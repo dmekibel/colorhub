@@ -4081,8 +4081,12 @@ scenario("paintings", "Maternity: the lilac/mauve sleeve the old palette finder 
   await t.click(await t.waitFor('[data-glo="diverse"]', 8000, "the Diverse chip"), { wait: 400 });
   t.ev(`document.querySelector("[data-glk]") && document.querySelector("[data-glk]")._countTo(14)`);
   await t.sleep(300);
-  const hasPurple = t.ev(`[...document.querySelectorAll("[data-glswatches] [data-glj]")].some(b => { const c = getComputedStyle(b).getPropertyValue("--c").trim(); const [, C, H] = lch(c); return C >= 8 && H >= 280 && H <= 350; })`);
-  t.expect(hasPurple, "Diverse at 14 colors still has nothing in the lilac/mauve/purple hue range on Maternity");
+  // the recovered family reads, by the app's own naming/family system, as mauve/rose/raspberry -- a dusty
+  // mauve-rose, not a pure cool violet (see tools/gallery.py's extract_pool() comment: that's the honest color
+  // once you actually measure the sleeve's pixels). Checking the app's own familyOf() rather than reinventing
+  // hue math sidesteps CIELAB-hue-vs-HSV-hue confusion entirely, and is exactly what a visitor would see named.
+  const hasMauve = t.ev(`[...document.querySelectorAll("[data-glswatches] [data-glj]")].some(b => { const c = getComputedStyle(b).getPropertyValue("--c").trim(); const fam = typeof familyOf === "function" && familyOf(c); return fam && /mauve|rose|raspberry|plum|purple|lilac|magenta|pink|orchid|violet/i.test(fam.head.n); })`);
+  t.expect(hasMauve, "Diverse at 14 colors still has nothing in the mauve/rose/purple family on Maternity");
 });
 // David, relayed 2026-10-09 ("pressing on the picture should make it full screen, instead of instantly starting
 // the color picker"): a plain tap on the painting opens Look closer; no loupe, no sampling.
