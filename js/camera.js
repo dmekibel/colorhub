@@ -5,10 +5,11 @@
 //
 // David, 2026-10-09, exact pixel: isoSample's patch (js/isolate.js) is a touch-friendly average (about 5% of
 // the short edge) built for the tap-to-guess games. The camera reads differently: eyeSample() below samples the
-// reticle's exact pixel (or at most a 2x2 average) straight off the SOURCE's native resolution -- the <video>
-// or <img> element itself, never a canvas that was resized to fit the screen. Live, that's ~12 times a second;
-// only the NAME shown eases between readings (Lab-smoothed), never the sampled color or hex, so flicker can't
-// quietly swap in a slightly-wrong swatch. Freezing pauses the <video> itself (it keeps its last decoded,
+// reticle's exact pixel (or a small Photoshop-style average -- getSampleSize(), js/eyedrop.js: Point through
+// 31x31, shared with the rest of the app's eyedroppers) straight off the SOURCE's native resolution -- the
+// <video> or <img> element itself, never a canvas that was resized to fit the screen. Live, that's ~12 times a
+// second; only the NAME shown eases between readings (Lab-smoothed), never the sampled color or hex, so flicker
+// can't quietly swap in a slightly-wrong swatch. Freezing pauses the <video> itself (it keeps its last decoded,
 // full-resolution frame), and a tap on the frozen frame maps back through the exact cover-crop transform the
 // screen drew it with (toNative), so a tap always samples where it looks like it's sampling.
 //
@@ -23,7 +24,8 @@
 // not. Lock asks the camera hardware itself to hold exposure and white balance steady (MediaStreamTrack.
 // applyConstraints), where the device allows it; it's hidden when the camera reports no such capability.
 
-// ---------- exact-pixel sampling (at most a 2x2 average), always off the source's native resolution ----------
+// ---------- exact-pixel sampling (n x n, n = getSampleSize() at the call site), always off the source's native
+// resolution, never the display-sized copy ----------
 let EYE_PROBE = null;
 function eyeSample(src, w, h, fx, fy, n = 2) {
   if (!src || !w || !h) return null;
@@ -319,7 +321,7 @@ function eye(opts = {}) {
     raf = requestAnimationFrame(tick);
     if (frozen || !vid.videoWidth || t - last < 80) return;
     last = t;
-    const hex = read(eyeSample(vid, vid.videoWidth, vid.videoHeight, .5, .5));
+    const hex = read(eyeSample(vid, vid.videoWidth, vid.videoHeight, .5, .5, getSampleSize()));
     if (!hex) return;
     const L = lab(hex);
     smooth = smooth ? smooth.map((x, i) => x + (L[i] - x) * .45) : L;
@@ -347,7 +349,7 @@ function eye(opts = {}) {
     if (!PICK) $("#shadesBtn").hidden = false;
     $("#shut").setAttribute("aria-label", "Back to live");
     at = [.5, .5]; placeRet();
-    paint(read(eyeSample(camSrc, camW, camH, .5, .5)));
+    paint(read(eyeSample(camSrc, camW, camH, .5, .5, getSampleSize())));
     // a freeze is an exposure, not a quiz answer: log it once to the Learner Model as "seen" (js/learner.js)
     if (typeof learnerLog === "function" && cur && !loggedThisFreeze) { loggedThisFreeze = true; learnerLog({ type: "seen", color: { n: cur.nm.n, h: cur.hex }, src: capKind }); }
     buzz(10);
@@ -393,7 +395,7 @@ function eye(opts = {}) {
       const ref = frozen ? isoSample(still, p[0], p[1]) : vid.videoWidth ? isoSample(vid, .5, .5) : null;
       const f = ref && wbFrom(ref);
       wbArm = false; wbBtn.classList.remove("arm");
-      if (f) { setWb(f); toast("White set"); if (frozen) paint(read(eyeSample(camSrc, camW, camH, at[0], at[1]))); }
+      if (f) { setWb(f); toast("White set"); if (frozen) paint(read(eyeSample(camSrc, camW, camH, at[0], at[1], getSampleSize()))); }
       else toast("Too dark or too colorful. Try white or grey");
       hintNow(); buzz(5); return;
     }
@@ -401,7 +403,7 @@ function eye(opts = {}) {
     const R = stage.getBoundingClientRect(), sfx = (e.clientX - R.left) / R.width, sfy = (e.clientY - R.top) / R.height;
     at = [sfx, sfy]; placeRet();
     const [fx, fy] = toNative(sfx, sfy);
-    paint(read(eyeSample(camSrc, camW, camH, fx, fy))); buzz(5);
+    paint(read(eyeSample(camSrc, camW, camH, fx, fy, getSampleSize()))); buzz(5);
   });
   $("#shut").onclick = () => {
     if (frozen) return stream ? live() : null;
@@ -596,12 +598,72 @@ function cameraPick(o = {}) {
   eye({ pick: true, multi: !!o.multi, title: o.title, onPick: o.onPick, onDone: finish });
   return promise;
 }
+// photoPick: a photo, picked with the shared drag loupe (js/eyedrop.js eyedropAttach) -- the same picker the
+// camera, set-page photo picking and future callers all use, instead of a second one built here. Choose a photo,
+// then press-and-drag on it for a magnified, live-named read; release = pick. multi keeps a running strip with
+// a persistent Done (same markup/classes as cameraPick's own picks strip, css already covers both).
 function photoPick(o = {}) {
   let resolveDone = null;
   const promise = o.onDone ? null : new Promise(res => { resolveDone = res; });
   const finish = hexes => { if (o.onDone) o.onDone(hexes); if (resolveDone) resolveDone(hexes); };
-  eye({ pick: true, multi: !!o.multi, title: o.title, forcePhoto: true, onPick: o.onPick, onDone: finish });
+  const input = document.createElement("input");
+  input.type = "file"; input.accept = "image/*"; input.hidden = true;
+  document.body.appendChild(input);
+  input.onchange = () => {
+    const f = input.files[0]; input.remove();
+    if (!f) return finish([]);
+    const img = new Image();
+    img.onload = () => photoPickOpen(img, o, finish);
+    img.onerror = () => { toast("That photo didn't load"); finish([]); };
+    img.src = URL.createObjectURL(f);
+  };
+  input.click();
   return promise;
+}
+function photoPickOpen(img, o, finish) {
+  const picks = [];
+  img.className = "eye-photopick-img"; img.alt = "";
+  const el = show(`
+    <header class="eye-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eye-hint">${esc(o.title || "Press and drag for the exact color")}</span></header>
+    <div class="eye-stage eye-photopick-stage" id="stage"></div>
+    <div class="eye-card">
+      <button class="eye-name" id="nm" hidden><i id="chip"></i><span><b id="big"></b><em id="src"></em></span></button>
+      <p class="eye-hex mono" id="hexline"></p>
+      <div class="eye-picks" id="picks" hidden></div>
+      <p class="eye-note">${o.multi ? "Release to add a color; press elsewhere for the next one." : "Release to pick."}</p>
+    </div>
+  `, "fixed eye photopick");
+  const $ = s => el.querySelector(s);
+  $("#stage").appendChild(img);
+  let cur = null, left = false;
+  const paint = hex => {
+    if (!hex) return;
+    cur = { hex, nm: nameOf(hex) };
+    $("#nm").hidden = false; $("#chip").style.setProperty("--c", hex);
+    $("#big").textContent = cur.nm.text;
+    $("#src").textContent = cur.nm.de < VERY_CLOSE_DE ? "Nearest of about 1,000 names" : `Nearest of about 1,000 names · ${pctDiff(cur.nm.de)}`;
+    $("#hexline").textContent = hex;
+  };
+  const renderPicks = () => {
+    const p = $("#picks"); p.hidden = !picks.length;
+    p.innerHTML = picks.map(h => `<i style="--c:${h}"></i>`).join("") + (picks.length ? `<button class="eye-picks-done" data-act="done">Done · ${picks.length}</button>` : "");
+  };
+  const leave = () => { if (left) return; left = true; drop.detach(); };
+  const drop = eyedropAttach(img, {
+    onMove: hex => paint(hex),
+    onPick: hex => {
+      paint(hex);
+      o.onPick && o.onPick(hex, { src: "photo" });
+      if (!o.multi) { leave(); finish([hex]); if (app.contains(el)) go(S.tab || "explore"); return; }
+      picks.push(hex); renderPicks(); buzz(10);
+    },
+  });
+  cleanup.push(leave);
+  $("[data-back]").onclick = () => { leave(); finish(picks.slice()); if (app.contains(el)) go(S.tab || "explore"); };
+  $("#picks").onclick = e => {
+    if (!e.target.closest('[data-act="done"]')) return;
+    buzz(10); leave(); finish(picks.slice()); if (app.contains(el)) go(S.tab || "explore");
+  };
 }
 window.cameraPick = cameraPick;
 window.photoPick = photoPick;
