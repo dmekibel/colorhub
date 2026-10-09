@@ -607,7 +607,11 @@ function rpBarWire(el) {
     if (k === "family") return scrollTo(el.querySelector(".ar-fam"));
     if (k === "id") return scrollTo(el.querySelector(".rp-idcard"));
   });
-  // it lives on <body>, not in the screen: the screen's entrance animation leaves a transform that would pin a fixed bar to the page
+  // it lives on <body>, not in the screen: the screen's entrance animation leaves a transform that would pin a fixed bar to the page.
+  // Defensive: a fast Back-then-forward can call this again before the last page's own cleanup has run (David,
+  // 2026-10-09: "the header disappears" -- two stale .rp-bar nodes fighting over the "on" class reads as a flicker
+  // that looks like the bar vanishing), so never leave more than the one this call owns.
+  document.querySelectorAll("body > .rp-bar").forEach(b => b.remove());
   document.body.appendChild(bar);
   // David, 2026-10-09: "header feels too big -- harder to read the article" -> while actively reading down, the
   // bar slims further (name + back only, the jump tabs fade out); scrolling up a little brings the tabs straight

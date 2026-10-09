@@ -1337,6 +1337,46 @@ scenario("pages", "role paintings and Werner's 1821 example show on the color pa
   t.expect(/Werner, 1821:.*Blue Copper Ore.*\(mineral\)/.test(t.text(line)), `the Werner line reads "${t.text(line)}"`);
 });
 
+// David, 2026-10-09 on Ochre Brown: "I'm unable to tap the painting to open the painting page" -- the "In the
+// archive" hero pin (js/richcolor.js rcReachSection) used glPinHTML's plain [data-gi] markup, which nothing on
+// the color page was ever wired to handle (rcWireOpen only delegated [data-rc-gi]/[data-rc-open]/[data-rc-pair]).
+// Every painting tile on a color page -- the In paintings rail, the archive hero, a role-paintings tile -- must
+// open its painting in one tap; this walks all three on one color with a rich paintings record.
+scenario("pages", "every painting tile on a color page opens its painting: the In paintings rail, the archive hero, a role tile", async t => {
+  // colorDossier() rebuilds the whole page on every Back, so .rp-paint (and everything under it) must be
+  // re-queried fresh after each round trip -- a reused reference from before a navigation is a detached node.
+  const freshPaint = () => t.waitFor(() => t.$(".rp-paint"), 8000, "the Paintings section");
+
+  await H.openPage(t, "#/name/ochre-brown", "Ochre Brown");
+
+  // 1. the In paintings rail (js/paintingsof.js paintingsOfSection, inside [data-glin]) -- it starts itself via
+  // an IntersectionObserver (500px rootMargin), so nudge layout with a scroll event the way the other rail
+  // scenarios do, rather than waiting on real scroll motion in a small iframe.
+  let paint = await freshPaint();
+  const rail = await t.waitFor(() => { const g = t.$("[data-glin]", paint); if (g) { g.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); } return t.$$("[data-glin] [data-gi]", paint)[0]; }, 20000, "a painting tile in the In paintings rail");
+  await t.click(rail, { wait: 700 });
+  await t.waitFor(() => t.$(".gl-page"), 10000, "the rail painting's own page");
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => H.title(t) === "Ochre Brown", 8000, "Back to return to Ochre Brown from the rail");
+
+  // 2. "In the archive": the hero pin beside "N paintings come close to it" (rcReachSection)
+  paint = await freshPaint();
+  const archive = await t.waitFor(() => t.$(".rc-reach:not(.rc-reach-none)", paint), 20000, "the In the archive section");
+  const hero = await t.waitFor(() => t.$(".rc-reach-pin [data-gi]", archive), 10000, "the archive's closest-painting pin");
+  await t.click(hero, { wait: 700 });
+  await t.waitFor(() => t.$(".gl-page"), 10000, "the archive pin's own page");
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => H.title(t) === "Ochre Brown", 8000, "Back to return to Ochre Brown from the archive hero");
+
+  // 3. a role-paintings tile (rcRolePaintingsHTML) -- resolves async per role; any one that lands counts
+  paint = await freshPaint();
+  const role = await t.waitFor(() => t.$$(".rc-ri[data-rc-gi]", paint)[0], 15000, "a resolved role-paintings tile");
+  await t.click(role, { wait: 700 });
+  await t.waitFor(() => t.$(".gl-page"), 10000, "the role tile's own page");
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => H.title(t) === "Ochre Brown", 8000, "Back to return to Ochre Brown from the role tile");
+});
+
 scenario("pages", "hold the cover: the flower rises, dragging lights a hex, letting go opens that color; Back returns", async t => {
   await H.openPage(t, "#/name/fiery-rose", "Fiery Rose");
   const hero = t.$(".cp-hero"), r = hero.getBoundingClientRect();

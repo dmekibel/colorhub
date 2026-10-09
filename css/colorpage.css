@@ -191,10 +191,11 @@
 .cp-details-body p{font-size:15px;line-height:1.55;color:var(--soft)}
 
 /* "You and this color" and "Its role in paintings" (js/richcolor.js) */
-.rc-role-bar{display:flex;gap:3px;min-height:96px}
-.rc-role{display:flex;flex-direction:column;justify-content:flex-end;gap:3px;min-width:68px;padding:12px 10px;text-align:left;border-radius:6px;background:var(--cp-surface-2);border-top:6px solid var(--c)}
+.rc-role-bar{display:flex;flex-wrap:nowrap;gap:3px;min-height:96px}
+.rc-role{display:flex;flex-direction:column;justify-content:flex-end;gap:3px;min-width:84px;max-width:none;padding:12px 10px;text-align:left;border-radius:6px;background:var(--cp-surface-2);border-top:6px solid var(--c);overflow:hidden}
 .rc-role[data-role="shadow"]{border-top-color:color-mix(in srgb,var(--c) 65%,#000)}
 .rc-role[data-role="light"]{border-top-color:color-mix(in srgb,var(--c) 65%,#fff)}
+.rc-role b,.rc-role span,.rc-role small{overflow-wrap:break-word;word-break:break-word}
 .rc-role b{font:400 18px/1 var(--serif)}
 .rc-role span{font:500 13px/1.2 var(--mono);opacity:.8}
 .rc-role small{font-size:13px;line-height:1.25;opacity:.7}
@@ -226,7 +227,8 @@
 .rc-reach-blocks{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start}
 .rc-reach-pin .gl-pin{width:100%}
 .rc-reach-stat{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--soft)}
-.rc-reach-stat b{font:400 26px/1.05 var(--serif);color:var(--ink)}
+.rc-reach-stat>b{font:400 26px/1.05 var(--serif);color:var(--ink)}
+.rc-reach-yr{font:600 14px/1.3 var(--mono);color:var(--ink)}
 .rc-compass-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .rc-cell{display:grid;grid-template-columns:30px 1fr;grid-template-rows:auto auto auto;column-gap:10px;align-items:center;padding:10px;border:1px solid var(--cp-rule);border-radius:10px;text-align:left;width:100%;border-bottom:1px solid var(--cp-rule)}
 .rc-cell i{grid-row:1/4;width:30px;height:30px;border-radius:50%;background:var(--c)}
@@ -374,7 +376,7 @@
 
 /* ---------- the color header (David, 2026-10-09: "too big -- harder to read the article"): one slim row,
    back + name + small text tabs, about 56pt below the status bar, not two stacked rows ---------- */
-.rp-bar{position:fixed;top:0;left:50%;z-index:30;width:min(100%,540px);transform:translate(-50%,-110%);transition:transform .32s var(--ease);background:var(--c);padding:calc(var(--top) + 4px) var(--g) 6px;display:flex;align-items:center;column-gap:10px;pointer-events:none}
+.rp-bar{position:fixed;top:0;left:50%;z-index:40;width:min(100%,540px);transform:translate(-50%,-110%);transition:transform .32s var(--ease);background:var(--c);padding:calc(var(--top) + 4px) var(--g) 6px;display:flex;align-items:center;column-gap:10px;pointer-events:none}
 .rp-bar-back{width:30px;height:30px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--surface-2);color:var(--ink);border:1px solid rgba(236,232,223,.14)}.rp-bar-back svg{width:17px;height:17px}
 .rp-bar.on{transform:translate(-50%,0);pointer-events:auto}
 .rp-bar-hair{box-shadow:0 1px 0 rgba(255,255,255,.1)}

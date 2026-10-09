@@ -158,9 +158,14 @@ function rcRoleSection(name, hex) {
     const r = rcRoleStats(hex);
     if (!r || r.n < 3) { box.innerHTML = ""; return; }
     const tot = RC_ROLES.reduce((a, [k]) => a + r.roles[k].length, 0) || 1;
+    // sqrt-weighted, not raw share: a role held by 8% of matches still needs enough width to read its own
+    // sentence. Raw counts (e.g. 1044 vs 5663, a 5.4x spread) squeezed the rarest card well past where its own
+    // unbreakable words (and the repeated "of 13,662" on every card) could fit, and the text ran off the edge
+    // of the screen with nothing to stop it (David, 2026-10-09: "uneven widths, text cut"). The percent replaces
+    // that repeated denominator -- it's said once, in the caption below, for the whole bar.
     const segs = RC_ROLES.filter(([k]) => r.roles[k].length).map(([k, label, what]) => {
-      const list = r.roles[k], top = list.reduce((a, b) => b[1] > a[1] ? b : a);
-      return `<button class="rc-role" data-role="${k}" data-rc-gi="${top[0]}" style="flex:${Math.max(list.length, tot * .06)}"><b>${label}</b><span>${list.length} of ${r.n}</span><small>${esc(what)}</small></button>`;
+      const list = r.roles[k], top = list.reduce((a, b) => b[1] > a[1] ? b : a), pct = Math.max(1, Math.round(list.length / r.n * 100));
+      return `<button class="rc-role" data-role="${k}" data-rc-gi="${top[0]}" style="flex:${Math.sqrt(list.length).toFixed(2)}"><b>${label}</b><span>${pct}%</span><small>${esc(what)}</small></button>`;
     }).join("");
     box.innerHTML = `<section class="rc-sec rc-roles"><h3>Its role in paintings</h3>
       <div class="rc-role-bar" style="--c:${hex}">${segs}</div>
@@ -188,16 +193,21 @@ function rcRolePaintingsHTML(name, hex) {
       box.innerHTML = `<section class="rc-sec rc-roleimg"><h3>Its roles, one painting each</h3>
         <div class="rc-roleimg-row">${roles.map(([k, label]) => `<button type="button" class="rc-ri wait" data-role="${k}" aria-label="${esc(label)}"><span class="rc-ri-im"></span><small>${esc(label)}</small></button>`).join("")}</div>
         <p class="fine">A real painting where it plays each part, as photographed.</p></section>`;
-      roles.forEach(([k]) => {
+      const settled = roles.map(([k]) =>
         arfPainting(rp[k]).then(base => base ? Promise.resolve(base.fill ? base.fill() : null).catch(() => {}).then(() => base) : null).then(base => {
-          const tile = box.querySelector(`[data-role="${k}"]`); if (!tile) return;
-          if (!base) { tile.remove(); return; }
+          const tile = box.querySelector(`[data-role="${k}"]`); if (!tile) return false;
+          if (!base || !base.img || !base.img.src) { tile.remove(); return false; }   // genuinely nothing to show: hide the role rather than a swatch that reads as an empty box
           tile.classList.remove("wait"); tile.dataset.rcGi = base.i;
           const im = tile.querySelector(".rc-ri-im");
-          if (base.img && base.img.src) im.innerHTML = `<img src="${esc(base.img.src)}" alt="" loading="lazy" decoding="async"${base.img.cors ? ' crossorigin="anonymous"' : ""} onload="this.classList.add('ld')">`;
-          else im.style.background = (base.pal && base.pal[0]) || hex;
-        }).catch(() => { const tile = box.querySelector(`[data-role="${k}"]`); if (tile) tile.remove(); });
-      });
+          // display only, never pixel-read: crossorigin is for the canvas sampling other pages do, and several
+          // museum CDNs in GL_CORS_HOSTS (images.metmuseum.org, verified 2026-10-09) don't actually answer with
+          // Access-Control-Allow-Origin, so tagging a plain <img> with it makes the browser fail the load outright
+          // (David, 2026-10-09: "Mid and Light are empty dark boxes" -- Shadow/Accent happened to be local images,
+          // unaffected by the attribute, which is why only the remote-hosted roles went dark).
+          im.innerHTML = `<img src="${esc(base.img.src)}" alt="" loading="lazy" decoding="async" onload="this.classList.add('ld')" onerror="this.closest('.rc-ri').remove()">`;
+          return true;
+        }).catch(() => { const tile = box.querySelector(`[data-role="${k}"]`); if (tile) tile.remove(); return false; }));
+      Promise.all(settled).then(oks => { if (!box.isConnected) return; if (oks.filter(Boolean).length < 2) box.remove(); });
     }).catch(() => { const box2 = document.getElementById(id); if (box2) box2.remove(); });
   };
   rcLazyGallery(id, draw);   // arfPainting (js/article-refs.js) resolves through the same gallery index
@@ -615,23 +625,31 @@ function rcLazyGallery(id, draw) {
   setTimeout(() => { if (document.getElementById(id)) go(); }, 700);
 }
 const rcYearLabel = y => y == null ? "" : y < 0 ? `${-y} BCE` : String(y);
+// A painting year outside this range is almost certainly a parsing slip, not a real date (our oldest genuine
+// holdings -- Egyptian funerary papyri and the like -- run back several thousand years BCE, never further; and
+// a museum record can't postdate the archive build). Keep the line off rather than assert a date we can't trust.
+const rcYearPlausible = y => y != null && Number.isFinite(y) && y > -5000 && y <= new Date().getFullYear();
 function rcReachSection(name, hex) {
   const id = "rc-reach-" + Math.random().toString(36).slice(2, 8);
   const paint = (r, box) => {
     const [d, pi, ph, n, y] = r;
     const none = d > 8 && n === 0;
     const pin = () => (typeof GAL !== "undefined" && GAL) ? glPinHTML(pi, { badge: pctMatch(d) }) : "";
-    const caveat = `<p class="fine">As photographed: aged, varnished paintings, each cut to a few dozen colors, so a very small vivid touch can be lost. This says what our archive shows, not what paint can do.</p>`;
+    const caveat = `<p class="fine">As photographed: aged, varnished paintings, each cut to a few dozen colors, so a very small vivid touch can be lost. This says what our archive shows, not what paint can do. Dates are the museums' own, and only roughly known for the oldest work.</p>`;
     if (none) {
       box.innerHTML = `<section class="rc-sec rc-reach rc-reach-none"><p class="rc-reach-head">No painting in our 23,781 reaches this color. It's a modern color.</p>
         <div class="rc-reach-pair"><div style="--c:${hex}" data-ink="${ink(hex)}"><b>This color</b></div><button style="--c:${ph}" data-ink="${ink(ph)}" data-rc-gi="${pi}"><b>The closest any painting gets</b><small>${pctDiff(d)} · tap to see the painting</small></button></div>${caveat}</section>`;
     } else {
-      const few = n <= 3;
+      const few = n <= 3, yearOK = rcYearPlausible(y);
       box.innerHTML = `<section class="rc-sec rc-reach"><h3>In the archive</h3>
         <div class="rc-reach-blocks"><div class="rc-reach-pin">${pin()}</div>
-          <div class="rc-reach-stat"><b>${few ? (n ? `Only ${n} painting${n === 1 ? "" : "s"}` : "Barely any") : n.toLocaleString() + " paintings"}</b><span>${few ? "come close" : "come close to it"} (within ${pctFmt(6)}).</span>${y != null ? `<span>Earliest in our archive: <b>${esc(rcYearLabel(y))}</b>.</span>` : ""}<span>The closest, ${pctDiff(d)}, is the one at left.</span></div></div>${caveat}</section>`;
+          <div class="rc-reach-stat"><b>${few ? (n ? `Only ${n} painting${n === 1 ? "" : "s"}` : "Barely any") : n.toLocaleString() + " paintings"}</b><span>${few ? "come close" : "come close to it"} (within 6%).</span>${yearOK ? `<span class="rc-reach-earliest">Earliest in our archive: <b class="rc-reach-yr">${esc(rcYearLabel(y))}</b></span>` : ""}<span>The closest here, ${pctMatch(d)}, is the one at left.</span></div></div>${caveat}</section>`;
     }
     glFill(box);
+    // the hero pin is a plain gl-pin (data-gi), not one of the rc-* swatches rcWireOpen already delegates for;
+    // wire it locally so "tap the painting" works the same as every other painting tile on the page (David,
+    // 2026-10-09: "I'm unable to tap the painting to open the painting page").
+    box.onclick = e => { const p = e.target.closest("[data-gi]"); if (p) galleryPage(+p.dataset.gi, true, hex); };
   };
   Promise.all([rcLoadReach()]).then(() => {
     let r = RC_REACH && RC_REACH[name];
