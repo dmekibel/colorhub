@@ -1,105 +1,108 @@
 {
- "slug": "orchid-pink",
- "name": "Orchid Pink",
- "hex": "#F1C4D8",
- "names": [
-  "Orchid Pink"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Orchid Pink is a soft, light pink with a hint of purple, named for the flower and easy to confuse with the much stronger web color Orchid.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The name",
-   "body": "Paterson defines orchid pink as a lightish pink, sometimes a deep pink or a purplish pink [1]. His own range shows the name was loose [1]. The library's swatch is the pale end: ISCC-NBS block 2 calls it a \"light purplish pink\", and Ridgway's 1912 atlas and Maerz and Paul's 1930 dictionary both carry it [2].\n\nDo not mix it up with [[orchid]]. Paterson notes that Orchid in the X11 set is hex #DA70D6, a vivid magenta-violet, far stronger than this swatch [1]. Orchid pink sits among the soft pinks: closest to [[pale-pink]] and [[pink]], with [[lilac]] on its cooler side [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Orchid pink is almost absent from painting. Only 3 of the 23,781 paintings in our archive carry it over at least five per cent of the canvas, as photographed, which is rarer than 86 per cent of the named colors [3]. Light pinks this delicate are easy to lose in aged, varnished paintings, so the count says more about the photographs than about the painters [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the orchid flower",
-   "first_recorded": "Ridgway, 1912 (as a color term in our library)",
-   "source": "Paterson, p. 289"
-  },
-  "aka": [],
-  "siblings": [
-   "pale-pink",
-   "pink",
-   "lilac"
+  "slug": "orchid-pink",
+  "name": "Orchid Pink",
+  "hex": "#F1C4D8",
+  "names": [
+    "Orchid Pink",
+    "Rosolane Pink"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "orchid",
-    "gloss": "the X11 web color, #DA70D6, a vivid magenta-violet far stronger than this pink"
-   }
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Orchid Pink is a soft, light pink with a hint of purple, named for the flower and easy to confuse with the much stronger web color Orchid.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The name",
+      "body": "Paterson defines orchid pink as a lightish pink, sometimes a deep pink or a purplish pink [1]. His own range shows the name was loose [1]. The library's swatch is the pale end: ISCC-NBS block 2 calls it a \"light purplish pink\", and Ridgway's 1912 atlas and Maerz and Paul's 1930 dictionary both carry it [2].\n\nDo not mix it up with [[orchid]]. Paterson notes that Orchid in the X11 set is hex #DA70D6, a vivid magenta-violet, far stronger than this swatch [1]. Orchid pink sits among the soft pinks: closest to [[pale-pink]] and [[pink]], with [[lilac]] on its cooler side [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Orchid pink is almost absent from painting. Only 3 of the 23,781 paintings in our archive carry it over at least five per cent of the canvas, as photographed, which is rarer than 86 per cent of the named colors [3]. Light pinks this delicate are easy to lose in aged, varnished paintings, so the count says more about the photographs than about the painters [3]."
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 3,
-  "iscc_nbs": "block 2, light purplish pink",
-  "x11_orchid": "#DA70D6"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 289, \"orchid pink\", \"Orchid\"",
-   "loc_kind": "pdf-page",
-   "url": null
+  "aside": {
+    "origin": {
+      "named_after": "the orchid flower",
+      "first_recorded": "Ridgway, 1912 (as a color term in our library)",
+      "source": "Paterson, p. 289"
+    },
+    "aka": [
+      "Rosolane Pink (ridgway+iscc-nbs)"
+    ],
+    "siblings": [
+      "pale-pink",
+      "pink",
+      "lilac"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "orchid",
+        "gloss": "the X11 web color, #DA70D6, a vivid magenta-violet far stronger than this pink"
+      }
+    ],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 3,
+    "iscc_nbs": "block 2, light purplish pink",
+    "x11_orchid": "#DA70D6"
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed; at least 5% of the canvas within CIEDE2000 6)",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 289, \"orchid pink\", \"Orchid\"",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed; at least 5% of the canvas within CIEDE2000 6)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Paterson describes orchid pink as which kind of color?",
+      "choices": [
+        "A lightish pink",
+        "A dark brown",
+        "A bright yellow"
+      ],
+      "answer": "A lightish pink",
+      "kind": "pick"
+    },
+    {
+      "q": "The X11 web color Orchid is #DA70D6.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Orchid Pink and the web color Orchid share a flower but not a look: one is pale, the other vivid."
+  ],
+  "words": 190,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "questions": [
-  {
-   "q": "Paterson describes orchid pink as which kind of color?",
-   "choices": [
-    "A lightish pink",
-    "A dark brown",
-    "A bright yellow"
-   ],
-   "answer": "A lightish pink",
-   "kind": "pick"
-  },
-  {
-   "q": "The X11 web color Orchid is #DA70D6.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Orchid Pink and the web color Orchid share a flower but not a look: one is pale, the other vivid."
- ],
- "words": 190,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

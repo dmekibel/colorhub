@@ -1,126 +1,127 @@
 {
- "slug": "grey-aqua",
- "name": "Grey aqua",
- "hex": "#86ABA5",
- "names": [
-  "Grey aqua"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Grey aqua is a muted, greyed blue-green that our library carries as an English rendering of Mizu-iro, a traditional Japanese water color, close enough to Grey teal that only half a unit of greenness separates them.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A water color, translated",
-   "body": "Our color library lists Grey aqua's source as a traditional Japanese name, Mizu-iro (水色), glossed there as \"aqua blue color\" [1]. *Mizu* means water and *iro* means color, so the literal sense is closer to \"water-color\" than to the ocean-adjacent word \"aqua\" that this English rendering chose [1]. Book sources on Japanese traditional colors were not consulted directly here, so that gloss and translation rest on the library alone [1].\n\nThe nearest named color is [[grey-teal|Grey teal]], 4.8 units away and bluer; [[glaucous-blue|Glaucous Blue]] sits at the same distance, also bluer [2]. In Munsell terms Grey aqua sits near 4.7BG 6.6/2.5: a pale, low-chroma blue-green [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Grey aqua appears in 204 of our 23,781 paintings, as photographed, more common than 62 percent of the archive's named colors [3]. It peaks in the 1900s, in 19 of 1,674 paintings, at 2.4 times the expected rate, and is most over-represented among Impressionist works, at 4.4 times expected [3]. Inside a painting it most often plays a light [3]. The earliest match, in a work by Andrea del Castagno, is dated 1450, within the archive's documented range for this name, with no earlier record to compare it against here, a floor and not a first, since the archive's early centuries are thin [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Mizu-iro (水色), a traditional Japanese water color",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub color library, traditional Japanese colors list"
-  },
-  "aka": [
-   "Dark ash tone"
+  "slug": "grey-aqua",
+  "name": "Grey aqua",
+  "hex": "#86ABA5",
+  "names": [
+    "Grey aqua",
+    "Dark ash"
   ],
-  "siblings": [
-   "grey-teal",
-   "glaucous-blue",
-   "pastel-turquoise",
-   "morning-blue"
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Grey aqua is a muted, greyed blue-green that our library carries as an English rendering of Mizu-iro, a traditional Japanese water color, close enough to Grey teal that only half a unit of greenness separates them.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A water color, translated",
+      "body": "Our color library lists Grey aqua's source as a traditional Japanese name, Mizu-iro (水色), glossed there as \"aqua blue color\" [1]. *Mizu* means water and *iro* means color, so the literal sense is closer to \"water-color\" than to the ocean-adjacent word \"aqua\" that this English rendering chose [1]. Book sources on Japanese traditional colors were not consulted directly here, so that gloss and translation rest on the library alone [1].\n\nThe nearest named color is [[grey-teal|Grey teal]], 4.8 units away and bluer; [[grey-teal|Glaucous Blue]] sits at the same distance, also bluer [2]. In Munsell terms Grey aqua sits near 4.7BG 6.6/2.5: a pale, low-chroma blue-green [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Grey aqua appears in 204 of our 23,781 paintings, as photographed, more common than 62 percent of the archive's named colors [3]. It peaks in the 1900s, in 19 of 1,674 paintings, at 2.4 times the expected rate, and is most over-represented among Impressionist works, at 4.4 times expected [3]. Inside a painting it most often plays a light [3]. The earliest match, in a work by Andrea del Castagno, is dated 1450, within the archive's documented range for this name, with no earlier record to compare it against here, a floor and not a first, since the archive's early centuries are thin [3]."
+    }
   ],
-  "parent": null,
-  "children": null,
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Mizu-iro (水色)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 204,
-  "measured": {
-   "lch": [
-    67,
-    14,
-    184
-   ],
-   "nearest": [
-    [
-     "Grey teal",
-     4.8
+  "aside": {
+    "origin": {
+      "named_after": "Mizu-iro (水色), a traditional Japanese water color",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub color library, traditional Japanese colors list"
+    },
+    "aka": [
+      "Dark ash tone"
     ],
-    [
-     "Glaucous Blue",
-     4.8
+    "siblings": [
+      "grey-teal",
+      "glaucous-blue",
+      "pastel-turquoise",
+      "morning-blue"
+    ],
+    "parent": null,
+    "children": null,
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Mizu-iro (水色)"
+      }
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: traditional Japanese colors, Mizu-iro (水色)",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library: Munsell notation and look-alike distances",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 204,
+    "measured": {
+      "lch": [
+        67,
+        14,
+        184
+      ],
+      "nearest": [
+        [
+          "Grey teal",
+          4.8
+        ],
+        [
+          "Glaucous Blue",
+          4.8
+        ]
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: traditional Japanese colors, Mizu-iro (水色)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: Munsell notation and look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the Japanese name behind Grey aqua, Mizu-iro, literally mean?",
+      "choices": [
+        "Water color",
+        "Sky color",
+        "Deep sea",
+        "Morning dew"
+      ],
+      "answer": "Water color",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Grey aqua and Grey teal are far apart in color.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Grey aqua's Japanese name, Mizu-iro, literally just means 'water color'."
+  ],
+  "words": 246,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "What does the Japanese name behind Grey aqua, Mizu-iro, literally mean?",
-   "choices": [
-    "Water color",
-    "Sky color",
-    "Deep sea",
-    "Morning dew"
-   ],
-   "answer": "Water color",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Grey aqua and Grey teal are far apart in color.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Grey aqua's Japanese name, Mizu-iro, literally just means 'water color'."
- ],
- "words": 246,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

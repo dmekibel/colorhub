@@ -1,156 +1,158 @@
 {
- "slug": "slate-grey",
- "name": "Slate grey",
- "hex": "#5E6A6C",
- "names": [
-  "Slate grey"
- ],
- "tier": "standard",
- "lede": "Slate grey is the dark blue-tinted grey of roofing slate, a name that painters, paint makers and fieldworkers have all used loosely.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A stone's color",
-   "body": "Slate is a metamorphosed mudstone or shale that splits cleanly into thin sheets for roof tiles [1]. The Pigment Compendium stresses that the word names no specific mineral, because the composition depends on the local mudstone [1]. The color word follows the stone: Paterson defines slate grey as the color of grey slate, a dark grey, and lists the web color SlateGray (#708090) as one of the 140 X11 colors [2]. The swatch is Ridgway's of 1886 and also appears in ISCC-NBS 1955 and Maerz and Paul 1930 [3]. Neighbors in the library include [[payne-s-grey]], [[dark-slate-grey]] and [[davy-s-grey]] [3]."
-  },
-  {
-   "id": "paint",
-   "title": "Slate in the paint box",
-   "body": "Slate was ground up as a material. Heaton, writing in 1928, records slate powder sold in grades of different fineness and used in the paint trade as an inert filler for stopping and filling compounds for woodwork and machinery [1]. A slate black was made by calcining bituminous shale, and Mayer's phrase for it is a shale black containing 15 per cent carbon [4]. Slate white is only an old name for lead white [4]. A further \"slate blue\" in the same sources was a pale artificial ultramarine in the 1920s [4]."
-  },
-  {
-   "id": "wild",
-   "title": "Grey that hides a goat",
-   "body": "Finlay records a field use. In Ladakh a guide explains that the animals the author cannot see are neither blue nor sheep but slate grey, halfway between sheep and goats, and the author finds them only when pale legs show against orange rock [5]. The scene shows how well a grey animal vanishes against a grey scree slope."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, slate grey appears in 485 paintings, 2.04 per cent, as photographed, more than 69 per cent of the named colors [6]. It peaks in the 1900s, at 1.9 times the expected rate [6]. [[painter:john-singer-sargent|Sargent]] uses it most, 5 of 287 works here, but no painter stands out against the museum baseline [6]. It is over-represented in India, 2.3 times expected [6]. In printed English the word peaks in the 1940s, and rose fastest in the 2000s [7]. A color match in an aged photograph is not a pigment test [6]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "slate, the roofing stone",
-   "first_recorded": "Ridgway 1886 (in our sources)",
-   "source": "Pigment Compendium p. 357; Paterson p. 370"
-  },
-  "aka": [
-   "SlateGray"
+  "slug": "slate-grey",
+  "name": "Slate grey",
+  "hex": "#5E6A6C",
+  "names": [
+    "Slate grey",
+    "Dark Plumbeous"
   ],
-  "siblings": [
-   "payne-s-grey",
-   "dark-slate-grey",
-   "davy-s-grey"
+  "tier": "standard",
+  "lede": "Slate grey is the dark blue-tinted grey of roofing slate, a name that painters, paint makers and fieldworkers have all used loosely.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A stone's color",
+      "body": "Slate is a metamorphosed mudstone or shale that splits cleanly into thin sheets for roof tiles [1]. The Pigment Compendium stresses that the word names no specific mineral, because the composition depends on the local mudstone [1]. The color word follows the stone: Paterson defines slate grey as the color of grey slate, a dark grey, and lists the web color SlateGray (#708090) as one of the 140 X11 colors [2]. The swatch is Ridgway's of 1886 and also appears in ISCC-NBS 1955 and Maerz and Paul 1930 [3]. Neighbors in the library include [[payne-s-grey]], [[dark-slate-grey]] and [[davy-s-grey]] [3]."
+    },
+    {
+      "id": "paint",
+      "title": "Slate in the paint box",
+      "body": "Slate was ground up as a material. Heaton, writing in 1928, records slate powder sold in grades of different fineness and used in the paint trade as an inert filler for stopping and filling compounds for woodwork and machinery [1]. A slate black was made by calcining bituminous shale, and Mayer's phrase for it is a shale black containing 15 per cent carbon [4]. Slate white is only an old name for lead white [4]. A further \"slate blue\" in the same sources was a pale artificial ultramarine in the 1920s [4]."
+    },
+    {
+      "id": "wild",
+      "title": "Grey that hides a goat",
+      "body": "Finlay records a field use. In Ladakh a guide explains that the animals the author cannot see are neither blue nor sheep but slate grey, halfway between sheep and goats, and the author finds them only when pale legs show against orange rock [5]. The scene shows how well a grey animal vanishes against a grey scree slope."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, slate grey appears in 485 paintings, 2.04 per cent, as photographed, more than 69 per cent of the named colors [6]. It peaks in the 1900s, at 1.9 times the expected rate [6]. [[painter:john-singer-sargent|Sargent]] uses it most, 5 of 287 works here, but no painter stands out against the museum baseline [6]. It is over-represented in India, 2.3 times expected [6]. In printed English the word peaks in the 1940s, and rose fastest in the 2000s [7]. A color match in an aged photograph is not a pigment test [6]."
+    }
   ],
-  "parent": "grey",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#5E6A6C",
-   "de2000": 4,
-   "min_cover": 0.01
+  "aside": {
+    "origin": {
+      "named_after": "slate, the roofing stone",
+      "first_recorded": "Ridgway 1886 (in our sources)",
+      "source": "Pigment Compendium p. 357; Paterson p. 370"
+    },
+    "aka": [
+      "SlateGray",
+      "Dark Plumbeous (ridgway+iscc-nbs)"
+    ],
+    "siblings": [
+      "payne-s-grey",
+      "dark-slate-grey",
+      "davy-s-grey"
+    ],
+    "parent": "grey",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "n_present": 485,
-  "pct": 2.04,
-  "peak": "1900s, 1.9x baseline",
-  "ngram": {
-   "peak": 1940,
-   "rise": 2000
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Pigment Compendium (Eastaugh et al.), \"Slate\", p. 357",
-   "loc_kind": "pdf-page",
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#5E6A6C",
+      "de2000": 4,
+      "min_cover": 0.01
+    },
+    "n_present": 485,
+    "pct": 2.04,
+    "peak": "1900s, 1.9x baseline",
+    "ngram": {
+      "peak": 1940,
+      "rise": 2000
+    }
   },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, pp. 370, 501",
-   "loc_kind": "pdf-page",
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Pigment Compendium (Eastaugh et al.), \"Slate\", p. 357",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, pp. 370, 501",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz & Paul 1930, Ridgway), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"Slate black\", \"Slate white\", \"Slate blue\", p. 357",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Finlay, The Fabric of Civilization, p. 233",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 within 4, at least 1% of canvas)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "data",
+      "cite": "Google Books Ngram, case-insensitive, 5-year smoothing",
+      "loc_kind": null,
+      "url": "https://books.google.com/ngrams"
+    }
+  ],
+  "questions": [
+    {
+      "q": "What is slate geologically?",
+      "choices": [
+        "A metamorphosed mudstone or shale",
+        "A volcanic glass",
+        "A kind of limestone",
+        "A baked clay"
+      ],
+      "answer": "A metamorphosed mudstone or shale",
+      "kind": "pick"
+    },
+    {
+      "q": "What was 'slate white' an old name for?",
+      "choices": [
+        "Lead white",
+        "Chalk",
+        "Zinc white",
+        "Gesso"
+      ],
+      "answer": "Lead white",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Slate white was just an old name for lead white."
+  ],
+  "depth": "medium",
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "removed uncited claim about blue-green greys looking calmer next to browns",
+      "Paterson description made exact",
+      "camouflage line made a description of the anecdote rather than a general claim"
+    ]
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz & Paul 1930, Ridgway), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"Slate black\", \"Slate white\", \"Slate blue\", p. 357",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Finlay, The Fabric of Civilization, p. 233",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 within 4, at least 1% of canvas)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "data",
-   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing",
-   "loc_kind": null,
-   "url": "https://books.google.com/ngrams"
-  }
- ],
- "questions": [
-  {
-   "q": "What is slate geologically?",
-   "choices": [
-    "A metamorphosed mudstone or shale",
-    "A volcanic glass",
-    "A kind of limestone",
-    "A baked clay"
-   ],
-   "answer": "A metamorphosed mudstone or shale",
-   "kind": "pick"
-  },
-  {
-   "q": "What was 'slate white' an old name for?",
-   "choices": [
-    "Lead white",
-    "Chalk",
-    "Zinc white",
-    "Gesso"
-   ],
-   "answer": "Lead white",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Slate white was just an old name for lead white."
- ],
- "depth": "medium",
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "removed uncited claim about blue-green greys looking calmer next to browns",
-   "Paterson description made exact",
-   "camouflage line made a description of the anecdote rather than a general claim"
-  ]
- },
- "words": 361
+  "words": 361
 }

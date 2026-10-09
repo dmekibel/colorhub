@@ -1,109 +1,111 @@
 {
- "slug": "dusty-blue",
- "name": "Dusty Blue",
- "hex": "#6082B6",
- "names": [
-  "Dusty Blue"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Dusty Blue is a soft, greyed mid blue, a descriptive name that fits the faded look of old indigo work clothes.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The name",
-   "body": "Dusty blue appears in Ridgway's atlas of 1912, in the ISCC-NBS system of 1955 and in the xkcd survey of 2010 [1]. The library swatch is slightly greyer than this one, and its nearest named neighbor is [[steel-blue]], about 3 units away [1]. The xkcd name Off Blue is a near-duplicate [1].\n\nSt Clair uses the phrase for the Mao suit, the plain blue workwear that became ubiquitous in China, tied to the story of indigo [2]. Synthetic indigo, financed by BASF and developed by Adolf von Baeyer, moved indigo from a luxury on a par with Tyrian purple to the color of blue-collar workforces [2]. The global denim industry, dominated by classic indigo blue, was worth 54 billion dollars in 2011 [2]. See [[indigo]] and [[denim]]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive a color near this swatch appears in 122 of 23,781 paintings, or 0.51 per cent, which is more common than 54 per cent of the named colors [3]. It peaks in the 1900s at 1.9 times the expected rate, and in a painting it is an accent 59 per cent of the time [3]. These are photographs of aged paintings, so read them as screen colors [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "descriptive name; a blue dulled with grey",
-   "first_recorded": "Ridgway 1912; ISCC-NBS 1955",
-   "source": "ColorHub library"
-  },
-  "aka": [
-   "off blue"
+  "slug": "dusty-blue",
+  "name": "Dusty Blue",
+  "hex": "#6082B6",
+  "names": [
+    "Dusty Blue",
+    "Glaucous"
   ],
-  "siblings": [
-   "steel-blue",
-   "indigo",
-   "denim",
-   "blue"
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Dusty Blue is a soft, greyed mid blue, a descriptive name that fits the faded look of old indigo work clothes.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The name",
+      "body": "Dusty blue appears in Ridgway's atlas of 1912, in the ISCC-NBS system of 1955 and in the xkcd survey of 2010 [1]. The library swatch is slightly greyer than this one, and its nearest named neighbor is [[steel-blue]], about 3 units away [1]. The xkcd name Off Blue is a near-duplicate [1].\n\nSt Clair uses the phrase for the Mao suit, the plain blue workwear that became ubiquitous in China, tied to the story of indigo [2]. Synthetic indigo, financed by BASF and developed by Adolf von Baeyer, moved indigo from a luxury on a par with Tyrian purple to the color of blue-collar workforces [2]. The global denim industry, dominated by classic indigo blue, was worth 54 billion dollars in 2011 [2]. See [[indigo]] and [[denim]]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive a color near this swatch appears in 122 of 23,781 paintings, or 0.51 per cent, which is more common than 54 per cent of the named colors [3]. It peaks in the 1900s at 1.9 times the expected rate, and in a painting it is an accent 59 per cent of the time [3]. These are photographs of aged paintings, so read them as screen colors [3]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 122,
-  "pct_archive": 0.51,
-  "match": {
-   "hex": "#6082B6",
-   "de2000": 4
+  "aside": {
+    "origin": {
+      "named_after": "descriptive name; a blue dulled with grey",
+      "first_recorded": "Ridgway 1912; ISCC-NBS 1955",
+      "source": "ColorHub library"
+    },
+    "aka": [
+      "off blue",
+      "Glaucous (wiki+ridgway+iscc-nbs+maerz-paul)"
+    ],
+    "siblings": [
+      "steel-blue",
+      "indigo",
+      "denim",
+      "blue"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": []
   },
-  "role": "accent",
-  "peak_century": 1900
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz and Paul 1930, xkcd color survey 2010), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 122,
+    "pct_archive": 0.51,
+    "match": {
+      "hex": "#6082B6",
+      "de2000": 4
+    },
+    "role": "accent",
+    "peak_century": 1900
   },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Indigo\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz and Paul 1930, xkcd color survey 2010), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Indigo\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What did synthetic indigo turn from a luxury into?",
+      "choices": [
+        "The color of workwear for the blue-collar workforce",
+        "A scarlet dye",
+        "A pigment for kings"
+      ],
+      "answer": "The color of workwear for the blue-collar workforce",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: dusty blue is more common in our archive than 54 per cent of the named colors.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Synthetic indigo turned a luxury dye into the color of the blue-collar workforce."
+  ],
+  "words": 213,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "'cheap' not in source; reworded"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "What did synthetic indigo turn from a luxury into?",
-   "choices": [
-    "The color of workwear for the blue-collar workforce",
-    "A scarlet dye",
-    "A pigment for kings"
-   ],
-   "answer": "The color of workwear for the blue-collar workforce",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: dusty blue is more common in our archive than 54 per cent of the named colors.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Synthetic indigo turned a luxury dye into the color of the blue-collar workforce."
- ],
- "words": 213,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "'cheap' not in source; reworded"
-  ]
- }
 }

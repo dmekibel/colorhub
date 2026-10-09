@@ -71,6 +71,22 @@ const worldHistory = () => {
 };
 const worldWhenHistory = fn => window.FASHION_HISTORY ? fn() : loadData("fashion-history").then(() => fn());
 
+// ---------------------------------------------------------------- Measured eras (1700s, 1800-1849, 1850-1899)
+// Real multi-palette stats from the garment archive (data/fashion/measured-eras.json, built by
+// tools/fashion_measure.py from the same 991-piece Met + Cleveland corpus js/fashion.js already loads for
+// Garments), paired with the written article in data/fashion-eras.js (window.FASHION_ERAS, lazy). Separate
+// from Decades (1900s-2020s, documented but not corpus-measured — see research/FASHION.md for why).
+DATA_SRC["fashion-eras"] = "data/fashion-eras.js";
+let FX_ERA_STATS = null, FX_ERA_LOADING = null;
+function fxEraStatsLoad() {
+  if (FX_ERA_STATS) return Promise.resolve(FX_ERA_STATS);
+  return FX_ERA_LOADING || (FX_ERA_LOADING = fetch("data/fashion/measured-eras.json" + (DATA_VER ? "?v=" + DATA_VER : "")).then(r => r.ok ? r.json() : null).then(d => {
+    FX_ERA_LOADING = null;
+    return (FX_ERA_STATS = d);
+  }).catch(() => { FX_ERA_LOADING = null; return null; }));
+}
+const worldWhenEras = fn => window.FASHION_ERAS ? fn() : loadData("fashion-eras").then(() => fn());
+
 // ---------------------------------------------------------------- Fashion: the section inside World
 // A contents row of its own four parts; each opens a list screen, which opens a detail screen.
 // A World tile is a small cover: a picture or a color graphic on top, the title and a line under it.
@@ -83,6 +99,7 @@ function worldFashionSection(host) {
   const histImg = ((FASHION.history.find(h => h.img) || {}).img || {}).thumb;
   const tiles = [
     ["decades", "Decades", `${FASHION.decades.length} decades, 1900s–2020s`, wdStripes(FASHION.decades.map(d => d.swatches.map(s => s[0])))],
+    ["eras", "Measured eras", "1700s–1899, measured from real garments", wdStripes([["#A89D89", "#9C9274", "#71755A"], ["#CECFC9", "#CDB598", "#DBD1AA"], ["#D5D5D6", "#16171A", "#8A4F48"]])],
     ["coty", "Color of the year", "Pantone's picks, 2000–present", wdGrid(FASHION.coty.map(c => c.hex))],
     ["houses", "Houses", `${FASHION.houses.length} signature colors`, wdBars(FASHION.houses.map(h => h.hex))],
     ["history", "History", `${FASHION.history.length} pages`, wdImg(histImg, wdBars(["#4B1E4F", "#16171A", "#F3EFE6", "#6B7A3A", "#1C2B5A"]))],
@@ -110,6 +127,8 @@ function worldRouteTitle(slug) {
   if (kind === "history") { const h = worldHistory().find(x => x.id === id); return h ? h.title : "Fashion history"; }
   if (kind === "garments") return "Garments";
   if (kind === "garment") { const r = typeof FX !== "undefined" && FX && FX.byId.get(id); return r ? r.t : "Garment"; }
+  if (kind === "eras") return "Measured eras";
+  if (kind === "era") { const e = (window.FASHION_ERAS || []).find(x => x.id === id); return e ? e.title : "Measured era"; }
   return "Fashion";
 }
 function fashionPage(slug, opts = {}) {
@@ -124,6 +143,8 @@ function fashionPage(slug, opts = {}) {
   if (kind === "history" && id) return fashionHistoryDetail(id, opts);
   if (kind === "garments" && typeof fxBrowser === "function") return fxBrowser(opts);   // js/fashion.js
   if (kind === "garment" && id && typeof fxGarment === "function") return fxGarment(id, opts);
+  if (kind === "eras") return fashionEraList(opts);
+  if (kind === "era" && id) return fashionEraDetail(id, opts);
   return fashionFallback();
 }
 function fashionFallback() { xToOrigin(); }   // where the trail started (js/explore.js), never a guessed room
@@ -247,6 +268,108 @@ function fashionCoty(opts = {}) {
   `, "article wd");
   worldBackWire(el, opts, fashionFallback);
   worldWire(el, self);
+  return el;
+}
+
+// ---------------------------------------------------------------- Measured eras: list + detail
+// Needs two lazy sources: the written article (data/fashion-eras.js, window.FASHION_ERAS) and the stats
+// (data/fashion/measured-eras.json, fxEraStatsLoad). Draws whatever's ready, then redraws once both land —
+// the same "quiet placeholder, redraw in place" pattern fashionList(history) already uses.
+function fashionEraReady() { return !!(window.FASHION_ERAS && FX_ERA_STATS); }
+function fashionEraWhenReady(cb) {
+  if (fashionEraReady()) return;
+  Promise.all([loadData("fashion-eras"), fxEraStatsLoad()]).then(() => { if (fashionEraReady()) cb(); });
+}
+function fashionEraStatsFor(id) { return FX_ERA_STATS && FX_ERA_STATS.eras.find(x => x.id === id); }
+function fashionEraList(opts = {}) {
+  const el = fashionEraListDraw(opts);
+  if (!fashionEraReady()) fashionEraWhenReady(() => { if (el.isConnected) { const y = scrollY; fashionEraListDraw(opts); scrollTo(0, y); } });
+  return el;
+}
+function fashionEraListDraw(opts = {}) {
+  const items = window.FASHION_ERAS || [{ id: "1700s", title: "The 1700s", dek: "" }, { id: "1800-1849", title: "1800–1849", dek: "" }, { id: "1850-1899", title: "1850–1899", dek: "" }];
+  const el = show(`
+    ${worldTop("Fashion")}
+    <h1 class="p-title">Measured eras</h1>
+    <p class="p-dek">Real stats and several palettes per era, measured from museum open-access garments and textiles — not one swatch standing in for a whole period.</p>
+    <div class="wd-list">${items.map(it => {
+      const st = fashionEraStatsFor(it.id);
+      const sw = st ? st.palette.slice(0, 6) : null;
+      return `<button class="wd-card" data-wd-open="era-${esc(it.id)}">
+        <span class="mini-pal">${sw ? sw.map(c => `<i style="--c:${c.hex}"></i>`).join("") : `<i style="background:var(--surface-2)"></i>`}</span>
+        <b>${esc(it.title)}</b><small>${st ? `${st.n.toLocaleString()} measured pieces` : esc(it.dek || "")}</small>
+      </button>`;
+    }).join("")}</div>
+    <p class="fine">Measured from photographs of museum pieces (the Met and Cleveland Museum of Art open-access collections); not a random sample of what everyone wore, and these percentages describe this corpus, not a census. Later decades (1900s on) are covered in Decades instead — documented from fashion history, not corpus-measured, because these collections hold very little 20th-century western dress.</p>
+  `, "article wd");
+  worldBackWire(el, opts, fashionFallback);
+  el.querySelectorAll("[data-wd-open]").forEach(b => b.onclick = () => fashionPage(b.dataset.wdOpen, { back: () => fashionEraList(opts) }));
+  return el;
+}
+const FX_KIND_LABEL = { dress: "Dresses", menswear: "Menswear", accessory: "Accessories", other: "Other textiles" };
+function fashionEraPaletteTabs(st, uiKey) {
+  const kinds = Object.keys(st.byKind || {});
+  const tabs = [["all", "All pieces", st.palette, st.n]].concat(kinds.map(k => [k, FX_KIND_LABEL[k] || k, st.byKind[k].palette, st.byKind[k].n]));
+  if (tabs.length < 2) return { html: fashionEraPaletteHTML(st.palette) };
+  const active = tabs.find(t => t[0] === uiKey) ? uiKey : "all";
+  const html = `
+    <div class="fx-chips wd-era-tabs">${tabs.map(([k, label, , n]) => `<button class="${k === active ? "on" : ""}" data-era-tab="${esc(k)}">${esc(label)} <span class="mono">${n}</span></button>`).join("")}</div>
+    <div data-era-pal>${fashionEraPaletteHTML(tabs.find(t => t[0] === active)[2])}</div>`;
+  return { html };
+}
+function fashionEraPaletteHTML(pal) {
+  if (!pal || !pal.length) return `<p class="fine">Not enough measured pieces for a separate palette here.</p>`;
+  return `<div class="pal-names wd-era-pal">${pal.map(c => `<button class="pal-name" data-swatch="${esc(c.hex)}"><i style="--c:${esc(c.hex)}"></i><b>${esc(c.name)}</b><span>${c.pctGarments}% of pieces · ${(c.shareOfCloth * 100).toFixed(1)}% of measured cloth</span><em class="mono">${esc(c.hex)}</em></button>`).join("")}</div>`;
+}
+function fashionEraGalleryHTML(st) {
+  if (!st.gallery || !st.gallery.length) return "";
+  const thumb = g => g.mu === "met" ? g.img.replace("/web-large/", "/mobile-large/") : g.img;
+  return `<section class="wd-sec"><h3>From the archive</h3>
+    <div class="fx-strip">${st.gallery.map(g => `
+      <button class="fx-mini" data-era-open="${esc(g.id)}">
+        <span class="fx-img"><img src="${esc(thumb(g))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onload="this.classList.add('ld')"></span>
+        <span class="mini-pal">${g.p.slice(0, 6).map(c => `<i style="--c:${c[0]};flex:${c[1]}"></i>`).join("")}</span>
+        <small>${esc(g.t)}${g.cul ? " · " + esc(g.cul) : ""}</small>
+      </button>`).join("")}</div>
+    <p class="fine">Tap a piece to open it in Garments, with its museum credit and record.</p></section>`;
+}
+function fashionEraDetail(id, opts = {}) {
+  const self = () => fashionEraDetail(id, opts);
+  if (!fashionEraReady()) {
+    const el = show(`${worldTop("Fashion")}<h1 class="p-title">Loading…</h1>`, "article wd");
+    worldBackWire(el, opts, () => fashionEraList({}));
+    fashionEraWhenReady(() => { if (el.isConnected) { ROUTE_REPLACE = true; fashionEraDetail(id, opts); } });
+    return el;
+  }
+  const era = window.FASHION_ERAS.find(x => x.id === id);
+  const st = fashionEraStatsFor(id);
+  if (!era || !st) return fashionEraList(opts);
+  const uiKey = "all";
+  const tabs = fashionEraPaletteTabs(st, uiKey);
+  const el = show(`
+    ${worldTop("Measured eras")}
+    <p class="eyebrow p-type">Fashion · Measured era</p>
+    <h1 class="p-title">${esc(era.title)}</h1>
+    <p class="p-dek">${esc(era.dek || "")}</p>
+    <p class="fine mono">${st.n.toLocaleString()} measured pieces · ${Object.entries(st.museums).map(([k, v]) => `${k === "met" ? "The Met" : "Cleveland Museum of Art"} ${v}`).join(" · ")}</p>
+    <section class="wd-sec"><h3>Measured palette</h3>${tabs.html}</section>
+    ${st.findings && st.findings.length ? `<section class="wd-sec"><h3>What the measurements show</h3><ul class="wd-pieces">${st.findings.map(f => `<li>${esc(f)}</li>`).join("")}</ul></section>` : ""}
+    ${(era.lead || []).map(p => `<p class="wd-p">${worldLinkText(p)}</p>`).join("")}
+    ${(era.sections || []).map(x => `<section class="wd-sec"><h3>${esc(x.title)}</h3>${x.text.map(p => `<p class="wd-p">${worldLinkText(p)}</p>`).join("")}</section>`).join("")}
+    ${fashionEraGalleryHTML(st)}
+    ${era.hedge ? `<p class="fine">${esc(era.hedge)}</p>` : ""}
+    ${sourcesHTML(era.sources)}
+  `, "article wd");
+  worldBackWire(el, opts, () => fashionEraList({}));
+  worldWire(el, self);
+  const palSection = [...el.querySelectorAll(".wd-sec")].find(s => s.querySelector(".wd-era-tabs, .wd-era-pal"));
+  const wireEraTabs = () => palSection.querySelectorAll("[data-era-tab]").forEach(b => b.onclick = () => {
+    const t = fashionEraPaletteTabs(st, b.dataset.eraTab);
+    palSection.innerHTML = `<h3>Measured palette</h3>${t.html}`;
+    wireEraTabs();
+  });
+  if (palSection) wireEraTabs();
+  el.querySelectorAll("[data-era-open]").forEach(b => b.onclick = () => fashionPage("garment-" + b.dataset.eraOpen, { back: self }));
   return el;
 }
 

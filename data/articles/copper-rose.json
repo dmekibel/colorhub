@@ -1,113 +1,113 @@
 {
- "slug": "copper-rose",
- "name": "Copper Rose",
- "hex": "#996666",
- "names": [
-  "Copper Rose"
- ],
- "tier": "pigment",
- "depth": "short",
- "lede": "Copper Rose is a muted, grayish pink-red named for the metal copper, recorded in our library by three different systems, most recently Maerz and Paul in 1928.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Copper, read as a pink",
-   "body": "The nearest named colors on file are [[brick-rose]], [[dark-vinaceous]], [[rose-taupe]] and [[marsh-rose]], at 3, 3, 3.5 and 3.5 ΔE [1]. The 1955 ISCC-NBS system would class a close match as moderate red, 2.9 units of ΔE away [1].\n\nA near-duplicate swatch in our data, Corinthian Red, sits only 1.9 units off under a different name [1]. A second library color, [[copper-penny]], is built on the same metal word but reads as a browner, less pink shade [1]. In LCH terms Copper Rose is mid-dark and only mildly saturated: lightness 49, chroma 22, hue 22 degrees [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive of 23,781 paintings finds a close match to Copper Rose in 112, about 0.5 percent, as photographed [2]. Its fullest appearance is Henri Matisse's *Odalisque with a Screen* of 1923, at 55 percent coverage, and it also appears in an undated Indian work whose own title describes a palette of \"mauve, chartreuse and black\" [2]. Its use across the archive skews heavily toward Nepal, nearly 51 times the expected rate, and toward India, over 10 times expected, and peaks in the 1920s, in 6 of 237 paintings [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the metal copper",
-   "first_recorded": "1928 (Maerz and Paul, 1930 edition)",
-   "source": "Maerz and Paul, A Dictionary of Color; Ridgway, Color Standards and Color Nomenclature; ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "brick-rose",
-   "dark-vinaceous",
-   "rose-taupe",
-   "marsh-rose"
+  "slug": "copper-rose",
+  "name": "Copper Rose",
+  "hex": "#996666",
+  "names": [
+    "Copper Rose"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 112,
-  "match": {
-   "hex": "#996666",
-   "de2000": 6,
-   "min_cover": 0.05
+  "tier": "pigment",
+  "depth": "short",
+  "lede": "Copper Rose is a muted, grayish pink-red named for the metal copper, recorded in our library by three different systems, most recently Maerz and Paul in 1928.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Copper, read as a pink",
+      "body": "The nearest named colors on file are [[brick-rose]], [[brick-rose]], [[rose-taupe]] and [[marsh-rose]], at 3, 3, 3.5 and 3.5 ΔE [1]. The 1955 ISCC-NBS system would class a close match as moderate red, 2.9 units of ΔE away [1].\n\nA near-duplicate swatch in our data, Corinthian Red, sits only 1.9 units off under a different name [1]. A second library color, [[copper-penny]], is built on the same metal word but reads as a browner, less pink shade [1]. In LCH terms Copper Rose is mid-dark and only mildly saturated: lightness 49, chroma 22, hue 22 degrees [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings finds a close match to Copper Rose in 112, about 0.5 percent, as photographed [2]. Its fullest appearance is Henri Matisse's *Odalisque with a Screen* of 1923, at 55 percent coverage, and it also appears in an undated Indian work whose own title describes a palette of \"mauve, chartreuse and black\" [2]. Its use across the archive skews heavily toward Nepal, nearly 51 times the expected rate, and toward India, over 10 times expected, and peaks in the 1920s, in 6 of 237 paintings [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the metal copper",
+      "first_recorded": "1928 (Maerz and Paul, 1930 edition)",
+      "source": "Maerz and Paul, A Dictionary of Color; Ridgway, Color Standards and Color Nomenclature; ColorHub library"
+    },
+    "aka": [],
+    "siblings": [
+      "brick-rose",
+      "dark-vinaceous",
+      "rose-taupe",
+      "marsh-rose"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "measured": {
-   "lch": [
-    49,
-    22,
-    22
-   ],
-   "nearest": [
-    [
-     "Brick rose",
-     3.0
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 112,
+    "match": {
+      "hex": "#996666",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "measured": {
+      "lch": [
+        49,
+        22,
+        22
+      ],
+      "nearest": [
+        [
+          "Brick rose",
+          3.0
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What metal is Copper Rose named for?",
+      "choices": [
+        "Copper",
+        "Bronze",
+        "Iron",
+        "Gold"
+      ],
+      "answer": "Copper",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Copper Rose is most heavily used, relative to chance, in paintings from Nepal and India in our archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Copper Rose turns up nearly 51 times its expected rate in paintings from Nepal in our archive."
+  ],
+  "words": 216,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What metal is Copper Rose named for?",
-   "choices": [
-    "Copper",
-    "Bronze",
-    "Iron",
-    "Gold"
-   ],
-   "answer": "Copper",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Copper Rose is most heavily used, relative to chance, in paintings from Nepal and India in our archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Copper Rose turns up nearly 51 times its expected rate in paintings from Nepal in our archive."
- ],
- "words": 216,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

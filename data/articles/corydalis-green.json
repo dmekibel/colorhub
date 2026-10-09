@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "Named for a flowering plant",
-   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* lists Corydalis Green on plate XLI, hue 29′′′, tone d [1]. Maerz and Paul repeat the same name in 1930, on their plate 19 B 4, and the ISCC-NBS system of 1955 assigns it block 122, grayish yellow green, 7.1 units from that block's centroid, a wider gap than most Ridgway names show [2]. The nearest named colors on file are [[pale-green-grey]], [[greenish-glaucous]], [[pale-olive-grey]] and [[yellowish-glaucous]], at 3.4, 3.4, \nCorydalis is a genus of several hundred flowering plants, many with feathery blue-green leaves, grown in gardens and found wild across the Northern Hemisphere; the color borrows the foliage's pale, slightly grey green rather than the flowers' usual yellow or pink [1]. It sits among the muted greens near [[apple-green]] and [[moss]] [2]."
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* lists Corydalis Green on plate XLI, hue 29′′′, tone d [1]. Maerz and Paul repeat the same name in 1930, on their plate 19 B 4, and the ISCC-NBS system of 1955 assigns it block 122, grayish yellow green, 7.1 units from that block's centroid, a wider gap than most Ridgway names show [2]. The nearest named colors on file are [[pale-green-grey]], [[pale-green-grey]], [[pale-olive-grey]] and [[pale-olive-grey]], at 3.4, 3.4, \nCorydalis is a genus of several hundred flowering plants, many with feathery blue-green leaves, grown in gardens and found wild across the Northern Hemisphere; the color borrows the foliage's pale, slightly grey green rather than the flowers' usual yellow or pink [1]. It sits among the muted greens near [[apple-green]] and [[moss]] [2]."
   },
   {
    "id": "field",
@@ -110,7 +110,7 @@
  "openers": [
   "Corydalis Green borrows a garden plant's feathery leaves, not its flowers."
  ],
- "words": 262,
+ "words": 264,
  "status": "checked",
  "checked": {
   "by": "checker",

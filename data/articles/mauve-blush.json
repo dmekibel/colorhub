@@ -1,137 +1,137 @@
 {
- "name": "Mauve Blush",
- "hex": "#B8A38F",
- "names": [
-  "Mauve Blush"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Mauve Blush is a warm, dusty tan, filed under the mauve family though it reads as brown rather than purple, recorded by the Maerz and Paul dictionary in 1930 with a first use in 1928.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A mauve that reads as tan",
-   "body": "Our naming data files this as a family-word variant of [[mauve]] [1]. The Maerz and Paul dictionary of 1930 plots it on plate 12 A3 and gives it a first recorded use of 1928, and the ISCC-NBS system files the same area as \"light grayish yellowish brown\" [1]. In LCH terms it reads as lightness 68, chroma 14, hue 71 degrees: a soft, low-saturation tan, closer to beige than to any purple [1].\n\nIts nearest computed neighbors are [[mushroom|Mushroom]], [[drab-grey|Drab Grey]] and [[linen-grey|Linen Grey]], all within 3.5 units [2]. The closest everyday name is Tan, about 8.0 units away [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 2,102, as photographed (1,422 by the stricter within-painting measure), which makes it more common than 93 percent of the named colors we track; it is one of the most widely present tones in our data [4]. [[painter:willem-van-de-velde-ii|Willem van de Velde (II)]] used it most: it appears in 4 of his 15 works here, 4.6 times the rate of the museums those works come from [4]. It is most over-represented in paintings from Nepal, at 2.9 times the expected rate (10 of 25 paintings), and on canvas it keeps company with [[taupe|Taupe]] and [[almond|Almond]] far more than chance [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a modifier on Mauve; measured as a yellowish-brown tan",
-   "first_recorded": "Maerz & Paul, 1930 (first used 1928)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "mushroom",
-   "drab-grey",
-   "linen-grey",
-   "greyish-tan"
+  "name": "Mauve Blush",
+  "hex": "#B8A38F",
+  "names": [
+    "Mauve Blush"
   ],
-  "parent": "mauve",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 2102,
-  "measured": {
-   "lch": [
-    68,
-    14,
-    71
-   ],
-   "nearest": [
-    [
-     "Mushroom",
-     2.9
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Mauve Blush is a warm, dusty tan, filed under the mauve family though it reads as brown rather than purple, recorded by the Maerz and Paul dictionary in 1930 with a first use in 1928.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A mauve that reads as tan",
+      "body": "Our naming data files this as a family-word variant of [[mauve]] [1]. The Maerz and Paul dictionary of 1930 plots it on plate 12 A3 and gives it a first recorded use of 1928, and the ISCC-NBS system files the same area as \"light grayish yellowish brown\" [1]. In LCH terms it reads as lightness 68, chroma 14, hue 71 degrees: a soft, low-saturation tan, closer to beige than to any purple [1].\n\nIts nearest computed neighbors are [[mushroom|Mushroom]], [[linen-grey|Drab Grey]] and [[linen-grey|Linen Grey]], all within 3.5 units [2]. The closest everyday name is Tan, about 8.0 units away [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 2,102, as photographed (1,422 by the stricter within-painting measure), which makes it more common than 93 percent of the named colors we track; it is one of the most widely present tones in our data [4]. [[painter:willem-van-de-velde-ii|Willem van de Velde (II)]] used it most: it appears in 4 of his 15 works here, 4.6 times the rate of the museums those works come from [4]. It is most over-represented in paintings from Nepal, at 2.9 times the expected rate (10 of 25 paintings), and on canvas it keeps company with [[taupe|Taupe]] and [[almond|Almond]] far more than chance [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a modifier on Mauve; measured as a yellowish-brown tan",
+      "first_recorded": "Maerz & Paul, 1930 (first used 1928)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "mushroom",
+      "drab-grey",
+      "linen-grey",
+      "greyish-tan"
     ],
-    [
-     "Drab-Grey",
-     3.5
-    ],
-    [
-     "Linen grey",
-     3.5
-    ],
-    [
-     "Greyish tan",
-     3.5
+    "parent": "mauve",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 2102,
+    "measured": {
+      "lch": [
+        68,
+        14,
+        71
+      ],
+      "nearest": [
+        [
+          "Mushroom",
+          2.9
+        ],
+        [
+          "Drab-Grey",
+          3.5
+        ],
+        [
+          "Linen grey",
+          3.5
+        ],
+        [
+          "Greyish tan",
+          3.5
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/nodes-m.json): Mauve Blush — Maerz & Paul 1930, plate 12 A3, first recorded 1928",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges-m.json): nearest distinct neighbors by CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Mauve Blush entry",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/m.json)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Despite its name, which family does Mauve Blush read closer to by measured color?",
+      "choices": [
+        "Tan and beige",
+        "Bright purple",
+        "Deep blue",
+        "Pure black"
+      ],
+      "answer": "Tan and beige",
+      "kind": "pick"
+    },
+    {
+      "q": "In which country's paintings is Mauve Blush most over-represented in our archive?",
+      "choices": [
+        "Nepal",
+        "France",
+        "India",
+        "Japan"
+      ],
+      "answer": "Nepal",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Mauve Blush carries \"mauve\" in its name but measures as a dusty tan, with almost none of mauve's purple left."
+  ],
+  "words": 247,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "No book concordance hits for this slug; written from the color graph, library and archive data only.",
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/nodes-m.json): Mauve Blush — Maerz & Paul 1930, plate 12 A3, first recorded 1928",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges-m.json): nearest distinct neighbors by CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Mauve Blush entry",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/m.json)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Despite its name, which family does Mauve Blush read closer to by measured color?",
-   "choices": [
-    "Tan and beige",
-    "Bright purple",
-    "Deep blue",
-    "Pure black"
-   ],
-   "answer": "Tan and beige",
-   "kind": "pick"
-  },
-  {
-   "q": "In which country's paintings is Mauve Blush most over-represented in our archive?",
-   "choices": [
-    "Nepal",
-    "France",
-    "India",
-    "Japan"
-   ],
-   "answer": "Nepal",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Mauve Blush carries \"mauve\" in its name but measures as a dusty tan, with almost none of mauve's purple left."
- ],
- "words": 247,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-08",
-  "issues": [
-   "No book concordance hits for this slug; written from the color graph, library and archive data only.",
-   "lint 2026-10-09"
-  ]
- },
- "slug": "mauve-blush"
+  "slug": "mauve-blush"
 }

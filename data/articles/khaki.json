@@ -1,272 +1,272 @@
 {
- "slug": "khaki",
- "name": "Khaki",
- "hex": "#BDB76B",
- "names": [
-  "Khaki"
- ],
- "tier": "nature",
- "depth": "long",
- "lede": "Khaki is a drab, dust-colored brownish yellow-green, named from an Indian-language word for dust, and the color that moved armies out of bright uniforms into ones meant to be hard to see.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A word for dust",
-   "body": "*Khaki* reached English from India, and the books gloss it a little differently: dusty or dust-colored in Urdu (St Clair), dust-colored in Hindi (Paterson), earth-colored or dust-colored in Hindustani (Pastoureau) [1][2][3]. It does not come from the French *kaki*, the persimmon, a mix-up Pastoureau rules out [2]. Finlay adds that in India, undyed natural-colored cotton cloth was itself called khaki, or earth color [4].\n\nPaterson notes that many color names start from a cloth, as Kendal green, loden and russet do, and gives khaki as the reverse case, where the color gave its name to the fabric [5]. He describes the color as a drab yellowish brown, sometimes with a greenish tinge [3]."
-  },
-  {
-   "id": "guides",
-   "title": "Mud and cotton at Peshawar",
-   "body": "The usual story begins with Sir Harry Lumsden, who raised the Corps of Guides at Peshawar in 1846 [1]. St Clair says he bought white cotton in a Lahore bazaar and had it rubbed with river mud, so his men would blend into a dusty land [1]. She gives this as what is thought to have happened, and the hedge is fair: our own date data has khaki uniforms made official for the Guides in 1848 [6]. The two years may mark different events, the raising of the corps and the uniform, but the sources we hold do not settle it.\n\nThe Indian Mutiny of 1857 made the usual bright kit less practical still, and dusty brown uniforms spread through the Indian army between about 1860 and 1870 [1]. Where river mud was not to hand, cloth was dyed with coffee, tea, soil and curry powder [1]. Pastoureau dates the British adoption to the second half of the nineteenth century and credits the soldiers of the Indian armies [2]."
-  },
-  {
-   "id": "blending-in",
-   "title": "Armies stop being visible",
-   "body": "Before khaki, armies wore bright colors to be seen. In St Clair's account, bright cloth made forces look bigger and let soldiers find friends in battle smoke, but near 1900 aircraft scouting and smokeless guns made being visible a danger [1]. Pastoureau notes that other armies had already moved toward colors that blended with the landscape: grayish green for the Germans, Italians and Russians, grayish blue for Austro-Hungarian soldiers [7].\n\nFrance is the counterexample. Red trousers dyed with [[madder]] were ordered in 1829 and worn until 1915, and in 1911 a former war minister defended them as part of the French national character [7]. Pastoureau suggests that being so easy to see may have cost the army heavy losses in the field [7]."
-  },
-  {
-   "id": "world-war",
-   "title": "Khaki in the First World War",
-   "body": "On 5 August 1914 Kitchener took over as Britain's war secretary, and the government then spent four years coaxing millions of civilians into khaki [1]. It is said that Germans at the Battle of Mons expected red coats and bearskins, and thought the new khaki looked like golfing tweeds [1]. By 1918 the color stood for soldiering itself: recruits wore khaki armbands, posters asked men why they were not in it, and the phrase *khaki fever* was turned on young women said to like soldiers too much [1].\n\nMaking that much khaki was an industrial problem. By the First World War, Finlay says, most army khaki began as bleached white cotton that was then dyed with synthetic colors to a greenish brown [4]. St Clair's notes say that Britain depended so heavily on German dyemakers that at times it could hardly color its own uniforms khaki [8]. Finlay adds that the German army in 1914 could not get those dyes either, a supply crisis that pushed that country's dye industry forward [4]. The two accounts are hard to reconcile from these books alone.\n\nGarfield quotes a chemist at Read Holliday of Huddersfield, which supplied khaki yellow and khaki brown as part of British Dyes Ltd [9]. Dyes were so scarce, he recalled, that a dyer could often earn more by selling dye stock than by using it [9]."
-  },
-  {
-   "id": "dyes",
-   "title": "What khaki was dyed with",
-   "body": "Khaki was never one dye. Cutch, a tannin-rich extract from the heartwood of *Acacia catechu*, gives a fast dye whose shades run from brown through olive to khaki [10]. Balfour-Paul describes a large woad-and-indigo fermentation vat, still in use in the 1900s, that colored loose wool for army khaki and air-force grey blends [11]. That suggests blue was one ingredient in some khaki wool [11]."
-  },
-  {
-   "id": "art",
-   "title": "Khaki in paint and in fashion",
-   "body": "Painters mixed their khakis. Ball points out that the dull olive, khaki and red-brown of Monet's *Lavacourt under Snow* (about 1879) are not ochres or earths but mixtures of cobalt blue, viridian, cadmium yellow and vermilion [12].\n\nPastoureau's verdict on the color is blunt: he finds khaki dirty, sad and often unpleasant to look at, and groups it with modern greens made to hide in or to disguise dirt [2]. That is a judgment, not a measurement. Khaki and its cousins nonetheless reached civilian clothes, first among young rebels wearing military surplus and then, in the 1970s, in designers' brownish greens [2]."
-  },
-  {
-   "id": "swatches",
-   "title": "Which khaki",
-   "body": "There is no single screen khaki. Our swatch, #BDB76B, is a duller mid yellow-green that ISCC-NBS calls a moderate greenish yellow, about three units away [6]. Paterson gives the X11 keyword khaki as #F0E68C, a much paler yellow [3]. Our library also carries Khaki (Web) at #C3B091, a pale tan, and the xkcd color survey recorded two khakis, #AAA662 and #9B8F55 [6].\n\nNone of these is the cloth of a field uniform, which Paterson describes as a drab yellowish brown [3]. Close relatives in our data are [[khaki-web]], [[khaki-green]], [[khaki-grey]], [[khaki-brown]] and [[light-khaki]] [6]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Khaki appears in 300 of 23,781 paintings in our archive, 1.26 per cent, and in 207 when counted by lightness rank inside each painting [13]. It is more common than 71 per cent of the named colors, and plays an accent in 48 per cent of those 207 [13]. It peaks in the 1900s, in 2.2 per cent of the 1,674 paintings from that century, 2.6 times the baseline of the same museums [13]. Its most devoted painter is [[painter:auguste-renoir|Renoir]], with the color in 5 of 50 of his works here, 5.3 times the baseline [13]. By country it is most over-represented in India, 2.5 times expected (12 of 721 paintings), a pleasing echo of the word's origin and nothing more [13].\n\nIn Google Books the word is almost absent before 1900, and its general use peaks in the 1910s, the decade of the war; counted as an adjective, which is the color sense, it peaks in the 2010s [13]. Our fashion data lists a color identical to this swatch among both the 1910s and the 1990s palettes [6].\n\nThe earliest archive match is a work of about 1285 by Duccio, 563 years before the name's first record in 1848 [13]. These are photographs of aged, varnished paintings, so a match is a look-alike hue, not a pigment test [13]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "an Indian-language word for dust (books call it Urdu, Hindi or Hindustani)",
-   "first_recorded": "uniforms of the Corps of Guides, 1846 to 1848; Maerz and Paul give 1848",
-   "source": "St Clair, Secret Lives of Colour, 'Khaki'; Paterson, A Dictionary of Colour"
-  },
-  "aka": [
-   "dust color",
-   "earth color"
+  "slug": "khaki",
+  "name": "Khaki",
+  "hex": "#BDB76B",
+  "names": [
+    "Khaki"
   ],
-  "siblings": [
-   "khaki-web",
-   "khaki-green",
-   "khaki-grey"
+  "tier": "nature",
+  "depth": "long",
+  "lede": "Khaki is a drab, dust-colored brownish yellow-green, named from an Indian-language word for dust, and the color that moved armies out of bright uniforms into ones meant to be hard to see.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A word for dust",
+      "body": "*Khaki* reached English from India, and the books gloss it a little differently: dusty or dust-colored in Urdu (St Clair), dust-colored in Hindi (Paterson), earth-colored or dust-colored in Hindustani (Pastoureau) [1][2][3]. It does not come from the French *kaki*, the persimmon, a mix-up Pastoureau rules out [2]. Finlay adds that in India, undyed natural-colored cotton cloth was itself called khaki, or earth color [4].\n\nPaterson notes that many color names start from a cloth, as Kendal green, loden and russet do, and gives khaki as the reverse case, where the color gave its name to the fabric [5]. He describes the color as a drab yellowish brown, sometimes with a greenish tinge [3]."
+    },
+    {
+      "id": "guides",
+      "title": "Mud and cotton at Peshawar",
+      "body": "The usual story begins with Sir Harry Lumsden, who raised the Corps of Guides at Peshawar in 1846 [1]. St Clair says he bought white cotton in a Lahore bazaar and had it rubbed with river mud, so his men would blend into a dusty land [1]. She gives this as what is thought to have happened, and the hedge is fair: our own date data has khaki uniforms made official for the Guides in 1848 [6]. The two years may mark different events, the raising of the corps and the uniform, but the sources we hold do not settle it.\n\nThe Indian Mutiny of 1857 made the usual bright kit less practical still, and dusty brown uniforms spread through the Indian army between about 1860 and 1870 [1]. Where river mud was not to hand, cloth was dyed with coffee, tea, soil and curry powder [1]. Pastoureau dates the British adoption to the second half of the nineteenth century and credits the soldiers of the Indian armies [2]."
+    },
+    {
+      "id": "blending-in",
+      "title": "Armies stop being visible",
+      "body": "Before khaki, armies wore bright colors to be seen. In St Clair's account, bright cloth made forces look bigger and let soldiers find friends in battle smoke, but near 1900 aircraft scouting and smokeless guns made being visible a danger [1]. Pastoureau notes that other armies had already moved toward colors that blended with the landscape: grayish green for the Germans, Italians and Russians, grayish blue for Austro-Hungarian soldiers [7].\n\nFrance is the counterexample. Red trousers dyed with [[madder]] were ordered in 1829 and worn until 1915, and in 1911 a former war minister defended them as part of the French national character [7]. Pastoureau suggests that being so easy to see may have cost the army heavy losses in the field [7]."
+    },
+    {
+      "id": "world-war",
+      "title": "Khaki in the First World War",
+      "body": "On 5 August 1914 Kitchener took over as Britain's war secretary, and the government then spent four years coaxing millions of civilians into khaki [1]. It is said that Germans at the Battle of Mons expected red coats and bearskins, and thought the new khaki looked like golfing tweeds [1]. By 1918 the color stood for soldiering itself: recruits wore khaki armbands, posters asked men why they were not in it, and the phrase *khaki fever* was turned on young women said to like soldiers too much [1].\n\nMaking that much khaki was an industrial problem. By the First World War, Finlay says, most army khaki began as bleached white cotton that was then dyed with synthetic colors to a greenish brown [4]. St Clair's notes say that Britain depended so heavily on German dyemakers that at times it could hardly color its own uniforms khaki [8]. Finlay adds that the German army in 1914 could not get those dyes either, a supply crisis that pushed that country's dye industry forward [4]. The two accounts are hard to reconcile from these books alone.\n\nGarfield quotes a chemist at Read Holliday of Huddersfield, which supplied khaki yellow and khaki brown as part of British Dyes Ltd [9]. Dyes were so scarce, he recalled, that a dyer could often earn more by selling dye stock than by using it [9]."
+    },
+    {
+      "id": "dyes",
+      "title": "What khaki was dyed with",
+      "body": "Khaki was never one dye. Cutch, a tannin-rich extract from the heartwood of *Acacia catechu*, gives a fast dye whose shades run from brown through olive to khaki [10]. Balfour-Paul describes a large woad-and-indigo fermentation vat, still in use in the 1900s, that colored loose wool for army khaki and air-force grey blends [11]. That suggests blue was one ingredient in some khaki wool [11]."
+    },
+    {
+      "id": "art",
+      "title": "Khaki in paint and in fashion",
+      "body": "Painters mixed their khakis. Ball points out that the dull olive, khaki and red-brown of Monet's *Lavacourt under Snow* (about 1879) are not ochres or earths but mixtures of cobalt blue, viridian, cadmium yellow and vermilion [12].\n\nPastoureau's verdict on the color is blunt: he finds khaki dirty, sad and often unpleasant to look at, and groups it with modern greens made to hide in or to disguise dirt [2]. That is a judgment, not a measurement. Khaki and its cousins nonetheless reached civilian clothes, first among young rebels wearing military surplus and then, in the 1970s, in designers' brownish greens [2]."
+    },
+    {
+      "id": "swatches",
+      "title": "Which khaki",
+      "body": "There is no single screen khaki. Our swatch, #BDB76B, is a duller mid yellow-green that ISCC-NBS calls a moderate greenish yellow, about three units away [6]. Paterson gives the X11 keyword khaki as #F0E68C, a much paler yellow [3]. Our library also carries Khaki (Web) at #C3B091, a pale tan, and the xkcd color survey recorded two khakis, #AAA662 and #9B8F55 [6].\n\nNone of these is the cloth of a field uniform, which Paterson describes as a drab yellowish brown [3]. Close relatives in our data are [[khaki-web]], [[khaki-green]], [[khaki-olive]], [[khaki-brown]] and [[light-khaki]] [6]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Khaki appears in 300 of 23,781 paintings in our archive, 1.26 per cent, and in 207 when counted by lightness rank inside each painting [13]. It is more common than 71 per cent of the named colors, and plays an accent in 48 per cent of those 207 [13]. It peaks in the 1900s, in 2.2 per cent of the 1,674 paintings from that century, 2.6 times the baseline of the same museums [13]. Its most devoted painter is [[painter:auguste-renoir|Renoir]], with the color in 5 of 50 of his works here, 5.3 times the baseline [13]. By country it is most over-represented in India, 2.5 times expected (12 of 721 paintings), a pleasing echo of the word's origin and nothing more [13].\n\nIn Google Books the word is almost absent before 1900, and its general use peaks in the 1910s, the decade of the war; counted as an adjective, which is the color sense, it peaks in the 2010s [13]. Our fashion data lists a color identical to this swatch among both the 1910s and the 1990s palettes [6].\n\nThe earliest archive match is a work of about 1285 by Duccio, 563 years before the name's first record in 1848 [13]. These are photographs of aged, varnished paintings, so a match is a look-alike hue, not a pigment test [13]."
+    }
   ],
-  "parent": null,
-  "children": [
-   "khaki-brown",
-   "light-khaki"
+  "aside": {
+    "origin": {
+      "named_after": "an Indian-language word for dust (books call it Urdu, Hindi or Hindustani)",
+      "first_recorded": "uniforms of the Corps of Guides, 1846 to 1848; Maerz and Paul give 1848",
+      "source": "St Clair, Secret Lives of Colour, 'Khaki'; Paterson, A Dictionary of Colour"
+    },
+    "aka": [
+      "dust color",
+      "earth color"
+    ],
+    "siblings": [
+      "khaki-web",
+      "khaki-green",
+      "khaki-grey"
+    ],
+    "parent": null,
+    "children": [
+      "khaki-brown",
+      "light-khaki"
+    ],
+    "disambiguation": [
+      {
+        "slug": "khaki-web",
+        "gloss": "a pale tan in our library; the X11 keyword is a paler yellow"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "ur",
+        "name": "khaki (dusty)"
+      }
+    ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 300,
+    "n_within_painting": 207,
+    "century_peak": {
+      "century": 1900,
+      "pct": 2.2,
+      "lift": 2.6
+    },
+    "painters": [
+      [
+        "pierre-auguste-renoir",
+        5,
+        50,
+        5.3
+      ]
+    ],
+    "countries": [
+      [
+        "India",
+        12,
+        721,
+        2.5
+      ]
+    ],
+    "first_seen": {
+      "year": 1285,
+      "id": "commons-Q948745"
+    },
+    "ngram": {
+      "peak_general": 1910,
+      "peak_adjective": 2010
+    },
+    "measured": {
+      "lch": [
+        73.4,
+        40.3,
+        102.6
+      ],
+      "iscc": "moderate greenish yellow, block 94",
+      "alts": [
+        "#F0E68C",
+        "#C3B091",
+        "#AAA662",
+        "#9B8F55"
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, 'Khaki'",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pastoureau, Green: The History of a Color, 'Brownish Green: Khaki' and the section on modern greens (epub ch. 44)",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, 'khaki', p. 231",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Finlay, Fabric, note XVIII to ch. 3, p. 571",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, essay on colour names from materials, p. 305",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "data",
+      "cite": "ColorHub library and graph: ISCC-NBS block 94, Maerz and Paul first record 1848, alternate khaki swatches, fashion-decade twins",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Pastoureau, Blue: The History of a Color, section on uniforms and the red trousers (epub ch. 10)",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, notes to 'Khaki'",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Garfield, Mauve, footnote on the First World War dye trade (epub ch. 21)",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Pigment Compendium, 'Cutch', p. 150",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, p. 140",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 8 ('The Reign of Light')",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "data",
+      "cite": "ColorHub archive field notes and Google Books Ngram, as photographed",
+      "loc_kind": "entry",
+      "url": null
+    }
   ],
-  "disambiguation": [
-   {
-    "slug": "khaki-web",
-    "gloss": "a pale tan in our library; the X11 keyword is a paler yellow"
-   }
+  "questions": [
+    {
+      "q": "What does the word khaki mean in the Indian languages it came from?",
+      "choices": [
+        "Dusty or dust-colored",
+        "Persimmon-colored",
+        "Olive",
+        "Soldier"
+      ],
+      "answer": "Dusty or dust-colored",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: khaki comes from the French word for the persimmon, kaki.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Why did armies move from bright uniforms toward khaki around 1900?",
+      "choices": [
+        "Scouting aircraft and smokeless guns made being seen dangerous",
+        "Bright dyes ran out",
+        "Khaki dye was cheaper than madder",
+        "Kings preferred it"
+      ],
+      "answer": "Scouting aircraft and smokeless guns made being seen dangerous",
+      "kind": "pick"
+    }
   ],
-  "other_languages": [
-   {
-    "lang": "ur",
-    "name": "khaki (dusty)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 300,
-  "n_within_painting": 207,
-  "century_peak": {
-   "century": 1900,
-   "pct": 2.2,
-   "lift": 2.6
-  },
-  "painters": [
-   [
-    "pierre-auguste-renoir",
-    5,
-    50,
-    5.3
-   ]
+  "openers": [
+    "By St Clair's account, khaki began as white cotton rubbed with river mud at Peshawar.",
+    "Monet's dull olive and khaki in Lavacourt under Snow are mixed from bright blue, green, yellow and red.",
+    "Some army khaki wool was dyed in a vat with indigo in it."
   ],
-  "countries": [
-   [
-    "India",
-    12,
-    721,
-    2.5
-   ]
-  ],
-  "first_seen": {
-   "year": 1285,
-   "id": "commons-Q948745"
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   },
-  "ngram": {
-   "peak_general": 1910,
-   "peak_adjective": 2010
-  },
-  "measured": {
-   "lch": [
-    73.4,
-    40.3,
-    102.6
-   ],
-   "iscc": "moderate greenish yellow, block 94",
-   "alts": [
-    "#F0E68C",
-    "#C3B091",
-    "#AAA662",
-    "#9B8F55"
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, 'Khaki'",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pastoureau, Green: The History of a Color, 'Brownish Green: Khaki' and the section on modern greens (epub ch. 44)",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, 'khaki', p. 231",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Finlay, Fabric, note XVIII to ch. 3, p. 571",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, essay on colour names from materials, p. 305",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "data",
-   "cite": "ColorHub library and graph: ISCC-NBS block 94, Maerz and Paul first record 1848, alternate khaki swatches, fashion-decade twins",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Pastoureau, Blue: The History of a Color, section on uniforms and the red trousers (epub ch. 10)",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, notes to 'Khaki'",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Garfield, Mauve, footnote on the First World War dye trade (epub ch. 21)",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Pigment Compendium, 'Cutch', p. 150",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Balfour-Paul, Indigo, p. 140",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 8 ('The Reign of Light')",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "data",
-   "cite": "ColorHub archive field notes and Google Books Ngram, as photographed",
-   "loc_kind": "entry",
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the word khaki mean in the Indian languages it came from?",
-   "choices": [
-    "Dusty or dust-colored",
-    "Persimmon-colored",
-    "Olive",
-    "Soldier"
-   ],
-   "answer": "Dusty or dust-colored",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: khaki comes from the French word for the persimmon, kaki.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Why did armies move from bright uniforms toward khaki around 1900?",
-   "choices": [
-    "Scouting aircraft and smokeless guns made being seen dangerous",
-    "Bright dyes ran out",
-    "Khaki dye was cheaper than madder",
-    "Kings preferred it"
-   ],
-   "answer": "Scouting aircraft and smokeless guns made being seen dangerous",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "By St Clair's account, khaki began as white cotton rubbed with river mud at Peshawar.",
-  "Monet's dull olive and khaki in Lavacourt under Snow are mixed from bright blue, green, yellow and red.",
-  "Some army khaki wool was dyed in a vat with indigo in it."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- },
- "words": 1115
+  "words": 1115
 }

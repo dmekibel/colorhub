@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A darker reading of aquamarine",
-   "body": "The name follows the library's modifier grammar, *dark* plus [[aquamarine]] [1]. Ridgway's 1912 *Color Standards and Color Nomenclature* places a close hue at plate VII, hue 39, a scan of an aged plate and so only approximate [1]. Our library's nearest computed ISCC-NBS block for this chip is a moderate bluish green, and Maerz and Paul's 1930 dictionary separately dates a hue this dark to 1912 as well [1].\n\nThe books do not explain why \"dark\" was chosen over another modifier for this reading [2]. Its nearest named neighbors by color distance are [[anthracene-green]] and [[deep-teal-green]], both almost indistinguishable at 3.1 units, with [[myrtle-green]] a little further at 3.5 [3]."
+   "body": "The name follows the library's modifier grammar, *dark* plus [[aquamarine]] [1]. Ridgway's 1912 *Color Standards and Color Nomenclature* places a close hue at plate VII, hue 39, a scan of an aged plate and so only approximate [1]. Our library's nearest computed ISCC-NBS block for this chip is a moderate bluish green, and Maerz and Paul's 1930 dictionary separately dates a hue this dark to 1912 as well [1].\n\nThe books do not explain why \"dark\" was chosen over another modifier for this reading [2]. Its nearest named neighbors by color distance are [[deep-teal-green]] and [[deep-teal-green]], both almost indistinguishable at 3.1 units, with [[myrtle-green]] a little further at 3.5 [3]."
   },
   {
    "id": "field",
@@ -114,7 +114,7 @@
  "openers": [
   "Dark Aquamarine's earliest painting match in our archive predates the name by nearly four centuries."
  ],
- "words": 203,
+ "words": 204,
  "status": "checked",
  "checked": {
   "by": "checker",

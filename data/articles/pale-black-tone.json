@@ -1,126 +1,126 @@
 {
- "slug": "pale-black-tone",
- "name": "Pale Black Tone",
- "hex": "#2E211B",
- "names": [
-  "Pale Black Tone"
- ],
- "tier": "traditional",
- "depth": "short",
- "lede": "Pale Black Tone is ColorHub's English rendering of Kenpōzome, a near-black reddish brown that Japanese tradition names after a swordsman, not after the color itself.",
- "sections": [
-  {
-   "id": "japan",
-   "title": "A swordsman's dye, not a shade",
-   "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Kenpōzome (憲法染), literally \"legal dye,\" and traces the name to the swordsman Yoshioka Kenpō, whose school dyed its training robes this near-black brown [1]. The library renders it in English as Pale Black Tone, a plain description of the hue rather than a translation of the Japanese [1]. The ISCC-NBS dictionary of 1955 places the same swatch in block 47, \"dark grayish reddish brown,\" about 6.5 units from that block's centre [2]. Our library's nearest other named colors sit almost on top of it: [[dark-walnut]] and [[pale-black]] are each only 2.8 units away [2].\n\nMeasured in LCH it reads lightness 14, chroma 8, hue 51 degrees: dark, low-saturation, and warm [2]. At that lightness the swatch reads as nearly black on most screens, which is consistent with a dye meant to look like a uniform's black even though it never reached true black [1][2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a close match in 8,374 of 23,781 paintings, about 35 percent, as photographed [3]. That high a rate fits a dark, desaturated brown: it sits well inside ordinary shadow, not a distinctive pigment [3]. It plays a shadow role in 93 percent of its occurrences and is almost never a highlight [3]. It shares canvases more than chance with [[mahogany]] and [[black]], and its archive presence peaks in 1660s, in 423 of 820 paintings, painting at 1.5 times the overall rate [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the swordsman Yoshioka Kenpō, whose school's dye this was",
-   "first_recorded": "undocumented in English; traditional Japanese usage",
-   "source": "ColorHub library (Wikipedia, \"Traditional colors of Japan\")"
-  },
-  "aka": [
-   "Kenpōzome"
+  "slug": "pale-black-tone",
+  "name": "Pale Black Tone",
+  "hex": "#2E211B",
+  "names": [
+    "Pale Black Tone"
   ],
-  "siblings": [
-   "dark-walnut",
-   "pale-black",
-   "bistre",
-   "mahogany"
+  "tier": "traditional",
+  "depth": "short",
+  "lede": "Pale Black Tone is ColorHub's English rendering of Kenpōzome, a near-black reddish brown that Japanese tradition names after a swordsman, not after the color itself.",
+  "sections": [
+    {
+      "id": "japan",
+      "title": "A swordsman's dye, not a shade",
+      "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Kenpōzome (憲法染), literally \"legal dye,\" and traces the name to the swordsman Yoshioka Kenpō, whose school dyed its training robes this near-black brown [1]. The library renders it in English as Pale Black Tone, a plain description of the hue rather than a translation of the Japanese [1]. The ISCC-NBS dictionary of 1955 places the same swatch in block 47, \"dark grayish reddish brown,\" about 6.5 units from that block's centre [2]. Our library's nearest other named colors sit almost on top of it: [[dark-walnut]] and [[dark-walnut]] are each only 2.8 units away [2].\n\nMeasured in LCH it reads lightness 14, chroma 8, hue 51 degrees: dark, low-saturation, and warm [2]. At that lightness the swatch reads as nearly black on most screens, which is consistent with a dye meant to look like a uniform's black even though it never reached true black [1][2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a close match in 8,374 of 23,781 paintings, about 35 percent, as photographed [3]. That high a rate fits a dark, desaturated brown: it sits well inside ordinary shadow, not a distinctive pigment [3]. It plays a shadow role in 93 percent of its occurrences and is almost never a highlight [3]. It shares canvases more than chance with [[mahogany]] and [[black]], and its archive presence peaks in 1660s, in 423 of 820 paintings, painting at 1.5 times the overall rate [3]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Kenpōzome (憲法染)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 8374,
-  "pct": 35.2,
-  "measured": {
-   "lch": [
-    14.1,
-    8.3,
-    51.3
-   ],
-   "nearest_iscc": [
-    "dark grayish reddish brown",
-    6.5
-   ],
-   "nearest": [
-    "Dark walnut",
-    2.84
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json; Wikipedia, \"Traditional colors of Japan\"; jp field)",
-   "loc_kind": null,
-   "url": null
+  "aside": {
+    "origin": {
+      "named_after": "the swordsman Yoshioka Kenpō, whose school's dye this was",
+      "first_recorded": "undocumented in English; traditional Japanese usage",
+      "source": "ColorHub library (Wikipedia, \"Traditional colors of Japan\")"
+    },
+    "aka": [
+      "Kenpōzome"
+    ],
+    "siblings": [
+      "dark-walnut",
+      "pale-black",
+      "bistre",
+      "mahogany"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Kenpōzome (憲法染)"
+      }
+    ]
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library (ISCC-NBS 1955 block 47), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 8374,
+    "pct": 35.2,
+    "measured": {
+      "lch": [
+        14.1,
+        8.3,
+        51.3
+      ],
+      "nearest_iscc": [
+        "dark grayish reddish brown",
+        6.5
+      ],
+      "nearest": [
+        "Dark walnut",
+        2.84
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23781 paintings), computed match, as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json; Wikipedia, \"Traditional colors of Japan\"; jp field)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library (ISCC-NBS 1955 block 47), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23781 paintings), computed match, as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the Japanese name Kenpōzome literally mean?",
+      "choices": [
+        "Legal dye",
+        "Swordsman's black",
+        "Deep shadow",
+        "Training robe"
+      ],
+      "answer": "Legal dye",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: this color is usually a highlight in the paintings where our archive finds it.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pale Black Tone's Japanese name is named for a swordsman, not for the color itself."
+  ],
+  "words": 261,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits (src empty); facts drawn from the library's own jp field, ISCC-NBS block data and the archive.",
+      "lint 2026-10-09"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "What does the Japanese name Kenpōzome literally mean?",
-   "choices": [
-    "Legal dye",
-    "Swordsman's black",
-    "Deep shadow",
-    "Training robe"
-   ],
-   "answer": "Legal dye",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: this color is usually a highlight in the paintings where our archive finds it.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Pale Black Tone's Japanese name is named for a swordsman, not for the color itself."
- ],
- "words": 261,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "No concordance hits (src empty); facts drawn from the library's own jp field, ISCC-NBS block data and the archive.",
-   "lint 2026-10-09"
-  ]
- }
 }

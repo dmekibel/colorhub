@@ -12,7 +12,7 @@
   {
    "id": "swatch",
    "title": "A color named for a stone that will not hold still",
-   "body": "Paterson defines *opal* as the color of the precious stone, sometimes a milky bluish green, and adds that the color is uncertain [1]. The word also stretches to any changing or uncertain range of colors, after the changeability of the stone [1]. Our swatch follows the quiet reading, a pale greenish grey that Ridgway plotted in 1912 and Maerz and Paul listed in 1930, with that dictionary dating the name as a color to 1921 [9].\n\nIts nearest neighbors are two of Ridgway's own glaucous greys, Deep Bluish Glaucous and Bluish Glaucous, 1.7 and 2.0 units away on the CIEDE2000 scale; compare [[glaucous]] [9]. Its nearest ISCC-NBS category is light greenish gray, 5.8 units off [9]. The related word *opaline*, Paterson says, is a light muted green, and *opalescent* and *opalesque* describe an iridescent quality like the stone's [1].\n\nThe swatch is the stone in its quietest mood, not its fire. Pastoureau adds that the stone's color in antiquity varied by period, description and variety, and is not always the one we link to it today [8]."
+   "body": "Paterson defines *opal* as the color of the precious stone, sometimes a milky bluish green, and adds that the color is uncertain [1]. The word also stretches to any changing or uncertain range of colors, after the changeability of the stone [1]. Our swatch follows the quiet reading, a pale greenish grey that Ridgway plotted in 1912 and Maerz and Paul listed in 1930, with that dictionary dating the name as a color to 1921 [9].\n\nIts nearest neighbors are two of Ridgway's own glaucous greys, Deep Bluish Glaucous and Bluish Glaucous, 1.7 and 2.0 units away on the CIEDE2000 scale; compare [[dusty-blue]] [9]. Its nearest ISCC-NBS category is light greenish gray, 5.8 units off [9]. The related word *opaline*, Paterson says, is a light muted green, and *opalescent* and *opalesque* describe an iridescent quality like the stone's [1].\n\nThe swatch is the stone in its quietest mood, not its fire. Pastoureau adds that the stone's color in antiquity varied by period, description and variety, and is not always the one we link to it today [8]."
   },
   {
    "id": "stone",
@@ -243,7 +243,7 @@
   "The curse of the opal seems to come from a Walter Scott novel; a Roman senator once refused to sell one for two million sesterces.",
   "Look for opal's quiet color in Sisley's snow and Boudin's beaches: pale, grey-green, and the lightest thing in the picture."
  ],
- "words": 1140,
+ "words": 1141,
  "status": "checked",
  "checked": {
   "by": "checker",

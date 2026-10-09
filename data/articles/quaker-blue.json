@@ -1,134 +1,134 @@
 {
- "slug": "quaker-blue",
- "name": "Quaker Blue",
- "hex": "#323741",
- "names": [
-  "Quaker Blue"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Quaker Blue is a near-black, slate-dark blue that Maerz and Paul recorded in 1892, an adjective likely borrowed from the plain, dark clothing associated with Quakers.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A plain color, by name",
-   "body": "Maerz and Paul's 1930 dictionary of color dates the name to 1892 and places it at plate 40 E 6 [1]. The dictionary does not spell out the reasoning, but *Quaker* was a common Victorian shorthand for a drab, undyed grey or near-black, the sober dress Quakers were known for [1]. Maerz and Paul paired it with a very different color under the same word, the warm grey [[quaker-drab|Quaker Drab]], suggesting the adjective described a plainness of dress rather than one fixed hue [1].\n\nThe nearest ISCC-NBS block by computed distance is 187, black, but the match is loose, 5.2 units off, so the 1955 dictionary never quite caught this exact mix [1]. In Lab terms it sits close to [[graphite|Graphite]] and [[gunmetal|Gunmetal]], both under five units away, and to [[black-grey|Black Grey]] a little further out [1]. No Munsell notation is recorded for it, unlike most of its library neighbors [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "A color within six units of it covers at least 5 percent of the canvas in 627 of our 23,781 archive paintings, as photographed, more common than 78 percent of our named colors [2]. It most often serves as a shadow tone, 39 percent of the 346 paintings where our within-painting lens finds it [2]. It peaks in paintings from the 1200s, at 2.9 times the rate expected from that century's baseline [2]. The earliest dated painting carrying it is from 1099, 831 years before Maerz and Paul's 1892 record, a floor set by the archive's thin early coverage rather than a true first appearance [2]. John Singer Sargent carries it in 8 of his 287 works here [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the plain, dark clothing associated with Quakers",
-   "first_recorded": "1892 (Maerz & Paul, 1930)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "gunmetal",
-   "graphite",
-   "black-grey",
-   "bluish-black"
+  "slug": "quaker-blue",
+  "name": "Quaker Blue",
+  "hex": "#323741",
+  "names": [
+    "Quaker Blue"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "quaker-drab",
-    "gloss": "Quaker Drab (#858078) is a lighter, warm grey under the same adjective"
-   }
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Quaker Blue is a near-black, slate-dark blue that Maerz and Paul recorded in 1892, an adjective likely borrowed from the plain, dark clothing associated with Quakers.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A plain color, by name",
+      "body": "Maerz and Paul's 1930 dictionary of color dates the name to 1892 and places it at plate 40 E 6 [1]. The dictionary does not spell out the reasoning, but *Quaker* was a common Victorian shorthand for a drab, undyed grey or near-black, the sober dress Quakers were known for [1]. Maerz and Paul paired it with a very different color under the same word, the warm grey [[pebble-grey|Quaker Drab]], suggesting the adjective described a plainness of dress rather than one fixed hue [1].\n\nThe nearest ISCC-NBS block by computed distance is 187, black, but the match is loose, 5.2 units off, so the 1955 dictionary never quite caught this exact mix [1]. In Lab terms it sits close to [[graphite|Graphite]] and [[gunmetal|Gunmetal]], both under five units away, and to [[black-grey|Black Grey]] a little further out [1]. No Munsell notation is recorded for it, unlike most of its library neighbors [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "A color within six units of it covers at least 5 percent of the canvas in 627 of our 23,781 archive paintings, as photographed, more common than 78 percent of our named colors [2]. It most often serves as a shadow tone, 39 percent of the 346 paintings where our within-painting lens finds it [2]. It peaks in paintings from the 1200s, at 2.9 times the rate expected from that century's baseline [2]. The earliest dated painting carrying it is from 1099, 831 years before Maerz and Paul's 1892 record, a floor set by the archive's thin early coverage rather than a true first appearance [2]. John Singer Sargent carries it in 8 of his 287 works here [2]."
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 346,
-  "n_present_painting_level": 627,
-  "measured": {
-   "lch": [
-    23.0,
-    6.9,
-    274.0
-   ],
-   "nearest": [
-    [
-     "Gunmetal",
-     5.1
+  "aside": {
+    "origin": {
+      "named_after": "the plain, dark clothing associated with Quakers",
+      "first_recorded": "1892 (Maerz & Paul, 1930)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "gunmetal",
+      "graphite",
+      "black-grey",
+      "bluish-black"
     ],
-    [
-     "Graphite",
-     5.2
+    "parent": null,
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "quaker-drab",
+        "gloss": "Quaker Drab (#858078) is a lighter, warm grey under the same adjective"
+      }
     ],
-    [
-     "Black Grey",
-     5.2
-    ],
-    [
-     "Bluish Black",
-     5.2
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 346,
+    "n_present_painting_level": 627,
+    "measured": {
+      "lch": [
+        23.0,
+        6.9,
+        274.0
+      ],
+      "nearest": [
+        [
+          "Gunmetal",
+          5.1
+        ],
+        [
+          "Graphite",
+          5.2
+        ],
+        [
+          "Black Grey",
+          5.2
+        ],
+        [
+          "Bluish Black",
+          5.2
+        ]
+      ]
+    },
+    "painters": [
+      {
+        "name": "John Singer Sargent",
+        "hits": 8,
+        "n": 287
+      }
     ]
-   ]
   },
-  "painters": [
-   {
-    "name": "John Singer Sargent",
-    "hits": 8,
-    "n": 287
-   }
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Maerz and Paul 1930, plate 40 E 6, first recorded 1892",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Maerz and Paul 1930, plate 40 E 6, first recorded 1892",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the adjective \"Quaker\" most likely describe in these two dictionary names?",
+      "choices": [
+        "A plain, undyed, sober look rather than one fixed hue",
+        "A specific dye imported by Quaker merchants",
+        "A region in Pennsylvania",
+        "A brand of paint"
+      ],
+      "answer": "A plain, undyed, sober look rather than one fixed hue",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Quaker Blue and Quaker Drab are close in color.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Quaker Blue and Quaker Drab share an adjective but almost no color in common."
+  ],
+  "words": 288,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits (src empty); the Quaker naming logic is inferred, not stated by Maerz and Paul, and flagged as such.",
+      "lint 2026-10-09"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "What does the adjective \"Quaker\" most likely describe in these two dictionary names?",
-   "choices": [
-    "A plain, undyed, sober look rather than one fixed hue",
-    "A specific dye imported by Quaker merchants",
-    "A region in Pennsylvania",
-    "A brand of paint"
-   ],
-   "answer": "A plain, undyed, sober look rather than one fixed hue",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Quaker Blue and Quaker Drab are close in color.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Quaker Blue and Quaker Drab share an adjective but almost no color in common."
- ],
- "words": 288,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No concordance hits (src empty); the Quaker naming logic is inferred, not stated by Maerz and Paul, and flagged as such.",
-   "lint 2026-10-09"
-  ]
- }
 }

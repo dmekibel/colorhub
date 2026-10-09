@@ -1,137 +1,137 @@
 {
- "slug": "dark-hyssop-violet",
- "name": "Dark Hyssop Violet",
- "hex": "#69556C",
- "names": [
-  "Dark Hyssop Violet"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Dark Hyssop Violet is a muted, greyed purple named for the herb hyssop, recorded by Ridgway in 1912 and classed by the ISCC-NBS system in 1955 as a dark puple.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A grayed herb purple",
-   "body": "Our data traces the name to hyssop, the aromatic herb, rather than to a pigment or a place [1]. Ridgway's 1912 atlas plots it on plate XXXVI at hue 59′′, tone k, and the ISCC-NBS system of 1955 files the same area as block 224, \"dark puple,\" about 6.7 units from that block's reference point [1]. In LCH terms it reads as lightness 39, chroma 16, hue 322 degrees: dark, low in saturation, and leaning red of true violet [1].\n\nThe nearest named colors on file are [[dusty-purple-tone]], [[deep-slate-violet]] and [[naphthalene-violet]], at 4, 4.4 and 4.7 ΔE [1]. Its nearest distinct neighbor by computed color distance is [[dusty-purple-tone|Dusty Purple-Tone]], 4.0 units off, described in our data as more vivid and more purple [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 18, as photographed, which makes it rarer than 62 percent of the named colors we track [4]. It peaks in paintings from the 1800s, where it turns up at 1.6 times the rate expected from that century's share of the archive [4]. Inside a painting it most often plays a hidden color, in half of its matches, by lightness rank within the canvas; varnish cannot fake that ranking [4]. The earliest match is a 1490 painting by Bartolomeo Vivarini, well before the name's first record in our sources, which only tells us the hue existed long before anyone wrote it down, not that the pigment did, a floor and not a first, since the archive's early centuries are thin [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "hyssop, the aromatic herb",
-   "first_recorded": "Ridgway, 1912",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "dusty-purple-tone",
-   "deep-slate-violet",
-   "naphthalene-violet",
-   "dusty-plum"
+  "slug": "dark-hyssop-violet",
+  "name": "Dark Hyssop Violet",
+  "hex": "#69556C",
+  "names": [
+    "Dark Hyssop Violet"
   ],
-  "parent": "violet",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 18,
-  "measured": {
-   "lch": [
-    39,
-    16,
-    322
-   ],
-   "nearest": [
-    [
-     "Dusty purple tone",
-     4.0
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Dark Hyssop Violet is a muted, greyed purple named for the herb hyssop, recorded by Ridgway in 1912 and classed by the ISCC-NBS system in 1955 as a dark puple.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A grayed herb purple",
+      "body": "Our data traces the name to hyssop, the aromatic herb, rather than to a pigment or a place [1]. Ridgway's 1912 atlas plots it on plate XXXVI at hue 59′′, tone k, and the ISCC-NBS system of 1955 files the same area as block 224, \"dark puple,\" about 6.7 units from that block's reference point [1]. In LCH terms it reads as lightness 39, chroma 16, hue 322 degrees: dark, low in saturation, and leaning red of true violet [1].\n\nThe nearest named colors on file are [[dusty-purple-tone]], [[deep-slate-violet]] and [[dusty-plum]], at 4, 4.4 and 4.7 ΔE [1]. Its nearest distinct neighbor by computed color distance is [[dusty-purple-tone|Dusty Purple-Tone]], 4.0 units off, described in our data as more vivid and more purple [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 18, as photographed, which makes it rarer than 62 percent of the named colors we track [4]. It peaks in paintings from the 1800s, where it turns up at 1.6 times the rate expected from that century's share of the archive [4]. Inside a painting it most often plays a hidden color, in half of its matches, by lightness rank within the canvas; varnish cannot fake that ranking [4]. The earliest match is a 1490 painting by Bartolomeo Vivarini, well before the name's first record in our sources, which only tells us the hue existed long before anyone wrote it down, not that the pigment did, a floor and not a first, since the archive's early centuries are thin [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "hyssop, the aromatic herb",
+      "first_recorded": "Ridgway, 1912",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "dusty-purple-tone",
+      "deep-slate-violet",
+      "naphthalene-violet",
+      "dusty-plum"
     ],
-    [
-     "Deep Slate-Violet",
-     4.4
-    ],
-    [
-     "Naphthalene Violet",
-     4.7
-    ],
-    [
-     "Dusty plum",
-     4.7
+    "parent": "violet",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 18,
+    "measured": {
+      "lch": [
+        39,
+        16,
+        322
+      ],
+      "nearest": [
+        [
+          "Dusty purple tone",
+          4.0
+        ],
+        [
+          "Deep Slate-Violet",
+          4.4
+        ],
+        [
+          "Naphthalene Violet",
+          4.7
+        ],
+        [
+          "Dusty plum",
+          4.7
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/nodes-d.json): Dark Hyssop Violet — Ridgway 1912, plate XXXVI, hue 59′′, tone k; ISCC-NBS 1955, block 224",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Dark Hyssop Violet and Deep Hyssop Violet entries",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges-d.json): nearest distinct neighbors by CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/d.json)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which 1912 atlas first plots Dark Hyssop Violet, on plate XXXVI?",
+      "choices": [
+        "Ridgway",
+        "Maerz and Paul",
+        "Munsell",
+        "Pantone"
+      ],
+      "answer": "Ridgway",
+      "kind": "pick"
+    },
+    {
+      "q": "Inside a painting, which role does Dark Hyssop Violet most often play?",
+      "choices": [
+        "A hidden color",
+        "The brightest highlight",
+        "The sky",
+        "A skin tone"
+      ],
+      "answer": "A hidden color",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Its earliest match in our archive is a 1490 painting, well before the name itself was ever written down."
+  ],
+  "words": 290,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No book concordance hits for this slug; written from the color graph, library and archive data only.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/nodes-d.json): Dark Hyssop Violet — Ridgway 1912, plate XXXVI, hue 59′′, tone k; ISCC-NBS 1955, block 224",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Dark Hyssop Violet and Deep Hyssop Violet entries",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges-d.json): nearest distinct neighbors by CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/d.json)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which 1912 atlas first plots Dark Hyssop Violet, on plate XXXVI?",
-   "choices": [
-    "Ridgway",
-    "Maerz and Paul",
-    "Munsell",
-    "Pantone"
-   ],
-   "answer": "Ridgway",
-   "kind": "pick"
-  },
-  {
-   "q": "Inside a painting, which role does Dark Hyssop Violet most often play?",
-   "choices": [
-    "A hidden color",
-    "The brightest highlight",
-    "The sky",
-    "A skin tone"
-   ],
-   "answer": "A hidden color",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Its earliest match in our archive is a 1490 painting, well before the name itself was ever written down."
- ],
- "words": 290,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No book concordance hits for this slug; written from the color graph, library and archive data only.",
-   "lint 2026-10-09"
-  ]
- }
 }

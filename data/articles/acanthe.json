@@ -1,158 +1,158 @@
 {
- "slug": "acanthe",
- "name": "Acanthe",
- "hex": "#6A552A",
- "names": [
-  "Acanthe"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Acanthe is an olive brown that Maerz and Paul's catalogue renamed at least four times between 1850 and 1927, and it is, as photographed, the single most common color in our entire painting archive.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Four names for one catalogue slot",
-   "body": "Maerz and Paul's *A Dictionary of Color* places this hue at plate 15, position L 9, first recorded around 1850 [1]. Their own records show the same plate position carrying other names across different editions: Siam and Butternut in 1892, Old Olive in 1905, and both Whippet and Bronze Nude in 1927, before the catalogue settled on Acanthe [1]. Our library does not say which of these names came first in practice, only the dates each is recorded, so the order given here follows the dates alone [2].\n\nIts closest named relatives are [[olive-mud]] and [[field-drab]], both more vivid and within 2.6 units [3].\n\nFurther out are [[japanese-bush-warbler]], almost the same at 2.8 units, and [[bronze]], lighter at 4.0 [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Acanthe is, as photographed, the most common color in our archive of 23,781 paintings: a color within six units of it covers at least five per cent of a canvas in 4,414 works, close to one painting in five [4]. That breadth likely reflects how generic a dark olive-brown is at matching varnished, aged canvases, not a single pigment [4]. Jean-Charles Cazin carries it in three-quarters of his sixteen archived paintings, and it is most common in paintings from the Netherlands, the United Kingdom and Belgium [4]. It most often shares a canvas with other browns [4]. These remain photographs of aged, varnished paintings, read as screen colors, not pigment tests [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented beyond the catalogue entry; earlier editions used other names at the same plate position (Siam, Old Olive, Butternut, Whippet, Bronze Nude)",
-   "first_recorded": "Maerz & Paul, A Dictionary of Color (1930), plate 15 L 9, first recorded c. 1850",
-   "source": "ColorHub color library (Maerz & Paul 1930)"
-  },
-  "aka": [],
-  "siblings": [
-   "olive-mud",
-   "field-drab",
-   "japanese-bush-warbler",
-   "bronze"
+  "slug": "acanthe",
+  "name": "Acanthe",
+  "hex": "#6A552A",
+  "names": [
+    "Acanthe"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#6A552A",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 4414,
-  "painters": [
-   {
-    "name": "Jean-Charles Cazin",
-    "hits": 12,
-    "n": 16,
-    "lift": 4.04
-   }
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Acanthe is an olive brown that Maerz and Paul's catalogue renamed at least four times between 1850 and 1927, and it is, as photographed, the single most common color in our entire painting archive.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Four names for one catalogue slot",
+      "body": "Maerz and Paul's *A Dictionary of Color* places this hue at plate 15, position L 9, first recorded around 1850 [1]. Their own records show the same plate position carrying other names across different editions: Siam and Butternut in 1892, Old Olive in 1905, and both Whippet and Bronze Nude in 1927, before the catalogue settled on Acanthe [1]. Our library does not say which of these names came first in practice, only the dates each is recorded, so the order given here follows the dates alone [2].\n\nIts closest named relatives are [[olive-mud]] and [[olive-mud]], both more vivid and within 2.6 units [3].\n\nFurther out are [[japanese-bush-warbler]], almost the same at 2.8 units, and [[bronze]], lighter at 4.0 [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Acanthe is, as photographed, the most common color in our archive of 23,781 paintings: a color within six units of it covers at least five per cent of a canvas in 4,414 works, close to one painting in five [4]. That breadth likely reflects how generic a dark olive-brown is at matching varnished, aged canvases, not a single pigment [4]. Jean-Charles Cazin carries it in three-quarters of his sixteen archived paintings, and it is most common in paintings from the Netherlands, the United Kingdom and Belgium [4]. It most often shares a canvas with other browns [4]. These remain photographs of aged, varnished paintings, read as screen colors, not pigment tests [4]."
+    }
   ],
-  "countries": [
-   {
-    "key": "Netherlands",
-    "hits": 1264,
-    "n": 4930,
-    "lift": 1.38
-   }
-  ],
-  "company": [
-   {
-    "word": "Brown",
-    "lift": 2.05
-   },
-   {
-    "word": "Olive",
-    "lift": 1.59
-   }
-  ],
-  "measured": {
-   "lch": [
-    37.4,
-    28.2,
-    83.9
-   ],
-   "nearest": [
-    [
-     "Olive Mud",
-     2.6
+  "aside": {
+    "origin": {
+      "named_after": "undocumented beyond the catalogue entry; earlier editions used other names at the same plate position (Siam, Old Olive, Butternut, Whippet, Bronze Nude)",
+      "first_recorded": "Maerz & Paul, A Dictionary of Color (1930), plate 15 L 9, first recorded c. 1850",
+      "source": "ColorHub color library (Maerz & Paul 1930)"
+    },
+    "aka": [],
+    "siblings": [
+      "olive-mud",
+      "field-drab",
+      "japanese-bush-warbler",
+      "bronze"
     ],
-    [
-     "Field Drab",
-     2.6
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#6A552A",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 4414,
+    "painters": [
+      {
+        "name": "Jean-Charles Cazin",
+        "hits": 12,
+        "n": 16,
+        "lift": 4.04
+      }
+    ],
+    "countries": [
+      {
+        "key": "Netherlands",
+        "hits": 1264,
+        "n": 4930,
+        "lift": 1.38
+      }
+    ],
+    "company": [
+      {
+        "word": "Brown",
+        "lift": 2.05
+      },
+      {
+        "word": "Olive",
+        "lift": 1.59
+      }
+    ],
+    "measured": {
+      "lch": [
+        37.4,
+        28.2,
+        83.9
+      ],
+      "nearest": [
+        [
+          "Olive Mud",
+          2.6
+        ],
+        [
+          "Field Drab",
+          2.6
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Maerz & Paul, A Dictionary of Color (1930), plate 15 L 9, with alternate-name dates from the same source",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library, standard-system tier classification",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges-a.json), CIEDE2000 look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "About how often does a color within six units of Acanthe appear in our archive?",
+      "choices": [
+        "About one painting in five",
+        "About one in a hundred",
+        "About one in a thousand",
+        "Never"
+      ],
+      "answer": "About one painting in five",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Maerz and Paul's catalogue used several other names at the same plate position before settling on Acanthe.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Acanthe, as photographed, is the single most common color in our entire 23,781-painting archive."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "batch writer",
+    "date": "2026-10-08",
+    "issues": [
+      "High archive prevalence is flagged in-text as likely reflecting a generic dark olive-brown matching broadly, not a specific pigment.",
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Maerz & Paul, A Dictionary of Color (1930), plate 15 L 9, with alternate-name dates from the same source",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library, standard-system tier classification",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges-a.json), CIEDE2000 look-alike distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "About how often does a color within six units of Acanthe appear in our archive?",
-   "choices": [
-    "About one painting in five",
-    "About one in a hundred",
-    "About one in a thousand",
-    "Never"
-   ],
-   "answer": "About one painting in five",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Maerz and Paul's catalogue used several other names at the same plate position before settling on Acanthe.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Acanthe, as photographed, is the single most common color in our entire 23,781-painting archive."
- ],
- "status": "checked",
- "checked": {
-  "by": "batch writer",
-  "date": "2026-10-08",
-  "issues": [
-   "High archive prevalence is flagged in-text as likely reflecting a generic dark olive-brown matching broadly, not a specific pigment.",
-   "lint 2026-10-09"
-  ]
- },
- "words": 265
+  "words": 265
 }

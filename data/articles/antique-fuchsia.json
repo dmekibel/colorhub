@@ -1,127 +1,127 @@
 {
- "name": "Antique Fuchsia",
- "hex": "#915C83",
- "names": [
-  "Antique Fuchsia"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Antique Fuchsia dulls fuchsia, the pink-purple flower named for the botanist Leonhard Fuchs, into a muted mauve-purple.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A dulled flower color",
-   "body": "The base word, fuchsia, names a flowering shrub itself named for the sixteenth-century German botanist Leonhard Fuchs; \"antique\" here means aged and dulled in tone, not literally old [1]. Maerz and Paul's 1930 dictionary is the earliest source for this exact shade in our library, and the ISCC-NBS system filed it in 1955 under block 223, a moderate purple [1][2]. Its nearest named look-alikes are [[dull-purple]] and [[light-plum]], with [[purpleish]] and [[livid-purple]] close by [3].\n\nFuchs himself never saw the color named for his flower: the plant was named for him by Charles Plumier decades after Fuchs's death, and the dye and paint industries only picked up the hue much later [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This is a rare tone in our archive: it covers at least one percent of the canvas in only 2 of 23,781 paintings, as photographed, rarer than 86 percent of the named colors here [4]. One of the two is a 1905 Henri Matisse painting [4]. Both of our two matches come from the early twentieth century, too small a sample to say anything about which painters or periods favored this particular shade [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "fuchsia, the flower named for botanist Leonhard Fuchs",
-   "first_recorded": "1930 (Maerz & Paul)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "dull-purple",
-   "light-plum",
-   "purpleish",
-   "livid-purple"
+  "name": "Antique Fuchsia",
+  "hex": "#915C83",
+  "names": [
+    "Antique Fuchsia"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 2,
-  "rank_pct": 14,
-  "measured": {
-   "lch": [
-    46.1,
-    30.7,
-    335.4
-   ],
-   "nearest": [
-    [
-     "Dull Purple",
-     3.1
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Antique Fuchsia dulls fuchsia, the pink-purple flower named for the botanist Leonhard Fuchs, into a muted mauve-purple.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A dulled flower color",
+      "body": "The base word, fuchsia, names a flowering shrub itself named for the sixteenth-century German botanist Leonhard Fuchs; \"antique\" here means aged and dulled in tone, not literally old [1]. Maerz and Paul's 1930 dictionary is the earliest source for this exact shade in our library, and the ISCC-NBS system filed it in 1955 under block 223, a moderate purple [1][2]. Its nearest named look-alikes are [[dull-purple]] and [[light-plum]], with [[purpleish]] and [[dusky-mauve]] close by [3].\n\nFuchs himself never saw the color named for his flower: the plant was named for him by Charles Plumier decades after Fuchs's death, and the dye and paint industries only picked up the hue much later [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This is a rare tone in our archive: it covers at least one percent of the canvas in only 2 of 23,781 paintings, as photographed, rarer than 86 percent of the named colors here [4]. One of the two is a 1905 Henri Matisse painting [4]. Both of our two matches come from the early twentieth century, too small a sample to say anything about which painters or periods favored this particular shade [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "fuchsia, the flower named for botanist Leonhard Fuchs",
+      "first_recorded": "1930 (Maerz & Paul)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "dull-purple",
+      "light-plum",
+      "purpleish",
+      "livid-purple"
     ],
-    [
-     "Light Plum",
-     3.2
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 2,
+    "rank_pct": 14,
+    "measured": {
+      "lch": [
+        46.1,
+        30.7,
+        335.4
+      ],
+      "nearest": [
+        [
+          "Dull Purple",
+          3.1
+        ],
+        [
+          "Light Plum",
+          3.2
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Maerz & Paul, 1930",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: ISCC-NBS 1955 block 223",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Fuchsia, the flower, is named after whom?",
+      "choices": [
+        "Botanist Leonhard Fuchs",
+        "A Roman emperor",
+        "A French dye maker",
+        "A Japanese painter"
+      ],
+      "answer": "Botanist Leonhard Fuchs",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Leonhard Fuchs chose the fuchsia flower's name himself.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Antique Fuchsia appears in only two paintings of our 23,781-painting archive."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-09",
+    "issues": [
+      "Extremely sparse archive presence (n=2); kept short rather than padded."
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Maerz & Paul, 1930",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library: ISCC-NBS 1955 block 223",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Fuchsia, the flower, is named after whom?",
-   "choices": [
-    "Botanist Leonhard Fuchs",
-    "A Roman emperor",
-    "A French dye maker",
-    "A Japanese painter"
-   ],
-   "answer": "Botanist Leonhard Fuchs",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Leonhard Fuchs chose the fuchsia flower's name himself.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Antique Fuchsia appears in only two paintings of our 23,781-painting archive."
- ],
- "status": "checked",
- "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-09",
-  "issues": [
-   "Extremely sparse archive presence (n=2); kept short rather than padded."
-  ]
- },
- "slug": "antique-fuchsia",
- "words": 200
+  "slug": "antique-fuchsia",
+  "words": 200
 }

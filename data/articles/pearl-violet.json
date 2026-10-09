@@ -12,7 +12,7 @@
   {
    "id": "japan",
    "title": "Wisteria, twice named",
-   "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Fuji-iro (藤色), \"wisteria color,\" after the hanging purple clusters of the wisteria vine, long favored in Japanese dress and crests [1]. The same hue range was independently registered decades later in Germany as RAL 4011, in 1927, an unrelated coincidence of two naming traditions landing near the same purple [2]. The ISCC-NBS dictionary of 1955 places it in block 223, \"moderate purple,\" about 7.5 units from that block's centre[2]. The library's nearest other named colors are [[saccardo-s-violet]] and [[dusty-violet]], each under 3 units away [2].\n\nMeasured in LCH it reads lightness 52, chroma 28, hue 308 degrees, a mid-toned, moderately saturated purple [2]."
+   "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Fuji-iro (藤色), \"wisteria color,\" after the hanging purple clusters of the wisteria vine, long favored in Japanese dress and crests [1]. The same hue range was independently registered decades later in Germany as RAL 4011, in 1927, an unrelated coincidence of two naming traditions landing near the same purple [2]. The ISCC-NBS dictionary of 1955 places it in block 223, \"moderate purple,\" about 7.5 units from that block's centre[2]. The library's nearest other named colors are [[dusty-violet]] and [[dusty-violet]], each under 3 units away [2].\n\nMeasured in LCH it reads lightness 52, chroma 28, hue 308 degrees, a mid-toned, moderately saturated purple [2]."
   },
   {
    "id": "field",
@@ -113,7 +113,7 @@
  "openers": [
   "Pearl Violet's wisteria name and its German paint-standard code arrived from two unrelated traditions."
  ],
- "words": 204,
+ "words": 203,
  "status": "checked",
  "checked": {
   "by": "writer",

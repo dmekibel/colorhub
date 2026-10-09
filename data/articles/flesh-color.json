@@ -1,143 +1,143 @@
 {
- "slug": "flesh-color",
- "name": "Flesh Color",
- "hex": "#F1A58D",
- "names": [
-  "Flesh Color"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Flesh color is the old name for a warm, pale pink-orange, the shade painters and tailors once used for light skin.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A name from the body",
-   "body": "Paterson defines the flesh family as a moderate pink, and records that the term was applied in the 1920s to pink silk stockings [1]. Related words include flesh-tint and flesh-toned, the latter meaning the pinkish shades of the human complexion [1]. Another entry, flesh-red, is a red used for minerals and crystals [1]. See also [[flesh-red]], [[flesh-pink]], [[peach]], [[pink]] and [[salmon]].\n\nThe name is a description of one kind of skin, not of skin in general. The swatch here is a strong yellowish pink in ISCC-NBS terms, from block 5 [2], and Ridgway already listed a flesh color in his 1886 nomenclature [3]. Every complexion differs, so treat this as a historical paint-chip word, not a measurement of people."
-  },
-  {
-   "id": "painting",
-   "title": "In painting",
-   "body": "Old painting manuals treat flesh as a mixture to be judged by eye, not a tube color. Cennino Cennini's handbook, as St Clair retells it, advises egg yolk from town hens for young faces, whose flesh is cooler, and from farm hens for older, swarthy faces [4]. For corpses it advises omitting the usual pink top layer, since a dead person, it says, has no color [4]. Gurney makes the modern version of the point: painters should mix flesh tones from observation, not from a standard flesh tube [5]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive holds this color in 64 of 23,781 paintings, and as an inside-the-painting measure in 25; it most often plays a light there, in 64 percent of those 25 [6]. It peaks in the 1900s, at 0.4 percent of the 1,674 paintings from that century, or 2.7 times what the museums' baseline predicts [6]. The earliest match is 1333, by Bernardo Daddi, which is 553 years before the name's earliest record in our sources, 1886 [6]. These are photographs of aged, varnished paintings, so a match is a look-alike hue, not proof of a pigment."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the color of light human skin",
-   "first_recorded": "Ridgway, 1886 nomenclature (earliest in our sources)",
-   "source": "Paterson, Dictionary of Colour; ColorHub library"
-  },
-  "aka": [
-   "flesh-tint",
-   "flesh-toned"
+  "slug": "flesh-color",
+  "name": "Flesh Color",
+  "hex": "#F1A58D",
+  "names": [
+    "Flesh Color"
   ],
-  "siblings": [
-   "flesh-red",
-   "flesh-pink"
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Flesh color is the old name for a warm, pale pink-orange, the shade painters and tailors once used for light skin.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A name from the body",
+      "body": "Paterson defines the flesh family as a moderate pink, and records that the term was applied in the 1920s to pink silk stockings [1]. Related words include flesh-tint and flesh-toned, the latter meaning the pinkish shades of the human complexion [1]. Another entry, flesh-red, is a red used for minerals and crystals [1]. See also [[pale-flesh]], [[flesh-pink]], [[peach]], [[pink]] and [[salmon]].\n\nThe name is a description of one kind of skin, not of skin in general. The swatch here is a strong yellowish pink in ISCC-NBS terms, from block 5 [2], and Ridgway already listed a flesh color in his 1886 nomenclature [3]. Every complexion differs, so treat this as a historical paint-chip word, not a measurement of people."
+    },
+    {
+      "id": "painting",
+      "title": "In painting",
+      "body": "Old painting manuals treat flesh as a mixture to be judged by eye, not a tube color. Cennino Cennini's handbook, as St Clair retells it, advises egg yolk from town hens for young faces, whose flesh is cooler, and from farm hens for older, swarthy faces [4]. For corpses it advises omitting the usual pink top layer, since a dead person, it says, has no color [4]. Gurney makes the modern version of the point: painters should mix flesh tones from observation, not from a standard flesh tube [5]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive holds this color in 64 of 23,781 paintings, and as an inside-the-painting measure in 25; it most often plays a light there, in 64 percent of those 25 [6]. It peaks in the 1900s, at 0.4 percent of the 1,674 paintings from that century, or 2.7 times what the museums' baseline predicts [6]. The earliest match is 1333, by Bernardo Daddi, which is 553 years before the name's earliest record in our sources, 1886 [6]. These are photographs of aged, varnished paintings, so a match is a look-alike hue, not proof of a pigment."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "flesh-red",
-    "gloss": "a red, mostly for minerals and crystals, not a skin tone"
-   }
+  "aside": {
+    "origin": {
+      "named_after": "the color of light human skin",
+      "first_recorded": "Ridgway, 1886 nomenclature (earliest in our sources)",
+      "source": "Paterson, Dictionary of Colour; ColorHub library"
+    },
+    "aka": [
+      "flesh-tint",
+      "flesh-toned"
+    ],
+    "siblings": [
+      "flesh-red",
+      "flesh-pink"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "flesh-red",
+        "gloss": "a red, mostly for minerals and crystals, not a skin tone"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 64,
+    "role": "light (64% of 25 paintings)",
+    "record": {
+      "first": 1886,
+      "first_src": "ridgway-1886"
+    },
+    "measured": {
+      "iscc": "strong yellowish pink",
+      "block": 5
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"flesh\" entries",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "ISCC-NBS block 5, via ColorHub library",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub library: Ridgway 1886 and 1912 entries",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Color, ch. on white lead",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, p. 124",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 paintings, as photographed; fieldnotes/f.json",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 64,
-  "role": "light (64% of 25 paintings)",
-  "record": {
-   "first": 1886,
-   "first_src": "ridgway-1886"
-  },
-  "measured": {
-   "iscc": "strong yellowish pink",
-   "block": 5
+  "questions": [
+    {
+      "q": "Why do painting manuals not treat flesh as a single tube color?",
+      "choices": [
+        "Skin varies and is mixed from observation",
+        "Tube flesh was banned",
+        "It fades instantly"
+      ],
+      "answer": "Skin varies and is mixed from observation",
+      "kind": "pick"
+    },
+    {
+      "q": "The word flesh-colored was applied in the 1920s to which garment?",
+      "choices": [
+        "Pink silk stockings",
+        "Wool coats",
+        "Leather gloves"
+      ],
+      "answer": "Pink silk stockings",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Flesh-colored was a 1920s word for pink silk stockings, says Paterson."
+  ],
+  "words": 320,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Attributed the handbook to Cennini; fixed ambiguous 'He' about the corpse pink layer"
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"flesh\" entries",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "ISCC-NBS block 5, via ColorHub library",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub library: Ridgway 1886 and 1912 entries",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Color, ch. on white lead",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Gurney, Color and Light, p. 124",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 paintings, as photographed; fieldnotes/f.json",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Why do painting manuals not treat flesh as a single tube color?",
-   "choices": [
-    "Skin varies and is mixed from observation",
-    "Tube flesh was banned",
-    "It fades instantly"
-   ],
-   "answer": "Skin varies and is mixed from observation",
-   "kind": "pick"
-  },
-  {
-   "q": "The word flesh-colored was applied in the 1920s to which garment?",
-   "choices": [
-    "Pink silk stockings",
-    "Wool coats",
-    "Leather gloves"
-   ],
-   "answer": "Pink silk stockings",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Flesh-colored was a 1920s word for pink silk stockings, says Paterson."
- ],
- "words": 320,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Attributed the handbook to Cennini; fixed ambiguous 'He' about the corpse pink layer"
-  ]
- }
 }

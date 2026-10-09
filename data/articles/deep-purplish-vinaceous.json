@@ -12,12 +12,12 @@
   {
    "id": "name",
    "title": "One wine-colored shade among many",
-   "body": "Ridgway's 1912 plate XLIV gives this hue the name Deep Purplish Vinaceous, hue 69′′′, and the ISCC-NBS system of 1955 files the nearest category as \"grayish purplish red\" in its block 262 [1]. The nearest named colors on file are [[artificial-vermilion]], [[mauve-taupe]] and [[somalis]], at 3.1, 3.9 and 4.3 ΔE [1]. Why he reached for wine specifically, rather than another red fruit or flower, is not explained in our sources [2].\n\nIn LCH terms it measures lightness 48, chroma 17, hue 8 degrees, Munsell 9.1RP 4.7/3.7 [1]. Its closest distinct match in the library is [[artificial-vermilion]], about 3.1 CIEDE2000 units away, with [[mauve-taupe]] close behind at 3.9 units; its own near neighbor on the chart, [[deep-livid-brown]], sits at 4.5 [3]."
+   "body": "Ridgway's 1912 plate XLIV gives this hue the name Deep Purplish Vinaceous, hue 69′′′, and the ISCC-NBS system of 1955 files the nearest category as \"grayish purplish red\" in its block 262 [1]. The nearest named colors on file are [[artificial-vermilion]], [[mauve-taupe]] and [[somalis]], at 3.1, 3.9 and 4.3 ΔE [1]. Why he reached for wine specifically, rather than another red fruit or flower, is not explained in our sources [2].\n\nIn LCH terms it measures lightness 48, chroma 17, hue 8 degrees, Munsell 9.1RP 4.7/3.7 [1]. Its closest distinct match in the library is [[artificial-vermilion]], about 3.1 CIEDE2000 units away, with [[mauve-taupe]] close behind at 3.9 units; its own near neighbor on the chart, [[faded-rosewood]], sits at 4.5 [3]."
   },
   {
    "id": "field",
    "title": "Field notes",
-   "body": "A match within six CIEDE2000 units covering at least five percent of the canvas turns up in 56 of our 23,781 archive paintings, about 0.24 percent, as photographed [4]. It peaks in the 1900s, in 5 of 1,674 paintings, at 4.7 times the overall rate, and is most loved by Paul Gauguin, in three of his fifty paintings here, twenty-five times his own museums' baseline; it most often plays a mid-tone, in 64 percent of its appearances [4].\n\nThe earliest dated match is the same Gandavyuha-sutra manuscript leaf, year 1000, that carries [[deep-livid-brown]], nine centuries before Ridgway recorded the name in 1912; early centuries are thin in the archive, so this is a floor, not a first, and a photograph of an aged canvas is a screen color, not a pigment test [4]."
+   "body": "A match within six CIEDE2000 units covering at least five percent of the canvas turns up in 56 of our 23,781 archive paintings, about 0.24 percent, as photographed [4]. It peaks in the 1900s, in 5 of 1,674 paintings, at 4.7 times the overall rate, and is most loved by Paul Gauguin, in three of his fifty paintings here, twenty-five times his own museums' baseline; it most often plays a mid-tone, in 64 percent of its appearances [4].\n\nThe earliest dated match is the same Gandavyuha-sutra manuscript leaf, year 1000, that carries [[faded-rosewood]], nine centuries before Ridgway recorded the name in 1912; early centuries are thin in the archive, so this is a floor, not a first, and a photograph of an aged canvas is a screen color, not a pigment test [4]."
   }
  ],
  "aside": {
@@ -140,7 +140,7 @@
  "openers": [
   "One of more than twenty wine-colored steps on Ridgway's 1912 chart."
  ],
- "words": 291,
+ "words": 289,
  "status": "checked",
  "checked": {
   "by": "batch-writer",

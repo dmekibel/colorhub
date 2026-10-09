@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A stand-in, not a specific paint",
-   "body": "Viridian itself is a chromium oxide pigment, prized by painters for a cool, transparent green unlike the older, more yellow chrome greens [1]. \"Generic\" in the name signals that this swatch is an average stand-in, not a single manufacturer's tube color, the role the library gives it [1]. Our library finds only a Wikipedia list behind the name, with no date for its coining [1].\n\nMeasured in LCH, it sits at lightness 47 with a strong blue-leaning green hue [1]. Its nearest named neighbors are near-ties: [[dark-viridian-green]] and [[blue-green]], each within 3 units of CIEDE2000 and described as almost the same [1]. [[spanish-viridian]] and [[arsenate]] sit a little farther out, also close [1]."
+   "body": "Viridian itself is a chromium oxide pigment, prized by painters for a cool, transparent green unlike the older, more yellow chrome greens [1]. \"Generic\" in the name signals that this swatch is an average stand-in, not a single manufacturer's tube color, the role the library gives it [1]. Our library finds only a Wikipedia list behind the name, with no date for its coining [1].\n\nMeasured in LCH, it sits at lightness 47 with a strong blue-leaning green hue [1]. Its nearest named neighbors are near-ties: [[blue-green]] and [[blue-green]], each within 3 units of CIEDE2000 and described as almost the same [1]. [[spanish-viridian]] and [[arsenate]] sit a little farther out, also close [1]."
   },
   {
    "id": "field",
@@ -105,7 +105,7 @@
  "openers": [
   "Generic Viridian is an average stand-in for the chromium-green pigment family, not any one maker's tube color."
  ],
- "words": 236,
+ "words": 235,
  "status": "checked",
  "checked": {
   "by": "batch-10",
