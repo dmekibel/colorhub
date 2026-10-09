@@ -2734,7 +2734,9 @@ scenario("favs", "shelf: top five, a plate opens its page, Back returns, a row h
   t.ev("window.__card = false; window.tzShareCanvas = d => { const c = document.createElement('canvas'); c.width = 1080; c.height = 1350; d(c.getContext('2d')); window.__card = true; }");
   await t.click("[data-share]", { wait: 300 });
   t.expect(t.ev("window.__card"), "the My colors card didn't draw");
-  // the verbs: Learn opens a deck (and Close comes back), Keep saves a palette, the primary opens a ranking screen, On the map opens Home
+  // the verbs: Learn opens a deck (and Close comes back), Keep saves a palette, the primary opens a ranking
+  // screen, See its colors opens your own colors' honeycomb (js/palettehive.js, not Home lit up among every
+  // other name -- David, 2026-10-09, the same fix as every other palette/painting door)
   await t.click("[data-cs=learn]", { wait: 600 });
   // Learn now opens Practice's quick sheet (prInstantDeck) first: start it, then a deck or a Practice run appears
   await t.waitFor(".screen.deck, [data-qgo], .screen.pr-play", 6000, "the Learn sheet or deck");
@@ -2747,7 +2749,8 @@ scenario("favs", "shelf: top five, a plate opens its page, Back returns, a row h
   await t.click("[data-close]", { wait: 500 });
   await t.waitFor(".fv-shelf", 6000, "the shelf after closing the ranking");
   await t.click("[data-cs=map]", { wait: 900 });
-  await t.waitFor(".hm canvas", 15000, "Home with your colors lit");
+  await t.waitFor(".ph-sheet", 15000, "your colors' own honeycomb");
+  t.expect(t.ev("window.PH_DEBUG && PH_DEBUG.count()") > 0, "the honeycomb drew no cells");
 });
 
 scenario("favs", "best of three: keep one, drop one, a new set arrives; Undo takes it back", async t => {
@@ -4199,8 +4202,11 @@ scenario("trail", "On the map's ✕ (\"Close\") returns to the page that lit it,
   await TRL.atHash(t, /^#\/gallery\/\d+/, "the second painting");
   const paintingHash = TRL.hash(t), depthAtPainting = TRL.depth(t);
   t.expect(depthAtPainting >= 3, `expected at least color+painting+painter on the trail before the second painting, got ${depthAtPainting}: ${t.ev("XSTACK.join(' , ')")}`);
-  const mapBtn = await t.waitFor("[data-cs='map']", 10000, "the second painting's On the map action");
-  await t.click(mapBtn, { wait: 800 });
+  // the painting page's own [data-cs=map] now opens its palette honeycomb (js/palettehive.js, David 2026-10-09:
+  // "showing it on the color map is a useless feature"), not the big shared map -- csOnMap/mapSelect themselves
+  // are unchanged, so this step lights the map the same way the map/gallery address route and the search bar
+  // still do, to keep testing exactly what this scenario is about: the trail surviving Close on a lit map.
+  t.ev(`mapSelect({ title: "This painting", colors: ["#1F4FBF", "#2255C5", "#1C49B5"], source: "painting" })`);
   await t.waitFor(() => t.$(".screen.hm canvas"), 12000, "the lit map");
   await t.sleep(300);
   t.expect(TRL.depth(t) === depthAtPainting, `lighting the map changed the trail depth to ${TRL.depth(t)}, expected ${depthAtPainting}`);
@@ -4462,10 +4468,13 @@ scenario("mapstudy", "Name it, Neighborhood and Wander all play; Choose shows bo
 // ================================================================== LANE F: the lit set is the map's subject (js/honey.js honeyLitBar)
 scenario("map-subject", "a painting on the map: the bar's Learn these, Find them, ‹ back with the scroll kept, ✕", async t => {
   await TRL.open(t, "#/painting/milkmaid");
-  const b = await t.waitFor("[data-cs=map]", 15000, "the On the map button on The Milkmaid");
+  await t.waitFor("[data-cs=map]", 15000, "the painting page to render (its own action row)");
   t.w.scrollTo(0, 400); await t.sleep(200);
   const y0 = Math.round(t.w.scrollY);
-  await t.click(b, { force: true, wait: 900 });
+  // the painting page's own [data-cs=map] now opens its palette honeycomb (js/palettehive.js) -- this lane is
+  // about honeyLitBar itself (Learn these, Find them, ‹, ✕), still reachable exactly the way the bar's own ✕
+  // step below already does, directly, the same real call csOnMap()/mapSelect() made from inside that button
+  t.ev("csOnMap(hmPaintingSet(graph().nodes.get('painting-milkmaid')))");
   await t.waitFor(() => /The Milkmaid/.test(t.text(".cs-hl-bar")) && /as photographed/.test(t.text(".cs-hl-bar")), 15000, "the Milkmaid bar on the map");
   t.expect(t.$(".cs-hl-bar .cs-hl-back"), "the bar has no ‹ back to the painting");
   // Learn these: the Learn sheet on exactly the lit set, with its source
