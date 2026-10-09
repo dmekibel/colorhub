@@ -4,8 +4,14 @@
 .glz-top{display:flex;align-items:center;gap:12px;padding:calc(var(--top) + 10px) var(--g) 6px;flex:none}
 .glz-title{flex:1;min-width:0;font:400 15px/1.3 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .glz-stage{position:relative;flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none}
-.glz-frame{position:relative;max-width:94vw;max-height:94%;will-change:transform;transition:transform .05s linear}
-.glz-img{display:block;max-width:94vw;max-height:94dvh;width:auto;height:auto;object-fit:contain;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:filter .2s var(--ease)}
+/* the frame's box is the image's natural pixel size, untouched by CSS -- js/paintzoom.js's gesture model does
+   ALL the sizing with transform:scale(), starting at the "fit" scale (min(stageW/naturalW,stageH/naturalH))
+   computed once the image loads, so a transform-origin:center scale() and a max-width/height clamp are never
+   both trying to size the same box at once. transform has no transition by default: glZoomOpen() turns one on
+   only for the specific moments that want an eased snap (a pinch/drag settling back in bounds, a double-tap),
+   and removes it again before the next live-dragged frame so panning never fights a CSS transition. */
+.glz-frame{position:relative;will-change:transform}
+.glz-img{display:block;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:filter .2s var(--ease)}
 .glz-cv{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;opacity:0;transition:opacity .25s var(--ease);filter:blur(1px)}
 .glz-cv.on{opacity:1}
 .glz-tools{flex:none;display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px var(--g) calc(var(--bottom) + 14px)}
@@ -58,8 +64,6 @@
   .glz-scrim{display:grid;grid-template-columns:1fr minmax(200px,248px);grid-template-rows:auto 1fr;grid-template-areas:"top top" "stage tools"}
   .glz-top{grid-area:top;padding-left:calc(var(--g) + var(--left));padding-right:calc(var(--g) + var(--right))}
   .glz-stage{grid-area:stage}
-  .glz-frame{max-width:96%;max-height:94%}
-  .glz-img{max-width:96%;max-height:94dvh}
   .glz-tools{grid-area:tools;flex-direction:column;justify-content:center;align-items:stretch;gap:14px;
     padding:14px calc(14px + var(--right)) calc(var(--bottom) + 14px) 14px;overflow-y:auto}
   .glz-pal{justify-content:flex-start}

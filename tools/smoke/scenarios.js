@@ -3210,28 +3210,75 @@ scenario("paintings", "a painting's identity (title, painter, museum) sits above
   t.expect(stripTop < 812, `the palette strip sits at y=${Math.round(stripTop)}, below the 812px fold`);
 });
 // David, relayed 2026-10-09 ("usually tapping a color should open the color, not the segmentation of it"):
-// a strip tile now opens its color's page in one tap, the app-wide [data-swatch] rule (CLAUDE.md); "Where this
-// sits on the painting" moved to the small glyph in its corner, a second, explicit gesture.
-scenario("paintings", "a painting's strip tile opens its color page in one tap; the Where glyph locates it instead", async t => {
+// a strip tile opens its color's page in one tap, the app-wide [data-swatch] rule (CLAUDE.md).
+// David, 2026-10-09 again ("the palette strip looks weird now because there's a symbol on the colors... it
+// looked better when the swatches had no symbols on top"): the corner "Where" glyph is gone from the strip
+// entirely. "Where this sits on the painting" is now a long-press on a strip chip, and an explicit row action
+// (the same [data-locate] glyph, just in the expanded list below the strip) -- never a symbol sitting on a chip.
+// NOTE: a timed (480ms setTimeout-driven) long-press is not simulated here -- tools/smoke/scenarios.js's own
+// pre-existing "sets / long-press a swatch adds it to the tray" scenario (same js/settray.js SX_HOLD mechanism
+// this chip opts out of) is independently flaky under Chrome's --virtual-time-budget for the same reason: a
+// real-time setTimeout inside the iframe racing the harness's own outer-page timing doesn't advance reliably
+// under virtual time. Manually verified instead (Browser pane, real clock, 2026-10-09): press-hold-release on
+// a strip chip locates it (dims the painting, shows the caption, the trailing click is swallowed -- still on
+// the painting page); a second long-press clears it; a plain short tap is unaffected and still opens the
+// color page. This scenario covers everything that IS reliable under virtual time: the glyph is gone from the
+// strip, a plain tap still opens the page, and the row action (an ordinary click, no timer) does the same job.
+scenario("paintings", "a painting's strip tile opens its color page in one tap, with no Where glyph on the chip; the expanded list's row action locates it", async t => {
   await t.open("#/gallery/12", { settle: 800 });
   t.expect(!t.$("[data-glwhere]"), "the old On the painting switch is still in the DOM");
   await t.waitFor("[data-glswatches] [data-glj]", 15000, "a palette swatch tile");
   const tileAt0 = () => t.$('[data-glswatches] [data-glj="0"]');
   t.expect(tileAt0().hasAttribute("data-swatch"), "the strip chip isn't a [data-swatch] (one tap should open its page)");
+  t.expect(!tileAt0().querySelector("[data-locate], .pal-where"), "the strip chip still has a Where glyph on it");
+  t.expect(t.$("[data-glswatches]").hasAttribute("data-no-hold"), "the strip doesn't opt out of settray.js's app-wide long-press (needed so its own long-press can locate instead)");
   await t.click(tileAt0(), { force: true, wait: 600 });
   await t.waitFor(".cp-page", 8000, "the color page after tapping the chip body");
   await t.click(TRL.screenBack(t), { wait: 600 });
-  await t.waitFor("[data-glswatches] [data-glj]", 10000, "the painting page again after Back");
-  const whereAt0 = () => t.$('[data-glswatches] [data-glj="0"] [data-locate]');
-  t.expect(whereAt0(), "no Where glyph on the chip");
-  await t.click(whereAt0(), { force: true, wait: 400 });
-  t.expect(tileAt0().classList.contains("loc"), "the chip doesn't show as located after tapping its Where glyph");
-  await t.waitFor(() => t.$("[data-gllitcv]").classList.contains("on"), 4000, "the painting dims around the located color");
+  // the expanded list's own row action: an ordinary click, no timing involved, so it's reliable here
+  await t.waitFor("[data-glrows] [data-glj]", 10000, "the expanded palette rows");
+  const rowWhereAt0 = () => t.$('[data-glrows] [data-glj="0"] [data-locate]');
+  t.expect(rowWhereAt0(), "no Where row-action on the expanded list");
+  await t.click(rowWhereAt0(), { force: true, wait: 400 });
+  t.expect(t.$('[data-glrows] [data-glj="0"]').classList.contains("loc"), "the row doesn't show as located after tapping its Where action");
+  await t.waitFor(() => t.$("[data-gllitcv]").classList.contains("on"), 4000, "the painting dims from the row action");
   const cap = t.$("[data-gllocate]");
   t.expect(cap && !cap.hidden && /% of the canvas/.test(t.text(cap)), `the locate caption is missing or wrong: "${cap && t.text(cap)}"`);
-  await t.click(whereAt0(), { force: true, wait: 400 });
-  t.expect(!tileAt0().classList.contains("loc") && t.$("[data-gllocate]").hidden, "tapping Where again didn't clear the locate state");
+  await t.click(rowWhereAt0(), { force: true, wait: 400 });
+  t.expect(!t.$('[data-glrows] [data-glj="0"]').classList.contains("loc") && t.$("[data-gllocate]").hidden, "tapping the row action again didn't clear the locate state");
   t.expect(!t.$("[data-gllitcv]").classList.contains("on"), "the dim canvas is still on after clearing locate");
+});
+// David, 2026-10-09: "the color palette slider doesn't show more than 11 colors." Root cause: a flex item's
+// default min-width is auto (its own content size, here padding + the percent label's text -- not 0), so the
+// strip's chips stopped shrinking once each one needed ~35-40px, and the rest silently overflowed the row's own
+// overflow:hidden. css/gallery.css now floors each chip at 14px and makes it its own container so its percent
+// label (data-glj's <span>) drops out on its own once the chip is too narrow to show it legibly, instead of the
+// chip itself vanishing. Checked on a painting with a pool bigger than 11 (gallery/777, Diverse mode, max 18
+// here) at five slider positions, at both 440px and 375px: the number of VISIBLE (non-zero-width) chips always
+// equals the slider's value, and the expanded list below always shows every one regardless.
+scenario("paintings", "the palette strip shows every chip the slider asks for, not just the first ~11", async t => {
+  for (const w of [440, 375]) {
+    await t.open("#/gallery/777", { settle: 800, size: [w, 956] });
+    const diverse = await t.waitFor(() => t.$$("[data-glo]").find(b => b.dataset.glo === "diverse"), 15000, "the Diverse mode chip");
+    await t.click(diverse, { force: true, wait: 400 });
+    const slide = await t.waitFor("[data-glk]", 8000, "the How-many slider");
+    t.expect(typeof slide._countTo === "function", "the slider isn't a countify() control");
+    const max = +slide.max;
+    t.expect(max >= 12, `this painting's Diverse pool is only ${max} colors -- too small to exercise the >11 case at ${w}px`);
+    for (const k of [2, 8, 12, 16, max]) {
+      if (k > max) continue;
+      slide._countTo(k);
+      await t.sleep(250);
+      const visible = t.$$("[data-glswatches] [data-glj]").filter(c => c.getBoundingClientRect().width > 0);
+      t.expect(visible.length === k, `at ${w}px, ${k} colors asked for but ${visible.length} chips are actually visible`);
+      const rows = t.$$("[data-glrows] [data-glj]");
+      t.expect(rows.length === k, `at ${w}px, the expanded list shows ${rows.length} rows, not all ${k}`);
+      // no chip is clipped off the right edge of the strip
+      const stripR = t.$("[data-glswatches]").getBoundingClientRect();
+      const offscreen = visible.filter(c => c.getBoundingClientRect().right > stripR.right + 1);
+      t.expect(!offscreen.length, `at ${w}px with ${k} colors, ${offscreen.length} chip(s) run past the strip's own right edge`);
+    }
+  }
 });
 // The Analysis section's "Learn this painting" button (js/artwiki.js awAnalysis) was guarded by
 // `typeof paintingLesson === "function"`, a function that was never defined anywhere, so the button never
@@ -3456,6 +3503,89 @@ scenario("paintings", "Look closer's Region tool: tap lights a region and opens 
   if (slide && !t.$("[data-rgslide]").hidden) { slide._countTo(2); await t.sleep(300); t.expect(t.$$("[data-rgswatches] [data-swatch]").length === 2, "the region slider didn't redraw its palette live"); }
   await t.click(t.$("[data-rgswatches] [data-swatch]"), { force: true, wait: 600 });
   await t.waitFor(".cp-page", 8000, "a color page after tapping a region-palette chip");
+});
+// David, 2026-10-09: "it gets janky -- I can pan around and it gets stuck in weird poses... I should only be
+// able to zoom in, not zoom out too far". js/paintzoom.js's gesture rewrite: Z is a real scale against the
+// image's own natural pixels, hard-clamped to [fitZ, fitZ*8] every frame (no rubber band on zoom -- David's ask
+// was literal), and pan is clamped to the overflow past the stage on each axis, with a BOUNDED rubber-band
+// (asymptotes to 140px past the clamp, see js/paintzoom.js's rubber()) during a live drag so it can never run
+// away. Same pointer hygiene as the map's own fuzz test above: 1-3 simulated fingers going down, moving,
+// lifting, cancelling, or vanishing with no up/cancel at all. Checks the gesture's own state (scrim._glzQA, the
+// same QA-accessor pattern as HM_CTRL._qaState) after every step, not rendered pixels -- Z and P are asserted
+// to stay within those bounds at every single step, which is true by construction unless something let a
+// NaN/Infinity through or skipped a clamp.
+scenario("paintings", "Look closer: random gesture fuzz (pinch/pan/lost fingers) never zooms below fit or sends the image off-screen", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { wait: 700 });
+  await t.waitFor(".glz-scrim.in", 4000, "the Look closer overlay");
+  const result = t.ev(`(() => {
+    const scrim = document.querySelector(".glz-scrim"), stage = document.querySelector(".glz-stage");
+    if (!scrim || !scrim._glzQA || !stage) return JSON.stringify({ error: "no scrim/QA" });
+    const QA = scrim._glzQA;
+    const mk = (type, id, x, y) => new PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: id, pointerType: "touch", isPrimary: id === 1 });
+    const mulberry32 = seed => () => { seed = seed + 0x6D2B79F5 | 0; let x = Math.imul(seed ^ seed >>> 15, 1 | seed); x = x + Math.imul(x ^ x >>> 7, 61 | x) ^ x; return ((x ^ x >>> 14) >>> 0) / 4294967296; };
+    const r = stage.getBoundingClientRect();
+    const OVERSHOOT = 145;   // rubber()'s asymptote (140) plus a hair of slack
+    const fails = [];
+    for (let seed = 0; seed < 40 && fails.length < 5; seed++) {
+      QA.stopMomentum(); QA.reset();
+      const rnd = mulberry32(seed + 1);
+      const down = new Set();
+      const steps = 15 + Math.floor(rnd() * 20);
+      for (let s = 0; s < steps; s++) {
+        const id = 1 + Math.floor(rnd() * 3);
+        const x = r.left + 10 + rnd() * Math.max(10, r.width - 20), y = r.top + 10 + rnd() * Math.max(10, r.height - 20);
+        const pick = rnd();
+        if (!down.has(id)) { if (pick < .85) { stage.dispatchEvent(mk("pointerdown", id, x, y)); down.add(id); } }
+        else if (pick < .55) stage.dispatchEvent(mk("pointermove", id, x, y));
+        else if (pick < .75) { stage.dispatchEvent(mk("pointerup", id, x, y)); down.delete(id); }
+        else if (pick < .90) { stage.dispatchEvent(mk("pointercancel", id, x, y)); down.delete(id); }
+        else down.delete(id);   // "lost": the id just vanishes, no up/cancel ever sent
+        const st = QA.state();
+        if (!Number.isFinite(st.Z) || !Number.isFinite(st.P[0]) || !Number.isFinite(st.P[1])) { fails.push({ seed, s, reason: "non-finite", st }); break; }
+        if (st.Z < st.fitZ - .001) fails.push({ seed, s, reason: "below fit", st });
+        if (st.Z > st.maxZ + .001) fails.push({ seed, s, reason: "above max", st });
+        const limX = Math.max(0, (st.natW * st.Z - r.width) / 2) + OVERSHOOT, limY = Math.max(0, (st.natH * st.Z - r.height) / 2) + OVERSHOOT;
+        if (Math.abs(st.P[0]) > limX) fails.push({ seed, s, reason: "P.x off-screen", st, limX });
+        if (Math.abs(st.P[1]) > limY) fails.push({ seed, s, reason: "P.y off-screen", st, limY });
+      }
+    }
+    QA.stopMomentum();
+    return JSON.stringify({ fails: fails.slice(0, 5), failCount: fails.length, total: 40 });
+  })()`);
+  const r = JSON.parse(result);
+  t.expect(!r.error, `fuzz test couldn't run: ${r.error}`);
+  t.expect(r.failCount === 0, `${r.failCount} invalid gesture states out of ${r.total} seeds: ${JSON.stringify(r.fails)}`);
+});
+// David, 2026-10-09: "when I open a painting, sometimes it doesn't let me tap the painter." Root cause: the
+// name only became a real link once js/loader.js's lazy wiki data finished loading (awPaintingHook, js/
+// artwiki.js's "upgrade plain text to a button" pattern) -- commonly still loading on the first painting you
+// open in a session, so a tap in that window landed on inert text. js/gallery.js's .p-dek now renders the link
+// immediately (an optimistic slug straight off the painting's own artist field); artwiki.js's hook only
+// confirms it once the real data lands (or downgrades a genuine non-painter to plain text). This drives 10
+// random painting pages straight off a fresh #/home load -- no wait for the background wiki fetch at all --
+// and checks the painter link is already there and actually opens the painter page every time.
+scenario("paintings", "the painter link on a painting page is tappable immediately, before the painter list finishes loading -- 10 random paintings", async t => {
+  const N = 23778;   // the corpus size (tools/check.js's "ids gate"); an out-of-range pick is simply skipped below
+  let tries = 0, ok = 0, noLoad = 0, noLink = 0;
+  const found = [], misses = [];
+  while (ok < 10 && tries < 30) {   // ~14% of the corpus has no credited artist, so a wide-enough budget matters
+    tries++;
+    const i = Math.floor(Math.random() * N);
+    // a FRESH reload every pick, on purpose: this is exactly the real bug's window (js/loader.js's wiki data
+    // hasn't had a chance to arrive yet on a cold load), not just a client-side re-render mid-session
+    await t.open(`#/gallery/${i}`, { settle: 250 });
+    const got = await t.waitFor(() => t.$(".p-title") && t.text(".p-title").length ? true : null, 10000, "the painting page").catch(() => null);
+    if (!got) { noLoad++; misses.push({ i, why: "no-load", title: t.$(".p-title") ? t.text(".p-title") : null }); continue; }
+    const link = t.$(".p-dek [data-awpainter]");
+    if (!link) { noLink++; misses.push({ i, why: "no-link", title: t.text(".p-title"), dek: t.$(".p-dek") ? t.text(".p-dek") : null }); continue; }
+    const name = t.text(link);
+    await t.click(link, { wait: 500 });
+    const landed = await t.waitFor(() => /^#\/painter\//.test(t.w.location.hash), 8000, "the painter page").catch(() => false);
+    t.expect(landed, `tapping "${name}" (painting ${i}) didn't open the painter page (hash: ${t.w.location.hash})`);
+    found.push(i); ok++;
+  }
+  t.expect(ok === 10, `only found ${ok}/10 (tries ${tries}, noLoad ${noLoad}, noLink ${noLink}): ${JSON.stringify(misses)}`);
 });
 scenario("paintings", "Look closer on a painting then swiping back (popstate) never leaves the color page under a stuck dark scrim", async t => {
   await t.open("#/color/cobalt", { settle: 800 });

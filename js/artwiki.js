@@ -648,13 +648,26 @@ function awPaintingWhy(host, r) {
 // Painting pages: the Analysis section (called from js/gallery.js glPage)
 // ======================================================================
 function awPaintingHook(el, i, d, ctx) {
-  // 1. the artist's name becomes a link once the painter list is here (it loads quietly, once)
+  // 1. the artist name is already a real, tappable link the moment the page draws (js/gallery.js's .p-dek
+  // render, from the painting's own d.a field) -- David, 2026-10-09: "sometimes it doesn't let me tap the
+  // painter". The old code waited for the painter list to finish loading before turning the name into a button
+  // AT ALL, so a tap in that window (common on a fresh load, since js/loader.js's wiki data is lazy) landed on
+  // inert text. This only confirms or corrects that optimistic render once the real data is in: an artist who
+  // genuinely isn't in the archive downgrades to plain text instead of a dead-end button, and a defensive
+  // elementFromPoint check catches the OTHER reported cause (something else sitting on top of it) by lifting
+  // the link's stacking order if the point at its own center doesn't actually land on it.
   if (d.a) {
     const slug = routeSlug(d.a), dek = el.querySelector(".p-dek");
     awLoad().then(() => {
-      if (!el.isConnected || !dek || !awHasPainter(slug)) return;
-      const parts = [`<button class="aw-link" data-awpainter="${slug}">${esc(d.a)}</button>`, d.co, d.mv].filter(Boolean).map((x, k) => k ? esc(x) : x);
-      dek.innerHTML = parts.join(" · ");
+      if (!el.isConnected || !dek) return;
+      const btn = dek.querySelector("[data-awpainter]");
+      if (!btn) return;
+      if (!awHasPainter(slug)) { btn.outerHTML = esc(d.a); return; }
+      const r = btn.getBoundingClientRect();
+      if (r.width && r.height) {
+        const hit = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+        if (hit && hit !== btn && !btn.contains(hit)) { btn.style.position = "relative"; btn.style.zIndex = "1"; }
+      }
     }).catch(() => {});
   }
   awContext(el.querySelector("[data-glctx]"), i, d);

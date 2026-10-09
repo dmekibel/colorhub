@@ -29,33 +29,168 @@ function glZoomOpen(opts) {
   document.body.appendChild(scrim);
   const prevOverflow = document.body.style.overflow; document.body.style.overflow = "hidden";
   const frame = scrim.querySelector(".glz-frame"), cv = scrim.querySelector(".glz-cv"), stage = scrim.querySelector(".glz-stage"), img = scrim.querySelector(".glz-img");
+  // Gesture model (David, reported 2026-10-09: "it gets janky -- I can pan around and it gets stuck in weird
+  // poses... I should only be able to zoom in, not zoom out too far"). Z is a real scale factor against the
+  // image's OWN natural pixel size (not a 0-1..something-arbitrary knob): fitZ = the largest scale that still
+  // shows the whole image in the stage (min(stageW/naturalW, stageH/naturalH)), computed once the image loads
+  // and recomputed on resize/orientation change. Z can never go below fitZ -- "zoom out" below the size that
+  // already shows everything doesn't mean anything here -- and never above fitZ*8. Pan is clamped every frame
+  // so the image's own edges can never leave the stage: when the rendered size is <= the stage on an axis
+  // there's nothing to pan on that axis (clamp range is exactly 0, matching "fit" always being centered, no
+  // stuck half-panned state); when it's bigger, the clamp range is the overflow on each side. A live drag gets
+  // soft rubber-band resistance past that range (so a flick at the edge still feels alive, not a hard wall);
+  // it snaps back in bounds on release. Zoom itself is never rubber-banded -- David's ask was literal ("never
+  // smaller"), so pinch/wheel are hard-clamped to [fitZ, maxZ] every frame, no overshoot to correct later.
   let Z = 1, P = [0, 0], active = null, palHex = null;
-  const ZMAX = 6;
-  const apply = () => { frame.style.transform = `translate(${P[0]}px,${P[1]}px) scale(${Z})`; };
-  // pinch/pan/wheel, the same pointer-map pattern js/paintmap.js uses for its canvas -- stepped aside while
-  // "Pick" is active (eydAttach, below, owns the gesture then; a one-finger drag samples, not pans)
-  const pts = new Map(); let drag = null, pinch = null;
+  let fitZ = 1, maxZ = 8, natW = 0, natH = 0;
+  const computeFit = () => {
+    natW = img.naturalWidth || 0; natH = img.naturalHeight || 0;
+    const r = stage.getBoundingClientRect();
+    const f = (natW && natH && r.width && r.height) ? Math.min(r.width / natW, r.height / natH) : 1;
+    fitZ = Number.isFinite(f) && f > 0 ? f : 1;
+    maxZ = fitZ * 8;
+  };
+  const panLimit = zVal => {
+    const r = stage.getBoundingClientRect();
+    const rw = natW * zVal, rh = natH * zVal;
+    return [Math.max(0, (rw - r.width) / 2), Math.max(0, (rh - r.height) / 2)];
+  };
+  // a soft, diminishing-return resistance past a bound -- the further past, the less an extra px of finger
+  // movement moves the image, so it never feels like it could run away ("stuck in weird poses")
+  const rubber = over => over / (1 + Math.abs(over) / 140);
+  const rubberClamp = (v, lo, hi) => v < lo ? lo + rubber(v - lo) : v > hi ? hi + rubber(v - hi) : v;
+  const clampP = (p, zVal, soft) => {
+    const [lx, ly] = panLimit(zVal);
+    const cx = soft ? rubberClamp(p[0], -lx, lx) : clamp(p[0], -lx, lx);
+    const cy = soft ? rubberClamp(p[1], -ly, ly) : clamp(p[1], -ly, ly);
+    return [Number.isFinite(cx) ? cx : 0, Number.isFinite(cy) ? cy : 0];
+  };
+  const apply = () => {
+    if (!Number.isFinite(Z) || Z <= 0) Z = fitZ || 1;
+    if (!Number.isFinite(P[0])) P[0] = 0; if (!Number.isFinite(P[1])) P[1] = 0;
+    frame.style.transform = `translate(${P[0]}px,${P[1]}px) scale(${Z})`;
+  };
+  const springFrame = (ms, after) => {
+    frame.style.transition = `transform ${ms}ms var(--spring)`;
+    const done = () => { frame.style.transition = ""; frame.removeEventListener("transitionend", done); if (after) after(); };
+    frame.addEventListener("transitionend", done);
+  };
+  const resetView = () => { computeFit(); Z = fitZ; P = [0, 0]; frame.style.transition = ""; apply(); };
+  if (img.complete && img.naturalWidth) resetView(); else img.addEventListener("load", resetView);
+  const onResize = () => {
+    computeFit(); Z = clamp(Z, fitZ, maxZ); P = clampP(P, Z, false);
+    frame.style.transition = ""; apply();
+  };
+  window.addEventListener("resize", onResize);
+  // zoom around a focal point (screen coords): the math that keeps the point under the fingers/cursor fixed
+  // on screen while Z changes -- without this, a pinch zooms around the frame's center and the picture visibly
+  // slides out from under your fingers (part of the "janky" report)
+  const zoomAt = (fx, fy, newZRaw, soft) => {
+    const newZ = clamp(newZRaw, fitZ, maxZ);
+    if (!Number.isFinite(newZ) || newZ <= 0 || !Number.isFinite(Z) || Z <= 0) return;
+    const r = stage.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    const k = newZ / Z;
+    if (Number.isFinite(k)) P = [(fx - cx) * (1 - k) + P[0] * k, (fy - cy) * (1 - k) + P[1] * k];
+    Z = newZ; P = clampP(P, Z, soft); apply();
+  };
+  // pinch/pan/wheel/double-tap, with the same pointer hygiene the map got: every way a gesture can end
+  // (pointerup, pointercancel, lostpointercapture, touchcancel -- iOS doesn't always send the first two) clears
+  // it, a pointer older than STALE_MS is pruned defensively (a stuck phantom finger from a dropped event would
+  // otherwise wedge pinch math forever), and every computed value is checked finite before it reaches style.
+  // Stepped aside entirely while "Pick" or "Region" is active (their own tap/drag handlers own the gesture then).
+  const pts = new Map(); let drag = null, pinch = null, raf = null;
+  const STALE_MS = 2500;
+  const stopMomentum = () => { if (raf) { cancelAnimationFrame(raf); raf = null; } };
+  const snapBack = () => {
+    const target = clampP(P, Z, false);
+    if (Math.abs(target[0] - P[0]) < .5 && Math.abs(target[1] - P[1]) < .5) { P = target; apply(); return; }
+    springFrame(320); P = target; apply();
+  };
+  const startMomentum = (vx0, vy0) => {
+    stopMomentum();
+    let vx = Number.isFinite(vx0) ? vx0 : 0, vy = Number.isFinite(vy0) ? vy0 : 0, last = performance.now();
+    const step = now => {
+      const dt = Math.min(48, now - last); last = now;
+      const decay = Math.exp(-.0045 * dt);
+      vx *= decay; vy *= decay;
+      P[0] += vx * dt; P[1] += vy * dt;
+      const [lx, ly] = panLimit(Z); let edge = false;
+      if (P[0] < -lx) { P[0] = -lx; edge = true; vx = 0; } if (P[0] > lx) { P[0] = lx; edge = true; vx = 0; }
+      if (P[1] < -ly) { P[1] = -ly; edge = true; vy = 0; } if (P[1] > ly) { P[1] = ly; edge = true; vy = 0; }
+      apply();
+      if (edge || (Math.abs(vx) < .02 && Math.abs(vy) < .02)) { raf = null; return; }
+      raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+  };
+  let lastTapT = 0, lastTapX = 0, lastTapY = 0;
+  const maybeDoubleTap = (x, y) => {
+    const now = performance.now();
+    const isDouble = now - lastTapT < 320 && Math.hypot(x - lastTapX, y - lastTapY) < 24;
+    lastTapT = isDouble ? 0 : now; lastTapX = x; lastTapY = y;
+    if (!isDouble) return false;
+    if (typeof buzz === "function") buzz(6);
+    zoomAt(x, y, Z > fitZ * 1.15 ? fitZ : Math.min(maxZ, fitZ * 2.5), false);
+    springFrame(280);
+    return true;
+  };
+  const endPointer = e => {
+    const aborted = e === null;   // touchcancel: the OS took the gesture away -- hard-stop, never carry momentum
+    if (e && e.pointerId != null) pts.delete(e.pointerId); else pts.clear();
+    if (pts.size < 2) pinch = null;
+    if (!aborted && pts.size === 1) {
+      const [[, v]] = pts;
+      drag = { x: v.x, y: v.y, x0: v.x, y0: v.y, moved: true, lastT: performance.now(), vx: 0, vy: 0 };
+      return;
+    }
+    if (!aborted && pts.size > 1) return;
+    if (!aborted && drag && !drag.moved) { if (!maybeDoubleTap(drag.x, drag.y)) snapBack(); }
+    else if (!aborted && drag && drag.moved && (Math.abs(drag.vx) > .02 || Math.abs(drag.vy) > .02)) startMomentum(drag.vx, drag.vy);
+    else snapBack();
+    drag = null;
+  };
   stage.addEventListener("pointerdown", e => {
     if (active === "pick" || active === "region") return;
-    pts.set(e.pointerId, [e.clientX, e.clientY]);
+    stopMomentum(); frame.style.transition = "";
+    const now = performance.now();
+    for (const [id, v] of pts) if (now - v.t > STALE_MS) pts.delete(id);
+    if (pts.size >= 2) return;
+    pts.set(e.pointerId, { x: e.clientX, y: e.clientY, t: now });
     try { stage.setPointerCapture(e.pointerId); } catch (err) {}
-    if (pts.size === 1) drag = { x: e.clientX, y: e.clientY, moved: false, x0: e.clientX, y0: e.clientY };
-    else if (pts.size === 2) { const [a, b] = [...pts.values()]; pinch = { d0: Math.hypot(a[0] - b[0], a[1] - b[1]), z0: Z }; if (drag) drag.moved = true; }
+    if (pts.size === 1) drag = { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, moved: false, lastT: now, vx: 0, vy: 0 };
+    else if (pts.size === 2) {
+      const [a, b] = [...pts.values()];
+      pinch = { d0: Math.max(1, Math.hypot(a.x - b.x, a.y - b.y)), z0: Z };
+      if (drag) drag.moved = true;
+    }
   });
   stage.addEventListener("pointermove", e => {
     if (!pts.has(e.pointerId)) return;
-    pts.set(e.pointerId, [e.clientX, e.clientY]);
-    if (pinch && pts.size >= 2) { const [a, b] = [...pts.values()]; Z = clamp(pinch.z0 * Math.hypot(a[0] - b[0], a[1] - b[1]) / Math.max(10, pinch.d0), 1, ZMAX); apply(); return; }
+    pts.set(e.pointerId, { x: e.clientX, y: e.clientY, t: performance.now() });
+    if (pinch && pts.size >= 2) {
+      const [a, b] = [...pts.values()];
+      const d = Math.hypot(a.x - b.x, a.y - b.y); if (!Number.isFinite(d) || d <= 0) return;
+      zoomAt((a.x + b.x) / 2, (a.y + b.y) / 2, pinch.z0 * d / pinch.d0, false);
+      return;
+    }
     if (drag && pts.size === 1) {
       if (!drag.moved && Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 6) return;
       drag.moved = true;
-      P[0] += e.clientX - drag.x; P[1] += e.clientY - drag.y; drag.x = e.clientX; drag.y = e.clientY; apply();
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y, now = performance.now(), dt = Math.max(1, now - drag.lastT);
+      drag.vx = dx / dt; drag.vy = dy / dt; drag.lastT = now;
+      P = clampP([P[0] + dx, P[1] + dy], Z, true);
+      drag.x = e.clientX; drag.y = e.clientY; apply();
     }
   });
-  const up = e => { pts.delete(e.pointerId); if (pts.size < 2) pinch = null; if (!pts.size) drag = null; };
-  stage.addEventListener("pointerup", up); stage.addEventListener("pointercancel", up);
-  stage.addEventListener("wheel", e => { e.preventDefault(); Z = clamp(Z * Math.exp(-e.deltaY * .0015), 1, ZMAX); apply(); }, { passive: false });
-  stage.addEventListener("dblclick", () => { if (active !== "pick" && active !== "region") { Z = Z > 1.2 ? 1 : 2.4; if (Z === 1) P = [0, 0]; apply(); } });
+  stage.addEventListener("pointerup", endPointer);
+  stage.addEventListener("pointercancel", endPointer);
+  stage.addEventListener("lostpointercapture", endPointer);
+  stage.addEventListener("touchcancel", () => endPointer(null));
+  stage.addEventListener("wheel", e => {
+    if (active === "pick" || active === "region") return;
+    e.preventDefault(); stopMomentum(); frame.style.transition = "";
+    zoomAt(e.clientX, e.clientY, Z * Math.exp(-e.deltaY * .0015), false);
+  }, { passive: false });
   stage.addEventListener("contextmenu", e => e.preventDefault());
   // "Pick": eyedropAttach (js/eyedrop.js) on the zoomed image itself, armed only while this tool is active, so
   // it never fights the pan/pinch handlers above (D+E of David's palette-engine brief, 2026-10-09). The readout
@@ -136,6 +271,7 @@ function glZoomOpen(opts) {
   let closed = false;
   const close = () => {
     if (closed) return; closed = true;
+    stopMomentum(); window.removeEventListener("resize", onResize);
     document.body.style.overflow = prevOverflow; scrim.remove(); document.removeEventListener("keydown", onKey);
   };
   const onKey = e => { if (e.key === "Escape") close(); };
@@ -153,5 +289,9 @@ function glZoomOpen(opts) {
   // js/richpage.js's rp-bar/rp-hold).
   cleanup.push(close);
   requestAnimationFrame(() => scrim.classList.add("in"));
+  // a QA accessor for the gesture fuzz test (tools/smoke/scenarios.js), the same pattern js/honey.js exposes
+  // via HM_CTRL._qaState -- the raw camera state plus the bounds it should always be within, so the test can
+  // assert on the gesture machinery itself rather than reading rendered pixels back out of a transform string
+  scrim._glzQA = { state: () => ({ Z, P: P.slice(), fitZ, maxZ, natW, natH }), stopMomentum: () => stopMomentum(), reset: () => resetView() };
   return { close };
 }
