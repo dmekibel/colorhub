@@ -270,6 +270,7 @@ function lhRoom() {
     ptg ? row("ptg", ptg.hs, `<em>${esc(ptg.title)}</em>`, ptg.mine ? "The last painting you looked at" : "Today's painting, its colors") : "",
     row("surprise", ["#C9A227", "#3F8F8A", "#B5546B", "#5C4E9C"], "Surprise me", "A few names from somewhere new"),
     row("deck", ["#008080", "#E2725B", "#CC7722", "#6082B6"], "Make your own deck", "Pick the colors, the order and the game"),
+    row("slideshow", ["#CA7B80", "#8E7F71", "#4E518B", "#9CAF88"], "Slideshow", "Colors, one at a time, with their names"),
   ].join("");
   const fresh = !st.yours && !st.learning;
   const el = show(`
@@ -316,6 +317,7 @@ function lhRoom() {
     if (k === "ptg") { buzz(8); return lsOpen({ items: ptg.hs, label: ptg.title, src: "painting" }); }
     if (k === "surprise") { const s = lhSurprise(lhStats()); return lhStudy(s.items, { label: `A surprise: ${s.fam.toLowerCase()}`, title: `A surprise: <em>${esc(s.fam.toLowerCase())}</em>`, src: "surprise" }); }
     if (k === "deck") { buzz(6); return prHome(); }
+    if (k === "slideshow") { buzz(6); return ssOpen(); }
     if (k === "test") {
       S.lh = S.lh && typeof S.lh === "object" ? S.lh : {}; S.lh.tested = S.lh.tested || {}; S.lh.tested[test.key] = today(); save();
       return lhStudy(test.items, { label: `Stage test: ${test.label}`, title: `Stage test · <em>${esc(test.label)}</em>`, src: "stagetest", pace: "test" });

@@ -3440,6 +3440,87 @@ scenario("pages", "with an iPhone safe area, ‹ and Close sit below the status 
   t.expect(!bad.length, `on the status bar: ${bad.join(", ")}`);
 });
 
+// ================================================================== SLIDESHOW (js/slideshow.js)
+scenario("slideshow", "opens from Learn's Or choose, switches modes, steps by swipe and pause, and a name opens its page", async t => {
+  await lrReal(t, "#shot=learn");
+  await t.waitFor(".room-learn [data-ch='slideshow']", 6000, "the Learn room's Slideshow row");
+  await t.click(".room-learn [data-ch='slideshow']", { wait: 500 });
+  await t.waitFor(".ss-ov .ss-layer", 6000, "the slideshow's first slide");
+  t.expect(t.$(".ss-mode.on") && t.text(".ss-mode.on").toLowerCase().includes("shuffle"), "Shuffle isn't the remembered default mode");
+  t.expect(/shuffle/i.test(t.text("[data-ss-mode-btn] .lbl")), `the Mode button reads "${t.text("[data-ss-mode-btn] .lbl")}"`);
+
+  // the Mode button opens a compact picker (only ✕ / Mode / Pause sit over the color at rest)
+  await t.click("[data-ss-mode-btn]", { wait: 300 });
+  await t.waitFor(() => !t.$("[data-ss-picker]").hidden, 3000, "the mode picker to open");
+
+  // switch to Look-alikes: a split pair with a one-line distinction
+  await t.click(`[data-ss-mode="lookalikes"]`, { wait: 400 });
+  await t.waitFor(".ss-ov .ss-layer.ss-pair", 6000, "a look-alike pair");
+  t.expect(/\bthan\b/.test(t.text(".ss-diff")), `the distinction line reads "${t.text(".ss-diff")}"`);
+  t.expect(t.$("[data-ss-picker]").hidden, "the picker didn't close after choosing a mode");
+
+  // switch to Family: the chip strip appears and picking one keeps a single color on screen (the picker stays
+  // open for a family pick, since picking the family is still part of choosing the mode)
+  await t.click("[data-ss-mode-btn]", { wait: 300 });
+  await t.click(`[data-ss-mode="family"]`, { wait: 400 });
+  await t.waitFor(() => !t.$("[data-ss-famstrip]").hidden, 4000, "the family chip strip");
+  await t.click(`[data-ss-fam="Greens"]`, { wait: 500 });
+  await t.waitFor(".ss-ov .ss-layer:not(.ss-pair)", 6000, "a single-color slide for Greens");
+  t.expect(t.$("[data-ss-picker]").hidden, "the picker didn't close after picking a family");
+
+  // back to Shuffle: a tap pauses (manual session), a second tap resumes
+  await t.click("[data-ss-mode-btn]", { wait: 300 });
+  await t.click(`[data-ss-mode="shuffle"]`, { wait: 400 });
+  await t.waitFor(".ss-ov .ss-layer:not(.ss-pair)", 4000, "a shuffled slide");
+  await t.click(".ss-stage", { pointer: true, wait: 300 });
+  t.expect(/resume/i.test(t.el("[data-ss-pause]").getAttribute("aria-label")), "a tap on the stage did not pause");
+  await t.click(".ss-stage", { pointer: true, wait: 300 });
+  t.expect(/^pause$/i.test(t.el("[data-ss-pause]").getAttribute("aria-label")), "a second tap did not resume");
+
+  // swipe left steps to a new slide (the progress hint advances)
+  const before = t.text("[data-ss-hint]");
+  { const r = t.$(".ss-stage").getBoundingClientRect(), w = t.w, o = { bubbles: true, cancelable: true, pointerId: 1, pointerType: "touch", isPrimary: true, view: w, clientY: r.top + r.height * .5 };
+    t.$(".ss-stage").dispatchEvent(new w.PointerEvent("pointerdown", { ...o, clientX: r.left + r.width * .82 }));
+    t.$(".ss-stage").dispatchEvent(new w.PointerEvent("pointermove", { ...o, clientX: r.left + r.width * .2 }));
+    t.$(".ss-stage").dispatchEvent(new w.PointerEvent("pointerup", { ...o, clientX: r.left + r.width * .2 })); }
+  await t.sleep(500);
+  t.expect(t.text("[data-ss-hint]") !== before, `the progress hint didn't move past "${before}"`);
+
+  // pause first: Chrome's virtual time budget can let the 9s auto-advance timer fire between two slow test
+  // steps, swapping the very slide this test is about to tap (a test-only race, not a real-world one — a real
+  // viewer's tap lands well inside a dwell, and ssScheduleNext() restarts the clock on every step regardless)
+  if (!/resume/i.test(t.el("[data-ss-pause]").getAttribute("aria-label"))) await t.click("[data-ss-pause]", { pointer: true, wait: 300 });
+  t.expect(/resume/i.test(t.el("[data-ss-pause]").getAttribute("aria-label")), "could not pause before the name tap");
+  await t.waitFor(".ss-layer.in .ss-name-btn", 4000, "the current slide's name button, settled");
+
+  // tapping the name opens that color's real page, and leaving it returns to the Learn room, not the slideshow
+  await t.click(".ss-layer.in .ss-name-btn", { wait: 600 });
+  await t.waitFor(".cp-page", 8000, "a color page after tapping its name");
+  t.expect(!t.$(".ss-ov"), "the slideshow is still open behind the color page");
+  await t.click("[data-back]", { wait: 500 });
+  await t.waitFor(() => !t.$(".cp-page") && !t.$(".ss-ov"), 6000, "Back to leave the color page");
+  t.expect(t.$(".room-learn"), `Back landed on "${t.snapshot()}", expected the Learn room`);
+});
+
+scenario("slideshow", "Today mode starts on today's color, and the Mode pill relabels itself Shuffle once it hands off", async t => {
+  await lrReal(t, "#shot=learn");
+  await t.waitFor("[data-slideshow='today']", 6000, "the Today card's slideshow button");
+  const today = t.ev("dailyColor().n");
+  await t.click("[data-slideshow='today']", { wait: 500 });
+  await t.waitFor(".ss-ov .ss-name-btn", 6000, "the first slide's name");
+  t.expect(t.text(".ss-ov .ss-name-btn") === today, `the first slide is "${t.text(".ss-ov .ss-name-btn")}", expected today's color "${today}"`);
+  t.expect(/today/i.test(t.text("[data-ss-mode-btn] .lbl")), `the Mode button should still read Today on slide 1, reads "${t.text("[data-ss-mode-btn] .lbl")}"`);
+  // step past today's color: the mode has handed off to Shuffle, so the pill must say so honestly, never still "Today"
+  await t.click(".ss-stage", { pointer: true, wait: 300 });   // pause, so the test's own step is the only one that advances
+  const stage = t.$(".ss-stage"), r = stage.getBoundingClientRect(), w = t.w;
+  const o = { bubbles: true, cancelable: true, pointerId: 1, pointerType: "touch", isPrimary: true, view: w, clientY: r.top + r.height * .5 };
+  stage.dispatchEvent(new w.PointerEvent("pointerdown", { ...o, clientX: r.left + r.width * .82 }));
+  stage.dispatchEvent(new w.PointerEvent("pointermove", { ...o, clientX: r.left + r.width * .2 }));
+  stage.dispatchEvent(new w.PointerEvent("pointerup", { ...o, clientX: r.left + r.width * .2 }));
+  await t.sleep(400);
+  t.expect(/shuffle/i.test(t.text("[data-ss-mode-btn] .lbl")), `after today's color the Mode button should read Shuffle, reads "${t.text("[data-ss-mode-btn] .lbl")}"`);
+});
+
 // ================================================================== THE FAMILY TREE (js/aesthetics-graph.js: #/web)
 scenario("web", "a fresh load of #/web shows the graph canvas and a tap opens the Show sheet", async t => {
   await t.open("#/web", { settle: 600 });

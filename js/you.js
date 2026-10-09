@@ -59,7 +59,8 @@ function ymSettingsHTML() {
     { k: "profile", lead: YM_I.eye, label: "Color vision and tools", value: p ? esc(YM_CVD[p.cvd] || "Set") : "Not set" }])
   + mnGroup("While you learn", [
     { k: "haptics", lead: YM_I.tap, label: "Haptics", sub: "A small tap on every answer", sw: S.haptics !== false },
-    { k: "quick", lead: YM_I.quick, label: "Quick mode", sub: "Reviews skip typing and mixing", sw: !!S.quick }])
+    { k: "quick", lead: YM_I.quick, label: "Quick mode", sub: "Reviews skip typing and mixing", sw: !!S.quick },
+    { k: "ssidle", lead: icon("play", 20), label: "Idle slideshow", sub: "Starts on its own after a minute, on the map or Today", sw: S.ssIdle !== false }])
   + mnGroup("Your progress", [
     { k: "backup", lead: YM_I.down, label: "Back up your progress", value: last ? `Last ${esc(last)}` : "Never" },
     { k: "restore", lead: YM_I.up, label: "Restore a backup" },
@@ -74,6 +75,7 @@ function ymWireSettings(root, back, close = () => {}) {
     const k = b.dataset.mn, flip = on => { b.querySelector(".mn-sw").classList.toggle("on", on); b.setAttribute("aria-checked", on ? "true" : "false"); };
     if (k === "haptics") { S.haptics = S.haptics === false; save(); flip(S.haptics); buzz(12); return; }
     if (k === "quick") { S.quick = !S.quick; save(); flip(S.quick); buzz(8); return; }
+    if (k === "ssidle") { S.ssIdle = S.ssIdle === false; save(); flip(S.ssIdle); buzz(8); return; }
     if (k === "backup") { backupProgress(); const v = b.querySelector(".mn-val"); if (v) v.textContent = `Last ${fmtDay(S.backedUp)}`; return; }
     if (k === "reset") {
       return mnConfirm({ title: "Reset all progress?", body: "Every color you've learned, your reviews, your eye and your taste are erased from this phone. A backup file can bring them back; nothing else can.", yes: "Erase everything", no: "Keep my progress", danger: true })
