@@ -380,10 +380,14 @@
 .rp-bar-hair{box-shadow:0 1px 0 rgba(255,255,255,.1)}
 .rp-bar[data-ink="dark"]{color:#141311}.rp-bar[data-ink="light"]{color:#fff}
 .rp-bar-name{flex:none;min-height:30px;padding:0;background:none;border:0;color:inherit;font:400 17px/1.1 var(--serif);letter-spacing:-.01em;text-align:left;max-width:34%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rp-bar-chips{flex:1;display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;justify-content:flex-end}
+.rp-bar-chips{flex:1;display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;justify-content:flex-end;opacity:1;transform:translateX(0);transition:opacity .2s ease,transform .2s ease}
 .rp-bar-chips::-webkit-scrollbar{display:none}
 .rp-bar-chips button{flex:none;min-height:30px;padding:0 2px;background:none;border:0;color:inherit;opacity:.75;font:400 14px/1 var(--sans)}
 .rp-bar-chips button[hidden]{display:none}
+/* David, 2026-10-09: reading down slims the bar further (name + back only); a little scroll up brings the tabs
+   straight back. The bar's own height never changes (it's one row already), so this is a quiet fade+slide. */
+.rp-bar.collapsed .rp-bar-chips{opacity:0;transform:translateX(6px);pointer-events:none}
+@media (prefers-reduced-motion:reduce){.rp-bar-chips{transition:none}}
 .cp-page .cp-close{z-index:31}
 @media (prefers-reduced-motion:reduce){.rp-bar{transition:none}}
 

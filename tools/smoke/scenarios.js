@@ -1015,6 +1015,40 @@ scenario("pages", "single tap opens focus view; double tap favorites without ope
   tap(); await t.sleep(60); tap();
 });
 
+// David, 2026-10-09: a long article's lede already shows on the cover (the "Almost the same as..." / story-first-
+// sentence line); the door card used to repeat it as its own dek. The door now opens straight on the chapter list.
+scenario("pages", "a long article's lede shows once, on the cover -- not again on the door card", async t => {
+  await H.openPage(t, "#/color/scarlet", "Scarlet");
+  await t.waitFor(".ar-door", 10000, "the story door (Scarlet is long enough for one)");
+  t.expect(!t.$(".ar-door-dek"), "the door card still shows its own dek under the title");
+  t.expect(t.$(".rp-def") && t.text(".rp-def").length > 10, "the cover has no definition line to show the lede once");
+  t.expect(t.$$(".ar-door-row").length >= 1, "the door opens on the chapter list with no dek in the way");
+});
+
+// David, 2026-10-09: caught while craft-reviewing Olive (a color with children) -- a door-length article's
+// chapters/Family/Notes live behind "Begin reading", so Family used to be silently absent on the color page for
+// every long article (~260 of the richest ones). It now has its own always-present slot.
+scenario("pages", "Family still shows on a door-length article's color page (Olive -- it has children)", async t => {
+  await H.openPage(t, "#/name/olive", "Olive");
+  await t.waitFor(".ar-door", 10000, "the story door (Olive is long enough for one)");
+  const fam = await t.waitFor(".ar-fam", 8000, "the Family section, even though the article is a door");
+  t.expect(t.$$(".fam-trow-l", fam).some(p => p.textContent === "Variations"), "Olive's children ('Variations') don't show in the family tree");
+  await t.click([...t.$$(".fam-seg-b", fam)].find(b => b.textContent === "Compare"), { wait: 300 });
+  t.expect(t.$(".fam-cmp-line", fam), "Compare has no split/diff line for a door-length article's color page");
+});
+
+// David, 2026-10-09: "header feels too big -- harder to read the article". Scrolling down slims the pinned bar
+// further (the jump tabs fade out, back + name stay); scrolling up a little brings the tabs straight back.
+scenario("pages", "the pinned header slims its tabs away on scroll down, brings them back on scroll up", async t => {
+  await H.openPage(t, "#/color/scarlet", "Scarlet");
+  const scroll = async y => { t.w.scrollTo(0, y); t.w.document.dispatchEvent(new t.w.Event("scroll")); await t.sleep(30); };
+  for (let y = 0; y <= 1400; y += 140) await scroll(y);
+  const bar = await t.waitFor(".rp-bar.on", 4000, "the pinned header, once scrolled past the cover");
+  await t.waitFor(() => bar.classList.contains("collapsed"), 2000, "the header to slim its tabs while scrolling down");
+  for (let y = 1400; y >= 900; y -= 140) await scroll(y);
+  await t.waitFor(() => !bar.classList.contains("collapsed"), 2000, "the header to bring its tabs back on scroll up");
+});
+
 scenario("pages", "nearest stories: a name without an article offers the nearest ones, a tap opens another page", async t => {
   // a name with no story of its own. Every color is getting an article, so pick one still without a committed article
   // from the article index; when none is left, nearest stories can't show and the scenario only notes it.
