@@ -504,7 +504,18 @@ function show(html, cls = "", tab = null) {
   cleanup.forEach(f => { try { f(); } catch (e) {} }); cleanup = [];
   // (.flyer / .hc-morph: a bubble-to-page shape belongs to the screen that asked for it; one left mid-flight or
   // orphaned by an error must never float over the next screen as a stuck, unlabeled circle)
-  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost,.rooms-stem,.rm-scrim,.flyer,.hc-morph").forEach(n => n.remove());
+  // .tlg-floor: js/trail.js's own gesture-following backdrop (pull-down / edge-swipe). It normally removes
+  // itself (the gesture's own release/cancel handlers), but a navigation that preempts the gesture entirely --
+  // the native iOS back swipe completing before our pointer sequence gets a pointerup/pointercancel, which it
+  // doesn't reliably send once the OS has claimed the touch -- left it (and the "continue off-screen" commit
+  // animation it belonged to) with nobody left to clean it up: a full-viewport backdrop stuck over every screen
+  // after, reading as a permanent black screen. Every render is a fresh start, so this is the one place that
+  // can promise it: no screen is ever drawn underneath a leftover gesture backdrop, however it was abandoned.
+  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost,.rooms-stem,.rm-scrim,.flyer,.hc-morph,.tlg-floor").forEach(n => n.remove());
+  // the gesture's own "continue off-screen" animation, if one was still in flight when something else (that
+  // same preempting navigation) got here first: cancel it so its onfinish never fires a second, stale xBack()/
+  // tlToOrigin() on top of the navigation that already happened (the double-back suspect).
+  if (typeof TLG_ANIM !== "undefined" && TLG_ANIM) { try { TLG_ANIM.cancel(); } catch (e) {} TLG_ANIM = null; }
   document.body.classList.remove("stem-open"); STEM_OPEN = false;
   // a new screen always scrolls: release any scroll lock a sheet or panel left behind (leaving a screen with a sheet
   // open used to keep the body pinned, so the next page couldn't scroll)
@@ -537,6 +548,11 @@ function show(html, cls = "", tab = null) {
   document.body.classList.remove("scrolled");
   const el = app.querySelector(".screen");
   if (skipAnim) el.style.animation = "none";   // no entrance either: the gesture (or the native swipe) already moved it
+  // skipAnim already read whatever TLG_SKIP was for THIS screen; clear it now so a flag a gesture left set (it
+  // never reached its own tlgCommit() finally, again the preempted-gesture case above) can't also apply to some
+  // later, unrelated screen that was never meant to skip its entrance and would otherwise be forced visible from
+  // frame one with no animation to bring it in.
+  if (typeof TLG_SKIP !== "undefined" && TLG_SKIP) TLG_SKIP = false;
   if (typeof mxOnShow === "function") mxOnShow(el);   // a bubble growing into this page, or a page shrinking back into the map (js/mapxfer.js)
   const mb = tab && el.querySelector("[data-menu]"); if (mb) mb.onclick = () => menu();
   if (typeof tlNote === "function") tlNote(el, tab, backNav);   // the one trail, the map glyph, the pull-down (js/trail.js)

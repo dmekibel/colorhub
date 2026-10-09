@@ -98,6 +98,11 @@ html.sheet-open .sx-tray,html.booth .sx-tray{display:none}
 .sp-strip-cap{font:400 13px/1.4 var(--sans);color:var(--soft);margin:8px 0 0}
 .sp-strip button{touch-action:none;transition:box-shadow .15s}
 .sp-strip button.dragging{z-index:2;box-shadow:0 10px 24px -8px rgba(0,0,0,.6);transition:none}
+/* David, 2026-10-09: "same full-screen preview for a pair or more" -- js/richpage.js colorFocus(). Top-center on
+   both shapes: the plates already use their own top-left (the "Aa" sample) and top-right (remove) corners, and
+   the strip's own labels (when a reading fills them in) sit bottom-left of each segment, so this is the one
+   spot free on both that still reads as "the whole thing", not one color in particular. */
+.sp-expand{position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:3;width:38px;height:38px}
 .sp-names{display:flex;flex-direction:column;margin:10px 0 0}
 .sp-name{display:flex;align-items:center;border-bottom:1px solid var(--rule);background:var(--ground);transition:box-shadow .15s}
 .sp-name.dragging{position:relative;z-index:2;box-shadow:0 10px 24px -8px rgba(0,0,0,.5);transition:none}

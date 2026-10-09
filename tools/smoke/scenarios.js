@@ -1150,6 +1150,40 @@ scenario("pages", "single tap opens focus view; double tap favorites without ope
   tap(); await t.sleep(60); tap();
 });
 
+// David, 2026-10-09: "tapping the color to go full screen shouldn't let me scroll down in the full screen -- right
+// now it does." lockScroll()/unlockScroll() (js/core.js, the same iOS-safe body lock every sheet already uses) plus
+// touch-action:none stop the page moving underneath; the corner tag (name + hex) is the other half of this request.
+scenario("pages", "the focus view locks background scroll and shows the color's name and hex in a corner", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  t.w.scrollTo(0, 220); t.w.document.dispatchEvent(new t.w.Event("scroll")); await t.sleep(80);
+  const y0 = t.w.scrollY;
+  t.expect(y0 > 100, `the page didn't actually scroll before opening the focus view (scrollY ${y0})`);
+  const hero = t.$(".cp-hero"), r = hero.getBoundingClientRect();
+  const o = { bubbles: true, cancelable: true, clientX: r.left + r.width / 2, clientY: r.top + 170, pointerId: 43, pointerType: "touch", isPrimary: true, view: t.w };
+  hero.dispatchEvent(new t.w.PointerEvent("pointerdown", o)); hero.dispatchEvent(new t.w.PointerEvent("pointerup", o));
+  await t.waitFor(".rp-focus.on", 2000, "the focus view");
+  t.expect(t.d.documentElement.classList.contains("sheet-open"), "opening the focus view didn't lock the background scroll");
+  const lockedY = t.w.scrollY;
+  const name = t.text(".rp-focus .rp-focus-name"), tag = t.text(".rp-focus .rp-focus-tag");
+  t.expect(name === "Teal", `the centered name reads "${name}"`);
+  t.expect(tag.includes("Teal") && /#[0-9A-F]{6}/.test(tag), `the corner tag doesn't show the color's name and hex: "${tag}"`);
+  // scrolling or wheeling the page while the focus view is open must not move the real scroll position
+  t.w.scrollTo(0, lockedY + 400);
+  t.$(".rp-focus").dispatchEvent(new t.w.WheelEvent("wheel", { bubbles: true, cancelable: true, deltaY: 300 }));
+  await t.sleep(80);
+  t.expect(t.w.scrollY === lockedY, `scrolling while the focus view was open moved scrollY from ${lockedY} to ${t.w.scrollY}`);
+  t.expect(t.w.getComputedStyle(t.$(".rp-focus")).touchAction === "none", "the focus view doesn't block a direct touch-scroll (touch-action)");
+  // close it (swipe down): the background scroll position is exactly restored, not left wherever it got pinned
+  const fr = t.$(".rp-focus").getBoundingClientRect();
+  const fo = { bubbles: true, cancelable: true, clientX: fr.left + fr.width / 2, clientY: fr.top + 60, pointerId: 44, pointerType: "touch", isPrimary: true, view: t.w };
+  t.$(".rp-focus").dispatchEvent(new t.w.PointerEvent("pointerdown", fo));
+  t.$(".rp-focus").dispatchEvent(new t.w.PointerEvent("pointerup", { ...fo, clientY: fo.clientY + 140 }));
+  await t.waitFor(() => !t.$(".rp-focus"), 2000, "the focus view to close");
+  await t.sleep(80);
+  t.expect(!t.d.documentElement.classList.contains("sheet-open"), "the scroll lock was never released");
+  t.expect(t.w.scrollY === y0, `closing the focus view left scrollY at ${t.w.scrollY}, expected the original ${y0}`);
+});
+
 // David, 2026-10-09: a long article's lede already shows on the cover (the "Almost the same as..." / story-first-
 // sentence line); the door card used to repeat it as its own dek. The door now opens straight on the chapter list.
 scenario("pages", "a long article's lede shows once, on the cover -- not again on the door card", async t => {
@@ -2744,6 +2778,51 @@ scenario("sets", "double-tap the top swatches keeps the palette (a heart burst);
   await t.click(t.$(".sp-pair .sp-plate"), { wait: 500 });
   await t.waitFor(".cp-page .cp-hero-foot h1", 8000, "a single tap on a plate still opens its color page");
 });
+
+// David, 2026-10-09: "same full-screen preview for a pair or more." colorFocus() (js/richpage.js) is the one
+// function behind both the color page's cover tap and this button; a pair gets 2 side-by-side bands.
+scenario("sets", "View full screen on a pair shows 2 side-by-side bands, locks scroll, and swipe-down closes", async t => {
+  SP.placed();
+  await t.open("#/pair/4f6b3a+c2412d", { settle: 800, keepState: true });
+  await t.waitFor(".sp-page .sp-plate", 12000, "the pair page");
+  const btn = await t.waitFor("[data-sp-expand]", 6000, "the View full screen button");
+  await t.click(btn, { wait: 400 });
+  await t.waitFor(".rp-focus.on", 2000, "the focus view");
+  t.expect(t.$(".rp-focus.cf-multi") && !t.$(".rp-focus.cf-stack"), "a pair (2 colors) should be side by side, not stacked");
+  const bands = t.$$(".cf-band");
+  t.expect(bands.length === 2, `expected 2 bands, got ${bands.length}`);
+  const tags = bands.map(b => t.text(".rp-focus-tag", b));
+  t.expect(tags.every(x => /#[0-9A-F]{6}/.test(x)), `a band's tag doesn't show a hex: ${tags.join(" | ")}`);
+  t.expect(new Set(tags).size === 2, `the two bands show the same tag: ${tags.join(" | ")}`);
+  t.expect(t.d.documentElement.classList.contains("sheet-open"), "the full-screen view didn't lock the background scroll");
+  // swipe down on one band closes the whole view, same as the single-color focus
+  const r = bands[0].getBoundingClientRect(), o = { bubbles: true, cancelable: true, clientX: r.left + r.width / 2, clientY: r.top + 60, pointerId: 51, pointerType: "touch", isPrimary: true, view: t.w };
+  bands[0].dispatchEvent(new t.w.PointerEvent("pointerdown", o));
+  bands[0].dispatchEvent(new t.w.PointerEvent("pointerup", { ...o, clientY: o.clientY + 140 }));
+  await t.waitFor(() => !t.$(".rp-focus"), 2000, "the focus view to close on swipe down");
+  await t.sleep(80);
+  t.expect(!t.d.documentElement.classList.contains("sheet-open"), "the scroll lock was never released");
+  await t.waitFor(() => t.bodyOverlayLeaks().length === 0, 3000, `a stuck overlay after closing: ${t.bodyOverlayLeaks().join(", ")}`);
+});
+scenario("sets", "View full screen on a 5-color palette stacks the bands and labels each one", async t => {
+  SP.placed();
+  await t.open("#/set/2b2a4c-b85c38-e0c097-6f8f72-8c3b4a", { settle: 800, keepState: true });
+  await t.waitFor(".sp-page [data-strip]", 12000, "the palette page");
+  const btn = await t.waitFor("[data-sp-expand]", 6000, "the View full screen button");
+  await t.click(btn, { wait: 400 });
+  await t.waitFor(".rp-focus.on", 2000, "the focus view");
+  t.expect(t.$(".rp-focus.cf-stack"), "5 colors should stack (full-width bands), not sit side by side");
+  const bands = t.$$(".cf-band");
+  t.expect(bands.length === 5, `expected 5 bands, got ${bands.length}`);
+  const tags = bands.map(b => t.text(".rp-focus-tag", b));
+  t.expect(tags.every(x => x && /#[0-9A-F]{6}/.test(x)), `every band needs its own name + hex: ${tags.join(" | ")}`);
+  t.expect(new Set(tags).size === 5, `every band's tag should be distinct: ${tags.join(" | ")}`);
+  // a tap closes it directly (no dim/undim step for a multi-color view)
+  await t.click(bands[0], { pointer: true, wait: 400 });
+  await t.waitFor(() => !t.$(".rp-focus"), 2000, "a tap to close the stacked view");
+  await t.waitFor(() => t.bodyOverlayLeaks().length === 0, 3000, `a stuck overlay after closing: ${t.bodyOverlayLeaks().join(", ")}`);
+});
+
 scenario("sets", "a set page: pairs inside and Improve with Apply and Undo", async t => {
   SP.placed();
   await t.open("#/set/2b2a4c-b85c38-e0c097-6f8f72", { settle: 800, keepState: true });
@@ -3902,4 +3981,70 @@ scenario("trail", "popstate (the native iOS/browser back swipe) swaps straight t
   t.expect(!sawMx, "the native back swipe still played the bubble-shrink animation");
   await t.waitFor(() => t.$(".screen.hm canvas") && !t.$(".cp-page"), 8000, "the map after the native back swipe");
   MXT.corners(t, "after a native back swipe");
+});
+
+// David's iPhone, 2026-10-09: "Going from a painting back to the color page is still a black screen." Root cause
+// (verified by reverting the fix below and watching this scenario fail): show() (js/core.js) never removed a
+// leftover .tlg-floor, js/trail.js's gesture-following backdrop. iOS doesn't reliably deliver a pointerup or
+// pointercancel once it's claimed a touch for its own back gesture, so a native back winning that race against
+// our own pointer tracking left the backdrop (a full-viewport var(--ground) layer) with nobody left to clean it
+// up -- stuck over every screen drawn after it, forever, not just one bad frame. The fix: show() now sweeps
+// .tlg-floor on every render and cancels any leftover TLG_ANIM, and the gesture's own commit no longer fires a
+// second, stale back once its page is already gone (el.isConnected).
+scenario("trail", "a native back racing an in-flight edge-swipe (no pointerup ever follows) doesn't strand the backdrop", async t => {
+  await TRL.open(t, "#/color/cobalt");
+  const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
+  const fold = sec.closest("details:not([open])"); if (fold) await t.click(fold.querySelector("summary"), { wait: 300 });
+  sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); await t.sleep(300);
+  const pin = await t.waitFor(() => { sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); return t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin, [data-glin] [data-gi]")[0]; }, 25000, "a painting in cobalt's rail");
+  pin.scrollIntoView({ block: "center" }); await t.sleep(200);
+  await t.click(pin, { wait: 600 });
+  await TRL.atHash(t, /^#\/gallery\/\d+/, "the painting page");
+  await t.sleep(500);   // tlgWire only arms once the page has rested a moment (TLG_BORN), like a real swipe
+  const scr = t.$("#app .screen"), r = scr.getBoundingClientRect(), y = r.top + r.height * .5, w = t.w, id = 91;
+  const o = (x, cy) => ({ bubbles: true, cancelable: true, clientX: x, clientY: cy, pointerId: id, pointerType: "touch", isPrimary: true, view: w });
+  scr.dispatchEvent(new w.PointerEvent("pointerdown", o(8, y)));
+  await t.sleep(16);
+  scr.dispatchEvent(new w.PointerEvent("pointermove", o(60, y)));
+  await t.sleep(16);
+  t.expect(t.$(".tlg-floor"), "the edge-swipe never armed (no backdrop under the drag)");
+  // iOS's own back gesture wins the race here: a real popstate, with this pointer sequence left dangling --
+  // no pointerup or pointercancel ever arrives for it (that's the point of this scenario)
+  t.w.history.back();
+  await TRL.atHash(t, /^#\/(color|name)\/cobalt/, "back on the cobalt page");
+  await t.sleep(300);
+  t.expect(!t.$(".tlg-floor"), "the edge-swipe's backdrop was left behind, blacking out the color page");
+  t.expect(t.bodyOverlayLeaks().length === 0, `a stuck overlay is covering the color page: ${t.bodyOverlayLeaks().join(", ")}`);
+  t.expect(t.$(".cp-hero"), `the color page itself isn't actually drawn (snapshot: ${t.snapshot()})`);
+});
+
+scenario("trail", "a native back winning the race after an edge-swipe already committed doesn't double-back or strand the backdrop", async t => {
+  await TRL.open(t, "#/color/cobalt");
+  const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
+  const fold = sec.closest("details:not([open])"); if (fold) await t.click(fold.querySelector("summary"), { wait: 300 });
+  sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); await t.sleep(300);
+  const pin = await t.waitFor(() => { sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); return t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin, [data-glin] [data-gi]")[0]; }, 25000, "a painting in cobalt's rail");
+  pin.scrollIntoView({ block: "center" }); await t.sleep(200);
+  await t.click(pin, { wait: 600 });
+  await TRL.atHash(t, /^#\/gallery\/\d+/, "the painting page");
+  await t.sleep(500);
+  const depthBefore = TRL.depth(t);
+  const scr = t.$("#app .screen"), r = scr.getBoundingClientRect(), y = r.top + r.height * .5;
+  // a real edge-swipe, past the commit threshold: the finger lifts normally (a real pointerup), so the
+  // "continue off-screen" animation starts the ordinary way -- it's just slow to finish (the harness's virtual
+  // clock doesn't drive WAAPI animations on its own; see TLGT.forceCommit above)
+  await t.drag(scr, [{ x: 8, y }, { x: 20, y }, { x: 160, y }], { ms: 35, wait: 0 });
+  await t.waitFor(() => t.ev("typeof TLG_ANIM !== 'undefined' && !!TLG_ANIM"), 3000, "the commit animation to start");
+  const anim = t.ev("TLG_ANIM");
+  // ...but iOS's own back gesture gets there first: a real popstate lands well before that animation would
+  // ever finish on its own
+  t.w.history.back();
+  await TRL.atHash(t, /^#\/(color|name)\/cobalt/, "back on the cobalt page");
+  await t.sleep(300);
+  t.expect(!t.$(".tlg-floor"), "the committed edge-swipe's backdrop was left behind");
+  t.expect(t.bodyOverlayLeaks().length === 0, `a stuck overlay is covering the color page: ${t.bodyOverlayLeaks().join(", ")}`);
+  t.expect(t.$(".cp-hero"), `the color page itself isn't actually drawn (snapshot: ${t.snapshot()})`);
+  t.expect(anim.playState === "idle", `the stranded commit animation was never cancelled (playState: ${anim.playState})`);
+  t.expect(t.ev("typeof TLG_ANIM !== 'undefined' && TLG_ANIM === null"), "TLG_ANIM still points at the stranded animation");
+  t.expect(TRL.depth(t) === Math.max(0, depthBefore - 1), `the native back landed twice: trail depth is ${TRL.depth(t)}, expected ${Math.max(0, depthBefore - 1)} (was ${depthBefore})`);
 });
