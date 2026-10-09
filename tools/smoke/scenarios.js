@@ -2160,6 +2160,19 @@ scenario("paintings", "paintings-of: looser tolerance never finds fewer; a secon
   await t.click("[data-drop]", { force: true, wait: 600 });
   await t.waitFor(() => t.$$(".pt-chip").length === 1, 4000, "the chip to drop");
 });
+scenario("paintings", "at strict settings a rare color shows no unrelated paintings -- only an honest empty state until Loosen is tapped", async t => {
+  // ff00ff at exactly this color, covering at least 20% of the canvas: essentially no real painting clears that
+  // bar, so this proves the empty state never quietly falls back to "closest anyway" tiles (David, 2026-10-09).
+  await t.open("#/paintings-of/ff00ff?t=0&m=20", { settle: 600 });
+  await t.waitFor(() => !/Measuring/.test(t.text("[data-finding]")) && t.text("[data-finding]"), 20000, "the finding line");
+  t.expect(/nothing|not one/i.test(t.text("[data-finding]")), `strict magenta should report an honest empty state, got "${t.text("[data-finding]")}"`);
+  t.expect(t.$$(".pt-results .pin, .pt-results .gl-pin").length === 0, "a strict, essentially-unmatchable query rendered painting tiles anyway");
+  const loosen = t.$(".pt-results [data-pt-loosen]");
+  t.expect(!!loosen, "no Loosen button offered on the honest empty state");
+  await t.click("[data-pt-loosen]", { wait: 900 });
+  await t.waitFor(() => !t.$(".pt-results [data-pt-loosen]") || !/Loosening/.test(t.$(".pt-results [data-pt-loosen]").textContent), 15000, "loosening to finish");
+  t.expect(/loosened/i.test(t.text("[data-finding]")) || t.$$(".pt-results .pin, .pt-results .gl-pin").length > 0 || /nothing|not one/i.test(t.text("[data-finding]")), "Loosen should either find something and say so, or admit it's at the loosest measure");
+});
 scenario("paintings", "a pair's paintings, the masters' chords, and a painting with its color pinned", async t => {
   await t.open("#/paintings-of/c2412d+4f6b3a?t=4&m=1", { settle: 600 });
   await t.waitFor(".pt-finding", 12000, "the pair's paintings");
@@ -2295,6 +2308,45 @@ scenario("paintings", "a color page's In paintings section: presets re-run the q
   await t.click('[data-pt-quick] [data-pre-tol="10"]', { force: true, wait: 600 });
   await t.click("[data-pt-tune]", { force: true, wait: 400 });
   t.expect(t.$$("[data-pt-tuner] .pt-range").length === 2, "Fine-tune doesn't open two sliders");
+});
+// David, on iPhone (2026-10-09): "sometimes when I'm on a color page, tap a painting, then swipe back to the color
+// page, the screen goes black." Root cause: js/paintzoom.js's "Look closer" scrim (glZoomOpen) lives on <body>,
+// not inside the screen it opened over (same reason js/richpage.js's rp-bar does -- so pinch/pan isn't clipped by
+// the screen's own transform) -- but unlike rp-bar, it never registered a cleanup, so core.js show()'s "clear
+// everything the last screen left behind" pass never touched it. Swiping back (or the Back button: both land in
+// xBack(), both re-render through show()) left this near-opaque full-viewport scrim (rgba(6,6,5,.97), z-index 60)
+// sitting over the real color page underneath, forever: not actually a black page, just one buried under a
+// black curtain nobody pulled back. Fixed by giving glZoomOpen's close() to cleanup.push, the same way every
+// other body-level overlay in this app already protects itself.
+scenario("paintings", "Look closer on a painting then swiping back (popstate) never leaves the color page under a stuck dark scrim", async t => {
+  await t.open("#/color/cobalt", { settle: 800 });
+  const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
+  const dr = sec.closest("details"); if (dr && !dr.open) await t.click(dr.querySelector("summary"), { wait: 300 });
+  sec.scrollIntoView();
+  await t.waitFor(() => t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin").length > 0 || t.$("[data-pt-loosen]"), 20000, "the rail or a Loosen button");
+  if (!t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin").length) await t.click("[data-pt-loosen]", { wait: 1500 });
+  const openZoomFromRail = async () => {
+    await t.waitFor("[data-pt-rail] [data-gi]", 15000, "a painting tile in the rail");
+    await t.click("[data-pt-rail] [data-gi]", { wait: 800 });
+    await t.waitFor(".gl-page", 12000, "the painting page");
+    await t.waitFor("[data-glcloser]", 8000, "the Look closer button");
+    await t.click("[data-glcloser]", { wait: 500 });
+    t.expect(t.$(".glz-scrim"), "Look closer didn't open its scrim");
+  };
+  // the opaque scrim covers the painting page's own ‹, so a real finger has only one way back while it's up: the
+  // iOS edge-swipe gesture (popstate) -- which is exactly David's report. Twice, since he saw it "sometimes".
+  for (let i = 0; i < 2; i++) {
+    await openZoomFromRail();
+    t.w.history.back(); await t.sleep(900);
+    t.expect(!t.$(".glz-scrim"), `popstate (the iOS swipe-back gesture) left the "Look closer" scrim stuck over the page`);
+    await t.waitFor(() => /\/color\/cobalt/.test(t.w.location.hash), 10000, "landing back on the color page");
+    const scr = t.$(".screen");
+    t.expect(scr && t.w.getComputedStyle(scr).opacity === "1", "the color page came back fully transparent, not visible");
+    t.expect(scr && scr.textContent.trim().length > 20, "the color page came back with no content");
+    const sec2 = await t.waitFor("[data-glin]", 8000, "the In paintings section again");
+    sec2.scrollIntoView();
+    await t.waitFor(() => t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin").length > 0, 15000, "the rail to still show its paintings after Back");
+  }
 });
 
 // ================================================================== SET PAGES (js/settray.js, js/setpage.js: a page for every pair and palette)
