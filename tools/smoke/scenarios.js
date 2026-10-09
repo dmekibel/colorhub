@@ -3025,9 +3025,19 @@ scenario("map", "search 2.0: a hex and a modifier fly; a decade, a painter and a
 scenario("map", "From a painting: See its colors opens its own honeycomb (not the big map) · the address route still lights the big map directly", async t => {
   await H.homeReady(t); t.ev(`galleryPage(14423, true)`);   // Mona Lisa -- galleryPage() itself pushes "g:14423" (the real trail Back needs)
   await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 15000, "the Mona Lisa painting page");
-  const b = await t.waitFor("[data-cs=map]", 12000, "the See its colors button on a painting page");
-  t.expect(/see its colors/i.test(t.text(b)), `the map action isn't labeled "See its colors": "${t.text(b)}"`);
-  await t.click(b, { force: true, wait: 500 });
+  // David, 2026-10-09 (Lane 4, PLAN §3.6): the painting page's action row is compact now (Learn these · ♡ Keep ·
+  // Share) -- "On the map" (the old [data-cs=map] "See its colors" button) moved into ⋯'s "Go" group
+  // (js/gallery.js moreRegister("gallery")), same as Play and the painter link. galleryPage() is called directly
+  // above (a fast test shortcut, bypassing the router) rather than through openRoute(), so it never set ROUTE_NOW
+  // -- harmless for a plain top-level button, but js/trail.js tlRouteKind() (ROUTE_NOW-based) is what ⋯ uses to
+  // find the right registered group, and a real navigation always sets it first. Set it directly here, same as
+  // openRoute() would for this address, so ⋯ opens on "gallery" 's own groups and not the generic fallback.
+  t.ev(`ROUTE_NOW = "#/gallery/14423"`);
+  await t.click("[data-tl-more]", { wait: 300 });
+  await t.waitFor(".mr-sheet", 6000, "the painting page's ⋯ sheet");
+  const row = t.$$(".mr-sheet .mn-row").find(r => t.text(r).includes("On the map"));
+  t.expect(row, "no \"On the map\" row in the painting's ⋯ sheet");
+  await t.click(row, { wait: 500 });
   await t.waitFor(".ph-sheet", 12000, "the palette honeycomb sheet");
   await t.waitFor(() => t.ev("window.PH_DEBUG && PH_DEBUG.count()") > 0, 8000, "the honeycomb to lay out its cells");
   let shown = +t.text("[data-ph-n]"), cells = t.ev("PH_DEBUG.count()");
@@ -4102,7 +4112,13 @@ scenario("sets", "long-press a swatch adds it to the tray and the tray opens the
   // long-press a palette chip on a painting: it joins the set, the tray shows, the page stays; the tray opens the pair
   await t.open("#/gallery/15146", { settle: 800, keepState: true });
   t.ev('sxSetTray(["#C9A227"])');
-  const sw = await t.waitFor(() => t.$$("#app .pal[data-swatch], #app .pal-name[data-swatch]").find(e => e.getBoundingClientRect().width > 10 && t.ev("de2000")(e.dataset.swatch, "#C9A227") > 3), 15000, "a palette chip on the painting");
+  // David, 2026-10-09 (Lane 4): the strip's own chips ([data-glswatches]) now opt out of this app-wide long-press
+  // (data-no-hold) in favor of their own long-press (toggle "Where" locate) -- js/settray.js's own exemption list
+  // (".sheet, .cp-hero, [data-no-hold]"). The expanded list's rows (.pal-name, [data-glrows]) are NOT part of
+  // that strip and still carry the real add-to-tray gesture this scenario is about; .find() must skip the
+  // opted-out strip chips explicitly; picking the first DOM match (the strip, since it renders first) used to
+  // silently test a swatch that can never add to the tray any more.
+  const sw = await t.waitFor(() => t.$$("#app .pal[data-swatch], #app .pal-name[data-swatch]").find(e => !e.closest("[data-no-hold]") && e.getBoundingClientRect().width > 10 && t.ev("de2000")(e.dataset.swatch, "#C9A227") > 3), 15000, "a palette chip on the painting that still supports long-press-to-tray");
   sw.scrollIntoView({ block: "center" }); await t.sleep(400);   // let the scroll settle: a scroll cancels a hold
   const r = sw.getBoundingClientRect(), o = { bubbles: true, cancelable: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2, pointerId: 1, pointerType: "touch", isPrimary: true, view: t.w };
   const n0 = t.ev("sxTray().length"), page = t.w.location.hash;
