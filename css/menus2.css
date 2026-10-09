@@ -15,6 +15,13 @@
   --dock:calc(var(--bottom) + var(--corner-gap) + var(--corner) + 28px);
   --tabh:var(--dock)}
 /* html,body background left as before (2026-10-08 black-bar regression) */
+/* David, 2026-10-09: "swiping from right to left creates a black screen that's panned in" -- the map's own
+   canvas already sets touch-action:none (css/honey.css .hc-cv), but nothing stopped the PAGE itself (html/body)
+   from rubber-banding or scrolling horizontally if a gesture ever slipped past it (a tap that starts on an
+   overlay, an edge-swipe). overscroll-behavior:none on the root is the standard fix: no page-level pan/bounce in
+   either axis, in any browser. Doesn't touch any element's own intentional scrolling (overscroll-behavior:contain
+   on each scroll container, set throughout, still works exactly as before). */
+html,body{overscroll-behavior:none}
 .room-floor-peek{display:none}
 .room-sheet{top:0;bottom:calc(-1 * var(--vb));border-radius:0;box-shadow:none;background:var(--ground)}
 .room-sheet>.screen{padding-top:calc(var(--top) + 18px)}

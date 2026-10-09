@@ -202,8 +202,16 @@ function mxLand(m) {
   m.timers.push(setTimeout(() => { if (MX === m && m.pageGhost) { m.pageGhost.remove(); m.pageGhost = null; } }, delay));
   if (m.mapEl) {
     m.mapEl.style.transformOrigin = geo ? `${geo.x}px ${geo.y}px` : "50% 50%";
+    // David: a corner button (position:fixed) went missing or landed off-screen after Back from a color page.
+    // This animation's own fill:"both" keeps its transform "in effect" on m.mapEl (the Home screen) even once
+    // it visually settles at scale(1) -- an element with a transform animation still filling is a new containing
+    // block for any position:fixed descendant, so every corner (fixed to what it thinks is the viewport) was
+    // really fixed to m.mapEl's own box for as long as this lingered. mxKill() cancels every m.anims entry and
+    // calls cornersBack() eventually, but only once the whole sequence (overlay fade, title flight…) finishes --
+    // this cancels THIS animation's effect the moment it finishes, so the mispositioning window is as short as
+    // the shrink itself, not the whole transition.
     mxAnim(m, m.mapEl, [{ transform: "scale(1.12)", opacity: .3 }, { transform: "scale(1)", opacity: 1 }], { duration: MX_SHRINK, delay, easing: MX_EASE_BACK, fill: "both" })
-      .onfinish = () => { if (MX === m) m.mapEl.style.transformOrigin = ""; };
+      .onfinish = function () { if (MX === m) m.mapEl.style.transformOrigin = ""; try { this.cancel(); } catch (e) {} };
   }
   if (!geo) {
     // no bubble of this color on screen: the color dissolves into the map

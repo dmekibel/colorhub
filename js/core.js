@@ -525,6 +525,17 @@ function show(html, cls = "", tab = null) {
   if (typeof tlNote === "function") tlNote(el, tab, backNav);   // the one trail, the map glyph, the pull-down (js/trail.js)
   el.querySelectorAll("img").forEach(i => { if (i.complete && i.naturalWidth) i.classList.add("ld"); });
   requestAnimationFrame(() => { runMorph(el); reveal(el); countUp(el); });
+  // David: a corner button (position:fixed) went missing or landed off-screen after returning from a color page.
+  // .screen's own entrance animation (css/polish.css "enter") ends at transform:none, but an element with a CSS
+  // animation still in effect (even one that finishes AT the identity transform, kept by fill-mode:both) computes
+  // as a transform matrix, not the literal keyword none -- and per spec that alone makes it a new containing
+  // block for any position:fixed descendant. Every corner lives inside .screen, so once this ran, "fixed" meant
+  // "fixed to .screen's own box", not the viewport: usually invisible (the two matched), but not always, and
+  // never for the next screen while this one's ghost (.fade-ghost) is still mid-fade-out alongside it. Dropping
+  // the animation once it's done removes the stray containing block and restores true viewport-fixed.
+  const clearEnterAnim = () => { el.style.animation = "none"; };
+  el.addEventListener("animationend", clearEnterAnim, { once: true });
+  setTimeout(clearEnterAnim, 650);   // belt and suspenders: animationend firing late or not at all must not leave this stuck
   return el;
 }
 // Every tab's home opens with the same line: the brand on the left, the tab's own actions and the menu (⋯) on the right.

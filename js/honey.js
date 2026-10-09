@@ -62,6 +62,14 @@ function honeyNorm(o) {
 
 // ---------- layouts: base points on the unit hex lattice (+ the two vectors the plane repeats along) ----------
 const honeyHueKey = it => it.C < 7 ? 400 + (100 - it.L) / 100 : (it.H - 15 + 360) % 360;
+// The Map's own hue key (HONEY_SORT below): low-chroma colors read as near-noise by hue -- two near-blacks can
+// land on wildly different, meaningless hue angles -- and used to come out scattered among vivid colors that
+// happened to round to the same bucket. David, 2026-10-09, two screenshots: a near-black blue sitting amid vivid
+// blues; grey/taupe islands amid oranges and yellows. Below HONEY_NEUTRAL_C they get ONE dedicated region instead
+// (sorted before every real hue, so they fill the map's own first columns), by lightness among themselves --
+// chroma falls off toward that one edge, the hue wheel stays unbroken for everything that actually reads as a hue.
+const HONEY_NEUTRAL_C = 16;
+const honeyGridHueKey = it => it.C < HONEY_NEUTRAL_C ? -1000 + (100 - it.L) : (it.H - 15 + 360) % 360;
 // k tunes the tile's aspect: smaller k = more rows, taller tile (today's shipped "mapTall"); bigger k = fewer
 // rows, wider tile (the original "mapWide").
 function honeyMap(items, k) {
@@ -387,12 +395,12 @@ const HONEY_CENTER = {
 };
 // x(it) runs left to right; y(it) top to bottom inside a column; g (optional) keeps groups apart in the smoothing
 const HONEY_SORT = {
-  hue: { t: "Hue", l: "", r: "", line: "hue across, light to dark down", x: honeyHueKey, y: it => 100 - it.L },
-  light: { t: "Lightness", l: "Lighter", r: "Darker", line: "light to dark across, hue down", x: it => 100 - it.L, y: honeyHueKey },
-  chroma: { t: "Vividness", l: "Muted", r: "Vivid", line: "muted to vivid across, light to dark down", x: it => it.C, y: it => 100 - it.L },
-  warm: { t: "Warmth", l: "Warmer", r: "Cooler", line: "warm to cool across, light to dark down", x: it => -honeyTemp(it), y: it => 100 - it.L },
-  painted: { t: "Painted", l: "Most painted", r: "Rarely painted", line: "most painted to rarely painted across", needs: "painted", x: it => -honeyPainted(it), y: it => 100 - it.L },
-  met: { t: "First met", l: "Met first", r: "Not met yet", line: "the order you met them, then the rest by hue", sig: items => items.map(it => honeyMet(it) || 0).join(","),
+  hue: { t: "Hue", line: "hue across, light to dark down", x: honeyGridHueKey, y: it => 100 - it.L },
+  light: { t: "Lightness", line: "light to dark across, hue down", x: it => 100 - it.L, y: honeyGridHueKey },
+  chroma: { t: "Vividness", line: "muted to vivid across, light to dark down", x: it => it.C, y: it => 100 - it.L },
+  warm: { t: "Warmth", line: "warm to cool across, light to dark down", x: it => -honeyTemp(it), y: it => 100 - it.L },
+  painted: { t: "Painted", line: "most painted to rarely painted across", needs: "painted", x: it => -honeyPainted(it), y: it => 100 - it.L },
+  met: { t: "First met", line: "the order you met them, then the rest by hue", sig: items => items.map(it => honeyMet(it) || 0).join(","),
     x: it => { const m = honeyMet(it); return m == null ? 1e15 + honeyHueKey(it) : m; }, y: it => 100 - it.L, g: it => honeyMet(it) == null ? 1 : 0 },
 };
 // a grid by one sort: columns by x, each column by y (groups stay apart when the sort has them)
@@ -412,7 +420,7 @@ const HONEY_ARR = {
   families: { title: "Families", kind: "grid", def: "hue", sub: "A region per family, greys in the middle", fit: true,
     make: (items, ord) => { const s = HONEY_SORT[ord] || HONEY_SORT.hue; return honeyRegions(items, a => honeySortGrid(a, s, 2.4)); } },   // tall regions: the book is phone-shaped
   // the color plane seen from above (lightness set aside): warm left, cool right, greens up, magentas down
-  temp: { title: "Warm and cool", kind: "", sub: "Warm left, cool right, greys in the middle", axes: { l: "Warmer", r: "Cooler" }, make: items => honeyGridArr(items, it => -honeyTemp(it), it => -(it.C < 6 ? 0 : it.C / (it.C + 18) * Math.sin((it.H - 60) * Math.PI / 180)), 1.25) },
+  temp: { title: "Warm and cool", kind: "", sub: "Warm left, cool right, greys in the middle", make: items => honeyGridArr(items, it => -honeyTemp(it), it => -(it.C < 6 ? 0 : it.C / (it.C + 18) * Math.sin((it.H - 60) * Math.PI / 180)), 1.25) },
 };
 const HONEY_ARR_IDS = Object.keys(HONEY_ARR);
 // the orders a shape offers, in chip order
@@ -596,7 +604,10 @@ const HONEY_STYLES = {
   globe: { title: "Globe", cfg: { layout: "globe", lensMode: "none", gap: .05, shape: 0, zMinUser: .5, labelMin: 32, vig: 0 },
     far: { labelMin: -8 } },
 };
-const HONEY_MAX_DRAWN = 3000;   // phones stay smooth and safe; see the draw loop
+// David, 2026-10-09: raised from 3000 so the biggest sets (every name, every shade) can actually reach a whole-map
+// zoom-out -- a tiny cell past r<3 already skips the hex-poly path and its label (honeyCellPath, finishFrame), so
+// the per-bubble cost out here is one cheap fill, not the full draw; phones stay smooth and safe; see the draw loop
+const HONEY_MAX_DRAWN = 5000;
 // motion (net lag + water breathe/ripple) is skipped past this many drawn bubbles, so it stays fast at the
 // biggest, most zoomed-out sets too — idle drift is unaffected (it only ever moves one pan value, not per-bubble)
 const HONEY_MOTION_BUDGET = Math.round(HONEY_MAX_DRAWN * .5);
@@ -1035,7 +1046,13 @@ function honeycomb(host, opts = {}) {
       // strongly periodic ring/moire (David: no eye-shaped artifact) rather than the glowing texture a big
       // tile gives. Below ~180 lattice points, cap the zoom-out at the ordinary clean-ish floor instead.
       if (lay.pts.length < 180) return cfg.lensMode === "round" ? clamp(search(fits(1.8)), .12, ZMAX) : clamp(need(1.8), .12, ZMAX);
-      return clamp(+cfg.zMinUser, ABS_ZMIN, ZMAX);
+      // David, 2026-10-09: "the app doesn't let you zoom out more... you should be able to simply zoom out and
+      // see the whole map." The preset's own zMinUser is tuned to avoid a periodic moire texture, which for a
+      // big set (every name, every shade) sits well short of "the whole non-repeating tile fits" -- whichever
+      // asks for MORE zoom-out (the smaller Z) wins, so a small/typical set keeps its tuned floor untouched, but
+      // a big one can still go all the way out to its own whole-map view.
+      const whole = cfg.lensMode === "round" ? clamp(search(fits(1.1)), ABS_ZMIN, ZMAX) : clamp(need(1.1), ABS_ZMIN, ZMAX);
+      return Math.min(clamp(+cfg.zMinUser, ABS_ZMIN, ZMAX), whole);
     }
     if (cfg.lensMode === "round") return clamp(search(fits(1.5)), .15, search(fits(.5)));
     return clamp(need(1.5), ABS_ZMIN, clamp(need(.5), .15, ZMAX));
@@ -1085,7 +1102,7 @@ function honeycomb(host, opts = {}) {
     // Safety: never draw more than ~5,000 bubbles. Far out on a big set some styles reached 50,000-120,000, which ran
     // a phone out of memory (a white or black screen). Past the budget, the zoom-out limit moves in to this zoom.
     // and never so far out that the screen is mostly specks too small to draw: move the limit in instead
-    if (tinyN > drawn.length * 3 && tinyN > 800 && Z < ZMAX) { ZMIN = Math.min(ZMAX, Math.max(ZMIN, Z * 1.25)); if (Z < ZMIN) { Z = ZMIN; zAnim = null; requestAnimationFrame(() => draw()); } }
+    if (tinyN > drawn.length * 5 && tinyN > 1500 && Z < ZMAX) { ZMIN = Math.min(ZMAX, Math.max(ZMIN, Z * 1.25)); if (Z < ZMIN) { Z = ZMIN; zAnim = null; requestAnimationFrame(() => draw()); } }
     if (drawn.length > HONEY_MAX_DRAWN) { ZMIN = Math.min(ZMAX, Math.max(ZMIN, Z * Math.sqrt(drawn.length / HONEY_MAX_DRAWN))); drawn.length = HONEY_MAX_DRAWN; if (Z < ZMIN) { Z = ZMIN; zAnim = null; requestAnimationFrame(() => draw()); } }
     cItemCur = cItem;
   }
