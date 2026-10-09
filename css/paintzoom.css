@@ -25,3 +25,19 @@
    ratio, instead of risking the surrounding padding math (David's rebuild brief, 2026-10-09) */
 .gl-closer{position:absolute;right:10px;bottom:10px;z-index:2;display:flex;align-items:center;gap:7px;height:38px;padding:0 14px 0 11px;border-radius:999px;background:rgba(14,13,11,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(236,232,223,.18);color:#fff;font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;white-space:nowrap}
 .gl-closer svg{width:16px;height:16px}
+
+/* ============================================================ landscape lane (2026-10-09, CSS only -- js/paintzoom.js
+   untouched): "the painting page -- image fits the height, info beside it". The column stack (top bar / image /
+   tools+palette) becomes a grid: the top bar spans the full width, the image keeps the left/center and now fits
+   by HEIGHT instead of width (the usual portrait constraint), and the segmented view switch + palette move into
+   a right-hand rail next to it instead of stacking underneath, so nothing competes with the image for height. */
+@media (orientation:landscape){
+  .glz-scrim{display:grid;grid-template-columns:1fr minmax(200px,248px);grid-template-rows:auto 1fr;grid-template-areas:"top top" "stage tools"}
+  .glz-top{grid-area:top;padding-left:calc(var(--g) + var(--left));padding-right:calc(var(--g) + var(--right))}
+  .glz-stage{grid-area:stage}
+  .glz-frame{max-width:96%;max-height:94%}
+  .glz-img{max-width:96%;max-height:94dvh}
+  .glz-tools{grid-area:tools;flex-direction:column;justify-content:center;align-items:stretch;gap:14px;
+    padding:14px calc(14px + var(--right)) calc(var(--bottom) + 14px) 14px;overflow-y:auto}
+  .glz-pal{justify-content:flex-start}
+}

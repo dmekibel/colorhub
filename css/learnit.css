@@ -89,3 +89,18 @@
   .screen.learnit .lt-diff{font-size:22px;margin-top:12px}
   .screen.learnit .lt-swatch{min-height:120px;padding:16px}
 }
+
+/* landscape lane (2026-10-09): a rotated phone is ~390-440px tall, shorter than the max-height:700px case
+   above was tuned for, and it's wide now instead -- the swatch can give up some of its own height (it has
+   width to spare) so the name, the diff line and Next all stay above the fold with nothing to scroll past. */
+@media (orientation:landscape){
+  .screen.learnit{padding-top:calc(var(--top) + 4px);padding-bottom:calc(var(--bottom) + 4px)}
+  .screen.learnit .lt-head{margin-bottom:0}
+  .screen.learnit .lt-swatch{min-height:96px;padding:14px}
+  .screen.learnit .lt-display{font-size:clamp(30px,7vw,46px)}
+  .screen.learnit .lt-t1{font-size:clamp(22px,5vw,30px)}
+  .screen.learnit .lt-diff{font-size:22px;margin-top:10px}
+  .screen.learnit .lt-plates{height:44px}
+  .screen.learnit .lt-page-foot{height:40px;margin-top:0}
+  .screen.learnit .note{margin-top:4px}
+}

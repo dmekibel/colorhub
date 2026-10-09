@@ -3958,3 +3958,85 @@ scenario("trail", "popstate (the native iOS/browser back swipe) swaps straight t
   await t.waitFor(() => t.$(".screen.hm canvas") && !t.$(".cp-page"), 8000, "the map after the native back swipe");
   MXT.corners(t, "after a native back swipe");
 });
+
+// ---------- landscape (2026-10-09, design/DESIGN-CANON.md §5 rule 7 "nothing horizontally scrolls"): key
+// screens at 956x440 (David's iPhone 16 Pro Max rotated). Each scenario opens with opt.size so only this
+// group's iframe changes size; every other scenario above keeps the usual 375x812 portrait frame. Two checks
+// per screen: no horizontal overflow (scrollWidth never exceeds the viewport) and the primary action sits
+// fully inside the viewport (never under a corner, never past the right/bottom edge).
+const LS = {
+  size: [956, 440],
+  noHOverflow(t, where) {
+    const w = t.w.innerWidth, sw = t.d.documentElement.scrollWidth;
+    t.expect(sw <= w + 1, `${where}: the page is ${sw}px wide in a ${w}px viewport (horizontal overflow)`);
+  },
+  inView(t, sel, where) {
+    const e = t.$(sel);
+    t.expect(e, `${where}: no "${sel}" to check`);
+    const r = e.getBoundingClientRect(), w = t.w.innerWidth, h = t.w.innerHeight;
+    t.expect(r.width > 0 && r.height > 0, `${where}: "${sel}" has no size`);
+    t.expect(r.left >= 0 && r.top >= 0 && r.right <= w + 1 && r.bottom <= h + 1,
+      `${where}: "${sel}" sits outside the ${w}x${h} viewport (${Math.round(r.left)},${Math.round(r.top)},${Math.round(r.right)},${Math.round(r.bottom)})`);
+  },
+};
+scenario("landscape", "the map: canvas fills, both corners stay on screen", async t => {
+  await t.open("#shot=home", { size: LS.size, settle: 300 });
+  await t.waitFor("canvas", 10000, "the honeycomb canvas");
+  LS.noHOverflow(t, "home");
+  LS.inView(t, ".corner.l", "home");
+  LS.inView(t, ".corner.r", "home");
+});
+scenario("landscape", "a color page: no overflow, Learn it and the heart stay reachable", async t => {
+  await t.open("#/color/teal", { size: LS.size, settle: 300 });
+  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1"), 12000, "the Teal color page");
+  LS.noHOverflow(t, "color page");
+  LS.inView(t, ".rp-learnpill", "color page");
+  LS.inView(t, ".rp-heart", "color page");
+});
+scenario("landscape", "a painting page: no overflow, the image and Close stay reachable", async t => {
+  await t.open("#/gallery/12", { size: LS.size, settle: 800 });
+  await t.waitFor(".gl-hero", 10000, "the painting's pinned image");
+  LS.noHOverflow(t, "painting page");
+  LS.inView(t, ".gl-hero", "painting page");
+  LS.inView(t, "[data-back],.art-top .icon-btn", "painting page");
+});
+scenario("landscape", "Look closer: the image-beside-tools grid has no overflow and the image fits the height", async t => {
+  await t.open("#/gallery/12", { size: LS.size, settle: 800 });
+  await t.waitFor(".gl-hero", 10000, "the painting's pinned image");
+  await t.waitFor(() => t.$(".gl-hero > span") && t.$(".gl-hero > span").classList.contains("gl-tap"), 10000, "the picture becomes tappable");
+  await t.click(".gl-closer", { force: true, wait: 400 });
+  await t.waitFor(".glz-scrim.in", 8000, "the Look closer overlay");
+  LS.noHOverflow(t, "look closer");
+  const img = t.$(".glz-img"), tools = t.$(".glz-tools");
+  t.expect(img, "no .glz-img in the Look closer overlay");
+  t.expect(img.getBoundingClientRect().height > t.w.innerHeight * .5, "the image doesn't fit the height (it's under half the viewport tall)");
+  LS.inView(t, ".glz-tools", "look closer");
+});
+scenario("landscape", "a set page: no overflow", async t => {
+  await t.open("#/set/2f6f4e-c8553d-e0a458", { size: LS.size, settle: 800 });
+  await t.waitFor(".sp-page .sp-pair, .sp-page .sp-strip", 12000, "the set page");
+  LS.noHOverflow(t, "set page");
+});
+scenario("landscape", "Learn it (Meet): no overflow, the swatch and Next stay reachable", async t => {
+  await t.open("#shot=learnit:meet", { size: LS.size, settle: 900 });
+  const scr = await t.waitFor(".screen.learnit", 10000, "the Learn it lesson");
+  await t.stable(scr);   // the screen's own entrance animation (app.css .enter, 12px translateY) must settle first
+  LS.noHOverflow(t, "learnit meet");
+  LS.inView(t, ".screen.learnit .lt-swatch, .screen.learnit .lt-cover", "learnit meet");
+});
+scenario("landscape", "a Train game board: no overflow", async t => {
+  await t.open("#shot=gx:hue", { size: LS.size, settle: 500 });
+  await t.waitFor(".screen", 10000, "the game station");
+  LS.noHOverflow(t, "train game");
+});
+scenario("landscape", "the You page: no overflow", async t => {
+  await t.open("#shot=you", { size: LS.size, settle: 500 });
+  await t.waitFor(".you-page, .ym-hero", 10000, "the You page");
+  LS.noHOverflow(t, "you");
+});
+scenario("landscape", "the slideshow: full bleed, no overflow, Close stays reachable", async t => {
+  await t.open("#shot=slideshow", { size: LS.size, settle: 700 });
+  await t.waitFor(".sheet.ss-full", 10000, "the slideshow");
+  LS.noHOverflow(t, "slideshow");
+  LS.inView(t, ".ss-x", "slideshow");
+});
