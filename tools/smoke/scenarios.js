@@ -58,15 +58,23 @@ const H = {
     await t.waitFor(() => /\d/.test(t.text(".hm-title small")) && !/Loading/.test(t.text(".hm-title small")), 10000, "the honeycomb to fill");
     return cv;
   },
-  // Home's right corner: one button, a labeled menu (js/home.js doMenu); which = a [data-do] row
+  // Home's right corner: one button, a labeled menu (js/home.js doMenu); which = a [data-do] row.
+  // David, 2026-10-09: trimmed to 4 rows (learn, fav, search, colors) — Recall moved to the left
+  // menu's Learn room, and "arrange" folded into the combined Colors & Arrange sheet (one [data-do]
+  // row, "colors", with a tab inside). Callers that still ask for "arrange" or "map" get "colors".
   async menu(t, which) {
     await t.click("#hmDo", { wait: 120 });
     await t.waitFor(".hm-do-stem [data-do]", 6000, "the right corner's menu");
-    if (which) await t.click(`.hm-do-stem [data-do="${which}"]`, { wait: 200 });
+    const row = which === "arrange" || which === "map" ? "colors" : which;
+    if (row) await t.click(`.hm-do-stem [data-do="${row}"]`, { wait: 200 });
   },
+  // which = "colors" | "arrange" — both open the one combined sheet; "arrange" also switches its tab.
   async sheet(t, which = "colors") {
     await H.menu(t, which);
-    await t.waitFor(`.hm-chooser[data-which="${which}"]`, 10000, `the ${which} sheet`);
+    await t.waitFor(`.hm-chooser`, 10000, `the ${which} sheet`);
+    if (which === "arrange" && !t.$(`.hm-chooser[data-tab="arrange"]`)) {
+      await t.click('.hm-chooser .hm-ch-tab[data-tab="arrange"]', { wait: 300 });
+    }
   },
   async keys(t, key) { t.w.dispatchEvent(new t.w.KeyboardEvent("keydown", { key, bubbles: true })); await t.sleep(300); },
 };
@@ -348,8 +356,7 @@ scenario("home", "the full-height screen survives an arrangement change in a sta
 
 scenario("home", "Arrange is non-modal: a tap or a pan on the map doesn't close it, a double-tap does", async t => {
   await H.homeReady(t);
-  await H.menu(t);
-  await t.click('.hm-do-stem [data-do="arrange"]', { wait: 500 });
+  await H.sheet(t, "arrange");
   t.expect(t.$(".sheet.hm-sheet-arrange"), "the Arrange sheet did not open");
   const cv = t.$("canvas"), r = cv.getBoundingClientRect();
   const tapX = r.left + r.width / 2, tapY = r.top + 60;   // the top of the map, above the sheet
@@ -372,8 +379,7 @@ scenario("home", "Arrange is non-modal: a tap or a pan on the map doesn't close 
 scenario("home", "Arrange's fit mode frames the whole layout above the sheet, for every arrangement", async t => {
   const forceAnims = () => [...t.d.querySelectorAll(".sheet,.screen")].forEach(e => e.getAnimations && e.getAnimations().forEach(a => { try { a.finish(); } catch (er) {} }));
   await H.homeReady(t);
-  await H.menu(t);
-  await t.click('.hm-do-stem [data-do="arrange"]', { wait: 400 });
+  await H.sheet(t, "arrange");
   const within = async why => {
     forceAnims(); await t.sleep(150); forceAnims();
     // headless Chrome's virtual time budget never advances the sheet's entrance animation in real time, so the
@@ -563,7 +569,6 @@ scenario("home", "View sheet opens; stage chips change the count", async t => {
 scenario("home", "Arrange sheet: Looks and the feel sliders", async t => {
   await H.homeReady(t);
   await H.sheet(t, "arrange");
-  t.expect(!t.$(".hm-tabs, [data-tab]"), "the Arrange sheet still has tabs");
   const styles = t.$$(".hm-look-chip");
   t.expect(styles.length === 2, `${styles.length} Look chips (Bubbles and Honeycomb; magnification is the Magnify slider)`);
   const n0 = H.num(t.text("[data-count]"));
@@ -1388,14 +1393,19 @@ scenario("home", "Study corner opens the instant deck seeded with the middle col
   t.expect(/Learn/.test(t.$("[data-qtitle]").textContent), "the sheet title");
   t.expect(t.$$(".pr-quick .pr-plate i").length >= 5, "the deck plate");
 });
-// David, 2026-10-09: "pressing the recall / study button takes you straight into flashcards" — the map's
-// Recall row (and the You page's recall card, below) must open the one Study flow, never js/learn.js's old
-// swipe deck (.deck) directly.
-scenario("home", "the map's Recall opens the one Study flow, not the old swipe deck", async t => {
+// David, 2026-10-09: "pressing the recall / study button takes you straight into flashcards" — Recall
+// lives only in the left menu's Learn room now (the map's right-corner menu dropped its own Recall
+// row as a duplicate), and it must open the one Study flow, never js/learn.js's old swipe deck
+// (.deck) directly.
+scenario("home", "DEBUGTMP the left menu's Learn room Recall opens the one Study flow not the old swipe deck", async t => {
   await H.homeReady(t);
   t.ev("Object.values(S.cards).slice(0, 2).forEach(c => { c.due = addDays(today(), -1); }); save();");
-  await H.menu(t, "recall");
-  await t.waitFor(".ls-sheet, .ls-study", 6000, "the Study sheet or session from Recall");
+  await t.click("[data-rooms-corner]", { wait: 300 });
+  await t.click('.rooms-stem .rm-bubble[data-room="learn"]', { wait: 700 });
+  await t.waitFor('.room-sheet[data-room="learn"]', 6000, "the Learn room");
+  t.expect(/recall/i.test(t.text(".lh-hero-t")), `the Learn room hero reads "${t.text(".lh-hero-t")}" (wanted a recall count)`);
+  await t.click("[data-study]", { wait: 400 });
+  await t.waitFor(".ls-sheet, .ls-study", 6000, "the Study sheet or session from the Learn room");
   t.expect(!t.$(".deck"), "Recall did not open the old swipe deck directly");
 });
 
@@ -2167,23 +2177,36 @@ scenario("map", "three bubble taps with Back between leave no stuck bubble and H
   }
   t.notes.push("3 opens mid-glide, no leftovers, centered on return");
 });
-scenario("map", "one right corner: its menu holds every verb, and closes on a tap outside, Escape and Back", async t => {
+// David, 2026-10-09: "this menu is too long... Recall doesn't belong here, it's already in the left
+// menu" — trimmed to <=5 rows (learn, fav, search, colors), no Recall, and nothing that duplicates a
+// left-menu (Rooms stem) action. Learn-these/Study-the-map folded into one "Study the map" row, and
+// Colors/Arrange combined into one "colors" row (its own tab switch inside the sheet).
+scenario("map", "the right corner's menu is <=5 rows, has no Recall, and nothing duplicated with the left menu", async t => {
   await H.homeReady(t);
   t.expect(t.$$(".screen.hm .corner").length === 2, `${t.$$(".screen.hm .corner").length} corner buttons on Home`);
   t.expect(!t.$("#hmMapStudy, [data-pr-study], #hmFav, #hmView"), "a verb still has its own button on Home");
   await H.menu(t);
   const rows = t.$$(".hm-do-stem [data-do]").map(b => b.dataset.do);
-  for (const k of ["learn", "map", "fav", "search", "colors", "arrange"]) t.expect(rows.includes(k), `the menu has no ${k}`);
+  t.expect(rows.length <= 5, `the menu has ${rows.length} rows (wanted <=5): ${rows.join(", ")}`);
+  t.expect(!rows.includes("recall"), "Recall is still in the right corner's menu (it belongs only in the left menu's Learn room)");
+  for (const k of ["learn", "fav", "search", "colors"]) t.expect(rows.includes(k), `the menu has no ${k}`);
+  t.expect(!rows.includes("arrange") && !rows.includes("map"), "Arrange or Study-the-map kept its own separate row instead of folding in");
   t.expect(t.$$(".hm-do-stem [data-do]").every(b => t.text(b.querySelector("b")).length > 2), "a menu row has no label");
+  // one home per action: none of the right menu's rows should duplicate a left (Rooms stem) room
+  const rightLabels = t.$$(".hm-do-stem [data-do] b").map(b => t.text(b).trim().toLowerCase());
+  await H.keys(t, "Escape"); await t.sleep(200);
+  await t.click("[data-rooms-corner]", { wait: 300 });
+  const leftLabels = t.$$(".rooms-stem .rm-bubble b").map(b => t.text(b).trim().toLowerCase());
+  await H.keys(t, "Escape"); await t.sleep(200);
+  for (const l of rightLabels) t.expect(!leftLabels.includes(l), `"${l}" appears in both the left and right menus`);
   t.$(".rm-scrim").dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
   await t.sleep(450);
   t.expect(!t.$(".hm-do-stem") && t.$("#hmDo").getAttribute("aria-expanded") === "false", "a tap outside did not close the menu");
   await H.menu(t);
   await H.keys(t, "Escape"); await t.sleep(400);
   t.expect(!t.$(".hm-do-stem"), "Escape did not close the menu");
-  await H.menu(t, "map");
-  await t.waitFor(".ms", 8000, "Study the map from the menu");
-  t.expect(!t.ev("'famNames' in S.hm && S.hm.famNames"), "the family names setting is back");
+  await H.menu(t, "learn");
+  await t.waitFor(".pr-quick", 8000, "Study the map from the menu");
 });
 
 

@@ -187,11 +187,19 @@
 .sheet.hm-sheet-panel{display:flex;flex-direction:column;height:min(56dvh,540px);max-height:min(56dvh,540px);overflow:hidden;padding-left:0;padding-right:0;padding-bottom:0}
 .hm-sheet-panel>.grab{flex:none}
 .hm-sheet-panel .hm-chooser{flex:1;min-height:0;display:flex;flex-direction:column}
-.hm-ch-head{flex:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:0 16px 12px;touch-action:none}
+.hm-ch-head{flex:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 16px 10px;touch-action:none}
 .hm-ch-t{min-width:0}
 .hm-ch-t .title-2{margin:0 0 4px!important}
 .hm-ch-head .hm-count{margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+/* David, 2026-10-09: "combine Colors and Arrange into one menu with a tab on top" -- the Colors/Arrange segmented
+   switch replaces the old fixed title; the count line (now its own paragraph, same copy/placement as before)
+   sits right under the whole header, not nested in it, so it reads the same under either tab. */
+.hm-ch-tabs{display:flex;gap:6px;flex:1;min-width:0}
+.hm-ch-tabs .hm-ch-tab{flex:1;height:40px;border:1px solid var(--rule);border-radius:var(--r-pill);background:none;font:400 17px/1 var(--serif);color:var(--soft)}
+.hm-ch-tabs .hm-ch-tab.on{background:var(--ink);border-color:var(--ink);color:#0E0D0B}
+.hm-chooser>.hm-count{padding:0 16px;margin:0 0 10px}
 .hm-chooser-acts{flex:none;display:flex;gap:6px}
+.hm-chooser-acts[hidden]{display:none}  /* the [hidden] attribute loses to this class's own display:flex otherwise -- same specificity, author beats UA, so the hidden pane's close button stays laid out and overlaps the tabs */
 .hm-chooser-acts .iconq{width:44px;height:44px}
 .hm-ch-x{background:var(--surface-2)}
 /* Arrange by: a strip of live pictures, the current one ringed in paper */
