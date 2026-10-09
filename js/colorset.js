@@ -170,7 +170,7 @@ function csCompare(a, b) {
 const CS_ICON = {   // the shared icon set (js/core.js ICON_PATHS): one metaphor per concept
   map: icon("map", 20), learn: icon("learn", 20), play: icon("play", 20), compare: icon("compare", 20), keep: icon("heart", 20), share: icon("share", 20),
 };
-const CS_ACTS = [["map", "On the map"], ["learn", "Learn"], ["play", "Play"], ["compare", "Compare"], ["keep", "Keep"], ["share", "Share"]];
+const CS_ACTS = [["map", "See its colors"], ["learn", "Learn"], ["play", "Play"], ["compare", "Compare"], ["keep", "Keep"], ["share", "Share"]];
 function csActions(set, o = {}) {
   const row = document.createElement("div");
   row.className = "cs-acts"; row.setAttribute("role", "group"); row.setAttribute("aria-label", "Do more with these colors");
@@ -184,7 +184,15 @@ function csActions(set, o = {}) {
     const b = e.target.closest("[data-cs]"); if (!b) return;
     e.stopPropagation(); buzz(5);
     const s = csGet(set), k = b.dataset.cs;
-    if (k === "map") { if (typeof mapSelect === "function") mapSelect({ title: s.title, colors: s.colors, source: s.kind, id: s.id, src: s.src }); else csOnMap(s); }
+    // David, 2026-10-09: lighting a palette among all ~2,700 names on the big map "doesn't give you anything" --
+    // what's useful is this thing's OWN colors, sized by share, nothing else on screen (js/palettehive.js). A
+    // set built with a pool (gallery's csPoolPick, a subject's svPool) carries pick/max already, so the slider
+    // here goes all the way to the real measured count, recomputed at every step, never a truncated top-24.
+    if (k === "map") {
+      if (typeof openPaletteHive === "function") openPaletteHive({ title: s.title, subtitle: s.src && s.kind === "painting" ? "as photographed" : "", colors: s.colors, source: s.kind, poolFn: s.pick, max: s.max });
+      else if (typeof mapSelect === "function") mapSelect({ title: s.title, colors: s.colors, source: s.kind, id: s.id, src: s.src });
+      else csOnMap(s);
+    }
     else if (k === "learn") csLearn(s, { back: o.back });
     else if (k === "play") csPlay(s, { back: o.back });
     else if (k === "compare") csCompare(s, partner());

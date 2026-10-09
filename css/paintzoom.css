@@ -4,8 +4,14 @@
 .glz-top{display:flex;align-items:center;gap:12px;padding:calc(var(--top) + 10px) var(--g) 6px;flex:none}
 .glz-title{flex:1;min-width:0;font:400 15px/1.3 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .glz-stage{position:relative;flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none}
-.glz-frame{position:relative;max-width:94vw;max-height:94%;will-change:transform;transition:transform .05s linear}
-.glz-img{display:block;max-width:94vw;max-height:94dvh;width:auto;height:auto;object-fit:contain;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:filter .2s var(--ease)}
+/* the frame's box is the image's natural pixel size, untouched by CSS -- js/paintzoom.js's gesture model does
+   ALL the sizing with transform:scale(), starting at the "fit" scale (min(stageW/naturalW,stageH/naturalH))
+   computed once the image loads, so a transform-origin:center scale() and a max-width/height clamp are never
+   both trying to size the same box at once. transform has no transition by default: glZoomOpen() turns one on
+   only for the specific moments that want an eased snap (a pinch/drag settling back in bounds, a double-tap),
+   and removes it again before the next live-dragged frame so panning never fights a CSS transition. */
+.glz-frame{position:relative;will-change:transform}
+.glz-img{display:block;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:filter .2s var(--ease)}
 .glz-cv{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;opacity:0;transition:opacity .25s var(--ease);filter:blur(1px)}
 .glz-cv.on{opacity:1}
 .glz-tools{flex:none;display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px var(--g) calc(var(--bottom) + 14px)}
@@ -16,15 +22,35 @@
 .glz-pal[hidden]{display:none}
 .glz-pal button{width:34px;height:34px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.22)}
 .glz-pal button.on{outline:2px solid var(--ink);outline-offset:2px}
-/* Region tool: hidden until real region data comes back for this painting (glZoomOpen), and a one-line hint
-   while it's the active tool so a first-time visitor knows to tap the picture, not drag it */
-[data-glzv="region"][hidden]{display:none}
-.glz-region-hint{margin:2px 0 0;font:400 13px/1.3 var(--sans);color:var(--soft);text-align:center}
-.glz-region-hint[hidden]{display:none}
+/* Select tool: hidden until segProbe resolves whether this painting's host even lets the encoder read its
+   pixels (glZoomOpen) -- revealed either as a normal button or, honestly, a disabled one with a title tooltip
+   explaining why, never silently missing. .glz-tool-hint is shared with Where's original one-line instruction. */
+[data-glzv="select"][hidden]{display:none}
+[data-glzv="select"]:disabled{opacity:.4}
+.glz-tool-hint{margin:2px 0 0;font:400 13px/1.3 var(--sans);color:var(--soft);text-align:center}
+.glz-tool-hint[hidden]{display:none}
 @media (prefers-reduced-motion:reduce){.glz-scrim,.glz-frame,.glz-img{transition:none}}
 
-/* the region palette sheet (js/gallery.js glRegionSheet) -- a compact version of the painting page's own
-   strip + mode switcher + slider, reusing its CSS (.gl-pal-ui, .gl-strip, .gl-slide, .cnt-step/.cnt-b) */
+/* Select's own controls block (js/paintzoom.js, js/segment.js): the first-run model-download progress bar,
+   the "getting ready"/"tap the thing you want" hint (.glz-tool-hint, shared with Where), and once an image is
+   encoded, the +/- tap-mode toggle plus Undo/Clear -- all hidden together outside Select (data-glzsel) */
+.glz-sel[hidden]{display:none}
+.glz-sel-prog[hidden]{display:none}
+.glz-sel-prog-label{margin:0 0 6px;font:400 13px/1.3 var(--sans);color:var(--soft);text-align:center}
+.glz-sel-bar{height:5px;border-radius:999px;background:rgba(236,232,223,.14);overflow:hidden}
+.glz-sel-bar i{display:block;height:100%;width:0;background:var(--ink);border-radius:inherit;transition:width .15s linear}
+.glz-sel-wifi{margin:6px 0 0;text-align:center}
+.glz-sel-wifi[hidden]{display:none}
+.glz-sel-ctl{display:flex;align-items:center;justify-content:center;gap:10px}
+.glz-sel-ctl[hidden]{display:none}
+.glz-sel-pm button{min-width:44px;font:500 17px/1 var(--sans)}
+.glz-sel-btn{height:36px;padding:0 14px;border-radius:999px;background:var(--s1,#171512);color:var(--ink);font:500 13px/1 var(--sans);box-shadow:inset 0 0 0 1px var(--line,rgba(236,232,223,.10));transition:background .12s,opacity .12s}
+.glz-sel-btn:active{background:var(--s3,#2B2823)}
+.glz-sel-btn:disabled{opacity:.32}
+
+/* the selection's own palette sheet (js/segment.js segSheet) -- a compact version of the painting page's own
+   strip + mode switcher + slider, reusing its CSS (.gl-pal-ui, .gl-strip, .gl-slide, .cnt-step/.cnt-b); the
+   same classes the old region sheet used (.rgs-*), now fed a live AI-selected pool instead of a precomputed one */
 .rgs-sheet{padding-bottom:calc(var(--bottom) + 16px)}
 .rgs-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:2px 0 12px}
 .rgs-head b{font:400 19px/1 var(--serif);color:var(--ink)}
@@ -58,8 +84,6 @@
   .glz-scrim{display:grid;grid-template-columns:1fr minmax(200px,248px);grid-template-rows:auto 1fr;grid-template-areas:"top top" "stage tools"}
   .glz-top{grid-area:top;padding-left:calc(var(--g) + var(--left));padding-right:calc(var(--g) + var(--right))}
   .glz-stage{grid-area:stage}
-  .glz-frame{max-width:96%;max-height:94%}
-  .glz-img{max-width:96%;max-height:94dvh}
   .glz-tools{grid-area:tools;flex-direction:column;justify-content:center;align-items:stretch;gap:14px;
     padding:14px calc(14px + var(--right)) calc(var(--bottom) + 14px) 14px;overflow-y:auto}
   .glz-pal{justify-content:flex-start}

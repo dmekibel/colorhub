@@ -651,126 +651,6 @@ function glPaintMask(cv, P, hex) {
   x.putImageData(out, 0, 0);
 }
 
-// ---------- regions (Option A, David's palette-engine brief, 2026-10-09): SLIC + RAG-merge color regions,
-// precomputed offline (tools/regions_build.py) into data/regions/d/NNN.json, same shard/order as data/gallery/
-// so a painting's regions live at the same index. Each shard entry is null (no cached image, or nothing cleared
-// the area floor) or { w, h, rle, regions: [{a: share, p: base64 pool (gallery.py's pack_pool scheme)}] }.
-// Labels stay honest: "this area" -- a Background/Figure split was tested (region centroid vs the image center/
-// border) and dropped, see the big comment at the top of regions_build.py for why (a surrounding background's
-// centroid reads as "central" too, and unsupervised segmentation splits one person into several same-colored
-// pieces rather than one "figure" blob) -- not reliable enough to name.
-const GL_REGIONS_CACHE = new Map();   // shard index -> Promise<array>
-function glRegionsShard(i) {
-  const shard = Math.floor(i / GAL.shard);
-  if (!GL_REGIONS_CACHE.has(shard)) {
-    const v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
-    GL_REGIONS_CACHE.set(shard, fetch(`data/regions/d/${String(shard).padStart(3, "0")}.json${v}`).then(r => r.ok ? r.json() : null).catch(() => null));
-  }
-  return GL_REGIONS_CACHE.get(shard);
-}
-function glRegionsFor(i) {
-  return glRegionsShard(i).then(arr => (arr && arr[i % GAL.shard]) || null);
-}
-// base64 bytes of (label, runlen) pairs -> a flat Uint8Array of w*h labels (tools/regions_build.py's rle_encode, mirrored)
-function glRleDecode(b64, w, h) {
-  let bin; try { bin = atob(b64); } catch (e) { return null; }
-  const out = new Uint8Array(w * h);
-  let o = 0;
-  for (let i = 0; i + 1 < bin.length && o < out.length; i += 2) {
-    const v = bin.charCodeAt(i), run = bin.charCodeAt(i + 1);
-    for (let k = 0; k < run && o < out.length; k++) out[o++] = v;
-  }
-  return out;
-}
-// paints cv (sized to rd.w/rd.h, the small stored grid -- upsampled by the canvas's own CSS object-fit:contain,
-// same trick glPaintMask relies on) dim everywhere except region regionLabel (1-based; grid value 0 = no region)
-function glPaintRegionMask(cv, rd, regionLabel) {
-  const w = rd.w, h = rd.h, labels = glRleDecode(rd.rle, w, h); if (!labels) return false;
-  const n = w * h, a = new Float32Array(n);
-  for (let j = 0; j < n; j++) a[j] = labels[j] === regionLabel ? 1 : 0;
-  // a small box blur so the (already-small) grid's own cell edges don't stair-step when upsampled to screen size
-  const blur1 = (src, horiz) => {
-    const out = new Float32Array(n);
-    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
-      let s = 0, c = 0;
-      for (let d = -1; d <= 1; d++) {
-        const xx = horiz ? x + d : x, yy = horiz ? y : y + d;
-        if (xx >= 0 && yy >= 0 && xx < w && yy < h) { s += src[yy * w + xx]; c++; }
-      }
-      out[y * w + x] = s / c;
-    }
-    return out;
-  };
-  const sm = blur1(blur1(a, true), false);
-  cv.width = w; cv.height = h;
-  const x = cv.getContext("2d"), out = x.createImageData(w, h);
-  for (let j = 0; j < n; j++) {
-    const o = j * 4; out.data[o] = 14; out.data[o + 1] = 13; out.data[o + 2] = 11; out.data[o + 3] = Math.round((1 - sm[j]) * 170);
-  }
-  x.putImageData(out, 0, 0);
-  return true;
-}
-// which region (1-based label, or 0 = none) sits at a fraction (fx,fy) of the image, 0..1 each way
-function glRegionAt(rd, fx, fy) {
-  const labels = glRleDecode(rd.rle, rd.w, rd.h); if (!labels) return 0;
-  const x = Math.min(rd.w - 1, Math.max(0, Math.floor(fx * rd.w))), y = Math.min(rd.h - 1, Math.max(0, Math.floor(fy * rd.h)));
-  return labels[y * rd.w + x];
-}
-// A region's own compact palette sheet (By area / Diverse / Stands out, the shared slider, every chip opening
-// its color page in one tap) -- js/paintzoom.js's Region tool opens this once a tap lands on a region. The
-// label always reads "this area": no Background/Figure guess (see tools/regions_build.py's own comment for why
-// that was tested and dropped -- not reliable enough to name). onClose fires once, however the sheet closes
-// (my own call, a swipe, or a scrim tap), so the caller can clear its highlight either way.
-function glRegionSheet(region, onClose) {
-  const pool = glPoolDecode(region.p);
-  let curK = Math.min(6, pool.length), mode = "area", kCtl = null;
-  const flatPrior = new Array(13).fill(0);   // a region has no painter/archive hue context, same fallback as js/studio.js's PV_FLAT_PRIOR
-  const modeSet = (m, k) => {
-    if (m === "area") return { pal: glPoolByArea(pool, k) };
-    if (m === "diverse") return { pal: glPoolDiverse(pool, k) };
-    if (m === "out") return { pal: glStandOut(pool, k, flatPrior) };
-    return null;
-  };
-  const curSet = () => modeSet(mode, Math.min(curK, pool.length)) || modeSet("area", curK);
-  const { sh, close } = sheet(`
-    <div class="rgs-head"><b>This area</b><span>${Math.round(region.a * 100)}% of the canvas</span></div>
-    <div class="seg rgs-modes" role="group" aria-label="Palette type">
-      <button data-rgm="area" aria-pressed="true">By area</button>
-      <button data-rgm="diverse" aria-pressed="false">Diverse</button>
-      <button data-rgm="out" aria-pressed="false">Stands out</button>
-    </div>
-    <div class="pr-slide gl-slide rgs-slide" data-rgslide hidden><input type="range" data-rgk aria-label="How many colors"><span class="gl-kn-t" data-rgkn></span></div>
-    <div class="palette gl-strip" data-rgswatches></div>
-    <div class="pal-names" data-rgrows></div>
-    <p class="fine">This painting's photograph, read just inside this one area. Regions are found by color, not by what they show -- so "this area" is honest where a guessed object name wouldn't be.</p>
-  `, { lock: false });
-  sh.classList.add("rgs-sheet", "gl-pal-ui");   // inherits the painting page's own slider/stepper/strip styling
-  const draw = () => {
-    const set = curSet(), pal = set.pal || [];
-    sh.querySelectorAll("[data-rgm]").forEach(b => { const on = b.dataset.rgm === mode; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
-    const slide = sh.querySelector("[data-rgslide]"), inp = slide.querySelector("input"), max = Math.max(2, Math.min(pool.length, 8)), kk = Math.min(Math.max(curK, 2), max);
-    slide.hidden = pool.length <= 2;
-    if (!slide.hidden) {
-      if (!kCtl) kCtl = countify(inp, { min: 2, max, value: kk, out: sh.querySelector("[data-rgkn]"), onSet: (v, final) => { curK = v; draw(); if (final) buzz(5); } });
-      else { kCtl.range(2, max); kCtl.set(kk); }
-    }
-    sh.querySelector("[data-rgkn]").textContent = kk + " colors";
-    sh.querySelector("[data-rgswatches]").innerHTML = pal.map(p => `<button class="pal" data-swatch="${p.h}" style="--c:${p.h};flex:${(Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
-    sh.querySelector("[data-rgrows]").innerHTML = pal.map(p => {
-      const nm = glName(p.h), fam = !nm.sub && typeof familyOf === "function" && familyOf(p.h);
-      const sub = [nm.sub ? nm.sub.charAt(0).toUpperCase() + nm.sub.slice(1) : fam ? fam.head.n + " family" : "", glPctTxt(p.share)].filter(Boolean).join(" · ");
-      return `<button class="pal-name" data-swatch="${p.h}"><i style="--c:${p.h}" data-ink="${ink(p.h)}"></i><b>${esc(nm.t)}</b><span>${esc(sub)}</span><em class="mono">${p.h}</em></button>`;
-    }).join("");
-  };
-  sh.querySelector(".rgs-modes").onclick = e => { const b = e.target.closest("[data-rgm]"); if (!b || b.dataset.rgm === mode) return; mode = b.dataset.rgm; buzz(5); draw(); };
-  draw();
-  if (onClose) {
-    const mo = new MutationObserver(() => { if (!sh.isConnected) { mo.disconnect(); onClose(); } });
-    mo.observe(document.body, { childList: true });
-  }
-  return close;
-}
-
 // ---------- a plain color readout, no quiz (David's palette-engine brief, 2026-10-09, D+E): "the press-and-
 // slide loupe doesn't exist on the painting page" / "selecting a color takes you directly to a guessing game;
 // it should just let me select any color". Wired from js/eyedrop.js's onPick on the painting's main image and
@@ -1069,7 +949,7 @@ function glPage(i, d, fromHex, tol) {
     <div class="gl-id">
     <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
     <h1 class="p-title">${esc(d.t)}</h1>
-    <p class="p-dek">${esc([d.a || "Artist unknown", d.co, d.mv].filter(Boolean).join(" · "))}</p>
+    <p class="p-dek">${d.a ? `<button class="aw-link" data-awpainter="${esc(routeSlug(d.a))}">${esc(d.a)}</button>` : "Artist unknown"}${[d.co, d.mv].filter(Boolean).map(x => ` · ${esc(x)}`).join("")}</p>
     <p class="gl-id-src">${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}</p>
     <div class="gl-why" data-glwhy hidden></div>
     </div>
@@ -1137,17 +1017,18 @@ function glPage(i, d, fromHex, tol) {
     // Each strip chip now opens its color's page in one tap, the app-wide rule (CLAUDE.md "one tap on any color
     // opens its page"; David, relayed 2026-10-09: "usually tapping a color should open the color, not the
     // segmentation of it") -- data-swatch hands that straight to the global delegate (js/swatch.js), no local
-    // code needed. "Where this sits on the painting" moves to the small glyph in the corner, a second, explicit
-    // gesture (swatch.js's own long-press is already claimed app-wide for "add to a set" -- js/settray.js -- so
-    // this can't reuse that slot): tapping it toggles the dim-and-glow locate view, same as the whole chip used to.
-    // the locate glyph carries the index on data-locate itself (NOT a second data-glj) -- a chip's own [data-glj]
-    // must stay a one-element-per-color selector; tools/smoke/scenarios.js and this file's own curPal-size
-    // checks both count by it
-    el.querySelector("[data-glswatches]").innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}${locate && locate.j === j ? " loc" : ""}" data-glj="${j}" data-swatch="${p.h}" style="--c:${p.h};flex:${(Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.pick ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span><i class="pal-where" data-locate="${j}" tabindex="0" role="button" aria-pressed="${locate && locate.j === j}" aria-label="Where ${esc(nameOf(p.h).n)} is on the painting">${GL_WHERE_ICON}</i></button>`).join("");
+    // code needed. "Where this sits on the painting" used to live in a corner glyph on every chip; David,
+    // 2026-10-09: "the palette strip looks weird now because there's a symbol on the colors... it looked
+    // better when the swatches had no symbols on top." Removed from the strip entirely -- it's now a long-press
+    // on a strip chip (wireLocate(), below: its own [data-no-hold] opt-out of js/settray.js's app-wide "long-
+    // press a swatch adds it to your set", since that's the same gesture slot) and an explicit row action in
+    // the expanded list (the [data-locate] glyph there, the one nested-control exemption js/swatch.js's capture
+    // delegate already recognizes, same as the old strip glyph did).
+    el.querySelector("[data-glswatches]").innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}${locate && locate.j === j ? " loc" : ""}" data-glj="${j}" data-swatch="${p.h}" style="--c:${p.h};flex:${(Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.pick ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
     el.querySelector("[data-glrows]").innerHTML = pal.map((p, j) => {
       const nm = glName(p.h), fam = !nm.sub && !p.out && typeof familyOf === "function" && familyOf(p.h);
       const sub = [p.out ? "Stands out" : nm.sub ? nm.sub.charAt(0).toUpperCase() + nm.sub.slice(1) : fam ? fam.head.n + " family" : "", p.pick ? "Picked" : glPctTxt(p.share)].filter(Boolean).join(" · ");
-      return `<button class="pal-name${near && near.i === j ? " on" : ""}" data-swatch="${p.h}" data-glj="${j}"><i style="--c:${p.h}" data-ink="${ink(p.h)}"></i><b>${esc(nm.t)}</b><span>${esc(p.out && nm.sub ? sub + " · " + nm.sub : sub)}</span><em class="mono">${p.h}</em></button>`;
+      return `<button class="pal-name${near && near.i === j ? " on" : ""}${locate && locate.j === j ? " loc" : ""}" data-swatch="${p.h}" data-glj="${j}"><i style="--c:${p.h}" data-ink="${ink(p.h)}"></i><b>${esc(nm.t)}</b><span>${esc(p.out && nm.sub ? sub + " · " + nm.sub : sub)}</span><em class="mono">${p.h}</em><i class="pal-where" data-locate="${j}" tabindex="0" role="button" aria-pressed="${locate && locate.j === j}" aria-label="Where ${esc(nameOf(p.h).n)} is on the painting">${GL_WHERE_ICON}</i></button>`;
     }).join("");
     drawCov(pal);
     const arrive = el.querySelector("[data-glarrive]");
@@ -1285,16 +1166,48 @@ function glPage(i, d, fromHex, tol) {
   }
   // the How-many slider is wired by countify() itself (built lazily inside drawModes, see kCtl) -- its onSet
   // already updates curK, clears locate and redraws, same as this used to do by hand
-  el.querySelector("[data-glswatches]").onclick = e => {
-    // only the small "Where" glyph toggles locate now; a tap anywhere else on the chip is a plain [data-swatch]
-    // and js/swatch.js's own capture-phase delegate already opened its color page before this ever runs
+  // the expanded list's own "Where" glyph (unchanged pattern from the old strip glyph, just moved here)
+  el.querySelector("[data-glrows]").onclick = e => {
     const loc = e.target.closest("[data-locate]"); if (!loc) return;
     buzz(5); toggleLocate(+loc.dataset.locate);
   };
-  el.querySelector("[data-glswatches]").addEventListener("keydown", e => {
+  el.querySelector("[data-glrows]").addEventListener("keydown", e => {
     const loc = e.target.closest("[data-locate]"); if (!loc || (e.key !== "Enter" && e.key !== " ")) return;
     e.preventDefault(); buzz(5); toggleLocate(+loc.dataset.locate);
   });
+  // a long-press on a strip chip also toggles locate now that the corner glyph is gone (David, 2026-10-09: it
+  // "looked weird" with a symbol on every swatch). js/settray.js's own app-wide long-press ("add to a set")
+  // already claims this gesture on every [data-swatch] in the app, so the strip opts out of it (data-no-hold,
+  // the same exemption cp-hero and sheets already use) and runs its own shorter-lived version instead. The
+  // click a completed press would otherwise also fire needs swallowing the same way settray.js swallows ITS
+  // own: a capture-phase listener on `window` (not document -- window's capture runs before js/swatch.js's own
+  // document-level capture delegate, regardless of script load order, since window sits outside document in
+  // the capture path) that drops the next click if it followed a long-press within the strip.
+  const stripEl = el.querySelector("[data-glswatches]");
+  stripEl.dataset.noHold = "";
+  const LOC_HOLD = 480;
+  let locPress = null, locJustHeld = 0;
+  stripEl.addEventListener("pointerdown", e => {
+    const b = e.target.closest("[data-glj]"); if (!b || e.button > 0) return;
+    if (locPress) clearTimeout(locPress.t);
+    const p = { x: e.clientX, y: e.clientY, j: +b.dataset.glj };
+    p.t = setTimeout(() => {
+      if (locPress !== p) return;
+      locPress = null; locJustHeld = performance.now();
+      buzz(6); toggleLocate(p.j);
+    }, LOC_HOLD);
+    locPress = p;
+  });
+  const locCancel = () => { if (locPress) { clearTimeout(locPress.t); locPress = null; } };
+  stripEl.addEventListener("pointermove", e => { if (locPress && Math.hypot(e.clientX - locPress.x, e.clientY - locPress.y) > 10) locCancel(); });
+  ["pointerup", "pointercancel"].forEach(k => stripEl.addEventListener(k, locCancel));
+  const locSwallow = e => {
+    if (!locJustHeld || performance.now() - locJustHeld > 1200) return;
+    if (!e.target.closest || !stripEl.contains(e.target)) return;
+    locJustHeld = 0; e.preventDefault(); e.stopPropagation();
+  };
+  addEventListener("click", locSwallow, true);
+  cleanup.push(() => removeEventListener("click", locSwallow, true));
   el.querySelector("[data-glorder]").onclick = e => {
     if (e.target.closest("[data-glmore]")) { modesOpen = !modesOpen; buzz(5); drawPalette(); return; }
     const b = e.target.closest("[data-glo]"); if (!b || b.dataset.glo === mode) return;

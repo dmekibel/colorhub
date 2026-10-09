@@ -66,6 +66,8 @@ function ooShot(arg) {
     return;
   }
   if (what === "setup") { const pf = ooPref("oo"); if (a === "shuffle") pf.mode = "shuffle"; if (a === "choose") Object.assign(pf, { m: "pick", d: "level", lv: 15, grid: 8, odd: 2 }); return ooMap(); }
+  // customize: the map, then the Customize sheet open (David, 2026-10-09: the old setup screen's controls, now one sheet behind a small icon)
+  if (what === "customize") { ooMap(); return setTimeout(() => { const b = document.querySelector("[data-customize]"); if (b) b.click(); }, 300); }
   if (what === "end") {
     const sess = Object.assign(ooSess(9), { mode: "classic", lay: ooClassic(4, 1) }), rnd = ooRnd(7), res = [];
     ooS().edge = { x: 11.2, day: addDays(today(), -2), n: 30 };
