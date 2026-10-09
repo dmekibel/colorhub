@@ -1,0 +1,107 @@
+{
+ "slug": "pale-vinaceous-fawn",
+ "name": "Pale Vinaceous-Fawn",
+ "hex": "#D1C2B3",
+ "names": [
+  "Pale Vinaceous-Fawn"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pale Vinaceous-Fawn is a dusty, pinkish tan, the pale tone Robert Ridgway charted beside the parent color Vinaceous-Fawn in his 1912 color atlas, and a near-exact match for the everyday name Oatmeal.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pale tone of Vinaceous-Fawn",
+   "body": "Pale Vinaceous-Fawn puts Ridgway's tone word Pale in front of [[vinaceous-fawn]], a compound built from *vinaceous*, Ridgway's own word for a wine-tinted hue, and fawn, a pale brown [1]. Vinaceous-Fawn itself is Ridgway's plate XL, hue 13 triple-prime, tone b; it never reached the ISCC-NBS dictionary of 1955 or Maerz and Paul's 1930 list, staying a Ridgway-only name [1].\n\nOn screen this swatch sits close enough to [[oatmeal]] to read as the same color, a zero-unit match [1]; its nearest distinct neighbor is [[sandust]], 3.6 units off [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 1,420 of 23,781 paintings, 5.97 percent, as photographed; narrowing to at least five percent coverage inside a painting leaves 1,031, more common than 90 percent of the named colors in our library [2]. It peaks in the 1100s, present in 12.0 percent of the 50 paintings we have from then, 1.8 times the archive's overall rate [2]. Inside a painting it most often plays a light across its 1,031 appearances by lightness rank [2].\n\nThe earliest match dates to 900, in a work attributed to Zhao Guangfu, a floor and not a first since the archive's early centuries are thin; that is 1,012 years before the name's 1912 record, so the match marks a look-alike hue in an aged photograph, not a surviving pigment [2]. Xugu used it most, in 9 of his 16 paintings here, 6.4 times the rate of the museums those works come from, and it is most over-represented in paintings from China, 2.1 times the expected rate [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Ridgway's tone system: the pale tone of Vinaceous-Fawn",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XL",
+   "source": "Ridgway 1912; ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "vinaceous-fawn",
+   "oatmeal",
+   "sandust",
+   "iris-mauve"
+  ],
+  "parent": "vinaceous-fawn",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1420,
+  "n_within_painting": 1031,
+  "pct_archive": 5.97,
+  "rank_pct": 90,
+  "measured": {
+   "nearest": [
+    [
+     "Oatmeal",
+     0.0
+    ],
+    [
+     "Sandust",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json: Ridgway 1912) and look-alike distances, data/graph/edges-p.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed, data/graph/fieldnotes/p.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color is an essentially identical match for Pale Vinaceous-Fawn?",
+   "choices": [
+    "Oatmeal",
+    "Sandust",
+    "Iris Mauve"
+   ],
+   "answer": "Oatmeal",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Vinaceous-Fawn was later filed in the ISCC-NBS 1955 dictionary.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Vinaceous-Fawn and the everyday name Oatmeal land on essentially the same swatch."
+ ],
+ "words": 291,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

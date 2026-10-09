@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A modifier, and a linguistic aside",
-   "body": "The name itself is undocumented before 2010 beyond ordinary descriptive use [1]. Philip Ball notes that the Celtic word *glas* covers a range running from a brownish-green to blue, and that Japanese *ao* can mean green, blue or dark depending on context; whether a language draws the line between hues is a matter of vocabulary, not of what its speakers can see [2]. In the 1970s, Michel Pastoureau records designers briefly putting brownish-green military-surplus shades into civilian fashion, a trend that did not last [3].\n\nIts nearest named neighbor is [[mud-green|Mud Green]], only 3.2 units away and read as almost the same color [4]. [[murky-green|Murky Green]] is close too, also read as almost the same color [4]. [[poop-green|Poop Green]] is nearby too, lighter and more vivid by comparison [4]."
+   "body": "The name itself is undocumented before 2010 beyond ordinary descriptive use [1]. Philip Ball notes that the Celtic word *glas* covers a range running from a brownish-green to blue, and that Japanese *ao* can mean green, blue or dark depending on context; whether a language draws the line between hues is a matter of vocabulary, not of what its speakers can see [2]. In the 1970s, Michel Pastoureau records designers briefly putting brownish-green military-surplus shades into civilian fashion, a trend that did not last [3].\n\nIts nearest named neighbor is [[mud-green|Mud Green]], only 3.2 units away and read as almost the same color [4]. [[murky-green|Murky Green]] is close too, also read as almost the same color [4]. [[olive|Olive]] sits further out, also brownish, at about 7.7 units [4]."
   },
   {
    "id": "field",
@@ -30,7 +30,7 @@
   "siblings": [
    "mud-green",
    "murky-green",
-   "poop-green"
+   "olive"
   ],
   "parent": "green",
   "children": [],

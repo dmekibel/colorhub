@@ -11,7 +11,7 @@
   {
    "id": "name",
    "title": "An old food word",
-   "body": "Maerz and Paul's 1930 dictionary dates this name to 1430, on plate 10, swatch J2, making it one of the older food-based color names in ColorHub's library [1]. The 1955 ISCC-NBS system, citing the same dictionary, classes it in block 105 [1]. A Wikipedia entry, citing the color-reference site Xona.com, lists the same hex under the same name; our library hedges that single web citation against the two older, dated dictionary sources [1]. The nearest named colors on file are [[barf-green]], [[vomit-green]] and [[puke-green]], at 2.1, \n[[olive]] and [[mustard]] sit nearby in the same dull yellow-green family [1]."
+   "body": "Maerz and Paul's 1930 dictionary dates this name to 1430, on plate 10, swatch J2, making it one of the older food-based color names in ColorHub's library [1]. The 1955 ISCC-NBS system, citing the same dictionary, classes it in block 105 [1]. A Wikipedia entry, citing the color-reference site Xona.com, lists the same hex under the same name; our library hedges that single web citation against the two older, dated dictionary sources [1]. The nearest named colors on file are [[avocado-green]], 3.7 units away, and [[calliste-green]], 4.7 units away [1]. [[olive]] and [[mustard]] sit nearby too, in the same dull yellow-green family [1]."
   },
   {
    "id": "field",
@@ -27,10 +27,9 @@
   },
   "aka": [],
   "siblings": [
-   "barf-green",
-   "vomit-green",
-   "puke-green",
-   "avocado-green"
+   "avocado-green",
+   "calliste-green",
+   "mustard-green"
   ],
   "parent": null,
   "children": [
@@ -53,20 +52,12 @@
    ],
    "nearest": [
     [
-     "Barf Green",
-     2.1
-    ],
-    [
-     "Vomit Green",
-     2.2
-    ],
-    [
-     "Puke Green",
-     2.5
-    ],
-    [
      "Avocado Green",
      3.7
+    ],
+    [
+     "Calliste Green",
+     4.7
     ]
    ]
   }
@@ -112,7 +103,7 @@
  "openers": [
   "Pea Soup Green is dated to 1430, but our 23,781-painting archive finds it in only five."
  ],
- "words": 211,
+ "words": 215,
  "status": "draft",
  "checked": {
   "by": "batch-writer",

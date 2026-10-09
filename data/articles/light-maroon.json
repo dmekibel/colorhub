@@ -1,0 +1,151 @@
+{
+ "slug": "light-maroon",
+ "name": "Light Maroon",
+ "hex": "#A24857",
+ "names": [
+  "Light Maroon"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Light Maroon lightens [[maroon]], and is not to be confused with FireBrick, which Paterson's dictionary separately calls \"a light maroon colour.\"",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Not the same as FireBrick",
+   "body": "This name is the modifier *light* set against the base color [[maroon]], recorded in the xkcd 2010 crowd survey [1]. Paterson's dictionary does use the phrase \"a light maroon colour\" elsewhere, but to describe FireBrick, one of the 140 X11 Color Set names, hex #B22222, a browner red than the #A24857 shown here [2]. The two are unrelated namings that happen to share descriptive words [2]. The ISCC-NBS system's nearest block is \"moderate red,\" 5.1 units away [1]. Nearest on file are [[pomegranate-purple]] and [[light-burgundy]], at 2.6 and 2.9 units [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this shade, as photographed, in 31 of 23,781 paintings, 0.13 percent, rarer than 63 percent of our named colors; within a single canvas it is a distinct area in 17 of them [3]. It peaks in the 1900s, at 0.4 percent of that century's 1,674 paintings, 3.3 times the expected rate, and inside a painting it most often plays an accent across its 17 appearances [3]. The earliest dated match is a 1470 panel by Hans Memling, 540 years before the name's 2010 record; the archive's early centuries are thin, so this is a floor, not a first [3]. In printed English the word \"maroon\" rose fastest in the 1920s, by Google Books counts across all senses of the word, so a color name that is also an everyday word can mislead [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the modifier light applied to the base color maroon",
+   "first_recorded": "2010 (xkcd color survey)",
+   "source": "ColorHub color graph; Paterson, A Dictionary of Colour"
+  },
+  "aka": [],
+  "siblings": [
+   "pomegranate-purple",
+   "light-burgundy",
+   "english-red",
+   "dark-rose"
+  ],
+  "parent": "maroon",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 17,
+  "measured": {
+   "lch": [
+    42.8,
+    39.9,
+    13.8
+   ],
+   "nearest_iscc": [
+    "moderate red",
+    5.1
+   ],
+   "nearest": [
+    [
+     "Pomegranate-Purple",
+     2.6
+    ],
+    [
+     "Light Burgundy",
+     2.9
+    ],
+    [
+     "English Red",
+     3.8
+    ],
+    [
+     "Dark Rose",
+     3.9
+    ]
+   ]
+  },
+  "role_top": {
+   "role": "accent",
+   "pct": 88
+  },
+  "first_seen": {
+   "year": 1470,
+   "painter": "Hans Memling",
+   "years_before_record": 540
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH/Munsell values, ISCC-NBS 1955 crosswalk, xkcd 2010 survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"FireBrick\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed; Google Books Ngram, \"maroon\"",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Paterson's dictionary uses the phrase \"a light maroon colour\" to describe which X11 color?",
+   "choices": [
+    "FireBrick",
+    "Maroon",
+    "English Red",
+    "Dark Rose"
+   ],
+   "answer": "FireBrick",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: FireBrick and Light Maroon share the same hex code.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Inside a painting, which role does Light Maroon most often play?",
+   "choices": [
+    "Accent",
+    "Shadow",
+    "Light",
+    "Mid-tone"
+   ],
+   "answer": "Accent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Paterson's dictionary calls a different X11 color \"a light maroon colour\" — not this one."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified Paterson citation: FireBrick #B22222 described as 'A light maroon colour' in the book."
+  ]
+ },
+ "words": 249
+}

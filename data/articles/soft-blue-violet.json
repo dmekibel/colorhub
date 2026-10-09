@@ -1,0 +1,139 @@
+{
+ "slug": "soft-blue-violet",
+ "name": "Soft Blue-Violet",
+ "hex": "#786FBA",
+ "names": [
+  "Soft Blue-Violet"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Soft Blue-Violet is a muted violet-blue built from modifier grammar, 'soft' plus Blue-Violet, and its hue already sat in Robert Ridgway's 1912 color atlas before anyone called it this name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An old swatch, a modifier name",
+   "body": "Our graph names this color by modifier grammar, 'soft' added to the family word [[blue-violet]] [1]. Ridgway's 1912 nomenclature carried a close match on plate XXIII, hue 55′, and the ISCC-NBS system later classified that swatch in 1955 as block 206, a brilliant violet [2].\n\nOur real nearest look-alikes are [[violet-blue|Violet blue]], clearly more vivid than this muted version, with [[middle-blue-purple]], almost the same hue, sitting a little further out still [3]. Two deeper modifier siblings sit further down the same family: [[deep-soft-blue-violet]] and [[deep-soft-bluish-violet]], both duller and darker than this version [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds only 3 paintings that match this violet-blue, as photographed, with the within-painting lens counting it in just 1 — rarer than 86 percent of the named colors we track [4]. Its one confirmed appearance is in Edvard Munch's 1901 work, where it plays an accent rather than a dominant field of color [4]. That single match is too thin a sample for any claim about century, country or painter beyond this one canvas [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: 'soft' + the family word Blue-Violet; a close swatch sat in Ridgway's 1912 atlas",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library, Soft Blue-Violet entry"
+  },
+  "aka": [],
+  "siblings": [
+   "blue-violet",
+   "violet-blue",
+   "middle-blue-purple"
+  ],
+  "parent": "blue-violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "n_within": 1,
+  "rarer_than_pct": 86,
+  "measured": {
+   "lch": [
+    50.6,
+    43.9,
+    299.1
+   ],
+   "nearest": [
+    [
+     "Violet blue",
+     2.8
+    ],
+    [
+     "Middle Blue Purple",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph node: modifier grammar (data/graph/nodes-s.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 and ISCC-NBS 1955 filings (data/library.json, Soft Blue-Violet)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub Color Graph: look-alike edges (data/graph/edges-s.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Soft Blue-Violet's name follows what grammar?",
+   "choices": [
+    "'soft' + the family word Blue-Violet",
+    "A place name",
+    "A gemstone name",
+    "A painter's signature color"
+   ],
+   "answer": "'soft' + the family word Blue-Violet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a close match to this hue already existed in Ridgway's 1912 color atlas.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our archive, Soft Blue-Violet's one confirmed match is by which painter?",
+   "choices": [
+    "Edvard Munch",
+    "Henri Matisse",
+    "Gustav Klimt",
+    "John Singer Sargent"
+   ],
+   "answer": "Edvard Munch",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A near-match to Soft Blue-Violet already sat in a 1912 color atlas.",
+  "Our archive finds only one confirmed painting with this exact violet-blue."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified as internally consistent with cited ColorHub library/graph/archive data; no book or web source cited for this article's factual claims, no myth-list phrase found, and the claims are already conservatively hedged (undocumented origin, floor-not-first framing, thin-sample caveats)."
+  ]
+ },
+ "words": 201
+}

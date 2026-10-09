@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "The name",
-   "body": "No book in our library records a name at this position before the xkcd color survey of 2010, where the public supplied the plain descriptive phrase \"dark mustard\" [1]. Its origin before that survey is undocumented here [1].\n\nThe nearest ISCC-NBS 1955 block is deep yellow, under 3 CIEDE2000 units away, close enough that the two names describe much the same swatch, and the closest Munsell reading runs near 4.6Y in hue [1]. The nearest named colors on file are [[baby-shit-brown]], [[diarrhea]] and [[baby-poo]], at 2.3, 2.5 and 2.5 ΔE [1]."
+   "body": "No book in our library records a name at this position before the xkcd color survey of 2010, where the public supplied the plain descriptive phrase \"dark mustard\" [1]. Its origin before that survey is undocumented here [1].\n\nThe nearest ISCC-NBS 1955 block is deep yellow, under 3 CIEDE2000 units away, close enough that the two names describe much the same swatch, and the closest Munsell reading runs near 4.6Y in hue [1]. The nearest named colors on file are [[brown-yellow]], [[mustard-brown]] and [[dark-goldenrod]], at 4.7, 5.7 and 5.8 ΔE [1]."
   },
   {
    "id": "field",
@@ -28,10 +28,9 @@
   },
   "aka": [],
   "siblings": [
-   "baby-shit-brown",
-   "diarrhea",
-   "baby-poo",
-   "brown-yellow"
+   "brown-yellow",
+   "mustard-brown",
+   "dark-goldenrod"
   ],
   "parent": "mustard",
   "children": [],
@@ -60,20 +59,12 @@
   "measured": {
    "nearest": [
     [
-     "Baby Shit Brown",
-     2.3
-    ],
-    [
-     "Diarrhea",
-     2.5
-    ],
-    [
-     "Baby Poo",
-     2.5
-    ],
-    [
      "Brown Yellow",
      4.7
+    ],
+    [
+     "Mustard Brown",
+     5.7
     ]
    ]
   }

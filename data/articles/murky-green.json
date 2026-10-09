@@ -1,0 +1,132 @@
+{
+ "slug": "murky-green",
+ "name": "Murky Green",
+ "hex": "#6C7A0E",
+ "names": [
+  "Murky Green"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Murky Green is a dull, dark yellow-green named by a volunteer in the xkcd 2010 crowd color survey, one of thousands of plain-English labels that survey collected.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crowd's plain judgment",
+   "body": "Our library traces this name only to the xkcd 2010 survey; why that volunteer reached for \"murky\" rather than any other word is not recorded [1]. The ISCC-NBS dictionary's nearest block is \"deep yellow green,\" 8.2 units from that block's centre, a loose match [1].\n\nIts nearest named neighbor is [[swamp-green|Swamp Green]], 4.4 units away [2]. [[olive|Olive]] sits further out, about 5.6 units, also duller [2]. Measured in LCH it reads lightness 48, chroma 54, hue 110 degrees, a dark, muddy green [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 46 of 23,781 paintings (22 by the within-painting lens), rarer than 60 percent of the named colors, as photographed [3]. It peaks in the 1800s, found in 12 of the 8,345 paintings we have from that century, 1.3 times the expected rate [3]. Inside a painting it most often plays an accent across its 22 occurrences [3]. The earliest archive match dates to 1513, 497 years before the name's 2010 record; that gap marks a look-alike hue in an aged photograph, not evidence the name itself is old [3]. In print, the phrase \"murky green\" rose fastest in the 2000s and peaked in the 2010s, tracking the survey's own timing rather than any older use [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a plain descriptive judgment, not a material or place",
+   "first_recorded": "2010 (xkcd crowd color survey)",
+   "source": "ColorHub color library (xkcd 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "swamp-green",
+   "olive",
+   "brownish-green",
+   "dirty-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 46,
+  "rank_pct": 60,
+  "peak_century": [
+   1800,
+   1.3
+  ],
+  "role_top": [
+   "accent",
+   55
+  ],
+  "measured": {
+   "lch": [
+    48,
+    54,
+    110
+   ],
+   "nearest_iscc": [
+    "deep yellow green",
+    8.2
+   ],
+   "nearest": [
+    [
+     "Swamp Green",
+     4.4
+    ],
+    [
+     "Olive",
+     5.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes-m.json): xkcd 2010 source, ISCC-NBS block",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges for murky-green (data/graph/edges-m.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py, data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 2010 crowd survey first recorded Murky Green?",
+   "choices": [
+    "xkcd",
+    "Pantone",
+    "RAL",
+    "Maerz and Paul"
+   ],
+   "answer": "xkcd",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the archive's earliest match for Murky Green predates the name's own 2010 record.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Murky Green's earliest archive match, from 1513, predates the name itself by nearly 500 years."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); facts drawn from the graph, library and archive fieldnotes only."
+  ]
+ },
+ "words": 228
+}

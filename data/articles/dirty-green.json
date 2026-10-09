@@ -1,0 +1,115 @@
+{
+ "slug": "dirty-green",
+ "name": "Dirty Green",
+ "hex": "#667E2C",
+ "names": [
+  "Dirty Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dirty Green is a muted, yellowish reading of [[green]], settled on by the crowd-sourced 2010 xkcd color survey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plain modifier for a muddied hue",
+   "body": "The name follows a plain modifier grammar, *dirty* plus [[green]], meaning duller and more yellowed than the plain color; it comes from the xkcd online color survey of 2010 rather than any historical dictionary or plate [1]. Our library also records the exact same hex under the separate name Moss Olive, a duplicate entry from another source [1].\n\nIts closest look-alike on file is [[khaki-green]], about 3.6 units off, with [[military-green]] and [[muddy-green]] a little further out [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This match appears in 0.31% of the 23,781 paintings in our archive (74 paintings, as photographed); the within-painting lens narrows that to 47 [3]. In our archive it is rarer than 51% of the named colors [3]. It peaks in the 1900s, present in 0.6% of the 1,674 paintings we have from that decade (10 paintings), 2.6 times the rate its museums would predict [3]. Inside a painting it most often plays an accent across its 47 appearances by lightness rank within the painting [3]. It is painted most often by John Singer Sargent (4 of 287 works here); no painter stands out against the museums' baseline [3]. It is most over-represented in France, 2.2x expected (19 of 3,443 paintings) [3]. The earliest match dates to 1513, 497 years before the name's 2010 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a muddied, yellowed reading of green",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "Moss Olive (duplicate entry, same hex)"
+  ],
+  "siblings": [
+   "khaki-green",
+   "military-green",
+   "muddy-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 74,
+  "pct_archive": 0.31,
+  "n_within_painting": 47,
+  "pct_within_painting": 0.2,
+  "rank_pct": 49,
+  "painters": [
+   "John Singer Sargent"
+  ],
+  "countries": [
+   "France"
+  ],
+  "name_first_recorded": 2010,
+  "earliest_match_year": 1513
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "xkcd color survey (2010); ColorHub color library duplicate-name record (Moss Olive)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,700 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Dirty Green come from?",
+   "choices": [
+    "The crowd-sourced 2010 xkcd color survey",
+    "Ridgway's 1912 plates",
+    "The ISCC-NBS 1955 system",
+    "A Japanese traditional list"
+   ],
+   "answer": "The crowd-sourced 2010 xkcd color survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dirty Green's exact hex is also recorded under a separate name, Moss Olive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dirty Green has a separate twin name on file, Moss Olive, for the exact same hex."
+ ],
+ "words": 279,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field section used the within-painting-lens count/percent but labeled it 'as photographed' and used a stale archive total; replaced with the correct as-photographed count/percent (23,781-painting archive) and refreshed the decade, role, painter, country and first-seen facts from data/graph/fieldnotes"
+  ]
+ }
+}

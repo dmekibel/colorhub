@@ -1,0 +1,119 @@
+{
+ "slug": "pale-dull-glaucous-blue",
+ "name": "Pale Dull Glaucous-Blue",
+ "hex": "#B6CCCA",
+ "names": [
+  "Pale Dull Glaucous-Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Pale Dull Glaucous-Blue is a pale, slightly green-grey, built by putting the modifiers pale and dull in front of the base color [[glaucous-blue]], glaucous meaning the chalky blue-green bloom seen on grapes, plums and some leaves.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Modifiers on a botanist's word",
+   "body": "Pale Dull Glaucous-Blue stacks two modifier words, pale and dull, in front of the base color [[glaucous-blue]], in the compound-modifier grammar our library uses for names like this one [1]. *Glaucous* is an old botanical and zoological term for the waxy, frosted blue-green bloom on surfaces like a plum's skin or a eucalyptus leaf, and the base color carries that word into the color-naming systems [1]. Robert Ridgway first listed this swatch in his 1912 *Color Standards and Color Nomenclature*, plate XLII, hue 41, tone f, and the Inter-Society Color Council later filed it in the ISCC-NBS 1955 system as block 184 (R) [1].\n\nIts nearest named neighbor is [[opal]], 4.0 units off, almost the same color on screen [2]; [[pale-russian-blue]] sits the same 4.0 units away [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within range of this swatch in 227 of 23,781 paintings, 0.95 percent, as photographed; looking for real coverage inside each painting narrows that to 166 [3]. That makes it more common than 68 percent of the named colors in our library [3]. It most often plays a light across its 166 appearances by lightness rank, so varnish cannot fake the result [3]. Alfred Sisley is its most devoted painter, present in 8 of his 50 works here, 9.0 times the expected rate for the museums those paintings come from [3].\n\nThe earliest match dates to 1445, nearly five hundred years before Ridgway's 1912 plate, a floor and not a first, since the archive's early centuries are thin; it marks a look-alike hue in an aged photograph, not a surviving pigment or dye [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: pale dull + glaucous-blue (glaucous, a chalky bloom on leaves and fruit)",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XLII",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "opal",
+   "pale-russian-blue",
+   "light-glaucous-blue"
+  ],
+  "parent": "glaucous-blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 227,
+  "n_within_painting": 166,
+  "pct_archive": 0.95,
+  "rank_pct": 68,
+  "measured": {
+   "lch": [
+    80,
+    8,
+    191
+   ],
+   "nearest": [
+    [
+     "Opal",
+     4.0
+    ],
+    [
+     "Pale Russian Blue",
+     4.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XLII, hue 41, tone f; ISCC-NBS 1955 block 184 (R)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-p.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"glaucous\" describe?",
+   "choices": [
+    "A chalky blue-green bloom on leaves or fruit",
+    "A Japanese traditional dye",
+    "A Crayola metallic finish",
+    "A Ridgway printing error"
+   ],
+   "answer": "A chalky blue-green bloom on leaves or fruit",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Alfred Sisley paints this color far more often than chance would predict.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Dull Glaucous-Blue borrows a word botanists use for the bloom on a plum's skin."
+ ],
+ "words": 301,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

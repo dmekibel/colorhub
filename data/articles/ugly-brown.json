@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A judgment, not a description",
-   "body": "The 2010 xkcd survey let respondents type any name for a swatch, and a number of them reached for blunt opinions like this one instead of a hue word; who first used it beyond the survey is undocumented [1]. The ISCC-NBS block for the region reads \"light olive\" [1].\n\nOur library also records Khaki Brown as a near-duplicate of this swatch, within rounding of the same color [1]. Its closest standing colors are [[hazel]], 5.0 units away by CIEDE2000 and almost the same, [[spanish-bistre]] at 5.2, duller, and [[poo]] at 5.6, yellower [2]."
+   "body": "The 2010 xkcd survey let respondents type any name for a swatch, and a number of them reached for blunt opinions like this one instead of a hue word; who first used it beyond the survey is undocumented [1]. The ISCC-NBS block for the region reads \"light olive\" [1].\n\nOur library also records Khaki Brown as a near-duplicate of this swatch, within rounding of the same color [1]. Its closest standing colors are [[hazel]], 5.0 units away by CIEDE2000 and almost the same, [[spanish-bistre]] at 5.2, duller, and [[olive]] at 6.2, duller still [2]."
   },
   {
    "id": "field",
@@ -32,7 +32,7 @@
   "siblings": [
    "hazel",
    "spanish-bistre",
-   "poo"
+   "olive"
   ],
   "parent": "brown",
   "children": [],
@@ -58,8 +58,8 @@
      5.2
     ],
     [
-     "Poo",
-     5.6
+     "Olive",
+     6.2
     ]
    ]
   }
@@ -112,7 +112,7 @@
  "openers": [
   "Ugly Brown is a judgment, not a hue word: a crowd respondent's opinion from the 2010 xkcd survey."
  ],
- "words": 189,
+ "words": 190,
  "status": "checked",
  "checked": {
   "by": "checker",

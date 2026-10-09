@@ -1,0 +1,125 @@
+{
+ "slug": "patina-green",
+ "name": "Patina Green",
+ "hex": "#327662",
+ "names": [
+  "Patina Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Patina Green is a deep, slightly blue-leaning green named for the oxidized coating that forms on copper and bronze, and it is also RAL 6000, a 1927 German industrial color standard.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A patina, standardized",
+   "body": "Patina is the thin, naturally formed surface layer, often green, that copper and bronze develop as they weather [1]. RAL set its version as RAL 6000, Patina Green, one of its earliest industrial color standards, founded in Germany in 1927 [1]. The 1955 ISCC-NBS system lists the same area as block 135, \"light yellowish green,\" about 2.4 units from this exact shade [1].\n\nThe nearest named colors on file are [[deep-jade]], [[light-danube-green]], [[tropical-rainforest]] and [[blue-green]], at 3, 3.3, 3.5 and 4.2 ΔE [1]. The closest name in the Maerz and Paul dictionary dates to about 1894, three decades before RAL's standard [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, this green appears in only 40, about 0.17 percent, rarer than 64 percent of our named colors [2]. It peaks in the 1800s, in 11 of 8,345 paintings, at 1.8 times the expected rate for that century, and it is most over-represented in paintings from France, at 2.7 times the expected rate [2]. Inside a painting it most often plays a mid-tone rather than a light or a shadow [2].\n\nThe earliest match is a 1728 still life by [[painter:jan-van-huysum|Jan van Huysum]], about two centuries before RAL's 1927 standard, so that early hit is a look-alike hue in an aged photograph and not evidence of any real patina on the canvas, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "patina, the oxidized surface of weathered copper and bronze",
+   "first_recorded": "RAL, 1927 (RAL 6000)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "deep-jade",
+   "light-danube-green",
+   "tropical-rainforest",
+   "blue-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 40,
+  "pct_present": 0.17,
+  "rarer_than_pct": 64,
+  "role": "mid-tone, 27% of 15 matched paintings",
+  "measured": {
+   "lch": [
+    45.0,
+    27.1,
+    170.3
+   ],
+   "nearest": [
+    [
+     "Deep jade",
+     3.0
+    ],
+    [
+     "Light Danube Green",
+     3.3
+    ]
+   ]
+  },
+  "iscc": {
+   "block": 135,
+   "name": "moderate green",
+   "de": 2.4
+  },
+  "first_record": {
+   "year": 1927,
+   "source": "ral"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: RAL 6000 (1927); ISCC-NBS 1955 block 135; Maerz & Paul 1930, first recorded c. 1894, plate 19 B 7",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Patina Green (n=40)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"patina\" refer to in this color's name?",
+   "choices": [
+    "The weathered surface coating on copper and bronze",
+    "A green mineral",
+    "A tropical plant",
+    "A dye-vat color"
+   ],
+   "answer": "The weathered surface coating on copper and bronze",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Patina Green is the only name our library files in ISCC-NBS block 135.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "ISCC-NBS block 135 is crowded enough to hold Patina Green alongside Egyptian Green, Lizard Green and Spruce Green.",
+  "Patina Green is RAL's standardized version of the real green crust that forms on weathered copper."
+ ],
+ "words": 271,
+ "status": "draft",
+ "checked": {
+  "by": "",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

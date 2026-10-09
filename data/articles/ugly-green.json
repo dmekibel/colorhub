@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A judgment, not a description",
-   "body": "The 2010 xkcd survey let respondents type any name for a swatch, and a number of them reached for blunt opinions like this one instead of a hue word; who first used it beyond the survey is undocumented [1]. The ISCC-NBS block for the region reads \"strong yellow green\" [1].\n\nOur library also records Avocado as a near-duplicate of this swatch, within rounding of the same color [1]. Its closest standing colors are [[dark-yellow-green]], 2.8 units away by CIEDE2000 and almost the same, [[baby-shit-green]] at 3.1, also almost the same, and [[bright-moss]] at 3.6, duller [2]."
+   "body": "The 2010 xkcd survey let respondents type any name for a swatch, and a number of them reached for blunt opinions like this one instead of a hue word; who first used it beyond the survey is undocumented [1]. The ISCC-NBS block for the region reads \"strong yellow green\" [1].\n\nOur library also records Avocado as a near-duplicate of this swatch, within rounding of the same color [1]. Its closest standing colors are [[dark-yellow-green]], 2.8 units away by CIEDE2000 and almost the same, [[bright-moss]] at 3.6, also almost the same, and [[avocado-green]] at 5.6, duller [2]."
   },
   {
    "id": "field",
@@ -31,8 +31,8 @@
   ],
   "siblings": [
    "dark-yellow-green",
-   "baby-shit-green",
-   "bright-moss"
+   "bright-moss",
+   "avocado-green"
   ],
   "parent": "green",
   "children": [],
@@ -54,12 +54,12 @@
      2.8
     ],
     [
-     "Baby Shit Green",
-     3.1
+     "Bright moss",
+     3.6
     ],
     [
-     "Bright Moss",
-     3.6
+     "Avocado Green",
+     5.6
     ]
    ]
   }
@@ -112,7 +112,7 @@
  "openers": [
   "Ugly Green is a judgment, not a hue word: a crowd respondent's opinion from the 2010 xkcd survey."
  ],
- "words": 195,
+ "words": 194,
  "status": "checked",
  "checked": {
   "by": "checker",

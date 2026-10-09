@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A crowd name with old neighbors",
-   "body": "No dictionary or paint-brand plate carries this exact compound; it is modifier grammar, first written down in the 2010 xkcd survey [1]. Its nearest named neighbors are startlingly close: [[baby-poo|Baby Poo]], 2.3 units away, and [[baby-shit-brown|Baby Shit Brown]], 2.4 units away, both read as almost the same color [2]. [[dark-mustard|Dark Mustard]] and plain [[mustard]] sit further out, both darker or lighter by comparison [2]."
+   "body": "No dictionary or paint-brand plate carries this exact compound; it is modifier grammar, first written down in the 2010 xkcd survey [1]. Its nearest named neighbors are startlingly close: [[ocher|Ocher]], 3.1 units away, and [[pyrite-yellow|Pyrite Yellow]], 5.0 units away, both read as close to this exact color [2]. [[dark-mustard|Dark Mustard]] and plain [[mustard]] sit further out, both darker or lighter by comparison [2]."
   },
   {
    "id": "field",
@@ -28,8 +28,10 @@
   },
   "aka": [],
   "siblings": [
-   "baby-poo",
-   "baby-shit-brown"
+   "ocher",
+   "pyrite-yellow",
+   "dark-mustard",
+   "mustard"
   ],
   "parent": "yellow",
   "children": [],
@@ -50,12 +52,12 @@
    ],
    "nearest": [
     [
-     "Baby Poo",
-     2.3
+     "Ocher",
+     3.1
     ],
     [
-     "Baby Shit Brown",
-     2.4
+     "Pyrite Yellow",
+     5.0
     ]
    ]
   }
@@ -114,5 +116,5 @@
   "date": "2026-10-08",
   "issues": []
  },
- "words": 228
+ "words": 227
 }

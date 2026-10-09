@@ -1,0 +1,125 @@
+{
+ "slug": "faded-blue",
+ "name": "Faded Blue",
+ "hex": "#658CBB",
+ "names": [
+  "Faded Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Faded Blue pairs the modifier \"faded\" with plain blue, naming a washed-out, greyed blue that books tie to monks' habits and to work clothes worn in protest.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on blue, with older echoes",
+   "body": "Faded Blue pairs \"faded\" with [[blue]], the xkcd 2010 color-naming survey's term for this washed-out, greyed blue [1]. The exact compound is the survey's; the words themselves are older. Pastoureau writes that Cistercian and Benedictine monks, unable to afford a solid black for their habits, often wore \"more or less faded blue\" instead [2]. Balfour-Paul notes that faded blue work clothes, most famously blue denim jeans, were later worn deliberately as an anti-establishment statement [3]. Its nearest named look-alikes in our library are [[clear-cadet-blue]], [[glaucous]] and [[dusty-blue]] [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this blue in 0.56 percent of the 23,781 paintings we have, 134 of them, as photographed; the within-painting lens finds it in 86 [5]. That is more common than 57 percent of the named colors in our archive [5]. Inside a painting it most often plays an accent across the 86 paintings where it appears [5]. The earliest match in our archive is dated 1426, nearly six centuries before the name's own earliest record of 2010; the archive's early centuries are thin, so this is a floor, not a first [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the modifier \"faded\" plus blue",
+   "first_recorded": "2010 (xkcd color-naming survey)",
+   "source": "ColorHub color library (xkcd 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "clear-cadet-blue",
+   "glaucous"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 134,
+  "measured": {
+   "lch": [
+    57.2,
+    28.8,
+    268.7
+   ],
+   "nearest": [
+    [
+     "Clear Cadet Blue",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 color-naming survey; computed LCH and nearest named colors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, White, p. 142",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 17",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library: computed look-alike colors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Balfour-Paul say faded blue work clothes, like denim jeans, came to represent?",
+   "choices": [
+    "An anti-establishment statement",
+    "Royal mourning",
+    "Religious purity",
+    "Military rank"
+   ],
+   "answer": "An anti-establishment statement",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pastoureau writes that some monks wore faded blue instead of true black.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Some monks wore faded blue instead of true black, since a solid black dye cost too much."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "words": 206
+}

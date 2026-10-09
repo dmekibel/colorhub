@@ -1,0 +1,110 @@
+{
+ "slug": "very-light-green",
+ "name": "Very Light Green",
+ "hex": "#D1FFBD",
+ "names": [
+  "Very Light Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Very Light Green is the modifier \"very light\" applied to [[green]], filed by the ISCC-NBS system in 1955 and again by the xkcd crowd survey in 2010.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pale modifier on green",
+   "body": "The name is built from the modifier \"very light\" plus the base color [[green]], not a separate coined word [1]. Our library places it in the ISCC-NBS dictionary's 1955 block 148, and it was recorded again, independently, in the xkcd 2010 crowd color survey [1][2]. The library also lists two near-duplicate names at the same hex, \"Very Pale Green\" (0.4 units off) and \"Washed Out Green\" (2.2 units off) [1].\n\nIts nearest look-alikes are [[tea-green]] (4.8 units, duller and darker), [[light-grey-green]] (6.4, darker) and [[celery]] (6.6, more vivid) [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive holds this color across at least one percent of its canvas, as photographed; that describes the limits of our archive, not the color itself [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier (\"very light\") on the base color green",
+   "first_recorded": "1955 (ISCC-NBS); 2010 (xkcd)",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Very Pale Green",
+   "Washed Out Green"
+  ],
+  "siblings": [
+   "tea-green",
+   "light-grey-green",
+   "celery"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "iscc_nbs_block": 148
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 148 entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 crowd color survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub look-alike graph (data/graph/edges-v.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Very Light Green's name is built from which two parts?",
+   "choices": [
+    "A modifier plus the base color green",
+    "A place name plus green",
+    "A painter's name plus green",
+    "A plant name plus green"
+   ],
+   "answer": "A modifier plus the base color green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Very Light Green appears in a large share of our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Very Light Green was filed by the ISCC-NBS dictionary in 1955, decades before the xkcd survey named it again."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 151
+}

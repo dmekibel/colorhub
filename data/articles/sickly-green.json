@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A feeling, not a thing",
-   "body": "The 2010 xkcd survey gathered 1,058,212 free-text color names from 127,825 participants shown random hex values, and Munroe published roughly the top thousand that emerged [1]. \"Sickly\" describes an association, the color of nausea or illness, rather than naming a dye, mineral or place, putting it with other body-reaction names like [[barf-green|Barf Green]] and [[puke-green|Puke Green]] from the same survey [1]. By our look-alike data those two are in fact its nearest colors, Barf Green 2.2 units away and Puke Green 2.6, both read as almost the same [2].\n\nNo dictionary, standard or paint company lists this name; the 2010 survey is its only documented appearance [1]. [[avocado-green|Avocado Green]] sits a little further off, 3.3 units away and also read as almost the same, showing how this hue sits between an edible association and a sickened one depending on which survey respondent you ask [1][2]."
+   "body": "The 2010 xkcd survey gathered 1,058,212 free-text color names from 127,825 participants shown random hex values, and Munroe published roughly the top thousand that emerged [1]. \"Sickly\" describes an association, the color of nausea or illness, rather than naming a dye, mineral or place [1]. By our look-alike data its nearest colors are [[avocado|Avocado]], 2.5 units away, and [[avocado-green|Avocado Green]], 3.3 units away, both read as almost the same [2].\n\nNo dictionary, standard or paint company lists this name; the 2010 survey is its only documented appearance [1]. [[pea-soup-green|Pea Soup Green]] sits a little further off, 3.8 units away, another food name crowded into the same yellow-green corner [1][2]."
   },
   {
    "id": "field",
@@ -28,9 +28,9 @@
   },
   "aka": [],
   "siblings": [
-   "barf-green",
-   "puke-green",
+   "avocado",
    "avocado-green",
+   "pea-soup-green",
    "dark-lime"
   ],
   "parent": null,
@@ -49,8 +49,12 @@
    ],
    "nearest": [
     [
-     "Barf Green",
-     2.2
+     "Avocado",
+     2.5
+    ],
+    [
+     "Avocado Green",
+     3.3
     ]
    ]
   }
@@ -103,7 +107,7 @@
  "openers": [
   "Sickly Green names a feeling, not a thing, and our archive finds only 3 paintings close to it."
  ],
- "words": 276,
+ "words": 240,
  "status": "checked",
  "checked": {
   "by": "batch-writer",
