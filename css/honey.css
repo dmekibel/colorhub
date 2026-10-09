@@ -170,3 +170,13 @@
 .mx-floor{position:fixed;left:0;right:0;z-index:0;pointer-events:none}
 .screen.mx-hold{visibility:hidden}
 .mx.mx-block{pointer-events:auto}
+
+/* ============================================================ landscape lane (2026-10-09, CSS only -- no JS
+   touched here): the explorer's own top bar and caption/button bar sit flush against the side edges on a
+   rotated phone (12px fixed padding), which is exactly where a landscape notch now is. Adds the same
+   var(--left)/var(--right) safe-area tokens (app.css) the Rooms corners use. Scoped to orientation:landscape
+   only -- portrait keeps its existing 12px. */
+@media (orientation:landscape){
+  .cx-top{padding-left:calc(12px + var(--left));padding-right:calc(12px + var(--right))}
+  .hm-search{left:max(calc(12px + var(--left)),calc(50% - 258px));right:max(calc(12px + var(--right)),calc(50% - 258px))}
+}

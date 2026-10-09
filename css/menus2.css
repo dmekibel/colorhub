@@ -85,7 +85,7 @@ body.stem-open .screen,body.stem-open .hc,body.stem-open .hm-stage{filter:none}
 .rooms-stem .rm-art{width:50px;height:50px;box-shadow:none;position:relative;transition:transform var(--dur-0) ease-out}
 .rooms-stem .rm-label{display:flex;flex-direction:column;gap:3px;min-width:0}
 .rooms-stem .rm-label b{font:400 22px/1 var(--serif);letter-spacing:-.01em;color:var(--ink);text-shadow:none;white-space:nowrap}
-.rooms-stem .rm-label em{margin:0;font:italic 400 14px/1.15 var(--serif);color:var(--soft);text-shadow:none;white-space:nowrap;
+.rooms-stem .rm-label em{margin:0;font:italic 400 17px/1.15 var(--serif);color:var(--soft);text-shadow:none;white-space:nowrap;
   max-width:calc(100vw - 150px);overflow:hidden;text-overflow:ellipsis}
 /* the room you're in: a paper ring on its picture */
 .rooms-stem .rm-bubble.cur .rm-art{box-shadow:0 0 0 2px var(--surface-2),0 0 0 3.5px var(--paper)}
@@ -119,7 +119,7 @@ body.stem-open .screen,body.stem-open .hc,body.stem-open .hm-stage{filter:none}
 /* the header: title-2 left, at most two solid 44 px icon buttons right */
 .mn-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:0 0 8px}
 .mn-head .mn-title{margin:6px 0 0}
-.mn-note{font:italic 400 16px/1.3 var(--serif);color:var(--soft);margin:4px 0 0}
+.mn-note{font:italic 400 17px/1.3 var(--serif);color:var(--soft);margin:4px 0 0}
 .mn-acts{display:flex;gap:8px;flex:none}
 .mn-icon{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);color:var(--ink);
   border:1px solid rgba(236,232,223,.1);transition:transform var(--dur-0) ease-out,background var(--dur-1)}
@@ -129,7 +129,7 @@ body.stem-open .screen,body.stem-open .hc,body.stem-open .hm-stage{filter:none}
 /* quiet rows, in groups with one note each; hairlines between, never boxes */
 .mn-group{margin:0 0 18px}
 .mn-group:last-child{margin-bottom:0}
-.mn-gnote{font:italic 400 16px/1.3 var(--serif);color:var(--soft);margin:0 0 2px}
+.mn-gnote{font:italic 400 17px/1.3 var(--serif);color:var(--soft);margin:0 0 2px}
 .mn-row{display:flex;align-items:center;gap:14px;width:100%;min-height:60px;padding:8px 0;border:0;border-bottom:1px solid var(--rule);
   background:none;color:var(--ink);text-align:left;font:inherit;-webkit-tap-highlight-color:transparent;transition:opacity var(--dur-0) ease-out}
 .mn-group>.mn-row:first-child,.mn-gnote+.mn-row{border-top:1px solid var(--rule)}
@@ -140,7 +140,7 @@ body.stem-open .screen,body.stem-open .hc,body.stem-open .hm-stage{filter:none}
 .mn-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
 .mn-txt b{font:400 21px/1.12 var(--serif);letter-spacing:-.005em;color:var(--ink)}
 .mn-txt small{font:400 13.5px/1.35 var(--sans);color:var(--soft)}
-.mn-val{flex:none;font:italic 400 16px/1.2 var(--serif);color:var(--soft);max-width:44%;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mn-val{flex:none;font:italic 400 17px/1.2 var(--serif);color:var(--soft);max-width:44%;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .mn-chev{flex:none;display:grid;color:var(--faint)}.mn-chev svg{width:16px;height:16px}
 .mn-row.danger .mn-txt b,.mn-row.danger .mn-lead{color:var(--bad)}
 /* the switch: an opaque track, a paper thumb when on */
@@ -166,7 +166,7 @@ body.stem-open .screen,body.stem-open .hc,body.stem-open .hm-stage{filter:none}
 .sheet .search{height:48px;padding:0 16px;margin:0 0 16px;border:1px solid var(--rule);border-radius:var(--r-pill);background:var(--surface-2);color:var(--soft)}
 .sheet .search svg{flex:none;width:18px;height:18px}
 .sheet .search input{font:400 20px/1 var(--serif)}
-.sheet .search+#xresults>.fine{font:italic 400 16px/1.4 var(--serif);color:var(--soft);margin-top:4px}
+.sheet .search+#xresults>.fine{font:italic 400 17px/1.4 var(--serif);color:var(--soft);margin-top:4px}
 .sheet .search+#xresults>.fine svg{width:15px;height:15px;vertical-align:-2px}
 
 /* empty states (DESIGN-SYSTEM §10): one title-3 line, one small line, one quiet action */
@@ -208,12 +208,12 @@ html.booth .toast{background:var(--booth-2);box-shadow:none;border-color:var(--b
 .ym-n{font:400 76px/.82 var(--serif);letter-spacing:-.04em;color:var(--ink)}
 .ym-of{display:flex;flex-direction:column;gap:4px;padding-bottom:4px;min-width:0}
 .ym-of .note{color:var(--ink);font-size:18px}
-.ym-of small{font:italic 400 15px/1.3 var(--serif);color:var(--soft)}
+.ym-of small{font:italic 400 17px/1.3 var(--serif);color:var(--soft)}
 .ym-figs{display:grid;grid-template-columns:repeat(3,1fr);margin-top:22px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
 .ym-figs>div{display:flex;flex-direction:column;gap:6px;padding:14px 0 12px}
 .ym-figs>div+div{padding-left:14px;border-left:1px solid var(--rule)}
 .ym-figs b{font:400 20px/1 var(--mono);color:var(--ink)}
-.ym-figs span{font:italic 400 15px/1.2 var(--serif);color:var(--soft)}
+.ym-figs span{font:italic 400 17px/1.2 var(--serif);color:var(--soft)}
 .ym-links{display:flex;flex-wrap:wrap;gap:4px 22px;margin-top:6px}
 .ym-sec{margin-top:var(--s6)}
 .ym-h{font:400 30px/1.02 var(--serif);letter-spacing:-.02em;margin:0 0 12px}
@@ -243,7 +243,7 @@ html.booth .toast{background:var(--booth-2);box-shadow:none;border-color:var(--b
 .ym-pal-c i{flex:1;background:var(--c)}
 .ym-bars{display:flex;flex-direction:column;gap:8px;margin:0 0 14px}
 .ym-bars>div{display:grid;grid-template-columns:76px 1fr 46px;align-items:center;gap:10px}
-.ym-bars span{font:italic 400 15px/1 var(--serif);color:var(--soft)}
+.ym-bars span{font:italic 400 17px/1 var(--serif);color:var(--soft)}
 .ym-bars i{height:6px;border-radius:3px;width:var(--w);background:var(--c)}
 .ym-bars b{font:400 13px/1 var(--mono);color:var(--soft);text-align:right}
 /* a 2-column grid of real-size cards (David, 2026-10-09: "your photos look small" -- the old row was 92px
@@ -256,7 +256,7 @@ html.booth .toast{background:var(--booth-2);box-shadow:none;border-color:var(--b
 .ym-ph-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ym-ph-band{display:flex;height:10px;border-radius:0 0 var(--r-1) var(--r-1);overflow:hidden}
 .ym-ph-band i{background:var(--c)}
-.ym-ph small{margin-top:6px;font:italic 400 14px/1.2 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ym-ph small{margin-top:6px;font:italic 400 17px/1.2 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ym-lately{display:flex;flex-wrap:wrap;gap:8px}
 .ym-late{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:4px 14px 4px 4px;border-radius:var(--r-pill);background:var(--surface-2);color:var(--ink);text-decoration:none;font:400 17px/1 var(--serif)}
 .ym-late i{width:30px;height:30px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
@@ -385,3 +385,23 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--ink);outline-of
 .mn-txt small{font:400 14px/1.35 var(--sans)}
 .mn-val{font:400 15px/1.2 var(--sans);font-style:normal;font-variant-numeric:tabular-nums}
 .mn-row.danger .mn-lead{background:rgba(240,154,134,.12)}
+
+/* ============================================================ landscape lane (2026-10-09): the notch sits on
+   the LEFT or RIGHT edge once the phone is rotated, not the top. Every surface that pins itself to the side
+   (the Rooms corners, the stem they raise, a bottom sheet's own gutter, the toast) now adds var(--left)/
+   var(--right) (app.css) on top of its usual fixed offset, so nothing sits under the sensor housing. Portrait
+   is untouched: those vars are 0px there. Scoped to orientation:landscape only, so nothing here changes the
+   portrait look David already approved. */
+@media (orientation:landscape){
+  .corner.l{left:calc(16px + var(--left))}
+  .corner.r{right:calc(16px + var(--right))}
+  .rooms-stem .rm-bubble{left:calc(12px + var(--left) + var(--x,0px))}
+  .rooms-stem.hm-do-stem .rm-bubble{left:auto;right:calc(12px + var(--right) + var(--x,0px))}
+  .sheet{padding-left:calc(var(--g) + var(--left));padding-right:calc(var(--g) + var(--right))}
+  .room-sheet>.screen{padding-left:calc(var(--g) + var(--left));padding-right:calc(var(--g) + var(--right))}
+  .toast{max-width:calc(100vw - 32px - var(--left) - var(--right))}
+  /* a bottom sheet on a short landscape screen (390-440px tall) shouldn't climb to 88% of the whole viewport --
+     leave the map/page behind it visible, same "side panel, not a near-full-screen slab" ask as the map's own
+     Colors/Arrange sheet already follows (css/home.css .hm-sheet-panel) */
+  .sheet:not(.hm-sheet-panel):not(.ss-full){max-height:min(84dvh,420px)}
+}

@@ -14,7 +14,7 @@
 .ls-prev i{aspect-ratio:1;border-radius:6px;animation:lsIn .28s var(--ease,ease) both;animation-delay:calc(var(--k) * 12ms);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
 .ls-prev i:first-child{outline:2px solid var(--ink,#ECE8DF);outline-offset:2px}
 @keyframes lsIn{from{transform:scale(.6);opacity:0}}
-.ls-names{font:italic 400 16px/1.35 var(--serif);color:var(--soft);margin:10px 0 4px;min-height:44px;text-wrap:pretty}
+.ls-names{font:italic 400 17px/1.35 var(--serif);color:var(--soft);margin:10px 0 4px;min-height:44px;text-wrap:pretty}
 .ls-say{min-height:72px;margin:10px 0 6px}.ls-say .ls-names{min-height:0;margin:0}
 .ls-why{font:400 15px/1.35 var(--sans);color:var(--soft);margin:6px 0 0;text-wrap:pretty}.ls-why:empty{display:none}
 .ls-slide{display:grid;grid-template-columns:92px 1fr 72px;align-items:center;gap:12px;min-height:52px}
@@ -22,7 +22,7 @@
 .ls-sl-t{font:400 18px/1.1 var(--serif);color:var(--ink)}
 .ls-sl-v{font:400 18px/1 var(--serif);color:var(--ink);text-align:right;white-space:nowrap}
 .ls-slide input{width:100%;height:44px;margin:0;accent-color:var(--paper,#EFEBE3);touch-action:pan-y}
-.ls-closehint{font:italic 400 15px/1.3 var(--serif);color:var(--soft);margin:-6px 0 6px 104px}
+.ls-closehint{font:italic 400 17px/1.3 var(--serif);color:var(--soft);margin:-6px 0 6px 104px}
 .ls-go{display:flex;gap:10px;margin-top:16px}
 .ls-go .pr-primary{flex:1;width:auto}
 .ls-look{flex:none;display:flex;align-items:center;gap:8px;height:58px;padding:0 22px;border-radius:999px;background:var(--surface-2,#1F1D18);border:1px solid rgba(236,232,223,.22);color:var(--ink);font:400 21px/1 var(--serif)}
@@ -72,7 +72,7 @@
 .ls-pt-t b{font:400 18px/1.15 var(--serif);color:var(--ink)}
 .ls-pt-c{display:flex;align-items:center;gap:3px;margin-top:4px}
 .ls-pt-c i{width:18px;height:18px;border-radius:4px;background:var(--c)}
-.ls-pt-c em{font:italic 400 14px/1 var(--serif);color:var(--soft);margin-left:6px}
+.ls-pt-c em{font:italic 400 17px/1 var(--serif);color:var(--soft);margin-left:6px}
 .ls-car{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(-1 * var(--pr-g,20px));padding:0 var(--pr-g,20px);scrollbar-width:none}
 .ls-card{flex:none;width:calc(100% - 28px);min-height:min(62vh,520px);scroll-snap-align:center;border-radius:var(--r-3,22px);background:var(--c);padding:18px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px}
 .ls-card b{font-family:var(--serif);font-weight:400;line-height:1;letter-spacing:-.02em}
@@ -85,13 +85,13 @@
 .ls-prog i{flex:1;height:8px;border-radius:3px;background:rgba(0,0,0,.22);position:relative;overflow:hidden}
 .ls-prog i::after{content:"";position:absolute;inset:0;background:var(--c);transform-origin:left;transform:scaleX(var(--lv,0));transition:transform .45s var(--spring,cubic-bezier(.3,1.4,.5,1))}
 .ls-prog i.done{box-shadow:0 0 0 1.5px #fff}
-.ls-combo{flex:none;opacity:0;transition:opacity .2s;display:flex;align-items:baseline;gap:4px;min-width:64px;justify-content:flex-end;color:var(--soft);font:italic 400 14px/1 var(--serif)}
+.ls-combo{flex:none;opacity:0;transition:opacity .2s;display:flex;align-items:baseline;gap:4px;min-width:64px;justify-content:flex-end;color:var(--soft);font:italic 400 17px/1 var(--serif)}
 .ls-combo b{font:400 20px/1 var(--mono);font-style:normal;color:var(--ink);transition:transform .2s}
 .ls-combo.tick b{animation:lsTick .32s var(--spring,ease)}
 .ls-combo.hot b{color:#FFD58A}
 .ls-combo.fire b{color:#FF9E7A;text-shadow:0 0 12px rgba(255,140,90,.55)}
 @keyframes lsTick{40%{transform:scale(1.45)}}
-.ls-status{display:flex;align-items:center;gap:10px;justify-content:center;min-height:24px;margin:0;font:italic 400 15px/1.2 var(--serif);color:var(--soft)}
+.ls-status{display:flex;align-items:center;gap:10px;justify-content:center;min-height:24px;margin:0;font:italic 400 17px/1.2 var(--serif);color:var(--soft)}
 .ls-status .pr-code{font-size:13px;font-style:normal;color:var(--ink)}
 .ls-pop{opacity:0;font:400 15px/1 var(--serif);font-style:normal;padding:5px 10px;border-radius:999px;background:var(--paper,#EFEBE3);color:var(--paper-ink,#141311)}
 .ls-pop.go{animation:lsPop 1.6s var(--ease,ease) both}
@@ -115,7 +115,7 @@
 .ls-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
 .ls-stats div{padding:12px;border-radius:var(--r-2,14px);background:rgba(0,0,0,.18);display:flex;flex-direction:column;gap:6px}
 .ls-stats b .pr-code{font-size:22px;color:var(--ink)}
-.ls-stats span{font:italic 400 14px/1.2 var(--serif);color:var(--soft)}
+.ls-stats span{font:italic 400 17px/1.2 var(--serif);color:var(--soft)}
 .ls-chips{display:flex;flex-wrap:wrap;gap:6px}
 .ls-chip{display:flex;align-items:center;gap:8px;min-height:40px;padding:0 14px 0 6px;border-radius:999px;background:rgba(0,0,0,.18);color:var(--ink);font:400 16px/1 var(--serif)}
 .ls-chip i{width:28px;height:28px;border-radius:50%;background:var(--c)}
@@ -143,13 +143,13 @@
 .ls-pace{margin-top:12px}
 .ls-pace .pr-rail{gap:6px}
 .ls-pace .pr-chip{padding:0 13px;font-size:17px}
-.ls-pace-say{font:italic 400 15px/1.35 var(--serif);color:var(--soft);margin:8px 0 0;min-height:21px;text-wrap:pretty}
+.ls-pace-say{font:italic 400 17px/1.35 var(--serif);color:var(--soft);margin:8px 0 0;min-height:21px;text-wrap:pretty}
 /* a Meet card: the color fills the stage, its name sits on it; the difference line and Next below */
 .ls-meet{gap:0}
 .ls-meet-sw{flex:1;min-height:200px;border-radius:var(--r-3,22px);background:var(--c);display:flex;flex-direction:column;justify-content:space-between;padding:18px 20px 20px;
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);animation:lsMeetIn .42s var(--spring,cubic-bezier(.3,1.3,.5,1)) both;margin-top:8px}
 @keyframes lsMeetIn{from{opacity:0;transform:translateY(14px) scale(.97)}}
-.ls-meet-tag{align-self:flex-start;font:italic 400 16px/1 var(--serif);padding:6px 11px;border-radius:999px;background:var(--paper,#EFEBE3);color:var(--paper-ink,#141311)}
+.ls-meet-tag{align-self:flex-start;font:italic 400 17px/1 var(--serif);padding:6px 11px;border-radius:999px;background:var(--paper,#EFEBE3);color:var(--paper-ink,#141311)}
 .ls-meet.again .ls-meet-tag{background:var(--paper,#EFEBE3);color:var(--paper-ink,#141311)}
 .ls-meet-name{display:flex;flex-direction:column;gap:8px;animation:lsMeetName .5s .1s var(--ease,ease) both}
 @keyframes lsMeetName{from{opacity:0;transform:translateY(8px)}}
@@ -188,6 +188,14 @@
 /* a color set aside for tomorrow: its segment dims */
 .ls-prog i.aside{opacity:.4}
 @media (max-width:360px){.ls-meet-n{font-size:46px}.ls-mp-half .ls-meet-n{font-size:25px}.ls-meet-line{font-size:16px}}
+/* landscape lane (2026-10-09): the Study card already flexes to whatever height the screen's own flex column
+   gives it (flex:1), but on a ~390-440px-tall rotated phone that's little enough that the name and Next both
+   need a smaller floor than the 200px portrait one, so Next never has to be scrolled to. */
+@media (orientation:landscape){
+  .ls-meet-sw,.ls-mp{min-height:140px}
+  .ls-meet-n{font-size:40px}
+  .ls-mp-half .ls-meet-n{font-size:24px}
+}
 @media (prefers-reduced-motion:reduce){.ls-meet-sw,.ls-meet-name,.ls-meet-line,.ls-mp,.ls-mp-half{animation:none!important}}
 .pr-shot .ls-meet-sw,.pr-shot .ls-meet-name,.pr-shot .ls-meet-line,.pr-shot .ls-mp,.pr-shot .ls-mp-half{animation:none}
 

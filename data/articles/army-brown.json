@@ -7,7 +7,7 @@
  ],
  "tier": "standard",
  "depth": "short",
- "lede": "Army Brown is a medium, warm brown recorded by Maerz and Paul in 1912, and among the most common colors in our entire painting archive.",
+ "lede": "Army Brown is a medium, warm brown, recorded in Maerz and Paul's 1930 dictionary as first used in 1912, and among the most common colors in our entire painting archive.",
  "sections": [
   {
    "id": "name",
@@ -113,7 +113,7 @@
  "openers": [
   "Nearly 9 paintings in 100 in our archive carry this brown, far more than most named colors."
  ],
- "words": 244,
+ "words": 249,
  "status": "checked",
  "checked": {
   "by": "checker",

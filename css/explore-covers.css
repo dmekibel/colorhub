@@ -33,7 +33,7 @@
 .xp-flat-label[data-ink="dark"]{color:#141311}
 .xp-flat-label[data-ink="light"]{color:#fff}
 .xp-broken{font-size:30px;text-shadow:0 1px 12px rgba(0,0,0,.35)}
-.xp-broken small{display:block;margin-top:8px;font:italic 400 16px/1.3 var(--serif);letter-spacing:0;color:rgba(255,255,255,.82)}
+.xp-broken small{display:block;margin-top:8px;font:italic 400 17px/1.3 var(--serif);letter-spacing:0;color:rgba(255,255,255,.82)}
 /* Saved: a mosaic of what you've kept, or a quiet heart when there's nothing yet */
 .xp-mosaic{position:absolute;inset:0;display:grid;grid-template-columns:repeat(var(--cols,3),1fr);grid-auto-rows:1fr;gap:2px;background:var(--tint,var(--ground))}
 .xp-mosaic i{display:block}

@@ -80,11 +80,11 @@
 .oo-dt em{font-style:normal;font-size:13.5px;color:var(--soft)}
 .oo-eyeline{display:flex;flex-direction:column;gap:6px;width:100%;margin-top:14px;padding:14px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);text-align:left}
 .oo-eyeline span{font:italic 400 17px/1.35 var(--serif);color:var(--ink)}
-.oo-eyeline b{display:flex;align-items:center;gap:4px;font:italic 400 15px/1 var(--serif);color:var(--soft)}
+.oo-eyeline b{display:flex;align-items:center;gap:4px;font:italic 400 17px/1 var(--serif);color:var(--soft)}
 .oo-eyeline svg{width:14px;height:14px}
 .oo-world{display:flex;flex-direction:column;gap:3px;margin:30px 0 4px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
 .oo-world b{font:400 24px/1.1 var(--serif)}
-.oo-world span{font:italic 400 15px/1.3 var(--serif);color:var(--soft)}
+.oo-world span{font:italic 400 17px/1.3 var(--serif);color:var(--soft)}
 .oo-node{position:relative;display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:center;width:100%;padding:13px 0;text-align:left;border-bottom:1px solid var(--rule);transition:opacity .25s}
 .oo-node:active{opacity:.6}
 .oo-node.locked{opacity:.34}
@@ -113,7 +113,7 @@
 
 /* ---------- results, share, misses ---------- */
 .oo-stars-row{display:flex;flex-wrap:wrap;gap:18px;margin:0 0 20px}
-.oo-star{display:flex;align-items:center;gap:7px;font:italic 400 16px/1 var(--serif);color:var(--faint)}
+.oo-star{display:flex;align-items:center;gap:7px;font:italic 400 17px/1 var(--serif);color:var(--faint)}
 .oo-star i{width:16px;height:16px}
 .oo-star.on{color:var(--ink)}
 .oo-star.new i{animation:ooPop .7s var(--spring) calc(.25s + var(--k) * .18s) both}
@@ -133,7 +133,7 @@
 .oo-ey{margin-top:12px}
 .oo-eyet{width:100%;border-collapse:collapse;margin-top:8px;font:400 13px/1 var(--mono);font-variant-numeric:tabular-nums}
 .oo-eyet th,.oo-eyet td{padding:11px 0;border-bottom:1px solid var(--rule);text-align:right;font-weight:400}
-.oo-eyet thead th{font:italic 400 14px/1 var(--serif);color:var(--soft)}
+.oo-eyet thead th{font:italic 400 17px/1 var(--serif);color:var(--soft)}
 .oo-eyet tbody th{text-align:left;font:400 17px/1 var(--serif);display:flex;align-items:center;gap:10px}
 .oo-eyet tbody th i{width:12px;height:12px;border-radius:2px;background:var(--c)}
 .oo-eyet td.thin,.oo-eyet td.na{color:var(--faint)}
@@ -211,14 +211,14 @@
 /* settle: the feedback line rises in after the impact */
 .oo-in{animation:ooIn .42s var(--ease) .12s both}
 @keyframes ooIn{from{opacity:0;transform:translateY(8px)}}
-.oo-streak{font:italic 400 16px/1 var(--serif);color:#F2D78A;animation:ooStreak .6s var(--spring) both}
+.oo-streak{font:italic 400 17px/1 var(--serif);color:#F2D78A;animation:ooStreak .6s var(--spring) both}
 @keyframes ooStreak{0%{opacity:0;transform:scale(.7)}60%{opacity:1;transform:scale(1.08)}100%{transform:none}}
 /* a miss shows the truth: the two colors side by side, labeled */
 .oo-cmp{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:100%}
 .oo-cmp span{display:flex;flex-direction:column;gap:6px}
 .oo-cmp i{display:block;height:44px;background:var(--c)}
 .oo-cmp span:first-child i{border-radius:var(--r-1) 0 0 var(--r-1)}.oo-cmp span:last-child i{border-radius:0 var(--r-1) var(--r-1) 0}
-.oo-cmp em{font:italic 400 16px/1.2 var(--serif);color:var(--ink)}
+.oo-cmp em{font:italic 400 17px/1.2 var(--serif);color:var(--ink)}
 .oo-cmp span:last-child em{text-align:right}
 .oo-fb .eye-n{font-style:normal;color:var(--ink)}
 .gy-miss-names{font-size:13px;line-height:1.4;color:var(--soft);margin-top:6px}
@@ -229,7 +229,7 @@
 .oo-node.fresh .oo-mini{animation:ooFresh 1.8s var(--ease) .4s both}
 @keyframes ooFresh{0%{box-shadow:0 0 0 0 rgba(242,215,138,.75)}60%{box-shadow:0 0 0 12px rgba(242,215,138,0)}100%{box-shadow:none}}
 .oo-node.fresh .oo-nt em{color:#F2D78A}
-.oo-world.lit b::after{content:" · mastered";font:italic 400 16px/1 var(--serif);color:#F2D78A}
+.oo-world.lit b::after{content:" · mastered";font:italic 400 17px/1 var(--serif);color:#F2D78A}
 .oo-empty{margin-top:22px;max-width:36ch}
 .oo-inbox{display:flex;flex-direction:column;width:100%;height:100%;min-height:0}
 .oo-inbox .drill-stage{flex:1}
@@ -243,7 +243,7 @@
 .oo-lbar b{position:absolute;top:-6px;bottom:-6px;width:2px;margin-left:-1px;background:#F4F4F2}
 .oo-lbar i{position:absolute;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--c);box-shadow:0 0 0 2px #F4F4F2}
 .oo-lbar i.odd{box-shadow:0 0 0 2px var(--good),0 0 0 4px rgba(0,0,0,.25)}
-.oo-lends{display:flex;justify-content:space-between;margin-top:10px;font:italic 400 16px/1.2 var(--serif);color:var(--ink)}
+.oo-lends{display:flex;justify-content:space-between;margin-top:10px;font:italic 400 17px/1.2 var(--serif);color:var(--ink)}
 .oo-shotmode .oo-in,.oo-shotmode .oo-tn,.oo-shotmode .oo-streak,.oo-shotmode .oo-star.new i{animation:none!important}
 
 /* Painters' pairs: two pair cards, then lifts, then three paintings that hold the winner */
@@ -256,10 +256,10 @@
 .oo-pcs i:first-child{border-radius:var(--r-1) 0 0 var(--r-1)}.oo-pcs i:last-child{border-radius:0 var(--r-1) var(--r-1) 0}
 .oo-pc b{font:400 21px/1.1 var(--serif)}
 .oo-pc b em{font-style:italic;color:var(--paper-soft)}
-.oo-pcl{font:italic 400 16px/1.3 var(--serif);color:var(--paper-soft);margin-top:4px}
+.oo-pcl{font:italic 400 17px/1.3 var(--serif);color:var(--paper-soft);margin-top:4px}
 .oo-pcl:empty{display:none}
 .oo-pc.ring{box-shadow:0 0 0 3px var(--good)}.oo-pc.miss{box-shadow:0 0 0 3px var(--bad)}
-.oo-pexh{font:italic 400 16px/1.3 var(--serif);color:var(--soft);margin:4px 0 8px}
+.oo-pexh{font:italic 400 17px/1.3 var(--serif);color:var(--soft);margin:4px 0 8px}
 .oo-pexr{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .oo-pp{display:flex;flex-direction:column;gap:4px;text-align:left;min-width:0}
 .oo-pp img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--r-1);background:var(--booth-2)}
@@ -284,7 +284,7 @@
 .oo-pk-seg button{flex:1}
 .oo-pk-seg button.on,.oo-pk-ch button.on{background:var(--ink);border-color:var(--ink);color:#0E0D0B}
 .oo-pk-ch{margin-top:8px}
-.oo-pk-note{font:italic 400 16px/1.3 var(--serif);color:var(--soft);margin:10px 0 0;text-wrap:pretty}
+.oo-pk-note{font:italic 400 17px/1.3 var(--serif);color:var(--soft);margin:10px 0 0;text-wrap:pretty}
 .oo-jumpnote{margin:6px 0 0}
 .oo-node.clr .oo-nt b .mono{color:var(--good)}
 .oo-jump{padding:4px 0 8px}
