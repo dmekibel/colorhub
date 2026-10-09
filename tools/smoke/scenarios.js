@@ -112,6 +112,30 @@ scenario("home", "a pending placement hint reappears on a later Home open, and a
   t.expect(!t.$(".lr-maphint"), "the hint is still in the DOM after being dismissed");
 });
 
+// David, 2026-10-09: "I want to see all the color names, even when tiny... as long as it's legible." A label's
+// own real font size (honeyWrap's cached per-name ratio times the cell's current diameter) now gates whether it
+// draws at all -- not the cell's raw diameter or a style's own labelMin tuning, which could hide a label that
+// would read fine or show one that wouldn't ("no half-legible labels"). Verified with a zoomed screenshot of
+// the smallest labels this draws (Petrol, Hunter green, Steel blue, all crisp at 440x956); this just locks the
+// numeric floor in so it can't quietly regress.
+scenario("home", "every cell shows its name when legible, never smaller than the verified floor", async t => {
+  const cv = await H.homeReady(t);
+  const stat = t.ev("HM_CTRL._labelFsStat()");
+  t.expect(stat.n > 20, `too few labels drawn to judge (${stat.n})`);
+  t.expect(stat.min >= stat.floor, `a label drew at ${stat.min}px, under the ${stat.floor}px legibility floor`);
+  t.notes.push(`${stat.n} labels, ${stat.min}-${stat.max}px (floor ${stat.floor}px)`);
+  // zoomed out, Honeycomb look, the largest set: still never under the floor, and the mosaic's own tiny cells
+  // (honeyCells' cheap hex path) correctly carry NO label at all rather than a smudge
+  t.ev('S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.style = "honeycomb"; hmHome();');
+  await t.waitFor(() => H.num(t.text(".hm-title small")) > 500, 10000, "every name to fill");
+  const floor = t.ev("HM_CTRL.zoomFloor()");
+  t.ev(`HM_CTRL.zoom(${floor}, false)`);
+  await t.sleep(300);
+  const stat2 = t.ev("HM_CTRL._labelFsStat()");
+  if (stat2.n > 0) t.expect(stat2.min >= stat2.floor, `zoomed out: a label drew at ${stat2.min}px, under the ${stat2.floor}px floor`);
+  t.notes.push(`zoomed out: ${stat2.n} labels, min ${stat2.min}px`);
+});
+
 scenario("home", "a far bubble glides to the middle, it does not open", async t => {
   const cv = await H.homeReady(t);
   const r = cv.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;

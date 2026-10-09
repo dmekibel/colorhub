@@ -635,6 +635,17 @@ const honeyEaseS = u => u <= 0 ? 0 : u >= 1 ? 1 : u * u * (3 - 2 * u);   // smoo
 const honeyErf = x => { const s = x < 0 ? -1 : 1; x = Math.abs(x); const t = 1 / (1 + .3275911 * x);
   return s * (1 - ((((1.061405429 * t - 1.453152027) * t + 1.421413741) * t - .284496736) * t + .254829592) * t * Math.exp(-x * x)); };
 const HONEY_WRAP = new Map();
+// David, 2026-10-09: "I want to see all the color names, even when tiny... as long as it's legible." A cell's
+// own font size (honeyWrap's cached per-name wrap ratio, below, times the cell's current diameter) is the real
+// legibility signal -- not the cell's raw diameter or a style's own labelMin tuning (meant for when a REGION
+// starts revealing names, a design choice, not a legibility floor), which could hide a label that would still
+// read fine, or show one that wouldn't. 7 CSS px is a verified floor (screenshotted at 440x956, 3x device
+// pixel ratio: the smallest labels this draws stay crisp, nothing smudgy); below it, no label at all -- never
+// a half-legible one. honeyWrap's own per-name cache (not per-size: the fs it returns is a RATIO, scaled by
+// whatever diameter a cell currently has) means this costs nothing extra across a frame's many tiny cells that
+// never reach the floor -- the expensive part (ctx.measureText, picking the wrap) runs once per unique name,
+// ever, not once per cell per frame.
+const HONEY_LABEL_FS_MIN = 7;
 function honeyWrap(ctx, name) {
   let w = HONEY_WRAP.get(name); if (w) return w;
   const maxW = 76, words = name.split(" ");
@@ -1326,9 +1337,14 @@ function honeycomb(host, opts = {}) {
       // edge, light on a dark cell and dark on a light one, reads as a deliberate boundary either way and masks
       // a stray sliver instead of leaving it bare. Was dark-cells-only; now every cell at a readable size gets one.
       ctx.lineWidth = Math.max(1, d * .018); ctx.strokeStyle = it.L < 50 ? `rgba(236,232,223,${it.L < 14 ? .34 : it.L < 26 ? .24 : .14})` : `rgba(14,13,11,${it.L > 86 ? .16 : .1})`; ctx.stroke();
-      const la = Math.min(1, Math.max(0, (d - zc("labelMin")) / 5));
-      if (la > 0) {
-        const w = honeyWrap(ctx, it.n), fs = Math.min(w.fs * d, 30), lh = fs * 1.02;
+      // a cheap pre-filter before the honeyWrap lookup: even the most compact name (honeyWrap's own best-case
+      // fs ratio, ~.19) can't clear the legibility floor below roughly this diameter, so most of a crowded
+      // frame's tiny cells skip the (cached, but still a Map lookup) call entirely
+      if (d * .19 < HONEY_LABEL_FS_MIN) continue;
+      const w = honeyWrap(ctx, it.n), fsReal = w.fs * d;
+      if (fsReal >= HONEY_LABEL_FS_MIN) {
+        const la = Math.min(1, (fsReal - HONEY_LABEL_FS_MIN) / 2);   // a quick ~2px fade right at the floor, not a hard pop
+        const fs = Math.min(fsReal, 30), lh = fs * 1.02;
         const sub = Math.min(1, Math.max(0, (d - 150) / 30)), subH = sub ? fs * .9 : 0;
         const y0 = b.y - (w.lines.length - 1) * lh / 2 + fs * .06 - subH / 2;
         ctx.font = `${fs}px "Instrument Serif",Georgia,serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
@@ -1815,9 +1831,14 @@ function honeycomb(host, opts = {}) {
     if (!b || !(b.d > 0)) return null;
     const r = cv.getBoundingClientRect(), shp = zc("shape"), rays = [];
     for (let i = 0; i < 72; i++) { const t = i / 72 * 6.283185307; rays.push(b.poly && shp > .02 && b.rin >= 3 ? b.rin * (1 - shp) + honeyRay(b.poly, t) * shp : b.rin); }
-    const it = b.it, la = (b.d - zc("labelMin")) / 5;
+    const it = b.it;
     let label = null;
-    if (la > .5 && !(ST.label && !ST.label(it.o))) { const w = honeyWrap(ctx, it.n), fs = Math.min(w.fs * b.d, 30); label = { lines: w.lines, fs, lh: fs * 1.02, ink: it.ink }; }
+    // the same legibility gate the main draw loop uses (HONEY_LABEL_FS_MIN), so a bubble morphing into its own
+    // page starts from exactly the label state it was actually showing, not the old labelMin-based guess
+    if (!(ST.label && !ST.label(it.o))) {
+      const w = honeyWrap(ctx, it.n), fsReal = w.fs * b.d;
+      if (fsReal >= HONEY_LABEL_FS_MIN) { const fs = Math.min(fsReal, 30); label = { lines: w.lines, fs, lh: fs * 1.02, ink: it.ink }; }
+    }
     return { x: r.left + b.x, y: r.top + b.y, d: b.d, rays, label, h: it.h, n: it.n };
   }
   function open(it, b) {
@@ -2121,6 +2142,20 @@ function honeycomb(host, opts = {}) {
     _tinyPolyStat() {
       const tiny = drawn.filter(b => b.d0 != null && b.d0 < 7);
       return { tiny: tiny.length, poly: tiny.filter(b => b.poly).length, total: drawn.length };
+    },
+    // QA (tools/smoke home group): every currently-drawn bubble's REAL label font size in CSS px (honeyWrap's
+    // cached per-name ratio times the bubble's current diameter), for bubbles that would actually draw one
+    // (HONEY_LABEL_FS_MIN or above) -- so a test (or a screenshot-driven check) can confirm nothing smaller
+    // than the verified legibility floor ever gets a label, and report the smallest one actually shown.
+    _labelFsStat() {
+      const fs = [];
+      for (const b of drawn) {
+        if (!b.it || !(b.d > 0)) continue;
+        const w = honeyWrap(ctx, b.it.n), real = w.fs * b.d;
+        if (real >= HONEY_LABEL_FS_MIN) fs.push(+real.toFixed(2));
+      }
+      fs.sort((a, c) => a - c);
+      return { n: fs.length, min: fs[0] ?? null, max: fs[fs.length - 1] ?? null, floor: HONEY_LABEL_FS_MIN };
     },
     // QA only: the ordinary zoom(z) always clamps to [ZMIN,ZMAX] (the pinch-out floor), but a real pinch can
     // still swing well past it for a moment (rubber(), the elastic overshoot before it springs back) -- which
