@@ -603,15 +603,38 @@ function hmHome() {
     // insetCur tween), ctrl.enterFit() flies the map to show the whole thing centered above the sheet, and every
     // setting change re-fits (js/honey.js update()) so the change reads at a glance; exitFit() below flies back
     // to the pan/zoom you had, on any way the sheet closes.
+    const measureInset = () => { if (ctrl && sh.isConnected) { const r = sh.getBoundingClientRect(); ctrl.setInset({ bottom: Math.max(0, viewEl.getBoundingClientRect().bottom - r.top) }); } };   // measured to the map's own bottom (it reaches past innerHeight on an iPhone Home Screen app)
     const applyInset = () => requestAnimationFrame(() => {
       if (!ctrl) return;
-      const r = sh.getBoundingClientRect();
-      ctrl.setInset({ bottom: Math.max(0, viewEl.getBoundingClientRect().bottom - r.top) });   // measured to the map's own bottom (it reaches past innerHeight on an iPhone Home Screen app)
-      if (arrange) setTimeout(() => { if (sh.isConnected) ctrl.enterFit(); }, reduceMotion ? 0 : 300);
+      measureInset();   // an immediate (possibly still-mid-entrance) read, so the map starts recentering right away
+      // the sheet's own slide-up entrance is still moving at this first read -- re-measure once it's actually
+      // settled (same ~300ms as the fit flight below) rather than fit against a transform mid-flight, or the
+      // computed inset (and so the fit) can come out based on where the sheet WAS, not where it ends up.
+      if (arrange) setTimeout(() => { if (sh.isConnected) { measureInset(); ctrl.enterFit(); } }, reduceMotion ? 0 : 300);
     });
-    const mo = new MutationObserver(() => { if (!sh.isConnected) { if (ctrl) { if (arrange) ctrl.exitFit(); ctrl.setInset({ bottom: 0 }); } mo.disconnect(); } });
+    // David: "when I open Arrange it doesn't zoom out enough and doesn't center everything in the top half" --
+    // re-measure (and for Arrange, re-fit) whenever the sheet's own height changes, not just once at open: a
+    // chip wrapping to a second line, a family list growing, the keyboard, all change where its top really is.
+    const ro = new ResizeObserver(applyInset); ro.observe(sh);
+    const mo = new MutationObserver(() => { if (!sh.isConnected) { ro.disconnect(); if (ctrl) { if (arrange) ctrl.exitFit(); ctrl.setInset({ bottom: 0 }); } mo.disconnect(); } });
     mo.observe(document.body, { childList: true });
     q("[data-sheet-close]").onclick = () => { buzz(4); close(); };
+    // David: "tapping the top half instantly closes Arrange... I need to pan and zoom the map while choosing
+    // arrangements... close it by double-tapping the map, the ✕, or swiping the sheet down." The scrim above the
+    // sheet is now pointer-events:none (css/home.css .hm-scrim-clear) for Arrange, so every tap/pan/pinch reaches
+    // the canvas normally; a double-tap specifically closes the sheet instead of the canvas's own double-tap-to-
+    // zoom (captured here, ahead of honey.js's own canvas listeners, and stopped from reaching them).
+    if (arrange) {
+      let lastTapT = 0;
+      const dblClose = e => {
+        if (e.pointerType && e.pointerType !== "touch" && e.pointerType !== "mouse") return;
+        const now = performance.now();
+        if (now - lastTapT < 350) { e.stopPropagation(); buzz(6); close(); lastTapT = 0; return; }
+        lastTapT = now;
+      };
+      viewEl.addEventListener("pointerup", dblClose, true);
+      cleanup.push(() => viewEl.removeEventListener("pointerup", dblClose, true));
+    }
     const fmt = n => n.toLocaleString();
     function paintCount() {
       const p = q("[data-count]"); if (!p || !p.isConnected) return;
@@ -652,6 +675,7 @@ function hmHome() {
         S.hm.ord = { ...(S.hm.ord || {}), [arr]: id }; save(); buzz(4);
         paintOrd(); paintArr();
         if (ctrl) ctrl.update({ items, soft: true, arrange: true, recenter: true, tweak: hmLiveTweak(hmView()) });
+        if (typeof vbFix === "function") setTimeout(vbFix, 450);   // David: the black bar after choosing a new arrangement/order (see the [data-arr] handler's own comment)
       };
       const paintArr = () => {
         const a = hmView().arr;
@@ -666,6 +690,10 @@ function hmHome() {
         const spec = honeyOrderSpec(b.dataset.arr, hmOrd(b.dataset.arr));
         if (spec && spec.needs === "painted") await honeyLoadPainted().catch(() => {});
         if (ctrl) ctrl.update({ items, soft: true, arrange: true, tweak: hmLiveTweak(hmView()) });
+        // David: "if I open Arrange and choose a new arrangement, the black bar at the bottom comes back" (an
+        // iPhone Home Screen app, --vb/--app-full, js/core.js vbFix). Whatever resize path causes it, re-running
+        // vbFix() once the arrangement's own fly/zoom settles is the same self-healing the corner watchdog does.
+        if (typeof vbFix === "function") setTimeout(vbFix, 450);
       });
       paintOrd();
       { const cur = q(".hm-arr-b.on"); if (cur) cur.scrollIntoView({ block: "nearest", inline: "center" }); }
