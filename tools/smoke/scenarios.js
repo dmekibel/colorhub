@@ -4775,6 +4775,34 @@ scenario("paintmap", "the deferred shapes: Families, Tones, Rings and Spiral all
   t.expect(spiralXY[0] === ringXY[0] && spiralXY[1] === ringXY[1], "Rings and Spiral don't agree on where the seed itself sits (both should start their own order with it)");
   await t.click("[data-sheet-close]", { wait: 600 });
 });
+// David, 2026-10-09: "your favorites glowing on the map" (a pink outline+glow per drawn cell, js/paintmap.js
+// draw()'s favSet) and "always-labeled landmark paintings" (a painter-name label on any cell whose gallery index
+// is in PM_LANDMARKS -- the SAME "famous" definition data/artists/portraits.json already uses for painter-page
+// portraits, not a new one). Both are canvas pixels, not DOM, so this checks the thing that actually matters --
+// the real data state (a heart tap really does favorite the centered painting) and that the draw loop runs
+// clean with both decorations active through a real pan, rather than fragile pixel sampling of glow/label
+// colors. PM_CTRL._qaLandmarks(arr) sidesteps the real portraits.json fetch, which doesn't reliably resolve
+// inside this harness's virtual-time iframe (same class of timing gap as the thumbnail-streaming scenario above).
+scenario("paintmap", "your favorites glow and always-labeled landmarks don't break the draw loop", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  await t.waitFor("[data-pmheart]:not([hidden])", 6000, "the heart under the centered painting");
+  await t.click("[data-pmheart]", { wait: 400 });
+  const favored = t.w.PM_CTRL.center;
+  t.expect(t.ev(`(() => { const d = typeof glDetailNow === "function" && glDetailNow(${favored}); return !!(d && typeof fvArtHas === "function" && fvArtHas(d.id)); })()`), "the centered painting didn't actually become a favorite");
+  const sample = t.ev("PM_CTRL.lay().items.slice(0, 40)");
+  t.ev(`PM_CTRL._qaLandmarks([${[favored, ...sample].join(",")}])`);
+  await t.sleep(150);
+  t.expect(t.errors.length === 0, `window errors after forcing landmarks: ${t.errors.join(" | ")}`);
+  const cv = t.$(".pmx-cv"), r = cv.getBoundingClientRect();
+  const mk = (type, x, y) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 77, pointerType: "touch", isPrimary: true, view: t.w });
+  cv.dispatchEvent(mk("pointerdown", r.left + r.width / 2, r.top + r.height / 2));
+  for (let i = 1; i <= 6; i++) cv.dispatchEvent(mk("pointermove", r.left + r.width / 2 - i * 10, r.top + r.height / 2 - i * 6));
+  cv.dispatchEvent(mk("pointerup", r.left + r.width / 2 - 60, r.top + r.height / 2 - 36));
+  await t.sleep(250);
+  t.expect(t.errors.length === 0, `window errors after panning with favorites+landmarks drawn: ${t.errors.join(" | ")}`);
+  await t.click("[data-pmheart]", { wait: 300 });   // leave state clean for later scenarios
+});
 // David's screenshot, 2026-10-09: "zooming out doesn't load the stuff" -- only a ~160-cell central disc ever got a
 // thumbnail, however long you waited, because the per-frame candidate list handed to pmImages().want() was capped
 // at 160 BEFORE its own concurrency limit (PM_FLIGHT, 14 concurrent) ever got a say -- everything past the nearest

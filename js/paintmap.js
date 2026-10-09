@@ -85,6 +85,12 @@ const PM_ICON = {
 let PM_THUMBS = null, PM_THUMBS_P = null;
 const PM_PAN = new Map();     // layout key -> { x, y, s }: where you were, so Back from a painting lands on it again
 const PM_LAYOUTS = new Map(); // layout key -> layout (the color pass costs ~100 ms on 24,000 paintings: once is enough)
+// David, 2026-10-09: "always-labeled landmark paintings" -- gallery indices from EVERY painter's own `famous`
+// list (data/artists/portraits.json, tools/artwiki_portraits.py's Wikidata-reach signal, already built and
+// already used for painter-page portraits/js/richcolor.js rcLoadPortraits -- the same definition of "famous"
+// the rest of the app uses, not a new one invented here). Labeled by painter name (already in hand synchronously
+// via F.artist, no extra fetch per cell) at a far lower size threshold than any other on-map text gets.
+let PM_LANDMARKS = new Set();
 
 // ---------- data ----------
 function pmThumbsLoad() {
@@ -540,6 +546,14 @@ function pmMount(el, s, F) {
   let P = [0, 0], Z = 1, V = [0, 0], glide = null, raf = 0, dead = false, centerK = -1, lastTick = 0, drawn = [];
   const ZMAX = 2.2;
   const imgs = pmImages(() => kick());
+  if (!PM_LANDMARKS.size && typeof rcLoadPortraits === "function") {
+    rcLoadPortraits().then(port => {
+      if (dead || !port) return;
+      const set = new Set();
+      for (const slug in port) (port[slug].famous || []).forEach(gi => { if (gi != null && gi >= 0) set.add(gi); });
+      PM_LANDMARKS = set; kick();
+    }).catch(() => {});
+  }
   // ---- the lens (js/honey.js's round fisheye): F(z) is how far from the middle a cell z cells away is drawn
   // far out, the lens softens (as on the color map), so the overview reads as one even mosaic
   const M0N = 4.6, M1 = 1, SIG = 1.1;
@@ -657,6 +671,9 @@ function pmMount(el, s, F) {
     const cx = W / 2, cy = H / 2, R = Finv(Math.hypot(W, H) / 2 + 40), k0 = K();
     const map = (ex, ey) => { const z = Math.hypot(ex, ey), f = z < 1e-6 ? K() * M0 : Fz(z) / z; return [cx + ex * f, cy + ey * f]; };
     const x0 = Math.floor(P[0] - R), x1 = Math.ceil(P[0] + R), y0 = Math.floor(P[1] - R), y1 = Math.ceil(P[1] + R);
+    // David, 2026-10-09: "your favorites glowing on the map" -- one Set built once a frame (fvArtList's own
+    // {i,...} records already carry the gallery index), not a per-cell favorites lookup.
+    const favSet = typeof fvArtList === "function" ? new Set(fvArtList().map(r => r.i)) : null;
     drawn = []; const wantImg = [];
     for (let y = Math.max(y0, lay.gy0); y <= Math.min(y1, lay.gy0 + lay.GH - 1); y++) {
       const row = (y - lay.gy0) * lay.GW;
@@ -712,6 +729,29 @@ function pmMount(el, s, F) {
         ctx.globalAlpha = 1;
       }
       if (b.d >= 40 && GAL.mean[i * 3] < 24) { ctx.strokeStyle = "rgba(236,232,223,.14)"; ctx.lineWidth = 1; ctx.strokeRect(X + .5, Y + .5, w - 1, h - 1); }
+      // your favorites glow (the same pink the heart icon turns "on")
+      if (favSet && favSet.size && b.d >= 7 && favSet.has(i)) {
+        ctx.save(); const lw = Math.max(1.5, Math.min(3, b.d * .025));
+        ctx.shadowColor = "rgba(232,120,122,.85)"; ctx.shadowBlur = Math.min(18, b.d * .2);
+        ctx.strokeStyle = "rgba(232,120,122,.95)"; ctx.lineWidth = lw;
+        ctx.strokeRect(X + lw / 2, Y + lw / 2, w - lw, h - lw);
+        ctx.restore();
+      }
+      // always-labeled landmarks (a painter name, small and opaque, regardless of how small the cell otherwise reads)
+      if (b.d >= 16 && PM_LANDMARKS.size && PM_LANDMARKS.has(i)) {
+        const nm = F.artist[i] ? xbArtistName(F, F.artist[i]) : "";
+        if (nm) {
+          const py = Y + h + 4;
+          if (py > -16 && py < H + 16) {
+            ctx.save(); ctx.font = `500 ${Math.max(10, Math.min(13, b.d * .15))}px "Geist Mono", Menlo, monospace`;
+            ctx.textAlign = "center"; ctx.textBaseline = "top";
+            const tw2 = ctx.measureText(nm).width;
+            ctx.fillStyle = "rgba(14,13,11,.82)"; ctx.fillRect(b.x - tw2 / 2 - 5, py - 2, tw2 + 10, 15);
+            ctx.fillStyle = "rgba(236,232,223,.95)"; ctx.fillText(nm, b.x, py);
+            ctx.restore();
+          }
+        }
+      }
     }
     // band and painter labels, where there's room to read them
     if (lay.labels.length) {
@@ -1017,7 +1057,11 @@ function pmMount(el, s, F) {
   const ro = new ResizeObserver(() => size()); ro.observe(cv);
   cleanup.push(() => { dead = true; clearTimeout(tapTimer); ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); if (lay && centerK >= 0) PM_PAN.set(lay.key, { x: lay.x[centerK], y: lay.y[centerK], s: Z }); });
   size(); build(false);
-  window.PM_CTRL = { get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length; }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); } };
+  window.PM_CTRL = { get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length; }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); },
+    // QA (tools/smoke paintmap group): a real network fetch of data/artists/portraits.json doesn't reliably
+    // resolve inside the virtual-time test harness, so a forced override makes "landmarks label themselves" a
+    // deterministic check rather than a timing bet.
+    _qaLandmarks: arr => { PM_LANDMARKS = new Set(arr); kick(); } };
 }
 
 // this file can load after router.js (on first use): give pmOpen its address now
