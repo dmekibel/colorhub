@@ -107,8 +107,7 @@ function ukGrid(push = true) {
   const el = show(`
     ${worldTop("Ukiyo-e prints")}
     <h1 class="p-title">Ukiyo-e prints</h1>
-    <p class="p-dek">${UK.length.toLocaleString()} Japanese woodblock prints, public domain, from the Art Institute of Chicago and the Cleveland Museum of Art.</p>
-    <p class="p-body">Ukiyo-e printmakers worked from a narrow, largely plant- and mineral-based palette: indigo (ai) for blue and blue-green, and beni, a safflower-derived pink-red that fades fastest of all of them, so many surviving prints read cooler and more muted than they printed. The synthetic pigment Prussian blue reached Japan in quantity in the late 1820s; Hokusai's "Thirty-Six Views of Mount Fuji," begun around 1830, is the series most associated with its arrival, which is why so many of its skies and waves are Prussian blue rather than indigo.</p>
+    <p class="p-dek">${UK.length.toLocaleString()} Japanese woodblock prints, public domain, from the Art Institute of Chicago and the Cleveland Museum of Art. A narrow natural palette — indigo, and a safflower pink-red that fades fastest — until Prussian blue arrived in the late 1820s.</p>
     <div class="art-bubbles" id="ukChips" role="tablist"></div>
     <div id="ukFeed"></div>
     <p class="fine">Colors are as scanned or photographed: aged paper, shifted and faded pigments, and the scan itself all sit between a print and the hex shown.</p>

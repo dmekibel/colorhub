@@ -86,8 +86,18 @@ function bpNode(o) {
 }
 // data/botany.js (window.BOTANY) is self-loaded by js/botany.js (its own injected <script> tag, not the
 // DATA_SRC/loadData lazy mechanism); btWhen(fn) is the function it exports for "run this once BOTANY exists".
+// js/botany.js's own s.onerror never flushes its wait queue (a dropped/failed request there just leaves
+// btOK false forever), so a bare btWhen(res) here could hang this room's entire load on a botany.js failure
+// that has nothing to do with botanical plates -- a 4s timeout guard means a slow or failed botany.js only
+// costs the color cross-links (bpBotanyMatch degrades to "no match" when BOTANY never arrives), never the room.
 function bpWhenBotany() {
-  return new Promise(res => { if (typeof btWhen === "function") btWhen(res); else res(); });
+  return new Promise(res => {
+    if (typeof btWhen !== "function") { res(); return; }
+    let done = false;
+    const go = () => { if (!done) { done = true; res(); } };
+    btWhen(go);
+    setTimeout(go, 4000);
+  });
 }
 function loadBotanical() {
   if (BP) return Promise.resolve(BP);
@@ -141,8 +151,7 @@ function bpGrid(push = true) {
   const el = show(`
     ${worldTop("Botanical & bird plates")}
     <h1 class="p-title">Botanical &amp; bird plates</h1>
-    <p class="p-dek">${BP.length.toLocaleString()} hand-colored natural-history plates, public domain, from Wikimedia Commons: ${nBird.toLocaleString()} birds (Audubon's "The Birds of America"), ${nPlant.toLocaleString()} botanical (Curtis's Botanical Magazine and Pierre-Joseph Redouté).</p>
-    <p class="p-body">Before color photography, a naturalist's only way to show a species' true color was to paint it, and then have that painting engraved or lithographed and hand-colored, plate by plate, by a workshop of colorists following a reference. Audubon's birds were engraved by Robert Havell and colored to match Audubon's own watercolors; Redouté's flowers and Curtis's Botanical Magazine worked the same way a generation apart. No two hand-colored copies of the same plate are perfectly identical.</p>
+    <p class="p-dek">${BP.length.toLocaleString()} hand-colored natural-history plates, public domain, from Wikimedia Commons: ${nBird.toLocaleString()} birds (Audubon's "The Birds of America"), ${nPlant.toLocaleString()} botanical (Curtis's Botanical Magazine and Pierre-Joseph Redouté). Painted, then engraved and hand-colored plate by plate — no two copies are quite identical.</p>
     <div class="art-bubbles" id="bpChips" role="tablist"></div>
     <div id="bpFeed"></div>
     <p class="fine">Colors are as scanned or photographed: hand-applied color over a printed plate, aged paper, and a photography pass all sit between a plate and the hex shown.</p>
