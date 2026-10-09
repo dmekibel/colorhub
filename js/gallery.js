@@ -1187,7 +1187,10 @@ function glPage(i, d, fromHex, tol) {
 // fetch to pass, so that fails the whole load (confirmed: ERR_FAILED, "blocked by CORS policy"). Rather than
 // give up on ~40% of the corpus, glCommonsResolve() below gets the real, already-CORS-safe URL a different way.
 // The Art Institute's local copies (img/gallery/aic/) are same-origin, so they just work with no entry here at
-// all; Cleveland's CDN sends no CORS header anywhere in its chain, so it's the one source that's genuinely stuck.
+// all. Cleveland is the one source still genuinely stuck: re-checked 2026-10-09 (David asked whether their Open
+// Access API exposes a CORS path, the way Commons' MediaWiki API did) — neither openaccess-api.clevelandart.org
+// (the JSON API itself) nor any size on openaccess-cdn.clevelandart.org (web/print/full) sends
+// Access-Control-Allow-Origin, with or without an Origin header, so there's no door in anywhere in that chain.
 const GL_CORS_HOSTS = new Set(["api.nga.gov", "iiif.micr.io", "images.metmuseum.org", "api.smk.dk", "iip-thumb.smk.dk"]);
 function glCORS(url) {
   try { return GL_CORS_HOSTS.has(new URL(String(url || ""), location.href).hostname) ? ' crossorigin="anonymous"' : ""; }
