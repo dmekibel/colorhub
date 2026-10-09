@@ -1457,6 +1457,29 @@ scenario("pages", "the pinned header's padding clears a simulated status-bar ins
   t.expect(t.$$("body > .rp-bar").length === 1, `${t.$$("body > .rp-bar").length} .rp-bar nodes on body after reopening, expected exactly 1`);
 });
 
+// Root cause found (js/trail.js-owning lane, following up on the scenario above): bar.getAnimations() can report
+// its own transform transition stuck at playState "running" long after its declared duration elapsed -- a fast,
+// scripted scroll (many scroll events with no real time between them) reliably reproduces it. Stuck mid-
+// interpolation, the bar reads as "disappeared" (pinned near its fully hidden preset) or "overlaps the status
+// bar" (a small residual Y offset, still visible but a few px too high) depending on exactly where it got stuck --
+// the same root cause behind both of David's reports on Aero. js/richpage.js rpBarWire's check() now finishes
+// any such stuck transition every time the bar is meant to be on screen, snapping it straight to .on's own
+// resting transform instead of leaving it part-way there.
+scenario("pages", "a fast scripted scroll never leaves the pinned header's transform stuck off its \"on\" resting position", async t => {
+  const INSET = 59;
+  await H.openPage(t, "#/color/scarlet", "Scarlet");
+  const bar = await t.waitFor(() => t.$("body > .rp-bar"), 8000, "the pinned header");
+  { const st = t.w.document.createElement("style"); st.textContent = `:root{--top:${INSET}px !important}`; t.w.document.head.appendChild(st); }
+  const settled = () => { const r = bar.getBoundingClientRect(); return Math.abs(r.top) < 1; };   // .on's resting transform: translate(-50%,0)
+  for (let rep = 0; rep < 6; rep++) {
+    t.w.scrollTo(0, 0); t.w.document.dispatchEvent(new t.w.Event("scroll"));
+    for (let y = 0; y <= 2000; y += 45) { t.w.scrollTo(0, y); t.w.document.dispatchEvent(new t.w.Event("scroll")); }
+    await t.sleep(30);
+    t.expect(bar.classList.contains("on"), `rep ${rep}: the bar should be "on" once scrolled past the cover`);
+    t.expect(settled(), `rep ${rep}: the bar's transform is stuck at top=${Math.round(bar.getBoundingClientRect().top)}px instead of settling to 0 (on-screen, below the status bar)`);
+  }
+});
+
 scenario("pages", "nearest stories: a name without an article offers the nearest ones, a tap opens another page", async t => {
   // a name with no story of its own. Every color is getting an article, so pick one still without a committed article
   // from the article index; when none is left, nearest stories can't show and the scenario only notes it.
@@ -3474,6 +3497,74 @@ scenario("trail", "On the map's ✕ (\"Close\") returns to the page that lit it,
   await TRL.atHash(t, /^#\/gallery\/\d+/, "Back from the painter lands on the first painting");
   await t.click(TRL.screenBack(t), { wait: 600 });
   await TRL.atHash(t, /^#\/color\/cobalt/, "Back from the first painting lands on cobalt");
+});
+
+// David, 2026-10-09: "don't lose all my progress just because I tapped the map" -- extended to the OTHER Close,
+// the ordinary ✕ "map glyph" (tl-exit) that deliberately forgets the live trail (the previous scenario covers
+// the lit-map's own ✕). Close still forgets XSTACK and Back still stays on the map (unchanged, see the
+// "map glyph exits... trail wasn't cleared" scenario below) -- it just isn't thrown away: a small "Back to…"
+// pill (js/trail.js tlRecentPill) offers it back on the very next map draw, and tapping it resumes the whole
+// chain, landing exactly where Close happened.
+const TLR = {
+  // color (cobalt) -> a painting from its rail -> its painter; returns { painterHash, depth }
+  async toPainter(t) {
+    await TRL.open(t, "#/color/cobalt");
+    const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
+    const fold = sec.closest("details:not([open])"); if (fold) await t.click(fold.querySelector("summary"), { wait: 300 });
+    sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); await t.sleep(300);
+    const pin = await t.waitFor(() => { sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); return t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin, [data-glin] [data-gi]")[0]; }, 25000, "a painting in cobalt's rail");
+    pin.scrollIntoView({ block: "center" }); await t.sleep(200);
+    await t.click(pin, { wait: 600 });
+    await TRL.atHash(t, /^#\/gallery\/\d+/, "the painting page");
+    const painter = await t.waitFor(() => t.$("#app .screen [data-awpainter]"), 20000, "the painter link on the painting");
+    await t.click(painter, { wait: 600 });
+    await TRL.atHash(t, /^#\/painter\//, "the painter page");
+    return { painterHash: TRL.hash(t), depth: TRL.depth(t) };
+  },
+};
+scenario("trail", "Close stashes the trail: a \"Back to…\" pill on the map resumes it, landing back on the chain", async t => {
+  const { painterHash, depth } = await TLR.toPainter(t);
+  t.expect(depth >= 2, `expected color+painting on the trail before the painter page, got ${depth}`);
+  // explicit Close: the plain map, the live trail forgotten the usual way
+  await t.click("#app .screen [data-tl-exit]", { wait: 900 });
+  await t.waitFor(".hm canvas", 10000, "the map after Close");
+  t.expect(TRL.depth(t) === 0, `Close should still clear the live trail; it holds ${TRL.depth(t)}`);
+  const pill = await t.waitFor(".tl-recent-pill.in", 4000, "the \"Back to…\" pill");
+  t.expect(t.text(".tl-recent-pill .tl-recent-txt").length > 0 && /back to/i.test(pill.getAttribute("aria-label") || ""), `the pill doesn't read as a way back: "${pill.getAttribute("aria-label")}"`);
+  await t.click(pill, { wait: 800 });
+  await TRL.atHash(t, new RegExp("^" + painterHash.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), "the pill resumed the painter page");
+  t.expect(TRL.depth(t) === depth, `resuming landed with trail depth ${TRL.depth(t)}, expected ${depth}`);
+  // and Back from there still retraces the rest of the chain, exactly as if Close had never happened
+  await t.click(TRL.screenBack(t), { wait: 600 });
+  await TRL.atHash(t, /^#\/gallery\/\d+/, "Back from the painter lands on the painting");
+  await t.click(TRL.screenBack(t), { wait: 600 });
+  await TRL.atHash(t, /^#\/color\/cobalt/, "Back from the painting lands on cobalt");
+});
+scenario("trail", "the \"Back to…\" pill disappears on a real pan, and the stash still shows in the trail sheet afterward", async t => {
+  const { depth } = await TLR.toPainter(t);
+  await t.click("#app .screen [data-tl-exit]", { wait: 900 });
+  await t.waitFor(".hm canvas", 10000, "the map after Close");
+  const cv = await t.waitFor(".tl-recent-pill.in", 4000, "the pill").then(() => t.$(".hm canvas"));
+  const r = cv.getBoundingClientRect(), o = (x, y) => ({ bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 31, pointerType: "touch", isPrimary: true, view: t.w });
+  cv.dispatchEvent(new t.w.PointerEvent("pointerdown", o(r.width * .5, r.height * .6)));
+  cv.dispatchEvent(new t.w.PointerEvent("pointermove", o(r.width * .5 - 60, r.height * .6 - 40)));
+  await t.waitFor(() => !t.$(".tl-recent-pill"), 2000, "the pill to clear after a real pan");
+  cv.dispatchEvent(new t.w.PointerEvent("pointerup", o(r.width * .5 - 60, r.height * .6 - 40)));
+  // the stash itself survives the pan -- still reachable from the long-press trail sheet (a fresh page first:
+  // the bare map itself has no ‹ to long-press)
+  t.ev("hmOpenColor(BYNAME.get('viridian'))");
+  await t.waitFor(() => t.$("#app .screen [data-back]") && !t.$(".screen.waiting"), 15000, "a fresh, unrelated page from the map");
+  const back = TRL.screenBack(t), br = back.getBoundingClientRect(), bo = { bubbles: true, cancelable: true, clientX: br.left + 10, clientY: br.top + 10, pointerId: 32, pointerType: "touch", isPrimary: true, view: t.w };
+  back.dispatchEvent(new t.w.PointerEvent("pointerdown", bo));
+  await t.sleep(700);
+  t.w.dispatchEvent(new t.w.PointerEvent("pointerup", bo)); back.click();
+  await t.waitFor(".tl-sheet", 4000, "the trail sheet");
+  t.expect(t.$(".tl-recent-h") && /last trail/i.test(t.text(".tl-recent-h")), "the sheet doesn't offer \"Your last trail\" after the pan");
+  const recentList = t.$$(".tl-sheet .tl-list")[1];
+  t.expect(recentList && recentList.querySelectorAll(".tl-row").length === depth, `the stashed trail should list ${depth} rows, got ${recentList ? recentList.querySelectorAll(".tl-row").length : "no second list"}`);
+  // tapping a row in it resumes that point in the OLD chain -- not the fresh page the sheet was opened from
+  await t.click(recentList.querySelector(".tl-row"), { wait: 700 });
+  await t.waitFor(() => !/viridian/i.test(TRL.hash(t)) && t.$("#app .screen [data-back]") && !t.$(".screen.waiting"), 15000, "a row from the stashed trail to open its own page");
 });
 
 scenario("trail", "long-press ‹ shows the trail; a row jumps there; the map glyph exits with the map's pan and zoom kept", async t => {
