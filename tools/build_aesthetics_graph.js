@@ -157,6 +157,8 @@ const CURATED = [
     palette: ["#0A0A0A", "#4B0036", "#8A8A8A", "#F4F1EA"] },
   { id: "movement:arts-and-crafts", title: "Arts and Crafts movement", era: "c. 1880–1910", y: 1880, place: "United Kingdom",
     essence: "A reform movement against industrial manufacture: handmade furniture, textiles and botanical pattern design (William Morris).", moveType: true },
+  { id: "movement:op-art", title: "Op Art", era: "1960s", y: 1964, place: "international",
+    essence: "Optical-abstraction painting (Bridget Riley, Victor Vasarely) using high-contrast geometric pattern to trick the eye into perceived movement.", moveType: true },
 ];
 for (const c of CURATED) addNode({ ...c, type: c.id.split(":")[0], slug: c.id.split(":")[1], hasPage: false, memberCount: 0,
   lab: c.palette ? (() => { const labs = c.palette.map(hexToLab); return labs.reduce((s, l) => [s[0] + l[0] / labs.length, s[1] + l[1] / labs.length, s[2] + l[2] / labs.length], [0, 0, 0]); })() : null,
@@ -240,7 +242,12 @@ for (const l of LOOKS) for (const r of l.related || []) addEdge("look:" + l.id, 
   const colored = [...nodes.values()].filter(n => n.lab && (n.type === "look" || n.type === "movement" || n.type === "subculture"));
   for (const n of colored) {
     const scored = colored.filter(o => o !== n).map(o => [o.id, labDist(n.lab, o.lab)]).sort((a, b) => a[1] - b[1]).slice(0, 5);
-    for (const [to, d] of scored) if (d < 28) addEdge(n.id, to, "shared_colors", { label: "similar palette", why: `Approximate palette distance ${d.toFixed(1)} (CIE Lab, rough, for browsing only).`, source: "computed, approximate Lab from each node's palette/mean L-C-W" });
+    for (const [to, d] of scored) if (d < 28) {
+      // a word, not a raw number with no reference (DESIGN-CANON law 5) -- same move as js/artwiki.js's own
+      // tie(), with thresholds calibrated to this metric's own range (most pairs land under 10)
+      const closeness = d < 3 ? "very close palettes" : d < 7 ? "close palettes" : d < 14 ? "somewhat different palettes" : "different palettes";
+      addEdge(n.id, to, "shared_colors", { label: "similar palette", why: `${closeness.charAt(0).toUpperCase()}${closeness.slice(1)} (approximate, for browsing only).`, source: "computed, approximate Lab from each node's palette/mean L-C-W" });
+    }
   }
 }
 // 10) curated influence / revival / lineage edges for subcultures and internet aesthetics (each with a one-line, factual reason; no invented facts)
@@ -266,8 +273,83 @@ const CURATED_EDGES = [
   ["subculture:goth", "look:pastel-goth", "revival", "Pastel goth (2010s) kept goth's iconography but swapped black for pastel color."],
   ["subculture:goth", "look:witch-house", "revival", "Witch house (2010s internet micro-genre) reused goth's occult imagery with digital glitch."],
   ["subculture:rockabilly", "subculture:beatnik", "same_era", "Both are 1950s American youth subcultures."],
+  // design and art movement lineage (David, next pass: "many more curated, sourced edges for internet
+  // aesthetics and fashion/design movements... each with a one-line factual reason")
+  ["look:bauhaus", "look:swiss-style", "influence", "Bauhaus's functionalist grid teaching fed directly into the Swiss/International Typographic Style of the 1950s."],
+  ["look:de-stijl", "look:bauhaus", "influence", "De Stijl's primary-color geometric abstraction (Theo van Doesburg taught at the Bauhaus in 1922) directly shaped early Bauhaus design."],
+  ["look:art-nouveau", "look:art-deco", "influence", "Art Deco emerged in the 1920s partly as a reaction against Art Nouveau's organic curves, favoring geometric streamlined form instead."],
+  ["look:art-deco", "look:streamline-moderne", "lineage", "Streamline Moderne (1930s) grew directly out of Art Deco, trading ornament for aerodynamic curves."],
+  ["look:streamline-moderne", "look:space-age", "influence", "Streamline Moderne's aerodynamic curves anticipated Space Age design's chrome, curved forms."],
+  ["look:space-age", "look:y2k", "revival", "Y2K design revived 1960s Space Age futurism's chrome and curved forms for the turn of the millennium."],
+  ["look:y2k", "look:frutiger-aero", "lineage", "Frutiger Aero (2004–2013) extended Y2K's optimistic tech gloss into glossy, nature-tinged UI design."],
+  ["look:memphis", "look:postmodern", "influence", "The Memphis Group's clashing color and pattern (founded by Ettore Sottsass, 1981) became a signature look of 1980s postmodern design."],
+  ["look:memphis", "look:corporate-memphis", "lineage", "Corporate Memphis (2010s illustration style) takes its name and flat geometric figures from the Memphis Group."],
+  ["look:pop-art", "look:psychedelic", "influence", "Pop art's bold flat color blocks of the early 1960s fed directly into psychedelic poster art later in the decade."],
+  ["look:psychedelic", "look:art-nouveau", "revival", "1960s psychedelic poster artists (Wes Wilson and others, for the Fillmore shows) deliberately revived Art Nouveau's sinuous lines and lettering."],
+  ["movement:op-art", "look:pop-art", "same_era", "Op Art and Pop Art both rose to prominence in the early-to-mid 1960s, pursuing optical abstraction and commercial imagery respectively."],
+  ["look:vienna-secession", "look:art-nouveau", "member_of", "The Vienna Secession (1897) was the Austrian branch of the wider Art Nouveau movement."],
+  ["look:constructivism", "look:de-stijl", "same_era", "Constructivism and De Stijl developed in parallel after WWI, both reducing form to geometric abstraction."],
+  ["look:brutalism", "look:postmodern", "influence", "1970s–80s postmodern architecture developed largely as a direct reaction against Brutalism's bare concrete forms."],
+  ["look:eighties-neon", "look:synthwave", "revival", "Synthwave (2010s) is a deliberate nostalgic revival of 1980s neon design and typography."],
+  ["look:ukiyo-e", "look:art-nouveau", "influence", "Japanese ukiyo-e woodblock prints, popularized in Europe as Japonisme, directly shaped Art Nouveau's flat color fields and flowing line."],
+  ["look:fauvism", "look:expressionism", "influence", "Fauvism's raw, unmixed color (from 1905) directly influenced German Expressionism in the years that followed."],
+  ["look:wabi-sabi", "look:japandi", "lineage", "Japandi (2010s) blends wabi-sabi's imperfect, natural aesthetic with Scandinavian minimalism."],
+  ["look:scandinavian", "look:japandi", "lineage", "Japandi fuses Scandinavian design's pale minimalism with Japanese wabi-sabi."],
+  ["look:dark-academia", "look:light-academia", "revival", "Light academia (2020s) is a direct palette-inverted variant of dark academia, keeping its scholarly motifs."],
+  ["look:dark-academia", "look:chaotic-academia", "revival", "Chaotic academia (2020s) keeps dark academia's scholarly obsession but drops its curated, muted palette discipline."],
+  ["look:dark-academia", "look:science-academia", "revival", "Science academia (2020s) applies dark academia's scholarly-aesthetic template to STEM instead of the humanities."],
+  ["subculture:goth", "look:cyberpunk", "same_era", "Goth and early cyberpunk fiction both took shape in the UK/US post-punk scene of the early-to-mid 1980s."],
+  ["look:cyberpunk", "look:cybergoth", "influence", "Cybergoth (1990s) fused cyberpunk's techno-dystopian imagery with goth fashion."],
+  ["look:steampunk", "look:dieselpunk", "same_era", "Dieselpunk applies steampunk's retro-technology conceit to the interwar era instead of the Victorian one."],
+  ["look:dieselpunk", "look:raygun-gothic", "influence", "Raygun Gothic (1930s–50s sci-fi serials like Flash Gordon) is closely related to dieselpunk's interwar retro-futurism."],
+  ["look:raygun-gothic", "look:atompunk", "influence", "Atompunk extends raygun gothic's retro-futurism into the atomic-age optimism of the 1950s–60s."],
+  ["look:barbiecore", "look:millennial-pink", "influence", "Barbiecore (2023, tied to the Barbie film) intensified millennial pink into a louder, fully saturated hot pink."],
+  ["look:emo", "look:e-girl-e-boy", "revival", "E-girl/e-boy style (2019–, via TikTok) draws directly on emo and scene's dark eyeliner and dyed hair."],
+  ["look:visual-kei", "look:gothic-lolita", "same_place", "Both grew out of Tokyo's Harajuku street-fashion and Japanese rock (visual kei) scenes."],
+  ["look:decora", "look:gothic-lolita", "same_place", "Decora and gothic lolita both grew out of Harajuku street fashion, at opposite ends of its color range."],
+  ["subculture:goth", "look:health-goth", "influence", "Health goth (2013–) applies goth's black-on-black palette to techwear and athletic gear."],
 ];
 for (const [from, to, type, why] of CURATED_EDGES) addEdge(from, to, type, { label: type.replace("_", " "), why, source: "curated (documented cultural/design history)" });
+
+// 11) the aesthetics KB (data/aesthetics/kb/<id>.json, another lane's in-progress per-look lineage write-up --
+// this script is re-runnable as more files land). Each file's lineage.influenced_by / lineage.influences are
+// free-text strings; only the ones that resolve to a real node here (by slug, or the same string with a
+// trailing "movement"/"style"/"group"/"aesthetic"/"subculture" word stripped) become edges, so nothing invented
+// gets added just because the KB prose mentions it in passing.
+{
+  const KB_DIR = path.join(ROOT, "data/aesthetics/kb");
+  const stripSuffix = s => s.replace(/\s+(movement|style|group|aesthetic|subculture|art|era)$/i, "").trim();
+  const resolveKbRef = ref => {
+    const tries = [ref, stripSuffix(ref)];
+    for (const t of tries) {
+      const slug = routeSlug(t);
+      if (nodes.has("look:" + slug)) return "look:" + slug;
+      if (nodes.has("subculture:" + slug)) return "subculture:" + slug;
+      if (nodes.has("movement:" + slug)) return "movement:" + slug;
+    }
+    return null;
+  };
+  let kbFiles = [];
+  try { kbFiles = fs.readdirSync(KB_DIR).filter(f => f.endsWith(".json")); } catch (e) { /* not written yet */ }
+  let kbEdgeCount = 0;
+  for (const f of kbFiles) {
+    let kb; try { kb = JSON.parse(fs.readFileSync(path.join(KB_DIR, f), "utf8")); } catch (e) { continue; }
+    const selfId = "look:" + (kb.id || f.replace(/\.json$/, ""));
+    if (!nodes.has(selfId) || !kb.lineage) continue;
+    const name = nodes.get(selfId).title;
+    for (const ref of kb.lineage.influenced_by || []) {
+      const m = resolveKbRef(ref); if (!m) continue;
+      addEdge(m, selfId, "influence", { label: "influenced by", why: `${name}'s own ColorHub knowledge-base entry lists this as an influence.`, source: `data/aesthetics/kb/${f}` });
+      kbEdgeCount++;
+    }
+    for (const ref of kb.lineage.influences || []) {
+      const m = resolveKbRef(ref); if (!m) continue;
+      addEdge(selfId, m, "influence", { label: "influences", why: `${name}'s own ColorHub knowledge-base entry lists this among what it influenced.`, source: `data/aesthetics/kb/${f}` });
+      kbEdgeCount++;
+    }
+  }
+  console.log(`aesthetics KB: ${kbFiles.length} files read, ${kbEdgeCount} edges resolved`);
+}
 
 // ---------- a deterministic force-directed layout, precomputed so the browser never runs a simulation ----------
 function layout(nodeList, edgeList, iters = 240) {
@@ -324,14 +406,30 @@ nodeList.forEach((n, i) => {
   delete n.lab;
 });
 
+// ---------- one more layout per edge type, so the Show sheet's edge-type switch can rearrange the whole
+// screen instead of just toggling which lines draw (David: "different connections should show differently").
+// Stored as parallel arrays (out.layouts[type][i] = [x,y] for out.nodes[i]), not per-node objects, since
+// repeating 9 key names on every one of ~1,026 nodes would cost far more than one flat array per type.
+// js/aesthetics-graph.js animates each node from its current position to the new type's (or, with several
+// edge types on at once, their average) whenever the filter changes; the default px/py above (the one layout
+// that used every edge at once) is the resting position with no type singled out.
+console.log("computing one layout per edge type...");
+const edgeTypesPresent = [...new Set(edges.map(e => e.type))];
+const layouts = {};
+for (const t of edgeTypesPresent) {
+  const subset = edges.filter(e => e.type === t);
+  const laidT = layout(nodeList, subset, 160);
+  layouts[t] = laidT.map(l => [l.x, l.y]);
+}
+
 const byType = {};
 for (const n of nodeList) byType[n.type] = (byType[n.type] || 0) + 1;
 const byEdgeType = {};
 for (const e of edges) byEdgeType[e.type] = (byEdgeType[e.type] || 0) + 1;
 
-const out = { v: 1, built: new Date().toISOString().slice(0, 10),
-  source: "data/looks.js, data/artists/meta.json + context.json (Wikidata, CC0), and a short hand-curated subculture/design-movement list (see each node/edge's own `source`).",
+const out = { v: 2, built: new Date().toISOString().slice(0, 10),
+  source: "data/looks.js, data/artists/meta.json + context.json (Wikidata, CC0), data/aesthetics/kb/*.json, and a short hand-curated subculture/design-movement list (see each node/edge's own `source`).",
   counts: { nodes: nodeList.length, edges: edges.length, byType, byEdgeType },
-  nodes: nodeList, edges };
+  nodes: nodeList, edges, layouts };
 fs.writeFileSync(path.join(ROOT, "data/aesthetics/graph.json"), JSON.stringify(out));
 console.log("wrote data/aesthetics/graph.json:", JSON.stringify(out.counts, null, 2));

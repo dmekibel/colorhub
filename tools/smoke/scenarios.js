@@ -2678,3 +2678,44 @@ scenario("web", "a look page's \"See its family tree\" opens the graph centered 
   await t.waitFor(() => /^#\/web\/focus\//.test(t.w.location.hash), 10000, "the #/web/focus/ address");
   await t.waitFor(".ag-canvas", 8000, "the family tree canvas after focusing a look");
 });
+
+// David, next pass: "tapping a painter/movement node then Back returns to the same graph view (pan/zoom/focus)"
+scenario("web", "tapping a painter from the graph, then Back, returns to the exact same pan/zoom", async t => {
+  await t.open("#/web/focus/artist:abraham-bloemaert", { settle: 600 });
+  const cv = await t.waitFor(".ag-canvas", 15000, "the family tree canvas");
+  await t.sleep(300);   // let agMount's centerOn settle before reading the view back
+  const viewBefore = t.w.eval("AGV.getView()");
+  const r = cv.getBoundingClientRect();
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2, { wait: 600 });
+  await t.waitFor(() => /^#\/painter\//.test(t.w.location.hash), 10000, "the painter page after tapping the focused node");
+  t.expect(/Bloemaert/.test(t.$("#app").innerText), "the painter page doesn't name Abraham Bloemaert");
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => /^#\/web/.test(t.w.location.hash) && t.$(".ag-canvas"), 10000, "back on the family tree");
+  const viewAfter = t.w.eval("AGV.getView()");
+  t.expect(Math.abs(viewAfter.scale - viewBefore.scale) < 0.01 && Math.abs(viewAfter.x - viewBefore.x) < 2 && Math.abs(viewAfter.y - viewBefore.y) < 2,
+    `view changed: ${JSON.stringify(viewBefore)} -> ${JSON.stringify(viewAfter)}`);
+});
+
+// David, next pass: "edge-type switch should re-arrange... David asked that different connections show differently"
+scenario("web", "switching the edge-type filter animates nodes to a different precomputed layout", async t => {
+  await t.open("#/web", { settle: 900 });
+  await t.waitFor(".ag-canvas", 15000, "the family tree canvas");
+  await t.sleep(500);
+  const before = t.w.eval(`[...AG.nodes.values()].slice(0, 40).map(n => [n.id, n.cx, n.cy])`);
+  await t.click("[data-agshow]", { wait: 300 });
+  await t.waitFor(".ag-sheet", 6000, "the Show sheet");
+  // turn off every default edge type and turn on "Shares colors" alone: a very different layout
+  for (const type of ["influence", "lineage", "member_of", "revival"]) { const c = t.$(`.ag-sheet [data-agedge="${type}"]`); if (c) await t.click(c, { wait: 60 }); }
+  await t.click('.ag-sheet [data-agedge="shared_colors"]', { wait: 60 });
+  await t.click(".ag-sheet [data-agapply]", { wait: 200 });
+  // the animation runs on requestAnimationFrame against performance.now(), which (unlike a plain setTimeout)
+  // doesn't advance on its own under the harness's virtual clock -- pump real time explicitly with tick() (a
+  // real same-origin fetch, same trick js/smoke/harness.js uses for stable()) instead of one long sleep
+  let after = before, moved = 0;
+  for (let i = 0; i < 20 && moved <= before.length * 0.3; i++) {
+    await t.tick(); await t.sleep(150);
+    after = t.w.eval(`[...AG.nodes.values()].slice(0, 40).map(n => [n.id, n.cx, n.cy])`);
+    moved = before.filter((b, j) => Math.hypot(after[j][1] - b[1], after[j][2] - b[2]) > 0.02).length;
+  }
+  t.expect(moved > before.length * 0.3, `only ${moved}/${before.length} sampled nodes moved to the new layout`);
+});
