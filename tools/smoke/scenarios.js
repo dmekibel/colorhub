@@ -654,18 +654,34 @@ scenario("learn", "Study on the Learn room opens the Study sheet then meets the 
   if (!t.$(".ls-res")) t.notes.push("last: " + log.slice(-6).join(",") + " · " + (t.$(".ls-study .pr-stage .pr-step") || {}).className);
   await t.waitFor(".ls-res", 8000, "the Study results");
 });
-scenario("learn", "due reviews come first in Study and are asked from memory before anything new is met", async t => {
+scenario("learn", "due reviews get a Quick look overview, then are asked from memory before anything new is met", async t => {
   await lrReal(t, "#shot=learn", "Object.values(S.cards).slice(0, 3).forEach(c => { c.due = addDays(today(), -1); });");
   await t.waitFor(".room-learn [data-study]", 6000, "the Learn room");
   t.expect(/to recall/i.test(t.text(".lh-hero-t")), `the headline says "${t.text(".lh-hero-t")}"`);
   await t.click(".room-learn [data-study]", { wait: 600 });
   await t.waitFor(".ls-sheet", 6000, "the Study sheet");
   t.expect(/to recall/.test(t.text(".ls-sheet [data-why]")), `the sheet says what's due ("${t.text(".ls-sheet [data-why]")}")`);
+  t.expect(/quick look/i.test(t.text(".ls-sheet [data-pacesay]")), `the sheet says there's an overview first ("${t.text(".ls-sheet [data-pacesay]")}")`);
   await t.click(".ls-sheet [data-go]", { force: true, wait: 700 });
-  await t.waitFor(".ls-study .pr-step", 6000, "the first step");
-  t.expect(!t.$(".ls-study .ls-meet") && !t.$(".ls-study .ls-story-bars"), "a due review was shown before it was asked");
+  // David, 2026-10-09: "it should first do an overview, then quiz" — even an all-review set opens with a Quick
+  // look (every session does), and only then moves into the questions.
+  await t.waitFor(".ls-study .ls-story-bars", 6000, "the Quick look overview");
+  t.expect(t.$(".ls-study .ls-quick"), "the overview card is a Quick look, not a question");
+  for (let i = 0; i < 10 && t.$(".ls-study .ls-story-bars"); i++) { t.ev(LS_SOLVE); await t.sleep(260); }
+  await t.waitFor(".ls-study .pr-step", 6000, "the first question, after the overview");
+  t.expect(!t.$(".ls-study .ls-meet") && !t.$(".ls-study .ls-story-bars"), "the overview ended before the first question");
   const due = t.ev("dueList().map(c => c.n.toLowerCase())"), first = t.ev("(() => { const s = document.querySelector('.ls-study .pr-stage'); return s._lsIt ? s._lsIt.key : ''; })()");
   t.expect(due.includes(first), `the first question is a due review (${first})`);
+});
+scenario("learn", "Test me skips the overview, straight to questions", async t => {
+  await lrReal(t, "#shot=learn", "Object.values(S.cards).slice(0, 3).forEach(c => { c.due = addDays(today(), -1); });");
+  await t.waitFor(".room-learn [data-study]", 6000, "the Learn room");
+  await t.click(".room-learn [data-study]", { wait: 600 });
+  await t.waitFor(".ls-sheet", 6000, "the Study sheet");
+  await t.click('.ls-sheet [data-pace="test"]', { wait: 300 });
+  await t.click(".ls-sheet [data-go]", { force: true, wait: 700 });
+  await t.waitFor(".ls-study .pr-step", 6000, "the first step");
+  t.expect(!t.$(".ls-study .ls-story-bars"), "Test me opens straight on a question, no overview");
 });
 
 // ================================================================== THE DAILIES (js/challenge.js, js/colordle.js)
@@ -1015,6 +1031,40 @@ scenario("pages", "single tap opens focus view; double tap favorites without ope
   tap(); await t.sleep(60); tap();
 });
 
+// David, 2026-10-09: a long article's lede already shows on the cover (the "Almost the same as..." / story-first-
+// sentence line); the door card used to repeat it as its own dek. The door now opens straight on the chapter list.
+scenario("pages", "a long article's lede shows once, on the cover -- not again on the door card", async t => {
+  await H.openPage(t, "#/color/scarlet", "Scarlet");
+  await t.waitFor(".ar-door", 10000, "the story door (Scarlet is long enough for one)");
+  t.expect(!t.$(".ar-door-dek"), "the door card still shows its own dek under the title");
+  t.expect(t.$(".rp-def") && t.text(".rp-def").length > 10, "the cover has no definition line to show the lede once");
+  t.expect(t.$$(".ar-door-row").length >= 1, "the door opens on the chapter list with no dek in the way");
+});
+
+// David, 2026-10-09: caught while craft-reviewing Olive (a color with children) -- a door-length article's
+// chapters/Family/Notes live behind "Begin reading", so Family used to be silently absent on the color page for
+// every long article (~260 of the richest ones). It now has its own always-present slot.
+scenario("pages", "Family still shows on a door-length article's color page (Olive -- it has children)", async t => {
+  await H.openPage(t, "#/name/olive", "Olive");
+  await t.waitFor(".ar-door", 10000, "the story door (Olive is long enough for one)");
+  const fam = await t.waitFor(".ar-fam", 8000, "the Family section, even though the article is a door");
+  t.expect(t.$$(".fam-trow-l", fam).some(p => p.textContent === "Variations"), "Olive's children ('Variations') don't show in the family tree");
+  await t.click([...t.$$(".fam-seg-b", fam)].find(b => b.textContent === "Compare"), { wait: 300 });
+  t.expect(t.$(".fam-cmp-line", fam), "Compare has no split/diff line for a door-length article's color page");
+});
+
+// David, 2026-10-09: "header feels too big -- harder to read the article". Scrolling down slims the pinned bar
+// further (the jump tabs fade out, back + name stay); scrolling up a little brings the tabs straight back.
+scenario("pages", "the pinned header slims its tabs away on scroll down, brings them back on scroll up", async t => {
+  await H.openPage(t, "#/color/scarlet", "Scarlet");
+  const scroll = async y => { t.w.scrollTo(0, y); t.w.document.dispatchEvent(new t.w.Event("scroll")); await t.sleep(30); };
+  for (let y = 0; y <= 1400; y += 140) await scroll(y);
+  const bar = await t.waitFor(".rp-bar.on", 4000, "the pinned header, once scrolled past the cover");
+  await t.waitFor(() => bar.classList.contains("collapsed"), 2000, "the header to slim its tabs while scrolling down");
+  for (let y = 1400; y >= 900; y -= 140) await scroll(y);
+  await t.waitFor(() => !bar.classList.contains("collapsed"), 2000, "the header to bring its tabs back on scroll up");
+});
+
 scenario("pages", "nearest stories: a name without an article offers the nearest ones, a tap opens another page", async t => {
   // a name with no story of its own. Every color is getting an article, so pick one still without a committed article
   // from the article index; when none is left, nearest stories can't show and the scenario only notes it.
@@ -1236,10 +1286,21 @@ scenario("home", "Study corner opens the instant deck seeded with the middle col
   t.expect(/Learn/.test(t.$("[data-qtitle]").textContent), "the sheet title");
   t.expect(t.$$(".pr-quick .pr-plate i").length >= 5, "the deck plate");
 });
+// David, 2026-10-09: "pressing the recall / study button takes you straight into flashcards" — the map's
+// Recall row (and the You page's recall card, below) must open the one Study flow, never js/learn.js's old
+// swipe deck (.deck) directly.
+scenario("home", "the map's Recall opens the one Study flow, not the old swipe deck", async t => {
+  await H.homeReady(t);
+  t.ev("Object.values(S.cards).slice(0, 2).forEach(c => { c.due = addDays(today(), -1); }); save();");
+  await H.menu(t, "recall");
+  await t.waitFor(".ls-sheet, .ls-study", 6000, "the Study sheet or session from Recall");
+  t.expect(!t.$(".deck"), "Recall did not open the old swipe deck directly");
+});
 
 // ================================================================== LEARN A SET (js/learnset.js)
 const LS_SOLVE = `(() => {
   const st = document.querySelector('.ls-study .pr-stage'); if (!st) return 'gone';
+  const skip = st.querySelector('[data-skip-look]'); if (skip) { skip.click(); return 'skiplook'; }
   const boss = st.querySelector('[data-boss]'); if (boss) { boss.click(); return 'boss'; }
   const nx = st.querySelector('[data-next]'); if (nx) { nx.click(); return 'next'; }
   const it = st._lsIt, nm = it ? prName(it) : '';
@@ -1248,6 +1309,8 @@ const LS_SOLVE = `(() => {
     const k = tiles.findIndex((t, i) => !t.sw && !btns[i].classList.contains('gone')); if (k < 0) return 'wait';
     const j = tiles.findIndex(t => t.sw && t.i === tiles[k].i); btns[k].click(); btns[j].click(); return 'match';
   }
+  if (st.querySelector('.pr-s-sort')) { const chk = st.querySelector('[data-check]'); if (chk) { chk.click(); return 'sort'; } return 'wait'; }
+  if (st.querySelector('.pr-s-gradient') && st._prChoose) { st._prChoose(.5); return 'gradient'; }
   if (st.querySelector('.pr-s-odd')) { st._prChoose(st._prOpts.findIndex(o => !o.same)); return 'odd'; }
   if (st.querySelector('.pr-s-edge') && st._prEdge) { st._prChoose(st._prEdge.last); return 'edge'; }
   if (st.querySelector('.pr-s-quiz')) { st._prChoose([...st.querySelectorAll('.pr-opt')].findIndex(b => b.textContent.trim() === nm)); return 'qn'; }
@@ -1321,6 +1384,26 @@ scenario("learnset", "Study: a mixed session runs to the results", async t => {
   t.expect(t.ev("Object.values(S.cards).filter(c => c.from && c.due > today()).length") >= 1, "the Study colors are in spaced review");
   await t.click(".ls-res [data-a=look]", { wait: 500 });
   await t.waitFor(".ls-lookscr", 4000, "Look again from the results");
+});
+// Sort (light to dark, drag into order) and Gradient (place it on a strip between two neighbors) — the two
+// formats design/LEARN-ROOM-2.md §Formats lists as missing. Test me starts every color at the "tell apart" rung
+// (lv 2), where both live, so a longer session at that pace gives them a fair chance to come up without relying
+// on the natural climb. Their results feed S.eye, not the naming log (js/studyformats.js sfEyeLog).
+scenario("learnset", "Study: Sort and Gradient come up in a longer session and feed the eye profile, not the naming log", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor(".ls-sheet", 4000, "Learn it opens the Learn sheet directly");
+  t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r._countTo(10); })()");
+  await t.click('.ls-sheet [data-pace="test"]', { wait: 300 });
+  const eyeBefore = t.ev("Array.isArray(S.eye) ? S.eye.length : 0");
+  await t.click(".ls-sheet [data-go]", { force: true, wait: 700 });
+  await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "the first question");
+  const kinds = new Set();
+  for (let i = 0; i < 260 && !t.$(".ls-res"); i++) { const k = t.ev(LS_SOLVE); kinds.add(k); await t.sleep(k === "wait" ? 250 : 220); }
+  t.notes.push("kinds: " + [...kinds].join(","));
+  t.expect(kinds.has("sort") || kinds.has("gradient"), `neither Sort nor Gradient showed up in a 10-color test-me session (${[...kinds].join(",")})`);
+  const eyeAfter = t.ev("Array.isArray(S.eye) ? S.eye.length : 0");
+  if (kinds.has("sort") || kinds.has("gradient")) t.expect(eyeAfter > eyeBefore, `S.eye grew (${eyeBefore} -> ${eyeAfter})`);
 });
 // Lane E (David, 2026-10-09): Learn it opens the Learn sheet with its settings showing (size, closeness, neighbors,
 // pace, Look vs Study), seeded with the color + its 3 nearest (the old quick mode's shape) — not straight into
@@ -2087,20 +2170,23 @@ scenario("paintings", "a painting's identity (title, painter, museum) sits above
   // scrolling the page at that height (440x956 is checked separately with a real screenshot -- see colorhub-verify)
   t.expect(stripTop < 812, `the palette strip sits at y=${Math.round(stripTop)}, below the 812px fold`);
 });
-scenario("paintings", "a painting's On the painting control: numbered Markers that are remembered and a Highlight that dims", async t => {
+// David's polish pass, 2026-10-09: the three-way "On the painting" switch (Off/Markers/Highlight) is gone,
+// redundant once a swatch tile locates itself on tap. Tapping a strip tile should dim the rest of the painting,
+// glow where that color sits, and caption its share and a plain-English region; tapping it again clears it.
+scenario("paintings", "a painting's strip tile locates a color on the painting (the old Markers/Highlight switch is gone)", async t => {
   await t.open("#/gallery/12", { settle: 800 });
-  await t.waitFor(() => { const w = t.$("[data-glwhere]"); return w && !w.hidden && w; }, 15000, "the On the painting control (a local copy, so its pixels can be read)");
-  await t.click('[data-glw="mark"]', { force: true, wait: 400 });
-  const marks = t.$$(".gl-mks .gl-mk:not(.sm)");
-  t.expect(marks.length >= 3, `only ${marks.length} numbered markers`);
-  t.expect(t.$$("[data-glswatches] .gl-n").length === t.$$("[data-glswatches] [data-glj]").length, "the strip chips aren't numbered like the markers");
-  t.expect(t.ev("S.glWhere") === "mark", "the choice isn't remembered");
-  const hexes = new Set(t.$$("[data-glrows] [data-swatch]").map(b => b.dataset.swatch));
-  t.expect(marks.every(m => hexes.has(m.dataset.swatch)), "a marker isn't one of the palette's colors");
-  await t.click('[data-glw="lit"]', { force: true, wait: 400 });
-  t.expect(!t.$(".gl-mks .gl-mk") && t.$("[data-gllitcv]").classList.contains("on"), "Highlight didn't swap the markers for the dimmed painting");
-  await t.click('[data-glw="off"]', { force: true, wait: 300 });
-  t.expect(!t.$("[data-gllitcv]").classList.contains("on"), "Off left the painting dimmed");
+  t.expect(!t.$("[data-glwhere]"), "the old On the painting switch is still in the DOM");
+  await t.waitFor("[data-glswatches] [data-glj]", 15000, "a palette swatch tile");
+  // the strip redraws (a fresh node) every time locate toggles, so re-query it each time rather than keep a reference
+  const tileAt0 = () => t.$('[data-glswatches] [data-glj="0"]');
+  await t.click(tileAt0(), { force: true, wait: 400 });
+  t.expect(tileAt0().classList.contains("loc"), "the tapped tile doesn't show as located");
+  await t.waitFor(() => t.$("[data-gllitcv]").classList.contains("on"), 4000, "the painting dims around the located color");
+  const cap = t.$("[data-gllocate]");
+  t.expect(cap && !cap.hidden && /% of the canvas/.test(t.text(cap)), `the locate caption is missing or wrong: "${cap && t.text(cap)}"`);
+  await t.click(tileAt0(), { force: true, wait: 400 });
+  t.expect(!tileAt0().classList.contains("loc") && t.$("[data-gllocate]").hidden, "tapping the tile again didn't clear the locate state");
+  t.expect(!t.$("[data-gllitcv]").classList.contains("on"), "the dim canvas is still on after clearing locate");
 });
 // The Analysis section's "Learn this painting" button (js/artwiki.js awAnalysis) was guarded by
 // `typeof paintingLesson === "function"`, a function that was never defined anywhere, so the button never
@@ -2148,6 +2234,25 @@ scenario("paintings", "swiping the picture moves to the next/previous painting b
   t.expect(/^#\/gallery\/\d+/.test(TRL.hash(t)) && TRL.hash(t) !== hash0, "the swipe didn't navigate to a gallery address");
   await t.click(TRL.screenBack(t), { wait: 500 });
   t.expect(t.text(".p-title") === title0, "Back after a swipe didn't return to the first painting");
+});
+// David's polish pass, 2026-10-09: a compact action row (Keep, Share, On the map — Play only once a real game is
+// wired, never Learn or Compare, which don't belong on this page any more), and "Findings" + "Analysis" merged
+// into one section with the strongest lines first and the rest behind one "More".
+scenario("paintings", "the action row is compact (Keep/Share/On the map) and Findings/Analysis read as one section", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  const acts = await t.waitFor("[data-csacts] .cs-act", 15000, "the action row");
+  const keys = t.$$("[data-csacts] .cs-act").map(b => b.dataset.cs);
+  t.expect(keys.length <= 4, `the action row has ${keys.length} buttons, not compact`);
+  t.expect(!keys.includes("learn") && !keys.includes("compare"), `Learn or Compare still in the action row: ${keys}`);
+  t.expect(keys.slice(0, 2).join() === "keep,share", `expected Keep then Share first, got ${keys}`);
+  // the wrapper's own header reads "Findings"; nested sub-cards (painter row, "another century") keep their own
+  // headers, but nothing in here should say "Analysis" any more -- it folded into this one section
+  t.expect(/Findings/.test(t.text(".gl-finds > .sec-head")), "the Findings wrapper's own header is missing or wrong");
+  t.expect(!t.$$(".gl-finds .sec-head b").some(b => t.text(b) === "Analysis"), "a separate \"Analysis\" header is still showing");
+  const more = t.$(".gl-finds-more");
+  t.expect(more && !more.open, "the Analysis fold should start closed");
+  await t.click(more.querySelector("summary"), { wait: 400 });
+  t.expect(/Value key/.test(t.text("[data-awan]")), "opening More doesn't reveal the Analysis tiles");
 });
 scenario("paintings", "a color page's In paintings section: presets re-run the query; Fine-tune opens the sliders", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
@@ -2723,7 +2828,10 @@ scenario("learnroom", "a wedge of the wheel studies that family at your level an
   await t.open("#shot=lx:room", { settle: 600 });
   await t.click(await t.waitFor("[data-lh-map]", 10000, "See them on the map"), { wait: 900 });
   await t.waitFor(".hm canvas", 8000, "the map from See them on the map");
-  t.expect(t.ev("S.hm.filter") === "learned", `the map's view (${t.ev("S.hm.src")} · ${t.ev("S.hm.filter")})`);
+  // David, 2026-10-09: a map selection is a mode inside the real map (mapSelect), not a separate filtered view
+  t.expect(t.ev("typeof HONEY_HL !== 'undefined' && !!HONEY_HL"), "See them on the map lights up a selection (mapSelect)");
+  t.expect(t.ev("(HONEY_HL && HONEY_HL.hexes || []).length") > 0, "the selection carries colors to light up");
+  t.expect(t.$(".cs-hl-bar, .cs-hl-pill"), "the selection chip is on screen");
 });
 scenario("learnroom", "the Today card shows the painting and opens both of its parts", async t => {
   await t.open("#shot=learn", { settle: 600 });
@@ -2793,6 +2901,15 @@ scenario("you-coverage", "You: a favorite painting, long mix-up names and hearte
   t.expect(sw <= cw, `the You page scrolls horizontally: scrollWidth ${sw} > clientWidth ${cw}`);
   const screen = t.$(".screen.you-page");
   t.expect(screen.getBoundingClientRect().width <= cw + 1, `the You page's own screen is ${Math.round(screen.getBoundingClientRect().width)}px wide, wider than the ${cw}px viewport`);
+});
+
+scenario("you-coverage", "You: the recall card opens the one Study flow, not the old swipe deck", async t => {
+  await t.open("#shot=you", { settle: 600 });
+  t.ev("Object.values(S.cards).slice(0, 2).forEach(c => { c.due = addDays(today(), -1); }); save(); youPage();");
+  await t.sleep(300);
+  await t.click('[data-ym="recall"]', { wait: 600 });
+  await t.waitFor(".ls-sheet, .ls-study", 6000, "the Study sheet or session from the recall card");
+  t.expect(!t.$(".deck"), "the recall card did not open the old swipe deck directly");
 });
 
 // ================================================================== THE PAINTING PAGE + NAME IT / FIND IT (PLAN.md lane A)

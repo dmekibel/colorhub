@@ -1265,7 +1265,6 @@ function honeycomb(host, opts = {}) {
   function caption() {
     const it = center; if (!it) return;
     cap.querySelector("i").style.setProperty("--c", it.h);
-    if (typeof relState === "function") cap.querySelector("i").dataset.rel = relState(it.c || it.h);   // the relation mark (js/polish.js)
     cap.querySelector("b").textContent = it.n;
     cap.querySelector("small").textContent = honeyWhere(it);
     cap.querySelector("em").textContent = it.h;

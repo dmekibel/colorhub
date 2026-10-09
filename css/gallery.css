@@ -137,8 +137,13 @@
 /* the "Findings" wrapper (js/gallery.js glPage, David's rebuild brief, 2026-10-09): one header over the
    crops/roles row and the painter/decade/movement comparison; quiet when both are still empty */
 .gl-finds .sec-head{margin-bottom:4px}
-.gl-finds:not(:has(.gl-roles:not(:empty))):not(:has(.aw-cx:not(:empty))){display:none}
 .gl-finds .aw-cx{margin-top:18px}
+/* Findings and Analysis used to read as two data sections back to back; the strongest lines (roles/crops, then
+   In context) lead, the rest of the Analysis deep-dive folds behind one "More" (David's polish pass, 2026-10-09) */
+.gl-finds-more{margin-top:18px;border-top:1px solid var(--rule)}
+.gl-finds-more>summary{font:400 17px/1.2 var(--serif);color:var(--ink);padding:16px 0;cursor:pointer;min-height:44px;box-sizing:border-box;list-style:none}
+.gl-finds-more>summary::-webkit-details-marker{display:none}
+.gl-finds-more[open]>summary{padding-bottom:10px}
 .gl-role span{display:flex;flex-direction:column;gap:2px;min-width:0}
 .gl-role em{font:italic 400 15px/1.2 var(--serif);color:var(--soft)}
 .gl-role b{font:400 18px/1.15 var(--serif);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
@@ -187,7 +192,6 @@
 .gl-strip .pal{position:relative;padding:6px 7px;font:500 12px/1 var(--sans);letter-spacing:0;font-variant-numeric:tabular-nums}
 .gl-strip .pal[data-ink="dark"],.pal-name i[data-ink="dark"]{color:rgba(14,13,11,.78)}
 .gl-strip .pal[data-ink="light"],.pal-name i[data-ink="light"]{color:rgba(255,255,255,.88)}
-.gl-strip .gl-n{position:absolute;top:6px;left:7px;font:500 12px/1 var(--sans);font-style:normal}
 .gl-strip .pal,.gl-pal-ui .pal-name{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 .gl-modes-f{position:relative;margin:8px calc(-1 * var(--g)) 0}
 .gl-modes-f::before,.gl-modes-f::after{content:"";position:absolute;top:0;bottom:0;width:36px;z-index:1;pointer-events:none;opacity:0;transition:opacity .2s}

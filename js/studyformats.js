@@ -82,3 +82,108 @@ PR_STEPS.edge = { by: null, render(box, it, ctx = {}) {
 function sfEdgeKeep(a, b, step, border) {
   try { S.edges = S.edges || {}; const k = a + "|" + b; (S.edges[k] = S.edges[k] || []).push([today(), step, border + 1]); if (S.edges[k].length > 12) S.edges[k].splice(0, S.edges[k].length - 12); } catch (e) {}
 }
+// Perceptual-skill evidence from Study's own formats (design/LEARN-ROOM-2.md §55: "the edge and odd-one-out
+// results feeding the eye profile in Train"). A Sort or Gradient result says something about how finely you see
+// light-to-dark or where one color gives way to another — never that you "know" a name, so it's kept apart from
+// the Learner Model's naming log (learnerLog) in its own bounded list. Train's own gym engine owns the dials it
+// runs (S.gym.skills); this is a second, independent source eyeThreshold() can draw on, not a write into that.
+const SF_EYE_CAP = 300;
+function sfEyeLog(kind, fam, err) {
+  try {
+    S.eye = Array.isArray(S.eye) ? S.eye : [];
+    S.eye.push({ t: Date.now(), k: String(kind), f: String(fam || ""), e: +err });
+    if (S.eye.length > SF_EYE_CAP) S.eye.splice(0, S.eye.length - SF_EYE_CAP);
+    if (typeof lnSaveSoon === "function") lnSaveSoon(); else save();
+  } catch (e) {}
+}
+
+// ---------- sort: a set-level round (studypace.js spNext), light to dark, drag into order ----------
+PR_STEPS.sort = { by: null, render(box, items, ctx = {}) {
+  items = [].concat(items).slice(0, 6);
+  if (items.length < 4) return PR_STEPS.match.render(box, items, ctx);
+  return new Promise(resolve => {
+    const t0 = performance.now();
+    const correct = items.slice().sort((a, b) => lab(b.h)[0] - lab(a.h)[0]);   // lightest first
+    const shown = prShuffle(items);
+    box.innerHTML = `<div class="pr-step pr-s-sort">${ctx.note ? `<p class="pr-stepnote">${esc(ctx.note)}</p>` : `<p class="pr-stepnote">Light to dark: drag into order</p>`}
+      <div class="pr-sort-list" data-sort>${shown.map(it => `<div class="pr-sort-row" data-k="${esc(it.key)}" style="--c:${it.h}"><span class="pr-sort-n">${esc(prName(it))}</span></div>`).join("")}</div>
+      <div class="pr-foot"><button class="btn" data-check>Check</button></div></div>`;
+    const list = box.querySelector("[data-sort]");
+    let rows = [...list.children], rowH = 0, checked = false;
+    const layout = skip => rows.forEach((r, i) => { if (r !== skip) r.style.transform = `translateY(${i * rowH}px)`; });
+    const measure = () => { rowH = list.clientHeight / rows.length; rows.forEach(r => r.style.height = (rowH - 6) + "px"); layout(); };
+    requestAnimationFrame(measure);
+    rows.forEach(r => r.addEventListener("pointerdown", e => {
+      if (checked) return;
+      r.setPointerCapture(e.pointerId); r.classList.add("lift");
+      const y0 = e.clientY, i0 = rows.indexOf(r), top0 = i0 * rowH;
+      const move = ev => {
+        const y = clamp(top0 + ev.clientY - y0, 0, (rows.length - 1) * rowH);
+        r.style.transform = `translateY(${y}px) scale(1.02)`;
+        const want = clamp(Math.round(y / rowH), 0, rows.length - 1), cur = rows.indexOf(r);
+        if (want !== cur) { rows.splice(cur, 1); rows.splice(want, 0, r); layout(r); buzz(4); }
+      };
+      const up = () => { r.removeEventListener("pointermove", move); r.classList.remove("lift"); layout(); };
+      r.addEventListener("pointermove", move);
+      r.addEventListener("pointerup", up, { once: true });
+      r.addEventListener("pointercancel", up, { once: true });
+    }));
+    box.querySelector("[data-check]").onclick = () => {
+      if (checked) return; checked = true;
+      const finalOrder = rows.map(r => items.find(it => it.key === r.dataset.k));
+      const per = items.map(it => ({ item: it, ok: finalOrder.indexOf(it) === correct.indexOf(it), answer: null }));
+      const wrong = per.filter(p => !p.ok).length;
+      rows.forEach((r, i) => r.classList.add(finalOrder[i] === correct[i] ? "good" : "bad"));
+      buzz(wrong ? [10, 40, 10] : [10, 30, 20]);
+      box.querySelector(".pr-foot").innerHTML = `<p class="pr-hint">${wrong ? `${wrong} out of place. Here's the order, light to dark.` : "Perfect order"}</p>`;
+      const fam = typeof prFam9 === "function" ? prFam9(items[0].h) : "";
+      sfEyeLog("sort", fam, wrong / items.length);
+      // a miss teaches: settle into the true order before moving on, not just red outlines (CLAUDE.md: the
+      // same rule every other step here follows — a wrong answer shows the truth)
+      if (wrong) later(() => { rows.forEach(r => r.classList.remove("good", "bad")); rows = correct.map(it => list.querySelector(`[data-k="${CSS.escape(it.key)}"]`)); layout(); rows.forEach(r => r.classList.add("true")); }, 650);
+      later(() => resolve({ ok: wrong === 0, ms: performance.now() - t0, per, answer: null }), wrong ? 1500 : 500);
+    };
+  });
+} };
+
+// ---------- gradient: place a color in its spot on a strip between two neighbors (studypace.js spBracket) ----------
+PR_STEPS.gradient = { by: null, render(box, it, ctx = {}) {
+  const ends = ctx.other;
+  if (!ends || !ends.a || !ends.b) return PR_STEPS["quiz-color"].render(box, it, ctx);
+  return new Promise(resolve => {
+    const t0 = performance.now(), A = lab(ends.a.h), B = lab(ends.b.h), M = lab(it.h);
+    const d = [B[0] - A[0], B[1] - A[1], B[2] - A[2]], v = [M[0] - A[0], M[1] - A[1], M[2] - A[2]];
+    const len2 = d[0] * d[0] + d[1] * d[1] + d[2] * d[2], dot = d[0] * v[0] + d[1] * v[1] + d[2] * v[2];
+    const trueT = clamp(len2 ? dot / len2 : .5, 0, 1), nm = prName(it), na = prName(ends.a), nb = prName(ends.b);
+    box.innerHTML = `<div class="pr-step pr-s-gradient">
+      <div class="pr-q"><span class="pr-note">Place it on the gradient</span><b class="pr-t1" style="${prFit(nm, 40)}">${esc(nm)}</b></div>
+      <div class="sf-grad-bar" data-bar style="background:linear-gradient(to right, ${ends.a.h}, ${ends.b.h})"><i class="sf-grad-mark" data-mark style="left:50%"></i></div>
+      <div class="sf-grad-ends"><span>${esc(na)}</span><span>${esc(nb)}</span></div>
+      <div class="pr-fb" aria-live="polite"></div>
+      <div class="pr-foot"><button class="btn" data-set>Set it there</button></div></div>`;
+    const bar = box.querySelector("[data-bar]"), mark = box.querySelector("[data-mark]"), fb = box.querySelector(".pr-fb"), foot = box.querySelector(".pr-foot");
+    let pos = .5, done = false, dragging = false;
+    const setPos = x => { pos = clamp(x, 0, 1); mark.style.left = (pos * 100) + "%"; };
+    const fromEvent = e => { const r = bar.getBoundingClientRect(), p = e.changedTouches ? e.changedTouches[0] : e; return (p.clientX - r.left) / r.width; };
+    bar.addEventListener("pointerdown", e => { if (done) return; dragging = true; bar.setPointerCapture(e.pointerId); setPos(fromEvent(e)); buzz(3); });
+    bar.addEventListener("pointermove", e => { if (!dragging || done) return; setPos(fromEvent(e)); });
+    bar.addEventListener("pointerup", () => { dragging = false; });
+    const commit = () => {
+      if (done) return; done = true;
+      const err = Math.abs(pos - trueT), ok = err <= .12;
+      mark.classList.add("set");
+      const tm = document.createElement("i"); tm.className = "sf-grad-mark true"; tm.style.left = (trueT * 100) + "%"; bar.appendChild(tm);
+      buzz(ok ? 12 : [10, 40, 10]);
+      fb.innerHTML = `<p>${ok ? "Right where it sits." : pos < trueT ? `${esc(nm)} sits further toward ${esc(nb)} than that.` : `${esc(nm)} sits further toward ${esc(na)} than that.`}</p>`;
+      const fam = typeof prFam9 === "function" ? prFam9(it.h) : "";
+      sfEyeLog("gradient", fam, err);
+      const res = { ok, answer: { kind: "gradient", t: pos, trueT }, ms: performance.now() - t0 };
+      if (typeof prHold === "function") prHold(box, foot, () => resolve(res));
+      else if (ok) prAuto(() => resolve(res), 1200);
+      else prNextBtn(foot, () => resolve(res));
+      prKeyer(ctx)(e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); resolve(res); } });
+    };
+    foot.querySelector("[data-set]").onclick = commit;
+    box._prChoose = t => { setPos(t); commit(); };   // smoke/test hook
+  });
+} };

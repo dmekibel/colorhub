@@ -1,11 +1,4 @@
-/* The Learner Model's relation mark (js/learner.js relMarkHTML) and the ColorSet verbs (js/colorset.js).
-   Minimal on purpose: the design lane (L12) owns .rel-mark's final look, and its CSS wins on merge. */
-
-/* the relation mark: nothing = unmet · ring = met · solid disc = yours · dashed red ring = you mixed it up */
-.rel-mark{display:inline-block;flex:none;width:8px;height:8px;margin-left:6px;border-radius:50%;vertical-align:middle;pointer-events:none}
-.rel-mark[data-s="met"]{box-shadow:inset 0 0 0 1.5px currentColor;opacity:.75}
-.rel-mark[data-s="yours"]{background:currentColor}
-.rel-mark[data-s="confused"]{border:1.5px dashed var(--bad)}
+/* The ColorSet verbs (js/colorset.js). */
 
 /* one action row any page can drop in: opaque tiles, icon over a short label */
 .cs-acts{display:grid;grid-template-columns:repeat(var(--n,4),minmax(0,1fr));gap:6px;margin-top:14px}
@@ -24,7 +17,6 @@
 .cs-chips{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:10px}
 .cs-chip{display:inline-flex;align-items:center;gap:6px;min-height:32px;font-size:13px;color:var(--soft)}
 .cs-chip i{width:16px;height:16px;border-radius:50%;background:var(--c);flex:none;box-shadow:inset 0 0 0 1px var(--rule)}
-.cs-chip .rel-mark{margin-left:0;color:var(--ink)}
 .cs-cmp-read{margin-top:18px;display:grid;gap:8px}
 .cs-cmp-read p{font:400 19px/1.25 var(--serif);margin:0}
 .cs-cmp-read b{font-weight:400;font-style:italic}

@@ -891,7 +891,9 @@ function hmHome() {
     STEM_KEY = e => { if (e.key === "Escape") { e.stopPropagation(); closeStem(); } };
     addEventListener("keydown", STEM_KEY, true);
     const acts = {
-      recall: () => deck("review"),
+      // the one Study door (js/learnset.js lsOpen -> overview -> varied formats), never the old swipe deck
+      // straight away (David, 2026-10-09: "pressing the recall / study button takes you straight into flashcards")
+      recall: () => typeof lhStudy === "function" && typeof lhDue === "function" ? lhStudy(lhDue(), { label: "Recall", title: "Study <em>what's due</em>", src: "recall", exact: true }) : deck("review"),
       learn: () => hmStudyCorner(ctrl, items),
       map: () => msOpen({ from: "home" }),
       fav: () => fvPickStart(el, ctrl),
