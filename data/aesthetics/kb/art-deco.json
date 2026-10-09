@@ -1,0 +1,70 @@
+{
+ "id": "art-deco",
+ "name": "Art Deco",
+ "lineage": {
+  "influenced_by": [
+   "the 1925 Paris Exposition Internationale des Arts Décoratifs (the style's naming event)",
+   "Egyptian imagery after the 1922 Tutankhamun discovery",
+   "Cubism's geometric faceting"
+  ],
+  "influences": [
+   "streamline-moderne",
+   "cassette-futurism"
+  ]
+ },
+ "eras": [
+  "c. 1910–1939 (peak 1925–1935)"
+ ],
+ "places": [
+  "Paris",
+  "New York (Chrysler Building, 1930)",
+  "Miami Beach"
+ ],
+ "garments": [
+  "beaded flapper dresses",
+  "geometric jewelry",
+  "metallic lamé"
+ ],
+ "media": [
+  {
+   "title": "William Van Alen's Chrysler Building (1930)",
+   "note": ""
+  },
+  {
+   "title": "The Great Gatsby (multiple adaptations)",
+   "note": "a recurring popular touchstone, though the 1925 novel predates the term \"Art Deco\" itself, coined retrospectively (historian Bevis Hillier, 1968) from the 1925 exposition's name"
+  }
+ ],
+ "figures": [
+  "William Van Alen",
+  "Tamara de Lempicka",
+  "Erté"
+ ],
+ "reacts_against": "Art Nouveau's organic, flowing plant forms, trading them for symmetrical, geometric, machine-age glamour that matched the era's new skyscrapers and ocean liners.",
+ "revivals": [
+  "a recurring luxury-design reference; Miami Beach's Art Deco Historic District is a major modern tourist draw"
+ ],
+ "article": "Art Deco didn't have its name until decades after its peak. The style emerged in the 1910s–20s and took its defining public moment at the 1925 Paris Exposition Internationale des Arts Décoratifs — but \"Art Deco,\" shortened from that exposition's name, wasn't coined as a period term until the British historian Bevis Hillier used it in a 1968 book, retroactively naming a style that had already been over for thirty years. What it names is a deliberately symmetrical, geometric glamour that replaced Art Nouveau's organic curves with hard-edged sunbursts, chevrons and stepped forms, often in gold, black and jewel tones set against cream or ivory. Two real-world events fed its visual vocabulary directly: the 1922 discovery of Tutankhamun's tomb set off a craze for Egyptian motifs across fashion and architecture, and the era's new engineering feats — ocean liners, early skyscrapers — gave Deco designers a machine-age confidence that shows most famously in William Van Alen's 1930 Chrysler Building, with its tiered crown and sunburst steel ornament. The style crossed from architecture into fashion (beaded flapper dresses, geometric jewelry) and graphic design before the Depression and the Second World War ended its run; Miami Beach's dense cluster of Art Deco hotels, built mostly in the 1930s and preserved as a historic district, is now one of the style's most visited surviving concentrations.",
+ "wiki_facts": {
+  "decade_of_origin": "1910s–1930s",
+  "key_motifs": "Bold geometric shapes (chevrons, sunbursts, zig-zags), stepped forms, stylized natural forms, lavish ornamentation, symmetry",
+  "key_colours": "High contrast palettes, black, silver, gold, chrome, rich jewel tones",
+  "related_aesthetics": "Art NouveauBauhausCubismDecopunkDeco-Luxe[https://cari.institute/aesthetics/decoplex Decoplex]DieselpunkFlapperFleischer StyleFuturismGarçonneRoaring TwentiesStreamline ModerneWeimar Cabaret",
+  "key_values": "Luxury, glamour, modernity, progress, faith in technology, \"machine aesthetic,\" speed"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Art_Deco"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 85% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

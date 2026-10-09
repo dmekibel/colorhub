@@ -1,0 +1,61 @@
+{
+ "id": "de-stijl",
+ "name": "De Stijl",
+ "lineage": {
+  "influenced_by": [
+   "Cubism",
+   "theosophy's interest in universal/spiritual order"
+  ],
+  "influences": [
+   "bauhaus",
+   "constructivism"
+  ]
+ },
+ "eras": [
+  "1917–1931 (the movement's journal and main activity)"
+ ],
+ "places": [
+  "Netherlands"
+ ],
+ "garments": [
+  "not a fashion look — painting, furniture and architecture"
+ ],
+ "media": [
+  {
+   "title": "Piet Mondrian, Composition with Red, Blue and Yellow (1930)",
+   "note": "the defining image of the style's reduced palette"
+  }
+ ],
+ "figures": [
+  "Piet Mondrian",
+  "Theo van Doesburg",
+  "Gerrit Rietveld"
+ ],
+ "reacts_against": "representational art and decorative ornament entirely, reducing painting to horizontal and vertical lines and the three primary colors plus black, white and grey.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Neoplasticism",
+  "decade_of_origin": "1917 - 1931",
+  "key_motifs": "Straight horizontal and vertical lines, squares and rectangles, asymmetry, geometric abstraction, dynamic equilibrium",
+  "key_colours": "Primary colors (red, blue, yellow) and non-colors (white, black, gray)",
+  "related_aesthetics": "BauhausConstructivismCubismModernismSuprematismInternational Typographic Style",
+  "key_values": "Pure abstraction, spiritual harmony, universality, order, reduction to essentials, utopian social vision, integration of art and life"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/De_Stijl"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "light — about 47% of the measured color is pale or near-white",
+   "mostly muted — about 64% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

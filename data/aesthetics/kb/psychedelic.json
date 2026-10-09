@@ -1,0 +1,64 @@
+{
+ "id": "psychedelic",
+ "name": "1960s psychedelia",
+ "lineage": {
+  "influenced_by": [
+   "1960s counterculture and LSD use",
+   "Art Nouveau's flowing linework (directly revived by poster artists)"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 1966–1972"
+ ],
+ "places": [
+  "San Francisco (Haight-Ashbury concert posters)"
+ ],
+ "garments": [
+  "tie-dye",
+  "paisley",
+  "clashing saturated color combinations"
+ ],
+ "media": [
+  {
+   "title": "Wes Wilson's Fillmore concert posters (1966–68)",
+   "note": "pioneered the genre's warped, barely-legible lettering"
+  },
+  {
+   "title": "The Beatles, Sgt. Pepper's Lonely Hearts Club Band (1967) cover art",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Wes Wilson",
+  "Victor Moscoso"
+ ],
+ "reacts_against": "mainstream 1960s advertising's clean, legible design conventions, deliberately using vibrating, hard-to-read color combinations to evoke the visual distortion of a psychedelic drug experience.",
+ "revivals": [
+  "periodic fashion revivals; a visible influence on 1990s rave flyer design"
+ ],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "1960s",
+  "key_motifs": "Distorted visuals, themes of love, vibrant color palettes, surreal imagery, fluid shapes, organic forms, optical illusions, altered states of consciousness, experimental music techniques",
+  "key_colors": "Fluorescent colors, saturated hues, contrasting palettes, rainbow gradients",
+  "related_aesthetics": "Acid DesignAcid HouseArt NouveauBeatnikChichaCorporate HippieCyberdeliaFlower PowerFreakbeatHippieMadchesterManguebeatMid-Century MedievalPeacock RevolutionPop ArtSunshine PopSurrealism",
+  "key_values": "Counterculture, exploration of consciousness, altered perception, artistic experimentation, spiritual exploration, anti-establishment sentiment"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Psychedelia"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "a vivid streak — roughly 30% of the color measured is highly saturated",
+   "mostly muted — about 40% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

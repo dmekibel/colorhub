@@ -1,0 +1,69 @@
+{
+ "id": "space-age",
+ "name": "Space Age",
+ "lineage": {
+  "influenced_by": [
+   "the real 1957–1975 Space Race",
+   "Streamline Moderne's aerodynamic forms"
+  ],
+  "influences": [
+   "raygun-gothic",
+   "atompunk",
+   "cassette-futurism"
+  ]
+ },
+ "eras": [
+  "c. 1960–1975"
+ ],
+ "places": [
+  "Paris (Courrèges, Paco Rabanne fashion)",
+  "Finland (Eero Aarnio furniture)"
+ ],
+ "garments": [
+  "white go-go boots",
+  "metallic and vinyl fabric",
+  "helmet-like headwear (André Courrèges's 1964 collection)"
+ ],
+ "media": [
+  {
+   "title": "Eero Aarnio's Ball Chair (1963)",
+   "note": ""
+  },
+  {
+   "title": "André Courrèges's 1964 \"Moon Girl\" collection",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "André Courrèges",
+  "Eero Aarnio",
+  "Paco Rabanne"
+ ],
+ "reacts_against": "earthbound, historical design references entirely, styling furniture and fashion as if the near future would be lived on a spacecraft.",
+ "revivals": [
+  "a recurring reference in atompunk/retrofuturist media"
+ ],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "1950s-1960s",
+  "key_motifs": "Rockets, satellites, planets, stars, astronauts, flying saucers, atomic symbols, streamlined shapes, parabolas, fins, geodesic domes, capsules, clean lines, futuristic vehicles",
+  "key_colours": "White, silver, chrome, bright primary colors (red, blue, yellow)",
+  "related_aesthetics": "AtompunkCassette FuturismGroovivalModMid-Century ModernPop ArtRaygun GothicRetrofuturismRocketpunkShibuya-KeiY2K Futurism",
+  "key_values": "Optimism, technological progress, utopianism, scientific advancement, exploration, future orientation, modernity, convenience"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Space_Age"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 71% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}
