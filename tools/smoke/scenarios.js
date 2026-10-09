@@ -2309,6 +2309,45 @@ scenario("paintings", "a color page's In paintings section: presets re-run the q
   await t.click("[data-pt-tune]", { force: true, wait: 400 });
   t.expect(t.$$("[data-pt-tuner] .pt-range").length === 2, "Fine-tune doesn't open two sliders");
 });
+// David, on iPhone (2026-10-09): "sometimes when I'm on a color page, tap a painting, then swipe back to the color
+// page, the screen goes black." Root cause: js/paintzoom.js's "Look closer" scrim (glZoomOpen) lives on <body>,
+// not inside the screen it opened over (same reason js/richpage.js's rp-bar does -- so pinch/pan isn't clipped by
+// the screen's own transform) -- but unlike rp-bar, it never registered a cleanup, so core.js show()'s "clear
+// everything the last screen left behind" pass never touched it. Swiping back (or the Back button: both land in
+// xBack(), both re-render through show()) left this near-opaque full-viewport scrim (rgba(6,6,5,.97), z-index 60)
+// sitting over the real color page underneath, forever: not actually a black page, just one buried under a
+// black curtain nobody pulled back. Fixed by giving glZoomOpen's close() to cleanup.push, the same way every
+// other body-level overlay in this app already protects itself.
+scenario("paintings", "Look closer on a painting then swiping back (popstate) never leaves the color page under a stuck dark scrim", async t => {
+  await t.open("#/color/cobalt", { settle: 800 });
+  const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
+  const dr = sec.closest("details"); if (dr && !dr.open) await t.click(dr.querySelector("summary"), { wait: 300 });
+  sec.scrollIntoView();
+  await t.waitFor(() => t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin").length > 0 || t.$("[data-pt-loosen]"), 20000, "the rail or a Loosen button");
+  if (!t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin").length) await t.click("[data-pt-loosen]", { wait: 1500 });
+  const openZoomFromRail = async () => {
+    await t.waitFor("[data-pt-rail] [data-gi]", 15000, "a painting tile in the rail");
+    await t.click("[data-pt-rail] [data-gi]", { wait: 800 });
+    await t.waitFor(".gl-page", 12000, "the painting page");
+    await t.waitFor("[data-glcloser]", 8000, "the Look closer button");
+    await t.click("[data-glcloser]", { wait: 500 });
+    t.expect(t.$(".glz-scrim"), "Look closer didn't open its scrim");
+  };
+  // the opaque scrim covers the painting page's own ‹, so a real finger has only one way back while it's up: the
+  // iOS edge-swipe gesture (popstate) -- which is exactly David's report. Twice, since he saw it "sometimes".
+  for (let i = 0; i < 2; i++) {
+    await openZoomFromRail();
+    t.w.history.back(); await t.sleep(900);
+    t.expect(!t.$(".glz-scrim"), `popstate (the iOS swipe-back gesture) left the "Look closer" scrim stuck over the page`);
+    await t.waitFor(() => /\/color\/cobalt/.test(t.w.location.hash), 10000, "landing back on the color page");
+    const scr = t.$(".screen");
+    t.expect(scr && t.w.getComputedStyle(scr).opacity === "1", "the color page came back fully transparent, not visible");
+    t.expect(scr && scr.textContent.trim().length > 20, "the color page came back with no content");
+    const sec2 = await t.waitFor("[data-glin]", 8000, "the In paintings section again");
+    sec2.scrollIntoView();
+    await t.waitFor(() => t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin").length > 0, 15000, "the rail to still show its paintings after Back");
+  }
+});
 
 // ================================================================== SET PAGES (js/settray.js, js/setpage.js: a page for every pair and palette)
 const SP = {
