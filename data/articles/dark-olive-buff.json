@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A Ridgway hue, darkened",
-   "body": "The name applies dark to [[olive-buff]], which Robert Ridgway placed on plate XL of his 1912 *Color Standards and Color Nomenclature*, hue 21′′′ [1]. Buff names a pale yellowish tan, after the color of buffalo hide leather, and olive shifts it toward green-grey [1]. The ISCC-NBS *Dictionary of Color Names* later filed this darkened form in 1955 as block 91 [1].\n\nIts closest measured neighbor is [[ecru-olive]], only 3.0 units away and almost the same color; [[dust]] is a little duller and [[dark-beige]] darker [2]."
+   "body": "The name applies dark to [[olive-buff]], which Robert Ridgway placed on plate XL of his 1912 *Color Standards and Color Nomenclature*, hue 21′′′ [1]. Buff names a pale yellowish tan, after the color of buffalo hide leather, and olive shifts it toward green-grey [1]. The ISCC-NBS *Dictionary of Color Names* later filed this darkened form in 1955 as block 91 [1].\n\nIts closest measured neighbor is [[ecru-olive]], only 3.0 units away and almost the same color; [[dust]] is a little duller and [[dust]] darker [2]."
   },
   {
    "id": "field",
@@ -121,7 +121,7 @@
  "openers": [
   "Present in about one painting in eight in our archive, almost always as a highlight."
  ],
- "words": 233,
+ "words": 232,
  "status": "checked",
  "checked": {
   "by": "checker",

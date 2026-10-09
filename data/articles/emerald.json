@@ -1,401 +1,401 @@
 {
- "slug": "emerald",
- "name": "Emerald",
- "hex": "#50C878",
- "names": [
-  "Emerald",
-  "Paris Green"
- ],
- "tier": "pigment",
- "depth": "epic",
- "lede": "Emerald is a bright, slightly bluish green named after the gem, a beryl tinted by a trace of chromium, and it also names one of the most brilliant and most poisonous paints of the nineteenth century.",
- "sections": [
-  {
-   "id": "name",
-   "title": "One name, three greens",
-   "body": "Three different things answer to this name. The first is the gemstone, a green beryl [1]. The second is emerald green, a copper and arsenic pigment first sold in Germany in 1814 by most accounts (Coles gives 1808), which has nothing to do with the stone except its color [12]. The third is the screen swatch on this page, #50C878, which our library records with exactly the same value as Paris green, one of that pigment's many trade names [25][15].\n\nThe word reaches back to the Greek *smaragdos*, which seems to have been a general name for green stones rather than one mineral [2]. Finlay notes that the Persian word *zabarjad* may share a root with Zubara, an ancient emerald mine in Egypt, and with Zabargad, a Red Sea island of peridot [2]. Latin kept the gem in its vocabulary: of all the classical words for green, medieval Latin added only one, *smaragdinus*, emerald green [4].\n\nThe confusion with other green stones is old. Peridot from Zabargad was sold for centuries as the \"evening emerald\", because its yellower green holds its glow at dusk better than the bluer true emerald [3]. That difference is a useful way to see the color: emerald leans toward blue, peridot toward yellow [3]."
-  },
-  {
-   "id": "material",
-   "title": "Beryl and chromium",
-   "body": "Beryl is built from beryllium, aluminium, silicon and oxygen, and it is colorless when pure [1]. A trace of chromium makes it emerald; St Clair adds that vanadium can do the same [1][6]. With a trace of iron instead the crystal becomes pale blue aquamarine, and with manganese it turns pink morganite, a stone found in Madagascar in 1911 and named after the banker J. P. Morgan [1].\n\nBeryllium and chromium form in different kinds of rock, so emerald needs an accident of geology, such as two tectonic plates colliding, to bring them together [1]. Ball explains why the same chromium can give two colors: it makes ruby red but emerald green because the crystal around it pulls on it differently [7]. Peridot, by contrast, owes its green to iron that is part of its own formula, so it is always green, while an emerald's color depends on a tiny impurity [3].\n\nEmeralds are rarely clean. Jewellers call the inclusions *jardin*, \"garden\", and for centuries cracks have been filled with oil, and now with polymers, to hide them [1]. In 1935 the Californian Carroll Chatham grew the first emerald crystal in a laboratory flux; each crystal takes about nine months, and Auguste Verneuil, who made synthetic rubies in 1902, never managed an emerald [1]."
-  },
-  {
-   "id": "history",
-   "title": "Cleopatra's mines",
-   "body": "Books disagree on how old emerald mining is. St Clair says Egyptians mined the stones from 1500 BC, while Finlay finds the first written record of the mines at Zubara in Strabo, in 24 BC, though she thinks they are probably older [6][1]. The mines lay at Sikait and Zubara on the slopes of Mount Smaragdus, \"Emerald Mountain\", in Egypt's Eastern Desert [1].\n\nEmeralds were the Egyptian stone of the Ptolemaic and Roman world, and Cleopatra gave them as gifts engraved with her portrait [1]. After Egypt became a Roman province in 30 BC, Rome took control of the mines [1]. Pliny never forgot seeing Lollia Paulina at a party covered in emeralds and pearls, which she said had cost forty million sesterces [1].\n\nIn 529 the emperor Justinian reserved emeralds, pearls and sapphires for the aristocracy, and women of lower rank answered with necklaces of hexagonal green glass beads [1]. The Egyptian mines were then forgotten for centuries, until the French mineralogist Frédéric Cailliaud found the workings at Zubara on 8 November 1816, at a time when emeralds were fashionable in Napoleonic France [1]."
-  },
-  {
-   "id": "trade",
-   "title": "The Colombian flood",
-   "body": "Most Egyptian emeralds were small, pale and flawed [1]. In the 1530s the Spanish learned of a richer source in what is now Colombia, opening the Chivor mine in 1537 and Muzo in 1567; Finlay calls Muzo the best emerald mine in history [1]. Colombian stones were larger, clearer and more saturated, and when people picture emerald green today, Finlay argues, it is usually the Colombian shade [1].\n\nAbundance destroyed the price. In 1150 the lapidary Teifaschi had ranked emeralds above diamonds, rubies and sapphires because they were the rarest [1]. A ship that carried the missionary José de Acosta home in 1587 held two chests of them, and divers have recovered more than 6,000 uncut stones from the *Atocha*, which sank off Florida in 1622 [1]. Thomas Nicols told in 1652 of a jeweller who, shown a whole casket, valued each stone at a crown, an eighth of a ducat [1].\n\nMuch of the Colombian output went east [1]. Green was the color of the Prophet's cloak and so of Islam, and Persian and Mughal rulers paid immense sums for emeralds [1][10]. By the 1670s so many South American stones had reached India that the jeweller Tavernier insisted the dark \"Oriental\" emeralds sold there were really American [1]. The cost fell on the miners: in 1593 the president of New Granada issued a decree protecting the enslaved workers of Chivor, which closed in 1675 [1]."
-  },
-  {
-   "id": "eyes",
-   "title": "A green for tired eyes",
-   "body": "Roman writers believed green rested the eyes, and emeralds were ground into costly eye balms [9][6]. Coles traces the same belief to ancient Egypt, where powdered green stones went into eye ointments [10]. Medieval scribes and illuminators kept an emerald beside them to look at between pages [9].\n\nIn the Bible the emerald is almost the only green object: it sits in the high priest's breastplate and in the foundations of the heavenly Jerusalem [8]. A herald writing in Sicily around 1435 tied green to lead, Venus, Thursday and strength, and to the emerald among stones [11]. The German word *Brille*, glasses, comes from beryl, because polished beryls served as lenses [1]."
-  },
-  {
-   "id": "pigment",
-   "title": "Emerald green, the paint",
-   "body": "The pigment called emerald green is copper aceto-arsenite, a brilliant bluish green made from verdigris and arsenic [12][13]. Books disagree on its origin. The Pigment Compendium and Ball credit the paint maker Wilhelm Sattler and the pharmacist Friedrich Russ in Schweinfurt, with sales from 1814, and note a rival claim for Ignaz von Mitis in Vienna the same year; Coles dates it to 1808 [12][13][14]. Liebig and Braconnot published recipes in 1822, after which many firms made it [12].\n\nIt went under dozens of names: Schweinfurt green, Paris green, Vienna green and, in France, *vert Paul Véronèse*, after the bright green Veronese had made his trademark centuries earlier [15][19]. One study counted 86 names for emerald and Scheele's greens, and some writers suspected the variety was meant to reassure a public that knew the color was poisonous [12]. A further trap is translation: French *vert émeraude* and German *Smaragdgrün* mean viridian, a safe chromium green, not emerald green [12][13].\n\nPainters loved it. Turner took it up soon after it appeared, and Ball counts emerald green among the twelve new synthetic pigments in the Impressionists' twenty principal colors [13][20]. Monet used it in the smoky darks of the Gare Saint-Lazare, Cézanne combined it with viridian in his Provence hillsides, and Van Gogh told his brother it was bad economy not to use it [20]. Vlaminck urged painting with pure \"Veronese green\", and Klee said no mixture could ever produce a Schweinfurt green [21]. It has also been found on Tibetan thangkas, on Indian paintings of about 1900 and in a painting by Hiroshige [12]. Its weakness was chemical: it browns beside sulfur-containing paints such as the cadmium colors and ultramarine [14]."
-  },
-  {
-   "id": "chemistry",
-   "title": "Arsenic on the walls",
-   "body": "Emerald green was cheap enough for house paint and wallpaper, and that is where it did harm [13]. Printed in thick relief, it shed arsenical dust, and *The Times* reported children dying in bedrooms papered with it [13]. In 1880 Henry Carr showed the Society of Arts a nursery wallpaper of boys playing cricket that, he said, had killed a young relative [16]. Gurney adds that emerald green was also sold as an insecticide [22].\n\nThe trade defended itself. In 1870 the manager of the Zuber wallpaper works argued that the green was harmless in small amounts, noting that no French law forbade it [17]. Pastoureau reports, from gossip columns, that the widowed Queen Victoria banished green from the royal palaces [17]. According to Coles, a ban on making emerald green paint came only in the 1960s [14]. Viridian, a chromium green made cheaply after a new method of 1859, soon replaced it for printing, household and industrial uses [13]."
-  },
-  {
-   "id": "myths",
-   "title": "Myths and disputes",
-   "body": "A popular story says that arsenic from green wallpaper killed Napoleon on St Helena; Ball relays it only as a legend [13]. The evidence is mixed and the case is unproven. Hair sold as Napoleon's was found in 1960 to contain arsenic, and a scrap of his Longwood wallpaper tested in 1980 held Scheele's green, an older arsenic green, rather than emerald green [16]. His doctors blamed stomach cancer, and in 2008 Italian physicists found his arsenic levels high but steady across his whole life, which does not fit a slow poisoning on the island [16][18]. Pastoureau still thinks the damp green rooms probably played a part, so the books disagree [17].\n\nThe story of Nero is also disputed [5][6]. Several books repeat that he watched gladiators through a large emerald, like sunglasses [6][1]. Pastoureau reads the Roman source differently: Nero did not look through the stone but rested his eyes by glancing at an emerald between bouts, since green was thought to soothe the sight, and through a cut stone he would have seen almost nothing [5].\n\nPaterson's dictionary says Veronese used emerald green so much that the French named it after him [15]. The dates rule that out: Veronese died in 1588, more than two centuries before the pigment existed, and Ball explains the name as a tribute to his mixed greens [19]."
-  },
-  {
-   "id": "swatch",
-   "title": "The swatch",
-   "body": "The ISCC-NBS system classes this swatch as a brilliant yellowish green [25]. Its nearest named neighbors are Algae Green, [[seaweed]] and Soft Green, all within four units, and it is far lighter than the darker [[emerald-green]] of the RAL paint chart [25]. A cut Colombian emerald looks deeper and bluer than any flat swatch; Finlay describes the Egyptian stones as pale and the Nubian ones as darker than the Colombian [1].\n\nWerner's mineral color chart, as extended by Syme, made Emerald Green its characteristic green, number 53 [23]. Syme mixed it from about equal parts Berlin blue and gamboge, and his example from nature was the bright patch on a teal drake's wing [23]. That small iridescent speculum on a duck is the easiest place to see the color outdoors. Beside it sit [[viridian]], [[malachite]], [[jade]] and [[scheele-s-green]], the other greens this story touches [25]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Emerald barely exists in our paintings. Within six units of this swatch at five per cent of the canvas, none of our 23,781 paintings qualifies [26]. Even at a loose test, within ten units and two per cent of the canvas, only three do [26]. They are a Mughal-style [[art:aic-62243|Portrait of Emperor Jahangir]], Van Gogh's [[art:nga-72328|Roses]] and Robert Delaunay's [[art:nga-52397|Political Drama]] of 1914 [26].\n\nThese are photographs of aged, varnished paintings, and a color match is not a pigment test in either direction [26]. The pigment can be present where the swatch is not: the Impressionists mostly mixed emerald green into other colors, as Monet did in the darks of the Gare Saint-Lazare [20]. And a swatch can appear where the pigment never was: Van Gogh's *Roses* reads green today partly because its [[madder]] pink has faded [26].\n\nThe word has its own curve. In Google Books, *emerald* as a color adjective has a first peak in the 1860s, the decade when crinolines in emerald green filled ballrooms, sinks to about a quarter of its later high in the 1970s, and is printed most of all after 2010 [27][24]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the gemstone, Greek smaragdos (a general word for green stones)",
-   "first_recorded": "the pigment name emerald green from 1814; Werner's chart lists Emerald Green by 1821",
-   "source": "Pigment Compendium; Baty, Nature's Palette"
-  },
-  "aka": [
-   "Paris green (same screen value)",
-   "Schweinfurt green (the pigment)",
-   "smaragdinus (medieval Latin)"
+  "slug": "emerald",
+  "name": "Emerald",
+  "hex": "#50C878",
+  "names": [
+    "Emerald",
+    "Paris Green"
   ],
-  "siblings": [
-   "scheele-s-green",
-   "viridian",
-   "malachite",
-   "jade"
+  "tier": "pigment",
+  "depth": "epic",
+  "lede": "Emerald is a bright, slightly bluish green named after the gem, a beryl tinted by a trace of chromium, and it also names one of the most brilliant and most poisonous paints of the nineteenth century.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "One name, three greens",
+      "body": "Three different things answer to this name. The first is the gemstone, a green beryl [1]. The second is emerald green, a copper and arsenic pigment first sold in Germany in 1814 by most accounts (Coles gives 1808), which has nothing to do with the stone except its color [12]. The third is the screen swatch on this page, #50C878, which our library records with exactly the same value as Paris green, one of that pigment's many trade names [25][15].\n\nThe word reaches back to the Greek *smaragdos*, which seems to have been a general name for green stones rather than one mineral [2]. Finlay notes that the Persian word *zabarjad* may share a root with Zubara, an ancient emerald mine in Egypt, and with Zabargad, a Red Sea island of peridot [2]. Latin kept the gem in its vocabulary: of all the classical words for green, medieval Latin added only one, *smaragdinus*, emerald green [4].\n\nThe confusion with other green stones is old. Peridot from Zabargad was sold for centuries as the \"evening emerald\", because its yellower green holds its glow at dusk better than the bluer true emerald [3]. That difference is a useful way to see the color: emerald leans toward blue, peridot toward yellow [3]."
+    },
+    {
+      "id": "material",
+      "title": "Beryl and chromium",
+      "body": "Beryl is built from beryllium, aluminium, silicon and oxygen, and it is colorless when pure [1]. A trace of chromium makes it emerald; St Clair adds that vanadium can do the same [1][6]. With a trace of iron instead the crystal becomes pale blue aquamarine, and with manganese it turns pink morganite, a stone found in Madagascar in 1911 and named after the banker J. P. Morgan [1].\n\nBeryllium and chromium form in different kinds of rock, so emerald needs an accident of geology, such as two tectonic plates colliding, to bring them together [1]. Ball explains why the same chromium can give two colors: it makes ruby red but emerald green because the crystal around it pulls on it differently [7]. Peridot, by contrast, owes its green to iron that is part of its own formula, so it is always green, while an emerald's color depends on a tiny impurity [3].\n\nEmeralds are rarely clean. Jewellers call the inclusions *jardin*, \"garden\", and for centuries cracks have been filled with oil, and now with polymers, to hide them [1]. In 1935 the Californian Carroll Chatham grew the first emerald crystal in a laboratory flux; each crystal takes about nine months, and Auguste Verneuil, who made synthetic rubies in 1902, never managed an emerald [1]."
+    },
+    {
+      "id": "history",
+      "title": "Cleopatra's mines",
+      "body": "Books disagree on how old emerald mining is. St Clair says Egyptians mined the stones from 1500 BC, while Finlay finds the first written record of the mines at Zubara in Strabo, in 24 BC, though she thinks they are probably older [6][1]. The mines lay at Sikait and Zubara on the slopes of Mount Smaragdus, \"Emerald Mountain\", in Egypt's Eastern Desert [1].\n\nEmeralds were the Egyptian stone of the Ptolemaic and Roman world, and Cleopatra gave them as gifts engraved with her portrait [1]. After Egypt became a Roman province in 30 BC, Rome took control of the mines [1]. Pliny never forgot seeing Lollia Paulina at a party covered in emeralds and pearls, which she said had cost forty million sesterces [1].\n\nIn 529 the emperor Justinian reserved emeralds, pearls and sapphires for the aristocracy, and women of lower rank answered with necklaces of hexagonal green glass beads [1]. The Egyptian mines were then forgotten for centuries, until the French mineralogist Frédéric Cailliaud found the workings at Zubara on 8 November 1816, at a time when emeralds were fashionable in Napoleonic France [1]."
+    },
+    {
+      "id": "trade",
+      "title": "The Colombian flood",
+      "body": "Most Egyptian emeralds were small, pale and flawed [1]. In the 1530s the Spanish learned of a richer source in what is now Colombia, opening the Chivor mine in 1537 and Muzo in 1567; Finlay calls Muzo the best emerald mine in history [1]. Colombian stones were larger, clearer and more saturated, and when people picture emerald green today, Finlay argues, it is usually the Colombian shade [1].\n\nAbundance destroyed the price. In 1150 the lapidary Teifaschi had ranked emeralds above diamonds, rubies and sapphires because they were the rarest [1]. A ship that carried the missionary José de Acosta home in 1587 held two chests of them, and divers have recovered more than 6,000 uncut stones from the *Atocha*, which sank off Florida in 1622 [1]. Thomas Nicols told in 1652 of a jeweller who, shown a whole casket, valued each stone at a crown, an eighth of a ducat [1].\n\nMuch of the Colombian output went east [1]. Green was the color of the Prophet's cloak and so of Islam, and Persian and Mughal rulers paid immense sums for emeralds [1][10]. By the 1670s so many South American stones had reached India that the jeweller Tavernier insisted the dark \"Oriental\" emeralds sold there were really American [1]. The cost fell on the miners: in 1593 the president of New Granada issued a decree protecting the enslaved workers of Chivor, which closed in 1675 [1]."
+    },
+    {
+      "id": "eyes",
+      "title": "A green for tired eyes",
+      "body": "Roman writers believed green rested the eyes, and emeralds were ground into costly eye balms [9][6]. Coles traces the same belief to ancient Egypt, where powdered green stones went into eye ointments [10]. Medieval scribes and illuminators kept an emerald beside them to look at between pages [9].\n\nIn the Bible the emerald is almost the only green object: it sits in the high priest's breastplate and in the foundations of the heavenly Jerusalem [8]. A herald writing in Sicily around 1435 tied green to lead, Venus, Thursday and strength, and to the emerald among stones [11]. The German word *Brille*, glasses, comes from beryl, because polished beryls served as lenses [1]."
+    },
+    {
+      "id": "pigment",
+      "title": "Emerald green, the paint",
+      "body": "The pigment called emerald green is copper aceto-arsenite, a brilliant bluish green made from verdigris and arsenic [12][13]. Books disagree on its origin. The Pigment Compendium and Ball credit the paint maker Wilhelm Sattler and the pharmacist Friedrich Russ in Schweinfurt, with sales from 1814, and note a rival claim for Ignaz von Mitis in Vienna the same year; Coles dates it to 1808 [12][13][14]. Liebig and Braconnot published recipes in 1822, after which many firms made it [12].\n\nIt went under dozens of names: Schweinfurt green, Paris green, Vienna green and, in France, *vert Paul Véronèse*, after the bright green Veronese had made his trademark centuries earlier [15][19]. One study counted 86 names for emerald and Scheele's greens, and some writers suspected the variety was meant to reassure a public that knew the color was poisonous [12]. A further trap is translation: French *vert émeraude* and German *Smaragdgrün* mean viridian, a safe chromium green, not emerald green [12][13].\n\nPainters loved it. Turner took it up soon after it appeared, and Ball counts emerald green among the twelve new synthetic pigments in the Impressionists' twenty principal colors [13][20]. Monet used it in the smoky darks of the Gare Saint-Lazare, Cézanne combined it with viridian in his Provence hillsides, and Van Gogh told his brother it was bad economy not to use it [20]. Vlaminck urged painting with pure \"Veronese green\", and Klee said no mixture could ever produce a Schweinfurt green [21]. It has also been found on Tibetan thangkas, on Indian paintings of about 1900 and in a painting by Hiroshige [12]. Its weakness was chemical: it browns beside sulfur-containing paints such as the cadmium colors and ultramarine [14]."
+    },
+    {
+      "id": "chemistry",
+      "title": "Arsenic on the walls",
+      "body": "Emerald green was cheap enough for house paint and wallpaper, and that is where it did harm [13]. Printed in thick relief, it shed arsenical dust, and *The Times* reported children dying in bedrooms papered with it [13]. In 1880 Henry Carr showed the Society of Arts a nursery wallpaper of boys playing cricket that, he said, had killed a young relative [16]. Gurney adds that emerald green was also sold as an insecticide [22].\n\nThe trade defended itself. In 1870 the manager of the Zuber wallpaper works argued that the green was harmless in small amounts, noting that no French law forbade it [17]. Pastoureau reports, from gossip columns, that the widowed Queen Victoria banished green from the royal palaces [17]. According to Coles, a ban on making emerald green paint came only in the 1960s [14]. Viridian, a chromium green made cheaply after a new method of 1859, soon replaced it for printing, household and industrial uses [13]."
+    },
+    {
+      "id": "myths",
+      "title": "Myths and disputes",
+      "body": "A popular story says that arsenic from green wallpaper killed Napoleon on St Helena; Ball relays it only as a legend [13]. The evidence is mixed and the case is unproven. Hair sold as Napoleon's was found in 1960 to contain arsenic, and a scrap of his Longwood wallpaper tested in 1980 held Scheele's green, an older arsenic green, rather than emerald green [16]. His doctors blamed stomach cancer, and in 2008 Italian physicists found his arsenic levels high but steady across his whole life, which does not fit a slow poisoning on the island [16][18]. Pastoureau still thinks the damp green rooms probably played a part, so the books disagree [17].\n\nThe story of Nero is also disputed [5][6]. Several books repeat that he watched gladiators through a large emerald, like sunglasses [6][1]. Pastoureau reads the Roman source differently: Nero did not look through the stone but rested his eyes by glancing at an emerald between bouts, since green was thought to soothe the sight, and through a cut stone he would have seen almost nothing [5].\n\nPaterson's dictionary says Veronese used emerald green so much that the French named it after him [15]. The dates rule that out: Veronese died in 1588, more than two centuries before the pigment existed, and Ball explains the name as a tribute to his mixed greens [19]."
+    },
+    {
+      "id": "swatch",
+      "title": "The swatch",
+      "body": "The ISCC-NBS system classes this swatch as a brilliant yellowish green [25]. Its nearest named neighbors are Algae Green, [[seaweed]] and Soft Green, all within four units, and it is far lighter than the darker [[emerald-green]] of the RAL paint chart [25]. A cut Colombian emerald looks deeper and bluer than any flat swatch; Finlay describes the Egyptian stones as pale and the Nubian ones as darker than the Colombian [1].\n\nWerner's mineral color chart, as extended by Syme, made Emerald Green its characteristic green, number 53 [23]. Syme mixed it from about equal parts Berlin blue and gamboge, and his example from nature was the bright patch on a teal drake's wing [23]. That small iridescent speculum on a duck is the easiest place to see the color outdoors. Beside it sit [[viridian]], [[malachite]], [[jade]] and [[scheele-s-green]], the other greens this story touches [25]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Emerald barely exists in our paintings. Within six units of this swatch at five per cent of the canvas, none of our 23,781 paintings qualifies [26]. Even at a loose test, within ten units and two per cent of the canvas, only three do [26]. They are a Mughal-style [[art:aic-62243|Portrait of Emperor Jahangir]], Van Gogh's [[art:nga-72328|Roses]] and Robert Delaunay's [[art:nga-52397|Political Drama]] of 1914 [26].\n\nThese are photographs of aged, varnished paintings, and a color match is not a pigment test in either direction [26]. The pigment can be present where the swatch is not: the Impressionists mostly mixed emerald green into other colors, as Monet did in the darks of the Gare Saint-Lazare [20]. And a swatch can appear where the pigment never was: Van Gogh's *Roses* reads green today partly because its [[irresistible]] pink has faded [26].\n\nThe word has its own curve. In Google Books, *emerald* as a color adjective has a first peak in the 1860s, the decade when crinolines in emerald green filled ballrooms, sinks to about a quarter of its later high in the 1970s, and is printed most of all after 2010 [27][24]."
+    }
   ],
-  "parent": "green",
-  "children": [
-   "emerald-green"
-  ],
-  "disambiguation": [
-   {
-    "slug": "emerald-green",
-    "gloss": "the RAL and Werner swatch, a much darker green"
-   },
-   {
-    "slug": "viridian",
-    "gloss": "French vert émeraude, a chromium green, not the arsenic pigment"
-   },
-   {
-    "slug": "veronese-green",
-    "gloss": "Ridgway's pale yellow-green, unrelated to the French trade name for emerald green"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "fr",
-    "name": "émeraude; vert émeraude means viridian"
-   },
-   {
-    "lang": "de",
-    "name": "Smaragd; Smaragdgrün means viridian; Schweinfurter Grün"
-   },
-   {
-    "lang": "la",
-    "name": "smaragdus; smaragdinus"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#50C878",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 0,
-  "loose_match": {
-   "de2000": 10,
-   "min_cover": 0.02,
-   "n_present": 3,
-   "paintings": [
-    "aic-62243",
-    "nga-72328",
-    "nga-52397"
-   ]
-  },
-  "ngram": {
-   "adj_first_peak_decade": 1860,
-   "adj_low_decade": 1970,
-   "adj_peak_decade": 2010
-  },
-  "measured": {
-   "lch": [
-    72.5,
-    59.5,
-    149.4
-   ],
-   "iscc_nbs": "brilliant yellowish green",
-   "contrast_white": 2.13,
-   "contrast_black": 9.87,
-   "same_value_as": "Paris Green",
-   "nearest": [
-    [
-     "Algae Green",
-     2.9
+  "aside": {
+    "origin": {
+      "named_after": "the gemstone, Greek smaragdos (a general word for green stones)",
+      "first_recorded": "the pigment name emerald green from 1814; Werner's chart lists Emerald Green by 1821",
+      "source": "Pigment Compendium; Baty, Nature's Palette"
+    },
+    "aka": [
+      "Paris green (same screen value)",
+      "Schweinfurt green (the pigment)",
+      "smaragdinus (medieval Latin)"
     ],
-    [
-     "Seaweed",
-     3.4
+    "siblings": [
+      "scheele-s-green",
+      "viridian",
+      "malachite",
+      "jade"
     ],
-    [
-     "Soft Green",
-     3.6
+    "parent": "green",
+    "children": [
+      "emerald-green"
+    ],
+    "disambiguation": [
+      {
+        "slug": "emerald-green",
+        "gloss": "the RAL and Werner swatch, a much darker green"
+      },
+      {
+        "slug": "viridian",
+        "gloss": "French vert émeraude, a chromium green, not the arsenic pigment"
+      },
+      {
+        "slug": "veronese-green",
+        "gloss": "Ridgway's pale yellow-green, unrelated to the French trade name for emerald green"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "fr",
+        "name": "émeraude; vert émeraude means viridian"
+      },
+      {
+        "lang": "de",
+        "name": "Smaragd; Smaragdgrün means viridian; Schweinfurter Grün"
+      },
+      {
+        "lang": "la",
+        "name": "smaragdus; smaragdinus"
+      }
     ]
-   ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#50C878",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 0,
+    "loose_match": {
+      "de2000": 10,
+      "min_cover": 0.02,
+      "n_present": 3,
+      "paintings": [
+        "aic-62243",
+        "nga-72328",
+        "nga-52397"
+      ]
+    },
+    "ngram": {
+      "adj_first_peak_decade": 1860,
+      "adj_low_decade": 1970,
+      "adj_peak_decade": 2010
+    },
+    "measured": {
+      "lch": [
+        72.5,
+        59.5,
+        149.4
+      ],
+      "iscc_nbs": "brilliant yellowish green",
+      "contrast_white": 2.13,
+      "contrast_black": 9.87,
+      "same_value_as": "Paris Green",
+      "nearest": [
+        [
+          "Algae Green",
+          2.9
+        ],
+        [
+          "Seaweed",
+          3.4
+        ],
+        [
+          "Soft Green",
+          3.6
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Finlay, Jewels: A Secret History, \"Emerald\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Finlay, Jewels: A Secret History, notes to \"Emerald\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Finlay, Jewels: A Secret History, \"Peridot\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Pastoureau, Green: The History of a Color, ch. 10",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Pastoureau, Green: The History of a Color, ch. 11 (\"The emerald and the leek\")",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Emerald\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 10",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Pastoureau, Green: The History of a Color, ch. 13",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Pastoureau, Green: The History of a Color, ch. 17",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, \"Green\" (p. 32)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Pastoureau, Green: The History of a Color, ch. 29",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Eastaugh et al., Pigment Compendium, p. 162 (\"Eisenach green\", \"Emerald green\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 15",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, \"Emerald Green\" (p. 143)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"emerald green\", \"Paris green\", \"Veronese green\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 7 (\"Green\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "book",
+      "cite": "Pastoureau, Green: The History of a Color, ch. 40",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 18,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Scheele's green\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 19,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 14",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 20,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 16",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 21,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 21",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 22,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, pp. 92, 221",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 23,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 141, 150",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 24,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 24",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 25,
+      "kind": "data",
+      "cite": "ColorHub color library and Color Graph (data/library.json, data/graph/nodes-e.json: ISCC-NBS 1955, RAL, Werner 1821), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 26,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py: dE2000 <= 6 at >= 5% of canvas, and dE2000 <= 10 at >= 2%)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 27,
+      "kind": "data",
+      "cite": "Google Books Ngram, adjective use, relative to peak (data/graph/fieldnotes/e.json)",
+      "loc_kind": null,
+      "url": "https://books.google.com/ngrams"
+    }
+  ],
+  "questions": [
+    {
+      "q": "Why is the same chromium red in a ruby but green in an emerald?",
+      "choices": [
+        "The crystal around the chromium pulls on it differently, shifting which light it absorbs",
+        "Emeralds also contain copper",
+        "Rubies are heated and emeralds are not",
+        "Emeralds are dyed green after mining"
+      ],
+      "answer": "The crystal around the chromium pulls on it differently, shifting which light it absorbs",
+      "kind": "pick"
+    },
+    {
+      "q": "What is the paint called emerald green made of?",
+      "choices": [
+        "Copper and arsenic",
+        "Powdered emeralds",
+        "Chromium oxide",
+        "Prussian blue and yellow"
+      ],
+      "answer": "Copper and arsenic",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: it is proven that green wallpaper killed Napoleon.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Once emeralds poured in from Colombia, a jeweller valued a whole casket of them at a crown apiece.",
+    "The paint called emerald green has no emerald in it: it is copper and arsenic, and it was sold as an insecticide too.",
+    "Look for emerald on a teal drake's wing: the small bright patch that Werner's color chart used as its example."
+  ],
+  "words": 1916,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Pigment date: 'invented in 1814' stated flat although Coles gives 1808; hedged to 'first sold ... by most accounts'."
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Finlay, Jewels: A Secret History, \"Emerald\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Finlay, Jewels: A Secret History, notes to \"Emerald\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Finlay, Jewels: A Secret History, \"Peridot\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Pastoureau, Green: The History of a Color, ch. 10",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Pastoureau, Green: The History of a Color, ch. 11 (\"The emerald and the leek\")",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Emerald\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 10",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Pastoureau, Green: The History of a Color, ch. 13",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Pastoureau, Green: The History of a Color, ch. 17",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Coles, Chromatopia, \"Green\" (p. 32)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Pastoureau, Green: The History of a Color, ch. 29",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Eastaugh et al., Pigment Compendium, p. 162 (\"Eisenach green\", \"Emerald green\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 15",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "book",
-   "cite": "Coles, Chromatopia, \"Emerald Green\" (p. 143)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"emerald green\", \"Paris green\", \"Veronese green\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 7 (\"Green\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 17,
-   "kind": "book",
-   "cite": "Pastoureau, Green: The History of a Color, ch. 40",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 18,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Scheele's green\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 19,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 14",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 20,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 16",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 21,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 21",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 22,
-   "kind": "book",
-   "cite": "Gurney, Color and Light, pp. 92, 221",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 23,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 141, 150",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 24,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 24",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 25,
-   "kind": "data",
-   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph/nodes-e.json: ISCC-NBS 1955, RAL, Werner 1821), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 26,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py: dE2000 <= 6 at >= 5% of canvas, and dE2000 <= 10 at >= 2%)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 27,
-   "kind": "data",
-   "cite": "Google Books Ngram, adjective use, relative to peak (data/graph/fieldnotes/e.json)",
-   "loc_kind": null,
-   "url": "https://books.google.com/ngrams"
-  }
- ],
- "questions": [
-  {
-   "q": "Why is the same chromium red in a ruby but green in an emerald?",
-   "choices": [
-    "The crystal around the chromium pulls on it differently, shifting which light it absorbs",
-    "Emeralds also contain copper",
-    "Rubies are heated and emeralds are not",
-    "Emeralds are dyed green after mining"
-   ],
-   "answer": "The crystal around the chromium pulls on it differently, shifting which light it absorbs",
-   "kind": "pick"
-  },
-  {
-   "q": "What is the paint called emerald green made of?",
-   "choices": [
-    "Copper and arsenic",
-    "Powdered emeralds",
-    "Chromium oxide",
-    "Prussian blue and yellow"
-   ],
-   "answer": "Copper and arsenic",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: it is proven that green wallpaper killed Napoleon.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Once emeralds poured in from Colombia, a jeweller valued a whole casket of them at a crown apiece.",
-  "The paint called emerald green has no emerald in it: it is copper and arsenic, and it was sold as an insecticide too.",
-  "Look for emerald on a teal drake's wing: the small bright patch that Werner's color chart used as its example."
- ],
- "words": 1916,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Pigment date: 'invented in 1814' stated flat although Coles gives 1808; hedged to 'first sold ... by most accounts'."
-  ]
- }
 }

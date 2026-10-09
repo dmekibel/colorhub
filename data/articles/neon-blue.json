@@ -1,131 +1,131 @@
 {
- "slug": "neon-blue",
- "name": "Neon Blue",
- "hex": "#4666FF",
- "names": [
-  "Neon Blue"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Neon Blue is a vivid, electric blue whose earliest record in our data is not the modern word *neon* at all but a butterfly's wing in Werner's 1821 Nomenclature of Colours.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Older than the word neon",
-   "body": "Our library's earliest source for a color this close to #4666FF is Patrick Syme's 1821 edition of Werner's Nomenclature of Colours, where it is illustrated by the upper side of the wings of the small blue heath butterfly, the flower borage, and azure stone or lapis lazuli [1]. The modifier *neon*, by contrast, is a 20th-century word, and the xkcd crowd survey only recorded this exact name in 2010 [1]. ISCC-NBS lists it as a brilliant greenish blue in their 1955 charts, and the German RAL standard carries a close blue, RAL 5002, from 1927 [1].\n\nAt hex #4666FF it measures lightness 50 and chroma 89 in LCH, one of the most saturated blues in the library [1]. Its nearest named neighbors are [[bright-blue|Bright Blue]], 3.9 CIEDE2000 units off and read as almost the same color, and [[royal-blue|Royal blue]], 4.2 units off and duller; [[electric-blue|Electric Blue]] sits 6.5 units off, more vivid and darker [2]. The library separately logs Ultramarine Blue as a near-duplicate across five different sources [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive has a blue this vivid covering even 1% of its canvas, as photographed [3]. A blue this saturated sits outside the range most historical pigments and aged varnish can reach on a photograph, which describes our museum holdings rather than painting as a whole [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the modifier neon + blue; the color itself traces to Werner's 1821 nomenclature",
-   "first_recorded": "1821 (Werner/Syme, Nomenclature of Colours); this name from the 2010 xkcd survey",
-   "source": "ColorHub color library"
-  },
-  "aka": [
-   "Ultramarine Blue"
+  "slug": "neon-blue",
+  "name": "Neon Blue",
+  "hex": "#4666FF",
+  "names": [
+    "Neon Blue"
   ],
-  "siblings": [
-   "vantg-blue",
-   "bright-blue",
-   "royal-blue",
-   "azul"
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Neon Blue is a vivid, electric blue whose earliest record in our data is not the modern word *neon* at all but a butterfly's wing in Werner's 1821 Nomenclature of Colours.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Older than the word neon",
+      "body": "Our library's earliest source for a color this close to #4666FF is Patrick Syme's 1821 edition of Werner's Nomenclature of Colours, where it is illustrated by the upper side of the wings of the small blue heath butterfly, the flower borage, and azure stone or lapis lazuli [1]. The modifier *neon*, by contrast, is a 20th-century word, and the xkcd crowd survey only recorded this exact name in 2010 [1]. ISCC-NBS lists it as a brilliant greenish blue in their 1955 charts, and the German RAL standard carries a close blue, RAL 5002, from 1927 [1].\n\nAt hex #4666FF it measures lightness 50 and chroma 89 in LCH, one of the most saturated blues in the library [1]. Its nearest named neighbors are [[royal-blue|Bright Blue]], 3.9 CIEDE2000 units off and read as almost the same color, and [[royal-blue|Royal blue]], 4.2 units off and duller; [[electric-blue|Electric Blue]] sits 6.5 units off, more vivid and darker [2]. The library separately logs Ultramarine Blue as a near-duplicate across five different sources [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive has a blue this vivid covering even 1% of its canvas, as photographed [3]. A blue this saturated sits outside the range most historical pigments and aged varnish can reach on a photograph, which describes our museum holdings rather than painting as a whole [3]."
+    }
   ],
-  "parent": "blue",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-  "n_present": 0,
-  "pct": 0.0,
-  "measured": {
-   "lch": [
-    49.5,
-    88.5,
-    296.4
-   ],
-   "nearest": [
-    [
-     "Vantg Blue",
-     3.6
+  "aside": {
+    "origin": {
+      "named_after": "the modifier neon + blue; the color itself traces to Werner's 1821 nomenclature",
+      "first_recorded": "1821 (Werner/Syme, Nomenclature of Colours); this name from the 2010 xkcd survey",
+      "source": "ColorHub color library"
+    },
+    "aka": [
+      "Ultramarine Blue"
     ],
-    [
-     "Bright Blue",
-     3.9
+    "siblings": [
+      "vantg-blue",
+      "bright-blue",
+      "royal-blue",
+      "azul"
     ],
-    [
-     "Royal blue",
-     4.2
-    ],
-    [
-     "Azul",
-     5.3
+    "parent": "blue",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+    "n_present": 0,
+    "pct": 0.0,
+    "measured": {
+      "lch": [
+        49.5,
+        88.5,
+        296.4
+      ],
+      "nearest": [
+        [
+          "Vantg Blue",
+          3.6
+        ],
+        [
+          "Bright Blue",
+          3.9
+        ],
+        [
+          "Royal blue",
+          4.2
+        ],
+        [
+          "Azul",
+          5.3
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-n.json): Werner's Nomenclature of Colours (1821, via Patrick Syme's edition), ISCC-NBS 1955, RAL 1927, Wikipedia, xkcd 2010",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph look-alikes (data/graph/edges-n.json), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What is the earliest recorded source for a blue this close to Neon Blue?",
+      "choices": [
+        "Werner's 1821 Nomenclature of Colours",
+        "The xkcd 2010 crowd survey",
+        "A 1950s paint catalog",
+        "A 19th-century chemistry textbook"
+      ],
+      "answer": "Werner's 1821 Nomenclature of Colours",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the word neon is as old as this color's earliest record in our data.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Neon Blue's earliest record in our data is a butterfly's wing in an 1821 color dictionary, a century before the word neon existed."
+  ],
+  "words": 247,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits; written from ColorHub library/graph data only.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes-n.json): Werner's Nomenclature of Colours (1821, via Patrick Syme's edition), ISCC-NBS 1955, RAL 1927, Wikipedia, xkcd 2010",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph look-alikes (data/graph/edges-n.json), CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What is the earliest recorded source for a blue this close to Neon Blue?",
-   "choices": [
-    "Werner's 1821 Nomenclature of Colours",
-    "The xkcd 2010 crowd survey",
-    "A 1950s paint catalog",
-    "A 19th-century chemistry textbook"
-   ],
-   "answer": "Werner's 1821 Nomenclature of Colours",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the word neon is as old as this color's earliest record in our data.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Neon Blue's earliest record in our data is a butterfly's wing in an 1821 color dictionary, a century before the word neon existed."
- ],
- "words": 247,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "No concordance hits; written from ColorHub library/graph data only.",
-   "lint 2026-10-09"
-  ]
- }
 }

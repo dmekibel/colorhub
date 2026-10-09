@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A landscape word",
-   "body": "Our library traces the name only to a Wikipedia color list, which gives no date for when the name was coined [1]. It is a landscape word, the dense green canopy of a tropical rainforest, rather than a material or institution [1].\n\nIts nearest named neighbor is [[patina-green]], 3.5 units of CIEDE2000 away and described as duller [2]. [[generic-viridian]] sits at the same distance, almost the same, [[blue-green]] at 4.2, also almost the same, and [[dark-viridian-green]] at 4.3, also almost the same [2]. Measured in LCH it reads lightness 44, chroma 34, a dark, moderately saturated green [1]."
+   "body": "Our library traces the name only to a Wikipedia color list, which gives no date for when the name was coined [1]. It is a landscape word, the dense green canopy of a tropical rainforest, rather than a material or institution [1].\n\nIts nearest named neighbor is [[patina-green]], 3.5 units of CIEDE2000 away and described as duller [2]. [[generic-viridian]] sits at the same distance, almost the same, [[blue-green]] at 4.2, also almost the same, and [[blue-green]] at 4.3, also almost the same [2]. Measured in LCH it reads lightness 44, chroma 34, a dark, moderately saturated green [1]."
   },
   {
    "id": "field",
@@ -121,7 +121,7 @@
  "openers": [
   "Tropical Rainforest's earliest archive match is a Renoir from 1881, and its latest from 1959."
  ],
- "words": 202,
+ "words": 201,
  "status": "checked",
  "checked": {
   "by": "checker",

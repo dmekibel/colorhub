@@ -12,7 +12,7 @@
     {
       "id": "name",
       "title": "A listed color",
-      "body": "Paterson's dictionary lists DarkOrchid as an entry in the X11 Color Set, with the hex code 9932CC [1]. In his index of colour names it is filed with the violets, next to DarkViolet [2]. The records we hold place the name in the CSS list and in a web encyclopedia, and give no earlier source [3]. Where the name came from is undocumented in our sources, so we do not guess at it.\n\nIts nearest neighbors among our names, by CIELAB distance, are [[vivid-violet|Vivid violet]], [[vivid-violet|Violet (RYB)]] and [[lightish-purple|Lightish Purple]] [5]. On a white page it reaches a contrast ratio of 5.7:1 [5]."
+      "body": "Paterson's dictionary lists DarkOrchid as an entry in the X11 Color Set, with the hex code 9932CC [1]. In his index of colour names it is filed with the violets, next to DarkViolet [2]. The records we hold place the name in the CSS list and in a web encyclopedia, and give no earlier source [3]. Where the name came from is undocumented in our sources, so we do not guess at it.\n\nIts nearest neighbors among our names, by CIELAB distance, are [[vivid-violet|Vivid violet]], [[vivid-violet|Violet (RYB)]] and [[bright-lavender|Lightish Purple]] [5]. On a white page it reaches a contrast ratio of 5.7:1 [5]."
     },
     {
       "id": "field",

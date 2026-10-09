@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "The name",
-   "body": "The name comes to us from the 2010 xkcd color survey, as one of the named greens [1]. No book I read treats it as a color word, and who first used it as one is undocumented. ISCC-NBS 1955 would call it a vivid green, 6.6 units away, and its Munsell notation is 1.3G 6.2/8.1 [1]. Close neighbours are [[jade]], [[peppermint]] and [[boring-green]], each a few units off [1]."
+   "body": "The name comes to us from the 2010 xkcd color survey, as one of the named greens [1]. No book I read treats it as a color word, and who first used it as one is undocumented. ISCC-NBS 1955 would call it a vivid green, 6.6 units away, and its Munsell notation is 1.3G 6.2/8.1 [1]. Close neighbours are [[jade]], [[peppermint]] and [[algae]], each a few units off [1]."
   },
   {
    "id": "pigments",
@@ -156,7 +156,7 @@
   "The white cliffs of Dover are made of the remains of single-celled algae.",
   "Brown, blue and red algae exist: pigments such as fucoxanthin and phycoerythrin do the coloring."
  ],
- "words": 305,
+ "words": 304,
  "status": "checked",
  "checked": {
   "by": "checker",

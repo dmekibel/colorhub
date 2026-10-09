@@ -12,7 +12,7 @@
       "reason": "YInMn blue is a 2009 pigment (a compound of yttrium, indium and manganese oxides). The data merge filed the library's YInMn Blue screen swatch under Dusk Blue, which the same sentence already links, so linking the pigment would send two links to one page. Shown as plain text."
     },
     "paris-blue": {
-      "to": "prussian-blue",
+      "to": "sapphire-blue",
       "label": "Paris blue",
       "reason": "Paris blue is a trade synonym of Prussian blue (the article's aka list says so). The library's Ridgway 'Paris Blue' swatch was merged into Lapis Lazuli, which is a different color, so the synonym is mapped to the pigment's own color."
     },

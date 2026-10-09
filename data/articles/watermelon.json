@@ -1,154 +1,154 @@
 {
- "slug": "watermelon",
- "name": "Watermelon",
- "hex": "#FD4659",
- "names": [
-  "Watermelon"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Watermelon is the red-pink of the fruit's flesh, a food color name recorded in a 1930 color dictionary and again in the 2010 xkcd survey.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A fruit name",
-   "body": "Maerz and Paul's dictionary of 1930 records the name, with a first appearance dated 1926 and a plate position of 1 K 9 [1]. The xkcd survey of 2010 lists it again [1]. The flesh gets its red mostly from lycopene, the same pigment that colors tomatoes, and which Paterson says also colors apricots, pink grapefruit and guavas [2]. Nearest named colors are [[lightish-red]], [[grapefruit]] and [[fiery-rose]] [3]."
-  },
-  {
-   "id": "trade",
-   "title": "A dye-vat simile",
-   "body": "Finlay describes a madder lake being made by George Field's method: crushed roots are washed, the dye is mixed with alum and water, and the froth-topped slurry looks like watermelon juice [4]. The comparison is the writer's, not a trade name, but it shows how a natural red-pink reads to the eye. See [[flower:madder|madder]]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Only 2 paintings in our archive of 23,781 hold this color, as photographed, which makes it rarer than 79% of named colors [5]. The word itself peaks in printed English in the 2010s, and rose fastest in the 1880s [6]. These are photographs of varnished paintings, not pigment tests."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the flesh of the watermelon",
-   "first_recorded": "1926 (Maerz & Paul 1930)",
-   "source": "ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "pink-red",
-   "grapefruit",
-   "fiery-rose",
-   "red-pink"
+  "slug": "watermelon",
+  "name": "Watermelon",
+  "hex": "#FD4659",
+  "names": [
+    "Watermelon"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-  "n_present": 2,
-  "rarer_than_pct": 79,
-  "ngram": {
-   "peak": "2010s",
-   "fastest_rise": "1880s"
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Watermelon is the red-pink of the fruit's flesh, a food color name recorded in a 1930 color dictionary and again in the 2010 xkcd survey.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A fruit name",
+      "body": "Maerz and Paul's dictionary of 1930 records the name, with a first appearance dated 1926 and a plate position of 1 K 9 [1]. The xkcd survey of 2010 lists it again [1]. The flesh gets its red mostly from lycopene, the same pigment that colors tomatoes, and which Paterson says also colors apricots, pink grapefruit and guavas [2]. Nearest named colors are [[neon-red]], [[grapefruit]] and [[fiery-rose]] [3]."
+    },
+    {
+      "id": "trade",
+      "title": "A dye-vat simile",
+      "body": "Finlay describes a madder lake being made by George Field's method: crushed roots are washed, the dye is mixed with alum and water, and the froth-topped slurry looks like watermelon juice [4]. The comparison is the writer's, not a trade name, but it shows how a natural red-pink reads to the eye. See [[flower:madder|madder]]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Only 2 paintings in our archive of 23,781 hold this color, as photographed, which makes it rarer than 79% of named colors [5]. The word itself peaks in printed English in the 2010s, and rose fastest in the 1880s [6]. These are photographs of varnished paintings, not pigment tests."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the flesh of the watermelon",
+      "first_recorded": "1926 (Maerz & Paul 1930)",
+      "source": "ColorHub library"
+    },
+    "aka": [],
+    "siblings": [
+      "pink-red",
+      "grapefruit",
+      "fiery-rose",
+      "red-pink"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "measured": {
-   "lch": [
-    58.0,
-    76.0,
-    24.4
-   ],
-   "nearest": [
-    [
-     "Lightish Red",
-     3.1
-    ],
-    [
-     "Grapefruit",
-     4.6
-    ],
-    [
-     "Fiery Rose",
-     4.9
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+    "n_present": 2,
+    "rarer_than_pct": 79,
+    "ngram": {
+      "peak": "2010s",
+      "fastest_rise": "1880s"
+    },
+    "measured": {
+      "lch": [
+        58.0,
+        76.0,
+        24.4
+      ],
+      "nearest": [
+        [
+          "Lightish Red",
+          3.1
+        ],
+        [
+          "Grapefruit",
+          4.6
+        ],
+        [
+          "Fiery Rose",
+          4.9
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Maerz & Paul 1930, plate 1 K 9, first recorded 1926; xkcd 2010",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 251 (\"lycopene\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Finlay, Color, ch. 14",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes) (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "data",
+      "cite": "ColorHub Ngram cache (Google Books, adjective use)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which pigment gives watermelon flesh its red, according to Paterson?",
+      "choices": [
+        "Lycopene",
+        "Indigo",
+        "Carmine",
+        "Chlorophyll"
+      ],
+      "answer": "Lycopene",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Finlay says madder-lake slurry once looked like watermelon juice.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Tomato and watermelon share one red: lycopene."
+  ],
+  "words": 192,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "verified lycopene list, Field's madder simile, library dates"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Maerz & Paul 1930, plate 1 K 9, first recorded 1926; xkcd 2010",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 251 (\"lycopene\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Finlay, Color, ch. 14",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes) (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "data",
-   "cite": "ColorHub Ngram cache (Google Books, adjective use)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which pigment gives watermelon flesh its red, according to Paterson?",
-   "choices": [
-    "Lycopene",
-    "Indigo",
-    "Carmine",
-    "Chlorophyll"
-   ],
-   "answer": "Lycopene",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Finlay says madder-lake slurry once looked like watermelon juice.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Tomato and watermelon share one red: lycopene."
- ],
- "words": 192,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "verified lycopene list, Field's madder simile, library dates"
-  ]
- }
 }

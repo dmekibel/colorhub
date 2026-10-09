@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A light build of plum",
-   "body": "The nearest named colors on file are [[antique-fuchsia]], [[purpleish]], [[dull-magenta-purple]] and [[magenta-haze]], at 3.2, 3.6, 4.1 and 5 ΔE [1]. The ISCC-NBS system classes the hue as moderate reddish purple, about 2.2 units from that block's center [1]. Its Munsell notation is 2.2RP 4.6/8.1 and its LCH values are lightness 46, chroma 37, hue 341 degrees, a mid-toned, muted purple-red [1]. \n\nTen other names cluster around this same swatch in our library's alternate-name lists, among them Caprice Pink, Clover, Dahlia Mauve, Geisha and Verbena Lavender [2]. That crowd of names, all pointing at one muted purple-red, is typical of a color between two better-known families, rose and [[plum]]."
+   "body": "The nearest named colors on file are [[antique-fuchsia]], [[razzmic-berry]], [[dull-magenta-purple]] and [[magenta-haze]], at 3.2, 3.6, 4.1 and 5 ΔE [1]. The ISCC-NBS system classes the hue as moderate reddish purple, about 2.2 units from that block's center [1]. Its Munsell notation is 2.2RP 4.6/8.1 and its LCH values are lightness 46, chroma 37, hue 341 degrees, a mid-toned, muted purple-red [1]. \n\nTen other names cluster around this same swatch in our library's alternate-name lists, among them Caprice Pink, Clover, Dahlia Mauve, Geisha and Verbena Lavender [2]. That crowd of names, all pointing at one muted purple-red, is typical of a color between two better-known families, rose and [[plum]]."
   },
   {
    "id": "field",
@@ -112,7 +112,7 @@
  "openers": [
   "Ten different library names, from Caprice Pink to Verbena Lavender, cluster around the same muted purple-red as Light Plum."
  ],
- "words": 229,
+ "words": 230,
  "status": "checked",
  "checked": {
   "by": "batch writer",

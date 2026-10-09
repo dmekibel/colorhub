@@ -7,12 +7,12 @@
  ],
  "tier": "descriptive",
  "depth": "brief",
- "lede": "Light Navy raises the value of [[navy]], tracked since 1927 by the German RAL color standard as RAL 5017, and carries its own lighter child, [[light-navy-blue]].",
+ "lede": "Light Navy raises the value of [[navy]], tracked since 1927 by the German RAL color standard as RAL 5017, and carries its own lighter child, [[newport]].",
  "sections": [
   {
    "id": "name",
    "title": "A standard, not just a survey",
-   "body": "The name is the modifier *light* set against the base color [[navy]] [1]. Its earliest documented listing in our sources is RAL 5017, from the German RAL color-matching system founded in 1927, an approximate screen value for a paint and signage standard rather than a measured dye [1]. The ISCC-NBS 1955 lists separately file the same range as block 183, \"dark blue,\" and the xkcd 2010 survey records it again from crowd labeling [1]. It has one documented child in our data, the still-lighter [[light-navy-blue]], and its nearest neighbor is [[dusk-blue]] at 2.6 units [1]."
+   "body": "The name is the modifier *light* set against the base color [[navy]] [1]. Its earliest documented listing in our sources is RAL 5017, from the German RAL color-matching system founded in 1927, an approximate screen value for a paint and signage standard rather than a measured dye [1]. The ISCC-NBS 1955 lists separately file the same range as block 183, \"dark blue,\" and the xkcd 2010 survey records it again from crowd labeling [1]. It has one documented child in our data, the still-lighter [[newport]], and its nearest neighbor is [[dusk-blue]] at 2.6 units [1]."
   },
   {
    "id": "field",
@@ -140,5 +140,5 @@
   "date": "2026-10-08",
   "issues": []
  },
- "words": 231
+ "words": 227
 }

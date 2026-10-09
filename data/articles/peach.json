@@ -1,264 +1,264 @@
 {
- "slug": "peach",
- "name": "Peach",
- "hex": "#FFCBA4",
- "names": [
-  "Peach"
- ],
- "tier": "nature",
- "depth": "long",
- "lede": "Peach is the yellowish pink of the fruit's skin, a color word recorded in English by 1588, and the name also belongs to a black pigment made from the fruit's stones.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The fruit's skin",
-   "body": "*Peach* names the yellowish pink of the fruit, and Paterson's dictionary defines it that way [1]. Shakespeare used the compound \"peach-colour'd\" in *Measure for Measure* and in *Henry IV, Part 2* [1]. Maerz and Paul's *Dictionary of Color* of 1930 dates the color name to 1588 [2].\n\nOur swatch, a light orange-pink, is the one that ISCC-NBS and Maerz and Paul share [2]. Ridgway's 1912 plate has near twins under other names, Orange-Pink and Salmon-Buff [2]. Screen sources disagree: Wikipedia's list gives a paler cream-yellow, and the xkcd survey a stronger orange [2]. Its closest relatives among our names are [[apricot]], [[salmon]] and [[peachy-pink]], with [[pale-peach]] and [[dark-peach]] on either side [2].\n\nThe nearest cut stone is the peach-pink beryl [[gem:morganite|morganite]], colored by manganese where emerald is colored by chromium [16]."
+  "slug": "peach",
+  "name": "Peach",
+  "hex": "#FFCBA4",
+  "names": [
+    "Peach"
+  ],
+  "tier": "nature",
+  "depth": "long",
+  "lede": "Peach is the yellowish pink of the fruit's skin, a color word recorded in English by 1588, and the name also belongs to a black pigment made from the fruit's stones.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The fruit's skin",
+      "body": "*Peach* names the yellowish pink of the fruit, and Paterson's dictionary defines it that way [1]. Shakespeare used the compound \"peach-colour'd\" in *Measure for Measure* and in *Henry IV, Part 2* [1]. Maerz and Paul's *Dictionary of Color* of 1930 dates the color name to 1588 [2].\n\nOur swatch, a light orange-pink, is the one that ISCC-NBS and Maerz and Paul share [2]. Ridgway's 1912 plate has near twins under other names, Orange-Pink and Salmon-Buff [2]. Screen sources disagree: Wikipedia's list gives a paler cream-yellow, and the xkcd survey a stronger orange [2]. Its closest relatives among our names are [[apricot]], [[salmon]] and [[dusty-salmon]], with [[pale-peach]] and [[dark-peach]] on either side [2].\n\nThe nearest cut stone is the peach-pink beryl [[gem:morganite|morganite]], colored by manganese where emerald is colored by chromium [16]."
+    },
+    {
+      "id": "blossom",
+      "title": "The blossom is another color",
+      "body": "The tree's flower has its own color, and it is not the fruit's. Paterson defines peach-blossom as a light purplish pink, and peach bloom as a deep pink used as a ceramic glaze [1]. The 1790s lists of color names that descend from Werner's mineral nomenclature carry *peach-blossom red* beside flesh red and rose red [3]. A four-language chart of color names published by the botanist Saccardo in 1894 still had *peach-blossom colour* in it [3]. The [[flower:peach|peach blossom]] is the color those lists meant.\n\nA medieval puzzle hangs on the blossom. Some scholars have derived the cloth color word *pers* from the peach tree's Latin name, since the blossom is usually a bluish pink [4]. Others derive it from a Latin word for pressed, from Spanish and Portuguese words for black, or from Persian lilac or the cornflower [4]. Gage reports that there is no agreement [4]. By the later Middle Ages in northern Europe, on cloth it appears to have named the costliest and deepest blue, so wherever the word began, it ended nowhere near peach [4].\n\nRudolf Steiner proposed peach blossom as the color that shows the living soul in human skin [13]. Derek Jarman, writing in *Chroma*, wondered whether Steiner would have chosen differently had he been black [13]."
+    },
+    {
+      "id": "peach-black",
+      "title": "Peach black: a peach that is not peach",
+      "body": "The strangest peach in the books is black. Peach black is a carbon black made by charring peach stones, and it was in use from the Middle Ages onward [5]. It belongs to a family of char blacks made from the shells or kernels of fruits such as cherry, almond, walnut and coconut [5]. Unlike lamp blacks, made from airborne soot, char blacks keep some of the original structure of the stone [5].\n\nA medieval source repeats the recipe, listing soot, charcoal of wood, charcoal of peach stones and burnt twigs [6]. Harley found English writers advising peach stones in a manuscript, cherry and date stones in Hilliard (1624), almond shells in Lomazzo as translated by Haydocke (1584, 1598) and walnut shells in Peacham (1612) [6].\n\nPainters treated it as a staple. When Cézanne saw Bernard's small palette in 1904, he is reported to have asked where his peach black was [7]. A palette of Matisse's from 1937 started with peach black by the thumb-hole and went through 17 colors to madder lake [7]. Renoir preferred ivory black, when he used black at all [8]. A color called peach black is therefore a black, and the name records the raw material."
+    },
+    {
+      "id": "flesh",
+      "title": "From flesh to peach",
+      "body": "Peach has also been a way out of a bad word. \"Flesh\" and \"nude\" as color names assume pale skin, which St Clair calls painfully out of step with a global fashion market [9]. She lists sand, champagne, biscuit, peach and beige as the alternatives for the pale pink-beige in question [9]. She also reports that Crayola renamed its \"flesh\" crayon \"peach\" in 1962 [9]. The date rests on St Clair alone among our books, so treat it as reported and not checked [9]."
+    },
+    {
+      "id": "wardrobe",
+      "title": "Wardrobes and walls",
+      "body": "Peach was already a fashion word in the sixteenth century. After Elizabeth I took the throne in 1558, her wardrobe accounts show her dressing mostly in white, black and gold, with subdued colors such as peach, [[ash]] and [[tawny]] [10].\n\nIn the twentieth century peach became an interior decorator's color. Birren, writing in 1950, called peach one of the true appetite colors, recommended its tints for hospitals, homes, factories and schools, and suggested ivory, cream or peach to warm a chilly or poorly lit space [11]. These are the opinions of a color consultant of his day, and the books disagree with them. Eckstut warns against claims that peach increases appetite, because responses to a color depend on personal, cultural and biological backgrounds [12]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 45 works, 0.19 per cent of the archive [14]. The biggest patches are in four works [14]. Helleu's [[painting:commons-Q123517324|Portrait of a Woman]] (1909) covers 62 per cent of its canvas [14]. An Indian painting of [[painting:cma-162473|Krishna ferrying Radha across the Yamuna]] (about 1890) covers 55 per cent [14]. Grosch's [[painting:smk-KMS791|view of Vordingborg]] (1810) covers 54 per cent, and Abildgaard's [[painting:smk-KMS3355|Achilles and the Daughters of Lycomedes]] (1794) covers 45 per cent [14]. The earliest is a Chinese [[painting:cma-149391|White-Robed Guanyin]] of about 1250, at 24 per cent [14]. As always these are photographs of aged, varnished paintings, so a match is a screen color and not a pigment test [14].\n\nInside a painting it is a highlight in 91 per cent of the works that carry it, and a mid-tone in the other 9 per cent [14]. Its peak decade is the 1840s, with 5 of 699 paintings, 3.8 times the archive rate [14]. In France it appears in 13 paintings and in Denmark and the United States in 8 each [14]. Not one of the 140 Impressionist works in the archive has a patch this clean, as photographed [14].\n\nIn Google Books the word *peach* is steady from 1800 and peaks around 1890 [15]. The count includes the fruit, so it dates the word and not the color [15]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the skin of the peach fruit (Prunus persica)",
+      "first_recorded": "1588 (Maerz and Paul, 1930)",
+      "source": "Paterson, A Dictionary of Colour, p. 301; Maerz and Paul via data/library.json"
+    },
+    "aka": [
+      "peach colour",
+      "peach blossom (a bluer pink)",
+      "peach black (a black pigment)"
+    ],
+    "siblings": [
+      "apricot",
+      "salmon",
+      "peachy-pink"
+    ],
+    "parent": null,
+    "children": [
+      "pale-peach",
+      "dark-peach",
+      "peach-rose",
+      "dusty-peach"
+    ],
+    "disambiguation": [
+      {
+        "slug": "peach-blush",
+        "gloss": "Peach Blush on our chart is a dark brownish red, nothing like the pale fruit"
+      }
+    ],
+    "other_languages": []
   },
-  {
-   "id": "blossom",
-   "title": "The blossom is another color",
-   "body": "The tree's flower has its own color, and it is not the fruit's. Paterson defines peach-blossom as a light purplish pink, and peach bloom as a deep pink used as a ceramic glaze [1]. The 1790s lists of color names that descend from Werner's mineral nomenclature carry *peach-blossom red* beside flesh red and rose red [3]. A four-language chart of color names published by the botanist Saccardo in 1894 still had *peach-blossom colour* in it [3]. The [[flower:peach|peach blossom]] is the color those lists meant.\n\nA medieval puzzle hangs on the blossom. Some scholars have derived the cloth color word *pers* from the peach tree's Latin name, since the blossom is usually a bluish pink [4]. Others derive it from a Latin word for pressed, from Spanish and Portuguese words for black, or from Persian lilac or the cornflower [4]. Gage reports that there is no agreement [4]. By the later Middle Ages in northern Europe, on cloth it appears to have named the costliest and deepest blue, so wherever the word began, it ended nowhere near peach [4].\n\nRudolf Steiner proposed peach blossom as the color that shows the living soul in human skin [13]. Derek Jarman, writing in *Chroma*, wondered whether Steiner would have chosen differently had he been black [13]."
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#FFCBA4",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 45,
+    "top_paintings": [
+      "commons-Q123517324",
+      "cma-162473",
+      "smk-KMS791",
+      "smk-KMS3355",
+      "cma-149391"
+    ],
+    "role": {
+      "highlight": 0.91,
+      "mid": 0.09
+    },
+    "peak_decade": {
+      "decade": 1840,
+      "hits": 5,
+      "n": 699,
+      "lift": 3.78
+    },
+    "ngram": {
+      "peak": 1890,
+      "first_5pct": 1800
+    }
   },
-  {
-   "id": "peach-black",
-   "title": "Peach black: a peach that is not peach",
-   "body": "The strangest peach in the books is black. Peach black is a carbon black made by charring peach stones, and it was in use from the Middle Ages onward [5]. It belongs to a family of char blacks made from the shells or kernels of fruits such as cherry, almond, walnut and coconut [5]. Unlike lamp blacks, made from airborne soot, char blacks keep some of the original structure of the stone [5].\n\nA medieval source repeats the recipe, listing soot, charcoal of wood, charcoal of peach stones and burnt twigs [6]. Harley found English writers advising peach stones in a manuscript, cherry and date stones in Hilliard (1624), almond shells in Lomazzo as translated by Haydocke (1584, 1598) and walnut shells in Peacham (1612) [6].\n\nPainters treated it as a staple. When Cézanne saw Bernard's small palette in 1904, he is reported to have asked where his peach black was [7]. A palette of Matisse's from 1937 started with peach black by the thumb-hole and went through 17 colors to madder lake [7]. Renoir preferred ivory black, when he used black at all [8]. A color called peach black is therefore a black, and the name records the raw material."
-  },
-  {
-   "id": "flesh",
-   "title": "From flesh to peach",
-   "body": "Peach has also been a way out of a bad word. \"Flesh\" and \"nude\" as color names assume pale skin, which St Clair calls painfully out of step with a global fashion market [9]. She lists sand, champagne, biscuit, peach and beige as the alternatives for the pale pink-beige in question [9]. She also reports that Crayola renamed its \"flesh\" crayon \"peach\" in 1962 [9]. The date rests on St Clair alone among our books, so treat it as reported and not checked [9]."
-  },
-  {
-   "id": "wardrobe",
-   "title": "Wardrobes and walls",
-   "body": "Peach was already a fashion word in the sixteenth century. After Elizabeth I took the throne in 1558, her wardrobe accounts show her dressing mostly in white, black and gold, with subdued colors such as peach, [[ash]] and [[tawny]] [10].\n\nIn the twentieth century peach became an interior decorator's color. Birren, writing in 1950, called peach one of the true appetite colors, recommended its tints for hospitals, homes, factories and schools, and suggested ivory, cream or peach to warm a chilly or poorly lit space [11]. These are the opinions of a color consultant of his day, and the books disagree with them. Eckstut warns against claims that peach increases appetite, because responses to a color depend on personal, cultural and biological backgrounds [12]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 45 works, 0.19 per cent of the archive [14]. The biggest patches are in four works [14]. Helleu's [[painting:commons-Q123517324|Portrait of a Woman]] (1909) covers 62 per cent of its canvas [14]. An Indian painting of [[painting:cma-162473|Krishna ferrying Radha across the Yamuna]] (about 1890) covers 55 per cent [14]. Grosch's [[painting:smk-KMS791|view of Vordingborg]] (1810) covers 54 per cent, and Abildgaard's [[painting:smk-KMS3355|Achilles and the Daughters of Lycomedes]] (1794) covers 45 per cent [14]. The earliest is a Chinese [[painting:cma-149391|White-Robed Guanyin]] of about 1250, at 24 per cent [14]. As always these are photographs of aged, varnished paintings, so a match is a screen color and not a pigment test [14].\n\nInside a painting it is a highlight in 91 per cent of the works that carry it, and a mid-tone in the other 9 per cent [14]. Its peak decade is the 1840s, with 5 of 699 paintings, 3.8 times the archive rate [14]. In France it appears in 13 paintings and in Denmark and the United States in 8 each [14]. Not one of the 140 Impressionist works in the archive has a patch this clean, as photographed [14].\n\nIn Google Books the word *peach* is steady from 1800 and peaks around 1890 [15]. The count includes the fruit, so it dates the word and not the color [15]."
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 301 (\"peach\", \"peach-black\", \"peach bloom\", \"peach-blossom\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub library (data/library.json): Maerz and Paul 1930 (first recorded 1588, plate 9 A 6), Ridgway 1912 plate II, ISCC-NBS 1955, Wikipedia and xkcd swatches",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 30-33",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 84",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, p. 87 (\"Peach black\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"Black pigments\" and \"Peach black\", pp. 41, 96, 224",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, pp. 192, 228",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Finlay, Color, ch. 11",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Nude\" and its notes",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 11",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, pp. 22, 28, 29",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Eckstut and Eckstut, What Is Color?, p. 52",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Jarman, Chroma, p. 69",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "data",
+      "cite": "ColorHub archive field notes (tools/article_field.py, CIEDE2000 within 6, at least 5% of canvas), 23,781 paintings, as photographed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "data",
+      "cite": "Google Books Ngram, \"peach\" (case-insensitive, 5-year smoothing), via the ColorHub cache",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "book",
+      "cite": "Finlay, Jewels: A Secret History, ch. 15",
+      "loc_kind": "epub-chapter",
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Why is there a pigment called peach black?",
+      "choices": [
+        "It is made by charring peach stones",
+        "It is a very dark shade of peach",
+        "It was first sold in Peachtree, Georgia",
+        "It is the color of peach leaves in autumn"
+      ],
+      "answer": "It is made by charring peach stones",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: peach black is a peach-colored pigment.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "In a painting that contains a patch of this peach, what role does it usually play?",
+      "choices": [
+        "A highlight",
+        "A deep shadow",
+        "The background sky",
+        "An outline"
+      ],
+      "answer": "A highlight",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Peach black is a black pigment made by burning peach stones, and Cézanne reportedly missed it on another painter's palette.",
+    "Where you see this peach in a painting, look for the light: in 91 per cent of our archive's matches it is a highlight."
+  ],
+  "words": 987,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Spot-checked key claims against fact card and book text (Gage Matisse/Cezanne/Gerbier, Ball and Balfour-Paul indigo); no text changes needed."
+    ]
   }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the skin of the peach fruit (Prunus persica)",
-   "first_recorded": "1588 (Maerz and Paul, 1930)",
-   "source": "Paterson, A Dictionary of Colour, p. 301; Maerz and Paul via data/library.json"
-  },
-  "aka": [
-   "peach colour",
-   "peach blossom (a bluer pink)",
-   "peach black (a black pigment)"
-  ],
-  "siblings": [
-   "apricot",
-   "salmon",
-   "peachy-pink"
-  ],
-  "parent": null,
-  "children": [
-   "pale-peach",
-   "dark-peach",
-   "peach-rose",
-   "dusty-peach"
-  ],
-  "disambiguation": [
-   {
-    "slug": "peach-blush",
-    "gloss": "Peach Blush on our chart is a dark brownish red, nothing like the pale fruit"
-   }
-  ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#FFCBA4",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 45,
-  "top_paintings": [
-   "commons-Q123517324",
-   "cma-162473",
-   "smk-KMS791",
-   "smk-KMS3355",
-   "cma-149391"
-  ],
-  "role": {
-   "highlight": 0.91,
-   "mid": 0.09
-  },
-  "peak_decade": {
-   "decade": 1840,
-   "hits": 5,
-   "n": 699,
-   "lift": 3.78
-  },
-  "ngram": {
-   "peak": 1890,
-   "first_5pct": 1800
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 301 (\"peach\", \"peach-black\", \"peach bloom\", \"peach-blossom\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub library (data/library.json): Maerz and Paul 1930 (first recorded 1588, plate 9 A 6), Ridgway 1912 plate II, ISCC-NBS 1955, Wikipedia and xkcd swatches",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 30-33",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 84",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Coles, Chromatopia, p. 87 (\"Peach black\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"Black pigments\" and \"Peach black\", pp. 41, 96, 224",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, pp. 192, 228",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Finlay, Color, ch. 11",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Nude\" and its notes",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 11",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy, pp. 22, 28, 29",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Eckstut and Eckstut, What Is Color?, p. 52",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Jarman, Chroma, p. 69",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "data",
-   "cite": "ColorHub archive field notes (tools/article_field.py, CIEDE2000 within 6, at least 5% of canvas), 23,781 paintings, as photographed",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "data",
-   "cite": "Google Books Ngram, \"peach\" (case-insensitive, 5-year smoothing), via the ColorHub cache",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "book",
-   "cite": "Finlay, Jewels: A Secret History, ch. 15",
-   "loc_kind": "epub-chapter",
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Why is there a pigment called peach black?",
-   "choices": [
-    "It is made by charring peach stones",
-    "It is a very dark shade of peach",
-    "It was first sold in Peachtree, Georgia",
-    "It is the color of peach leaves in autumn"
-   ],
-   "answer": "It is made by charring peach stones",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: peach black is a peach-colored pigment.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "In a painting that contains a patch of this peach, what role does it usually play?",
-   "choices": [
-    "A highlight",
-    "A deep shadow",
-    "The background sky",
-    "An outline"
-   ],
-   "answer": "A highlight",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Peach black is a black pigment made by burning peach stones, and Cézanne reportedly missed it on another painter's palette.",
-  "Where you see this peach in a painting, look for the light: in 91 per cent of our archive's matches it is a highlight."
- ],
- "words": 987,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Spot-checked key claims against fact card and book text (Gage Matisse/Cezanne/Gerbier, Ball and Balfour-Paul indigo); no text changes needed."
-  ]
- }
 }

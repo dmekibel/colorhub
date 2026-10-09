@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A Ridgway tone with a near-twin",
-   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* carries this swatch on plate V, hue 27, tone d [1]. The 1955 ISCC-NBS dictionary files the exact name \"Light Green-Yellow\" under block 101, \"light greenish yellow\" [2]. The name builds \"light\" onto [[green-yellow]], a straightforward hue-pair compound rather than a word drawn from nature or trade [1].\n\nIn our color library its closest neighbors are [[pale-butter]] and [[dark-cream]], both about 2.9 units away, nearly the same color on screen [3]. [[light-chalcedony-yellow]] sits 3.3 units off and duller, despite sharing the same block in the 1955 dictionary [2][3]."
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* carries this swatch on plate V, hue 27, tone d [1]. The 1955 ISCC-NBS dictionary files the exact name \"Light Green-Yellow\" under block 101, \"light greenish yellow\" [2]. The name builds \"light\" onto [[green-yellow]], a straightforward hue-pair compound rather than a word drawn from nature or trade [1].\n\nIn our color library its closest neighbors are [[pale-butter]] and [[light-green-yellow]], both about 2.9 units away, nearly the same color on screen [3]. [[light-chalcedony-yellow]] sits 3.3 units off and duller, despite sharing the same block in the 1955 dictionary [2][3]."
   },
   {
    "id": "field",
@@ -119,7 +119,7 @@
  "openers": [
   "Light Green-Yellow and Light Chalcedony Yellow share the same 1955 ISCC-NBS dictionary block, despite being distinct named colors."
  ],
- "words": 274,
+ "words": 275,
  "status": "checked",
  "checked": {
   "by": "checker",

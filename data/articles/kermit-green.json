@@ -1,104 +1,104 @@
 {
- "slug": "kermit-green",
- "name": "Kermit Green",
- "hex": "#5CB200",
- "names": [
-  "Kermit Green"
- ],
- "tier": "person",
- "depth": "short",
- "lede": "Kermit Green is a bright yellow-green crowd-named for Kermit the Frog in a 2010 online color survey, and it is almost absent from our painting archive.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A Muppet's green",
-   "body": "Kermit Green comes from the 2010 xkcd color survey, in which thousands of online respondents typed a name for each of a long series of randomly generated colors [1]. The name itself is simple: respondents matched the swatch to the skin of Kermit the Frog, the Muppet performed and voiced by Jim Henson since 1955 [1]. Our color graph records the origin plainly, as a color named for a person, Kermit [1].\n\nThe color graph puts Kermit Green almost on top of [[leaf-green]], 2.6 units away, and close to [[kelly-green]] at 3.2 units [1]. [[kelly-green|Kelly green]]'s own entry lists Kermit Green among its informal aliases, so the two crowd names describe nearly the same patch of yellow-green [1]. [[grass|Grass]] and [[nasty-green|Nasty Green]] sit a little further out, at 3.4 and 4.3 units [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive of 23,781 paintings holds exactly one match for this color, as photographed, which makes it rarer than 86 percent of our named colors [2]. A bright, saturated internet-survey green like this has no pigment or dye history behind it, so painters had no reason to reach for anything so vivid [2]. The one match is a computed color distance, not a pigment identification [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Kermit the Frog, the Muppet performed by Jim Henson",
-   "first_recorded": "2010 (xkcd color survey)",
-   "source": "ColorHub color graph"
-  },
-  "aka": [],
-  "siblings": [
-   "leaf-green",
-   "kelly-green"
+  "slug": "kermit-green",
+  "name": "Kermit Green",
+  "hex": "#5CB200",
+  "names": [
+    "Kermit Green"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 1,
-  "rarer_than_pct": 86,
-  "measured": {
-   "nearest": [
-    [
-     "Leaf Green",
-     2.6
+  "tier": "person",
+  "depth": "short",
+  "lede": "Kermit Green is a bright yellow-green crowd-named for Kermit the Frog in a 2010 online color survey, and it is almost absent from our painting archive.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A Muppet's green",
+      "body": "Kermit Green comes from the 2010 xkcd color survey, in which thousands of online respondents typed a name for each of a long series of randomly generated colors [1]. The name itself is simple: respondents matched the swatch to the skin of Kermit the Frog, the Muppet performed and voiced by Jim Henson since 1955 [1]. Our color graph records the origin plainly, as a color named for a person, Kermit [1].\n\nThe color graph puts Kermit Green almost on top of [[leaf-green]], 2.6 units away, and close to [[kelly-green]] at 3.2 units [1]. [[kelly-green|Kelly green]]'s own entry lists Kermit Green among its informal aliases, so the two crowd names describe nearly the same patch of yellow-green [1]. [[grass|Grass]] and [[leaf|Nasty Green]] sit a little further out, at 3.4 and 4.3 units [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings holds exactly one match for this color, as photographed, which makes it rarer than 86 percent of our named colors [2]. A bright, saturated internet-survey green like this has no pigment or dye history behind it, so painters had no reason to reach for anything so vivid [2]. The one match is a computed color distance, not a pigment identification [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "Kermit the Frog, the Muppet performed by Jim Henson",
+      "first_recorded": "2010 (xkcd color survey)",
+      "source": "ColorHub color graph"
+    },
+    "aka": [],
+    "siblings": [
+      "leaf-green",
+      "kelly-green"
     ],
-    [
-     "Kelly green",
-     3.2
-    ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color graph: xkcd 2010 crowd color survey and look-alike edges",
-   "loc_kind": null,
-   "url": null
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which Muppet character gave Kermit Green its name?",
-   "choices": [
-    "Kermit the Frog",
-    "Miss Piggy",
-    "Big Bird",
-    "Oscar the Grouch"
-   ],
-   "answer": "Kermit the Frog",
-   "kind": "pick"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 1,
+    "rarer_than_pct": 86,
+    "measured": {
+      "nearest": [
+        [
+          "Leaf Green",
+          2.6
+        ],
+        [
+          "Kelly green",
+          3.2
+        ]
+      ]
+    }
   },
-  {
-   "q": "True or false: Kermit Green comes from an online crowd-sourced color survey.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color graph: xkcd 2010 crowd color survey and look-alike edges",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which Muppet character gave Kermit Green its name?",
+      "choices": [
+        "Kermit the Frog",
+        "Miss Piggy",
+        "Big Bird",
+        "Oscar the Grouch"
+      ],
+      "answer": "Kermit the Frog",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Kermit Green comes from an online crowd-sourced color survey.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Kermit Green shows up in just one of the 23,781 paintings in our archive."
+  ],
+  "words": 223,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "openers": [
-  "Kermit Green shows up in just one of the 23,781 paintings in our archive."
- ],
- "words": 223,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

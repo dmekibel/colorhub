@@ -1,138 +1,138 @@
 {
- "name": "Velvet Green",
- "hex": "#58773A",
- "names": [
-  "Velvet Green"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Velvet Green is a muted yellow-green borrowing its name from [[velvet]], the fabric word, not from any green velvet in particular.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A fabric word, not a hue family",
-   "body": "Maerz and Paul record Velvet Green as first appearing in 1902, on plate 22, chip L8, in their 1930 dictionary [1]. The ISCC-NBS system of 1955 files the chip as \"moderate olive green,\" block 118 [1]. \"Velvet\" names a texture, not a color family, and the library's actual [[velvet]] is a dark magenta-purple, nowhere near this green — the shared word is coincidence, not kinship [2]. Our nearest named neighbor by measured color is [[military-green]], a slightly darker and more olive shade, with [[fern-green]] close behind [2]. A fourth near match, [[muddy-green]], is slightly duller still [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a match for Velvet Green in only 143 of 23,781 paintings, about 0.6 percent, more common than 54 percent of the named colors we track [3]. It peaks in the 1900s, in 11 of 1,674 paintings, 2.1 times the rate expected from that century's share of the archive [3]. Camille Pissarro used it most: 5 of his 50 paintings here carry it, 6.6 times his peers' rate [3]. It is also most over-represented in French paintings generally, 2.6 times the expected rate [3]. The earliest archive match dates to 1500, four centuries before Maerz and Paul recorded the name, which again shows only a look-alike hue, not the dye or the word [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the word \"velvet\", not a specific fabric or dye",
-   "first_recorded": "1902, per Maerz and Paul (1930)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "fern-green",
-   "military-green",
-   "sap-green",
-   "muddy-green"
+  "name": "Velvet Green",
+  "hex": "#58773A",
+  "names": [
+    "Velvet Green"
   ],
-  "parent": "velvet",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 143,
-  "measured": {
-   "lch": [
-    46.4,
-    37.4,
-    127.1
-   ],
-   "nearest": [
-    [
-     "Fern Green",
-     3.1
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Velvet Green is a muted yellow-green borrowing its name from [[velvet]], the fabric word, not from any green velvet in particular.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A fabric word, not a hue family",
+      "body": "Maerz and Paul record Velvet Green as first appearing in 1902, on plate 22, chip L8, in their 1930 dictionary [1]. The ISCC-NBS system of 1955 files the chip as \"moderate olive green,\" block 118 [1]. \"Velvet\" names a texture, not a color family, and the library's actual [[velvet]] is a dark magenta-purple, nowhere near this green — the shared word is coincidence, not kinship [2]. Our nearest named neighbor by measured color is [[military-green]], a slightly darker and more olive shade, with [[fern-green]] close behind [2]. A fourth near match, [[military-green]], is slightly duller still [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a match for Velvet Green in only 143 of 23,781 paintings, about 0.6 percent, more common than 54 percent of the named colors we track [3]. It peaks in the 1900s, in 11 of 1,674 paintings, 2.1 times the rate expected from that century's share of the archive [3]. Camille Pissarro used it most: 5 of his 50 paintings here carry it, 6.6 times his peers' rate [3]. It is also most over-represented in French paintings generally, 2.6 times the expected rate [3]. The earliest archive match dates to 1500, four centuries before Maerz and Paul recorded the name, which again shows only a look-alike hue, not the dye or the word [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the word \"velvet\", not a specific fabric or dye",
+      "first_recorded": "1902, per Maerz and Paul (1930)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "fern-green",
+      "military-green",
+      "sap-green",
+      "muddy-green"
     ],
-    [
-     "Military Green",
-     3.4
-    ],
-    [
-     "Sap Green",
-     4.3
-    ],
-    [
-     "Muddy Green",
-     4.6
+    "parent": "velvet",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 143,
+    "measured": {
+      "lch": [
+        46.4,
+        37.4,
+        127.1
+      ],
+      "nearest": [
+        [
+          "Fern Green",
+          3.1
+        ],
+        [
+          "Military Green",
+          3.4
+        ],
+        [
+          "Sap Green",
+          4.3
+        ],
+        [
+          "Muddy Green",
+          4.6
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Maerz & Paul 1930, ISCC-NBS 1955 entries",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library, nearest-neighbor computation",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the word \"velvet\" in Velvet Green refer to?",
+      "choices": [
+        "The fabric word, unrelated to this hue",
+        "A real green velvet textile",
+        "A French dye house",
+        "A painter's nickname"
+      ],
+      "answer": "The fabric word, unrelated to this hue",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: ColorHub's own Velvet color is a green.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Which painter used Velvet Green most often in our archive?",
+      "choices": [
+        "Camille Pissarro",
+        "Paul Gauguin",
+        "Georges Seurat",
+        "John Singer Sargent"
+      ],
+      "answer": "Camille Pissarro",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Velvet Green borrows a fabric word for a color that has nothing to do with velvet."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Maerz & Paul 1930, ISCC-NBS 1955 entries",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library, nearest-neighbor computation",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the word \"velvet\" in Velvet Green refer to?",
-   "choices": [
-    "The fabric word, unrelated to this hue",
-    "A real green velvet textile",
-    "A French dye house",
-    "A painter's nickname"
-   ],
-   "answer": "The fabric word, unrelated to this hue",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: ColorHub's own Velvet color is a green.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Which painter used Velvet Green most often in our archive?",
-   "choices": [
-    "Camille Pissarro",
-    "Paul Gauguin",
-    "Georges Seurat",
-    "John Singer Sargent"
-   ],
-   "answer": "Camille Pissarro",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Velvet Green borrows a fabric word for a color that has nothing to do with velvet."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- },
- "slug": "velvet-green",
- "words": 246
+  "slug": "velvet-green",
+  "words": 246
 }

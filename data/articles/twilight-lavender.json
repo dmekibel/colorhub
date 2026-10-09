@@ -1,132 +1,132 @@
 {
- "slug": "twilight-lavender",
- "name": "Twilight Lavender",
- "hex": "#8A496B",
- "names": [
-  "Twilight Lavender"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Twilight Lavender is a dusty, reddish purple named for the fading evening sky rather than the [[lavender]] flower directly.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A sky word, not a flower",
-   "body": "Our library traces the name only to a Wikipedia color list, which gives no date for when it entered use [1]. Despite carrying lavender in its name, the word twilight points to the sky at dusk, so the color is filed as a landscape word rather than a plant one [1].\n\nIts nearest named neighbor is [[dull-magenta-purple]], 3.0 units of CIEDE2000 away and described as almost the same [2]. [[raisin-purple]] sits at 3.4, also almost the same, [[dark-mauve]] at 3.5, redder and duller, and [[dull-dark-purple]] at 3.9, purpler [2]. Measured in LCH it reads lightness 40, chroma 33, a dark, moderately saturated reddish purple [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in just 9 of 23,781 paintings (0.04 percent), rarer than 78 percent of the named colors, as photographed [3]. The earliest dated match is 1600, though the archive's early centuries are thin, so this is a floor and not a first [3]. The latest dated match is 1915, across 8 dated paintings in total [3]. These are photographs of varnished paintings, so a color match is not a pigment test [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the colors of twilight, the fading evening sky",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub library (a Wikipedia list)"
-  },
-  "aka": [],
-  "siblings": [
-   "dull-magenta-purple",
-   "raisin-purple",
-   "dark-mauve",
-   "dull-dark-purple"
+  "slug": "twilight-lavender",
+  "name": "Twilight Lavender",
+  "hex": "#8A496B",
+  "names": [
+    "Twilight Lavender"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
-  "n_present": 9,
-  "rank_pct_rarer": 78,
-  "first_dated": {
-   "year": 1600,
-   "before_record": false
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Twilight Lavender is a dusty, reddish purple named for the fading evening sky rather than the [[lavender]] flower directly.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A sky word, not a flower",
+      "body": "Our library traces the name only to a Wikipedia color list, which gives no date for when it entered use [1]. Despite carrying lavender in its name, the word twilight points to the sky at dusk, so the color is filed as a landscape word rather than a plant one [1].\n\nIts nearest named neighbor is [[dull-magenta-purple]], 3.0 units of CIEDE2000 away and described as almost the same [2]. [[raisin-purple]] sits at 3.4, also almost the same, [[corinthian-purple]] at 3.5, redder and duller, and [[dull-dark-purple]] at 3.9, purpler [2]. Measured in LCH it reads lightness 40, chroma 33, a dark, moderately saturated reddish purple [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in just 9 of 23,781 paintings (0.04 percent), rarer than 78 percent of the named colors, as photographed [3]. The earliest dated match is 1600, though the archive's early centuries are thin, so this is a floor and not a first [3]. The latest dated match is 1915, across 8 dated paintings in total [3]. These are photographs of varnished paintings, so a color match is not a pigment test [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the colors of twilight, the fading evening sky",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub library (a Wikipedia list)"
+    },
+    "aka": [],
+    "siblings": [
+      "dull-magenta-purple",
+      "raisin-purple",
+      "dark-mauve",
+      "dull-dark-purple"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "measured": {
-   "lch": [
-    40,
-    33,
-    347
-   ],
-   "nearest": [
-    [
-     "Dull Magenta Purple",
-     3.0
-    ],
-    [
-     "Raisin Purple",
-     3.4
-    ],
-    [
-     "Dark Mauve",
-     3.5
-    ],
-    [
-     "Dull Dark Purple",
-     3.9
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
+    "n_present": 9,
+    "rank_pct_rarer": 78,
+    "first_dated": {
+      "year": 1600,
+      "before_record": false
+    },
+    "measured": {
+      "lch": [
+        40,
+        33,
+        347
+      ],
+      "nearest": [
+        [
+          "Dull Magenta Purple",
+          3.0
+        ],
+        [
+          "Raisin Purple",
+          3.4
+        ],
+        [
+          "Dark Mauve",
+          3.5
+        ],
+        [
+          "Dull Dark Purple",
+          3.9
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): name source and nature tier",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges): CIEDE2000 look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the twilight in Twilight Lavender refer to?",
+      "choices": [
+        "The fading colors of the evening sky",
+        "The lavender flower's bloom time",
+        "A specific sunset photograph",
+        "A dye vat's cooling stage"
+      ],
+      "answer": "The fading colors of the evening sky",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Twilight Lavender is classed with flower and plant names in our library.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Despite its name, Twilight Lavender is filed as a sky color, not a flower one."
+  ],
+  "words": 203,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "rank-percentile drift: article said 77%, current data/graph/fieldnotes says 78% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): name source and nature tier",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges): CIEDE2000 look-alike distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the twilight in Twilight Lavender refer to?",
-   "choices": [
-    "The fading colors of the evening sky",
-    "The lavender flower's bloom time",
-    "A specific sunset photograph",
-    "A dye vat's cooling stage"
-   ],
-   "answer": "The fading colors of the evening sky",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Twilight Lavender is classed with flower and plant names in our library.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Despite its name, Twilight Lavender is filed as a sky color, not a flower one."
- ],
- "words": 203,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "rank-percentile drift: article said 77%, current data/graph/fieldnotes says 78% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
-  ]
- }
 }

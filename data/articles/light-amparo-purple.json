@@ -1,104 +1,104 @@
 {
- "slug": "light-amparo-purple",
- "name": "Light Amparo Purple",
- "hex": "#CF91DA",
- "names": [
-  "Light Amparo Purple"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Light Amparo Purple is a paler reading of [[amparo-purple|Amparo Purple]], a hue Ridgway recorded in his 1912 atlas and the ISCC-NBS system filed again in 1955.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier on an undocumented name",
-   "body": "The name is built by grammar, \"light\" plus the parent color [[amparo-purple|Amparo Purple]], whose own name is undocumented in the sources consulted; \"Amparo\" is a Spanish word for shelter and a common given name, but nothing we hold confirms a link [1]. Ridgway's 1912 atlas places the parent hue on plate XI, hue 63, and the ISCC-NBS system separately filed it in 1955 as block 217, a brilliant purple [1]. This paler, lighter version keeps the same two-source record [1].\n\nIts nearest named neighbor in the color graph is [[bright-lilac|Bright Lilac]], 3.9 units away, with [[lavender-pink|Lavender Pink]] close behind at 4.1 and [[rose-purple|Rose-Purple]] at 4.2 [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive holds this color covering at least 1 percent of its canvas, within a color distance of 4, as photographed [2]. A bright, pale modern purple like this, built as a lightened variant rather than drawn from a historical pigment, sits outside the range painters working from natural dyes and earths had on hand [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a descriptive modifier: light + Amparo Purple",
-   "first_recorded": "1912 (Ridgway, plate XI); also ISCC-NBS 1955, block 217",
-   "source": "ColorHub color graph"
-  },
-  "aka": [],
-  "siblings": [
-   "bright-lilac",
-   "lavender-pink"
+  "slug": "light-amparo-purple",
+  "name": "Light Amparo Purple",
+  "hex": "#CF91DA",
+  "names": [
+    "Light Amparo Purple"
   ],
-  "parent": "amparo-purple",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "iscc": "brilliant purple",
-   "nearest": [
-    [
-     "Bright Lilac",
-     3.9
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Light Amparo Purple is a paler reading of [[orchid-purple|Amparo Purple]], a hue Ridgway recorded in his 1912 atlas and the ISCC-NBS system filed again in 1955.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier on an undocumented name",
+      "body": "The name is built by grammar, \"light\" plus the parent color [[orchid-purple|Amparo Purple]], whose own name is undocumented in the sources consulted; \"Amparo\" is a Spanish word for shelter and a common given name, but nothing we hold confirms a link [1]. Ridgway's 1912 atlas places the parent hue on plate XI, hue 63, and the ISCC-NBS system separately filed it in 1955 as block 217, a brilliant purple [1]. This paler, lighter version keeps the same two-source record [1].\n\nIts nearest named neighbor in the color graph is [[bright-lilac|Bright Lilac]], 3.9 units away, with [[lavender-pink|Lavender Pink]] close behind at 4.1 and [[rose-purple|Rose-Purple]] at 4.2 [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive holds this color covering at least 1 percent of its canvas, within a color distance of 4, as photographed [2]. A bright, pale modern purple like this, built as a lightened variant rather than drawn from a historical pigment, sits outside the range painters working from natural dyes and earths had on hand [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a descriptive modifier: light + Amparo Purple",
+      "first_recorded": "1912 (Ridgway, plate XI); also ISCC-NBS 1955, block 217",
+      "source": "ColorHub color graph"
+    },
+    "aka": [],
+    "siblings": [
+      "bright-lilac",
+      "lavender-pink"
     ],
-    [
-     "Lavender Pink",
-     4.1
-    ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color graph: Ridgway 1912 plate XI, ISCC-NBS 1955 block 217, and look-alike edges",
-   "loc_kind": null,
-   "url": null
+    "parent": "amparo-purple",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Light Amparo Purple is a lightened version of which parent color?",
-   "choices": [
-    "Amparo Purple",
-    "Alice Blue",
-    "Khaki",
-    "Aubergine"
-   ],
-   "answer": "Amparo Purple",
-   "kind": "pick"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "iscc": "brilliant purple",
+      "nearest": [
+        [
+          "Bright Lilac",
+          3.9
+        ],
+        [
+          "Lavender Pink",
+          4.1
+        ]
+      ]
+    }
   },
-  {
-   "q": "True or false: our sources confirm that \"Amparo\" in the name refers to a specific person.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color graph: Ridgway 1912 plate XI, ISCC-NBS 1955 block 217, and look-alike edges",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Light Amparo Purple is a lightened version of which parent color?",
+      "choices": [
+        "Amparo Purple",
+        "Alice Blue",
+        "Khaki",
+        "Aubergine"
+      ],
+      "answer": "Amparo Purple",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources confirm that \"Amparo\" in the name refers to a specific person.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "No source we hold confirms who, or what, the \"Amparo\" in Amparo Purple refers to."
+  ],
+  "words": 190,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "openers": [
-  "No source we hold confirms who, or what, the \"Amparo\" in Amparo Purple refers to."
- ],
- "words": 190,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

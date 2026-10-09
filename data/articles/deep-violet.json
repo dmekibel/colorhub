@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "Almost black",
-   "body": "The name follows the library's modifier grammar, *deep* plus [[violet]]; our record traces the exact chip to the 2010 xkcd online color survey, a crowd-sourced naming exercise rather than a dictionary or a painted plate [1]. The same hex has also circulated under Eggplant Purple, an alternate commercial name with no further history recorded here [1].\n\nAt lightness 16 out of 100 it sits near the dark end of the whole violet family; its closest look-alike on file is [[deep-purple]], about 4.1 units off, with [[petunia]] and [[grape-purple]] a little further out [2]."
+   "body": "The name follows the library's modifier grammar, *deep* plus [[violet]]; our record traces the exact chip to the 2010 xkcd online color survey, a crowd-sourced naming exercise rather than a dictionary or a painted plate [1]. The same hex has also circulated under Eggplant Purple, an alternate commercial name with no further history recorded here [1].\n\nAt lightness 16 out of 100 it sits near the dark end of the whole violet family; its closest look-alike on file is [[midnight-purple]], about 4.1 units off, with [[petunia]] and [[grape]] a little further out [2]."
   },
   {
    "id": "field",
@@ -103,7 +103,7 @@
  "openers": [
   "Deep Violet is so close to black it barely registers in our painting archive."
  ],
- "words": 179,
+ "words": 178,
  "status": "checked",
  "checked": {
   "by": "checker",

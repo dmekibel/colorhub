@@ -1,137 +1,137 @@
 {
- "slug": "bagdad",
- "name": "Bagdad",
- "hex": "#1D3043",
- "names": [
-  "Bagdad"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Bagdad is a very dark blue from Maerz and Paul's 1930 dictionary, using the older English spelling of the Iraqi city; why the city lent its name is undocumented.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A dictionary name and an old spelling",
-   "body": "Maerz and Paul's dictionary lists Bagdad at plate 40, position L 7, and the library dates its first recorded use to 1921; the NBS cited it in 1955 [1]. The nearest ISCC-NBS category is plain dark blue, about 4.7 units away [1]. Nothing in our books explains the name. Birren, discussing early color symbolism, cites Woolley on a ziggurat found between Bagdad and the Persian Gulf, dated to about 2300 BC, whose shrine was covered in blue glazed tile; that is the only link the books offer [2]. Neighbors are [[trooper]], [[dark-blue-grey]] and [[prussian-blue]] [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Bagdad appears in 265 of the 23,781 paintings in our archive (1.1%), as photographed [4]. Its most devoted painter is Émile Bernard, who uses it in 4 of 22 works here, 6.1 times the baseline of the museums those works come from [4]. Like Atlantis it is mostly a hidden color: in 47% of the 139 paintings where it counts [4]. These are photographs of varnished paintings, not pigment tests."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "origin undocumented (older spelling of Baghdad)",
-   "first_recorded": "1921 (Maerz & Paul 1930)",
-   "source": "ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "trooper",
-   "dark-blue-grey",
-   "prussian-blue",
-   "quaker-blue"
+  "slug": "bagdad",
+  "name": "Bagdad",
+  "hex": "#1D3043",
+  "names": [
+    "Bagdad"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-  "n_present": 265,
-  "pct": 1.11,
-  "devoted_painter": {
-   "name": "Émile Bernard",
-   "works": 4,
-   "of": 22,
-   "lift": 6.1
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Bagdad is a very dark blue from Maerz and Paul's 1930 dictionary, using the older English spelling of the Iraqi city; why the city lent its name is undocumented.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A dictionary name and an old spelling",
+      "body": "Maerz and Paul's dictionary lists Bagdad at plate 40, position L 7, and the library dates its first recorded use to 1921; the NBS cited it in 1955 [1]. The nearest ISCC-NBS category is plain dark blue, about 4.7 units away [1]. Nothing in our books explains the name. Birren, discussing early color symbolism, cites Woolley on a ziggurat found between Bagdad and the Persian Gulf, dated to about 2300 BC, whose shrine was covered in blue glazed tile; that is the only link the books offer [2]. Neighbors are [[trooper]], [[dark-grey-blue]] and [[prussian-blue]] [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Bagdad appears in 265 of the 23,781 paintings in our archive (1.1%), as photographed [4]. Its most devoted painter is Émile Bernard, who uses it in 4 of 22 works here, 6.1 times the baseline of the museums those works come from [4]. Like Atlantis it is mostly a hidden color: in 47% of the 139 paintings where it counts [4]. These are photographs of varnished paintings, not pigment tests."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "origin undocumented (older spelling of Baghdad)",
+      "first_recorded": "1921 (Maerz & Paul 1930)",
+      "source": "ColorHub library"
+    },
+    "aka": [],
+    "siblings": [
+      "trooper",
+      "dark-blue-grey",
+      "prussian-blue",
+      "quaker-blue"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "measured": {
-   "lch": [
-    19.1,
-    14.3,
-    264.9
-   ],
-   "nearest": [
-    [
-     "Trooper",
-     2.7
-    ],
-    [
-     "Dark Blue-Grey",
-     4.7
-    ],
-    [
-     "Prussian Blue",
-     5.3
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+    "n_present": 265,
+    "pct": 1.11,
+    "devoted_painter": {
+      "name": "Émile Bernard",
+      "works": 4,
+      "of": 22,
+      "lift": 6.1
+    },
+    "measured": {
+      "lch": [
+        19.1,
+        14.3,
+        264.9
+      ],
+      "nearest": [
+        [
+          "Trooper",
+          2.7
+        ],
+        [
+          "Dark Blue-Grey",
+          4.7
+        ],
+        [
+          "Prussian Blue",
+          5.3
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Maerz & Paul 1930, plate 40 L 7, first recorded 1921; NBS Circular 553 (1955)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Birren, The Psychology of Color, ch. 10",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes) (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which painter in our archive uses Bagdad most, relative to his museums?",
+      "choices": [
+        "Émile Bernard",
+        "Claude Monet",
+        "Johannes Vermeer",
+        "Henri Matisse"
+      ],
+      "answer": "Émile Bernard",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the books we hold explain why the color is named Bagdad.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "A near-black blue that hides in the shadows of paintings."
+  ],
+  "words": 194,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "verified Birren/Woolley passage and library data"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Maerz & Paul 1930, plate 40 L 7, first recorded 1921; NBS Circular 553 (1955)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Birren, The Psychology of Color, ch. 10",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes) (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which painter in our archive uses Bagdad most, relative to his museums?",
-   "choices": [
-    "Émile Bernard",
-    "Claude Monet",
-    "Johannes Vermeer",
-    "Henri Matisse"
-   ],
-   "answer": "Émile Bernard",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the books we hold explain why the color is named Bagdad.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "A near-black blue that hides in the shadows of paintings."
- ],
- "words": 194,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "verified Birren/Woolley passage and library data"
-  ]
- }
 }

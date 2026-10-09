@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "The pale stalk, not the whole plant",
-   "body": "The name comes from the vegetable [[celery]], whose outer stalks run a deeper green while the blanched inner heart stays close to this pale, lime-tinted shade [1]. Our library finds this exact cluster recorded only by the 2010 xkcd color survey, with no CSS, Wikipedia, or dictionary entry of the same name [1].\n\nThe nearest named colors on file are [[light-pea-green]], [[light-light-green]] and [[light-pastel-green]], at 3, 4.2 and 4.2 ΔE [1]. Siblings in the same yellow-green range are [[chartreuse]], [[lime]], and [[mint]] [1]."
+   "body": "The name comes from the vegetable [[celery]], whose outer stalks run a deeper green while the blanched inner heart stays close to this pale, lime-tinted shade [1]. Our library finds this exact cluster recorded only by the 2010 xkcd color survey, with no CSS, Wikipedia, or dictionary entry of the same name [1].\n\nThe nearest named colors on file are [[light-pea-green]], [[very-light-green]] and [[celery]], at 3, 4.2 and 4.2 ΔE [1]. Siblings in the same yellow-green range are [[chartreuse]], [[lime]], and [[mint]] [1]."
   },
   {
    "id": "field",
@@ -108,7 +108,7 @@
  "openers": [
   "Celery is named for the vegetable's pale inner heart, not its deeper green outer stalks."
  ],
- "words": 158,
+ "words": 156,
  "status": "checked",
  "checked": {
   "by": "writer",

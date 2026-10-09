@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A berry name without a named berry",
-   "body": "Our only source for this entry is Wikipedia, which gives the hex value and the \"berry\" ending but does not say which berry, if any, the color is meant to recall [1]. \"Razzmic\" plays on \"raspberry\" by sound, but that link is not confirmed in the sources here [1]. The color sits near enough to several other names that our library lists them as close matches from other systems: Patricia, an ISCC-NBS name via Maerz and Paul first recorded in 1924, and Phlox Purple, first recorded in 1886 [1].\n\nIts nearest named neighbor is [[plum]], 2.5 units away and more vivid [2]. [[purpleish]] sits almost the same shade, just 3.3 units off, and the library's own near-duplicate crowd name, \"Purplish\", is closer still at 0.9 units [1][2]."
+   "body": "Our only source for this entry is Wikipedia, which gives the hex value and the \"berry\" ending but does not say which berry, if any, the color is meant to recall [1]. \"Razzmic\" plays on \"raspberry\" by sound, but that link is not confirmed in the sources here [1]. The color sits near enough to several other names that our library lists them as close matches from other systems: Patricia, an ISCC-NBS name via Maerz and Paul first recorded in 1924, and Phlox Purple, first recorded in 1886 [1].\n\nIts nearest named neighbor is [[plum]], 2.5 units away and more vivid [2]. [[razzmic-berry]] sits almost the same shade, just 3.3 units off, and the library's own near-duplicate crowd name, \"Purplish\", is closer still at 0.9 units [1][2]."
   },
   {
    "id": "field",
@@ -104,7 +104,7 @@
  "openers": [
   "Razzmic Berry sounds like raspberry, but no source here confirms which berry, if any, it is named for."
  ],
- "words": 193,
+ "words": 194,
  "status": "checked",
  "checked": {
   "by": "writer",

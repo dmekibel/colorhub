@@ -12,7 +12,7 @@
   {
    "id": "swatch",
    "title": "Which denim",
-   "body": "Denim names a cloth first and a color second. The color is the blue of indigo-dyed cotton twill, the kind that wears pale where it rubs [4][5]. Our swatch, #3B638C, sits 2.9 units from the ISCC-NBS block called moderate blue on the CIEDE2000 scale, and its Munsell notation is 3.5PB 4.0/6.5 [12].\n\nA brighter web swatch, #1560BD, also circulates under the name in lists drawn from Wikipedia [12]. Our page uses the darker one, which matches the screen value we hold for RAL 5007 [12]. Neither is the dye itself: the chart color [[indigo]] is a violet-blue far from a faded pair of jeans, and the real dye is the subject of [[indigo-dye]] and the [[flower:indigo-woad|indigo plant]] [4][12].\n\nThe nearest named stone is [[gem:lapis-lazuli|lapis lazuli]], 2.9 units away in our data, while the nearest named colors are [[queen-blue]], [[newport]] and [[light-navy-blue]] [12]."
+   "body": "Denim names a cloth first and a color second. The color is the blue of indigo-dyed cotton twill, the kind that wears pale where it rubs [4][5]. Our swatch, #3B638C, sits 2.9 units from the ISCC-NBS block called moderate blue on the CIEDE2000 scale, and its Munsell notation is 3.5PB 4.0/6.5 [12].\n\nA brighter web swatch, #1560BD, also circulates under the name in lists drawn from Wikipedia [12]. Our page uses the darker one, which matches the screen value we hold for RAL 5007 [12]. Neither is the dye itself: the chart color [[indigo]] is a violet-blue far from a faded pair of jeans, and the real dye is the subject of [[indigo-dye]] and the [[flower:indigo-woad|indigo plant]] [4][12].\n\nThe nearest named stone is [[gem:lapis-lazuli|lapis lazuli]], 2.9 units away in our data, while the nearest named colors are [[queen-blue]], [[newport]] and [[newport]] [12]."
   },
   {
    "id": "word",
@@ -253,7 +253,7 @@
   "In denim only the warp threads are dyed, so worn jeans go pale where the blue rubs off but the blue left behind keeps its hue.",
   "Dye vats dated to about 1700, still stained blue, were dug up beside the canal at Nîmes."
  ],
- "words": 1430,
+ "words": 1428,
  "status": "checked",
  "checked": {
   "by": "checker",

@@ -1,132 +1,132 @@
 {
- "slug": "metallic-blue",
- "name": "Metallic Blue",
- "hex": "#4F738E",
- "names": [
-  "Metallic Blue"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Metallic Blue is a grayish steel blue named by an online color survey, borrowing the vocabulary of car paint for a color that is flat on a screen.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A finish, not a pigment",
-   "body": "The library records Metallic Blue only from a 2010 crowd-sourced survey, and the nearest ISCC-NBS category is grayish [[blue]], about 5.4 units away [1]. Its nearest named relatives are [[denim]], [[steel-blue]] and [[dull-blue]] [2].\n\nThe word *metallic* names a finish and not a hue. Paterson's *Dictionary of Colour* defines it as a lustrous reflective finish, especially in motor vehicles, and uses \"metallic blue\" as its own example [3]. A lustrous finish is something a flat screen swatch cannot show, so the swatch here is only the average hue [3]. No color book we hold treats metallic blue as a pigment [4]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Metallic Blue appears in 219 of the 23,781 paintings in our archive, about 0.92%, as photographed [5]. It peaks in paintings of the 1900s, in 19 of 1,674 (1.1%), 2.4 times the rate expected from the same museums [5]. Inside a painting it most often plays a hidden color, in 42% of the 99 paintings where it counts [5]. The earliest match is from 1301, though the archive is thin in early centuries [5]. These are photographs of varnished paintings, so a match is not a pigment test [5]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a surface finish, as on cars",
-   "first_recorded": "2010 (xkcd color survey)",
-   "source": "ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "denim",
-   "steel-blue",
-   "dull-blue"
+  "slug": "metallic-blue",
+  "name": "Metallic Blue",
+  "hex": "#4F738E",
+  "names": [
+    "Metallic Blue"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-  "n_present": 219,
-  "pct": 0.92,
-  "peak_period": "1900s",
-  "measured": {
-   "lch": [
-    46.8,
-    19.5,
-    254.5
-   ],
-   "nearest": [
-    [
-     "Denim",
-     7.1
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Metallic Blue is a grayish steel blue named by an online color survey, borrowing the vocabulary of car paint for a color that is flat on a screen.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A finish, not a pigment",
+      "body": "The library records Metallic Blue only from a 2010 crowd-sourced survey, and the nearest ISCC-NBS category is grayish [[blue]], about 5.4 units away [1]. Its nearest named relatives are [[denim]], [[steel-blue]] and [[flat-blue]] [2].\n\nThe word *metallic* names a finish and not a hue. Paterson's *Dictionary of Colour* defines it as a lustrous reflective finish, especially in motor vehicles, and uses \"metallic blue\" as its own example [3]. A lustrous finish is something a flat screen swatch cannot show, so the swatch here is only the average hue [3]. No color book we hold treats metallic blue as a pigment [4]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Metallic Blue appears in 219 of the 23,781 paintings in our archive, about 0.92%, as photographed [5]. It peaks in paintings of the 1900s, in 19 of 1,674 (1.1%), 2.4 times the rate expected from the same museums [5]. Inside a painting it most often plays a hidden color, in 42% of the 99 paintings where it counts [5]. The earliest match is from 1301, though the archive is thin in early centuries [5]. These are photographs of varnished paintings, so a match is not a pigment test [5]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a surface finish, as on cars",
+      "first_recorded": "2010 (xkcd color survey)",
+      "source": "ColorHub library"
+    },
+    "aka": [],
+    "siblings": [
+      "denim",
+      "steel-blue",
+      "dull-blue"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+    "n_present": 219,
+    "pct": 0.92,
+    "peak_period": "1900s",
+    "measured": {
+      "lch": [
+        46.8,
+        19.5,
+        254.5
+      ],
+      "nearest": [
+        [
+          "Denim",
+          7.1
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): xkcd 2010 survey; ISCC-NBS grayish blue",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"metallic\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "Concordance search of ../color-kb/concordance/by-color/metallic-blue.jsonl",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the word metallic describe in Paterson's definition?",
+      "choices": [
+        "A lustrous reflective finish",
+        "A kind of pigment",
+        "A hue of blue",
+        "A dye from minerals"
+      ],
+      "answer": "A lustrous reflective finish",
+      "kind": "pick"
+    },
+    {
+      "q": "In which period does this color peak in our painting archive?",
+      "choices": [
+        "The 1900s",
+        "The 1300s",
+        "The 1600s",
+        "The 1700s"
+      ],
+      "answer": "The 1900s",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "A blue named for a car finish, not a pigment."
+  ],
+  "words": 216,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Removed unsupported flake claim not in Paterson"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): xkcd 2010 survey; ISCC-NBS grayish blue",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"metallic\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "Concordance search of ../color-kb/concordance/by-color/metallic-blue.jsonl",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the word metallic describe in Paterson's definition?",
-   "choices": [
-    "A lustrous reflective finish",
-    "A kind of pigment",
-    "A hue of blue",
-    "A dye from minerals"
-   ],
-   "answer": "A lustrous reflective finish",
-   "kind": "pick"
-  },
-  {
-   "q": "In which period does this color peak in our painting archive?",
-   "choices": [
-    "The 1900s",
-    "The 1300s",
-    "The 1600s",
-    "The 1700s"
-   ],
-   "answer": "The 1900s",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "A blue named for a car finish, not a pigment."
- ],
- "words": 216,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Removed unsupported flake claim not in Paterson"
-  ]
- }
 }

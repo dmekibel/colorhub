@@ -1,134 +1,134 @@
 {
- "slug": "tealish",
- "name": "Tealish",
- "hex": "#24BCA8",
- "names": [
-  "Tealish"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Tealish is a brighter, slightly bluer-green cousin of teal, named the informal way English makes color words: add \"-ish\" and let the crowd agree.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A suffix, not a source",
-   "body": "The xkcd color survey of 2010 recorded Tealish as a crowd name; our data has no earlier or more formal source for it [1]. The nearest named colors on file are [[keppel]], [[greeny-blue]], [[light-sea-green]] and [[tiffany-blue]], at 3.5, 4.8, 5, 4.8, 4.8 and 5.2 ΔE [2]. In printed English the word itself peaks in the 2010s, tracking the survey that popularized it [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in exactly 1 of 23,781 paintings, as photographed, rarer than 86 percent of the named colors we track [4]. That single match is not evidence the color existed earlier; a 2010 crowd name can still land, by chance, on an old painting's hue [4]. It sits in the [[green]] family, close to [[aqua]] rather than to any pure blue [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "xkcd color survey, 2010",
-   "source": "ColorHub color graph"
-  },
-  "aka": [],
-  "siblings": [
-   "keppel",
-   "greeny-blue",
-   "light-sea-green",
-   "tiffany-blue"
+  "slug": "tealish",
+  "name": "Tealish",
+  "hex": "#24BCA8",
+  "names": [
+    "Tealish"
   ],
-  "parent": "teal",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 1,
-  "measured": {
-   "lch": [
-    69,
-    42,
-    181
-   ],
-   "nearest": [
-    [
-     "Keppel",
-     3.5
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Tealish is a brighter, slightly bluer-green cousin of teal, named the informal way English makes color words: add \"-ish\" and let the crowd agree.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A suffix, not a source",
+      "body": "The xkcd color survey of 2010 recorded Tealish as a crowd name; our data has no earlier or more formal source for it [1]. The nearest named colors on file are [[keppel]], [[jungle-green]], [[light-sea-green]] and [[tiffany-blue]], at 3.5, 4.8, 5, 4.8, 4.8 and 5.2 ΔE [2]. In printed English the word itself peaks in the 2010s, tracking the survey that popularized it [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in exactly 1 of 23,781 paintings, as photographed, rarer than 86 percent of the named colors we track [4]. That single match is not evidence the color existed earlier; a 2010 crowd name can still land, by chance, on an old painting's hue [4]. It sits in the [[green]] family, close to [[aqua]] rather than to any pure blue [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented",
+      "first_recorded": "xkcd color survey, 2010",
+      "source": "ColorHub color graph"
+    },
+    "aka": [],
+    "siblings": [
+      "keppel",
+      "greeny-blue",
+      "light-sea-green",
+      "tiffany-blue"
     ],
-    [
-     "Greeny Blue",
-     4.8
-    ],
-    [
-     "Light Sea Green",
-     4.8
-    ],
-    [
-     "Tiffany Blue",
-     5.2
+    "parent": "teal",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 1,
+    "measured": {
+      "lch": [
+        69,
+        42,
+        181
+      ],
+      "nearest": [
+        [
+          "Keppel",
+          3.5
+        ],
+        [
+          "Greeny Blue",
+          4.8
+        ],
+        [
+          "Light Sea Green",
+          4.8
+        ],
+        [
+          "Tiffany Blue",
+          5.2
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color graph: xkcd 2010 survey entry, origin undocumented",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: ISCC-NBS 1955 block 159 entries",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub Ngram cache, adjective sense, term 'tealish'",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the \"-ish\" in Tealish signal?",
+      "choices": [
+        "A specific chemical dye",
+        "Close to, but not quite, the base color",
+        "A place name",
+        "A museum catalog code"
+      ],
+      "answer": "Close to, but not quite, the base color",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our archive finds Tealish in many paintings.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Tealish turns up in exactly one painting out of nearly 24,000."
+  ],
+  "words": 156,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color graph: xkcd 2010 survey entry, origin undocumented",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library: ISCC-NBS 1955 block 159 entries",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub Ngram cache, adjective sense, term 'tealish'",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the \"-ish\" in Tealish signal?",
-   "choices": [
-    "A specific chemical dye",
-    "Close to, but not quite, the base color",
-    "A place name",
-    "A museum catalog code"
-   ],
-   "answer": "Close to, but not quite, the base color",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our archive finds Tealish in many paintings.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Tealish turns up in exactly one painting out of nearly 24,000."
- ],
- "words": 156,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

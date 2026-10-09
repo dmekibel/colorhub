@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A bright green, independently named four times",
-   "body": "The ISCC-NBS 1955 census files Seafoam as a brilliant green in block 140 [1]. Maerz and Paul trace the name to 1920, on their plate 17 A 9 [1]. xkcd's 2010 color survey lists two near-identical shades, within 1.1 and 1.7 units, called *Light Blue Green* and *Light Bluish Green* [1].\n\nColorHub's own library places its nearest distinctly-named neighbor at [[light-greenish-blue]], about 3.3 units off, with [[light-seafoam]] and [[baby-green]] close behind [1]. ColorHub's broader palette map also groups it loosely with [[mint]], nearly 9 units away, a looser family match than a true twin [1]."
+   "body": "The ISCC-NBS 1955 census files Seafoam as a brilliant green in block 140 [1]. Maerz and Paul trace the name to 1920, on their plate 17 A 9 [1]. xkcd's 2010 color survey lists two near-identical shades, within 1.1 and 1.7 units, called *Light Blue Green* and *Light Bluish Green* [1].\n\nColorHub's own library places its nearest distinctly-named neighbor at [[greenish-cyan]], about 3.3 units off, with [[seafoam]] and [[baby-green]] close behind [1]. ColorHub's broader palette map also groups it loosely with [[mint]], nearly 9 units away, a looser family match than a true twin [1]."
   },
   {
    "id": "field",
@@ -114,7 +114,7 @@
  "openers": [
   "Seafoam never once turns up in our 23,781-painting archive — too bright and saturated for any varnished, centuries-old canvas."
  ],
- "words": 205,
+ "words": 203,
  "status": "checked",
  "checked": {
   "by": "checker",

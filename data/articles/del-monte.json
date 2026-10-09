@@ -1,117 +1,117 @@
 {
- "slug": "del-monte",
- "name": "Del Monte",
- "hex": "#585569",
- "names": [
-  "Del Monte"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Del Monte is a muted grey-violet from the 1930 Maerz and Paul color dictionary, and the books say nothing about where the name came from.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A name without a story",
-   "body": "Del Monte is known in our sources only as plate 46 E7 of Maerz and Paul's *Dictionary of Color*, published in 1930 [1]. It sits in the ISCC-NBS system as a \"grayish purplish blue\", about 6.1 units away [1]. No color book we hold explains the name, and the concordance hits that mention \"del Monte\" are about other things: a cardinal who patronized Caravaggio, and researchers who reported a mineral, weddellite, on limestone in Venice [2][3]. Neither is the origin of the color, so we leave the origin undocumented. A fruit brand and a place name share the words, but that is a guess without a source.\n\nThe cardinal does have a place in color history. Gage notes that Caravaggio's early Roman patron, Cardinal Francesco Maria del Monte, had a circle that took a positive view of shadow, and that Caravaggio's breadth of shadow neutralized local colors to an unprecedented degree [2]. The color is not named for him, but a muted violet-grey is a fair picture of that neutralized light."
-  },
-  {
-   "id": "siblings",
-   "title": "Nearby names",
-   "body": "The closest named colors are muted purples and blue-greys such as [[slate-purple]], [[purple-grey]] and [[blue-grey]], and the darker [[midnight-blue]] [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 133 paintings, and in 64 by the stricter within-painting measure [4]. Inside a painting it most often plays a hidden color, in 48 per cent of those works, meaning it is the cool tone tucked into shadows and dark passages [4].\n\nIt peaks in the 1900s, in 1.1 per cent of the 1,674 paintings from that century, about 3.1 times the expected rate, and it is most over-represented in France, at 2.5 times expected [4]. The earliest match is a work of 1457 by Alesso Baldovinetti, [[painting:commons-Q3618168|a portrait panel]], which is 473 years before the name's first record, so it is a look-alike hue in an aged, varnished photograph [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "origin undocumented",
-   "first_recorded": "1930, Maerz and Paul plate 46 E7",
-   "source": "ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "slate-purple",
-   "purple-grey"
+  "slug": "del-monte",
+  "name": "Del Monte",
+  "hex": "#585569",
+  "names": [
+    "Del Monte"
   ],
-  "parent": "purple",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 133,
-  "n_within": 64,
-  "century_peak": "1900s",
-  "role": "hidden 48%",
-  "country": "France 2.5x"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub library: ISCC-NBS, Maerz and Paul and other name sources (data/library.json)",
-   "loc_kind": null,
-   "url": null
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Del Monte is a muted grey-violet from the 1930 Maerz and Paul color dictionary, and the books say nothing about where the name came from.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A name without a story",
+      "body": "Del Monte is known in our sources only as plate 46 E7 of Maerz and Paul's *Dictionary of Color*, published in 1930 [1]. It sits in the ISCC-NBS system as a \"grayish purplish blue\", about 6.1 units away [1]. No color book we hold explains the name, and the concordance hits that mention \"del Monte\" are about other things: a cardinal who patronized Caravaggio, and researchers who reported a mineral, weddellite, on limestone in Venice [2][3]. Neither is the origin of the color, so we leave the origin undocumented. A fruit brand and a place name share the words, but that is a guess without a source.\n\nThe cardinal does have a place in color history. Gage notes that Caravaggio's early Roman patron, Cardinal Francesco Maria del Monte, had a circle that took a positive view of shadow, and that Caravaggio's breadth of shadow neutralized local colors to an unprecedented degree [2]. The color is not named for him, but a muted violet-grey is a fair picture of that neutralized light."
+    },
+    {
+      "id": "siblings",
+      "title": "Nearby names",
+      "body": "The closest named colors are muted purples and blue-greys such as [[slate-purple]], [[grey-purple]] and [[blue-grey]], and the darker [[midnight-blue]] [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a color near this swatch appears in 133 paintings, and in 64 by the stricter within-painting measure [4]. Inside a painting it most often plays a hidden color, in 48 per cent of those works, meaning it is the cool tone tucked into shadows and dark passages [4].\n\nIt peaks in the 1900s, in 1.1 per cent of the 1,674 paintings from that century, about 3.1 times the expected rate, and it is most over-represented in France, at 2.5 times expected [4]. The earliest match is a work of 1457 by Alesso Baldovinetti, [[painting:commons-Q3618168|a portrait panel]], which is 473 years before the name's first record, so it is a look-alike hue in an aged, varnished photograph [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "origin undocumented",
+      "first_recorded": "1930, Maerz and Paul plate 46 E7",
+      "source": "ColorHub library"
+    },
+    "aka": [],
+    "siblings": [
+      "slate-purple",
+      "purple-grey"
+    ],
+    "parent": "purple",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 160",
-   "loc_kind": "book-page",
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 133,
+    "n_within": 64,
+    "century_peak": "1900s",
+    "role": "hidden 48%",
+    "country": "France 2.5x"
   },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Pigment Compendium (Eastaugh et al.), p. 407 (Delmonte and Sabbioni, 1983, on weddellite)",
-   "loc_kind": "book-page",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub library: ISCC-NBS, Maerz and Paul and other name sources (data/library.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 160",
+      "loc_kind": "book-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Pigment Compendium (Eastaugh et al.), p. 407 (Delmonte and Sabbioni, 1983, on weddellite)",
+      "loc_kind": "book-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "In which 1930 book does the name Del Monte appear in our sources?",
+      "choices": [
+        "Maerz and Paul's Dictionary of Color",
+        "Newton's Opticks",
+        "Goethe's Theory of Colours",
+        "Ridgway's Nomenclature"
+      ],
+      "answer": "Maerz and Paul's Dictionary of Color",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the books say the color is named after Cardinal del Monte.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Del Monte appears only in a 1930 dictionary, and nobody wrote down why."
+  ],
+  "words": 340,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Corrected description of Delmonte and Sabbioni weddellite study",
+      "Tightened Gage paraphrase"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "In which 1930 book does the name Del Monte appear in our sources?",
-   "choices": [
-    "Maerz and Paul's Dictionary of Color",
-    "Newton's Opticks",
-    "Goethe's Theory of Colours",
-    "Ridgway's Nomenclature"
-   ],
-   "answer": "Maerz and Paul's Dictionary of Color",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the books say the color is named after Cardinal del Monte.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Del Monte appears only in a 1930 dictionary, and nobody wrote down why."
- ],
- "words": 340,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Corrected description of Delmonte and Sabbioni weddellite study",
-   "Tightened Gage paraphrase"
-  ]
- }
 }

@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A gloss that drifts from its name",
-   "body": "The library files this hex under *Hatobanezumi* (鳩羽鼠), whose kanji name a grey the color of a dove's feathers [1]. The English gloss \"Reddish umber\" describes the hue's warm, muted brown-grey rather than translating the Japanese name, so the two point at the same swatch by different routes [1]. [[umber]] is the English pigment word the gloss borrows, not a look-alike match; the hex #755D5B is a screen approximation, with no recipe or date recorded here [1].\n\nIts nearest library look-alike is [[haematite-red]], about 4.6 units away in LCH space and read as darker and redder than this swatch [1].\n\nFurther along the same family are [[deep-livid-brown]] and [[faded-rosewood]], both read as more vivid than this swatch [1]."
+   "body": "The library files this hex under *Hatobanezumi* (鳩羽鼠), whose kanji name a grey the color of a dove's feathers [1]. The English gloss \"Reddish umber\" describes the hue's warm, muted brown-grey rather than translating the Japanese name, so the two point at the same swatch by different routes [1]. [[umber]] is the English pigment word the gloss borrows, not a look-alike match; the hex #755D5B is a screen approximation, with no recipe or date recorded here [1].\n\nIts nearest library look-alike is [[haematite-red]], about 4.6 units away in LCH space and read as darker and redder than this swatch [1].\n\nFurther along the same family are [[faded-rosewood]] and [[faded-rosewood]], both read as more vivid than this swatch [1]."
   },
   {
    "id": "field",
@@ -107,7 +107,7 @@
  "openers": [
   "Reddish umber's Japanese name actually means dove feather grey."
  ],
- "words": 195,
+ "words": 194,
  "status": "checked",
  "checked": {
   "by": "batch-29",

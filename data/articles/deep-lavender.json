@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "Past the flower, into purple",
-   "body": "Our library finds Deep Lavender in the 2010 xkcd crowd survey, with no source earlier on file [1]. The ISCC-NBS 1955 dictionary places the same color in its block 210, among the colors it calls \"light violet\", 5.2 units away in our conversion [2]. In Munsell notation it sits near 3.1P 4.8/12.3, a fairly dark, highly saturated purple [2].\n\nThe flower lavender itself gives a pale, greyed violet; \"deep\" here does the opposite of what a real sprig of lavender looks like, pushing the color darker and far more saturated [2]. Its nearest modifier siblings in the same family are [[dusty-lavender]], a greyed, paler cousin, and [[deep-lilac]], a close but slightly pinker purple [2]. Who coined this exact pairing of words is not recorded in the sources we hold [1][2]."
+   "body": "Our library finds Deep Lavender in the 2010 xkcd crowd survey, with no source earlier on file [1]. The ISCC-NBS 1955 dictionary places the same color in its block 210, among the colors it calls \"light violet\", 5.2 units away in our conversion [2]. In Munsell notation it sits near 3.1P 4.8/12.3, a fairly dark, highly saturated purple [2].\n\nThe flower lavender itself gives a pale, greyed violet; \"deep\" here does the opposite of what a real sprig of lavender looks like, pushing the color darker and far more saturated [2]. Its nearest modifier siblings in the same family are [[dusty-lavender]], a greyed, paler cousin, and [[middle-blue-purple]], a close but slightly pinker purple [2]. Who coined this exact pairing of words is not recorded in the sources we hold [1][2]."
   },
   {
    "id": "field",
@@ -107,7 +107,7 @@
  "openers": [
   "Deep Lavender is so saturated that our archive of 23,781 paintings has no match for it at all."
  ],
- "words": 221,
+ "words": 222,
  "status": "checked",
  "checked": {
   "by": "writer",

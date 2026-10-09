@@ -1,585 +1,585 @@
 {
- "slug": "purple",
- "name": "Purple",
- "hex": "#7B3FA0",
- "names": [
-  "Purple"
- ],
- "tier": "pigment",
- "depth": "epic",
- "lede": "Purple is the color between red and blue that the rainbow leaves out, named after a shellfish dye so costly that for a thousand years it meant the emperor himself.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A dye before a color",
-   "body": "English *purple* comes from Latin *purpura* and Greek *porphyra*, the names of the dye that Mediterranean dyers drew from sea snails [1][2]. In antiquity the word named a substance more than a hue. The Greek and Latin purples ran from bluish to deep red and blood-colored crimson, and the Roman jurist Ulpian defined *purpura* as any red that was not dyed with the insect dyes [3][4][2].\n\nIn the early Middle Ages the word drifted further, toward a kind of cloth [3][5]. In tenth-century Spain *purpura* meant a rich silk cloth that could be almost any color, even white or green [3][5]. In a fourteenth-century mosaic in the Chora church in Istanbul, a skein of wool labelled *porphyrion*, purple, is shown bright vermilion [5]. Only by the mid-seventeenth century had purple settled back into being a hue [5]."
-  },
-  {
-   "id": "swatch",
-   "title": "Purple, violet and the screen",
-   "body": "The swatch here is a strong blue-leaning purple. Measured against the 1955 ISCC-NBS standard names, its nearest neighbor is actually strong violet, and the nearest named colors in our library are [[spectrum-violet]], [[hyacinth-violet]], [[rebecca-purple]] and [[royal-purple]] [30]. The CSS keyword `purple`, `#800080`, is equal parts red and blue and sits about ten units redder; the [[tyrian-purple]] swatch is a deep crimson, more than twenty units away [30].\n\nIn English, violet and purple are not the same thing [6][7]. Violet is a spectral color, the shortest wavelengths we can see, while purple appears nowhere in the rainbow: it exists only when the eye receives long and short wavelengths together [6][7]. That is why purple closes the color circle, joining the red end of the spectrum to the blue end [8]. French splits the field differently, and its *violet* covers much of what English calls purple [9].\n\nPurple is also hard to make. A purple surface has to absorb the middle of the spectrum, the greens, while reflecting both ends, which few natural substances do [10]. Livingstone, a vision scientist who paints, reports that she has found no truly violet pigment, and that a tube of cobalt violet cost her about nine times as much as an ordinary color [10]."
-  },
-  {
-   "id": "tyrian",
-   "title": "The shellfish purple",
-   "body": "Dyers in Asia Minor and Mycenaean Greece were making purple from several species of shellfish by the fifteenth century BC, and it became the most valuable dyestuff of the ancient world [11]. The colorant comes from a gland of the murex snail as a pale fluid that turns yellow, then green, then blue and finally purple in sunlight and air [3][12]. Chemically it is almost indigo, a dibromoindigo with two bromine atoms where indigo has hydrogen [3][13].\n\nThe yields were tiny, though the books' numbers look less different than they seem once the units are matched [13][3]. Balfour-Paul gives about ten thousand shellfish for a gram of dye; Ball, St Clair and Coles give about a quarter of a million for an ounce [13][3][12][14]. Finlay saw the old dye baths at Tyre, set at the downwind edge of the city, and at Sidon a hill made of discarded shells [15]. The smell, Pliny complained, hovered between rotting shellfish and garlic [2]. Vitruvius believed the shade depended on the sun: the shellfish of Pontus and Gaul gave a blackish purple, those of the far west a bluish one, and those of Rhodes in the south a red [50].\n\nPliny described the most admired shade as the color of clotted blood, nearly black by reflected light and brilliant when held up to it [16][17]. He also recorded the price: a violet purple at a hundred denarii a pound in his youth, then a Tyrian dye that a thousand would not buy [15]. Ball reckons that in the third century AD a pound of purple wool cost about three years' wages for a baker [3]. Under Diocletian, Greenfield writes, a pound of the best cloth was priced at 50,000 denarii, its weight in gold [17]."
-  },
-  {
-   "id": "power",
-   "title": "Born in the purple",
-   "body": "In Classical Greece purple was admired more than reserved: Plato and Aristotle treat it as the most beautiful color, and purple cloth with gold stars lies in the royal tomb at Vergina [18]. Rome made it a rank. Only a general in his triumph wore a robe of purple and gold, senators wore broad purple stripes and knights narrow ones [18][3]. By the fourth century AD only the emperor could wear true purple, and making it outside the imperial works was a capital crime [3]. Suetonius tells of a young man arrested and executed under Caligula for appearing in full purple [19].\n\nThe laws targeted the snail, not the color. Roman codes banned the murex dye itself, since \"purple\" was too vague a word to police [5]. Byzantine empresses gave birth in a purple chamber, so a prince who inherited the throne was *porphyrogenitus*, born in the purple [14][2]. In the mosaics of San Vitale in Ravenna both Justinian and Christ wear purple [3]. Horace's phrase \"purple patches\", for showy passages of verse, dates from about 18 BC [2].\n\nThe recipe did not survive the empire. Most books say it was lost when Constantinople fell to the Turks in 1453; Coles gives 1204 instead [3][2][13][14]. They also disagree on its return: Ball and St Clair credit the French biologist Lacaze-Duthiers with rediscovering the color change in 1856, while Coles and Paterson date the rediscovery to 1998 [3][12][14][20]. The loss reached the Church: cardinals, who had worn purple, moved to scarlet in the 1460s, when Byzantine purple ran out [21][22][17]."
-  },
-  {
-   "id": "imitations",
-   "title": "Counterfeits, lichens and snails",
-   "body": "Because the real thing was so dear, much ancient purple was imitation [13]. Roman-era Egyptian dyers dyed wool blue with woad and then red with [[madder]] or a lichen, and the Talmud, around AD 200, warns against a counterfeit purple made from indigo and madder [13]. In Oaxaca today people still taste purple cloth to tell the snail dye from a plant fake [13].\n\nThe books disagree on how medieval European dyers made purple [23][13]. Pastoureau says the dyers' guilds were split by color, so a blue dyer could not dye red, and purple was made by dyeing blue and then black, a *subniger* or half-black [23][24][6]. In his account redder purples, from brazilwood or from woad followed by madder, arrived only around 1400 [24]. Balfour-Paul describes woad finished in a madder or kermes bath as the ordinary medieval route to purples and mulberries [13]. The cheaper red-purple dyes came from lichens. Archil was made by fermenting *Roccella* lichens in urine; the same lichens give litmus, and St Clair tells of a Florentine merchant who brought the method from the Levant in the fourteenth century and whose family took the name Rucellai from it [25]. Finlay credits a Scottish coppersmith, George Gordon, with a lichen violet of the 1750s that he called cudbear, after his nephew Cuthbert [26].\n\nThe shellfish dye still survives on the Pacific coast of Mexico, the only place where it is taken without killing the snails [27]. Mixtec dyers press the gland straight onto cotton thread and put the animals back on the rocks to recover [27][15]. In 1983 the Mexican government let a Japanese company collect the snails for kimono silk; it killed them instead, and after years of protest the contract was revoked [15][2]."
-  },
-  {
-   "id": "church",
-   "title": "Penance, mourning and bishops",
-   "body": "Pastoureau traces purple's church meanings to that half-black [23]. Purple is the Church's color for Advent and Lent, seasons of penance [28][14]. In mourning it marked the later, lighter stage: codified half-mourning in purple and light grey came mainly in the nineteenth century, and Victorian widows moved from black to mauves and violets after their first years [29][31]. Pastoureau notes that violet became the color of bishops only late [6]. Finlay adds that modern bishops often wear amethyst rather than the medieval sapphire [32].\n\nHeraldry almost left purple out. In 1661 the herald Ménestrier wrote that painters could not agree whether purpure was mauve, wine or mulberry [5]. Confucius, as Birren quotes him, refused to wear purple because it confused the eye with red [33]. In French opinion polls, Pastoureau reports, violet is the most disliked color after brown [6]."
-  },
-  {
-   "id": "japan",
-   "title": "In Japan: murasaki",
-   "body": "Japan had its own purple tradition. Deep purple, *murasaki*, was one of the forbidden colors, off-limits to ordinary people [2]. It was usually dyed with the root of gromwell, *murasaki-so*, because the local purple shellfish was too rare [15]. Purple still wraps precious objects in Shinto shrines and colors the tassels of the highest-ranking sumo referee, and the author of *The Tale of Genji* is known as Lady Murasaki [15]."
-  },
-  {
-   "id": "art",
-   "title": "Purple in paint",
-   "body": "Until the nineteenth century painters had no good violet pigment [34]. They built purple instead, laying a red lake glaze over a blue so that the two worked like colored filters [35]. Many purple robes in fifteenth-century panels were ultramarine glazed with red lake; where the lake has faded, the robes now read pink in the lights and blue in the shadows [36]. Gage suggests that costly purplish ultramarine became painting's stand-in for imperial purple, which helps explain the Virgin's robes [21].\n\nNew pigments came late. Cobalt violet was made in France from 1859 and manganese violet from 1868 [37][38]. Even then the Impressionists mostly mixed their mauves from cobalt blue or ultramarine with a red lake [38]. Their violet shadows, the complement of yellow sunlight, earned the jibe *violettomania* [38][39]. Critics claimed the painters saw violet because of afterimages from staring at sunlit landscapes, or because they could see ultraviolet; these were mockery, not findings [39]. The books disagree on who announced that fresh air is violet: Ball and Coles say Monet, St Clair says Manet [38][40][39]. Monet's eighteen snow scenes of Argenteuil from the winter of 1875 are full of whites tinged blue, grey, pink and, above all, purple [41].\n\nThe dye side changed first. In 1856 William Perkin made [[mauve]], the first aniline dye, and the name aniline itself goes back through Portuguese *anil* to the Sanskrit for indigo [13][42]. [[magenta|Magenta]] followed in 1859, and many more coal-tar colors soon after [12][2]. St Clair argues that once anyone could buy purple cheaply, it stopped being special [2]."
-  },
-  {
-   "id": "words",
-   "title": "A late word, a hard rhyme",
-   "body": "Purple came late to many languages, on one influential account [43]. In Berlin and Kay's 1969 sequence of basic color words, it arrives in the last group with pink, orange and grey, a scheme critics consider overstated [43]. Ogden's Basic English of the late 1920s left purple out of its eight color words [44]. Isaac Newton's first list of spectral colors in the 1660s had five, ending in purple; he later added orange and indigo to make seven, a number chosen to match the musical scale rather than read off the light [45]. Paterson lists purple among the common English color words that have no good rhyme [44].\n\nTo see purple in the world, look where red and blue light meet: the soft violet glow that can be the last color in a dusk sky, or a far range of hills [46][47]. A Maya huipil can read purple from across a room and turn out, up close, to be thin stripes of about ten other colors [47]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "The surprise in our archive is an absence. Not one of 23,781 museum paintings has a color within six units of this swatch covering five per cent of its canvas [48]. Even with the net widened to twelve units and one per cent, only six paintings qualify, and none is older than 1750 [48]. The strongest are Klimt's *[[art:commons-Q5967091|The Maiden]]* of 1913, Sargent's *[[art:commons-Q131754092|Bedouins]]* of 1905 and Signac's *[[art:commons-Q17491415|Woman with a Parasol]]* of 1893 [48]. These are photographs of varnished paintings, and yellowed varnish can pull a purple toward brown, but the pattern fits the history: a strong purple was rare in paint until the new pigments of the nineteenth century [48][34].\n\nIn Google Books, counting adjective uses only, *purple* was at its highest in the nineteenth century, fell to about two-fifths of that in the 1970s, and was back near its old level by the 2010s [49]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Latin purpura, Greek porphyra: the shellfish dye of Tyre",
-   "first_recorded": "Old English, from Latin; a hue in the modern sense by the mid-17th century",
-   "source": "Coles, Chromatopia, p. 24; Gage, Colour and Culture, p. 84"
-  },
-  "aka": [
-   "Tyrian purple (the ancient dye)",
-   "purpure (heraldry)",
-   "murasaki (Japanese)",
-   "violet (French, broadly)"
+  "slug": "purple",
+  "name": "Purple",
+  "hex": "#7B3FA0",
+  "names": [
+    "Purple"
   ],
-  "siblings": [
-   "violet",
-   "tyrian-purple",
-   "royal-purple",
-   "imperial-purple",
-   "mauve",
-   "magenta"
+  "tier": "pigment",
+  "depth": "epic",
+  "lede": "Purple is the color between red and blue that the rainbow leaves out, named after a shellfish dye so costly that for a thousand years it meant the emperor himself.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A dye before a color",
+      "body": "English *purple* comes from Latin *purpura* and Greek *porphyra*, the names of the dye that Mediterranean dyers drew from sea snails [1][2]. In antiquity the word named a substance more than a hue. The Greek and Latin purples ran from bluish to deep red and blood-colored crimson, and the Roman jurist Ulpian defined *purpura* as any red that was not dyed with the insect dyes [3][4][2].\n\nIn the early Middle Ages the word drifted further, toward a kind of cloth [3][5]. In tenth-century Spain *purpura* meant a rich silk cloth that could be almost any color, even white or green [3][5]. In a fourteenth-century mosaic in the Chora church in Istanbul, a skein of wool labelled *porphyrion*, purple, is shown bright vermilion [5]. Only by the mid-seventeenth century had purple settled back into being a hue [5]."
+    },
+    {
+      "id": "swatch",
+      "title": "Purple, violet and the screen",
+      "body": "The swatch here is a strong blue-leaning purple. Measured against the 1955 ISCC-NBS standard names, its nearest neighbor is actually strong violet, and the nearest named colors in our library are [[spectrum-violet]], [[hyacinth-violet]], [[rebecca-purple]] and [[royal-purple]] [30]. The CSS keyword `purple`, `#800080`, is equal parts red and blue and sits about ten units redder; the [[tyrian-purple]] swatch is a deep crimson, more than twenty units away [30].\n\nIn English, violet and purple are not the same thing [6][7]. Violet is a spectral color, the shortest wavelengths we can see, while purple appears nowhere in the rainbow: it exists only when the eye receives long and short wavelengths together [6][7]. That is why purple closes the color circle, joining the red end of the spectrum to the blue end [8]. French splits the field differently, and its *violet* covers much of what English calls purple [9].\n\nPurple is also hard to make. A purple surface has to absorb the middle of the spectrum, the greens, while reflecting both ends, which few natural substances do [10]. Livingstone, a vision scientist who paints, reports that she has found no truly violet pigment, and that a tube of cobalt violet cost her about nine times as much as an ordinary color [10]."
+    },
+    {
+      "id": "tyrian",
+      "title": "The shellfish purple",
+      "body": "Dyers in Asia Minor and Mycenaean Greece were making purple from several species of shellfish by the fifteenth century BC, and it became the most valuable dyestuff of the ancient world [11]. The colorant comes from a gland of the murex snail as a pale fluid that turns yellow, then green, then blue and finally purple in sunlight and air [3][12]. Chemically it is almost indigo, a dibromoindigo with two bromine atoms where indigo has hydrogen [3][13].\n\nThe yields were tiny, though the books' numbers look less different than they seem once the units are matched [13][3]. Balfour-Paul gives about ten thousand shellfish for a gram of dye; Ball, St Clair and Coles give about a quarter of a million for an ounce [13][3][12][14]. Finlay saw the old dye baths at Tyre, set at the downwind edge of the city, and at Sidon a hill made of discarded shells [15]. The smell, Pliny complained, hovered between rotting shellfish and garlic [2]. Vitruvius believed the shade depended on the sun: the shellfish of Pontus and Gaul gave a blackish purple, those of the far west a bluish one, and those of Rhodes in the south a red [50].\n\nPliny described the most admired shade as the color of clotted blood, nearly black by reflected light and brilliant when held up to it [16][17]. He also recorded the price: a violet purple at a hundred denarii a pound in his youth, then a Tyrian dye that a thousand would not buy [15]. Ball reckons that in the third century AD a pound of purple wool cost about three years' wages for a baker [3]. Under Diocletian, Greenfield writes, a pound of the best cloth was priced at 50,000 denarii, its weight in gold [17]."
+    },
+    {
+      "id": "power",
+      "title": "Born in the purple",
+      "body": "In Classical Greece purple was admired more than reserved: Plato and Aristotle treat it as the most beautiful color, and purple cloth with gold stars lies in the royal tomb at Vergina [18]. Rome made it a rank. Only a general in his triumph wore a robe of purple and gold, senators wore broad purple stripes and knights narrow ones [18][3]. By the fourth century AD only the emperor could wear true purple, and making it outside the imperial works was a capital crime [3]. Suetonius tells of a young man arrested and executed under Caligula for appearing in full purple [19].\n\nThe laws targeted the snail, not the color. Roman codes banned the murex dye itself, since \"purple\" was too vague a word to police [5]. Byzantine empresses gave birth in a purple chamber, so a prince who inherited the throne was *porphyrogenitus*, born in the purple [14][2]. In the mosaics of San Vitale in Ravenna both Justinian and Christ wear purple [3]. Horace's phrase \"purple patches\", for showy passages of verse, dates from about 18 BC [2].\n\nThe recipe did not survive the empire. Most books say it was lost when Constantinople fell to the Turks in 1453; Coles gives 1204 instead [3][2][13][14]. They also disagree on its return: Ball and St Clair credit the French biologist Lacaze-Duthiers with rediscovering the color change in 1856, while Coles and Paterson date the rediscovery to 1998 [3][12][14][20]. The loss reached the Church: cardinals, who had worn purple, moved to scarlet in the 1460s, when Byzantine purple ran out [21][22][17]."
+    },
+    {
+      "id": "imitations",
+      "title": "Counterfeits, lichens and snails",
+      "body": "Because the real thing was so dear, much ancient purple was imitation [13]. Roman-era Egyptian dyers dyed wool blue with woad and then red with [[irresistible]] or a lichen, and the Talmud, around AD 200, warns against a counterfeit purple made from indigo and madder [13]. In Oaxaca today people still taste purple cloth to tell the snail dye from a plant fake [13].\n\nThe books disagree on how medieval European dyers made purple [23][13]. Pastoureau says the dyers' guilds were split by color, so a blue dyer could not dye red, and purple was made by dyeing blue and then black, a *subniger* or half-black [23][24][6]. In his account redder purples, from brazilwood or from woad followed by madder, arrived only around 1400 [24]. Balfour-Paul describes woad finished in a madder or kermes bath as the ordinary medieval route to purples and mulberries [13]. The cheaper red-purple dyes came from lichens. Archil was made by fermenting *Roccella* lichens in urine; the same lichens give litmus, and St Clair tells of a Florentine merchant who brought the method from the Levant in the fourteenth century and whose family took the name Rucellai from it [25]. Finlay credits a Scottish coppersmith, George Gordon, with a lichen violet of the 1750s that he called cudbear, after his nephew Cuthbert [26].\n\nThe shellfish dye still survives on the Pacific coast of Mexico, the only place where it is taken without killing the snails [27]. Mixtec dyers press the gland straight onto cotton thread and put the animals back on the rocks to recover [27][15]. In 1983 the Mexican government let a Japanese company collect the snails for kimono silk; it killed them instead, and after years of protest the contract was revoked [15][2]."
+    },
+    {
+      "id": "church",
+      "title": "Penance, mourning and bishops",
+      "body": "Pastoureau traces purple's church meanings to that half-black [23]. Purple is the Church's color for Advent and Lent, seasons of penance [28][14]. In mourning it marked the later, lighter stage: codified half-mourning in purple and light grey came mainly in the nineteenth century, and Victorian widows moved from black to mauves and violets after their first years [29][31]. Pastoureau notes that violet became the color of bishops only late [6]. Finlay adds that modern bishops often wear amethyst rather than the medieval sapphire [32].\n\nHeraldry almost left purple out. In 1661 the herald Ménestrier wrote that painters could not agree whether purpure was mauve, wine or mulberry [5]. Confucius, as Birren quotes him, refused to wear purple because it confused the eye with red [33]. In French opinion polls, Pastoureau reports, violet is the most disliked color after brown [6]."
+    },
+    {
+      "id": "japan",
+      "title": "In Japan: murasaki",
+      "body": "Japan had its own purple tradition. Deep purple, *murasaki*, was one of the forbidden colors, off-limits to ordinary people [2]. It was usually dyed with the root of gromwell, *murasaki-so*, because the local purple shellfish was too rare [15]. Purple still wraps precious objects in Shinto shrines and colors the tassels of the highest-ranking sumo referee, and the author of *The Tale of Genji* is known as Lady Murasaki [15]."
+    },
+    {
+      "id": "art",
+      "title": "Purple in paint",
+      "body": "Until the nineteenth century painters had no good violet pigment [34]. They built purple instead, laying a red lake glaze over a blue so that the two worked like colored filters [35]. Many purple robes in fifteenth-century panels were ultramarine glazed with red lake; where the lake has faded, the robes now read pink in the lights and blue in the shadows [36]. Gage suggests that costly purplish ultramarine became painting's stand-in for imperial purple, which helps explain the Virgin's robes [21].\n\nNew pigments came late. Cobalt violet was made in France from 1859 and manganese violet from 1868 [37][38]. Even then the Impressionists mostly mixed their mauves from cobalt blue or ultramarine with a red lake [38]. Their violet shadows, the complement of yellow sunlight, earned the jibe *violettomania* [38][39]. Critics claimed the painters saw violet because of afterimages from staring at sunlit landscapes, or because they could see ultraviolet; these were mockery, not findings [39]. The books disagree on who announced that fresh air is violet: Ball and Coles say Monet, St Clair says Manet [38][40][39]. Monet's eighteen snow scenes of Argenteuil from the winter of 1875 are full of whites tinged blue, grey, pink and, above all, purple [41].\n\nThe dye side changed first. In 1856 William Perkin made [[mauve]], the first aniline dye, and the name aniline itself goes back through Portuguese *anil* to the Sanskrit for indigo [13][42]. [[magenta|Magenta]] followed in 1859, and many more coal-tar colors soon after [12][2]. St Clair argues that once anyone could buy purple cheaply, it stopped being special [2]."
+    },
+    {
+      "id": "words",
+      "title": "A late word, a hard rhyme",
+      "body": "Purple came late to many languages, on one influential account [43]. In Berlin and Kay's 1969 sequence of basic color words, it arrives in the last group with pink, orange and grey, a scheme critics consider overstated [43]. Ogden's Basic English of the late 1920s left purple out of its eight color words [44]. Isaac Newton's first list of spectral colors in the 1660s had five, ending in purple; he later added orange and indigo to make seven, a number chosen to match the musical scale rather than read off the light [45]. Paterson lists purple among the common English color words that have no good rhyme [44].\n\nTo see purple in the world, look where red and blue light meet: the soft violet glow that can be the last color in a dusk sky, or a far range of hills [46][47]. A Maya huipil can read purple from across a room and turn out, up close, to be thin stripes of about ten other colors [47]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "The surprise in our archive is an absence. Not one of 23,781 museum paintings has a color within six units of this swatch covering five per cent of its canvas [48]. Even with the net widened to twelve units and one per cent, only six paintings qualify, and none is older than 1750 [48]. The strongest are Klimt's *[[art:commons-Q5967091|The Maiden]]* of 1913, Sargent's *[[art:commons-Q131754092|Bedouins]]* of 1905 and Signac's *[[art:commons-Q17491415|Woman with a Parasol]]* of 1893 [48]. These are photographs of varnished paintings, and yellowed varnish can pull a purple toward brown, but the pattern fits the history: a strong purple was rare in paint until the new pigments of the nineteenth century [48][34].\n\nIn Google Books, counting adjective uses only, *purple* was at its highest in the nineteenth century, fell to about two-fifths of that in the 1970s, and was back near its old level by the 2010s [49]."
+    }
   ],
-  "parent": null,
-  "children": [
-   "dark-purple",
-   "pale-purple",
-   "light-violet",
-   "blue-purple",
-   "red-purple",
-   "grey-purple",
-   "dusty-purple"
-  ],
-  "disambiguation": [
-   {
-    "slug": "violet",
-    "gloss": "a spectral color, bluer; purple is a mix of red and blue light"
-   },
-   {
-    "slug": "tyrian-purple",
-    "gloss": "the ancient shellfish dye, a deep crimson on screens"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "la",
-    "name": "purpura"
-   },
-   {
-    "lang": "el",
-    "name": "porphyra"
-   },
-   {
-    "lang": "ja",
-    "name": "murasaki (紫)"
-   },
-   {
-    "lang": "fr",
-    "name": "violet, pourpre"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#7B3FA0",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 0,
-  "wider_match": {
-   "de2000": 12,
-   "min_cover": 0.01,
-   "n_present": 6,
-   "earliest": 1750
-  },
-  "top_paintings": [
-   "commons-Q5967091",
-   "commons-Q131754092",
-   "commons-Q17491415",
-   "aic-20820"
-  ],
-  "ngram": {
-   "term": "purple",
-   "adjective_only": true,
-   "high": "1800s-1860s",
-   "low_decade": 1970,
-   "low_rel": 0.39,
-   "rel_2010": 0.92
-  },
-  "measured": {
-   "lch": [
-    38.4,
-    60.7,
-    315.6
-   ],
-   "iscc_nbs_nearest": "strong violet",
-   "contrast_white": 6.86,
-   "css_purple": [
-    "#800080",
-    10.1
-   ],
-   "tyrian_purple_swatch": [
-    "#66023C",
-    21.4
-   ],
-   "nearest": [
-    [
-     "Hyacinth Violet",
-     4.6
+  "aside": {
+    "origin": {
+      "named_after": "Latin purpura, Greek porphyra: the shellfish dye of Tyre",
+      "first_recorded": "Old English, from Latin; a hue in the modern sense by the mid-17th century",
+      "source": "Coles, Chromatopia, p. 24; Gage, Colour and Culture, p. 84"
+    },
+    "aka": [
+      "Tyrian purple (the ancient dye)",
+      "purpure (heraldry)",
+      "murasaki (Japanese)",
+      "violet (French, broadly)"
     ],
-    [
-     "Spectrum Violet",
-     4.7
+    "siblings": [
+      "violet",
+      "tyrian-purple",
+      "royal-purple",
+      "imperial-purple",
+      "mauve",
+      "magenta"
     ],
-    [
-     "Rebecca Purple",
-     5.1
+    "parent": null,
+    "children": [
+      "dark-purple",
+      "pale-purple",
+      "light-violet",
+      "blue-purple",
+      "red-purple",
+      "grey-purple",
+      "dusty-purple"
     ],
-    [
-     "Royal Purple",
-     5.1
+    "disambiguation": [
+      {
+        "slug": "violet",
+        "gloss": "a spectral color, bluer; purple is a mix of red and blue light"
+      },
+      {
+        "slug": "tyrian-purple",
+        "gloss": "the ancient shellfish dye, a deep crimson on screens"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "la",
+        "name": "purpura"
+      },
+      {
+        "lang": "el",
+        "name": "porphyra"
+      },
+      {
+        "lang": "ja",
+        "name": "murasaki (紫)"
+      },
+      {
+        "lang": "fr",
+        "name": "violet, pourpre"
+      }
     ]
-   ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#7B3FA0",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 0,
+    "wider_match": {
+      "de2000": 12,
+      "min_cover": 0.01,
+      "n_present": 6,
+      "earliest": 1750
+    },
+    "top_paintings": [
+      "commons-Q5967091",
+      "commons-Q131754092",
+      "commons-Q17491415",
+      "aic-20820"
+    ],
+    "ngram": {
+      "term": "purple",
+      "adjective_only": true,
+      "high": "1800s-1860s",
+      "low_decade": 1970,
+      "low_rel": 0.39,
+      "rel_2010": 0.92
+    },
+    "measured": {
+      "lch": [
+        38.4,
+        60.7,
+        315.6
+      ],
+      "iscc_nbs_nearest": "strong violet",
+      "contrast_white": 6.86,
+      "css_purple": [
+        "#800080",
+        10.1
+      ],
+      "tyrian_purple_swatch": [
+        "#66023C",
+        21.4
+      ],
+      "nearest": [
+        [
+          "Hyacinth Violet",
+          4.6
+        ],
+        [
+          "Spectrum Violet",
+          4.7
+        ],
+        [
+          "Rebecca Purple",
+          5.1
+        ],
+        [
+          "Royal Purple",
+          5.1
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, p. 24",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Purple\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 17",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 30",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, pp. 30-31, 84, 86",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Pastoureau, Le petit livre des couleurs, ch. 7 (\"Les demi-couleurs\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Westland, Universal Principles of Color, ch. 88; Eckstut, What Is Color?, ch. 32",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, ch. 23",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Batchelor, Chromophobia, ch. 4",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Livingstone, Vision and Art, ch. 13",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 20",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Tyrian purple\" and \"Magenta\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, pp. 24-26, 40, 245",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, pp. 24-25, 61",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 10 (\"Violet\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 29",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 7",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 18,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, pp. 18, 29",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 19,
+      "kind": "book",
+      "cite": "Pastoureau, Red, ch. 13",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 20,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"argaman\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 21,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, pp. 134-135",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 22,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Scarlet\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 23,
+      "kind": "book",
+      "cite": "Pastoureau, Green, ch. 27; Pastoureau, Red, ch. 33",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 24,
+      "kind": "book",
+      "cite": "Pastoureau, Black, pp. 16, 106",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 25,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Archil\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 26,
+      "kind": "book",
+      "cite": "Finlay, Fabric, p. 207",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 27,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, p. 212",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 28,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 123 (liturgical colours)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 29,
+      "kind": "book",
+      "cite": "Pastoureau, Black, p. 135",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 30,
+      "kind": "data",
+      "cite": "ColorHub color library and Color Graph (data/graph; ISCC-NBS 1955 centroids; CSS), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 31,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Heliotrope\"; Finlay, Fabric, p. 332",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 32,
+      "kind": "book",
+      "cite": "Finlay, Jewels, ch. 16",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 33,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, ch. 10",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 34,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 2",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 35,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 5",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 36,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 19",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 37,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 7",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 38,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 8",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 39,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Violet\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 40,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, p. 155",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 41,
+      "kind": "book",
+      "cite": "Pastoureau, White, p. 177",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 42,
+      "kind": "book",
+      "cite": "Garfield, Mauve, ch. 1",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 43,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 83; Batchelor, Chromophobia, ch. 4",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 44,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"Basic English\" and p. 405",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 45,
+      "kind": "book",
+      "cite": "Pastoureau, Black, p. 148; Pastoureau, White, p. 166",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 46,
+      "kind": "book",
+      "cite": "Gurney, Colour and Light, p. 184",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 47,
+      "kind": "book",
+      "cite": "Finlay, Fabric, p. 88",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 48,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py; dE2000 <= 6 at >= 5% of canvas, and dE2000 <= 12 at >= 1%)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 49,
+      "kind": "data",
+      "cite": "Google Books Ngram, adjective use only (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": "https://books.google.com/ngrams"
+    },
+    {
+      "n": 50,
+      "kind": "data",
+      "cite": "ColorHub passages: Vitruvius, The Ten Books on Architecture, Book VII, ch. 13 (Morgan translation, 1914) (data/passages.json)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Why is purple missing from the rainbow when violet is not?",
+      "choices": [
+        "Purple only appears when long and short wavelengths reach the eye together",
+        "Purple light is absorbed by raindrops",
+        "Purple is too dark to see in daylight",
+        "Purple sits beyond red, outside what we can see"
+      ],
+      "answer": "Purple only appears when long and short wavelengths reach the eye together",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the Impressionists painted violet shadows because staring at sunlit landscapes gave them a permanent afterimage.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Why do some purple robes in fifteenth-century paintings now look pink in the lights and blue in the shadows?",
+      "choices": [
+        "The red lake glazed over the blue has faded",
+        "The painters meant them as two colors",
+        "Varnish has turned the purple pink",
+        "The blue pigment has darkened to black"
+      ],
+      "answer": "The red lake glazed over the blue has faded",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Purple is not in the rainbow: it only exists when red and blue light reach the eye together.",
+    "In our archive of 23,781 paintings, not one has a strong purple covering even a twentieth of the canvas.",
+    "Some fifteenth-century purple robes now look pink and blue because their red glaze has faded."
+  ],
+  "words": 1923,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Spot-checked 8+ claims against fact cards and book text (Pliny smell, Vitruvius shades, polls, sumo referee, mapping of notes): no changes needed."
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Coles, Chromatopia, p. 24",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Purple\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 17",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 30",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, pp. 30-31, 84, 86",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Pastoureau, Le petit livre des couleurs, ch. 7 (\"Les demi-couleurs\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Westland, Universal Principles of Color, ch. 88; Eckstut, What Is Color?, ch. 32",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy, ch. 23",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Batchelor, Chromophobia, ch. 4",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Livingstone, Vision and Art, ch. 13",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 20",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Tyrian purple\" and \"Magenta\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Balfour-Paul, Indigo, pp. 24-26, 40, 245",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "book",
-   "cite": "Coles, Chromatopia, pp. 24-25, 61",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 10 (\"Violet\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 29",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 17,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 7",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 18,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, pp. 18, 29",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 19,
-   "kind": "book",
-   "cite": "Pastoureau, Red, ch. 13",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 20,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"argaman\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 21,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, pp. 134-135",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 22,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Scarlet\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 23,
-   "kind": "book",
-   "cite": "Pastoureau, Green, ch. 27; Pastoureau, Red, ch. 33",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 24,
-   "kind": "book",
-   "cite": "Pastoureau, Black, pp. 16, 106",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 25,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Archil\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 26,
-   "kind": "book",
-   "cite": "Finlay, Fabric, p. 207",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 27,
-   "kind": "book",
-   "cite": "Balfour-Paul, Indigo, p. 212",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 28,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 123 (liturgical colours)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 29,
-   "kind": "book",
-   "cite": "Pastoureau, Black, p. 135",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 30,
-   "kind": "data",
-   "cite": "ColorHub color library and Color Graph (data/graph; ISCC-NBS 1955 centroids; CSS), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 31,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Heliotrope\"; Finlay, Fabric, p. 332",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 32,
-   "kind": "book",
-   "cite": "Finlay, Jewels, ch. 16",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 33,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy, ch. 10",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 34,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 2",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 35,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 5",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 36,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 19",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 37,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 7",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 38,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 8",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 39,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Violet\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 40,
-   "kind": "book",
-   "cite": "Coles, Chromatopia, p. 155",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 41,
-   "kind": "book",
-   "cite": "Pastoureau, White, p. 177",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 42,
-   "kind": "book",
-   "cite": "Garfield, Mauve, ch. 1",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 43,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 83; Batchelor, Chromophobia, ch. 4",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 44,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"Basic English\" and p. 405",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 45,
-   "kind": "book",
-   "cite": "Pastoureau, Black, p. 148; Pastoureau, White, p. 166",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 46,
-   "kind": "book",
-   "cite": "Gurney, Colour and Light, p. 184",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 47,
-   "kind": "book",
-   "cite": "Finlay, Fabric, p. 88",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 48,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py; dE2000 <= 6 at >= 5% of canvas, and dE2000 <= 12 at >= 1%)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 49,
-   "kind": "data",
-   "cite": "Google Books Ngram, adjective use only (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": "https://books.google.com/ngrams"
-  },
-  {
-   "n": 50,
-   "kind": "data",
-   "cite": "ColorHub passages: Vitruvius, The Ten Books on Architecture, Book VII, ch. 13 (Morgan translation, 1914) (data/passages.json)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Why is purple missing from the rainbow when violet is not?",
-   "choices": [
-    "Purple only appears when long and short wavelengths reach the eye together",
-    "Purple light is absorbed by raindrops",
-    "Purple is too dark to see in daylight",
-    "Purple sits beyond red, outside what we can see"
-   ],
-   "answer": "Purple only appears when long and short wavelengths reach the eye together",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the Impressionists painted violet shadows because staring at sunlit landscapes gave them a permanent afterimage.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Why do some purple robes in fifteenth-century paintings now look pink in the lights and blue in the shadows?",
-   "choices": [
-    "The red lake glazed over the blue has faded",
-    "The painters meant them as two colors",
-    "Varnish has turned the purple pink",
-    "The blue pigment has darkened to black"
-   ],
-   "answer": "The red lake glazed over the blue has faded",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Purple is not in the rainbow: it only exists when red and blue light reach the eye together.",
-  "In our archive of 23,781 paintings, not one has a strong purple covering even a twentieth of the canvas.",
-  "Some fifteenth-century purple robes now look pink and blue because their red glaze has faded."
- ],
- "words": 1923,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Spot-checked 8+ claims against fact cards and book text (Pliny smell, Vitruvius shades, polls, sumo referee, mapping of notes): no changes needed."
-  ]
- }
 }

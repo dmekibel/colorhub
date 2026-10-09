@@ -12,7 +12,7 @@
   {
    "id": "swatch",
    "title": "The swatch is a crowd name",
-   "body": "The swatch, #750851, comes from the 2010 xkcd color survey, in which respondents typed their own names for colors on screen [1]. The name is a crowd label, and the survey gave no history for it, so the origin of the word as a color name is undocumented [1]. The color is a dark, strongly saturated purplish red. Its nearest named neighbors are [[byzantium]] and [[rich-purple]], and the ISCC-NBS system of 1955 would call it a deep purplish red [1].\n\nNo book on our shelf defines velvet as a color. The one velvet entry we found in Paterson's dictionary is \"black velvet\", a drink of champagne mixed with stout [2]. So this page is about the cloth, and about the places where velvet left a mark on the vocabulary of color."
+   "body": "The swatch, #750851, comes from the 2010 xkcd color survey, in which respondents typed their own names for colors on screen [1]. The name is a crowd label, and the survey gave no history for it, so the origin of the word as a color name is undocumented [1]. The color is a dark, strongly saturated purplish red. Its nearest named neighbors are [[byzantium]] and [[velvet]], and the ISCC-NBS system of 1955 would call it a deep purplish red [1].\n\nNo book on our shelf defines velvet as a color. The one velvet entry we found in Paterson's dictionary is \"black velvet\", a drink of champagne mixed with stout [2]. So this page is about the cloth, and about the places where velvet left a mark on the vocabulary of color."
   },
   {
    "id": "cloth",
@@ -234,7 +234,7 @@
   "Genoa's weavers added special selvedges to black silk velvet because that was where buyers checked the weave.",
   "The swatch name velvet comes from a 2010 online survey, but the cloth it names carried Europe's most expensive reds."
  ],
- "words": 825,
+ "words": 824,
  "status": "checked",
  "checked": {
   "by": "checker",

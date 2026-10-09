@@ -18,7 +18,7 @@
   {
    "id": "records",
    "title": "Where the name is recorded",
-   "body": "In our library, Maerz and Paul's 1930 dictionary of color lists cornflower as first recorded in 1891, on plate 42 [7]. The ISCC-NBS system of 1955 puts the same hue in its block 194 [7]. In Google Books, its use as a color word peaks in the 2010s [8].\n\nThe nearest named blues on the screen are [[blue-grey]], [[soft-blue]], [[clear-cadet-blue]] and [[dodger-blue]], each within about five to six units of CIEDE2000 [7]. [[berlin-blue]] and [[lupine]] are slightly farther, at about seven [7]."
+   "body": "In our library, Maerz and Paul's 1930 dictionary of color lists cornflower as first recorded in 1891, on plate 42 [7]. The ISCC-NBS system of 1955 puts the same hue in its block 194 [7]. In Google Books, its use as a color word peaks in the 2010s [8].\n\nThe nearest named blues on the screen are [[blue-grey]], [[clear-cadet-blue]], [[clear-cadet-blue]] and [[dodger-blue]], each within about five to six units of CIEDE2000 [7]. [[berlin-blue]] and [[lupine]] are slightly farther, at about seven [7]."
   },
   {
    "id": "old-blues",
@@ -305,5 +305,5 @@
    "Opener hedged to Harley's no-evidence finding"
   ]
  },
- "words": 700
+ "words": 701
 }

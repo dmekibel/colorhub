@@ -1,192 +1,192 @@
 {
- "slug": "china-blue",
- "name": "China Blue",
- "hex": "#383867",
- "names": [
-  "China Blue"
- ],
- "tier": "pigment",
- "depth": "long",
- "lede": "China Blue is two things with one name: an eighteenth-century English way of printing indigo straight onto cloth, and a dark blue in Werner's color nomenclature for naturalists.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Two meanings, one name",
-   "body": "The textile meaning came first. By the 1740s printers in England were using a secret process called China Blue to print designs in [[indigo]] directly on cloth [1]. The second meaning is Werner's, as translated by Syme, where China Blue is number 27 among the blues, a dark blue with a little [[prussian-blue]] in it [2][3].\n\nThe dictionary adds a third. Paterson lists China blue as a lavender blue, and separately a Chinese blue, made from cobalt blue and flake white and listed as a synonym of Prussian blue [4]. These entries do not agree with each other, which is typical of a name used by printers, naturalists and paint makers at once. Why the printing method was called *China* is not explained in the sources we read [1][4]."
-  },
-  {
-   "id": "process",
-   "title": "Printing with indigo",
-   "body": "Indigo is awkward to print. Its soluble white form turns blue the moment it meets air, so a printer who wanted a positive blue design had to stop it oxidizing before it reached the fibres [1]. Two methods emerged, both thought to have been developed in England, since continental Europeans called the results English blue [1].\n\nThe first, Pencil Blue, dates from the 1730s: the reduced indigo was painted on with a brush and had to be applied quickly in small amounts [1]. China Blue, kept secret in England by the 1740s, worked on a different principle [1]. Printers ground indigo finely, mixed it with a thickener into a paste, and printed it in its undissolved state [1]. They then dipped the cloth in alternating baths of lime, which dissolved the indigo, and ferrous sulphate, which reduced it, and the blue developed in the cloth [1].\n\nThe results were well-defined, even blues, good for engraved copperplate and later roller printing, but the process damaged [[madder]] dyes [1]. Pencil Blue, by contrast, let printers add touches of blue and green to polychrome madder chintzes [1]. At the time the French ban on printed Indian cottons was theoretically still in force, yet the Oberkampf factory at Jouy adopted China Blue [1]."
-  },
-  {
-   "id": "after",
-   "title": "After Prussian blue",
-   "body": "Both methods stayed in use in the nineteenth century even though Prussian blue arrived, which was easier to use but harsher in color [1]. By 1890 direct printing with indigo was used less and less, though better recipes existed, among them a glucose process that is still used and a hydrosulphite process that is more expensive but has advantages [1].\n\nOne trap in the vocabulary: *blue-printing* does not mean this. Balfour-Paul notes that the term is applied misleadingly, since it properly belongs to the central European resist-dyeing technique called *Blaudruck* [1]."
-  },
-  {
-   "id": "werner",
-   "title": "Werner's China Blue",
-   "body": "Baty reports that Syme's 1814 edition brought the name China blue to naturalists, and that the later botanical color charts of Dauthenay and Oberthür took terms such as China blue from it [3]. Our library cites Werner's nomenclature as the 1821 record, so books and data differ by seven years on the date [3][5]. Werner defined China Blue as azure blue with a little Prussian blue in it [2].\n\nIts three examples show the system's logic of matching one color across kingdoms. In the animal kingdom, the back of the weevil *Rhynchites nitens*; in the vegetable, the back parts of a gentian flower; in the mineral, blue copper ore from Chessy, which today is called [[gem:azurite|azurite]] [2][5]. In Werner's blues it comes after Indigo Blue and Prussian Blue and before [[azure]] Blue and Ultramarine Blue [3]."
-  },
-  {
-   "id": "swatch",
-   "title": "The swatch",
-   "body": "Our swatch, #383867, comes from an aged scan of Werner's plate, so it is approximate [5]. It is a dark blue leaning toward violet, closest to [[navy]] at 5.8 CIEDE2000 units, and sits in ISCC-NBS block 182 [5]. That is much darker than Paterson's lavender blue [4], and the printers' China Blue, whatever its exact tone, was an indigo blue [1]. The three meanings have little in common beyond the word.\n\nIf you want to look for it, search old blue-and-white printed cottons: a China Blue print has crisp, even blue fields and fine lines that a brush could not make, and the blue shades lighter where the dip was shorter [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This color appears in 45 of the 23,781 paintings in our archive, or 0.19 per cent, as photographed; the stricter within-painting count finds it in 19 [6]. It is rarer than 62 per cent of named colors [6]. It peaks in the 1900s, in 10 of 1,674 paintings, 5.0 times the rate expected from the same museums [6]. Inside a painting it most often plays a shadow, in 42 per cent of those 19 [6].\n\nThe earliest painting in the archive that matches is a panel dated 1340, [[painting:commons-Q3842761|by Pietro Lorenzetti]], 481 years before the name's earliest record in our sources [6]. That is a look-alike dark blue in an aged photograph, not proof of indigo or any pigment [6]. In printed English the phrase peaks in the 1920s, and Google Books counts every sense [6]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "origin undocumented in the sources read; used for an English indigo-printing method (1740s) and for Werner's blue no. 27",
-   "first_recorded": "by the 1740s (printing method); 1814 or 1821 (Werner/Syme)",
-   "source": "Balfour-Paul, Indigo, pp. 160-161; Baty, Nature's Palette"
-  },
-  "aka": [
-   "English blue (continental name for the printing methods)"
+  "slug": "china-blue",
+  "name": "China Blue",
+  "hex": "#383867",
+  "names": [
+    "China Blue"
   ],
-  "siblings": [
-   "indigo",
-   "prussian-blue",
-   "azure"
+  "tier": "pigment",
+  "depth": "long",
+  "lede": "China Blue is two things with one name: an eighteenth-century English way of printing indigo straight onto cloth, and a dark blue in Werner's color nomenclature for naturalists.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Two meanings, one name",
+      "body": "The textile meaning came first. By the 1740s printers in England were using a secret process called China Blue to print designs in [[indigo]] directly on cloth [1]. The second meaning is Werner's, as translated by Syme, where China Blue is number 27 among the blues, a dark blue with a little [[prussian-blue]] in it [2][3].\n\nThe dictionary adds a third. Paterson lists China blue as a lavender blue, and separately a Chinese blue, made from cobalt blue and flake white and listed as a synonym of Prussian blue [4]. These entries do not agree with each other, which is typical of a name used by printers, naturalists and paint makers at once. Why the printing method was called *China* is not explained in the sources we read [1][4]."
+    },
+    {
+      "id": "process",
+      "title": "Printing with indigo",
+      "body": "Indigo is awkward to print. Its soluble white form turns blue the moment it meets air, so a printer who wanted a positive blue design had to stop it oxidizing before it reached the fibres [1]. Two methods emerged, both thought to have been developed in England, since continental Europeans called the results English blue [1].\n\nThe first, Pencil Blue, dates from the 1730s: the reduced indigo was painted on with a brush and had to be applied quickly in small amounts [1]. China Blue, kept secret in England by the 1740s, worked on a different principle [1]. Printers ground indigo finely, mixed it with a thickener into a paste, and printed it in its undissolved state [1]. They then dipped the cloth in alternating baths of lime, which dissolved the indigo, and ferrous sulphate, which reduced it, and the blue developed in the cloth [1].\n\nThe results were well-defined, even blues, good for engraved copperplate and later roller printing, but the process damaged [[irresistible]] dyes [1]. Pencil Blue, by contrast, let printers add touches of blue and green to polychrome madder chintzes [1]. At the time the French ban on printed Indian cottons was theoretically still in force, yet the Oberkampf factory at Jouy adopted China Blue [1]."
+    },
+    {
+      "id": "after",
+      "title": "After Prussian blue",
+      "body": "Both methods stayed in use in the nineteenth century even though Prussian blue arrived, which was easier to use but harsher in color [1]. By 1890 direct printing with indigo was used less and less, though better recipes existed, among them a glucose process that is still used and a hydrosulphite process that is more expensive but has advantages [1].\n\nOne trap in the vocabulary: *blue-printing* does not mean this. Balfour-Paul notes that the term is applied misleadingly, since it properly belongs to the central European resist-dyeing technique called *Blaudruck* [1]."
+    },
+    {
+      "id": "werner",
+      "title": "Werner's China Blue",
+      "body": "Baty reports that Syme's 1814 edition brought the name China blue to naturalists, and that the later botanical color charts of Dauthenay and Oberthür took terms such as China blue from it [3]. Our library cites Werner's nomenclature as the 1821 record, so books and data differ by seven years on the date [3][5]. Werner defined China Blue as azure blue with a little Prussian blue in it [2].\n\nIts three examples show the system's logic of matching one color across kingdoms. In the animal kingdom, the back of the weevil *Rhynchites nitens*; in the vegetable, the back parts of a gentian flower; in the mineral, blue copper ore from Chessy, which today is called [[gem:azurite|azurite]] [2][5]. In Werner's blues it comes after Indigo Blue and Prussian Blue and before [[azure]] Blue and Ultramarine Blue [3]."
+    },
+    {
+      "id": "swatch",
+      "title": "The swatch",
+      "body": "Our swatch, #383867, comes from an aged scan of Werner's plate, so it is approximate [5]. It is a dark blue leaning toward violet, closest to [[navy]] at 5.8 CIEDE2000 units, and sits in ISCC-NBS block 182 [5]. That is much darker than Paterson's lavender blue [4], and the printers' China Blue, whatever its exact tone, was an indigo blue [1]. The three meanings have little in common beyond the word.\n\nIf you want to look for it, search old blue-and-white printed cottons: a China Blue print has crisp, even blue fields and fine lines that a brush could not make, and the blue shades lighter where the dip was shorter [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This color appears in 45 of the 23,781 paintings in our archive, or 0.19 per cent, as photographed; the stricter within-painting count finds it in 19 [6]. It is rarer than 62 per cent of named colors [6]. It peaks in the 1900s, in 10 of 1,674 paintings, 5.0 times the rate expected from the same museums [6]. Inside a painting it most often plays a shadow, in 42 per cent of those 19 [6].\n\nThe earliest painting in the archive that matches is a panel dated 1340, [[painting:commons-Q3842761|by Pietro Lorenzetti]], 481 years before the name's earliest record in our sources [6]. That is a look-alike dark blue in an aged photograph, not proof of indigo or any pigment [6]. In printed English the phrase peaks in the 1920s, and Google Books counts every sense [6]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "lavender-blue",
-    "gloss": "Paterson's China blue is a pale lavender blue, much lighter than this swatch"
-   }
+  "aside": {
+    "origin": {
+      "named_after": "origin undocumented in the sources read; used for an English indigo-printing method (1740s) and for Werner's blue no. 27",
+      "first_recorded": "by the 1740s (printing method); 1814 or 1821 (Werner/Syme)",
+      "source": "Balfour-Paul, Indigo, pp. 160-161; Baty, Nature's Palette"
+    },
+    "aka": [
+      "English blue (continental name for the printing methods)"
+    ],
+    "siblings": [
+      "indigo",
+      "prussian-blue",
+      "azure"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "lavender-blue",
+        "gloss": "Paterson's China blue is a pale lavender blue, much lighter than this swatch"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#383867",
+      "de2000": 4,
+      "min_cover": 0.02
+    },
+    "n_present": 45,
+    "n_within_painting": 19,
+    "century": {
+      "1900s": {
+        "n": 10,
+        "of": 1674,
+        "lift": 5.0
+      }
+    },
+    "role": {
+      "shadow_pct": 42
+    },
+    "first_seen": {
+      "year": 1340,
+      "id": "commons-Q3842761"
+    },
+    "ngram": {
+      "peak": "1920s"
+    },
+    "measured": {
+      "nearest": [
+        [
+          "Navy",
+          5.8
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, pp. 160-161 (\"Direct printing with indigo\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, Werner's table, no. 27 (China Blue)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, chapter on Werner and Syme (index: \"China blue\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"China blue\" and \"Chinese blue\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "data",
+      "cite": "ColorHub library (data/library.json): China Blue",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "data",
+      "cite": "ColorHub archive field notes (data/graph/fieldnotes/c.json), china-blue, with Google Books Ngram",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#383867",
-   "de2000": 4,
-   "min_cover": 0.02
-  },
-  "n_present": 45,
-  "n_within_painting": 19,
-  "century": {
-   "1900s": {
-    "n": 10,
-    "of": 1674,
-    "lift": 5.0
-   }
-  },
-  "role": {
-   "shadow_pct": 42
-  },
-  "first_seen": {
-   "year": 1340,
-   "id": "commons-Q3842761"
-  },
-  "ngram": {
-   "peak": "1920s"
-  },
-  "measured": {
-   "nearest": [
-    [
-     "Navy",
-     5.8
+  "questions": [
+    {
+      "q": "Why was indigo hard to print directly onto cloth?",
+      "choices": [
+        "Its white soluble form turns blue in air before it reaches the fibres",
+        "It cannot dissolve at all",
+        "It stains only silk",
+        "It needs sunlight"
+      ],
+      "answer": "Its white soluble form turns blue in air before it reaches the fibres",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the China Blue process printed indigo already dissolved.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "In Werner's system, what is China Blue?",
+      "choices": [
+        "Azure blue with a little Prussian blue",
+        "Pure indigo",
+        "Ultramarine with white",
+        "Cobalt blue"
+      ],
+      "answer": "Azure blue with a little Prussian blue",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "China Blue was a secret English printing process by the 1740s, and it was hard on madder.",
+    "Werner matched his China Blue across three kingdoms: a weevil, a gentian and a copper ore."
+  ],
+  "words": 814,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "All sampled claims traced to fact cards and book text; no changes needed."
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Balfour-Paul, Indigo, pp. 160-161 (\"Direct printing with indigo\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, Werner's table, no. 27 (China Blue)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, chapter on Werner and Syme (index: \"China blue\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"China blue\" and \"Chinese blue\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "data",
-   "cite": "ColorHub library (data/library.json): China Blue",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "data",
-   "cite": "ColorHub archive field notes (data/graph/fieldnotes/c.json), china-blue, with Google Books Ngram",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Why was indigo hard to print directly onto cloth?",
-   "choices": [
-    "Its white soluble form turns blue in air before it reaches the fibres",
-    "It cannot dissolve at all",
-    "It stains only silk",
-    "It needs sunlight"
-   ],
-   "answer": "Its white soluble form turns blue in air before it reaches the fibres",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the China Blue process printed indigo already dissolved.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "In Werner's system, what is China Blue?",
-   "choices": [
-    "Azure blue with a little Prussian blue",
-    "Pure indigo",
-    "Ultramarine with white",
-    "Cobalt blue"
-   ],
-   "answer": "Azure blue with a little Prussian blue",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "China Blue was a secret English printing process by the 1740s, and it was hard on madder.",
-  "Werner matched his China Blue across three kingdoms: a weevil, a gentian and a copper ore."
- ],
- "words": 814,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "All sampled claims traced to fact cards and book text; no changes needed."
-  ]
- }
 }

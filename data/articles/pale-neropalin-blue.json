@@ -1,107 +1,107 @@
 {
- "slug": "pale-neropalin-blue",
- "name": "Pale Neropalin Blue",
- "hex": "#B8C5D6",
- "names": [
-  "Pale Neropalin Blue"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Pale Neropalin Blue is a soft greyish blue, the pale tone Robert Ridgway charted beside the parent color Neropalin Blue in his 1912 color atlas.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A pale tone of Neropalin Blue",
-   "body": "Pale Neropalin Blue puts Ridgway's tone word Pale in front of [[neropalin-blue]], following the same paired-tone method his 1912 *Color Standards and Color Nomenclature* used across the atlas [1]. Neropalin Blue itself is Ridgway's plate XXII, hue 49, tone b; unlike many of its neighbors it never reached the ISCC-NBS dictionary of 1955 or Maerz and Paul's 1930 list, so it stayed a Ridgway-only name [1].\n\nIts nearest named neighbor is [[sky-grey]], only 2.5 units off and close enough on screen to read as the same color [1]; [[burn-blue]] sits 3.0 units away and [[cloudy-blue]] 3.3 [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in 239 of 23,781 paintings, 1.01 percent, as photographed; narrowing to at least five percent coverage inside a painting leaves 145 [2]. That makes it more common than 65 percent of the named colors in our library [2]. It peaks in the 1900s, present in 1.2 percent of the 1,674 paintings from that century, 1.5 times the archive's overall rate [2]. Inside a painting it most often plays a light, in 54 percent of its 145 appearances by lightness rank [2].\n\nThe earliest match dates to 1450, in a work attributed to Andrea del Castagno, a floor and not a first since the archive's early centuries are thin; that is 462 years before the name's 1912 record, so the match marks a look-alike hue in an aged photograph, not a surviving pigment [2]. John Singer Sargent carries it most often, in 4 of his 287 paintings here, though no painter stands out against the museum baseline [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Ridgway's tone system: the pale tone of Neropalin Blue",
-   "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XXII",
-   "source": "Ridgway 1912; ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "neropalin-blue",
-   "sky-grey",
-   "burn-blue",
-   "cloudy-blue"
+  "slug": "pale-neropalin-blue",
+  "name": "Pale Neropalin Blue",
+  "hex": "#B8C5D6",
+  "names": [
+    "Pale Neropalin Blue"
   ],
-  "parent": "neropalin-blue",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 239,
-  "n_within_painting": 145,
-  "pct_archive": 1.01,
-  "rank_pct": 65,
-  "measured": {
-   "nearest": [
-    [
-     "Sky Grey",
-     2.5
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Pale Neropalin Blue is a soft greyish blue, the pale tone Robert Ridgway charted beside the parent color Neropalin Blue in his 1912 color atlas.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A pale tone of Neropalin Blue",
+      "body": "Pale Neropalin Blue puts Ridgway's tone word Pale in front of [[dusty-cornflower]], following the same paired-tone method his 1912 *Color Standards and Color Nomenclature* used across the atlas [1]. Neropalin Blue itself is Ridgway's plate XXII, hue 49, tone b; unlike many of its neighbors it never reached the ISCC-NBS dictionary of 1955 or Maerz and Paul's 1930 list, so it stayed a Ridgway-only name [1].\n\nIts nearest named neighbor is [[sky-grey]], only 2.5 units off and close enough on screen to read as the same color [1]; [[burn-blue]] sits 3.0 units away and [[cloudy-blue]] 3.3 [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in 239 of 23,781 paintings, 1.01 percent, as photographed; narrowing to at least five percent coverage inside a painting leaves 145 [2]. That makes it more common than 65 percent of the named colors in our library [2]. It peaks in the 1900s, present in 1.2 percent of the 1,674 paintings from that century, 1.5 times the archive's overall rate [2]. Inside a painting it most often plays a light, in 54 percent of its 145 appearances by lightness rank [2].\n\nThe earliest match dates to 1450, in a work attributed to Andrea del Castagno, a floor and not a first since the archive's early centuries are thin; that is 462 years before the name's 1912 record, so the match marks a look-alike hue in an aged photograph, not a surviving pigment [2]. John Singer Sargent carries it most often, in 4 of his 287 paintings here, though no painter stands out against the museum baseline [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "Ridgway's tone system: the pale tone of Neropalin Blue",
+      "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XXII",
+      "source": "Ridgway 1912; ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "neropalin-blue",
+      "sky-grey",
+      "burn-blue",
+      "cloudy-blue"
     ],
-    [
-     "Burn Blue",
-     3.0
-    ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json: Ridgway 1912) and look-alike distances, data/graph/edges-p.json",
-   "loc_kind": null,
-   "url": null
+    "parent": "neropalin-blue",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed, data/graph/fieldnotes/p.json",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which named color sits closest to Pale Neropalin Blue?",
-   "choices": [
-    "Sky Grey",
-    "Burn Blue",
-    "Cloudy Blue"
-   ],
-   "answer": "Sky Grey",
-   "kind": "pick"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 239,
+    "n_within_painting": 145,
+    "pct_archive": 1.01,
+    "rank_pct": 65,
+    "measured": {
+      "nearest": [
+        [
+          "Sky Grey",
+          2.5
+        ],
+        [
+          "Burn Blue",
+          3.0
+        ]
+      ]
+    }
   },
-  {
-   "q": "True or false: Neropalin Blue was later filed in the ISCC-NBS 1955 dictionary.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json: Ridgway 1912) and look-alike distances, data/graph/edges-p.json",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed, data/graph/fieldnotes/p.json",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which named color sits closest to Pale Neropalin Blue?",
+      "choices": [
+        "Sky Grey",
+        "Burn Blue",
+        "Cloudy Blue"
+      ],
+      "answer": "Sky Grey",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Neropalin Blue was later filed in the ISCC-NBS 1955 dictionary.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pale Neropalin Blue and Sky Grey sit close enough to pass for the same color."
+  ],
+  "words": 286,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "openers": [
-  "Pale Neropalin Blue and Sky Grey sit close enough to pass for the same color."
- ],
- "words": 286,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

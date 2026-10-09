@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "One block, many names",
-   "body": "Ridgway's 1912 nomenclature places the swatch at plate XXX, hue 21′′, and the ISCC-NBS system of 1955 reads it as a dark yellow, under 2 units from the block center, among the closer matches in our library [1]. The same ISCC-NBS region also covers names such as Sudan, Russet Leaf, Middle Stone and Light Yellowish Olive, the last under 1.1 units from this hex [1].\n\nOur library's own nearest match is [[dark-beige]], with [[dark-olive-buff]] and [[water-grey]] close by [1][2]. The name pairs \"ecru\", an unbleached linen tone, with \"olive\" [1]."
+   "body": "Ridgway's 1912 nomenclature places the swatch at plate XXX, hue 21′′, and the ISCC-NBS system of 1955 reads it as a dark yellow, under 2 units from the block center, among the closer matches in our library [1]. The same ISCC-NBS region also covers names such as Sudan, Russet Leaf, Middle Stone and Light Yellowish Olive, the last under 1.1 units from this hex [1].\n\nOur library's own nearest match is [[dust]], with [[dark-olive-buff]] and [[water-grey]] close by [1][2]. The name pairs \"ecru\", an unbleached linen tone, with \"olive\" [1]."
   },
   {
    "id": "field",
@@ -112,5 +112,5 @@
    "lint 2026-10-09"
   ]
  },
- "words": 251
+ "words": 250
 }

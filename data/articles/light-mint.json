@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A light build of mint",
-   "body": "The nearest named colors on file are [[light-seafoam]], [[light-pastel-green]], [[light-light-green]] and [[very-light-green]], at 3.4, 3.7, 4.2 and 4.5 ΔE [1]. The ISCC-NBS system classes it as very light yellowish green, about 4 units from the nearest ISCC-NBS block center [1]. Its Munsell notation is 0.9G 9.4/9.0 and its LCH values are lightness 94, chroma 44, hue 144 degrees, among the lightest greens in our library [1]. In sRGB its components run 182 red, 255 green and 187 blue, so the green channel runs at its full strength while red and blue sit close together [1].\n\nTwo other xkcd names sit within about 2 units of this swatch: Light Mint Green and Light Seafoam Green [2]. That near-duplication is normal for crowd-surveyed modifier names: different respondents described the same pale green with slightly different words. See [[seafoam]] for the related sea-foam family."
+   "body": "The nearest named colors on file are [[seafoam]], [[celery]], [[very-light-green]] and [[very-light-green]], at 3.4, 3.7, 4.2 and 4.5 ΔE [1]. The ISCC-NBS system classes it as very light yellowish green, about 4 units from the nearest ISCC-NBS block center [1]. Its Munsell notation is 0.9G 9.4/9.0 and its LCH values are lightness 94, chroma 44, hue 144 degrees, among the lightest greens in our library [1]. In sRGB its components run 182 red, 255 green and 187 blue, so the green channel runs at its full strength while red and blue sit close together [1].\n\nTwo other xkcd names sit within about 2 units of this swatch: Light Mint Green and Light Seafoam Green [2]. That near-duplication is normal for crowd-surveyed modifier names: different respondents described the same pale green with slightly different words. See [[seafoam]] for the related sea-foam family."
   },
   {
    "id": "field",
@@ -115,7 +115,7 @@
  "openers": [
   "Light Mint and Light Seafoam Green are near-duplicates in the xkcd survey, within about two units of each other."
  ],
- "words": 211,
+ "words": 208,
  "status": "checked",
  "checked": {
   "by": "batch writer",

@@ -1,133 +1,133 @@
 {
- "slug": "black-bean",
- "name": "Black Bean",
- "hex": "#3D0C02",
- "names": [
-  "Black Bean"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Black Bean is a near-black, reddish brown named for the dried legume, a shade darker and redder than ordinary chocolate brown.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A legume's name, no documented coining",
-   "body": "Our library traces the name only to a Wikipedia color list, which cites no book, dictionary or date for who coined it [1]. The ISCC-NBS system, which assigns descriptive names to measured blocks of color, calls this swatch a dark reddish brown [1]. Measured in LCH, it sits at lightness 11, close to black, with a modest reddish-orange hue angle [1].\n\nIts nearest named neighbor is [[dark-sienna]], 4.1 units of CIEDE2000 away and described as duller and redder [1]. [[oxblood]] sits a little farther off, at 4.4, and is more vivid [1]. Against those two, and against the paler [[dark-maroon]] and the lighter [[carbuncle]], Black Bean reads as the quietest, darkest member of the group [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in 945 of 23,781 paintings (4.0 percent), more common than 79 percent of the named colors, as photographed [2]. It peaks in the 1400s, in 33 of 945 paintings, at 2.1 times the rate expected from that century's share of the archive [2]. Inside a painting it most often plays a shadow, 48 percent of the time, a role measured by lightness rank within the canvas rather than by the raw hex match [2]. It shares canvases with Maroon and Burnt Red more often than chance [2]. These are photographs of aged, varnished paintings, so a color match is not a pigment identification [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the dried black bean, undocumented beyond the name itself",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub library (a Wikipedia list)"
-  },
-  "aka": [],
-  "siblings": [
-   "dark-sienna",
-   "oxblood",
-   "dark-maroon",
-   "carbuncle"
+  "slug": "black-bean",
+  "name": "Black Bean",
+  "hex": "#3D0C02",
+  "names": [
+    "Black Bean"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
-  "n_present": 945,
-  "rank_pct": 79,
-  "peak_century": [
-   1400,
-   2.1
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Black Bean is a near-black, reddish brown named for the dried legume, a shade darker and redder than ordinary chocolate brown.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A legume's name, no documented coining",
+      "body": "Our library traces the name only to a Wikipedia color list, which cites no book, dictionary or date for who coined it [1]. The ISCC-NBS system, which assigns descriptive names to measured blocks of color, calls this swatch a dark reddish brown [1]. Measured in LCH, it sits at lightness 11, close to black, with a modest reddish-orange hue angle [1].\n\nIts nearest named neighbor is [[dark-sienna]], 4.1 units of CIEDE2000 away and described as duller and redder [1]. [[oxblood]] sits a little farther off, at 4.4, and is more vivid [1]. Against those two, and against the paler [[dark-sienna]] and the lighter [[carbuncle]], Black Bean reads as the quietest, darkest member of the group [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in 945 of 23,781 paintings (4.0 percent), more common than 79 percent of the named colors, as photographed [2]. It peaks in the 1400s, in 33 of 945 paintings, at 2.1 times the rate expected from that century's share of the archive [2]. Inside a painting it most often plays a shadow, 48 percent of the time, a role measured by lightness rank within the canvas rather than by the raw hex match [2]. It shares canvases with Maroon and Burnt Red more often than chance [2]. These are photographs of aged, varnished paintings, so a color match is not a pigment identification [2]."
+    }
   ],
-  "role_top": [
-   "shadow",
-   48
-  ],
-  "measured": {
-   "lch": [
-    11,
-    28,
-    35
-   ],
-   "nearest": [
-    [
-     "Dark Sienna",
-     4.1
+  "aside": {
+    "origin": {
+      "named_after": "the dried black bean, undocumented beyond the name itself",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub library (a Wikipedia list)"
+    },
+    "aka": [],
+    "siblings": [
+      "dark-sienna",
+      "oxblood",
+      "dark-maroon",
+      "carbuncle"
     ],
-    [
-     "Oxblood",
-     4.4
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
+    "n_present": 945,
+    "rank_pct": 79,
+    "peak_century": [
+      1400,
+      2.1
+    ],
+    "role_top": [
+      "shadow",
+      48
+    ],
+    "measured": {
+      "lch": [
+        11,
+        28,
+        35
+      ],
+      "nearest": [
+        [
+          "Dark Sienna",
+          4.1
+        ],
+        [
+          "Oxblood",
+          4.4
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes): name source, ISCC-NBS block, CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What everyday thing is Black Bean named after?",
+      "choices": [
+        "The dried bean",
+        "A beetle",
+        "A type of coal",
+        "A coffee roast"
+      ],
+      "answer": "The dried bean",
+      "kind": "pick"
+    },
+    {
+      "q": "Inside a painting, what role does Black Bean most often play?",
+      "choices": [
+        "A shadow",
+        "A highlight",
+        "A background sky",
+        "A flesh tone"
+      ],
+      "answer": "A shadow",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources document who first named this color.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Black Bean is darker and redder than ordinary chocolate brown, and most often plays the shadow in a painting."
+  ],
+  "words": 242,
+  "status": "checked",
+  "checked": {
+    "by": "batch-10",
+    "date": "2026-10-09",
+    "issues": [
+      "No book source found; named_after is inferred from the name itself, not a documented record.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes): name source, ISCC-NBS block, CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What everyday thing is Black Bean named after?",
-   "choices": [
-    "The dried bean",
-    "A beetle",
-    "A type of coal",
-    "A coffee roast"
-   ],
-   "answer": "The dried bean",
-   "kind": "pick"
-  },
-  {
-   "q": "Inside a painting, what role does Black Bean most often play?",
-   "choices": [
-    "A shadow",
-    "A highlight",
-    "A background sky",
-    "A flesh tone"
-   ],
-   "answer": "A shadow",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our sources document who first named this color.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Black Bean is darker and redder than ordinary chocolate brown, and most often plays the shadow in a painting."
- ],
- "words": 242,
- "status": "checked",
- "checked": {
-  "by": "batch-10",
-  "date": "2026-10-09",
-  "issues": [
-   "No book source found; named_after is inferred from the name itself, not a documented record.",
-   "lint 2026-10-09"
-  ]
- }
 }

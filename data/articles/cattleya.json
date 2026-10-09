@@ -1,126 +1,126 @@
 {
- "slug": "cattleya",
- "name": "Cattleya",
- "hex": "#A573A0",
- "names": [
-  "Cattleya"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Cattleya is a light reddish purple from Maerz and Paul's 1930 dictionary, named for the corsage orchid genus of the same color family.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A dictionary name, 1905",
-   "body": "Maerz and Paul's 1930 dictionary of color dates the name to 1905, at plate 42, column H, chip 6, hex #A573A0 [1]. No Ridgway or ISCC-NBS plate is recorded for it independently in this library; the ISCC-NBS committee's 1955 match places it among the \"moderate purple\" names, 6.3 units away [1]. Its Munsell notation is 8.6P 5.4/7.3 [1]. *Cattleya* is also the genus name of the showy corsage orchids, many of which bloom in exactly this range of purple-pink, but the dictionary entry itself does not spell out that link [1].\n\nIts nearest library neighbor is [[eupatorium-purple|Eupatorium Purple]], about 3.9 units away, with [[dark-lilac|Dark Lilac]] close behind at 4.0 and [[faded-purple|Faded Purple]] a shade further at 4.9, all cooler and darker [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "A color within ten units of Cattleya covers at least five per cent of the canvas in 12 of 23,781 paintings, as photographed; the wider ten-unit threshold is used here because the usual six-unit match found too few paintings to read [2]. Its earliest appearance is a *Madonna and Child with Saint Catherine* from around 1600 [2]. It also turns up in Eugène Boudin's 1869 *The Mole of Deauville*, John Singer Sargent's 1913 *Sirmione*, and Paul Gauguin's 1892 *Fatata te Miti* [2]. These are photographs of varnished paintings, read as screen colors [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "likely the Cattleya orchid genus, though undocumented in the dictionary entry itself",
-   "first_recorded": "Maerz & Paul, 1930 (dated 1905), plate 42 H 6",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "faded-purple",
-   "dark-lilac",
-   "bishop-s-purple",
-   "eupatorium-purple"
+  "slug": "cattleya",
+  "name": "Cattleya",
+  "hex": "#A573A0",
+  "names": [
+    "Cattleya"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#A573A0",
-   "de2000": 10,
-   "min_cover": 0.05
-  },
-  "n_present": 12,
-  "painters": [],
-  "measured": {
-   "rgb": [
-    165,
-    115,
-    160
-   ],
-   "lch": [
-    54.9,
-    31.7,
-    329.0
-   ],
-   "nearest": [
-    [
-     "Eupatorium Purple",
-     3.9
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Cattleya is a light reddish purple from Maerz and Paul's 1930 dictionary, named for the corsage orchid genus of the same color family.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A dictionary name, 1905",
+      "body": "Maerz and Paul's 1930 dictionary of color dates the name to 1905, at plate 42, column H, chip 6, hex #A573A0 [1]. No Ridgway or ISCC-NBS plate is recorded for it independently in this library; the ISCC-NBS committee's 1955 match places it among the \"moderate purple\" names, 6.3 units away [1]. Its Munsell notation is 8.6P 5.4/7.3 [1]. *Cattleya* is also the genus name of the showy corsage orchids, many of which bloom in exactly this range of purple-pink, but the dictionary entry itself does not spell out that link [1].\n\nIts nearest library neighbor is [[eupatorium-purple|Eupatorium Purple]], about 3.9 units away, with [[viola|Dark Lilac]] close behind at 4.0 and [[faded-purple|Faded Purple]] a shade further at 4.9, all cooler and darker [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "A color within ten units of Cattleya covers at least five per cent of the canvas in 12 of 23,781 paintings, as photographed; the wider ten-unit threshold is used here because the usual six-unit match found too few paintings to read [2]. Its earliest appearance is a *Madonna and Child with Saint Catherine* from around 1600 [2]. It also turns up in Eugène Boudin's 1869 *The Mole of Deauville*, John Singer Sargent's 1913 *Sirmione*, and Paul Gauguin's 1892 *Fatata te Miti* [2]. These are photographs of varnished paintings, read as screen colors [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "likely the Cattleya orchid genus, though undocumented in the dictionary entry itself",
+      "first_recorded": "Maerz & Paul, 1930 (dated 1905), plate 42 H 6",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "faded-purple",
+      "dark-lilac",
+      "bishop-s-purple",
+      "eupatorium-purple"
     ],
-    [
-     "Dark Lilac",
-     4.0
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#A573A0",
+      "de2000": 10,
+      "min_cover": 0.05
+    },
+    "n_present": 12,
+    "painters": [],
+    "measured": {
+      "rgb": [
+        165,
+        115,
+        160
+      ],
+      "lch": [
+        54.9,
+        31.7,
+        329.0
+      ],
+      "nearest": [
+        [
+          "Eupatorium Purple",
+          3.9
+        ],
+        [
+          "Dark Lilac",
+          4.0
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Maerz & Paul 1930 (plate 42 H 6), ISCC-NBS 1955 entries",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match within ΔE 10, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What is Cattleya also the name of, in the same color family?",
+      "choices": [
+        "A genus of orchid",
+        "A gemstone",
+        "A silk weave",
+        "A pigment mineral"
+      ],
+      "answer": "A genus of orchid",
+      "kind": "pick"
+    },
+    {
+      "q": "Why does this article use a ΔE 10 match instead of the usual six units?",
+      "choices": [
+        "The six-unit match found too few paintings to read",
+        "Cattleya is not a real color",
+        "The archive excludes purple paintings",
+        "Ten units is always used for purples"
+      ],
+      "answer": "The six-unit match found too few paintings to read",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Cattleya shares its name, and its color, with a genus of corsage orchid."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "nearest-neighbor distance (and, for cattleya, the named color) did not match data/graph/edges-*.json 'la' / a direct CIEDE2000 recomputation; corrected.",
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Maerz & Paul 1930 (plate 42 H 6), ISCC-NBS 1955 entries",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match within ΔE 10, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What is Cattleya also the name of, in the same color family?",
-   "choices": [
-    "A genus of orchid",
-    "A gemstone",
-    "A silk weave",
-    "A pigment mineral"
-   ],
-   "answer": "A genus of orchid",
-   "kind": "pick"
-  },
-  {
-   "q": "Why does this article use a ΔE 10 match instead of the usual six units?",
-   "choices": [
-    "The six-unit match found too few paintings to read",
-    "Cattleya is not a real color",
-    "The archive excludes purple paintings",
-    "Ten units is always used for purples"
-   ],
-   "answer": "The six-unit match found too few paintings to read",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Cattleya shares its name, and its color, with a genus of corsage orchid."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "nearest-neighbor distance (and, for cattleya, the named color) did not match data/graph/edges-*.json 'la' / a direct CIEDE2000 recomputation; corrected.",
-   "lint 2026-10-09"
-  ]
- },
- "words": 238
+  "words": 238
 }

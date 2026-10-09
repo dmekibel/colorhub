@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "Named for a stone it doesn't match",
-   "body": "Our library's only source for this value is RAL Classic, catalog number 6026, a German paint standard founded in 1927, so the hex is an approximate screen reading of a printed color card rather than a photographed gem [1]. [[gem:opal|Opal]] itself rarely shows a solid, saturated green like this one; its color play comes from internal structure, not a single pigment, so the name borrows the stone's reputation more than its look [1].\n\nThe nearest named colors on file are [[pearl-opal-green]] and [[dark-green-blue]], at Compare [[teal|Teal]], [[viridian|Viridian]] and [[dark-slate-grey|Dark Slate Grey]], other deep, cool standards [1]."
+   "body": "Our library's only source for this value is RAL Classic, catalog number 6026, a German paint standard founded in 1927, so the hex is an approximate screen reading of a printed color card rather than a photographed gem [1]. [[gem:opal|Opal]] itself rarely shows a solid, saturated green like this one; its color play comes from internal structure, not a single pigment, so the name borrows the stone's reputation more than its look [1].\n\nThe nearest named colors on file are [[pearl-opal-green]] and [[opal-green]], at Compare [[teal|Teal]], [[viridian|Viridian]] and [[dark-slate-grey|Dark Slate Grey]], other deep, cool standards [1]."
   },
   {
    "id": "field",
@@ -116,7 +116,7 @@
  "openers": [
   "Named for a gem whose color play rarely looks like this flat, deep green."
  ],
- "words": 201,
+ "words": 200,
  "status": "checked",
  "checked": {
   "by": "checker",

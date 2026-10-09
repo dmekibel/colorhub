@@ -1,120 +1,120 @@
 {
- "slug": "conch-shell",
- "name": "Conch Shell",
- "hex": "#F5927A",
- "names": [
-  "Conch Shell"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Conch Shell is a strong yellowish pink named for the inside of a conch's shell, first recorded by Maerz and Paul in 1925.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Named for the shell's interior",
-   "body": "Maerz and Paul's *A Dictionary of Color* records Conch Shell on plate 1 D 10, dating it to 1925, five years before their 1930 edition was published; our library cites it through that 1930 edition [1]. The ISCC-NBS system of 1955 would place it in block 26, strong yellowish pink, 3.4 units from that block's centroid [2]. The nearest named colors on file are [[meat]], [[grenadine-pink]], [[dark-salmon]] and [[peachy-pink]], at 2.8, 3.2, \nThe conch is a large sea snail whose shell shows a glossy, pink-orange interior once prized for cameos and trumpets, and the color names that lining rather than the shell's duller outer face [1]. It sits among the warm pinks near [[peach]] and [[coral]] [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a color within six units of Conch Shell covers at least five per cent of the canvas in only 5 of them, as photographed [3]. The earliest is Correggio's *Salvator Mundi*, from about 1515 [3]. It is a vivid, saturated pink that rarely dominates enough of an aged, varnished canvas to register at our threshold, so its scarcity here reflects coverage, not absence from painters' palettes generally [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the interior of a conch shell",
-   "first_recorded": "1925 (Maerz and Paul)",
-   "source": "Maerz and Paul, A Dictionary of Color; ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "meat",
-   "grenadine-pink",
-   "dark-salmon",
-   "peachy-pink"
+  "slug": "conch-shell",
+  "name": "Conch Shell",
+  "hex": "#F5927A",
+  "names": [
+    "Conch Shell"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 5,
-  "iscc_category": "strong yellowish pink",
-  "nearest": [
-   [
-    "Salmon",
-    5.2
-   ]
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Conch Shell is a strong yellowish pink named for the inside of a conch's shell, first recorded by Maerz and Paul in 1925.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Named for the shell's interior",
+      "body": "Maerz and Paul's *A Dictionary of Color* records Conch Shell on plate 1 D 10, dating it to 1925, five years before their 1930 edition was published; our library cites it through that 1930 edition [1]. The ISCC-NBS system of 1955 would place it in block 26, strong yellowish pink, 3.4 units from that block's centroid [2]. The nearest named colors on file are [[meat]], [[grenadine-pink]], [[dark-salmon]] and [[dusty-salmon]], at 2.8, 3.2, \nThe conch is a large sea snail whose shell shows a glossy, pink-orange interior once prized for cameos and trumpets, and the color names that lining rather than the shell's duller outer face [1]. It sits among the warm pinks near [[peach]] and [[coral]] [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a color within six units of Conch Shell covers at least five per cent of the canvas in only 5 of them, as photographed [3]. The earliest is Correggio's *Salvator Mundi*, from about 1515 [3]. It is a vivid, saturated pink that rarely dominates enough of an aged, varnished canvas to register at our threshold, so its scarcity here reflects coverage, not absence from painters' palettes generally [3]."
+    }
   ],
-  "measured": {
-   "nearest": [
-    [
-     "Meat",
-     2.8
+  "aside": {
+    "origin": {
+      "named_after": "the interior of a conch shell",
+      "first_recorded": "1925 (Maerz and Paul)",
+      "source": "Maerz and Paul, A Dictionary of Color; ColorHub library"
+    },
+    "aka": [],
+    "siblings": [
+      "meat",
+      "grenadine-pink",
+      "dark-salmon",
+      "peachy-pink"
     ],
-    [
-     "Grenadine Pink",
-     3.2
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 5,
+    "iscc_category": "strong yellowish pink",
+    "nearest": [
+      [
+        "Salmon",
+        5.2
+      ]
+    ],
+    "measured": {
+      "nearest": [
+        [
+          "Meat",
+          2.8
+        ],
+        [
+          "Grenadine Pink",
+          3.2
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Maerz and Paul, A Dictionary of Color (1930 ed.), plate 1 D 10, first recorded 1925 (via ColorHub library)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955 block 26), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What part of the conch does Conch Shell's color name?",
+      "choices": [
+        "Its glossy pink-orange interior",
+        "Its spines",
+        "Its barnacles"
+      ],
+      "answer": "Its glossy pink-orange interior",
+      "kind": "pick"
+    },
+    {
+      "q": "Conch Shell was first recorded by Maerz and Paul in 1925.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Conch Shell names the glossy pink lining of a sea snail's shell, not its duller outside."
+  ],
+  "words": 214,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Maerz and Paul, A Dictionary of Color (1930 ed.), plate 1 D 10, first recorded 1925 (via ColorHub library)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955 block 26), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What part of the conch does Conch Shell's color name?",
-   "choices": [
-    "Its glossy pink-orange interior",
-    "Its spines",
-    "Its barnacles"
-   ],
-   "answer": "Its glossy pink-orange interior",
-   "kind": "pick"
-  },
-  {
-   "q": "Conch Shell was first recorded by Maerz and Paul in 1925.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Conch Shell names the glossy pink lining of a sea snail's shell, not its duller outside."
- ],
- "words": 214,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

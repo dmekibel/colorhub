@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "The name",
-   "body": "The swatch sits in Ridgway's 1912 plate XLIV, under a hue the plate calls 61 triple-prime, tone b, and the ISCC-NBS system of 1955 places it in block 222, light purple [1]. A second, nearby Ridgway entry on plate XXXVII carries the same hue number and lands in ISCC-NBS block 228, a related moderate reddish purple [1]. Both plate readings are scans of aged printed color, so treat them as approximate [1]. The Maerz and Paul dictionary of 1930 first records a name at this position in 1905, on its plate 43, patch E6 [1].\n\nThe xkcd survey of 2010 later collected the plain descriptive phrase \"dark lavender\" from the public, which is the name this article uses [1]. In the ISCC-NBS system itself the block is called pale reddish purple, about 5 CIEDE2000 units from this swatch [1]. The nearest named colors on file are [[purpley-grey]], [[vestal]] and [[catalpa]], at 3.9, 4.7 and 4.8 ΔE [1]."
+   "body": "The swatch sits in Ridgway's 1912 plate XLIV, under a hue the plate calls 61 triple-prime, tone b, and the ISCC-NBS system of 1955 places it in block 222, light purple [1]. A second, nearby Ridgway entry on plate XXXVII carries the same hue number and lands in ISCC-NBS block 228, a related moderate reddish purple [1]. Both plate readings are scans of aged printed color, so treat them as approximate [1]. The Maerz and Paul dictionary of 1930 first records a name at this position in 1905, on its plate 43, patch E6 [1].\n\nThe xkcd survey of 2010 later collected the plain descriptive phrase \"dark lavender\" from the public, which is the name this article uses [1]. In the ISCC-NBS system itself the block is called pale reddish purple, about 5 CIEDE2000 units from this swatch [1]. The nearest named colors on file are [[vestal]], [[vestal]] and [[catalpa]], at 3.9, 4.7 and 4.8 ΔE [1]."
   },
   {
    "id": "field",
@@ -115,7 +115,7 @@
  "openers": [
   "Dark Lavender peaks in paintings from around 1910, at nearly nine times its usual rate."
  ],
- "words": 287,
+ "words": 286,
  "status": "checked",
  "checked": {
   "by": "writer-lane",

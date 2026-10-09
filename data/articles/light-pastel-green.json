@@ -1,113 +1,113 @@
 {
- "slug": "light-pastel-green",
- "name": "Light Pastel Green",
- "hex": "#B2FBA5",
- "names": [
-  "Light Pastel Green"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Light Pastel Green is a lightened reading of [[pastel-green|Pastel Green]], one of the crowd-sourced names the xkcd color survey filed in 2010.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier on a chalky green",
-   "body": "The name is built by grammar: \"light\" over the parent [[pastel-green|Pastel Green]], itself named for its soft, chalky look rather than for a dye or pigment [1]. Our only record of this exact step is the xkcd color survey of 2010, a crowd-sourced monitor-color study, not a dyer's or naturalist's list [1].\n\nIts nearest named neighbor in the color graph is [[light-light-green|Light Light Green]], 3.1 units away, with [[light-mint|Light Mint]] close behind at 3.7 [1]. Both read as slightly duller versions of this same pale yellow-green."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive holds this color covering at least 1 percent of its canvas, within a color distance of 4, as photographed [2]. A bright, pale green this close to a monitor's full saturation sits outside the range of pigments and dyes available to painters working before modern screens [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a descriptive modifier: light + Pastel Green",
-   "first_recorded": "2010 (xkcd color survey)",
-   "source": "ColorHub color graph"
-  },
-  "aka": [],
-  "siblings": [
-   "light-light-green",
-   "light-mint",
-   "celery"
+  "slug": "light-pastel-green",
+  "name": "Light Pastel Green",
+  "hex": "#B2FBA5",
+  "names": [
+    "Light Pastel Green"
   ],
-  "parent": "pastel-green",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    92,
-    51,
-    138
-   ],
-   "nearest": [
-    [
-     "Light Light Green",
-     3.1
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Light Pastel Green is a lightened reading of [[pastel-green|Pastel Green]], one of the crowd-sourced names the xkcd color survey filed in 2010.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier on a chalky green",
+      "body": "The name is built by grammar: \"light\" over the parent [[pastel-green|Pastel Green]], itself named for its soft, chalky look rather than for a dye or pigment [1]. Our only record of this exact step is the xkcd color survey of 2010, a crowd-sourced monitor-color study, not a dyer's or naturalist's list [1].\n\nIts nearest named neighbor in the color graph is [[very-light-green|Light Light Green]], 3.1 units away, with [[very-light-green|Light Mint]] close behind at 3.7 [1]. Both read as slightly duller versions of this same pale yellow-green."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive holds this color covering at least 1 percent of its canvas, within a color distance of 4, as photographed [2]. A bright, pale green this close to a monitor's full saturation sits outside the range of pigments and dyes available to painters working before modern screens [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a descriptive modifier: light + Pastel Green",
+      "first_recorded": "2010 (xkcd color survey)",
+      "source": "ColorHub color graph"
+    },
+    "aka": [],
+    "siblings": [
+      "light-light-green",
+      "light-mint",
+      "celery"
     ],
-    [
-     "Light Mint",
-     3.7
+    "parent": "pastel-green",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        92,
+        51,
+        138
+      ],
+      "nearest": [
+        [
+          "Light Light Green",
+          3.1
+        ],
+        [
+          "Light Mint",
+          3.7
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color graph: xkcd color survey (2010) and look-alike edges",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Light Pastel Green is a lightened version of which parent color?",
+      "choices": [
+        "Pastel Green",
+        "Teal",
+        "Russet-Vinaceous",
+        "Rose"
+      ],
+      "answer": "Pastel Green",
+      "kind": "pick"
+    },
+    {
+      "q": "Which survey first recorded this exact shade in our sources?",
+      "choices": [
+        "The 2010 xkcd color survey",
+        "Ridgway's 1912 atlas",
+        "The ISCC-NBS 1955 lists",
+        "Maerz and Paul, 1930"
+      ],
+      "answer": "The 2010 xkcd color survey",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "This pale green is not found in a single painting in our 23,781-painting archive, as photographed."
+  ],
+  "words": 159,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits (src empty); written from the color graph and archive only."
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color graph: xkcd color survey (2010) and look-alike edges",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Light Pastel Green is a lightened version of which parent color?",
-   "choices": [
-    "Pastel Green",
-    "Teal",
-    "Russet-Vinaceous",
-    "Rose"
-   ],
-   "answer": "Pastel Green",
-   "kind": "pick"
-  },
-  {
-   "q": "Which survey first recorded this exact shade in our sources?",
-   "choices": [
-    "The 2010 xkcd color survey",
-    "Ridgway's 1912 atlas",
-    "The ISCC-NBS 1955 lists",
-    "Maerz and Paul, 1930"
-   ],
-   "answer": "The 2010 xkcd color survey",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "This pale green is not found in a single painting in our 23,781-painting archive, as photographed."
- ],
- "words": 159,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No concordance hits (src empty); written from the color graph and archive only."
-  ]
- }
 }

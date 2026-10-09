@@ -17,7 +17,7 @@
   {
    "id": "neighbors",
    "title": "Neighbors",
-   "body": "The nearest named color in the library is [[ecru]], at a CIEDE2000 distance of 2.7, and [[champagne]] is a near duplicate at 2.0 [3]. It is warmer than plain [[white]] and lighter than [[beige]] [3]."
+   "body": "The nearest named color in the library is [[ecru]], at a CIEDE2000 distance of 2.7, and [[antique-white]] is a near duplicate at 2.0 [3]. It is warmer than plain [[white]] and lighter than [[beige]] [3]."
   },
   {
    "id": "field",
@@ -117,7 +117,7 @@
  "openers": [
   "Antique White was in print as a color name by 1915, decades before the web adopted it."
  ],
- "words": 237,
+ "words": 238,
  "status": "checked",
  "checked": {
   "by": "checker",

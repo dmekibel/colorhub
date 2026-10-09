@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "Two leaves, two colors",
-   "body": "The swatch comes from a 2010 survey and sits closest to the ISCC-NBS block called strong yellow green, 5.9 units away [11]. Its nearest neighbors in our data are [[nasty-green]], [[grass]] and [[leaf-green]] [11]. The older name lists point the other way: the ISCC-NBS record of the name *leaf* sits in block 51, whose other names are Autumn Leaf, Dead Leaf, Feuille Morte and Leaf Brown [11]. Block 51 is an orange-brown block, nothing like this green [11]. The color word has always carried both ends of a leaf's year.\n\nPaterson's dictionary of colour shows the same split. Leaf green is the color of leaves, sometimes the yellowy green of young leaves, and one of the colors in the Ostwald circle [4]. *Feuille* alone is a light green, but *feuillemorte* is the brown of dead leaves, spelled in many ways, among them filemot and philamot [4]. Leafmold is a dark reddish-orange, and dead-leaf brown has an entry of its own [4]. The dictionary also records that *chlorosis* has two opposite meanings: a leaf turning green from some other color, or a leaf lacking chlorophyll and turning yellow or white [4]."
+   "body": "The swatch comes from a 2010 survey and sits closest to the ISCC-NBS block called strong yellow green, 5.9 units away [11]. Its nearest neighbors in our data are [[leaf]], [[grass]] and [[leaf-green]] [11]. The older name lists point the other way: the ISCC-NBS record of the name *leaf* sits in block 51, whose other names are Autumn Leaf, Dead Leaf, Feuille Morte and Leaf Brown [11]. Block 51 is an orange-brown block, nothing like this green [11]. The color word has always carried both ends of a leaf's year.\n\nPaterson's dictionary of colour shows the same split. Leaf green is the color of leaves, sometimes the yellowy green of young leaves, and one of the colors in the Ostwald circle [4]. *Feuille* alone is a light green, but *feuillemorte* is the brown of dead leaves, spelled in many ways, among them filemot and philamot [4]. Leafmold is a dark reddish-orange, and dead-leaf brown has an entry of its own [4]. The dictionary also records that *chlorosis* has two opposite meanings: a leaf turning green from some other color, or a leaf lacking chlorophyll and turning yellow or white [4]."
   },
   {
    "id": "green",
@@ -251,7 +251,7 @@
   "The word leaf names both the green of spring and, in older color lists, the brown of a dead one.",
   "Look at a tree against the sun: the leaves lit from behind are the strongest yellow-green on it."
  ],
- "words": 1008,
+ "words": 1007,
  "status": "checked",
  "checked": {
   "by": "checker",

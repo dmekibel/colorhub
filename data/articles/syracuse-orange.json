@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A university's orange",
-   "body": "Our library traces the name only to a Wikipedia color list, which credits Syracuse University but gives no date for when the school adopted this exact shade [1]. The name itself is a school's branding word, not a material, place of origin or person [1].\n\nIts nearest named neighbor is [[sinopia]], 2.7 units of CIEDE2000 away and described as almost the same [2]. [[brick-orange]] sits a little farther out at 3.8, duller, [[burnt-orange]] at 4.7, also duller, and [[mars-orange]] at 4.9, also duller [2]. Measured in LCH it reads lightness 50, chroma 81, a saturated orange leaning toward red [1]."
+   "body": "Our library traces the name only to a Wikipedia color list, which credits Syracuse University but gives no date for when the school adopted this exact shade [1]. The name itself is a school's branding word, not a material, place of origin or person [1].\n\nIts nearest named neighbor is [[sinopia]], 2.7 units of CIEDE2000 away and described as almost the same [2]. [[sinopia]] sits a little farther out at 3.8, duller, [[burnt-orange]] at 4.7, also duller, and [[mars-orange]] at 4.9, also duller [2]. Measured in LCH it reads lightness 50, chroma 81, a saturated orange leaning toward red [1]."
   },
   {
    "id": "field",
@@ -124,7 +124,7 @@
  "openers": [
   "Syracuse Orange's nearest neighbor on the color charts is Sinopia, an old earth-pigment name, though the two have no documented connection."
  ],
- "words": 233,
+ "words": 232,
  "status": "checked",
  "checked": {
   "by": "checker",

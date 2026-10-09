@@ -1,245 +1,245 @@
 {
- "slug": "mulberry",
- "name": "Mulberry",
- "hex": "#C54B8C",
- "names": [
-  "Mulberry"
- ],
- "tier": "nature",
- "depth": "long",
- "lede": "Mulberry is named for the fruit of the mulberry tree, and for centuries it meant a dark purplish red; on a screen today it is a brighter, pinker magenta.",
- "sections": [
-  {
-   "id": "swatch",
-   "title": "The swatch and the word",
-   "body": "The swatch here is the modern screen mulberry, a strong magenta-leaning red-pink [1]. Maerz and Paul's 1930 color dictionary lists the name, with a first record of 1776, and ISCC-NBS has a block for it [1]. The xkcd survey value for the same name is much darker, near #920A4E [1].\n\nThat darker reading is closer to the old word. Paterson defines mulberry simply as the color of the mulberry, also called mulberry red, and notes Dickens put Job Trotter in a \"mulberry suit\" in *The Pickwick Papers* [2]. His entry for murrey is the clue to how the dictionary sees it: a dark purplish red, a shortened form of mulberry [3]."
-  },
-  {
-   "id": "murrey",
-   "title": "Murrey, morello and the Latin fruit",
-   "body": "English kept two older words for the color. Murrey is mulberry cut short, and morello is a dark red that Paterson calls similar to murrey [3][4]. Some sources treat the two as the same color, others do not [3].\n\nThe Pigment Compendium traces morello to *morum*, the Latin word for mulberry, and groups it with *pabonazo* and *violetto* as Italian names for a purple [5]. It suggests the color may have been made from kermes or cochineal insects [5]. The fruit gave several languages the same dark, wine-like word for a color that sits between red and violet [3][5]."
-  },
-  {
-   "id": "heraldry",
-   "title": "A color painters could not agree on",
-   "body": "In 1661 the heraldic writer C. F. Menestrier complained that painters did not know how to render the heraldic tincture called purple [6]. Some used a mauve and some a wine color. Others used the color of mulberries, which he described as a dark violet, and others the lighter color of the husk of mulberries [6].\n\nThe mulberry was therefore a reference color that even specialists used in two shades, one dark and one pale [6]. That is the same uncertainty a modern reader meets between a dark murrey and a bright screen swatch."
-  },
-  {
-   "id": "cloth",
-   "title": "In the dye trade",
-   "body": "In the cloth trade the word named a dyed result. Greenfield notes that fine woolens called scarlet were sometimes dyed other colors, producing mulberrys, grays, blacks and even greens, and that in some places these were still sold as scarlets [7]. Color words in the cloth trade named a material and a quality as much as a hue [7].\n\nBalfour-Paul counts mulberries among the medieval dyer's results when woad was paired with madder, kermes or even a lichen purple, alongside purples, pinks, violets and scarlets [8]. Woad is blue and madder and kermes are red, so these mixed dyes sit between red and violet, which fits a purplish red [8]. Compare [[madder]], the red half of that pair, and [[crimson]] and [[scarlet]], the other reds the trade named for their dyes [7][8]."
-  },
-  {
-   "id": "tree",
-   "title": "The tree and the silk",
-   "body": "The color comes from the fruit, but the tree has its own history. Silkworms feed on the leaves of the white mulberry, *Morus alba*, and the leaves of that tree are about the only food they can eat without getting sick [9]. James VI and I wanted an English silk industry, and in 1607 owners of large estates were told to plant ten thousand mulberry trees each; a four-acre garden was planted where Buckingham Palace stands today, tended by the King's Mulberry Men [10]. Finlay reports that the king was wrongly advised, because most of the trees sent from France were black mulberries, and silkworms do not like their leaves [10].\n\nAncient story gives the fruit a color too. As Finlay retells Ovid, the lovers Pyramus and Thisbe die under a mulberry tree, and their blood turns its white fruit red [11]. It is a poet's tale, not botany. See the [[flower:mulberry|mulberry tree]] for the plant itself."
-  },
-  {
-   "id": "confusion",
-   "title": "Mulberry yellow",
-   "body": "Not every old mulberry was red. The Pigment Compendium lists \"mulberry\" as a name for a yellow, and sends the reader to fustic [12]. The confusion is botanical: the tree that gives fustic, now called *Maclura tinctoria*, was once classed as *Morus tinctoria*, and the Boyle reference to a yellow dye from mulberry trees seems to come from that older name [12]. Young fustic is a different plant altogether, *Cotinus coggyria* [12].\n\nSo a recipe that mentions mulberry dye needs checking: it may mean a red-purple fruit color, or a yellow wood dye [12]."
-  },
-  {
-   "id": "literature",
-   "title": "A dark food",
-   "body": "In 1884 Huysmans opened *À rebours* with a funeral banquet at which every dish and drink was black, brown or purple [13]. Pastoureau quotes the menu, and mulberries are on it beside plum pudding and heart-cherries [13]. The fruit stands for a dark, nearly black purple, not for the bright pink of the swatch [13][12]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a color near this swatch appears in just one painting, dated 1900, which makes the color rarer than 86 per cent of the named colors [14]. That is a screen-color measure of a bright magenta-red, which painters used sparingly; the darker murrey of the old word is not what this swatch tests [14][1].\n\nIn printed English, the adjective *mulberry* peaks in the 1830s, and by the 2010s its use is about a seventh of that peak [15]. These are photographs of aged, varnished paintings and a book-scan curve, so read them as hints, not as proof of a dye [14][15]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the fruit of the mulberry tree",
-   "first_recorded": "1776, per Maerz & Paul 1930",
-   "source": "ColorHub library; Paterson, A Dictionary of Colour"
-  },
-  "aka": [
-   "murrey",
-   "mulberry red",
-   "morello (close relative)"
+  "slug": "mulberry",
+  "name": "Mulberry",
+  "hex": "#C54B8C",
+  "names": [
+    "Mulberry"
   ],
-  "siblings": [
-   "claret",
-   "plum"
+  "tier": "nature",
+  "depth": "long",
+  "lede": "Mulberry is named for the fruit of the mulberry tree, and for centuries it meant a dark purplish red; on a screen today it is a brighter, pinker magenta.",
+  "sections": [
+    {
+      "id": "swatch",
+      "title": "The swatch and the word",
+      "body": "The swatch here is the modern screen mulberry, a strong magenta-leaning red-pink [1]. Maerz and Paul's 1930 color dictionary lists the name, with a first record of 1776, and ISCC-NBS has a block for it [1]. The xkcd survey value for the same name is much darker, near #920A4E [1].\n\nThat darker reading is closer to the old word. Paterson defines mulberry simply as the color of the mulberry, also called mulberry red, and notes Dickens put Job Trotter in a \"mulberry suit\" in *The Pickwick Papers* [2]. His entry for murrey is the clue to how the dictionary sees it: a dark purplish red, a shortened form of mulberry [3]."
+    },
+    {
+      "id": "murrey",
+      "title": "Murrey, morello and the Latin fruit",
+      "body": "English kept two older words for the color. Murrey is mulberry cut short, and morello is a dark red that Paterson calls similar to murrey [3][4]. Some sources treat the two as the same color, others do not [3].\n\nThe Pigment Compendium traces morello to *morum*, the Latin word for mulberry, and groups it with *pabonazo* and *violetto* as Italian names for a purple [5]. It suggests the color may have been made from kermes or cochineal insects [5]. The fruit gave several languages the same dark, wine-like word for a color that sits between red and violet [3][5]."
+    },
+    {
+      "id": "heraldry",
+      "title": "A color painters could not agree on",
+      "body": "In 1661 the heraldic writer C. F. Menestrier complained that painters did not know how to render the heraldic tincture called purple [6]. Some used a mauve and some a wine color. Others used the color of mulberries, which he described as a dark violet, and others the lighter color of the husk of mulberries [6].\n\nThe mulberry was therefore a reference color that even specialists used in two shades, one dark and one pale [6]. That is the same uncertainty a modern reader meets between a dark murrey and a bright screen swatch."
+    },
+    {
+      "id": "cloth",
+      "title": "In the dye trade",
+      "body": "In the cloth trade the word named a dyed result. Greenfield notes that fine woolens called scarlet were sometimes dyed other colors, producing mulberrys, grays, blacks and even greens, and that in some places these were still sold as scarlets [7]. Color words in the cloth trade named a material and a quality as much as a hue [7].\n\nBalfour-Paul counts mulberries among the medieval dyer's results when woad was paired with madder, kermes or even a lichen purple, alongside purples, pinks, violets and scarlets [8]. Woad is blue and madder and kermes are red, so these mixed dyes sit between red and violet, which fits a purplish red [8]. Compare [[irresistible]], the red half of that pair, and [[crimson]] and [[scarlet]], the other reds the trade named for their dyes [7][8]."
+    },
+    {
+      "id": "tree",
+      "title": "The tree and the silk",
+      "body": "The color comes from the fruit, but the tree has its own history. Silkworms feed on the leaves of the white mulberry, *Morus alba*, and the leaves of that tree are about the only food they can eat without getting sick [9]. James VI and I wanted an English silk industry, and in 1607 owners of large estates were told to plant ten thousand mulberry trees each; a four-acre garden was planted where Buckingham Palace stands today, tended by the King's Mulberry Men [10]. Finlay reports that the king was wrongly advised, because most of the trees sent from France were black mulberries, and silkworms do not like their leaves [10].\n\nAncient story gives the fruit a color too. As Finlay retells Ovid, the lovers Pyramus and Thisbe die under a mulberry tree, and their blood turns its white fruit red [11]. It is a poet's tale, not botany. See the [[flower:mulberry|mulberry tree]] for the plant itself."
+    },
+    {
+      "id": "confusion",
+      "title": "Mulberry yellow",
+      "body": "Not every old mulberry was red. The Pigment Compendium lists \"mulberry\" as a name for a yellow, and sends the reader to fustic [12]. The confusion is botanical: the tree that gives fustic, now called *Maclura tinctoria*, was once classed as *Morus tinctoria*, and the Boyle reference to a yellow dye from mulberry trees seems to come from that older name [12]. Young fustic is a different plant altogether, *Cotinus coggyria* [12].\n\nSo a recipe that mentions mulberry dye needs checking: it may mean a red-purple fruit color, or a yellow wood dye [12]."
+    },
+    {
+      "id": "literature",
+      "title": "A dark food",
+      "body": "In 1884 Huysmans opened *À rebours* with a funeral banquet at which every dish and drink was black, brown or purple [13]. Pastoureau quotes the menu, and mulberries are on it beside plum pudding and heart-cherries [13]. The fruit stands for a dark, nearly black purple, not for the bright pink of the swatch [13][12]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a color near this swatch appears in just one painting, dated 1900, which makes the color rarer than 86 per cent of the named colors [14]. That is a screen-color measure of a bright magenta-red, which painters used sparingly; the darker murrey of the old word is not what this swatch tests [14][1].\n\nIn printed English, the adjective *mulberry* peaks in the 1830s, and by the 2010s its use is about a seventh of that peak [15]. These are photographs of aged, varnished paintings and a book-scan curve, so read them as hints, not as proof of a dye [14][15]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 1,
-  "rank": "rarer than 86% of named colors",
-  "ngram": {
-   "term": "mulberry",
-   "sense": "adjective",
-   "peak": "1830s"
+  "aside": {
+    "origin": {
+      "named_after": "the fruit of the mulberry tree",
+      "first_recorded": "1776, per Maerz & Paul 1930",
+      "source": "ColorHub library; Paterson, A Dictionary of Colour"
+    },
+    "aka": [
+      "murrey",
+      "mulberry red",
+      "morello (close relative)"
+    ],
+    "siblings": [
+      "claret",
+      "plum"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "measured": {
-   "lch": [
-    50,
-    56,
-    349
-   ],
-   "alt_xkcd": "#920A4E"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 1,
+    "rank": "rarer than 86% of named colors",
+    "ngram": {
+      "term": "mulberry",
+      "sense": "adjective",
+      "peak": "1830s"
+    },
+    "measured": {
+      "lch": [
+        50,
+        56,
+        349
+      ],
+      "alt_xkcd": "#920A4E"
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub name library, \"Mulberry\" (Maerz & Paul 1930, plate 48 E 9; ISCC-NBS block 235; xkcd survey)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"mulberry\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"murrey\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"morello\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"pabonazo\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 86",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 7",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, p. 40",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Finlay, Fabric, p. 338",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Finlay, Fabric, p. 358",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Finlay, Fabric, p. 340",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"mulberry\" and \"fustic\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Pastoureau, Black, p. 86",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "data",
+      "cite": "ColorHub archive (field notes, as photographed)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "data",
+      "cite": "Google Books Ngram via ColorHub field notes (adjective use)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "The old word murrey is what, in relation to mulberry?",
+      "choices": [
+        "A shortened form of the same word",
+        "A Latin name for madder",
+        "A yellow wood dye",
+        "A kind of silk"
+      ],
+      "answer": "A shortened form of the same word",
+      "kind": "pick"
+    },
+    {
+      "q": "A recipe calls for \"mulberry\" dye in the Pigment Compendium's usage. What else could it mean?",
+      "choices": [
+        "A yellow dye from fustic",
+        "A blue dye from woad",
+        "A white dye from chalk",
+        "A black dye from soot"
+      ],
+      "answer": "A yellow dye from fustic",
+      "kind": "pick"
+    },
+    {
+      "q": "Silkworms prefer the leaves of the black mulberry.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Murrey, an old English color word, is just \"mulberry\" cut short: a dark purplish red.",
+    "\"Mulberry yellow\" was a real dye name, and it points to fustic, not to the fruit."
+  ],
+  "words": 845,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Softened inference about blue-over-red dyeing",
+      "Silkworm diet wording matched to Finlay"
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub name library, \"Mulberry\" (Maerz & Paul 1930, plate 48 E 9; ISCC-NBS block 235; xkcd survey)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"mulberry\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"murrey\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"morello\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"pabonazo\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 86",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 7",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Balfour-Paul, Indigo, p. 40",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Finlay, Fabric, p. 338",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Finlay, Fabric, p. 358",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Finlay, Fabric, p. 340",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"mulberry\" and \"fustic\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Pastoureau, Black, p. 86",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "data",
-   "cite": "ColorHub archive (field notes, as photographed)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "data",
-   "cite": "Google Books Ngram via ColorHub field notes (adjective use)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "The old word murrey is what, in relation to mulberry?",
-   "choices": [
-    "A shortened form of the same word",
-    "A Latin name for madder",
-    "A yellow wood dye",
-    "A kind of silk"
-   ],
-   "answer": "A shortened form of the same word",
-   "kind": "pick"
-  },
-  {
-   "q": "A recipe calls for \"mulberry\" dye in the Pigment Compendium's usage. What else could it mean?",
-   "choices": [
-    "A yellow dye from fustic",
-    "A blue dye from woad",
-    "A white dye from chalk",
-    "A black dye from soot"
-   ],
-   "answer": "A yellow dye from fustic",
-   "kind": "pick"
-  },
-  {
-   "q": "Silkworms prefer the leaves of the black mulberry.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Murrey, an old English color word, is just \"mulberry\" cut short: a dark purplish red.",
-  "\"Mulberry yellow\" was a real dye name, and it points to fustic, not to the fruit."
- ],
- "words": 845,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Softened inference about blue-over-red dyeing",
-   "Silkworm diet wording matched to Finlay"
-  ]
- }
 }

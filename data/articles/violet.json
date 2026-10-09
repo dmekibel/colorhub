@@ -52,7 +52,7 @@
   {
    "id": "swatch",
    "title": "Which violet?",
-   "body": "The violet on this page, #8000FF, is a fully saturated screen color between blue and magenta, and ISCC-NBS files it as vivid purple, 11.4 units away [49]. Its nearest named neighbors are [[vivid-purple]] at 3.7 units, [[purplish-blue]] at 3.9 and [[blue-violet]] at 4.2 [49].\n\nThe CSS keyword `violet` is a different color entirely [3][49]. Inherited from the X11 color list, it is #EE82EE, a pale pinkish lilac 31 units from this swatch and closer to [[orchid]] than to anything in a rainbow [3][49]. Darker cousins in our library include [[dark-violet]] and [[indigo]] [49]. [[purple]] is the mixture Ridgway wanted kept apart [5]."
+   "body": "The violet on this page, #8000FF, is a fully saturated screen color between blue and magenta, and ISCC-NBS files it as vivid purple, 11.4 units away [49]. Its nearest named neighbors are [[vivid-purple]] at 3.7 units, [[blurple]] at 3.9 and [[blue-violet]] at 4.2 [49].\n\nThe CSS keyword `violet` is a different color entirely [3][49]. Inherited from the X11 color list, it is #EE82EE, a pale pinkish lilac 31 units from this swatch and closer to [[orchid]] than to anything in a rainbow [3][49]. Darker cousins in our library include [[dark-violet]] and [[indigo]] [49]. [[purple]] is the mixture Ridgway wanted kept apart [5]."
   },
   {
    "id": "field",
@@ -587,7 +587,7 @@
   "Rembrandt's pale lilac dress for Hendrickje contains no blue at all: white, charcoal and a little red lake.",
   "Look at shadows on sunlit sand or snow: Delacroix saw violet there, and the Impressionists painted it."
  ],
- "words": 2017,
+ "words": 2016,
  "status": "checked",
  "checked": {
   "by": "checker",

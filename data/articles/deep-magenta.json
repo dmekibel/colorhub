@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A modifier, not a separate name",
-   "body": "The nearest named colors on file are [[warm-purple]], [[dark-magenta]], [[iris-purple]] and [[barney]], at 3.7, 4.3, 5.8 and 5.8 ΔE [1]. It comes from the 2010 xkcd color survey, where a visitor's typed label for this darker, lower-lightness cluster of the magenta family won out over other wording [1].\n\nBecause it is a modifier rather than a standalone dictionary word, Deep magenta is not in our library of CSS, Ridgway, Maerz and Paul, or ISCC-NBS names; only its parent [[magenta]] carries that older pedigree [1]. At lightness 38 and chroma 78, it sits noticeably darker than typical magenta while keeping nearly the same hue angle [1]. Nearby in the same family are [[purple]], [[fuchsia]], and [[plum]], all sharing the same reddish-purple corner of the wheel [1]."
+   "body": "The nearest named colors on file are [[hyacinth-violet]], [[dark-magenta]], [[iris-purple]] and [[purple-munsell]], at 3.7, 4.3, 5.8 and 5.8 ΔE [1]. It comes from the 2010 xkcd color survey, where a visitor's typed label for this darker, lower-lightness cluster of the magenta family won out over other wording [1].\n\nBecause it is a modifier rather than a standalone dictionary word, Deep magenta is not in our library of CSS, Ridgway, Maerz and Paul, or ISCC-NBS names; only its parent [[magenta]] carries that older pedigree [1]. At lightness 38 and chroma 78, it sits noticeably darker than typical magenta while keeping nearly the same hue angle [1]. Nearby in the same family are [[purple]], [[magenta]], and [[plum]], all sharing the same reddish-purple corner of the wheel [1]."
   },
   {
    "id": "field",
@@ -100,7 +100,7 @@
  "openers": [
   "Deep magenta is built from a modifier plus a base name, not a tradition of its own."
  ],
- "words": 208,
+ "words": 209,
  "status": "checked",
  "checked": {
   "by": "writer",

@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "An old green under new names",
-   "body": "The Maerz and Paul dictionary of 1930 records \"Pauncy Green\" itself undated on plate 22 D 8, but the same chart spot carries older names: Flower de Luce Green from 1600, Pancy Green from 1654 and Iris Green from about 1864 [1]. That spread of names and dates, all clustered on one plate position, shows how often fabric and paint trades renamed the same green over three centuries [1].\n\nThe nearest named colors on file are [[fern-green]], [[hay-s-green]], [[dark-sage]] and [[velvet-green]], at 3.1, 4.1, 4.5 and 4.9 ΔE [1]. Who coined \"pauncy\" itself, or what it meant, is undocumented in the books we hold [1]."
+   "body": "The Maerz and Paul dictionary of 1930 records \"Pauncy Green\" itself undated on plate 22 D 8, but the same chart spot carries older names: Flower de Luce Green from 1600, Pancy Green from 1654 and Iris Green from about 1864 [1]. That spread of names and dates, all clustered on one plate position, shows how often fabric and paint trades renamed the same green over three centuries [1].\n\nThe nearest named colors on file are [[fern-green]], [[hay-s-green]], [[hay-s-green]] and [[velvet-green]], at 3.1, 4.1, 4.5 and 4.9 ΔE [1]. Who coined \"pauncy\" itself, or what it meant, is undocumented in the books we hold [1]."
   },
   {
    "id": "field",
@@ -103,7 +103,7 @@
  "openers": [
   "One chart spot carries four different green names spanning over 250 years: Flower de Luce Green, Pancy Green, Iris Green and Pauncy Green."
  ],
- "words": 288,
+ "words": 289,
  "status": "draft",
  "checked": {
   "by": "",

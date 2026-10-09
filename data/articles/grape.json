@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A fruit that is not quite the color",
-   "body": "Paterson's dictionary defines grape as a dark purple or violet [1]. St Clair's glossary goes further, calling it a violet shade that is much brighter than real grapes [2]. Samuel Johnson described the real fruit differently: in an entry Paterson quotes under *bloom*, the blue on plums and grapes freshly picked is that dusty coating [3]. The swatch cannot show it.\n\nThe swatch here, #6C3461, is the ISCC-NBS 1955 block 212, which that system names \"dark reddish purple\" [4]. Maerz and Paul's 1930 dictionary also carries it, with a first recorded date of 1916 [4]. The same swatch is the Japanese traditional color *ayame-iro*, \"iris color\" [4]. The nearest neighbors in our graph are [[grape-purple]], [[plum]], [[aubergine]] and [[burgundy]] [4]."
+   "body": "Paterson's dictionary defines grape as a dark purple or violet [1]. St Clair's glossary goes further, calling it a violet shade that is much brighter than real grapes [2]. Samuel Johnson described the real fruit differently: in an entry Paterson quotes under *bloom*, the blue on plums and grapes freshly picked is that dusty coating [3]. The swatch cannot show it.\n\nThe swatch here, #6C3461, is the ISCC-NBS 1955 block 212, which that system names \"dark reddish purple\" [4]. Maerz and Paul's 1930 dictionary also carries it, with a first recorded date of 1916 [4]. The same swatch is the Japanese traditional color *ayame-iro*, \"iris color\" [4]. The nearest neighbors in our graph are [[grape]], [[plum]], [[aubergine]] and [[burgundy]] [4]."
   },
   {
    "id": "wine-dark",
@@ -214,7 +214,7 @@
   "The pigment called grape black is made from burnt vine twigs or wine lees, and it is black, not purple.",
   "In our archive of 23,781 paintings, only one holds this grape-dark purple over a twentieth of the canvas."
  ],
- "words": 662,
+ "words": 661,
  "status": "checked",
  "checked": {
   "by": "checker",

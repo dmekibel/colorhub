@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A compound, surveyed in 2010",
-   "body": "The name follows the modifier pattern \"pink\" plus the parent hue [[purple]], describing a hue that sits between the two [1]. Our library's only dated record for this exact pairing is the 2010 xkcd online color-naming survey [2]. The same survey, and others in our library, recorded several near-twins for the same hue: [[pinky-purple]], [[purpley-pink]] and [[purpleish-pink]], along with Fuchsia (Crayola) as an unrelated brand name for a close shade [3].\n\nThe nearest named colors by measured distance are [[purpleish-pink]], duller, and [[pinky-purple]], also duller [4]. [[bright-magenta]] reads more vivid; [[medium-orchid]] is duller, and [[steel-pink]] darker [4]."
+   "body": "The name follows the modifier pattern \"pink\" plus the parent hue [[purple]], describing a hue that sits between the two [1]. Our library's only dated record for this exact pairing is the 2010 xkcd online color-naming survey [2]. The same survey, and others in our library, recorded several near-twins for the same hue: [[pinky-purple]], [[pinky-purple]] and [[pale-magenta]], along with Fuchsia (Crayola) as an unrelated brand name for a close shade [3].\n\nThe nearest named colors by measured distance are [[pale-magenta]], duller, and [[pinky-purple]], also duller [4]. [[magenta]] reads more vivid; [[medium-orchid]] is duller, and [[steel-pink]] darker [4]."
   },
   {
    "id": "field",
@@ -114,7 +114,7 @@
  "openers": [
   "Pink Purple has at least three close near-twin names in our library, including Pinky Purple and Purpley Pink."
  ],
- "words": 189,
+ "words": 188,
  "status": "checked",
  "checked": {
   "by": "checker",

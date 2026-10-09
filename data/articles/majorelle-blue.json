@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A painter's garden wall",
-   "body": "Jacques Majorelle, a French Orientalist painter working in Marrakech, built a villa and garden there from 1923 and used an intense cobalt-leaning blue on its walls, fountains and pergolas, a color later named for him [1]. The garden fell into disrepair after his death in 1962 and was restored from 1980 by the fashion designer Yves Saint Laurent and his partner Pierre Bergé, who kept the blue and reopened the grounds as the Jardin Majorelle [1]. Our library lists the hex #6050DC under the person tier, with a strong purplish-blue ISCC-NBS classification 8.2 units from its nearest block [2]. The nearest named colors on file are [[warm-blue]], [[iris]] and [[purpleish-blue]], at 3.9, \nThe swatch on screen reads closer to violet than the wall color most visitors remember, which tends toward a deeper, more saturated cobalt; screen blues compress easily next to a bright white Moroccan sky [2]. Nearby on the wheel sit [[cobalt-blue]] and [[ultramarine|French ultramarine]], the pigments that give that same intensity in paint, and [[french-blue]] sits a little further toward true blue [2]."
+   "body": "Jacques Majorelle, a French Orientalist painter working in Marrakech, built a villa and garden there from 1923 and used an intense cobalt-leaning blue on its walls, fountains and pergolas, a color later named for him [1]. The garden fell into disrepair after his death in 1962 and was restored from 1980 by the fashion designer Yves Saint Laurent and his partner Pierre Bergé, who kept the blue and reopened the grounds as the Jardin Majorelle [1]. Our library lists the hex #6050DC under the person tier, with a strong purplish-blue ISCC-NBS classification 8.2 units from its nearest block [2]. The nearest named colors on file are [[majorelle-blue]], [[iris]] and [[blurple]], at 3.9, \nThe swatch on screen reads closer to violet than the wall color most visitors remember, which tends toward a deeper, more saturated cobalt; screen blues compress easily next to a bright white Moroccan sky [2]. Nearby on the wheel sit [[cobalt-blue]] and [[dark-blue|French ultramarine]], the pigments that give that same intensity in paint, and [[french-blue]] sits a little further toward true blue [2]."
   },
   {
    "id": "field",
@@ -133,7 +133,7 @@
  "openers": [
   "The garden wall that gave this blue its name was repainted by a fashion designer, not the painter who invented it."
  ],
- "words": 290,
+ "words": 289,
  "status": "checked",
  "checked": {
   "by": "batch-9 writer",
