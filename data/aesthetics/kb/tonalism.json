@@ -1,0 +1,25 @@
+{
+ "id": "tonalism",
+ "name": "Tonalism",
+ "lineage": {},
+ "eras": [],
+ "places": [],
+ "garments": [],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 53% of the measured color across 6 Commons photos is below mid-lightness",
+   "mostly muted — about 73% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

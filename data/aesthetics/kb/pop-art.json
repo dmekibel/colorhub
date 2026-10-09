@@ -1,0 +1,66 @@
+{
+ "id": "pop-art",
+ "name": "Pop art",
+ "lineage": {
+  "influenced_by": [
+   "commercial advertising and comic-book printing",
+   "consumer culture of the 1950s-60s"
+  ],
+  "influences": [
+   "corporate-memphis",
+   "memphis"
+  ]
+ },
+ "eras": [
+  "mid-1950s (Britain) – 1960s (peak, US)"
+ ],
+ "places": [
+  "London (Independent Group)",
+  "New York (Warhol's Factory)"
+ ],
+ "garments": [
+  "not primarily a fashion look, though its flat, bright color language influenced 1960s graphic fashion prints"
+ ],
+ "media": [
+  {
+   "title": "Andy Warhol, Campbell's Soup Cans (1962)",
+   "note": ""
+  },
+  {
+   "title": "Roy Lichtenstein, Whaam! (1963)",
+   "note": "appropriates comic-strip printing's flat primary color and Ben-Day dots"
+  }
+ ],
+ "figures": [
+  "Andy Warhol",
+  "Roy Lichtenstein",
+  "Richard Hamilton"
+ ],
+ "reacts_against": "Abstract Expressionism's seriousness and painterly gesture, borrowing instead from advertising, packaging and mass media's flat, repeatable, commercial color.",
+ "revivals": [],
+ "article": "Pop art's colors are commercial colors, lifted on purpose. By the 1950s, American and British visual culture was saturated with advertising, comic strips and product packaging printed in a narrow, flat, highly saturated palette dictated by cheap offset and screen printing — a handful of primaries plus black, none of the subtlety oil paint allows. Andy Warhol and Roy Lichtenstein, working independently through the early 1960s, took that printed-commercial palette and moved it onto canvas at gallery scale: Warhol's repeated Campbell's Soup Cans and Marilyn Monroe silkscreens, Lichtenstein's comic-panel enlargements complete with the visible dot pattern (Ben-Day dots) of cheap newsprint reproduction. The effect depended on refusing the blended, mixed color of academic painting in favor of the same hard-edged, pre-mixed, repeatable hues a printing press would use — Pop art's whole visual joke is that fine art could look exactly as mechanical and mass-produced as a soup label, which is also what made it scandalous to a 1950s art world still invested in Abstract Expressionism's handmade, emotionally loaded brushwork. That flat, poster-bright color language fed directly into later design movements that also wanted color with no apology for being loud and synthetic, from Memphis Group furniture in the 1980s to the flat illustration style now called Corporate Memphis.",
+ "wiki_facts": {
+  "other_names": "|decade_of_origin=1950s",
+  "decade_of_origin": "1950s",
+  "key_motifs": "Consumer goods, mass media imagery, celebrity portraits, comics, bold lines, Ben-Day dots, commercial art techniques",
+  "key_colours": "Saturated primary and secondary colors",
+  "related_aesthetics": "Catholic KitschChichaFiguration NarrativeInternet AwesomesauceLowbrowNeo-PopNouveau RéalismeRadical DesignShibuya-KeiSots ArtSuperflatToyismXerox Art",
+  "key_values": "Critique and celebration of consumerism, mass culture, anti-elitism, humor, irony, rejecting abstract expressionism"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Pop_Art"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "light — about 43% of the measured color is pale or near-white",
+   "mostly muted — about 52% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

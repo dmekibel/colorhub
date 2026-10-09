@@ -1,0 +1,60 @@
+{
+ "id": "impressionism",
+ "name": "Impressionism",
+ "lineage": {
+  "influenced_by": [
+   "plein-air painting",
+   "Japanese ukiyo-e prints",
+   "the invention of portable paint tubes"
+  ],
+  "influences": [
+   "neo-impressionism",
+   "fauvism"
+  ]
+ },
+ "eras": [
+  "1874 (first group exhibition, named after Monet's Impression, Sunrise) – c. 1886"
+ ],
+ "places": [
+  "Paris and the Seine valley (Argenteuil, Giverny)"
+ ],
+ "garments": [
+  "not a fashion look — a painting technique"
+ ],
+ "media": [
+  {
+   "title": "Claude Monet, Impression, Sunrise (1872)",
+   "note": "the painting a hostile critic's review named the movement after"
+  }
+ ],
+ "figures": [
+  "Claude Monet",
+  "Pierre-Auguste Renoir",
+  "Berthe Morisot"
+ ],
+ "reacts_against": "the Académie's polished studio finish and historical/mythological subject matter; Impressionists painted outdoors, fast, in visible brushstrokes, recording modern life and changing light instead.",
+ "revivals": [],
+ "article": "Impressionism's whole palette grows out of one practical decision: paint outside, fast, before the light changes. Before the 1840s, oil paint came in pig bladders and had to be mixed in a studio; the invention of the collapsible metal paint tube let artists carry ready-mixed color into fields and along riverbanks, and a generation of young French painters — Monet, Renoir, Morisot, Pissarro — took the opportunity to abandon the Académie's dark, polished studio finish for something faster and more visibly handmade. Their 1874 group show (organized partly because the official Salon kept rejecting their work) included Monet's Impression, Sunrise, and a hostile reviewer coined \"Impressionists\" as an insult that stuck. The movement's color signature follows directly from its method: because light changes by the minute outdoors, painters learned to lay down short, visible strokes of relatively pure, unmixed color side by side rather than blending on the palette, trusting the eye to do some of the mixing at a distance — a principle the following generation (neo-impressionism) would push to its logical, scientific extreme with actual dots of pure pigment. Shadows, which academic painting rendered in black or brown, Impressionists often painted in blue or violet, since that's closer to what outdoor shadows actually look like under open sky — a genuinely radical idea at the time, and one of the clearest ways to tell an Impressionist canvas from everything painted before it.",
+ "wiki_facts": {
+  "decade_of_origin": "1870s - 1880s",
+  "key_motifs": "Scenes of modern life, landscapes, leisure activities (boating, cafés, dances), urban scenes, effects of changing light and atmosphere",
+  "key_colours": "Bright, often unmixed colors; emphasis on natural light; broken color; avoidance of black paint",
+  "related_aesthetics": "Barbizon SchoolJaponismePost-ImpressionismRealism",
+  "key_values": "Capturing the fleeting moment; visual sensation over fine detail; observation of modern life; rejection of academic tradition"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Impressionism"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 47% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

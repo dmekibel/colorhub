@@ -1,0 +1,61 @@
+{
+ "id": "rococo",
+ "name": "Rococo",
+ "lineage": {
+  "influenced_by": [
+   "late Baroque court culture",
+   "a reaction against Louis XIV's formal grandeur"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 1715–1780 (French Régence through Louis XV)"
+ ],
+ "places": [
+  "Paris and Versailles salons"
+ ],
+ "garments": [
+  "pastel silk panniers",
+  "powdered wigs",
+  "porcelain and gilt ornament"
+ ],
+ "media": [
+  {
+   "title": "Jean-Honoré Fragonard, The Swing (1767)",
+   "note": "the genre's best-known single image"
+  }
+ ],
+ "figures": [
+  "Jean-Honoré Fragonard",
+  "François Boucher",
+  "Antoine Watteau"
+ ],
+ "reacts_against": "the heavy, dark, symmetrical formality of Louis XIV's Baroque court style, favoring asymmetry, pastel color and lighter subject matter (flirtation, gardens) instead.",
+ "revivals": [
+  "a recurring fashion and interior-design reference (most recently Sofia Coppola's Marie Antoinette, 2006)"
+ ],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Late Baroque, Style Louis XV, Style Régence, Pompadour Style",
+  "decade_of_origin": "1720s - 1760s",
+  "key_motifs": "Shells (rocaille), C-scrolls and S-scrolls, acanthus leaves, putti (cherubs), pastoral scenes, elaborate asymmetry, mythological love stories",
+  "key_colours": "Pastel palettes (light pink, powder blue, mint green, cream, lavender), ivory white, gold leaf",
+  "related_aesthetics": "BaroqueChinoiserieDecadenceGustavianNeoclassicism'''Modern Interpretations:'''AngelcoreCoquettePrincesscoreRococopunk",
+  "key_values": "Frivolity, pleasure, intimacy, elegance, leisure, ornamentation, light-heartedness"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Rococo"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 59% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

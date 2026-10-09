@@ -1,0 +1,24 @@
+{
+ "id": "neo-impressionism",
+ "name": "Pointillism",
+ "lineage": {},
+ "eras": [],
+ "places": [],
+ "garments": [],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 55% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}
