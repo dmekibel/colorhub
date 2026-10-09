@@ -2309,7 +2309,7 @@ scenario("sets", "Pair with on a color page: picker suggests, searches, try-on b
   await t.click(btn, { wait: 600 });
   await t.waitFor(".sheet.sx-sheet .sx-opt", 6000, "the picker's suggestions");
   t.expect(t.$$(".sx-sheet .sx-sec").length >= 2, "fewer than two suggestion rows");
-  t.expect(t.$(".sx-try-sw.empty"), "the try-on strip starts with a dashed empty slot");
+  t.expect(t.$(".sx-try-seg.empty"), "the try-on preview starts with a dashed empty slot");
   const q = t.$(".sx-sheet [data-sx-q]"); q.value = "rose"; q.dispatchEvent(new t.w.Event("input", { bubbles: true })); await t.sleep(200);
   await t.waitFor(".sx-sheet .sx-li", 6000, "search results for rose");
   q.value = ""; q.dispatchEvent(new t.w.Event("input", { bubbles: true })); await t.sleep(200);
@@ -2320,14 +2320,32 @@ scenario("sets", "Pair with on a color page: picker suggests, searches, try-on b
   const hex1 = firstOpt.dataset.sxHex;
   await t.click(firstOpt, { force: true, wait: 300 });
   t.expect(!t.$(".sp-page"), "tapping a candidate must not navigate away");
-  t.expect(t.$(".sx-try-sw.trying"), "the trying slot is filled");
+  t.expect(t.$(".sx-try-seg.trying"), "the trying slot is filled");
   t.expect(/· .+% apart · contrast/.test(t.text(".sx-try-rel")), "the relation line reads name · % apart · contrast");
+  // David, 2026-10-09: "too small; make the visualization bigger" and "I scroll past the preview so I can't see
+  // it anymore" — a real split swatch, substantially bigger than the old 76px chips, outside the scrolling
+  // candidate list entirely (js/core.js sheet()'s [data-sheet-scroll] shape) so it can't scroll out of view.
+  const bigBox = t.$(".sx-try-big");
+  t.expect(bigBox.getBoundingClientRect().height >= 90, `the try-on preview is only ${Math.round(bigBox.getBoundingClientRect().height)}px tall`);
+  // start from a known, unscrolled state (the ring-picker check above already scrolled the list to bring itself
+  // into view, via a JS-smooth scrollIntoView the test harness's forced scroll-behavior:auto can't shortcut)
+  const scrollBox = t.$("[data-sheet-scroll]");
+  await t.tick(); await t.sleep(500); await t.tick();
+  scrollBox.scrollTop = 0; scrollBox.dispatchEvent(new t.w.Event("scroll")); await t.tick(); await t.sleep(300); await t.tick();
+  const topBefore = t.$(".sx-try").getBoundingClientRect().top;
+  scrollBox.scrollTop = 600; scrollBox.dispatchEvent(new t.w.Event("scroll")); await t.tick(); await t.sleep(300); await t.tick();
+  const tryAfterScroll = t.$(".sx-try");
+  t.expect(tryAfterScroll && Math.abs(tryAfterScroll.getBoundingClientRect().top - topBefore) < 2, `the preview scrolled away with the list instead of staying on top (was ${topBefore}, now ${tryAfterScroll && tryAfterScroll.getBoundingClientRect().top})`);
+  t.expect(tryAfterScroll.classList.contains("collapsed"), "the preview never collapses after scrolling");
+  t.expect(!t.reachable(t.$("[data-try-add]")), "Add is not reachable once the preview has collapsed");
+  scrollBox.scrollTop = 0; scrollBox.dispatchEvent(new t.w.Event("scroll")); await t.sleep(250);
+  t.expect(!t.$(".sx-try").classList.contains("collapsed"), "the preview doesn't expand again back at the top");
   // swapping to another candidate replaces the trial
   const opts = t.$$(".sx-sheet .sx-opt"), second = opts.find(b => b.dataset.sxHex !== hex1);
-  if (second) { await t.click(second, { force: true, wait: 300 }); t.expect(t.ev("de2000")(t.$(".sx-try-sw.trying").style.getPropertyValue("--c"), second.dataset.sxHex) < 1, "swapping candidates replaces the trial, not adds to it"); }
+  if (second) { await t.click(second, { force: true, wait: 300 }); t.expect(t.ev("de2000")(t.$(".sx-try-seg.trying").style.getPropertyValue("--c"), second.dataset.sxHex) < 1, "swapping candidates replaces the trial, not adds to it"); }
   // Cancel discards the trial, leaving the set unchanged
   await t.click("[data-try-cancel]", { force: true, wait: 200 });
-  t.expect(!t.$(".sx-try-sw.trying") && t.$(".sx-try-sw.empty"), "Cancel clears the trying slot");
+  t.expect(!t.$(".sx-try-seg.trying") && t.$(".sx-try-seg.empty"), "Cancel clears the trying slot");
   t.expect(t.ev("sxTray().length") === 0, "Cancel left the tray unchanged");
   // Add commits it
   await t.click(t.$(".sx-sheet .sx-opt"), { force: true, wait: 300 });
