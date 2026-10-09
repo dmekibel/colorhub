@@ -247,13 +247,18 @@ function spPage(hexes, o = {}) {
     b.addEventListener("animationend", () => b.remove());
     setTimeout(() => b.isConnected && b.remove(), 1200);
   };
+  // David, 2026-10-09: "same full-screen preview for a pair or more." Every data-swatch on the pair/strip already
+  // opens that one color's own page (a stronger action than richpage's cover tap, which never navigates since
+  // you're already on that exact color) and long-press on any swatch already adds it to the tray (js/settray.js),
+  // so the full-screen look gets its own small control on the cover itself rather than overloading either gesture.
+  const expandBtn = `<button class="sp-expand icon-btn glass" data-sp-expand aria-label="View full screen, side by side">${ICON.search}</button>`;
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
     <p class="eyebrow p-type">${pair ? "A pair" : k === 3 ? "A trio" : `A palette of ${k}`}</p>
     <h1 class="p-title sp-title${names.join("").length > 44 ? " longer" : names.join("").length > 24 ? " long" : ""}">${names.map((n, i) => `<button data-swatch="${hexes[i]}">${esc(n)}</button>`).join(`<span class="sp-plus">+</span>`)}</h1>
     ${o.undo ? `<div class="sp-undo" data-undo-bar><span>${esc(o.applied || "Changed")}.</span><button data-undo>Undo</button></div>` : ""}
-    ${pair ? `<div class="sp-pair" data-dbltap>${plate(hexes[0], hexes[1], 0)}${plate(hexes[1], hexes[0], 1)}</div>`
-      : `<div class="sp-strip" data-strip data-dbltap>${hexes.map(h => `<button data-swatch="${h}" style="--c:${h};flex:1" aria-label="${esc(spNm(h))}"></button>`).join("")}</div>
+    ${pair ? `<div class="sp-pair" data-dbltap>${plate(hexes[0], hexes[1], 0)}${plate(hexes[1], hexes[0], 1)}${expandBtn}</div>`
+      : `<div class="sp-strip" data-strip data-dbltap>${hexes.map(h => `<button data-swatch="${h}" style="--c:${h};flex:1" aria-label="${esc(spNm(h))}"></button>`).join("")}${expandBtn}</div>
          <p class="sp-strip-cap" data-stripcap>Equal shares. Press and drag a segment to reorder.</p>
          <div class="sp-names">${hexes.map((h, i) => `<span class="sp-name"><button data-swatch="${h}"><i style="--c:${h}"></i><b>${esc(names[i])}</b><em class="mono">${h}</em></button><button class="sp-handle" data-handle="${i}" aria-label="Drag to reorder ${esc(names[i])}">${SP_ICON_GRIP}</button><button class="sp-drop" data-drop="${i}" aria-label="Remove ${esc(names[i])}">${SX_ICON_X}</button></span>`).join("")}</div>`}
     <p class="sp-lead" data-lead aria-live="polite">Reading the paintings…</p>
@@ -268,6 +273,8 @@ function spPage(hexes, o = {}) {
     <p class="fine sp-fine">Paintings are measured pixel by pixel in the museums' own photographs of varnished paintings, so colors are as photographed and screen colors are approximate. A painting “holds” a color when something within 4% of it covers at least 1% of the canvas. “× chance” compares with the colors being scattered independently: a tendency in these photographs, not a rule of painting.</p>
   `, "article sp-page");
   el.querySelector("[data-back]").onclick = xBack;
+  const expBtn = el.querySelector("[data-sp-expand]");
+  if (expBtn) expBtn.onclick = e => { e.stopPropagation(); buzz(5); if (typeof colorFocus === "function") colorFocus(hexes.map((h, i) => ({ name: names[i], hex: h }))); };
   el.addEventListener("swatch-dbltap", e => {
     const was = (S.palettes || []).some(p => p.cols.join() === hexes.join());
     heartBurst(el, e.detail.x, e.detail.y);

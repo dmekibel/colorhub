@@ -7,7 +7,7 @@
  ],
  "tier": "place",
  "depth": "short",
- "lede": "Indian Pink is a soft, warm pink first recorded by Maerz and Paul in 1902, an older entry than most of the other \"Indian\"-named colors in our library.",
+ "lede": "Indian Pink is a soft, warm pink, recorded in Maerz and Paul's 1930 dictionary as first used in 1902, an older entry than most of the other \"Indian\"-named colors in our library.",
  "sections": [
   {
    "id": "name",
@@ -133,5 +133,5 @@
    "lint 2026-10-09"
   ]
  },
- "words": 253
+ "words": 257
 }
