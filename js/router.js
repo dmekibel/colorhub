@@ -377,6 +377,10 @@ function pmLoad() {
   }));
 }
 function pmGo(spec, fromAddress) {
+  // every entry point (a painting's "Similar paintings", a painter's "Their work on the map", a color's or a set
+  // of favorites' "See them as a map"...) is also a vote for the remembered "Colors | Paintings" floor mode
+  // (David, 2026-10-09), so Rooms > Home or the brand logo lands back here, not on the honeycomb, next time
+  if (typeof S !== "undefined") { S.hm = S.hm || {}; S.hm.mode = "paintings"; if (typeof save === "function") save(); }
   return pmLoad().then(() => pmOpen(spec, { address: !!fromAddress, fresh: true })).catch(e => { console.warn(e); toast("The painting map didn't load"); if (fromAddress) xToOrigin(); });
 }
 document.addEventListener("click", e => {

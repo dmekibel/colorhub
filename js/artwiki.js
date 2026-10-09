@@ -487,7 +487,7 @@ function awPainter(slug, push = true) {
     <div data-awbio></div>
     <div class="aw-you" data-aw-you></div>
     ${awHighlight(P.typical != null ? P.typical : -1, hlLine, hlChips)}
-    ${n >= 2 ? `<button class="gl-pmap aw-pmap" data-pmap="arr=color&p=${esc(slug)}">${GL_ICON_MAP}<span>See all ${n} as a map</span>${ICON.chev}</button>` : ""}
+    ${n >= 2 ? `<button class="gl-pmap aw-pmap" data-pmap="arr=color&p=${esc(slug)}">${GL_ICON_MAP}<span>Their work on the map</span>${ICON.chev}</button>` : ""}
     ${palettes}
     ${colors}
     ${time}
