@@ -85,8 +85,22 @@
 .rp-focus.closing{opacity:0}
 .rp-focus-name{font:400 20px/1.2 var(--serif);letter-spacing:-.01em;opacity:.92;transition:opacity .4s ease;padding:0 32px;text-align:center;text-wrap:balance}
 .rp-focus.dim .rp-focus-name{opacity:0}
+/* the quiet corner tag (David, 2026-10-09): name + hex, bottom-left, safe-area aware -- a museum label that stays
+   on through the big centered name's own fade (it's "alone with the color", not "alone with no idea what it is") */
+.rp-focus-tag{position:absolute;left:calc(env(safe-area-inset-left,0px) + 18px);bottom:calc(env(safe-area-inset-bottom,0px) + 16px);
+  margin:0;font:400 13px/1.3 var(--mono);letter-spacing:.02em;opacity:.55;pointer-events:none;text-align:left;text-transform:none}
 .rp-focus[data-ink="dark"]{color:#141311}.rp-focus[data-ink="light"]{color:#fff}
 @media (prefers-reduced-motion:reduce){.rp-focus{transform:none;transition:opacity .22s ease}.rp-focus.on{transform:none}.rp-focus-name{transition:opacity .22s ease}}
+/* the same view, 2 or more colors at once (David, 2026-10-09: "same full-screen preview for a pair or more" --
+   js/setpage.js): full-height bands side by side, or stacked full-width when there are 4+ (or the viewport is too
+   narrow for a sliver of a band to read) -- background and the transform-origin scale-in still belong to .rp-focus
+   itself, each band just paints its own fill and carries its own corner tag, inked by its own contrast */
+.rp-focus.cf-multi{background:var(--ground);flex-direction:row;align-items:stretch}
+.rp-focus.cf-multi.cf-stack{flex-direction:column}
+.cf-band{position:relative;flex:1;min-width:0;min-height:0;background:var(--c)}
+.cf-band[data-ink="dark"]{color:#141311}.cf-band[data-ink="light"]{color:#fff}
+.cf-band .rp-focus-tag{opacity:.65}
+@media (prefers-reduced-motion:reduce){.rp-focus.cf-multi{transform:none}}
 
 /* ---------- the look-alike strip: no label, the diff line right under it ---------- */
 .cp-strip-sec{margin-top:26px}
@@ -175,6 +189,15 @@
 
 /* Painters / When and where / Often paired with */
 .rc-painters .kin,.rc-whenwhere,.rc-paired .kin{margin-bottom:2px}
+/* a painter row opens their page (David, 2026-10-09: Paul Signac wasn't tappable and had no photo) -- a real
+   portrait (data/artists/portraits.json via js/artwiki.js's own painter page) at the same ~72px an avatar
+   reads at elsewhere, rounded like the app's circular swatches; the signature-color swatch is the honest
+   fallback when no portrait exists, never a blank circle. */
+.rc-painters .kin.rc-painter{grid-template-columns:72px 1fr;cursor:pointer}
+.rc-painter-port{width:72px;height:72px;border-radius:50%;object-fit:cover;background:var(--c,var(--cp-surface-2));flex:none}
+.rc-painter-port-sw{display:block}
+.rc-painter-port-sw.wait{animation:rpPulse 1.6s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.rc-painter-port-sw.wait{animation:none}}
 .rc-spark{display:flex;align-items:flex-end;gap:3px;height:60px;margin:10px 0}
 .rc-spark i{flex:1;background:var(--soft);opacity:.35;border-radius:2px 2px 0 0;min-height:4px;position:relative;display:flex;align-items:flex-end;justify-content:center}
 .rc-spark i.on{opacity:1;background:var(--ink)}
@@ -191,10 +214,11 @@
 .cp-details-body p{font-size:15px;line-height:1.55;color:var(--soft)}
 
 /* "You and this color" and "Its role in paintings" (js/richcolor.js) */
-.rc-role-bar{display:flex;gap:3px;min-height:96px}
-.rc-role{display:flex;flex-direction:column;justify-content:flex-end;gap:3px;min-width:68px;padding:12px 10px;text-align:left;border-radius:6px;background:var(--cp-surface-2);border-top:6px solid var(--c)}
+.rc-role-bar{display:flex;flex-wrap:nowrap;gap:3px;min-height:96px}
+.rc-role{display:flex;flex-direction:column;justify-content:flex-end;gap:3px;min-width:84px;max-width:none;padding:12px 10px;text-align:left;border-radius:6px;background:var(--cp-surface-2);border-top:6px solid var(--c);overflow:hidden}
 .rc-role[data-role="shadow"]{border-top-color:color-mix(in srgb,var(--c) 65%,#000)}
 .rc-role[data-role="light"]{border-top-color:color-mix(in srgb,var(--c) 65%,#fff)}
+.rc-role b,.rc-role span,.rc-role small{overflow-wrap:break-word;word-break:break-word}
 .rc-role b{font:400 18px/1 var(--serif)}
 .rc-role span{font:500 13px/1.2 var(--mono);opacity:.8}
 .rc-role small{font-size:13px;line-height:1.25;opacity:.7}
@@ -226,7 +250,8 @@
 .rc-reach-blocks{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start}
 .rc-reach-pin .gl-pin{width:100%}
 .rc-reach-stat{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--soft)}
-.rc-reach-stat b{font:400 26px/1.05 var(--serif);color:var(--ink)}
+.rc-reach-stat>b{font:400 26px/1.05 var(--serif);color:var(--ink)}
+.rc-reach-yr{font:600 14px/1.3 var(--mono);color:var(--ink)}
 .rc-compass-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .rc-cell{display:grid;grid-template-columns:30px 1fr;grid-template-rows:auto auto auto;column-gap:10px;align-items:center;padding:10px;border:1px solid var(--cp-rule);border-radius:10px;text-align:left;width:100%;border-bottom:1px solid var(--cp-rule)}
 .rc-cell i{grid-row:1/4;width:30px;height:30px;border-radius:50%;background:var(--c)}
@@ -374,7 +399,7 @@
 
 /* ---------- the color header (David, 2026-10-09: "too big -- harder to read the article"): one slim row,
    back + name + small text tabs, about 56pt below the status bar, not two stacked rows ---------- */
-.rp-bar{position:fixed;top:0;left:50%;z-index:30;width:min(100%,540px);transform:translate(-50%,-110%);transition:transform .32s var(--ease);background:var(--c);padding:calc(var(--top) + 4px) var(--g) 6px;display:flex;align-items:center;column-gap:10px;pointer-events:none}
+.rp-bar{position:fixed;top:0;left:50%;z-index:40;width:min(100%,540px);transform:translate(-50%,-110%);transition:transform .32s var(--ease);background:var(--c);padding:calc(var(--top) + 4px) var(--g) 6px;display:flex;align-items:center;column-gap:10px;pointer-events:none}
 .rp-bar-back{width:30px;height:30px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--surface-2);color:var(--ink);border:1px solid rgba(236,232,223,.14)}.rp-bar-back svg{width:17px;height:17px}
 .rp-bar.on{transform:translate(-50%,0);pointer-events:auto}
 .rp-bar-hair{box-shadow:0 1px 0 rgba(255,255,255,.1)}

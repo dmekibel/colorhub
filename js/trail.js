@@ -232,7 +232,13 @@ function tlgWire(el) {
       const dur = Math.min(TLG_CAP, Math.max(120, remaining / Math.max(v, .35)));
       el.style.transition = "none";
       a.anim = TLG_ANIM = el.animate([{ transform: el.style.transform || "none" }, { transform: final }], { duration: dur, easing: "linear", fill: "forwards" });
-      a.anim.onfinish = () => { TLG_ANIM = null; floor.remove(); tlgCommit(dest); };
+      // something else (a native back winning a race against our own pointer tracking -- iOS doesn't reliably
+      // send a pointerup/pointercancel once it's claimed the touch) may already have navigated and redrawn the
+      // screen while this animation was still running: el is this gesture's own page, so if it's no longer in
+      // the document, that already happened. Committing anyway would both double the back (xBack()/tlToOrigin()
+      // again, on top of the one that already ran) and, since show() cleans up .tlg-floor/TLG_ANIM on every
+      // render now, there is nothing left here worth finishing against.
+      a.anim.onfinish = () => { TLG_ANIM = null; floor.remove(); if (el.isConnected) tlgCommit(dest); };
     } else {
       el.style.transition = `transform ${TLG_SPRING}ms var(--spring)`;
       el.style.transform = "translate(0,0)";

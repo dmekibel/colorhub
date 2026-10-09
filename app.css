@@ -1041,3 +1041,10 @@ body.stem-open .screen,body.stem-open .hc,body.stem-open .hm-stage{filter:bright
 .cnt-b:disabled{opacity:.32;cursor:default}
 .cnt-b:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .cs-hl-bar .cnt-b{background:var(--paper-line);color:var(--paper-ink);border-color:transparent}
+
+/* ---------- the black-bar diagnostic HUD (js/core.js vbHud) ---------- */
+.vb-hud{position:fixed;left:8px;right:8px;bottom:8px;z-index:999;background:#000;color:#6f6;border:1px solid #3a3;border-radius:10px;padding:10px 12px;box-shadow:0 8px 24px rgba(0,0,0,.6)}
+.vb-hud pre{margin:0 0 8px;font:11px/1.5 "Geist Mono",ui-monospace,monospace;white-space:pre-wrap;word-break:break-all;max-height:40vh;overflow:auto}
+.vb-hud-row{display:flex;gap:8px}
+.vb-hud-row button{flex:1;min-height:36px;border-radius:8px;border:1px solid #3a3;background:#0a1a0a;color:#9f9;font:13px/1 "Geist Mono",ui-monospace,monospace}
+.vb-hud-row button:active{background:#143014}

@@ -188,20 +188,50 @@ function rpCoverLike(el, name, hex) {
 // can look at it alone. The name sits small and quiet, fading after ~2s; a tap while it's dim brings it back; a tap
 // while it's lit, or a swipe down, returns exactly to the page. Grows from where you tapped; a reduced-motion visitor
 // gets a plain fade instead. Keeps the screen awake while open, when Wake Lock exists.
+// David, 2026-10-09: "same full-screen preview for a pair or more." One shared view: colorFocus(colors) takes 1 or
+// more { name, hex } and shows them full screen -- a single color exactly as before, 2-3 as full-height side-by-side
+// bands, 4+ (or a narrow viewport, where side-by-side would squeeze each band to a sliver) stacked instead. Used by
+// both the color page's cover (rpOpenFocus, the 1-color case below) and the set page (js/setpage.js).
 let RP_FOCUS = null;
-function rpOpenFocus(name, hex, cx, cy) {
-  if (RP_FOCUS) return;
+function colorFocus(colors, opts = {}) {
+  if (RP_FOCUS || !colors || !colors.length) return;
+  // 4+ always stacks (full-width, so each band stays a real band, not a sliver); a pair or trio stays side by
+  // side down to a real phone width (375-440px: David's own device and the smoke harness both live there) and
+  // only falls back to stacked below that -- "pick what reads best" (David, 2026-10-09), not a fixed rule
+  const { cx, cy } = opts, multi = colors.length > 1, stacked = colors.length >= 4 || innerWidth < 340;
   const reduce = typeof reduceMotion !== "undefined" && reduceMotion;
   const ov = document.createElement("div");
-  ov.className = "rp-focus"; ov.setAttribute("data-ink", ink(hex));
-  ov.style.setProperty("--c", hex);
-  ov.style.setProperty("--ox", (cx != null ? cx / innerWidth * 100 : 50) + "%");
-  ov.style.setProperty("--oy", (cy != null ? cy / innerHeight * 100 : 50) + "%");
-  ov.innerHTML = `<p class="rp-focus-name">${esc(name)}</p>`;
+  ov.className = "rp-focus" + (multi ? " cf-multi" + (stacked ? " cf-stack" : "") : "");
+  // David, 2026-10-09: "tapping the color to go full screen shouldn't let me scroll down in the full screen --
+  // right now it does." lockScroll() (js/core.js) is the one iOS-safe body lock every sheet already uses (pins
+  // the body at its own scroll offset instead of overflow:hidden, which would jump it to the top); touch-action
+  // plus a direct touchmove preventDefault stop the rubber-band itself on the layer's own full-viewport touches,
+  // which the body lock alone doesn't reach (iOS can still rubber-band a fixed element under a live touch).
+  ov.style.touchAction = "none";
+  ov.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
+  if (!multi) {
+    // the single-color case: one full fill, the big centered name (its own fade) plus the quiet corner tag
+    const { name, hex } = colors[0];
+    ov.setAttribute("data-ink", ink(hex));
+    ov.style.setProperty("--c", hex);
+    ov.style.setProperty("--ox", (cx != null ? cx / innerWidth * 100 : 50) + "%");
+    ov.style.setProperty("--oy", (cy != null ? cy / innerHeight * 100 : 50) + "%");
+    // the color's own name and hex, quietly in a corner (always on, independent of the big centered name's own
+    // fade -- a museum label, not part of "alone with the color")
+    ov.innerHTML = `<p class="rp-focus-name">${esc(name)}</p><p class="rp-focus-tag">${esc(name)} · ${esc(String(hex).toUpperCase())}</p>`;
+  } else {
+    // 2+ colors: full-height (or, stacked, full-width) bands, each with its own name + hex in its own corner,
+    // by its own contrast -- no single big name makes sense once there's more than one color to look at alone
+    ov.innerHTML = colors.map(({ name, hex }) =>
+      `<div class="cf-band" style="--c:${hex}" data-ink="${ink(hex)}"><p class="rp-focus-tag">${esc(name)} · ${esc(String(hex).toUpperCase())}</p></div>`).join("");
+  }
   document.body.appendChild(ov);
   RP_FOCUS = ov;
+  lockScroll();
   let dimT = 0, wakeLock = null, dim = false;
-  const schedule = () => { clearTimeout(dimT); dimT = setTimeout(() => { dim = true; ov.classList.add("dim"); }, 2000); };
+  // the dim-after-a-beat cycle is about the single big centered name only; a multi view has nothing to fade --
+  // its per-band tags are already the "quiet" version, so a tap on it always just closes
+  const schedule = () => { if (multi) return; clearTimeout(dimT); dimT = setTimeout(() => { dim = true; ov.classList.add("dim"); }, 2000); };
   try { if (navigator.wakeLock && navigator.wakeLock.request) navigator.wakeLock.request("screen").then(w => wakeLock = w).catch(() => {}); } catch (e) {}
   requestAnimationFrame(() => { ov.classList.add("on"); schedule(); });
   let closed = false;
@@ -209,6 +239,7 @@ function rpOpenFocus(name, hex, cx, cy) {
     if (closed) return; closed = true;
     clearTimeout(dimT); if (wakeLock) { try { wakeLock.release(); } catch (e) {} }
     document.removeEventListener("keydown", onKey2);
+    unlockScroll();
     ov.classList.remove("on"); ov.classList.add("closing"); buzz(4);
     RP_FOCUS = null;
     if (reduce) ov.remove(); else setTimeout(() => ov.remove(), 280);
@@ -219,7 +250,9 @@ function rpOpenFocus(name, hex, cx, cy) {
   // the screen's own entrance-animation transform to stay viewport-fixed) -- so, same as those, it needs its own
   // cleanup: without this, swiping back (or any navigation) while the focus view was open left this full-viewport
   // color fill stuck over whatever page came next (David's "the screen goes black" report, 2026-10-09, was this
-  // same leak class in js/paintzoom.js; this is the sibling overlay that opens from the cover itself).
+  // same leak class in js/paintzoom.js; this is the sibling overlay that opens from the cover itself). close()
+  // also restores the scroll lock (unlockScroll), so a navigation that skips the swipe-down/tap close still
+  // leaves the next screen free to scroll.
   cleanup.push(close);
   let sy = 0, sx = 0, dragging = false;
   ov.addEventListener("pointerdown", e => { sy = e.clientY; sx = e.clientX; dragging = true; });
@@ -227,9 +260,12 @@ function rpOpenFocus(name, hex, cx, cy) {
     if (!dragging) return; dragging = false;
     if (e.clientY - sy > 70 && Math.abs(e.clientX - sx) < 80) return close();   // swipe down, always returns
     if (dim) { dim = false; ov.classList.remove("dim"); schedule(); return; }   // tap while dim: just bring the name back
-    close();   // tap while lit: return to the page
+    close();   // tap while lit (or multi, which has no dim state at all): return to the page
   });
 }
+// the single-color entry point (the cover's own tap): rpCoverLike above, and the design-review shot hook
+// (js/boot.js #shot=rpfocus:<name>@<hex>), both still call this directly
+function rpOpenFocus(name, hex, cx, cy) { colorFocus([{ name, hex }], { cx, cy }); }
 function rpCoverFill(el, name, hex, heroHex, entry) {
   const h1 = el.querySelector(".rp-name"); if (h1) { rpFitName(h1); if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => h1.isConnected && rpFitName(h1)); }
   // the story itself (js/article.js arLoad, cached: the story slot reads the same file), not the small lite index
@@ -607,7 +643,11 @@ function rpBarWire(el) {
     if (k === "family") return scrollTo(el.querySelector(".ar-fam"));
     if (k === "id") return scrollTo(el.querySelector(".rp-idcard"));
   });
-  // it lives on <body>, not in the screen: the screen's entrance animation leaves a transform that would pin a fixed bar to the page
+  // it lives on <body>, not in the screen: the screen's entrance animation leaves a transform that would pin a fixed bar to the page.
+  // Defensive: a fast Back-then-forward can call this again before the last page's own cleanup has run (David,
+  // 2026-10-09: "the header disappears" -- two stale .rp-bar nodes fighting over the "on" class reads as a flicker
+  // that looks like the bar vanishing), so never leave more than the one this call owns.
+  document.querySelectorAll("body > .rp-bar").forEach(b => b.remove());
   document.body.appendChild(bar);
   // David, 2026-10-09: "header feels too big -- harder to read the article" -> while actively reading down, the
   // bar slims further (name + back only, the jump tabs fade out); scrolling up a little brings the tabs straight
@@ -667,7 +707,14 @@ function rpPaintFill(el, name, hex, entry, famC) {
   const leadHost = sec.querySelector("[data-rp-lead]");
   artPromise.then(r => {
     const art = (r && r.art) || {}, self = (r && r.self) || { slug: routeSlug(name), n: name, h: hex };
-    if (leadHost && leadHost.isConnected && typeof arfLead === "function") arfLead(f => { leadHost.appendChild(f); return true; }, art, self).catch(() => {});
+    // articleRenderSplit (js/article.js) now shows the lead picture at the top of the article itself, in the
+    // same slot every other story opens with -- a real contextual photo first, the painting that covers the
+    // most of this color otherwise (David, 2026-10-09: "so all articles and pages feel equal in value"). This
+    // slot only still needs to fill in when that didn't happen: a color with no article at all, where
+    // rpStoryFill's twin fallback (rpTwinHTML) runs instead and has no picture of its own. r.has (not a DOM
+    // check) is the right signal -- articleRenderSplit always attempts its own lead as soon as it finds an
+    // article, well before that lead's own async picture-pick resolves, so a DOM check here could race it.
+    if (leadHost && leadHost.isConnected && typeof arfLead === "function" && !(r && r.has)) arfLead(f => { leadHost.appendChild(f); return true; }, art, self).catch(() => {});
   });
   const gi = sec.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, { n: name, h: hex });
   if (typeof rcWireYou === "function") rcWireYou(sec, name, hex);

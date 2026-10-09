@@ -1,123 +1,123 @@
 {
-  "slug": "grecian-rose",
-  "name": "Grecian Rose",
-  "hex": "#D38D86",
-  "names": [
-    "Grecian Rose"
-  ],
-  "tier": "nature",
-  "depth": "short",
-  "lede": "Grecian Rose is a dusty, dark yellowish pink first recorded by Maerz and Paul in 1927, sitting so close to Orange-Vinaceous and Peach Rose in color space that the three names mark almost the same shade.",
-  "sections": [
-    {
-      "id": "name",
-      "title": "A pink by another name",
-      "body": "Maerz and Paul's 1930 dictionary gives Grecian Rose at plate 3 F 9, first recorded in 1927 [1]. The same plate carries two later variants at almost the same spot: Moss Rose, recorded in 1892, and Starflower, recorded in 1928 [1]. The ISCC-NBS system of 1955 would call this a light grayish red, a salmon tone warmed by a touch of brown [2].\n\nThe nearest named colors are [[peach-rose|Peach Rose]], 2.7 units away and almost the same shade read under a different name, and [[new-york-pink|New York Pink]], 3.2 units away [2]. \"Grecian\" borrows classical-world prestige the way many early-twentieth-century paint and fabric names did; no source consulted explains the choice beyond that [1]."
-    },
-    {
-      "id": "field",
-      "title": "Field notes",
-      "body": "Grecian Rose appears in 83 of our 23,781 paintings, as photographed, rarer than 60 percent of the archive's named colors [3]. It peaks in the 1900s, in 6 of 1,674 paintings, at 2.6 times the expected rate for that century [3]. Where it appears, it most often plays an accent rather than a base tone [3]. The earliest match is dated 1301, 629 years before Maerz and Paul's 1927 record — a look-alike hue in an aged photograph, not proof that the same dye or pigment made it, a floor and not a first, since the archive's early centuries are thin [3]."
-    }
-  ],
-  "aside": {
-    "origin": {
-      "named_after": "undocumented; \"Grecian\" is a decorative, not etymological, label",
-      "first_recorded": "1927, per Maerz and Paul",
-      "source": "Maerz and Paul, A Dictionary of Color (1930), plate 3 F 9"
-    },
-    "aka": [
-      "Moss Rose",
-      "Starflower"
-    ],
-    "siblings": [
-      "peach-rose",
-      "new-york-pink",
-      "rosebloom",
-      "brownish-vinaceous"
-    ],
-    "parent": null,
-    "children": null,
-    "disambiguation": [],
-    "other_languages": []
+ "slug": "grecian-rose",
+ "name": "Grecian Rose",
+ "hex": "#D38D86",
+ "names": [
+  "Grecian Rose"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Grecian Rose is a dusty, dark yellowish pink, recorded in Maerz and Paul's 1930 dictionary as first used in 1927, sitting so close to Orange-Vinaceous and Peach Rose in color space that the three names mark almost the same shade.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pink by another name",
+   "body": "Maerz and Paul's 1930 dictionary gives Grecian Rose at plate 3 F 9, first recorded in 1927 [1]. The same plate carries two later variants at almost the same spot: Moss Rose, recorded in 1892, and Starflower, recorded in 1928 [1]. The ISCC-NBS system of 1955 would call this a light grayish red, a salmon tone warmed by a touch of brown [2].\n\nThe nearest named colors are [[peach-rose|Peach Rose]], 2.7 units away and almost the same shade read under a different name, and [[new-york-pink|New York Pink]], 3.2 units away [2]. \"Grecian\" borrows classical-world prestige the way many early-twentieth-century paint and fabric names did; no source consulted explains the choice beyond that [1]."
   },
-  "field": {
-    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-    "n_present": 83,
-    "measured": {
-      "lch": [
-        66,
-        30,
-        30
-      ],
-      "nearest": [
-        [
-          "Peach Rose",
-          2.7
-        ],
-        [
-          "New York Pink",
-          3.2
-        ]
-      ]
-    }
-  },
-  "notes": [
-    {
-      "n": 1,
-      "kind": "book",
-      "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 3 F 9",
-      "loc_kind": "entry",
-      "url": null
-    },
-    {
-      "n": 2,
-      "kind": "data",
-      "cite": "ColorHub color library: computed ISCC-NBS block and look-alike distances",
-      "loc_kind": null,
-      "url": null
-    },
-    {
-      "n": 3,
-      "kind": "data",
-      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-      "loc_kind": null,
-      "url": null
-    }
-  ],
-  "questions": [
-    {
-      "q": "Which dictionary first records Grecian Rose, in 1927?",
-      "choices": [
-        "Maerz and Paul",
-        "Ridgway",
-        "ISCC-NBS",
-        "Werner"
-      ],
-      "answer": "Maerz and Paul",
-      "kind": "pick"
-    },
-    {
-      "q": "True or false: Grecian Rose is a clearly distinct shade from its nearest named neighbors.",
-      "choices": [
-        "True",
-        "False"
-      ],
-      "answer": "False",
-      "kind": "true-false"
-    }
-  ],
-  "openers": [
-    "Grecian Rose sits so close to two other names that only 2.7 units of color space separate them."
-  ],
-  "words": 246,
-  "status": "checked",
-  "checked": {
-    "by": "checker",
-    "date": "2026-10-08",
-    "issues": [
-      "Fixed: the lede said Grecian Rose, Orange-Vinaceous and Peach Rose 'mark almost the same point on the page' — but Orange-Vinaceous and Peach Rose come from Ridgway (1912), not from Maerz and Paul's plate 3 (where Grecian Rose, Moss Rose and Starflower actually sit together); the three colors are close only by computed color distance, not by any shared page. Reworded to 'in color space ... almost the same shade.'",
-      "lint 2026-10-09"
-    ]
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Grecian Rose appears in 83 of our 23,781 paintings, as photographed, rarer than 60 percent of the archive's named colors [3]. It peaks in the 1900s, in 6 of 1,674 paintings, at 2.6 times the expected rate for that century [3]. Where it appears, it most often plays an accent rather than a base tone [3]. The earliest match is dated 1301, 629 years before Maerz and Paul's 1927 record — a look-alike hue in an aged photograph, not proof that the same dye or pigment made it, a floor and not a first, since the archive's early centuries are thin [3]."
   }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; \"Grecian\" is a decorative, not etymological, label",
+   "first_recorded": "1927, per Maerz and Paul",
+   "source": "Maerz and Paul, A Dictionary of Color (1930), plate 3 F 9"
+  },
+  "aka": [
+   "Moss Rose",
+   "Starflower"
+  ],
+  "siblings": [
+   "peach-rose",
+   "new-york-pink",
+   "rosebloom",
+   "brownish-vinaceous"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 83,
+  "measured": {
+   "lch": [
+    66,
+    30,
+    30
+   ],
+   "nearest": [
+    [
+     "Peach Rose",
+     2.7
+    ],
+    [
+     "New York Pink",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 3 F 9",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: computed ISCC-NBS block and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which dictionary first records Grecian Rose, in 1927?",
+   "choices": [
+    "Maerz and Paul",
+    "Ridgway",
+    "ISCC-NBS",
+    "Werner"
+   ],
+   "answer": "Maerz and Paul",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Grecian Rose is a clearly distinct shade from its nearest named neighbors.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Grecian Rose sits so close to two other names that only 2.7 units of color space separate them."
+ ],
+ "words": 250,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Fixed: the lede said Grecian Rose, Orange-Vinaceous and Peach Rose 'mark almost the same point on the page' — but Orange-Vinaceous and Peach Rose come from Ridgway (1912), not from Maerz and Paul's plate 3 (where Grecian Rose, Moss Rose and Starflower actually sit together); the three colors are close only by computed color distance, not by any shared page. Reworded to 'in color space ... almost the same shade.'",
+   "lint 2026-10-09"
+  ]
+ }
 }

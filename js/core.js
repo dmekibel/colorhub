@@ -60,6 +60,68 @@ vbFix(); addEventListener("resize", vbFix); addEventListener("load", vbFix); set
 try { visualViewport && visualViewport.addEventListener("resize", vbFix); } catch (e) {}
  addEventListener("orientationchange", () => setTimeout(vbFix, 300));
 
+// ---------- the black-bar diagnostic HUD (David, 2026-10-09: "since it's only reproducible on a real iPhone
+// Home Screen app, add a diagnostic HUD... Then he can screenshot it when the bar appears and we fix it from
+// facts.") Opens with a 3s long-press on the left Rooms corner, or #debug=vb in the URL hash. A small, opaque,
+// live-updating panel -- every number this chapter's black-bar hunt actually needed, in one place, plus a
+// Copy button so the numbers travel in a screenshot's caption or a message instead of being retyped by hand. ----------
+let vbHudRAF = 0;
+function vbHud() {
+  if (document.querySelector(".vb-hud")) return;
+  const el = document.createElement("div");
+  el.className = "vb-hud";
+  el.innerHTML = '<pre></pre><div class="vb-hud-row"><button data-vb-copy>Copy</button><button data-vb-close>Close</button></div>';
+  document.body.appendChild(el);
+  const pre = el.querySelector("pre");
+  // env(safe-area-inset-bottom), measured the same way vbFix() measures where bottom:0 really lands: a real
+  // fixed probe, not a CSS value read back (which some engines report as 0px outside an actual safe-area context)
+  const probe = document.createElement("div");
+  probe.style.cssText = "position:fixed;left:0;bottom:0;width:1px;height:1px;visibility:hidden;pointer-events:none;padding-bottom:env(safe-area-inset-bottom,0px)";
+  document.documentElement.appendChild(probe);
+  const fields = () => {
+    const vv = window.visualViewport, de = document.documentElement;
+    const safeBottom = probe.getBoundingClientRect().height - 1;
+    const bx = innerWidth / 2, by = innerHeight - 5;
+    const bottomEl = document.elementFromPoint(bx, by);
+    const tag = el => el ? el.tagName.toLowerCase() + (el.className ? "." + String(el.className).trim().split(/\s+/).join(".") : "") : "none";
+    const cv = document.querySelector(".hc-cv");
+    const lines = [
+      ["innerHeight", innerHeight], ["outerHeight", outerHeight], ["screen.height", screen.height],
+      ["visualViewport.height", vv ? vv.height.toFixed(1) : "n/a"], ["visualViewport.offsetTop", vv ? vv.offsetTop.toFixed(1) : "n/a"],
+      ["--vb", getComputedStyle(de).getPropertyValue("--vb").trim() || "(none)"],
+      ["--app-full", getComputedStyle(de).getPropertyValue("--app-full").trim() || "(none)"],
+      ["safe-area-inset-bottom", safeBottom.toFixed(1) + "px"],
+      ["html.clientHeight", de.clientHeight], ["body.clientHeight", document.body.clientHeight],
+      ["#app.clientHeight", (typeof app !== "undefined" && app) ? app.clientHeight : "n/a"],
+      ["canvas CSS height", cv ? cv.getBoundingClientRect().height.toFixed(1) : "(no canvas)"],
+      ["standalone()", typeof standalone === "function" ? standalone() : "n/a"],
+      ["bottom-10px element", tag(bottomEl)],
+    ];
+    pre.textContent = lines.map(([k, v]) => `${k.padEnd(23)}${v}`).join("\n");
+    vbHudRAF = requestAnimationFrame(fields);
+  };
+  fields();
+  el.querySelector("[data-vb-copy]").onclick = () => {
+    try { navigator.clipboard.writeText(pre.textContent).catch(() => {}); } catch (e) {}
+    const b = el.querySelector("[data-vb-copy]"), was = b.textContent; b.textContent = "Copied"; setTimeout(() => { b.textContent = was; }, 900);
+  };
+  el.querySelector("[data-vb-close]").onclick = () => { cancelAnimationFrame(vbHudRAF); probe.remove(); el.remove(); };
+}
+// a 3s hold on the left Rooms corner -- a deliberate, out-of-the-way gesture nothing else on that button uses
+// (a plain tap opens/closes the stem; see js/core.js's own document-level click delegation just below)
+(() => {
+  let timer = 0;
+  const cancel = () => { clearTimeout(timer); timer = 0; };
+  document.addEventListener("pointerdown", e => {
+    const b = e.target.closest && e.target.closest("[data-rooms-corner]"); if (!b) return;
+    timer = setTimeout(() => { vbHud(); }, 3000);
+  }, { passive: true });
+  document.addEventListener("pointerup", cancel, { passive: true });
+  document.addEventListener("pointercancel", cancel, { passive: true });
+})();
+const vbHudFromHash = () => { if (/(^#|[#&])debug=vb(&|$)/.test(location.hash)) vbHud(); };
+vbHudFromHash(); addEventListener("hashchange", vbHudFromHash);
+
 // ---------- color math (CIELAB, D65) ----------
 const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
 function lab(h) {
@@ -504,7 +566,19 @@ function show(html, cls = "", tab = null) {
   cleanup.forEach(f => { try { f(); } catch (e) {} }); cleanup = [];
   // (.flyer / .hc-morph: a bubble-to-page shape belongs to the screen that asked for it; one left mid-flight or
   // orphaned by an error must never float over the next screen as a stuck, unlabeled circle)
-  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost,.rooms-stem,.rm-scrim,.flyer,.hc-morph").forEach(n => n.remove());
+  // .tlg-floor: js/trail.js's own gesture-following backdrop (pull-down / edge-swipe). It normally removes
+  // itself (the gesture's own release/cancel handlers), but a navigation that preempts the gesture entirely --
+  // the native iOS back swipe completing before our pointer sequence gets a pointerup/pointercancel, which it
+  // doesn't reliably send once the OS has claimed the touch -- left it (and the "continue off-screen" commit
+  // animation it belonged to) with nobody left to clean it up: a full-viewport backdrop stuck over every screen
+  // after, reading as a permanent black screen (David, 2026-10-09: "it looks like the black bar is always
+  // there"). Every render is a fresh start, so this is the one place that can promise it: no screen is ever
+  // drawn underneath a leftover gesture backdrop, however it was abandoned.
+  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost,.rooms-stem,.rm-scrim,.flyer,.hc-morph,.tlg-floor").forEach(n => n.remove());
+  // the gesture's own "continue off-screen" animation, if one was still in flight when something else (that
+  // same preempting navigation) got here first: cancel it so its onfinish never fires a second, stale xBack()/
+  // tlToOrigin() on top of the navigation that already happened (the double-back suspect).
+  if (typeof TLG_ANIM !== "undefined" && TLG_ANIM) { try { TLG_ANIM.cancel(); } catch (e) {} TLG_ANIM = null; }
   document.body.classList.remove("stem-open"); STEM_OPEN = false;
   // a new screen always scrolls: release any scroll lock a sheet or panel left behind (leaving a screen with a sheet
   // open used to keep the body pinned, so the next page couldn't scroll)
@@ -537,6 +611,11 @@ function show(html, cls = "", tab = null) {
   document.body.classList.remove("scrolled");
   const el = app.querySelector(".screen");
   if (skipAnim) el.style.animation = "none";   // no entrance either: the gesture (or the native swipe) already moved it
+  // skipAnim already read whatever TLG_SKIP was for THIS screen; clear it now so a flag a gesture left set (it
+  // never reached its own tlgCommit() finally, again the preempted-gesture case above) can't also apply to some
+  // later, unrelated screen that was never meant to skip its entrance and would otherwise be forced visible from
+  // frame one with no animation to bring it in.
+  if (typeof TLG_SKIP !== "undefined" && TLG_SKIP) TLG_SKIP = false;
   if (typeof mxOnShow === "function") mxOnShow(el);   // a bubble growing into this page, or a page shrinking back into the map (js/mapxfer.js)
   const mb = tab && el.querySelector("[data-menu]"); if (mb) mb.onclick = () => menu();
   if (typeof tlNote === "function") tlNote(el, tab, backNav);   // the one trail, the map glyph, the pull-down (js/trail.js)
@@ -803,8 +882,14 @@ const fanVars = (n, k) => `--k:${k};--mid:${(n - 1) / 2}`;
 // Lock page scrolling under a sheet or panel without losing your place (overflow:hidden on a 100%-tall body
 // would jump to the top): pin the body at its current offset, then put the scroll back on release.
 // iOS Safari ignores user-scalable=no, so stop its pinch-zoom gesture on pages directly (the honeycomb and other
-// canvases read raw pointers, which this doesn't touch)
-document.addEventListener("gesturestart", e => e.preventDefault(), { passive: false });
+// canvases read raw pointers, which this doesn't touch). David, 2026-10-09: "if I zoom out far enough, panning
+// gets stuck and the black bar comes back" -- preventDefault on gesturestart ALONE doesn't reliably hold off
+// Safari's native page pinch-zoom once it's underway; gesturechange (and gestureend, belt and braces) need it
+// too, or a strong two-finger pinch at the map's own zoom limit can still hand the gesture to the page itself,
+// which scales/shifts the document (visualViewport moves), uncovers the real background below the fixed
+// canvas (the black bar) and leaves the canvas's own pointer listeners stranded under a page that's now panned
+// or zoomed out from under them (the "stuck" panning).
+["gesturestart", "gesturechange", "gestureend"].forEach(t => document.addEventListener(t, e => e.preventDefault(), { passive: false }));
 let LOCKS = 0, LOCK_Y = 0;
 function lockScroll() {
   if (LOCKS++) return;

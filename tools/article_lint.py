@@ -240,6 +240,26 @@ def check_wording(a, issues):
             issues.append(f"wording (openers): leftover phrase in {op!r}")
 
 
+# David, 2026-10-09: "Aero" read "first recorded by Maerz and Paul in 1920" right next to the cover's own
+# "Maerz & Paul, 1930" -- A Dictionary of Color was published in 1930; node.fy/the library's "Maerz & Paul 1930,
+# first recorded <year>" note is citing an EARLIER first-use year *within* that 1930 book, not the book's own
+# date. "first recorded by Maerz and Paul in <year<1930>" says the recording act itself happened then, which is
+# false. Eight articles had it (aero, bistre-green, conch-shell, dark, japanese-blue, grecian-rose, morning-blue,
+# indian-pink); this rule keeps it from coming back. A genuine 1930 year ("...in 1930") is fine as written.
+MAERZ_PAUL_YEAR_RE = re.compile(r"(?:first )?recorded by Maerz and Paul(?:'s 1930 dictionary)?\s+in\s+(1[7-9]\d{2})\b")
+
+
+def check_maerz_paul_year(a, issues):
+    """Pattern 8: 'first recorded by Maerz and Paul in <year>' where <year> isn't 1930 -- misattributes the
+    book's own 1930 publication date to whatever earlier first-use year it cites for that name."""
+    for where, t in all_text(a):
+        m = MAERZ_PAUL_YEAR_RE.search(t)
+        if m and m.group(1) != "1930":
+            issues.append(f"maerz-paul year ({where}): says Maerz and Paul recorded it in {m.group(1)}, but "
+                           f"A Dictionary of Color is 1930 -- say \"recorded in Maerz and Paul's 1930 dictionary "
+                           f"as first used in {m.group(1)}\" instead")
+
+
 CAVEAT_HINTS = ("as photographed", "screen color", "screen approximation", "not a pigment", "approximate")
 ROLE_NAMES = ["shadow", "mid", "light", "accent", "hidden"]
 
@@ -361,6 +381,7 @@ def lint_one(path):
     check_wording(a, issues)
     check_fieldnum(a, issues)
     check_lookalike(a, issues)
+    check_maerz_paul_year(a, issues)
     return issues
 
 
