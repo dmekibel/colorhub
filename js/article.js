@@ -412,7 +412,10 @@ function arInline(text, art, hl) {
   if (AR_MP || AR_ISCC) s = s.replace(AR_SYSREF_RE, (m, whole, plate, col, row, block) => {
     const hex = arSysRefHex(plate, col, row, block);
     if (!hex) return m;
-    stash.push(`<button type="button" class="ar-sysref" data-ar-swatch="${esc(hex)}|${esc(m)}" aria-label="${esc(m)}, this entry's own color"><i style="--c:${hex}"></i>${esc(m)}</button>`);
+    // the entry's own color marks the text too, lifted the same legible way as any other link (never a flat dot
+    // beside plain white words): a genuinely hueless one still gets the swatch dot, just not a colored word
+    const a = arAccent(hex), cls = a.mode !== "none" ? ` ${AR_HL_CLS[a.mode]}" style="--hl:${a.c}` : "";
+    stash.push(`<button type="button" class="ar-sysref${cls}" data-ar-swatch="${esc(hex)}|${esc(m)}" aria-label="${esc(m)}, this entry's own color"><i style="--c:${hex}"></i>${esc(m)}</button>`);
     return "\u0001" + (stash.length - 1) + "\u0002";
   });
   s = esc(s);
@@ -559,6 +562,11 @@ function arActionsFor(sec) {
 // A chapter, made easier to read: long paragraphs split at sentence ends, a drop cap, the page's own color name marked once,
 // and between the paragraphs (never two in one gap, spread out): a plate of the colors a paragraph names, the chapter's
 // short attributed quotation, and its key dates. js/article-refs.js later fills the remaining long runs with pictures.
+// a paragraph's self-highlight tracker ({ name, a, done, used, words }): the page's own name takes its own legible
+// color once per call site (lede, each chapter, the door's dek — never the same mention twice, never every mention)
+function arSelfMe(art, self) {
+  return self ? { name: art.name || self.n, a: arAccent(self.h), done: false, used: new Set([self.slug]), words: arWordsRe() } : null;
+}
 function arSectionHTML(sec, art, self, ch) {
   const acts = arActionsFor(sec);
   const items = [];
@@ -580,7 +588,7 @@ function arSectionHTML(sec, art, self, ch) {
     const dates = arDatesOf(ps.map(i => items[i].text));
     if (dates.length) place(ps[Math.max(...dates.map(d => d.p))], arDatesHTML(dates));   // after the text that tells them
   }
-  const me = self ? { name: art.name || self.n, a: arAccent(self.h), done: false, used: new Set([self.slug]), words: arWordsRe() } : null;
+  const me = arSelfMe(art, self);
   const first = ps[0], cap = first != null && /^[A-Z][A-Za-z]*[\s,]/.test(items[first].text) && arPlain(items[first].text).split(/\s+/).length >= 30 ? first : -1;   // a drop cap on a full first paragraph
   const body = items.map((b, i) => (b.t === "p" ? arBlockHTML(b, art, { hl: { n: 0, self: me }, cls: i === cap ? "ar-dc" : "" }) : arBlockHTML(b, art)) + (after.get(i) || "")).join("");
   const kick = ch && ch.n > 1 && sec.title ? `<p class="ar-chk">Chapter ${ch.i} of ${ch.n}</p>` : "";
@@ -629,7 +637,7 @@ function arBuildHTML(art, self) {
   const acc = self && self.h ? arAccent(self.h) : null, accStyle = acc && acc.deco ? ` style="--ar-acc:${acc.deco}"` : "";
   return `<article class="ar${acc && acc.deco ? " ar-has-acc" : ""}" data-ar="${esc(art.slug)}"${accStyle}>
     <p class="ar-kind">${[tier, arMinutes(art) + " min read"].filter(Boolean).map(esc).join(" · ")}</p>
-    ${art.lede ? `<p class="ar-lede">${arInline(art.lede, art)}</p>` : ""}
+    ${art.lede ? `<p class="ar-lede">${arInline(art.lede, art, { n: 0, self: arSelfMe(art, self) })}</p>` : ""}
     ${arFactsHTML(art)}
     ${art.status === "draft" ? `<p class="ar-draft">A draft: not yet fact-checked.</p>` : ""}
     ${toc.length > 1 ? `<button type="button" class="ar-bar" data-ar-bar aria-label="Contents"><span class="ar-bar-l">Contents</span><span class="ar-bar-c" data-ar-cur></span><span class="ar-bar-n mono" data-ar-pos></span><i class="ar-bar-p" data-ar-prog></i></button>` : ""}
@@ -821,7 +829,7 @@ function arDoorHTML(art, self, fig) {
   return `<section class="ar-door" data-ar-door="${esc(art.slug)}">${fig || ""}
     <p class="ar-door-k">The story${st && st.done ? " · read" : ""}</p>
     <h2 class="ar-door-t">${esc(art.name || self.n)}</h2>
-    ${dek ? `<p class="ar-door-dek">${arInline(dek, art)}</p>` : ""}
+    ${dek ? `<p class="ar-door-dek">${arInline(dek, art, { n: 0, self: arSelfMe(art, self) })}</p>` : ""}
     <p class="ar-door-meta">${esc(meta)}</p>
     <div class="ar-door-rows">${rows}</div>
     <button type="button" class="ar-door-go" data-ar-begin>${started ? `Continue reading · ${left} min` : st && st.done ? "Read it again" : `Begin reading · ${mins} min`}<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>

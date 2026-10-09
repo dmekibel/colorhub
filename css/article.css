@@ -270,9 +270,9 @@ span.ar-ref.ar-x{text-decoration:none;color:var(--ar-body)}
    first line's baseline, larger and in the page's color; it can never misalign */
 .ar-sec>p.ar-dc::first-letter{font-family:var(--serif);color:var(--ar-acc-x);font-weight:400;font-size:2.15em;line-height:0;letter-spacing:-.01em}
 /* color words */
-.ar-link.hl-t,.ar-hl.hl-t{color:var(--hl);font-weight:500}
-.ar-link.hl-t{text-decoration-color:color-mix(in srgb,var(--hl) 45%,transparent)}
-.ar-link.hl-l{text-decoration-color:var(--hl);text-decoration-thickness:2px;font-weight:500}
+.ar-link.hl-t,.ar-hl.hl-t,.ar-sysref.hl-t{color:var(--hl);font-weight:500}
+.ar-link.hl-t,.ar-sysref.hl-t{text-decoration-color:color-mix(in srgb,var(--hl) 45%,transparent)}
+.ar-link.hl-l,.ar-sysref.hl-l{text-decoration-color:var(--hl);text-decoration-thickness:2px;font-weight:500}
 .ar-hl.hl-l{text-decoration:underline;text-decoration-color:var(--hl);text-decoration-thickness:2px;text-underline-offset:4px;font-weight:500;color:var(--ink)}
 .ar-link.ar-cw.hl-t{text-decoration:none}
 .ar-nw{white-space:nowrap}
