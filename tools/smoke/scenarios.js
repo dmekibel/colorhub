@@ -2345,13 +2345,15 @@ scenario("paintings", "lane A: a painting page leads with what stands out; Name 
   t.ev(`(() => { const s = document.querySelector("[data-glk]"); s.value = 3; s.dispatchEvent(new Event("input", { bubbles: true })); })()`);
   t.expect(t.$$("[data-glswatches] [data-glj]").length === 3, "the slider didn't redraw the palette live");
   await t.click('[data-glo="out"]', { wait: 300 });
-  await t.waitFor(() => /You can name \d+ of \d+/.test(t.text(".gl-cov")), 6000, "the coverage line");
+  await t.waitFor(() => /Learn the colors here/.test(t.text(".gl-cov")), 6000, "the coverage line");
   await t.click('[data-glo="area"]', { wait: 300 });
   const shares = t.$$("[data-glswatches] .pal span").map(s => parseInt(s.textContent, 10) || 0);
   t.expect(shares[0] >= Math.max(...shares), "By area doesn't lead with the biggest color");
   await t.click('[data-glo="out"]', { wait: 300 });
   const answers = () => t.ev(`lnS().ev.filter(e => e.e === "answer" && /-it$/.test(e.by || "")).length`);
   const n0 = answers();
+  // the quiz now sits collapsed at the bottom ("Test yourself", David's rebuild brief, 2026-10-09)
+  await t.click(await t.waitFor(".gl-quiz-fold summary", 8000, "the Test yourself fold"), { wait: 300 });
   await t.click(await t.waitFor(".tq-open", 8000, "the Name its colors button"), { wait: 500 });
   for (let r = 0; r < 3; r++) {
     await t.waitFor(".tq-opts button, .tq.finding", 6000, `round ${r + 1}`);

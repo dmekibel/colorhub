@@ -776,10 +776,14 @@ function glPage(i, d, fromHex, tol) {
   const curSet = () => modeSet(mode, curK) || modeSet("out", curK);
   const curPal = () => curSet().pal;
   const dom = pal6.reduce((a, b) => b.share > a.share ? b : a).h;
+  // the surround behind the picture (when it doesn't fill the full width) tints with the painting's own average
+  // color, not black (David's rebuild brief, 2026-10-09) — G.mean is the true pixel-weighted mean, in Lab
+  const avg = (typeof G.mean !== "undefined" && G.mean) ? labHex(G.mean[i * 3], G.mean[i * 3 + 1], G.mean[i * 3 + 2]) : dom;
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><div class="art-top-r">${d.rec ? `<a class="glass-pill" href="${esc(d.rec)}" target="_blank" rel="noopener">${GL_ICON_OUT}<span>${esc(src.short)}</span></a>` : ""}${typeof fvArtHeart === "function" ? fvArtHeart(d.id) : ""}</div></header>
     <div class="gl-pal-wrap">
-    <div class="gl-hero gl-full-w"><span style="--c:${dom};width:min(100%, calc(30dvh / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas></span></div>
+    <div class="gl-hero gl-full-w" style="--c:${avg}"><span style="width:min(100%, calc(62dvh / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas></span>
+    <button class="gl-closer" data-glcloser>${ICON.search}<span>Look closer</span></button></div>
     <div class="gl-id">
     <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
     <h1 class="p-title">${esc(d.t)}</h1>
@@ -799,15 +803,18 @@ function glPage(i, d, fromHex, tol) {
     <div class="gl-cov" data-glcov></div>
     <div data-csacts></div>
     </div></div>
-    <div class="gl-under"><div class="gl-quiz" data-glquiz></div>${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}</div>
+    <div class="gl-under">${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}</div>
+    <div class="gl-finds"><div class="sec-head"><b>Findings</b><span>as photographed</span></div>
     <div class="gl-roles" data-glroles></div>
-    <div class="aw-cx" data-glctx></div>
+    <div class="aw-cx" data-glctx></div></div>
     <p class="fine">Computed by ColorHub, not by the museum, from its photograph. Names are the nearest of about 1,000. Old varnish and the photograph shift color, and screens differ.</p>
     <div data-awan></div>
+    <div class="gl-morepainter" data-glmorepainter></div>
     ${typeof twSection === "function" ? `<div data-glsim></div>` : `<div class="sec-head gl-sim-h"><b>Similar palettes</b><span>by color, not subject</span></div>
     <div class="gl-rail" data-glsim></div>`}
     <button class="gl-pmap" data-pmap="arr=similar&seed=${i}">${GL_ICON_MAP}<span>Similar paintings, on the map</span>${ICON.chev}</button>
     <section class="srcs"><h3>Image and data</h3><ul><li>${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? ` · ${esc(src.credit)}` : ""}</li><li>Palette and color names computed by ColorHub from the museum's image</li></ul></section>
+    <details class="gl-quiz-fold"><summary>Test yourself</summary><div class="gl-quiz" data-glquiz></div></details>
   `, "article gl-page");
   const route = "#/gallery/" + i, heroSpan = el.querySelector(".gl-hero > span");
   // "You can name 4 of 6" (js/coverage.js) for the colors on screen, one name each, and "Learn the rest"
@@ -818,7 +825,8 @@ function glPage(i, d, fromHex, tol) {
     pal.forEach(p => { const nm = nameOf(p.h); if (nm.n && nm.de < NEAR_DE && !seen.has(nm.n)) { seen.add(nm.n); items.push({ n: nm.n, h: p.h }); } });
     if (items.length < 2) { host.innerHTML = ""; return; }
     const cov = setCoverage(items), rest = items.filter(x => { try { return typeof knowState !== "function" || knowState(x) !== "yours"; } catch (e) { return true; } });
-    host.innerHTML = `${coverageRing(cov, { size: 40, stroke: 4 })}<span><b>${esc(typeof covLabel === "function" ? covLabel(cov) : "")}</b><em>${cov.yours === cov.total ? "Every name here is yours." : "Yours once recalled on a later day."}</em></span>${cov.yours && rest.length && typeof prQuick === "function" ? `<button class="gl-cov-go" data-glrest>Learn the rest</button>` : ""}`;
+    // a quiet row right by the palette, not a boast (David's rebuild brief, 2026-10-09)
+    host.innerHTML = `${coverageRing(cov, { size: 40, stroke: 4 })}<span><b>Learn the colors here</b><em>${cov.yours === cov.total ? "Every name here is yours." : `${cov.yours} of ${cov.total} so far — the rest, once recalled on a later day.`}</em></span>${cov.yours && rest.length && typeof prQuick === "function" ? `<button class="gl-cov-go" data-glrest>Learn the rest</button>` : ""}`;
     const go = host.querySelector("[data-glrest]");
     if (go) go.onclick = () => prQuick({ items: rest.map(x => x.h), label: d.t, src: "painting", route });
   };
@@ -907,9 +915,9 @@ function glPage(i, d, fromHex, tol) {
     }
     x.putImageData(out, 0, 0); cv.classList.add("on");
   };
-  // the located swatch's caption: its share, and in plain words where its pixels sit — the same coarse photo
-  // litBuild() already reads, so no extra network or canvas work
-  const glRegionOf = hex => {
+  // where a color's pixels sit, as a fraction of the image (0..1 each way) — the same coarse photo litBuild()
+  // already reads for "On the painting", reused here for the locate caption and the "Look closer" crops
+  const glHexCentroid = hex => {
     const P = litBuild(); if (!P) return null;
     const t = lab(hex); let w = 0, sx = 0, sy = 0;
     for (let j = 0; j < P.w * P.h; j++) {
@@ -918,8 +926,11 @@ function glPage(i, d, fromHex, tol) {
       const wt = 1 - dd / 13, y = (j / P.w) | 0, x = j - y * P.w;
       w += wt; sx += wt * x; sy += wt * y;
     }
-    if (w < 1) return null;
-    const fx = sx / w / P.w, fy = sy / w / P.h, vi = fy < .33 ? 0 : fy < .66 ? 1 : 2, hi = fx < .33 ? 0 : fx < .66 ? 1 : 2;
+    return w < 1 ? null : { fx: sx / w / P.w, fy: sy / w / P.h };
+  };
+  const glRegionOf = hex => {
+    const c = glHexCentroid(hex); if (!c) return null;
+    const vi = c.fy < .33 ? 0 : c.fy < .66 ? 1 : 2, hi = c.fx < .33 ? 0 : c.fx < .66 ? 1 : 2;
     const V = ["upper", "", "lower"], H = ["left", "center", "right"];
     if (vi === 1 && hi === 1) return "near the center";
     if (vi === 1) return "on the " + H[hi];
@@ -1019,6 +1030,9 @@ function glPage(i, d, fromHex, tol) {
     const b = e.target.closest("[data-glj]"); if (!b) return;
     buzz(5); toggleLocate(+b.dataset.glj);
   };
+  // "Look closer": the same picture, full screen, with pinch-zoom/pan and Value/Squint/Where (js/paintzoom.js)
+  const closerBtn = el.querySelector("[data-glcloser]");
+  if (closerBtn) closerBtn.onclick = () => { buzz(5); glZoomOpen({ src: glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null }); };
   el.querySelector("[data-glorder]").onclick = e => {
     if (e.target.closest("[data-glmore]")) { modesOpen = !modesOpen; buzz(5); drawPalette(); return; }
     const b = e.target.closest("[data-glo]"); if (!b || b.dataset.glo === mode) return;
@@ -1054,8 +1068,44 @@ function glPage(i, d, fromHex, tol) {
     row = r; drawPalette();   // the accents / hidden / focal palette types come from this row
     const roles = [["Accent", (r.acc || []).map(k => pool[k]).find(Boolean), "small and vivid"], ["Easy to miss", (r.hid || []).map(k => pool[k]).find(Boolean), "muted, another family"], ["Focal", pool[r.foc], "stands apart"]].filter(x => x[1]);
     if (!roles.length) return;
-    host.innerHTML = `<p class="gl-roles-h">Look for</p><div class="gl-roles-row">${roles.map(([t, p, why]) => `<button class="gl-role" data-swatch="${p.h}" aria-label="${esc(t)}: ${esc(glName(p.h).n)}"><i style="--c:${p.h}"></i><span><em>${esc(t)}</em><b>${esc(glName(p.h).n)}</b><small>${esc(why)}</small></span></button>`).join("")}</div>`;
+    // "Look closer": an automatic crop around where each role color actually sits (lit.ok once the photo's
+    // pixels can be read here), labeled with its name — point 4 of David's rebuild brief, 2026-10-09, folded
+    // into Findings along with the old flat "Look for" swatches (point 5: "fold the old roles section in")
+    const crop = p => {
+      const c = lit.ok ? glHexCentroid(p.h) : null;
+      if (!c) return `<i style="--c:${p.h}"></i>`;
+      const zoom = 280;
+      return `<i style="background-image:url(${esc(glBig(d.img))});background-size:${zoom}% auto;background-position:${(c.fx * 100).toFixed(1)}% ${(c.fy * 100).toFixed(1)}%"></i>`;
+    };
+    host.innerHTML = `<p class="gl-roles-h">Look closer</p><div class="gl-roles-row">${roles.map(([t, p, why]) => `<button class="gl-role" data-swatch="${p.h}" aria-label="${esc(t)}: ${esc(glName(p.h).n)}">${crop(p)}<span><em>${esc(t)}</em><b>${esc(glName(p.h).n)}</b><small>${esc(why)}</small></span></button>`).join("")}</div>`;
   }).catch(() => {});
+  // "More by this painter", with where this painting sits in their timeline, right above "More like this"
+  // (David's rebuild brief, 2026-10-09, point 7)
+  if (d.a && typeof awLoad === "function") {
+    const slug = routeSlug(d.a);
+    awLoad().then(() => {
+      if (!el.isConnected || !awHasPainter(slug)) return;
+      return awPainterLoad(slug).then(x => {
+        const host = el.querySelector("[data-glmorepainter]");
+        if (!host || !host.isConnected) return;
+        const all = (x.P.ix || []).filter(j => j >= 0), dated = all.filter(j => G.year[j] !== GL_UNDATED);
+        if (all.length < 2) return;
+        const order = dated.slice().sort((a, b) => G.year[a] - G.year[b]);
+        const rank = order.indexOf(i), idxOf = new Map(order.map((j, k) => [j, k]));
+        // the nearest in time read as "where this painting sits" better than a random sample of the painter's works
+        const near = rank >= 0
+          ? order.filter(j => j !== i).sort((a, b) => Math.abs(idxOf.get(a) - rank) - Math.abs(idxOf.get(b) - rank)).slice(0, 6)
+          : all.filter(j => j !== i).slice(0, 6);
+        const posTxt = rank >= 0 ? `#${rank + 1} of ${order.length} dated works by ${esc(d.a)}, by year${yr ? ", painted " + esc(yr) : ""}.` : "";
+        host.innerHTML = `<div class="sec-head"><b>More by ${esc(d.a)}</b><span>${all.length.toLocaleString()} here</span></div>
+          ${posTxt ? `<p class="gl-mp-sub">${posTxt}</p>` : ""}
+          <div class="gl-rail">${near.map(j => glPinHTML(j, {})).join("")}</div>
+          <button class="aw-link" data-awpainter="${esc(slug)}">See all ${all.length.toLocaleString()} by ${esc(d.a)} ↗</button>`;
+        host.onclick = e => { const g = e.target.closest("[data-gi]"); if (g) galleryPage(+g.dataset.gi, true); };
+        glFill(host);
+      });
+    }).catch(() => {});
+  }
   // Name its colors (js/thingquiz.js): guess before you're told, one quiet button under the picture, never forced
   glQuizLoad().then(() => {
     const host = el.querySelector("[data-glquiz]"); if (!host || !host.isConnected || typeof thingQuiz !== "function") return;

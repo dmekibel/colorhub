@@ -133,7 +133,12 @@
 .gl-roles-h{margin:0 0 10px;font:italic 400 17px/1 var(--serif);color:var(--soft)}
 .gl-roles-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .gl-role{display:flex;flex-direction:column;gap:8px;min-width:0;padding:0;text-align:left;color:var(--ink);background:none}
-.gl-role i{display:block;width:100%;height:56px;border-radius:var(--r-1);background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.14)}
+.gl-role i{display:block;width:100%;height:56px;border-radius:var(--r-1);background:var(--c) no-repeat;box-shadow:inset 0 0 0 1px rgba(236,232,223,.14)}
+/* the "Findings" wrapper (js/gallery.js glPage, David's rebuild brief, 2026-10-09): one header over the
+   crops/roles row and the painter/decade/movement comparison; quiet when both are still empty */
+.gl-finds .sec-head{margin-bottom:4px}
+.gl-finds:not(:has(.gl-roles:not(:empty))):not(:has(.aw-cx:not(:empty))){display:none}
+.gl-finds .aw-cx{margin-top:18px}
 .gl-role span{display:flex;flex-direction:column;gap:2px;min-width:0}
 .gl-role em{font:italic 400 15px/1.2 var(--serif);color:var(--soft)}
 .gl-role b{font:400 18px/1.15 var(--serif);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
@@ -153,8 +158,10 @@
 .gl-pmap svg:first-child{color:var(--soft)}
 .gl-pmap svg:last-child{color:var(--faint)}
 
-/* the palette sits right under the painting; the painting stays pinned while you change types and sizes */
-.gl-pal-wrap .gl-hero{position:sticky;top:calc(var(--top) + 64px);z-index:4;margin:0 calc(-1 * var(--g));padding:0 var(--g) 10px;background:var(--ground)}
+/* David's rebuild brief, 2026-10-09: the picture is now much bigger (css/paintzoom.css), so it no longer stays
+   pinned while you change palette types below it -- at this size that would eat the whole screen. "Look closer"
+   (the full-screen view) is the way to keep studying it while the palette controls stay reachable. */
+.gl-pal-wrap .gl-hero{margin:0 calc(-1 * var(--g));padding:0 var(--g) 10px}
 /* David, 2026-10-09 ("weird that you need to scroll far down just to get who and why"): title, painter, date and
    museum sit right under the pinned image, above the palette strip, so who/when/where/why never needs a scroll.
    Kept short on purpose -- the eyebrow/title/dek are the same elements the painting used to show lower on the
@@ -235,6 +242,15 @@
 .gl-lit-cv{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;opacity:0;transition:opacity .25s var(--ease);filter:blur(1px)}
 .gl-lit-cv.on{opacity:1}
 .gl-pick-dot{pointer-events:none}
-/* the pinned painting hides what scrolls up behind it, right up to the header's fade */
-.gl-pal-wrap .gl-hero{box-shadow:0 -28px 0 var(--ground)}
+/* "Test yourself" (David's rebuild brief, 2026-10-09: quiz collapsed, closed by default, like the color page's
+   other <details> sections) and "More by this painter" just above "More like this" */
+.gl-quiz-fold{margin:18px 0 0;border-top:1px solid var(--rule)}
+.gl-quiz-fold>summary{font:400 17px/1.2 var(--serif);color:var(--ink);padding:16px 0;cursor:pointer;min-height:44px;box-sizing:border-box;list-style:none}
+.gl-quiz-fold>summary::-webkit-details-marker{display:none}
+.gl-quiz-fold[open]>summary{padding-bottom:10px}
+.gl-quiz-fold .gl-quiz{padding-bottom:16px}
+.gl-morepainter{margin-top:22px}
+.gl-morepainter:empty{display:none}
+.gl-morepainter .sec-head{margin-bottom:4px}
+.gl-morepainter .gl-mp-sub{color:var(--soft);font-size:13.5px;line-height:1.4;margin:0 0 12px}
 .gl-page .gl-pal-ui .palette.gl-strip:empty{display:none}
