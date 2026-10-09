@@ -1,0 +1,1477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0E0D0B">
+<title>Color Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+/* Night Gallery tokens (design/VISUAL-DIRECTION.md) */
+:root{
+  --ground:#0E0D0B; --s1:#171512; --s2:#201E1A; --s3:#2B2823;
+  --line:rgba(236,232,223,.10); --line-2:rgba(236,232,223,.22);
+  --ink:#ECE8DF; --soft:#A39E92; --faint:#7C776C;
+  --paper:#EFEBE3; --paper-ink:#141311; --good:#9AD4AE; --bad:#F09A86;
+  --serif:"Instrument Serif",ui-serif,Georgia,serif;
+  --sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r-tile:6px; --r-card:18px; --r-sheet:28px; --ease:cubic-bezier(.2,.8,.2,1);
+  --g:16px; --c:#ECE8DF;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+html,body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+body{min-height:100vh;overflow-x:hidden}
+.app{max-width:520px;margin:0 auto;padding:calc(env(safe-area-inset-top,0px) + 14px) var(--g) 0;position:relative}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+.num{font-variant-numeric:tabular-nums}
+
+/* header */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;margin-bottom:6px}
+.kicker{font:italic 400 17px/1.2 var(--serif);color:var(--soft);margin:0 0 2px}
+h1{font:400 48px/.92 var(--serif);letter-spacing:-.02em;margin:0}
+.sub{font:400 14px/1.4 var(--sans);color:var(--soft);margin:8px 0 0}
+.who{display:flex;gap:6px;background:var(--s1);border:1px solid var(--line);border-radius:999px;padding:3px;flex:none}
+.who button{height:36px;padding:0 12px 0 8px;border-radius:999px;display:flex;align-items:center;gap:7px;font:500 14px var(--sans);color:var(--soft)}
+.who button i{width:14px;height:14px;border-radius:50%;display:block}
+.who button[aria-pressed=true]{background:var(--s3);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line-2)}
+
+.views{display:flex;gap:6px;margin:16px calc(-1 * var(--g)) 0;padding:0 var(--g) 2px;overflow-x:auto;scrollbar-width:none}
+.views::-webkit-scrollbar{display:none}
+.views{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 56px),transparent);padding-right:56px}
+.views button{flex:none;height:44px;padding:0 16px;border-radius:999px;background:var(--s1);border:1px solid var(--line);font:500 15px var(--sans);color:var(--soft);display:flex;align-items:center;gap:8px;transition:transform .12s var(--ease)}
+.views button:active{transform:scale(.96)}
+.views button[aria-pressed=true]{background:var(--s3);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line-2);border-color:transparent}
+.views button[aria-pressed=true]::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c)}
+
+/* the stage */
+.lede{font:400 23px/1.18 var(--serif);margin:18px 0 12px;min-height:54px;text-wrap:pretty}
+.lede em{font-style:italic;color:var(--soft)}
+.stage{position:relative}
+svg{display:block;overflow:visible}
+.field{touch-action:manipulation}
+.bub{cursor:pointer}
+.bub circle{transition:opacity .2s}
+.lbl{font:400 13px var(--serif);pointer-events:none}
+.lbl.s{font:500 12px var(--sans);font-variant-numeric:tabular-nums;opacity:.8}
+.axis{font:400 12px var(--sans);fill:var(--faint)}
+.guide{fill:none;stroke:var(--line);stroke-width:1}
+
+/* readout (a selected color, in place: no sheet) */
+.read{margin:14px 0 0;background:var(--s1);border:1px solid var(--line);border-radius:var(--r-card);padding:14px;display:grid;grid-template-columns:96px 1fr;gap:14px;animation:rise .28s var(--ease)}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.plate{display:block;border-radius:var(--r-tile);min-height:96px;position:relative}
+.plate.hair{box-shadow:inset 0 0 0 1px var(--line)}
+.read h3{font:400 30px/1 var(--serif);margin:2px 0 6px}
+.read h3 a{color:inherit;text-decoration:none}
+.read p{margin:0;font-size:15px;line-height:1.4;color:var(--soft)}
+.read .when{grid-column:1/-1}
+.thumbs{display:flex;gap:6px;margin-top:10px;overflow-x:auto;scrollbar-width:none}
+.thumbs img{height:64px;border-radius:var(--r-tile);display:block;background:var(--s2)}
+
+/* dock: controls in the thumb zone */
+.dock{position:sticky;bottom:0;margin:18px calc(-1 * var(--g)) 0;padding:12px var(--g) calc(env(safe-area-inset-bottom,0px) + 14px);background:var(--s1);border-top:1px solid var(--line);border-radius:var(--r-sheet) var(--r-sheet) 0 0;box-shadow:0 -16px 48px rgba(0,0,0,.5);z-index:5}
+.row{display:flex;align-items:center;gap:12px;min-height:48px}
+.row + .row{margin-top:4px}
+.row .k{font:500 15px var(--sans);color:var(--soft);width:66px;flex:none}
+.row .v{font:500 15px var(--sans);font-variant-numeric:tabular-nums;width:58px;text-align:right;flex:none}
+.seg{display:flex;gap:4px;background:var(--ground);border-radius:999px;padding:3px;overflow-x:auto;scrollbar-width:none;flex:1}
+.seg::-webkit-scrollbar{display:none}
+.seg button{flex:none;height:40px;padding:0 13px;border-radius:999px;font:500 14px var(--sans);color:var(--soft);white-space:nowrap}
+.seg button[aria-pressed=true]{background:var(--s3);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line-2)}
+.slider{position:relative;flex:1;height:44px;touch-action:none;cursor:pointer}
+.slider .tr{position:absolute;left:0;right:0;top:19px;height:6px;border-radius:3px;background:var(--s3)}
+.slider .fi{position:absolute;left:0;top:19px;height:6px;border-radius:3px;background:var(--ink)}
+.slider .th{position:absolute;top:8px;width:28px;height:28px;margin-left:-14px;border-radius:50%;background:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.5)}
+.range .bars{position:absolute;left:0;right:0;bottom:22px;height:22px;display:flex;align-items:flex-end;gap:1px}
+.range .bars i{flex:1;border-radius:2px 2px 0 0;min-height:2px;opacity:.35;transition:opacity .15s}
+.range .bars i.on{opacity:1}
+.range{height:60px}
+.range .tr,.range .fi{top:41px}.range .th{top:30px}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;height:36px;padding:0 12px;border-radius:999px;background:var(--s2);font:500 14px var(--sans);color:var(--soft);white-space:nowrap}
+.chip[aria-pressed=true]{background:var(--s3);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line-2)}
+
+/* years */
+.yr{display:grid;grid-template-columns:44px 1fr;align-items:center;gap:8px;height:19px;cursor:pointer}
+.yr b{font:500 12px var(--sans);font-variant-numeric:tabular-nums;color:var(--faint);text-align:right}
+.yr .bar{display:flex;height:15px;border-radius:3px;overflow:hidden}
+.yr .bar i{display:block;height:100%}
+.yr.gap{margin-top:7px}
+.yr:active .bar{transform:scale(.99)}
+
+/* chords */
+.ch{padding:10px 0 12px;border-top:1px solid var(--line);cursor:pointer}
+.ch:first-child{border-top:0}
+.ch h4{font:400 21px/1.05 var(--serif);margin:0;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.ch h4 span{font:500 14px var(--sans);color:var(--soft);font-variant-numeric:tabular-nums}
+.strip{display:flex;gap:2px;height:34px;margin-top:8px}
+.strip i{flex:1;display:flex;flex-direction:column;border-radius:3px;overflow:hidden;background:var(--s2);min-width:4px}
+.strip i b{flex:1;display:block}
+.ch p{margin:6px 0 0;font-size:15px;color:var(--soft);line-height:1.4}
+.yticks{display:flex;justify-content:space-between;font:500 12px var(--sans);color:var(--faint);margin-top:4px;font-variant-numeric:tabular-nums}
+
+/* compare */
+.cmp-head{display:grid;grid-template-columns:1fr 64px 1fr;align-items:end;margin-bottom:6px}
+.cmp-head div{font:400 26px/1 var(--serif)}
+.cmp-head div:last-child{text-align:right}
+.cmp-head small{display:block;font:400 13px var(--sans);color:var(--faint);margin-top:4px}
+.big{display:flex;align-items:baseline;gap:12px;margin:18px 0 6px}
+.big b{font:400 72px/.86 var(--serif);font-variant-numeric:tabular-nums}
+.big span{font:400 16px/1.3 var(--sans);color:var(--soft)}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.vs .card{background:var(--s1);border:1px solid var(--line);border-radius:var(--r-card);padding:12px}
+.vs .card h5{margin:0;font:400 21px/1.05 var(--serif)}
+.vs .card p{margin:4px 0 0;font-size:14px;color:var(--soft);line-height:1.35}
+.duo{display:flex;height:10px;border-radius:3px;overflow:hidden;margin-top:10px}
+
+/* painting */
+.picker{display:flex;gap:8px;overflow-x:auto;margin:0 calc(-1 * var(--g)) 12px;padding:2px var(--g);scrollbar-width:none}
+.picker::-webkit-scrollbar{display:none}
+.picker button{flex:none;height:46px;border-radius:var(--r-tile);overflow:hidden;position:relative;opacity:.55;transition:opacity .2s}
+.picker button[aria-pressed=true]{opacity:1;box-shadow:0 0 0 2px var(--ground),0 0 0 3.5px var(--ink)}
+.picker img{height:46px;display:block}
+.hero{position:relative;border-radius:var(--r-tile);overflow:hidden;background:var(--s1);margin:0 auto}
+.hero img,.hero canvas{display:block;width:100%;height:100%;object-fit:contain}
+.hero canvas{position:absolute;inset:0;opacity:0;transition:opacity .35s var(--ease);image-rendering:pixelated}
+.hero.map canvas{opacity:1}
+.hero .tag{position:absolute;left:8px;bottom:8px;background:var(--s2);border-radius:999px;padding:5px 10px;font:500 13px var(--sans);color:var(--ink);opacity:0;transition:opacity .2s}
+.hero.map .tag{opacity:1}
+.cap{font:italic 400 17px/1.3 var(--serif);color:var(--soft);margin:8px 0 0}
+.voices{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0 4px}
+.voices button{text-align:left}
+.voices i{display:block;height:44px;border-radius:var(--r-tile)}
+.voices b{display:block;font:500 13px var(--sans);color:var(--soft);margin-top:6px}
+.voices span{display:block;font:400 15px/1.1 var(--serif);margin-top:1px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px}
+.pair a{display:block;height:110px;border-radius:var(--r-tile);text-decoration:none;color:inherit;position:relative}
+.pair a span{position:absolute;left:10px;bottom:8px;font:400 21px/1 var(--serif)}
+.facts{margin:10px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:15px}
+.facts dt{color:var(--soft)}
+.facts dd{margin:0;font-variant-numeric:tabular-nums}
+.verdict{font:400 21px/1.2 var(--serif);margin:12px 0 0}
+.chordcard{background:var(--s1);border:1px solid var(--line);border-radius:var(--r-card);padding:12px 14px;margin-top:8px;cursor:pointer;transition:background .15s}
+.chordcard[aria-pressed=true]{background:var(--s3);box-shadow:inset 0 0 0 1.5px var(--line-2)}
+.chordcard h4{margin:0;font:400 21px/1.05 var(--serif);display:flex;justify-content:space-between;gap:10px}
+.chordcard h4 span{font:500 13px var(--sans);color:var(--soft);align-self:center}
+.chordcard .sw{display:flex;gap:3px;height:28px;margin:8px 0 6px}
+.chordcard .sw i{border-radius:var(--r-tile);display:block}
+.chordcard p{margin:0;font-size:15px;color:var(--soft);line-height:1.38}
+.meter{height:4px;border-radius:2px;background:var(--s3);margin-top:8px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--ink)}
+.sec{font:400 30px/1 var(--serif);margin:26px 0 4px}
+.secnote{font:400 15px/1.4 var(--sans);color:var(--soft);margin:0 0 6px}
+
+/* art says */
+.fcard{background:var(--s1);border:1px solid var(--line);border-radius:var(--r-card);padding:16px;margin-top:12px}
+.fcard h4{margin:0 0 4px;font:400 26px/1.04 var(--serif)}
+.fcard p{margin:8px 0 0;font-size:15px;line-height:1.42;color:var(--soft)}
+.fcard .n{font:500 13px var(--sans);color:var(--faint);margin-top:10px;font-variant-numeric:tabular-nums}
+.bars2{display:grid;gap:8px;margin-top:12px}
+.bars2 .r{display:grid;grid-template-columns:96px 1fr 48px;align-items:center;gap:10px;font-size:14px}
+.bars2 .r span{color:var(--soft)}
+.bars2 .r b{font-weight:500;text-align:right;font-variant-numeric:tabular-nums}
+.bars2 .t{position:relative;height:22px;background:var(--s2);border-radius:4px}
+.bars2 .t i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.bars2 .t u{position:absolute;top:-3px;bottom:-3px;border-left:1.5px dashed var(--soft);opacity:.7}
+.bars2 .t s{position:absolute;top:10px;height:2px;background:rgba(20,19,17,.75);border-left:2px solid rgba(20,19,17,.75);border-right:2px solid rgba(20,19,17,.75);box-sizing:content-box;margin-top:-4px;height:2px;border-top:4px solid transparent;border-bottom:4px solid transparent;background-clip:padding-box}
+.pairs{display:grid;gap:8px;margin-top:12px}
+.pairs .r{display:grid;grid-template-columns:44px 44px 1fr auto;align-items:center;gap:8px}
+.pairs .r i{height:44px;border-radius:var(--r-tile);display:block}
+.pairs .r span{font:400 17px/1.1 var(--serif)}
+.pairs .r b{font:500 15px var(--sans);font-variant-numeric:tabular-nums}
+.foot{font:400 14px/1.45 var(--sans);color:var(--faint);margin:28px 0 24px}
+.foot b{color:var(--soft);font-weight:500}
+.load{display:grid;place-items:center;height:60vh;font:italic 400 21px var(--serif);color:var(--soft)}
+.load i{display:block;width:44px;height:44px;border-radius:50%;margin:0 auto 14px;background:conic-gradient(#8a6a3a,#3c5a6e,#6a7d43,#8a6a3a);animation:spin 2.4s linear infinite;-webkit-mask:radial-gradient(circle,transparent 15px,#000 16px)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.err{color:var(--bad)}
+/* career time scrubber */
+.play{flex:none;width:48px;height:48px;border-radius:50%;background:var(--s3);display:grid;place-items:center;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line-2);transition:transform .12s var(--ease)}
+.play:active{transform:scale(.94)}
+.tline{height:56px}
+.tline .bars{position:absolute;left:0;right:0;bottom:24px;height:24px;display:flex;align-items:flex-end;gap:1px}
+.tline .bars i{flex:1;border-radius:2px 2px 0 0;min-height:2px}
+.tline .tr,.tline .fi{top:38px}.tline .th{top:27px}
+.tline .ev{position:absolute;bottom:2px;width:2px;height:8px;margin-left:-1px;background:var(--soft);border-radius:1px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin:6px 0 0;font:500 13px var(--sans);color:var(--soft)}
+.legend span{display:flex;align-items:center;gap:6px}
+/* the dance */
+.hero .base{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
+.hero.dance .base{filter:grayscale(1) brightness(.4) contrast(.9)}
+.hero.dance canvas{opacity:1;image-rendering:auto}
+.hero.geo .base{filter:brightness(.62) saturate(.8)}
+.hero.geo svg{position:absolute;inset:0}
+.dctl{display:flex;align-items:center;gap:12px;margin-top:12px}
+.dots{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1;padding:4px 2px}
+.dots::-webkit-scrollbar{display:none}
+.dots button{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--s1);transition:transform .15s var(--ease)}
+.dots button i{display:flex;width:22px;height:22px;border-radius:50%;overflow:hidden}
+.dots button i b{flex:1}
+.dots button[aria-pressed=true]{background:var(--s3);box-shadow:inset 0 0 0 1.5px var(--line-2);transform:scale(1.08)}
+.dcap{min-height:92px;margin-top:8px}
+.dcap h4{font:400 30px/1 var(--serif);margin:0}
+.dcap p{font-size:15px;line-height:1.4;color:var(--soft);margin:6px 0 0}
+.dcap .meter{max-width:180px}
+/* mosaic */
+.mosbar{display:flex;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap}
+.mosbar .chip{height:44px;padding:0 16px;font-size:15px}
+.legend2{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.legend2 button{width:44px;height:44px;border-radius:50%;display:grid;place-items:center}
+.legend2 i{width:34px;height:34px;border-radius:50%;display:block;box-shadow:inset 0 0 0 1px var(--line)}
+.legend2 button[aria-pressed=true]{box-shadow:inset 0 0 0 2px var(--ink)}
+/* geometry */
+.roses{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px;text-align:center}
+.roses svg{margin:0 auto}
+.roses span{display:block;font:400 15px/1.1 var(--serif);margin-top:4px}
+.roses b{display:block;font:500 12px var(--sans);color:var(--soft);margin-top:2px}
+/* arc */
+.film{display:flex;gap:4px;overflow-x:auto;margin:0 calc(-1 * var(--g)) 8px;padding:0 var(--g);scrollbar-width:none}
+.film::-webkit-scrollbar{display:none}
+.film button{flex:none;position:relative}
+.film img{height:64px;display:block;border-radius:4px}
+.film span{position:absolute;left:4px;bottom:3px;font:500 11px var(--sans);color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.9)}
+.evkey{display:flex;flex-wrap:wrap;gap:4px 14px;margin:6px 0 4px;font:500 13px var(--sans);color:var(--soft)}
+.evkey i{display:inline-block;width:1px;height:10px;border-left:1.5px dashed var(--soft);margin-right:6px;vertical-align:-1px}
+.arcrow{margin-top:10px}
+.arch{display:flex;justify-content:space-between;align-items:baseline}
+.arch span{font:400 19px var(--serif)}
+.arch b{font:500 14px var(--sans);font-variant-numeric:tabular-nums}
+.arch b.soft{color:var(--faint);font-weight:400}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="top"><p class="kicker" id="kick">Color atlas</p><div class="who" id="who" role="group" aria-label="Painter"></div></div>
+    <h1 id="title">&nbsp;</h1>
+  </header>
+  <p class="sub" id="sub">&nbsp;</p>
+  <nav class="views" id="views" aria-label="Views"></nav>
+  <main id="main" style="padding-bottom:28px"><div class="load"><div><i></i>Gathering two careers of color…</div></div></main>
+  <div class="dock" id="dock" hidden></div>
+</div>
+<pre id="out" hidden></pre>
+<script>
+"use strict";
+// ColorHub Atlas prototype (design/ATLAS/ATLAS.md). Self-contained: no app code is loaded. Served from the repo root
+// (python3 -m http.server), it reads the real data: data/gallery (index.bin years, detail shards with each painting's
+// 24-color pool), data/artists (the painter's works, birth and death), data/core-names.json and
+// design/ATLAS/data/findings.json (design/ATLAS/mine.py). Every number is "as photographed".
+const ROOT = "../../";
+const ERRS = []; addEventListener("error", e => ERRS.push(String(e.message) + " @" + e.lineno)); addEventListener("unhandledrejection", e => ERRS.push("rej: " + String(e.reason && (e.reason.stack || e.reason))));
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const pct = (v, d = 0) => (v * 100).toFixed(d) + "%";
+const buzz = () => { try { navigator.vibrate && navigator.vibrate(4); } catch (e) {} };
+
+// ---------------- color math: OKLab / OKLCH (Ottosson 2020) ----------------
+const lin = v => { v /= 255; return v > .04045 ? ((v + .055) / 1.055) ** 2.4 : v / 12.92; };
+const gam = v => { v = v <= .0031308 ? 12.92 * v : 1.055 * Math.pow(v, 1 / 2.4) - .055; return clamp(Math.round(v * 255), 0, 255); };
+function rgbOk(r, g, b) {
+  r = lin(r); g = lin(g); b = lin(b);
+  const l = Math.cbrt(.4122214708 * r + .5363325363 * g + .0514459929 * b), m = Math.cbrt(.2119034982 * r + .6806995451 * g + .1073969566 * b), s = Math.cbrt(.0883024619 * r + .2817188376 * g + .6299787005 * b);
+  return [.2104542553 * l + .793617785 * m - .0040720468 * s, 1.9779984951 * l - 2.428592205 * m + .4505937099 * s, .0259040371 * l + .7827717662 * m - .808675766 * s];
+}
+const hexOk = h => { const n = parseInt(h.slice(1), 16); return rgbOk(n >> 16 & 255, n >> 8 & 255, n & 255); };
+function okRgb([L, a, b]) {
+  const l = (L + .3963377774 * a + .2158037573 * b) ** 3, m = (L - .1055613458 * a - .0638541728 * b) ** 3, s = (L - .0894841775 * a - 1.291485548 * b) ** 3;
+  return [4.0767416621 * l - 3.3077115913 * m + .2309699292 * s, -1.2684380046 * l + 2.6097574011 * m - .3413193965 * s, -.0041960863 * l - .7034186147 * m + 1.707614701 * s];
+}
+const okHex = ok => "#" + okRgb(ok).map(v => gam(v).toString(16).padStart(2, "0")).join("").toUpperCase();
+const lchOf = ([L, a, b]) => { const C = Math.hypot(a, b); let h = Math.atan2(b, a) * 180 / Math.PI; if (h < 0) h += 360; return { L, C, h }; };
+const okD = (p, q) => Math.hypot(p[0] - q[0], p[1] - q[1], p[2] - q[2]);
+const hueD = (a, b) => { const d = Math.abs(a - b) % 360; return d > 180 ? 360 - d : d; };
+const warmth = ok => ok[1] * .5 + ok[2] * .866;              // a/b projected on the orange-yellow direction (60 deg)
+const inkOn = ok => ok[0] > .68 ? "rgba(20,19,17,.88)" : "rgba(255,255,255,.94)";
+// the "natural" lightness of each hue: OKLCH lightness of the most vivid sRGB color at that hue (yellow light, blue dark)
+const NAT_L = (() => {
+  const t = new Array(360).fill(null), P = [[1, 0, 0], [1, 1, 0], [0, 1, 0], [0, 1, 1], [0, 0, 1], [1, 0, 1], [1, 0, 0]];
+  for (let e = 0; e < 6; e++) for (let s = 0; s <= 400; s++) {
+    const u = s / 400, c = P[e].map((v, k) => (v + (P[e + 1][k] - v) * u) * 255), o = lchOf(rgbOk(...c));
+    t[Math.floor(o.h) % 360] = o.L;
+  }
+  for (let i = 0; i < 720; i++) if (t[i % 360] == null) t[i % 360] = t[(i + 359) % 360];
+  return t;
+})();
+
+// ---------------- names: nearest of the ~900 core names ----------------
+let NAMES = [];
+function nameOf(ok) {
+  let best = null, bd = 1e9;
+  for (const n of NAMES) { const d = okD(ok, n.ok); if (d < bd) { bd = d; best = n; } }
+  return best ? { n: best.n, match: clamp(1 - bd / .25, 0, 1) } : { n: "", match: 0 };
+}
+const slugOf = s => String(s).normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+const colorURL = n => ROOT + "index.html#/color/" + slugOf(n);
+
+// ---------------- families (the same OKLCH bins as design/ATLAS/mine.py) ----------------
+const FAMS = [["Reds", 10, 40], ["Oranges & browns", 40, 70], ["Ochres & olives", 70, 100], ["Yellows", 100, 125], ["Yellow-greens", 125, 145],
+  ["Greens", 145, 175], ["Teals", 175, 210], ["Blues", 210, 250], ["Deep blues", 250, 285], ["Violets", 285, 325], ["Pinks & crimsons", 325, 370]];
+const FAM_SHORT = ["Reds", "Browns", "Ochres", "Yellows", "Limes", "Greens", "Teals", "Blues", "Ultramarines", "Violets", "Pinks", "Darks", "Greys", "Pales"];
+function famOf(o) {   // o: {L, C, h}
+  if (o.C < .04) return o.L < .42 ? 11 : o.L < .72 ? 12 : 13;
+  const h = o.h < 10 ? o.h + 360 : o.h;
+  for (let i = 0; i < FAMS.length; i++) if (h >= FAMS[i][1] && h < FAMS[i][2]) return i;
+  return 0;
+}
+
+// ---------------- data ----------------
+const PAINTERS = { vg: { slug: "vincent-van-gogh", short: "Van Gogh", his: "his",
+    periods: [["Holland", 1880, 1885], ["Paris", 1886, 1887], ["Arles to Auvers", 1888, 1890]] },
+  mo: { slug: "claude-monet", short: "Monet", his: "his",
+    periods: [["To 1879", 1860, 1879], ["1880s", 1880, 1889], ["The series", 1890, 1899], ["From 1900", 1900, 1926]] } };
+const D = { gal: null, years: null, shards: new Map(), meta: null, find: null };
+const J = p => fetch(ROOT + p).then(r => { if (!r.ok) throw new Error(p + " " + r.status); return r.json(); });
+function shard(k) {
+  if (!D.shards.has(k)) D.shards.set(k, J(`data/gallery/d/${String(k).padStart(3, "0")}.json`));
+  return D.shards.get(k);
+}
+function decodePool(b64) {
+  if (!b64) return [];
+  const bin = atob(b64), out = [];
+  let tot = 0;
+  for (let i = 0; i + 3 < bin.length; i += 4) { const s = bin.charCodeAt(i + 3) / 250; tot += s; out.push({ rgb: [bin.charCodeAt(i), bin.charCodeAt(i + 1), bin.charCodeAt(i + 2)], share: s }); }
+  return out.map(p => { const ok = rgbOk(...p.rgb); return { ok, hex: okHex(ok), share: p.share / (tot || 1), ...lchOf(ok) }; }).sort((a, b) => b.share - a.share);
+}
+const imgURL = p => !p ? "" : /^img\//.test(p) ? ROOT + p : p.replace(/\/full\/400\/?/, "/full/!600,600/").replace(/\/full\/400,\//, "/full/600,/");
+async function loadPainter(key) {
+  const P = PAINTERS[key];
+  if (P.works) return P;
+  const [px, meta] = [await J(`data/artists/p/${P.slug}.json`), D.meta.a[P.slug] || {}];
+  P.name = meta.n || P.short; P.b = meta.b; P.d = meta.d;
+  const rows = await Promise.all(px.ix.map(i => shard(Math.floor(i / 100)).then(s => [i, s[i % 100]])));
+  const works = [], out = [];
+  for (const [gi, r] of rows) {
+    const y = D.years[gi];
+    const w = { gi, id: r[0], t: r[1] || "Untitled", y, img: r[5], local: /^img\//.test(r[5] || ""), pool: decodePool(r[10]) };
+    if (!w.pool.length) continue;
+    // a work dated before the painter was 12, or after his death, is a cataloguing slip: set aside and said so
+    if (y == null || (P.b && y < P.b + 12) || (P.d && y > P.d + 1)) { out.push(w); continue; }
+    works.push(w);
+  }
+  works.sort((a, b) => a.y - b.y || a.gi - b.gi);
+  works.forEach((w, i) => { w.idx = i; w.mean = meanOk(w.pool); w.f = feat(w.pool); });
+  P.works = works; P.out = out; P.y0 = works[0].y; P.y1 = works[works.length - 1].y;
+  return P;
+}
+function meanOk(pool) { const m = [0, 0, 0]; pool.forEach(p => { for (let k = 0; k < 3; k++) m[k] += p.ok[k] * p.share; }); return m; }
+
+// ---------------- dynamic palette (port of js/gallery.js glPoolPick), then shares re-assigned honestly ----------------
+function poolPick(pool, k) {
+  if (k >= pool.length) return pool.map(p => ({ ...p }));
+  const picked = [], left = pool.slice();
+  while (picked.length < k && left.length) {
+    let bi = 0, bs = -1;
+    left.forEach((g, i) => {
+      const near = picked.length ? Math.min(...picked.map(p => okD(p.ok, g.ok))) : 1;
+      const s = Math.pow(g.share, .6) * (.5 + 3 * g.C) * Math.pow(Math.min(1, near / .14), 1.5);
+      if (s > bs) { bs = s; bi = i; }
+    });
+    picked.push(left.splice(bi, 1)[0]);
+  }
+  // every pool color joins its nearest picked note, so shares still add up to the whole canvas
+  const notes = picked.map(p => ({ ...p, share: 0 }));
+  pool.forEach(p => { let bi = 0, bd = 9; notes.forEach((n, i) => { const d = okD(n.ok, p.ok); if (d < bd) { bd = d; bi = i; } }); notes[bi].share += p.share; });
+  return notes.sort((a, b) => b.share - a.share);
+}
+
+// ---------------- features (same as mine.py) for fingerprint and "least like himself" ----------------
+function gini(xs) { const x = xs.slice().sort((a, b) => a - b), n = x.length, s = x.reduce((a, b) => a + b, 0); let t = 0; x.forEach((v, i) => t += (2 * (i + 1) - n - 1) * v); return s ? t / (n * s) : 0; }
+function feat(pool) {
+  const Lh = new Array(7).fill(0), Le = [0, .3, .4, .5, .6, .7, .8, 1.01], Hh = new Array(8).fill(0);
+  let cw = 0, mc = 0, ml = 0, warm = 0;
+  pool.forEach(p => {
+    for (let k = 0; k < 7; k++) if (p.L >= Le[k] && p.L < Le[k + 1]) Lh[k] += p.share;
+    const w = p.share * Math.min(p.C, .2); Hh[Math.floor(p.h / 45) % 8] += w; cw += w;
+    mc += p.share * p.C; ml += p.share * p.L; if (warmth(p.ok) > .01) warm += p.share;
+  });
+  const sc = Math.min(1, mc / .06);
+  return [...Lh, ...Hh.map(v => v / (cw || 1) * sc), mc * 10, ml, warm, gini(pool.map(p => p.share))];
+}
+
+// ---------------- career colors: weighted k-means in OKLab over every pool color of every work ----------------
+function careerColors(works, K) {
+  const atoms = [];
+  works.forEach(w => w.pool.forEach(p => atoms.push({ ok: p.ok, w: p.share / works.length, wi: w.idx, y: w.y })));
+  const sc = [1, 1.35, 1.35];                                // hue differences count a little more than lightness ones
+  const dist = (p, q) => Math.hypot((p[0] - q[0]) * sc[0], (p[1] - q[1]) * sc[1], (p[2] - q[2]) * sc[2]);
+  K = Math.min(K, atoms.length);
+  const cents = [atoms.reduce((a, b) => b.w > a.w ? b : a).ok.slice()], dmin = atoms.map(a => dist(a.ok, cents[0]));
+  while (cents.length < K) {
+    let bi = 0, bs = -1; atoms.forEach((a, i) => { const s = a.w * dmin[i] * dmin[i]; if (s > bs) { bs = s; bi = i; } });
+    cents.push(atoms[bi].ok.slice()); atoms.forEach((a, i) => { dmin[i] = Math.min(dmin[i], dist(a.ok, cents[cents.length - 1])); });
+  }
+  const as = new Int16Array(atoms.length);
+  for (let it = 0; it < 16; it++) {
+    atoms.forEach((a, i) => { let bi = 0, bd = 9; cents.forEach((c, k) => { const d = dist(a.ok, c); if (d < bd) { bd = d; bi = k; } }); as[i] = bi; });
+    const acc = cents.map(() => [0, 0, 0, 0]);
+    atoms.forEach((a, i) => { const c = acc[as[i]]; c[0] += a.ok[0] * a.w; c[1] += a.ok[1] * a.w; c[2] += a.ok[2] * a.w; c[3] += a.w; });
+    acc.forEach((c, k) => { if (c[3] > 0) cents[k] = [c[0] / c[3], c[1] / c[3], c[2] / c[3]]; });
+  }
+  const cl = cents.map((ok, k) => ({ k, ok, w: 0, by: new Map(), yS: 0 }));
+  atoms.forEach((a, i) => { const c = cl[as[i]]; c.w += a.w; c.by.set(a.wi, (c.by.get(a.wi) || 0) + a.w * works.length); c.yS += a.w * a.y; });
+  return cl.filter(c => c.w > 0).map(c => {
+    const o = lchOf(c.ok), nm = nameOf(c.ok), inW = [...c.by].filter(([, s]) => s >= .01);
+    const ys = inW.map(([wi]) => works.find(w => w.idx === wi).y).sort((a, b) => a - b);
+    return { ...c, ...o, hex: okHex(c.ok), name: nm.n, match: nm.match, yMean: c.yS / c.w, present: inW.length, ys, fam: famOf(o) };
+  }).sort((a, b) => b.w - a.w);
+}
+
+// ---------------- bubble packing (the honeycomb's "neighbors are relatives" rule, with sizes that mean area) ----------------
+function pack(nodes, W, H, iters = 280) {
+  for (let it = 0; it < iters; it++) {
+    const k = .015 + .08 * (1 - it / iters);
+    for (const n of nodes) { n.x += (n.tx - n.x) * k; n.y += (n.ty - n.y) * k; }
+    for (let i = 0; i < nodes.length; i++) for (let j = i + 1; j < nodes.length; j++) {
+      const a = nodes[i], b = nodes[j], dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || .01, m = a.r + b.r + 2.5;
+      if (d < m) { const o = m - d, wa = b.r * b.r / (a.r * a.r + b.r * b.r), ux = dx / d, uy = dy / d; a.x -= ux * o * wa; a.y -= uy * o * wa; b.x += ux * o * (1 - wa); b.y += uy * o * (1 - wa); }
+    }
+    for (const n of nodes) { n.x = clamp(n.x, n.r + 1, W - n.r - 1); n.y = clamp(n.y, n.r + 1, H - n.r - 1); }
+  }
+  return nodes;
+}
+// the angle a color takes on a wheel: its hue, yellow at the top; a grey goes by lightness (pale at the top, dark below),
+// on the side nearer its own faint hue, so greys meet the hues of their own lightness (js/honey.js honeyAngleOf)
+function wheelAngle(c) {
+  const hueA = ((c.h - 105) * Math.PI / 180) - Math.PI / 2;
+  if (c.C >= .045) return hueA;
+  const side = Math.cos(hueA) >= 0 ? 1 : -1, la = -Math.PI / 2 + side * (1 - clamp((c.L - .15) / .8, 0, 1)) * Math.PI;
+  const w = clamp((c.C - .015) / .03, 0, 1);
+  return Math.atan2(w * Math.sin(hueA) + (1 - w) * Math.sin(la), w * Math.cos(hueA) + (1 - w) * Math.cos(la));
+}
+const ARR = {
+  used: { t: "Most used", lede: "most used in the middle, hue going round" },
+  time: { t: "Time", lede: "earliest in the middle, latest at the edge" },
+  hue: { t: "Hue map", lede: "hue across, light to dark down" },
+  warm: { t: "Warm–cool", lede: "warm left, cool right, light to dark down" },
+  light: { t: "Light", lede: "lightest in the middle, darkest at the edge" },
+};
+function targets(cl, arr, W, H, P) {
+  const cx = W / 2, cy = H / 2, R = Math.min(W, H) / 2 - 18;
+  const Ls = cl.map(c => c.L), Lmin = Math.min(...Ls), Lmax = Math.max(...Ls);
+  const ln = L => (L - Lmin) / ((Lmax - Lmin) || 1);
+  if (arr === "used") { const by = cl.slice().sort((a, b) => b.w - a.w); by.forEach((c, i) => { const r = R * Math.sqrt((i + .5) / by.length), a = wheelAngle(c); c.tx = cx + r * Math.cos(a); c.ty = cy + r * Math.sin(a); }); }
+  if (arr === "light") cl.forEach(c => { const r = R * (1 - ln(c.L)) * .95 + 8, a = wheelAngle(c); c.tx = cx + r * Math.cos(a); c.ty = cy + r * Math.sin(a); });
+  if (arr === "time") cl.forEach(c => { const r = R * clamp((c.yMean - P.ya) / ((P.yb - P.ya) || 1), 0, 1) * .96 + 6, a = wheelAngle(c); c.tx = cx + r * Math.cos(a); c.ty = cy + r * Math.sin(a); });
+  if (arr === "hue") cl.forEach(c => {
+    const x = c.C < .04 ? .05 + .08 * (((c.h + 360) % 360) / 360) : .16 + .82 * (((c.h - 20 + 360) % 360) / 360);
+    c.tx = 14 + x * (W - 28); c.ty = 16 + (1 - ln(c.L)) * (H - 32);
+  });
+  if (arr === "warm") { const ws = cl.map(c => warmth(c.ok)), m = Math.max(.02, ...ws.map(Math.abs)); cl.forEach((c, i) => { c.tx = cx - (ws[i] / m) * (W / 2 - 24); c.ty = 16 + (1 - ln(c.L)) * (H - 32); }); }
+}
+
+// ---------------- chords: statistically detected relationships inside one painting (ATLAS.md section 3) ----------------
+const CHORDS = [
+  ["comp", "Opposites", "Two hues 150–210° apart on the OKLCH wheel, each at least 2% of the canvas."],
+  ["equal", "Equal-light pair", "Two clearly different hues at almost the same lightness (within 4 points): the edge between them shimmers."],
+  ["split", "Split opposites", "One hue with two partners either side of its opposite."],
+  ["triad", "Triad", "Three hues spaced roughly evenly round the wheel."],
+  ["run", "Analogous run", "Three or more neighbouring hues, each within 25° of the next, spanning under 75°."],
+  ["ladder", "Value ladder", "Four or more notes of one hue (or of grey) stepping evenly from light to dark."],
+  ["tint", "One hue, many strengths", "Three or more notes of one hue at similar lightness, from greyed to vivid."],
+  ["wc", "Warm against cool", "At least 12% of the canvas warm and 12% cool."],
+  ["solo", "Solo accent", "One vivid note, under 6% of the canvas, at least twice the canvas's average vividness, on a mostly muted field."],
+  ["tonal", "Tonal", "Three quarters of the canvas near-grey: the harmony lives in warm and cool greys."],
+  ["chiaro", "Light against dark", "A fifth of the canvas in deep darks and an eighth in lights, with little between."],
+  ["discord", "Discord", "A hue that is naturally lighter painted darker than a naturally darker one (yellow below blue): the classic reversed order."],
+];
+const quant = (xs, q) => { const a = xs.slice().sort((x, y) => x - y); return a[Math.min(a.length - 1, Math.floor(q * a.length))]; };
+const CHORD_IDX = Object.fromEntries(CHORDS.map((c, i) => [c[0], i]));
+function detectChords(notes, adj) {
+  const out = [], N = notes.length, hued = (n, c = .05, s = .02) => n.C >= c && n.share >= s;
+  const touch = (i, j) => adj ? adj[i][j] : null;
+  const nm = i => notes[i].nm;
+  const add = (type, idx, s, line) => out.push({ type, name: CHORDS[CHORD_IDX[type]][1], idx, s: clamp(s, 0, 1), line });
+  const meanC = notes.reduce((t, n) => t + n.C * n.share, 0), meanL = notes.reduce((t, n) => t + n.L * n.share, 0);
+  // opposites and equal-light pairs
+  let best = null;
+  for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
+    const a = notes[i], b = notes[j]; if (!hued(a) || !hued(b)) continue;
+    const dh = hueD(a.h, b.h);
+    if (dh >= 150) {
+      const s = Math.pow(Math.min(a.C, b.C) / .12, .7) * Math.pow(Math.min(a.share, b.share) / .06, .35) * (1 - Math.abs(dh - 180) / 60);
+      if (!best || s > best.s) best = { i, j, s, dh };
+    }
+  }
+  if (best) {
+    const a = notes[best.i], b = notes[best.j], big = a.share >= b.share ? a : b, sm = big === a ? b : a, t = touch(best.i, best.j);
+    add("comp", [best.i, best.j], best.s, `${big.nm} against ${sm.nm}, ${Math.round(best.dh)}° apart, ${(big.share / sm.share).toFixed(1)} to 1 by area${t != null ? `; they touch ${t.toFixed(1)}× ${t >= 1 ? "more" : "less"} than chance` : ""}.`);
+  }
+  let eq = null;
+  for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
+    const a = notes[i], b = notes[j]; if (!hued(a, .06, .015) || !hued(b, .06, .015)) continue;
+    const dh = hueD(a.h, b.h), dL = Math.abs(a.L - b.L);
+    if (dh >= 90 && dL <= .04) { const s = (1 - dL / .04) * .5 + Math.min(a.C, b.C) / .2 + Math.min(a.share, b.share) * 4; if (!eq || s > eq.s) eq = { i, j, s, dL }; }
+  }
+  if (eq) add("equal", [eq.i, eq.j], eq.s * .8, `${nm(eq.i)} and ${nm(eq.j)}: different hues, lightness within ${Math.round(eq.dL * 100)} points.`);
+  // split opposites
+  let sp = null;
+  for (let k = 0; k < N; k++) { const K = notes[k]; if (!hued(K, .05, .015)) continue;
+    for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) { if (i === k || j === k) continue;
+      const a = notes[i], b = notes[j]; if (!hued(a, .05, .015) || !hued(b, .05, .015)) continue;
+      const da = hueD(K.h, a.h), db = hueD(K.h, b.h), dab = hueD(a.h, b.h);
+      if (da >= 120 && da <= 175 && db >= 120 && db <= 175 && dab >= 20 && dab <= 110) { const s = Math.min(K.C, a.C, b.C) / .09 * Math.pow(Math.min(K.share, a.share, b.share) / .04, .35); if (!sp || s > sp.s) sp = { idx: [k, i, j], s }; }
+    } }
+  if (sp) add("split", sp.idx, sp.s * .9, `${nm(sp.idx[0])} with ${nm(sp.idx[1])} and ${nm(sp.idx[2])} either side of its opposite.`);
+  // triad
+  let tr = null;
+  for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) for (let k = j + 1; k < N; k++) {
+    const t = [notes[i], notes[j], notes[k]]; if (!t.every(n => hued(n, .05, .015))) continue;
+    const g = [hueD(t[0].h, t[1].h), hueD(t[1].h, t[2].h), hueD(t[0].h, t[2].h)];
+    if (g.every(x => x >= 85)) { const s = Math.min(...t.map(n => n.C)) / .09 * Math.pow(Math.min(...t.map(n => n.share)) / .04, .35); if (!tr || s > tr.s) tr = { idx: [i, j, k], s }; }
+  }
+  if (tr) add("triad", tr.idx, tr.s * .85, `${tr.idx.map(nm).join(", ")}: three hues spaced round the wheel.`);
+  // analogous run
+  const hs = notes.map((n, i) => ({ n, i })).filter(o => o.n.C >= .04 && o.n.share >= .01).sort((a, b) => a.n.h - b.n.h);
+  let run = null;
+  for (let s = 0; s < hs.length; s++) { const cur = [hs[s]];
+    for (let t = 1; t < hs.length; t++) { const nx = hs[(s + t) % hs.length], pv = cur[cur.length - 1];
+      if (hueD(nx.n.h, pv.n.h) <= 25 && hueD(nx.n.h, cur[0].n.h) <= 75 && !cur.includes(nx)) cur.push(nx); else break; }
+    if (cur.length >= 3) { const area = cur.reduce((t, o) => t + o.n.share, 0); const sc = Math.min(1, area / .5) * .7 + Math.min(cur.length, 6) / 6 * .3;
+      if (!run || sc > run.s) run = { idx: cur.map(o => o.i), s: sc, area }; } }
+  if (run) add("run", run.idx, run.s, `${run.idx.length} neighbouring hues from ${nm(run.idx[0])} to ${nm(run.idx[run.idx.length - 1])}, ${pct(run.area)} of the canvas.`);
+  // value ladder: one hue band (40 deg window) or the greys, >= 4 notes, wide and fairly even steps
+  let lad = null;
+  const groups = [notes.map((n, i) => i).filter(i => notes[i].C < .04)];
+  for (let h0 = 0; h0 < 360; h0 += 20) groups.push(notes.map((n, i) => i).filter(i => notes[i].C >= .03 && hueD(notes[i].h, h0 + 20) <= 20));
+  groups.forEach(g => { if (g.length < 4) return; const s = g.slice().sort((a, b) => notes[b].L - notes[a].L), Lv = s.map(i => notes[i].L), span = Lv[0] - Lv[Lv.length - 1];
+    const gaps = Lv.slice(1).map((v, k) => Lv[k] - v), mg = span / gaps.length, even = Math.max(...gaps) <= 2.4 * mg;
+    if (span >= .32 && even) { const sc = Math.min(1, span / .6) * .6 + Math.min(s.length, 7) / 7 * .4; if (!lad || sc > lad.s) lad = { idx: s, s: sc, span }; } });
+  if (lad) add("ladder", lad.idx, lad.s, `${lad.idx.length} steps of one ${notes[lad.idx[0]].C < .04 && notes[lad.idx[1]].C < .04 ? "grey" : "hue"}, from ${nm(lad.idx[0])} down to ${nm(lad.idx[lad.idx.length - 1])}.`);
+  // one hue at many strengths
+  let tint = null;
+  for (let h0 = 0; h0 < 360; h0 += 15) { const g = notes.map((n, i) => i).filter(i => notes[i].C >= .015 && hueD(notes[i].h, h0) <= 13);
+    if (g.length < 3) continue; const Ls = g.map(i => notes[i].L), Cs = g.map(i => notes[i].C);
+    if (Math.max(...Ls) - Math.min(...Ls) <= .16 && Math.max(...Cs) >= .07 && Math.max(...Cs) / Math.min(...Cs) >= 2.5) {
+      const s = Math.min(1, Math.max(...Cs) / .14) * .6 + Math.min(g.length, 5) / 5 * .4; if (!tint || s > tint.s) tint = { idx: g.sort((a, b) => notes[a].C - notes[b].C), s }; } }
+  if (tint) add("tint", tint.idx, tint.s * .9, `One hue at ${tint.idx.length} strengths, from ${nm(tint.idx[0])} to ${nm(tint.idx[tint.idx.length - 1])}.`);
+  // warm against cool
+  let wA = 0, cA = 0; const wi = [], ci = [];
+  notes.forEach((n, i) => { if (n.C < .035) return; const w = warmth(n.ok); if (w > .02) { wA += n.share; wi.push(i); } else if (w < -.02) { cA += n.share; ci.push(i); } });
+  if (wA >= .12 && cA >= .12) { const top = a => a.sort((x, y) => notes[y].share - notes[x].share).slice(0, 2); add("wc", [...top(wi), ...top(ci)], Math.min(wA, cA) / Math.max(wA, cA) * .7 + Math.min(1, (wA + cA) / .8) * .3, `${pct(wA)} of the canvas warm against ${pct(cA)} cool.`); }
+  // solo accent
+  const muted = notes.reduce((t, n) => t + (n.C < .05 ? n.share : 0), 0);
+  let solo = null;
+  notes.forEach((n, i) => { if (n.C >= .09 && n.C >= 2.2 * meanC && n.share <= .06 && n.share >= .004 && muted >= .55) { const s = Math.min(1, n.C / meanC / 5) * .7 + muted * .3; if (!solo || s > solo.s) solo = { i, s }; } });
+  if (solo) add("solo", [solo.i], solo.s, `${nm(solo.i)} is ${(notes[solo.i].C / meanC).toFixed(1)}× as vivid as the canvas, on ${pct(notes[solo.i].share, 1)} of it.`);
+  // tonal
+  const grey = notes.reduce((t, n) => t + (n.C < .045 ? n.share : 0), 0);
+  if (grey >= .75) { const g = notes.map((n, i) => i).filter(i => notes[i].C < .045), ww = g.reduce((t, i) => t + (warmth(notes[i].ok) > 0 ? notes[i].share : 0), 0);
+    add("tonal", g.slice(0, 5), (grey - .75) / .25 * .6 + .4, `${pct(grey)} of the canvas is near-grey; ${pct(ww / grey)} of that leans warm.`); }
+  // light against dark
+  const dk = notes.reduce((t, n) => t + (n.L < .32 ? n.share : 0), 0), lt = notes.reduce((t, n) => t + (n.L > .68 ? n.share : 0), 0), mid = notes.reduce((t, n) => t + (n.L > .42 && n.L < .58 ? n.share : 0), 0);
+  if (dk >= .2 && lt >= .12 && mid <= .35) { const ids = notes.map((n, i) => i).filter(i => notes[i].L < .32 || notes[i].L > .68).sort((a, b) => notes[a].L - notes[b].L);
+    add("chiaro", [ids[0], ids[ids.length - 1]], Math.min(1, (dk + lt) / .8) * (1 - mid), `${pct(dk)} deep darks against ${pct(lt)} lights, ${pct(mid)} in the middle values.`); }
+  // discord: natural lightness order reversed
+  let dis = null;
+  for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) { if (i === j) continue; const a = notes[i], b = notes[j];
+    if (!hued(a, .06, .015) || !hued(b, .06, .015) || hueD(a.h, b.h) < 60) continue;
+    const nat = NAT_L[Math.floor(a.h) % 360] - NAT_L[Math.floor(b.h) % 360];       // a is naturally lighter by nat
+    if (nat >= .12 && b.L - a.L >= .08) { const s = Math.min(1, (b.L - a.L) / .25) * .5 + Math.min(1, nat / .4) * .2 + Math.min(a.C, b.C) / .2; if (!dis || s > dis.s) dis = { i, j, s }; } }
+  if (dis) add("discord", [dis.i, dis.j], dis.s * .8, `${nm(dis.i)} is painted darker than ${nm(dis.j)}, the reverse of their natural order.`);
+  return out.sort((a, b) => b.s - a.s);
+}
+// voices: who carries the painting
+function voices(notes) {
+  const meanL = notes.reduce((t, n) => t + n.L * n.share, 0);
+  const ground = 0;
+  const bass = notes.map((n, i) => i).filter(i => notes[i].share >= .04).sort((a, b) => notes[a].L - notes[b].L)[0];
+  const light = notes.map((n, i) => i).filter(i => notes[i].share >= .02).sort((a, b) => notes[b].L - notes[a].L)[0];
+  const lead = notes.map((n, i) => i).filter(i => i !== ground).sort((a, b) => { const f = n => n.C * Math.abs(n.L - meanL) * Math.pow(n.share, .25) + n.C * .05; return f(notes[b]) - f(notes[a]); })[0];
+  return [["Ground", ground, "the largest area"], ["Bass", bass, "the darkest big note"], ["Light", light, "the lightest note"], ["Lead", lead, "where the eye lands"]];
+}
+
+// ---------------- pixels: the painting at screen size (for the dance and the mosaic) and small (for statistics) ----------------
+const PIX = new Map();
+const bigURL = p => !p ? "" : /^img\//.test(p) ? ROOT + p : p.replace(/\/full\/400,\//, "/full/843,/").replace(/\/full\/400$/, "/full/843,/0/default.jpg").replace(/width=\d+/, "width=900");
+function loadPixels(w, Wd) {
+  const key = w.id + "|" + Wd;
+  if (PIX.has(key)) return PIX.get(key);
+  const p = new Promise(res => {
+    const im = new Image(); im.crossOrigin = "anonymous";
+    let done = false; const fin = v => { if (!done) { done = true; res(v); } };
+    setTimeout(() => fin(null), 12000);
+    im.onload = () => { try {
+      const ar = im.naturalHeight / im.naturalWidth, grab = (W) => { const H = Math.round(W * ar), cv = document.createElement("canvas"); cv.width = W; cv.height = H; const cx = cv.getContext("2d"); cx.imageSmoothingQuality = "high"; cx.drawImage(im, 0, 0, W, H); return { W, H, d: cx.getImageData(0, 0, W, H).data }; };
+      const toOk = g => { const n = g.W * g.H, ok = new Float32Array(n * 3); for (let i = 0; i < n; i++) { const o = rgbOk(g.d[i * 4], g.d[i * 4 + 1], g.d[i * 4 + 2]); ok[i * 3] = o[0]; ok[i * 3 + 1] = o[1]; ok[i * 3 + 2] = o[2]; } return ok; };
+      // screen buffer: about one pixel per CSS pixel, capped near a quarter million
+      let Ws = Math.min(Wd, im.naturalWidth); if (Ws * Ws * ar > 260000) Ws = Math.floor(Math.sqrt(260000 / ar));
+      const scr = grab(Ws), ana = grab(Math.min(150, im.naturalWidth));
+      fin({ ar, src: im.src, scr: { ...scr, ok: toOk(scr) }, ana: { ...ana, ok: toOk(ana) } });
+    } catch (e) { fin(null); } };
+    im.onerror = () => fin(null);
+    im.src = bigURL(w.img);
+  });
+  PIX.set(key, p); return p;
+}
+function labelPixels(px, notes) {
+  const n = px.W * px.H, lab = new Uint8Array(n), cnt = new Array(notes.length).fill(0);
+  for (let i = 0; i < n; i++) { let bi = 0, bd = 9; for (let k = 0; k < notes.length; k++) { const o = notes[k].ok, d = (px.ok[i * 3] - o[0]) ** 2 + (px.ok[i * 3 + 1] - o[1]) ** 2 + (px.ok[i * 3 + 2] - o[2]) ** 2; if (d < bd) { bd = d; bi = k; } } lab[i] = bi; cnt[bi]++; }
+  const K = notes.length, A = Array.from({ length: K }, () => new Array(K).fill(0)); let T = 0;
+  for (let y = 0; y < px.H; y++) for (let x = 0; x < px.W; x++) { const i = y * px.W + x;
+    if (x + 1 < px.W) { const j = lab[i + 1]; A[lab[i]][j]++; A[j][lab[i]]++; T += 2; }
+    if (y + 1 < px.H) { const j = lab[i + px.W]; A[lab[i]][j]++; A[j][lab[i]]++; T += 2; } }
+  const p = cnt.map(c => c / n), lift = A.map((r, i) => r.map((v, j) => i === j ? 1 : (T * p[i] * p[j] > 0 ? v / (T * p[i] * p[j]) : 0)));
+  return { lab, lift, p, A };
+}
+// soft membership of every screen pixel in every note (a softmax over OKLab distance): the dance's masks are sums of these
+function softMembership(scr, notes) {
+  const n = scr.W * scr.H, K = notes.length, E = notes.map(() => new Float32Array(n)), tau = .0022;
+  for (let i = 0; i < n; i++) { let z = 0; const L = scr.ok[i * 3], a = scr.ok[i * 3 + 1], b = scr.ok[i * 3 + 2];
+    for (let k = 0; k < K; k++) { const o = notes[k].ok, d = (L - o[0]) ** 2 + (a - o[1]) ** 2 + (b - o[2]) ** 2, e = Math.exp(-d / tau) + 1e-9; E[k][i] = e; z += e; }
+    for (let k = 0; k < K; k++) E[k][i] /= z; }
+  return E;
+}
+// the geometry of color: where each note lives (centroid, spread, principal axis) and which way its edges run
+function geometry(ana, lp, notes) {
+  const { W, H, ok } = ana, n = W * H, L = new Float32Array(n); for (let i = 0; i < n; i++) L[i] = ok[i * 3];
+  const out = notes.map(() => ({ sx: 0, sy: 0, sxx: 0, syy: 0, sxy: 0, c: 0, rose: new Float32Array(12), c2: 0, s2: 0, wsum: 0 }));
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const i = y * W + x, g = out[lp.lab[i]], u = x, v = y;
+    g.sx += u; g.sy += v; g.sxx += u * u; g.syy += v * v; g.sxy += u * v; g.c++;
+    if (x > 0 && y > 0 && x < W - 1 && y < H - 1) {
+      const gx = (L[i - W + 1] + 2 * L[i + 1] + L[i + W + 1]) - (L[i - W - 1] + 2 * L[i - 1] + L[i + W - 1]);
+      const gy = (L[i + W - 1] + 2 * L[i + W] + L[i + W + 1]) - (L[i - W - 1] + 2 * L[i - W] + L[i - W + 1]);
+      const m = Math.hypot(gx, gy); if (m < .02) continue;
+      let phi = Math.atan2(-gy, gx) * 180 / Math.PI + 90; phi = ((phi % 180) + 180) % 180;      // along the edge, 0 = horizontal, 90 = vertical
+      g.rose[Math.floor(phi / 15) % 12] += m; g.c2 += m * Math.cos(2 * phi * Math.PI / 180); g.s2 += m * Math.sin(2 * phi * Math.PI / 180); g.wsum += m;
+    }
+  }
+  return out.map((g, k) => {
+    if (!g.c) return null;
+    const mx = g.sx / g.c, my = g.sy / g.c, cxx = g.sxx / g.c - mx * mx, cyy = g.syy / g.c - my * my, cxy = g.sxy / g.c - mx * my;
+    const tr = cxx + cyy, det = cxx * cyy - cxy * cxy, l1 = tr / 2 + Math.sqrt(Math.max(0, tr * tr / 4 - det)), l2 = Math.max(0, tr - l1);
+    const ang = .5 * Math.atan2(2 * cxy, cxx - cyy);   // radians, image coords (y down)
+    let dir = .5 * Math.atan2(g.s2, g.c2) * 180 / Math.PI; if (dir < 0) dir += 180;
+    return { k, share: g.c / n, mx: mx / W, my: my / H, l1, l2, ang, rose: Array.from(g.rose), dir, coh: g.wsum ? Math.hypot(g.c2, g.s2) / g.wsum : 0 };
+  });
+}
+
+// ---------------- state (a hash like #v=career&who=vg&arr=time&k=40&y=1888-1890 reproduces any screen) ----------------
+const S = { v: "career", who: "vg", arr: "used", k: 36, y: null, sel: null, rm: "paint", pk: 8, sort: "hue", cm: "fly", grain: 5, same: 0, pid: "nga-106382", nk: 9, pair: [], chord: -1, lay: "wheel", map: 0, t: null, win: 0, pm: "dance", dens: 34, sorted: 0, step: null };
+(function readHash() {
+  const h = new URLSearchParams(location.hash.slice(1));
+  const NUM = new Set(["k", "pk", "grain", "same", "nk", "chord", "map", "t", "win", "dens", "sorted", "step", "sel"]);
+  for (const [k, v] of h) { if (k === "y") S.y = v.split("-").map(Number); else if (k === "pair") S.pair = v.split(",").filter(Boolean).map(Number); else if (k in S) S[k] = NUM.has(k) ? +v : v; }
+})();
+function writeHash() {
+  const o = { v: S.v, who: S.who };
+  if (S.v === "career") { Object.assign(o, { arr: S.arr, k: S.k, win: S.win }); if (S.t != null) o.t = S.t.toFixed(1); }
+  if (S.y && (S.v === "years" || S.v === "chords")) o.y = S.y.join("-");
+  if (S.v === "years") Object.assign(o, { rm: S.rm, pk: S.pk, sort: S.sort });
+  if (S.v === "compare") Object.assign(o, { cm: S.cm, grain: S.grain, same: S.same });
+  if (S.v === "painting") { Object.assign(o, { pid: S.pid, pm: S.pm, nk: S.nk }); if (S.pm === "mosaic") o.dens = S.dens; if (S.pair.length) o.pair = S.pair.join(","); if (S.sorted) o.sorted = 1; }
+  history.replaceState(null, "", "#" + new URLSearchParams(o).toString());
+}
+const VIEWS = [["career", "Career"], ["arc", "Arc"], ["years", "Years"], ["chords", "Chords"], ["compare", "Compare"], ["painting", "One painting"], ["art", "What art says"]];
+let P = null;   // the current painter
+const inRange = w => !S.y || (w.y >= S.y[0] && w.y <= S.y[1]);
+const period = () => S.y ? (S.y[0] === S.y[1] ? `${S.y[0]}` : `${S.y[0]}–${S.y[1]}`) : `${P.y0}–${P.y1}`;
+
+// ---------------- chrome ----------------
+function chrome() {
+  const v = S.v;
+  $("#kick").textContent = v === "compare" ? "Two painters, one map" : v === "art" ? "Harmony learned from art" : v === "painting" ? "One painting" : v === "arc" ? "A life in color" : "Color atlas";
+  const who = $("#who");
+  who.hidden = v === "compare" || v === "art";
+  who.innerHTML = Object.entries(PAINTERS).map(([k, p]) => `<button data-who="${k}" aria-pressed="${S.who === k}"><i style="background:${p.dot || "#555"}"></i>${p.short}</button>`).join("");
+  $("#views").innerHTML = VIEWS.map(([k, t]) => `<button data-view="${k}" aria-pressed="${v === k}">${t}</button>`).join("");
+  document.documentElement.style.setProperty("--c", P.dot || "#ECE8DF");
+}
+
+// ---------------- controls ----------------
+function seg(key, opts) { return `<div class="seg" role="group">${opts.map(([v, t]) => `<button data-set="${key}" data-val="${v}" aria-pressed="${String(S[key]) === String(v)}">${t}</button>`).join("")}</div>`; }
+function slider(key, min, max, label) {
+  const f = (S[key] - min) / (max - min);
+  return `<div class="row"><span class="k">${label}</span><div class="slider" data-slide="${key}" data-min="${min}" data-max="${max}"><div class="tr"></div><div class="fi" style="width:${f * 100}%"></div><div class="th" style="left:${f * 100}%"></div></div><span class="v" id="v-${key}">${S[key]}</span></div>`;
+}
+function yearRange() {
+  const ys = P.works.map(w => w.y), a = P.y0, b = P.y1, yy = S.y || [a, b], span = Math.max(1, b - a);
+  const per = []; for (let y = a; y <= b; y++) { const ws = P.works.filter(w => w.y === y); per.push({ y, n: ws.length, c: ws.length ? okHex(meanOk(ws.flatMap(w => w.pool.map(p => ({ ok: p.ok, share: p.share / ws.length }))))) : "#333" }); }
+  const mx = Math.max(...per.map(p => p.n));
+  const f0 = (yy[0] - a) / span, f1 = (yy[1] - a) / span;
+  return `<div class="row"><span class="k">Years</span><div class="slider range" data-range="1" data-min="${a}" data-max="${b}">
+    <div class="bars">${per.map(p => `<i class="${p.y >= yy[0] && p.y <= yy[1] ? "on" : ""}" style="height:${p.n ? 18 + 82 * p.n / mx : 6}%;background:${p.n ? p.c : "var(--s3)"}"></i>`).join("")}</div>
+    <div class="tr"></div><div class="fi" style="left:${f0 * 100}%;width:${(f1 - f0) * 100}%"></div><div class="th" data-t="0" style="left:${f0 * 100}%"></div><div class="th" data-t="1" style="left:${f1 * 100}%"></div></div>
+    <span class="v num" id="v-y">${yy[0] === a && yy[1] === b ? "All" : yy[0] === yy[1] ? yy[0] : `${String(yy[0]).slice(2)}–${String(yy[1]).slice(2)}`}</span></div>
+    <div class="row" style="min-height:40px"><span class="k"></span><div class="chips">${[["All", a, b], ...P.periods].map(([t, x, y]) => { const on = (!S.y && t === "All") || (S.y && S.y[0] === Math.max(x, a) && S.y[1] === Math.min(y, b)); return `<button class="chip" data-period="${Math.max(x, a)}-${Math.min(y, b)}" aria-pressed="${on}">${t}</button>`; }).join("")}</div></div>`;
+}
+function bindSliders(root) {
+  root.querySelectorAll(".slider").forEach(el => {
+    const min = +el.dataset.min, max = +el.dataset.max, range = !!el.dataset.range;
+    let which = 0, raf = 0;
+    const val = e => { const r = el.getBoundingClientRect(); return Math.round(min + clamp((e.clientX - r.left) / r.width, 0, 1) * (max - min)); };
+    const apply = v => {
+      if (range) { const cur = S.y ? S.y.slice() : [min, max]; cur[which] = v; if (cur[0] > cur[1]) { cur.reverse(); which = 1 - which; } S.y = cur[0] === min && cur[1] === max ? null : cur; S.sel = null; }
+      else { if (S[el.dataset.slide] === v) return; S[el.dataset.slide] = v; if (el.dataset.slide === "k") S.sel = null; if (el.dataset.slide === "nk") { S.pair = []; S.chord = -1; } }
+      cancelAnimationFrame(raf); raf = requestAnimationFrame(() => render(true));
+    };
+    el.addEventListener("pointerdown", e => {
+      el.setPointerCapture(e.pointerId); const v = val(e);
+      if (range) { const cur = S.y || [min, max]; which = Math.abs(v - cur[0]) <= Math.abs(v - cur[1]) ? 0 : 1; if (cur[0] === cur[1]) which = v < cur[0] ? 0 : 1; }
+      buzz(); apply(v);
+      const mv = ev => apply(val(ev)), up = () => { el.removeEventListener("pointermove", mv); el.removeEventListener("pointerup", up); writeHash(); };
+      el.addEventListener("pointermove", mv); el.addEventListener("pointerup", up);
+    });
+  });
+}
+
+// ================= VIEW 1: Career, with time as a slider =================
+// Colors are found once over the whole career (so a cell keeps its identity), placed by the arrangement, then sized by how
+// much of the surface they cover inside a moving window of years. Scrub or play: cells swell, shrink, appear when a color is
+// first used and fade when it's dropped; the relationships detected in each painting (opposites, warm against cool, a solo
+// accent on its field) are drawn as links between cells, thickening while they're in use.
+const WINS = [[0, "Whole career"], [1, "1 year"], [2, "2 years"], [4, "4 years"]];
+const EVENTS = {
+  vg: { src: "Van Gogh Museum, Amsterdam (biography)", ev: [[1885.9, "Leaves Nuenen"], [1886.2, "Paris"], [1888.15, "Arles"], [1888.98, "Crisis, hospital"], [1889.37, "Saint-Rémy asylum"], [1890.38, "Auvers"], [1890.57, "Dies"]] },
+  mo: { src: "Musée Marmottan Monet (biography); Marmor, Archives of Ophthalmology 2006 (the cataracts)", ev: [[1871.95, "Argenteuil"], [1879.7, "Camille dies"], [1883.3, "Giverny"], [1890.6, "Grainstacks series"], [1899.8, "London"], [1908.8, "Venice"], [1912.5, "Cataracts diagnosed"], [1923.5, "Cataract surgery"]] },
+};
+const LINK_CLS = { comp: "opp", equal: "opp", split: "opp", discord: "opp", wc: "wc", solo: "solo" };
+const LINK_DASH = { opp: "", wc: "7 6", solo: "1 6" };
+const LINK_NAME = { opp: "opposites", wc: "warm against cool", solo: "accent on its field" };
+let CAREER = null, FIELD = null, PLAY = null;
+const kern = (works, t, win) => { const sg = Math.max(.42, win / 2); return works.map(w => Math.exp(-((w.y - t) ** 2) / (2 * sg * sg))); };
+function careerModel() {
+  const W = Math.min(innerWidth, 520) - 32, H = Math.round(Math.min(W * 1.02, 440));
+  const key = `${S.who}|${S.k}|${S.arr}|${S.win}|${W}`;
+  if (CAREER && CAREER.key === key) return CAREER;
+  const works = P.works, cl = careerColors(works, S.k);
+  P.ya = P.y0; P.yb = P.y1;
+  cl.forEach(c => { c.sw = works.map(w => c.by.get(w.idx) || 0); });
+  // the biggest each cell gets in any window: packing for that size means no two cells ever overlap while scrubbing
+  const maxSh = cl.map(c => c.w);
+  if (S.win) for (let t = P.y0; t <= P.y1; t += .5) { const g = kern(works, t, S.win), G = g.reduce((a, b) => a + b, 0); cl.forEach((c, i) => { let s = 0; for (let k = 0; k < g.length; k++) s += g[k] * c.sw[k]; maxSh[i] = Math.max(maxSh[i], s / G); }); }
+  const s = Math.sqrt(.5 * W * H / Math.PI / maxSh.reduce((a, b) => a + b, 0));
+  cl.forEach((c, i) => { c.r = Math.max(4.5, s * Math.sqrt(maxSh[i])); });
+  targets(cl, S.arr, W, H, P); cl.forEach(c => { c.x = c.tx; c.y = c.ty; }); pack(cl, W, H);
+  // relationships per painting, each note mapped to its career cell
+  const sc = [1, 1.35, 1.35], dist = (p, q) => Math.hypot((p[0] - q[0]) * sc[0], (p[1] - q[1]) * sc[1], (p[2] - q[2]) * sc[2]);
+  const cellOf = ok => { let bi = 0, bd = 9; cl.forEach((c, i) => { const d = dist(ok, c.ok); if (d < bd) { bd = d; bi = i; } }); return bi; };
+  works.forEach(w => {
+    if (!w.n9) { w.n9 = poolPick(w.pool, 9); w.n9.forEach(n => n.nm = nameOf(n.ok).n); w.c9 = detectChords(w.n9, null); }
+    const L = [];
+    w.c9.forEach(ch => { const cls = LINK_CLS[ch.type]; if (!cls) return;
+      let prs = ch.type === "split" ? [[ch.idx[0], ch.idx[1]], [ch.idx[0], ch.idx[2]]] : ch.type === "wc" ? [[ch.idx[0], ch.idx[Math.min(2, ch.idx.length - 1)]]] : ch.type === "solo" ? [[ch.idx[0], 0]] : [[ch.idx[0], ch.idx[1]]];
+      prs.forEach(([i, j]) => { const a = cellOf(w.n9[i].ok), b = cellOf(w.n9[j].ok); if (a === b) return;
+        // a link is only drawn between cells that still show the relationship (the cell is an average of many notes)
+        const A = cl[a], B = cl[b]; if (cls === "opp" && (Math.min(A.C, B.C) < .035 || hueD(A.h, B.h) < 110)) return; if (cls === "wc" && Math.sign(warmth(A.ok)) === Math.sign(warmth(B.ok))) return;
+        L.push({ a: Math.min(a, b), b: Math.max(a, b), cls, s: ch.s }); }); });
+    w.links = L;
+  });
+  CAREER = { key, works, cl, W, H, s };
+  return CAREER;
+}
+function stateAt(M, t) {
+  const works = M.works, all = !S.win, g = all ? works.map(() => 1) : kern(works, t, S.win), G = g.reduce((a, b) => a + b, 0) || 1;
+  const sh = M.cl.map(c => { let s = 0; for (let k = 0; k < g.length; k++) s += g[k] * c.sw[k]; return s / G; });
+  const lk = new Map();
+  works.forEach((w, k) => { if (g[k] < .02) return; w.links.forEach(l => { const key = `${l.a}|${l.b}|${l.cls}`; lk.set(key, (lk.get(key) || 0) + g[k] * l.s); }); });
+  const links = [...lk].map(([key, v]) => { const [a, b, cls] = key.split("|"); return { a: +a, b: +b, cls, v: v / G }; }).filter(l => l.v >= (all ? .02 : .04)).sort((x, y) => y.v - x.v).slice(0, all ? 9 : 12);
+  const n = all ? works.length : works.filter((w, k) => g[k] > .5).length;
+  return { sh, links, n, g };
+}
+function labelLines(name, r) {
+  const cw = 6.3, fits = s => s.length * cw <= r * 2 - 12;
+  if (fits(name)) return [name];
+  const words = name.split(" ");
+  if (words.length >= 2 && r >= 30) { for (let k = 1; k < words.length; k++) { const a = words.slice(0, k).join(" "), b = words.slice(k).join(" "); if (fits(a) && fits(b)) return [a, b]; } }
+  return null;
+}
+function viewCareer(live) {
+  const M = careerModel(), { cl, W, H } = M;
+  if (S.t == null || S.t < P.y0 || S.t > P.y1) S.t = S.win ? P.y0 : null;
+  const ring = [];
+  if (S.arr === "time") { const R = Math.min(W, H) / 2 - 18, span = P.yb - P.ya, step = span > 30 ? 10 : span > 12 ? 4 : span > 5 ? 2 : 1;
+    for (let y = Math.ceil(P.ya / step) * step; y <= P.yb; y += step) { const r = R * (y - P.ya) / (span || 1) * .96 + 6; ring.push(`<circle class="guide" cx="${W / 2}" cy="${H / 2}" r="${r}"/><text class="axis" x="${W / 2 + r * .72 + 4}" y="${H / 2 - r * .72 - 4}">${y}</text>`); } }
+  if (S.arr === "hue" || S.arr === "warm") ring.push(`<text class="axis" x="0" y="${H + 16}">${S.arr === "hue" ? "greys" : "warm"}</text><text class="axis" x="${W}" y="${H + 16}" text-anchor="end">${S.arr === "hue" ? "hue →" : "cool"}</text>`);
+  const prev = FIELD && FIELD.k === cl.length && FIELD.key === `${S.who}|${S.k}|${S.win}` ? FIELD.pos : null;
+  FIELD = { k: cl.length, key: `${S.who}|${S.k}|${S.win}`, pos: cl.map(c => [c.x, c.y]) };
+  const bubbles = cl.map((c, i) => `<g class="bub" data-c="${i}" transform="translate(${c.x},${c.y})" ${prev ? `data-from="${prev[i][0]},${prev[i][1]}"` : ""}><circle class="b" r="${c.r}" fill="${c.hex}" ${c.L < .25 ? 'stroke="rgba(236,232,223,.16)"' : ""}/><circle class="ring" r="${c.r + 4}" fill="none" stroke="var(--ink)" stroke-width="2" style="display:none"/><text class="lbl" text-anchor="middle" fill="${inkOn(c.ok)}"></text><text class="lbl s" text-anchor="middle" fill="${inkOn(c.ok)}"></text></g>`).join("");
+  const sel = S.sel != null ? cl[S.sel] : null;
+  const legend = `<div class="legend"><span><svg width="26" height="8"><line x1="1" y1="4" x2="25" y2="4" stroke="var(--ink)" stroke-width="2"/></svg>opposites</span><span><svg width="26" height="8"><line x1="1" y1="4" x2="25" y2="4" stroke="var(--ink)" stroke-width="2" stroke-dasharray="7 6"/></svg>warm–cool</span><span><svg width="26" height="8"><line x1="2" y1="4" x2="25" y2="4" stroke="var(--ink)" stroke-width="2.4" stroke-dasharray="1 6" stroke-linecap="round"/></svg>accent</span></div>`;
+  const html = `<p class="lede" id="clede"></p>
+    <div class="stage"><svg class="field" id="cfield" width="${W}" height="${H + 22}" viewBox="0 0 ${W} ${H + 22}" role="img" aria-label="${esc(P.short)}'s colors, ${ARR[S.arr].lede}"><defs id="cdefs"></defs>${ring.join("")}<g id="clinks" style="pointer-events:none"></g><g id="cbubs">${bubbles}</g></svg></div>
+    ${legend}
+    ${sel ? readout(sel, M.works, 1) : `<p class="cap">${cl.length} colors found across ${M.works.length} paintings${P.out.length ? ` (${P.out.length} misdated work set aside)` : ""}, ${ARR[S.arr].lede}. Size is share of the painted surface${S.win ? " inside the window of years" : ""}; lines are relationships found inside the paintings. Tap a color to trace it.</p>`}`;
+  const evs = EVENTS[S.who].ev.filter(e => e[0] >= P.y0 - .5 && e[0] <= P.y1 + 1);
+  const span = P.y1 - P.y0 || 1, per = []; for (let y = P.y0; y <= P.y1; y++) { const ws = M.works.filter(w => w.y === y); per.push({ n: ws.length, c: ws.length ? okHex(meanOk(ws.flatMap(w => w.pool.map(p => ({ ok: p.ok, share: p.share / ws.length }))))) : "" }); }
+  const mx = Math.max(...per.map(p => p.n)), tf = S.t == null ? 1 : (S.t - P.y0) / span;
+  const dock = `<div class="row">${seg("arr", Object.entries(ARR).map(([k, a]) => [k, a.t]))}</div>
+    <div class="row"><button class="play" id="play" aria-label="Play through the years">${PLAY ? ICON_PAUSE : ICON_PLAY}</button>
+      <div class="slider tline" id="tline"><div class="bars">${per.map(p => `<i style="height:${p.n ? 20 + 80 * p.n / mx : 6}%;background:${p.n ? p.c : "var(--s3)"}"></i>`).join("")}</div>
+        ${evs.map(e => `<b class="ev" style="left:${clamp((e[0] - P.y0) / span, 0, 1) * 100}%" title="${esc(e[1])}"></b>`).join("")}
+        <div class="tr"></div><div class="fi" style="width:${tf * 100}%"></div><div class="th" style="left:${tf * 100}%"></div></div>
+      <span class="v num" id="v-t">${S.t == null ? "All" : Math.floor(S.t)}</span></div>
+    <div class="row"><span class="k">Window</span>${seg("win", WINS)}</div>
+    ${slider("k", 8, 72, "Colors")}`;
+  return { html, dock, after: () => {
+    paintCareer(S.t, live);
+    document.querySelectorAll("#cbubs .bub[data-from]").forEach(g => { const [ox, oy] = g.dataset.from.split(",").map(Number), c = cl[+g.dataset.c];
+      if (!live && Math.hypot(ox - c.x, oy - c.y) > 1) g.animate([{ transform: `translate(${ox}px,${oy}px)` }, { transform: `translate(${c.x}px,${c.y}px)` }], { duration: 560, easing: "cubic-bezier(.32,.72,0,1)" }); });
+    bindTimeline(M);
+  } };
+}
+const ICON_PLAY = `<svg width="18" height="18" viewBox="0 0 18 18"><path d="M5 3.2v11.6c0 .6.7 1 1.2.6l8.6-5.8a.7.7 0 0 0 0-1.2L6.2 2.6C5.7 2.2 5 2.6 5 3.2z" fill="currentColor"/></svg>`;
+const ICON_PAUSE = `<svg width="18" height="18" viewBox="0 0 18 18"><rect x="4" y="3" width="3.6" height="12" rx="1.2" fill="currentColor"/><rect x="10.4" y="3" width="3.6" height="12" rx="1.2" fill="currentColor"/></svg>`;
+function paintCareer(t, live) {
+  const M = CAREER, st = stateAt(M, t), { cl, s } = M;
+  const sel = S.sel != null ? cl[S.sel] : null;
+  document.querySelectorAll("#cbubs .bub").forEach(g => {
+    const i = +g.dataset.c, c = cl[i], r = st.sh[i] > 1e-4 ? Math.max(3, s * Math.sqrt(st.sh[i])) : 0;
+    const b = g.querySelector(".b"); b.setAttribute("r", r.toFixed(2)); g.style.opacity = r ? (sel && sel !== c ? .3 : 1) : 0;
+    const rg = g.querySelector(".ring"); rg.style.display = sel === c ? "" : "none"; rg.setAttribute("r", r + 4);
+    const [t1, t2] = g.querySelectorAll("text"), lines = r >= 22 ? labelLines(c.name, r) : null, showPct = lines && r >= 33;
+    if (lines) { const top = -(lines.length - 1) * 7 + (showPct ? -5 : 4); t1.innerHTML = lines.map((ln, k) => `<tspan x="0" y="${top + k * 14}">${esc(ln)}</tspan>`).join(""); } else t1.innerHTML = "";
+    t2.textContent = showPct ? pct(st.sh[i], st.sh[i] < .1 ? 1 : 0) : ""; t2.setAttribute("y", (lines ? -(lines.length - 1) * 7 + 4 + (lines.length - 1) * 14 + 9 : 0) + 5);
+  });
+  // links: a curve bowing toward the middle, colored from one cell to the other
+  const cx = M.W / 2, cy = M.H / 2;
+  $("#cdefs").innerHTML = st.links.map((l, k) => { const a = cl[l.a], b = cl[l.b]; return `<linearGradient id="lg${k}" gradientUnits="userSpaceOnUse" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}"><stop offset="0" stop-color="${a.hex}"/><stop offset="1" stop-color="${b.hex}"/></linearGradient>`; }).join("");
+  const rNow = i => st.sh[i] > 1e-4 ? Math.max(3, s * Math.sqrt(st.sh[i])) : 0;
+  $("#clinks").innerHTML = st.links.map((l, k) => { const A = cl[l.a], B = cl[l.b], mx = (A.x + B.x) / 2, my = (A.y + B.y) / 2, qx = mx + (cx - mx) * .35, qy = my + (cy - my) * .35, wdt = 2 + 8 * Math.min(1, l.v / .4);
+    // start and end at the cells' edges, so a link never covers the color it joins
+    const edge = (c, r) => { const dx = qx - c.x, dy = qy - c.y, d = Math.hypot(dx, dy) || 1; return { x: c.x + dx / d * (r + 2), y: c.y + dy / d * (r + 2) }; };
+    const a = edge(A, rNow(l.a)), b = edge(B, rNow(l.b));
+    const dim = sel && sel !== A && sel !== B;
+    return `<path d="M${a.x},${a.y}Q${qx},${qy} ${b.x},${b.y}" fill="none" stroke="var(--ground)" stroke-width="${wdt + 3}" opacity="${dim ? .2 : .7}" stroke-linecap="round" stroke-dasharray="${LINK_DASH[l.cls]}"/><path d="M${a.x},${a.y}Q${qx},${qy} ${b.x},${b.y}" fill="none" stroke="url(#lg${k})" stroke-width="${wdt}" stroke-linecap="round" stroke-dasharray="${LINK_DASH[l.cls]}" opacity="${dim ? .12 : .7 + .3 * Math.min(1, l.v / .3)}"/>`; }).join("");
+  // the lede: the whole career, or what's happening in this window
+  const lede = $("#clede");
+  if (lede) {
+    if (t == null) lede.textContent = careerLede(cl, M.works, st.sh);
+    else {
+      const ev = EVENTS[S.who].ev.filter(e => Math.abs(e[0] - t) <= .6).map(e => e[1]).join(" · "), top = st.links.slice().sort((x, y) => y.v * (cl[y.a].C + cl[y.b].C) - x.v * (cl[x.a].C + cl[x.b].C))[0];
+      const yr = Math.floor(t);
+      lede.innerHTML = `<span class="num">${yr}</span>${ev ? ` <em>· ${esc(ev)}</em>` : ""}. ${st.n ? (top ? `${esc(cl[top.a].name)} with ${esc(cl[top.b].name)}: ${LINK_NAME[top.cls]}, the strongest relationship now.` : `${st.n} painting${st.n > 1 ? "s" : ""} in view, no strong relationship.`) : "No paintings near this year in the archive."}`;
+    }
+  }
+  const v = $("#v-t"); if (v) v.textContent = t == null ? "All" : Math.floor(t);
+  const tl = $("#tline"); if (tl) { const f = t == null ? 1 : (t - P.y0) / ((P.y1 - P.y0) || 1); tl.querySelector(".fi").style.width = f * 100 + "%"; tl.querySelector(".th").style.left = f * 100 + "%"; }
+}
+function bindTimeline(M) {
+  const tl = $("#tline"), pb = $("#play");
+  if (!tl) return;
+  const val = e => { const r = tl.getBoundingClientRect(); return P.y0 + clamp((e.clientX - r.left) / r.width, 0, 1) * (P.y1 - P.y0); };
+  const toWindow = () => { if (!S.win) { S.win = 2; S.t = P.y0; render(true); return true; } return false; };
+  tl.addEventListener("pointerdown", e => {
+    stopPlay(); if (toWindow()) return;
+    tl.setPointerCapture(e.pointerId); buzz(); S.t = val(e); paintCareer(S.t, true);
+    const mv = ev => { S.t = val(ev); paintCareer(S.t, true); }, up = () => { tl.removeEventListener("pointermove", mv); tl.removeEventListener("pointerup", up); writeHash(); };
+    tl.addEventListener("pointermove", mv); tl.addEventListener("pointerup", up);
+  });
+  pb.addEventListener("click", e => { e.stopPropagation(); buzz();
+    if (PLAY) return stopPlay();
+    if (!S.win) { S.win = 2; S.t = P.y0; CAREER = null; render(true).then(startPlay); return; }
+    if (S.t == null || S.t >= P.y1 - .05) S.t = P.y0;
+    startPlay();
+  });
+}
+function startPlay() {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches, span = P.y1 - P.y0, dur = Math.max(6000, span * 900);
+  let last = performance.now();
+  PLAY = { raf: 0 }; const pb = $("#play"); if (pb) pb.innerHTML = ICON_PAUSE;
+  const step = now => {
+    if (!PLAY) return;
+    const dt = now - last; last = now;
+    S.t = Math.min(P.y1, S.t + (reduce ? Math.round(dt / 1400) : dt * span / dur));
+    paintCareer(S.t, true);
+    if (S.t >= P.y1) { stopPlay(); writeHash(); return; }
+    PLAY.raf = requestAnimationFrame(step);
+  };
+  PLAY.raf = requestAnimationFrame(step);
+}
+function stopPlay() { if (!PLAY) return; cancelAnimationFrame(PLAY.raf); PLAY = null; const pb = $("#play"); if (pb) pb.innerHTML = ICON_PLAY; }
+const fit = (s, px, cw) => { const n = Math.floor(px / cw); return s.length <= n ? s : s.slice(0, Math.max(3, n - 1)).trim() + "…"; };
+function careerLede(cl, works, sh) {
+  const famW = new Array(14).fill(0); cl.forEach((c, i) => famW[c.fam] += sh[i]);
+  const order = famW.map((w, i) => [w, i]).sort((a, b) => b[0] - a[0]);
+  const top = order.slice(0, 2).map(([, i]) => FAM_SHORT[i].toLowerCase()), cap = s => s[0].toUpperCase() + s.slice(1);
+  if (S.arr === "time" && works.length >= 6) {
+    const mid = works[Math.floor(works.length / 2)].y, early = works.filter(w => w.y < mid), late = works.filter(w => w.y >= mid);
+    if (early.length && late.length) {
+      const L = ws => ws.reduce((t, w) => t + w.mean[0], 0) / ws.length, C = ws => ws.reduce((t, w) => t + w.pool.reduce((s, p) => s + p.C * p.share, 0), 0) / ws.length;
+      const dL = (L(late) - L(early)) * 100, rC = C(late) / C(early);
+      return `From ${mid} on, ${P.his} color gets ${dL > 0 ? "lighter" : "darker"} by ${Math.abs(dL).toFixed(0)} points and ${rC >= 1 ? rC.toFixed(1) + "× as vivid" : (1 / rC).toFixed(1) + "× quieter"}.`;
+    }
+  }
+  if (S.arr === "warm") { let w = 0, c = 0; cl.forEach((x, i) => { if (x.C >= .035) { const t = warmth(x.ok); if (t > .02) w += sh[i]; else if (t < -.02) c += sh[i]; } }); return `${pct(w)} of ${P.his} surface is warm, ${pct(c)} cool, the rest near-grey.`; }
+  if (S.arr === "light") { const Lm = cl.reduce((t, c, i) => t + c.L * sh[i], 0); return `Mean lightness ${(Lm * 100).toFixed(0)} of 100: ${Lm > .55 ? "a light painter" : Lm > .45 ? "a mid-value painter" : "a dark painter"}, as photographed.`; }
+  if (S.arr === "hue") { const blue = famW[6] + famW[7] + famW[8]; return `${cap(top[0])} and ${top[1]} carry the most; blues and teals take ${pct(blue)}.`; }
+  const big = sh.slice().sort((a, b) => b - a).slice(0, 5).reduce((t, v) => t + v, 0);
+  return `${cap(top[0])} and ${top[1]} carry ${P.short}: the five biggest colors cover ${pct(big)} of the surface.`;
+}
+function readout(c, works) {
+  const ws = works.map(w => ({ w, s: c.by.get(w.idx) || 0 })).filter(o => o.s > .005).sort((a, b) => b.s - a.s);
+  const yrs = c.ys.length ? (c.ys[0] === c.ys[c.ys.length - 1] ? `${c.ys[0]}` : `${c.ys[0]}–${c.ys[c.ys.length - 1]}`) : "";
+  const W = Math.min(innerWidth, 520) - 32 - 30, a = P.ya, b = P.yb, span = Math.max(1, b - a);
+  const dots = works.map(w => { const s = c.by.get(w.idx) || 0; const x = 6 + (w.y - a) / span * (W - 12); return s > .005 ? `<circle cx="${x}" cy="14" r="${clamp(2 + Math.sqrt(s) * 14, 2, 11)}" fill="${c.hex}" ${c.L < .25 ? 'stroke="rgba(236,232,223,.3)"' : ""}/>` : `<circle cx="${x}" cy="14" r="1.5" fill="var(--faint)"/>`; }).join("");
+  return `<div class="read"><a class="plate ${c.L > .9 ? "hair" : ""}" href="${colorURL(c.name)}" style="background:${c.hex}" aria-label="Open ${esc(c.name)}"></a>
+    <div><h3><a href="${colorURL(c.name)}">${esc(c.name)} <span style="color:var(--soft)">›</span></a></h3><p>${pct(c.w, 1)} of ${P.his} painted surface, in ${c.present} of ${works.length} paintings${yrs ? `, ${yrs}` : ""}.</p></div>
+    <div class="when"><svg width="${W}" height="28" aria-label="Where it appears over the years">${dots}</svg><div class="yticks"><span>${a}</span><span>${b}</span></div>
+    <div class="thumbs">${ws.slice(0, 6).map(o => `<img src="${imgURL(o.w.img)}" alt="${esc(o.w.t)}" loading="lazy" data-open="${o.w.id}">`).join("")}</div></div></div>`;
+}
+
+// ================= VIEW 2: Years (a palette per painting, or the river of families) =================
+const SORTS = { hue: (a, b) => (a.C < .04) - (b.C < .04) || (a.C < .04 ? b.L - a.L : ((a.h - 20 + 360) % 360) - ((b.h - 20 + 360) % 360)), light: (a, b) => b.L - a.L, area: (a, b) => b.share - a.share };
+function viewYears() {
+  const works = P.works.filter(inRange);
+  if (!works.length) return { html: `<p class="lede">No dated paintings in ${period()}.</p>` };
+  const fam = ws => { const f = new Array(14).fill(0); ws.forEach(w => w.pool.forEach(p => f[famOf(p)] += p.share / ws.length)); return f; };
+  const mid = works[Math.floor(works.length / 2)].y, e = works.filter(w => w.y < mid), l = works.filter(w => w.y >= mid);
+  let lede = `${works.length} paintings, ${period()}.`;
+  if (e.length >= 3 && l.length >= 3) {
+    const fe = fam(e), fl = fam(l); let bi = 0, bd = 0; for (let i = 0; i < 14; i++) if (Math.abs(fl[i] - fe[i]) > Math.abs(bd)) { bd = fl[i] - fe[i]; bi = i; }
+    lede = `${FAM_SHORT[bi]} ${bd > 0 ? "grow" : "shrink"} from ${pct(fe[bi])} of ${P.his} surface before ${mid} to ${pct(fl[bi])} after.`;
+  }
+  let body;
+  if (S.rm === "paint") {
+    let last = null;
+    body = `<div class="rows">${works.map(w => { const notes = poolPick(w.pool, S.pk).sort(SORTS[S.sort]); const show = w.y !== last; last = w.y;
+      return `<div class="yr ${show ? "gap" : ""}" data-open="${w.id}" title="${esc(w.t)}"><b>${show ? w.y : ""}</b><div class="bar">${notes.map(n => `<i style="width:${n.share * 100}%;background:${n.hex}"></i>`).join("")}</div></div>`; }).join("")}</div>
+      <p class="cap">One row per painting, oldest at the top: ${S.pk} colors each, widths by area, ${S.sort === "hue" ? "greys first, then hue" : S.sort === "light" ? "light to dark" : "biggest first"}. Tap a row to open that painting.</p>`;
+  } else body = river(works);
+  const dock = `<div class="row">${seg("rm", [["paint", "Paintings"], ["river", "River"]])}</div>${S.rm === "paint" ? `<div class="row"><span class="k">Order</span>${seg("sort", [["hue", "Hue"], ["light", "Light"], ["area", "Area"]])}</div>${slider("pk", 3, 24, "Colors")}` : ""}${yearRange()}`;
+  return { html: `<p class="lede">${esc(lede)}</p>${body}`, dock };
+}
+const RIVER_ORDER = [11, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13];
+function river(works) {
+  const W = Math.min(innerWidth, 520) - 32, L = 40, Wd = W - L, ya = works[0].y, yb = works[works.length - 1].y, span = Math.max(1, yb - ya);
+  const H = Math.max(360, Math.min(620, span * 46)), steps = 70, sig = Math.max(.6, span / 14);
+  const slices = [];
+  for (let s = 0; s <= steps; s++) {
+    const y = ya + span * s / steps, f = new Array(14).fill(0), c = Array.from({ length: 14 }, () => [0, 0, 0]);
+    let tw = 0;
+    works.forEach(w => { const k = Math.exp(-((w.y - y) ** 2) / (2 * sig * sig)); tw += k; w.pool.forEach(p => { const i = famOf(p); f[i] += p.share * k; c[i][0] += p.ok[0] * p.share * k; c[i][1] += p.ok[1] * p.share * k; c[i][2] += p.ok[2] * p.share * k; }); });
+    slices.push({ y, f: f.map(v => v / tw), c: c.map((v, i) => f[i] > 0 ? okHex(v.map(x => x / f[i])) : "#000") });
+  }
+  const yOf = y => 6 + (y - ya) / span * (H - 12), poly = [];
+  for (let s = 0; s < steps; s++) {
+    const A = slices[s], B = slices[s + 1]; let xa = L, xb = L;
+    RIVER_ORDER.forEach(i => { const wa = A.f[i] * Wd, wb = B.f[i] * Wd; if (wa + wb > .2) poly.push(`<path d="M${xa},${yOf(A.y)}H${xa + wa}L${xb + wb},${yOf(B.y)}H${xb}Z" fill="${A.c[i]}" stroke="${A.c[i]}" stroke-width=".6"/>`); xa += wa; xb += wb; });
+  }
+  const ticks = [...new Set(works.map(w => w.y))].map(y => `<text class="axis" x="${L - 8}" y="${yOf(y) + 4}" text-anchor="end">${y}</text>`).filter((_, i, a) => a.length < 16 || i % 2 === 0);
+  const marks = works.map(w => `<circle cx="${L - 3}" cy="${yOf(w.y)}" r="1.6" fill="var(--soft)"/>`).join("");
+  const last = slices[steps], labs = []; let x = L;
+  RIVER_ORDER.forEach(i => { const w = last.f[i] * Wd; if (w > 34) labs.push(`<text class="axis" x="${x + w / 2}" y="${H + 16}" text-anchor="middle" fill="var(--soft)">${FAM_SHORT[i]}</text>`); x += w; });
+  return `<svg width="${W}" height="${H + 24}" role="img" aria-label="Color families over the years">${poly.join("")}${ticks.join("")}${marks}${labs.join("")}</svg>
+    <p class="cap">Each band is a family of color, as wide as its share of the surface in those years and painted in ${P.his} own average of it. Smoothed over about ${sig.toFixed(1)} years; ticks mark the paintings.</p>`;
+}
+
+// ================= VIEW 3: Chords across a career (the progression) =================
+function viewChords() {
+  const works = P.works.filter(inRange);
+  if (!works.length) return { html: `<p class="lede">No dated paintings in ${period()}.</p>` };
+  works.forEach(w => { if (!w.ch || w.chK !== S.nk) { const notes = poolPick(w.pool, S.nk); notes.forEach(n => n.nm = nameOf(n.ok).n); w.notes = notes; w.ch = detectChords(notes, null); w.chK = S.nk; } });
+  const mid = works[Math.floor(works.length / 2)].y, early = works.filter(w => w.y < mid), late = works.filter(w => w.y >= mid);
+  const rows = CHORDS.map(([id, name, def]) => {
+    const hits = works.map(w => w.ch.find(c => c.type === id) || null), n = hits.filter(Boolean).length;
+    const fe = early.filter(w => w.ch.some(c => c.type === id)).length / (early.length || 1), fl = late.filter(w => w.ch.some(c => c.type === id)).length / (late.length || 1);
+    const ys = works.filter((w, k) => hits[k]).map(w => w.y), when = ys.length ? (ys.length >= 3 ? `mostly ${quant(ys, .2)}–${quant(ys, .8)}` : ys.join(", ")) : "never";
+    return { id, name, def, hits, n, fe, fl, when };
+  }).sort((a, b) => b.n - a.n);
+  let lede = "";
+  const ch = rows.filter(r => early.length >= 4 && late.length >= 4).sort((a, b) => Math.abs(b.fl - b.fe) - Math.abs(a.fl - a.fe))[0];
+  if (ch && Math.abs(ch.fl - ch.fe) >= .2) lede = `${ch.name}: ${pct(ch.fe)} of ${P.his} paintings before ${mid}, ${pct(ch.fl)} from ${mid} on.`;
+  else lede = `${rows[0].name} is ${P.his} most common chord: ${rows[0].n} of ${works.length} paintings.`;
+  const html = `<p class="lede">${esc(lede)}</p>
+    <div class="chs">${rows.map(r => `<div class="ch" data-chord="${r.id}"><h4>${r.name}<span>${r.n} of ${works.length} · ${r.when}</span></h4>
+      <div class="strip">${r.hits.map((h, k) => { const w = works[k]; if (!h) return `<i title="${w.y}"></i>`; const cols = h.idx.slice(0, 2).map(i => w.notes[i].hex); return `<i title="${esc(w.t)}, ${w.y}" style="opacity:${.45 + .55 * h.s}">${cols.map(c => `<b style="background:${c}"></b>`).join("")}</i>`; }).join("")}</div>
+      ${S.chord === CHORD_IDX[r.id] ? `<p>${esc(r.def)}</p>` : ""}</div>`).join("")}</div>
+    <div class="yticks" style="margin-left:0"><span>${works[0].y}</span><span>paintings in date order →</span><span>${works[works.length - 1].y}</span></div>
+    <p class="cap">Every painting read as ${S.nk} notes; a column is one painting, colored by the chord's own two main notes. Tap a chord to see how it is measured.</p>`;
+  const dock = `${slider("nk", 5, 16, "Notes")}${yearRange()}`;
+  return { html, dock };
+}
+
+// ================= VIEW 4: Compare (the butterfly: two painters on one coordinate system) =================
+const ROWS = [12, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];   // greys, then the hue families round the wheel
+function binsOf(works, nb) {
+  const cells = ROWS.map(() => Array.from({ length: nb }, () => ({ w: 0, ok: [0, 0, 0] }))), edges = [];
+  for (let k = 1; k < nb; k++) edges.push(.25 + (.85 - .25) * k / nb);
+  works.forEach(w => w.pool.forEach(p => {
+    const f = famOf(p), r = ROWS.indexOf(f === 11 || f === 13 ? 12 : f); let b = 0; while (b < edges.length && p.L >= edges[b]) b++;
+    const c = cells[r][nb - 1 - b], s = p.share / works.length; c.w += s; c.ok[0] += p.ok[0] * s; c.ok[1] += p.ok[1] * s; c.ok[2] += p.ok[2] * s;
+  }));
+  cells.forEach(r => r.forEach(c => { if (c.w) c.hex = okHex(c.ok.map(v => v / c.w)); }));
+  return cells;   // column 0 = lightest
+}
+function viewCompare() {
+  const A = PAINTERS.mo, B = PAINTERS.vg, nb = S.grain;
+  const lo = Math.max(A.y0, B.y0), hi = Math.min(A.y1, B.y1);
+  const wa = A.works.filter(w => !S.same || (w.y >= lo && w.y <= hi)), wb = B.works.filter(w => !S.same || (w.y >= lo && w.y <= hi));
+  const ca = binsOf(wa, nb), cb = binsOf(wb, nb);
+  const W = Math.min(innerWidth, 520) - 32, spine = 64, half = (W - spine) / 2, cw = half / nb, rh = Math.max(30, Math.min(40, cw * 1.05)), H = ROWS.length * rh;
+  const mx = Math.max(...ca.slice(1).flat().map(c => c.w), ...cb.slice(1).flat().map(c => c.w));   // hued rows set the scale; greys are capped
+  const rad = w => w ? Math.max(3.5, (Math.min(cw, rh) / 2 - 1.5) * Math.min(1, Math.sqrt(w / mx))) : 0;
+  let shared = 0; ca.forEach((r, i) => r.forEach((c, j) => shared += Math.min(c.w, cb[i][j].w)));
+  const g = [];
+  ROWS.forEach((f, i) => {
+    const y = i * rh + rh / 2;
+    g.push(`<text class="axis" x="${half + spine / 2}" y="${y + 4}" text-anchor="middle" fill="var(--soft)" style="font-size:12.5px">${FAM_SHORT[f]}</text>`);
+    for (let j = 0; j < nb; j++) {
+      if (S.cm === "fly") {
+        const xa = half - (j + .5) * cw, xb = half + spine + (j + .5) * cw, a = ca[i][j], b = cb[i][j];
+        g.push(a.w ? `<circle cx="${xa}" cy="${y}" r="${rad(a.w)}" fill="${a.hex}"/>` : `<circle cx="${xa}" cy="${y}" r="5" fill="none" stroke="var(--s3)" stroke-width="1.2" stroke-dasharray="2 2.4"/>`);
+        g.push(b.w ? `<circle cx="${xb}" cy="${y}" r="${rad(b.w)}" fill="${b.hex}"/>` : `<circle cx="${xb}" cy="${y}" r="5" fill="none" stroke="var(--s3)" stroke-width="1.2" stroke-dasharray="2 2.4"/>`);
+      }
+    }
+  });
+  let grid;
+  if (S.cm === "fly") grid = `<div class="cmp-head"><div>${A.short}<small>dark ← → light</small></div><span></span><div>${B.short}<small>light ← → dark</small></div></div>
+    <svg width="${W}" height="${H}" role="img" aria-label="Butterfly comparison">${g.join("")}</svg>`;
+  else {   // overlap: one grid, each cell split; left half Monet, right half Van Gogh
+    const cw2 = (W - spine) / nb, rr = w => w ? Math.max(2.5, (Math.min(cw2, rh) / 2 - 1.5) * Math.min(1, Math.sqrt(w / mx))) : 0, h2 = [];
+    ROWS.forEach((f, i) => { const y = i * rh + rh / 2; h2.push(`<text class="axis" x="0" y="${y + 4}" fill="var(--soft)" style="font-size:12.5px">${FAM_SHORT[f]}</text>`);
+      for (let j = 0; j < nb; j++) { const x = spine + (j + .5) * cw2, a = ca[i][j], b = cb[i][j];
+        if (a.w) h2.push(`<path d="M${x},${y - rr(a.w)}A${rr(a.w)},${rr(a.w)} 0 0 0 ${x},${y + rr(a.w)}Z" fill="${a.hex}"/>`); else h2.push(`<circle cx="${x - 3}" cy="${y}" r="1.3" fill="var(--s3)"/>`);
+        if (b.w) h2.push(`<path d="M${x},${y - rr(b.w)}A${rr(b.w)},${rr(b.w)} 0 0 1 ${x},${y + rr(b.w)}Z" fill="${b.hex}"/>`); else h2.push(`<circle cx="${x + 3}" cy="${y}" r="1.3" fill="var(--s3)"/>`);
+        h2.push(`<line x1="${x}" x2="${x}" y1="${y - 6}" y2="${y + 6}" stroke="var(--ground)" stroke-width="1.5"/>`); } });
+    grid = `<div class="cmp-head"><div>${A.short}<small>left halves</small></div><span></span><div>${B.short}<small>right halves</small></div></div>
+      <svg width="${W}" height="${H + 18}" role="img" aria-label="Overlap comparison">${h2.join("")}<text class="axis" x="${spine}" y="${H + 14}">light</text><text class="axis" x="${W}" y="${H + 14}" text-anchor="end">dark</text></svg>`;
+  }
+  // findings: family shares side by side, plus lightness and vividness
+  const fam = ws => { const f = new Array(14).fill(0); ws.forEach(w => w.pool.forEach(p => f[famOf(p)] += p.share / ws.length)); return f; };
+  const fa = fam(wa), fb = fam(wb), diffs = fa.map((v, i) => ({ i, a: v, b: fb[i], r: (Math.max(v, fb[i]) + .005) / (Math.min(v, fb[i]) + .005) })).filter(d => Math.max(d.a, d.b) > .03).sort((x, y) => y.r - x.r).slice(0, 4);
+  const mL = ws => ws.reduce((t, w) => t + w.mean[0], 0) / ws.length, mC = ws => ws.reduce((t, w) => t + w.pool.reduce((s, p) => s + p.C * p.share, 0), 0) / ws.length;
+  const famHex = (ws, i) => { const m = [0, 0, 0]; let t = 0; ws.forEach(w => w.pool.forEach(p => { if (famOf(p) === i) { t += p.share; for (let k = 0; k < 3; k++) m[k] += p.ok[k] * p.share; } })); return t ? okHex(m.map(v => v / t)) : "#333"; };
+  const cards = diffs.map(d => { const more = d.a > d.b ? A : B; return `<div class="card"><h5>${FAM_SHORT[d.i]}</h5><p>${more.short} ${d.r >= 1.95 ? d.r.toFixed(1) + "×" : "+" + Math.round((d.r - 1) * 100) + "%"} more: ${pct(d.a, 1)} vs ${pct(d.b, 1)}</p><div class="duo"><i style="flex:${d.a};background:${famHex(wa, d.i)}"></i><i style="width:3px;background:var(--s1)"></i><i style="flex:${d.b};background:${famHex(wb, d.i)}"></i></div></div>`; }).join("");
+  const html = `<p class="lede">${A.short} lives ${mL(wa) > mL(wb) ? "lighter" : "darker"} (${Math.round(mL(wa) * 100)} vs ${Math.round(mL(wb) * 100)}) and ${mC(wa) > mC(wb) ? "more vivid" : "quieter"}; ${B.short} ${mC(wb) > mC(wa) ? `is ${(mC(wb) / mC(wa)).toFixed(1)}× as vivid` : "is quieter"}.</p>
+    ${grid}
+    <div class="big"><b>${Math.round(shared * 100)}%</b><span>of their color falls in the same cells${S.same ? `, ${lo}–${hi} only` : ""}.<br>${wa.length} Monets, ${wb.length} Van Goghs.</span></div>
+    <div class="vs">${cards}</div>
+    <p class="cap">Same rows (hue families) and columns (lightness) for both. Each dot is that painter's own average color in the cell, sized by its share of all his paintings on one shared scale (the greys row is capped so the hues can be read). A dashed ring is a color he didn't use there.</p>`;
+  const dock = `<div class="row">${seg("cm", [["fly", "Butterfly"], ["over", "Overlap"]])}</div>${slider("grain", 3, 7, "Detail")}
+    <div class="row"><span class="k">Years</span><div class="chips"><button class="chip" data-set="same" data-val="0" aria-pressed="${!S.same}">Whole careers</button><button class="chip" data-set="same" data-val="1" aria-pressed="${!!S.same}">Same years, ${lo}–${hi}</button></div></div>`;
+  return { html, dock };
+}
+
+// ================= VIEW 5: One painting: the dance, the mosaic, the geometry, the symphony of notes =================
+const HUEWORD = n => { if (n.C < .04) return n.L < .35 ? "darks" : n.L > .75 ? "pales" : "greys"; const h = n.h;
+  if (h < 40 || h >= 345) return n.L > .72 ? "pinks" : "reds"; if (h < 70) return n.L < .5 && n.C < .13 ? "browns" : "oranges";
+  if (h < 112) return n.L < .55 ? (n.C < .08 ? "olives" : "ochres") : "yellows"; if (h < 175) return "greens"; if (h < 215) return "teals"; if (h < 290) return "blues"; return "violets"; };
+const cap1 = s => s ? s[0].toUpperCase() + s.slice(1) : s;
+function danceSteps(notes, chords) {
+  const fam = i => notes.map((n, j) => j).filter(j => j === i || (notes[j].C >= .035 && notes[i].C >= .035 && hueD(notes[j].h, notes[i].h) <= 28 && Math.abs(notes[j].L - notes[i].L) <= .3));
+  const area = sel => sel.reduce((t, j) => t + notes[j].share, 0), mL = sel => sel.reduce((t, j) => t + notes[j].L * notes[j].share, 0) / (area(sel) || 1);
+  const steps = [], same = (a, b) => a.length === b.length && a.every(x => b.includes(x));
+  const cand = notes.map((n, i) => i).filter(i => notes[i].share >= .02 && notes[i].C >= .05);
+  const lead = cand.sort((a, b) => notes[b].C * Math.pow(notes[b].share, .35) - notes[a].C * Math.pow(notes[a].share, .35))[0] ?? 0;
+  const A = fam(lead), wl = HUEWORD(notes[lead]);
+  steps.push({ sel: A, v: 0, title: `The ${wl} alone`, line: `${pct(area(A))} of the canvas, from ${notes[A[0]].nm}${A.length > 1 ? ` to ${notes[A[A.length - 1]].nm}` : ""}.` });
+  const PAIRS = ["comp", "split", "equal", "discord"], used = new Set();
+  const pc = chords.find(c => PAIRS.includes(c.type) && c.idx.some(i => A.includes(i)) && c.idx.some(i => !A.includes(i))) || chords.find(c => PAIRS.includes(c.type));
+  if (pc) {
+    used.add(pc);
+    const other = pc.idx.find(i => !A.includes(i)) ?? pc.idx[1], B = fam(other), wo = HUEWORD(notes[other]), sel = [...new Set([...A, ...B])];
+    steps.push({ sel, v: 0, title: `${cap1(wl)} and ${wo === wl ? "their partner" : wo}`, line: `${pc.name}: ${pc.line}`, s: pc.s });
+    const dL = Math.round((mL(A) - mL(B)) * 100);
+    steps.push({ sel, v: 1, title: "Their values", line: Math.abs(dL) <= 3 ? `Without hue they almost vanish into each other: within ${Math.abs(dL)} points of lightness.` : `Without hue, the ${wl} sit ${Math.abs(dL)} points ${dL > 0 ? "lighter" : "darker"} than the ${wo}.` });
+  }
+  chords.filter(c => !used.has(c) && c.type !== "tonal").slice(0, 4).forEach(c => {
+    let sel = c.idx.slice();
+    if (c.type === "wc") { sel = notes.map((n, i) => i).filter(i => notes[i].C >= .035 && warmth(notes[i].ok) > .02); if (!sel.length || sel.length >= notes.length * .8) return; }
+    if (c.type === "solo") sel = [c.idx[0]];
+    if (steps.some(s => same(s.sel, sel) && s.v === 0)) return;
+    steps.push({ sel, v: c.type === "ladder" || c.type === "chiaro" ? 1 : 0, title: c.name, line: c.line, s: c.s });
+  });
+  steps.push({ sel: notes.map((n, i) => i), v: 0, all: true, title: "The whole painting", line: `${notes.length} notes, ${chords.length} relationships found between them.` });
+  return steps;
+}
+function pairVerdict(a, b, t) {
+  const dh = hueD(a.h, b.h), dL = (b.L - a.L) * 100;
+  const kind = Math.min(a.C, b.C) < .035 ? "a hue against a near-grey" : dh >= 150 ? "near-opposites" : dh <= 30 ? "neighbours on the wheel" : dh >= 100 ? "far apart on the wheel" : "a third of the wheel apart";
+  const nat = NAT_L[Math.floor(a.h) % 360] - NAT_L[Math.floor(b.h) % 360], disc = Math.min(a.C, b.C) >= .06 && dh >= 60 && ((nat > .12 && dL > 8) || (nat < -.12 && dL < -8));
+  return `${cap1(kind)}${Math.abs(dL) <= 4 && dh >= 90 && Math.min(a.C, b.C) >= .05 ? " at equal lightness, so their edge shimmers" : ""}${disc ? ", in reversed natural order (a discord)" : ""}${t != null ? (t >= 1.3 ? `, set side by side (${t.toFixed(1)}× more contact than chance)` : t <= .6 ? `, kept apart (${t.toFixed(1)}× chance contact)` : ", touching about as often as chance") : ""}.`;
+}
+let DANCE = null, MOS = null;
+const DCACHE = new Map();
+async function viewPainting(live) {
+  stopDance();
+  const all = [...PAINTERS.vg.works, ...PAINTERS.mo.works];
+  const w = all.find(x => x.id === S.pid) || P.works[0]; S.pid = w.id;
+  const painter = PAINTERS.vg.works.includes(w) ? PAINTERS.vg : PAINTERS.mo;
+  const notes = poolPick(w.pool, S.nk); notes.forEach(n => { n.nm = nameOf(n.ok).n; });
+  const Wd = Math.min(innerWidth, 520) - 32;
+  const px = await loadPixels(w, Wd);
+  const lp = px ? labelPixels(px.ana, notes) : null;
+  const chords = detectChords(notes, lp && lp.lift), vo = voices(notes), steps = danceSteps(notes, chords);
+  window.__notes = notes.map(n => n.nm + " " + n.hex + " " + Math.round(n.share * 100)); window.__steps = steps.map(s => s.title + ":" + s.sel.join(","));
+  const pair = S.pair.filter(i => i < notes.length), chord = chords[S.chord] || null, focus = pair.length ? pair : chord ? chord.idx : [];
+  const ar = px ? px.ar : 1 / (w.ar || 1.25), hh = Math.round(Math.min(S.pm === "mosaic" ? 440 : 380, Wd * ar)), hw = Math.round(hh / ar);
+  const pick = painter.works.map(x => `<button data-pid="${x.id}" aria-pressed="${x === w}" aria-label="${esc(x.t)}, ${x.y}"><img src="${imgURL(x.img)}" alt="" loading="lazy"></button>`).join("");
+  // ---- the notes wheel: angle = hue, distance from the middle = vividness, size = area ----
+  const WH = Math.round(Math.min(Wd, 360)), cx = Wd / 2, cy = WH / 2, R = WH / 2 - 26, cmax = Math.max(.12, ...notes.map(n => n.C));
+  const nodes = notes.map((n, i) => {
+    let x, y; if (S.lay === "wheel") { const a = wheelAngle(n), r = (n.C < .03 ? n.C / .03 * .18 : .18 + .82 * n.C / cmax) * R; x = cx + r * Math.cos(a); y = cy + r * Math.sin(a); }
+    else { x = 30 + (n.C / cmax) * (Wd - 60); y = 20 + (1 - n.L) * (WH - 40); }
+    return { i, n, x, y, tx: x, ty: y, r: clamp(Math.sqrt(n.share) * WH * .2, 7, 46) };
+  });
+  pack(nodes, Wd, WH, 160);
+  const ringStops = Array.from({ length: 72 }, (_, k) => { const h = k * 5, ok = [.72, .11 * Math.cos(h * Math.PI / 180), .11 * Math.sin(h * Math.PI / 180)], a = wheelAngle({ h, C: .11, L: .72 }); return `<circle cx="${cx + (R + 14) * Math.cos(a)}" cy="${cy + (R + 14) * Math.sin(a)}" r="4" fill="${okHex(ok)}" opacity=".55"/>`; }).join("");
+  const lines = [];
+  if (focus.length >= 2) for (let a = 0; a < focus.length; a++) for (let b = a + 1; b < focus.length; b++) { const p = nodes[focus[a]], q = nodes[focus[b]]; lines.push(`<line x1="${p.x}" y1="${p.y}" x2="${q.x}" y2="${q.y}" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="3 4" opacity=".8"/>`); }
+  const wheel = `<svg class="field" width="${Wd}" height="${WH}" role="img" aria-label="The painting's notes">${S.lay === "wheel" ? `<circle class="guide" cx="${cx}" cy="${cy}" r="${R * .18}"/><circle class="guide" cx="${cx}" cy="${cy}" r="${R}"/>${ringStops}` : `<text class="axis" x="30" y="${WH - 2}">greyed</text><text class="axis" x="${Wd - 30}" y="${WH - 2}" text-anchor="end">vivid</text><text class="axis" x="0" y="14">light</text>`}${lines.join("")}
+    ${nodes.map(o => { const on = focus.includes(o.i); return `<g class="bub" data-note="${o.i}" style="opacity:${focus.length && !on ? .32 : 1}"><circle cx="${o.x}" cy="${o.y}" r="${o.r}" fill="${o.n.hex}" ${o.n.L < .25 ? 'stroke="rgba(236,232,223,.18)"' : ""}/>${on ? `<circle cx="${o.x}" cy="${o.y}" r="${o.r + 4}" fill="none" stroke="var(--ink)" stroke-width="2"/>` : ""}${o.r >= 26 ? `<text class="lbl s" x="${o.x}" y="${o.y + 4}" text-anchor="middle" fill="${inkOn(o.n.ok)}">${pct(o.n.share)}</text>` : ""}</g>`; }).join("")}</svg>`;
+  let pairHTML = "";
+  if (pair.length === 2) {
+    const [i, j] = pair, a = notes[i], b = notes[j], dh = hueD(a.h, b.h), dL = (b.L - a.L) * 100, rc = Math.max(a.C, b.C) / Math.max(.004, Math.min(a.C, b.C)), t = lp ? lp.lift[i][j] : null;
+    pairHTML = `<div class="pair"><a href="${colorURL(a.nm)}" style="background:${a.hex};color:${inkOn(a.ok)}"><span>${esc(a.nm)}</span></a><a href="${colorURL(b.nm)}" style="background:${b.hex};color:${inkOn(b.ok)}"><span>${esc(b.nm)}</span></a></div>
+      <p class="verdict">${esc(pairVerdict(a, b, t))}</p>
+      <dl class="facts"><dt>Hue</dt><dd>${Math.round(dh)}° apart</dd><dt>Lightness</dt><dd>${Math.abs(dL) < 1 ? "the same" : `${esc(dL > 0 ? b.nm : a.nm)} ${Math.abs(dL).toFixed(0)} points lighter`}</dd><dt>Vividness</dt><dd>${rc < 1.15 ? "about equal" : `${esc(a.C > b.C ? a.nm : b.nm)} ${rc.toFixed(1)}×`}</dd><dt>Area</dt><dd>${pct(a.share, 1)} : ${pct(b.share, 1)}</dd>${t != null ? `<dt>Contact</dt><dd>${t.toFixed(2)}× chance</dd>` : ""}</dl>`;
+  }
+  // ---- the hero, by mode ----
+  let hero = "", under = "";
+  if (S.pm === "dance") {
+    hero = `<div class="hero dance" id="hero" style="width:${hw}px;height:${hh}px"><img class="base" src="${bigURL(w.img)}" alt="${esc(w.t)}" crossorigin="anonymous"><canvas id="dance"></canvas></div>`;
+    under = `<div class="dctl"><button class="play" id="dplay" aria-label="Play the reading">${ICON_PAUSE}</button><div class="dots" id="dots">${steps.map((s, k) => `<button data-step="${k}" aria-label="${esc(s.title)}"><i>${(s.all ? notes.slice(0, 4) : s.sel.slice(0, 3).map(j => notes[j])).map(n => `<b style="background:${n.hex}"></b>`).join("")}</i></button>`).join("")}</div></div>
+      <div class="dcap"><h4 id="dtitle">&nbsp;</h4><p id="dline">&nbsp;</p><div class="meter" id="dmeter"><i style="width:0"></i></div></div>`;
+  } else if (S.pm === "mosaic") {
+    hero = `<div class="hero" id="hero" style="width:${hw}px;height:${hh}px;background:var(--ground)"><canvas id="mos" style="opacity:1;image-rendering:auto"></canvas></div>`;
+    under = `<div class="mosbar"><button class="chip" id="msort" aria-pressed="${!!S.sorted}">${S.sorted ? "Back to the painting" : "Sort the tiles by color"}</button><span class="cap" id="mcap" style="margin:0"></span></div>
+      <div class="legend2">${notes.map((n, i) => `<button data-note="${i}" aria-pressed="${pair.includes(i)}" aria-label="${esc(n.nm)}"><i style="background:${n.hex}"></i></button>`).join("")}</div>`;
+  } else {
+    hero = `<div class="hero geo" id="hero" style="width:${hw}px;height:${hh}px"><img class="base" src="${bigURL(w.img)}" alt="${esc(w.t)}"><svg id="geo" width="${hw}" height="${hh}"></svg></div>`;
+    under = `<div id="geotext"></div>`;
+  }
+  const lede = S.pm === "geo" ? "Where each color lives, and which way it runs." : S.pm === "mosaic" ? "Every tile keeps its place: left is left, up is up." : chords.length ? `${chords.length} relationship${chords.length === 1 ? "" : "s"} in ${S.nk} notes. <em>Watch them one at a time.</em>` : `No strong relationship at ${S.nk} notes. <em>Try more notes.</em>`;
+  const html = `<div class="picker">${pick}</div>
+    ${hero}${under}
+    <p class="lede">${lede}</p>
+    <div class="row" style="margin-bottom:6px">${seg("lay", [["wheel", "Wheel"], ["value", "Value"]])}</div>
+    ${wheel}
+    ${pairHTML || `<p class="cap">${S.lay === "wheel" ? "Hue goes round, vividness grows outward, size is area." : "Light at the top, vivid to the right, size is area."} Tap two notes to compare them${lp ? " and see where they sit" : ""}.</p>`}
+    <h3 class="sec">Voices</h3><div class="voices">${vo.map(([t, i]) => `<button data-pair="${i}" aria-label="${t}: ${esc(notes[i].nm)}"><i style="background:${notes[i].hex}"></i><b>${t}</b><span>${esc(notes[i].nm)}</span></button>`).join("")}</div>
+    <h3 class="sec">Relationships</h3><p class="secnote">Measured, not assumed: each is a rule on hue, lightness, vividness and area${lp ? ", and contact in the image" : ""}.</p>
+    ${chords.map((c, k) => `<div class="chordcard" data-chordi="${k}" aria-pressed="${S.chord === k}"><h4>${c.name}<span>${Math.round(c.s * 100)}</span></h4><div class="sw">${c.idx.map(i => `<i style="flex:${Math.max(.04, notes[i].share)};background:${notes[i].hex}"></i>`).join("")}</div><p>${esc(c.line)}</p><div class="meter"><i style="width:${c.s * 100}%"></i></div></div>`).join("")}
+    ${!px ? `<p class="foot">This museum's image can't be read pixel by pixel here, so the dance, the mosaic and contact aren't available for it.</p>` : ""}`;
+  const dock = `<div class="row">${seg("pm", [["dance", "Dance"], ["mosaic", "Mosaic"], ["geo", "Geometry"]])}</div>${S.pm === "mosaic" ? slider("dens", 12, 72, "Tiles") : slider("nk", 3, 16, "Notes")}`;
+  return { html, dock, after: () => {
+    const pk = document.querySelector(".picker [aria-pressed=true]"); if (pk && !live) pk.scrollIntoView({ inline: "center", block: "nearest" });
+    if (!px) return;
+    if (S.pm === "dance") startDance(w, px, notes, steps, chords, lp);
+    else if (S.pm === "mosaic") drawMosaic(px, notes, hw, hh, pair, lp);
+    else drawGeometry(px, lp, notes, hw, hh);
+  } };
+}
+// ---- the dance: one relationship at a time on the real painting ----
+function startDance(w, px, notes, steps, chords, lp) {
+  const scr = px.scr, n = scr.W * scr.H, key = `${w.id}|${S.nk}|${scr.W}`;
+  if (!DCACHE.has(key)) { const grey = new Uint8ClampedArray(n); for (let i = 0; i < n; i++) { const L = scr.ok[i * 3]; grey[i] = gam(L * L * L); } DCACHE.clear(); DCACHE.set(key, { E: softMembership(scr, notes), grey }); }
+  const { E, grey } = DCACHE.get(key), cv = $("#dance"); cv.width = scr.W; cv.height = scr.H;
+  const cx = cv.getContext("2d"), img = cx.createImageData(scr.W, scr.H), D8 = img.data;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const maskOf = sel => { const m = new Float32Array(n); sel.forEach(j => { const e = E[j]; for (let i = 0; i < n; i++) m[i] += e[i]; }); return m; };
+  const masks = steps.map(() => null), maskK = k => masks[k] || (masks[k] = steps[k].all ? new Float32Array(n).fill(1) : maskOf(steps[k].sel));
+  DANCE = { cur: new Float32Array(n), from: new Float32Array(n), to: null, vf: 0, vfrom: 0, vto: 0, t0: 0, k: -1, playing: false, timer: 0, raf: 0 };
+  const draw = (m, vf) => { for (let i = 0; i < n; i++) { const o = i * 4; D8[o] = scr.d[o] * (1 - vf) + grey[i] * vf; D8[o + 1] = scr.d[o + 1] * (1 - vf) + grey[i] * vf; D8[o + 2] = scr.d[o + 2] * (1 - vf) + grey[i] * vf; D8[o + 3] = Math.min(255, m[i] * 290); } cx.putImageData(img, 0, 0); };
+  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  const caption = (st) => { $("#dtitle").textContent = st.title; $("#dline").textContent = st.line; $("#dmeter i").style.width = (st.s != null ? st.s * 100 : 0) + "%"; $("#dmeter").style.visibility = st.s != null ? "visible" : "hidden"; };
+  const goMask = (m, v, st, k) => {
+    clearTimeout(DANCE.timer); cancelAnimationFrame(DANCE.raf);
+    DANCE.from.set(DANCE.cur); DANCE.to = m; DANCE.vfrom = DANCE.vf; DANCE.vto = v; DANCE.k = k; DANCE.t0 = performance.now();
+    caption(st);
+    document.querySelectorAll("#dots button").forEach((b, j) => b.setAttribute("aria-pressed", j === k));
+    const dur = reduce ? 1 : 1200;
+    const frame = now => {
+      const t = Math.min(1, (now - DANCE.t0) / dur), e = ease(t), f = DANCE.from, to = DANCE.to, c = DANCE.cur;
+      for (let i = 0; i < n; i++) c[i] = f[i] + (to[i] - f[i]) * e;
+      DANCE.vf = DANCE.vfrom + (DANCE.vto - DANCE.vfrom) * e; draw(c, DANCE.vf);
+      if (t < 1) DANCE.raf = requestAnimationFrame(frame);
+      else if (DANCE.playing && k >= 0) { if (k < steps.length - 1) DANCE.timer = setTimeout(() => go(k + 1), 2300); else { DANCE.playing = false; $("#dplay").innerHTML = ICON_PLAY; } }
+    };
+    DANCE.raf = requestAnimationFrame(frame);
+  };
+  const go = k => { k = clamp(k, 0, steps.length - 1); S.step = k; goMask(maskK(k), steps[k].v, steps[k], k); };
+  DANCE.go = go;
+  const setPlay = on => { DANCE.playing = on; $("#dplay").innerHTML = on ? ICON_PAUSE : ICON_PLAY; if (on) { if (DANCE.k >= steps.length - 1 || DANCE.k < 0) go(0); else go(DANCE.k + 1); } else clearTimeout(DANCE.timer); };
+  $("#dplay").onclick = e => { e.stopPropagation(); buzz(); setPlay(!DANCE.playing); };
+  document.querySelectorAll("#dots button").forEach((b, j) => b.onclick = e => { e.stopPropagation(); buzz(); setPlay(false); go(j); });
+  // swipe steps; a tap picks the note under your finger (Choose: build your own selection)
+  const hero = $("#hero"); let x0 = 0, y0 = 0;
+  hero.onpointerdown = e => { x0 = e.clientX; y0 = e.clientY; };
+  hero.onpointerup = e => {
+    const dx = e.clientX - x0; buzz();
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(e.clientY - y0)) { setPlay(false); go((DANCE.k < 0 ? 0 : DANCE.k) + (dx < 0 ? 1 : -1)); return; }
+    const r = hero.getBoundingClientRect(), px_ = Math.floor((e.clientX - r.left) / r.width * scr.W), py = Math.floor((e.clientY - r.top) / r.height * scr.H), p = py * scr.W + px_;
+    let bk = 0; E.forEach((e2, k) => { if (e2[p] > E[bk][p]) bk = k; });
+    setPlay(false);
+    S.pair = S.pair.includes(bk) ? S.pair.filter(x => x !== bk) : [...S.pair, bk].slice(-4); S.chord = -1; S.step = "c"; render(true);
+  };
+  draw(DANCE.cur, 0);
+  // where to begin: a chosen selection, a step from the address, or play from the top
+  if (S.pair.length) { const sel = S.pair.filter(i => i < notes.length), a = notes[sel[0]], b = notes[sel[1]];
+    DANCE.cur.fill(0); goMask(maskOf(sel), 0, { title: sel.map(i => notes[i].nm).join(" + "), line: sel.length === 2 ? pairVerdict(a, b, lp ? lp.lift[sel[0]][sel[1]] : null) : sel.length === 1 ? `${pct(a.share, 1)} of the canvas. Tap more of the painting to add colors.` : `${pct(sel.reduce((t, i) => t + notes[i].share, 0))} of the canvas together.` }, -1); $("#dplay").innerHTML = ICON_PLAY; }
+  else if (S.chord >= 0 && chords[S.chord]) { const c = chords[S.chord]; goMask(maskOf(c.idx), c.type === "ladder" || c.type === "chiaro" ? 1 : 0, { title: c.name, line: c.line, s: c.s }, -1); $("#dplay").innerHTML = ICON_PLAY; }
+  else if (typeof S.step === "number" && S.step >= 0) { $("#dplay").innerHTML = ICON_PLAY; DANCE.cur.fill(1); go(S.step); }
+  else { DANCE.cur.fill(1); draw(DANCE.cur, 0); DANCE.playing = !reduce; $("#dplay").innerHTML = DANCE.playing ? ICON_PAUSE : ICON_PLAY; DANCE.timer = setTimeout(() => go(0), 700); if (reduce) caption({ title: "Step through", line: "Tap the dots or swipe the painting to move between relationships." }); }
+}
+function stopDance() { if (DANCE) { clearTimeout(DANCE.timer); cancelAnimationFrame(DANCE.raf); DANCE.playing = false; DANCE = null; } if (MOS) { cancelAnimationFrame(MOS.raf); MOS = null; } }
+// ---- the mosaic: the painting as honeycomb tiles, composition kept ----
+function drawMosaic(px, notes, hw, hh, sel, lp) {
+  const scr = px.scr, cols = S.dens, dx = hw / cols, dy = dx * .866, rows = Math.ceil(hh / dy) + 1, sx = scr.W / hw, tiles = [];
+  for (let r = 0; r < rows; r++) for (let c = 0; c <= cols; c++) {
+    const x = c * dx + (r & 1 ? dx / 2 : 0), y = r * dy; if (x > hw + dx / 2 || y > hh + dy) continue;
+    const x0 = clamp(Math.floor((x - dx / 2) * sx), 0, scr.W - 1), x1 = clamp(Math.ceil((x + dx / 2) * sx), x0 + 1, scr.W), y0 = clamp(Math.floor((y - dy / 2) * sx), 0, scr.H - 1), y1 = clamp(Math.ceil((y + dy / 2) * sx), y0 + 1, scr.H);
+    let L = 0, a = 0, b = 0, m = 0; for (let yy = y0; yy < y1; yy++) for (let xx = x0; xx < x1; xx++) { const i = (yy * scr.W + xx) * 3; L += scr.ok[i]; a += scr.ok[i + 1]; b += scr.ok[i + 2]; m++; }
+    const ok = [L / m, a / m, b / m]; let bk = 0, bd = 9; notes.forEach((nn, k) => { const d = okD(ok, nn.ok); if (d < bd) { bd = d; bk = k; } });
+    tiles.push({ r, c, x, y, hx: x, hy: y, ok, hex: okHex(ok), k: bk, grey: okHex([ok[0] * .55 + .04, 0, 0]) });
+  }
+  // contact between two chosen notes: neighbouring tiles, against what their tile counts predict
+  const idx = new Map(tiles.map((t, i) => [t.r + "," + t.c, i])), nb = (t) => { const o = t.r & 1 ? [[0, -1], [0, 1], [-1, 0], [-1, 1], [1, 0], [1, 1]] : [[0, -1], [0, 1], [-1, -1], [-1, 0], [1, -1], [1, 0]]; return o.map(([dr, dc]) => idx.get((t.r + dr) + "," + (t.c + dc))).filter(v => v != null); };
+  const on = new Set(sel); let touch = 0, pairs = 0; const lit = new Set();
+  tiles.forEach((t, i) => nb(t).forEach(j => { if (j < i) return; pairs++; const u = tiles[j]; if (sel.length === 2 && ((t.k === sel[0] && u.k === sel[1]) || (t.k === sel[1] && u.k === sel[0]))) { touch++; lit.add(i); lit.add(j); } }));
+  const cnt = notes.map((_, k) => tiles.filter(t => t.k === k).length);
+  const capEl = $("#mcap");
+  if (sel.length === 1) capEl.textContent = `${notes[sel[0]].nm}: ${cnt[sel[0]]} of ${tiles.length} tiles.`;
+  else if (sel.length === 2) { const pa = cnt[sel[0]] / tiles.length, pb = cnt[sel[1]] / tiles.length, ex = 2 * pairs * pa * pb; capEl.textContent = `They touch at ${touch} edges, ${ex ? (touch / ex).toFixed(1) : "–"}× what their areas predict.`; }
+  else if (sel.length > 2) capEl.textContent = `${sel.length} colors: ${sel.reduce((t, k) => t + cnt[k], 0)} of ${tiles.length} tiles.`;
+  else capEl.textContent = `${tiles.length.toLocaleString()} tiles. Tap one to isolate its color.`;
+  // sorted home for every tile: same slots, filled in color order, so "how much" reads as blocks
+  const order = notes.map((n, k) => k).sort((a, b) => wheelSortKey(notes[a]) - wheelSortKey(notes[b]));
+  const rank = new Map(order.map((k, i) => [k, i])), slots = tiles.map(t => [t.hx, t.hy]).sort((p, q) => p[1] - q[1] || p[0] - q[0]);
+  tiles.slice().sort((a, b) => rank.get(a.k) - rank.get(b.k) || b.ok[0] - a.ok[0]).forEach((t, i) => { t.sxp = slots[i][0]; t.syp = slots[i][1]; });
+  const cv = $("#mos"), dpr = 2; cv.width = hw * dpr; cv.height = hh * dpr; const cx = cv.getContext("2d"); cx.scale(dpr, dpr);
+  const rad = dx / Math.sqrt(3) * .97;
+  const paint = (f) => {
+    cx.fillStyle = "#0E0D0B"; cx.fillRect(0, 0, hw, hh);
+    tiles.forEach(t => { const x = t.hx + (t.sxp - t.hx) * f(t), y = t.hy + (t.syp - t.hy) * f(t);
+      cx.beginPath(); for (let k = 0; k < 6; k++) { const a = Math.PI / 6 + k * Math.PI / 3; cx.lineTo(x + rad * Math.cos(a), y + rad * Math.sin(a)); } cx.closePath();
+      cx.fillStyle = !sel.length || on.has(t.k) ? t.hex : t.grey; cx.fill(); });
+    if (lit.size && !S.sorted) { cx.strokeStyle = "rgba(236,232,223,.9)"; cx.lineWidth = 1.2; tiles.forEach((t, i) => { if (!lit.has(i)) return; cx.beginPath(); for (let k = 0; k < 6; k++) { const a = Math.PI / 6 + k * Math.PI / 3; cx.lineTo(t.hx + rad * .82 * Math.cos(a), t.hy + rad * .82 * Math.sin(a)); } cx.closePath(); cx.stroke(); }); }
+  };
+  MOS = { tiles, raf: 0 };
+  paint(() => S.sorted ? 1 : 0);
+  $("#msort").onclick = e => { e.stopPropagation(); buzz(); const to = S.sorted ? 0 : 1; S.sorted = to; $("#msort").textContent = to ? "Back to the painting" : "Sort the tiles by color"; $("#msort").setAttribute("aria-pressed", !!to);
+    const t0 = performance.now(), N = tiles.length, reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    tiles.forEach((t, i) => { t.d = (Math.hypot(t.hx - t.sxp, t.hy - t.syp) / (hw + hh)) * 380; });
+    const ease = u => 1 - Math.pow(1 - u, 3);
+    const frame = now => { const el = now - t0; let busy = false;
+      paint(t => { const u = reduce ? 1 : clamp((el - t.d) / 820, 0, 1); if (u < 1) busy = true; return to ? ease(u) : 1 - ease(u); });
+      if (busy) MOS.raf = requestAnimationFrame(frame); else writeHash(); };
+    MOS.raf = requestAnimationFrame(frame); };
+  cv.onclick = e => { if (S.sorted) return; const r = cv.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * hw, y = (e.clientY - r.top) / r.height * hh;
+    let bt = null, bd = 1e9; tiles.forEach(t => { const d = (t.hx - x) ** 2 + (t.hy - y) ** 2; if (d < bd) { bd = d; bt = t; } });
+    if (!bt) return; buzz(); S.pair = S.pair.includes(bt.k) ? S.pair.filter(k => k !== bt.k) : [...S.pair, bt.k].slice(-4); S.chord = -1; render(true); };
+}
+const wheelSortKey = n => n.C < .04 ? -10 + (1 - n.L) : ((n.h - 20 + 360) % 360);
+// ---- geometry: centroid, spread and axis of each color on the picture; the direction of its edges ----
+function drawGeometry(px, lp, notes, hw, hh) {
+  const G = geometry(px.ana, lp, notes), f = hw / px.ana.W;
+  const top = G.filter(g => g && g.share >= .03).sort((a, b) => b.share - a.share).slice(0, 6);
+  const svg = $("#geo"), parts = [];
+  const pts = top.slice(0, 5).map(g => [g.mx * hw, g.my * hh]);
+  for (let i = 0; i + 1 < pts.length; i++) parts.push(`<line x1="${pts[i][0]}" y1="${pts[i][1]}" x2="${pts[i + 1][0]}" y2="${pts[i + 1][1]}" stroke="rgba(236,232,223,.55)" stroke-width="1.2" stroke-dasharray="2 5"/>`);
+  top.forEach((g, gi) => { const n = notes[g.k], x = g.mx * hw, y = g.my * hh, rx = Math.sqrt(g.l1) * f, ry = Math.sqrt(g.l2) * f, deg = g.ang * 180 / Math.PI;
+    if (gi >= 4) { parts.push(`<circle cx="${x}" cy="${y}" r="7" fill="${n.hex}" stroke="var(--ink)" stroke-width="1.4"/>`); return; }
+    parts.push(`<g transform="translate(${x},${y}) rotate(${deg})"><ellipse rx="${rx}" ry="${ry}" fill="${n.hex}" fill-opacity=".14" stroke="rgba(14,13,11,.7)" stroke-width="5"/><ellipse rx="${rx}" ry="${ry}" fill="none" stroke="${n.hex}" stroke-width="2.4"/><line x1="${-rx}" x2="${rx}" y1="0" y2="0" stroke="rgba(14,13,11,.7)" stroke-width="4"/><line x1="${-rx}" x2="${rx}" y1="0" y2="0" stroke="${n.hex}" stroke-width="1.8"/></g>
+      <circle cx="${x}" cy="${y}" r="8" fill="${n.hex}" stroke="var(--ink)" stroke-width="1.6"/>`); });
+  svg.innerHTML = parts.join("");
+  // sentences: relative position of the two biggest hued notes, the most directional, the most scattered
+  const hued = top.filter(g => notes[g.k].C >= .04), out = [];
+  if (hued.length >= 2) { const a = hued[0], b = hued[1], dx = (a.mx - b.mx) * hw, dy = (b.my - a.my) * hh, ang = Math.round(Math.atan2(dy, dx) * 180 / Math.PI), dist = Math.hypot(dx, dy) / Math.hypot(hw, hh);
+    const word = Math.abs(dy) < Math.abs(dx) * .35 ? (dx > 0 ? "to the right of" : "to the left of") : Math.abs(dx) < Math.abs(dy) * .35 ? (dy > 0 ? "above" : "below") : `${dy > 0 ? "up" : "down"} and to the ${dx > 0 ? "right" : "left"} of`;
+    out.push(`The ${HUEWORD(notes[a.k])} sit ${word} the ${HUEWORD(notes[b.k])} (${Math.abs(ang)}° ${ang >= 0 ? "above" : "below"} level), ${dist < .12 ? "almost on top of each other" : `${Math.round(dist * 100)}% of the canvas apart`}.`); }
+  const dirn = top.slice().sort((a, b) => b.coh - a.coh)[0];
+  if (dirn) out.push(`${notes[dirn.k].nm} has the clearest grain: its edges run at ${Math.round(dirn.dir)}°${dirn.dir > 70 && dirn.dir < 110 ? ", near vertical" : dirn.dir < 20 || dirn.dir > 160 ? ", near horizontal" : ", on the diagonal"} (coherence ${dirn.coh.toFixed(2)}).`);
+  const spread = top.slice().sort((a, b) => (b.l1 + b.l2) - (a.l1 + a.l2));
+  if (spread.length >= 2) out.push(`${notes[spread[0].k].nm} is spread across the whole picture; ${notes[spread[spread.length - 1].k].nm} gathers in one place.`);
+  const rose = g => { const mx = Math.max(...g.rose, 1e-9), mn = Math.min(...g.rose), R = 38, c = 44, petals = []; g.rose.forEach((v, b) => { const r = 6 + (R - 6) * (v - .85 * mn) / ((mx - .85 * mn) || 1); [0, 180].forEach(o => { const a0 = -(b * 15 + o) * Math.PI / 180, a1 = -((b + 1) * 15 + o) * Math.PI / 180; petals.push(`<path d="M${c},${c}L${c + r * Math.cos(a0)},${c + r * Math.sin(a0)}A${r},${r} 0 0 0 ${c + r * Math.cos(a1)},${c + r * Math.sin(a1)}Z" fill="${notes[g.k].hex}"/>`); }); });
+    return `<svg width="88" height="88" aria-label="Edge directions of ${esc(notes[g.k].nm)}"><circle cx="44" cy="44" r="40" fill="var(--s1)" stroke="var(--line)"/><line x1="4" x2="84" y1="44" y2="44" stroke="var(--line)"/><line x1="44" x2="44" y1="4" y2="84" stroke="var(--line)"/>${petals.join("")}</svg>`; };
+  $("#geotext").innerHTML = `<div class="roses">${top.slice(0, 4).map(g => `<div>${rose(g)}<span>${esc(notes[g.k].nm)}</span><b>${Math.round(g.dir)}° · ${g.coh > .3 ? "strong" : g.coh > .15 ? "some" : "loose"} grain</b></div>`).join("")}</div>
+    ${out.map(s => `<p class="cap" style="font-style:normal;color:var(--ink);font-family:var(--sans);font-size:15px">${esc(s)}</p>`).join("")}
+    <p class="cap">Rings: where each color spreads, one standard deviation, with its main axis; dots mark its center. Roses: which way its edges run, relative to its own average. Measured on a 150-pixel copy, so this is the grain of the brushwork and the shapes, not single strokes.</p>`;
+}
+
+// ================= VIEW: Arc (every work in order, measured curves, change points, sourced life events) =================
+// Honesty rule (CLAUDE.md myths list): a color never carries a fixed emotion, so this view never reads psychology from
+// color. It shows the measured shift, puts sourced biography beside it, and leaves the link to the viewer.
+const METRICS = [
+  ["L", "Lightness", w => w.pool.reduce((t, p) => t + p.L * p.share, 0) * 100, v => v.toFixed(0)],
+  ["C", "Vividness", w => w.pool.reduce((t, p) => t + p.C * p.share, 0) * 1000, v => v.toFixed(0)],
+  ["warm", "Warm minus cool", w => w.pool.reduce((t, p) => t + (p.C >= .035 ? Math.sign(warmth(p.ok)) * (Math.abs(warmth(p.ok)) > .02) * p.share : 0), 0) * 100, v => (v > 0 ? "+" : "") + v.toFixed(0)],
+  ["con", "Contrast", w => { const s = w.pool.slice().sort((a, b) => a.L - b.L); let c = 0, lo = null, hi = null; s.forEach(p => { c += p.share; if (lo == null && c >= .05) lo = p.L; if (hi == null && c >= .95) hi = p.L; }); return ((hi ?? s[s.length - 1].L) - (lo ?? s[0].L)) * 100; }, v => v.toFixed(0)],
+  ["div", "Distinct colors", w => { const nn = poolPick(w.pool, 12); return Math.exp(-nn.reduce((t, n) => t + (n.share > 0 ? n.share * Math.log(n.share) : 0), 0)); }, v => v.toFixed(1)],
+  ["spr", "Hue spread", w => { let c = 0, s = 0, t = 0; w.pool.forEach(p => { if (p.C < .04) return; const wt = p.share * p.C; c += wt * Math.cos(p.h * Math.PI / 180); s += wt * Math.sin(p.h * Math.PI / 180); t += wt; }); if (!t) return 0; const R = Math.min(1, Math.hypot(c, s) / t); return Math.sqrt(-2 * Math.log(Math.max(R, 1e-6))) * 180 / Math.PI; }, v => v.toFixed(0) + "°"],
+];
+// the single split that best explains a series (least squares), and a permutation test of it
+function changePoint(xs) {
+  const n = xs.length; if (n < 8) return null;
+  const best = arr => { let bk = -1, bg = 0; const tot = arr.reduce((a, b) => a + b, 0), m = tot / n, sst = arr.reduce((t, v) => t + (v - m) ** 2, 0); let s = 0;
+    for (let k = 3; k <= n - 3; k++) { s += arr[k - 1]; const m1 = s / k, m2 = (tot - s) / (n - k), g = k * (m1 - m) ** 2 + (n - k) * (m2 - m) ** 2; if (g > bg) { bg = g; bk = k; } }
+    return { k: bk, g: bg / (sst || 1) }; };
+  const obs = best(xs); let ge = 0; const a = xs.slice();
+  let seed = 12345; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let r = 0; r < 300; r++) { for (let i = n - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } if (best(a).g >= obs.g) ge++; }
+  const before = xs.slice(0, obs.k), after = xs.slice(obs.k), mean = v => v.reduce((x, y) => x + y, 0) / v.length;
+  const sd = Math.sqrt(xs.reduce((t, v) => t + (v - mean(xs)) ** 2, 0) / n) || 1;
+  return { k: obs.k, p: (ge + 1) / 301, before: mean(before), after: mean(after), d: (mean(after) - mean(before)) / sd };
+}
+function viewArc() {
+  const works = P.works, n = works.length, W = Math.min(innerWidth, 520) - 32, ev = EVENTS[S.who];
+  const y0 = works[0].y, y1 = works[n - 1].y, span = Math.max(1, y1 - y0), X = y => 8 + (y - y0) / span * (W - 16);
+  // within one year, spread works evenly so dots don't sit on top of each other
+  const byYear = new Map(); works.forEach(w => byYear.set(w.y, (byYear.get(w.y) || 0) + 1));
+  const seen = new Map(), xs = works.map(w => { const k = seen.get(w.y) || 0; seen.set(w.y, k + 1); const m = byYear.get(w.y); return X(w.y + (m > 1 ? (k + .5) / m - .5 : 0) * .85); });
+  const series = METRICS.map(([id, name, f, fmt]) => { const v = works.map(f); return { id, name, v, fmt, cp: changePoint(v) }; });
+  const sig = series.filter(s => s.cp && s.cp.p < .05).sort((a, b) => Math.abs(b.cp.d) - Math.abs(a.cp.d));
+  const evs = ev.ev.filter(e => e[0] >= y0 - .5 && e[0] <= y1 + .6);
+  const chart = (s, first) => {
+    const H = 64, mn = Math.min(...s.v), mx = Math.max(...s.v), Y = v => H - 8 - (v - mn) / ((mx - mn) || 1) * (H - 16);
+    const sg = Math.max(.5, span / 14), line = []; for (let k = 0; k <= 60; k++) { const y = y0 + span * k / 60; let a = 0, b = 0; works.forEach((w, i) => { const g = Math.exp(-((w.y - y) ** 2) / (2 * sg * sg)); a += g * s.v[i]; b += g; }); line.push(`${k ? "L" : "M"}${X(y).toFixed(1)},${Y(a / b).toFixed(1)}`); }
+    const cp = s.cp && s.cp.p < .05 ? s.cp : null, cx = cp ? (xs[cp.k - 1] + xs[cp.k]) / 2 : 0;
+    return `<div class="arcrow"><div class="arch"><span>${s.name}</span>${cp ? `<b>${s.fmt(cp.before)} → ${s.fmt(cp.after)}</b>` : `<b class="soft">no clear shift</b>`}</div>
+      <svg width="${W}" height="${H}" aria-label="${esc(s.name)} by year">${evs.map(e => `<line x1="${X(e[0])}" x2="${X(e[0])}" y1="0" y2="${H}" stroke="var(--line-2)" stroke-dasharray="2 3"/>`).join("")}
+      ${cp ? `<rect x="${cx}" y="0" width="${W - cx}" height="${H}" fill="rgba(236,232,223,.035)"/><line x1="${cx}" x2="${cx}" y1="0" y2="${H}" stroke="var(--ink)" stroke-width="1.5"/>` : ""}
+      <path d="${line.join("")}" fill="none" stroke="var(--soft)" stroke-width="1.5"/>${works.map((w, i) => `<circle cx="${xs[i]}" cy="${Y(s.v[i])}" r="3.6" fill="${okHex(w.mean)}" stroke="rgba(236,232,223,.25)" stroke-width=".6" data-open="${w.id}"/>`).join("")}</svg></div>`;
+  };
+  const top = sig[0];
+  let lede = top ? `${top.name} shifts ${top.cp.after > top.cp.before ? "up" : "down"} from ${works[top.cp.k].y}: ${top.fmt(top.cp.before)} before, ${top.fmt(top.cp.after)} after <em>(p ${top.cp.p < .01 ? "< .01" : "= " + top.cp.p.toFixed(2).slice(1)})</em>.` : `No sharp shift in ${P.his} measured color at this sample size.`;
+  // checks of popular claims, with the n that's actually here
+  let check = "";
+  if (S.who === "vg") { const late = works.filter(w => w.y === 1890), mid = works.filter(w => w.y === 1888 || w.y === 1889), Lm = ws => ws.reduce((t, w) => t + w.pool.reduce((s, p) => s + p.L * p.share, 0), 0) / ws.length * 100;
+    if (late.length && mid.length) check = `Did his last year darken? 1890 (n = ${late.length}) averages lightness ${Lm(late).toFixed(0)}, against ${Lm(mid).toFixed(0)} for 1888–89 (n = ${mid.length}). ${Math.abs(Lm(late) - Lm(mid)) < 4 ? "No clear change in this sample." : Lm(late) < Lm(mid) ? "Darker, in this sample." : "If anything, lighter, in this sample."}`; }
+  if (S.who === "mo") { const cat = works.filter(w => w.y >= 1912 && w.y <= 1922);
+    check = `The cataract years, 1912–1922: ${cat.length} painting${cat.length === 1 ? "" : "s"} here (${cat.map(w => w.y).join(", ") || "none"}). Too few to measure the documented shift toward reds and yellows; the archive needs more late Monets.`; }
+  const strip = works.map(w => `<button data-open="${w.id}" title="${esc(w.t)}, ${w.y}"><img src="${imgURL(w.img)}" alt="" loading="lazy"><span>${w.y}</span></button>`).join("");
+  const html = `<p class="lede">${lede}</p>
+    <div class="film">${strip}</div>
+    <div class="evkey">${evs.map(e => `<span><i></i>${Math.floor(e[0])} ${esc(e[1])}</span>`).join("")}</div>
+    ${series.map((s, i) => chart(s, i === 0)).join("")}
+    <div class="yticks"><span>${y0}</span><span>${y1}</span></div>
+    ${check ? `<p class="verdict" style="font-size:19px">${esc(check)}</p>` : ""}
+    <p class="foot"><b>We measure the color; the dates come from ${esc(ev.src)}; any link between them is yours to judge.</b> Color doesn't carry fixed emotions. Shaded areas mark a statistically clear split (best single change point, permutation test, p < .05). Dashed lines are life events. ${n} paintings, as photographed.</p>`;
+  return { html, dock: "" };
+}
+
+// ================= VIEW 6: What art says (findings mined from the whole archive) =================
+function bars(groups, key = "g", label = g => g) {
+  return `<div class="bars2">${groups.map(g => `<div class="r"><span>${esc(label(g[key]))}</span><div class="t"><i style="width:${g.p * 100}%;background:${g.col || "#C9B48A"}"></i><s style="left:${g.ci[0] * 100}%;width:${(g.ci[1] - g.ci[0]) * 100}%"></s><u style="left:50%"></u></div><b>${pct(g.p)}</b></div>`).join("")}</div>`;
+}
+function viewArt() {
+  const F = Object.fromEntries(D.find.findings.map(f => [f.id, f]));
+  const cards = [];
+  // 1. the vertical order of color
+  const vo = F.vertical; if (vo) {
+    const H = 330, W = Math.min(innerWidth, 520) - 64, famCol = { "Blues": "#5E7FA3", "Deep blues": "#4D5C8C", "Pales": "#DCD3BD", "Teals": "#4E8580", "Greens": "#5F7F52", "Greys": "#8B8478", "Yellow-greens": "#8E8C4A", "Ochres & olives": "#8F7A45", "Yellows": "#C9A445", "Darks": "#2B2620", "Oranges & browns": "#7E5235", "Reds": "#8E3B2D", "Violets": "#6C5A80", "Pinks & crimsons": "#9A5865" };
+    const fams = vo.families, FH = H, FW = Math.round(FH * .5), fx = 0;
+    // labels relaxed apart on the right, with leader lines to each family's true height on the canvas
+    const ly = fams.map(f => 10 + f.median * (FH - 20)); const lab = ly.slice(); for (let it = 0; it < 60; it++) for (let k = 1; k < lab.length; k++) if (lab[k] - lab[k - 1] < 21) { const d = (21 - (lab[k] - lab[k - 1])) / 2; lab[k - 1] -= d; lab[k] += d; }
+    const col = (f, k) => { const x = fx + FW * (.25 + .5 * ((k * .618) % 1)); return `<path d="M${x + 9},${ly[k]}C${FW + 20},${ly[k]} ${FW + 14},${lab[k]} ${FW + 34},${lab[k]}" fill="none" stroke="var(--line-2)"/><circle cx="${x}" cy="${ly[k]}" r="9" fill="${famCol[f.fam] || "#777"}" stroke="rgba(236,232,223,.25)"/><text class="axis" x="${FW + 40}" y="${lab[k] + 4.5}" fill="var(--ink)" style="font-size:14px">${esc(f.fam)} <tspan fill="var(--faint)">${Math.round(f.median * 100)}%</tspan></text>`; };
+    cards.push(`<div class="fcard"><h4>Blue at the top, red at the bottom</h4>
+      <svg width="${W}" height="${H}" role="img" aria-label="Median height of each color family on the canvas"><rect x="${fx}" y="0" width="${FW}" height="${FH}" rx="6" fill="var(--s2)" stroke="var(--line)"/><text class="axis" x="${FW / 2}" y="16" text-anchor="middle">top of the canvas</text><text class="axis" x="${FW / 2}" y="${FH - 8}" text-anchor="middle">bottom</text>${fams.map(col).join("")}</svg>
+      <p>Where each color family sits on the canvas: blues at ${Math.round(fams[0].median * 100)}% of the way down, reds at ${Math.round(fams[fams.length - 1].median * 100)}%. In landscapes the blues rise to ${Math.round((fams.find(f => f.fam === "Blues").land || 0) * 100)}% and the darks sink to ${Math.round((fams.find(f => f.fam === "Darks").land || 0) * 100)}%. Sky above, earth below, figures' reds low in the frame.</p>
+      <div class="n">n = ${vo.n.toLocaleString()} paintings with local images · median height · 95% intervals ±${Math.round((fams[0].ci[1] - fams[0].ci[0]) * 50)} or less</div></div>`);
+  }
+  // 2. lit figure, dark ground
+  const fg = F.figureground; if (fg) cards.push(`<div class="fcard"><h4>The lit sitter on a dark ground rose and fell</h4>${bars(fg.groups.map(g => ({ ...g, col: "#C9A27E" })))}
+    <p>Portraits whose middle is lighter than their edges: ${pct(fg.groups[0].p)} before 1700, ${pct(Math.max(...fg.groups.map(g => g.p)))} at the peak, ${pct(fg.groups[fg.groups.length - 1].p)} after 1900. The dashed line is a coin flip.</p>
+    <div class="n">n = ${fg.n} portraits (by title) · bars show 95% intervals · center box vs outer band</div></div>`);
+  const tb = F.topbottom; if (tb) cards.push(`<div class="fcard"><h4>Light above, dark below, except in portraits</h4>${bars(tb.groups.map(g => ({ ...g, col: g.g === "landscape" ? "#8FA6B8" : "#A88C70" })), "g", g => g[0].toUpperCase() + g.slice(1) + "s")}
+    <p>Share whose top third is lighter than their bottom third. Landscapes carry the sky; portraits often darken toward the top, where the background is.</p><div class="n">n = ${tb.n.toLocaleString()} · by genre from titles</div></div>`);
+  const wl = F.warmlights; if (wl) cards.push(`<div class="fcard"><h4>Warm lights belong to portraits</h4>${bars(wl.groups.map(g => ({ ...g, col: g.g === "portrait" ? "#D2A579" : g.g === "landscape" ? "#7F9AA8" : "#A9997F" })), "g", g => g[0].toUpperCase() + g.slice(1) + "s")}
+    <p>Paintings whose lightest fifth is warmer than their darkest fifth. Lit flesh against cool shadow in ${pct(wl.groups.find(g => g.g === "portrait").p)} of portraits; landscapes split evenly, because their lights are often sky.</p><div class="n">n = ${wl.n.toLocaleString()} · yellowed varnish inflates warm lights</div></div>`);
+  // hue intervals
+  const iv = F.intervals; if (iv) { const W = Math.min(innerWidth, 520) - 64, H = 150, bw = W / iv.ratio.length, mx = Math.max(...iv.ratio, 1.2), y1 = H - 20 - (1 / mx) * (H - 34);
+    cards.push(`<div class="fcard"><h4>Painters keep hues close</h4><svg width="${W}" height="${H}" role="img" aria-label="Hue intervals in paintings vs chance">${iv.ratio.map((r, k) => { const h = r / mx * (H - 34), hue = k * 15 + 7; return `<rect x="${k * bw + 2}" y="${H - 20 - h}" width="${bw - 4}" height="${h}" rx="3" fill="${okHex([.68, .1 * Math.cos((55 + hue) * Math.PI / 180), .1 * Math.sin((55 + hue) * Math.PI / 180)])}" opacity="${r >= 1 ? 1 : .55}"/>`; }).join("")}
+      <line x1="0" x2="${W}" y1="${y1}" y2="${y1}" stroke="var(--soft)" stroke-dasharray="4 4"/><text class="axis" x="${W}" y="${y1 - 5}" text-anchor="end">chance</text><text class="axis" x="0" y="${H - 4}">same hue</text><text class="axis" x="${W}" y="${H - 4}" text-anchor="end">opposite, 180°</text></svg>
+      <p>Two distinct notes within 15° of hue sit in the same painting ${iv.effect.close.toFixed(1)}× as often as chance; true opposites only ${iv.effect.opposite.toFixed(2)}×. The wheel's complementary rule is the exception in museums, not the habit. The pull toward close hues grows from ${iv.byEra["before 1500"][0].toFixed(1)}× before 1500 to ${iv.byEra["1900s"][0].toFixed(1)}× in the 1900s.</p>
+      <div class="n">n = ${iv.n.toLocaleString()} paintings · null: notes from another painting of the same museum and century · 95% ${iv.effect.ci_close.join("–")}</div></div>`); }
+  // live: whose palette (Monet vs Van Gogh, leave one out)
+  const fpLive = fingerprint();
+  const fp = F.fingerprint;
+  cards.push(`<div class="fcard"><h4>Monet or Van Gogh? The colors alone can tell</h4><div class="big" style="margin:8px 0 0"><b>${pct(fpLive.acc)}</b><span>of ${fpLive.n} paintings put with the right painter from their 24 colors, each one left out of its own painter's average.</span></div>
+    <p>Across all ${fp.effect.painters} painters with 20 or more works it's harder: the right one first ${pct(fp.effect.top1)} of the time, in the top five ${pct(fp.effect.top5)}, against ${pct(fp.effect.chance1, 1)} by chance.</p>
+    <div class="vs">${fpLive.odd.map(o => `<div class="card"><img src="${imgURL(o.w.img)}" alt="" style="width:100%;height:96px;object-fit:cover;border-radius:6px;display:block"><h5 style="margin-top:8px">The least ${o.P.short} ${o.P.short}</h5><p>${esc(o.w.t)}, ${o.w.y}</p></div>`).join("")}</div>
+    <div class="n">computed live here · nearest of two painter averages · ${fp.n.toLocaleString()} paintings in the archive-wide test</div></div>`);
+  const dt = F.dating; if (dt) cards.push(`<div class="fcard"><h4>A palette dates a painting, roughly</h4><div class="big" style="margin:8px 0 0"><b>±${Math.round(dt.effect.medianErr)}</b><span>years, half the time, from color alone. Guessing the archive's middle year: ±${Math.round(dt.effect.nullMedianErr)}.</span></div>
+    <p>Best for the 1600s (±${dt.byCentury.find(c => c.c === 1600).medianErr}), worst for gold-ground panels, which read as 1800s.</p>
+    <div class="vs">${dt.misfits.slice(0, 2).map(m => `<div class="card"><img src="${imgURL(m.img)}" alt="" style="width:100%;height:96px;object-fit:cover;border-radius:6px;display:block"><h5 style="margin-top:8px">${m.y}, looks ${m.pred}</h5><p>${esc(m.t)}</p></div>`).join("")}</div>
+    <div class="n">n = ${dt.n.toLocaleString()} · 25 nearest palettes, 5-fold cross-validated</div></div>`);
+  const pr = F.pairs; if (pr) cards.push(`<div class="fcard"><h4>Partners art actually chooses</h4><p style="margin-top:0">${esc(pr.sentence)}</p><div class="pairs">${pr.pairs.slice(0, 5).map(p => `<div class="r"><i style="background:${p.ah}"></i><i style="background:${p.bh}"></i><span>${esc(p.a)} with ${esc(p.b)}</span><b>${p.lift.toFixed(1)}×</b></div>`).join("")}</div>
+    <div class="n">n = ${pr.n.toLocaleString()} paintings · lift vs each museum's and century's own rates · Poisson 95% above 1</div></div>`);
+  const html = `<p class="lede">Not wheel math: what ${D.find.nPaintings.toLocaleString()} paintings actually do with color.</p>${cards.join("")}
+    <p class="foot"><b>As photographed.</b> Museum photographs of varnished paintings; spatial findings use the ${D.find.nImages.toLocaleString()} images held locally (Chicago and Copenhagen). Methods and code: design/ATLAS/mine.py.</p>`;
+  return { html, dock: "" };
+}
+function fingerprint() {
+  const A = PAINTERS.vg, B = PAINTERS.mo, all = [...A.works.map(w => [w, A]), ...B.works.map(w => [w, B])];
+  const cen = ws => { const m = new Array(ws[0].f.length).fill(0); ws.forEach(w => w.f.forEach((v, k) => m[k] += v / ws.length)); return m; };
+  const sd = new Array(A.works[0].f.length).fill(0), mu = cen(all.map(x => x[0]));
+  all.forEach(([w]) => w.f.forEach((v, k) => sd[k] += (v - mu[k]) ** 2 / all.length)); sd.forEach((v, k) => sd[k] = Math.sqrt(v) + 1e-6);
+  const d = (f, c) => f.reduce((t, v, k) => t + ((v - c[k]) / sd[k]) ** 2, 0);
+  const cA = cen(A.works), cB = cen(B.works); let ok = 0;
+  all.forEach(([w, p]) => { const own = p === A ? A.works : B.works, n = own.length, c0 = (p === A ? cA : cB).map((v, k) => (v * n - w.f[k]) / (n - 1));
+    const other = p === A ? cB : cA; if (d(w.f, c0) < d(w.f, other)) ok++; });
+  const odd = [A, B].map(p => { const c = p === A ? cA : cB, o = p === A ? cB : cA; const w = p.works.slice().sort((x, y) => (d(y.f, c) - d(y.f, o)) - (d(x.f, c) - d(x.f, o)))[0]; return { P: p, w }; });
+  return { acc: ok / all.length, n: all.length, odd };
+}
+
+// ---------------- render loop ----------------
+async function render(live) {
+  P = PAINTERS[S.who];
+  chrome();
+  const sub = $("#sub"), title = $("#title");
+  title.style.fontSize = "";
+  if (S.v === "compare") { title.textContent = "Monet & Van Gogh"; sub.textContent = `${PAINTERS.mo.works.length} and ${PAINTERS.vg.works.length} paintings · as photographed`; }
+  else if (S.v === "painting") { const w = [...PAINTERS.vg.works, ...PAINTERS.mo.works].find(x => x.id === S.pid); const pn = w && PAINTERS.vg.works.includes(w) ? PAINTERS.vg : PAINTERS.mo; title.textContent = w ? w.t : P.name; title.style.fontSize = w && w.t.length > 22 ? "34px" : ""; sub.textContent = w ? `${pn.name}, ${w.y} · as photographed` : ""; }
+  else if (S.v === "art") { title.textContent = "What art says"; sub.textContent = `${D.find.nPaintings.toLocaleString()} paintings, measured · as photographed`; }
+  else { const f = S.v === "years" || S.v === "chords"; title.textContent = P.name; sub.textContent = `${f ? P.works.filter(inRange).length : P.works.length} paintings, ${f ? period() : `${P.y0}–${P.y1}`} · as photographed`; }
+  stopPlay(); stopDance();
+  const fn = { career: viewCareer, arc: viewArc, years: viewYears, chords: viewChords, compare: viewCompare, painting: viewPainting, art: viewArt }[S.v];
+  const r = await fn(live);
+  const main = $("#main"), y = scrollY;
+  main.innerHTML = r.html;
+  const dock = $("#dock"); dock.hidden = !r.dock; dock.innerHTML = r.dock || "";
+  bindSliders(dock);
+  if (r.after) r.after(main);
+  if (live) scrollTo(0, y);
+  writeHash();
+  $("#out").textContent = JSON.stringify({ ok: true, v: S.v, iw: innerWidth, sw: document.documentElement.scrollWidth, errs: ERRS });
+  setTimeout(() => { $("#out").textContent = JSON.stringify({ ok: true, v: S.v, errs: ERRS, dance: DANCE ? DANCE.k : null, notes: window.__notes, steps: window.__steps }); }, 4000);
+}
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-view],[data-who],[data-set],[data-period],[data-c],[data-open],[data-chord],[data-pid],[data-note],[data-chordi],[data-pair]");
+  if (!t) return;
+  const d = t.dataset; buzz();
+  if (d.view) { S.v = d.view; S.sel = null; scrollTo(0, 0); return render(); }
+  if (d.who) { if (S.who === d.who) return; S.who = d.who; S.y = null; S.sel = null; FIELD = null; S.t = S.win ? PAINTERS[d.who].y0 : null; if (S.v === "painting") { S.pid = PAINTERS[d.who].works[0].id; S.pair = []; S.chord = -1; } return render(); }
+  if (d.set) { S[d.set] = typeof S[d.set] === "number" ? +d.val : d.val; S.sel = null;
+    if (d.set === "win") { S.t = S.win ? (S.t == null ? P.y0 : S.t) : null; }
+    if (d.set === "pm") { S.sorted = 0; S.step = null; }
+    return render(d.set !== "arr"); }
+  if (d.period) { const [a, b] = d.period.split("-").map(Number); S.y = a === P.y0 && b === P.y1 ? null : [a, b]; S.sel = null; FIELD = null; return render(true); }
+  if (d.c != null) { stopPlay(); S.sel = S.sel === +d.c ? null : +d.c; return render(true); }
+  if (d.open) { S.pid = d.open; S.v = "painting"; S.pair = []; S.chord = -1; S.step = null; scrollTo(0, 0); return render(); }
+  if (d.chord) { const i = CHORD_IDX[d.chord]; S.chord = S.chord === i ? -1 : i; return render(true); }
+  if (d.pid) { S.pid = d.pid; S.pair = []; S.chord = -1; S.map = 0; S.step = null; S.sorted = 0; return render(true); }
+  if (d.note != null || d.pair != null) { const i = +(d.note != null ? d.note : d.pair); S.chord = -1; S.step = null;
+    S.pair = S.pair.includes(i) ? S.pair.filter(x => x !== i) : [...S.pair.slice(S.pm === "mosaic" ? -3 : -1), i]; return render(true); }
+  if (d.chordi != null) { const k = +d.chordi; S.chord = S.chord === k ? -1 : k; S.pair = []; S.step = null; if (S.chord >= 0 && S.pm === "geo") S.pm = "dance"; render(true).then(() => { if (S.chord >= 0) scrollTo({ top: 0, behavior: "smooth" }); }); return; }
+});
+
+// ---------------- boot ----------------
+(async function boot() {
+  try {
+    const [gal, bin, meta, names, find] = await Promise.all([J("data/gallery/index.json"), fetch(ROOT + "data/gallery/index.bin").then(r => r.arrayBuffer()), J("data/artists/meta.json"), J("data/core-names.json"), J("design/ATLAS/data/findings.json")]);
+    const b = new Uint8Array(bin), y = new Array(gal.n);
+    for (let i = 0; i < gal.n; i++) { const o = i * gal.rec, v = b[o] | b[o + 1] << 8; y[i] = v ? v - gal.year0 : null; }
+    D.gal = gal; D.years = y; D.meta = meta; D.find = find;
+    NAMES = names.map(n => ({ n: n.n, ok: hexOk(n.h) }));
+    await Promise.all([loadPainter("vg"), loadPainter("mo")]);
+    for (const k in PAINTERS) PAINTERS[k].dot = okHex(meanOk(PAINTERS[k].works.flatMap(w => w.pool.map(p => ({ ok: p.ok, share: p.share }))).map(p => ({ ok: p.ok, share: p.share / PAINTERS[k].works.length }))).map((v, i) => i ? v * 2.2 : v * 1.15));
+    if (S.v === "painting" && ![...PAINTERS.vg.works, ...PAINTERS.mo.works].some(w => w.id === S.pid)) S.pid = PAINTERS[S.who].works[0].id;
+    await render();
+  } catch (e) {
+    $("#main").innerHTML = `<div class="load"><div class="err">Couldn't load the archive: ${esc(e.message)}.<br><span style="color:var(--soft)">Serve the repo root with python3 -m http.server and open design/ATLAS/prototype.html.</span></div></div>`;
+    $("#out").textContent = JSON.stringify({ ok: false, err: String(e.stack || e) });
+  }
+})();
+</script>
+</body>
+</html>
