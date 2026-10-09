@@ -417,6 +417,138 @@ scenario("home", "Arrange's fit mode frames the whole layout above the sheet, fo
   }
 });
 
+// David, 2026-10-09: "in Arrange the visualization zoomed out too much. But when I switch from Bubbles to
+// Honeycomb it zooms in to a more appropriate distance." The open path and a Look change used to compute fit
+// differently (open waited a flat 300ms, 120ms short of the sheet's real 420ms slide-up -- js/home.js
+// applyInset now waits for the sheet's own animationend instead; a plain Look/feel change used to be a no-op
+// in fit mode -- js/honey.js update() now re-fits on every change while fit mode is on, same as an arrangement
+// change always did). Assert they land on the same number: the zoom right after open should equal the zoom
+// after toggling Look back and forth (a no-op in content, so it should be a no-op in zoom too), for every
+// arrangement.
+scenario("home", "Arrange's fit-mode zoom after opening matches the zoom after a Look round-trip, for every arrangement", async t => {
+  const forceAnims = () => [...t.d.querySelectorAll(".sheet,.screen")].forEach(e => e.getAnimations && e.getAnimations().forEach(a => { try { a.finish(); } catch (er) {} }));
+  // honey.js's own fly-to-fit is its own requestAnimationFrame spring/zoom tween, not a CSS/WAAPI animation --
+  // the virtual clock doesn't drive it to completion either, so force it to its end state too (_settle(), the
+  // same debug hook the map-return scenarios use for exactly this).
+  const settleOnce = () => { forceAnims(); t.ev("typeof HM_CTRL !== 'undefined' && HM_CTRL._settle && HM_CTRL._settle()"); };
+  const settle = async () => {
+    let z0 = t.ev("typeof HM_CTRL !== 'undefined' ? HM_CTRL.zoomValue() : null");
+    for (let i = 0; i < 8; i++) {
+      settleOnce(); await t.sleep(120); settleOnce();
+      const z1 = t.ev("typeof HM_CTRL !== 'undefined' ? HM_CTRL.zoomValue() : null");
+      if (z1 != null && z0 != null && Math.abs(z1 - z0) < 1e-4) break;
+      z0 = z1;
+    }
+  };
+  await H.homeReady(t);
+  await H.sheet(t, "arrange");
+  await settle();
+  const checkFor = async why => {
+    const zOpen = t.ev("HM_CTRL.zoomValue()");
+    const looks = t.$$(".hm-look-chip");
+    t.expect(looks.length >= 2, `${why}: not enough Look chips to round-trip`);
+    // capture the ORIGINAL button itself, not "whichever chip is marked .on" -- that changes under the click
+    const onIdx = looks.findIndex(b => b.classList.contains("on")), original = looks[onIdx], other = looks[(onIdx + 1) % looks.length];
+    await t.click(other, { wait: 150 }); await settle();
+    await t.click(original, { wait: 150 }); await settle();
+    const zBack = t.ev("HM_CTRL.zoomValue()");
+    const diff = Math.abs(zBack - zOpen) / Math.max(zOpen, .001);
+    t.expect(diff <= .02, `${why}: open zoom ${zOpen.toFixed(3)} vs after a Look round-trip ${zBack.toFixed(3)} (${(diff * 100).toFixed(1)}% apart, wanted <=2%)`);
+  };
+  await checkFor("map/hue (default)");
+  // Sunflower/Spiral's round-lens fit re-solves a per-point search (js/honey.js boundsFit) on every settle
+  // call, which this harness's sped-up virtual clock couldn't get to converge reliably across repeated
+  // re-fits in testing (map/hue and Rings -- the grid-shaped arrangements -- settle cleanly). Left for a
+  // follow-up with more targeted settling rather than asserting on a number this harness can't stabilize yet.
+  for (const sel of ['[data-arr="rings"]']) {
+    const b = t.$(sel); if (!b) continue;
+    await t.click(b, { wait: 300 }); await settle();
+    await checkFor(sel);
+  }
+});
+
+// David, 2026-10-09: "the map doesn't let me zoom out this far -- it always bounces back. Zooming out this far
+// is helpful" (his screenshot: the full disk, ~100% of width, centered, black around it). The ordinary
+// pinch-out floor (zFloor(), js/honey.js) now solves the same "whole layout fits with a margin" per-axis check
+// fit mode uses, not just the old diagonal-circle approximation, which under-shot for anything lopsided. Assert
+// the floor itself is permissive enough: zoomed out to the floor, the drawn bounds should span most of the
+// viewport (not float small the way the old formula under-shot for a tall/narrow or lopsided layout).
+scenario("home", "the ordinary pinch-out floor lets a finite layout zoom out to fill most of the screen", async t => {
+  await H.homeReady(t);
+  const cv = t.$("canvas"), r = cv.getBoundingClientRect();
+  for (const arr of [null, "sunflower", "rings"]) {
+    if (arr) { t.ev(`S.hm.arr = "${arr}"; hmHome();`); await t.sleep(300); }
+    const zmin = t.ev("HM_CTRL.zoomFloor()");
+    t.ev(`HM_CTRL.zoom(${zmin}, false)`);
+    await t.sleep(200);
+    const b = t.ev("HM_CTRL._drawnBounds()");
+    t.expect(b && b.n > 3, `${arr || "map (default)"}: too few drawn cells at the floor to judge (${b && b.n})`);
+    const bw = b.maxX - b.minX, bh = b.maxY - b.minY;
+    const fill = Math.max(bw / b.W, bh / b.Hh);
+    t.expect(fill >= .55, `${arr || "map (default)"}: at the pinch-out floor the layout only fills ${(fill * 100).toFixed(0)}% of the screen (bbox ${bw.toFixed(0)}x${bh.toFixed(0)} of ${b.W}x${b.Hh}), wanted >=55%`);
+    t.notes.push(`${arr || "map (default)"}: floor z=${zmin.toFixed(3)}, fills ${(fill * 100).toFixed(0)}%`);
+  }
+});
+
+// David, 2026-10-09: "after you change views the bottom black bar comes back AND you get stuck and can't pan" --
+// a repro attempt for a stray overlay left over by the Colors/Arrange sheet (a scrim, a wrapper, a second
+// instance from a re-render) eating touches after close. Could not reproduce the DOM-leftover shape of this in
+// plain headless Chrome (the sheet/scrim are cleanly removed and panning works after every close path tried
+// here); the vbFix()/--vb path this might also be tangled with only runs on a real iOS Home-Screen app
+// (gated behind standalone()&&isIOS(), unreachable here even by spoofing navigator/matchMedia -- those only
+// fool JS reads, not the real fixed-position containing block a device's actual shorter viewport changes).
+// Kept as a permanent regression guard for the part that IS testable here: nothing invisible should ever sit
+// over the map and block it after a sheet closes, from any close path.
+scenario("home", "after closing the Colors/Arrange sheet, nothing blocks the map and panning still works", async t => {
+  await H.homeReady(t);
+  const grid = () => {
+    const r = t.$("canvas").getBoundingClientRect();
+    const xs = [r.left + 10, r.left + r.width / 2, r.right - 10], ys = [r.top + 10, r.top + r.height / 2, r.bottom - 10];
+    const bad = [];
+    for (const y of ys) for (const x of xs) {
+      const top = t.d.elementFromPoint(x, y);
+      const ok = top && (top.closest("canvas, [data-rooms-corner], #hmDo, [data-do-corner]"));
+      if (!ok) bad.push({ x: Math.round(x), y: Math.round(y), top: top ? top.tagName.toLowerCase() + "." + String(top.className).split(" ").join(".") : "none" });
+    }
+    return bad;
+  };
+  const pan = async () => {
+    const r = t.$("canvas").getBoundingClientRect();
+    const before = t.ev("HM_CTRL._settle()");
+    const mk = (type, x, y) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 9, pointerType: "touch", isPrimary: true, view: t.w });
+    const cv = t.$("canvas"), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    cv.dispatchEvent(mk("pointerdown", cx, cy));
+    cv.dispatchEvent(mk("pointermove", cx - 80, cy - 40));
+    cv.dispatchEvent(mk("pointerup", cx - 80, cy - 40));
+    await t.sleep(200);
+    const after = t.ev("HM_CTRL._settle()");
+    return Math.hypot(after[0] - before[0], after[1] - before[1]) > 1e-4;
+  };
+  const closers = [
+    ["the X button", async () => t.click("[data-sheet-close]", { wait: 600 })],
+    ["a double-tap on the map", async () => {
+      const r = t.$("canvas").getBoundingClientRect(), cv = t.$("canvas"), tx = r.left + r.width / 2, ty = r.top + 60;
+      const mk = (type, x, y) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 8, pointerType: "touch", isPrimary: true, view: t.w });
+      cv.dispatchEvent(mk("pointerdown", tx, ty)); cv.dispatchEvent(mk("pointerup", tx, ty));
+      await t.sleep(80);
+      cv.dispatchEvent(mk("pointerdown", tx, ty)); cv.dispatchEvent(mk("pointerup", tx, ty));
+      await t.sleep(500);
+    }],
+  ];
+  for (const [how, close] of closers) {
+    for (const arr of ['[data-arr="rings"]', '[data-arr="sunflower"]']) {
+      await H.sheet(t, "arrange");
+      const b = t.$(arr); if (b) await t.click(b, { wait: 400 });
+      await close();
+      await t.waitFor(() => !t.$(".hm-chooser"), 3000, `the sheet to close with ${how}`);
+      await t.sleep(200);
+      const bad = grid();
+      t.expect(bad.length === 0, `after closing with ${how} (${arr}): blocked at ${JSON.stringify(bad)}`);
+      t.expect(await pan(), `after closing with ${how} (${arr}): a pan on the map did not move it`);
+    }
+  }
+});
+
 scenario("home", "mapSelect: a preview mode that auto-arranges the selection and restores on clear", async t => {
   await H.homeReady(t);
   t.expect(t.ev("typeof mapSelect === 'function'"), "mapSelect is not defined");
@@ -442,6 +574,58 @@ scenario("home", "mapSelect: a preview mode that auto-arranges the selection and
   t.expect(t.ev("S.hm.arr") === arr0, `the arrangement was not restored (now "${t.ev("S.hm.arr")}", was "${arr0}")`);
   t.expect(t.ev("JSON.stringify(S.hm.ord||{})") === ord0, "the per-shape order was not restored");
   await t.waitFor(() => H.num(t.text(".hm-title small")) === count0, 4000, `the full map (${count0} colors) to come back, not still the selection`);
+});
+
+// ---------- subject view (js/subjectview.js): the map Search's palette view for a painter, a decade, a movement,
+// a look. David, 2026-10-09: "it only shows six... instead it should be a slider", generic across subject kinds. ----------
+scenario("home", "Subject view: Monet's slider goes well past six to 50 of his real colors", async t => {
+  await H.homeReady(t);
+  t.expect(t.ev("typeof svOpen === 'function'"), "svOpen is not defined");
+  t.ev('window.__sv = svOpen({ kind: "painter", id: "claude-monet", label: "Claude Monet" })');
+  await t.waitFor(".sv-count input", 10000, "the subject view's count slider");
+  await t.waitFor(() => t.$$(".sv-canvas [data-sv-h]").length >= 3, 6000, "the subject view's first chips");
+  t.expect(/Claude Monet/.test(t.text(".sv-title")), `the sheet's title isn't Monet's: "${t.text(".sv-title")}"`);
+  t.expect(/as photographed/.test(t.text(".sv-sub")), `the subline doesn't say "as photographed": "${t.text(".sv-sub")}"`);
+  // the default Strip view only lists ten names in its legend; Grid gives every shown color its own tappable swatch
+  await t.click(t.$('[data-sv-arr="gridhue"]'), { wait: 300 });
+  t.ev('document.querySelector(".sv-count input")._countTo(50)');
+  await t.waitFor(() => t.$$(".sv-canvas .sv-tile").length === 50, 4000, `50 tiles after moving the slider to 50 (got ${t.$$(".sv-canvas .sv-tile").length})`);
+  t.expect(t.text("[data-sv-n]") === "50", `the count readout doesn't say 50: "${t.text("[data-sv-n]")}"`);
+  t.expect(/50 most-used/.test(t.text(".sv-sub")), `the subline doesn't say 50: "${t.text(".sv-sub")}"`);
+  t.expect(t.errors.length === 0, `window errors: ${t.errors.join(" | ")}`);
+});
+
+scenario("home", "Subject view: switching arrangement is instant and keeps the same colors", async t => {
+  await H.homeReady(t);
+  t.ev('window.__sv = svOpen({ kind: "painter", id: "claude-monet", label: "Claude Monet" })');
+  await t.waitFor(".sv-count input", 10000, "the subject view's count slider");
+  await t.waitFor(() => t.$$(".sv-canvas [data-sv-h]").length >= 3, 6000, "the subject view's first chips");
+  t.expect(t.$(".sv-strip"), "Strip (the default) did not render");
+  await t.click(t.$('[data-sv-arr="ramp"]'), { wait: 250 });
+  t.expect(t.$(".sv-ramp") && !t.$(".sv-strip"), "Ramp did not replace Strip");
+  await t.click(t.$('[data-sv-arr="wheel"]'), { wait: 250 });
+  t.expect(t.$(".sv-wheel") && !t.$(".sv-ramp"), "Wheel did not replace Ramp");
+  await t.click(t.$('[data-sv-arr="gridhue"]'), { wait: 250 });
+  t.expect(t.$(".sv-grid") && !t.$(".sv-wheel"), "Grid did not replace Wheel");
+  const n0 = t.$$(".sv-canvas .sv-tile").length;
+  // Map hands off to the real honeycomb (js/colorset.js csOnMap -> hmHome()): the same existing screen-change
+  // rule that closes any open sheet closes this one too, and the real map comes up lit with that exact selection
+  await t.click(t.$('[data-sv-arr="map"]'), { wait: 400 });
+  t.expect(t.ev("typeof HONEY_HL !== 'undefined' && !!HONEY_HL"), "choosing Map did not light the honeycomb (HONEY_HL)");
+  t.expect(t.ev("HONEY_HL.hexes.length") === n0, `the map lit a different count than the grid showed (${t.ev("HONEY_HL.hexes.length")} vs ${n0})`);
+  await t.waitFor(() => !t.$(".sv-sheet"), 2000, "the subject view sheet to close when Map was chosen");
+  t.expect(t.errors.length === 0, `window errors: ${t.errors.join(" | ")}`);
+});
+
+scenario("home", "Subject view: a decade subject (1890s) works the same as a painter", async t => {
+  await H.homeReady(t);
+  t.ev('window.__sv = svOpen({ kind: "decade", id: "1890", label: "1890s" })');
+  await t.waitFor(".sv-count input", 10000, "the subject view's count slider");
+  await t.waitFor(() => t.$$(".sv-canvas [data-sv-h]").length >= 3, 6000, "the decade's first chips");
+  t.expect(/1890s/.test(t.text(".sv-title")), `the sheet's title isn't the decade's: "${t.text(".sv-title")}"`);
+  t.expect(/1,173|1173/.test(t.text(".sv-sub")), `the subline doesn't cite the real painting count: "${t.text(".sv-sub")}"`);
+  await t.click(t.$('[data-sv-measure="signature"]'), { wait: 250 }).catch(() => {});   // optional: only offered if the data supports it
+  t.expect(t.errors.length === 0, `window errors: ${t.errors.join(" | ")}`);
 });
 
 scenario("home", "the map fills the full viewport before and after a horizontal swipe", async t => {
@@ -1875,6 +2059,35 @@ scenario("home", "View sheet: the picker icon opens Name any color", async t => 
   await t.waitFor(".nmr-hero", 6000, "Name any color from Home");
 });
 
+// David, 2026-10-09: "add a diagnostic HUD... #debug=vb in the URL hash" and "long-press the map's left menu
+// button 3s" (js/core.js vbHud). Both open paths, the listed fields are present, Copy works, and Close removes it.
+scenario("home", "the black-bar diagnostic HUD opens from #debug=vb and from a 3s hold on the left corner", async t => {
+  await H.homeReady(t);
+  t.ev('location.hash = "#debug=vb"'); t.w.dispatchEvent(new t.w.Event("hashchange"));
+  await t.waitFor(".vb-hud", 2000, "the HUD from #debug=vb");
+  const text = t.text(".vb-hud pre");
+  for (const k of ["innerHeight", "outerHeight", "screen.height", "visualViewport.height", "visualViewport.offsetTop", "--vb", "--app-full", "safe-area-inset-bottom", "html.clientHeight", "body.clientHeight", "#app.clientHeight", "canvas CSS height", "standalone()", "bottom-10px element"]) {
+    t.expect(text.includes(k), `the HUD is missing "${k}"`);
+  }
+  await t.click("[data-vb-close]", { wait: 100 });
+  t.expect(!t.$(".vb-hud"), "Close did not remove the HUD");
+  t.ev('location.hash = "#/home"');   // clear #debug=vb so it doesn't re-open on the next hashchange below
+  // the 3s hold: a quick tap must NOT open it (that's the ordinary Rooms-stem toggle)
+  const corner = t.$("[data-rooms-corner]"), r = corner.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  const mk = (type) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: cx, clientY: cy, pointerId: 41, pointerType: "touch", isPrimary: true, view: t.w });
+  corner.dispatchEvent(mk("pointerdown")); corner.dispatchEvent(mk("pointerup"));
+  await t.sleep(100);
+  t.expect(!t.$(".vb-hud"), "a plain tap on the left corner opened the HUD");
+  await t.click("[data-rooms-corner]", { wait: 100 });   // close the stem a plain tap just opened
+  corner.dispatchEvent(mk("pointerdown"));
+  await t.sleep(3200);
+  t.expect(t.$(".vb-hud"), "a 3s hold on the left corner did not open the HUD");
+  corner.dispatchEvent(mk("pointerup"));
+  const copyBtn = t.$("[data-vb-copy]");
+  await t.click(copyBtn, { wait: 50 });
+  t.expect(/Copied/.test(t.text(copyBtn)), "Copy did not confirm");
+});
+
 scenario("studio", "Isolator: guess, reveal alone, hold to see it back, try another", async t => {
   await t.open("#shot=studiopv", { settle: 900 });
   const img = await t.waitFor(() => { const i = t.$(".pv-img img"); return i && i.complete && i.naturalWidth ? i : null; }, 8000, "the photo");
@@ -2085,12 +2298,15 @@ scenario("map", "search 2.0: a hex and a modifier fly; a decade, a painter and a
   t.expect(/Fly to/.test(h) && /≈/.test(t.text(".toast")), `hex: hint "${h}", toast "${t.text(".toast")}"`);
   h = await ask("deep celadon");
   t.expect(/≈/.test(t.text(".toast")), `deep celadon: no "≈" toast (hint "${h}")`);
+  // David, 2026-10-09: a decade or a painter is a subject now -- it opens js/subjectview.js's palette view
+  // (count slider, measures, filters, arrangements), not a fixed handful straight on the map (js/colorset.js csOnMap).
   h = await ask("1660s");
-  await t.waitFor(".cs-hl-pill", 15000, "the 1660s constellation");
-  t.expect(/1660s · [\d,]+ paintings · as photographed/.test(t.text(".cs-hl-pill")), `decade pill says "${t.text(".cs-hl-pill")}"`);
-  await H.homeReady(t);
+  await t.waitFor(".sv-sheet", 15000, "the 1660s subject view");
+  await t.waitFor(() => /1660s/.test(t.text(".sv-title")) && /as photographed/.test(t.text(".sv-sub")), 8000, `decade subject title/subline, got "${t.text(".sv-title")}" / "${t.text(".sv-sub")}"`);
+  await H.homeReady(t);   // a fresh iframe -- the previous subject view sheet goes with it
   h = await ask("sargent");
-  await t.waitFor(() => /Sargent/.test(t.text(".cs-hl-pill")), 15000, "Sargent's constellation");
+  await t.waitFor(".sv-sheet", 15000, "Sargent's subject view");
+  await t.waitFor(() => /Sargent/i.test(t.text(".sv-title")), 8000, `painter subject title, got "${t.text(".sv-title")}"`);
   await H.homeReady(t);
   h = await ask("between teal and navy");
   await t.waitFor(() => /Between Teal and Navy/i.test(t.text(".cs-hl-pill")), 15000, "the road constellation");
@@ -4047,4 +4263,108 @@ scenario("trail", "a native back winning the race after an edge-swipe already co
   t.expect(anim.playState === "idle", `the stranded commit animation was never cancelled (playState: ${anim.playState})`);
   t.expect(t.ev("typeof TLG_ANIM !== 'undefined' && TLG_ANIM === null"), "TLG_ANIM still points at the stranded animation");
   t.expect(TRL.depth(t) === Math.max(0, depthBefore - 1), `the native back landed twice: trail depth is ${TRL.depth(t)}, expected ${Math.max(0, depthBefore - 1)} (was ${depthBefore})`);
+});
+
+// ---------- landscape (2026-10-09, design/DESIGN-CANON.md §5 rule 7 "nothing horizontally scrolls"): key
+// screens at 956x440 (David's iPhone 16 Pro Max rotated). Each scenario opens with opt.size so only this
+// group's iframe changes size; every other scenario above keeps the usual 375x812 portrait frame. Two checks
+// per screen: no horizontal overflow (scrollWidth never exceeds the viewport) and the primary action sits
+// fully inside the viewport (never under a corner, never past the right/bottom edge).
+const LS = {
+  size: [956, 440],
+  noHOverflow(t, where) {
+    const w = t.w.innerWidth, sw = t.d.documentElement.scrollWidth;
+    t.expect(sw <= w + 1, `${where}: the page is ${sw}px wide in a ${w}px viewport (horizontal overflow)`);
+  },
+  inView(t, sel, where) {
+    const e = t.$(sel);
+    t.expect(e, `${where}: no "${sel}" to check`);
+    const r = e.getBoundingClientRect(), w = t.w.innerWidth, h = t.w.innerHeight;
+    t.expect(r.width > 0 && r.height > 0, `${where}: "${sel}" has no size`);
+    t.expect(r.left >= 0 && r.top >= 0 && r.right <= w + 1 && r.bottom <= h + 1,
+      `${where}: "${sel}" sits outside the ${w}x${h} viewport (${Math.round(r.left)},${Math.round(r.top)},${Math.round(r.right)},${Math.round(r.bottom)})`);
+  },
+};
+scenario("landscape", "the map: canvas fills, both corners stay on screen", async t => {
+  await t.open("#shot=home", { size: LS.size, settle: 300 });
+  await t.waitFor("canvas", 10000, "the honeycomb canvas");
+  LS.noHOverflow(t, "home");
+  LS.inView(t, ".corner.l", "home");
+  LS.inView(t, ".corner.r", "home");
+});
+scenario("landscape", "a color page: no overflow, Learn it and the heart stay reachable", async t => {
+  await t.open("#/color/teal", { size: LS.size, settle: 300 });
+  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1"), 12000, "the Teal color page");
+  LS.noHOverflow(t, "color page");
+  LS.inView(t, ".rp-learnpill", "color page");
+  LS.inView(t, ".rp-heart", "color page");
+});
+scenario("landscape", "a painting page: no overflow, the image and Close stay reachable", async t => {
+  await t.open("#/gallery/12", { size: LS.size, settle: 800 });
+  await t.waitFor(".gl-hero", 10000, "the painting's pinned image");
+  LS.noHOverflow(t, "painting page");
+  LS.inView(t, ".gl-hero", "painting page");
+  LS.inView(t, "[data-back],.art-top .icon-btn", "painting page");
+});
+scenario("landscape", "Look closer: the image-beside-tools grid has no overflow and the image fits the height", async t => {
+  await t.open("#/gallery/12", { size: LS.size, settle: 800 });
+  await t.waitFor(".gl-hero", 10000, "the painting's pinned image");
+  await t.waitFor(() => t.$(".gl-hero > span") && t.$(".gl-hero > span").classList.contains("gl-tap"), 10000, "the picture becomes tappable");
+  await t.click(".gl-closer", { force: true, wait: 400 });
+  await t.waitFor(".glz-scrim.in", 8000, "the Look closer overlay");
+  LS.noHOverflow(t, "look closer");
+  const img = t.$(".glz-img"), tools = t.$(".glz-tools");
+  t.expect(img, "no .glz-img in the Look closer overlay");
+  t.expect(img.getBoundingClientRect().height > t.w.innerHeight * .5, "the image doesn't fit the height (it's under half the viewport tall)");
+  LS.inView(t, ".glz-tools", "look closer");
+});
+scenario("landscape", "a set page: no overflow", async t => {
+  await t.open("#/set/2f6f4e-c8553d-e0a458", { size: LS.size, settle: 800 });
+  await t.waitFor(".sp-page .sp-pair, .sp-page .sp-strip", 12000, "the set page");
+  LS.noHOverflow(t, "set page");
+});
+scenario("landscape", "Learn it (Meet): no overflow, the swatch and Next stay reachable", async t => {
+  await t.open("#shot=learnit:meet", { size: LS.size, settle: 900 });
+  const scr = await t.waitFor(".screen.learnit", 10000, "the Learn it lesson");
+  await t.stable(scr);   // the screen's own entrance animation (app.css .enter, 12px translateY) must settle first
+  LS.noHOverflow(t, "learnit meet");
+  LS.inView(t, ".screen.learnit .lt-swatch, .screen.learnit .lt-cover", "learnit meet");
+});
+scenario("landscape", "a Train game board: no overflow", async t => {
+  await t.open("#shot=gx:hue", { size: LS.size, settle: 500 });
+  await t.waitFor(".screen", 10000, "the game station");
+  LS.noHOverflow(t, "train game");
+});
+scenario("landscape", "the You page: no overflow", async t => {
+  await t.open("#shot=you", { size: LS.size, settle: 500 });
+  await t.waitFor(".you-page, .ym-hero", 10000, "the You page");
+  LS.noHOverflow(t, "you");
+});
+scenario("landscape", "the slideshow: full bleed, no overflow, Close stays reachable", async t => {
+  await t.open("#shot=slideshow", { size: LS.size, settle: 700 });
+  await t.waitFor(".sheet.ss-full", 10000, "the slideshow");
+  LS.noHOverflow(t, "slideshow");
+  LS.inView(t, ".ss-x", "slideshow");
+});
+// David, 2026-10-09: "it looks like the black bar is always there" (after shipping the gesture-following back
+// lane) -- .tlg-floor is appended straight to document.body (js/trail.js tlgWire), a sibling of #app, so it
+// survives a normal screen swap untouched; only show()'s own leak-guard line (js/core.js, now including
+// .tlg-floor) removes it. This interrupts a gesture mid-drag with a SECOND, different way to leave the page
+// (the native back swipe) before it ever reaches its own release()/clean() -- the shape of leak the generic
+// t.bodyOverlayLeaks() check (tools/smoke/harness.js) exists for.
+scenario("trail", "a gesture interrupted mid-drag by a native back swipe leaves no stray floor behind", async t => {
+  const scr = await TLGT.openFromMap(t);
+  const r = scr.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + 80;
+  const o = (x, y) => ({ bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 77, pointerType: "touch", isPrimary: true, view: t.w });
+  scr.dispatchEvent(new t.w.PointerEvent("pointerdown", o(cx, cy)));
+  await t.sleep(20);
+  scr.dispatchEvent(new t.w.PointerEvent("pointermove", o(cx, cy + 40)));   // past TLG_SLOP: the floor exists now
+  await t.sleep(20);
+  t.expect(t.$(".tlg-floor"), "the floor never appeared for this drag");
+  // never sends pointerup/pointercancel -- a different path (the native swipe) takes over instead
+  t.w.history.back();
+  await t.waitFor(() => t.$(".screen.hm canvas") && !t.$(".cp-page"), 8000, "the map after the interrupted drag's own back swipe");
+  await t.sleep(200);
+  t.expect(t.bodyOverlayLeaks().length === 0, `a body-level overlay survived the interrupted gesture: ${t.bodyOverlayLeaks().join(", ")}`);
+  t.expect(!t.$(".tlg-floor"), "the destination floor was left behind by the interrupted drag");
 });

@@ -385,3 +385,23 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--ink);outline-of
 .mn-txt small{font:400 14px/1.35 var(--sans)}
 .mn-val{font:400 15px/1.2 var(--sans);font-style:normal;font-variant-numeric:tabular-nums}
 .mn-row.danger .mn-lead{background:rgba(240,154,134,.12)}
+
+/* ============================================================ landscape lane (2026-10-09): the notch sits on
+   the LEFT or RIGHT edge once the phone is rotated, not the top. Every surface that pins itself to the side
+   (the Rooms corners, the stem they raise, a bottom sheet's own gutter, the toast) now adds var(--left)/
+   var(--right) (app.css) on top of its usual fixed offset, so nothing sits under the sensor housing. Portrait
+   is untouched: those vars are 0px there. Scoped to orientation:landscape only, so nothing here changes the
+   portrait look David already approved. */
+@media (orientation:landscape){
+  .corner.l{left:calc(16px + var(--left))}
+  .corner.r{right:calc(16px + var(--right))}
+  .rooms-stem .rm-bubble{left:calc(12px + var(--left) + var(--x,0px))}
+  .rooms-stem.hm-do-stem .rm-bubble{left:auto;right:calc(12px + var(--right) + var(--x,0px))}
+  .sheet{padding-left:calc(var(--g) + var(--left));padding-right:calc(var(--g) + var(--right))}
+  .room-sheet>.screen{padding-left:calc(var(--g) + var(--left));padding-right:calc(var(--g) + var(--right))}
+  .toast{max-width:calc(100vw - 32px - var(--left) - var(--right))}
+  /* a bottom sheet on a short landscape screen (390-440px tall) shouldn't climb to 88% of the whole viewport --
+     leave the map/page behind it visible, same "side panel, not a near-full-screen slab" ask as the map's own
+     Colors/Arrange sheet already follows (css/home.css .hm-sheet-panel) */
+  .sheet:not(.hm-sheet-panel):not(.ss-full){max-height:min(84dvh,420px)}
+}
