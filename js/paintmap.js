@@ -441,41 +441,42 @@ function pmLayout(s, F) {
 
 // ---------- thumbnails: load the few on screen, bake each once, recycle ----------
 const PM_BAKE = 144, PM_CACHE_MAX = 650, PM_BIG_MAX = 36, PM_FLIGHT = 14;
-// Canvas taint (map lane's audit, 2026-10-09): a thumbnail drawn onto a canvas WITHOUT a crossorigin request
-// that the host actually honors leaves that canvas "not origin-clean" forever -- every later toDataURL/
-// getImageData on it throws SecurityError, and the taint propagates to any OTHER canvas it's later drawn onto
-// (js/honey.js's own HM_CTRL.snapshot() reads the shared honeycomb canvas, which these baked tiles are drawn
-// onto). Most of the corpus (AIC, Cleveland, Commons -- tools/gallery.py's own GL_CORS_HOSTS-equivalent list,
-// js/gallery.js's GL_CORS_HOSTS) isn't on a host that answers a CORS request, so requesting crossorigin from
-// them would just fail the LOAD entirely (gallery.js's own glCORS() comment covers the same ground). The fix
-// here is the other half of that same rule: request crossorigin from the hosts that do support it (NGA, the
-// Rijksmuseum's IIIF host, the Met, SMK) so those tiles stay readable, and for every other remote host, never
-// draw the real pixels onto a canvas at all -- fill with the painting's own dominant color instead (already
-// computed, pmHex()), which keeps the honeycomb's shared canvas genuinely readable for snapshot() no matter
-// which paintings happen to be on screen, at the cost of a plain color tile for most non-local paintings. Our
-// own local copies (img/gallery/<path>, the "L" code in thumbs.txt) are same-origin and always safe either way.
+// Canvas taint, corrected (2026-10-09, after measuring only ~62% of drawn cells showed a real photo and finding
+// why): drawing a cross-origin image onto a canvas WITHOUT a crossorigin request the host actually honors does
+// leave THAT canvas unreadable (toDataURL/getImageData throw), and the taint spreads to any other canvas it's
+// later drawn onto -- but nothing in this file, or anywhere else in the app, ever reads pixels back off .pmx-cv
+// or off a baked tile's own offscreen canvas (grepped: the only getImageData/toDataURL on a map canvas is
+// js/honey.js's HM_CTRL.snapshot(), which reads honey.js's OWN separate honeycomb canvas -- a different element
+// this file never touches). The original fix ported honey.js's real constraint onto a canvas that never needed
+// it, so most of the corpus (Commons, Cleveland -- not in GL_CORS_HOSTS, and Commons' own Special:FilePath
+// redirect chain fails an actual crossOrigin="anonymous" load even though its final CDN response does carry
+// Access-Control-Allow-Origin: *, confirmed live) got a flat color tile instead of its photo, no matter the
+// size or zoom. bake() now always draws the real pixels it already has in memory, safe host or not -- a tainted
+// canvas is only a problem for code that tries to read it back, and nothing here does. crossOrigin is still
+// only requested from hosts we know answer it correctly (pmSafeHost/GL_CORS_HOSTS): asking a host that doesn't
+// support it would fail the LOAD entirely (gallery.js's own glCORS() comment covers the same ground), not just
+// taint a canvas nothing reads.
 function pmSafeHost(url) {
   try { return GL_CORS_HOSTS.has(new URL(url, location.href).hostname); } catch (e) { return false; }
 }
 function pmImages(onReady) {
   const cache = new Map(), bigs = new Map();   // i -> { st: 0 loading | 1 ready | 2 failed, bm, ar, used } ; i -> HTMLImageElement (kept for the big tiles)
   let flying = 0, frame = 0, dead = false;
-  const bake = (i, img, crop, safe) => {
+  const bake = (i, img, crop) => {
     const nw = img.naturalWidth, nh = img.naturalHeight;
     let sx = 0, sy = 0, sw = nw, sh = nh;
     if (crop && crop[2] - crop[0] > 50 && crop[3] - crop[1] > 50) { sx = crop[0] / 1000 * nw; sy = crop[1] / 1000 * nh; sw = (crop[2] - crop[0]) / 1000 * nw; sh = (crop[3] - crop[1]) / 1000 * nh; }
     const src = { sx, sy, sw, sh }, m = Math.min(sw, sh);
     const cv = document.createElement("canvas"); cv.width = cv.height = PM_BAKE;
     const cx = cv.getContext("2d");
-    if (safe) cx.drawImage(img, sx + (sw - m) / 2, sy + (sh - m) / 2, m, m, 0, 0, PM_BAKE, PM_BAKE);
-    else { cx.fillStyle = pmHex(i); cx.fillRect(0, 0, PM_BAKE, PM_BAKE); }
+    cx.drawImage(img, sx + (sw - m) / 2, sy + (sh - m) / 2, m, m, 0, 0, PM_BAKE, PM_BAKE);
     return { cv, src };
   };
   function want(list) {   // list: gallery indices, most wanted first; also tells which ones need the full picture
     frame++;
     for (const [i, big] of list) {
       const e = cache.get(i);
-      if (e) { e.used = frame; if (big && e.safe && e.st === 1 && !bigs.has(i) && e.url) pmBigLoad(i, e); continue; }
+      if (e) { e.used = frame; if (big && e.st === 1 && !bigs.has(i) && e.url) pmBigLoad(i, e); continue; }
       if (flying >= PM_FLIGHT) continue;
       const t = pmThumb(i); if (!t) { cache.set(i, { st: 2, used: frame }); continue; }
       const local = t.url.startsWith("img/gallery/"), safe = local || pmSafeHost(t.url);
@@ -486,10 +487,11 @@ function pmImages(onReady) {
         flying--; ent.img = null; if (dead) return;
         (img.decode ? img.decode().catch(() => {}) : Promise.resolve()).then(() => {
           if (dead) return;
-          // never hand an unsafe-host image to ctx.drawImage() directly (that's what taints the shared canvas,
-          // js/trail.js's HM_CTRL.snapshot() included) -- only the baked square (itself safe: see bake()) goes
-          // up for those; "big" stays reserved for a host we know answers a real CORS request
-          try { const b = bake(i, img, t.crop, safe); ent.bm = b.cv; ent.src = b.src; ent.st = 1; ent.t0 = performance.now(); if (big && safe) { bigs.set(i, img); trimBig(); } } catch (err) { ent.st = 2; }
+          // bake() always draws the real pixels now (see the comment above pmSafeHost) -- "big" (the full,
+          // less-cropped picture, kept for the always-biggest centered/magnified cell) is no longer reserved for
+          // a CORS-answering host either; pmBigLoad just has to avoid requesting crossorigin from a host that
+          // won't honor it (that would fail the load outright, not merely taint a canvas nothing reads).
+          try { const b = bake(i, img, t.crop); ent.bm = b.cv; ent.src = b.src; ent.st = 1; ent.t0 = performance.now(); if (big) { bigs.set(i, img); trimBig(); } } catch (err) { ent.st = 2; }
           onReady();
         });
       };
@@ -505,10 +507,11 @@ function pmImages(onReady) {
     }
   }
   function pmBigLoad(i, e) {
-    if (e.bigLoading || !e.safe) return; e.bigLoading = true;   // unsafe hosts never get a raw drawImage -- the baked square (e.bm) covers them
+    if (e.bigLoading) return; e.bigLoading = true;
     const local = e.url.startsWith("img/gallery/");
-    const img = new Image(); img.decoding = "async"; if (!local) img.crossOrigin = "anonymous";
+    const img = new Image(); img.decoding = "async"; if (!local && e.safe) img.crossOrigin = "anonymous";   // only from a host that actually answers CORS -- requesting it elsewhere fails the load outright
     img.onload = () => { if (dead) return; bigs.set(i, img); trimBig(); onReady(); };
+    img.onerror = () => { e.bigLoading = false; };
     img.src = e.url;
   }
   function trimBig() { while (bigs.size > PM_BIG_MAX) { const k = bigs.keys().next().value; bigs.delete(k); const e = cache.get(k); if (e) e.bigLoading = false; } }
@@ -525,7 +528,7 @@ function pmOpen(spec, o = {}) {
   const from = typeof spec === "string" ? spec : JSON.stringify(spec || {}), fresh = o.fresh && !o._used;
   o._used = true;
   const el = show(`
-    <div class="pmx-stage"><canvas class="pmx-cv" aria-label="Paintings as a map: drag to browse, pinch to zoom, tap the middle one to open it"></canvas><div class="pmx-imglayer" data-pmimglayer></div><p class="pmx-wait">Laying out the paintings…</p></div>
+    <div class="pmx-stage"><canvas class="pmx-cv" aria-label="Paintings as a map: drag to browse, pinch to zoom, tap the middle one to open it"></canvas><p class="pmx-wait">Laying out the paintings…</p></div>
     <header class="pmx-top">
       <button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>
       <p class="pmx-title"><b>Paintings</b></p>
@@ -560,7 +563,6 @@ function pmMount(el, s, F) {
   const cv = el.querySelector(".pmx-cv"), ctx = cv.getContext("2d"), wait = el.querySelector(".pmx-wait");
   const RM = reduceMotion, cap = el.querySelector("[data-pmcap]"), heart = el.querySelector("[data-pmheart]");
   const facets = el.querySelector("[data-pmfacets]"), chipbar = el.querySelector("[data-pmchipbar]"), walkBar = el.querySelector("[data-pmwalk]");
-  const imgLayer = el.querySelector("[data-pmimglayer]");
   let walk = [];   // "Walk from here" (David, 2026-10-09): the gallery indices visited this walk, in order; [] when none is active
   let scrubTimer = 0;   // the time scrubber's own Play timer (0 = not playing); lives here, not inside openSheet, so it survives a sheet close/reopen
   let lay = null, W = 0, H = 0, dpr = 1, base = 46;
@@ -602,25 +604,6 @@ function pmMount(el, s, F) {
     const perUnit = Math.min(W / (l.GW + 1.4), H / (l.GH + 1.4));
     return clamp(Math.max(1, perUnit / base), zMin(), ZMAX);
   };
-  // the <img> overlay pool (David, 2026-10-09): a non-CORS host's picture needs no CORS header to just be SHOWN
-  // as a plain <img>, only canvas pixel-reads do -- capped so a dense layout can't flood the DOM with these.
-  const IMG_LAYER_MAX = 28;
-  const imgLayerShown = new Map();   // gallery index -> <img> currently placed for it
-  function syncImgLayer(wanted) {
-    const keep = new Set();
-    for (const w0 of wanted) {
-      keep.add(w0.i);
-      let im = imgLayerShown.get(w0.i);
-      if (!im) {
-        const th = pmThumb(w0.i); if (!th) continue;
-        im = document.createElement("img"); im.decoding = "async"; im.alt = ""; im.src = th.url;
-        imgLayer.appendChild(im); imgLayerShown.set(w0.i, im);
-      }
-      im.style.left = Math.round(w0.X) + "px"; im.style.top = Math.round(w0.Y) + "px";
-      im.style.width = Math.round(w0.w) + "px"; im.style.height = Math.round(w0.h) + "px";
-    }
-    for (const [i, im] of imgLayerShown) if (!keep.has(i)) { im.remove(); imgLayerShown.delete(i); }
-  }
   function size() {
     const r = cv.getBoundingClientRect(); W = r.width; H = r.height; dpr = Math.min(3, devicePixelRatio || 1);
     cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
@@ -850,7 +833,7 @@ function pmMount(el, s, F) {
     // every cell is drawn (David, 2026-10-09: drawing either inline here let a later, bigger tile painted on top
     // blot out or clip an earlier cell's label/overlay -- drawn is sorted smallest-d-first specifically so
     // bigger/closer cells paint OVER smaller/farther ones, backwards for something that has to survive the pass)
-    const landmarkCandidates = [], imgLayerWanted = [];
+    const landmarkCandidates = [];
     for (const b of drawn) {
       const i = b.i, e = imgs.get(i), w = b.w, h = b.h, m = b.m;
       const X = b.x - w / 2, Y = b.y - h / 2;
@@ -887,22 +870,6 @@ function pmMount(el, s, F) {
         const nm = F.artist[i] ? xbArtistName(F, F.artist[i]) : "";
         if (nm) landmarkCandidates.push({ x: b.x, y: Y + h + 4, d: b.d, text: nm });
       }
-      // the <img> overlay (David, 2026-10-09, "pictures don't load as well as before"): a non-CORS host's image
-      // can never be read back off a canvas (toDataURL/getImageData throw), but a plain <img> needs no CORS
-      // header at all to just be SHOWN -- the centered painting always gets one if it needs one, plus any other
-      // large cell. Decided straight from pmThumb()/pmSafeHost(), not from e (the imgs cache's own entry) -- e
-      // is only created inside imgs.want() at the END of this same draw() call, so on the very first frame a
-      // painting becomes eligible e is still undefined and nothing would trigger a second frame to add the
-      // overlay once it existed. Priority (biggest first), not first-come: drawn is smallest-first, so capping
-      // during this same ascending pass let small cells fill the whole pool before the centered painting (always
-      // biggest) ever got a turn.
-      if (m > .3 || b.d > 60) {
-        const th = pmThumb(i);
-        if (th) {
-          const local = th.url.startsWith("img/gallery/"), safe = local || pmSafeHost(th.url);
-          if (!safe) imgLayerWanted.push({ i, X, Y, w, h, d: b.d });
-        }
-      }
     }
     // landmark labels: a real sans font (not the mono the count-labels use), truncated with an ellipsis rather
     // than clipped, clamped inside the canvas width, and skipped (not stacked) when it would collide with an
@@ -927,8 +894,6 @@ function pmMount(el, s, F) {
         ctx.fillStyle = "rgba(236,232,223,.96)"; ctx.fillText(txt, px, c.y);
       }
     }
-    imgLayerWanted.sort((a, b) => b.d - a.d);
-    syncImgLayer(imgLayerWanted.slice(0, IMG_LAYER_MAX));
     // band and painter labels, where there's room to read them
     if (lay.labels.length) {
       ctx.textBaseline = "alphabetic"; ctx.textAlign = "left";
@@ -1232,15 +1197,17 @@ function pmMount(el, s, F) {
   }
   // ---- life cycle
   const ro = new ResizeObserver(() => size()); ro.observe(cv);
-  cleanup.push(() => { dead = true; clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); imgLayerShown.forEach(im => im.remove()); imgLayerShown.clear(); if (lay && centerK >= 0) PM_PAN.set(lay.key, { x: lay.x[centerK], y: lay.y[centerK], s: Z }); });
+  cleanup.push(() => { dead = true; clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); if (lay && centerK >= 0) PM_PAN.set(lay.key, { x: lay.x[centerK], y: lay.y[centerK], s: Z }); });
   size(); build(false);
   window.PM_CTRL = { get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length; }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); },
     // QA (tools/smoke paintmap group): a real network fetch of data/artists/portraits.json doesn't reliably
     // resolve inside the virtual-time test harness, so a forced override makes "landmarks label themselves" a
-    // deterministic check rather than a timing bet; same for the <img> overlay's own network image.
+    // deterministic check rather than a timing bet.
     _qaLandmarks: arr => { PM_LANDMARKS = new Set(arr); PM_LANDMARKS_ON = true; kick(); },
     _qaRects: () => drawn.map(b => ({ i: b.i, x: b.x, y: b.y, w: b.w, h: b.h })),
-    _qaHasOverlay: i => imgLayerShown.has(i) };
+    // true once that painting's own real pixels are baked (bake() no longer falls back to a flat color for a
+    // non-CORS host -- see the comment above pmSafeHost), false only while still loading or on a genuine failure
+    _qaImageReal: i => { const e = imgs.get(i); return !!(e && e.st === 1); } };
 }
 
 // this file can load after router.js (on first use): give pmOpen its address now
