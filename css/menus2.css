@@ -29,7 +29,13 @@
 .corner.l{left:16px}.corner.r{right:16px}
 .corner svg{width:20px;height:20px}
 /* Home has one right corner now (#hmDo, js/home.js doMenu): every verb lives in its menu */
-.sheet{bottom:calc(-1 * var(--vb));padding-bottom:calc(var(--bottom) + 20px)}
+/* A floating sheet (unlike a full-bleed .room-sheet) stays anchored to bottom:0 — shifting it down by --vb
+   (2026-10-08, left over from this file's first draft) pushed every bottom sheet's real content that far below
+   the visible viewport on an iPhone Home Screen app, slicing off its last row with no way to scroll to it
+   (David's Study-sheet screenshot, 2026-10-09: the format chips were cut and the sheet couldn't scroll further).
+   The belt-and-braces box-shadow a few rules down (0 160px 0 0 var(--surface-1)) already paints the strip below
+   the sheet's real edge, so no position shift is needed here. */
+.sheet{padding-bottom:calc(var(--bottom) + 20px)}
 .sheet:focus{outline:none}
 
 /* ============================================================ the rooms stem (js/core.js toggleStem) */
