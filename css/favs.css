@@ -347,7 +347,9 @@ html:has(#app > .screen.fv-run){--ground:#5F5F5F;--lift:#676767;--lift-2:#6E6E6E
 .fva-heart:active{transform:scale(.88)}
 .fva-heart.pop svg{animation:fvaPop .42s var(--spring)}
 .art-top .fva-heart{background:var(--s2);border:1px solid var(--line)}
-@keyframes fvaPop{0%{transform:scale(.6)}55%{transform:scale(1.22)}100%{transform:scale(1)}}
+/* anticipation (a quick dip) -> impact (overshoot) -> settle, the same cadence the color page's heart uses
+   (css/colorpage.css rpHeartLike) — the heart animates in place; nothing else needs to move to show it landed */
+@keyframes fvaPop{0%{transform:scale(1)}22%{transform:scale(.84)}60%{transform:scale(1.22)}100%{transform:scale(1)}}
 /* a long press on the picture: a heart blooms where the thumb is, then goes */
 .fva-bloom{position:absolute;z-index:3;width:84px;height:84px;margin:-42px 0 0 -42px;color:#F2EEE6;pointer-events:none;filter:drop-shadow(0 6px 18px rgba(0,0,0,.45));animation:fvaBloom .85s var(--ease-grow) both}
 .fva-bloom svg{width:100%;height:100%}
