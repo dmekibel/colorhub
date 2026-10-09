@@ -121,6 +121,19 @@
       await this.sleep(opt.wait != null ? opt.wait : 600);
     }
     pointerOn(sel) { const e = this.el(sel), r = e.getBoundingClientRect(); return { e, r, cx: r.left + r.width / 2, cy: r.top + r.height / 2 }; }
+    // A scripted finger: pointerdown at points[0], a pointermove through every later point (each one a real event,
+    // `ms` apart on the virtual clock -- js/trail.js's gesture tracks real inter-event time via performance.now(),
+    // which runs on Chrome's actual clock even under --virtual-time-budget, so this reproduces a real distance/time
+    // -- i.e. velocity -- profile), then pointerup at the last point (or pointercancel, with opt.cancel).
+    async drag(target, points, opt = {}) {
+      const e = this.el(target), w = this.w, id = opt.id || 77, ms = opt.ms != null ? opt.ms : 16;
+      const o = (x, y) => ({ bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: id, pointerType: "touch", isPrimary: true, view: w });
+      e.dispatchEvent(new w.PointerEvent("pointerdown", o(points[0].x, points[0].y)));
+      for (let i = 1; i < points.length; i++) { await this.sleep(ms); e.dispatchEvent(new w.PointerEvent("pointermove", o(points[i].x, points[i].y))); }
+      const last = points[points.length - 1];
+      e.dispatchEvent(new w.PointerEvent(opt.cancel ? "pointercancel" : "pointerup", o(last.x, last.y)));
+      await this.sleep(opt.wait != null ? opt.wait : 50);
+    }
     // run code inside the app (its globals live in the iframe's global scope: S, go, colorPage…)
     ev(code) { return this.w.eval(code); }
     // k items from arr, the same ones for the same seed (SMOKE_SEED, default today's date): random coverage that
