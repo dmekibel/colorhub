@@ -92,7 +92,10 @@
 .nmr-shot{position:relative;margin-top:14px;touch-action:none;border-radius:var(--r-1);overflow:hidden;background:var(--surface-2)}
 .nmr-shot canvas,.nmr-shot video{display:block;width:100%;max-height:40dvh;object-fit:contain}
 .nmr-shot [hidden]{display:none}
-.nmr-ret{position:absolute;width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px rgba(0,0,0,.55);pointer-events:none}
+/* the live camera's aim circle: always dead-center (it samples the middle of the frame), no JS positioning
+   needed. A press-and-drag photo pick uses the shared eyedropper's own loupe instead (js/eyedrop.js) — David,
+   2026-10-09: "the camera, photo uploads and set-page photo picking can all reuse it" */
+.nmr-aim{position:absolute;left:50%;top:50%;width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px rgba(0,0,0,.55);pointer-events:none}
 .nmr-snap{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;margin-top:12px;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);font:400 22px/1 var(--serif)}
 .nmr-snap[hidden]{display:none}
 .nmr-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}

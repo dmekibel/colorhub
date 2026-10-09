@@ -150,9 +150,15 @@ function sxPick(anchor, o = {}) {
   const alike = (typeof lookalikes === "function" ? lookalikes({ n: nameOf(anchor).n, h: anchor }, 8) : []).map(x => x.x || x).filter(x => x && x.h);
   const favs = typeof fvStore === "function" ? Object.keys(fvStore()).slice(-12).reverse().map(sxHex).filter(h => h && de2000(h, anchor) >= 1) : [];
   const recent = typeof trail === "function" ? trail(14).filter(x => x.kind === "color" && x.colors[0]).map(x => x.colors[0].h).map(sxHex).filter(h => h && de2000(h, anchor) >= 1) : [];
+  // David, 2026-10-09: "the visualization [is] too small" and "I scroll past the preview so I can't see it
+  // anymore" — the preview (sx-head + the big try-on swatch) sits outside the scrolling area entirely, sheet()'s
+  // own supported pattern for a sheet with a non-scrolling top and a scrolled body ([data-sheet-scroll], already
+  // used by js/home.js's chooser sheet): simpler and more reliably "stays put" than position:sticky inside a
+  // position:fixed sheet, which some engines get wrong.
   const { sh, close } = sheet(`
     <div class="sx-head"><i style="--c:${anchor}"></i><div><p class="eyebrow">${o.title ? "Add a color to" : "Pair with…"}</p><h2>${esc(o.title || name)}</h2></div></div>
     <div class="sx-try" data-sx-try></div>
+    <div class="sx-scroll" data-sheet-scroll>
     ${others.length && !o.onPick ? `<button class="sx-addset" data-sx-addset><span class="sx-tray-sw">${others.map(h => `<i style="--c:${h}"></i>`).join("")}<i style="--c:${anchor}"></i></span><span><b>Add to your set</b><small>${others.length + 1} colors: ${esc(others.map(sxNm).slice(0, 3).join(", "))}${others.length > 3 ? "…" : ""} and ${esc(name.toLowerCase())}</small></span>${ICON.arrow}</button>` : ""}
     <label class="sx-search"><input type="search" placeholder="Search any color name" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Search any color name" data-sx-q></label>
     <div class="sx-results" data-sx-results hidden></div>
@@ -167,22 +173,27 @@ function sxPick(anchor, o = {}) {
     <div class="sx-picker" data-sx-picker hidden></div>
     <button class="btn solid sx-use" data-sx-use hidden>Try this color</button>
     <button class="sx-any" data-sx-cam>${SX_ICON_CAM}<span><b>Point your camera</b><small>Add colors one after another, from what's in front of you</small></span></button>
-    <button class="sx-any" data-sx-photo>${SX_ICON_PHOTO}<span><b>From a photo</b><small>Tap any spot for its exact color</small></span></button>`);
-  sh.classList.add("sx-sheet");
+    <button class="sx-any" data-sx-photo>${SX_ICON_PHOTO}<span><b>From a photo</b><small>Tap any spot for its exact color</small></span></button>
+    </div>`);
+  sh.classList.add("sx-sheet", "sx-pick-sheet");
   // the set as it stands (the anchor, plus anything already in the tray): what the try-on strip shows beside the
   // dashed trying slot. A candidate never commits on its own tap; Add does (sxTryAdd), Cancel clears the trial.
   const buildSet = others.length ? [...others, anchor] : [anchor];
   let trying = null;
   const tryBox = sh.querySelector("[data-sx-try]");
+  // David, 2026-10-09: "too small; make the visualization bigger" and "keep the preview on top while scrolling" —
+  // a real split swatch (not a row of small chips), sticky to the top of the sheet (its own opaque background,
+  // so the candidate list never shows through) while you keep browsing suggestions underneath. It shrinks a
+  // little once you've scrolled a bit, so it never eats the whole screen, but the color and the actions stay put.
   const paintTry = () => {
     const full = trying ? [...buildSet, trying] : buildSet, against = buildSet[buildSet.length - 1];
-    tryBox.innerHTML = `<div class="sx-try-row">${buildSet.map(h => `<div class="sx-try-sw" style="--c:${h}"><b>${esc(sxNm(h))}</b></div>`).join("")}${
-      trying ? `<div class="sx-try-sw trying" data-sx-trying style="--c:${trying}"><b>${esc(sxNm(trying))}</b></div>`
-             : `<div class="sx-try-sw empty" data-sx-trying aria-label="Trying nothing yet"><span>+</span></div>`}</div>
+    const seg = (h, cls) => `<div class="sx-try-seg${cls ? " " + cls : ""}" style="--c:${h}"${cls === "trying" ? ' data-sx-trying' : ""}><b>${esc(sxNm(h))}</b></div>`;
+    tryBox.innerHTML = `<div class="sx-try-big">${buildSet.map(h => seg(h)).join("")}${
+      trying ? seg(trying, "trying") : `<div class="sx-try-seg empty" data-sx-trying aria-label="Trying nothing yet"><span>+</span></div>`}</div>
       ${trying ? `<p class="sx-try-rel">${esc(sxRelLine(against, trying))}</p>
       <div class="sx-try-acts"><button class="btn ghost" data-try-cancel>Cancel</button><button class="btn solid" data-try-add ${full.length > SX_MAX ? "disabled" : ""}>Add</button></div>` : ""}`;
   };
-  const setTrying = h => { h = sxHex(h); if (!h || buildSet.some(x => de2000(x, h) < 1)) return; trying = h; buzz(6); paintTry(); tryBox.scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" }); };
+  const setTrying = h => { h = sxHex(h); if (!h || buildSet.some(x => de2000(x, h) < 1)) return; trying = h; buzz(6); paintTry(); };
   const cancelTrying = () => { trying = null; paintTry(); };
   const addTrying = () => {
     if (!trying) return;
@@ -194,6 +205,8 @@ function sxPick(anchor, o = {}) {
   // sfxChord lives in js/sound.js, loaded after this file in some screens; guard the same way js/learnset.js does
   const lsSfx2 = (fn, ...a) => { try { if (typeof window[fn] === "function") window[fn](...a); } catch (e) {} };
   paintTry();
+  const scrollBox = sh.querySelector("[data-sheet-scroll]");
+  scrollBox.addEventListener("scroll", () => tryBox.classList.toggle("collapsed", scrollBox.scrollTop > 36), { passive: true });
   const pick = h => {
     h = sxHex(h); if (!h) return;
     setTrying(h);
@@ -283,23 +296,15 @@ function sxPhotoFlow(start, o = {}) {
   };
   input.click();
 }
+// Press, drag and release (the shared eyedropper, js/eyedrop.js): the loupe does the magnified, finger-clear
+// reading, Point/3x3/5x5/11x11/31x31 is whatever Settings has it set to, and a pick is only committed on
+// release — the old version only ever read a fixed 2x2 patch on a plain tap, with no loupe and no drag.
 function sxPhotoSheet(img, start, o = {}) {
-  const w = img.naturalWidth, h = img.naturalHeight;
-  const cnv = document.createElement("canvas"); cnv.width = w; cnv.height = h;
-  const ctx = cnv.getContext("2d", { willReadFrequently: true }); ctx.drawImage(img, 0, 0, w, h);
-  const exact = (fx, fy) => {
-    const x = Math.max(0, Math.min(w - 2, Math.round(fx * w) - 1)), y = Math.max(0, Math.min(h - 2, Math.round(fy * h) - 1));
-    const d = ctx.getImageData(x, y, 2, 2).data;
-    let r = 0, g = 0, b = 0, n = 0;
-    for (let p = 0; p < d.length; p += 4) { r += d[p]; g += d[p + 1]; b += d[p + 2]; n++; }
-    const hex = v => Math.round(v / n).toString(16).padStart(2, "0");
-    return ("#" + hex(r) + hex(g) + hex(b)).toUpperCase();
-  };
   const picked = start.slice();
   const { sh, close } = sheet(`
-    <div class="sx-head"><div><p class="eyebrow">From a photo</p><h2>Tap a spot for its color</h2></div></div>
+    <div class="sx-head"><div><p class="eyebrow">From a photo</p><h2>Press a spot for its color</h2></div></div>
     <div class="sx-photo-wrap" data-sx-photo-wrap><img class="sx-photo-img" src="${img.src}" alt="" data-sx-photo-img><i class="sx-photo-pin" data-sx-photo-pin hidden></i></div>
-    <p class="sx-sub" data-sx-photo-cap>An exact pixel, not an average — tap again for another.</p>
+    <p class="sx-sub" data-sx-photo-cap>Press and drag to find the exact spot — tap again for another.</p>
     <div class="sx-try-row" data-sx-photo-strip></div>
     <button class="btn solid sx-use" data-sx-photo-done>Done${picked.length ? ` · ${picked.length}` : ""}</button>`);
   sh.classList.add("sx-sheet");
@@ -309,17 +314,17 @@ function sxPhotoSheet(img, start, o = {}) {
   };
   paintStrip();
   const im = sh.querySelector("[data-sx-photo-img]"), pin = sh.querySelector("[data-sx-photo-pin]");
-  im.addEventListener("pointerup", e => {
-    const r = im.getBoundingClientRect(), fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height;
-    if (fx < 0 || fy < 0 || fx > 1 || fy > 1) return;
-    const hex = exact(fx, fy);
-    pin.hidden = false; pin.style.left = (fx * 100) + "%"; pin.style.top = (fy * 100) + "%"; pin.style.setProperty("--c", hex);
-    buzz(8);
-    if (o.onPick) { o.onPick(hex); toast(`${sxNm(hex)} picked`); return; }
-    if (sxHas(picked, hex)) { toast(`${sxNm(hex)} is already in your set`); return; }
-    if (picked.length >= SX_MAX) { toast(`A set holds up to ${SX_MAX} colors`); return; }
-    picked.push(hex); paintStrip();
-    toast(`${sxNm(hex)} added · ${picked.length} in your set`);
+  const place = (hex, p) => { pin.hidden = false; pin.style.left = (p.x / im.naturalWidth * 100) + "%"; pin.style.top = (p.y / im.naturalHeight * 100) + "%"; pin.style.setProperty("--c", hex); };
+  eyedropAttach(im, {
+    onMove: place,
+    onPick: (hex, p) => {
+      place(hex, p); buzz(8);
+      if (o.onPick) { o.onPick(hex); toast(`${sxNm(hex)} picked`); return; }
+      if (sxHas(picked, hex)) { toast(`${sxNm(hex)} is already in your set`); return; }
+      if (picked.length >= SX_MAX) { toast(`A set holds up to ${SX_MAX} colors`); return; }
+      picked.push(hex); paintStrip();
+      toast(`${sxNm(hex)} added · ${picked.length} in your set`);
+    },
   });
   sh.querySelector("[data-sx-photo-done]").onclick = () => {
     buzz(10); close();

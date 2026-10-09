@@ -121,6 +121,19 @@
       await this.sleep(opt.wait != null ? opt.wait : 600);
     }
     pointerOn(sel) { const e = this.el(sel), r = e.getBoundingClientRect(); return { e, r, cx: r.left + r.width / 2, cy: r.top + r.height / 2 }; }
+    // A scripted finger: pointerdown at points[0], a pointermove through every later point (each one a real event,
+    // `ms` apart on the virtual clock -- js/trail.js's gesture tracks real inter-event time via performance.now(),
+    // which runs on Chrome's actual clock even under --virtual-time-budget, so this reproduces a real distance/time
+    // -- i.e. velocity -- profile), then pointerup at the last point (or pointercancel, with opt.cancel).
+    async drag(target, points, opt = {}) {
+      const e = this.el(target), w = this.w, id = opt.id || 77, ms = opt.ms != null ? opt.ms : 16;
+      const o = (x, y) => ({ bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: id, pointerType: "touch", isPrimary: true, view: w });
+      e.dispatchEvent(new w.PointerEvent("pointerdown", o(points[0].x, points[0].y)));
+      for (let i = 1; i < points.length; i++) { await this.sleep(ms); e.dispatchEvent(new w.PointerEvent("pointermove", o(points[i].x, points[i].y))); }
+      const last = points[points.length - 1];
+      e.dispatchEvent(new w.PointerEvent(opt.cancel ? "pointercancel" : "pointerup", o(last.x, last.y)));
+      await this.sleep(opt.wait != null ? opt.wait : 50);
+    }
     // run code inside the app (its globals live in the iframe's global scope: S, go, colorPage…)
     ev(code) { return this.w.eval(code); }
     // k items from arr, the same ones for the same seed (SMOKE_SEED, default today's date): random coverage that
@@ -132,6 +145,25 @@
       return a.slice(0, k);
     }
     snapshot() { return this.d.body ? this.d.body.innerText.slice(0, 160).replace(/\s+/g, " ") : ""; }
+    // Generic leak guard (David, 2026-10-09, after the "Look closer" scrim and the focus view were both found
+    // living on <body> -- outside #app, to escape the screen's own entrance-animation transform -- with no
+    // cleanup, so navigation never removed them and the real page underneath looked "gone" or "black" behind
+    // one): any element a screen appends straight to document.body instead of returning from show() needs its
+    // own cleanup.push, same as js/richpage.js's rp-bar/rp-focus and js/paintzoom.js's scrim now do. This can't
+    // know every future overlay by name, so it checks the shape of the bug instead: a direct child of <body>,
+    // other than #app itself, that's position:fixed and covers most of the viewport is either a sheet/scrim the
+    // CURRENT screen means to have open right now, or a leak from a screen that's already gone. Call it right
+    // after a navigation with nothing deliberately left open (no sheet, no "Look closer", no focus view) and
+    // expect an empty list.
+    bodyOverlayLeaks() {
+      const w = this.w, vw = w.innerWidth, vh = w.innerHeight, min = 0.8 * vw * vh;
+      return [...this.d.body.children].filter(e => e.id !== "app" && e.tagName !== "SCRIPT" && e.tagName !== "STYLE").filter(e => {
+        const cs = w.getComputedStyle(e);
+        if (cs.position !== "fixed" || cs.display === "none" || +cs.opacity === 0) return false;
+        const r = e.getBoundingClientRect();
+        return r.width * r.height >= min;
+      }).map(e => `${e.tagName.toLowerCase()}${e.className ? "." + String(e.className).split(" ")[0] : ""}`);
+    }
   }
 
   async function runOne(sc, only) {

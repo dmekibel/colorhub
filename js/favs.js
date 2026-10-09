@@ -442,7 +442,8 @@ function fvArtWire(el, i, d, pic) {
     fvArtSet(i, d, on); paint();
     btn.classList.remove("pop"); void btn.offsetWidth; if (on) btn.classList.add("pop");
     buzz(on ? 10 : 4);
-    if (on) toast(how === "hold" ? "Kept in your favorites" : "In your favorites", { action: "See them", onAction: () => { XSTACK.push("favs"); favShelf(); } });
+    // low: this heart lives in the top bar; the usual toast would land right over it (David, 2026-10-09)
+    if (on) toast(how === "hold" ? "Kept in your favorites" : "In your favorites", { action: "See them", onAction: () => { XSTACK.push("favs"); favShelf(); }, low: true, ms: 3000 });
   };
   btn.onclick = e => { e.stopPropagation(); set(!fvArtHas(d.id), "tap"); };
   if (!pic) return;

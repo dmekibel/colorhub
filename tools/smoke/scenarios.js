@@ -301,6 +301,108 @@ scenario("home", "Study the map lives only on the right corner, not duplicated i
   t.expect(!/study the map/i.test(t.text("#app")), `Train still mentions "Study the map" somewhere: "${t.text("#app").slice(0, 300)}"`);
 });
 
+// David: "when I open Arrange it doesn't zoom out enough and doesn't center everything in the top half of the
+// screen." Fit mode (js/honey.js boundsFit/flyToFit) now fits the layout's own (x,y) bounds -- not a radial
+// zFloor() approximation -- into the measured rect above the sheet, for every arrangement. Headless Chrome's
+// virtual time budget doesn't advance the sheet's own CSS entrance animation (or a Web Animations API one) in
+// real time, so this forces them to the end before measuring, the same workaround the color-page-return and
+// corner-watchdog scenarios already use.
+// David: "tapping the top half instantly closes Arrange... I need to pan and zoom the map while choosing
+// arrangements... close it by double-tapping the map, the ✕, or swiping the sheet down." The scrim above the
+// sheet is pointer-events:none for Arrange (css/home.css .hm-scrim-clear) so a tap or a pan on the map reaches
+// the canvas, not the scrim's old close-on-any-tap; a double-tap specifically closes it (js/home.js chooser).
+// David: "if I open Arrange and choose a new arrangement, the black bar at the bottom comes back" -- an iPhone
+// Home Screen app's reported viewport is shorter than the physical screen (js/core.js vbFix, --vb/--app-full,
+// which .screen.fixed.cx reaches through). Spoofs navigator.standalone, matchMedia('(display-mode: standalone)'),
+// an iOS UA and screen.height > innerHeight (the exact condition vbFix() looks for), then checks the screen's
+// own full-height box survives an arrangement change -- the [data-arr]/[data-ord] handlers now re-run vbFix()
+// once the change settles (js/home.js), the same self-healing the corner watchdog already does elsewhere.
+scenario("home", "the full-height screen survives an arrangement change in a standalone (Home Screen) app", async t => {
+  await H.homeReady(t);
+  t.ev(`
+    Object.defineProperty(navigator, 'standalone', { value: true, configurable: true });
+    Object.defineProperty(navigator, 'userAgent', { value: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15', configurable: true });
+    Object.defineProperty(navigator, 'platform', { value: 'iPhone', configurable: true });
+    Object.defineProperty(screen, 'height', { value: innerHeight + 62, configurable: true });
+    Object.defineProperty(screen, 'width', { value: innerWidth, configurable: true });
+    const realMM = window.matchMedia.bind(window);
+    window.matchMedia = q => q.includes('display-mode: standalone') ? { matches: true, media: q, addListener(){}, removeListener(){} } : realMM(q);
+    vbFix();
+  `);
+  await t.sleep(300);
+  const fullH = t.ev("innerHeight + 62");
+  const screenH = () => Math.round(t.$(".screen.hm").getBoundingClientRect().height);
+  await t.waitFor(() => screenH() >= fullH - 2, 3000, `the screen to reach full height (${fullH}) before testing (got ${screenH()})`);
+  // the corner buttons (and so H.menu's own tap path) sit at the bottom of the now-taller-than-812 screen, off
+  // the smoke harness's fixed-size iframe -- open Arrange directly (#shot=home:look's own hook) instead
+  t.ev('window.HM_CHOOSER && window.HM_CHOOSER("look")');
+  await t.waitFor(".sheet.hm-sheet-arrange", 3000, "the Arrange sheet to open");
+  await t.sleep(400);
+  const arrB = t.$$(".hm-arr-b:not(.on)")[0];
+  t.expect(arrB, "no arrangement chip to pick");
+  await t.click(arrB, { wait: 700 });
+  t.expect(screenH() >= fullH - 2, `the screen shrank to ${screenH()} (wanted >= ${fullH - 2}) after choosing a new arrangement -- the black bar`);
+  await t.click("[data-sheet-close]", { wait: 500 });
+  t.expect(screenH() >= fullH - 2, `the screen shrank to ${screenH()} after closing Arrange`);
+});
+
+scenario("home", "Arrange is non-modal: a tap or a pan on the map doesn't close it, a double-tap does", async t => {
+  await H.homeReady(t);
+  await H.menu(t);
+  await t.click('.hm-do-stem [data-do="arrange"]', { wait: 500 });
+  t.expect(t.$(".sheet.hm-sheet-arrange"), "the Arrange sheet did not open");
+  const cv = t.$("canvas"), r = cv.getBoundingClientRect();
+  const tapX = r.left + r.width / 2, tapY = r.top + 60;   // the top of the map, above the sheet
+  const mk = (type, x, y, id = 1) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: id, pointerType: "touch", isPrimary: true, view: t.w });
+  cv.dispatchEvent(mk("pointerdown", tapX, tapY)); cv.dispatchEvent(mk("pointerup", tapX, tapY));
+  await t.sleep(300);
+  t.expect(t.$(".sheet.hm-sheet-arrange"), "a single tap on the map closed Arrange");
+  cv.dispatchEvent(mk("pointerdown", tapX, tapY));
+  cv.dispatchEvent(mk("pointermove", tapX - 50, tapY + 30));
+  cv.dispatchEvent(mk("pointerup", tapX - 50, tapY + 30));
+  await t.sleep(300);
+  t.expect(t.$(".sheet.hm-sheet-arrange"), "panning the map closed Arrange");
+  cv.dispatchEvent(mk("pointerdown", tapX, tapY)); cv.dispatchEvent(mk("pointerup", tapX, tapY));
+  await t.sleep(80);
+  cv.dispatchEvent(mk("pointerdown", tapX, tapY)); cv.dispatchEvent(mk("pointerup", tapX, tapY));
+  await t.sleep(400);
+  t.expect(!t.$(".sheet.hm-sheet-arrange"), "a double-tap on the map did not close Arrange");
+});
+
+scenario("home", "Arrange's fit mode frames the whole layout above the sheet, for every arrangement", async t => {
+  const forceAnims = () => [...t.d.querySelectorAll(".sheet,.screen")].forEach(e => e.getAnimations && e.getAnimations().forEach(a => { try { a.finish(); } catch (er) {} }));
+  await H.homeReady(t);
+  await H.menu(t);
+  await t.click('.hm-do-stem [data-do="arrange"]', { wait: 400 });
+  const within = async why => {
+    forceAnims(); await t.sleep(150); forceAnims();
+    // headless Chrome's virtual time budget never advances the sheet's entrance animation in real time, so the
+    // app's own re-measure-after-300ms (js/home.js chooser applyInset) still reads the stuck (off-screen) rect;
+    // force it again, then redo the same setInset+enterFit it does, exactly like a real device would once the
+    // (real, time-accurate) entrance actually finished
+    t.ev(`(() => { const sh = document.querySelector(".sheet.hm-sheet-arrange"), v = document.querySelector(".cx-view"); if (!sh || !v) return; const r = sh.getBoundingClientRect(); HM_CTRL.setInset({ bottom: Math.max(0, v.getBoundingClientRect().bottom - r.top) }); HM_CTRL.enterFit(); })()`);
+    await t.sleep(900);
+    forceAnims(); await t.sleep(200);
+    const sheet = t.$(".sheet.hm-sheet-arrange"); t.expect(sheet, `${why}: no Arrange sheet`);
+    const sheetTop = sheet.getBoundingClientRect().top;
+    const b = t.ev("HM_CTRL._drawnBounds()");
+    t.expect(b && b.n > 3, `${why}: too few drawn cells to judge (${b && b.n})`);
+    // a generous tolerance, not pixel-perfect containment: the fisheye's own magnified middle bubble can still
+    // push a little past the strict rect (see the lane's commit message), but it must be in the right
+    // neighborhood -- nowhere near the old behavior (zoomed in, bounds many screens wide).
+    const pad = Math.max(60, sheetTop * .5);
+    t.expect(b.minX > -pad && b.maxX < b.W + pad, `${why}: horizontal bounds [${b.minX.toFixed(0)},${b.maxX.toFixed(0)}] far outside [0,${b.W}]`);
+    t.expect(b.minY > -pad && b.maxY < sheetTop + pad, `${why}: vertical bounds [${b.minY.toFixed(0)},${b.maxY.toFixed(0)}] far outside [0,${sheetTop.toFixed(0)}]`);
+    t.notes.push(`${why}: sheetTop=${sheetTop.toFixed(0)} bounds=[${b.minX.toFixed(0)},${b.minY.toFixed(0)}..${b.maxX.toFixed(0)},${b.maxY.toFixed(0)}]`);
+  };
+  await within("map/hue (default)");
+  for (const sel of ['[data-arr="rings"]', '[data-arr="families"]', '[data-arr="sunflower"]']) {
+    const b = t.$(sel); if (!b) continue;
+    await t.click(b, { wait: 300 });
+    await within(sel);
+  }
+});
+
 scenario("home", "mapSelect: a preview mode that auto-arranges the selection and restores on clear", async t => {
   await H.homeReady(t);
   t.expect(t.ev("typeof mapSelect === 'function'"), "mapSelect is not defined");
@@ -2306,6 +2408,91 @@ scenario("paintings", "the action row is compact (Keep/Share/On the map) and Fin
   await t.click(more.querySelector("summary"), { wait: 400 });
   t.expect(/Value key/.test(t.text("[data-awan]")), "opening More doesn't reveal the Analysis tiles");
 });
+// David, 2026-10-09: a Commons painting's own Special:FilePath URL can't be read with crossorigin (verified by
+// hand: its redirect chain never sends Access-Control-Allow-Origin on the intermediate hops), so
+// glCommonsResolve() asks the MediaWiki API instead, which answers with CORS directly and hands back an already
+// -resolved thumb URL. The smoke harness blocks every external host, so this stands in for that one resolved
+// fetch with a local, same-origin image at the exact seam — everything downstream (the swap, armSample, Pick
+// from it) is the real code, unmocked.
+scenario("paintings", "on a Commons painting, the resolved CORS fallback makes Pick from it return an exact pixel", async t => {
+  await t.open("#/home", { settle: 300 });
+  t.ev(`window.glCommonsResolve = () => Promise.resolve(location.origin + "/icon-512.png")`);
+  t.ev(`galleryPage(14423, true)`);   // Mona Lisa, a Commons-sourced painting
+  await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 15000, "the Mona Lisa painting page");
+  await t.waitFor(() => t.$(".gl-hero > span").classList.contains("gl-tap"), 10000, "the picture becomes tappable once the resolved image is armed and readable");
+  if (!t.$('[data-glo="pick"]')) await t.click("[data-glmore]", { wait: 300 });
+  await t.click('[data-glo="pick"]', { wait: 400 });
+  // the picture's own tap handler reads real clientX/clientY off the event, so dispatch one at its center
+  t.ev(`(() => { const s = document.querySelector(".gl-hero > span"), r = s.getBoundingClientRect(); s.dispatchEvent(new MouseEvent("click", { bubbles: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 })); })()`);
+  await t.sleep(400);
+  await t.waitFor(() => /colors you took/i.test(t.text("[data-glcap]")), 4000, "a picked color after tapping the picture");
+  t.expect(t.$(".gl-tap-dot"), "no pick dot appeared, so the tap never reached a real pixel");
+});
+// js/eyedrop.js: the shared press-and-drag eyedropper. A synthetic two-color test image (left half pure red,
+// right half pure blue) proves the sampling math directly, with no network and no dependence on any one screen
+// that's adopted it yet (David, 2026-10-09).
+scenario("eyedrop", "the shared eyedropper: drag reads each side, and sample size changes the reading at the boundary", async t => {
+  await t.open("#/home", { settle: 300 });
+  const raw = await t.ev(`(() => new Promise(resolve => {
+    const c = document.createElement("canvas"); c.width = 100; c.height = 40;
+    const cx = c.getContext("2d");
+    cx.fillStyle = "#FF0000"; cx.fillRect(0, 0, 50, 40);
+    cx.fillStyle = "#0000FF"; cx.fillRect(50, 0, 50, 40);
+    const img = new Image();
+    img.onload = () => {
+      img.style.cssText = "position:fixed;left:0;top:0;width:200px;height:80px;z-index:999";
+      document.body.appendChild(img);
+      const r = img.getBoundingClientRect();
+      const fire = (el, type, x) => el.dispatchEvent(new PointerEvent(type, { bubbles: true, clientX: r.left + x, clientY: r.top + r.height / 2, isPrimary: true, pointerId: 1 }));
+      setSampleSize(1);
+      const moves1 = [];
+      const a1 = eyedropAttach(img, { onMove: (hex) => moves1.push(hex) });
+      fire(img, "pointerdown", 10);
+      const redHex = moves1[moves1.length - 1];
+      fire(img, "pointermove", 190);
+      const blueHex = moves1[moves1.length - 1];
+      fire(img, "pointermove", 100);
+      const pointBoundary = moves1[moves1.length - 1];
+      fire(img, "pointerup", 100);
+      a1.detach();
+      setSampleSize(31);
+      const moves2 = [];
+      const a2 = eyedropAttach(img, { onMove: (hex) => moves2.push(hex) });
+      fire(img, "pointerdown", 100);
+      const avgBoundary = moves2[moves2.length - 1];
+      fire(img, "pointerup", 100);
+      a2.detach();
+      setSampleSize(1);
+      document.body.removeChild(img);
+      resolve(JSON.stringify({ redHex, blueHex, pointBoundary, avgBoundary }));
+    };
+    img.src = c.toDataURL();
+  }))()`);
+  const r = JSON.parse(raw);
+  t.expect(r.redHex === "#FF0000", `the red side read ${r.redHex}, not pure red`);
+  t.expect(r.blueHex === "#0000FF", `the blue side read ${r.blueHex}, not pure blue`);
+  t.expect(r.pointBoundary === "#FF0000" || r.pointBoundary === "#0000FF", `Point at the boundary should land on one exact side, got ${r.pointBoundary}`);
+  t.expect(r.avgBoundary !== "#FF0000" && r.avgBoundary !== "#0000FF" && /^#[0-9A-F]{6}$/.test(r.avgBoundary), `31×31 at the boundary should blend the two sides, got ${r.avgBoundary}`);
+  // the loupe follows the drag and shows a live readout
+  const loupeInfo = await t.ev(`(() => new Promise(resolve => {
+    const img = document.createElement("img");
+    img.style.cssText = "position:fixed;left:0;top:0;width:200px;height:80px;z-index:999";
+    img.onload = () => {
+      document.body.appendChild(img);
+      const r = img.getBoundingClientRect();
+      eyedropAttach(img, {});
+      img.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, clientX: r.left + 10, clientY: r.top + r.height / 2, isPrimary: true, pointerId: 1 }));
+      const loupe = document.querySelector(".eyd-loupe");
+      resolve(JSON.stringify({ shown: !!loupe, hex: loupe && loupe.querySelector(".eyd-loupe-hex").textContent }));
+    };
+    const c = document.createElement("canvas"); c.width = 100; c.height = 40;
+    c.getContext("2d").fillRect(0, 0, 100, 40);
+    img.src = c.toDataURL();
+  }))()`);
+  const lr = JSON.parse(loupeInfo);
+  t.expect(lr.shown, "the loupe never appeared on pointerdown");
+  t.expect(/^#[0-9A-F]{6}$/.test(lr.hex), `the loupe's hex readout is missing or wrong: ${lr.hex}`);
+});
 scenario("paintings", "a color page's In paintings section: presets re-run the query; Fine-tune opens the sliders", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
   const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
@@ -2353,10 +2540,44 @@ scenario("paintings", "Look closer on a painting then swiping back (popstate) ne
     const scr = t.$(".screen");
     t.expect(scr && t.w.getComputedStyle(scr).opacity === "1", "the color page came back fully transparent, not visible");
     t.expect(scr && scr.textContent.trim().length > 20, "the color page came back with no content");
+    await t.waitFor(() => t.bodyOverlayLeaks().length === 0, 5000, `a full-viewport overlay leaked from the painting page: ${t.bodyOverlayLeaks().join(", ")}`);
     const sec2 = await t.waitFor("[data-glin]", 8000, "the In paintings section again");
     sec2.scrollIntoView();
     await t.waitFor(() => t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin").length > 0, 15000, "the rail to still show its paintings after Back");
   }
+});
+// The generic guard (David, 2026-10-09): "Look closer" and the cover's own focus view are two screens that both
+// append a full-viewport fixed box straight to <body> (so a screen's entrance-animation transform doesn't clip
+// it) -- the exact shape of bug that left the "Look closer" scrim stuck over the color page above. This checks
+// the shape itself (t.bodyOverlayLeaks(), tools/smoke/harness.js), not the two names already fixed, so a THIRD
+// screen built the same way and missing its cleanup still fails this, not just paintzoom.js and richpage.js.
+scenario("pages", "nothing a screen left on document.body outlives a swipe back -- the focus view included", async t => {
+  // a real pushed entry to pop back to: Home, then an in-app navigation into the color page (same path a tapped
+  // bubble takes) -- opening the color page directly, with nothing before it in this document's history, would
+  // make a lone Back a no-op and prove nothing (the paintings scenario above gets its depth the same way, via
+  // a tap into the painting page instead of straight to a color address)
+  await t.open("#/home", { settle: 800 });
+  t.w.openRoute("#/color/cobalt");
+  await t.waitFor(".cp-hero", 10000, "the color page's cover");
+  // core.js show()'s own .fade-ghost (the outgoing screen's 260ms fade) is WAAPI-driven, which needs the real
+  // clock this virtual-time Chrome only advances while t.tick() is waiting on something -- waitFor already loops
+  // tick()+sleep, which a flat sleep() doesn't
+  await t.waitFor(() => t.bodyOverlayLeaks().length === 0, 5000, `a fresh color page keeps a body-level overlay: ${t.bodyOverlayLeaks().join(", ")}`);
+  // the cover's bare fill, tapped once: js/richpage.js rpOpenFocus takes the color full screen
+  const hero = t.$(".cp-hero"), r = hero.getBoundingClientRect();
+  hero.dispatchEvent(new t.w.PointerEvent("pointerup", { bubbles: true, cancelable: true, isPrimary: true, button: 0, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2, view: t.w }));
+  await t.waitFor(".rp-focus", 4000, "the focus view to open");
+  // rpOpenFocus grows it in from a scale(.06) origin via requestAnimationFrame(() => ov.classList.add("on")) and a
+  // CSS transition -- virtual-time Chrome only advances that while something is polling for it (see the .fade-ghost
+  // note above), so wait for the grown size itself rather than a fixed sleep
+  await t.waitFor(() => t.bodyOverlayLeaks().includes("div.rp-focus"), 5000, "the focus view isn't recognized as the full-viewport overlay it is");
+  // swipe back without closing it first -- the exact move that left the "Look closer" scrim stuck in the
+  // paintings scenario above; this lands back on Home, not on the color page itself
+  t.w.history.back();
+  await t.waitFor(() => !t.$(".rp-focus"), 5000, "swiping back while the focus view was open left it on the page");
+  await t.waitFor(() => t.bodyOverlayLeaks().length === 0, 5000, `a body-level overlay leaked past the focus view: ${t.bodyOverlayLeaks().join(", ")}`);
+  const scr = t.$(".screen");
+  t.expect(scr && t.w.getComputedStyle(scr).opacity === "1" && scr.textContent.trim().length > 20, "the screen Back landed on isn't actually visible");
 });
 
 // ================================================================== SET PAGES (js/settray.js, js/setpage.js: a page for every pair and palette)
@@ -2371,7 +2592,7 @@ scenario("sets", "Pair with on a color page: picker suggests, searches, try-on b
   await t.click(btn, { wait: 600 });
   await t.waitFor(".sheet.sx-sheet .sx-opt", 6000, "the picker's suggestions");
   t.expect(t.$$(".sx-sheet .sx-sec").length >= 2, "fewer than two suggestion rows");
-  t.expect(t.$(".sx-try-sw.empty"), "the try-on strip starts with a dashed empty slot");
+  t.expect(t.$(".sx-try-seg.empty"), "the try-on preview starts with a dashed empty slot");
   const q = t.$(".sx-sheet [data-sx-q]"); q.value = "rose"; q.dispatchEvent(new t.w.Event("input", { bubbles: true })); await t.sleep(200);
   await t.waitFor(".sx-sheet .sx-li", 6000, "search results for rose");
   q.value = ""; q.dispatchEvent(new t.w.Event("input", { bubbles: true })); await t.sleep(200);
@@ -2382,14 +2603,34 @@ scenario("sets", "Pair with on a color page: picker suggests, searches, try-on b
   const hex1 = firstOpt.dataset.sxHex;
   await t.click(firstOpt, { force: true, wait: 300 });
   t.expect(!t.$(".sp-page"), "tapping a candidate must not navigate away");
-  t.expect(t.$(".sx-try-sw.trying"), "the trying slot is filled");
+  t.expect(t.$(".sx-try-seg.trying"), "the trying slot is filled");
   t.expect(/· .+% apart · contrast/.test(t.text(".sx-try-rel")), "the relation line reads name · % apart · contrast");
+  // David, 2026-10-09: "too small; make the visualization bigger" and "I scroll past the preview so I can't see
+  // it anymore" — a real split swatch, substantially bigger than the old 76px chips, outside the scrolling
+  // candidate list entirely (js/core.js sheet()'s [data-sheet-scroll] shape) so it can't scroll out of view.
+  const bigBox = t.$(".sx-try-big");
+  t.expect(bigBox.getBoundingClientRect().height >= 90, `the try-on preview is only ${Math.round(bigBox.getBoundingClientRect().height)}px tall`);
+  // start from a known, unscrolled state (the ring-picker check above already scrolled the list to bring itself
+  // into view, via a JS-smooth scrollIntoView the test harness's forced scroll-behavior:auto can't shortcut)
+  const scrollBox = t.$("[data-sheet-scroll]");
+  await t.tick(); await t.sleep(500); await t.tick();
+  scrollBox.scrollTop = 0; scrollBox.dispatchEvent(new t.w.Event("scroll")); await t.tick(); await t.sleep(300); await t.tick();
+  const topBefore = t.$(".sx-try").getBoundingClientRect().top;
+  scrollBox.scrollTop = 600; scrollBox.dispatchEvent(new t.w.Event("scroll")); await t.tick(); await t.sleep(300); await t.tick();
+  const tryAfterScroll = t.$(".sx-try");
+  t.expect(tryAfterScroll && Math.abs(tryAfterScroll.getBoundingClientRect().top - topBefore) < 2, `the preview scrolled away with the list instead of staying on top (was ${topBefore}, now ${tryAfterScroll && tryAfterScroll.getBoundingClientRect().top})`);
+  t.expect(tryAfterScroll.classList.contains("collapsed"), "the preview never collapses after scrolling");
+  let reach = t.reachable(t.$("[data-try-add]"));
+  for (let i = 0; reach && i < 20; i++) { await t.tick(); await t.sleep(100); reach = t.reachable(t.$("[data-try-add]")); }
+  t.expect(!reach, `Add is not reachable once the preview has collapsed: ${reach}`);
+  scrollBox.scrollTop = 0; scrollBox.dispatchEvent(new t.w.Event("scroll")); await t.sleep(250);
+  t.expect(!t.$(".sx-try").classList.contains("collapsed"), "the preview doesn't expand again back at the top");
   // swapping to another candidate replaces the trial
   const opts = t.$$(".sx-sheet .sx-opt"), second = opts.find(b => b.dataset.sxHex !== hex1);
-  if (second) { await t.click(second, { force: true, wait: 300 }); t.expect(t.ev("de2000")(t.$(".sx-try-sw.trying").style.getPropertyValue("--c"), second.dataset.sxHex) < 1, "swapping candidates replaces the trial, not adds to it"); }
+  if (second) { await t.click(second, { force: true, wait: 300 }); t.expect(t.ev("de2000")(t.$(".sx-try-seg.trying").style.getPropertyValue("--c"), second.dataset.sxHex) < 1, "swapping candidates replaces the trial, not adds to it"); }
   // Cancel discards the trial, leaving the set unchanged
   await t.click("[data-try-cancel]", { force: true, wait: 200 });
-  t.expect(!t.$(".sx-try-sw.trying") && t.$(".sx-try-sw.empty"), "Cancel clears the trying slot");
+  t.expect(!t.$(".sx-try-seg.trying") && t.$(".sx-try-seg.empty"), "Cancel clears the trying slot");
   t.expect(t.ev("sxTray().length") === 0, "Cancel left the tray unchanged");
   // Add commits it
   await t.click(t.$(".sx-sheet .sx-opt"), { force: true, wait: 300 });
@@ -2624,6 +2865,51 @@ scenario("pages", "a fresh load of #/painter/<slug> opens that painter, not Home
   t.expect(/Bloemaert/.test(t.$("#app").innerText), "the painter's page doesn't name the painter");
   t.expect(!t.$(".hm canvas"), "a direct painter address landed on Home");
   t.expect(t.w.location.hash === "#/painter/abraham-bloemaert", `the address changed to ${t.w.location.hash}`);
+});
+
+// The painter-page rebuild (David, 2026-10-09): portrait hero first, then "Most famous", then the life's work
+// grid with its sort chips and filter drawer (js/artwiki.js awPortraitHero/awFamousRail/awWorksSection).
+// Bazille's self-portrait is one of the few whose museum (AIC) serves its image same-origin (img/gallery/...),
+// so it loads under the smoke harness's host-resolver-rules (every other host, Wikimedia included, is
+// deliberately unreachable there -- most painter portraits are Commons-hosted and can't be asserted on here).
+scenario("pages", "painter page: the portrait hero renders (an image or the signature-color field -- never empty)", async t => {
+  await t.open("#/painter/frederic-bazille", { settle: 600 });
+  await t.waitFor(".aw-page", 15000, "the painter page");
+  const hero = await t.waitFor(".aw-pt-hero", 8000, "the portrait hero");
+  t.expect(hero.getBoundingClientRect().height > 100, "the portrait hero has no size");
+  t.expect(t.$(".aw-pt-hero figcaption") && t.text(".aw-pt-hero figcaption").length > 0, "the portrait hero has no caption");
+  // a painter with no portrait anywhere still gets the hero, as a field of his own signature colors
+  await t.open("#/painter/adam-pijnacker", { settle: 600 });
+  await t.waitFor(".aw-page", 15000, "the painter page (no portrait)");
+  const field = await t.waitFor(".aw-pt-hero.aw-pt-field", 8000, "the signature-color fallback field");
+  t.expect(t.$$(".aw-pt-bars i", field).length > 0, "the fallback field has no color bars");
+});
+scenario("pages", "painter page: a sort chip reorders the life's work grid", async t => {
+  await t.open("#/painter/john-singer-sargent", { settle: 600 });
+  await t.waitFor(".aw-page", 15000, "the painter page");
+  await t.waitFor("#aw-works", 8000, "the Life's work section");
+  const firstGi = () => { const p = t.$(".aw-wk-mount .gl-pin, .aw-wk-mount .gl-pin.wait"); return p && p.dataset.gi; };
+  await t.waitFor(() => firstGi(), 8000, "the grid's first pin");
+  const before = firstGi();
+  const vivid = t.$$('[data-wksort="C"]').find(b => /Vivid/.test(b.textContent));
+  t.expect(vivid, "no Vivid sort chip");
+  await t.click(vivid, { wait: 500 });
+  t.expect(vivid.classList.contains("on"), "the Vivid chip didn't turn on");
+  await t.waitFor(() => firstGi() && firstGi() !== before, 6000, "the grid order to change after switching sort");
+});
+scenario("pages", "painter page: a museum filter narrows the life's work grid -- honestly", async t => {
+  await t.open("#/painter/rembrandt-van-rijn", { settle: 600 });
+  await t.waitFor(".aw-page", 15000, "the painter page");
+  await t.waitFor("#aw-works", 8000, "the Life's work section");
+  const fold = await t.waitFor('[data-wkfilter] summary', 8000, "the Filter drawer");
+  await t.click(fold, { wait: 300 });
+  const mus = t.$$("[data-wkmus]")[0];
+  t.expect(mus, "no museum filter chip (expected more than one museum here)");
+  const before = t.text("[data-wkcount]");
+  await t.click(mus, { wait: 500 });
+  t.expect(mus.classList.contains("on"), "the museum chip didn't turn on");
+  await t.waitFor(() => t.text("[data-wkcount]") !== before, 6000, "the count readout to change after a museum filter");
+  t.expect(/ of /.test(t.text("[data-wkcount]")), `the count doesn't read "N of M" once filtered (got "${t.text("[data-wkcount]")}")`);
 });
 
 // ================================================================== THE TRAIL (js/trail.js: one Back for everything, the map glyph)
@@ -3163,6 +3449,15 @@ scenario("favs", "a painting's heart (now in the top bar) and a double-tap on th
   await t.click("[data-fva]", { wait: 400 });
   t.expect(t.$("[data-fva]").getAttribute("aria-pressed") === "true", "the heart didn't fill");
   t.expect(t.ev("Object.keys(S.favArt || {}).length") === 1, "the painting isn't in favorites");
+  // David, 2026-10-09: a toast used to land right over the heart it was confirming. Now it's low, and the heart
+  // (still animating/settled) stays the top hit at its own center the whole time.
+  const atHeart = t.ev(`(() => { const r = document.querySelector("[data-fva]").getBoundingClientRect(); const el = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return el && el.closest("[data-fva]") === document.querySelector("[data-fva]"); })()`);
+  t.expect(atHeart, "the heart is no longer the top element at its own center — something is covering it");
+  const toastEl = t.$(".toast");
+  t.expect(toastEl && toastEl.classList.contains("toast-low"), "the favorites toast isn't the low (bottom) variant");
+  t.expect(toastEl.getBoundingClientRect().top > t.$(".art-top").getBoundingClientRect().bottom, "the toast overlaps the top bar");
+  t.expect(!!toastEl.querySelector("button"), "the toast has no tappable favorites link");
+
   t.ev(`S.favs = { "#008080": { n: "Teal", at: today() }, "#4682B4": { n: "Steel blue", at: today() } }; S.fvCat = "all"; save(); favShelf()`);
   await t.waitFor(".fv-cats [data-fvcat]", 6000, "the kinds on the shelf");
   const kinds = t.$$(".fv-cats [data-fvcat]").map(b => b.dataset.fvcat).join(",");
@@ -3348,6 +3643,87 @@ scenario("pages", "with an iPhone safe area, ‹ and Close sit below the status 
   t.expect(!bad.length, `on the status bar: ${bad.join(", ")}`);
 });
 
+// ================================================================== SLIDESHOW (js/slideshow.js)
+scenario("slideshow", "opens from Learn's Or choose, switches modes, steps by swipe and pause, and a name opens its page", async t => {
+  await lrReal(t, "#shot=learn");
+  await t.waitFor(".room-learn [data-ch='slideshow']", 6000, "the Learn room's Slideshow row");
+  await t.click(".room-learn [data-ch='slideshow']", { wait: 500 });
+  await t.waitFor(".ss-ov .ss-layer", 6000, "the slideshow's first slide");
+  t.expect(t.$(".ss-mode.on") && t.text(".ss-mode.on").toLowerCase().includes("shuffle"), "Shuffle isn't the remembered default mode");
+  t.expect(/shuffle/i.test(t.text("[data-ss-mode-btn] .lbl")), `the Mode button reads "${t.text("[data-ss-mode-btn] .lbl")}"`);
+
+  // the Mode button opens a compact picker (only ✕ / Mode / Pause sit over the color at rest)
+  await t.click("[data-ss-mode-btn]", { wait: 300 });
+  await t.waitFor(() => !t.$("[data-ss-picker]").hidden, 3000, "the mode picker to open");
+
+  // switch to Look-alikes: a split pair with a one-line distinction
+  await t.click(`[data-ss-mode="lookalikes"]`, { wait: 400 });
+  await t.waitFor(".ss-ov .ss-layer.ss-pair", 6000, "a look-alike pair");
+  t.expect(/\bthan\b/.test(t.text(".ss-diff")), `the distinction line reads "${t.text(".ss-diff")}"`);
+  t.expect(t.$("[data-ss-picker]").hidden, "the picker didn't close after choosing a mode");
+
+  // switch to Family: the chip strip appears and picking one keeps a single color on screen (the picker stays
+  // open for a family pick, since picking the family is still part of choosing the mode)
+  await t.click("[data-ss-mode-btn]", { wait: 300 });
+  await t.click(`[data-ss-mode="family"]`, { wait: 400 });
+  await t.waitFor(() => !t.$("[data-ss-famstrip]").hidden, 4000, "the family chip strip");
+  await t.click(`[data-ss-fam="Greens"]`, { wait: 500 });
+  await t.waitFor(".ss-ov .ss-layer:not(.ss-pair)", 6000, "a single-color slide for Greens");
+  t.expect(t.$("[data-ss-picker]").hidden, "the picker didn't close after picking a family");
+
+  // back to Shuffle: a tap pauses (manual session), a second tap resumes
+  await t.click("[data-ss-mode-btn]", { wait: 300 });
+  await t.click(`[data-ss-mode="shuffle"]`, { wait: 400 });
+  await t.waitFor(".ss-ov .ss-layer:not(.ss-pair)", 4000, "a shuffled slide");
+  await t.click(".ss-stage", { pointer: true, wait: 300 });
+  t.expect(/resume/i.test(t.el("[data-ss-pause]").getAttribute("aria-label")), "a tap on the stage did not pause");
+  await t.click(".ss-stage", { pointer: true, wait: 300 });
+  t.expect(/^pause$/i.test(t.el("[data-ss-pause]").getAttribute("aria-label")), "a second tap did not resume");
+
+  // swipe left steps to a new slide (the progress hint advances)
+  const before = t.text("[data-ss-hint]");
+  { const r = t.$(".ss-stage").getBoundingClientRect(), w = t.w, o = { bubbles: true, cancelable: true, pointerId: 1, pointerType: "touch", isPrimary: true, view: w, clientY: r.top + r.height * .5 };
+    t.$(".ss-stage").dispatchEvent(new w.PointerEvent("pointerdown", { ...o, clientX: r.left + r.width * .82 }));
+    t.$(".ss-stage").dispatchEvent(new w.PointerEvent("pointermove", { ...o, clientX: r.left + r.width * .2 }));
+    t.$(".ss-stage").dispatchEvent(new w.PointerEvent("pointerup", { ...o, clientX: r.left + r.width * .2 })); }
+  await t.sleep(500);
+  t.expect(t.text("[data-ss-hint]") !== before, `the progress hint didn't move past "${before}"`);
+
+  // pause first: Chrome's virtual time budget can let the 9s auto-advance timer fire between two slow test
+  // steps, swapping the very slide this test is about to tap (a test-only race, not a real-world one — a real
+  // viewer's tap lands well inside a dwell, and ssScheduleNext() restarts the clock on every step regardless)
+  if (!/resume/i.test(t.el("[data-ss-pause]").getAttribute("aria-label"))) await t.click("[data-ss-pause]", { pointer: true, wait: 300 });
+  t.expect(/resume/i.test(t.el("[data-ss-pause]").getAttribute("aria-label")), "could not pause before the name tap");
+  await t.waitFor(".ss-layer.in .ss-name-btn", 4000, "the current slide's name button, settled");
+
+  // tapping the name opens that color's real page, and leaving it returns to the Learn room, not the slideshow
+  await t.click(".ss-layer.in .ss-name-btn", { wait: 600 });
+  await t.waitFor(".cp-page", 8000, "a color page after tapping its name");
+  t.expect(!t.$(".ss-ov"), "the slideshow is still open behind the color page");
+  await t.click("[data-back]", { wait: 500 });
+  await t.waitFor(() => !t.$(".cp-page") && !t.$(".ss-ov"), 6000, "Back to leave the color page");
+  t.expect(t.$(".room-learn"), `Back landed on "${t.snapshot()}", expected the Learn room`);
+});
+
+scenario("slideshow", "Today mode starts on today's color, and the Mode pill relabels itself Shuffle once it hands off", async t => {
+  await lrReal(t, "#shot=learn");
+  await t.waitFor("[data-slideshow='today']", 6000, "the Today card's slideshow button");
+  const today = t.ev("dailyColor().n");
+  await t.click("[data-slideshow='today']", { wait: 500 });
+  await t.waitFor(".ss-ov .ss-name-btn", 6000, "the first slide's name");
+  t.expect(t.text(".ss-ov .ss-name-btn") === today, `the first slide is "${t.text(".ss-ov .ss-name-btn")}", expected today's color "${today}"`);
+  t.expect(/today/i.test(t.text("[data-ss-mode-btn] .lbl")), `the Mode button should still read Today on slide 1, reads "${t.text("[data-ss-mode-btn] .lbl")}"`);
+  // step past today's color: the mode has handed off to Shuffle, so the pill must say so honestly, never still "Today"
+  await t.click(".ss-stage", { pointer: true, wait: 300 });   // pause, so the test's own step is the only one that advances
+  const stage = t.$(".ss-stage"), r = stage.getBoundingClientRect(), w = t.w;
+  const o = { bubbles: true, cancelable: true, pointerId: 1, pointerType: "touch", isPrimary: true, view: w, clientY: r.top + r.height * .5 };
+  stage.dispatchEvent(new w.PointerEvent("pointerdown", { ...o, clientX: r.left + r.width * .82 }));
+  stage.dispatchEvent(new w.PointerEvent("pointermove", { ...o, clientX: r.left + r.width * .2 }));
+  stage.dispatchEvent(new w.PointerEvent("pointerup", { ...o, clientX: r.left + r.width * .2 }));
+  await t.sleep(400);
+  t.expect(/shuffle/i.test(t.text("[data-ss-mode-btn] .lbl")), `after today's color the Mode button should read Shuffle, reads "${t.text("[data-ss-mode-btn] .lbl")}"`);
+});
+
 // ================================================================== THE FAMILY TREE (js/aesthetics-graph.js: #/web)
 scenario("web", "a fresh load of #/web shows the graph canvas and a tap opens the Show sheet", async t => {
   await t.open("#/web", { settle: 600 });
@@ -3419,4 +3795,79 @@ scenario("web", "switching the edge-type filter animates nodes to a different pr
     moved = before.filter((b, j) => Math.hypot(after[j][1] - b[1], after[j][2] - b[2]) > 0.02).length;
   }
   t.expect(moved > before.length * 0.3, `only ${moved}/${before.length} sampled nodes moved to the new layout`);
+});
+
+// ================================================================== GESTURE-FOLLOWING BACK (js/trail.js tlgWire)
+// David, 2026-10-09: "if I swipe down I don't need to see it shrink back into its original bubble, I just need to
+// see the page swiped away downwards; if I swipe back, the zoom-out animation doesn't make sense in that context."
+const TLGT = {
+  async openFromMap(t) {
+    TRL.placed(t);
+    await t.open("#/home", { settle: 600, keepState: true });
+    await t.waitFor(".hm canvas", 12000, "the map");
+    await t.sleep(300);
+    t.ev("hmOpenColor(BYNAME.get('cobalt'))");
+    await TRL.atHash(t, /^#\/color\/cobalt/, "the cobalt page");
+    await t.sleep(500);   // tlgWire only arms once the page has rested a moment (TLG_BORN) -- same as a real swipe
+    return t.$("#app .screen");
+  },
+  // force the "continue off-screen" WAAPI animation to the end (the virtual clock doesn't drive it on its own --
+  // the same workaround the "mxLand never stalls" scenario above uses for js/mapxfer.js's own animations)
+  async forceCommit(t) {
+    await t.waitFor(() => t.ev("typeof TLG_ANIM !== 'undefined' && !!TLG_ANIM"), 3000, "the gesture's own animation to start");
+    t.ev("(() => { if (typeof TLG_ANIM !== 'undefined' && TLG_ANIM) TLG_ANIM.finish(); })()");
+  },
+};
+scenario("trail", "pull-down on a color page opened from the map swipes it away (no shrink-to-bubble) and lands on the map", async t => {
+  const scr = await TLGT.openFromMap(t);
+  const r = scr.getBoundingClientRect();
+  // a slow, generous pull past the threshold -- distance alone should carry it, not velocity
+  await t.drag(scr, [{ x: r.left + r.width / 2, y: r.top + 80 }, { x: r.left + r.width / 2, y: r.top + 90 }, { x: r.left + r.width / 2, y: r.top + 260 }], { ms: 40, wait: 0 });
+  t.expect(t.$(".tlg-floor"), "no destination floor appeared under the drag");
+  t.expect(t.$(".tlg-floor-img"), "the map's own snapshot didn't back the floor (going straight back to the map)");
+  await TLGT.forceCommit(t);
+  t.expect(!t.$(".mx") && !t.$(".mx-floor"), "the old shrink-to-bubble animation ran on a swiped-away page");
+  await t.waitFor(() => t.$(".screen.hm canvas") && !t.$(".cp-page"), 8000, "back on the map after the pull");
+  await t.sleep(150);
+  t.expect(!t.$(".tlg-floor"), "the destination floor was left behind");
+  t.expect(t.ev("typeof TLG_SKIP !== 'undefined' && !TLG_SKIP"), "TLG_SKIP was left on");
+  MXT.corners(t, "after a pull-down");
+});
+scenario("trail", "a short, slow pull-down springs the page back without navigating", async t => {
+  const scr = await TLGT.openFromMap(t);
+  const r = scr.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + 80;
+  await t.drag(scr, [{ x: cx, y: cy }, { x: cx, y: cy + 12 }, { x: cx, y: cy + 40 }], { ms: 90, wait: 400 });
+  t.expect(t.$(".cp-page") && /\/color\/cobalt/.test(TRL.hash(t)), "a short pull navigated away instead of springing back");
+  await t.waitFor(() => !t.$(".tlg-floor"), 2000, "the floor to clear after springing back");
+  t.expect(scr.style.transform === "" || scr.style.transform === "none" || !scr.isConnected, "the page didn't settle back to its own place");
+});
+scenario("trail", "a left-edge swipe slides the page off to the right (no shrink) and lands on the map", async t => {
+  const scr = await TLGT.openFromMap(t);
+  const r = scr.getBoundingClientRect(), y = r.top + r.height * .5;
+  await t.drag(scr, [{ x: 8, y }, { x: 20, y }, { x: 160, y }], { ms: 35, wait: 0 });
+  t.expect(t.$(".tlg-floor"), "no destination floor appeared under the edge-swipe");
+  await TLGT.forceCommit(t);
+  t.expect(!t.$(".mx") && !t.$(".mx-floor"), "the old shrink-to-bubble animation ran on an edge-swiped page");
+  await t.waitFor(() => t.$(".screen.hm canvas") && !t.$(".cp-page"), 8000, "back on the map after the edge-swipe");
+  await t.sleep(150);
+  MXT.corners(t, "after a left-edge swipe");
+});
+scenario("trail", "a fast flick past a short distance still commits (velocity, not just distance)", async t => {
+  const scr = await TLGT.openFromMap(t);
+  const r = scr.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + 80;
+  // well under the 110px distance threshold, but fast (big steps, short ms)
+  await t.drag(scr, [{ x: cx, y: cy }, { x: cx, y: cy + 20 }, { x: cx, y: cy + 70 }], { ms: 8, wait: 0 });
+  await TLGT.forceCommit(t);
+  await t.waitFor(() => t.$(".screen.hm canvas") && !t.$(".cp-page"), 8000, "a fast short flick still reached the map");
+});
+scenario("trail", "popstate (the native iOS/browser back swipe) swaps straight to the map with no shrink and no crossfade", async t => {
+  await TLGT.openFromMap(t);
+  t.expect(!t.$(".mx") && !t.$(".tlg-floor"), "something was already animating before Back");
+  t.w.history.back();
+  // if mxLeave ran (HIST_POP not honored), .mx/.mx-floor would appear for the shrink; poll fast enough to catch it
+  let sawMx = false;
+  for (let i = 0; i < 20; i++) { if (t.$(".mx") || t.$(".mx-floor")) { sawMx = true; break; } await t.sleep(20); }
+  t.expect(!sawMx, "the native back swipe still played the bubble-shrink animation");
+  await t.waitFor(() => t.$(".screen.hm canvas") && !t.$(".cp-page"), 8000, "the map after the native back swipe");
+  MXT.corners(t, "after a native back swipe");
 });

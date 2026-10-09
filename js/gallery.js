@@ -1039,12 +1039,25 @@ function glPage(i, d, fromHex, tol) {
     thingQuiz(host, { img: () => sampleImg, crop: d.crop, colors: glStandOut(pool.length ? pool : pal6, pool.length ? 12 : 6, prior), pool: pool.length ? pool : pal6,
       title: d.t, kind: "painting", src: route, learn: null, label: "Name its colors" });
   }).catch(() => {});
-  // swap in the big image when it arrives (SMK's server is slow; the small copy shows meanwhile)
+  // swap in the big image when it arrives (SMK's server is slow; the small copy shows meanwhile). A Commons URL
+  // goes through glCommonsResolve first (its own Special:FilePath can't be read with crossorigin — see glCORS
+  // above); crossOrigin is set on both the loader and the visible <img> before either gets a src, so the swap
+  // lands in the readable (CORS) cache partition, not the plain one the small copy already used (David, 2026-10-09).
   const hiImg = el.querySelector("img[data-hi]");
   if (hiImg) {
-    const big = new Image(); if (glCORS(hiImg.dataset.hi)) big.crossOrigin = "anonymous";
-    big.onload = () => { if (hiImg.isConnected) { hiImg.src = big.src; hiImg.classList.add("hi"); armSample(hiImg); } };
-    big.src = hiImg.dataset.hi;
+    const swap = (url, cors) => {
+      const big = new Image(); if (cors) big.crossOrigin = "anonymous";
+      big.onload = () => {
+        if (!hiImg.isConnected) return;
+        if (cors) hiImg.crossOrigin = "anonymous";
+        hiImg.src = big.src; hiImg.classList.add("hi"); armSample(hiImg);
+      };
+      big.onerror = () => {};   // quietly keep the small copy if even the fallback fails
+      big.src = url;
+    };
+    const hiUrl = hiImg.dataset.hi, commonsFn = glCommonsFilename(hiUrl);
+    if (commonsFn) glCommonsResolve(hiUrl, 1200).then(resolved => swap(resolved || hiUrl, !!resolved));
+    else swap(hiUrl, !!glCORS(hiUrl));
   }
   // tap the painting to name a spot (ROADMAP §13): only where the image's host allows a canvas read (local
   // copies under img/gallery/, and CORS-enabled hosts like Wikimedia). Tested once per image; the affordance
@@ -1168,17 +1181,50 @@ function glPage(i, d, fromHex, tol) {
 // crossorigin="anonymous" lets a canvas read the image later (tap-to-name), but it only helps — and only loads
 // at all — on a host that actually answers every hop with Access-Control-Allow-Origin (checked by hand, 2026-10,
 // with curl -I and an Origin header against each museum's real image URL): NGA, the Rijksmuseum's IIIF host, the
-// Met and SMK all do, directly, no redirect. Commons looks CORS-enabled too (upload.wikimedia.org itself sends
-// the header) but the stored `img` URL is commons.wikimedia.org's Special:FilePath, which 302s through a page
-// that does NOT send the header -- a browser's CORS check runs on every redirect hop, so crossorigin there
-// fails the whole fetch (confirmed in headless Chrome: ERR_FAILED, "blocked by CORS policy", no image at all).
-// Rather than risk that for ~40% of the corpus, Commons is left off this list; the Art Institute already blocks
-// hotlinking outright (img/gallery/aic/ local copies stand in for it), and Cleveland's CDN sends no CORS header
-// at all -- those paintings simply get no tap-to-name affordance, same as Commons.
+// Met and SMK all do, directly, no redirect. Commons' own image host (upload.wikimedia.org / thumb.wikimedia.org)
+// sends the header too, but the URL stored in the corpus is commons.wikimedia.org's Special:FilePath, which
+// redirects through a hop that does NOT send it — a browser's CORS check needs every hop in a crossorigin
+// fetch to pass, so that fails the whole load (confirmed: ERR_FAILED, "blocked by CORS policy"). Rather than
+// give up on ~40% of the corpus, glCommonsResolve() below gets the real, already-CORS-safe URL a different way.
+// The Art Institute's local copies (img/gallery/aic/) are same-origin, so they just work with no entry here at
+// all. Cleveland is the one source still genuinely stuck: re-checked 2026-10-09 (David asked whether their Open
+// Access API exposes a CORS path, the way Commons' MediaWiki API did) — neither openaccess-api.clevelandart.org
+// (the JSON API itself) nor any size on openaccess-cdn.clevelandart.org (web/print/full) sends
+// Access-Control-Allow-Origin, with or without an Origin header, so there's no door in anywhere in that chain.
 const GL_CORS_HOSTS = new Set(["api.nga.gov", "iiif.micr.io", "images.metmuseum.org", "api.smk.dk", "iip-thumb.smk.dk"]);
 function glCORS(url) {
   try { return GL_CORS_HOSTS.has(new URL(String(url || ""), location.href).hostname) ? ' crossorigin="anonymous"' : ""; }
   catch (e) { return ""; }
+}
+// Commons' own Special:FilePath URL can't be read with crossorigin (see above), but the MediaWiki API supports
+// CORS directly (the documented &origin=* pattern) and hands back the already-resolved thumb URL on
+// upload.wikimedia.org / thumb.wikimedia.org — which answers with Access-Control-Allow-Origin itself, no redirect
+// left to fail. Verified by hand, 2026-10-09 (David: a Velázquez from Commons couldn't be read for Pick from it).
+// One request per file+width, cached; width is a request only — Commons may hand back a nearby size it already
+// has rendered, not that exact number, so the caller should trust whatever comes back and read it at its own size.
+const GL_COMMONS_CACHE = new Map();
+function glCommonsFilename(url) {
+  try {
+    const u = new URL(String(url || ""), location.href);
+    if (u.hostname !== "commons.wikimedia.org") return null;
+    const m = u.pathname.match(/\/wiki\/Special:FilePath\/(.+)$/);
+    return m ? decodeURIComponent(m[1]) : null;
+  } catch (e) { return null; }
+}
+function glCommonsResolve(url, width) {
+  const fn = glCommonsFilename(url);
+  if (!fn) return Promise.resolve(null);
+  const key = fn + "@" + width;
+  if (GL_COMMONS_CACHE.has(key)) return GL_COMMONS_CACHE.get(key);
+  const api = "https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url&iiurlwidth=" + encodeURIComponent(width) +
+    "&titles=" + encodeURIComponent("File:" + fn) + "&format=json&origin=*";
+  const p = fetch(api).then(r => r.ok ? r.json() : null).then(j => {
+    const pages = j && j.query && j.query.pages, page = pages && Object.values(pages)[0];
+    const info = page && page.imageinfo && page.imageinfo[0];
+    return (info && (info.thumburl || info.url)) || null;
+  }).catch(() => null);
+  GL_COMMONS_CACHE.set(key, p);
+  return p;
 }
 
 // ---------- "In paintings" on a color page ----------

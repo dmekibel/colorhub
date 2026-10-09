@@ -1,0 +1,80 @@
+/* The slideshow (js/slideshow.js): "screensaver meets museum label". Full-bleed color, the name in big serif,
+   one honest line if we have one, a quiet progress hint. Slow cross-fades, cut instead of fading under
+   Reduced Motion (the global rule in app.css already collapses every transition's duration). Piggybacks on
+   js/core.js sheet() for its swipe-down-to-close, Escape and outside-tap behavior; .ss-full overrides the
+   sheet's usual bottom-card shape into a true full screen. */
+.sheet.ss-full{position:fixed;inset:0;max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;
+  background:var(--ground);box-shadow:none;overflow:hidden;animation:fade var(--dur-1) ease both}
+.sheet.ss-full .grab{position:absolute;left:50%;top:calc(var(--top) + 10px);transform:translateX(-50%);z-index:5;
+  width:36px;height:4px;margin:0;background:rgba(255,255,255,.4)}
+
+.ss-ov{position:absolute;inset:0;overflow:hidden}
+.ss-stage{position:absolute;inset:0}
+.ss-layer{position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;
+  background:var(--c);padding:0 28px calc(var(--bottom) + 64px);opacity:0;transition:opacity 900ms ease}
+.ss-layer.in{opacity:1}
+.ss-layer[data-ink="dark"]{color:#141311}
+.ss-layer[data-ink="light"]{color:#fff}
+.ss-name-btn{appearance:none;background:none;border:0;padding:0;margin:0 -4px 10px;text-align:left;color:inherit;
+  font:400 clamp(44px,13vw,86px)/.96 var(--serif);letter-spacing:-.03em;text-wrap:balance;cursor:pointer;
+  -webkit-tap-highlight-color:transparent}
+.ss-name-btn:active{opacity:.78}
+.ss-line{margin:0;max-width:34ch;font:400 17px/1.4 var(--serif);letter-spacing:0;opacity:.86;text-wrap:pretty}
+.ss-line:empty{display:none}
+
+/* two close names, side by side, with the one-line distinction straddling the seam (js/lookalikes.js lookDiff) */
+.ss-layer.ss-pair{flex-direction:row;align-items:stretch;justify-content:stretch;padding:0}
+.ss-half{flex:1;appearance:none;border:0;background:var(--c);color:inherit;display:flex;align-items:flex-end;
+  justify-content:flex-start;padding:0 20px calc(var(--bottom) + 96px);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ss-half:active{opacity:.85}
+.ss-half[data-ink="dark"]{color:#141311}
+.ss-half[data-ink="light"]{color:#fff}
+.ss-name-sm{font:400 clamp(28px,8vw,46px)/1.02 var(--serif);letter-spacing:-.02em;text-wrap:balance}
+.ss-diff{position:absolute;left:50%;bottom:calc(var(--bottom) + 28px);transform:translateX(-50%);z-index:2;
+  max-width:88%;margin:0;padding:14px 22px;border-radius:var(--r-pill);background:#14130F;
+  color:#fff;font:400 17px/1.4 var(--serif);letter-spacing:0;text-align:center;text-wrap:pretty}
+
+/* top bar: close, Mode (opens a compact picker below), pause — three opaque capsules, never more, over the color.
+   Law 1: the color is the interface, so chrome stays minimal at rest (David-critic fix, 2026-10-09). */
+.ss-top{position:absolute;left:0;right:0;top:calc(var(--top) + 20px);z-index:3;display:flex;align-items:center;
+  justify-content:space-between;gap:10px;padding:0 16px}
+.ss-x,.ss-pause,.ss-mode-btn{flex:none;height:40px;border-radius:50%;display:grid;place-items:center;
+  background:#14130F;color:#fff;border:1px solid rgba(255,255,255,.14)}
+.ss-x,.ss-pause{width:40px}
+.ss-x:active,.ss-pause:active,.ss-mode-btn:active{transform:scale(.92)}
+.ss-x svg,.ss-pause svg{width:18px;height:18px}
+.ss-mode-btn{display:flex;align-items:center;justify-content:center;gap:8px;border-radius:var(--r-pill);
+  padding:0 16px;font:400 14px/1 var(--sans);max-width:min(220px,60vw)}
+.ss-mode-btn svg{width:16px;height:16px;flex:none}
+.ss-mode-btn .chev{width:14px;height:14px;transition:transform var(--dur-1)}
+.ss-mode-btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+
+/* the compact picker: hidden until the Mode button opens it */
+.ss-picker{position:absolute;left:16px;right:16px;top:calc(var(--top) + 68px);z-index:3;background:#14130F;
+  border-radius:var(--r-2);border:1px solid rgba(255,255,255,.12);padding:10px;
+  display:flex;flex-direction:column;gap:4px}
+.ss-picker[hidden]{display:none}
+.ss-mode{display:flex;align-items:center;gap:10px;height:44px;padding:0 12px;border-radius:var(--r-1);
+  background:none;color:rgba(255,255,255,.82);font:400 15px/1 var(--sans);text-align:left}
+.ss-mode svg{width:17px;height:17px;flex:none}
+.ss-mode.on{background:#fff;color:#141311}
+.ss-mode.on svg{color:#141311}
+.ss-fam-strip{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;padding-top:8px;border-top:1px solid rgba(255,255,255,.12)}
+.ss-fam-strip[hidden]{display:none}
+.ss-fam-chip{flex:none;height:34px;padding:0 14px;border-radius:var(--r-pill);background:rgba(255,255,255,.08);
+  color:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.1);font:400 13px/1 var(--sans)}
+.ss-fam-chip.on{background:#fff;color:#141311;border-color:#fff}
+
+.ss-hint{position:absolute;right:18px;bottom:calc(var(--bottom) + 18px);z-index:3;margin:0;
+  font:400 13px/1 var(--sans);color:rgba(255,255,255,.55);text-shadow:0 1px 3px rgba(0,0,0,.4)}
+.ss-layer[data-ink="dark"] ~ .ss-hint,.ss-pair .ss-half[data-ink="dark"]+.ss-half[data-ink="dark"]~.ss-hint{color:rgba(0,0,0,.45)}
+
+@media (max-width:359px){
+  .ss-name-btn{font-size:clamp(38px,14vw,72px)}
+  .ss-top{gap:6px;padding:0 12px}
+  .ss-mode-btn{padding:0 10px}
+}
+
+/* the trigger button answers within 100ms even while data is still loading (David-critic fix, 2026-10-09) */
+@keyframes ssLoadPulse{0%,100%{opacity:1}50%{opacity:.5}}
+.ss-loading{animation:ssLoadPulse .9s ease-in-out infinite;pointer-events:none}

@@ -5,7 +5,7 @@
 const { spawn } = require("child_process"), fs = require("fs"), os = require("os"), path = require("path");
 const CHROME = process.env.SMOKE_CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
-function runChrome(url, { budget = 120000, alarm = 30, tag = "run" } = {}) {
+function runChrome(url, { budget = 240000, alarm = 45, tag = "run" } = {}) {
   return new Promise(resolve => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), `colorhub-smoke-${tag}-`));
     const args = ["-e", `alarm ${alarm}; exec @ARGV`, CHROME, "--headless", "--disable-gpu", "--no-first-run", "--no-default-browser-check",

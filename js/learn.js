@@ -481,7 +481,7 @@ function lrTodayHtml() {
   // Night Gallery row lead (css/ng.css): a 32 px disc with the part's own icon; done, it turns --good with a tick
   const tick = (on, ic) => `<span class="lr-tick${on ? " on" : ""}" aria-hidden="true">${icon(on ? "check" : ic, on ? 16 : 18)}</span>`;
   return `<section class="lr-today">
-    <div class="dl-head"><h3 class="title-3">Today</h3><span class="note">${n > 1 ? `${n}-day streak` : ""}</span></div>
+    <div class="dl-head"><h3 class="title-3">Today</h3><span class="note">${n > 1 ? `${n}-day streak` : ""}</span>${typeof ssOpen === "function" ? `<button class="icon-btn" data-slideshow="today" aria-label="Slideshow, starting with today's color">${icon("play", 18)}</button>` : ""}</div>
     <div class="lr-tcard${pDone && dDone ? " done" : ""}">
       <button class="lr-tc-art" data-dpaint aria-label="Today's painting"><span class="dl-art dl-ph lr-tc-img" id="dlPaintArt"></span><span class="lr-tc-chip" id="dlColorArt"></span></button>
       <div class="lr-tc-text"><p class="lr-tc-title" id="lrTcTitle">Today's painting <em>and color</em></p><p class="note lr-tc-sub" id="lrTcSub">&nbsp;</p></div>

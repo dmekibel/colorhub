@@ -174,6 +174,10 @@ function mxReveal(m) {
 function mxLeave(go) {
   if (MX && MX.dir === "out" && MX.building) return MX;   // the deferred build itself
   if (MX) mxKill();
+  // the exit was already animated -- a native iOS/browser back swipe (HIST_POP, core.js) or js/trail.js's own
+  // gesture-following pull-down/edge-swipe (TLG_SKIP) -- so the bubble shrink would just be a second, conflicting
+  // animation on top of one the user already watched finish. Build the map straight away instead.
+  if ((typeof HIST_POP !== "undefined" && HIST_POP) || (typeof TLG_SKIP !== "undefined" && TLG_SKIP)) return null;
   const cur = app.querySelector(".screen");
   if (!mxOn() || !cur || cur.classList.contains("hm")) return null;
   const hero = cur.querySelector(".cp-hero"), h = hero && (hero.style.getPropertyValue("--c") || "").trim();
