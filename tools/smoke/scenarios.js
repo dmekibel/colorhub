@@ -1393,13 +1393,12 @@ scenario("train", "every entry on the Train menu opens something (nothing locked
   t.notes.push(`${n} Train entries and ${d} drills opened`);
 });
 
-scenario("train", "Odd one out: tap tiles through a whole round", async t => {
-  // js/games: the Train shelf opens the Odd one out map (a played save), then level 1
-  await t.open("#shot=gx:home", { settle: 600 });
-  const st = await t.waitFor("[data-oo-map]", 6000, "the Odd one out shelf");
-  await t.click(st, { wait: 600 });
-  const play = await t.waitFor("[data-play], .oo-board", 6000, "the map or level 1");
-  if (play.matches("[data-play]")) await t.click(play, { wait: 600 });
+// David, 2026-10-09 ("spot the difference seems too complex"): one tap from the Train shelf lands on the board
+// (For you, adaptive) -- no setup screen first, for a first-timer or a returning player. The old Classic/Shuffle/
+// Choose/names-on-tiles/session-length setup now lives behind a small Customize icon (js/games/oo-ui.js
+// ooCustomizeSheet), never gating round one. The play screen itself shows only the board, one instruction and a
+// quiet progress indicator; the end-of-session screen is one number, one sentence, then Details.
+const ooTapRound = async t => {
   await t.waitFor(".oo-board .oo-t", 6000, "the board");
   t.expect(t.$$(".oo-board .oo-t").length >= 9, `${t.$$(".oo-board .oo-t").length} tiles`);
   const first = t.$("#oostage").innerHTML;
@@ -1412,7 +1411,41 @@ scenario("train", "Odd one out: tap tiles through a whole round", async t => {
   }
   await t.waitFor(".result", 6000, "the station result screen");
   t.expect(t.$(".result").innerText.length > 40, "the result screen is empty");
-  t.notes.push(`${taps} taps to the result`);
+  return taps;
+};
+scenario("train", "Odd one out: one tap from the shelf to the board, then a whole round", async t => {
+  await t.open("#shot=gx:home", { settle: 600 });
+  const st = await t.waitFor("[data-oo-map]", 6000, "the Odd one out shelf");
+  await t.click(st, { wait: 700 });
+  t.expect(!t.$("[data-play]"), "a first tap on the shelf should land on the board, not a setup screen");
+  const taps = await ooTapRound(t);
+  t.notes.push(`${taps} taps to the result (first-timer, direct entry)`);
+  // a returning player: back to Train, tap the shelf again -- still straight to the board, not the ladder/map
+  await t.click("[data-map]", { wait: 500 });
+  await t.waitFor(".oo-map [data-close]", 6000, "the ladder map");
+  await t.click(".oo-map [data-close]", { wait: 500 });
+  const st2 = await t.waitFor("[data-oo-map]", 6000, "the Odd one out shelf again");
+  await t.click(st2, { wait: 700 });
+  t.expect(!t.$("[data-play]"), "a returning player should also land on the board in one tap");
+  await t.waitFor(".oo-board .oo-t", 6000, "the board, second time");
+});
+
+scenario("train", "Odd one out: Customize is one sheet behind a small icon, not shown before round one", async t => {
+  await t.open("#shot=gx:oo:lv-1", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "level 1's board");
+  t.expect(!t.$(".oo-pk, .oo-sl"), "setup controls should not sit on the play screen itself");
+  const tune = await t.waitFor("[data-tune]", 4000, "the Customize icon");
+  await t.click(tune, { wait: 500 });
+  await t.waitFor(".cx-sh-head h3", 4000, "the Customize sheet");
+  t.expect(/customize/i.test(t.text(".cx-sh-head h3")), "the sheet should say Customize");
+  t.expect(t.$$("[data-len]").length === 3, "session length should offer Short, Standard and Long");
+  await t.click('[data-len="15"]', { wait: 400 });
+  t.expect(t.$('[data-len="15"]').classList.contains("on"), "Short did not get selected");
+  await t.click('[data-names="off"]', { wait: 400 });
+  t.expect(t.$('[data-names="off"]').classList.contains("on"), "Names off did not get selected");
+  await t.click("[data-done]", { wait: 500 });
+  t.expect(!t.$(".cx-sh-head h3"), "the sheet should close");
+  await t.waitFor(".oo-board .oo-t", 4000, "the board is still there after closing Customize");
 });
 
 // Gradients (js/games/hue-*.js): the shelf opens the teaching board; swap the two tiles with real taps, then play
