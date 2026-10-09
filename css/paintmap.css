@@ -86,6 +86,14 @@
 /* the arc (Home's right-corner menu): the current arrangement is ringed */
 .pmx-stem .hm-do-ic{color:var(--ink)}
 
+/* the time scrubber (David, 2026-10-09: "paintings appear decade by decade"), in the Arrange tab */
+.pmx-scrub{display:flex;align-items:center;gap:10px;margin:2px 0 6px}
+.pmx-scrub input[type="range"]{flex:1;accent-color:var(--paper)}
+.pmx-scrub-play{flex:none;width:40px;height:40px;display:grid;place-items:center;border-radius:50%;background:var(--surface-2);color:var(--ink);transition:transform .2s var(--spring)}
+.pmx-scrub-play.on{background:var(--paper);color:var(--paper-ink)}
+.pmx-scrub-play svg{width:17px;height:17px}
+.pmx-scrub-play:active{transform:scale(.92)}
+
 /* Filter */
 .pmx-scrim{background:rgba(0,0,0,.3)}
 .pmx-sheet{padding-top:10px;padding-bottom:0}

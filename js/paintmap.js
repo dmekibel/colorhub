@@ -81,6 +81,8 @@ const PM_ICON = {
   down: sv('<path d="M7 10l5 5 5-5"/>', 14, 2),
   // the "Colors" row back to the honeycomb (David, 2026-10-09): a small cluster of named bubbles
   colorsMode: sv('<circle cx="7" cy="8" r="3.4"/><circle cx="16" cy="7" r="2.6"/><circle cx="8.5" cy="16" r="2.8"/><circle cx="16.5" cy="15.5" r="2"/>', 22, 1.6),
+  // the time scrubber's own Play/Pause (David, 2026-10-09): ICON.play (js/core.js) is the app-wide one; Pause doesn't exist yet elsewhere, so it's local here
+  pause: sv('<path d="M9 5v14M15 5v14"/>', 20, 2.2),
 };
 let PM_THUMBS = null, PM_THUMBS_P = null;
 const PM_PAN = new Map();     // layout key -> { x, y, s }: where you were, so Back from a painting lands on it again
@@ -114,12 +116,22 @@ const pmDom = i => { let b = 0; for (let j = 1; j < 6; j++) if (GAL.sh[i * 6 + j
 const pmHex = i => glHex(i, pmDom(i));
 
 // ---------- the spec: what to show and how (the address's query) ----------
-const pmFresh = () => ({ arr: "color", f: xbFresh(), seed: -1, fav: 0, place: "avg" });
+const pmFresh = () => ({ arr: "color", f: xbFresh(), seed: -1, fav: 0, place: "avg", upToYear: null });
+// David, 2026-10-09: "a time scrubber with play (paintings appear decade by decade)" -- the dataset's own real
+// year span (excluding undated), computed once and cached. The scrubber's slider runs across this, not a guess.
+let PM_YEAR_RANGE = null;
+function pmYearRange() {
+  if (PM_YEAR_RANGE) return PM_YEAR_RANGE;
+  let lo = 1e9, hi = -1e9;
+  for (let i = 0; i < GAL.n; i++) { const y = GAL.year[i]; if (y === GL_UNDATED) continue; if (y < lo) lo = y; if (y > hi) hi = y; }
+  return PM_YEAR_RANGE = [lo, hi];
+}
 function pmParse(q, F) {
   const s = pmFresh(), p = new URLSearchParams(String(q || "").replace(/^\?/, ""));
   const a = p.get("arr"); if (PM_ARR.some(x => x[0] === a)) s.arr = a;
   const pl = p.get("pl"); if (PM_PLACE.some(x => x[0] === pl)) s.place = pl;
   const f = s.f, num = k => { const v = p.get(k); return v != null && v !== "" && isFinite(+v) ? +v : null; };
+  const uy = num("uy"); if (uy != null) s.upToYear = uy;
   if (p.get("c")) { f.hexes = p.get("c").split(",").filter(h => /^[0-9a-f]{6}$/i.test(h)).map(h => "#" + h.toUpperCase()); f.name = f.hexes.length ? nameOf(f.hexes[0]).text : ""; f.tol = num("t") || 8; f.cover = num("m") != null ? num("m") : 2; }
   f.y0 = num("y0"); f.y1 = num("y1");
   if (p.get("p")) f.painter = F.slugIx.get(p.get("p")) || 0;
@@ -142,6 +154,7 @@ function pmQS(s, F) {
   if (f.mus >= 0 && F) out.push(["mus", F.G.src[f.mus].k]);
   if (PM_NEEDS_SEED.has(s.arr) && s.seed >= 0) out.push(["seed", s.seed]);
   if (s.fav) out.push(["fav", 1]);
+  if (s.upToYear != null) out.push(["uy", s.upToYear]);
   return out.map(([k, v]) => k + "=" + encodeURIComponent(v)).join("&");
 }
 // router.js ROUTED: the address and title of an open map
@@ -198,6 +211,13 @@ function pmList(s, F) {
     const ids = typeof fvArtList === "function" ? fvArtList() : [];
     const want = new Set(ids.map(r => r.i));
     list = list.filter(i => want.has(i));
+  }
+  // the time scrubber (David, 2026-10-09): "paintings appear decade by decade" -- only ones dated at or before
+  // the scrubbed year. Undated paintings have nothing honest to compare against a year, so they stay hidden
+  // until the scrubber reaches the real end of the range (the same moment it stops meaning anything to filter).
+  if (s.upToYear != null) {
+    const [, hi] = pmYearRange();
+    if (s.upToYear < hi) list = list.filter(i => GAL.year[i] !== GL_UNDATED && GAL.year[i] <= s.upToYear);
   }
   return list;
 }
@@ -544,6 +564,7 @@ function pmMount(el, s, F) {
   const RM = reduceMotion, cap = el.querySelector("[data-pmcap]"), heart = el.querySelector("[data-pmheart]");
   const centerBtn = el.querySelector("[data-pmcenter]"), facets = el.querySelector("[data-pmfacets]"), chipbar = el.querySelector("[data-pmchipbar]"), walkBar = el.querySelector("[data-pmwalk]");
   let walk = [];   // "Walk from here" (David, 2026-10-09): the gallery indices visited this walk, in order; [] when none is active
+  let scrubTimer = 0;   // the time scrubber's own Play timer (0 = not playing); lives here, not inside openSheet, so it survives a sheet close/reopen
   let lay = null, W = 0, H = 0, dpr = 1, base = 46;
   let P = [0, 0], Z = 1, V = [0, 0], glide = null, raf = 0, dead = false, centerK = -1, lastTick = 0, drawn = [];
   const ZMAX = 2.2;
@@ -643,6 +664,31 @@ function pmMount(el, s, F) {
       const k = +b.dataset.pmwalkto; if (k === walk.length - 1) return;
       buzz(5); walk = walk.slice(0, k + 1); s.seed = walk[k]; s.arr = "rings"; rebuild();
     });
+  }
+  // the time scrubber (David, 2026-10-09): "paintings appear decade by decade." scrubTimer lives on pmMount
+  // (not inside openSheet) so Play keeps running after the sheet closes -- the map itself is what's supposed to
+  // visibly fill in, and scrubUpdateUI queries the DOM fresh each tick rather than holding a reference to any
+  // one sheet instance, so it degrades to a no-op (not an error) whenever the sheet isn't open to show it.
+  function scrubUpdateUI() {
+    const inp = document.querySelector("[data-pmscrub]");
+    const [lo, hi] = pmYearRange(), cur = s.upToYear == null ? hi : s.upToYear;
+    if (inp) inp.value = cur;
+    const lab = document.querySelector("[data-pmscrublabel]");
+    if (lab) lab.textContent = s.upToYear == null ? "Showing every year" : `Up to ${cur}${cur >= hi ? "" : " (undated paintings join at the end)"}`;
+    const btn = document.querySelector("[data-pmscrubplay]");
+    if (btn) { btn.classList.toggle("on", !!scrubTimer); btn.innerHTML = scrubTimer ? PM_ICON.pause : ICON.play; btn.setAttribute("aria-label", scrubTimer ? "Pause" : "Play"); }
+  }
+  function scrubStep() {
+    const [lo, hi] = pmYearRange(), cur = s.upToYear == null ? lo : s.upToYear;
+    const next = cur + Math.max(5, Math.round((hi - lo) / 90));
+    if (next >= hi) { s.upToYear = null; clearInterval(scrubTimer); scrubTimer = 0; } else s.upToYear = next;
+    rebuild(); scrubUpdateUI();
+  }
+  function scrubPlay() {
+    if (scrubTimer) { clearInterval(scrubTimer); scrubTimer = 0; scrubUpdateUI(); return; }
+    const [lo, hi] = pmYearRange();
+    if (s.upToYear == null || s.upToYear >= hi) s.upToYear = lo;
+    rebuild(); scrubTimer = setInterval(scrubStep, 420); scrubUpdateUI();
   }
   // filter-by-example (David, 2026-10-09): the centered painting's own facets as tappable "only these" chips,
   // plus "More like this" (the same whole-palette matching as the "similar" arrangement, seeded here)
@@ -1025,7 +1071,11 @@ function pmMount(el, s, F) {
         <div class="hm-seg hm-seg-n pmx-center-seg">${PM_CENTER.map(([k, t]) => {
           const found = t === "A favorite" ? (typeof fvArtList === "function" && fvArtList().length) : true;
           return `<button data-pmcenterk="${k}"${found ? "" : " disabled"}>${esc(t)}</button>`;
-        }).join("")}</div>`;
+        }).join("")}</div>
+        <div class="cx-sec"><b>When</b></div>
+        <div class="pmx-scrub"><input type="range" min="${pmYearRange()[0]}" max="${pmYearRange()[1]}" step="5" value="${s.upToYear == null ? pmYearRange()[1] : s.upToYear}" data-pmscrub aria-label="Reveal paintings up to this year">
+          <button class="pmx-scrub-play${scrubTimer ? " on" : ""}" data-pmscrubplay aria-label="${scrubTimer ? "Pause" : "Play"}">${scrubTimer ? PM_ICON.pause : ICON.play}</button></div>
+        <p class="hm-arr-sub" data-pmscrublabel>${s.upToYear == null ? "Showing every year" : `Up to ${s.upToYear}${s.upToYear >= pmYearRange()[1] ? "" : " (undated paintings join at the end)"}`}</p>`;
       qa$("[data-pmarr]").forEach(b => b.onclick = () => {
         const id = b.dataset.pmarr; buzz(5);
         if (PM_NEEDS_SEED.has(id)) { if (mid < 0) return; s.seed = mid; s.arr = id; }
@@ -1039,6 +1089,11 @@ function pmMount(el, s, F) {
         const fn = PM_CENTER.find(c => c[0] === b.dataset.pmcenterk)[2], found = fn(list);
         if (found < 0) return; buzz(6); s.seed = found; if (!PM_NEEDS_SEED.has(s.arr)) s.arr = "rings"; rebuild(); renderArrange();
       });
+      q$("[data-pmscrub]").oninput = e => {
+        if (scrubTimer) { clearInterval(scrubTimer); scrubTimer = 0; }
+        const v = +e.target.value, [, hi] = pmYearRange(); s.upToYear = v >= hi ? null : v; rebuild(); renderArrange();
+      };
+      q$("[data-pmscrubplay]").onclick = () => { buzz(6); scrubPlay(); renderArrange(); };
     }
     // ---- Filter: every chip with its count, applied live (no separate confirm -- matches the color map's
     // non-modal Colors/Arrange sheet) ----
@@ -1094,7 +1149,7 @@ function pmMount(el, s, F) {
   }
   // ---- life cycle
   const ro = new ResizeObserver(() => size()); ro.observe(cv);
-  cleanup.push(() => { dead = true; clearTimeout(tapTimer); ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); if (lay && centerK >= 0) PM_PAN.set(lay.key, { x: lay.x[centerK], y: lay.y[centerK], s: Z }); });
+  cleanup.push(() => { dead = true; clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); if (lay && centerK >= 0) PM_PAN.set(lay.key, { x: lay.x[centerK], y: lay.y[centerK], s: Z }); });
   size(); build(false);
   window.PM_CTRL = { get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length; }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); },
     // QA (tools/smoke paintmap group): a real network fetch of data/artists/portraits.json doesn't reliably
