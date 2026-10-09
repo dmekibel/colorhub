@@ -3510,6 +3510,36 @@ scenario("paintings", "Look closer: random gesture fuzz (pinch/pan/lost fingers)
   t.expect(!r.error, `fuzz test couldn't run: ${r.error}`);
   t.expect(r.failCount === 0, `${r.failCount} invalid gesture states out of ${r.total} seeds: ${JSON.stringify(r.fails)}`);
 });
+// David, 2026-10-09: "when I open a painting, sometimes it doesn't let me tap the painter." Root cause: the
+// name only became a real link once js/loader.js's lazy wiki data finished loading (awPaintingHook, js/
+// artwiki.js's "upgrade plain text to a button" pattern) -- commonly still loading on the first painting you
+// open in a session, so a tap in that window landed on inert text. js/gallery.js's .p-dek now renders the link
+// immediately (an optimistic slug straight off the painting's own artist field); artwiki.js's hook only
+// confirms it once the real data lands (or downgrades a genuine non-painter to plain text). This drives 10
+// random painting pages straight off a fresh #/home load -- no wait for the background wiki fetch at all --
+// and checks the painter link is already there and actually opens the painter page every time.
+scenario("paintings", "the painter link on a painting page is tappable immediately, before the painter list finishes loading -- 10 random paintings", async t => {
+  const N = 23778;   // the corpus size (tools/check.js's "ids gate"); an out-of-range pick is simply skipped below
+  let tries = 0, ok = 0, noLoad = 0, noLink = 0;
+  const found = [], misses = [];
+  while (ok < 10 && tries < 30) {   // ~14% of the corpus has no credited artist, so a wide-enough budget matters
+    tries++;
+    const i = Math.floor(Math.random() * N);
+    // a FRESH reload every pick, on purpose: this is exactly the real bug's window (js/loader.js's wiki data
+    // hasn't had a chance to arrive yet on a cold load), not just a client-side re-render mid-session
+    await t.open(`#/gallery/${i}`, { settle: 250 });
+    const got = await t.waitFor(() => t.$(".p-title") && t.text(".p-title").length ? true : null, 10000, "the painting page").catch(() => null);
+    if (!got) { noLoad++; misses.push({ i, why: "no-load", title: t.$(".p-title") ? t.text(".p-title") : null }); continue; }
+    const link = t.$(".p-dek [data-awpainter]");
+    if (!link) { noLink++; misses.push({ i, why: "no-link", title: t.text(".p-title"), dek: t.$(".p-dek") ? t.text(".p-dek") : null }); continue; }
+    const name = t.text(link);
+    await t.click(link, { wait: 500 });
+    const landed = await t.waitFor(() => /^#\/painter\//.test(t.w.location.hash), 8000, "the painter page").catch(() => false);
+    t.expect(landed, `tapping "${name}" (painting ${i}) didn't open the painter page (hash: ${t.w.location.hash})`);
+    found.push(i); ok++;
+  }
+  t.expect(ok === 10, `only found ${ok}/10 (tries ${tries}, noLoad ${noLoad}, noLink ${noLink}): ${JSON.stringify(misses)}`);
+});
 scenario("paintings", "Look closer on a painting then swiping back (popstate) never leaves the color page under a stuck dark scrim", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
   const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
