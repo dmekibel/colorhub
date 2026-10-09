@@ -232,30 +232,30 @@ LAB.namer = (hex, push = true) => {
     eye() {
       $("#pane").innerHTML = `<div class="nmr-eye" id="eyeBox"><p class="nmr-read" id="er">Pick a spot in a photo, or point the camera, and the patch under your finger is named.</p>
         <div class="nmr-eyebtns"><label class="nmr-pill">Choose a photo<input type="file" accept="image/*" hidden id="ef"></label><button class="nmr-pill" id="ec">Use the camera</button></div>
-        <div class="nmr-shot" id="shot" hidden><canvas id="ecv"></canvas><video id="evid" playsinline muted hidden></video><i class="nmr-ret" id="ret"></i></div>
+        <div class="nmr-shot" id="shot" hidden><canvas id="ecv"></canvas><video id="evid" playsinline muted hidden></video><i class="nmr-aim" id="aim" hidden></i></div>
         <button class="nmr-snap" id="snap" hidden>Freeze this frame</button></div>`;
-      const cv = $("#ecv"), vid = $("#evid"), box = $("#shot"), ret = $("#ret");
-      let live = false, pos = [.5, .5];
-      const mark = () => { ret.style.left = pos[0] * 100 + "%"; ret.style.top = pos[1] * 100 + "%"; };
-      const pick = () => { if (cv.width) setColor(isoSample(cv, pos[0], pos[1], { frac: .03 }), "eye"); };
+      const cv = $("#ecv"), vid = $("#evid"), box = $("#shot"), aim = $("#aim");
+      let live = false, eyd = null;
+      // press-and-drag, the loupe, sample size — the shared picker (js/eyedrop.js), not a bespoke one here
+      const detachEyd = () => { if (eyd) { eyd.detach(); eyd = null; } };
+      const armPick = () => { detachEyd(); eyd = eyedropAttach(cv, { onMove: h => setColor(h, "eye"), onPick: h => setColor(h, "eye") }); };
       const showImg = src => {
         const w = src.naturalWidth || src.videoWidth, h = src.naturalHeight || src.videoHeight, k = Math.min(1, 900 / Math.max(w, h));
         cv.width = Math.round(w * k); cv.height = Math.round(h * k); cv.getContext("2d").drawImage(src, 0, 0, cv.width, cv.height);
-        cv.hidden = false; vid.hidden = true; live = false; stopCam(); box.hidden = false; $("#snap").hidden = true; $("#er").textContent = "Tap or drag across the picture."; mark(); pick();
+        cv.hidden = false; vid.hidden = true; live = false; stopCam(); box.hidden = false; $("#snap").hidden = true; aim.hidden = true; $("#er").textContent = "Press and drag across the picture.";
+        armPick(); setColor(isoSample(cv, .5, .5, { frac: .03 }), "eye");   // a first reading, centered, before any touch
       };
       $("#ef").onchange = e => { const f = e.target.files[0]; if (!f) return; const img = new Image(); img.onload = () => { eyeSrc = "photo"; showImg(img); URL.revokeObjectURL(img.src); }; img.onerror = () => toast("Couldn't open that image"); img.src = URL.createObjectURL(f); };
       $("#ec").onclick = async () => {
         try { stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment", width: { ideal: 1280 } }, audio: false }); }
         catch (e) { toast("The camera isn't available here"); return; }
-        eyeSrc = "camera";
-        vid.srcObject = stream; vid.hidden = false; cv.hidden = true; box.hidden = false; live = true; pos = [.5, .5]; mark(); $("#snap").hidden = false; $("#er").textContent = "Aim the circle, then freeze the frame.";
+        eyeSrc = "camera"; detachEyd();
+        vid.srcObject = stream; vid.hidden = false; cv.hidden = true; box.hidden = false; live = true; aim.hidden = false; $("#snap").hidden = false; $("#er").textContent = "Aim the circle, then freeze the frame.";
         try { await vid.play(); } catch (e) {}
         const tick = () => { if (!live || !el.isConnected) return; if (vid.videoWidth) setColor(isoSample(vid, .5, .5, { frac: .03 }), "eye"); setTimeout(() => requestAnimationFrame(tick), 140); };
         tick();
       };
       $("#snap").onclick = () => { if (vid.videoWidth) showImg(vid); };
-      const mv = e => { if (live) return; const r = cv.getBoundingClientRect(); pos = [clamp((e.clientX - r.left) / r.width, 0, 1), clamp((e.clientY - r.top) / r.height, 0, 1)]; mark(); pick(); };
-      box.addEventListener("pointerdown", e => { if (live) return; box.setPointerCapture(e.pointerId); mv(e); box.onpointermove = mv; box.onpointerup = box.onpointercancel = () => { box.onpointermove = null; buzz(4); }; });
       return { render() {}, set() {} };
     },
   };

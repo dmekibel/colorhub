@@ -96,8 +96,20 @@ function de2000(h1, h2) {
   const Sl = 1 + .015 * (Lb - 50) ** 2 / Math.sqrt(20 + (Lb - 50) ** 2), Sc = 1 + .045 * Cbp, Sh = 1 + .015 * Cbp * T, Rt = -Math.sin(2 * dTh * rad) * Rc;
   return Math.sqrt((dL / Sl) ** 2 + (dC / Sc) ** 2 + (dH / Sh) ** 2 + Rt * (dC / Sc) * (dH / Sh));
 }
+// WCAG 2 relative luminance / contrast ratio, so text on a swatch is picked by real contrast, not a lightness
+// guess (David, 2026-10-09: "Ice" was barely visible on the Sort board — white text on a near-white swatch).
+function relLum(hex) {
+  const h = String(hex).replace("#", ""), c = [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16) / 255);
+  const lin = v => v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4);
+  return .2126 * lin(c[0]) + .7152 * lin(c[1]) + .0722 * lin(c[2]);
+}
+function contrastRatio(h1, h2) { const a = relLum(h1), b = relLum(h2), hi = Math.max(a, b), lo = Math.min(a, b); return (hi + .05) / (lo + .05); }
+const INK_DARK = "#141311", INK_LIGHT = "#FFFFFF";
+// The ink hex (not just "dark"/"light") for a swatch: whichever of ink/paper has the higher real WCAG contrast,
+// so every very light or very dark swatch still gets a readable name, everywhere (Study, Learn, the map, …).
+const inkHex = h => contrastRatio(h, INK_DARK) >= contrastRatio(h, INK_LIGHT) ? INK_DARK : INK_LIGHT;
 // Text color that stays readable on a swatch
-const ink = h => lab(h)[0] > 64 ? "dark" : "light";
+const ink = h => inkHex(h) === INK_DARK ? "dark" : "light";
 
 // ---------- percent display (David, 2026-10-10: "a delta number doesn't feel like anything") ----------
 // CIEDE2000 between pure black and pure white is 100, and L* also runs 0-100, so a ΔE00 or ΔL* value already
@@ -485,6 +497,9 @@ const SCROLL_BY_HASH = new Map();
 function show(html, cls = "", tab = null) {
   const leavingHash = ROUTE_NOW, leavingY = scrollY;
   const backNav = BACK_RENDER; BACK_RENDER = false;
+  // the exit already played its own animation -- a native back swipe, or js/trail.js's own gesture-following
+  // pull-down/edge-swipe (TLG_SKIP) -- so this landing is a plain, instant swap: no crossfade, no entrance.
+  const skipAnim = (typeof HIST_POP !== "undefined" && HIST_POP) || (typeof TLG_SKIP !== "undefined" && TLG_SKIP);
   timers.forEach(clearTimeout); timers = []; onKey = null;
   cleanup.forEach(f => { try { f(); } catch (e) {} }); cleanup = [];
   // (.flyer / .hc-morph: a bubble-to-page shape belongs to the screen that asked for it; one left mid-flight or
@@ -499,7 +514,7 @@ function show(html, cls = "", tab = null) {
   // the old screen fades out underneath the new one (and, combined with growFrom's clip-path on the new
   // content below, is also what stands in for "the honeycomb dims" during a Room's grow-in: DESIGN-SYSTEM §8)
   const old = app.firstElementChild;
-  if (old && !reduceMotion) {
+  if (old && !reduceMotion && !skipAnim) {
     const ghost = document.createElement("div"), y = scrollY;
     ghost.className = "fade-ghost"; ghost.style.top = -y + "px";
     ghost.appendChild(old);
@@ -521,6 +536,7 @@ function show(html, cls = "", tab = null) {
   else window.scrollTo(0, 0);
   document.body.classList.remove("scrolled");
   const el = app.querySelector(".screen");
+  if (skipAnim) el.style.animation = "none";   // no entrance either: the gesture (or the native swipe) already moved it
   if (typeof mxOnShow === "function") mxOnShow(el);   // a bubble growing into this page, or a page shrinking back into the map (js/mapxfer.js)
   const mb = tab && el.querySelector("[data-menu]"); if (mb) mb.onclick = () => menu();
   if (typeof tlNote === "function") tlNote(el, tab, backNav);   // the one trail, the map glyph, the pull-down (js/trail.js)
