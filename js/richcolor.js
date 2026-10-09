@@ -483,21 +483,51 @@ function rcLoadPortraits() {
 }
 // a painter row's avatar: a real portrait when one resolves (a plain Wikidata image is ready now; a self/other
 // portrait that's itself a gallery painting needs its image resolved async, like the painter page's own hero --
-// rcPaintersSection wires that after the fact) -- else the swatch fallback, never a blank circle.
+// rcPaintersSection wires that after the fact). With no portrait at all, the painter page's own fallback applies
+// here too (David, 2026-10-09, on seeing an empty circle next to painters who do have portraits: "take their
+// most famous painting and put it in their circle, so it looks the same as painters with portraits"): the
+// portraits.json `famous` list, else the per-painter file's `typical` (most-reached painting) -- the same two
+// steps js/artwiki.js awPortraitHero falls through before it ever draws a plain swatch.
 function rcPainterPortHTML(slug, port) {
   const pt = (port && port[slug] && port[slug].portrait) || { src: "none" };
   if (pt.src === "wikidata" && pt.url) return `<img class="rc-painter-port" src="${esc(pt.url)}" alt="" loading="lazy" decoding="async" crossorigin="anonymous" onerror="this.outerHTML='<i class=&quot;rc-painter-port rc-painter-port-sw&quot; style=&quot;--c:#8a8a82&quot;></i>'">`;
   if ((pt.src === "self" || pt.src === "other") && pt.gi != null) return `<i class="rc-painter-port rc-painter-port-sw wait" style="--c:#8a8a82" data-port-gi="${pt.gi}"></i>`;
-  return `<i class="rc-painter-port rc-painter-port-sw" style="--c:#8a8a82"></i>`;
+  const famousGi = ((port && port[slug] && port[slug].famous) || []).find(gi => gi != null && gi >= 0);
+  if (famousGi != null) return `<i class="rc-painter-port rc-painter-port-sw wait" style="--c:#8a8a82" data-port-gi="${famousGi}"></i>`;
+  return `<i class="rc-painter-port rc-painter-port-sw wait" style="--c:#8a8a82" data-port-pending="${esc(slug)}"></i>`;
 }
 function rcPaintersHTML(name, port) {
   const rows = (RC_ARTISTS || {})[name];
   if (!rows || !rows.length) return "";
   return `<section class="rc-sec rc-painters"><h3>Painters who use it</h3>
     ${rows.slice(0, 5).map(r => { const slug = r.s || routeSlug(r.a);
-      return `<button type="button" class="kin rc-plain rc-painter" data-awpainter="${esc(slug)}">${rcPainterPortHTML(slug, port)}<b>${esc(r.a)}</b><span>${r.l.toFixed(1)}× more than his or her peers, from ${r.n} painting${r.n === 1 ? "" : "s"} here</span></button>`; }).join("")}
+      return `<button type="button" class="kin rc-plain rc-painter" data-awpainter="${esc(slug)}">${rcPainterPortHTML(slug, port)}<b>${esc(r.a)}</b><span>${r.l.toFixed(1)}× more than their peers, from ${r.n} painting${r.n === 1 ? "" : "s"} here</span></button>`; }).join("")}
     <p class="fine">Lift vs. the same decade and country (or country, or the whole archive, when that group is too small), as photographed, from the gallery's 23,781 paintings (n per painter above).</p>
   </section>`;
+}
+// resolves one painting tile (an <i data-port-gi>) into its image, same crop/size as a real portrait.
+// No loading="lazy" here: the browser can't judge viewport proximity for an element that isn't in the document
+// yet, and for at least one real case this measurably hung forever rather than degrading to eager -- a painting
+// sourced from Commons, whose d.img is a commons.wikimedia.org/wiki/Special:FilePath/... redirect URL (the raw
+// form the rest of the gallery already hands to a normal, attached <img> just fine; it's specifically the
+// unattached + lazy combination that breaks). Verified live: identical fetch, removing only `loading="lazy"`,
+// went from a 5s timeout to loading normally. The row is already off-screen until scrolled to, so there's
+// nothing lazy-loading would have saved here anyway.
+function rcPainterFillGi(i) {
+  glDetail(+i.dataset.portGi).then(d => {
+    if (!i.isConnected || !d) return;
+    const img = document.createElement("img");
+    img.className = "rc-painter-port"; img.alt = ""; img.decoding = "async";
+    img.src = glSmall(d) ? d.img : glBig(d.img);
+    img.onerror = () => { i.classList.remove("wait"); };
+    img.onload = () => i.replaceWith(img);
+  }).catch(() => { i.classList.remove("wait"); });
+}
+let RC_PTYP = new Map();   // slug -> Promise<typical gi | null> (data/artists/p/<slug>.json), shared across rows/sections
+function rcPainterTypicalGi(slug) {
+  if (!RC_PTYP.has(slug)) RC_PTYP.set(slug, fetch(`data/artists/p/${slug}.json` + (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : ""))
+    .then(r => r.ok ? r.json() : null).catch(() => null).then(P => P && P.typical != null && P.typical >= 0 ? P.typical : null));
+  return RC_PTYP.get(slug);
 }
 function rcPaintersSection(name, hex) {
   const id = "rc-painters-" + Math.random().toString(36).slice(2, 8);
@@ -506,19 +536,18 @@ function rcPaintersSection(name, hex) {
     let html = rcPaintersHTML(name, port);
     if (!html) { const near = rcNearestWith(hex, name, n => (RC_ARTISTS[n] || []).length); if (near) html = rcPaintersHTML(near.n, port).replace("<h3>Painters who use it</h3>", "<h3>Painters who use it</h3>" + rcNearNote(name, near)); }
     box.innerHTML = html;
-    // self/other portraits are themselves a gallery painting: resolve their image the same way the painter
-    // page's own hero does (js/artwiki.js awFillPortrait), not before loadGallery() has the detail shard in.
-    const waiting = box.querySelectorAll("[data-port-gi]");
-    if (waiting.length && typeof loadGallery === "function") loadGallery().then(() => waiting.forEach(i => {
-      glDetail(+i.dataset.portGi).then(d => {
-        if (!i.isConnected || !d) return;
-        const img = document.createElement("img");
-        img.className = "rc-painter-port"; img.alt = ""; img.loading = "lazy"; img.decoding = "async";
-        img.src = glSmall(d) ? d.img : glBig(d.img);
-        img.onerror = () => { i.classList.remove("wait"); };
-        img.onload = () => i.replaceWith(img);
-      }).catch(() => { i.classList.remove("wait"); });
-    })).catch(() => {});
+    // any painting-backed avatar (a self/other portrait, or a painter's famous/typical painting) resolves the
+    // same way the painter page's own hero does (js/artwiki.js awFillPortrait), not before loadGallery() has
+    // the detail shard in. A pending tile (no gi known yet: no portrait and no famous painting) looks up the
+    // painter's own typical painting first, then joins the same resolve path.
+    const ready = () => { const w = box.querySelectorAll("[data-port-gi]"); if (w.length && typeof loadGallery === "function") loadGallery().then(() => w.forEach(rcPainterFillGi)).catch(() => {}); };
+    ready();
+    box.querySelectorAll("[data-port-pending]").forEach(i => rcPainterTypicalGi(i.dataset.portPending).then(gi => {
+      if (!i.isConnected) return;
+      if (gi == null) { i.classList.remove("wait"); return; }   // truly nothing to show: the signature-color swatch stands
+      i.removeAttribute("data-port-pending"); i.dataset.portGi = gi;
+      if (typeof loadGallery === "function") loadGallery().then(() => rcPainterFillGi(i)).catch(() => i.classList.remove("wait"));
+    }).catch(() => { if (i.isConnected) i.classList.remove("wait"); }));
   });
   return `<div id="${id}"></div>`;
 }

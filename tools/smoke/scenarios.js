@@ -1740,6 +1740,24 @@ scenario("pages", "a painter row in Painters who use it opens their page, and al
   t.expect(t.$(".aw-pt-hero"), "the painter page has no portrait hero");
 });
 
+// David, 2026-10-09 on Pinkish Tan: a painter with no recorded portrait should show their famous/typical
+// painting in the same circle a real portrait uses, not an empty swatch. That fallback image is built off-DOM
+// (js/richcolor.js rcPainterFillGi) so it can swap in once loaded without a flash -- and a detached <img> with
+// loading="lazy" never fires onload for at least one real case (a gallery row whose image URL is a
+// commons.wikimedia.org/wiki/Special:FilePath/... redirect, same form the rest of the gallery hands a normal,
+// *attached* <img> all the time): the browser has no layout position to judge "near the viewport" against, so
+// the fetch never starts and the row is stuck on its swatch placeholder forever. This walks every row on a
+// color with several famous/typical-painting fallbacks and asserts each one resolves to a real image.
+scenario("pages", "every painter avatar (portrait or famous/typical-painting fallback) resolves to a real image, same size", async t => {
+  await H.openPage(t, "#/name/tawny-orange", "Tawny orange");
+  const paint = await t.waitFor(() => t.$(".rp-paint"), 8000, "the Paintings section");
+  const rows = await t.waitFor(() => { const r = t.$$(".rc-painter[data-awpainter]", paint); return r.length >= 4 ? r : null; }, 20000, "several painter rows");
+  await t.waitFor(() => t.$$(".rc-painter-port.wait", paint).length === 0, 15000, "every painter avatar to resolve off its wait placeholder");
+  const sizes = new Set(rows.map(r => { const p = t.$(".rc-painter-port", r); const cs = t.w.getComputedStyle(p); return cs.width + "x" + cs.height; }));
+  t.expect(sizes.size === 1, `painter avatars render at ${sizes.size} different sizes, expected 1: ${[...sizes].join(", ")}`);
+  t.expect(rows.every(r => t.$("img.rc-painter-port, i.rc-painter-port", r)), "a painter row lost its avatar entirely");
+});
+
 scenario("pages", "hold the cover: the flower rises, dragging lights a hex, letting go opens that color; Back returns", async t => {
   await H.openPage(t, "#/name/fiery-rose", "Fiery Rose");
   const hero = t.$(".cp-hero"), r = hero.getBoundingClientRect();
