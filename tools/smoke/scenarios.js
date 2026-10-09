@@ -2598,7 +2598,10 @@ scenario("learnroom", "a wedge of the wheel studies that family at your level an
   await t.open("#shot=lx:room", { settle: 600 });
   await t.click(await t.waitFor("[data-lh-map]", 10000, "See them on the map"), { wait: 900 });
   await t.waitFor(".hm canvas", 8000, "the map from See them on the map");
-  t.expect(t.ev("S.hm.filter") === "learned", `the map's view (${t.ev("S.hm.src")} · ${t.ev("S.hm.filter")})`);
+  // David, 2026-10-09: a map selection is a mode inside the real map (mapSelect), not a separate filtered view
+  t.expect(t.ev("typeof HONEY_HL !== 'undefined' && !!HONEY_HL"), "See them on the map lights up a selection (mapSelect)");
+  t.expect(t.ev("(HONEY_HL && HONEY_HL.hexes || []).length") > 0, "the selection carries colors to light up");
+  t.expect(t.$(".cs-hl-bar, .cs-hl-pill"), "the selection chip is on screen");
 });
 scenario("learnroom", "the Today card shows the painting and opens both of its parts", async t => {
   await t.open("#shot=learn", { settle: 600 });
