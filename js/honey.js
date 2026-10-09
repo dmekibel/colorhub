@@ -1990,12 +1990,17 @@ function honeycomb(host, opts = {}) {
       setItems(o.items || (lay && lay.raw), o.focus || (center && center.o), o.soft ? "soft" : "");
       // regions (Families, Hue pages) read best whole: the arrival eases out until most of the book is in view
       const arr = HONEY_ARR[honeyParseKey(cfg.layout).id];
-      // fit mode (the Arrange sheet is open) wins over every other arrival, but only re-fits on an actual
-      // arrangement change (a new layout has new bounds) -- not a soft/filter update. Picking a new arrangement
-      // is itself a deliberate action, so it always re-fits and clears any pan/pinch override from before; a
-      // soft update (a feel slider, say) respects whatever view the user is already looking at.
+      // fit mode (the Arrange sheet is open) wins over every other arrival. Picking a new arrangement is a
+      // deliberate action, so it always re-fits and clears any pan/pinch override from before. David, 2026-10-09:
+      // "when I switch from Bubbles to Honeycomb it zooms in to a more appropriate distance" (the opening fit is
+      // the one that's wrong) -- a plain Look/feel change used to be a no-op here, leaving whatever zoom the
+      // (possibly-still-settling) open-time fit left behind; what actually "fixed" it was setItems()'s own
+      // ZMIN=zFloor()/clamp picking up the NEW style's floor and incidentally pushing Z back up -- never a real
+      // re-fit at all. Every update() while fit mode is on now re-fits for real (still respecting a manual
+      // pan/pinch override, same as an arrangement change would), so the open path and a later Look change
+      // compute the exact same number from the exact same function.
       if (fitMode && o.arrange) { fitUserOverride = false; flyToFit(true); }
-      else if (fitMode) {}
+      else if (fitMode) { if (!fitUserOverride) flyToFit(true); }
       else if (o.arrange && hlOn && HONEY_HL) l18FrameLit();
       else if (o.arrange && arr && arr.fit && !lay.globe) { P = [0, 0]; Plag = P.slice(); zoomTo(Math.max(ZMIN, Math.min(Z, ZMIN * 1.3)), W / 2, vcy()); }
       // a new order travels to the middle (for Center on, where the chosen color now sits)

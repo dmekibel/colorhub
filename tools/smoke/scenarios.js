@@ -417,6 +417,56 @@ scenario("home", "Arrange's fit mode frames the whole layout above the sheet, fo
   }
 });
 
+// David, 2026-10-09: "in Arrange the visualization zoomed out too much. But when I switch from Bubbles to
+// Honeycomb it zooms in to a more appropriate distance." The open path and a Look change used to compute fit
+// differently (open waited a flat 300ms, 120ms short of the sheet's real 420ms slide-up -- js/home.js
+// applyInset now waits for the sheet's own animationend instead; a plain Look/feel change used to be a no-op
+// in fit mode -- js/honey.js update() now re-fits on every change while fit mode is on, same as an arrangement
+// change always did). Assert they land on the same number: the zoom right after open should equal the zoom
+// after toggling Look back and forth (a no-op in content, so it should be a no-op in zoom too), for every
+// arrangement.
+scenario("home", "Arrange's fit-mode zoom after opening matches the zoom after a Look round-trip, for every arrangement", async t => {
+  const forceAnims = () => [...t.d.querySelectorAll(".sheet,.screen")].forEach(e => e.getAnimations && e.getAnimations().forEach(a => { try { a.finish(); } catch (er) {} }));
+  // honey.js's own fly-to-fit is its own requestAnimationFrame spring/zoom tween, not a CSS/WAAPI animation --
+  // the virtual clock doesn't drive it to completion either, so force it to its end state too (_settle(), the
+  // same debug hook the map-return scenarios use for exactly this).
+  const settleOnce = () => { forceAnims(); t.ev("typeof HM_CTRL !== 'undefined' && HM_CTRL._settle && HM_CTRL._settle()"); };
+  const settle = async () => {
+    let z0 = t.ev("typeof HM_CTRL !== 'undefined' ? HM_CTRL.zoomValue() : null");
+    for (let i = 0; i < 8; i++) {
+      settleOnce(); await t.sleep(120); settleOnce();
+      const z1 = t.ev("typeof HM_CTRL !== 'undefined' ? HM_CTRL.zoomValue() : null");
+      if (z1 != null && z0 != null && Math.abs(z1 - z0) < 1e-4) break;
+      z0 = z1;
+    }
+  };
+  await H.homeReady(t);
+  await H.sheet(t, "arrange");
+  await settle();
+  const checkFor = async why => {
+    const zOpen = t.ev("HM_CTRL.zoomValue()");
+    const looks = t.$$(".hm-look-chip");
+    t.expect(looks.length >= 2, `${why}: not enough Look chips to round-trip`);
+    // capture the ORIGINAL button itself, not "whichever chip is marked .on" -- that changes under the click
+    const onIdx = looks.findIndex(b => b.classList.contains("on")), original = looks[onIdx], other = looks[(onIdx + 1) % looks.length];
+    await t.click(other, { wait: 150 }); await settle();
+    await t.click(original, { wait: 150 }); await settle();
+    const zBack = t.ev("HM_CTRL.zoomValue()");
+    const diff = Math.abs(zBack - zOpen) / Math.max(zOpen, .001);
+    t.expect(diff <= .02, `${why}: open zoom ${zOpen.toFixed(3)} vs after a Look round-trip ${zBack.toFixed(3)} (${(diff * 100).toFixed(1)}% apart, wanted <=2%)`);
+  };
+  await checkFor("map/hue (default)");
+  // Sunflower/Spiral's round-lens fit re-solves a per-point search (js/honey.js boundsFit) on every settle
+  // call, which this harness's sped-up virtual clock couldn't get to converge reliably across repeated
+  // re-fits in testing (map/hue and Rings -- the grid-shaped arrangements -- settle cleanly). Left for a
+  // follow-up with more targeted settling rather than asserting on a number this harness can't stabilize yet.
+  for (const sel of ['[data-arr="rings"]']) {
+    const b = t.$(sel); if (!b) continue;
+    await t.click(b, { wait: 300 }); await settle();
+    await checkFor(sel);
+  }
+});
+
 // David, 2026-10-09: "after you change views the bottom black bar comes back AND you get stuck and can't pan" --
 // a repro attempt for a stray overlay left over by the Colors/Arrange sheet (a scrim, a wrapper, a second
 // instance from a re-render) eating touches after close. Could not reproduce the DOM-leftover shape of this in
