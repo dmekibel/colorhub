@@ -402,6 +402,13 @@ function pmLayRings(list, seed) {
 // free integer cell (this engine's grid needs one painting per cell), searching outward on the rare collision --
 // phyllotaxis is specifically the pattern that packs points with the fewest collisions in the first place, so
 // this almost always resolves within a ring or two.
+// David, 2026-10-09 ("the Spiral view looks off because of all the empty space"): the radius constant was 1.6,
+// which packs k points into a disk of area pi*(1.6*sqrt(k))^2 -- about 8x more area than the k unit-area grid
+// cells actually need (a disk of k unit cells has radius sqrt(k/pi) = 0.564*sqrt(k)), so most of that disk was
+// genuinely empty grid, not an illusion of the lens. 0.62*sqrt(k) is just above that theoretical minimum --
+// close to as dense as Rings' own zero-gap shells (Rings enumerates literally every cell in ring order, so it's
+// the tightest possible reference point) -- leaving the collision search below just enough slack that it
+// resolves in a ring or two instead of piling up near the seed.
 function pmLaySpiral(list, seed) {
   const L = pmSimilarOrder(list, seed), n = L.length, GOLD = Math.PI * (3 - Math.sqrt(5));
   const occupied = new Set(), X = new Int32Array(n), Y = new Int32Array(n);
@@ -409,7 +416,7 @@ function pmLaySpiral(list, seed) {
   for (let k = 0; k < n; k++) {
     let x = 0, y = 0;
     if (k > 0) {
-      const rad = Math.sqrt(k) * 1.6, ang = k * GOLD;
+      const rad = Math.sqrt(k) * .62, ang = k * GOLD;
       x = Math.round(rad * Math.cos(ang)); y = Math.round(rad * Math.sin(ang));
       if (occupied.has(key(x, y))) {
         outer: for (let ring = 1; ring < 30; ring++) {
