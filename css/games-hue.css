@@ -131,7 +131,7 @@
 .hg-art .hg-still.big{width:min(100%,46dvh * var(--ar),300px);margin:0 auto}
 .hg-srcline{display:flex;flex-direction:column;gap:3px;padding-right:28px}
 .hg-srcline b{font:400 26px/1.08 var(--serif);color:var(--ink)}
-.hg-srcline em{font:italic 400 16px/1.3 var(--serif);color:var(--soft)}
+.hg-srcline em{font:italic 400 17px/1.3 var(--serif);color:var(--soft)}
 .hg-art>svg{position:absolute;right:0;bottom:12px;color:var(--soft)}
 .hg-art:active .hg-srcline b{opacity:.7}
 .hg-corners{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:14px}
@@ -158,7 +158,7 @@
 .hg-seg button:active{transform:scale(.96)}
 .hg-seg button.on{background:var(--surface-3);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(236,232,223,.22)}
 .hg-diffs button{font-size:17px}
-.hg-modeline{font:italic 400 16px/1.4 var(--serif);color:var(--soft);text-wrap:pretty;margin:2px 2px 0}
+.hg-modeline{font:italic 400 17px/1.4 var(--serif);color:var(--soft);text-wrap:pretty;margin:2px 2px 0}
 
 /* ---------- readable sizes (David: "the text at the bottom is too small"): nothing under body size on these screens ---------- */
 .hg-map .fine,.hg-res .fine{font-size:16px;line-height:1.55;color:var(--soft)}

@@ -23,7 +23,7 @@
 .lh-w-t{font:400 15px/1 var(--serif);fill:var(--ink);letter-spacing:0;pointer-events:none}
 .lh-hub{fill:var(--surface-1);stroke:var(--rule)}
 .lh-hub-n{font:400 30px/1 var(--serif);fill:var(--ink);font-variant-numeric:tabular-nums}
-.lh-hub-t{font:italic 400 14px/1 var(--serif);fill:var(--soft)}
+.lh-hub-t{font:italic 400 17px/1 var(--serif);fill:var(--soft)}
 .lh-wheel-n{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 14px;margin-top:6px}
 .lh-map{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0;border:0;background:none;color:var(--ink);font:400 16px/1 var(--sans);cursor:pointer}
 .lh-map svg{width:16px;height:16px}

@@ -28,7 +28,7 @@
 .screen.learnit .lt-t1 em{font-style:italic}
 .screen.learnit .lt-code{font:400 13px/1 var(--mono);letter-spacing:.02em;font-variant-numeric:tabular-nums}
 .screen.learnit .lt-diff{font:400 26px/1.15 var(--serif);letter-spacing:-.01em;margin-top:16px;text-wrap:pretty;flex:none}
-.screen.learnit .note{font:italic 400 16px/1.3 var(--serif);color:var(--soft);margin-top:10px}
+.screen.learnit .note{font:italic 400 17px/1.3 var(--serif);color:var(--soft);margin-top:10px}
 
 /* ---------- the pager (Meet): one page fills the space under the head, swipe up or tap to continue ---------- */
 .screen.learnit .lt-pager{flex:1;min-height:0;overflow-y:auto;scroll-snap-type:y mandatory;overscroll-behavior:contain;scrollbar-width:none}
@@ -62,7 +62,7 @@
 
 /* ---------- Tell apart: pickBoard()'s own card, a serif note instead of its default mono eyebrow ---------- */
 .screen.learnit .pi-q .eyebrow,
-.screen.learnit .pi-hint{font:italic 400 16px/1.3 var(--serif);letter-spacing:0;text-transform:none;color:var(--paper-soft)}
+.screen.learnit .pi-hint{font:italic 400 17px/1.3 var(--serif);letter-spacing:0;text-transform:none;color:var(--paper-soft)}
 .screen.learnit footer.deck-foot.pi-foot .pi-hint{color:var(--soft)}
 
 /* ---------- Done: calm, still on grey, one way out ---------- */

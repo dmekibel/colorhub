@@ -13,7 +13,7 @@
 .wg-pt{flex:0 0 min(42vw,170px);scroll-snap-align:start;display:flex;flex-direction:column;gap:4px;padding:0;border:0;background:none;color:inherit;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent;min-width:0}
 .wg-pt img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:2px;background:var(--lift);margin-bottom:3px}
 .wg-pt b{font:400 16px/1.15 var(--serif)}
-.wg-pt span{font:italic 400 14px/1.3 var(--serif);color:var(--soft)}
+.wg-pt span{font:italic 400 17px/1.3 var(--serif);color:var(--soft)}
 /* viewer */
 .wgv{position:fixed;inset:0;z-index:45;background:var(--ground);display:flex;flex-direction:column;animation:fade .2s both;touch-action:none;-webkit-user-select:none;user-select:none}
 .wgv-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:calc(var(--top) + 52px) 10px 10px}

@@ -47,7 +47,7 @@
 .tl-th-room .rm-art{width:48px;height:48px;box-shadow:none}
 .tl-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .tl-txt b{font:400 19px/1.15 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tl-txt em{font:italic 400 14px/1.3 var(--serif);color:var(--soft)}
+.tl-txt em{font:italic 400 17px/1.3 var(--serif);color:var(--soft)}
 .tl-foot{margin-top:4px}
 .tl-list li+li .tl-foot{border-top:1px solid var(--rule);border-radius:0;padding-top:12px}
 .tl-list li:has(.tl-foot)+li .tl-foot{border-top:0;padding-top:8px}

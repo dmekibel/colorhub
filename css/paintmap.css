@@ -18,7 +18,7 @@
 .pmx-title b{display:flex;align-items:center;gap:4px;font:400 22px/1.05 var(--serif);letter-spacing:-.01em}
 .pmx-title b svg{color:var(--soft);flex:none}
 .pmx-title small{max-width:100%;font:400 15px/1.25 var(--sans);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pmx-why{position:absolute;z-index:3;left:16px;right:16px;top:calc(var(--top) + 76px);margin:0;text-align:center;font:italic 400 16px/1.3 var(--serif);color:rgba(236,232,223,.72);pointer-events:none;
+.pmx-why{position:absolute;z-index:3;left:16px;right:16px;top:calc(var(--top) + 76px);margin:0;text-align:center;font:italic 400 17px/1.3 var(--serif);color:rgba(236,232,223,.72);pointer-events:none;
   text-shadow:0 1px 10px rgba(0,0,0,.8)}
 
 /* bottom: the painting in the middle, named; the heart beside it; the corner at the right */
