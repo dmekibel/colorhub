@@ -6,110 +6,194 @@
   "Scheele's Green"
  ],
  "tier": "pigment",
- "depth": "short",
- "lede": "Scheele's Green is a yellowish, slightly dulled green named for the Swedish chemist Carl Wilhelm Scheele, who discovered the copper-arsenite pigment behind it in 1775.",
+ "depth": "epic",
+ "lede": "Scheele's Green is a dirty, olive-tinged yellow-green that the Swedish chemist Carl Wilhelm Scheele produced by accident in 1775 while investigating arsenic, and sold anyway, copper and poison together in one tube.",
  "sections": [
   {
-   "id": "name",
-   "title": "A bright green chemists learned to fear",
-   "body": "Scheele discovered the pigment in Sweden in 1775, though he did not publish his recipe until 1778 [3]. It is a copper arsenite, warm and opaque, and by the end of the nineteenth century it had largely replaced older copper-carbonate greens in paint [3]. It was never adopted widely as an artist's pigment, however, because it discolored in the presence of acid or sulfur fumes and, far more seriously, because it was toxic [3].\n\nThe toxicity made Scheele's Green notorious outside the studio [3]. In damp wallpaper, mould growing over the pigment could convert its copper arsenite into trimethylarsine gas, a volatile arsenic compound; families living in rooms papered with it suffered chronic poisoning from their own walls [3]. It fell out of favor after the 1860s as both its toxicity and its instability became impossible to ignore, and was gradually succeeded by other arsenic greens before synthetic, non-toxic pigments replaced the whole family [3].\n\nRidgway's 1912 atlas lists this exact hue on plate VI, hue 33, tone i, and Maerz and Paul's 1930 dictionary dates the name itself to 1778, Scheele's publication year [1]. In LCH terms it measures lightness 68, chroma 44, hue 110, close to [[russet-green|Russet Green]], [[deep-chrysolite-green|Deep Chrysolite Green]] and [[lily-green|Lily Green]] [2]."
+   "id": "discovery",
+   "title": "An accident with arsenic",
+   "body": "Scheele found the compound copper arsenite in 1775 while working on what became patent yellow, in the middle of a separate set of experiments with arsenic [1][2]. He recognized the new green's promise as an artist's pigment at once, and it went into production as Scheele's Green [1][2]. The color itself was never especially fine: Ball calls it \"not a particularly distinguished colour,\" with a slightly dirty tone, which is exactly what our own swatch shows, a muted olive rather than a clean green [1]. Scheele was not naive about what he had made. In a letter to a scientist friend in 1777, a year before the pigment went into production, he said he was troubled by it and felt users should be warned of its poisonous nature [2]. The warning did not stop the sale.\n\nAn English recipe recorded sometime between 1795 and 1816 lays out essentially the same chemistry by hand: purified alkali mixed with powdered white arsenic dissolved in boiling water, the resulting precipitate washed and dried on chalk [12]. Some older technical sources call the result copper arsenate, which the modern Pigment Compendium treats as a persistent error; the real compound is a hydrated copper arsenite, the same family as the pigment Scheele sold [12]. The English manufacturer Berger later marketed its own version of that compound under a proprietary name of its own, African Green, one of several aliases the color picked up as different firms sold the same chemistry [12]."
+  },
+  {
+   "id": "use",
+   "title": "A painter's green, used thinly",
+   "body": "Turner used Scheele's Green around 1805, in an oil sketch of Guildford seen from the banks of the River Wey, and it turns up among the crowd in Édouard Manet's *Music in the Tuileries Gardens* (1862) [1]. Evidence of wider use by well-known painters before the nineteenth century is otherwise thin [1]. Paterson's dictionary of color files it as one entry in a small family of copper-based greens that includes chrysocolla, mineral green, Montpellier green, verditer and verdigris — Scheele's was simply the newest and cheapest of the family to make [5]. The color traveled well beyond painting: our own archive of textile fragments turns up a length matched within 4.0 units in a French or Italian weave, a Chinese fragment from the eighth century 7.2 units off, and a Japanese fragment 7.6 units off [8]. None of the three is necessarily made with Scheele's own pigment, since the match is on color alone, but together they are proof the hue itself long predates the chemist's accident [8]. Fashion-history swatches put a close cousin of the shade in both the 1910s and the 1990s under the same label, khaki, 5.6 units off each time [6]."
+  },
+  {
+   "id": "impressionism",
+   "title": "A synthetic color for a new kind of painting",
+   "body": "By the time Impressionism arrived, Scheele's Green had become one of a wave of new synthetic pigments that changed what painters could reach for: of the twenty pigments most often identified in Impressionist paintings, twelve were new synthetics, Scheele's green among them, alongside emerald green, viridian, chrome yellow, cadmium yellow, chrome orange, cerulean blue, cobalt blue and artificial ultramarine [1]. That list reads like a chemistry inventory because it is one — most of these colors reached painters within a few decades of each other, each the product of a separate discovery, Scheele's own an accident inside someone else's arsenic research [1][2]. Our own archive agrees with the broad picture, if not the specific painters that art history tends to name: Scheele's Green peaks in paintings from the 1900s, a generation after the core Impressionist years, at three times the rate the same museums' baselines would predict [10]."
+  },
+  {
+   "id": "danger",
+   "title": "The poison nobody could stop selling",
+   "body": "Green pigments had long struggled with difficult, unstable materials, and St Clair suggests that history helped attach the color to ideas of capriciousness, poison and even evil well before Scheele's own chemistry made the association literal [11]. Scheele's Green is copper arsenite: both the copper and the arsenic are real, not exaggerated [1][3]. It fell out of favor for two separate reasons, not one — it discolored in the presence of acids and sulfur, turning duller with age, and it was simply toxic to make and to live with [3]. In 1808, chemists introduced copper acetoarsenite as a more durable replacement, sold under several names — emerald green, *vert Paul Véronèse*, Schweinfurt green, Brunswick green — that held its color better but kept the same arsenic and still tended to brown over time [3][11]. By 1858, something like 100 square miles of British wall space, across ordinary homes, hotels, hospitals and railway waiting rooms, was estimated to be papered in these copper-arsenic greens, and by 1863 the *Times* put annual British production of Scheele's green alone at 500 to 700 tons [11]. A surgeon at Guy's Hospital in London was among the first to connect a wave of patients with sore eyelids, sore lips, and lung and throat complaints to rooms papered in arsenic green [4].\n\nA persistent story holds that arsenic wallpaper killed Napoleon in exile on Saint Helena [11]. The documented pieces are real and suggestive, not proof: his body was found curiously well preserved when exhumed in 1840, one symptom of arsenic poisoning, a twentieth-century hair sample tested abnormally high for the poison, and in the 1980s his damp little room on the island was found to have been papered in a verdant design containing Scheele's green [11]. What spread from there, St Clair is careful to call a rumor — that the British deliberately poisoned a prisoner they found difficult — and it remains unproven; damp wallpaper of that kind was common, not a deliberate dose, and the symptoms of long illness can resemble arsenic poisoning without it [11]. What is documented beyond dispute is plainer and closer to home: Scheele's own 1777 letter, written a year before his pigment reached the market, already called it poisonous [2]."
+  },
+  {
+   "id": "neighbors",
+   "title": "Its neighbors",
+   "body": "In the color graph, Scheele's Green sits 2.6 units from [[russet-green]], almost the same color, and 3.0 units from [[deep-chrysolite-green]], also almost indistinguishable [7]. [[lily-green]], 3.4 units off, is duller, and [[cosse-green]], 3.7 off, is more vivid [7]. [[reseda]] and [[absinthe-green]] both sit 3.8 units away, each close enough to pass for the same shade in poor light [7]. Two older name lists file an identical color under Certosa and under Verdant, cross-system aliases rather than distinct hues [6]. On a painter's mixing wheel, rotated to the true complement, the nearest familiar colors are [[mathews-purple]], [[pearly-purple]] and [[orchid-magenta]] — a cool violet-pink opposite for a warm, dirty yellow-green [7]. Munsell notation places the swatch at 2.3GY 6.7/5.9, a moderately light, moderately saturated yellow-green [6]. Our graph's own computed-nearest ISCC-NBS block for this exact hex is \"moderate greenish yellow,\" 5.7 units off [6]. No 1955 dictionary filing exists for the specific name Scheele's Green, so that computed block, imperfect as it is, is the closest honest answer our own data can give [6]."
+  },
+  {
+   "id": "seen-in",
+   "title": "Seen in",
+   "body": "Among internet-era design aesthetics, the closest full-palette matches to Scheele's Green are two contemporary \"core\" styles, Traumacore and Fairycore, each 2.1 units off on this exact swatch, with Weirdcore a step further at 3.6 units on its neighbor Neva Green [9]. None of the three has anything to do with arsenic or the 1860s [9]: it is simply a two-century jump from a Georgian poison pigment to a 2020s mood board, made on color alone, with no history attached on the newer end."
   },
   {
    "id": "field",
    "title": "Field notes",
-   "body": "A screen match for this green turns up in 100 of 23,781 paintings, about 0.4 percent, as photographed, concentrated over four times above the archive's average in the 1900s decade [2]. Niels Larsen Stevns, Georges Seurat and Vincent van Gogh all carry it well above the archive's base rate [2]. The earliest dated match in our archive, a 1548 Lucas Cranach portrait, predates Scheele's own discovery by more than two centuries, a reminder that a screen-color match never proves which pigment a painter actually used, a floor and not a first, since the archive's early centuries are thin [2]."
+   "body": "Our archive finds this green in 137 of 23,778 paintings, about 0.58 percent as photographed; a stricter within-painting lens finds it in 90 [10]. That makes it more common than 56 percent of the named colors in the archive [10]. It peaks in the 1900s century-wide, in 1.4 percent of 1,674 paintings from that decade, 24 of them, three times the expected rate against the same museums' baseline [10]. Narrowed to single decades, the sharpest peak actually falls in the 1910s, 1.7 percent of 523 paintings, 9 of them, again about three times the expected rate [10]. Inside a painting it most often plays an accent, in 53 percent of its 90 clearest matches, by lightness rank within each canvas so an aged varnish cannot fake the result [10].\n\nGeorges Seurat is its most devoted painter by far, carrying the color in 8 of his 41 works here, 11.2 times what his period and museums would predict [10]. It is also sharply over-represented in paintings from India, 6 of 721, 3.3 times the expected rate [10]. The earliest match in the archive is Hieronymus Bosch's work from 1500, with 90 dated paintings carrying it through to 1941; the archive's early centuries are thin, so this is a floor, not a first, and a 1500 match sits 412 years before the color's own earliest record in our sources, Ridgway's 1912 system — a look-alike hue in an aged photograph, not proof that anyone mixed copper arsenite that early [10]. Maerz and Paul's 1930 dictionary separately dates the name itself to 1778, the year Scheele's pigment reached the market, plate 19, swatch L 8 [6]. This is a computed color match on photographed, varnished canvases, not a pigment test."
   }
  ],
  "aside": {
   "origin": {
-   "named_after": "Carl Wilhelm Scheele, Swedish chemist",
-   "first_recorded": "1778, per Maerz and Paul",
-   "source": "Maerz and Paul, A Dictionary of Color (1930)"
+   "named_after": "Carl Wilhelm Scheele, the Swedish chemist who produced and sold it",
+   "first_recorded": "1778 (Maerz & Paul, 1930 dictionary, plate 19 L 8); discovered 1775",
+   "source": "ColorHub color library"
   },
-  "aka": [],
+  "aka": [
+   "Certosa",
+   "Verdant"
+  ],
   "siblings": [
    "russet-green",
    "deep-chrysolite-green",
    "lily-green",
-   "cosse-green"
+   "cosse-green",
+   "reseda",
+   "absinthe-green"
   ],
-  "parent": "green",
+  "parent": null,
   "children": [],
   "disambiguation": [],
   "other_languages": []
  },
  "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 100,
-  "rate": 0.0042,
-  "peak_decade": {
-   "key": 1940,
-   "rate": 0.179,
-   "lift": 42.47
-  },
+  "dataset": "ColorHub archive, 23,778 paintings, as photographed",
+  "n_present": 137,
+  "n_present_within_painting_lens": 90,
   "measured": {
    "lch": [
-    68,
-    44,
-    110
+    67.8,
+    43.6,
+    109.7
    ],
    "nearest": [
     [
      "Russet Green",
      2.6
-    ],
-    [
-     "Deep Chrysolite Green",
-     3.0
-    ],
-    [
-     "Lily Green",
-     3.4
-    ],
-    [
-     "Cosse Green",
-     3.7
     ]
    ]
+  },
+  "iscc_computed_nearest": {
+   "name": "moderate greenish yellow",
+   "de": 5.7
+  },
+  "most_devoted_painter": {
+   "name": "Georges Seurat",
+   "lift": 11.2
   }
  },
  "notes": [
   {
    "n": 1,
    "kind": "book",
-   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate VI, hue 33, tone i; Maerz and Paul, A Dictionary of Color (1930), plate 19 L 8",
-   "loc_kind": "entry",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "book-chapter",
    "url": null
   },
   {
    "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library and archive (23,781 paintings): ISCC-NBS 1955 block 117, LCH values, computed match, as photographed",
-   "loc_kind": null,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 16",
+   "loc_kind": "book-chapter",
    "url": null
   },
   {
    "n": 3,
-   "kind": "web",
-   "cite": "MFA CAMEO, \"Scheele's green\"; Wikipedia, \"Scheele's green\"",
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 143",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 9 (\"Poisoning the Clientele\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"copper-green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, Maerz & Paul 1930, Munsell renotation, name aliases",
    "loc_kind": null,
-   "url": "https://cameo.mfa.org/wiki/Scheele's_green"
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE ΔE2000, the real look-alike edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: garment and fashion-history palette twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: design-look palette twins (ΔE2000 ≤ 8)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive (23,778 paintings), two-lens computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, \"Scheele's Green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pigment Compendium, pp. 15, 33, 135 (\"African Green\", \"Arsenic\", \"Copper Arsenate\")",
+   "loc_kind": "pdf-page",
+   "url": null
   }
  ],
  "questions": [
   {
-   "q": "Why did Scheele's Green fall out of use as a paint pigment?",
+   "q": "What was Scheele actually investigating when he produced the pigment that became Scheele's Green?",
    "choices": [
-    "It was toxic and unstable",
-    "It was too expensive",
-    "It faded too quickly in sunlight",
-    "It was banned by royal decree"
+    "Arsenic, while working toward patent yellow",
+    "A cure for lead poisoning",
+    "A new blue dye",
+    "Gold refining"
    ],
-   "answer": "It was toxic and unstable",
+   "answer": "Arsenic, while working toward patent yellow",
    "kind": "pick"
   },
   {
-   "q": "True or false: a screen color match for Scheele's Green in a 1548 painting proves Scheele's own pigment was used.",
+   "q": "True or false: arsenic wallpaper has been confirmed as the cause of Napoleon's death on Saint Helena.",
    "choices": [
     "True",
     "False"
@@ -118,28 +202,28 @@
    "kind": "true-false"
   },
   {
-   "q": "What compound gave Scheele's Green its color?",
+   "q": "Why did emerald green (copper acetoarsenite) replace Scheele's Green after 1808, even though both pigments were toxic?",
    "choices": [
-    "Copper arsenite",
-    "Lead oxide",
-    "Chromium oxide",
-    "Cobalt silicate"
+    "It was more durable and held its color better",
+    "It contained no arsenic",
+    "It was cheaper to manufacture",
+    "It was invented by Scheele himself"
    ],
-   "answer": "Copper arsenite",
+   "answer": "It was more durable and held its color better",
    "kind": "pick"
   }
  ],
  "openers": [
-  "Damp wallpaper painted in Scheele's Green could turn mouldy and release arsenic gas into the room."
+  "Scheele warned a friend in writing that his new green was poisonous a full year before he started selling it.",
+  "Georges Seurat reached for this exact olive-green more than eleven times as often as his peers did."
  ],
- "words": 322,
- "status": "checked",
+ "words": 1513,
+ "status": "draft",
  "checked": {
-  "by": "batch-23",
-  "date": "2026-10-08",
+  "by": "writer",
+  "date": "2026-10-09",
   "issues": [
-   "No concordance hits for this slug; pigment and toxicity history from web sources (MFA CAMEO, Wikipedia), which largely agree and are hedged as such.",
-   "lint 2026-10-09"
+   "Depth wave pilot: built from color-kb concordance (96 hits: Ball, Finlay, Coles, Garfield, Paterson, St Clair) plus the color graph's real look-alikes, archive fieldnotes, garment and look twins. Correctly distinguishes Scheele's own documented 1777 poison warning from the unproven Napoleon arsenic-wallpaper legend."
   ]
  }
 }

@@ -6,163 +6,238 @@
   "Pompeian Red"
  ],
  "tier": "place",
- "depth": "medium",
- "lede": "Pompeian red is a muted brick red named for the walls of Pompeii, and in the pigment trade it was a name for a natural iron-oxide red also sold as Venetian or Indian red.",
+ "depth": "long",
+ "lede": "Pompeian Red is a dark, earthy red named for the frescoes uncovered at Pompeii, popular for the half-century before 1930, though the books that describe it cannot agree on whether it is a dark brick red or a comparatively light one.",
  "sections": [
   {
    "id": "name",
-   "title": "A name for the walls of Pompeii",
-   "body": "St Clair's glossary of color names lists Pompeian red as a dark brick red, taking its name from houses that archaeologists dug out at Pompeii [1]. Paterson's dictionary defines it as the red found in the frescoes of Pompeii and sends the reader to Venetian red [2].\n\nIn the pigment trade the name drifted onto a plain oxide red. Venetian red is an orange-red or reddish-brown natural iron oxide, sold under many regional names, including Venice, Indian, Spanish, Pompeian and Persian red [3][4]. Heaton in 1928 listed Pompeian red as a current name for a light Indian red, which he defined as a highly calcined iron oxide [5]. The books therefore disagree on how dark it is: a dark brick red in one, a light red in another [1][5]."
+   "title": "A color named for a ruin, then set loose",
+   "body": "Maerz and Paul's 1930 dictionary is direct about the source: the name honors the red of the frescoes in Pompeii's villas, and the color had been popular for roughly fifty years before the dictionary's own publication [1]. St Clair's glossary describes it as a dark brick red, taken from the color of the excavated houses themselves [2]. Paterson's dictionary, by contrast, defines it by sending the reader to a different entry entirely, Venetian Red, without independently committing to a shade [3]. The two books disagree on how dark the color actually is: St Clair's dark brick red and Heaton's 1928 description of a current \"Pompeian red\" as a light Indian red, a highly calcined iron oxide, are not the same color at all [2][4]. Venetian Red itself is a natural iron oxide, orange-red to reddish-brown, sold under a whole cluster of regional trade names for what is largely one pigment family — among the names recorded are Venice red, Persian red, Spanish red, our own Pompeian red, and Indian red [3][5]. In the pigment trade, the name eventually drifted from its archaeological origin onto a fairly plain oxide red, the kind of drift common to names that start out meaning one specific, excavated thing and end up meaning a color category [3]."
   },
   {
-   "id": "empire",
-   "title": "With dark greens, in the Empire",
-   "body": "In France in the First Empire, greens were still dark and were set beside Pompeian reds or crimsons and bright gold [6]. Pastoureau adds that it is a myth that Napoleon started this \"Empire green\" fashion [6]."
+   "id": "empire-fashion",
+   "title": "A color for the First Empire, and a myth it does not need",
+   "body": "In France during the First Empire, Pastoureau notes that dark greens of the period were commonly set beside Pompeian reds or crimsons and bright gold, part of a fashionable color scheme of the day [6]. Pastoureau also corrects a myth that touches this same period directly: the fashion for a so-called \"Empire green\" is sometimes credited to Napoleon himself, and that attribution is false [6]. Pompeian Red's own documented role here needs no such embellishment [6]: it was simply one of the colors fashionable interiors paired with dark green and gold in that moment, Pompeii's own excavated reds feeding directly into a contemporary decorative fashion a world away from the ruin itself."
   },
   {
-   "id": "swatch",
-   "title": "The swatch",
-   "body": "Our swatch is a library color with three early sources: the ISCC-NBS system of 1955, Ridgway's *Color Standards* of 1912 and Maerz and Paul of 1930 [7]. It is a moderate red, 3.9 units from the ISCC-NBS center [7]. Its closest relatives in the earth reds are [[venetian-red]], [[indian-red]], [[brick-red]] and [[terracotta]] [7]."
+   "id": "two-traditions",
+   "title": "A second name, unconnected",
+   "body": "Our own library files a Japanese traditional name beside this one: Su'ōkō (蘇芳香), \"sappanwood incense,\" a color named for the reddish dye of the sappanwood tree [7]. As with other cases in our library where a Western and a Japanese name land on nearly the same hue, there is no documented link between the two traditions — a ruin in southern Italy and a dye tree's name in Japan arrived at a similar red independently [7]. A separate cross-system list also files an identical or near-identical color under Pearl Pink, a name that, read on its own, sounds nothing like this dark red at all [7]."
+  },
+  {
+   "id": "neighbors",
+   "title": "Its neighbors",
+   "body": "In the color graph, Pompeian Red sits 2.6 units from [[reddish-chestnut]], almost the same color, and 2.8 from [[deep-chestnut]], more vivid [8]. [[redwood]], 2.9 off, is duller; [[dragon-s-blood]], 3.0 off, is almost the same again; [[dusty-crimson]], 3.4 off, is almost the same; [[acajou-red]], 3.6 off, is duller [8]. The real 1955 ISCC-NBS filing for the exact name lands on block 19, \"grayish red\" — one block different from the computed-nearest block for this hex, \"moderate red,\" a small, honest gap of the kind that turns up whenever a single named swatch sits near a boundary [9]."
+  },
+  {
+   "id": "seen-in",
+   "title": "Seen in",
+   "body": "Three garments in our archive land close by, spanning three unconnected traditions: an American dress, 1.4 units off; a Navajo (Diné) rug from the American Southwest, 2.3 off; and a Byzantine-period curtain fragment with a galloping horse from Antinoë, Egypt, 2.5 off [10]. Among design aesthetics, Whimsigoth is the closest full-palette match, 2.6 units off on this exact swatch, with Cottagecore further out at 4.5 on its neighbor Dragon's-Blood Red, and Traumacore at 4.7 on Ferruginous [11]. Pantone's 2015 Color of the Year, Marsala, sits 5.7 units away, a fittingly earthy, wine-dark relative [12]. On screen, two films built around the color red generally, *The Red Shoes* and *Three Colours: Red*, both sit roughly 8 to 9 units off — close enough to share a family resemblance, not close enough to call a match [13]."
   },
   {
    "id": "field",
    "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, Pompeian red appears in 248, 1.04 per cent, and is more common than 70 per cent of the named colors [8]. It peaks in the 1400s, in 2.3 per cent of 945 paintings, about 2.2 times what the same museums would predict [8]. It most often plays an accent (81 per cent of 196 works measured) [8]. These are photographs of aged, varnished paintings, so a match is not a pigment test [8]. The term itself appears in Google Books from about 1860 and peaks around 1920 [9]."
+   "body": "Our archive finds this red in 248 of 23,778 paintings, about 1.04 percent as photographed; a stricter within-painting lens finds it in 196 [14]. That makes it more common than 69 percent of the named colors in the archive [14]. Inside a painting it overwhelmingly plays an accent, 81 percent of its 196 clearest matches, by far the strongest single-role concentration of any color in this pilot [14]. It is sharply over-represented in paintings from India, 3.0 times the expected rate across 721 paintings, and in the Kalighat painting tradition specifically, 3.4 times expected across 96 works [14]. It also shares canvases with two unusually named colors, Oxheart and Avellaneous, far more than chance alone would explain [14].\n\nIt peaks century-wide in the 1400s, 2.3 percent of 945 paintings from then, and the single-decade peak is sharper still, also the 1400s, 9.6 percent of 73 paintings, 3.6 times the expected rate [14]. The earliest match in the archive is from 1119, with 137 dated paintings carrying it through to 1923; the archive's early centuries are thin, so this is a floor, not a first, and an 1119 match sits 793 years before the name's own earliest record in our sources, Ridgway's 1912 system [14]. In printed English the word itself peaks in the 1920s, matching Maerz and Paul's note that the color had already been popular for decades by their 1930 publication, and rose fastest in the 1880s [14]. This is a computed color match on photographed, varnished canvases, not a pigment test."
   }
  ],
  "aside": {
   "origin": {
-   "named_after": "Pompeii, from the red walls found there",
-   "first_recorded": "in colormen's lists by 1928 (Heaton); undocumented earlier in the books",
-   "source": "Paterson, A Dictionary of Colour; Pigment Compendium"
+   "named_after": "the red of the frescoes uncovered at Pompeii",
+   "first_recorded": "1882 (Maerz & Paul, 1930 dictionary, plate 4 J 10; popular for roughly 50 years before 1930)",
+   "source": "ColorHub color library"
   },
   "aka": [
-   "Venetian red (trade equivalent)",
-   "Indian red (variant)"
+   "Pearl Pink"
   ],
   "siblings": [
-   "venetian-red",
-   "indian-red",
-   "brick-red"
+   "reddish-chestnut",
+   "deep-chestnut",
+   "redwood",
+   "dragon-s-blood",
+   "dusty-crimson",
+   "acajou-red"
   ],
   "parent": null,
   "children": [],
   "disambiguation": [],
-  "other_languages": []
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Su'ōkō (蘇芳香), \"sappanwood incense\""
+   }
+  ]
  },
  "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (fieldnotes; within six units, at least five per cent of the canvas)",
+  "dataset": "ColorHub archive, 23,778 paintings, as photographed",
   "n_present": 248,
+  "n_present_within_painting_lens": 196,
   "measured": {
    "lch": [
     46.1,
     41.9,
     30.0
    ],
-   "iscc": "moderate red, dE 3.9"
+   "nearest": [
+    [
+     "Reddish chestnut",
+     2.6
+    ]
+   ]
   },
-  "ngram": {
-   "first": 1860,
-   "peak": 1920
-  }
+  "iscc_real_1955_filing": {
+   "name": "grayish red",
+   "block": 19
+  },
+  "iscc_computed_nearest": {
+   "name": "moderate red",
+   "de": 3.9
+  },
+  "most_common_role": "accent"
  },
  "notes": [
   {
    "n": 1,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, glossary of color names",
-   "loc_kind": "entry",
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930 (plate 4 J 10, origin note)",
+   "loc_kind": null,
    "url": null
   },
   {
    "n": 2,
    "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 318",
-   "loc_kind": "pdf-page",
+   "cite": "St Clair, The Secret Lives of Color, glossary",
+   "loc_kind": "entry",
    "url": null
   },
   {
    "n": 3,
    "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 410",
-   "loc_kind": "pdf-page",
+   "cite": "Paterson, A Dictionary of Colour, \"Pompeian red\", \"Venetian red\"",
+   "loc_kind": "entry",
    "url": null
   },
   {
    "n": 4,
    "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 159",
-   "loc_kind": "pdf-page",
+   "cite": "Heaton, Outlines of Paint Technology (1928), as cited in the Pigment Compendium",
+   "loc_kind": "entry",
    "url": null
   },
   {
    "n": 5,
    "kind": "book",
-   "cite": "Pigment Compendium, \"Pompeian red\", p. 318 (citing Heaton, 1928)",
-   "loc_kind": "pdf-page",
+   "cite": "Pigment Compendium, \"Venetian red\"",
+   "loc_kind": "entry",
    "url": null
   },
   {
    "n": 6,
    "kind": "book",
-   "cite": "Pastoureau, Green, chapter on the nineteenth century",
+   "cite": "Pastoureau, Green",
    "loc_kind": "book-chapter",
    "url": null
   },
   {
    "n": 7,
    "kind": "data",
-   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz and Paul 1930)",
+   "cite": "ColorHub color library: node src/family, traditional-name and cross-system alias cross-references",
    "loc_kind": null,
    "url": null
   },
   {
    "n": 8,
    "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (fieldnotes; within six units, at least five per cent of the canvas)",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE ΔE2000, the real look-alike edges)",
    "loc_kind": null,
    "url": null
   },
   {
    "n": 9,
    "kind": "data",
-   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing",
+   "cite": "ColorHub sources: ISCC-NBS 1955 dictionary filing (data/sources/iscc-nbs-names.json, iscc-nbs-centroids.json) vs. the node's own computed-nearest block",
    "loc_kind": null,
-   "url": "https://books.google.com/ngrams"
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: garment palette twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: design-look palette twins (ΔE2000 ≤ 8)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: Pantone Color of the Year twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: film-palette twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive (23,778 paintings), two-lens computed match, as photographed",
+   "loc_kind": null,
+   "url": null
   }
  ],
  "questions": [
   {
-   "q": "In the pigment trade, Pompeian red was a name for what?",
+   "q": "Why do St Clair's and Heaton's descriptions of Pompeian Red actually disagree?",
    "choices": [
-    "A natural iron-oxide red",
-    "A mercury sulfide",
-    "A lake from madder",
-    "A plant dye"
+    "One calls it a dark brick red, the other a light, highly calcined iron oxide",
+    "They disagree on which country invented it",
+    "One says it is a dye, the other a pigment",
+    "They disagree on whether the color exists at all"
    ],
-   "answer": "A natural iron-oxide red",
+   "answer": "One calls it a dark brick red, the other a light, highly calcined iron oxide",
    "kind": "pick"
   },
   {
-   "q": "True or false: Napoleon invented Empire green.",
+   "q": "True or false: Napoleon personally started the fashion for \"Empire green,\" the color sometimes paired with Pompeian Red in First Empire France.",
    "choices": [
     "True",
     "False"
    ],
    "answer": "False",
    "kind": "true-false"
+  },
+  {
+   "q": "What role does Pompeian Red most often play inside a painting, by our own archive's measurement?",
+   "choices": [
+    "An accent, in a strong majority of its clearest matches",
+    "A hidden, barely-visible color",
+    "The lightest tone in the canvas",
+    "An even split across all roles"
+   ],
+   "answer": "An accent, in a strong majority of its clearest matches",
+   "kind": "pick"
   }
  ],
  "openers": [
-  "In the paint trade, Pompeian red could mean the same oxide red as Venetian red or Indian red."
+  "Two respected color dictionaries describe Pompeian Red so differently — one dark brick red, one light oxide — that they can't really be talking about the same shade.",
+  "Pompeian Red plays an accent role in four out of five of the paintings where our archive finds it, the single strongest role-concentration of any color in this pilot."
  ],
- "words": 340,
- "status": "checked",
+ "words": 950,
+ "status": "draft",
  "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
+  "by": "writer",
+  "date": "2026-10-09",
   "issues": [
-   "Reworded a 10-word run shared with Paterson. All claims traced to Paterson, St Clair, Pigment Compendium, Pastoureau."
+   "Depth wave pilot: built from color-kb concordance (9 hits) plus 16 existing fact cards (St Clair, Paterson, Pigment Compendium/Heaton, Pastoureau), the color graph's real look-alikes and traditional/alias cross-references, archive fieldnotes, and garment/look/film/Pantone twins. States the St Clair/Heaton disagreement directly and corrects the adjacent Napoleon/Empire-green myth."
   ]
  }
 }

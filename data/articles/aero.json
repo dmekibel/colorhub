@@ -6,24 +6,34 @@
   "Aero"
  ],
  "tier": "standard",
- "depth": "short",
- "lede": "Aero is a clear light blue first recorded by Maerz and Paul in 1920, in the years air travel itself was becoming a word for modern speed.",
+ "depth": "long",
+ "lede": "Aero is a clear, slightly grayed light blue that Maerz and Paul's 1930 color dictionary filed in 1920 as a textile-trade name, not, as the word's shape suggests, a nod to aviation.",
  "sections": [
   {
    "id": "name",
-   "title": "A name in the library",
-   "body": "Maerz and Paul's 1930 dictionary dates Aero to 1920, plate 36, swatch H 6 [1]. The ISCC-NBS system of 1955 lists it in block 186, among the grayish blues [1]. The name's link to aviation is not confirmed in the sources here, though the word and the decade line up [1].\n\nIn the color graph, Aero's closest neighbor is [[squill-blue]], 3.4 units away, with [[french-sky-blue]] and [[blue-jeans]] also near, and the basic term [[sky]] close behind at 4.5 [2]. [[baby-blue-eyes]], a separate library entry, sits 9.6 units off, paler and softer [2]. Munsell gives 2.2PB 7.2/7.7, a pale, moderately saturated blue [1]. The hex #7CB9E8 is a screen approximation; it is also a CSS Level 4 color keyword [1]."
+   "title": "A name in the trade, not the sky",
+   "body": "Maerz and Paul's 1930 dictionary dates Aero to 1920, plate 36, swatch H 6, and gives its origin in three words: a textile-trade name [1]. That is a specific, sourced answer, and it rules out the obvious guess: 1920 is early for \"aero-\" to mean air travel in popular use, and the dictionary does not connect the word to flight at all [1]. The exact product or trade the name served is undocumented in the sources consulted here [1].\n\nThe 1955 ISCC-NBS dictionary filed the exact name Aero under block 186, \"grayish blue\" [2], while our own graph's computed-nearest ISCC-NBS block for this exact hex is a neighboring one, block 181, \"light blue\" [3] — the real 1955 filing and the nearest-block computation land one neighborhood apart, which happens when a named color sits near a block boundary. Munsell gives 2.2PB 7.2/7.7, a pale, moderately saturated blue [1]. The hex #7CB9E8 is a screen approximation; it is also a CSS Level 4 color keyword [1]. On a painter's color wheel its rotated complement lands near [[tan]], [[cinnamon-buff]] and [[sandstone]] — the warm, sandy opposite of a cool, pale sky blue [9]."
+  },
+  {
+   "id": "neighbors",
+   "title": "Its neighbors",
+   "body": "In the color graph, Aero's closest neighbor is [[squill-blue]], 3.4 units away and almost the same color [4]. [[french-sky-blue]] sits 4.1 units off, purpler and more vivid; [[blue-jeans]] is 4.5 units off, more vivid and darker; the basic term [[sky]] is also 4.5 away, and lighter [4]. [[iceberg]], 5.4 units off, is darker, and [[pale-cerulean]], 5.5 off, is duller and lighter [4]. None of these six distances is small enough to call the same color as Aero, so it occupies its own small patch of pale, grayish blue rather than duplicating a neighbor [4]."
+  },
+  {
+   "id": "seen-in",
+   "title": "Seen in",
+   "body": "Pantone named a close cousin of this blue, Cerulean, its Color of the Year for 2000, 6.7 units from Aero [5]. Denim's first light-wash workwear blues land 9.1 units off, close enough to share a family resemblance but clearly a different cast [5]. Among design aesthetics, the closest full-palette matches are [[look:space-age|Space Age]], 1.2 units off on Aero itself, and [[look:minimalism|Minimalism]], 1.9 off, with [[look:brutalism|Brutalism]] a step further at 2.2 units on its neighbor Squill Blue [6]. On screen, the 2023 film [[film:barbie|Barbie]] carries a painted-sky blue 5.1 units from Aero, and the Pixar color-scripts tradition for soft pastel skies sits 7.6 units off [7]."
   },
   {
    "id": "field",
    "title": "Field notes",
-   "body": "Our archive finds this blue in 18 of 23,781 paintings, about 0.08 percent, as photographed [3]. The earliest dated match is Botticelli's *Mary Magdalene predella* (1425), five centuries before the name existed, a floor and not a first, since the archive's early centuries are thin [3]. The strongest later matches are skies and water, led by Frédéric Bazille's *The Western Ramparts at Aigues-Mortes* (1867) and Bernardo Bellotto's Venetian canal view, *The Campo di Santi Giovanni e Paolo* (1743) [3]. The 1800s carry the highest lift among centuries measured, about 1.7 times the base rate [3]. This is a computed color match on photographed, varnished canvases, not a pigment test [3]."
+   "body": "Our archive finds this blue in 25 of 23,778 paintings, about 0.11 percent as photographed; a stricter within-painting lens finds it in 17 [8]. That makes it rarer than 64 percent of the named colors in the archive [8]. Inside a painting it most often sits as a mid-tone, in 35 percent of its 17 clearest matches, ranked by lightness within each canvas so an aged varnish cannot fake the result [8].\n\nThe earliest match is Michelangelo's work from 1500, with the third-earliest dated to 1617 and the latest to 1926, 20 dated paintings in all [8]. The archive's early centuries are thin, so this is a floor, not a first; a 1500 match is 430 years before the name's own 1920 record, so it is a look-alike hue in an aged photograph, not proof that anyone called it Aero, or made a matching dye, that early [8]. The 1800s carry the strongest later lift, 1.3 times the expected rate among 8,344 paintings from that century [8]. In printed English the adjective sense of the word itself peaks in the 1940s, two decades after the dictionary's 1920 record [8]. This is a computed color match on photographed, varnished canvases, not a pigment test."
   }
  ],
  "aside": {
   "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "undocumented in the sources consulted",
+   "named_after": "a textile-trade name; the exact product or maker is undocumented in the sources consulted",
+   "first_recorded": "1920 (Maerz & Paul, 1930 dictionary, plate 36 H 6)",
    "source": "ColorHub color library"
   },
   "aka": [],
@@ -31,7 +41,9 @@
    "squill-blue",
    "french-sky-blue",
    "blue-jeans",
-   "sky"
+   "sky",
+   "iceberg",
+   "pale-cerulean"
   ],
   "parent": null,
   "children": [],
@@ -39,8 +51,9 @@
   "other_languages": []
  },
  "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 18,
+  "dataset": "ColorHub archive, 23,778 paintings, as photographed",
+  "n_present": 25,
+  "n_present_within_painting_lens": 17,
   "measured": {
    "lch": [
     72.8,
@@ -54,52 +67,107 @@
     ]
    ]
   },
-  "iscc": {
+  "iscc_computed_nearest": {
    "name": "light blue",
    "de": 5.7
+  },
+  "iscc_real_1955_filing": {
+   "name": "grayish blue",
+   "block": 186
   }
  },
  "notes": [
   {
    "n": 1,
    "kind": "data",
-   "cite": "ColorHub color library: Maerz & Paul 1930, Ridgway 1912, ISCC-NBS 1955, RAL entries",
+   "cite": "ColorHub color library: Maerz & Paul 1930 (plate 36 H 6, origin note), Munsell renotation",
    "loc_kind": null,
    "url": null
   },
   {
    "n": 2,
    "kind": "data",
-   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+   "cite": "ColorHub sources: ISCC-NBS 1955 dictionary filing (data/sources/iscc-nbs-names.json, iscc-nbs-centroids.json)",
    "loc_kind": null,
    "url": null
   },
   {
    "n": 3,
    "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "cite": "ColorHub color graph: this hex's own computed-nearest ISCC-NBS block (data/graph nodes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE ΔE2000, the real look-alike edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: fashion-history and Pantone Color of the Year twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: design-look palette twins (ΔE2000 ≤ 8)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: film-palette twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive (23,778 paintings), two-lens computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed painter's-wheel (RYB) complement, nearest core names",
    "loc_kind": null,
    "url": null
   }
  ],
  "questions": [
   {
-   "q": "In which decade does Maerz and Paul first record Aero?",
+   "q": "What does Maerz and Paul's 1930 dictionary say Aero's name actually comes from?",
    "choices": [
-    "The 1920s",
-    "The 1890s",
-    "The 1950s",
-    "The 1860s"
+    "A textile-trade name",
+    "The aviation industry",
+    "A 1920s race car",
+    "A chemical compound"
    ],
-   "answer": "The 1920s",
+   "answer": "A textile-trade name",
    "kind": "pick"
   },
   {
-   "q": "Why can Aero appear in a 1425 Botticelli painting, decades before the name existed?",
+   "q": "True or false: the real 1955 ISCC-NBS filing for the name \"Aero\" and our own computed-nearest ISCC-NBS block for its hex name the same category.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why can Aero appear in a Michelangelo-era painting from 1500, four centuries before the name existed?",
    "choices": [
     "The color match is on the painting's blue, not on who named it first",
     "The painting was repainted in the 1920s",
-    "Botticelli invented the color",
+    "Michelangelo invented the color",
     "The archive only includes paintings after 1920"
    ],
    "answer": "The color match is on the painting's blue, not on who named it first",
@@ -107,16 +175,16 @@
   }
  ],
  "openers": [
-  "Aero shows up in Botticelli five centuries before anyone called a color by that name."
+  "Aero reads like an aviation word, but the 1930 dictionary that first recorded it in 1920 calls it a textile-trade name instead.",
+  "Our own computed-nearest ISCC-NBS block for Aero's hex, and the real 1955 filing for the name Aero, land in two different neighborhoods of grayish blue."
  ],
- "words": 260,
- "status": "checked",
+ "words": 627,
+ "status": "draft",
  "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
+  "by": "writer",
+  "date": "2026-10-09",
   "issues": [
-   "Nearest-neighbor claim (name and/or distance) in the 'name' section and field.measured.nearest did not match data/graph/edges-*.json 'la' (the cited color-graph computation); corrected to the true nearest colors and distances, and updated aside.siblings to match.",
-   "lint 2026-10-09"
+   "Depth wave pass: replaced the unconfirmed aviation guess with the dictionary's own 'textile-trade name' origin; added the real-vs-computed ISCC-NBS filing distinction, full look-alike neighborhood, aesthetics-graph twins (films, fashion, design looks), and the within-painting archive lens."
   ]
  }
 }

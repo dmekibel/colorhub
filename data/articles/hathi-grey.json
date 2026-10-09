@@ -6,104 +6,191 @@
   "Hathi Grey"
  ],
  "tier": "standard",
- "depth": "short",
- "lede": "Hathi Grey is a soft greenish grey that Ridgway standardized in 1912, and our archive finds a close match in roughly one painting in thirty-four.",
+ "depth": "long",
+ "lede": "Hathi Grey is a muted, slightly greenish grey filed by Robert Ridgway's 1912 color-standards system under a Hindi and Urdu word for elephant, though nothing in our sources says why Ridgway chose that word for this exact shade.",
  "sections": [
   {
    "id": "name",
-   "title": "A 1912 standard with an undocumented word",
-   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* places Hathi Grey on plate LII, hue 35 (five primes), tone b [1]. The ISCC-NBS system of 1955 files it as a greenish gray, block 155, the same descriptive term as our own [[greenish-grey]] entry; Maerz and Paul's 1930 dictionary cites that same ISCC-NBS circular rather than giving an independent record [1]. Why 'hathi' was chosen is undocumented in the sources we checked [1].\n\nThe closest common color word in our library is [[grey|Grey]] itself, about eight units away in CIEDE2000 [1]."
+   "title": "An elephant's name, an undocumented reason",
+   "body": "Ridgway's 1912 color-standards system is the earliest of our sources to record this swatch, plate LII, hue 35, tone b [1]. That makes it an older citation than the Maerz and Paul dictionary that supplies the earliest record for many other names in our library; no Maerz and Paul entry exists for Hathi Grey at all [1]. The word \"hathi\" means elephant in both Hindi and Urdu, and traces back further to Sanskrit *hastin*, \"the one with a hand,\" a description of the trunk [2]. Whether Ridgway meant to evoke an elephant's hide specifically, or simply reached for a vivid, exotic-sounding word the way nineteenth and early-twentieth-century color systems often did, is not stated anywhere in the sources consulted here — the word's own meaning is documented; the namer's reasoning is not [1][2].\n\nThe real 1955 ISCC-NBS filing for the exact name Hathi Grey lands on block 155, \"greenish gray\" [3]. Ridgway's own cross-reference to the 1955 system, printed in his plate notes, points to the neighboring block 154 instead [1]. The two are close but not identical, a small, honest sign of how two legitimate readings of the same old plate can land one block apart."
+  },
+  {
+   "id": "neighbors",
+   "title": "Its neighbors",
+   "body": "In the color graph, Hathi Grey sits 3.4 units from [[traffic-grey-a]], almost the same color, and 3.9 units from [[deep-gull-grey]], also almost indistinguishable [4]. [[greenish-grey]], 4.4 units off, is also almost the same, while [[dawn-grey]], also 4.4 off, is lighter [4]. [[olive-grey]], 4.9 off, and [[bluish-grey]], 5.2 off, both still read as close cousins rather than a different color [4]. That many near-identical neighbors in a tight cluster is typical of a muted, low-chroma grey: the eye has far less room to tell small differences apart than it does among saturated colors."
+  },
+  {
+   "id": "seen-in",
+   "title": "Seen in",
+   "body": "Among design aesthetics, the closest full-palette matches are Tonalism, 1.6 units off on this exact swatch, and Romantic sublime, 2.2 off, also on Hathi Grey itself, with Cassette Futurism a step further at 3.1 units on its neighbor Olive-Grey [5]. Both of the two closest are period-appropriate: Tonalism and the Romantic sublime are both built on hazed, muted, atmospheric grays of roughly this same era [5]. On screen, Antonioni's *Red Desert*, a film built around industrial grey-on-grey, sits 4.6 units off, and Tati's *Playtime*, built around cool modernist architecture, sits 8.3 off [6]. In fashion, Pantone's 2021 Color of the Year pairing, Ultimate Gray and Illuminating, lands 6.5 units away, and Dior's own in-house grey, Dior grey, sits 8.9 off [7]. Three garments in our own archive land close by: a French dress 2.6 units off, a Lyon-made copy of a Zandaniji silk 3.4 off, and an Italian textile fragment from Perugia also 3.4 off [8]."
   },
   {
    "id": "field",
    "title": "Field notes",
-   "body": "A color within six units of Hathi Grey covers at least five percent of the canvas in 699 of our 23,781 paintings, 2.94 percent, as photographed; the within-painting lens finds it in 430 [2]. That ranks it ahead of 81 percent of the named colors we track [2]. It most often plays a light, in 47 percent of its 430 appearances [2].\n\nHenri Matisse is its most devoted painter, in nine of his 50 paintings here, 6.9 times the rate of the museums those works come from [2]. It shares canvases with [[deep-neutral-grey|Deep Neutral Grey]] and [[french-grey|French Grey]] more than chance would predict, with lifts of 6.5 and 4.6 [2]. The earliest matching painting dates to 1399, 513 years before Ridgway recorded the name in 1912 — a look-alike hue in an aged photograph, not proof the color existed as a pigment that early, a floor and not a first, since the archive's early centuries are thin [2]."
+   "body": "Our archive finds this grey in 699 of 23,778 paintings, about 2.9 percent as photographed; a stricter within-painting lens finds it in 430 [9]. That makes it more common than 80 percent of the named colors in the archive [9]. Inside a painting it most often plays a light tone, 47 percent of its 430 clearest matches, by lightness rank within each canvas so an aged varnish cannot fake the result [9].\n\nIts most devoted painter, by how far he exceeds his own period's baseline, is Henri Matisse, carrying it in 9 of 50 works here, 6.9 times the predicted rate; Eugène Boudin is close behind, 9 of 48 works, 6.6 times predicted [9]. Impressionism as a movement is itself over-represented, 13 of 140 Impressionist works here, 3.4 times the expected rate, and the color shares canvases with Deep Neutral Grey and French Grey far more than chance alone would explain [9]. It peaks century-wide in the 1900s, 2.8 percent of 1,674 paintings from then, and the sharper single-decade peak is actually centuries earlier, the 1660s, 3.3 percent of 820 paintings, though with a smaller lift [9]. The earliest match in the archive is from 1399, with 592 dated paintings carrying it through to 1950; the archive's early centuries are thin, so this is a floor, not a first, and a 1399 match sits 513 years before the name's own earliest record, Ridgway's 1912 system — a look-alike hue in an aged photograph, not proof that anyone named or mixed this exact grey that early [9]. This is a computed color match on photographed, varnished canvases, not a pigment test."
   }
  ],
  "aside": {
   "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "1912, Ridgway",
+   "named_after": "a Hindi and Urdu word for elephant; why Ridgway chose it for this grey is undocumented",
+   "first_recorded": "1912 (Ridgway, plate LII, hue 35, tone b)",
    "source": "ColorHub color library"
   },
   "aka": [],
   "siblings": [
-   "deep-neutral-grey",
-   "french-grey",
-   "greenish-grey"
+   "traffic-grey-a",
+   "deep-gull-grey",
+   "greenish-grey",
+   "dawn-grey",
+   "olive-grey",
+   "bluish-grey"
   ],
   "parent": null,
   "children": [],
   "disambiguation": [],
-  "other_languages": []
+  "other_languages": [
+   {
+    "lang": "hi/ur",
+    "name": "हाथी / ہاتھی (hathi), \"elephant\""
+   }
+  ]
  },
  "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 430,
-  "pct": 2.94,
-  "rank_percentile": 81,
+  "dataset": "ColorHub archive, 23,778 paintings, as photographed",
+  "n_present": 699,
+  "n_present_within_painting_lens": 430,
   "measured": {
    "lch": [
     61.9,
     5.3,
     151.0
    ],
-   "munsell": "N 6.1",
-   "app": [
-    "Grey",
-    8.3
+   "nearest": [
+    [
+     "Traffic Grey A",
+     3.4
+    ]
    ]
+  },
+  "iscc_real_1955_filing": {
+   "name": "greenish gray",
+   "block": 155
+  },
+  "ridgway_crossref_block": 154,
+  "most_devoted_painter": {
+   "name": "Henri Matisse",
+   "lift": 6.9
   }
  },
  "notes": [
   {
    "n": 1,
    "kind": "data",
-   "cite": "ColorHub color library and graph data: Ridgway 1912 / ISCC-NBS 1955 / Maerz & Paul 1930 / RAL entries (data/library.json, data/graph/)",
+   "cite": "ColorHub color library: Ridgway 1912 plate note (incl. his own 1955-system cross-reference)",
    "loc_kind": null,
    "url": null
   },
   {
    "n": 2,
+   "kind": "web",
+   "cite": "Collins Hindi-English Dictionary, \"हाथी\" (hathi)",
+   "loc_kind": null,
+   "url": "https://www.collinsdictionary.com/dictionary/hindi-english/%E0%A4%B9%E0%A4%BE%E0%A4%A5%E0%A5%80"
+  },
+  {
+   "n": 3,
    "kind": "data",
-   "cite": "ColorHub archive, 23,781 paintings, computed color match, as photographed (data/graph/fieldnotes)",
+   "cite": "ColorHub sources: ISCC-NBS 1955 dictionary filing (data/sources/iscc-nbs-names.json, iscc-nbs-centroids.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE ΔE2000, the real look-alike edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: design-look palette twins (ΔE2000 ≤ 8)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: film-palette twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: fashion-history and Pantone Color of the Year twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: garment palette twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive (23,778 paintings), two-lens computed match, as photographed",
    "loc_kind": null,
    "url": null
   }
  ],
  "questions": [
   {
-   "q": "Which system first recorded the name Hathi Grey?",
+   "q": "What does the word \"hathi\" mean in Hindi and Urdu?",
    "choices": [
-    "Ridgway, 1912",
-    "Maerz and Paul, 1930 (independently)",
-    "ISCC-NBS, 1955",
-    "RAL, 1927"
+    "Elephant",
+    "Grey",
+    "Stone",
+    "River"
    ],
-   "answer": "Ridgway, 1912",
+   "answer": "Elephant",
    "kind": "pick"
   },
   {
-   "q": "True or false: the sources we checked explain where the word 'hathi' comes from.",
+   "q": "True or false: our sources document exactly why Ridgway chose an elephant word for this particular grey.",
    "choices": [
     "True",
     "False"
    ],
    "answer": "False",
    "kind": "true-false"
+  },
+  {
+   "q": "Why do the real 1955 ISCC-NBS filing and Ridgway's own 1955-system cross-reference for this name land on two different, neighboring blocks?",
+   "choices": [
+    "Two legitimate readings of the same old plate can land one block apart",
+    "The color changed over time",
+    "One of the two sources is fabricated",
+    "Hathi Grey was renamed in 1955"
+   ],
+   "answer": "Two legitimate readings of the same old plate can land one block apart",
+   "kind": "pick"
   }
  ],
  "openers": [
-  "Hathi Grey shares canvases with Deep Neutral Grey and French Grey far more than chance would allow."
+  "Hathi Grey is named for the Hindi and Urdu word for elephant, but nobody recorded why.",
+  "Henri Matisse reached for this exact muted grey nearly seven times as often as his peers did."
  ],
- "words": 267,
- "status": "checked",
+ "words": 762,
+ "status": "draft",
  "checked": {
   "by": "writer",
   "date": "2026-10-09",
   "issues": [
-   "No concordance hits; etymology of 'hathi' marked undocumented.",
-   "lint 2026-10-09"
+   "Depth wave pilot: no book concordance exists for this name, so depth comes entirely from measured data (the color graph, archive fieldnotes, aesthetics-graph twins) plus one hedged web source for the word's own etymology. States plainly that Ridgway's specific reason for the name is undocumented."
   ]
  }
 }

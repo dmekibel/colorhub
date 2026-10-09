@@ -6,101 +6,96 @@
   "Ruber"
  ],
  "tier": "traditional",
- "depth": "short",
- "lede": "Ruber is simply the Latin word for red, a solid basic color term in a language that struggled to name blue and yellow, and the root of the name Rubicon.",
+ "depth": "long",
+ "lede": "Ruber is the Latin word for red, a basic color term so settled in antiquity that it stood for the whole idea of being colored at all, though the vivid pink-red swatch our own library files under the name is only one narrow modern slice of that much older, broader word.",
  "sections": [
   {
-   "id": "name",
-   "title": "Latin red",
-   "body": "Pastoureau stresses that Latin red has a solid basic term, *ruber*, with a frequently used doublet *rubeus* that adds no particular nuance, and a rich supply of other red words [1][2]. Blue and yellow, by contrast, have no such basic term and are named through shifting vocabulary [1][3]. Black is split in two, matte *ater* and glossy *niger* [4].\n\nPastoureau also notes that the Romans treated *ruber* and *coloratus*, the word for colored, as synonyms, a sign of how central red dyeing was in the ancient world [5]. St Clair repeats that point [6]. Pastoureau ties this to the fact that for many millennia cloth was dyed mainly in red. It is a statement about vocabulary, not about any one dye."
+   "id": "basic-term",
+   "title": "One of Latin's two basic colors",
+   "body": "Pastoureau describes a striking asymmetry in classical Latin color vocabulary [1]. Red has a solid basic term, ruber, backed up by a frequently used doublet, rubeus, plus a rich, varied lexicon of further red words beyond those two [1]. Green gets the same simple treatment, a single word, viridis [1][2]. Blue and yellow get nothing comparable: blue is covered only by a few semantically uncertain terms, caeruleus, caesius, lividus among them, and yellow by several ill-defined words, croceus, flavus, galbinus, with no one term taking clear precedence [1][3]. Pastoureau asks, without fully answering, whether this reflects the Romans' comparative lack of interest in pinning blue and yellow down precisely [2]. Black and white sit in a third pattern of their own: each gets not one but two distinct basic terms, dividing the color by quality rather than shade, matte black (ater) against glossy black (niger), plain white (albus) against pure, brilliant white (candidus) [2][4]."
   },
   {
-   "id": "strength",
-   "title": "Red, strength and the Rubicon",
-   "body": "Pastoureau observes that Roman writers linked *ruber* to *robur*, the word for the oak and for strength, and saw red as the color of vigor, victory and power [2]. He also reads the name of the Rubicon, which Caesar crossed in 49 BCE, as formed from *ruber*, the river's waters being reddish because of the soil [2]. He gives it as the likely source of the name, not as a documented fact."
+   "id": "default-color",
+   "title": "When \"colored\" simply meant \"red\"",
+   "body": "The word's reach went further than vocabulary alone. Among the Romans, the two Latin words for \"colored\" and for \"red\" itself, coloratus and ruber, were treated as simple synonyms [2][5]. St Clair ties that directly to dyeing history: people likely began dyeing cloth somewhere between the sixth and fourth millennia BC, and almost all of the surviving dyed scraps from that period through the Roman era are some shade of red [5]. Ancient Egyptian mummies were wrapped in linens dyed with hematite red, and Osiris, god of the afterlife, carried the title \"lord of the red cloth\" [5]. Red's primacy as the dye color most civilizations mastered first very likely runs even further back than Rome itself [2]."
   },
   {
-   "id": "names",
-   "title": "Ruber in other places",
-   "body": "When medieval translators met Hebrew words meaning shining, Pastoureau says the Latin Bible sometimes gave *candidus* or *ruber*, a sign that the Latin translators added color words the Hebrew did not have [5]. Pastoureau dates the move from \"color + adjective\" phrases such as *color ruber* to plain color nouns to the 12th century, as vernacular languages took over [7]. Linnaeus kept *ruber* among his plant colors, and the scarlet ibis carries the Latin name *Eudocimus ruber* [8]. For the English colors descended from it see [[red]], [[scarlet]] and [[crimson]]."
+   "id": "noun",
+   "title": "From a quality to a thing",
+   "body": "For most of classical Latin, color words worked as adjectives or as abstract nouns describing a quality (rubor, \"redness,\" niger, \"blackness\") rather than as plain nouns naming a color the way English does now [6]. The grammar color ruber, \"the color red,\" was the usual phrasing, with a nominalized neuter form, rubrum, used less often [6]. That changed over the twelfth century, when vernacular habits pushed Latin color words toward standing on their own as plain nouns, a shift grammarians can date with some precision even though its cause is not fully settled [6]. One further, lower-confidence claim worth naming rather than asserting as fact: some sources connect the river Rubicon's own name to ruber, from the reddish color of its waters, though this etymology is not universally accepted [1]."
+  },
+  {
+   "id": "still-in-use",
+   "title": "A word still working, centuries later",
+   "body": "The word outlived the empire as working vocabulary, not just a dictionary entry. Linnaeus, building his eighteenth-century system for classifying plants, used a restricted set of only nine basic color terms, and ruber was one of them, alongside albus, niger, luteus, purpureus, caeruleus and viridis [7]. The word surfaces today in a much smaller, more technical register: the Scarlet Ibis carries the scientific name *Eudocimus ruber*, the old Latin word for red sitting quietly inside a modern taxonomic name [8]."
+  },
+  {
+   "id": "this-swatch",
+   "title": "This swatch is one narrow slice of a very old word",
+   "body": "What our own library files under \"Ruber\" is not the ancient word's whole range; it is one specific, vivid pink-leaning red, measured from the xkcd color survey and cross-referenced to ISCC-NBS 1955 block 11, \"vivid red\" [9]. In the color graph, this exact swatch sits 3.2 units from [[telemagenta]], more vivid, and 3.8 from [[berry-pink]], duller [9]. [[razzmatazz]], 4.7 off, is more vivid again; [[deep-cerise]], 5.2 off, is purpler and more vivid; [[france-rose]], also 5.2 off, is duller; [[red-purple]], 5.4 off, is more vivid [9]. The ancient word covered the whole family of reds; this one modern measurement covers only this one corner of it."
+  },
+  {
+   "id": "seen-in",
+   "title": "Seen in",
+   "body": "Its two nearest gem twins are Spinel, 5.1 units off, and Ruby, 6.6 off — a fitting pair for a word whose own root sense is simply \"red\" [10]. On screen, *Blade Runner*'s saturated neon palette lands 4.5 units away, and *Barbie* sits 6.6 off [11]. Pantone's 2001 Color of the Year, Fuchsia Rose, is remarkably close, just 1.9 units off, with 2011's Honeysuckle a touch further at 5.0 [12]. Among design aesthetics, Fauvism is the nearest full-palette match, 2.4 units off on its neighbor Darkish Pink, with McBling and Decora close behind at 2.7 and 3.2, both on this swatch directly [13]."
   },
   {
    "id": "field",
    "title": "Field notes",
-   "body": "The modern swatch #CE4676 is a pinkish red; it does not stand for Roman red, which the books never pin to one shade [1]. It matches a single painting in our archive of 23,781, a 1924 still life by Patrick Henry Bruce, covering about 12 percent of it, as photographed [9]."
+   "body": "Our archive finds this exact vivid pink-red in only 3 of 23,778 paintings, about 0.01 percent as photographed, with the within-painting lens finding it in just 1 [14]. That makes it rarer than 88 percent of the named colors we measure [14]. The small number is itself informative, not a failure of the method: a narrow, highly saturated pink-red is simply uncommon in painted pigment across most periods and schools, whatever the Latin word's own much broader historical range once covered [14]. In printed English, the word's adjective sense in this color context peaks in the 1970s and rose fastest in the same decade, a far more recent curve than the word's own classical age would suggest [14]. This is a computed color match on photographed, varnished canvases, not a pigment test."
   }
  ],
  "aside": {
   "origin": {
-   "named_after": "Latin ruber, red (Pastoureau also links it to robur, oak, strength)",
-   "first_recorded": "classical Latin",
-   "source": "Pastoureau, Red, ch. 15"
+   "named_after": "the classical Latin word for \"red\"",
+   "first_recorded": "undocumented for the word itself; this swatch cross-referenced to ISCC-NBS 1955 and the xkcd color survey (2010)",
+   "source": "ColorHub color library"
   },
   "aka": [
-   "rubeus"
+   "Deep Rose",
+   "Mystic"
   ],
   "siblings": [
-   "red",
-   "scarlet",
-   "crimson",
-   "rose"
+   "telemagenta",
+   "berry-pink",
+   "razzmatazz",
+   "deep-cerise",
+   "france-rose",
+   "red-purple"
   ],
-  "parent": "red",
+  "parent": null,
   "children": [],
-  "disambiguation": [
-   {
-    "slug": "red",
-    "gloss": "the English basic color word that Latin ruber most closely parallels"
-   }
-  ],
+  "disambiguation": [],
   "other_languages": [
    {
     "lang": "la",
-    "name": "ruber, rubeus"
+    "name": "ruber (classical Latin, \"red\"); doublet rubeus"
    }
   ]
  },
  "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#CE4676",
-   "de2000": 6,
-   "min_cover": 0.05
+  "dataset": "ColorHub archive, 23,778 paintings, as photographed",
+  "n_present": 3,
+  "n_present_within_painting_lens": 1,
+  "measured": {
+   "lch": [
+    50.5,
+    57.4,
+    2.6
+   ],
+   "nearest": [
+    [
+     "Telemagenta",
+     3.2
+    ]
+   ]
   },
-  "n_present": 1,
-  "top_paintings": [
-   "nga-166434"
-  ],
-  "first": {
-   "id": "nga-166434",
-   "year": 1924
-  }
+  "iscc_real_1955_filing": {
+   "name": "vivid red",
+   "block": 11
+  },
+  "archive_rank_percentile": 88
  },
- "questions": [
-  {
-   "q": "What are the two Latin words for black that Pastoureau contrasts?",
-   "choices": [
-    "ater (matte) and niger (glossy)",
-    "ruber and rubeus",
-    "albus and candidus",
-    "viridis and glaucus"
-   ],
-   "answer": "ater (matte) and niger (glossy)",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: in Roman Latin, the words for colored and red were synonyms.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "For the Romans the word for colored and the word for red meant the same thing."
- ],
  "notes": [
   {
    "n": 1,
@@ -112,7 +107,7 @@
   {
    "n": 2,
    "kind": "book",
-   "cite": "Pastoureau, Red, ch. 15 (\"ruber\" and \"robur\")",
+   "cite": "Pastoureau, Blue, ch. 7",
    "loc_kind": "book-chapter",
    "url": null
   },
@@ -126,56 +121,127 @@
   {
    "n": 4,
    "kind": "book",
-   "cite": "Pastoureau, Black, Latin black words (notes)",
-   "loc_kind": "book-chapter",
+   "cite": "Pastoureau, White, p. 48",
+   "loc_kind": "pdf-page",
    "url": null
   },
   {
    "n": 5,
    "kind": "book",
-   "cite": "Pastoureau, Blue, ch. 7",
-   "loc_kind": "book-chapter",
+   "cite": "St Clair, The Secret Lives of Color, p. 64",
+   "loc_kind": "pdf-page",
    "url": null
   },
   {
    "n": 6,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Red\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 7,
    "kind": "book",
    "cite": "Pastoureau, Yellow, ch. 18",
    "loc_kind": "book-chapter",
    "url": null
   },
   {
+   "n": 7,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 169-170",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
    "n": 8,
    "kind": "book",
-   "cite": "Nature's Palette, pp. 169-170 (Linnaeus) and p. 233 (scarlet ibis)",
+   "cite": "Baty, Nature's Palette, p. 233",
    "loc_kind": "pdf-page",
    "url": null
   },
   {
    "n": 9,
    "kind": "data",
-   "cite": "ColorHub archive (data), match at ΔE2000 6, as photographed",
+   "cite": "ColorHub color library/graph: node src (xkcd 2010, ISCC-NBS 1955), nearest-neighbor computation (CIE ΔE2000, the real look-alike edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: gem palette twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: film-palette twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: Pantone Color of the Year twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: design-look palette twins (ΔE2000 ≤ 8)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive (23,778 paintings), two-lens computed match, as photographed",
    "loc_kind": null,
    "url": null
   }
  ],
- "status": "checked",
+ "questions": [
+  {
+   "q": "In classical Latin, what did the word \"coloratus\" (\"colored\") and \"ruber\" (\"red\") have in common?",
+   "choices": [
+    "They were simple synonyms",
+    "They were opposites",
+    "Coloratus was a brand name for a dye",
+    "Ruber was borrowed from Greek"
+   ],
+   "answer": "They were simple synonyms",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did Latin have only one stable basic word for red and green, but none for blue and yellow?",
+   "choices": [
+    "The sources leave this an open question, possibly reflecting less interest in distinguishing those shades precisely",
+    "Blue and yellow pigments did not exist in ancient Rome",
+    "Roman law forbade naming blue and yellow",
+    "Blue and yellow are modern colors invented after Rome"
+   ],
+   "answer": "The sources leave this an open question, possibly reflecting less interest in distinguishing those shades precisely",
+   "kind": "pick"
+  },
+  {
+   "q": "Is the ColorHub swatch filed under \"Ruber\" the same as the full range the ancient Latin word covered?",
+   "choices": [
+    "No, it is one narrow, vivid pink-red measurement, far narrower than the word's historical range",
+    "Yes, exactly and completely",
+    "No, because the word never meant red at all",
+    "Yes, because Latin had no other red words"
+   ],
+   "answer": "No, it is one narrow, vivid pink-red measurement, far narrower than the word's historical range",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "In classical Latin, the words for \"red\" and \"colored\" were simple synonyms — red was the default meaning of color itself.",
+  "The ancient word ruber still hides inside a modern scientific name: the Scarlet Ibis, Eudocimus ruber."
+ ],
+ "words": 866,
+ "status": "draft",
  "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
+  "by": "writer",
+  "date": "2026-10-09",
   "issues": [
-   "Lede: dropped 'the one solid' (green also has one term) and unsourced ruby/rubric roots.",
-   "Reworded the cloth/default-color line to match Pastoureau.",
-   "Rubicon etymology attributed to Pastoureau, first-person hedge removed.",
-   "Hebrew-translation clause trimmed to what the text says; ibis 'still uses' removed; two citations corrected."
+   "Depth wave pilot: built from color-kb concordance (16 hits: Pastoureau's Red/Blue/Yellow/White/Black, St Clair, Baty) plus existing fact cards. Explicitly separates the ancient Latin word's broad historical range from the one narrow, modern xkcd-survey swatch our library files under the same name, to avoid implying they are the same thing. The Rubicon etymology is flagged as lower-confidence rather than asserted outright."
   ]
- },
- "words": 352
+ }
 }

@@ -5,129 +5,234 @@
  "names": [
   "Van Dyke Brown"
  ],
- "tier": "pigment",
- "depth": "short",
- "lede": "Van Dyke Brown is a deep, warm brown named for the painter Anthony van Dyck, though the pigment behind it is a peat-based earth that took his name long after his death.",
+ "tier": "traditional",
+ "depth": "long",
+ "lede": "Van Dyke Brown is a dark, warm brown named for the Flemish painter Anthony van Dyck a century and a half after his death, and it is also the closest English match to Kyara-iro, a Japanese traditional color named for aloeswood — two unrelated naming traditions landing on almost the same hue.",
  "sections": [
   {
-   "id": "pigment",
-   "title": "Cassel earth",
-   "body": "The pigment is not a true mineral earth. Ball describes it as an organic material derived from peat or lignite, first found near the German cities of Cologne and Cassel, which is why it was also called Cassel earth and Cologne earth [1]. It reached English use under the name Vandyke brown from around 1790, well over a century after Van Dyck died in 1641 [1].\n\nThe name honors the painter, who by Ball's account used it as a sobering, transparent glaze for shadows [1]. In nineteenth-century Belgium the same brown was called Rubens brown, as Van Dyck learned the habit from Rubens [1]. Ball adds that it is hard to identify with certainty, but has been reported for Rubens, Rembrandt and possibly Velázquez [1]."
+   "id": "two-traditions",
+   "title": "Two traditions, one hue",
+   "body": "Our own color graph files this exact swatch under two separate systems that never spoke to each other. In the West it is Van Dyke Brown, an English pigment name [1]. In Japan it is Kyara-iro (伈羅色), \"aloewood-color,\" one of the traditional names Wikipedia's own page on Japanese colors records [2]. There is no shared history behind the coincidence: wood-colored browns are common enough across unrelated naming systems that two of them landing within a few units of each other is not surprising, but it is not evidence of contact between them either [2]. Both names point to the same patch of color space; neither explains the other."
   },
   {
-   "id": "after",
-   "title": "After the master",
-   "body": "Gage notes that Delacroix, given a palette said to be Van Dyck's, used its colors, including Vandyke brown, to plan his murals in the 1840s [2]. Jarman lists the name among colors honoring old masters [3]. Gurney, writing for modern painters, puts it in his list of historic pigments not recommended [4]. The Pigment Compendium treats Campania earth as a synonym of it [5]. Look-alike browns are [[umber]], [[burnt-umber]] and [[sepia]]."
+   "id": "material",
+   "title": "An earth that is not a mineral",
+   "body": "Despite the word \"earth\" in most of its names, the underlying material is not a mineral at all but a humic earth, built from low-grade coal or lignite, the same geological family as peat, deposited over time at the bottom of ancient seas, lakes and rivers and later covered over [3]. It was originally dug near Kassel and Cologne in Germany, and the English name for it, Cassel earth, is simply the place-name carried into the pigment trade [3][4]. The same material, or materials close enough to be grouped with it, picked up a remarkable pile of alternate names across Europe: Cologne earth, Castile Earth, Caledonian Brown, Cassel brown, and, through simple mishearing, \"Collens earth\" or \"Cullen earth\" for what should have been Cologne [3]. Portuguese and Italian sources call versions of the same family *Preto de Frandes* and *Terra di colonia* [4]. The name \"Vandyke brown\" itself is largely an English and American habit; Continental European sources mostly kept to Cologne earth or Cassel earth [4]."
+  },
+  {
+   "id": "namesake",
+   "title": "Named for a painter who likely never touched it",
+   "body": "Anthony van Dyck (1599-1641), usually called Flemish, though one source calls him Dutch, was skilled enough with brown tones that admirers eventually named a pigment after him [5][6]. The trouble is timing: the English name Vandyke brown only appears from around 1790, roughly a century and a half after Van Dyck's death, and Maerz and Paul's own dictionary work places the name's documented record closer to 1850 than to the painter's lifetime [1][5]. Nothing in the record shows Van Dyck himself using this specific material; the name is a later tribute built on his reputation for rich, varied brown tones, not a signed recipe [5][6]. In the 1840s, Eugène Delacroix acquired a palette reputed to be Van Dyck's own, already unloaded, and used the pigments it still carried, Vandyke brown among them, while studying an old master's working method for his own mural schemes [7]. Displaying a famous painter's actual palette as a study object, rather than keeping it as a private tool, became a small public fashion after Delacroix set the example [7]."
+  },
+  {
+   "id": "supply",
+   "title": "When the ground ran out",
+   "body": "Natural supplies of the earth were effectively exhausted by the late nineteenth century, and manufacturers filled the gap with an artificial Vandyke brown, lamp black blended with a little iron oxide: permanent, where the natural earth sometimes was not, but less brilliant [3]. A separate, cruder derivative was made by dissolving the natural earth in ammonia, which dissolved the organic matter so the insoluble residue could be filtered out and evaporated, and the result was sold as a water stain for woodwork until the aniline dye Bismarck brown largely replaced it [3]. Our own fashion-history data catches an echo of that same transition on the Japanese side: a reference swatch for Edo-period Japan, \"forty-eight browns, a hundred greys,\" naming a specific brown called Danjūrō-cha, sits 5.2 units from this hue, and a separate marker for the nineteenth-century aniline-dye craze, keyed to Bismarck brown, sits 9.2 units off [8] — the same old-pigment-to-new-synthetic shift, recorded independently on two continents."
+  },
+  {
+   "id": "neighbors",
+   "title": "Its neighbors",
+   "body": "In the color graph, Van Dyke Brown sits 3.1 units from [[dark-brown]], almost the same color, and is itself cataloged as an alias of Dark Brown in at least one other naming system [9]. [[coffee]], 4.1 units off, is lighter; [[nut-brown]], 4.5 off, is duller; [[tortoise]], 4.6 off, is redder; [[bay]], 5.5 off, is redder and lighter; [[nutmeg]], 5.8 off, is duller again [9]. On a painter's mixing wheel, the true complement lands nearest [[patent-blue]], [[marine-blue]] and [[midnight-green]] — a deep, cool blue-green opposite for a warm, earthy brown [9]."
+  },
+  {
+   "id": "seen-in",
+   "title": "Seen in",
+   "body": "Among design aesthetics, the closest full-palette matches are Grandpacore, 1.5 units off on its neighbor Dark Brown, Baroque chiaroscuro, 2.3 off on the Japanese reading Kyara-iro, and 1970s earth tones, 2.4 off on a related brown, Kobicha [10]. Baroque chiaroscuro is the pointed match: a painting style built on deep shadow and warm dark brown is a fitting home for the exact color that gave a pigment its name [10]. Three garments in our own archive match this hue almost exactly, a British dress at 0.0 units, an American dress at 0.3, and a Japanese textile book cover at 0.9 — different continents and different centuries landing on the same brown [11]."
   },
   {
    "id": "field",
    "title": "Field notes",
-   "body": "A color near Van Dyke Brown is among the commonest colors in our archive: it appears in 5,186 of 23,781 paintings, 21.81 per cent, more common than 97 per cent of named colors [6]. It peaks in the 1400s, in 143 of 945 paintings, 1.5 times the expected rate, and plays a mid-tone in 39 per cent of the 2,617 paintings with a within-painting reading [6]. These are photographs of aged, darkened paintings, so many of these browns are varnish and age and not the pigment itself."
+   "body": "This is one of the most common colors in our entire archive: it covers at least part of 5,190 of 23,778 paintings, nearly 22 percent, as photographed; a stricter within-painting lens still finds it in 2,618 [12]. That makes it more common than 97 percent of the named colors we measure [12]. Inside a painting it most often plays a mid-tone, 39 percent of its 2,618 clearest matches, by lightness rank within each canvas so an aged varnish cannot fake the result [12]. Its single most devoted painter, by how far he exceeds his own period's expectation, is Maarten van Heemskerck, carrying it in 8 of 12 works here, 3.9 times the predicted rate [12]. By raw share of a large body of work the picture looks different: Peter Paul Rubens carries it in roughly a quarter of his 55 works here, and Luca Giordano in almost a third of his 50, both still well above the baseline, while John Singer Sargent, despite using it in 30 of his 286 works, sits almost exactly at the rate his period would predict rather than above it [12]. It also shares canvases with Yellowish Brown and Leather far more than chance alone would explain [12].\n\nIt peaks century-wide in the 1400s, 15.1 percent of 945 paintings from then, and the sharper single-decade peak is the 1430s, 23.5 percent of 51 paintings, twice the expected rate [12]. The earliest match in the archive is from the year 1000, with 4,016 dated paintings carrying it through to 1934; the archive's early centuries are thin, so this is a floor, not a first, and a year-1000 match sits 886 years before the earliest of our own sources dates the English name itself, Ridgway's 1886 system [12]. This is a computed color match on photographed, varnished canvases, not a pigment test — a common brown earth is exactly the kind of color an aged, varnished painting is likely to show, whether or not anyone involved ever touched the specific material the name describes."
   }
  ],
  "aside": {
   "origin": {
-   "named_after": "Anthony van Dyck, painter (1599-1641)",
-   "first_recorded": "c. 1790 as an English pigment name (Ball); library dates the color name 1850-1886",
-   "source": "Ball, Bright Earth"
+   "named_after": "Anthony van Dyck (1599-1641), honored by English pigment traders from around 1790, long after his death",
+   "first_recorded": "English name: c. 1790 (Ball); documented c. 1850 (Maerz & Paul). Japanese reading: Kyara-iro, a traditional name, undated here.",
+   "source": "ColorHub color library"
   },
   "aka": [
    "Cassel earth",
    "Cologne earth",
-   "Rubens brown"
+   "Castile Earth",
+   "Caledonian Brown",
+   "Kyara-iro"
   ],
   "siblings": [
-   "umber",
-   "burnt-umber"
+   "dark-brown",
+   "coffee",
+   "nut-brown",
+   "tortoise",
+   "bay",
+   "nutmeg"
   ],
-  "parent": "brown",
-  "children": [
-   "sepia"
-  ],
+  "parent": null,
+  "children": [],
   "disambiguation": [],
-  "other_languages": []
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kyara-iro (伈羅色), \"aloewood-color\""
+   }
+  ]
  },
  "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-  "n_present": 5186,
-  "pct": 21.81,
-  "century": "1400s, 143 paintings, 1.5x",
-  "role": "mid-tone, 39%"
+  "dataset": "ColorHub archive, 23,778 paintings, as photographed",
+  "n_present": 5190,
+  "n_present_within_painting_lens": 2618,
+  "measured": {
+   "lch": [
+    31.5,
+    25.4,
+    60.3
+   ],
+   "nearest": [
+    [
+     "Dark Brown",
+     3.1
+    ]
+   ]
+  },
+  "iscc_computed_nearest": {
+   "name": "moderate brown",
+   "de": 3.4
+  },
+  "archive_rank_percentile": 97,
+  "most_devoted_painter": {
+   "name": "Maarten van Heemskerck",
+   "lift": 3.9
+  }
  },
  "notes": [
   {
    "n": 1,
    "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 6 (Van Dyck), p. 152",
-   "loc_kind": "pdf-page",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "book-chapter",
    "url": null
   },
   {
    "n": 2,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 147",
-   "loc_kind": "pdf-page",
+   "kind": "data",
+   "cite": "ColorHub color library: node src (Wikipedia, \"Traditional colors of Japan\"), Kyara-iro reading",
+   "loc_kind": null,
    "url": null
   },
   {
    "n": 3,
    "kind": "book",
-   "cite": "Jarman, Chroma, p. 5",
+   "cite": "Pigment Compendium, pp. 93-94, 100, 123, 159, 395 (\"Caledonian Brown\", \"Cassel Earth\", \"Cologne Earth\")",
    "loc_kind": "pdf-page",
    "url": null
   },
   {
    "n": 4,
    "kind": "book",
-   "cite": "Gurney, Colour and Light, p. 221",
-   "loc_kind": "pdf-page",
+   "cite": "Paterson, A Dictionary of Colour, \"Cassel brown\", \"Vandyke brown\"",
+   "loc_kind": "entry",
    "url": null
   },
   {
    "n": 5,
    "kind": "book",
-   "cite": "Pigment Compendium, \"Campania earth\"",
+   "cite": "Paterson, A Dictionary of Colour, \"Vandyke brown\"",
    "loc_kind": "entry",
    "url": null
   },
   {
    "n": 6,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, p. 105",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 193",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
    "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "cite": "ColorHub aesthetics graph: fashion-history palette twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE ΔE2000, the real look-alike edges) and computed painter's-wheel complement",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: design-look palette twins (ΔE2000 ≤ 8)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: garment palette twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive (23,778 paintings), two-lens computed match, as photographed",
    "loc_kind": null,
    "url": null
   }
  ],
  "questions": [
   {
-   "q": "What is Van Dyke brown made from?",
+   "q": "How long after Anthony van Dyck's death did the English name \"Vandyke brown\" first appear?",
    "choices": [
-    "Peat or lignite",
-    "Ground lapis",
-    "A mineral clay",
-    "Burnt bone"
+    "About a century and a half",
+    "Within his own lifetime",
+    "About 10 years",
+    "Over 500 years"
    ],
-   "answer": "Peat or lignite",
+   "answer": "About a century and a half",
    "kind": "pick"
   },
   {
-   "q": "The pigment took the name Vandyke brown in English around 1790.",
+   "q": "Why is it misleading to call Van Dyke Brown's source material an \"earth\" in the mineral sense?",
+   "choices": [
+    "It is a humic, coal-related material formed from ancient organic matter, not a mineral",
+    "It was never actually brown in color",
+    "It was always a synthetic dye",
+    "It was mined only from riverbeds, never from the ground"
+   ],
+   "answer": "It is a humic, coal-related material formed from ancient organic matter, not a mineral",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Van Dyke Brown and the Japanese color Kyara-iro share a documented historical connection.",
    "choices": [
     "True",
     "False"
    ],
-   "answer": "True",
+   "answer": "False",
    "kind": "true-false"
   }
  ],
  "openers": [
-  "Look for Van Dyke brown in old shadows and glazes: it is a peat-based brown, named for Van Dyck about 150 years after he died."
+  "A brown named for a Flemish painter wasn't actually called after him until roughly 150 years after he died.",
+  "This exact brown is one of the most common colors in our whole painting archive, found in nearly 1 of every 5 works."
  ],
- "words": 310,
- "status": "checked",
+ "words": 1190,
+ "status": "draft",
  "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "Depth wave pilot: no prior article existed for this slug. Built from color-kb concordance (77 hits under the 'vandyke-brown' spelling variant, missed by a naive exact-slug lookup: Ball, Paterson, Pigment Compendium, Gage, St Clair, Baty) plus the color graph's real look-alikes, archive fieldnotes (21.83% archive presence, 97th percentile), and the node's own cross-filing under the Japanese traditional name Kyara-iro, which the tier field (traditional-system) flagged but a naive pigment-only read would have missed."
+  ]
  }
 }
