@@ -1,259 +1,259 @@
 {
- "slug": "opal",
- "name": "Opal",
- "hex": "#A8C3BC",
- "names": [
-  "Opal"
- ],
- "tier": "pigment",
- "depth": "long",
- "lede": "Opal is the pale, milky grey-green of a stone famous for the opposite: a gem whose own color is a shifting play of flashes, and whose name as a plain color means something quiet and uncertain.",
- "sections": [
-  {
-   "id": "swatch",
-   "title": "A color named for a stone that will not hold still",
-   "body": "Paterson defines *opal* as the color of the precious stone, sometimes a milky bluish green, and adds that the color is uncertain [1]. The word also stretches to any changing or uncertain range of colors, after the changeability of the stone [1]. Our swatch follows the quiet reading, a pale greenish grey that Ridgway plotted in 1912 and Maerz and Paul listed in 1930, with that dictionary dating the name as a color to 1921 [9].\n\nIts nearest neighbors are two of Ridgway's own glaucous greys, Deep Bluish Glaucous and Bluish Glaucous, 1.7 and 2.0 units away on the CIEDE2000 scale; compare [[glaucous]] [9]. Its nearest ISCC-NBS category is light greenish gray, 5.8 units off [9]. The related word *opaline*, Paterson says, is a light muted green, and *opalescent* and *opalesque* describe an iridescent quality like the stone's [1].\n\nThe swatch is the stone in its quietest mood, not its fire. Pastoureau adds that the stone's color in antiquity varied by period, description and variety, and is not always the one we link to it today [8]."
-  },
-  {
-   "id": "stone",
-   "title": "What opal is",
-   "body": "Opal is silica with water in it. Finlay gives its formula as SiO2 with a variable amount of water, which he puts at five to ten per cent of the stone's volume [3]. Unlike most gems it is not a crystal: the *Pigment Compendium* places it among the amorphous or cryptocrystalline forms of silicon dioxide, the same broad family as the diatom shells used as a pale pigment [6].\n\nIts color is physical, not chemical. Finlay contrasts opal's iridescence, which comes from the texture of the surface splitting light, with the color of most objects, which arises as light is transformed inside them [4]. Livingstone files opals with butterfly wings, pearls and soap bubbles as colors made by interference and diffraction [5], and Paterson names opals among the examples of a diffraction grating [1]. See the gem as [[gem:opal|opal]]; Jarman groups it with [[gem:moonstone|moonstone]] and the shell lining called mother-of-[[pearl]] as cool, mysterious, iridescent things [12],.\n\nIn Werner's color nomenclature, as Baty describes Syme's 1821 edition, the mineral example for skimmed-milk white is common opal [7]. That fits the swatch better than the flashing stone does."
-  },
-  {
-   "id": "order",
-   "title": "Order makes the fire",
-   "body": "Before the nineteenth century, Finlay reports, scientists guessed that precious opal held trapped oil, or a net of tiny cracks, or that its water caused the color [3]. The water theory fails, because common and precious opal hold similar amounts [3]. The German scientist H. Behrens came close in 1871 by proposing thin curved plates that focus light [3].\n\nThe answer came in the 1960s, when Australian researchers magnified opals thirty thousand times and found silica spheres several hundred nanometers across, about the wavelength of visible light [3]. Precious opal differs from common opal not in its material but in its order. The spheres lie in neat rows and the light returns as bright colors, while in common opal they lie in no order and the light scatters [3]. Larger spheres give [[red]], and smaller ones the more usual [[blue]] [3]."
-  },
-  {
-   "id": "rome",
-   "title": "A senator's opal",
-   "body": "Finlay tells the best-known opal story of antiquity. In 35 B.C. the Roman senator Nonius owned an opal the size of a hazelnut, valued at two million sesterces, enough for a villa or two in a good part of Rome [3]. Every opal then known in Europe came from the mines of Czernowitza, in present-day Slovakia, a place Rome never conquered, which made them rarer than other gems [3]. Nonius refused to sell, and that was where his trouble began [3]. Among the books we read only Finlay tells it, so the details are his telling [3].\n\nOpals stayed prized afterward. An opal described as white as snow, with splashes of red wine, was the central stone of a thirteenth-century imperial crown of the Holy Roman Empire; it was called the Orphanus, perhaps because it had no equal [3]. In 1584 Queen Elizabeth I received an opal parure from Sir Christopher Hatton [3]. Napoleon later gave Josephine a red opal of nearly 140 grams, named the Burning of Troy [3]."
-  },
-  {
-   "id": "australia",
-   "title": "Australia and the Eulo Queen",
-   "body": "From the 1870s onward, Australia's deserts have supplied most of the world's opal [3]. Finlay sketches the types: pale stones at Coober Pedy in South Australia, boulder opal in Queensland, and dark opal at Lightning Ridge in New South Wales [3]. Mexico and Nevada also produce opals, often [[orange]] \"fire opals\", but far fewer [3].\n\nIn the 1890s, in outback Queensland, Isobel Robinson, known as the Eulo Queen, bought opals from miners and wore a gold belt studded with opals the size of Victorian pennies [3]. Her holdings by 1898 included two hotels, a casino and two shops, a butcher's and a general store [3]."
-  },
-  {
-   "id": "luck",
-   "title": "The unlucky stone, and where that came from",
-   "body": "Opal's reputation for bad luck, Finlay says, seems to come from the nineteenth-century novel *Anne of Geierstein* by Sir Walter Scott [3]. In it a baroness tied to an opal brooch crumbles to ash after a drop of holy water falls on the stone [3]. Scott was playing with real traits: opal is among the softer gems, it cracks and dulls if put too near fire, and it was thought to change in contact with the body [3]. So the idea that opal has always been unlucky is a legend with a traceable author, and Rome's collectors, as the Nonius story shows, wanted it badly [3].\n\nOlder belief ran the other way. Birren lists opal among the gems credited with curing diseases of the eye [10]. Today opal is October's birthstone, alongside tourmaline, in Paterson's list, and Finlay's modern anniversary list gives it to the thirty-fourth year [2][3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 174 of them [11]. They cluster in the 1800s, with 99 of 8,345 paintings, about 1.2 per cent, which is 1.6 times the rate the museums' own mix predicts [11]. The peak decade is the 1860s, with 21 of 926 [11]. Impressionism holds it in 4 of its 140 paintings here [11].\n\nThe painters who reach for it are landscape and seaside painters: [[painter:eugene-boudin|Boudin]] in 5 of 33 works, [[painter:alfred-sisley|Sisley]] in 4 of 50 and [[painter:henri-rousseau|Henri Rousseau]] in 3 of 13 [11]. The two biggest patches are in Sisley's *First Snow at Veneux-Nadon* of 1878, where it covers about 60 per cent of the canvas, and Boudin's *Women on the Beach at Berck* of 1881, at 48 per cent [11]. See [[painting:nga-62641|First Snow at Veneux-Nadon]] and [[painting:nga-52159|Women on the Beach at Berck]]. In 91 per cent of the paintings where it appears it plays the highlight, one of the lightest colors in the picture [11].\n\nSo in paint this opal is a snow, surf and sky-haze color, nothing like the gem's fire. As always these are photographs of aged, varnished paintings, and a color match is not a pigment test [11]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the gemstone opal",
-   "first_recorded": "as a color: Ridgway 1912; Maerz & Paul date it 1921",
-   "source": "Paterson, A Dictionary of Colour; Finlay, Jewels, ch. 13"
-  },
-  "aka": [
-   "opaline (Paterson: a light muted green)"
+  "slug": "opal",
+  "name": "Opal",
+  "hex": "#A8C3BC",
+  "names": [
+    "Opal"
   ],
-  "siblings": [
-   "glaucous",
-   "pearl"
+  "tier": "pigment",
+  "depth": "long",
+  "lede": "Opal is the pale, milky grey-green of a stone famous for the opposite: a gem whose own color is a shifting play of flashes, and whose name as a plain color means something quiet and uncertain.",
+  "sections": [
+    {
+      "id": "swatch",
+      "title": "A color named for a stone that will not hold still",
+      "body": "Paterson defines *opal* as the color of the precious stone, sometimes a milky bluish green, and adds that the color is uncertain [1]. The word also stretches to any changing or uncertain range of colors, after the changeability of the stone [1]. Our swatch follows the quiet reading, a pale greenish grey that Ridgway plotted in 1912 and Maerz and Paul listed in 1930, with that dictionary dating the name as a color to 1921 [9].\n\nIts nearest neighbors are two of Ridgway's own glaucous greys, Deep Bluish Glaucous and Bluish Glaucous, 1.7 and 2.0 units away on the CIEDE2000 scale; compare [[dusty-blue]] [9]. Its nearest ISCC-NBS category is light greenish gray, 5.8 units off [9]. The related word *opaline*, Paterson says, is a light muted green, and *opalescent* and *opalesque* describe an iridescent quality like the stone's [1].\n\nThe swatch is the stone in its quietest mood, not its fire. Pastoureau adds that the stone's color in antiquity varied by period, description and variety, and is not always the one we link to it today [8]."
+    },
+    {
+      "id": "stone",
+      "title": "What opal is",
+      "body": "Opal is silica with water in it. Finlay gives its formula as SiO2 with a variable amount of water, which he puts at five to ten per cent of the stone's volume [3]. Unlike most gems it is not a crystal: the *Pigment Compendium* places it among the amorphous or cryptocrystalline forms of silicon dioxide, the same broad family as the diatom shells used as a pale pigment [6].\n\nIts color is physical, not chemical. Finlay contrasts opal's iridescence, which comes from the texture of the surface splitting light, with the color of most objects, which arises as light is transformed inside them [4]. Livingstone files opals with butterfly wings, pearls and soap bubbles as colors made by interference and diffraction [5], and Paterson names opals among the examples of a diffraction grating [1]. See the gem as [[gem:opal|opal]]; Jarman groups it with [[gem:moonstone|moonstone]] and the shell lining called mother-of-[[pearl]] as cool, mysterious, iridescent things [12],.\n\nIn Werner's color nomenclature, as Baty describes Syme's 1821 edition, the mineral example for skimmed-milk white is common opal [7]. That fits the swatch better than the flashing stone does."
+    },
+    {
+      "id": "order",
+      "title": "Order makes the fire",
+      "body": "Before the nineteenth century, Finlay reports, scientists guessed that precious opal held trapped oil, or a net of tiny cracks, or that its water caused the color [3]. The water theory fails, because common and precious opal hold similar amounts [3]. The German scientist H. Behrens came close in 1871 by proposing thin curved plates that focus light [3].\n\nThe answer came in the 1960s, when Australian researchers magnified opals thirty thousand times and found silica spheres several hundred nanometers across, about the wavelength of visible light [3]. Precious opal differs from common opal not in its material but in its order. The spheres lie in neat rows and the light returns as bright colors, while in common opal they lie in no order and the light scatters [3]. Larger spheres give [[red]], and smaller ones the more usual [[blue]] [3]."
+    },
+    {
+      "id": "rome",
+      "title": "A senator's opal",
+      "body": "Finlay tells the best-known opal story of antiquity. In 35 B.C. the Roman senator Nonius owned an opal the size of a hazelnut, valued at two million sesterces, enough for a villa or two in a good part of Rome [3]. Every opal then known in Europe came from the mines of Czernowitza, in present-day Slovakia, a place Rome never conquered, which made them rarer than other gems [3]. Nonius refused to sell, and that was where his trouble began [3]. Among the books we read only Finlay tells it, so the details are his telling [3].\n\nOpals stayed prized afterward. An opal described as white as snow, with splashes of red wine, was the central stone of a thirteenth-century imperial crown of the Holy Roman Empire; it was called the Orphanus, perhaps because it had no equal [3]. In 1584 Queen Elizabeth I received an opal parure from Sir Christopher Hatton [3]. Napoleon later gave Josephine a red opal of nearly 140 grams, named the Burning of Troy [3]."
+    },
+    {
+      "id": "australia",
+      "title": "Australia and the Eulo Queen",
+      "body": "From the 1870s onward, Australia's deserts have supplied most of the world's opal [3]. Finlay sketches the types: pale stones at Coober Pedy in South Australia, boulder opal in Queensland, and dark opal at Lightning Ridge in New South Wales [3]. Mexico and Nevada also produce opals, often [[orange]] \"fire opals\", but far fewer [3].\n\nIn the 1890s, in outback Queensland, Isobel Robinson, known as the Eulo Queen, bought opals from miners and wore a gold belt studded with opals the size of Victorian pennies [3]. Her holdings by 1898 included two hotels, a casino and two shops, a butcher's and a general store [3]."
+    },
+    {
+      "id": "luck",
+      "title": "The unlucky stone, and where that came from",
+      "body": "Opal's reputation for bad luck, Finlay says, seems to come from the nineteenth-century novel *Anne of Geierstein* by Sir Walter Scott [3]. In it a baroness tied to an opal brooch crumbles to ash after a drop of holy water falls on the stone [3]. Scott was playing with real traits: opal is among the softer gems, it cracks and dulls if put too near fire, and it was thought to change in contact with the body [3]. So the idea that opal has always been unlucky is a legend with a traceable author, and Rome's collectors, as the Nonius story shows, wanted it badly [3].\n\nOlder belief ran the other way. Birren lists opal among the gems credited with curing diseases of the eye [10]. Today opal is October's birthstone, alongside tourmaline, in Paterson's list, and Finlay's modern anniversary list gives it to the thirty-fourth year [2][3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 174 of them [11]. They cluster in the 1800s, with 99 of 8,345 paintings, about 1.2 per cent, which is 1.6 times the rate the museums' own mix predicts [11]. The peak decade is the 1860s, with 21 of 926 [11]. Impressionism holds it in 4 of its 140 paintings here [11].\n\nThe painters who reach for it are landscape and seaside painters: [[painter:eugene-boudin|Boudin]] in 5 of 33 works, [[painter:alfred-sisley|Sisley]] in 4 of 50 and [[painter:henri-rousseau|Henri Rousseau]] in 3 of 13 [11]. The two biggest patches are in Sisley's *First Snow at Veneux-Nadon* of 1878, where it covers about 60 per cent of the canvas, and Boudin's *Women on the Beach at Berck* of 1881, at 48 per cent [11]. See [[painting:nga-62641|First Snow at Veneux-Nadon]] and [[painting:nga-52159|Women on the Beach at Berck]]. In 91 per cent of the paintings where it appears it plays the highlight, one of the lightest colors in the picture [11].\n\nSo in paint this opal is a snow, surf and sky-haze color, nothing like the gem's fire. As always these are photographs of aged, varnished paintings, and a color match is not a pigment test [11]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#A8C3BC",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 174,
-  "top_paintings": [
-   "nga-62641",
-   "nga-52159"
-  ],
-  "century_1800s": {
-   "hits": 99,
-   "n": 8345,
-   "lift": 1.62
-  },
-  "painters": [
-   [
-    "Eugène Boudin",
-    5,
-    33
-   ],
-   [
-    "Alfred Sisley",
-    4,
-    50
-   ],
-   [
-    "Henri Rousseau",
-    3,
-    13
-   ]
-  ],
-  "role": {
-   "highlight": 0.91,
-   "mid": 0.09
-  },
-  "measured": {
-   "lch": [
-    76.7,
-    10.5,
-    177.6
-   ],
-   "nearest": [
-    [
-     "Deep Bluish Glaucous",
-     1.7
+  "aside": {
+    "origin": {
+      "named_after": "the gemstone opal",
+      "first_recorded": "as a color: Ridgway 1912; Maerz & Paul date it 1921",
+      "source": "Paterson, A Dictionary of Colour; Finlay, Jewels, ch. 13"
+    },
+    "aka": [
+      "opaline (Paterson: a light muted green)"
     ],
-    [
-     "Bluish Glaucous",
-     2.0
+    "siblings": [
+      "dusty-blue",
+      "pearl"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#A8C3BC",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 174,
+    "top_paintings": [
+      "nga-62641",
+      "nga-52159"
+    ],
+    "century_1800s": {
+      "hits": 99,
+      "n": 8345,
+      "lift": 1.62
+    },
+    "painters": [
+      [
+        "Eugène Boudin",
+        5,
+        33
+      ],
+      [
+        "Alfred Sisley",
+        4,
+        50
+      ],
+      [
+        "Henri Rousseau",
+        3,
+        13
+      ]
+    ],
+    "role": {
+      "highlight": 0.91,
+      "mid": 0.09
+    },
+    "measured": {
+      "lch": [
+        76.7,
+        10.5,
+        177.6
+      ],
+      "nearest": [
+        [
+          "Deep Bluish Glaucous",
+          1.7
+        ],
+        [
+          "Bluish Glaucous",
+          2.0
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"opal\", \"opaline\", \"opalescent\" and \"diffraction grating\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"birthstones\" (month list)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Finlay, Jewels: A Secret History, ch. 13",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Finlay, Jewels: A Secret History, ch. 16",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Livingstone, Vision and Art: The Biology of Seeing, ch. 10",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Pigment Compendium, silicon dioxide entry (Silicates group)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, Werner's whites (Syme 1821)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Pastoureau, Yellow: The History of a Color, ch. 17",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "data",
+      "cite": "ColorHub library (data/library.json): Opal, with Ridgway 1912, Maerz & Paul 1930 and ISCC-NBS 1955 sources; scans of aged plates, approximate",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, ch. 3 (\"The Amulet Wearers\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Jarman, Chroma, the silver passage",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Why does precious opal flash colors while common opal does not?",
+      "choices": [
+        "Its silica spheres are stacked in order, at about the wavelength of light",
+        "It holds more water",
+        "It contains traces of chromium",
+        "It is harder"
+      ],
+      "answer": "Its silica spheres are stacked in order, at about the wavelength of light",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: opal has been considered unlucky since antiquity.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "As a plain color word, what does Paterson say opal can look like?",
+      "choices": [
+        "A milky bluish green, but uncertain",
+        "A deep red with flecks of gold",
+        "A bright orange",
+        "A flat black"
+      ],
+      "answer": "A milky bluish green, but uncertain",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Opal's flashes are not pigment: they come from tiny silica spheres stacked like billiard balls, about the width of a wavelength of light.",
+    "The curse of the opal seems to come from a Walter Scott novel; a Roman senator once refused to sell one for two million sesterces.",
+    "Look for opal's quiet color in Sisley's snow and Boudin's beaches: pale, grey-green, and the lightest thing in the picture."
+  ],
+  "words": 1141,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Nonius story, Orphanus, Hatton, Napoleon, Eulo Queen and the Scott origin are Finlay only (Nonius checked: no other book names him); hedged in text.",
+      "Finlay's sky-is-red-because-of-big-molecules analogy deliberately omitted (physics wrong).",
+      "Fire/boulder/black opal colors are stone varieties, the swatch is the milky color word (Paterson).",
+      "Birren cure claim reported as belief only.",
+      "Baty/Syme whites page not located; cited at section level."
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"opal\", \"opaline\", \"opalescent\" and \"diffraction grating\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"birthstones\" (month list)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Finlay, Jewels: A Secret History, ch. 13",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Finlay, Jewels: A Secret History, ch. 16",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Livingstone, Vision and Art: The Biology of Seeing, ch. 10",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Pigment Compendium, silicon dioxide entry (Silicates group)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, Werner's whites (Syme 1821)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Pastoureau, Yellow: The History of a Color, ch. 17",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "data",
-   "cite": "ColorHub library (data/library.json): Opal, with Ridgway 1912, Maerz & Paul 1930 and ISCC-NBS 1955 sources; scans of aged plates, approximate",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy, ch. 3 (\"The Amulet Wearers\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Jarman, Chroma, the silver passage",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Why does precious opal flash colors while common opal does not?",
-   "choices": [
-    "Its silica spheres are stacked in order, at about the wavelength of light",
-    "It holds more water",
-    "It contains traces of chromium",
-    "It is harder"
-   ],
-   "answer": "Its silica spheres are stacked in order, at about the wavelength of light",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: opal has been considered unlucky since antiquity.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "As a plain color word, what does Paterson say opal can look like?",
-   "choices": [
-    "A milky bluish green, but uncertain",
-    "A deep red with flecks of gold",
-    "A bright orange",
-    "A flat black"
-   ],
-   "answer": "A milky bluish green, but uncertain",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Opal's flashes are not pigment: they come from tiny silica spheres stacked like billiard balls, about the width of a wavelength of light.",
-  "The curse of the opal seems to come from a Walter Scott novel; a Roman senator once refused to sell one for two million sesterces.",
-  "Look for opal's quiet color in Sisley's snow and Boudin's beaches: pale, grey-green, and the lightest thing in the picture."
- ],
- "words": 1140,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Nonius story, Orphanus, Hatton, Napoleon, Eulo Queen and the Scott origin are Finlay only (Nonius checked: no other book names him); hedged in text.",
-   "Finlay's sky-is-red-because-of-big-molecules analogy deliberately omitted (physics wrong).",
-   "Fire/boulder/black opal colors are stone varieties, the swatch is the milky color word (Paterson).",
-   "Birren cure claim reported as belief only.",
-   "Baty/Syme whites page not located; cited at section level."
-  ]
- }
 }

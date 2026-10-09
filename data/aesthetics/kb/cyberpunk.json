@@ -1,0 +1,68 @@
+{
+ "id": "cyberpunk",
+ "name": "Cyberpunk",
+ "lineage": {
+  "influenced_by": [
+   "1980s noir and tech-dystopia fiction",
+   "Hong Kong street photography",
+   "punk DIY culture"
+  ],
+  "influences": [
+   "cybergoth",
+   "dieselpunk",
+   "raygun-gothic",
+   "atompunk"
+  ]
+ },
+ "eras": [
+  "literary origin early 1980s (William Gibson)",
+  "visual codification 1982 (Blade Runner)",
+  "ongoing game/media presence"
+ ],
+ "places": [
+  "imagined dense Asian-coded megacities (visually drawing heavily, and controversially, on real Hong Kong/Tokyo street photography)"
+ ],
+ "garments": [
+  "trench coats",
+  "mirrored sunglasses",
+  "visible cybernetic augmentation",
+  "neon-lit urban grime"
+ ],
+ "media": [
+  {
+   "title": "William Gibson, Neuromancer (1984)",
+   "note": "the foundational novel, though the term predates it slightly"
+  },
+  {
+   "title": "Blade Runner (1982)",
+   "note": "set the genre's enduring neon-noir visual template"
+  },
+  {
+   "title": "Cyberpunk 2077 (2020)",
+   "note": "the biggest recent mainstream vehicle for the aesthetic"
+  }
+ ],
+ "figures": [
+  "William Gibson",
+  "Ridley Scott"
+ ],
+ "reacts_against": "science fiction's earlier clean, optimistic techno-futurism (contrast atompunk/raygun-gothic); cyberpunk insists technology concentrates power and grime rather than erasing them.",
+ "revivals": [
+  "sustained rather than revived, with periodic surges around major game/film releases"
+ ],
+ "article": "Cyberpunk's signature palette — hot neon pink and cyan against wet, light-polluted black — is really a photograph of a very particular kind of city street, repeated for forty years. The genre's literary roots run to the early 1980s, when writers including William Gibson (whose 1984 novel Neuromancer gave the genre its clearest text) imagined futures where technology had made life faster and more connected but also meaner and more unequal, with megacorporations replacing governments. Its visual identity, though, was set less by any book than by Ridley Scott's 1982 film Blade Runner, which rendered that future as permanently rain-slicked night: towering neon signage, mostly in advertising-signage pink and cyan, reflected endlessly off wet pavement and dense urban haze. That look drew heavily — and, especially in retrospect, controversially — on real Hong Kong and Tokyo street photography, borrowing the density and signage of real Asian cities as backdrop and atmosphere for Western-authored stories, a pattern later cyberpunk media (including 2020's Cyberpunk 2077) has had to reckon with. Color-wise, the genre's black is never a flat, dry black the way goth's is; it's always wet, always catching a reflection, which is part of why cyberpunk's palette reads as more alive and more oppressive at once than a simple neon-on-black description suggests.",
+ "wiki_facts": {
+  "other_names": "|decade_of_origin = 1980s",
+  "decade_of_origin": "1980s",
+  "key_motifs": "Neon-lit cityscapes, cybernetics and prosthetics, rain-slicked streets, towering megastructures, computer terminals, hackers, holograms, Japanese kanji, tactical gear, wires and cables",
+  "key_colours": "Black, neon blue, neon pink, neon purple, silver, chrome",
+  "related_aesthetics": "90s CoolAbstract TechBerlin Techno FashionBiopunkBrutalismCassette FuturismCyberdeliaCyber GhettoCyberpopCyberprepCybertweeDreampunkEarly CyberElectronic Body MusicGlitch ArtHexatronNeo-TokyoNeon NoirPC-98RetrofuturismRivetheadSynthwaveSteampunkTechwearVaporwaveVectorheartY2K Futurism",
+  "key_values": "High-Tech/Low-Life, anti-authoritarianism, transhumanism, skepticism of corporate power, digital dystopia"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Cyberpunk"
+  }
+ ]
+}

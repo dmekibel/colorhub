@@ -1,0 +1,50 @@
+{
+ "id": "kawaii",
+ "name": "Kawaii",
+ "lineage": {
+  "influenced_by": [
+   "a 1970s Japanese teenage handwriting trend (marui ji, \"round writing\")",
+   "postwar Japanese consumer and toy culture"
+  ],
+  "influences": [
+   "decora",
+   "fairycore"
+  ]
+ },
+ "eras": [
+  "1970s–present (Japan)"
+ ],
+ "places": [],
+ "garments": [
+  "pastel plastic",
+  "plush fabric",
+  "ribbons"
+ ],
+ "media": [
+  {
+   "title": "Sanrio's Hello Kitty (created 1974)",
+   "note": "the character most responsible for globalizing the aesthetic"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "conventional adult seriousness and, in its original teenage context, the pressure to appear mature; kawaii culture deliberately performs childlike softness as a form of resistance to that expectation.",
+ "revivals": [],
+ "article": "Kawaii culture's origin is unusually well documented for something now treated as a loose internet-aesthetic tag. In the 1970s, Japanese schoolgirls developed a distinctive rounded, childlike handwriting style (marui ji) that teachers actively discouraged, which only made it spread faster among teenagers as a quiet form of generational rebellion. Publishers and toy companies picked up the same round, soft visual sensibility, and Sanrio's 1974 creation of Hello Kitty gave the aesthetic its single most globally recognized ambassador, eventually built into a licensing empire covering nearly every consumer product category. Japanese cultural studies scholars have written extensively about kawaii as more than decoration: performing cuteness let young Japanese women push back, in a culturally acceptable way, against pressure to present as mature and self-effacing. The aesthetic's reach abroad has mostly traveled through anime, manga and video game fandom rather than direct marketing, which is why its internet-era spread (and the string of English \"-core\" sub-labels like decora it's spawned) looks so different from how it actually took root in Japan.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Kawaii"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "light — about 65% of the measured color is pale or near-white",
+   "mostly muted — about 63% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

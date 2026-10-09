@@ -1,0 +1,104 @@
+{
+ "slug": "hot-purple",
+ "name": "Hot Purple",
+ "hex": "#CB00F5",
+ "names": [
+  "Hot Purple"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Hot Purple is a saturated violet-magenta that crowdsourcing, not a dictionary or a dye house, put a name to.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crowd name, not a dictionary one",
+   "body": "Our color library traces Hot Purple to the xkcd color survey of 2010, in which volunteers typed free-text names for colors shown on screen and the most popular labels for each shade were kept [1]. \"Hot\" here works the way it does in Hot Pink: a plain intensifier on the hue word, not a reference to temperature or to any material [1]. Who first typed this exact pairing, or whether it existed earlier, is undocumented in our sources [1].\n\nThe nearest named neighbor by measured color is [[bright-purple]], close enough that the two read as the same color at a glance; [[phlox]] sits a little further out, lighter [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive has a color within CIEDE2000 4 of Hot Purple covering at least 1 percent of its canvas, as photographed [3]. A violet this saturated and this bright is rare in oil paint generally, since the brightest purple pigments and dyes are a recent and largely synthetic group [3]. That describes our museum-sourced archive, not painting as a whole [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a crowd-sourced label from the 2010 xkcd color survey",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "ColorHub color library (xkcd)"
+  },
+  "aka": [],
+  "siblings": [
+   "bright-purple",
+   "phlox",
+   "steel-pink"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "match": {
+   "hex": "#CB00F5",
+   "de2000": 4,
+   "min_cover": 0.01
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd color survey, 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, look-alike computation (data/graph/edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Hot Purple come from?",
+   "choices": [
+    "Volunteers' free-text answers in the 2010 xkcd color survey",
+    "A dye company's 19th-century catalog",
+    "A pigment first made in France",
+    "A kabuki actor's stage name"
+   ],
+   "answer": "Volunteers' free-text answers in the 2010 xkcd color survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources name a specific person who coined \"Hot Purple.\"",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Hot Purple's name came from a 2010 internet survey, not a dye house."
+ ],
+ "words": 188,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

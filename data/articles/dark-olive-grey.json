@@ -1,120 +1,122 @@
 {
- "slug": "dark-olive-grey",
- "name": "Dark olive grey",
- "hex": "#444337",
- "names": [
-  "Dark olive grey"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Dark olive grey is exactly what it says: a greyed, dark version of olive, fixed by Ridgway in 1912 with no further story behind the choice of words.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Plain description, old source",
-   "body": "This color comes from Ridgway's 1912 *Color Standards and Color Nomenclature*, plate LI, hue 23 with five primes, tone i [1]. The nearest named colors on file are [[brown-olive]], [[grey-olive]], [[greenish-umber]] and [[black-olive]], at 2.5, 2.9, 3.4 and 3.9 ΔE [1]. Ridgway also lists an alias, \"Dark Olive-Grey,\" at a different, lighter value, #676C5C, a reminder that the same name can land on more than one plate [1].\n\nIn ISCC-NBS terms it is an olive gray, with [[greenish-umber]] and [[black-olive]] also close in our library [1]."
+  "slug": "dark-olive-grey",
+  "name": "Dark olive grey",
+  "hex": "#444337",
+  "names": [
+    "Dark olive grey",
+    "Yellow Olive"
+  ],
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Dark olive grey is exactly what it says: a greyed, dark version of olive, fixed by Ridgway in 1912 with no further story behind the choice of words.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Plain description, old source",
+      "body": "This color comes from Ridgway's 1912 *Color Standards and Color Nomenclature*, plate LI, hue 23 with five primes, tone i [1]. The nearest named colors on file are [[brown-olive]], [[grey-olive]], [[greenish-umber]] and [[black-olive]], at 2.5, 2.9, 3.4 and 3.9 ΔE [1]. Ridgway also lists an alias, \"Dark Olive-Grey,\" at a different, lighter value, #676C5C, a reminder that the same name can land on more than one plate [1].\n\nIn ISCC-NBS terms it is an olive gray, with [[greenish-umber]] and [[black-olive]] also close in our library [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this dark olive in 2,919 of 23,781 paintings, 12.27 percent, more common than 95 percent of our named colors, as photographed [2]. It most often plays a mid-tone, in 40 percent of its appearances, with a strong secondary role as shadow [2]. Arnoud van Halen favors it most, in 17 of his 50 catalogued works, over three times the baseline for the museums those works come from [2]. The earliest dated example, from 1099, predates Ridgway's 1912 record of the name by over eight centuries, so the match is a look-alike hue in aged paint, not proof of any pigment, a floor and not a first, since the archive's early centuries are thin [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "plain description: dark + olive + grey",
+      "first_recorded": "Ridgway, 1912 (plate LI)",
+      "source": "ColorHub color library (Ridgway 1912; RAL)"
+    },
+    "aka": [
+      "Dark Olive-Grey (Ridgway, a separate, lighter plate value, #676C5C)",
+      "Yellow Olive (ral)"
+    ],
+    "siblings": [
+      "brown-olive",
+      "grey-olive",
+      "greenish-umber",
+      "black-olive"
+    ],
+    "parent": "olive-grey",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "olive-grey",
+        "gloss": "the plain modifier base; several plate values share this family of names"
+      }
+    ],
+    "other_languages": []
   },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this dark olive in 2,919 of 23,781 paintings, 12.27 percent, more common than 95 percent of our named colors, as photographed [2]. It most often plays a mid-tone, in 40 percent of its appearances, with a strong secondary role as shadow [2]. Arnoud van Halen favors it most, in 17 of his 50 catalogued works, over three times the baseline for the museums those works come from [2]. The earliest dated example, from 1099, predates Ridgway's 1912 record of the name by over eight centuries, so the match is a look-alike hue in aged paint, not proof of any pigment, a floor and not a first, since the archive's early centuries are thin [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "plain description: dark + olive + grey",
-   "first_recorded": "Ridgway, 1912 (plate LI)",
-   "source": "ColorHub color library (Ridgway 1912; RAL)"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 2919,
+    "rate": 0.1227,
+    "measured": {
+      "lch": [
+        28.2,
+        7.7,
+        105.2
+      ],
+      "nearest": [
+        [
+          "Brown Olive",
+          2.5
+        ]
+      ]
+    },
+    "first_seen": {
+      "year": 1099,
+      "painting": "aic-193241"
+    }
   },
-  "aka": [
-   "Dark Olive-Grey (Ridgway, a separate, lighter plate value, #676C5C)"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Ridgway 1912, plate LI, hue 23′′′′′, tone i; RAL",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "siblings": [
-   "brown-olive",
-   "grey-olive",
-   "greenish-umber",
-   "black-olive"
+  "questions": [
+    {
+      "q": "Where does the name \"Dark olive grey\" come from?",
+      "choices": [
+        "A trade name with a hidden history",
+        "Plain description: dark, olive, and grey combined",
+        "A painter's surname",
+        "A mineral"
+      ],
+      "answer": "Plain description: dark, olive, and grey combined",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Ridgway's 1912 book lists only one plate value for a name close to \"Dark Olive-Grey.\"",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
   ],
-  "parent": "olive-grey",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "olive-grey",
-    "gloss": "the plain modifier base; several plate values share this family of names"
-   }
+  "openers": [
+    "Dark olive grey turns up in more than one painting in eight across our whole archive."
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 2919,
-  "rate": 0.1227,
-  "measured": {
-   "lch": [
-    28.2,
-    7.7,
-    105.2
-   ],
-   "nearest": [
-    [
-     "Brown Olive",
-     2.5
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   },
-  "first_seen": {
-   "year": 1099,
-   "painting": "aic-193241"
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Ridgway 1912, plate LI, hue 23′′′′′, tone i; RAL",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Where does the name \"Dark olive grey\" come from?",
-   "choices": [
-    "A trade name with a hidden history",
-    "Plain description: dark, olive, and grey combined",
-    "A painter's surname",
-    "A mineral"
-   ],
-   "answer": "Plain description: dark, olive, and grey combined",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Ridgway's 1912 book lists only one plate value for a name close to \"Dark Olive-Grey.\"",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Dark olive grey turns up in more than one painting in eight across our whole archive."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- },
- "words": 236
+  "words": 236
 }

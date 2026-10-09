@@ -1,0 +1,132 @@
+{
+ "slug": "harbor-rat",
+ "name": "Harbor rat",
+ "hex": "#757D75",
+ "names": [
+  "Harbor rat"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Harbor rat is a muted greenish grey from Japan's traditional color list, one of a large family of \"nezumi\" (mouse-grey) names, and it is the rare traditional Japanese color whose top painter in our archive actually painted harbors.",
+ "sections": [
+  {
+   "id": "japan",
+   "title": "In Japan: Minatonezumi",
+   "body": "The name is written 湊鼠, romanized Minatonezumi, and our color library glosses it literally as \"harbor rat\" [1]. *Nezumi* means mouse or rat, and it names a whole family of Edo-period greys, each one a mouse-grey tinted toward something else; who first paired this particular grey with a harbor is undocumented in the sources we have [1]. The closest named neighbors by measured color are [[colewort-green]] and [[concrete-grey]], both within about four units, with [[moss-grey]] and [[dusty-grey]] a little further out [2].\n\nThe hex value, #757D75, is a screen approximation; Japanese traditional names were fixed to dye and pigment, not to a monitor [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for Harbor rat in 643 of 23,781 paintings, about 2.7 percent, more common than 77 percent of the named colors we track, as photographed [3]. It peaks in the 1900s, in 39 of 1,674 paintings from that century, 1.9 times the rate its share of the archive would predict [3]. Inside a painting it most often plays a mid-tone, in 34 percent of its appearances [3].\n\nThe painter most devoted to it is Eugène Boudin, in 5 of his 33 paintings here, 3.5 times his peers' rate, as photographed [3]. Boudin painted harbors and beaches most of his working life, which makes him an apt match for a grey named for one, though that is a coincidence of our archive and not evidence for the name's origin [3]. The earliest archive match is dated 1280, by Gao Kekong; the archive's early centuries are thin, so that is a floor, not a first [3]. It shares canvases more than chance with colors we call Traffic Grey B and Dawn Grey [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; one of the traditional Japanese \"nezumi\" (mouse-grey) family of names",
+   "first_recorded": "undocumented in the sources we have",
+   "source": "ColorHub color library: traditional colors of Japan"
+  },
+  "aka": [],
+  "siblings": [
+   "colewort-green",
+   "concrete-grey",
+   "moss-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "湊鼠 (Minatonezumi)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 643,
+  "measured": {
+   "lch": [
+    51.5,
+    5.7,
+    144.1
+   ],
+   "nearest": [
+    [
+     "Colewort Green",
+     2.5
+    ],
+    [
+     "Concrete Grey",
+     4.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional colors of Japan (Wikipedia)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, look-alike computation (data/graph/edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"nezumi\" signal in a traditional Japanese color name like Minatonezumi?",
+   "choices": [
+    "A mouse- or rat-grey base tone",
+    "A bright primary color",
+    "A kind of silk weave",
+    "A kabuki actor's stage name"
+   ],
+   "answer": "A mouse- or rat-grey base tone",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources explain why this particular grey was paired with the word \"harbor.\"",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter in our archive used Harbor rat most, relative to his own output?",
+   "choices": [
+    "Eugène Boudin",
+    "Claude Monet",
+    "John Singer Sargent",
+    "Gao Kekong"
+   ],
+   "answer": "Eugène Boudin",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Harbor rat's top painter in our archive is Eugène Boudin, who spent his career painting harbors."
+ ],
+ "words": 329,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

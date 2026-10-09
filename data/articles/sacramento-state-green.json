@@ -1,0 +1,136 @@
+{
+ "slug": "sacramento-state-green",
+ "name": "Sacramento State Green",
+ "hex": "#043927",
+ "names": [
+  "Sacramento State Green"
+ ],
+ "tier": "place",
+ "depth": "medium",
+ "lede": "Sacramento State Green is the near-black forest green of California State University, Sacramento's Hornets athletics, listed alongside white as a primary color rather than taken from any dye or pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A university's own green",
+   "body": "The university's teams are the Hornets, and their primary colors are listed as green and white; a team-color reference site gives this dark green as Pantone PMS 343 at this hex [1]. Our library sources the name and value from a Wikipedia-style extended color list rather than from a dye or mineral word, so it is filed here as a place and institution name, not a pigment one [2]. No source consulted explains why this particular dark green, rather than a brighter or more common \"hunter green,\" was chosen for the school [1].\n\nBy our look-alike data the nearest color is [[phthalo-green|Phthalo Green]], 2.8 units away and read as almost the same, with [[dark-hunter-green|Dark Hunter Green]] further off at 5.1, read as lighter [3]. It is much darker than a generic hunter green, about 13 units away [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a green within range of this hex in 15 of 23,781 paintings, about 0.06 percent, as photographed [4]. The earliest is an anonymous 1460 triptych of the Crucifixion, where it covers about 15 percent of the panel, and the strongest match is Bronzino's 1545 *Portrait of Giovanni de' Medici as a Child*, where it covers about 47 percent [4]. The United States and France carry a disproportionate share of the hits relative to their size in the archive, though on a small base of 15 paintings total [4]. Paintings from the 1800s hold the largest raw count, eight of the fifteen, but the sample stays too thin to call that a real decade effect [4]. As with any museum photograph, the match is to the image as scanned, not to a pigment sample from the canvas [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "California State University, Sacramento, and its Hornets athletics programs",
+   "first_recorded": "undocumented date; current brand value Pantone PMS 343",
+   "source": "ColorHub color library; team color reference sites"
+  },
+  "aka": [],
+  "siblings": [
+   "phthalo-green",
+   "dark-hunter-green",
+   "msu-green",
+   "evergreen"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 15,
+  "measured": {
+   "lch": [
+    20.4,
+    22.8,
+    163.2
+   ],
+   "nearest": [
+    [
+     "Phthalo Green",
+     2.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Team color reference listings for the Sacramento State Hornets (Pantone PMS 343, #043927)",
+   "loc_kind": null,
+   "url": "https://teamcolorcodes.com/california-state-university-sacramento-hornets-colors/"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia-sourced crowd list entry, Sacramento State Green",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph, look-alike edges (data/graph/edges-s.json, edges-p.json, edges-d.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Sacramento State Green belongs to which school's team colors?",
+   "choices": [
+    "California State University, Sacramento",
+    "University of Oregon",
+    "Michigan State University",
+    "Sacramento City College"
+   ],
+   "answer": "California State University, Sacramento",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources explain why this exact dark green, rather than a brighter green, was chosen for the school.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which color is the nearest look-alike to Sacramento State Green in our data?",
+   "choices": [
+    "Phthalo Green",
+    "Dark Hunter Green",
+    "MSU Green",
+    "Evergreen"
+   ],
+   "answer": "Phthalo Green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Sacramento State's green is nearly black, almost the same as the pigment color Phthalo Green and far darker than a usual hunter green."
+ ],
+ "words": 302,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Fixed two factual errors against the cited teamcolorcodes.com page: the Pantone number was wrong (article said PMS 627 C; the source lists this green as PMS 343) and the paired color was wrong (article said 'green and gold'; the source lists the primary colors as 'green and white'). Corrected both in the body, lede, aside.origin, and note 1.",
+   "Pantone PMS 343 and the hex come from a team-branding reference site, not an institutional style guide seen directly; hedged as web-sourced.",
+   "Archive country/century breakdowns rest on only 15 matches.",
+   "Opus spot-audit 2026-10-09: claims re-verified against graph/fieldnotes/article_field.py; errors fixed."
+  ]
+ }
+}

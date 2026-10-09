@@ -1,137 +1,136 @@
 {
- "name": "Marsh Rose",
- "hex": "#A36E6B",
- "names": [
-  "Marsh Rose"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Marsh Rose is a muted, dusty red-brown named for the rose, recorded by the Maerz and Paul dictionary in 1930 with a first use in 1927.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A rose, dulled",
-   "body": "Our data traces the name to the rose, the flower, rather than a pigment or a place [1]. The Maerz and Paul dictionary of 1930 plots it on plate 4 I9 and gives it a first recorded use of 1927, and the ISCC-NBS system files the same area as \"grayish red\" [1]. In LCH terms it reads as lightness 52, chroma 23, hue 26 degrees: a muted, moderate-dark red leaning brown [1].\n\nIts nearest computed neighbor is [[copper-penny|Copper Penny]], just 2.7 units off and almost the same color, followed by [[copper-rose|Copper Rose]] and [[brick-rose|Brick Rose]] [2]. The closest everyday name is [[mauve]], about 11.1 units away, though the two colors share little beyond that measured distance [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 163, as photographed (59 by the stricter within-painting measure), which makes it more common than 52 percent of the named colors we track [4]. It is most over-represented in paintings from India, at 2.5 times the expected rate (16 of 721 paintings), and most of the Kalighat school in particular, 5.8 times the baseline [4]. The earliest match is a painting dated to the year 1000, 930 years before the name's first record in 1930; that only shows the hue existed long before anyone wrote it down, not that any pigment did, a floor and not a first, since the archive's early centuries are thin [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the rose",
-   "first_recorded": "Maerz & Paul, 1930 (first used 1927)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "copper-penny",
-   "copper-rose",
-   "brick-rose",
-   "dark-vinaceous"
+  "name": "Marsh Rose",
+  "hex": "#A36E6B",
+  "names": [
+    "Marsh Rose"
   ],
-  "parent": "rose",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 163,
-  "measured": {
-   "lch": [
-    52,
-    23,
-    26
-   ],
-   "nearest": [
-    [
-     "Copper Penny",
-     2.7
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Marsh Rose is a muted, dusty red-brown named for the rose, recorded by the Maerz and Paul dictionary in 1930 with a first use in 1927.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A rose, dulled",
+      "body": "Our data traces the name to the rose, the flower, rather than a pigment or a place [1]. The Maerz and Paul dictionary of 1930 plots it on plate 4 I9 and gives it a first recorded use of 1927, and the ISCC-NBS system files the same area as \"grayish red\" [1]. In LCH terms it reads as lightness 52, chroma 23, hue 26 degrees: a muted, moderate-dark red leaning brown [1].\n\nIts nearest computed neighbor is [[copper-penny|Copper Penny]], just 2.7 units off and almost the same color, followed by [[copper-rose|Copper Rose]] and [[brick-rose|Brick Rose]] [2]. The closest everyday name is [[mauve]], about 11.1 units away, though the two colors share little beyond that measured distance [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 163, as photographed (59 by the stricter within-painting measure), which makes it more common than 52 percent of the named colors we track [4]. It is most over-represented in paintings from India, at 2.5 times the expected rate (16 of 721 paintings), and most of the Kalighat school in particular, 5.8 times the baseline [4]. The earliest match is a painting dated to the year 1000, 930 years before the name's first record in 1930; that only shows the hue existed long before anyone wrote it down, not that any pigment did, a floor and not a first, since the archive's early centuries are thin [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the rose",
+      "first_recorded": "Maerz & Paul, 1930 (first used 1927)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "copper-penny",
+      "copper-rose",
+      "brick-rose"
     ],
-    [
-     "Copper Rose",
-     3.5
-    ],
-    [
-     "Brick rose",
-     3.6
-    ],
-    [
-     "Dark Vinaceous",
-     3.6
+    "parent": "rose",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 163,
+    "measured": {
+      "lch": [
+        52,
+        23,
+        26
+      ],
+      "nearest": [
+        [
+          "Copper Penny",
+          2.7
+        ],
+        [
+          "Copper Rose",
+          3.5
+        ],
+        [
+          "Brick rose",
+          3.6
+        ],
+        [
+          "Dark Vinaceous",
+          3.6
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/nodes-m.json): Marsh Rose — Maerz & Paul 1930, plate 4 I9, first recorded 1927",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges-m.json): nearest distinct neighbors by CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Marsh Rose entry, nearest everyday name",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/m.json)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Marsh Rose is named for which flower?",
+      "choices": [
+        "Rose",
+        "Mallow",
+        "Hyssop",
+        "Grape"
+      ],
+      "answer": "Rose",
+      "kind": "pick"
+    },
+    {
+      "q": "In which country's paintings is Marsh Rose most over-represented in our archive?",
+      "choices": [
+        "India",
+        "France",
+        "Nepal",
+        "Denmark"
+      ],
+      "answer": "India",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Marsh Rose shows up 2.5 times more often than expected in the paintings we have from India, especially the Kalighat school."
+  ],
+  "words": 261,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "No book concordance hits for this slug; written from the color graph, library and archive data only.",
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/nodes-m.json): Marsh Rose — Maerz & Paul 1930, plate 4 I9, first recorded 1927",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges-m.json): nearest distinct neighbors by CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Marsh Rose entry, nearest everyday name",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/m.json)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Marsh Rose is named for which flower?",
-   "choices": [
-    "Rose",
-    "Mallow",
-    "Hyssop",
-    "Grape"
-   ],
-   "answer": "Rose",
-   "kind": "pick"
-  },
-  {
-   "q": "In which country's paintings is Marsh Rose most over-represented in our archive?",
-   "choices": [
-    "India",
-    "France",
-    "Nepal",
-    "Denmark"
-   ],
-   "answer": "India",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Marsh Rose shows up 2.5 times more often than expected in the paintings we have from India, especially the Kalighat school."
- ],
- "words": 261,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-08",
-  "issues": [
-   "No book concordance hits for this slug; written from the color graph, library and archive data only.",
-   "lint 2026-10-09"
-  ]
- },
- "slug": "marsh-rose"
+  "slug": "marsh-rose"
 }

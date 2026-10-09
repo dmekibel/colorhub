@@ -1,0 +1,51 @@
+{
+ "id": "goblincore",
+ "name": "Goblincore",
+ "lineage": {
+  "influenced_by": [
+   "cottagecore (as a direct, messier counter-trend)",
+   "a reclaiming of \"ugly\" nature (mud, mushrooms, bugs)"
+  ],
+  "influences": [
+   "witchcore"
+  ]
+ },
+ "eras": [
+  "c. 2020–present"
+ ],
+ "places": [
+  "TikTok/Tumblr; forest floor and pond imagery"
+ ],
+ "garments": [
+  "mismatched earthy layers",
+  "collected natural objects (shiny rocks, acorns) as jewelry"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "cottagecore's tidy, sunlit prettiness, celebrating the muddy, unglamorous and amphibian side of nature instead.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "2020s",
+  "key_motifs": "Clutter, dirt, flora, frogs, goblins, snails, mushrooms, candles, shiny jewels, bones, moss.",
+  "key_colours": "Earth tones such as dark green, light brown, dark brown, dark lime, black, and navy blue. (Sometimes)",
+  "related_aesthetics": "AdventurecoreCottagecoreCrowcoreDragoncoreEarthcoreMushroomcoreGreen AcademiaNaturecoreVulture CultureWitchcoreCryptidcore",
+  "key_values": "Curiosity, diversity, imperfection, nature, maximalism."
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Goblincore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 43% of the measured color across 6 wiki photos is below mid-lightness",
+   "mostly muted — about 76% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

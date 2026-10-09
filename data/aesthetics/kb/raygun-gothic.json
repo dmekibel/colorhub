@@ -1,0 +1,54 @@
+{
+ "id": "raygun-gothic",
+ "name": "Raygun Gothic",
+ "lineage": {
+  "influenced_by": [
+   "1930s-50s science fiction pulp magazine covers and film serials (Flash Gordon)",
+   "Streamline Moderne and Art Deco architecture"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "aesthetic evokes 1930s-50s pulp sci-fi; term popularized by William Gibson"
+ ],
+ "places": [
+  "pulp magazine illustration"
+ ],
+ "garments": [
+  "not a fashion look — a retrofuturist design aesthetic (chrome rocket ships, ray guns)"
+ ],
+ "media": [
+  {
+   "title": "Flash Gordon film serials (1936–40)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "William Gibson (popularized the term)"
+ ],
+ "reacts_against": "nothing contemporaneous — it names the specific brand of optimistic, chrome-and-fins science fiction imagined before real spaceflight existed.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "1940s/1950s",
+  "key_motifs": "Nuclear-based powerSpace travel and spacesuitsFantastical planets and aliensHover technologyBright colorsRobotsAutomated appliancesAircraft-like finsChrome grilles and highlightsGeometric Shapes",
+  "related_aesthetics": "Art DecoAtompunkCassette FuturismDieselpunkDinerGoogieRetrofuturismRocketpunkSpace AgeStreamline ModerneFactory Pomo",
+  "key_values": "Endless technological advancementAbstracted architecturePulp comic vibesOptimistic views"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Raygun_Gothic"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 51% of the measured color across 6 wiki photos is below mid-lightness",
+   "mostly muted — about 47% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

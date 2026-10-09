@@ -1,0 +1,59 @@
+{
+ "id": "swiss-style",
+ "name": "Swiss Style",
+ "lineage": {
+  "influenced_by": [
+   "Bauhaus typography",
+   "De Stijl's grid logic"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 1950s–1970s (Switzerland and Germany)"
+ ],
+ "places": [
+  "Zürich",
+  "Basel"
+ ],
+ "garments": [
+  "not a fashion look — a graphic design movement"
+ ],
+ "media": [
+  {
+   "title": "Josef Müller-Brockmann's concert posters (1950s–60s)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Josef Müller-Brockmann",
+  "Max Bill"
+ ],
+ "reacts_against": "decorative, hand-lettered graphic design, insisting on strict grid systems, sans-serif type (Helvetica, released 1957, is its defining typeface) and objective, legible communication.",
+ "revivals": [
+  "still the default grammar of most corporate and editorial graphic design"
+ ],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "1930s-1960s",
+  "key_motifs": "Akzidenz-Grotesk, Univers and Helvetica fonts, asymmetric layouts, grids, limited color palettes",
+  "related_aesthetics": "BauhausConstructivismDe StijlFlat DesignMinimalismModernismPlakatstilPrecisionismPurismSuprematism",
+  "key_values": "Cleanliness, readibility, objectivity[https://www.printmag.com/featured/swiss-style-principles-typefaces-designers/ \"Swiss Style: The Principles, the Typefaces & the Designers\" | printmag.com]"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/International_Typographic_Style"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 47% of the measured color across 6 wiki photos is below mid-lightness",
+   "a vivid streak — roughly 27% of the color measured is highly saturated",
+   "mostly muted — about 60% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

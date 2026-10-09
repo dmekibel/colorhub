@@ -29,6 +29,27 @@ CI_SOURCES.design.pin = (r, st) => {
   return `<span class="pt-tile pt-design"><span class="pt-dstrip">${it[5].map(h => `<i style="--c:${h}"></i>`).join("")}</span><em>${ptPct(r.cover)} of the piece</em><b>${esc(it[1])}</b><small>${esc([it[2], it[3]].filter(Boolean).join(" · "))}${it[4] ? (it[2] || it[3] ? " · " : "") + esc(it[4]) : ""}</small></span>`;
 };
 
+// a photograph's tile (data/photography/colorindex/items.json: [id, title, photographer, year, process, thumb]),
+// clickable (Phase 2, js/photography.js): opens the same paintingPage every photo already uses from the Museum
+// grid or a photographer page, so "In photographs" is not a dead end the way a design piece's tile still is.
+CI_SOURCES.photography.pin = (r, st) => {
+  const it = (CI_SOURCES.photography.items || [])[r.i];
+  if (!it) return `<span class="pt-tile"><b>Photograph</b></span>`;
+  const [id, title, photographer, year, process, thumb] = it;
+  return `<button class="pt-tile pt-photo" data-pt-photo="${esc(id)}">${thumb ? `<img src="${esc(thumb)}" alt="" loading="lazy">` : ""}<em>${ptPct(r.cover)} of the photo</em><b>${esc(title)}</b><small>${esc([photographer, year].filter(Boolean).join(" · "))}${process ? (photographer || year ? " · " : "") + esc(process) : ""}</small></button>`;
+};
+// shared by paintingsOfSection and paintingsOfPage's click handlers below
+// photographyNodeById needs the full photos.json (js/photography.js loadPhotography()), which a color page never
+// loads on its own -- only visiting the Photography door does. So this tile's tap loads it on demand, same as
+// the gallery's own "load on first use" rail (js/gallery.js glFill).
+function ptOpenPhoto(id) {
+  if (typeof loadPhotography !== "function") return;
+  const go = () => { const n = photographyNodeById(id); if (n) paintingPage(n); };
+  const n = typeof photographyNodeById === "function" ? photographyNodeById(id) : null;
+  if (n) return paintingPage(n);
+  loadPhotography().then(go).catch(() => toast("The photograph didn't load."));
+}
+
 // ---------- words ----------
 const ptPct = c => c >= 10 ? Math.round(c) + "%" : c >= 1 ? (+c.toFixed(1)) + "%" : c >= .1 ? (+c.toFixed(2)) + "%" : "under 0.1%";
 const ptNum = n => n.toLocaleString("en-US");
@@ -178,6 +199,7 @@ function paintingsOfSection(hex, host, o = {}) {
   host.onclick = e => {
     const p = e.target.closest("[data-gi]");
     if (p) { const r = (host.querySelector("[data-pt-rail]")._rows || []).find(x => x.i === +p.dataset.gi); return galleryPage(+p.dataset.gi, true, hex, st.tol); }
+    const ph = e.target.closest("[data-pt-photo]"); if (ph) return ptOpenPhoto(ph.dataset.ptPhoto);
     if (e.target.closest("[data-pt-all]")) return paintingsOfPage([hex], { ...st, back: true });
     const a = e.target.closest("[data-pre-tol]");
     if (a && !a.closest("[data-pt-tuner]")) { st.tol = +a.dataset.preTol; ptSave(st); buzz(6); if (tuner) tuner.set(st); return refresh(); }
@@ -218,7 +240,7 @@ function ptParse(spec) {
   if (t != null) st.tol = t; if (m != null) st.minCover = m; st.maxCover = x > 0 ? x : null;
   if (PT_MODES.some(a => a[0] === q.get("mode"))) st.mode = q.get("mode"); else st.mode = "all";
   st.sort = PT_SORTS.some(a => a[0] === q.get("s")) ? q.get("s") : "cover";
-  st.source = ["paintings", "design", "both"].includes(q.get("src")) ? q.get("src") : "paintings";
+  st.source = ["paintings", "design", "photography", "both"].includes(q.get("src")) ? q.get("src") : "paintings";
   return { hexes: ptHexList(h), st };
 }
 // (#/pair/ itself is now the pair page, js/setpage.js; this screen keeps the paintings-of/ address even for a plain pair)
@@ -355,6 +377,7 @@ function paintingsOfPage(hexes, o = {}) {
     const g = e.target.closest("[data-gi]");
     if (g && !g.closest("[data-statsbody]")) return galleryPage(+g.dataset.gi, true, hexes, st.tol);
     if (g) return galleryPage(+g.dataset.gi, true, hexes, st.tol);
+    const ph = e.target.closest("[data-pt-photo]"); if (ph) return ptOpenPhoto(ph.dataset.ptPhoto);
     if (e.target.closest("[data-more]")) return paint(true);
     if (e.target.closest("[data-retry]")) return run();
     const drop = e.target.closest("[data-drop]");

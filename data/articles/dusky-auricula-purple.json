@@ -1,0 +1,110 @@
+{
+ "slug": "dusky-auricula-purple",
+ "name": "Dusky Auricula Purple",
+ "hex": "#5E4556",
+ "names": [
+  "Dusky Auricula Purple"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dusky Auricula Purple is a dark, grayed purple first plated by Robert Ridgway in 1912, its name likely built on the auricula, a primrose grown for purple-shaded petals.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower's name, darkened",
+   "body": "Ridgway's *Color Standards and Color Nomenclature* of 1912 plates this swatch at plate XXVI, hue 69 prime, on an aged, scanned original that is itself approximate [1]. The ISCC-NBS charts of 1955 file block 242 as a dark reddish purple, 4.2 units from this swatch [1]. The name pairs *dusky* with [[auricula-purple|Auricula Purple]]; the base name's own origin is undocumented in our sources, but it likely points to *Primula auricula*, a European primrose grown for petals that shade from purple toward near-black at the throat [1].\n\nAt hex #5E4556 it measures lightness 33 and chroma 15 in LCH [1]. Its closest named neighbor is [[eggplant|Eggplant]], 2.9 units away and redder; [[dark-maroon-purple|Dark Maroon Purple]] sits 4.3 units off, also redder, and [[dusty-plum|Dusty Plum]] 5.0 units off, lighter and redder [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This match appears in 0.28% of the 23,781 paintings in our archive (67 paintings, as photographed); the within-painting lens narrows that to 38 [3]. In our archive it is rarer than 54% of the named colors [3]. It peaks in the 1900s, present in 0.7% of the 1,674 paintings we have from that decade (12 paintings), 3.0 times the rate its museums would predict [3]. Inside a painting it most often plays a hidden color, in 50% of its 38 appearances by lightness rank within the painting [3]. The earliest match dates to 1375, 537 years before the name's 1912 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier of Auricula Purple: dusky + auricula purple, named for the primrose Primula auricula",
+   "first_recorded": "1912 (Ridgway, plate XXVI)",
+   "source": "Ridgway, Color Standards and Color Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "auricula-purple",
+   "eggplant",
+   "dark-maroon-purple",
+   "dusty-plum"
+  ],
+  "parent": "auricula-purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 67,
+  "pct_archive": 0.28,
+  "n_within_painting": 38,
+  "pct_within_painting": 0.16,
+  "rank_pct": 46,
+  "name_first_recorded": 1912,
+  "earliest_match_year": 1375
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-d.json): Ridgway 1912, plate XXVI, hue 69'; ISCC-NBS 1955, block 242 (R)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Dusky Auricula Purple's name built on?",
+   "choices": [
+    "Auricula, a primrose with purple-centered blooms",
+    "A gemstone",
+    "A dye city",
+    "A painter's surname"
+   ],
+   "answer": "Auricula, a primrose with purple-centered blooms",
+   "kind": "pick"
+  },
+  {
+   "q": "Which plate first fixes the name Dusky Auricula Purple in our sources?",
+   "choices": [
+    "Ridgway, 1912, plate XXVI",
+    "The 2010 xkcd color survey",
+    "Maerz and Paul, 1930",
+    "The ISCC-NBS charts alone"
+   ],
+   "answer": "Ridgway, 1912, plate XXVI",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dusky Auricula Purple is named for a primrose whose petals naturally shade into near-black at the throat."
+ ],
+ "words": 305,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field section's presence/rank/decade/painter/country numbers no longer matched data/graph/fieldnotes (stale archive snapshot); replaced with the current fieldnotes facts"
+  ]
+ }
+}

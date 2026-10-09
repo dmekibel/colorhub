@@ -1,126 +1,128 @@
 {
- "slug": "mauve-rose",
- "name": "Mauve rose",
- "hex": "#B58A96",
- "names": [
-  "Mauve rose"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Mauve rose is a dusty, greyish pink-purple on the warmer side of the [[mauve]] family, dated to Ridgway's 1912 nomenclature and confirmed by the ISCC-NBS system in 1955 as a close match to its own \"light grayish purplish red\" block.",
- "sections": [
-  {
-   "id": "name",
-   "title": "One block, many brand names",
-   "body": "The ISCC-NBS system places Mauve rose in block 16, only 1.6 units from that block's center, a close fit [1]. Maerz and Paul's 1930 dictionary and the ISCC-NBS lists of 1955 attach a long chain of near-synonyms to the same block, among them Vinaceous, Candida, Grey Pink and Mauve Orchid, each a separate trade name landing close to the same point [1]. The books in color-kb have no entry for \"Mauve rose\" itself [4].\n\nIn the ColorHub library the point is also carried, with no measurable difference, as Vinaceous-Lilac (ΔE 0.0) [1][3]. Its nearest distinct neighbor is [[anemone]], 2.6 units off and \"almost the same\" by our graph's own description [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Mauve rose is rare in our archive: 22 of 23,781 paintings, about 0.1 percent, as photographed [2]. Where it appears, it keeps unusually close company with plain [[mauve]], turning up on the same canvases far more than chance would predict [3]. Counts are computed matches on varnished, photographed paintings, not pigment identifications [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a rose-tinted shade of mauve",
-   "first_recorded": "1912, Ridgway",
-   "source": "Ridgway 1912; ISCC-NBS 1955"
-  },
-  "aka": [
-   "Vinaceous-Lilac",
-   "Vinaceous",
-   "Candida"
+  "slug": "mauve-rose",
+  "name": "Mauve rose",
+  "hex": "#B58A96",
+  "names": [
+    "Mauve rose",
+    "Vinaceous-Lilac"
   ],
-  "siblings": [
-   "vinaceous-lilac",
-   "anemone",
-   "mauve-grey"
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Mauve rose is a dusty, greyish pink-purple on the warmer side of the [[mauve]] family, dated to Ridgway's 1912 nomenclature and confirmed by the ISCC-NBS system in 1955 as a close match to its own \"light grayish purplish red\" block.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "One block, many brand names",
+      "body": "The ISCC-NBS system places Mauve rose in block 16, only 1.6 units from that block's center, a close fit [1]. Maerz and Paul's 1930 dictionary and the ISCC-NBS lists of 1955 attach a long chain of near-synonyms to the same block, among them Vinaceous, Candida, Grey Pink and Mauve Orchid, each a separate trade name landing close to the same point [1]. The books in color-kb have no entry for \"Mauve rose\" itself [4].\n\nIn the ColorHub library the point is also carried, with no measurable difference, as Vinaceous-Lilac (ΔE 0.0) [1][3]. Its nearest distinct neighbor is [[anemone]], 2.6 units off and \"almost the same\" by our graph's own description [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Mauve rose is rare in our archive: 22 of 23,781 paintings, about 0.1 percent, as photographed [2]. Where it appears, it keeps unusually close company with plain [[mauve]], turning up on the same canvases far more than chance would predict [3]. Counts are computed matches on varnished, photographed paintings, not pigment identifications [2]."
+    }
   ],
-  "parent": "mauve",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 22,
-  "measured": {
-   "lch": [
-    61.8,
-    18.2,
-    359.9
-   ],
-   "nearest": [
-    [
-     "Anemone",
-     2.6
+  "aside": {
+    "origin": {
+      "named_after": "a rose-tinted shade of mauve",
+      "first_recorded": "1912, Ridgway",
+      "source": "Ridgway 1912; ISCC-NBS 1955"
+    },
+    "aka": [
+      "Vinaceous-Lilac",
+      "Vinaceous",
+      "Candida"
+    ],
+    "siblings": [
+      "mauve-rose",
+      "anemone",
+      "mauve-grey",
+      "grey-pink"
+    ],
+    "parent": "mauve",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 22,
+    "measured": {
+      "lch": [
+        61.8,
+        18.2,
+        359.9
+      ],
+      "nearest": [
+        [
+          "Anemone",
+          2.6
+        ]
+      ]
+    }
+  },
+  "questions": [
+    {
+      "q": "In the ColorHub library, Mauve rose and Vinaceous-Lilac are:",
+      "choices": [
+        "The same point, ΔE 0.0",
+        "Different colors 10 units apart",
+        "Unrelated names",
+        "Opposites on the wheel"
+      ],
+      "answer": "The same point, ΔE 0.0",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Mauve rose is one of the colors our archive finds most often.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Mauve rose shares its ColorHub library point exactly with a second trade name, Vinaceous-Lilac."
+  ],
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes, data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, RAL, Munsell and CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match (ΔE2000 ≤ 6, ≥ 5% of canvas), as photographed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph: nearest named neighbors and cross-domain twin matches (gems, films, fashion decades, Werner 1821 cross-reference), computed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "Concordance of the 29 color books held in color-kb for this name: no hits",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No book concordance hits for this name; sourced from ColorHub's own color library and archive data.",
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "questions": [
-  {
-   "q": "In the ColorHub library, Mauve rose and Vinaceous-Lilac are:",
-   "choices": [
-    "The same point, ΔE 0.0",
-    "Different colors 10 units apart",
-    "Unrelated names",
-    "Opposites on the wheel"
-   ],
-   "answer": "The same point, ΔE 0.0",
-   "kind": "pick"
   },
-  {
-   "q": "True or false: Mauve rose is one of the colors our archive finds most often.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Mauve rose shares its ColorHub library point exactly with a second trade name, Vinaceous-Lilac."
- ],
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes, data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, RAL, Munsell and CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match (ΔE2000 ≤ 6, ≥ 5% of canvas), as photographed",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph: nearest named neighbors and cross-domain twin matches (gems, films, fashion decades, Werner 1821 cross-reference), computed",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "Concordance of the 29 color books held in color-kb for this name: no hits",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No book concordance hits for this name; sourced from ColorHub's own color library and archive data.",
-   "lint 2026-10-09"
-  ]
- },
- "words": 201
+  "words": 201
 }

@@ -1,0 +1,43 @@
+{
+ "id": "mori-kei",
+ "name": "Mori Kei",
+ "lineage": {
+  "influenced_by": [
+   "Japanese street-fashion culture more broadly",
+   "a specific early social-networking platform's community features"
+  ],
+  "influences": [
+   "dark-mori"
+  ]
+ },
+ "eras": [
+  "2006–present (Japan)"
+ ],
+ "places": [],
+ "garments": [
+  "linen and cotton",
+  "crochet",
+  "muted florals"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "the loud, maximalist Harajuku street styles (decora, gyaru) that dominated Japanese street-fashion media before it, offering a quiet, muted, nature-focused alternative instead.",
+ "revivals": [],
+ "article": "Mori kei (\"forest style\") has an unusually specific founding platform: the community coalesced around 2006 on Mixi, a Japanese social networking site that predated most Western platforms' mainstream adoption, where members shared photos of loose, layered, naturalistic clothing in pale, muted tones evoking a quiet, imagined forest life. The style arrived as a deliberate contrast to the louder, more maximalist Harajuku street styles (gyaru, decora) that had dominated Japanese street-fashion media through the preceding years, offering a softer, quieter visual register instead. Mori kei's emphasis on natural fiber, muted color and an unhurried, nature-adjacent mood anticipated several Western internet aesthetics by nearly a decade — cottagecore in particular shares much of its visual logic — though the two developed independently, on different platforms, in different cultural contexts, and direct influence between them is not well documented.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Mori Kei"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 65% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

@@ -1,113 +1,116 @@
 {
- "slug": "pale-lime",
- "name": "Pale Lime",
- "hex": "#DDE490",
- "names": [
-  "Pale Lime"
- ],
- "tier": "commercial",
- "depth": "brief",
- "lede": "Pale Lime is a soft, light yellow-green; as a color name it is simply descriptive, and the books we hold say almost nothing about it.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A descriptive name",
-   "body": "The name joins pale to lime, the citrus color. Our sources give no date or inventor for it [1]. The only book hits are two near-identical passages from a cross-reference table in Baty's *Nature's Palette*, a book about Werner's nomenclature of colors, where Pale Lime appears in the same row as Green Gold and Olive Yellow [2]. The scan does not make the table's columns clear, so we do not read more into it. Neighboring colors include [[lime]] and [[green]]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "The swatch is light: contrast against white is only 1.35 [1]. In our archive of 23,781 paintings, a color within six units that covers at least five per cent of the canvas appears in 19 works [3]. The largest share is Sargent's *Portrait Study for Head of Moses*, at about 30 per cent, and 89 per cent of the matching areas sit in the highlights of their pictures [3]. Ten of the 19 date from the 1800s, and the earliest is a flower painting of 1599 [3]. As photographed: museum photographs of aged, varnished paintings; a color match is not a pigment test."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "lime (citrus), pale",
-   "first_recorded": "undocumented",
-   "source": "ColorHub core names"
-  },
-  "aka": [],
-  "siblings": [
-   "lime",
-   "chartreuse",
-   "apple-green",
-   "light-green"
+  "slug": "pale-lime",
+  "name": "Pale Lime",
+  "hex": "#DDE490",
+  "names": [
+    "Pale Lime",
+    "Viridine Green"
   ],
-  "parent": "green",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#DDE490",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 19,
-  "top_paintings": [
-   "commons-Q119810428",
-   "rijks-20026179",
-   "nga-59918"
+  "tier": "commercial",
+  "depth": "brief",
+  "lede": "Pale Lime is a soft, light yellow-green; as a color name it is simply descriptive, and the books we hold say almost nothing about it.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A descriptive name",
+      "body": "The name joins pale to lime, the citrus color. Our sources give no date or inventor for it [1]. The only book hits are two near-identical passages from a cross-reference table in Baty's *Nature's Palette*, a book about Werner's nomenclature of colors, where Pale Lime appears in the same row as Green Gold and Olive Yellow [2]. The scan does not make the table's columns clear, so we do not read more into it. Neighboring colors include [[lime]] and [[green]]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "The swatch is light: contrast against white is only 1.35 [1]. In our archive of 23,781 paintings, a color within six units that covers at least five per cent of the canvas appears in 19 works [3]. The largest share is Sargent's *Portrait Study for Head of Moses*, at about 30 per cent, and 89 per cent of the matching areas sit in the highlights of their pictures [3]. Ten of the 19 date from the 1800s, and the earliest is a flower painting of 1599 [3]. As photographed: museum photographs of aged, varnished paintings; a color match is not a pigment test."
+    }
   ],
-  "measured": {
-   "contrast_white": 1.35
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub core names (data/core-names.json), no library source or date",
-   "loc_kind": null,
-   "url": null
+  "aside": {
+    "origin": {
+      "named_after": "lime (citrus), pale",
+      "first_recorded": "undocumented",
+      "source": "ColorHub core names"
+    },
+    "aka": [
+      "Viridine Green (ridgway+iscc-nbs+maerz-paul+xkcd)"
+    ],
+    "siblings": [
+      "lime",
+      "chartreuse",
+      "apple-green",
+      "light-green"
+    ],
+    "parent": "green",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 267-268 (cross-reference table)",
-   "loc_kind": "pdf-page",
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#DDE490",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 19,
+    "top_paintings": [
+      "commons-Q119810428",
+      "rijks-20026179",
+      "nga-59918"
+    ],
+    "measured": {
+      "contrast_white": 1.35
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub core names (data/core-names.json), no library source or date",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 267-268 (cross-reference table)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What kind of color is Pale Lime?",
+      "choices": [
+        "A light yellow-green",
+        "A deep blue",
+        "A bright red"
+      ],
+      "answer": "A light yellow-green",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our books document a history for the name Pale Lime.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pale Lime is mostly seen as a highlight color in paintings, not a shadow.",
+    "Pale lime sits close to white: look for it in sunlit leaves."
+  ],
+  "words": 204,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "questions": [
-  {
-   "q": "What kind of color is Pale Lime?",
-   "choices": [
-    "A light yellow-green",
-    "A deep blue",
-    "A bright red"
-   ],
-   "answer": "A light yellow-green",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our books document a history for the name Pale Lime.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Pale Lime is mostly seen as a highlight color in paintings, not a shadow.",
-  "Pale lime sits close to white: look for it in sunlit leaves."
- ],
- "words": 204,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

@@ -1,149 +1,149 @@
 {
- "slug": "alloy-orange",
- "name": "Alloy Orange",
- "hex": "#C46210",
- "names": [
-  "Alloy Orange"
- ],
- "tier": "commercial",
- "depth": "brief",
- "lede": "Alloy Orange is a deep, brownish orange from Crayola's crayon list, close enough to the older name [[burnt-orange|burnt orange]] that the two are easy to mistake on screen.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A Crayola name with no paper trail",
-   "body": "Alloy Orange sits in Crayola's crayon list, and our only record of it traces to Wikipedia's inventory of Crayola names rather than to any dictionary or color standard in our library [1]. Crayola does not publish an explanation for the name, so when the crayon was introduced and who chose the name are both undocumented here [1]. The ISCC-NBS system classifies this hex value as a deep orange, about 2.1 units from that block's reference chip, and its Munsell notation works out to 3.6YR 5.1/11.7 [2]."
-  },
-  {
-   "id": "swatch",
-   "title": "Nearly burnt orange",
-   "body": "Our library's own color match places Alloy Orange within about 4.3 units of [[burnt-orange|burnt orange]], which reads a little more vivid beside it [2]. Closer still, at 3.8 units, are [[orange-rufous|Orange-Rufous]] and [[rust-orange|rust orange]], near twins on a screen, with the lighter [[xanthine-orange|Xanthine Orange]] just beyond at 3.9 [2]. The two names have unrelated histories: burnt orange is dated as early as 1915 and entered the 1930 Maerz and Paul dictionary, while Alloy Orange has no comparable record, only Crayola's own choice [2][3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a color near Alloy Orange appears in 141, about 0.59 per cent, and in 103 by the stricter within-painting measure, which is more common than 59 per cent of the named colors we track [4]. It functions almost entirely as an accent, 88 per cent of those 103 paintings, a small warm note rather than a field of color [4].\n\nIt peaks in paintings from the 1500s, at 1.4 times the expected rate, and is most over-represented in paintings from India, at 3.8 times expected [4]. These are photographs of varnished paintings read as screen colors, most painted centuries before Crayola existed, so the match is a hue coincidence, not a use of this crayon [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented (a Crayola crayon name)",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "Wikipedia, List of Crayola crayon colors"
-  },
-  "aka": [],
-  "siblings": [
-   "burnt-orange",
-   "orange-rufous",
-   "rust-orange",
-   "xanthine-orange"
+  "slug": "alloy-orange",
+  "name": "Alloy Orange",
+  "hex": "#C46210",
+  "names": [
+    "Alloy Orange"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 141,
-  "n_within": 103,
-  "role": "accent 88%",
-  "century_peak": "1500s, 1.4x expected",
-  "country": "India, 3.8x expected",
-  "measured": {
-   "lch": [
-    52.4,
-    67.1,
-    58.8
-   ],
-   "nearest": [
-    [
-     "Orange-Rufous",
-     3.8
+  "tier": "commercial",
+  "depth": "brief",
+  "lede": "Alloy Orange is a deep, brownish orange from Crayola's crayon list, close enough to the older name [[burnt-orange|burnt orange]] that the two are easy to mistake on screen.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A Crayola name with no paper trail",
+      "body": "Alloy Orange sits in Crayola's crayon list, and our only record of it traces to Wikipedia's inventory of Crayola names rather than to any dictionary or color standard in our library [1]. Crayola does not publish an explanation for the name, so when the crayon was introduced and who chose the name are both undocumented here [1]. The ISCC-NBS system classifies this hex value as a deep orange, about 2.1 units from that block's reference chip, and its Munsell notation works out to 3.6YR 5.1/11.7 [2]."
+    },
+    {
+      "id": "swatch",
+      "title": "Nearly burnt orange",
+      "body": "Our library's own color match places Alloy Orange within about 4.3 units of [[burnt-orange|burnt orange]], which reads a little more vivid beside it [2]. Closer still, at 3.8 units, are [[rust-orange|Orange-Rufous]] and [[rust-orange|rust orange]], near twins on a screen, with the lighter [[xanthine-orange|Xanthine Orange]] just beyond at 3.9 [2]. The two names have unrelated histories: burnt orange is dated as early as 1915 and entered the 1930 Maerz and Paul dictionary, while Alloy Orange has no comparable record, only Crayola's own choice [2][3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a color near Alloy Orange appears in 141, about 0.59 per cent, and in 103 by the stricter within-painting measure, which is more common than 59 per cent of the named colors we track [4]. It functions almost entirely as an accent, 88 per cent of those 103 paintings, a small warm note rather than a field of color [4].\n\nIt peaks in paintings from the 1500s, at 1.4 times the expected rate, and is most over-represented in paintings from India, at 3.8 times expected [4]. These are photographs of varnished paintings read as screen colors, most painted centuries before Crayola existed, so the match is a hue coincidence, not a use of this crayon [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented (a Crayola crayon name)",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "Wikipedia, List of Crayola crayon colors"
+    },
+    "aka": [],
+    "siblings": [
+      "burnt-orange",
+      "rust-orange",
+      "xanthine-orange",
+      "brown-orange"
     ],
-    [
-     "Burnt orange",
-     4.3
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 141,
+    "n_within": 103,
+    "role": "accent 88%",
+    "century_peak": "1500s, 1.4x expected",
+    "country": "India, 3.8x expected",
+    "measured": {
+      "lch": [
+        52.4,
+        67.1,
+        58.8
+      ],
+      "nearest": [
+        [
+          "Orange-Rufous",
+          3.8
+        ],
+        [
+          "Burnt orange",
+          4.3
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "web",
+      "cite": "Wikipedia, \"List of Crayola crayon colors\"",
+      "loc_kind": null,
+      "url": "https://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors"
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: nearest-match, ISCC-NBS and Munsell fields (data/library.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library: Maerz and Paul first-recorded dates (data/library.json, burnt orange entry)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which older name sits about 4.3 units from Alloy Orange, close enough to mistake on screen?",
+      "choices": [
+        "Burnt orange",
+        "Mauve",
+        "Cerulean",
+        "Isabelline"
+      ],
+      "answer": "Burnt orange",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Crayola publishes an explanation of where the name Alloy Orange comes from.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "In our painting archive, where does a color near Alloy Orange most often turn up?",
+      "choices": [
+        "As a small accent",
+        "As the dominant color filling most of the canvas",
+        "As a background wash",
+        "As a frame or border color"
+      ],
+      "answer": "As a small accent",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Alloy Orange is close enough to burnt orange that the two can look identical on screen.",
+    "In our archive, a color near Alloy Orange turns up most often as a small accent, not the main color."
+  ],
+  "words": 321,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Verified: ISCC-NBS block 51 'deep orange' and dE 2.1 to its centroid #BE6000 reproduce exactly from data/sources/iscc-nbs-centroids.json; Munsell 3.6YR 5.1/11.7 reproduces exactly via colour-science (illuminant C, Bradford) matching tools/graph_color.py's pipeline; nearest-match dE 4.3 to Burnt Orange matches data/library.json. No myth-list violations. Carried forward prior note: no book/institutional source for the Crayola introduction date, only Wikipedia's list, already hedged as web/undocumented in the text.",
+      "Editor spot-audit 2026-10-09: removed unverified claim that Antique Brass, Copper and Brown Sugar sit close (they are 15+ units lighter/duller); 'same paint tin' overclaim at dE 4.3 removed; nearest is Orange-Rufous/rust orange 3.8 per graph edges, not Burnt orange (that was the curriculum 'app' match); removed invented 'robe or vessel'.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "web",
-   "cite": "Wikipedia, \"List of Crayola crayon colors\"",
-   "loc_kind": null,
-   "url": "https://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors"
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library: nearest-match, ISCC-NBS and Munsell fields (data/library.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library: Maerz and Paul first-recorded dates (data/library.json, burnt orange entry)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which older name sits about 4.3 units from Alloy Orange, close enough to mistake on screen?",
-   "choices": [
-    "Burnt orange",
-    "Mauve",
-    "Cerulean",
-    "Isabelline"
-   ],
-   "answer": "Burnt orange",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Crayola publishes an explanation of where the name Alloy Orange comes from.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "In our painting archive, where does a color near Alloy Orange most often turn up?",
-   "choices": [
-    "As a small accent",
-    "As the dominant color filling most of the canvas",
-    "As a background wash",
-    "As a frame or border color"
-   ],
-   "answer": "As a small accent",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Alloy Orange is close enough to burnt orange that the two can look identical on screen.",
-  "In our archive, a color near Alloy Orange turns up most often as a small accent, not the main color."
- ],
- "words": 321,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Verified: ISCC-NBS block 51 'deep orange' and dE 2.1 to its centroid #BE6000 reproduce exactly from data/sources/iscc-nbs-centroids.json; Munsell 3.6YR 5.1/11.7 reproduces exactly via colour-science (illuminant C, Bradford) matching tools/graph_color.py's pipeline; nearest-match dE 4.3 to Burnt Orange matches data/library.json. No myth-list violations. Carried forward prior note: no book/institutional source for the Crayola introduction date, only Wikipedia's list, already hedged as web/undocumented in the text.",
-   "Editor spot-audit 2026-10-09: removed unverified claim that Antique Brass, Copper and Brown Sugar sit close (they are 15+ units lighter/duller); 'same paint tin' overclaim at dE 4.3 removed; nearest is Orange-Rufous/rust orange 3.8 per graph edges, not Burnt orange (that was the curriculum 'app' match); removed invented 'robe or vessel'.",
-   "lint 2026-10-09"
-  ]
- }
 }

@@ -1,124 +1,127 @@
 {
- "slug": "biscuit",
- "name": "Biscuit",
- "hex": "#CEB29A",
- "names": [
-  "Biscuit"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Biscuit is the pale tan of a baked biscuit, named from a word that means \"twice cooked\" and first used as a color in the 1880s.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Twice-cooked",
-   "body": "*Biscuit* comes from the Italian *biscotto*, \"twice-cooked\" [1]. As a color word it means the light brown of a biscuit, and the dictionary dates its first record as a color to 1884 [1].\n\nThe word has a second life in pottery: a clay body that has had its first firing but not yet been decorated is called biscuit [1]."
-  },
-  {
-   "id": "use",
-   "title": "Biscuit in the wardrobe",
-   "body": "In fashion, biscuit sits among the soft skin-toned neutrals. A history of the color nude lists sand, champagne, biscuit, peach and beige as the alternatives that persist next to the word nude itself [2]. Its neighbors on the swatch chart are [[beige]], [[tan]] and [[bisque]] [3]."
-  },
-  {
-   "id": "swatch",
-   "title": "The swatch",
-   "body": "The ISCC-NBS system of 1955 files this color under \"brownish pink\", in block 57, about 2.7 units of color difference from the swatch [3]. Ridgway's 1912 atlas and the Maerz and Paul dictionary of 1930 are also sources for the name [3]. The color is light, with a lightness near 74 out of 100, and low in saturation [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "The ColorHub archive places biscuit in the orange family, though its chroma is low: it is a muted, light brownish pink [3]. Contrast against white is about 2 to 1, which is too pale for body text [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the baked biscuit (Italian biscotto, twice-cooked)",
-   "first_recorded": "1884 as a color word",
-   "source": "Paterson, A Dictionary of Colour, p. 50"
-  },
-  "aka": [],
-  "siblings": [
-   "beige",
-   "bisque",
-   "tan"
+  "slug": "biscuit",
+  "name": "Biscuit",
+  "hex": "#CEB29A",
+  "names": [
+    "Biscuit",
+    "Vinaceous-Buff"
   ],
-  "parent": null,
-  "children": [
-   "french-beige"
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Biscuit is the pale tan of a baked biscuit, named from a word that means \"twice cooked\" and first used as a color in the 1880s.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Twice-cooked",
+      "body": "*Biscuit* comes from the Italian *biscotto*, \"twice-cooked\" [1]. As a color word it means the light brown of a biscuit, and the dictionary dates its first record as a color to 1884 [1].\n\nThe word has a second life in pottery: a clay body that has had its first firing but not yet been decorated is called biscuit [1]."
+    },
+    {
+      "id": "use",
+      "title": "Biscuit in the wardrobe",
+      "body": "In fashion, biscuit sits among the soft skin-toned neutrals. A history of the color nude lists sand, champagne, biscuit, peach and beige as the alternatives that persist next to the word nude itself [2]. Its neighbors on the swatch chart are [[beige]], [[tan]] and [[bisque]] [3]."
+    },
+    {
+      "id": "swatch",
+      "title": "The swatch",
+      "body": "The ISCC-NBS system of 1955 files this color under \"brownish pink\", in block 57, about 2.7 units of color difference from the swatch [3]. Ridgway's 1912 atlas and the Maerz and Paul dictionary of 1930 are also sources for the name [3]. The color is light, with a lightness near 74 out of 100, and low in saturation [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "The ColorHub archive places biscuit in the orange family, though its chroma is low: it is a muted, light brownish pink [3]. Contrast against white is about 2 to 1, which is too pale for body text [3]."
+    }
   ],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "it",
-    "name": "biscotto (twice-cooked)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub name archive",
-  "family": "Oranges",
-  "lightness": 74.4,
-  "chroma": 17.2,
-  "contrast_white": 2.01,
-  "iscc_nearest": "brownish pink (block 57), dE 2.7"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 50 (\"biscuit\")",
-   "loc_kind": "pdf-page",
-   "url": null
+  "aside": {
+    "origin": {
+      "named_after": "the baked biscuit (Italian biscotto, twice-cooked)",
+      "first_recorded": "1884 as a color word",
+      "source": "Paterson, A Dictionary of Colour, p. 50"
+    },
+    "aka": [
+      "Vinaceous-Buff (ridgway+iscc-nbs)"
+    ],
+    "siblings": [
+      "beige",
+      "bisque",
+      "tan"
+    ],
+    "parent": null,
+    "children": [
+      "french-beige"
+    ],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "it",
+        "name": "biscotto (twice-cooked)"
+      }
+    ]
   },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "St. Clair, The Secret Lives of Color, p. 51 (nude)",
-   "loc_kind": "pdf-page",
-   "url": null
+  "field": {
+    "dataset": "ColorHub name archive",
+    "family": "Oranges",
+    "lightness": 74.4,
+    "chroma": 17.2,
+    "contrast_white": 2.01,
+    "iscc_nearest": "brownish pink (block 57), dE 2.7"
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub name archive, data/graph nodes (ISCC-NBS 1955 block 57; Ridgway 1912; Maerz and Paul 1930)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the Italian root of \"biscuit\" mean?",
-   "choices": [
-    "Twice cooked",
-    "Pale brown",
-    "Crumbly",
-    "Baker's flour"
-   ],
-   "answer": "Twice cooked",
-   "kind": "pick"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 50 (\"biscuit\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "St. Clair, The Secret Lives of Color, p. 51 (nude)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub name archive, data/graph nodes (ISCC-NBS 1955 block 57; Ridgway 1912; Maerz and Paul 1930)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the Italian root of \"biscuit\" mean?",
+      "choices": [
+        "Twice cooked",
+        "Pale brown",
+        "Crumbly",
+        "Baker's flour"
+      ],
+      "answer": "Twice cooked",
+      "kind": "pick"
+    },
+    {
+      "q": "In pottery, what is a biscuit?",
+      "choices": [
+        "Clay fired once, before decoration",
+        "A finished glaze",
+        "A kiln shelf",
+        "A painted tile"
+      ],
+      "answer": "Clay fired once, before decoration",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Biscuit means \"twice cooked\", and as a color it was first recorded in 1884."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Removed unsupported inference that unglazed clay is the older meaning."
+    ]
   },
-  {
-   "q": "In pottery, what is a biscuit?",
-   "choices": [
-    "Clay fired once, before decoration",
-    "A finished glaze",
-    "A kiln shelf",
-    "A painted tile"
-   ],
-   "answer": "Clay fired once, before decoration",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Biscuit means \"twice cooked\", and as a color it was first recorded in 1884."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Removed unsupported inference that unglazed clay is the older meaning."
-  ]
- },
- "words": 219
+  "words": 219
 }

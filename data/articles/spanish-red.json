@@ -1,343 +1,343 @@
 {
- "slug": "spanish-red",
- "name": "Spanish Red",
- "hex": "#E60026",
- "names": [
-  "Spanish Red"
- ],
- "tier": "place",
- "depth": "epic",
- "lede": "Spanish red is a name with two histories: a bright red earth pigment mined in Spain, and the red of cochineal, the cactus insect whose dye made Spain's American empire rich and sent pirates, spies and chemists after it.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Two Spanish reds",
-   "body": "Paterson's dictionary gives Spanish red as a bright red, and lists a Spanish red oxide, a bright red iron-oxide pigment used for staining [1]. Under Venetian red it names the natural iron oxide that goes by many place names, Spanish red among them [1].\n\nThe second meaning is the dye. *Spanish Red* is the title of R. A. Donkin's 1977 study of cochineal and the opuntia cactus, and both Greenfield and Finlay cite it [3][4]. Finlay uses the phrase for cochineal itself [4]. The earth and the insect share a name and a country, nothing else, and this article follows both.\n\nThe name also sits in color lists. The Maerz and Paul dictionary of 1930 prints Spanish Red on plate 6 and dates the name to 1854, and the 1955 ISCC-NBS dictionary carries it forward under its block 40 [19]."
-  },
-  {
-   "id": "earth",
-   "title": "The earth",
-   "body": "Red ochre is the oldest red there is. Neanderthals buried their dead with it, and Cro-Magnon painters covered cave walls in the same iron-rich earth [5].\n\nAs a pigment, Spanish red was a variety of red ochre [2]. Fairholt defined it in 1854 as an ochre resembling Venetian red but slightly yellower, and the Pigment Compendium takes it to come from Spain's commercially important red ochre deposits [2]. Field's 1835 list of names for red ochre includes Spanish red, and Salter in 1869 added Spanish brown [2]. Heaton recorded Spanish oxide in 1928 as a term for a natural iron oxide from Spain [2].\n\nThe earth is not the swatch. The vivid red on this page, #E60026, lies 17.7 CIEDE2000 units from our [[red-oxide]], an earthy brick-brown red, and 6.6 from [[venetian-red]] [19]. For the ochre sense, look for brick and rust; for the swatch, look at a poppy or a fire engine."
-  },
-  {
-   "id": "insect",
-   "title": "Blood of the nopal",
-   "body": "Cochineal is a scale insect that lives on prickly pear cacti and makes carminic acid, a defensive chemical that is also a powerful red dye [6]. The female insect is the source of the dye, and on mordanted cloth the red lasts for centuries [6]. The Aztecs called it *nocheztli*, \"blood of the nopal\", and one of their words for red, *tlapalli*, also meant color in general [6].\n\nWhere cochineal dyeing began is open to argument. Cochineal-saturated textiles about two thousand years old come from a necropolis in Peru, while the people of the Mixteca and Oaxaca highlands in Mexico bred the domesticated insect, *Dactylopius coccus*, which is twice the size of the wild kind and yields more dye [6]. Scholars disagree on who came first, and Greenfield leaves the question open [6].\n\nFarmers seeded egg nests onto cactus joints, harvested two or sometimes three times a year, and dried the females in the sun or in steam baths, losing a third of their weight [6]. Greenfield puts it at as many as 70,000 dried insects to a pound of dye, a figure best read as tens of thousands [6]. The Aztecs took the dye as tribute: by the Conquest they demanded over a hundred bags a year from villages in Oaxaca and the Mixteca, which modern estimates make more than nine tons [6]. They also used it as medicine, as a food color for tamales and as cosmetic color for the skin [6].\n\nA cochineal red depends on what it is dyed onto. Animal fibers took it best, and cotton gave admirable but paler reds [6]. Finlay compares the infested cactus fields to a noble rot, with [[gem:ruby|rubies]] in place of sweet wine at the end [4]."
-  },
-  {
-   "id": "empire",
-   "title": "From tribute to Spain's second export",
-   "body": "The conquistadors met the dye in Mexico's marketplaces in 1519 [5]. Cortés took little interest in the trade, and most conquistadors left cochineal to merchants [7]. By 1554 Spanish merchants valued the Tlaxcala-Puebla trade alone at over 100,000 pesos a year [9].\n\nBy the late 1560s cochineal was heading for second place among New Spain's exports, behind only silver [9]. Up to 175,000 pounds were harvested each year, most of it shipped to Seville, where officials valued the imports at about 250,000 pesos [9]. Royal taxes took as much as 25 per cent of the import value [9].\n\nMerchants learned to corner it. In 1585 the Capponi of Florence and the Maluenda of Burgos, having learned that the annual fleet had left with unusually little cochineal, bought up most of Europe's stock and then raised the price [8]."
-  },
-  {
-   "id": "secret",
-   "title": "A secret worth guarding",
-   "body": "Spain treated the dye as a state secret. From the 1560s the Crown repeatedly planned a royal monopoly on the trade and set up a partial one only in 1618 [10]. It did better at protecting Spain's global monopoly on production: by the early 1600s imports were worth over 500,000 pesos a year, and travel permits and loyal merchants on both sides of the Atlantic kept foreigners away from the live insect [10].\n\nThe secrecy kept Europe arguing for more than two centuries over whether cochineal was animal, vegetable or mineral [5]. In the sixteenth century many thought it a fruit or a nut [4]. A Dutch merchant calculated in 1704 that a pound held as many as 102,400 grains and asked who could dismember so many insects, so cochineal had to be a fruit or a plant growth [12].\n\nThe microscope did not settle it quickly. Leeuwenhoek, asked by Robert Boyle in 1685, first took the grains for seeds, and only in 1704, with better lenses, drew eggs inside them [13]. Many sensible people still distrusted microscope evidence on principle [13]."
-  },
-  {
-   "id": "pirates",
-   "title": "Pirates and spies",
-   "body": "English privateers wanted cochineal as much as silver. In the winter of 1590 bankers reported prizes carrying over 20,000 pounds of it and feared bankruptcies in Seville [11]. After the earl of Essex's great prize of 1597, Elizabeth let him buy the cochineal at 18 shillings a pound when the going price was 30 to 40, and barred other imports for two years [11].\n\nThe French botanist Thiery de Menonville set out in January 1777 with a passport naming him botanist and physician [14]. He took Oaxacan cochineal and cactus, and when he reached Saint-Domingue on 4 September much of the stock had died [14]. British dyers of the late 1700s used about 240,000 pounds a year and paid Spanish merchants nearly £200,000 for it [15]. So when James Anderson, an East India Company surgeon, wrote in 1786 that he had found cochineal on a cactus at Madras, Joseph Banks was almost certainly elated [15]."
-  },
-  {
-   "id": "collapse",
-   "title": "Boom and collapse",
-   "body": "World production quadrupled between 1830 and 1850 to over two million pounds a year, with the Canary Islands, Guatemala, Mexico and Java all supplying [16]. By the early 1850s the price was a quarter of its 1820 level [16]. The Canary Islands then raised output sixfold between 1855 and the early 1870s, to as many as five or six million pounds a year [17].\n\nChemistry ended it. Synthetic alizarin, found at once by Perkin and by BASF chemists in 1869, destroyed the market for [[madder]] and cut into cochineal's [17]. In 1878 Biebrich scarlet, a German dye, matched cochineal almost perfectly on wool, and the market collapsed [17]. Canary farmers who had nothing else to export fell into poverty, and most switched to bananas in the 1890s [17]."
-  },
-  {
-   "id": "today",
-   "title": "The dye that came back",
-   "body": "Cochineal now appears on labels as E120, cochineal extract, [[carmine]] or carminic acid, in candy, yogurt, juice, cough syrup, lipstick and Campari [18]. Finlay notes that in the United States it is one of the few red ingredients permitted in eye shadow [4]. Peru supplies 80 per cent or more of the world's cochineal, with exports of nearly two million pounds a year, and prices swung from twelve to over eighty US dollars a kilogram in the 1990s [18]."
-  },
-  {
-   "id": "swatch",
-   "title": "The swatch is a screen red",
-   "body": "The swatch, #E60026, is a vivid red and the nearest named colors are close: [[red]] at 2.9 CIEDE2000 units, [[vermilion]] at 5.6 and [[crimson]] at 5.8 [19]. Neither the ochre nor the insect fixes it. The books give no single reference color for either, and a cochineal red moves with the mordant and the fiber [6]. Treat the swatch as a name-list color, not a measured dye."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in only 11 works [20]. In a finer lens it appears in 7 paintings, which makes it rarer than 72 per cent of the named colors [20]. The largest area is a Rajput page of about 1650, a Brahmin delivering an invitation to Krishna, where it fills 29 per cent of the picture [20].\n\nThe rest are scattered: [[painter:pierre-bonnard|Bonnard]]'s *Corner of a Table* of 1935, a Chinese ancestor portrait of 1644, [[painter:manuel-castellano|Castellano]]'s portrait of Alfonso I, [[painter:felix-vallotton|Vallotton]]'s *Romanian Woman in a Red Dress* and [[painter:john-singer-sargent|Sargent]]'s portrait of William Marshall Cazalet [20]. The earliest is [[painter:bronzino|Bronzino]]'s *Pietà with Saint Mary Magdalene* of 1529, only a few years after the conquest of Mexico [20]. A look-alike hue in an aged photograph proves nothing about cochineal. By century, the 1900s hold four of the 11 and are the one clear peak, at 5.2 times the archive's rate [20].\n\nIn every one of the seven paintings the finer lens finds, this red is an accent, not a ground [20]. These are photographs of varnished paintings, so read them as screen colors. Where to look: a cardinal's scarlet robe in a portrait [14], or a lipstick label that says E120 [18]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Spain, as source of a red ochre and of New World cochineal",
-   "first_recorded": "Maerz and Paul 1930 give 1854; Donkin's 1977 study uses it for cochineal",
-   "source": "Pigment Compendium p. 363; Greenfield, A Perfect Red; ColorHub library"
-  },
-  "aka": [
-   "Spanish oxide (the ochre)",
-   "cochineal red",
-   "carmine (the dye)"
+  "slug": "spanish-red",
+  "name": "Spanish Red",
+  "hex": "#E60026",
+  "names": [
+    "Spanish Red"
   ],
-  "siblings": [
-   "venetian-red",
-   "indian-red",
-   "red-oxide",
-   "carmine"
+  "tier": "place",
+  "depth": "epic",
+  "lede": "Spanish red is a name with two histories: a bright red earth pigment mined in Spain, and the red of cochineal, the cactus insect whose dye made Spain's American empire rich and sent pirates, spies and chemists after it.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Two Spanish reds",
+      "body": "Paterson's dictionary gives Spanish red as a bright red, and lists a Spanish red oxide, a bright red iron-oxide pigment used for staining [1]. Under Venetian red it names the natural iron oxide that goes by many place names, Spanish red among them [1].\n\nThe second meaning is the dye. *Spanish Red* is the title of R. A. Donkin's 1977 study of cochineal and the opuntia cactus, and both Greenfield and Finlay cite it [3][4]. Finlay uses the phrase for cochineal itself [4]. The earth and the insect share a name and a country, nothing else, and this article follows both.\n\nThe name also sits in color lists. The Maerz and Paul dictionary of 1930 prints Spanish Red on plate 6 and dates the name to 1854, and the 1955 ISCC-NBS dictionary carries it forward under its block 40 [19]."
+    },
+    {
+      "id": "earth",
+      "title": "The earth",
+      "body": "Red ochre is the oldest red there is. Neanderthals buried their dead with it, and Cro-Magnon painters covered cave walls in the same iron-rich earth [5].\n\nAs a pigment, Spanish red was a variety of red ochre [2]. Fairholt defined it in 1854 as an ochre resembling Venetian red but slightly yellower, and the Pigment Compendium takes it to come from Spain's commercially important red ochre deposits [2]. Field's 1835 list of names for red ochre includes Spanish red, and Salter in 1869 added Spanish brown [2]. Heaton recorded Spanish oxide in 1928 as a term for a natural iron oxide from Spain [2].\n\nThe earth is not the swatch. The vivid red on this page, #E60026, lies 17.7 CIEDE2000 units from our [[red-oxide]], an earthy brick-brown red, and 6.6 from [[venetian-red]] [19]. For the ochre sense, look for brick and rust; for the swatch, look at a poppy or a fire engine."
+    },
+    {
+      "id": "insect",
+      "title": "Blood of the nopal",
+      "body": "Cochineal is a scale insect that lives on prickly pear cacti and makes carminic acid, a defensive chemical that is also a powerful red dye [6]. The female insect is the source of the dye, and on mordanted cloth the red lasts for centuries [6]. The Aztecs called it *nocheztli*, \"blood of the nopal\", and one of their words for red, *tlapalli*, also meant color in general [6].\n\nWhere cochineal dyeing began is open to argument. Cochineal-saturated textiles about two thousand years old come from a necropolis in Peru, while the people of the Mixteca and Oaxaca highlands in Mexico bred the domesticated insect, *Dactylopius coccus*, which is twice the size of the wild kind and yields more dye [6]. Scholars disagree on who came first, and Greenfield leaves the question open [6].\n\nFarmers seeded egg nests onto cactus joints, harvested two or sometimes three times a year, and dried the females in the sun or in steam baths, losing a third of their weight [6]. Greenfield puts it at as many as 70,000 dried insects to a pound of dye, a figure best read as tens of thousands [6]. The Aztecs took the dye as tribute: by the Conquest they demanded over a hundred bags a year from villages in Oaxaca and the Mixteca, which modern estimates make more than nine tons [6]. They also used it as medicine, as a food color for tamales and as cosmetic color for the skin [6].\n\nA cochineal red depends on what it is dyed onto. Animal fibers took it best, and cotton gave admirable but paler reds [6]. Finlay compares the infested cactus fields to a noble rot, with [[gem:ruby|rubies]] in place of sweet wine at the end [4]."
+    },
+    {
+      "id": "empire",
+      "title": "From tribute to Spain's second export",
+      "body": "The conquistadors met the dye in Mexico's marketplaces in 1519 [5]. Cortés took little interest in the trade, and most conquistadors left cochineal to merchants [7]. By 1554 Spanish merchants valued the Tlaxcala-Puebla trade alone at over 100,000 pesos a year [9].\n\nBy the late 1560s cochineal was heading for second place among New Spain's exports, behind only silver [9]. Up to 175,000 pounds were harvested each year, most of it shipped to Seville, where officials valued the imports at about 250,000 pesos [9]. Royal taxes took as much as 25 per cent of the import value [9].\n\nMerchants learned to corner it. In 1585 the Capponi of Florence and the Maluenda of Burgos, having learned that the annual fleet had left with unusually little cochineal, bought up most of Europe's stock and then raised the price [8]."
+    },
+    {
+      "id": "secret",
+      "title": "A secret worth guarding",
+      "body": "Spain treated the dye as a state secret. From the 1560s the Crown repeatedly planned a royal monopoly on the trade and set up a partial one only in 1618 [10]. It did better at protecting Spain's global monopoly on production: by the early 1600s imports were worth over 500,000 pesos a year, and travel permits and loyal merchants on both sides of the Atlantic kept foreigners away from the live insect [10].\n\nThe secrecy kept Europe arguing for more than two centuries over whether cochineal was animal, vegetable or mineral [5]. In the sixteenth century many thought it a fruit or a nut [4]. A Dutch merchant calculated in 1704 that a pound held as many as 102,400 grains and asked who could dismember so many insects, so cochineal had to be a fruit or a plant growth [12].\n\nThe microscope did not settle it quickly. Leeuwenhoek, asked by Robert Boyle in 1685, first took the grains for seeds, and only in 1704, with better lenses, drew eggs inside them [13]. Many sensible people still distrusted microscope evidence on principle [13]."
+    },
+    {
+      "id": "pirates",
+      "title": "Pirates and spies",
+      "body": "English privateers wanted cochineal as much as silver. In the winter of 1590 bankers reported prizes carrying over 20,000 pounds of it and feared bankruptcies in Seville [11]. After the earl of Essex's great prize of 1597, Elizabeth let him buy the cochineal at 18 shillings a pound when the going price was 30 to 40, and barred other imports for two years [11].\n\nThe French botanist Thiery de Menonville set out in January 1777 with a passport naming him botanist and physician [14]. He took Oaxacan cochineal and cactus, and when he reached Saint-Domingue on 4 September much of the stock had died [14]. British dyers of the late 1700s used about 240,000 pounds a year and paid Spanish merchants nearly £200,000 for it [15]. So when James Anderson, an East India Company surgeon, wrote in 1786 that he had found cochineal on a cactus at Madras, Joseph Banks was almost certainly elated [15]."
+    },
+    {
+      "id": "collapse",
+      "title": "Boom and collapse",
+      "body": "World production quadrupled between 1830 and 1850 to over two million pounds a year, with the Canary Islands, Guatemala, Mexico and Java all supplying [16]. By the early 1850s the price was a quarter of its 1820 level [16]. The Canary Islands then raised output sixfold between 1855 and the early 1870s, to as many as five or six million pounds a year [17].\n\nChemistry ended it. Synthetic alizarin, found at once by Perkin and by BASF chemists in 1869, destroyed the market for [[irresistible]] and cut into cochineal's [17]. In 1878 Biebrich scarlet, a German dye, matched cochineal almost perfectly on wool, and the market collapsed [17]. Canary farmers who had nothing else to export fell into poverty, and most switched to bananas in the 1890s [17]."
+    },
+    {
+      "id": "today",
+      "title": "The dye that came back",
+      "body": "Cochineal now appears on labels as E120, cochineal extract, [[carmine]] or carminic acid, in candy, yogurt, juice, cough syrup, lipstick and Campari [18]. Finlay notes that in the United States it is one of the few red ingredients permitted in eye shadow [4]. Peru supplies 80 per cent or more of the world's cochineal, with exports of nearly two million pounds a year, and prices swung from twelve to over eighty US dollars a kilogram in the 1990s [18]."
+    },
+    {
+      "id": "swatch",
+      "title": "The swatch is a screen red",
+      "body": "The swatch, #E60026, is a vivid red and the nearest named colors are close: [[red]] at 2.9 CIEDE2000 units, [[vermilion]] at 5.6 and [[crimson]] at 5.8 [19]. Neither the ochre nor the insect fixes it. The books give no single reference color for either, and a cochineal red moves with the mordant and the fiber [6]. Treat the swatch as a name-list color, not a measured dye."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in only 11 works [20]. In a finer lens it appears in 7 paintings, which makes it rarer than 72 per cent of the named colors [20]. The largest area is a Rajput page of about 1650, a Brahmin delivering an invitation to Krishna, where it fills 29 per cent of the picture [20].\n\nThe rest are scattered: [[painter:pierre-bonnard|Bonnard]]'s *Corner of a Table* of 1935, a Chinese ancestor portrait of 1644, [[painter:manuel-castellano|Castellano]]'s portrait of Alfonso I, [[painter:felix-vallotton|Vallotton]]'s *Romanian Woman in a Red Dress* and [[painter:john-singer-sargent|Sargent]]'s portrait of William Marshall Cazalet [20]. The earliest is [[painter:bronzino|Bronzino]]'s *Pietà with Saint Mary Magdalene* of 1529, only a few years after the conquest of Mexico [20]. A look-alike hue in an aged photograph proves nothing about cochineal. By century, the 1900s hold four of the 11 and are the one clear peak, at 5.2 times the archive's rate [20].\n\nIn every one of the seven paintings the finer lens finds, this red is an accent, not a ground [20]. These are photographs of varnished paintings, so read them as screen colors. Where to look: a cardinal's scarlet robe in a portrait [14], or a lipstick label that says E120 [18]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "venetian-red",
-    "gloss": "the sister red ochre, slightly less yellow than Spanish red by Fairholt's account"
-   },
-   {
-    "slug": "carmine",
-    "gloss": "the cochineal dye's own name, a deeper red"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "es",
-    "name": "grana cochinilla (the Spanish name of cochineal)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#E60026",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 11,
-  "top_paintings": [
-   "cma-314438",
-   "commons-Q17491092",
-   "met-42889",
-   "commons-Q59857439",
-   "commons-Q17492253",
-   "commons-Q64024588"
-  ],
-  "first_seen": {
-   "id": "commons-Q83295755",
-   "year": 1529
-  },
-  "by_century": {
-   "1900s": [
-    4,
-    1674
-   ]
-  },
-  "role": "accent in all 7 of the finer lens's paintings",
-  "measured": {
-   "lch": [
-    48.2,
-    88.6,
-    32.7
-   ],
-   "nearest": [
-    [
-     "Red",
-     2.9
+  "aside": {
+    "origin": {
+      "named_after": "Spain, as source of a red ochre and of New World cochineal",
+      "first_recorded": "Maerz and Paul 1930 give 1854; Donkin's 1977 study uses it for cochineal",
+      "source": "Pigment Compendium p. 363; Greenfield, A Perfect Red; ColorHub library"
+    },
+    "aka": [
+      "Spanish oxide (the ochre)",
+      "cochineal red",
+      "carmine (the dye)"
     ],
-    [
-     "Vermilion",
-     5.6
+    "siblings": [
+      "venetian-red",
+      "indian-red",
+      "red-oxide",
+      "carmine"
     ],
-    [
-     "Crimson",
-     5.8
+    "parent": null,
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "venetian-red",
+        "gloss": "the sister red ochre, slightly less yellow than Spanish red by Fairholt's account"
+      },
+      {
+        "slug": "carmine",
+        "gloss": "the cochineal dye's own name, a deeper red"
+      }
     ],
-    [
-     "Venetian Red",
-     6.6
+    "other_languages": [
+      {
+        "lang": "es",
+        "name": "grana cochinilla (the Spanish name of cochineal)"
+      }
     ]
-   ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#E60026",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 11,
+    "top_paintings": [
+      "cma-314438",
+      "commons-Q17491092",
+      "met-42889",
+      "commons-Q59857439",
+      "commons-Q17492253",
+      "commons-Q64024588"
+    ],
+    "first_seen": {
+      "id": "commons-Q83295755",
+      "year": 1529
+    },
+    "by_century": {
+      "1900s": [
+        4,
+        1674
+      ]
+    },
+    "role": "accent in all 7 of the finer lens's paintings",
+    "measured": {
+      "lch": [
+        48.2,
+        88.6,
+        32.7
+      ],
+      "nearest": [
+        [
+          "Red",
+          2.9
+        ],
+        [
+          "Vermilion",
+          5.6
+        ],
+        [
+          "Crimson",
+          5.8
+        ],
+        [
+          "Venetian Red",
+          6.6
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"Spanish red\", \"Spanish red oxide\", \"Venetian red\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"Red ochre\" p. 334 and \"Spanish ochre\", \"Spanish oxide\", \"Spanish red\" p. 363",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, notes and bibliography (citing R. A. Donkin, \"Spanish Red: An Ethnogeographical Study of Cochineal and the Opuntia Cactus\", 1977)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 13 (\"Red\") and bibliography",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, Prologue (\"The Color of Desire\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 3 (\"An Ancient Art\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 5 (\"A Profitable Empire\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 6 (\"Cochineal on Trial\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 7 (\"Legacies\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 8 (\"Trade Secrets\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 9 (\"Pirates' Prize\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 10 (\"Wormberry\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 11 (\"Through the Looking Glass\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 13 (\"A Spy in Oaxaca\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 14 (\"Anderson's Incredible Folly\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 16 (\"Scarlet Fever\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 17 (\"A Lump of Coal\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 18,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 18 (\"Renaissance Dye\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 19,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Maerz and Paul 1930 plate 6 G 12, ISCC-NBS 1955; CIEDE2000 computed by ColorHub",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 20,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas; within-painting lens in data/graph/fieldnotes/s.json)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What were Europeans arguing about for more than two centuries because Spain kept cochineal secret?",
+      "choices": [
+        "Whether it was animal, vegetable or mineral",
+        "Whether it was red or crimson",
+        "Which port it left from",
+        "Whether it dyed cotton"
+      ],
+      "answer": "Whether it was animal, vegetable or mineral",
+      "kind": "pick"
+    },
+    {
+      "q": "Why did the Capponi and Maluenda cartel of 1585 succeed in raising the price?",
+      "choices": [
+        "They bought up Europe's stock after learning the fleet had left with little cochineal",
+        "They owned the Mexican cactus fields",
+        "They controlled the Spanish Crown's tax",
+        "They invented a cheaper substitute"
+      ],
+      "answer": "They bought up Europe's stock after learning the fleet had left with little cochineal",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the Spanish red of the ochre sense and the cochineal sense are the same material.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "In 1597 Queen Elizabeth sold the earl of Essex his captured cochineal at 18 shillings a pound when the market price was 30 to 40.",
+    "Europe argued for more than two centuries over whether cochineal was an animal, a plant or a mineral, because Spain guarded the secret.",
+    "One synthetic dye, Biebrich scarlet of 1878, was a near-perfect cochineal match on wool, and the market collapsed."
+  ],
+  "words": 1544,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Finer-lens count corrected from 5 to 7 (5 is the plain-presence count; 7 matches the later accent sentence).",
+      "Reworded a sentence that tracked Greenfield too closely.",
+      "Verified cochineal figures (175,000 lb, 70,000 hedged, Campari/E120) against Greenfield text."
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"Spanish red\", \"Spanish red oxide\", \"Venetian red\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"Red ochre\" p. 334 and \"Spanish ochre\", \"Spanish oxide\", \"Spanish red\" p. 363",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, notes and bibliography (citing R. A. Donkin, \"Spanish Red: An Ethnogeographical Study of Cochineal and the Opuntia Cactus\", 1977)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 13 (\"Red\") and bibliography",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, Prologue (\"The Color of Desire\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 3 (\"An Ancient Art\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 5 (\"A Profitable Empire\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 6 (\"Cochineal on Trial\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 7 (\"Legacies\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 8 (\"Trade Secrets\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 9 (\"Pirates' Prize\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 10 (\"Wormberry\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 11 (\"Through the Looking Glass\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 13 (\"A Spy in Oaxaca\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 14 (\"Anderson's Incredible Folly\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 16 (\"Scarlet Fever\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 17,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 17 (\"A Lump of Coal\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 18,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 18 (\"Renaissance Dye\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 19,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Maerz and Paul 1930 plate 6 G 12, ISCC-NBS 1955; CIEDE2000 computed by ColorHub",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 20,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas; within-painting lens in data/graph/fieldnotes/s.json)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What were Europeans arguing about for more than two centuries because Spain kept cochineal secret?",
-   "choices": [
-    "Whether it was animal, vegetable or mineral",
-    "Whether it was red or crimson",
-    "Which port it left from",
-    "Whether it dyed cotton"
-   ],
-   "answer": "Whether it was animal, vegetable or mineral",
-   "kind": "pick"
-  },
-  {
-   "q": "Why did the Capponi and Maluenda cartel of 1585 succeed in raising the price?",
-   "choices": [
-    "They bought up Europe's stock after learning the fleet had left with little cochineal",
-    "They owned the Mexican cactus fields",
-    "They controlled the Spanish Crown's tax",
-    "They invented a cheaper substitute"
-   ],
-   "answer": "They bought up Europe's stock after learning the fleet had left with little cochineal",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the Spanish red of the ochre sense and the cochineal sense are the same material.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "In 1597 Queen Elizabeth sold the earl of Essex his captured cochineal at 18 shillings a pound when the market price was 30 to 40.",
-  "Europe argued for more than two centuries over whether cochineal was an animal, a plant or a mineral, because Spain guarded the secret.",
-  "One synthetic dye, Biebrich scarlet of 1878, was a near-perfect cochineal match on wool, and the market collapsed."
- ],
- "words": 1544,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Finer-lens count corrected from 5 to 7 (5 is the plain-presence count; 7 matches the later accent sentence).",
-   "Reworded a sentence that tracked Greenfield too closely.",
-   "Verified cochineal figures (175,000 lb, 70,000 hedged, Campari/E120) against Greenfield text."
-  ]
- }
 }

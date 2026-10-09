@@ -1,0 +1,44 @@
+{
+ "id": "neo-impressionism",
+ "name": "Pointillism",
+ "lineage": {
+  "influenced_by": [
+   "Impressionism",
+   "contemporary color-vision science (Chevreul, Rood)"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 1886–1906"
+ ],
+ "places": [
+  "Paris"
+ ],
+ "garments": [
+  "not a fashion look — a painting technique (also called Pointillism, or Divisionism)"
+ ],
+ "media": [
+  {
+   "title": "Georges Seurat, A Sunday on La Grande Jatte (1884–86)",
+   "note": "the movement's defining painting"
+  }
+ ],
+ "figures": [
+  "Georges Seurat",
+  "Paul Signac"
+ ],
+ "reacts_against": "Impressionism's intuitive, fast brushwork, replacing it with a slower, scientific method: tiny dots of pure, unmixed color placed so the eye blends them at a distance (a real optical effect, though weaker than the painters themselves sometimes claimed).",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 55% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

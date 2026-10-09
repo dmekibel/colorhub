@@ -1,116 +1,115 @@
 {
- "slug": "bright-lavender",
- "name": "Bright Lavender",
- "hex": "#C760FF",
- "names": [
-  "Bright Lavender"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Bright Lavender is a vivid violet built from \"bright\" plus lavender, first recorded by the 2010 xkcd survey and again by the 1955 ISCC-NBS dictionary.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier that drifts from its base",
-   "body": "The name is built the usual way, \"bright\" plus [[lavender]], first recorded by the 2010 xkcd survey and again by the ISCC-NBS 1955 dictionary, which places it in block 210 as a vivid violet [1][2]. The nearest named colors on file are [[easter-purple]], [[heliotrope]], [[lighter-purple]] and [[bright-violet]], at 3.3, 6.2, 6.4 and 6.4 ΔE [1].\n\nThat gap is the point of calling a color \"bright\": raising the saturation of a pale name can carry the result into a different part of the color wheel entirely. Siblings here are [[lavender]], [[magenta]], [[purple]], and [[violet]], the points this color sits between [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive of 23,781 paintings, as photographed, has no painting where this vivid violet covers five percent or more of the canvas [3]. A hue this saturated at this lightness is outside the range synthetic-era pigments typically hold once aged and varnished, let alone the natural dyes earlier painters had [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "modifier grammar: bright + lavender",
-   "first_recorded": "1955, ISCC-NBS dictionary, block 210",
-   "source": "ColorHub color library (xkcd, ISCC-NBS)"
-  },
-  "aka": [],
-  "siblings": [
-   "easter-purple",
-   "heliotrope",
-   "lighter-purple",
-   "bright-violet"
+  "slug": "bright-lavender",
+  "name": "Bright Lavender",
+  "hex": "#C760FF",
+  "names": [
+    "Bright Lavender"
   ],
-  "parent": "lavender",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    60,
-    91,
-    317
-   ],
-   "nearest": [
-    [
-     "Easter Purple",
-     3.3
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Bright Lavender is a vivid violet built from \"bright\" plus lavender, first recorded by the 2010 xkcd survey and again by the 1955 ISCC-NBS dictionary.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier that drifts from its base",
+      "body": "The name is built the usual way, \"bright\" plus [[lavender]], first recorded by the 2010 xkcd survey and again by the ISCC-NBS 1955 dictionary, which places it in block 210 as a vivid violet [1][2]. The nearest named colors on file are [[bright-lavender]], [[heliotrope]], [[bright-lavender]] and [[bright-violet]], at 3.3, 6.2, 6.4 and 6.4 ΔE [1].\n\nThat gap is the point of calling a color \"bright\": raising the saturation of a pale name can carry the result into a different part of the color wheel entirely. Siblings here are [[lavender]], [[magenta]], [[purple]], and [[violet]], the points this color sits between [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings, as photographed, has no painting where this vivid violet covers five percent or more of the canvas [3]. A hue this saturated at this lightness is outside the range synthetic-era pigments typically hold once aged and varnished, let alone the natural dyes earlier painters had [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "modifier grammar: bright + lavender",
+      "first_recorded": "1955, ISCC-NBS dictionary, block 210",
+      "source": "ColorHub color library (xkcd, ISCC-NBS)"
+    },
+    "aka": [],
+    "siblings": [
+      "bright-lavender",
+      "heliotrope",
+      "bright-violet"
+    ],
+    "parent": "lavender",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        60,
+        91,
+        317
+      ],
+      "nearest": [
+        [
+          "Easter Purple",
+          3.3
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: xkcd 2010 survey entry, nearest-match computation",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: ISCC-NBS 1955 dictionary, block 210 (T)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which learnable color is Bright Lavender's closest match in our library, by measured CIEDE2000 distance?",
+      "choices": [
+        "Magenta",
+        "Lavender",
+        "White",
+        "Teal"
+      ],
+      "answer": "Magenta",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: raising the saturation of a pale color name always keeps it in the same part of the color wheel.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Bright Lavender's nearest learnable match is Magenta, not Lavender."
+  ],
+  "words": 179,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "No private fact-card file for this slug.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: xkcd 2010 survey entry, nearest-match computation",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library: ISCC-NBS 1955 dictionary, block 210 (T)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which learnable color is Bright Lavender's closest match in our library, by measured CIEDE2000 distance?",
-   "choices": [
-    "Magenta",
-    "Lavender",
-    "White",
-    "Teal"
-   ],
-   "answer": "Magenta",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: raising the saturation of a pale color name always keeps it in the same part of the color wheel.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Bright Lavender's nearest learnable match is Magenta, not Lavender."
- ],
- "words": 179,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-08",
-  "issues": [
-   "No private fact-card file for this slug.",
-   "lint 2026-10-09"
-  ]
- }
 }

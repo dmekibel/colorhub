@@ -1,113 +1,116 @@
 {
- "slug": "wedgwood-blue",
- "name": "Wedgwood Blue",
- "hex": "#C0CBF4",
- "names": [
-  "Wedgwood Blue"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Wedgwood blue is a very pale, slightly violet blue whose name comes from ceramics; in our data it is a Ridgway 1912 name.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A potter's blue",
-   "body": "The name points to ceramics. In Garfield's account of a Bureau of Standards count of 7,500 color names, \"Wedgwood blue\" is the example given for the ceramic category, which held 36 names [1]. That is the only mention of the name in the color books we searched, so what follows rests mostly on our own records.\n\nThe swatch is a very light purplish blue, ISCC-NBS block 185, about 2.8 units from its nearest standard name [2]. It sits close to [[powder-blue]] and [[sky-blue]] in lightness, with a slight lean toward violet [2]."
-  },
-  {
-   "id": "record",
-   "title": "First on paper in 1912",
-   "body": "Our earliest written record of the name is Ridgway's 1912 color nomenclature, and the 1955 ISCC-NBS system lists it again [2]. That is a record date for the name in our sources, not proof of when potters first used the blue [2].\n\nIn the archive of 23,781 paintings, as photographed, a color this pale appears in 25 paintings, most often as a hidden color rather than a main one [3]. The earliest match is a 1474 Piero della Francesca panel, a look-alike hue in an aged photograph and not a Wedgwood connection [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "English Wedgwood pottery (Garfield files the name under ceramics)",
-   "first_recorded": "Ridgway, 1912",
-   "source": "Garfield, Mauve; ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "powder-blue",
-   "sky-blue",
-   "periwinkle",
-   "lavender"
+  "slug": "wedgwood-blue",
+  "name": "Wedgwood Blue",
+  "hex": "#C0CBF4",
+  "names": [
+    "Wedgwood Blue",
+    "Wedgewood Blue"
   ],
-  "parent": "blue",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 25,
-  "iscc": {
-   "block": 185,
-   "name": "very light purplish blue",
-   "de": 2.8
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Wedgwood blue is a very pale, slightly violet blue whose name comes from ceramics; in our data it is a Ridgway 1912 name.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A potter's blue",
+      "body": "The name points to ceramics. In Garfield's account of a Bureau of Standards count of 7,500 color names, \"Wedgwood blue\" is the example given for the ceramic category, which held 36 names [1]. That is the only mention of the name in the color books we searched, so what follows rests mostly on our own records.\n\nThe swatch is a very light purplish blue, ISCC-NBS block 185, about 2.8 units from its nearest standard name [2]. It sits close to [[powder-blue]] and [[sky-blue]] in lightness, with a slight lean toward violet [2]."
+    },
+    {
+      "id": "record",
+      "title": "First on paper in 1912",
+      "body": "Our earliest written record of the name is Ridgway's 1912 color nomenclature, and the 1955 ISCC-NBS system lists it again [2]. That is a record date for the name in our sources, not proof of when potters first used the blue [2].\n\nIn the archive of 23,781 paintings, as photographed, a color this pale appears in 25 paintings, most often as a hidden color rather than a main one [3]. The earliest match is a 1474 Piero della Francesca panel, a look-alike hue in an aged photograph and not a Wedgwood connection [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "English Wedgwood pottery (Garfield files the name under ceramics)",
+      "first_recorded": "Ridgway, 1912",
+      "source": "Garfield, Mauve; ColorHub library"
+    },
+    "aka": [
+      "Wedgewood Blue (ridgway+iscc-nbs)"
+    ],
+    "siblings": [
+      "powder-blue",
+      "sky-blue",
+      "periwinkle",
+      "lavender"
+    ],
+    "parent": "blue",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "first_record": {
-   "year": 1912,
-   "source": "ridgway"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 25,
+    "iscc": {
+      "block": 185,
+      "name": "very light purplish blue",
+      "de": 2.8
+    },
+    "first_record": {
+      "year": 1912,
+      "source": "ridgway"
+    },
+    "role": "hidden color, 48% of 21 paintings"
   },
-  "role": "hidden color, 48% of 21 paintings"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Garfield, Mauve, ch. 23",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub library: Ridgway 1912, ISCC-NBS 1955 block 185",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub painting archive, as photographed",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Garfield, Mauve, ch. 23",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub library: Ridgway 1912, ISCC-NBS 1955 block 185",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub painting archive, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "In Garfield's count of color names, which category holds Wedgwood blue?",
+      "choices": [
+        "Ceramic names",
+        "Mineral names",
+        "Flower names",
+        "Mythology names"
+      ],
+      "answer": "Ceramic names",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the 1474 painting match proves Wedgwood-style blue existed then.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Garfield gives Wedgwood blue as the example of a ceramic color name."
+  ],
+  "words": 206,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Removed unsourced Josiah Wedgwood attribution and unverified aka names",
+      "Fixed Garfield count: Judd's 7,500 color names, not registered dye names"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "In Garfield's count of color names, which category holds Wedgwood blue?",
-   "choices": [
-    "Ceramic names",
-    "Mineral names",
-    "Flower names",
-    "Mythology names"
-   ],
-   "answer": "Ceramic names",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the 1474 painting match proves Wedgwood-style blue existed then.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Garfield gives Wedgwood blue as the example of a ceramic color name."
- ],
- "words": 206,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Removed unsourced Josiah Wedgwood attribution and unverified aka names",
-   "Fixed Garfield count: Judd's 7,500 color names, not registered dye names"
-  ]
- }
 }

@@ -1,0 +1,119 @@
+{
+  "slug": "green-crayola",
+  "name": "Green (Crayola)",
+  "hex": "#1CAC78",
+  "names": [
+    "Green (Crayola)"
+  ],
+  "tier": "commercial",
+  "depth": "brief",
+  "lede": "Green (Crayola) is the shade of green sold under Crayola's plain \"Green\" crayon, a cooler, more teal-leaning green than the word green alone suggests.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The crayon box's own green",
+      "body": "Our library files this swatch as the color behind Crayola's crayon simply named \"Green\", distinct from the general color word [[green]] it is paired with [1]. The qualifier \"(Crayola)\" marks it as one of several named variants of [[green]] in our data, alongside entries such as [[green-pigment|Green (Pigment)]] [1].\n\nIt sits close to a cluster of near-duplicate names: [[jade|Jade]] and [[green-crayola|Dark Seafoam]] are both almost the same color, [[vivid-green|Vivid Green]] is a shade duller, and [[jade-green|Jade Green]] is more vivid [2]. A separate entry in the color-standard system, Green (Munsell), lands only 1.5 units away, which means two institutions each assign their own \"Green\" to almost the same point on screen [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive carries a color close enough to this one over enough of its canvas to count, as photographed [3]. Crayola's own pigment mixes were designed for wax crayons on paper under indoor light, not for painters' palettes, so the absence is expected rather than surprising [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the Crayola crayon named plainly \"Green\"",
+      "first_recorded": "undocumented in our sources beyond its listing on Wikipedia",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "jade",
+      "green-crayola",
+      "vivid-green",
+      "jade-green"
+    ],
+    "parent": "green",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        62.6,
+        51.2,
+        160.9
+      ],
+      "nearest": [
+        [
+          "Jade",
+          2.6
+        ],
+        [
+          "Dark Seafoam",
+          2.8
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-g.json; Wikipedia list of Crayola crayon colors)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges-g.json) and library near-duplicate list",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes/g.json)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Green (Crayola) is the color of a Crayola crayon named:",
+      "choices": [
+        "Green",
+        "Jade",
+        "Forest",
+        "Emerald"
+      ],
+      "answer": "Green",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Green (Crayola) and the plain color word Green are exactly the same shade.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Crayola's own \"Green\" crayon is a cooler, more teal-leaning green than the plain color word suggests."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "batch writer",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits (src empty); written from ColorHub graph/library data only, no book sources."
+    ]
+  },
+  "words": 183
+}

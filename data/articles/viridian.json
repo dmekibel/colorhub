@@ -1,303 +1,304 @@
 {
- "slug": "viridian",
- "name": "Viridian",
- "hex": "#40826D",
- "names": [
-  "Viridian"
- ],
- "tier": "pigment",
- "depth": "epic",
- "lede": "Viridian is a deep, cool green made from chromium oxide with water in its crystal, first made in Paris about 1838 by a maker who guarded the recipe, and it became Cézanne's definitive green.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The name",
-   "body": "Viridian is a deep, cool, slightly transparent green made from hydrated chromium oxide [1][2]. Its name sits beside *viridescent*, \"becoming green\", in the old dictionaries of colour [3]. In France the same pigment was sold as *vert émeraude*, which collides with English [[emerald-green|emerald green]], a different and poisonous copper compound [1].\n\nThe trade gave it many names. Guignet's green, Pannetier's green, transparent oxide of chromium and emerald oxide of chromium are all the same material [2]. In England it was also called Veronese green in the later nineteenth century, though that name had first belonged to a copper-arsenic pigment [2]. The confusion is the first thing to learn about viridian, and the chemistry explains how it began."
-  },
-  {
-   "id": "chemistry",
-   "title": "Chromium and a little water",
-   "body": "Viridian is chromium(III) oxide with water built into the crystal [2]. Ball stresses that those water molecules in the lattice make all the difference, because they tune the chromium ions to a far more attractive hue than the plain oxide has [1]. Plain chromium oxide is a different pigment: Paterson calls its matt form a dark opaque green, and Ball sets the non-hydrated, opaque version apart from viridian [3][1].\n\nThe element at work is the one that colours a famous stone. A trace of chromium in beryl makes [[gem:emerald|emerald]] green, and the same element in corundum makes ruby red [6][7]. Paterson dates the discovery of the green oxide to the chemist Vauquelin in 1797, long before anyone made a paint of it [3]."
-  },
-  {
-   "id": "pannetier",
-   "title": "Pannetier's secret, 1838",
-   "body": "The pigment was first made as a paint in Paris [1][3]. By Ball's account the colourman Pannetier developed it in 1838, turning chromium oxide into a green he sold as *vert émeraude* [1]. Paterson gives the same year and name [3], and the Pigment Compendium says \"about 1838\" [2]. All three agree on the city and the man; they differ only in how firmly they commit to the date.\n\nPannetier guarded the recipe closely and charged a high price [1]. The Compendium adds a detail Ball leaves out: he told the method to only one person, Binet, who also manufactured the colour [2]. Anyone else who wanted the green had to work it out alone."
-  },
-  {
-   "id": "guignet",
-   "title": "Guignet and the open recipe, 1859",
-   "body": "In 1859 the chemist C. E. Guignet found another way to make the colour and patented it [1][2][3]. The Compendium says he reproduced the green by an unusual reaction of his own, so the pigment was effectively invented twice [2]. Ball does not say whether Guignet knew Pannetier's secret; he says only that the new method let viridian find a wide and receptive market [1].\n\nThe usual route, once Guignet's patent made it public, was to heat a bichromate compound with boric acid and then hydrolyse the product, washing out the soluble salts [2]. There was no single standard recipe. Terry, writing in England near the end of the century, listed as many as twelve methods of preparation, and one of them gave Arnaudon's chrome green, a chromium phosphate [2].\n\nEnglish readers first met it in print through Salter in 1869, and the Winsor & Newton catalogue listed it the same year [2]. Books disagree about how far it spread. Ball says viridian pushed the poisonous emerald green out of printing and domestic and industrial uses almost at once [1]. The Compendium stresses the opposite constraint: viridian was expensive to make, so artists were its chief customers and its use stayed limited [2]. The two can both be true, since a printer and a painter weigh a price differently.\n\nOne quality made the cost worthwhile. In 1874 the French chemists Riffault and colleagues praised it for keeping its brightness and purity under artificial light [2]."
-  },
-  {
-   "id": "confusions",
-   "title": "Not emerald green, not chrome green",
-   "body": "Three greens are easy to mix up with viridian, and the older books themselves mixed them up. English emerald green is copper aceto-arsenite, a bright and poisonous pigment, and Ball warns against confusing it with the French name *vert émeraude* for viridian [1]. Chrome green is a cheap mixture of Prussian blue and chrome yellow, which Ball says was oddly sold as cinnabar green or zinnober green [1]. Paterson gives chrome green the same recipe but lists chromium oxide among its names, which shows how tangled the vocabulary had become [3].\n\nThe practical difference is that viridian is a single compound and the other two are not. The Compendium records its Colour Index entry as Pigment Green 18, a label painters still read on a tube [2][10]. When a nineteenth-century recipe says only \"chrome green\" or \"emerald\", the reader cannot be sure which pigment is meant, and a modern conservator would test the paint to find out."
-  },
-  {
-   "id": "painters",
-   "title": "In painting",
-   "body": "Until the early nineteenth century, Ball observes, nobody had seen greens, yellows and violets as brilliant as the new synthetic pigments produced [4]. Ball counts twelve new synthetics among the twenty chief pigments found in Impressionist paintings, viridian included [4]. The Compendium finds it on French Impressionist paintings in the National Gallery in London, on van Gogh's canvases, and on German neoclassical paintings in Munich's Schack Gallery [2].\n\n[[painter:paul-cezanne|Cézanne]] is the painter most tied to it. Ball calls it his definitive green, and says it is the only one of the newest pigments to feature prominently in his work [1][4]. In *Hillside in Provence*, about 1885, he put emerald green and viridian beside ochres mixed with vermilion, and the strong greens sit against subdued earths [4]. Gage agrees that Cézanne used viridian and no other new synthetic, though Ball adds emerald green to the picture, so the books differ on how pure the choice was [4][5].\n\nThe Impressionists used it in bright, nearly unmixed touches [4]. Renoir's *Boating on the Seine* of 1879 to 1880 uses viridian with cobalt blue, chrome yellow, vermilion and lead white, applied almost unmixed [4]. [[painter:claude-monet|Monet]] built the smoke and shadows of his 1877 *Gare Saint-Lazare* views from mixtures of bright pigments, viridian among them, with only a little ivory black [4]. Ball says Seurat's palette ran to a fairly typical Impressionist range that included viridian or emerald green [4]. Gauguin used it too, but seldom straight from the tube [4].\n\nIt lasted into the twentieth century. [[painter:henri-matisse|Matisse]]'s palette of 1937 held seventeen colours in an apparently arbitrary order, with large mounds of white, and viridian was one of them [5]."
-  },
-  {
-   "id": "older-greens",
-   "title": "What it replaced",
-   "body": "Older greens had a poor record. Verdigris is corrupted by sulphur compounds in the air, so it had to be sealed under varnish [8]. Painters in the fifteenth century tried to protect it by dissolving it in hot resin, producing copper resinate, but that green turned brown in light and air [8]. Many Renaissance paintings now show dull umber foliage and drapery where a copper green once stood [8].\n\nViridian had none of this problem. The Compendium says it was considered a beautiful and durable colour, and Paterson calls it an excellent pigment for artists [2][3]. That durability is the real reason a pigment that cost so much was worth buying."
-  },
-  {
-   "id": "mixtures",
-   "title": "Mixtures and descendants",
-   "body": "Viridian became a base for other named colours. Mixed with zinc yellows it gave Victoria green, permanent green and *verts solides* [2]. With ultramarine it made academy blue, according to Heaton as reported by the Compendium [2]. The same source records cadmium green as a composite of cadmium yellow and viridian [2]. Church noted that makers sometimes added barium chromate to shift the hue [2].\n\nIn modern use it is still a mixing green. Gurney's limited palettes for painters include viridian (Pigment Green 18) alongside ultramarine and other colours [10]."
-  },
-  {
-   "id": "swatch",
-   "title": "The swatch is not the tube",
-   "body": "The swatch on this page, #40826D, is a mid-dark green that the ISCC-NBS system of 1955 files as \"moderate green\", within a ΔE of 4.1 [13]. Maerz and Paul's dictionary of colour records the name as first used about 1864 [13]. A tube of viridian varies with its maker and its recipe, and a screen cannot show the transparency that Ball describes [1].\n\nOther lists disagree about the hue. The xkcd colour survey of 2010 placed \"viridian\" at #1E9167, which is greener and more vivid, while the library entry Viridian Green is a bluer teal, #009698 [13]. Treat all of these as approximations."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive holds 23,781 paintings [12]. At least five per cent of the canvas sits within six units of this green in 23 of them, as photographed, which is about one painting in a thousand [12]. These are photographs of aged, varnished paintings, so a match is a look-alike hue and not a pigment test.\n\nThe surprises are instructive. Not one of the 140 paintings tagged Impressionism passes the same test, although the books say viridian was an Impressionist staple [4][12]. The reason is probably that painters used it in touches and mixtures, not as the broad flat patch a swatch match needs. The strongest hits are in the early twentieth century: Edvard Munch's [[painting:commons-Q18889507|Beach]] has the colour over 36 per cent of its surface, and Matisse's [[painting:smk-KMSr80|Pink Onions]] over 28 per cent [12]. [[painter:felix-vallotton|Vallotton]] accounts for three of the 23, in three of his 40 paintings here [12].\n\nThe 1900s hold 13 of the 23 matches, against 9 in the 1800s, even though the archive has five times as many paintings from the 1800s [12]. The earliest match is the portrait [[painting:nga-59938|Dr. Philemon Tracy]], dated 1790, 48 years before Pannetier [12]. Its green cannot be viridian; it is probably an old background or an altered pigment [12].\n\nIn printed English the word was almost absent in 1800, reached about two per cent of its modern peak by 1860, and kept rising to a peak around 2010 [11]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the Latin-rooted word for green, as in viridescent (becoming green)",
-   "first_recorded": "Pannetier, Paris, about 1838; Guignet's patent 1859; first described in England 1869",
-   "source": "Ball, Bright Earth, ch. 7; Pigment Compendium, \"viridian\""
-  },
-  "aka": [
-   "Guignet's green",
-   "Pannetier's green",
-   "vert émeraude",
-   "transparent oxide of chromium",
-   "emerald oxide of chromium",
-   "Pigment Green 18"
+  "slug": "viridian",
+  "name": "Viridian",
+  "hex": "#40826D",
+  "names": [
+    "Viridian"
   ],
-  "siblings": [
-   "viridian-green",
-   "generic-viridian"
+  "tier": "pigment",
+  "depth": "epic",
+  "lede": "Viridian is a deep, cool green made from chromium oxide with water in its crystal, first made in Paris about 1838 by a maker who guarded the recipe, and it became Cézanne's definitive green.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The name",
+      "body": "Viridian is a deep, cool, slightly transparent green made from hydrated chromium oxide [1][2]. Its name sits beside *viridescent*, \"becoming green\", in the old dictionaries of colour [3]. In France the same pigment was sold as *vert émeraude*, which collides with English [[emerald-green|emerald green]], a different and poisonous copper compound [1].\n\nThe trade gave it many names. Guignet's green, Pannetier's green, transparent oxide of chromium and emerald oxide of chromium are all the same material [2]. In England it was also called Veronese green in the later nineteenth century, though that name had first belonged to a copper-arsenic pigment [2]. The confusion is the first thing to learn about viridian, and the chemistry explains how it began."
+    },
+    {
+      "id": "chemistry",
+      "title": "Chromium and a little water",
+      "body": "Viridian is chromium(III) oxide with water built into the crystal [2]. Ball stresses that those water molecules in the lattice make all the difference, because they tune the chromium ions to a far more attractive hue than the plain oxide has [1]. Plain chromium oxide is a different pigment: Paterson calls its matt form a dark opaque green, and Ball sets the non-hydrated, opaque version apart from viridian [3][1].\n\nThe element at work is the one that colours a famous stone. A trace of chromium in beryl makes [[gem:emerald|emerald]] green, and the same element in corundum makes ruby red [6][7]. Paterson dates the discovery of the green oxide to the chemist Vauquelin in 1797, long before anyone made a paint of it [3]."
+    },
+    {
+      "id": "pannetier",
+      "title": "Pannetier's secret, 1838",
+      "body": "The pigment was first made as a paint in Paris [1][3]. By Ball's account the colourman Pannetier developed it in 1838, turning chromium oxide into a green he sold as *vert émeraude* [1]. Paterson gives the same year and name [3], and the Pigment Compendium says \"about 1838\" [2]. All three agree on the city and the man; they differ only in how firmly they commit to the date.\n\nPannetier guarded the recipe closely and charged a high price [1]. The Compendium adds a detail Ball leaves out: he told the method to only one person, Binet, who also manufactured the colour [2]. Anyone else who wanted the green had to work it out alone."
+    },
+    {
+      "id": "guignet",
+      "title": "Guignet and the open recipe, 1859",
+      "body": "In 1859 the chemist C. E. Guignet found another way to make the colour and patented it [1][2][3]. The Compendium says he reproduced the green by an unusual reaction of his own, so the pigment was effectively invented twice [2]. Ball does not say whether Guignet knew Pannetier's secret; he says only that the new method let viridian find a wide and receptive market [1].\n\nThe usual route, once Guignet's patent made it public, was to heat a bichromate compound with boric acid and then hydrolyse the product, washing out the soluble salts [2]. There was no single standard recipe. Terry, writing in England near the end of the century, listed as many as twelve methods of preparation, and one of them gave Arnaudon's chrome green, a chromium phosphate [2].\n\nEnglish readers first met it in print through Salter in 1869, and the Winsor & Newton catalogue listed it the same year [2]. Books disagree about how far it spread. Ball says viridian pushed the poisonous emerald green out of printing and domestic and industrial uses almost at once [1]. The Compendium stresses the opposite constraint: viridian was expensive to make, so artists were its chief customers and its use stayed limited [2]. The two can both be true, since a printer and a painter weigh a price differently.\n\nOne quality made the cost worthwhile. In 1874 the French chemists Riffault and colleagues praised it for keeping its brightness and purity under artificial light [2]."
+    },
+    {
+      "id": "confusions",
+      "title": "Not emerald green, not chrome green",
+      "body": "Three greens are easy to mix up with viridian, and the older books themselves mixed them up. English emerald green is copper aceto-arsenite, a bright and poisonous pigment, and Ball warns against confusing it with the French name *vert émeraude* for viridian [1]. Chrome green is a cheap mixture of Prussian blue and chrome yellow, which Ball says was oddly sold as cinnabar green or zinnober green [1]. Paterson gives chrome green the same recipe but lists chromium oxide among its names, which shows how tangled the vocabulary had become [3].\n\nThe practical difference is that viridian is a single compound and the other two are not. The Compendium records its Colour Index entry as Pigment Green 18, a label painters still read on a tube [2][10]. When a nineteenth-century recipe says only \"chrome green\" or \"emerald\", the reader cannot be sure which pigment is meant, and a modern conservator would test the paint to find out."
+    },
+    {
+      "id": "painters",
+      "title": "In painting",
+      "body": "Until the early nineteenth century, Ball observes, nobody had seen greens, yellows and violets as brilliant as the new synthetic pigments produced [4]. Ball counts twelve new synthetics among the twenty chief pigments found in Impressionist paintings, viridian included [4]. The Compendium finds it on French Impressionist paintings in the National Gallery in London, on van Gogh's canvases, and on German neoclassical paintings in Munich's Schack Gallery [2].\n\n[[painter:paul-cezanne|Cézanne]] is the painter most tied to it. Ball calls it his definitive green, and says it is the only one of the newest pigments to feature prominently in his work [1][4]. In *Hillside in Provence*, about 1885, he put emerald green and viridian beside ochres mixed with vermilion, and the strong greens sit against subdued earths [4]. Gage agrees that Cézanne used viridian and no other new synthetic, though Ball adds emerald green to the picture, so the books differ on how pure the choice was [4][5].\n\nThe Impressionists used it in bright, nearly unmixed touches [4]. Renoir's *Boating on the Seine* of 1879 to 1880 uses viridian with cobalt blue, chrome yellow, vermilion and lead white, applied almost unmixed [4]. [[painter:claude-monet|Monet]] built the smoke and shadows of his 1877 *Gare Saint-Lazare* views from mixtures of bright pigments, viridian among them, with only a little ivory black [4]. Ball says Seurat's palette ran to a fairly typical Impressionist range that included viridian or emerald green [4]. Gauguin used it too, but seldom straight from the tube [4].\n\nIt lasted into the twentieth century. [[painter:henri-matisse|Matisse]]'s palette of 1937 held seventeen colours in an apparently arbitrary order, with large mounds of white, and viridian was one of them [5]."
+    },
+    {
+      "id": "older-greens",
+      "title": "What it replaced",
+      "body": "Older greens had a poor record. Verdigris is corrupted by sulphur compounds in the air, so it had to be sealed under varnish [8]. Painters in the fifteenth century tried to protect it by dissolving it in hot resin, producing copper resinate, but that green turned brown in light and air [8]. Many Renaissance paintings now show dull umber foliage and drapery where a copper green once stood [8].\n\nViridian had none of this problem. The Compendium says it was considered a beautiful and durable colour, and Paterson calls it an excellent pigment for artists [2][3]. That durability is the real reason a pigment that cost so much was worth buying."
+    },
+    {
+      "id": "mixtures",
+      "title": "Mixtures and descendants",
+      "body": "Viridian became a base for other named colours. Mixed with zinc yellows it gave Victoria green, permanent green and *verts solides* [2]. With ultramarine it made academy blue, according to Heaton as reported by the Compendium [2]. The same source records cadmium green as a composite of cadmium yellow and viridian [2]. Church noted that makers sometimes added barium chromate to shift the hue [2].\n\nIn modern use it is still a mixing green. Gurney's limited palettes for painters include viridian (Pigment Green 18) alongside ultramarine and other colours [10]."
+    },
+    {
+      "id": "swatch",
+      "title": "The swatch is not the tube",
+      "body": "The swatch on this page, #40826D, is a mid-dark green that the ISCC-NBS system of 1955 files as \"moderate green\", within a ΔE of 4.1 [13]. Maerz and Paul's dictionary of colour records the name as first used about 1864 [13]. A tube of viridian varies with its maker and its recipe, and a screen cannot show the transparency that Ball describes [1].\n\nOther lists disagree about the hue. The xkcd colour survey of 2010 placed \"viridian\" at #1E9167, which is greener and more vivid, while the library entry Viridian Green is a bluer teal, #009698 [13]. Treat all of these as approximations."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive holds 23,781 paintings [12]. At least five per cent of the canvas sits within six units of this green in 23 of them, as photographed, which is about one painting in a thousand [12]. These are photographs of aged, varnished paintings, so a match is a look-alike hue and not a pigment test.\n\nThe surprises are instructive. Not one of the 140 paintings tagged Impressionism passes the same test, although the books say viridian was an Impressionist staple [4][12]. The reason is probably that painters used it in touches and mixtures, not as the broad flat patch a swatch match needs. The strongest hits are in the early twentieth century: Edvard Munch's [[painting:commons-Q18889507|Beach]] has the colour over 36 per cent of its surface, and Matisse's [[painting:smk-KMSr80|Pink Onions]] over 28 per cent [12]. [[painter:felix-vallotton|Vallotton]] accounts for three of the 23, in three of his 40 paintings here [12].\n\nThe 1900s hold 13 of the 23 matches, against 9 in the 1800s, even though the archive has five times as many paintings from the 1800s [12]. The earliest match is the portrait [[painting:nga-59938|Dr. Philemon Tracy]], dated 1790, 48 years before Pannetier [12]. Its green cannot be viridian; it is probably an old background or an altered pigment [12].\n\nIn printed English the word was almost absent in 1800, reached about two per cent of its modern peak by 1860, and kept rising to a peak around 2010 [11]."
+    }
   ],
-  "parent": null,
-  "children": [
-   "dark-viridian-green"
-  ],
-  "disambiguation": [
-   {
-    "slug": "emerald-green",
-    "gloss": "English emerald green is a poisonous copper aceto-arsenite; the French name vert émeraude meant viridian"
-   },
-   {
-    "slug": "viridian-green",
-    "gloss": "the library entry with the bluer teal swatch, #009698"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "fr",
-    "name": "vert émeraude, vert Guignet, vert Pannetier"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#40826D",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 23,
-  "top_paintings": [
-   "commons-Q18889507",
-   "smk-KMSr80",
-   "commons-Q121841008",
-   "commons-Q17491415"
-  ],
-  "painters": {
-   "felix-vallotton": {
-    "hits": 3,
-    "n": 40
-   }
-  },
-  "century": {
-   "1800": {
-    "hits": 9,
-    "n": 8345
-   },
-   "1900": {
-    "hits": 13,
-    "n": 1674
-   }
-  },
-  "role": {
-   "mid": 0.74,
-   "highlight": 0.09,
-   "shadow": 0.17
-  },
-  "ngram": {
-   "rel_1860": 0.019,
-   "rel_1900": 0.114,
-   "rel_2000": 0.702,
-   "peak": 2010
-  },
-  "measured": {
-   "lch": [
-    49.7,
-    26.9,
-    169.4
-   ],
-   "contrast_white": 4.53,
-   "iscc": "moderate green",
-   "nearest": [
-    [
-     "Arsenate",
-     4.0
+  "aside": {
+    "origin": {
+      "named_after": "the Latin-rooted word for green, as in viridescent (becoming green)",
+      "first_recorded": "Pannetier, Paris, about 1838; Guignet's patent 1859; first described in England 1869",
+      "source": "Ball, Bright Earth, ch. 7; Pigment Compendium, \"viridian\""
+    },
+    "aka": [
+      "Guignet's green",
+      "Pannetier's green",
+      "vert émeraude",
+      "transparent oxide of chromium",
+      "emerald oxide of chromium",
+      "Pigment Green 18"
     ],
-    [
-     "Dark Viridian Green",
-     4.5
+    "siblings": [
+      "viridian-green",
+      "generic-viridian",
+      "arsenate"
     ],
-    [
-     "Hooker's Green",
-     4.5
+    "parent": null,
+    "children": [
+      "generic-viridian"
+    ],
+    "disambiguation": [
+      {
+        "slug": "emerald-green",
+        "gloss": "English emerald green is a poisonous copper aceto-arsenite; the French name vert émeraude meant viridian"
+      },
+      {
+        "slug": "viridian-green",
+        "gloss": "the library entry with the bluer teal swatch, #009698"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "fr",
+        "name": "vert émeraude, vert Guignet, vert Pannetier"
+      }
     ]
-   ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#40826D",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 23,
+    "top_paintings": [
+      "commons-Q18889507",
+      "smk-KMSr80",
+      "commons-Q121841008",
+      "commons-Q17491415"
+    ],
+    "painters": {
+      "felix-vallotton": {
+        "hits": 3,
+        "n": 40
+      }
+    },
+    "century": {
+      "1800": {
+        "hits": 9,
+        "n": 8345
+      },
+      "1900": {
+        "hits": 13,
+        "n": 1674
+      }
+    },
+    "role": {
+      "mid": 0.74,
+      "highlight": 0.09,
+      "shadow": 0.17
+    },
+    "ngram": {
+      "rel_1860": 0.019,
+      "rel_1900": 0.114,
+      "rel_2000": 0.702,
+      "peak": 2010
+    },
+    "measured": {
+      "lch": [
+        49.7,
+        26.9,
+        169.4
+      ],
+      "contrast_white": 4.53,
+      "iscc": "moderate green",
+      "nearest": [
+        [
+          "Arsenate",
+          4.0
+        ],
+        [
+          "Dark Viridian Green",
+          4.5
+        ],
+        [
+          "Hooker's Green",
+          4.5
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, chs. 7-8",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"viridian\" (and \"academy blue\", \"cadmium green\"), p. 404",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"viridian green\", \"chromium oxide\", \"chrome green\", \"viridescent\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 8 (Impressionism and after)",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, pp. 192, 227-228",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Finlay, Jewels: A Secret History, ch. 15 (emerald) and the sapphire chapter",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "data",
+      "cite": "ColorHub gem page: emerald (data/gems.js)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, \"verdigris\" and \"copper resinate\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Gurney, Colour and Light, palette demonstrations",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "data",
+      "cite": "Google Books Ngram, \"viridian\", case-insensitive, 5-year smoothing, relative to peak",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 paintings, ΔE2000 6, at least 5% of canvas, as photographed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "data",
+      "cite": "ColorHub library: ISCC-NBS 1955 block 141; Maerz and Paul 1930; xkcd 2010",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which poisonous green did viridian push out of printing and domestic uses?",
+      "choices": [
+        "Emerald green (copper aceto-arsenite)",
+        "Terre verte",
+        "Verdigris",
+        "Sap green"
+      ],
+      "answer": "Emerald green (copper aceto-arsenite)",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: viridian is the same pigment as chrome green, a mix of Prussian blue and chrome yellow.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Which painter's definitive green is viridian, according to Ball?",
+      "choices": [
+        "Cézanne",
+        "Vermeer",
+        "Turner",
+        "Rembrandt"
+      ],
+      "answer": "Cézanne",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Viridian is chromium oxide with water inside the crystal, and that water is what turns a dull oxide into a deep, clear green.",
+    "Pannetier sold the green dearly and told his method to only one man, so a rival chemist had to reinvent it in 1859.",
+    "Look for the strong greens against muted earths in a late Cézanne landscape: that is viridian at work."
+  ],
+  "words": 1548,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Lede: removed 'kept secret until 1859' overstatement",
+      "Paterson does not call viridian durable: attributed durability to the Compendium only",
+      "Gurney palette claim softened to what the text shows",
+      "Seurat claim reworded to Ball's 'viridian or emerald green'"
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, chs. 7-8",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"viridian\" (and \"academy blue\", \"cadmium green\"), p. 404",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"viridian green\", \"chromium oxide\", \"chrome green\", \"viridescent\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 8 (Impressionism and after)",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, pp. 192, 227-228",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Finlay, Jewels: A Secret History, ch. 15 (emerald) and the sapphire chapter",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "data",
-   "cite": "ColorHub gem page: emerald (data/gems.js)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Coles, Chromatopia, \"verdigris\" and \"copper resinate\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Gurney, Colour and Light, palette demonstrations",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "data",
-   "cite": "Google Books Ngram, \"viridian\", case-insensitive, 5-year smoothing, relative to peak",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 paintings, ΔE2000 6, at least 5% of canvas, as photographed",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "data",
-   "cite": "ColorHub library: ISCC-NBS 1955 block 141; Maerz and Paul 1930; xkcd 2010",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which poisonous green did viridian push out of printing and domestic uses?",
-   "choices": [
-    "Emerald green (copper aceto-arsenite)",
-    "Terre verte",
-    "Verdigris",
-    "Sap green"
-   ],
-   "answer": "Emerald green (copper aceto-arsenite)",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: viridian is the same pigment as chrome green, a mix of Prussian blue and chrome yellow.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Which painter's definitive green is viridian, according to Ball?",
-   "choices": [
-    "Cézanne",
-    "Vermeer",
-    "Turner",
-    "Rembrandt"
-   ],
-   "answer": "Cézanne",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Viridian is chromium oxide with water inside the crystal, and that water is what turns a dull oxide into a deep, clear green.",
-  "Pannetier sold the green dearly and told his method to only one man, so a rival chemist had to reinvent it in 1859.",
-  "Look for the strong greens against muted earths in a late Cézanne landscape: that is viridian at work."
- ],
- "words": 1548,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Lede: removed 'kept secret until 1859' overstatement",
-   "Paterson does not call viridian durable: attributed durability to the Compendium only",
-   "Gurney palette claim softened to what the text shows",
-   "Seurat claim reworded to Ball's 'viridian or emerald green'"
-  ]
- }
 }

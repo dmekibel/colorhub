@@ -1,0 +1,114 @@
+{
+ "slug": "purple-munsell",
+ "name": "Purple (Munsell)",
+ "hex": "#9F00C5",
+ "names": [
+  "Purple (Munsell)"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Purple (Munsell) is a vivid, saturated purple: the color sitting at hue 5.0P in the Munsell system, one step over from plain [[purple]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A system color, not a dictionary name",
+   "body": "This entry is not a found word but a notation: Munsell notes it 5.0P 4.0/21.9, hue 5.0P, value 4.0, chroma 21.9, among the highest chroma figures the system records for a purple [1]. The Munsell system itself dates to Albert Munsell's early-twentieth-century notation for hue, value and chroma, built to be measured rather than named [1]. Our library's only source for this particular entry is a Wikipedia summary of that notation [1]. The nearest named color on file is [[dark-violet]], 3.0 units away and more vivid still, with [[dark-orchid]] and [[iris-purple]] close behind [2]. The ISCC-NBS system classes this hue as a vivid purple [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive matches this color closely enough to count, as photographed [3]. A chroma this high is rare on an aged, varnished canvas; pigments fade and glaze darkens long before they reach this intensity [3]. That absence describes our archive, not painting as a whole [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Munsell color notation system",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-violet",
+   "dark-orchid",
+   "iris-purple"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "munsell": "5.0P 4.0/21.9",
+   "nearest": [
+    [
+     "Dark Violet",
+     3.0
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "vivid purple",
+   "de2000": 3.8
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Munsell notation, ISCC-NBS 1955 block",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What kind of name is \"Purple (Munsell)\"?",
+   "choices": [
+    "A measured notation (hue, value, chroma), not a found word",
+    "A dye named for a plant",
+    "A Crayola crayon name",
+    "A place name"
+   ],
+   "answer": "A measured notation (hue, value, chroma), not a found word",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this exact color turns up in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Purple (Munsell) is too saturated for any aged, varnished canvas in our archive to match."
+ ],
+ "words": 183,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "Single web-sourced library entry; no book or dated record found for this notation value."
+  ]
+ }
+}

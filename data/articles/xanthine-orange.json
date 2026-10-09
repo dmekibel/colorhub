@@ -1,147 +1,148 @@
 {
- "slug": "xanthine-orange",
- "name": "Xanthine Orange",
- "hex": "#D06D1D",
- "names": [
-  "Xanthine Orange"
- ],
- "tier": "pigment",
- "depth": "short",
- "lede": "Xanthine Orange is a deep burnt orange first plated by Ridgway in 1912, a color that plays an accent far more often than any other role in the paintings where our archive finds it.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A deep orange, and a Japanese echo",
-   "body": "Ridgway's 1912 atlas plates this color at plate III, hue 13, tone i, a scan of an aged plate treated here as approximate [1]. The 1955 ISCC-NBS circular later classed it as deep orange, 5.4 units from its own block center, and the Munsell notation is 3.7YR 5.5/11.6 [1]. Our sources do not explain where the English word \"xanthine\" was coined as a color name; the books consulted leave its origin undocumented beyond its classification here as a mineral or pigment word [1].\n\nOur library cross-references two Japanese traditional names at nearly this hue: Kincha (金茶), meaning golden brown, and Kohaku-iro (琥珀色), meaning amber color [1]. The closest named color on screen is [[browny-orange]], 3.0 units away and described as almost the same; [[alloy-orange]] follows at 3.9, read as darker, [[ochre]] at 4.0, also almost the same, and [[orange-rufous]] at 4.6 [3]. Our graph also finds a gem twin: a flame-orange [[gem:spinel|spinel]] sits only 2.9 units from this hue [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this orange in 0.51 percent of 23,781 paintings, 121 of them, and the within-painting lens isolates it as a dominant area in 120 of those, nearly every one, as photographed [2]. That ranks it ahead of 62 percent of the named colors we track [2]. It peaks in the 1900s, in 13 of 1,674 paintings, present in 0.8 percent of the 1,674 paintings (13 of them) dated to that century, 1.4 times its museums' baseline rate [2].\n\nInside a painting it plays an accent 84 percent of the time, the highest accent rate of any color, by lightness rank rather than by eye [2]. It is strongly over-represented in Indian painting, 3.9 times the expected rate, and further still in the Mughal and Pahari movements specifically, 6.5 and 6.4 times their baselines [2]. The earliest match in our archive is a painting dated to 1250, 662 years before Ridgway's 1912 record of the name; that gap marks a look-alike hue in an aged photograph, not the pigment itself, a floor and not a first, since the archive's early centuries are thin [2]. In printed English the word rose fastest in the 1910s and peaked in the 1930s (Google Books, all senses of the word) [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented beyond its tag as a mineral or pigment word",
-   "first_recorded": "1912 (Ridgway)",
-   "source": "Ridgway, Color Standards and Color Nomenclature"
-  },
-  "aka": [],
-  "siblings": [
-   "browny-orange",
-   "alloy-orange",
-   "ochre",
-   "orange-rufous"
+  "slug": "xanthine-orange",
+  "name": "Xanthine Orange",
+  "hex": "#D06D1D",
+  "names": [
+    "Xanthine Orange"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Kincha (金茶), Kohaku-iro (琥珀色)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 121,
-  "n_within": 120,
-  "measured": {
-   "lch": [
-    56.5,
-    66.8,
-    59.2
-   ],
-   "nearest": [
-    [
-     "Browny Orange",
-     3.0
+  "tier": "pigment",
+  "depth": "short",
+  "lede": "Xanthine Orange is a deep burnt orange first plated by Ridgway in 1912, a color that plays an accent far more often than any other role in the paintings where our archive finds it.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A deep orange, and a Japanese echo",
+      "body": "Ridgway's 1912 atlas plates this color at plate III, hue 13, tone i, a scan of an aged plate treated here as approximate [1]. The 1955 ISCC-NBS circular later classed it as deep orange, 5.4 units from its own block center, and the Munsell notation is 3.7YR 5.5/11.6 [1]. Our sources do not explain where the English word \"xanthine\" was coined as a color name; the books consulted leave its origin undocumented beyond its classification here as a mineral or pigment word [1].\n\nOur library cross-references two Japanese traditional names at nearly this hue: Kincha (金茶), meaning golden brown, and Kohaku-iro (琥珀色), meaning amber color [1]. The closest named color on screen is [[xanthine-orange]], 3.0 units away and described as almost the same; [[alloy-orange]] follows at 3.9, read as darker, [[ochre]] at 4.0, also almost the same, and [[rust-orange]] at 4.6 [3]. Our graph also finds a gem twin: a flame-orange [[gem:spinel|spinel]] sits only 2.9 units from this hue [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this orange in 0.51 percent of 23,781 paintings, 121 of them, and the within-painting lens isolates it as a dominant area in 120 of those, nearly every one, as photographed [2]. That ranks it ahead of 62 percent of the named colors we track [2]. It peaks in the 1900s, in 13 of 1,674 paintings, present in 0.8 percent of the 1,674 paintings (13 of them) dated to that century, 1.4 times its museums' baseline rate [2].\n\nInside a painting it plays an accent 84 percent of the time, the highest accent rate of any color, by lightness rank rather than by eye [2]. It is strongly over-represented in Indian painting, 3.9 times the expected rate, and further still in the Mughal and Pahari movements specifically, 6.5 and 6.4 times their baselines [2]. The earliest match in our archive is a painting dated to 1250, 662 years before Ridgway's 1912 record of the name; that gap marks a look-alike hue in an aged photograph, not the pigment itself, a floor and not a first, since the archive's early centuries are thin [2]. In printed English the word rose fastest in the 1910s and peaked in the 1930s (Google Books, all senses of the word) [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented beyond its tag as a mineral or pigment word",
+      "first_recorded": "1912 (Ridgway)",
+      "source": "Ridgway, Color Standards and Color Nomenclature"
+    },
+    "aka": [],
+    "siblings": [
+      "xanthine-orange",
+      "alloy-orange",
+      "ochre",
+      "rust-orange",
+      "orpiment-orange"
     ],
-    [
-     "Alloy Orange",
-     3.9
-    ],
-    [
-     "Ochre",
-     4.0
-    ],
-    [
-     "Orange-Rufous",
-     4.6
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Kincha (金茶), Kohaku-iro (琥珀色)"
+      }
     ]
-   ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 121,
+    "n_within": 120,
+    "measured": {
+      "lch": [
+        56.5,
+        66.8,
+        59.2
+      ],
+      "nearest": [
+        [
+          "Browny Orange",
+          3.0
+        ],
+        [
+          "Alloy Orange",
+          3.9
+        ],
+        [
+          "Ochre",
+          4.0
+        ],
+        [
+          "Orange-Rufous",
+          4.6
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Ridgway (1912) plate III, hue 13; ISCC-NBS cross-reference; Japanese traditional-color links (Kincha, Kohaku-iro)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed; Google Ngram word-frequency cache",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub graph: nearest named colors (look-alike data)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "In our archive, what role does Xanthine Orange most often play inside a painting?",
+      "choices": [
+        "An accent",
+        "A shadow",
+        "A mid-tone",
+        "A hidden color"
+      ],
+      "answer": "An accent",
+      "kind": "pick"
+    },
+    {
+      "q": "Which Indian painting tradition is most over-represented in Xanthine Orange?",
+      "choices": [
+        "Mughal",
+        "Impressionism",
+        "Rajput only",
+        "Pahari only"
+      ],
+      "answer": "Mughal",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources explain exactly who coined the name Xanthine Orange.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "In 84 percent of its appearances.",
+    "The same deep orange has a near-match in two old Japanese names: Kincha, golden brown, and Kohaku-iro, amber."
+  ],
+  "words": 411,
+  "status": "checked",
+  "checked": {
+    "by": "claude",
+    "date": "2026-10-08",
+    "issues": [
+      "No source gives the coining or etymology of \"xanthine\" as a color word.",
+      "Mughal and Pahari overlap with the India country figure rather than adding independently.",
+      "lint 2026-10-09"
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Ridgway (1912) plate III, hue 13; ISCC-NBS cross-reference; Japanese traditional-color links (Kincha, Kohaku-iro)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed; Google Ngram word-frequency cache",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub graph: nearest named colors (look-alike data)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "In our archive, what role does Xanthine Orange most often play inside a painting?",
-   "choices": [
-    "An accent",
-    "A shadow",
-    "A mid-tone",
-    "A hidden color"
-   ],
-   "answer": "An accent",
-   "kind": "pick"
-  },
-  {
-   "q": "Which Indian painting tradition is most over-represented in Xanthine Orange?",
-   "choices": [
-    "Mughal",
-    "Impressionism",
-    "Rajput only",
-    "Pahari only"
-   ],
-   "answer": "Mughal",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our sources explain exactly who coined the name Xanthine Orange.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "In 84 percent of its appearances.",
-  "The same deep orange has a near-match in two old Japanese names: Kincha, golden brown, and Kohaku-iro, amber."
- ],
- "words": 411,
- "status": "checked",
- "checked": {
-  "by": "claude",
-  "date": "2026-10-08",
-  "issues": [
-   "No source gives the coining or etymology of \"xanthine\" as a color word.",
-   "Mughal and Pahari overlap with the India country figure rather than adding independently.",
-   "lint 2026-10-09"
-  ]
- }
 }

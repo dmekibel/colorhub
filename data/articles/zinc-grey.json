@@ -1,0 +1,125 @@
+{
+ "slug": "zinc-grey",
+ "name": "Zinc Grey",
+ "hex": "#655B55",
+ "names": [
+  "Zinc Grey"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Zinc Grey takes its name from the dull, bluish-grey sheen of the metal zinc, distinct from zinc white, the pigment made from zinc oxide.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The metal, not the pigment",
+   "body": "Zinc Grey is filed under our pigment-and-mineral names simply as the color of the metal zinc itself, rather than of zinc white, the opaque pigment painters have used since the nineteenth century [1]. Our sources give no date for when the color name itself entered use [1].\n\nIts nearest look-alikes are [[grebe]], 2.8 units away, and [[greyish-umber]], 2.9 units away, both almost the same; [[plain-mouse]], at 3.0, is also close [2]. Other systems file the same region as Dark Greyish Brown or Dusky Drab [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color appears in 4.52 percent of 23,781 paintings, 1,076 of them as photographed, more common than 84 percent of the names we track [3]. Eugène Louis Boudin used it most, in 4 of 15 works here, 4.8 times his museums' baseline [3]. It peaks in the 1900s, found in 5.6 percent of the 1,674 paintings we have from then, 94 of them, 1.8 times the expected rate, and plays a mid-tone in 35 percent of its paintings [3]. The earliest dated match goes back to 1119, though the archive's early centuries are thin enough that this is a floor, not a first [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the dull grey sheen of the metal zinc",
+   "first_recorded": "undocumented in our sources",
+   "source": "ColorHub color library (Wikipedia)"
+  },
+  "aka": [],
+  "siblings": [
+   "grebe",
+   "greyish-umber",
+   "plain-mouse",
+   "dark-greyish-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1076,
+  "pct": 4.52,
+  "rank_pct": 84,
+  "measured": {
+   "lch": [
+    39.4,
+    5.7,
+    59.4
+   ],
+   "nearest": [
+    [
+     "Grebe",
+     2.8
+    ],
+    [
+     "Greyish Umber",
+     2.9
+    ],
+    [
+     "Plain Mouse",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (Wikipedia); tier classification \"pigment, dye or mineral word: zinc\"",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges, data/graph/edges-z.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Zinc Grey named after?",
+   "choices": [
+    "The dull grey sheen of the metal zinc",
+    "Zinc white, the painter's pigment",
+    "A galvanized-steel paint brand",
+    "A mineral called zincite"
+   ],
+   "answer": "The dull grey sheen of the metal zinc",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Zinc Grey and zinc white describe the same thing.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Zinc Grey names the metal's own dull sheen, not the white pigment that shares its name."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "rank-percentile drift: article said 85%, current data/graph/fieldnotes says 84% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
+  ]
+ },
+ "words": 217
+}

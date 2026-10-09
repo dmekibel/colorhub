@@ -1,0 +1,73 @@
+{
+ "id": "gothic-lolita",
+ "name": "Gothic Lolita",
+ "lineage": {
+  "influenced_by": [
+   "Victorian and Rococo dress",
+   "visual kei",
+   "Japanese street fashion (Harajuku)"
+  ],
+  "influences": [
+   "pastel-goth",
+   "princesscore",
+   "royalcore"
+  ]
+ },
+ "eras": [
+  "mid-1990s origin (Japan)",
+  "2000s international spread via visual kei bands and magazines like Gothic & Lolita Bible"
+ ],
+ "places": [
+  "Harajuku, Tokyo",
+  "visual kei concerts"
+ ],
+ "garments": [
+  "knee-length bell-shaped skirts",
+  "petticoats",
+  "lace and ribbon trim",
+  "blouses with high collars",
+  "platform Mary Janes",
+  "parasols"
+ ],
+ "media": [
+  {
+   "title": "Gothic & Lolita Bible (magazine, launched 2001)",
+   "note": "the main print vehicle that spread the look globally"
+  },
+  {
+   "title": "Mana (Malice Mizer, visual kei musician)",
+   "note": "widely credited with popularizing the elegant-gothic-lolita strand"
+  }
+ ],
+ "figures": [
+  "Mana"
+ ],
+ "reacts_against": "the exposed, Western-coded sexiness of mainstream fashion; Gothic Lolita deliberately covers the body in historical silhouette as a form of modesty-as-style.",
+ "revivals": [
+  "steady subcultural continuity rather than a single revival; renewed international visibility via 2020s J-fashion YouTube/TikTok"
+ ],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "|decade_of_origin=1990s",
+  "decade_of_origin": "1990s",
+  "key_motifs": "Crosses, bats, religious iconography, chandeliers, castles, coffins, deep red roses",
+  "key_colours": "Black, white, deep jewel tones (maroon, navy, crimson, purple)",
+  "related_aesthetics": "AristocratClassic LolitaGothLolitaRomantic GothSweet LolitaVictorianVictorian GothVisual Kei",
+  "key_values": "Elegance, darkness, mystery, drama, Victorian-era aesthetics"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Gothic_Lolita"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 42% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 73% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

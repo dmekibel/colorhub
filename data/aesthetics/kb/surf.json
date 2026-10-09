@@ -1,0 +1,55 @@
+{
+ "id": "surf",
+ "name": "Surf",
+ "lineage": {
+  "influenced_by": [
+   "Polynesian surfing traditions, brought to California and Hawaii's tourism industry in the early 20th century",
+   "1960s beach-party film and music"
+  ],
+  "influences": [
+   "coastal-grandmother",
+   "y2k"
+  ]
+ },
+ "eras": [
+  "1960s–present"
+ ],
+ "places": [],
+ "garments": [
+  "boardshorts",
+  "faded cotton",
+  "sun-bleached hair"
+ ],
+ "media": [
+  {
+   "title": "The Endless Summer (1966 documentary)",
+   "note": ""
+  },
+  {
+   "title": "The Beach Boys' early-1960s surf-rock records",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Duke Kahanamoku"
+ ],
+ "reacts_against": "nothing specific; surf culture and its fashion grew organically around the sport's practical needs (sun protection, salt-water-resistant fabric) before being commercialized into a broader lifestyle brand.",
+ "revivals": [],
+ "article": "Modern surfing traces to Native Hawaiian tradition, revived and popularized for a wider American audience in the early 20th century largely through the efforts of Olympic swimmer Duke Kahanamoku, who gave surfing demonstrations that helped carry the sport to California and beyond. Surf culture as a distinct American fashion and music identity took shape through the early 1960s, fed by films like Gidget (1959) and music by bands like the Beach Boys, before the 1966 documentary The Endless Summer helped cement a globally recognized surf-travel aesthetic. The look itself — boardshorts, sun-bleached hair, faded cotton — grew largely from practical need (quick-drying fabric, sun protection) rather than designed fashion, which is part of why it photographs as so consistently relaxed and unstructured compared to more costume-like subcultures on this list. Surf culture's commercial afterlife, through brands like Quiksilver and Billabong from the 1970s-80s on, eventually separated the look from the sport almost entirely, selling a beach lifestyle to people who may never paddle out.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Surf"
+  }
+ ],
+ "measured": {
+  "n_images": 5,
+  "n_candidates": 5,
+  "findings": [
+   "mostly muted — about 95% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

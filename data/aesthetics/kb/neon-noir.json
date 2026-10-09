@@ -1,0 +1,54 @@
+{
+ "id": "neon-noir",
+ "name": "Neon noir",
+ "lineage": {
+  "influenced_by": [
+   "film noir's shadow-and-light grammar",
+   "1980s synthwave color"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 1980s revival onward (Michael Mann's work); term popularized 2010s"
+ ],
+ "places": [
+  "Miami (Miami Vice, 1984–89)",
+  "Los Angeles"
+ ],
+ "garments": [
+  "not a fashion look — a cinematography style"
+ ],
+ "media": [
+  {
+   "title": "Michael Mann, Miami Vice (TV series, 1984–89)",
+   "note": ""
+  },
+  {
+   "title": "Nicolas Winding Refn, Drive (2011)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Michael Mann",
+  "Nicolas Winding Refn"
+ ],
+ "reacts_against": "classic film noir's black-and-white or desaturated palette, replacing it with the same high-contrast shadow grammar rendered in saturated neon pink and cyan.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Neon_Noir"
+  }
+ ],
+ "measured": {
+  "n_images": 3,
+  "n_candidates": 3,
+  "findings": [
+   "dark — about 65% of the measured color across 3 wiki photos is below mid-lightness"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

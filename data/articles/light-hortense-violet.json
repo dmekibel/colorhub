@@ -1,135 +1,133 @@
 {
- "name": "Light Hortense Violet",
- "hex": "#C17CD3",
- "names": [
-  "Light Hortense Violet"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Light Hortense Violet is a bright pink-violet named for hortense, the French word for hydrangea, and classed by the ISCC-NBS system in 1955 as a brilliant purple.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A hydrangea, not a pigment",
-   "body": "Our data files the name under hortense, the flower word, rather than a pigment or a place [1]. Ridgway's 1912 atlas plots it on plate XI at hue 61, and the ISCC-NBS system of 1955 files the same area as block 217, \"brilliant purple\" [1]. In LCH terms it reads as lightness 62, chroma 54, hue 320 degrees: bright, strongly saturated, and leaning pink of true violet [1].\n\nIts nearest neighbors by computed color distance are [[orchid-purple|Orchid Purple]] and [[amparo-purple|Amparo Purple]], each only 2.7 units off, and [[lavender-floral|Lavender Floral]], 3.6 units off [2]. The closest everyday name is [[orchid]], about 5.1 units away [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our 23,781-painting archive has no painting where a close match covers at least one percent of the canvas, as photographed; that describes this archive, not painting as a whole [4]. A near-duplicate by name is [[orchid-purple|Orchid Purple]], the sibling our library lists as the same hue within rounding [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "hortense, the French name for the hydrangea",
-   "first_recorded": "Ridgway, 1912",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "orchid-purple",
-   "amparo-purple",
-   "lavender-floral",
-   "floral-lavender"
+  "name": "Light Hortense Violet",
+  "hex": "#C17CD3",
+  "names": [
+    "Light Hortense Violet"
   ],
-  "parent": "violet",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    62,
-    54,
-    320
-   ],
-   "nearest": [
-    [
-     "Orchid purple",
-     2.7
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Light Hortense Violet is a bright pink-violet named for hortense, the French word for hydrangea, and classed by the ISCC-NBS system in 1955 as a brilliant purple.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A hydrangea, not a pigment",
+      "body": "Our data files the name under hortense, the flower word, rather than a pigment or a place [1]. Ridgway's 1912 atlas plots it on plate XI at hue 61, and the ISCC-NBS system of 1955 files the same area as block 217, \"brilliant purple\" [1]. In LCH terms it reads as lightness 62, chroma 54, hue 320 degrees: bright, strongly saturated, and leaning pink of true violet [1].\n\nIts nearest neighbors by computed color distance are [[orchid-purple|Orchid Purple]] and [[orchid-purple|Amparo Purple]], each only 2.7 units off, and [[floral-lavender|Lavender Floral]], 3.6 units off [2]. The closest everyday name is [[orchid]], about 5.1 units away [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our 23,781-painting archive has no painting where a close match covers at least one percent of the canvas, as photographed; that describes this archive, not painting as a whole [4]. A near-duplicate by name is [[orchid-purple|Orchid Purple]], the sibling our library lists as the same hue within rounding [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "hortense, the French name for the hydrangea",
+      "first_recorded": "Ridgway, 1912",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "orchid-purple",
+      "floral-lavender"
     ],
-    [
-     "Amparo Purple",
-     2.7
-    ],
-    [
-     "Lavender (Floral)",
-     3.6
-    ],
-    [
-     "Floral lavender",
-     3.6
+    "parent": "violet",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        62,
+        54,
+        320
+      ],
+      "nearest": [
+        [
+          "Orchid purple",
+          2.7
+        ],
+        [
+          "Amparo Purple",
+          2.7
+        ],
+        [
+          "Lavender (Floral)",
+          3.6
+        ],
+        [
+          "Floral lavender",
+          3.6
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/nodes-l.json): Light Hortense Violet — Ridgway 1912, plate XI, hue 61; ISCC-NBS 1955, block 217",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges-l.json): nearest distinct neighbors by CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Light Hortense Violet entry",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/l.json)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Hortense, the word behind this name, is the French name for which flower?",
+      "choices": [
+        "Hydrangea",
+        "Rose",
+        "Violet",
+        "Orchid"
+      ],
+      "answer": "Hydrangea",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our painting archive finds a close match to Light Hortense Violet covering at least one percent of some canvas.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "The name comes from hortense, the French word for hydrangea, not from a pigment."
+  ],
+  "words": 177,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "No book concordance hits for this slug; written from the color graph and library data only; no archive matches.",
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/nodes-l.json): Light Hortense Violet — Ridgway 1912, plate XI, hue 61; ISCC-NBS 1955, block 217",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges-l.json): nearest distinct neighbors by CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Light Hortense Violet entry",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/l.json)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Hortense, the word behind this name, is the French name for which flower?",
-   "choices": [
-    "Hydrangea",
-    "Rose",
-    "Violet",
-    "Orchid"
-   ],
-   "answer": "Hydrangea",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our painting archive finds a close match to Light Hortense Violet covering at least one percent of some canvas.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "The name comes from hortense, the French word for hydrangea, not from a pigment."
- ],
- "words": 177,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-08",
-  "issues": [
-   "No book concordance hits for this slug; written from the color graph and library data only; no archive matches.",
-   "lint 2026-10-09"
-  ]
- },
- "slug": "light-hortense-violet"
+  "slug": "light-hortense-violet"
 }

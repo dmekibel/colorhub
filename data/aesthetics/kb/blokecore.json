@@ -1,0 +1,41 @@
+{
+ "id": "blokecore",
+ "name": "Blokecore",
+ "lineage": {
+  "influenced_by": [
+   "1990s-2000s English football (soccer) terrace culture",
+   "a broader internet-wide reclamation of previously \"uncool\" normcore signifiers"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2022–present"
+ ],
+ "places": [],
+ "garments": [
+  "vintage football jerseys",
+  "straight-leg jeans",
+  "retro trainers"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "the idea that football jerseys and terrace-casual style were inherently unfashionable; blokecore's whole premise is taking clothing coded as unglamorous and wearing it as a deliberate style statement.",
+ "revivals": [],
+ "article": "Blokecore surfaced on TikTok and the secondhand marketplace Depop around 2022, built on vintage European football jerseys — especially 1990s-2000s English and Italian club kits — paired with straight-leg jeans and retro trainers in a styling previously associated mainly with football terrace culture and, in its original context, rarely read as high fashion. The trend's name plays directly on \"bloke,\" British slang for an ordinary man, framing the look as an ironic or affectionate adoption of unglamorous, working-class-coded menswear by an audience (largely young women, by most trend coverage) outside that original context. Its rapid 2022 spread was helped considerably by the easy availability of genuinely old club jerseys on resale platforms, giving the trend an unusually direct, traceable supply chain between the vintage garments and the people wearing them, rather than relying on new manufacturing the way most fast-moving fashion trends do.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Blokecore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 73% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "slug": "pallid-violet",
+ "name": "Pallid Violet",
+ "hex": "#CECAF1",
+ "names": [
+  "Pallid Violet"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pallid Violet names a pale, washed-out [[violet]] by plain modifier grammar, filed by Ridgway's 1912 nomenclature and again in the ISCC-NBS lists of 1955.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, not a coined word",
+   "body": "The name follows a fixed pattern in our library: \"pallid\" plus the parent hue [[violet]], meaning a faded, low-saturation version of it [1]. Robert Ridgway's 1912 *Color Standards and Color Nomenclature* lists the swatch on plate X, hue 59, tone f [2]. The ISCC-NBS system picked the same swatch up in its 1955 dictionary, filing it in block 198 under \"R\" [3]. Our library files the name as an alternate of [[pale-periwinkle|Pale Periwinkle]], which shares its exact hex [1].\n\nThe nearest named neighbors by measured color are [[pallid-blue-violet]], a touch bluer, and [[pale-wistaria-blue]], almost indistinguishable [4]. [[lavender-blue]] reads more vivid, and [[pale-mauve]] leans purpler [4]. [[wedgwood-blue]] sits further off, bluer still [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a match for this violet in just 3 of them, about 0.01 percent, rarer than 81 percent of the named colors we track, as photographed [5]. A pale, low-chroma violet this specific is uncommon across the whole archive, and the small count fits that pattern rather than marking anything unusual [5]. These are photographs of aged, varnished canvases read as screen colors, not pigment identifications [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier (\"pallid\") applied to the parent hue Violet",
+   "first_recorded": "1912, Ridgway's Color Standards and Color Nomenclature",
+   "source": "Ridgway (1912); ISCC-NBS (1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "pallid-blue-violet",
+   "pale-wistaria-blue",
+   "lavender-blue"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "rank_pct": 81,
+  "measured": {
+   "lch": [
+    82.8,
+    20.7,
+    295.7
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: modifier-grammar naming (data/graph/nodes-p.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature, plate X, hue 59, tone f",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 dictionary entry, block 198 (R)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges (data/graph/edges-p.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What kind of name is Pallid Violet?",
+   "choices": [
+    "A modifier (\"pallid\") applied to the parent color Violet",
+    "A place name",
+    "A Crayola crayon name",
+    "A painter's name"
+   ],
+   "answer": "A modifier (\"pallid\") applied to the parent color Violet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pallid Violet was first filed in Ridgway's 1912 plates.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pallid Violet shows up in our archive in only 3 of 23,781 paintings, rarer than most of the colors we track."
+ ],
+ "words": 207,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Opus spot-audit 2026-10-09: claims re-verified against graph/fieldnotes/article_field.py; errors fixed."
+  ]
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "id": "clean-girl",
+ "name": "Clean girl",
+ "lineage": {
+  "influenced_by": [
+   "VSCO girl's successor trend cycle",
+   "minimalist \"your skin but better\" beauty marketing"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 2022–present"
+ ],
+ "places": [
+  "TikTok"
+ ],
+ "garments": [
+  "slicked-back buns",
+  "gold hoop earrings",
+  "minimal \"no-makeup makeup\""
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "heavy, contoured \"Instagram baddie\" makeup, presenting a minimal, dewy, low-effort-looking beauty standard instead — a standard that drew criticism for relying on genetics and expensive products despite its \"effortless\" marketing.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "|decade_of_origin=2020s",
+  "decade_of_origin": "2020s",
+  "key_motifs": "Slicked-back bun (\"facelift\" hairstyle), minimalist makeup, claw clips, gold hoop earrings, \"model off-duty\" athleisure, matching workout sets, green juice/iced coffee",
+  "key_colours": "Neutrals (beige, white, cream, brown, grey)",
+  "related_aesthetics": "Minimalism\nScandi Girl Winter\nThat Girl\nVanilla Girl",
+  "key_values": "Effortlessness, discipline, productivity, wellness, hyper-curation"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Clean_Girl"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 75% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

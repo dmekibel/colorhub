@@ -1,0 +1,55 @@
+{
+ "id": "frutiger-aero",
+ "name": "Frutiger Aero",
+ "lineage": {
+  "influenced_by": [
+   "Apple's Aqua interface (2000)",
+   "Windows Vista/7's glassy UI",
+   "early-2000s tech optimism"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 2004–2013"
+ ],
+ "places": [
+  "software interface design broadly (Windows, early iOS, airport signage)"
+ ],
+ "garments": [
+  "not a fashion look — a UI and graphic design aesthetic (named for the typeface Frutiger, widely used in airport and tech signage of the era)"
+ ],
+ "media": [
+  {
+   "title": "Windows Vista (2007) interface design",
+   "note": ""
+  }
+ ],
+ "figures": [],
+ "reacts_against": "flat, minimal 2010s design (iOS 7 onward) retroactively made Frutiger Aero's glossy, dimensional, nature-plus-technology look feel like a lost, more optimistic era.",
+ "revivals": [
+  "a 2020s nostalgia-driven online revival, grouped with Y2K and frutiger-aero-specific Discord/Tumblr communities"
+ ],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Web 2.0 Gloss",
+  "decade_of_origin": "2000s",
+  "key_motifs": "Skeuomorphism, glossy textures, \"Humanism\", use of nature, bokeh, bubbles, Frutiger fonts, glass, auroras",
+  "key_colours": "Blue, green, white, tertiary colours",
+  "related_aesthetics": "Abstract TechBright TertiariesChromecoreCleancoreCyberprepDollar Store VernacularFlat DesignGen X Soft ClubGlassmorphismHexatronHands UpClear TechRecession PopRetrofuturismSeapunkSilicon DreamsSkeuomorphismSolarpunkSuperflat PopTechnoNeko2000Tranquil Spa GraphicsTrillwaveTropicalVaporwaveVectordeliaVectorflourishWebcoreY2K Futurism"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Frutiger_Aero"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 47% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

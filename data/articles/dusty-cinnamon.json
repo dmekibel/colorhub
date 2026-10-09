@@ -1,0 +1,127 @@
+{
+ "slug": "dusty-cinnamon",
+ "name": "Dusty cinnamon",
+ "hex": "#B0927A",
+ "names": [
+  "Dusty cinnamon"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty cinnamon is a pale, greyed tan, ColorHub's English name for the Japanese traditional color Rikyushiracha, \"faded Sen no Rikyu's tea,\" named for a tea master's muted taste rather than the spice its English name suggests.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A faded tea-ceremony brown",
+   "body": "Rikyushiracha (利休白茶) is named in the Wikipedia list of Japan's traditional colors for \"faded Sen no Rikyu's tea\": Sen no Rikyu was the sixteenth-century tea master credited with shaping the Japanese tea ceremony, and this muted, light brown-tan carries his name the way several other traditional *cha* (tea) browns do [1]. It is not named for the aromatic bark that the English word cinnamon points to here [1].\n\nIts nearest named neighbor on file is [[light-cinnamon-drab]], 3.0 units off, close enough on screen to read as the same tan [2]; [[grey-beige]] sits 3.7 off [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within six units of this swatch in 1,820 of 23,781 paintings, 7.65 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 1,176 [3]. That makes it more common than 91 percent of the named colors in our library [3]. It peaks in the 1200s, present in 18.3 percent of our 142 paintings from that century, 2.1 times the museums' baseline rate [3]. Inside a painting it most often sits as a hidden color, in 35 percent of its 1,176 appearances by lightness rank [3].\n\nJohn Singer Sargent paints it most often by raw count, in 18 of 287 works here, though no single painter stands out once each museum's own baseline is taken into account [3]. The earliest match dates to the year 900, a floor and not a first, since the archive's early centuries are thin [3]. It shares canvases with [[sandust|Sandust]] and [[rood-s-brown|Rood's Brown]] more often than chance [3]. These are computed color matches to photographed, varnished paintings, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Rikyushiracha, \"faded Sen no Rikyu's tea\"",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, Traditional colors of Japan"
+  },
+  "aka": [
+   "Rikyushiracha"
+  ],
+  "siblings": [
+   "light-cinnamon-drab",
+   "grey-beige",
+   "mushroom",
+   "cinnamon-drab"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Rikyushiracha (利休白茶)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1820,
+  "n_within_painting": 1176,
+  "pct_archive": 7.65,
+  "rank_pct": 91,
+  "measured": {
+   "lch": [
+    63,
+    19,
+    66
+   ],
+   "nearest": [
+    [
+     "Light Cinnamon-Drab",
+     3.0
+    ],
+    [
+     "Grey Beige",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional list, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Who is Rikyushiracha named after?",
+   "choices": [
+    "The tea master Sen no Rikyu",
+    "The cinnamon spice tree",
+    "A silk merchant"
+   ],
+   "answer": "The tea master Sen no Rikyu",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter holds this color the most times by raw count in our archive?",
+   "choices": [
+    "John Singer Sargent",
+    "Pietro Perugino",
+    "André Derain"
+   ],
+   "answer": "John Singer Sargent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Named for a faded tea master's taste, not the cinnamon spice its English name suggests."
+ ],
+ "words": 307,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

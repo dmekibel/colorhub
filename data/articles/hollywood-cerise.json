@@ -1,0 +1,119 @@
+{
+  "slug": "hollywood-cerise",
+  "name": "Hollywood Cerise",
+  "hex": "#F400A1",
+  "names": [
+    "Hollywood Cerise"
+  ],
+  "tier": "place",
+  "depth": "brief",
+  "lede": "Hollywood Cerise is a vivid pink-magenta that carried the name \"Hollywood\" alone for two decades before anyone added the word cerise.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A name that grew a second word",
+      "body": "*Cerise* is French for cherry, and entered English as a color word in the nineteenth century; the Oxford English Dictionary's earliest citation is The Times, 30 November 1858 [1]. This particular pink-magenta is older than that borrowing: our library traces the plain name \"Hollywood\" to 1922, decades before \"Hollywood Cerise\" is recorded [1]. The fuller name appears by the 1940s, and by the 1950s the Venus Paradise brand sold a colored pencil under exactly that name [1].\n\nIts nearest named neighbors are [[frostbite]], [[hollywood-cerise]] and [[persian-rose]], all close enough to read as the same family at a glance [2]. [[deep-pink]] sits a little further out, and [[barbie-pink]] further still, duller and lighter [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive has a color within CIEDE2000 4 of Hollywood Cerise covering at least 1 percent of its canvas, as photographed [3]. That describes the museum collections behind our archive, not painting as a whole: a magenta this saturated is rare in oil paint before modern synthetic dyes and inks, and our archive is thin on anything made with those [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "Hollywood, California; the word cerise added later",
+      "first_recorded": "as \"Hollywood\", 1922; as \"Hollywood Cerise\" by the 1940s",
+      "source": "ColorHub color library (Wikipedia-sourced)"
+    },
+    "aka": [
+      "Hollywood"
+    ],
+    "siblings": [
+      "frostbite",
+      "hollywood-cerise",
+      "persian-rose"
+    ],
+    "parent": "cerise",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "match": {
+      "hex": "#F400A1",
+      "de2000": 4,
+      "min_cover": 0.01
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "web",
+      "cite": "Wikipedia, \"Cerise (color)\", section on Hollywood cerise",
+      "loc_kind": null,
+      "url": "https://en.wikipedia.org/wiki/Cerise_(color)"
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library, look-alike computation (data/graph/edges)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What did French cerise originally mean before it became a color word?",
+      "choices": [
+        "Cherry",
+        "Rose",
+        "Blood",
+        "Silk"
+      ],
+      "answer": "Cherry",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the name \"Hollywood Cerise\" is older than the plain name \"Hollywood.\"",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Which product line sold a \"Hollywood cerise\" colored pencil in the 1950s?",
+      "choices": [
+        "Venus Paradise",
+        "Crayola",
+        "Faber-Castell",
+        "Derwent"
+      ],
+      "answer": "Venus Paradise",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Hollywood Cerise went by just \"Hollywood\" for its first two decades."
+  ],
+  "words": 197,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-09",
+    "issues": [
+      "name history is web-sourced only; hedge kept"
+    ]
+  }
+}

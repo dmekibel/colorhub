@@ -1,121 +1,122 @@
 {
- "slug": "heather-pink",
- "name": "Heather pink",
- "hex": "#D15B8F",
- "names": [
-  "Heather pink"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Heather pink is a vivid, slightly purplish pink standardized by RAL in 1927, named for the fresh flowers of the heather shrub rather than its faded, grey-toned Heather grey sibling.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A flower's own pink",
-   "body": "RAL 1927 is the source given for Heather pink here, with the hex value an approximate screen rendering of the printed standard [1]. Heather's small bell-shaped flowers bloom in exactly this register, a magenta-leaning pink across moorland in late summer; the color library groups it under \"heather\" as a family word, the brighter counterpart to the greyed Heather grey [2]. The ISCC-NBS system would file it as a deep purplish pink [2]. In Munsell terms it sits near 5.0RP 5.4/12.0: high chroma, near the boundary of red and purple [2].\n\nThe nearest named color is [[france-rose|France Rose]], 4.4 units away and duller; [[rose-color|Rose Color]] sits at 4.9, more vivid [2]. The library also lists Heather Violet as a close alternate name [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive carries a match for Heather pink, as photographed [3]. That describes the archive, not painting as a whole: this saturated a pink, at this exact hue, rarely survives in old oils once varnish and age have had their effect [3]. Its paler, greyer sibling Heather grey, by contrast, turns up in dozens of paintings here, which is itself a small lesson in how fugitive a bright pink pigment can be next to a muted one [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "heather, the flowering shrub, in its fresh bloom",
-   "first_recorded": "1927, as a RAL standard",
-   "source": "RAL color standard (1927)"
-  },
-  "aka": [
-   "Heather Violet"
+  "slug": "heather-pink",
+  "name": "Heather pink",
+  "hex": "#D15B8F",
+  "names": [
+    "Heather pink",
+    "Heather Violet"
   ],
-  "siblings": [
-   "france-rose",
-   "rose-color",
-   "darkish-pink",
-   "mulberry"
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Heather pink is a vivid, slightly purplish pink standardized by RAL in 1927, named for the fresh flowers of the heather shrub rather than its faded, grey-toned Heather grey sibling.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A flower's own pink",
+      "body": "RAL 1927 is the source given for Heather pink here, with the hex value an approximate screen rendering of the printed standard [1]. Heather's small bell-shaped flowers bloom in exactly this register, a magenta-leaning pink across moorland in late summer; the color library groups it under \"heather\" as a family word, the brighter counterpart to the greyed Heather grey [2]. The ISCC-NBS system would file it as a deep purplish pink [2]. In Munsell terms it sits near 5.0RP 5.4/12.0: high chroma, near the boundary of red and purple [2].\n\nThe nearest named color is [[france-rose|France Rose]], 4.4 units away and duller; [[rose-color|Rose Color]] sits at 4.9, more vivid [2]. The library also lists Heather Violet as a close alternate name [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive carries a match for Heather pink, as photographed [3]. That describes the archive, not painting as a whole: this saturated a pink, at this exact hue, rarely survives in old oils once varnish and age have had their effect [3]. Its paler, greyer sibling Heather grey, by contrast, turns up in dozens of paintings here, which is itself a small lesson in how fugitive a bright pink pigment can be next to a muted one [3]."
+    }
   ],
-  "parent": "heather",
-  "children": null,
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    55,
-    52,
-    354
-   ],
-   "nearest": [
-    [
-     "France Rose",
-     4.4
+  "aside": {
+    "origin": {
+      "named_after": "heather, the flowering shrub, in its fresh bloom",
+      "first_recorded": "1927, as a RAL standard",
+      "source": "RAL color standard (1927)"
+    },
+    "aka": [
+      "Heather Violet"
     ],
-    [
-     "Rose Color",
-     4.9
+    "siblings": [
+      "france-rose",
+      "rose-color",
+      "ruber",
+      "mulberry"
+    ],
+    "parent": "heather",
+    "children": null,
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        55,
+        52,
+        354
+      ],
+      "nearest": [
+        [
+          "France Rose",
+          4.4
+        ],
+        [
+          "Rose Color",
+          4.9
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: RAL standard (1927), approximate screen value",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: computed ISCC-NBS block, Munsell notation and look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Heather pink is named for which part of the heather plant?",
+      "choices": [
+        "Its fresh flowers",
+        "Its dried, faded sprigs",
+        "Its roots",
+        "Its bark"
+      ],
+      "answer": "Its fresh flowers",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: at least one painting in the ColorHub archive closely matches Heather pink.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Heather pink is the bright, fresh-flower counterpart to the faded Heather grey."
+  ],
+  "words": 232,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: RAL standard (1927), approximate screen value",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library: computed ISCC-NBS block, Munsell notation and look-alike distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Heather pink is named for which part of the heather plant?",
-   "choices": [
-    "Its fresh flowers",
-    "Its dried, faded sprigs",
-    "Its roots",
-    "Its bark"
-   ],
-   "answer": "Its fresh flowers",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: at least one painting in the ColorHub archive closely matches Heather pink.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Heather pink is the bright, fresh-flower counterpart to the faded Heather grey."
- ],
- "words": 232,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

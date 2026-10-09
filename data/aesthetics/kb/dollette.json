@@ -1,0 +1,42 @@
+{
+ "id": "dollette",
+ "name": "Dollette",
+ "lineage": {
+  "influenced_by": [
+   "coquette aesthetics",
+   "porcelain doll and baby-doll dress imagery"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2023–present"
+ ],
+ "places": [],
+ "garments": [
+  "baby-doll dresses",
+  "satin bows",
+  "mary jane shoes"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "coquette's lingerie-adjacent, more overtly sexualized focus, offering a more literally doll-like, childlike silhouette instead.",
+ "revivals": [],
+ "article": "Dollette surfaced as a named sub-style of the broader coquette aesthetic around 2023, distinguishing itself through a more literal doll-like silhouette — baby-doll dresses, mary jane shoes, satin bows — rather than coquette's lingerie-adjacent focus on corsetry and bows worn as intimate apparel. As one of the most recently coined aesthetics in this archive, dollette has limited documentation outside of fashion-trend coverage and the TikTok and Pinterest communities that use the term, and its boundary against coquette, princesscore and soft girl is genuinely porous — several fashion writers covering the trend have noted the labels function more as slightly different vibes within the same broad cluster than as sharply distinct movements, which is typical of how quickly-coined 2020s micro-aesthetics tend to work.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Dollette"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "light — about 51% of the measured color is pale or near-white",
+   "mostly muted — about 76% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

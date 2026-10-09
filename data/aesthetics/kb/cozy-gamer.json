@@ -1,0 +1,56 @@
+{
+ "id": "cozy-gamer",
+ "name": "Cozy Gamer",
+ "lineage": {
+  "influenced_by": [
+   "cottagecore",
+   "life-simulation games (Animal Crossing, Stardew Valley)"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2020 onward, accelerated by pandemic-era Animal Crossing: New Horizons"
+ ],
+ "places": [
+  "in-game spaces as much as real ones"
+ ],
+ "garments": [
+  "soft, pastel loungewear",
+  "plushies and knit accessories mirroring in-game items"
+ ],
+ "media": [
+  {
+   "title": "Animal Crossing: New Horizons (2020)",
+   "note": "the single biggest driver of the aesthetic's 2020 explosion"
+  },
+  {
+   "title": "Stardew Valley (2016)",
+   "note": "an earlier touchstone for the low-stakes, nature-focused game palette"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "high-stress, competitive gaming culture's visual language (dark, aggressive, red-black); cozy gamer aesthetics are deliberately soft and low-stakes.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "2020s",
+  "key_motifs": "Houseplants, mechanical keyboards, plushies, pixel art, warm fairy lights, wood textures, pegboards, mugs",
+  "key_colours": "Sage green, cream, soft brown, pastel pink, warm white",
+  "related_aesthetics": "Cottagecore\nCozycore\nJuminocore\nKawaii Gamer\nLo-fi Art\nNaturecore\nWitchcore",
+  "key_values": "Escapism, comfort, mindfulness, slow living, soft productivity"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Cozy_Gamer"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 70% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

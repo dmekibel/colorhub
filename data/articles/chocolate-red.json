@@ -1,176 +1,176 @@
 {
- "slug": "chocolate-red",
- "name": "Chocolate Red",
- "hex": "#4D3635",
- "names": [
-  "Chocolate Red"
- ],
- "tier": "person",
- "depth": "short",
- "lede": "Chocolate Red is a dark brownish red, entry 98 in the color nomenclature that the Scottish artist Patrick Syme built from the mineralogist Werner's system, defined as a mixture of two neighboring reds.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A name from a nomenclature",
-   "body": "Chocolate Red does not come from the sweet [1]. It comes from a reference system that matched each color name to a painted swatch and to real examples from animals, plants and minerals [1][2]. Werner published a method of identifying minerals by their outward characters in 1774, and over the next forty years or so he revised a list of color terms for his students [2]. Patrick Syme, a Scottish artist, expanded that list to 108 terms in 1814 and to 110 in 1821, and added a painted swatch to each [2].\n\nWhy the word *chocolate* was chosen is undocumented in the sources we hold. What is documented is the recipe: Syme defines Chocolate Red as veinous blood red mixed with a little brownish red [1]."
-  },
-  {
-   "id": "neighbors",
-   "title": "Where it sits in the list",
-   "body": "Syme's names are built from each other. Veinous Blood Red (number 96) is carmine red mixed with brownish black, and Brownish Purple Red (97), which he equates with a Werner term, \"cherry red\", is lake red darkened with brownish black and a little grey [1]. Chocolate Red is number 98, and Brownish Red (99) combines chocolate red with hyacinth red and a touch of chesnut brown [1].\n\nThe list then slides into the browns: Deep Reddish Brown is chesnut brown with a little chocolate red in it [1]. Chocolate Red is therefore the hinge where the reds darken into brown [1]. Nearby entries on the same page are [[veinous-blood-red]], [[brownish-purple-red]], [[brownish-red]] and [[deep-reddish-brown]] [1]."
-  },
-  {
-   "id": "examples",
-   "title": "What Syme pointed at",
-   "body": "For each color Syme named a real thing to hold it against [1]. For Chocolate Red the animal example is the breast feathers of the bird of paradise, and the vegetable example is the brown disk at the centre of the common marigold [1]. The illustrations in the modern edition show the same color on the breast of a bird of paradise in a 1801-06 engraving by Levaillant, on a marigold in Bulliard's flora of 1776-81, and on iron oxide in Sowerby's mineralogy of 1802-17 [1].\n\nNone of these is cacao. A reader who wants to see the color can look into the dark centre of a [[flower:marigold|marigold]] in late summer."
-  },
-  {
-   "id": "swatch",
-   "title": "The swatch",
-   "body": "The screen color here, #4D3635, is a dark, slightly purplish brown; its nearest ordinary name is [[umber]], about 10 units away in ΔE [3]. It is a screen reading of a printed reproduction of a plate, so it is approximate, and the pigments of 1821 have aged since [3]. Syme filed it under the reds, but on a modern screen it reads as a brown [1][3].\n\nBeside the plain English [[chocolate]], a much lighter and warmer brown (#7B3F00), it looks like a different color entirely [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive, 1,069 of 23,781 paintings (4.5 per cent) contain this color on at least five per cent of the canvas, within six units of ΔE [4]. It is mostly a shadow color: 72 per cent of its role in a painting's lightness order is shadow [4]. The 1500s are over-represented, at 1.5 times the base rate, and the 1510s peak at 24 of 243 paintings, 2.2 times the base rate [4]. Among painters, Bronzino has it in 5 of 21 works and Pontormo in 4 of 13 [4].\n\nIn Google Books, the phrase *chocolate red* first rises above five per cent of its peak around 1812 and peaks in 1925 [5]. All archive numbers are photographs of aged, varnished paintings, so a color match is not a pigment test [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "entry 98 in Syme's Werner's Nomenclature of Colours (1814, 1821); why 'chocolate' was chosen is undocumented",
-   "first_recorded": "1814 (Syme's first edition) or earlier in Werner's own lists",
-   "source": "Baty (ed.), Nature's Palette, introduction and plate V"
-  },
-  "aka": [
-   "Werner's chocolate red"
+  "slug": "chocolate-red",
+  "name": "Chocolate Red",
+  "hex": "#4D3635",
+  "names": [
+    "Chocolate Red"
   ],
-  "siblings": [
-   "brownish-red",
-   "brownish-purple-red",
-   "veinous-blood-red"
+  "tier": "person",
+  "depth": "short",
+  "lede": "Chocolate Red is a dark brownish red, entry 98 in the color nomenclature that the Scottish artist Patrick Syme built from the mineralogist Werner's system, defined as a mixture of two neighboring reds.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A name from a nomenclature",
+      "body": "Chocolate Red does not come from the sweet [1]. It comes from a reference system that matched each color name to a painted swatch and to real examples from animals, plants and minerals [1][2]. Werner published a method of identifying minerals by their outward characters in 1774, and over the next forty years or so he revised a list of color terms for his students [2]. Patrick Syme, a Scottish artist, expanded that list to 108 terms in 1814 and to 110 in 1821, and added a painted swatch to each [2].\n\nWhy the word *chocolate* was chosen is undocumented in the sources we hold. What is documented is the recipe: Syme defines Chocolate Red as veinous blood red mixed with a little brownish red [1]."
+    },
+    {
+      "id": "neighbors",
+      "title": "Where it sits in the list",
+      "body": "Syme's names are built from each other. Veinous Blood Red (number 96) is carmine red mixed with brownish black, and Brownish Purple Red (97), which he equates with a Werner term, \"cherry red\", is lake red darkened with brownish black and a little grey [1]. Chocolate Red is number 98, and Brownish Red (99) combines chocolate red with hyacinth red and a touch of chesnut brown [1].\n\nThe list then slides into the browns: Deep Reddish Brown is chesnut brown with a little chocolate red in it [1]. Chocolate Red is therefore the hinge where the reds darken into brown [1]. Nearby entries on the same page are [[veinous-blood-red]], [[dusty-rose-brown]], [[brownish-red]] and [[deep-reddish-brown]] [1]."
+    },
+    {
+      "id": "examples",
+      "title": "What Syme pointed at",
+      "body": "For each color Syme named a real thing to hold it against [1]. For Chocolate Red the animal example is the breast feathers of the bird of paradise, and the vegetable example is the brown disk at the centre of the common marigold [1]. The illustrations in the modern edition show the same color on the breast of a bird of paradise in a 1801-06 engraving by Levaillant, on a marigold in Bulliard's flora of 1776-81, and on iron oxide in Sowerby's mineralogy of 1802-17 [1].\n\nNone of these is cacao. A reader who wants to see the color can look into the dark centre of a [[flower:marigold|marigold]] in late summer."
+    },
+    {
+      "id": "swatch",
+      "title": "The swatch",
+      "body": "The screen color here, #4D3635, is a dark, slightly purplish brown; its nearest ordinary name is [[umber]], about 10 units away in ΔE [3]. It is a screen reading of a printed reproduction of a plate, so it is approximate, and the pigments of 1821 have aged since [3]. Syme filed it under the reds, but on a modern screen it reads as a brown [1][3].\n\nBeside the plain English [[chocolate]], a much lighter and warmer brown (#7B3F00), it looks like a different color entirely [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive, 1,069 of 23,781 paintings (4.5 per cent) contain this color on at least five per cent of the canvas, within six units of ΔE [4]. It is mostly a shadow color: 72 per cent of its role in a painting's lightness order is shadow [4]. The 1500s are over-represented, at 1.5 times the base rate, and the 1510s peak at 24 of 243 paintings, 2.2 times the base rate [4]. Among painters, Bronzino has it in 5 of 21 works and Pontormo in 4 of 13 [4].\n\nIn Google Books, the phrase *chocolate red* first rises above five per cent of its peak around 1812 and peaks in 1925 [5]. All archive numbers are photographs of aged, varnished paintings, so a color match is not a pigment test [4]."
+    }
   ],
-  "parent": null,
-  "children": [
-   "deep-reddish-brown"
+  "aside": {
+    "origin": {
+      "named_after": "entry 98 in Syme's Werner's Nomenclature of Colours (1814, 1821); why 'chocolate' was chosen is undocumented",
+      "first_recorded": "1814 (Syme's first edition) or earlier in Werner's own lists",
+      "source": "Baty (ed.), Nature's Palette, introduction and plate V"
+    },
+    "aka": [
+      "Werner's chocolate red"
+    ],
+    "siblings": [
+      "brownish-red",
+      "dusty-rose-brown",
+      "veinous-blood-red"
+    ],
+    "parent": null,
+    "children": [
+      "deep-reddish-brown"
+    ],
+    "disambiguation": [
+      {
+        "slug": "chocolate",
+        "gloss": "the brown of the sweet (#7B3F00), lighter and warmer; unrelated to Syme's entry"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#4D3635",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 1069,
+    "role": {
+      "shadow": 0.72,
+      "mid": 0.28
+    },
+    "peak_decade": {
+      "decade": 1510,
+      "hits": 24,
+      "n": 243,
+      "lift": 2.2
+    },
+    "ngram": {
+      "peak": 1925,
+      "first_5pct": 1812
+    },
+    "measured": {
+      "nearest": [
+        [
+          "Umber",
+          10.4
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Baty (ed.), Nature's Palette: A Colour Reference System from the Natural World, plate V (Reds and Browns), entries 96-101",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Baty (ed.), Nature's Palette, introduction (Werner and Syme)",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub names list and botany notes: nearest-name distances in ΔE (swatch vs Umber 10.4; Chocolate #7B3F00)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (tools/article_field.py), #4D3635, ΔE 6, at least 5% of canvas, as photographed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "data",
+      "cite": "Google Books Ngram, 'chocolate red', 5-year smoothing, relative to peak",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "disambiguation": [
-   {
-    "slug": "chocolate",
-    "gloss": "the brown of the sweet (#7B3F00), lighter and warmer; unrelated to Syme's entry"
-   }
+  "questions": [
+    {
+      "q": "How did Patrick Syme define Chocolate Red?",
+      "choices": [
+        "Veinous blood red mixed with a little brownish red",
+        "Carmine red mixed with cacao",
+        "Chesnut brown with a little orange",
+        "Lake red mixed with black and grey"
+      ],
+      "answer": "Veinous blood red mixed with a little brownish red",
+      "kind": "pick"
+    },
+    {
+      "q": "Which flower's centre was Syme's vegetable example of Chocolate Red?",
+      "choices": [
+        "The common marigold",
+        "The Oriental poppy",
+        "The deadly nightshade's berry",
+        "The garden pansy"
+      ],
+      "answer": "The common marigold",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: cacao was among the examples Syme used for Chocolate Red.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#4D3635",
-   "de2000": 6,
-   "min_cover": 0.05
+  "openers": [
+    "Chocolate Red is entry 98 in Syme's 1821 color nomenclature, and the color's example in nature is the dark centre of a marigold, not cacao.",
+    "Look into the middle of a common marigold: that brown is the color a nineteenth-century artist chose to stand for Chocolate Red."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   },
-  "n_present": 1069,
-  "role": {
-   "shadow": 0.72,
-   "mid": 0.28
-  },
-  "peak_decade": {
-   "decade": 1510,
-   "hits": 24,
-   "n": 243,
-   "lift": 2.2
-  },
-  "ngram": {
-   "peak": 1925,
-   "first_5pct": 1812
-  },
-  "measured": {
-   "nearest": [
-    [
-     "Umber",
-     10.4
-    ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Baty (ed.), Nature's Palette: A Colour Reference System from the Natural World, plate V (Reds and Browns), entries 96-101",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Baty (ed.), Nature's Palette, introduction (Werner and Syme)",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub names list and botany notes: nearest-name distances in ΔE (swatch vs Umber 10.4; Chocolate #7B3F00)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (tools/article_field.py), #4D3635, ΔE 6, at least 5% of canvas, as photographed",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "data",
-   "cite": "Google Books Ngram, 'chocolate red', 5-year smoothing, relative to peak",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "How did Patrick Syme define Chocolate Red?",
-   "choices": [
-    "Veinous blood red mixed with a little brownish red",
-    "Carmine red mixed with cacao",
-    "Chesnut brown with a little orange",
-    "Lake red mixed with black and grey"
-   ],
-   "answer": "Veinous blood red mixed with a little brownish red",
-   "kind": "pick"
-  },
-  {
-   "q": "Which flower's centre was Syme's vegetable example of Chocolate Red?",
-   "choices": [
-    "The common marigold",
-    "The Oriental poppy",
-    "The deadly nightshade's berry",
-    "The garden pansy"
-   ],
-   "answer": "The common marigold",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: cacao was among the examples Syme used for Chocolate Red.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Chocolate Red is entry 98 in Syme's 1821 color nomenclature, and the color's example in nature is the dark centre of a marigold, not cacao.",
-  "Look into the middle of a common marigold: that brown is the color a nineteenth-century artist chose to stand for Chocolate Red."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- },
- "words": 591
+  "words": 591
 }

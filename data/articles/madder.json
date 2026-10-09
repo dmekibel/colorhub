@@ -1,477 +1,477 @@
 {
- "slug": "madder",
- "name": "Madder",
- "hex": "#CC3336",
- "names": [
-  "Madder Lake",
-  "Rose Madder"
- ],
- "tier": "pigment",
- "depth": "epic",
- "lede": "Madder is the red of a root: probably the oldest dye people ever made, the secret behind Turkey red and rose madder, and the first natural dye ever rebuilt in a laboratory.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The name and the plant",
-   "body": "Madder is not a single color but a plant and everything made from it. The dye comes from the roots of *Rubia tinctorum* and a few close relatives, and the main coloring molecule, alizarin, is roughly a hundredth of the root's weight [4][5]. English inherited the word from Old English *mædere*, a Germanic name with cousins in Swedish and Icelandic [29]. The French call it *garance*, and one nineteenth-century French madder lake was sold as *carmin de garance* [18]. The Levantine trade word *alizari* gave chemists the name *alizarin* [8].\n\nThe screen swatch for this page is the color that dictionaries call Madder Lake, a strong warm red [32]. Its nearest neighbors among our named colors are plain [[red]] and Persian red, both less than three units away [32]. That fits its history: until 1868, Garfield writes, madder supplied half the world with red [5]. The pink of [[rose-madder]] and the browns and violets of Ridgway's 1912 madder colors ([[madder-brown]], [[madder-violet]]) all borrow the root's name for different treatments of its color [32][19]."
-  },
-  {
-   "id": "material",
-   "title": "One root, many reds",
-   "body": "A madder plant is unremarkable above ground: small greenish-yellow flowers and fleshy roots of a reddish yellow [4]. The roots took two to three years to fatten before they were dug; Garfield gives 18 to 30 months and Pastoureau three years [5][2]. In seventeenth-century Holland, the law made farmers on reclaimed land dig the crop within two years, since roots left longer could burrow into the dykes [6].\n\nThe dried root was pounded in stages. The first pounding gave the cheapest grade, and the third, from the heart of the root, gave the finest, which the Dutch called *krap* and the English \"crop\" [6]. Animals that ate the plant showed it: cows and sheep gave faintly reddened milk [2], and the chemist Duhamel du Monceau found that pigeons fed on madder grew red bones [6].\n\nMadder is a mordant dye, so the metal salt that fixes it also sets its hue. With alum it gives an orange-red, not a pink, and other mordants push it toward pink, purple or black [6][5]. George Field, writing for painters, counted five coloring matters in the one root: yellow, red, orange, purple and brown [19]. One plant could dye a carpet brick red, stain a lute orange and, over a woad blue, finish a cloth purple or black [6][7][12]."
-  },
-  {
-   "id": "history",
-   "title": "The oldest red",
-   "body": "The oldest dyed cloth fragments that survive are all red, and Pastoureau infers from them that dyeing began with red and that madder was probably the first dye of all [1][2]. A scrap of cotton found on a silver vase at Mohenjo-daro, about 4,600 years old, had been dyed with madder; Finlay calls it the oldest decorated cotton known, and it would once have been pink or orange-red depending on its mordant [3]. Madder was in use in Egypt from about 1500 BC, madder-dyed fabric lay in Tutankhamun's tomb, and a paint-seller's stock at Pompeii included it [4].\n\nRome's guild of dyers had six separate trades for red, and one of them, the *sandicinii*, worked with madder [2]. Pliny noted that the painters' purple made at Puteoli was preferred to the one from Tyre because it took madder well [30]. Some books say madder reached Europe with the Crusaders [26][34], but the Roman evidence shows it was there long before; Ball's reading is that European fields of madder date from at least the thirteenth century and the dye spread more widely after the Crusades [13][8].\n\nMadder was also the hidden half of many other colors. Egyptian dyers of the Roman era faked costly shellfish purple by dyeing woad blue and then madder red over it, and the Talmud warns against a counterfeit purple made from indigo and madder [12]. Medieval dyers built their purples, mulberries and best blacks the same way, a blue foot of woad finished in a madder or kermes bath [12]."
-  },
-  {
-   "id": "trade",
-   "title": "Fields, guilds and blue devils",
-   "body": "Madder was the cheap red, and the law treated its dyers that way. In fourteenth- and fifteenth-century Nuremberg and Milan, red dyers who used local madder had a different legal status, different taxes and different clients from those who used imported kermes or cochineal [11]. The insect reds were brighter and dearer; madder tended toward brown and was thought fit for carpets and ordinary clothes [20].\n\nWhen blue came into fashion in the thirteenth century, the madder merchants fought back with pictures. A 1256 contract in Strasbourg ordered a church window showing the devil in blue, and a 1265 mural in Erfurt painted the Devil tempting Christ blue as well [10]. It did not work: blue overtook red in European cloth, and dyers' recipe books slowly swung from mostly red to mostly blue [11].\n\nFrance kept a soldier's use for it. In 1829 Charles X replaced the infantry's blue trousers with madder-red ones, and they stayed red until 1915 [25]. During the First World War that red made the men easy targets, and indigo-blue cloth replaced it [35]."
-  },
-  {
-   "id": "turkey-red",
-   "title": "Turkey red",
-   "body": "In most of Europe madder gave corals and brick reds [7]. Dyers in the Ottoman Empire and India could get something else: a deep, clear, washable red on cotton, made in a dozen or more steps over three to four months, with rancid oil, dung and blood among the ingredients [7]. Europeans called it Turkey red, and the method was one of the best-kept secrets in dyeing [6].\n\nIndian cottons printed and painted in madder red, called chintz after the Hindi *chint*, astonished European buyers in the seventeenth century because they could be washed without fading [9][8]. European printing then divided into two crafts, indigo for the blue printers and madder for the chintz-makers [8].\n\nThe Dutch learned Turkey red in the 1730s and the French in 1747, and two brothers from Rouen brought it to Manchester in 1787 [6]. It fed the Glasgow fashion for red bandannas with white spots, made by printing madder and then bleaching out the pattern [6]. By 1860 Britain was importing over a million pounds' worth of madder a year, and French madder was accused of being cut with brick dust and oats [4]."
-  },
-  {
-   "id": "art",
-   "title": "In the paintbox: madder lake and rose madder",
-   "body": "A dye becomes a paint by being fixed onto a colorless powder, which makes a lake. Madder lake is more permanent than the brazilwood lakes painters also used, but harder to make; a recipe survives from the tenth century, yet it is hard to find in medieval panel painting [13]. It shows up in fifteenth-century Netherlandish painting, helped by the madder fields of Zeeland, for instance in Dieric Bouts's *Virgin and Child with Saints Peter and Paul* of about 1460 [13]. Rembrandt's red lakes were mainly madder and cochineal [15], and in 1548 Titian asked Aretino for a lake so fiery in its madder color that crimson silk looked dull beside it [16].\n\nThe pigment then almost disappears from the written record: Italian sources fall silent on it between 1612 and 1733, perhaps because lake makers were boiling the red out of madder-dyed cloth scraps rather than roots [14]. George Field revived it at the turn of the nineteenth century [17]. He began with madder as a dyestuff in the 1790s, was making madder lake in London by about 1800, and devised the clear pink called rose madder by filtering the extract under pressure [17][6]. Constable and Lawrence bought colors from him [18], and Field's *Chromatography* treats rose madder as the painter's standard for pink roses [19].\n\nTurner owned at least twelve kinds of madder, most of them as fugitive as cochineal; by 1900 only two varieties were still sold to London artists [20]. Fading is the madder story painters know best. Van Gogh's *[[art:nga-72328|Roses]]* at the National Gallery of Art in Washington was long titled *White Roses*, until conservators found in the late 1990s that it held traces of what was probably madder red: the roses had been pink [21]. Gurney credits a new formulation of madder lake as part of the inspiration for Frederic Church's blazing sunset, *[[art:cma-141639|Twilight in the Wilderness]]* [22]. Genuine rose madder is still made from roots, a process that takes more than three months from shipment to tube [6]."
-  },
-  {
-   "id": "chemistry",
-   "title": "Alizarin: nature rebuilt",
-   "body": "Chemists went looking for the red inside the root in the nineteenth century. Jean-Jacques Colin and Pierre Robiquet isolated it and named it alizarin, along with a second compound, purpurin, that gives natural madder a slight orange cast [8]. Books disagree on the year: Ball and Paterson give 1820, Garfield 1827 [8][23][5]. Concentrated extracts followed; by 1864 one, Kopp's purpurin, was up to 55 times stronger than ground root [24].\n\nIn 1868 Carl Graebe and Carl Liebermann, in Berlin, worked out alizarin's structure and made it from anthracene, a component of coal tar [8][5]. Mauve and magenta had been new molecules found by chance; alizarin was a natural product rebuilt by design, the first time a vegetable coloring matter had been made in a laboratory [8][5]. Their route needed costly bromine, and in 1869 three groups independently found a cheaper one with sulphuric acid: Caro and Graebe at BASF, Riese at Hoechst, and William Perkin in London [8]. By Ball's account BASF and Perkin filed patents a day apart and split the market, Britain to Perkin and the Continent to BASF [8].\n\nThe effect was immediate. A hundredweight of madder cost 30 shillings in 1868 and 8 shillings a year later [4][6]. Britain had imported an average of 17,500 tons a year from 1859 to 1868, and only 4,400 tons in 1876 [5]. Perkin's own output rose from 40 tons in 1870 to 435 tons in 1873 [8]. Germany made 12,000 tons of alizarin in 1880 [8], and many of Europe's madder fields were turned over to vines [23]. When critics claimed the synthetic dye was more scarlet than the real thing, Perkin showed the Chemical Society that it was the same dyestuff [5]. Paterson dates the arrival of the longer-lasting quinacridones, which began to take alizarin's place, to 1958 [23]."
-  },
-  {
-   "id": "myths",
-   "title": "Myths and loose ends",
-   "body": "A popular story says the word *guarantee* comes from *garance*, because madder's quality or price was officially vouched for. Jarman tells it [26], and Ball repeats a version in an endnote [27], but it is a folk etymology: *guarantee* comes from Old French *garantie*, from a Frankish word meaning warrant [28].\n\nThe Crusader story is a half-truth [26][34]. Madder may have been domesticated in India [8], and Rome already had madder dyers [2], so the Crusades at most widened European cultivation rather than introducing the plant [13]. Garfield also passes on a tale that Alexander splashed his troops with madder to fake wounds [5]; no other book here supports it, so treat it as an anecdote, not history."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,531 paintings, a screen color within six units of Madder Lake covers at least five per cent of the canvas in only 71 works [31]. Where it does, it is rarely European: 25 of the 71 are Indian, eleven times the archive's rate, and Rajput court painting carries it 34 times as often as the archive average [31]. The six paintings where it covers the most canvas are all Indian, made between 1650 and 1760, with red grounds covering 29 to 37 per cent of the surface [31]. The earliest dated example is Taddeo Gaddi's *Madonna and Child Enthroned* of 1355 [31].\n\nTwo caveats travel with every number here. These are photographs of aged, varnished paintings, and a color match is not a pigment test: an Indian red ground of that hue may be lac, red lead or vermilion rather than madder [31]. Van Gogh's *Roses* shows the other side of the problem: as photographed today, its six largest colors are all greens and pale greens, and no pink reaches the six at all [31].\n\nThe word has its own curve. In Google Books, *madder* is printed most around 1800 to 1810, still holds about 60 per cent of that level in 1860, and falls to about 20 per cent by 1900 [33]. *Alizarine* appears in the 1840s and peaks in 1871, two years after the synthesis went commercial [33]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the madder plant, Rubia tinctorum",
-   "first_recorded": "Old English mædere",
-   "source": "Wiktionary (madder)"
-  },
-  "aka": [
-   "Madder Lake",
-   "Rose Madder",
-   "garance (French)",
-   "Turkey red (the dyeing method)"
+  "slug": "madder",
+  "name": "Madder",
+  "hex": "#CC3336",
+  "names": [
+    "Madder Lake",
+    "Rose Madder"
   ],
-  "siblings": [
-   "alizarin",
-   "alizarine-pink"
+  "tier": "pigment",
+  "depth": "epic",
+  "lede": "Madder is the red of a root: probably the oldest dye people ever made, the secret behind Turkey red and rose madder, and the first natural dye ever rebuilt in a laboratory.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The name and the plant",
+      "body": "Madder is not a single color but a plant and everything made from it. The dye comes from the roots of *Rubia tinctorum* and a few close relatives, and the main coloring molecule, alizarin, is roughly a hundredth of the root's weight [4][5]. English inherited the word from Old English *mædere*, a Germanic name with cousins in Swedish and Icelandic [29]. The French call it *garance*, and one nineteenth-century French madder lake was sold as *carmin de garance* [18]. The Levantine trade word *alizari* gave chemists the name *alizarin* [8].\n\nThe screen swatch for this page is the color that dictionaries call Madder Lake, a strong warm red [32]. Its nearest neighbors among our named colors are plain [[red]] and Persian red, both less than three units away [32]. That fits its history: until 1868, Garfield writes, madder supplied half the world with red [5]. The pink of [[imperial-red]] and the browns and violets of Ridgway's 1912 madder colors ([[madder-brown]], [[madder-violet]]) all borrow the root's name for different treatments of its color [32][19]."
+    },
+    {
+      "id": "material",
+      "title": "One root, many reds",
+      "body": "A madder plant is unremarkable above ground: small greenish-yellow flowers and fleshy roots of a reddish yellow [4]. The roots took two to three years to fatten before they were dug; Garfield gives 18 to 30 months and Pastoureau three years [5][2]. In seventeenth-century Holland, the law made farmers on reclaimed land dig the crop within two years, since roots left longer could burrow into the dykes [6].\n\nThe dried root was pounded in stages. The first pounding gave the cheapest grade, and the third, from the heart of the root, gave the finest, which the Dutch called *krap* and the English \"crop\" [6]. Animals that ate the plant showed it: cows and sheep gave faintly reddened milk [2], and the chemist Duhamel du Monceau found that pigeons fed on madder grew red bones [6].\n\nMadder is a mordant dye, so the metal salt that fixes it also sets its hue. With alum it gives an orange-red, not a pink, and other mordants push it toward pink, purple or black [6][5]. George Field, writing for painters, counted five coloring matters in the one root: yellow, red, orange, purple and brown [19]. One plant could dye a carpet brick red, stain a lute orange and, over a woad blue, finish a cloth purple or black [6][7][12]."
+    },
+    {
+      "id": "history",
+      "title": "The oldest red",
+      "body": "The oldest dyed cloth fragments that survive are all red, and Pastoureau infers from them that dyeing began with red and that madder was probably the first dye of all [1][2]. A scrap of cotton found on a silver vase at Mohenjo-daro, about 4,600 years old, had been dyed with madder; Finlay calls it the oldest decorated cotton known, and it would once have been pink or orange-red depending on its mordant [3]. Madder was in use in Egypt from about 1500 BC, madder-dyed fabric lay in Tutankhamun's tomb, and a paint-seller's stock at Pompeii included it [4].\n\nRome's guild of dyers had six separate trades for red, and one of them, the *sandicinii*, worked with madder [2]. Pliny noted that the painters' purple made at Puteoli was preferred to the one from Tyre because it took madder well [30]. Some books say madder reached Europe with the Crusaders [26][34], but the Roman evidence shows it was there long before; Ball's reading is that European fields of madder date from at least the thirteenth century and the dye spread more widely after the Crusades [13][8].\n\nMadder was also the hidden half of many other colors. Egyptian dyers of the Roman era faked costly shellfish purple by dyeing woad blue and then madder red over it, and the Talmud warns against a counterfeit purple made from indigo and madder [12]. Medieval dyers built their purples, mulberries and best blacks the same way, a blue foot of woad finished in a madder or kermes bath [12]."
+    },
+    {
+      "id": "trade",
+      "title": "Fields, guilds and blue devils",
+      "body": "Madder was the cheap red, and the law treated its dyers that way. In fourteenth- and fifteenth-century Nuremberg and Milan, red dyers who used local madder had a different legal status, different taxes and different clients from those who used imported kermes or cochineal [11]. The insect reds were brighter and dearer; madder tended toward brown and was thought fit for carpets and ordinary clothes [20].\n\nWhen blue came into fashion in the thirteenth century, the madder merchants fought back with pictures. A 1256 contract in Strasbourg ordered a church window showing the devil in blue, and a 1265 mural in Erfurt painted the Devil tempting Christ blue as well [10]. It did not work: blue overtook red in European cloth, and dyers' recipe books slowly swung from mostly red to mostly blue [11].\n\nFrance kept a soldier's use for it. In 1829 Charles X replaced the infantry's blue trousers with madder-red ones, and they stayed red until 1915 [25]. During the First World War that red made the men easy targets, and indigo-blue cloth replaced it [35]."
+    },
+    {
+      "id": "turkey-red",
+      "title": "Turkey red",
+      "body": "In most of Europe madder gave corals and brick reds [7]. Dyers in the Ottoman Empire and India could get something else: a deep, clear, washable red on cotton, made in a dozen or more steps over three to four months, with rancid oil, dung and blood among the ingredients [7]. Europeans called it Turkey red, and the method was one of the best-kept secrets in dyeing [6].\n\nIndian cottons printed and painted in madder red, called chintz after the Hindi *chint*, astonished European buyers in the seventeenth century because they could be washed without fading [9][8]. European printing then divided into two crafts, indigo for the blue printers and madder for the chintz-makers [8].\n\nThe Dutch learned Turkey red in the 1730s and the French in 1747, and two brothers from Rouen brought it to Manchester in 1787 [6]. It fed the Glasgow fashion for red bandannas with white spots, made by printing madder and then bleaching out the pattern [6]. By 1860 Britain was importing over a million pounds' worth of madder a year, and French madder was accused of being cut with brick dust and oats [4]."
+    },
+    {
+      "id": "art",
+      "title": "In the paintbox: madder lake and rose madder",
+      "body": "A dye becomes a paint by being fixed onto a colorless powder, which makes a lake. Madder lake is more permanent than the brazilwood lakes painters also used, but harder to make; a recipe survives from the tenth century, yet it is hard to find in medieval panel painting [13]. It shows up in fifteenth-century Netherlandish painting, helped by the madder fields of Zeeland, for instance in Dieric Bouts's *Virgin and Child with Saints Peter and Paul* of about 1460 [13]. Rembrandt's red lakes were mainly madder and cochineal [15], and in 1548 Titian asked Aretino for a lake so fiery in its madder color that crimson silk looked dull beside it [16].\n\nThe pigment then almost disappears from the written record: Italian sources fall silent on it between 1612 and 1733, perhaps because lake makers were boiling the red out of madder-dyed cloth scraps rather than roots [14]. George Field revived it at the turn of the nineteenth century [17]. He began with madder as a dyestuff in the 1790s, was making madder lake in London by about 1800, and devised the clear pink called rose madder by filtering the extract under pressure [17][6]. Constable and Lawrence bought colors from him [18], and Field's *Chromatography* treats rose madder as the painter's standard for pink roses [19].\n\nTurner owned at least twelve kinds of madder, most of them as fugitive as cochineal; by 1900 only two varieties were still sold to London artists [20]. Fading is the madder story painters know best. Van Gogh's *[[art:nga-72328|Roses]]* at the National Gallery of Art in Washington was long titled *White Roses*, until conservators found in the late 1990s that it held traces of what was probably madder red: the roses had been pink [21]. Gurney credits a new formulation of madder lake as part of the inspiration for Frederic Church's blazing sunset, *[[art:cma-141639|Twilight in the Wilderness]]* [22]. Genuine rose madder is still made from roots, a process that takes more than three months from shipment to tube [6]."
+    },
+    {
+      "id": "chemistry",
+      "title": "Alizarin: nature rebuilt",
+      "body": "Chemists went looking for the red inside the root in the nineteenth century. Jean-Jacques Colin and Pierre Robiquet isolated it and named it alizarin, along with a second compound, purpurin, that gives natural madder a slight orange cast [8]. Books disagree on the year: Ball and Paterson give 1820, Garfield 1827 [8][23][5]. Concentrated extracts followed; by 1864 one, Kopp's purpurin, was up to 55 times stronger than ground root [24].\n\nIn 1868 Carl Graebe and Carl Liebermann, in Berlin, worked out alizarin's structure and made it from anthracene, a component of coal tar [8][5]. Mauve and magenta had been new molecules found by chance; alizarin was a natural product rebuilt by design, the first time a vegetable coloring matter had been made in a laboratory [8][5]. Their route needed costly bromine, and in 1869 three groups independently found a cheaper one with sulphuric acid: Caro and Graebe at BASF, Riese at Hoechst, and William Perkin in London [8]. By Ball's account BASF and Perkin filed patents a day apart and split the market, Britain to Perkin and the Continent to BASF [8].\n\nThe effect was immediate. A hundredweight of madder cost 30 shillings in 1868 and 8 shillings a year later [4][6]. Britain had imported an average of 17,500 tons a year from 1859 to 1868, and only 4,400 tons in 1876 [5]. Perkin's own output rose from 40 tons in 1870 to 435 tons in 1873 [8]. Germany made 12,000 tons of alizarin in 1880 [8], and many of Europe's madder fields were turned over to vines [23]. When critics claimed the synthetic dye was more scarlet than the real thing, Perkin showed the Chemical Society that it was the same dyestuff [5]. Paterson dates the arrival of the longer-lasting quinacridones, which began to take alizarin's place, to 1958 [23]."
+    },
+    {
+      "id": "myths",
+      "title": "Myths and loose ends",
+      "body": "A popular story says the word *guarantee* comes from *garance*, because madder's quality or price was officially vouched for. Jarman tells it [26], and Ball repeats a version in an endnote [27], but it is a folk etymology: *guarantee* comes from Old French *garantie*, from a Frankish word meaning warrant [28].\n\nThe Crusader story is a half-truth [26][34]. Madder may have been domesticated in India [8], and Rome already had madder dyers [2], so the Crusades at most widened European cultivation rather than introducing the plant [13]. Garfield also passes on a tale that Alexander splashed his troops with madder to fake wounds [5]; no other book here supports it, so treat it as an anecdote, not history."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,531 paintings, a screen color within six units of Madder Lake covers at least five per cent of the canvas in only 71 works [31]. Where it does, it is rarely European: 25 of the 71 are Indian, eleven times the archive's rate, and Rajput court painting carries it 34 times as often as the archive average [31]. The six paintings where it covers the most canvas are all Indian, made between 1650 and 1760, with red grounds covering 29 to 37 per cent of the surface [31]. The earliest dated example is Taddeo Gaddi's *Madonna and Child Enthroned* of 1355 [31].\n\nTwo caveats travel with every number here. These are photographs of aged, varnished paintings, and a color match is not a pigment test: an Indian red ground of that hue may be lac, red lead or vermilion rather than madder [31]. Van Gogh's *Roses* shows the other side of the problem: as photographed today, its six largest colors are all greens and pale greens, and no pink reaches the six at all [31].\n\nThe word has its own curve. In Google Books, *madder* is printed most around 1800 to 1810, still holds about 60 per cent of that level in 1860, and falls to about 20 per cent by 1900 [33]. *Alizarine* appears in the 1840s and peaks in 1871, two years after the synthesis went commercial [33]."
+    }
   ],
-  "parent": null,
-  "children": [
-   "madder-lake",
-   "madder-brown",
-   "madder-violet",
-   "madder-blue"
-  ],
-  "disambiguation": [
-   {
-    "slug": "madder-blue",
-    "gloss": "Ridgway 1912 name for a greyed color, not a blue dye from madder"
-   },
-   {
-    "slug": "madder-violet",
-    "gloss": "Ridgway 1912 name for a greyed color, not a violet dye from madder"
-   },
-   {
-    "slug": "alizarin",
-    "gloss": "Alizarin is the coloring molecule; the swatch named Alizarin is a cooler red"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "fr",
-    "name": "garance"
-   },
-   {
-    "lang": "nl",
-    "name": "meekrap"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
-  "match": {
-   "hex": "#CC3336",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 71,
-  "top_country": {
-   "name": "India",
-   "hits": 25,
-   "lift": 11.5
-  },
-  "top_movement": {
-   "name": "Rajput",
-   "hits": 10,
-   "n": 97,
-   "lift": 34.2
-  },
-  "first_dated": {
-   "id": "commons-Q3842751",
-   "painter": "Taddeo Gaddi",
-   "year": 1355
-  },
-  "top_paintings": [
-   "cma-162216",
-   "cma-154260",
-   "cma-154764",
-   "cma-314462",
-   "cma-314491",
-   "cma-314481"
-  ],
-  "role": {
-   "mid": 0.58,
-   "shadow": 0.27,
-   "highlight": 0.15
-  },
-  "faded_example": {
-   "id": "nga-72328",
-   "six_colors": "all greens and pale greens"
-  },
-  "ngram": {
-   "madder_peak": 1803,
-   "madder_rel_1860": 0.62,
-   "madder_rel_1900": 0.21,
-   "alizarine_peak": 1871
-  },
-  "measured": {
-   "lch": [
-    46.3,
-    69.0,
-    31
-   ],
-   "hsl": [
-    359,
-    60,
-    50
-   ],
-   "chroma_pct_core": 88,
-   "contrast_white": 5.13,
-   "contrast_black": 4.09,
-   "nearest": [
-    [
-     "Red",
-     2.6
+  "aside": {
+    "origin": {
+      "named_after": "the madder plant, Rubia tinctorum",
+      "first_recorded": "Old English mædere",
+      "source": "Wiktionary (madder)"
+    },
+    "aka": [
+      "Madder Lake",
+      "Rose Madder",
+      "garance (French)",
+      "Turkey red (the dyeing method)"
     ],
-    [
-     "Persian Red",
-     0.8
+    "siblings": [
+      "crimson",
+      "alizarine-pink"
+    ],
+    "parent": null,
+    "children": [
+      "madder-lake",
+      "madder-brown",
+      "madder-violet",
+      "madder-blue"
+    ],
+    "disambiguation": [
+      {
+        "slug": "madder-blue",
+        "gloss": "Ridgway 1912 name for a greyed color, not a blue dye from madder"
+      },
+      {
+        "slug": "madder-violet",
+        "gloss": "Ridgway 1912 name for a greyed color, not a violet dye from madder"
+      },
+      {
+        "slug": "crimson",
+        "gloss": "Alizarin is the coloring molecule; the swatch named Alizarin is a cooler red"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "fr",
+        "name": "garance"
+      },
+      {
+        "lang": "nl",
+        "name": "meekrap"
+      }
     ]
-   ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+    "match": {
+      "hex": "#CC3336",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 71,
+    "top_country": {
+      "name": "India",
+      "hits": 25,
+      "lift": 11.5
+    },
+    "top_movement": {
+      "name": "Rajput",
+      "hits": 10,
+      "n": 97,
+      "lift": 34.2
+    },
+    "first_dated": {
+      "id": "commons-Q3842751",
+      "painter": "Taddeo Gaddi",
+      "year": 1355
+    },
+    "top_paintings": [
+      "cma-162216",
+      "cma-154260",
+      "cma-154764",
+      "cma-314462",
+      "cma-314491",
+      "cma-314481"
+    ],
+    "role": {
+      "mid": 0.58,
+      "shadow": 0.27,
+      "highlight": 0.15
+    },
+    "faded_example": {
+      "id": "nga-72328",
+      "six_colors": "all greens and pale greens"
+    },
+    "ngram": {
+      "madder_peak": 1803,
+      "madder_rel_1860": 0.62,
+      "madder_rel_1900": 0.21,
+      "alizarine_peak": 1871
+    },
+    "measured": {
+      "lch": [
+        46.3,
+        69.0,
+        31
+      ],
+      "hsl": [
+        359,
+        60,
+        50
+      ],
+      "chroma_pct_core": 88,
+      "contrast_white": 5.13,
+      "contrast_black": 4.09,
+      "nearest": [
+        [
+          "Red",
+          2.6
+        ],
+        [
+          "Persian Red",
+          0.8
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Pastoureau, Blue: The History of a Color, ch. 7",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 12",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Finlay, Fabric, p. 95",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Madder\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Garfield, Mauve, ch. 8 (\"Madder\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 5 (\"Orange\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 7",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 17",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Finlay, Fabric, p. 101",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 22",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Pastoureau, Blue: The History of a Color, ch. 8",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, pp. 24-26, 40",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 12",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "book",
+      "cite": "Eastaugh et al., Pigment Compendium, p. 244",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 14",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 141",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 219",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 18,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 15",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 19,
+      "kind": "book",
+      "cite": "Field, Chromatography (1885 revision), ch. IX, \"Madder Lakes\" (public domain)",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 20,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 4 (\"Red\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 21,
+      "kind": "book",
+      "cite": "Finlay, Colour, introduction",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 22,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, p. 20",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 23,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"alizarin\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 24,
+      "kind": "book",
+      "cite": "Eastaugh et al., Pigment Compendium, p. 165",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 25,
+      "kind": "book",
+      "cite": "Pastoureau, Blue: The History of a Color, ch. 10",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 26,
+      "kind": "book",
+      "cite": "Jarman, Chroma, p. 23",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 27,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, notes to ch. 9",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 28,
+      "kind": "web",
+      "cite": "Wiktionary, \"guarantee\" (etymology)",
+      "loc_kind": null,
+      "url": "https://en.wiktionary.org/wiki/guarantee"
+    },
+    {
+      "n": 29,
+      "kind": "web",
+      "cite": "Wiktionary, \"madder\" (etymology)",
+      "loc_kind": null,
+      "url": "https://en.wiktionary.org/wiki/madder"
+    },
+    {
+      "n": 30,
+      "kind": "book",
+      "cite": "Pliny, Natural History, bk 35, ch. 26 (Bostock & Riley, 1857; public domain)",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 31,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,531 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 32,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json, data/core-names.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 33,
+      "kind": "data",
+      "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+      "loc_kind": null,
+      "url": "https://books.google.com/ngrams"
+    },
+    {
+      "n": 34,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"madder\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 35,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Indigo\"",
+      "loc_kind": "entry",
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Why did Turner's and Van Gogh's madder pinks lose their color, while madder-dyed carpets kept theirs for centuries?",
+      "choices": [
+        "Lake pigments sit exposed in thin paint and fade in light; a mordanted dye is bound into the fiber",
+        "Painters used a different plant",
+        "Carpets were repainted",
+        "Oil paint bleaches red"
+      ],
+      "answer": "Lake pigments sit exposed in thin paint and fade in light; a mordanted dye is bound into the fiber",
+      "kind": "pick"
+    },
+    {
+      "q": "What happened to the price of madder the year after alizarin was synthesized?",
+      "choices": [
+        "It fell from 30 to 8 shillings a hundredweight",
+        "It doubled",
+        "It stayed the same",
+        "Madder was banned"
+      ],
+      "answer": "It fell from 30 to 8 shillings a hundredweight",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the word guarantee comes from garance, the French for madder.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "One root gave carpets their brick red, lutes their amber and Van Gogh's roses a pink that has since vanished.",
+    "In 1868 madder cost 30 shillings a hundredweight. A year later it cost 8, because a chemist had rebuilt it from coal tar.",
+    "Look for madder in old carpets: the warm, slightly orange red beside indigo blue."
+  ],
+  "words": 1955,
+  "status": "pilot",
+  "checked": {
+    "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+    "date": "2026-10-08",
+    "issues": [
+      "Isolation of alizarin dated 1820 (Ball, Paterson) vs 1827 (Garfield): stated as books disagree.",
+      "'guarantee' from garance: corrected as folk etymology (Ball repeats it in an endnote).",
+      "Crusader introduction: framed as half-truth; Alexander anecdote flagged as unsupported.",
+      "Archive matches are colors, not pigment identifications (said in text)."
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Pastoureau, Blue: The History of a Color, ch. 7",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 12",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Finlay, Fabric, p. 95",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Madder\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Garfield, Mauve, ch. 8 (\"Madder\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 5 (\"Orange\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 7",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 17",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Finlay, Fabric, p. 101",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 22",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Pastoureau, Blue: The History of a Color, ch. 8",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Balfour-Paul, Indigo, pp. 24-26, 40",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 12",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "book",
-   "cite": "Eastaugh et al., Pigment Compendium, p. 244",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 14",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 141",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 17,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 219",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 18,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 15",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 19,
-   "kind": "book",
-   "cite": "Field, Chromatography (1885 revision), ch. IX, \"Madder Lakes\" (public domain)",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 20,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 4 (\"Red\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 21,
-   "kind": "book",
-   "cite": "Finlay, Colour, introduction",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 22,
-   "kind": "book",
-   "cite": "Gurney, Color and Light, p. 20",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 23,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"alizarin\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 24,
-   "kind": "book",
-   "cite": "Eastaugh et al., Pigment Compendium, p. 165",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 25,
-   "kind": "book",
-   "cite": "Pastoureau, Blue: The History of a Color, ch. 10",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 26,
-   "kind": "book",
-   "cite": "Jarman, Chroma, p. 23",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 27,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, notes to ch. 9",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 28,
-   "kind": "web",
-   "cite": "Wiktionary, \"guarantee\" (etymology)",
-   "loc_kind": null,
-   "url": "https://en.wiktionary.org/wiki/guarantee"
-  },
-  {
-   "n": 29,
-   "kind": "web",
-   "cite": "Wiktionary, \"madder\" (etymology)",
-   "loc_kind": null,
-   "url": "https://en.wiktionary.org/wiki/madder"
-  },
-  {
-   "n": 30,
-   "kind": "book",
-   "cite": "Pliny, Natural History, bk 35, ch. 26 (Bostock & Riley, 1857; public domain)",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 31,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,531 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 32,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json, data/core-names.json), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 33,
-   "kind": "data",
-   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
-   "loc_kind": null,
-   "url": "https://books.google.com/ngrams"
-  },
-  {
-   "n": 34,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"madder\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 35,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Indigo\"",
-   "loc_kind": "entry",
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Why did Turner's and Van Gogh's madder pinks lose their color, while madder-dyed carpets kept theirs for centuries?",
-   "choices": [
-    "Lake pigments sit exposed in thin paint and fade in light; a mordanted dye is bound into the fiber",
-    "Painters used a different plant",
-    "Carpets were repainted",
-    "Oil paint bleaches red"
-   ],
-   "answer": "Lake pigments sit exposed in thin paint and fade in light; a mordanted dye is bound into the fiber",
-   "kind": "pick"
-  },
-  {
-   "q": "What happened to the price of madder the year after alizarin was synthesized?",
-   "choices": [
-    "It fell from 30 to 8 shillings a hundredweight",
-    "It doubled",
-    "It stayed the same",
-    "Madder was banned"
-   ],
-   "answer": "It fell from 30 to 8 shillings a hundredweight",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the word guarantee comes from garance, the French for madder.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "One root gave carpets their brick red, lutes their amber and Van Gogh's roses a pink that has since vanished.",
-  "In 1868 madder cost 30 shillings a hundredweight. A year later it cost 8, because a chemist had rebuilt it from coal tar.",
-  "Look for madder in old carpets: the warm, slightly orange red beside indigo blue."
- ],
- "words": 1955,
- "status": "pilot",
- "checked": {
-  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
-  "date": "2026-10-08",
-  "issues": [
-   "Isolation of alizarin dated 1820 (Ball, Paterson) vs 1827 (Garfield): stated as books disagree.",
-   "'guarantee' from garance: corrected as folk etymology (Ball repeats it in an endnote).",
-   "Crusader introduction: framed as half-truth; Alexander anecdote flagged as unsupported.",
-   "Archive matches are colors, not pigment identifications (said in text)."
-  ]
- }
 }

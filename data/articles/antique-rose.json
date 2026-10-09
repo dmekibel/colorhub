@@ -2,7 +2,8 @@
  "name": "Antique rose",
  "hex": "#AF7678",
  "names": [
-  "Antique rose"
+  "Antique rose",
+  "Deep Vinaceous"
  ],
  "tier": "nature",
  "depth": "medium",
@@ -25,7 +26,9 @@
    "first_recorded": "1912 (Ridgway)",
    "source": "Ridgway, Color Standards and Color Nomenclature"
   },
-  "aka": [],
+  "aka": [
+   "Deep Vinaceous (ridgway+iscc-nbs)"
+  ],
   "siblings": [
    "ash-rose",
    "marsh-rose",
@@ -130,8 +133,8 @@
  ],
  "status": "checked",
  "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-09",
+  "by": "checker",
+  "date": "2026-10-08",
   "issues": []
  },
  "slug": "antique-rose",

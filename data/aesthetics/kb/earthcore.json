@@ -1,0 +1,41 @@
+{
+ "id": "earthcore",
+ "name": "Earthcore",
+ "lineage": {
+  "influenced_by": [
+   "cottagecore and goblincore's nature-adjacent internet-aesthetic wave",
+   "a post-pandemic surge of interest in pottery, foraging and other tactile, slow crafts"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2020s"
+ ],
+ "places": [],
+ "garments": [
+  "unglazed ceramic",
+  "raw linen",
+  "stone"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "the bright, saturated palettes common to many other internet aesthetics, insisting on an unglamorous, literally dirt-toned color range instead.",
+ "revivals": [],
+ "article": "Earthcore names a 2020s internet-aesthetic tag built around a deliberately unglamorous palette — clay, stone, moss, raw soil — applied across fashion and interiors as a mineral, muted counterpoint to brighter internet aesthetics. It emerged as part of a broader cluster of nature-adjacent \"core\" tags (alongside cottagecore and goblincore) that gained momentum during and after pandemic-era lockdowns, when renewed interest in gardening, pottery, foraging and other slow, tactile crafts fed directly into online aesthetic communities looking for a visual language to match. Earthcore's boundary against goblincore (messier, more amphibian) and wabi-sabi (Japanese, philosophically grounded, much older) is genuinely loose — like several recent internet-aesthetic tags, it functions more as a palette descriptor shared across several related communities than as a single, sharply bounded movement with its own independent history.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Earthcore"
+  }
+ ],
+ "measured": {
+  "n_images": 1,
+  "n_candidates": 1,
+  "findings": [
+   "mostly muted — about 90% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

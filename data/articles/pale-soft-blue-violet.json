@@ -1,0 +1,107 @@
+{
+ "slug": "pale-soft-blue-violet",
+ "name": "Pale Soft Blue-Violet",
+ "hex": "#ABAFEA",
+ "names": [
+  "Pale Soft Blue-Violet"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pale Soft Blue-Violet is a light, muted blue-violet, the pale tone Robert Ridgway charted beside the parent color Soft Blue-Violet in his 1912 color atlas.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pale tone of Soft Blue-Violet",
+   "body": "Pale Soft Blue-Violet stacks two of Ridgway's own words, Pale and Soft, onto the base hue [[blue-violet]], naming [[soft-blue-violet]] as its direct parent [1]. Soft Blue-Violet is Ridgway's plate XXIII, hue 55 prime, later filed by the ISCC-NBS dictionary of 1955 in block 206 [1].\n\nIts nearest named neighbor is [[periwinkle]], 2.8 units off and more vivid than this swatch [1]; [[pale-greyish-violet-blue]] sits 3.6 units away, reading duller and bluer [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in only 11 of 23,781 paintings, 0.05 percent, as photographed; narrowing to at least five percent coverage inside a painting leaves 8, rarer than 70 percent of the named colors in our library [2]. It peaks in the 1800s, present in 0.1 percent of the 8,345 paintings from that century, 1.8 times the archive's overall rate [2].\n\nThe earliest match dates to 1484, in a work by Pietro Perugino, a floor and not a first since the archive's early centuries are thin; that is 428 years before the name's 1912 record, so the match marks a look-alike hue in an aged photograph, not a surviving pigment [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Ridgway's tone system: the pale tone of Soft Blue-Violet",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XXIII",
+   "source": "Ridgway 1912; ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "soft-blue-violet",
+   "blue-violet",
+   "periwinkle",
+   "pale-greyish-violet-blue"
+  ],
+  "parent": "soft-blue-violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 11,
+  "n_within_painting": 8,
+  "pct_archive": 0.05,
+  "rank_pct": 70,
+  "measured": {
+   "nearest": [
+    [
+     "Periwinkle",
+     2.8
+    ],
+    [
+     "Pale Greyish Violet-Blue",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json: Ridgway 1912, ISCC-NBS 1955) and look-alike distances, data/graph/edges-p.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed, data/graph/fieldnotes/p.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color sits closest to Pale Soft Blue-Violet?",
+   "choices": [
+    "Periwinkle",
+    "Pale Greyish Violet-Blue",
+    "Chicory Blue"
+   ],
+   "answer": "Periwinkle",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pale Soft Blue-Violet stacks two of Ridgway's own tone words onto one base hue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Soft Blue-Violet stacks two Ridgway tone words, pale and soft, onto a single base hue."
+ ],
+ "words": 214,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

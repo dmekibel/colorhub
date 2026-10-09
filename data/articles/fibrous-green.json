@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "An industrial standard, not a dictionary word",
-   "body": "RAL, the German standards body founded in 1927, assigns this hue the code 6039 in its classic color collection [1]. Unlike Maerz and Paul's or Ridgway's dictionaries, RAL colors are specified for paint and industrial coatings rather than drawn from everyday naming; our hex value is an approximate screen rendering of that paint standard [1]. Our own classification places it in the region the ISCC-NBS would call vivid yellow green, Munsell notation 3.2GY 7.5/9.1 [2].\n\nThe nearest named colors on file are [[acid-green]], [[baby-puke-green]], [[snot]] and [[snot-green]], at 2.8, 3.6, 3.6 and 4.4 ΔE [2]. Its nearest library neighbor is a hue called Acid Green, and it sits between [[green]] and [[yellow]] on the color wheel [2]."
+   "body": "RAL, the German standards body founded in 1927, assigns this hue the code 6039 in its classic color collection [1]. Unlike Maerz and Paul's or Ridgway's dictionaries, RAL colors are specified for paint and industrial coatings rather than drawn from everyday naming; our hex value is an approximate screen rendering of that paint standard [1]. Our own classification places it in the region the ISCC-NBS would call vivid yellow green, Munsell notation 3.2GY 7.5/9.1 [2].\n\nThe nearest named colors on file are [[acid-green]], [[mustard-green]], [[oil-yellow]] and [[june-bud]], at 2.8, 4.8, 5.5 and 5.7 ΔE [2]. Its nearest library neighbor is a hue called Acid Green, and it sits between [[green]] and [[yellow]] on the color wheel [2]."
   },
   {
    "id": "field",
@@ -29,9 +29,9 @@
   "aka": [],
   "siblings": [
    "acid-green",
-   "baby-puke-green",
-   "snot",
-   "snot-green"
+   "mustard-green",
+   "oil-yellow",
+   "june-bud"
   ],
   "parent": null,
   "children": [],

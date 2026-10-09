@@ -1,309 +1,309 @@
 {
- "slug": "tan",
- "name": "Tan",
- "hex": "#D2B48C",
- "names": [
-  "Tan"
- ],
- "tier": "nature",
- "depth": "long",
- "lede": "Tan is the color of tanned leather and sun-browned skin, a light yellowish brown whose name comes from the French word that also gave English tawny.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A leather word",
-   "body": "*Tan* is first of all a verb: to turn raw hides into leather with a tanning agent such as tannin, and also to go brown in the sun [1]. The color word takes its sense from both, the brown or tawny shade of tanned leather and of sun-browned skin [1]. A tannery is the place where the process is done [1]. The older English words *tawny* and the heraldic *tenné* come from the French *tanné*, which meant the same thing, the color of something tanned [1].\n\nThe swatch here is the web and X11 color named `tan`, #D2B48C, a light, slightly yellow brown [1][12]. Maerz and Paul's 1930 dictionary dates the word as a color name to 1590, and the ISCC-NBS system of 1955 places it in block 54 [12]. Paterson's dictionary describes the X11 Tan as \"a dark green\", which is an evident slip, since the hex code printed beside it is a light brown [1]. A different survey, the xkcd color names, puts tan at #D1B26F, more golden, about 6.6 units of color difference from this swatch [13]."
-  },
-  {
-   "id": "medieval",
-   "title": "The ugliest color",
-   "body": "The tan of the late Middle Ages was not today's pale sand [2][3]. Pastoureau describes the fifteenth-century *tanné* as a shade considered ugly, somewhere between brown and red, and elsewhere as fawn-colored or dark russet [2][3]. Paterson agrees on the redder side: in heraldry *tenné* is orange or brownish orange [1]. Books therefore describe the old color slightly differently, and none of them describes the light yellow-brown of the modern swatch [1][2][3].\n\nIts reputation was poor. The poet Jean Robertet, who died in 1502, ended a poem on nine colors with tan and then black, and called tan changeable and unreliable, full of worry [3]. The anonymous successor of the Sicily herald, writing in the same period, called it the ugliest of all colors [3]. Charles d'Orléans, imprisoned in England, wrote that black and tan were his colors, in a poem that turned away from the gray he associated with hope [2][3]. The *Blason des couleurs*, a color poem in the same tradition, advised old women to wear tan, purple, gray or black rather than white [4].\n\nTan was thus a color of the old, the sad and the doubtful. Pastoureau lists tan among the three colors of sorrow and death in fifteenth-century French lyric poetry, with black and dark green [2]."
-  },
-  {
-   "id": "leather",
-   "title": "Leather, bark and buff",
-   "body": "Tan is tied to materials as much as to a hue. Tanbark, the crushed bark used in tanning, once had a second use: in the Dutch stack process for making white lead, lead was exposed to vinegar vapor in beds of fermenting matter, and tan bark was one of the materials that kept the temperature up [5]. Sir James Creed's chamber process of 1749 made the dung or tan unnecessary [5].\n\nBark also yields tan dyes. Quercitron, a yellow dye from the bark of the black oak, gives a tan with chromium mordant, and its inner bark gives darker oranges and tans [6]. In Central Java, the soga batiks pair indigo blue with a tan made from the bark of the soga tree on a cream ground, and the tan gradually fades [7].\n\nSeveral neighbors are named for leathers. *Buff* is short for buffalo, a buttery tanned ox leather worn as soldiers' coats in the sixteenth and seventeenth centuries, and the phrase *in the buff* is said to come from its likeness to skin [8][9]. By the 1700s buff breeches were expected of a gentleman, and George Washington wore buff and blue in 1775, the colors of the Fairfax Independent Company [8][10]. *Russet* first meant a coarse cloth dipped in weak woad and madder leftovers, so its color ran from dun to brown to gray, and an English statute of 1363 limited carters and ploughmen to it [11]. Near relations on our map include [[tawny]], [[buff]], [[russet]], [[fawn]] and [[camel]]."
-  },
-  {
-   "id": "skin",
-   "title": "Sun, class and the tan",
-   "body": "Pastoureau reads the history of the suntan as a history of class in three phases [14]. Until the middle of the nineteenth century, the elite wanted the palest skin possible, so as not to be mistaken for sun-browned peasants [14]. In the second half of the century, when the pallid worker of factory and mine became the person to avoid resembling, good society took to the seashore and the mountains, and a tan marked leisure [14]. After the Second World War, as seaside holidays spread to the less affluent in the 1960s and 1970s, the fashionable turned away from tanning again, by his account [14].\n\nPaterson's dictionary preserves the vocabulary of that last phase: *nightclub tan* and *café sunburn* for a wan complexion, *fake tan* for the bronzing done by lamp or cream [1]. Our map files the skin colors nearby as [[sunburn]] and [[bronze]], and the paler shades as [[light-tan]] and [[pinkish-tan]]."
-  },
-  {
-   "id": "soldiers",
-   "title": "Black and Tans",
-   "body": "Tan also turns up as a uniform color in a name from the 1920s [1]. Paterson lists the Black and Tans as the armed force that fought Sinn Fein, named for the colors of their uniform [1]. Light tans had a longer military life as well: they stayed in uniforms through the nineteenth century, usually as facings on bolder colors such as emerald green and Prussian blue [9]. [[khaki]] is the later and duller uniform color, from a Hindi word for dust-colored, the fabric of British field uniforms [1]."
-  },
-  {
-   "id": "eye",
-   "title": "Where to look",
-   "body": "A tan is a color that depends on its neighbors, and the books show it being confused in both directions. The optics writer Matteo Zaccolini, writing around 1620, listed tan as the fifth color in the sequence in which colors recede into the blue of distance, after black, green, pale yellow-green and purple and before red, yellow and white [15]. Birren reported, around 1950, that women wiring workers in a factory tired from the effort of telling orange from tan, among other pairs, and traced their fatigue to that strain, not to poor lighting [16].\n\nThe practical lesson is to look for tan beside its neighbors, not alone. Our nearest named neighbor is [[burlywood]], only 3.1 units of color difference away, and [[toupe]] is close too [20]. A deep blue makes a good partner, as the soga batiks show [7]. In painting, Ball notes that in one Titian the blue robe is set against a blue sea and sky while orange and tan tones sit side by side [17]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Tan is one of the commonest named colors in our archive. It appears in 3,018 of 23,781 paintings, or 12.69 percent, which puts it above 95 percent of the named colors, counting a painting when the color covers at least five percent of the canvas within a small color distance, as photographed [18]. Inside a painting it most often plays a light, in 52 percent of the 1,928 paintings where our within-painting lens finds it [18].\n\nThe pattern is cultural more than chronological. It is over-represented in Iran, in 9 of 29 paintings, 2.7 times the expected rate, and in the Kalighat and Mughal groups, in 50 of 96 and 65 of 168 works [18]. Among painters, [[painter:willem-van-de-velde-ii|Willem van de Velde]] uses it in 6 of 15 works here, 4.4 times the baseline of the museums those works come from, and [[painter:kano-tan-yu|Kanō Tan'yū]] in 9 of 14 [18]. A good example of the broad light tan of a ground is [[painting:cma-155799|Bugaku Dancer]], and [[painting:met-49012|Hawk Grasping a Small Bird]] is nearly all tan [18].\n\nThe earliest match is a painting dated 799, but our early centuries are thin and the match is a look-alike hue in an aged photograph, not proof of a pigment or dye [18]. The word itself, in Google Books, is used as an adjective more and more from the 1940s and peaks in the 2010s [19]. All archive numbers are from photographs of aged, varnished paintings and are not pigment tests [18]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "tanned leather and sun-browned skin (French tanné)",
-   "first_recorded": "as a color name, 1590 (Maerz and Paul)",
-   "source": "Paterson, A Dictionary of Colour; Maerz and Paul 1930"
-  },
-  "aka": [
-   "tanned",
-   "tan brown"
+  "slug": "tan",
+  "name": "Tan",
+  "hex": "#D2B48C",
+  "names": [
+    "Tan"
   ],
-  "siblings": [
-   "tawny",
-   "buff",
-   "burlywood",
-   "beige",
-   "camel",
-   "fawn"
+  "tier": "nature",
+  "depth": "long",
+  "lede": "Tan is the color of tanned leather and sun-browned skin, a light yellowish brown whose name comes from the French word that also gave English tawny.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A leather word",
+      "body": "*Tan* is first of all a verb: to turn raw hides into leather with a tanning agent such as tannin, and also to go brown in the sun [1]. The color word takes its sense from both, the brown or tawny shade of tanned leather and of sun-browned skin [1]. A tannery is the place where the process is done [1]. The older English words *tawny* and the heraldic *tenné* come from the French *tanné*, which meant the same thing, the color of something tanned [1].\n\nThe swatch here is the web and X11 color named `tan`, #D2B48C, a light, slightly yellow brown [1][12]. Maerz and Paul's 1930 dictionary dates the word as a color name to 1590, and the ISCC-NBS system of 1955 places it in block 54 [12]. Paterson's dictionary describes the X11 Tan as \"a dark green\", which is an evident slip, since the hex code printed beside it is a light brown [1]. A different survey, the xkcd color names, puts tan at #D1B26F, more golden, about 6.6 units of color difference from this swatch [13]."
+    },
+    {
+      "id": "medieval",
+      "title": "The ugliest color",
+      "body": "The tan of the late Middle Ages was not today's pale sand [2][3]. Pastoureau describes the fifteenth-century *tanné* as a shade considered ugly, somewhere between brown and red, and elsewhere as fawn-colored or dark russet [2][3]. Paterson agrees on the redder side: in heraldry *tenné* is orange or brownish orange [1]. Books therefore describe the old color slightly differently, and none of them describes the light yellow-brown of the modern swatch [1][2][3].\n\nIts reputation was poor. The poet Jean Robertet, who died in 1502, ended a poem on nine colors with tan and then black, and called tan changeable and unreliable, full of worry [3]. The anonymous successor of the Sicily herald, writing in the same period, called it the ugliest of all colors [3]. Charles d'Orléans, imprisoned in England, wrote that black and tan were his colors, in a poem that turned away from the gray he associated with hope [2][3]. The *Blason des couleurs*, a color poem in the same tradition, advised old women to wear tan, purple, gray or black rather than white [4].\n\nTan was thus a color of the old, the sad and the doubtful. Pastoureau lists tan among the three colors of sorrow and death in fifteenth-century French lyric poetry, with black and dark green [2]."
+    },
+    {
+      "id": "leather",
+      "title": "Leather, bark and buff",
+      "body": "Tan is tied to materials as much as to a hue. Tanbark, the crushed bark used in tanning, once had a second use: in the Dutch stack process for making white lead, lead was exposed to vinegar vapor in beds of fermenting matter, and tan bark was one of the materials that kept the temperature up [5]. Sir James Creed's chamber process of 1749 made the dung or tan unnecessary [5].\n\nBark also yields tan dyes. Quercitron, a yellow dye from the bark of the black oak, gives a tan with chromium mordant, and its inner bark gives darker oranges and tans [6]. In Central Java, the soga batiks pair indigo blue with a tan made from the bark of the soga tree on a cream ground, and the tan gradually fades [7].\n\nSeveral neighbors are named for leathers. *Buff* is short for buffalo, a buttery tanned ox leather worn as soldiers' coats in the sixteenth and seventeenth centuries, and the phrase *in the buff* is said to come from its likeness to skin [8][9]. By the 1700s buff breeches were expected of a gentleman, and George Washington wore buff and blue in 1775, the colors of the Fairfax Independent Company [8][10]. *Russet* first meant a coarse cloth dipped in weak woad and madder leftovers, so its color ran from dun to brown to gray, and an English statute of 1363 limited carters and ploughmen to it [11]. Near relations on our map include [[tawny]], [[buff]], [[russet]], [[fawn]] and [[camel]]."
+    },
+    {
+      "id": "skin",
+      "title": "Sun, class and the tan",
+      "body": "Pastoureau reads the history of the suntan as a history of class in three phases [14]. Until the middle of the nineteenth century, the elite wanted the palest skin possible, so as not to be mistaken for sun-browned peasants [14]. In the second half of the century, when the pallid worker of factory and mine became the person to avoid resembling, good society took to the seashore and the mountains, and a tan marked leisure [14]. After the Second World War, as seaside holidays spread to the less affluent in the 1960s and 1970s, the fashionable turned away from tanning again, by his account [14].\n\nPaterson's dictionary preserves the vocabulary of that last phase: *nightclub tan* and *café sunburn* for a wan complexion, *fake tan* for the bronzing done by lamp or cream [1]. Our map files the skin colors nearby as [[sunburn]] and [[bronze]], and the paler shades as [[light-tan]] and [[pinkish-tan]]."
+    },
+    {
+      "id": "soldiers",
+      "title": "Black and Tans",
+      "body": "Tan also turns up as a uniform color in a name from the 1920s [1]. Paterson lists the Black and Tans as the armed force that fought Sinn Fein, named for the colors of their uniform [1]. Light tans had a longer military life as well: they stayed in uniforms through the nineteenth century, usually as facings on bolder colors such as emerald green and Prussian blue [9]. [[khaki]] is the later and duller uniform color, from a Hindi word for dust-colored, the fabric of British field uniforms [1]."
+    },
+    {
+      "id": "eye",
+      "title": "Where to look",
+      "body": "A tan is a color that depends on its neighbors, and the books show it being confused in both directions. The optics writer Matteo Zaccolini, writing around 1620, listed tan as the fifth color in the sequence in which colors recede into the blue of distance, after black, green, pale yellow-green and purple and before red, yellow and white [15]. Birren reported, around 1950, that women wiring workers in a factory tired from the effort of telling orange from tan, among other pairs, and traced their fatigue to that strain, not to poor lighting [16].\n\nThe practical lesson is to look for tan beside its neighbors, not alone. Our nearest named neighbor is [[burlywood]], only 3.1 units of color difference away, and [[toupe]] is close too [20]. A deep blue makes a good partner, as the soga batiks show [7]. In painting, Ball notes that in one Titian the blue robe is set against a blue sea and sky while orange and tan tones sit side by side [17]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Tan is one of the commonest named colors in our archive. It appears in 3,018 of 23,781 paintings, or 12.69 percent, which puts it above 95 percent of the named colors, counting a painting when the color covers at least five percent of the canvas within a small color distance, as photographed [18]. Inside a painting it most often plays a light, in 52 percent of the 1,928 paintings where our within-painting lens finds it [18].\n\nThe pattern is cultural more than chronological. It is over-represented in Iran, in 9 of 29 paintings, 2.7 times the expected rate, and in the Kalighat and Mughal groups, in 50 of 96 and 65 of 168 works [18]. Among painters, [[painter:willem-van-de-velde-ii|Willem van de Velde]] uses it in 6 of 15 works here, 4.4 times the baseline of the museums those works come from, and [[painter:kano-tan-yu|Kanō Tan'yū]] in 9 of 14 [18]. A good example of the broad light tan of a ground is [[painting:cma-155799|Bugaku Dancer]], and [[painting:met-49012|Hawk Grasping a Small Bird]] is nearly all tan [18].\n\nThe earliest match is a painting dated 799, but our early centuries are thin and the match is a look-alike hue in an aged photograph, not proof of a pigment or dye [18]. The word itself, in Google Books, is used as an adjective more and more from the 1940s and peaks in the 2010s [19]. All archive numbers are from photographs of aged, varnished paintings and are not pigment tests [18]."
+    }
   ],
-  "parent": null,
-  "children": [
-   "light-tan",
-   "dark-tan",
-   "pinkish-tan"
-  ],
-  "disambiguation": [
-   {
-    "slug": "tawny",
-    "gloss": "the old tanné: darker and redder than today's tan"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "fr",
-    "name": "tanné (the older color, redder)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#D2B48C",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 3018,
-  "rate_pct": 12.69,
-  "role": {
-   "light_pct": 52,
-   "n": 1928
-  },
-  "painters": [
-   "willem-van-de-velde-ii",
-   "kano-tan-yu"
-  ],
-  "ngram": {
-   "adj_rise": 1940,
-   "peak": 2010
-  },
-  "measured": {
-   "lch": [
-    75,
-    25,
-    78
-   ],
-   "nearest": [
-    [
-     "Burlywood",
-     3.1
+  "aside": {
+    "origin": {
+      "named_after": "tanned leather and sun-browned skin (French tanné)",
+      "first_recorded": "as a color name, 1590 (Maerz and Paul)",
+      "source": "Paterson, A Dictionary of Colour; Maerz and Paul 1930"
+    },
+    "aka": [
+      "tanned",
+      "tan brown"
+    ],
+    "siblings": [
+      "tawny",
+      "buff",
+      "burlywood",
+      "beige",
+      "camel",
+      "fawn"
+    ],
+    "parent": null,
+    "children": [
+      "light-tan",
+      "pinchbeck-brown",
+      "pinkish-tan"
+    ],
+    "disambiguation": [
+      {
+        "slug": "tawny",
+        "gloss": "the old tanné: darker and redder than today's tan"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "fr",
+        "name": "tanné (the older color, redder)"
+      }
     ]
-   ]
-  }
- },
- "questions": [
-  {
-   "q": "What does the color word tan come from?",
-   "choices": [
-    "The shade of tanned leather and sun-browned skin",
-    "A dye made from oak galls",
-    "A pigment sold in Tangier",
-    "The Latin word for ten"
-   ],
-   "answer": "The shade of tanned leather and sun-browned skin",
-   "kind": "pick"
   },
-  {
-   "q": "How did poets of the late 1400s regard the color then called tanné?",
-   "choices": [
-    "As changeable and ugly, a color of sorrow",
-    "As the color of royalty",
-    "As the color of hope",
-    "As the most beautiful of all colors"
-   ],
-   "answer": "As changeable and ugly, a color of sorrow",
-   "kind": "pick"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#D2B48C",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 3018,
+    "rate_pct": 12.69,
+    "role": {
+      "light_pct": 52,
+      "n": 1928
+    },
+    "painters": [
+      "willem-van-de-velde-ii",
+      "kano-tan-yu"
+    ],
+    "ngram": {
+      "adj_rise": 1940,
+      "peak": 2010
+    },
+    "measured": {
+      "lch": [
+        75,
+        25,
+        78
+      ],
+      "nearest": [
+        [
+          "Burlywood",
+          3.1
+        ]
+      ]
+    }
   },
-  {
-   "q": "True or false: in the later nineteenth century a suntan marked leisure, as against the pallid factory worker.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Late medieval poets called tan the ugliest of colors; now it is in a paint on one painting in eight in our archive.",
-  "Look for tan beside a deep blue: the Javanese soga batiks pair the two on a cream ground."
- ],
- "words": 1288,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Removed unsupported 1430s date for Charles d'Orleans poem (source gives no date).",
-   "Titian sentence restated to what Ball says (rules broken, materials distinguish); dropped 'quiet family' gloss."
+  "questions": [
+    {
+      "q": "What does the color word tan come from?",
+      "choices": [
+        "The shade of tanned leather and sun-browned skin",
+        "A dye made from oak galls",
+        "A pigment sold in Tangier",
+        "The Latin word for ten"
+      ],
+      "answer": "The shade of tanned leather and sun-browned skin",
+      "kind": "pick"
+    },
+    {
+      "q": "How did poets of the late 1400s regard the color then called tanné?",
+      "choices": [
+        "As changeable and ugly, a color of sorrow",
+        "As the color of royalty",
+        "As the color of hope",
+        "As the most beautiful of all colors"
+      ],
+      "answer": "As changeable and ugly, a color of sorrow",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: in the later nineteenth century a suntan marked leisure, as against the pallid factory worker.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Late medieval poets called tan the ugliest of colors; now it is in a paint on one painting in eight in our archive.",
+    "Look for tan beside a deep blue: the Javanese soga batiks pair the two on a cream ground."
+  ],
+  "words": 1288,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Removed unsupported 1430s date for Charles d'Orleans poem (source gives no date).",
+      "Titian sentence restated to what Ball says (rules broken, materials distinguish); dropped 'quiet family' gloss."
+    ]
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, entries \"tan\", \"Tan\", \"tawny\", \"tenné\", \"Black and Tans\", \"khaki\", \"nightclub tan\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pastoureau, Black: The History of a Color, p. 110",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Pastoureau, Green: The History of a Color, section on Jean Robertet's L'Exposition des couleurs",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Pastoureau, White: The History of a Color, pp. 113-115 (the Blason des couleurs)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"white lead\" (stack and chamber processes), p. 236 and p. 246",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"quercitron\", p. 329",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, p. 161",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, ch. 107 (\"Buff\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, ch. 105 (\"Brown\") and the section on military uniforms",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, entry \"buff\", p. 73",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, ch. 109 (\"Russet\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "data",
+      "cite": "ColorHub library: ISCC-NBS 1955 block 54; Maerz and Paul 1930, first recorded 1590, plate 12 L 11; X11/CSS color Tan",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "data",
+      "cite": "ColorHub name disambiguation: xkcd color survey tan #D1B26F against the main swatch",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "book",
+      "cite": "Pastoureau, Black: The History of a Color, pp. 171-172",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 171",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, part 4, ch. 18",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 5 (Titian)",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 18,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 paintings, as photographed (L6 field notes, tan, CIEDE2000 within 6, at least 5 percent of the canvas)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 20,
+      "kind": "data",
+      "cite": "ColorHub graph look-alikes for tan (CIEDE2000)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 19,
+      "kind": "data",
+      "cite": "Google Books Ngram, adjective use of \"tan\", 5-year smoothed",
+      "loc_kind": null,
+      "url": null
+    }
   ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, entries \"tan\", \"Tan\", \"tawny\", \"tenné\", \"Black and Tans\", \"khaki\", \"nightclub tan\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pastoureau, Black: The History of a Color, p. 110",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Pastoureau, Green: The History of a Color, section on Jean Robertet's L'Exposition des couleurs",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Pastoureau, White: The History of a Color, pp. 113-115 (the Blason des couleurs)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"white lead\" (stack and chamber processes), p. 236 and p. 246",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"quercitron\", p. 329",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Balfour-Paul, Indigo, p. 161",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, ch. 107 (\"Buff\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, ch. 105 (\"Brown\") and the section on military uniforms",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, entry \"buff\", p. 73",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, ch. 109 (\"Russet\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "data",
-   "cite": "ColorHub library: ISCC-NBS 1955 block 54; Maerz and Paul 1930, first recorded 1590, plate 12 L 11; X11/CSS color Tan",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "data",
-   "cite": "ColorHub name disambiguation: xkcd color survey tan #D1B26F against the main swatch",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "book",
-   "cite": "Pastoureau, Black: The History of a Color, pp. 171-172",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 171",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy, part 4, ch. 18",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 17,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 5 (Titian)",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 18,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 paintings, as photographed (L6 field notes, tan, CIEDE2000 within 6, at least 5 percent of the canvas)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 20,
-   "kind": "data",
-   "cite": "ColorHub graph look-alikes for tan (CIEDE2000)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 19,
-   "kind": "data",
-   "cite": "Google Books Ngram, adjective use of \"tan\", 5-year smoothed",
-   "loc_kind": null,
-   "url": null
-  }
- ]
 }

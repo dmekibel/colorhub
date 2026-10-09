@@ -1,264 +1,266 @@
 {
- "slug": "clay",
- "name": "Clay",
- "hex": "#CB8062",
- "names": [
-  "Clay"
- ],
- "tier": "nature",
- "depth": "epic",
- "lede": "Clay is the color of the material it is named for: a soft, slightly greyish orange-brown, closer to a fired flowerpot than to a river bank, because clay itself is a family of earths that can be white, grey, red or yellow.",
- "sections": [
-  {
-   "id": "name",
-   "title": "One word, many colors",
-   "body": "The word names a material before it names a color, and the material has no single hue. The clay minerals are a group of hydrous sheet silicates that soak up water until they turn plastic and lose it again to harden when heated, which is why clay has been used for pottery for thousands of years [1]. The best-known member, kaolinite, is white when pure and may be grey, blue, red, brown or yellow when calcium, iron or magnesium are present [2].\n\nAs a color, the dictionary meaning is narrower. Paterson defines clay simply as a light brown [9]. Our library places the swatch on this page in the ISCC-NBS system, in the block called grayish reddish orange, and records Ridgway's plate of 1912 as the earliest dated chart in our sources [13]. Maerz and Paul, in their 1930 dictionary of color, trace the name's first use as a color to 1594 [13]. Both facts come from the library's notes, and the 1594 date is a first-recorded date rather than the origin of the word [13].\n\nThe swatch resembles a fired clay body more than a raw one. Raw clays are often grey or yellow and turn red or buff in the kiln, so the reddish orange of this page is nearer to [[terracotta]] and [[brick]] than to the mud of a riverbank [1][13]. Look-alike names in the same family include [[tan]], [[camel]] and [[ochre]]."
-  },
-  {
-   "id": "minerals",
-   "title": "What gives clay its color",
-   "body": "Pure kaolin is a white clay mineral formed by the weathering of feldspars, and it is described as the only white mineral pigment available in commercial quantities [2]. It is strip-mined, needs little processing, and is sold in grades: water-washed china clay, calcined clay, and clay whose platelets have been ground thin [2]. The finest particles are only about two micrometres across [2]. White earths such as pipe-clay were among the earth pigments that painters used beside the true ochres [4].\n\nImpurities supply the rest. Ball explains that cave painters dug red and yellow earths that owe their color to hematite, an iron oxide holding varying amounts of water, and found greens in the clays celadonite and glauconite [3]. The same passage gives charcoal for black, a manganese mineral for brown, and chalk or ground bone for white [3]. Clay therefore sits under several of the oldest color families, and the single-hue picture of \"clay color\" is a modern simplification.\n\nWater shows the same effect on a larger scale. Silt or clay in water gives it a brownish color and cuts visibility sharply, in Gurney's account, while algae in lakes make it greenish [10]."
-  },
-  {
-   "id": "fire",
-   "title": "Fired clay and glaze",
-   "body": "Fire changes clay, and potters learned to steer the change. Ball describes the red and black ware of Greek and Roman civilizations as coloured with a clay slip that contained red clay and organic matter, or iron oxides [3]. He says the technique was apparently devised around 1500 BC at Mycenae, with big refinements by Attic potters in the sixth century BC [3]. Its secret was later lost to the West [3].\n\nWhere to look: on a flowerpot, compare the bare red-orange of the fired rim with the glazed inside, and compare both with a wet lump of garden clay. Glazes have their own history of color. Among Egypt's earliest glazes are those on clay beads, which were fired with a mix of soda and copper minerals, and the earliest pottery glazes were thin coats of coloured glass with a little clay to help them stick [3]. In Mesopotamia, from around 1000 BC, Babylonian potters made lead glazes by painting powdered galena (lead sulphide) onto the pottery, then tinted them with copper, iron or manganese oxides [3].\n\nThe most famous clay color of all is [[celadon]]. Finlay writes that its delicate skin and jade-like color came from wood ash and kaolin, both from the mountains, and that the kiln atmosphere matters: reduction fired in a lack of air gives the green, and oxidation gives brown [6]. A glaze that took its green from the fire is a reminder that the color of a finished pot is a record of how it was baked, not of what it started as [6]."
-  },
-  {
-   "id": "pigments",
-   "title": "Clay inside pigments and dyes",
-   "body": "Clay also carries other colors. The Maya made a vivid turquoise for their frescoes by combining a local species of indigo with the clay mineral palygorskite, and Europeans did not understand until 2000 that the molecules were trapped in the clay lattice [7][1]. It was so bright that people believed until the 1960s that Maya blue was made from metal [7]. Balfour-Paul adds that the Maya used it on murals, sculptures, ceramics and textiles [7]. The same book explains why indigo makers were tempted to cheat: ever since Pliny warned of indigo adulterated with clay, manufacturers had added bulk with substances from brick dust to Prussian blue [11].\n\nCennino Cennini, the Italian painter, advised mixing a little Baghdad indigo with clay as a cheap stand-in for ultramarine in frescoes, according to Finlay [7].\n\nRed earths were traded by the clay pit. Pastoureau writes that clay pits around Sinope, on the Black Sea shore, gave a good red ochre in antiquity, and the port exported it to the Roman world [8]. The Latin words that came from the town's name all point to red [8].\n\nClay was also a tool. The Dutch stack process for white lead used clay pots divided into two chambers, one for the lead and one for vinegar, lined up by the dozen and heaped with manure for heat [12]. The pot, in other words, was clay and the pigment was white."
-  },
-  {
-   "id": "boles",
-   "title": "Boles and fuller's earth",
-   "body": "Painters and craftsmen had their own names for the useful clays. Bole is a naturally occurring, iron-rich material such as red ochre, particularly suited to the base layer under gold leaf, where a high polish is wanted [16]. Documents mention white and red boles, and Harley found in seventeenth-century British sources that the word was usually tied to Armenian bole rather than to ochre in general [16]. Armenian bole itself is a deep red ochre first found in Cappadocia, according to Field in 1835 [16]. De Mayerne also records bole in the priming of canvases [16].\n\nFuller's earth is a clay with a high capacity for absorbing water and organic molecules, mainly of the smectite group [17]. It is generally white but ranges to green, brown, grey or blue [17]. Its name comes from fulling, the cleaning of cloth and wool, because the clay removes oils [17]. The Pigment Compendium notes that it is listed as a pigment term by Gettens and Stout in 1966 but not by many other sources, and that it is sometimes confused with kaolin although the two differ [17]."
-  },
-  {
-   "id": "people",
-   "title": "Clay on the body and the wall",
-   "body": "Finlay describes visiting Australian Aboriginal painters who mix white kaolin clay with seagull eggs to paint stripes on their faces for hunting, and reports that in north-east Arnhem Land novices are smeared with ochre in sacred clan patterns and white clay masks during initiation [5]. The best white, a clay called huntite, is believed in some accounts to be the feces of the Rainbow Snake [5]. These are reports from one author's travels, not a survey of Australian practice [5].\n\nFinlay also reports the Italian mineralogist Giacomo Chiari's explanation that red ochre painted on wet clay plaster lines up with magnetic north as it dries, so a fresco keeps a record of the field's direction [5]. It is a striking claim, and it rests on one conversation in the book, so treat it as a report rather than a settled result [5]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 museum paintings, 189 hold colors within six units of this swatch over at least five per cent of the canvas, about 0.8 per cent of the archive [14]. These are photographs of aged, varnished paintings, so a match is a hue and not a pigment test [14].\n\nThe surprise is geographic. India accounts for 45 of 721 paintings that match, 7.9 times the archive rate, and the Rajput, Pahari and Mughal schools together supply 25 of 363 [14]. In Europe the clearest case is [[painter:amedeo-modigliani|Modigliani]], with 5 of his 18 paintings in the archive, about 35 times the archive rate, among them [[painting:nga-46521|Nude on a Blue Cushion]] [14]. Gilbert Stuart has the color in 5 of 50 works [14]. [[painter:gilbert-stuart|Stuart]] painted portraits, so the match is probably skin, but our archive cannot tell skin from fabric [14].\n\nThe largest single match in the archive is an Indian painting of 1699, *Young Woman Smoking a Huqqa*, where the color covers 43 per cent of the canvas, followed by a Dutch portrait of a puppy from 1850 at 42 per cent [14]. The color most often plays a highlight: 53 per cent of matched area is in the lightest group, 40 per cent mid and 7 per cent shadow [14]. The word that shares canvases with it most is terracotta [14]. In printed English the word *clay* peaks in the 1920s, but it counts the material and the surnames too, so the curve says little about the color [15]. The earliest match in the archive is a sixth-century bodhisattva fragment, well before the 1594 first record of the name [14][13]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the material, clay; the color sense is recorded from 1594 (Maerz and Paul)",
-   "first_recorded": "1594 (Maerz and Paul, per our library)",
-   "source": "Library notes; Paterson"
-  },
-  "aka": [
-   "Clay brown"
+  "slug": "clay",
+  "name": "Clay",
+  "hex": "#CB8062",
+  "names": [
+    "Clay",
+    "Testaceous"
   ],
-  "siblings": [
-   "terracotta",
-   "brick",
-   "tan"
+  "tier": "nature",
+  "depth": "epic",
+  "lede": "Clay is the color of the material it is named for: a soft, slightly greyish orange-brown, closer to a fired flowerpot than to a river bank, because clay itself is a family of earths that can be white, grey, red or yellow.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "One word, many colors",
+      "body": "The word names a material before it names a color, and the material has no single hue. The clay minerals are a group of hydrous sheet silicates that soak up water until they turn plastic and lose it again to harden when heated, which is why clay has been used for pottery for thousands of years [1]. The best-known member, kaolinite, is white when pure and may be grey, blue, red, brown or yellow when calcium, iron or magnesium are present [2].\n\nAs a color, the dictionary meaning is narrower. Paterson defines clay simply as a light brown [9]. Our library places the swatch on this page in the ISCC-NBS system, in the block called grayish reddish orange, and records Ridgway's plate of 1912 as the earliest dated chart in our sources [13]. Maerz and Paul, in their 1930 dictionary of color, trace the name's first use as a color to 1594 [13]. Both facts come from the library's notes, and the 1594 date is a first-recorded date rather than the origin of the word [13].\n\nThe swatch resembles a fired clay body more than a raw one. Raw clays are often grey or yellow and turn red or buff in the kiln, so the reddish orange of this page is nearer to [[terracotta]] and [[brick]] than to the mud of a riverbank [1][13]. Look-alike names in the same family include [[tan]], [[camel]] and [[ochre]]."
+    },
+    {
+      "id": "minerals",
+      "title": "What gives clay its color",
+      "body": "Pure kaolin is a white clay mineral formed by the weathering of feldspars, and it is described as the only white mineral pigment available in commercial quantities [2]. It is strip-mined, needs little processing, and is sold in grades: water-washed china clay, calcined clay, and clay whose platelets have been ground thin [2]. The finest particles are only about two micrometres across [2]. White earths such as pipe-clay were among the earth pigments that painters used beside the true ochres [4].\n\nImpurities supply the rest. Ball explains that cave painters dug red and yellow earths that owe their color to hematite, an iron oxide holding varying amounts of water, and found greens in the clays celadonite and glauconite [3]. The same passage gives charcoal for black, a manganese mineral for brown, and chalk or ground bone for white [3]. Clay therefore sits under several of the oldest color families, and the single-hue picture of \"clay color\" is a modern simplification.\n\nWater shows the same effect on a larger scale. Silt or clay in water gives it a brownish color and cuts visibility sharply, in Gurney's account, while algae in lakes make it greenish [10]."
+    },
+    {
+      "id": "fire",
+      "title": "Fired clay and glaze",
+      "body": "Fire changes clay, and potters learned to steer the change. Ball describes the red and black ware of Greek and Roman civilizations as coloured with a clay slip that contained red clay and organic matter, or iron oxides [3]. He says the technique was apparently devised around 1500 BC at Mycenae, with big refinements by Attic potters in the sixth century BC [3]. Its secret was later lost to the West [3].\n\nWhere to look: on a flowerpot, compare the bare red-orange of the fired rim with the glazed inside, and compare both with a wet lump of garden clay. Glazes have their own history of color. Among Egypt's earliest glazes are those on clay beads, which were fired with a mix of soda and copper minerals, and the earliest pottery glazes were thin coats of coloured glass with a little clay to help them stick [3]. In Mesopotamia, from around 1000 BC, Babylonian potters made lead glazes by painting powdered galena (lead sulphide) onto the pottery, then tinted them with copper, iron or manganese oxides [3].\n\nThe most famous clay color of all is [[celadon]]. Finlay writes that its delicate skin and jade-like color came from wood ash and kaolin, both from the mountains, and that the kiln atmosphere matters: reduction fired in a lack of air gives the green, and oxidation gives brown [6]. A glaze that took its green from the fire is a reminder that the color of a finished pot is a record of how it was baked, not of what it started as [6]."
+    },
+    {
+      "id": "pigments",
+      "title": "Clay inside pigments and dyes",
+      "body": "Clay also carries other colors. The Maya made a vivid turquoise for their frescoes by combining a local species of indigo with the clay mineral palygorskite, and Europeans did not understand until 2000 that the molecules were trapped in the clay lattice [7][1]. It was so bright that people believed until the 1960s that Maya blue was made from metal [7]. Balfour-Paul adds that the Maya used it on murals, sculptures, ceramics and textiles [7]. The same book explains why indigo makers were tempted to cheat: ever since Pliny warned of indigo adulterated with clay, manufacturers had added bulk with substances from brick dust to Prussian blue [11].\n\nCennino Cennini, the Italian painter, advised mixing a little Baghdad indigo with clay as a cheap stand-in for ultramarine in frescoes, according to Finlay [7].\n\nRed earths were traded by the clay pit. Pastoureau writes that clay pits around Sinope, on the Black Sea shore, gave a good red ochre in antiquity, and the port exported it to the Roman world [8]. The Latin words that came from the town's name all point to red [8].\n\nClay was also a tool. The Dutch stack process for white lead used clay pots divided into two chambers, one for the lead and one for vinegar, lined up by the dozen and heaped with manure for heat [12]. The pot, in other words, was clay and the pigment was white."
+    },
+    {
+      "id": "boles",
+      "title": "Boles and fuller's earth",
+      "body": "Painters and craftsmen had their own names for the useful clays. Bole is a naturally occurring, iron-rich material such as red ochre, particularly suited to the base layer under gold leaf, where a high polish is wanted [16]. Documents mention white and red boles, and Harley found in seventeenth-century British sources that the word was usually tied to Armenian bole rather than to ochre in general [16]. Armenian bole itself is a deep red ochre first found in Cappadocia, according to Field in 1835 [16]. De Mayerne also records bole in the priming of canvases [16].\n\nFuller's earth is a clay with a high capacity for absorbing water and organic molecules, mainly of the smectite group [17]. It is generally white but ranges to green, brown, grey or blue [17]. Its name comes from fulling, the cleaning of cloth and wool, because the clay removes oils [17]. The Pigment Compendium notes that it is listed as a pigment term by Gettens and Stout in 1966 but not by many other sources, and that it is sometimes confused with kaolin although the two differ [17]."
+    },
+    {
+      "id": "people",
+      "title": "Clay on the body and the wall",
+      "body": "Finlay describes visiting Australian Aboriginal painters who mix white kaolin clay with seagull eggs to paint stripes on their faces for hunting, and reports that in north-east Arnhem Land novices are smeared with ochre in sacred clan patterns and white clay masks during initiation [5]. The best white, a clay called huntite, is believed in some accounts to be the feces of the Rainbow Snake [5]. These are reports from one author's travels, not a survey of Australian practice [5].\n\nFinlay also reports the Italian mineralogist Giacomo Chiari's explanation that red ochre painted on wet clay plaster lines up with magnetic north as it dries, so a fresco keeps a record of the field's direction [5]. It is a striking claim, and it rests on one conversation in the book, so treat it as a report rather than a settled result [5]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 museum paintings, 189 hold colors within six units of this swatch over at least five per cent of the canvas, about 0.8 per cent of the archive [14]. These are photographs of aged, varnished paintings, so a match is a hue and not a pigment test [14].\n\nThe surprise is geographic. India accounts for 45 of 721 paintings that match, 7.9 times the archive rate, and the Rajput, Pahari and Mughal schools together supply 25 of 363 [14]. In Europe the clearest case is [[painter:amedeo-modigliani|Modigliani]], with 5 of his 18 paintings in the archive, about 35 times the archive rate, among them [[painting:nga-46521|Nude on a Blue Cushion]] [14]. Gilbert Stuart has the color in 5 of 50 works [14]. [[painter:gilbert-stuart|Stuart]] painted portraits, so the match is probably skin, but our archive cannot tell skin from fabric [14].\n\nThe largest single match in the archive is an Indian painting of 1699, *Young Woman Smoking a Huqqa*, where the color covers 43 per cent of the canvas, followed by a Dutch portrait of a puppy from 1850 at 42 per cent [14]. The color most often plays a highlight: 53 per cent of matched area is in the lightest group, 40 per cent mid and 7 per cent shadow [14]. The word that shares canvases with it most is terracotta [14]. In printed English the word *clay* peaks in the 1920s, but it counts the material and the surnames too, so the curve says little about the color [15]. The earliest match in the archive is a sixth-century bodhisattva fragment, well before the 1594 first record of the name [14][13]."
+    }
   ],
-  "parent": "earth",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "celadon",
-    "gloss": "a green made in clay by fire, not the color of the clay"
-   }
+  "aside": {
+    "origin": {
+      "named_after": "the material, clay; the color sense is recorded from 1594 (Maerz and Paul)",
+      "first_recorded": "1594 (Maerz and Paul, per our library)",
+      "source": "Library notes; Paterson"
+    },
+    "aka": [
+      "Clay brown",
+      "Testaceous (ridgway+iscc-nbs+maerz-paul)"
+    ],
+    "siblings": [
+      "terracotta",
+      "brick",
+      "tan"
+    ],
+    "parent": "earth",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "celadon",
+        "gloss": "a green made in clay by fire, not the color of the clay"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "23,781 museum paintings, as photographed",
+    "match": {
+      "hex": "#CB8062",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 189,
+    "countries": "India 45 of 721 (7.9x)",
+    "painters": "Modigliani 5 of 18; Gilbert Stuart 5 of 50",
+    "role": {
+      "highlight": 0.53,
+      "mid": 0.4,
+      "shadow": 0.07
+    },
+    "company": [
+      "terracotta",
+      "ochre",
+      "tan"
+    ]
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"clay minerals group\" (entry)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"kaolin\" and \"clay minerals group: kaolinite sub-group\" (entries)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 11",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, p. 37",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Finlay, Color, ch. 10",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Finlay, Color, ch. 16 and ch. 21",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Finlay, Color, ch. 18; Balfour-Paul, Indigo, p. 32",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Pastoureau, Green, ch. 29",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"clay\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Gurney, Colour and Light, p. 206",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, pp. 113 and 122",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Finlay, Color, ch. 12; Coles, Chromatopia, p. 59",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 block 74, Ridgway 1912, Maerz and Paul 1930 (first recorded 1594)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"bole\" and \"Armenian bole\" (entries)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"fuller's earth\" (entry)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "data",
+      "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, all senses, relative to peak",
+      "loc_kind": null,
+      "url": "https://books.google.com/ngrams"
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "23,781 museum paintings, as photographed",
-  "match": {
-   "hex": "#CB8062",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 189,
-  "countries": "India 45 of 721 (7.9x)",
-  "painters": "Modigliani 5 of 18; Gilbert Stuart 5 of 50",
-  "role": {
-   "highlight": 0.53,
-   "mid": 0.4,
-   "shadow": 0.07
-  },
-  "company": [
-   "terracotta",
-   "ochre",
-   "tan"
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"clay minerals group\" (entry)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"kaolin\" and \"clay minerals group: kaolinite sub-group\" (entries)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 11",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Coles, Chromatopia, p. 37",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Finlay, Color, ch. 10",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Finlay, Color, ch. 16 and ch. 21",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Finlay, Color, ch. 18; Balfour-Paul, Indigo, p. 32",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Pastoureau, Green, ch. 29",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"clay\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Gurney, Colour and Light, p. 206",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Balfour-Paul, Indigo, pp. 113 and 122",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Finlay, Color, ch. 12; Coles, Chromatopia, p. 59",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 block 74, Ridgway 1912, Maerz and Paul 1930 (first recorded 1594)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"bole\" and \"Armenian bole\" (entries)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 17,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"fuller's earth\" (entry)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "data",
-   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, all senses, relative to peak",
-   "loc_kind": null,
-   "url": "https://books.google.com/ngrams"
+  "questions": [
+    {
+      "q": "Why is the swatch for clay closer to terracotta than to river mud?",
+      "choices": [
+        "Raw clays are often grey or yellow and turn red in the kiln",
+        "The swatch is a mistake",
+        "Terracotta is made of metal",
+        "Mud is always orange"
+      ],
+      "answer": "Raw clays are often grey or yellow and turn red in the kiln",
+      "kind": "pick"
+    },
+    {
+      "q": "What did the Maya mix with indigo to make Maya blue?",
+      "choices": [
+        "The clay mineral palygorskite",
+        "Copper filings",
+        "Lapis lazuli",
+        "Cobalt"
+      ],
+      "answer": "The clay mineral palygorskite",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: pure kaolin clay is white.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pure clay is white; the orange of a flowerpot comes from iron and fire.",
+    "The Maya trapped indigo inside a clay mineral to make a blue that lasted for centuries.",
+    "India has this color 7.9 times as often as the rest of our archive."
+  ],
+  "words": 1515,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Removed unsupported editorial comparing Cennini's fake ultramarine to Maya blue",
+      "Hedged Mycenae date ('apparently' per Ball)",
+      "Reworded glaze sentence to avoid shared book phrasing",
+      "Verified Maya blue, Chiari, Sinope, Cave pigments, Gurney silt, Paterson clay, Pliny against book text"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "Why is the swatch for clay closer to terracotta than to river mud?",
-   "choices": [
-    "Raw clays are often grey or yellow and turn red in the kiln",
-    "The swatch is a mistake",
-    "Terracotta is made of metal",
-    "Mud is always orange"
-   ],
-   "answer": "Raw clays are often grey or yellow and turn red in the kiln",
-   "kind": "pick"
-  },
-  {
-   "q": "What did the Maya mix with indigo to make Maya blue?",
-   "choices": [
-    "The clay mineral palygorskite",
-    "Copper filings",
-    "Lapis lazuli",
-    "Cobalt"
-   ],
-   "answer": "The clay mineral palygorskite",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: pure kaolin clay is white.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Pure clay is white; the orange of a flowerpot comes from iron and fire.",
-  "The Maya trapped indigo inside a clay mineral to make a blue that lasted for centuries.",
-  "India has this color 7.9 times as often as the rest of our archive."
- ],
- "words": 1515,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Removed unsupported editorial comparing Cennini's fake ultramarine to Maya blue",
-   "Hedged Mycenae date ('apparently' per Ball)",
-   "Reworded glaze sentence to avoid shared book phrasing",
-   "Verified Maya blue, Chiari, Sinope, Cave pigments, Gurney silt, Paterson clay, Pliny against book text"
-  ]
- }
 }

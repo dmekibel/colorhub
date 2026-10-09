@@ -1,0 +1,121 @@
+{
+  "slug": "portland-orange",
+  "name": "Portland Orange",
+  "hex": "#FF5A36",
+  "names": [
+    "Portland Orange"
+  ],
+  "tier": "place",
+  "depth": "medium",
+  "lede": "Portland Orange is a vivid, reddish orange named for the glow of pedestrian \"don't walk\" signals, a traffic-engineering color rather than a dye or a place's building stone.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A traffic light, not a cement",
+      "body": "The phrase \"Portland\" attached to a color most often points to Portland cement, patented in 1824 by the English bricklayer Joseph Aspdin, who named it for its resemblance to a prized building stone from the Isle of Portland [1]. This color is a different Portland: Wikipedia's reference list dates an account of this orange to Institute of Traffic Engineers proceedings on \"Pedestrian Lights\" from around 1959, but the article gives no explanation of why the color itself carries the name \"Portland,\" and the sources checked here found no further account of its naming [1].\n\nThe color became the standard glow for the \"don't walk\" phase of pedestrian crossing signals in the United States and Canada, an orange chosen to be clearly distinct from the red and green of ordinary traffic lights in poor visibility [1]. None of the books consulted here (including Ridgway 1912 and the ISCC-NBS 1955 filings) carry this exact name [4]; it belongs to twentieth-century engineering standards rather than to pigment or dye history.\n\nIts closest look-alikes on file are [[tomato|Tomato]], a duller match, and [[scarlet|Orangey Red]], with [[pinkish-orange|Pinkish Orange]] and [[orange-red|Orange Red]] nearby too [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings, as photographed, finds a match for this orange in only 7 of them, about 0.03 percent, rarer than 72 percent of our named colors [3]. Where it does appear, it plays an accent role in every case, ranked by lightness rather than raw area [3].\n\nThe earliest dated match is from 1601; our archive's early centuries are thin, so that date is a floor, not a first, and the match is only a look-alike hue in an aged, varnished photograph, not proof that a matching pigment existed then [3]. A vivid synthetic orange this saturated is, in any case, a twentieth-century engineering color rather than a historical pigment."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the orange glow of US and Canadian pedestrian \"don't walk\" signals; why it carries the name \"Portland\" is undocumented in the sources checked here",
+      "first_recorded": "around 1959, per an Institute of Traffic Engineers account cited in Wikipedia's reference list",
+      "source": "web (Wikipedia, \"Portland Orange\")"
+    },
+    "aka": [],
+    "siblings": [
+      "tomato",
+      "scarlet",
+      "orange-red"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 7,
+    "pct_archive": 0.03,
+    "measured": {
+      "nearest": [
+        [
+          "Tomato",
+          2.7
+        ]
+      ]
+    },
+    "first_seen": {
+      "year": 1601,
+      "painting_id": "commons-Q59825442"
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "web",
+      "cite": "Wikipedia, \"Portland Orange\"; Wikipedia, \"White Portland cement\"",
+      "loc_kind": null,
+      "url": "https://en.wikipedia.org/wiki/Portland_Orange"
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub graph: look-alike edges (data/graph/edges-p.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match and first-seen date, as photographed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub color library: Ridgway (1912) and ISCC-NBS (1955) entries in data/library.json",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does Portland Orange's name refer to?",
+      "choices": [
+        "The orange glow of a pedestrian \"don't walk\" signal",
+        "Portland cement's grey color",
+        "A pigment mined near Portland, England",
+        "A Crayola crayon"
+      ],
+      "answer": "The orange glow of a pedestrian \"don't walk\" signal",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Portland Orange is named after the same Portland as Portland cement.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Portland Orange isn't named for a building stone at all; it's the orange glow of a \"don't walk\" sign."
+  ],
+  "words": 324,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Removed an unsupported claim (a pedestrian-signal \"church-window shop in Portland, Oregon\" origin story) that the cited Wikipedia \"Portland Orange\" article does not actually contain; replaced with the verifiable detail only (a 1959 Institute of Traffic Engineers reference in Wikipedia's citation list), and the article now says plainly that why it is named \"Portland\" is undocumented."
+    ]
+  }
+}

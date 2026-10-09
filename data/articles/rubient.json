@@ -1,113 +1,113 @@
 {
- "slug": "rubient",
- "name": "Rubient",
- "hex": "#5C2833",
- "names": [
-  "Rubient"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Rubient is a dark, brownish red that Maerz and Paul dated to 1927, a name built on the Latin root *rubens*, reddening, that also gives English \"ruby\" and \"rubicund.\"",
- "sections": [
-  {
-   "id": "name",
-   "title": "A Latin root, an uncertain plate",
-   "body": "Maerz and Paul's 1930 dictionary dates the name to 1927, but our two records of its plate disagree on the row, one giving plate 55, row K, the other plate 55, row L, so the exact square is not settled [1]. The nearest ISCC-NBS block by computed distance is 259, dark purplish red, 6.0 units from the hex #5C2833, and that same block also covers [[raisin-purple|Raisin Purple]] from elsewhere in our library, despite the two looking distinctly different [1].\n\nTwo other library names, [[dusty-wine|Dusty wine]] and [[wine-brown|Wine brown]], sit at exactly the same measured distance from Rubient, because the two themselves share one hex code [1]. [[purple-brown|Purple Brown]] sits a little further out still [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "A color within six units of it covers at least five percent of the canvas in 103 of our 23,781 archive paintings, as photographed, rarer than 52 percent of our named colors [2]. It most often serves as a shadow, 34 percent of the 44 paintings our within-painting lens finds it in, and it peaks in the 1500s, in 9 of 2,231 paintings, at 1.8 times the expected rate [2]. The earliest dated example is a 1423 painting by Gentile da Fabriano, 507 years before the name's own 1927 record, a floor set by thin early coverage rather than a true first sighting [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Latin *rubens*, reddening",
-   "first_recorded": "1927 (Maerz & Paul, 1930)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "raisin-purple",
-   "dusty-wine",
-   "wine-brown"
+  "slug": "rubient",
+  "name": "Rubient",
+  "hex": "#5C2833",
+  "names": [
+    "Rubient"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 44,
-  "n_present_painting_level": 103,
-  "measured": {
-   "lch": [
-    23.8,
-    25.4,
-    9.9
-   ],
-   "nearest": [
-    [
-     "Dusty wine",
-     7.5
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Rubient is a dark, brownish red that Maerz and Paul dated to 1927, a name built on the Latin root *rubens*, reddening, that also gives English \"ruby\" and \"rubicund.\"",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A Latin root, an uncertain plate",
+      "body": "Maerz and Paul's 1930 dictionary dates the name to 1927, but our two records of its plate disagree on the row, one giving plate 55, row K, the other plate 55, row L, so the exact square is not settled [1]. The nearest ISCC-NBS block by computed distance is 259, dark purplish red, 6.0 units from the hex #5C2833, and that same block also covers [[raisin-purple|Raisin Purple]] from elsewhere in our library, despite the two looking distinctly different [1].\n\nTwo other library names, [[wine-brown|Dusty wine]] and [[wine-brown|Wine brown]], sit at exactly the same measured distance from Rubient, because the two themselves share one hex code [1]. [[purple-brown|Purple Brown]] sits a little further out still [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "A color within six units of it covers at least five percent of the canvas in 103 of our 23,781 archive paintings, as photographed, rarer than 52 percent of our named colors [2]. It most often serves as a shadow, 34 percent of the 44 paintings our within-painting lens finds it in, and it peaks in the 1500s, in 9 of 2,231 paintings, at 1.8 times the expected rate [2]. The earliest dated example is a 1423 painting by Gentile da Fabriano, 507 years before the name's own 1927 record, a floor set by thin early coverage rather than a true first sighting [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "Latin *rubens*, reddening",
+      "first_recorded": "1927 (Maerz & Paul, 1930)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "raisin-purple",
+      "wine-brown",
+      "purplish-red"
     ],
-    [
-     "Wine brown",
-     7.5
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 44,
+    "n_present_painting_level": 103,
+    "measured": {
+      "lch": [
+        23.8,
+        25.4,
+        9.9
+      ],
+      "nearest": [
+        [
+          "Dusty wine",
+          7.5
+        ],
+        [
+          "Wine brown",
+          7.5
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Maerz and Paul 1930, plate 55, first recorded 1927 (sources disagree on row K or L); nearest ISCC-NBS 1955 block 259",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which other library color shares Rubient's 1955 ISCC-NBS block (259, dark purplish red)?",
+      "choices": [
+        "Raisin Purple",
+        "Raisin Black",
+        "Royal",
+        "Quaker Blue"
+      ],
+      "answer": "Raisin Purple",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources agree exactly on which plate square gives Rubient its name.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Dusty Wine and Wine Brown sit at the identical distance from Rubient, because the two share one hex between them."
+  ],
+  "words": 245,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits (src empty); the plate row (K vs L) disagreement between our two records is stated, not resolved.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Maerz and Paul 1930, plate 55, first recorded 1927 (sources disagree on row K or L); nearest ISCC-NBS 1955 block 259",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which other library color shares Rubient's 1955 ISCC-NBS block (259, dark purplish red)?",
-   "choices": [
-    "Raisin Purple",
-    "Raisin Black",
-    "Royal",
-    "Quaker Blue"
-   ],
-   "answer": "Raisin Purple",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our sources agree exactly on which plate square gives Rubient its name.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Dusty Wine and Wine Brown sit at the identical distance from Rubient, because the two share one hex between them."
- ],
- "words": 245,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No concordance hits (src empty); the plate row (K vs L) disagreement between our two records is stated, not resolved.",
-   "lint 2026-10-09"
-  ]
- }
 }

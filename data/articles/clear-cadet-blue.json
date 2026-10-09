@@ -1,127 +1,127 @@
 {
- "slug": "clear-cadet-blue",
- "name": "Clear Cadet Blue",
- "hex": "#698ACE",
- "names": [
-  "Clear Cadet Blue"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Clear Cadet Blue is a lighter, more vivid modifier on [[cadet-blue]], scanned from Ridgway's 1912 plates and filed by the ISCC-NBS system in 1955.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier on cadet blue",
-   "body": "The name follows the library's modifier grammar: *clear* plus [[cadet-blue|cadet blue]], meaning a lighter, cleaner version of that grayish blue rather than an independent name [1]. Ridgway's *Color Standards and Color Nomenclature* (1912) places the hue at plate XXI, hue 49′, a scan of an aged printed plate and so only approximate [1]. The ISCC-NBS system filed the same chip in 1955 as a brilliant blue [1]. Who chose the word \"clear\" for this reading, rather than another modifier, is not recorded in the sources we hold [2].\n\nIn our library's own distance measure its nearest named neighbors are [[faded-blue]] and [[soft-blue]], both about 3.2 units off and read as bluer or more vivid versions of this hue; [[dusty-blue]] and [[glaucous]] sit a touch further, at 4.0 [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "A color this close to Clear Cadet Blue turns up in just 43 of 23,781 paintings in our archive, as photographed, about 0.18 percent, rarer than 56 percent of the named colors we track [4]. It peaks in paintings from the 1900s, at 1.7 times the expected rate for that decade, though the sample is thin [4]. Inside a painting it most often plays an accent, 66 percent of the time [4]. The earliest match we hold is a 1474 painting by Piero della Francesca, 438 years before the name's own 1912 record [4]. That is centuries before the name's own record, a floor on the hue's age, not a first use of either the name or a pigment."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a modifier on cadet blue; the choice of \"clear\" over another word is undocumented",
-   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXI, hue 49′",
-   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
-  },
-  "aka": [],
-  "siblings": [
-   "faded-blue",
-   "soft-blue",
-   "dusty-blue",
-   "glaucous"
+  "slug": "clear-cadet-blue",
+  "name": "Clear Cadet Blue",
+  "hex": "#698ACE",
+  "names": [
+    "Clear Cadet Blue"
   ],
-  "parent": "cadet-blue",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 43,
-  "n_within": 32,
-  "role": "accent 66%",
-  "century_peak": "1900s, 1.7x expected",
-  "measured": {
-   "lch": [
-    57.7,
-    39.3,
-    280.5
-   ],
-   "nearest": [
-    [
-     "Faded Blue",
-     3.2
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Clear Cadet Blue is a lighter, more vivid modifier on [[cadet-blue]], scanned from Ridgway's 1912 plates and filed by the ISCC-NBS system in 1955.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier on cadet blue",
+      "body": "The name follows the library's modifier grammar: *clear* plus [[cadet-blue|cadet blue]], meaning a lighter, cleaner version of that grayish blue rather than an independent name [1]. Ridgway's *Color Standards and Color Nomenclature* (1912) places the hue at plate XXI, hue 49′, a scan of an aged printed plate and so only approximate [1]. The ISCC-NBS system filed the same chip in 1955 as a brilliant blue [1]. Who chose the word \"clear\" for this reading, rather than another modifier, is not recorded in the sources we hold [2].\n\nIn our library's own distance measure its nearest named neighbors are [[clear-cadet-blue]] and [[clear-cadet-blue]], both about 3.2 units off and read as bluer or more vivid versions of this hue; [[dusty-blue]] and [[dusty-blue]] sit a touch further, at 4.0 [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "A color this close to Clear Cadet Blue turns up in just 43 of 23,781 paintings in our archive, as photographed, about 0.18 percent, rarer than 56 percent of the named colors we track [4]. It peaks in paintings from the 1900s, at 1.7 times the expected rate for that decade, though the sample is thin [4]. Inside a painting it most often plays an accent, 66 percent of the time [4]. The earliest match we hold is a 1474 painting by Piero della Francesca, 438 years before the name's own 1912 record [4]. That is centuries before the name's own record, a floor on the hue's age, not a first use of either the name or a pigment."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a modifier on cadet blue; the choice of \"clear\" over another word is undocumented",
+      "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXI, hue 49′",
+      "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
+    },
+    "aka": [],
+    "siblings": [
+      "clear-cadet-blue",
+      "dusty-blue",
+      "flax-flower-blue",
+      "cornflower"
     ],
-    [
-     "Soft Blue",
-     3.2
-    ]
-   ]
+    "parent": "cadet-blue",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 43,
+    "n_within": 32,
+    "role": "accent 66%",
+    "century_peak": "1900s, 1.7x expected",
+    "measured": {
+      "lch": [
+        57.7,
+        39.3,
+        280.5
+      ],
+      "nearest": [
+        [
+          "Faded Blue",
+          3.2
+        ],
+        [
+          "Soft Blue",
+          3.2
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-c.json): Ridgway 1912, plate XXI, hue 49′; ISCC-NBS 1955, block 177 (R)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "Color-kb concordance of the 29 color books for this name (no hits beyond the catalogue entries)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph, look-alike edges (data/graph/edges-c.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); counts are computed color matches on photographs of varnished, aged canvases, not pigment identifications",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the \"clear\" in Clear Cadet Blue modify?",
+      "choices": [
+        "Cadet blue",
+        "Cerulean",
+        "Denim",
+        "Navy"
+      ],
+      "answer": "Cadet blue",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the earliest painting match for Clear Cadet Blue in our archive predates the name's 1912 record.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Clear Cadet Blue is a lighter reading of cadet blue, scanned from a 1912 plate."
+  ],
+  "words": 274,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-09",
+    "issues": []
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes-c.json): Ridgway 1912, plate XXI, hue 49′; ISCC-NBS 1955, block 177 (R)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "Color-kb concordance of the 29 color books for this name (no hits beyond the catalogue entries)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph, look-alike edges (data/graph/edges-c.json), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); counts are computed color matches on photographs of varnished, aged canvases, not pigment identifications",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the \"clear\" in Clear Cadet Blue modify?",
-   "choices": [
-    "Cadet blue",
-    "Cerulean",
-    "Denim",
-    "Navy"
-   ],
-   "answer": "Cadet blue",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the earliest painting match for Clear Cadet Blue in our archive predates the name's 1912 record.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Clear Cadet Blue is a lighter reading of cadet blue, scanned from a 1912 plate."
- ],
- "words": 271,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-09",
-  "issues": []
- }
 }

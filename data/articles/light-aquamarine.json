@@ -1,0 +1,105 @@
+{
+  "slug": "light-aquamarine",
+  "name": "Light Aquamarine",
+  "hex": "#7BFDC7",
+  "names": [
+    "Light Aquamarine"
+  ],
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Light Aquamarine is a near-neon, pale green-blue built from the word \"light\" plus [[aquamarine|Aquamarine]], the sea-and-gemstone color, and a 2010 crowd survey put this exact swatch on record.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier on a gemstone word",
+      "body": "The name follows the usual grammar: \"light\" plus the parent color [[aquamarine|Aquamarine]], itself named for the pale blue-green of seawater and the gem beryl colored by traces of iron [1]. Our graph credits the 2010 xkcd color survey for this exact, brighter and paler swatch, distinct from the gem's own calmer, more muted range [1]. By computed ISCC-NBS block it lands as a very light green [1].\n\nIts nearest named neighbor is the parent itself, [[aquamarine|Aquamarine]], only 2.7 units away, with [[greenish-cyan|Light Greenish Blue]] close behind at 3.3, and [[greenish-cyan|Greenish Cyan]] and [[seafoam|Light Seafoam]] further out at 4.8 and 4.9 [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive holds this color covering at least 1 percent of its canvas, within a color distance of 4, as photographed [2]. The real gem and real seawater never reach a green this bright and saturated, so the gap in the archive reflects a modern, screen-only brightness rather than any gap in our data [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a descriptive modifier: light + Aquamarine",
+      "first_recorded": "2010 (xkcd color survey)",
+      "source": "ColorHub color graph"
+    },
+    "aka": [],
+    "siblings": [
+      "aquamarine",
+      "greenish-cyan",
+      "bright-teal"
+    ],
+    "parent": "aquamarine",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "iscc": "very light green",
+      "nearest": [
+        [
+          "Aquamarine",
+          2.7
+        ],
+        [
+          "Light Greenish Blue",
+          3.3
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color graph: xkcd 2010 crowd color survey and look-alike edges",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Light Aquamarine is a brighter, paler version of which parent color?",
+      "choices": [
+        "Aquamarine",
+        "Khaki",
+        "Alice Blue",
+        "Lemon Yellow"
+      ],
+      "answer": "Aquamarine",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: real aquamarine gemstones reach a green as bright and saturated as this swatch.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Light Aquamarine is brighter than any real gemstone or seawater actually gets."
+  ],
+  "words": 187,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
+  }
+}

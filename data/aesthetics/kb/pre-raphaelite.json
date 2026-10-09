@@ -1,0 +1,68 @@
+{
+ "id": "pre-raphaelite",
+ "name": "Pre-Raphaelite",
+ "lineage": {
+  "influenced_by": [
+   "early Italian Renaissance painting (before Raphael)",
+   "a reaction against the Royal Academy's teaching"
+  ],
+  "influences": [
+   "gothic-lolita",
+   "princesscore"
+  ]
+ },
+ "eras": [
+  "founded 1848 (Pre-Raphaelite Brotherhood)"
+ ],
+ "places": [
+  "London"
+ ],
+ "garments": [
+  "flowing medieval-inspired dress",
+  "unbound red hair as a recurring motif"
+ ],
+ "media": [
+  {
+   "title": "John Everett Millais, Ophelia (1851–52)",
+   "note": ""
+  },
+  {
+   "title": "Dante Gabriel Rossetti's portraits of Jane Morris and Elizabeth Siddal",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Dante Gabriel Rossetti",
+  "John Everett Millais",
+  "William Holman Hunt"
+ ],
+ "reacts_against": "the Royal Academy's idealized, Raphael-descended teaching style, choosing jewel-bright color and literal detail from nature instead.",
+ "revivals": [
+  "a visible influence on gothic-lolita and princesscore's romantic silhouettes"
+ ],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Pre-Raphaelite Brotherhood",
+  "decade_of_origin": "1848",
+  "key_motifs": "Medievalism, Arthurian legend, religious and mythological subjects, literary themes, detailed natural landscapes, idealized female figures",
+  "key_colours": "Vivid jewel tones (cobalt, ruby, emerald), luminous whites",
+  "related_aesthetics": "AestheticismArt NouveauRealismRomanticismSymbolism",
+  "key_values": "Sincere representation, truth to nature, moral seriousness, opposition to academic conventions"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Pre-Raphaelite"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 54% of the measured color across 6 wiki photos is below mid-lightness",
+   "mostly muted — about 46% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

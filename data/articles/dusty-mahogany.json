@@ -1,0 +1,127 @@
+{
+ "slug": "dusty-mahogany",
+ "name": "Dusty mahogany",
+ "hex": "#592B1F",
+ "names": [
+  "Dusty mahogany"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dusty mahogany is a muted reddish brown built the plain way, by putting the modifier \"dusty\" in front of [[mahogany]], the reddish-brown timber color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on mahogany",
+   "body": "\"Dusty\" here is a grammar move, not a dye or a place: it softens [[mahogany]] toward grey the way \"dusty rose\" softens rose [1]. Our color library files it as a modifier compound rather than a named historical color [1].\n\nThe same hex also sits near a Japanese traditional name in our data, Kōrozen (黄櫨染, \"sumac-dyed\"), listed among the traditional colors of Japan, but the library gives no date for when that name was first recorded, so it stays undocumented here [2]. The nearest named color in our graph is [[chestnut-leather-brown]], at a color distance (ΔE2000) of 2.6, essentially the same shade; [[mahogany]] itself sits 4.6 away and reads more vivid by comparison [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this brown in 2,420 of 23,781 paintings, about 10.2 percent, one of the more common colors in this group, as photographed [4]. It peaks in the 1560s (38 of 159 paintings from that decade), with Pontormo's portraits showing it in well over half their canvases, and Juan de Juanes and Bronzino close behind [4]. The earliest dated match is a carved wooden beam fragment from the year 550, a floor set by what survives and was photographed, not a first appearance, and long before the Japanese name on record for the same hue [4]. These are museum photographs of aged, varnished paintings, so the match is a computed color comparison, not a pigment identification [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the modifier \"dusty\" plus the wood color mahogany",
+   "first_recorded": "undocumented",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Kōrozen (黄櫨染)"
+  ],
+  "siblings": [
+   "chestnut-leather-brown",
+   "mahogany-brown",
+   "dusty-oxblood"
+  ],
+  "parent": "mahogany",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kōrozen (黄櫨染), \"sumac-dyed\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2420,
+  "rate": 0.1018,
+  "match": {
+   "hex": "#592B1F",
+   "de2000": 6.0,
+   "min_cover": 0.05
+  },
+  "nearest": [
+   [
+    "Chestnut leather brown",
+    2.6
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional-Japanese-color entries (kanji, romaji, meaning)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional-Japanese-color entries (kanji, romaji, meaning)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges (ΔE2000)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What kind of color name is \"Dusty mahogany\"?",
+   "choices": [
+    "A modifier plus a base color word",
+    "A pigment name",
+    "A place name",
+    "A painter's name"
+   ],
+   "answer": "A modifier plus a base color word",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our data gives an exact year when Dusty mahogany's name was first recorded.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dusty mahogany turns up in roughly one painting in ten in our archive."
+ ],
+ "words": 255,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits (src empty); kept to library + graph + archive data; Japanese kanji link left undocumented for date."
+  ]
+ }
+}

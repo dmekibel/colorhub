@@ -1,0 +1,119 @@
+{
+ "slug": "dusky-mauve",
+ "name": "Dusky mauve",
+ "hex": "#86617B",
+ "names": [
+  "Dusky mauve",
+  "Livid Purple"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Dusky mauve is a dusky, muted purple from Ridgway's 1912 atlas, where it was named Livid Purple, one of the rarest colors in our painting archive, though a matching hue turns up in a Bronzino portrait painted 367 years before the name existed.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A tight match across three books",
+   "body": "Ridgway's 1912 atlas carries this tone on plate XXXVII, hue 63″, notated 0.8RP 4.5/4.7 in the Munsell system [1]. The 1955 ISCC-NBS dictionary groups it under block 245, naming it grayish reddish purple, only 1.6 units from Ridgway's reading, one of the tighter matches in this naming lineage [1]. Maerz and Paul's 1930 dictionary lists the same swatch independently, cited in the same 1955 circular [2].\n\nIts closest neighbor in our library is [[livid-violet]], about 3.1 units away and more purple, followed by [[dull-purple]], about 4.0 units off and more vivid [3]. [[light-perilla-purple]] and [[claret-cup]] sit a little further, about 4.4 to 4.6 units off and redder [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This match appears in 0.06% of the 23,781 paintings in our archive (15 paintings, as photographed); the within-painting lens narrows that to 9 [4]. In our archive it is rarer than 69% of the named colors [4]. It peaks in the 1900s, present in 0.3% of the 1,674 paintings we have from that decade (5 paintings), 3.8 times the rate its museums would predict [4]. Inside a painting it most often plays a hidden color, in 44% of its 9 appearances by lightness rank within the painting [4]. The earliest match dates to 1545, 367 years before the name's 1912 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [4]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "livid, a dusky or bruised purple; undocumented beyond the naming system",
+   "first_recorded": "1912 (Ridgway); carried into the 1955 ISCC-NBS dictionary and the 1930 Maerz and Paul dictionary",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553; Maerz and Paul, A Dictionary of Color"
+  },
+  "aka": [
+   "Livid Purple"
+  ],
+  "siblings": [
+   "livid-violet",
+   "dull-purple",
+   "light-perilla-purple",
+   "antique-fuchsia"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 15,
+  "pct_archive": 0.06,
+  "n_within_painting": 9,
+  "pct_within_painting": 0.04,
+  "rank_pct": 31,
+  "name_first_recorded": 1912,
+  "earliest_match_year": 1545
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXXVII, hue 63″; cited in ISCC-NBS, NBS Circular 553 (1955), block 245, \"grayish reddish purple\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930); cited in ISCC-NBS, NBS Circular 553 (1955)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library and graph: computed LCH and nearest-neighbor distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "By how many units did Ridgway's 1912 reading and the 1955 ISCC-NBS block differ for Dusky mauve?",
+   "choices": [
+    "1.6",
+    "4.8",
+    "6.3",
+    "9.5"
+   ],
+   "answer": "1.6",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a hue matching Dusky mauve appears in our archive earlier than the name itself was recorded.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A 1545 Bronzino portrait carries a hue matching Dusky mauve (Livid Purple), 367 years before the name was ever recorded.",
+  "Dusky mauve (Livid Purple) is one of the rarest colors in our archive, matched in only 15 of 23,781 paintings."
+ ],
+ "words": 309,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field section's presence/rank/decade/painter/country numbers no longer matched data/graph/fieldnotes (stale archive snapshot); replaced with the current fieldnotes facts"
+  ]
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "id": "baddie",
+ "name": "Baddie",
+ "lineage": {
+  "influenced_by": [
+   "Kim Kardashian and the broader Kardashian-Jenner family's 2010s Instagram presence",
+   "hip-hop fashion and beauty traditions"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2015–present"
+ ],
+ "places": [],
+ "garments": [
+  "bodycon fabric",
+  "false lashes",
+  "acrylic nails"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "earlier, more understated Instagram presentation, pushing toward maximal visible effort (contour, lashes, acrylics) as a confidence signal rather than something to downplay.",
+ "revivals": [],
+ "article": "Baddie style crystallized through the mid-2010s as Instagram's visual culture matured around a specific, highly produced look: heavy contour makeup, false lashes, acrylic nails, fitted or bodycon clothing, all captured in a confident, deliberately posed presentation. The aesthetic drew heavily on hip-hop fashion and beauty traditions and was amplified enormously by the Kardashian-Jenner family's own Instagram presence, which normalized a level of visible cosmetic effort — contour lines, lash extensions — that earlier eras of casual social photography hadn't featured so prominently. Baddie's emphasis on confidence and visible glamour positioned it, in the trend cycle that followed, as the aesthetic clean girl would later define itself against: where clean girl marketed itself as effortless and minimal, baddie had never claimed effortlessness as a virtue, treating visible preparation as part of the look's whole point rather than something to hide.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Baddie"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 66% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

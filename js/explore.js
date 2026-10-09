@@ -692,32 +692,18 @@ function cpReadNextHTML(n) {
   if (!list.length) return "";
   return `<section class="rp-next"><h2>Read next</h2>${list.map(x => `<button class="rp-next-row" data-node="${esc(x.to.id)}"><b>${esc(x.to.title)}</b><span>${esc(x.why || x.rel || "")}</span></button>`).join("")}</section>`;
 }
+// David, 2026-10-09: the old primary row (Learn it + Save + Share icons) is gone -- Learn it, Pair with… and
+// the heart now live in the cover's own compact action row (js/richpage.js rpActionRowHTML), and the heart is
+// the one "save" a color page offers (the older bookmark-style isSaved/toggleSave stays for Explore's pins,
+// just not wired here any more). Share moves to the ID card.
 function colorPage(n, tapped) {
-  const c = n.c, w = n.wiki, st = c.id && S.cards[c.id], mine = isMine(st);
+  const c = n.c, w = n.wiki;
   tapped = tapped ? String(tapped).toUpperCase() : null;
-  const saved = isSaved(n.id) || (typeof fvHas === "function" && fvHas(c.h));   // the heart is also "your colors" (js/favs.js)
   const coreSelf = (CORE_NAMES || (typeof coreFallback === "function" ? coreFallback() : [])).find(e => e.n.toLowerCase() === c.n.toLowerCase());
   const entry = { n: c.n, h: c.h, src: (coreSelf && coreSelf.src) || ["app"], also: (coreSelf && coreSelf.also) || [], notes: (coreSelf && coreSelf.notes) || [] };
-  const primary = `<div class="cp-primary-row">
-      ${typeof prQuick === "function" || typeof hmLearnIt === "function" ? `<button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button>` : ""}
-      <button class="icon-btn cp-icon${saved ? " saved" : ""}" data-save aria-label="Save" aria-pressed="${saved}">${saved ? ICON.heartOn : ICON.heart}</button>
-      <button class="icon-btn cp-icon" data-share aria-label="Share">${ICON.share}</button>
-    </div>`;
-  const el = colorDossier(entry, { tapped, node: n, primary, paintHost: `<section class="gl-in" data-glin></section>`,
-    facet: typeof arFacetArt === "function" ? arFacetArt(c) : null, fig: figHTML(c.n), sources: (w && w.sources) || [], codes: codeRows(tapped || c.h), readNext: cpReadNextHTML(n) });
+  const el = colorDossier(entry, { tapped, node: n,
+    facet: typeof arFacetArt === "function" ? arFacetArt(c) : null, codes: codeRows(tapped || c.h) });
   const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => typeof prQuick === "function" ? prQuick({ seed: c }) : hmLearnIt(c);   // js/practice.js: the instant-deck sheet
-  el.querySelector("[data-save]").onclick = e => {
-    const b = e.currentTarget, want = !b.classList.contains("saved");
-    if (isSaved(n.id) !== want) toggleSave(n.id);
-    if (typeof fvPageSet === "function") fvPageSet(el, c.h, c.n, want);   // js/favs.js: the same heart fills "Your colors"
-    b.innerHTML = want ? ICON.heartOn : ICON.heart; b.setAttribute("aria-pressed", want); b.classList.toggle("saved", want);
-  };
-  el.querySelector("[data-share]").onclick = () => {
-    const url = shareURL("color/" + routeSlug(c.n)), text = `${c.n} · ColorHub`;
-    if (navigator.share) navigator.share({ text, url }).catch(() => {});
-    else { try { navigator.clipboard.writeText(url); toast("Copied the link"); } catch (e) {} }
-  };
-  const gi = el.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, c);
   if (typeof learnerLog === "function" && !tapped) learnerLog({ type: "seen", color: c, src: "page" });   // the Learner Model (js/learner.js)
   return el;   // so growFrom (js/core.js, js/home.js hmOpenColor) can grow this page from the tapped honeycomb bubble
 }
@@ -753,17 +739,19 @@ function paintingPage(n) {
   const el = show(`
     ${artTop(n)}
     ${n.img ? `<div class="ptg"><img id="pimg" src="${esc(n.img)}" alt="${esc(n.title)} by ${esc(n.artist)}"><canvas id="pmask"></canvas></div>` : ""}
-    <p class="eyebrow p-type">Painting · ${esc(n.year || "")}</p>
+    <p class="eyebrow p-type">${esc(n.typeLabel || "Painting")}${n.year ? " · " + esc(n.year) : ""}</p>
     <h1 class="p-title">${esc(n.title)}</h1>
-    <p class="p-dek">${esc(n.artist || "")}${n.place ? ` · ${esc(n.place)}` : ""}</p>
+    <p class="p-dek">${n.photographerSlug ? `<button class="aw-link" data-photographer="${esc(n.photographerSlug)}">${esc(n.artist || "")}</button>` : esc(n.artist || "")}${n.place ? ` · ${esc(n.place)}` : ""}</p>
     ${pal.length ? `<div class="palette">${pal.map((p, i) => `<button class="pal" data-pi="${i}" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("")}</div>
       <div class="pal-names">${pal.map((p, i) => { const fam = typeof familyOf === "function" && familyOf(p.h); return `<button class="pal-name" data-pi="${i}" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(p.name)}</b>${fam ? `<span>${esc(fam.head.n)} family</span>` : ""}<em class="mono">${p.h}</em></button>`; }).join("")}</div>
       <p class="fine">Tap a swatch to open its page.</p>${typeof prLearnBtn === "function" ? prLearnBtn(".palette", n.title) : ""}` : `<p class="fine">This painting's palette is being extracted.</p>`}
     ${n.note ? `<p class="p-body">${linkText(n.note)}</p>` : ""}
     ${connSection(n)}
-    ${n.commons ? `<section class="srcs"><h3>Image</h3><ul><li><a href="${esc(n.commons)}" target="_blank" rel="noopener">Wikimedia Commons</a> · ${esc(n.license || "Public domain")}</li></ul></section>` : ""}
+    ${n.commons ? `<section class="srcs"><h3>Image</h3><ul><li><a href="${esc(n.commons)}" target="_blank" rel="noopener">${esc(n.imgSrcLabel || "Wikimedia Commons")}</a> · ${esc(n.license || "Public domain")}</li></ul></section>` : ""}
   `, "article");
   wireArticle(el, n);
+  // Phase 2 (js/photography.js): a photograph's byline opens its photographer's page, same pattern as a painter link
+  const phLink = el.querySelector("[data-photographer]"); if (phLink) phLink.onclick = e => { e.stopPropagation(); if (typeof photographerPage === "function") photographerPage(phLink.dataset.photographer); };
   // L18 H4: the ColorSet verbs for this painting, "On the map" first (js/home.js hmPaintingSet, js/colorset.js csActions)
   if (pal.length && typeof hmPaintingSet === "function" && typeof csActions === "function") { const fine = el.querySelector(".pal-names + .fine"); if (fine) fine.after(csActions(hmPaintingSet(n), { only: ["map", "learn", "play"], back: () => paintingPage(n) })); }
   // highlight where a palette color sits, using the index map

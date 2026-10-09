@@ -1,0 +1,67 @@
+{
+ "id": "baroque-chiaroscuro",
+ "name": "Baroque chiaroscuro",
+ "lineage": {
+  "influenced_by": [
+   "Renaissance tenebrism",
+   "Counter-Reformation church patronage"
+  ],
+  "influences": [
+   "dutch-golden-age",
+   "film-noir"
+  ]
+ },
+ "eras": [
+  "c. 1600–1680"
+ ],
+ "places": [
+  "Rome",
+  "Naples",
+  "Utrecht (the Caravaggisti)"
+ ],
+ "garments": [
+  "velvet and dark silk",
+  "linen shirts catching the light",
+  "pewter and brass props"
+ ],
+ "media": [
+  {
+   "title": "Caravaggio, The Calling of Saint Matthew (1599–1600)",
+   "note": "the paradigm case of the style"
+  }
+ ],
+ "figures": [
+  "Caravaggio",
+  "Artemisia Gentileschi",
+  "Georges de La Tour"
+ ],
+ "reacts_against": "Mannerism's crowded, evenly lit compositions, pulling the eye to one figure with one hard light source instead.",
+ "revivals": [
+  "a constant reference point for film noir and theatrical lighting design ever since"
+ ],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Barroco",
+  "decade_of_origin": "c. 1600 - 1750",
+  "key_motifs": "Dramatic movement, swirling forms, monumental scale, ''chiaroscuro'' (strong light/dark contrast), religious ecstasy, martyrdom, classical mythology, elaborate ornamentation",
+  "key_colours": "Deep, rich colors (crimson, indigo, ochre), dramatic contrasts of light and shadow, extensive use of gold and bronze",
+  "related_aesthetics": "Italian RenaissanceMannerismRococoSpanish Golden Age'''Modern Interpretations:'''AngelcoreRoyalcore2000s 'Modern Baroque'",
+  "key_values": "Opulence, grandeur, sensuousness, drama, movement, tension, emotional exuberance, passion"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Baroque"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 42% of the measured color across 6 wiki photos is below mid-lightness",
+   "mostly muted — about 48% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

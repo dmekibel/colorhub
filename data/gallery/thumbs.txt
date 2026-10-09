@@ -1875,8 +1875,6 @@ Laic/269805.jpg	0,0,1000,985
 Laic/270002.jpg	0,84,1000,1000
 Laic/271417.jpg	88,165,912,896
 Laic/271418.jpg	83,165,912,896
-Laic/271419.jpg	
-Laic/271420.jpg	
 Laic/274209.jpg	0,0,949,1000
 Laic/282029.jpg	
 Laic/282030.jpg	
@@ -23743,7 +23741,6 @@ CSargent%20IMG%208950.jpg	115,97,865,970
 CSargent%20IMG%208949.jpg	140,0,860,947
 CSargent%20IMG%208980.jpg	133,68,933,955
 CLettre%20de%20John%20Singer%20Sargent%20%C3%A0%20Claude%20Monet.jpg	36,0,942,1000
-CLettre%20de%20John%20Singer%20Sargent%20%C3%A0%20Albert%20de%20Belleroche%20avec%20un%20dessin%20de%20Madame%20Gautreau%20qui%20regarde%20par-dessus%20un%20piano.jpg	150,150,850,850
 CNikolai%20Dmitriyevich%20Kuznetsov%2C%20Kalman%20Ze%27ev%20Wissotzky%2C%201896%2C%20Hermitage%20Museum%20%D0%AD%D0%A0%D0%96-2041%3B%20from%20hermitagemuseum.org.jpg	
 CLa%20loge%20or%20l%27avant-sc%C3%A9ne.jpg	
 CPierre-Auguste%20Renoir%20-%20Fleurs%20et%20chats.jpg	

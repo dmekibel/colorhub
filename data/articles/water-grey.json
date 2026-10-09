@@ -1,126 +1,126 @@
 {
- "name": "Water Grey",
- "hex": "#9C8F5B",
- "names": [
-  "Water Grey"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Water Grey, despite the name, is a dull olive-tan, not a grey, and one of the more frequent matches in our entire painting archive.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A grey that isn't grey",
-   "body": "Maerz and Paul's 1930 dictionary dates Water Grey to 1705, plate 14, chip B1 [1]. The ISCC-NBS revision of 1955 files the same chip as \"light olive gray,\" block 91, not as a true grey despite the name [1]. The nearest named neighbor by measured color is [[ecru-olive]], a close match, with [[dull-citrine]] just behind it [2]. Further out, [[dark-beige]] and [[buffy-citrine]] sit in the same small cluster [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a match for Water Grey in 2,216 of 23,781 paintings, about 9.3 percent, more common than 92 percent of the named colors we track [3]. It peaks in the 1700s, in 232 of 3,449 paintings, 1.3 times the rate expected from that century's share of the archive [3]. Inside a painting it most often plays a light tone, in 45 percent of its appearances [3]. Arnoud van Halen used it most: it appears in 28 of his 50 paintings here, 6.4 times his peers' rate [3]. It shares canvases more than chance would predict with colors we call Yellow Stone and Dark Citrine [3]. The earliest archive match dates to 1201, five centuries before Maerz and Paul recorded the name in 1930 [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "1705, per Maerz and Paul (1930)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "ecru-olive",
-   "dull-citrine",
-   "dark-beige",
-   "buffy-citrine"
+  "name": "Water Grey",
+  "hex": "#9C8F5B",
+  "names": [
+    "Water Grey"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 2216,
-  "measured": {
-   "lch": [
-    59.4,
-    29.5,
-    95.6
-   ],
-   "nearest": [
-    [
-     "Ecru-Olive",
-     4.6
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Water Grey, despite the name, is a dull olive-tan, not a grey, and one of the more frequent matches in our entire painting archive.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A grey that isn't grey",
+      "body": "Maerz and Paul's 1930 dictionary dates Water Grey to 1705, plate 14, chip B1 [1]. The ISCC-NBS revision of 1955 files the same chip as \"light olive gray,\" block 91, not as a true grey despite the name [1]. The nearest named neighbor by measured color is [[ecru-olive]], a close match, with [[dull-citrine]] just behind it [2]. Further out, [[dust]] and [[buffy-citrine]] sit in the same small cluster [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a match for Water Grey in 2,216 of 23,781 paintings, about 9.3 percent, more common than 92 percent of the named colors we track [3]. It peaks in the 1700s, in 232 of 3,449 paintings, 1.3 times the rate expected from that century's share of the archive [3]. Inside a painting it most often plays a light tone, in 45 percent of its appearances [3]. Arnoud van Halen used it most: it appears in 28 of his 50 paintings here, 6.4 times his peers' rate [3]. It shares canvases more than chance would predict with colors we call Yellow Stone and Dark Citrine [3]. The earliest archive match dates to 1201, five centuries before Maerz and Paul recorded the name in 1930 [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented",
+      "first_recorded": "1705, per Maerz and Paul (1930)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "ecru-olive",
+      "dull-citrine",
+      "dust",
+      "buffy-citrine"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 2216,
+    "measured": {
+      "lch": [
+        59.4,
+        29.5,
+        95.6
+      ],
+      "nearest": [
+        [
+          "Ecru-Olive",
+          4.6
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Maerz & Paul 1930, ISCC-NBS 1955 entries",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library, nearest-neighbor computation",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What family does the ISCC-NBS system actually file Water Grey under?",
+      "choices": [
+        "Dark grayish yellow",
+        "A true neutral grey",
+        "Deep blue",
+        "Bright pink"
+      ],
+      "answer": "Dark grayish yellow",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Water Grey is a true neutral grey.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Which painter used Water Grey most often in our archive?",
+      "choices": [
+        "Arnoud van Halen",
+        "John Singer Sargent",
+        "Jan Maurits Quinkhard",
+        "Nicolas Lancret"
+      ],
+      "answer": "Arnoud van Halen",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Water Grey turns up in nearly one painting in ten in our archive, despite its washed-out name."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Maerz & Paul 1930, ISCC-NBS 1955 entries",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library, nearest-neighbor computation",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What family does the ISCC-NBS system actually file Water Grey under?",
-   "choices": [
-    "Dark grayish yellow",
-    "A true neutral grey",
-    "Deep blue",
-    "Bright pink"
-   ],
-   "answer": "Dark grayish yellow",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Water Grey is a true neutral grey.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Which painter used Water Grey most often in our archive?",
-   "choices": [
-    "Arnoud van Halen",
-    "John Singer Sargent",
-    "Jan Maurits Quinkhard",
-    "Nicolas Lancret"
-   ],
-   "answer": "Arnoud van Halen",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Water Grey turns up in nearly one painting in ten in our archive, despite its washed-out name."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- },
- "slug": "water-grey",
- "words": 233
+  "slug": "water-grey",
+  "words": 232
 }

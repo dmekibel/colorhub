@@ -1,122 +1,122 @@
 {
- "slug": "neuwieder-green",
- "name": "Neuwieder Green",
- "hex": "#87C89B",
- "names": [
-  "Neuwieder Green"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Neuwieder Green is a light, yellowish green that Maerz and Paul's 1930 dictionary dates to around 1850, likely after the German town of Neuwied, known historically for its dye and chemical works.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A town's name, a tentative date",
-   "body": "Maerz and Paul place this value at plate 17, position B 8, first recorded around 1850, the \"c.\" in their own record signaling that the date is approximate rather than exact [1]. The ISCC-NBS system of 1955 classifies it as a light yellowish green, about 3.4 units from that block's reference chip [2]. Our library's note gives no direct statement that the name refers to Neuwied on the Rhine, so the connection, however likely for a nineteenth-century German dye name, remains unconfirmed here [1].\n\nIts nearest library neighbor is [[celadon|Celadon]], and it sits close to [[cobalt-green|Cobalt Green]], [[baby-green|Baby Green]] and [[seafoam-green|Seafoam Green]] on the same light, yellow-green stretch of the chart [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a color within six units of Neuwieder Green covers at least five per cent of the canvas in only 6 works, as photographed [3]. Two of those six are by Van Gogh, *Roulin's Baby* and a still life of oranges and lemons, both from 1888 and 1889 [3]. It functions mostly as a highlight color and is most over-represented in paintings from Austria [3]. These remain photographs of aged, varnished canvases read as screen colors, not pigment tests [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "likely Neuwied, a German town on the Rhine, though our sources do not state this directly",
-   "first_recorded": "Maerz & Paul, A Dictionary of Color (1930), plate 17 B 8, first recorded c. 1850",
-   "source": "ColorHub color library (Maerz & Paul 1930; ISCC-NBS 1955)"
-  },
-  "aka": [],
-  "siblings": [
-   "celadon",
-   "cobalt-green",
-   "baby-green",
-   "seafoam-green"
+  "slug": "neuwieder-green",
+  "name": "Neuwieder Green",
+  "hex": "#87C89B",
+  "names": [
+    "Neuwieder Green"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#87C89B",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 6,
-  "countries": [
-   {
-    "key": "Austria",
-    "lift": 32.76
-   }
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Neuwieder Green is a light, yellowish green that Maerz and Paul's 1930 dictionary dates to around 1850, likely after the German town of Neuwied, known historically for its dye and chemical works.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A town's name, a tentative date",
+      "body": "Maerz and Paul place this value at plate 17, position B 8, first recorded around 1850, the \"c.\" in their own record signaling that the date is approximate rather than exact [1]. The ISCC-NBS system of 1955 classifies it as a light yellowish green, about 3.4 units from that block's reference chip [2]. Our library's note gives no direct statement that the name refers to Neuwied on the Rhine, so the connection, however likely for a nineteenth-century German dye name, remains unconfirmed here [1].\n\nIts nearest library neighbor is [[celadon|Celadon]], and it sits close to [[cobalt-green|Cobalt Green]], [[baby-green|Baby Green]] and [[lemon-meringue|Seafoam Green]] on the same light, yellow-green stretch of the chart [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a color within six units of Neuwieder Green covers at least five per cent of the canvas in only 6 works, as photographed [3]. Two of those six are by Van Gogh, *Roulin's Baby* and a still life of oranges and lemons, both from 1888 and 1889 [3]. It functions mostly as a highlight color and is most over-represented in paintings from Austria [3]. These remain photographs of aged, varnished canvases read as screen colors, not pigment tests [3]."
+    }
   ],
-  "role": "highlight 67%",
-  "measured": {
-   "lch": [
-    75,
-    34,
-    152
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Maerz & Paul, A Dictionary of Color, plate 17 B 8, first recorded c. 1850",
-   "loc_kind": "entry",
-   "url": null
+  "aside": {
+    "origin": {
+      "named_after": "likely Neuwied, a German town on the Rhine, though our sources do not state this directly",
+      "first_recorded": "Maerz & Paul, A Dictionary of Color (1930), plate 17 B 8, first recorded c. 1850",
+      "source": "ColorHub color library (Maerz & Paul 1930; ISCC-NBS 1955)"
+    },
+    "aka": [],
+    "siblings": [
+      "celadon",
+      "cobalt-green",
+      "baby-green",
+      "lemon-meringue"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: ISCC-NBS block, nearest-match field (data/graph/nodes-m.json; data/library.json)",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#87C89B",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 6,
+    "countries": [
+      {
+        "key": "Austria",
+        "lift": 32.76
+      }
+    ],
+    "role": "highlight 67%",
+    "measured": {
+      "lch": [
+        75,
+        34,
+        152
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does our library's \"c. 1850\" notation tell us about Neuwieder Green's first-recorded date?",
-   "choices": [
-    "That the date is approximate, not exact",
-    "That it was recorded exactly in 1850",
-    "That it predates 1800",
-    "That no date is given at all"
-   ],
-   "answer": "That the date is approximate, not exact",
-   "kind": "pick"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Maerz & Paul, A Dictionary of Color, plate 17 B 8, first recorded c. 1850",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: ISCC-NBS block, nearest-match field (data/graph/nodes-m.json; data/library.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does our library's \"c. 1850\" notation tell us about Neuwieder Green's first-recorded date?",
+      "choices": [
+        "That the date is approximate, not exact",
+        "That it was recorded exactly in 1850",
+        "That it predates 1800",
+        "That no date is given at all"
+      ],
+      "answer": "That the date is approximate, not exact",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources directly confirm that Neuwieder Green is named for the German town of Neuwied.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Neuwieder Green's own dictionary entry only approximates its first-recorded date, c. 1850."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "batch writer",
+    "date": "2026-10-08",
+    "issues": [
+      "Connection to the town of Neuwied is plausible but not directly stated in the sources consulted; flagged as likely, not confirmed.",
+      "lint 2026-10-09"
+    ]
   },
-  {
-   "q": "True or false: our sources directly confirm that Neuwieder Green is named for the German town of Neuwied.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Neuwieder Green's own dictionary entry only approximates its first-recorded date, c. 1850."
- ],
- "status": "checked",
- "checked": {
-  "by": "batch writer",
-  "date": "2026-10-08",
-  "issues": [
-   "Connection to the town of Neuwied is plausible but not directly stated in the sources consulted; flagged as likely, not confirmed.",
-   "lint 2026-10-09"
-  ]
- },
- "words": 223
+  "words": 223
 }

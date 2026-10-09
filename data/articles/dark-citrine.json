@@ -1,164 +1,163 @@
 {
- "slug": "dark-citrine",
- "name": "Dark Citrine",
- "hex": "#776B39",
- "names": [
-  "Dark Citrine"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Dark Citrine is a dark shade of [[citrine|citrine]], one of Robert Ridgway's working names built by the plain grammar of modifier plus base color.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier, not a new color",
-   "body": "Dark Citrine joins the modifier *dark* to the base color [[citrine]], a dull yellow-green named for the citrine quartz [1][4]. Ridgway's 1912 plate IV, hue 21, places it well down his tone scale, measured at lightness 45 and a moderate chroma of 30 in LCH terms [1][4]. The ISCC-NBS system groups the same hue block, 107, under 'moderate yellowish brown,' a Delta-E of 9.1 from Ridgway's own point, a reminder that the two systems sort by different rules even when they land in the same neighborhood [2]. The nearest named colors on file are [[khaki-olive]] and [[khaki-grey]], at 4.5 and 4.5 ΔE [1][4]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this shade, as photographed, in 9.7% of 23,781 paintings, 2,307 paintings; within a single canvas it reads as a distinct area in 1,187 of them [3]. That ranks it more common than 92% of the archive's named colors [3]. It peaks in the 1700s, found in 6.8% of that century's 3,449 paintings, 1.4 times the expected rate [3]. Inside a painting it most often plays a light, by lightness rank, in 31% of its appearances [3]. Peter Snayers is its most devoted painter, using it in 9 of his 16 works here, 7.6 times the baseline rate of the museums those paintings come from [3]. The earliest dated appearance is a painting from 916, 996 years before the name's first documented record in 1912; the archive's early centuries are thin, so this is a floor and not a first, and the match is a look-alike hue, not proof of pigment [3]. It shares canvases with [[silver-fern]] and [[codium-fragile-seaweed]] more often than chance, lifts of 5.8 and 4.5 [3]. In printed English the word 'citrine' peaks in the 1920s, counting every sense of the word, so a name that is also a mineral and a fruit can mislead [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the base color citrine, with the modifier 'dark'",
-   "first_recorded": "1912 (Ridgway, Color Standards and Nomenclature)",
-   "source": "Ridgway, Color Standards and Nomenclature"
-  },
-  "aka": [],
-  "siblings": [
-   "khaki-olive",
-   "khaki-grey",
-   "spanish-bistre",
-   "yellowish-olive"
+  "slug": "dark-citrine",
+  "name": "Dark Citrine",
+  "hex": "#776B39",
+  "names": [
+    "Dark Citrine"
   ],
-  "parent": "citrine",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "measured": {
-   "lch": [
-    45.3,
-    29.6,
-    94.9
-   ],
-   "nearest_iscc": [
-    "moderate yellowish brown",
-    9.1
-   ],
-   "nearest": [
-    [
-     "Khaki olive",
-     4.5
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Dark Citrine is a dark shade of [[citrine|citrine]], one of Robert Ridgway's working names built by the plain grammar of modifier plus base color.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier, not a new color",
+      "body": "Dark Citrine joins the modifier *dark* to the base color [[citrine]], a dull yellow-green named for the citrine quartz [1][4]. Ridgway's 1912 plate IV, hue 21, places it well down his tone scale, measured at lightness 45 and a moderate chroma of 30 in LCH terms [1][4]. The ISCC-NBS system groups the same hue block, 107, under 'moderate yellowish brown,' a Delta-E of 9.1 from Ridgway's own point, a reminder that the two systems sort by different rules even when they land in the same neighborhood [2]. The nearest named colors on file are [[khaki-olive]] and [[khaki-olive]], at 4.5 and 4.5 ΔE [1][4]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this shade, as photographed, in 9.7% of 23,781 paintings, 2,307 paintings; within a single canvas it reads as a distinct area in 1,187 of them [3]. That ranks it more common than 92% of the archive's named colors [3]. It peaks in the 1700s, found in 6.8% of that century's 3,449 paintings, 1.4 times the expected rate [3]. Inside a painting it most often plays a light, by lightness rank, in 31% of its appearances [3]. Peter Snayers is its most devoted painter, using it in 9 of his 16 works here, 7.6 times the baseline rate of the museums those paintings come from [3]. The earliest dated appearance is a painting from 916, 996 years before the name's first documented record in 1912; the archive's early centuries are thin, so this is a floor and not a first, and the match is a look-alike hue, not proof of pigment [3]. It shares canvases with [[silver-fern]] and [[seaweed-green]] more often than chance, lifts of 5.8 and 4.5 [3]. In printed English the word 'citrine' peaks in the 1920s, counting every sense of the word, so a name that is also a mineral and a fruit can mislead [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the base color citrine, with the modifier 'dark'",
+      "first_recorded": "1912 (Ridgway, Color Standards and Nomenclature)",
+      "source": "Ridgway, Color Standards and Nomenclature"
+    },
+    "aka": [],
+    "siblings": [
+      "khaki-olive",
+      "spanish-bistre",
+      "yellowish-olive"
     ],
-    [
-     "Khaki Grey",
-     4.5
-    ],
-    [
-     "Spanish Bistre",
-     5.0
-    ],
-    [
-     "Yellowish Olive",
-     5.2
+    "parent": "citrine",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "measured": {
+      "lch": [
+        45.3,
+        29.6,
+        94.9
+      ],
+      "nearest_iscc": [
+        "moderate yellowish brown",
+        9.1
+      ],
+      "nearest": [
+        [
+          "Khaki olive",
+          4.5
+        ],
+        [
+          "Khaki Grey",
+          4.5
+        ],
+        [
+          "Spanish Bistre",
+          5.0
+        ],
+        [
+          "Yellowish Olive",
+          5.2
+        ]
+      ]
+    },
+    "n_present": 1187,
+    "role_top": {
+      "role": "light",
+      "pct": 31
+    },
+    "painter": {
+      "name": "Peter Snayers",
+      "n": 9,
+      "of": 16,
+      "lift": 7.6
+    },
+    "first_seen": {
+      "year": 916,
+      "years_before_record": 996
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Nomenclature, 1912, plate IV, hue 21",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "ISCC-NBS, National Bureau of Standards Circular 553, 1955, block 107 (\"moderate yellowish brown\")",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub color graph: computed LCH/Munsell values and modifier-name cross-reference",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What quartz gives the base color 'citrine' its name?",
+      "choices": [
+        "Citrine quartz",
+        "Topaz",
+        "Amber",
+        "Jasper"
+      ],
+      "answer": "Citrine quartz",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Dark Citrine's Delta-E distance from its nearest ISCC-NBS block is small, under 2.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Which painter in our archive paints Dark Citrine far more often than his peers?",
+      "choices": [
+        "Peter Snayers",
+        "Paul Cezanne",
+        "Claude Monet",
+        "Gustav Klimt"
+      ],
+      "answer": "Peter Snayers",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Dark Citrine turns up in almost one painting in ten.",
+    "Peter Snayers reaches for it more than seven times as often as his peers."
+  ],
+  "words": 333,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  },
-  "n_present": 1187,
-  "role_top": {
-   "role": "light",
-   "pct": 31
-  },
-  "painter": {
-   "name": "Peter Snayers",
-   "n": 9,
-   "of": 16,
-   "lift": 7.6
-  },
-  "first_seen": {
-   "year": 916,
-   "years_before_record": 996
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Ridgway, Color Standards and Nomenclature, 1912, plate IV, hue 21",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "ISCC-NBS, National Bureau of Standards Circular 553, 1955, block 107 (\"moderate yellowish brown\")",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub color graph: computed LCH/Munsell values and modifier-name cross-reference",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What quartz gives the base color 'citrine' its name?",
-   "choices": [
-    "Citrine quartz",
-    "Topaz",
-    "Amber",
-    "Jasper"
-   ],
-   "answer": "Citrine quartz",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Dark Citrine's Delta-E distance from its nearest ISCC-NBS block is small, under 2.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Which painter in our archive paints Dark Citrine far more often than his peers?",
-   "choices": [
-    "Peter Snayers",
-    "Paul Cezanne",
-    "Claude Monet",
-    "Gustav Klimt"
-   ],
-   "answer": "Peter Snayers",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Dark Citrine turns up in almost one painting in ten.",
-  "Peter Snayers reaches for it more than seven times as often as his peers."
- ],
- "words": 334,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

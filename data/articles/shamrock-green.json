@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A vivid green, named for Ireland's emblem",
-   "body": "Ridgway's 1912 plates give Shamrock Green at hue 33′′, tone i, on plate XXXII, and the Inter-Society Color Council's 1955 census files it, in block 131, as a vivid green, Munsell 3.0G 5.6/9.4 [1]. The same ISCC-NBS block also holds Irish-themed near-duplicates, *Blarney*, *Killarney*, and *Emerald Isle*, and Maerz and Paul date Killarney to 1912 [1].\n\nIts nearest library neighbor is [[jade]], about 3.2 units away, with the generic names [[greenish]] and [[green]] close behind [1]. The name follows [[shamrock]], Ireland's three-leafed emblem, though none of our sources date the pairing itself, and the hex code alone cannot settle it [1]."
+   "body": "Ridgway's 1912 plates give Shamrock Green at hue 33′′, tone i, on plate XXXII, and the Inter-Society Color Council's 1955 census files it, in block 131, as a vivid green, Munsell 3.0G 5.6/9.4 [1]. The same ISCC-NBS block also holds Irish-themed near-duplicates, *Blarney*, *Killarney*, and *Emerald Isle*, and Maerz and Paul date Killarney to 1912 [1].\n\nIts nearest library neighbor is [[jade]], about 3.2 units away, with [[green]] close behind at 4.0 [1]. The name follows [[shamrock]], Ireland's three-leafed emblem, though none of our sources date the pairing itself, and the hex code alone cannot settle it [1]."
   },
   {
    "id": "field",
@@ -29,7 +29,8 @@
   "aka": [],
   "siblings": [
    "jade",
-   "shamrock"
+   "shamrock",
+   "spanish-green"
   ],
   "parent": null,
   "children": [],
@@ -109,7 +110,7 @@
  "openers": [
   "Shamrock Green appears in just one of our 23,781 paintings — a 1917 Swiss ruin scene, used as a mid-tone."
  ],
- "words": 205,
+ "words": 203,
  "status": "checked",
  "checked": {
   "by": "checker",

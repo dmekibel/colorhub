@@ -1,0 +1,42 @@
+{
+ "id": "fairy-grunge",
+ "name": "Fairy Grunge",
+ "lineage": {
+  "influenced_by": [
+   "fairycore",
+   "grunge"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2020–present"
+ ],
+ "places": [],
+ "garments": [
+  "sheer dark fabric",
+  "ripped tights",
+  "butterfly clips"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "fairycore's unbroken prettiness, deliberately smudging and distressing it to add a darker, more lived-in edge.",
+ "revivals": [],
+ "article": "Fairy grunge emerged on TikTok around 2020–21 as a direct, openly stated fusion of two aesthetics that had been circulating separately: fairycore's ethereal, flower-crown softness and grunge's dark, distressed texture. The combination — smudged black eyeliner paired with butterfly wings, ripped tights under sheer fabric — reads as a kind of corrective to fairycore's unbroken sweetness, adding grunge's grit without abandoning fairycore's fantastical imagery altogether. Like several other recent internet-aesthetic fusions on this list (rococopunk is another), fairy grunge is best understood not as an organic subculture with its own independent history but as a moodboard-level combination of two already-named aesthetics, assembled and circulated within internet fashion-content culture rather than growing out of any lived scene.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Fairy Grunge"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 63% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 95% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

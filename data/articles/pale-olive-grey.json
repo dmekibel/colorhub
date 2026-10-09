@@ -1,134 +1,134 @@
 {
- "slug": "pale-olive-grey",
- "name": "Pale olive grey",
- "hex": "#C7C8AF",
- "names": [
-  "Pale olive grey"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Pale olive grey is a light, dusty khaki, the library's lightened variant of [[olive-grey]], and our archive finds it in one painting in sixteen.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier on an existing name",
-   "body": "The nearest named color on file is [[corydalis-green]], 4.3 ΔE off [1]. Ridgway's 1912 atlas places it at plate LI, and the ISCC-NBS system of 1955 files the same patch as yellowish gray, about 5.9 units away in CIEDE2000 [1]. Measured in LCH it has lightness 80, chroma 13 and hue 111 degrees, close to [[beige]] and [[ecru]] [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive, a match appears in 1,171 of 23,781 paintings, about 4.9 percent, as photographed, making it one of the more common named colors we track; the within-painting lens finds it in 846 [2]. That is ahead of 88 percent of our named colors [2]. It is most often a light tone, in 51 percent of its appearances [2]. It peaks in the 1800s, in 406 of 8,345 paintings, 4.9 percent of the 8,345 paintings (406 of them) we have from that century, about 1.4 times the archive's typical rate [2]. Eugène Boudin is its most devoted painter, carrying it in 8 of his 33 archived works, 3.8 times the typical rate, and it is also over-represented in British paintings, 88 of 593, about 2.5 times what would be expected [2]. It shares canvases more than chance would predict with [[light-celandine-green]] and [[leek-green]] [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "modifier grammar: pale + olive-grey",
-   "first_recorded": "Ridgway, Color Standards and Nomenclature, 1912, plate LI; ISCC-NBS, 1955",
-   "source": "ColorHub color library and Color Graph"
-  },
-  "aka": [],
-  "siblings": [
-   "corydalis-green",
-   "celandine-green",
-   "pale-olivine",
-   "greenish-glaucous"
+  "slug": "pale-olive-grey",
+  "name": "Pale olive grey",
+  "hex": "#C7C8AF",
+  "names": [
+    "Pale olive grey"
   ],
-  "parent": "olive-grey",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 1171,
-  "painters": [
-   {
-    "name": "Eugène Boudin",
-    "hits": 8,
-    "n": 33,
-    "lift": 3.8
-   }
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Pale olive grey is a light, dusty khaki, the library's lightened variant of [[olive-grey]], and our archive finds it in one painting in sixteen.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier on an existing name",
+      "body": "The nearest named color on file is [[corydalis-green]], 4.3 ΔE off [1]. Ridgway's 1912 atlas places it at plate LI, and the ISCC-NBS system of 1955 files the same patch as yellowish gray, about 5.9 units away in CIEDE2000 [1]. Measured in LCH it has lightness 80, chroma 13 and hue 111 degrees, close to [[beige]] and [[ecru]] [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive, a match appears in 1,171 of 23,781 paintings, about 4.9 percent, as photographed, making it one of the more common named colors we track; the within-painting lens finds it in 846 [2]. That is ahead of 88 percent of our named colors [2]. It is most often a light tone, in 51 percent of its appearances [2]. It peaks in the 1800s, in 406 of 8,345 paintings, 4.9 percent of the 8,345 paintings (406 of them) we have from that century, about 1.4 times the archive's typical rate [2]. Eugène Boudin is its most devoted painter, carrying it in 8 of his 33 archived works, 3.8 times the typical rate, and it is also over-represented in British paintings, 88 of 593, about 2.5 times what would be expected [2]. It shares canvases more than chance would predict with [[light-celandine-green]] and [[leek-green]] [2]."
+    }
   ],
-  "measured": {
-   "lch": [
-    79.9,
-    13.2,
-    110.6
-   ],
-   "munsell_plate": "Ridgway 1912, plate LI, hue 23''''' ",
-   "iscc_nbs": {
-    "name": "yellowish gray",
-    "de2000": 5.9
-   },
-   "nearest": [
-    [
-     "Corydalis Green",
-     4.3
+  "aside": {
+    "origin": {
+      "named_after": "modifier grammar: pale + olive-grey",
+      "first_recorded": "Ridgway, Color Standards and Nomenclature, 1912, plate LI; ISCC-NBS, 1955",
+      "source": "ColorHub color library and Color Graph"
+    },
+    "aka": [],
+    "siblings": [
+      "corydalis-green",
+      "celandine-green",
+      "pale-olivine",
+      "pale-green-grey"
     ],
-    [
-     "Celandine Green",
-     4.6
+    "parent": "olive-grey",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 1171,
+    "painters": [
+      {
+        "name": "Eugène Boudin",
+        "hits": 8,
+        "n": 33,
+        "lift": 3.8
+      }
     ],
-    [
-     "Pale Olivine",
-     4.8
-    ],
-    [
-     "Greenish Glaucous",
-     5.1
+    "measured": {
+      "lch": [
+        79.9,
+        13.2,
+        110.6
+      ],
+      "munsell_plate": "Ridgway 1912, plate LI, hue 23''''' ",
+      "iscc_nbs": {
+        "name": "yellowish gray",
+        "de2000": 5.9
+      },
+      "nearest": [
+        [
+          "Corydalis Green",
+          4.3
+        ],
+        [
+          "Celandine Green",
+          4.6
+        ],
+        [
+          "Pale Olivine",
+          4.8
+        ],
+        [
+          "Greenish Glaucous",
+          5.1
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which Ridgway 1912 plate carries Pale olive grey's hue?",
+      "choices": [
+        "Plate LI",
+        "Plate XVII",
+        "Plate XXXIV",
+        "Plate XLII"
+      ],
+      "answer": "Plate LI",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Pale olive grey is one of the rarer named colors in our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pale olive grey turns up in British paintings at about 2.5 times our archive's overall rate."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Field notes named the wrong painter and stat (claimed Willem van de Velde the Elder, 8/14, over 9x; real fieldnotes data (data/graph/fieldnotes) show Eugène Boudin, 8/33, 3.8x) and the wrong painting count/percentage and companion colors; corrected to the real painter, counts and companions.",
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which Ridgway 1912 plate carries Pale olive grey's hue?",
-   "choices": [
-    "Plate LI",
-    "Plate XVII",
-    "Plate XXXIV",
-    "Plate XLII"
-   ],
-   "answer": "Plate LI",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Pale olive grey is one of the rarer named colors in our painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Pale olive grey turns up in British paintings at about 2.5 times our archive's overall rate."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Field notes named the wrong painter and stat (claimed Willem van de Velde the Elder, 8/14, over 9x; real fieldnotes data (data/graph/fieldnotes) show Eugène Boudin, 8/33, 3.8x) and the wrong painting count/percentage and companion colors; corrected to the real painter, counts and companions.",
-   "lint 2026-10-09"
-  ]
- },
- "words": 235
+  "words": 235
 }

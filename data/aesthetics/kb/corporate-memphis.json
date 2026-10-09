@@ -1,0 +1,55 @@
+{
+ "id": "corporate-memphis",
+ "name": "Corporate Memphis",
+ "lineage": {
+  "influenced_by": [
+   "Memphis Group design",
+   "Pop Art's flat commercial color",
+   "flat-design app illustration trends"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 2017–present"
+ ],
+ "places": [
+  "startup/tech marketing websites"
+ ],
+ "garments": [
+  "not a fashion look — an illustration style"
+ ],
+ "media": [
+  {
+   "title": "Facebook/Meta, Slack and countless startup landing pages (2017–on)",
+   "note": "the style's main vehicle"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "stock photography's perceived fakeness, offering illustrated, deliberately \"diverse\"-looking flat figures instead — a solution later widely mocked as having become just as generic.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Alegria, Big Tech Art Style, Blob Web, Globohomo, Humans of Flat",
+  "decade_of_origin": "Late 2010s",
+  "key_motifs": "Flat vector illustrations, disproportionate bodies (small heads, bendy limbs), pastel or vibrant solid colors, lack of facial features, geometric shapes",
+  "key_colours": "Blue, purple, yellow, pastel tones",
+  "related_aesthetics": "Claymorphism\nFlat Design\nMinimalism\nNeubrutalism\nMemphis Design (namesake)",
+  "key_values": "Inclusivity, minimalism, scalability, friendliness, mass appeal |related_aesthetics=Claymorphism\nFlat Design\nMinimalism\nNeubrutalism\nMemphis Design (namesake)"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Corporate_Memphis"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "light — about 66% of the measured color is pale or near-white",
+   "mostly muted — about 47% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

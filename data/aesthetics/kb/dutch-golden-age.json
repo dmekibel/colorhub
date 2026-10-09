@@ -1,0 +1,67 @@
+{
+ "id": "dutch-golden-age",
+ "name": "Dutch Golden Age interior",
+ "lineage": {
+  "influenced_by": [
+   "Baroque chiaroscuro",
+   "Protestant Dutch merchant culture's taste for domestic scenes over religious commissions"
+  ],
+  "influences": [
+   "tonalism"
+  ]
+ },
+ "eras": [
+  "c. 1609–1702 (roughly the Dutch Republic's peak)"
+ ],
+ "places": [
+  "Delft",
+  "Amsterdam",
+  "Haarlem"
+ ],
+ "garments": [
+  "black wool and starched white linen (the burgher uniform)",
+  "lace collars"
+ ],
+ "media": [
+  {
+   "title": "Johannes Vermeer, Girl with a Pearl Earring (c. 1665)",
+   "note": ""
+  },
+  {
+   "title": "Johannes Vermeer, The Milkmaid (c. 1658)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Johannes Vermeer",
+  "Rembrandt van Rijn",
+  "Pieter de Hooch"
+ ],
+ "reacts_against": "the large-scale religious and mythological painting that dominated Catholic Europe; a newly Protestant, merchant-funded market favored small domestic scenes instead.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "De Gouden Eeuw",
+  "decade_of_origin": "c. 1600 - 1700",
+  "key_motifs": "Genre scenes (domestic life), individual and group portraits, still lifes (vanitas, floral, banquet), landscapes, seascapes",
+  "key_colours": "Somber, earthy tones (browns, ochres, grays), masterful use of light and shadow (chiaroscuro), accents of brilliant color",
+  "related_aesthetics": "BaroqueDanish Golden AgeFlemish BaroqueNorthern RenaissanceSpanish Golden Age",
+  "key_values": "Realism, observation of daily life, Protestant morality, civic pride, prosperity, domesticity, scientific curiosity"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Dutch_Golden_Age"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 58% of the measured color across 6 wiki photos is below mid-lightness",
+   "mostly muted — about 81% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

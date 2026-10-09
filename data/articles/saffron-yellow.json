@@ -1,412 +1,412 @@
 {
- "slug": "saffron-yellow",
- "name": "Saffron Yellow",
- "hex": "#D09B2C",
- "names": [
-  "Saffron Yellow"
- ],
- "tier": "pigment",
- "depth": "epic",
- "lede": "Saffron yellow is the warm, orange-leaning yellow of the world's costliest spice, the dried threads of one autumn crocus, which dyed Roman gowns, stood in for gold in medieval manuscripts and gave its name to number 68 in Werner's chart of yellows. The threads themselves are crimson; the yellow only comes out in the water.",
- "sections": [
-  {
-   "id": "threads",
-   "title": "Red threads, yellow dye",
-   "body": "Saffron is the dried stigmas of *Crocus sativus*, three crimson threads from the center of a violet autumn flower [5]. The threads are red, not yellow, and Victoria Finlay, who went looking for a source of the dye, reports that genuine saffron should be crimson in the packet [6]. Steeped as a tea, it looks deep red with a thin layer of gold on top [6].\n\nSo \"saffron yellow\" names the color of what saffron does, not of what saffron is. As a color it teeters between yellow and orange [5]. It is warmer than [[gamboge-yellow]] and less red than [[deep-saffron]]. The swatch on this page is a chart color, taken up below [21]."
-  },
-  {
-   "id": "material",
-   "title": "The most expensive colorant",
-   "body": "The flower is sterile, so no wild saffron exists, and nobody knows for certain when or where it was first cultivated [5]. Each bloom lasts a day, the whole crop comes in about two weeks, and every stigma is picked out by hand because attempts to mechanize the job have failed [5].\n\nBooks disagree on how many flowers make a unit of spice. St Clair gives 31,800 to 45,500 flowers to the pound [5]. Finlay, quoting an Iranian producer, gives 170,000 flowers to the kilo, about 77,000 to the pound [6]. Both agree on the point that matters: each flower yields very little.\n\nThe price follows. In 2013 an ounce of saffron cost $364, against $8 for vanilla and $3.75 for cardamom [5]. A high price invites fraud. Dealers have added butter for weight, safflower, or artificially reddened yellow stamens [6][1]. St Clair reports that in Nuremberg in 1444 a man named Jobst Finderlers was burned alive for adulterating his saffron with marigold [5]. A shipment is a target too. In 1374 nobles hijacked 800 pounds of saffron bound for Basel, which began the so-called Saffron War [5][6]. Books disagree on its length: St Clair says 14 months, Finlay more than three [5][6].\n\nWhere it grows has moved. St Clair says Spain grew it from at least 961 [5]. Finlay gives two stories for La Mancha, an Arab introduction in the eighth century or a Roman one, and neither is documented [6]. By Finlay's account, Iran produced far more than Spain, and its biggest firm alone sold more than five times Spain's total crop [6]. St Clair adds that Spain now imports Iranian saffron [5]."
-  },
-  {
-   "id": "antiquity",
-   "title": "Saffron in the ancient world",
-   "body": "The oldest pictures of saffron are Aegean [4]. A wall painting from Akrotiri on Santorini shows a woman filling a basket with stigmas [4]. Pastoureau notes that in the Minoan period queens and princesses wore saffron-yellow clothing as a mark of rank [4]. The Greeks had a word for the shade, *krokinos*, though Greek color words conveyed light and saturation more than a fixed hue [3].\n\nRome made saffron a trade. By the end of the republic, dyers formed guilds by color, and one of them, the *crocotarii*, worked only in saffron [1]. Saffron was the dearest of the Roman yellow dyes, used for women's clothing such as the *stola crocota*, a long pleated gown, and for the dress of certain priests [1]. It gave splendid, slightly orange yellows, but it was not very stable [1]. Cheaper weld, the other great yellow dye, gave very solid tones that were less bright and less orange [1].\n\nThe Latin word *croceus*, from *crocus*, meant a bright orange-leaning yellow like saffron, and it carried ideas of beauty, prestige and femininity [3]. Isidore of Seville, writing in the sixth and seventh centuries, mentions yellow mainly to explain where *croceus* comes from [27].\n\nThat femininity had consequences. In his attacks on Publius Clodius, Cicero describes the disguise Clodius wore in the Bona Dea affair, a *crocata*, a saffron-yellow gown [2]. For Cicero the dress proved that Clodius was effeminate and unfit for office [2]. Later Latin writers mocked men in yellow in the same way [2].\n\nOvid offers a gentler picture. In a passage Pastoureau quotes, a dye resembling saffron is the color of Aurora's cloak at dawn [1]. Even in later centuries, cheap yellow cloth could make the wearer look wan unless it was dyed with costly saffron [24].\n\nGage reports that the ninth-century Syrian writer Job of Edessa listed saffron-yellow, with red, green and golden-yellow, as the intermediate colors between white and black [26]."
-  },
-  {
-   "id": "walden",
-   "title": "Saffron Walden",
-   "body": "England grew saffron for centuries. A legend says a pilgrim brought a single corm from the Holy Land in his hat, or in a hollow staff, in the reign of Edward III [5]. Finlay doubts this: if the pilgrim existed, he more probably picked up corms in northern Greece, and a death penalty makes a better story [7].\n\nWhat is documented is the town. Chipping Walden in Essex changed its name to Saffron Walden in the sixteenth century, and its coat of arms gained three crocuses [5][7]. Fortunes swung with the weather and the market. Demand fell in 1540 when imports became cheaper, and in 1571 farmers found their crocuses weakened by overcropping [7]. A royal decree of 1575 ordered two days and nights in the stocks for anyone who threw saffron flowers into the river in time of flood [7]. In 1665 the price climbed above four pounds a pound, up from about two a few years before, after a story that saffron cured the plague [7].\n\nThe trade died out all the same. When George I visited a nearby great house in 1720, the town had no local saffron to offer him [7]. Only the town's name and arms still record the crop."
-  },
-  {
-   "id": "manuscripts",
-   "title": "Saffron in the scriptorium",
-   "body": "For medieval painters saffron was a yellow paint and a poor person's gold. Ball notes that a yellow lake from saffron, mixed with glair (beaten egg white), gave illuminators a strong, pure, transparent yellow [11]. Finlay tried the recipe: steeped overnight in egg white, it turned the color of a blood orange and was luminous on the page, though not very like gold [7].\n\nThe Pigment Compendium counts the recipes [10]. Clarke has listed 24 from manuscripts written before 1500, and takes their number as a sign of how much illuminators valued the color [10]. A Bolognese manuscript of the fifteenth century mixes it with lead white and gum water to draw gold flowers on paper [10]. A Paduan manuscript, written between the late sixteenth and early seventeenth centuries, says to wrap the saffron in cloth and soak it in white vinegar, adding a little gum or beaten egg white [10]. It was also glazed over orpiment, as in a painting from the early fourteenth century [10]. The Paterson dictionary adds another ruse, imitation gold leaf made from tinfoil painted with saffron [20].\n\nSaffron also made greens. Cennino Cennini, as Ball relays him, called a blend of saffron and verdigris the most perfect grass green imaginable [11]. In Persia, miniaturists added saffron to verdigris, and Finlay credits Dr. Barkeshli with showing that this kept the green from corroding the paper [19][4]. The sixteenth-century artist Mir Ali Heravi advised adding a small amount of saffron to make the verdigris stable [19]. Saffron itself, St Clair notes, is not particularly colorfast [5]."
-  },
-  {
-   "id": "impostors",
-   "title": "Impostors and namesakes",
-   "body": "Because saffron is dear, many things have borrowed its name. The best known is [[flower:safflower|safflower]], *Carthamus tinctorius*, a thistle-like plant whose dried petals resemble saffron and were sometimes sold fraudulently as it [1]. Its nickname was \"bastard saffron\", and it dyed reds and orange-leaning yellows that were beautiful but not very resistant to light [1][9]. The Pigment Compendium warns that the literature has long confused the two, so an old recipe that says \"saffron\" may mean safflower [10].\n\nOther namesakes are mineral. Antimonial saffron was an old name for an antimony sulfide [10]. *Crocus martis*, which Ball glosses as \"Mars yellow\", was the alchemists' name for oxidized iron [12]. In the early seventeenth century Sir Theodore de Mayerne used the name, and even plain \"saffron\", for a product he made clear was red [12]. Our name list keeps [[crocus-martis]] as a dull grey-brown rose [21]. The scarlet-orange mineral crocoite was named from the Greek *krokos*, saffron, and led to the discovery of chromium, so chrome yellow, which Van Gogh fell for, descends from the same word [14].\n\nSynthetic dyes took over the role. In 1845 silk dyers in Lyon began using picric acid, whose crystals dye silk a saffron hue, and by 1851 their yellow silk was on show at the Great Exhibition in London [13]."
-  },
-  {
-   "id": "robes",
-   "title": "Saffron robes and a flag",
-   "body": "The word has also traveled into religion and politics. Coles reports that in both China and India the color we call orange took its name from saffron rather than from the fruit [18]. In Buddhism, he adds, saffron orange is the color of illumination [18]. Pastoureau mentions the tradition that the Buddha's robe began as a plain death shroud [25].\n\nDespite the name, saffron almost never colors the robes. Finlay asked where Tibetan monks got their dye and found that robes were mostly dyed with turmeric, a cheap spice, and Thai monks often color theirs with jackfruit [8]. None of the natural ones she met used saffron [8]. St Clair agrees that turmeric or jackfruit is used, since saffron itself is far too costly [5]. The \"saffron robe\" is a color word, not an ingredient.\n\nIndia's flag keeps the word for its top band. When the flag was adopted in 1947, S. Radhakrishnan explained that the saffron denotes renunciation or disinterestedness; today it is read as courage and sacrifice as well [5]. For a brighter, redder orange of that name, see [[deep-saffron]]."
-  },
-  {
-   "id": "charts",
-   "title": "A color in the naturalists' charts",
-   "body": "The name reached natural science through a mineralogy handbook [15]. In Werner's 1821 nomenclature, as edited by Patrick Syme, number 68 among the yellows is Saffron Yellow [15]. Syme says it is gamboge yellow mixed with gallstone yellow in about equal parts, and he points to the tail coverts of the golden pheasant, the anthers of the saffron crocus, and the mineral sulphate of magnesia [15]. Syme's own ingredients are [[gamboge-yellow]] and [[gallstone-yellow]] [15]. By measured distance, the nearest names to this swatch are [[forsythia]], [[goldenrod]] and [[mustard]], at 2.9, 3.6 and 4.7 CIEDE2000 units [21].\n\nSyme took the term from the English edition of Willdenow's textbook, along with bluish green, lilac and blackish grey [16]. The chart then passed on. Ridgway's 1886 *Nomenclature of Colors for Naturalists* kept at least 19 of Syme's terms, saffron yellow among them [16]. Within Syme's own pages the color is a building block: Sap Green is a mix of emerald green, a good deal of saffron yellow and a little chestnut brown, while King's Yellow is mostly gamboge yellow with a touch of saffron [17]. Our library also lists the name in Maerz and Paul (1930, as cited by the NBS), in RAL (1927) and in ISCC-NBS (1955), whose nearest category to the swatch is \"moderate orange yellow\" [21].\n\nTreat every screen swatch with suspicion. The Werner sample has aged, RAL's saffron yellow is lighter and more orange (about #F6A950), and the hex shown here is one approximation among several [21]. None of them is the spice, whose threads are crimson [6]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "We searched our archive of 23,781 paintings for this swatch [22]. A color within six units of it covers at least five per cent of the canvas in 394 of them, about 1.7 per cent [22]. All of this is as photographed: museum photographs of aged, varnished paintings, so a match is a screen color and not a pigment test [22].\n\nThe strongest pattern is geographic. It turns up in 59 of 721 Indian works in the archive, about five times the archive rate, and in the Pahari and Rajput schools it reaches 20 of 118 and 17 of 97, roughly ten times the average [22]. Japan is only slightly above the average, at 15 of 698 [22]. The color takes up most of the canvas in Maruyama Ōkyo's [[painting:cma-159733|Heron on a Willow Branch]], about 73 per cent, though that is likely a ground rather than a dye [22].\n\nBy date it peaks in the 1820s, in 63 of 731 paintings, five times the archive's rate [22]. One painter may account for part of that spike: [[painter:george-dawe|Dawe]] has it in 15 of 50 works, 18 times the archive rate [22]. The 1200s and 1300s are a second bump, at 7 of 142 and 12 of 251 paintings [22].\n\nIn printed English the phrase *saffron yellow* peaks around 1900, after rising fastest in the 1840s [23]. By the within-painting lens it usually plays an accent, in 76 per cent of the 484 paintings that carry it [22]. Its usual company is [[marigold]] and [[mustard]], the same palette of spice and flower [22]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the saffron crocus, Crocus sativus (stigmas used as spice and dye)",
-   "first_recorded": "Roman dyeing guild of the crocotarii; as a chart color, Werner/Syme 1821 no. 68",
-   "source": "Pastoureau, Yellow; Baty, Nature's Palette; St Clair, The Secret Lives of Colour"
-  },
-  "aka": [
-   "crocus yellow",
-   "croceus (Latin)",
-   "krokinos (Greek)"
+  "slug": "saffron-yellow",
+  "name": "Saffron Yellow",
+  "hex": "#D09B2C",
+  "names": [
+    "Saffron Yellow"
   ],
-  "siblings": [
-   "deep-saffron",
-   "gamboge-yellow",
-   "gallstone-yellow"
+  "tier": "pigment",
+  "depth": "epic",
+  "lede": "Saffron yellow is the warm, orange-leaning yellow of the world's costliest spice, the dried threads of one autumn crocus, which dyed Roman gowns, stood in for gold in medieval manuscripts and gave its name to number 68 in Werner's chart of yellows. The threads themselves are crimson; the yellow only comes out in the water.",
+  "sections": [
+    {
+      "id": "threads",
+      "title": "Red threads, yellow dye",
+      "body": "Saffron is the dried stigmas of *Crocus sativus*, three crimson threads from the center of a violet autumn flower [5]. The threads are red, not yellow, and Victoria Finlay, who went looking for a source of the dye, reports that genuine saffron should be crimson in the packet [6]. Steeped as a tea, it looks deep red with a thin layer of gold on top [6].\n\nSo \"saffron yellow\" names the color of what saffron does, not of what saffron is. As a color it teeters between yellow and orange [5]. It is warmer than [[gamboge-yellow]] and less red than [[deep-saffron]]. The swatch on this page is a chart color, taken up below [21]."
+    },
+    {
+      "id": "material",
+      "title": "The most expensive colorant",
+      "body": "The flower is sterile, so no wild saffron exists, and nobody knows for certain when or where it was first cultivated [5]. Each bloom lasts a day, the whole crop comes in about two weeks, and every stigma is picked out by hand because attempts to mechanize the job have failed [5].\n\nBooks disagree on how many flowers make a unit of spice. St Clair gives 31,800 to 45,500 flowers to the pound [5]. Finlay, quoting an Iranian producer, gives 170,000 flowers to the kilo, about 77,000 to the pound [6]. Both agree on the point that matters: each flower yields very little.\n\nThe price follows. In 2013 an ounce of saffron cost $364, against $8 for vanilla and $3.75 for cardamom [5]. A high price invites fraud. Dealers have added butter for weight, safflower, or artificially reddened yellow stamens [6][1]. St Clair reports that in Nuremberg in 1444 a man named Jobst Finderlers was burned alive for adulterating his saffron with marigold [5]. A shipment is a target too. In 1374 nobles hijacked 800 pounds of saffron bound for Basel, which began the so-called Saffron War [5][6]. Books disagree on its length: St Clair says 14 months, Finlay more than three [5][6].\n\nWhere it grows has moved. St Clair says Spain grew it from at least 961 [5]. Finlay gives two stories for La Mancha, an Arab introduction in the eighth century or a Roman one, and neither is documented [6]. By Finlay's account, Iran produced far more than Spain, and its biggest firm alone sold more than five times Spain's total crop [6]. St Clair adds that Spain now imports Iranian saffron [5]."
+    },
+    {
+      "id": "antiquity",
+      "title": "Saffron in the ancient world",
+      "body": "The oldest pictures of saffron are Aegean [4]. A wall painting from Akrotiri on Santorini shows a woman filling a basket with stigmas [4]. Pastoureau notes that in the Minoan period queens and princesses wore saffron-yellow clothing as a mark of rank [4]. The Greeks had a word for the shade, *krokinos*, though Greek color words conveyed light and saturation more than a fixed hue [3].\n\nRome made saffron a trade. By the end of the republic, dyers formed guilds by color, and one of them, the *crocotarii*, worked only in saffron [1]. Saffron was the dearest of the Roman yellow dyes, used for women's clothing such as the *stola crocota*, a long pleated gown, and for the dress of certain priests [1]. It gave splendid, slightly orange yellows, but it was not very stable [1]. Cheaper weld, the other great yellow dye, gave very solid tones that were less bright and less orange [1].\n\nThe Latin word *croceus*, from *crocus*, meant a bright orange-leaning yellow like saffron, and it carried ideas of beauty, prestige and femininity [3]. Isidore of Seville, writing in the sixth and seventh centuries, mentions yellow mainly to explain where *croceus* comes from [27].\n\nThat femininity had consequences. In his attacks on Publius Clodius, Cicero describes the disguise Clodius wore in the Bona Dea affair, a *crocata*, a saffron-yellow gown [2]. For Cicero the dress proved that Clodius was effeminate and unfit for office [2]. Later Latin writers mocked men in yellow in the same way [2].\n\nOvid offers a gentler picture. In a passage Pastoureau quotes, a dye resembling saffron is the color of Aurora's cloak at dawn [1]. Even in later centuries, cheap yellow cloth could make the wearer look wan unless it was dyed with costly saffron [24].\n\nGage reports that the ninth-century Syrian writer Job of Edessa listed saffron-yellow, with red, green and golden-yellow, as the intermediate colors between white and black [26]."
+    },
+    {
+      "id": "walden",
+      "title": "Saffron Walden",
+      "body": "England grew saffron for centuries. A legend says a pilgrim brought a single corm from the Holy Land in his hat, or in a hollow staff, in the reign of Edward III [5]. Finlay doubts this: if the pilgrim existed, he more probably picked up corms in northern Greece, and a death penalty makes a better story [7].\n\nWhat is documented is the town. Chipping Walden in Essex changed its name to Saffron Walden in the sixteenth century, and its coat of arms gained three crocuses [5][7]. Fortunes swung with the weather and the market. Demand fell in 1540 when imports became cheaper, and in 1571 farmers found their crocuses weakened by overcropping [7]. A royal decree of 1575 ordered two days and nights in the stocks for anyone who threw saffron flowers into the river in time of flood [7]. In 1665 the price climbed above four pounds a pound, up from about two a few years before, after a story that saffron cured the plague [7].\n\nThe trade died out all the same. When George I visited a nearby great house in 1720, the town had no local saffron to offer him [7]. Only the town's name and arms still record the crop."
+    },
+    {
+      "id": "manuscripts",
+      "title": "Saffron in the scriptorium",
+      "body": "For medieval painters saffron was a yellow paint and a poor person's gold. Ball notes that a yellow lake from saffron, mixed with glair (beaten egg white), gave illuminators a strong, pure, transparent yellow [11]. Finlay tried the recipe: steeped overnight in egg white, it turned the color of a blood orange and was luminous on the page, though not very like gold [7].\n\nThe Pigment Compendium counts the recipes [10]. Clarke has listed 24 from manuscripts written before 1500, and takes their number as a sign of how much illuminators valued the color [10]. A Bolognese manuscript of the fifteenth century mixes it with lead white and gum water to draw gold flowers on paper [10]. A Paduan manuscript, written between the late sixteenth and early seventeenth centuries, says to wrap the saffron in cloth and soak it in white vinegar, adding a little gum or beaten egg white [10]. It was also glazed over orpiment, as in a painting from the early fourteenth century [10]. The Paterson dictionary adds another ruse, imitation gold leaf made from tinfoil painted with saffron [20].\n\nSaffron also made greens. Cennino Cennini, as Ball relays him, called a blend of saffron and verdigris the most perfect grass green imaginable [11]. In Persia, miniaturists added saffron to verdigris, and Finlay credits Dr. Barkeshli with showing that this kept the green from corroding the paper [19][4]. The sixteenth-century artist Mir Ali Heravi advised adding a small amount of saffron to make the verdigris stable [19]. Saffron itself, St Clair notes, is not particularly colorfast [5]."
+    },
+    {
+      "id": "impostors",
+      "title": "Impostors and namesakes",
+      "body": "Because saffron is dear, many things have borrowed its name. The best known is [[flower:safflower|safflower]], *Carthamus tinctorius*, a thistle-like plant whose dried petals resemble saffron and were sometimes sold fraudulently as it [1]. Its nickname was \"bastard saffron\", and it dyed reds and orange-leaning yellows that were beautiful but not very resistant to light [1][9]. The Pigment Compendium warns that the literature has long confused the two, so an old recipe that says \"saffron\" may mean safflower [10].\n\nOther namesakes are mineral. Antimonial saffron was an old name for an antimony sulfide [10]. *Crocus martis*, which Ball glosses as \"Mars yellow\", was the alchemists' name for oxidized iron [12]. In the early seventeenth century Sir Theodore de Mayerne used the name, and even plain \"saffron\", for a product he made clear was red [12]. Our name list keeps [[crocus-martis]] as a dull grey-brown rose [21]. The scarlet-orange mineral crocoite was named from the Greek *krokos*, saffron, and led to the discovery of chromium, so chrome yellow, which Van Gogh fell for, descends from the same word [14].\n\nSynthetic dyes took over the role. In 1845 silk dyers in Lyon began using picric acid, whose crystals dye silk a saffron hue, and by 1851 their yellow silk was on show at the Great Exhibition in London [13]."
+    },
+    {
+      "id": "robes",
+      "title": "Saffron robes and a flag",
+      "body": "The word has also traveled into religion and politics. Coles reports that in both China and India the color we call orange took its name from saffron rather than from the fruit [18]. In Buddhism, he adds, saffron orange is the color of illumination [18]. Pastoureau mentions the tradition that the Buddha's robe began as a plain death shroud [25].\n\nDespite the name, saffron almost never colors the robes. Finlay asked where Tibetan monks got their dye and found that robes were mostly dyed with turmeric, a cheap spice, and Thai monks often color theirs with jackfruit [8]. None of the natural ones she met used saffron [8]. St Clair agrees that turmeric or jackfruit is used, since saffron itself is far too costly [5]. The \"saffron robe\" is a color word, not an ingredient.\n\nIndia's flag keeps the word for its top band. When the flag was adopted in 1947, S. Radhakrishnan explained that the saffron denotes renunciation or disinterestedness; today it is read as courage and sacrifice as well [5]. For a brighter, redder orange of that name, see [[deep-saffron]]."
+    },
+    {
+      "id": "charts",
+      "title": "A color in the naturalists' charts",
+      "body": "The name reached natural science through a mineralogy handbook [15]. In Werner's 1821 nomenclature, as edited by Patrick Syme, number 68 among the yellows is Saffron Yellow [15]. Syme says it is gamboge yellow mixed with gallstone yellow in about equal parts, and he points to the tail coverts of the golden pheasant, the anthers of the saffron crocus, and the mineral sulphate of magnesia [15]. Syme's own ingredients are [[gamboge-yellow]] and [[toffee]] [15]. By measured distance, the nearest names to this swatch are [[forsythia]], [[goldenrod]] and [[mustard]], at 2.9, 3.6 and 4.7 CIEDE2000 units [21].\n\nSyme took the term from the English edition of Willdenow's textbook, along with bluish green, lilac and blackish grey [16]. The chart then passed on. Ridgway's 1886 *Nomenclature of Colors for Naturalists* kept at least 19 of Syme's terms, saffron yellow among them [16]. Within Syme's own pages the color is a building block: Sap Green is a mix of emerald green, a good deal of saffron yellow and a little chestnut brown, while King's Yellow is mostly gamboge yellow with a touch of saffron [17]. Our library also lists the name in Maerz and Paul (1930, as cited by the NBS), in RAL (1927) and in ISCC-NBS (1955), whose nearest category to the swatch is \"moderate orange yellow\" [21].\n\nTreat every screen swatch with suspicion. The Werner sample has aged, RAL's saffron yellow is lighter and more orange (about #F6A950), and the hex shown here is one approximation among several [21]. None of them is the spice, whose threads are crimson [6]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "We searched our archive of 23,781 paintings for this swatch [22]. A color within six units of it covers at least five per cent of the canvas in 394 of them, about 1.7 per cent [22]. All of this is as photographed: museum photographs of aged, varnished paintings, so a match is a screen color and not a pigment test [22].\n\nThe strongest pattern is geographic. It turns up in 59 of 721 Indian works in the archive, about five times the archive rate, and in the Pahari and Rajput schools it reaches 20 of 118 and 17 of 97, roughly ten times the average [22]. Japan is only slightly above the average, at 15 of 698 [22]. The color takes up most of the canvas in Maruyama Ōkyo's [[painting:cma-159733|Heron on a Willow Branch]], about 73 per cent, though that is likely a ground rather than a dye [22].\n\nBy date it peaks in the 1820s, in 63 of 731 paintings, five times the archive's rate [22]. One painter may account for part of that spike: [[painter:george-dawe|Dawe]] has it in 15 of 50 works, 18 times the archive rate [22]. The 1200s and 1300s are a second bump, at 7 of 142 and 12 of 251 paintings [22].\n\nIn printed English the phrase *saffron yellow* peaks around 1900, after rising fastest in the 1840s [23]. By the within-painting lens it usually plays an accent, in 76 per cent of the 484 paintings that carry it [22]. Its usual company is [[marigold]] and [[mustard]], the same palette of spice and flower [22]."
+    }
   ],
-  "parent": null,
-  "children": [
-   "deep-saffron"
-  ],
-  "disambiguation": [
-   {
-    "slug": "deep-saffron",
-    "gloss": "a brighter, redder saffron orange, not this chart yellow"
-   },
-   {
-    "slug": "crocus-martis",
-    "gloss": "the alchemists' crocus martis, an iron oxide, grey-brown rose in our data"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "la",
-    "name": "croceus (saffron-colored)"
-   },
-   {
-    "lang": "el",
-    "name": "krokinos"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#D09B2C",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 394,
-  "top_paintings": [
-   "cma-159733",
-   "commons-Q133572560",
-   "cma-155590",
-   "cma-148378"
-  ],
-  "painters": [
-   {
-    "name": "George Dawe",
-    "hits": 15,
-    "of": 50
-   }
-  ],
-  "countries": [
-   {
-    "name": "India",
-    "hits": 59,
-    "of": 721
-   }
-  ],
-  "movements": [
-   {
-    "name": "Pahari",
-    "hits": 20,
-    "of": 118
-   },
-   {
-    "name": "Rajput",
-    "hits": 17,
-    "of": 97
-   }
-  ],
-  "peak_decade": {
-   "decade": 1820,
-   "hits": 63,
-   "of": 731
-  },
-  "role": "accent",
-  "company": [
-   "Marigold",
-   "Mustard"
-  ],
-  "ngram": {
-   "peak": 1900,
-   "word": "saffron yellow"
-  },
-  "measured": {
-   "nearest": [
-    [
-     "Forsythia",
-     2.9
+  "aside": {
+    "origin": {
+      "named_after": "the saffron crocus, Crocus sativus (stigmas used as spice and dye)",
+      "first_recorded": "Roman dyeing guild of the crocotarii; as a chart color, Werner/Syme 1821 no. 68",
+      "source": "Pastoureau, Yellow; Baty, Nature's Palette; St Clair, The Secret Lives of Colour"
+    },
+    "aka": [
+      "crocus yellow",
+      "croceus (Latin)",
+      "krokinos (Greek)"
     ],
-    [
-     "Goldenrod",
-     3.6
+    "siblings": [
+      "deep-saffron",
+      "gamboge-yellow",
+      "toffee"
     ],
-    [
-     "Mustard",
-     4.7
+    "parent": null,
+    "children": [
+      "deep-saffron"
     ],
-    [
-     "Marigold",
-     5.5
+    "disambiguation": [
+      {
+        "slug": "deep-saffron",
+        "gloss": "a brighter, redder saffron orange, not this chart yellow"
+      },
+      {
+        "slug": "crocus-martis",
+        "gloss": "the alchemists' crocus martis, an iron oxide, grey-brown rose in our data"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "la",
+        "name": "croceus (saffron-colored)"
+      },
+      {
+        "lang": "el",
+        "name": "krokinos"
+      }
     ]
-   ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#D09B2C",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 394,
+    "top_paintings": [
+      "cma-159733",
+      "commons-Q133572560",
+      "cma-155590",
+      "cma-148378"
+    ],
+    "painters": [
+      {
+        "name": "George Dawe",
+        "hits": 15,
+        "of": 50
+      }
+    ],
+    "countries": [
+      {
+        "name": "India",
+        "hits": 59,
+        "of": 721
+      }
+    ],
+    "movements": [
+      {
+        "name": "Pahari",
+        "hits": 20,
+        "of": 118
+      },
+      {
+        "name": "Rajput",
+        "hits": 17,
+        "of": 97
+      }
+    ],
+    "peak_decade": {
+      "decade": 1820,
+      "hits": 63,
+      "of": 731
+    },
+    "role": "accent",
+    "company": [
+      "Marigold",
+      "Mustard"
+    ],
+    "ngram": {
+      "peak": 1900,
+      "word": "saffron yellow"
+    },
+    "measured": {
+      "nearest": [
+        [
+          "Forsythia",
+          2.9
+        ],
+        [
+          "Goldenrod",
+          3.6
+        ],
+        [
+          "Mustard",
+          4.7
+        ],
+        [
+          "Marigold",
+          5.5
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Pastoureau, Yellow: The History of a Color, \"A Beneficial Color\" (Dyeing in Yellow)",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pastoureau, Yellow: The History of a Color, \"A Beneficial Color\" (The Clodius Affair)",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Pastoureau, Yellow: The History of a Color, \"A Beneficial Color\" (The Lessons of the Lexicon)",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Pastoureau, Yellow: The History of a Color, \"A Beneficial Color\", plate caption \"Saffron Gatherer\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Saffron\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 6 (\"Yellow\"), \"Saffron\" and \"The Laughing Spice\"",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 6 (\"Yellow\"), \"Saffron Walden\"",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 6 (\"Yellow\"), \"Saffron\" (Tibetan and Thai robes)",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 5 (\"Orange\"), \"Bastard Saffron and the Blood of Dragons\"",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Eastaugh et al., Pigment Compendium, \"saffron\", p. 344, and \"safflower\", \"bastard saffron\", \"antimonial saffron\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 12",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 14",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 17",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Chrome yellow\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 194-195 (Saffron Yellow, no. 68)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 30, 173",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 155, 192",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 18,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, p. 29",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 19,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 7 (\"Green\"), \"The Lost Greens\"",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 20,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"saffron\" and related entries",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 21,
+      "kind": "data",
+      "cite": "ColorHub library and name graph (data/library.json, data/graph/): Werner 1821 no. 68, ISCC-NBS 1955, RAL 1927, Maerz and Paul 1930; nearest names by CIEDE2000",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 22,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py, within six units, at least five per cent of the canvas; data/graph/fieldnotes)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 23,
+      "kind": "data",
+      "cite": "Google Books Ngram, \"saffron yellow\", case-insensitive, five-year smoothed",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 24,
+      "kind": "book",
+      "cite": "Pastoureau, Yellow: The History of a Color, \"An Unpopular Color\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 25,
+      "kind": "book",
+      "cite": "Pastoureau, Yellow: The History of a Color, \"On the Margin of Yellow: Orange\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 26,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 68",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 27,
+      "kind": "book",
+      "cite": "Pastoureau, Yellow: The History of a Color, \"The Silence of the Bible and the Church Fathers\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What color are saffron threads as they come from the flower?",
+      "choices": [
+        "Crimson red",
+        "Bright yellow",
+        "Orange",
+        "Violet"
+      ],
+      "answer": "Crimson red",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Buddhist monks' saffron robes are dyed with saffron.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Why did Cicero mention a saffron gown when attacking Clodius?",
+      "choices": [
+        "Yellow was a women's color, so it showed he had dressed as a woman",
+        "Saffron was banned for citizens by law",
+        "Saffron robes belonged to priests of Jupiter",
+        "The gown was dyed with a poisonous plant"
+      ],
+      "answer": "Yellow was a women's color, so it showed he had dressed as a woman",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Saffron threads are crimson; the yellow only appears in the water.",
+    "In 1374 nobles hijacked 800 pounds of saffron bound for Basel, and a war followed.",
+    "Look at an Indian miniature of the Pahari or Rajput schools: about one in six carries this color."
+  ],
+  "words": 2071,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Spot-checked St Clair, Finlay, Pastoureau passages (Saffron War, Finderlers, Iran output, Isidore, wan yellow): all supported; hedges for single-source and disagreeing figures already in text"
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Pastoureau, Yellow: The History of a Color, \"A Beneficial Color\" (Dyeing in Yellow)",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pastoureau, Yellow: The History of a Color, \"A Beneficial Color\" (The Clodius Affair)",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Pastoureau, Yellow: The History of a Color, \"A Beneficial Color\" (The Lessons of the Lexicon)",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Pastoureau, Yellow: The History of a Color, \"A Beneficial Color\", plate caption \"Saffron Gatherer\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Saffron\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 6 (\"Yellow\"), \"Saffron\" and \"The Laughing Spice\"",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 6 (\"Yellow\"), \"Saffron Walden\"",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 6 (\"Yellow\"), \"Saffron\" (Tibetan and Thai robes)",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 5 (\"Orange\"), \"Bastard Saffron and the Blood of Dragons\"",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Eastaugh et al., Pigment Compendium, \"saffron\", p. 344, and \"safflower\", \"bastard saffron\", \"antimonial saffron\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 12",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 14",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 17",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Chrome yellow\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 194-195 (Saffron Yellow, no. 68)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 30, 173",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 17,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 155, 192",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 18,
-   "kind": "book",
-   "cite": "Coles, Chromatopia, p. 29",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 19,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 7 (\"Green\"), \"The Lost Greens\"",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 20,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"saffron\" and related entries",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 21,
-   "kind": "data",
-   "cite": "ColorHub library and name graph (data/library.json, data/graph/): Werner 1821 no. 68, ISCC-NBS 1955, RAL 1927, Maerz and Paul 1930; nearest names by CIEDE2000",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 22,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py, within six units, at least five per cent of the canvas; data/graph/fieldnotes)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 23,
-   "kind": "data",
-   "cite": "Google Books Ngram, \"saffron yellow\", case-insensitive, five-year smoothed",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 24,
-   "kind": "book",
-   "cite": "Pastoureau, Yellow: The History of a Color, \"An Unpopular Color\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 25,
-   "kind": "book",
-   "cite": "Pastoureau, Yellow: The History of a Color, \"On the Margin of Yellow: Orange\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 26,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 68",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 27,
-   "kind": "book",
-   "cite": "Pastoureau, Yellow: The History of a Color, \"The Silence of the Bible and the Church Fathers\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What color are saffron threads as they come from the flower?",
-   "choices": [
-    "Crimson red",
-    "Bright yellow",
-    "Orange",
-    "Violet"
-   ],
-   "answer": "Crimson red",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Buddhist monks' saffron robes are dyed with saffron.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Why did Cicero mention a saffron gown when attacking Clodius?",
-   "choices": [
-    "Yellow was a women's color, so it showed he had dressed as a woman",
-    "Saffron was banned for citizens by law",
-    "Saffron robes belonged to priests of Jupiter",
-    "The gown was dyed with a poisonous plant"
-   ],
-   "answer": "Yellow was a women's color, so it showed he had dressed as a woman",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Saffron threads are crimson; the yellow only appears in the water.",
-  "In 1374 nobles hijacked 800 pounds of saffron bound for Basel, and a war followed.",
-  "Look at an Indian miniature of the Pahari or Rajput schools: about one in six carries this color."
- ],
- "words": 2072,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Spot-checked St Clair, Finlay, Pastoureau passages (Saffron War, Finderlers, Iran output, Isidore, wan yellow): all supported; hedges for single-source and disagreeing figures already in text"
-  ]
- }
 }

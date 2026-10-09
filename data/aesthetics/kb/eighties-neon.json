@@ -1,0 +1,46 @@
+{
+ "id": "eighties-neon",
+ "name": "1980s neon",
+ "lineage": {
+  "influenced_by": [
+   "Memphis Group design",
+   "early MTV/music-video graphics",
+   "arcade and early computer graphics"
+  ],
+  "influences": [
+   "synthwave",
+   "vaporwave",
+   "mcbling"
+  ]
+ },
+ "eras": [
+  "c. 1982–1990"
+ ],
+ "places": [
+  "US consumer and media design broadly"
+ ],
+ "garments": [
+  "windbreakers",
+  "neon spandex",
+  "graphic prints"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "the earthy, muted 1970s palette, embracing synthetic brightness enabled by new fluorescent and early LED/LCD technology.",
+ "revivals": [
+  "directly revived by synthwave and vaporwave from the early 2010s on"
+ ],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [],
+ "measured": {
+  "n_images": 1,
+  "n_candidates": 1,
+  "findings": [
+   "dark — about 84% of the measured color across 1 Commons photos is below mid-lightness",
+   "mostly muted — about 83% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

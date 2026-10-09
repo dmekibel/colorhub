@@ -1,0 +1,160 @@
+{
+ "slug": "deep-bluish-grey-green",
+ "name": "Deep Bluish Grey-Green",
+ "hex": "#64807C",
+ "names": [
+  "Deep Bluish Grey-Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Deep Bluish Grey-Green is a muted, grey-leaning green, Robert Ridgway's darker step down from his own Bluish Grey-Green, with a second life as a Japanese traditional color gloss.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One grey-green, two naming systems",
+   "body": "Ridgway recorded Deep Bluish Grey-Green in 1912, plate XLII, hue 41 triple-prime, tone i, directly below [[bluish-grey-green|Bluish Grey-Green]] on the same card [1]. The ISCC-NBS dictionary filed this darker name again in 1955, block 150, as a grayish green [2]. The same hue also carries a Japanese traditional gloss in our data, *Sabiasagi* (錆浅葱), \"rusted light-blue,\" an entirely separate naming thread from Ridgway's grammar [3]. Its nearest named neighbors on file are [[serpent]] and [[deep-medici-blue]], at 3.0 to 3.3 CIEDE2000 units [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this grey-green, as photographed, in 332 of 23,781 paintings, 1.4 percent, more common than 65 percent of the named colors we track [5]. It peaks in the 1900s, 20 of 1,674 paintings from that century, 2.0 times the expected rate [5]. Paul Cezanne is its most devoted painter here, in 5 of his 50 works, 5.4 times the baseline rate [5]. Inside a painting it most often plays a hidden color, in 37 percent of its 144 strongest matches [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the base color Bluish Grey-Green, darkened",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLII; filed again by ISCC-NBS in 1955, block 150",
+   "source": "Ridgway 1912; ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "serpent",
+   "deep-medici-blue",
+   "deep-greyish-blue-green",
+   "hydro"
+  ],
+  "parent": "bluish-grey-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Sabiasagi (錆浅葱)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 144,
+  "measured": {
+   "lch": [
+    51.4,
+    11.0,
+    186.0
+   ],
+   "nearest_iscc": [
+    "grayish green",
+    6.1
+   ],
+   "nearest": [
+    [
+     "Serpent",
+     3.0
+    ],
+    [
+     "Deep Medici Blue",
+     3.3
+    ],
+    [
+     "Deep Greyish Blue-Green",
+     3.9
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1400,
+   "years_before_record": 512
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XLII, hue 41‴, tone i",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "ISCC-NBS, National Bureau of Standards Circular 553, 1955, block 150 (\"grayish green\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Japanese traditional color list, Sabiasagi",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-d.json): CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which plate of Ridgway's 1912 atlas carries Deep Bluish Grey-Green?",
+   "choices": [
+    "Plate XLII",
+    "Plate VII",
+    "Plate XIX",
+    "Plate XXIII"
+   ],
+   "answer": "Plate XLII",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color also carries a Japanese traditional name in our data, Sabiasagi.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter in our archive is most devoted to Deep Bluish Grey-Green?",
+   "choices": [
+    "Paul Cezanne",
+    "Claude Monet",
+    "Gustav Klimt",
+    "Vincent van Gogh"
+   ],
+   "answer": "Paul Cezanne",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Deep Bluish Grey-Green also carries a Japanese name in our data, Sabiasagi, \"rusted light-blue.\"",
+  "Paul Cezanne uses it more than five times his usual rate."
+ ],
+ "words": 194,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

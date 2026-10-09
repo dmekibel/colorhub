@@ -1,0 +1,122 @@
+{
+ "slug": "dusty-brown",
+ "name": "Dusty brown",
+ "hex": "#534A32",
+ "names": [
+  "Dusty brown"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty brown is a dark, muted olive-brown, ColorHub's English name for the Japanese traditional color Rikancha, named for a particular tea master's taste rather than for dust.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "\"Rikan brown,\" not dust",
+   "body": "Rikancha (璃寛茶), literally \"Rikan brown,\" is named in the Wikipedia list of Japan's traditional colors for Rikan, though the page does not say who or what Rikan was; it is undocumented in the sources consulted here [1]. It is one of many *cha* (tea) names in the traditional list for muted browns, and the name has nothing to do with dust, despite its English rendering [1].\n\nIts nearest named neighbor on file is [[seaweed-green]], 3.5 units off [2], an unrelated name that happens to land on nearly the same muted color."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within six units of this swatch in 5,144 of 23,781 paintings, 21.63 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 3,783 [3]. That makes it more common than 99 percent of the named colors in our library, one of the most frequent matches we track [3]. It peaks in the 1100s, present in 20.0 percent of our 50 paintings from that century, 1.4 times the museums' baseline rate [3]. Inside a painting it most often sits as a hidden color, in 41 percent of its 3,783 appearances by lightness rank [3].\n\nMeindert Hobbema is its most devoted painter on file, present in 9 of his 16 works here, more than three times the baseline rate for the museums that hold them [3]. The earliest match dates to the year 900, a floor and not a first, since the archive's early centuries are thin [3]. It shares canvases with [[baiko-brown|Baiko brown]] and [[greyish-brown|Greyish Brown]] more often than chance [3]. These are computed color matches to photographed, varnished paintings, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Rikancha, \"Rikan brown\"; who or what Rikan was is undocumented here",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, Traditional colors of Japan"
+  },
+  "aka": [
+   "Rikancha"
+  ],
+  "siblings": [
+   "seaweed-green",
+   "baiko-brown",
+   "greyish-brown",
+   "indigo-tea"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Rikancha (璃寛茶)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5144,
+  "n_within_painting": 3783,
+  "pct_archive": 21.63,
+  "rank_pct": 99,
+  "measured": {
+   "lch": [
+    32,
+    16,
+    91
+   ],
+   "nearest": [
+    [
+     "Seaweed green",
+     3.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional list, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the name Rikancha literally mean?",
+   "choices": [
+    "Rikan brown",
+    "River mud",
+    "Winter bark"
+   ],
+   "answer": "Rikan brown",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color is rare in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Named \"Rikan brown\" after a person Wikipedia doesn't identify, not after dust."
+ ],
+ "words": 300,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

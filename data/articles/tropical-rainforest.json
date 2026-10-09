@@ -1,0 +1,133 @@
+{
+  "slug": "tropical-rainforest",
+  "name": "Tropical Rainforest",
+  "hex": "#00755E",
+  "names": [
+    "Tropical Rainforest"
+  ],
+  "tier": "place",
+  "depth": "brief",
+  "lede": "Tropical Rainforest is a dark, slightly blue green named for the biome rather than any pigment, dye or place of manufacture.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A landscape word",
+      "body": "Our library traces the name only to a Wikipedia color list, which gives no date for when the name was coined [1]. It is a landscape word, the dense green canopy of a tropical rainforest, rather than a material or institution [1].\n\nIts nearest named neighbor is [[patina-green]], 3.5 units of CIEDE2000 away and described as duller [2]. [[generic-viridian]] sits at the same distance, almost the same, [[blue-green]] at 4.2, also almost the same, and [[blue-green]] at 4.3, also almost the same [2]. Measured in LCH it reads lightness 44, chroma 34, a dark, moderately saturated green [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in just 12 of 23,781 paintings (0.05 percent), rarer than 74 percent of the named colors, as photographed [3]. The earliest dated match is 1881, in a work by Pierre-Auguste Renoir, though the archive's early centuries are thin, so this is a floor and not a first [3]. The latest dated match is 1959, across 10 dated paintings in total [3]. These are photographs of varnished paintings, so a color match is not a pigment test [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the tropical rainforest biome",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub library (a Wikipedia list)"
+    },
+    "aka": [],
+    "siblings": [
+      "patina-green",
+      "generic-viridian",
+      "blue-green",
+      "bottle-green"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
+    "n_present": 12,
+    "rank_pct_rarer": 74,
+    "first_dated": {
+      "year": 1881,
+      "painter": "Pierre-Auguste Renoir",
+      "before_record": false
+    },
+    "measured": {
+      "lch": [
+        44,
+        34,
+        172
+      ],
+      "nearest": [
+        [
+          "Patina Green",
+          3.5
+        ],
+        [
+          "Generic Viridian",
+          3.5
+        ],
+        [
+          "Blue-Green",
+          4.2
+        ],
+        [
+          "Dark Viridian Green",
+          4.3
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): name source and place tier",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges): CIEDE2000 look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What is Tropical Rainforest named for?",
+      "choices": [
+        "A biome, the tropical rainforest",
+        "A paint manufacturer's trademark",
+        "A specific rainforest location",
+        "A pigment made from plant matter"
+      ],
+      "answer": "A biome, the tropical rainforest",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Tropical Rainforest is one of the more common colors in our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Tropical Rainforest's earliest archive match is a Renoir from 1881, and its latest from 1959."
+  ],
+  "words": 201,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "rank-percentile drift: article said 72%, current data/graph/fieldnotes says 74% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
+    ]
+  }
+}

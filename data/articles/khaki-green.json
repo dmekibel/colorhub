@@ -1,128 +1,128 @@
 {
- "slug": "khaki-green",
- "name": "Khaki Green",
- "hex": "#728639",
- "names": [
-  "Khaki Green"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Khaki Green is a moderate yellow-green that the ISCC-NBS system named directly in 1955, built on the family word khaki.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A direct ISCC-NBS name",
-   "body": "The ISCC-NBS system lists Khaki Green directly in 1955, in block 151, with no separate record in Ridgway's 1912 nomenclature [1]. Maerz and Paul's 1930 dictionary carries a related entry, first recorded in 1920, on plate 24, swatch A9, and the xkcd color survey of 2010 also carries the name [1]. The nearest named colors on file are [[moss-olive]], [[dirty-green]] and [[mossy-green]], at 3.6, \nThe closest common color word in our library is [[moss|Moss]], about eight units away in CIEDE2000 [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "A color within six units of Khaki Green covers at least five percent of the canvas in 133 of our 23,781 paintings, 0.56 percent, as photographed; the within-painting lens finds it in 76 [2]. That ranks it ahead of 55 percent of the named colors we track [2]. It peaks in the 1900s, in 14 of 1,674 paintings, at 0.8 percent of that decade's paintings, 2.2 times the archive's overall rate, and it most often plays an accent, in 62 percent of its 76 appearances [2].\n\nCamille Pissarro is its most devoted painter, in seven of his 50 paintings here, 9.4 times the rate of the museums those works come from, and it is also most over-represented in French paintings, 2.4 times the expected rate [2]. In printed English the phrase itself peaked in the 2010s, rising fastest in the 2000s, long after the ISCC-NBS filed it in 1955 [2]. The earliest matching painting dates to 1512, 443 years before that filing — a look-alike hue in an aged photograph, not proof the color existed as a dye that early, a floor and not a first, since the archive's early centuries are thin [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the family word khaki",
-   "first_recorded": "1955, ISCC-NBS",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "moss-olive",
-   "dirty-green",
-   "mossy-green",
-   "military-green"
+  "slug": "khaki-green",
+  "name": "Khaki Green",
+  "hex": "#728639",
+  "names": [
+    "Khaki Green"
   ],
-  "parent": "khaki",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 76,
-  "pct": 0.56,
-  "rank_percentile": 55,
-  "measured": {
-   "lch": [
-    52.9,
-    43.1,
-    117.0
-   ],
-   "munsell": "4.8GY 5.2/6.2",
-   "app": [
-    "Moss",
-    8.0
-   ],
-   "nearest": [
-    [
-     "Moss olive",
-     3.6
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Khaki Green is a moderate yellow-green that the ISCC-NBS system named directly in 1955, built on the family word khaki.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A direct ISCC-NBS name",
+      "body": "The ISCC-NBS system lists Khaki Green directly in 1955, in block 151, with no separate record in Ridgway's 1912 nomenclature [1]. Maerz and Paul's 1930 dictionary carries a related entry, first recorded in 1920, on plate 24, swatch A9, and the xkcd color survey of 2010 also carries the name [1]. The nearest named colors on file are [[moss-olive]], [[khaki-green]] and [[mossy-green]], at 3.6, \nThe closest common color word in our library is [[moss|Moss]], about eight units away in CIEDE2000 [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "A color within six units of Khaki Green covers at least five percent of the canvas in 133 of our 23,781 paintings, 0.56 percent, as photographed; the within-painting lens finds it in 76 [2]. That ranks it ahead of 55 percent of the named colors we track [2]. It peaks in the 1900s, in 14 of 1,674 paintings, at 0.8 percent of that decade's paintings, 2.2 times the archive's overall rate, and it most often plays an accent, in 62 percent of its 76 appearances [2].\n\nCamille Pissarro is its most devoted painter, in seven of his 50 paintings here, 9.4 times the rate of the museums those works come from, and it is also most over-represented in French paintings, 2.4 times the expected rate [2]. In printed English the phrase itself peaked in the 2010s, rising fastest in the 2000s, long after the ISCC-NBS filed it in 1955 [2]. The earliest matching painting dates to 1512, 443 years before that filing — a look-alike hue in an aged photograph, not proof the color existed as a dye that early, a floor and not a first, since the archive's early centuries are thin [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the family word khaki",
+      "first_recorded": "1955, ISCC-NBS",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "moss-olive",
+      "khaki-green",
+      "mossy-green",
+      "military-green"
     ],
-    [
-     "Dirty Green",
-     3.6
-    ],
-    [
-     "Mossy Green",
-     4.6
-    ],
-    [
-     "Military Green",
-     4.9
+    "parent": "khaki",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 76,
+    "pct": 0.56,
+    "rank_percentile": 55,
+    "measured": {
+      "lch": [
+        52.9,
+        43.1,
+        117.0
+      ],
+      "munsell": "4.8GY 5.2/6.2",
+      "app": [
+        "Moss",
+        8.0
+      ],
+      "nearest": [
+        [
+          "Moss olive",
+          3.6
+        ],
+        [
+          "Dirty Green",
+          3.6
+        ],
+        [
+          "Mossy Green",
+          4.6
+        ],
+        [
+          "Military Green",
+          4.9
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and graph data: Ridgway 1912 / ISCC-NBS 1955 / Maerz & Paul 1930 / RAL entries (data/library.json, data/graph/)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 paintings, computed color match, as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which system first lists the name Khaki Green?",
+      "choices": [
+        "ISCC-NBS, 1955",
+        "Ridgway, 1912",
+        "RAL, 1927",
+        "Maerz and Paul, 1930 (independently)"
+      ],
+      "answer": "ISCC-NBS, 1955",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: in print, the phrase 'khaki green' peaked in use right after the ISCC-NBS listed it in 1955.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "In print, 'khaki green' didn't actually peak until the 2010s, decades after the dictionaries filed it."
+  ],
+  "words": 296,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits for this slug.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and graph data: Ridgway 1912 / ISCC-NBS 1955 / Maerz & Paul 1930 / RAL entries (data/library.json, data/graph/)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 paintings, computed color match, as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which system first lists the name Khaki Green?",
-   "choices": [
-    "ISCC-NBS, 1955",
-    "Ridgway, 1912",
-    "RAL, 1927",
-    "Maerz and Paul, 1930 (independently)"
-   ],
-   "answer": "ISCC-NBS, 1955",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: in print, the phrase 'khaki green' peaked in use right after the ISCC-NBS listed it in 1955.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "In print, 'khaki green' didn't actually peak until the 2010s, decades after the dictionaries filed it."
- ],
- "words": 296,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "No concordance hits for this slug.",
-   "lint 2026-10-09"
-  ]
- }
 }

@@ -1,0 +1,68 @@
+{
+ "id": "art-nouveau",
+ "name": "Art Nouveau",
+ "lineage": {
+  "influenced_by": [
+   "Arts and Crafts movement",
+   "Japonisme (ukiyo-e's flowing line)",
+   "botanical illustration"
+  ],
+  "influences": [
+   "vienna-secession"
+  ]
+ },
+ "eras": [
+  "c. 1890–1910"
+ ],
+ "places": [
+  "Paris and Nancy (France)",
+  "Brussels",
+  "Barcelona (Gaudí)"
+ ],
+ "garments": [
+  "flowing, corset-free \"reform dress\" promoted alongside the style, though rarely adopted at scale"
+ ],
+ "media": [
+  {
+   "title": "Alphonse Mucha's theater posters (1890s)",
+   "note": ""
+  },
+  {
+   "title": "Antoni Gaudí's Barcelona architecture (Casa Batlló, 1904–06)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Alphonse Mucha",
+  "Antoni Gaudí",
+  "Hector Guimard"
+ ],
+ "reacts_against": "historicism — the 19th century's habit of reviving past styles wholesale — by inventing an explicitly new decorative language based on plant and flower forms.",
+ "revivals": [
+  "a visible influence on 1960s psychedelic poster art's flowing linework"
+ ],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Modern Style (Britain)Glasgow Style (Scotland)Jugendstil (Germany)Stile Liberty (Italy)Modernismo (Spain)Modernisme (Catalonia)Wiener Jugendstil or Secessionsstil (Austro-Hungary)Nieuwe Kunst (the Netherlands)Arte Nova (Portugal)Arta 1900 (Romania)Tiffany Style (US)",
+  "decade_of_origin": "1890s–1910s",
+  "key_motifs": "\"Whiplash\" curves, sinuous lines, stylized natural forms (flowers, insects, vines), female figures, peacock feathers",
+  "key_colours": "Muted palettes including olive green, mustard yellow, brown, lilac, and sage, often with accents of gold and silver",
+  "related_aesthetics": "AestheticismArts and CraftsArt DecoGlasgow Style (regional)JaponismeModernisme (regional)SymbolismPost-ImpressionismPsychedelia",
+  "key_values": "Integration of fine and applied arts, rejection of historicism, ornamentation based on nature, use of modern materials"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Art_Nouveau"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 64% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

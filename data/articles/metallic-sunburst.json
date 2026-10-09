@@ -1,0 +1,141 @@
+{
+ "slug": "metallic-sunburst",
+ "name": "Metallic Sunburst",
+ "hex": "#9C7C38",
+ "names": [
+  "Metallic Sunburst"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Metallic Sunburst is a golden-brown, named in English for a bright burst of light and carried in our data as a traditional Japanese color, *Hiwacha*, which actually names a finch.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A sunburst in English, a finch in Japanese",
+   "body": "The English name evokes light itself, a gleam bright enough to call a sunburst [1]. Our library also files this hue as *Hiwacha* (鶸茶), a traditional Japanese name our data translates as \"finch-brown,\" after the brownish plumage of a Cardueline finch [1]. The two names describe the same gold-brown shade from entirely different angles, one from light, one from a bird [1].\n\nIts nearest named neighbors by measured color are [[orange-citrine]] and [[honey-yellow]], both almost the same shade, with [[yellowish-hazel]] and [[fallen-leaf]] close behind [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match in 2,098 of 23,781 paintings, 8.82 percent, as photographed; the within-painting lens finds it in 1,357 [2]. That makes it more common than 93 percent of the named colors we track, one of the most frequently matched colors in the whole archive [2]. It peaks in the 1400s, found in 70 of the 945 paintings we have from that century, 1.3 times the expected rate [2]. Fritz Thomsen is its most devoted painter, carrying it in 6 of his 18 works here [2]. Paintings with Metallic Sunburst are more likely than chance to also carry Shit Brown and Olive-Ocher [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a sunburst's gleam, in English; a Cardueline finch's plumage, in the Japanese Hiwacha (鶸茶)",
+   "first_recorded": "undocumented date; listed in our sources as a traditional Japanese color name",
+   "source": "ColorHub color library (traditional colors of Japan)"
+  },
+  "aka": [
+   "Hiwacha"
+  ],
+  "siblings": [
+   "orange-citrine",
+   "honey-yellow",
+   "yellowish-hazel"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Hiwacha (鶸茶)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2098,
+  "n_within_painting": 1357,
+  "rank_more_common_than_pct": 93,
+  "century_peak": {
+   "century": 1400,
+   "n": 70,
+   "of": 945,
+   "lift": 1.3
+  },
+  "painter": {
+   "name": "Fritz Thomsen",
+   "n": 6,
+   "of": 18
+  },
+  "company": [
+   [
+    "Shit Brown",
+    4.2
+   ],
+   [
+    "Olive-Ocher",
+    4.1
+   ]
+  ],
+  "measured": {
+   "lch": [
+    53.8,
+    41.2,
+    83.7
+   ],
+   "nearest": [
+    [
+     "Orange-Citrine",
+     3.1
+    ],
+    [
+     "Honey Yellow",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional colors of Japan (via Wikipedia); ColorHub name graph (look-alike edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Hiwacha, the Japanese name behind Metallic Sunburst, literally reference?",
+   "choices": [
+    "A finch's brown plumage",
+    "A metal alloy",
+    "A sunset over rice fields",
+    "A dye made from acorns"
+   ],
+   "answer": "A finch's brown plumage",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Metallic Sunburst is one of the rarer colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Metallic Sunburst's Japanese name, Hiwacha, actually means \"finch-brown,\" after a bird's plumage."
+ ],
+ "words": 221,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits in the 29 books for this slug; sourced from our own library/graph data only."
+  ]
+ }
+}

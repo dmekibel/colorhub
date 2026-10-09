@@ -1,133 +1,135 @@
 {
- "name": "Graphite violet",
- "hex": "#625F67",
- "names": [
-  "Graphite violet"
- ],
- "tier": "pigment",
- "depth": "short",
- "lede": "Graphite violet is a mid-grey with a faint violet lean, one of ColorHub's own core names built as a violet-leaning variant of graphite.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A mineral-word family variant",
-   "body": "This name is built on the mineral word graphite, placed in our naming system as a violet-leaning variant of the family rather than copied from a single dated source [1]. The 1955 ISCC-NBS system would file its neutral, slightly purplish character in the dark purplish gray range, at Munsell N 4.0 [1]. Which historical plate or dictionary, if any, used this exact name is undocumented in the sources checked here [1].\n\nIt reads lighter than the library's own Graphite, a 1915 Maerz and Paul entry at a much darker value, and a different hue from the grey-toned, RAL-sourced Graphite Grey [1]. The nearest named colors on file are [[plumbago-slate]], [[blackish-grey]] and [[smoke]], at 2.6, \nIts family parent, [[graphite]], and the neutral [[slate]] both sit nearby in ColorHub's own color map [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this grey in 378 of 23,781 paintings, about one and a half per cent [2]. It peaks in the 1900s, in 31 of 1,674 paintings, at roughly three times the overall baseline rate [2]. The earliest match is a 1119 Buddhist manuscript page, eight centuries before this name entered ColorHub's own naming system, so that is a lookalike hue, not a pigment record, a floor and not a first, since the archive's early centuries are thin [2]. These are photographs of aged, varnished paintings and manuscripts, and a match is a computed color comparison, not a material identification [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the mineral graphite, as a violet-leaning family variant",
-   "first_recorded": "undocumented as a historical name; added to ColorHub's core list",
-   "source": "ColorHub name graph (data/graph)"
-  },
-  "aka": [],
-  "siblings": [
-   "plumbago-slate",
-   "blackish-grey",
-   "smoke",
-   "vinaceous-slate"
+  "name": "Graphite violet",
+  "hex": "#625F67",
+  "names": [
+    "Graphite violet",
+    "Heliotrope-Slate"
   ],
-  "parent": "graphite",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "graphite",
-    "gloss": "a separate, darker library color (Maerz and Paul, 1915)"
-   }
+  "tier": "pigment",
+  "depth": "short",
+  "lede": "Graphite violet is a mid-grey with a faint violet lean, one of ColorHub's own core names built as a violet-leaning variant of graphite.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A mineral-word family variant",
+      "body": "This name is built on the mineral word graphite, placed in our naming system as a violet-leaning variant of the family rather than copied from a single dated source [1]. The 1955 ISCC-NBS system would file its neutral, slightly purplish character in the dark purplish gray range, at Munsell N 4.0 [1]. Which historical plate or dictionary, if any, used this exact name is undocumented in the sources checked here [1].\n\nIt reads lighter than the library's own Graphite, a 1915 Maerz and Paul entry at a much darker value, and a different hue from the grey-toned, RAL-sourced Graphite Grey [1]. The nearest named colors on file are [[plumbago-slate]], [[blackish-grey]] and [[smoke]], at 2.6, \nIts family parent, [[graphite]], and the neutral [[slate]] both sit nearby in ColorHub's own color map [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this grey in 378 of 23,781 paintings, about one and a half per cent [2]. It peaks in the 1900s, in 31 of 1,674 paintings, at roughly three times the overall baseline rate [2]. The earliest match is a 1119 Buddhist manuscript page, eight centuries before this name entered ColorHub's own naming system, so that is a lookalike hue, not a pigment record, a floor and not a first, since the archive's early centuries are thin [2]. These are photographs of aged, varnished paintings and manuscripts, and a match is a computed color comparison, not a material identification [2]."
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed",
-  "match": {
-   "hex": "#625F67",
-   "de2000": 6,
-   "min_cover": 0.05
+  "aside": {
+    "origin": {
+      "named_after": "the mineral graphite, as a violet-leaning family variant",
+      "first_recorded": "undocumented as a historical name; added to ColorHub's core list",
+      "source": "ColorHub name graph (data/graph)"
+    },
+    "aka": [
+      "Heliotrope-Slate (ridgway+iscc-nbs)"
+    ],
+    "siblings": [
+      "plumbago-slate",
+      "blackish-grey",
+      "smoke"
+    ],
+    "parent": "graphite",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "graphite",
+        "gloss": "a separate, darker library color (Maerz and Paul, 1915)"
+      }
+    ],
+    "other_languages": []
   },
-  "n_present": 378,
-  "measured": {
-   "lch": [
-    40.8,
-    5.0,
-    305.0
-   ],
-   "iscc": "dark purplish gray",
-   "nearest": [
-    [
-     "Plumbago Slate",
-     2.6
-    ],
-    [
-     "Blackish Grey",
-     3.4
-    ],
-    [
-     "Smoke",
-     3.6
-    ],
-    [
-     "Vinaceous-Slate",
-     3.6
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed",
+    "match": {
+      "hex": "#625F67",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 378,
+    "measured": {
+      "lch": [
+        40.8,
+        5.0,
+        305.0
+      ],
+      "iscc": "dark purplish gray",
+      "nearest": [
+        [
+          "Plumbago Slate",
+          2.6
+        ],
+        [
+          "Blackish Grey",
+          3.4
+        ],
+        [
+          "Smoke",
+          3.6
+        ],
+        [
+          "Vinaceous-Slate",
+          3.6
+        ]
+      ]
+    },
+    "peak_century": 1900
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub name graph (data/graph/nodes): family-word derivation from \"graphite\"; ISCC-NBS 1955 category and Munsell notation",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Graphite violet is built as a variant of which family word?",
+      "choices": [
+        "Graphite",
+        "Jasper",
+        "Jade",
+        "Diamine"
+      ],
+      "answer": "Graphite",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: a specific nineteenth or twentieth-century dictionary entry names this exact color \"Graphite violet\".",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Graphite violet reads lighter than ColorHub's own Graphite, despite sharing its name."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No historical plate or dictionary source found for this exact name; treated as a ColorHub family variant.",
+      "lint 2026-10-09"
     ]
-   ]
   },
-  "peak_century": 1900
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub name graph (data/graph/nodes): family-word derivation from \"graphite\"; ISCC-NBS 1955 category and Munsell notation",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Graphite violet is built as a variant of which family word?",
-   "choices": [
-    "Graphite",
-    "Jasper",
-    "Jade",
-    "Diamine"
-   ],
-   "answer": "Graphite",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: a specific nineteenth or twentieth-century dictionary entry names this exact color \"Graphite violet\".",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Graphite violet reads lighter than ColorHub's own Graphite, despite sharing its name."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No historical plate or dictionary source found for this exact name; treated as a ColorHub family variant.",
-   "lint 2026-10-09"
-  ]
- },
- "slug": "graphite-violet",
- "words": 253
+  "slug": "graphite-violet",
+  "words": 253
 }

@@ -1,0 +1,118 @@
+{
+ "slug": "greeny-blue",
+ "name": "Greeny Blue",
+ "hex": "#42B395",
+ "names": [
+  "Greeny Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Greeny Blue is a muted sea green named by modifier grammar as greeny plus [[blue]], recorded by the 2010 xkcd color survey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Greeny, plus blue",
+   "body": "Our data classes Greeny Blue as a descriptive-modifier name, pairing the informal adjective \"greeny\" with the parent color [[blue]] [1]. The spelling \"greeny\" rather than \"greenish\" is the kind of casual variant the xkcd survey's free-text entry invited, and our sources give no history for this exact value beyond that 2010 crowd-sourced list [1].\n\nThe nearest named look-alikes on file are [[jungle-green|Jungle Green]], almost the same shade, and [[zomp|Zomp]], a darker variant [2]. [[mountain-meadow|Mountain Meadow]] and [[keppel|Keppel]] sit further off, both more vivid [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive, 6 paintings carry a color close enough to this one over enough of their canvas to count, about 0.03 per cent, as photographed, rarer than 82 per cent of our named colors [3]. The sample is too small to support any claim about painters, periods or countries, and these are photographs of aged, varnished paintings read as screen colors, not pigment matches [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "greeny + blue (modifier grammar)",
+   "first_recorded": "2010, in the xkcd color-name survey",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "jungle-green",
+   "zomp",
+   "mountain-meadow"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 6,
+  "measured": {
+   "lch": [
+    66.2,
+    39.6,
+    171.3
+   ],
+   "nearest": [
+    [
+     "Jungle Green",
+     3.4
+    ],
+    [
+     "Zomp",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-g.json): xkcd 2010 crowd-sourced color-name survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-g.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes/g.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Greeny Blue's name is built from which two pieces?",
+   "choices": [
+    "Greeny + blue",
+    "Jungle + green",
+    "A painter's surname + blue",
+    "A Japanese traditional term"
+   ],
+   "answer": "Greeny + blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Greeny Blue is common in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Greeny Blue uses the casual spelling \"greeny\" rather than the more common \"greenish\"."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits (src empty); written from ColorHub graph/library data only, no book sources. Archive sample (n=6) too small for painter/period claims."
+  ]
+ },
+ "words": 169
+}

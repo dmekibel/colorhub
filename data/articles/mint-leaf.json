@@ -1,124 +1,126 @@
 {
- "slug": "mint-leaf",
- "name": "Mint leaf",
- "hex": "#7DC18B",
- "names": [
-  "Mint leaf"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Mint leaf is a clear, light yellowish green dated to Ridgway's 1912 color nomenclature, and despite the garden-herb name it is one of the rarest colors in our painting archive.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A garden word, a rare paint",
-   "body": "Ridgway's 1912 nomenclature lists this tone, and the ISCC-NBS system of 1955 places it in block 135, \"deep yellowish green\", 3.8 units from that block's center [1]. In the ColorHub library the same point is also carried under Cendre Green, an exact duplicate (ΔE 0.0) [1][3]. The books held in color-kb have no entry for \"Mint leaf\" [4].\n\nIts nearest distinct neighbor is [[neuwieder-green]], 3.1 units off, \"almost the same\" by our graph [3]. Nearby cousins in the library include [[cobalt-green]] and [[dark-sea-green]], both duller or more saturated versions of the same yellow-green family [3].\n\nThe gap between a common garden word and a rare painted color is itself a finding: not every plant name used by dye and paint catalogers in 1912 reflects how often painters actually reached for that hue [1][2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Despite its plant-garden name, Mint leaf is nearly absent from our archive: 5 of 23,781 paintings, about 0.02 percent, as photographed [2]. The handful that do carry it include two Van Gogh still lifes and a Mughal portrait of Emperor Jahangir, where it covers over half the canvas [2]. Counts are computed matches on varnished, photographed paintings, not pigment identifications [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the leaf of the mint plant",
-   "first_recorded": "1912, Ridgway",
-   "source": "Ridgway 1912; ISCC-NBS 1955"
-  },
-  "aka": [
-   "Cendre Green"
+  "slug": "mint-leaf",
+  "name": "Mint leaf",
+  "hex": "#7DC18B",
+  "names": [
+    "Mint leaf",
+    "Cendre Green"
   ],
-  "siblings": [
-   "cendre-green",
-   "neuwieder-green",
-   "cobalt-green"
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Mint leaf is a clear, light yellowish green dated to Ridgway's 1912 color nomenclature, and despite the garden-herb name it is one of the rarest colors in our painting archive.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A garden word, a rare paint",
+      "body": "Ridgway's 1912 nomenclature lists this tone, and the ISCC-NBS system of 1955 places it in block 135, \"deep yellowish green\", 3.8 units from that block's center [1]. In the ColorHub library the same point is also carried under Cendre Green, an exact duplicate (ΔE 0.0) [1][3]. The books held in color-kb have no entry for \"Mint leaf\" [4].\n\nIts nearest distinct neighbor is [[neuwieder-green]], 3.1 units off, \"almost the same\" by our graph [3]. Nearby cousins in the library include [[cobalt-green]] and [[dark-sea-green]], both duller or more saturated versions of the same yellow-green family [3].\n\nThe gap between a common garden word and a rare painted color is itself a finding: not every plant name used by dye and paint catalogers in 1912 reflects how often painters actually reached for that hue [1][2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Despite its plant-garden name, Mint leaf is nearly absent from our archive: 5 of 23,781 paintings, about 0.02 percent, as photographed [2]. The handful that do carry it include two Van Gogh still lifes and a Mughal portrait of Emperor Jahangir, where it covers over half the canvas [2]. Counts are computed matches on varnished, photographed paintings, not pigment identifications [2]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 5,
-  "measured": {
-   "lch": [
-    72.5,
-    38.7,
-    148.0
-   ],
-   "nearest": [
-    [
-     "Neuwieder Green",
-     3.1
+  "aside": {
+    "origin": {
+      "named_after": "the leaf of the mint plant",
+      "first_recorded": "1912, Ridgway",
+      "source": "Ridgway 1912; ISCC-NBS 1955"
+    },
+    "aka": [
+      "Cendre Green"
+    ],
+    "siblings": [
+      "mint-leaf",
+      "neuwieder-green",
+      "cobalt-green",
+      "arcadian-green"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 5,
+    "measured": {
+      "lch": [
+        72.5,
+        38.7,
+        148.0
+      ],
+      "nearest": [
+        [
+          "Neuwieder Green",
+          3.1
+        ]
+      ]
+    }
+  },
+  "questions": [
+    {
+      "q": "Which 1912 source lists Mint leaf?",
+      "choices": [
+        "Ridgway's color nomenclature",
+        "A Crayola box",
+        "Pantone",
+        "Newton's Opticks"
+      ],
+      "answer": "Ridgway's color nomenclature",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Mint leaf is a common color in our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Mint leaf is named for a common garden herb but is one of the rarest colors in our painting archive."
+  ],
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes, data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, RAL, Munsell and CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match (ΔE2000 ≤ 6, ≥ 5% of canvas), as photographed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph: nearest named neighbors and cross-domain twin matches (gems, films, fashion decades, Werner 1821 cross-reference), computed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "Concordance of the 29 color books held in color-kb for this name: no hits",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No book concordance hits for this name; sourced from ColorHub's own color library and archive data.",
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "questions": [
-  {
-   "q": "Which 1912 source lists Mint leaf?",
-   "choices": [
-    "Ridgway's color nomenclature",
-    "A Crayola box",
-    "Pantone",
-    "Newton's Opticks"
-   ],
-   "answer": "Ridgway's color nomenclature",
-   "kind": "pick"
   },
-  {
-   "q": "True or false: Mint leaf is a common color in our painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Mint leaf is named for a common garden herb but is one of the rarest colors in our painting archive."
- ],
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes, data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, RAL, Munsell and CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match (ΔE2000 ≤ 6, ≥ 5% of canvas), as photographed",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph: nearest named neighbors and cross-domain twin matches (gems, films, fashion decades, Werner 1821 cross-reference), computed",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "Concordance of the 29 color books held in color-kb for this name: no hits",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No book concordance hits for this name; sourced from ColorHub's own color library and archive data.",
-   "lint 2026-10-09"
-  ]
- },
- "words": 224
+  "words": 224
 }

@@ -109,13 +109,12 @@ function namePage(entry, push = true, tapped) {
   // codes: HEX/RGB/HSL from js/explore.js's codes(), plus Lab (the space every closeness number here is computed in)
   const Lab = lab(heroHex);
   const codeRows = (typeof codes === "function" ? codes(heroHex).slice(0, 3) : [["HEX", heroHex]]).concat([["LAB", `${Lab[0].toFixed(1)} ${Lab[1].toFixed(1)} ${Lab[2].toFixed(1)}`]]);
-  const learnBtn = (learnC && typeof hmLearnIt === "function") || typeof prQuick === "function" ? `<button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button>` : "";
-  const primary = typeof fvHeartRow === "function" ? fvHeartRow(hex, name, learnBtn) : learnBtn ? `<div class="cp-primary-row">${learnBtn}</div>` : "";
-  const el = colorDossier(entry, { tapped, primary, shadeBase, cls: "names", paintHost: `<section class="gl-in" data-npgal></section>`, codes: codeRows });
+  // Learn it, Pair with… and the heart now live in the cover's own action row (js/richpage.js rpActionRowHTML
+  // / rpCoverFill wires the heart's liking moment); this page only needs to point Learn it at `learnC`, since
+  // the cover doesn't know about a name's own card id.
+  const el = colorDossier(entry, { tapped, shadeBase, cls: "names", codes: codeRows });
   const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => typeof prQuick === "function" ? prQuick({ seed: { n: name, h: hex } }) : hmLearnIt(learnC);   // js/practice.js (its sheet offers Learn it for any learnable name: js/learnmore.js)
-  if (typeof fvWireHeart === "function") fvWireHeart(el, hex, name);   // js/favs.js
   const shBtn = el.querySelector("[data-shade-base]"); if (shBtn) shBtn.onclick = () => openCoreName(shadeBase.h, shadeBase.n);
-  npPaintingsSection(el.querySelector("[data-npgal]"), hex, name);
   return el;   // so growFrom (js/core.js, js/home.js hmOpenName) can grow this page from the tapped honeycomb bubble
 }
 

@@ -1,126 +1,127 @@
 {
- "slug": "military-green",
- "name": "Military Green",
- "hex": "#667C3E",
- "names": [
-  "Military Green"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Military Green is a dull, yellowish olive from a 2010 crowd color survey, close enough to uniform drab that the name reads as obvious even though no army ever registered it.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A descriptive compound",
-   "body": "The library's only source for Military Green is the xkcd 2010 survey, where volunteers typed free-text names for colors shown on screen [1]. No dictionary, paint brand or military specification in our data uses the phrase, so its coining is undocumented beyond that survey [1]. It measures lightness 49 and chroma 36 in LCH, a middling, muted olive rather than a pure green [1].\n\nOn screen it is close kin to several other olive names: [[velvet-green|Velvet Green]] sits 3.4 CIEDE2000 units away, [[muddy-green|Muddy Green]] 3.6, and [[dirty-green|Dirty Green]] 3.7, all read by the graph as almost the same color; [[khaki-green|Khaki Green]] is a little further off at 4.9, more vivid [2]. The nearest gem comparison is [[gem:peridot|peridot]], whose common stones run a touch deeper [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this olive in 206 of 23,781 paintings, about 0.87%, as photographed; a stricter within-painting reading finds it in 106 [4]. It first turns up in a 1390 painting by Spinello Aretino, 620 years before the name's own 2010 record, which only means an aged photograph can resemble this hue, not that anyone mixed this pigment then [4]. Georges Seurat is its most devoted painter here, present in 8 of his 41 works, 10.4 times the baseline rate [4]. Inside a painting it most often plays an accent, the smallest, brightest note rather than the shadow [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented; a descriptive compound of military + green",
-   "first_recorded": "2010 (xkcd color survey)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "velvet-green",
-   "muddy-green",
-   "dirty-green",
-   "khaki-green"
+  "slug": "military-green",
+  "name": "Military Green",
+  "hex": "#667C3E",
+  "names": [
+    "Military Green"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-  "n_present": 206,
-  "pct": 0.87,
-  "measured": {
-   "lch": [
-    49.0,
-    36.3,
-    121.3
-   ],
-   "nearest": [
-    [
-     "Velvet Green",
-     3.4
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Military Green is a dull, yellowish olive from a 2010 crowd color survey, close enough to uniform drab that the name reads as obvious even though no army ever registered it.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A descriptive compound",
+      "body": "The library's only source for Military Green is the xkcd 2010 survey, where volunteers typed free-text names for colors shown on screen [1]. No dictionary, paint brand or military specification in our data uses the phrase, so its coining is undocumented beyond that survey [1]. It measures lightness 49 and chroma 36 in LCH, a middling, muted olive rather than a pure green [1].\n\nOn screen it is close kin to several other olive names: [[velvet-green|Velvet Green]] sits 3.4 CIEDE2000 units away, [[military-green|Muddy Green]] 3.6, and [[khaki-green|Dirty Green]] 3.7, all read by the graph as almost the same color; [[khaki-green|Khaki Green]] is a little further off at 4.9, more vivid [2]. The nearest gem comparison is [[gem:peridot|peridot]], whose common stones run a touch deeper [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this olive in 206 of 23,781 paintings, about 0.87%, as photographed; a stricter within-painting reading finds it in 106 [4]. It first turns up in a 1390 painting by Spinello Aretino, 620 years before the name's own 2010 record, which only means an aged photograph can resemble this hue, not that anyone mixed this pigment then [4]. Georges Seurat is its most devoted painter here, present in 8 of his 41 works, 10.4 times the baseline rate [4]. Inside a painting it most often plays an accent, the smallest, brightest note rather than the shadow [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented; a descriptive compound of military + green",
+      "first_recorded": "2010 (xkcd color survey)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "velvet-green",
+      "military-green",
+      "khaki-green",
+      "moss-olive",
+      "garland-green"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+    "n_present": 206,
+    "pct": 0.87,
+    "measured": {
+      "lch": [
+        49.0,
+        36.3,
+        121.3
+      ],
+      "nearest": [
+        [
+          "Velvet Green",
+          3.4
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-m.json): xkcd 2010 crowd-sourced color survey",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph look-alikes (data/graph/edges-m.json), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph twins, gems cross-reference (data/graph/edges-m.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which museum or institution first registered the name Military Green?",
+      "choices": [
+        "None; it comes from a 2010 crowd survey",
+        "The US Army",
+        "NATO",
+        "Ridgway's 1912 dictionary"
+      ],
+      "answer": "None; it comes from a 2010 crowd survey",
+      "kind": "pick"
+    },
+    {
+      "q": "Inside a painting, what role does Military Green most often play?",
+      "choices": [
+        "Accent",
+        "Shadow",
+        "Background sky",
+        "Skin tone"
+      ],
+      "answer": "Accent",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Military Green turns up in a 1390 painting, 620 years before the name itself was ever recorded."
+  ],
+  "words": 253,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits; written from ColorHub library/graph/archive data only.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes-m.json): xkcd 2010 crowd-sourced color survey",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph look-alikes (data/graph/edges-m.json), CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph twins, gems cross-reference (data/graph/edges-m.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which museum or institution first registered the name Military Green?",
-   "choices": [
-    "None; it comes from a 2010 crowd survey",
-    "The US Army",
-    "NATO",
-    "Ridgway's 1912 dictionary"
-   ],
-   "answer": "None; it comes from a 2010 crowd survey",
-   "kind": "pick"
-  },
-  {
-   "q": "Inside a painting, what role does Military Green most often play?",
-   "choices": [
-    "Accent",
-    "Shadow",
-    "Background sky",
-    "Skin tone"
-   ],
-   "answer": "Accent",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Military Green turns up in a 1390 painting, 620 years before the name itself was ever recorded."
- ],
- "words": 253,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "No concordance hits; written from ColorHub library/graph/archive data only.",
-   "lint 2026-10-09"
-  ]
- }
 }

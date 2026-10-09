@@ -1,0 +1,113 @@
+{
+  "slug": "light-perilla-purple",
+  "name": "Light Perilla Purple",
+  "hex": "#95657B",
+  "names": [
+    "Light Perilla Purple"
+  ],
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Light Perilla Purple is a paler reading of [[perilla-purple|Perilla Purple]], the dusty reddish mauve Robert Ridgway named for the East Asian herb perilla in his 1912 color atlas.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier on a leaf color",
+      "body": "The name is built by grammar: \"light\" over the parent [[perilla-purple|Perilla Purple]], itself named for the dark purple-red leaves of perilla, the herb better known in the kitchen as shiso [1]. Ridgway's 1912 atlas plates this lighter step on plate XXXVII, hue 65'', tone i [1]. Measured, it reads lighter than its parent (lightness 48 against 38) at a close chroma, keeping the same muted, reddish cast [1].\n\nIts nearest named neighbor is [[mauve-taupe|Mauve-Taupe]], 3.9 units away and redder, with [[daphne-red|Daphne Red]] close behind at 4.1, more vivid [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this dusty mauve in 15 of 23,781 paintings (0.06 percent, as photographed), rarer than 82 percent of the named colors we track [2]. The earliest dated match runs to 1780, by Joseph-Siffred Duplessis, 132 years before Ridgway's 1912 record; the match is a look-alike hue in an aged photograph, not proof the pigment was there, a floor and not a first, since the archive's early centuries are thin [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a descriptive modifier: light + Perilla Purple",
+      "first_recorded": "1912 (Ridgway, plate XXXVII)",
+      "source": "Ridgway, Color Standards and Color Nomenclature"
+    },
+    "aka": [],
+    "siblings": [
+      "mauve-taupe",
+      "daphne-red",
+      "dusky-mauve"
+    ],
+    "parent": "perilla-purple",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 15,
+    "measured": {
+      "lch": [
+        48,
+        23,
+        349
+      ],
+      "nearest": [
+        [
+          "Mauve-Taupe",
+          3.9
+        ],
+        [
+          "Daphne Red",
+          4.1
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXXVII, hue 65'', tone i; cited via ColorHub color library",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Light Perilla Purple is a lightened version of which parent color?",
+      "choices": [
+        "Perilla Purple",
+        "Rosolane Purple",
+        "Royal Blue",
+        "Rose"
+      ],
+      "answer": "Perilla Purple",
+      "kind": "pick"
+    },
+    {
+      "q": "Perilla, the herb behind the parent color's name, is better known in the kitchen as what?",
+      "choices": [
+        "Shiso",
+        "Basil",
+        "Sorrel",
+        "Sumac"
+      ],
+      "answer": "Shiso",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "This dusty mauve is named for perilla, the East Asian herb better known in the kitchen as shiso."
+  ],
+  "words": 187,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits (src empty); written from Ridgway via the color library and archive."
+    ]
+  }
+}

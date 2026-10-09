@@ -1,0 +1,120 @@
+{
+  "slug": "sickly-green",
+  "name": "Sickly Green",
+  "hex": "#94B21C",
+  "names": [
+    "Sickly Green"
+  ],
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Sickly Green is a strong, murky yellow-green recorded in the 2010 xkcd color survey, where respondents reached for the look of nausea rather than a plant, place or pigment to name it.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A feeling, not a thing",
+      "body": "The 2010 xkcd survey gathered 1,058,212 free-text color names from 127,825 participants shown random hex values, and Munroe published roughly the top thousand that emerged [1]. \"Sickly\" describes an association, the color of nausea or illness, rather than naming a dye, mineral or place [1]. By our look-alike data its nearest colors are [[avocado|Avocado]], 2.5 units away, and [[avocado-green|Avocado Green]], 3.3 units away, both read as almost the same [2].\n\nNo dictionary, standard or paint company lists this name; the 2010 survey is its only documented appearance [1]. [[pea-soup-green|Pea Soup Green]] sits a little further off, 3.8 units away, another food name crowded into the same yellow-green corner [1][2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a close match to this yellow-green in only 3 of 23,781 paintings, as photographed [3]. All three are Scandinavian or French landscape works from 1888 to 1941, the earliest Odilon Redon's 1888 *Peyrelebade*, a floor set by the archive's own holdings rather than a true first sighting [3]. Denmark shows the largest lift of any country checked, 2 hits across 1,676 Danish paintings, though on a sample too thin for a real claim about Danish painting generally [3]. The color's rarity in art fits a name born from an emotional reaction rather than from pigment use [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a free-text response in the 2010 xkcd color survey, describing an association with nausea or illness",
+      "first_recorded": "2010 (xkcd color survey)",
+      "source": "xkcd Color Survey Results, 2010"
+    },
+    "aka": [],
+    "siblings": [
+      "avocado",
+      "avocado-green",
+      "pea-soup-green",
+      "calliste-green"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 3,
+    "measured": {
+      "lch": [
+        68.2,
+        71.2,
+        113.9
+      ],
+      "nearest": [
+        [
+          "Avocado",
+          2.5
+        ],
+        [
+          "Avocado Green",
+          3.3
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "web",
+      "cite": "xkcd Color Survey Results, blog.xkcd.com, May 2010",
+      "loc_kind": null,
+      "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph, look-alike edges (data/graph/edges-s.json, edges-b.json, edges-p.json, edges-a.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What kind of word is \"sickly\" in Sickly Green, rather than a dye or mineral word?",
+      "choices": [
+        "A description of an association, with nausea or illness",
+        "A plant name",
+        "A place name",
+        "A pigment's chemical name"
+      ],
+      "answer": "A description of an association, with nausea or illness",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Sickly Green is common in our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Sickly Green names a feeling, not a thing, and our archive finds only 3 paintings close to it."
+  ],
+  "words": 240,
+  "status": "checked",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-09",
+    "issues": [
+      "Sole documented source is the 2010 xkcd crowd survey.",
+      "Country lift (Denmark) rests on only 2 of 3 total archive matches."
+    ]
+  }
+}

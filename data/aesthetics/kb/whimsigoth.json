@@ -1,0 +1,45 @@
+{
+ "id": "whimsigoth",
+ "name": "Whimsigoth",
+ "lineage": {
+  "influenced_by": [
+   "1990s-2000s mystical/witchy fashion",
+   "nu-goth",
+   "celestial/tarot imagery"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "lived reference era 1990s-2000s; named/revived c. 2021–present"
+ ],
+ "places": [
+  "TikTok/Pinterest"
+ ],
+ "garments": [
+  "velvet and moon-phase prints",
+  "layered silver jewelry",
+  "flared trousers"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "both traditional goth's severity and 2010s minimalism, mixing mysticism with a softer 1990s silhouette.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Whimsigothic"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 72% of the measured color across 6 wiki photos is below mid-lightness",
+   "mostly muted — about 57% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

@@ -1,0 +1,59 @@
+{
+ "id": "streamline-moderne",
+ "name": "Streamline Moderne",
+ "lineage": {
+  "influenced_by": [
+   "Art Deco",
+   "1930s aerodynamic engineering and industrial design"
+  ],
+  "influences": [
+   "space-age",
+   "cassette-futurism"
+  ]
+ },
+ "eras": [
+  "c. 1930–1945"
+ ],
+ "places": [
+  "United States (Depression-era civic and transport design)"
+ ],
+ "garments": [
+  "not primarily a fashion look — an industrial and architectural design style"
+ ],
+ "media": [
+  {
+   "title": "Raymond Loewy's industrial design (Coldspot refrigerator, 1935; locomotives)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Raymond Loewy",
+  "Norman Bel Geddes"
+ ],
+ "reacts_against": "Art Deco's ornamental geometry, stripping it down to smooth, curved, wind-tunnel-inspired forms that implied speed even on a stationary building or toaster.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Art Moderne, Streamline Design, Style Paquebot",
+  "decade_of_origin": "1930s–1940s",
+  "key_motifs": "Curved corners, horizontal lines (\"speed lines\"), smooth and unadorned surfaces, glass block, chrome accents, porthole windows",
+  "key_colours": "Often white or pale earth tones, with accents of chrome and steel",
+  "related_aesthetics": "Art DecoDieselpunkDecopunkFactory PomoMid-Century ModernRaygun Gothic",
+  "key_values": "Speed, efficiency, modernity, technology, motion, functionality"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Streamline_Moderne"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 71% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

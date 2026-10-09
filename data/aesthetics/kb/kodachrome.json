@@ -1,0 +1,42 @@
+{
+ "id": "kodachrome",
+ "name": "Kodachrome",
+ "lineage": {
+  "influenced_by": [
+   "Kodak's Kodachrome slide film (introduced 1935)"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "1935–2009 (when Kodak discontinued the film)"
+ ],
+ "places": [
+  "amateur and professional photography worldwide"
+ ],
+ "garments": [
+  "not a fashion look — a photographic film stock"
+ ],
+ "media": [
+  {
+   "title": "Steve McCurry's \"Afghan Girl\" (1984, National Geographic)",
+   "note": "shot on Kodachrome"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "nothing — it's a specific film stock, prized for rich, warm, highly saturated color and archival stability, discontinued in 2009 as digital photography took over.",
+ "revivals": [
+  "imitated by countless digital photo-editing presets and Instagram-era filters"
+ ],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 71% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

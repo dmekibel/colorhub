@@ -1,0 +1,120 @@
+{
+ "name": "Papyrus White",
+ "hex": "#CFD3CD",
+ "names": [
+  "Papyrus White"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Papyrus White is a pale grey-green standardized today as RAL 9018, but Werner's 1821 nomenclature filed the same patch among the Purples, under a dragonfly's name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "From a dragonfly to a paint code",
+   "body": "ColorHub's library sets this swatch to RAL 9018, a modern European paint and design standard, and separately to Werner's 1821 *Nomenclature of Colours*, where it appears among the Purples as no. 35, Bluish Lilac Purple [1]. Werner, by Syme's account, tied that number to the male of the dragonfly *Libellula depressa*, to blue lilac flowers, and to the mineral lepidolite [1]. The name and the family have drifted since 1821; the modern swatch reads as a neutral grey-green, not a purple, and a reader comparing the two on screen should expect a visible gap [1]. The papyrus in the current name is a paper plant, not a pigment: nothing in the library ties the hex to any actual papyrus dye or paper sample [1].\n\nThe nearest named colors on file are [[grey-white]], [[light-grey]], [[timberwolf]] and [[pale-sage]], at 3.3, 4, [[ecru]], [[grey]] and [[white]] sit nearby in the same pale-neutral family [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Papyrus White in 1,028 of 23,781 paintings (4.32 percent), as photographed, almost always as a highlight [2]. Two of Piet Mondrian's grid compositions and two of Georgia O'Keeffe's white flower paintings are among its closest matches [2]. It keeps company with Ecru, Sky Blue and Silver more than chance [2]. These are screen approximations of aged, varnished canvases, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "papyrus paper; Werner's 1821 name was Bluish Lilac Purple, after a dragonfly",
+   "first_recorded": "Werner, 1821, no. 35 (Purples)",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Bluish Lilac Purple"
+  ],
+  "siblings": [
+   "grey-white",
+   "light-grey",
+   "timberwolf",
+   "pale-sage"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1028,
+  "role": {
+   "highlight": 0.98,
+   "mid": 0.02,
+   "shadow": 0.0
+  },
+  "company": [
+   "Ecru",
+   "Sky Blue",
+   "Silver"
+  ],
+  "measured": {
+   "lch": [
+    84,
+    3,
+    135
+   ],
+   "nearest": [
+    [
+     "Grey White",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Werner's 1821 nomenclature tie this swatch to, under the name Bluish Lilac Purple?",
+   "choices": [
+    "A dragonfly, a lilac flower and a mineral",
+    "A seashell and a pearl",
+    "A type of silk",
+    "A bird's egg"
+   ],
+   "answer": "A dragonfly, a lilac flower and a mineral",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Werner's 1821 system classed this swatch among the Purples.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Werner's 1821 chart filed this grey-green among the Purples, named for a dragonfly."
+ ],
+ "words": 244,
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "papyrus-white"
+}

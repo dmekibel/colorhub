@@ -1,0 +1,67 @@
+{
+ "id": "ukiyo-e",
+ "name": "Ukiyo-e",
+ "lineage": {
+  "influenced_by": [
+   "Edo-period (1603–1868) urban merchant culture",
+   "woodblock printing technique"
+  ],
+  "influences": [
+   "impressionism",
+   "fauvism"
+  ]
+ },
+ "eras": [
+  "17th–19th century (peak 1760s–1850s)"
+ ],
+ "places": [
+  "Edo (Tokyo)"
+ ],
+ "garments": [
+  "not a fashion look — a woodblock print tradition, though it depicts kimono fashion of its era extensively"
+ ],
+ "media": [
+  {
+   "title": "Katsushika Hokusai, The Great Wave off Kanagawa (c. 1831)",
+   "note": ""
+  },
+  {
+   "title": "Utagawa Hiroshige, 100 Famous Views of Edo (1856–58)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Katsushika Hokusai",
+  "Utagawa Hiroshige",
+  "Kitagawa Utamaro"
+ ],
+ "reacts_against": "no single Western movement; it developed independently as popular, affordable urban art (\"pictures of the floating world\") for merchant-class buyers excluded from elite painting patronage.",
+ "revivals": [
+  "directly cited by Impressionist and Post-Impressionist painters (Van Gogh collected and copied ukiyo-e prints) after Japan reopened to trade in the 1850s-60s, a cross-cultural influence historians call Japonisme"
+ ],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Pictures of the Floating World",
+  "decade_of_origin": "17th–19th centuries",
+  "key_motifs": "Courtesans and beautiful women (bijin-ga), kabuki actors (yakusha-e), landscapes (fūkei-ga), scenes from history and folklore, sumo wrestlers, nature scenes",
+  "key_colours": "Rich and varied palettes, often with bold black outlines and flat areas of color",
+  "related_aesthetics": "Art NouveauJaponismeImpressionismPost-ImpressionismSuperflat",
+  "key_values": "Appreciation of transient pleasures, urban entertainment culture, beauty, theatricality, observation of nature and daily life"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Ukiyo-e"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "light — about 43% of the measured color is pale or near-white",
+   "mostly muted — about 68% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

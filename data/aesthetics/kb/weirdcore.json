@@ -1,0 +1,50 @@
+{
+ "id": "weirdcore",
+ "name": "Weirdcore",
+ "lineage": {
+  "influenced_by": [
+   "liminal space and dreamcore",
+   "early-2000s low-resolution digital photography"
+  ],
+  "influences": [
+   "glitchcore"
+  ]
+ },
+ "eras": [
+  "c. 2019–present"
+ ],
+ "places": [
+  "Tumblr/TikTok"
+ ],
+ "garments": [
+  "not a fashion look — an image aesthetic"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "polished imagery generally, favoring deliberately unsettling, low-fidelity, text-overlaid photos.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Oddcore, Strangecore",
+  "decade_of_origin": "2010s",
+  "key_motifs": "Low-quality digital images, amateur editing, primitive graphics, image compression, distorted or out-of-place objects, unusual borders, word art, uncomfortably framed subjects, liminal spaces, out-of-context captions, incorrect or nonsensical labels, digital artifacts, distorted geometry",
+  "related_aesthetics": "Blogspot SceneAfter HoursBastardcoreDreamcoreGlitch ArtGlitter GraphicsKidcoreLiminal SpaceNet.artSurrealismVaporwaveWebcoreXpiritualism",
+  "key_values": "Confusion, disorientation, dread, alienation, nostalgia (anemoia), dreamlike states, distorted perception, the unfamiliar within the familiar, unease, comfort (paradoxically), curiosity, questioning of reality"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Weirdcore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 45% of the measured color across 6 wiki photos is below mid-lightness",
+   "mostly muted — about 85% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

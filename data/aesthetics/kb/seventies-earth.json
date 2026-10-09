@@ -1,0 +1,45 @@
+{
+ "id": "seventies-earth",
+ "name": "1970s earth tones",
+ "lineage": {
+  "influenced_by": [
+   "post-psychedelic come-down",
+   "the 1973 oil crisis's effect on consumer optimism",
+   "a renewed interest in craft/natural materials"
+  ],
+  "influences": [
+   "cottagecore",
+   "goblincore"
+  ]
+ },
+ "eras": [
+  "c. 1970–1979"
+ ],
+ "places": [
+  "US and UK suburban interiors"
+ ],
+ "garments": [
+  "corduroy",
+  "macramé",
+  "wood-paneled interiors",
+  "harvest gold and avocado green appliances"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "the previous decade's bright psychedelic and Space Age optimism, settling into a warmer, earthier, more domestic palette as the economic mood cooled.",
+ "revivals": [
+  "a frequent interior-design nostalgia reference since the 2010s"
+ ],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 88% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

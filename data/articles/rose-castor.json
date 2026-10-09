@@ -1,0 +1,127 @@
+{
+ "slug": "rose-castor",
+ "name": "Rose Castor",
+ "hex": "#877474",
+ "names": [
+  "Rose Castor"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Rose Castor is a dusty, reddish gray recorded by Maerz and Paul in 1930.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A late, dusty rose-gray",
+   "body": "Maerz and Paul's 1930 dictionary gives Rose Castor a first recorded date of 1926, at plate 54 C 2 [1]. The name pairs rose with castor, though our sources do not explain whether castor here points to the beaver-fur color sense of the word or to a dye, so that link is undocumented here [1]. The ISCC-NBS system does not carry a separate block for this exact name in our data [2].\n\nThe nearest named color is [[dusty-rose-brown|Dusty Rose Brown]], 3.2 units away; the library itself lists this as the closest recorded entry [2]. [[zircon-grey|Zircon Grey]] sits an equally close 3.2 units off, and [[crocus-martis|Crocus Martis]] is 3.4 units away [2]. In LCH terms Rose Castor measures lightness 51, chroma 8, hue 20 degrees[2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds Rose Castor in 186 of 23,781 paintings, 0.78 percent, as photographed, more common than 57 percent of the archive's named colors [3]. It peaks in the 1900s, in 30 of 1,674 paintings, at 3.3 times the expected rate, and is most over-represented in French paintings, at 2.3 times the expected rate [3]. It most often turns up as a light tone, in 29 percent of its paintings [3]. The earliest match is dated 1452, in a work by Bartolomeo Caporali, 478 years before Maerz and Paul's 1930 record of the name — a look-alike hue in an aged photograph, not proof of a dye or pigment, a floor and not a first, since the archive's early centuries are thin [3]. [[fontainebleau|Fontainebleau]], a separate library name, sits a little further out, at 4.9 units, from Rose Castor [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "rose and castor; the exact sense of castor is undocumented in our sources",
+   "first_recorded": "1926, per Maerz and Paul",
+   "source": "ColorHub color library, Maerz and Paul 1930 plate 54 C 2"
+  },
+  "aka": [],
+  "siblings": [
+   "dusty-rose-brown",
+   "zircon-grey",
+   "crocus-martis",
+   "fontainebleau"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 186,
+  "measured": {
+   "lch": [
+    51,
+    8,
+    20
+   ],
+   "nearest": [
+    [
+     "Dusty rose brown",
+     3.2
+    ],
+    [
+     "Zircon Grey",
+     3.2
+    ],
+    [
+     "Crocus Martis",
+     3.4
+    ],
+    [
+     "Fontainebleau",
+     4.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul 1930, plate 54 C 2",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: computed LCH and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which dictionary gives Rose Castor its earliest recorded date, 1926?",
+   "choices": [
+    "Maerz and Paul",
+    "Ridgway",
+    "Werner",
+    "Pantone"
+   ],
+   "answer": "Maerz and Paul",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources explain exactly what castor refers to in the name Rose Castor.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Rose Castor, first recorded in 1926, is one of the latest-dated names in its batch."
+ ],
+ "words": 276,
+ "status": "draft",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

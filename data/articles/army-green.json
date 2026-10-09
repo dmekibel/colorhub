@@ -1,120 +1,120 @@
 {
- "name": "Army Green",
- "hex": "#4B5D16",
- "names": [
-  "Army Green"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Army Green is a dull olive associated with military uniforms and camouflage, recorded in the 2010 xkcd color-naming survey.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A uniform's name, an undocumented coining",
-   "body": "The name joins \"army\" to a dull olive green, the shade long used for field uniforms and equipment because it blends into foliage [1]. ColorHub's library first catalogs the exact name from the 2010 xkcd crowd survey; which army, country or decade first used this specific wording as a formal color name is undocumented in the sources consulted [1]. Its nearest named look-alike is [[camo-green|Camo Green]], almost the same color, with [[mud-green|Mud Green]], [[navy-green|Navy Green]] and [[xander|Xander]] a little further off [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this olive in 141 of 23,781 paintings (0.59 percent, as photographed), more common than 55 percent of named colors here [3]. It peaks in paintings from the 1900s, at 2.4 times the expected rate, most often as an accent, and is over-represented in American paintings (2.3 times expected) [3]. George Inness is its most devoted painter, using it in 5 of 45 works here, over seven times the baseline rate [3]. The earliest matching canvas dates to 1400, six centuries before the name was recorded; the archive's early centuries are thin, so this is a floor, not a first, and a look-alike hue, not proof the term is that old [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "military field uniforms and camouflage",
-   "first_recorded": "2010 (xkcd color survey)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "camo-green",
-   "mud-green",
-   "navy-green",
-   "xander"
+  "name": "Army Green",
+  "hex": "#4B5D16",
+  "names": [
+    "Army Green"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 141,
-  "rank_pct": 55,
-  "measured": {
-   "lch": [
-    36.7,
-    40.6,
-    116.3
-   ],
-   "nearest": [
-    [
-     "Camo Green",
-     3.1
-    ]
-   ]
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Army Green is a dull olive associated with military uniforms and camouflage, recorded in the 2010 xkcd color-naming survey.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A uniform's name, an undocumented coining",
+      "body": "The name joins \"army\" to a dull olive green, the shade long used for field uniforms and equipment because it blends into foliage [1]. ColorHub's library first catalogs the exact name from the 2010 xkcd crowd survey; which army, country or decade first used this specific wording as a formal color name is undocumented in the sources consulted [1]. Its nearest named look-alike is [[camo-green|Camo Green]], almost the same color, with [[mud|Mud Green]], [[navy-green|Navy Green]] and [[xander|Xander]] a little further off [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this olive in 141 of 23,781 paintings (0.59 percent, as photographed), more common than 55 percent of named colors here [3]. It peaks in paintings from the 1900s, at 2.4 times the expected rate, most often as an accent, and is over-represented in American paintings (2.3 times expected) [3]. George Inness is its most devoted painter, using it in 5 of 45 works here, over seven times the baseline rate [3]. The earliest matching canvas dates to 1400, six centuries before the name was recorded; the archive's early centuries are thin, so this is a floor, not a first, and a look-alike hue, not proof the term is that old [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "military field uniforms and camouflage",
+      "first_recorded": "2010 (xkcd color survey)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "camo-green",
+      "mud",
+      "navy-green",
+      "xander"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "painter": {
-   "name": "George Inness",
-   "n": 5,
-   "of": 45,
-   "lift": 7.2
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: xkcd color survey, 2010",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 141,
+    "rank_pct": 55,
+    "measured": {
+      "lch": [
+        36.7,
+        40.6,
+        116.3
+      ],
+      "nearest": [
+        [
+          "Camo Green",
+          3.1
+        ]
+      ]
+    },
+    "painter": {
+      "name": "George Inness",
+      "n": 5,
+      "of": 45,
+      "lift": 7.2
+    }
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: xkcd color survey, 2010",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which color is Army Green's closest named neighbor?",
+      "choices": [
+        "Camo Green",
+        "Mauve",
+        "Prussian Blue",
+        "Burlywood"
+      ],
+      "answer": "Camo Green",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the exact coining of \"Army Green\" as a color name is documented to a specific year before 2010.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "George Inness painted with this olive far more than any other artist in our archive."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which color is Army Green's closest named neighbor?",
-   "choices": [
-    "Camo Green",
-    "Mauve",
-    "Prussian Blue",
-    "Burlywood"
-   ],
-   "answer": "Camo Green",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the exact coining of \"Army Green\" as a color name is documented to a specific year before 2010.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "George Inness painted with this olive far more than any other artist in our archive."
- ],
- "status": "checked",
- "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-09",
-  "issues": []
- },
- "slug": "army-green",
- "words": 212
+  "slug": "army-green",
+  "words": 212
 }

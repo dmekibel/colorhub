@@ -1,126 +1,126 @@
 {
- "slug": "pale-charcoal",
- "name": "Pale Charcoal",
- "hex": "#455859",
- "names": [
-  "Pale Charcoal"
- ],
- "tier": "traditional",
- "depth": "short",
- "lede": "Pale Charcoal is ColorHub's English name for Sabi-onando, a dark, slightly green-grey blue that the traditional Japanese color list ties to storage chests rather than to ash.",
- "sections": [
-  {
-   "id": "japan",
-   "title": "A storage-chest grey, not an ember grey",
-   "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Sabi-onando (錆御納戸), where sabi means \"rust\" and onando names a dark blue-grey once used for the cloth lining storage chests (nando) [1]. ColorHub's English rendering, Pale Charcoal, borrows the ember word for a tone that is actually a weathered blue-grey, not a true grey from burnt wood [1]. The ISCC-NBS dictionary of 1955 places it in block 156, \"dark greenish gray,\" about 4.5 units from that block's centre [2]. The library's nearest other named colors are [[saccardo-s-slate]] and [[dark-teal-grey]], each 2.8 units away [2].\n\nMeasured in LCH it reads lightness 36, chroma 8, hue 203 degrees, a cool, muted blue-green [2]. The small chroma value means the color sits close to neutral grey on screen, which is why \"charcoal\" reads plausibly even though the Japanese name points to rust and storage cloth, not to burnt fuel [1][2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a close match in only 450 of 23,781 paintings, under 2 percent, as photographed [3]. Paul Cézanne's work carries it at nearly 14 times the archive's overall rate, in 13 of his 50 dated paintings [3]. It plays a mid-tone role about half the time and a shadow the rest, rarely a highlight [3]. It shares canvases more than chance with the color word Petrol, at nearly 20 times the ordinary rate, and its presence peaks in the 1930s, in 6 of 69 paintings [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a dark blue-grey used for the cloth lining storage chests (nando)",
-   "first_recorded": "undocumented in English; traditional Japanese usage",
-   "source": "ColorHub library (Wikipedia, \"Traditional colors of Japan\")"
-  },
-  "aka": [
-   "Sabi-onando"
+  "slug": "pale-charcoal",
+  "name": "Pale Charcoal",
+  "hex": "#455859",
+  "names": [
+    "Pale Charcoal"
   ],
-  "siblings": [
-   "saccardo-s-slate",
-   "dark-teal-grey",
-   "blackish-plumbeous",
-   "slate-color"
+  "tier": "traditional",
+  "depth": "short",
+  "lede": "Pale Charcoal is ColorHub's English name for Sabi-onando, a dark, slightly green-grey blue that the traditional Japanese color list ties to storage chests rather than to ash.",
+  "sections": [
+    {
+      "id": "japan",
+      "title": "A storage-chest grey, not an ember grey",
+      "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Sabi-onando (錆御納戸), where sabi means \"rust\" and onando names a dark blue-grey once used for the cloth lining storage chests (nando) [1]. ColorHub's English rendering, Pale Charcoal, borrows the ember word for a tone that is actually a weathered blue-grey, not a true grey from burnt wood [1]. The ISCC-NBS dictionary of 1955 places it in block 156, \"dark greenish gray,\" about 4.5 units from that block's centre [2]. The library's nearest other named colors are [[dark-teal-grey]] and [[dark-teal-grey]], each 2.8 units away [2].\n\nMeasured in LCH it reads lightness 36, chroma 8, hue 203 degrees, a cool, muted blue-green [2]. The small chroma value means the color sits close to neutral grey on screen, which is why \"charcoal\" reads plausibly even though the Japanese name points to rust and storage cloth, not to burnt fuel [1][2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a close match in only 450 of 23,781 paintings, under 2 percent, as photographed [3]. Paul Cézanne's work carries it at nearly 14 times the archive's overall rate, in 13 of his 50 dated paintings [3]. It plays a mid-tone role about half the time and a shadow the rest, rarely a highlight [3]. It shares canvases more than chance with the color word Petrol, at nearly 20 times the ordinary rate, and its presence peaks in the 1930s, in 6 of 69 paintings [3]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Sabi-onando (錆御納戸)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 450,
-  "pct": 1.9,
-  "measured": {
-   "lch": [
-    35.9,
-    7.6,
-    203.1
-   ],
-   "nearest_iscc": [
-    "dark greenish gray",
-    4.5
-   ],
-   "nearest": [
-    "Saccardo's Slate",
-    2.81
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json; Wikipedia, \"Traditional colors of Japan\"; jp field)",
-   "loc_kind": null,
-   "url": null
+  "aside": {
+    "origin": {
+      "named_after": "a dark blue-grey used for the cloth lining storage chests (nando)",
+      "first_recorded": "undocumented in English; traditional Japanese usage",
+      "source": "ColorHub library (Wikipedia, \"Traditional colors of Japan\")"
+    },
+    "aka": [
+      "Sabi-onando"
+    ],
+    "siblings": [
+      "dark-teal-grey",
+      "blackish-plumbeous",
+      "slate-color",
+      "blue-ochre"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Sabi-onando (錆御納戸)"
+      }
+    ]
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library (ISCC-NBS 1955 block 156), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 450,
+    "pct": 1.9,
+    "measured": {
+      "lch": [
+        35.9,
+        7.6,
+        203.1
+      ],
+      "nearest_iscc": [
+        "dark greenish gray",
+        4.5
+      ],
+      "nearest": [
+        "Saccardo's Slate",
+        2.81
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23781 paintings), computed match, as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json; Wikipedia, \"Traditional colors of Japan\"; jp field)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library (ISCC-NBS 1955 block 156), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23781 paintings), computed match, as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does onando, part of this color's Japanese name, refer to?",
+      "choices": [
+        "Cloth lining a storage chest",
+        "Burnt charcoal",
+        "A rust stain",
+        "A dye vat"
+      ],
+      "answer": "Cloth lining a storage chest",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Paul Cézanne used this color far more often than the archive average.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pale Charcoal's Japanese name points to a storage chest, not to burnt wood."
+  ],
+  "words": 259,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits (src empty); facts drawn from the library's own jp field, ISCC-NBS block data and the archive.",
+      "lint 2026-10-09"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "What does onando, part of this color's Japanese name, refer to?",
-   "choices": [
-    "Cloth lining a storage chest",
-    "Burnt charcoal",
-    "A rust stain",
-    "A dye vat"
-   ],
-   "answer": "Cloth lining a storage chest",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Paul Cézanne used this color far more often than the archive average.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Pale Charcoal's Japanese name points to a storage chest, not to burnt wood."
- ],
- "words": 259,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "No concordance hits (src empty); facts drawn from the library's own jp field, ISCC-NBS block data and the archive.",
-   "lint 2026-10-09"
-  ]
- }
 }

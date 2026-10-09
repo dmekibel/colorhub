@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "The soup, not the vegetable",
-   "body": "Our graph files this as a food-and-landscape name rather than a modifier, recorded by the xkcd 2010 crowd survey [1]. The ISCC-NBS system places the family as \"deep greenish yellow\", block 100, about 3.7 units from this exact swatch [1]. The nearest named colors on file are [[baby-shit-green]], [[vomit]] and [[pea-soup-green]], at 2.9, \nThe color is murkier than most greens: the same murk gave English the idiom \"pea-souper\" for a thick yellow-brown fog, a usage this swatch echoes more than a bowl of fresh green peas does [1]."
+   "body": "Our graph files this as a food-and-landscape name rather than a modifier, recorded by the xkcd 2010 crowd survey [1]. The ISCC-NBS system places the family as \"deep greenish yellow\", block 100, about 3.7 units from this exact swatch [1]. The nearest named colors on file are [[pea-soup-green|Pea Soup Green]], 4.4 units away, and [[calliste-green|Calliste Green]], 5.7 units away [1].\n\nThe color is murkier than most greens: the same murk gave English the idiom \"pea-souper\" for a thick yellow-brown fog, a usage this swatch echoes more than a bowl of fresh green peas does [1]."
   },
   {
    "id": "field",
@@ -28,10 +28,9 @@
   },
   "aka": [],
   "siblings": [
-   "baby-shit-green",
-   "vomit",
    "pea-soup-green",
-   "vomit-green"
+   "calliste-green",
+   "old-moss-green"
   ],
   "parent": null,
   "children": [],
@@ -55,20 +54,12 @@
   "measured": {
    "nearest": [
     [
-     "Baby Shit Green",
-     2.9
-    ],
-    [
-     "Vomit",
-     4.0
-    ],
-    [
      "Pea Soup Green",
      4.4
     ],
     [
-     "Vomit Green",
-     4.5
+     "Calliste Green",
+     5.7
     ]
    ]
   }
@@ -114,7 +105,7 @@
  "openers": [
   "Pea Soup is named for the murky soup, which is also why English has \"pea-souper\" for a thick fog."
  ],
- "words": 243,
+ "words": 246,
  "status": "checked",
  "checked": {
   "by": "checker",

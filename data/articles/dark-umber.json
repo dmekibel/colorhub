@@ -1,0 +1,151 @@
+{
+ "slug": "dark-umber",
+ "name": "Dark umber",
+ "hex": "#4D3B3C",
+ "names": [
+  "Dark umber"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Dark umber is a near-black, faintly red-brown shade of umber, the old earth pigment; our data files this exact English name as the gloss for a Japanese traditional color, Fujisusutake.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An old pigment, a newer gloss",
+   "body": "The base word, [[umber]], is the manganese-rich brown earth that European painters took up in the late 1400s [4]. Some writers derive its name from Umbria, but Ball and other books lean toward the Latin for shadow, noting the earth came mostly from Turkey [4]. Our data files Dark umber itself only through the Japanese traditional color list, as the English rendering of *Fujisusutake* (藤煤竹), \"wisteria and burnt bamboo,\" rather than through a Western pigment catalog [1]. No Ridgway plate or ISCC-NBS block is given for this exact darkened name in our sources [1]. Its nearest named neighbors on file are [[chocolate-red]] and [[deep-reddish-brown]], at 2.7 and 3.3 CIEDE2000 units, both redder than this near-black brown [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this near-black brown, as photographed, in 448 of 23,781 paintings, 1.88 percent, more common than 75 percent of the named colors we track [3]. It peaks in the 1900s, 49 of 1,674 paintings from that century, 2.7 times the expected rate [3]. Inside a painting it most often plays a mid-tone, in 43 percent of the 298 paintings our within-painting lens counts [3]. It shares canvases with Hay's Brown and Black Blue more than chance would predict [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the earth pigment umber, darkened; filed in our data as the gloss for the Japanese Fujisusutake",
+   "first_recorded": "undocumented in a Western dictionary; carried by the Japanese traditional color list",
+   "source": "ColorHub Japanese traditional color list"
+  },
+  "aka": [],
+  "siblings": [
+   "chocolate-red",
+   "deep-reddish-brown",
+   "reddish-black",
+   "taupe-brown"
+  ],
+  "parent": "umber",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Fujisusutake (藤煤竹)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 298,
+  "measured": {
+   "lch": [
+    26.8,
+    8.4,
+    16.6
+   ],
+   "nearest": [
+    [
+     "Chocolate-Red",
+     2.7
+    ],
+    [
+     "Deep Reddish Brown",
+     3.3
+    ],
+    [
+     "Reddish Black",
+     3.4
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1201,
+   "years_before_record": null
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/core-names.json): Japanese traditional color list, Fujisusutake",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-d.json): CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Fujisusutake, the Japanese name Dark umber glosses, literally mean?",
+   "choices": [
+    "Wisteria and burnt bamboo",
+    "Soot of the pine",
+    "Plum blossom at dusk",
+    "Old cedar bark"
+   ],
+   "answer": "Wisteria and burnt bamboo",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark umber appears in our data with a Ridgway plate number of its own.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our archive, what role does Dark umber most often play inside a painting?",
+   "choices": [
+    "Mid-tone",
+    "Highlight",
+    "Accent",
+    "Hidden only"
+   ],
+   "answer": "Mid-tone",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dark umber reaches our data by way of a Japanese name meaning \"wisteria and burnt bamboo.\"",
+  "It is more common in our archive than 75 percent of the named colors we track."
+ ],
+ "words": 228,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-09",
+  "issues": [
+   "Opus spot-audit 2026-10-09: claims re-verified against graph/fieldnotes/article_field.py; errors fixed."
+  ]
+ }
+}

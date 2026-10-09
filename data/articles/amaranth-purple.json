@@ -1,121 +1,121 @@
 {
- "slug": "amaranth-purple",
- "name": "Amaranth Purple",
- "hex": "#AB274F",
- "names": [
-  "Amaranth Purple"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Amaranth Purple is a saturated purplish red, closer in the color graph to several named reds than to any true purple.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A name in the library",
-   "body": "The ISCC-NBS system of 1955 filed this name under block 256, deep purplish red, despite the word \"purple\" in its name [1]. Wikipedia's entry on the color cites Maerz and Paul as an earlier source, but the library's own dictionary record keeps no first date [1]. In the color graph, the closest neighbors are all reds: [[raspberry]] at 2.7 units, [[big-dip-o-ruby]] close behind at 3.8, and [[berry-red]] and [[maroon-x11]] tied just beyond that at 4.1 [2].\n\nMunsell notation reads 0.8R 3.9/11.8, a dark, highly saturated red-leaning hue [1]. The hex #AB274F is a screen approximation; no plate or swatch number survives in the library record consulted here [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in 4 of 23,781 paintings, as photographed [3]. The earliest is Jusepe de Ribera's *Saint John the Baptist in the Desert* (1650); the others date from about 1900 on, including Ernst Ludwig Kirchner's *Two Girls under an Umbrella* (1910) and two Indian paintings in the Cleveland Museum's collection [3]. Among this small set, Indian paintings and the 1900s decade both stand out well above the archive's base rate [3]. The sample is small enough that this is a pattern worth noting, not a conclusion [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "raspberry",
-   "big-dip-o-ruby",
-   "berry-red",
-   "maroon-x11"
+  "slug": "amaranth-purple",
+  "name": "Amaranth Purple",
+  "hex": "#AB274F",
+  "names": [
+    "Amaranth Purple"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 4,
-  "measured": {
-   "lch": [
-    39.0,
-    55.6,
-    9.9
-   ],
-   "nearest": [
-    [
-     "Raspberry",
-     2.7
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Amaranth Purple is a saturated purplish red, closer in the color graph to several named reds than to any true purple.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A name in the library",
+      "body": "The ISCC-NBS system of 1955 filed this name under block 256, deep purplish red, despite the word \"purple\" in its name [1]. Wikipedia's entry on the color cites Maerz and Paul as an earlier source, but the library's own dictionary record keeps no first date [1]. In the color graph, the closest neighbors are all reds: [[raspberry]] at 2.7 units, [[big-dip-o-ruby]] close behind at 3.8, and [[berry-red]] and [[berry-red]] tied just beyond that at 4.1 [2].\n\nMunsell notation reads 0.8R 3.9/11.8, a dark, highly saturated red-leaning hue [1]. The hex #AB274F is a screen approximation; no plate or swatch number survives in the library record consulted here [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in 4 of 23,781 paintings, as photographed [3]. The earliest is Jusepe de Ribera's *Saint John the Baptist in the Desert* (1650); the others date from about 1900 on, including Ernst Ludwig Kirchner's *Two Girls under an Umbrella* (1910) and two Indian paintings in the Cleveland Museum's collection [3]. Among this small set, Indian paintings and the 1900s decade both stand out well above the archive's base rate [3]. The sample is small enough that this is a pattern worth noting, not a conclusion [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "raspberry",
+      "big-dip-o-ruby",
+      "berry-red",
+      "rose-red"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 4,
+    "measured": {
+      "lch": [
+        39.0,
+        55.6,
+        9.9
+      ],
+      "nearest": [
+        [
+          "Raspberry",
+          2.7
+        ]
+      ]
+    },
+    "iscc": {
+      "name": "vivid purplish red (block 254 by measurement; filed 1955 under 256, deep purplish red)",
+      "de": 7.3
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Maerz & Paul 1930, Ridgway 1912, ISCC-NBS 1955, RAL entries",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Despite its name, what color family does the ISCC-NBS system actually place Amaranth Purple in?",
+      "choices": [
+        "Purplish reds",
+        "True purples",
+        "Browns",
+        "Oranges"
+      ],
+      "answer": "Purplish reds",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Amaranth Purple's closest named neighbors in the color graph are all reds.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Amaranth Purple's closest color-graph neighbors are all named reds, not purples."
+  ],
+  "words": 223,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Nearest-neighbor claim (name and/or distance) in the 'name' section and field.measured.nearest did not match data/graph/edges-*.json 'la' (the cited color-graph computation); corrected to the true nearest colors and distances, and updated aside.siblings to match.",
+      "Editor spot-audit 2026-10-09: block 256 is 'deep purplish red'; 'vivid purplish red' is the computed nearest block 254 (conflation fixed).",
+      "lint 2026-10-09"
     ]
-   ]
-  },
-  "iscc": {
-   "name": "vivid purplish red (block 254 by measurement; filed 1955 under 256, deep purplish red)",
-   "de": 7.3
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Maerz & Paul 1930, Ridgway 1912, ISCC-NBS 1955, RAL entries",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Despite its name, what color family does the ISCC-NBS system actually place Amaranth Purple in?",
-   "choices": [
-    "Purplish reds",
-    "True purples",
-    "Browns",
-    "Oranges"
-   ],
-   "answer": "Purplish reds",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Amaranth Purple's closest named neighbors in the color graph are all reds.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Amaranth Purple's closest color-graph neighbors are all named reds, not purples."
- ],
- "words": 223,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Nearest-neighbor claim (name and/or distance) in the 'name' section and field.measured.nearest did not match data/graph/edges-*.json 'la' (the cited color-graph computation); corrected to the true nearest colors and distances, and updated aside.siblings to match.",
-   "Editor spot-audit 2026-10-09: block 256 is 'deep purplish red'; 'vivid purplish red' is the computed nearest block 254 (conflation fixed).",
-   "lint 2026-10-09"
-  ]
- }
 }

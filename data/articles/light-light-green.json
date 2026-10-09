@@ -1,138 +1,137 @@
 {
- "slug": "light-light-green",
- "name": "Light Light Green",
- "hex": "#C8FFB0",
- "names": [
-  "Light Light Green"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Light Light Green is a pale, almost washed-out mint from the 2010 xkcd color survey, named by doubling the modifier *light* on the plain word *green* rather than borrowing a new word.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A doubled modifier",
-   "body": "Repeating a modifier, as in *light light green*, is the survey's way of pushing further along a scale than the single word *light* already does; the library files it as a direct child of [[green]] [1][2]. A near-duplicate xkcd entry, Washed Out Green, sits about 2.2 units away, close enough that the two likely describe the same impression to different volunteers [2]. The 1955 ISCC-NBS system's closest block, very light yellowish green, is 5.3 units off [2]. The nearest named colors on file are [[very-light-green]], [[light-pastel-green]] and [[light-mint]], at 2.6, 3.1 and 4.2 ΔE [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive carries a color within four units of Light Light Green covering at least one per cent of its canvas, as photographed [3]. A green this pale and this saturated at once is an unusual combination for aged oil paint, which tends to either fade toward grey or darken with varnish rather than stay this bright and light together [3]. In printed English the phrase rose fastest and peaked in the 1930s, though it stays rare overall [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "modifier grammar: light light + green",
-   "first_recorded": "xkcd color survey, 2010",
-   "source": "ColorHub color library and Color Graph"
-  },
-  "aka": [],
-  "siblings": [
-   "very-light-green",
-   "light-pastel-green",
-   "light-mint",
-   "celery"
+  "slug": "light-light-green",
+  "name": "Light Light Green",
+  "hex": "#C8FFB0",
+  "names": [
+    "Light Light Green"
   ],
-  "parent": "green",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    94.7,
-    45.0,
-    134.1
-   ],
-   "iscc_nbs": {
-    "name": "very light yellowish green",
-    "de2000": 5.3
-   },
-   "nearest": [
-    [
-     "Very Light Green",
-     2.6
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Light Light Green is a pale, almost washed-out mint from the 2010 xkcd color survey, named by doubling the modifier *light* on the plain word *green* rather than borrowing a new word.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A doubled modifier",
+      "body": "Repeating a modifier, as in *light light green*, is the survey's way of pushing further along a scale than the single word *light* already does; the library files it as a direct child of [[green]] [1][2]. A near-duplicate xkcd entry, Washed Out Green, sits about 2.2 units away, close enough that the two likely describe the same impression to different volunteers [2]. The 1955 ISCC-NBS system's closest block, very light yellowish green, is 5.3 units off [2]. The nearest named colors on file are [[very-light-green]], [[celery]] and [[very-light-green]], at 2.6, 3.1 and 4.2 ΔE [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive carries a color within four units of Light Light Green covering at least one per cent of its canvas, as photographed [3]. A green this pale and this saturated at once is an unusual combination for aged oil paint, which tends to either fade toward grey or darken with varnish rather than stay this bright and light together [3]. In printed English the phrase rose fastest and peaked in the 1930s, though it stays rare overall [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "modifier grammar: light light + green",
+      "first_recorded": "xkcd color survey, 2010",
+      "source": "ColorHub color library and Color Graph"
+    },
+    "aka": [],
+    "siblings": [
+      "very-light-green",
+      "celery",
+      "light-pea-green"
     ],
-    [
-     "Light Pastel Green",
-     3.1
-    ],
-    [
-     "Light Mint",
-     4.2
-    ],
-    [
-     "Celery",
-     4.2
+    "parent": "green",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        94.7,
+        45.0,
+        134.1
+      ],
+      "iscc_nbs": {
+        "name": "very light yellowish green",
+        "de2000": 5.3
+      },
+      "nearest": [
+        [
+          "Very Light Green",
+          2.6
+        ],
+        [
+          "Light Pastel Green",
+          3.1
+        ],
+        [
+          "Light Mint",
+          4.2
+        ],
+        [
+          "Celery",
+          4.2
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "web",
+      "cite": "xkcd color survey (2010), crowdsourced color-name list",
+      "loc_kind": null,
+      "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "web",
+      "cite": "Google Books Ngram, case-insensitive",
+      "loc_kind": null,
+      "url": "https://books.google.com/ngrams"
+    }
+  ],
+  "questions": [
+    {
+      "q": "Why is the name \"Light Light Green\" written with \"light\" twice?",
+      "choices": [
+        "To push further along the lightness scale than \"light green\" alone",
+        "It is a translation error",
+        "It names two different greens mixed together",
+        "It refers to a two-tone paint"
+      ],
+      "answer": "To push further along the lightness scale than \"light green\" alone",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Light Light Green turns up in our museum-painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Light Light Green doubles its own modifier just to go paler still."
+  ],
+  "words": 213,
+  "status": "checked",
+  "checked": {
+    "by": "batch writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "web",
-   "cite": "xkcd color survey (2010), crowdsourced color-name list",
-   "loc_kind": null,
-   "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "web",
-   "cite": "Google Books Ngram, case-insensitive",
-   "loc_kind": null,
-   "url": "https://books.google.com/ngrams"
-  }
- ],
- "questions": [
-  {
-   "q": "Why is the name \"Light Light Green\" written with \"light\" twice?",
-   "choices": [
-    "To push further along the lightness scale than \"light green\" alone",
-    "It is a translation error",
-    "It names two different greens mixed together",
-    "It refers to a two-tone paint"
-   ],
-   "answer": "To push further along the lightness scale than \"light green\" alone",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Light Light Green turns up in our museum-painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Light Light Green doubles its own modifier just to go paler still."
- ],
- "words": 214,
- "status": "checked",
- "checked": {
-  "by": "batch writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

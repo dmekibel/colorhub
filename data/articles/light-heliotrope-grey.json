@@ -1,0 +1,152 @@
+{
+  "slug": "light-heliotrope-grey",
+  "name": "Light Heliotrope-Grey",
+  "hex": "#B3A9AE",
+  "names": [
+    "Light Heliotrope-Grey"
+  ],
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Light Heliotrope-Grey lightens [[heliotrope-grey]], a flower-named grey-purple, and is Claude Monet's single favorite shade of its kind in our archive.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A paled grey-purple",
+      "body": "The name is the modifier *light* set against the base color [[heliotrope-grey]], itself named for the pale purple heliotrope flower [1]. Ridgway's 1912 *Color Standards and Nomenclature* records the matching range on plate L, hue 65'''', tone f, a scan of an aged plate and so an approximation [1]. The ISCC-NBS lists of 1955 file the same block as 227, \"light purplish gray,\" a Delta-E of 4.8 away [1]. Nearest on file is [[black-shadows]] at 3.2 units, with [[mauve-grey]] and [[mauve-grey]] both at 4.2 [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this shade, as photographed, in 177 of 23,781 paintings, 0.74 percent; within a single canvas it is a distinct area in 109 of them, more common than 60 percent of our named colors [2]. Claude Monet is its most devoted painter, using it in 6 of 50 works here, 9.2 times the baseline rate of the museums those paintings come from [2]. It peaks in the 1900s at 1.7 percent of that century's 1,674 paintings, 2.7 times the expected rate, and inside a painting it most often plays a light, in 61 percent of its 109 appearances [2]. The earliest match dates to 1119, 793 years before the name's 1912 record; the archive's early centuries are thin, so this is a floor, not a first [2]. It is also most over-represented in Swedish paintings in our data, 3.7 times expected [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the modifier light applied to the base color heliotrope-grey",
+      "first_recorded": "1912 (Ridgway, Color Standards and Nomenclature, plate L)",
+      "source": "Ridgway, Color Standards and Nomenclature"
+    },
+    "aka": [],
+    "siblings": [
+      "black-shadows",
+      "mauve-grey",
+      "irisglow"
+    ],
+    "parent": "heliotrope-grey",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 109,
+    "measured": {
+      "lch": [
+        70.2,
+        4.7,
+        344.0
+      ],
+      "nearest_iscc": [
+        "light purplish gray",
+        4.8
+      ],
+      "nearest": [
+        [
+          "Black-Shadows",
+          3.2
+        ],
+        [
+          "Mauve-Grey",
+          4.2
+        ],
+        [
+          "Vinaceous-Grey",
+          4.2
+        ],
+        [
+          "Irisglow",
+          4.9
+        ]
+      ]
+    },
+    "role_top": {
+      "role": "light",
+      "pct": 61
+    },
+    "painter": {
+      "name": "Claude Monet",
+      "n": 6,
+      "of": 50,
+      "lift": 9.2
+    },
+    "first_seen": {
+      "year": 1119,
+      "years_before_record": 793
+    },
+    "country": {
+      "name": "Sweden",
+      "lift": 3.7,
+      "n": 6,
+      "of": 120
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Nomenclature, 1912, plate L, hue 65''''",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What is Light Heliotrope-Grey a lightened version of?",
+      "choices": [
+        "Heliotrope-Grey",
+        "Mauve-Grey",
+        "Black-Shadows",
+        "Vinaceous-Grey"
+      ],
+      "answer": "Heliotrope-Grey",
+      "kind": "pick"
+    },
+    {
+      "q": "Which painter reaches for Light Heliotrope-Grey far more than his peers?",
+      "choices": [
+        "Claude Monet",
+        "John Singer Sargent",
+        "George Catlin",
+        "Jacob Maris"
+      ],
+      "answer": "Claude Monet",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Ridgway's 1912 plate gives this color's exact modern hex value.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Claude Monet reaches for this grey-purple more than nine times as often as his peers."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
+  },
+  "words": 255
+}

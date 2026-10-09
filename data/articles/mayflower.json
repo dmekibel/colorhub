@@ -1,133 +1,133 @@
 {
- "slug": "mayflower",
- "name": "Mayflower",
- "hex": "#CB5D68",
- "names": [
-  "Mayflower"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Mayflower is a deep pink named for the trailing spring flower rather than the ship, first recorded by Maerz and Paul's 1930 dictionary of color.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A spring flower's pink",
-   "body": "Maerz and Paul place this value at plate 3, position J 8, first recorded in 1923, seven years before their dictionary itself appeared [1]. The ISCC-NBS system of 1955 classifies it as a moderate red [2]. The flowering plant commonly called mayflower varies by region, trailing arbutus in parts of North America and hawthorn blossom in England, so the dictionary's choice of exactly which bloom it means is not stated [1]. Its nearest library neighbor is [[carmine-red|Carmine Red]], and the purplish red of [[maroon-x11|Maroon (X11)]], distinct from the duller brown [[maroon|Maroon]] [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a color within six units of Mayflower covers at least five per cent of the canvas in only 7 works, as photographed [3]. It is strongly over-represented in paintings tagged Kalighat, an Indian popular painting tradition, at over a hundred times the expected rate, and in Indian paintings generally [3]. The earliest match is Botticelli's *Baptism of Saint Zenobius* from around 1500, though the role this pink plays there is a computed color match, not a documented pigment, a floor and not a first, since the archive's early centuries are thin [3]. These remain photographs of aged, varnished canvases read as screen colors [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the mayflower, a trailing spring-blooming plant (species not specified)",
-   "first_recorded": "Maerz & Paul, A Dictionary of Color (1930), plate 3 J 8, first recorded 1923",
-   "source": "ColorHub color library (Maerz & Paul 1930; ISCC-NBS 1955)"
-  },
-  "aka": [],
-  "siblings": [
-   "carmine-red",
-   "raspberry",
-   "maroon-x11",
-   "maroon"
+  "slug": "mayflower",
+  "name": "Mayflower",
+  "hex": "#CB5D68",
+  "names": [
+    "Mayflower"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#CB5D68",
-   "de2000": 6,
-   "min_cover": 0.05
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Mayflower is a deep pink named for the trailing spring flower rather than the ship, first recorded by Maerz and Paul's 1930 dictionary of color.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A spring flower's pink",
+      "body": "Maerz and Paul place this value at plate 3, position J 8, first recorded in 1923, seven years before their dictionary itself appeared [1]. The ISCC-NBS system of 1955 classifies it as a moderate red [2]. The flowering plant commonly called mayflower varies by region, trailing arbutus in parts of North America and hawthorn blossom in England, so the dictionary's choice of exactly which bloom it means is not stated [1]. Its nearest library neighbor is [[carmine-red|Carmine Red]], and the purplish red of [[berry-red|Maroon (X11)]], distinct from the duller brown [[maroon|Maroon]] [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a color within six units of Mayflower covers at least five per cent of the canvas in only 7 works, as photographed [3]. It is strongly over-represented in paintings tagged Kalighat, an Indian popular painting tradition, at over a hundred times the expected rate, and in Indian paintings generally [3]. The earliest match is Botticelli's *Baptism of Saint Zenobius* from around 1500, though the role this pink plays there is a computed color match, not a documented pigment, a floor and not a first, since the archive's early centuries are thin [3]. These remain photographs of aged, varnished canvases read as screen colors [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the mayflower, a trailing spring-blooming plant (species not specified)",
+      "first_recorded": "Maerz & Paul, A Dictionary of Color (1930), plate 3 J 8, first recorded 1923",
+      "source": "ColorHub color library (Maerz & Paul 1930; ISCC-NBS 1955)"
+    },
+    "aka": [],
+    "siblings": [
+      "carmine-red",
+      "raspberry",
+      "berry-red",
+      "maroon"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "n_present": 7,
-  "movements": [
-   {
-    "key": "Kalighat",
-    "lift": 106.17
-   }
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#CB5D68",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 7,
+    "movements": [
+      {
+        "key": "Kalighat",
+        "lift": 106.17
+      }
+    ],
+    "countries": [
+      {
+        "key": "India",
+        "lift": 14.14
+      }
+    ],
+    "measured": {
+      "lch": [
+        54,
+        47,
+        19
+      ],
+      "nearest": [
+        [
+          "Carmine Red",
+          7.7
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Maerz & Paul, A Dictionary of Color, plate 3 J 8, first recorded 1923",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: ISCC-NBS block, nearest-match field (data/graph/nodes-m.json; data/library.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "countries": [
-   {
-    "key": "India",
-    "lift": 14.14
-   }
+  "questions": [
+    {
+      "q": "What does Maerz and Paul's dictionary name Mayflower after?",
+      "choices": [
+        "A trailing spring flower",
+        "A ship",
+        "A month on the calendar",
+        "A dye works"
+      ],
+      "answer": "A trailing spring flower",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: in our archive, Mayflower is strongly over-represented in the Kalighat painting tradition.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
   ],
-  "measured": {
-   "lch": [
-    54,
-    47,
-    19
-   ],
-   "nearest": [
-    [
-     "Carmine Red",
-     7.7
+  "openers": [
+    "Mayflower the color is named for the flower, not the ship."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "batch writer",
+    "date": "2026-10-08",
+    "issues": [
+      "Which species of 'mayflower' the 1930 dictionary meant is not stated; left as undocumented.",
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Maerz & Paul, A Dictionary of Color, plate 3 J 8, first recorded 1923",
-   "loc_kind": "entry",
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: ISCC-NBS block, nearest-match field (data/graph/nodes-m.json; data/library.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does Maerz and Paul's dictionary name Mayflower after?",
-   "choices": [
-    "A trailing spring flower",
-    "A ship",
-    "A month on the calendar",
-    "A dye works"
-   ],
-   "answer": "A trailing spring flower",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: in our archive, Mayflower is strongly over-represented in the Kalighat painting tradition.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Mayflower the color is named for the flower, not the ship."
- ],
- "status": "checked",
- "checked": {
-  "by": "batch writer",
-  "date": "2026-10-08",
-  "issues": [
-   "Which species of 'mayflower' the 1930 dictionary meant is not stated; left as undocumented.",
-   "lint 2026-10-09"
-  ]
- },
- "words": 220
+  "words": 220
 }

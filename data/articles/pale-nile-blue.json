@@ -1,0 +1,107 @@
+{
+ "slug": "pale-nile-blue",
+ "name": "Pale Nile Blue",
+ "hex": "#B9DED7",
+ "names": [
+  "Pale Nile Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pale Nile Blue is a pale blue-green, the pale tone Robert Ridgway charted beside the parent color Nile Blue in his 1912 color atlas.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pale tone of Nile Blue",
+   "body": "Pale Nile Blue puts Ridgway's tone word Pale in front of [[nile-blue]], the paired-tone method his 1912 *Color Standards and Color Nomenclature* used across the atlas [1]. Nile Blue itself is Ridgway's plate XIX, hue 41 prime, tone d, later filed by the ISCC-NBS dictionary of 1955 in block 163; Maerz and Paul's 1930 *Dictionary of Color* lists it as first recorded in 1884 [1]. Ridgway files both names under his green hues, closer in that system to green than to blue [1].\n\nIts nearest named neighbor is [[plunket]], 3.1 units off and bluer than this swatch [1]; [[microcline-green]] sits 3.8 units away, reading greener, and [[lichen-green]] 5.3 units away, greener still [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in only 33 of 23,781 paintings, 0.14 percent, as photographed; narrowing to at least five percent coverage inside a painting leaves 24 [2]. That makes it rarer than 59 percent of the named colors in our library [2]. It peaks in the 1700s, present in 0.2 percent of the 3,449 paintings from that century, 1.8 times the archive's overall rate [2]. Inside a painting it most often plays a light, in 42 percent of its 24 appearances by lightness rank [2].\n\nThe earliest match dates to 1478, in a work by Sandro Botticelli, a floor and not a first since the archive's early centuries are thin; that is 434 years before the name's 1912 record, so the match marks a look-alike hue in an aged photograph, not a surviving pigment [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Ridgway's tone system: the pale tone of Nile Blue",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XIX",
+   "source": "Ridgway 1912; ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "nile-blue",
+   "plunket",
+   "microcline-green",
+   "lichen-green"
+  ],
+  "parent": "nile-blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 33,
+  "n_within_painting": 24,
+  "pct_archive": 0.14,
+  "rank_pct": 59,
+  "measured": {
+   "nearest": [
+    [
+     "Plunket",
+     3.1
+    ],
+    [
+     "Microcline Green",
+     3.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930) and look-alike distances, data/graph/edges-p.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed, data/graph/fieldnotes/p.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color sits closest to Pale Nile Blue?",
+   "choices": [
+    "Plunket",
+    "Microcline Green",
+    "Lichen Green"
+   ],
+   "answer": "Plunket",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway's color system files Nile Blue among his greens rather than his blues.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Nile Blue is filed by its own namer among the greens, not the blues."
+ ],
+ "words": 274,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

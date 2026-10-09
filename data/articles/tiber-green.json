@@ -1,145 +1,145 @@
 {
- "slug": "tiber-green",
- "name": "Tiber Green",
- "hex": "#BDD99F",
- "names": [
-  "Tiber Green"
- ],
- "tier": "place",
- "depth": "medium",
- "lede": "Tiber Green is a pale yellow-green named, by our library's own classification, for the Tiber, and its single strongest match in our painting archive is Vincent van Gogh's *Roses*, where it covers nearly half the canvas.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A river's name on a 1912 plate",
-   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* records this hue at plate XVIII, hue 33′, tone d, and Maerz and Paul's 1930 dictionary repeats it at plate 18, position E 6, dated to the same year [1]. The ISCC-NBS system later filed it as a light yellow-green [1]. Our color library classes it as a place-or-institution name, built on \"Tiber\" [2]. Beyond that classification, nothing in our sources confirms whether the name points to the river that runs through Rome or to some other use of the word [2].\n\nIts closest named relative is [[light-grey-green]], just 3.1 units away and almost indistinguishable, followed by [[veronese-green]], a touch yellower [3].\n\nFurther out are [[greenish-hospital-green]] and [[light-cendre-green]], both greener at 4.6 units [3]. Our library files the color under fashion and textiles rather than nature, which is worth noting for a name that otherwise reads as a landscape color [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Tiber Green is uncommon in our archive of 23,781 paintings: a color within six units of it covers at least five per cent of a canvas in only 14 works, as photographed [4]. The strongest of them is Van Gogh's 1890 *Roses*, where it covers 44 per cent of the canvas, a painting whose colors read very differently today than the pinks its title promises [4]. Across its matches overall, 93 per cent of the coverage sits in highlights rather than mid-tones or shadow [4]. These are photographs of aged, varnished paintings, so every figure is a screen color, not a pigment identification [4]. Mughal painting carries the color at about ten times the archive's overall rate, and works from Russia and the United States carry it at several times the rate too [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the place-or-institution word \"Tiber\"; whether it means the river in Rome is not confirmed in our sources",
-   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XVIII, hue 33′, tone d",
-   "source": "ColorHub color library (Ridgway 1912; Maerz & Paul 1930; ISCC-NBS 1955)"
-  },
-  "aka": [],
-  "siblings": [
-   "light-grey-green",
-   "veronese-green",
-   "greenish-hospital-green",
-   "light-cendre-green"
+  "slug": "tiber-green",
+  "name": "Tiber Green",
+  "hex": "#BDD99F",
+  "names": [
+    "Tiber Green"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#BDD99F",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 14,
-  "role": {
-   "highlight": 0.93,
-   "mid": 0.07
-  },
-  "top_paintings": [
-   {
-    "id": "nga-72328",
-    "title": "Roses",
-    "painter": "Vincent van Gogh",
-    "year": 1890,
-    "cover": 0.444
-   }
+  "tier": "place",
+  "depth": "medium",
+  "lede": "Tiber Green is a pale yellow-green named, by our library's own classification, for the Tiber, and its single strongest match in our painting archive is Vincent van Gogh's *Roses*, where it covers nearly half the canvas.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A river's name on a 1912 plate",
+      "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* records this hue at plate XVIII, hue 33′, tone d, and Maerz and Paul's 1930 dictionary repeats it at plate 18, position E 6, dated to the same year [1]. The ISCC-NBS system later filed it as a light yellow-green [1]. Our color library classes it as a place-or-institution name, built on \"Tiber\" [2]. Beyond that classification, nothing in our sources confirms whether the name points to the river that runs through Rome or to some other use of the word [2].\n\nIts closest named relative is [[light-grey-green]], just 3.1 units away and almost indistinguishable, followed by [[veronese-green]], a touch yellower [3].\n\nFurther out are [[greenish-hospital-green]] and [[greenish-hospital-green]], both greener at 4.6 units [3]. Our library files the color under fashion and textiles rather than nature, which is worth noting for a name that otherwise reads as a landscape color [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Tiber Green is uncommon in our archive of 23,781 paintings: a color within six units of it covers at least five per cent of a canvas in only 14 works, as photographed [4]. The strongest of them is Van Gogh's 1890 *Roses*, where it covers 44 per cent of the canvas, a painting whose colors read very differently today than the pinks its title promises [4]. Across its matches overall, 93 per cent of the coverage sits in highlights rather than mid-tones or shadow [4]. These are photographs of aged, varnished paintings, so every figure is a screen color, not a pigment identification [4]. Mughal painting carries the color at about ten times the archive's overall rate, and works from Russia and the United States carry it at several times the rate too [4]."
+    }
   ],
-  "measured": {
-   "lch": [
-    83.4,
-    32.1,
-    127.2
-   ],
-   "nearest": [
-    [
-     "Light Grey Green",
-     3.1
+  "aside": {
+    "origin": {
+      "named_after": "the place-or-institution word \"Tiber\"; whether it means the river in Rome is not confirmed in our sources",
+      "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XVIII, hue 33′, tone d",
+      "source": "ColorHub color library (Ridgway 1912; Maerz & Paul 1930; ISCC-NBS 1955)"
+    },
+    "aka": [],
+    "siblings": [
+      "light-grey-green",
+      "veronese-green",
+      "greenish-hospital-green",
+      "pastel-green"
     ],
-    [
-     "Veronese Green",
-     4.0
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#BDD99F",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 14,
+    "role": {
+      "highlight": 0.93,
+      "mid": 0.07
+    },
+    "top_paintings": [
+      {
+        "id": "nga-72328",
+        "title": "Roses",
+        "painter": "Vincent van Gogh",
+        "year": 1890,
+        "cover": 0.444
+      }
+    ],
+    "measured": {
+      "lch": [
+        83.4,
+        32.1,
+        127.2
+      ],
+      "nearest": [
+        [
+          "Light Grey Green",
+          3.1
+        ],
+        [
+          "Veronese Green",
+          4.0
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-t.json): Ridgway 1912, plate XVIII, hue 33′, tone d; Maerz & Paul 1930, plate 18 E 6; ISCC-NBS 1955",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library, place/institution tier classification",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges-t.json), CIEDE2000 look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas); nga-72328, Vincent van Gogh, Roses (1890)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which painting is Tiber Green's strongest match in our archive?",
+      "choices": [
+        "Van Gogh's Roses",
+        "Monet's Water Lilies",
+        "Sargent's Crucifixion",
+        "A Mughal portrait"
+      ],
+      "answer": "Van Gogh's Roses",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources confirm the name Tiber Green refers to the river in Rome.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Van Gogh's Roses reads, as photographed today, as nearly half Tiber Green."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "batch writer",
+    "date": "2026-10-08",
+    "issues": [
+      "Whether 'Tiber' refers to the river is plausible but not confirmed by our sources; stated as unconfirmed.",
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes-t.json): Ridgway 1912, plate XVIII, hue 33′, tone d; Maerz & Paul 1930, plate 18 E 6; ISCC-NBS 1955",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library, place/institution tier classification",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges-t.json), CIEDE2000 look-alike distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas); nga-72328, Vincent van Gogh, Roses (1890)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which painting is Tiber Green's strongest match in our archive?",
-   "choices": [
-    "Van Gogh's Roses",
-    "Monet's Water Lilies",
-    "Sargent's Crucifixion",
-    "A Mughal portrait"
-   ],
-   "answer": "Van Gogh's Roses",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our sources confirm the name Tiber Green refers to the river in Rome.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Van Gogh's Roses reads, as photographed today, as nearly half Tiber Green."
- ],
- "status": "checked",
- "checked": {
-  "by": "batch writer",
-  "date": "2026-10-08",
-  "issues": [
-   "Whether 'Tiber' refers to the river is plausible but not confirmed by our sources; stated as unconfirmed.",
-   "lint 2026-10-09"
-  ]
- },
- "words": 316
+  "words": 316
 }

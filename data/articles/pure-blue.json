@@ -1,0 +1,122 @@
+{
+ "slug": "pure-blue",
+ "name": "Pure Blue",
+ "hex": "#0203E2",
+ "names": [
+  "Pure Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pure Blue is [[blue|Blue]] with no hint of green or violet pulling it either way, an intense, near-primary blue named by the modifier \"pure\" rather than by any pigment or place.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The parent word plus a grammatical modifier",
+   "body": "The name pairs the parent word [[blue|Blue]] with the modifier \"pure\", describing the hue itself (unmixed, with nothing added) rather than naming a dye, a mineral or a place; it was recorded in Randall Munroe's 2010 xkcd color-naming survey [1]. No earlier dictionary or plate in the books consulted here carries this exact phrase [1].\n\nIn printed English more generally, the phrase \"pure blue\" rose through the mid-1800s and peaked in the 1870s, a pattern that reflects the words' broader use (including non-color senses) and not this swatch specifically [2]. Its closest look-alikes on file are [[medium-blue|Medium Blue]], duller, and [[primary-blue|Primary Blue]], more vivid, two other entries from the same survey describing much the same near-primary blue, with [[zaffre|Zaffre]] a duller, darker match further out [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries a close match to this exact, highly saturated blue covering at least 1 percent of its canvas, as photographed [4]. That says something about the limits of our archive of historical paintings, not about painting in general: a blue this pure and intense, with almost no red or green mixed in, is rare in paint even where blue itself is common [4]. These are photographs of aged, varnished canvases, so the absence is a statement about this dataset, not a claim that the color never appears on canvas."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the grammatical modifier \"pure\" plus the parent color Blue, describing an unmixed hue",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "xkcd (Munroe 2010)"
+  },
+  "aka": [
+   "Rich Blue",
+   "Strong Blue"
+  ],
+  "siblings": [
+   "medium-blue",
+   "primary-blue",
+   "zaffre"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "nearest": [
+    [
+     "Medium Blue",
+     2.8
+    ]
+   ]
+  },
+  "ngram": {
+   "term": "pure blue",
+   "peak_decade": 1870,
+   "rise_decade": 1850
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 color survey entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph fieldnotes: Google Books Ngram curve for \"pure blue\" (data/graph/fieldnotes/p.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike and parent edges (data/graph/edges-p.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match (none at 1% coverage), as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the modifier \"pure\" describe in Pure Blue?",
+   "choices": [
+    "An unmixed hue, with no green or violet pulling it either way",
+    "A specific pigment or dye",
+    "A place where the color was first made",
+    "A Crayola crayon name"
+   ],
+   "answer": "An unmixed hue, with no green or violet pulling it either way",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our 23,781-painting archive finds this exact shade covering at least 1 percent of several canvases.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pure Blue is so intense and unmixed that no painting in our 23,781-painting archive carries a close match to it."
+ ],
+ "words": 247,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

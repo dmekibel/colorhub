@@ -1,124 +1,123 @@
 {
- "slug": "pale-payne-s-grey",
- "name": "Pale Payne's Grey",
- "hex": "#9FA8AE",
- "names": [
-  "Pale Payne's Grey"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Pale Payne's Grey is a soft, bluish grey built on the name of Payne's grey, the mixed watercolor wash painters use in place of black, and recorded by Ridgway in 1912.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A paler wash",
-   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* records this swatch as plate XLIX, hue 49 with four primes, tone f [1]. It takes its name from Payne's grey, the blue-black watercolor mix named for the eighteenth-century English painter William Payne, who favored it over flat black for softening shadows [1][2]. The American ISCC-NBS dictionary later filed the same swatch as block 185, a pale blue, and the German RAL system gives a near-duplicate of its own, Window Grey, only 2.2 units away [1].\n\nIn Munsell notation it reads as N 6.7, a near-neutral grey with almost no hue [1]. The nearest named colors on file are [[pale-green-blue-grey]], [[light-blue-grey]], [[endive-blue]] and [[cadet-grey]], at 3.6, 3.9, 3.9 and 4.3 ΔE [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this grey in 504 of 23,781 paintings, 2.12 percent, more common than 76 percent of our named colors, as photographed [3]. It most often reads as a light tone rather than a shadow, in 56 percent of its appearances [3]. Claude Monet favors it most, in 9 of his 50 catalogued works here, nearly seven times the baseline rate for the museums those paintings come from [3]. The earliest dated example, from 1315, predates Ridgway's 1912 record of the name by nearly six centuries, so the match is a look-alike hue, not a trace of the pigment William Payne mixed, a floor and not a first, since the archive's early centuries are thin [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Payne's grey, the watercolor wash named for painter William Payne",
-   "first_recorded": "Ridgway, 1912 (plate XLIX)",
-   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955, block 185; RAL)"
-  },
-  "aka": [
-   "Window Grey (RAL, near-duplicate)"
+  "slug": "pale-payne-s-grey",
+  "name": "Pale Payne's Grey",
+  "hex": "#9FA8AE",
+  "names": [
+    "Pale Payne's Grey"
   ],
-  "siblings": [
-   "pale-green-blue-grey",
-   "light-blue-grey",
-   "endive-blue",
-   "cadet-grey",
-   "dark-grey"
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Pale Payne's Grey is a soft, bluish grey built on the name of Payne's grey, the mixed watercolor wash painters use in place of black, and recorded by Ridgway in 1912.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A paler wash",
+      "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* records this swatch as plate XLIX, hue 49 with four primes, tone f [1]. It takes its name from Payne's grey, the blue-black watercolor mix named for the eighteenth-century English painter William Payne, who favored it over flat black for softening shadows [1][2]. The American ISCC-NBS dictionary later filed the same swatch as block 185, a pale blue, and the German RAL system gives a near-duplicate of its own, Window Grey, only 2.2 units away [1].\n\nIn Munsell notation it reads as N 6.7, a near-neutral grey with almost no hue [1]. The nearest named colors on file are [[pale-green-blue-grey]], [[light-blue-grey]], [[light-blue-grey]] and [[cadet-grey]], at 3.6, 3.9, 3.9 and 4.3 ΔE [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this grey in 504 of 23,781 paintings, 2.12 percent, more common than 76 percent of our named colors, as photographed [3]. It most often reads as a light tone rather than a shadow, in 56 percent of its appearances [3]. Claude Monet favors it most, in 9 of his 50 catalogued works here, nearly seven times the baseline rate for the museums those paintings come from [3]. The earliest dated example, from 1315, predates Ridgway's 1912 record of the name by nearly six centuries, so the match is a look-alike hue, not a trace of the pigment William Payne mixed, a floor and not a first, since the archive's early centuries are thin [3]."
+    }
   ],
-  "parent": "payne-s-grey",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 504,
-  "rate": 0.0212,
-  "measured": {
-   "lch": [
-    68,
-    5,
-    245
-   ],
-   "nearest": [
-    [
-     "Pale Green-Blue Grey",
-     3.6
+  "aside": {
+    "origin": {
+      "named_after": "Payne's grey, the watercolor wash named for painter William Payne",
+      "first_recorded": "Ridgway, 1912 (plate XLIX)",
+      "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955, block 185; RAL)"
+    },
+    "aka": [
+      "Window Grey (RAL, near-duplicate)"
+    ],
+    "siblings": [
+      "pale-green-blue-grey",
+      "light-blue-grey",
+      "cadet-grey",
+      "cool-grey"
+    ],
+    "parent": "payne-s-grey",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 504,
+    "rate": 0.0212,
+    "measured": {
+      "lch": [
+        68,
+        5,
+        245
+      ],
+      "nearest": [
+        [
+          "Pale Green-Blue Grey",
+          3.6
+        ]
+      ]
+    },
+    "first_seen": {
+      "year": 1315,
+      "painting": "commons-Q141161707",
+      "painter": "Lippo di Benivieni"
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Ridgway 1912, plate XLIX, hue 49′′′′, tone f; ISCC-NBS 1955, block 185 (R); RAL 7040",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "web",
+      "cite": "Wikipedia, \"Payne's grey\", on William Payne and the mixed wash",
+      "loc_kind": "entry",
+      "url": "https://en.wikipedia.org/wiki/Payne%27s_grey"
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Who is Payne's grey named after?",
+      "choices": [
+        "A chemist",
+        "The painter William Payne",
+        "A mineral mine",
+        "A dye merchant"
+      ],
+      "answer": "The painter William Payne",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: painters used Payne's grey as a softer substitute for flat black.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pale Payne's Grey carries the name of a painter who mixed it to avoid using flat black."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   },
-  "first_seen": {
-   "year": 1315,
-   "painting": "commons-Q141161707",
-   "painter": "Lippo di Benivieni"
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Ridgway 1912, plate XLIX, hue 49′′′′, tone f; ISCC-NBS 1955, block 185 (R); RAL 7040",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "web",
-   "cite": "Wikipedia, \"Payne's grey\", on William Payne and the mixed wash",
-   "loc_kind": "entry",
-   "url": "https://en.wikipedia.org/wiki/Payne%27s_grey"
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Who is Payne's grey named after?",
-   "choices": [
-    "A chemist",
-    "The painter William Payne",
-    "A mineral mine",
-    "A dye merchant"
-   ],
-   "answer": "The painter William Payne",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: painters used Payne's grey as a softer substitute for flat black.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Pale Payne's Grey carries the name of a painter who mixed it to avoid using flat black."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- },
- "words": 273
+  "words": 274
 }

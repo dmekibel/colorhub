@@ -1,0 +1,121 @@
+{
+ "slug": "rose-dust",
+ "name": "Rose Dust",
+ "hex": "#9E5E6F",
+ "names": [
+  "Rose Dust"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Rose Dust is a muted, purplish rose, recorded by Ridgway in 1912 and by Maerz and Paul in 1926, that peaked in print in the 1950s, decades after either record.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A muted rose, recorded twice",
+   "body": "Ridgway's 1912 nomenclature places this hue at plate XXXVIII, hue 69'', tone i, and the ISCC-NBS system of 1955 files it as block 19, a grayish purplish red [1]. Maerz and Paul's 1930 dictionary separately gives a first recorded date of 1926 [1]. The two records sit close but not identical, within the range books disagree on dates for minor names [1].\n\nThe nearest named color is [[mauve-taupe|Mauve Taupe]], 3.3 units away and the library's own nearest match; [[daphne-red|Daphne Red]] sits 4.4 units off [2]. [[swiss-rose|Swiss Rose]] is 4.5 units away, and [[japonica|Japonica]] is also 4.5 units off [2]. In LCH terms Rose Dust measures lightness 48, chroma 28, hue 3 degrees [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds Rose Dust in only 37 of 23,781 paintings, 0.16 percent, as photographed, rarer than 70 percent of the archive's named colors [3]. The earliest match is dated 1550, in a work by Jacopo Tintoretto, 362 years before Ridgway's 1912 record of the name — a look-alike hue in an aged photograph, not proof of a dye or pigment, a floor and not a first, since the archive's early centuries are thin [3]. In printed English the word rose dust peaked in the 1950s and rose fastest that same decade, by Google Books' count of all senses of the phrase, well after either of its 1912 and 1926 color records [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "rose, as a dusty, muted shade",
+   "first_recorded": "1912, per Ridgway (books disagree: Maerz and Paul give 1926)",
+   "source": "ColorHub color library, Ridgway 1912 plate XXXVIII, ISCC-NBS 1955 block 19, Maerz and Paul 1930"
+  },
+  "aka": [
+   "Vernonia Purple"
+  ],
+  "siblings": [
+   "mauve-taupe",
+   "daphne-red",
+   "swiss-rose",
+   "japonica"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 37,
+  "measured": {
+   "lch": [
+    48,
+    28,
+    3
+   ],
+   "nearest": [
+    [
+     "Mauve Taupe",
+     3.3
+    ],
+    [
+     "Daphne Red",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 plate XXXVIII hue 69'', ISCC-NBS 1955 block 19, Maerz and Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: computed LCH and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In which decade did the phrase \"rose dust\" peak in printed English, by Google Books' count?",
+   "choices": [
+    "The 1950s",
+    "The 1890s",
+    "The 1920s",
+    "The 2000s"
+   ],
+   "answer": "The 1950s",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway and Maerz and Paul agree exactly on the year Rose Dust was first recorded.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Rose Dust peaked in print decades after either of its two color-book records."
+ ],
+ "words": 252,
+ "status": "draft",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,299 +1,299 @@
 {
- "slug": "lavender",
- "name": "Lavender",
- "hex": "#BFA2E8",
- "names": [
-  "Lavender"
- ],
- "tier": "nature",
- "depth": "long",
- "lede": "Lavender is the pale bluish purple of lavender flowers, a color word English has used since the early 1700s, and a name that has been pinned to several quite different swatches since.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A flower, and perhaps a wash",
-   "body": "*Lavender* names the plant first. Paterson defines the color as a pale lilac, the color of lavender flowers, with lavender grey and lavender blue as variants [1]. He adds that the word is possibly derived from Latin *lavare*, to wash, which is a hedge and not a settled etymology [1]. In our library the English color word is first recorded in 1705, and [[lavender-blue]] as a name is dated to 1796 [17][14].\n\nSt Clair describes lavender as a pale bluish purple, and notes that the blooms themselves are normally stronger than the color named after them [2]. That fits Paterson's account of saturation, in which lavender is a mixture of violet and white and counts among the low-saturation colors, as pink is a mixture of red and white [1].\n\nThe flower had a meaning before the color had a name. Two nineteenth-century flower dictionaries give it as distrust, and by Dumont's account the reason was an old belief that asps liked to live in lavender, so people approached the plant warily [5][6]. The Romans, he adds, used it in their baths [6]."
-  },
-  {
-   "id": "werner",
-   "title": "Dried lavender in Werner's chart",
-   "body": "Werner's 54 colors of 1774 include no lavender [4]. The name arrives in the expanded lists that followed, and in Patrick Syme's chart of 1821 it is number 44, Lavender Purple, mixed from blue and red with a little brown and grey [3][4]. His examples were dried lavender flowers, the light spots on the underwings of the peacock butterfly, and porcelain jasper [3].\n\nBooks disagree on where the name came from. Syme's own caption calls it the lavender blue of Werner, but Baty's notes derive number 44 from the Lavender Blue of Claudine Picardet, whose French translation of 1790 added 17 colors to Werner's list [3][4]. Either way the swatch is a dusky grey-violet, nothing like the flower in bloom, and we keep it on its own page as [[lavender-purple]] [14]."
-  },
-  {
-   "id": "swatch",
-   "title": "Four lavenders",
-   "body": "No single swatch is the lavender. The one on this page, #BFA2E8, is a soft violet with real chroma, and the nearest ISCC-NBS block names it a brilliant purple, 6.7 CIEDE2000 units away [14]. The CSS and X11 color `lavender`, #E6E6FA, is far paler and nearly colorless, 19.8 units from ours [1][14].\n\nRidgway's plate of 1912 gives a greyed pink-lilac, #D7CAD4, which is 18.8 units from ours and 8.7 from CSS [14]. Werner's aged swatch, #77747F, is a dark grey, 25.5 units away [14]. The Ridgway and Werner values are scans of aged printed plates, so they are approximate [14].\n\nAll four are called lavender, and each follows a different source. If you mean the flower, the soft violet here is the closest of the four; if you mean the web color, the paler one is."
-  },
-  {
-   "id": "dye",
-   "title": "In dye, paint and fashion",
-   "body": "Lavender is a fragile tone, and the books meet it where colors fail. In Oaxaca, Finlay watched a thread rubbed with a sea snail's secretion turn lime green, then yellow, then purple in sunlight [7]. The skein she dyed herself came out mauve, lilac or lavender, not the dark, almost black purple that Pliny described [7]. Guatemalan weavers, she reports, watch snail-dyed yarn move from yellow through green to lavender [8].\n\nFugitive paint ended up in the same place. Greenfield notes that the geranium pink lakes and violet paints of Van Gogh and Gauguin turned pale blue and lavender-white [9].\n\nPerkin's [[mauve]] gave the tone a fashion life. Around the centenary of 1956 the British Colour Council listed sweet lavender among seven fashionable shades derived directly from Perkin's first color [10]. A ship's paint tells a quieter story: Union-Castle liners had hulls of an indeterminate dull lavender-gray-pink, and Lord Mountbatten, noticing one vanish at dusk, had his destroyers painted gray with a touch of Venetian red, a tone that became known as [[mountbatten-pink]] [2]."
-  },
-  {
-   "id": "words",
-   "title": "Stones, words and associations",
-   "body": "The gem trade uses the word for color grades. Jadeite is usually green but can also be lavender, and pearls range from white through pink and lavender to black [13]. Paterson's amalgam of birthstone lists gives purple or lavender for [[gem:amethyst|amethyst]], the February stone [1]. See also [[gem:jade|jade]] and [[gem:pearl|pearl]].\n\nThe word picked up social meanings too. Paterson records the American use of *lavender* for homosexuality, a lavender marriage as a marriage of convenience entered into by a homosexual person, and the Lavender List, the resignation honours of Harold Wilson, said to have been recommended on lavender notepaper [1].\n\nMid-century color psychology treated lavender as calming. Birren reports that aura healers recommended violet and lavender for a soothing effect on the nervous system, and he ranks lavender among the best \"smelling\" colors, with pink, pale yellow and green [11]. The same book advises keeping lavender out of operating rooms because it makes complexions look ghastly [11]. These are mid-century opinions, not modern evidence.\n\nBatchelor reads a television advertisement in which a pair of pale lavender underpants ends up as a lavender front room, and takes it as a tale about the difference between saying and showing [12]. Lavender is hard to describe and easy to point at, which is the best advice for learning it."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Lavender is almost absent from painting. In our archive of 23,781 paintings, one work has a color within six CIEDE2000 units of this swatch covering at least five per cent of its canvas: [[painting:commons-Q114241452|Paysage avec danse de paysans]] by [[painter:claude-lorrain|Claude Lorrain]], dated 1637, at 19 per cent [15]. At a tighter threshold, within four units and one per cent of the canvas, no painting qualifies [15].\n\nThese are photographs of aged, varnished paintings, so they say little about how pale tints looked when new, and a color match is not a pigment test [15]. A color named for a garden flower is nearly missing from the museum walls we have measured.\n\nThe word is easier to follow. In Google Books, *lavender* stands at about half its eventual peak in 1800, dips to 29 per cent of it in 1840, reaches 69 per cent in 1920 and peaks in 2017 [16]. The count includes the plant and its scent, so it is not a measure of the color alone [16]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the lavender plant (Lavandula); possibly Latin lavare, 'to wash' (Paterson, hedged)",
-   "first_recorded": "English color word, 1705 (ColorHub library); Lavender Blue 1796 (Maerz and Paul)",
-   "source": "Paterson, A Dictionary of Colour, \"lavender\""
-  },
-  "aka": [
-   "lavender purple (Werner no. 44)",
-   "X11 lavender (#E6E6FA)"
+  "slug": "lavender",
+  "name": "Lavender",
+  "hex": "#BFA2E8",
+  "names": [
+    "Lavender"
   ],
-  "siblings": [
-   "lavender-blue",
-   "lavender-purple",
-   "lilac"
+  "tier": "nature",
+  "depth": "long",
+  "lede": "Lavender is the pale bluish purple of lavender flowers, a color word English has used since the early 1700s, and a name that has been pinned to several quite different swatches since.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A flower, and perhaps a wash",
+      "body": "*Lavender* names the plant first. Paterson defines the color as a pale lilac, the color of lavender flowers, with lavender grey and lavender blue as variants [1]. He adds that the word is possibly derived from Latin *lavare*, to wash, which is a hedge and not a settled etymology [1]. In our library the English color word is first recorded in 1705, and [[lavender-blue]] as a name is dated to 1796 [17][14].\n\nSt Clair describes lavender as a pale bluish purple, and notes that the blooms themselves are normally stronger than the color named after them [2]. That fits Paterson's account of saturation, in which lavender is a mixture of violet and white and counts among the low-saturation colors, as pink is a mixture of red and white [1].\n\nThe flower had a meaning before the color had a name. Two nineteenth-century flower dictionaries give it as distrust, and by Dumont's account the reason was an old belief that asps liked to live in lavender, so people approached the plant warily [5][6]. The Romans, he adds, used it in their baths [6]."
+    },
+    {
+      "id": "werner",
+      "title": "Dried lavender in Werner's chart",
+      "body": "Werner's 54 colors of 1774 include no lavender [4]. The name arrives in the expanded lists that followed, and in Patrick Syme's chart of 1821 it is number 44, Lavender Purple, mixed from blue and red with a little brown and grey [3][4]. His examples were dried lavender flowers, the light spots on the underwings of the peacock butterfly, and porcelain jasper [3].\n\nBooks disagree on where the name came from. Syme's own caption calls it the lavender blue of Werner, but Baty's notes derive number 44 from the Lavender Blue of Claudine Picardet, whose French translation of 1790 added 17 colors to Werner's list [3][4]. Either way the swatch is a dusky grey-violet, nothing like the flower in bloom, and we keep it on its own page as [[purple-slate]] [14]."
+    },
+    {
+      "id": "swatch",
+      "title": "Four lavenders",
+      "body": "No single swatch is the lavender. The one on this page, #BFA2E8, is a soft violet with real chroma, and the nearest ISCC-NBS block names it a brilliant purple, 6.7 CIEDE2000 units away [14]. The CSS and X11 color `lavender`, #E6E6FA, is far paler and nearly colorless, 19.8 units from ours [1][14].\n\nRidgway's plate of 1912 gives a greyed pink-lilac, #D7CAD4, which is 18.8 units from ours and 8.7 from CSS [14]. Werner's aged swatch, #77747F, is a dark grey, 25.5 units away [14]. The Ridgway and Werner values are scans of aged printed plates, so they are approximate [14].\n\nAll four are called lavender, and each follows a different source. If you mean the flower, the soft violet here is the closest of the four; if you mean the web color, the paler one is."
+    },
+    {
+      "id": "dye",
+      "title": "In dye, paint and fashion",
+      "body": "Lavender is a fragile tone, and the books meet it where colors fail. In Oaxaca, Finlay watched a thread rubbed with a sea snail's secretion turn lime green, then yellow, then purple in sunlight [7]. The skein she dyed herself came out mauve, lilac or lavender, not the dark, almost black purple that Pliny described [7]. Guatemalan weavers, she reports, watch snail-dyed yarn move from yellow through green to lavender [8].\n\nFugitive paint ended up in the same place. Greenfield notes that the geranium pink lakes and violet paints of Van Gogh and Gauguin turned pale blue and lavender-white [9].\n\nPerkin's [[mauve]] gave the tone a fashion life. Around the centenary of 1956 the British Colour Council listed sweet lavender among seven fashionable shades derived directly from Perkin's first color [10]. A ship's paint tells a quieter story: Union-Castle liners had hulls of an indeterminate dull lavender-gray-pink, and Lord Mountbatten, noticing one vanish at dusk, had his destroyers painted gray with a touch of Venetian red, a tone that became known as [[mountbatten-pink]] [2]."
+    },
+    {
+      "id": "words",
+      "title": "Stones, words and associations",
+      "body": "The gem trade uses the word for color grades. Jadeite is usually green but can also be lavender, and pearls range from white through pink and lavender to black [13]. Paterson's amalgam of birthstone lists gives purple or lavender for [[gem:amethyst|amethyst]], the February stone [1]. See also [[gem:jade|jade]] and [[gem:pearl|pearl]].\n\nThe word picked up social meanings too. Paterson records the American use of *lavender* for homosexuality, a lavender marriage as a marriage of convenience entered into by a homosexual person, and the Lavender List, the resignation honours of Harold Wilson, said to have been recommended on lavender notepaper [1].\n\nMid-century color psychology treated lavender as calming. Birren reports that aura healers recommended violet and lavender for a soothing effect on the nervous system, and he ranks lavender among the best \"smelling\" colors, with pink, pale yellow and green [11]. The same book advises keeping lavender out of operating rooms because it makes complexions look ghastly [11]. These are mid-century opinions, not modern evidence.\n\nBatchelor reads a television advertisement in which a pair of pale lavender underpants ends up as a lavender front room, and takes it as a tale about the difference between saying and showing [12]. Lavender is hard to describe and easy to point at, which is the best advice for learning it."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Lavender is almost absent from painting. In our archive of 23,781 paintings, one work has a color within six CIEDE2000 units of this swatch covering at least five per cent of its canvas: [[painting:commons-Q114241452|Paysage avec danse de paysans]] by [[painter:claude-lorrain|Claude Lorrain]], dated 1637, at 19 per cent [15]. At a tighter threshold, within four units and one per cent of the canvas, no painting qualifies [15].\n\nThese are photographs of aged, varnished paintings, so they say little about how pale tints looked when new, and a color match is not a pigment test [15]. A color named for a garden flower is nearly missing from the museum walls we have measured.\n\nThe word is easier to follow. In Google Books, *lavender* stands at about half its eventual peak in 1800, dips to 29 per cent of it in 1840, reaches 69 per cent in 1920 and peaks in 2017 [16]. The count includes the plant and its scent, so it is not a measure of the color alone [16]."
+    }
   ],
-  "parent": "purple",
-  "children": [
-   "pale-lavender",
-   "light-lavender",
-   "dull-lavender",
-   "lavender-grey",
-   "pink-lavender"
-  ],
-  "disambiguation": [
-   {
-    "slug": "lavender-purple",
-    "gloss": "Werner's Lavender Purple is a dark grey, not a pale violet"
-   },
-   {
-    "slug": "lavender-blush",
-    "gloss": "a near-white pink with a lavender name"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "la",
-    "name": "lavare, 'to wash' (possible source, per Paterson)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#BFA2E8",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 1,
-  "top_paintings": [
-   "commons-Q114241452"
-  ],
-  "tighter_threshold": {
-   "de2000": 4,
-   "min_cover": 0.01,
-   "n_present": 0
-  },
-  "swatches": {
-   "ours": "#BFA2E8",
-   "css": "#E6E6FA",
-   "ridgway_1912": "#D7CAD4",
-   "werner_44": "#77747F"
-  },
-  "ngram": {
-   "peak": 2017,
-   "rel_1800": 0.535,
-   "rel_1840": 0.289,
-   "rel_1920": 0.692
-  },
-  "measured": {
-   "lch": [
-    71.4,
-    39.6,
-    307.7
-   ],
-   "nearest": [
-    [
-     "Wisteria",
-     4.4
+  "aside": {
+    "origin": {
+      "named_after": "the lavender plant (Lavandula); possibly Latin lavare, 'to wash' (Paterson, hedged)",
+      "first_recorded": "English color word, 1705 (ColorHub library); Lavender Blue 1796 (Maerz and Paul)",
+      "source": "Paterson, A Dictionary of Colour, \"lavender\""
+    },
+    "aka": [
+      "lavender purple (Werner no. 44)",
+      "X11 lavender (#E6E6FA)"
     ],
-    [
-     "Lilac",
-     9.2
+    "siblings": [
+      "lavender-blue",
+      "purple-slate",
+      "lilac"
+    ],
+    "parent": "purple",
+    "children": [
+      "pale-lavender",
+      "light-lavender",
+      "dull-lavender",
+      "lavender-grey",
+      "pink-lavender"
+    ],
+    "disambiguation": [
+      {
+        "slug": "purple-slate",
+        "gloss": "Werner's Lavender Purple is a dark grey, not a pale violet"
+      },
+      {
+        "slug": "lavender-blush",
+        "gloss": "a near-white pink with a lavender name"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "la",
+        "name": "lavare, 'to wash' (possible source, per Paterson)"
+      }
     ]
-   ],
-   "iscc": [
-    "brilliant purple",
-    6.7
-   ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#BFA2E8",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 1,
+    "top_paintings": [
+      "commons-Q114241452"
+    ],
+    "tighter_threshold": {
+      "de2000": 4,
+      "min_cover": 0.01,
+      "n_present": 0
+    },
+    "swatches": {
+      "ours": "#BFA2E8",
+      "css": "#E6E6FA",
+      "ridgway_1912": "#D7CAD4",
+      "werner_44": "#77747F"
+    },
+    "ngram": {
+      "peak": 2017,
+      "rel_1800": 0.535,
+      "rel_1840": 0.289,
+      "rel_1920": 0.692
+    },
+    "measured": {
+      "lch": [
+        71.4,
+        39.6,
+        307.7
+      ],
+      "nearest": [
+        [
+          "Wisteria",
+          4.4
+        ],
+        [
+          "Lilac",
+          9.2
+        ]
+      ],
+      "iscc": [
+        "brilliant purple",
+        6.7
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, entries \"lavender\", \"Lavender List\", \"lavender marriage\", \"saturated\", and the birthstone list (pp. 50, 237, 356)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, glossary \"Lavender\" and \"Mountbatten pink\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, colour no. 44 \"Lavender Purple\", pp. 104, 113-115",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, Introduction and chart of nomenclatures, pp. 16-35",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Greenaway, Language of Flowers (1884), \"Lavender\" (public domain)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Dumont, The Language of Flowers, \"Lavender\" (public domain)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 19 (the sea-snail dyeing in Oaxaca)",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Finlay, Fabric, pp. 88-89",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 22",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Garfield, Mauve, ch. 23 (the 1956 centenary)",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, chs. 4, 13 and 20",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Batchelor, Chromophobia, ch. 9",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Finlay, Jewels, ch. 12 (pearls) and glossary \"jadeite\"",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, CSS, Werner 1821, Maerz and Paul 1930), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas) and Color Graph field notes",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "data",
+      "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+      "loc_kind": null,
+      "url": "https://books.google.com/ngrams"
+    },
+    {
+      "n": 17,
+      "kind": "data",
+      "cite": "ColorHub Color Graph origin record for Lavender (data/graph/fieldnotes/l.json, library first-use date)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "In Syme's chart, what did Werner's Lavender Purple (number 44) match?",
+      "choices": [
+        "Dried lavender flowers",
+        "Amethyst crystals",
+        "Heliotrope petals",
+        "Lavender oil"
+      ],
+      "answer": "Dried lavender flowers",
+      "kind": "pick"
+    },
+    {
+      "q": "In Finlay's account of the sea-snail dye, what is the order of colors on the thread in sunlight?",
+      "choices": [
+        "Lime green, yellow, purple",
+        "Purple, blue, green",
+        "Yellow, red, purple",
+        "White, grey, lavender"
+      ],
+      "answer": "Lime green, yellow, purple",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: lavender, a color named for a common flower, is common in the museum paintings of our archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Four different swatches all answer to the name lavender, more than 25 CIEDE2000 units apart.",
+    "Paterson defines lavender as violet mixed with white, one of the low-saturation colors.",
+    "In our painting archive only one picture has a lavender like this one over a twentieth of its canvas, and it is a Claude Lorrain of 1637."
+  ],
+  "words": 1014,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, entries \"lavender\", \"Lavender List\", \"lavender marriage\", \"saturated\", and the birthstone list (pp. 50, 237, 356)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, glossary \"Lavender\" and \"Mountbatten pink\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, colour no. 44 \"Lavender Purple\", pp. 104, 113-115",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, Introduction and chart of nomenclatures, pp. 16-35",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Greenaway, Language of Flowers (1884), \"Lavender\" (public domain)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Dumont, The Language of Flowers, \"Lavender\" (public domain)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 19 (the sea-snail dyeing in Oaxaca)",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Finlay, Fabric, pp. 88-89",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 22",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Garfield, Mauve, ch. 23 (the 1956 centenary)",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy, chs. 4, 13 and 20",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Batchelor, Chromophobia, ch. 9",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Finlay, Jewels, ch. 12 (pearls) and glossary \"jadeite\"",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, CSS, Werner 1821, Maerz and Paul 1930), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas) and Color Graph field notes",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "data",
-   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
-   "loc_kind": null,
-   "url": "https://books.google.com/ngrams"
-  },
-  {
-   "n": 17,
-   "kind": "data",
-   "cite": "ColorHub Color Graph origin record for Lavender (data/graph/fieldnotes/l.json, library first-use date)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "In Syme's chart, what did Werner's Lavender Purple (number 44) match?",
-   "choices": [
-    "Dried lavender flowers",
-    "Amethyst crystals",
-    "Heliotrope petals",
-    "Lavender oil"
-   ],
-   "answer": "Dried lavender flowers",
-   "kind": "pick"
-  },
-  {
-   "q": "In Finlay's account of the sea-snail dye, what is the order of colors on the thread in sunlight?",
-   "choices": [
-    "Lime green, yellow, purple",
-    "Purple, blue, green",
-    "Yellow, red, purple",
-    "White, grey, lavender"
-   ],
-   "answer": "Lime green, yellow, purple",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: lavender, a color named for a common flower, is common in the museum paintings of our archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Four different swatches all answer to the name lavender, more than 25 CIEDE2000 units apart.",
-  "Paterson defines lavender as violet mixed with white, one of the low-saturation colors.",
-  "In our painting archive only one picture has a lavender like this one over a twentieth of its canvas, and it is a Claude Lorrain of 1637."
- ],
- "words": 1014,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

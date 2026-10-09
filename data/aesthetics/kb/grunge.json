@@ -1,0 +1,64 @@
+{
+ "id": "grunge",
+ "name": "Grunge",
+ "lineage": {
+  "influenced_by": [
+   "Pacific Northwest punk and metal scenes",
+   "thrift-store/workwear practicality in a rainy climate"
+  ],
+  "influences": [
+   "indie-sleaze",
+   "nu-goth"
+  ]
+ },
+ "eras": [
+  "c. 1985–1996 (peak 1991–94)"
+ ],
+ "places": [
+  "Seattle"
+ ],
+ "garments": [
+  "flannel shirts",
+  "ripped jeans",
+  "combat boots",
+  "thermal henleys"
+ ],
+ "media": [
+  {
+   "title": "Nirvana, Nevermind (1991)",
+   "note": "the album most credited with bringing the look to mainstream visibility"
+  }
+ ],
+ "figures": [
+  "Kurt Cobain"
+ ],
+ "reacts_against": "1980s glam metal and corporate fashion's polish, dressing in cheap, practical, already-worn-looking clothes as a visible rejection of consumerist style.",
+ "revivals": [
+  "cited repeatedly as a direct ancestor of indie sleaze and 2020s TikTok \"grunge\" styling"
+ ],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Seattle Sound",
+  "decade_of_origin": "1980s",
+  "key_motifs": "Flannel shirts, ripped jeans, band t-shirts, Doc Martens, oversized sweaters, long unkempt hair",
+  "key_colours": "Earthy and muted tones: brown, army green, grey, burgundy, faded denim",
+  "related_aesthetics": "AlternativeGraffiti PopMetalheadPunkIndieSepia BlurIndie SleazeHeroin Chic",
+  "key_values": "Anti-consumerism, authenticity, apathy, rebellion, social alienation, angst"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Grunge"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "light — about 73% of the measured color is pale or near-white",
+   "mostly muted — about 89% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

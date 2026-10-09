@@ -1,122 +1,122 @@
 {
- "slug": "persian-orange",
- "name": "Persian Orange",
- "hex": "#D99058",
- "tier": "place",
- "depth": "brief",
- "lede": "Persian orange is a warm, muted orange, a reddish yellow in the old dictionaries, and the clay-and-leather tone of many painted pages.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The Persian family",
-   "body": "Paterson defines Persian orange as a reddish yellow [1]. In the same entries Persian blue is a strong blue or a pale violet, and Persian red is a purplish red pigment, linked to Venetian red and also used for chrome orange [1]. All three appear in his lists by color family, Persian orange among the oranges [2].\n\nNo book in our set explains why the word Persian is attached, and none ties it to a single dye or a single date [1][2]. Our library carries it from Maerz and Paul's *Dictionary of Color* of 1930, plate 10, which records the name as first used in 1892 [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "The swatch #D99058 is a moderate orange [3]. It is common in painting: our archive of 23,781 paintings has it in 452, or 1.9%, as photographed [4]. It peaks in the 1400s, at 1.6 times the museums' baseline, and inside a painting it most often plays an accent [4]. Dürer is its most devoted painter here, with it in 8 of 47 works [4]. Much of that is probably aged varnish and skin, so it is a screen color, not a pigment test [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Persia (the name's reason is undocumented)",
-   "first_recorded": "1892 (Maerz & Paul, 1930)",
-   "source": "Paterson, p. 305"
-  },
-  "aka": [],
-  "siblings": [
-   "burnt-orange",
-   "persimmon",
-   "amber"
+  "slug": "persian-orange",
+  "name": "Persian Orange",
+  "hex": "#D99058",
+  "tier": "place",
+  "depth": "brief",
+  "lede": "Persian orange is a warm, muted orange, a reddish yellow in the old dictionaries, and the clay-and-leather tone of many painted pages.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The Persian family",
+      "body": "Paterson defines Persian orange as a reddish yellow [1]. In the same entries Persian blue is a strong blue or a pale violet, and Persian red is a purplish red pigment, linked to Venetian red and also used for chrome orange [1]. All three appear in his lists by color family, Persian orange among the oranges [2].\n\nNo book in our set explains why the word Persian is attached, and none ties it to a single dye or a single date [1][2]. Our library carries it from Maerz and Paul's *Dictionary of Color* of 1930, plate 10, which records the name as first used in 1892 [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "The swatch #D99058 is a moderate orange [3]. It is common in painting: our archive of 23,781 paintings has it in 452, or 1.9%, as photographed [4]. It peaks in the 1400s, at 1.6 times the museums' baseline, and inside a painting it most often plays an accent [4]. Dürer is its most devoted painter here, with it in 8 of 47 works [4]. Much of that is probably aged varnish and skin, so it is a screen color, not a pigment test [4]."
+    }
   ],
-  "parent": "orange",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "persian-red",
-    "gloss": "Paterson: a purplish red pigment, not an orange"
-   }
+  "aside": {
+    "origin": {
+      "named_after": "Persia (the name's reason is undocumented)",
+      "first_recorded": "1892 (Maerz & Paul, 1930)",
+      "source": "Paterson, p. 305"
+    },
+    "aka": [],
+    "siblings": [
+      "burnt-orange",
+      "persimmon",
+      "amber"
+    ],
+    "parent": "orange",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "madder-lake",
+        "gloss": "Paterson: a purplish red pigment, not an orange"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#D99058",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 452,
+    "role": "accent",
+    "peak_decade": 1500
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"Persian blue\", \"Persian orange\", \"Persian red\", p. 305",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, the oranges list, p. 502",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#D99058",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 452,
-  "role": "accent",
-  "peak_decade": 1500
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"Persian blue\", \"Persian orange\", \"Persian red\", p. 305",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, the oranges list, p. 502",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
+  "questions": [
+    {
+      "q": "How does Paterson define Persian orange?",
+      "choices": [
+        "A reddish yellow",
+        "A pale violet",
+        "A dark blue",
+        "A grey"
+      ],
+      "answer": "A reddish yellow",
+      "kind": "pick"
+    },
+    {
+      "q": "In paintings, what role does this color most often play?",
+      "choices": [
+        "An accent",
+        "A background wash",
+        "The darkest shadow",
+        "The only color"
+      ],
+      "answer": "An accent",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Persian orange appears in 452 of our 23,781 paintings, most often as an accent."
+  ],
+  "names": [
+    "Persian Orange"
+  ],
+  "status": "checked",
+  "words": 206,
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Claims verified against fact card and book text; no changes."
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "How does Paterson define Persian orange?",
-   "choices": [
-    "A reddish yellow",
-    "A pale violet",
-    "A dark blue",
-    "A grey"
-   ],
-   "answer": "A reddish yellow",
-   "kind": "pick"
-  },
-  {
-   "q": "In paintings, what role does this color most often play?",
-   "choices": [
-    "An accent",
-    "A background wash",
-    "The darkest shadow",
-    "The only color"
-   ],
-   "answer": "An accent",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Persian orange appears in 452 of our 23,781 paintings, most often as an accent."
- ],
- "names": [
-  "Persian Orange"
- ],
- "status": "checked",
- "words": 206,
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Claims verified against fact card and book text; no changes."
-  ]
- }
 }

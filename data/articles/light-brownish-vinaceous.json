@@ -1,132 +1,132 @@
 {
- "slug": "light-brownish-vinaceous",
- "name": "Light Brownish Vinaceous",
- "hex": "#CEB0AB",
- "names": [
-  "Light Brownish Vinaceous"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Light Brownish Vinaceous is a pale, dusty pink from Ridgway's 1912 atlas, sitting closer to Silver Pink than to any true brown.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A dusty pink, not a brown",
-   "body": "Ridgway's 1912 atlas carries this tone on plate XXXIX, hue 5‴ [1]. The 1955 ISCC-NBS dictionary groups it under block 8, naming it grayish pink, 2.5 units from Ridgway's reading, its Munsell notation given as 7.1R 7.4/2.7 [1].\n\nDespite the word \"brownish\" in its name, its nearest neighbor in our library is [[silver-pink]], about 3.2 units away and redder, followed by [[pale-purplish-vinaceous]], almost the same color at 3.6 units [2]. [[pale-blush]] and [[light-vinaceous-fawn]] sit a little further, each about 4.2 units off and more yellow [2]. *Vinaceous*, wine-colored, is the operative word; the brown reads as a dusty cast over pink, not a separate hue [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a matching color in 117 of 23,781 paintings, about 0.49 percent, as photographed, more common than 56 percent of the named colors tracked [3]. It peaks in the 1900s, present in 1.2 percent of the 1,674 paintings from that decade, 2.8 times its museums' expected rate [3].\n\nInside a painting it most often hides, in 45 percent of its 82 clearly-ranked appearances, a rank computed within each canvas so varnish cannot fake it [3]. It is also most over-represented in Indian paintings, 2.7 times the expected rate, found in 12 of the archive's 721 [3]. These are photographs of aged, varnished paintings, and the match is a computed color reading, not a pigment identification [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "vinaceous, wine-colored; Ridgway's drab-brown modifier chain",
-   "first_recorded": "1912 (Ridgway); carried into the 1955 ISCC-NBS dictionary",
-   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
-  },
-  "aka": [],
-  "siblings": [
-   "silver-pink",
-   "pale-purplish-vinaceous",
-   "pale-blush",
-   "light-vinaceous-fawn"
+  "slug": "light-brownish-vinaceous",
+  "name": "Light Brownish Vinaceous",
+  "hex": "#CEB0AB",
+  "names": [
+    "Light Brownish Vinaceous"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#CEB0AB",
-   "de2000": 2.5,
-   "min_cover": 0.02
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Light Brownish Vinaceous is a pale, dusty pink from Ridgway's 1912 atlas, sitting closer to Silver Pink than to any true brown.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A dusty pink, not a brown",
+      "body": "Ridgway's 1912 atlas carries this tone on plate XXXIX, hue 5‴ [1]. The 1955 ISCC-NBS dictionary groups it under block 8, naming it grayish pink, 2.5 units from Ridgway's reading, its Munsell notation given as 7.1R 7.4/2.7 [1].\n\nDespite the word \"brownish\" in its name, its nearest neighbor in our library is [[silver-pink]], about 3.2 units away and redder, followed by [[pale-purplish-vinaceous]], almost the same color at 3.6 units [2]. [[pale-blush]] and [[pale-blush]] sit a little further, each about 4.2 units off and more yellow [2]. *Vinaceous*, wine-colored, is the operative word; the brown reads as a dusty cast over pink, not a separate hue [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a matching color in 117 of 23,781 paintings, about 0.49 percent, as photographed, more common than 56 percent of the named colors tracked [3]. It peaks in the 1900s, present in 1.2 percent of the 1,674 paintings from that decade, 2.8 times its museums' expected rate [3].\n\nInside a painting it most often hides, in 45 percent of its 82 clearly-ranked appearances, a rank computed within each canvas so varnish cannot fake it [3]. It is also most over-represented in Indian paintings, 2.7 times the expected rate, found in 12 of the archive's 721 [3]. These are photographs of aged, varnished paintings, and the match is a computed color reading, not a pigment identification [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "vinaceous, wine-colored; Ridgway's drab-brown modifier chain",
+      "first_recorded": "1912 (Ridgway); carried into the 1955 ISCC-NBS dictionary",
+      "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
+    },
+    "aka": [],
+    "siblings": [
+      "silver-pink",
+      "pale-purplish-vinaceous",
+      "pale-blush",
+      "sweet-pea"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "n_present": 117,
-  "measured": {
-   "lch": [
-    74.3,
-    12.0,
-    33.2
-   ],
-   "nearest": [
-    [
-     "Silver Pink",
-     3.2
-    ],
-    [
-     "Pale Purplish Vinaceous",
-     3.6
-    ],
-    [
-     "Pale blush",
-     4.2
-    ],
-    [
-     "Light Vinaceous-Fawn",
-     4.2
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#CEB0AB",
+      "de2000": 2.5,
+      "min_cover": 0.02
+    },
+    "n_present": 117,
+    "measured": {
+      "lch": [
+        74.3,
+        12.0,
+        33.2
+      ],
+      "nearest": [
+        [
+          "Silver Pink",
+          3.2
+        ],
+        [
+          "Pale Purplish Vinaceous",
+          3.6
+        ],
+        [
+          "Pale blush",
+          4.2
+        ],
+        [
+          "Light Vinaceous-Fawn",
+          4.2
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXXIX, hue 5‴; cited in ISCC-NBS, NBS Circular 553 (1955), block 8, \"grayish yellowish pink\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library and graph: computed LCH and nearest-neighbor distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does \"vinaceous\" describe in this name?",
+      "choices": [
+        "A wine color",
+        "A type of wood",
+        "A region in Italy",
+        "A dye plant"
+      ],
+      "answer": "A wine color",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Light Brownish Vinaceous is found more often than expected in paintings from India.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Light Brownish Vinaceous reads as a dusty wine-pink, not a brown, despite its name."
+  ],
+  "words": 255,
+  "status": "checked",
+  "checked": {
+    "by": "batch-36",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXXIX, hue 5‴; cited in ISCC-NBS, NBS Circular 553 (1955), block 8, \"grayish yellowish pink\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library and graph: computed LCH and nearest-neighbor distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does \"vinaceous\" describe in this name?",
-   "choices": [
-    "A wine color",
-    "A type of wood",
-    "A region in Italy",
-    "A dye plant"
-   ],
-   "answer": "A wine color",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Light Brownish Vinaceous is found more often than expected in paintings from India.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Light Brownish Vinaceous reads as a dusty wine-pink, not a brown, despite its name."
- ],
- "words": 256,
- "status": "checked",
- "checked": {
-  "by": "batch-36",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

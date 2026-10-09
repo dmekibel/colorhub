@@ -1,148 +1,148 @@
 {
- "slug": "swiss-rose",
- "name": "Swiss Rose",
- "hex": "#AA5B66",
- "names": [
-  "Swiss Rose"
- ],
- "tier": "place",
- "depth": "medium",
- "lede": "Swiss Rose is a dusty rose-red recorded by Maerz and Paul in 1930 at a plate position that had carried a different name, Monsoreau, in their 1892 listing of the same catalogue.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A dustier name for an older entry",
-   "body": "Maerz and Paul's 1930 *A Dictionary of Color* records Swiss Rose at plate 4, position K 2, dated 1927, and the ISCC-NBS system later filed it as a moderate red [1]. The same plate position had carried the name Monsoreau in the dictionary's own 1892-dated listing, so the same catalogue slot was renamed before it reached Swiss Rose, a detail our library preserves but does not further explain [1]. The \"Swiss\" in the final name is, by our classification, a place-or-institution word with no documented reasoning beyond the adjective itself [2].\n\nThe nearest named colors are [[brick-rose]] and [[dark-vinaceous]], each about 4.5 units away and both redder and duller [3].\n\nA little further off are [[popstar]], more vivid at 4.8 units, and [[solferino]], redder at 4.9 [3]. Fashion and textile use is the field our library assigns to this name, rather than nature or painting, which fits a dusty rose more associated with cloth than with pigment [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, as photographed, a color within six units of Swiss Rose covers at least five per cent of a canvas in 22 works [4]. More than half of those matches fall in the twentieth century [4]. The earliest is a work from around the year 1000 depicting a Bodhisattva, where it covers about 16 per cent of the canvas [4]. Pierre Bonnard is the strongest match, present in three of his forty-five archived paintings, over seventy times the archive's rate, and Henri Matisse's 1923 *Odalisque with a Screen* carries it across nearly a third of the canvas [4]. It is also disproportionately linked to Kalighat painting from Bengal [4]. These remain photographs of aged, varnished paintings, read as screen colors, not pigment tests [4]. Where it does appear, it splits mostly between mid-tone and shadow, rarely as a highlight [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented; the place-or-institution word \"Swiss\"",
-   "first_recorded": "Maerz & Paul, A Dictionary of Color (1930), plate 4 K 2, first recorded 1927 (the same plate position carried the name Monsoreau in 1892)",
-   "source": "ColorHub color library (Maerz & Paul 1930; ISCC-NBS 1955)"
-  },
-  "aka": [],
-  "siblings": [
-   "brick-rose",
-   "dark-vinaceous",
-   "popstar",
-   "solferino"
+  "slug": "swiss-rose",
+  "name": "Swiss Rose",
+  "hex": "#AA5B66",
+  "names": [
+    "Swiss Rose"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#AA5B66",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 22,
-  "painters": [
-   {
-    "name": "Pierre Bonnard",
-    "hits": 3,
-    "n": 45,
-    "lift": 72.06
-   }
+  "tier": "place",
+  "depth": "medium",
+  "lede": "Swiss Rose is a dusty rose-red recorded by Maerz and Paul in 1930 at a plate position that had carried a different name, Monsoreau, in their 1892 listing of the same catalogue.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A dustier name for an older entry",
+      "body": "Maerz and Paul's 1930 *A Dictionary of Color* records Swiss Rose at plate 4, position K 2, dated 1927, and the ISCC-NBS system later filed it as a moderate red [1]. The same plate position had carried the name Monsoreau in the dictionary's own 1892-dated listing, so the same catalogue slot was renamed before it reached Swiss Rose, a detail our library preserves but does not further explain [1]. The \"Swiss\" in the final name is, by our classification, a place-or-institution word with no documented reasoning beyond the adjective itself [2].\n\nThe nearest named colors are [[brick-rose]] and [[brick-rose]], each about 4.5 units away and both redder and duller [3].\n\nA little further off are [[popstar]], more vivid at 4.8 units, and [[solferino]], redder at 4.9 [3]. Fashion and textile use is the field our library assigns to this name, rather than nature or painting, which fits a dusty rose more associated with cloth than with pigment [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, as photographed, a color within six units of Swiss Rose covers at least five per cent of a canvas in 22 works [4]. More than half of those matches fall in the twentieth century [4]. The earliest is a work from around the year 1000 depicting a Bodhisattva, where it covers about 16 per cent of the canvas [4]. Pierre Bonnard is the strongest match, present in three of his forty-five archived paintings, over seventy times the archive's rate, and Henri Matisse's 1923 *Odalisque with a Screen* carries it across nearly a third of the canvas [4]. It is also disproportionately linked to Kalighat painting from Bengal [4]. These remain photographs of aged, varnished paintings, read as screen colors, not pigment tests [4]. Where it does appear, it splits mostly between mid-tone and shadow, rarely as a highlight [4]."
+    }
   ],
-  "movements": [
-   {
-    "key": "Kalighat",
-    "hits": 2,
-    "n": 96,
-    "lift": 22.52
-   }
-  ],
-  "measured": {
-   "lch": [
-    48.2,
-    34.4,
-    13.9
-   ],
-   "nearest": [
-    [
-     "Brick Rose",
-     4.5
+  "aside": {
+    "origin": {
+      "named_after": "undocumented; the place-or-institution word \"Swiss\"",
+      "first_recorded": "Maerz & Paul, A Dictionary of Color (1930), plate 4 K 2, first recorded 1927 (the same plate position carried the name Monsoreau in 1892)",
+      "source": "ColorHub color library (Maerz & Paul 1930; ISCC-NBS 1955)"
+    },
+    "aka": [],
+    "siblings": [
+      "brick-rose",
+      "popstar",
+      "solferino",
+      "rose-dust"
     ],
-    [
-     "Dark Vinaceous",
-     4.5
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#AA5B66",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 22,
+    "painters": [
+      {
+        "name": "Pierre Bonnard",
+        "hits": 3,
+        "n": 45,
+        "lift": 72.06
+      }
+    ],
+    "movements": [
+      {
+        "key": "Kalighat",
+        "hits": 2,
+        "n": 96,
+        "lift": 22.52
+      }
+    ],
+    "measured": {
+      "lch": [
+        48.2,
+        34.4,
+        13.9
+      ],
+      "nearest": [
+        [
+          "Brick Rose",
+          4.5
+        ],
+        [
+          "Dark Vinaceous",
+          4.5
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Maerz & Paul, A Dictionary of Color (1930), plate 4 K 2; ISCC-NBS 1955",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library, place/institution tier classification",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges-s.json), CIEDE2000 look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What name did the same catalogue plate position carry before Swiss Rose?",
+      "choices": [
+        "Monsoreau",
+        "Persimmon",
+        "Acanthe",
+        "Windsor"
+      ],
+      "answer": "Monsoreau",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Swiss Rose is most strongly linked to Pierre Bonnard's paintings.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Swiss Rose sits at a catalogue plate position that was named Monsoreau 35 years earlier."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "batch writer",
+    "date": "2026-10-08",
+    "issues": [
+      "Monsoreau is not a color in our own data (no slug), so it is named in prose rather than linked.",
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Maerz & Paul, A Dictionary of Color (1930), plate 4 K 2; ISCC-NBS 1955",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library, place/institution tier classification",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges-s.json), CIEDE2000 look-alike distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What name did the same catalogue plate position carry before Swiss Rose?",
-   "choices": [
-    "Monsoreau",
-    "Persimmon",
-    "Acanthe",
-    "Windsor"
-   ],
-   "answer": "Monsoreau",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Swiss Rose is most strongly linked to Pierre Bonnard's paintings.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Swiss Rose sits at a catalogue plate position that was named Monsoreau 35 years earlier."
- ],
- "status": "checked",
- "checked": {
-  "by": "batch writer",
-  "date": "2026-10-08",
-  "issues": [
-   "Monsoreau is not a color in our own data (no slug), so it is named in prose rather than linked.",
-   "lint 2026-10-09"
-  ]
- },
- "words": 328
+  "words": 328
 }

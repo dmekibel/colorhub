@@ -1,119 +1,120 @@
 {
- "name": "Android Green",
- "hex": "#3DDC84",
- "names": [
-  "Android Green"
- ],
- "tier": "commercial",
- "depth": "brief",
- "lede": "Android Green is the bright, yellowish green of Google's Android robot logo.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A tech brand's green",
-   "body": "The name is a brand override: ColorHub's library notes it as the Android logo green, with Wikipedia citing Google as the source [1]. It has no earlier pigment, dye or dictionary history; it exists because a software platform's mascot was drawn in this exact shade [1]. The nearest named look-alikes are [[weird-green]] and [[aqua-green]], with [[malachite]] and [[seaweed]] a little further off [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive holds this green covering at least one percent of its canvas, as photographed [3]. That is expected: it is a recent screen color built for a logo, not a pigment that painters ever mixed [3]. It joins a growing set of brand and interface colors, like many app-icon greens, that exist only as screen values with no pigment or dye history behind them [3]. Screen greens built for logos rarely find their way onto a painter's palette at all [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the Android operating system's robot logo",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub color library (Wikipedia, citing Google)"
-  },
-  "aka": [],
-  "siblings": [
-   "weird-green",
-   "aqua-green",
-   "malachite",
-   "seaweed"
+  "name": "Android Green",
+  "hex": "#3DDC84",
+  "names": [
+    "Android Green"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    78.4,
-    68.0,
-    152.1
-   ],
-   "nearest": [
-    [
-     "Weird Green",
-     2.7
+  "tier": "commercial",
+  "depth": "brief",
+  "lede": "Android Green is the bright, yellowish green of Google's Android robot logo.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A tech brand's green",
+      "body": "The name is a brand override: ColorHub's library notes it as the Android logo green, with Wikipedia citing Google as the source [1]. It has no earlier pigment, dye or dictionary history; it exists because a software platform's mascot was drawn in this exact shade [1]. The nearest named look-alikes are [[android-green]] and [[aqua-green]], with [[malachite]] and [[seaweed]] a little further off [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive holds this green covering at least one percent of its canvas, as photographed [3]. That is expected: it is a recent screen color built for a logo, not a pigment that painters ever mixed [3]. It joins a growing set of brand and interface colors, like many app-icon greens, that exist only as screen values with no pigment or dye history behind them [3]. Screen greens built for logos rarely find their way onto a painter's palette at all [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the Android operating system's robot logo",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub color library (Wikipedia, citing Google)"
+    },
+    "aka": [],
+    "siblings": [
+      "android-green",
+      "aqua-green",
+      "malachite",
+      "seaweed",
+      "emerald"
     ],
-    [
-     "Aqua Green",
-     3.0
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        78.4,
+        68.0,
+        152.1
+      ],
+      "nearest": [
+        [
+          "Weird Green",
+          2.7
+        ],
+        [
+          "Aqua Green",
+          3.0
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Wikipedia, citing Google",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Android Green is named for what?",
+      "choices": [
+        "Google's Android logo",
+        "A 1930s paint company",
+        "An insect",
+        "A military uniform"
+      ],
+      "answer": "Google's Android logo",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Android Green has a pigment or dye history predating the Android logo.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Android Green has no pigment history; it was built for a phone logo."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Modern brand color with no archive presence; kept brief."
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Wikipedia, citing Google",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Android Green is named for what?",
-   "choices": [
-    "Google's Android logo",
-    "A 1930s paint company",
-    "An insect",
-    "A military uniform"
-   ],
-   "answer": "Google's Android logo",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Android Green has a pigment or dye history predating the Android logo.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Android Green has no pigment history; it was built for a phone logo."
- ],
- "status": "checked",
- "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-09",
-  "issues": [
-   "Modern brand color with no archive presence; kept brief."
-  ]
- },
- "slug": "android-green",
- "words": 157
+  "slug": "android-green",
+  "words": 157
 }

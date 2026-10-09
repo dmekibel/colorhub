@@ -17,7 +17,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "Our archive finds a color within six units of this swatch in only 34 of 23,781 paintings, 0.14 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 11 [2]. That makes it rarer than 67 percent of the named colors in our library [2]. Inside a painting it most often plays an accent, in 55 percent of its 11 appearances by lightness rank [2].\n\nThe earliest match dates to the year 1000, a thousand years before the name's 2010 record, so it marks a look-alike hue in an aged photograph, not a surviving pigment or dye [2]. In printed English the word rose fastest in the 1920s, well before the name reached xkcd's volunteers, a reminder that a search for \"dusky rose\" in that era is catching the flower and the general phrase, not yet this specific color [2]."
+   "body": "Our archive finds a color within six units of this swatch in only 34 of 23,781 paintings, 0.14 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 11 [2]. That makes it rarer than 67 percent of the named colors in our library [2]. Inside a painting it most often plays an accent across its 11 appearances by lightness rank [2].\n\nThe earliest match dates to the year 1000, a thousand years before the name's 2010 record, a floor and not a first, since the archive's early centuries are thin; it marks a look-alike hue in an aged photograph, not a surviving pigment or dye [2]. In printed English the word rose fastest in the 1920s, well before the name reached xkcd's volunteers, a reminder that a search for \"dusky rose\" in that era is catching the flower and the general phrase, not yet this specific color [2]."
   }
  ],
  "aside": {
@@ -102,11 +102,11 @@
  "openers": [
   "Dusky Rose and Dusty Rose sit close enough to pass for the same pink."
  ],
- "words": 257,
+ "words": 266,
  "status": "checked",
  "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
+  "by": "checker",
+  "date": "2026-10-08",
   "issues": []
  }
 }

@@ -1,167 +1,169 @@
 {
- "slug": "light-blue-grey",
- "name": "Light Blue Grey",
- "hex": "#A4AAB6",
- "names": [
-  "Light Blue Grey",
-  "Light Blue Grey"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Light Blue Grey is a light shade of [[blue-grey|blue-grey]], one of Robert Ridgway's working names built by the plain grammar of modifier plus base color.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier, not a new color",
-   "body": "Light Blue Grey joins the modifier *light* to the base color [[blue-grey]], raising the value of an already desaturated hue [1][4]. The name shows up in several of our library's systems at once, including CSS, Wikipedia's X11 table, and the crowd-labeled xkcd survey, besides Ridgway and ISCC-NBS [1][2][4]. The systems do not all agree on the exact hex: one alternate reading lands closer to #B7C9E2, a cooler and paler blue than the #A4AAB6 shown here [4]. The ISCC-NBS system calls the matching block, 185, 'pale blue,' a Delta-E of 6.4 from this article's value [2]. The nearest named colors on file are [[pale-payne-s-grey]] and [[burn-blue]], at 3.9 and 4.8 ΔE [1][4]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this shade, as photographed, in 1.73% of 23,781 paintings, 411 paintings; within a single canvas it reads as a distinct area in 246 of them [3]. That ranks it more common than 74% of the archive's named colors [3]. It peaks in the 1900s, found in 2.2% of that century's 1,674 paintings, 1.6 times the expected rate [3]. Inside a painting it most often plays a light, by lightness rank, in 57% of its 246 appearances [3]. Claude Monet is its most devoted painter by a wide margin, using it in 12 of his 50 works here, 13.8 times the baseline rate of the museums those paintings come from [3]. The earliest dated appearance is a painting from 1440, 472 years before the name's first documented record in 1912; the archive's early centuries are thin, so this is a floor and not a first [3]. It shares canvases with [[french-grey]] more often than chance, a lift of 4.6 [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the base color blue-grey, with the modifier 'light'",
-   "first_recorded": "1912 (Ridgway, Color Standards and Nomenclature)",
-   "source": "Ridgway, Color Standards and Nomenclature"
-  },
-  "aka": [
-   "Light Blue Grey"
+  "slug": "light-blue-grey",
+  "name": "Light Blue Grey",
+  "hex": "#A4AAB6",
+  "names": [
+    "Light Blue Grey",
+    "Light Blue Grey",
+    "Endive Blue"
   ],
-  "siblings": [
-   "pale-payne-s-grey",
-   "burn-blue",
-   "pale-violet-plumbeous",
-   "deep-plumbago-blue"
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Light Blue Grey is a light shade of [[blue-grey|blue-grey]], one of Robert Ridgway's working names built by the plain grammar of modifier plus base color.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier, not a new color",
+      "body": "Light Blue Grey joins the modifier *light* to the base color [[blue-grey]], raising the value of an already desaturated hue [1][4]. The name shows up in several of our library's systems at once, including CSS, Wikipedia's X11 table, and the crowd-labeled xkcd survey, besides Ridgway and ISCC-NBS [1][2][4]. The systems do not all agree on the exact hex: one alternate reading lands closer to #B7C9E2, a cooler and paler blue than the #A4AAB6 shown here [4]. The ISCC-NBS system calls the matching block, 185, 'pale blue,' a Delta-E of 6.4 from this article's value [2]. The nearest named colors on file are [[pale-payne-s-grey]] and [[burn-blue]], at 3.9 and 4.8 ΔE [1][4]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this shade, as photographed, in 1.73% of 23,781 paintings, 411 paintings; within a single canvas it reads as a distinct area in 246 of them [3]. That ranks it more common than 74% of the archive's named colors [3]. It peaks in the 1900s, found in 2.2% of that century's 1,674 paintings, 1.6 times the expected rate [3]. Inside a painting it most often plays a light, by lightness rank, in 57% of its 246 appearances [3]. Claude Monet is its most devoted painter by a wide margin, using it in 12 of his 50 works here, 13.8 times the baseline rate of the museums those paintings come from [3]. The earliest dated appearance is a painting from 1440, 472 years before the name's first documented record in 1912; the archive's early centuries are thin, so this is a floor and not a first [3]. It shares canvases with [[french-grey]] more often than chance, a lift of 4.6 [3]."
+    }
   ],
-  "parent": "blue-grey",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "measured": {
-   "lch": [
-    69.5,
-    6.9,
-    272.4
-   ],
-   "nearest_iscc": [
-    "pale blue",
-    6.4
-   ],
-   "nearest": [
-    [
-     "Pale Payne's Grey",
-     3.9
+  "aside": {
+    "origin": {
+      "named_after": "the base color blue-grey, with the modifier 'light'",
+      "first_recorded": "1912 (Ridgway, Color Standards and Nomenclature)",
+      "source": "Ridgway, Color Standards and Nomenclature"
+    },
+    "aka": [
+      "Light Blue Grey",
+      "Endive Blue (ridgway+iscc-nbs+maerz-paul)"
     ],
-    [
-     "Burn Blue",
-     4.8
+    "siblings": [
+      "pale-payne-s-grey",
+      "burn-blue",
+      "pale-violet-plumbeous",
+      "deep-plumbago-blue"
     ],
-    [
-     "Pale Violet-Plumbeous",
-     5.0
-    ],
-    [
-     "Deep Plumbago Blue",
-     5.2
+    "parent": "blue-grey",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "measured": {
+      "lch": [
+        69.5,
+        6.9,
+        272.4
+      ],
+      "nearest_iscc": [
+        "pale blue",
+        6.4
+      ],
+      "nearest": [
+        [
+          "Pale Payne's Grey",
+          3.9
+        ],
+        [
+          "Burn Blue",
+          4.8
+        ],
+        [
+          "Pale Violet-Plumbeous",
+          5.0
+        ],
+        [
+          "Deep Plumbago Blue",
+          5.2
+        ]
+      ]
+    },
+    "n_present": 246,
+    "role_top": {
+      "role": "light",
+      "pct": 57
+    },
+    "painter": {
+      "name": "Claude Monet",
+      "n": 12,
+      "of": 50,
+      "lift": 13.8
+    },
+    "first_seen": {
+      "year": 1440,
+      "years_before_record": 472
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Nomenclature, 1912, an undated plate",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "ISCC-NBS, National Bureau of Standards Circular 553, 1955, block 185 (\"pale blue\")",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub color graph: computed LCH/Munsell values and modifier-name cross-reference",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which painter in our archive paints Light Blue Grey far more often than his peers?",
+      "choices": [
+        "Claude Monet",
+        "Paul Cezanne",
+        "Peter Snayers",
+        "Gustav Klimt"
+      ],
+      "answer": "Claude Monet",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: every system in our library gives Light Blue Grey the exact same hex value.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Inside a painting, which role does Light Blue Grey most often play?",
+      "choices": [
+        "Light",
+        "Shadow",
+        "Hidden color",
+        "Accent"
+      ],
+      "answer": "Light",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Claude Monet reaches for Light Blue Grey nearly fourteen times as often as his peers.",
+    "Our library's own systems do not agree on its exact hex value."
+  ],
+  "words": 302,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  },
-  "n_present": 246,
-  "role_top": {
-   "role": "light",
-   "pct": 57
-  },
-  "painter": {
-   "name": "Claude Monet",
-   "n": 12,
-   "of": 50,
-   "lift": 13.8
-  },
-  "first_seen": {
-   "year": 1440,
-   "years_before_record": 472
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Ridgway, Color Standards and Nomenclature, 1912, an undated plate",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "ISCC-NBS, National Bureau of Standards Circular 553, 1955, block 185 (\"pale blue\")",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub color graph: computed LCH/Munsell values and modifier-name cross-reference",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which painter in our archive paints Light Blue Grey far more often than his peers?",
-   "choices": [
-    "Claude Monet",
-    "Paul Cezanne",
-    "Peter Snayers",
-    "Gustav Klimt"
-   ],
-   "answer": "Claude Monet",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: every system in our library gives Light Blue Grey the exact same hex value.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Inside a painting, which role does Light Blue Grey most often play?",
-   "choices": [
-    "Light",
-    "Shadow",
-    "Hidden color",
-    "Accent"
-   ],
-   "answer": "Light",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Claude Monet reaches for Light Blue Grey nearly fourteen times as often as his peers.",
-  "Our library's own systems do not agree on its exact hex value."
- ],
- "words": 302,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

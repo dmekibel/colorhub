@@ -1,122 +1,121 @@
 {
- "slug": "dark-rose",
- "name": "Dark Rose",
- "hex": "#B5485D",
- "names": [
-  "Dark Rose"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Dark Rose darkens [[rose]], named for the flower, and in our archive it is almost entirely a color of the 1900s, where it runs at nearly ten times the overall rate.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A darkened rose",
-   "body": "Dark Rose applies our modifier grammar's dark to [[rose]], whose name comes directly from the flower and has named a color in English since the medieval period, long before any formal color dictionary existed [1]. The parent entry used here was crowdsourced in the 2010 xkcd color survey, part of the same large online exercise that supplied [[dark-maroon]] and [[dark-mauve]] [1].\n\nIts closest measured match is [[pomegranate-purple]], just 2.7 units away and almost the same color; [[popstar]] is nearly as close, [[light-burgundy]] a little more distant, and [[light-maroon]] duller still at 3.9 units [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This color is rare in our archive overall, matched in only 10 of 23,781 paintings, about 0.04 per cent, as photographed [3]. Seven of those ten are from the 1900s, where the rate runs at about 9.9 times the archive's average, and none at all are dated before 1800 [3]. Kalighat paintings carry it at nearly 25 times the archive rate, though on a single painting out of 96, so the sample is thin [3]. The earliest dated match, from around 1800, shows it covering a little over 11 per cent of its canvas, a floor on the color's age in painting rather than a claim of its first appearance [3]. As photographed: these are computed color matches on museum photographs of aged, varnished paintings, not a pigment test [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the parent color rose, darkened by ColorHub's modifier grammar",
-   "first_recorded": "2010 (xkcd color survey, for the parent rose)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "pomegranate-purple",
-   "popstar",
-   "light-burgundy"
+  "slug": "dark-rose",
+  "name": "Dark Rose",
+  "hex": "#B5485D",
+  "names": [
+    "Dark Rose"
   ],
-  "parent": "rose",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#B5485D",
-   "de2000": 6,
-   "min_cover": 0.05
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Dark Rose darkens [[rose]], named for the flower, and in our archive it is almost entirely a color of the 1900s, where it runs at nearly ten times the overall rate.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A darkened rose",
+      "body": "Dark Rose applies our modifier grammar's dark to [[rose]], whose name comes directly from the flower and has named a color in English since the medieval period, long before any formal color dictionary existed [1]. The parent entry used here was crowdsourced in the 2010 xkcd color survey, part of the same large online exercise that supplied [[dark-sienna]] and [[corinthian-purple]] [1].\n\nIts closest measured match is [[pomegranate-purple]], just 2.7 units away and almost the same color; [[popstar]] is nearly as close, [[pomegranate-purple]] a little more distant, and [[pomegranate-purple]] duller still at 3.9 units [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This color is rare in our archive overall, matched in only 10 of 23,781 paintings, about 0.04 per cent, as photographed [3]. Seven of those ten are from the 1900s, where the rate runs at about 9.9 times the archive's average, and none at all are dated before 1800 [3]. Kalighat paintings carry it at nearly 25 times the archive rate, though on a single painting out of 96, so the sample is thin [3]. The earliest dated match, from around 1800, shows it covering a little over 11 per cent of its canvas, a floor on the color's age in painting rather than a claim of its first appearance [3]. As photographed: these are computed color matches on museum photographs of aged, varnished paintings, not a pigment test [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the parent color rose, darkened by ColorHub's modifier grammar",
+      "first_recorded": "2010 (xkcd color survey, for the parent rose)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "pomegranate-purple",
+      "popstar"
+    ],
+    "parent": "rose",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "n_present": 10,
-  "rate": 0.0004,
-  "by_century_peak": {
-   "decade": "1900s",
-   "lift": 9.94
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#B5485D",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 10,
+    "rate": 0.0004,
+    "by_century_peak": {
+      "decade": "1900s",
+      "lift": 9.94
+    },
+    "measured": {
+      "lch": [
+        46.0,
+        47.3,
+        13.2
+      ],
+      "nearest": [
+        [
+          "Pomegranate Purple",
+          2.7
+        ]
+      ]
+    }
   },
-  "measured": {
-   "lch": [
-    46.0,
-    47.3,
-    13.2
-   ],
-   "nearest": [
-    [
-     "Pomegranate Purple",
-     2.7
-    ]
-   ]
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): modifier-grammar entry over the parent color Rose (xkcd 2010 survey)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub Color Graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Dark Rose is built by darkening which color?",
+      "choices": [
+        "Rose",
+        "Burgundy",
+        "Pomegranate",
+        "Claret"
+      ],
+      "answer": "Rose",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Dark Rose is far more common in our archive's 1900s paintings than in earlier centuries.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Rare everywhere in the archive except the 1900s, where it runs ten times as common."
+  ],
+  "words": 257,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-09",
+    "issues": []
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): modifier-grammar entry over the parent color Rose (xkcd 2010 survey)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-d.json), CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Dark Rose is built by darkening which color?",
-   "choices": [
-    "Rose",
-    "Burgundy",
-    "Pomegranate",
-    "Claret"
-   ],
-   "answer": "Rose",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Dark Rose is far more common in our archive's 1900s paintings than in earlier centuries.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Rare everywhere in the archive except the 1900s, where it runs ten times as common."
- ],
- "words": 257,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-09",
-  "issues": []
- }
 }

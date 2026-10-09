@@ -37,6 +37,7 @@ function nodeRoute(n) {
   if (n.kind === "story") return "story/" + (n.sid || String(n.id).replace(/^s:/, ""));
   if (n.kind === "botany") return "botany/" + String(n.id).replace(/^bt:(plant|dye|essay):/, "");   // js/botany.js
   if (n.kind === "gems") return "gem/" + String(n.id).replace(/^gm:(gem|essay):/, "");   // js/gems.js
+  if (n.kind === "photographer") return "photographer/" + String(n.id).replace(/^photographer-/, "");   // js/photography.js
   return "page/" + n.id;
 }
 function tabRoute(tab) {
@@ -108,8 +109,12 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["passagePage", p => p && p.id ? routed(p.title, "passage/" + p.id) : null],
   ["filmPage", f => f && f.id ? routed(f.title, "film/" + f.id) : null],   // js/passages.js, js/films.js
   ["namePage", (entry, push, tapped) => entry && entry.n ? routed(entry.n, "name/" + routeSlug(entry.n) + tappedQS(tapped)) : null],   // js/names.js: a library color that isn't one of the 101
+  ["sourcePage", id => id && typeof SOURCE_SYSTEMS !== "undefined" && SOURCE_SYSTEMS[id] ? routed(SOURCE_SYSTEMS[id].title, "source/" + id) : null],   // js/sources.js
   ["phOpenRecord", (id, rec) => id != null ? routed(rec && (rec.title || rec.from) || "Your photo", "photo/" + id) : null],   // js/photos.js
-  ["lkOpen", id => { const l = typeof lkGet === "function" && lkGet(id); return l ? routed(l.name, "look/" + id) : null; }],   // js/looks.js
+  ["lkOpen", id => { const l = typeof lkGet === "function" && lkGet(id); return l ? routed(l.name, "look/" + id) : null; }],
+  ["pulpGrid", () => routed("Pulp covers", "pulp")],   // js/pulp.js: the World door for pulp magazine/paperback covers   // js/looks.js
+  ["photographyGrid", () => routed("Photography", "photography")],   // js/photography.js: the World door for the color-photography archive
+  ["photographerPage", slug => slug ? routed((typeof phGetName === "function" && phGetName(slug)) || slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase()), "photographer/" + slug) : null],   // js/photography.js
   ["fashionPage", slug => typeof worldRouteTitle === "function" ? routed(worldRouteTitle(slug), "fashion/" + slug) : null],   // js/world.js
   ["btListPage", kind => typeof btListTitle === "function" ? routed(btListTitle(kind), "botany/" + kind) : null],   // js/botany.js (plant/dye/essay detail pages route via wikiPage above)
   ["btFloriPage", () => routed("The language of flowers", "botany/flori")],   // js/botany.js
@@ -216,6 +221,8 @@ function openRoute(hash, initial = false) {
   if (kind === "studio" && id === "namer" && typeof LAB.namer === "function") { base(); XSTACK = []; LAB.namer(tappedHex); return true; }
   if (kind === "studio" && id === "wheel" && typeof gamutWheel === "function") { base(); XSTACK = []; gamutWheel(); return true; }
   if (kind === "studio" && id === "palette" && more && typeof openSavedPalette === "function") { base(); XSTACK = []; openSavedPalette(more); return true; }
+  // the family tree (js/aesthetics-graph.js): #/web, #/web/focus/<nodeId>, #/web/node/<nodeId>
+  if (kind === "web" && typeof agOpenRoute === "function") { base(); XSTACK = []; agOpenRoute(id, more); return true; }
   // the floor (the honeycomb, js/home.js): not a tab, so it's its own address
   if (kind === "home" && typeof hmHome === "function") { base(); XSTACK = []; hmHome(); return true; }
   if (kind === "map" && id && more != null && typeof hmMapRoute === "function") { base(); XSTACK = []; hmMapRoute(id, more); return true; }   // js/home.js: #/map/gallery/<i>, #/map/painting/<slug>
@@ -226,18 +233,41 @@ function openRoute(hash, initial = false) {
     go(tabs[kind]);
     return true;
   }
-  const node = () => kind === "color" ? (routeColor(id) ? colorNode(routeColor(id)) : null)
-    : graph().nodes.get(kind === "painting" ? "painting-" + id : kind === "story" ? "s:" + id : id) || null;
-  if (["color", "page", "painting", "story"].includes(kind) && id) {
-    if (kind === "color" && !routeColor(id)) return false;
+  // #/color/<slug>: a cold load only has the ~101 core colors (BASICS/ALL) synchronously -- an archive name
+  // (CORE_NAMES, ~1,000; the ~2,700-name library) is still loading. routeColor alone used to just fail for one of
+  // those and the route gave up (`return false`), which bounced a fresh #/color/dawn-grey to the Welcome/Today
+  // fallback while #/color/scarlet (a core name) worked fine. Mirrors the "name" kind below: the fast path is
+  // unchanged for a core color, but a slug routeColor can't find now WAITS for the names it needs (routeNameAsync
+  // -- core names, library names and aliases) and THEN opens, as a color page or a name page, whichever the slug
+  // actually is -- never a silent redirect, and routeNoName (a real "not found" page) only once that's exhausted.
+  if (kind === "color" && id) {
+    const c = routeColor(id);
+    if (c) {
+      base();
+      ROUTE_NEXT = routed(c.n, parts.slice(0, more === "more" ? 3 : 2).join("/"));
+      whenWiki(() => { const n = colorNode(c); if (!n) return xToOrigin(); XSTACK = []; if (more === "more") return closeup(n); return openNode(n, true, tappedHex); });
+      return true;
+    }
     base();
-    ROUTE_NEXT = routed(kind === "color" ? routeColor(id).n : "", parts.slice(0, more === "more" ? 3 : 2).join("/"));
+    if (!CORE_NAMES) { ROUTE_NEXT = routed("", "color/" + id); waitScreen(); ROUTE_REPLACE = true; }
+    XSTACK = [];
+    whenWiki(() => routeNameAsync(id).then(r => {
+      if (r && r.color) { XSTACK = []; const n = colorNode(r.color); if (more === "more") return closeup(n); return openNode(n, true, tappedHex); }
+      if (r && r.entry) { if (more === "more" && typeof closeup === "function") { try { return closeup(r.entry); } catch (e) {} } return namePage(r.entry, true, tappedHex); }
+      routeNoName(id);
+    }));
+    return true;
+  }
+  const node = () => graph().nodes.get(kind === "painting" ? "painting-" + id : kind === "story" ? "s:" + id : id) || null;
+  if (["page", "painting", "story"].includes(kind) && id) {
+    base();
+    ROUTE_NEXT = routed("", parts.slice(0, more === "more" ? 3 : 2).join("/"));
     whenWiki(() => {
       const n = node();
       if (!n) return xToOrigin();
       XSTACK = [];
       if (more === "more") return closeup(n);
-      return n.kind === "story" ? storyPlayer(n) : openNode(n, true, kind === "color" ? tappedHex : null);
+      return n.kind === "story" ? storyPlayer(n) : openNode(n, true, null);
     });
     return true;
   }
@@ -251,6 +281,10 @@ function openRoute(hash, initial = false) {
     base(); XSTACK = []; archWhen(() => { const f = (window.FILMS || []).find(x => x.id === id); if (f) filmPage(f); else xToOrigin(); }); return true;
   }
   if (kind === "look" && id && typeof lkOpenRoute === "function") { base(); XSTACK = []; lkOpenRoute(id); return true; }   // js/looks.js
+  if (kind === "source" && id && typeof sourcePage === "function") { base(); XSTACK = []; sourcePage(id); return true; }   // js/sources.js
+  if (kind === "pulp" && !id && typeof pulpGrid === "function") { base(); XSTACK = []; pulpGrid(false); return true; }   // js/pulp.js: #/pulp (a direct link to one cover, #/painting/pulp-<id>, needs the grid open first in this session)
+  if (kind === "photography" && !id && typeof photographyGrid === "function") { base(); XSTACK = []; photographyGrid(false); return true; }   // js/photography.js: #/photography (a direct link to one photo, #/painting/photod-<id>, needs the grid open first)
+  if (kind === "photographer" && id && typeof photographerPage === "function") { base(); XSTACK = []; photographerPage(id, false); return true; }   // js/photography.js
   if (kind === "botany" && id && typeof btOpenRoute === "function") { base(); btOpenRoute(id); return true; }   // js/botany.js
   if (kind === "gem" && id && typeof gmOpenRoute === "function") { base(); gmOpenRoute(id); return true; }   // js/gems.js
   if (kind === "brand" && id && typeof bdOpenRoute === "function") { base(); bdOpenRoute(id); return true; }   // js/brands.js

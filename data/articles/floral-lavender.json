@@ -1,133 +1,132 @@
 {
- "slug": "floral-lavender",
- "name": "Floral lavender",
- "hex": "#B57EDC",
- "names": [
-  "Floral lavender"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Floral lavender is a brighter, more saturated purple than the muted [[lavender]] of the flower it is named for, and our painting archive has no record of it at all.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Brighter than the plant",
-   "body": "Lavender, the plant, gives its name to one of the oldest flower-derived color words in English, but Floral lavender pushes well past the grayed, dusty purple of the real [[flower:lavender|lavender]] bloom toward a brighter, more saturated hue [1]. The nearest named colors on file are [[light-hortense-violet]] and [[orchid-purple]], at \nWikipedia is our only source for this particular name and hex value; no older dictionary, plate or survey in our library carries it [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive shows this color covering at least 1 percent of its canvas, within CIEDE2000 4 of it, as photographed [3]. A bright, modern-saturation purple like this is simply absent from the pigments and dyes historical painters had on hand [3]. Measured in LCH it comes out at lightness 62, chroma 80, hue 314 degrees, than to any grayer lavender [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the lavender flower, brightened past its natural dye color",
-   "first_recorded": "undocumented in the books consulted",
-   "source": "ColorHub color graph"
-  },
-  "aka": [],
-  "siblings": [
-   "light-hortense-violet",
-   "orchid-purple",
-   "amparo-purple",
-   "pale-purple"
+  "slug": "floral-lavender",
+  "name": "Floral lavender",
+  "hex": "#B57EDC",
+  "names": [
+    "Floral lavender"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "lavender",
-    "gloss": "the flower's own muted, grayer purple"
-   }
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Floral lavender is a brighter, more saturated purple than the muted [[lavender]] of the flower it is named for, and our painting archive has no record of it at all.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Brighter than the plant",
+      "body": "Lavender, the plant, gives its name to one of the oldest flower-derived color words in English, but Floral lavender pushes well past the grayed, dusty purple of the real [[flower:lavender|lavender]] bloom toward a brighter, more saturated hue [1]. The nearest named colors on file are [[light-hortense-violet]] and [[orchid-purple]], at \nWikipedia is our only source for this particular name and hex value; no older dictionary, plate or survey in our library carries it [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive shows this color covering at least 1 percent of its canvas, within CIEDE2000 4 of it, as photographed [3]. A bright, modern-saturation purple like this is simply absent from the pigments and dyes historical painters had on hand [3]. Measured in LCH it comes out at lightness 62, chroma 80, hue 314 degrees, than to any grayer lavender [2]."
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    62,
-    80,
-    314
-   ],
-   "iscc": "brilliant purple",
-   "nearest": [
-    [
-     "Light Hortense Violet",
-     3.6
+  "aside": {
+    "origin": {
+      "named_after": "the lavender flower, brightened past its natural dye color",
+      "first_recorded": "undocumented in the books consulted",
+      "source": "ColorHub color graph"
+    },
+    "aka": [],
+    "siblings": [
+      "light-hortense-violet",
+      "orchid-purple",
+      "pale-purple"
     ],
-    [
-     "Orchid purple",
-     4.1
+    "parent": null,
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "lavender",
+        "gloss": "the flower's own muted, grayer purple"
+      }
     ],
-    [
-     "Amparo Purple",
-     4.1
-    ],
-    [
-     "Pale Purple",
-     5.9
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        62,
+        80,
+        314
+      ],
+      "iscc": "brilliant purple",
+      "nearest": [
+        [
+          "Light Hortense Violet",
+          3.6
+        ],
+        [
+          "Orchid purple",
+          4.1
+        ],
+        [
+          "Amparo Purple",
+          4.1
+        ],
+        [
+          "Pale Purple",
+          5.9
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color graph: nature/plant tier, lavender; Wikipedia is the only source on file",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: ISCC-NBS 1955 block 217/222 entries; measured LCH",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "How does Floral lavender compare to the real lavender flower's color?",
+      "choices": [
+        "Much duller",
+        "Much brighter and more saturated",
+        "Identical",
+        "Greener"
+      ],
+      "answer": "Much brighter and more saturated",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our archive finds Floral lavender in many old paintings.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Floral lavender is a far brighter purple than the flower it is named for ever grew."
+  ],
+  "words": 167,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color graph: nature/plant tier, lavender; Wikipedia is the only source on file",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library: ISCC-NBS 1955 block 217/222 entries; measured LCH",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "How does Floral lavender compare to the real lavender flower's color?",
-   "choices": [
-    "Much duller",
-    "Much brighter and more saturated",
-    "Identical",
-    "Greener"
-   ],
-   "answer": "Much brighter and more saturated",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our archive finds Floral lavender in many old paintings.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Floral lavender is a far brighter purple than the flower it is named for ever grew."
- ],
- "words": 167,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

@@ -1,0 +1,46 @@
+{
+ "id": "gyaru",
+ "name": "Gyaru",
+ "lineage": {
+  "influenced_by": [
+   "American pop culture imagery (California beach and glamour tropes), reinterpreted through a specifically Japanese lens",
+   "a rejection of traditional Japanese standards of feminine modesty"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "1990s–2010s (Japan)"
+ ],
+ "places": [],
+ "garments": [
+  "bleached and voluminous hair",
+  "false lashes",
+  "platform boots"
+ ],
+ "media": [
+  {
+   "title": "Egg magazine (1995–2014, relaunched later)",
+   "note": "the main print record of the gyaru scene's many sub-styles"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "the pale skin, quiet demeanor and restrained dress long held up as the ideal for young Japanese women, inverting nearly every element of it on purpose.",
+ "revivals": [],
+ "article": "Gyaru (a Japanese rendering of the English \"gal\") emerged in the 1990s as young Japanese women built a look almost point-for-point opposed to the era's conventional femininity: deliberately tanned skin instead of the prized pale complexion, bleached and heavily styled hair, dramatic false-lash makeup, loud instead of quiet self-presentation. The scene splintered into distinct, well-documented sub-styles tracked closely by magazines like Egg — ganguro pushed the tan and contrast furthest, himegyaru (\"princess gyaru\") added pastel, doll-like glamour, and several other named variants each carried their own specific makeup and silhouette rules. Academic and journalistic accounts of gyaru culture consistently frame it as a form of visible rebellion against expectations of restraint and modesty placed on young women, closer in spirit to punk's confrontational self-presentation than to a simple fashion trend, even though its specific visual vocabulary (tan, lashes, platform boots) looks nothing like Western punk.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Gyaru"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 75% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "id": "light-academia",
+ "name": "Light Academia",
+ "lineage": {
+  "influenced_by": [
+   "dark academia (as a direct, brighter counterpart)"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 2020–present"
+ ],
+ "places": [
+  "TikTok/Pinterest"
+ ],
+ "garments": [
+  "cream and beige knitwear",
+  "linen",
+  "pleated skirts"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "dark academia's gothic moodiness, keeping the scholarly motifs but shifting the palette to sunlit cream and beige.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "|decade_of_origin   = 2010s",
+  "decade_of_origin": "2010s",
+  "key_motifs": "European/British, scholarly, old books, long corridors, fields of grass surrounded by woods, the hills, art, the classics",
+  "key_colours": "Beige, cream, light brown, white, plaid, dim shades",
+  "related_aesthetics": "Art Academia\nBohemian\nComfy/Cozy\nCottagecore\nClassicism\nDark Academia\nGreen Academia\nOld Money\nPreppy\nRomantic Academia\nStudyblr\nVictorian",
+  "key_values": "Positivity, academics, the classics, poetry/literature"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Light_Academia"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 71% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

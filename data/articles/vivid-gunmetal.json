@@ -1,0 +1,160 @@
+{
+ "slug": "vivid-gunmetal",
+ "name": "Vivid gunmetal",
+ "hex": "#2E372E",
+ "names": [
+  "Vivid gunmetal"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Vivid gunmetal is a dark, greyed green that our data pairs with the Japanese traditional name 藍海松茶 (Aimirucha), a textile-dye term for a seaweed-tinged brown.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dyer's seaweed brown",
+   "body": "Our source files this hue under the Japanese traditional color list as 藍海松茶 (Aimirucha), translated in our data as \"indigo Codium fragile seaweed brown,\" naming the sea vegetable Codium fragile over-dyed with indigo [1]. The English label \"Vivid gunmetal\" in our library is a plain descriptive name for the same hex, not a translation of the Japanese phrase [1].\n\nIts nearest look-alikes are [[pale-gunmetal]] (3.0 units, almost the same), [[brown-green]] (3.3, almost the same), [[fir-green]] (4.3, almost the same) and [[nickle-green]] (4.4, lighter) [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 945 of 23,781 paintings, about 3.97 percent, as photographed, more common than 85 percent of the named colors we track [3]. It peaks in the 1900s, found in 4.7 percent of the 1,674 paintings we have from then (79 paintings), 1.6 times the expected rate for that century, and plays a mid-tone in 36 percent of the paintings that carry it [3]. Harald Giersing is its most devoted painter, using it in 6 of his 23 works here, 4.6 times the baseline rate; Paul Cezanne also favors it, in 8 of his 50 works [3]. It is most over-represented in paintings from Sweden, at 2.5 times the expected rate, and shares canvases more than chance with New Hay and Deep Slate-Olive [3]. The earliest dated match is 1230, a floor set by thin early-century coverage rather than a true first [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a plain descriptive label in our library; the paired Japanese name is a dye term for seaweed-tinged brown",
+   "first_recorded": "undocumented",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-gunmetal",
+   "brown-green",
+   "fir-green",
+   "nickle-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Aimirucha (藍海松茶), \"indigo Codium fragile seaweed brown\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 945,
+  "rank_pct": 85,
+  "century_peak": {
+   "century": "1900s",
+   "lift": 1.6,
+   "n": 79
+  },
+  "role": {
+   "kind": "mid-tone",
+   "share": 0.36,
+   "n": 659
+  },
+  "painters": [
+   [
+    "harald-giersing",
+    6,
+    23,
+    4.6
+   ],
+   [
+    "paul-cezanne",
+    8,
+    50
+   ]
+  ],
+  "country": {
+   "name": "Sweden",
+   "lift": 2.5,
+   "n": 11
+  },
+  "company": [
+   [
+    "new-hay",
+    6.2
+   ],
+   [
+    "deep-slate-olive",
+    5.8
+   ]
+  ],
+  "first_seen": {
+   "year": 1230
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color list entry for Aimirucha",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub look-alike graph (data/graph/edges-v.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name paired with Vivid gunmetal (Aimirucha) refer to?",
+   "choices": [
+    "An indigo-dyed seaweed brown",
+    "A steamed chestnut tan",
+    "A dark red",
+    "A royal purple"
+   ],
+   "answer": "An indigo-dyed seaweed brown",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter is most devoted to Vivid gunmetal in our archive?",
+   "choices": [
+    "Harald Giersing",
+    "George Dawe",
+    "John Singer Sargent",
+    "Caravaggio"
+   ],
+   "answer": "Harald Giersing",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Vivid gunmetal is one of the rarer colors in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Vivid gunmetal's paired Japanese name is a dyer's term for indigo-steeped seaweed, not metal."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "rank-percentile drift: article said 86%, current data/graph/fieldnotes says 85% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
+  ]
+ },
+ "words": 263
+}

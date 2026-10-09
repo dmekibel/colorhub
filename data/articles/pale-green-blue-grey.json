@@ -1,0 +1,120 @@
+{
+ "slug": "pale-green-blue-grey",
+ "name": "Pale Green-Blue Grey",
+ "hex": "#A8B2B4",
+ "names": [
+  "Pale Green-Blue Grey"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pale Green-Blue Grey is a very pale, nearly colorless grey with the faintest blue-green lean, one of Ridgway's 1912 systematic names, later picked up by the ISCC-NBS system.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A systematic grey",
+   "body": "The name comes from Ridgway's 1912 color standards, plate XLVIII, hue 45'''', tone f, read from a scan of an aged printed plate [1]. The 1955 ISCC-NBS system lists the same area as block 185 under \"bluish white,\" about 3.3 units from this exact shade [1]. Its Munsell notation, N 7.1, marks it as a true neutral: no hue at all, only a value step [1].\n\nThe nearest named colors on file are [[sage-grey]], [[pale-payne-s-grey]], [[pale-violet-plumbeous]] and [[pearl]], at 2.9, 3.6, 4.4 and 4.7 ΔE [1]. Nothing in the dictionaries we hold explains why this particular step earned its own name, so that part is undocumented here [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, this grey appears in 475, about 2.0 percent, more common than 77 percent of our named colors [2]. It peaks in the 1900s, in 38 of 1,674 paintings, at 1.7 times the expected rate for that century, and inside a painting it is most often a light rather than a shadow [2].\n\n[[painter:camille-pissarro|Camille Pissarro]] is its most devoted painter, present in 7 of his 50 works here, 5.5 times his museums' baseline [2]. The earliest match is a 1315 panel by Lippo di Benivieni, nearly six centuries before Ridgway's name, so that early hit is a look-alike hue in an aged photograph, not a trace of this named grey, a floor and not a first, since the archive's early centuries are thin [2]. It shares canvases more than chance with [[light-greyish-olive]] and [[linen-grey]] [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a step in Ridgway's systematic grey series",
+   "first_recorded": "Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "sage-grey",
+   "pale-payne-s-grey",
+   "pale-violet-plumbeous",
+   "pearl"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 475,
+  "pct_present": 2.0,
+  "rank_pct": 77,
+  "role": "light, 52% of 306 matched paintings",
+  "measured": {
+   "lch": [
+    71.9,
+    3.8,
+    215.9
+   ],
+   "nearest": [
+    [
+     "Sage grey",
+     2.9
+    ],
+    [
+     "Pale Payne's Grey",
+     3.6
+    ]
+   ]
+  },
+  "iscc": {
+   "block": 185,
+   "name": "bluish white",
+   "de": 3.3
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, plate XLVIII, hue 45''''; ISCC-NBS 1955 block 185",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Pale Green-Blue Grey (n=475)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 source gives this grey its name?",
+   "choices": [
+    "Ridgway's color standards",
+    "Crayola",
+    "The Pantone system",
+    "Werner's nomenclature"
+   ],
+   "answer": "Ridgway's color standards",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the 1315 painting match proves this named grey existed in 1315.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ridgway's 1912 grey scale was fine enough that two of its steps sit only 1.4 units apart."
+ ],
+ "words": 288,
+ "status": "draft",
+ "checked": {
+  "by": "",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

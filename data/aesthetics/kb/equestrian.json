@@ -1,0 +1,43 @@
+{
+ "id": "equestrian",
+ "name": "Equestrian",
+ "lineage": {
+  "influenced_by": [
+   "real competitive and leisure horse-riding uniform requirements"
+  ],
+  "influences": [
+   "old-money",
+   "preppy"
+  ]
+ },
+ "eras": [
+  "roots in traditional riding dress; recurring fashion reference"
+ ],
+ "places": [],
+ "garments": [
+  "tweed",
+  "leather riding boots",
+  "brass buckles"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "nothing specific; equestrian style's fashion-world appeal rests mainly on its combination of genuine function (riding dress has real practical requirements) with old-money-coded polish.",
+ "revivals": [],
+ "article": "Equestrian style draws directly on real, codified horse-riding dress: jodhpurs cut to move with a bent knee in the saddle, tall boots designed to protect the leg against stirrup leather, hacking jackets tailored to not flap or catch in the wind. Because actual competitive riding (dressage, show jumping, fox hunting in its historical form) has long been associated with wealth and land ownership, equestrian fashion carries an old-money connotation that fashion houses have borrowed repeatedly without any of their customers necessarily riding horses at all. Unlike several trend-cycle aesthetics in this archive with a clear coining moment, equestrian style functions more as a steady, recurring fashion reference — tweed, brass buckles, riding boots reappear on runways and in catalog photography across decades without ever fully falling out of circulation, closely overlapping with (and feeding into) both old money and preppy's shared vocabulary of understated, tradition-coded wealth signaling.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Equestrian"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 80% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

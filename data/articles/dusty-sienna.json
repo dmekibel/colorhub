@@ -1,0 +1,122 @@
+{
+ "slug": "dusty-sienna",
+ "name": "Dusty sienna",
+ "hex": "#8F583C",
+ "names": [
+  "Dusty sienna"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty sienna renders Chōjicha (丁子茶), a traditional Japanese name meaning \"clove-brown\", after cloth dyed with clove.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for the clove",
+   "body": "Our color library gives the source as 丁子茶 (Chōjicha), \"clove-brown\": chōji is the clove, long used in East Asian dyeing and incense, and cha again does double duty for both brown and tea [1]. No first-recorded date survives in our sources, so when the name entered use is undocumented here [1]. The library's own near-duplicate note pairs it with a second traditional name, Fushizome (柴染), \"brushwood-dyed\", at a color distance of just 2.0 [1].\n\nThe nearest named color in our graph is [[polished-brown]], at a color distance (ΔE2000) of 2.8, a more vivid shade; [[auburn]] sits 3.8 away and reads duller [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this brown in 1,673 of 23,781 paintings, about 7.0 percent, as photographed [3]. It is strongest well outside Japan: Tibetan painting carries it at over six times the overall rate, and Nepali work at close to four times [3]. The earliest dated appearance in the archive is a funerary papyrus from around 1069 BCE, over two millennia before the Japanese name on record; this is a floor set by what survives and was photographed, not a first sighting [3]. These are photographs of aged, varnished paintings; the match is computed, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Chōjicha (丁子茶), \"clove-brown\"",
+   "first_recorded": "undocumented",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Chōjicha (丁子茶)",
+   "Fushizome (柴染, near-duplicate)"
+  ],
+  "siblings": [
+   "polished-brown",
+   "auburn",
+   "army-brown",
+   "vassar-tan"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Chōjicha (丁子茶), \"clove-brown\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1673,
+  "rate": 0.0704,
+  "match": {
+   "hex": "#8F583C",
+   "de2000": 6.0,
+   "min_cover": 0.05
+  },
+  "countries": [
+   [
+    "Tibet",
+    6.05
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional-Japanese-color entries (kanji, romaji, meaning)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges (ΔE2000)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What plant gives Dusty sienna its Japanese name, Chōjicha?",
+   "choices": [
+    "The clove",
+    "The cherry",
+    "The camellia",
+    "The persimmon"
+   ],
+   "answer": "The clove",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive's earliest dated appearance of Dusty sienna is in a painting from the 1900s.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dusty sienna's Japanese name points to cloth dyed with clove, and our archive's earliest match predates the year 1000 BCE."
+ ],
+ "words": 215,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits; no first-recorded date for the Japanese source name."
+  ]
+ }
+}

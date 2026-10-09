@@ -1,126 +1,126 @@
 {
- "slug": "corinthian-purple",
- "name": "Corinthian Purple",
- "hex": "#7D435A",
- "names": [
-  "Corinthian Purple"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Corinthian Purple is a dark purplish red from Maerz and Paul's 1930 dictionary of color, and nothing in our sources explains why the compilers reached for Corinth.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A dictionary name, unexplained",
-   "body": "Corinthian Purple is Maerz and Paul's name for a dark purplish red, plate 6, row C, column 5 of their 1930 dictionary, with the ISCC-NBS circular of 1955 repeating it under the same hex, #7D435A [1]. Maerz and Paul date the name's first recorded use to 1912, eighteen years before their own dictionary appeared, which they take from an earlier source [1]. None of the 29 books in our concordance mentions this name, so whether the city of Corinth, a dye, or a textile line prompted it is undocumented here [1].\n\nIn our color graph the nearest named neighbor is [[dark-mauve|Dark Mauve]], 3.8 units away in Lab space, a shade with less red and more blue [1]. A little further out, at 6.2 units, sits [[dahlia-carmine|Dahlia Carmine]] [1]. The Munsell notation for the swatch is 6.1RP 3.6/5.7, placing it in the red-purple wedge the ISCC-NBS calls \"dark purplish red\" [1]. It belongs with our [[red|red]] family, and because the ISCC modifier reads \"purplish,\" it also sits near [[purple|purple]] [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in 0.08% of 23,781 paintings, 19 of them, as photographed, with the within-painting lens counting 7 [2]. That is rarer than 72% of our named colors [2]. The earliest match dates to 1600, 330 years before Maerz and Paul recorded the name, a floor rather than a first, since a color match in an aged photograph is not proof of a dye or pigment [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "1930 (maerz-paul)",
-   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930"
-  },
-  "aka": [],
-  "siblings": [
-   "dark-mauve",
-   "dahlia-carmine",
-   "raisin-purple",
-   "twilight-lavender"
+  "slug": "corinthian-purple",
+  "name": "Corinthian Purple",
+  "hex": "#7D435A",
+  "names": [
+    "Corinthian Purple"
   ],
-  "parent": "red",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 19,
-  "measured": {
-   "lch": [
-    36.2,
-    28.1,
-    354.8
-   ],
-   "nearest": [
-    [
-     "Dark Mauve",
-     3.2
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Corinthian Purple is a dark purplish red from Maerz and Paul's 1930 dictionary of color, and nothing in our sources explains why the compilers reached for Corinth.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A dictionary name, unexplained",
+      "body": "Corinthian Purple is Maerz and Paul's name for a dark purplish red, plate 6, row C, column 5 of their 1930 dictionary, with the ISCC-NBS circular of 1955 repeating it under the same hex, #7D435A [1]. Maerz and Paul date the name's first recorded use to 1912, eighteen years before their own dictionary appeared, which they take from an earlier source [1]. None of the 29 books in our concordance mentions this name, so whether the city of Corinth, a dye, or a textile line prompted it is undocumented here [1].\n\nIn our color graph the nearest named neighbor is [[corinthian-purple|Dark Mauve]], 3.8 units away in Lab space, a shade with less red and more blue [1]. A little further out, at 6.2 units, sits [[dahlia-carmine|Dahlia Carmine]] [1]. The Munsell notation for the swatch is 6.1RP 3.6/5.7, placing it in the red-purple wedge the ISCC-NBS calls \"dark purplish red\" [1]. It belongs with our [[red|red]] family, and because the ISCC modifier reads \"purplish,\" it also sits near [[purple|purple]] [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in 0.08% of 23,781 paintings, 19 of them, as photographed, with the within-painting lens counting 7 [2]. That is rarer than 72% of our named colors [2]. The earliest match dates to 1600, 330 years before Maerz and Paul recorded the name, a floor rather than a first, since a color match in an aged photograph is not proof of a dye or pigment [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented",
+      "first_recorded": "1930 (maerz-paul)",
+      "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930"
+    },
+    "aka": [],
+    "siblings": [
+      "corinthian-purple",
+      "dahlia-carmine",
+      "raisin-purple",
+      "twilight-lavender"
     ],
-    [
-     "Dahlia Carmine",
-     3.9
-    ],
-    [
-     "Raisin Purple",
-     4.1
-    ],
-    [
-     "Twilight Lavender",
-     4.5
+    "parent": "red",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 19,
+    "measured": {
+      "lch": [
+        36.2,
+        28.1,
+        354.8
+      ],
+      "nearest": [
+        [
+          "Dark Mauve",
+          3.2
+        ],
+        [
+          "Dahlia Carmine",
+          3.9
+        ],
+        [
+          "Raisin Purple",
+          4.1
+        ],
+        [
+          "Twilight Lavender",
+          4.5
+        ]
+      ]
+    },
+    "iscc_nbs": {
+      "name": "dark purplish red",
+      "de": 7.2
+    },
+    "munsell": "6.1RP 3.6/5.7"
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and name graph (data/library.json, data/graph/): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930; nearest names by Lab-space distance",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed",
+      "loc_kind": "entry",
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which 1930 dictionary catalogs the name Corinthian Purple?",
+      "choices": [
+        "Maerz and Paul",
+        "Ridgway",
+        "Pantone",
+        "Crayola"
+      ],
+      "answer": "Maerz and Paul",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources explain why this color is named for Corinth.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Corinthian Purple is rarer in our painting archive than 72 out of every 100 named colors."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits; origin of the Corinth reference is undocumented in our sources.",
+      "lint 2026-10-09"
     ]
-   ]
   },
-  "iscc_nbs": {
-   "name": "dark purplish red",
-   "de": 7.2
-  },
-  "munsell": "6.1RP 3.6/5.7"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and name graph (data/library.json, data/graph/): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930; nearest names by Lab-space distance",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed",
-   "loc_kind": "entry",
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which 1930 dictionary catalogs the name Corinthian Purple?",
-   "choices": [
-    "Maerz and Paul",
-    "Ridgway",
-    "Pantone",
-    "Crayola"
-   ],
-   "answer": "Maerz and Paul",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our sources explain why this color is named for Corinth.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Corinthian Purple is rarer in our painting archive than 72 out of every 100 named colors."
- ],
- "status": "checked",
- "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-08",
-  "issues": [
-   "No concordance hits; origin of the Corinth reference is undocumented in our sources.",
-   "lint 2026-10-09"
-  ]
- },
- "words": 264
+  "words": 264
 }

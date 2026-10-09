@@ -1,121 +1,124 @@
 {
- "slug": "pale-flesh",
- "name": "Pale flesh",
- "hex": "#E9C49D",
- "names": [
-  "Pale flesh"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Pale flesh is a soft, warm tan that goes back to Werner's early-nineteenth-century color system, and it shares its exact screen color with a second library name, Flesh Red.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A tan from an old naturalist's chart",
-   "body": "The library traces Pale flesh to Werner's 1821 nomenclature, the chart later used by field naturalists to describe specimens by eye [1]. The ISCC-NBS computed category for this hex is a pale orange yellow, a soft tan rather than any true skin tone [1]. \"Flesh\" here follows the old convention of naming a pale tan after light skin; this library keeps that only as a historical name, not a claim about real skin [1]. At this hex our library also records a second name, [[flesh-red|Flesh Red]], at an identical value, and a close cousin, [[flesh-pink|Flesh Pink]], a touch pinker [1].\n\nThe nearest distinct neighbor is [[dusty-peach|Dusty peach]], about 2.9 units away by CIEDE2000, with [[sugar-cane|Sugar Cane]] close behind it [1]. In LCH terms it measures lightness 81, chroma 26, hue 73 degrees, Munsell 7.9YR 8.1/4.2 [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in 813 of 23,781 paintings, 3.42 percent, as photographed [2]. It is most over-represented in the 1710s, in 13 of that decade's 169 paintings, about 2.3 times the expected rate [2]. Xugu is its most devoted painter here, carrying it in 9 of his 16 works, over 16 times the baseline, well ahead of Luis de Morales [2]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a conventional pale skin tone, after Werner's 1821 color system",
-   "first_recorded": "1821 (Werner)",
-   "source": "Werner's Nomenclature of Colours (1821 ed.); ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "dusty-peach",
-   "sugar-cane",
-   "burlywood",
-   "leghorn"
+  "slug": "pale-flesh",
+  "name": "Pale flesh",
+  "hex": "#E9C49D",
+  "names": [
+    "Pale flesh",
+    "Flesh Red"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 813,
-  "measured": {
-   "lch": [
-    81,
-    26,
-    73
-   ],
-   "nearest": [
-    [
-     "Dusty peach",
-     2.9
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Pale flesh is a soft, warm tan that goes back to Werner's early-nineteenth-century color system, and it shares its exact screen color with a second library name, Flesh Red.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A tan from an old naturalist's chart",
+      "body": "The library traces Pale flesh to Werner's 1821 nomenclature, the chart later used by field naturalists to describe specimens by eye [1]. The ISCC-NBS computed category for this hex is a pale orange yellow, a soft tan rather than any true skin tone [1]. \"Flesh\" here follows the old convention of naming a pale tan after light skin; this library keeps that only as a historical name, not a claim about real skin [1]. At this hex our library also records a second name, [[pale-flesh|Flesh Red]], at an identical value, and a close cousin, [[flesh-pink|Flesh Pink]], a touch pinker [1].\n\nThe nearest distinct neighbor is [[dusty-peach|Dusty peach]], about 2.9 units away by CIEDE2000, with [[sugar-cane|Sugar Cane]] close behind it [1]. In LCH terms it measures lightness 81, chroma 26, hue 73 degrees, Munsell 7.9YR 8.1/4.2 [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in 813 of 23,781 paintings, 3.42 percent, as photographed [2]. It is most over-represented in the 1710s, in 13 of that decade's 169 paintings, about 2.3 times the expected rate [2]. Xugu is its most devoted painter here, carrying it in 9 of his 16 works, over 16 times the baseline, well ahead of Luis de Morales [2]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a conventional pale skin tone, after Werner's 1821 color system",
+      "first_recorded": "1821 (Werner)",
+      "source": "Werner's Nomenclature of Colours (1821 ed.); ColorHub library"
+    },
+    "aka": [
+      "Flesh Red (werner)"
     ],
-    [
-     "Sugar Cane",
-     3.3
+    "siblings": [
+      "dusty-peach",
+      "sugar-cane",
+      "burlywood",
+      "leghorn"
     ],
-    [
-     "Burlywood",
-     4.2
-    ],
-    [
-     "Leghorn",
-     4.2
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 813,
+    "measured": {
+      "lch": [
+        81,
+        26,
+        73
+      ],
+      "nearest": [
+        [
+          "Dusty peach",
+          2.9
+        ],
+        [
+          "Sugar Cane",
+          3.3
+        ],
+        [
+          "Burlywood",
+          4.2
+        ],
+        [
+          "Leghorn",
+          4.2
+        ]
+      ]
+    },
+    "painter": "Xugu"
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Werner 1821; near-duplicate match Flesh Red, ΔE 0.0; nearest distinct match Dusty peach, ΔE 2.9",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Pale flesh shares its exact screen color with which other library name?",
+      "choices": [
+        "Flesh Red",
+        "Dusty peach",
+        "Pale Flesh Color",
+        "Onion-Skin Pink"
+      ],
+      "answer": "Flesh Red",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: \"flesh\" in a color name like this one is meant as a literal claim about real skin tones.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pale flesh traces back to a color chart from 1821, built for naturalists describing specimens."
+  ],
+  "words": 243,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  },
-  "painter": "Xugu"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Werner 1821; near-duplicate match Flesh Red, ΔE 0.0; nearest distinct match Dusty peach, ΔE 2.9",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
   }
- ],
- "questions": [
-  {
-   "q": "Pale flesh shares its exact screen color with which other library name?",
-   "choices": [
-    "Flesh Red",
-    "Dusty peach",
-    "Pale Flesh Color",
-    "Onion-Skin Pink"
-   ],
-   "answer": "Flesh Red",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: \"flesh\" in a color name like this one is meant as a literal claim about real skin tones.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Pale flesh traces back to a color chart from 1821, built for naturalists describing specimens."
- ],
- "words": 243,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

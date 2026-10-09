@@ -1,0 +1,52 @@
+{
+ "id": "regencycore",
+ "name": "Regencycore",
+ "lineage": {
+  "influenced_by": [
+   "actual English Regency-era (1811–1820) fashion and etiquette",
+   "Jane Austen's novels and their many adaptations"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2020s"
+ ],
+ "places": [],
+ "garments": [
+  "empire-waist muslin and silk",
+  "long gloves",
+  "ribbon trim"
+ ],
+ "media": [
+  {
+   "title": "Bridgerton (2020–)",
+   "note": "the show most directly credited with the 2020s surge"
+  },
+  {
+   "title": "Pride and Prejudice (1995 BBC adaptation; 2005 film)",
+   "note": "an earlier, recurring touchstone for Austen-inspired aesthetics"
+  }
+ ],
+ "figures": [
+  "Jane Austen"
+ ],
+ "reacts_against": "contemporary athleisure and streetwear norms, reaching instead for a highly formal, codified historical silhouette as aspiration.",
+ "revivals": [],
+ "article": "Regencycore takes its visual vocabulary from a real, well-documented ten-year span of English fashion history — the Regency period, named for the years (1811–1820) when the future King George IV ruled as Prince Regent during his father's illness — best known today through Jane Austen's novels, all published within or just after that window. The empire waistline, pastel muslin and long gloves that define the look are accurate to real period dress, not an invented fantasy silhouette. What's new is the internet-aesthetic framing: the term and its organized moodboard culture emerged specifically in the early 2020s, accelerated enormously by Netflix's Bridgerton (2020), a show whose production design deliberately heightened and modernized real Regency fashion rather than reproducing it strictly, which means much of what circulates as \"regencycore\" online is actually closer to Bridgerton's glossier reinterpretation than to museum-accurate 1810s dress. Earlier Austen adaptations, particularly the 1995 BBC Pride and Prejudice, had already kept the period's visual language in slow, steady circulation for decades before the internet gave it a name.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Regencycore"
+  }
+ ],
+ "measured": {
+  "n_images": 2,
+  "n_candidates": 2,
+  "findings": [
+   "mostly muted — about 91% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

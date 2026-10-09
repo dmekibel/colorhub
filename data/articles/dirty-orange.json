@@ -1,0 +1,121 @@
+{
+  "slug": "dirty-orange",
+  "name": "Dirty Orange",
+  "hex": "#C87606",
+  "names": [
+    "Dirty Orange"
+  ],
+  "tier": "traditional",
+  "depth": "brief",
+  "lede": "Dirty Orange is a deep, muted orange named by the 2010 xkcd color survey, close enough to the Japanese traditional color Yamabukicha to carry its own \"in Japan\" thread.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A plain English name, a Japanese echo",
+      "body": "The English name is a straightforward xkcd-survey label from 2010, duller than plain orange [1]. Ridgway's 1912 plate III, hue 15, tone i, independently recorded a close match, and the ISCC-NBS system of 1955 filed the same region into block 50, named strong orange in that system's own list [1]. Our library also records a near-duplicate, Mars Yellow, about 1.5 units off, from the same two older sources [1].\n\n**In Japan**, the nearest traditional record is Yamabukicha (山吹茶), \"gold-brown\", named for the kerria rose, or yamabuki; our data flags it as a near match in hex, not a claim that the English and Japanese names share an origin [1]. Its closest look-alike on file is [[ochre]], about 3.0 units off, with [[xanthine-orange]], [[brown-orange]] and [[copper]] close behind [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This match appears in 1.02% of the 23,781 paintings in our archive (243 paintings, as photographed); the within-painting lens narrows that to 203 [3]. In our archive it is more common than 71% of the named colors [3]. It peaks in the 1800s, present in 1.1% of the 8,345 paintings we have from that decade (90 paintings), 1.3 times the rate its museums would predict [3]. Inside a painting it most often plays an accent, in 82% of its 203 appearances by lightness rank within the painting [3]. Its most devoted painter is George Dawe, present in 12 of 50 works here, 10.1x the baseline of the museums those works come from (as photographed 11.8x) [3]. It is most over-represented in India, 3.1x expected (17 of 721 paintings) [3]. The earliest match dates to 1290, 622 years before the name's 1912 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a plain xkcd-survey label for a muted orange, independently close to the Japanese Yamabukicha",
+      "first_recorded": "Ridgway 1912, plate III; ISCC-NBS 1955, block 50; xkcd color survey, 2010",
+      "source": "ColorHub library"
+    },
+    "aka": [
+      "Mars Yellow (near-duplicate, ΔE 1.5)"
+    ],
+    "siblings": [
+      "ochre",
+      "xanthine-orange",
+      "brown-orange",
+      "copper"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Yamabukicha (山吹茶), \"gold-brown\" — a near hex match, not a shared-origin name"
+      }
+    ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 243,
+    "pct_archive": 1.02,
+    "n_within_painting": 203,
+    "pct_within_painting": 0.85,
+    "rank_pct": 71,
+    "painters": [
+      "George Dawe"
+    ],
+    "countries": [
+      "India"
+    ],
+    "name_first_recorded": 1912,
+    "earliest_match_year": 1290
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate III; ISCC-NBS Circular 553 (1955), block 50; xkcd color survey (2010)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub graph: look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,900 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the Japanese name Yamabukicha, close in hex to Dirty Orange, mean?",
+      "choices": [
+        "Gold-brown",
+        "Deep orange",
+        "Orange blossom",
+        "Mars yellow"
+      ],
+      "answer": "Gold-brown",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Dirty Orange and Yamabukicha are the same name translated between languages.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Dirty Orange, an English crowd-sourced name, lands almost on top of a Japanese traditional color with an unrelated history."
+  ],
+  "words": 347,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "field section used the within-painting-lens count/percent but labeled it 'as photographed' and used a stale archive total; replaced with the correct as-photographed count/percent (23,781-painting archive) and refreshed the decade, role, painter, country and first-seen facts from data/graph/fieldnotes"
+    ]
+  }
+}

@@ -1,150 +1,150 @@
 {
- "slug": "brittany",
- "name": "Brittany",
- "hex": "#5685A5",
- "names": [
-  "Brittany"
- ],
- "tier": "place",
- "depth": "short",
- "lede": "Brittany is a mid steel-blue recorded by Maerz & Paul in 1926 and named, as far as the sources show, after the region of France.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The name and its record",
-   "body": "The library traces this color to a single source, the Maerz & Paul dictionary of 1930, which gives first use as 1926 and the plate reference 35 J 6, and files it under fashion and textiles [1]. The books on the shelf do not describe the shade, and none explains why the region lent its name, so the origin is undocumented here. The nearest named color is [[steel-blue]], 4.1 apart in ΔE [1]. Brittany also turns up as an alternate name for Dusty Cornflower, a close neighbor [1]."
-  },
-  {
-   "id": "region",
-   "title": "What the books say about the region",
-   "body": "The books mention Brittany for other colors [2][3]. Anne of Brittany, queen to Charles VIII and then Louis XII, brought black mourning to the French court around the turn of the sixteenth century, ending the era of the white queens [2]. Finlay reports that some Breton widows wore yellow for mourning [3]. Pastoureau notes that a Breton sailor will not paint a hull green or board a boat with a green hull, a taboo he describes as limited to this region [4].\n\nGauguin painted yellows in Brittany at Pont-Aven, symbolic rather than realistic and painted flat [5]. The red cap worn by Breton peasants in the riots of 1675 is one of the reasons Pastoureau gives for the cap's later adoption in the Revolution [6]. Paterson adds that gingham may take its name from Guingamp in Brittany, where it was made [7]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "On screen the swatch is a muted blue with lightness 53 and chroma 23 in LCH, close to [[steel-blue]] and not far from [[cadet-blue]] [1]. Screen colors are approximate."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the region of Brittany, France (origin undocumented)",
-   "first_recorded": "1926 (Maerz & Paul 1930)",
-   "source": "ColorHub library"
-  },
-  "aka": [
-   "Bretagne (French name of the region)"
+  "slug": "brittany",
+  "name": "Brittany",
+  "hex": "#5685A5",
+  "names": [
+    "Brittany"
   ],
-  "siblings": [
-   "steel-blue",
-   "cadet-blue",
-   "cornflower-blue",
-   "denim"
+  "tier": "place",
+  "depth": "short",
+  "lede": "Brittany is a mid steel-blue recorded by Maerz & Paul in 1926 and named, as far as the sources show, after the region of France.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The name and its record",
+      "body": "The library traces this color to a single source, the Maerz & Paul dictionary of 1930, which gives first use as 1926 and the plate reference 35 J 6, and files it under fashion and textiles [1]. The books on the shelf do not describe the shade, and none explains why the region lent its name, so the origin is undocumented here. The nearest named color is [[steel-blue]], 4.1 apart in ΔE [1]. Brittany also turns up as an alternate name for Dusty Cornflower, a close neighbor [1]."
+    },
+    {
+      "id": "region",
+      "title": "What the books say about the region",
+      "body": "The books mention Brittany for other colors [2][3]. Anne of Brittany, queen to Charles VIII and then Louis XII, brought black mourning to the French court around the turn of the sixteenth century, ending the era of the white queens [2]. Finlay reports that some Breton widows wore yellow for mourning [3]. Pastoureau notes that a Breton sailor will not paint a hull green or board a boat with a green hull, a taboo he describes as limited to this region [4].\n\nGauguin painted yellows in Brittany at Pont-Aven, symbolic rather than realistic and painted flat [5]. The red cap worn by Breton peasants in the riots of 1675 is one of the reasons Pastoureau gives for the cap's later adoption in the Revolution [6]. Paterson adds that gingham may take its name from Guingamp in Brittany, where it was made [7]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "On screen the swatch is a muted blue with lightness 53 and chroma 23 in LCH, close to [[steel-blue]] and not far from [[cadet-blue]] [1]. Screen colors are approximate."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub library (Maerz & Paul 1930, plate 35 J 6)",
-  "measured": {
-   "lch": [
-    53,
-    23,
-    252
-   ],
-   "nearest": [
-    [
-     "Steel blue",
-     4.1
-    ]
-   ]
+  "aside": {
+    "origin": {
+      "named_after": "the region of Brittany, France (origin undocumented)",
+      "first_recorded": "1926 (Maerz & Paul 1930)",
+      "source": "ColorHub library"
+    },
+    "aka": [
+      "Bretagne (French name of the region)"
+    ],
+    "siblings": [
+      "steel-blue",
+      "cadet-blue",
+      "cornflower",
+      "denim"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "first_recorded": 1926
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub library (data/library.json), \"Brittany\"",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub library (Maerz & Paul 1930, plate 35 J 6)",
+    "measured": {
+      "lch": [
+        53,
+        23,
+        252
+      ],
+      "nearest": [
+        [
+          "Steel blue",
+          4.1
+        ]
+      ]
+    },
+    "first_recorded": 1926
   },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pastoureau, Black, section on funerals",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Finlay, Jewels, ch. 11",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Pastoureau, Green, note 40",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Pastoureau, Yellow, section on Gauguin",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Pastoureau, Red, chapter on the red cap",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"gingham\"",
-   "loc_kind": "entry",
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub library (data/library.json), \"Brittany\"",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pastoureau, Black, section on funerals",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Finlay, Jewels, ch. 11",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Pastoureau, Green, note 40",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Pastoureau, Yellow, section on Gauguin",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Pastoureau, Red, chapter on the red cap",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"gingham\"",
+      "loc_kind": "entry",
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Who brought black mourning to the French court as a queen's color?",
+      "choices": [
+        "Anne of Brittany",
+        "Eugenie",
+        "Catherine de Medici",
+        "Marie Antoinette"
+      ],
+      "answer": "Anne of Brittany",
+      "kind": "pick"
+    },
+    {
+      "q": "Where did Gauguin paint yellows in Brittany?",
+      "choices": [
+        "Pont-Aven",
+        "Arles",
+        "Giverny",
+        "Tahiti"
+      ],
+      "answer": "Pont-Aven",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "A Breton sailor will not paint his hull green, Pastoureau reports."
+  ],
+  "words": 275,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "questions": [
-  {
-   "q": "Who brought black mourning to the French court as a queen's color?",
-   "choices": [
-    "Anne of Brittany",
-    "Eugenie",
-    "Catherine de Medici",
-    "Marie Antoinette"
-   ],
-   "answer": "Anne of Brittany",
-   "kind": "pick"
-  },
-  {
-   "q": "Where did Gauguin paint yellows in Brittany?",
-   "choices": [
-    "Pont-Aven",
-    "Arles",
-    "Giverny",
-    "Tahiti"
-   ],
-   "answer": "Pont-Aven",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "A Breton sailor will not paint his hull green, Pastoureau reports."
- ],
- "words": 275,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

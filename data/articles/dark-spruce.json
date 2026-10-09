@@ -1,0 +1,136 @@
+{
+ "name": "Dark spruce",
+ "hex": "#203838",
+ "names": [
+  "Dark spruce",
+  "Bluish charcoal",
+  "Kōrainando"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dark spruce is a dark, muted teal, also recorded in Japan's traditional color list as Bluish charcoal (高麗納戸, Kōrainando).",
+ "sections": [
+  {
+   "id": "japan",
+   "title": "In Japan: Kōrainando",
+   "body": "The Japanese name is written 高麗納戸, romanized Kōrainando, which reads literally as \"Goryeo storeroom,\" listed among Japan's traditional colors under the English gloss Bluish charcoal [1]. *Nando*, storeroom, names a family of muted, low-saturation colors in Japanese tradition; what tied this particular dark teal to Goryeo-era Korea specifically is undocumented in the sources we have [1]. Further out, [[pale-gunmetal]] and [[outer-space-crayola|Outer Space]] sit in the same small cluster [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for Dark spruce in 339 of 23,781 paintings, about 1.4 percent, more common than 69 percent of the named colors we track [3]. It peaks in the 1400s, in 23 of 945 paintings, 2.5 times the rate expected from that century's share of the archive [3]. Inside a painting it is usually hidden rather than prominent, by lightness rank, in 36 percent of its appearances [3]. Paul Cezanne used it most: 7 of his 50 paintings here carry it, 6.0 times his peers' rate [3]. The earliest archive match dates to 1265, and our sources give no Western first-recorded date for this traditional Japanese name to compare it against [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented (the word nando names a Japanese family of muted colors)",
+   "first_recorded": "undocumented in the sources we have",
+   "source": "ColorHub color library: traditional colors of Japan"
+  },
+  "aka": [
+   "Kōrainando",
+   "Bluish charcoal"
+  ],
+  "siblings": [
+   "baltic",
+   "black-green",
+   "pale-gunmetal",
+   "outer-space-crayola"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "高麗納戸 (Kōrainando)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 339,
+  "measured": {
+   "lch": [
+    21.7,
+    9.8,
+    197.7
+   ],
+   "nearest": [
+    [
+     "Baltic",
+     4.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional colors of Japan (Wikipedia)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, nearest-neighbor computation",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"nando\" literally mean in the name Kōrainando?",
+   "choices": [
+    "Storeroom",
+    "River",
+    "Lacquer",
+    "Moonlight"
+   ],
+   "answer": "Storeroom",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Bluish charcoal is a Japanese traditional-color name for the same hex as Dark spruce.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter used Dark spruce most often in our archive?",
+   "choices": [
+    "Paul Cezanne",
+    "Caravaggio",
+    "Amedeo Modigliani",
+    "Fra Angelico"
+   ],
+   "answer": "Paul Cezanne",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Bluish charcoal and Dark spruce are two names for the same dark teal, from unrelated traditions."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "dark-spruce",
+ "words": 214
+}

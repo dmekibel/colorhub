@@ -95,12 +95,14 @@ const r2Extras = () => (Array.isArray(window.TRAIN_TILES) ? window.TRAIN_TILES :
 const r2Extra = t => ({ id: "x-" + t.id, ic: t.icon || "gradient", name: t.name, meta: t.meta || "", attr: `data-r2-extra="${esc(t.id)}"`, more: t.more, played: !!t.played });
 function r2TrainGames() {
   const st = ooS(), ln = st.line && typeof st.line === "object" ? st.line : {}, pr = st.pairs && typeof st.pairs === "object" ? st.pairs : {};
-  const ms = typeof msState === "function" ? msState() : null, msFound = ms ? (ms.found[msLevelKey(ms.spec.level)] || []).length : 0;
   const mem = st.mix.wasthere || {}, memN = r2Stars(mem.stars);
   const xs = r2Extras(), hue = xs.find(t => t.id === "hue"), eye = xs.find(t => /painter/i.test(String(t.id)) && !t.more);
   const hs = typeof hgS === "function" ? hgS() : {};
+  // David, 2026-10-09: "is it redundant to have Study on the bottom-left button's menu and also on the
+  // bottom-right button's menu?" Yes -- Study the map is an action you take ON the map, so it stays only on the
+  // map's own right corner (js/home.js doMenu); it no longer has a tile here (Train, reached from the Rooms
+  // corner on the left -- "where you go", not "what you do").
   const games = [
-    ...(ms ? [{ id: "map", ic: "map", name: "Study the map", attr: "data-mapstudy", played: msFound > 0, meta: msFound ? `${msFound.toLocaleString("en-US")} found` : "Find and name", done: !!(ms.day && ms.day.d === today() && ms.day.done) }] : []),
     { id: "oo", ic: "odd", name: "Odd one out", attr: "data-oo-map", played: !!st.sets, done: st.last === today(), meta: st.sets ? `Level ${(Number.isFinite(st.lv) ? st.lv : ooYou()) + 1}${ooStarCount() ? ` · ${ooStarCount()} stars` : ""}` : "Spot the odd tile" },
     ...(hue ? [{ ...r2Extra(hue), id: "hue", played: !!hs.plays, done: hs.last === today() }] : []),
     { id: "line", ic: "across", name: "Across the line", attr: "data-oo-line", played: !!(ln.n || ln.best), meta: ln.best ? `Best ${ln.best} of 8` : "Where a name ends" },
@@ -215,7 +217,6 @@ function r2WireTrain(el) {
   on("[data-oo-map]", () => ooEnter());
   on("[data-oo-line]", () => ooAcross());
   on("[data-oo-pairs]", () => ooPairs());
-  on("[data-mapstudy]", () => msOpen({ from: "gym" }));
   on("[data-mt]", b => openMatch(b.dataset.mt));
   on("[data-r2-mix]", b => ooPlayMix(b.dataset.r2Mix, { title: b.dataset.r2Mix === "wasthere" ? "Color memory" : "Train", onQuit: () => go("gym") }));
   on("[data-r2-colordle]", () => daily());

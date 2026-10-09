@@ -1,130 +1,130 @@
 {
- "name": "Coralbell",
- "hex": "#CC7067",
- "names": [
-  "Coralbell"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Coralbell is a dark yellowish pink from Maerz and Paul's 1930 dictionary, named for the coral bells flower, and closest in our library to terracotta.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A flower on a 1930 plate",
-   "body": "Maerz and Paul's *A Dictionary of Color* dates this hue to 1928, on plate 3, cell H10 [1]. Coral bells (*Heuchera*) is a garden perennial with small, bell-shaped pink-red flowers on tall stalks, and the dictionary's name follows that plant, though it does not spell out the exact flower variety meant [1]. The ISCC-NBS 1955 report classes the color as a moderate red [2].\n\nThe nearest named colors on file are [[strawberry-pink]], [[light-jasper-red]], [[brownish-pink]] and [[antique-pink]], at 3.5, 4.9, 5.2 and 5.3 ΔE [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "ColorHub's archive finds this color in 55 of 23,781 paintings, about 0.2 percent, as photographed [4]. The match peaks in the 1910s, in 6 of 523 paintings, with hits spread across Nepal, Iran, Austria and Tibet rather than clustered in one tradition [4]. The count is a computed color match on photographed, varnished canvases, not a pigment identification [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "coral bells (Heuchera), the garden flower",
-   "first_recorded": "1928, Maerz & Paul 1930",
-   "source": "Maerz & Paul, A Dictionary of Color"
-  },
-  "aka": [],
-  "siblings": [
-   "strawberry-pink",
-   "light-jasper-red",
-   "brownish-pink",
-   "antique-pink"
+  "name": "Coralbell",
+  "hex": "#CC7067",
+  "names": [
+    "Coralbell"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 55,
-  "match": {
-   "nearest_library": "Terracotta",
-   "de2000": 6.2
-  },
-  "measured": {
-   "lch": [
-    57,
-    41,
-    31
-   ],
-   "nearest": [
-    [
-     "Strawberry Pink",
-     3.5
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Coralbell is a dark yellowish pink from Maerz and Paul's 1930 dictionary, named for the coral bells flower, and closest in our library to terracotta.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A flower on a 1930 plate",
+      "body": "Maerz and Paul's *A Dictionary of Color* dates this hue to 1928, on plate 3, cell H10 [1]. Coral bells (*Heuchera*) is a garden perennial with small, bell-shaped pink-red flowers on tall stalks, and the dictionary's name follows that plant, though it does not spell out the exact flower variety meant [1]. The ISCC-NBS 1955 report classes the color as a moderate red [2].\n\nThe nearest named colors on file are [[strawberry-pink]], [[light-jasper-red]], [[old-rose]] and [[antique-pink]], at 3.5, 4.9, 5.2 and 5.3 ΔE [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "ColorHub's archive finds this color in 55 of 23,781 paintings, about 0.2 percent, as photographed [4]. The match peaks in the 1910s, in 6 of 523 paintings, with hits spread across Nepal, Iran, Austria and Tibet rather than clustered in one tradition [4]. The count is a computed color match on photographed, varnished canvases, not a pigment identification [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "coral bells (Heuchera), the garden flower",
+      "first_recorded": "1928, Maerz & Paul 1930",
+      "source": "Maerz & Paul, A Dictionary of Color"
+    },
+    "aka": [],
+    "siblings": [
+      "strawberry-pink",
+      "light-jasper-red",
+      "old-rose",
+      "antique-pink"
     ],
-    [
-     "Light Jasper Red",
-     4.9
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 55,
+    "match": {
+      "nearest_library": "Terracotta",
+      "de2000": 6.2
+    },
+    "measured": {
+      "lch": [
+        57,
+        41,
+        31
+      ],
+      "nearest": [
+        [
+          "Strawberry Pink",
+          3.5
+        ],
+        [
+          "Light Jasper Red",
+          4.9
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Maerz & Paul, A Dictionary of Color (1930), plate 3, cell H10",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: ISCC-NBS (1955) block entry",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library: nearest named colors by CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What plant is Coralbell named after?",
+      "choices": [
+        "Coral bells (Heuchera)",
+        "Coral reef polyps",
+        "A dye-yielding coral tree",
+        "A type of rose"
+      ],
+      "answer": "Coral bells (Heuchera)",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Coralbell's nearest named color in our library is a close match, under 10 units away.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Coralbell's closest named neighbor in our library is terracotta, just 6 units away."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Maerz & Paul, A Dictionary of Color (1930), plate 3, cell H10",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library: ISCC-NBS (1955) block entry",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library: nearest named colors by CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What plant is Coralbell named after?",
-   "choices": [
-    "Coral bells (Heuchera)",
-    "Coral reef polyps",
-    "A dye-yielding coral tree",
-    "A type of rose"
-   ],
-   "answer": "Coral bells (Heuchera)",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Coralbell's nearest named color in our library is a close match, under 10 units away.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Coralbell's closest named neighbor in our library is terracotta, just 6 units away."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- },
- "slug": "coralbell",
- "words": 172
+  "slug": "coralbell",
+  "words": 172
 }

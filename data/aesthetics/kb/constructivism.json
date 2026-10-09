@@ -1,0 +1,66 @@
+{
+ "id": "constructivism",
+ "name": "Constructivism",
+ "lineage": {
+  "influenced_by": [
+   "Cubism and Futurism",
+   "the 1917 Russian Revolution's call for art in service of industry and the state"
+  ],
+  "influences": [
+   "de-stijl",
+   "bauhaus"
+  ]
+ },
+ "eras": [
+  "c. 1915–1930s (Soviet Russia)"
+ ],
+ "places": [
+  "Moscow",
+  "Petrograd/Leningrad"
+ ],
+ "garments": [
+  "utilitarian worker's clothing, designed by some Constructivist artists (Varvara Stepanova) as a rejection of fashion for fashion's sake"
+ ],
+ "media": [
+  {
+   "title": "El Lissitzky, Beat the Whites with the Red Wedge (1919)",
+   "note": ""
+  },
+  {
+   "title": "Alexander Rodchenko's graphic design and photography (1920s)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Vladimir Tatlin",
+  "El Lissitzky",
+  "Alexander Rodchenko"
+ ],
+ "reacts_against": "art-for-art's-sake entirely, insisting that art should serve industrial production and the new Soviet state — hence its hard geometry, red-black-white posters and photomontage.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Russian Constructivism",
+  "decade_of_origin": "1910s - 1920s",
+  "key_motifs": "Geometric abstraction, industrial materials (metal, glass, plastic), dynamic diagonal compositions, photomontage, sans-serif typography, structural forms",
+  "key_colours": "Limited palettes, often featuring bold red, black, and white",
+  "related_aesthetics": "BauhausCubismDeconstructivismDe StijlFuturismInternational Typographic StyleNeue Slowenische KunstSoviet ChicSuprematism",
+  "key_values": "Art in service of social revolution (\"art into life\"), rejection of \"art for art's sake,\" utilitarianism, functionalism, collectivism, embrace of technology"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Constructivism"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "light — about 46% of the measured color is pale or near-white",
+   "mostly muted — about 85% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

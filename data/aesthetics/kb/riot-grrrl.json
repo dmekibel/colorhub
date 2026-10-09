@@ -1,0 +1,66 @@
+{
+ "id": "riot-grrrl",
+ "name": "Riot Grrrl",
+ "lineage": {
+  "influenced_by": [
+   "punk/hardcore DIY culture",
+   "third-wave feminism"
+  ],
+  "influences": [
+   "scene",
+   "nu-goth"
+  ]
+ },
+ "eras": [
+  "early-to-mid 1990s (Olympia, WA / DC)"
+ ],
+ "places": [
+  "Olympia, Washington (Bikini Kill, Bratmobile)",
+  "DC punk scene"
+ ],
+ "garments": [
+  "slip dresses over band tees",
+  "Sharpie-written slogans on bare skin",
+  "combat boots",
+  "baby barrettes with aggressive makeup"
+ ],
+ "media": [
+  {
+   "title": "Bikini Kill, Pussy Whip EP / early 90s releases",
+   "note": "the scene's foundational band"
+  },
+  {
+   "title": "Bust and the riot grrrl zine network",
+   "note": "DIY print culture spread the look as much as the music did"
+  }
+ ],
+ "figures": [
+  "Kathleen Hanna"
+ ],
+ "reacts_against": "mainstream music industry sexism and the male-dominated punk scene it grew out of; the clashing cute/aggressive styling (barrettes plus slurs written on skin) was itself the political statement.",
+ "revivals": [
+  "2016–present, cited repeatedly in pop-feminist fashion coverage; direct visual quotation in 2020s 'coquette-meets-punk' TikTok trends"
+ ],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "Early 1990s",
+  "key_motifs": "DIY zines and publications; handwritten text and collage; visible protest slogans; reclaimed derogatory terms; unpolished aesthetics",
+  "key_colours": "Black, pink, red, white, ivory, dark grey",
+  "related_aesthetics": "GrungeKinderwhorePunkQueercore",
+  "key_values": "Feminism, anti-consumerism, rejection of the mainstream, DIY ethos, female empowerment, social activism"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Riot_Grrrl"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 83% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

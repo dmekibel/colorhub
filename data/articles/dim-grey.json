@@ -1,133 +1,133 @@
 {
- "slug": "dim-grey",
- "name": "Dim Grey",
- "hex": "#696969",
- "names": [
-  "Dim Grey"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Dim Grey is a neutral mid-dark grey from the X11 color list, exactly 105 on each of red, green and blue.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A listed color",
-   "body": "Paterson's dictionary lists DimGray as an entry in the X11 Color Set, with hex code 696969 [1]. Each pair of digits is 69 in hex, which is 105 on the 0 to 255 scale, so the three channels are equal and the color has no hue [5]. In ordinary language, Paterson defines dim as poorly lit, or lacking lustre or brilliance [1]. His index files it among the greys [2]. Our name records list CSS, a web encyclopedia and RAL (1927) [3].\n\nIts nearest neighbors among our names, by CIELAB distance, are [[deep-neutral-grey|Deep Neutral Grey]], [[nickel|Nickel]] and [[slate-grey|Slate grey]] [5]. On a white page it reaches a contrast ratio of 5.49:1 [5]."
-  },
-  {
-   "id": "art",
-   "title": "In paintings",
-   "body": "Dim Grey is one of the most common named colors in our archive: it appears in 457 of 23,781 paintings, 1.92%, more often than 73% of the named colors [4]. It most often plays a light, in 35% of the 231 paintings where the within-painting reading finds it [4]. It peaks in the 1900s at 1.6 times the expected rate [4]. Matisse painted it most often (4 of his 50 works here), though no painter stands out against the museum baseline [4]. It is most over-represented in Norway, at 3.2 times expected (7 of 120 paintings) [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "dim: lacking lustre (Paterson)",
-   "first_recorded": "RAL, 1927 (per our name records)",
-   "source": "Paterson p. 147"
-  },
-  "aka": [
-   "DimGray"
+  "slug": "dim-grey",
+  "name": "Dim Grey",
+  "hex": "#696969",
+  "names": [
+    "Dim Grey"
   ],
-  "siblings": [
-   "dark-grey",
-   "charcoal",
-   "slate-grey"
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Dim Grey is a neutral mid-dark grey from the X11 color list, exactly 105 on each of red, green and blue.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A listed color",
+      "body": "Paterson's dictionary lists DimGray as an entry in the X11 Color Set, with hex code 696969 [1]. Each pair of digits is 69 in hex, which is 105 on the 0 to 255 scale, so the three channels are equal and the color has no hue [5]. In ordinary language, Paterson defines dim as poorly lit, or lacking lustre or brilliance [1]. His index files it among the greys [2]. Our name records list CSS, a web encyclopedia and RAL (1927) [3].\n\nIts nearest neighbors among our names, by CIELAB distance, are [[deep-neutral-grey|Deep Neutral Grey]], [[nickel|Nickel]] and [[slate-grey|Slate grey]] [5]. On a white page it reaches a contrast ratio of 5.49:1 [5]."
+    },
+    {
+      "id": "art",
+      "title": "In paintings",
+      "body": "Dim Grey is one of the most common named colors in our archive: it appears in 457 of 23,781 paintings, 1.92%, more often than 73% of the named colors [4]. It most often plays a light, in 35% of the 231 paintings where the within-painting reading finds it [4]. It peaks in the 1900s at 1.6 times the expected rate [4]. Matisse painted it most often (4 of his 50 works here), though no painter stands out against the museum baseline [4]. It is most over-represented in Norway, at 3.2 times expected (7 of 120 paintings) [4]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "contrast_white": 5.49,
-  "nearest": [
-   [
-    "Deep Neutral Grey",
-    4.1
-   ],
-   [
-    "Nickel",
-    4.4
-   ],
-   [
-    "Slate grey",
-    4.9
-   ]
+  "aside": {
+    "origin": {
+      "named_after": "dim: lacking lustre (Paterson)",
+      "first_recorded": "RAL, 1927 (per our name records)",
+      "source": "Paterson p. 147"
+    },
+    "aka": [
+      "DimGray"
+    ],
+    "siblings": [
+      "cool-grey",
+      "charcoal",
+      "slate-grey"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "contrast_white": 5.49,
+    "nearest": [
+      [
+        "Deep Neutral Grey",
+        4.1
+      ],
+      [
+        "Nickel",
+        4.4
+      ],
+      [
+        "Slate grey",
+        4.9
+      ]
+    ],
+    "n_present": 457,
+    "pct": 1.92,
+    "role_light_pct": 35,
+    "top_country": "Norway"
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 147",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 471",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub name records (data/graph/names.json and per-name source lists)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "data",
+      "cite": "Computed from the hex value: WCAG relative luminance and contrast ratio; CIELAB distance to the other names in data/graph/names.json",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "n_present": 457,
-  "pct": 1.92,
-  "role_light_pct": 35,
-  "top_country": "Norway"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 147",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 471",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub name records (data/graph/names.json and per-name source lists)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "data",
-   "cite": "Computed from the hex value: WCAG relative luminance and contrast ratio; CIELAB distance to the other names in data/graph/names.json",
-   "loc_kind": null,
-   "url": null
+  "questions": [
+    {
+      "q": "How much is each channel of Dim Grey, on the 0 to 255 scale?",
+      "choices": [
+        "105",
+        "69",
+        "150",
+        "128"
+      ],
+      "answer": "105",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Dim Grey is rare in our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Dim Grey is exactly 105 out of 255 on every channel, and it turns up in nearly 2% of the paintings in our archive."
+  ],
+  "words": 224,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "questions": [
-  {
-   "q": "How much is each channel of Dim Grey, on the 0 to 255 scale?",
-   "choices": [
-    "105",
-    "69",
-    "150",
-    "128"
-   ],
-   "answer": "105",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Dim Grey is rare in our painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Dim Grey is exactly 105 out of 255 on every channel, and it turns up in nearly 2% of the paintings in our archive."
- ],
- "words": 224,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

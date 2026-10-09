@@ -1,0 +1,141 @@
+{
+ "slug": "insect-screen",
+ "name": "Insect screen",
+ "hex": "#2D4436",
+ "names": [
+  "Insect screen"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Insect screen is a dark, muted green from Japan's traditional color list, and our own literal gloss of the name may be hiding a prettier story behind it.",
+ "sections": [
+  {
+   "id": "japan",
+   "title": "In Japan: Mushi'ao",
+   "body": "The name is written 虫襖, romanized Mushi'ao, which our color library glosses literally as \"insect screen\" [1]. Japanese color-history sites instead tie this same name to the jewel beetle, or *tamamushi*: a dark, iridescent green said to echo the beetle's wing case, and treat Mushi'ao as effectively the same color as Tamamushi-iro, \"jewel-beetle color\" [2]. We cannot confirm which reading our own library's translation intends, so we give both [1][2].\n\nThe nearest named neighbor by measured color is [[shirvan]], with [[bakst-green]] close by, both almost the same shade [3]. [[nickle-green]] and [[dark-hunter-green]] sit a little further out [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for Insect screen in 391 of 23,781 paintings, about 1.64 percent, more common than 73 percent of the named colors we track, as photographed [4]. It peaks in the 1900s, in 47 of 1,674 paintings from that century, 2.7 times the rate its share of the archive would predict [4]. Inside a painting it most often plays a shadow, in 41 percent of its appearances [4].\n\nThe painter most devoted to it is Harald Giersing, in 5 of his 23 paintings here, 8.4 times his peers' rate, as photographed [4]. The earliest archive match is dated 1400, in a work by Andrea di Bartolo; the archive's early centuries are thin, so that is a floor, not a first [4]. It shares canvases more than chance with the color we call Varley's Green [4]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "disputed between a literal \"insect screen\" and the iridescent jewel beetle (tamamushi)",
+   "first_recorded": "undocumented in the sources we have",
+   "source": "ColorHub color library: traditional colors of Japan; Japanese color-history sites"
+  },
+  "aka": [],
+  "siblings": [
+   "shirvan",
+   "bakst-green",
+   "nickle-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "虫襖 (Mushi'ao)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 391,
+  "measured": {
+   "lch": [
+    26.6,
+    13.7,
+    155.7
+   ],
+   "nearest": [
+    [
+     "Shirvan",
+     2.8
+    ],
+    [
+     "Bakst Green",
+     3.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional colors of Japan (Wikipedia)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "web",
+   "cite": "irocore.com, \"虫襖(むしあお)とは？伝統色のいろは\" (Japanese color-history site, on the jewel-beetle association)",
+   "loc_kind": null,
+   "url": "https://irocore.com/mushiao/"
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library, look-alike computation (data/graph/edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Besides the literal \"insect screen,\" what do Japanese color-history sites tie this name to?",
+   "choices": [
+    "The iridescent wing case of the jewel beetle",
+    "A kind of mosquito net fabric",
+    "A kabuki actor's robe",
+    "A tea ceremony utensil"
+   ],
+   "answer": "The iridescent wing case of the jewel beetle",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources agree on a single, confirmed origin for this name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter used Insect screen most, relative to his own output, in our archive?",
+   "choices": [
+    "Harald Giersing",
+    "Paul Cezanne",
+    "Maurice Denis",
+    "Andrea di Bartolo"
+   ],
+   "answer": "Harald Giersing",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Insect screen may really be named for a beetle, not a screen door."
+ ],
+ "words": 276,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": [
+   "jewel-beetle reading is single-source web; kept as a hedge alongside our own literal gloss"
+  ]
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "slug": "medium-green",
+ "name": "Medium Green",
+ "hex": "#39AD48",
+ "names": [
+  "Medium Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Medium Green names itself: a plain mid-saturation [[green]], filed under the ISCC-NBS 1955 lists and later picked up by the xkcd color survey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, twice over",
+   "body": "The name is ordinary modifier grammar, \"medium\" plus the parent hue [[green]] [1]. Our library's earliest record for it is the ISCC-NBS 1955 lists, in color block 151, and the xkcd color survey later used the same words for a brighter, more saturated green [1]. Neither source explains the name beyond the two plain words [1].\n\nIts nearest named neighbors by measured color are [[shamrock]] and [[peppermint]], a touch brighter and duller respectively, with [[green-pigment|Green (pigment)]] close behind [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries a close match to this exact shade of green, covering at least one percent of its canvas, as photographed [2]. That says something about this archive and its mix of museums and periods, not about painting as a whole, and not about how often the color turns up anywhere else [2]. Greens this saturated and this specific a lightness are harder for any photograph of an aged, varnished canvas to hold onto than a duller, darker green [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: medium + green",
+   "first_recorded": "ISCC-NBS 1955 (block 151)",
+   "source": "ColorHub color library: ISCC-NBS (1955), xkcd color survey"
+  },
+  "aka": [],
+  "siblings": [
+   "shamrock",
+   "peppermint"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    62.7,
+    67.7,
+    141.7
+   ],
+   "nearest": [
+    [
+     "Shamrock",
+     2.8
+    ],
+    [
+     "Peppermint",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS (1955), xkcd color survey (2010); ColorHub name graph (look-alike edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1955 list first files a color close to Medium Green in our sources?",
+   "choices": [
+    "ISCC-NBS",
+    "Ridgway's Color Standards",
+    "Werner's Nomenclature",
+    "Maerz and Paul"
+   ],
+   "answer": "ISCC-NBS",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our painting archive finds a strong, common match for Medium Green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Medium Green is a modifier on green, twice over: first filed by the ISCC-NBS in 1955, later by the xkcd color survey."
+ ],
+ "words": 181,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No archive presence for this slug; field section is necessarily thin."
+  ]
+ }
+}

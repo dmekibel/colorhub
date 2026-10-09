@@ -1,0 +1,62 @@
+{
+ "id": "expressionism",
+ "name": "Expressionism",
+ "lineage": {
+  "influenced_by": [
+   "Fauvism",
+   "Edvard Munch",
+   "German anxiety before and after WWI"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 1905–1933 (German Expressionism's main window)"
+ ],
+ "places": [
+  "Dresden and Berlin (Die Brücke, Der Blaue Reiter)"
+ ],
+ "garments": [
+  "not a fashion look — a painting and film movement"
+ ],
+ "media": [
+  {
+   "title": "Edvard Munch, The Scream (1893)",
+   "note": "the direct forerunner"
+  },
+  {
+   "title": "The Cabinet of Dr. Caligari (1920)",
+   "note": "German Expressionist cinema's defining image"
+  }
+ ],
+ "figures": [
+  "Edvard Munch",
+  "Ernst Ludwig Kirchner",
+  "Wassily Kandinsky"
+ ],
+ "reacts_against": "naturalistic representation, distorting color and form to render inner emotional states rather than observed reality.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "1900s-1920s",
+  "key_motifs": "Distorted or elongated figures, urban alienation, psychological turmoil, spirituality, raw emotion, masks, woodcut textures",
+  "key_colours": "Intense, arbitrary, symbolic, and often dissonant colors; strong, jarring contrasts; agitated and swirling brushstrokes",
+  "related_aesthetics": "Abstract ExpressionismCubismFauvismNeo-ExpressionismNew ObjectivityPost-ImpressionismSymbolismWeimar Cabaret",
+  "key_values": "Subjective emotional experience over objective reality; expression of inner psychological states; critique of modern society; spiritual renewal"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Expressionism"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 40% of the measured color across 6 wiki photos is below mid-lightness",
+   "a vivid streak — roughly 28% of the color measured is highly saturated"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

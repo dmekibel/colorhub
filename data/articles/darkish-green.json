@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A hedge, not a plain modifier",
-   "body": "Most xkcd modifiers simply stack a word like *dark* onto a base color, but *darkish* adds the softer suffix *-ish*, a volunteer's way of saying the color leans dark without committing fully, distinct from how the survey separately names a plainer [[dark-forest-green]] [1][2]. The 1955 ISCC-NBS system's nearest block, strong green, sits a comparatively wide 7.8 units away[2]. The nearest named colors on file are [[imperial-jade]], [[emerald-green]] and [[tree-green]], at 3.2, 5 and 5.1 ΔE [2]."
+   "body": "Most xkcd modifiers simply stack a word like *dark* onto a base color, but *darkish* adds the softer suffix *-ish*, a volunteer's way of saying the color leans dark without committing fully, distinct from how the survey separately names a plainer [[phthalo-green]] [1][2]. The 1955 ISCC-NBS system's nearest block, strong green, sits a comparatively wide 7.8 units away[2]. The nearest named colors on file are [[imperial-jade]], [[emerald-green]] and [[tree-green]], at 3.2, 5 and 5.1 ΔE [2]."
   },
   {
    "id": "field",
@@ -127,7 +127,7 @@
  "openers": [
   "\"Darkish\" hedges on purpose: it is \"dark\" without fully committing."
  ],
- "words": 216,
+ "words": 215,
  "status": "checked",
  "checked": {
   "by": "batch writer",

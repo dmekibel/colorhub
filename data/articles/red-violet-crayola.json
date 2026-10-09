@@ -1,0 +1,116 @@
+{
+ "slug": "red-violet-crayola",
+ "name": "Red-Violet (Crayola)",
+ "hex": "#C0448F",
+ "names": [
+  "Red-Violet (Crayola)"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Red-Violet (Crayola) is a Crayola crayon shade whose name states its own mixture: a violet pulled toward red.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plain compound name",
+   "body": "Crayola often names a crayon by stating the two hues it sits between rather than inventing a word, and this is one of those names [1]. The color library records it from a Wikipedia-sourced list of Crayola crayon colors; no book consulted here gives an exact release date for this particular label, so that date is undocumented [1]. The hex value #C0448F is a screen approximation of a printed crayon wrapper, not a measured pigment [1].\n\nIts nearest neighbor in the library is [[mulberry]], about 2.6 units away in LCH space, close enough that the two look almost the same on an uncalibrated screen [1]. [[red-violet]] is the plainer form of the same compound name, used in other systems without the Crayola brand attached to it [1].\n\nOther close matches in the library include [[mulberry-crayola]] and the more vivid [[fandango]], both within a few LCH units of this swatch [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In the ColorHub painting archive this hue is close to unique, matching only 1 of 23,781 paintings, as photographed [2]. That single match is a painting from India dated 1900, and the color turns up far more often in Indian works than the archive average, though a sample of one says more about the hue's rarity than about any real pattern [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "its own position between red and violet",
+   "first_recorded": "undocumented beyond its listing as a Crayola crayon name",
+   "source": "ColorHub color library (Wikipedia)"
+  },
+  "aka": [
+   "Red-Violet"
+  ],
+  "siblings": [
+   "mulberry",
+   "mulberry-crayola",
+   "fandango"
+  ],
+  "parent": "red-violet",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "red-violet",
+    "gloss": "the same compound name without the Crayola brand qualifier"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "measured": {
+   "lch": [
+    49,
+    59,
+    345
+   ],
+   "nearest": [
+    [
+     "Mulberry",
+     2.6
+    ]
+   ]
+  },
+  "top_country": "India"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia list of Crayola crayon colors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the name 'Red-Violet (Crayola)' describe?",
+   "choices": [
+    "A violet shifted toward red",
+    "A place in Italy",
+    "A 19th-century dye",
+    "A mineral pigment"
+   ],
+   "answer": "A violet shifted toward red",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: an exact release year for this Crayola color is recorded in the sources checked here.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Red-Violet (Crayola) names itself: a violet pulled toward red."
+ ],
+ "words": 226,
+ "status": "checked",
+ "checked": {
+  "by": "batch-29",
+  "date": "2026-10-09",
+  "issues": [
+   "No book source for an exact Crayola release date; left undocumented.",
+   "No archive field data beyond a single match."
+  ]
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "slug": "phlox",
+ "name": "Phlox",
+ "hex": "#DF00FF",
+ "names": [
+  "Phlox"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Phlox is a vivid, electric magenta-purple named for the garden flower, though it reads far more saturated on screen than the flower itself ever does.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Brighter than the flower",
+   "body": "Maerz and Paul's 1930 dictionary records this name on plate 54 H 12, with a first recorded date of 1918 [1]. The ISCC-NBS system files it in block 238, \"vivid reddish purple\", but its own measured distance from that block's center is 16.4 units, unusually large, meaning the swatch sits near the edge of what the block covers rather than at its heart [2]. Phlox flowers themselves range from pale pink to a true magenta-purple, but rarely this electric [1].\n\nOur library also flags Phlox as a near-exact computed duplicate, zero CIEDE2000 units apart, of Psychedelic Purple, a separate name drawn from the web [2]. The nearest other named color is [[magenta|Magenta]], 5.9 units away [2]. [[phlox-pink|Phlox Pink]] is the paler, dustier member of the same name family [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries this color across at least one percent of its canvas, as photographed [3]. That describes the limits of our museum archive, which skews toward older, less saturated pigments, rather than painting as a whole [3]. In printed English the word \"phlox\" itself has been used since at least 1820, peaking in the 1930s, though that count mixes the flower, the color and any other use of the word [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the phlox flower",
+   "first_recorded": "1918, per Maerz and Paul",
+   "source": "Maerz and Paul, A Dictionary of Color (1930), plate 54 H 12"
+  },
+  "aka": [
+   "Psychedelic Purple"
+  ],
+  "siblings": [
+   "magenta",
+   "bright-purple",
+   "steel-pink",
+   "bright-lavender"
+  ],
+  "parent": null,
+  "children": [
+   "phlox-pink"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    55,
+    117,
+    323
+   ],
+   "nearest": [
+    [
+     "Magenta",
+     5.9
+    ],
+    [
+     "Bright Purple",
+     6.2
+    ],
+    [
+     "Steel Pink",
+     6.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 54 H 12",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 238 entry, near-duplicate and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings) and Ngram word-frequency cache, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: real phlox flowers are usually as electric and saturated as the color Phlox.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which other name in our library is a near-exact computed duplicate of Phlox?",
+   "choices": [
+    "Psychedelic Purple",
+    "Pigeon Blue",
+    "Pinard Yellow",
+    "Plum grey"
+   ],
+   "answer": "Psychedelic Purple",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Phlox and Psychedelic Purple are, by the numbers, the same color under two different names."
+ ],
+ "words": 224,
+ "status": "draft",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

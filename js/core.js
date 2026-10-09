@@ -294,6 +294,7 @@ const ICON_PATHS = {
   today: '<rect x="4.5" y="5" width="15" height="15" rx="2.5"/><path d="M4.5 10h15M8.5 3v4M15.5 3v4"/>',
   compass: '<circle cx="12" cy="12" r="8.5"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
   wheel: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.4"/><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3"/>',
+  web: '<circle cx="12" cy="5" r="1.9"/><circle cx="5" cy="19" r="1.9"/><circle cx="19" cy="19" r="1.9"/><circle cx="12" cy="12.5" r="1.9"/><path d="M12 7v3.6M10.3 14L7 17.3M13.7 14L17 17.3"/>',   // js/aesthetics-graph.js: the family tree
   // kinds of things (article references, cards)
   gem: '<path d="M3.5 9l3-4.5h11l3 4.5L12 20z"/><path d="M3.5 9h17M9 4.5L12 9l3-4.5M12 9v11"/>',
   flower: '<circle cx="12" cy="10" r="2.2"/><path d="M12 7.8C10 5.6 10.4 3.5 12 3.5s2 2.1 0 4.3zM14.2 10c2.2-2 4.3-1.6 4.3 0s-2.1 2-4.3 0zM12 12.2c2 2.2 1.6 4.3 0 4.3s-2-2.1 0-4.3zM9.8 10c-2.2 2-4.3 1.6-4.3 0s2.1-2 4.3 0zM12 16.5v4"/>',
@@ -311,7 +312,7 @@ const ICON = {
   search: icon("search", 20), play: icon("play", 18), today: icon("today", 24), compass: icon("compass", 24), palette: icon("studio", 24),
   bolt: icon("bolt", 20), camera: icon("camera", 22), dice: icon("dice", 22), heart: icon("heart", 22), heartOn: icon("heartOn", 22),
   star: icon("star", 22), starOn: icon("starOn", 22), map: icon("map", 22), colors: icon("colors", 22), arrange: icon("arrange", 22),
-  sound: icon("sound", 22), compare: icon("compare", 22), you: icon("you", 24),
+  sound: icon("sound", 22), compare: icon("compare", 22), you: icon("you", 24), web: icon("web", 22), tune: icon("tune", 20),
 };
 // Night Gallery sliders (css/ng.css): every range input's track fills in ink up to its thumb. --ngp is kept in step on
 // input and change, and for sliders that arrive with a screen or have their value set in code (a Reset), on the next frame.
@@ -524,6 +525,17 @@ function show(html, cls = "", tab = null) {
   if (typeof tlNote === "function") tlNote(el, tab, backNav);   // the one trail, the map glyph, the pull-down (js/trail.js)
   el.querySelectorAll("img").forEach(i => { if (i.complete && i.naturalWidth) i.classList.add("ld"); });
   requestAnimationFrame(() => { runMorph(el); reveal(el); countUp(el); });
+  // David: a corner button (position:fixed) went missing or landed off-screen after returning from a color page.
+  // .screen's own entrance animation (css/polish.css "enter") ends at transform:none, but an element with a CSS
+  // animation still in effect (even one that finishes AT the identity transform, kept by fill-mode:both) computes
+  // as a transform matrix, not the literal keyword none -- and per spec that alone makes it a new containing
+  // block for any position:fixed descendant. Every corner lives inside .screen, so once this ran, "fixed" meant
+  // "fixed to .screen's own box", not the viewport: usually invisible (the two matched), but not always, and
+  // never for the next screen while this one's ghost (.fade-ghost) is still mid-fade-out alongside it. Dropping
+  // the animation once it's done removes the stray containing block and restores true viewport-fixed.
+  const clearEnterAnim = () => { el.style.animation = "none"; };
+  el.addEventListener("animationend", clearEnterAnim, { once: true });
+  setTimeout(clearEnterAnim, 650);   // belt and suspenders: animationend firing late or not at all must not leave this stuck
   return el;
 }
 // Every tab's home opens with the same line: the brand on the left, the tab's own actions and the menu (⋯) on the right.
@@ -594,6 +606,18 @@ function roomsNote(id) {
 // it was under a solid dimming scrim; the rooms rise as opaque capsules in a low arc from the corner, under the
 // thumb. A tap anywhere outside (or the ✕, Escape, Back) sinks them back into the corner and nothing else moves.
 let STEM_KEY = null;
+// David: "clicking it again minimizes it, and then automatically it expands again by itself." The corner that opens
+// the stem has z-index:18 while "on" (menus2.css), meant to float above the stem's own scrim so the SAME tap that
+// closes it lands on the button again -- but the button lives inside #app's own stacking context (main{z-index:1}),
+// which caps it there no matter its own z-index, so the stacking fight it's meant to win it can't actually win: a
+// real tap at that spot always hits the full-screen scrim instead. That's still fine (the scrim's own pointerdown
+// closes the same way) -- except iOS Safari can still fire a *delayed* synthetic "click" there afterward (a known
+// quirk: preventDefault on pointerdown doesn't reliably cancel it), which lands squarely on the real button once
+// the scrim has been removed a moment later and reopens what the user just closed. STEM_CLOSED_AT/stemJustClosed
+// is the guard: any attempt to OPEN within a short window of a close is almost certainly that ghost click, not a
+// deliberate second tap, so it's swallowed instead of reopening the stem.
+let STEM_CLOSED_AT = 0;
+const stemJustClosed = () => Date.now() - STEM_CLOSED_AT < 380;
 // The one source of truth for the corners coming back: a pan fade (.chrome-hide on Home) never outlives a closed
 // sheet or menu. Called by closeStem and every sheet() close (David: "the bottom corner buttons disappear").
 // It is the single state function for the corners: called on every way into Home (hmHome), at the end of a bubble <->
@@ -606,7 +630,7 @@ function cornersBack() {
 }
 function closeStem(instant) {
   const s = document.querySelector(".rooms-stem"), sc = document.querySelector(".rm-scrim");
-  STEM_OPEN = false; cornersBack();
+  STEM_OPEN = false; STEM_CLOSED_AT = Date.now(); cornersBack();
   document.body.classList.remove("stem-open");
   if (STEM_KEY) { removeEventListener("keydown", STEM_KEY, true); STEM_KEY = null; }
   document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.remove("on"); b.innerHTML = ROOMS_GLYPH; b.setAttribute("aria-expanded", "false"); });
@@ -620,6 +644,7 @@ function closeStem(instant) {
 }
 function toggleStem(cornerEl) {
   if (STEM_OPEN) { buzz(4); return closeStem(); }
+  if (stemJustClosed()) return;   // a ghost click right after closing must not reopen it (see stemJustClosed above)
   if (document.querySelector(".sheet,.scrim")) return;   // a sheet is already up; don't stack chrome on chrome
   document.querySelectorAll(".rooms-stem,.rm-scrim").forEach(n => n.remove());   // one still sinking from a fast double tap
   buzz(4);

@@ -1,0 +1,116 @@
+{
+ "slug": "reddish-wine",
+ "name": "Reddish wine",
+ "hex": "#672422",
+ "names": [
+  "Reddish wine"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Reddish wine glosses Azuki-iro, a Japanese traditional name taken from the dark red azuki bean.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for a bean",
+   "body": "The library files this hex under *Azuki-iro* (小豆色), named for the azuki bean, a small dark-red legume used across East Asian cooking [1]. The English gloss \"Reddish wine\" describes the hue's deep brownish-red rather than translating the bean's name [1]. The hex #672422 is a screen approximation; no exact date for this named shade is recorded in the sources consulted here [1].\n\nIts nearest library look-alike is [[light-oxblood]], about 2.7 units away in LCH space [1].\n\nFurther along the same family are [[persian-plum]], more vivid, and [[chestnut-leather-brown]], almost the same color [1]. [[oxblood]] names the wider family this shade belongs to [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In the ColorHub painting archive this hue appears in 757 of 23,781 paintings, about 3.2 percent, as photographed [2]. It peaks around the 1470s, with Andrea del Sarto and Giorgione among the painters who use it most relative to their output, and it is common again in the 1400s and 1500s more broadly [2]. These are computed color matches on varnished, photographed canvases, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the azuki bean, a small dark-red legume",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library (Japanese traditional-color data)"
+  },
+  "aka": [
+   "Azuki-iro"
+  ],
+  "siblings": [
+   "light-oxblood",
+   "persian-plum",
+   "chestnut-leather-brown",
+   "oxblood"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Azuki-iro (小豆色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 757,
+  "measured": {
+   "lch": [
+    25,
+    35,
+    30
+   ],
+   "nearest": [
+    [
+     "Light oxblood",
+     2.7
+    ]
+   ]
+  },
+  "peak_decade": 1470
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional-color entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Azuki-iro, the Japanese name behind Reddish wine, named after?",
+   "choices": [
+    "A small dark-red bean",
+    "A wine region",
+    "A bird's plumage",
+    "A volcanic mineral"
+   ],
+   "answer": "A small dark-red bean",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this hue is rare before 1400 in the ColorHub archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Reddish wine's Japanese name is taken from a bean, not a grape."
+ ],
+ "words": 182,
+ "status": "checked",
+ "checked": {
+  "by": "batch-29",
+  "date": "2026-10-09",
+  "issues": [
+   "No parent slug for \"wine\" exists in the color graph; linked to oxblood siblings instead."
+  ]
+ }
+}

@@ -1,280 +1,280 @@
 {
- "slug": "verdigris-green",
- "name": "Verdigris Green",
- "hex": "#61AC86",
- "names": [
-  "Verdigris Green"
- ],
- "tier": "pigment",
- "depth": "long",
- "lede": "Verdigris green is the pale blue-green named for the crust that forms on corroded copper, a pigment that painters from ancient Egypt to the nineteenth century valued and distrusted in equal measure.",
- "sections": [
-  {
-   "id": "swatch",
-   "title": "Which verdigris",
-   "body": "Verdigris is not one thing. The *Pigment Compendium* says the word is loosely defined: it covers the corrosion products that form when copper and its alloys meet organic acids such as acetic acid, and also the compounds made on purpose for paint [1]. Some are blue and some green; of the five basic acetate formulas it lists, three are blue, one is green and one is blue-green [1].\n\nThe swatch here is the color name, not the chemistry. It is a pale, cool green, within a CIEDE2000 distance of 2.6 of ISCC-NBS block 136, and it comes from Werner's number 50 as printed, an aged swatch and approximate [13]. Ridgway's plate of 1912 gives a deeper, bluer green near #469C7E [13]. Baty adds that the paint on Syme's swatches and plates has muted with time [4]."
-  },
-  {
-   "id": "name",
-   "title": "Names",
-   "body": "St Clair glosses *verdigris* as French for green from Greece, and gives the German name *Grünspan*, Spanish green, noting that the sixteenth-century scholar Georgius Agricola wrote that the pigment was brought from Spain [6]. The *Pigment Compendium* records that Grenoble was a chief place of manufacture and that south-east France, especially the Rhône valley, made verdigris as a by-product of the wine industry [2]. Pliny and Vitruvius called it *aeruca* [1]."
-  },
-  {
-   "id": "material",
-   "title": "How it was made",
-   "body": "Verdigris for painting was generally made on purpose by exposing copper plates, strips or foil to vinegar, curdled milk, urine, wine lees and similar substances [1]. St Clair describes copper sheets left for two weeks in a sealed pot with lye and vinegar or sour wine, after which the green patina was scraped off and powdered [6]. The crust could be refined by dissolving it in vinegar and evaporating the liquid until crystals formed, a recipe that a sixteenth- or seventeenth-century Paduan manuscript gives for crystallised verdigris [2]. Recrystallised, neutral verdigris proved more stable in oil than the basic kind [1].\n\nBecause the recipes varied so much, no single substance was produced [1]. Burnt verdigris, which Salter in 1869 called an olive-colored copper oxide, was another thing again [2]. Some \"verdigris\" was stranger still: Laurie in 1914 found that the verdigris on certain sixteenth- and seventeenth-century legal rolls was azurite, probably dissolved in vinegar, and Purinton and Newman called natural copper minerals verdigris in Indian paintings [1]."
-  },
-  {
-   "id": "history",
-   "title": "Old, steady, then gone",
-   "body": "Pliny, quoting Theophrastus of about 315 BC, says verdigris was made from copper soaked in wine lees [1]. Olsson and colleagues identified it among the pigments of Egyptian papyri of the thirteenth century BC [1]. In easel painting it was in common use from the thirteenth century to the nineteenth, and it went out of use in the early twentieth [1]. Finlay says Europeans stopped using it in the nineteenth century, while Persian painters kept it until the early twentieth [10].\n\nPrinted English follows the same arc: the word *verdigris* peaks about 1823 and by the 2000s stands at roughly 13 percent of that peak, counting every sense [15]. Pastoureau adds a warning from the dyer's and painter's workshop: greens made by corroding copper with vinegar, urine or tartar are bright and luminous but corrosive, a real poison, which is why German speaks of *Giftgrün*, poison green [12]."
-  },
-  {
-   "id": "art",
-   "title": "A pigment that does not last, or does",
-   "body": "Cennino Cennini wrote around 1400 that verdigris is pleasing to the eye but does not last [1]. The record is mixed. Woudhuysen-Keller points out that in many works it has darkened dramatically, but in others it remains bright green or blue, depending on whether it was thoroughly embedded in oil or an oil-resin varnish, and yellow glazes could correct its bluish hue [1].\n\nBall adds that verdigris turns fairly transparent in oil, like malachite, so painters often added lead white or lead-tin yellow to make it opaque again [7]. Much of the brown or almost black foliage in late-fifteenth-century pictures comes less from verdigris itself than from copper resinate, verdigris mixed with resin, which turns blackish as light breaks the resin down [8]. Cennino called verdigris and white lead mortal enemies, yet Ball reports that modern tests show no harm in the mixture and that painters often used the two together [8].\n\nBooks disagree here. Finlay blames the darkening of the green in George Washington's dining room at Mount Vernon on verdigris reacting with the lead white in the finishes [9]. Ball's tests point the other way, so the cause may lie elsewhere [8][9]. The room's story is told under [[pistachio]]."
-  },
-  {
-   "id": "persia",
-   "title": "Zangar: verdigris in Persia and India",
-   "body": "In Persian and Indian painting verdigris is called *zangar* [10]. Finlay reports that its recipe was similar to the European and Chinese ones, though sheep-milk yogurt was sometimes used, and that a seventeenth-century text by Sadiqi Beg Afshar calls for thin copper swords hung over a well for a month [10]. For many Muslims green is a holy color, and miniature painters gave important men a verdigris halo, while garden scenes of love were set in green bowers [10].\n\nThe conservator Mandana Barkeshli noticed that sixteenth-century Mughal miniatures were burned through where one green appeared, while Persian ones were not, and traced the answer to a poem advising painters to mix saffron with zangar [10]. Finlay finds the same mixture in Cennino's recipe of one part saffron to two of verdigris, which he promised would give the most perfect grass-green, though he did not say that saffron protected the support [10]. The *Pigment Compendium* agrees that verdigris was adulterated with saffron to retard corrosion, and that Barkeshli and Ataie recognized this in Persian and Indian miniatures, but it also cites a conflicting study by Lee and colleagues from 1997 [1]."
-  },
-  {
-   "id": "werner",
-   "title": "In Werner's chart",
-   "body": "Werner's and Syme's chart lists verdigris green as number 50 among the greens, with the tail of the small long-tailed green parrot as its animal example and copper green as its mineral [3]. It also served as a building block for other names: in Syme's recipes, celandine green, the name the chart gives to what we call [[celadon-green]], is verdigris green with ash grey, and [[verditter-blue]] takes a little verdigris green mixed into Berlin blue [5]. In the same vocabulary [[mountain-green]] and [[emerald-green]] sit beside it [3].\n\nThe word names a patina as well as a paint. Jarman calls the charioteer of Delphi a verdigris green statue [11]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "These are our own measurements, from photographs of aged, varnished paintings; a color match is not a pigment test [14]. Within a CIEDE2000 distance of 6, and covering at least 5 percent of the canvas, this green appears in only 7 of 23,781 paintings [14].\n\nThe largest areas are in [[painter:maurice-denis|Maurice Denis]]'s *Paysage aux arbres verts* of 1893, at about 28 percent of the canvas, and [[painter:pierre-bonnard|Bonnard]]'s *La Symphonie pastorale* of 1918, at about 26 percent [14]. [[painting:nga-72328|Van Gogh's Roses]] of 1890, whose present greens are discussed under [[madder]], reads at about 10 percent [14]. The six largest matches are all dated 1783 or later [14]. In the 1900s the color appears in 2 of 1,674 paintings, about four times the expected rate, but with so few matches that is a pattern to watch, not a finding [14].\n\nDo not read these as verdigris. A cool light green in a photograph can come from many pigments, and the early pictures that did use verdigris have largely browned or been overpainted [1][14]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "verdigris, the green or blue corrosion of copper and the pigment made from it",
-   "first_recorded": "as a pigment in Egyptian papyri of the 13th century BC; as a color name, no. 50 in Werner-descended charts by 1821",
-   "source": "Pigment Compendium, \"Verdigris\"; Baty, Nature's Palette, Greens no. 50"
-  },
-  "aka": [
-   "verdigris",
-   "aeruca (Latin)",
-   "zangar (Persian)",
-   "Grünspan (German)"
+  "slug": "verdigris-green",
+  "name": "Verdigris Green",
+  "hex": "#61AC86",
+  "names": [
+    "Verdigris Green"
   ],
-  "siblings": [
-   "celadon-green",
-   "mountain-green",
-   "emerald-green"
+  "tier": "pigment",
+  "depth": "long",
+  "lede": "Verdigris green is the pale blue-green named for the crust that forms on corroded copper, a pigment that painters from ancient Egypt to the nineteenth century valued and distrusted in equal measure.",
+  "sections": [
+    {
+      "id": "swatch",
+      "title": "Which verdigris",
+      "body": "Verdigris is not one thing. The *Pigment Compendium* says the word is loosely defined: it covers the corrosion products that form when copper and its alloys meet organic acids such as acetic acid, and also the compounds made on purpose for paint [1]. Some are blue and some green; of the five basic acetate formulas it lists, three are blue, one is green and one is blue-green [1].\n\nThe swatch here is the color name, not the chemistry. It is a pale, cool green, within a CIEDE2000 distance of 2.6 of ISCC-NBS block 136, and it comes from Werner's number 50 as printed, an aged swatch and approximate [13]. Ridgway's plate of 1912 gives a deeper, bluer green near #469C7E [13]. Baty adds that the paint on Syme's swatches and plates has muted with time [4]."
+    },
+    {
+      "id": "name",
+      "title": "Names",
+      "body": "St Clair glosses *verdigris* as French for green from Greece, and gives the German name *Grünspan*, Spanish green, noting that the sixteenth-century scholar Georgius Agricola wrote that the pigment was brought from Spain [6]. The *Pigment Compendium* records that Grenoble was a chief place of manufacture and that south-east France, especially the Rhône valley, made verdigris as a by-product of the wine industry [2]. Pliny and Vitruvius called it *aeruca* [1]."
+    },
+    {
+      "id": "material",
+      "title": "How it was made",
+      "body": "Verdigris for painting was generally made on purpose by exposing copper plates, strips or foil to vinegar, curdled milk, urine, wine lees and similar substances [1]. St Clair describes copper sheets left for two weeks in a sealed pot with lye and vinegar or sour wine, after which the green patina was scraped off and powdered [6]. The crust could be refined by dissolving it in vinegar and evaporating the liquid until crystals formed, a recipe that a sixteenth- or seventeenth-century Paduan manuscript gives for crystallised verdigris [2]. Recrystallised, neutral verdigris proved more stable in oil than the basic kind [1].\n\nBecause the recipes varied so much, no single substance was produced [1]. Burnt verdigris, which Salter in 1869 called an olive-colored copper oxide, was another thing again [2]. Some \"verdigris\" was stranger still: Laurie in 1914 found that the verdigris on certain sixteenth- and seventeenth-century legal rolls was azurite, probably dissolved in vinegar, and Purinton and Newman called natural copper minerals verdigris in Indian paintings [1]."
+    },
+    {
+      "id": "history",
+      "title": "Old, steady, then gone",
+      "body": "Pliny, quoting Theophrastus of about 315 BC, says verdigris was made from copper soaked in wine lees [1]. Olsson and colleagues identified it among the pigments of Egyptian papyri of the thirteenth century BC [1]. In easel painting it was in common use from the thirteenth century to the nineteenth, and it went out of use in the early twentieth [1]. Finlay says Europeans stopped using it in the nineteenth century, while Persian painters kept it until the early twentieth [10].\n\nPrinted English follows the same arc: the word *verdigris* peaks about 1823 and by the 2000s stands at roughly 13 percent of that peak, counting every sense [15]. Pastoureau adds a warning from the dyer's and painter's workshop: greens made by corroding copper with vinegar, urine or tartar are bright and luminous but corrosive, a real poison, which is why German speaks of *Giftgrün*, poison green [12]."
+    },
+    {
+      "id": "art",
+      "title": "A pigment that does not last, or does",
+      "body": "Cennino Cennini wrote around 1400 that verdigris is pleasing to the eye but does not last [1]. The record is mixed. Woudhuysen-Keller points out that in many works it has darkened dramatically, but in others it remains bright green or blue, depending on whether it was thoroughly embedded in oil or an oil-resin varnish, and yellow glazes could correct its bluish hue [1].\n\nBall adds that verdigris turns fairly transparent in oil, like malachite, so painters often added lead white or lead-tin yellow to make it opaque again [7]. Much of the brown or almost black foliage in late-fifteenth-century pictures comes less from verdigris itself than from copper resinate, verdigris mixed with resin, which turns blackish as light breaks the resin down [8]. Cennino called verdigris and white lead mortal enemies, yet Ball reports that modern tests show no harm in the mixture and that painters often used the two together [8].\n\nBooks disagree here. Finlay blames the darkening of the green in George Washington's dining room at Mount Vernon on verdigris reacting with the lead white in the finishes [9]. Ball's tests point the other way, so the cause may lie elsewhere [8][9]. The room's story is told under [[pistachio]]."
+    },
+    {
+      "id": "persia",
+      "title": "Zangar: verdigris in Persia and India",
+      "body": "In Persian and Indian painting verdigris is called *zangar* [10]. Finlay reports that its recipe was similar to the European and Chinese ones, though sheep-milk yogurt was sometimes used, and that a seventeenth-century text by Sadiqi Beg Afshar calls for thin copper swords hung over a well for a month [10]. For many Muslims green is a holy color, and miniature painters gave important men a verdigris halo, while garden scenes of love were set in green bowers [10].\n\nThe conservator Mandana Barkeshli noticed that sixteenth-century Mughal miniatures were burned through where one green appeared, while Persian ones were not, and traced the answer to a poem advising painters to mix saffron with zangar [10]. Finlay finds the same mixture in Cennino's recipe of one part saffron to two of verdigris, which he promised would give the most perfect grass-green, though he did not say that saffron protected the support [10]. The *Pigment Compendium* agrees that verdigris was adulterated with saffron to retard corrosion, and that Barkeshli and Ataie recognized this in Persian and Indian miniatures, but it also cites a conflicting study by Lee and colleagues from 1997 [1]."
+    },
+    {
+      "id": "werner",
+      "title": "In Werner's chart",
+      "body": "Werner's and Syme's chart lists verdigris green as number 50 among the greens, with the tail of the small long-tailed green parrot as its animal example and copper green as its mineral [3]. It also served as a building block for other names: in Syme's recipes, celandine green, the name the chart gives to what we call [[celadon-green]], is verdigris green with ash grey, and [[verditter-blue]] takes a little verdigris green mixed into Berlin blue [5]. In the same vocabulary [[mountain-green]] and [[emerald-green]] sit beside it [3].\n\nThe word names a patina as well as a paint. Jarman calls the charioteer of Delphi a verdigris green statue [11]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "These are our own measurements, from photographs of aged, varnished paintings; a color match is not a pigment test [14]. Within a CIEDE2000 distance of 6, and covering at least 5 percent of the canvas, this green appears in only 7 of 23,781 paintings [14].\n\nThe largest areas are in [[painter:maurice-denis|Maurice Denis]]'s *Paysage aux arbres verts* of 1893, at about 28 percent of the canvas, and [[painter:pierre-bonnard|Bonnard]]'s *La Symphonie pastorale* of 1918, at about 26 percent [14]. [[painting:nga-72328|Van Gogh's Roses]] of 1890, whose present greens are discussed under [[irresistible]], reads at about 10 percent [14]. The six largest matches are all dated 1783 or later [14]. In the 1900s the color appears in 2 of 1,674 paintings, about four times the expected rate, but with so few matches that is a pattern to watch, not a finding [14].\n\nDo not read these as verdigris. A cool light green in a photograph can come from many pigments, and the early pictures that did use verdigris have largely browned or been overpainted [1][14]."
+    }
   ],
-  "parent": "green",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "verditter-blue",
-    "gloss": "Syme's blue number 32, mixed from Berlin blue and a little verdigris green"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "de",
-    "name": "Grünspan (Spanish green)"
-   },
-   {
-    "lang": "fa",
-    "name": "zangar (verdigris)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#61AC86",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 7,
-  "top_paintings": [
-   "commons-Q17494727",
-   "commons-Q17492360",
-   "nga-42489",
-   "aic-25872",
-   "nga-72328"
-  ],
-  "role": {
-   "mid": 0.71,
-   "highlight": 0.29
-  },
-  "ngram": {
-   "peak": 1823,
-   "rel_2000": 0.131
-  },
-  "measured": {
-   "lch": [
-    64.8,
-    34.5,
-    159.0
-   ],
-   "contrast_white": 2.71,
-   "nearest": [
-    [
-     "light green (ISCC-NBS 136)",
-     2.6
+  "aside": {
+    "origin": {
+      "named_after": "verdigris, the green or blue corrosion of copper and the pigment made from it",
+      "first_recorded": "as a pigment in Egyptian papyri of the 13th century BC; as a color name, no. 50 in Werner-descended charts by 1821",
+      "source": "Pigment Compendium, \"Verdigris\"; Baty, Nature's Palette, Greens no. 50"
+    },
+    "aka": [
+      "verdigris",
+      "aeruca (Latin)",
+      "zangar (Persian)",
+      "Grünspan (German)"
+    ],
+    "siblings": [
+      "celadon-green",
+      "mountain-green",
+      "emerald-green"
+    ],
+    "parent": "green",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "verditter-blue",
+        "gloss": "Syme's blue number 32, mixed from Berlin blue and a little verdigris green"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "de",
+        "name": "Grünspan (Spanish green)"
+      },
+      {
+        "lang": "fa",
+        "name": "zangar (verdigris)"
+      }
     ]
-   ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#61AC86",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 7,
+    "top_paintings": [
+      "commons-Q17494727",
+      "commons-Q17492360",
+      "nga-42489",
+      "aic-25872",
+      "nga-72328"
+    ],
+    "role": {
+      "mid": 0.71,
+      "highlight": 0.29
+    },
+    "ngram": {
+      "peak": 1823,
+      "rel_2000": 0.131
+    },
+    "measured": {
+      "lch": [
+        64.8,
+        34.5,
+        159.0
+      ],
+      "contrast_white": 2.71,
+      "nearest": [
+        [
+          "light green (ISCC-NBS 136)",
+          2.6
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"Verdigris\", pp. 398-399",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"Burnt verdigris\" (p. 79), \"Crystallised verdigris\" (p. 148), \"Grenoble verdigris\" (p. 190)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, Greens, no. 50 (\"Verdigris Green\")",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, introduction and notes on the swatches",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, Greens no. 46 (\"Celandine Green\") and Blues no. 32 (\"Verditter Blue\")",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Verdigris\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 13",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 19",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Finlay, Color, ch. 16",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Finlay, Color, ch. 16 (\"The lost greens\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Jarman, Chroma, p. 41",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Pastoureau, Le petit livre des couleurs, \"Vert\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json; Werner 1821 no. 50; Ridgway 1912 plate XIX; ISCC-NBS 1955 block 136), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "data",
+      "cite": "ColorHub archive of 23,781 paintings (tools/article_field.py), as photographed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "data",
+      "cite": "Google Books Ngram, \"verdigris\" (all senses), via ColorHub data/graph",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the pigment name verdigris cover?",
+      "choices": [
+        "Copper corrosion products and compounds made from copper, some blue and some green",
+        "Only a green made from malachite",
+        "A green earth dug from the ground",
+        "A plant dye from iris juice"
+      ],
+      "answer": "Copper corrosion products and compounds made from copper, some blue and some green",
+      "kind": "pick"
+    },
+    {
+      "q": "Ball reports that modern tests show verdigris and white lead cannot be mixed without damage.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "In Syme's recipes, verdigris green is a component of which named color?",
+      "choices": [
+        "Verditter blue",
+        "Vermilion red",
+        "Gamboge yellow"
+      ],
+      "answer": "Verditter blue",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Verdigris could be blue as easily as green: three of the five basic acetate formulas the Compendium lists are blue.",
+    "Look for brown trees in late-fifteenth-century pictures: the culprit is often copper resinate, not verdigris itself.",
+    "Persian painters called verdigris zangar and, by Finlay's account, mixed it with saffron."
+  ],
+  "words": 1186,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Reworded phrasing shared with Baty"
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"Verdigris\", pp. 398-399",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"Burnt verdigris\" (p. 79), \"Crystallised verdigris\" (p. 148), \"Grenoble verdigris\" (p. 190)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, Greens, no. 50 (\"Verdigris Green\")",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, introduction and notes on the swatches",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, Greens no. 46 (\"Celandine Green\") and Blues no. 32 (\"Verditter Blue\")",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Verdigris\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 13",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 19",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Finlay, Color, ch. 16",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Finlay, Color, ch. 16 (\"The lost greens\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Jarman, Chroma, p. 41",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Pastoureau, Le petit livre des couleurs, \"Vert\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json; Werner 1821 no. 50; Ridgway 1912 plate XIX; ISCC-NBS 1955 block 136), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "data",
-   "cite": "ColorHub archive of 23,781 paintings (tools/article_field.py), as photographed",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "data",
-   "cite": "Google Books Ngram, \"verdigris\" (all senses), via ColorHub data/graph",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the pigment name verdigris cover?",
-   "choices": [
-    "Copper corrosion products and compounds made from copper, some blue and some green",
-    "Only a green made from malachite",
-    "A green earth dug from the ground",
-    "A plant dye from iris juice"
-   ],
-   "answer": "Copper corrosion products and compounds made from copper, some blue and some green",
-   "kind": "pick"
-  },
-  {
-   "q": "Ball reports that modern tests show verdigris and white lead cannot be mixed without damage.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "In Syme's recipes, verdigris green is a component of which named color?",
-   "choices": [
-    "Verditter blue",
-    "Vermilion red",
-    "Gamboge yellow"
-   ],
-   "answer": "Verditter blue",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Verdigris could be blue as easily as green: three of the five basic acetate formulas the Compendium lists are blue.",
-  "Look for brown trees in late-fifteenth-century pictures: the culprit is often copper resinate, not verdigris itself.",
-  "Persian painters called verdigris zangar and, by Finlay's account, mixed it with saffron."
- ],
- "words": 1186,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Reworded phrasing shared with Baty"
-  ]
- }
 }

@@ -1,0 +1,126 @@
+{
+ "slug": "dusty-aubergine",
+ "name": "Dusty aubergine",
+ "hex": "#3A243B",
+ "names": [
+  "Dusty aubergine"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty aubergine is a very dark, muted purple, ColorHub's English name for the Japanese traditional color Kokimurasaki, literally \"deep purple,\" with no vegetable in its original name at all.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A deep purple, not a vegetable",
+   "body": "Kokimurasaki (深紫) is named in the Wikipedia list of Japan's traditional colors simply for being a deep purple, *murasaki*, rather than for the aubergine (eggplant) the English rendering here suggests [1]. The page gives no further history for the name beyond that literal meaning, and it is undocumented in the sources consulted here [1].\n\nIts nearest named neighbor on file is [[romanesque]], 2.8 units off, close enough on screen to read as the same color [2]; [[dark-purple]] sits 3.6 off [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within six units of this swatch in 52 of 23,781 paintings, 0.22 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 34 [3]. That makes it rarer than 55 percent of the named colors in our library [3]. It peaks in the 1500s, present in 0.4 percent of our 2,231 paintings from that century, 1.9 times the museums' baseline rate [3]. Inside a painting it most often sits as a hidden color, in 41 percent of its 34 appearances by lightness rank [3].\n\nThe earliest match, by Ambrogio Lorenzetti, dates to 1342, a floor and not a first, since the archive's early centuries are thin [3]. These are computed color matches to photographed, varnished paintings, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Kokimurasaki, \"deep purple\"",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, Traditional colors of Japan"
+  },
+  "aka": [
+   "Kokimurasaki"
+  ],
+  "siblings": [
+   "romanesque",
+   "dark-purple",
+   "dante",
+   "windsor"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kokimurasaki (深紫)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 52,
+  "n_within_painting": 34,
+  "pct_archive": 0.22,
+  "rank_pct": 55,
+  "measured": {
+   "lch": [
+    18,
+    18,
+    325
+   ],
+   "nearest": [
+    [
+     "Romanesque",
+     2.8
+    ],
+    [
+     "Dark Purple",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional list, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Kokimurasaki literally mean?",
+   "choices": [
+    "Deep purple",
+    "Eggplant skin",
+    "Evening shadow"
+   ],
+   "answer": "Deep purple",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Japanese name for this color refers to a vegetable.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The English name says aubergine; the Japanese name just says deep purple."
+ ],
+ "words": 239,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

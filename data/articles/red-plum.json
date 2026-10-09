@@ -1,0 +1,132 @@
+{
+  "slug": "red-plum",
+  "name": "Red plum",
+  "hex": "#DB5A6B",
+  "names": [
+    "Red plum"
+  ],
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Red plum is a bright, warm pink-red named for the fruit, with only a thin Japanese-sourced record in our library and an identical twin under a second name.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A fruit color with little paper trail",
+      "body": "ColorHub's library carries Red plum through a Japanese source with no recorded date and no plate or block number, so when the name was coined and by whom are both undocumented here [1]. The hex value #DB5A6B is a screen approximation; no pigment or dye is named in our sources [1]. The identical color point also carries the library name [[red-plum|Dusty Cerise]], a second catalog entry for the same swatch [2].\n\nPast that exact duplicate, the nearest distinct neighbor is [[mayflower|Mayflower]], 3.0 units away and slightly more orange; [[carmine-red|Carmine Red]] sits 4.0 units off, and [[paradise-pink|Paradise Pink]] is 4.4 units away, both brighter [2]. In LCH terms Red plum measures lightness 56, chroma 55, hue 18 degrees[2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds Red plum in only 7 of 23,781 paintings, 0.03 percent, as photographed, rarer than 77 percent of the archive's named colors [3]. Where it appears, it plays an accent in every instance rather than a shadow or a mid-tone [3]. The archive is too thin here to name a leading painter, century or country with confidence [3]. As a bright, saturated red, it is also one of the colors most sensitive to a canvas's varnish and lighting, so each match is read with that caveat [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the plum fruit",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub color library, Japanese-sourced entry (no date given)"
+    },
+    "aka": [],
+    "siblings": [
+      "mayflower",
+      "carmine-red",
+      "paradise-pink",
+      "cinnamon-satin"
+    ],
+    "parent": null,
+    "children": null,
+    "disambiguation": [
+      {
+        "slug": "red-plum",
+        "gloss": "the identical color point under a different, library-only name"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 7,
+    "measured": {
+      "lch": [
+        56,
+        55,
+        18
+      ],
+      "nearest": [
+        [
+          "Mayflower",
+          3.0
+        ],
+        [
+          "Carmine Red",
+          4.0
+        ],
+        [
+          "Paradise Pink",
+          4.4
+        ],
+        [
+          "Pinkish",
+          4.9
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Japanese-sourced entry, no date recorded",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: computed LCH and look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which library name shares Red plum's exact color point under a different name?",
+      "choices": [
+        "Dusty Cerise",
+        "Carmine Red",
+        "Mayflower",
+        "Paradise Pink"
+      ],
+      "answer": "Dusty Cerise",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our books give a clear coinage date for the name Red plum.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Red plum shares its exact color point with a second library name, Dusty Cerise."
+  ],
+  "words": 231,
+  "status": "draft",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
+    ]
+  }
+}

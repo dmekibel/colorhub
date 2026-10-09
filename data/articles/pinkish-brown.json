@@ -1,0 +1,124 @@
+{
+  "slug": "pinkish-brown",
+  "name": "Pinkish Brown",
+  "hex": "#B17261",
+  "names": [
+    "Pinkish Brown"
+  ],
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Pinkish Brown names a warm, reddish [[brown]] by plain modifier grammar, and the same pairing of words turns up in older writing describing faded dyes and disliked cats, long before the 2010 survey fixed it to one hex.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier with older echoes",
+      "body": "The name follows the modifier pattern \"pinkish\" plus the parent hue [[brown]], and our library's only dated record for this exact swatch is the 2010 xkcd color survey [1]. The phrase itself is older in English: one account of dye history describes brazilwood, a tropical hardwood dye, fading to \"a dowdy pinkish brown\" [2], and a study of color superstition notes that cats of this shade were once disliked in Japan [3]. Neither passage names this precise hue, so the swatch's own coining stays undocumented [1].\n\nThe nearest named colors by measured distance are [[cacao-brown]] and [[etruscan-red]], both almost the same shade [4]. [[blast-off-bronze]] is duller; [[clay-pink]] and [[clay-pink]] read almost the same, and [[copper-penny]] runs redder [4]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings finds a match for this reddish brown in 372 of them, about 1.56 percent, more common than 66 percent of the named colors we track, as photographed [5]. It peaks in the 1400s, at 1.5 times the expected rate (11 of 945 paintings from then), and inside a painting it plays an accent in 70 percent of cases, ranked by lightness rather than raw area [5]. Gilbert Stuart is its most devoted painter here, using it in 7 of 50 works, 6.8 times the baseline for the museums those works come from [5]. It is most over-represented in Indian paintings, at 2.2 times the expected rate [5]. The earliest match is dated 1230; the archive's early centuries are thin, so that date is a floor, not a first [5]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a modifier (\"pinkish\") applied to the parent hue Brown; the exact swatch's coining is undocumented",
+      "first_recorded": "2010, xkcd color survey, for this exact swatch",
+      "source": "xkcd (2010)"
+    },
+    "aka": [],
+    "siblings": [
+      "cacao-brown",
+      "etruscan-red",
+      "clay-pink"
+    ],
+    "parent": "brown",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 372,
+    "rank_pct": 66,
+    "peak_century": {
+      "key": 1400,
+      "lift": 1.5
+    },
+    "role": "accent, 70% of 154 dated matches",
+    "top_painter": "Gilbert Stuart",
+    "top_country": {
+      "key": "India",
+      "lift": 2.2
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: xkcd 2010 color survey entry",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 7 (\"A Perfect Red\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, ch. 3 (\"The Amulet Wearers\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub graph: look-alike edges (data/graph/edges-p.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, century lift, role, painter and country lift, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What was described fading to \"a dowdy pinkish brown\" in one color history?",
+      "choices": [
+        "Brazilwood dye",
+        "Indigo",
+        "Madder lake",
+        "Prussian blue"
+      ],
+      "answer": "Brazilwood dye",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the 2010 xkcd survey is the first time the phrase \"pinkish brown\" appeared in English.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Brazilwood dye, prized for centuries, was known to fade to \"a dowdy pinkish brown\"."
+  ],
+  "words": 291,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
+  }
+}

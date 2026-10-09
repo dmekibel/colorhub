@@ -1,122 +1,122 @@
 {
- "slug": "celery",
- "name": "Celery",
- "hex": "#C1FD95",
- "names": [
-  "Celery"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Celery is a pale, yellow-green named for the vegetable's pale inner stalks rather than its greener outer ribs.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The pale stalk, not the whole plant",
-   "body": "The name comes from the vegetable [[celery]], whose outer stalks run a deeper green while the blanched inner heart stays close to this pale, lime-tinted shade [1]. Our library finds this exact cluster recorded only by the 2010 xkcd color survey, with no CSS, Wikipedia, or dictionary entry of the same name [1].\n\nThe nearest named colors on file are [[light-pea-green]], [[light-light-green]] and [[light-pastel-green]], at 3, 4.2 and 4.2 ΔE [1]. Siblings in the same yellow-green range are [[chartreuse]], [[lime]], and [[mint]] [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive of 23,781 paintings, as photographed, has no painting where this pale yellow-green covers five percent or more of the canvas [2]. The combination of near-white lightness and strong chroma this color needs is rare in aged oil paint, where pale greens tend to have drifted toward grey over centuries of varnish [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the pale inner stalk of the celery plant",
-   "first_recorded": "2010, xkcd color survey",
-   "source": "xkcd (Munroe 2010)"
-  },
-  "aka": [],
-  "siblings": [
-   "light-pea-green",
-   "light-light-green",
-   "light-pastel-green",
-   "light-lime"
+  "slug": "celery",
+  "name": "Celery",
+  "hex": "#C1FD95",
+  "names": [
+    "Celery"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    93,
-    57,
-    130
-   ],
-   "nearest": [
-    [
-     "Light Pea Green",
-     3.0
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Celery is a pale, yellow-green named for the vegetable's pale inner stalks rather than its greener outer ribs.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The pale stalk, not the whole plant",
+      "body": "The name comes from the vegetable [[celery]], whose outer stalks run a deeper green while the blanched inner heart stays close to this pale, lime-tinted shade [1]. Our library finds this exact cluster recorded only by the 2010 xkcd color survey, with no CSS, Wikipedia, or dictionary entry of the same name [1].\n\nThe nearest named colors on file are [[light-pea-green]], [[very-light-green]] and [[celery]], at 3, 4.2 and 4.2 ΔE [1]. Siblings in the same yellow-green range are [[chartreuse]], [[lime]], and [[mint]] [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings, as photographed, has no painting where this pale yellow-green covers five percent or more of the canvas [2]. The combination of near-white lightness and strong chroma this color needs is rare in aged oil paint, where pale greens tend to have drifted toward grey over centuries of varnish [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the pale inner stalk of the celery plant",
+      "first_recorded": "2010, xkcd color survey",
+      "source": "xkcd (Munroe 2010)"
+    },
+    "aka": [],
+    "siblings": [
+      "light-pea-green",
+      "very-light-green",
+      "celery",
+      "light-lime"
     ],
-    [
-     "Light Light Green",
-     4.2
-    ],
-    [
-     "Light Pastel Green",
-     4.2
-    ],
-    [
-     "Light Lime",
-     5.2
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        93,
+        57,
+        130
+      ],
+      "nearest": [
+        [
+          "Light Pea Green",
+          3.0
+        ],
+        [
+          "Light Light Green",
+          4.2
+        ],
+        [
+          "Light Pastel Green",
+          4.2
+        ],
+        [
+          "Light Lime",
+          5.2
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: xkcd 2010 color survey entry, naming source \"celery\"",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What part of the celery plant is this color closest to?",
+      "choices": [
+        "The pale, blanched inner stalk",
+        "The dark green leaves",
+        "The seeds",
+        "The root"
+      ],
+      "answer": "The pale, blanched inner stalk",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Celery has an entry in the CSS or X11 color keyword lists.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Celery is named for the vegetable's pale inner heart, not its deeper green outer stalks."
+  ],
+  "words": 156,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "No private fact-card file for this slug.",
+      "Not in data/library.json as a dictionary or CSS entry; only the xkcd survey cluster is confirmed.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: xkcd 2010 color survey entry, naming source \"celery\"",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What part of the celery plant is this color closest to?",
-   "choices": [
-    "The pale, blanched inner stalk",
-    "The dark green leaves",
-    "The seeds",
-    "The root"
-   ],
-   "answer": "The pale, blanched inner stalk",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Celery has an entry in the CSS or X11 color keyword lists.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Celery is named for the vegetable's pale inner heart, not its deeper green outer stalks."
- ],
- "words": 158,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-08",
-  "issues": [
-   "No private fact-card file for this slug.",
-   "Not in data/library.json as a dictionary or CSS entry; only the xkcd survey cluster is confirmed.",
-   "lint 2026-10-09"
-  ]
- }
 }

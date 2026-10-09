@@ -32,7 +32,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "This is a color painters seem to avoid, or varnish hides. In our archive of 23,781 museum paintings, no painting has a color within four units of this swatch covering at least one per cent of the canvas [9]. At this lightness a match would be near black, so what the archive shows is the limit of a photograph of a varnished painting, not proof that artists never used it [9]. Its closest named neighbors are [[dark-plum]] (2.9 units away), [[deep-violet]] (4.9), [[deep-purple]] (5.4) and [[midnight-purple]] (6.9) [2].\n\nThe word is a modern one in print. In Google Books the color sense is almost absent until the early twentieth century, rises fastest from the 2000s and peaks in 2010, the last decade measured [10]. The vegetable and the color share the word, so the curve is only a guide [10]."
+   "body": "This is a color painters seem to avoid, or varnish hides. In our archive of 23,781 museum paintings, no painting has a color within four units of this swatch covering at least one per cent of the canvas [9]. At this lightness a match would be near black, so what the archive shows is the limit of a photograph of a varnished painting, not proof that artists never used it [9]. Its closest named neighbors are [[dark-plum]] (2.9 units away), [[petunia]] (4.9), [[midnight-purple]] (5.4) and [[midnight-purple]] (6.9) [2].\n\nThe word is a modern one in print. In Google Books the color sense is almost absent until the early twentieth century, rises fastest from the 2000s and peaks in 2010, the last decade measured [10]. The vegetable and the color share the word, so the curve is only a guide [10]."
   }
  ],
  "aside": {
@@ -220,7 +220,7 @@
   "The eggplant is a nightshade, a cousin of the potato and of a plant once used for a green dye.",
   "In our archive of 23,781 paintings, none holds this color at one per cent of the canvas."
  ],
- "words": 496,
+ "words": 495,
  "status": "checked",
  "checked": {
   "by": "checker",

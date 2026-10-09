@@ -1,0 +1,45 @@
+{
+ "id": "tonalism",
+ "name": "Tonalism",
+ "lineage": {
+  "influenced_by": [
+   "Dutch Golden Age landscape painting",
+   "James McNeill Whistler's nocturnes"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 1880–1915"
+ ],
+ "places": [
+  "United States"
+ ],
+ "garments": [
+  "not a fashion look — an American landscape-painting style"
+ ],
+ "media": [
+  {
+   "title": "James McNeill Whistler's Nocturne series (1870s)",
+   "note": "a key forerunner"
+  }
+ ],
+ "figures": [
+  "George Inness",
+  "James McNeill Whistler"
+ ],
+ "reacts_against": "detailed, literal landscape realism, favoring soft, veiled, single-toned atmosphere (often blue-grey or brown twilight) over clear description.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 53% of the measured color across 6 Commons photos is below mid-lightness",
+   "mostly muted — about 73% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

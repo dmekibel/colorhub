@@ -1,0 +1,115 @@
+{
+ "slug": "dirty-blue",
+ "name": "Dirty Blue",
+ "hex": "#3F829D",
+ "names": [
+  "Dirty Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dirty Blue is a muted, greenish-grey reading of [[blue]], settled on by the crowd-sourced 2010 xkcd color survey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plain modifier for a muddied hue",
+   "body": "The name follows a plain modifier grammar, *dirty* plus [[blue]], meaning duller and greyer than the plain color; it comes from the xkcd online color survey of 2010 rather than any historical dictionary or plate [1]. Our library also records the exact same hex under the separate name Harbor Blue, a duplicate entry from another source [1].\n\nIts closest look-alike on file is [[chessylite-blue]], about 2.8 units off, with [[beaucaire]] and [[faience]] a little further out [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This match appears in 0.36% of the 23,781 paintings in our archive (85 paintings, as photographed); the within-painting lens narrows that to 38 [3]. In our archive it is rarer than 54% of the named colors [3]. It peaks in the 1900s, present in 0.8% of the 1,674 paintings we have from that decade (13 paintings), 3.8 times the rate its museums would predict [3]. Inside a painting it most often plays an accent across its 38 appearances by lightness rank within the painting [3]. Its most devoted painter is Claude Monet, present in 5 of 50 works here, 8.3x the baseline of the museums those works come from (as photographed 6.0x) [3]. It is most over-represented in France, 2.8x expected (18 of 3,443 paintings) [3]. The earliest match dates to 1500, 510 years before the name's 2010 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a muddied, duller reading of blue",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "Harbor Blue (duplicate entry, same hex)"
+  ],
+  "siblings": [
+   "chessylite-blue",
+   "beaucaire",
+   "faience"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 85,
+  "pct_archive": 0.36,
+  "n_within_painting": 38,
+  "pct_within_painting": 0.16,
+  "rank_pct": 46,
+  "painters": [
+   "Claude Monet"
+  ],
+  "countries": [
+   "France"
+  ],
+  "name_first_recorded": 2010,
+  "earliest_match_year": 1500
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "xkcd color survey (2010); ColorHub color library duplicate-name record (Harbor Blue)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,700 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Dirty Blue come from?",
+   "choices": [
+    "The crowd-sourced 2010 xkcd color survey",
+    "Ridgway's 1912 plates",
+    "The ISCC-NBS 1955 system",
+    "Maerz and Paul's 1930 dictionary"
+   ],
+   "answer": "The crowd-sourced 2010 xkcd color survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dirty Blue's exact hex is also recorded under a separate name, Harbor Blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dirty Blue shows up more in Claude Monet's paintings than the archive's overall rate would predict."
+ ],
+ "words": 283,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field section used the within-painting-lens count/percent but labeled it 'as photographed' and used a stale archive total; replaced with the correct as-photographed count/percent (23,781-painting archive) and refreshed the decade, role, painter, country and first-seen facts from data/graph/fieldnotes"
+  ]
+ }
+}

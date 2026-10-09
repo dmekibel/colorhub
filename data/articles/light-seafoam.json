@@ -1,117 +1,117 @@
 {
- "slug": "light-seafoam",
- "name": "Light Seafoam",
- "hex": "#A0FEBF",
- "names": [
-  "Light Seafoam"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Light Seafoam is a bright, very pale green recorded only in the 2010 xkcd color survey, and its own library entry marks it as close kin to Light Mint.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A light build of seafoam",
-   "body": "The nearest named colors on file are [[light-mint]], [[seafoam]], [[light-aquamarine]] and [[hospital-green]], at 3.4, 3.8, 4.9 and 5.4 ΔE [1]. The ISCC-NBS system classes the hue as very light yellowish green, about 6 units from that block's center, the widest gap of this group [1]. Its Munsell notation is 2.9G 9.2/8.7 and its LCH values are lightness 93, chroma 46, hue 152 degrees, among the lightest, brightest greens in our library [1]. In sRGB its components run 160 red, 254 green and 191 blue, with green at nearly full strength and blue well ahead of red, which gives the swatch its cool, aerated look [1].\n\nSee [[seafoam]] for the base sea-foam color this name lightens, and [[light-mint]] for its closest library neighbor. Further out still, [[light-greenish-blue]] sits 5.6 ΔE away, more vivid and darker [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive has a color within CIEDE2000 4 of Light Seafoam covering even 1% of its canvas, as photographed [2]. That describes this archive, not painting as a whole [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the base color seafoam, lightened",
-   "first_recorded": "xkcd survey, 2010",
-   "source": "ColorHub Color Graph"
-  },
-  "aka": [],
-  "siblings": [
-   "light-mint",
-   "seafoam",
-   "light-aquamarine",
-   "hospital-green"
+  "slug": "light-seafoam",
+  "name": "Light Seafoam",
+  "hex": "#A0FEBF",
+  "names": [
+    "Light Seafoam"
   ],
-  "parent": "seafoam",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "match": {
-   "hex": "#A0FEBF",
-   "de_max": 4,
-   "min_cover": 0.01
-  },
-  "nearest": [
-   [
-    "Mint",
-    6.4
-   ]
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Light Seafoam is a bright, very pale green recorded only in the 2010 xkcd color survey, and its own library entry marks it as close kin to Light Mint.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A light build of seafoam",
+      "body": "The nearest named colors on file are [[very-light-green]], [[seafoam]], [[aquamarine]] and [[hospital-green]], at 3.4, 3.8, 4.9 and 5.4 ΔE [1]. The ISCC-NBS system classes the hue as very light yellowish green, about 6 units from that block's center, the widest gap of this group [1]. Its Munsell notation is 2.9G 9.2/8.7 and its LCH values are lightness 93, chroma 46, hue 152 degrees, among the lightest, brightest greens in our library [1]. In sRGB its components run 160 red, 254 green and 191 blue, with green at nearly full strength and blue well ahead of red, which gives the swatch its cool, aerated look [1].\n\nSee [[seafoam]] for the base sea-foam color this name lightens, and [[very-light-green]] for its closest library neighbor. Further out still, [[greenish-cyan]] sits 5.6 ΔE away, more vivid and darker [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive has a color within CIEDE2000 4 of Light Seafoam covering even 1% of its canvas, as photographed [2]. That describes this archive, not painting as a whole [2]."
+    }
   ],
-  "measured": {
-   "nearest": [
-    [
-     "Light Mint",
-     3.4
+  "aside": {
+    "origin": {
+      "named_after": "the base color seafoam, lightened",
+      "first_recorded": "xkcd survey, 2010",
+      "source": "ColorHub Color Graph"
+    },
+    "aka": [],
+    "siblings": [
+      "very-light-green",
+      "seafoam",
+      "aquamarine",
+      "hospital-green"
     ],
-    [
-     "Seafoam",
-     3.8
+    "parent": "seafoam",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "match": {
+      "hex": "#A0FEBF",
+      "de_max": 4,
+      "min_cover": 0.01
+    },
+    "nearest": [
+      [
+        "Mint",
+        6.4
+      ]
+    ],
+    "measured": {
+      "nearest": [
+        [
+          "Light Mint",
+          3.4
+        ],
+        [
+          "Seafoam",
+          3.8
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub Color Graph: node record (hex, LCH, Munsell, ISCC-NBS block, recorded sources)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive field notes (data/graph/fieldnotes), 23,781 paintings, CIEDE2000 <= 4, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which single survey records the name Light Seafoam in our sources?",
+      "choices": [
+        "The xkcd color survey (2010)",
+        "ISCC-NBS (1955)",
+        "Ridgway (1912)"
+      ],
+      "answer": "The xkcd color survey (2010)",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Light Seafoam's library entry marks it as near Light Mint.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Light Seafoam's own library entry flags it as a near neighbor of Light Mint."
+  ],
+  "words": 207,
+  "status": "checked",
+  "checked": {
+    "by": "batch writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub Color Graph: node record (hex, LCH, Munsell, ISCC-NBS block, recorded sources)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive field notes (data/graph/fieldnotes), 23,781 paintings, CIEDE2000 <= 4, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which single survey records the name Light Seafoam in our sources?",
-   "choices": [
-    "The xkcd color survey (2010)",
-    "ISCC-NBS (1955)",
-    "Ridgway (1912)"
-   ],
-   "answer": "The xkcd color survey (2010)",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Light Seafoam's library entry marks it as near Light Mint.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Light Seafoam's own library entry flags it as a near neighbor of Light Mint."
- ],
- "words": 207,
- "status": "checked",
- "checked": {
-  "by": "batch writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

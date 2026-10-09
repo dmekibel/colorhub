@@ -1,113 +1,115 @@
 {
- "slug": "cyan-blue",
- "name": "Cyan blue",
- "hex": "#57B0CA",
- "names": [
-  "Cyan blue"
- ],
- "tier": "pigment",
- "depth": "brief",
- "lede": "Cyan blue was once a name for a cornflower dye recommended by Robert Boyle, not the printer's cyan of today.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Boyle's cornflower blue",
-   "body": "The Pigment Compendium records that in the seventeenth century Boyle recommended a blue dye prepared from cornflower petals, *Centaurea cyanus* [1]. Some eighteenth-century watercolor books gave the color as cornflower blue, Boyle's blue or cyan blue [1]. The color was criticized in 1738, and there is no evidence it was ever sold commercially [1].\n\nThe name comes from the Greek for blue, kept in words like *cyano-* [2]. Today's cyan is counted among the spectral hues, the bands seen in a rainbow or through a prism [3]. See [[cyan]], [[cerulean]] and [[light-blue]]. The Compendium also files the name as a synonym of cornflower blue, so it is a pigment-literature name, not a modern screen color [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "The swatch is rare in museum paint. It appears in 0.06% of the 23,781 paintings in our archive (14 paintings, as photographed) [4]. It peaks in the 1800s, at 1.6 times the expected rate [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Greek kyanos, blue (via the cornflower, Centaurea cyanus)",
-   "first_recorded": "17th century (Boyle, 1664)",
-   "source": "Pigment Compendium, \"cyan blue\", p. 145"
-  },
-  "aka": [
-   "Boyle's blue",
-   "cornflower blue (dye)"
+  "slug": "cyan-blue",
+  "name": "Cyan blue",
+  "hex": "#57B0CA",
+  "names": [
+    "Cyan blue",
+    "Cendre Blue"
   ],
-  "siblings": [
-   "cyan",
-   "cerulean"
+  "tier": "pigment",
+  "depth": "brief",
+  "lede": "Cyan blue was once a name for a cornflower dye recommended by Robert Boyle, not the printer's cyan of today.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Boyle's cornflower blue",
+      "body": "The Pigment Compendium records that in the seventeenth century Boyle recommended a blue dye prepared from cornflower petals, *Centaurea cyanus* [1]. Some eighteenth-century watercolor books gave the color as cornflower blue, Boyle's blue or cyan blue [1]. The color was criticized in 1738, and there is no evidence it was ever sold commercially [1].\n\nThe name comes from the Greek for blue, kept in words like *cyano-* [2]. Today's cyan is counted among the spectral hues, the bands seen in a rainbow or through a prism [3]. See [[aqua]], [[cerulean]] and [[light-blue]]. The Compendium also files the name as a synonym of cornflower blue, so it is a pigment-literature name, not a modern screen color [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "The swatch is rare in museum paint. It appears in 0.06% of the 23,781 paintings in our archive (14 paintings, as photographed) [4]. It peaks in the 1800s, at 1.6 times the expected rate [4]."
+    }
   ],
-  "parent": "blue",
-  "children": [
-   "light-blue"
+  "aside": {
+    "origin": {
+      "named_after": "Greek kyanos, blue (via the cornflower, Centaurea cyanus)",
+      "first_recorded": "17th century (Boyle, 1664)",
+      "source": "Pigment Compendium, \"cyan blue\", p. 145"
+    },
+    "aka": [
+      "Boyle's blue",
+      "cornflower blue (dye)",
+      "Cendre Blue (ridgway+iscc-nbs+maerz-paul)"
+    ],
+    "siblings": [
+      "aqua",
+      "cerulean"
+    ],
+    "parent": "blue",
+    "children": [
+      "light-blue"
+    ],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 14,
+    "peak_decade": "1800s",
+    "baseline_lift": 1.6
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"cyan blue\" and \"cornflower\", pp. 145, 150",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"cyano-\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Westland, Principles, \"Spectral Hues\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 14,
-  "peak_decade": "1800s",
-  "baseline_lift": 1.6
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"cyan blue\" and \"cornflower\", pp. 145, 150",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"cyano-\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Westland, Principles, \"Spectral Hues\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
-   "loc_kind": null,
-   "url": null
+  "questions": [
+    {
+      "q": "Which flower gave the dye called cyan blue?",
+      "choices": [
+        "Cornflower",
+        "Indigo plant",
+        "Violet"
+      ],
+      "answer": "Cornflower",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Boyle's cornflower dye was sold commercially.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Cyan blue once meant a cornflower dye that no one ever sold."
+  ],
+  "words": 167,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Westland lists cyan among spectral hues but not 'between green and blue'; reworded"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "Which flower gave the dye called cyan blue?",
-   "choices": [
-    "Cornflower",
-    "Indigo plant",
-    "Violet"
-   ],
-   "answer": "Cornflower",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Boyle's cornflower dye was sold commercially.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Cyan blue once meant a cornflower dye that no one ever sold."
- ],
- "words": 167,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Westland lists cyan among spectral hues but not 'between green and blue'; reworded"
-  ]
- }
 }

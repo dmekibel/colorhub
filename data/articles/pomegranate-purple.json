@@ -1,0 +1,119 @@
+{
+ "slug": "pomegranate-purple",
+ "name": "Pomegranate Purple",
+ "hex": "#AD4254",
+ "names": [
+  "Pomegranate Purple"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pomegranate Purple is a deep, muted reddish purple named for the fruit's seeds and rind, dated by the Maerz and Paul dictionary to 1886.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The fruit, not quite the color we expect",
+   "body": "Maerz and Paul's 1930 dictionary dates \"Pomegranate Purple\" to 1886 and plots it on plate 4 I 6 [1]. The name points to the fruit, but the swatch leans more toward a dusty wine red than toward the violet most people picture when they hear \"purple\" [1]. Its Munsell notation is 2.1R 4.3/9.9, a notation that sits in the red hue band despite the name [1].\n\nThe closest of our common colors is [[english-red]], 3.2 units away [1]. The books we hold do not say which part of the fruit, the rind or the juice-stained seeds, the namer had in mind [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, this color appears in only 24, about 0.1 percent, rarer than 66 percent of our named colors [2]. It peaks in the 1600s, in 5 of 6,394 paintings, and inside a painting it most often plays an accent, in 92 percent of its matched paintings, rather than a light or a shadow [2].\n\nThe earliest match is a 1508 panel by [[painter:juan-de-flandes|Juan de Flandes]], about three and a half centuries before the 1886 name, so that early hit is a look-alike hue in an aged photograph, not proof of the dye or pigment, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the pomegranate fruit",
+   "first_recorded": "Maerz & Paul, 1930 (dated 1886)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "english-red",
+   "reddish-crimson",
+   "popstar",
+   "purple-madder"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 24,
+  "pct_present": 0.1,
+  "rarer_than_pct": 66,
+  "role": "accent, 92% of 12 matched paintings",
+  "measured": {
+   "lch": [
+    43.4,
+    46.9,
+    15.5
+   ],
+   "nearest": [
+    [
+     "English Red",
+     3.2
+    ],
+    [
+     "Reddish crimson",
+     5.2
+    ]
+   ]
+  },
+  "first_record": {
+   "year": 1886,
+   "source": "maerz-paul"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, first recorded 1886, plate 4 I 6",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Pomegranate Purple (n=24)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Pomegranate Purple's Munsell hue notation suggest about the color?",
+   "choices": [
+    "It sits in the red hue band, not violet",
+    "It is a pure violet",
+    "It has no hue at all",
+    "It is a yellow-green"
+   ],
+   "answer": "It sits in the red hue band, not violet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside a painting, this color most often plays a shadow.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Despite its name, Pomegranate Purple's own Munsell notation sits in the red hue band, not violet."
+ ],
+ "words": 242,
+ "status": "draft",
+ "checked": {
+  "by": "",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

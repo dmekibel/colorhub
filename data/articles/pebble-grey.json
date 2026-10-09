@@ -1,0 +1,133 @@
+{
+ "slug": "pebble-grey",
+ "name": "Pebble grey",
+ "hex": "#858078",
+ "names": [
+  "Pebble grey",
+  "Quaker Drab"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Pebble grey is a warm, light brownish grey also recorded as Quaker Drab, which Maerz and Paul traced back to 1802, among the oldest names in this corner of the library, and one that four different color systems have each tried to pin down since.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Four systems, one grey",
+   "body": "Under the name Quaker Drab, Maerz and Paul's 1930 dictionary gives plate 46 B2 and dates the name to 1802 [1]. Ridgway's 1912 *Color Standards and Color Nomenclature* lists a near match at plate LI, hue 1''''', read from a scan of an aged printed plate, so it is approximate [1]. The National Bureau of Standards folded both into ISCC-NBS block 265 in 1955, calling it a medium gray, and the industrial RAL system later assigned it an approximate equivalent, RAL 7048 [1].\n\nIts exact hex, #858078, is one of the handful of cases in our library where two names, from two different eras — the historical Quaker Drab and the more modern Pebble Grey — land on precisely the same swatch [1]. A paler sibling, [[pale-quaker-drab|Pale Quaker Drab]] (#9E9A95), follows the same \"Quaker\" adjective toward a lighter grey, while [[quaker-blue|Quaker Blue]] carries the word into a much darker, bluer near-black [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of it covers at least 5 percent of the canvas in 1,292 of our 23,781 archive paintings, as photographed, more common than 86 percent of our named colors [2]. It most often plays a light tone, 36 percent of the 658 paintings where our within-painting lens finds it, and it peaks in paintings from the 1900s, at 1.7 times the expected rate [2]. Shen Zhou is its most devoted painter here, carrying it in 8 of his 12 works, 7.3 times what his era's baseline would predict [2]. The earliest dated painting is from 1200, 712 years before Ridgway's 1912 record, a floor set by thin early coverage rather than a true first sighting [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the plain, undyed look of Quaker dress",
+   "first_recorded": "1802 (Maerz & Paul, 1930), as Quaker Drab",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Quaker Drab"
+  ],
+  "siblings": [
+   "quaker-blue",
+   "middle-grey",
+   "mouse-grey"
+  ],
+  "parent": null,
+  "children": [
+   "pale-quaker-drab"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 658,
+  "n_present_painting_level": 1292,
+  "measured": {
+   "lch": [
+    53.8,
+    5.0,
+    85.6
+   ],
+   "nearest": [
+    [
+     "Middle Grey",
+     2.7
+    ]
+   ]
+  },
+  "painters": [
+   {
+    "name": "Shen Zhou",
+    "hits": 8,
+    "n": 12,
+    "lift": 7.3
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul 1930, plate 46 B2, first recorded 1802; Ridgway 1912, plate LI; ISCC-NBS 1955 block 265; RAL 7048",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is unusual about Pebble grey and its historical name, Quaker Drab?",
+   "choices": [
+    "They share the exact same hex, #858078",
+    "They were coined by the same person",
+    "They are both RAL industrial colors",
+    "Neither appears in our painting archive"
+   ],
+   "answer": "They share the exact same hex, #858078",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pebble grey (Quaker Drab) and Quaker Blue are close in color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter is most associated with this color in our archive?",
+   "choices": [
+    "Shen Zhou",
+    "John Singer Sargent",
+    "Claude Monet",
+    "Alfred Sisley"
+   ],
+   "answer": "Shen Zhou",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pebble grey carries an older name, Quaker Drab, for the exact same hex."
+ ],
+ "words": 310,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); Ridgway hue notation read from the digitized plate scan, so the tone letter is approximate.",
+   "lint 2026-10-09"
+  ]
+ }
+}

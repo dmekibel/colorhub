@@ -1,0 +1,141 @@
+{
+ "slug": "misty-moss",
+ "name": "Misty Moss",
+ "hex": "#BBB477",
+ "names": [
+  "Misty Moss"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Misty Moss is a muted, greyed yellow-green that softens [[moss]] with the atmospheric word \"misty,\" and it turns up in just over three percent of our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A softened moss",
+   "body": "Our library traces Misty Moss only to a Wikipedia color list, with no first-recorded date given [1]. The name pairs the atmospheric modifier \"misty\" with [[moss]], the plant word that anchors the whole family [1]. The ISCC-NBS dictionary of 1955 places it in block 105, \"grayish greenish yellow,\" only 1.2 units from that block's centre [1].\n\nIts nearest named neighbor is [[khaki]], 2.9 units away and more vivid [2]. [[citron-green]] sits 3.6 units out, also more vivid, and [[yellow-stone]] 3.7 units out, lighter [2]. Measured in LCH it reads lightness 73, chroma 33, hue 102 degrees, a dusty, warm-leaning green [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 762 of 23,781 paintings, about 3.2 percent, as photographed; the within-painting lens finds it in 480 [3]. It is more common than 81 percent of the named colors in the archive [3]. It peaks in the 1900s, found in 3.6 percent of the 1,674 paintings from that century (60 paintings), 2.1 times the expected rate [3]. Inside a painting it most often plays a light, 54 percent of its 480 occurrences, measured by lightness rank within the canvas so varnish cannot fake it [3]. Paulus Potter is its most devoted painter, carrying it in 11 of his 28 works here, 9.9 times the baseline rate of the museums those works come from (9.0 times as photographed) [3]. It shares canvases with Pale Goldenrod and Serpentine Green more often than chance, at 13.0 and 7.9 times the expected rate [3]. These are photographs of varnished paintings; a color match is not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "moss, softened by the modifier \"misty\"",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library (a Wikipedia list)"
+  },
+  "aka": [],
+  "siblings": [
+   "khaki",
+   "citron-green",
+   "yellow-stone",
+   "dusty-khaki"
+  ],
+  "parent": "moss",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 762,
+  "rank_pct": 81,
+  "peak_century": [
+   1900,
+   2.1
+  ],
+  "role_top": [
+   "light",
+   54
+  ],
+  "top_painter": [
+   "Paulus Potter",
+   9.9
+  ],
+  "measured": {
+   "lch": [
+    73,
+    33,
+    102
+   ],
+   "nearest_iscc": [
+    "grayish greenish yellow",
+    1.2
+   ],
+   "nearest": [
+    [
+     "Khaki",
+     2.9
+    ],
+    [
+     "Citron Green",
+     3.6
+    ],
+    [
+     "Yellow-Stone",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes-m.json): name source, tier, ISCC-NBS block",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges for misty-moss (data/graph/edges-m.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py, data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What plant word does Misty Moss build on?",
+   "choices": [
+    "Moss",
+    "Fern",
+    "Lichen",
+    "Ivy"
+   ],
+   "answer": "Moss",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Misty Moss is more common in our painting archive than most named colors.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Misty Moss turns up in more than three percent of our 23,781-painting archive, ahead of most named colors."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); facts drawn from the graph, library and archive fieldnotes only.",
+   "Fixed: field section and field.rank_pct said 'more common than 82 percent'; data/graph/fieldnotes/m.json gives rp=81 (and its own generated 'facts' text says 81%). Corrected both to 81."
+  ]
+ },
+ "words": 291
+}

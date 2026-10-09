@@ -1,126 +1,125 @@
 {
- "slug": "vivid-lilac",
- "name": "Vivid lilac",
- "hex": "#C48EFD",
- "names": [
-  "Vivid lilac"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Vivid Lilac is a saturated light purple recorded only in the 2010 xkcd color survey, where our library files the name itself with the older spelling Liliac.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A vivid build on lilac",
-   "body": "The nearest named colors on file are [[baby-purple]], [[bright-lilac]], [[lavender-floral]] and [[floral-lavender]], at 3.9, 5.6, 6.2 and 6.2 ΔE [2]. Our own library entry for this exact swatch spells the name Liliac rather than Lilac, an older or variant spelling carried over from that survey [2]. The ISCC-NBS system classes the hue as brilliant purple, about 6.7 units from that block's center [1]. Its Munsell notation is 3.2P 6.7/14.4 and its LCH values are lightness 68, chroma 63, hue 311 degrees [1]. In sRGB its components run 196 red, 142 green and 253 blue, with blue leading and red a clear second, the pattern of a purple pulled toward pink rather than blue [1]. See [[lilac]] for the paler flower color this name intensifies."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive has a color within CIEDE2000 4 of Vivid Lilac covering even 1% of its canvas, as photographed [3]. That describes this archive, not painting as a whole: a purple this saturated is rare in aged, varnished oil paint [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the base color lilac, intensified by vivid",
-   "first_recorded": "xkcd survey, 2010",
-   "source": "ColorHub Color Graph"
-  },
-  "aka": [
-   "Liliac"
+  "slug": "vivid-lilac",
+  "name": "Vivid lilac",
+  "hex": "#C48EFD",
+  "names": [
+    "Vivid lilac"
   ],
-  "siblings": [
-   "baby-purple",
-   "bright-lilac",
-   "lavender-floral",
-   "floral-lavender"
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Vivid Lilac is a saturated light purple recorded only in the 2010 xkcd color survey, where our library files the name itself with the older spelling Liliac.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A vivid build on lilac",
+      "body": "The nearest named colors on file are [[lavender]], [[bright-lilac]], [[floral-lavender]] and [[floral-lavender]], at 3.9, 5.6, 6.2 and 6.2 ΔE [2]. Our own library entry for this exact swatch spells the name Liliac rather than Lilac, an older or variant spelling carried over from that survey [2]. The ISCC-NBS system classes the hue as brilliant purple, about 6.7 units from that block's center [1]. Its Munsell notation is 3.2P 6.7/14.4 and its LCH values are lightness 68, chroma 63, hue 311 degrees [1]. In sRGB its components run 196 red, 142 green and 253 blue, with blue leading and red a clear second, the pattern of a purple pulled toward pink rather than blue [1]. See [[lilac]] for the paler flower color this name intensifies."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive has a color within CIEDE2000 4 of Vivid Lilac covering even 1% of its canvas, as photographed [3]. That describes this archive, not painting as a whole: a purple this saturated is rare in aged, varnished oil paint [3]."
+    }
   ],
-  "parent": "lilac",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "match": {
-   "hex": "#C48EFD",
-   "de_max": 4,
-   "min_cover": 0.01
-  },
-  "nearest": [
-   [
-    "Lavender",
-    7.5
-   ]
-  ],
-  "measured": {
-   "nearest": [
-    [
-     "Baby Purple",
-     3.9
+  "aside": {
+    "origin": {
+      "named_after": "the base color lilac, intensified by vivid",
+      "first_recorded": "xkcd survey, 2010",
+      "source": "ColorHub Color Graph"
+    },
+    "aka": [
+      "Liliac"
     ],
-    [
-     "Bright Lilac",
-     5.6
+    "siblings": [
+      "lavender",
+      "bright-lilac",
+      "floral-lavender"
+    ],
+    "parent": "lilac",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "match": {
+      "hex": "#C48EFD",
+      "de_max": 4,
+      "min_cover": 0.01
+    },
+    "nearest": [
+      [
+        "Lavender",
+        7.5
+      ]
+    ],
+    "measured": {
+      "nearest": [
+        [
+          "Baby Purple",
+          3.9
+        ],
+        [
+          "Bright Lilac",
+          5.6
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub Color Graph: node record (hex, LCH, Munsell, ISCC-NBS block, recorded sources)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): nearest named match",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive field notes (data/graph/fieldnotes), 23,781 paintings, CIEDE2000 <= 4, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What spelling does our library's own entry use for this exact swatch?",
+      "choices": [
+        "Liliac",
+        "Lylack",
+        "Lilache"
+      ],
+      "answer": "Liliac",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Vivid Lilac's nearest common library name is Lavender.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Our own library spells this swatch Liliac, an older variant of the name Vivid Lilac."
+  ],
+  "words": 202,
+  "status": "checked",
+  "checked": {
+    "by": "batch writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub Color Graph: node record (hex, LCH, Munsell, ISCC-NBS block, recorded sources)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): nearest named match",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive field notes (data/graph/fieldnotes), 23,781 paintings, CIEDE2000 <= 4, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What spelling does our library's own entry use for this exact swatch?",
-   "choices": [
-    "Liliac",
-    "Lylack",
-    "Lilache"
-   ],
-   "answer": "Liliac",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Vivid Lilac's nearest common library name is Lavender.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Our own library spells this swatch Liliac, an older variant of the name Vivid Lilac."
- ],
- "words": 203,
- "status": "checked",
- "checked": {
-  "by": "batch writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

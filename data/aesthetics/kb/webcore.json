@@ -1,0 +1,50 @@
+{
+ "id": "webcore",
+ "name": "Webcore",
+ "lineage": {
+  "influenced_by": [
+   "late-1990s/early-2000s GeoCities and personal-homepage web design"
+  ],
+  "influences": [
+   "glitchcore",
+   "frutiger-aero"
+  ]
+ },
+ "eras": [
+  "lived era late 1990s–early 2000s; aesthetic named/revived c. 2019–present"
+ ],
+ "places": [
+  "GeoCities, Angelfire and other early personal-homepage hosts"
+ ],
+ "garments": [
+  "not primarily a fashion look — a web-design aesthetic, though it has a minor clothing-graphic crossover with y2k"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "the smooth, templated look of modern social media profiles, celebrating early the web's handmade, chaotic, GIF-heavy personal pages instead.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Internetcore, Enacore",
+  "decade_of_origin": "Late 2010s-Early 2020s",
+  "key_motifs": "Nostalgic internet imagery (GeoCities, Windows XP), pixel art, early 3D graphics, browser windows, surrealism, pop-ups, error messages, outdated technology",
+  "key_colours": "Bright primary colors, often with digital distortion or pastel filters",
+  "related_aesthetics": "2010s Meme MaximalismCybercoreDemosceneDreamcoreFrutiger AeroGlitch ArtGlitchcoreOld WebSilicon DreamsTechnoNeko2000VaporwaveWeirdcoreXpiritualismY2K FuturismYabujincore",
+  "key_values": "Nostalgia (anemoia), critique of the modern corporate internet, digital surrealism, creativity"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Webcore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "a vivid streak — roughly 54% of the color measured is highly saturated"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

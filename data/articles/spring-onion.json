@@ -1,114 +1,117 @@
 {
- "slug": "spring-onion",
- "name": "Spring Onion",
- "hex": "#8DB255",
- "names": [
-  "Spring Onion"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Spring Onion is a fresh, moderate yellow-green, the color of the tender shoots, listed in our library from a Japanese traditional color set.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A shoot's green",
-   "body": "The name belongs to a plant, and the swatch is the spring-shoot green between a leaf green and a pale lime [1]. Our library takes it from a Japanese traditional color set, with no date and no further note on its origin [1]. The ISCC-NBS system files the swatch under \"moderate yellow green\", 7.7 CIEDE2000 units away, a loose fit [1].\n\nThe only mention in our books concerns the smell, not the color. Finlay describes placing a live purple-dye snail, a caracola, on his watch strap, where it soon turned bright purple and gave off a strong smell of spring onions [2]. That tells us about the dye animal, and nothing about this green [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Spring Onion is rare in painting [3]. It appears in 17 of 23,781 paintings in our archive, 0.07 per cent, rarer than 65 per cent of the named colors [3]. It peaks in the 1900s, in 0.3 per cent of the 1,674 paintings from that century, 3.6 times the museums' baseline [3]. Inside a painting it most often plays an accent, in 54 per cent of the 13 paintings where the within-painting lens finds it [3].\n\nThe earliest dated match is 1861 and the latest 1913, and the archive's early centuries are thin [3]. These are photographs of aged, varnished paintings, so a match is a look-alike hue and not proof of a pigment [3]. In printed English the words peak in the 2010s [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the spring onion plant",
-   "first_recorded": "undated (Japanese traditional set)",
-   "source": "ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "asparagus",
-   "pistachio",
-   "apple-green",
-   "sap-green"
+  "slug": "spring-onion",
+  "name": "Spring Onion",
+  "hex": "#8DB255",
+  "names": [
+    "Spring Onion",
+    "Greenish pistachio"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-  "n_present": 17,
-  "pct": 0.07,
-  "peak": "1900s",
-  "iscc": {
-   "name": "moderate yellow green",
-   "de": 7.7
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Spring Onion is a fresh, moderate yellow-green, the color of the tender shoots, listed in our library from a Japanese traditional color set.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A shoot's green",
+      "body": "The name belongs to a plant, and the swatch is the spring-shoot green between a leaf green and a pale lime [1]. Our library takes it from a Japanese traditional color set, with no date and no further note on its origin [1]. The ISCC-NBS system files the swatch under \"moderate yellow green\", 7.7 CIEDE2000 units away, a loose fit [1].\n\nThe only mention in our books concerns the smell, not the color. Finlay describes placing a live purple-dye snail, a caracola, on his watch strap, where it soon turned bright purple and gave off a strong smell of spring onions [2]. That tells us about the dye animal, and nothing about this green [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Spring Onion is rare in painting [3]. It appears in 17 of 23,781 paintings in our archive, 0.07 per cent, rarer than 65 per cent of the named colors [3]. It peaks in the 1900s, in 0.3 per cent of the 1,674 paintings from that century, 3.6 times the museums' baseline [3]. Inside a painting it most often plays an accent, in 54 per cent of the 13 paintings where the within-painting lens finds it [3].\n\nThe earliest dated match is 1861 and the latest 1913, and the archive's early centuries are thin [3]. These are photographs of aged, varnished paintings, so a match is a look-alike hue and not proof of a pigment [3]. In printed English the words peak in the 2010s [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the spring onion plant",
+      "first_recorded": "undated (Japanese traditional set)",
+      "source": "ColorHub library"
+    },
+    "aka": [
+      "Greenish pistachio (jp)"
+    ],
+    "siblings": [
+      "asparagus",
+      "pistachio",
+      "apple-green",
+      "sap-green"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+    "n_present": 17,
+    "pct": 0.07,
+    "peak": "1900s",
+    "iscc": {
+      "name": "moderate yellow green",
+      "de": 7.7
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json), CIEDE2000 distances to ISCC-NBS names; Japanese traditional color set (jp)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Finlay, Color, ch. 19",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); at least 2% of the canvas",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "Google Books Ngram, all senses of the term, 5-year smoothing",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does Finlay say smelled of spring onions?",
+      "choices": [
+        "A live purple snail's secretion",
+        "A green dye vat",
+        "Fresh paint",
+        "Dried indigo"
+      ],
+      "answer": "A live purple snail's secretion",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Spring Onion is a common color in our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "The only book mention of spring onions here is about a smell: Finlay's purple snail.",
+    "Spring Onion green appears in just 17 of 23,781 archive paintings."
+  ],
+  "words": 257,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances to ISCC-NBS names; Japanese traditional color set (jp)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Finlay, Color, ch. 19",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); at least 2% of the canvas",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "Google Books Ngram, all senses of the term, 5-year smoothing",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does Finlay say smelled of spring onions?",
-   "choices": [
-    "A live purple snail's secretion",
-    "A green dye vat",
-    "Fresh paint",
-    "Dried indigo"
-   ],
-   "answer": "A live purple snail's secretion",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Spring Onion is a common color in our painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "The only book mention of spring onions here is about a smell: Finlay's purple snail.",
-  "Spring Onion green appears in just 17 of 23,781 archive paintings."
- ],
- "words": 257,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

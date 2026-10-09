@@ -1,123 +1,122 @@
 {
- "slug": "sudan-brown",
- "name": "Sudan Brown",
- "hex": "#97622D",
- "names": [
-  "Sudan Brown"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Sudan Brown is a strong yellowish brown fixed by Robert Ridgway's 1912 atlas.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Ridgway's plate III",
-   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* places this hue on plate III, hue 15, tone k, and the ISCC-NBS circular of 1955 cites the same block, classing it a strong brown, Munsell notation 7.3YR 4.5/6.7 [1]. Maerz and Paul's 1930 dictionary records the same name on plate 14, swatch L12, also dated to 1912, confirming Ridgway as the earliest source among the systems our library tracks [1]. The books read give no further story for the name beyond the place it invokes, and anything more specific is undocumented here [1].\n\nThe nearest named colors on file are [[gallstone-yellow]], [[toffee]], [[amber-brown]] and [[ochre-brown]], at 3.2, 3.2, 3.6 and 3.7 ΔE [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a color within six units of Sudan Brown covers at least one per cent of the canvas in 2,371 paintings, about 9.97 per cent overall, the single most common named color, more common than 93 per cent of all the named colors we track; the within-painting lens finds it in 1,427 [2]. It peaked in the 1300s, present in 14.7 per cent of the 251 paintings we hold from that century, three times the archive's overall rate [2]. Inside a painting it most often plays an accent, in 57 per cent of its 1,427 appearances [2].\n\nIts most devoted painter is Alexandre-Gabriel Decamps, carrying it in 5 of his 13 archived works, 4.5 times the baseline rate of the museums those works come from, with Giorgione and Giovanni Bellini close behind [2]. It shares canvases with [[dusty-bronze|Dusty bronze]] and [[dark-brown|Dark Brown]] far more than chance, a lift of 4.5 across 323 paintings for the former [2]. The earliest dated painting to carry it is from the year 1000, 912 years before Ridgway's own 1912 record, as photographed, not as evidence of any single pigment, a floor and not a first, since the archive's early centuries are thin [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented beyond the place-name it invokes",
-   "first_recorded": "1912 (Ridgway)",
-   "source": "data/library.json; data/graph/nodes-s.json"
-  },
-  "aka": [],
-  "siblings": [
-   "gallstone-yellow",
-   "toffee",
-   "amber-brown",
-   "ochre-brown"
+  "slug": "sudan-brown",
+  "name": "Sudan Brown",
+  "hex": "#97622D",
+  "names": [
+    "Sudan Brown"
   ],
-  "parent": "brown",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 2371,
-  "measured": {
-   "lch": [
-    46.3,
-    41.4,
-    66.7
-   ],
-   "nearest": [
-    [
-     "Gallstone Yellow",
-     3.2
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Sudan Brown is a strong yellowish brown fixed by Robert Ridgway's 1912 atlas.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Ridgway's plate III",
+      "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* places this hue on plate III, hue 15, tone k, and the ISCC-NBS circular of 1955 cites the same block, classing it a strong brown, Munsell notation 7.3YR 4.5/6.7 [1]. Maerz and Paul's 1930 dictionary records the same name on plate 14, swatch L12, also dated to 1912, confirming Ridgway as the earliest source among the systems our library tracks [1]. The books read give no further story for the name beyond the place it invokes, and anything more specific is undocumented here [1].\n\nThe nearest named colors on file are [[toffee]], [[toffee]], [[amber-brown]] and [[ochre-brown]], at 3.2, 3.2, 3.6 and 3.7 ΔE [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a color within six units of Sudan Brown covers at least one per cent of the canvas in 2,371 paintings, about 9.97 per cent overall, the single most common named color, more common than 93 per cent of all the named colors we track; the within-painting lens finds it in 1,427 [2]. It peaked in the 1300s, present in 14.7 per cent of the 251 paintings we hold from that century, three times the archive's overall rate [2]. Inside a painting it most often plays an accent, in 57 per cent of its 1,427 appearances [2].\n\nIts most devoted painter is Alexandre-Gabriel Decamps, carrying it in 5 of his 13 archived works, 4.5 times the baseline rate of the museums those works come from, with Giorgione and Giovanni Bellini close behind [2]. It shares canvases with [[dusty-bronze|Dusty bronze]] and [[dark-brown|Dark Brown]] far more than chance, a lift of 4.5 across 323 paintings for the former [2]. The earliest dated painting to carry it is from the year 1000, 912 years before Ridgway's own 1912 record, as photographed, not as evidence of any single pigment, a floor and not a first, since the archive's early centuries are thin [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented beyond the place-name it invokes",
+      "first_recorded": "1912 (Ridgway)",
+      "source": "data/library.json; data/graph/nodes-s.json"
+    },
+    "aka": [],
+    "siblings": [
+      "toffee",
+      "amber-brown",
+      "ochre-brown"
+    ],
+    "parent": "brown",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 2371,
+    "measured": {
+      "lch": [
+        46.3,
+        41.4,
+        66.7
+      ],
+      "nearest": [
+        [
+          "Gallstone Yellow",
+          3.2
+        ]
+      ]
+    },
+    "painters": [
+      {
+        "name": "Alexandre-Gabriel Decamps",
+        "hits": 5,
+        "n": 13,
+        "lift": 4.5
+      }
+    ],
+    "company": [
+      {
+        "word": "Dusty bronze",
+        "lift": 4.5,
+        "n": 323
+      }
     ]
-   ]
   },
-  "painters": [
-   {
-    "name": "Alexandre-Gabriel Decamps",
-    "hits": 5,
-    "n": 13,
-    "lift": 4.5
-   }
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-s.json, data/library.json): Ridgway 1912 plate III hue 15 tone k (scan of an aged plate, approximate); ISCC-NBS Circular 553 (1955) block 55 (M/R); Maerz & Paul 1930 plate 14 L 12; CIEDE2000 nearest-name match",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (data/graph/fieldnotes/s.json)",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "company": [
-   {
-    "word": "Dusty bronze",
-    "lift": 4.5,
-    "n": 323
-   }
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes-s.json, data/library.json): Ridgway 1912 plate III hue 15 tone k (scan of an aged plate, approximate); ISCC-NBS Circular 553 (1955) block 55 (M/R); Maerz & Paul 1930 plate 14 L 12; CIEDE2000 nearest-name match",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (data/graph/fieldnotes/s.json)",
-   "loc_kind": null,
-   "url": null
+  "questions": [
+    {
+      "q": "Which 1912 publication first fixes Sudan Brown?",
+      "choices": [
+        "Ridgway's atlas",
+        "Maerz and Paul's dictionary",
+        "the ISCC-NBS circular",
+        "RAL"
+      ],
+      "answer": "Ridgway's atlas",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Sudan Brown is the single most common named color in this batch within our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Sudan Brown turns up in nearly one painting in ten in our archive, the most common color in this entire batch."
+  ],
+  "words": 336,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "Which 1912 publication first fixes Sudan Brown?",
-   "choices": [
-    "Ridgway's atlas",
-    "Maerz and Paul's dictionary",
-    "the ISCC-NBS circular",
-    "RAL"
-   ],
-   "answer": "Ridgway's atlas",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Sudan Brown is the single most common named color in this batch within our painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Sudan Brown turns up in nearly one painting in ten in our archive, the most common color in this entire batch."
- ],
- "words": 337,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

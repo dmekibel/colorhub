@@ -1,108 +1,108 @@
 {
- "slug": "pale-mauve",
- "name": "Pale Mauve",
- "hex": "#D9C8EF",
- "names": [
-  "Pale Mauve"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Pale Mauve is a light, soft lilac-purple, the faded end of [[mauve]]'s long fashion career.",
- "sections": [
-  {
-   "id": "mourning",
-   "title": "From display to mourning",
-   "body": "Pale Mauve is simply a lightened [[mauve]], the flower-named color made famous by the dye of 1856 [3]. Garfield records that mauve shifted from a showy, frivolous color to a color of mourning [1].\n\nIn 1863, before her marriage to the Prince of Wales, Princess Alexandra arrived in London wearing pale mauve poplin cut as half-mourning [1]. Queen Victoria moved from black to mauve within four years of losing Prince Albert [1]. By 1869 the color was nearly forgotten, replaced by another dye craze [1].\n\nThe swatch on this page is #D9C8EF, the screen value we hold for it, which is an approximation and not a measured pigment [3]. Like any pale color it sits between its hue and [[white]], and because the name is a description and not a tradition, other lists may place it a little differently [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Pale Mauve is rare in our archive: 3 of 23,781 paintings, about 0.01 percent, as photographed [2]. In printed English the phrase peaks in the 1930s and rose fastest in the 1920s, though Google Books counts every sense of the words [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a lightened mauve (French mauve, the mallow)",
-   "first_recorded": "Ridgway 1912",
-   "source": "Garfield, Mauve, ch. 16"
-  },
-  "aka": [],
-  "siblings": [
-   "light-mauve",
-   "old-mauve",
-   "mauve",
-   "white"
+  "slug": "pale-mauve",
+  "name": "Pale Mauve",
+  "hex": "#D9C8EF",
+  "names": [
+    "Pale Mauve"
   ],
-  "parent": "mauve",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 3,
-  "pct_of_paintings": 0.01,
-  "library_sources": [
-   "ISCC-NBS 1955",
-   "Ridgway 1912",
-   "xkcd 2010"
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Garfield, Mauve, ch. 16 (\"The Terrible Glare\")",
-   "loc_kind": "book-chapter",
-   "url": null
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Pale Mauve is a light, soft lilac-purple, the faded end of [[mauve]]'s long fashion career.",
+  "sections": [
+    {
+      "id": "mourning",
+      "title": "From display to mourning",
+      "body": "Pale Mauve is simply a lightened [[mauve]], the flower-named color made famous by the dye of 1856 [3]. Garfield records that mauve shifted from a showy, frivolous color to a color of mourning [1].\n\nIn 1863, before her marriage to the Prince of Wales, Princess Alexandra arrived in London wearing pale mauve poplin cut as half-mourning [1]. Queen Victoria moved from black to mauve within four years of losing Prince Albert [1]. By 1869 the color was nearly forgotten, replaced by another dye craze [1].\n\nThe swatch on this page is #D9C8EF, the screen value we hold for it, which is an approximation and not a measured pigment [3]. Like any pale color it sits between its hue and [[white]], and because the name is a description and not a tradition, other lists may place it a little differently [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Pale Mauve is rare in our archive: 3 of 23,781 paintings, about 0.01 percent, as photographed [2]. In printed English the phrase peaks in the 1930s and rose fastest in the 1920s, though Google Books counts every sense of the words [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a lightened mauve (French mauve, the mallow)",
+      "first_recorded": "Ridgway 1912",
+      "source": "Garfield, Mauve, ch. 16"
+    },
+    "aka": [],
+    "siblings": [
+      "grey-pink",
+      "old-mauve",
+      "mauve",
+      "white"
+    ],
+    "parent": "mauve",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive field notes (23,781 paintings, as photographed)",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 3,
+    "pct_of_paintings": 0.01,
+    "library_sources": [
+      "ISCC-NBS 1955",
+      "Ridgway 1912",
+      "xkcd 2010"
+    ]
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub library: ISCC-NBS 1955, Ridgway 1912, xkcd 2010",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Garfield, Mauve, ch. 16 (\"The Terrible Glare\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive field notes (23,781 paintings, as photographed)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub library: ISCC-NBS 1955, Ridgway 1912, xkcd 2010",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What did Alexandra wear in 1863, according to Garfield?",
+      "choices": [
+        "A half-mourning dress of pale mauve poplin",
+        "A red velvet gown",
+        "A white satin dress",
+        "A green silk cloak"
+      ],
+      "answer": "A half-mourning dress of pale mauve poplin",
+      "kind": "pick"
+    },
+    {
+      "q": "By 1869 mauve was all but forgotten.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pale mauve went from a frivolous fashion to half-mourning dress within a few years."
+  ],
+  "words": 190,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Reworded to avoid close phrasing of Garfield"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "What did Alexandra wear in 1863, according to Garfield?",
-   "choices": [
-    "A half-mourning dress of pale mauve poplin",
-    "A red velvet gown",
-    "A white satin dress",
-    "A green silk cloak"
-   ],
-   "answer": "A half-mourning dress of pale mauve poplin",
-   "kind": "pick"
-  },
-  {
-   "q": "By 1869 mauve was all but forgotten.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Pale mauve went from a frivolous fashion to half-mourning dress within a few years."
- ],
- "words": 190,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Reworded to avoid close phrasing of Garfield"
-  ]
- }
 }

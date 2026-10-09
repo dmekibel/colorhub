@@ -1,119 +1,119 @@
 {
- "slug": "levant-red",
- "name": "Levant Red",
- "hex": "#AE4141",
- "names": [
-  "Levant Red"
- ],
- "tier": "traditional",
- "depth": "brief",
- "lede": "Levant red is an alternative name for Turkey red, a brilliant alizarin red dye used in Britain from 1785 into the 1930s.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Another name for Turkey red",
-   "body": "Paterson sends Levant red straight to Turkey red [1]. The Turkey red entry calls it a brilliant red dye made from alizarin, described as yellowish red, a moderate red or a brownish red, and also called Adrianople red [2]. Paterson also defines \"Turkey\" as originating from Turkey or the Levant [2].\n\nPaterson says the technique of dyeing cloth and yarn this way was extensively practised in Britain between 1785 and the 1930s [2]."
-  },
-  {
-   "id": "family",
-   "title": "Where it sits",
-   "body": "Paterson's index lists Levant red among the reds [3]. The colour belongs in the reds beside [[madder]] and shades such as [[light-red]] and [[indian-red]] [4]. Whatever it is called, Paterson's wording shows the range one dye can cover, from yellowish to brownish red [2]. The swatch is a muted, brick-leaning red [4]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No usable archive measurements exist for this name, so there is no painting data to quote [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the Levant, the eastern Mediterranean, as a source of Turkey red",
-   "first_recorded": "listed in Paterson's dictionary (2003)",
-   "source": "Paterson, A Dictionary of Colour"
-  },
-  "aka": [
-   "Turkey red",
-   "Adrianople red"
+  "slug": "levant-red",
+  "name": "Levant Red",
+  "hex": "#AE4141",
+  "names": [
+    "Levant Red"
   ],
-  "siblings": [
-   "indian-red",
-   "light-red",
-   "madder",
-   "brick-red"
+  "tier": "traditional",
+  "depth": "brief",
+  "lede": "Levant red is an alternative name for Turkey red, a brilliant alizarin red dye used in Britain from 1785 into the 1930s.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Another name for Turkey red",
+      "body": "Paterson sends Levant red straight to Turkey red [1]. The Turkey red entry calls it a brilliant red dye made from alizarin, described as yellowish red, a moderate red or a brownish red, and also called Adrianople red [2]. Paterson also defines \"Turkey\" as originating from Turkey or the Levant [2].\n\nPaterson says the technique of dyeing cloth and yarn this way was extensively practised in Britain between 1785 and the 1930s [2]."
+    },
+    {
+      "id": "family",
+      "title": "Where it sits",
+      "body": "Paterson's index lists Levant red among the reds [3]. The colour belongs in the reds beside [[irresistible]] and shades such as [[light-red]] and [[indian-red]] [4]. Whatever it is called, Paterson's wording shows the range one dye can cover, from yellowish to brownish red [2]. The swatch is a muted, brick-leaning red [4]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No usable archive measurements exist for this name, so there is no painting data to quote [4]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": []
- },
- "field": {
-  "dataset": "ColorHub name library; no archive field notes for this name",
-  "swatch": "#AE4141",
-  "books": 3
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 231, \"Levant red\"",
-   "loc_kind": "pdf-page",
-   "url": null
+  "aside": {
+    "origin": {
+      "named_after": "the Levant, the eastern Mediterranean, as a source of Turkey red",
+      "first_recorded": "listed in Paterson's dictionary (2003)",
+      "source": "Paterson, A Dictionary of Colour"
+    },
+    "aka": [
+      "Turkey red",
+      "Adrianople red"
+    ],
+    "siblings": [
+      "indian-red",
+      "light-red",
+      "irresistible",
+      "brick-red"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": []
   },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 392, \"Turkey red\"",
-   "loc_kind": "pdf-page",
-   "url": null
+  "field": {
+    "dataset": "ColorHub name library; no archive field notes for this name",
+    "swatch": "#AE4141",
+    "books": 3
   },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 507 (index of reds)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub color library and name graph (data/library.json, data/graph/names.json), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 231, \"Levant red\"",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 392, \"Turkey red\"",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 507 (index of reds)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub color library and name graph (data/library.json, data/graph/names.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Levant red is another name for what?",
+      "choices": [
+        "Turkey red",
+        "Carmine",
+        "Vermilion",
+        "Cochineal"
+      ],
+      "answer": "Turkey red",
+      "kind": "pick"
+    },
+    {
+      "q": "Paterson says the Turkey red dyeing technique was used in Britain between 1785 and the 1930s.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Levant red is another name for Turkey red."
+  ],
+  "words": 157,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Removed unsupported claim that red cottons came from the Levant before Europe learned the process",
+      "Removed Finlay speculative passage presented as trade fact",
+      "Lede: 'madder-family' and 'colored cotton' replaced with Paterson's wording"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "Levant red is another name for what?",
-   "choices": [
-    "Turkey red",
-    "Carmine",
-    "Vermilion",
-    "Cochineal"
-   ],
-   "answer": "Turkey red",
-   "kind": "pick"
-  },
-  {
-   "q": "Paterson says the Turkey red dyeing technique was used in Britain between 1785 and the 1930s.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Levant red is another name for Turkey red."
- ],
- "words": 157,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Removed unsupported claim that red cottons came from the Levant before Europe learned the process",
-   "Removed Finlay speculative passage presented as trade fact",
-   "Lede: 'madder-family' and 'colored cotton' replaced with Paterson's wording"
-  ]
- }
 }

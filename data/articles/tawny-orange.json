@@ -1,119 +1,121 @@
 {
- "slug": "tawny-orange",
- "name": "Tawny Orange",
- "hex": "#C68545",
- "names": [
-  "Tawny Orange"
- ],
- "tier": "traditional",
- "depth": "brief",
- "lede": "Tawny orange is an old descriptive pairing of two color words, tawny and orange, for a warm brown-orange close to amber.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Tawny and orange",
-   "body": "*Tawny* is an old word for a dark brown tied to birds and animals, from the French *tanné*, meaning tan [1]. Paterson also records a Greek combining form, *cirrho-*, glossed as tawny or orange [2]. The pair is a modifier and a noun and not a separate invention, which makes the name's origin undocumented as a single coinage.\n\nThe phrase turns up in Werner's color nomenclature as used by physicians [3]. In a table Baty reproduces, a medical color list puts \"tawny orange\" beside a gloss of amber yellow, evidence that early nineteenth-century doctors used Werner's names to describe the body [3]. Ridgway's 1912 atlas and the ISCC-NBS list of 1955 both carry the name in our library [4]. Nearby named colors are [[tawny]], [[amber]] and [[orange-brown]] [4]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "A color near Tawny Orange appears in 931 of 23,781 paintings in our archive, 3.91 per cent, more common than 87 per cent of the named colors [5]. It peaks in the 1400s, in 65 paintings, 2.1 times the expected rate, and Bellini has it in 6 of 17 works [5]. It usually plays an accent, in 71 per cent of 767 paintings [5]. These are photographs of varnished paintings; nothing here shows what pigment made the color."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "tawny + orange (descriptive)",
-   "first_recorded": "1912 (Ridgway, in our library)",
-   "source": "Paterson; Baty; ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "tawny",
-   "amber"
+  "slug": "tawny-orange",
+  "name": "Tawny Orange",
+  "hex": "#C68545",
+  "names": [
+    "Tawny Orange",
+    "Ochraceous-Tawny"
   ],
-  "parent": null,
-  "children": [
-   "orange-brown",
-   "orange-brown",
-   "antimony-yellow"
+  "tier": "traditional",
+  "depth": "brief",
+  "lede": "Tawny orange is an old descriptive pairing of two color words, tawny and orange, for a warm brown-orange close to amber.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Tawny and orange",
+      "body": "*Tawny* is an old word for a dark brown tied to birds and animals, from the French *tanné*, meaning tan [1]. Paterson also records a Greek combining form, *cirrho-*, glossed as tawny or orange [2]. The pair is a modifier and a noun and not a separate invention, which makes the name's origin undocumented as a single coinage.\n\nThe phrase turns up in Werner's color nomenclature as used by physicians [3]. In a table Baty reproduces, a medical color list puts \"tawny orange\" beside a gloss of amber yellow, evidence that early nineteenth-century doctors used Werner's names to describe the body [3]. Ridgway's 1912 atlas and the ISCC-NBS list of 1955 both carry the name in our library [4]. Nearby named colors are [[tawny]], [[amber]] and [[orange-brown]] [4]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "A color near Tawny Orange appears in 931 of 23,781 paintings in our archive, 3.91 per cent, more common than 87 per cent of the named colors [5]. It peaks in the 1400s, in 65 paintings, 2.1 times the expected rate, and Bellini has it in 6 of 17 works [5]. It usually plays an accent, in 71 per cent of 767 paintings [5]. These are photographs of varnished paintings; nothing here shows what pigment made the color."
+    }
   ],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-  "n_present": 931,
-  "pct": 3.91,
-  "century": "1400s, 65 paintings, 2.1x",
-  "painter": "Giovanni Bellini, 6 of 17 works"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"tawny\", p. 389",
-   "loc_kind": "pdf-page",
-   "url": null
+  "aside": {
+    "origin": {
+      "named_after": "tawny + orange (descriptive)",
+      "first_recorded": "1912 (Ridgway, in our library)",
+      "source": "Paterson; Baty; ColorHub library"
+    },
+    "aka": [
+      "Ochraceous-Tawny (ridgway+iscc-nbs)"
+    ],
+    "siblings": [
+      "tawny",
+      "amber"
+    ],
+    "parent": null,
+    "children": [
+      "orange-brown",
+      "antimony-yellow"
+    ],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"cirrho-\", p. 105",
-   "loc_kind": "pdf-page",
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+    "n_present": 931,
+    "pct": 3.91,
+    "century": "1400s, 65 paintings, 2.1x",
+    "painter": "Giovanni Bellini, 6 of 17 works"
   },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, ch. 5 (Werner in medicine), pp. 220-221",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"tawny\", p. 389",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"cirrho-\", p. 105",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, ch. 5 (Werner in medicine), pp. 220-221",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What did Paterson say the old word tawny comes from?",
+      "choices": [
+        "The French tanné",
+        "The Greek kirros",
+        "A Dutch word for tea",
+        "Latin aurum"
+      ],
+      "answer": "The French tanné",
+      "kind": "pick"
+    },
+    {
+      "q": "In the medical table Baty reproduces, tawny orange is paired with amber yellow.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Doctors used Werner's names for the body: one medical list pairs \"tawny orange\" with \"amber yellow\"."
+  ],
+  "words": 222,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "questions": [
-  {
-   "q": "What did Paterson say the old word tawny comes from?",
-   "choices": [
-    "The French tanné",
-    "The Greek kirros",
-    "A Dutch word for tea",
-    "Latin aurum"
-   ],
-   "answer": "The French tanné",
-   "kind": "pick"
-  },
-  {
-   "q": "In the medical table Baty reproduces, tawny orange is paired with amber yellow.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Doctors used Werner's names for the body: one medical list pairs \"tawny orange\" with \"amber yellow\"."
- ],
- "words": 222,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

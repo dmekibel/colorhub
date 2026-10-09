@@ -1,0 +1,139 @@
+{
+ "slug": "bright-pink",
+ "name": "Bright Pink",
+ "hex": "#FE01B1",
+ "names": [
+  "Bright Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Bright Pink names its own saturation on top of [[pink]], and the phrase has described vivid pinks in English prose for well over a century before it became a hex swatch.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier with a long informal life",
+   "body": "As a named swatch, Bright Pink is recorded only by the xkcd 2010 crowd color survey [1]. But the plain phrase \"bright pink\" is far older in print: Philip Ball describes eosin, a bright pink dye made from coal-tar fluorescein, sold by BASF from 1874 [2]. David Batchelor quotes Huysmans describing a flower's bright pink as the shade of a scar in the middle of healing [3].\n\nIts nearest named neighbor is [[hollywood-cerise|Hollywood Cerise]], only 3.0 units away and read as almost the same color [4]. [[frostbite|Frostbite]] and [[persian-rose|Persian Rose]] sit a little further out, both duller [4]. [[barbie-pink|Barbie Pink]] sits further out, duller by comparison, and the 2023 film *Barbie* used a fluorescent pink only 5.0 units from this swatch for its own branding [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries this exact pink covering at least one percent of its canvas, as photographed [5]. A hue this saturated is close to screen-only; Schiaparelli's 1930s shocking pink, the nearest fashion match on record, still sits 9.8 units away [6]. Our data cannot say whether any underlying pigment or dye was ever this saturated off a screen."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pink, intensified",
+   "first_recorded": "2010 as a swatch name (xkcd); the descriptive phrase is far older in print",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "hollywood-cerise",
+   "frostbite"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "match": {
+   "min_cover": 0.01
+  },
+  "measured": {
+   "lch": [
+    56.4,
+    91.4,
+    345.6
+   ],
+   "nearest": [
+    [
+     "Hollywood Cerise",
+     3.0
+    ],
+    [
+     "Frostbite",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 17",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 8",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges for bright-pink",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub color graph: fashion twin edges for bright-pink",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Bright Pink's nearest named neighbor?",
+   "choices": [
+    "Hollywood Cerise",
+    "Magenta",
+    "Barbie Pink",
+    "Rose"
+   ],
+   "answer": "Hollywood Cerise",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the phrase \"bright pink\" only entered English print after the 2010 xkcd survey.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Bright pink described flowers and dyes in English prose a century before it became a hex code."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 215
+}

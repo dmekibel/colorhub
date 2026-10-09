@@ -89,6 +89,10 @@
 /* the museum link and the heart share the top bar's right side (David, 2026-10-09: the heart used to be a
    scroll away, under the picture) */
 .gl-page .art-top-r{display:flex;align-items:center;gap:8px}
+/* the bar sits over the full-bleed hero and the page's running text once scrolled; a fading gradient let text
+   show through behind the buttons, so give it a solid, blurred backdrop like the color page's bar (David screenshot,
+   2026-10-09) */
+.gl-page .art-top{background:var(--ground);background:color-mix(in srgb,var(--ground) 92%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--rule)}
 .gl-page .palette{margin-top:12px}
 .gl-sim-h{margin-bottom:16px}
 
@@ -129,7 +133,12 @@
 .gl-roles-h{margin:0 0 10px;font:italic 400 17px/1 var(--serif);color:var(--soft)}
 .gl-roles-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .gl-role{display:flex;flex-direction:column;gap:8px;min-width:0;padding:0;text-align:left;color:var(--ink);background:none}
-.gl-role i{display:block;width:100%;height:56px;border-radius:var(--r-1);background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.14)}
+.gl-role i{display:block;width:100%;height:56px;border-radius:var(--r-1);background:var(--c) no-repeat;box-shadow:inset 0 0 0 1px rgba(236,232,223,.14)}
+/* the "Findings" wrapper (js/gallery.js glPage, David's rebuild brief, 2026-10-09): one header over the
+   crops/roles row and the painter/decade/movement comparison; quiet when both are still empty */
+.gl-finds .sec-head{margin-bottom:4px}
+.gl-finds:not(:has(.gl-roles:not(:empty))):not(:has(.aw-cx:not(:empty))){display:none}
+.gl-finds .aw-cx{margin-top:18px}
 .gl-role span{display:flex;flex-direction:column;gap:2px;min-width:0}
 .gl-role em{font:italic 400 15px/1.2 var(--serif);color:var(--soft)}
 .gl-role b{font:400 18px/1.15 var(--serif);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
@@ -149,8 +158,28 @@
 .gl-pmap svg:first-child{color:var(--soft)}
 .gl-pmap svg:last-child{color:var(--faint)}
 
-/* the palette sits right under the painting; the painting stays pinned while you change types and sizes */
-.gl-pal-wrap .gl-hero{position:sticky;top:calc(var(--top) + 64px);z-index:4;margin:0 calc(-1 * var(--g));padding:0 var(--g) 10px;background:var(--ground)}
+/* David's rebuild brief, 2026-10-09: the picture is now much bigger (css/paintzoom.css), so it no longer stays
+   pinned while you change palette types below it -- at this size that would eat the whole screen. "Look closer"
+   (the full-screen view) is the way to keep studying it while the palette controls stay reachable. */
+.gl-pal-wrap .gl-hero{margin:0 calc(-1 * var(--g));padding:0 var(--g) 10px}
+/* David, 2026-10-09 ("weird that you need to scroll far down just to get who and why"): title, painter, date and
+   museum sit right under the pinned image, above the palette strip, so who/when/where/why never needs a scroll.
+   Kept short on purpose -- the eyebrow/title/dek are the same elements the painting used to show lower on the
+   page (gl-roles still follows, further down); this block just moves them above the palette. */
+.gl-id{margin-top:14px}
+.gl-id .p-title{margin-top:6px}
+.gl-id .p-dek{margin-top:6px}
+.gl-id-src{margin-top:4px;font:400 13px/1.3 var(--mono);color:var(--faint)}
+.gl-id-src a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+/* "Why it matters": one or two lines from this painting's own Analysis findings (js/artwiki.js awPaintingWhy),
+   the only per-painting prose the corpus currently has. Quiet until there's something to say. */
+.gl-why{margin-top:10px}
+.gl-why[hidden]{display:none}
+.gl-why-t{font:400 15px/1.45 var(--sans);color:var(--soft);text-wrap:pretty}
+.gl-why-ex{margin:6px 0 0;padding-left:18px;font:400 15px/1.45 var(--sans);color:var(--soft)}
+.gl-why-ex[hidden]{display:none}
+.gl-why-ex li+li{margin-top:4px}
+.gl-why-more{margin-top:4px;font:500 14px/1 var(--sans);color:var(--ink);text-decoration:underline;text-underline-offset:2px}
 /* David, 2026-10-08 ("weird spacing; palettes don't fit"): the strip first, right under the picture, then three
    slim rows (type, how many, on the painting) and a one-line caption. Selection lifts a step, never turns white. */
 .gl-pal-ui{padding-top:0}
@@ -187,6 +216,12 @@
 .gl-cap.open .gl-cap-t{white-space:normal}
 .gl-cap-t[disabled]{cursor:default;opacity:1}
 .gl-cap .aw-link{flex:none}
+/* a located swatch (tapped on the strip, not its name): an outline plus a quiet ring so it reads as "active"
+   distinctly from the "arrived from" .on state (David's rebuild brief, 2026-10-09) */
+.gl-strip .pal.loc{outline:2px solid var(--ink);outline-offset:-2px;box-shadow:inset 0 0 0 4px rgba(14,13,11,.35)}
+.gl-locate{display:flex;align-items:center;gap:8px;min-height:0;margin:4px 0 2px;font:400 14px/1.4 var(--sans);color:var(--soft)}
+.gl-locate[hidden]{display:none}
+.gl-locate i{width:12px;height:12px;border-radius:50%;background:var(--c);flex:none;box-shadow:inset 0 0 0 1px rgba(236,232,223,.22)}
 .gl-pal-ui .pal-names{margin-top:6px}
 .gl-pal-ui .pal-name i{display:grid;place-items:center;font:500 12px/1 var(--sans);font-style:normal}
 /* markers: each palette color's main places on the painting, numbered like its chip */
@@ -207,6 +242,15 @@
 .gl-lit-cv{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;opacity:0;transition:opacity .25s var(--ease);filter:blur(1px)}
 .gl-lit-cv.on{opacity:1}
 .gl-pick-dot{pointer-events:none}
-/* the pinned painting hides what scrolls up behind it, right up to the header's fade */
-.gl-pal-wrap .gl-hero{box-shadow:0 -28px 0 var(--ground)}
+/* "Test yourself" (David's rebuild brief, 2026-10-09: quiz collapsed, closed by default, like the color page's
+   other <details> sections) and "More by this painter" just above "More like this" */
+.gl-quiz-fold{margin:18px 0 0;border-top:1px solid var(--rule)}
+.gl-quiz-fold>summary{font:400 17px/1.2 var(--serif);color:var(--ink);padding:16px 0;cursor:pointer;min-height:44px;box-sizing:border-box;list-style:none}
+.gl-quiz-fold>summary::-webkit-details-marker{display:none}
+.gl-quiz-fold[open]>summary{padding-bottom:10px}
+.gl-quiz-fold .gl-quiz{padding-bottom:16px}
+.gl-morepainter{margin-top:22px}
+.gl-morepainter:empty{display:none}
+.gl-morepainter .sec-head{margin-bottom:4px}
+.gl-morepainter .gl-mp-sub{color:var(--soft);font-size:13.5px;line-height:1.4;margin:0 0 12px}
 .gl-page .gl-pal-ui .palette.gl-strip:empty{display:none}

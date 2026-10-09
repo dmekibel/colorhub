@@ -98,8 +98,8 @@
  "words": 217,
  "status": "checked",
  "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
+  "by": "checker",
+  "date": "2026-10-08",
   "issues": [
    "No private fact-card file for this slug.",
    "No archive presence at the match threshold, so field notes are limited to that absence."

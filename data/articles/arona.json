@@ -1,124 +1,124 @@
 {
- "slug": "arona",
- "name": "Arona",
- "hex": "#3E5563",
- "names": [
-  "Arona"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Arona is a dark, desaturated blue-grey, the kind of color a dictionary files under neutrals even though the color graph places it firmly among the slate blues.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A name in the library",
-   "body": "Maerz and Paul's 1930 dictionary dates this color to 1928; the library's own record disagrees with itself by one swatch letter, giving plate 39 J 6 in one field and 39 I 6 in another, a minor inconsistency rather than a real dispute [1]. The ISCC-NBS system classes it as a dark bluish gray [1]. The nearest color-graph neighbor is [[dark-payne-s-grey]], 2.6 units away, with [[bruges]] close behind at 3.3, and [[dark-blue-slate]] and [[dark-violet-slate]] almost as close [2].\n\nMunsell gives 9.0B 3.4/2.6, low in both lightness and chroma [1]. The hex #3E5563 is a screen approximation of the dictionary plate [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this grey-blue in 274 of 23,781 paintings, about 1.15 percent, as photographed [3]. The earliest dated match is a 1270 Italian panel, *The Mourning Saint John the Evangelist*, a floor and not a first, since the archive's early centuries are thin [3]. Lorenzo Lotto, Niels Larsen Stevns, Paul Signac, Jean Ranc and Vicente López Portaña all use it well above their peers' average rate [3]. Strong individual matches include Félix Ziem's *Venice from the Riva looking toward the Piazzale San Marco* (1885) and Henry Ottmann's *The Luxembourg Station in Brussels* (1903) [3]. The 1930s show the sharpest decade-level concentration, over seven times the archive's average [3]. These counts are computed matches, not pigment identifications [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "dark-payne-s-grey",
-   "bruges",
-   "dark-blue-slate",
-   "dark-violet-slate"
+  "slug": "arona",
+  "name": "Arona",
+  "hex": "#3E5563",
+  "names": [
+    "Arona"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 274,
-  "measured": {
-   "lch": [
-    34.8,
-    11.9,
-    246.1
-   ],
-   "nearest": [
-    [
-     "Dark Payne's Grey",
-     2.6
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Arona is a dark, desaturated blue-grey, the kind of color a dictionary files under neutrals even though the color graph places it firmly among the slate blues.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A name in the library",
+      "body": "Maerz and Paul's 1930 dictionary dates this color to 1928; the library's own record disagrees with itself by one swatch letter, giving plate 39 J 6 in one field and 39 I 6 in another, a minor inconsistency rather than a real dispute [1]. The ISCC-NBS system classes it as a dark bluish gray [1]. The nearest color-graph neighbor is [[dark-payne-s-grey]], 2.6 units away, with [[bruges]] close behind at 3.3, and [[dark-blue-slate]] and [[dark-blue-slate]] almost as close [2].\n\nMunsell gives 9.0B 3.4/2.6, low in both lightness and chroma [1]. The hex #3E5563 is a screen approximation of the dictionary plate [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this grey-blue in 274 of 23,781 paintings, about 1.15 percent, as photographed [3]. The earliest dated match is a 1270 Italian panel, *The Mourning Saint John the Evangelist*, a floor and not a first, since the archive's early centuries are thin [3]. Lorenzo Lotto, Niels Larsen Stevns, Paul Signac, Jean Ranc and Vicente López Portaña all use it well above their peers' average rate [3]. Strong individual matches include Félix Ziem's *Venice from the Riva looking toward the Piazzale San Marco* (1885) and Henry Ottmann's *The Luxembourg Station in Brussels* (1903) [3]. The 1930s show the sharpest decade-level concentration, over seven times the archive's average [3]. These counts are computed matches, not pigment identifications [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "dark-payne-s-grey",
+      "bruges",
+      "dark-blue-slate",
+      "deep-slate-blue"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 274,
+    "measured": {
+      "lch": [
+        34.8,
+        11.9,
+        246.1
+      ],
+      "nearest": [
+        [
+          "Dark Payne's Grey",
+          2.6
+        ]
+      ]
+    },
+    "iscc": {
+      "name": "dark bluish gray",
+      "de": 5.8
+    },
+    "peak_decade": {
+      "key": 1930,
+      "lift": 7.55
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Maerz & Paul 1930, Ridgway 1912, ISCC-NBS 1955, RAL entries",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What is Arona's nearest named neighbor in the color graph?",
+      "choices": [
+        "Dark Payne's Grey",
+        "Sepia",
+        "Byzantium",
+        "Candy Pink"
+      ],
+      "answer": "Dark Payne's Grey",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the color library's own records agree exactly on Arona's Maerz and Paul plate number.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Even the library's own records disagree, by one letter, on which 1928 plate Arona came from."
+  ],
+  "words": 250,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Nearest-neighbor claim (name and/or distance) in the 'name' section and field.measured.nearest did not match data/graph/edges-*.json 'la' (the cited color-graph computation); corrected to the true nearest colors and distances, and updated aside.siblings to match.",
+      "lint 2026-10-09"
     ]
-   ]
-  },
-  "iscc": {
-   "name": "dark bluish gray",
-   "de": 5.8
-  },
-  "peak_decade": {
-   "key": 1930,
-   "lift": 7.55
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Maerz & Paul 1930, Ridgway 1912, ISCC-NBS 1955, RAL entries",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What is Arona's nearest named neighbor in the color graph?",
-   "choices": [
-    "Dark Payne's Grey",
-    "Sepia",
-    "Byzantium",
-    "Candy Pink"
-   ],
-   "answer": "Dark Payne's Grey",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the color library's own records agree exactly on Arona's Maerz and Paul plate number.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Even the library's own records disagree, by one letter, on which 1928 plate Arona came from."
- ],
- "words": 250,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Nearest-neighbor claim (name and/or distance) in the 'name' section and field.measured.nearest did not match data/graph/edges-*.json 'la' (the cited color-graph computation); corrected to the true nearest colors and distances, and updated aside.siblings to match.",
-   "lint 2026-10-09"
-  ]
- }
 }

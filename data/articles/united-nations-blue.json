@@ -1,0 +1,128 @@
+{
+ "slug": "united-nations-blue",
+ "name": "United Nations Blue",
+ "hex": "#009EDB",
+ "names": [
+  "United Nations Blue"
+ ],
+ "tier": "place",
+ "depth": "brief",
+ "lede": "United Nations Blue is a vivid, greenish blue taken from the United Nations flag, an institution's color rather than a pigment or dye.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flag's blue",
+   "body": "Our library traces the name only to a Wikipedia color list, which gives no date for when the United Nations adopted this exact shade for its emblem and world map [1]. The ISCC-NBS block for the region reads \"vivid greenish blue\" [1].\n\nIts nearest named neighbor is [[weezy-blue]], 2.9 units of CIEDE2000 away and described as almost the same [2]. [[carolina-blue]] sits at 4.4, duller, [[blue-jeans]] at 7.2, bluer and lighter, and [[cerulean-sea]] at 7.8, darker [2]. Measured in LCH it reads lightness 61, chroma 43, a bright, strongly saturated blue [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in just 4 of 23,781 paintings (0.02 percent), rarer than 83 percent of the named colors, as photographed [3]. A flag color this recent and this saturated has little reason to turn up in centuries-old paintings, so the scarcity is unsurprising [3]. These are photographs of varnished paintings, so a color match is not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the United Nations flag",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub library (a Wikipedia list)"
+  },
+  "aka": [],
+  "siblings": [
+   "weezy-blue",
+   "carolina-blue",
+   "blue-jeans",
+   "cerulean-sea"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
+  "n_present": 4,
+  "rank_pct_rarer": 83,
+  "measured": {
+   "lch": [
+    61,
+    43,
+    253
+   ],
+   "nearest": [
+    [
+     "Weezy Blue",
+     2.9
+    ],
+    [
+     "Carolina Blue",
+     4.4
+    ],
+    [
+     "Blue Jeans",
+     7.2
+    ],
+    [
+     "Cerulean Sea",
+     7.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): name source and place tier",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges): CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is United Nations Blue taken from?",
+   "choices": [
+    "The United Nations flag",
+    "A paint manufacturer's trademark",
+    "A medieval dye recipe",
+    "A mineral pigment"
+   ],
+   "answer": "The United Nations flag",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: United Nations Blue is one of the more common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "United Nations Blue is rare in old paintings, appearing in only 4 of our 23,781-painting archive."
+ ],
+ "words": 180,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "rank-percentile drift: article said 82%, current data/graph/fieldnotes says 83% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
+  ]
+ }
+}

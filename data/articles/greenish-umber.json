@@ -1,140 +1,139 @@
 {
- "slug": "greenish-umber",
- "name": "Greenish umber",
- "hex": "#4D4B3A",
- "names": [
-  "Greenish umber"
- ],
- "tier": "traditional",
- "depth": "brief",
- "lede": "Yanagisusutake, sooty willow-bamboo",
- "sections": [
-  {
-   "id": "name",
-   "title": "Greenish umber is a dark olive-brown carried into our library from the Japanese traditional color Yanagisusutake, \"sooty willow bamboo,\" and it sits 11.7 units from the plain [[umber]].",
-   "body": "Our library lists this color under the Japanese name Yanagisusutake, written 柳煤竹, combining *yanagi* (willow), *susu* (soot) and *take* (bamboo) [1]. No book consulted independently dates the coinage beyond that library gloss, so it is undocumented here [1].\n\nThe swatch measures lightness 32, chroma 11 and hue 103 degrees, filed under Neutrals and used chiefly for painter's pigments [1]. The nearest named colors on file are [[guinea-hen]], [[dark-olive]], [[yellow-olive]] and [[dark-olive-grey]], at 2.6, 3.4, 3.4 and 3.4 ΔE [1]. A lighter, more saturated relative in the same name set is [[greenish-sage]]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "A color within range of this swatch appears in 4,172 of the 23,781 paintings in our archive, about 17.5 percent, as photographed, roughly split evenly between mid-tone and shadow use [2]. The earliest dated match is a 138 CE Egyptian funerary panel, a floor and not a first, since the archive's early centuries are thin [2]. Arnoud van Halen carries it in 31 of 50 dated paintings, 3.5 times the archive's overall rate[2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "柳 (yanagi), willow + 煤 (susu), soot + 竹 (take), bamboo",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
-  },
-  "aka": [
-   "Yanagisusutake",
-   "柳煤竹"
+  "slug": "greenish-umber",
+  "name": "Greenish umber",
+  "hex": "#4D4B3A",
+  "names": [
+    "Greenish umber"
   ],
-  "siblings": [
-   "guinea-hen",
-   "dark-olive",
-   "yellow-olive",
-   "dark-olive-grey"
+  "tier": "traditional",
+  "depth": "brief",
+  "lede": "Yanagisusutake, sooty willow-bamboo",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Greenish umber is a dark olive-brown carried into our library from the Japanese traditional color Yanagisusutake, \"sooty willow bamboo,\" and it sits 11.7 units from the plain [[umber]].",
+      "body": "Our library lists this color under the Japanese name Yanagisusutake, written 柳煤竹, combining *yanagi* (willow), *susu* (soot) and *take* (bamboo) [1]. No book consulted independently dates the coinage beyond that library gloss, so it is undocumented here [1].\n\nThe swatch measures lightness 32, chroma 11 and hue 103 degrees, filed under Neutrals and used chiefly for painter's pigments [1]. The nearest named colors on file are [[guinea-hen]], [[dark-olive]], [[dark-olive-grey]] and [[dark-olive-grey]], at 2.6, 3.4, 3.4 and 3.4 ΔE [1]. A lighter, more saturated relative in the same name set is [[grey-celadon]]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "A color within range of this swatch appears in 4,172 of the 23,781 paintings in our archive, about 17.5 percent, as photographed, roughly split evenly between mid-tone and shadow use [2]. The earliest dated match is a 138 CE Egyptian funerary panel, a floor and not a first, since the archive's early centuries are thin [2]. Arnoud van Halen carries it in 31 of 50 dated paintings, 3.5 times the archive's overall rate[2]."
+    }
   ],
-  "parent": "umber",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Yanagisusutake (柳煤竹), \"sooty willow bamboo\""
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 4172,
-  "first_seen": {
-   "year": 138,
-   "painter": null
-  },
-  "painters": [
-   {
-    "name": "Arnoud van Halen",
-    "n": 50,
-    "hits": 31,
-    "lift": 3.53
-   }
-  ],
-  "measured": {
-   "lch": [
-    32,
-    11,
-    103
-   ],
-   "nearest": [
-    [
-     "Guinea Hen",
-     2.6
+  "aside": {
+    "origin": {
+      "named_after": "柳 (yanagi), willow + 煤 (susu), soot + 竹 (take), bamboo",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+    },
+    "aka": [
+      "Yanagisusutake",
+      "柳煤竹"
+    ],
+    "siblings": [
+      "guinea-hen",
+      "dark-olive",
+      "dark-olive-grey"
+    ],
+    "parent": "umber",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Yanagisusutake (柳煤竹), \"sooty willow bamboo\""
+      }
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (data/graph/fieldnotes, tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What three words combine to form the Japanese name Yanagisusutake?",
-   "choices": [
-    "Willow, soot, bamboo",
-    "River, stone, moss",
-    "Pine, ash, clay",
-    "Bamboo, ink, silk"
-   ],
-   "answer": "Willow, soot, bamboo",
-   "kind": "pick"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 4172,
+    "first_seen": {
+      "year": 138,
+      "painter": null
+    },
+    "painters": [
+      {
+        "name": "Arnoud van Halen",
+        "n": 50,
+        "hits": 31,
+        "lift": 3.53
+      }
+    ],
+    "measured": {
+      "lch": [
+        32,
+        11,
+        103
+      ],
+      "nearest": [
+        [
+          "Guinea Hen",
+          2.6
+        ]
+      ]
+    }
   },
-  {
-   "q": "True or false: this is one of the rarest colors in our archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Which painter's work carries this color far above the archive's average rate?",
-   "choices": [
-    "Arnoud van Halen",
-    "Claude Monet",
-    "Titian",
-    "Vermeer"
-   ],
-   "answer": "Arnoud van Halen",
-   "kind": "pick"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub painting archive, 23,781 paintings, as photographed (data/graph/fieldnotes, tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What three words combine to form the Japanese name Yanagisusutake?",
+      "choices": [
+        "Willow, soot, bamboo",
+        "River, stone, moss",
+        "Pine, ash, clay",
+        "Bamboo, ink, silk"
+      ],
+      "answer": "Willow, soot, bamboo",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: this is one of the rarest colors in our archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Which painter's work carries this color far above the archive's average rate?",
+      "choices": [
+        "Arnoud van Halen",
+        "Claude Monet",
+        "Titian",
+        "Vermeer"
+      ],
+      "answer": "Arnoud van Halen",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Greenish umber's Japanese name, yanagisusutake, stitches together willow, soot and bamboo into one dark olive-brown."
+  ],
+  "words": 176,
+  "status": "checked",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-09",
+    "issues": [
+      "No book consulted independently dates the name Yanagisusutake beyond the library's own gloss; stated as undocumented.",
+      "lint 2026-10-09"
+    ]
   }
- ],
- "openers": [
-  "Greenish umber's Japanese name, yanagisusutake, stitches together willow, soot and bamboo into one dark olive-brown."
- ],
- "words": 175,
- "status": "checked",
- "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-09",
-  "issues": [
-   "No book consulted independently dates the name Yanagisusutake beyond the library's own gloss; stated as undocumented.",
-   "lint 2026-10-09"
-  ]
- }
 }

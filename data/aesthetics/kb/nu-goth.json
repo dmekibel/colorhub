@@ -1,0 +1,52 @@
+{
+ "id": "nu-goth",
+ "name": "Nu-Goth",
+ "lineage": {
+  "influenced_by": [
+   "traditional goth",
+   "minimalist streetwear",
+   "witch-house"
+  ],
+  "influences": [
+   "witchcore"
+  ]
+ },
+ "eras": [
+  "2010–2015 (Tumblr)"
+ ],
+ "places": [
+  "Tumblr"
+ ],
+ "garments": [
+  "minimalist all-black streetwear (fewer lace/velvet flourishes than classic goth)",
+  "crescent moon and geometric jewelry",
+  "box braids/sleek hair"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "classic goth's ornate Victorian/medieval references, trading them for a flatter, more minimal, streetwear-adjacent black.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Hipster Goth",
+  "decade_of_origin": "2010s",
+  "key_motifs": "Occult and alchemical symbols, moons, triangles, wide-brimmed hats, harnesses, platform boots, round sunglasses",
+  "key_colours": "Monochromatic (black, white, grey)",
+  "related_aesthetics": "Goth\nHealth Goth\nHipster\nPastel Goth\nTrad Goth\nWitch House",
+  "key_values": "Modernism, minimalism, occultism, internet culture, fashion-forwardness"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Nu-Goth"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 91% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

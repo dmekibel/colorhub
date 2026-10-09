@@ -1,0 +1,54 @@
+{
+ "id": "preppy",
+ "name": "Preppy",
+ "lineage": {
+  "influenced_by": [
+   "actual Ivy League and Northeastern boarding-school dress codes"
+  ],
+  "influences": [
+   "old-money",
+   "tenniscore"
+  ]
+ },
+ "eras": [
+  "mid-20th century, codified 1980 (The Official Preppy Handbook)"
+ ],
+ "places": [],
+ "garments": [
+  "cable-knit sweaters",
+  "madras plaid",
+  "boat shoes",
+  "pearls"
+ ],
+ "media": [
+  {
+   "title": "Lisa Birnbach (ed.), The Official Preppy Handbook (1980)",
+   "note": "the book that named and satirized the style for a mass audience"
+  }
+ ],
+ "figures": [
+  "Lisa Birnbach"
+ ],
+ "reacts_against": "1970s countercultural dressing-down, reclaiming a visibly formal, old-money-coded wardrobe at a moment when casualness had become the more rebellious choice.",
+ "revivals": [
+  "Ralph Lauren's ongoing commercial reinterpretation since the 1970s-80s",
+  "a 2020s TikTok-driven old-money-adjacent revival"
+ ],
+ "article": "Preppy style is unusual in having an exact, dateable codification: The Official Preppy Handbook, edited by Lisa Birnbach and published in 1980, took the real dress codes of elite Northeastern prep schools and Ivy League colleges and turned them into a best-selling satirical guide — simultaneously mocking the style and, by giving it a name and a shopping list, making it far easier for people outside that world to buy into it. The book arrived at a moment when 1970s countercultural dressing-down had made visible formality itself feel like the more unexpected choice, and Ralph Lauren's parallel commercial build-out of Ivy-coded branding through the same period turned a once-exclusive campus uniform into a widely available retail category. The style's pastel argyle, boat shoes and popped collars have cycled in and out of fashion-media attention repeatedly since, most recently absorbed into the 2020s \"old money\" and quiet-luxury trend wave, which keeps preppy's palette while dropping most of its original collegiate specificity.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Preppy"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 59% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

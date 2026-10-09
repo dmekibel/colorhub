@@ -1,0 +1,137 @@
+{
+  "slug": "dull-indian-purple",
+  "name": "Dull Indian Purple",
+  "hex": "#7F616A",
+  "names": [
+    "Dull Indian Purple"
+  ],
+  "tier": "place",
+  "depth": "short",
+  "lede": "Dull Indian Purple is a muted, greyish mauve-purple from Robert Ridgway's 1912 nomenclature, one of several colors in his system carrying the modifier \"Indian\" without a stated reason.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "One of Ridgway's unexplained 'Indian' names",
+      "body": "Ridgway's 1912 nomenclature places this hue on plate XLIV, hue 69 triple-prime, tone i, and the ISCC-NBS system later classified it as a grayish reddish purple, about 5.2 units from that block's reference color [1]. Ridgway's book does not explain what \"Indian\" refers to across its various purple, red and yellow entries, so whether this name points to India, to a pigment once imported from there, or to some other convention is undocumented here [1]. The nearest named colors on file are [[slate-purple]], [[deep-purplish-vinaceous]], [[old-lavender]] and [[faded-rosewood]], at 3.7, 4.6, \nIn Munsell terms this chip reads 6.3RP 4.4/2.9, low in chroma, the \"dull\" announced in its own name [1]. [[plum|Plum]] sits closer in hue, if not in our measured distance [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a close match to this color in 70 of 23,781 paintings, about 0.29 percent, and in 31 by the stricter within-painting measure, which makes it rarer than 57 percent of the named colors we track [2]. Inside those paintings it most often sits as a hidden color, 58 percent of the 31, present but not dominant, the kind of tone a varnish layer can mute further [2]. It is most over-represented in paintings from India, at 3.1 times the expected rate, 8 of 721 such paintings, and peaks in paintings from the 1900s, at 2.5 times expected [2].\n\nThe earliest match in our archive dates to 1450, with the latest from 1932, 46 dated paintings in all, a floor and not a first, since the archive's early centuries are thin [2]. That earliest match is 462 years before the name's own earliest record in our sources, 1912 [1][2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented; one of several Ridgway names carrying the modifier \"Indian\"",
+      "first_recorded": "1912 (Ridgway)",
+      "source": "ColorHub color library, Dull Indian Purple entry"
+    },
+    "aka": [],
+    "siblings": [
+      "slate-purple",
+      "deep-purplish-vinaceous",
+      "old-lavender",
+      "faded-rosewood"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 70,
+    "n_within": 31,
+    "rarer_than_pct": 57,
+    "country": "India, 3.1x expected",
+    "century_peak": "1900s, 2.5x expected",
+    "role": "hidden color 58%",
+    "measured": {
+      "lch": [
+        44.4,
+        13.7,
+        358.3
+      ],
+      "nearest": [
+        [
+          "Slate-Purple",
+          3.7
+        ],
+        [
+          "Deep Purplish Vinaceous",
+          4.6
+        ],
+        [
+          "Old Lavender",
+          5.8
+        ],
+        [
+          "Deep Livid Brown",
+          5.8
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "kind": "data",
+      "cite": "ColorHub color library: Ridgway 1912 and ISCC-NBS 1955 entries (data/library.json, Dull Indian Purple)",
+      "loc_kind": null,
+      "url": null,
+      "n": 1
+    },
+    {
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null,
+      "n": 2
+    }
+  ],
+  "questions": [
+    {
+      "q": "True or false: Ridgway's 1912 book explains what \"Indian\" refers to in this and similar color names.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "In our archive, which country is Dull Indian Purple most over-represented in?",
+      "choices": [
+        "India",
+        "France",
+        "the Netherlands",
+        "Japan"
+      ],
+      "answer": "India",
+      "kind": "pick"
+    },
+    {
+      "q": "Inside a painting, how does Dull Indian Purple most often function, by our archive's measure?",
+      "choices": [
+        "As a hidden, muted color rather than a dominant one",
+        "As the brightest highlight",
+        "As a border pigment",
+        "As the main background wash"
+      ],
+      "answer": "As a hidden, muted color rather than a dominant one",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Dull Indian Purple is one of three \"Indian\"-named colors in our library, and none of the three come with an explanation.",
+    "In our archive, this muted purple shows up most often as a hidden color -- present, but never the star of the canvas."
+  ],
+  "status": "draft",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
+    ]
+  },
+  "words": 321
+}

@@ -1,0 +1,71 @@
+{
+ "id": "indie-sleaze",
+ "name": "Indie Sleaze",
+ "lineage": {
+  "influenced_by": [
+   "2000s indie rock scenes",
+   "disposable-camera party photography",
+   "American Apparel advertising"
+  ],
+  "influences": [
+   "scene",
+   "y2k"
+  ]
+ },
+ "eras": [
+  "2006–2012 (lived era)",
+  "2021–present (nostalgia revival, named retroactively)"
+ ],
+ "places": [
+  "Brooklyn/east London DIY venues",
+  "Cobrasnake and The Misshapes party photography"
+ ],
+ "garments": [
+  "skinny jeans",
+  "ironic band tees",
+  "disheveled layering",
+  "neon accents under flash photography",
+  "smudged eyeliner"
+ ],
+ "media": [
+  {
+   "title": "The Cobrasnake (party photo blog, 2005–2012)",
+   "note": "the main visual archive the revival draws its palette from"
+  },
+  {
+   "title": "MGMT, Oracular Spectacular (2007)",
+   "note": "soundtrack most tied to the era's parties"
+  }
+ ],
+ "figures": [
+  "Mark \"Cobrasnake\" Hunter"
+ ],
+ "reacts_against": "the polished, filtered Instagram aesthetics that followed it (2013–2020); indie sleaze's whole appeal on revival is its deliberate ugliness and flash-lit grain.",
+ "revivals": [
+  "named and revived 2021–2023, largely on TikTok, as a reaction against hyper-curated influencer photography"
+ ],
+ "article": "Indie sleaze is unusual among internet aesthetics because almost nobody called it that while it was happening. From roughly 2006 to 2012, a loose scene around Brooklyn and East London DIY venues dressed down on purpose — skinny jeans, smudged eyeliner, a disposable-camera flash blowing out every color into the same harsh, slightly green-white — and partied in a way that got photographed obsessively by blogs like The Cobrasnake. Nobody named the look until 2021, when it resurfaced on TikTok as a reaction to a decade of ring-light influencer polish: suddenly the grainy, overexposed, color-blown photos of 2008 house parties looked like a style rather than just bad lighting. The palette isn't really a chosen one so much as the photographic signature of cheap digital flash cameras: neon accents flattened and bleached, skin tones pushed cool, shadows crushed to near-black. Because the revival is built entirely on old photos and old music rather than new designers, indie sleaze's color identity is tied unusually tightly to a specific camera technology and a specific decade, rather than to any garment or motif.",
+ "wiki_facts": {
+  "other_names": "Indie Über-Sleaze (original term), Hipster (colloquial),\nPost-Underground",
+  "decade_of_origin": "Mid-to-late 2000s",
+  "key_motifs": "Amateur flash photography, smudged eyeliner, messy hair, ripped tights, deep V-necks, neon accents, band t-shirts, skinny jeans, metallic fabrics, American Apparel basics, cigarettes",
+  "key_colours": "Black, white, neon pink, neon green, metallic silver",
+  "related_aesthetics": "BloghouseBrat Summer (revival)Candy SleazeElectroclashGeek ChicHedi BoyHeroin ChicHipsterIndieKinderwhoreMcBlingNew RaveRecession PopSwagTweeUrbancore",
+  "key_values": "Hedonism, irony, performed authenticity, nightlife documentation, chaotic energy, rejection of polish, provocativeness, sexuality"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Indie_Sleaze"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 59% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 68% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

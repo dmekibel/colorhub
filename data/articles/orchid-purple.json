@@ -1,110 +1,114 @@
 {
- "slug": "orchid-purple",
- "name": "Orchid purple",
- "hex": "#B775CA",
- "names": [
-  "Orchid purple"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Orchid purple is a bright, light purple built directly on [[orchid]], and it shares its exact screen color with a second library name, Amparo Purple.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A family word's purple",
-   "body": "The library marks Orchid purple as a direct modifier of the family word [[orchid]], recorded by Ridgway in 1912 [1]. The ISCC-NBS 1955 lists classify it as a vivid reddish purple, brighter and more saturated than most flower-named purples in our library [1]. At this hex our library also records a second name, Amparo Purple, at an identical value, two separate dictionary entries for one color [1].\n\nThe nearest distinct neighbor is [[light-hortense-violet|Light Hortense Violet]], about 2.7 units away by CIEDE2000, with [[lavender-floral|Lavender (Floral)]] not far behind [1]. In LCH terms it measures lightness 59, chroma 53, hue 320 degrees, Munsell 6.0P 5.8/12.4 [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Orchid purple is not a painter's color. No painting in our archive of 23,781, as photographed, has a color within a small distance of this swatch covering even five percent of the canvas [2]. That describes our own archive, not painting as a whole, and the gap likely owes something to how rare a pigment this bright and this purple was before modern synthetic dyes [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "orchid, a direct family-word modifier",
-   "first_recorded": "1912 (Ridgway)",
-   "source": "Ridgway, Color Standards and Color Nomenclature (1912); ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "amparo-purple",
-   "light-hortense-violet"
+  "slug": "orchid-purple",
+  "name": "Orchid purple",
+  "hex": "#B775CA",
+  "names": [
+    "Orchid purple",
+    "Amparo Purple"
   ],
-  "parent": "orchid",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "match": {
-   "hex": "#B775CA",
-   "min_cover": 0.05
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Orchid purple is a bright, light purple built directly on [[orchid]], and it shares its exact screen color with a second library name, Amparo Purple.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A family word's purple",
+      "body": "The library marks Orchid purple as a direct modifier of the family word [[orchid]], recorded by Ridgway in 1912 [1]. The ISCC-NBS 1955 lists classify it as a vivid reddish purple, brighter and more saturated than most flower-named purples in our library [1]. At this hex our library also records a second name, Amparo Purple, at an identical value, two separate dictionary entries for one color [1].\n\nThe nearest distinct neighbor is [[light-hortense-violet|Light Hortense Violet]], about 2.7 units away by CIEDE2000, with [[floral-lavender|Lavender (Floral)]] not far behind [1]. In LCH terms it measures lightness 59, chroma 53, hue 320 degrees, Munsell 6.0P 5.8/12.4 [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Orchid purple is not a painter's color. No painting in our archive of 23,781, as photographed, has a color within a small distance of this swatch covering even five percent of the canvas [2]. That describes our own archive, not painting as a whole, and the gap likely owes something to how rare a pigment this bright and this purple was before modern synthetic dyes [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "orchid, a direct family-word modifier",
+      "first_recorded": "1912 (Ridgway)",
+      "source": "Ridgway, Color Standards and Color Nomenclature (1912); ColorHub library"
+    },
+    "aka": [
+      "Amparo Purple (ridgway+iscc-nbs+maerz-paul+xkcd)"
+    ],
+    "siblings": [
+      "orchid-purple",
+      "light-hortense-violet",
+      "purple-mountain-majesty"
+    ],
+    "parent": "orchid",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "measured": {
-   "lch": [
-    59,
-    53,
-    320
-   ],
-   "nearest": [
-    [
-     "Light Hortense Violet",
-     2.7
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "match": {
+      "hex": "#B775CA",
+      "min_cover": 0.05
+    },
+    "measured": {
+      "lch": [
+        59,
+        53,
+        320
+      ],
+      "nearest": [
+        [
+          "Light Hortense Violet",
+          2.7
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Ridgway 1912; ISCC-NBS 1955 block 236; near-duplicate match Amparo Purple, ΔE 0.0; nearest distinct match Light Hortense Violet, ΔE 2.7",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Orchid purple shares its exact screen color with which other library name?",
+      "choices": [
+        "Amparo Purple",
+        "Old Lilac",
+        "Oriental Fuchsia",
+        "Byzantium"
+      ],
+      "answer": "Amparo Purple",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Orchid purple is common in our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Orchid purple doesn't show up in our archive of 23,781 paintings at all."
+  ],
+  "words": 194,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Ridgway 1912; ISCC-NBS 1955 block 236; near-duplicate match Amparo Purple, ΔE 0.0; nearest distinct match Light Hortense Violet, ΔE 2.7",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Orchid purple shares its exact screen color with which other library name?",
-   "choices": [
-    "Amparo Purple",
-    "Old Lilac",
-    "Oriental Fuchsia",
-    "Byzantium"
-   ],
-   "answer": "Amparo Purple",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Orchid purple is common in our painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Orchid purple doesn't show up in our archive of 23,781 paintings at all."
- ],
- "words": 194,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

@@ -1,0 +1,112 @@
+{
+ "slug": "deep-soft-bluish-violet",
+ "name": "Deep Soft Bluish Violet",
+ "hex": "#6E629A",
+ "names": [
+  "Deep Soft Bluish Violet"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Deep Soft Bluish Violet is a muted, darkened reading of [[violet]] pulled toward blue, from Ridgway's 1912 plates and the 1955 ISCC-NBS system.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Three words doing specific work",
+   "body": "The name layers *deep* (lower lightness), *soft* (lower chroma) and *bluish* (a hue shift) onto the base color [[violet]], in the library's own modifier grammar [1]. Ridgway's 1912 plate XXIII, hue 57′, tone i, is the recorded source, and the ISCC-NBS system of 1955 later filed the same chip into block 207, named strong violet in that system's own list [1].\n\nIts closest look-alike is [[dauphin-s-violet]], about 3.3 units off, with [[deep-soft-blue-violet]] close behind at 3.4 [2]. [[foxglove]] and [[blanc-s-violet]] sit further out [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This match appears in 0.03% of the 23,781 paintings in our archive (8 paintings, as photographed); the within-painting lens narrows that to 2 [3]. In our archive it is rarer than 82% of the named colors [3]. Inside a painting it most often plays an accent, in 100% of its 2 appearances by lightness rank within the painting [3]. The earliest match dates to 1658, 254 years before the name's 1912 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "three stacked modifiers, deep, soft and bluish, on the base color violet",
+   "first_recorded": "Ridgway 1912, plate XXIII",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "dauphin-s-violet",
+   "foxglove",
+   "blanc-s-violet"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "deep-soft-blue-violet",
+    "gloss": "a separately named near-twin, about 3.4 units away"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 8,
+  "pct_archive": 0.03,
+  "n_within_painting": 2,
+  "pct_within_painting": 0.01,
+  "rank_pct": 18,
+  "name_first_recorded": 1912,
+  "earliest_match_year": 1658
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXIII; ISCC-NBS Circular 553 (1955), block 207",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,700 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which base color does Deep Soft Bluish Violet modify?",
+   "choices": [
+    "Violet",
+    "Blue",
+    "Grey",
+    "Teal"
+   ],
+   "answer": "Violet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color is common in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Deep Soft Bluish Violet stacks three modifiers on one base color and is one of the rarest matches in our archive."
+ ],
+ "words": 230,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field section used the within-painting-lens count/percent but labeled it 'as photographed' and used a stale archive total; replaced with the correct as-photographed count/percent (23,781-painting archive) and refreshed the decade, role, painter, country and first-seen facts from data/graph/fieldnotes"
+  ]
+ }
+}

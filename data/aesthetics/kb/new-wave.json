@@ -1,0 +1,58 @@
+{
+ "id": "new-wave",
+ "name": "New Wave",
+ "lineage": {
+  "influenced_by": [
+   "punk's DIY energy, redirected through art-school irony",
+   "early affordable synthesizers"
+  ],
+  "influences": [
+   "synthwave",
+   "vaporwave"
+  ]
+ },
+ "eras": [
+  "1977–1985"
+ ],
+ "places": [],
+ "garments": [
+  "skinny ties",
+  "structured blazers",
+  "synthesizers"
+ ],
+ "media": [
+  {
+   "title": "Talking Heads, Remain in Light (1980)",
+   "note": ""
+  },
+  {
+   "title": "Devo's matching jumpsuits and energy-dome hats (late 1970s on)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "David Byrne"
+ ],
+ "reacts_against": "punk's raw aggression, keeping its DIY, anti-corporate spirit but channeling it through synthesizers, art-school concept and a more deliberately stylized visual presentation.",
+ "revivals": [
+  "directly cited by synthwave's 1980s-referencing visual language"
+ ],
+ "article": "New wave grew out of the same late-1970s scene that produced punk, sharing its DIY, anti-corporate-rock attitude but trading raw guitar aggression for synthesizers, angular art-school concept and a far more deliberate visual sensibility. Bands like Talking Heads and Devo treated the stage presentation itself as part of the art — Devo performed in matching industrial jumpsuits and red \"energy dome\" hats, a costume as conceptually loaded as their music. The genre's rise coincided almost exactly with MTV's 1981 launch, and new wave's sharper, more graphic visual style (bold color-blocking, geometric shapes, structured tailoring) was unusually well suited to the new medium, which helped push it toward mainstream pop success faster than punk itself ever achieved. That synthesizer-and-geometry visual language became a direct ancestor of 1980s-nostalgic genres decades later, most clearly synthwave, which revives new wave and its adjacent synth-pop scene's color and font choices almost wholesale.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/New Wave"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "a vivid streak — roughly 33% of the color measured is highly saturated",
+   "mostly muted — about 53% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

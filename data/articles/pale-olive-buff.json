@@ -1,0 +1,107 @@
+{
+ "slug": "pale-olive-buff",
+ "name": "Pale Olive-Buff",
+ "hex": "#DCD0B6",
+ "names": [
+  "Pale Olive-Buff"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pale Olive-Buff is a muted, light tan, the pale tone Robert Ridgway charted beside the parent color Olive-Buff in his 1912 color atlas.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pale tone of Olive-Buff",
+   "body": "Pale Olive-Buff puts Ridgway's tone word Pale in front of [[olive-buff]], the paired-tone method his 1912 *Color Standards and Color Nomenclature* used across the atlas [1]. Olive-Buff itself is Ridgway's plate XL, hue 21 triple-prime, tone d, later filed by the ISCC-NBS dictionary of 1955 in block 89 [1].\n\nIts nearest named neighbor is [[light-ivory]], 3.4 units off and yellower than this swatch [1]; [[beige]] sits 3.6 units away, reading more vivid, and [[bone]] 4.0 units away, almost the same [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 2,438 of 23,781 paintings, 10.25 percent, as photographed; narrowing to at least five percent coverage inside a painting leaves 1,701 [2]. That makes it more common than 94 percent of the named colors in our library [2]. It peaks in the 1100s, present in 28.0 percent of the 50 paintings we have from then, 1.8 times the archive's overall rate [2]. Inside a painting it most often plays a light, in 51 percent of its 1,701 appearances by lightness rank [2].\n\nThe earliest match dates to 900, in a work attributed to Zhao Guangfu, a floor and not a first since the archive's early centuries are thin; that is 1,012 years before the name's 1912 record, so the match marks a look-alike hue in an aged photograph, not a surviving pigment [2]. Willem van de Velde (I) used it most, in 9 of his 14 paintings here, 7.7 times the rate of the museums those works come from, and it is most over-represented in paintings from Iran, 2.8 times the expected rate [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Ridgway's tone system: the pale tone of Olive-Buff",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XL",
+   "source": "Ridgway 1912; ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "olive-buff",
+   "light-ivory",
+   "beige",
+   "bone"
+  ],
+  "parent": "olive-buff",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2438,
+  "n_within_painting": 1701,
+  "pct_archive": 10.25,
+  "rank_pct": 94,
+  "measured": {
+   "nearest": [
+    [
+     "Light Ivory",
+     3.4
+    ],
+    [
+     "Beige",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json: Ridgway 1912, ISCC-NBS 1955) and look-alike distances, data/graph/edges-p.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed, data/graph/fieldnotes/p.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color sits closest to Pale Olive-Buff?",
+   "choices": [
+    "Light Ivory",
+    "Beige",
+    "Bone"
+   ],
+   "answer": "Light Ivory",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pale Olive-Buff is one of the rarer colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Olive-Buff turns up in more than one painting in ten, among the most common named colors in our archive."
+ ],
+ "words": 288,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

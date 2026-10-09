@@ -198,24 +198,72 @@ function hmArrLabel(v = hmView()) {
   if (!sp) return a.title;
   return `${a.title} · ${ord === "near" ? "Around " + hmNear(v).n : sp.t}`;
 }
-// what position means right now, in words: line (the sheet's one line), top (the map's caption for a radial shape),
-// l and r (the map's edge captions for a grid)
+// what position means right now, in words -- the Arrange sheet's one descriptive line under the shape/order chips
+// (David, 2026-10-09: "I don't like the colder/warmer labels" -- the map used to float this same wording as edge
+// captions over the honeycomb itself, via hmAxes(); that's gone, this sentence-form description in the sheet stays)
 function hmMeaning(v = hmView()) {
   const a = HONEY_ARR[v.arr] || HONEY_ARR.map, ord = hmOrd(v.arr, v), spec = honeyOrderSpec(v.arr, ord);
   if (a.kind === "radial") {
     const mid = ord === "near" ? hmNear(v).n : ord === "today" && typeof dailyColor === "function" ? `today's color, ${dailyColor().n}` : spec.mid;
-    return { line: `Middle: ${mid}. Edge: ${spec.edge}.`, top: `Middle: ${mid} · Edge: ${ord === "common" ? "the rarest" : spec.edge}` };
+    return { line: `Middle: ${mid}. Edge: ${spec.edge}.` };
   }
   if (a.kind === "grid") {
     if (v.arr === "map" && ord === "hue") return { line: a.sub + "." };
     const line = spec.line.charAt(0).toUpperCase() + spec.line.slice(1);
-    return { line: v.arr === "families" ? `Inside each family: ${spec.line}.` : line + ".", l: spec.l, r: spec.r };
+    return { line: v.arr === "families" ? `Inside each family: ${spec.line}.` : line + "." };
   }
-  return { line: a.sub + ".", l: a.axes && a.axes.l, r: a.axes && a.axes.r };
+  return { line: a.sub + "." };
 }
 // regions (Families, Hue pages) read as a whole book, so the lens is gentler there: a strong fisheye shrank the outer
 // regions to specks. Your Magnify still moves it, from a calmer start.
 const hmLiveTweak = v => { const a = HONEY_ARR[v.arr], feel = a && a.fit ? { ...v.feel, mag: v.feel.mag * .45 } : v.feel; return { ...hmFeelTweak(v.style, feel), layout: hmLayoutKey(v.arr, v.style, hmOrd(v.arr, v)) }; };
+
+// ---------- selection mode's own arrangement choice (David, 2026-10-09: "I don't like when the selected colors
+// are scattered... pick the appropriate view so they're minimally scattered"). Among a handful of candidate
+// arrangements, hmBestArrangeFor lays the WHOLE current item set out each way (honeyLayout, the same builder the
+// live map uses) and keeps whichever one packs the SELECTED colors into the smallest bounding box -- a cheap,
+// honest proxy for "minimally scattered" that needs no canvas. The radial shapes are centered on the selection's
+// own average color (hmAvgHex), which usually wins outright for anything that was already one family or palette.
+function hmAvgHex(hexes) {
+  const labs = hexes.map(h => lab(h));
+  const L = labs.reduce((s, v) => s + v[0], 0) / labs.length, a = labs.reduce((s, v) => s + v[1], 0) / labs.length, b = labs.reduce((s, v) => s + v[2], 0) / labs.length;
+  return labHex(L, a, b);
+}
+const HM_SEL_CANDIDATES = [
+  ["map", "hue", "arranged by hue so they sit together"],
+  ["map", "light", "arranged by lightness so they sit together"],
+  ["map", "chroma", "arranged by vividness so they sit together"],
+  ["families", "hue", "grouped by family so they sit together"],
+  ["rings", "near", "centered on their own average color"],
+  ["sunflower", "near", "centered on their own average color"],
+];
+function hmBestArrangeFor(items, hexes) {
+  if (!hexes || hexes.length < 2 || !items || !items.length) return null;
+  // a selection's own hexes (a painting's measured palette, say) rarely land exactly on a named bubble's hex, so
+  // match each one to its NEAREST point in Lab, the same way honey.js hlItems() finds the lit bubbles themselves
+  const labs = hexes.map(h => lab(h));
+  let near = null;
+  try { near = hmAvgHex(hexes); } catch (e) {}
+  let best = null;
+  for (const [arr, ord, why] of HM_SEL_CANDIDATES) {
+    if (!HONEY_ARR[arr] || (ord === "near" && !near)) continue;
+    const key = ord === "near" ? `${arr}~near~${near.toUpperCase()}` : `${arr}~${ord}`;
+    let lay; try { lay = honeyLayout(items, key); } catch (e) { continue; }
+    if (!lay.pts.length) continue;
+    const seen = new Set(), matched = [];
+    for (const L of labs) {
+      let bp = null, bd = Infinity;
+      for (const p of lay.pts) { const it = p.it, dd = (it.lab[0] - L[0]) ** 2 + (it.lab[1] - L[1]) ** 2 + (it.lab[2] - L[2]) ** 2; if (dd < bd) { bd = dd; bp = p; } }
+      if (bp && !seen.has(bp)) { seen.add(bp); matched.push(bp); }
+    }
+    if (matched.length < Math.min(2, hexes.length)) continue;
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const p of matched) { if (p.x < minX) minX = p.x; if (p.x > maxX) maxX = p.x; if (p.y < minY) minY = p.y; if (p.y > maxY) maxY = p.y; }
+    const area = Math.max(.02, maxX - minX) * Math.max(.02, maxY - minY);
+    if (!best || area < best.area) best = { arr, ord, why, area, near: ord === "near" ? { h: near, n: "" } : null };
+  }
+  return best;
+}
 
 // ---------- the Tweak panel: live sliders over whatever preset is active, saved in S.hm.tweak ----------
 // A compact, opaque, non-modal sheet (~45dvh): the honeycomb above it keeps running and repainting as the
@@ -411,7 +459,7 @@ function hmHome() {
       else { if (fx && fx.morph) fx.morph(); open(); }
     } finally { if (src) src.remove(); }
   };
-  let hlAll = false;
+  let hlAll = false, selPrevArr = null;   // selPrevArr: the arrangement a selection (HONEY_HL) displaced, restored when it clears
   if (typeof HONEY_LIVE !== "undefined") HONEY_LIVE.add(() => { if (!el.isConnected) return false; if (hlAll && !HONEY_HL) { hlAll = false; render(true); } return true; });
   let baseItems = [];   // the source's colors before the family / tone / knowledge filters (the chips count from these)
   function paintTitle(loading) {
@@ -441,7 +489,23 @@ function hmHome() {
     if (typeof HONEY_HL !== "undefined" && HONEY_HL && (HONEY_HL.fresh || HONEY_HL.every) && !every) {
       if (!LONG_NAMES || !CORE_NAMES) { await Promise.all([loadCoreNames(), loadLongNames()]); if (!el.isConnected || g !== gen) return; }
       items = hmEveryNameItems(); hlAll = true; HONEY_HL.every = true;
-    } else if (!(typeof HONEY_HL !== "undefined" && HONEY_HL)) hlAll = false;
+      // David: "pick the appropriate view for the list of colors so they're minimally scattered." Chosen once per
+      // distinct selection (HONEY_HL.rev), not on every reframe (Learn these/Find them set .fresh again on the way
+      // back) -- the arrangement a selection displaces is remembered in selPrevArr and restored the moment it clears.
+      if (HONEY_HL.arrRev !== HONEY_HL.rev) {
+        HONEY_HL.arrRev = HONEY_HL.rev;
+        if (!selPrevArr) selPrevArr = { arr: S.hm.arr, ord: { ...(S.hm.ord || {}) }, near: S.hm.near };
+        const picked = typeof hmBestArrangeFor === "function" ? hmBestArrangeFor(items, HONEY_HL.hexes) : null;
+        if (picked) {
+          S.hm.arr = picked.arr; S.hm.ord = { ...(S.hm.ord || {}), [picked.arr]: picked.ord };
+          if (picked.near) S.hm.near = picked.near;
+          HONEY_HL.why = picked.why;
+        }
+      }
+    } else if (!(typeof HONEY_HL !== "undefined" && HONEY_HL)) {
+      hlAll = false;
+      if (selPrevArr) { S.hm.arr = selPrevArr.arr; S.hm.ord = selPrevArr.ord; if (selPrevArr.near) S.hm.near = selPrevArr.near; selPrevArr = null; }
+    }
     baseItems = items;
     if (!hlAll) {
       let out = hmFiltered(items);
@@ -455,7 +519,7 @@ function hmHome() {
     }
     // an order that reads the painting counts (Painted) waits for them the first time (a small file)
     { const vv = hmView(), sp = honeyOrderSpec(vv.arr, hmOrd(vv.arr, vv)); if (sp && sp.needs === "painted" && !HONEY_PAINTED) { await honeyLoadPainted().catch(() => {}); if (!el.isConnected || g !== gen) return; } }
-    paintTitle(); hmAxes();
+    paintTitle();
     if (typeof paintDo === "function") paintDo();
     const tw = hmLiveTweak(hmView());
     if (ctrl) ctrl.update({ items, soft, arrange: !!ro.arrange, tweak: tw, style: hmView().style });
@@ -463,6 +527,13 @@ function hmHome() {
       onZoom: z => { S.hm.zoom = Math.round(z * 100) / 100; save(); } });
     window.HM_CTRL = ctrl;   // the map, for js/polish.js flyToMap()
     hmWireChrome();
+    // David: "if I change something about the map, the bottom corner buttons disappear, and I can't get them back."
+    // Every chooser setting (stage, family, tone, filter, a collection, Arrange's shape/order/Look/feel/edges) ends
+    // in a render(): cornersBack() used to run only from a sheet/menu CLOSE or a pan's finger-lift, so a stray
+    // chrome-hide (or a faded inline style from a transition in flight when the setting changed) could survive a
+    // render and never get undone until something else happened to close a sheet. A sheet still open afterward
+    // still visually covers the corners as before — this only clears a stuck fade, never the sheet's own layout.
+    cornersBack();
     if (typeof fvHomeReady === "function") fvHomeReady(el, ctrl);   // js/favs.js: open straight into pick mode when asked
   }
   function applyView(k, val) { S.hm[k] = val; save(); buzz(4); }
@@ -527,8 +598,18 @@ function hmHome() {
     // the map is what you're adjusting: the area above the sheet stays clear (a tap there still closes it)
     const scrim = sh.previousElementSibling; if (scrim && scrim.classList.contains("scrim")) scrim.classList.add("hm-scrim-clear");
     const q = s2 => sh.querySelector(s2), qa = s2 => [...sh.querySelectorAll(s2)];
-    const applyInset = () => requestAnimationFrame(() => { if (ctrl) { const r = sh.getBoundingClientRect(); ctrl.setInset({ bottom: Math.max(0, viewEl.getBoundingClientRect().bottom - r.top) }); } });   // measured to the map's own bottom (it reaches past innerHeight on an iPhone Home Screen app)
-    const mo = new MutationObserver(() => { if (!sh.isConnected) { if (ctrl) ctrl.setInset({ bottom: 0 }); mo.disconnect(); } });
+    // David, 2026-10-09: "the middle of the screen is covered by the sheet... zoomed in you can barely see the
+    // difference between views." For Arrange, once the inset has finished easing in (~300ms, honey.js's own
+    // insetCur tween), ctrl.enterFit() flies the map to show the whole thing centered above the sheet, and every
+    // setting change re-fits (js/honey.js update()) so the change reads at a glance; exitFit() below flies back
+    // to the pan/zoom you had, on any way the sheet closes.
+    const applyInset = () => requestAnimationFrame(() => {
+      if (!ctrl) return;
+      const r = sh.getBoundingClientRect();
+      ctrl.setInset({ bottom: Math.max(0, viewEl.getBoundingClientRect().bottom - r.top) });   // measured to the map's own bottom (it reaches past innerHeight on an iPhone Home Screen app)
+      if (arrange) setTimeout(() => { if (sh.isConnected) ctrl.enterFit(); }, reduceMotion ? 0 : 300);
+    });
+    const mo = new MutationObserver(() => { if (!sh.isConnected) { if (ctrl) { if (arrange) ctrl.exitFit(); ctrl.setInset({ bottom: 0 }); } mo.disconnect(); } });
     mo.observe(document.body, { childList: true });
     q("[data-sheet-close]").onclick = () => { buzz(4); close(); };
     const fmt = n => n.toLocaleString();
@@ -571,7 +652,6 @@ function hmHome() {
         S.hm.ord = { ...(S.hm.ord || {}), [arr]: id }; save(); buzz(4);
         paintOrd(); paintArr();
         if (ctrl) ctrl.update({ items, soft: true, arrange: true, recenter: true, tweak: hmLiveTweak(hmView()) });
-        hmAxes(true);
       };
       const paintArr = () => {
         const a = hmView().arr;
@@ -586,7 +666,6 @@ function hmHome() {
         const spec = honeyOrderSpec(b.dataset.arr, hmOrd(b.dataset.arr));
         if (spec && spec.needs === "painted") await honeyLoadPainted().catch(() => {});
         if (ctrl) ctrl.update({ items, soft: true, arrange: true, tweak: hmLiveTweak(hmView()) });
-        hmAxes(true);
       });
       paintOrd();
       { const cur = q(".hm-arr-b.on"); if (cur) cur.scrollIntoView({ block: "nearest", inline: "center" }); }
@@ -655,23 +734,6 @@ function hmHome() {
     }
     applyInset();
   }
-  // a quiet caption at the screen's edges for an arrangement whose direction means something ("Warmer", "Cooler"):
-  // never a label on a bubble, and it fades with the rest of the chrome while you drag
-  // A radial shape says what its middle and edge mean in one line at the top, for a few seconds after you open Home
-  // or change the order (then it goes: the map is the content).
-  let axT = 0;
-  function hmAxes(fresh) {
-    let ax = el.querySelector(".hm-axes");
-    const m = hmMeaning(), cap = {};
-    if (m.l) cap.l = m.l;
-    if (m.r) cap.r = m.r;
-    if (m.top) cap.t = m.top;
-    if (!Object.keys(cap).length || hlAll) { if (ax) ax.remove(); return; }
-    if (!ax) { ax = document.createElement("div"); ax.className = "hm-axes"; ax.setAttribute("aria-hidden", "true"); el.appendChild(ax); fresh = true; }
-    const html = Object.entries(cap).map(([side, t]) => `<span class="hm-ax hm-ax-${side}">${esc(t)}</span>`).join("");
-    if (ax.innerHTML !== html) { ax.innerHTML = html; fresh = true; }
-    if (fresh && cap.t) { const t = ax.querySelector(".hm-ax-t"); clearTimeout(axT); axT = setTimeout(() => { if (t.isConnected) t.classList.add("gone"); }, 4500); }
-  }
   // ---------- search: a tap (from the View panel's header) reveals the field; typing filters the honeycomb ----------
   const searchBox = $("#hmSearch"), searchInput = $("#hmq"), searchHint = $("#hmqHint");
   function openSearch() { searchBox.hidden = false; hmShowChrome(true); searchInput.focus(); }
@@ -721,14 +783,15 @@ function hmHome() {
   // Shown again as soon as the finger lifts, and it stays: no timer. (A 1.8 s auto-hide left the buttons drawn but
   // untappable, pointer-events off, so "no button in View works" — David.)
   function hmShowChrome() { el.classList.remove("chrome-hide"); clearTimeout(chromeT); }
+  let hmDragging = false;   // true only while a real drag/pinch on the canvas is live (the watchdog below must not fight it)
   function hmWireChrome() {
     const cv = viewEl.querySelector("canvas"); if (!cv || cv.dataset.hmWired) return; cv.dataset.hmWired = "1";
     // L18 (David: "everything disappears except the flashcards"): every corner fades together (css/home.css), only
     // once a drag really moves (a tap never blinks them), and they return a beat after the finger lifts
     let p0 = null;
     cv.addEventListener("pointerdown", e => { p0 = [e.clientX, e.clientY]; clearTimeout(chromeT); });
-    cv.addEventListener("pointermove", e => { if (p0 && Math.hypot(e.clientX - p0[0], e.clientY - p0[1]) > 10) { el.classList.add("chrome-hide"); clearTimeout(chromeT); } });
-    const lift = () => { p0 = null; clearTimeout(chromeT); chromeT = setTimeout(() => { el.classList.remove("chrome-hide"); if (!document.querySelector(".sheet") && !STEM_OPEN) cornersBack(); }, 220); };
+    cv.addEventListener("pointermove", e => { if (p0 && Math.hypot(e.clientX - p0[0], e.clientY - p0[1]) > 10) { el.classList.add("chrome-hide"); hmDragging = true; clearTimeout(chromeT); } });
+    const lift = () => { p0 = null; hmDragging = false; clearTimeout(chromeT); chromeT = setTimeout(() => { el.classList.remove("chrome-hide"); if (!document.querySelector(".sheet") && !STEM_OPEN) cornersBack(); }, 220); };
     cv.addEventListener("pointerup", () => { lift(); hmDismissHint(); });
     cv.addEventListener("pointercancel", lift);
     // David: "sometimes the bottom corner buttons disappear". A pan whose finger lifts off the canvas (over a corner, a
@@ -740,6 +803,40 @@ function hmHome() {
     document.addEventListener("visibilitychange", winLift);
     cleanup.push(() => { ["pointerup", "pointercancel", "blur"].forEach(k => removeEventListener(k, winLift, true)); document.removeEventListener("visibilitychange", winLift); });
   }
+  // David (repeatedly): "the buttons on the map still disappear." render()'s own cornersBack() and every sheet/
+  // stem close already call it, but there's no way to enumerate every path that could leave a stray chrome-hide
+  // or a faded inline style behind -- a bfcache restore (iOS backgrounding and returning, pageshow with
+  // event.persisted), a resize/orientation change mid-transition, a visibilitychange the lift() closure above
+  // missed because the canvas wasn't wired yet, or something not yet found. So corner visibility is made a pure,
+  // self-healing function of state instead of trusting every event path to call cornersBack() correctly: a cheap
+  // watchdog says so whenever Home is the active screen, no sheet or stem is up, and no drag/pinch is live --
+  // which is also exactly the condition cornersBack() itself is safe to call under.
+  function hmCornerWatch() {
+    if (!el.isConnected || hmDragging || document.querySelector(".sheet,.scrim") || STEM_OPEN) return;
+    // a position:fixed corner is fixed to the nearest transformed ancestor, not necessarily the viewport: a
+    // lingering transform (a finished-but-still-"filling" animation -- js/mapxfer.js mxLand's map-shrink is one,
+    // js/polish.js's screen-entrance "enter" animation is another) can leave it positioned against the WRONG box
+    // even while every opacity/pointer-events style cornersBack() checks says "visible" -- getComputedStyle, not
+    // el.style, since a Web Animations API effect (fill:"both") never shows up as an inline style. Both call
+    // sites clean up after themselves now, but this is the backstop: once no sheet/stem/drag says el should still
+    // be moving, nothing is allowed to still be animating it either.
+    // only a FINISHED-but-filling animation is stale (a still-RUNNING one is a legitimate transition in progress,
+    // which this must never interrupt)
+    if (typeof el.getAnimations === "function") { try { el.getAnimations().forEach(a => { if (a.playState === "finished") a.cancel(); }); } catch (e) {} }
+    cornersBack();
+    // David's screenshot: a ~130pt black band under the honeycomb on an iPhone Home Screen app. --vb/--app-full
+    // (js/core.js vbFix -- the strip a standalone iOS app's translucent status bar leaves the reported viewport
+    // short by, which .screen.fixed.cx{height:var(--app-full,100dvh)} reaches through) are computed once at
+    // script load plus a few fixed points (load, a 600ms timeout, resize, orientationchange); if the real device
+    // hadn't settled its own viewport yet at any of those moments, the map's screen could be sized from a stale
+    // measurement forever after. The same events this watchdog already listens to are reasons to recompute it too.
+    if (typeof vbFix === "function") vbFix();
+  }
+  const hmWatchEvents = ["pageshow", "resize", "orientationchange"];
+  hmWatchEvents.forEach(k => addEventListener(k, hmCornerWatch));
+  document.addEventListener("visibilitychange", hmCornerWatch);
+  const hmWatchTimer = setInterval(hmCornerWatch, 1000);
+  cleanup.push(() => { hmWatchEvents.forEach(k => removeEventListener(k, hmCornerWatch)); document.removeEventListener("visibilitychange", hmCornerWatch); clearInterval(hmWatchTimer); });
   hmShowChrome(); cornersBack();   // every way into Home starts with both corners drawn and tappable
   // ---------- the right corner: ONE button (PLAN.md decision #2; David: "Study the map is a mini game that belongs with
   // learning, inside a menu, not its own button"). It shows how many names are due, and opens a labeled arc of verbs,
@@ -755,6 +852,7 @@ function hmHome() {
   paintDo();
   function doMenu() {
     if (STEM_OPEN) { buzz(4); return closeStem(); }
+    if (typeof stemJustClosed === "function" && stemJustClosed()) return;   // a ghost click right after closing must not reopen it (js/core.js)
     if (document.querySelector(".sheet,.scrim")) return;
     document.querySelectorAll(".rooms-stem,.rm-scrim").forEach(n => n.remove());
     hmDismissHint();
@@ -828,7 +926,14 @@ function hmHome() {
   window.HM_SEARCH = q => { openSearch(); searchInput.value = q; searchInput.dispatchEvent(new Event("input")); };   // #shot=home:find:<q>
   window.HM_CHOOSER = chooser;   // #shot=home:look hook (tools/shots.sh): drive the Show/Look sheet without a tap
   const drawn = render(false);
-  if (back) Promise.resolve(drawn).then(() => mxLand(back), () => mxLand(back));
+  // David: "the transition gets stuck in the middle for a couple of seconds too long" going back to the map from
+  // a color page. mxLand (js/mapxfer.js, the shrink-into-the-bubble animation) used to wait for render() to fully
+  // resolve first -- on a slow connection or the first Home of a session, render() awaits loadCoreNames/
+  // loadLongNames/loadShades (and honeyLoadPainted for a "Painted" order), which is exactly the network/data wait
+  // the shrink must never be gated on. A hard cap starts it within 300ms regardless: mxLand itself already
+  // degrades gracefully with no bubble geometry yet (it dissolves the color into the map instead of a precise
+  // shrink-to-bubble), which is an honest fallback, never a stuck screen.
+  if (back) { const cap = new Promise(res => later(res, 300)); Promise.race([Promise.resolve(drawn), cap]).then(() => mxLand(back), () => mxLand(back)); }
 }
 
 // Opens an app color's full page directly (ROADMAP.md §12: no half-height card, no second tap). Back (the

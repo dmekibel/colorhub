@@ -1,123 +1,118 @@
 {
- "slug": "dark-lime",
- "name": "Dark Lime",
- "hex": "#84B701",
- "names": [
-  "Dark Lime"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Dark Lime is a deep, saturated yellow-green, a shade down from [[lime]] and classed by the ISCC-NBS system as a vivid yellow green.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The name",
-   "body": "No book in our library records a name at this position before the xkcd color survey of 2010, where the public supplied the plain descriptive phrase \"dark lime\" [1]. Its origin before that survey is undocumented here [1].\n\nThe nearest ISCC-NBS 1955 block is vivid yellow green, about 6 CIEDE2000 units away, and the closest Munsell reading runs near 6.0GY in hue [1]. The nearest named colors on file are [[sickly-green]], [[booger-green]] and [[bright-olive]], at 3.5, 3.8 and 4.3 ΔE [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a match for this swatch in just one of 23,781 paintings, Paul Gauguin's *Mother and Child under a Tree at Pont-Aven* (1886), where it covers about 5 per cent of the canvas [2]. That single hit is in a French painting, giving France a far higher than average rate for this exact shade in our small sample [2]. These are photographs of aged, varnished paintings, so one hit says the shade is rare on surviving canvas, not that it was rarely mixed [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "lime, the fruit color, darkened",
-   "first_recorded": "xkcd color survey, 2010",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "sickly-green",
-   "booger-green",
-   "bright-olive",
-   "avocado-green"
+  "slug": "dark-lime",
+  "name": "Dark Lime",
+  "hex": "#84B701",
+  "names": [
+    "Dark Lime"
   ],
-  "parent": "lime",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
-  "n_present": 1,
-  "rate": 0.0,
-  "top_painting": {
-   "id": "commons-Q79790701",
-   "title": "Mother and Child under a Tree at Pont-Aven",
-   "painter": "Paul Gauguin",
-   "year": 1886,
-   "cover": 0.052
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Dark Lime is a deep, saturated yellow-green, a shade down from [[lime]] and classed by the ISCC-NBS system as a vivid yellow green.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The name",
+      "body": "No book in our library records a name at this position before the xkcd color survey of 2010, where the public supplied the plain descriptive phrase \"dark lime\" [1]. Its origin before that survey is undocumented here [1].\n\nThe nearest ISCC-NBS 1955 block is vivid yellow green, about 6 CIEDE2000 units away, and the closest Munsell reading runs near 6.0GY in hue [1]. The nearest named colors on file are [[avocado]], [[acid-green]] and [[avocado-green]], at 3.5, 4.3 and 4.5 ΔE [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a match for this swatch in just one of 23,781 paintings, Paul Gauguin's *Mother and Child under a Tree at Pont-Aven* (1886), where it covers about 5 per cent of the canvas [2]. That single hit is in a French painting, giving France a far higher than average rate for this exact shade in our small sample [2]. These are photographs of aged, varnished paintings, so one hit says the shade is rare on surviving canvas, not that it was rarely mixed [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "lime, the fruit color, darkened",
+      "first_recorded": "xkcd color survey, 2010",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "avocado",
+      "acid-green",
+      "avocado-green"
+    ],
+    "parent": "lime",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "measured": {
-   "nearest": [
-    [
-     "Sickly Green",
-     3.5
-    ],
-    [
-     "Booger Green",
-     3.8
-    ],
-    [
-     "Bright Olive",
-     4.3
-    ],
-    [
-     "Avocado Green",
-     4.5
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+    "n_present": 1,
+    "rate": 0.0,
+    "top_painting": {
+      "id": "commons-Q79790701",
+      "title": "Mother and Child under a Tree at Pont-Aven",
+      "painter": "Paul Gauguin",
+      "year": 1886,
+      "cover": 0.052
+    },
+    "measured": {
+      "nearest": [
+        [
+          "Sickly Green",
+          3.5
+        ],
+        [
+          "Bright Olive",
+          4.3
+        ],
+        [
+          "Avocado Green",
+          4.5
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, xkcd color survey 2010), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "How many of our 23,781 archived paintings carry a match for this exact shade of Dark Lime?",
+      "choices": [
+        "One",
+        "About 1,000",
+        "None"
+      ],
+      "answer": "One",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: a book in our library names this exact shade before the xkcd survey of 2010.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Dark Lime's exact shade turns up in just one of our 23,781 archived paintings, a Gauguin."
+  ],
+  "words": 204,
+  "status": "checked",
+  "checked": {
+    "by": "writer-lane",
+    "date": "2026-10-08",
+    "issues": [
+      "No book source for the name; xkcd survey only; field stats based on a single painting",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, xkcd color survey 2010), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "How many of our 23,781 archived paintings carry a match for this exact shade of Dark Lime?",
-   "choices": [
-    "One",
-    "About 1,000",
-    "None"
-   ],
-   "answer": "One",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: a book in our library names this exact shade before the xkcd survey of 2010.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Dark Lime's exact shade turns up in just one of our 23,781 archived paintings, a Gauguin."
- ],
- "words": 205,
- "status": "checked",
- "checked": {
-  "by": "writer-lane",
-  "date": "2026-10-08",
-  "issues": [
-   "No book source for the name; xkcd survey only; field stats based on a single painting",
-   "lint 2026-10-09"
-  ]
- }
 }

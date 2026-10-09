@@ -1,112 +1,112 @@
 {
- "slug": "fern-green",
- "name": "Fern Green",
- "hex": "#4F7942",
- "names": [
-  "Fern Green"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Fern Green is a mid, slightly dulled green, dated by Maerz and Paul to 1902 and later adopted by RAL and Crayola.",
- "sections": [
-  {
-   "id": "name",
-   "title": "One green, several lists",
-   "body": "Maerz and Paul's 1930 dictionary, by the account the NBS carried into its 1955 circular, puts the first printed record of the name at 1902, on plate 21 F 5 [1]. The German RAL system later listed its own approximate match in 1927 as RAL 6025, and Wikipedia's Crayola-sourced entry and the 2010 xkcd color survey both cite the same green [1]. The ISCC-NBS system reads it as a strong green, about 9.9 units from the block center, a looser match than most [1].\n\nThe nearest named color in our data is [[velvet-green]], about 5.4 units off, with [[dark-sage]] and [[forest-green]] further out [2]. The family word is [[fern]] itself [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This color, as photographed, appears in 99 of 23,781 paintings, about 0.42 percent, more common than 50 percent of the named colors we track [3]. It peaks in the 1900s, in 14 of 1,674 paintings, at 0.8 percent of that period's paintings, 3.5 times the overall rate [3]. Inside a painting it most often plays an accent [3]. It is most over-represented in France (3.1 times expected; 29 of 3443 paintings) [3]. The earliest match in the archive is a 1500 painting by Pedro Berruguete, 427 years before the name's 1927 record, so this is a look-alike hue in an aged photograph, not a pigment identification, a floor and not a first, since the archive's early centuries are thin [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the fern plant",
-   "first_recorded": "1902 (Maerz & Paul 1930)",
-   "source": "data/library.json"
-  },
-  "aka": [],
-  "siblings": [
-   "velvet-green",
-   "dark-sage",
-   "forest-green"
+  "slug": "fern-green",
+  "name": "Fern Green",
+  "hex": "#4F7942",
+  "names": [
+    "Fern Green"
   ],
-  "parent": "fern",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 99,
-  "pct": 0.42,
-  "peak": "1900s, 0.8% of this period's paintings, 3.5x expected",
-  "country": [
-   "France",
-   29,
-   3443,
-   3.1
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 and other name sources; CIEDE2000",
-   "loc_kind": null,
-   "url": null
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Fern Green is a mid, slightly dulled green, dated by Maerz and Paul to 1902 and later adopted by RAL and Crayola.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "One green, several lists",
+      "body": "Maerz and Paul's 1930 dictionary, by the account the NBS carried into its 1955 circular, puts the first printed record of the name at 1902, on plate 21 F 5 [1]. The German RAL system later listed its own approximate match in 1927 as RAL 6025, and Wikipedia's Crayola-sourced entry and the 2010 xkcd color survey both cite the same green [1]. The ISCC-NBS system reads it as a strong green, about 9.9 units from the block center, a looser match than most [1].\n\nThe nearest named color in our data is [[velvet-green]], about 5.4 units off, with [[hay-s-green]] and [[forest-green]] further out [2]. The family word is [[fern]] itself [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This color, as photographed, appears in 99 of 23,781 paintings, about 0.42 percent, more common than 50 percent of the named colors we track [3]. It peaks in the 1900s, in 14 of 1,674 paintings, at 0.8 percent of that period's paintings, 3.5 times the overall rate [3]. Inside a painting it most often plays an accent [3]. It is most over-represented in France (3.1 times expected; 29 of 3443 paintings) [3]. The earliest match in the archive is a 1500 painting by Pedro Berruguete, 427 years before the name's 1927 record, so this is a look-alike hue in an aged photograph, not a pigment identification, a floor and not a first, since the archive's early centuries are thin [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the fern plant",
+      "first_recorded": "1902 (Maerz & Paul 1930)",
+      "source": "data/library.json"
+    },
+    "aka": [],
+    "siblings": [
+      "velvet-green",
+      "hay-s-green",
+      "forest-green"
+    ],
+    "parent": "fern",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 99,
+    "pct": 0.42,
+    "peak": "1900s, 0.8% of this period's paintings, 3.5x expected",
+    "country": [
+      "France",
+      29,
+      3443,
+      3.1
+    ]
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "According to Maerz and Paul, when was Fern Green first recorded?",
-   "choices": [
-    "1902",
-    "1955",
-    "1800",
-    "2010"
-   ],
-   "answer": "1902",
-   "kind": "pick"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 and other name sources; CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "According to Maerz and Paul, when was Fern Green first recorded?",
+      "choices": [
+        "1902",
+        "1955",
+        "1800",
+        "2010"
+      ],
+      "answer": "1902",
+      "kind": "pick"
+    },
+    {
+      "q": "In which country is Fern Green most over-represented in our archive?",
+      "choices": [
+        "France",
+        "Japan",
+        "Mexico",
+        "Iran"
+      ],
+      "answer": "France",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Fern Green was adopted by RAL, Crayola and xkcd long after its 1902 first record."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Fixed: the field-notes paragraph (and the matching \"field\" object) invented four painter names (\"Van Gogh, Pissarro, Munch and Gauguin\") with no basis — ar.pa/ar.pn are empty for this slug (the real over-representation is a country, France, 29 of 3,443, 3.1x, which went unmentioned) — and an earliest-match painter (\"Lucas Cranach the Elder\") and record year (1902) that don't match the real data (first-seen is a 1500 painting by Pedro Berruguete; the real record year is 1927). The presence count (70) and peak-decade stat (1910s/1.9%/6x+) also didn't match the real data (99 as-photographed; peak is the 1900s century fact, 0.8%/3.5x). Rewrote the paragraph directly from data/graph/fieldnotes for this slug; removed every unsupported claim rather than inventing a replacement for it.",
+      "lint 2026-10-09"
+    ]
   },
-  {
-   "q": "In which country is Fern Green most over-represented in our archive?",
-   "choices": [
-    "France",
-    "Japan",
-    "Mexico",
-    "Iran"
-   ],
-   "answer": "France",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Fern Green was adopted by RAL, Crayola and xkcd long after its 1902 first record."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Fixed: the field-notes paragraph (and the matching \"field\" object) invented four painter names (\"Van Gogh, Pissarro, Munch and Gauguin\") with no basis — ar.pa/ar.pn are empty for this slug (the real over-representation is a country, France, 29 of 3,443, 3.1x, which went unmentioned) — and an earliest-match painter (\"Lucas Cranach the Elder\") and record year (1902) that don't match the real data (first-seen is a 1500 painting by Pedro Berruguete; the real record year is 1927). The presence count (70) and peak-decade stat (1910s/1.9%/6x+) also didn't match the real data (99 as-photographed; peak is the 1900s century fact, 0.8%/3.5x). Rewrote the paragraph directly from data/graph/fieldnotes for this slug; removed every unsupported claim rather than inventing a replacement for it.",
-   "lint 2026-10-09"
-  ]
- },
- "words": 254
+  "words": 255
 }

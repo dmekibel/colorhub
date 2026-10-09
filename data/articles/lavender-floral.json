@@ -1,0 +1,113 @@
+{
+ "slug": "lavender-floral",
+ "name": "Lavender (Floral)",
+ "hex": "#B57EDC",
+ "names": [
+  "Lavender (Floral)"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Lavender (Floral) is the brighter purple of the lavender bloom itself, kept apart from the muted, greyed [[lavender]] the web color lists settled on, and it carries the same hex code as our [[floral-lavender|Floral lavender]] article under a different name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two names, one swatch",
+   "body": "Lavender, the plant, gave English one of its oldest flower color words, but the muted, dusty purple most web color lists call \"lavender\" is greyer than the flower itself ever is [1]. Lavender (Floral) and [[floral-lavender|Floral lavender]] are the same computed color, #B57EDC, listed under two different display names in our library, with a color distance of 0.0 between them [1]. Our graph treats the two as the brighter, truer-to-the-bloom reading of lavender, next to [[light-hortense-violet|Light Hortense Violet]] at 3.6 units and [[orchid-purple|Orchid purple]] at 4.1 [1].\n\nWikipedia is the only source we hold for this exact name and hex pairing; no older dictionary, plate or survey in our library carries it [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive shows this color covering at least 1 percent of its canvas, within a color distance of 4, as photographed [2]. A bright, modern-saturation purple like this sits outside the range of the pigments and dyes historical painters had on hand, so its absence from the archive is expected, not a gap in our data [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the lavender flower, brightened past its grayer web counterpart",
+   "first_recorded": "undocumented in the books consulted",
+   "source": "ColorHub color graph"
+  },
+  "aka": [],
+  "siblings": [
+   "light-hortense-violet",
+   "orchid-purple"
+  ],
+  "parent": "lavender",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "lavender",
+    "gloss": "the web color list's greyer, more muted purple"
+   },
+   {
+    "slug": "floral-lavender",
+    "gloss": "the same computed color under a different display name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "iscc": "brilliant purple",
+   "nearest": [
+    [
+     "Light Hortense Violet",
+     3.6
+    ],
+    [
+     "Orchid purple",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph and library: web-sourced name, duplicate entry and look-alike edges",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Lavender (Floral) shares its exact hex code with which other article in our library?",
+   "choices": [
+    "Floral lavender",
+    "Alice Blue",
+    "Khaki",
+    "Kobi"
+   ],
+   "answer": "Floral lavender",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Lavender (Floral) is greyer and more muted than the web color list's plain \"lavender\".",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Lavender (Floral) and Floral lavender are the exact same color under two different names."
+ ],
+ "words": 212,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

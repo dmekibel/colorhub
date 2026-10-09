@@ -1,0 +1,159 @@
+{
+ "slug": "light-oxblood",
+ "name": "Light Oxblood",
+ "hex": "#5E2824",
+ "names": [
+  "Light oxblood"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Light Oxblood is ColorHub's English rendering of Ebicha, a traditional Japanese color whose kanji name literally means \"shrimp brown.\"",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Shrimp brown, called maroon",
+   "body": "The Japanese name is *Ebicha* (海老茶), kanji for \"shrimp brown,\" a dark red-brown our library glosses as \"maroon (shrimp brown)\" [1]. It is one of the traditional colors of Japan catalogued on Wikipedia; our sources give no date for when the name entered use, and it is undocumented here [1]. The ISCC-NBS system's nearest block is \"dark red,\" 6.5 units away [1]. Nearest on file is [[reddish-wine]] at 2.7 units, with [[chestnut-leather-brown]] close behind at 2.8 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this dark red-brown, as photographed, in 1,097 of 23,781 paintings, 4.61 percent, more common than 82 percent of our named colors; within a single canvas it is a distinct area in 479 of them [2]. Juan de Juanes is its most devoted painter, using it in 4 of 15 works here, 4.4 times the baseline rate of the museums those paintings come from [2]. It peaks in the 1400s, at 5.2 percent of that century's 945 paintings, 2.5 times the expected rate, and inside a painting it most often plays an accent, in 49 percent of its 479 appearances [2]. The earliest dated match is from 1260; the archive's early centuries are thin, so this is a floor, not a first [2]. It shares canvases with [[hay-s-russet]] more often than chance, a lift of 2.8 [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Japanese traditional color Ebicha (shrimp brown)",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library; Wikipedia, Traditional colors of Japan"
+  },
+  "aka": [
+   "Ebicha"
+  ],
+  "siblings": [
+   "reddish-wine",
+   "chestnut-leather-brown",
+   "dusty-mahogany",
+   "dusty-oxblood",
+   "mahogany",
+   "persian-plum"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Ebicha (海老茶), \"shrimp brown\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 479,
+  "measured": {
+   "lch": [
+    23.8,
+    28.3,
+    30.9
+   ],
+   "nearest_iscc": [
+    "dark red",
+    6.5
+   ],
+   "nearest": [
+    [
+     "Reddish wine",
+     2.7
+    ],
+    [
+     "Chestnut-leather brown",
+     2.8
+    ],
+    [
+     "Dusty mahogany",
+     3.9
+    ],
+    [
+     "Dusty oxblood",
+     4.4
+    ],
+    [
+     "Mahogany",
+     5.5
+    ],
+    [
+     "Persian Plum",
+     5.6
+    ]
+   ]
+  },
+  "role_top": {
+   "role": "accent",
+   "pct": 49
+  },
+  "painter": {
+   "name": "Juan de Juanes",
+   "n": 4,
+   "of": 15,
+   "lift": 4.4
+  },
+  "first_seen": {
+   "year": 1260
+  },
+  "company": {
+   "with": "Hay's Russet",
+   "lift": 2.8,
+   "n": 32
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph: Japanese traditional-color record (jp), ISCC-NBS 1955 crosswalk",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Ebicha, the Japanese name behind Light Oxblood, literally mean?",
+   "choices": [
+    "Shrimp brown",
+    "Dried blood",
+    "Autumn bark",
+    "Burnt clay"
+   ],
+   "answer": "Shrimp brown",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter in our archive reaches for this dark red-brown far more than his peers?",
+   "choices": [
+    "Juan de Juanes",
+    "John Singer Sargent",
+    "Albrecht Dürer",
+    "Paulus Potter"
+   ],
+   "answer": "Juan de Juanes",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Its Japanese name translates, literally, to \"shrimp brown.\""
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 241
+}

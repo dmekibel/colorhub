@@ -1,110 +1,110 @@
 {
- "slug": "bright-lilac",
- "name": "Bright Lilac",
- "hex": "#D891EF",
- "names": [
-  "Bright Lilac"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Bright Lilac is a vivid pale purple drawn from a Crayola crayon of the same name, also recorded independently by the 2010 xkcd survey.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Two lists, one color",
-   "body": "Wikipedia's \"List of colors\" entry for this shade cites the Crayola crayon of the same name as its source, and the 2010 xkcd survey separately recorded its own cluster at this hue, under its own crowd-chosen label [1]. The name itself follows ordinary modifier grammar, \"bright\" in front of the base color [[lilac]] [1].\n\nThe nearest named colors on file are [[light-amparo-purple]], [[baby-purple]], [[lavender-pink]] and [[vivid-lilac]], at 3.9, 4.5, 5.3 and 5.6 ΔE [1]. Family neighbors are [[lilac]], [[lavender]], [[purple]], and [[magenta]] [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive of 23,781 paintings, as photographed, has no painting where this bright violet-pink covers five percent or more of the canvas [2]. Lilac-family pigments bright enough to reach this saturation at this lightness are a modern development; nothing in the archive's older material gets close [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "modifier grammar: bright + lilac",
-   "first_recorded": "undocumented date; via Wikipedia, citing Crayola",
-   "source": "ColorHub color library (Wikipedia/Crayola, xkcd)"
-  },
-  "aka": [],
-  "siblings": [
-   "light-amparo-purple",
-   "baby-purple",
-   "lavender-pink",
-   "vivid-lilac"
+  "slug": "bright-lilac",
+  "name": "Bright Lilac",
+  "hex": "#D891EF",
+  "names": [
+    "Bright Lilac"
   ],
-  "parent": "lilac",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    70,
-    56,
-    319
-   ],
-   "nearest": [
-    [
-     "Light Amparo Purple",
-     3.9
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Bright Lilac is a vivid pale purple drawn from a Crayola crayon of the same name, also recorded independently by the 2010 xkcd survey.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Two lists, one color",
+      "body": "Wikipedia's \"List of colors\" entry for this shade cites the Crayola crayon of the same name as its source, and the 2010 xkcd survey separately recorded its own cluster at this hue, under its own crowd-chosen label [1]. The name itself follows ordinary modifier grammar, \"bright\" in front of the base color [[lilac]] [1].\n\nThe nearest named colors on file are [[light-amparo-purple]], [[lavender]], [[lavender-pink]] and [[vivid-lilac]], at 3.9, 4.5, 5.3 and 5.6 ΔE [1]. Family neighbors are [[lilac]], [[lavender]], [[purple]], and [[magenta]] [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings, as photographed, has no painting where this bright violet-pink covers five percent or more of the canvas [2]. Lilac-family pigments bright enough to reach this saturation at this lightness are a modern development; nothing in the archive's older material gets close [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "modifier grammar: bright + lilac",
+      "first_recorded": "undocumented date; via Wikipedia, citing Crayola",
+      "source": "ColorHub color library (Wikipedia/Crayola, xkcd)"
+    },
+    "aka": [],
+    "siblings": [
+      "light-amparo-purple",
+      "lavender",
+      "lavender-pink",
+      "vivid-lilac"
+    ],
+    "parent": "lilac",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        70,
+        56,
+        319
+      ],
+      "nearest": [
+        [
+          "Light Amparo Purple",
+          3.9
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Wikipedia List of colors (citing Crayola), xkcd 2010 survey entry",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which crayon maker does Wikipedia cite as the source for this color's name?",
+      "choices": [
+        "Crayola",
+        "Faber-Castell",
+        "RAL",
+        "Pantone"
+      ],
+      "answer": "Crayola",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Bright Lilac's closest learnable match in our library is its own parent color, Lilac.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Bright Lilac's closest learnable neighbor turns out to be Lavender, not Lilac."
+  ],
+  "words": 157,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "No private fact-card file for this slug.",
+      "First-recorded date undocumented; Wikipedia gives no date for the Crayola source.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Wikipedia List of colors (citing Crayola), xkcd 2010 survey entry",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which crayon maker does Wikipedia cite as the source for this color's name?",
-   "choices": [
-    "Crayola",
-    "Faber-Castell",
-    "RAL",
-    "Pantone"
-   ],
-   "answer": "Crayola",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Bright Lilac's closest learnable match in our library is its own parent color, Lilac.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Bright Lilac's closest learnable neighbor turns out to be Lavender, not Lilac."
- ],
- "words": 158,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-08",
-  "issues": [
-   "No private fact-card file for this slug.",
-   "First-recorded date undocumented; Wikipedia gives no date for the Crayola source.",
-   "lint 2026-10-09"
-  ]
- }
 }

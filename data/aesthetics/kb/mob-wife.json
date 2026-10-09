@@ -1,0 +1,51 @@
+{
+ "id": "mob-wife",
+ "name": "Mob Wife",
+ "lineage": {
+  "influenced_by": [
+   "1990s mafia-film costume design",
+   "a direct, explicitly stated reaction against the clean-girl trend"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2023–2024"
+ ],
+ "places": [],
+ "garments": [
+  "faux fur coats",
+  "leopard print",
+  "gold chain jewelry"
+ ],
+ "media": [
+  {
+   "title": "Goodfellas (1990)",
+   "note": "the film most frequently cited as the look's visual source"
+  },
+  {
+   "title": "The Sopranos (1999–2007)",
+   "note": "a secondary, TV-era reference point"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "the clean girl aesthetic's minimal makeup and muted palette, which had dominated feeds for roughly two years before mob wife's late-2023 emergence as a deliberately loud, maximalist counter-trend.",
+ "revivals": [],
+ "article": "Mob wife is one of the most precisely dated aesthetics in this archive: TikTok creators began naming and circulating the look in November and December 2023, explicitly framing it as the opposite of the clean girl aesthetic that had dominated the platform's beauty and fashion content for roughly the two years prior. Its visual sourcing is similarly specific — the faux-fur coats, leopard print, gold jewelry and dark, dramatic makeup draw almost entirely from 1990s mafia-film costuming, Goodfellas (1990) above all, with The Sopranos supplying a secondary, slightly later reference point. Because the trend coalesced so recently and so self-consciously (commentators and participants alike described it in real time as a reaction against a specific prior trend), mob wife offers an unusually clear case study in how a single named TikTok aesthetic can form, get its reasons stated explicitly by the people building it, and reach saturation within a few months — a much faster and better-documented cycle than most of this archive's older, slower-forming looks.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Mob Wife"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 60% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 92% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

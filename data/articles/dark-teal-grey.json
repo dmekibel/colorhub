@@ -1,130 +1,133 @@
 {
- "slug": "dark-teal-grey",
- "name": "Dark Teal Grey",
- "hex": "#3D585D",
- "names": [
-  "Dark teal grey"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Dark Teal Grey is a muted, blue-green grey named for teal, the dabbling duck, and recorded in both Ridgway's 1912 plates and the ISCC-NBS system of 1955.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A duck's name, dulled",
-   "body": "Our data files this as a plant-and-landscape word, tracing \"teal\" to the duck rather than to a pigment or dye [1]. Both Ridgway's 1912 atlas and the ISCC-NBS lists of 1955 carry it, though our source note does not keep the specific plate or block number for this exact entry [1]. In LCH terms it measures lightness 36, chroma 11, hue 215 degrees: dark, only lightly saturated, and sitting between blue and green [1].\n\nIts nearest distinct neighbor by computed color distance is [[dark-delft-blue|Dark Delft Blue]], 3.0 units away and read in our data as \"almost the same\" [2]. One step further sits [[blue-ochre|Blue Ochre]], 3.4 units off and called \"bluer\" [2]. Its parent family word is [[dark-teal]], the lighter, more saturated color this grey is a muted version of [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 143, as photographed, more common than 65 percent of the named colors we track [3]. It peaks in paintings from the 1900s, at 2.7 times the rate expected from that century's share of the archive [3]. Pierre-Auguste Renoir is its most devoted painter here, with the color present in 5 of 50 of his works in the archive, well above the baseline of the museums those works come from [3]. Inside a painting it most often plays a hidden color, in 43 percent of its matches, by lightness rank within the canvas [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "teal, the dabbling duck",
-   "first_recorded": "Ridgway, 1912",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "pale-charcoal",
-   "dark-delft-blue",
-   "blue-ochre",
-   "dark-payne-s-grey"
+  "slug": "dark-teal-grey",
+  "name": "Dark Teal Grey",
+  "hex": "#3D585D",
+  "names": [
+    "Dark teal grey",
+    "Saccardo's Slate"
   ],
-  "parent": "dark-teal",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 143,
-  "measured": {
-   "lch": [
-    36,
-    11,
-    215
-   ],
-   "nearest": [
-    [
-     "Pale charcoal",
-     2.8
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Dark Teal Grey is a muted, blue-green grey named for teal, the dabbling duck, and recorded in both Ridgway's 1912 plates and the ISCC-NBS system of 1955.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A duck's name, dulled",
+      "body": "Our data files this as a plant-and-landscape word, tracing \"teal\" to the duck rather than to a pigment or dye [1]. Both Ridgway's 1912 atlas and the ISCC-NBS lists of 1955 carry it, though our source note does not keep the specific plate or block number for this exact entry [1]. In LCH terms it measures lightness 36, chroma 11, hue 215 degrees: dark, only lightly saturated, and sitting between blue and green [1].\n\nIts nearest distinct neighbor by computed color distance is [[dark-delft-blue|Dark Delft Blue]], 3.0 units away and read in our data as \"almost the same\" [2]. One step further sits [[blue-ochre|Blue Ochre]], 3.4 units off and called \"bluer\" [2]. Its parent family word is [[dark-teal]], the lighter, more saturated color this grey is a muted version of [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 143, as photographed, more common than 65 percent of the named colors we track [3]. It peaks in paintings from the 1900s, at 2.7 times the rate expected from that century's share of the archive [3]. Pierre-Auguste Renoir is its most devoted painter here, with the color present in 5 of 50 of his works in the archive, well above the baseline of the museums those works come from [3]. Inside a painting it most often plays a hidden color, in 43 percent of its matches, by lightness rank within the canvas [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "teal, the dabbling duck",
+      "first_recorded": "Ridgway, 1912",
+      "source": "ColorHub color library"
+    },
+    "aka": [
+      "Saccardo's Slate (ridgway+iscc-nbs)"
     ],
-    [
-     "Dark Delft Blue",
-     3.0
+    "siblings": [
+      "pale-charcoal",
+      "dark-delft-blue",
+      "blue-ochre",
+      "dark-payne-s-grey"
     ],
-    [
-     "Blue Ochre",
-     3.4
-    ],
-    [
-     "Dark Payne's Grey",
-     4.0
+    "parent": "dark-teal",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 143,
+    "measured": {
+      "lch": [
+        36,
+        11,
+        215
+      ],
+      "nearest": [
+        [
+          "Pale charcoal",
+          2.8
+        ],
+        [
+          "Dark Delft Blue",
+          3.0
+        ],
+        [
+          "Blue Ochre",
+          3.4
+        ],
+        [
+          "Dark Payne's Grey",
+          4.0
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/nodes-d.json): Dark Teal Grey — tier classification, Ridgway 1912, ISCC-NBS 1955",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges-d.json): nearest distinct neighbors by CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/d.json)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Dark Teal Grey is a muted version of which family color?",
+      "choices": [
+        "Dark Teal",
+        "Dark Walnut",
+        "Dawn Grey",
+        "Deep Champagne"
+      ],
+      "answer": "Dark Teal",
+      "kind": "pick"
+    },
+    {
+      "q": "Which painter in our archive is most devoted to Dark Teal Grey?",
+      "choices": [
+        "Pierre-Auguste Renoir",
+        "Claude Monet",
+        "Eugène Boudin",
+        "John Singer Sargent"
+      ],
+      "answer": "Pierre-Auguste Renoir",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "It most often turns up in our archive as a hidden color, buried in the shadow of a painting rather than on top."
+  ],
+  "words": 261,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No book concordance hits for this slug; written from the color graph, library and archive data only.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/nodes-d.json): Dark Teal Grey — tier classification, Ridgway 1912, ISCC-NBS 1955",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges-d.json): nearest distinct neighbors by CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/d.json)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Dark Teal Grey is a muted version of which family color?",
-   "choices": [
-    "Dark Teal",
-    "Dark Walnut",
-    "Dawn Grey",
-    "Deep Champagne"
-   ],
-   "answer": "Dark Teal",
-   "kind": "pick"
-  },
-  {
-   "q": "Which painter in our archive is most devoted to Dark Teal Grey?",
-   "choices": [
-    "Pierre-Auguste Renoir",
-    "Claude Monet",
-    "Eugène Boudin",
-    "John Singer Sargent"
-   ],
-   "answer": "Pierre-Auguste Renoir",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "It most often turns up in our archive as a hidden color, buried in the shadow of a painting rather than on top."
- ],
- "words": 261,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No book concordance hits for this slug; written from the color graph, library and archive data only.",
-   "lint 2026-10-09"
-  ]
- }
 }

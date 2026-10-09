@@ -1,114 +1,117 @@
 {
- "slug": "espresso",
- "name": "Espresso",
- "hex": "#351E1C",
- "names": [
-  "Espresso"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Espresso is a very dark, reddish brown named for the coffee drink, close to black at a glance and warmer once it sits beside black.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A drink, not a pigment",
-   "body": "None of the 29 books we searched treats *espresso* as a color [1]. Finlay uses the word only for a coffee he drank in a Spanish café while looking for saffron fields [1]. The origin of the color name is undocumented in our sources [1][2].\n\nMeasured against the ISCC-NBS categories, the swatch is nearest to dark grayish reddish brown, 4.1 units of ΔE2000 away [2]. For neighbors see [[coffee]], [[dark-brown]] and [[chocolate-brown]]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This dark appears in 1,391 paintings in our archive, 5.85 per cent, as photographed [3]. John Singer Sargent has 19 of 287 paintings in it and Caravaggio 9 of 47 [3]. By century it peaks in the 1500s, in 194 of 2,231 paintings, 8.7 per cent [3]. Darkened varnish can push old paintings toward very dark browns, and these are photographs of aged, varnished paintings, so a color match is not a pigment test [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the coffee drink",
-   "first_recorded": "undocumented",
-   "source": "origin not documented in our sources"
-  },
-  "aka": [],
-  "siblings": [
-   "coffee",
-   "dark-brown",
-   "chocolate-brown",
-   "almost-black"
+  "slug": "espresso",
+  "name": "Espresso",
+  "hex": "#351E1C",
+  "names": [
+    "Espresso",
+    "Black kite"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive of about 23,800 paintings, as photographed",
-  "n_present": 1391,
-  "pct": 5.85,
-  "century_peak": {
-   "century": 1500,
-   "hits": 194,
-   "of": 2231
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Espresso is a very dark, reddish brown named for the coffee drink, close to black at a glance and warmer once it sits beside black.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A drink, not a pigment",
+      "body": "None of the 29 books we searched treats *espresso* as a color [1]. Finlay uses the word only for a coffee he drank in a Spanish café while looking for saffron fields [1]. The origin of the color name is undocumented in our sources [1][2].\n\nMeasured against the ISCC-NBS categories, the swatch is nearest to dark grayish reddish brown, 4.1 units of ΔE2000 away [2]. For neighbors see [[coffee]], [[dark-brown]] and [[chocolate-brown]]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This dark appears in 1,391 paintings in our archive, 5.85 per cent, as photographed [3]. John Singer Sargent has 19 of 287 paintings in it and Caravaggio 9 of 47 [3]. By century it peaks in the 1500s, in 194 of 2,231 paintings, 8.7 per cent [3]. Darkened varnish can push old paintings toward very dark browns, and these are photographs of aged, varnished paintings, so a color match is not a pigment test [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the coffee drink",
+      "first_recorded": "undocumented",
+      "source": "origin not documented in our sources"
+    },
+    "aka": [
+      "Black kite (jp)"
+    ],
+    "siblings": [
+      "coffee",
+      "dark-brown",
+      "chocolate-brown",
+      "rich-black-fogra39"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "measured": {
-   "nearest": [
-    [
-     "dark grayish reddish brown",
-     4.1
-    ]
-   ]
+  "field": {
+    "dataset": "ColorHub archive of about 23,800 paintings, as photographed",
+    "n_present": 1391,
+    "pct": 5.85,
+    "century_peak": {
+      "century": 1500,
+      "hits": 194,
+      "of": 2231
+    },
+    "measured": {
+      "nearest": [
+        [
+          "dark grayish reddish brown",
+          4.1
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Finlay, Color, ch. 15",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub library (data/library.json): name sources and dates and ISCC-NBS nearest category",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, color-match counts (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Do the books we searched discuss espresso as a color?",
+      "choices": [
+        "No, only the drink",
+        "Yes, as a Renaissance pigment",
+        "Yes, as a dye from Spain",
+        "Yes, as a mineral"
+      ],
+      "answer": "No, only the drink",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: this dark is most common in 1500s paintings in our archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Espresso sits at 5.85 per cent of our painted archive, most often among paintings from the 1500s."
+  ],
+  "words": 171,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Finlay, Color, ch. 15",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub library (data/library.json): name sources and dates and ISCC-NBS nearest category",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, color-match counts (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Do the books we searched discuss espresso as a color?",
-   "choices": [
-    "No, only the drink",
-    "Yes, as a Renaissance pigment",
-    "Yes, as a dye from Spain",
-    "Yes, as a mineral"
-   ],
-   "answer": "No, only the drink",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: this dark is most common in 1500s paintings in our archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Espresso sits at 5.85 per cent of our painted archive, most often among paintings from the 1500s."
- ],
- "words": 171,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

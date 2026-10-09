@@ -1,0 +1,112 @@
+{
+  "slug": "paradise-pink",
+  "name": "Paradise Pink",
+  "hex": "#E63E62",
+  "names": [
+    "Paradise Pink"
+  ],
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Paradise Pink is a strong, warm red-pink that our sources mark only as an obscure, novelty name, with no book or dated plate behind it.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "An obscure name, no documented coiner",
+      "body": "Our color library flags Paradise Pink as an obscure, qualified or novelty name rather than one tied to a dated system, and who first used it is undocumented in the sources consulted here [1]. No book, plate or standard list in our concordance carries this exact pairing of words for this hue [1].\n\nThe nearest named color by measured distance is [[cerise]], about 3.7 units away, almost the same shade [2]. [[red-plum]] and [[red-plum]] sit a little further out, both duller; [[pink-red]] and [[pink-red]] read more vivid [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our archive of 23,781 paintings carries this color covering at least one percent of its canvas, within CIEDE2000 4 of the swatch, as photographed [3]. That describes the limits of this archive's photographs of aged, varnished paintings, not a judgment on where the color appears in life [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented in the sources consulted",
+      "first_recorded": "undocumented",
+      "source": "Wikipedia (list entry only)"
+    },
+    "aka": [],
+    "siblings": [
+      "cerise",
+      "red-plum",
+      "carmine-red"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        53.1,
+        68.4,
+        16.1
+      ],
+      "nearest": [
+        [
+          "Cerise",
+          3.7
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): list entry, source \"wiki\"",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub graph: look-alike edges (data/graph/edges-p.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What do our sources say about who coined the name Paradise Pink?",
+      "choices": [
+        "It is undocumented",
+        "Robert Ridgway named it in 1912",
+        "It comes from the ISCC-NBS 1955 dictionary",
+        "It is a Crayola crayon from the 1990s"
+      ],
+      "answer": "It is undocumented",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our painting archive has a strong match for Paradise Pink.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "No painting in our 23,781-painting archive comes close enough to count as a strong match for Paradise Pink."
+  ],
+  "words": 164,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
+  }
+}

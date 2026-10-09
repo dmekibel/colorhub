@@ -1,0 +1,50 @@
+{
+ "id": "atompunk",
+ "name": "Atompunk",
+ "lineage": {
+  "influenced_by": [
+   "1950s–60s atomic-age design and advertising",
+   "Googie architecture"
+  ],
+  "influences": [
+   "raygun-gothic",
+   "dieselpunk"
+  ]
+ },
+ "eras": [
+  "aesthetic built retroactively from genuine 1945–1965 design"
+ ],
+ "places": [
+  "postwar American suburbia and World's Fair exhibitions"
+ ],
+ "garments": [
+  "not primarily a clothing look — defined mostly through product/interior design (boomerang shapes, starburst motifs)"
+ ],
+ "media": [
+  {
+   "title": "Fallout (video game series, 1997–)",
+   "note": "the single biggest modern vehicle for atompunk's visual revival"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "nothing contemporaneous — it's a retrofuturist look built after the fact, reacting against later, blander consumer design by idealizing the optimistic techno-futurism of the atomic age.",
+ "revivals": [
+  "ongoing through retrofuturist media (Fallout, The Jetsons revivals, mid-century design collecting)"
+ ],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Atompunk"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "a vivid streak — roughly 33% of the color measured is highly saturated"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

@@ -1,124 +1,124 @@
 {
- "slug": "muddy-brown",
- "name": "Muddy Brown",
- "hex": "#886806",
- "names": [
-  "Muddy Brown"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Muddy Brown is a dull, yellow-leaning brown from a 2010 crowd color survey, a dirtier-looking neighbor of Milk Chocolate and Mustard on screen.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A descriptive compound",
-   "body": "The library's only source for Muddy Brown is the xkcd 2010 survey; no dictionary or paint brand in our data uses the phrase, so its coining is undocumented beyond that [1]. At hex #886806 it measures lightness 46 and chroma 52 in LCH, a fairly dark, muted brown-yellow [1].\n\nIts nearest named neighbors by CIEDE2000 are [[bistre-brown|Bistre Brown]], 4.2 units off and read as lighter, and [[antique|Antique]], 4.3 units off and duller [2]. The nearest gem comparison is deep \"Madeira\" [[gem:citrine|citrine]], 5.7 units away [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this brown in 340 of 23,781 paintings, about 1.43%, as photographed, more common than 68% of the named colors here [4]. The earliest match is a 1375 painting, 635 years before the name's own 2010 record, which only shows an aged, varnished canvas can resemble this hue, not that anyone mixed this exact paint then, a floor and not a first, since the archive's early centuries are thin [4]. Paulus Potter is its most devoted painter, present in 4 of his 28 works, 8.9 times the baseline rate [4]. It shares canvases with [[mud-green|Mud Green]] and [[fallen-leaf|Fallen leaf]] more than chance would predict, and inside a painting it most often plays an accent [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented; a descriptive compound of muddy + brown",
-   "first_recorded": "2010 (xkcd color survey)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "bistre-brown",
-   "antique",
-   "mud-green",
-   "fallen-leaf"
+  "slug": "muddy-brown",
+  "name": "Muddy Brown",
+  "hex": "#886806",
+  "names": [
+    "Muddy Brown"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-  "n_present": 340,
-  "pct": 1.43,
-  "measured": {
-   "lch": [
-    45.8,
-    51.5,
-    85.0
-   ],
-   "nearest": [
-    [
-     "Bistre Brown",
-     4.2
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Muddy Brown is a dull, yellow-leaning brown from a 2010 crowd color survey, a dirtier-looking neighbor of Milk Chocolate and Mustard on screen.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A descriptive compound",
+      "body": "The library's only source for Muddy Brown is the xkcd 2010 survey; no dictionary or paint brand in our data uses the phrase, so its coining is undocumented beyond that [1]. At hex #886806 it measures lightness 46 and chroma 52 in LCH, a fairly dark, muted brown-yellow [1].\n\nIts nearest named neighbors by CIEDE2000 are [[bistre-brown|Bistre Brown]], 4.2 units off and read as lighter, and [[antique|Antique]], 4.3 units off and duller [2]. The nearest gem comparison is deep \"Madeira\" [[gem:citrine|citrine]], 5.7 units away [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this brown in 340 of 23,781 paintings, about 1.43%, as photographed, more common than 68% of the named colors here [4]. The earliest match is a 1375 painting, 635 years before the name's own 2010 record, which only shows an aged, varnished canvas can resemble this hue, not that anyone mixed this exact paint then, a floor and not a first, since the archive's early centuries are thin [4]. Paulus Potter is its most devoted painter, present in 4 of his 28 works, 8.9 times the baseline rate [4]. It shares canvases with [[mud|Mud Green]] and [[fallen-leaf|Fallen leaf]] more than chance would predict, and inside a painting it most often plays an accent [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented; a descriptive compound of muddy + brown",
+      "first_recorded": "2010 (xkcd color survey)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "bistre-brown",
+      "antique",
+      "mud",
+      "fallen-leaf"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+    "n_present": 340,
+    "pct": 1.43,
+    "measured": {
+      "lch": [
+        45.8,
+        51.5,
+        85.0
+      ],
+      "nearest": [
+        [
+          "Bistre Brown",
+          4.2
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-m.json): xkcd 2010 crowd-sourced color survey",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph look-alikes (data/graph/edges-m.json), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph twins, gems cross-reference (data/graph/edges-m.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which painter's works carry Muddy Brown far above the archive's baseline rate?",
+      "choices": [
+        "Paulus Potter",
+        "Georges Seurat",
+        "John Singer Sargent",
+        "Peter Paul Rubens"
+      ],
+      "answer": "Paulus Potter",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: a paint company registered the name Muddy Brown before the 2010 crowd survey.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Muddy Brown turns up in a 1375 painting, more than six centuries before the name was ever recorded."
+  ],
+  "words": 223,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits; written from ColorHub library/graph/archive data only. Avoided the crude near-duplicate crowd names (dE 3.4-4.2) in favor of Bistre Brown and Antique.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes-m.json): xkcd 2010 crowd-sourced color survey",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph look-alikes (data/graph/edges-m.json), CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph twins, gems cross-reference (data/graph/edges-m.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which painter's works carry Muddy Brown far above the archive's baseline rate?",
-   "choices": [
-    "Paulus Potter",
-    "Georges Seurat",
-    "John Singer Sargent",
-    "Peter Paul Rubens"
-   ],
-   "answer": "Paulus Potter",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: a paint company registered the name Muddy Brown before the 2010 crowd survey.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Muddy Brown turns up in a 1375 painting, more than six centuries before the name was ever recorded."
- ],
- "words": 223,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "No concordance hits; written from ColorHub library/graph/archive data only. Avoided the crude near-duplicate crowd names (dE 3.4-4.2) in favor of Bistre Brown and Antique.",
-   "lint 2026-10-09"
-  ]
- }
 }
