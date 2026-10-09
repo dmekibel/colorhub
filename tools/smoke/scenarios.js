@@ -2390,6 +2390,45 @@ scenario("map", "the per-cell seam stroke doesn't slow a continuous pan+pinch on
   t.expect(mean < 60 && p95 < 80, `frame time regressed badly: mean ${mean.toFixed(1)}ms, p95 ${p95.toFixed(1)}ms over ${log.length} frames`);
   t.notes.push(`${log.length} frames, mean ${mean.toFixed(1)}ms, p95 ${p95.toFixed(1)}ms`);
 });
+// David, 2026-10-09: "zoomed-out view of honeycomb spiral looks like circles" -- honeyCells()'s own tiny-bubble
+// shortcut (under 7px, too many to afford the real per-neighbor polygon clip) used to always fall back to a
+// plain circle, even in Honeycomb look. It now hands tiny bubbles a cheap fixed regular hexagon instead, so the
+// mosaic still reads as tiled at low zoom; Bubbles look is untouched (still plain circles, on purpose).
+scenario("map", "Honeycomb look stays tiled at low zoom (not circles); Bubbles stays circles", async t => {
+  await H.homeReady(t);
+  // Deep zoomed out (_qaForceZoom: a QA-only bypass of the ordinary zoom(z) clamp -- js/honey.js's own pinch-out
+  // floor, raised earlier this chapter so "the whole layout fits", means a RESTING zoom rarely pushes a dense
+  // set's cells under the tiny-bubble (7px) threshold this fix is about; a real pinch gesture still can for a
+  // moment, via the elastic rubber-band overshoot before it springs back -- this parks there directly instead
+  // of timing a synthetic gesture just right).
+  t.ev('S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.arr = "spiral"; S.hm.style = "honeycomb"; hmHome();');
+  await t.waitFor(() => H.num(t.text(".hm-title small")) > 500, 10000, "every name to fill");
+  t.ev("HM_CTRL._qaForceZoom(0.08)");
+  await t.sleep(200);
+  const honeyStat = t.ev("HM_CTRL._tinyPolyStat()");
+  t.expect(honeyStat.tiny > 20, `too few tiny cells to judge at this zoom (${honeyStat.tiny})`);
+  t.expect(honeyStat.poly === honeyStat.tiny, `Honeycomb: only ${honeyStat.poly}/${honeyStat.tiny} tiny cells are tiled (the rest fell back to circles)`);
+  t.notes.push(`Honeycomb: ${honeyStat.poly}/${honeyStat.tiny} tiny cells tiled, ${honeyStat.total} drawn`);
+  // Bubbles: the same tiny bubbles should still be plain circles (no regression the other way)
+  t.ev('S.hm.style = "current"; hmHome();');
+  await t.sleep(300);
+  t.ev("HM_CTRL._qaForceZoom(0.08)");
+  await t.sleep(200);
+  const bubbleStat = t.ev("HM_CTRL._tinyPolyStat()");
+  t.expect(bubbleStat.tiny > 20, `too few tiny cells to judge at this zoom (${bubbleStat.tiny})`);
+  t.expect(bubbleStat.poly === 0, `Bubbles: ${bubbleStat.poly}/${bubbleStat.tiny} tiny cells are tiled (should be plain circles)`);
+  // frame time, Honeycomb look, the largest set, at the REAL (clamped) pinch-out floor -- not the forced probe
+  // zoom above, which is further out than a resting view ever reaches: the tiled mosaic should cost about what
+  // the Bubbles circles already cost (both measured just above/below), well inside a 16ms budget with headroom
+  t.ev('S.hm.style = "honeycomb"; hmHome();');
+  await t.sleep(300);
+  const floor = t.ev("HM_CTRL.zoomFloor()");
+  t.ev(`HM_CTRL.zoom(${floor}, false)`);
+  await t.sleep(200);
+  const ms = t.ev(`(() => { let best = Infinity; for (let i = 0; i < 20; i++) { const t0 = performance.now(); HM_CTRL.zoom(${floor} + i * 0.0001, false); best = Math.min(best, performance.now() - t0); } return best; })()`);
+  t.expect(ms < 16, `a draw at Honeycomb's lowest (resting) zoom took ${ms.toFixed(1)}ms, wanted <16ms (no CPU throttle here, so real headroom matters)`);
+  t.notes.push(`Honeycomb @ floor zoom ${floor.toFixed(2)}, every name: best draw ${ms.toFixed(1)}ms`);
+});
 scenario("map", "the map keeps its pan and zoom when you open a color and come back", async t => {
   const cv = await H.homeReady(t), r = cv.getBoundingClientRect();
   const o = (x, y) => ({ bubbles: true, cancelable: true, clientX: r.left + x, clientY: r.top + y, pointerId: 11, pointerType: "touch", isPrimary: true, view: t.w });

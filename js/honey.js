@@ -673,17 +673,30 @@ const honeyExtent = (theta, r, shapeAmt) => shapeAmt <= .02 ? r : r * (1 - shape
 //   shape 0 = the largest circle that fits in the cell (touching its nearest neighbors across the same gap)
 //   between = the circle blended toward the cell, so the corners round off
 // A bubble at the edge of what's drawn (neighbors culled) is also bounded by its own lens size, so it never balloons.
+// A unit regular hexagon (pointy-top, the same orientation as hmLookIcon's own honeycomb glyph in js/home.js),
+// reused below as the cheap tiled-cell shape for tiny bubbles -- six precomputed points, scaled per bubble by a
+// single multiply, instead of the full per-neighbor polygon clip.
+const HONEY_HEX_UNIT = Array.from({ length: 6 }, (_, i) => { const a = (i * 60 + 30) * Math.PI / 180; return [Math.cos(a), Math.sin(a)]; });
 function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {   // clipAll (L18 glide): clip even tiny bubbles   // grow: how far a bubble may swell past its own lens size, as a fraction of its diameter
   if (!drawn.length) return;
   // Speed: the grid is sized to a TYPICAL bubble (not the biggest, which put thousands of tiny ones in every lookup),
-  // and each bubble searches only as many cells as its own size needs. Tiny bubbles (under ~7 px) skip the cell
-  // clipping altogether: at that size a slightly smaller circle is indistinguishable and costs nothing.
+  // and each bubble searches only as many cells as its own size needs. Tiny bubbles (under ~7 px) skip the real
+  // per-neighbor cell clipping either way (too expensive to run on a few thousand of them every frame) -- but a
+  // tiled look still wants a TILED cell there, not a plain circle. David, 2026-10-09: "zoomed-out honeycomb
+  // spiral looks like circles" -- below, a fixed regular hexagon (the honeycomb lattice's own natural cell
+  // shape, not a pixel-exact Voronoi cell the way the full clip computes for a bigger bubble, but a solid
+  // mosaic at a glance, which is what low zoom needs) costs the same O(1) as the circle it replaces.
+  const tinyHex = shapeAmt > .5 ? HONEY_HEX_UNIT : null;
   const ds = drawn.map(b => b.d).sort((a, c) => a - c), typ = ds[Math.floor(ds.length / 2)] || 8, maxD = ds[ds.length - 1] || 8;
   const cell = Math.max(4, typ * 1.3, maxD * 1.5 / 12), grid = new Map(), key = (i, j) => i * 100003 + j;
   drawn.forEach((b, n) => { const k = key(Math.floor(b.x / cell), Math.floor(b.y / cell)); let a = grid.get(k); if (!a) grid.set(k, a = []); a.push(n); });
   const half = gapPx / 2;
   drawn.forEach((b, n) => {
-    if (b.d < 7 && !clipAll) { b.poly = null; b.rin = Math.max(0, b.d * .44 - half); b.d0 = b.d; b.d = 2 * b.rin; return; }
+    if (b.d < 7 && !clipAll) {
+      const rin = Math.max(0, b.d * .44 - half);
+      b.poly = tinyHex ? tinyHex.map(p => [p[0] * rin, p[1] * rin]) : null;
+      b.rin = rin; b.d0 = b.d; b.d = 2 * rin; return;
+    }
     const reach = Math.min(12, Math.ceil((b.d + maxD) * .75 / cell));
     // start from a 16-gon a little bigger than the bubble's own lens size
     const R0 = b.d * Math.max(.62, grow * 1.2); let poly = [];
@@ -2101,6 +2114,20 @@ function honeycomb(host, opts = {}) {
       gs.sort((x, y) => x - y);
       return { n: drawn.length, w: cv.width, h: cv.height, gap: gs.length ? +gs[Math.floor(gs.length / 2)].toFixed(2) : null, p90: gs.length ? +gs[Math.floor(gs.length * .9)].toFixed(2) : null };
     },
+    // QA (tools/smoke home group): among the currently-drawn TINY bubbles (the ones honeyCells' own cheap path
+    // handles, under 7px -- see that function's own comment), how many have a real polygon (tiled, David,
+    // 2026-10-09: "zoomed-out honeycomb... looks like circles") vs none (a plain circle). A style with a high
+    // shapeAmt (Honeycomb) should tile even its tiniest cells; a low one (Bubbles) should still draw circles.
+    _tinyPolyStat() {
+      const tiny = drawn.filter(b => b.d0 != null && b.d0 < 7);
+      return { tiny: tiny.length, poly: tiny.filter(b => b.poly).length, total: drawn.length };
+    },
+    // QA only: the ordinary zoom(z) always clamps to [ZMIN,ZMAX] (the pinch-out floor), but a real pinch can
+    // still swing well past it for a moment (rubber(), the elastic overshoot before it springs back) -- which
+    // is genuinely where a dense set's cells can still drop under the tiny-bubble threshold _tinyPolyStat()
+    // above is checking. This bypasses the clamp so a test can park there and read the result directly, instead
+    // of trying to time a synthetic pinch gesture just right.
+    _qaForceZoom(z) { Z = +z; draw(); },
     // QA (tools/smoke map group): every currently-drawn bubble's own screen rect (CSS px, cv's own box, not the
     // backing store), so a caller can check "does fit mode actually keep everything above the sheet" numerically
     _drawnBounds() {
