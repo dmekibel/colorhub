@@ -2998,7 +2998,7 @@ scenario("map", "search 2.0: a hex and a modifier fly; a decade, a painter and a
 // honeycomb (js/palettehive.js) instead of lighting it among every other name on Home. #/map/gallery/<i> is a
 // different, untouched feature (js/home.js hmMapRoute, "Similar paintings on the map") and still lights a
 // museum painting directly on the big shared map -- the second half of this scenario guards that it still does.
-scenario("map", "From a painting, See its colors opens its own honeycomb (not the big map); the address route still lights the big map directly", async t => {
+scenario("map", "From a painting: See its colors opens its own honeycomb (not the big map) · the address route still lights the big map directly", async t => {
   await H.homeReady(t); t.ev(`galleryPage(14423, true)`);   // Mona Lisa -- galleryPage() itself pushes "g:14423" (the real trail Back needs)
   await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 15000, "the Mona Lisa painting page");
   const b = await t.waitFor("[data-cs=map]", 12000, "the See its colors button on a painting page");
