@@ -387,7 +387,7 @@ function ooRun(cfg) {
   // Details and the eye profile; a small Customize icon (grid size, Shuffle, names on tiles, session length)
   // replaces the setup screen that used to sit before round one.
   const html = `
-    <header class="deck-top">${cfg.box ? "" : `<button class="icon-btn" data-close aria-label="Close">${ICON.x}</button>`}${segs}${cfg.customize && !cfg.box ? `<button class="icon-btn" data-tune aria-label="Customize">${ICON.tune}</button>` : ""}</header>
+    <header class="deck-top">${cfg.box ? "" : `<button class="icon-btn" data-close aria-label="Close">${ICON.x}</button>`}${segs}${cfg.customize && !cfg.box ? `<button class="icon-btn${cfg.tuneLabel ? " oo-tunelab" : ""}" data-tune aria-label="Customize">${ICON.tune}${cfg.tuneLabel ? "<small>Customize</small>" : ""}</button>` : ""}</header>
     <div class="drill-head oo-head"><h2 id="ooq"></h2></div>
     <div class="drill-stage oo-stage" id="oostage"></div>
     <div class="drill-foot oo-foot" id="oofoot"></div>`;
@@ -517,7 +517,7 @@ function ooPlay(opt = {}) {
   const lvWord = () => `Level ${Math.floor(sess.x) + 1}`;
   ooRun({
     label: lvWord(), labelOf: lvWord, total: sess.n, i0: sess.i, combo: true, gen, cls: lay0 && lay0.n >= 9 ? "oo-dense" : "",
-    customize: true,
+    customize: true, tuneLabel: st.sets === 0,
     // every answer moves the staircase; reaching a new level is the big moment (the level-up sound)
     onAnswer: res => { const up = ooSessStep(sess, !!res.ok); if (!up) return null; later(() => buzz([10, 30, 10, 30, 24]), 120); return `Level ${Math.floor(sess.x) + 1}`; },
     onEnd: s => ooSessDone(sess, s),
@@ -586,6 +586,7 @@ function ooSessDone(sess, s) {
       ${sess.hist.length >= 4 ? ooClimbSVG(sess, edgeX) : ""}
       <div class="res-list">
         <div class="res"><span>Right</span><b class="mono">${sess.hits} of ${sess.i}</b><span class="oo-rp">${rightPct}%</span></div>
+        ${s.pts ? `<div class="res"><span>Points</span><b class="mono">${s.pts.toLocaleString()}</b><span></span></div>` : ""}
         ${top >= 0 ? `<div class="res"><span>Highest level</span><b class="mono">Level ${top + 1} · ${pctFmt(OO_GAPS[top])}</b>${newTop ? "<em>new</em>" : "<span></span>"}</div>` : ""}
         ${s.maxCombo >= 3 ? `<div class="res"><span>Longest streak</span><b class="mono">${s.maxCombo} in a row</b><span></span></div>` : ""}
         ${s.minPair ? `<div class="res"><span>Smallest you spotted</span><b class="mono">${pctFmt(s.min)}</b><span class="oo-pair"><i style="--c:${s.minPair[0]}" data-swatch="${s.minPair[0]}"></i><i style="--c:${s.minPair[1]}" data-swatch="${s.minPair[1]}"></i></span></div>` : ""}

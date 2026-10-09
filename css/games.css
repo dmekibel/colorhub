@@ -39,6 +39,13 @@
 .oo-hearts{flex:1;display:flex;gap:7px}
 .oo-hearts i{width:11px;height:11px;border-radius:50%;background:var(--bad);transition:background .3s,transform .3s var(--spring)}
 .oo-hearts i.gone{background:var(--rule);transform:scale(.7)}
+/* the Customize icon trails the header (app.css .deck-top .icon-btn assumes a LEADING icon and pulls it left
+   12px to sit flush with the edge -- flip that for a trailing icon, same as .bar .icon-btn does) */
+.oo-play .deck-top [data-tune]{margin-left:0;margin-right:-12px}
+/* a first-timer's first session names the icon once, so "Customize" isn't a private symbol (craft critique,
+   2026-10-09); every session after that, it's the plain icon again */
+.oo-play .deck-top .oo-tunelab{display:flex;align-items:center;width:auto;height:36px;gap:6px;padding:0 14px 0 10px;border-radius:var(--r-pill);background:var(--surface-2);margin-right:0}
+.oo-tunelab small{font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--soft)}
 
 /* ---------- the foot: answers, pills, the feedback line ---------- */
 .oo-foot{min-height:112px;flex-direction:column;gap:10px}
@@ -291,7 +298,9 @@
 
 /* ---------- Odd one out sessions (2026-10-09): Customize, the progress bar, dense grids, names on tiles, the climb ---------- */
 .oo-cust{display:flex;flex-direction:column;gap:12px}
-.oo-setgap{height:6px}
+/* a thin rule between each control group (mode, difficulty, names, session length), so a sheet with five groups
+   reads as five groups, not one scroll of controls (craft critique, 2026-10-09) */
+.oo-setgap{height:1px;margin:2px 0;background:var(--rule)}
 .oo-sl{display:flex;flex-direction:column;gap:2px}
 .oo-sl-h{display:flex;justify-content:space-between;align-items:baseline;font:400 17px/1.3 var(--sans);color:var(--soft)}
 .oo-sl-h b{font:500 17px/1 var(--mono);color:var(--ink)}
