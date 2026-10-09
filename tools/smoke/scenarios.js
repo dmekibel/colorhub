@@ -3026,19 +3026,24 @@ scenario("map", "From a painting: See its colors opens its own honeycomb (not th
   await H.homeReady(t);
   t.ev(`galleryPage(14423, true)`);   // Mona Lisa -- galleryPage() itself pushes "g:14423" (the real trail Back needs)
   await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 15000, "the Mona Lisa painting page");
-  // David, 2026-10-09 (Lane 4, PLAN §3.6): the painting page's action row is compact now (Learn these · ♡ Keep ·
-  // Share) -- "On the map" (the old [data-cs=map] "See its colors" button) moved into ⋯'s "Go" group
-  // (js/gallery.js moreRegister("gallery")), same as Play and the painter link. galleryPage() is called directly
-  // above (a fast test shortcut, bypassing the router) rather than through openRoute(), so it never set ROUTE_NOW
-  // -- harmless for a plain top-level button, but js/trail.js tlRouteKind() (ROUTE_NOW-based) is what ⋯ uses to
-  // find the right registered group, and a real navigation always sets it first. Set it directly here, same as
-  // openRoute() would for this address, so ⋯ opens on "gallery" 's own groups and not the generic fallback.
-  t.ev(`ROUTE_NOW = "#/gallery/14423"`);
-  await t.click("[data-tl-more]", { wait: 300 });
-  await t.waitFor(".mr-sheet", 6000, "the painting page's ⋯ sheet");
-  const row = t.$$(".mr-sheet .mn-row").find(r => t.text(r).includes("On the map"));
-  t.expect(row, "no \"On the map\" row in the painting's ⋯ sheet");
-  await t.click(row, { wait: 500 });
+  // This door has moved between the surface action row and ⋯'s "Go" group more than once (Lane 4's pagekit pass
+  // tucked it into ⋯ as "On the map"; a later coordinator fix moving the ♡ heart back to the top bar freed a
+  // surface slot and it's back as a top-level [data-cs=map] "See its colors" button, js/gallery.js csActions) --
+  // check both rather than hard-coding whichever is current, so the next reshuffle doesn't need a smoke-test fix
+  // of its own. Direct galleryPage() (a fast test shortcut bypassing the router) never sets ROUTE_NOW, which the
+  // ⋯ fallback path needs (js/trail.js tlRouteKind()) to find "gallery"'s own registered groups instead of the
+  // generic "page" fallback -- harmless for the top-level button, only set it on the path that needs it.
+  const mapBtn = t.$("[data-cs=map]");
+  if (mapBtn) {
+    await t.click(mapBtn, { wait: 500 });
+  } else {
+    t.ev(`ROUTE_NOW = "#/gallery/14423"`);
+    await t.click("[data-tl-more]", { wait: 300 });
+    await t.waitFor(".mr-sheet", 6000, "the painting page's ⋯ sheet");
+    const row = t.$$(".mr-sheet .mn-row").find(r => t.text(r).includes("On the map"));
+    t.expect(row, "no \"On the map\" row in the painting's ⋯ sheet, and no [data-cs=map] button on the surface either");
+    await t.click(row, { wait: 500 });
+  }
   await t.waitFor(".ph-sheet", 12000, "the palette honeycomb sheet");
   await t.waitFor(() => t.ev("window.PH_DEBUG && PH_DEBUG.count()") > 0, 8000, "the honeycomb to lay out its cells");
   let shown = +t.text("[data-ph-n]"), cells = t.ev("PH_DEBUG.count()");
