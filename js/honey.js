@@ -311,14 +311,15 @@ function honeySunArr(items, rankOf, groupOf) {
   if (groupOf) lay.bounds = honeyGroupBounds(pts, groupOf);
   return lay;
 }
-// a family per region: each family a small grid of its own (sub(items) -> a finite layout), the regions laid out three
-// across like the pages of a book (read left to right, top to bottom), with a one-cell sea between them. Each region
-// is snapped to the lattice (whole columns, an even number of rows), so its cells stay on the honeycomb.
+// a family (or other group) per region: each group a small grid of its own (sub(items) -> a finite layout), the
+// regions laid out three across like the pages of a book (read left to right, top to bottom), with a one-cell sea
+// between them. Each region is snapped to the lattice (whole columns, an even number of rows), so its cells stay on
+// the honeycomb. groupOf (default: the family) decides which region a color falls into.
 // read around the middle (Greys) clockwise from the top left: Pinks, Reds, Oranges, Browns, Yellows, Greens, Blues, Purples
 const HONEY_PAGE_ORDER = ["Pinks", "Reds", "Oranges", "Purples", "Greys", "Browns", "Blues", "Greens", "Yellows"];
-function honeyRegions(items, sub, order = HONEY_PAGE_ORDER) {
+function honeyRegions(items, sub, order = HONEY_PAGE_ORDER, groupOf = csFamily) {
   const by = new Map();
-  for (const it of items) { const f = csFamily(it); let a = by.get(f); if (!a) by.set(f, a = []); a.push(it); }
+  for (const it of items) { const f = groupOf(it); let a = by.get(f); if (!a) by.set(f, a = []); a.push(it); }
   const regs = order.filter(f => by.has(f)).map(f => {
     const g = sub(by.get(f)), xs = g.pts.map(q => q.x), ys = g.pts.map(q => q.y);
     return { f, g, x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) };
@@ -340,6 +341,11 @@ function honeyRegions(items, sub, order = HONEY_PAGE_ORDER) {
 }
 // warm (+1, orange-yellow) to cool (-1, blue), scaled by strength so greys sit in the seam
 const honeyTemp = it => it.C < 6 ? 0 : it.C / (it.C + 18) * Math.cos((it.H - 60) * Math.PI / 180);
+// TONES: every color sits in exactly one mood, by lightness then chroma (dark first, since a dark vivid red is
+// still read as "a dark red" before "a vivid red"): Dark (L<40), Light (L>=78), Vivid (the rest, C>=45), Muted
+// (everyone calmer and in between) -- full coverage, no color falls between the islands.
+const HONEY_TONE_ORDER = ["Vivid", "Light", "Muted", "Dark"];
+const honeyToneGroup = it => it.L < 40 ? "Dark" : it.L >= 78 ? "Light" : it.C >= 45 ? "Vivid" : "Muted";
 const honeyTier = it => { const c = typeof hmCard === "function" ? hmCard(it.o) : null; return !c ? 2 : typeof isMine === "function" && isMine(c) ? 0 : 1; };
 const honeyRankOf = it => it.o.rank != null ? +it.o.rank : 1e9;
 // the stage each color falls in (by its place in rank order, so a stage is exactly its round number)
@@ -417,10 +423,10 @@ const HONEY_ARR = {
     make: (items, ord, p) => { const o = HONEY_CENTER[ord] || HONEY_CENTER.light; return honeyRingArr(items, o.rank(items, p), o.group && o.group(items)); } },
   sunflower: { title: "Sunflower", kind: "radial", def: "vivid", sub: "A golden spiral from the middle out, hue going round",
     make: (items, ord, p) => { const o = HONEY_CENTER[ord] || HONEY_CENTER.vivid; return honeySunArr(items, o.rank(items, p), o.group && o.group(items)); } },
-  families: { title: "Families", kind: "grid", def: "hue", sub: "A region per family, greys in the middle", fit: true,
+  families: { title: "Families", kind: "grid", def: "hue", sub: "A region per family, greys in the middle", fit: true, unit: "family",
     make: (items, ord) => { const s = HONEY_SORT[ord] || HONEY_SORT.hue; return honeyRegions(items, a => honeySortGrid(a, s, 2.4)); } },   // tall regions: the book is phone-shaped
-  // the color plane seen from above (lightness set aside): warm left, cool right, greens up, magentas down
-  temp: { title: "Warm and cool", kind: "", sub: "Warm left, cool right, greys in the middle", make: items => honeyGridArr(items, it => -honeyTemp(it), it => -(it.C < 6 ? 0 : it.C / (it.C + 18) * Math.sin((it.H - 60) * Math.PI / 180)), 1.25) },
+  tones: { title: "Tones", kind: "grid", def: "hue", sub: "An island per mood: vivid, light, muted, dark; hue around inside each", fit: true, unit: "mood",
+    make: (items, ord) => { const s = HONEY_SORT[ord] || HONEY_SORT.hue; return honeyRegions(items, a => honeySortGrid(a, s, 2.4), HONEY_TONE_ORDER, honeyToneGroup); } },
 };
 const HONEY_ARR_IDS = Object.keys(HONEY_ARR);
 // the orders a shape offers, in chip order
@@ -429,7 +435,9 @@ const honeyOrderSpec = (id, ord) => { const a = HONEY_ARR[id]; return !a ? null 
 // "rings~vivid" -> { id: "rings", ord: "vivid", p: undefined }; "rings~near~#AABBCC" -> p "#AABBCC"
 function honeyParseKey(k) { const [id, ord, p] = String(k || "").split("~"); return { id, ord: ord || (HONEY_ARR[id] ? HONEY_ARR[id].def : ""), p }; }
 // older saves: the arrangements that are now a shape plus an order
-const HONEY_ARR_OLD = { wheel: ["rings", "muted"], light: ["rings", "light"], path: ["rings", "common"], known: ["rings", "known"], pages: ["families", "chroma"] };
+// (David, 2026-10-09: "Warm and cool" was its own plane with no order chips; Map's "Warmth" sort-by already does
+// the same job — warm to cool across, light to dark down — so the dedicated shape is retired in its favor)
+const HONEY_ARR_OLD = { wheel: ["rings", "muted"], light: ["rings", "light"], path: ["rings", "common"], known: ["rings", "known"], pages: ["families", "chroma"], temp: ["map", "warm"] };
 const honeyIsLayout = k => ["wheel", "sunflower", "globe", "spiral", "mapTall", "mapWide"].includes(k) || !!(HONEY_ARR[honeyParseKey(k).id] && HONEY_ARR[honeyParseKey(k).id].make);
 // a small live picture of an arrangement, drawn from the actual colors (the View sheet's strip): every color a dot
 // at its place, fitted to the canvas. Uses the same layout cache as the map, so the tap that follows is instant.
