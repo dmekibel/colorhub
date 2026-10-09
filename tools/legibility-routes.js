@@ -38,6 +38,7 @@ const LEGIBILITY_ROUTES = [
   { name: "subject-view", hash: "#shot=home:subject:family:Blues:Blues", settle: 900 },
   { name: "source-page", hash: "#/source/ridgway", key: true, settle: 700 },
   { name: "aesthetics-graph", hash: "#/web", key: true, settle: 1200 },
+  { name: "museum-home", hash: "#/museum", key: true, settle: 900 },
   { name: "museum-art", hash: "#/museum/art", settle: 900 },
   { name: "museum-ideas", hash: "#/museum/ideas", settle: 900 },
   { name: "museum-world", hash: "#/museum/world", settle: 900 },

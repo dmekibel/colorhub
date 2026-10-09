@@ -28,9 +28,15 @@ function placesRecentRow() {
 }
 // Every collection, as a picture tile, recent-first (PLAN §3.1/§3.4: "a directory of destinations... shows every
 // destination as a picture", exempt from the ≤6 rule). js/collections.js owns COLLECTIONS/collRecent().
+// David, 2026-10-09: "Add a picture to each one of these squares." A tile shows its own cover photo (c.img,
+// object-fit:cover, loading="lazy") when it has one, or a small real-color mosaic (c.swatches) when a photo
+// would be dishonest (Brands: no logos). c.pic is the loading/fallback wash either way, and onerror on the
+// <img> removes it so a broken hotlink just falls back to that wash instead of a dead gap.
 function placesCollTile(c) {
-  return `<button class="pl-ctile" data-pl-coll="${esc(c.id)}" style="${c.pic ? `--c:${esc(c.pic)}` : ""}">
-    <span class="pl-ctile-pic">${c.pic ? "" : ""}</span><b>${esc(c.t)}</b>${c.count ? `<small>${esc(c.count)}</small>` : ""}</button>`;
+  const cover = c.img ? `<img class="pl-ctile-img" src="${esc(c.img)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`
+    : c.swatches && c.swatches.length ? `<span class="pl-ctile-mosaic">${c.swatches.map(h => `<i style="background:${esc(h)}"></i>`).join("")}</span>` : "";
+  return `<button class="pl-ctile${cover ? " has-cover" : ""}" data-pl-coll="${esc(c.id)}" style="${c.pic ? `--c:${esc(c.pic)}` : ""}">
+    ${cover}<b>${esc(c.t)}</b>${c.count ? `<small>${esc(c.count)}</small>` : ""}</button>`;
 }
 // Same corner, same empirically-observed quirk the old bubble-arc stem was fixed for (core.js stemJustClosed,
 // David 2026-10-08: "clicking it again minimizes it, and then automatically it expands again by itself" -- a

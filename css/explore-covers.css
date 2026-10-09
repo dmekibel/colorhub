@@ -88,3 +88,38 @@
 .art-feed .pm-q{padding-top:0}
 /* the Art cover's second way in: the painting map (js/paintmap.js), a quiet line under the primary */
 .xp-act .xp-alt{display:block;width:100%;min-height:44px;margin-top:6px;border:0;background:none;font:italic 400 18px/44px var(--serif);color:var(--soft);text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(236,232,223,.3)}
+
+/* ---------- Museum home: one screen of collections (design/SIMPLIFY/PLAN.md §4 #1) ---------- */
+.mu-home{padding-top:calc(var(--top) + 10px)}
+.mu-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.mu-head .title-1{margin:0}
+.mu-head-acts{display:flex;gap:6px;flex:none}
+.mu-sub{margin:6px 0 16px;color:var(--soft)}
+.mu-today{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface-2);border-radius:var(--r-card,18px);padding:10px;margin:0 0 20px;border:0}
+.mu-today:active{transform:scale(.99)}
+.mu-today-im{width:60px;height:60px;border-radius:12px;overflow:hidden;flex:none;background:var(--surface-3,#2a2a2a)}
+.mu-today-im img{width:100%;height:100%;object-fit:cover;display:block}
+.mu-today-wait .mu-today-im{background:linear-gradient(135deg,#2C4F6F,#8E9C8A 60%,#F0DFBC)}
+.mu-today-t{display:flex;flex-direction:column;gap:2px;min-width:0}
+.mu-today-t b{font:600 16px/1.25 var(--serif);color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mu-today-t small{font:400 13px/1.3 var(--sans);color:var(--soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mu-colls{margin-bottom:22px}
+.mu-colls.pl-colls{grid-template-columns:repeat(3,1fr)}
+@media (max-width:360px){.mu-colls.pl-colls{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------- Collection tile covers (design/SIMPLIFY/PLAN.md §3.1/§3.4; David, 2026-10-09: "Add a picture
+   to each one of these squares.") The .pl-ctile component is places.js's own (css/places.css); these rules
+   only add the cover layer and raise the label above it, using the extra .has-cover class for specificity
+   so they win regardless of stylesheet load order, without editing places.css. ---------- */
+.pl-ctile.has-cover{overflow:hidden}
+.pl-ctile-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.pl-ctile-mosaic{position:absolute;inset:0;z-index:0;display:flex}
+.pl-ctile-mosaic i{flex:1 1 0}
+/* A photo or mosaic sits under the scrim at every lightness, so the fixed .55-opacity scrim (places.css) isn't
+   always enough -- tools/check_legibility.js caught "Design objects"/"Aesthetics" at 4.2:1/2.3:1 and every
+   count at 12px (under the 13px floor). Darken further and lift the text, scoped to .has-cover so a plain
+   flat-pic tile (none exist today, but the fallback path) is untouched. */
+.pl-ctile.has-cover::before{z-index:1;background:linear-gradient(rgba(0,0,0,.08) 0%,rgba(0,0,0,.6) 48%,rgba(0,0,0,.94) 78%,rgba(0,0,0,.96) 100%)}
+.pl-ctile.has-cover b,.pl-ctile.has-cover small{z-index:2;text-shadow:0 1px 4px rgba(0,0,0,.7)}
+.pl-ctile.has-cover b{color:#fff}
+.pl-ctile.has-cover small{font-size:13px;color:rgba(255,255,255,.92)}

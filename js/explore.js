@@ -29,7 +29,7 @@ function toggleSave(id) {
   const i = S.saved.indexOf(id);
   if (i >= 0) S.saved.splice(i, 1); else S.saved.unshift(id);
   save(); buzz(8);
-  toast(i >= 0 ? "Removed from Saved" : "Saved");
+  toast(i >= 0 ? "Removed from Kept" : esc(KEEP.done));
   return i < 0;
 }
 
@@ -156,17 +156,22 @@ function LAB_TILES(keys = ["harmony", "contrast", "eye", "studio"]) {
   return keys.map(k => tiles[k]).join("");
 }
 // ======================================================================
-// Explore's top level: a vertical pager of five full-screen covers (DESIGN-SYSTEM.md §12).
-// S.lens remembers which part is open ("all" = the pager itself, i.e. For you's own address is plain
-// #/explore); exploreHome() is the one entry point router.js and go() call, same as before.
+// Explore's top level, redesigned again (design/SIMPLIFY/PLAN.md §4 #1): the Museum's own home is now ONE
+// screen of collection tiles (museumHome(), below) instead of the five-screen pager -- David, 2026-10-08:
+// "why do I need to go to Museum and then World just to reach pulp covers and photography? Too many steps."
+// S.lens remembers which part is open; "foryou" is the old pager, kept one tap down in Museum's own ⋯ as
+// "Today's picks" (nothing is deleted, only given a shorter path). exploreHome() is still the one entry
+// point router.js and go() call, same as before, and every old #/explore/<art|ideas|world|saved> address
+// still opens the same screen it always did.
 // ======================================================================
 function exploreHome() {
-  const lens = ["art", "ideas", "world", "saved"].includes(S.lens) ? S.lens : "all";
+  const lens = ["art", "ideas", "world", "saved", "foryou"].includes(S.lens) ? S.lens : "all";
   if (lens === "art") return artHome();
   if (lens === "ideas") return exploreIdeas();
   if (lens === "world") return exploreWorld();
   if (lens === "saved") return exploreSaved();
-  return explorePager();
+  if (lens === "foryou") return explorePager();
+  return museumHome();
 }
 // a part's cover opens the same way a honeycomb bubble or a painting thumbnail would (DESIGN-SYSTEM §8):
 // here, a plain lens switch, re-using the pattern every lens chip used before this redesign.
@@ -284,6 +289,59 @@ function wireCoverImages(root, fallback) {
     img.addEventListener("error", fail, { once: true });
   });
 }
+// ======================================================================
+// The Museum's own home: one screen of collection tiles (design/SIMPLIFY/PLAN.md §3.1/§4 #1). Today's
+// painting leads; then Recent (the last collections you opened); then every collection, grouped under plain
+// headings that are labels, not doors (COLLECTIONS, js/collections.js). Reuses the Places sheet's own tile
+// component (placesCollTile, js/places.js) so a collection looks the same wherever it's reached from.
+// ======================================================================
+function museumTodayHTML() {
+  const { art, tp } = coverData();
+  if (!art) return `<button class="mu-today mu-today-wait" data-mu-today aria-label="Today's painting"><span class="mu-today-im"></span><span class="mu-today-t"><span class="eyebrow">Today</span><b>${tp ? "Loading…" : "A painting a day"}</b></span></button>`;
+  return `<button class="mu-today" data-mu-today><span class="mu-today-im">${art.img ? `<img src="${esc(art.img)}" alt="${esc(art.title)}" loading="lazy">` : ""}</span>
+    <span class="mu-today-t"><span class="eyebrow">Today</span><b>${esc(art.title)}</b><small>${esc(artCoverNote(art))}</small></span></button>`;
+}
+function museumHome() {
+  XSTACK = [];
+  museumRegisterMore();
+  const recentIds = Array.isArray(S.recentColl) ? S.recentColl.slice(0, 3) : [];
+  const recent = recentIds.map(id => COLLECTIONS.find(c => c.id === id)).filter(Boolean);
+  const groups = MUSEUM_GROUPS.map(g => [g, COLLECTIONS.filter(c => c.group === g)]).filter(([, l]) => l.length);
+  const el = show(`
+    <header class="mu-head"><h1 class="title-1">${esc(NAV_MUSEUM)}</h1><div class="mu-head-acts">
+      <button class="icon-btn" data-search aria-label="Search">${ICON.search}</button>
+      <button class="icon-btn" data-menu aria-label="More">${ICON.dots}</button></div></header>
+    <p class="note mu-sub">Every painting, painter, movement, flower, gem, poem, film and look, in one place.</p>
+    ${museumTodayHTML()}
+    ${recent.length ? `<div class="sec-head"><b>Recent</b></div><div class="pl-colls mu-colls">${recent.map(placesCollTile).join("")}</div>` : ""}
+    ${groups.map(([g, list]) => `<div class="sec-head"><b>${esc(g)}</b></div><div class="pl-colls mu-colls">${list.map(placesCollTile).join("")}</div>`).join("")}
+  `, "explore mu-home", "explore");
+  el.querySelector("[data-menu]").onclick = () => moreOpen("explore");
+  el.querySelector("[data-search]").onclick = () => (typeof searchOpen === "function" ? searchOpen({ from: "museum" }) : exploreSearchSheet());
+  const td = el.querySelector("[data-mu-today]");
+  if (td) td.onclick = () => { const { art } = coverData(); if (art) openNode(art); };
+  el.addEventListener("click", e => { const c = e.target.closest("[data-pl-coll]"); if (c) { buzz(8); if (typeof collOpen === "function") collOpen(c.dataset.plColl); } });
+}
+const MUSEUM_GROUPS = ["Art", "Design", "Nature", "Writing & film", "Looks & ideas"];
+const museumShuffle = () => { if (typeof loadGallery === "function") loadGallery().then(() => { if (typeof GAL !== "undefined" && GAL && typeof galleryPage === "function") galleryPage(Math.floor(Math.random() * GAL.n), true); }); };
+// Museum's own ⋯ (PLAN §3.1/§9): the pager survives here as "Today's picks", plus a shuffle and a way to
+// what you've kept (Studio's Kept, PLAN §3.1 "Museum › Saved" -> "Studio › Kept"), findable without leaving
+// the room. explore.js loads before places.js/search.js (index.html order), so this registers lazily, the
+// first time the room's own home draws, rather than at module-load time when moreRegister doesn't exist yet.
+let MUSEUM_MORE_REGISTERED = false;
+function museumRegisterMore() {
+  if (MUSEUM_MORE_REGISTERED || typeof moreRegister !== "function") return;
+  MUSEUM_MORE_REGISTERED = true;
+  moreRegister("explore", () => [
+    { title: "More", items: [
+      { t: "Today's picks", n: "A new mix every day", run: () => openPart("foryou") },
+      { t: "Shuffle a painting", run: museumShuffle },
+      { t: "What you've kept", n: "Colors, paintings, palettes and photos", run: () => { if (typeof favShelf === "function") favShelf(() => go("explore")); } },
+    ] },
+  ]);
+  if (typeof featureRegister === "function") featureRegister("museum-shuffle", { t: "Shuffle a painting", where: "Museum · More", words: ["random", "surprise"], run: museumShuffle });
+}
+
 function explorePager() {
   XSTACK = [];
   const { c, art, story, coty, tp, saved } = coverData();

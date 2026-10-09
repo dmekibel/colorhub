@@ -1229,7 +1229,7 @@ scenario("home", "Colors | Paintings: the corner-menu switch is bidirectional an
 });
 
 // ================================================================== ROOMS
-for (const [shot, id, label, needs] of [["learn", "learn", "Learn", ".plates, .btn"], ["gym", "gym", "Train", ".r2-g, .gs-tile"], ["explore", "explore", "Explore", ".xp-cover"], ["studio", "studio", "Studio", "[data-wheel]"]]) {
+for (const [shot, id, label, needs] of [["learn", "learn", "Learn", ".plates, .btn"], ["gym", "gym", "Train", ".r2-g, .gs-tile"], ["explore", "explore", "Explore", ".mu-colls"], ["studio", "studio", "Studio", "[data-wheel]"]]) {
   scenario("rooms", `${label} renders inside the room sheet`, async t => {
     await t.open("#shot=" + shot, { settle: 600 });
     await t.waitFor(`.room-sheet[data-room="${id}"]`, 8000, `the ${label} room sheet`);
@@ -1530,41 +1530,57 @@ scenario("train", "Brand colors: tap through a full round to results", async t =
   t.notes.push(`${rounds} rounds played`);
 });
 
-// ================================================================== EXPLORE
-for (const [part, expect] of [["all", ".x-feed .pin, .x-feed [data-pin]"], ["art", ".xb-pick"], ["ideas", ".x-feed .pin, .x-feed [data-pin]"], ["world", "#world *"], ["saved", ".x-feed"]]) {
-  scenario("explore", `${part} cover opens and goes back`, async t => {
-    await t.open("#shot=explore:all", { settle: 600 });
-    const cover = await t.waitFor(`.xp-cover[data-part="${part}"]`, 8000, `the ${part} cover`);
-    t.expect(t.$$(".xp-cover").length === 5, `${t.$$(".xp-cover").length} covers instead of 5`);
-    let pinOpened = false;
-    await t.click(cover, { force: true, wait: 500 });
+// ================================================================== MUSEUM (design/SIMPLIFY/PLAN.md §4 #1:
+// the room's own home is now one screen of collection tiles, grouped, recent-first, instead of a five-cover
+// pager -- David, 2026-10-08, "why do I need to go to Museum and then World just to reach pulp covers and
+// photography? Too many steps." The pager survives one tap down as "Today's picks" (lens "foryou", below).
+scenario("explore", "Museum home shows every collection as a tile, grouped, and a tile opens", async t => {
+  await t.open("#shot=explore:all", { settle: 600 });
+  await t.waitFor(".mu-home", 8000, "the Museum home");
+  t.expect(/museum/i.test(t.text(".mu-head")), `the room doesn't name itself ("${t.text(".mu-head")}")`);
+  const tiles = await t.waitFor(() => { const ts = t.$$(".mu-colls [data-pl-coll]"); return ts.length >= 10 && ts; }, 8000, "collection tiles");
+  t.notes.push(`${tiles.length} collection tiles, ${t.$$(".mu-home .sec-head").length} group headings`);
+  const groups = new Set(t.$$(".mu-home .sec-head b").map(e => e.textContent));
+  t.expect(groups.has("Design") && (groups.has("Design")), `Design group missing (groups: ${[...groups].join(", ")})`);
+  const tile = tiles.find(x => x.dataset.plColl === "pulp") || tiles[0];
+  const steps = tile.dataset.plColl === "pulp" ? 2 : 2;   // Places/Museum tile tap -> its page: always 2 taps from home
+  t.notes.push(`${tile.dataset.plColl}: ${steps} taps from the map`);
+  await t.click(tile, { force: true, wait: 600 });
+  await t.waitFor(() => t.$(".p-title") || t.$(".article"), 12000, "a collection screen after tapping its tile");
+});
+
+for (const [part, expect] of [["art", ".xb-pick"], ["ideas", ".x-feed .pin, .x-feed [data-pin]"], ["world", "#world *"], ["saved", ".x-feed"]]) {
+  scenario("explore", `${part} lens opens and Back returns to the Museum`, async t => {
+    await t.open(`#shot=explore:${part}`, { settle: 600 });
     await t.waitFor(".p-title", 8000, `the ${part} screen`);
     await t.waitFor(expect, 12000, `${part} content (${expect})`);
-    if (/pin/.test(expect)) {   // a pin opens a closeup
+    if (/pin/.test(expect)) {   // a pin opens a closeup; back out of it before the final Back
       const pin = t.$$(expect).find(p => p.getBoundingClientRect().width > 0);
       t.expect(pin, "no visible pin");
       const title = t.text(".p-title");
       await t.click(pin, { force: true, wait: 600 });
       await t.waitFor(() => t.text(".p-title") !== title || t.$(".closeup, .cp-page, .article"), 6000, "a pin to open");
       await t.sleep(200);
-      pinOpened = true;
+      await t.click("[data-back]", { wait: 500 });
+      await t.waitFor(".p-title", 6000, `the ${part} screen again after the pin's Back`);
     }
-    if (pinOpened) { await t.click("[data-back]", { wait: 500 }); await t.waitFor(() => t.$(".p-title") || t.$(".xp-cover"), 6000, "a screen after Back from the pin"); }
-    if (!t.$(".xp-cover")) await t.click("[data-back]", { wait: 500 });
-    await t.waitFor(".xp-cover", 6000, "the pager of covers after Back");
+    await t.click(".art-top [data-back], [data-back]", { wait: 500 });
+    await t.waitFor(".mu-home", 6000, "the Museum home after Back");
   });
 }
 
-// For you (js/explore.js, default lens): a strong painting interest (interests(), js/learner.js) nudges
-// painting pins earlier in the mix -- a nudge like fvForYou's, never a filter, so every kind still shows.
-scenario("explore", "For you nudges pins toward a strand you follow, without hiding the others", async t => {
+// For you (js/explore.js): kept one tap down in Museum's ⋯ as "Today's picks" (lens "foryou"). A strong
+// painting interest (interests(), js/learner.js) nudges painting pins earlier in the mix -- a nudge like
+// fvForYou's, never a filter, so every kind still shows.
+scenario("explore", "Today's picks nudges pins toward a strand you follow, without hiding the others", async t => {
   try {
     localStorage.setItem("colorhub-v1", JSON.stringify({
       v: 3, placed: { tier: 1, at: "2026-10-01" },
       learn: { v: 1, ev: Array.from({ length: 20 }, (_, i) => ({ t: Date.now() - i * 36e5, e: "seen", src: "painting" })), agg: { c: {}, p: {} }, sets: {}, bf: 1 },
     }));
   } catch (e) {}
-  await t.open("#shot=explore:all", { settle: 600, keepState: true });
+  await t.open("#shot=explore:foryou", { settle: 600, keepState: true });
+  await t.waitFor(".xp-cover", 8000, "the Today's picks pager");
   await t.click('.xp-cover[data-part="all"]', { force: true, wait: 500 });
   await t.waitFor(".x-feed .pin", 10000, "pins in the For you feed");
   const kinds = t.$$(".x-feed .pin").map(p => p.className.match(/pin-(\w+)/)?.[1] || "");
@@ -1572,16 +1588,16 @@ scenario("explore", "For you nudges pins toward a strand you follow, without hid
   t.expect(kinds.includes("color"), "the color pins disappeared; a nudge should never hide the others");
 });
 
-scenario("explore", "a cover's palette chip opens its color page; the primary opens the part", async t => {
-  await t.open("#shot=explore:all", { settle: 600 });
+scenario("explore", "a Today's-picks palette chip opens its color page; the primary opens the part", async t => {
+  await t.open("#shot=explore:foryou", { settle: 600 });
   const chip = await t.waitFor('.xp-cover[data-part="all"] .xp-chip', 8000, "a palette chip on the For you cover");
   await t.click(chip, { force: true, wait: 500 });
   await t.waitFor(".cp-page, .nm-page, .p-title", 8000, "a color page after tapping a palette chip");
   t.expect(!t.$(".x-feed"), "the chip opened the For you feed instead of its color page");
-  await t.open("#shot=explore:all", { settle: 600 });
-  const go = await t.waitFor('.xp-cover[data-part="saved"] [data-go]', 8000, "the Saved cover's primary");
+  await t.open("#shot=explore:foryou", { settle: 600 });
+  const go = await t.waitFor('.xp-cover[data-part="world"] [data-go]', 8000, "the World cover's primary");
   await t.click(go, { force: true, wait: 500 });
-  await t.waitFor(".p-title", 8000, "a part after the Saved cover's primary");
+  await t.waitFor(".p-title", 8000, "a part after the World cover's primary");
 });
 
 scenario("explore", "Art with a color shows tiles", async t => {
@@ -4619,9 +4635,10 @@ scenario("learnroom", "day one: For you and the wheel and the choices and Today 
   await t.waitFor(".room-learn .lh-wheel", 8000, "the color wheel");
   const room = t.$(".room-learn");
   t.expect(!t.$(".quilt", room) && !t.$(".path-list", room) && !t.$("[data-menu]", room), "the grid, the stage rows or Settings are still in the room");
-  t.expect(t.$$(".lr-today", room).length === 1 && !t.$(".dl-row", room), "Today is not one card");
-  const blocks = [".lh-hero", ".lh-wheel-sec", ".lh-choose", ".lr-today", ".inst", ".keep"].filter(s => t.$(s, room)).length;
-  t.expect(blocks <= 5, `${blocks} blocks on day one`);
+  // Today's own card left Learn for Train (design/SIMPLIFY/PLAN.md §7 R5/R6): no duplicate here any more
+  t.expect(!t.$(".lr-today", room) && !t.$(".dl-row", room), "Learn still shows its own Today card");
+  const blocks = [".lh-hero", ".lh-wheel-sec", ".lh-choose", ".inst", ".keep"].filter(s => t.$(s, room)).length;
+  t.expect(blocks <= 4, `${blocks} blocks on day one`);
   t.expect(t.$$(".btn", room).filter(b => !b.classList.contains("ghost")).length === 1, "more than one filled button");
   t.expect(t.$$(".lh-w", room).length === 9, "the wheel doesn't show nine families");
   t.expect(!/units? to|the 101|locked/i.test(room.innerText), "old path copy is still there");
@@ -4645,17 +4662,13 @@ scenario("learnroom", "a wedge of the wheel studies that family at your level an
   t.expect(t.ev("(HONEY_HL && HONEY_HL.hexes || []).length") > 0, "the selection carries colors to light up");
   t.expect(t.$(".cs-hl-bar, .cs-hl-pill"), "the selection chip is on screen");
 });
-scenario("learnroom", "the Today card shows the painting and opens both of its parts", async t => {
+// Today's painting and Name it in six used to repeat as their own card at the bottom of Learn; removed
+// 2026-10-09 (design/SIMPLIFY/PLAN.md §7 R5/R6) since the identical boards already live in Train › Today,
+// which the "train" group's "every entry on the Train menu opens something" scenario already exercises.
+scenario("learnroom", "Learn's Or choose has no duplicate of Train's Today boards", async t => {
   await t.open("#shot=learn", { settle: 600 });
-  await t.waitFor(".lr-today #dlPaintArt img", 8000, "Today's painting in the card");
-  await t.waitFor(() => t.$("#lrTcSw.on"), 8000, "today's color swatch");
-  t.expect(/,|hides in/.test(t.text("#lrTcTitle")) && t.text("#lrTcSub").length > 3, `the card's title ("${t.text("#lrTcTitle")}")`);
-  if (t.ev("typeof todayPick") !== "function") t.expect(!t.$(".lr-tc-chip.on"), "a color chip sits on a painting it isn't linked to");
-  await t.click(".lr-tc-act[data-daily]", { wait: 600 });
-  await t.waitFor(".dn-in", 10000, "Name it in six from the card");
-  await t.open("#shot=learn", { settle: 600 });
-  await t.click(await t.waitFor(".lr-tc-act[data-dpaint]", 8000, "the Look row"), { wait: 600 });
-  await t.waitFor("#dpFrame", 8000, "Today's painting from the card");
+  await t.waitFor(".lh-choose", 8000, "Learn's Or choose section");
+  t.expect(!t.$(".lr-today, .lr-tcard"), "Learn still shows its own Today card (now a duplicate of Train's)");
 });
 scenario("you-coverage", "You: Untangle on a mix-up opens the Learn sheet on that pair, saved sets show a ring, the count is never negative", async t => {
   await t.open("#/you", { settle: 400 });
