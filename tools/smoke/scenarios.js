@@ -2506,10 +2506,11 @@ scenario("studio", "photo palette: mode chips, slider and a chip opens its page"
   await t.waitFor("[data-pvorder] button", 8000, "the photo's palette-type chips");
   const n0 = t.$$(".gl-strip [data-swatch]").length;
   t.expect(t.$$("[data-pvorder] button").length >= 8, `only ${t.$$("[data-pvorder] button").length} palette types on a photo (the painting page has up to 14)`);
+  t.expect(t.$('[data-pvo="diverse"]'), "Diverse isn't offered on a photo (David's palette-engine brief, 2026-10-09: the photo gets the same engine)");
   const other = t.$$("[data-pvorder] button").find(b => !b.classList.contains("on"));
   if (other) await t.click(other, { force: true, wait: 400 });
   const slide = t.$("[data-pvk]");
-  if (slide && !t.$("[data-pvslide]").hidden) { slide.value = slide.max; slide.dispatchEvent(new t.w.Event("input", { bubbles: true })); await t.sleep(300); }
+  if (slide && !t.$("[data-pvslide]").hidden) { slide._countTo(slide.max ? +slide.max : 20); await t.sleep(300); }
   t.expect(t.$$(".gl-strip [data-swatch]").length >= 3, `only ${t.$$(".gl-strip [data-swatch]").length} chips after changing the controls (was ${n0})`);
   const chip = t.$$(".gl-strip [data-swatch]").find(e => e.getBoundingClientRect().width > 0);
   await t.click(chip, { force: true, wait: 400 });
@@ -2517,6 +2518,24 @@ scenario("studio", "photo palette: mode chips, slider and a chip opens its page"
   await H.back(t);
   t.expect(!t.$(".cp-page"), "Back left the color page open");
   t.expect(t.$("#app").innerText.length > 60, "Back from the color page landed on an empty screen");
+});
+// David's palette-engine brief, 2026-10-09: "Fix js/studio.js's photo palette to use the new engine + Diverse
+// mode" -- By area must be true top-k-by-share (glPoolByArea, not the old vividness-weighted glPoolPick), and
+// Diverse must actually return a palette with the slider wired through countify like every other mode.
+scenario("studio", "photo palette: By area is true top-k-by-share, and Diverse returns a real, slider-driven palette", async t => {
+  await t.open("#shot=studiopv", { settle: 900 });
+  await t.waitFor("[data-pvorder] button", 8000, "the photo's palette-type chips");
+  await t.click('[data-pvo="area"]', { force: true, wait: 400 });
+  const shares = () => t.$$(".gl-strip .pal span").map(s => parseInt(s.textContent, 10) || 0);
+  t.expect(shares()[0] >= Math.max(...shares()), "By area doesn't lead with the biggest color on a photo");
+  await t.click('[data-pvo="diverse"]', { force: true, wait: 400 });
+  const n0 = t.$$("[data-pvswatches] [data-pvj]").length;
+  t.expect(n0 >= 2, "Diverse returned fewer than 2 colors on a photo");
+  const slide = t.$("[data-pvk]");
+  t.expect(slide && !t.$("[data-pvslide]").hidden, "Diverse has no How-many slider");
+  slide._countTo(2);   // always below n0 (the slider's own min is 2, and every photo pool here has >2 colors)
+  await t.sleep(300);
+  t.expect(t.$$("[data-pvswatches] [data-pvj]").length === 2, `the slider didn't redraw Diverse live (still ${t.$$("[data-pvswatches] [data-pvj]").length} chips, was ${n0})`);
 });
 
 // A photo gets the painting page's whole palette engine (David, 2026-10-09): mode chips, the How-many slider,
@@ -3407,6 +3426,36 @@ scenario("paintings", "a color page's In paintings section: presets re-run the q
 // sitting over the real color page underneath, forever: not actually a black page, just one buried under a
 // black curtain nobody pulled back. Fixed by giving glZoomOpen's close() to cleanup.push, the same way every
 // other body-level overlay in this app already protects itself.
+// Option A region segmentation (David's palette-engine brief, 2026-10-09, shipped corpus-wide): tools/
+// regions_build.py precomputes a few coherent color regions per painting (data/regions/d/NNN.json, same shard/
+// order as data/gallery/). The Region tool needs no live pixel read at all (eydMap is pure geometry), so it
+// works even where Pick/Where can't (a non-CORS museum host) -- this test doesn't need the Commons CORS mock
+// the other Look-closer tests use.
+scenario("paintings", "Look closer's Region tool: tap lights a region and opens its own palette sheet, every mode and the slider working", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { wait: 700 });
+  const regionBtn = await t.waitFor('[data-glzv="region"]:not([hidden])', 8000, "the Region tool (region data for this painting)");
+  await t.click(regionBtn, { force: true, wait: 400 });
+  const img = t.$(".glz-img"), r = img.getBoundingClientRect();
+  // try a few points: a region grid has real gaps near hard edges, so one honest retry keeps this from being flaky
+  let ok = false;
+  for (const [fx, fy] of [[0.3, 0.3], [0.5, 0.5], [0.7, 0.4], [0.4, 0.7]]) {
+    t.ev(`(() => { const img = document.querySelector(".glz-img"), r = img.getBoundingClientRect(); img.dispatchEvent(new MouseEvent("click", { bubbles: true, clientX: r.left + r.width * ${fx}, clientY: r.top + r.height * ${fy} })); })()`);
+    await t.sleep(500);
+    if (t.$(".rgs-sheet")) { ok = true; break; }
+  }
+  t.expect(ok, "tapping the image in Region mode never opened a region palette sheet");
+  t.expect(t.$(".glz-cv").classList.contains("on"), "the region didn't light up (soft mask) on the painting");
+  t.expect(/This area/.test(t.text(".rgs-head")), "the region sheet doesn't say \"This area\" (an honest label, no guessed object name)");
+  const n0 = t.$$("[data-rgswatches] [data-swatch]").length;
+  t.expect(n0 >= 1, "the region's palette strip has no chips");
+  await t.click('[data-rgm="diverse"]', { force: true, wait: 400 });
+  t.expect(t.$('[data-rgm="diverse"]').classList.contains("on"), "Diverse didn't become the active region palette mode");
+  const slide = t.$("[data-rgk]");
+  if (slide && !t.$("[data-rgslide]").hidden) { slide._countTo(2); await t.sleep(300); t.expect(t.$$("[data-rgswatches] [data-swatch]").length === 2, "the region slider didn't redraw its palette live"); }
+  await t.click(t.$("[data-rgswatches] [data-swatch]"), { force: true, wait: 600 });
+  await t.waitFor(".cp-page", 8000, "a color page after tapping a region-palette chip");
+});
 scenario("paintings", "Look closer on a painting then swiping back (popstate) never leaves the color page under a stuck dark scrim", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
   const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
