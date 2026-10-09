@@ -382,6 +382,11 @@ scenario("home", "Arrange is non-modal: a tap or a pan on the map doesn't close 
   await H.homeReady(t);
   await H.sheet(t, "arrange");
   t.expect(t.$(".sheet.hm-sheet-arrange"), "the Arrange sheet did not open");
+  // David, 2026-10-09: "pressing Arrange brings the black bar back at the bottom" -- a non-modal sheet (this
+  // one: the map keeps panning and zooming underneath it) never locks body scroll either now (js/core.js
+  // sheet()'s own {lock:false}, js/home.js chooser) -- html.sheet-open (app.css: body{position:fixed}) toggling
+  // right as the sheet opens was a real candidate for the black bar's own trigger on an iOS Home Screen app.
+  t.expect(!t.d.documentElement.classList.contains("sheet-open"), "the non-modal Arrange sheet locked body scroll anyway");
   const cv = t.$("canvas"), r = cv.getBoundingClientRect();
   const tapX = r.left + r.width / 2, tapY = r.top + 60;   // the top of the map, above the sheet
   const mk = (type, x, y, id = 1) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: id, pointerType: "touch", isPrimary: true, view: t.w });
@@ -398,6 +403,12 @@ scenario("home", "Arrange is non-modal: a tap or a pan on the map doesn't close 
   cv.dispatchEvent(mk("pointerdown", tapX, tapY)); cv.dispatchEvent(mk("pointerup", tapX, tapY));
   await t.sleep(400);
   t.expect(!t.$(".sheet.hm-sheet-arrange"), "a double-tap on the map did not close Arrange");
+  t.expect(!t.d.documentElement.classList.contains("sheet-open"), "sheet-open was left on after Arrange closed");
+  // the opt-out itself, not just this one caller: an ordinary (modal) sheet with no {lock:false} still locks
+  t.ev('(() => { const { close } = sheet("<p>t</p>"); window.__lockedOk = document.documentElement.classList.contains("sheet-open"); close(); })()');
+  await t.sleep(500);
+  t.expect(t.ev("window.__lockedOk"), "sheet()'s default (modal) case stopped locking scroll");
+  t.expect(!t.d.documentElement.classList.contains("sheet-open"), "sheet-open was left on after the modal test sheet closed");
 });
 
 scenario("home", "Arrange's fit mode frames the whole layout above the sheet, for every arrangement", async t => {
@@ -426,11 +437,22 @@ scenario("home", "Arrange's fit mode frames the whole layout above the sheet, fo
     // David, 2026-10-09: "the original view is now too far away" -- a loose "somewhere in the neighborhood" pad
     // (above) isn't enough to catch a disk floating small in empty space, so also require it to actually fill
     // the space above the sheet, on the axis its own shape is actually constrained by (a tall arrangement like
-    // the default map/hue fills by height, not width; a round one like Sunflower fills by both) -- at least 85%
-    // of the ~16px-margin-adjusted space on whichever axis is tighter.
+    // the default map/hue fills by height, not width; a round one like Sunflower fills by both) -- at least 80%
+    // of the ~16px-margin-adjusted space on whichever axis is tighter. (David's next report, on his own default
+    // Spiral/Sunflower + Honeycomb: the fit was OVERFLOWING the available space by ~14%, because boundsFit()
+    // checked each lattice point's own position but never its DRAWN RADIUS -- fixed by accounting for each
+    // point's real diameter at the candidate zoom, same as buildFlatDrawn's own round branch computes it. That
+    // fix is correctly more conservative for a round arrangement than the diagonal-only approximation it
+    // replaced, landing at ~83-85% instead of exactly 85%+ -- a deliberate, small trade of fill % for the
+    // overflow this is actually guarding against; 80% still confirms it isn't floating small the way the
+    // original bug did.)
     const bw = b.maxX - b.minX, bh = b.maxY - b.minY, availW = b.W - 32, availH = sheetTop - 32;
     const fill = Math.max(bw / availW, bh / availH);
-    t.expect(fill >= .85, `${why}: the fitted layout only fills ${(fill * 100).toFixed(0)}% of the space above the sheet on its own constrained axis (bbox ${bw.toFixed(0)}x${bh.toFixed(0)}, available ${availW.toFixed(0)}x${availH.toFixed(0)})`);
+    t.expect(fill >= .8, `${why}: the fitted layout only fills ${(fill * 100).toFixed(0)}% of the space above the sheet on its own constrained axis (bbox ${bw.toFixed(0)}x${bh.toFixed(0)}, available ${availW.toFixed(0)}x${availH.toFixed(0)})`);
+    // the overflow bug itself (David: "the preview still zooms out too far" turned out to mean the OPPOSITE --
+    // it was actually overflowing the available space by ~14%, from a point's own drawn radius never being
+    // subtracted): never past ~103% on either axis (a sliver of slack for sub-pixel rounding, not real overflow)
+    t.expect(bw <= availW * 1.03 && bh <= availH * 1.03, `${why}: the fitted layout overflows the space above the sheet (bbox ${bw.toFixed(0)}x${bh.toFixed(0)}, available ${availW.toFixed(0)}x${availH.toFixed(0)})`);
     t.notes.push(`${why}: sheetTop=${sheetTop.toFixed(0)} bounds=[${b.minX.toFixed(0)},${b.minY.toFixed(0)}..${b.maxX.toFixed(0)},${b.maxY.toFixed(0)}] fill=${(fill * 100).toFixed(0)}%`);
   };
   await within("map/hue (default)");

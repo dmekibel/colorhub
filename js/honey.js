@@ -1105,10 +1105,16 @@ function honeycomb(host, opts = {}) {
     // Checking width and height as two independent constraints on the SAME z (both must hold, so the smaller --
     // more zoomed out -- survives) fixes both axes at once; js/honey.js's own zFloor() does the same AND-of-two-
     // axes trick already (the `fits` helper a little below this function).
-    // David, 2026-10-09: "width ~= screen width minus ~16px margins" -- just the plain margin, no extra safety
-    // factor on top of it. The per-point check below already uses each point's own REAL drawn position (the
-    // same F(r,l)/r radial transform the renderer itself uses, not an approximation of where the magnified
-    // middle bubble might land), so there is nothing left to pad for.
+    // David, 2026-10-09: "width ~= screen width minus ~16px margins" -- just the plain margin. The per-point
+    // check below uses each point's own REAL drawn position (the same F(r,l)/r radial transform the renderer
+    // itself uses) -- but David's next report ("the preview still zooms out too far", on his own default
+    // Spiral/Sunflower + Honeycomb) showed this wasn't the whole picture: a point's own DRAWN RADIUS (strong
+    // magnification can make the near-center cells considerably bigger than the lattice spacing alone
+    // suggests) was never subtracted, so a cell right at the computed boundary could still draw well past it --
+    // measured overflowing the available space by ~14% on that exact combination. localScale (defined above,
+    // the same function buildFlatDrawn's own round branch calls) gives each point's real diameter at a
+    // candidate zoom; checking center-position-plus-own-radius against the boundary, not just the center, is
+    // what _drawnBounds() -- the actual rendered extent -- would also measure.
     const margin = 16, pad = 1;
     const availW = Math.max(40, W - margin * 2), availH = Math.max(40, Hh - insetBottom - margin * 2);
     // fit mode wants the OPPOSITE search direction from zFloor()'s own `search` a little below (its own
@@ -1133,9 +1139,9 @@ function honeycomb(host, opts = {}) {
         const l = { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig };
         for (const p of lay.pts) {
           const ex = p.x - cx, ey = p.y - cy, r = Math.hypot(ex, ey);
-          if (!r) continue;
-          const k = F(r, l) / r;
-          if (Math.abs(ex * k) * pad > availW / 2 || Math.abs(ey * k) * pad > availH / 2) return true;
+          const k = r ? F(r, l) / r : 0, sx = ex * k, sy = ey * k;
+          const rad = base * z * localScale(r, l) * pack() / 2;   // this point's own drawn radius at this z
+          if (Math.abs(sx) + rad * pad > availW / 2 || Math.abs(sy) + rad * pad > availH / 2) return true;
         }
         return false;
       });
