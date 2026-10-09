@@ -112,6 +112,12 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["sourcePage", id => id && typeof SOURCE_SYSTEMS !== "undefined" && SOURCE_SYSTEMS[id] ? routed(SOURCE_SYSTEMS[id].title, "source/" + id) : null],   // js/sources.js
   ["phOpenRecord", (id, rec) => id != null ? routed(rec && (rec.title || rec.from) || "Your photo", "photo/" + id) : null],   // js/photos.js
   ["lkOpen", id => { const l = typeof lkGet === "function" && lkGet(id); return l ? routed(l.name, "look/" + id) : null; }],
+  // the subject palette view (js/subjectview.js, PAGES-AUDIT.md plan item 3, David 2026-10-09): a painter,
+  // decade, movement, country, museum or look's measured colors. id is already slug-safe for painter/look,
+  // numeric for decade; movement/country/museum get routeSlug()'d here and matched back to their real key by
+  // svOpenRoute (data/analysis/groups.json's own keys, same as awGroup does for the art wiki's own movement/
+  // decade/country pages below).
+  ["svOpen", subject => subject && subject.kind && subject.id != null ? routed(subject.label || String(subject.id), "subject/" + subject.kind + "/" + routeSlug(String(subject.id))) : null],
   ["pulpGrid", () => routed("Pulp covers", "pulp")],   // js/pulp.js: the World door for pulp magazine/paperback covers   // js/looks.js
   ["photographyGrid", () => routed("Photography", "photography")],   // js/photography.js: the World door for the color-photography archive
   ["photographerPage", slug => slug ? routed((typeof phGetName === "function" && phGetName(slug)) || slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase()), "photographer/" + slug) : null],   // js/photography.js
@@ -289,6 +295,7 @@ function openRoute(hash, initial = false) {
     base(); XSTACK = []; archWhen(() => { const f = (window.FILMS || []).find(x => x.id === id); if (f) filmPage(f); else xToOrigin(); }); return true;
   }
   if (kind === "look" && id && typeof lkOpenRoute === "function") { base(); XSTACK = []; lkOpenRoute(id); return true; }   // js/looks.js
+  if (kind === "subject" && id && more != null && typeof svOpenRoute === "function") { base(); XSTACK = []; svOpenRoute(id, more); return true; }   // js/subjectview.js: #/subject/<kind>/<id>, PAGES-AUDIT.md plan item 3
   if (kind === "source" && id && typeof sourcePage === "function") { base(); XSTACK = []; sourcePage(id); return true; }   // js/sources.js
   if (kind === "pulp" && !id && typeof pulpGrid === "function") { base(); XSTACK = []; pulpGrid(false); return true; }   // js/pulp.js: #/pulp (a direct link to one cover, #/painting/pulp-<id>, needs the grid open first in this session)
   if (kind === "photography" && !id && typeof photographyGrid === "function") { base(); XSTACK = []; photographyGrid(false); return true; }   // js/photography.js: #/photography (a direct link to one photo, #/painting/photod-<id>, needs the grid open first)

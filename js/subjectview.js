@@ -161,13 +161,76 @@ function svArrHTML(arr, shown) {
   return "";   // "map" hands off instead of rendering here (see svArrange)
 }
 
+// ---------- a real address, #/subject/<kind>/<id> (router.js ROUTED + openRoute; PAGES-AUDIT.md plan item 3,
+// David 2026-10-09: "the richest new screen in the app... unlinkable and unshareable") ----------
+// svOpen is a sheet (js/core.js sheet()), not a show()-based screen, so it has none of js/trail.js's usual
+// free rides: no routeCommit() from show(), no auto "r:" trail join from tlNote(). Both are added here, in this
+// file, instead of touching trail.js's own xBack/show logic: every open commits the address and title (its
+// ROUTED entry in router.js sets ROUTE_NEXT the instant before this runs) and pushes one "sv:" trail token
+// (same shape as galleryPage's "g:i"), and both undo themselves once the sheet is actually gone -- a
+// MutationObserver, since every internal close path (scrim tap, swipe-down, Escape) calls sheet()'s own close
+// directly, never the wrapped one returned to a caller.
+function svResolveSlug(kind, slug) {
+  if (kind === "decade") return Promise.resolve(/^\d+$/.test(slug) ? +slug : null);
+  if (kind === "painter" || kind === "look") return Promise.resolve(slug);   // already slug-safe real ids
+  return l18Get("data/analysis/groups.json").then(G => {
+    const gk = SV_GROUP_KEY[kind], keys = G && G[gk] ? Object.keys(G[gk]) : [];
+    return keys.find(k => routeSlug(k) === slug) || null;
+  }).catch(() => null);
+}
+function svOpenRoute(kind, slug) {
+  if (!SV_KIND_LABEL[kind]) return typeof xToOrigin === "function" ? xToOrigin() : go(S.tab || "learn");
+  svResolveSlug(kind, slug).then(id => {
+    if (id == null) return typeof xToOrigin === "function" ? xToOrigin() : go(S.tab || "learn");
+    svOpen({ kind, id, label: kind === "decade" ? id + "s" : String(id) });
+  }).catch(() => { if (typeof xToOrigin === "function") xToOrigin(); });
+}
+// tok -> { hash, title } from just BEFORE it first opened. Kept across a replay (js/explore.js xStep, "sv:"),
+// so closing it after a detour (open the subject, tap a color, come back, then close) still lands on where the
+// trail really started, not on the color page visited in between.
+const SV_PREV = new Map();
 function svOpen(subject, o = {}) {
   const kind = subject.kind, id = subject.id, label = subject.label || "";
+  const tok = "sv:" + kind + ":" + encodeURIComponent(String(id));
+  const isNew = typeof XSTACK === "undefined" || XSTACK[XSTACK.length - 1] !== tok;
+  let navigated = false;
+  try {
+    if (typeof ROUTE_NEXT !== "undefined" && ROUTE_NEXT && typeof routeCommit === "function") {
+      // ROUTE_NOW only ever gets set by routeCommit() itself, so on a cold direct load of #/subject/... (no
+      // earlier screen ever committed a route this session) it's still "" -- location.hash is what router.js's
+      // own base() already put in the address bar for the tab underneath, and the one honest fallback here
+      if (isNew) SV_PREV.set(tok, { hash: (typeof ROUTE_NOW !== "undefined" && ROUTE_NOW) || location.hash || "", title: document.title });
+      routeCommit();
+      navigated = true;
+    }
+  } catch (e) {}
+  if (navigated && isNew) {
+    XSTACK.push(tok);
+    if (typeof TL_META !== "undefined") TL_META.set(tok, { title: label || String(id), hash: ROUTE_NOW, c: "", img: "", sw: [] });
+    if (typeof tlSave === "function") tlSave();
+  }
   const { sh, close } = sheet(`<p class="eyebrow">${esc(SV_KIND_LABEL[kind] || "Subject")}</p>
     <h1 class="sv-title">${esc(label || id)}</h1>
     <p class="sv-sub" data-sv-sub>Looking up its measured colors…</p>
     <div class="sv-body" data-sv-body><p class="fine">Loading…</p></div>`);
   sh.classList.add("sv-sheet");
+  if (navigated) {
+    const obs = new MutationObserver(() => {
+      if (document.body.contains(sh)) return;
+      obs.disconnect();
+      try {
+        if (typeof XSTACK !== "undefined" && XSTACK[XSTACK.length - 1] === tok) XSTACK.pop();
+        if (typeof TL_META !== "undefined") TL_META.delete(tok);
+        const prev = SV_PREV.get(tok) || { hash: "", title: document.title };
+        SV_PREV.delete(tok);
+        history.replaceState({ ch: 1 }, "", prev.hash || undefined);
+        if (typeof ROUTE_NOW !== "undefined") ROUTE_NOW = prev.hash;
+        document.title = prev.title || document.title;
+        if (typeof tlSave === "function") tlSave();
+      } catch (e) {}
+    });
+    obs.observe(document.body, { childList: true });
+  }
   svResolve(kind, id).then(data => {
     if (!data || !data.items.length) { sh.querySelector("[data-sv-sub]").textContent = "No measured colors for this yet."; sh.querySelector("[data-sv-body]").innerHTML = ""; return; }
     return (data.museums.length ? svMuseumLabels() : Promise.resolve(new Map())).then(labels => { data.museumLabels = labels; svRender(sh, data, o); });
