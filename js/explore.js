@@ -295,15 +295,33 @@ function wireCoverImages(root, fallback) {
 // headings that are labels, not doors (COLLECTIONS, js/collections.js). Reuses the Places sheet's own tile
 // component (placesCollTile, js/places.js) so a collection looks the same wherever it's reached from.
 // ======================================================================
-function museumTodayHTML() {
-  const { art, tp } = coverData();
-  if (!art) return `<button class="mu-today mu-today-wait" data-mu-today aria-label="Today's painting"><span class="mu-today-im"></span><span class="mu-today-t"><span class="eyebrow">Today</span><b>${tp ? "Loading…" : "A painting a day"}</b></span></button>`;
-  return `<button class="mu-today" data-mu-today><span class="mu-today-im">${art.img ? `<img src="${esc(art.img)}" alt="${esc(art.title)}" loading="lazy">` : ""}</span>
+function museumTodayHTML(art) {
+  if (!art) return `<button class="mu-today mu-today-wait" id="muToday" data-mu-today aria-label="Today's painting"><span class="mu-today-im"></span><span class="mu-today-t"><span class="eyebrow">Today</span><b>Loading…</b></span></button>`;
+  return `<button class="mu-today" id="muToday" data-mu-today><span class="mu-today-im">${art.img ? `<img src="${esc(art.img)}" alt="${esc(art.title)}" loading="lazy">` : ""}</span>
     <span class="mu-today-t"><span class="eyebrow">Today</span><b>${esc(art.title)}</b><small>${esc(artCoverNote(art))}</small></span></button>`;
+}
+// coverData()'s `art` can still be null the first time this draws (todayPick()/the daily set loading), same
+// as explorePager()'s own Art cover -- this fills the card in once dpLoad() lands, instead of leaving "Loading…"
+// stuck forever (the gap a "one-today" smoke scenario caught: the card never updated after its first render).
+function museumFillToday(el) {
+  if (typeof dpLoad !== "function") return;
+  dpLoad().then(e => {
+    if (!e || !el.isConnected) return;
+    const card = el.querySelector("#muToday"); if (!card) return;
+    const { art } = coverData();
+    const html = art ? museumTodayHTML(art)
+      : `<button class="mu-today" id="muToday" data-mu-today><span class="mu-today-im"><img src="${esc(dpThumb(e))}" alt="${esc(e.t)}" loading="lazy"></span>
+        <span class="mu-today-t"><span class="eyebrow">Today</span><b>${esc(e.t)}</b><small>${esc([e.a, e.yr].filter(Boolean).join(", "))}</small></span></button>`;
+    const tmp = document.createElement("div"); tmp.innerHTML = html;
+    const nw = tmp.firstElementChild;
+    card.replaceWith(nw);
+    nw.onclick = () => { const a = coverData().art; if (a) openNode(a); else challenge(); };
+  }).catch(() => {});
 }
 function museumHome() {
   XSTACK = [];
   museumRegisterMore();
+  const { art } = coverData();
   const recentIds = Array.isArray(S.recentColl) ? S.recentColl.slice(0, 3) : [];
   const recent = recentIds.map(id => COLLECTIONS.find(c => c.id === id)).filter(Boolean);
   const groups = MUSEUM_GROUPS.map(g => [g, COLLECTIONS.filter(c => c.group === g)]).filter(([, l]) => l.length);
@@ -312,14 +330,15 @@ function museumHome() {
       <button class="icon-btn" data-search aria-label="Search">${ICON.search}</button>
       <button class="icon-btn" data-menu aria-label="More">${ICON.dots}</button></div></header>
     <p class="note mu-sub">Every painting, painter, movement, flower, gem, poem, film and look, in one place.</p>
-    ${museumTodayHTML()}
+    ${museumTodayHTML(art)}
     ${recent.length ? `<div class="sec-head"><b>Recent</b></div><div class="pl-colls mu-colls">${recent.map(placesCollTile).join("")}</div>` : ""}
     ${groups.map(([g, list]) => `<div class="sec-head"><b>${esc(g)}</b></div><div class="pl-colls mu-colls">${list.map(placesCollTile).join("")}</div>`).join("")}
   `, "explore mu-home", "explore");
   el.querySelector("[data-menu]").onclick = () => moreOpen("explore");
   el.querySelector("[data-search]").onclick = () => (typeof searchOpen === "function" ? searchOpen({ from: "museum" }) : exploreSearchSheet());
   const td = el.querySelector("[data-mu-today]");
-  if (td) td.onclick = () => { const { art } = coverData(); if (art) openNode(art); };
+  if (td) td.onclick = () => { const a = coverData().art; if (a) openNode(a); };
+  if (!art) museumFillToday(el);
   el.addEventListener("click", e => { const c = e.target.closest("[data-pl-coll]"); if (c) { buzz(8); if (typeof collOpen === "function") collOpen(c.dataset.plColl); } });
 }
 const MUSEUM_GROUPS = ["Art", "Design", "Nature", "Writing & film", "Looks & ideas"];

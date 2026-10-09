@@ -1303,12 +1303,17 @@ scenario("learn", "Test me skips the overview, straight to questions", async t =
 });
 
 // ================================================================== THE DAILIES (js/challenge.js, js/colordle.js)
-scenario("daily", "Today row: both tiles show their art and open their games", async t => {
-  await t.open("#shot=learn", { settle: 600 });
-  await t.waitFor("#dlPaintArt img", 8000, "the painting tile's thumbnail");
-  await t.waitFor(() => !t.$("#dlColorArt.dl-ph"), 8000, "the color tile's swatch");
+// Today's painting and Name it in six used to also have their own row on Learn (lrTodayHtml); removed
+// 2026-10-09 (design/SIMPLIFY/PLAN.md §7 R5/R6) as a duplicate of this exact row, which is now their one home.
+scenario("daily", "Train's Today row: both tiles show their art and open their games", async t => {
+  await t.open("#shot=gx:home", { settle: 600 });
+  await t.waitFor("#r2DpImg img", 8000, "the painting tile's thumbnail");
   await t.click("[data-dpaint]", { wait: 500 });
   await t.waitFor("#dpFrame", 8000, "Today's painting after tapping its tile");
+  t.ev("document.querySelectorAll('.scrim,.sheet,.toast').forEach(n => n.remove())");
+  await t.open("#shot=gx:home", { settle: 600 });
+  await t.click("[data-r2-colordle]", { wait: 500 });
+  await t.waitFor(".dn-in", 8000, "Name it in six after tapping the color tile");
 });
 scenario("daily", "Name today's color: a typed guess draws a row, a second says which way", async t => {
   await t.open("#/daily", { settle: 600 });
@@ -4457,7 +4462,7 @@ scenario("trail", "long-press ‹ shows the trail; a row jumps there; the map gl
 
 scenario("trail-links", "the Museum: its own address, the old one still works, and a part's trail runs out back into it", async t => {
   await TRL.open(t, "#/museum");
-  await t.waitFor(".xp-pager", 15000, "the Museum's covers at #/museum");
+  await t.waitFor(".mu-home", 15000, "the Museum's collections at #/museum");
   t.expect(/^Museum/.test(t.d.title), `the title is "${t.d.title}"`);
   await TRL.open(t, "#/explore/ideas");
   await t.waitFor(".x-feed", 15000, "Ideas at the old #/explore/ideas");
@@ -4889,8 +4894,12 @@ scenario("train", "Across the line: anchor, add the neighbor word, honest miss, 
 });
 
 // ================================================================== ONE TODAY (PLAN.md lane B)
-scenario("one-today", "todayPick names a color and the painting that holds it; the Museum Art cover, Today's painting and the Learn card all quote it", async t => {
-  await t.open("#/explore", { settle: 600 });
+// The Art cover lives in Today's picks now (the old pager, one tap down in Museum's ⋯, lens "foryou" --
+// design/SIMPLIFY/PLAN.md §4 #1). Learn's own copy of this card (the ".lr-tc-chip" color-on-painting link) was
+// a duplicate of Train's Today row and was removed (PLAN §7 R5/R6); the cross-check that used to end on it now
+// checks the Museum home's own Today card (museumTodayHTML(), js/explore.js) names the same painting instead.
+scenario("one-today", "todayPick names a color and the painting that holds it; Today's picks cover and the Museum home's Today card both quote it", async t => {
+  await t.open("#shot=explore:foryou", { settle: 600 });
   t.expect(t.ev("typeof todayPick") === "function", "todayPick isn't loaded");
   const pk = t.ev(`(() => { const p = todayPick(); return p && { c: p.color.n, h: p.color.h, id: p.painting.id, s: p.painting.share, bs: p.board.seed, bp: p.board.painting, dc: dailyColor().n, same: JSON.stringify(todayPick()) === JSON.stringify(todayPick(today())) }; })()`);
   t.expect(pk && pk.c && pk.id && pk.s >= 2 && pk.bs === pk.h && pk.bp === pk.id && pk.same, "todayPick isn't {color, painting at 2%+, board}: " + JSON.stringify(pk));
@@ -4900,8 +4909,8 @@ scenario("one-today", "todayPick names a color and the painting that holds it; t
   const e = await t.ev(`dpLoad().then(e => ({ id: e.id, t: e.t }))`);
   t.expect(e && e.id === pk.id, `Today's painting is ${e && e.id}, not ${pk.id}`);
   t.expect(note().includes(e.t), "the Art cover doesn't name today's painting");
-  await t.open("#shot=learn", { settle: 600 });
-  await t.waitFor(".lr-tc-chip.on", 8000, "the Learn card's color chip on the painting");
+  await t.open("#/museum", { settle: 600 });
+  await t.waitFor(() => t.text(".mu-today-t b").includes(e.t), 8000, "the Museum home's Today card to name the same painting");
 });
 
 // ---- the painting map (js/paintmap.js) and painting favorites (js/favs.js §4–5) ----
@@ -5386,12 +5395,21 @@ scenario("slideshow", "opens from Learn's Or choose, switches modes, steps by sw
   t.expect(t.$(".room-learn"), `Back landed on "${t.snapshot()}", expected the Learn room`);
 });
 
+// The dedicated "start on today's color" slideshow button used to live on Learn's own Today card
+// (data-slideshow="today"); removed 2026-10-09 as a duplicate (design/SIMPLIFY/PLAN.md §7 R6) of the plain
+// Slideshow row already in Learn's "Or choose" -- "Today" is still exactly one of its own Mode choices.
 scenario("slideshow", "Today mode starts on today's color, and the Mode pill relabels itself Shuffle once it hands off", async t => {
   await lrReal(t, "#shot=learn");
-  await t.waitFor("[data-slideshow='today']", 6000, "the Today card's slideshow button");
+  await t.waitFor(".lh-rows", 6000, "Learn's Or choose rows");
+  await t.click('.lh-rows [data-ch="slideshow"]', { wait: 600 });
+  await t.waitFor(".ss-ov", 6000, "the slideshow");
+  await t.click("[data-ss-mode-btn]", { wait: 300 });
+  await t.waitFor("[data-ss-mode='today']", 3000, "the Today mode option");
   const today = t.ev("dailyColor().n");
-  await t.click("[data-slideshow='today']", { wait: 500 });
-  await t.waitFor(".ss-ov .ss-name-btn", 6000, "the first slide's name");
+  await t.click("[data-ss-mode='today']", { wait: 500 });
+  // waitFor the TEXT, not just the element: it already existed (the shuffle mode's own first slide) before this
+  // click, so a plain existence check would resolve instantly on the stale name, before ssRebuild() repaints it
+  await t.waitFor(() => t.text(".ss-ov .ss-name-btn") === today, 6000, "the slide to land on today's color after switching modes");
   t.expect(t.text(".ss-ov .ss-name-btn") === today, `the first slide is "${t.text(".ss-ov .ss-name-btn")}", expected today's color "${today}"`);
   t.expect(/today/i.test(t.text("[data-ss-mode-btn] .lbl")), `the Mode button should still read Today on slide 1, reads "${t.text("[data-ss-mode-btn] .lbl")}"`);
   // step past today's color: the mode has handed off to Shuffle, so the pill must say so honestly, never still "Today"
