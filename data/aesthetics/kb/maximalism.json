@@ -1,0 +1,41 @@
+{
+ "id": "maximalism",
+ "name": "Maximalism",
+ "lineage": {
+  "influenced_by": [
+   "cluttercore",
+   "grandmillennial"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "named in reaction to 2010s minimalism"
+ ],
+ "places": [],
+ "garments": [
+  "mixed pattern textiles",
+  "gallery-wall art",
+  "collected objects"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Maximalism"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 44% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

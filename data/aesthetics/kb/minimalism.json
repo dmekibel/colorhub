@@ -1,0 +1,41 @@
+{
+ "id": "minimalism",
+ "name": "Minimalism",
+ "lineage": {
+  "influenced_by": [
+   "japandi",
+   "wabi-sabi"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "design roots 1960s; lifestyle trend peaked 2010s"
+ ],
+ "places": [],
+ "garments": [
+  "unadorned surfaces",
+  "neutral linen",
+  "pale wood"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Minimalism"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 65% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

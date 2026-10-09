@@ -1,0 +1,42 @@
+{
+ "id": "nautical",
+ "name": "Nautical",
+ "lineage": {
+  "influenced_by": [
+   "sailorcore",
+   "coastal-grandmother"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "roots 19th c. naval uniform; recurring fashion revival"
+ ],
+ "places": [],
+ "garments": [
+  "Breton stripes",
+  "brass buttons",
+  "canvas"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Nautical"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "light — about 42% of the measured color is pale or near-white",
+   "mostly muted — about 59% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

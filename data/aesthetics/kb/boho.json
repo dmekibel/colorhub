@@ -1,0 +1,41 @@
+{
+ "id": "boho",
+ "name": "Boho",
+ "lineage": {
+  "influenced_by": [
+   "hippie",
+   "fairycore"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2000s (as a named trend), rooted in 1960s-70s bohemian style"
+ ],
+ "places": [],
+ "garments": [
+  "suede fringe",
+  "crochet",
+  "flowing cotton"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Boho"
+  }
+ ],
+ "measured": {
+  "n_images": 1,
+  "n_candidates": 1,
+  "findings": [
+   "light — about 62% of the measured color is pale or near-white"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

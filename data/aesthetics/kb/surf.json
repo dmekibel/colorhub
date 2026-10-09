@@ -1,0 +1,41 @@
+{
+ "id": "surf",
+ "name": "Surf",
+ "lineage": {
+  "influenced_by": [
+   "coastal-grandmother",
+   "y2k"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "1960s–present"
+ ],
+ "places": [],
+ "garments": [
+  "boardshorts",
+  "faded cotton",
+  "sun-bleached hair"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Surf"
+  }
+ ],
+ "measured": {
+  "n_images": 5,
+  "n_candidates": 5,
+  "findings": [
+   "mostly muted — about 95% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "id": "clowncore",
+ "name": "Clowncore",
+ "lineage": {
+  "influenced_by": [
+   "kidcore",
+   "rainbowcore"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2019–present"
+ ],
+ "places": [],
+ "garments": [
+  "checkered print",
+  "oversized silhouettes",
+  "bright primary color"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Clowncore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "a vivid streak — roughly 38% of the color measured is highly saturated"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

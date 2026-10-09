@@ -1,0 +1,42 @@
+{
+ "id": "shabby-chic",
+ "name": "Shabby Chic",
+ "lineage": {
+  "influenced_by": [
+   "grandmillennial",
+   "cottagecore"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "coined 1989"
+ ],
+ "places": [],
+ "garments": [
+  "distressed painted wood",
+  "faded floral linen",
+  "white-washed finishes"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Shabby Chic"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "light — about 58% of the measured color is pale or near-white",
+   "mostly muted — about 88% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}
