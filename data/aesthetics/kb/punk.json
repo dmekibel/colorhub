@@ -1,0 +1,44 @@
+{
+ "id": "punk",
+ "name": "Punk",
+ "lineage": {
+  "influenced_by": [
+   "riot-grrrl",
+   "grunge",
+   "indie-sleaze"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "1976–1982 (first wave)"
+ ],
+ "places": [],
+ "garments": [
+  "safety pins",
+  "ripped leather",
+  "bleach-stained black fabric",
+  "spray paint"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Punk"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 54% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 89% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

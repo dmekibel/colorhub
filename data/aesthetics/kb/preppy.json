@@ -1,0 +1,42 @@
+{
+ "id": "preppy",
+ "name": "Preppy",
+ "lineage": {
+  "influenced_by": [
+   "old-money",
+   "tenniscore"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "mid-20th century, codified 1980 (The Official Preppy Handbook)"
+ ],
+ "places": [],
+ "garments": [
+  "cable-knit sweaters",
+  "madras plaid",
+  "boat shoes",
+  "pearls"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Preppy"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 59% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

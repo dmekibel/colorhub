@@ -1,0 +1,42 @@
+{
+ "id": "new-wave",
+ "name": "New Wave",
+ "lineage": {
+  "influenced_by": [
+   "synthwave",
+   "eighties-neon"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "1977–1985"
+ ],
+ "places": [],
+ "garments": [
+  "skinny ties",
+  "structured blazers",
+  "synthesizers"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/New Wave"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "a vivid streak — roughly 33% of the color measured is highly saturated",
+   "mostly muted — about 53% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

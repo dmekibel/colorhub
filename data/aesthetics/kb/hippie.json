@@ -1,0 +1,42 @@
+{
+ "id": "hippie",
+ "name": "Hippie",
+ "lineage": {
+  "influenced_by": [
+   "psychedelic",
+   "cottagecore"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "1965–1972"
+ ],
+ "places": [],
+ "garments": [
+  "tie-dye cotton",
+  "suede fringe",
+  "beaded jewelry",
+  "paisley"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Hippie"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 66% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

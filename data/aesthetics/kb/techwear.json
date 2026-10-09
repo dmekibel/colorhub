@@ -1,0 +1,42 @@
+{
+ "id": "techwear",
+ "name": "Techwear",
+ "lineage": {
+  "influenced_by": [
+   "cyberpunk",
+   "gorpcore"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2010s–present"
+ ],
+ "places": [],
+ "garments": [
+  "GORE-TEX and technical nylon",
+  "webbing straps",
+  "articulated joints"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Techwear"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 50% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 95% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

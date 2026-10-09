@@ -1,0 +1,41 @@
+{
+ "id": "mod",
+ "name": "Mod",
+ "lineage": {
+  "influenced_by": [
+   "swiss-style"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "1958–1966"
+ ],
+ "places": [],
+ "garments": [
+  "slim tailored suits",
+  "Fred Perry polos",
+  "mini dresses",
+  "Vespa scooters"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Mod"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 66% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

@@ -1,0 +1,43 @@
+{
+ "id": "rave",
+ "name": "Rave",
+ "lineage": {
+  "influenced_by": [
+   "acid-house",
+   "seapunk",
+   "cybergoth"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "1988–1995 (UK \"Second Summer of Love\")"
+ ],
+ "places": [],
+ "garments": [
+  "fluorescent plastic",
+  "glow sticks",
+  "baggy fits"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Rave"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 43% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 76% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}
