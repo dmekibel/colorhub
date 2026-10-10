@@ -1461,16 +1461,28 @@ scenario("train", "Odd one out: one tap from the shelf to the board, then a whol
   await t.waitFor(".oo-board .oo-t", 6000, "the board, second time");
 });
 
-scenario("train", "Odd one out: Zen is one pill (no timer, no lives), a palette round, a 2-odd round, a miss", async t => {
+scenario("train", "Odd one out: Zen is one pill (no timer, no lives), a gradient round, a combined-axis round, a 2-odd round, a miss", async t => {
   await t.open("#shot=gx:oo:zen", { settle: 600 });
   await t.waitFor(".oo-board .oo-t", 6000, "a Zen board");
   t.expect(!t.$(".oo-hearts") && !t.$(".oo-tlimit"), "Zen should show no lives and no timer");
   t.expect(t.$(".oo-ztally"), "Zen should show a quiet running tally");
   t.expect(t.$(".oo-zenpill.on") && /zen/i.test(t.text(".oo-zenpill")), "the Zen pill should read on and say Zen");
 
-  await t.open("#shot=gx:oo:palette", { settle: 600 });
-  await t.waitFor(".oo-t.oo-pal", 6000, "a palette round");
-  t.expect(t.$$(".oo-t.oo-pal").length === 9, "a palette round should still be a 3 x 3 grid of patterned tiles");
+  // a gradient round: the WHOLE grid is one smooth palette (not a per-tile stripe pattern) -- every tile's own
+  // color should differ a little from its neighbors, and exactly one should sit off of where the sweep says it
+  // belongs. No two tiles pass get the exact same color (a flat board would repeat one color nine times).
+  await t.open("#shot=gx:oo:grad2d", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a gradient round");
+  const uniq = t.ev("new Set(OO_LAST.colors).size"), gridType = t.ev("OO_LAST.gridType"), gAns = t.ev("OO_LAST.ans.length");
+  t.expect(gridType === "grad2d", `a forced grad2d round should say gridType grad2d, got ${gridType}`);
+  t.expect(uniq >= 7, `a gradient board's tiles should mostly be distinct colors, only ${uniq} of 9 were`);
+  t.expect(gAns === 1, "a plain gradient round should have one odd tile");
+
+  // a combined-axis round: the one odd tile moves along more than one judgment at once
+  await t.open("#shot=gx:oo:combo", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a combined-axis round");
+  const mixN = t.ev("OO_LAST.mix && Object.keys(OO_LAST.mix).length");
+  t.expect(mixN >= 2, `a combo round should move more than one axis, got ${mixN}`);
 
   await t.open("#shot=gx:oo:k2", { settle: 600 });
   await t.waitFor(".oo-board .oo-t", 6000, "a 2-odd round");

@@ -181,8 +181,7 @@ function ooSnap() {
 // ======================================================================
 const OO_NUM_W = ["", "One", "Two", "Three", "Four"];
 const OO_Q = { one: "Which tile is different?", pair: "Two tiles are different. Find both.", group: "Find the hidden shape.",
-  count: "How many tiles are different?", twins: "Find the two identical tiles.", which: "Which tile is different?",
-  palette: "One tile's pattern is a little different. Find it." };
+  count: "How many tiles are different?", twins: "Find the two identical tiles.", which: "Which tile is different?" };
 function ooBoardHTML(r, o = {}) {
   // big Classic grids (up to 16 × 16) keep about a 2 px seam and small corners, so the tiles stay big enough to see
   const dense = r.cols > 6 && (r.b === "grid" || r.b === "busy");
@@ -192,11 +191,6 @@ function ooBoardHTML(r, o = {}) {
   const pct = x => (x * 100).toFixed(3) + "%";
   const tiles = r.cells.map((c, i) => {
     const x = c.x + gap / 2, y = c.y + gap / 2, w = c.w - gap, h = c.h - gap;
-    if (r.v === "palette") {
-      const pal = i === r.at ? r.pal.map((h2, j) => j === r.slot ? r.odd : h2) : r.pal;
-      const st = `left:${pct(x)};top:${pct(y)};width:${pct(w)};height:${pct(h)};--p0:${pal[0]};--p1:${pal[1]};--p2:${pal[2]}`;
-      return `<button class="oo-t oo-pal" data-i="${i}" style="${st}" aria-label="Tile ${i + 1}"></button>`;
-    }
     const img = r.paint ? `;background-image:url(${r.paint.url});background-size:${r.cols * 100}% ${r.cols * 100}%;background-position:${c.gx / (r.cols - 1) * 100}% ${c.gy / (r.cols - 1) * 100}%` : "";
     const st = `left:${pct(x)};top:${pct(y)};width:${pct(w)};height:${pct(h)};--c:${r.colors[i]}${c.rot ? `;--rot:${c.rot.toFixed(1)}deg` : ""}${o.breathe ? `;--bd:-${(Math.random() * 3.4).toFixed(2)}s;--bp:${(2.8 + Math.random() * 1.4).toFixed(2)}s` : ""}${img}`;
     return `<button class="oo-t oo-${c.shape}${r.paint ? " oo-pt" : ""}" data-i="${i}" style="${st}" aria-label="Tile ${i + 1}"></button>`;
@@ -606,8 +600,8 @@ function ooSimpleEnd(zen, startTh, model, stats, again) {
   later(() => buzz(best.d > .04 ? [12, 60, 12] : 10), 400);
   return el;
 }
-// the game itself: one tap in, straight to the board. opt.zen forces Zen; opt.forceShape ("palette" | "k2" | "k4")
-// is a screenshot hook that pins the first round's shape.
+// the game itself: one tap in, straight to the board. opt.zen forces Zen; opt.forceShape ("flat" | "grad1d" |
+// "grad2d" | "combo" | "k2" | "k4") is a screenshot hook that pins the first round's shape.
 function ooMap(opt = {}) {
   if (!S.scr && !ooShotMode() && typeof screenCheck === "function") return screenCheck(() => ooMap(opt));
   eyeNamesReady();
@@ -642,10 +636,14 @@ function ooMap(opt = {}) {
     const breather = st.round > 0 && st.round % 5 === 4;
     let r = null;
     if (st.round === 0 && opt.forceShape) {
-      const axis = ooSimpleAxis(model), d = ooSimpleD(model, axis, false);
-      r = opt.forceShape === "palette" ? ooPaletteRound(st.cols, axis, d) : ooRound({ v: "one", b: "grid", n: st.cols, d, axis, k: opt.forceShape === "k4" ? 4 : 2 });
+      const axis = ooSimpleAxis(model), d = ooSimpleD(model, axis, false), skill = ooSimpleSkill(st.cols), fs = opt.forceShape;
+      const dims = fs === "grad1d" ? "grad1d" : fs === "grad2d" ? "grad2d" : "flat";
+      const mix = fs === "combo" ? { [axis]: .6, [OO_AXES.find(a => a !== axis)]: .4 } : { [axis]: 1 };
+      const k = fs === "k4" ? 4 : fs === "k2" ? 2 : 1, bf = OO_S_GRAD_F[dims];
+      r = ooSimpleGradRound(st.cols, dims, skill, mix, d * bf, k, Math.random);
+      if (r) Object.assign(r, { axis, judg: axis, mix, bf: r.gridType ? bf : 1 });
     }
-    if (!r) r = ooSimpleRound({ model, cols: st.cols }, breather);
+    if (!r) r = ooSimpleRound({ model, cols: st.cols, round: st.round }, breather);
     ui.foot.innerHTML = "";
     const o = { feedback: true };
     if (!zen) o.timeLimit = ooSimpleTime(st.cols);
@@ -656,7 +654,17 @@ function ooMap(opt = {}) {
     st.round++;
     if (res.ok) st.hits++; else if (!zen) st.lives--;
     st.acc.push(res.ok ? 1 : 0); if (st.acc.length > OO_S_WINDOW) st.acc.shift();
-    if (r.judg && res.act > 0 && OO_AXES.includes(r.judg)) ooUpdate(model, r.judg, r.fam || ooFam(r.base || r.odd), res.act / ((r.vf || 1) * (r.bf || 1)), !!res.ok, r.g || 0);
+    // a combined-axis round still only teaches the judgment it mainly tested: crediting every axis with its own
+    // slice of one shared outcome reads as "a tiny hue nudge alone was spotted" even when a much bigger chroma
+    // or lightness move did the real work, which quietly dragged every axis's estimate down (confirmed with
+    // tools/oo_simple_sim.js). The dominant axis in the mix gets the full drawn gap, as if the round were pure.
+    if (res.act > 0) {
+      const mix = r.mix || (r.judg ? { [r.judg]: 1 } : null);
+      if (mix) {
+        const dom = Object.keys(mix).reduce((best, a) => mix[a] > mix[best] ? a : best, Object.keys(mix)[0]);
+        if (OO_AXES.includes(dom)) ooUpdate(model, dom, r.fam || ooFam(r.base || r.odd), res.act / ((r.vf || 1) * (r.bf || 1)), !!res.ok, r.g || 0);
+      }
+    }
     if (!res.ok && res.picked && res.right) ooLogMiss(res.right, res.picked, { game: "odd:simple", judg: r.judg, d: res.act });
     const newCols = ooSimpleGrid(st.cols, st.acc);
     if (newCols !== st.cols) { st.cols = newCols; st.acc = []; }

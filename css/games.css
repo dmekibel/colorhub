@@ -279,12 +279,10 @@
 .oo-sres h1 em{font-style:normal;color:#F2D78A}
 .oo-rp{font:500 15px/1 var(--mono);color:var(--soft);text-align:right}
 
-/* ---------- the simple game (2026-10-10): one screen, a growing grid, Arcade/Zen, a palette round, the timer ---------- */
+/* ---------- the simple game (2026-10-10): one screen, a growing grid, Arcade/Zen, gradient boards, the timer ---------- */
 .oo-zenpill{height:30px;padding:0 14px;border-radius:var(--r-pill);background:var(--surface-2);color:var(--soft);font:italic 400 15px/1 var(--serif);transition:background .2s,color .2s;margin-right:-6px}
 .oo-zenpill.on{background:var(--ink);color:var(--ground,#0E0D0B)}
 .oo-ztally{flex:1;font:500 15px/1 var(--mono);color:var(--soft);text-align:center}
-/* a palette round: every tile tiles the same three colors; the odd tile has one of them nudged */
-.oo-t.oo-pal{background:linear-gradient(to bottom,var(--p0) 0 33.4%,var(--p1) 33.4% 66.7%,var(--p2) 66.7% 100%)}
 /* the per-round timer: a thin bar above the board that empties over the round's time limit */
 .oo-tlimit{display:block;width:100%;height:3px;border-radius:2px;background:var(--ink);transform-origin:left;margin-bottom:10px}
 .oo-tlimit.go{transition:transform var(--t,4s) linear;transform:scaleX(0)}

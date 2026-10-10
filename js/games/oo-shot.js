@@ -1,7 +1,8 @@
 "use strict";
 // Screenshot states for Odd one out (index.html#shot=gx:oo:<state>, through gymShot in js/gym.js). In memory only.
 //   map · fresh · shelf · eye · daily (gameDailyBoard in a host box) · result · line · line-ans · line-miss · whose · wplay (Whose palette? playing)
-//   first (the first 3 x 3 board) · palette (a palette round) · k2 (a 2-odd round) · k4 (a 4-odd round) · zen (Zen mode)
+//   first (the first 3 x 3 board) · grad1d / grad2d (a gradient round) · combo (a combined-axis round) ·
+//   k2 (a 2-odd round) · k4 (a 4-odd round) · zen (Zen mode)
 //   ans (tap the right tile) · miss (tap a wrong tile) · end (the end screen) · mix-<id>[-ans] · step-<kind>
 function ooShotState() {
   const st = ooS(), day = today();
@@ -27,7 +28,9 @@ function ooShot(arg) {
   // the very first tap: straight into a 3 x 3 board, taught by doing
   if (what === "first") { fresh(); return ooEnter(); }
   if (what === "map") { ooShotState(); return ooMap(); }
-  if (what === "palette") { fresh(); return ooMap({ forceShape: "palette" }); }
+  if (what === "grad1d") { fresh(); return ooMap({ forceShape: "grad1d" }); }
+  if (what === "grad2d") { fresh(); return ooMap({ forceShape: "grad2d" }); }
+  if (what === "combo") { fresh(); return ooMap({ forceShape: "combo" }); }
   if (what === "k2") { fresh(); return ooMap({ forceShape: "k2" }); }
   if (what === "k4") { fresh(); return ooMap({ forceShape: "k4" }); }
   if (what === "zen") { fresh(); return ooMap({ zen: true }); }
