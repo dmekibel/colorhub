@@ -35,6 +35,23 @@ Usage:
   python3 tools/paintmap_atlas.py clean                    # remove .progress.json (start over)
   python3 tools/paintmap_atlas.py resplit                  # re-tile existing v1 sheets to the v2, WebKit-safe
                                                              # layout (<=2048px sheets) -- no network at all
+
+David, 2026-10-10: "a more convenient way to view [Design objects, Photography...], similar to paintings... and
+even on a map" -- every subcommand above also takes --collection design|photography (default: paintings, the
+exact behavior this file always had). A collection's own sheets land at data/paintmap/<collection>/ instead of
+data/paintmap/ itself (js/paintmap.js's pmAtlasBase() reads from the same place), built in ONE pass over that
+collection's own already-built data file(s) instead of data/gallery/thumbs.txt -- no separate thumbs file to
+generate first, since js/designobjects.js's objects-<cat>.json / js/photography.js's photos.json already carry
+everything load_lines_design()/load_lines_photography() below need per item, in the SAME array order
+loadDesignObjects()/loadPhotography() build their own in-memory array in (concatenated by DO_CATS for Design
+objects; file order for Photography), so index i here is the same i js/paintmap.js's adapter uses.
+Cooper Hewitt and the National Postal Museum (both served from ids.si.edu) are skipped for Design objects: that
+host's TLS certificate is currently expired, and this script never bypasses certificate verification -- those
+cells are left blank in the sheet, which js/paintmap.js already draws as a flat fill of the object's own
+measured dominant color (the same fallback every cell gets before its picture has loaded), not a missing tile.
+`build` prints how many cells were skipped for this reason when the run finishes.
+  python3 tools/paintmap_atlas.py build --collection design
+  python3 tools/paintmap_atlas.py build --collection photography
 """
 import json, os, random, sys, time, threading
 import urllib.request, urllib.error
@@ -49,6 +66,18 @@ GAL = os.path.join(ROOT, "data", "gallery")
 OUT = os.path.join(ROOT, "data", "paintmap")
 THUMBS = os.path.join(GAL, "thumbs.txt")
 PROGRESS = os.path.join(OUT, ".progress.json")
+
+# ---- the "Collection" switch (David, 2026-10-10) -- "paintings" (default) leaves every path above untouched;
+# any other value moves OUT under data/paintmap/<collection>/ (set in main(), once --collection is parsed) and
+# load_lines()/process_one() below read that collection's own data file(s) instead of thumbs.txt.
+COLLECTION = "paintings"
+DESIGN_CATS = ["poster", "graphic", "textile", "wallpaper", "ceramics", "glass", "furniture", "product", "costume", "stamps"]
+DESIGN_DIR = os.path.join(ROOT, "data", "design")
+PHOTO_FILE = os.path.join(ROOT, "data", "photography", "photos.json")
+# ids.si.edu (Cooper Hewitt chndm, National Postal Museum npmd) currently answers with an expired TLS cert --
+# skip, never bypass verification (David's explicit instruction). js/paintmap.js's own flat dominant-color fill
+# already covers a cell with no picture, so "skipped" here just means that cell never gets a real photo tile.
+DESIGN_SKIP_SRC = {"chndm", "npmd"}
 
 TIER0_TILE = 20
 TIER1_TILE = 80
@@ -190,10 +219,46 @@ def parse_line(line):
     return code_addr, crop
 
 
-def process_one(i, line, retries=RETRIES):
-    code_addr, crop = parse_line(line)
+def design_thumb_url(o):
+    """A design object's own ('kind', 'loc') for fetch_bytes(), or None to skip this cell entirely (no picture,
+    no fetch -- js/paintmap.js's flat dominant-color fill covers it). Mirrors js/designobjects.js's DO_IMG_TPL
+    exactly, except chndm/npmd (ids.si.edu's own template there) are never resolved -- see DESIGN_SKIP_SRC."""
+    src, i = o.get("src"), o.get("i")
+    if not i or src in DESIGN_SKIP_SRC:
+        return None
+    if src == "rijksd":
+        return ("http", f"https://iiif.micr.io/{i}/full/400,/0/default.jpg")
+    if src == "metd":
+        return ("http", f"https://images.metmuseum.org/CRDImages/{i}")
+    if src in ("cmad", "commonsd"):
+        return ("http", i)   # already a full, hotlinkable URL (doImgUrl's own cmad/commonsd case)
+    if src == "aicd":
+        return ("local", os.path.join(ROOT, "img", "design", "aicd", f"{o.get('id')}.jpg"))
+    return None
+
+
+def process_one(i, item, retries=RETRIES):
+    """item is a thumbs.txt LINE for the paintings collection (the original contract), or a raw JSON row for
+    Design objects / Photography -- load_lines() below hands each collection its own native shape, and this
+    branches on COLLECTION to resolve it the right way. Crop is always None for the two newer collections (the
+    corpora have no frame-crop data the way paintings' own thumbs.txt does); a skipped/unresolvable item (a
+    DESIGN_SKIP_SRC source, or a Photography row with no image) returns the same (None, None, err) shape a
+    network failure would, so it's counted and reported the same way, never silently dropped.
+    """
     try:
-        kind, loc = thumb_url(code_addr)
+        if COLLECTION == "design":
+            resolved = design_thumb_url(item)
+            if resolved is None:
+                return i, None, None, "skipped (ids.si.edu TLS, or no image)"
+            kind, loc, crop = resolved[0], resolved[1], None
+        elif COLLECTION == "photography":
+            img = item.get("img")
+            if not img:
+                return i, None, None, "no image field"
+            kind, loc, crop = "http", img, None
+        else:
+            code_addr, crop = parse_line(item)
+            kind, loc = thumb_url(code_addr)
         raw = fetch_bytes(kind, loc, retries=retries)
         t0 = square_crop_resize(raw, crop, TIER0_TILE)
         t1 = square_crop_resize(raw, crop, TIER1_TILE)
@@ -202,7 +267,27 @@ def process_one(i, line, retries=RETRIES):
         return i, None, None, str(e)
 
 
+def load_lines_design():
+    """Every design object, in the EXACT order js/designobjects.js's loadDesignObjects() builds its own DO
+    array in: DO_CATS order, each category's own file in its own array order, concatenated ('.flat()')."""
+    rows = []
+    for cat in DESIGN_CATS:
+        path = os.path.join(DESIGN_DIR, f"objects-{cat}.json")
+        if os.path.exists(path):
+            rows.extend(json.load(open(path)))
+    return rows
+
+
+def load_lines_photography():
+    """Every photograph, in file order -- js/photography.js's loadPhotography() maps photos.json 1:1, in order."""
+    return json.load(open(PHOTO_FILE))
+
+
 def load_lines():
+    if COLLECTION == "design":
+        return load_lines_design()
+    if COLLECTION == "photography":
+        return load_lines_photography()
     with open(THUMBS) as f:
         return [l.rstrip("\n") for l in f if l.strip() != "" or True]
 
@@ -478,6 +563,7 @@ def dt_str(s):
 
 
 def main():
+    global COLLECTION, OUT, PROGRESS
     args = sys.argv[1:]
     cmd = args[0] if args else "build"
     workers, limit, start_group, q0, q1, retries = WORKERS, None, 0, Q0, Q1, RETRIES
@@ -489,7 +575,17 @@ def main():
         elif args[k] == "--quality0": q0 = int(args[k + 1]); k += 2
         elif args[k] == "--quality1": q1 = int(args[k + 1]); k += 2
         elif args[k] == "--retries": retries = int(args[k + 1]); k += 2
+        elif args[k] == "--collection": COLLECTION = args[k + 1]; k += 2
         else: k += 1
+
+    if COLLECTION not in ("paintings", "design", "photography"):
+        raise SystemExit(f"--collection must be paintings, design or photography (got {COLLECTION!r})")
+    # a collection's own sheets live under data/paintmap/<collection>/, never mixed with Paintings' own root
+    # files (OUT/PROGRESS are both derived from it, same as at module load -- recomputed here because that
+    # original computation ran before --collection was known)
+    if COLLECTION != "paintings":
+        OUT = os.path.join(ROOT, "data", "paintmap", COLLECTION)
+        PROGRESS = os.path.join(OUT, ".progress.json")
 
     os.makedirs(OUT, exist_ok=True)
 
@@ -548,6 +644,8 @@ def main():
 
     t_start = time.time()
     total_requests = 0
+    skip_count = 0   # "skipped" (ids.si.edu TLS / no image), tracked apart from a genuine fetch failure --
+    # same cell-left-blank outcome either way, but worth reporting separately (David asked how many)
 
     for g in range(max(start_group, 0), num_groups):
         lo, hi = g * GROUP_SIZE, min(n, (g + 1) * GROUP_SIZE)
@@ -561,6 +659,8 @@ def main():
                 total_requests += 1
                 if err:
                     fail_count += 1
+                    if err.startswith("skipped"):
+                        skip_count += 1
                     if len(failures) < 200:
                         failures.append((i, err))
                     continue
@@ -588,7 +688,8 @@ def main():
     }
     json.dump(manifest, open(os.path.join(OUT, "manifest.json"), "w"))
     total_dt = time.time() - t_start
-    print(f"done. {total_requests} requests in {total_dt:.1f}s, ok={ok_count} fail={fail_count}")
+    print(f"done. {total_requests} requests in {total_dt:.1f}s, ok={ok_count} fail={fail_count}"
+          + (f" (of which {skip_count} skipped -- ids.si.edu TLS or no image)" if skip_count else ""))
     if failures:
         with open(os.path.join(OUT, "fetch-failures.txt"), "w") as f:
             for i, err in failures:

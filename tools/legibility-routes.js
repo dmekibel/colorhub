@@ -29,6 +29,7 @@ const LEGIBILITY_ROUTES = [
   { name: "odd-whose-palette", hash: "#/odd/whose", settle: 900 },
   { name: "hue-gradients", hash: "#/hue", settle: 900 },
   { name: "across-the-line", hash: "#/line", settle: 900 },
+  { name: "which-way", hash: "#/whichway", settle: 900 },
   { name: "studio", hash: "#shot=studio", key: true },
   { name: "studio-photo-palette", hash: "#shot=studiopv", settle: 900 },
   { name: "you", hash: "#shot=you", key: true },

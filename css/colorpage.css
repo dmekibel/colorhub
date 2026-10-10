@@ -83,19 +83,18 @@
 .rp-focus{position:fixed;inset:0;z-index:400;background:var(--c);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.06);transform-origin:var(--ox,50%) var(--oy,50%);transition:opacity .4s var(--ease,ease),transform .4s var(--ease,ease)}
 .rp-focus.on{opacity:1;transform:scale(1)}
 .rp-focus.closing{opacity:0}
-.rp-focus-name{font:400 20px/1.2 var(--serif);letter-spacing:-.01em;opacity:.92;transition:opacity .4s ease;padding:0 32px;text-align:center;text-wrap:balance}
-.rp-focus.dim .rp-focus-name{opacity:0}
-/* the quiet corner tag (David, 2026-10-09): name + hex, bottom-left, safe-area aware -- a museum label that stays
-   on through the big centered name's own fade (it's "alone with the color", not "alone with no idea what it is").
-   Restyled 2026-10-09 (David: "the color's name is in a small, ugly font -- not as pretty as before going full
-   screen"): the app's own display type, not a small mono line -- the name in the serif display face at a
+/* the quiet corner tag (David, 2026-10-09; and 2026-10-10: "full-screen color shouldn't show the name in the
+   middle, keep it only in the corner" -- the old big centered .rp-focus-name and its dim-after-a-beat fade are
+   gone; this corner tag is the one label the color field ever shows now). Name + hex, bottom-left, safe-area
+   aware. Restyled 2026-10-09 (David: "the color's name is in a small, ugly font -- not as pretty as before going
+   full screen"): the app's own display type, not a small mono line -- the name in the serif display face at a
    generous size, the hex quietly beneath it in the sans at caption size, generous margins so it reads as a
    label, not a cramped corner note. */
 .rp-focus-tag{position:absolute;left:calc(env(safe-area-inset-left,0px) + 24px);right:calc(env(safe-area-inset-right,0px) + 24px);bottom:calc(env(safe-area-inset-bottom,0px) + 28px);margin:0;pointer-events:none;text-align:left;opacity:.9}
 .rp-focus-tag-name{margin:0;font:400 clamp(34px,9vw,44px)/1.05 var(--serif);letter-spacing:-.01em;text-wrap:balance}
 .rp-focus-tag-hex{margin:6px 0 0;font:400 13px/1.3 var(--sans);letter-spacing:.06em;opacity:.65;text-transform:uppercase;font-variant-numeric:tabular-nums}
 .rp-focus[data-ink="dark"]{color:#141311}.rp-focus[data-ink="light"]{color:#fff}
-@media (prefers-reduced-motion:reduce){.rp-focus{transform:none;transition:opacity .22s ease}.rp-focus.on{transform:none}.rp-focus-name{transition:opacity .22s ease}}
+@media (prefers-reduced-motion:reduce){.rp-focus{transform:none;transition:opacity .22s ease}.rp-focus.on{transform:none}}
 /* the same view, 2 or more colors at once (David, 2026-10-09: "same full-screen preview for a pair or more" --
    js/setpage.js): full-height bands side by side, or stacked full-width when there are 4+ (or the viewport is too
    narrow for a sliver of a band to read) -- background and the transform-origin scale-in still belong to .rp-focus

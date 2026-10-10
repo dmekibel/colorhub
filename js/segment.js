@@ -51,6 +51,15 @@ const SEG_DIM = 1024;   // MobileSAM's expected long edge, same as the reference
 // (GitHub Pages always sends one for a static file, so this is a same-frame fallback, not a real estimate)
 const SEG_FILES = [
   { key: "ort", url: "models/ort/ort.min.js", kind: "text", bytes: 433678, label: "Loading the selection tool" },
+  // onnxruntime-web 1.19.2's threaded-wasm backend is itself an ES module (the glue emscripten emits for a
+  // pthread-capable build) that ort.min.js dynamically import()s by URL -- NOT a plain .wasm fetched by the
+  // bundle directly. Without this file, ort.env.wasm.wasmPaths has nothing to point .mjs at, the backend's own
+  // relative self-lookup resolves against segment-worker.js's own URL (js/, not models/ort/) and 404s, and
+  // ort.InferenceSession.create() never resolves or rejects -- Select's progress UI spins forever with no
+  // console error on any platform (found 2026-10-10 chasing David's "Select doesn't load" on iPhone: the four
+  // original files were all reachable, but this fifth one, required by the exact onnxruntime-web version
+  // vendored, was never fetched -- confirmed via unpkg's own file listing for onnxruntime-web@1.19.2/dist/).
+  { key: "mjs", url: "models/ort/ort-wasm-simd-threaded.mjs", kind: "text", bytes: 24503, label: "Loading the selection tool" },
   { key: "wasm", url: "models/ort/ort-wasm-simd-threaded.wasm", kind: "buffer", bytes: 11018731, label: "Loading the selection tool" },
   { key: "encoder", url: "models/mobilesam-encoder.onnx", kind: "buffer", bytes: 28195125, label: "Downloading the selection tool" },
   { key: "decoder", url: "models/mobilesam-decoder.onnx", kind: "buffer", bytes: 8837301, label: "Downloading the selection tool" },
@@ -123,7 +132,12 @@ function segRPC(type, data, transfer) {
 function segEnsureReady(onProgress) {
   if (SEG_READY) return SEG_READY;
   SEG_READY = (async () => {
-    if (window.__segStub) return true;   // smoke test stub: see tools/smoke/scenarios.js
+    // smoke test stub: see tools/smoke/scenarios.js. window.__segStubFail lets one specific scenario force
+    // this to reject (a real init failure -- a missing vendored file, a bad wasmPaths shape, an offline mid-
+    // download -- all land here the same way) so the SURROUNDING error-surfacing UI (js/paintzoom.js's
+    // selSetError: an honest hint plus the real error text one tap away in "Details") gets exercised without
+    // needing a real broken model file on disk.
+    if (window.__segStub) { if (window.__segStubFail) throw new Error(String(window.__segStubFail)); return true; }
     const progress = new Map();
     const report = () => {
       let loaded = 0, total = 0, label = SEG_FILES[0].label;
@@ -136,6 +150,10 @@ function segEnsureReady(onProgress) {
       .then(buf => { results[f.key] = buf; })));
     const ortText = new TextDecoder().decode(results.ort);
     const ortBlobUrl = URL.createObjectURL(new Blob([ortText], { type: "application/javascript" }));
+    // the threaded-wasm backend's own loader module, dynamically import()d by ort.min.js (see SEG_FILES'
+    // "mjs" entry above) -- a real text/javascript blob URL, not application/wasm
+    const mjsText = new TextDecoder().decode(results.mjs);
+    const mjsBlobUrl = URL.createObjectURL(new Blob([mjsText], { type: "text/javascript" }));
     const wasmBlobUrl = URL.createObjectURL(new Blob([results.wasm], { type: "application/wasm" }));
     SEG_WORKER = new Worker("js/segment-worker.js");
     SEG_WORKER.onmessage = e => {
@@ -144,7 +162,11 @@ function segEnsureReady(onProgress) {
       if (ok) p.resolve(e.data); else p.reject(new Error(error || "segment worker error"));
     };
     SEG_WORKER.onerror = e => { for (const [, p] of SEG_PENDING) p.reject(e); SEG_PENDING.clear(); };
-    await segRPC("init", { ortUrl: ortBlobUrl, wasmUrl: wasmBlobUrl, encoderBuf: results.encoder, decoderBuf: results.decoder }, [results.encoder, results.decoder]);
+    // both the loader module and the wasm binary go in as blob: URLs under wasmPaths.mjs / wasmPaths.wasm --
+    // the shape this onnxruntime-web version actually reads (confirmed 2026-10-10: wasmPaths.wasmBinary,
+    // tried first, threw "Failed to construct 'URL': Invalid URL" deep in the threaded-wasm module's own
+    // startup -- this two-URL form is the one that actually initializes)
+    await segRPC("init", { ortUrl: ortBlobUrl, mjsUrl: mjsBlobUrl, wasmUrl: wasmBlobUrl, encoderBuf: results.encoder, decoderBuf: results.decoder }, [results.encoder, results.decoder]);
     return true;
   })().catch(e => { SEG_READY = null; throw e; });   // a failed first attempt (offline mid-download, etc.) can be retried, not stuck forever
   return SEG_READY;

@@ -355,3 +355,12 @@ html:has(#app > .screen.fv-run){--ground:#5F5F5F;--lift:#676767;--lift-2:#6E6E6E
 .fva-bloom svg{width:100%;height:100%}
 @keyframes fvaBloom{0%{opacity:0;transform:scale(.4)}25%{opacity:.95;transform:scale(1.08)}60%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1.1)}}
 @media (prefers-reduced-motion:reduce){.fva-bloom,.fva-heart.pop svg{animation-duration:.01s}}
+
+/* ---------- a grid tile's own corner heart (David, 2026-10-10: Keep on every tile in Design objects'/
+   Photography's Browse-all grids and the paintings map's bottom card) -- js/favs.js fvItemHeart's markup,
+   appended into a [data-pin] tile that JS has already set position:relative on, so this anchors to THAT
+   button, not the page. A small glass pill (never a bare icon floating on a bright photo) over the picture's
+   own top-right corner, same reach and target size as .fva-heart elsewhere. */
+.fva-heart-tile{position:absolute;top:8px;right:8px;z-index:2;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:rgba(14,13,11,.55);backdrop-filter:blur(6px);color:#F2EEE6;transition:transform .2s var(--spring)}
+.fva-heart-tile.on{color:#E8787A}
+.fva-heart-tile:active{transform:scale(.88)}

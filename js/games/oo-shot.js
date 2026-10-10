@@ -1,7 +1,8 @@
 "use strict";
 // Screenshot states for Odd one out (index.html#shot=gx:oo:<state>, through gymShot in js/gym.js). In memory only.
 //   map · fresh · shelf · eye · daily (gameDailyBoard in a host box) · result · line · line-ans · line-miss · whose · wplay (Whose palette? playing)
-//   first (the first 3 x 3 board) · palette (a palette round) · k2 (a 2-odd round) · k4 (a 4-odd round) · zen (Zen mode)
+//   first (the first board) · grad1 / grad2 / grad3 (a gradient round, gentle to rich) · combo (a combined-axis
+//   round) · k2 (a 2-odd round) · k4 (a 4-odd round) · zen (Zen mode) · big (a 16+ expert-size board)
 //   ans (tap the right tile) · miss (tap a wrong tile) · end (the end screen) · mix-<id>[-ans] · step-<kind>
 function ooShotState() {
   const st = ooS(), day = today();
@@ -27,9 +28,21 @@ function ooShot(arg) {
   // the very first tap: straight into a 3 x 3 board, taught by doing
   if (what === "first") { fresh(); return ooEnter(); }
   if (what === "map") { ooShotState(); return ooMap(); }
-  if (what === "palette") { fresh(); return ooMap({ forceShape: "palette" }); }
-  if (what === "k2") { fresh(); return ooMap({ forceShape: "k2" }); }
-  if (what === "k4") { fresh(); return ooMap({ forceShape: "k4" }); }
+  // zen: true on every forced state below -- Arcade's own 2.5s auto-continue otherwise races a slow headless
+  // screenshot capture and the round moves on before the shot lands (David, 2026-10-11's beautiful-palette
+  // screenshots surfaced this: the capture caught whatever round the timer had already auto-advanced to).
+  if (what === "grad1") { fresh(); return ooMap({ forceShape: "grad1", zen: true }); }
+  if (what === "grad2") { fresh(); return ooMap({ forceShape: "grad2", zen: true }); }
+  if (what === "grad3") { fresh(); return ooMap({ forceShape: "grad3", zen: true }); }
+  if (what === "combo") { fresh(); return ooMap({ forceShape: "combo", zen: true }); }
+  if (what === "k2") { fresh(); return ooMap({ forceShape: "k2", zen: true }); }
+  if (what === "k4") { fresh(); return ooMap({ forceShape: "k4", zen: true }); }
+  // a 16+-side expert board, so a screenshot doesn't need 400 rounds of real play to get there. A real, vivid
+  // painting palette (not a random draw) so the expert-board screenshot reads as "extremely beautiful", not
+  // whatever muted canvas the real pool happened to pick that second: Kandinsky's Composition VII is an
+  // actually-measured palette from data/paintings.js, not invented for the screenshot.
+  if (what === "big") { fresh(); const s = ooSimpleState(); s.cols = 16; save();
+    return ooMap({ forceShape: "grad3", zen: true, palette: { colors: ["#9E9E83", "#576067", "#A99C4C", "#9D5D23"], label: "Wassily Kandinsky, Composition VII, 1913", link: { kind: "painting", id: "painting-composition-vii" } } }); }
   if (what === "zen") { fresh(); return ooMap({ zen: true }); }
   if (what === "ans") { fresh(); ooMap(); return setTimeout(() => ooShotTap(true), 900); }
   if (what === "miss") { fresh(); ooMap(); return setTimeout(() => ooShotTap(false), 900); }

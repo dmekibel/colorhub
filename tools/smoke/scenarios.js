@@ -871,7 +871,9 @@ scenario("home", "Subject view: a decade subject (1890s) works the same as a pai
   await t.waitFor(".sv-count input", 10000, "the subject view's count slider");
   await t.waitFor(() => t.$$(".sv-canvas [data-sv-h]").length >= 3, 6000, "the decade's first chips");
   t.expect(/1890s/.test(t.text(".sv-title")), `the sheet's title isn't the decade's: "${t.text(".sv-title")}"`);
-  t.expect(/1,173|1173/.test(t.text(".sv-sub")), `the subline doesn't cite the real painting count: "${t.text(".sv-sub")}"`);
+  // the count grows with the corpus (1,173 at 23,778 paintings; more after the 2026-10-10 European expansion) -- assert a real, plausible count, not a frozen one
+  const svN = +((t.text(".sv-sub").match(/across ([\d,]+) paintings/) || [])[1] || "0").replace(/,/g, "");
+  t.expect(svN >= 1000, `the subline doesn't cite a real painting count: "${t.text(".sv-sub")}"`);
   await t.click(t.$('[data-sv-measure="signature"]'), { wait: 250 }).catch(() => {});   // optional: only offered if the data supports it
   t.expect(t.errors.length === 0, `window errors: ${t.errors.join(" | ")}`);
 });
@@ -1475,16 +1477,37 @@ scenario("train", "Odd one out: one tap from the shelf to the board, then a whol
   await t.waitFor(".oo-board .oo-t", 6000, "the board, second time");
 });
 
-scenario("train", "Odd one out: Zen is one pill (no timer, no lives), a palette round, a 2-odd round, a miss", async t => {
+scenario("train", "Odd one out: Zen is one pill (no timer, no lives), a gradient round, a combined-axis round, a 2-odd round, a miss, the reveal card", async t => {
   await t.open("#shot=gx:oo:zen", { settle: 600 });
   await t.waitFor(".oo-board .oo-t", 6000, "a Zen board");
   t.expect(!t.$(".oo-hearts") && !t.$(".oo-tlimit"), "Zen should show no lives and no timer");
   t.expect(t.$(".oo-ztally"), "Zen should show a quiet running tally");
   t.expect(t.$(".oo-zenpill.on") && /zen/i.test(t.text(".oo-zenpill")), "the Zen pill should read on and say Zen");
+  t.expect(t.$(".oo-board.oo-full"), "the board should fill its play area (oo-full), not sit in a fixed square box");
 
-  await t.open("#shot=gx:oo:palette", { settle: 600 });
-  await t.waitFor(".oo-t.oo-pal", 6000, "a palette round");
-  t.expect(t.$$(".oo-t.oo-pal").length === 9, "a palette round should still be a 3 x 3 grid of patterned tiles");
+  // a gradient round: the WHOLE grid is one smooth palette (not a per-tile stripe pattern) -- every tile's own
+  // color should differ a little from its neighbors, and exactly one should sit off of where the sweep says it
+  // belongs. No two tiles pass get the exact same color (a flat board would repeat one color nine times).
+  await t.open("#shot=gx:oo:grad3", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a gradient round");
+  const uniq = t.ev("new Set(OO_LAST.colors).size"), gridType = t.ev("OO_LAST.gridType"), gAns = t.ev("OO_LAST.ans.length");
+  t.expect(gridType === "grad3", `a forced grad3 round should say gridType grad3, got ${gridType}`);
+  t.expect(uniq >= 7, `a gradient board's tiles should mostly be distinct colors, only ${uniq} of 9 were`);
+  t.expect(gAns === 1, "a plain gradient round should have one odd tile");
+  // tap the odd tile and check the reveal card: two big named halves, a difference line, a gradient strip, a source
+  const tiles = t.$$(".oo-board .oo-t"), at = t.ev("OO_LAST.ans[0]");
+  await t.click(tiles[at], { wait: 500 });
+  await t.waitFor(".oo-reveal", 4000, "the reveal card");
+  t.expect(t.$$(".oo-rv-half").length === 2, "the reveal should show two big named color halves");
+  t.expect(t.$(".oo-rv-diff").innerText.length > 2, "the reveal should say how the colors differ");
+  t.expect(t.$(".oo-rv-strip"), "a gradient round's reveal should show the gradient's own key stops");
+  t.expect(t.$(".oo-rv-src"), "the reveal should name where the palette came from");
+
+  // a combined-axis round: the one odd tile moves along more than one judgment at once
+  await t.open("#shot=gx:oo:combo", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a combined-axis round");
+  const mixN = t.ev("OO_LAST.mix && Object.keys(OO_LAST.mix).length");
+  t.expect(mixN >= 2, `a combo round should move more than one axis, got ${mixN}`);
 
   await t.open("#shot=gx:oo:k2", { settle: 600 });
   await t.waitFor(".oo-board .oo-t", 6000, "a 2-odd round");
@@ -1494,7 +1517,8 @@ scenario("train", "Odd one out: Zen is one pill (no timer, no lives), a palette 
   await t.open("#shot=gx:oo:miss", { settle: 1400 });
   await t.waitFor(".oo-t.ring", 6000, "the odd tile ringed after a miss");
   t.expect(t.$(".oo-t.miss"), "the tapped (wrong) tile should be marked");
-  t.expect(t.$(".oo-cmp"), "a miss should show both colors side by side");
+  t.expect(t.$(".oo-reveal") && t.$$(".oo-rv-half").length === 2, "a miss should still show the reveal card's two named halves");
+  t.expect(t.$(".oo-board.oo-settle"), "the board should settle back while the reveal card is up");
 });
 
 scenario("train", "Odd one out: the end screen names the day's edge with three bars", async t => {
@@ -1503,6 +1527,18 @@ scenario("train", "Odd one out: the end screen names the day's edge with three b
   t.expect(t.$$(".oo-ebar").length === 3, "three bars: hue, saturation, value");
   t.expect(t.$("h1").innerText.length > 5, "a headline naming the edge");
   t.expect(t.$(".result [data-again]") && t.$(".result [data-keep]"), "Play again and Keep going should both be offered");
+});
+
+// David, 2026-10-11: "use the player's own favorites as gradient sources... weighted in ~1 in 3 boards when the
+// player has >= 3 favorites". Seed S.favs with three kept colors and check ooPickPalette() cites them sometimes.
+scenario("train", "Odd one out: a player's own kept colors turn up as a gradient source", async t => {
+  await t.open("#shot=gx:oo:first", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a board");
+  t.ev("S.favs = {'#2E8B57':{n:3,at:today()}, '#C0392B':{n:2,at:today()}, '#2874A6':{n:1,at:today()}}; save(); 1");
+  const hit = t.ev("Array.from({length:80},()=>ooPickPalette()).some(p => p && p.fromFav)");
+  t.expect(hit, "with 3+ kept colors, some gradient sources should be the player's own favorites");
+  const label = t.ev("(Array.from({length:80},()=>ooPickPalette()).find(p => p && p.fromFav) || {}).label");
+  t.expect(typeof label === "string" && /^(Your colors:|From your favorite:)/.test(label), `a favorite source's label should say so plainly, got "${label}"`);
 });
 
 // Gradients (js/games/hue-*.js): the shelf opens the teaching board; swap the two tiles with real taps, then play
@@ -1759,9 +1795,14 @@ scenario("pages", "the focus view locks background scroll and shows the color's 
   await t.waitFor(".rp-focus.on", 2000, "the focus view");
   t.expect(t.d.documentElement.classList.contains("sheet-open"), "opening the focus view didn't lock the background scroll");
   const lockedY = t.w.scrollY;
-  const name = t.text(".rp-focus .rp-focus-name"), tag = t.text(".rp-focus .rp-focus-tag");
-  t.expect(name === "Teal", `the centered name reads "${name}"`);
+  // David, 2026-10-10: "full-screen color shouldn't show the name in the middle, keep it only in the corner" --
+  // no .rp-focus-name any more, and nothing else should land near the viewport center either.
+  t.expect(!t.$(".rp-focus-name"), "a centered name element still exists in the focus view");
+  const tag = t.text(".rp-focus .rp-focus-tag");
   t.expect(tag.includes("Teal") && /#[0-9A-F]{6}/.test(tag), `the corner tag doesn't show the color's name and hex: "${tag}"`);
+  const cx = t.w.innerWidth / 2, cy = t.w.innerHeight / 2, centerHit = t.d.elementFromPoint(cx, cy);
+  const nearCenterText = centerHit && typeof centerHit.closest === "function" && centerHit.closest(".rp-focus-tag, .cf-band .rp-focus-tag");
+  t.expect(!nearCenterText || !(centerHit.textContent || "").trim(), "a text element sits near the viewport center in the focus view");
   // scrolling or wheeling the page while the focus view is open must not move the real scroll position
   t.w.scrollTo(0, lockedY + 400);
   t.$(".rp-focus").dispatchEvent(new t.w.WheelEvent("wheel", { bubbles: true, cancelable: true, deltaY: 300 }));
@@ -2171,8 +2212,14 @@ scenario("pages", "a painter row in Painters who use it opens their page, and al
 // *attached* <img> all the time): the browser has no layout position to judge "near the viewport" against, so
 // the fetch never starts and the row is stuck on its swatch placeholder forever. This walks every row on a
 // color with several famous/typical-painting fallbacks and asserts each one resolves to a real image.
+// David, 2026-10-10 (euro corpus expansion): "Tawny orange" used to have >= 4 qualifying painters; the grown
+// corpus's recomputed lift (data/analysis/color-artists.json) now gives it only one, so the "several painter
+// rows" wait would (correctly, per the data) never reach 4 -- not a resolution bug, just a stale fixture color.
+// "Black brown" still has 5 painters here, none with a Wikidata portrait (all five exercise the famous/typical
+// fallback this scenario exists to check), so it keeps the original intent without hardcoding a count that
+// drifts with the corpus.
 scenario("pages", "every painter avatar (portrait or famous/typical-painting fallback) resolves to a real image, same size", async t => {
-  await H.openPage(t, "#/name/tawny-orange", "Tawny orange");
+  await H.openPage(t, "#/name/black-brown", "Black brown");
   const paint = await t.waitFor(() => t.$(".rp-paint"), 8000, "the Paintings section");
   const rows = await t.waitFor(() => { const r = t.$$(".rc-painter[data-awpainter]", paint); return r.length >= 4 ? r : null; }, 20000, "several painter rows");
   await t.waitFor(() => t.$$(".rc-painter-port.wait", paint).length === 0, 15000, "every painter avatar to resolve off its wait placeholder");
@@ -3773,6 +3820,30 @@ scenario("paintings", "Look closer's Select tool: tap adds a point, opens the se
   await t.click(t.$("[data-rgswatches] [data-swatch]"), { force: true, wait: 600 });
   await t.waitFor(".cp-page", 8000, "a color page after tapping a selection-palette chip");
 });
+// David, 2026-10-10: "Select doesn't load" on his iPhone turned out to be onnxruntime-web's own threaded-wasm
+// backend failing to initialize (a missing vendored loader module) -- and the progress UI just sat there
+// forever with no visible error at all, because segEnsureReady's own .catch in js/paintzoom.js swallowed the
+// rejection into a generic hint with no way to see what actually broke. Fixed on both ends: the real init bug
+// (js/segment.js's SEG_FILES, js/segment-worker.js's wasmPaths), and this -- ANY failure of Select's download/
+// init/encode/decode now surfaces an honest one-line hint plus the real error text one tap away in "Details"
+// (js/paintzoom.js's selSetError), never a spinner that just stops. window.__segStubFail (js/segment.js) forces
+// segEnsureReady to reject with a chosen message without needing an actually-broken file on disk.
+scenario("paintings", "Look closer's Select tool: an init failure surfaces an honest message + Details, never an endless spinner", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  t.ev('window.__segStub = true; window.__segStubFail = "stub: simulated init failure (missing ort-wasm-simd-threaded.mjs)";');
+  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { wait: 700 });
+  const selectBtn = await t.waitFor('[data-glzv="select"]:not([hidden])', 8000, "the Select tool (segProbe resolving under the stub)");
+  await t.click(selectBtn, { force: true, wait: 400 });
+  const hint = await t.waitFor("[data-glzselhint]:not([hidden])", 8000, "an honest hint after the forced init failure (found an endless spinner instead)");
+  t.expect(/couldn't load/i.test(t.text(hint)), `the hint doesn't read as a failure: "${t.text(hint)}"`);
+  t.expect(t.$("[data-glzselprog]").hidden, "the progress bar never hid itself after the failure");
+  t.expect(t.$("[data-glzselctl]").hidden, "the +/- tap controls appeared despite the init never succeeding");
+  const detail = t.$("[data-glzselerrdetail]");
+  t.expect(detail && !detail.hidden, "no Details disclosure appeared for the failure");
+  await t.click(detail.querySelector("summary"), { force: true, wait: 150 });
+  t.expect(detail.open, "Details didn't open on tap");
+  t.expect(t.text(detail.querySelector("[data-glzselerrmsg]")).includes("simulated init failure"), "Details doesn't show the real error text");
+});
 // David, 2026-10-09: "it gets janky -- I can pan around and it gets stuck in weird poses... I should only be
 // able to zoom in, not zoom out too far". js/paintzoom.js's gesture rewrite: Z is a real scale against the
 // image's own natural pixels, hard-clamped to [fitZ, fitZ*8] every frame (no rubber band on zoom -- David's ask
@@ -4009,8 +4080,15 @@ scenario("sets", "Pair with…'s ring picker updates the try-on preview live whi
   const before = t.$(".sx-try-seg.trying").style.getPropertyValue("--c");
   sv.dispatchEvent(new t.w.PointerEvent("pointerdown", po(r.left + r.width * .15, r.top + r.height * .15)));
   sv.dispatchEvent(new t.w.PointerEvent("pointermove", po(r.left + r.width * .88, r.top + r.height * .88)));
-  await t.tick(); await t.sleep(120); await t.tick();
-  const mid = t.$(".sx-try-seg.trying").style.getPropertyValue("--c");
+  // colorPicker's onChange is rAF-throttled (js/picker.js update()), and under a heavily loaded machine's
+  // virtual-time Chrome a single rAF can be starved for a while, so a one-shot sample right after the move can
+  // still read the old color even though the drag genuinely works. Poll for the change instead (up to ~1.5s
+  // real time, same pattern other rAF-driven lanes use, e.g. the map's fly-to-fit tween) -- this still fails
+  // hard if the preview never updates, it just doesn't mistake "hasn't painted yet" for "broken".
+  const mid = await t.waitFor(() => {
+    const v = t.$(".sx-try-seg.trying").style.getPropertyValue("--c");
+    return v && v !== before ? v : null;
+  }, 1500, `the live preview to update mid-drag (was ${before})`, 1500);
   t.expect(mid && mid !== before, `dragging the square didn't update the live preview mid-drag (was ${before}, still ${mid})`);
   sv.dispatchEvent(new t.w.PointerEvent("pointerup", po(r.left + r.width * .88, r.top + r.height * .88)));
   // no outline/border between the two halves: the only "trying" marker is CSS's small badge, never a box-shadow seam
@@ -4310,6 +4388,51 @@ scenario("sets", "a trio with no close match says so plainly, with no unrelated 
 });
 
 // ================================================================== DIRECT LOADS (a typed or shared address on a fresh load)
+// David, 2026-10-10 ("Old Woman", 1655, Moses ter Borch, Rijksmuseum): a painter real enough to have paintings
+// here but too few/undocumented for one of the ~840 full profiles used to render as plain, dead grey text on the
+// painting page. The rule now: every painter name is tappable (js/artwiki.js awPainter() falls back to
+// awPainterLite(), built from tools/painters_lite.py's data/artists/lite.json, every OTHER named painter in the
+// corpus). A random daily-seeded sample of paintings, including deliberately minor ones, checks this holds.
+scenario("pages", "every painter name on a random sample of paintings is tappable, including minor painters without a full profile", async t => {
+  await t.open("#/home", { settle: 300 });
+  // 23778: the corpus size tools/check.js's own "ids gate" reports (checked at the top of this file's other
+  // gallery-index scenarios, e.g. "a random archive painting has..."); galleryPage() itself loads the gallery
+  // index on demand, so nothing here needs to wait on it directly.
+  const n = 23778;
+  // Moses ter Borch himself (gallery index 5767, "Old Woman") is seeded in every run, so this scenario always
+  // exercises the exact report, not just whatever the daily sample happens to catch; the other 9 are a real
+  // random sweep, re-seeded daily (tools/smoke/harness.js's sample()).
+  const idxs = [...new Set([5767, ...t.sample(Array.from({ length: n }, (_, i) => i), 5, "painter-names")])];
+  let checked = 0, liteSeen = 0, fullSeen = 0;
+  const bad = [];
+  // Each painting is its own full round trip (painting page -> painter page -> grid), heavier than most
+  // scenarios here, so one slow or genuinely broken index in the daily sample is isolated with its own race
+  // against a per-item cap rather than risking the whole scenario's 120s ceiling.
+  for (const gi of idxs) {
+    try {
+      await Promise.race([
+        (async () => {
+          t.ev(`galleryPage(${gi}, true)`);
+          await t.waitFor(() => t.$(".p-title") && t.text(".p-title").length > 0, 6000, `painting ${gi} to draw`);
+          const btn = t.$(".p-dek [data-awpainter]");
+          if (!btn) return;   // "Artist unknown" on this one -- nothing to check
+          const name = t.text(btn);
+          await t.click(btn, { force: true, wait: 400 });
+          await t.waitFor(".aw-page", 6000, `a painter page for "${name}" (from painting ${gi})`);
+          await t.waitFor(".aw-page .gl-pin", 6000, `at least one painting on ${name}'s page (from painting ${gi})`);
+          const lite = !!t.$(".aw-page.aw-lite");
+          if (lite) liteSeen++; else fullSeen++;
+          if (gi === 5767) t.expect(lite && /Borch/.test(name), `painting 5767's painter wasn't Moses ter Borch on a lite page (got "${name}", lite=${lite})`);
+          checked++;
+        })(),
+        new Promise((_, rej) => setTimeout(() => rej(new Error("per-item cap")), 14000)),
+      ]);
+    } catch (e) { bad.push(gi + ":" + e.message); }
+  }
+  t.expect(checked >= 3, `too few named painters turned up in this sample to be a real check (${checked} of ${idxs.length}; skipped: ${bad.join("; ") || "none"})`);
+  t.expect(liteSeen >= 1, `not one lite (no-full-profile) painter page turned up -- Moses ter Borch's own case should have (skipped: ${bad.join("; ") || "none"})`);
+  t.notes.push(`${checked} painter links checked (${fullSeen} full profiles, ${liteSeen} lite)${bad.length ? `; skipped ${bad.length}: ${bad.join("; ")}` : ""}`);
+});
 scenario("pages", "a fresh load of #/painter/<slug> opens that painter, not Home", async t => {
   await t.open("#/painter/abraham-bloemaert", { settle: 600 });
   await t.waitFor(".aw-page, [data-awpainter-page], .screen.aw", 15000, "the painter page on a direct load");
@@ -5115,6 +5238,29 @@ scenario("train", "Across the line: anchor, add the neighbor word, honest miss, 
   t.expect(t.ev("S.learn.ev.some(r => r.e === 'confuse' && r.src === 'across' && r.c && r.b)"), "the miss wasn't logged as a named mix-up");
 });
 
+// Which way? (David, 2026-10-10): a honeycomb, a word ("muddier"), a right tap and a wrong tap each label every
+// surrounding tile with its own word, name the right one's nearest real name, and log to the Learner Model.
+scenario("train", "Which way?: a honeycomb round, a right tap, a wrong tap, both labeled and logged", async t => {
+  await t.open("#/train", { settle: 600 });
+  t.ev("S.scr = { ok: true, t: today() }; wwPlay()");   // past the one-time screen check
+  await t.click(await t.waitFor("[data-go]", 8000, "Play 12 rounds"), { wait: 600 });
+  await t.waitFor(".ww-run .oo-board .oo-t", 10000, "the first honeycomb board");
+  t.expect(/Which is the/.test(t.text("#ooq")), `the prompt doesn't ask a direction: "${t.text("#ooq")}"`);
+  const ev0 = t.ev("S.learn && S.learn.ev ? S.learn.ev.length : 0");
+  const tiles = () => t.$$(".ww-run .oo-board .oo-t");
+  await t.click(tiles()[t.ev("OO_LAST.ans[0]")], { force: true, wait: 700 });
+  t.expect(t.$$(".ww-run .oo-board .oo-tn").length >= 1, "the right tile wasn't labeled with its word on answer");
+  t.expect(/Nearest name/.test(t.text("#oofoot")), `the reveal doesn't link a nearest real name: "${t.text("#oofoot")}"`);
+  const ev1 = t.ev("S.learn.ev.length");
+  t.expect(ev1 > ev0, "the right answer wasn't logged to the Learner Model");
+  await t.click("[data-next]", { wait: 700 });
+  await t.waitFor(".ww-run .oo-board .oo-t:not(:disabled)", 10000, "the second board");
+  const wrongIdx = t.ev("(() => { const b = document.querySelector('.ww-run .oo-board'), ts = [...b.querySelectorAll('.oo-t')]; return ts.findIndex((x, i) => i !== OO_LAST.ans[0] && !x.disabled); })()");
+  await t.click(tiles()[wrongIdx], { force: true, wait: 700 });
+  t.expect(/You picked/.test(t.text("#oofoot")) || /Right:/.test(t.text("#oofoot")), `the miss doesn't name what you tapped instead: "${t.text("#oofoot")}"`);
+  t.expect(t.ev("S.learn.ev.length") >= ev1, "the second answer wasn't logged");
+});
+
 // ================================================================== ONE TODAY (PLAN.md lane B)
 // The Art cover lives in Today's picks now (the old pager, one tap down in Museum's ⋯, lens "foryou" --
 // design/SIMPLIFY/PLAN.md §4 #1). Learn's own copy of this card (the ".lr-tc-chip" color-on-painting link) was
@@ -5471,6 +5617,12 @@ scenario("paintmap", "cell overlap stays subtle (not runaway) at 3 zoom levels, 
   t.expect(rarePainter > 0, "couldn't find a painter with a small handful of works to test the sparse case");
   await t.open(`#/paintings/map?arr=color&p=${t.ev(`XBF.meta.artists[${rarePainter} - 1][1]`)}`, { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 0 && t.w.PM_CTRL.count <= 6, 20000, "the sparse filtered map to lay out");
+  // David, 2026-10-10 (euro corpus expansion exposed this): a painter with only 2-3 works can resolve, lay out
+  // and still not have had a real animation frame yet by this point -- the same rAF/virtual-clock gap
+  // _qaForceDraw's own comment documents elsewhere in this file. A bigger (4+ result) sparse set used to mask
+  // this because waitFor's own polling loop (tick()+sleep(25)) happened to straddle a real frame often enough;
+  // it isn't reliable, so force one directly instead of hoping.
+  t.ev("PM_CTRL._qaForceDraw()");
   checkOverlap(`a sparse (${t.w.PM_CTRL.count}-result) filter`);
   // fit-to-view: a small set shouldn't float tiny in the middle -- the biggest drawn cell should fill a
   // meaningful share of the screen, not sit at a flat default zoom meant for a dense set
@@ -5523,12 +5675,16 @@ scenario("paintmap", "tier 2 (the per-painting loader) is gated to close-ups onl
 scenario("paintmap", "tier 0 (the shared atlas sheet) covers the whole default view, tier 1 loads on zoom", async t => {
   const src = await fetch("/js/paintmap.js").then(r => r.text());
   // the tier-0 drawImage must run for every drawn cell unconditionally (gated only on PM_ATLAS/bm0 existing, not
-  // on any further per-cell async state) -- that's what makes "one request covers the whole view" true at all
+  // on any further per-cell ASYNC state) -- that's what makes "one request covers the whole view" true at all
   // 2026-10-10: tier 0 is now several <=2048px sheets (iOS/WebKit decode-size safety -- tools/paintmap_atlas.py),
   // so the drawImage is gated on THIS CELL's own sheet bitmap (bm0) rather than one shared PM_ATLAS.bm0 -- still
   // unconditional in the sense that matters (no further per-cell async wait once PM_ATLAS itself is ready, since
   // every sheet in bm0s resolves together in one Promise.all before PM_ATLAS is ever set)
-  const t0Block = (src.match(/if \(PM_ATLAS && PM_ATLAS\.bm0s\) \{[\s\S]*?\n      \}/) || [""])[0];
+  // 2026-10-10 (euro corpus expansion): also gated on `inAtlas` (i < atlas.man.n) now -- a SYNCHRONOUS bounds
+  // check, not an async wait, so it doesn't reintroduce the per-cell timing gap this comment is about. Needed
+  // because the manifest only ever covers however many paintings it was built for; without it, a painting added
+  // after the atlas's last build would alias onto some unrelated painting's tile instead of falling back.
+  const t0Block = (src.match(/if \(inAtlas && atlas\.bm0s\) \{[\s\S]*?\n      \}/) || [""])[0];
   t.expect(t0Block && /ctx\.drawImage\(bm0,/.test(t0Block), "couldn't find tier 0's per-cell drawImage -- check it hasn't grown an extra per-cell gate");
   const manifestExists = await fetch("/data/paintmap/manifest.json", { cache: "no-store" }).then(r => r.ok).catch(() => false);
   if (!manifestExists) { t.notes.push("data/paintmap/manifest.json not present in this checkout -- skipped the live load-time check, static check only"); return; }
@@ -5550,6 +5706,45 @@ scenario("paintmap", "tier 0 (the shared atlas sheet) covers the whole default v
   await t.sleep(400);
   const t1s = t.ev("PM_CTRL._qaTier1Stats()");
   t.expect(t1s && t1s.want > 0, "no cells asked for a tier-1 sheet after zooming in");
+});
+// David, 2026-10-10: "a more convenient way to view [the other archives]... and even on a map" -- the
+// "Collection" switch (js/paintmap.js's own PM_COLLECTIONS/pmAdapterBuild) lets the SAME map lay out Design
+// objects and Photography, not just Paintings. These three cover the map side of that: the switch itself
+// (col= in the address, same as every other spec field), its own atlas tier loading from data/paintmap/
+// <collection>/, hearting from the bottom card going into the generic fvItem* store (js/favs.js), and the
+// existing year-range filter (f.y0/f.y1) applying against a non-painting adapter's own G.year.
+scenario("paintmap", "switching Collection to Photography lays it out and draws from its own atlas", async t => {
+  await t.open("#/paintings/map?col=photography&arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec && t.w.PM_CTRL.spec.col === "photography" && t.w.PM_CTRL.count > 1000, 20000, "the map to lay out Photography (a few thousand photographs, not 24,000 paintings)");
+  t.expect(/Photography/.test(t.text(".pmx-title")), `top bar didn't say Photography: "${t.text(".pmx-title")}"`);
+  const manifestExists = await fetch("/data/paintmap/photography/manifest.json", { cache: "no-store" }).then(r => r.ok).catch(() => false);
+  if (!manifestExists) { t.notes.push("data/paintmap/photography/manifest.json not built in this checkout -- skipped the live atlas check"); return; }
+  let ready = false;
+  for (let i = 0; i < 60 && !ready; i++) { await t.tick(); await t.sleep(150); ready = t.ev("PM_CTRL._qaAtlasReady()") === true; }
+  if (!ready) { t.notes.push("Photography's tier 0 hadn't finished loading within the poll budget (same virtual-time gap the Paintings atlas scenario above documents)"); return; }
+  t.expect(ready, "Photography's own atlas tier 0 never reported ready");
+});
+scenario("paintmap", "hearting a photo from the map's bottom card appears in Kept (js/favs.js's generic store)", async t => {
+  await t.open("#/paintings/map?col=photography&arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec.col === "photography" && t.w.PM_CTRL.count > 1000 && t.w.PM_CTRL.drawn > 5, 20000, "Photography to lay out");
+  const cv = t.$(".pmx-cv"), r = cv.getBoundingClientRect(), c0 = t.w.PM_CTRL.center;
+  // tapping the cell that's ALREADY centered schedules an open (tap()'s double-tap-or-open branch, same as the
+  // very first paintmap scenario above) -- offset like that scenario does, so this lands on a DIFFERENT cell
+  // and takes the plain "fly to it, show the card, don't open" path instead.
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2 - 210, { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL.center >= 0 && t.w.PM_CTRL.center !== c0, 6000, "a different photograph centered under the tap");
+  await t.waitFor(".pmx-heart", 6000, "the bottom card's heart");
+  const before = t.ev("Object.keys(S.favItem || {}).length");
+  await t.click(".pmx-heart", { wait: 500 });
+  await t.waitFor(() => t.ev("Object.keys(S.favItem || {}).length") === before + 1, 6000, "the heart to add one kept item");
+  t.expect(t.ev("Object.values(S.favItem).some(r => r.kind === 'photography')"), "the new Kept entry wasn't tagged kind: \"photography\"");
+});
+scenario("paintmap", "filtering Photography to a narrow year range narrows the map (the address's own y0/y1)", async t => {
+  await t.open("#/paintings/map?col=photography&arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec.col === "photography" && t.w.PM_CTRL.count > 1000, 20000, "Photography to lay out unfiltered");
+  const total = t.w.PM_CTRL.count;
+  await t.open("#/paintings/map?col=photography&arr=color&y0=1939&y1=1943", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec.col === "photography" && t.w.PM_CTRL.count > 0 && t.w.PM_CTRL.count < total, 20000, `the 1939-1943 filter to narrow the set below its unfiltered count (${total})`);
 });
 scenario("favs", "a painting's heart (now in the top bar) and a double-tap on the picture both keep it; the shelf sorts favorites into kinds with counts, remembered", async t => {
   await t.open("#/gallery/8136", { settle: 800 });
@@ -5586,6 +5781,23 @@ scenario("favs", "a painting's heart (now in the top bar) and a double-tap on th
   t.expect(t.ev("S.fvCat") === "paintings", "the chosen kind isn't remembered");
   await t.click(".fva-grid .fva-pin", { wait: 900 });
   await t.waitFor(() => /#\/gallery\/8136/.test(t.w.location.hash), 10000, "a kept painting to open");
+});
+// David, 2026-10-10: "same favs store, appear in Studio's Kept" -- a Design object or a photograph hearted
+// anywhere (its own grid, or the map's bottom card) lands in js/favs.js's generic fvItem* store, and Studio's
+// Kept shelf (favShelf) shows it under its own "Archives" category, same as Paintings has its own.
+scenario("favs", "a design object hearted from its grid shows up in Studio's Kept, under Archives", async t => {
+  await t.open("#/design/browse", { settle: 900 });
+  await t.waitFor("#doBrFeed [data-fvi]", 15000, "a Keep heart on a tile");
+  const tile = t.$$("#doBrFeed [data-pin]")[0], id = tile.dataset.pin;
+  await t.click(tile.querySelector("[data-fvi]"), { wait: 500 });
+  t.expect(t.ev("Object.keys(S.favItem || {}).length") === 1, "hearting a tile didn't add to S.favItem");
+  // the only kept kind so far is Archives, so favShelf() goes straight to its shelf -- no tab bar to choose from
+  // (same minimalist rule every other single-kind case already follows, e.g. "nothing kept but paintings")
+  t.ev("S.fvCat = 'all'; save(); favShelf()");
+  await t.waitFor(".fva-grid [data-fvi-open]", 6000, "the Archives grid");
+  t.expect(t.ev("fvCatNow(fvCats())") === "archives", `expected the shelf to land on archives, got "${t.ev("fvCatNow(fvCats())")}"`);
+  await t.click(`[data-fvi-open="${id}"]`, { wait: 900 });
+  await t.waitFor(() => t.text(".p-title").length > 0 && !t.$(".fv-cat-archives"), 10000, "the kept object's own page to open");
 });
 
 // ---------- the bubble <-> page move and the exact return (js/mapxfer.js, honey.js HONEY_RET; David, 2026-10-08) ----------
@@ -6221,6 +6433,77 @@ scenario("design", "\"In design objects\" renders on a color page with design-ob
   await t.open("#/color/ivory", { settle: 800 });
   await t.waitFor(".p-title, .cp-page", 12000, "a color page");
   await t.waitFor(() => /In design objects/.test(t.d.body.innerText), 10000, '"In design objects" section');
+});
+// David, 2026-10-10: "I got to Design objects but the screen gets stuck and won't let me go back to anything
+// else." The repro that matters is the one a real phone hits that this suite's own host-blocked network can't
+// (tools/smoke/run-chrome.js maps every external host to NOTFOUND, so a slow/failed museum image never has the
+// chance to behave differently here) -- but whatever the live-network trigger turns out to be, Design objects'
+// own ‹ back button, and the map underneath it, must survive a visit regardless. doCategory() used to build
+// one masonry() of every filtered row at once (graphic: 1,854 objects, textile: 1,620...) in a single innerHTML
+// write; it's now paged (DO_PAGE=60, a "Show more" row) the same way doShelfHTML already capped the room's own
+// shelves, so the heaviest render this screen does is bounded no matter how big a category is.
+scenario("design", "a big category pages instead of rendering every object at once, and ‹ walks back through the room instead of skipping it", async t => {
+  // Real multi-step navigation (room -> "See all" -> category), the same shape as David's "Places -> Design
+  // objects" repro, so the trail (js/trail.js XSTACK) has the room as its own entry below the category -- not
+  // the single-entry "opened straight from a link" case, where xBack() popping the only entry would correctly
+  // jump straight to the map. Here, ‹ must visit the room first.
+  await t.open("#/design", { settle: 900 });
+  await t.waitFor("[data-do-cat]", 12000, "a \"See all\" control on the room");
+  const seeAll = t.$$("[data-do-cat]").find(b => b.dataset.doCat === "graphic") || t.$('[data-do-cat="graphic"]');
+  t.expect(seeAll, "no \"See all\" control for the graphic design category");
+  await t.click(seeAll, { wait: 700 });
+  await t.waitFor(() => /Graphic design/.test(t.text(".p-title")), 10000, "the graphic design category page");
+  await t.waitFor("#doCatFeed .pin", 10000, "the category grid");
+  const firstPage = (t.$$("#doCatFeed .pin") || []).length;
+  t.expect(firstPage > 0 && firstPage <= 60, `first render showed ${firstPage} pins, expected <= 60 (DO_PAGE)`);
+  const more = t.$("[data-do-more]");
+  t.expect(more, "no \"Show more\" control on a category with more than 60 objects");
+  await t.click(more, { wait: 500 });
+  const grown = (t.$$("#doCatFeed .pin") || []).length;
+  t.expect(grown > firstPage, `"Show more" didn't add rows (still ${grown})`);
+  // ‹ out of the category: lands on the room, not skipped past it (and not a duplicate trail entry that just
+  // redraws this same category -- design/SIMPLIFY/PLAN.md's duplicate-push bug, fixed 2026-10-10).
+  await t.click("[data-back]", { wait: 700 });
+  await t.waitFor(() => /^Design objects$/.test(t.text(".p-title").trim()), 8000, `the Design objects room after one ‹ (got "${t.text(".p-title")}")`);
+  // ‹ out of the room: lands somewhere real and responsive -- not an inert or blocked screen.
+  await t.click("[data-back]", { wait: 700 });
+  await t.waitFor(() => !t.$(".screen.wd"), 8000, "the Design objects room to actually leave after a second ‹");
+  t.expect(t.errors.length === 0, `console/window errors after leaving Design objects: ${t.errors.join(" | ")}`);
+  const stuck = t.d.elementFromPoint(t.frame.clientWidth / 2, t.frame.clientHeight / 2);
+  t.expect(stuck, "nothing at all is at the center of the screen after backing out of Design objects");
+});
+// David, 2026-10-10: "Browse all" (#/design/browse) -- every object, filterable by category/decade/maker,
+// sortable (date/color/maker), a Keep heart on every tile, and "See on the map" opening js/paintmap.js with
+// Design objects as the Collection. js/photography.js's own grid already had filters; it gets the same Sort +
+// hearts + map link added directly, covered by the second scenario below.
+scenario("design", "Browse all sorts, hearts a tile into Kept, and opens the map with Design objects selected", async t => {
+  await t.open("#/design/browse", { settle: 900 });
+  await t.waitFor(".p-title", 12000, "the Browse all page");
+  t.expect(/Browse all/.test(t.text(".p-title")), `title was "${t.text(".p-title")}"`);
+  await t.waitFor("#doBrFeed [data-pin]", 12000, "the unsorted grid");
+  await t.click('#doBrSort [data-dbs="date"]', { wait: 500 });
+  await t.waitFor(() => t.$('#doBrSort [data-dbs="date"]').classList.contains("on"), 6000, "the date sort chip to take the \"on\" state");
+  await t.waitFor(() => t.$$("#doBrFeed [data-pin]").length > 0, 8000, "the grid to redraw sorted by date");
+  await t.waitFor("#doBrFeed [data-fvi]", 8000, "a Keep heart on a tile");
+  const before = t.ev("Object.keys(S.favItem || {}).length");
+  await t.click(t.$$("#doBrFeed [data-fvi]")[0], { wait: 500 });
+  await t.waitFor(() => t.ev("Object.keys(S.favItem || {}).length") === before + 1, 6000, "the heart to add one kept item");
+  t.expect(t.ev("Object.values(S.favItem).some(r => r.kind === 'design')"), "the new Kept entry wasn't tagged kind: \"design\"");
+  await t.click("[data-do-map]", { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec && t.w.PM_CTRL.spec.col === "design", 15000, "the map to open with Design objects as the Collection");
+});
+scenario("design", "Photography's grid sorts, hearts a tile into Kept, and opens the map with Photography selected", async t => {
+  await t.open("#/photography", { settle: 900 });
+  await t.waitFor("#phFeed .pin", 12000, "the photography grid");
+  await t.click('#phSort [data-phs="date"]', { wait: 500 });
+  await t.waitFor(() => t.$$("#phFeed .pin").length > 0, 8000, "the grid to redraw sorted by date");
+  await t.waitFor("#phFeed [data-fvi]", 8000, "a Keep heart on a tile");
+  const before = t.ev("Object.keys(S.favItem || {}).length");
+  await t.click(t.$$("#phFeed [data-fvi]")[0], { wait: 500 });
+  await t.waitFor(() => t.ev("Object.keys(S.favItem || {}).length") === before + 1, 6000, "the heart to add one kept item");
+  t.expect(t.ev("Object.values(S.favItem).some(r => r.kind === 'photography')"), "the new Kept entry wasn't tagged kind: \"photography\"");
+  await t.click("[data-ph-map]", { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec && t.w.PM_CTRL.spec.col === "photography", 15000, "the map to open with Photography as the Collection");
 });
 // ================================================================== UKIYO-E PRINTS (js/ukiyoe.js, Archives lane)
 scenario("design", "the ukiyo-e grid opens with filters and a print opens with facts", async t => {
