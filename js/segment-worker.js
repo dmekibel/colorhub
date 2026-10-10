@@ -13,7 +13,15 @@ self.onmessage = async e => {
       self.importScripts(e.data.ortUrl);              // a blob: URL of ort.min.js's own source -- already cached, never re-fetched
       ort.env.wasm.numThreads = 1;                     // no COOP/COEP on GitHub Pages, so no SharedArrayBuffer -- see js/segment.js's header
       ort.env.wasm.proxy = false;                      // running inside our OWN worker already; ort's multi-thread proxy-worker path is for its own sub-workers, not needed here
-      ort.env.wasm.wasmPaths = { "ort-wasm-simd-threaded.wasm": e.data.wasmUrl };   // a blob: URL of the .wasm binary, same reason
+      // onnxruntime-web 1.19.2's wasm backend is itself an ES module that ort.min.js dynamically import()s --
+      // wasmPaths needs { mjs, wasm } keys (not a filename-keyed map, which was the bug: a filename key like
+      // "ort-wasm-simd-threaded.wasm" is silently ignored, so the backend fell through to resolving its own
+      // default filename relative to THIS worker's script URL -- js/, not models/ort/ -- and 404'd on every
+      // platform; see js/segment.js's SEG_FILES comment). wasmBinary (handing the bytes straight in instead
+      // of a wasm: URL) looks like it should also work but throws "Failed to construct 'URL': Invalid URL"
+      // deep in the threaded module's own startup on this onnxruntime-web version -- confirmed with a
+      // minimal repro 2026-10-10 -- so both files go in as blob: URLs.
+      ort.env.wasm.wasmPaths = { mjs: e.data.mjsUrl, wasm: e.data.wasmUrl };
       const [enc, dec] = await Promise.all([
         ort.InferenceSession.create(e.data.encoderBuf, { executionProviders: ["wasm"] }),
         ort.InferenceSession.create(e.data.decoderBuf, { executionProviders: ["wasm"] }),

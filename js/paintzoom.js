@@ -37,6 +37,7 @@ function glZoomOpen(opts) {
           <p class="fine glz-sel-wifi" data-glzselwifi hidden>Downloads once, then works without a connection. Best on Wi-Fi.</p>
         </div>
         <p class="glz-tool-hint" data-glzselhint hidden>Getting ready&hellip;</p>
+        <details class="fine glz-sel-errdetail" data-glzselerrdetail hidden><summary>Details</summary><p data-glzselerrmsg></p></details>
         <div class="glz-sel-ctl" data-glzselctl hidden>
           <div class="seg glz-sel-pm" role="group" aria-label="Tap mode">
             <button data-glzselpm="1" aria-pressed="true" aria-label="Add to the selection">+</button>
@@ -272,8 +273,21 @@ function glZoomOpen(opts) {
     progLabel: scrim.querySelector("[data-glzselproglabel]"), bar: scrim.querySelector("[data-glzselbar]"),
     wifi: scrim.querySelector("[data-glzselwifi]"), hint: scrim.querySelector("[data-glzselhint]"),
     ctl: scrim.querySelector("[data-glzselctl]"), undo: scrim.querySelector("[data-glzselundo]"), clear: scrim.querySelector("[data-glzselclear]"),
+    errDetail: scrim.querySelector("[data-glzselerrdetail]"), errMsg: scrim.querySelector("[data-glzselerrmsg]"),
   });
-  const selSetHint = (txt, show) => { const { hint } = selEls(); if (hint) { hint.hidden = show === false; hint.textContent = txt; } };
+  const selSetHint = (txt, show) => {
+    const { hint, errDetail } = selEls();
+    if (hint) { hint.hidden = show === false; hint.textContent = txt; }
+    if (errDetail) errDetail.hidden = true;   // any honest-hint update (including a fresh retry) clears a stale error disclosure
+  };
+  // a failure is never silent: the honest one-line hint above, plus the real error text one tap away in
+  // "Details" -- never a spinner that just stops (David's "no hype, no fake progress" rule cuts both ways:
+  // no fake progress on the way up, and no silent death on the way down either)
+  const selSetError = (hintTxt, err) => {
+    selSetHint(hintTxt);
+    const { errDetail, errMsg } = selEls();
+    if (errDetail && errMsg) { errMsg.textContent = String((err && (err.message || err)) || "Unknown error"); errDetail.hidden = false; }
+  };
   const selReset = () => {
     selPoints = []; selBusy = false; selTapMode = 1;   // Clear/leaving Select starts over clean -- back to the default "+" tap mode too, not just an empty point list
     scrim.querySelectorAll("[data-glzselpm]").forEach(b => { const on = b.dataset.glzselpm === "1"; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
@@ -307,7 +321,7 @@ function glZoomOpen(opts) {
       // switch silently stops being able to close it (found live, not guessed -- tools/smoke's Select scenario)
       const mySheet = pool.length && typeof segSheet === "function" ? segSheet(pool, () => { if (selSheetClose === mySheet) selSheetClose = null; }) : null;
       selSheetClose = mySheet;
-    }).catch(() => { selBusy = false; selSetHint("Couldn't select that -- try tapping again."); });
+    }).catch(err => { selBusy = false; selSetError("Couldn't select that -- try tapping again.", err); });
   };
   // activates on entry into Select (not before -- "lazy-load only on entering Select"): downloads+caches the
   // model the first time ever (segEnsureReady's own progress callback drives the banner), then encodes this
@@ -331,7 +345,7 @@ function glZoomOpen(opts) {
     }).then(() => {
       selSetHint("Tap the thing you want. + adds, − removes.");
       if (ctl) ctl.hidden = false;
-    }).catch(() => { if (prog) prog.hidden = true; selSetHint("Select couldn't load — try again."); });
+    }).catch(err => { if (prog) prog.hidden = true; selSetError("Select couldn't load — try again.", err); });
   };
   scrim.querySelector(".glz-sel-pm").onclick = e => {
     const b = e.target.closest("[data-glzselpm]"); if (!b) return;
