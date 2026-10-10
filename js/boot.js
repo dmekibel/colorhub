@@ -12,7 +12,11 @@ function bootStart() {
   if (SHOT) return loadWiki().then(() => shot(SHOT));
   ROUTE_REPLACE = true;   // the first screen takes over the page's own history entry
   // Home (the honeycomb) is the floor of the app (DESIGN-SYSTEM.md §2) and the default landing place, not a tab.
-  if (!openRoute(location.hash, true)) S.placed ? hmHome() : welcome();
+  // David, 2026-10-10: "skip the initial color test — a new user opens straight to the color map." A first launch
+  // places the learner at the beginning of the path (the same result as the test's "start at the beginning"), so no
+  // screen anywhere sends them to welcome(); the placement test stays reachable from Learn (#/welcome).
+  if (!S.placed) { S.placed = { tier: 2, at: today(), auto: true }; S.start = 0; save(); }
+  if (!openRoute(location.hash, true)) hmHome();
   prefetchWiki();
 }
 if (document.readyState === "loading") addEventListener("DOMContentLoaded", bootStart, { once: true });
