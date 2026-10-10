@@ -5127,6 +5127,106 @@ scenario("paintmap", "entering the map from 5 different paintings always centers
 // behind "More options" (not yet reorganized in the sheet markup -- tracked separately), not deleted. This test
 // checks the primary three are present and switching still resets any seed; it does not yet assert the extra
 // controls are hidden, since the tuck-behind-More-options reshuffle is still pending.
+// David, 2026-10-10: "a slider in Arrange for the zooming effect" -- the color map's own Magnify, mirrored here
+// (M0N feeds the lens only, never pmLayout(), so dragging it must never trigger a rebuild/re-fit -- see the
+// slider's own oninput comment). Checks moving it changes the center cell's drawn size and nothing else breaks.
+// David, 2026-10-10: "I should be able to select multiple things -- a color range, a time range, multiple
+// countries, or e.g. only Europe." pmRun() (not xbRun) ANDs across facets, ORs within one -- Europe (a region
+// chip, which bulk-toggles its whole country list into f.coSet), 1850-1900 (the dual-range When slider) and
+// Blues (a hue-family quick-pick) together should narrow the result, and every painting actually on screen
+// must satisfy all three at once (never just "the count looks right" -- a real per-painting check against the
+// same data the filter itself reads: F.country, F.G.year, pmHueBandOf()).
+scenario("paintmap", "Europe + 1850-1900 + Blues narrows correctly; every visible painting satisfies all three", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "the unfiltered map to lay out");
+  const totalCount = t.w.PM_CTRL.count;
+  await t.open("#/paintings/map?arr=color&region=europe&y0=1850&y1=1900&hb=6", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 0, 20000, "the filtered map to lay out");
+  t.expect(t.w.PM_CTRL.spec.f.region === "europe", `region didn't parse: ${JSON.stringify(t.w.PM_CTRL.spec.f.region)}`);
+  t.expect(t.w.PM_CTRL.spec.f.y0 === 1850 && t.w.PM_CTRL.spec.f.y1 === 1900, `the year range didn't parse: ${t.w.PM_CTRL.spec.f.y0}-${t.w.PM_CTRL.spec.f.y1}`);
+  t.expect(t.w.PM_CTRL.spec.f.hueBand === 6, `the hue band didn't parse: ${t.w.PM_CTRL.spec.f.hueBand}`);
+  const filteredCount = t.w.PM_CTRL.count;
+  t.expect(filteredCount > 0 && filteredCount < totalCount, `the combined filter didn't narrow anything: ${filteredCount} of ${totalCount}`);
+  const check = t.ev(`(() => {
+    const F = XBF, items = PM_CTRL.lay().items;
+    const euroIdx = new Set(PM_REGIONS.find(r => r[0] === "europe")[2].map(nm => F.meta.countries.indexOf(nm) + 1));
+    let bad = 0;
+    for (const i of items) {
+      const okCo = euroIdx.has(F.country[i]);
+      const y = F.G.year[i], okY = y !== GL_UNDATED && y >= 1850 && y <= 1900;
+      const okHue = pmHueBandOf(i, F) === 6;
+      if (!(okCo && okY && okHue)) bad++;
+    }
+    return { bad, n: items.length };
+  })()`);
+  t.expect(check.bad === 0, `${check.bad} of ${check.n} visible paintings fail Europe/1850-1900/Blues`);
+  t.notes.push(`${check.n} paintings pass (of ${totalCount} total)`);
+});
+// The same filter upgrade, driven through the actual sheet UI (not just the URL) -- a region chip bulk-selects
+// its countries, tapping a second country ADDS to the set (multi-select, not exclusive -- the old single-pick
+// behavior this replaced would have swapped one for the other), and Reset clears every new field, not just the
+// old single-value ones.
+scenario("paintmap", "the Filter sheet: a region chip bulk-selects countries, country/painter are multi-select, Reset clears all of it", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "the map to lay out");
+  await t.click(".pmx-do", { wait: 400 });
+  await t.waitFor(".pmx-sheet [data-tab='filter']", 4000, "the sheet tabs");
+  await t.click(".pmx-sheet [data-tab='filter']", { wait: 400 });
+  await t.waitFor("[data-pmregion]", 4000, "the region chips");
+  await t.click("[data-pmregion='europe']", { wait: 300 });
+  t.expect(t.w.PM_CTRL.spec.f.coSet.length > 5, `Europe didn't bulk-add countries: ${JSON.stringify(t.w.PM_CTRL.spec.f.coSet)}`);
+  t.expect(t.w.PM_CTRL.spec.f.region === "europe", "the region itself wasn't remembered");
+  // while coSet is EXACTLY the region's own countries, the map's chip should read "Europe", not a list of them
+  const chipsNow = t.ev("pmActiveChips(PM_CTRL.spec, XBF)");
+  t.expect(chipsNow.some(c => c.dim === "co" && c.text === "Europe"), `no compact "Europe" chip: ${JSON.stringify(chipsNow)}`);
+  // a specific country chip ON TOP of the region: additive, not a replacement -- coSet grows by one and the
+  // chip text correctly stops claiming to be exactly "Europe" any more (it now holds one country outside it)
+  const before = t.w.PM_CTRL.spec.f.coSet.length;
+  const japanChip = t.$$("[data-pmco]").find(b => t.text(b).startsWith("Japan"));
+  if (japanChip) {
+    await t.click(japanChip, { wait: 300 });
+    t.expect(t.w.PM_CTRL.spec.f.coSet.length === before + 1, "tapping an extra country should ADD to the set, not replace it");
+  }
+  // painter: tap two different ones, both should stay selected (multi-select) -- re-queried between taps since
+  // each tap's rebuild() + renderFilter() re-sorts/re-renders the chip row (a stale element reference from
+  // before the re-render can end up detached or zero-size)
+  t.expect(t.$$("[data-pmp]").length >= 2, "not enough painter chips to test multi-select");
+  await t.click(t.$$("[data-pmp]")[0], { wait: 300 });
+  const secondId = t.w.PM_CTRL.spec.f.painterSet[0];
+  const second = t.$$("[data-pmp]").find(b => +b.dataset.pmp !== secondId);
+  t.expect(second, "no other painter chip left to tap");
+  await t.click(second, { wait: 300 });
+  t.expect(t.w.PM_CTRL.spec.f.painterSet.length === 2, `both painter taps should both stick: ${JSON.stringify(t.w.PM_CTRL.spec.f.painterSet)}`);
+  // the active chips on the map itself read as ONE compact chip per facet, not one per country/painter
+  await t.click("[data-sheet-close]", { wait: 500 });
+  await t.waitFor(".pmx-xchip", 4000, "the removable chips on the map");
+  const chipTexts = t.$$(".pmx-xchip").map(b => t.text(b));
+  t.expect(chipTexts.some(x => x.includes("2 painters")), `no compact "2 painters" chip among ${JSON.stringify(chipTexts)}`);
+  // Reset clears the new fields too, not just the legacy single ones
+  await t.click(".pmx-do", { wait: 400 });
+  await t.click("[data-tab='filter']", { wait: 400 });
+  await t.waitFor("[data-pmreset]", 4000, "Reset");
+  await t.click("[data-pmreset]", { wait: 400 });
+  t.expect(t.w.PM_CTRL.spec.f.coSet.length === 0 && t.w.PM_CTRL.spec.f.painterSet.length === 0 && !t.w.PM_CTRL.spec.f.region, `Reset left something behind: ${JSON.stringify(t.w.PM_CTRL.spec.f)}`);
+});
+scenario("paintmap", "the Magnify slider changes the center cell's size live, with no rebuild", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  await t.click(".pmx-do", { wait: 400 });
+  await t.waitFor(".pmx-sheet [data-pmmag]", 4000, "the Magnify slider");
+  const before = t.ev("PM_CTRL._qaRects().find(b => b.i === PM_CTRL.center)");
+  t.expect(before, "nothing drawn at the center to measure");
+  const layBefore = t.ev("PM_CTRL.lay()");
+  const slider = t.$(".pmx-sheet [data-pmmag]");
+  slider.value = "1";
+  slider.dispatchEvent(new Event("input", { bubbles: true }));
+  t.ev("PM_CTRL._qaForceDraw()");
+  const after = t.ev("PM_CTRL._qaRects().find(b => b.i === PM_CTRL.center)");
+  t.expect(Math.max(after.w, after.h) > Math.max(before.w, before.h) * 1.05, `Magnify=1 didn't enlarge the center cell: ${JSON.stringify(before)} -> ${JSON.stringify(after)}`);
+  t.expect(t.ev("PM_CTRL.lay()") === layBefore, "the Magnify slider rebuilt the layout -- it should only redraw");
+  slider.dispatchEvent(new Event("change", { bubbles: true }));
+  t.expect(/mag=1/.test(t.w.location.hash), `the address didn't pick up mag=1 after the slider settled: ${t.w.location.hash}`);
+});
 scenario("paintmap", "the settings sheet offers Color, Time and Painter as Arrange choices, and switching resets any seed", async t => {
   await t.open("#/paintings/map?arr=spiral&seed=100", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 100, 20000, "the map to lay out around a seed");
