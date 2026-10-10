@@ -135,7 +135,9 @@ function photographyGrid(push = true) {
     <div class="art-bubbles" id="phChips" role="tablist"></div>
     <div id="phFeed"><p class="fine">Loading the photographs…</p></div>
   `, "article");
-  if (push && typeof XSTACK !== "undefined") XSTACK.push("r:photography");
+  // David, 2026-10-10 (js/designobjects.js carries the full note): photographyGrid is ROUTED, so trail.js
+  // already joined it as "r:photography" when show() ran just above -- pushing the same token again here
+  // duplicated it, and the grid's own ‹ (one pop) silently redrew this same screen instead of leaving it.
   worldBackWire(el, {}, () => (typeof xToOrigin === "function" ? xToOrigin() : exploreHome()));
   el.querySelector("#phChips").onclick = e => {
     const b = e.target.closest("[data-pf]"); if (!b) return;
@@ -188,7 +190,9 @@ function photographerPage(slug, push = true) {
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
     <div id="phpBody"><p class="fine">Loading…</p></div>
   `, "article aw-page");
-  if (push && typeof XSTACK !== "undefined") XSTACK.push("r:photographer/" + slug);
+  // David, 2026-10-10 (js/designobjects.js carries the full note): photographerPage is ROUTED, so trail.js
+  // already joined it as "r:photographer/<slug>" when show() ran just above -- pushing the same token again
+  // here duplicated it.
   const back = () => (typeof xToOrigin === "function" ? xToOrigin() : exploreHome());
   el.querySelector("[data-back]").onclick = back;
   onKey = e => { if (e.key === "Escape") back(); };

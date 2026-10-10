@@ -67,7 +67,9 @@ function pulpGrid(push = true) {
     <div class="art-bubbles" id="pulpChips" role="tablist"></div>
     <div id="pulpFeed"><p class="fine">Loading the covers…</p></div>
   `, "article");
-  if (push && typeof XSTACK !== "undefined") XSTACK.push("r:pulp");
+  // David, 2026-10-10 (js/designobjects.js carries the full note): pulpGrid is ROUTED, so trail.js already
+  // joined it as "r:pulp" when show() ran just above -- pushing the same token again here duplicated it, and
+  // the grid's own ‹ (one pop) silently redrew this same screen instead of leaving it.
   worldBackWire(el, {}, () => (typeof xToOrigin === "function" ? xToOrigin() : exploreHome()));
   // wired once: redraws (pulpDraw) only replace innerHTML, so one delegated listener covers every filter click and pin tap
   el.querySelector("#pulpChips").onclick = e => {

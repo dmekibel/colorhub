@@ -156,7 +156,8 @@ function bpGrid(push = true) {
     <div id="bpFeed"></div>
     <p class="fine">Colors are as scanned or photographed: hand-applied color over a printed plate, aged paper, and a photography pass all sit between a plate and the hex shown.</p>
   `, "article wd");
-  if (push && typeof XSTACK !== "undefined") XSTACK.push("r:botanical");
+  // David, 2026-10-10 (js/designobjects.js carries the full note): bpGrid is ROUTED, so trail.js already
+  // joined it as "r:botanical" when show() ran just above -- pushing the same token again here duplicated it.
   worldBackWire(el, {}, () => (typeof xToOrigin === "function" ? xToOrigin() : exploreHome()));
   const draw = () => {
     const rows = bpFiltered(), { decades } = bpFacets(BP);

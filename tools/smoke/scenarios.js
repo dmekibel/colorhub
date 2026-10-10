@@ -6296,6 +6296,44 @@ scenario("design", "\"In design objects\" renders on a color page with design-ob
   await t.waitFor(".p-title, .cp-page", 12000, "a color page");
   await t.waitFor(() => /In design objects/.test(t.d.body.innerText), 10000, '"In design objects" section');
 });
+// David, 2026-10-10: "I got to Design objects but the screen gets stuck and won't let me go back to anything
+// else." The repro that matters is the one a real phone hits that this suite's own host-blocked network can't
+// (tools/smoke/run-chrome.js maps every external host to NOTFOUND, so a slow/failed museum image never has the
+// chance to behave differently here) -- but whatever the live-network trigger turns out to be, Design objects'
+// own ‹ back button, and the map underneath it, must survive a visit regardless. doCategory() used to build
+// one masonry() of every filtered row at once (graphic: 1,854 objects, textile: 1,620...) in a single innerHTML
+// write; it's now paged (DO_PAGE=60, a "Show more" row) the same way doShelfHTML already capped the room's own
+// shelves, so the heaviest render this screen does is bounded no matter how big a category is.
+scenario("design", "a big category pages instead of rendering every object at once, and ‹ walks back through the room instead of skipping it", async t => {
+  // Real multi-step navigation (room -> "See all" -> category), the same shape as David's "Places -> Design
+  // objects" repro, so the trail (js/trail.js XSTACK) has the room as its own entry below the category -- not
+  // the single-entry "opened straight from a link" case, where xBack() popping the only entry would correctly
+  // jump straight to the map. Here, ‹ must visit the room first.
+  await t.open("#/design", { settle: 900 });
+  await t.waitFor("[data-do-cat]", 12000, "a \"See all\" control on the room");
+  const seeAll = t.$$("[data-do-cat]").find(b => b.dataset.doCat === "graphic") || t.$('[data-do-cat="graphic"]');
+  t.expect(seeAll, "no \"See all\" control for the graphic design category");
+  await t.click(seeAll, { wait: 700 });
+  await t.waitFor(() => /Graphic design/.test(t.text(".p-title")), 10000, "the graphic design category page");
+  await t.waitFor("#doCatFeed .pin", 10000, "the category grid");
+  const firstPage = (t.$$("#doCatFeed .pin") || []).length;
+  t.expect(firstPage > 0 && firstPage <= 60, `first render showed ${firstPage} pins, expected <= 60 (DO_PAGE)`);
+  const more = t.$("[data-do-more]");
+  t.expect(more, "no \"Show more\" control on a category with more than 60 objects");
+  await t.click(more, { wait: 500 });
+  const grown = (t.$$("#doCatFeed .pin") || []).length;
+  t.expect(grown > firstPage, `"Show more" didn't add rows (still ${grown})`);
+  // ‹ out of the category: lands on the room, not skipped past it (and not a duplicate trail entry that just
+  // redraws this same category -- design/SIMPLIFY/PLAN.md's duplicate-push bug, fixed 2026-10-10).
+  await t.click("[data-back]", { wait: 700 });
+  await t.waitFor(() => /^Design objects$/.test(t.text(".p-title").trim()), 8000, `the Design objects room after one ‹ (got "${t.text(".p-title")}")`);
+  // ‹ out of the room: lands somewhere real and responsive -- not an inert or blocked screen.
+  await t.click("[data-back]", { wait: 700 });
+  await t.waitFor(() => !t.$(".screen.wd"), 8000, "the Design objects room to actually leave after a second ‹");
+  t.expect(t.errors.length === 0, `console/window errors after leaving Design objects: ${t.errors.join(" | ")}`);
+  const stuck = t.d.elementFromPoint(t.frame.clientWidth / 2, t.frame.clientHeight / 2);
+  t.expect(stuck, "nothing at all is at the center of the screen after backing out of Design objects");
+});
 // ================================================================== UKIYO-E PRINTS (js/ukiyoe.js, Archives lane)
 scenario("design", "the ukiyo-e grid opens with filters and a print opens with facts", async t => {
   await t.open("#/ukiyoe", { settle: 900 });

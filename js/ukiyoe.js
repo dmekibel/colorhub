@@ -112,7 +112,8 @@ function ukGrid(push = true) {
     <div id="ukFeed"></div>
     <p class="fine">Colors are as scanned or photographed: aged paper, shifted and faded pigments, and the scan itself all sit between a print and the hex shown.</p>
   `, "article wd");
-  if (push && typeof XSTACK !== "undefined") XSTACK.push("r:ukiyoe");
+  // David, 2026-10-10 (js/designobjects.js carries the full note): ukGrid is ROUTED, so trail.js already
+  // joined it as "r:ukiyoe" when show() ran just above -- pushing the same token again here duplicated it.
   worldBackWire(el, {}, () => (typeof xToOrigin === "function" ? xToOrigin() : exploreHome()));
   const draw = () => {
     const rows = ukFiltered(), { artists, decades } = ukFacets(UK);

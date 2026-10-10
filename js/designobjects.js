@@ -259,6 +259,12 @@ function doMakerPage(slug, opts = {}) {
 }
 
 // ---------------------------------------------------------------- category grid, #/design/cat/<cat>
+// David, 2026-10-10: "the screen gets stuck" on a real phone opening a big category (graphic has 1,854 objects,
+// textile 1,620, poster 1,267...) -- masonry() used to get every filtered row at once, so a tap into a large,
+// unfiltered category built well over a thousand DOM nodes (and started that many lazy-image observers) in one
+// synchronous innerHTML write. Capped the same way doShelfHTML already caps the room's own shelves (DO_PAGE at a
+// time, a "Show more" row after), so the heaviest write this screen ever does is bounded regardless of corpus size.
+const DO_PAGE = 60;
 let DO_FILTER = { decade: null, maker: "" };
 function doCatFacets(rows) {
   const decadeCounts = new Map();
@@ -276,6 +282,7 @@ function doCatFiltered(cat) {
 function doCategory(cat, push = true) {
   if (!DO) { doWhen(() => doCategory(cat, push)); return; }
   DO_FILTER = { decade: null, maker: "" };
+  let shown = DO_PAGE;
   const label = DO_CAT_LABEL[cat] || cat;
   const el = show(`
     ${worldTop("Design objects")}
@@ -284,7 +291,12 @@ function doCategory(cat, push = true) {
     <div class="art-bubbles" id="doCatChips" role="tablist"></div>
     <div id="doCatFeed"></div>
   `, "article wd");
-  if (push && typeof XSTACK !== "undefined") XSTACK.push("r:design/cat/" + cat);
+  // David, 2026-10-10: "the screen gets stuck and won't let me go back to anything else." Root cause: doCategory
+  // is ROUTED (router.js), so js/trail.js's own tlNote() already auto-joins the trail as "r:design/cat/<cat>"
+  // the instant show() runs above -- this manual push used to fire right after, adding the *same* token a
+  // second time. xBack() only pops one entry per tap, so the first ‹ from a category silently popped the
+  // duplicate and re-drew this exact screen: indistinguishable from "back does nothing." (push is kept as a
+  // parameter for callers that still pass it, but it has nothing left to gate.)
   worldBackWire(el, {}, () => doGrid(false));
   const draw = () => {
     const rows = doCatFiltered(cat), { decades, makers } = doCatFacets(DO.filter(n => n.cat === cat));
@@ -298,16 +310,20 @@ function doCategory(cat, push = true) {
       ...makers.map(a => chip(a, DO_FILTER.maker === a, `data-df="maker" data-dv="${esc(a)}"`)),
     ].join("");
     const feed = el.querySelector("#doCatFeed");
-    if (feed) feed.innerHTML = rows.length ? masonry(rows.map(n => pin(n))) : `<p class="fine">No objects match. Try fewer filters.</p>`;
+    const page = rows.slice(0, shown);
+    feed.innerHTML = rows.length ? masonry(page.map(n => pin(n)))
+      + (rows.length > shown ? `<button class="do-shelf-more" data-do-more style="display:block;margin:14px auto">Show ${Math.min(DO_PAGE, rows.length - shown)} more (${rows.length - shown} left) ›</button>` : "")
+      : `<p class="fine">No objects match. Try fewer filters.</p>`;
   };
   el.querySelector("#doCatChips").onclick = e => {
     const b = e.target.closest("[data-df]"); if (!b) return;
     const key = b.dataset.df, v = b.dataset.dv;
     DO_FILTER[key] = key === "decade" ? (v === "" ? null : +v) : v;
-    buzz(6); draw();
+    shown = DO_PAGE; buzz(6); draw();
   };
   el.addEventListener("click", e => {
-    const p = e.target.closest("[data-pin]"); if (p) { const n = DO_BY_ID.get(p.dataset.pin); if (n) doOpenObject(n.id); }
+    const p = e.target.closest("[data-pin]"); if (p) { const n = DO_BY_ID.get(p.dataset.pin); if (n) doOpenObject(n.id); return; }
+    if (e.target.closest("[data-do-more]")) { shown += DO_PAGE; buzz(6); draw(); }
   });
   draw();
 }
@@ -317,7 +333,7 @@ function doShelfHTML(cat) {
   const rows = DO.filter(n => n.cat === cat).slice(0, 10);
   if (!rows.length) return "";
   return `<div class="sec-head"><b>${esc(DO_CAT_LABEL[cat] || cat)}</b><span>${DO.filter(n => n.cat === cat).length.toLocaleString()}</span></div>
-    <div class="do-shelf" data-do-shelf="${esc(cat)}">${rows.map(n => `<button class="do-shelf-item" data-pin="${esc(n.id)}"><img src="${esc(n.img || "")}" alt="" loading="lazy"${n.img ? "" : " style=\"display:none\""}>
+    <div class="do-shelf" data-do-shelf="${esc(cat)}">${rows.map(n => `<button class="do-shelf-item" data-pin="${esc(n.id)}" style="--c:${esc((n.palette[0] || {}).h || "#8a8a82")}"><img src="${esc(n.img || "")}" alt="" loading="lazy"${n.img ? "" : " style=\"display:none\""} onerror="this.style.display='none'">
       <span class="mini-pal">${n.palette.slice(0, 5).map(p => `<i style="--c:${p.h};flex:${p.share}"></i>`).join("")}</span></button>`).join("")}
       <button class="do-shelf-more" data-do-cat="${esc(cat)}">See all ${DO.filter(n => n.cat === cat).length.toLocaleString()} ›</button></div>`;
 }
@@ -354,7 +370,9 @@ function doGrid(push = true) {
     ${doMakersHTML()}
     <p class="fine">Colors are as photographed: museum photography, aging dyes and glazes, and a screen approximation all sit between an object and the hex shown. Images and metadata from the Smithsonian's Cooper Hewitt and National Postal Museum (CC0), the Art Institute of Chicago, the Cleveland Museum of Art (CC0), the Rijksmuseum, the Metropolitan Museum of Art (CC0) and Wikimedia Commons — public domain or CC0 only.</p>
   `, "article wd");
-  if (push && typeof XSTACK !== "undefined") XSTACK.push("r:design");
+  // see the matching note in doCategory() above: doGrid is also ROUTED, so trail.js already joined it as
+  // "r:design" when show() ran -- pushing it again here used to leave a duplicate on top of XSTACK, and the
+  // room's own ‹ (one pop) looked like it did nothing.
   worldBackWire(el, {}, () => (typeof xToOrigin === "function" ? xToOrigin() : exploreHome()));
   el.addEventListener("click", e => {
     const p = e.target.closest("[data-pin]"); if (p) { const n = DO_BY_ID.get(p.dataset.pin); if (n) doOpenObject(n.id); return; }
