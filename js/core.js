@@ -789,7 +789,27 @@ function cornersBack() {
   if (!STEM_OPEN) document.body.classList.remove("stem-open");
   // nothing may leave a corner drawn but faded or untappable (a transition's inline style)
   document.querySelectorAll("[data-rooms-corner],[data-do-corner]").forEach(b => ["opacity", "visibility", "pointerEvents"].forEach(k => { b.style[k] = ""; }));
+  clampCorners();
 }
+// A short landscape height (956x440 and similar) can leave a corner's measured rect a couple of px past the
+// real bottom edge -- --corner-b's own calc(var(--bottom) + var(--corner-gap) - var(--vb)) is never negative on
+// its own, but the containing block it resolves "bottom" against can still momentarily disagree with the real,
+// JS-measured innerHeight (a dvh/lvh rounding quirk, the same family of bug --app-full exists for). Rather than
+// chase that through another CSS unit, this is a direct, CSS-unit-agnostic safety net: measure every corner
+// against the real viewport and nudge it up by whatever it overflows, in device pixels, no guessing. Clears its
+// own inline override first, so a later resize/rotate back to a tall viewport un-clamps it again.
+function clampCorners() {
+  document.querySelectorAll(".corner").forEach(b => {
+    b.style.bottom = "";
+    const r = b.getBoundingClientRect(), over = r.bottom - innerHeight;
+    if (over > 0.5) {
+      const cur = parseFloat(getComputedStyle(b).bottom) || 0;
+      b.style.bottom = Math.max(0, cur - over - 1) + "px";
+    }
+  });
+}
+addEventListener("resize", clampCorners);
+addEventListener("orientationchange", () => later(clampCorners, 60));
 function closeStem(instant) {
   const s = document.querySelector(".rooms-stem"), sc = document.querySelector(".rm-scrim");
   STEM_OPEN = false; STEM_CLOSED_AT = Date.now(); cornersBack();
