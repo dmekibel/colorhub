@@ -3953,6 +3953,42 @@ scenario("sets", "Pair with on a color page: picker suggests, searches, try-on b
   await SP.lead(t);
   t.expect(t.$$(".sp-fact").length >= 5, "the relationship facts are missing");
 });
+// David, 2026-10-09 (the Pair Picker lane): three bugs in one screenshot of "Pair with…" for Chasseur (an alt
+// name for Phthalo Green) — the ring/sliders didn't update the preview until release, the trying half had a
+// white outline against the anchor half, and the art suggestions were thin. Covers all three plus the new
+// "Painters paired it with" row's honest provenance and its example-paintings info panel.
+scenario("sets", "Pair with…'s ring picker updates the try-on preview live while dragging, with no outline between the halves, and plenty of sourced art suggestions", async t => {
+  SP.placed();
+  await t.open("#/color/phthalo-green", { settle: 800, keepState: true });
+  const btn = await t.waitFor("[data-sx-pair]", 12000, "the Pair with… button");
+  await t.click(btn, { wait: 600 });
+  await t.waitFor(".sheet.sx-sheet .sx-opt", 6000, "the picker's suggestions");
+  // "Painters paired it with": plenty of suggestions (David, 2026-10-09: "a lot more"), every one honestly sourced
+  const artOpts = await t.waitFor(() => { const l = t.$$(".sx-sheet .sx-opt-art"); return l.length >= 12 ? l : null; }, 10000, "at least 12 'Painters paired it with' suggestions for Chasseur/Phthalo Green");
+  t.expect(artOpts.length >= 12, `expected >= 12 art suggestions, got ${artOpts.length}`);
+  t.expect(artOpts.every(b => /seen in \d+ paintings?/.test(t.text(b))), "an art suggestion is missing its honest 'seen in N paintings' provenance");
+  // tapping an art suggestion's ⓘ reveals example paintings (or an honest "none at this closeness"), not a navigation
+  await t.click(artOpts[0].querySelector("[data-sx-info]"), { force: true, wait: 400 });
+  await t.waitFor("[data-sx-art-info]:not([hidden])", 8000, "the example-paintings panel");
+  t.expect(!t.$(".sp-page"), "tapping ⓘ must not navigate away");
+  await t.waitFor(() => /gl-pin|closeness/.test(t.$("[data-sx-art-info]").innerHTML), 8000, "the example-paintings panel never resolved");
+  // the ring picker: opening it tries a color on at once, and every drag tick updates the preview live
+  await t.click(".sx-sheet [data-sx-any]", { force: true, wait: 400 });
+  const sv = await t.waitFor(".sx-sheet .cp-sv", 6000, "the saturation/brightness square");
+  t.expect(t.$(".sx-try-seg.trying"), "opening the ring picker didn't try a color on at once");
+  const r = sv.getBoundingClientRect();
+  const po = (x, y) => ({ bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 91, pointerType: "touch", isPrimary: true, view: t.w });
+  const before = t.$(".sx-try-seg.trying").style.getPropertyValue("--c");
+  sv.dispatchEvent(new t.w.PointerEvent("pointerdown", po(r.left + r.width * .15, r.top + r.height * .15)));
+  sv.dispatchEvent(new t.w.PointerEvent("pointermove", po(r.left + r.width * .88, r.top + r.height * .88)));
+  await t.tick(); await t.sleep(120); await t.tick();
+  const mid = t.$(".sx-try-seg.trying").style.getPropertyValue("--c");
+  t.expect(mid && mid !== before, `dragging the square didn't update the live preview mid-drag (was ${before}, still ${mid})`);
+  sv.dispatchEvent(new t.w.PointerEvent("pointerup", po(r.left + r.width * .88, r.top + r.height * .88)));
+  // no outline/border between the two halves: the only "trying" marker is CSS's small badge, never a box-shadow seam
+  const segShadow = t.ev("getComputedStyle(document.querySelector('.sx-try-seg.trying')).boxShadow");
+  t.expect(!segShadow || segShadow === "none", `the trying half still carries an outline box-shadow: ${segShadow}`);
+});
 // David, 2026-10-09: build a set from the camera (one color after another) or a photo (tap any spot, exact
 // pixel). The camera side feature-detects window.cameraPick, a sibling lane's build; this checks the honest
 // fallback (opens the camera) and the self-contained "From a photo" flow, which must work today either way.

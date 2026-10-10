@@ -378,7 +378,7 @@ def affinity(args, rows, head, built, meta_rows, arts):
         else:
             ok = far[i] & (n_std >= 10)
             comp = np.where(ok & (pair[i] >= MIN_PAIR_N) & (z[i] >= 3))[0]
-            comp = comp[np.argsort(-lift[i][comp])][:12]
+            comp = comp[np.argsort(-lift[i][comp])][:24]
             avo = np.where(ok & (exp[i] >= 8) & (z[i] <= -3))[0]
             avo = avo[np.argsort(lift[i][avo])][:6]
             ent = {"n": int(n_std[i]),

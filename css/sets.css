@@ -55,6 +55,15 @@ html.sheet-open .sx-tray,html.booth .sx-tray{display:none}
 .sx-li b{font:400 18px/1.2 var(--serif);flex:1}
 .sx-li span{font:400 13px/1.2 var(--sans);color:var(--soft)}
 .sx-none{font:400 15px/1.4 var(--sans);color:var(--soft);padding:14px 0}
+/* ---------- the art-based suggestions (js/settray.js's "Painters paired it with") ---------- */
+.sx-opt-art{position:relative}
+.sx-info{position:absolute;top:4px;right:4px;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;color:#fff;background:rgba(14,13,11,.45);box-shadow:0 0 0 1px rgba(255,255,255,.18)}
+.sx-info:active{background:rgba(14,13,11,.7)}
+.sx-art-info{margin:14px 0 0;animation:sxIn2 .22s var(--ease)}
+.sx-art-info[hidden]{display:none}
+.sx-art-rail{display:flex;gap:10px;overflow-x:auto;margin:8px calc(-1 * var(--g)) 0;padding:2px var(--g) 4px;scrollbar-width:none}
+.sx-art-rail::-webkit-scrollbar{display:none}
+.sx-art-rail .gl-pin{flex:none;width:130px}
 .sx-any{display:flex;align-items:center;gap:14px;width:100%;min-height:64px;margin:20px 0 0;padding:10px 0;border-top:1px solid var(--rule);text-align:left}
 .sx-any-ring{flex:none;width:40px;height:40px;border-radius:50%;background:conic-gradient(#E34234,#FFBF00,#50C878,#00A6C8,#3A5BD9,#9B4FD0,#E34234);-webkit-mask:radial-gradient(circle,transparent 9px,#000 10px);mask:radial-gradient(circle,transparent 9px,#000 10px)}
 .sx-any>svg{flex:none;width:40px;height:40px;padding:9px;box-sizing:border-box;border-radius:50%;background:var(--surface-2);color:var(--ink)}
@@ -222,9 +231,14 @@ html.sheet-open .sx-tray,html.booth .sx-tray{display:none}
 .sx-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--bottom) + 28px)}
 .sx-try{margin:16px 0 0;padding-top:2px;padding-bottom:10px;background:var(--surface-1);transition:padding .2s var(--ease)}
 .sx-try-big{display:flex;border-radius:var(--r-2);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(236,232,223,.12);height:clamp(96px,30vw,150px);transition:height .22s var(--ease)}
-.sx-try-seg{flex:1;min-width:0;display:flex;align-items:flex-end;padding:12px;background:var(--c);transition:flex .3s var(--ease),padding .2s var(--ease)}
+.sx-try-seg{position:relative;flex:1;min-width:0;display:flex;align-items:flex-end;padding:12px;background:var(--c);transition:flex .3s var(--ease),padding .2s var(--ease)}
 .sx-try-seg b{font:500 15px/1.2 var(--sans);color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.45);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:font-size .2s var(--ease)}
-.sx-try-seg.trying{animation:sxTryIn .22s var(--ease,ease) both;box-shadow:inset 0 0 0 3px var(--ink,#ECE8DF)}
+/* David, 2026-10-09: "the right second color is outlined... a little white line in between" — no border or
+   gap between the two halves any more; "trying" is marked by a small badge floating inside its own half,
+   clear of the shared seam, plus the same gentle scale-in it always had. */
+.sx-try-seg.trying{animation:sxTryIn .22s var(--ease,ease) both}
+.sx-try-seg.trying::after{content:"Trying";position:absolute;top:10px;right:10px;padding:3px 10px;border-radius:999px;background:rgba(14,13,11,.5);color:#fff;font:500 11px/1.4 var(--sans);letter-spacing:.01em;text-shadow:none}
+.sx-try.collapsed .sx-try-seg.trying::after{display:none}
 .sx-try-seg.empty{background:transparent;box-shadow:inset 0 0 0 2px dashed rgba(236,232,223,.3);align-items:center;justify-content:center;color:var(--faint)}
 .sx-try-seg.empty span{font:400 32px/1 var(--sans)}
 @keyframes sxTryIn{from{transform:scale(.97);opacity:.4}}
