@@ -582,10 +582,12 @@ function rpNamesDrawer(entry, name, hex, o) {
   return rpDrawer("names", "Names and codes", body, esc(`${hex}${n ? ` · listed by ${n} naming system${n === 1 ? "" : "s"}` : ""}${aka.length ? ` · also ${aka[0]}` : ""}`));
 }
 
-// ---------- the story: head first (lede), then Paintings sits between it and the chapters/Family body ----------
-// David, 2026-10-09 restructure: articleRenderSplit (js/article.js) draws the intro into headHost and the
-// chapters onward into bodyHost, so the Paintings section's own markup can sit between them in the DOM without
-// either piece needing to know about it. A color with no article gets the twin fallback in headHost instead.
+// ---------- the story: head (lede) then body (chapters) sit together, straight after the cover, ahead of
+// Paintings/Family/the ID card ----------
+// David, 2026-10-09 restructure; 2026-10-10 reorder: articleRenderSplit (js/article.js) draws the intro into
+// headHost and the chapters onward into bodyHost; js/richpage.js colorDossier places both hosts one after the
+// other, with the data sections (Paintings, Family, the ID card) below them, not in between. A color with no
+// article gets the twin fallback in headHost instead.
 function rpStoryFill(el, name, hex, o) {
   const headHost = el.querySelector("[data-ar-head]"), bodyHost = el.querySelector("[data-ar-body]");
   if (!headHost || !bodyHost) return Promise.resolve(null);
@@ -691,6 +693,15 @@ function rpBarWire(el) {
 // pairing lines (js/paintingsof.js paintingsOfSection, unchanged), the painter who used it most, the decade line,
 // then the remaining archive findings as plain one-liners (the old stat-card carousel, reworded). "In words" and
 // "In the world" (poems, gems, botany, fashion, films) tuck in quietly at the end: real depth, no new headline.
+// David, 2026-10-10: "the most informative and interesting things should be at the top" and "random statistics
+// are less interesting than that" -- inside this section (the article itself now comes before it, see
+// colorDossier above), the human/visual content leads: the paintings that hold the color, then who painted
+// with it, when and where, what it's paired with -- poems/literature/design/fashion/brand appearances are
+// secondary, after that. The numeric readings (the role bar's percentages, the archive's "N paintings come
+// close" stat, the bullet findings) move into one collapsed "By the numbers" at the end, closed by default, so
+// a stray statistic never outranks a painting or a painter on the way down the page. Each call is still exactly
+// the function another lane owns (richcolor.js, botany.js, gems.js, brands.js, designobjects.js, world.js,
+// poems.js, passages.js) -- only the order they're composed in here changed.
 function rpPaintSectionHTML(name, hex, entry, famC) {
   const call = (f, ...a) => typeof f === "function" ? f(...a) : "";
   return `<section class="rp-paint" id="rp-s-paint">
@@ -698,12 +709,10 @@ function rpPaintSectionHTML(name, hex, entry, famC) {
     <div class="rp-paint-lead" data-rp-lead></div>
     <div class="gl-in" data-glin></div>
     ${call(rcRolePaintingsHTML, name, hex)}
-    ${call(rcReachSection, name, hex)}
-    ${call(rcRoleSection, name, hex)}
     ${call(rcPaintersSection, name, hex)}
     ${call(rcWhenWhereSection, name, hex)}
+    ${call(rcPairedSection, name, hex)}
     ${call(rcYouHTML, name, hex)}
-    <div class="rp-findings-box" data-rp-findings></div>
     <div class="rp-elsewhere">
       <div class="c-poems"></div>
       ${call(archiveRows, entry, "books", famC)}
@@ -715,6 +724,11 @@ function rpPaintSectionHTML(name, hex, entry, famC) {
       <section class="fx-in" data-world-in></section>
       ${call(archiveRows, entry, "films", famC)}
     </div>
+    <details class="rc-more rp-bynumbers"><summary>By the numbers</summary>
+      ${call(rcRoleSection, name, hex)}
+      ${call(rcReachSection, name, hex)}
+      <div class="rp-findings-box" data-rp-findings></div>
+    </details>
   </section>`;
 }
 function rpPaintFill(el, name, hex, entry, famC) {
@@ -743,8 +757,13 @@ function rpPaintFill(el, name, hex, entry, famC) {
   });
   colorPoems(sec.querySelector(".c-poems"), entry);
   if (typeof worldColorRow === "function") worldColorRow(sec, { kind: "color", h: hex, title: name }, famC);
-  // quiet: the two extra blocks collapse to nothing if they turn out empty
-  setTimeout(() => { [".c-poems", "[data-world-in]"].forEach(s => { const x = sec.querySelector(s); if (x && !x.textContent.trim() && !x.querySelector("img,button,i")) x.remove(); }); }, 900);
+  // quiet: the two extra blocks collapse to nothing if they turn out empty, and so does "By the numbers" itself
+  // if every one of its three readings came back empty (a color with no reach/role/findings data at all)
+  setTimeout(() => {
+    [".c-poems", "[data-world-in]"].forEach(s => { const x = sec.querySelector(s); if (x && !x.textContent.trim() && !x.querySelector("img,button,i")) x.remove(); });
+    const nums = sec.querySelector(".rp-bynumbers");
+    if (nums && !nums.querySelector("section,[data-rp-findings]")) nums.remove();
+  }, 900);
 }
 
 // ---------- the ID card (David, 2026-10-09): facts, codes and sources merged into one specimen card ----------
@@ -823,11 +842,14 @@ function rpSplitWire(el, name, hex, tapped) {
   };
 }
 
-// ---------- one page for every color (David, 2026-10-09 restructure, replacing the Field notes grab-bag) ----------
+// ---------- one page for every color (David, 2026-10-09 restructure, replacing the Field notes grab-bag;
+// 2026-10-10: the article moved up ahead of the data sections -- "articles should be way more up top... you
+// read multiple paragraphs") ----------
 // js/explore.js colorPage (the app's own colors) and js/names.js namePage (every other name) both draw through this,
-// so every color reads in one order: cover (name, origin, action row) · the story's intro (lede) · Paintings (first
-// class, high up) · the chapters (inline Contents) · Family (Tree/Spectrum/Compare/Map) · the ID card · a quiet
-// "Next: <relative>" row · the last line. Test yourself lives collapsed at the end of the chapters themselves.
+// so every color reads in one order: cover (name, origin, action row) · the whole article, lede and chapters
+// together (the first 2-3 chapters, or ~350 words, open; the rest one tap down) · Paintings and the other data
+// sections · Family (Tree/Spectrum/Compare/Map) · the ID card · a quiet "Next: <relative>" row · the last line.
+// Test yourself lives collapsed at the end of the chapters themselves.
 // entry {n, h, src?, also?, notes?, shade?}; o: { tapped, cls, facet (a story built from the wiki, js/article.js
 // arFacetArt), codes [[k, v]], node }. Returns the screen; the caller wires its own save/share icons, if any.
 function colorDossier(entry, o = {}) {
@@ -846,8 +868,8 @@ function colorDossier(entry, o = {}) {
     ${rpBarHTML(name, heroHex)}
     ${entry.shade ? `<p class="fine np-shade">A described shade: ${esc(entry.shade.base)} made ${esc(entry.shade.mod)}${o.shadeBase ? `. <button class="link" data-shade-base>See ${esc(entry.shade.base)}</button>` : "."}</p>` : ""}
     <div class="ar-head" data-ar-head hidden></div>
-    ${rpPaintSectionHTML(name, heroHex, entry, famC)}
     <div class="ar-body" data-ar-body hidden></div>
+    ${rpPaintSectionHTML(name, heroHex, entry, famC)}
     <div class="ar-fam-host" data-ar-fam-host hidden></div>
     ${rpIdCardHTML()}
     ${rpNextHTML()}

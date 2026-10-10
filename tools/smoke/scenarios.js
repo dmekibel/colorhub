@@ -1767,11 +1767,17 @@ scenario("pages", "a long article reads inline (no door) with collapsible chapte
   const chapters = await t.waitFor(() => { const l = t.$$(".cp-page .ar-cs[data-ar-sec]"); return l.length >= 2 ? l : null; }, 10000, "Scarlet's chapters, collapsible and inline on the color page");
   const btns = chapters.map(c => c.querySelector("[data-ar-cs-btn]"));
   t.expect(btns[0].getAttribute("aria-expanded") === "true", "the first chapter should start open");
-  t.expect(btns.slice(1).some(b => b.getAttribute("aria-expanded") === "false"), "every chapter after the first started open -- at least one should start collapsed");
-  const secondBody = t.d.getElementById(btns[1].getAttribute("aria-controls"));
+  // David, 2026-10-10: the first 2-3 chapters (or ~350 words of them) start open, not just the first one --
+  // find the first chapter past that open run, rather than hardcoding "the second chapter".
+  const firstClosedIdx = btns.findIndex(b => b.getAttribute("aria-expanded") === "false");
+  t.expect(firstClosedIdx > 0, "every chapter started open -- at least one should start collapsed");
+  const closedBtn = btns[firstClosedIdx];
+  const secondBody = t.d.getElementById(closedBtn.getAttribute("aria-controls"));
   t.expect(secondBody && secondBody.hidden, "a collapsed chapter's body isn't actually hidden");
-  await t.click(btns[1], { wait: 350 });
-  t.expect(btns[1].getAttribute("aria-expanded") === "true" && !secondBody.hidden, "tapping a collapsed chapter's heading didn't open it");
+  const cont = t.$(".cp-page [data-ar-continue]");
+  t.expect(cont && /Continue reading/.test(t.text(cont)), "no \"Continue reading\" affordance before the first collapsed chapter");
+  await t.click(closedBtn, { wait: 350 });
+  t.expect(closedBtn.getAttribute("aria-expanded") === "true" && !secondBody.hidden, "tapping a collapsed chapter's heading didn't open it");
   t.expect(t.w.location.href.includes("#/color/scarlet"), "tapping a chapter heading navigated away from the color page");
   const expandAll = t.$(".cp-page [data-ar-expand-all]");
   t.expect(expandAll, "no Expand all / Collapse all control");
@@ -2099,8 +2105,11 @@ scenario("pages", "every painting tile on a color page opens its painting: the I
   await t.click("[data-back]", { wait: 600 });
   await t.waitFor(() => H.title(t) === "Ochre Brown", 8000, "Back to return to Ochre Brown from the rail");
 
-  // 2. "In the archive": the hero pin beside "N paintings come close to it" (rcReachSection)
+  // 2. "In the archive": the hero pin beside "N paintings come close to it" (rcReachSection) -- David, 2026-10-10:
+  // the numeric readings now live collapsed in "By the numbers", so open it first.
   paint = await freshPaint();
+  const byNumbers = await t.waitFor(() => t.$(".rp-bynumbers summary", paint), 8000, "the By the numbers disclosure");
+  await t.click(byNumbers, { wait: 300 });
   const archive = await t.waitFor(() => t.$(".rc-reach:not(.rc-reach-none)", paint), 20000, "the In the archive section");
   const hero = await t.waitFor(() => t.$(".rc-reach-pin [data-gi]", archive), 10000, "the archive's closest-painting pin");
   await t.click(hero, { wait: 700 });
