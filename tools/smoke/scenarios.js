@@ -5159,6 +5159,29 @@ scenario("train", "Across the line: anchor, add the neighbor word, honest miss, 
   t.expect(t.ev("S.learn.ev.some(r => r.e === 'confuse' && r.src === 'across' && r.c && r.b)"), "the miss wasn't logged as a named mix-up");
 });
 
+// Which way? (David, 2026-10-10): a honeycomb, a word ("muddier"), a right tap and a wrong tap each label every
+// surrounding tile with its own word, name the right one's nearest real name, and log to the Learner Model.
+scenario("train", "Which way?: a honeycomb round, a right tap, a wrong tap, both labeled and logged", async t => {
+  await t.open("#/train", { settle: 600 });
+  t.ev("S.scr = { ok: true, t: today() }; wwPlay()");   // past the one-time screen check
+  await t.click(await t.waitFor("[data-go]", 8000, "Play 12 rounds"), { wait: 600 });
+  await t.waitFor(".ww-run .oo-board .oo-t", 10000, "the first honeycomb board");
+  t.expect(/Which is the/.test(t.text("#ooq")), `the prompt doesn't ask a direction: "${t.text("#ooq")}"`);
+  const ev0 = t.ev("S.learn && S.learn.ev ? S.learn.ev.length : 0");
+  const tiles = () => t.$$(".ww-run .oo-board .oo-t");
+  await t.click(tiles()[t.ev("OO_LAST.ans[0]")], { force: true, wait: 700 });
+  t.expect(t.$$(".ww-run .oo-board .oo-tn").length >= 1, "the right tile wasn't labeled with its word on answer");
+  t.expect(/Nearest name/.test(t.text("#oofoot")), `the reveal doesn't link a nearest real name: "${t.text("#oofoot")}"`);
+  const ev1 = t.ev("S.learn.ev.length");
+  t.expect(ev1 > ev0, "the right answer wasn't logged to the Learner Model");
+  await t.click("[data-next]", { wait: 700 });
+  await t.waitFor(".ww-run .oo-board .oo-t:not(:disabled)", 10000, "the second board");
+  const wrongIdx = t.ev("(() => { const b = document.querySelector('.ww-run .oo-board'), ts = [...b.querySelectorAll('.oo-t')]; return ts.findIndex((x, i) => i !== OO_LAST.ans[0] && !x.disabled); })()");
+  await t.click(tiles()[wrongIdx], { force: true, wait: 700 });
+  t.expect(/You picked/.test(t.text("#oofoot")) || /Right:/.test(t.text("#oofoot")), `the miss doesn't name what you tapped instead: "${t.text("#oofoot")}"`);
+  t.expect(t.ev("S.learn.ev.length") >= ev1, "the second answer wasn't logged");
+});
+
 // ================================================================== ONE TODAY (PLAN.md lane B)
 // The Art cover lives in Today's picks now (the old pager, one tap down in Museum's ⋯, lens "foryou" --
 // design/SIMPLIFY/PLAN.md §4 #1). Learn's own copy of this card (the ".lr-tc-chip" color-on-painting link) was

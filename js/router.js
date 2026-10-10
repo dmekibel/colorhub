@@ -148,6 +148,7 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["ooMap", () => routed("Odd one out", "odd")], ["ooEyePage", () => routed("Your eye", "odd/eye")],   // js/games/oo-ui.js
   ["hgMap", () => routed("Gradients", "hue")], ["hgDaily", () => routed("Today's gradient", "hue/daily")],   // js/games/hue-ui.js
   ["ooWhose", () => routed("Whose palette?", "odd/whose")], ["ooAcross", () => routed("Across the line", "line")], ["ooPairs", () => routed("Painters' pairs", "odd/pairs")],
+  ["wwPlay", () => routed("Which way?", "whichway")],   // js/games/whichway.js
   ["pmOpen", spec => typeof pmRouteOf === "function" ? pmRouteOf(spec) : null],   // js/paintmap.js: #/paintings/map?arr=…&co=…
   ["arHubPage", id => id ? routed(arPretty(id), "hub/" + id) : null], ["arWhichPage", name => name ? routed(arPretty(name), "which/" + name) : null],
   ["arReadPage", (slug, ch) => slug ? routed(AR_READING.has(slug) ? AR_READING.get(slug).art.name : arPretty(slug), "read/" + slug + (ch ? "/" + ch : "")) : null]];   // js/article.js: the book, #/read/<slug>[/<chapter>]   // js/article.js: #/hub/<id>, #/which/<name>
@@ -336,6 +337,7 @@ function openRoute(hash, initial = false) {
     return true;
   }
   if (kind === "line" && typeof ooAcross === "function") { base(); XSTACK = []; ooAcross(); return true; }   // js/games/line.js
+  if (kind === "whichway" && typeof wwPlay === "function") { base(); XSTACK = []; wwPlay(); return true; }   // js/games/whichway.js
   if (kind === "odd" && typeof ooOpenRoute === "function") { base(); XSTACK = []; ooOpenRoute(id); return true; }   // js/games/oo-ui.js: #/odd, #/odd/eye, #/odd/whose, #/odd/pairs
   if (kind === "hue" && typeof hgOpenRoute === "function") { base(); XSTACK = []; hgOpenRoute(id); return true; }   // js/games/hue-ui.js: #/hue, #/hue/daily
   if (kind === "photo" && id && typeof photoPage === "function") { base(); XSTACK = []; photoPage(id); return true; }
