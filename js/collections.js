@@ -113,9 +113,9 @@ const PIGMENT_COVERS = [
 
 const COLLECTIONS = [
   // ---------- Art ----------
-  { id: "paintings", t: "Paintings", group: "Art", count: "23,778", pic: "#5E4A3A", img: "img/paintings/starry-night-thumb.jpg",
+  { id: "paintings", t: "Paintings", group: "Art", get count() { return (GAL && GAL.n ? GAL.n : 42331).toLocaleString("en-US"); }, pic: "#5E4A3A", img: "img/paintings/starry-night-thumb.jpg",
     open: () => { if (typeof tlKeepUnder === "function") tlKeepUnder(); if (typeof openPart === "function") openPart("art"); } },
-  { id: "painters", t: "Painters", group: "Art", count: "840", pic: "#7A5C3E", img: "img/paintings/the-kiss-thumb.jpg",
+  { id: "painters", t: "Painters", group: "Art", get count() { return (typeof AW !== "undefined" && AW.meta && AW.meta.a ? Object.keys(AW.meta.a).length : 1472).toLocaleString("en-US"); }, pic: "#7A5C3E", img: "img/paintings/the-kiss-thumb.jpg",
     open: () => { if (typeof awPainters === "function") awPainters(); else if (typeof awIndex === "function") awIndex(); } },
   { id: "movements", t: "Movements & decades", group: "Art", count: "", pic: "#4A5B3E", img: "img/paintings/composition-vii-thumb.jpg",
     open: () => { if (typeof awIndex === "function") awIndex(); } },
