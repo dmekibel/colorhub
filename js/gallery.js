@@ -1172,9 +1172,9 @@ function glPage(i, d, fromHex, tol) {
   // by ctx, so a re-register on the same painting just replaces the closures with ones that see this draw's d/i).
   if (typeof moreRegister === "function") moreRegister("gallery", () => [
     { title: "Look", items: [
-      { t: "Where each color sits", n: "Opens Look closer", run: () => glZoomOpen({ src: glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "where" }) },
+      { t: "Where each color sits", n: "Opens Look closer", run: () => glZoomOpen({ src: glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "where", cors: !!glCORS(glBig(d.img)), sampleOk: canSample }) },
       { t: "Value and squint", n: "See the light structure, or the big shapes", run: openLookCloser },
-      { t: "Select an object", n: "Tap the thing you want", run: () => glZoomOpen({ src: glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "select" }) },
+      { t: "Select an object", n: "Tap the thing you want", run: () => glZoomOpen({ src: glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "select", cors: !!glCORS(glBig(d.img)), sampleOk: canSample }) },
     ] },
     { title: "Go", items: [
       ...(d.a ? [{ t: "The painter", n: d.a, run: () => { if (typeof awPainter === "function") awPainter(routeSlug(d.a)); } }] : []),
@@ -1184,7 +1184,7 @@ function glPage(i, d, fromHex, tol) {
     ] },
   ]);
   if (typeof featureRegister === "function") {
-    featureRegister("gl-pick", { t: "Pick a color", where: "A painting · on the picture", words: ["eyedropper", "sample", "pipette"], run: () => { if (canSample) { pickArmed = true; syncEyd(); } else toast("Open a painting first"); } });
+    featureRegister("gl-pick", { t: "Pick a color", where: "A painting · on the picture", words: ["eyedropper", "sample", "pipette"], run: () => { if (canSample) { pickArmed = true; syncEyd(); } else toast("This museum's photo can't be read here, so colors can't be picked from it."); } });
     featureRegister("gl-where", { t: "Where a color sits on a painting", where: "A painting · ⋯ · Look", words: ["where", "locate", "highlight"], run: () => toast("Open a painting, then ⋯ · Where each color sits") });
   }
   // the How-many slider is wired by countify() itself (built lazily inside drawModes, see kCtl) -- its onSet
@@ -1332,7 +1332,7 @@ function glPage(i, d, fromHex, tol) {
   // open the plain color readout on release -- never js/isolate.js's guessing game, which stays reachable only
   // from the explicit "Test yourself" fold.
   let eyd = null, pickArmed = false;
-  const openLookCloser = () => { buzz(5); glZoomOpen({ src: glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i }); };
+  const openLookCloser = () => { buzz(5); glZoomOpen({ src: glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, cors: !!glCORS(glBig(d.img)), sampleOk: canSample }); };
   const syncEyd = () => {
     if (eyd) { eyd.detach(); eyd = null; }
     if (pickArmed && canSample && typeof eyedropAttach === "function") {
@@ -1351,7 +1351,9 @@ function glPage(i, d, fromHex, tol) {
       });
     }
     const btn = el.querySelector("[data-glpickbtn]");
-    if (btn) { btn.classList.toggle("on", pickArmed); btn.setAttribute("aria-pressed", pickArmed); btn.hidden = !canSample; }
+    // always shown once the image has been tested (never silently gone -- a painting whose host can't be read,
+    // like Cleveland's, still gets a button that explains itself on tap, per pickBtn.onclick above)
+    if (btn) { btn.classList.toggle("on", pickArmed); btn.setAttribute("aria-pressed", pickArmed); btn.hidden = false; }
   };
   function armSample(img) {
     sampleImg = img; canSample = testSample(img); heroSpan.classList.toggle("gl-tap", canSample); if (arrival) arrival.image(img, canSample);
@@ -1365,7 +1367,10 @@ function glPage(i, d, fromHex, tol) {
   // "Pick a color" (David, relayed 2026-10-09): the explicit way into the eyedropper now -- arms pickArmed,
   // which syncEyd() (above) turns into a live eyedropAttach() on the hero image
   const pickBtn = el.querySelector("[data-glpickbtn]");
-  if (pickBtn) pickBtn.onclick = () => { pickArmed = !pickArmed; buzz(5); syncEyd(); };
+  if (pickBtn) pickBtn.onclick = () => {
+    if (!canSample) { toast("This museum's photo can't be read here, so colors can't be picked from it."); return; }   // honest, never a dead tap (David's own rule for Select, CLAUDE.md "never a silent dead button")
+    pickArmed = !pickArmed; buzz(5); syncEyd();
+  };
   // "Pick from the painting": a small ring where each color was taken (the page's own tap-dot, kept)
   const dotAt = [];
   function clearDots() { heroSpan.querySelectorAll(".gl-pick-dot").forEach(n => n.remove()); }
@@ -1382,6 +1387,20 @@ function glPage(i, d, fromHex, tol) {
   // the arriving color: pinned above the palette, with how much of this canvas it covers and where (js/paintingsof.js, L26)
   if (fromHex && typeof ptArrival === "function") arrival = ptArrival(el, { i, hex: fromHex, tol, pool, heroSpan, getImg: () => sampleImg, onMap: () => { if (locate) { locate = null; drawPalette(); } }, why: "This museum's image server doesn't let ColorHub read its pixels, so the map isn't available for this painting." });
   if (typeof fvArtWire === "function") fvArtWire(el, i, d, heroSpan);   // the heart lives in the top bar (visible without scrolling); a long press or a double-tap on the picture keeps it too (js/favs.js)
+  // David's own host list (GL_CORS_HOSTS, above) says a museum's CDN always echoes its CORS header, but a real
+  // CDN (Imperva etc.) can flake on any single request -- found live on the Met, where the exact same URL got
+  // the header from a plain curl but not from this fetch. When that happens the crossorigin image fails to load
+  // AT ALL (not just "can't be read" -- the whole picture goes blank), with nothing to see why. One retry
+  // without crossOrigin keeps the picture visible (canSample then honestly comes back false from testSample()
+  // itself, no special-casing needed) instead of a dead gap where the painting should be.
+  const retryWithoutCORS = () => {
+    if (!sampleImg.crossOrigin) return;   // never asked for CORS, or already retried once -- a plain broken image, nothing more to try
+    const src = sampleImg.src;
+    sampleImg.crossOrigin = null;
+    sampleImg.addEventListener("load", () => armSample(sampleImg), { once: true });
+    sampleImg.src = ""; sampleImg.src = src;
+  };
+  sampleImg.addEventListener("error", retryWithoutCORS, { once: true });
   if (sampleImg.complete && sampleImg.naturalWidth) armSample(sampleImg); else sampleImg.addEventListener("load", () => armSample(sampleImg), { once: true });
   // Double-tap to like (Instagram-style, David 2026-10-09): since a single tap on the painting already does
   // something (names a spot, picks a color, selects a map place), it waits ~280ms for a second tap before

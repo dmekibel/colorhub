@@ -24,7 +24,7 @@ function glZoomOpen(opts) {
   scrim.className = "glz-scrim";
   scrim.innerHTML = `
     <div class="glz-top"><button class="tl-exit" data-glzclose aria-label="Done, back to the painting">${ICON.back}<span>Done</span></button><span class="glz-title">${esc(opts.title || "")}</span></div>
-    <div class="glz-stage"><div class="glz-frame"><img class="glz-img" src="${esc(opts.src)}" alt="${esc(opts.alt || "")}"><canvas class="glz-cv" aria-hidden="true"></canvas></div></div>
+    <div class="glz-stage"><div class="glz-frame"><img class="glz-img" src="${esc(opts.src)}"${opts.cors ? ' crossorigin="anonymous"' : ""} alt="${esc(opts.alt || "")}"><canvas class="glz-cv" aria-hidden="true"></canvas></div></div>
     <div class="glz-tools">
       <div class="seg glz-seg" role="group" aria-label="Look at it">
         <button data-glzv="value">Value</button><button data-glzv="squint">Squint</button>${opts.pix ? `<button data-glzv="where">Where</button>` : ""}${typeof eyedropAttach === "function" ? `<button data-glzv="pick">${typeof icon === "function" ? icon("pipette", 15) : ""}<span>Pick</span></button>` : ""}${opts.src && typeof segProbe === "function" ? `<button data-glzv="select" hidden>Select</button>` : ""}
@@ -97,6 +97,15 @@ function glZoomOpen(opts) {
     frame.addEventListener("transitionend", done);
   };
   const resetView = () => { computeFit(); Z = fitZ; P = [0, 0]; frame.style.transition = ""; apply(); };
+  // Same CORS-flake defense as js/gallery.js's own hero image: a host on the "safe" allowlist can still drop
+  // its CORS header on any single request (found live on the Met's Imperva CDN -- the identical URL answered
+  // with the header moments earlier from a plain curl). With crossorigin="anonymous" set and that header
+  // missing, the <img> doesn't just lose pixel-read access -- it fails to load AT ALL, leaving Look closer's
+  // whole stage blank. One retry without crossOrigin keeps the picture visible; Pick/Where then honestly find
+  // nothing to read (opts.sampleOk below), instead of a dead, unexplained gap where the painting should be.
+  if (img.crossOrigin) img.addEventListener("error", () => {
+    const src = img.src; img.crossOrigin = null; img.addEventListener("load", resetView, { once: true }); img.src = ""; img.src = src;
+  }, { once: true });
   if (img.complete && img.naturalWidth) resetView(); else img.addEventListener("load", resetView);
   const onResize = () => {
     computeFit(); Z = clamp(Z, fitZ, maxZ); P = clampP(P, Z, false);
@@ -348,6 +357,12 @@ function glZoomOpen(opts) {
   img.addEventListener("click", e => { if (active === "select") selTap(e.clientX, e.clientY); });
   // Value / Squint / Where / Pick / Select
   const setMode = m => {
+    // Pick needs a real canvas read on THIS image (js/eyedrop.js eydSource), unlike Where/Select which only
+    // ever touch the painting page's own precomputed opts.pix or their own CORS-safe probe image -- so Pick is
+    // the one tool that silently did nothing at all when the image couldn't be read (David's report, "the
+    // color picker isn't working"): the drag just never showed a loupe, no error, nothing. Honest now, the
+    // same rule Select's own probe already follows (never a silent dead button).
+    if (m === "pick" && active !== "pick" && !opts.sampleOk) { if (typeof toast === "function") toast("This museum's photo can't be read here, so colors can't be picked from it."); return; }
     active = active === m ? null : m;
     scrim.querySelectorAll("[data-glzv]").forEach(b => { const on = b.dataset.glzv === active; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
     scrim.querySelector(".glz-img").style.filter = active === "value" ? "grayscale(1)" : active === "squint" ? "blur(min(2.5vw,16px))" : "";

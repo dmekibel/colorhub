@@ -4958,6 +4958,57 @@ scenario("paintings", "Pick a color arms the eyedropper: drag shows the loupe, r
   t.expect(t.$(".gcr-sheet [data-gcr-open], .gcr-sheet .cp-sheet-primary"), "the readout has no way to open the color's page");
   t.expect(t.$(".gcr-sheet [data-gcr-where]"), "the readout has no \"Where else in this painting\" action");
 });
+// Found live (2026-10-10): js/paintzoom.js's own ".glz-img" never got the crossorigin attribute the painting
+// page's own hero image gets from js/gallery.js's glCORS(), so Look closer's "Pick" tool silently failed to
+// show a loupe or a readout for every museum image, even a genuinely CORS-safe one -- a drag just did nothing,
+// no error, nothing (eydSource's tainted-canvas catch returns null, sampleAndShow returns false). Select never
+// showed this because it probes/reads pixels through its own always-crossOrigin Image (js/segment.js), never
+// through ".glz-img" itself. This exercises the real path end to end with real pointer events.
+scenario("paintings", "Look closer's Pick tool: drag shows the loupe, release opens a plain readout with a hex", async t => {
+  await t.open("#/home", { settle: 300 });
+  t.ev(`window.glCommonsResolve = () => Promise.resolve(location.origin + "/icon-512.png")`);
+  t.ev(`galleryPage(14423, true)`);
+  await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 15000, "the Mona Lisa painting page");
+  await t.waitFor(() => t.$(".gl-hero > span").classList.contains("gl-tap"), 15000, "the picture becomes tappable once the resolved image is armed and readable");
+  await t.click(await t.waitFor("[data-glcloser]", 8000, "the Look closer button"), { wait: 500 });
+  const img = await t.waitFor(".glz-scrim.in .glz-img", 4000, "Look closer's own image");
+  await t.click(await t.waitFor('[data-glzv="pick"]', 4000, "the Pick tool"), { wait: 300 });
+  t.expect(t.$('[data-glzv="pick"]').classList.contains("on"), "the Pick tool doesn't show armed");
+  const r = img.getBoundingClientRect(), w = t.w;
+  const pt = (x, y, type) => img.dispatchEvent(new w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 11, pointerType: "touch", isPrimary: true, button: 0, view: w }));
+  const cx = r.left + r.width * .5, cy = r.top + r.height * .5;
+  pt(cx, cy, "pointerdown");
+  await t.sleep(80);
+  pt(cx + 10, cy + 6, "pointermove");
+  await t.waitFor(".eyd-loupe", 3000, "the eyedrop loupe while dragging in Look closer");
+  pt(cx + 10, cy + 6, "pointerup");
+  const sheet = await t.waitFor(".gcr-sheet, .sw-sheet", 4000, "the color readout sheet after releasing in Look closer");
+  t.expect(/^#[0-9A-F]{6}$/.test(t.text(".gcr-sheet .mono") || t.text(".sw-sheet .mono")), `the readout has no real hex (${t.text(".gcr-sheet .mono") || t.text(".sw-sheet .mono")})`);
+});
+// Cleveland (and anything else whose host can't be read here) used to just make the "Pick a color" button and
+// Look closer's "Pick" tool quietly vanish or go dead, with nothing explaining why (David's report, "the color
+// picker isn't working"). Both now say so on tap instead -- never a silent dead control.
+scenario("paintings", "an unreadable painting's Pick controls give an honest message instead of silently doing nothing", async t => {
+  await t.open("#/home", { settle: 300 });
+  // GAL.n is loaded from local data either way; only the IMAGE host is external, and the smoke harness's own
+  // --host-resolver-rules sends every external host to NXDOMAIN, so this painting's image never loads at all --
+  // the same end state (an image this host can't deliver readable pixels for) a real Cleveland CORS failure
+  // leaves it in, without needing network access to a real museum from this test.
+  t.ev(`typeof loadGallery === "function" ? loadGallery() : null`);
+  const gi = await t.waitFor(() => { if (!t.w.GAL) return null; for (let i = 0; i < t.w.GAL.n; i++) { const nm = t.w.GAL.src[t.w.GAL.mus[i]] && t.w.GAL.src[t.w.GAL.mus[i]].name; if (nm === "Cleveland Museum of Art") return i; } return null; }, 8000, "a Cleveland painting index");
+  t.ev(`galleryPage(${gi}, true)`);
+  await t.waitFor(() => !!t.$(".p-title") && t.text(".p-title").length > 0, 15000, "the painting page");
+  const btn = await t.waitFor("[data-glpickbtn]", 10000, "the Pick a color button (shown even though this image can't be read)");
+  t.expect(!btn.hidden, "the Pick a color button went silently missing instead of explaining itself");
+  await t.click(btn, { force: true, wait: 300 });
+  await t.waitFor(() => /can.t be read/i.test(t.text(".toast")), 3000, "an honest toast explaining why Pick can't work here");
+  t.expect(!btn.classList.contains("on"), "the Pick button armed anyway, with nothing to actually sample");
+  await t.click(await t.waitFor("[data-glcloser]", 8000, "the Look closer button"), { wait: 500 });
+  await t.waitFor(".glz-scrim.in", 4000, "Look closer");
+  await t.click(await t.waitFor('[data-glzv="pick"]', 4000, "Look closer's Pick tool"), { wait: 300 });
+  await t.waitFor(() => /can.t be read/i.test(t.text(".toast")), 3000, "Look closer's Pick tool also explains itself instead of a dead drag");
+  t.expect(!t.$('[data-glzv="pick"]').classList.contains("on"), "Look closer's Pick tool armed anyway, with nothing to actually sample");
+});
 // Lane H (design/IMPROVE-2026-10-08/PLAN.md): Across the line clicks. The anchor chip shows the word's own color,
 // a right answer offers the neighbor word, adding it makes a review card due tomorrow, a miss says "In ColorHub's
 // map", and each answer is logged to the Learner Model with names.
