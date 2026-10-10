@@ -1475,7 +1475,7 @@ scenario("train", "Odd one out: one tap from the shelf to a true full-screen boa
   t.expect(t.$(".oo-pausecard.on"), "tapping the pause mark should open the pause card");
   t.expect(t.$(".oo-hearts") && t.$$(".oo-hearts i").length === 3, "the pause card should show three lives in Arcade");
   t.expect(/arcade/i.test(t.text(".oo-zenpill")), "the pause card should offer a Zen pill, defaulting to Arcade");
-  t.expect(t.$$(".oo-pset .item").length === 4, "the pause card should offer four settings: sound, haptics, names, timer");
+  t.expect(t.$$(".oo-pset .item").length >= 7, "the pause card should offer Style, Palette intensity, Multiple odd tiles, Show colors between rounds, Names, Timer, Sound, Haptics");
   await t.click("[data-resume]", { wait: 400 });
   t.expect(!t.$(".oo-pausecard.on"), "Resume should close the pause card");
   const taps = await ooTapRound(t);
@@ -1499,10 +1499,11 @@ scenario("train", "Odd one out: Zen (no timer), a gapless full-bleed gradient bo
   t.expect(seam && seam !== "none", "tiles should carry a subtle seam (box-shadow), not sit edge to edge with zero separation");
   // the TAPPABLE grid lives inside the safe area; the color field bleeds full-bleed behind it, non-interactive
   // (David, 2026-10-11: top tiles were "hard to reach and cut off" under the status bar/Dynamic Island)
-  const insetTop = t.ev("(() => { const b = document.querySelector('.oo-board.oo-full'), s = document.querySelector('.oo-stage'); if (!b || !s) return null; return b.getBoundingClientRect().top - s.getBoundingClientRect().top; })()");
-  t.expect(insetTop != null && insetTop >= 20, `the tappable grid should start well below the stage's top edge, got ${insetTop}px`);
-  const bleedCount = t.ev("document.querySelectorAll('.oo-boardbleed .oo-t').length");
-  t.expect(bleedCount > 0, "a non-interactive bleed layer should fill the area outside the safe-area grid");
+  // true full-bleed again (David, 2026-10-11: no inset, no second blurred layer) -- the board fills the stage
+  // exactly, and reachability is handled at the round level instead (the odd tile is never placed unsafely)
+  const boardTop = t.ev("(() => { const b = document.querySelector('.oo-board.oo-full'), s = document.querySelector('.oo-stage'); if (!b || !s) return null; return Math.round(b.getBoundingClientRect().top - s.getBoundingClientRect().top); })()");
+  t.expect(boardTop === 0, `the board should fill the stage exactly, no inset margin, got ${boardTop}px`);
+  t.expect(!t.$(".oo-boardbleed") && !t.$(".oo-boardouter"), "there should be no second blurred bleed layer any more");
 
   // a gradient round: the WHOLE grid is one smooth palette (not a per-tile stripe pattern) -- every tile's own
   // color should differ a little from its neighbors, and exactly one should sit off of where the sweep says it
@@ -1546,7 +1547,41 @@ scenario("train", "Odd one out: Zen (no timer), a gapless full-bleed gradient bo
   await t.open("#shot=gx:oo:miss", { settle: 1400 });
   await t.waitFor(".oo-t.ring", 6000, "the odd tile ringed after a miss");
   t.expect(t.$(".oo-t.miss"), "the tapped (wrong) tile should be marked");
-  t.expect(t.$(".oo-reveal2") && t.$(".oo-rv2-inset") && t.$(".oo-rv2-oddname"), "a miss should still show the full-screen reveal's inset and names");
+  // the marked board holds for a beat before the reveal (David, 2026-10-11: "show you where you failed and
+  // what the correct answer would be") -- the reveal shouldn't be up yet right after the marks appear...
+  t.expect(!t.$(".oo-reveal2"), "the reveal appeared before the marked board got its beat to be seen");
+  // ...but should be, a little over a second later
+  await t.waitFor(".oo-reveal2", 2500, "the reveal, after the marked board's hold");
+  t.expect(t.$(".oo-rv2-inset") && t.$(".oo-rv2-oddname"), "a miss should still show the full-screen reveal's inset and names");
+});
+
+// David, 2026-10-11: "make the GAME avoid placing the odd tile in unsafe zones" -- the status bar/Dynamic
+// Island strip, the home indicator strip, the rounded corners -- instead of insetting the grid. Play several
+// real rounds and check the odd tile's cell never lands in a top/bottom safe-area buffer strip or a corner.
+scenario("train", "Odd one out: the odd tile never lands in the unsafe top/bottom/corner zones", async t => {
+  await t.open("#shot=gx:oo:zen", { settle: 600 });
+  for (let i = 0; i < 12; i++) {
+    await t.waitFor(".oo-board .oo-t", 4000, "a board");
+    const bad = t.ev(`(() => {
+      const b = document.querySelector('.oo-board.oo-full'); if (!b) return null;
+      const br = b.getBoundingClientRect(); const ans = (OO_LAST.ans||[]);
+      const tiles = [...b.querySelectorAll('.oo-t')];
+      const topBuf = 26, botBuf = 22, sideBuf = 4, corner = 55;
+      return ans.some(idx => {
+        const t = tiles[idx]; if (!t) return false;
+        const r = t.getBoundingClientRect(), cx = r.left + r.width/2 - br.left, cy = r.top + r.height/2 - br.top;
+        if (cx < sideBuf || cx > br.width - sideBuf || cy < topBuf || cy > br.height - botBuf) return true;
+        for (const [ox, oy] of [[0,0],[br.width,0],[0,br.height],[br.width,br.height]]) {
+          if (Math.abs(cx-ox) <= corner && Math.abs(cy-oy) <= corner && Math.hypot(cx-ox, cy-oy) < corner) return true;
+        }
+        return false;
+      });
+    })()`);
+    t.expect(!bad, `round ${i}: the odd tile landed in an unsafe zone`);
+    const tiles = t.$$(".oo-board .oo-t"), at = t.ev("OO_LAST.ans[0]");
+    await t.click(tiles[at], { wait: 300, force: true });
+    await t.click(".oo-reveal2", { wait: 300, force: true }).catch(() => {});
+  }
 });
 
 scenario("train", "Odd one out: the end screen names the day's edge with three bars", async t => {
@@ -1567,6 +1602,43 @@ scenario("train", "Odd one out: a player's own kept colors turn up as a gradient
   t.expect(hit, "with 3+ kept colors, some gradient sources should be the player's own favorites");
   const label = t.ev("(Array.from({length:80},()=>ooPickPalette()).find(p => p && p.fromFav) || {}).label");
   t.expect(typeof label === "string" && /^(Your colors:|From your favorite:)/.test(label), `a favorite source's label should say so plainly, got "${label}"`);
+});
+
+// David, 2026-10-11, "best of both worlds": Classic (square, one solid color, single tile, no palette) beside
+// the Gradient default, both through the Settings "Style" toggle in the pause menu.
+scenario("train", "Odd one out: Classic style is a square single-color board, Gradient is unaffected", async t => {
+  await t.open("#shot=gx:oo:zen", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a Gradient board");
+  // #shot=...zen resets S.games.oo (fresh()), which would wipe a style set beforehand -- set it AFTER landing,
+  // then re-enter the map directly (not through the shot route, so fresh() doesn't run again and erase it)
+  t.ev("ooSimpleState().style = 'classic'; save(); ooMap({ zen: true }); 1");
+  await t.waitFor(".oo-board .oo-t", 6000, "a Classic board");
+  const info = t.ev("({ rows: OO_LAST.rows, cols: OO_LAST.cols, gridType: OO_LAST.gridType, uniq: new Set(OO_LAST.fieldColors).size })");
+  t.expect(info.rows === info.cols, `Classic should be a square board, got ${info.rows} x ${info.cols}`);
+  t.expect(info.gridType === "flat", `Classic should be one solid color (flat), got ${info.gridType}`);
+  t.expect(info.uniq === 1, `Classic's field should be a single color, saw ${info.uniq} distinct`);
+  t.ev("ooSimpleState().style = 'gradient'; save(); 1");
+});
+
+// David, 2026-10-11: "Show colors between rounds" off -- a hit melts straight to the next board, no reveal card;
+// a miss still gets its brief marks-on-the-board teaching moment even with the reveal off.
+scenario("train", "Odd one out: the reveal toggle skips the card on a hit, but a miss still teaches", async t => {
+  await t.open("#shot=gx:oo:zen", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a board");
+  t.ev("ooSimpleState().reveal = false; save(); 1");
+  const tiles = t.$$(".oo-board .oo-t"), at = t.ev("OO_LAST.ans[0]"), boardBefore = t.$("#oostage").innerHTML;
+  await t.click(tiles[at], { wait: 900 });
+  t.expect(!t.$(".oo-reveal2"), "the reveal should not appear on a hit when the toggle is off");
+  await t.waitFor(".oo-board .oo-t", 4000, "the next board, reached without a reveal");
+  t.expect(t.$("#oostage").innerHTML !== boardBefore, "the board never advanced past the hit");
+  // a miss: still no reveal card, but the marks should appear and hold before the next board
+  const tiles2 = t.$$(".oo-board .oo-t"), ans2 = t.ev("OO_LAST.ans[0]");
+  const wrongIdx = tiles2.findIndex((_, i) => i !== ans2);
+  await t.click(tiles2[wrongIdx], { wait: 300 });
+  t.expect(t.$(".oo-t.miss") && t.$(".oo-t.ring"), "a miss should still mark the tapped and correct tiles with the reveal off");
+  t.expect(!t.$(".oo-reveal2"), "still no reveal card on a miss with the toggle off");
+  await t.waitFor(".oo-board .oo-t:not(.miss):not(.ring)", 3000, "the next board after the miss's hold");
+  t.ev("ooSimpleState().reveal = true; save(); 1");
 });
 
 // Gradients (js/games/hue-*.js): the shelf opens the teaching board; swap the two tiles with real taps, then play

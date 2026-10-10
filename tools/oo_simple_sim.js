@@ -28,19 +28,19 @@ const TEST_PALETTES = [
   { colors: ["#0B3D3A", "#2E7D6B", "#8FBF8A"] },
   { colors: ["#1A1A2E", "#C9A227"] },
 ];
-function run(truths, size0, seed, n = 400, aspect = 1.6) {
+function run(truths, size0, seed, n = 400, aspect = 1.6, richMode = "subtle") {
   const rnd = E.ooRnd(seed);
   const model = E.ooModel({});
   let size = size0, acc = [];
   const hist = [];
-  let subFloor = 0, floorRounds = 0, drawCount = 0, gradRounds = 0, gradEarly = 0, richCount = { flat: 0, grad1: 0, grad2: 0, grad3: 0 };
+  let subFloor = 0, floorRounds = 0, drawCount = 0, gradRounds = 0, gradEarly = 0, richCount = { flat: 0, grad1: 0, grad2: 0, grad3: 0 }, worstNeighborRatio = 0;
   for (let t = 0; t < n; t++) {
     const breather = t > 0 && t % 5 === 4;
     let r = null;
     const rampCols = E.ooSimpleRampCols(size, t);   // same ramp js/games/oo-ui.js applies: chill start, builds over a run
     for (let tries = 0; tries < 6 && !r; tries++) {
       const palette = TEST_PALETTES[Math.floor(rnd() * TEST_PALETTES.length)];
-      r = E.ooSimpleRound({ model, cols: rampCols, round: t, aspect, palette }, breather, rnd);
+      r = E.ooSimpleRound({ model, cols: rampCols, round: t, aspect, palette, richMode }, breather, rnd);
     }
     if (!r) continue;   // an unlucky draw (rare): skip, same as the UI would retry
     drawCount++;
@@ -48,6 +48,14 @@ function run(truths, size0, seed, n = 400, aspect = 1.6) {
     if (r.act < floor - 1e-6) subFloor++;
     if (r.act <= floor * 1.5) floorRounds++;   // near the floor, whatever the model's own (possibly much sharper) estimate says
     richCount[r.gridType] = (richCount[r.gridType] || 0) + 1;
+    // every gradient round: the worst step between neighboring tiles must stay clearly under the odd tile's own
+    // move (David, 2026-10-11: "a normal gradient step looks like a radically different tile" otherwise)
+    if (r.gridType && r.gridType !== "flat" && r.act > 0) {
+      // fieldColors (not colors/out) excludes the odd tile's own deviated color -- comparing ITS neighbor step
+      // would just re-measure the odd tile's own move, not "a normal gradient step" (which is what this checks)
+      const step = E.ooMaxNeighborStep(r.cells, r.fieldColors, r.cols, r.rows);
+      worstNeighborRatio = Math.max(worstNeighborRatio, step / r.act);
+    }
     if (r.gridType && r.gridType !== "flat") { gradRounds++; if (t < 30) gradEarly++; }
     // the mix this round actually drew, judged against a weighted blend of the true per-axis JNDs, discounted by
     // the board factor the generator already used to inflate the drawn gap (ooSimpleRound's d * OO_S_GRAD_F[tier]).
@@ -64,7 +72,7 @@ function run(truths, size0, seed, n = 400, aspect = 1.6) {
     if (next !== size) { size = next; acc = []; }
     hist.push({ t, axis: r.axis, act: r.act, ok, size, rows: r.rows, cols: r.cols, shape: r.v, gridType: r.gridType });
   }
-  return { model, hist, subFloor, floorRounds, drawCount, gradRounds, gradEarly, richCount };
+  return { model, hist, subFloor, floorRounds, drawCount, gradRounds, gradEarly, richCount, worstNeighborRatio };
 }
 const accOf = (hist, from, to) => { const s = hist.slice(from, to); return s.length ? s.filter(x => x.ok).length / s.length : 0; };
 
@@ -72,21 +80,25 @@ let fail = false;
 console.log("== A typical eye (hue 1.8, value 1.3, saturation 2.3 ΔE00) ==");
 {
   const truths = { hue: 1.8, light: 1.3, chroma: 2.3 };
-  const { model, hist, subFloor, gradRounds, drawCount, richCount } = run(truths, 3, 20261010);
+  const { model, hist, subFloor, gradRounds, drawCount, richCount, worstNeighborRatio } = run(truths, 3, 20261010);
   const last = hist[hist.length - 1];
   console.log(`  rounds 1-15:   ${(accOf(hist, 0, 15) * 100).toFixed(0)}% right`);
   console.log(`  rounds 16-50:  ${(accOf(hist, 15, 50) * 100).toFixed(0)}% right`);
   console.log(`  rounds 51-400: ${(accOf(hist, 50, 400) * 100).toFixed(0)}% right`);
   E.OO_AXES.forEach(a => { const th = Math.exp(model.j[a] ? model.j[a].r : Math.log(E.OO_START[a])); console.log(`  ${a.padEnd(7)} estimate ${th.toFixed(2)} (true ${truths[a]})`); });
   console.log(`  board reached by round 400: ${last.rows} x ${last.cols} (started 3 x 4-ish, cap ~${E.OO_S_MAX_COLS} the long way)`);
+  // Subtle is the default now (David, 2026-10-11: "less palettes and more subtle gradients as the default") --
+  // almost every round is grad1 (1-2 close, harmonious stops), grad2 only occasionally, grad3 essentially never
+  // outside Rich mode (checked in its own block below).
   console.log(`  gradient rounds: ${gradRounds} of ${drawCount} (~${(gradRounds / drawCount * 100).toFixed(0)}%); richness flat/grad1/grad2/grad3: ${richCount.flat || 0}/${richCount.grad1 || 0}/${richCount.grad2 || 0}/${richCount.grad3 || 0}`);
   console.log(`  rounds drawn below the visibility floor: ${subFloor} (must be 0)`);
+  console.log(`  worst neighbor-step as a fraction of the odd tile's own move: ${(worstNeighborRatio * 100).toFixed(0)}% (must stay under 50%)`);
   const settled = accOf(hist, 50, 400), gradRate = gradRounds / drawCount;
   if (settled < .68 || settled > .90) { console.log(`FAIL: settled accuracy ${(settled * 100).toFixed(0)}% is outside 68-90%`); fail = true; }
   if (subFloor > 0) { console.log(`FAIL: ${subFloor} rounds drawn below their axis's visibility floor`); fail = true; }
   if (last.rows * last.cols <= 12) { console.log("FAIL: the board never grew for a typical eye"); fail = true; }
   if (gradRate < .85) { console.log(`FAIL: gradient rate ${(gradRate * 100).toFixed(0)}% is too low -- David wants gradients as the default, flat only a rare palate-cleanser`); fail = true; }
-  if (!richCount.grad3) { console.log("FAIL: a typical eye never once saw the richest gradient tier in 400 rounds"); fail = true; }
+  if (worstNeighborRatio > .5) { console.log(`FAIL: a neighbor step reached ${(worstNeighborRatio * 100).toFixed(0)}% of the odd tile's own move -- should always stay under 50%`); fail = true; }
 }
 console.log("\n== A struggling eye (hue 5, value 4.5, saturation 6 ΔE00: much coarser than typical) ==");
 {
@@ -102,7 +114,6 @@ console.log("\n== A struggling eye (hue 5, value 4.5, saturation 6 ΔE00: much c
   if (settled < .65 || settled > .90) { console.log(`FAIL: settled accuracy ${(settled * 100).toFixed(0)}% is outside 65-90% for a struggling eye`); fail = true; }
   if (gradRate < .85) { console.log(`FAIL: a struggling eye should still see gradients at roughly the typical (now ~93%) rate, got ${(gradRate * 100).toFixed(0)}%`); fail = true; }
   if (gradEarly < 18) { console.log(`FAIL: a struggling eye saw only ${gradEarly} gradient rounds in its first 30 -- gradients should show up early for everyone`); fail = true; }
-  if ((richCount.grad2 || 0) + (richCount.grad3 || 0) === 0) { console.log("FAIL: a struggling eye never once saw a richer gradient (grad2/grad3) -- richness should still vary, just mostly gentle"); fail = true; }
 }
 console.log("\n== A very sharp eye (hue 0.5, value 0.4, saturation 0.5 ΔE00, all below the floor) ==");
 {
@@ -121,6 +132,15 @@ console.log("\n== A very sharp eye (hue 0.5, value 0.4, saturation 0.5 ΔE00, al
   if (floorRounds < drawCount * .1) { console.log("FAIL: a sharp eye should still spend some rounds near the floor, not scaling up with true ability"); fail = true; }
   if (Math.max(last.rows, last.cols) !== E.OO_S_MAX_COLS) { console.log(`FAIL: a sharp eye never reached the ${E.OO_S_MAX_COLS}-long cap`); fail = true; }
   if (gradRate < .85) { console.log(`FAIL: gradient rate ${(gradRate * 100).toFixed(0)}% is too low for a sharp eye too`); fail = true; }
+}
+console.log("\n== Rich mode (the Settings opt-in): richer tiers become available again ==");
+{
+  const truths = { hue: 1.8, light: 1.3, chroma: 2.3 };
+  const { richCount, worstNeighborRatio } = run(truths, 3, 20261010, 400, 1.6, "rich");
+  console.log(`  richness flat/grad1/grad2/grad3: ${richCount.flat || 0}/${richCount.grad1 || 0}/${richCount.grad2 || 0}/${richCount.grad3 || 0}`);
+  console.log(`  worst neighbor-step as a fraction of the odd tile's own move: ${(worstNeighborRatio * 100).toFixed(0)}% (must stay under 50%, even in Rich)`);
+  if (!richCount.grad3) { console.log("FAIL: Rich mode never once drew the richest gradient tier in 400 rounds"); fail = true; }
+  if (worstNeighborRatio > .5) { console.log(`FAIL: Rich mode's neighbor step reached ${(worstNeighborRatio * 100).toFixed(0)}% of the odd tile's own move`); fail = true; }
 }
 console.log("\n== A returning player (high persisted skill, fresh run) ==");
 {

@@ -201,18 +201,12 @@ function ooBoardHTML(r, o = {}) {
     const st = `left:${pct(x)};top:${pct(y)};width:${pct(w)};height:${pct(h)};--c:${r.colors[i]}${c.rot ? `;--rot:${c.rot.toFixed(1)}deg` : ""}${o.breathe ? `;--bd:-${(Math.random() * 3.4).toFixed(2)}s;--bp:${(2.8 + Math.random() * 1.4).toFixed(2)}s` : ""}${img}`;
     return `<button class="oo-t oo-${c.shape}${r.paint ? " oo-pt" : ""}" data-i="${i}" style="${st}" aria-label="Tile ${i + 1}"></button>`;
   }).join("");
-  const board = `<div class="oo-board oo-b-${r.b}${full ? " oo-full" : ""}${o.breathe ? " oo-breathe" : ""}${g ? " oo-ground" : ""}${dense ? " oo-dense" : ""}" style="--ar:${r.aspect || 1};${bg}">${tiles}</div>`;
-  if (!full) return board;
-  // the TAPPABLE grid has to live inside the safe area (David, 2026-10-11: top tiles "hard to reach and cut
-  // off" under the status bar/Dynamic Island) -- but the color field should still read as full-bleed. So the
-  // same colors are drawn twice: a non-interactive copy fills the whole screen edge to edge behind (the "bleed",
-  // under the notch and the home indicator and the rounded corners, where nothing needs to be tapped), and the
-  // real, tappable board sits on top of it, inset to the safe area. Same palette, so it reads as one field that
-  // simply continues past the usable grid, not two different boards.
-  const bleed = r.cells.map((c, i) => `<i class="oo-t oo-${c.shape}" style="left:${pct(c.x)};top:${pct(c.y)};width:${pct(c.w)};height:${pct(c.h)};--c:${r.colors[i]}"></i>`).join("");
-  // deliberately NOT ".oo-board" -- every other place in this file (ooAsk, ooMeltGhost, onAnswer...) selects the
-  // real board with ".oo-board", and that query has to keep finding only the real, tappable one.
-  return `<div class="oo-boardouter"><div class="oo-boardbleed" aria-hidden="true">${bleed}</div>${board}</div>`;
+  // TRUE full-bleed (David, 2026-10-11: "remove the blurry background layer... full width, no side margins...
+  // full height too -- into the curved corners"): one board, edge to edge, no inset/bleed split. Reachability
+  // under the notch/home indicator/corners is handled at the ROUND level instead -- the odd tile(s) are never
+  // placed there (ooSafeIdx in oo-engine.js, fed a safe-zone box computed from the real device geometry) -- so
+  // every tile stays visually full-bleed and every CORRECT answer stays genuinely reachable.
+  return `<div class="oo-board oo-b-${r.b}${full ? " oo-full" : ""}${o.breathe ? " oo-breathe" : ""}${g ? " oo-ground" : ""}${dense ? " oo-dense" : ""}" style="--ar:${r.aspect || 1};${bg}">${tiles}</div>`;
 }
 // a ripple across the board from the tapped tile (calm: a small dip and lift, in order of distance)
 function ooRipple(board, from) {
@@ -248,14 +242,28 @@ function ooGhostCleanup() {
 // rendered shape until the mismatch resolves, which looks like a snap to a different layout. Mirrors the CSS
 // inset rule in css/games.css (.oo-boardouter .oo-board.oo-full) exactly, so there is nothing left to reconcile
 // after the animation starts.
-function ooInsetAspect(stage) {
+// the board is true full-bleed again (David, 2026-10-11: "remove the blurry background layer... full width...
+// full height too"), so its aspect is simply the stage's own -- no inset box to mirror any more. Reachability
+// is handled separately, at the ROUND level (ooSafeBox below feeds oo-engine.js's ooSafeIdx, which never places
+// the odd tile under the notch, the home indicator or the rounded corners).
+function ooStageAspect(stage) {
+  const r = stage.getBoundingClientRect();
+  if (!r.width || !r.height) return null;
+  return r.height / r.width;
+}
+// normalized (0-1 of the board) safe box for the odd tile(s): the real device's safe-area insets plus a small
+// buffer, with an approximate iPhone corner radius (~55pt) carved out of each corner so a tile tucked exactly
+// into a rounded corner isn't picked either. Mirrors oo-engine.js's ooCellSafe/ooSafeIdx exactly.
+function ooSafeBox(stage) {
   const r = stage.getBoundingClientRect();
   if (!r.width || !r.height) return null;
   const cs = getComputedStyle(document.documentElement);
   const num = v => parseFloat(cs.getPropertyValue(v)) || 0;
-  const top = num("--top") + 40, bottom = num("--bottom") + 30, left = num("--left") + 16, right = num("--right") + 16;
-  const w = Math.max(40, r.width - left - right), h = Math.max(40, r.height - top - bottom);
-  return h / w;
+  const topPx = num("--top") + 26, bottomPx = num("--bottom") + 22, leftPx = num("--left") + 4, rightPx = num("--right") + 4, corner = 55;
+  return {
+    xMin: leftPx / r.width, xMax: 1 - rightPx / r.width, yMin: topPx / r.height, yMax: 1 - bottomPx / r.height,
+    cornerX: corner / r.width, cornerY: corner / r.height,
+  };
 }
 function ooMeltGhost(ui) {
   ooGhostCleanup();
@@ -757,12 +765,23 @@ function ooRevealHTML(r, res, showNames = true) {
   const no = pair && showNames ? ooNm(odd) : null, nf = pair && showNames ? ooNm(field) : null;
   if (pair) { ooSeenLog(odd); ooSeenLog(field); }   // the exposure is logged for Learn either way; only the on-screen label is optional
   const fieldC = field || odd || "#5F5F5F", fi = ink(fieldC);
-  const inset = `<button class="oo-rv2-inset" data-swatch="${odd || field}" data-ink="${ink(odd || field)}" style="--c:${odd || field}" aria-label="${esc(no || "The odd color")}"></button>`;
-  const names = pair && showNames ? `
-    <button class="oo-rv2-oddname" data-swatch="${odd}"><b>${esc(no)}</b><em class="mono">${esc(odd)}</em></button>
-    <button class="oo-rv2-fieldname" data-swatch="${field}">in ${esc(nf)}</button>` : "";
-  const diff = pair && r.dir ? `A touch ${esc(r.dir)}.` : r.none ? "Every tile was the same color." : res.ok ? "Right." : "The ringed tile was different.";
-  const exag = pair ? ooExaggerate(field, odd) : null;
+  // a multi-odd round (2 or 4 tiles, the opt-in Settings toggle) shows EVERY odd color, each its own inset with
+  // its own name -- not just the first one (David, 2026-10-11)
+  const multi = pair && r.odds && r.odds.length > 1;
+  let inset, names;
+  if (multi) {
+    const insets = r.odds.map((o, i) => `<button class="oo-rv2-inset oo-rv2-inset-m" data-swatch="${o.hex}" data-ink="${ink(o.hex)}" style="--c:${o.hex}" aria-label="Odd color ${i + 1}"></button>`).join("");
+    inset = `<div class="oo-rv2-insets">${insets}</div>`;
+    names = showNames ? `<div class="oo-rv2-namesm">${r.odds.map(o => `<button class="oo-rv2-oddname" data-swatch="${o.hex}" style="--c:${o.hex}"><b>${esc(ooNm(o.hex))}</b><em class="mono">${esc(o.hex)}</em></button>`).join("")}</div>
+      <button class="oo-rv2-fieldname" data-swatch="${field}">in ${esc(nf)}</button>` : "";
+  } else {
+    inset = `<button class="oo-rv2-inset" data-swatch="${odd || field}" data-ink="${ink(odd || field)}" style="--c:${odd || field}" aria-label="${esc(no || "The odd color")}"></button>`;
+    names = pair && showNames ? `
+      <button class="oo-rv2-oddname" data-swatch="${odd}"><b>${esc(no)}</b><em class="mono">${esc(odd)}</em></button>
+      <button class="oo-rv2-fieldname" data-swatch="${field}">in ${esc(nf)}</button>` : "";
+  }
+  const diff = multi ? `${r.odds.length} tiles were different.` : pair && r.dir ? `A touch ${esc(r.dir)}.` : r.none ? "Every tile was the same color." : res.ok ? "Right." : "The ringed tile was different.";
+  const exag = pair && !multi ? ooExaggerate(field, odd) : null;
   const seeIt = exag ? `<div class="oo-rv2-see" aria-hidden="true"><i style="--c:${field}"></i><i style="--c:${odd}"></i><i style="--c:${exag}"></i></div>` : "";
   const src = r.paletteSource;
   const srcHTML = src ? `<button class="oo-rv2-src"${src.link ? "" : " disabled"}>${src.fromFav ? "" : "From "}${esc(src.label)}</button>` : "";
@@ -856,6 +875,11 @@ function ooSimpleState() {
   if (o.names !== false) o.names = true;      // teach names after each round (pause menu toggle)
   if (o.timer !== false) o.timer = true;      // the per-round Arcade timer (pause menu toggle; Zen has none regardless)
   if (o.pauseHint == null) o.pauseHint = true; // the one-time "tap to pause" hint, shown once then cleared
+  // Settings (David, 2026-10-11: "best of both worlds + modular") -- all remembered per player.
+  if (o.style !== "classic") o.style = "gradient";   // Gradient (default, full-bleed palettes) / Classic (square, one solid color)
+  if (o.richMode !== "rich") o.richMode = "subtle";  // Palette intensity: Subtle (default, 1-2 close harmonious stops) / Rich (the old skill-ladder up to 4 stops)
+  if (o.multiOdd == null) o.multiOdd = false;        // multiple odd tiles: opt-in only ("selecting one is better than multiple")
+  if (o.reveal !== false) o.reveal = true;           // "Show colors between rounds" -- off skips the reveal on a hit (a miss still gets its brief marks)
   return o;
 }
 // the per-round timer: a little tighter as the grid grows (Arcade only)
@@ -938,10 +962,14 @@ function ooMap(opt = {}) {
       <button class="btn" data-resume>Resume</button>
       <button class="oo-zenpill${zen ? " on" : ""}" data-zen aria-pressed="${zen}">${zen ? "Zen" : "Arcade"}</button>
       <div class="oo-pset">
-        <button class="item" data-set="sound">Sound: ${S.sound === false ? "off" : "on"} ${ICON.chev}</button>
-        <button class="item" data-set="haptics">Haptics: ${S.haptics === false ? "off" : "on"} ${ICON.chev}</button>
+        <button class="item" data-set="style">Style: ${sim.style === "classic" ? "Classic" : "Gradient"} ${ICON.chev}</button>
+        ${sim.style !== "classic" ? `<button class="item" data-set="richMode">Palette intensity: ${sim.richMode === "rich" ? "Rich" : "Subtle"} ${ICON.chev}</button>` : ""}
+        <button class="item" data-set="multiOdd">Multiple odd tiles: ${sim.multiOdd ? "on" : "off"} ${ICON.chev}</button>
+        <button class="item" data-set="reveal">Show colors between rounds: ${sim.reveal ? "on" : "off"} ${ICON.chev}</button>
         <button class="item" data-set="names">Names after each round: ${sim.names ? "on" : "off"} ${ICON.chev}</button>
         <button class="item" data-set="timer">Timer: ${!zen && sim.timer ? "on" : "off"} ${ICON.chev}</button>
+        <button class="item" data-set="sound">Sound: ${S.sound === false ? "off" : "on"} ${ICON.chev}</button>
+        <button class="item" data-set="haptics">Haptics: ${S.haptics === false ? "off" : "on"} ${ICON.chev}</button>
       </div>
       <button class="btn ghost" data-exit>Exit</button>`;
     card.querySelector("[data-resume]").onclick = () => closePause();
@@ -953,6 +981,10 @@ function ooMap(opt = {}) {
       else if (k === "haptics") { S.haptics = S.haptics === false; save(); if (S.haptics) buzz(4); }
       else if (k === "names") { sim.names = !sim.names; save(); buzz(4); }
       else if (k === "timer") { sim.timer = !sim.timer; save(); buzz(4); }
+      else if (k === "multiOdd") { sim.multiOdd = !sim.multiOdd; save(); buzz(4); }
+      else if (k === "reveal") { sim.reveal = !sim.reveal; save(); buzz(4); }
+      else if (k === "richMode") { sim.richMode = sim.richMode === "rich" ? "subtle" : "rich"; save(); buzz(4); }
+      else if (k === "style") { sim.style = sim.style === "classic" ? "gradient" : "classic"; save(); buzz(4); closePause(true); ooMap({ zen }); return; }
       paintPause();
     });
   }
@@ -988,7 +1020,8 @@ function ooMap(opt = {}) {
     ooMeltGhost(ui);
     const enter = st.round === 0 ? null : st.grew ? "divide" : "settle"; st.grew = false;
     const breather = st.round > 0 && st.round % 5 === 4;
-    const aspect = ooInsetAspect(ui.stage) || (ui.stage.clientHeight / ui.stage.clientWidth) || 1.6;
+    const aspect = ooStageAspect(ui.stage) || 1.6;
+    const safeBox = ooSafeBox(ui.stage);
     let r = null;
     if (st.round === 0 && opt.forceShape) {
       const axis = ooSimpleAxis(model), skill = ooSimpleSkill(st.cols), fs = opt.forceShape;
@@ -997,14 +1030,14 @@ function ooMap(opt = {}) {
       const mix = fs === "combo" ? { [axis]: .6, [OO_AXES.find(a => a !== axis)]: .4 } : { [axis]: 1 };
       const k = fs === "k4" ? 4 : fs === "k2" ? 2 : 1, bf = OO_S_GRAD_F[richness] || 1;
       const { rows, cols } = ooSimpleDims(st.cols, aspect), palette = opt.palette || ooPickPalette();
-      for (let tries = 0; tries < 8 && !r; tries++) r = ooSimpleGradRound(rows, cols, richness, palette && palette.colors, skill, mix, d * bf, k, Math.random);
+      for (let tries = 0; tries < 8 && !r; tries++) r = ooSimpleGradRound(rows, cols, richness, palette && palette.colors, skill, mix, d * bf, k, Math.random, safeBox, sim.richMode);
       if (r) Object.assign(r, { axis, judg: axis, mix, bf: r.gridType && r.gridType !== "flat" ? bf : 1, paletteSource: palette });
     }
     // a run always starts chill and ramps toward the real, persisted skill over its first ~20 rounds (David,
     // 2026-10-11) -- st.cols itself (the true skill ratchet, tracked on accuracy) is untouched by this; only
     // what's fed into this round's size/richness band is ramped.
     const rampCols = ooSimpleRampCols(st.cols, st.round);
-    if (!r) r = ooSimpleRound({ model, cols: rampCols, round: st.round, aspect, palette: ooPickPalette() }, breather);
+    if (!r) r = ooSimpleRound({ model, cols: rampCols, round: st.round, aspect, palette: ooPickPalette(), safeBox, richMode: sim.richMode, multiOdd: sim.multiOdd, style: sim.style }, breather);
     const o = { feedback: true, tileNames: false, resolveOdd: true, enter, pauseCtl: {} };   // names live in the reveal now, never crowding gapless tiles
     if (!zen && sim.timer) o.timeLimit = ooSimpleTime(st.cols);
     curPauseCtl = o.pauseCtl;
@@ -1038,32 +1071,49 @@ function ooMap(opt = {}) {
     const board = ui.stage.querySelector(".oo-board");
     // a streak moment: a luminous sweep every 5 in a row, a slower bloom every 10
     if (res.ok && st.streak > 0 && st.streak % 5 === 0 && board) { const big = st.streak % 10 === 0; ooShimmer(board, big); buzz(big ? [12, 60, 12] : [8, 50, 8]); }
-    if (board) board.classList.add("oo-settle");
-    // the reveal: its own full-screen overlay, not a card over the board -- "remove the tiles entirely"
-    const rv = ooRevealHTML(r, res, sim.names);
-    const rvEl = document.createElement("div");
-    rvEl.className = "oo-reveal2" + (reduceMotion ? "" : " oo-in");
-    rvEl.dataset.ink = rv.fi;
-    rvEl.style.setProperty("--c", rv.fieldC);
-    // "Tap to continue" teaches the gesture for a player's first few reveals only (David, 2026-10-11)
-    const hintN = sim.revealHintN || 0, showHint = hintN < 3;
-    if (showHint) { sim.revealHintN = hintN + 1; save(); }
-    rvEl.innerHTML = `${rv.inset}
-      <div class="oo-rv2-names">${rv.names}</div>
-      <div class="oo-rv2-diffrow"><p class="oo-rv2-diff">${rv.diff}</p>${rv.seeIt}</div>
-      ${over ? `<p class="oo-rv2-end">See how you did ${ICON.arrow}</p>` : showHint ? `<p class="oo-rv2-hint">Tap to continue</p>` : ""}
-      ${rv.srcHTML}`;
-    el.appendChild(rvEl);
-    // the inset grows out of the odd tile it came from
-    ooRevealFlip({ foot: rvEl }, originOdd);
-    let gone = false;
-    const g2 = () => { if (gone) return; gone = true; rvEl.remove(); if (over) end(); else nextRound(); };
-    const srcBtn = rvEl.querySelector(".oo-rv2-src"); if (srcBtn && rv.link) srcBtn.onclick = e => { e.stopPropagation(); if (rv.link.kind === "painting") location.hash = "#/painting/" + String(rv.link.id).replace(/^painting-/, ""); else if (rv.link.kind === "look") location.hash = "#/look/" + rv.link.id; };
-    // tap anywhere advances -- only the inset, the two names and the source are [data-swatch]/explicit links
-    // (and those are a small fraction of the screen now, not most of it), so this always fires on an open tap
-    rvEl.addEventListener("click", e => { if (!e.target.closest("[data-swatch],.oo-rv2-src,a")) g2(); });
-    if (!zen) later(() => { if (!gone) g2(); }, 2500);
+    const proceed = () => { if (over) end(); else nextRound(); };
+    const showReveal = () => {
+      if (board) board.classList.add("oo-settle");
+      // the reveal: its own full-screen overlay, not a card over the board -- "remove the tiles entirely"
+      const rv = ooRevealHTML(r, res, sim.names);
+      const rvEl = document.createElement("div");
+      rvEl.className = "oo-reveal2" + (reduceMotion ? "" : " oo-in");
+      rvEl.dataset.ink = rv.fi;
+      rvEl.style.setProperty("--c", rv.fieldC);
+      // "Tap to continue" teaches the gesture for a player's first few reveals only (David, 2026-10-11)
+      const hintN = sim.revealHintN || 0, showHint = hintN < 3;
+      if (showHint) { sim.revealHintN = hintN + 1; save(); }
+      rvEl.innerHTML = `${rv.inset}
+        <div class="oo-rv2-names">${rv.names}</div>
+        <div class="oo-rv2-diffrow"><p class="oo-rv2-diff">${rv.diff}</p>${rv.seeIt}</div>
+        ${over ? `<p class="oo-rv2-end">See how you did ${ICON.arrow}</p>` : showHint ? `<p class="oo-rv2-hint">Tap to continue</p>` : ""}
+        ${rv.srcHTML}`;
+      el.appendChild(rvEl);
+      // the inset grows out of the odd tile it came from
+      ooRevealFlip({ foot: rvEl }, originOdd);
+      let gone = false;
+      const g2 = () => { if (gone) return; gone = true; rvEl.remove(); proceed(); };
+      const srcBtn = rvEl.querySelector(".oo-rv2-src"); if (srcBtn && rv.link) srcBtn.onclick = e => { e.stopPropagation(); if (rv.link.kind === "painting") location.hash = "#/painting/" + String(rv.link.id).replace(/^painting-/, ""); else if (rv.link.kind === "look") location.hash = "#/look/" + rv.link.id; };
+      // tap anywhere advances -- only the inset, the two names and the source are [data-swatch]/explicit links
+      // (and those are a small fraction of the screen now, not most of it), so this always fires on an open tap
+      rvEl.addEventListener("click", e => { if (!e.target.closest("[data-swatch],.oo-rv2-src,a")) g2(); });
+      if (!zen) later(() => { if (!gone) g2(); }, 2500);
+    };
     buzz(res.ok ? (zen ? 8 : 10) : [10, 40, 10]);
+    if (res.ok) {
+      // "Show colors between rounds" off (David, 2026-10-11): a correct tap already got its ripple + resolve
+      // animation when it was tapped (ooAsk's finish()); skip the reveal card and melt straight into the next
+      // board instead of stopping to show it again.
+      if (!sim.reveal) { if (board) board.classList.add("oo-settle"); later(() => proceed(), reduceMotion ? 0 : 420); return; }
+      showReveal();
+    } else {
+      // a miss: hold the marked board for a beat before moving on -- the tapped tile already has its ".miss"
+      // outline and the correct tile(s) their ".ring" pulse (ooAsk's finish()/reveal()), so this is the window
+      // to actually see them (David, 2026-10-11: "it should show you where you failed and what the correct
+      // answer would be"). With the reveal off, the marks ARE the whole lesson, so they still get their beat
+      // even though no reveal card follows.
+      later(() => { if (sim.reveal) showReveal(); else proceed(); }, 1200);
+    }
   }
   function end() { document.removeEventListener("visibilitychange", ooGhostCleanup); ooSimpleEnd(zen, startTh, model, st, z => ooMap({ zen: z })); }
   nextRound();
