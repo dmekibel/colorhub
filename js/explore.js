@@ -45,7 +45,14 @@ function pin(n, extra = {}) {
   }
   if (n.kind === "painting") {
     const ar = n.w && n.h ? n.h / n.w : .78, src = n.thumb || n.img;
-    return { h: 167 * ar + 64 + (why ? 44 : 0), html: `<button class="pin pin-art" data-pin="${id}">${badge}${src ? `<img src="${esc(src)}" alt="" loading="lazy" style="aspect-ratio:${(1 / ar).toFixed(3)}">` : `<span class="noimg"></span>`}
+    // A hotlinked image that 404s/403s (a broken museum URL, a dead redirect, hotlink protection) used to leave
+    // iOS's bare "?" placeholder sitting in the grid -- the palette strip right below it proves the data is fine,
+    // only the pixel fetch failed. onerror swaps the <img> for the same .noimg field the "no image at all" case
+    // already uses, tinted to this pin's own dominant color instead of the plain neutral (David, 2026-10-10: a
+    // failed image should read as a calm color field, not a broken icon).
+    const fb = esc(((n.palette || [])[0] || {}).h || "#8a8a82");
+    const noimg = `<span class="noimg" style="--c:${fb};aspect-ratio:${(1 / ar).toFixed(3)}"></span>`;
+    return { h: 167 * ar + 64 + (why ? 44 : 0), html: `<button class="pin pin-art" data-pin="${id}">${badge}${src ? `<img src="${esc(src)}" alt="" loading="lazy" style="aspect-ratio:${(1 / ar).toFixed(3)}" onerror="this.outerHTML='${noimg.replace(/'/g, "\\'").replace(/"/g, "&quot;")}'">` : noimg}
       ${(n.palette || []).length ? `<span class="mini-pal">${n.palette.map(c => `<i style="--c:${c.h};flex:${c.share}"></i>`).join("")}</span>` : ""}<b>${esc(n.title)}</b><small>${esc(n.artist || "")}${n.year ? " · " + esc(n.year) : ""}</small>${why}</button>` };
   }
   if (n.kind === "story") {

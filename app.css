@@ -420,7 +420,7 @@ html.sheet-open body{position:fixed;left:0;right:0;overflow:hidden}
 .own-dot{position:absolute;top:10px;right:10px;width:6px;height:6px;border-radius:50%;background:currentColor}
 .pin-badge{display:block;font:italic 400 17px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--soft);margin-bottom:7px}
 .pin-why{font-size:13px;line-height:1.4;color:var(--soft);margin-top:7px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.pin-art img,.pin-art .noimg{width:100%;display:block;object-fit:cover;background:var(--lift);border-radius:var(--r-1)}
+.pin-art img,.pin-art .noimg{width:100%;display:block;object-fit:cover;background:var(--c,var(--lift));border-radius:var(--r-1)}
 .pin-art .noimg{aspect-ratio:4/3}
 .pin-art .mini-pal{margin:6px 0 8px}
 .pin-art b{display:block;font:400 20px/1.02 var(--serif)}
