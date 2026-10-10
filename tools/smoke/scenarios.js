@@ -5700,6 +5700,23 @@ scenario("favs", "a painting's heart (now in the top bar) and a double-tap on th
   await t.click(".fva-grid .fva-pin", { wait: 900 });
   await t.waitFor(() => /#\/gallery\/8136/.test(t.w.location.hash), 10000, "a kept painting to open");
 });
+// David, 2026-10-10: "same favs store, appear in Studio's Kept" -- a Design object or a photograph hearted
+// anywhere (its own grid, or the map's bottom card) lands in js/favs.js's generic fvItem* store, and Studio's
+// Kept shelf (favShelf) shows it under its own "Archives" category, same as Paintings has its own.
+scenario("favs", "a design object hearted from its grid shows up in Studio's Kept, under Archives", async t => {
+  await t.open("#/design/browse", { settle: 900 });
+  await t.waitFor("#doBrFeed [data-fvi]", 15000, "a Keep heart on a tile");
+  const tile = t.$$("#doBrFeed [data-pin]")[0], id = tile.dataset.pin;
+  await t.click(tile.querySelector("[data-fvi]"), { wait: 500 });
+  t.expect(t.ev("Object.keys(S.favItem || {}).length") === 1, "hearting a tile didn't add to S.favItem");
+  // the only kept kind so far is Archives, so favShelf() goes straight to its shelf -- no tab bar to choose from
+  // (same minimalist rule every other single-kind case already follows, e.g. "nothing kept but paintings")
+  t.ev("S.fvCat = 'all'; save(); favShelf()");
+  await t.waitFor(".fva-grid [data-fvi-open]", 6000, "the Archives grid");
+  t.expect(t.ev("fvCatNow(fvCats())") === "archives", `expected the shelf to land on archives, got "${t.ev("fvCatNow(fvCats())")}"`);
+  await t.click(`[data-fvi-open="${id}"]`, { wait: 900 });
+  await t.waitFor(() => t.text(".p-title").length > 0 && !t.$(".fv-cat-archives"), 10000, "the kept object's own page to open");
+});
 
 // ---------- the bubble <-> page move and the exact return (js/mapxfer.js, honey.js HONEY_RET; David, 2026-10-08) ----------
 const MXT = {

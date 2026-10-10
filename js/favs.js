@@ -568,7 +568,7 @@ document.addEventListener("click", e => {
 // its count. The choice is remembered (S.fvCat). Each kind keeps its natural layout: colors on their honeycomb with
 // the ranking tools (the shelf as it was), paintings as a picture grid, palettes as strips, pages as rows. All shows
 // one short section per kind, in that order, never one mixed list.
-const FV_CATS = [["all", "All"], ["colors", "Colors"], ["paintings", "Paintings"], ["palettes", "Palettes"], ["pages", "Pages"]];
+const FV_CATS = [["all", "All"], ["colors", "Colors"], ["paintings", "Paintings"], ["archives", "Archives"], ["palettes", "Palettes"], ["pages", "Pages"]];
 // what Explore's ♡ kept (S.saved): the wiki graph only exists once the wiki has loaded; until then those wait
 function fvSavedNodes() {
   if (!(S.saved || []).length || typeof wikiReady !== "function" || !wikiReady()) return [];
@@ -577,7 +577,7 @@ function fvSavedNodes() {
 const fvSavedPaintings = () => fvSavedNodes().filter(n => n.kind === "painting" && n.img);
 const fvSavedPages = () => fvSavedNodes().filter(n => n.kind !== "painting");
 function fvCats() {
-  const n = { colors: fvCount(), paintings: fvArtCount() + fvSavedPaintings().length, palettes: (S.palettes || []).length, pages: fvSavedPages().length };
+  const n = { colors: fvCount(), paintings: fvArtCount() + fvSavedPaintings().length, archives: (typeof fvItemCount === "function" ? fvItemCount() : 0), palettes: (S.palettes || []).length, pages: fvSavedPages().length };
   const have = FV_CATS.filter(([k]) => k !== "all" && n[k] > 0).map(([k, t]) => ({ k, t, n: n[k] }));
   return have.length > 1 ? [{ k: "all", t: "All", n: have.reduce((a, c) => a + c.n, 0) }, ...have] : have;
 }
@@ -612,7 +612,14 @@ function fvPartPages(lim) {
   const hexOf = n => n.palette && n.palette.length ? n.palette[0].h : n.cover && n.cover.length ? n.cover[0] : n.swatches && n.swatches.length ? (n.swatches[0].h || n.swatches[0]) : "#3A3630";
   return `<div class="fv-pages">${show.map(n => `<button class="fv-pg" data-fvnode="${esc(n.id)}"><i style="--c:${esc(hexOf(n))}"></i><b>${esc(n.title)}</b>${ICON.chev}</button>`).join("")}</div>`;
 }
-const FV_PARTS = { colors: [fvPartColors, 12], paintings: [fvPartPaintings, 6], palettes: [fvPartPalettes, 4], pages: [fvPartPages, 5] };
+// every other browsable archive's own Kept (David, 2026-10-10: "same favs store, appear in Studio's Kept") --
+// js/favs.js's generic fvItemList(), any kind, newest first; opens through fvItemOpen (which already knows how
+// to reach Design objects/Photography's own page, whichever it is).
+function fvPartArchives(lim) {
+  const list = typeof fvItemList === "function" ? fvItemList() : [], show = lim ? list.slice(0, lim) : list;
+  return `<div class="fva-grid">${show.map(r => `<button class="fva-pin" data-fvi-open="${esc(r.id)}" data-fvi-kind="${esc(r.kind)}" aria-label="${esc(r.t)}">${fvItemThumb(r)}<b>${esc(r.t)}</b><small>${esc([r.a, r.y].filter(Boolean).join(" · "))}</small></button>`).join("")}</div>`;
+}
+const FV_PARTS = { colors: [fvPartColors, 12], paintings: [fvPartPaintings, 6], archives: [fvPartArchives, 6], palettes: [fvPartPalettes, 4], pages: [fvPartPages, 5] };
 // every kind but Colors (which keeps the full shelf above): All, Paintings, Palettes, Pages
 function fvCatShelf(cat, cats, back) {
   const kinds = cats.filter(c => c.k !== "all"), one = kinds.find(c => c.k === cat);
