@@ -354,6 +354,12 @@ function ooAsk(ui, r, o = {}) {
     const { q, stage, foot } = ui, v = r.v, tap = ["one", "pair", "group", "twins", "which"].includes(v);
     q.textContent = o.teach ? o.teach : r.b === "painting" ? "Which patch was recolored?" : o.flash ? "Remember the board" : v === "one" && r.k > 1 ? `${OO_NUM_W[r.k] || r.k} tiles are different. Find them all.` : OO_Q[v] || OO_Q.one;
     stage.innerHTML = ooBoardHTML(r, o);
+    // Square board (David, live-build bug: "very tall rectangular tiles... I don't like this tall shape"):
+    // .oo-simple .drill-stage stretches its child edge to edge for the Full-screen board (oo-full), but that
+    // same stretch was also stretching the centered, aspect-ratio-boxed Square board to the full viewport
+    // height, overriding its own square sizing and distorting every tile into a tall rectangle. The stage only
+    // stretches for a genuinely full-bleed round now; Square gets the plain centered box back (css/games.css).
+    if (r.full != null) stage.classList.toggle("oo-stage-square", r.full === false);
     const board = stage.querySelector(".oo-board"), tiles = [...board.querySelectorAll(".oo-t")];
     ooEnterBoard(board, tiles, o.enter);
     let t0 = performance.now(), done = false, hint = false, sel = [];
@@ -884,6 +890,11 @@ const OO_S_AXIS_WORD = { hue: "Hue", light: "Value", chroma: "Saturation" };
 // picker). Rows are derived to stay near-square (ooSimpleDims).
 const OO_SIZE_PRESETS = [4, 5, 6, 8];
 const OO_SIZE_DEFAULT_IDX = 1;   // 5 columns -- "4x6" was David's own first-timer example
+// Square board (David, 2026-10-11 bug fix): the Full-screen chips above are indices into OO_SIZE_PRESETS and
+// drive sim.sizeIdx, but Square always starts from sim.squareCols directly (ooStartCols below) -- rendering
+// those SAME chips while in Square mode let a player tap one, see it highlight, and watch nothing happen,
+// because the tap only ever touched sizeIdx. Square gets its own preset list and writes squareCols itself.
+const OO_SQUARE_PRESETS = [5, 6, 7, 8, 9];
 // the real floor under "too small to be fun": no board ever grows (or starts, from the picker -- see below)
 // denser than one tile per ~50 CSS px of the stage's own width. On a 440-wide phone that's ~8 columns, matching
 // the explicit cap; a wider viewport (tablet, landscape) earns a little more room by the same rule.
@@ -896,16 +907,25 @@ function ooGrowCap(ui) {
 function ooSizeLabel(size) { const d = ooSimpleDims(size, 1.6); return `${d.cols}×${d.rows}`; }
 // Square (Board setting or Classic, which implies it) starts from its own default (9, David 2026-10-11: "9x9
 // as Square's default size"), independent of the Full-screen chip picker.
-const ooStartCols = sim => (sim.board === "square" || sim.style === "classic") ? sim.squareCols : OO_SIZE_PRESETS[sim.sizeIdx];
+const ooIsSquareBoard = sim => sim.board === "square" || sim.style === "classic";
+const ooStartCols = sim => ooIsSquareBoard(sim) ? sim.squareCols : OO_SIZE_PRESETS[sim.sizeIdx];
 // the size picker (David, 2026-10-11: "a light pre-game choice... a row of 4-5 size chips... plus a 'Grows as
 // you play' toggle"), shared by the pre-game overlay and the pause menu so there's exactly one picker, not two.
+// David, live build bug: "the tile amount selector doesn't work" -- it showed the Full-screen chips (tied to
+// sizeIdx) even while Square was active, so a tap highlighted a chip but ooStartCols read squareCols instead
+// and never moved. The picker now renders (and writes) whichever value Board mode actually uses.
 function ooSizePickerHTML(sim, zen) {
   const growKey = zen ? "growZen" : "growArcade", grows = !!sim[growKey];
-  const chips = OO_SIZE_PRESETS.map((size, i) => {
-    const d = ooSimpleDims(size, 1.6), gr = Math.min(d.rows, 5), gc = Math.min(d.cols, 5);
-    return `<button class="oo-sizechip${i === sim.sizeIdx ? " on" : ""}" data-size="${i}">
+  const square = ooIsSquareBoard(sim);
+  const presets = square ? OO_SQUARE_PRESETS : OO_SIZE_PRESETS;
+  const chips = presets.map((size, i) => {
+    const d = square ? { rows: size, cols: size } : ooSimpleDims(size, 1.6);
+    const gr = Math.min(d.rows, 5), gc = Math.min(d.cols, 5);
+    const on = square ? size === sim.squareCols : i === sim.sizeIdx;
+    const label = square ? `${size}×${size}` : ooSizeLabel(size);
+    return `<button class="oo-sizechip${on ? " on" : ""}" data-size="${square ? size : i}">
       <span class="oo-sizeicon" style="--gc:${gc}">${Array.from({ length: gr * gc }, () => "<i></i>").join("")}</span>
-      <em>${ooSizeLabel(size)}</em>
+      <em>${label}</em>
     </button>`;
   }).join("");
   return `<div class="oo-sizepicker">
@@ -914,7 +934,11 @@ function ooSizePickerHTML(sim, zen) {
   </div>`;
 }
 function ooWireSizePicker(root, sim, onChange) {
-  root.querySelectorAll("[data-size]").forEach(b => b.onclick = () => { sim.sizeIdx = +b.dataset.size; save(); buzz(4); onChange(); });
+  const square = ooIsSquareBoard(sim);
+  root.querySelectorAll("[data-size]").forEach(b => b.onclick = () => {
+    if (square) sim.squareCols = +b.dataset.size; else sim.sizeIdx = +b.dataset.size;
+    save(); buzz(4); onChange();
+  });
   const gb = root.querySelector("[data-growkey]");
   if (gb) gb.onclick = () => { const k = gb.dataset.growkey; sim[k] = !sim[k]; save(); buzz(4); onChange(); };
 }
@@ -924,7 +948,10 @@ function ooPreviewBoard(ui, st, sim) {
   const aspect = ooStageAspect(ui.stage) || 1.6;
   const palette = sim.style === "classic" ? null : ooPickPalette();
   const r = ooSimpleRound({ model: ooS().model, cols: st.cols, round: 0, aspect, palette, richMode: sim.richMode, multiOdd: false, style: sim.style, board: sim.board }, false, Math.random);
-  if (r) ui.stage.innerHTML = ooBoardHTML(r, { feedback: true, tileNames: false });
+  if (r) {
+    ui.stage.innerHTML = ooBoardHTML(r, { feedback: true, tileNames: false });
+    ui.stage.classList.toggle("oo-stage-square", r.full === false);   // same Square/Full-screen stretch fix as ooAsk
+  }
 }
 // the state behind the simple game: the grid you're on, your rolling accuracy at that size, and Arcade or Zen
 function ooSimpleState() {
@@ -939,7 +966,7 @@ function ooSimpleState() {
   // Settings (David, 2026-10-11: "best of both worlds + modular") -- all remembered per player.
   if (o.style !== "classic") o.style = "gradient";   // Palette: Gradient (default) / Classic (one solid color, no palette)
   if (o.board !== "square") o.board = "full";        // Board shape (its own axis from Palette, 2026-10-11): Full screen (default) / Square (centered, margined, 9x9 default)
-  if (!Number.isInteger(o.squareCols) || o.squareCols < OO_S_MIN_COLS) o.squareCols = 9;
+  if (!Number.isInteger(o.squareCols) || o.squareCols < OO_SQUARE_PRESETS[0] || o.squareCols > OO_SQUARE_PRESETS[OO_SQUARE_PRESETS.length - 1]) o.squareCols = 9;
   if (o.richMode !== "rich") o.richMode = "subtle";  // Palette intensity: Subtle (default, 1-2 close harmonious stops) / Rich (the old skill-ladder up to 4 stops)
   if (o.multiOdd == null) o.multiOdd = false;        // multiple odd tiles: opt-in only ("selecting one is better than multiple")
   if (o.reveal !== false) o.reveal = true;           // "Show colors between rounds" -- off skips the reveal on a hit (a miss still gets its brief marks)
