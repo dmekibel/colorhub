@@ -307,6 +307,15 @@
 /* a hairline seam (David, 2026-10-11: "without cell outlines the game feels a bit off") -- not a gap, just a
    soft inset shade so tiles read as tiles while the field stays one continuous surface */
 .oo-full .oo-t{box-shadow:inset 0 0 0 .5px rgba(0,0,0,.16),inset 0 0 0 1px rgba(255,255,255,.035)}
+/* the tapped/correct marks, INSET instead of the app-wide outline+offset (David, 2026-10-11: "the outline is
+   broken" -- on this gapless, edge-to-edge board, an outline's positive offset pushes the stroke out into the
+   NEXT tile's own painted box, which is a separate sibling element and so clips or fully covers it depending on
+   paint order). An inset box-shadow is painted entirely inside the tile's own box, so it can never be clipped by
+   a neighbor regardless of DOM order, transform or the ripple/flip transition running at the same time. */
+.oo-full .oo-t.sel{outline:none;box-shadow:inset 0 0 0 3px var(--ink)}
+.oo-full .oo-t.ring{outline:none;box-shadow:inset 0 0 0 3px var(--good)}
+.oo-full .oo-t.miss{outline:none;box-shadow:inset 0 0 0 3px var(--bad)}
+.oo-full .oo-t.same{outline:none;box-shadow:inset 0 0 0 2px rgba(255,255,255,.75)}
 /* TRUE full-bleed (David, 2026-10-11: "remove the blurry background layer... full width... full height too --
    into the curved corners"): no inset, no second blurred layer. Reachability under the notch/home indicator/
    corners is handled at the round-generation level instead (ooSafeIdx in oo-engine.js never places the odd
@@ -336,6 +345,24 @@
 .oo-pset .item{text-align:left;padding:13px 16px;font:400 16px/1.2 var(--sans);color:var(--ink);background:transparent;border-bottom:1px solid rgba(236,232,223,.08);display:flex;justify-content:space-between;align-items:center}
 .oo-pset .item:last-child{border-bottom:0}
 @media (prefers-reduced-motion:reduce){.oo-pausefield,.oo-pausecard{transition:none}}
+/* the size picker (David, 2026-10-11, final word: a few fixed chips, not a continuous range -- "maybe the user
+   selects the size before the game"), shared by the pre-game sheet and the pause menu. */
+.oo-sizepicker{margin-bottom:18px;text-align:left}
+.oo-sizechips{display:flex;gap:8px;margin-bottom:8px}
+.oo-sizechip{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;border-radius:var(--r-2);background:var(--surface-2);transition:background .2s,transform .2s var(--spring)}
+.oo-sizechip.on{background:var(--ink)}
+.oo-sizechip:active{transform:scale(.94)}
+.oo-sizeicon{display:grid;grid-template-columns:repeat(var(--gc,3),5px);gap:2px}
+.oo-sizeicon i{width:5px;height:5px;border-radius:1px;background:var(--soft)}
+.oo-sizechip.on .oo-sizeicon i{background:var(--ground,#0E0D0B)}
+.oo-sizechip em{font:500 12px/1 var(--mono);font-style:normal;color:var(--soft)}
+.oo-sizechip.on em{color:var(--ground,#0E0D0B)}
+.oo-sizegrow{width:100%;border-radius:var(--r-2)}
+/* the pre-game sheet: the real board (at the last-used size) is already rendered and visible behind it -- this
+   just sits over the bottom, a light choice, not a setup screen (David, 2026-10-11) */
+.oo-pregame{position:fixed;inset:0;z-index:6;display:flex;align-items:flex-end;background:linear-gradient(180deg,transparent 0%,rgba(10,10,8,.55) 55%,rgba(10,10,8,.82) 100%)}
+.oo-pregame-sheet{width:100%;padding:20px 20px calc(var(--bottom) + 20px)}
+.oo-pregame-play{width:100%}
 
 /* ---------- the reveal (2026-10-11, redesigned around how a difference is actually seen and learned): the
    field color fills the screen; the odd color sits as a centered Albers-style inset square, where a subtle
@@ -372,8 +399,24 @@
    dividing entrance, the odd tile resolving into its true color, streak shimmer/bloom, a shake and a glow pulse,
    the reveal halves growing out of their own tiles. Everything here is transform/opacity/filter only (60fps,
    no layout thrash) and every rule below is switched off under prefers-reduced-motion. ---------- */
-.oo-ghost{pointer-events:none}
-.oo-ghost .oo-t.oo-melt{transition:opacity .42s var(--ease) var(--dl,0ms),transform .42s var(--ease) var(--dl,0ms),filter .42s var(--ease) var(--dl,0ms);opacity:0;transform:scale(.8);filter:blur(3px)}
+/* the round transition, rebuilt from scratch (David, 2026-10-11, "one simple, robust model"): the NEXT board is
+   fully computed and rendered at its real, final position before any animation runs (ooAsk already does this
+   synchronously). The OLD board is a single static snapshot (one clone, not per-tile), laid on top at its own
+   final rect, and the only thing that ever animates is that one layer's opacity, optionally revealed through a
+   radial mask growing from the tapped tile. There is no transform/scale/blur on the ghost any more -- those
+   made two layers blend into visibly wrong intermediate colors while both were partially visible, which is what
+   read as "a different arrangement, then it snaps". Nothing here ever triggers layout (opacity + mask only).
+   Removed on finish (ooGhostCleanup); only one is ever alive (OO_GHOST). */
+/* a plain opacity fade only -- no transform, no scale, no per-tile stagger, nothing that could read as a
+   "layout changing" while two layers are both partly visible. A radial mask growing from the tapped tile was
+   tried here too, but animating its radius needs the mask's custom property registered via @property to
+   interpolate smoothly at all (unregistered custom properties don't animate -- they'd jump straight from 0% to
+   full, which is exactly the "snap" this rebuild exists to remove), and @property's support is still uneven
+   enough on exactly the engine (WebKit/Safari) this needs to be bulletproof on that it isn't worth the risk for
+   a decorative flourish the spec itself called optional. A same-size round and a level-step round use the same
+   fade; the level-step additionally gets the new board's own "divide" entrance (ooEnterBoard) for its moment. */
+.oo-ghost{pointer-events:none;opacity:1;transition:opacity .3s linear}
+.oo-ghost.oo-ghost-out{opacity:0}
 .oo-t.oo-settle-in{animation:ooSettleIn .4s var(--spring) both;animation-delay:var(--dl,0ms)}
 @keyframes ooSettleIn{from{transform:scale(.72);opacity:0}to{transform:scale(1);opacity:1}}
 .oo-t.oo-divide-in{animation:ooDivideIn .48s var(--spring) both;animation-delay:var(--dl,0ms)}
@@ -386,7 +429,10 @@
 .oo-simple .oo-t.miss{animation:ooShake .32s var(--ease)}
 @keyframes ooShake{15%,45%,75%{transform:translateX(-4px)}30%,60%,90%{transform:translateX(4px)}100%{transform:translateX(0)}}
 .oo-simple .oo-t.ring{animation:ooGlowPulse .55s var(--ease)}
-@keyframes ooGlowPulse{0%{box-shadow:0 0 0 2px var(--good)}50%{box-shadow:0 0 0 2px var(--good),0 0 14px 5px var(--good)}100%{box-shadow:0 0 0 2px var(--good)}}
+/* inset throughout (matches the gapless board's own inset ring above -- David, 2026-10-11, "the outline is
+   broken"): the glow itself is a DROP shadow (unavoidably outward, it's a glow) layered after the inset ring, so
+   it can still bleed into a neighbor without clipping anything -- only the crisp ring stroke has to stay inset */
+@keyframes ooGlowPulse{0%{box-shadow:inset 0 0 0 3px var(--good)}50%{box-shadow:inset 0 0 0 3px var(--good),0 0 14px 5px var(--good)}100%{box-shadow:inset 0 0 0 3px var(--good)}}
 @media (prefers-reduced-motion:reduce){
   .oo-ghost{display:none}
   .oo-t.oo-settle-in,.oo-t.oo-divide-in,.oo-t.oo-shimmer-t,.oo-board.oo-bloom,.oo-simple .oo-t.miss,.oo-simple .oo-t.ring{animation:none}

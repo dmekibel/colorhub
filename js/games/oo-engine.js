@@ -858,11 +858,15 @@ const ooLerp = (a, b, t) => a + (b - a) * clamp(t, 0, 1);
 // the area it has to fill: >1 portrait, <1 landscape). David, 2026-10-10: "the board doesn't have to be
 // square... rows > columns on a phone (3x4, 4x6, 6x9 ... up to ~12x20)" -- this formula reproduces those
 // examples directly (size 4 -> 3x4, size 6 -> 4x6, size 9 -> 6x9, size 20 -> 13x20).
+// size is a COLUMN count (David, 2026-10-11: "closer to square is better... size options become columns, rows
+// derived to fill the height with near-square tiles") -- rows are derived straight from the real on-screen
+// aspect, not a fixed 1.6 guess, so (stageWidth/cols) / (stageHeight/rows) lands close to 1 by construction
+// instead of rounding away from square at small column counts the way a fixed-aspect guess did.
 function ooSimpleDims(size, aspect = 1.6) {
-  size = clamp(Math.round(size), OO_S_MIN_COLS, OO_S_MAX_COLS);
-  const a = Math.max(aspect, 1 / aspect), portrait = aspect >= 1;
-  const short = clamp(Math.round(size / a), 3, size);
-  return portrait ? { rows: size, cols: short } : { rows: short, cols: size };
+  const cols = clamp(Math.round(size), 3, OO_S_MAX_COLS);
+  const portrait = aspect >= 1, a = portrait ? aspect : 1 / aspect;
+  const rows = clamp(Math.round(cols * a), cols, OO_S_MAX_COLS * 3);
+  return portrait ? { rows, cols } : { rows: cols, cols: rows };
 }
 // a rows x cols grid of cells (fractions of the board, which simply fills its container -- David, 2026-10-11:
 // "the board doesn't have to be square"), unlike ooCells("grid", n, ...) above, which is always square.
@@ -965,11 +969,14 @@ function ooSimpleGridType(skill, round, rnd = Math.random, richMode = "subtle") 
 // 2026-10-11: "not ratchet up and stay tiny... some rounds bigger tiles, some smaller... always some variance
 // for fun and beauty"). A triangular-ish spread around the center, clamped to the grid's own min/max.
 const OO_S_BAND = 2;
-function ooSimpleRoundCols(centerCols, rnd = Math.random) {
+// lo/hi: the player's own chosen grid-size range (Settings, 2026-10-11 -- a dual-handle slider), defaulting to
+// the game's full OO_S_MIN_COLS..OO_S_MAX_COLS span. Every size this function (and the ramp/grow-shrink ratchet
+// below) can land on stays inside it.
+function ooSimpleRoundCols(centerCols, rnd = Math.random, lo = OO_S_MIN_COLS, hi = OO_S_MAX_COLS) {
   const w = [.06, .16, .56, .16, .06], r = rnd();
   let acc = 0, off = -OO_S_BAND;
   for (let i = 0; i < w.length; i++) { acc += w[i]; if (r <= acc) { off = i - OO_S_BAND; break; } }
-  return clamp(Math.round(centerCols + off), OO_S_MIN_COLS, OO_S_MAX_COLS);
+  return clamp(Math.round(centerCols + off), lo, hi);
 }
 // landing away from the band's center changes how hard a round reads from size and tile count alone, before any
 // color is even considered: bigger tiles (fewer cols than center) are easier to scan, so the color move itself
@@ -985,9 +992,9 @@ function ooSizeBiasMult(actualCols, centerCols) {
 // this ramped value in as ooSimpleRound's own "cols" ramps the gradient's richness and pull right along with the
 // grid size, since both already key off the same skill number -- one ramp, not two to keep in sync.
 const OO_S_RAMP_ROUNDS = 20, OO_S_RAMP_FLOOR = OO_S_MIN_COLS + 1;
-function ooSimpleRampCols(trueCols, round) {
+function ooSimpleRampCols(trueCols, round, lo = OO_S_MIN_COLS, hi = OO_S_MAX_COLS) {
   const t = clamp(round / OO_S_RAMP_ROUNDS, 0, 1);
-  return ooLerp(OO_S_RAMP_FLOOR, trueCols, t);
+  return clamp(ooLerp(Math.max(OO_S_RAMP_FLOOR, lo), clamp(trueCols, lo, hi), t), lo, hi);
 }
 // the expected color field. stopHexes: 2-4 real colors (a curated or favorite palette, picked in oo-ui.js);
 // cycles through them if a tier needs more stops than it was given. skill sets how far the sweep's own span
@@ -1151,30 +1158,33 @@ function ooSimpleGradRound(rows, cols, richness, stopHexes, skill, mix, d, k, rn
   }
   return null;
 }
-// one round of the simple game. state: { model, cols (the size index), round, aspect?, palette? (a curated or
-// favorite { colors, label, link } from oo-ui.js's pool, or null) }. breather: an easier round for rhythm.
-// state.cols is the band's CENTER for this round, not a literal size -- the caller (oo-ui.js) already ramps it
-// from a chill floor up to the real, persisted skill over a run's first ~20 rounds (ooSimpleRampCols). This
-// function draws the round's actual size from a small band around that center (ooSimpleRoundCols) and nudges
-// the color gap the opposite way (ooSizeBiasMult) so every member of the band is "just hard enough", not only
-// the center.
+// one round of the simple game. state: { model, cols (the board's own size, FIXED within a run -- see below),
+// round, aspect?, palette? (a curated or favorite { colors, label, link } from oo-ui.js's pool, or null) }.
+// breather: an easier round for rhythm.
+// David, 2026-10-11, final word on grid size (after round-to-round variance, then a ramp, were both tried and
+// read as "overwhelming... less zen"): the grid is picked before a run starts (oo-ui.js's pre-game size picker)
+// and stays FIXED for the whole run, difficulty coming only from color subtlety from here on -- except a slow,
+// one-row/col-at-a-time GROWTH every ~10-12 correct answers in Arcade (off by default in Zen), which oo-ui.js
+// drives by simply incrementing state.cols between rounds; this function never varies size on its own.
 function ooSimpleRound(state, breather, rnd = Math.random) {
   const richMode = state.richMode === "rich" ? "rich" : "subtle";
   const primary = ooSimpleAxis(state.model, rnd), d = ooSimpleD(state.model, primary, breather, rnd);
-  const mix = ooSimpleMix(primary, rnd), skill = ooSimpleSkill(state.cols);
+  const skill = ooSimpleSkill(state.cols);
+  const mix = ooSimpleMix(primary, rnd);
   // Classic (David, 2026-10-11, "best of both worlds": his girlfriend preferred the original -- "a 9x9 square
-  // board, one solid color, single tile"): same adaptive engine, safe zone, easiness ceiling, ramp and band
-  // variance as Gradient, just forced to a literal single base color on a square board, no palette/gradient.
+  // board, one solid color, single tile"): same adaptive engine, safe zone and easiness ceiling as Gradient,
+  // just forced to a literal single base color on a square board, no palette/gradient.
   const classic = state.style === "classic";
   const richness = classic ? "flat" : ooSimpleGridType(skill, state.round || 0, rnd, richMode);
-  const roundCols = ooSimpleRoundCols(state.cols, rnd), sizeBias = ooSizeBiasMult(roundCols, state.cols);
+  const gridLo = state.gridLo || OO_S_MIN_COLS, gridHi = state.gridHi || OO_S_MAX_COLS;
+  const roundCols = clamp(state.cols, gridLo, gridHi);
   const dims = classic ? { rows: roundCols, cols: roundCols } : ooSimpleDims(roundCols, state.aspect || 1.6);
   const { rows, cols } = dims;
   // multiple odd tiles are opt-in only now (David, 2026-10-11: "selecting one is better than multiple") --
   // state.multiOdd must be explicitly true (a Settings toggle, oo-ui.js) or every round is single-odd.
   const shape = state.multiOdd ? ooSimpleShape(rows * cols, rnd) : "one";
   const k = shape === "k4" ? Math.min(4, rows * cols - 1) : shape === "k2" ? 2 : 1;
-  const bf = (OO_S_GRAD_F[richness] || 1) * sizeBias, stopHexes = classic ? null : (state.palette && state.palette.colors);
+  const bf = OO_S_GRAD_F[richness] || 1, stopHexes = classic ? null : (state.palette && state.palette.colors);
   // the easiness ceiling: richness/size compensation can inflate d upward a lot (a rich board times a big-tile
   // round could otherwise clear 2x on its own), but the drawn gap this round actually plays at never exceeds
   // ~2.5x the player's own current threshold, nor an absolute ΔE00 that would read as an instant, obvious pop --
@@ -1196,11 +1206,12 @@ function ooSimpleRound(state, breather, rnd = Math.random) {
 // grid growth: a rolling window of the last OO_S_WINDOW results at the current size: grow on a hot streak, shrink
 // on a cold one, hold otherwise. The floor stops the gap from shrinking further, so this is the difficulty knob
 // once an axis is already sharp.
-function ooSimpleGrid(cols, acc) {
+function ooSimpleGrid(cols, acc, lo = OO_S_MIN_COLS, hi = OO_S_MAX_COLS) {
+  cols = clamp(cols, lo, hi);
   if (acc.length < OO_S_WINDOW) return cols;
   const rate = acc.reduce((a, b) => a + b, 0) / acc.length;
-  if (rate >= OO_S_GROW_AT) return Math.min(OO_S_MAX_COLS, cols + 1);
-  if (rate <= OO_S_SHRINK_AT) return Math.max(OO_S_MIN_COLS, cols - 1);
+  if (rate >= OO_S_GROW_AT) return Math.min(hi, cols + 1);
+  if (rate <= OO_S_SHRINK_AT) return Math.max(lo, cols - 1);
   return cols;
 }
 

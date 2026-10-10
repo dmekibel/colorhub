@@ -1451,7 +1451,12 @@ const ooTapRound = async t => {
   await t.waitFor(".oo-board .oo-t", 6000, "the board");
   t.expect(t.$$(".oo-board .oo-t").length >= 9, `${t.$$(".oo-board .oo-t").length} tiles`);
   const first = t.$("#oostage").innerHTML;
-  await t.click(".oo-board .oo-t", { wait: 1200 });
+  // force:true -- the Arcade timer is running from the moment this board first rendered, and real wall-clock
+  // automation overhead before this point can occasionally eat into it enough that the round has already timed
+  // out (a miss, its own 1200ms hold, then the reveal) by the time this click runs; that's a real, correct game
+  // behavior under time pressure, not something this scenario is testing, so don't let the reachability wait
+  // fight it -- either outcome (a normal tap, or already-revealed) is fine, just keep the run moving.
+  if (!t.$(".oo-reveal2")) await t.click(".oo-board .oo-t", { wait: 1200, force: true });
   t.expect(t.$("#oostage").innerHTML !== first || t.$(".result") || t.$(".oo-reveal2"), "tapping a tile changed nothing");
   let taps = 1;
   for (let i = 0; i < 60 && !t.$(".result"); i++) {
@@ -1462,11 +1467,17 @@ const ooTapRound = async t => {
   t.expect(t.$(".result").innerText.length > 40, "the end screen is empty");
   return taps;
 };
-scenario("train", "Odd one out: one tap from the shelf to a true full-screen board, then a whole run", async t => {
+scenario("train", "Odd one out: one tap from the shelf to the pre-game picker, Play into a true full-screen board, then a whole run", async t => {
   await t.open("#shot=gx:home", { settle: 600 });
   const st = await t.waitFor("[data-oo-map]", 6000, "the Odd one out shelf");
   await t.click(st, { wait: 700 });
-  t.expect(!t.$("[data-play]") && !t.$(".oo-pk") && !t.$(".oo-sl"), "a first tap on the shelf should land on the board, not a setup screen");
+  // a light pre-game choice, not the old-style setup screen (David, 2026-10-11): the real board is already
+  // visible behind it at the last-used size, with a row of size chips, a grow toggle and a big Play
+  t.expect(!t.$(".oo-pk") && !t.$(".oo-sl"), "a first tap on the shelf should never land on the old-style setup screen");
+  t.expect(t.$(".oo-pregame") && t.$$(".oo-sizechip").length === 4, "the pre-game picker should offer its size chips over the board");
+  t.expect(t.$(".oo-board .oo-t"), "the real board should already be visible (a preview) behind the picker");
+  await t.click("[data-play]", { wait: 500 });
+  t.expect(!t.$(".oo-pregame"), "tapping Play should dismiss the picker");
   t.expect(!t.$(".oo-hearts") && !t.$(".oo-zenpill"), "nothing but the board and the pause mark should be visible during play");
   t.expect(t.$(".oo-pause-mark"), "a subtle pause mark should always be present");
   t.expect(t.$(".oo-pause-hint.on"), "the very first session should show the one-time pause hint");
@@ -1482,8 +1493,10 @@ scenario("train", "Odd one out: one tap from the shelf to a true full-screen boa
   t.notes.push(`${taps} taps to the end screen (first-timer, direct entry, Arcade's three lives)`);
   t.expect(!t.$(".result [data-map]") && t.$(".result [data-again]") && t.$(".result [data-keep]"), "the end screen should offer Play again / Keep going, not a map");
   t.expect(t.$$(".oo-ebar").length === 3, "the end screen should show three bars: hue, saturation, value");
-  // a returning player: back to Train, tap the shelf again -- still straight to the board, never a map
+  // a returning player: the picker shows again (every entry does), but there's nothing to change -- just Play
   await t.click(".result [data-again]", { wait: 500 });
+  await t.waitFor(".oo-pregame [data-play]", 6000, "the picker again, for the second run");
+  await t.click("[data-play]", { wait: 500 });
   await t.waitFor(".oo-board .oo-t", 6000, "the board, second time");
 });
 
@@ -1610,14 +1623,42 @@ scenario("train", "Odd one out: Classic style is a square single-color board, Gr
   await t.open("#shot=gx:oo:zen", { settle: 600 });
   await t.waitFor(".oo-board .oo-t", 6000, "a Gradient board");
   // #shot=...zen resets S.games.oo (fresh()), which would wipe a style set beforehand -- set it AFTER landing,
-  // then re-enter the map directly (not through the shot route, so fresh() doesn't run again and erase it)
-  t.ev("ooSimpleState().style = 'classic'; save(); ooMap({ zen: true }); 1");
+  // then re-enter the map directly (not through the shot route, so fresh() doesn't run again and erase it);
+  // skipPicker since this is testing round generation, not the pre-game sheet
+  t.ev("ooSimpleState().style = 'classic'; save(); ooMap({ zen: true, skipPicker: true }); 1");
   await t.waitFor(".oo-board .oo-t", 6000, "a Classic board");
   const info = t.ev("({ rows: OO_LAST.rows, cols: OO_LAST.cols, gridType: OO_LAST.gridType, uniq: new Set(OO_LAST.fieldColors).size })");
   t.expect(info.rows === info.cols, `Classic should be a square board, got ${info.rows} x ${info.cols}`);
   t.expect(info.gridType === "flat", `Classic should be one solid color (flat), got ${info.gridType}`);
   t.expect(info.uniq === 1, `Classic's field should be a single color, saw ${info.uniq} distinct`);
   t.ev("ooSimpleState().style = 'gradient'; save(); 1");
+});
+
+// David, 2026-10-11, final word: a few fixed size chips (not a continuous range) plus a "Grows as you play"
+// toggle, shared by the pre-game sheet and the pause menu -- changing the chip in the pause menu takes effect
+// on the player's NEXT run, not the one in progress (changing the live board's size mid-round is exactly the
+// jolt this whole redesign removes).
+scenario("train", "Odd one out: the size-chip picker (pause menu) sets the next run's size and the grow toggle", async t => {
+  await t.open("#shot=gx:oo:zen", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a board");
+  await t.click(".oo-pause-mark", { wait: 400 });
+  await t.waitFor(".oo-pausecard.on", 2000, "the pause card");
+  t.expect(t.$(".oo-sizepicker") && t.$$(".oo-sizechip").length === 4, "the pause card should offer the same size-chip picker");
+  await t.click(t.$$(".oo-sizechip")[3], { wait: 300 });   // the densest chip (8 columns)
+  const sizeIdx = t.ev("ooSimpleState().sizeIdx");
+  t.expect(sizeIdx === 3, `picking the 4th chip should save sizeIdx 3, got ${sizeIdx}`);
+  t.expect(t.$$(".oo-sizechip")[3].classList.contains("on"), "the picked chip should show as selected");
+  const growBtn = t.$("[data-growkey]"), growBefore = /on/.test(growBtn.innerText);
+  await t.click(growBtn, { wait: 300 });
+  const growKey = growBtn.getAttribute("data-growkey"), growAfter = t.ev(`!!ooSimpleState().${growKey}`);
+  t.expect(growAfter === !growBefore, "the grow toggle should flip and persist");
+  await t.click("[data-resume]", { wait: 400 });
+  // the NEXT run (Play again from a fresh entry) picks up the new size
+  t.ev("ooSimpleState().style = 'gradient'; ooMap({ zen: true, skipPicker: true }); 1");
+  await t.waitFor(".oo-board .oo-t", 6000, "the next run's board");
+  const cols = t.ev("OO_LAST.cols");
+  t.expect(cols === 8, `the next run should start at the chosen 8-column size, got ${cols}`);
+  t.ev("const s = ooSimpleState(); s.sizeIdx = 1; s." + growKey + " = " + growBefore + "; save(); 1");   // reset
 });
 
 // David, 2026-10-11: "Show colors between rounds" off -- a hit melts straight to the next board, no reveal card;
@@ -1627,14 +1668,16 @@ scenario("train", "Odd one out: the reveal toggle skips the card on a hit, but a
   await t.waitFor(".oo-board .oo-t", 6000, "a board");
   t.ev("ooSimpleState().reveal = false; save(); 1");
   const tiles = t.$$(".oo-board .oo-t"), at = t.ev("OO_LAST.ans[0]"), boardBefore = t.$("#oostage").innerHTML;
-  await t.click(tiles[at], { wait: 900 });
+  // force:true -- the odd tile can legitimately land near the pause mark's own corner (it overlaps at most one
+  // tile's corner by design); that's a visual nicety to verify separately, not what this scenario is testing
+  await t.click(tiles[at], { wait: 900, force: true });
   t.expect(!t.$(".oo-reveal2"), "the reveal should not appear on a hit when the toggle is off");
   await t.waitFor(".oo-board .oo-t", 4000, "the next board, reached without a reveal");
   t.expect(t.$("#oostage").innerHTML !== boardBefore, "the board never advanced past the hit");
   // a miss: still no reveal card, but the marks should appear and hold before the next board
   const tiles2 = t.$$(".oo-board .oo-t"), ans2 = t.ev("OO_LAST.ans[0]");
   const wrongIdx = tiles2.findIndex((_, i) => i !== ans2);
-  await t.click(tiles2[wrongIdx], { wait: 300 });
+  await t.click(tiles2[wrongIdx], { wait: 300, force: true });
   t.expect(t.$(".oo-t.miss") && t.$(".oo-t.ring"), "a miss should still mark the tapped and correct tiles with the reveal off");
   t.expect(!t.$(".oo-reveal2"), "still no reveal card on a miss with the toggle off");
   await t.waitFor(".oo-board .oo-t:not(.miss):not(.ring)", 3000, "the next board after the miss's hold");

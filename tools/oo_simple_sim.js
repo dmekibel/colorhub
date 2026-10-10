@@ -28,19 +28,22 @@ const TEST_PALETTES = [
   { colors: ["#0B3D3A", "#2E7D6B", "#8FBF8A"] },
   { colors: ["#1A1A2E", "#C9A227"] },
 ];
-function run(truths, size0, seed, n = 400, aspect = 1.6, richMode = "subtle") {
+// David, 2026-10-11, final word on grid size: FIXED for a whole run (no band, no ramp) -- the player picks it
+// before the run (size0) -- except a slow, one-column-at-a-time GROWTH every ~10-12 correct (not necessarily
+// consecutive), Arcade only by default, capped (gridHi, a phone-appropriate ~8 columns, never the engine's own
+// abstract 3-20 scale). grows=false reproduces Zen's own default (never changes on its own).
+function run(truths, size0, seed, n = 400, aspect = 1.6, richMode = "subtle", gridHi = 8, grows = true) {
   const rnd = E.ooRnd(seed);
   const model = E.ooModel({});
-  let size = size0, acc = [];
+  let size = size0, hits = 0, hitsAtGrow = 0, growAt = 10 + Math.floor(rnd() * 3), grewCount = 0;
   const hist = [];
   let subFloor = 0, floorRounds = 0, drawCount = 0, gradRounds = 0, gradEarly = 0, richCount = { flat: 0, grad1: 0, grad2: 0, grad3: 0 }, worstNeighborRatio = 0;
   for (let t = 0; t < n; t++) {
     const breather = t > 0 && t % 5 === 4;
     let r = null;
-    const rampCols = E.ooSimpleRampCols(size, t);   // same ramp js/games/oo-ui.js applies: chill start, builds over a run
     for (let tries = 0; tries < 6 && !r; tries++) {
       const palette = TEST_PALETTES[Math.floor(rnd() * TEST_PALETTES.length)];
-      r = E.ooSimpleRound({ model, cols: rampCols, round: t, aspect, palette, richMode }, breather, rnd);
+      r = E.ooSimpleRound({ model, cols: size, round: t, aspect, palette, richMode }, breather, rnd);
     }
     if (!r) continue;   // an unlucky draw (rare): skip, same as the UI would retry
     drawCount++;
@@ -67,12 +70,13 @@ function run(truths, size0, seed, n = 400, aspect = 1.6, richMode = "subtle") {
     const ok = rnd() < E.ooP(effAct, blendTruth, r.g || 0);
     const dom = Object.keys(mix).reduce((best, a) => mix[a] > mix[best] ? a : best, Object.keys(mix)[0]);
     if (E.OO_AXES.includes(dom)) E.ooUpdate(model, dom, null, effAct, ok, r.g || 0);
-    acc.push(ok ? 1 : 0); if (acc.length > E.OO_S_WINDOW) acc.shift();
-    const next = E.ooSimpleGrid(size, acc);
-    if (next !== size) { size = next; acc = []; }
+    if (ok) {
+      hits++;
+      if (grows && size < gridHi && hits - hitsAtGrow >= growAt) { size++; grewCount++; hitsAtGrow = hits; growAt = 10 + Math.floor(rnd() * 3); }
+    }
     hist.push({ t, axis: r.axis, act: r.act, ok, size, rows: r.rows, cols: r.cols, shape: r.v, gridType: r.gridType });
   }
-  return { model, hist, subFloor, floorRounds, drawCount, gradRounds, gradEarly, richCount, worstNeighborRatio };
+  return { model, hist, subFloor, floorRounds, drawCount, gradRounds, gradEarly, richCount, worstNeighborRatio, grewCount };
 }
 const accOf = (hist, from, to) => { const s = hist.slice(from, to); return s.length ? s.filter(x => x.ok).length / s.length : 0; };
 
@@ -86,7 +90,7 @@ console.log("== A typical eye (hue 1.8, value 1.3, saturation 2.3 ΔE00) ==");
   console.log(`  rounds 16-50:  ${(accOf(hist, 15, 50) * 100).toFixed(0)}% right`);
   console.log(`  rounds 51-400: ${(accOf(hist, 50, 400) * 100).toFixed(0)}% right`);
   E.OO_AXES.forEach(a => { const th = Math.exp(model.j[a] ? model.j[a].r : Math.log(E.OO_START[a])); console.log(`  ${a.padEnd(7)} estimate ${th.toFixed(2)} (true ${truths[a]})`); });
-  console.log(`  board reached by round 400: ${last.rows} x ${last.cols} (started 3 x 4-ish, cap ~${E.OO_S_MAX_COLS} the long way)`);
+  console.log(`  board reached by round 400: ${last.rows} x ${last.cols} (started at 3 columns, grows to the 8-column phone cap)`);
   // Subtle is the default now (David, 2026-10-11: "less palettes and more subtle gradients as the default") --
   // almost every round is grad1 (1-2 close, harmonious stops), grad2 only occasionally, grad3 essentially never
   // outside Rich mode (checked in its own block below).
@@ -123,14 +127,14 @@ console.log("\n== A very sharp eye (hue 0.5, value 0.4, saturation 0.5 ΔE00, al
   console.log(`  rounds 51-400: ${(accOf(hist, 50, 400) * 100).toFixed(0)}% right (near-ceiling is expected: the floor is easier than this eye needs)`);
   console.log(`  rounds drawn near the visibility floor (within 1.5x it): ${floorRounds} of ${drawCount}`);
   console.log(`  gradient rounds: ${gradRounds} of ${drawCount} (~${(gradRate * 100).toFixed(0)}%); richness flat/grad1/grad2/grad3: ${richCount.flat || 0}/${richCount.grad1 || 0}/${richCount.grad2 || 0}/${richCount.grad3 || 0} -- richer and steeper on average than the typical eye's`);
-  console.log(`  board reached by round 400: ${last.rows} x ${last.cols} (should hit the ${E.OO_S_MAX_COLS}-long cap: once the floor binds, size is the only difficulty lever left)`);
+  console.log(`  board reached by round 400: ${last.rows} x ${last.cols} (should hit the 8-column phone cap: once the floor binds, size is the only difficulty lever left)`);
   console.log(`  rounds drawn below the visibility floor: ${subFloor} (must be 0)`);
   if (subFloor > 0) { console.log(`FAIL: ${subFloor} rounds drawn below their axis's visibility floor`); fail = true; }
   // richness is now a real difficulty lever of its own (a richer ground gets a bigger bf-compensated gap even
   // when the raw per-axis estimate has hit its floor), so "near the floor" is rarer than before gradients became
   // the default -- the hard requirement is subFloor === 0 above; this is just a sanity floor on top of that.
   if (floorRounds < drawCount * .1) { console.log("FAIL: a sharp eye should still spend some rounds near the floor, not scaling up with true ability"); fail = true; }
-  if (Math.max(last.rows, last.cols) !== E.OO_S_MAX_COLS) { console.log(`FAIL: a sharp eye never reached the ${E.OO_S_MAX_COLS}-long cap`); fail = true; }
+  if (last.cols !== 8) { console.log(`FAIL: a sharp eye never reached the 8-column phone cap, stopped at ${last.cols}`); fail = true; }
   if (gradRate < .85) { console.log(`FAIL: gradient rate ${(gradRate * 100).toFixed(0)}% is too low for a sharp eye too`); fail = true; }
 }
 console.log("\n== Rich mode (the Settings opt-in): richer tiers become available again ==");
@@ -142,23 +146,30 @@ console.log("\n== Rich mode (the Settings opt-in): richer tiers become available
   if (!richCount.grad3) { console.log("FAIL: Rich mode never once drew the richest gradient tier in 400 rounds"); fail = true; }
   if (worstNeighborRatio > .5) { console.log(`FAIL: Rich mode's neighbor step reached ${(worstNeighborRatio * 100).toFixed(0)}% of the odd tile's own move`); fail = true; }
 }
-console.log("\n== A returning player (high persisted skill, fresh run) ==");
+console.log("\n== Grid size is fixed per run except a slow, monotonic growth (David, 2026-10-11, final word) ==");
 {
-  // David, 2026-10-11: "every new run... starts chill -- few, large tiles... then ramps... regardless of saved
-  // skill". Start the sim at a near-max size (as if loaded from a long history) and check the first few rounds
-  // are small anyway, then climb back toward that skill over ~15-25 rounds.
-  const truths = { hue: 1.8, light: 1.3, chroma: 2.3 }, savedSkill = E.OO_S_MAX_COLS - 2;
-  const { hist } = run(truths, savedSkill, 99001, 60);
-  const early = hist.slice(0, 3).map(h => Math.max(h.rows, h.cols));
-  const late = hist.slice(40, 60).map(h => Math.max(h.rows, h.cols));
-  const earlyAvg = early.reduce((a, b) => a + b, 0) / early.length, lateAvg = late.reduce((a, b) => a + b, 0) / late.length;
-  console.log(`  saved skill: ${savedSkill}-long; first 3 rounds averaged ${earlyAvg.toFixed(1)}-long; rounds 40-60 averaged ${lateAvg.toFixed(1)}-long`);
-  if (earlyAvg > E.OO_S_RAMP_FLOOR + E.OO_S_BAND + 1) { console.log(`FAIL: a fresh run with a high saved skill (${savedSkill}) should still start chill (near ${E.OO_S_RAMP_FLOOR}-long), got ${earlyAvg.toFixed(1)} averaged over the first 3 rounds`); fail = true; }
-  if (lateAvg < savedSkill - E.OO_S_BAND - 1) { console.log(`FAIL: by rounds 40-60 the run should have climbed back near the saved skill (${savedSkill}), got ${lateAvg.toFixed(1)} averaged`); fail = true; }
-  // the band varies round to round even once the ramp has settled (not one ratcheting number held flat)
-  const settledWindow = hist.slice(40, 60).map(h => Math.max(h.rows, h.cols)), distinct = new Set(settledWindow).size;
-  console.log(`  distinct sizes seen in rounds 40-60: ${distinct} (should be > 1 -- a band, not one held number)`);
-  if (distinct < 2) { console.log("FAIL: the grid size never varied once the ramp settled -- expected a band, not a single held size"); fail = true; }
+  // same size for the whole run outside of a deliberate growth step: never a round-to-round jump, never a
+  // decrease, and growth stops dead at the chosen cap.
+  const truths = { hue: 1.8, light: 1.3, chroma: 2.3 };
+  const { hist, grewCount } = run(truths, 4, 20261011, 300, 1.6, "subtle", 8, true);
+  let badJump = 0, shrank = 0, overCap = 0;
+  for (let i = 1; i < hist.length; i++) {
+    const prev = hist[i - 1].cols, cur = hist[i].cols;
+    if (cur < prev) shrank++;
+    if (cur > prev + 1) badJump++;
+    if (cur > 8) overCap++;
+  }
+  console.log(`  started at 4 columns, grew ${grewCount} times over 300 rounds, ended at ${hist[hist.length - 1].cols} columns`);
+  console.log(`  round-to-round: ${shrank} decreases, ${badJump} jumps of more than 1 column, ${overCap} over the 8-column cap (all must be 0)`);
+  if (shrank > 0) { console.log(`FAIL: the grid shrank ${shrank} times -- it should only ever grow within a run`); fail = true; }
+  if (badJump > 0) { console.log(`FAIL: the grid jumped by more than one column ${badJump} times`); fail = true; }
+  if (overCap > 0) { console.log(`FAIL: the grid exceeded its own 8-column cap ${overCap} times`); fail = true; }
+  if (grewCount < 3) { console.log(`FAIL: a 300-round run at ~78% accuracy should grow several times (every ~10-12 correct), only grew ${grewCount}`); fail = true; }
+  // Zen's own default: grows=false, so the size genuinely never moves
+  const { hist: zenHist } = run(truths, 6, 20261011, 200, 1.6, "subtle", 8, false);
+  const zenSizes = new Set(zenHist.map(h => h.cols));
+  console.log(`  Zen (grows off, the default there): ${zenSizes.size} distinct column count(s) across 200 rounds (must be 1)`);
+  if (zenSizes.size !== 1) { console.log(`FAIL: Zen's grid changed on its own (${zenSizes.size} distinct sizes) even with growth off`); fail = true; }
 }
 console.log("\n== Never an obvious pop (David, 2026-10-11: \"never super easy or super obvious\") ==");
 {
@@ -181,6 +192,32 @@ console.log("\n== Never an obvious pop (David, 2026-10-11: \"never super easy or
   // that the answer is a foregone conclusion even on the very first, chill rounds.
   const first10 = hist.slice(0, 10), ratios = first10.map(h => h.act / Math.max(.5, E.ooTheta({ j: {} }, h.axis, null)));
   console.log(`  first 10 rounds' gap as a multiple of the START threshold: ${ratios.map(x => x.toFixed(1)).join(", ")}`);
+}
+console.log("\n== Classic style: square board, near the chosen column count, one solid color ==");
+{
+  const rnd = E.ooRnd(99);
+  const model = E.ooModel({});
+  let bad = 0, notFlat = 0;
+  for (let t = 0; t < 40; t++) {
+    const r = E.ooSimpleRound({ model, cols: 6, round: t, aspect: 1.6, style: "classic" }, false, rnd);
+    if (r.rows !== r.cols) bad++;
+    if (r.gridType !== "flat") notFlat++;
+  }
+  console.log(`  Classic at 6 columns: ${bad} of 40 rounds not square, ${notFlat} not a single solid color`);
+  if (bad > 0) { console.log(`FAIL: Classic drew ${bad} non-square rounds`); fail = true; }
+  if (notFlat > 0) { console.log(`FAIL: Classic drew ${notFlat} rounds that weren't a single solid color`); fail = true; }
+}
+console.log("\n== Near-square tiles (David, 2026-10-11: \"too tall... closer to square is better\") ==");
+{
+  let worst = 1;
+  for (const cols of [4, 5, 6, 8]) {
+    const d = E.ooSimpleDims(cols, 1.6);   // a typical portrait phone aspect
+    const tileAspect = (1 / d.cols) / ((1 / d.rows) * 1.6);   // (tile width / tile height), 1 = perfectly square
+    worst = Math.min(worst, Math.min(tileAspect, 1 / tileAspect));
+    console.log(`  ${cols} columns -> ${d.cols} x ${d.rows}, tile aspect ${tileAspect.toFixed(2)}`);
+  }
+  console.log(`  worst tile squareness: ${worst.toFixed(2)} (must stay at or above 1:1.15, i.e. >= ${(1 / 1.15).toFixed(2)})`);
+  if (worst < 1 / 1.15) { console.log(`FAIL: a tile strayed further than 1:1.15 from square (${worst.toFixed(2)})`); fail = true; }
 }
 console.log("\n== No flat boards, anywhere ==");
 {

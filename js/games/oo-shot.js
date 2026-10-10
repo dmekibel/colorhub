@@ -32,23 +32,24 @@ function ooShot(arg) {
   // zen: true on every forced state below -- Arcade's own 2.5s auto-continue otherwise races a slow headless
   // screenshot capture and the round moves on before the shot lands (David, 2026-10-11's beautiful-palette
   // screenshots surfaced this: the capture caught whatever round the timer had already auto-advanced to).
-  if (what === "grad1") { fresh(); return ooMap({ forceShape: "grad1", zen: true }); }
-  if (what === "grad2") { fresh(); return ooMap({ forceShape: "grad2", zen: true }); }
-  if (what === "grad3") { fresh(); return ooMap({ forceShape: "grad3", zen: true }); }
-  if (what === "combo") { fresh(); return ooMap({ forceShape: "combo", zen: true }); }
-  if (what === "k2") { fresh(); return ooMap({ forceShape: "k2", zen: true }); }
-  if (what === "k4") { fresh(); return ooMap({ forceShape: "k4", zen: true }); }
-  // a 16+-side expert board, so a screenshot doesn't need 400 rounds of real play to get there. A real, vivid
-  // painting palette (not a random draw) so the expert-board screenshot reads as "extremely beautiful", not
-  // whatever muted canvas the real pool happened to pick that second: Kandinsky's Composition VII is an
-  // actually-measured palette from data/paintings.js, not invented for the screenshot.
-  if (what === "big") { fresh(); const s = ooSimpleState(); s.cols = 16; save();
-    return ooMap({ forceShape: "grad3", zen: true, palette: { colors: ["#9E9E83", "#576067", "#A99C4C", "#9D5D23"], label: "Wassily Kandinsky, Composition VII, 1913", link: { kind: "painting", id: "painting-composition-vii" } } }); }
-  if (what === "zen") { fresh(); return ooMap({ zen: true }); }
+  if (what === "grad1") { fresh(); return ooMap({ forceShape: "grad1", zen: true, skipPicker: true }); }
+  if (what === "grad2") { fresh(); return ooMap({ forceShape: "grad2", zen: true, skipPicker: true }); }
+  if (what === "grad3") { fresh(); return ooMap({ forceShape: "grad3", zen: true, skipPicker: true }); }
+  if (what === "combo") { fresh(); return ooMap({ forceShape: "combo", zen: true, skipPicker: true }); }
+  if (what === "k2") { fresh(); return ooMap({ forceShape: "k2", zen: true, skipPicker: true }); }
+  if (what === "k4") { fresh(); return ooMap({ forceShape: "k4", zen: true, skipPicker: true }); }
+  // the densest board the phone cap allows (David, 2026-10-11: "~8 columns on a phone... growth stops at that
+  // cap"), so a screenshot doesn't need a whole run of real play to get there. A real, vivid painting palette
+  // (not a random draw) so the dense-board screenshot reads as "extremely beautiful", not whatever muted canvas
+  // the real pool happened to pick that second: Kandinsky's Composition VII is an actually-measured palette
+  // from data/paintings.js, not invented for the screenshot.
+  if (what === "big") { fresh(); const s = ooSimpleState(); s.sizeIdx = OO_SIZE_PRESETS.length - 1; save();
+    return ooMap({ forceShape: "grad3", zen: true, skipPicker: true, palette: { colors: ["#9E9E83", "#576067", "#A99C4C", "#9D5D23"], label: "Wassily Kandinsky, Composition VII, 1913", link: { kind: "painting", id: "painting-composition-vii" } } }); }
+  if (what === "zen") { fresh(); return ooMap({ zen: true, skipPicker: true }); }
   // the on-demand pause menu (the ONE control during play): tap the pause mark, same as a real player would
-  if (what === "pause") { fresh(); ooMap({ zen: true }); return setTimeout(() => { const b = document.querySelector(".oo-pause-mark"); if (b) b.click(); }, 700); }
-  if (what === "ans") { fresh(); ooMap(); return setTimeout(() => ooShotTap(true), 900); }
-  if (what === "miss") { fresh(); ooMap(); return setTimeout(() => ooShotTap(false), 900); }
+  if (what === "pause") { fresh(); ooMap({ zen: true, skipPicker: true }); return setTimeout(() => { const b = document.querySelector(".oo-pause-mark"); if (b) b.click(); }, 700); }
+  if (what === "ans") { fresh(); ooMap({ skipPicker: true }); return setTimeout(() => ooShotTap(true), 900); }
+  if (what === "miss") { fresh(); ooMap({ skipPicker: true }); return setTimeout(() => ooShotTap(false), 900); }
   if (what === "end") {
     ooShotState();
     const model = ooS().model;
