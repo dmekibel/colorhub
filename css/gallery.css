@@ -240,8 +240,52 @@
 .gl-modes button{flex:none;height:40px;padding:0 14px;border-radius:999px;font:500 14px/1 var(--sans);color:var(--soft);background:var(--s1,#171512);box-shadow:inset 0 0 0 1px var(--line,rgba(236,232,223,.10));transition:background .12s,color .12s,transform .12s}
 .gl-modes button:active{transform:scale(.96);background:var(--s3,#2B2823)}
 .gl-modes button.on{background:var(--sel-fill,#2B2823);color:var(--sel-ink,var(--ink));box-shadow:var(--sel-ring,inset 0 0 0 1.5px rgba(236,232,223,.22))}
+/* the mode switcher as a compact 2-row grid of tiles, each with its own tiny live preview strip (David,
+   2026-10-10: "the palette extractions/selectors... scrolling through that top row isn't convenient"). Only
+   `.gl-modes.gl-tiles` (the painting page's own container) gets this -- js/studio.js's photo page keeps the
+   plain scrolling `.gl-modes` pill row above untouched. */
+.gl-modes.gl-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;overflow:visible;padding:2px 0 0}
+.gl-tile{flex:none;height:auto;min-height:60px;padding:9px 11px 8px;border-radius:var(--r-tile,10px);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;text-align:left}
+.gl-tile-prev{display:flex;width:100%;height:9px;border-radius:3px;overflow:hidden}
+.gl-tile-prev i{flex:1;background:var(--c)}
+.gl-tile-prev:empty{display:none}
+.gl-tile b{font:500 14px/1.15 var(--sans);color:inherit;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.gl-tile-more{grid-column:1 / -1;flex-direction:row;align-items:center;justify-content:center;min-height:40px;gap:8px}
+.gl-tile-more em{font-style:normal;color:var(--faint)}
 .gl-pal-ui .gl-slide{display:flex;align-items:center;gap:10px;margin:2px 0 0;height:44px}
 .gl-pal-ui .gl-slide[hidden]{display:none}
+/* Shuffle / Edit / Save for the current single palette, and its short re-roll history (every mode but
+   Harmonies, which gives each of its own cards the same three -- David, 2026-10-10 + coordinator follow-up) */
+.gl-pal-acts{display:flex;gap:8px;margin:12px 0 0;flex-wrap:wrap}
+.gl-pal-acts[hidden],.gl-shufhist[hidden]{display:none}
+.gl-pa-btn{flex:none;height:40px;padding:0 14px;display:inline-flex;align-items:center;gap:7px;border-radius:999px;font:500 14px/1 var(--sans);color:var(--soft);background:var(--s1,#171512);box-shadow:inset 0 0 0 1px var(--line,rgba(236,232,223,.10));transition:background .12s,transform .12s}
+.gl-pa-btn:active{transform:scale(.96);background:var(--s3,#2B2823)}
+.gl-pa-btn.solid{background:var(--ink);color:var(--ground)}
+.gl-pa-btn svg{width:16px;height:16px}
+.gl-pa-btn:disabled{opacity:.35}
+.gl-shufhist{display:flex;gap:7px;margin:10px 0 0;overflow-x:auto;scrollbar-width:none}
+.gl-shufhist::-webkit-scrollbar{display:none}
+.gl-shuf-thumb{flex:none;display:flex;width:52px;height:30px;border-radius:5px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--line,rgba(236,232,223,.14))}
+.gl-shuf-thumb.on{box-shadow:inset 0 0 0 2px var(--ink)}
+.gl-shuf-thumb i{flex:1;background:var(--c)}
+
+/* Harmonies: several real-color relation cards at once, not one (David, 2026-10-10) */
+.gl-harm[hidden]{display:none}
+.gl-harm-top{display:flex;align-items:center;gap:10px;margin-top:4px}
+.gl-harm-chips{flex:1;min-width:0;display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding:2px 0}
+.gl-harm-chips::-webkit-scrollbar{display:none}
+.gl-harm-chips button{flex:none;height:34px;padding:0 12px;border-radius:999px;font:500 13px/1 var(--sans);color:var(--soft);background:var(--s1,#171512);box-shadow:inset 0 0 0 1px var(--line,rgba(236,232,223,.10))}
+.gl-harm-chips button.on{background:var(--sel-fill,#2B2823);color:var(--sel-ink,var(--ink));box-shadow:var(--sel-ring,inset 0 0 0 1.5px rgba(236,232,223,.22))}
+.gl-harm-list{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.gl-hcard{padding:12px;border-radius:var(--r-tile,10px);background:var(--s1,#171512);box-shadow:inset 0 0 0 1px var(--line,rgba(236,232,223,.10))}
+.gl-hcard-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px}
+.gl-hcard-top b{font:400 17px/1.2 var(--serif);color:var(--ink)}
+.gl-hcard-top span{font:500 13px/1 var(--mono);color:var(--soft);flex:none}
+.gl-hcard-strip{height:40px;border-radius:6px;overflow:hidden}
+.gl-hcard-names{margin:8px 0 0;font:400 13px/1.4 var(--sans);color:var(--soft)}
+.gl-hcard-acts{display:flex;gap:8px;margin-top:10px}
+.gl-harm-more{width:100%;height:44px;margin-top:4px;border-radius:999px;font:500 14px/1 var(--sans);color:var(--soft);background:var(--s1,#171512);box-shadow:inset 0 0 0 1px var(--line,rgba(236,232,223,.10))}
+.gl-harm-more[hidden]{display:none}
 .gl-pal-ui .gl-slide input{flex:1;height:44px}
 .gl-pal-ui .gl-slide input::-webkit-slider-thumb{width:24px;height:24px;margin-top:-10px}
 .gl-pal-ui .gl-slide input::-moz-range-thumb{width:24px;height:24px}
@@ -306,3 +350,28 @@
 .gl-morepainter .sec-head{margin-bottom:4px}
 .gl-morepainter .gl-mp-sub{color:var(--soft);font-size:13.5px;line-height:1.4;margin:0 0 12px}
 .gl-page .gl-pal-ui .palette.gl-strip:empty{display:none}
+
+/* the palette editor sheet (David, 2026-10-10: "how do we edit the palette?") -- remove/reorder/lock+shuffle
+   mirror js/setpage.js's own edit mode (a drag handle, an ×, a lock before a re-derive), as a modal for a
+   palette that hasn't been saved yet. */
+.gl-edit-sheet .gl-pe-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.gl-pe-name{width:100%;height:46px;margin-top:4px;padding:0 2px;border:0;border-bottom:1px solid var(--rule);background:none;color:var(--ink);font:400 19px/1 var(--serif)}
+.gl-pe-list{display:flex;flex-direction:column;margin-top:14px}
+.gl-pe-row{display:flex;align-items:center;gap:10px;height:52px;border-bottom:1px solid var(--rule);background:var(--ground);touch-action:none}
+.gl-pe-row.dragging{position:relative;z-index:2;box-shadow:0 6px 16px rgba(0,0,0,.4)}
+.gl-pe-row.locked{opacity:.85}
+.gl-pe-handle{flex:none;width:28px;height:44px;display:grid;place-items:center;color:var(--faint);cursor:grab}
+.gl-pe-sw{flex:none;width:34px;height:34px;border-radius:7px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.18)}
+.gl-pe-nm{flex:1;min-width:0;font:400 16px/1.2 var(--serif);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gl-pe-lock,.gl-pe-x{flex:none;width:36px;height:36px;display:grid;place-items:center;color:var(--soft)}
+.gl-pe-lock[aria-pressed="true"]{color:var(--ink)}
+.gl-pe-x:disabled{opacity:.3}
+.gl-pe-x svg{width:16px;height:16px}
+.gl-pe-swappanel{padding:10px 0 14px 38px}
+.gl-pe-swopts{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.gl-pe-swopt{width:32px;height:32px;border-radius:7px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.18)}
+.gl-pe-addrow{display:flex;align-items:center;gap:12px;height:52px;width:100%;text-align:left;color:var(--soft);font:400 16px/1 var(--serif)}
+.gl-pe-addsw{flex:none;width:34px;height:34px;border-radius:7px;display:grid;place-items:center;background:var(--s1,#171512);color:var(--faint)}
+.gl-pe-acts{display:flex;gap:10px;margin-top:16px}
+.gl-pe-acts .gl-pa-btn{flex:1;justify-content:center}
+.gl-pe-save{flex:2}
