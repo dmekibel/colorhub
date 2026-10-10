@@ -26,7 +26,7 @@
 //   whosePalette(slug)       -> the Train quiz, opened on this painter (L10)
 
 const AW_DIR = "data/artists/", AW_AN = "data/analysis/";
-const AW = { meta: null, stats: null, ge: null, grp: null, idx: null, ready: false, loading: null, P: new Map(), A: new Map(), SH: new Map(), pl: null, list: null, nh: null, ids: null, ctx: null, ctxP: null, base: null, port: null };
+const AW = { meta: null, stats: null, ge: null, grp: null, idx: null, ready: false, loading: null, P: new Map(), A: new Map(), SH: new Map(), pl: null, list: null, nh: null, ids: null, ctx: null, ctxP: null, base: null, port: null, lite: null, liteLoading: null };
 const awURL = p => p + (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "");
 const awGet = (p, kind = "json") => fetch(awURL(p)).then(r => { if (!r.ok) throw new Error(p + " " + r.status); return r[kind](); });
 const awPad = n => String(n).padStart(3, "0");
@@ -58,6 +58,14 @@ function awPainterLoad(slug) {
   if (AW.P.has(slug)) return Promise.resolve(AW.P.get(slug));
   return Promise.all([awGet(AW_AN + "artists/" + slug + ".json"), awGet(AW_DIR + "p/" + slug + ".json")]).then(([A, P]) => { AW.P.set(slug, { A, P }); return AW.P.get(slug); });
 }
+// data/artists/lite.json (tools/painters_lite.py): every named painter who ISN'T one of the ~840 full profiles,
+// built straight from the gallery corpus -- {slug: {n, ix:[gallery index...], co?, y0?, y1?}}. One small file
+// (a few hundred KB), loaded once, the first time any painter turns out not to have a full profile.
+function awLiteLoad() {
+  if (AW.lite) return Promise.resolve(AW.lite);
+  return AW.liteLoading || (AW.liteLoading = awGet(AW_DIR + "lite.json").then(doc => { AW.lite = doc.a || {}; AW.liteLoading = null; return AW.lite; }).catch(e => { AW.liteLoading = null; throw e; }));
+}
+const awHasLitePainter = slug => !!(AW.lite && AW.lite[slug]);
 function awShard(i) {
   const k = Math.floor(i / 100);
   if (AW.SH.has(k)) return Promise.resolve(AW.SH.get(k));
@@ -423,7 +431,15 @@ function awWorksWire(el, slug, m, A, P) {
 // Painter pages
 // ======================================================================
 function awPainter(slug, push = true) {
-  if (!AW.ready || !AW.P.has(slug)) return awWait(awPainter, [slug, push], () => awPainterLoad(slug));
+  if (!AW.ready) return awWait(awPainter, [slug, push], awLoad);
+  // David, 2026-10-10 ("Old Woman", 1655, Moses ter Borch, Rijksmuseum -- "I'm unable to tap the painter's
+  // name"): a painter real enough to have paintings here but too few (or too undocumented) for one of the
+  // ~840 full, analysis-backed profiles used to just downgrade to plain text wherever this ran (js/artwiki.js
+  // awPaintingHook). The rule now: every painter name is tappable. Not one of the full profiles -> the lite
+  // page below, built straight from the gallery corpus (tools/painters_lite.py's data/artists/lite.json) --
+  // never a dead name, even for a painter Wikidata can't resolve or who has only one painting here.
+  if (!AW.meta.a[slug]) return awPainterLite(slug, push);
+  if (!AW.P.has(slug)) return awWait(awPainter, [slug, push], () => awPainterLoad(slug));
   const m = AW.meta.a[slug], { A, P } = AW.P.get(slug);
   if (!m) { toast("No data for this painter"); return xToOrigin(); }
   if (push) XSTACK.push("aw:painter:" + slug);
@@ -559,6 +575,31 @@ function awPainter(slug, push = true) {
   ]);
 }
 
+// ======================================================================
+// Lite painter pages: every named painter who ISN'T one of the ~840 full profiles (David, 2026-10-10 -- see
+// awPainter()'s own comment above for why this exists). Plain by design: their paintings, with palettes already
+// computed (the same glGrid/glPinHTML the full page's own Life's work grid uses), dates and a stand-in for
+// nationality when the corpus has them, and an honest "a few works in our archive" note -- never a finding, a
+// signature color or anything else that needs the analysis pipeline this painter never ran through.
+function awPainterLite(slug, push = true) {
+  if (!AW.lite) return awWait(awPainterLite, [slug, push], awLiteLoad);
+  const L = AW.lite[slug];
+  if (!L) { toast("No data for this painter"); return xToOrigin(); }
+  if (push) XSTACK.push("aw:painter:" + slug);
+  const dates = L.y0 != null ? (L.y0 === L.y1 ? awY(L.y0) : `${awY(L.y0)}–${awY(L.y1)}`) : "";
+  const dek = [dates, L.co].filter(Boolean).join(" · ");
+  const n = L.ix.length;
+  const el = show(`
+    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
+    <div class="aw-head"><div><p class="eyebrow p-type">Painter</p><h1 class="p-title">${esc(L.n)}</h1>${dek ? `<p class="p-dek">${esc(dek)}</p>` : ""}</div></div>
+    <p class="aw-sub">${awPlural(n, "painting")} in our archive${n < 10 ? " -- too few for a full profile (signature colors, palette families, findings), so this is just the paintings themselves, each with its own measured palette." : ", but not yet enough documented about the painter for a full profile -- this is just the paintings themselves, each with its own measured palette."}</p>
+    <div class="aw-wk-mount gl-grid" data-awlitegrid></div>
+    <section class="srcs"><h3>Sources</h3><ul><li>Colors measured by ColorHub from museum photographs (${n} painting${n === 1 ? "" : "s"} by ${esc(L.n)} in the archive); every figure is as photographed, screen color only.</li></ul></section>`, "article aw-page aw-lite");
+  awWire(el);
+  const mount = el.querySelector("[data-awlitegrid]");
+  if (mount) glGrid(mount, { list: L.ix });
+}
+
 // favorite pairs and chords: pairs that share a color join into chords of three or four
 function awChords(pairs) {
   const ok = pairs.filter(p => p.count >= 4 && awCanon(p.a) !== awCanon(p.b));
@@ -672,22 +713,35 @@ function awPaintingHook(el, i, d, ctx) {
   // render, from the painting's own d.a field) -- David, 2026-10-09: "sometimes it doesn't let me tap the
   // painter". The old code waited for the painter list to finish loading before turning the name into a button
   // AT ALL, so a tap in that window (common on a fresh load, since js/loader.js's wiki data is lazy) landed on
-  // inert text. This only confirms or corrects that optimistic render once the real data is in: an artist who
-  // genuinely isn't in the archive downgrades to plain text instead of a dead-end button, and a defensive
+  // inert text. This only confirms or corrects that optimistic render once the real data is in, and a defensive
   // elementFromPoint check catches the OTHER reported cause (something else sitting on top of it) by lifting
   // the link's stacking order if the point at its own center doesn't actually land on it.
+  // David, 2026-10-10 ("Old Woman", 1655, Moses ter Borch, Rijksmuseum -- "I'm unable to tap the painter's
+  // name", plain grey text, no underline): a painter who isn't one of the ~840 full profiles used to downgrade
+  // straight to dead text here. Every painter real enough to have paintings in the gallery corpus is in EITHER
+  // meta.json (the full profiles) OR lite.json (tools/painters_lite.py: everyone else, by construction) --
+  // checking lite before giving up means the only painter name that should still ever downgrade is one whose
+  // own painting record has no artist at all (d.a itself falsy, handled by the ternary in js/gallery.js's own
+  // render, not reached here).
   if (d.a) {
     const slug = routeSlug(d.a), dek = el.querySelector(".p-dek");
-    awLoad().then(() => {
-      if (!el.isConnected || !dek) return;
-      const btn = dek.querySelector("[data-awpainter]");
-      if (!btn) return;
-      if (!awHasPainter(slug)) { btn.outerHTML = esc(d.a); return; }
+    const liftIfCovered = btn => {
       const r = btn.getBoundingClientRect();
       if (r.width && r.height) {
         const hit = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
         if (hit && hit !== btn && !btn.contains(hit)) { btn.style.position = "relative"; btn.style.zIndex = "1"; }
       }
+    };
+    awLoad().then(() => {
+      if (!el.isConnected || !dek) return;
+      const btn = dek.querySelector("[data-awpainter]");
+      if (!btn) return;
+      if (awHasPainter(slug)) { liftIfCovered(btn); return; }
+      return awLiteLoad().then(() => {
+        if (!btn.isConnected) return;
+        if (!awHasLitePainter(slug)) { btn.outerHTML = esc(d.a); return; }
+        liftIfCovered(btn);
+      }).catch(() => { if (btn.isConnected) btn.outerHTML = esc(d.a); });
     }).catch(() => {});
   }
   awContext(el.querySelector("[data-glctx]"), i, d);
@@ -1073,7 +1127,10 @@ function awStep(tok) {
 }
 function awOpenRoute(kind, id, more) {
   const run = () => {
-    if (kind === "painter") return AW.meta.a[id] ? awPainter(id) : go(S.tab || "learn");
+    // awPainter() itself now tries the full profile first and falls back to the lite page (every other named
+    // painter, tools/painters_lite.py) before giving up -- see its own comment. A cold #/painter/<slug> link
+    // (shared, bookmarked, or the browser's own history replay) gets the exact same fallback a live tap does.
+    if (kind === "painter") return awPainter(id);
     if (kind === "arthistory") return awIndex();
     if (kind === "painter-index") return awPainters();
     if (kind === "painters") return awVs(id && AW.meta.a[id] ? id : "", more && AW.meta.a[more] ? more : "");
@@ -1090,4 +1147,4 @@ function awOpenRoute(kind, id, more) {
 // broken-image icon.
 document.addEventListener("error", e => { const t = e.target; if (t && t.tagName === "IMG" && t.closest && t.closest(".aw-page")) t.style.visibility = "hidden"; }, true);
 // titles for the router (js/router.js): the name once the list is here
-const awTitle = (kind, key) => { try { return kind === "painter" ? AW.meta.a[key].n : kind === "decade" ? awDec(key) : String(key); } catch (e) { return String(key); } };
+const awTitle = (kind, key) => { try { return kind === "painter" ? (AW.meta.a[key] || (AW.lite && AW.lite[key]) || {}).n || String(key) : kind === "decade" ? awDec(key) : String(key); } catch (e) { return String(key); } };

@@ -4287,6 +4287,51 @@ scenario("sets", "a trio with no close match says so plainly, with no unrelated 
 });
 
 // ================================================================== DIRECT LOADS (a typed or shared address on a fresh load)
+// David, 2026-10-10 ("Old Woman", 1655, Moses ter Borch, Rijksmuseum): a painter real enough to have paintings
+// here but too few/undocumented for one of the ~840 full profiles used to render as plain, dead grey text on the
+// painting page. The rule now: every painter name is tappable (js/artwiki.js awPainter() falls back to
+// awPainterLite(), built from tools/painters_lite.py's data/artists/lite.json, every OTHER named painter in the
+// corpus). A random daily-seeded sample of paintings, including deliberately minor ones, checks this holds.
+scenario("pages", "every painter name on a random sample of paintings is tappable, including minor painters without a full profile", async t => {
+  await t.open("#/home", { settle: 300 });
+  // 23778: the corpus size tools/check.js's own "ids gate" reports (checked at the top of this file's other
+  // gallery-index scenarios, e.g. "a random archive painting has..."); galleryPage() itself loads the gallery
+  // index on demand, so nothing here needs to wait on it directly.
+  const n = 23778;
+  // Moses ter Borch himself (gallery index 5767, "Old Woman") is seeded in every run, so this scenario always
+  // exercises the exact report, not just whatever the daily sample happens to catch; the other 9 are a real
+  // random sweep, re-seeded daily (tools/smoke/harness.js's sample()).
+  const idxs = [...new Set([5767, ...t.sample(Array.from({ length: n }, (_, i) => i), 5, "painter-names")])];
+  let checked = 0, liteSeen = 0, fullSeen = 0;
+  const bad = [];
+  // Each painting is its own full round trip (painting page -> painter page -> grid), heavier than most
+  // scenarios here, so one slow or genuinely broken index in the daily sample is isolated with its own race
+  // against a per-item cap rather than risking the whole scenario's 120s ceiling.
+  for (const gi of idxs) {
+    try {
+      await Promise.race([
+        (async () => {
+          t.ev(`galleryPage(${gi}, true)`);
+          await t.waitFor(() => t.$(".p-title") && t.text(".p-title").length > 0, 6000, `painting ${gi} to draw`);
+          const btn = t.$(".p-dek [data-awpainter]");
+          if (!btn) return;   // "Artist unknown" on this one -- nothing to check
+          const name = t.text(btn);
+          await t.click(btn, { force: true, wait: 400 });
+          await t.waitFor(".aw-page", 6000, `a painter page for "${name}" (from painting ${gi})`);
+          await t.waitFor(".aw-page .gl-pin", 6000, `at least one painting on ${name}'s page (from painting ${gi})`);
+          const lite = !!t.$(".aw-page.aw-lite");
+          if (lite) liteSeen++; else fullSeen++;
+          if (gi === 5767) t.expect(lite && /Borch/.test(name), `painting 5767's painter wasn't Moses ter Borch on a lite page (got "${name}", lite=${lite})`);
+          checked++;
+        })(),
+        new Promise((_, rej) => setTimeout(() => rej(new Error("per-item cap")), 14000)),
+      ]);
+    } catch (e) { bad.push(gi + ":" + e.message); }
+  }
+  t.expect(checked >= 3, `too few named painters turned up in this sample to be a real check (${checked} of ${idxs.length}; skipped: ${bad.join("; ") || "none"})`);
+  t.expect(liteSeen >= 1, `not one lite (no-full-profile) painter page turned up -- Moses ter Borch's own case should have (skipped: ${bad.join("; ") || "none"})`);
+  t.notes.push(`${checked} painter links checked (${fullSeen} full profiles, ${liteSeen} lite)${bad.length ? `; skipped ${bad.length}: ${bad.join("; ")}` : ""}`);
+});
 scenario("pages", "a fresh load of #/painter/<slug> opens that painter, not Home", async t => {
   await t.open("#/painter/abraham-bloemaert", { settle: 600 });
   await t.waitFor(".aw-page, [data-awpainter-page], .screen.aw", 15000, "the painter page on a direct load");
