@@ -2045,6 +2045,28 @@ scenario("pages", "article figure cards: Mauve draws them inline; a card opens i
   await t.waitFor(() => t.$(".ar-read .ar-lede"), 15000, "#/read/mauve still opens its own full-article screen");
 });
 
+// js/article-refs.js arfGem/arfPaintingByImg: Pearl's article cites [[gem:pearl|pearl]], and that gem's own
+// curated photo is really Vermeer's "Girl with a Pearl Earring" (same Commons file as data/paintings.js'
+// painting-pearl-earring). David, 2026-10-10: that figure has to open the painting's own page, not sit as a
+// plain, unclickable picture or open the gem's material page.
+scenario("pages", "Pearl's article: the Vermeer painting figure is clickable and opens the painting's page", async t => {
+  await H.openPage(t, "#/color/pearl", "Pearl");
+  const expandAll = await t.waitFor(".cp-page [data-ar-expand-all]", 5000, "the Expand all control");
+  await t.click(expandAll, { wait: 400 });
+  const fig = await t.waitFor(() => t.$$(".cp-page .ar-fig").find(f => /pearl earring/i.test(t.text(f.querySelector(".ar-fig-n")))), 20000, "a figure card for Girl with a Pearl Earring");
+  t.expect(fig.dataset.kind === "painting", `the Vermeer figure is kind "${fig.dataset.kind}", expected "painting"`);
+  const btn = fig.querySelector(".ar-fig-b");
+  t.expect(btn, "the figure has no clickable button");
+  await t.click(btn, { wait: 700 });
+  await t.waitFor(() => t.$(".p-title"), 10000, "the painting page for Girl with a Pearl Earring");
+  t.expect(/pearl earring/i.test(t.text(".p-title")), `opened "${t.text(".p-title")}", expected Girl with a Pearl Earring`);
+  t.expect(/vermeer/i.test(t.$(".p-dek").innerText || ""), "the painter (Vermeer) isn't named on the painting page");
+  // Back from here replays whatever trail token the article's own color page pushed, same as any other figure
+  // (gem/flower/painting) opened from an article -- not special-cased here. Just confirm it doesn't throw.
+  await t.click("[data-back]", { wait: 600 });
+  t.expect(t.errors.length === 0, "Back threw: " + JSON.stringify(t.errors));
+});
+
 scenario("pages", "a tapped in-between hex opens its nearest name with 'Your color'", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   let sawYours = 0;
@@ -3916,7 +3938,18 @@ scenario("paintings", "Look closer's Select tool: tap adds a point, opens the se
   await t.click('[data-rgm="diverse"]', { force: true, wait: 400 });
   t.expect(t.$('[data-rgm="diverse"]').classList.contains("on"), "Diverse didn't become the active selection palette mode");
   const slide = t.$("[data-rgk]");
-  if (slide && !t.$("[data-rgslide]").hidden) { slide._countTo(2); await t.sleep(300); t.expect(t.$$("[data-rgswatches] [data-swatch]").length === 2, "the selection slider didn't redraw its palette live"); }
+  if (slide && !t.$("[data-rgslide]").hidden) {
+    slide._countTo(2); await t.sleep(300); t.expect(t.$$("[data-rgswatches] [data-swatch]").length === 2, "the selection slider didn't redraw its palette live");
+    // David, 2026-10-10: "adding more colors pushes the menu up... it should extend downwards without panning" --
+    // the sheet is a fixed height now ([data-sheet-scroll] around the growing content), so raising the count
+    // must never move the sheet's own top edge; new swatches/rows extend inside the inner scroller instead.
+    await t.sleep(200);
+    const topBefore = t.$(".rgs-sheet").getBoundingClientRect().top;
+    slide._countTo(8); await t.sleep(500);
+    t.expect(t.$$("[data-rgswatches] [data-swatch]").length > 2, "raising the slider to its max didn't add more colors");
+    const topAfter = t.$(".rgs-sheet").getBoundingClientRect().top;
+    t.expect(Math.abs(topAfter - topBefore) < 1, "the sheet's top moved when the color count grew -- it should extend downward, inside its own scroller, not push the sheet up");
+  }
   // Clear empties the point list and closes the sheet
   await t.click("[data-glzselclear]", { force: true, wait: 650 });   // sheet()'s own close() animates for up to 400ms before removing the element
   t.expect(!t.$(".rgs-sheet"), "Clear didn't close the selection sheet");

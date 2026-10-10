@@ -93,10 +93,30 @@ const arfImgOK = im => im && /^(https?:\/\/|img\/)/.test(im.src || "") ? im : nu
 // credit data the source requires: { credit, url, licenseUrl }
 const arfImgCredit = im => im ? { credit: String(im.credit || (im.commons ? "Wikimedia Commons" : "")).replace(/^Anonymous\s*(?=Unknown author)/, "").replace(/\s*\(https?:[^)]*\)/g, ""), url: im.commons || "", licenseUrl: im.licenseUrl || "" } : null;
 
+// A gem, flower or color's own "contextual" photo is sometimes really a specific archived painting (the famous
+// Vermeer behind the material "pearl", for one): matched generically by the Commons file both entries cite, not
+// by name (curators credit the painter, not the painting's title). When it matches, the figure opens that
+// painting's own page -- never the gem/flower/material page, and never a plain, unclickable picture -- and the
+// painter still gets their own named link, from the painting page itself (David, 2026-10-10).
+function arfCommonsFile(url) { const m = /\/File:([^?#]+)/.exec(String(url || "")); return m ? decodeURIComponent(m[1]).toLowerCase() : ""; }
+function arfPaintingByImg(im) {
+  const f = arfCommonsFile(im && im.commons); if (!f) return null;
+  const list = arfWin("PAINTINGS") || [];
+  return list.find(p => arfCommonsFile(p.commons) === f) || null;
+}
+function arfPaintingBase(pt) {
+  const pal = (pt.palette || []).map(p => p.h), shares = (pt.palette || []).map(p => p.share);
+  return { kind: "painting", id: pt.id, name: pt.title, sub: [pt.artist, pt.year].filter(Boolean).join(" · "), pal, shares, img: { src: pt.thumb || pt.img, hi: pt.img || "" },
+    credit: { credit: [pt.artist, pt.license].filter(Boolean).join(" · "), url: pt.commons || "", licenseUrl: "" },
+    cover: hex => pal.reduce((t, h, i) => { const d = arfDE(hex, h); return d < 12 ? t + (shares[i] || 0) * (1 - (d / 12) ** 2) : t; }, 0),
+    open: () => { const n = typeof graph === "function" ? graph().nodes.get(pt.id) : null; if (n && typeof openNode === "function") openNode(n); } };
+}
+
 function arfGem(id) {
   return arfPoll(() => arfWin("GEMS")).then(G => {
     const gm = G && G.gems.find(g => g.id === id); if (!gm) return null;
     const nid = "gm:gem:" + id, im = arfImgOK(((G.images || {})[nid] || [])[0] || ((arfWin("GEM_IMAGES") || {})[nid] || [])[0] || gm.img);
+    const pt = im && arfPaintingByImg(im); if (pt) return arfPaintingBase(pt);
     return { kind: "gem", id, name: gm.title, sub: "", pal: (gm.palette || []).map(p => p[0]), palNames: (gm.palette || []).map(p => p[1]),
       img: im && { src: im.src }, credit: arfImgCredit(im), open: self => { if (typeof gmBuildNodes === "function") gmBuildNodes(); openNode(gmNode(nid)); } };
   });
@@ -107,6 +127,7 @@ function arfFlower(id) {
     const p = (B.plants || []).find(x => x.id === id), d = !p && (B.dyes || []).find(x => x.id === id);
     if (!p && !d) return null;
     const nid = (p ? "bt:plant:" : "bt:dye:") + id, im = arfImgOK(((arfWin("BOTANY_IMAGES") || {})[nid] || [])[0]);
+    const pt = im && arfPaintingByImg(im); if (pt) return arfPaintingBase(pt);
     const names = p ? [p.color] : d.colors || [], pal = [], palNames = [];
     names.forEach(n => { const h = arfHex(n); if (h) { pal.push(h); palNames.push(n); } });
     return { kind: "flower", id, name: p ? p.plant.replace(/\s*\(.*\)\s*$/, "") : d.title, sub: p ? "" : "Dye plant", pal, palNames,
@@ -466,6 +487,9 @@ function arfLeadOwn(art, self) {
   const keys = [self.n, art.name, ...(art.names || []), self.slug, art.slug].filter(Boolean);
   for (const k of keys) {
     const f = arfImgOK((W[k] || [])[0]); if (!f) continue;
+    // David, 2026-10-10: the color's own "contextual" photo is sometimes really a specific archived painting
+    // (arfPaintingByImg) -- that one has to open its own page, not sit as a plain, unclickable picture.
+    const pt = arfPaintingByImg(f); if (pt) return arfPaintingBase(pt);
     return { kind: "own", lead: "own", key: "", name: self.n, img: { src: f.src }, credit: arfImgCredit(f), caption: f.caption || "", best: { h: self.h, i: 0, de: 0 } };
   }
   return null;
@@ -486,7 +510,11 @@ async function arfLeadPick(art, self) {
   // exact hex the visitor tapped, not the named color's unrelated contextual photo (David, 2026-10-09: "the
   // lead picture should match the user's color, and say which") -- skip straight to the scored painting/gem/
   // flower search below, which already keys off self.h (here, the tapped hex).
-  const own = self.tapped ? null : arfLeadOwn(art, self); if (own) return own;
+  // own.kind "painting" (arfPaintingByImg resolved the own photo to a specific archived painting): score it like
+  // any other painting lead instead of trusting the hand-set de:0 "own" shortcut, so its caption and match line
+  // are honest about this color vs. that painting, not vs. itself.
+  const own = self.tapped ? null : arfLeadOwn(art, self);
+  if (own) { if (own.kind === "painting") { const u = arfScore(own, self.h); u.lead = "painting"; return u; } return own; }
   const inTime = arfInTime(art);
   let row = null;
   for (const sl of [...new Set([art.slug, self.slug, ...(art.names || []).map(n => routeSlug(n))].filter(Boolean))]) { row = await arfGraphRow(sl); if (row) break; }
