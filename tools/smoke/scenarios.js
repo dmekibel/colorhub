@@ -3778,6 +3778,30 @@ scenario("paintings", "Look closer's Select tool: tap adds a point, opens the se
   await t.click(t.$("[data-rgswatches] [data-swatch]"), { force: true, wait: 600 });
   await t.waitFor(".cp-page", 8000, "a color page after tapping a selection-palette chip");
 });
+// David, 2026-10-10: "Select doesn't load" on his iPhone turned out to be onnxruntime-web's own threaded-wasm
+// backend failing to initialize (a missing vendored loader module) -- and the progress UI just sat there
+// forever with no visible error at all, because segEnsureReady's own .catch in js/paintzoom.js swallowed the
+// rejection into a generic hint with no way to see what actually broke. Fixed on both ends: the real init bug
+// (js/segment.js's SEG_FILES, js/segment-worker.js's wasmPaths), and this -- ANY failure of Select's download/
+// init/encode/decode now surfaces an honest one-line hint plus the real error text one tap away in "Details"
+// (js/paintzoom.js's selSetError), never a spinner that just stops. window.__segStubFail (js/segment.js) forces
+// segEnsureReady to reject with a chosen message without needing an actually-broken file on disk.
+scenario("paintings", "Look closer's Select tool: an init failure surfaces an honest message + Details, never an endless spinner", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  t.ev('window.__segStub = true; window.__segStubFail = "stub: simulated init failure (missing ort-wasm-simd-threaded.mjs)";');
+  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { wait: 700 });
+  const selectBtn = await t.waitFor('[data-glzv="select"]:not([hidden])', 8000, "the Select tool (segProbe resolving under the stub)");
+  await t.click(selectBtn, { force: true, wait: 400 });
+  const hint = await t.waitFor("[data-glzselhint]:not([hidden])", 8000, "an honest hint after the forced init failure (found an endless spinner instead)");
+  t.expect(/couldn't load/i.test(t.text(hint)), `the hint doesn't read as a failure: "${t.text(hint)}"`);
+  t.expect(t.$("[data-glzselprog]").hidden, "the progress bar never hid itself after the failure");
+  t.expect(t.$("[data-glzselctl]").hidden, "the +/- tap controls appeared despite the init never succeeding");
+  const detail = t.$("[data-glzselerrdetail]");
+  t.expect(detail && !detail.hidden, "no Details disclosure appeared for the failure");
+  await t.click(detail.querySelector("summary"), { force: true, wait: 150 });
+  t.expect(detail.open, "Details didn't open on tap");
+  t.expect(t.text(detail.querySelector("[data-glzselerrmsg]")).includes("simulated init failure"), "Details doesn't show the real error text");
+});
 // David, 2026-10-09: "it gets janky -- I can pan around and it gets stuck in weird poses... I should only be
 // able to zoom in, not zoom out too far". js/paintzoom.js's gesture rewrite: Z is a real scale against the
 // image's own natural pixels, hard-clamped to [fitZ, fitZ*8] every frame (no rubber band on zoom -- David's ask
