@@ -273,6 +273,20 @@ function doCatFacets(rows) {
 function doCatFiltered(cat) {
   return DO.filter(n => n.cat === cat && (DO_FILTER.decade == null || n.decade === DO_FILTER.decade) && (!DO_FILTER.maker || n.artist === DO_FILTER.maker));
 }
+// a Keep heart on every tile a feed just drew (David, 2026-10-10: "even on a map... like things, sort them" --
+// Design objects' own grids get the same Keep js/favs.js's generic fvItem* store gives every other archive).
+// Call once right after setting a feed's innerHTML to masonry(rows.map(pin)) -- `rows` must be the exact nodes
+// just drawn, so the id on each tile resolves to a real node for fvItemSet's record.
+function doWireHearts(container, rows) {
+  if (typeof fvItemHeart !== "function" || typeof fvItemWireGrid !== "function") return;
+  container._doHeartIndex = new Map(rows.map(n => [n.id, n]));   // a redraw replaces this feed's innerHTML wholesale, so the lookup is refreshed every call; the listener below is attached once and reads it live.
+  container.querySelectorAll("[data-pin]").forEach(b => {
+    if (b.querySelector("[data-fvi]")) return;   // this exact tile is already wired (survived a re-draw)
+    b.style.position = "relative";
+    b.insertAdjacentHTML("beforeend", fvItemHeart("design", b.dataset.pin));
+  });
+  if (!container._doHeartsWired) { container._doHeartsWired = true; fvItemWireGrid(container, id => container._doHeartIndex.get(id)); }
+}
 function doCategory(cat, push = true) {
   if (!DO) { doWhen(() => doCategory(cat, push)); return; }
   DO_FILTER = { decade: null, maker: "" };
@@ -298,12 +312,103 @@ function doCategory(cat, push = true) {
       ...makers.map(a => chip(a, DO_FILTER.maker === a, `data-df="maker" data-dv="${esc(a)}"`)),
     ].join("");
     const feed = el.querySelector("#doCatFeed");
-    if (feed) feed.innerHTML = rows.length ? masonry(rows.map(n => pin(n))) : `<p class="fine">No objects match. Try fewer filters.</p>`;
+    if (feed) { feed.innerHTML = rows.length ? masonry(rows.map(n => pin(n))) : `<p class="fine">No objects match. Try fewer filters.</p>`; doWireHearts(feed, rows); }
   };
   el.querySelector("#doCatChips").onclick = e => {
     const b = e.target.closest("[data-df]"); if (!b) return;
     const key = b.dataset.df, v = b.dataset.dv;
     DO_FILTER[key] = key === "decade" ? (v === "" ? null : +v) : v;
+    buzz(6); draw();
+  };
+  el.addEventListener("click", e => {
+    const p = e.target.closest("[data-pin]"); if (p) { const n = DO_BY_ID.get(p.dataset.pin); if (n) doOpenObject(n.id); }
+  });
+  draw();
+}
+
+// ---------------------------------------------------------------- "Browse all", #/design/browse (David,
+// 2026-10-10: "a more convenient way to view them, similar to paintings, with filters -- and even on a map").
+// Every object, every category at once (doCategory above stays a single-category drill-down) -- filter by
+// category/decade/maker, sort by date/color/maker, a Keep heart on every tile, and "See on the map" to lay
+// this exact filtered set out on js/paintmap.js's own map (the "Collection" picker there defaults to Design
+// objects when opened this way, via spec.col).
+let DO_BR_FILTER = { cat: "", decade: null, maker: "" }, DO_BR_SORT = "default";
+const DO_BR_SORTS = [["default", "Default"], ["date", "Oldest first"], ["color", "By color"], ["maker", "By maker"]];
+function doBrFacets(rows) {
+  const by = (key, cap) => { const m = new Map(); rows.forEach(r => { const v = r[key]; if (v) m.set(v, (m.get(v) || 0) + 1); }); return [...m.entries()].sort((a, b) => b[1] - a[1]).slice(0, cap).map(([v]) => v); };
+  const decadeCounts = new Map(); rows.forEach(r => { if (r.decade != null) decadeCounts.set(r.decade, (decadeCounts.get(r.decade) || 0) + 1); });
+  return {
+    cats: DO_CATS.filter(c => rows.some(r => r.cat === c)),
+    decades: [...decadeCounts.keys()].sort((a, b) => a - b),
+    makers: by("artist", 24).filter(Boolean),
+  };
+}
+function doBrFiltered() {
+  return DO.filter(n => (!DO_BR_FILTER.cat || n.cat === DO_BR_FILTER.cat) && (DO_BR_FILTER.decade == null || n.decade === DO_BR_FILTER.decade) && (!DO_BR_FILTER.maker || n.artist === DO_BR_FILTER.maker));
+}
+// By color sorts on the dominant swatch's hue (pmHueKey, js/paintmap.js -- the exact same red-to-purple sweep
+// the map's own "By color" arrangement uses, so the grid and the map read the same way).
+function doBrSorted(rows) {
+  if (DO_BR_SORT === "date") return [...rows].sort((a, b) => (a.year == null ? 1e9 : a.year) - (b.year == null ? 1e9 : b.year));
+  if (DO_BR_SORT === "maker") return [...rows].sort((a, b) => (a.artist || "~").localeCompare(b.artist || "~"));
+  if (DO_BR_SORT === "color" && typeof pmHueKey === "function" && typeof lab === "function") {
+    return [...rows].sort((a, b) => {
+      const ha = (a.palette[0] || {}).h || "#888888", hb = (b.palette[0] || {}).h || "#888888";
+      const [, a1, b1] = lab(ha), [, a2, b2] = lab(hb);
+      return pmHueKey(a1, b1) - pmHueKey(a2, b2);
+    });
+  }
+  return rows;
+}
+function doBrowseAll(push = true) {
+  if (!DO) { doWhen(() => doBrowseAll(push)); return; }
+  DO_BR_FILTER = { cat: "", decade: null, maker: "" }; DO_BR_SORT = "default";
+  const el = show(`
+    ${worldTop("Design objects")}
+    <h1 class="p-title">Browse all</h1>
+    <p class="p-dek">${DO.length.toLocaleString()} objects — filter, sort, or lay them out by color on the map.</p>
+    <button class="wl" data-do-map>See on the map ${ICON.arrow}</button>
+    <p class="pmx-lab2" style="margin-top:14px">Sort</p>
+    <div class="art-bubbles" id="doBrSort" role="tablist"></div>
+    <div class="art-bubbles" id="doBrChips" role="tablist"></div>
+    <div id="doBrFeed"></div>
+  `, "article wd");
+  if (push && typeof XSTACK !== "undefined") XSTACK.push("r:design/browse");
+  worldBackWire(el, {}, () => doGrid(false));
+  const draw = () => {
+    const all = doBrFiltered(), rows = doBrSorted(all), { cats, decades, makers } = doBrFacets(DO);
+    const chip = (label, on, attr) => `<button class="art-bubble pulp-chip${on ? " on" : ""}" ${attr}>${esc(label)}</button>`;
+    const sortRow = el.querySelector("#doBrSort");
+    if (sortRow) sortRow.innerHTML = DO_BR_SORTS.map(([k, t]) => chip(t, DO_BR_SORT === k, `data-dbs="${k}"`)).join("");
+    const chips = el.querySelector("#doBrChips");
+    if (chips) chips.innerHTML = [
+      chip("All categories", !DO_BR_FILTER.cat, 'data-dbf="cat" data-dbv=""'),
+      ...cats.map(c => chip(DO_CAT_LABEL[c] || c, DO_BR_FILTER.cat === c, `data-dbf="cat" data-dbv="${esc(c)}"`)),
+    ].join("") + `<span style="width:10px"></span>` + [
+      chip("All decades", DO_BR_FILTER.decade == null, 'data-dbf="decade" data-dbv=""'),
+      ...decades.map(d => chip(d + "s", DO_BR_FILTER.decade === d, `data-dbf="decade" data-dbv="${d}"`)),
+    ].join("") + `<span style="width:10px"></span>` + [
+      chip("All makers", !DO_BR_FILTER.maker, 'data-dbf="maker" data-dbv=""'),
+      ...makers.map(a => chip(a, DO_BR_FILTER.maker === a, `data-dbf="maker" data-dbv="${esc(a)}"`)),
+    ].join("");
+    const feed = el.querySelector("#doBrFeed");
+    if (feed) {
+      feed.innerHTML = rows.length ? masonry(rows.map(n => pin(n))) : `<p class="fine">No objects match. Try fewer filters.</p>`;
+      doWireHearts(feed, rows);
+    }
+  };
+  el.querySelector("[data-do-map]").onclick = () => {
+    if (typeof pmOpen !== "function") return;
+    // this grid's own filters (category/decade/maker) don't carry over 1:1 to the map's own filter sheet state
+    // today -- opening fresh and pointing David at the "Collection" switch (already set to Design objects) is
+    // more honest than silently dropping half the filter if the shapes don't line up.
+    pmOpen({ col: "design" }, { fresh: true });
+  };
+  el.querySelector("#doBrSort").onclick = e => { const b = e.target.closest("[data-dbs]"); if (!b) return; DO_BR_SORT = b.dataset.dbs; buzz(5); draw(); };
+  el.querySelector("#doBrChips").onclick = e => {
+    const b = e.target.closest("[data-dbf]"); if (!b) return;
+    const key = b.dataset.dbf, v = b.dataset.dbv;
+    DO_BR_FILTER[key] = key === "decade" ? (v === "" ? null : +v) : v;
     buzz(6); draw();
   };
   el.addEventListener("click", e => {
@@ -348,6 +453,7 @@ function doGrid(push = true) {
     ${worldTop("Design objects")}
     <h1 class="p-title">Design objects</h1>
     <p class="p-dek">${DO.length.toLocaleString()} posters, textiles, ceramics, glass, furniture, costume, graphic design and postage stamps, 1800-1979, measured and named like every painting in the archive — a job always had a color, long before art did.</p>
+    <button class="wl" data-do-browse>Browse all, with filters and sort ${ICON.arrow}</button>
     ${doOverviewColorsHTML()}
     ${doFindingCardsHTML()}
     ${DO_CATS.map(doShelfHTML).join("")}
@@ -357,6 +463,7 @@ function doGrid(push = true) {
   if (push && typeof XSTACK !== "undefined") XSTACK.push("r:design");
   worldBackWire(el, {}, () => (typeof xToOrigin === "function" ? xToOrigin() : exploreHome()));
   el.addEventListener("click", e => {
+    if (e.target.closest("[data-do-browse]")) { doBrowseAll(); return; }
     const p = e.target.closest("[data-pin]"); if (p) { const n = DO_BY_ID.get(p.dataset.pin); if (n) doOpenObject(n.id); return; }
     const c = e.target.closest("[data-do-cat]"); if (c) { doCategory(c.dataset.doCat); return; }
     const m = e.target.closest("[data-do-maker]"); if (m) { doMakerPage(m.dataset.doMaker); return; }
@@ -381,4 +488,5 @@ function doShot(kind, arg) {
   if (kind === "designcat") return doCategory(arg || "poster", false);
   if (kind === "designobject") return doWhen(() => doOpenObject(arg || (DO[0] && DO[0].id)));
   if (kind === "designmaker") return doWhen(() => doMakerPage(arg || (DO_MAKERS[0] && doSlug(DO_MAKERS[0].a))));
+  if (kind === "designbrowse") return doBrowseAll(false);
 }

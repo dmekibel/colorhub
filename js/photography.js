@@ -89,6 +89,23 @@ function photographyNode(o) {
 
 // ---------------------------------------------------------------- facets + filter state
 let PH_FILTER = { process: "", decade: null, country: "", photographer: "" };
+// David, 2026-10-10: "Photography must have hearts, sort, filter, map" -- Sort (date/color/photographer) joins
+// the filter chips already here; By color sorts on pmHueKey (js/paintmap.js), the same red-to-purple sweep the
+// map's own "By color" arrangement uses.
+let PH_SORT = "default";
+const PH_SORTS = [["default", "Default"], ["date", "Oldest first"], ["color", "By color"], ["photographer", "By photographer"]];
+function phSorted(rows) {
+  if (PH_SORT === "date") return [...rows].sort((a, b) => (a.year == null ? 1e9 : a.year) - (b.year == null ? 1e9 : b.year));
+  if (PH_SORT === "photographer") return [...rows].sort((a, b) => a.artist.localeCompare(b.artist));
+  if (PH_SORT === "color" && typeof pmHueKey === "function" && typeof lab === "function") {
+    return [...rows].sort((a, b) => {
+      const ha = (a.palette[0] || {}).h || "#888888", hb = (b.palette[0] || {}).h || "#888888";
+      const [, a1, b1] = lab(ha), [, a2, b2] = lab(hb);
+      return pmHueKey(a1, b1) - pmHueKey(a2, b2);
+    });
+  }
+  return rows;
+}
 function phFacets(rows) {
   const by = (key, cap) => {
     const counts = new Map();
@@ -132,11 +149,15 @@ function photographyGrid(push = true) {
     ${worldTop("Photography")}
     <h1 class="p-title">Photography</h1>
     <p class="p-dek">Public-domain color photographs, 1905-1943 and two from orbit. As scanned: aged plates, shifted dyes, a digitization's own color choices.</p>
+    <button class="wl" data-ph-map>See on the map ${ICON.arrow}</button>
+    <p class="pmx-lab2" style="margin-top:14px">Sort</p>
+    <div class="art-bubbles" id="phSort" role="tablist"></div>
     <div class="art-bubbles" id="phChips" role="tablist"></div>
     <div id="phFeed"><p class="fine">Loading the photographs…</p></div>
   `, "article");
   if (push && typeof XSTACK !== "undefined") XSTACK.push("r:photography");
   worldBackWire(el, {}, () => (typeof xToOrigin === "function" ? xToOrigin() : exploreHome()));
+  el.querySelector("#phSort").onclick = e => { const b = e.target.closest("[data-phs]"); if (!b) return; PH_SORT = b.dataset.phs; buzz(5); phDraw(el); };
   el.querySelector("#phChips").onclick = e => {
     const b = e.target.closest("[data-pf]"); if (!b) return;
     const key = b.dataset.pf, v = b.dataset.pv;
@@ -144,6 +165,7 @@ function photographyGrid(push = true) {
     buzz(6); phDraw(el);
   };
   el.addEventListener("click", e => {
+    if (e.target.closest("[data-ph-map]")) { if (typeof pmOpen === "function") pmOpen({ col: "photography" }, { fresh: true }); return; }
     const p = e.target.closest("[data-pin]"); if (p) { const n = (PH || []).find(r => r.id === p.dataset.pin); if (n) paintingPage(n); return; }
     const pr = e.target.closest("[data-phr]"); if (pr) { const n = PH_PROCESS_NOTES[pr.dataset.phr]; if (n) phProcessSheet(pr.dataset.phr); return; }
     if (e.target.closest("[data-retry]")) photographyGrid(false);
@@ -157,8 +179,10 @@ function phProcessSheet(process) {
   sheet(`<div class="gl-sh-top"><b>${esc(process)}</b></div><p class="aw-sub" style="max-width:none">${esc(phProcessNote(process))}</p>`);
 }
 function phDraw(el) {
-  const rows = phFiltered(), { processes, decades, countries, photographers } = phFacets(PH || []);
+  const filtered = phFiltered(), rows = phSorted(filtered), { processes, decades, countries, photographers } = phFacets(PH || []);
   const chip = (label, on, attr) => `<button class="art-bubble pulp-chip${on ? " on" : ""}" ${attr}>${esc(label)}</button>`;
+  const sortRow = el.querySelector("#phSort");
+  if (sortRow) sortRow.innerHTML = PH_SORTS.map(([k, t]) => chip(t, PH_SORT === k, `data-phs="${k}"`)).join("");
   const chips = el.querySelector("#phChips");
   if (chips) {
     chips.innerHTML = [
@@ -180,6 +204,17 @@ function phDraw(el) {
   const notesRow = Object.keys(PH_PROCESS_NOTES).filter(p => rows.some(r => r.process === p)).length > 1 || !PH_FILTER.process ? "" :
     `<button class="aw-link" data-phr="${esc(PH_FILTER.process)}" style="margin:0 0 14px">How ${esc((PH_PROCESS_NOTES[PH_FILTER.process] || {}).short || "this process").toLowerCase()} ${ICON.arrow}</button>`;
   feed.innerHTML = rows.length ? notesRow + masonry(rows.map(n => pin(n))) : `<p class="fine">No photographs match. Try fewer filters.</p>`;
+  // a Keep heart on every tile (js/favs.js's generic fvItem* store, shared with Design objects and the
+  // paintings map's own bottom card) -- David, 2026-10-10: "Photography must have hearts, sort, filter, map."
+  if (typeof fvItemHeart === "function" && typeof fvItemWireGrid === "function") {
+    feed._phHeartIndex = new Map(rows.map(n => [n.id, n]));
+    feed.querySelectorAll("[data-pin]").forEach(b => {
+      if (b.querySelector("[data-fvi]")) return;
+      b.style.position = "relative";
+      b.insertAdjacentHTML("beforeend", fvItemHeart("photography", b.dataset.pin));
+    });
+    if (!feed._phHeartsWired) { feed._phHeartsWired = true; fvItemWireGrid(feed, id => feed._phHeartIndex.get(id)); }
+  }
 }
 
 // ---------------------------------------------------------------- the photographer page, #/photographer/<slug>

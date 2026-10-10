@@ -122,6 +122,7 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["pulpGrid", () => routed("Pulp covers", "pulp")],   // js/pulp.js: the World door for pulp magazine/paperback covers   // js/looks.js
   ["photographyGrid", () => routed("Photography", "photography")],   // js/photography.js: the World door for the color-photography archive
   ["doGrid", () => routed("Design objects", "design")],   // js/designobjects.js: the World door for posters/textiles/ceramics/etc.
+  ["doBrowseAll", () => routed("Browse all design objects", "design/browse")],   // js/designobjects.js: the filterable, sortable, Keep-able grid + "See on the map"
   ["doCategory", cat => cat ? routed(DO_CAT_LABEL[cat] || cat, "design/cat/" + cat) : null],
   ["doMakerPage", slug => slug ? routed((typeof doMakerTitle === "function" && doMakerTitle(slug)) || slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase()), "design/maker/" + slug) : null],
   ["ukGrid", () => routed("Ukiyo-e prints", "ukiyoe")],   // js/ukiyoe.js: the World door for Japanese woodblock prints
@@ -316,6 +317,7 @@ function openRoute(hash, initial = false) {
   if (kind === "brand" && id && typeof bdOpenRoute === "function") { base(); bdOpenRoute(id); return true; }   // js/brands.js
   if (kind === "design" && id === "brands" && typeof bdBrowser === "function") { base(); XSTACK = []; bdBrowser(); return true; }
   if (kind === "design" && !id && typeof doGrid === "function") { base(); XSTACK = []; doGrid(false); return true; }   // js/designobjects.js: #/design
+  if (kind === "design" && id === "browse" && typeof doBrowseAll === "function") { base(); XSTACK = []; doBrowseAll(false); return true; }
   if (kind === "design" && id === "cat" && more && typeof doCategory === "function") { base(); XSTACK = []; doCategory(more, false); return true; }
   if (kind === "design" && id === "maker" && more && typeof doMakerPage === "function") { base(); XSTACK = []; doMakerPage(more, {}); return true; }
   if (kind === "ukiyoe" && !id && typeof ukGrid === "function") { base(); XSTACK = []; ukGrid(false); return true; }   // js/ukiyoe.js: #/ukiyoe
