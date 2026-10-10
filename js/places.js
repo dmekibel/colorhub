@@ -1,30 +1,31 @@
 "use strict";
 // The Places menu and the one ⋯ More sheet (design/SIMPLIFY/PLAN.md §3.1/§3.4/§9, the day-0 contract).
-// Replaces the left corner's old bubble-arc stem (js/core.js toggleStem, retired) and gives every screen the
-// same ⋯ anatomy: search first, this screen's own groups, Settings last. Nothing here is modal-over-modal: a
-// sub-page (moreSub) slides in INSIDE the same sheet, with its own ‹, never a second sheet stacked on top (PLAN
-// §3.4's "never a second sheet on top").
+// ⋯ (moreOpen/moreRegister, below) is unchanged and still the one sheet every PAGE's ⋯ opens. The Places
+// MENU itself (placesOpen, below) was restored to its earlier form on 2026-10-10 -- David's verdict on the
+// Simplify pass: "the bottom-left Collections shouldn't make the menu full screen; it should be a button like
+// the other rows above it... the way it worked before, both bottom-left and bottom-right buttons expanded
+// upward along the side without going full screen." So it's the old bubble-arc stem again (js/core.js's
+// retired toggleStem: STEM_OPEN/closeStem/cornersBack/growFrom/roomToFloor/stemJustClosed, all still there,
+// unchanged -- the map's right corner, js/home.js hmDoMenu, rides the exact same machinery), just with new
+// rows: the 5 places, then one more row, Collections, that opens the Museum's own grid of every collection
+// (js/explore.js museumHome) as its own screen -- never inline in this menu, which is the thing David objected to.
 
-// ---------- the Places sheet ----------
+// ---------- the Places stem ----------
 // Every place, in order (PLAN §3.1): the floor plus the four rooms that rise from it. Each row shows its own
 // live art and note (js/core.js roomsBubbleArt/roomsNote, unchanged -- the same pictures the old stem used).
 const PLACES_LIST = [["home", NAV_MAP], ...ROOMS_LIST];
 const placesHere = () => { const r = document.querySelector(".room-sheet"); return r ? r.dataset.room : "home"; };
-
-function placesRow(id, label, here) {
-  return `<button class="pl-row" role="menuitem" data-pl-go="${id}">
-    ${roomsBubbleArt(id)}<span class="pl-txt"><b>${esc(label)}</b><em>${esc(here ? "Here" : roomsNote(id))}</em></span>${here ? "" : ICON.chev}
-  </button>`;
-}
-// "Pick up where you left off" (PLAN §3.5/§9, replaces the timed "Back to…" pill with a persistent row here
-// and in the trail sheet): js/trail.js's TL_RECENT, the one stashed trail an explicit Close/place-pill leaves behind.
-function placesRecentRow() {
-  const r = typeof TL_RECENT !== "undefined" && TL_RECENT;
-  if (!r || !r.stack.length) return "";
-  const top = r.stack[r.stack.length - 1], m = (typeof tlMetaFor === "function" ? tlMetaFor(top) : null) || {};
-  const title = r.title || m.title || "your last page";
-  return `<button class="pl-recent" data-pl-recent>${typeof tlThumb === "function" ? tlThumb({ img: r.img, c: r.c, sw: r.sw }) : ""}
-    <span class="pl-txt"><b>Pick up where you left off</b><em>${esc(title)}</em></span>${ICON.chev}</button>`;
+// Collections' own row art: a small mosaic of 4 covers (David, 2026-10-10), not a swatch dot -- a plain,
+// recognizable "many small pictures" glyph, distinct from every room's single live picture. Real, not a
+// placeholder: the 4 hexes come from COLLECTIONS' own `pic` (js/collections.js, the same curated color every
+// collection's tile falls back to while its real cover loads), recent-first so the mosaic reflects what you
+// actually opened -- never four arbitrary colors with no connection to the data.
+const PLACES_COLL_FALLBACK = ["#5E4A3A", "#211D16", "#6B4C7A", "#1A1A2E"];   // Paintings/Poems/Gems/Films -- only if COLLECTIONS hasn't loaded
+function placesCollArt() {
+  const list = typeof collRecent === "function" ? collRecent() : [];
+  const hexes = (list.length ? list : (typeof COLLECTIONS !== "undefined" ? COLLECTIONS : [])).slice(0, 4).map(c => c.pic).filter(Boolean);
+  while (hexes.length < 4) hexes.push(PLACES_COLL_FALLBACK[hexes.length] || "#3A3226");
+  return `<span class="rm-art pl-coll-art">${hexes.map(h => `<i style="background:${esc(h)}"></i>`).join("")}</span>`;
 }
 // Every collection, as a picture tile, recent-first (PLAN §3.1/§3.4: "a directory of destinations... shows every
 // destination as a picture", exempt from the ≤6 rule). js/collections.js owns COLLECTIONS/collRecent().
@@ -45,47 +46,57 @@ function placesCollTile(c) {
 }
 // Same corner, same empirically-observed quirk the old bubble-arc stem was fixed for (core.js stemJustClosed,
 // David 2026-10-08: "clicking it again minimizes it, and then automatically it expands again by itself" -- a
-// delayed synthetic click iOS can still fire on a button once whatever covered it is gone). A MutationObserver
-// (not sheet()'s own close()) catches every way the sheet can leave -- scrim tap, swipe-down, Escape, a row --
-// so the guard holds regardless of which one closed it.
-let PLACES_CLOSED_AT = 0;
-const placesJustClosed = () => Date.now() - PLACES_CLOSED_AT < 380;
+// delayed synthetic click iOS can still fire on a button once whatever covered it is gone). The stem now rides
+// core.js's own STEM_OPEN/closeStem/STEM_CLOSED_AT/stemJustClosed -- the same guard the right corner's
+// hm-do-stem uses -- so this file no longer needs its own copy. Kept as a function (always false) only because
+// js/core.js's click delegator for [data-rooms-corner] still calls it defensively.
+const placesJustClosed = () => false;
 function placesOpen() {
-  if (document.querySelector(".sheet,.rooms-stem") || placesJustClosed()) return;
-  buzz(6);
+  if (STEM_OPEN) { buzz(4); return closeStem(); }
+  if (stemJustClosed() || document.querySelector(".sheet,.scrim,.rooms-stem")) return;
+  buzz(4);
+  if (!document.querySelector(".room-sheet") && typeof hmSnapFloor === "function") hmSnapFloor();   // L18 B2: the floor as you leave it
+  STEM_OPEN = true; document.body.classList.add("stem-open");
+  document.querySelectorAll(".rooms-stem,.rm-scrim").forEach(n => n.remove());   // one still sinking from a fast double tap
   const here = placesHere();
-  const colls = typeof collRecent === "function" ? collRecent() : [];
-  const html = `<div class="pl-sheet">
-      <h2 class="title-2">Places</h2>
-      ${placesRecentRow()}
-      <ul class="pl-grid" role="menu" aria-label="Places">${PLACES_LIST.map(([id, label]) => placesRow(id, label, id === here)).join("")}</ul>
-      ${colls.length ? `<h3 class="title-3 pl-coll-h">Collections</h3><ul class="pl-colls">${colls.map(placesCollTile).join("")}</ul>` : ""}
-      <div class="pl-search"><button type="button" class="pl-search-row" data-pl-search>${ICON.search}<span>Search colors, paintings, collections…</span></button></div>
-    </div>`;
-  const { sh, close } = sheet(html, { lock: false });
-  sh.classList.add("pl-sheet-wrap");
-  // the common case (a tap outside, on the scrim) is caught the instant it happens, same as closeStem()'s own
-  // STEM_CLOSED_AT; a MutationObserver is the fallback for the other ways out (swipe-down, Escape, a row) that
-  // don't fire on the scrim at all, at the small cost of catching those only once the sheet actually leaves.
-  const scrimEl = document.querySelector(".scrim");
-  if (scrimEl) scrimEl.addEventListener("pointerdown", () => { PLACES_CLOSED_AT = Date.now(); }, { capture: true });
-  const plMo = new MutationObserver(() => { if (!sh.isConnected) { PLACES_CLOSED_AT = Date.now(); plMo.disconnect(); } });
-  plMo.observe(document.body, { childList: true });
-  sh.addEventListener("click", e => {
-    const r = e.target.closest("[data-pl-recent]");
-    if (r) { close(); buzz(6); if (typeof tlResumeRecent === "function") tlResumeRecent(); return; }
-    const s = e.target.closest("[data-pl-search]");
-    if (s) { close(); if (typeof searchOpen === "function") searchOpen({ from: "places" }); return; }
-    const p = e.target.closest("[data-pl-go]");
-    if (p) {
-      const id = p.dataset.plGo; close();
-      if (id === here) return;
-      buzz(8);
-      if (id === "home") return typeof hmGoFloor === "function" ? hmGoFloor() : go("learn");
-      return go(id);
+  const rows = PLACES_LIST.map(([id, label]) => ({ id, label, cur: id === here }))
+    .concat([{ id: "colls", label: "Collections", coll: true }]);
+  const n = rows.length;
+  const scrim = document.createElement("div"); scrim.className = "rm-scrim rm-scrim-l";
+  scrim.addEventListener("pointerdown", e => { e.preventDefault(); e.stopPropagation(); buzz(4); closeStem(); });
+  scrim.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); });
+  scrim.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
+  const stem = document.createElement("div");
+  stem.className = "rooms-stem"; stem.setAttribute("role", "menu"); stem.setAttribute("aria-label", "Places");
+  stem.style.setProperty("--n", n);
+  // a straight stack up the left edge, nearest-first (David, 2026-10-08: "straight up along the side"): Map
+  // leads (you're usually a tap from it), then Learn/Train/Museum/Studio, Collections furthest (least-used).
+  stem.innerHTML = rows.map((r, i) => r.coll
+    ? `<button class="rm-bubble" role="menuitem" data-pl="colls" style="--i:${i}">
+        ${placesCollArt()}<span class="rm-label"><b>Collections</b><em>Every painting, poem, gem and look</em></span></button>`
+    : `<button class="rm-bubble${r.cur ? " cur" : ""}" role="menuitem" data-pl="${r.id}" style="--i:${i}">
+        ${roomsBubbleArt(r.id)}<span class="rm-label"><b>${esc(r.label)}</b><em>${esc(r.cur ? "You're here" : roomsNote(r.id))}</em></span></button>`
+  ).join("");
+  document.body.append(scrim, stem);
+  document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.add("on"); b.innerHTML = ICON.x; b.setAttribute("aria-expanded", "true"); });
+  requestAnimationFrame(() => requestAnimationFrame(() => { scrim.classList.add("on"); stem.classList.add("on"); }));
+  STEM_KEY = e => { if (e.key === "Escape") { e.stopPropagation(); closeStem(); } };
+  addEventListener("keydown", STEM_KEY, true);
+  stem.querySelectorAll("[data-pl]").forEach(b => b.onclick = () => {
+    const id = b.dataset.pl, art = b.querySelector(".rm-art");
+    buzz(8);
+    if (id === "colls") {
+      closeStem();
+      // the Museum's own grid of every collection (museumHome, js/explore.js) -- its own full screen, never
+      // rendered inline in this menu (David's objection to the Simplify pass's full-screen Collections panel).
+      S.lens = "all"; save();
+      return growFrom(art, () => go("explore"));
     }
-    const c = e.target.closest("[data-pl-coll]");
-    if (c) { close(); buzz(8); if (typeof collOpen === "function") collOpen(c.dataset.plColl); return; }
+    if (id === here) return closeStem();
+    b.classList.add("go");
+    closeStem();
+    if (id === "home") return roomToFloor(art);
+    growFrom(art, () => go(id));
   });
 }
 

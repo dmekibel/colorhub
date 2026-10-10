@@ -1,29 +1,20 @@
-/* The Places menu, the one ⋯ More sheet, the one search, and first-run orientation (js/places.js, js/search.js,
+/* The Places stem, the one ⋯ More sheet, the one search, and first-run orientation (js/places.js, js/search.js,
    js/orient.js -- design/SIMPLIFY/PLAN.md §9's day-0 contract). Reuses the sheet/mn-row/mn-group family
    (css/menus2.css) wherever it already fits; only what's genuinely new lives here. */
 
-/* ---------- the Places sheet (js/places.js placesOpen) ---------- */
-.pl-sheet .title-2{margin:0 0 4px}
-.pl-sheet-wrap .sheet,.mr-sheet-wrap .sheet,.sr-sheet-wrap .sheet{max-height:84dvh;overflow-y:auto;overscroll-behavior:contain}
-.pl-coll-h{margin:18px 0 10px;color:var(--soft);font-size:17px}
-.pl-grid{list-style:none;margin:0 0 4px;padding:0;display:flex;flex-direction:column;gap:2px}
-.pl-row{width:100%;display:flex;align-items:center;gap:14px;min-height:64px;padding:8px 6px;text-align:left;color:var(--ink);border-radius:var(--r-2,14px);transition:background var(--dur-1,.2s)}
-.pl-row:active{background:var(--surface-2)}
-.pl-row>svg{flex:none;color:var(--soft);width:16px;height:16px}
-.pl-row .rm-art{width:48px;height:48px;flex:none;border-radius:50%;box-shadow:none;position:relative}
-.pl-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
-.pl-txt b{font:400 19px/1.15 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pl-txt em{font:italic 400 16px/1.3 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* "Pick up where you left off" (replaces the timed "Back to…" map pill, PLAN §9): a paper row, always on top */
-.pl-recent{width:100%;display:flex;align-items:center;gap:14px;min-height:64px;padding:8px 10px;margin-bottom:10px;
-  text-align:left;border-radius:var(--r-2,14px);background:var(--paper);color:var(--paper-ink)}
-.pl-recent:active{opacity:.9}
-.pl-recent .tl-th{width:40px;height:40px;border-radius:8px}
-.pl-recent>svg{flex:none;width:16px;height:16px}
-.pl-recent .pl-txt b{font:600 16px/1.2 var(--sans);font-family:var(--sans)}
-.pl-recent .pl-txt em{color:inherit;opacity:.75}
-/* the collections grid: a picture tile per collection, three a row -- a directory of destinations, exempt from
-   the ≤6 rule (PLAN §3.4): "a collection you can't see is the exact problem this plan fixes" */
+/* ---------- the Places stem (js/places.js placesOpen) ----------
+   Restored 2026-10-10 (David's verdict on the Simplify corners) to the earlier expanding-pill-column
+   interaction: it shares .rooms-stem/.rm-bubble/.rm-art/.rm-label with the right corner's stem (css/menus2.css);
+   only the Collections row's own mosaic thumbnail is new. */
+.mr-sheet-wrap .sheet,.sr-sheet-wrap .sheet{max-height:84dvh;overflow-y:auto;overscroll-behavior:contain}
+/* Collections' own row art: a small mosaic of 4 covers (David, 2026-10-10), distinct from every place's single
+   live picture -- "Browse everything", not one room's own content. */
+.pl-coll-art{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;background:var(--ground)}
+.pl-coll-art i{display:block}
+/* the collections grid itself (js/explore.js museumHome, which reaches "Collections" one tap down): a picture
+   tile per collection, three a row -- a directory of destinations, exempt from the ≤6 rule (PLAN §3.4): "a
+   collection you can't see is the exact problem this plan fixes". Not rendered inline in the Places stem
+   anymore (David's objection to the Simplify pass's full-screen Collections panel) -- its own screen only. */
 .pl-colls{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .pl-ctile{aspect-ratio:1;border-radius:var(--r-card,18px);background:var(--c,var(--surface-2));position:relative;
   display:flex;flex-direction:column;justify-content:flex-end;padding:10px;text-align:left;overflow:hidden;
@@ -32,10 +23,6 @@
 .pl-ctile b{position:relative;font:500 14px/1.2 var(--sans);color:#fff;z-index:1}
 .pl-ctile small{position:relative;font:400 12px/1.2 var(--sans);color:rgba(255,255,255,.75);z-index:1}
 .pl-ctile:active{transform:scale(.97)}
-.pl-search{margin-top:18px}
-.pl-search-row{width:100%;display:flex;align-items:center;gap:10px;min-height:56px;padding:0 16px;border-radius:999px;
-  background:var(--surface-2);color:var(--soft);text-align:left;font:400 16px/1 var(--sans)}
-.pl-search-row svg{flex:none;width:18px;height:18px}
 
 /* ---------- the one ⋯ More sheet (js/places.js moreOpen) ---------- */
 .mr-sheet .mn-group:first-of-type{margin-top:4px}

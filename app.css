@@ -94,7 +94,15 @@ a{color:inherit}
 @keyframes enter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes fade{from{opacity:0}}
 .fixed{height:100dvh;min-height:0;overflow:hidden}
-.home,.meet,.has-tabs{animation-name:fade}
+.home,.meet,.has-tabs,.hm{animation-name:fade}
+/* .hm (the honeycomb/Map, ROADMAP §12 -- "home" in intent, "hm" in markup): the default .screen entrance
+   ("enter") animates via transform, which per spec gives the animating element a new containing block for the
+   whole 500ms it runs -- long enough to outlast a 300ms settle, and the exact family of bug this file's own
+   history already fought (a position:fixed corner pinned to the WRONG box). The plain opacity-only "fade" (like
+   .home/.meet/.has-tabs already get) never creates one, so the map's own corners (position:fixed, inside
+   .screen) stay fixed to the real viewport through the whole entrance, not just after it settles. David,
+   2026-10-10 (via the coordinator): a short landscape height (956x440) could catch ".corner.l" a couple of px
+   past the bottom edge mid-animation -- this is the root-cause fix; js/core.js clampCorners() is the backstop. */
 .has-tabs{padding-bottom:calc(var(--tabh) + 12px)}
 
 /* ---------- buttons (DESIGN-SYSTEM.md §10). One paper-filled primary per screen: .btn is now that pill, so
