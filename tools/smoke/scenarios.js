@@ -1426,11 +1426,10 @@ scenario("train", "every entry on the Train menu opens something (nothing locked
   t.notes.push(`${n} Train entries and ${d} drills opened`);
 });
 
-// David, 2026-10-09 ("spot the difference seems too complex"): one tap from the Train shelf lands on the board
-// (For you, adaptive) -- no setup screen first, for a first-timer or a returning player. The old Classic/Shuffle/
-// Choose/names-on-tiles/session-length setup now lives behind a small Customize icon (js/games/oo-ui.js
-// ooCustomizeSheet), never gating round one. The play screen itself shows only the board, one instruction and a
-// quiet progress indicator; the end-of-session screen is one number, one sentence, then Details.
+// David, 2026-10-10 ("very simple, always adapting"): one tap from the Train shelf lands straight on a 3 x 3
+// board -- no setup, no journey map, no level picker, no customize sheet. Arcade (a timer, three lives) is the
+// default; Zen is one small pill, not a menu. A miss reveals both colors; three misses in Arcade ends the run on
+// the three-bar end screen, which offers Play again / Keep going, never a map.
 const ooTapRound = async t => {
   await t.waitFor(".oo-board .oo-t", 6000, "the board");
   t.expect(t.$$(".oo-board .oo-t").length >= 9, `${t.$$(".oo-board .oo-t").length} tiles`);
@@ -1439,46 +1438,57 @@ const ooTapRound = async t => {
   t.expect(t.$("#oostage").innerHTML !== first || t.$(".result") || t.$("#oofoot").innerText.length > 5, "tapping a tile changed nothing");
   let taps = 1;
   for (let i = 0; i < 60 && !t.$(".result"); i++) {
-    const b = t.$("[data-next]") || t.$("[data-w]") || t.$("[data-k]:not(:disabled)") || t.$(".oo-board .oo-t:not(.ring):not(.miss):not(.sel):not(:disabled)");
+    const b = t.$("[data-next]") || t.$(".oo-board .oo-t:not(.ring):not(.miss):not(:disabled)");
     if (b) { await t.click(b, { force: true, wait: 400 }); taps++; } else await t.sleep(300);
   }
-  await t.waitFor(".result", 6000, "the station result screen");
-  t.expect(t.$(".result").innerText.length > 40, "the result screen is empty");
+  await t.waitFor(".result", 6000, "the end screen");
+  t.expect(t.$(".result").innerText.length > 40, "the end screen is empty");
   return taps;
 };
-scenario("train", "Odd one out: one tap from the shelf to the board, then a whole round", async t => {
+scenario("train", "Odd one out: one tap from the shelf to the board, then a whole run", async t => {
   await t.open("#shot=gx:home", { settle: 600 });
   const st = await t.waitFor("[data-oo-map]", 6000, "the Odd one out shelf");
   await t.click(st, { wait: 700 });
-  t.expect(!t.$("[data-play]"), "a first tap on the shelf should land on the board, not a setup screen");
+  t.expect(!t.$("[data-play]") && !t.$(".oo-pk") && !t.$(".oo-sl"), "a first tap on the shelf should land on the board, not a setup screen");
+  t.expect(t.$(".oo-hearts") && t.$$(".oo-hearts i").length === 3, "Arcade should show three lives");
+  t.expect(/arcade/i.test(t.text(".oo-zenpill")), "the header should offer a Zen pill, defaulting to Arcade");
   const taps = await ooTapRound(t);
-  t.notes.push(`${taps} taps to the result (first-timer, direct entry)`);
-  // a returning player: back to Train, tap the shelf again -- still straight to the board, not the ladder/map
-  await t.click("[data-map]", { wait: 500 });
-  await t.waitFor(".oo-map [data-close]", 6000, "the ladder map");
-  await t.click(".oo-map [data-close]", { wait: 500 });
-  const st2 = await t.waitFor("[data-oo-map]", 6000, "the Odd one out shelf again");
-  await t.click(st2, { wait: 700 });
-  t.expect(!t.$("[data-play]"), "a returning player should also land on the board in one tap");
+  t.notes.push(`${taps} taps to the end screen (first-timer, direct entry, Arcade's three lives)`);
+  t.expect(!t.$(".result [data-map]") && t.$(".result [data-again]") && t.$(".result [data-keep]"), "the end screen should offer Play again / Keep going, not a map");
+  t.expect(t.$$(".oo-ebar").length === 3, "the end screen should show three bars: hue, saturation, value");
+  // a returning player: back to Train, tap the shelf again -- still straight to the board, never a map
+  await t.click(".result [data-again]", { wait: 500 });
   await t.waitFor(".oo-board .oo-t", 6000, "the board, second time");
 });
 
-scenario("train", "Odd one out: Customize is one sheet behind a small icon, not shown before round one", async t => {
-  await t.open("#shot=gx:oo:lv-1", { settle: 600 });
-  await t.waitFor(".oo-board .oo-t", 6000, "level 1's board");
-  t.expect(!t.$(".oo-pk, .oo-sl"), "setup controls should not sit on the play screen itself");
-  const tune = await t.waitFor("[data-tune]", 4000, "the Customize icon");
-  await t.click(tune, { wait: 500 });
-  await t.waitFor(".cx-sh-head h3", 4000, "the Customize sheet");
-  t.expect(/customize/i.test(t.text(".cx-sh-head h3")), "the sheet should say Customize");
-  t.expect(t.$$("[data-len]").length === 3, "session length should offer Short, Standard and Long");
-  await t.click('[data-len="15"]', { wait: 400 });
-  t.expect(t.$('[data-len="15"]').classList.contains("on"), "Short did not get selected");
-  await t.click('[data-names="off"]', { wait: 400 });
-  t.expect(t.$('[data-names="off"]').classList.contains("on"), "Names off did not get selected");
-  await t.click("[data-done]", { wait: 500 });
-  t.expect(!t.$(".cx-sh-head h3"), "the sheet should close");
-  await t.waitFor(".oo-board .oo-t", 4000, "the board is still there after closing Customize");
+scenario("train", "Odd one out: Zen is one pill (no timer, no lives), a palette round, a 2-odd round, a miss", async t => {
+  await t.open("#shot=gx:oo:zen", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a Zen board");
+  t.expect(!t.$(".oo-hearts") && !t.$(".oo-tlimit"), "Zen should show no lives and no timer");
+  t.expect(t.$(".oo-ztally"), "Zen should show a quiet running tally");
+  t.expect(t.$(".oo-zenpill.on") && /zen/i.test(t.text(".oo-zenpill")), "the Zen pill should read on and say Zen");
+
+  await t.open("#shot=gx:oo:palette", { settle: 600 });
+  await t.waitFor(".oo-t.oo-pal", 6000, "a palette round");
+  t.expect(t.$$(".oo-t.oo-pal").length === 9, "a palette round should still be a 3 x 3 grid of patterned tiles");
+
+  await t.open("#shot=gx:oo:k2", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a 2-odd round");
+  const k = t.ev("OO_LAST && OO_LAST.ans && OO_LAST.ans.length");
+  t.expect(k === 2, `a k2 round should have two odd tiles, got ${k}`);
+
+  await t.open("#shot=gx:oo:miss", { settle: 1400 });
+  await t.waitFor(".oo-t.ring", 6000, "the odd tile ringed after a miss");
+  t.expect(t.$(".oo-t.miss"), "the tapped (wrong) tile should be marked");
+  t.expect(t.$(".oo-cmp"), "a miss should show both colors side by side");
+});
+
+scenario("train", "Odd one out: the end screen names the day's edge with three bars", async t => {
+  await t.open("#shot=gx:oo:end", { settle: 600 });
+  await t.waitFor(".result", 6000, "the end screen");
+  t.expect(t.$$(".oo-ebar").length === 3, "three bars: hue, saturation, value");
+  t.expect(t.$("h1").innerText.length > 5, "a headline naming the edge");
+  t.expect(t.$(".result [data-again]") && t.$(".result [data-keep]"), "Play again and Keep going should both be offered");
 });
 
 // Gradients (js/games/hue-*.js): the shelf opens the teaching board; swap the two tiles with real taps, then play
