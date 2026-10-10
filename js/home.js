@@ -1005,11 +1005,14 @@ function hmHome() {
     // own "Colors & Arrange is one tap further" ladder, and David's "it should be more prominent").
     const rows = [
       { id: "settings", t: "Settings", art: ic(HM_DO_GEAR), small: true, attr: "data-do-settings" },
-      { id: "surprise", t: "Surprise me", n: "A color you haven't met", art: ic(ICON.dice), attr: "data-do-surprise" },
+      { id: "surprise", t: "Surprise me", n: "A color you haven't met", art: ic(icon("dice", 22)), attr: "data-do-surprise" },
       { id: "namer", t: "Name any color", art: ic(icon("pipette", 22)), attr: "data-do-namer" },
-      typeof fvPickStart === "function" && { id: "keep", t: "Keep colors", n: "From the map", art: ic(FV_HEART), attr: "data-do-keep" },
-      typeof prQuick === "function" && { id: "study", t: "Study the map", n: lit ? honeyLitLabel().title : "Names near the middle", art: ic(PR_ICON.cards), attr: "data-do-study" },
-      typeof ssOpen === "function" && { id: "slideshow", t: "Slideshow", n: "Let the colors play", art: ic(ICON.play), attr: "data-do-slideshow" },
+      // David, 2026-10-10 (a live screenshot): "consistent 22px icons" -- FV_HEART/PR_ICON.cards/ICON.play are
+      // each sized for the spot they were first drawn for (24/24/18), not this stem, so every glyph here asks
+      // icon() directly at 22px instead of reusing those constants.
+      typeof fvPickStart === "function" && { id: "keep", t: "Keep colors", n: "From the map", art: ic(icon("heart", 22)), attr: "data-do-keep" },
+      typeof prQuick === "function" && { id: "study", t: "Study the map", n: lit ? honeyLitLabel().title : "Names near the middle", art: ic(icon("learn", 22)), attr: "data-do-study" },
+      typeof ssOpen === "function" && { id: "slideshow", t: "Slideshow", n: "Let the colors play", art: ic(icon("play", 22)), attr: "data-do-slideshow" },
       { id: "colors", t: "Colors & Arrange", n: `${hlAll ? "Every name" : hmViewLabel()} · ${hmArrLabel()}`, art: dots(sample), attr: "data-do-colors" },
     ].filter(Boolean);
     const n = rows.length;

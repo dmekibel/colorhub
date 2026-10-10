@@ -367,7 +367,12 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--ink);outline-of
    you're in is raised (--s3), ringed and dotted, never a paper ring. */
 .rooms-stem .rm-bubble{left:12px;height:var(--tap-l);gap:12px;padding:3px 22px 3px 3px;
   background:var(--s2);border:1px solid var(--line-2);box-shadow:0 8px 24px rgba(0,0,0,.5);transform-origin:28px 100%}
-.rooms-stem.hm-do-stem .rm-bubble{left:auto;right:12px;padding:3px 3px 3px 22px;transform-origin:calc(100% - 28px) 100%}
+/* the right corner's own bubble mirrors the left one: "its picture sits centered over the corner" means over
+   the RIGHT corner here, so the art has to be the OUTER (rightmost) flex child, not just given outer-side
+   padding while staying first in DOM order -- row-reverse is what was missing (David's screenshot, 2026-10-10:
+   "the circle is on the LEFT... match the old layout"). The padding above was already written for this (3px
+   hugging the now-outer icon, 22px of inner breathing room before the label), just never paired with it. */
+.rooms-stem.hm-do-stem .rm-bubble{left:auto;right:12px;padding:3px 3px 3px 22px;flex-direction:row-reverse;transform-origin:calc(100% - 28px) 100%}
 .rooms-stem .rm-bubble:active{background:var(--s3)}
 .rooms-stem .rm-art{width:48px;height:48px;border-radius:50%;overflow:hidden;flex:none}
 .rooms-stem .hm-do-ic{background:var(--s3)}
