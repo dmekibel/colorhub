@@ -1740,6 +1740,69 @@ scenario("train", "Odd one out: the size-chip picker (pause menu) sets the next 
   t.ev("const s = ooSimpleState(); s.sizeIdx = 1; s." + growKey + " = " + growBefore + "; save(); 1");   // reset
 });
 
+// David's live-build bug report: "the Odd one out tile amount selector doesn't work." Root cause: the pre-game
+// and pause-menu size chips always showed the Full-screen presets (bound to sim.sizeIdx), even while Board was
+// set to Square -- ooStartCols reads sim.squareCols for Square, so a tap highlighted a chip but moved nothing
+// ("Square overriding the chosen size"). Fixed in js/games/oo-ui.js: the picker now renders and WRITES whichever
+// value the current Board mode actually reads (OO_SQUARE_PRESETS/squareCols for Square, OO_SIZE_PRESETS/sizeIdx
+// for Full screen). This taps every chip in both modes and checks the PREVIEW updates immediately and the
+// started board's real rows x cols on Play, not just the chip's own "on" class.
+scenario("train", "Odd one out: every size chip moves the preview and the started board, in both Board modes", async t => {
+  await t.open("#shot=gx:oo:zen", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a board");
+  // show()'s cross-fade briefly leaves the PREVIOUS screen alive in a .fade-ghost outside #app (js/core.js) --
+  // querying the live document (not scoped to #app) during that ~260ms window can double-match stale chips/
+  // tiles from the screen being replaced, so every ooMap() re-entry below clears any ghost immediately first.
+  const killGhosts = "document.querySelectorAll('.fade-ghost').forEach(n => n.remove()); 1";
+  // -- Square mode: 5x5 through 9x9 --
+  t.ev("ooSimpleState().style = 'gradient'; ooSimpleState().board = 'square'; save(); ooMap({ zen: true }); 1");
+  t.ev(killGhosts);
+  await t.waitFor(".oo-pregame .oo-sizechip", 6000, "the pre-game picker, Square mode");
+  const sqChips = t.$$(".oo-sizechip");
+  t.expect(sqChips.length === 5, `Square should offer 5 size chips (5x5..9x9), got ${sqChips.length}`);
+  for (let i = 0; i < 5; i++) {
+    const size = 5 + i;
+    await t.click(t.$$(".oo-sizechip")[i], { wait: 250 });
+    const saved = t.ev("ooSimpleState().squareCols");
+    t.expect(saved === size, `tapping the ${size}x${size} chip should save squareCols ${size}, got ${saved}`);
+    t.expect(t.$$(".oo-sizechip")[i].classList.contains("on"), `the ${size}x${size} chip should show as selected`);
+    const tileN = t.$$(".oo-board .oo-t").length;
+    t.expect(tileN === size * size, `the live preview should redraw at ${size}x${size} (${size * size} tiles), got ${tileN}`);
+  }
+  await t.click("[data-play]", { wait: 500 });
+  await t.waitFor(".oo-board .oo-t", 6000, "the real board, Square mode");
+  const sqReal = t.ev("({ rows: OO_LAST.rows, cols: OO_LAST.cols })");
+  t.expect(sqReal.rows === 9 && sqReal.cols === 9, `Play should start the chosen 9x9 size, got ${sqReal.rows}x${sqReal.cols}`);
+  // persistence: the next entry reopens the picker with 9x9 still selected
+  t.ev("ooMap({ zen: true }); 1"); t.ev(killGhosts);
+  await t.waitFor(".oo-pregame .oo-sizechip", 6000, "the picker again");
+  t.expect(t.$$(".oo-sizechip")[4].classList.contains("on"), "the picker should remember the 9x9 choice on the next entry");
+  await t.click("[data-play]", { wait: 500 });
+  await t.waitFor(".oo-board .oo-t", 6000, "the board again");
+  // -- Full screen mode: the 4 original presets, unaffected by the Square fix --
+  t.ev("ooSimpleState().board = 'full'; save(); ooMap({ zen: true }); 1"); t.ev(killGhosts);
+  await t.waitFor(".oo-pregame .oo-sizechip", 6000, "the pre-game picker, Full screen mode");
+  const fsChips = t.$$(".oo-sizechip");
+  t.expect(fsChips.length === 4, `Full screen should offer 4 size chips, got ${fsChips.length}`);
+  const presets = [4, 5, 6, 8];
+  for (let i = 0; i < 4; i++) {
+    await t.click(t.$$(".oo-sizechip")[i], { wait: 250 });
+    const sizeIdx = t.ev("ooSimpleState().sizeIdx");
+    t.expect(sizeIdx === i, `tapping chip ${i} should save sizeIdx ${i}, got ${sizeIdx}`);
+    // the real aspect used is the stage's own measured aspect (ooStageAspect), not a hand-picked guess --
+    // matching ooPreviewBoard's own fallback chain exactly so this check never drifts from the real formula.
+    const tileN = t.$$(".oo-board .oo-t").length;
+    const dims = t.ev(`ooSimpleDims(${presets[i]}, ooStageAspect(document.getElementById("oostage")) || 1.6)`);
+    t.expect(tileN === dims.rows * dims.cols, `the live preview should redraw at ${dims.cols}x${dims.rows} (${dims.rows * dims.cols} tiles), got ${tileN}`);
+  }
+  await t.click("[data-play]", { wait: 500 });
+  await t.waitFor(".oo-board .oo-t", 6000, "the real board, Full screen mode");
+  const fsCols = t.ev("OO_LAST.cols");
+  t.expect(fsCols === 8, `Play should start the chosen 8-column size, got ${fsCols}`);
+  // reset for later scenarios
+  t.ev("const s = ooSimpleState(); s.board = 'full'; s.squareCols = 9; s.sizeIdx = 1; save(); 1");
+});
+
 // David, 2026-10-11: "Show colors between rounds" off -- a hit melts straight to the next board, no reveal card;
 // a miss still gets its brief marks-on-the-board teaching moment even with the reveal off.
 scenario("train", "Odd one out: the reveal toggle skips the card on a hit, but a miss still teaches", async t => {

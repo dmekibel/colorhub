@@ -303,6 +303,15 @@
 .oo-simple .drill-stage{position:fixed;inset:0;padding:0;align-items:stretch;justify-content:stretch;z-index:1}
 .oo-simple .drill-foot{display:none}
 .oo-board.oo-full{position:relative;width:100%;height:100%;aspect-ratio:auto}
+/* Board: Square (David, live-build bug: "very tall rectangular tiles... I don't like this tall shape" --
+   screenshotted at 9x9). The stretch above is only correct for the Full-screen board (oo-full fills the fixed
+   viewport edge to edge on purpose); stretching a Square round's own centered, aspect-ratio-1 box to the same
+   full viewport height broke its square shape outright -- a flex item's definite width plus a forced stretched
+   height no longer agree, so the box (and every tile inside it, all percentage-positioned against that box)
+   stopped being square. oo-stage-square (js/games/oo-ui.js, set whenever r.full === false) swaps the stretch
+   back to centering, and the Square board sizes itself as a real square that fits the viewport on every side. */
+.oo-simple .drill-stage.oo-stage-square{align-items:center;justify-content:center}
+.oo-simple .oo-board:not(.oo-full){width:min(calc(100% - 32px),calc(100dvh - 32px));aspect-ratio:1;margin:0;flex:none;border-radius:20px;overflow:hidden}
 .oo-full .oo-t{border-radius:0}
 /* a hairline seam (David, 2026-10-11: "without cell outlines the game feels a bit off") -- not a gap, just a
    soft inset shade so tiles read as tiles while the field stays one continuous surface */
