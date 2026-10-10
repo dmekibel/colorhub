@@ -1461,22 +1461,31 @@ scenario("train", "Odd one out: one tap from the shelf to the board, then a whol
   await t.waitFor(".oo-board .oo-t", 6000, "the board, second time");
 });
 
-scenario("train", "Odd one out: Zen is one pill (no timer, no lives), a gradient round, a combined-axis round, a 2-odd round, a miss", async t => {
+scenario("train", "Odd one out: Zen is one pill (no timer, no lives), a gradient round, a combined-axis round, a 2-odd round, a miss, the reveal card", async t => {
   await t.open("#shot=gx:oo:zen", { settle: 600 });
   await t.waitFor(".oo-board .oo-t", 6000, "a Zen board");
   t.expect(!t.$(".oo-hearts") && !t.$(".oo-tlimit"), "Zen should show no lives and no timer");
   t.expect(t.$(".oo-ztally"), "Zen should show a quiet running tally");
   t.expect(t.$(".oo-zenpill.on") && /zen/i.test(t.text(".oo-zenpill")), "the Zen pill should read on and say Zen");
+  t.expect(t.$(".oo-board.oo-full"), "the board should fill its play area (oo-full), not sit in a fixed square box");
 
   // a gradient round: the WHOLE grid is one smooth palette (not a per-tile stripe pattern) -- every tile's own
   // color should differ a little from its neighbors, and exactly one should sit off of where the sweep says it
   // belongs. No two tiles pass get the exact same color (a flat board would repeat one color nine times).
-  await t.open("#shot=gx:oo:grad2d", { settle: 600 });
+  await t.open("#shot=gx:oo:grad3", { settle: 600 });
   await t.waitFor(".oo-board .oo-t", 6000, "a gradient round");
   const uniq = t.ev("new Set(OO_LAST.colors).size"), gridType = t.ev("OO_LAST.gridType"), gAns = t.ev("OO_LAST.ans.length");
-  t.expect(gridType === "grad2d", `a forced grad2d round should say gridType grad2d, got ${gridType}`);
+  t.expect(gridType === "grad3", `a forced grad3 round should say gridType grad3, got ${gridType}`);
   t.expect(uniq >= 7, `a gradient board's tiles should mostly be distinct colors, only ${uniq} of 9 were`);
   t.expect(gAns === 1, "a plain gradient round should have one odd tile");
+  // tap the odd tile and check the reveal card: two big named halves, a difference line, a gradient strip, a source
+  const tiles = t.$$(".oo-board .oo-t"), at = t.ev("OO_LAST.ans[0]");
+  await t.click(tiles[at], { wait: 500 });
+  await t.waitFor(".oo-reveal", 4000, "the reveal card");
+  t.expect(t.$$(".oo-rv-half").length === 2, "the reveal should show two big named color halves");
+  t.expect(t.$(".oo-rv-diff").innerText.length > 2, "the reveal should say how the colors differ");
+  t.expect(t.$(".oo-rv-strip"), "a gradient round's reveal should show the gradient's own key stops");
+  t.expect(t.$(".oo-rv-src"), "the reveal should name where the palette came from");
 
   // a combined-axis round: the one odd tile moves along more than one judgment at once
   await t.open("#shot=gx:oo:combo", { settle: 600 });
@@ -1492,7 +1501,8 @@ scenario("train", "Odd one out: Zen is one pill (no timer, no lives), a gradient
   await t.open("#shot=gx:oo:miss", { settle: 1400 });
   await t.waitFor(".oo-t.ring", 6000, "the odd tile ringed after a miss");
   t.expect(t.$(".oo-t.miss"), "the tapped (wrong) tile should be marked");
-  t.expect(t.$(".oo-cmp"), "a miss should show both colors side by side");
+  t.expect(t.$(".oo-reveal") && t.$$(".oo-rv-half").length === 2, "a miss should still show the reveal card's two named halves");
+  t.expect(t.$(".oo-board.oo-settle"), "the board should settle back while the reveal card is up");
 });
 
 scenario("train", "Odd one out: the end screen names the day's edge with three bars", async t => {
@@ -1501,6 +1511,18 @@ scenario("train", "Odd one out: the end screen names the day's edge with three b
   t.expect(t.$$(".oo-ebar").length === 3, "three bars: hue, saturation, value");
   t.expect(t.$("h1").innerText.length > 5, "a headline naming the edge");
   t.expect(t.$(".result [data-again]") && t.$(".result [data-keep]"), "Play again and Keep going should both be offered");
+});
+
+// David, 2026-10-11: "use the player's own favorites as gradient sources... weighted in ~1 in 3 boards when the
+// player has >= 3 favorites". Seed S.favs with three kept colors and check ooPickPalette() cites them sometimes.
+scenario("train", "Odd one out: a player's own kept colors turn up as a gradient source", async t => {
+  await t.open("#shot=gx:oo:first", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a board");
+  t.ev("S.favs = {'#2E8B57':{n:3,at:today()}, '#C0392B':{n:2,at:today()}, '#2874A6':{n:1,at:today()}}; save(); 1");
+  const hit = t.ev("Array.from({length:80},()=>ooPickPalette()).some(p => p && p.fromFav)");
+  t.expect(hit, "with 3+ kept colors, some gradient sources should be the player's own favorites");
+  const label = t.ev("(Array.from({length:80},()=>ooPickPalette()).find(p => p && p.fromFav) || {}).label");
+  t.expect(typeof label === "string" && /^(Your colors:|From your favorite:)/.test(label), `a favorite source's label should say so plainly, got "${label}"`);
 });
 
 // Gradients (js/games/hue-*.js): the shelf opens the teaching board; swap the two tiles with real taps, then play
