@@ -31,6 +31,8 @@ const GL_ICON_OUT = sv('<path d="M14 5h5v5M19 5l-8 8M17 14v5H5V7h5"/>', 14, 1.8)
 // locate gesture -- David, relayed 2026-10-09: tapping a chip opens its page; locating it on the canvas moves
 // to this small control so the two never compete for the same tap)
 const GL_WHERE_ICON = sv('<circle cx="12" cy="12" r="5.5"/><path d="M12 2.5v4M12 17.5v4M2.5 12h4M17.5 12h4"/>', 13, 1.9, true);
+// a small die, for Shuffle (David, 2026-10-10: "derive different palettes from the same painting")
+const GL_ICON_DICE = sv('<rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="8.5" cy="8.5" r="1.3" fill="currentColor" stroke="none"/><circle cx="15.5" cy="8.5" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="8.5" cy="15.5" r="1.3" fill="currentColor" stroke="none"/><circle cx="15.5" cy="15.5" r="1.3" fill="currentColor" stroke="none"/>', 16, 1.6);
 
 // ---------- loading ----------
 function loadGallery() {
@@ -126,23 +128,39 @@ function glpOk(hex) {
   const l = Math.cbrt(.4122214708 * r + .5363325363 * g + .0514459929 * b), m = Math.cbrt(.2119034982 * r + .6806995451 * g + .1073969566 * b), s = Math.cbrt(.0883024619 * r + .2817188376 * g + .6299787005 * b);
   return [.2104542553 * l + .793617785 * m - .0040720468 * s, 1.9779984951 * l - 2.428592205 * m + .4505937099 * s, .0259040371 * l + .7827717662 * m - .808675766 * s];
 }
+// ---------- seeded shuffle (David, 2026-10-10: "couldn't we shuffle the seed, and derive different palettes
+// from the same painting?") ----------
+// mulberry32: tiny, deterministic PRNG. Every pick function below stays honest with it -- a shuffle never
+// invents a color, it only lets near-equally-good REAL candidates take each other's turn.
+function glRng(seed) {
+  let a = (seed >>> 0) || 1;
+  return () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+}
+// choose one of `scored` ({ s, ... }), biased to the top but honestly random among near-ties (within `near` of
+// the best score) rather than always the single argmax -- the one new step a seed adds to any greedy pick here
+function glRngPick(rng, scored, near = .15) {
+  let best = -Infinity; scored.forEach(s => { if (s.s > best) best = s.s; });
+  const pool = best > 0 ? scored.filter(s => s.s >= best * (1 - near)) : scored.filter(s => s.s === best);
+  return pool.length ? pool[Math.floor(rng() * pool.length)] : scored[0];
+}
 // pick k of the pool: the same share^0.6 x vividness x distinctness-from-what's-picked greedy rule as the
 // Python port's step 2 (and js/studio.js extractPalette's own step 2). Shares are renormalized over the picked
 // set only (the pool has no raw pixels left to re-assign against, so this is the closest honest approximation).
-function glPoolPick(pool, k) {
+// `seed`: a shuffle re-seed (David, 2026-10-10) -- omitted or 0, this is exactly the old deterministic pick.
+function glPoolPick(pool, k, seed) {
   if (!pool.length) return [];
   if (k >= pool.length) return pool.slice();
   const withOk = pool.map(p => ({ h: p.h, share: p.share, ok: glpOk(p.h) }));
   const chroma = ok => Math.hypot(ok[1], ok[2]);
+  const rng = seed ? glRng(seed) : null;
   const picked = [], left = withOk.slice();
   while (picked.length < k && left.length) {
-    let bi = 0, bs = -1;
-    left.forEach((g, i) => {
+    const scored = left.map((g, i) => {
       const near = picked.length ? Math.sqrt(Math.min(...picked.map(p => (p.ok[0] - g.ok[0]) ** 2 + (p.ok[1] - g.ok[1]) ** 2 + (p.ok[2] - g.ok[2]) ** 2))) : 1;
-      const s = Math.pow(g.share, .6) * (.5 + 3 * chroma(g.ok)) * Math.pow(Math.min(1, near / .14), 1.5);
-      if (s > bs) { bs = s; bi = i; }
+      return { i, s: Math.pow(g.share, .6) * (.5 + 3 * chroma(g.ok)) * Math.pow(Math.min(1, near / .14), 1.5) };
     });
-    picked.push(left.splice(bi, 1)[0]);
+    const pick = rng ? glRngPick(rng, scored) : scored.reduce((a, b) => b.s > a.s ? b : a);
+    picked.push(left.splice(pick.i, 1)[0]);
   }
   const tot = picked.reduce((a, p) => a + p.share, 0) || 1;
   return picked.map(p => ({ h: p.h, share: p.share / tot })).sort((a, b) => b.share - a.share);
@@ -157,7 +175,7 @@ function glPoolPick(pool, k) {
 // weighting, no distinctness game. Near-duplicates (ΔE00 < 6, the painter's-own-palette threshold elsewhere in
 // this file) are merged into the larger share first, so a cluster split across two adjacent picks by the offline
 // pipeline doesn't cost the ranking two slots for one real color.
-function glPoolByArea(pool, k) {
+function glPoolByArea(pool, k, seed) {
   if (!pool.length) return [];
   const merged = [];
   pool.slice().sort((a, b) => b.share - a.share).forEach(p => {
@@ -165,6 +183,15 @@ function glPoolByArea(pool, k) {
     if (near) near.share += p.share; else merged.push({ h: p.h, share: p.share });
   });
   merged.sort((a, b) => b.share - a.share);
+  // a shuffle here can only honestly reorder which near-tied colors land inside vs. just outside the cutoff --
+  // true area order stays area order, it just stops always resolving the same coin-flip at the boundary
+  if (seed && merged.length > k) {
+    const rng = glRng(seed), cut = merged[k - 1].share, tieSet = new Set(merged.filter(m => m.share >= cut * .85));
+    const tie = [...tieSet];
+    if (tie.length > 1) for (let i = tie.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [tie[i], tie[j]] = [tie[j], tie[i]]; }
+    let ti = 0;
+    return merged.map(m => tieSet.has(m) ? tie[ti++] : m).slice(0, k);
+  }
   return merged.slice(0, k);
 }
 // Diverse: farthest-point sampling in OKLab (max-min / MMR) -- start from the single biggest color, then
@@ -174,17 +201,18 @@ function glPoolByArea(pool, k) {
 // are re-measured against the final picks (every pool color goes to its nearest pick), same honesty rule as
 // glPoolPick. Ordered hue-then-lightness ("beautifully", not a jumbled share-sort) since this mode's whole point
 // is showing the painting's distinct families side by side.
-function glPoolDiverse(pool, k) {
+function glPoolDiverse(pool, k, seed) {
   if (!pool.length) return [];
   if (k >= pool.length) return pool.slice();
   const withOk = pool.map(p => ({ h: p.h, share: p.share, ok: glpOk(p.h) }));
   const d2 = (a, b) => (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 + (a[2] - b[2]) ** 2;
+  const rng = seed ? glRng(seed) : null;
   const start = withOk.reduce((a, b) => b.share > a.share ? b : a);
   const picked = [start], left = withOk.filter(p => p !== start);
   while (picked.length < k && left.length) {
-    let bi = 0, bd = -1;
-    left.forEach((g, i) => { const near = Math.min(...picked.map(p => d2(p.ok, g.ok))); if (near > bd) { bd = near; bi = i; } });
-    picked.push(left.splice(bi, 1)[0]);
+    const scored = left.map((g, i) => ({ i, s: Math.min(...picked.map(p => d2(p.ok, g.ok))) }));
+    const pick = rng ? glRngPick(rng, scored, .08) : scored.reduce((a, b) => b.s > a.s ? b : a);
+    picked.push(left.splice(pick.i, 1)[0]);
   }
   const PC = picked;
   const area = picked.map(() => 0), tot = withOk.reduce((a, p) => a + p.share, 0) || 1;
@@ -724,23 +752,24 @@ function glPainterHue(name) {
     .then(x => { const ix = x && x.P && x.P.ix; const h = ix && ix.length >= 3 ? glHueShares(ix.filter(i => i >= 0 && i < GAL.n)) : null; GL_HUE_PAINTER.set(slug, h); return h; })
     .catch(() => null);
 }
-function glStandOut(pool, k, prior) {
+function glStandOut(pool, k, prior, seed) {
   if (!pool.length) return [];
   const P = pool.map(p => { const l = lab(p.h), c = lch(p.h); return { h: p.h, share: p.share, lab: l, L: c[0], C: c[1], bin: glHueBin(c[1], c[2]) }; });
   const tot = P.reduce((a, p) => a + p.share, 0) || 1, m = [0, 1, 2].map(x => P.reduce((a, p) => a + p.share * p.lab[x], 0) / tot);
   const pr = prior || glHueAll(), picked = [], nOut = Math.min(Math.ceil(k / 2), k);
+  const rng = seed ? glRng(seed) : null;
   const nearest = p => picked.length ? Math.min(...picked.map(q => de2000(q.lab, p.lab))) : 99;
   const left = P.filter(p => p.L >= 20 || p.C >= 25);   // never a near-black as a "stands out" pick
   while (picked.length < nOut && left.length) {
-    let bi = -1, bs = 0;
+    const scored = [];
     left.forEach((p, j) => {
       const near = nearest(p); if (near < 10) return;
       const away = Math.hypot(p.lab[0] - m[0], p.lab[1] - m[1], p.lab[2] - m[2]);
-      const s = (p.C + 10) * (1 - Math.min(.9, pr[p.bin])) * away * Math.pow(Math.max(p.share, .001), .2) * Math.min(1, near / 25);
-      if (s > bs) { bs = s; bi = j; }
+      scored.push({ j, s: (p.C + 10) * (1 - Math.min(.9, pr[p.bin])) * away * Math.pow(Math.max(p.share, .001), .2) * Math.min(1, near / 25) });
     });
-    if (bi < 0) break;
-    picked.push(Object.assign(left.splice(bi, 1)[0], { out: true }));
+    if (!scored.length) break;
+    const pick = rng ? glRngPick(rng, scored) : scored.reduce((a, b) => b.s > a.s ? b : a);
+    picked.push(Object.assign(left.splice(pick.j, 1)[0], { out: true }));
   }
   const rest = P.filter(p => !picked.includes(p)).sort((a, b) => b.share - a.share);
   for (const minDE of [6, 0]) for (const p of rest) { if (picked.length >= k) break; if (!picked.includes(p) && nearest(p) >= minDE) picked.push(p); }
@@ -789,14 +818,17 @@ const GL_MODES = [
   ["warm", "Warm only", "Only the warm colors: reds, oranges and yellows.", "Only reds, oranges and yellows"],
   ["cool", "Cool only", "Only the cool colors: greens, blues and violets.", "Only greens, blues and violets"],
   ["ladder", "Value ladder", "Five steps from light to dark, each the average of the colors in that band.", "Five value steps, light to dark"],
-  ["harmony", "Harmony", "The painting's main hue with its strongest partners.", "The main hue and its strongest partners"],
+  ["harmony", "Harmonies", "Complements, triads, split pairs and more, found among the painting's own colors — not generic wheel colors.", "Complements, triads and split pairs, from the painting's own colors"],
   ["pick", "Pick from it", "", ""],
 ];
 // which palette types are worth a chip for THIS painting: Stands out, By area and Pick from it always pin (they
 // are general-purpose, not readings), plus up to two readings scored by how distinct/meaningful they are here —
 // a night scene's Shadows and Hidden colors beat a daylit scene's, a portrait's Skin and Focal beat a still
 // life's. Everything else sits behind "More" so the row never again shows all 14 at once (David, 2026-10-09).
-const GL_PINNED_MODES = ["out", "area", "diverse", "pick"];
+// David, 2026-10-10: "'Harmonies' is a very important one; why isn't it among the first?" -- the four general-
+// purpose readings now pin in his own order (By area, Stands out, Harmonies, Diverse); "Pick from it" has its
+// own explicit "Pick a color" button on the picture itself, so it moves behind More with everything else.
+const GL_PINNED_MODES = ["area", "out", "harmony", "diverse"];
 function glChipScore(key, row) {
   const st = row && row.stat;
   switch (key) {
@@ -894,6 +926,246 @@ function glModeSet(m, pool, k, row) {
   return null;
 }
 
+// ---------- Harmonies, as a family (David, 2026-10-10: "Harmonies is a very important one... triads, stuff
+// like that" / "it's only a single harmony palette -- couldn't we derive different palettes from the same
+// painting?"): every relation below is built ONLY from colors the painting actually measured (pool), never a
+// generic wheel color. For each relation an "anchor" is tried at every vivid pool color's own hue, and the
+// relation's other angles are each filled by the nearest real pool color within tolerance -- a relation that
+// the painting doesn't actually offer within tolerance simply produces no card, the same honesty rule every
+// mode on this page already follows. Shares are then re-measured as the area of every pool color nearest to a
+// member, same as glPoolDiverse/glStandOut, so a harmony card's percentages stay honest too.
+const GL_HARM_RELATIONS = [   // [key, label, hue offsets from the anchor, tolerance in degrees]
+  ["comp", "Complementary", [0, 180], 26],
+  ["split", "Split-complementary", [0, 150, 210], 22],
+  ["triad", "Triad", [0, 120, 240], 24],
+  ["tetrad", "Tetrad", [0, 90, 180, 270], 18],
+];
+function glHueDiff(a, b) { const d = Math.abs(a - b) % 360; return d > 180 ? 360 - d : d; }
+// every candidate harmony instance this pool offers, across every relation, unscored for count (k applied later)
+function glHarmonyCandidates(pool) {
+  const P = pool.map(p => { const c = lch(p.h); return { h: p.h, share: p.share, L: c[0], C: c[1], H: c[2] }; });
+  const tot = P.reduce((a, p) => a + p.share, 0) || 1;
+  const vivid = P.filter(p => p.C >= 10);
+  const out = [];
+  GL_HARM_RELATIONS.forEach(([key, label, offs, tol]) => {
+    vivid.forEach(anchor => {
+      const members = [], errs = [];
+      for (const off of offs) {
+        const target = (anchor.H + off) % 360;
+        let best = null, bd = tol;
+        vivid.forEach(p => { if (members.includes(p)) return; const d = glHueDiff(p.H, target); if (d < bd) { bd = d; best = p; } });
+        if (!best) break;
+        members.push(best); errs.push(bd);
+      }
+      if (members.length < offs.length) return;
+      const salience = members.reduce((a, p) => a + p.share * (p.C + 6), 0);
+      const fit = 1 - errs.reduce((a, b) => a + b, 0) / (offs.length * tol);
+      out.push({ key, label, members, score: salience * Math.max(.15, fit), fit });
+    });
+  });
+  // analogous: a contiguous run of 3+ vivid hues inside a ~60° window, tried at every 15° window start
+  for (let start = 0; start < 360; start += 15) {
+    const run = vivid.filter(p => glHueDiff(p.H, start + 30) <= 30).sort((a, b) => a.H - b.H);
+    if (run.length >= 3) out.push({ key: "analogous", label: "Analogous", members: run, score: run.reduce((a, p) => a + p.share * (p.C + 6), 0), fit: 1 });
+  }
+  // warm vs cool: the single most salient warm color against the single most salient cool one
+  const warm = vivid.filter(p => p.H < 100 || p.H >= 330).sort((a, b) => b.share * b.C - a.share * a.C)[0];
+  const cool = vivid.filter(p => p.H >= 100 && p.H < 330).sort((a, b) => b.share * b.C - a.share * a.C)[0];
+  if (warm && cool) out.push({ key: "warmcool", label: "Warm vs cool", members: [warm, cool], score: warm.share * (warm.C + 6) + cool.share * (cool.C + 6), fit: 1 });
+  // accent on neutral: the ground is mostly low-chroma, with a couple of small vivid accents against it
+  const neutrals = P.filter(p => p.C < 12), neutralShare = neutrals.reduce((a, p) => a + p.share, 0) / tot;
+  const accents = vivid.filter(p => p.share < .12).sort((a, b) => b.C - a.C).slice(0, 2);
+  if (neutralShare >= .35 && accents.length) {
+    const base = neutrals.slice().sort((a, b) => b.share - a.share).slice(0, 2);
+    out.push({ key: "accent", label: "Accent on neutral", members: [...base, ...accents], score: neutralShare * accents.reduce((a, p) => a + p.C, 0), fit: 1 });
+  }
+  // monochrome: one hue family's own value ladder (3+ members, spanning 15+ points of lightness)
+  const bins = new Map();
+  vivid.forEach(p => { const b = Math.round(p.H / 20) * 20 % 360; if (!bins.has(b)) bins.set(b, []); bins.get(b).push(p); });
+  bins.forEach(arr => {
+    if (arr.length < 3) return;
+    const Ls = arr.map(p => p.L), spread = Math.max(...Ls) - Math.min(...Ls);
+    if (spread < 15) return;
+    out.push({ key: "mono", label: "Monochrome", members: arr.slice().sort((a, b) => b.L - a.L), score: arr.reduce((a, p) => a + p.share * (p.C + 6), 0) * (spread / 60), fit: 1 });
+  });
+  // dedupe identical member sets (the same relation found from two anchors)
+  const seen = new Set(), dedup = [];
+  out.sort((a, b) => b.score - a.score).forEach(c => {
+    const sig = c.key + ":" + c.members.map(m => m.h).sort().join();
+    if (seen.has(sig)) return; seen.add(sig); dedup.push(c);
+  });
+  return { cands: dedup, tot };
+}
+// the family shown on screen: one best instance per relation present (a shuffle seed walks to the next-best
+// instead of always the single best, so re-rolling still only ever surfaces real, already-found relations)
+function glHarmonyFamily(pool, k, seed, relFilter) {
+  if (pool.length < 3) return [];
+  const { cands, tot } = glHarmonyCandidates(pool);
+  const filtered = relFilter && relFilter !== "all" ? cands.filter(c => c.key === relFilter) : cands;
+  const byRel = new Map();
+  filtered.forEach(c => { if (!byRel.has(c.key)) byRel.set(c.key, []); byRel.get(c.key).push(c); });
+  const rng = seed ? glRng(seed) : null;
+  const picks = [];
+  byRel.forEach(list => {
+    list.sort((a, b) => b.score - a.score);
+    const idx = rng ? Math.floor(rng() * Math.min(list.length, 3)) : 0;   // shuffle: one of this relation's top 3
+    picks.push(list[idx]);
+  });
+  return picks.sort((a, b) => b.score - a.score).map(c => {
+    const area = c.members.map(() => 0);
+    pool.forEach(p => { let bi = 0, bd = 1e9; c.members.forEach((m, j) => { const d = de2000(m.h, p.h); if (d < bd) { bd = d; bi = j; } }); area[bi] += p.share; });
+    const pal = c.members.map((m, j) => ({ h: m.h, share: area[j] / tot })).sort((a, b) => b.share - a.share).slice(0, Math.max(2, k));
+    return { key: c.key, label: c.label, fitPct: Math.round(Math.max(0, Math.min(1, c.fit)) * 100), pal };
+  });
+}
+const GL_HARM_CHIPS = [["all", "All"], ["comp", "Complementary"], ["analogous", "Analogous"], ["triad", "Triad"], ["split", "Split"], ["tetrad", "Tetrad"], ["mono", "Mono"], ["warmcool", "Warm/cool"], ["accent", "Accent"]];
+
+// ---------- saving a derived palette (David, 2026-10-10: "how do we save a palette once derived?") ----------
+// The same store as Picked colors' Build (js/picked.js pkSaveAsPalette) and the set page (js/setpage.js): S.palettes,
+// newest first, capped at 60 -- so a painting's palette shows up in Studio's Kept exactly like any other saved one.
+// an auto name, editable before Save: "<Painting> — <Relation/mode>" (empty label -> just the painting's title)
+function glSaveName(title, label) { return label ? `${title} — ${label}` : title; }
+function glSavePalette(hexes, name, openAfter) {
+  hexes = (hexes || []).filter(Boolean);
+  if (hexes.length < 2) return null;
+  S.palettes = Array.isArray(S.palettes) ? S.palettes : [];
+  const id = typeof plMakeId === "function" ? plMakeId() : "pl" + Date.now().toString(36);
+  const p = { id, cols: hexes.slice(), from: "A painting", name: (name || "").trim(), at: today() };
+  S.palettes.unshift(p);
+  S.palettes = S.palettes.slice(0, 60);
+  save();
+  buzz([10, 30, 20]);
+  toast(`Saved to Kept${p.name ? " · " + p.name : ""}`, { action: "Open", onAction: () => { if (typeof spPage === "function") spPage(hexes, { push: true }); } });
+  return p;
+}
+
+// ---------- editing a derived palette (David, 2026-10-10: "how do we edit the palette?") ----------
+// Remove / reorder / lock+shuffle reuse the same interaction shapes as the set page's own edit mode
+// (js/setpage.js spPage: a drag handle, an × to remove, a lock toggle before a re-derive) rather than inventing
+// new gestures; this sheet is the modal version of the same idea, for a palette that hasn't been saved yet.
+const GL_LOCK_ON = sv('<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>', 16, 1.8);
+const GL_LOCK_OFF = sv('<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 017.6-1.7"/>', 16, 1.8);
+const GL_GRIP = sv('<circle cx="9" cy="6" r="1.4" fill="currentColor" stroke="none"/><circle cx="15" cy="6" r="1.4" fill="currentColor" stroke="none"/><circle cx="9" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="9" cy="18" r="1.4" fill="currentColor" stroke="none"/><circle cx="15" cy="18" r="1.4" fill="currentColor" stroke="none"/>', 18);
+// weighted-random replacements for every unlocked slot, from real colors in `pool` only -- the same honesty
+// rule as every Shuffle on this page: never invents a color, just lets another real one take a locked slot's peer
+function glEditShuffle(items, locked, pool) {
+  const used = new Set(items.filter((_, i) => locked.has(i)).map(h => h.toUpperCase()));
+  const scored = (pool || []).filter(p => p && p.h).map(p => { const c = lch(p.h); return { h: p.h.toUpperCase(), s: Math.pow(Math.max(p.share, .001), .5) * (c[1] + 8) }; });
+  const rng = glRng(1 + Math.floor(Math.random() * 2147483646));
+  const out = items.slice();
+  for (let i = 0; i < out.length; i++) {
+    if (locked.has(i)) continue;
+    const avail = scored.filter(s => !used.has(s.h));
+    if (!avail.length) continue;
+    const pick = glRngPick(rng, avail, .25);
+    used.add(pick.h); out[i] = pick.h;
+  }
+  return out;
+}
+function glEditOpen(hexes, opts = {}) {
+  const items = (hexes || []).slice(0, 20), locked = new Set(), pool = opts.pool || [];
+  const { sh, close } = sheet(`<div data-geBody></div>`, { z: 90 });
+  sh.classList.add("gl-edit-sheet");
+  const body = sh.querySelector("[data-geBody]");
+  let swapFor = -1;   // index whose swap panel is open
+  const nearPool = h => pool.filter(p => p.h.toUpperCase() !== h.toUpperCase() && !items.some(x => x.toUpperCase() === p.h.toUpperCase()))
+    .map(p => ({ h: p.h, d: de2000(h, p.h) })).sort((a, b) => a.d - b.d).slice(0, 8);
+  const render = () => {
+    const nm = items.map(h => nameOf(h).n || h);
+    body.innerHTML = `
+      <div class="gl-pe-head"><p class="eyebrow">Edit palette</p><button type="button" class="icon-btn" data-ge-close aria-label="Close">${ICON.x}</button></div>
+      <input type="text" class="gl-pe-name" data-ge-name maxlength="60" value="${esc(opts.suggestedName || glSaveName(opts.title || "", opts.label))}" aria-label="Palette name">
+      <div class="gl-pe-list" data-ge-list>${items.map((h, i) => `
+        <div class="gl-pe-row${locked.has(i) ? " locked" : ""}" data-ge-row="${i}">
+          <button type="button" class="gl-pe-handle" data-ge-handle="${i}" aria-label="Drag to reorder ${esc(nm[i])}">${GL_GRIP}</button>
+          <button type="button" class="gl-pe-sw" data-ge-swap="${i}" style="--c:${h}" aria-label="Swap ${esc(nm[i])} for a nearby color"></button>
+          <b class="gl-pe-nm">${esc(nm[i])}</b>
+          <button type="button" class="gl-pe-lock" data-ge-lock="${i}" aria-pressed="${locked.has(i)}" aria-label="${locked.has(i) ? "Unlock" : "Lock"} ${esc(nm[i])}">${locked.has(i) ? GL_LOCK_ON : GL_LOCK_OFF}</button>
+          <button type="button" class="gl-pe-x" data-ge-rm="${i}" aria-label="Remove ${esc(nm[i])}"${items.length <= 2 ? " disabled" : ""}>${ICON.x}</button>
+        </div>
+        ${swapFor === i ? `<div class="gl-pe-swappanel"><p class="fine">Nearby colors in this painting</p><div class="gl-pe-swopts">${nearPool(h).map(c => `<button type="button" class="gl-pe-swopt" data-ge-swto="${c.h}" style="--c:${c.h}" aria-label="${esc(nameOf(c.h).n)}"></button>`).join("") || `<span class="fine">No other nearby colors in the pool.</span>`}</div></div>` : ""}`).join("")}</div>
+      ${items.length < 20 ? `<button type="button" class="gl-pe-addrow" data-ge-add><span class="gl-pe-addsw">${sv('<path d="M12 5v14M5 12h14"/>', 20, 1.8)}</span>Add a color</button>` : ""}
+      ${swapFor === "add" ? `<div class="gl-pe-swappanel"><p class="fine">From this painting</p><div class="gl-pe-swopts">${pool.filter(p => !items.some(x => x.toUpperCase() === p.h.toUpperCase())).slice().sort((a, b) => b.share - a.share).slice(0, 10).map(c => `<button type="button" class="gl-pe-swopt" data-ge-addfrom="${c.h}" style="--c:${c.h}" aria-label="${esc(nameOf(c.h).n)}"></button>`).join("") || `<span class="fine">Every pool color is already here.</span>`}</div>
+        ${typeof pkList === "function" && pkList().length ? `<p class="fine">Picked colors</p><div class="gl-pe-swopts">${pkList().slice(0, 10).map(c => `<button type="button" class="gl-pe-swopt" data-ge-addfrom="${c.h}" style="--c:${c.h}" aria-label="${esc(nameOf(c.h).n)}"></button>`).join("")}</div>` : ""}</div>` : ""}
+      <div class="gl-pe-acts">
+        <button type="button" class="gl-pa-btn" data-ge-shuffle${items.length === locked.size ? " disabled" : ""}>${GL_ICON_DICE}<span>Shuffle unlocked</span></button>
+        <button type="button" class="btn solid gl-pe-save" data-ge-save>Save palette</button>
+      </div>`;
+    wireDrag();
+  };
+  const wireDrag = () => {
+    const list = sh.querySelector("[data-ge-list]"); if (!list) return;
+    let sd = null;
+    const rows = () => [...list.querySelectorAll("[data-ge-row]")];
+    list.addEventListener("pointerdown", e => {
+      const h = e.target.closest("[data-ge-handle]"); if (!h) return;
+      const rs = rows(), row = h.closest("[data-ge-row]");
+      sd = { row, i: rs.indexOf(row), at: rs.indexOf(row), y: e.clientY, id: e.pointerId, step: row.offsetHeight + 1, n: rs.length, moved: false };
+    });
+    list.addEventListener("pointermove", e => {
+      if (!sd || e.pointerId !== sd.id) return;
+      const dy = e.clientY - sd.y;
+      if (!sd.moved && Math.abs(dy) > 6) { sd.moved = true; sd.row.classList.add("dragging"); try { sd.row.setPointerCapture(sd.id); } catch (er) {} buzz(5); }
+      if (!sd.moved) return;
+      if (e.cancelable) e.preventDefault();
+      sd.at = Math.max(0, Math.min(sd.n - 1, Math.round(sd.i + dy / sd.step)));
+      sd.row.style.transform = `translateY(${dy}px)`;
+      rows().forEach((r, idx) => {
+        if (r === sd.row) return;
+        let s = 0;
+        if (sd.i < sd.at && idx > sd.i && idx <= sd.at) s = -sd.step;
+        if (sd.i > sd.at && idx < sd.i && idx >= sd.at) s = sd.step;
+        r.style.transform = s ? `translateY(${s}px)` : "";
+      });
+    });
+    const end = e => {
+      if (!sd || e.pointerId !== sd.id) return;
+      const dr = sd; sd = null;
+      rows().forEach(r => r.style.transform = ""); dr.row.classList.remove("dragging");
+      if (dr.moved && dr.at !== dr.i) {
+        const [mv] = items.splice(dr.i, 1); items.splice(dr.at, 0, mv);
+        const wasLocked = locked.has(dr.i); locked.delete(dr.i);
+        const relock = new Set(); locked.forEach(x => relock.add(x > dr.i ? (x <= dr.at ? x - 1 : x) : (x >= dr.at ? x + 1 : x)));
+        locked.clear(); relock.forEach(x => locked.add(x)); if (wasLocked) locked.add(dr.at);
+        buzz(8); render();
+      }
+    };
+    list.addEventListener("pointerup", end); list.addEventListener("pointercancel", end);
+  };
+  sh.addEventListener("click", e => {
+    if (e.target.closest("[data-ge-close]")) return close();
+    const rm = e.target.closest("[data-ge-rm]");
+    if (rm && items.length > 2) {
+      const idx = +rm.dataset.geRm; items.splice(idx, 1);
+      const relock = new Set(); locked.forEach(x => relock.add(x > idx ? x - 1 : x)); locked.delete(idx); locked.clear(); relock.forEach(x => locked.add(x));
+      swapFor = -1; buzz(6); render(); return;
+    }
+    const lk = e.target.closest("[data-ge-lock]");
+    if (lk) { const idx = +lk.dataset.geLock; locked.has(idx) ? locked.delete(idx) : locked.add(idx); buzz(5); render(); return; }
+    const sw = e.target.closest("[data-ge-swap]");
+    if (sw) { const idx = +sw.dataset.geSwap; swapFor = swapFor === idx ? -1 : idx; buzz(5); render(); return; }
+    const swto = e.target.closest("[data-ge-swto]");
+    if (swto && swapFor >= 0 && typeof swapFor === "number") { items[swapFor] = swto.dataset.geSwto.toUpperCase(); swapFor = -1; buzz(6); render(); return; }
+    if (e.target.closest("[data-ge-add]")) { swapFor = swapFor === "add" ? -1 : "add"; buzz(5); render(); return; }
+    const addfrom = e.target.closest("[data-ge-addfrom]");
+    if (addfrom && items.length < 20) { items.push(addfrom.dataset.geAddfrom.toUpperCase()); swapFor = -1; buzz(6); render(); return; }
+    if (e.target.closest("[data-ge-shuffle]")) {
+      if (locked.size >= items.length) return;
+      const next = glEditShuffle(items, locked, pool);
+      for (let i = 0; i < items.length; i++) items[i] = next[i];
+      buzz(8); render(); return;
+    }
+    if (e.target.closest("[data-ge-save]")) {
+      const name = (sh.querySelector("[data-ge-name]") || {}).value || "";
+      close();
+      if (typeof opts.onSave === "function") opts.onSave(items.slice(), name);
+      return;
+    }
+  });
+  render();
+  return { sh, close };
+}
+
 // ---------- the lite painting page ----------
 // fromHex: the color the visitor arrived from (a search, a color page's "In paintings", a name page, or the
 // color sheet's "More paintings with this color") — ROADMAP §13 "arrive from a color and see it". Carried in
@@ -939,16 +1211,37 @@ function glPage(i, d, fromHex, tol) {
   let modesOpen = false;   // "at most 5 chips, chosen per painting, plus More" (David, 2026-10-09)
   let locate = null;       // a palette swatch tapped on the strip: { j, hex } — dims the rest, glows where it sits
   let painterOrder = null, painterRank = -1;   // this painter's paintings (chronological if dated), once loaded — swipe the picture to move along it
+  // ---------- Shuffle + Harmonies (David, 2026-10-10) ----------
+  // SHUF[mode] = { seeds: [0, ...re-rolls], idx }: seed 0 is always the original, honest derivation; every
+  // Shuffle appends a new seed and a small history row lets you step back to an earlier roll without re-rolling.
+  const SHUF = {};
+  const seedOf = m => { const s = SHUF[m]; return s ? s.seeds[s.idx] : 0; };
+  let harmCards = [];     // this draw's harmony family (glHarmonyFamily), kept so the cards section can render them
+  let harmFilter = "all"; // the sub-chip (All/Complementary/Analogous/Triad/Split/Tetrad/Mono/Warm-cool/Accent)
+  let harmMoreOpen = false;   // "show the best ~6, More for the rest" (David, 2026-10-10: no arbitrary cap at 10)
   const modeSet = (m, k) => {
-    if (m === "out") return { pal: glStandOut(pool.length ? pool : pal6, pool.length ? k : 6, prior), max: pool.length ? Math.min(pool.length, 20) : 6 };
-    if (m === "area") return { pal: pool.length ? glPoolByArea(pool, k) : pal6, max: pool.length ? Math.min(pool.length, 20) : 6 };
-    if (m === "diverse") return { pal: pool.length ? glPoolDiverse(pool, k) : pal6, max: pool.length ? Math.min(pool.length, 20) : 6 };
+    if (m === "out") return { pal: glStandOut(pool.length ? pool : pal6, pool.length ? k : 6, prior, seedOf("out")), max: pool.length ? Math.min(pool.length, 20) : 6 };
+    if (m === "area") return { pal: pool.length ? glPoolByArea(pool, k, seedOf("area")) : pal6, max: pool.length ? Math.min(pool.length, 20) : 6 };
+    if (m === "diverse") return { pal: pool.length ? glPoolDiverse(pool, k, seedOf("diverse")) : pal6, max: pool.length ? Math.min(pool.length, 20) : 6 };
+    if (m === "harmony") {
+      harmCards = pool.length >= 3 ? glHarmonyFamily(pool, k, seedOf("harmony"), harmFilter) : [];
+      return harmCards.length ? { pal: harmCards[0].pal, max: 20, harmony: true } : null;
+    }
     if (m === "pick") return { pal: picks.map(h => ({ h, share: 1 / picks.length, pick: true })), max: 12, fixed: true,
       cap: !lit.ok ? "This museum's image can't be read here, so tapping the painting can't pick colors from it. Every other palette type still works." : picks.length ? "Colors you took from the painting. Tap the picture for more, a swatch to open its page." : "Tap the painting to take a color, up to 12." };
     return glModeSet(m, pool, k, row);
   };
   const curSet = () => modeSet(mode, curK) || modeSet("out", curK);
   const curPal = () => curSet().pal;
+  // a fresh re-roll for this mode: a new seed, kept in a short history so Shuffle never loses an earlier result
+  const shuffleMode = m => {
+    const s = SHUF[m] || (SHUF[m] = { seeds: [0], idx: 0 });
+    s.seeds.push(1 + Math.floor(Math.random() * 2147483646));
+    if (s.seeds.length > 6) s.seeds.shift();
+    s.idx = s.seeds.length - 1;
+    locate = null; buzz(8); drawPalette();
+  };
+  const shuffleHistoryTo = (m, idx) => { const s = SHUF[m]; if (!s || idx === s.idx) return; s.idx = idx; locate = null; buzz(5); drawPalette(); };
   // the ColorSet verbs (js/colorset.js): this painting's palette, at whatever size the slider shows. Declared
   // early so both the action row and the coverage row's Learn button (David, 2026-10-09) can use it.
   const glSet = () => colorSet({ kind: "painting", id: "g" + i, title: d.t, colors: curPal().map(p => ({ h: p.h, share: p.share })), src: "gallery/" + i,
@@ -977,6 +1270,14 @@ function glPage(i, d, fromHex, tol) {
     <p class="gl-locate" data-gllocate hidden></p>
     <p class="gl-cap" data-glcap></p>
     <div class="pal-names" data-glrows></div>
+    <div class="gl-pal-acts" data-glpalacts hidden></div>
+    <div class="gl-shufhist" data-glshufhist hidden></div>
+    <div class="gl-harm" data-glharm hidden>
+      <div class="gl-harm-top"><div class="gl-harm-chips" data-glharmchips role="group" aria-label="Harmony type"></div><button class="gl-pa-btn" data-glharmshuffle>${GL_ICON_DICE}<span>Shuffle</span></button></div>
+      <div class="gl-shufhist" data-glharmhist hidden></div>
+      <div class="gl-harm-list" data-glharmlist></div>
+      <button class="gl-harm-more" data-glharmmore hidden></button>
+    </div>
     <div class="pt-arrive gl-arrive" data-glarrive hidden></div>
     <div class="gl-cov" data-glcov></div>
     <div data-csacts></div>
@@ -1026,9 +1327,12 @@ function glPage(i, d, fromHex, tol) {
   };
   // the palette strip + named rows + arrival line, redrawn whenever the slider's size changes
   const drawPalette = () => {
-    const set = curSet(), pal = set.pal;
+    const set = curSet(), pal = set.pal, isHarm = mode === "harmony";
     drawModes(set);
     const near = fromPrimary ? glNearestSwatch(pal, fromPrimary) : null;
+    const stripH = el.querySelector("[data-glswatches]"), rowsH = el.querySelector("[data-glrows]"), capH = el.querySelector("[data-glcap]");
+    stripH.hidden = isHarm; rowsH.hidden = isHarm; capH.hidden = isHarm;
+    if (!isHarm) {
     // the strip swatch locates (dims the rest, glows where it sits); its NAME, below, still opens the color page
     // (app rule kept, just split between the two halves of the same chip — David's rebuild brief, 2026-10-09)
     // Each strip chip now opens its color's page in one tap, the app-wide rule (CLAUDE.md "one tap on any color
@@ -1041,12 +1345,16 @@ function glPage(i, d, fromHex, tol) {
     // press a swatch adds it to your set", since that's the same gesture slot) and an explicit row action in
     // the expanded list (the [data-locate] glyph there, the one nested-control exemption js/swatch.js's capture
     // delegate already recognizes, same as the old strip glyph did).
-    el.querySelector("[data-glswatches]").innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}${locate && locate.j === j ? " loc" : ""}" data-glj="${j}" data-swatch="${p.h}" style="--c:${p.h};flex:${(Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.pick ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
-    el.querySelector("[data-glrows]").innerHTML = pal.map((p, j) => {
+    stripH.innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}${locate && locate.j === j ? " loc" : ""}" data-glj="${j}" data-swatch="${p.h}" style="--c:${p.h};flex:${(Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.pick ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
+    rowsH.innerHTML = pal.map((p, j) => {
       const nm = glName(p.h), fam = !nm.sub && !p.out && typeof familyOf === "function" && familyOf(p.h);
       const sub = [p.out ? "Stands out" : nm.sub ? nm.sub.charAt(0).toUpperCase() + nm.sub.slice(1) : fam ? fam.head.n + " family" : "", p.pick ? "Picked" : glPctTxt(p.share)].filter(Boolean).join(" · ");
       return `<button class="pal-name${near && near.i === j ? " on" : ""}${locate && locate.j === j ? " loc" : ""}" data-swatch="${p.h}" data-glj="${j}"><i style="--c:${p.h}" data-ink="${ink(p.h)}"></i><b>${esc(nm.t)}</b><span>${esc(p.out && nm.sub ? sub + " · " + nm.sub : sub)}</span><em class="mono">${p.h}</em><i class="pal-where" data-locate="${j}" tabindex="0" role="button" aria-pressed="${locate && locate.j === j}" aria-label="Where ${esc(nameOf(p.h).n)} is on the painting">${GL_WHERE_ICON}</i></button>`;
     }).join("");
+    }
+    drawPalActs(set, pal, isHarm);
+    const harmHost = el.querySelector("[data-glharm]");
+    if (harmHost) { harmHost.hidden = !isHarm; if (isHarm) drawHarmony(); }
     drawCov(pal);
     const arrive = el.querySelector("[data-glarrive]");
     if (typeof ptArrival === "function") { /* the arriving color is drawn by js/paintingsof.js (L26) */ }
@@ -1062,15 +1370,74 @@ function glPage(i, d, fromHex, tol) {
     litDraw(pal); drawLocate(pal);
     const acts = el.querySelector("[data-csacts]"); if (acts) acts.hidden = !pal.length;
   };
+  // Shuffle / Edit / Save for the current single palette (every mode but Harmonies, which gives each of its own
+  // cards the same three controls instead — see drawHarmony). History: a small row of past re-rolls (seed 0 =
+  // the original honest derivation), so Shuffle never throws an earlier result away.
+  const drawPalActs = (set, pal, isHarm) => {
+    const host = el.querySelector("[data-glpalacts]"), histHost = el.querySelector("[data-glshufhist]");
+    if (!host) return;
+    host.hidden = isHarm || mode === "pick" || pal.length < 2;
+    if (!host.hidden) host.innerHTML = `<button class="gl-pa-btn" data-glshuffle>${GL_ICON_DICE}<span>Shuffle</span></button><button class="gl-pa-btn" data-gledit>Edit</button><button class="gl-pa-btn solid" data-glsave>Save palette</button>`;
+    const s = SHUF[mode];
+    if (!histHost) return;
+    histHost.hidden = isHarm || !s || s.seeds.length < 2;
+    if (!histHost.hidden) histHost.innerHTML = s.seeds.map((sd, idx) => {
+      // every entry but the current one is cheap to recompute on demand (the pool is small): swap the pointer,
+      // read the palette it would give, swap back -- never mutates what's actually on screen
+      const prevPal = idx === s.idx ? pal : (() => { const save2 = s.idx; s.idx = idx; const p2 = modeSet(mode, curK).pal; s.idx = save2; return p2; })();
+      return `<button class="gl-shuf-thumb${idx === s.idx ? " on" : ""}" data-glshufgo="${idx}" aria-label="${idx === 0 ? "Original" : "Re-roll " + idx}">${prevPal.slice(0, 4).map(p => `<i style="--c:${p.h}"></i>`).join("")}</button>`;
+    }).join("");
+  };
+  // Harmonies: several real-color relation cards at once (David, 2026-10-10), not one. Each card gets its own
+  // Edit and Save palette (coordinator's follow-up, same day: "Edit action on every derived palette card");
+  // one Shuffle re-rolls the whole family at once, with the same short history row every mode gets.
+  const harmCardName = key => (GL_HARM_CHIPS.find(c => c[0] === key) || ["", "Harmony"])[1];
+  const drawHarmony = () => {
+    const chipsHost = el.querySelector("[data-glharmchips]"), listHost = el.querySelector("[data-glharmlist]"),
+      moreBtn = el.querySelector("[data-glharmmore]"), histHost = el.querySelector("[data-glharmhist]");
+    if (!chipsHost || !listHost) return;
+    const present = new Set(harmCards.map(c => c.key));
+    chipsHost.innerHTML = GL_HARM_CHIPS.filter(c => c[0] === "all" || present.has(c[0])).map(([k, t]) => `<button data-glharmchip="${k}" class="${harmFilter === k ? "on" : ""}" aria-pressed="${harmFilter === k}">${t}</button>`).join("");
+    const shown = harmMoreOpen ? harmCards : harmCards.slice(0, 6);
+    listHost.innerHTML = shown.length ? shown.map((c, j) => `
+      <div class="gl-hcard" data-hc="${j}">
+        <div class="gl-hcard-top"><b>${esc(c.label)}</b><span>${c.fitPct}% fit</span></div>
+        <div class="palette gl-strip gl-hcard-strip">${c.pal.map(p => `<button class="pal" data-swatch="${p.h}" style="--c:${p.h};flex:${(Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("")}</div>
+        <div class="gl-hcard-names">${c.pal.map(p => esc(nameOf(p.h).n)).join(" · ")}</div>
+        <div class="gl-hcard-acts"><button class="gl-pa-btn" data-hcedit="${j}">Edit</button><button class="gl-pa-btn solid" data-hcsave="${j}">Save palette</button></div>
+      </div>`).join("") : `<p class="fine">No ${harmFilter === "all" ? "clear relation" : harmCardName(harmFilter).toLowerCase()} shows up among this painting's own colors. Try Shuffle, or another type.</p>`;
+    moreBtn.hidden = harmCards.length <= 6;
+    if (!moreBtn.hidden) moreBtn.textContent = harmMoreOpen ? "Fewer" : `More (${harmCards.length - 6})`;
+    const s = SHUF.harmony;
+    if (histHost) {
+      histHost.hidden = !s || s.seeds.length < 2;
+      if (!histHost.hidden) histHost.innerHTML = s.seeds.map((sd, idx) => {
+        const cards = idx === s.idx ? harmCards : (() => { const save2 = s.idx; s.idx = idx; const c2 = glHarmonyFamily(pool, curK, seedOf("harmony"), harmFilter); s.idx = save2; return c2; })();
+        return `<button class="gl-shuf-thumb${idx === s.idx ? " on" : ""}" data-glharmgo="${idx}" aria-label="${idx === 0 ? "Original" : "Re-roll " + idx}">${(cards[0] ? cards[0].pal : []).slice(0, 4).map(p => `<i style="--c:${p.h}"></i>`).join("")}</button>`;
+      }).join("");
+    }
+  };
   // the palette types as one row of chips, only the ones this painting has; the slider and caption follow the type
+  // a tiny preview strip for a tile: what this mode would actually give, right now, for THIS painting (David,
+  // 2026-10-10: "each with a tiny preview strip of what it would give for THIS painting") -- a few swatches at a
+  // small fixed k, never the full slider-driven palette, so the tile itself stays compact and cheap to compute.
+  const glTilePreview = key => {
+    try {
+      const prev = key === "harmony" ? (harmCards.length ? harmCards[0].pal : (pool.length >= 3 ? (glHarmonyFamily(pool, 4, 0, "all")[0] || {}).pal : null))
+        : (modeSet(key, 4) || {}).pal;
+      return (prev || []).slice(0, 4).map(p => `<i style="--c:${p.h}"></i>`).join("");
+    } catch (e) { return ""; }
+  };
   const drawModes = set => {
-    const have = GL_MODES.filter(m => m[0] === "out" || m[0] === "area" || m[0] === "pick" || (m[0] === "diverse" && pool.length > 1) || (pool.length && glModeSet(m[0], pool, 6, row)));
+    const have = GL_MODES.filter(m => m[0] === "out" || m[0] === "area" || m[0] === "pick" || (m[0] === "diverse" && pool.length > 1)
+      || (m[0] === "harmony" && pool.length >= 3 && glHarmonyCandidates(pool).cands.length) || (pool.length && glModeSet(m[0], pool, 6, row)));
     const { shown, moreCount } = glPickChips(have, row, modesOpen);
     const host = el.querySelector("[data-glorder]"), key = shown.map(m => m[0]).join() + "|" + moreCount;
     if (host.dataset.k !== key) {
       host.dataset.k = key;
-      host.innerHTML = shown.map(m => `<button data-glo="${m[0]}" aria-pressed="false">${m[1]}</button>`).join("")
-        + (moreCount ? `<button data-glmore>More (${moreCount})</button>` : modesOpen && have.length > 5 ? `<button data-glmore>Fewer</button>` : "");
+      host.classList.add("gl-tiles");
+      host.innerHTML = shown.map(m => `<button class="gl-tile" data-glo="${m[0]}" aria-pressed="false"><span class="gl-tile-prev">${glTilePreview(m[0])}</span><b>${m[1]}</b></button>`).join("")
+        + (moreCount ? `<button class="gl-tile gl-tile-more" data-glmore>More<em>${moreCount}</em></button>` : modesOpen && have.length > 5 ? `<button class="gl-tile gl-tile-more" data-glmore>Fewer</button>` : "");
     }
     host.querySelectorAll("[data-glo]").forEach(b => { const on = b.dataset.glo === mode; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
     const slide = el.querySelector("[data-glslide]"), inp = slide.querySelector("input"), kk = Math.min(Math.max(curK, 2), set.max);
@@ -1260,6 +1627,30 @@ function glPage(i, d, fromHex, tol) {
   el.querySelector("[data-glcap]").onclick = e => {
     if (e.target.closest("[data-glclear]")) { picks.length = 0; clearDots(); buzz(5); drawPalette(); return; }
     if (e.target.closest("[data-glcapt]")) { capOpen = !capOpen; buzz(4); drawPalette(); }
+  };
+  // Shuffle / Edit / Save for the current single palette, and its history row (every mode but Harmonies)
+  const palActsHost = el.querySelector("[data-glpalacts]");
+  if (palActsHost) palActsHost.onclick = e => {
+    if (e.target.closest("[data-glshuffle]")) return shuffleMode(mode);
+    if (e.target.closest("[data-gledit]")) return glEditOpen(curPal().map(p => p.h), { title: d.t, label: (GL_MODES.find(m => m[0] === mode) || [, ""])[1], pool, onSave: (hexes, name) => glSavePalette(hexes, name) });
+    if (e.target.closest("[data-glsave]")) { const lbl = (GL_MODES.find(m => m[0] === mode) || [, ""])[1]; return glSavePalette(curPal().map(p => p.h), glSaveName(d.t, mode === "out" ? "" : lbl)); }
+  };
+  const shufHistHost = el.querySelector("[data-glshufhist]");
+  if (shufHistHost) shufHistHost.onclick = e => { const b = e.target.closest("[data-glshufgo]"); if (b) shuffleHistoryTo(mode, +b.dataset.glshufgo); };
+  // Harmonies: the sub-chip filter, More/Fewer, the family-wide Shuffle + its history, and every card's own Edit/Save
+  const harmHost0 = el.querySelector("[data-glharm]");
+  if (harmHost0) harmHost0.onclick = e => {
+    const chip = e.target.closest("[data-glharmchip]");
+    if (chip) { harmFilter = chip.dataset.glharmchip; harmMoreOpen = false; buzz(5); drawPalette(); return; }
+    if (e.target.closest("[data-glharmmore]")) { harmMoreOpen = !harmMoreOpen; buzz(5); drawPalette(); return; }
+    if (e.target.closest("[data-glharmshuffle]")) return shuffleMode("harmony");
+    const go = e.target.closest("[data-glharmgo]"); if (go) return shuffleHistoryTo("harmony", +go.dataset.glharmgo);
+    const ed = e.target.closest("[data-hcedit]"), sv2 = e.target.closest("[data-hcsave]");
+    if (ed || sv2) {
+      const card = harmCards[+(ed || sv2).dataset[ed ? "hcedit" : "hcsave"]]; if (!card) return;
+      if (ed) return glEditOpen(card.pal.map(p => p.h), { title: d.t, label: card.label, pool, onSave: (hexes, name) => glSavePalette(hexes, name) });
+      return glSavePalette(card.pal.map(p => p.h), glSaveName(d.t, card.label));
+    }
   };
   // the painter's own hue habits sharpen "stands out" (a camel that's rare for van Dyck), quietly, once they load
   glPainterHue(d.a).then(h => { if (h && el.isConnected) { prior = h; if (mode === "out") drawPalette(); } });
