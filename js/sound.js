@@ -222,6 +222,19 @@ const SND_FX = {
   near: t => { sndInst("marimba", sndDeg(1), t, { vel: .09, dur: .3 }); sndInst("marimba", sndDeg(1), t + .1, { vel: .06, dur: .35 }); },
   // a streak moment: the right pair plus a little rising sparkle
   combo: t => { SND_FX.right(t); [0, 2, 4].forEach((k, i) => sndInst("glass", sndDeg(sndRightDeg() + 5 + k), t + .16 + i * .045, { vel: .04, dur: .6, verb: .3 })); },
+  // Odd one out's own, more relaxing right/wrong/streak (David, 2026-10-11: "a lot more relaxing -- not so
+  // sharp and high-pitched"), scoped to the game itself (sndInOddGame below) rather than retuning the shared
+  // app-wide right/wrong/combo every other screen also uses. Lower octave (SND_C4, not sndDeg's default C5), a
+  // real soft attack (25-40ms, never a click), a gentler lowpass (warmer, fewer bright FM partials), a short
+  // reverb tail, and quieter throughout. A streak still rises within the pentatonic scale, just capped well
+  // short of shrill instead of climbing a full extra octave-plus the way the app's own sndRightDeg does.
+  oddright: t => {
+    const d = 2 + Math.min(SND.streak - 1, 5);
+    sndInst("marimba", sndDeg(d, SND_C4), t, { att: .028, vel: .085, dur: .5, lp: 2000, verb: .22 });
+    sndInst("marimba", sndDeg(d + 2, SND_C4), t + .09, { att: .032, vel: .065, dur: .6, lp: 1900, verb: .26 });
+  },
+  oddwrong: t => { sndSine(170, t, { to: 110, gt: .16, att: .035, vel: .08, dur: .32, lp: 450 }); },
+  oddcombo: t => { SND_FX.oddright(t); const d = 2 + Math.min(SND.streak - 1, 5); sndInst("glass", sndDeg(d + 5, SND_C4), t + .17, { att: .03, vel: .035, dur: .55, verb: .3, lp: 2400 }); },
   // the swipe deck: a card turning over is a paper whisper (plus the color's own note, quietly, once it shows)
   flip: (t, hex) => { sndNoise(t, { f0: 2400, f1: 5200, q: 1.1, vel: .05, dur: .09 }); sndNoise(t + .035, { f0: 4200, f1: 3000, q: 1.4, vel: .025, dur: .06 }); if (hex) sndColorAt(hex, t + .06, { vel: .07 }); },
   knew: t => { sndNoise(t, { f0: 900, f1: 3200, q: .7, vel: .03, dur: .16 }); const d = sndRightDeg(); sndInst("marimba", sndDeg(d), t + .05, { vel: .11, dur: .4 }); sndInst("marimba", sndDeg(d + 2), t + .12, { vel: .12, dur: .5, verb: .15 }); },
@@ -249,7 +262,10 @@ const SND_FX = {
   scale: (t, a) => { const l = [], seen = new Set(); (a.hexes || []).forEach(h => { if (!/^#[0-9a-f]{6}$/i.test(h || "")) return; const tn = colorTone(h); if (!seen.has(tn.semi)) { seen.add(tn.semi); l.push({ h, f: tn.f }); } }); l.sort((x, y) => x.f - y.f); const n = Math.min(l.length, 10), step = n > 1 ? l.length / n : 1; for (let i = 0; i < n; i++) sndColorAt(l[Math.min(l.length - 1, Math.floor(i * step))].h, t + i * .075, { vel: .09, long: i === n - 1, verb: .2 }); },
   chord: (t, a) => sndChordAt(a.hexes, t, a),
 };
-const SND_PRI = { scale: 7, tick: 1, tap: 1, reveal: 1, tuck: 1, select: 2, color: 2, flip: 3, next: 3, back: 3, open: 3, close: 3, rooms: 3, chord: 4, near: 4, right: 5, wrong: 5, knew: 5, again: 5, combo: 6, done: 7, settle: 8, complete: 8, levelup: 9, best: 9 };
+const SND_PRI = { scale: 7, tick: 1, tap: 1, reveal: 1, tuck: 1, select: 2, color: 2, flip: 3, next: 3, back: 3, open: 3, close: 3, rooms: 3, chord: 4, near: 4, right: 5, wrong: 5, knew: 5, again: 5, combo: 6, done: 7, settle: 8, complete: 8, levelup: 9, best: 9, oddright: 5, oddwrong: 5, oddcombo: 6 };
+// Odd one out's own screen (oo-ui.js's ooMap shows "fixed drill station oo-play oo-simple") -- the one place
+// the softer, more relaxing right/wrong/streak set above applies, instead of the shared app-wide vocabulary.
+const sndInOddGame = () => !!document.querySelector(".screen.oo-simple");
 function sndColorAt(hex, t, o = {}) {
   const tn = colorTone(hex), P = SND_INST[tn.inst];
   sndFM(tn.f, t, { ...P, index: P.index * (.3 + .9 * tn.bright), lp: P.lp * (.45 + .55 * tn.bright), vel: o.vel != null ? o.vel : .12, pan: tn.pan, verb: o.verb != null ? o.verb : .16, dur: P.dur * (o.long ? 1.6 : 1) });
@@ -307,6 +323,9 @@ function sndBuzz(ms) {
   const deck = (name === "select" || name === "right" || name === "wrong") && sndCtxDeck();
   if (name === "right" || name === "combo") { if (name === "right") SND.streak++; SND.streakT = now; SND.tally[0]++; }
   if (name === "wrong") { SND.streak = 0; SND.tally[1]++; }
+  // Odd one out gets its own, more relaxing take on these three (David, 2026-10-11) -- swapped in after the
+  // streak bookkeeping above (which stays the same either way), before anything actually plays.
+  if ((name === "right" || name === "wrong" || name === "combo") && sndInOddGame()) name = "odd" + name;
   if (deck) {
     if (name === "select") { const c = deck.style.getPropertyValue("--c").trim(); return sndQ("flip", /^#[0-9a-f]{6}$/i.test(c) ? c : null); }
     return sndQ(name === "right" ? "knew" : "again");
