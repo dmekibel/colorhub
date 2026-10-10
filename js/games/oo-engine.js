@@ -839,13 +839,32 @@ function ooWhoseAlts(list, ease, rnd) {
 // the timer instead, never through an invisible gap.
 // ======================================================================
 const OO_S_FLOOR = { hue: 2.4, chroma: 2, light: 1.6 };   // ΔE00, as drawn: conservative, always visible on a phone
-const OO_S_MULT = 1.5;    // d = th x this lands right ~75% of the time in theory (OO_SLOPE=3, OO_LAPSE=.03; see ooP);
-// in practice the online estimate runs a little generous, which settles actual play closer to 78-80% (tools/oo_simple_sim.js)
+const OO_S_MULT = 1.35;    // d = th x this lands right ~70% of the time in theory (OO_SLOPE=3, OO_LAPSE=.03; see ooP);
+// in practice the online estimate runs a little generous, and richer boards add their own difficulty on top, which
+// together settle actual play closer to 78-82% (tools/oo_simple_sim.js)
 const OO_S_BREATHE_MULT = 1.7;    // a breather round (~93%): easier, for rhythm, not a reward
-const OO_S_MIN_COLS = 3, OO_S_MAX_COLS = 16;   // David, 2026-10-10: "the grid can go much bigger than 9x9" -- 16 x 16
-// is the same ceiling the old Classic ladder shipped for years (css/games.css's .oo-dense already keeps tiles
-// tappable that far down by shrinking the seam, not the tile)
+const OO_S_MIN_COLS = 3, OO_S_MAX_COLS = 20;   // David, 2026-10-10: "the grid can go much bigger", "up to ~12x20"
+// -- this is a SIZE index (the board's longer side), not a literal column count once boards stop being square
+// (ooSimpleDims below turns it into rows x cols for the screen's own aspect)
 const OO_S_WINDOW = 8, OO_S_GROW_AT = .82, OO_S_SHRINK_AT = .4;   // rolling accuracy at this grid size
+const ooLerp = (a, b, t) => a + (b - a) * clamp(t, 0, 1);
+// a rows x cols board that fills the play area, longer side `size`, short side set by `aspect` (height/width of
+// the area it has to fill: >1 portrait, <1 landscape). David, 2026-10-10: "the board doesn't have to be
+// square... rows > columns on a phone (3x4, 4x6, 6x9 ... up to ~12x20)" -- this formula reproduces those
+// examples directly (size 4 -> 3x4, size 6 -> 4x6, size 9 -> 6x9, size 20 -> 13x20).
+function ooSimpleDims(size, aspect = 1.6) {
+  size = clamp(Math.round(size), OO_S_MIN_COLS, OO_S_MAX_COLS);
+  const a = Math.max(aspect, 1 / aspect), portrait = aspect >= 1;
+  const short = clamp(Math.round(size / a), 3, size);
+  return portrait ? { rows: size, cols: short } : { rows: short, cols: size };
+}
+// a rows x cols grid of cells (fractions of the board, which simply fills its container -- David, 2026-10-11:
+// "the board doesn't have to be square"), unlike ooCells("grid", n, ...) above, which is always square.
+function ooSimpleCells(cols, rows) {
+  const cells = [];
+  for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) cells.push({ x: x / cols, y: y / rows, w: 1 / cols, h: 1 / rows, gx: x, gy: y, shape: "sq" });
+  return cells;
+}
 
 // which axis the next round tests: weighted toward the one with the least evidence so far (interleaved, not round-robin)
 function ooSimpleAxis(model, rnd = Math.random) {
@@ -864,56 +883,100 @@ function ooSimpleD(model, axis, breather, rnd = Math.random) {
   return Math.max(OO_S_FLOOR[axis] * OO_S_FLOOR_PAD, Math.min(OO_MAX, th * jit * mult));
 }
 // how many tiles are odd this round. k4 only once the grid is big enough that four odd tiles isn't most of it.
-function ooSimpleShape(cols, rnd = Math.random) {
+function ooSimpleShape(n, rnd = Math.random) {
   const r = rnd();
-  if (cols >= 4 && r < .08) return "k4";
+  if (n >= 16 && r < .08) return "k4";
   if (r < .25) return "k2";
   return "one";
 }
-// ---------- the whole grid as one palette (David, 2026-10-10 correction): not a per-tile stripe pattern -- the
-// WHOLE BOARD is a smooth gradient (hue sweeping left to right, lightness top to bottom, or a 2-D blend between
-// corner colors), and the odd tile(s) sit off of where the gradient says they should be. "flat" (every tile the
-// same base color) is the plain case. A gradient is variety, not a reward: David, 2026-10-10 ("it's not only
-// about level, it's also about fun -- give gradients even to low-skill players, as long as it's not too
-// difficult, on their level") -- so gradients show at roughly the same RATE for everyone past a short flat
-// warm-up; what scales with skill is how STEEP the gradient is (a gentle sweep for a beginner, a steeper 2-D
-// blend more often for an expert), because a steeper ground competes harder with the odd tile for your eye.
-const OO_S_GRAD_WARMUP = 3;   // the first few rounds stay flat, so the very first board is the plain one
-const OO_S_GRAD_P = .46;   // roughly how often a round past the warm-up is some kind of gradient, at any skill
-const OO_S_GRAD_F = { flat: 1, grad1d: 1.15, grad2d: 1.35 };   // a board factor: a harder ground gets a bigger d to compensate (same convention as bf elsewhere), so the learner model stays comparable across ground types
+// ---------- OKLab/OKLCH (Björn Ottosson): the board's own gradient is mixed here, not in CIELAB, so a sweep
+// between two saturated colors stays luminous instead of dipping through a muddy grey midpoint. The odd tile's
+// move stays on the CIELAB machinery above (ooMove/ooMoveDir/ooGapDE): that's what the visibility floors and the
+// learner model are calibrated against, and it only ever touches one tile at a time, so there's no mid-mix to protect.
+function ooOklab(hex) {
+  const [r, g, b] = rgb(hex).map(v => { v /= 255; return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; });
+  const l = .4122214708 * r + .5363325363 * g + .0514459929 * b, m = .2119034982 * r + .6806995451 * g + .1073969566 * b, s = .0883024619 * r + .2817188376 * g + .6299787005 * b;
+  const l_ = Math.cbrt(l), m_ = Math.cbrt(m), s_ = Math.cbrt(s);
+  return [.2104542553 * l_ + .7936177850 * m_ - .0040720468 * s_, 1.9779984951 * l_ - 2.4285922050 * m_ + .4505937099 * s_, .0259040371 * l_ + .7827717662 * m_ - .8086757660 * s_];
+}
+function ooOklabRgb(L, a, b) {
+  const l_ = L + .3963377774 * a + .2158037573 * b, m_ = L - .1055613458 * a - .0638541728 * b, s_ = L - .0894841775 * a - 1.2914855480 * b;
+  const l = l_ ** 3, m = m_ ** 3, s = s_ ** 3;
+  return [4.0767416621 * l - 3.3077115913 * m + .2309699292 * s, -1.2684380046 * l + 2.6097574011 * m - .3413193965 * s, -.0041960863 * l - .7034186147 * m + 1.7076147010 * s]
+    .map(v => v <= .0031308 ? 12.92 * v : 1.055 * v ** (1 / 2.4) - .055);
+}
+const ooOklabInGamut = (L, a, b) => ooOklabRgb(L, a, b).every(v => v >= -.002 && v <= 1.002);
+const ooOklabHex = (L, a, b) => "#" + ooOklabRgb(L, a, b).map(v => Math.round(clamp(v, 0, 1) * 255).toString(16).padStart(2, "0")).join("").toUpperCase();
+const ooOklabMixRaw = (A, B, t) => A.map((x, i) => x + (B[i] - x) * t);
+// a point along several OKLab stops (2-4), piecewise
+function ooOklabPathRaw(stops, t) {
+  if (stops.length === 1) return stops[0];
+  const segs = stops.length - 1, pos = clamp(t, 0, 1) * segs, i = Math.min(segs - 1, Math.floor(pos));
+  return ooOklabMixRaw(stops[i], stops[i + 1], pos - i);
+}
+// in gamut, by pulling chroma toward the mix's own lightness rather than darkening -- keeps a rich sweep luminous
+// instead of sliding to grey at the edge of what the screen can show.
+function ooOklabToHexSafe(P) {
+  let k = 1;
+  for (let i = 0; i < 24 && !ooOklabInGamut(P[0], P[1] * k, P[2] * k); i++) k *= .92;
+  return ooOklabHex(P[0], P[1] * k, P[2] * k);
+}
+// ---------- the whole grid as one beautiful palette (David, 2026-10-10 and 2026-10-11): not a per-tile stripe
+// pattern, and not a flat ground either -- the board itself IS a gradient almost every round, mixed in OKLab
+// between 2-4 stops pulled from a curated or personal palette (js/games/oo-ui.js assembles the pool: painting
+// palettes, looks, high-lift painter pairs, and the player's own favorites), and the odd tile sits off of where
+// that gradient says it should be at its position. Difficulty is three things moving together: more tiles, a
+// richer gradient (more stops, a 2-D shape instead of a straight sweep), and a smaller gap -- never just one.
+const OO_S_GRAD_WARMUP = 2;    // the first couple of rounds are flat, so the very first board is the plain one
+const OO_S_FLAT_P = .07;       // flat past the warm-up is a rare palate-cleanser now, not the default
+const OO_S_RICH = {
+  grad1: { stops: 2, shapes: ["vert", "horiz"] },
+  grad2: { stops: 3, shapes: ["diag", "radial"] },
+  grad3: { stops: 4, shapes: ["corners4"] },
+};
+const OO_S_GRAD_F = { flat: 1, grad1: 1.12, grad2: 1.28, grad3: 1.45 };   // a richer ground gets a bigger d to compensate (same convention as bf elsewhere), so the per-axis estimate stays comparable across ground types
 // skill: 0 (struggling, still on a small grid) .. 1 (sharp, near the grid cap) -- reuses the grid-size proxy
 // that already drives difficulty, so no second "how good are they" number needs tracking.
-const ooSimpleSkill = cols => clamp((cols - OO_S_MIN_COLS) / (OO_S_MAX_COLS - OO_S_MIN_COLS), 0, 1);
+const ooSimpleSkill = size => clamp((size - OO_S_MIN_COLS) / (OO_S_MAX_COLS - OO_S_MIN_COLS), 0, 1);
+// which richness this round draws: a rare flat break, else 2/3/4 stops with the mix shifting toward the richer
+// tiers as skill rises (but never locked out at either end -- a beginner still meets a rich board sometimes, an
+// expert still gets an easy one, which is what keeps it feeling like a game and not a ladder).
 function ooSimpleGridType(skill, round, rnd = Math.random) {
   if (round < OO_S_GRAD_WARMUP) return "flat";
-  if (rnd() >= OO_S_GRAD_P) return "flat";
-  return rnd() < clamp(.15 + skill * .6, .1, .85) ? "grad2d" : "grad1d";
+  if (rnd() < OO_S_FLAT_P) return "flat";
+  const p1 = ooLerp(.72, .06, skill), p2 = ooLerp(.22, .34, skill), r = rnd();
+  return r < p1 ? "grad1" : r < p1 + p2 ? "grad2" : "grad3";
 }
-// the expected color field: flat (one base color everywhere), a 1-D sweep (one random Lab direction across
-// either grid axis) or a 2-D blend (two independent directions, one per grid axis -- a real corner-to-corner
-// mix). skill sets the steepness (the span a sweep covers edge to edge), gentle at the low end, steep at the high.
-function ooSimpleGradColors(cols, dims, skill, rnd = Math.random) {
-  const geo = ooCells("grid", cols, rnd), cells = geo.cells, N = cells.length;
-  if (dims === "flat") { const base = ooBase(rnd, {}); return { cells, colors: Array(N).fill(base), aspect: geo.aspect }; }
-  const lerp = (a, b) => a + (b - a) * clamp(skill, 0, 1);
-  for (let attempt = 0; attempt < 20; attempt++) {
-    const base = ooBase(rnd, {}), B = lab(base);
-    const span1 = dims === "grad1d" ? ooBtw(lerp(5, 11), lerp(9, 18), rnd) : ooBtw(lerp(8, 16), lerp(14, 26), rnd);
-    const dir1 = ooRandDir(rnd), n1 = Math.hypot(...dir1) || 1;
-    let sx = dir1.map(x => x / n1 * span1 / 2), sy = [0, 0, 0];
-    if (dims === "grad2d") { const dir2 = ooRandDir(rnd), n2 = Math.hypot(...dir2) || 1, span2 = ooBtw(lerp(8, 16), lerp(14, 26), rnd); sy = dir2.map(x => x / n2 * span2 / 2); }
-    else if (rnd() < .5) { sy = sx; sx = [0, 0, 0]; }   // a 1-D sweep runs top-to-bottom as often as left-to-right
-    const colors = [];
-    let ok = true;
-    for (let i = 0; i < N; i++) {
-      const c = cells[i], fx = cols > 1 ? c.gx / (cols - 1) * 2 - 1 : 0, fy = cols > 1 ? c.gy / (cols - 1) * 2 - 1 : 0;
-      const P = B.map((x, k) => x + sx[k] * fx + sy[k] * fy);
-      if (!inGamut(...P) || P[0] < 4 || P[0] > 96) { ok = false; break; }
-      colors.push(labHex(...P));
-    }
-    if (ok) return { cells, colors, aspect: geo.aspect };
+// the expected color field. stopHexes: 2-4 real colors (a curated or favorite palette, picked in oo-ui.js);
+// cycles through them if a tier needs more stops than it was given. skill sets how far the sweep's own span
+// reaches edge to edge -- gentle for a beginner, steep for an expert -- independent of the odd tile's own gap.
+function ooSimpleGradColors(rows, cols, richness, stopHexes, skill, rnd = Math.random) {
+  const cells = ooSimpleCells(cols, rows);
+  if (richness === "flat" || !stopHexes || !stopHexes.length) {
+    const base = (stopHexes && stopHexes[0]) || ooBase(rnd, {});
+    return { cells, colors: Array(cells.length).fill(base) };
   }
-  return ooSimpleGradColors(cols, "flat", skill, rnd);   // the gamut wouldn't take it: fall back to flat rather than fail the round
+  const R = OO_S_RICH[richness] || OO_S_RICH.grad1, need = R.stops;
+  const stops = []; for (let i = 0; i < need; i++) stops.push(stopHexes[i % stopHexes.length]);
+  const raw = stops.map(ooOklab), shape = ooPick(R.shapes, rnd);
+  // a beginner's sweep keeps only part of the source palette's own contrast (pulled toward its mean, same colors,
+  // gentler spread); an expert sees the palette at its own full contrast. Never pulled so far it's flat.
+  const pull = clamp(ooLerp(.4, 1, skill) * ooBtw(.92, 1.08, rnd), .3, 1);
+  const mean = raw[0].map((_, i) => raw.reduce((a, s) => a + s[i], 0) / raw.length);
+  const pulled = raw.map(s => ooOklabMixRaw(mean, s, pull));
+  const colors = cells.map(c => {
+    const fx = cols > 1 ? c.gx / (cols - 1) : .5, fy = rows > 1 ? c.gy / (rows - 1) : .5;
+    let P;
+    if (shape === "corners4" && pulled.length >= 4) {
+      const top = ooOklabMixRaw(pulled[0], pulled[1], fx), bot = ooOklabMixRaw(pulled[2], pulled[3], fx);
+      P = ooOklabMixRaw(top, bot, fy);
+    } else {
+      const t = shape === "vert" ? fy : shape === "horiz" ? fx : shape === "diag" ? (fx + fy) / 2 : Math.min(1, Math.hypot(fx - .5, fy - .5) / .7071);
+      P = ooOklabPathRaw(pulled, t);
+    }
+    return ooOklabToHexSafe(P);
+  });
+  return { cells, colors, shape };
 }
 // which axis (or combination) this round's error moves along, and how much weight each carries. Usually pure
 // (David: keep per-axis estimates clean most of the time); sometimes two or three axes move together, still
@@ -937,11 +1000,11 @@ function ooMixDir(mix, hex) {
 }
 // the odd tile(s): each is moved from its own expected (gradient) color by the mix direction, so the error is
 // always measured relative to where that tile's position says it should sit -- never the board's single base color.
-function ooSimpleGradRound(cols, dims, skill, mix, d, k, rnd = Math.random) {
-  for (let attempt = 0; attempt < 12; attempt++) {
-    const field = ooSimpleGradColors(cols, dims, skill, rnd);
+function ooSimpleGradRound(rows, cols, richness, stopHexes, skill, mix, d, k, rnd = Math.random) {
+  for (let attempt = 0; attempt < 10; attempt++) {
+    const field = ooSimpleGradColors(rows, cols, richness, stopHexes, skill, rnd);
     if (!field) continue;
-    const { cells, colors, aspect } = field, N = cells.length;
+    const { cells, colors, shape } = field, N = cells.length;
     const at = ooShuf([...Array(N).keys()], rnd).slice(0, Math.min(k, N - 1));
     const out = colors.slice();
     let okAll = true, act = null, odd = null, base0 = null, dir = null;
@@ -954,20 +1017,26 @@ function ooSimpleGradRound(cols, dims, skill, mix, d, k, rnd = Math.random) {
       if (act == null) { act = m.act; odd = m.hex; base0 = expect; dir = ooDirWord(expect, m.hex); }
     }
     if (!okAll) continue;
-    return { v: "one", b: "grid", n: cols, cols, cells, aspect, colors: out, ans: at, k: at.length, odd, base: base0, act, dir,
-      g: 1 / N, fam: ooFam(base0), gridType: dims, vf: 1 };
+    return { v: "one", b: "grid", rows, cols, cells, colors: out, ans: at, k: at.length, odd, base: base0, act, dir,
+      g: 1 / N, fam: ooFam(base0), gridType: richness, shape, vf: 1 };
   }
   return null;
 }
-// one round of the simple game. state: { model, cols, round }. breather: an easier round dropped in for rhythm.
+// one round of the simple game. state: { model, cols (the size index), round, aspect?, palette? (a curated or
+// favorite { colors, label, link } from oo-ui.js's pool, or null) }. breather: an easier round for rhythm.
 function ooSimpleRound(state, breather, rnd = Math.random) {
   const primary = ooSimpleAxis(state.model, rnd), d = ooSimpleD(state.model, primary, breather, rnd);
-  const mix = ooSimpleMix(primary, rnd), skill = ooSimpleSkill(state.cols), dims = ooSimpleGridType(skill, state.round || 0, rnd);
-  const shape = ooSimpleShape(state.cols, rnd), k = shape === "k4" ? Math.min(4, state.cols * state.cols - 1) : shape === "k2" ? 2 : 1;
-  const bf = OO_S_GRAD_F[dims];
-  let r = ooSimpleGradRound(state.cols, dims, skill, mix, d * bf, k, rnd);
-  if (!r) r = ooSimpleGradRound(state.cols, "flat", skill, { [primary]: 1 }, d, k, rnd);   // should be rare; a plain fallback
-  return Object.assign(r, { breather, axis: primary, judg: primary, mix, bf: r.gridType ? bf : 1 });
+  const mix = ooSimpleMix(primary, rnd), skill = ooSimpleSkill(state.cols), richness = ooSimpleGridType(skill, state.round || 0, rnd);
+  const { rows, cols } = ooSimpleDims(state.cols, state.aspect || 1.6);
+  const shape = ooSimpleShape(rows * cols, rnd), k = shape === "k4" ? Math.min(4, rows * cols - 1) : shape === "k2" ? 2 : 1;
+  const bf = OO_S_GRAD_F[richness] || 1, stopHexes = state.palette && state.palette.colors;
+  let r = ooSimpleGradRound(rows, cols, richness, stopHexes, skill, mix, d * bf, k, rnd);
+  if (!r) r = ooSimpleGradRound(rows, cols, "flat", stopHexes, skill, { [primary]: 1 }, d, k, rnd);   // should be rare; a plain fallback
+  // belt and braces: an extreme d or an unusual stop near the edge of the screen's gamut could in principle
+  // exhaust both attempts above. A round is never allowed to fail outright, so this last resort uses a base and
+  // a gap that are always drawable, same emergency pattern ooRound itself falls back to.
+  if (!r) r = ooSimpleGradRound(rows, cols, "flat", null, skill, { [primary]: 1 }, Math.min(d, 6), k, rnd);
+  return Object.assign(r, { breather, axis: primary, judg: primary, mix, bf: r.gridType && r.gridType !== "flat" ? bf : 1, paletteSource: state.palette || null });
 }
 // grid growth: a rolling window of the last OO_S_WINDOW results at the current size: grow on a hot streak, shrink
 // on a cold one, hold otherwise. The floor stops the gap from shrinking further, so this is the difficulty knob
@@ -990,6 +1059,7 @@ if (typeof module !== "undefined") module.exports = {
   OO_EDGE, ooEdgeTh, ooEdgeD, ooEdgeUpdate, ooPairRatioOf, ooWhoseAlts,
   ooPairsRound, ooPairClear, OO_PAIR_RATIO, ooLineRound, ooNameMargin, OO_LINE_MARGIN, OO_LINE_P0, OO_LINE_MIN, ooGradStrip, ooOrderRound, ooChangedRound, ooWasRound, ooNbackSeq, ooCountPick,
   OO_S_FLOOR, OO_S_FLOOR_PAD, OO_S_MULT, OO_S_BREATHE_MULT, OO_S_MIN_COLS, OO_S_MAX_COLS, OO_S_WINDOW, OO_S_GROW_AT, OO_S_SHRINK_AT,
-  OO_S_GRAD_WARMUP, OO_S_GRAD_P, OO_S_GRAD_F, ooSimpleSkill, ooSimpleGridType, ooSimpleGradColors, ooSimpleMix, ooMixDir, ooSimpleGradRound,
+  ooLerp, ooSimpleDims, ooSimpleCells, ooOklab, ooOklabRgb, ooOklabInGamut, ooOklabHex, ooOklabMixRaw, ooOklabPathRaw, ooOklabToHexSafe,
+  OO_S_GRAD_WARMUP, OO_S_FLAT_P, OO_S_RICH, OO_S_GRAD_F, ooSimpleSkill, ooSimpleGridType, ooSimpleGradColors, ooSimpleMix, ooMixDir, ooSimpleGradRound,
   ooSimpleAxis, ooSimpleD, ooSimpleShape, ooSimpleRound, ooSimpleGrid,
 };
