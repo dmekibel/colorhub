@@ -1457,7 +1457,8 @@ function pmMount(el, s, F) {
       }
       if (b.d >= 40 && F.G.mean[i * 3] < 24) { ctx.strokeStyle = "rgba(236,232,223,.14)"; ctx.lineWidth = 1; ctx.strokeRect(X + .5, Y + .5, w - 1, h - 1); }
       // your favorites glow (the same pink the heart icon turns "on"), kept subtle: a thin ring, not a halo
-      if (favSet && favSet.size && b.d >= 7 && favSet.has(i)) {
+      // David, 2026-10-10: "I don't like favorite paintings outlined in pink on the map" -- off; favorites still filter/sort
+      if (false && favSet && favSet.size && b.d >= 7 && favSet.has(i)) {
         ctx.save(); const lw = Math.max(1.25, Math.min(2, b.d * .018));
         ctx.strokeStyle = "rgba(232,120,122,.85)"; ctx.lineWidth = lw;
         ctx.strokeRect(X + lw / 2, Y + lw / 2, w - lw, h - lw);
