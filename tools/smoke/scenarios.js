@@ -6697,3 +6697,89 @@ scenario("design", "the botanical grid filters birds vs. botanical", async t => 
   await t.click(birdChip, { wait: 500 });
   await t.waitFor(() => t.$$("#bpFeed .pin").length > 0 || t.$(".fine"), 8000, "the grid to show only birds");
 });
+
+// ================================================================== PALETTE ENGINE: selector grid, Harmonies,
+// Shuffle, Save, Edit (David, 2026-10-10: "the palette extractions/selectors... scrolling through that top row
+// isn't convenient" / "Harmonies is a very important one" / "derive different palettes" / "how do we save a
+// palette once derived" / "how do we edit the palette")
+scenario("paintings", "the mode switcher is a tile grid with Harmonies among the first four, each tile with its own live preview", async t => {
+  await t.open("#/gallery/777", { settle: 800 });
+  const host = await t.waitFor("[data-glorder]", 15000, "the mode switcher");
+  t.expect(host.classList.contains("gl-tiles"), "the mode switcher isn't the new tile grid");
+  const tiles = t.$$("[data-glorder] [data-glo]");
+  t.expect(tiles.length >= 4, "fewer than 4 pinned mode tiles");
+  const order = tiles.slice(0, 4).map(b => b.dataset.glo);
+  t.expect(order[0] === "area" && order[1] === "out" && order.includes("harmony") && order.indexOf("harmony") < 3, `the first tiles were [${order.join(",")}], Harmonies should be among the first few`);
+  t.expect(t.$$("[data-glorder] .gl-tile-prev i").length > 0, "a tile's preview strip has no swatches");
+});
+scenario("paintings", "Harmonies shows several relation cards, each built only from real colors in the painting's own pool", async t => {
+  await t.open("#/gallery/777", { settle: 800 });
+  const harmTile = await t.waitFor(() => t.$$("[data-glo]").find(b => b.dataset.glo === "harmony"), 15000, "the Harmonies tile");
+  await t.click(harmTile, { force: true, wait: 500 });
+  await t.waitFor("[data-glharm]:not([hidden]) .gl-hcard", 8000, "at least one harmony card");
+  const cards = t.$$("[data-glharmlist] .gl-hcard");
+  t.expect(cards.length >= 3, `only ${cards.length} harmony cards shown for a colorful painting (gallery/777)`);
+  // sub-chips: All plus only the relations actually present
+  const chips = t.$$("[data-glharmchips] [data-glharmchip]").map(b => b.dataset.glharmchip);
+  t.expect(chips[0] === "all" && chips.length >= 2, `expected an All chip plus at least one relation chip, got [${chips.join(",")}]`);
+  const ok = t.ev(`(() => {
+    const d = glDetailNow(777), pool = glPoolDecode(d.pl), poolHex = new Set(pool.map(p => p.h.toUpperCase()));
+    const sw = [...document.querySelectorAll('[data-glharmlist] .gl-hcard .pal')];
+    return sw.length > 0 && sw.every(b => poolHex.has(getComputedStyle(b).getPropertyValue('--c').trim().toUpperCase()));
+  })()`);
+  t.expect(ok, "a harmony card shows a color that isn't in this painting's own measured pool");
+  // every card offers Edit and Save
+  t.expect(t.$$("[data-glharmlist] [data-hcedit]").length === cards.length, "not every harmony card has an Edit action");
+  t.expect(t.$$("[data-glharmlist] [data-hcsave]").length === cards.length, "not every harmony card has a Save palette action");
+});
+scenario("paintings", "Shuffle re-derives the palette (Diverse, where there's room to), but every hex it shows still comes from the painting's own pool", async t => {
+  await t.open("#/gallery/777", { settle: 800 });
+  // Diverse has the most real candidates to shuffle among for this painting (a single "Stands out" or "By area"
+  // re-roll can legitimately come back unchanged when the pool offers no honest near-tie to swap in -- David's
+  // own rule, "always real colors... never invented," means Shuffle must never force a change that isn't there).
+  const diverseTile = await t.waitFor(() => t.$$("[data-glo]").find(b => b.dataset.glo === "diverse"), 15000, "the Diverse tile");
+  await t.click(diverseTile, { force: true, wait: 400 });
+  const hexesOf = () => t.ev(`[...document.querySelectorAll('[data-glswatches] [data-glj]')].map(b => getComputedStyle(b).getPropertyValue('--c').trim().toUpperCase()).sort().join(",")`);
+  const before = hexesOf();
+  const shuffleBtn = await t.waitFor("[data-glshuffle]", 8000, "the Shuffle button");
+  const seen = new Set([before]);
+  for (let n = 0; n < 6 && seen.size < 2; n++) { await t.click(shuffleBtn, { wait: 350 }); seen.add(hexesOf()); }
+  t.expect(seen.size >= 2, "6 re-rolls of Diverse never produced a different real palette for gallery/777");
+  const ok = t.ev(`(() => {
+    const d = glDetailNow(777), pool = glPoolDecode(d.pl), poolHex = new Set(pool.map(p => p.h.toUpperCase()));
+    return [...document.querySelectorAll('[data-glswatches] [data-glj]')].every(b => poolHex.has(getComputedStyle(b).getPropertyValue('--c').trim().toUpperCase()));
+  })()`);
+  t.expect(ok, "after Shuffle, a swatch isn't a real color from this painting's pool");
+  // the history row keeps the original alongside every re-roll, so Shuffle never throws a result away
+  const hist = t.$$("[data-glshufhist] [data-glshufgo]");
+  t.expect(hist.length >= 2, "Shuffle's history row doesn't keep the original alongside the re-roll");
+  await t.click(hist[0], { wait: 300 });
+  t.expect(hexesOf() === before, "going back to the first history thumbnail didn't restore the original palette");
+});
+scenario("paintings", "Save palette adds a new entry to S.palettes, and Edit lets you remove, lock and shuffle before saving", async t => {
+  await t.open("#/gallery/777", { settle: 800 });
+  await t.waitFor("[data-glswatches] [data-glj]", 15000, "the palette strip");
+  const before = t.ev(`(S.palettes || []).length`);
+  const saveBtn = await t.waitFor("[data-glsave]", 8000, "the Save palette button");
+  await t.click(saveBtn, { wait: 500 });
+  const after = t.ev(`(S.palettes || []).length`);
+  t.expect(after === before + 1, `Save palette should add one entry to S.palettes (was ${before}, now ${after})`);
+  // Edit: remove one, lock one, shuffle -- the locked color must survive the shuffle untouched
+  const editBtn = await t.waitFor("[data-gledit]", 8000, "the Edit button");
+  await t.click(editBtn, { wait: 500 });
+  const rows = await t.waitFor(() => { const r = t.$$(".gl-edit-sheet [data-ge-row]"); return r.length >= 3 ? r : null; }, 8000, "at least 3 rows in the palette editor");
+  const nRows = rows.length;
+  const lockHex = t.ev(`document.querySelectorAll('.gl-edit-sheet [data-ge-row]')[0].querySelector('[data-ge-swap]').style.getPropertyValue('--c')`);
+  await t.click(t.$('.gl-edit-sheet [data-ge-lock="0"]'), { wait: 300 });
+  t.expect(t.$('.gl-edit-sheet [data-ge-lock="0"]').getAttribute("aria-pressed") === "true", "locking the first color didn't mark it locked");
+  await t.click(t.$('.gl-edit-sheet [data-ge-rm="2"]'), { wait: 300 });
+  t.expect(t.$$(".gl-edit-sheet [data-ge-row]").length === nRows - 1, "removing a row didn't shrink the editor's list");
+  const shufBtn = t.$(".gl-edit-sheet [data-ge-shuffle]");
+  t.expect(shufBtn && !shufBtn.disabled, "the editor's Shuffle unlocked button is missing or disabled with an unlocked color still present");
+  await t.click(shufBtn, { wait: 400 });
+  const lockHexAfter = t.ev(`document.querySelectorAll('.gl-edit-sheet [data-ge-row]')[0].querySelector('[data-ge-swap]').style.getPropertyValue('--c')`);
+  t.expect(lockHexAfter.toUpperCase() === lockHex.toUpperCase(), `the locked color changed after Shuffle unlocked (was ${lockHex}, now ${lockHexAfter})`);
+  await t.click(t.$(".gl-edit-sheet [data-ge-save]"), { wait: 500 });
+  const afterEdit = t.ev(`(S.palettes || []).length`);
+  t.expect(afterEdit === after + 1, `saving from the editor should add one more entry to S.palettes (was ${after}, now ${afterEdit})`);
+});

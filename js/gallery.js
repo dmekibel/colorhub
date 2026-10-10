@@ -847,10 +847,14 @@ function glChipScore(key, row) {
 }
 function glPickChips(have, row, open) {
   if (open) return { shown: have, moreCount: 0 };
-  const pinned = have.filter(m => GL_PINNED_MODES.includes(m[0]));
+  // the pinned four must actually render in David's own order (By area, Stands out, Harmonies, Diverse), not
+  // just somewhere in GL_MODES' declaration order -- .filter() on `have` kept whichever order GL_MODES happened
+  // to declare them in, which could park a scored extra (like Accents) ahead of a pinned mode (David, 2026-10-10
+  // smoke failure: "the first tiles were [out,area,diverse,accents]", Harmonies pushed to 5th).
+  const pinned = GL_PINNED_MODES.map(k => have.find(m => m[0] === k)).filter(Boolean);
   const rest = have.filter(m => !GL_PINNED_MODES.includes(m[0])).map(m => ({ m, s: glChipScore(m[0], row) })).sort((a, b) => b.s - a.s);
   const topKeys = new Set(rest.slice(0, 5 - pinned.length).map(r => r.m[0]));
-  const shown = have.filter(m => GL_PINNED_MODES.includes(m[0]) || topKeys.has(m[0]));
+  const shown = [...pinned, ...have.filter(m => !GL_PINNED_MODES.includes(m[0]) && topKeys.has(m[0]))];
   return { shown, moreCount: have.length - shown.length };
 }
 function glModeSet(m, pool, k, row) {
