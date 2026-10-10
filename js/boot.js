@@ -200,6 +200,37 @@ function shot(name) {
       if (arg === "fashion") { if (window.FASHION) fashionDecadeDetail(FASHION.decades[2].id); else fashionFallback(); return later2(() => nameSheet("#1C2B5A"), 700); }
       return loadGallery().then(() => { galleryPage(0); later2(() => nameSheet(glHex(0, 0)), 700); });
     }
+    // Picked colors (js/picked.js), for design-review screenshots only:
+    //   picked           the sheet itself, seeded with ~8 sample picks
+    //   picked:loupe     a synthetic image pinned to the very top of the screen, with the loupe shown mid-drag
+    //                    near that top edge (so the side-flip in js/eyedrop.js's position() is what's on screen)
+    //   picked:readout   js/gallery.js's glColorReadout, as it looks right after a pick (Saved line, the actions,
+    //                    the Picked colors button)
+    case "picked": {
+      const sample = ["#C8553D", "#3F7C8C", "#E0A458", "#5B7F6E", "#8C5E58", "#2F6F4E", "#D9A5B3", "#4F6D7A"];
+      S.picked = sample.map((h, i) => ({ h, n: nameOf(h).n, at: Date.now() - i * 6e4 }));
+      if (arg === "loupe") {
+        const el = show(`<div class="fixed" style="position:relative"></div>`, "fixed");
+        const img = new Image();
+        img.style.cssText = "position:fixed;left:0;top:0;width:100%;height:160px;object-fit:cover";
+        img.onload = () => {
+          el.appendChild(img);
+          later2(() => {
+            const r = img.getBoundingClientRect(), x = r.left + r.width * .6, y = r.top + 18;
+            eyedropAttach(img, {});
+            img.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, clientX: x, clientY: y, isPrimary: true, pointerId: 1 }));
+          }, 120);
+        };
+        const c = document.createElement("canvas"); c.width = 300; c.height = 160;
+        const cx = c.getContext("2d"), grad = cx.createLinearGradient(0, 0, 300, 160);
+        grad.addColorStop(0, "#C8553D"); grad.addColorStop(.5, "#3F7C8C"); grad.addColorStop(1, "#E0A458");
+        cx.fillStyle = grad; cx.fillRect(0, 0, 300, 160);
+        img.src = c.toDataURL();
+        return;
+      }
+      if (arg === "readout") { go("explore"); return later2(() => glColorReadout("#3F7C8C", {}), 200); }
+      return later2(() => pkSheet(), 150);
+    }
     // gems (js/gems.js): gems:world, gems:gems|essays, gems:gem:<id>, gems:essay:<id>
     case "gems": { const [sub, a2] = (arg || "world").split(":");
       if (sub === "world") { S.lens = "world"; return go("explore"); }

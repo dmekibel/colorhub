@@ -3734,6 +3734,103 @@ scenario("eyedrop", "the shared eyedropper: drag reads each side, and sample siz
   t.expect(lr.shown, "the loupe never appeared on pointerdown");
   t.expect(/^#[0-9A-F]{6}$/.test(lr.hex), `the loupe's hex readout is missing or wrong: ${lr.hex}`);
 });
+// js/picked.js: picking = saving (David, 2026-10-10). Two real picks through the real eyedropAttach path
+// (Pair with… → From a photo, the same door tested above) land in Picked colors automatically; Select mode's
+// Copy all hexes puts both on the clipboard stub.
+scenario("eyedrop", "two picks save to Picked colors automatically; Select mode copies both hexes", async t => {
+  SP.placed();
+  await t.open("#/color/teal", { settle: 800, keepState: true });
+  const btn = await t.waitFor("[data-sx-pair]", 12000, "the Pair with… button");
+  await t.click(btn, { wait: 600 });
+  await t.waitFor(".sheet.sx-sheet [data-sx-photo]", 6000, "From a photo");
+  await t.click("[data-sx-photo]", { force: true, wait: 300 });
+  t.ev(`(() => {
+    const c = document.createElement("canvas"); c.width = 200; c.height = 100;
+    const ctx = c.getContext("2d");
+    ctx.fillStyle = "#E34234"; ctx.fillRect(0, 0, 100, 100);
+    ctx.fillStyle = "#2B2A4C"; ctx.fillRect(100, 0, 100, 100);
+    c.toBlob(blob => {
+      const file = new File([blob], "test.png", { type: "image/png" });
+      const dt = new DataTransfer(); dt.items.add(file);
+      const input = document.querySelector('input[type=file][accept="image/*"]');
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+    }, "image/png");
+  })()`);
+  await t.waitFor("[data-sx-photo-img]", 8000, "the photo sheet's image");
+  const img = t.$("[data-sx-photo-img]");
+  let r = img.getBoundingClientRect();
+  await t.tapAt(img, r.left + r.width * .25, r.top + r.height * .5, {});
+  await t.sleep(200);
+  r = img.getBoundingClientRect();
+  await t.tapAt(img, r.left + r.width * .75, r.top + r.height * .5, {});
+  await t.sleep(200);
+  const n = await t.ev(`(S.picked || []).length`);
+  t.expect(n >= 2, `expected at least 2 colors in S.picked after two real picks, got ${n}`);
+  const pk = await t.waitFor("[data-pk-slot] [data-pk-open]", 4000, "the Picked colors button after two real picks");
+  await t.click(pk, { force: true, wait: 300 });
+  await t.waitFor(".pk-sheet", 4000, "the Picked colors sheet");
+  await t.click(await t.waitFor('[data-pk-mode="select"]', 2000, "the Select tab"), { force: true, wait: 200 });
+  const copyBtn = await t.waitFor("[data-pk-copyall]", 2000, "Copy all hexes");
+  await t.click(copyBtn, { force: true, wait: 200 });
+  t.expect(/Copied/.test(t.text(copyBtn)), "Copy all hexes did not confirm");
+  const clip = t.$("[data-pk-copyall]").getAttribute("data-pk-copied") || "";
+  t.expect(/^#[0-9A-F]{6}, #[0-9A-F]{6}$/.test(clip), `copy-all's own record of what it copied isn't two clean hexes: ${clip}`);
+});
+scenario("sets", "Picked colors: Build a palette saves a named set with the picked hexes, in tap order", async t => {
+  SP.placed();
+  await t.open("#/color/teal", { settle: 800, keepState: true });
+  const btn = await t.waitFor("[data-sx-pair]", 12000, "the Pair with… button");
+  await t.click(btn, { wait: 600 });
+  await t.waitFor(".sheet.sx-sheet [data-sx-photo]", 6000, "From a photo");
+  await t.click("[data-sx-photo]", { force: true, wait: 300 });
+  t.ev(`(() => {
+    const c = document.createElement("canvas"); c.width = 300; c.height = 100;
+    const ctx = c.getContext("2d");
+    ctx.fillStyle = "#E34234"; ctx.fillRect(0, 0, 100, 100);
+    ctx.fillStyle = "#2B2A4C"; ctx.fillRect(100, 0, 100, 100);
+    ctx.fillStyle = "#4C8C3D"; ctx.fillRect(200, 0, 100, 100);
+    c.toBlob(blob => {
+      const file = new File([blob], "test.png", { type: "image/png" });
+      const dt = new DataTransfer(); dt.items.add(file);
+      const input = document.querySelector('input[type=file][accept="image/*"]');
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+    }, "image/png");
+  })()`);
+  await t.waitFor("[data-sx-photo-img]", 8000, "the photo sheet's image");
+  const img = t.$("[data-sx-photo-img]");
+  let r = img.getBoundingClientRect();
+  await t.tapAt(img, r.left + r.width * .17, r.top + r.height * .5, {});
+  await t.sleep(200);
+  r = img.getBoundingClientRect();
+  await t.tapAt(img, r.left + r.width * .5, r.top + r.height * .5, {});
+  await t.sleep(200);
+  r = img.getBoundingClientRect();
+  await t.tapAt(img, r.left + r.width * .83, r.top + r.height * .5, {});
+  await t.sleep(200);
+  const n = await t.ev(`(S.picked || []).length`);
+  t.expect(n >= 3, `expected at least 3 colors in S.picked, got ${n}`);
+  const expectedOrder = JSON.parse(await t.ev(`JSON.stringify((S.picked || []).slice(0, 3).map(p => p.h))`));
+  t.expect(expectedOrder.length === 3, `expected 3 distinct picked hexes to build from, got ${expectedOrder.length}`);
+  const pk = await t.waitFor("[data-pk-slot] [data-pk-open]", 4000, "the Picked colors button");
+  await t.click(pk, { force: true, wait: 300 });
+  await t.waitFor(".pk-sheet", 4000, "the Picked colors sheet");
+  await t.click(await t.waitFor('[data-pk-mode="build"]', 2000, "the Build a palette tab"), { force: true, wait: 200 });
+  // every tap re-renders the whole sheet (new colors, a reflowed strip), so a chip grabbed before a click is
+  // detached by the next one — re-find each by its own hex, fresh, right before tapping it.
+  for (const hex of expectedOrder) {
+    const chip = await t.waitFor(`[data-pk-hex="${hex}"]`, 2000, `the chip for ${hex}`);
+    await t.click(chip, { force: true, wait: 150 });
+  }
+  await t.ev(`document.querySelector("[data-pk-name]").value = "Smoke test palette"`);
+  await t.click(await t.waitFor("[data-pk-save]", 2000, "Save"), { force: true, wait: 500 });
+  await t.waitFor(() => /^#\/set\//.test(t.w.location.hash), 8000, "Save opened the new set's page");
+  const saved = JSON.parse(await t.ev(`JSON.stringify((S.palettes || [])[0] || null)`));
+  t.expect(saved && saved.name === "Smoke test palette", `the saved palette's name is wrong: ${JSON.stringify(saved)}`);
+  t.expect(saved && saved.cols && saved.cols.length === 3, `the saved palette doesn't hold 3 colors: ${JSON.stringify(saved)}`);
+  t.expect(saved && JSON.stringify(saved.cols) === JSON.stringify(expectedOrder), `the saved order ${JSON.stringify(saved && saved.cols)} doesn't match tap order ${JSON.stringify(expectedOrder)}`);
+});
 scenario("paintings", "a color page's In paintings section: presets re-run the query; Fine-tune opens the sliders", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
   const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
@@ -5136,6 +5233,50 @@ scenario("paintings", "Look closer's Pick tool: drag shows the loupe, release op
   pt(cx + 10, cy + 6, "pointerup");
   const sheet = await t.waitFor(".gcr-sheet, .sw-sheet", 4000, "the color readout sheet after releasing in Look closer");
   t.expect(/^#[0-9A-F]{6}$/.test(t.text(".gcr-sheet .mono") || t.text(".sw-sheet .mono")), `the readout has no real hex (${t.text(".gcr-sheet .mono") || t.text(".sw-sheet .mono")})`);
+});
+// David, 2026-10-10: "After you pick a color in full screen (Look closer), you can't see it until after you
+// exit full screen." The readout sheet (js/gallery.js glColorReadout, {z:65}) opened BEHIND Look closer's own
+// full-screen layer (.glz-scrim, z-index:60) -- present in the DOM, but visually hidden and untappable, so a
+// DOM-presence check alone (the test just above) can't catch this. elementFromPoint at the sheet's own visible
+// location is the real test: it must resolve inside the sheet, not inside Look closer underneath it.
+scenario("paintings", "Look closer's pick readout is visible and on top while the viewer is still open, not hidden behind it", async t => {
+  await t.open("#/home", { settle: 300 });
+  t.ev(`window.glCommonsResolve = () => Promise.resolve(location.origin + "/icon-512.png")`);
+  t.ev(`galleryPage(14423, true)`);
+  await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 15000, "the Mona Lisa painting page");
+  await t.waitFor(() => t.$(".gl-hero > span").classList.contains("gl-tap"), 15000, "the picture becomes tappable once readable");
+  await t.click(await t.waitFor("[data-glcloser]", 8000, "the Look closer button"), { wait: 500 });
+  const img = await t.waitFor(".glz-scrim.in .glz-img", 4000, "Look closer's own image");
+  await t.click(await t.waitFor('[data-glzv="pick"]', 4000, "the Pick tool"), { force: true, wait: 300 });
+  const r = img.getBoundingClientRect(), w = t.w;
+  const pt = (x, y, type) => img.dispatchEvent(new w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 13, pointerType: "touch", isPrimary: true, button: 0, view: w }));
+  const cx = r.left + r.width * .5, cy = r.top + r.height * .5;
+  pt(cx, cy, "pointerdown");
+  await t.sleep(80);
+  pt(cx + 10, cy + 6, "pointermove");
+  await t.waitFor(".eyd-loupe", 3000, "the loupe while dragging in Look closer");
+  pt(cx + 10, cy + 6, "pointerup");
+  // a stale sheet from an earlier scenario in this same group can still match the plain selector (sheet() always
+  // appends to the END of body, so the LAST match is this pick's own, freshly opened one -- never the first).
+  await t.waitFor(".gcr-sheet, .sw-sheet", 4000, "the readout sheet after releasing");
+  // the slide-up animation runs on the compositor's real clock inside Look closer's own continuous redraw loop,
+  // which can starve it of a frame for longer than any sane wait here -- that's a timing question, not what
+  // this test is about. Force it to its settled end state directly, the same thing a finished animation would
+  // leave behind, so the one thing actually being tested (is the sheet's STACKING above Look closer, z-index-
+  // wise) isn't entangled with a separate animation-timing question.
+  await t.ev(`document.querySelectorAll(".gcr-sheet, .sw-sheet").forEach(s => { s.style.animation = "none"; s.style.transform = "none"; })`);
+  // the loupe (z-index:70, higher than even the fixed sheet) lingers for its own short "Saved" confirmation on
+  // a real setTimeout, which runs on the virtual clock here and so won't fire on its own without a real network
+  // tick -- already covered by the eyedrop group's own test; remove it so it can't be mistaken for the bug this
+  // test is actually checking (the sheet's z-index relative to Look closer, not the loupe's closing timer).
+  await t.ev(`document.querySelectorAll(".eyd-loupe").forEach(l => l.remove())`);
+  const sheets = t.$$(".gcr-sheet, .sw-sheet"), sheet = sheets[sheets.length - 1];
+  t.expect(sheet, "the readout sheet after releasing vanished before it could be measured");
+  t.expect(t.$(".glz-scrim.in"), "Look closer closed on its own after a pick — this test needs it still open");
+  const rr = sheet.getBoundingClientRect(), px = rr.left + rr.width / 2, py = rr.top + 20;
+  const hit = await t.ev(`(() => { const el = document.elementFromPoint(${px}, ${py}); if (!el) return "none"; if (el.closest(".gcr-sheet, .sw-sheet")) return "sheet"; if (el.closest(".glz-scrim")) return "look-closer"; return "other:" + el.tagName.toLowerCase() + "." + el.className; })()`);
+  t.expect(hit === "sheet", `the readout isn't actually on top where it's drawn — elementFromPoint there hit "${hit}", not the sheet (rect=${JSON.stringify(rr)}, inner=${t.w.innerWidth}x${t.w.innerHeight})`);
+  t.expect(t.$(".gcr-sheet .pk-stackbtn, .sw-sheet .pk-stackbtn, .glz-top .pk-stackbtn"), "no Picked colors button visible inside Look closer right after a pick");
 });
 // Cleveland (and anything else whose host can't be read here) used to just make the "Pick a color" button and
 // Look closer's "Pick" tool quietly vanish or go dead, with nothing explaining why (David's report, "the color

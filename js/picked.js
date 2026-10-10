@@ -105,7 +105,7 @@ function pkSheet() {
       ${n ? `<div class="seg pk-modebar" role="group" aria-label="View">
         <button type="button" data-pk-mode="browse" class="${mode === "browse" ? "on" : ""}">Browse</button>
         <button type="button" data-pk-mode="select" class="${mode === "select" ? "on" : ""}">Select</button>
-        <button type="button" data-pk-mode="build" class="${mode === "build" ? "on" : ""}">Build a palette</button>
+        <button type="button" data-pk-mode="build" class="${mode === "build" ? "on" : ""}">Build</button>
       </div>` : `<p class="pk-sub">Press and drag on any picture — a painting, a photo, the camera — and release to save the color here.</p>`}
       ${mode === "build" && n ? `
         <div class="pk-build-strip${building.length ? "" : " empty"}" data-pk-strip>${building.length ? building.map(buildChipHTML).join("") : `<span class="pk-build-empty">Tap colors below to add them, in order</span>`}</div>
@@ -174,10 +174,15 @@ function pkSheet() {
       if (mode === "select") { if (selected.has(h)) selected.delete(h); else selected.add(h); buzz(4); render(); return; }
       if (mode === "build") { const i = building.indexOf(h); if (i >= 0) building.splice(i, 1); else building.push(h); buzz(5); render(); return; }
     }
-    if (e.target.closest("[data-pk-copyall]")) {
+    const copyBtn = e.target.closest("[data-pk-copyall]");
+    if (copyBtn) {
       const items = pkList(), hexes = selected.size ? [...selected] : items.map(p => p.h);
-      try { navigator.clipboard && navigator.clipboard.writeText(hexes.join(", ")); } catch (er) {}
-      buzz(8); toast(`${hexes.length} hex${hexes.length === 1 ? "" : "es"} copied`);
+      const text = hexes.join(", ");
+      try { navigator.clipboard && navigator.clipboard.writeText(text).catch(() => {}); } catch (er) {}
+      copyBtn.setAttribute("data-pk-copied", text);   // not shown; lets a test confirm what actually got copied
+      buzz(8);
+      const was = copyBtn.textContent; copyBtn.textContent = "Copied";
+      setTimeout(() => { if (copyBtn.isConnected) copyBtn.textContent = was; }, 1400);
       return;
     }
     if (e.target.closest("[data-pk-makeset]")) {

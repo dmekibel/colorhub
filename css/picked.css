@@ -27,10 +27,18 @@
 .pk-head h2{font:400 30px/1.02 var(--serif);letter-spacing:-.02em;margin:2px 0 0}
 .pk-sub{font:400 15px/1.4 var(--sans);color:var(--soft);margin:0 0 12px}
 .pk-modebar{display:flex;width:100%;margin-bottom:14px}
-.pk-modebar button{flex:1 1 0;min-width:0;padding:0 6px;font:400 15px/1 var(--serif)}
-.pk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:8px;margin-bottom:14px}
-.pk-chip{position:relative;aspect-ratio:1;border-radius:var(--r-card);background:var(--c);display:flex;align-items:flex-end;padding:8px;overflow:hidden}
-.pk-chip b{font:500 12px/1.2 var(--sans);color:var(--ink-dynamic,inherit);text-align:left}
+/* a plain <button> defaults to white-space:nowrap in most engines, so flex:1's shrink alone just lets the text
+   spill past the button's (and the sheet's) own edge instead of wrapping -- confirmed with a real screenshot
+   (David, 2026-10-10 craft pass): clip and ellipsize instead, the same promise every other truncated label here keeps. */
+.pk-modebar button{flex:1 1 0;min-width:0;padding:0 6px;font:400 15px/1 var(--serif);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* a fixed 4-wide grid. Two bugs found by an actual screenshot (David, 2026-10-10 craft pass), both the same
+   root cause: a bare `1fr` track has an implicit min-width of its content's min-content size, not 0 -- a long
+   unbroken label ("Bottle green" as one word-wrapped unit) was growing its track past its 1/4 share and
+   pushing the whole grid past the sheet's own padded edge. minmax(0,1fr) removes that implicit minimum (the
+   standard fix); the label itself also gets the same overflow/ellipsis guard as every other truncated label here. */
+.pk-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:14px}
+.pk-chip{position:relative;aspect-ratio:1;border-radius:var(--r-card);background:var(--c);display:flex;align-items:flex-end;padding:8px;overflow:hidden;min-width:0}
+.pk-chip b{display:block;width:100%;font:500 12px/1.2 var(--sans);color:var(--ink-dynamic,inherit);text-align:left;overflow-wrap:break-word}
 .pk-chip[data-ink="dark"]{color:#141311}
 .pk-chip[data-ink="light"]{color:#fff}
 .pk-chip.on{box-shadow:inset 0 0 0 3px var(--paper)}
