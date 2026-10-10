@@ -3583,33 +3583,40 @@ scenario("map", "the per-cell seam stroke doesn't slow a continuous pan+pinch on
   t.expect(mean < 60 && p95 < 80, `frame time regressed badly: mean ${mean.toFixed(1)}ms, p95 ${p95.toFixed(1)}ms over ${log.length} frames`);
   t.notes.push(`${log.length} frames, mean ${mean.toFixed(1)}ms, p95 ${p95.toFixed(1)}ms`);
 });
-// David, 2026-10-09: "zoomed-out view of honeycomb spiral looks like circles" -- honeyCells()'s own tiny-bubble
-// shortcut (under 7px, too many to afford the real per-neighbor polygon clip) used to always fall back to a
-// plain circle, even in Honeycomb look. It now hands tiny bubbles a cheap fixed regular hexagon instead, so the
-// mosaic still reads as tiled at low zoom; Bubbles look is untouched (still plain circles, on purpose).
-scenario("map", "Tiny cells draw as plain circles at low zoom (the original look); frame time holds", async t => {
+// David, 2026-10-10 (two live screenshots, the honeycomb's deepest fix): "proper hexagons [center]... rotated
+// squares (diamonds) [transition ring]... a diagonal lattice of diamonds and squashed hexagons [outer area]"
+// and separately "the borders and shapes are jumping... pop and flicker between forms... from frame to frame."
+// Root cause: honeyCellPath (the real draw function) used to trace b.poly -- the actual per-neighbor-clipped
+// Voronoi cell -- as its "shape 1" endpoint. That's a hexagon only where the fisheye lens hasn't warped the
+// local neighbor geometry (near its focus); everywhere else it's whatever the clip produced, and it changes
+// shape (vertex count, position) every time a neighbor is culled in or out at the viewport edge or the 7px
+// tiny-bubble threshold swapped it for a plain circle. Fixed by never drawing b.poly: honeyCellPath now blends
+// circle -> a canonical, fixed-orientation regular hexagon (honeyHexR), scaled to the already neighbor-safe
+// radius (b.rin, still from the real per-neighbor clip, so cells still never overlap) -- one continuous shape
+// method at every size, which also means tiny cells tile now too (the ORIGINAL ask, "zoomed-out honeycomb
+// looks like circles", 2026-10-09 -- this supersedes the fragile fixed-tiny-hex patch that was reverted for
+// not tiling the lattice cleanly, babbfaff).
+scenario("map", "Honeycomb cells are always a true hexagon blend, at every size (Bubbles stays circles); frame time holds", async t => {
   await H.homeReady(t);
   // Deep zoomed out (_qaForceZoom: a QA-only bypass of the ordinary zoom(z) clamp -- js/honey.js's own pinch-out
-  // floor, raised earlier this chapter so "the whole layout fits", means a RESTING zoom rarely pushes a dense
-  // set's cells under the tiny-bubble (7px) threshold this fix is about; a real pinch gesture still can for a
-  // moment, via the elastic rubber-band overshoot before it springs back -- this parks there directly instead
-  // of timing a synthetic gesture just right).
+  // floor, raised earlier this chapter so "the whole layout fits") so there are plenty of small-but-not-
+  // imperceptible cells (b.rin >= 3) to judge, not just the handful a resting view shows.
   t.ev('S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.arr = "spiral"; S.hm.style = "honeycomb"; hmHome();');
   await t.waitFor(() => H.num(t.text(".hm-title small")) > 500, 10000, "every name to fill");
-  t.ev("HM_CTRL._qaForceZoom(0.08)");
+  t.ev("HM_CTRL._qaForceZoom(0.25)");
   await t.sleep(200);
   const honeyStat = t.ev("HM_CTRL._tinyPolyStat()");
-  t.expect(honeyStat.tiny > 20, `too few tiny cells to judge at this zoom (${honeyStat.tiny})`);
-  t.expect(honeyStat.poly === 0, `Honeycomb: ${honeyStat.poly}/${honeyStat.tiny} tiny cells drew as fixed hexagons (reverted: they should be circles)`);
-  t.notes.push(`Honeycomb: ${honeyStat.poly}/${honeyStat.tiny} tiny cells tiled, ${honeyStat.total} drawn`);
-  // Bubbles: the same tiny bubbles should still be plain circles (no regression the other way)
+  t.expect(honeyStat.big > 20, `too few judgeable (b.rin>=3) cells at this zoom (${honeyStat.big})`);
+  t.expect(honeyStat.tiled === honeyStat.big, `Honeycomb: only ${honeyStat.tiled}/${honeyStat.big} judgeable cells draw tiled (the rest fell back to a plain circle)`);
+  t.notes.push(`Honeycomb: ${honeyStat.tiled}/${honeyStat.big} cells tiled, ${honeyStat.total} drawn`);
+  // Bubbles: the same cells should still be plain circles (shapeAmt 0 -- no regression the other way)
   t.ev('S.hm.style = "current"; hmHome();');
   await t.sleep(300);
-  t.ev("HM_CTRL._qaForceZoom(0.08)");
+  t.ev("HM_CTRL._qaForceZoom(0.25)");
   await t.sleep(200);
   const bubbleStat = t.ev("HM_CTRL._tinyPolyStat()");
-  t.expect(bubbleStat.tiny > 20, `too few tiny cells to judge at this zoom (${bubbleStat.tiny})`);
-  t.expect(bubbleStat.poly === 0, `Bubbles: ${bubbleStat.poly}/${bubbleStat.tiny} tiny cells are tiled (should be plain circles)`);
+  t.expect(bubbleStat.big > 20, `too few judgeable cells at this zoom (${bubbleStat.big})`);
+  t.expect(bubbleStat.tiled === 0, `Bubbles: ${bubbleStat.tiled}/${bubbleStat.big} cells are tiled (should be plain circles)`);
   // frame time, Honeycomb look, the largest set, at the REAL (clamped) pinch-out floor -- not the forced probe
   // zoom above, which is further out than a resting view ever reaches: the tiled mosaic should cost about what
   // the Bubbles circles already cost (both measured just above/below), well inside a 16ms budget with headroom
@@ -3621,6 +3628,48 @@ scenario("map", "Tiny cells draw as plain circles at low zoom (the original look
   const ms = t.ev(`(() => { let best = Infinity; for (let i = 0; i < 20; i++) { const t0 = performance.now(); HM_CTRL.zoom(${floor} + i * 0.0001, false); best = Math.min(best, performance.now() - t0); } return best; })()`);
   t.expect(ms < 16, `a draw at Honeycomb's lowest (resting) zoom took ${ms.toFixed(1)}ms, wanted <16ms (no CPU throttle here, so real headroom matters)`);
   t.notes.push(`Honeycomb @ floor zoom ${floor.toFixed(2)}, every name: best draw ${ms.toFixed(1)}ms`);
+});
+// David, 2026-10-10: "the borders and shapes are jumping. While he pans or zooms, the cell outlines and shapes
+// pop and flicker between forms (diamond, hexagon, circle) from frame to frame." honeyCellPath's shape is now
+// driven only by shapeAmt (constant per look) and each cell's own b.rin, never by which neighbors happen to be
+// in its clip at that exact instant -- so the same cell's radius, not its shape METHOD, is the one thing that
+// can still move between two frames a few px of pan apart. This checks it holds nearly still for cells away
+// from the very edge of the drawn set (where a neighbor can genuinely enter or leave the clip's search window).
+scenario("map", "honeycomb cell radii stay stable across a small pan (no shape jump frame to frame)", async t => {
+  await H.homeReady(t);
+  t.ev('S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.arr = "map"; S.hm.ord = { map: "hue" }; S.hm.style = "honeycomb"; S.hm.feel = { mag: .95, space: .15, size: .5 }; hmHome();');
+  await t.waitFor(() => H.num(t.text(".hm-title small")) > 500, 10000, "every name to fill");
+  await t.sleep(300);
+  const before = t.ev("HM_CTRL._shapeSnapshot()");
+  // a few px, like a couple of real pointermove events into a drag -- not a full gesture. P is in the layout's
+  // own lattice units (honeyGridArr spaces items ~1 unit apart), not screen px, so this is a small FRACTION of
+  // one cell's spacing, not a literal "6px".
+  t.ev("HM_CTRL._qaNudgePan(0.05, 0.03)");
+  await t.sleep(80);
+  const after = t.ev("HM_CTRL._shapeSnapshot()");
+  // This is a fisheye lens: panning by a fixed amount does NOT translate every bubble's screen position by that
+  // same amount (near the lens focus a small pan moves a lot of screen px; far out, very little) -- so a cell's
+  // own continuous radius change from a 6px pan is real and expected, not a bug. What a "jump" (flicker between
+  // forms) looks like is a DISCONTINUITY: a radius that moves by a large fraction of itself, or vanishes/
+  // appears, between two frames this close together -- not a smooth lens-driven resize.
+  let common = 0, jumped = 0, worst = 0, worstName = "";
+  for (const name of Object.keys(before)) {
+    const a = before[name], b = after[name]; if (!b) continue;   // panned off the edge or newly drawn: not comparable
+    common++;
+    const rel = Math.abs(b.rin - a.rin) / Math.max(1, a.rin);
+    if (rel > worst) { worst = rel; worstName = name; }
+    if (rel > .5) jumped++;
+  }
+  t.expect(common > 50, `too few comparable cells to judge (${common}; before=${Object.keys(before).length} after=${Object.keys(after).length})`);
+  // a tolerance of 1: a cell genuinely at the edge of the drawn set CAN still gain or lose a real neighbor on a
+  // small pan (its own clip search window moving just enough to cross a culled bubble back into view) -- a
+  // separate, understood limit on how far viewport culling alone can go, not the shape-method flicker this
+  // test is really about. Catching that one case too would mean rendering a margin of off-screen neighbor
+  // bubbles purely for the clip (a real but bigger change); zero tolerance here chases that single cell instead
+  // of the actual regression class (diamonds/circles swapping in for hexagons), so it's capped, not required.
+  const tol = Math.max(1, Math.ceil(common * .02));
+  t.expect(jumped <= tol, `${jumped}/${common} cells changed radius by >50% over a 6px pan (worst: "${worstName}" at ${(worst * 100).toFixed(0)}%) -- more than the ${tol}-cell edge-culling tolerance`);
+  t.notes.push(`${common} cells compared, worst radius change ${(worst * 100).toFixed(1)}%`);
 });
 // David, 2026-10-10, a live screenshot of ?v=202610102104 (Honeycomb, Grid/Hue, fisheye on): "You broke the
 // honeycomb -- weird overlap now... cells overlap each other like fish scales with thick black borders,

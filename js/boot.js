@@ -64,14 +64,22 @@ function shot(name) {
       }
       return hmShot(arg);
     }
-    // bare honeycomb review shot, no chrome at all (tools/honey-contact-sheets.sh): honey:<style>:<n>:<default|out>[:<act>]
+    // bare honeycomb review shot, no chrome at all (tools/honey-contact-sheets.sh): honey:<style>:<n>:<zoom>[:<tw>][:<act>]
+    // zoom: "default" | "out" (the pinch-out floor) | "mid" (halfway between floor and 1x) | a literal number.
+    // tw: "tweak" opens the interactive Tweak panel; "mag" applies Magnify/Spacing/Bubble-size at David's own
+    // "high" preset (mag .95) via the same hmFeelTweak() the real Arrange sheet's slider drives, for a static,
+    // scriptable repro of a live screenshot report with Magnify pushed up (no slider to drag in a screenshot).
     // act (optional, 5th segment): bench | benchout | overlap — dispatched as a "honeyshot" event once settled;
     // the result lands in a fetch("bench?..."/"overlap?...") a QA script can read off the dev server's own log.
     case "honey": { const [styleId = "current", nStr = "101", zArg = "default", tw = "", act = ""] = (arg || "").split(":"), n = +nStr || 101;
       return labItems(n).then(items => {
         const el = show(`<div class="hc-shot"></div>`, "fixed");
-        const host = el.querySelector(".hc-shot"), ctrl = honeycomb(host, { items, style: styleId, centerFirst: true });
+        const tweak = tw === "mag" && typeof hmFeelTweak === "function" ? hmFeelTweak(styleId, { mag: .95, space: .15, size: .5 }) : undefined;
+        const host = el.querySelector(".hc-shot"), ctrl = honeycomb(host, { items, style: styleId, centerFirst: true, tweak });
+        const zNum = +zArg;
         if (zArg === "out") later2(() => { const z = ctrl.getCfg().resolved.zMinUser; ctrl.zoom(z != null ? z : .2, false); }, 150);
+        else if (zArg === "mid") later2(() => { const z0 = ctrl.getCfg().resolved.zMinUser || .2; ctrl.zoom((z0 + 1) / 2, false); }, 150);
+        else if (zArg !== "default" && isFinite(zNum)) later2(() => ctrl.zoom(zNum, false), 150);
         if (tw === "tweak") later2(() => hmOpenTweak(ctrl), 200);
         if (act) host.dispatchEvent(new CustomEvent("honeyshot", { detail: act }));
       }); }

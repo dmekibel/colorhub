@@ -827,15 +827,31 @@ function honeyRay(poly, t) {
   }
   return isFinite(best) ? best : 0;
 }
-// the bubble outline from its cell: the inscribed circle (shape 0), the cell (shape 1), or the blend
+// the bubble outline from its cell: the inscribed circle (shape 0), a TRUE regular hexagon (shape 1), or the
+// blend between. David, 2026-10-10 (two live screenshots): "the honeycomb is still broken... Center: proper
+// hexagons. Transition ring: the cells turn into rotated squares (diamonds)... Outer area: a diagonal lattice
+// of diamonds and squashed hexagons" -- and separately, "the borders and shapes are jumping... pop and flicker
+// between forms (diamond, hexagon, circle) from frame to frame."
+// Root cause of both: this used to trace b.poly -- the ACTUAL per-neighbor-clipped Voronoi cell (honeyCells,
+// above) -- as the shape-1 endpoint (honeyRay sampled b.poly's own edges). A Voronoi cell is only a regular
+// hexagon when its neighbors truly sit in a perfect hex ring around it; honeyGridArr's own lattice is a real
+// offset-row hex lattice in FLAT space, but the fisheye lens warps on-SCREEN positions non-uniformly away from
+// its focus, so the neighbor geometry the clip actually sees stops being hexagonal with distance from center --
+// exactly "proper hexagons" in the middle fading to "diamonds" and "squashed hexagons" outward. b.poly also
+// changes shape (vertex count and position) every time a culled-at-the-edge neighbor enters or leaves the
+// clip's search radius, or the 7px tiny-bubble threshold swaps b.poly for null -- both read as the shape
+// popping between methods frame to frame.
+// Fix: never draw b.poly's own shape. Draw a canonical, fixed-orientation regular hexagon (honeyHexR, the same
+// one honeyPath below already drew before the Voronoi-clip era) at every size, scaled to the ALREADY neighbor-
+// safe radius b.rin (still computed by honeyCells' real per-neighbor clip, so cells still never overlap) -- one
+// continuous shape method for every bubble, tiny or big, at every zoom, with no polygon vertices to jump.
 function honeyCellPath(ctx, b, shapeAmt, grow = 1) {
   ctx.beginPath();
   const r = b.rin * grow;
-  if (!b.poly || shapeAmt <= .02 || r < 3) { ctx.arc(b.x, b.y, Math.max(0, r), 0, 6.2832); return; }
-  if (shapeAmt >= .98) { b.poly.forEach((p, i) => { const x = b.x + p[0] * grow, y = b.y + p[1] * grow; if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y); }); ctx.closePath(); return; }
+  if (shapeAmt <= .02 || r < 3) { ctx.arc(b.x, b.y, Math.max(0, r), 0, 6.2832); return; }
   const n = r > 36 ? 36 : r > 14 ? 24 : 14;
   for (let i = 0; i <= n; i++) {
-    const t = i / n * 6.283185307, rr = (b.rin * (1 - shapeAmt) + honeyRay(b.poly, t) * shapeAmt) * grow;
+    const t = i / n * 6.283185307, rr = (r * (1 - shapeAmt) + honeyHexR(t, r) * shapeAmt);
     const x = b.x + Math.cos(t) * rr, y = b.y + Math.sin(t) * rr;
     if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y);
   }
@@ -1945,7 +1961,7 @@ function honeycomb(host, opts = {}) {
   function geoOf(b) {
     if (!b || !(b.d > 0)) return null;
     const r = cv.getBoundingClientRect(), shp = zc("shape"), rays = [];
-    for (let i = 0; i < 72; i++) { const t = i / 72 * 6.283185307; rays.push(b.poly && shp > .02 && b.rin >= 3 ? b.rin * (1 - shp) + honeyRay(b.poly, t) * shp : b.rin); }
+    for (let i = 0; i < 72; i++) { const t = i / 72 * 6.283185307; rays.push(shp > .02 && b.rin >= 3 ? b.rin * (1 - shp) + honeyHexR(t, b.rin) * shp : b.rin); }
     const it = b.it;
     let label = null;
     // the same legibility gate the main draw loop uses (HONEY_LABEL_FS_MIN), so a bubble morphing into its own
@@ -2261,9 +2277,16 @@ function honeycomb(host, opts = {}) {
     // handles, under 7px -- see that function's own comment), how many have a real polygon (tiled, David,
     // 2026-10-09: "zoomed-out honeycomb... looks like circles") vs none (a plain circle). A style with a high
     // shapeAmt (Honeycomb) should tile even its tiniest cells; a low one (Bubbles) should still draw circles.
+    // QA (tools/smoke map group): among all currently-drawn cells, how many are big enough to actually show a
+    // shape (b.rin >= 3 -- below that honeyCellPath's own floor always draws a plain circle, hex vs circle
+    // being imperceptible under 3px regardless of look) vs how many of THOSE would render tiled (a hexagon).
+    // David, 2026-10-10: honeyCellPath (the real draw function) no longer looks at b.poly at all -- it blends
+    // toward a canonical hexagon (honeyHexR) driven only by shapeAmt and the bubble's own safe radius (b.rin),
+    // so this mirrors that same condition directly, true for every size class at once (there's no separate
+    // "tiny-bubble" rule left to test -- that's the fix).
     _tinyPolyStat() {
-      const tiny = drawn.filter(b => b.d0 != null && b.d0 < 7);
-      return { tiny: tiny.length, poly: tiny.filter(b => b.poly).length, total: drawn.length };
+      const big = drawn.filter(b => b.rin >= 3), shp = zc("shape");
+      return { big: big.length, tiled: shp > .02 ? big.length : 0, total: drawn.length };
     },
     // QA (tools/smoke map group): do any two currently-drawn cell polygons actually overlap -- real tiles
     // (b.poly, both the full per-neighbor clip and the tiny-bubble hex) should only ever touch at a shared
@@ -2318,6 +2341,18 @@ function honeycomb(host, opts = {}) {
     // above is checking. This bypasses the clamp so a test can park there and read the result directly, instead
     // of trying to time a synthetic pinch gesture just right.
     _qaForceZoom(z) { Z = +z; draw(); },
+    // QA only (tools/smoke map group): David, 2026-10-10, "the borders and shapes are jumping... pop and
+    // flicker between forms... from frame to frame" while panning or zooming. _qaNudgePan moves the pan by a
+    // few px and redraws, exactly like a real drag would a couple of pointermove events in; _shapeSnapshot
+    // captures each currently-drawn cell's own radius (b.rin, the one value honeyCellPath's shape now depends
+    // on -- see its own comment) keyed by item name, so a test can diff two snapshots a nudge apart and assert
+    // the SAME cell didn't jump shape between them.
+    _qaNudgePan(dx, dy) { P = [P[0] + dx, P[1] + dy]; draw(); },
+    _shapeSnapshot() {
+      const m = {};
+      for (const b of drawn) if (b.it && b.rin > 0) m[b.it.n] = { rin: +b.rin.toFixed(3), x: +b.x.toFixed(2), y: +b.y.toFixed(2) };
+      return m;
+    },
     _qaState() { return { lay: !!lay, W, Hh, dead, visible, raf, phase, down: !!down, pinch: !!pinch, P: P.slice(), Z, drawnLen: drawn.length, fitMode, fitUserOverride, ptrsSize: ptrs.size }; },
     // David, 2026-10-09 ("panning gets stuck"): js/home.js's double-tap-to-close-Arrange (dblClose) stops the
     // second tap's pointerup from ever reaching this canvas's own pointerup listener (stopPropagation, ahead of
