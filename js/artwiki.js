@@ -430,7 +430,10 @@ function awWorksWire(el, slug, m, A, P) {
 // ======================================================================
 // Painter pages
 // ======================================================================
+// painter slugs renamed by the 2026-10-10 European expansion (Wikidata's fuller names); old links keep working
+const AW_SLUG_MOVED = { "david-teniers": "david-teniers-the-younger", "camille-corot": "jean-baptiste-camille-corot", "lucas-cranach": "lucas-cranach-the-elder" };
 function awPainter(slug, push = true) {
+  slug = AW_SLUG_MOVED[slug] || slug;
   if (!AW.ready) return awWait(awPainter, [slug, push], awLoad);
   // David, 2026-10-10 ("Old Woman", 1655, Moses ter Borch, Rijksmuseum -- "I'm unable to tap the painter's
   // name"): a painter real enough to have paintings here but too few (or too undocumented) for one of the
