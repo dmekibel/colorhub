@@ -186,7 +186,10 @@ function ooBoardHTML(r, o = {}) {
   // the simple game's boards are rows x cols (not always square: David, 2026-10-11, "the board doesn't have to
   // be square") and fill their stage edge to edge (oo-full), instead of the fixed aspect-ratio box every other
   // board type still uses.
-  const full = r.rows != null, longSide = Math.max(r.rows || r.cols, r.cols);
+  // Board: Full screen (edge to edge, default) or Square (centered, margined -- David, 2026-10-11, "keep a 9x9
+  // square... available alongside Full screen"). r.full is set by ooSimpleRound in oo-engine.js; Square rounds
+  // fall back to the ordinary centered/aspect-ratio-boxed .oo-board rule every other board type already uses.
+  const full = r.rows != null && r.full !== false, longSide = Math.max(r.rows || r.cols, r.cols);
   // big grids (up to ~20 a side) keep about a 2 px seam and small corners, so the tiles stay big enough to see.
   // The simple game's full-bleed board is completely gapless instead (David, 2026-10-11: "no space between
   // tiles -- completely adjacent, edge to edge"), tile squares with no inner rounding.
@@ -891,6 +894,9 @@ function ooGrowCap(ui) {
 // a chip's own label, from what ooSimpleDims actually renders at a typical portrait aspect -- never a hand-typed
 // number that could quietly drift out of sync with the real geometry.
 function ooSizeLabel(size) { const d = ooSimpleDims(size, 1.6); return `${d.cols}×${d.rows}`; }
+// Square (Board setting or Classic, which implies it) starts from its own default (9, David 2026-10-11: "9x9
+// as Square's default size"), independent of the Full-screen chip picker.
+const ooStartCols = sim => (sim.board === "square" || sim.style === "classic") ? sim.squareCols : OO_SIZE_PRESETS[sim.sizeIdx];
 // the size picker (David, 2026-10-11: "a light pre-game choice... a row of 4-5 size chips... plus a 'Grows as
 // you play' toggle"), shared by the pre-game overlay and the pause menu so there's exactly one picker, not two.
 function ooSizePickerHTML(sim, zen) {
@@ -917,7 +923,7 @@ function ooWireSizePicker(root, sim, onChange) {
 function ooPreviewBoard(ui, st, sim) {
   const aspect = ooStageAspect(ui.stage) || 1.6;
   const palette = sim.style === "classic" ? null : ooPickPalette();
-  const r = ooSimpleRound({ model: ooS().model, cols: st.cols, round: 0, aspect, palette, richMode: sim.richMode, multiOdd: false, style: sim.style }, false, Math.random);
+  const r = ooSimpleRound({ model: ooS().model, cols: st.cols, round: 0, aspect, palette, richMode: sim.richMode, multiOdd: false, style: sim.style, board: sim.board }, false, Math.random);
   if (r) ui.stage.innerHTML = ooBoardHTML(r, { feedback: true, tileNames: false });
 }
 // the state behind the simple game: the grid you're on, your rolling accuracy at that size, and Arcade or Zen
@@ -931,7 +937,9 @@ function ooSimpleState() {
   if (o.timer !== false) o.timer = true;      // the per-round Arcade timer (pause menu toggle; Zen has none regardless)
   if (o.pauseHint == null) o.pauseHint = true; // the one-time "tap to pause" hint, shown once then cleared
   // Settings (David, 2026-10-11: "best of both worlds + modular") -- all remembered per player.
-  if (o.style !== "classic") o.style = "gradient";   // Gradient (default, full-bleed palettes) / Classic (square, one solid color)
+  if (o.style !== "classic") o.style = "gradient";   // Palette: Gradient (default) / Classic (one solid color, no palette)
+  if (o.board !== "square") o.board = "full";        // Board shape (its own axis from Palette, 2026-10-11): Full screen (default) / Square (centered, margined, 9x9 default)
+  if (!Number.isInteger(o.squareCols) || o.squareCols < OO_S_MIN_COLS) o.squareCols = 9;
   if (o.richMode !== "rich") o.richMode = "subtle";  // Palette intensity: Subtle (default, 1-2 close harmonious stops) / Rich (the old skill-ladder up to 4 stops)
   if (o.multiOdd == null) o.multiOdd = false;        // multiple odd tiles: opt-in only ("selecting one is better than multiple")
   if (o.reveal !== false) o.reveal = true;           // "Show colors between rounds" -- off skips the reveal on a hit (a miss still gets its brief marks)
@@ -992,7 +1000,7 @@ function ooMap(opt = {}) {
   const model = ooS().model;
   const startTh = { hue: ooTheta(model, "hue", null), light: ooTheta(model, "light", null), chroma: ooTheta(model, "chroma", null) };
   const lives0 = zen ? 0 : 3;
-  const st = { cols: OO_SIZE_PRESETS[sim.sizeIdx], acc: sim.acc.slice(), round: 0, hits: 0, lives: lives0, streak: 0, grew: false, paused: false, hitsAtGrow: 0, growAt: 0 };
+  const st = { cols: ooStartCols(sim), acc: sim.acc.slice(), round: 0, hits: 0, lives: lives0, streak: 0, grew: false, paused: false, hitsAtGrow: 0, growAt: 0 };
   // a light pre-game choice, not a setup screen (David, 2026-10-11): the real board (at the last-used size)
   // renders and sits right there under a minimal picker -- chips, the grow toggle, a big Play. Tapping Play, or
   // tapping the board itself, starts; a returning player (nothing to change) can just tap Play immediately.
@@ -1020,7 +1028,7 @@ function ooMap(opt = {}) {
     function onChipChange() {
       // a new size choice redraws the (non-scored) preview board behind the sheet -- the real first round is
       // only ever generated once, by startPlay/nextRound, so changing your mind here never costs a round
-      st.cols = OO_SIZE_PRESETS[sim.sizeIdx];
+      st.cols = ooStartCols(sim);
       pregame.querySelector(".oo-sizepicker").outerHTML = ooSizePickerHTML(sim, zen);
       rewirePicker();
       ooPreviewBoard(ui, st, sim);
@@ -1050,7 +1058,8 @@ function ooMap(opt = {}) {
       <button class="oo-zenpill${zen ? " on" : ""}" data-zen aria-pressed="${zen}">${zen ? "Zen" : "Arcade"}</button>
       ${ooSizePickerHTML(sim, zen)}
       <div class="oo-pset">
-        <button class="item" data-set="style">Style: ${sim.style === "classic" ? "Classic" : "Gradient"} ${ICON.chev}</button>
+        <button class="item" data-set="style">Palette: ${sim.style === "classic" ? "Classic" : "Gradient"} ${ICON.chev}</button>
+        ${sim.style !== "classic" ? `<button class="item" data-set="board">Board: ${sim.board === "square" ? "Square" : "Full screen"} ${ICON.chev}</button>` : ""}
         ${sim.style !== "classic" ? `<button class="item" data-set="richMode">Palette intensity: ${sim.richMode === "rich" ? "Rich" : "Subtle"} ${ICON.chev}</button>` : ""}
         <button class="item" data-set="multiOdd">Multiple odd tiles: ${sim.multiOdd ? "on" : "off"} ${ICON.chev}</button>
         <button class="item" data-set="reveal">Show colors between rounds: ${sim.reveal ? "on" : "off"} ${ICON.chev}</button>
@@ -1073,6 +1082,7 @@ function ooMap(opt = {}) {
       else if (k === "reveal") { sim.reveal = !sim.reveal; save(); buzz(4); }
       else if (k === "richMode") { sim.richMode = sim.richMode === "rich" ? "subtle" : "rich"; save(); buzz(4); }
       else if (k === "style") { sim.style = sim.style === "classic" ? "gradient" : "classic"; save(); buzz(4); closePause(true); ooMap({ zen }); return; }
+      else if (k === "board") { sim.board = sim.board === "square" ? "full" : "square"; save(); buzz(4); closePause(true); ooMap({ zen }); return; }
       paintPause();
     });
     // the same size-chip picker as the pre-game overlay (David, 2026-10-11: "the pause menu keeps the same
@@ -1129,7 +1139,7 @@ function ooMap(opt = {}) {
       for (let tries = 0; tries < 8 && !r; tries++) r = ooSimpleGradRound(rows, cols, richness, palette && palette.colors, skill, mix, d * bf, k, Math.random, safeBox, sim.richMode);
       if (r) Object.assign(r, { axis, judg: axis, mix, bf: r.gridType && r.gridType !== "flat" ? bf : 1, paletteSource: palette });
     }
-    if (!r) r = ooSimpleRound({ model, cols: st.cols, round: st.round, aspect, palette: ooPickPalette(), safeBox, richMode: sim.richMode, multiOdd: sim.multiOdd, style: sim.style }, breather);
+    if (!r) r = ooSimpleRound({ model, cols: st.cols, round: st.round, aspect, palette: ooPickPalette(), safeBox, richMode: sim.richMode, multiOdd: sim.multiOdd, style: sim.style, board: sim.board }, breather);
     const o = { feedback: true, tileNames: false, resolveOdd: true, enter, pauseCtl: {} };   // names live in the reveal now, never crowding gapless tiles
     if (!zen && sim.timer) o.timeLimit = ooSimpleTime(st.cols);
     curPauseCtl = o.pauseCtl;
@@ -1300,7 +1310,7 @@ function ooShelf() {
   const acc = sim.acc.length ? Math.round(sim.acc.reduce((a, b) => a + b, 0) / sim.acc.length * 100) : null;
   return `<div class="sec-head"><b>Odd one out</b><span>a game of its own</span></div>
     <button class="oo-shelf" data-oo-map>
-      <span class="oo-nt"><b>${st.sets ? `${ooSizeLabel(OO_SIZE_PRESETS[sim.sizeIdx])}${acc != null ? ` · ${acc}% right` : ""}` : "Find the different tile"}</b><em>${st.sets ? "One tap back in. Zen mode plays with no timer, no lives." : "One tap in, pick a size, play. It can grow with you."}</em></span>
+      <span class="oo-nt"><b>${st.sets ? `${ooSizeLabel(ooStartCols(sim))}${acc != null ? ` · ${acc}% right` : ""}` : "Find the different tile"}</b><em>${st.sets ? "One tap back in. Zen mode plays with no timer, no lives." : "One tap in, pick a size, play. It can grow with you."}</em></span>
     </button>
     <button class="play-row" data-oo-line><span><b>Across the line</b><span>Three of these are Teal. Which one isn't?</span></span><em class="lt-best">${ln.best ? `<b>${ln.best}</b>best` : "new"}</em></button>
     <button class="play-row" data-oo-pairs><span><b>Painters' pairs</b><span>Which colors did painters put together?</span></span><em class="lt-best">${st.pairs && st.pairs.best ? `<b>${st.pairs.best}</b>best` : "new"}</em></button>

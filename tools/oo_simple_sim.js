@@ -66,6 +66,7 @@ function run(truths, size0, seed, n = 400, aspect = 1.6, richMode = "subtle", gr
     // across every axis in the mix systematically dragged every estimate down (a tiny secondary nudge got marked
     // "detected" on the strength of the dominant axis's much bigger move); matches js/games/oo-ui.js's onAnswer.
     const mix = r.mix || { [r.axis]: 1 }, effAct = r.act / (r.bf || 1);
+    const thAt = E.ooTheta(model, r.axis, null);   // the model's own threshold at the moment this round was drawn
     const blendTruth = Object.keys(mix).reduce((s, a) => s + mix[a] * truths[a], 0);
     const ok = rnd() < E.ooP(effAct, blendTruth, r.g || 0);
     const dom = Object.keys(mix).reduce((best, a) => mix[a] > mix[best] ? a : best, Object.keys(mix)[0]);
@@ -74,7 +75,7 @@ function run(truths, size0, seed, n = 400, aspect = 1.6, richMode = "subtle", gr
       hits++;
       if (grows && size < gridHi && hits - hitsAtGrow >= growAt) { size++; grewCount++; hitsAtGrow = hits; growAt = 10 + Math.floor(rnd() * 3); }
     }
-    hist.push({ t, axis: r.axis, act: r.act, ok, size, rows: r.rows, cols: r.cols, shape: r.v, gridType: r.gridType });
+    hist.push({ t, axis: r.axis, act: r.act, ok, size, rows: r.rows, cols: r.cols, shape: r.v, gridType: r.gridType, ease: r.ease, thAt, ratio: effAct / Math.max(.3, thAt), breather });
   }
   return { model, hist, subFloor, floorRounds, drawCount, gradRounds, gradEarly, richCount, worstNeighborRatio, grewCount };
 }
@@ -181,17 +182,33 @@ console.log("\n== Never an obvious pop (David, 2026-10-11: \"never super easy or
   // the generator aims for the ceiling via a binary search in-gamut (ooMoveDir/ooMove), which has its own small
   // granularity -- a fraction of a ΔE00 of overshoot on an awkward stop is the search's tolerance, not a broken
   // cap, so this allows a little slack above the target rather than demanding floating-point-exact targeting.
+  // Compared against each round's OWN r.ease (not the flat OO_S_EASE_MAX constant): the ceiling only caps
+  // richness/size COMPENSATION, never the player's own base, uncompensated difficulty below it -- otherwise a
+  // genuinely coarser-eyed player's rounds would be capped under their own threshold and could never converge
+  // above chance (this was a real regression, caught here: see js/games/oo-engine.js's ease = max(d, ...)).
   const SLACK = 1.2;
   let overAbs = 0;
-  hist.forEach(h => { if (h.act > E.OO_S_EASE_MAX + SLACK) overAbs++; });
-  console.log(`  rounds over the absolute ΔE00 ceiling (${E.OO_S_EASE_MAX} + ${SLACK} search slack): ${overAbs} of ${hist.length} (must be 0)`);
-  if (overAbs > 0) { console.log(`FAIL: ${overAbs} rounds drew a gap clearly above the easiness ceiling`); fail = true; }
+  hist.forEach(h => { if (h.act > (h.ease || E.OO_S_EASE_MAX) + SLACK) overAbs++; });
+  console.log(`  rounds over their own easiness ceiling (+ ${SLACK} search slack): ${overAbs} of ${hist.length} (must be 0)`);
+  if (overAbs > 0) { console.log(`FAIL: ${overAbs} rounds drew a gap clearly above their own easiness ceiling`); fail = true; }
   // a first-run median "reaction time" proxy: at ooP's own psychometric curve, a gap right at the ceiling still
   // leaves real uncertainty (not near-100% correct), which is the sim's stand-in for "needs a real look" --
   // true reaction-time needs a live player, this just checks the gap was never dialed so far past threshold
   // that the answer is a foregone conclusion even on the very first, chill rounds.
   const first10 = hist.slice(0, 10), ratios = first10.map(h => h.act / Math.max(.5, E.ooTheta({ j: {} }, h.axis, null)));
   console.log(`  first 10 rounds' gap as a multiple of the START threshold: ${ratios.map(x => x.toFixed(1)).join(", ")}`);
+  // David, 2026-10-11, explicit acceptance test: "median round should be near threshold, <=10% of rounds
+  // 'obvious' (gap > 2x threshold)" -- checked on the settled window (round 50 on), against each round's own
+  // ratio of its actual drawn gap to the model's threshold estimate AT THE TIME it was drawn. Breathers (every
+  // 5th round, deliberately easier "for rhythm, not a reward") are excluded from the "obvious" count -- they're
+  // an intentional, documented exception to the default difficulty curve this check is about, not a miss.
+  const settled = hist.slice(50), settledRatios = settled.map(h => h.ratio).sort((a, b) => a - b);
+  const nonBreather = settled.filter(h => !h.breather);
+  const median = settledRatios[Math.floor(settledRatios.length / 2)];
+  const obviousPct = nonBreather.filter(h => h.ratio > 2).length / nonBreather.length;
+  console.log(`  settled median gap/threshold ratio: ${median.toFixed(2)} (should be near 1); obvious non-breather rounds (>2x threshold): ${(obviousPct * 100).toFixed(1)}% (must be <= 10%)`);
+  if (median < .6 || median > 1.6) { console.log(`FAIL: the settled median ratio ${median.toFixed(2)} isn't "near threshold"`); fail = true; }
+  if (obviousPct > .1) { console.log(`FAIL: ${(obviousPct * 100).toFixed(1)}% of settled non-breather rounds were "obvious" (>2x threshold), should be <= 10%`); fail = true; }
 }
 console.log("\n== Classic style: square board, near the chosen column count, one solid color ==");
 {

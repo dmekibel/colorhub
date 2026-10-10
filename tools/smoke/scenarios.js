@@ -1671,6 +1671,48 @@ scenario("train", "Odd one out: Classic style is a square single-color board, Gr
   t.ev("ooSimpleState().style = 'gradient'; save(); 1");
 });
 
+// David, 2026-10-11, live feedback: "keep a 9x9 square, not-full-screen option... available alongside Full
+// screen" -- Board shape is its own axis from Palette/Style now (js/games/oo-engine.js, js/games/oo-ui.js):
+// Gradient can be played Full screen (default, edge to edge) or Square (centered, margined, 9x9 default size),
+// and Classic still always forces Square regardless of the Board setting, matching "the original" David liked.
+scenario("train", "Odd one out: Board picker (Full screen / Square) is independent of Palette/Style", async t => {
+  await t.open("#shot=gx:oo:zen", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a Full screen Gradient board");
+  const full1 = t.ev("({ full: OO_LAST.full, rows: OO_LAST.rows, cols: OO_LAST.cols })");
+  t.expect(full1.full !== false, `Gradient should default to Full screen, got full=${full1.full}`);
+  // switch to Square while staying Gradient -- its own setting, not tied to Classic
+  t.ev("ooSimpleState().board = 'square'; save(); ooMap({ zen: true, skipPicker: true }); 1");
+  await t.waitFor(".oo-board .oo-t", 6000, "a Square Gradient board");
+  const sq = t.ev("({ full: OO_LAST.full, rows: OO_LAST.rows, cols: OO_LAST.cols, gridType: OO_LAST.gridType })");
+  t.expect(sq.full === false, `Board: Square should set full=false, got ${sq.full}`);
+  t.expect(sq.rows === sq.cols, `Board: Square should be a square board, got ${sq.rows} x ${sq.cols}`);
+  t.expect(sq.cols === 9, `Square's default size should be 9x9, got ${sq.cols} columns`);
+  t.expect(sq.gridType !== "flat", `Square should still be Gradient (not forced solid), got gridType ${sq.gridType}`);
+  // the pause menu's Board row should be offered for Gradient, and reflect "Square"
+  t.ev("[...document.querySelectorAll('.oo-pause-mark')].pop().click(); 1");
+  await t.waitFor(".oo-pausecard.on", 2000, "the pause card");
+  const boardBtn = t.$('.oo-pausecard.on [data-set="board"]');
+  t.expect(boardBtn, "the pause menu should offer a Board row when Style is Gradient");
+  t.expect(/Square/.test(boardBtn.innerText), `the Board row should read Square, got "${boardBtn.innerText}"`);
+  t.ev("document.querySelector('.oo-pausecard.on [data-resume]').click(); 1");
+  await t.waitFor(".oo-board .oo-t", 2000, "the board after resuming");
+  t.expect(!t.$(".oo-pausecard.on"), "the pause card should be closed before continuing");
+  // Classic always forces Square, regardless of the Board setting -- and the pause menu hides the Board row
+  // entirely then, since it can't be changed independently of Classic
+  t.ev("ooSimpleState().style = 'classic'; ooSimpleState().board = 'full'; save(); ooMap({ zen: true, skipPicker: true }); 1");
+  await t.waitFor(".oo-board .oo-t", 6000, "a Classic board (forced Square)");
+  const classicSq = t.ev("({ full: OO_LAST.full, rows: OO_LAST.rows, cols: OO_LAST.cols })");
+  t.expect(classicSq.full === false, `Classic should force Square even with Board set to Full screen, got full=${classicSq.full}`);
+  t.expect(classicSq.rows === classicSq.cols, `Classic should still be square, got ${classicSq.rows} x ${classicSq.cols}`);
+  t.ev("[...document.querySelectorAll('.oo-pause-mark')].pop().click(); 1");
+  await t.waitFor(".oo-pausecard.on", 2000, "the pause card");
+  t.expect(!t.$('.oo-pausecard.on [data-set="board"]'), "the Board row should be hidden in the pause menu while Classic is active");
+  t.ev("document.querySelector('.oo-pausecard.on [data-resume]').click(); 1");
+  await t.waitFor(".oo-board .oo-t", 2000, "the board after resuming");
+  // reset for later scenarios
+  t.ev("ooSimpleState().style = 'gradient'; ooSimpleState().board = 'full'; save(); 1");
+});
+
 // David, 2026-10-11, final word: a few fixed size chips (not a continuous range) plus a "Grows as you play"
 // toggle, shared by the pre-game sheet and the pause menu -- changing the chip in the pause menu takes effect
 // on the player's NEXT run, not the one in progress (changing the live board's size mid-round is exactly the
