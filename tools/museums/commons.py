@@ -63,10 +63,19 @@ EXCLUDE_COLLECTIONS = {
     "Q160236": "The Metropolitan Museum of Art", "Q214867": "National Gallery of Art, Washington",
     "Q190804": "Rijksmuseum", "Q671384": "SMK (Statens Museum for Kunst)",
 }
-# Six museums named in the task, rich in public-domain paintings and missing from the six above.
+# Six museums named in the original task, rich in public-domain paintings and missing from the six above, plus
+# (2026-10-10, David: "I'm very interested in European art") a second wave of major European collections rich in
+# PD-old holdings and not already covered by a dedicated museum adapter (Rijksmuseum has its own -- see
+# EXCLUDE_COLLECTIONS -- so it is deliberately left out here).
 TARGET_COLLECTIONS = {
     "Q51252": "Uffizi Gallery", "Q160112": "Museo del Prado", "Q19675": "Louvre Museum",
     "Q132783": "State Hermitage Museum", "Q166888": "National Gallery, London", "Q23402": "Musee d'Orsay",
+    "Q154568": "Alte Pinakothek", "Q842858": "Nationalmuseum (Stockholm)", "Q165631": "Gemaldegalerie (Berlin)",
+    "Q150066": "Pinacoteca di Brera", "Q338330": "Gallerie dell'Accademia", "Q163804": "Städel Museum",
+    "Q1327919": "Wallace Collection", "Q183334": "Tretyakov Gallery", "Q4872": "Pushkin Museum",
+    "Q942713": "National Galleries of Scotland", "Q176251": "Museo Thyssen-Bornemisza",
+    "Q12110695": "Courtauld Gallery", "Q1419555": "National Gallery Prague", "Q1421440": "Fitzwilliam Museum",
+    "Q303139": "Belvedere (Vienna)",
 }
 # Old masters named in the task, plus the artists most often named alongside them, as a safety net for works the
 # museum-based half misses (a minor painting in a smaller collection). A wrong QID here just contributes zero rows.
@@ -80,6 +89,37 @@ NOTABLE_ARTISTS = {
     "Q42207": "Caravaggio", "Q297": "Diego Velazquez", "Q41264": "Johannes Vermeer", "Q5432": "Francisco Goya",
     "Q192070": "J. M. W. Turner", "Q189119": "John Constable", "Q60064": "Caspar David Friedrich",
     "Q296": "Claude Monet", "Q5582": "Vincent van Gogh", "Q34661": "Gustav Klimt",
+    # Second wave (2026-10-10, European-art refocus): Renaissance through early-20th-century European painters,
+    # for depth (every PD painting Wikidata has catalogued for each, not just the famous ones) across Italy,
+    # Flanders/Netherlands, France, Spain, Germany/Austria/Switzerland, Britain, Scandinavia and Central/Eastern
+    # Europe. Picked by hand from major art-historical movements/schools, QIDs resolved via wbsearchentities and
+    # spot-checked against the painter's description (dates, nationality) to avoid a same-named disambiguation hit.
+    "Q109061": "Guido Reni", "Q123071": "Arnold Böcklin", "Q127171": "Jean-Honore Fragonard",
+    "Q134741": "Camille Pissarro", "Q148458": "Jean-Francois Millet", "Q148475": "Camille Corot",
+    "Q150679": "Anthony van Dyck", "Q151573": "Paul Signac", "Q153746": "Albrecht Altdorfer",
+    "Q154338": "Matthias Grünewald", "Q154349": "Odilon Redon", "Q155626": "John Singer Sargent",
+    "Q158062": "Max Liebermann", "Q158840": "James Ensor", "Q159606": "John Everett Millais",
+    "Q164961": "Adolph Menzel", "Q164979": "Carl Spitzweg", "Q167654": "Frans Hals",
+    "Q171344": "William Hogarth", "Q17169": "Giovanni Bellini", "Q172911": "Ilya Repin",
+    "Q175130": "Alfred Sisley", "Q183221": "Antoine Watteau", "Q184212": "Theodore Gericault",
+    "Q186748": "Dante Gabriel Rossetti", "Q187506": "Honore Daumier", "Q189117": "Jan Matejko",
+    "Q192062": "Bartolome Esteban Murillo", "Q192720": "Thomas Gainsborough", "Q193064": "Ivan Shishkin",
+    "Q194402": "Joshua Reynolds", "Q203828": "Gustave Moreau", "Q205863": "Jan Steen",
+    "Q206820": "Anders Zorn", "Q207447": "Jean-Baptiste-Simeon Chardin", "Q207929": "Pontormo",
+    "Q209050": "Jan Brueghel the Elder", "Q209615": "Francisco de Zurbaran", "Q211356": "Isaac Levitan",
+    "Q212754": "John William Waterhouse", "Q213612": "Jacob van Ruisdael", "Q215100": "Mikhail Vrubel",
+    "Q216406": "Edward Burne-Jones", "Q217128": "Valentin Serov", "Q232423": "Judith Leyster",
+    "Q23380": "Jean-Auguste-Dominique Ingres", "Q234385": "Rachel Ruysch", "Q239394": "Edouard Vuillard",
+    "Q26408": "Pierre Bonnard", "Q28144": "Willem Kalf", "Q297838": "Jusepe de Ribera",
+    "Q314889": "Pieter de Hooch", "Q33477": "Eugene Delacroix", "Q336908": "Meindert Hobbema",
+    "Q34013": "Georges Seurat", "Q346808": "Gerard ter Borch", "Q351746": "Joaquin Sorolla",
+    "Q365068": "Peder Severin Kroyer", "Q380706": "Vilhelm Hammershoi", "Q381728": "George Stubbs",
+    "Q448189": "Jacek Malczewski", "Q48319": "Hans Holbein the Younger", "Q559559": "Fernand Khnopff",
+    "Q5664": "Fra Angelico", "Q5681": "Andrea Mantegna", "Q5811": "Masaccio",
+    "Q5822": "Piero della Francesca", "Q7803": "Agnolo Bronzino", "Q7814": "Giotto",
+    "Q7824": "Annibale Carracci", "Q83155": "Jacques-Louis David", "Q8457": "Correggio",
+    "Q8459": "Giorgione", "Q9319": "Tintoretto", "Q9348": "Parmigianino",
+    "Q9440": "Paolo Veronese",
 }
 PRECISION_SPAN = {11: 0, 10: 0, 9: 0, 8: 10, 7: 100, 6: 1000}
 # Wikidata's own English label is sometimes a shorter or honorific-bearing variant of the spelling the corpus

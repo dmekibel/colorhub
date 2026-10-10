@@ -308,7 +308,7 @@ def img_path(x):
 
 
 def commons_hint(x):
-    if x["src"] != "commons":
+    if x["src"] not in ("commons", "commons2"):  # commons2: new-growth commons rows, see corpus.py
         return False
     from urllib.parse import unquote
     name = unquote((x.get("img") or "").split("FilePath/")[-1].split("?")[0])
@@ -376,7 +376,7 @@ def sample_rows(rows, n, seed):
     for x in rows:
         if img_path(x).exists():
             by[x["src"]].append(x)
-    w = {s: (2 if s == "commons" else 1) for s in by}
+    w = {s: (2 if s in ("commons", "commons2") else 1) for s in by}
     tot = sum(w.values())
     out = []
     for s, xs in by.items():
