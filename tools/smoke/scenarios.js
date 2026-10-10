@@ -3587,7 +3587,7 @@ scenario("map", "the per-cell seam stroke doesn't slow a continuous pan+pinch on
 // shortcut (under 7px, too many to afford the real per-neighbor polygon clip) used to always fall back to a
 // plain circle, even in Honeycomb look. It now hands tiny bubbles a cheap fixed regular hexagon instead, so the
 // mosaic still reads as tiled at low zoom; Bubbles look is untouched (still plain circles, on purpose).
-scenario("map", "Honeycomb look stays tiled at low zoom (not circles); Bubbles stays circles", async t => {
+scenario("map", "Tiny cells draw as plain circles at low zoom (the original look); frame time holds", async t => {
   await H.homeReady(t);
   // Deep zoomed out (_qaForceZoom: a QA-only bypass of the ordinary zoom(z) clamp -- js/honey.js's own pinch-out
   // floor, raised earlier this chapter so "the whole layout fits", means a RESTING zoom rarely pushes a dense
@@ -3600,7 +3600,7 @@ scenario("map", "Honeycomb look stays tiled at low zoom (not circles); Bubbles s
   await t.sleep(200);
   const honeyStat = t.ev("HM_CTRL._tinyPolyStat()");
   t.expect(honeyStat.tiny > 20, `too few tiny cells to judge at this zoom (${honeyStat.tiny})`);
-  t.expect(honeyStat.poly === honeyStat.tiny, `Honeycomb: only ${honeyStat.poly}/${honeyStat.tiny} tiny cells are tiled (the rest fell back to circles)`);
+  t.expect(honeyStat.poly === 0, `Honeycomb: ${honeyStat.poly}/${honeyStat.tiny} tiny cells drew as fixed hexagons (reverted: they should be circles)`);
   t.notes.push(`Honeycomb: ${honeyStat.poly}/${honeyStat.tiny} tiny cells tiled, ${honeyStat.total} drawn`);
   // Bubbles: the same tiny bubbles should still be plain circles (no regression the other way)
   t.ev('S.hm.style = "current"; hmHome();');
