@@ -708,7 +708,9 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
   // spiral looks like circles" -- below, a fixed regular hexagon (the honeycomb lattice's own natural cell
   // shape, not a pixel-exact Voronoi cell the way the full clip computes for a bigger bubble, but a solid
   // mosaic at a glance, which is what low zoom needs) costs the same O(1) as the circle it replaces.
-  const tinyHex = shapeAmt > .5 ? HONEY_HEX_UNIT : null;
+  // Reverted (David, 2026-10-10: "Why is my honeycomb still broken... bring it back to how it was"): the fixed
+  // tiny hexagons (e5db1847) never tiled the spiral layout cleanly; tiny cells are plain circles again, as before.
+  const tinyHex = null;
   const ds = drawn.map(b => b.d).sort((a, c) => a - c), typ = ds[Math.floor(ds.length / 2)] || 8, maxD = ds[ds.length - 1] || 8;
   const cell = Math.max(4, typ * 1.3, maxD * 1.5 / 12), grid = new Map(), key = (i, j) => i * 100003 + j;
   drawn.forEach((b, n) => { const k = key(Math.floor(b.x / cell), Math.floor(b.y / cell)); let a = grid.get(k); if (!a) grid.set(k, a = []); a.push(n); });
