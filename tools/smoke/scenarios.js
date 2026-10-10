@@ -2061,10 +2061,12 @@ scenario("pages", "Pearl's article: the Vermeer painting figure is clickable and
   await t.waitFor(() => t.$(".p-title"), 10000, "the painting page for Girl with a Pearl Earring");
   t.expect(/pearl earring/i.test(t.text(".p-title")), `opened "${t.text(".p-title")}", expected Girl with a Pearl Earring`);
   t.expect(/vermeer/i.test(t.$(".p-dek").innerText || ""), "the painter (Vermeer) isn't named on the painting page");
-  // Back from here replays whatever trail token the article's own color page pushed, same as any other figure
-  // (gem/flower/painting) opened from an article -- not special-cased here. Just confirm it doesn't throw.
+  // Back replays the "n:Pearl" trail token the article's own page pushed (js/explore.js xStep): Pearl is a
+  // library/archive-only name (not one of the ~1,000 taught CORE_NAMES), which xStep now resolves via
+  // routeNameAsync, the same resolver #/color/<slug> uses, instead of falling through to xToOrigin.
   await t.click("[data-back]", { wait: 600 });
   t.expect(t.errors.length === 0, "Back threw: " + JSON.stringify(t.errors));
+  await t.waitFor(() => H.title(t) === "Pearl", 15000, "Back returns to Pearl's color page");
 });
 
 scenario("pages", "a tapped in-between hex opens its nearest name with 'Your color'", async t => {

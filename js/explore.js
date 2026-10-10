@@ -685,8 +685,21 @@ function xStep(prev) {
   if (prev.startsWith("poem:")) return poemPage(prev.slice(5), { back: true });   // a poem (js/poems.js)
   // a library color's own page, not one of the 101 (js/names.js): it isn't a graph node, so look it up by name
   if (prev.startsWith("n:")) {
-    const nm = decodeURIComponent(prev.slice(2));
-    return loadCoreNames().then(() => { const e = (CORE_NAMES || []).find(x => x.n === nm); e ? namePage(e, false, typeof tlTapped === "function" ? tlTapped(prev) : null) : xToOrigin(); });
+    const nm = decodeURIComponent(prev.slice(2)), tapped = typeof tlTapped === "function" ? tlTapped(prev) : null;
+    return loadCoreNames().then(() => {
+      const e = (CORE_NAMES || []).find(x => x.n === nm);
+      if (e) return namePage(e, false, tapped);
+      // not in the ~1,000 taught CORE_NAMES: an archive/library-only name (e.g. "Pearl", ~2,700 names) still
+      // needs its page back -- resolve it the same way the router does for a cold #/color/<slug> link
+      // (routeNameAsync, js/router.js) instead of falling through to xToOrigin (David, 2026-10-10: Back from a
+      // figure opened off such a name's page landed on the map/Learn tab instead of reopening the name).
+      if (typeof routeNameAsync !== "function" || typeof routeSlug !== "function") return xToOrigin();
+      return routeNameAsync(routeSlug(nm)).then(r => {
+        if (r && r.color && typeof colorNode === "function") return openNode(colorNode(r.color), false, tapped);
+        if (r && r.entry) return namePage(r.entry, false, tapped);
+        xToOrigin();
+      }).catch(() => xToOrigin());
+    });
   }
   if (prev.startsWith("r:") && typeof tlReplay === "function") return tlReplay(prev);   // any other addressed screen (js/trail.js)
   const node = graph().nodes.get(prev.replace(/^[zp]:/, ""));
