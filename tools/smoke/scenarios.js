@@ -871,7 +871,9 @@ scenario("home", "Subject view: a decade subject (1890s) works the same as a pai
   await t.waitFor(".sv-count input", 10000, "the subject view's count slider");
   await t.waitFor(() => t.$$(".sv-canvas [data-sv-h]").length >= 3, 6000, "the decade's first chips");
   t.expect(/1890s/.test(t.text(".sv-title")), `the sheet's title isn't the decade's: "${t.text(".sv-title")}"`);
-  t.expect(/1,173|1173/.test(t.text(".sv-sub")), `the subline doesn't cite the real painting count: "${t.text(".sv-sub")}"`);
+  // the count grows with the corpus (1,173 at 23,778 paintings; more after the 2026-10-10 European expansion) -- assert a real, plausible count, not a frozen one
+  const svN = +((t.text(".sv-sub").match(/across ([\d,]+) paintings/) || [])[1] || "0").replace(/,/g, "");
+  t.expect(svN >= 1000, `the subline doesn't cite a real painting count: "${t.text(".sv-sub")}"`);
   await t.click(t.$('[data-sv-measure="signature"]'), { wait: 250 }).catch(() => {});   // optional: only offered if the data supports it
   t.expect(t.errors.length === 0, `window errors: ${t.errors.join(" | ")}`);
 });
