@@ -265,25 +265,32 @@ function ooSafeBox(stage) {
     cornerX: corner / r.width, cornerY: corner / r.height,
   };
 }
+// the round transition, rebuilt from scratch (David, 2026-10-11, "one simple, robust model" -- stop patching
+// around it): by the time this runs, the NEXT board is not drawn yet -- ooAsk draws it right after, synchronously,
+// fully computed (colors, rows x cols, safe zone) at its real final position, same as always. This only handles
+// the OLD board: one static snapshot (not per-tile), sized from the STAGE's own rect (not the board's own, which
+// could be mid-transform from the just-finished reveal's ".oo-settle" -- using a scaled rect was the real bug
+// behind "the transition goes to the wrong size, then snaps": the snapshot itself was captured already shrunk).
+// Same-size rounds (the overwhelming common case, since the grid no longer varies round to round) get a ripple
+// reveal: a radial mask grows from the tapped tile, uncovering the new board underneath -- nothing here ever
+// moves, resizes or re-lays-out a tile, so there is no "wrong arrangement" to snap away from. A level-step
+// (st.grew) gets a plain cross-fade instead (ink-bloom): the size is genuinely different, so a localized reveal
+// would have to cross a layout seam; a flat fade across the whole field reads as one clean moment instead.
 function ooMeltGhost(ui) {
   ooGhostCleanup();
   if (reduceMotion) return;
   const board = ui.stage.querySelector(".oo-board");
   if (!board) return;
-  const elRect = ui.el.getBoundingClientRect(), bRect = board.getBoundingClientRect();
+  const elRect = ui.el.getBoundingClientRect(), sRect = ui.stage.getBoundingClientRect();
   const clone = board.cloneNode(true);
-  clone.classList.add("oo-ghost");
-  Object.assign(clone.style, { position: "absolute", left: (bRect.left - elRect.left) + "px", top: (bRect.top - elRect.top) + "px",
-    width: bRect.width + "px", height: bRect.height + "px", margin: "0", zIndex: "5", pointerEvents: "none" });
+  clone.className = "oo-ghost";   // never ".oo-settle" or any other leftover state class from the board just answered
+  clone.removeAttribute("style");
+  Object.assign(clone.style, { position: "absolute", left: (sRect.left - elRect.left) + "px", top: (sRect.top - elRect.top) + "px",
+    width: sRect.width + "px", height: sRect.height + "px", margin: "0", zIndex: "5", pointerEvents: "none" });
   ui.el.style.position = ui.el.style.position || "relative";
   ui.el.appendChild(clone);
-  const cx = bRect.width / 2, cy = bRect.height / 2;
-  clone.querySelectorAll(".oo-t").forEach(t => {
-    const x = parseFloat(t.style.left) / 100 * bRect.width, y = parseFloat(t.style.top) / 100 * bRect.height;
-    t.style.setProperty("--dl", Math.round(Math.hypot(x - cx, y - cy) * .55) + "ms");
-    t.classList.add("oo-melt");
-  });
-  const timer = later(() => { if (OO_GHOST && OO_GHOST.clone === clone) OO_GHOST = null; clone.remove(); }, 500);
+  requestAnimationFrame(() => clone.classList.add("oo-ghost-out"));
+  const timer = later(() => { if (OO_GHOST && OO_GHOST.clone === clone) OO_GHOST = null; clone.remove(); }, 340);
   OO_GHOST = { clone, timer };
 }
 // the new board settles in (a gentle scale+fade, staggered from the center) or, right after the grid grows,
@@ -864,12 +871,60 @@ function ooEyeLine() {
   return any.th ? `About ${pctFmt(any.th)} so far. Your eye profile fills in as you play.` : "Your eye profile fills in as you play.";
 }
 const OO_S_AXIS_WORD = { hue: "Hue", light: "Value", chroma: "Saturation" };
+// the board size, picked before a run starts and held fixed through it (David, 2026-10-11, final word after
+// round-to-round variance and then a ramp both read as "overwhelming... less zen"): a handful of presets (size
+// scalars for ooSimpleDims -- the board's longer side), shown as chips ("3x4", "4x6"...) in the pre-game picker
+// and the pause menu. Index 1 (~4x6) is the first-timer default.
+// columns across (David, 2026-10-11: "too small makes it less fun... cap the densest option at ~8 columns on a
+// phone... 4-6 the sweet spot" -- 10+ dropped; a tablet/landscape session gets more room by the same min-tile-
+// size rule, via ooGrowCap, but the chip list itself stays this phone-sized set everywhere for one consistent
+// picker). Rows are derived to stay near-square (ooSimpleDims).
+const OO_SIZE_PRESETS = [4, 5, 6, 8];
+const OO_SIZE_DEFAULT_IDX = 1;   // 5 columns -- "4x6" was David's own first-timer example
+// the real floor under "too small to be fun": no board ever grows (or starts, from the picker -- see below)
+// denser than one tile per ~50 CSS px of the stage's own width. On a 440-wide phone that's ~8 columns, matching
+// the explicit cap; a wider viewport (tablet, landscape) earns a little more room by the same rule.
+function ooGrowCap(ui) {
+  const w = ui.stage.getBoundingClientRect().width || 400;
+  return clamp(Math.floor(w / 50), 4, 14);
+}
+// a chip's own label, from what ooSimpleDims actually renders at a typical portrait aspect -- never a hand-typed
+// number that could quietly drift out of sync with the real geometry.
+function ooSizeLabel(size) { const d = ooSimpleDims(size, 1.6); return `${d.cols}×${d.rows}`; }
+// the size picker (David, 2026-10-11: "a light pre-game choice... a row of 4-5 size chips... plus a 'Grows as
+// you play' toggle"), shared by the pre-game overlay and the pause menu so there's exactly one picker, not two.
+function ooSizePickerHTML(sim, zen) {
+  const growKey = zen ? "growZen" : "growArcade", grows = !!sim[growKey];
+  const chips = OO_SIZE_PRESETS.map((size, i) => {
+    const d = ooSimpleDims(size, 1.6), gr = Math.min(d.rows, 5), gc = Math.min(d.cols, 5);
+    return `<button class="oo-sizechip${i === sim.sizeIdx ? " on" : ""}" data-size="${i}">
+      <span class="oo-sizeicon" style="--gc:${gc}">${Array.from({ length: gr * gc }, () => "<i></i>").join("")}</span>
+      <em>${ooSizeLabel(size)}</em>
+    </button>`;
+  }).join("");
+  return `<div class="oo-sizepicker">
+    <div class="oo-sizechips">${chips}</div>
+    <button class="item oo-sizegrow" data-growkey="${growKey}">Grows as you play: ${grows ? "on" : "off"} ${ICON.chev}</button>
+  </div>`;
+}
+function ooWireSizePicker(root, sim, onChange) {
+  root.querySelectorAll("[data-size]").forEach(b => b.onclick = () => { sim.sizeIdx = +b.dataset.size; save(); buzz(4); onChange(); });
+  const gb = root.querySelector("[data-growkey]");
+  if (gb) gb.onclick = () => { const k = gb.dataset.growkey; sim[k] = !sim[k]; save(); buzz(4); onChange(); };
+}
+// a throwaway, non-scored round at the chosen size, just to show behind the pre-game sheet -- no click handlers
+// are wired (ooBoardHTML alone, not ooAsk), so it's naturally inert until the real first round (nextRound) draws
+function ooPreviewBoard(ui, st, sim) {
+  const aspect = ooStageAspect(ui.stage) || 1.6;
+  const palette = sim.style === "classic" ? null : ooPickPalette();
+  const r = ooSimpleRound({ model: ooS().model, cols: st.cols, round: 0, aspect, palette, richMode: sim.richMode, multiOdd: false, style: sim.style }, false, Math.random);
+  if (r) ui.stage.innerHTML = ooBoardHTML(r, { feedback: true, tileNames: false });
+}
 // the state behind the simple game: the grid you're on, your rolling accuracy at that size, and Arcade or Zen
 function ooSimpleState() {
   const st = ooS();
   if (!ooObj(st.simple)) st.simple = {};
   const o = st.simple;
-  if (!Number.isInteger(o.cols) || o.cols < OO_S_MIN_COLS || o.cols > OO_S_MAX_COLS) o.cols = OO_S_MIN_COLS;
   if (!Array.isArray(o.acc)) o.acc = [];
   if (o.mode !== "zen") o.mode = "arcade";
   if (o.names !== false) o.names = true;      // teach names after each round (pause menu toggle)
@@ -880,6 +935,12 @@ function ooSimpleState() {
   if (o.richMode !== "rich") o.richMode = "subtle";  // Palette intensity: Subtle (default, 1-2 close harmonious stops) / Rich (the old skill-ladder up to 4 stops)
   if (o.multiOdd == null) o.multiOdd = false;        // multiple odd tiles: opt-in only ("selecting one is better than multiple")
   if (o.reveal !== false) o.reveal = true;           // "Show colors between rounds" -- off skips the reveal on a hit (a miss still gets its brief marks)
+  // the chosen starting size (an index into OO_SIZE_PRESETS) and whether it's allowed to grow during a run --
+  // on by default in Arcade (a slow, occasional milestone), off by default in Zen (David: "the grid NEVER
+  // changes on its own" there -- the player's own choice is the whole story).
+  if (!Number.isInteger(o.sizeIdx) || o.sizeIdx < 0 || o.sizeIdx >= OO_SIZE_PRESETS.length) o.sizeIdx = OO_SIZE_DEFAULT_IDX;
+  if (o.growArcade == null) o.growArcade = true;
+  if (o.growZen == null) o.growZen = false;
   return o;
 }
 // the per-round timer: a little tighter as the grid grows (Arcade only)
@@ -931,7 +992,11 @@ function ooMap(opt = {}) {
   const model = ooS().model;
   const startTh = { hue: ooTheta(model, "hue", null), light: ooTheta(model, "light", null), chroma: ooTheta(model, "chroma", null) };
   const lives0 = zen ? 0 : 3;
-  const st = { cols: sim.cols, acc: sim.acc.slice(), round: 0, hits: 0, lives: lives0, streak: 0, grew: false, paused: false };
+  const st = { cols: OO_SIZE_PRESETS[sim.sizeIdx], acc: sim.acc.slice(), round: 0, hits: 0, lives: lives0, streak: 0, grew: false, paused: false, hitsAtGrow: 0, growAt: 0 };
+  // a light pre-game choice, not a setup screen (David, 2026-10-11): the real board (at the last-used size)
+  // renders and sits right there under a minimal picker -- chips, the grow toggle, a big Play. Tapping Play, or
+  // tapping the board itself, starts; a returning player (nothing to change) can just tap Play immediately.
+  const showPicker = !opt.forceShape && !opt.skipPicker;
   const el = show(`
     <div class="drill-head oo-head"><h2 id="ooq"></h2></div>
     <div class="drill-stage oo-stage" id="oostage"></div>
@@ -939,9 +1004,31 @@ function ooMap(opt = {}) {
     <button class="oo-pause-mark" data-pause aria-label="Pause"><i></i><i></i></button>
     <span class="oo-pause-hint" data-hint>Tap to pause or leave</span>
     <div class="oo-pausefield" id="oopausefield"></div>
-    <div class="oo-pausecard" id="oopausecard"></div>`, "fixed drill station oo-play oo-simple");
+    <div class="oo-pausecard" id="oopausecard"></div>
+    ${showPicker ? `<div class="oo-pregame" id="oopregame">
+      <div class="oo-pregame-sheet">
+        ${ooSizePickerHTML(sim, zen)}
+        <button class="btn oo-pregame-play" data-play>Play ${ICON.arrow}</button>
+      </div>
+    </div>` : ""}`, "fixed drill station oo-play oo-simple");
   const ui = { q: el.querySelector("#ooq"), stage: el.querySelector("#oostage"), foot: el.querySelector("#oofoot"), el };
   const quit = () => { save(); go("gym"); };
+  const pregame = el.querySelector("#oopregame");
+  if (pregame) {
+    const startPlay = () => { pregame.remove(); nextRound(); };
+    const rewirePicker = () => { ooWireSizePicker(pregame, sim, onChipChange); pregame.querySelector("[data-play]").onclick = startPlay; };
+    function onChipChange() {
+      // a new size choice redraws the (non-scored) preview board behind the sheet -- the real first round is
+      // only ever generated once, by startPlay/nextRound, so changing your mind here never costs a round
+      st.cols = OO_SIZE_PRESETS[sim.sizeIdx];
+      pregame.querySelector(".oo-sizepicker").outerHTML = ooSizePickerHTML(sim, zen);
+      rewirePicker();
+      ooPreviewBoard(ui, st, sim);
+    }
+    rewirePicker();
+    pregame.addEventListener("click", e => { if (e.target === pregame) startPlay(); });   // "or tapping the board"
+    ooPreviewBoard(ui, st, sim);
+  }
   // the first time: a quiet hint by the mark, gone after 3s or at first touch, never again
   if (sim.pauseHint) {
     const hintEl = el.querySelector("[data-hint]");
@@ -961,6 +1048,7 @@ function ooMap(opt = {}) {
       ${!zen ? `<div class="oo-hearts" aria-label="${st.lives} lives" style="justify-content:center;margin:0 0 18px">${Array.from({ length: lives0 }, (_, i) => `<i${i >= st.lives ? ` class="gone"` : ""}></i>`).join("")}</div>` : ""}
       <button class="btn" data-resume>Resume</button>
       <button class="oo-zenpill${zen ? " on" : ""}" data-zen aria-pressed="${zen}">${zen ? "Zen" : "Arcade"}</button>
+      ${ooSizePickerHTML(sim, zen)}
       <div class="oo-pset">
         <button class="item" data-set="style">Style: ${sim.style === "classic" ? "Classic" : "Gradient"} ${ICON.chev}</button>
         ${sim.style !== "classic" ? `<button class="item" data-set="richMode">Palette intensity: ${sim.richMode === "rich" ? "Rich" : "Subtle"} ${ICON.chev}</button>` : ""}
@@ -987,6 +1075,11 @@ function ooMap(opt = {}) {
       else if (k === "style") { sim.style = sim.style === "classic" ? "gradient" : "classic"; save(); buzz(4); closePause(true); ooMap({ zen }); return; }
       paintPause();
     });
+    // the same size-chip picker as the pre-game overlay (David, 2026-10-11: "the pause menu keeps the same
+    // picker") -- mid-run it only re-paints the pause card itself; the live board only picks up a new chosen
+    // size at the start of the player's NEXT run (changing it mid-round would be exactly the "tile count
+    // changing" jolt this whole redesign is about removing).
+    ooWireSizePicker(card, sim, () => { paintPause(); });
   }
   function openPause() {
     if (st.paused) return;
@@ -1017,8 +1110,11 @@ function ooMap(opt = {}) {
   document.addEventListener("visibilitychange", ooGhostCleanup);
   let pauseAutoT = 0, curPauseCtl = {};
   function nextRound() {
-    ooMeltGhost(ui);
-    const enter = st.round === 0 ? null : st.grew ? "divide" : "settle"; st.grew = false;
+    // the grid is fixed for the whole run now (David, 2026-10-11, final word): no band, no ramp, no hold-timer
+    // -- st.cols only ever changes at a deliberate growth step (onAnswer, Arcade only, off by default in Zen),
+    // which is the one moment that gets the bigger "divide"/ink-bloom transition; every other round is a same-
+    // size ripple reveal (ooMeltGhost), which never has a layout change to cross-fade through in the first place.
+    const enter = st.round === 0 ? null : st.grew ? "divide" : null; st.grew = false;
     const breather = st.round > 0 && st.round % 5 === 4;
     const aspect = ooStageAspect(ui.stage) || 1.6;
     const safeBox = ooSafeBox(ui.stage);
@@ -1033,14 +1129,11 @@ function ooMap(opt = {}) {
       for (let tries = 0; tries < 8 && !r; tries++) r = ooSimpleGradRound(rows, cols, richness, palette && palette.colors, skill, mix, d * bf, k, Math.random, safeBox, sim.richMode);
       if (r) Object.assign(r, { axis, judg: axis, mix, bf: r.gridType && r.gridType !== "flat" ? bf : 1, paletteSource: palette });
     }
-    // a run always starts chill and ramps toward the real, persisted skill over its first ~20 rounds (David,
-    // 2026-10-11) -- st.cols itself (the true skill ratchet, tracked on accuracy) is untouched by this; only
-    // what's fed into this round's size/richness band is ramped.
-    const rampCols = ooSimpleRampCols(st.cols, st.round);
-    if (!r) r = ooSimpleRound({ model, cols: rampCols, round: st.round, aspect, palette: ooPickPalette(), safeBox, richMode: sim.richMode, multiOdd: sim.multiOdd, style: sim.style }, breather);
+    if (!r) r = ooSimpleRound({ model, cols: st.cols, round: st.round, aspect, palette: ooPickPalette(), safeBox, richMode: sim.richMode, multiOdd: sim.multiOdd, style: sim.style }, breather);
     const o = { feedback: true, tileNames: false, resolveOdd: true, enter, pauseCtl: {} };   // names live in the reveal now, never crowding gapless tiles
     if (!zen && sim.timer) o.timeLimit = ooSimpleTime(st.cols);
     curPauseCtl = o.pauseCtl;
+    ooMeltGhost(ui);
     ooAsk(ui, r, o).then(res => onAnswer(r, res));
   }
   function onAnswer(r, res) {
@@ -1064,9 +1157,16 @@ function ooMap(opt = {}) {
       }
     }
     if (!res.ok && res.picked && res.right) ooLogMiss(res.right, res.picked, { game: "odd:simple", judg: r.judg, d: res.act });
-    const newCols = ooSimpleGrid(st.cols, st.acc);
-    if (newCols !== st.cols) { st.grew = newCols > st.cols; st.cols = newCols; st.acc = []; }
-    sim.cols = st.cols; sim.acc = st.acc.slice(); sim.last = today(); save();
+    // the grid only ever grows, never shrinks, never jumps, and only in Arcade by default (David, 2026-10-11,
+    // final word: "a slow, gradual increase mid-run... Zen never changes on its own"). One row/col at a time,
+    // roughly every 10-12 correct (not necessarily consecutive -- a miss costs a life, not a step back), each
+    // a small, calm milestone (the "divide"/ink-bloom transition) rather than anything that reads as a ratchet.
+    const grows = zen ? sim.growZen : sim.growArcade;
+    if (res.ok && grows && st.cols < ooGrowCap(ui)) {
+      if (!st.growAt) st.growAt = 10 + Math.floor(Math.random() * 3);
+      if (st.hits - st.hitsAtGrow >= st.growAt) { st.cols++; st.grew = true; st.hitsAtGrow = st.hits; st.growAt = 10 + Math.floor(Math.random() * 3); }
+    }
+    sim.last = today(); save();
     const over = !zen && st.lives <= 0;
     const board = ui.stage.querySelector(".oo-board");
     // a streak moment: a luminous sweep every 5 in a row, a slower bloom every 10
@@ -1116,7 +1216,7 @@ function ooMap(opt = {}) {
     }
   }
   function end() { document.removeEventListener("visibilitychange", ooGhostCleanup); ooSimpleEnd(zen, startTh, model, st, z => ooMap({ zen: z })); }
-  nextRound();
+  if (!pregame) nextRound();   // with the picker up, the real first round only starts on Play (or a board tap)
 }
 const ooEnter = () => ooMap();
 
@@ -1200,7 +1300,7 @@ function ooShelf() {
   const acc = sim.acc.length ? Math.round(sim.acc.reduce((a, b) => a + b, 0) / sim.acc.length * 100) : null;
   return `<div class="sec-head"><b>Odd one out</b><span>a game of its own</span></div>
     <button class="oo-shelf" data-oo-map>
-      <span class="oo-nt"><b>${st.sets ? `${sim.cols} × ${sim.cols}${acc != null ? ` · ${acc}% right` : ""}` : "Find the different tile"}</b><em>${st.sets ? "One tap back in. Zen mode plays with no timer, no lives." : "One tap in: a 3 × 3 board, no setup. It grows with you."}</em></span>
+      <span class="oo-nt"><b>${st.sets ? `${ooSizeLabel(OO_SIZE_PRESETS[sim.sizeIdx])}${acc != null ? ` · ${acc}% right` : ""}` : "Find the different tile"}</b><em>${st.sets ? "One tap back in. Zen mode plays with no timer, no lives." : "One tap in, pick a size, play. It can grow with you."}</em></span>
     </button>
     <button class="play-row" data-oo-line><span><b>Across the line</b><span>Three of these are Teal. Which one isn't?</span></span><em class="lt-best">${ln.best ? `<b>${ln.best}</b>best` : "new"}</em></button>
     <button class="play-row" data-oo-pairs><span><b>Painters' pairs</b><span>Which colors did painters put together?</span></span><em class="lt-best">${st.pairs && st.pairs.best ? `<b>${st.pairs.best}</b>best` : "new"}</em></button>
