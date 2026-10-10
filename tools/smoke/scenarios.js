@@ -1571,6 +1571,43 @@ scenario("train", "Odd one out: Zen (no timer), a gapless full-bleed gradient bo
 // David, 2026-10-11: "make the GAME avoid placing the odd tile in unsafe zones" -- the status bar/Dynamic
 // Island strip, the home indicator strip, the rounded corners -- instead of insetting the grid. Play several
 // real rounds and check the odd tile's cell never lands in a top/bottom safe-area buffer strip or a corner.
+// David, 2026-10-11: "sound effects need to be a lot more relaxing -- not so sharp and high-pitched". A softer
+// right/wrong/streak set (js/sound.js: oddright/oddwrong/oddcombo), scoped to the game itself (sndInOddGame)
+// rather than retuning the shared app-wide vocabulary every other screen also uses. Can't easily hear a Web
+// Audio tone in headless Chrome, so this checks the wiring directly: sndBuzz renames right/wrong/combo to their
+// odd- prefixed sibling while an .oo-simple screen is up, and leaves them alone everywhere else.
+scenario("train", "Odd one out: right/wrong/streak sounds are swapped for the game's own softer set", async t => {
+  await t.open("#shot=gx:oo:zen", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a board");
+  const inGame = t.ev("typeof sndInOddGame === 'function' && sndInOddGame()");
+  t.expect(inGame, "sndInOddGame() should be true while the odd-one-out screen is up");
+  t.expect(t.ev("typeof SND_FX.oddright === 'function' && typeof SND_FX.oddwrong === 'function' && typeof SND_FX.oddcombo === 'function'"), "the game's own softer right/wrong/streak sounds should be defined");
+  // force SND.ctx truthy (it's only created after a real user gesture) so sndBuzz doesn't bail before renaming
+  const picked = t.ev(`(() => {
+    const prevCtx = SND.ctx; SND.ctx = SND.ctx || {};
+    const calls = [];
+    const prevQ = sndQ; window.sndQ = (name, arg) => calls.push(name);
+    buzz(10);              // "right"
+    buzz([10, 40, 10]);    // "wrong"
+    buzz([8, 50, 8]);      // "combo"
+    window.sndQ = prevQ; SND.ctx = prevCtx;
+    return calls;
+  })()`);
+  t.expect(picked[0] === "oddright", `a right tap should queue "oddright" in-game, got "${picked[0]}"`);
+  t.expect(picked[1] === "oddwrong", `a wrong tap should queue "oddwrong" in-game, got "${picked[1]}"`);
+  t.expect(picked[2] === "oddcombo", `a streak should queue "oddcombo" in-game, got "${picked[2]}"`);
+  // outside the game, the shared app-wide sounds are untouched
+  await t.open("#shot=gx:home", { settle: 600 });
+  const outside = t.ev(`(() => {
+    const prevCtx = SND.ctx; SND.ctx = SND.ctx || {};
+    const calls = []; const prevQ = sndQ; window.sndQ = (name) => calls.push(name);
+    buzz(10); buzz([10, 40, 10]);
+    window.sndQ = prevQ; SND.ctx = prevCtx;
+    return calls;
+  })()`);
+  t.expect(outside[0] === "right" && outside[1] === "wrong", `outside the game, right/wrong should stay the shared sounds, got ${JSON.stringify(outside)}`);
+});
+
 scenario("train", "Odd one out: the odd tile never lands in the unsafe top/bottom/corner zones", async t => {
   await t.open("#shot=gx:oo:zen", { settle: 600 });
   for (let i = 0; i < 12; i++) {
@@ -1632,6 +1669,48 @@ scenario("train", "Odd one out: Classic style is a square single-color board, Gr
   t.expect(info.gridType === "flat", `Classic should be one solid color (flat), got ${info.gridType}`);
   t.expect(info.uniq === 1, `Classic's field should be a single color, saw ${info.uniq} distinct`);
   t.ev("ooSimpleState().style = 'gradient'; save(); 1");
+});
+
+// David, 2026-10-11, live feedback: "keep a 9x9 square, not-full-screen option... available alongside Full
+// screen" -- Board shape is its own axis from Palette/Style now (js/games/oo-engine.js, js/games/oo-ui.js):
+// Gradient can be played Full screen (default, edge to edge) or Square (centered, margined, 9x9 default size),
+// and Classic still always forces Square regardless of the Board setting, matching "the original" David liked.
+scenario("train", "Odd one out: Board picker (Full screen / Square) is independent of Palette/Style", async t => {
+  await t.open("#shot=gx:oo:zen", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a Full screen Gradient board");
+  const full1 = t.ev("({ full: OO_LAST.full, rows: OO_LAST.rows, cols: OO_LAST.cols })");
+  t.expect(full1.full !== false, `Gradient should default to Full screen, got full=${full1.full}`);
+  // switch to Square while staying Gradient -- its own setting, not tied to Classic
+  t.ev("ooSimpleState().board = 'square'; save(); ooMap({ zen: true, skipPicker: true }); 1");
+  await t.waitFor(".oo-board .oo-t", 6000, "a Square Gradient board");
+  const sq = t.ev("({ full: OO_LAST.full, rows: OO_LAST.rows, cols: OO_LAST.cols, gridType: OO_LAST.gridType })");
+  t.expect(sq.full === false, `Board: Square should set full=false, got ${sq.full}`);
+  t.expect(sq.rows === sq.cols, `Board: Square should be a square board, got ${sq.rows} x ${sq.cols}`);
+  t.expect(sq.cols === 9, `Square's default size should be 9x9, got ${sq.cols} columns`);
+  t.expect(sq.gridType !== "flat", `Square should still be Gradient (not forced solid), got gridType ${sq.gridType}`);
+  // the pause menu's Board row should be offered for Gradient, and reflect "Square"
+  t.ev("[...document.querySelectorAll('.oo-pause-mark')].pop().click(); 1");
+  await t.waitFor(".oo-pausecard.on", 2000, "the pause card");
+  const boardBtn = t.$('.oo-pausecard.on [data-set="board"]');
+  t.expect(boardBtn, "the pause menu should offer a Board row when Style is Gradient");
+  t.expect(/Square/.test(boardBtn.innerText), `the Board row should read Square, got "${boardBtn.innerText}"`);
+  t.ev("document.querySelector('.oo-pausecard.on [data-resume]').click(); 1");
+  await t.waitFor(".oo-board .oo-t", 2000, "the board after resuming");
+  t.expect(!t.$(".oo-pausecard.on"), "the pause card should be closed before continuing");
+  // Classic always forces Square, regardless of the Board setting -- and the pause menu hides the Board row
+  // entirely then, since it can't be changed independently of Classic
+  t.ev("ooSimpleState().style = 'classic'; ooSimpleState().board = 'full'; save(); ooMap({ zen: true, skipPicker: true }); 1");
+  await t.waitFor(".oo-board .oo-t", 6000, "a Classic board (forced Square)");
+  const classicSq = t.ev("({ full: OO_LAST.full, rows: OO_LAST.rows, cols: OO_LAST.cols })");
+  t.expect(classicSq.full === false, `Classic should force Square even with Board set to Full screen, got full=${classicSq.full}`);
+  t.expect(classicSq.rows === classicSq.cols, `Classic should still be square, got ${classicSq.rows} x ${classicSq.cols}`);
+  t.ev("[...document.querySelectorAll('.oo-pause-mark')].pop().click(); 1");
+  await t.waitFor(".oo-pausecard.on", 2000, "the pause card");
+  t.expect(!t.$('.oo-pausecard.on [data-set="board"]'), "the Board row should be hidden in the pause menu while Classic is active");
+  t.ev("document.querySelector('.oo-pausecard.on [data-resume]').click(); 1");
+  await t.waitFor(".oo-board .oo-t", 2000, "the board after resuming");
+  // reset for later scenarios
+  t.ev("ooSimpleState().style = 'gradient'; ooSimpleState().board = 'full'; save(); 1");
 });
 
 // David, 2026-10-11, final word: a few fixed size chips (not a continuous range) plus a "Grows as you play"

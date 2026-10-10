@@ -22,7 +22,11 @@ const ooBtw = (a, b, rnd) => a + rnd() * (b - a);
 const OO_JUDG = { hue: "Hue", light: "Lightness", chroma: "Vividness", context: "In context", memory: "From memory" };
 const OO_AXES = ["hue", "light", "chroma"];
 // starting thresholds (ΔE00): deliberately easy, so the first rounds are wins and the estimate comes down to you
-const OO_START = { hue: 6, light: 6, chroma: 7, context: 8, memory: 9 };
+// David, 2026-10-11: "the whole game is too easy... starting/sitting too easy" -- a brand-new player's hue/
+// light/chroma threshold used to start at a coarse 6-7 ΔE00 (an easy gap), so early rounds (and any axis with
+// little evidence yet) read as obvious. A new player now starts assumed moderate (~3.5-4 ΔE00), tightening
+// fast with real evidence either way (ooUpdate already does that; only the starting point moves).
+const OO_START = { hue: 4, light: 3.5, chroma: 4, context: 8, memory: 9 };
 const OO_MIN = .4, OO_MAX = 30;
 // psychometric model: p(right) = g + (1 - g - lapse) * logistic(slope * ln(d / threshold))
 const OO_SLOPE = 3, OO_LAPSE = .03;
@@ -67,7 +71,13 @@ function ooUpdate(m, j, fam, dEff, ok, g = 0) {
   const r = m.j[j] || (m.j[j] = { r: Math.log(OO_START[j]), n: 0 });
   const f = fam ? (m.f[fam] || (m.f[fam] = { o: 0, n: 0 })) : null, fj = fam && OO_AXES.includes(j) ? (m.f[fam + ":" + j] || (m.f[fam + ":" + j] = { o: 0, n: 0 })) : null;
   const th = ooTheta(m, j, fam), p = ooP(dEff, th, g), e = (ok ? 1 : 0) - p;
-  // the step shrinks as evidence builds (fast at first, steady later), never to zero, so the estimate can follow you
+  // the step shrinks as evidence builds (fast at first, steady later), never to zero, so the estimate can follow you.
+  // A 2-down/1-up-style asymmetric step (correct pushes down faster than a miss eases up) was tried here for
+  // David's "too easy... make the staircase step down faster" and measured in tools/oo_simple_sim.js: it shifts
+  // the long-run EQUILIBRIUM itself, not just how fast it's reached, and a genuinely coarser-eyed player's
+  // estimate got stuck too low (52% settled, nowhere near the ~71% ooP targets) because misses alone couldn't
+  // push it back up fast enough. Reverted to a symmetric step; the lower OO_START and the tighter easiness
+  // ceiling below do the actual work of "not starting/sitting too easy" without destabilizing calibration.
   const K = Math.max(.07, .55 / Math.sqrt(1 + r.n / 3)), Kf = Math.max(.04, .3 / Math.sqrt(1 + (f ? f.n : 0) / 3));
   r.r = Math.log(Math.max(OO_MIN, Math.min(OO_MAX, Math.exp(r.r - K * e))));
   r.n++;
@@ -848,7 +858,9 @@ const OO_S_BREATHE_MULT = 1.7;    // a breather round (~93%): easier, for rhythm
 // would inflate the drawn gap, it's capped relative to the player's own current threshold on that axis, AND to
 // an absolute ΔE00 well under "pops out at a glance" -- so even a first-time, chill-ramped round still takes a
 // real look (a few seconds), never a free answer.
-const OO_S_EASE_X = 2.5, OO_S_EASE_MAX = 11;
+// David, 2026-10-11, tightened further: "too easy... gives obvious levels" -- 2.5x/11 still let richness+size
+// compensation inflate a round well past where it felt like a real look. Lower multiple, lower absolute cap.
+const OO_S_EASE_X = 1.6, OO_S_EASE_MAX = 6;
 const OO_S_MIN_COLS = 3, OO_S_MAX_COLS = 20;   // David, 2026-10-10: "the grid can go much bigger", "up to ~12x20"
 // -- this is a SIZE index (the board's longer side), not a literal column count once boards stop being square
 // (ooSimpleDims below turns it into rows x cols for the screen's own aspect)
@@ -1053,7 +1065,11 @@ function ooMaxNeighborStep(cells, colors, cols, rows) {
   }
   return max;
 }
-const OO_S_NEIGHBOR_CAP = .45;   // a gradient step between neighbors stays well under the odd tile's own move (David, 2026-10-11)
+// a gradient step between neighbors stays well under the odd tile's own move (David, 2026-10-11). Targeted a
+// bit under the hard 50% test line (tools/oo_simple_sim.js), not right at it -- the now-smaller easiness
+// ceiling (2026-10-11's difficulty pass) shrinks d itself for most rounds, leaving less absolute ΔE00 headroom
+// for the generative retries/backstop to work with before they hit their own shrink floor.
+const OO_S_NEIGHBOR_CAP = .4;
 // which axis (or combination) this round's error moves along, and how much weight each carries. Usually pure
 // (David: keep per-axis estimates clean most of the time); sometimes two or three axes move together, still
 // subtle overall, each contributing its share of the one target gap (so the staircase's own calibration -- the
@@ -1175,10 +1191,15 @@ function ooSimpleRound(state, breather, rnd = Math.random) {
   // board, one solid color, single tile"): same adaptive engine, safe zone and easiness ceiling as Gradient,
   // just forced to a literal single base color on a square board, no palette/gradient.
   const classic = state.style === "classic";
+  // Board shape (David, 2026-10-11) is its own axis from Style/palette now, not implied by Classic: Full screen
+  // (default, edge to edge) or Square (centered, margined, like the original -- 9x9 is its own default size,
+  // oo-ui.js). Classic+Square is "the original" David's girlfriend liked; Gradient+Square or Classic+Full work
+  // just as well, since nothing below depends on which palette produced the colors.
+  const square = classic || state.board === "square";
   const richness = classic ? "flat" : ooSimpleGridType(skill, state.round || 0, rnd, richMode);
   const gridLo = state.gridLo || OO_S_MIN_COLS, gridHi = state.gridHi || OO_S_MAX_COLS;
   const roundCols = clamp(state.cols, gridLo, gridHi);
-  const dims = classic ? { rows: roundCols, cols: roundCols } : ooSimpleDims(roundCols, state.aspect || 1.6);
+  const dims = square ? { rows: roundCols, cols: roundCols } : ooSimpleDims(roundCols, state.aspect || 1.6);
   const { rows, cols } = dims;
   // multiple odd tiles are opt-in only now (David, 2026-10-11: "selecting one is better than multiple") --
   // state.multiOdd must be explicitly true (a Settings toggle, oo-ui.js) or every round is single-odd.
@@ -1190,7 +1211,11 @@ function ooSimpleRound(state, breather, rnd = Math.random) {
   // ~2.5x the player's own current threshold, nor an absolute ΔE00 that would read as an instant, obvious pop --
   // while never dropping below the visibility floor. A known, accepted tradeoff (same as the floor elsewhere):
   // a clipped round's credit to the IRT model is a slight underestimate of the "aimed for" d, not a correctness bug.
-  const thNow = ooTheta(state.model, primary, null), ease = Math.max(OO_S_FLOOR[primary] * OO_S_FLOOR_PAD, Math.min(OO_S_EASE_MAX, thNow * OO_S_EASE_X));
+  // the ceiling caps how much richness/size COMPENSATION (bf) can inflate the round -- it must never cap the
+  // round below the base, uncompensated d itself, or a genuinely coarser-eyed player (whose own d is already
+  // large) would be capped UNDER their own threshold forever, incapable of ever converging above chance (found
+  // via tools/oo_simple_sim.js's struggling-eye check: a hard-min version of this flattened it to ~50%).
+  const thNow = ooTheta(state.model, primary, null), ease = Math.max(d, OO_S_FLOOR[primary] * OO_S_FLOOR_PAD, Math.min(OO_S_EASE_MAX, thNow * OO_S_EASE_X));
   const dEff = Math.min(d * bf, ease);
   let r = ooSimpleGradRound(rows, cols, richness, stopHexes, skill, mix, dEff, k, rnd, state.safeBox, richMode);
   if (!r) r = ooSimpleGradRound(rows, cols, "flat", stopHexes, skill, { [primary]: 1 }, Math.min(d, ease), k, rnd, state.safeBox, richMode);   // should be rare; a plain fallback
@@ -1201,7 +1226,7 @@ function ooSimpleRound(state, breather, rnd = Math.random) {
   // Classic truly has no palette (David, 2026-10-11: "no palettes") -- its base color comes from ooBase's own
   // family picker, not state.palette, so the reveal must never attribute it to a painting/look it didn't draw
   // from (state.palette may still be a real, unrelated pool entry computed upstream for the gradient path).
-  return Object.assign(r, { breather, axis: primary, judg: primary, mix, bf: r.gridType && r.gridType !== "flat" ? bf : 1, paletteSource: classic ? null : (state.palette || null) });
+  return Object.assign(r, { breather, axis: primary, judg: primary, mix, bf: r.gridType && r.gridType !== "flat" ? bf : 1, paletteSource: classic ? null : (state.palette || null), full: !square, ease });
 }
 // grid growth: a rolling window of the last OO_S_WINDOW results at the current size: grow on a hot streak, shrink
 // on a cold one, hold otherwise. The floor stops the gap from shrinking further, so this is the difficulty knob
