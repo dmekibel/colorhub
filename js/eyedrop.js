@@ -108,7 +108,7 @@ function eyedropAttach(el, o = {}) {
   // the screen). GAP is the real empty space left between the fingertip and the loupe's own edge now: ~80pt,
   // just clear of the thumb. Near the top edge there isn't 80pt plus the loupe's own height left above the
   // point, so it flips to sit beside the finger instead of vanishing off-screen or overlapping the status bar.
-  const EYD_GAP = 80;
+  const EYD_GAP = 22;   // David, 2026-10-10: "only a couple pixels higher" than the thumb
   const position = (clientX, clientY) => {
     if (!loupe) return;
     const lw = 140, vw = innerWidth || document.documentElement.clientWidth;
