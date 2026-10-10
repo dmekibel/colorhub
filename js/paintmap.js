@@ -1117,11 +1117,19 @@ function pmMount(el, s, F) {
     // content overflows) -- the opposite monotonicity from honey.js's own search() -- so the bisection here
     // grows `lo` (the largest z still known to fit) up toward the true/false boundary, not `hi` down to it.
     // a wildly elongated layout (By painter: thousands of painters each a short row, GW far smaller than GH)
-    // can need a REALLY small z to fit its long axis -- no artificial floor here (only ZMIN_ABS below, which
-    // exists only to keep the math finite, not to second-guess what a layout actually needs).
+    // can need a REALLY small z to fit its long axis. ZMIN_ABS used to be the search's hard starting floor, on
+    // the assumption it was always low enough in practice -- the euro corpus expansion (23,778 -> 42,331
+    // paintings, many more painters with few works each) broke that assumption: "By painter"'s GH grew past
+    // 7,000 rows, which needs zc ~ .0013 to fit, BELOW ZMIN_ABS (.002), so the old `if (!fits(lo)) return lo`
+    // silently settled for a zoom that still overflowed the view instead of searching lower. Now lo shrinks
+    // (geometrically) until it actually fits, so the floor tracks whatever the real layout needs at any corpus
+    // size, with only a true numerical floor (TRUE_FLOOR) to keep the loop finite -- that one is never expected
+    // to be hit by real content, only to stop the halving if `base`/`fzAt` ever produced something degenerate.
+    const TRUE_FLOOR = 1e-6;
     let lo = ZMIN_ABS, hi = 1;
-    if (!fits(lo)) return lo;   // even the smallest allowed zoom can't fit this layout -- that's the best we've got
-    for (let i = 0; i < 30; i++) { const m = (lo + hi) / 2; if (fits(m)) lo = m; else hi = m; }
+    while (!fits(lo) && lo > TRUE_FLOOR) { hi = lo; lo /= 8; }
+    if (!fits(lo)) return lo;   // even the smallest representable zoom can't fit this layout -- best we've got
+    for (let i = 0; i < 60; i++) { const m = (lo + hi) / 2; if (fits(m)) lo = m; else hi = m; }
     return Math.min(1, lo);
   };
   // a gentle rubber band BELOW the floor (David, 2026-10-10, "keep a gentle rubber band below it") -- same shape
@@ -1388,7 +1396,16 @@ function pmMount(el, s, F) {
       // so the whole archive shows its real tiny colors/shapes from the first frame the sheet lands, not just
       // whichever few hundred cells have individually streamed in by then. The base picture layer every other
       // tier below crossfades on top of (drawImage over drawImage, alpha<1 blends with what's already there).
-      if (atlas && atlas.bm0s) {
+      // David, 2026-10-10 (euro corpus expansion): the atlas manifest only ever covers however many paintings it
+      // was BUILT for (atlas.man.n) -- the shelf-packer, scale assumptions, and the search above are all always
+      // run against the FULL current corpus, so a painting added after the atlas was last built (i >= man.n)
+      // has a real cell here but no real tile in any sheet. pmT0Rect/pmT1Rect are pure modular arithmetic with
+      // no bounds check of their own: for such an i they'd silently ALIAS onto some other, unrelated painting's
+      // tile (wrap around the same sheet grid) rather than erroring -- a wrong sprite, not a missing one. Gate
+      // both tiers on `i < atlas.man.n` so a too-new painting always falls through to the flat color swatch
+      // (already drawn above) and tier 2's own per-painting loader (by real index, unaffected by this) instead.
+      const inAtlas = atlas && atlas.man && i < atlas.man.n;
+      if (inAtlas && atlas.bm0s) {
         const ts0 = pmTState(tierH, i), r0 = pmT0Rect(atlas.man, i), bm0 = atlas.bm0s[r0.sheet];
         const a0 = pmFadeAlpha(ts0, "f0", t, 220, RM); if (a0 < 1) fading = true;
         if (bm0) { ctx.globalAlpha = a0; ctx.drawImage(bm0, r0.x, r0.y, r0.s, r0.s, X, Y, w, h); ctx.globalAlpha = 1; }
@@ -1397,7 +1414,7 @@ function pmMount(el, s, F) {
       // request each, cached) once the cell reads as more than a speck -- replaces tier 0 by drawing over it.
       // hysteresis() (defined above for tier 2's own big/baked-square switch) keeps a cell parked near the
       // PM_T1_MIN boundary from flapping between tier 0 and tier 1 the same way it does for tier 2 below.
-      if (atlas) {
+      if (inAtlas) {
         const ts1 = pmTState(tierH, i), g = pmT1Group(atlas.man, i);
         if (hysteresis(ts1, "t1On", b.d / PM_T1_MIN, .75)) {
           wantT1.add(g);

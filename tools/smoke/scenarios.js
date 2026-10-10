@@ -2174,8 +2174,14 @@ scenario("pages", "a painter row in Painters who use it opens their page, and al
 // *attached* <img> all the time): the browser has no layout position to judge "near the viewport" against, so
 // the fetch never starts and the row is stuck on its swatch placeholder forever. This walks every row on a
 // color with several famous/typical-painting fallbacks and asserts each one resolves to a real image.
+// David, 2026-10-10 (euro corpus expansion): "Tawny orange" used to have >= 4 qualifying painters; the grown
+// corpus's recomputed lift (data/analysis/color-artists.json) now gives it only one, so the "several painter
+// rows" wait would (correctly, per the data) never reach 4 -- not a resolution bug, just a stale fixture color.
+// "Black brown" still has 5 painters here, none with a Wikidata portrait (all five exercise the famous/typical
+// fallback this scenario exists to check), so it keeps the original intent without hardcoding a count that
+// drifts with the corpus.
 scenario("pages", "every painter avatar (portrait or famous/typical-painting fallback) resolves to a real image, same size", async t => {
-  await H.openPage(t, "#/name/tawny-orange", "Tawny orange");
+  await H.openPage(t, "#/name/black-brown", "Black brown");
   const paint = await t.waitFor(() => t.$(".rp-paint"), 8000, "the Paintings section");
   const rows = await t.waitFor(() => { const r = t.$$(".rc-painter[data-awpainter]", paint); return r.length >= 4 ? r : null; }, 20000, "several painter rows");
   await t.waitFor(() => t.$$(".rc-painter-port.wait", paint).length === 0, 15000, "every painter avatar to resolve off its wait placeholder");
@@ -5545,6 +5551,12 @@ scenario("paintmap", "cell overlap stays subtle (not runaway) at 3 zoom levels, 
   t.expect(rarePainter > 0, "couldn't find a painter with a small handful of works to test the sparse case");
   await t.open(`#/paintings/map?arr=color&p=${t.ev(`XBF.meta.artists[${rarePainter} - 1][1]`)}`, { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 0 && t.w.PM_CTRL.count <= 6, 20000, "the sparse filtered map to lay out");
+  // David, 2026-10-10 (euro corpus expansion exposed this): a painter with only 2-3 works can resolve, lay out
+  // and still not have had a real animation frame yet by this point -- the same rAF/virtual-clock gap
+  // _qaForceDraw's own comment documents elsewhere in this file. A bigger (4+ result) sparse set used to mask
+  // this because waitFor's own polling loop (tick()+sleep(25)) happened to straddle a real frame often enough;
+  // it isn't reliable, so force one directly instead of hoping.
+  t.ev("PM_CTRL._qaForceDraw()");
   checkOverlap(`a sparse (${t.w.PM_CTRL.count}-result) filter`);
   // fit-to-view: a small set shouldn't float tiny in the middle -- the biggest drawn cell should fill a
   // meaningful share of the screen, not sit at a flat default zoom meant for a dense set
@@ -5597,12 +5609,16 @@ scenario("paintmap", "tier 2 (the per-painting loader) is gated to close-ups onl
 scenario("paintmap", "tier 0 (the shared atlas sheet) covers the whole default view, tier 1 loads on zoom", async t => {
   const src = await fetch("/js/paintmap.js").then(r => r.text());
   // the tier-0 drawImage must run for every drawn cell unconditionally (gated only on PM_ATLAS/bm0 existing, not
-  // on any further per-cell async state) -- that's what makes "one request covers the whole view" true at all
+  // on any further per-cell ASYNC state) -- that's what makes "one request covers the whole view" true at all
   // 2026-10-10: tier 0 is now several <=2048px sheets (iOS/WebKit decode-size safety -- tools/paintmap_atlas.py),
   // so the drawImage is gated on THIS CELL's own sheet bitmap (bm0) rather than one shared PM_ATLAS.bm0 -- still
   // unconditional in the sense that matters (no further per-cell async wait once PM_ATLAS itself is ready, since
   // every sheet in bm0s resolves together in one Promise.all before PM_ATLAS is ever set)
-  const t0Block = (src.match(/if \(atlas && atlas\.bm0s\) \{[\s\S]*?\n      \}/) || [""])[0];
+  // 2026-10-10 (euro corpus expansion): also gated on `inAtlas` (i < atlas.man.n) now -- a SYNCHRONOUS bounds
+  // check, not an async wait, so it doesn't reintroduce the per-cell timing gap this comment is about. Needed
+  // because the manifest only ever covers however many paintings it was built for; without it, a painting added
+  // after the atlas's last build would alias onto some unrelated painting's tile instead of falling back.
+  const t0Block = (src.match(/if \(inAtlas && atlas\.bm0s\) \{[\s\S]*?\n      \}/) || [""])[0];
   t.expect(t0Block && /ctx\.drawImage\(bm0,/.test(t0Block), "couldn't find tier 0's per-cell drawImage -- check it hasn't grown an extra per-cell gate");
   const manifestExists = await fetch("/data/paintmap/manifest.json", { cache: "no-store" }).then(r => r.ok).catch(() => false);
   if (!manifestExists) { t.notes.push("data/paintmap/manifest.json not present in this checkout -- skipped the live load-time check, static check only"); return; }
