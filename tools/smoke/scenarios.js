@@ -1440,11 +1440,10 @@ scenario("train", "every entry on the Train menu opens something (nothing locked
   t.notes.push(`${n} Train entries and ${d} drills opened`);
 });
 
-// David, 2026-10-09 ("spot the difference seems too complex"): one tap from the Train shelf lands on the board
-// (For you, adaptive) -- no setup screen first, for a first-timer or a returning player. The old Classic/Shuffle/
-// Choose/names-on-tiles/session-length setup now lives behind a small Customize icon (js/games/oo-ui.js
-// ooCustomizeSheet), never gating round one. The play screen itself shows only the board, one instruction and a
-// quiet progress indicator; the end-of-session screen is one number, one sentence, then Details.
+// David, 2026-10-10 ("very simple, always adapting"): one tap from the Train shelf lands straight on a 3 x 3
+// board -- no setup, no journey map, no level picker, no customize sheet. Arcade (a timer, three lives) is the
+// default; Zen is one small pill, not a menu. A miss reveals both colors; three misses in Arcade ends the run on
+// the three-bar end screen, which offers Play again / Keep going, never a map.
 const ooTapRound = async t => {
   await t.waitFor(".oo-board .oo-t", 6000, "the board");
   t.expect(t.$$(".oo-board .oo-t").length >= 9, `${t.$$(".oo-board .oo-t").length} tiles`);
@@ -1453,46 +1452,57 @@ const ooTapRound = async t => {
   t.expect(t.$("#oostage").innerHTML !== first || t.$(".result") || t.$("#oofoot").innerText.length > 5, "tapping a tile changed nothing");
   let taps = 1;
   for (let i = 0; i < 60 && !t.$(".result"); i++) {
-    const b = t.$("[data-next]") || t.$("[data-w]") || t.$("[data-k]:not(:disabled)") || t.$(".oo-board .oo-t:not(.ring):not(.miss):not(.sel):not(:disabled)");
+    const b = t.$("[data-next]") || t.$(".oo-board .oo-t:not(.ring):not(.miss):not(:disabled)");
     if (b) { await t.click(b, { force: true, wait: 400 }); taps++; } else await t.sleep(300);
   }
-  await t.waitFor(".result", 6000, "the station result screen");
-  t.expect(t.$(".result").innerText.length > 40, "the result screen is empty");
+  await t.waitFor(".result", 6000, "the end screen");
+  t.expect(t.$(".result").innerText.length > 40, "the end screen is empty");
   return taps;
 };
-scenario("train", "Odd one out: one tap from the shelf to the board, then a whole round", async t => {
+scenario("train", "Odd one out: one tap from the shelf to the board, then a whole run", async t => {
   await t.open("#shot=gx:home", { settle: 600 });
   const st = await t.waitFor("[data-oo-map]", 6000, "the Odd one out shelf");
   await t.click(st, { wait: 700 });
-  t.expect(!t.$("[data-play]"), "a first tap on the shelf should land on the board, not a setup screen");
+  t.expect(!t.$("[data-play]") && !t.$(".oo-pk") && !t.$(".oo-sl"), "a first tap on the shelf should land on the board, not a setup screen");
+  t.expect(t.$(".oo-hearts") && t.$$(".oo-hearts i").length === 3, "Arcade should show three lives");
+  t.expect(/arcade/i.test(t.text(".oo-zenpill")), "the header should offer a Zen pill, defaulting to Arcade");
   const taps = await ooTapRound(t);
-  t.notes.push(`${taps} taps to the result (first-timer, direct entry)`);
-  // a returning player: back to Train, tap the shelf again -- still straight to the board, not the ladder/map
-  await t.click("[data-map]", { wait: 500 });
-  await t.waitFor(".oo-map [data-close]", 6000, "the ladder map");
-  await t.click(".oo-map [data-close]", { wait: 500 });
-  const st2 = await t.waitFor("[data-oo-map]", 6000, "the Odd one out shelf again");
-  await t.click(st2, { wait: 700 });
-  t.expect(!t.$("[data-play]"), "a returning player should also land on the board in one tap");
+  t.notes.push(`${taps} taps to the end screen (first-timer, direct entry, Arcade's three lives)`);
+  t.expect(!t.$(".result [data-map]") && t.$(".result [data-again]") && t.$(".result [data-keep]"), "the end screen should offer Play again / Keep going, not a map");
+  t.expect(t.$$(".oo-ebar").length === 3, "the end screen should show three bars: hue, saturation, value");
+  // a returning player: back to Train, tap the shelf again -- still straight to the board, never a map
+  await t.click(".result [data-again]", { wait: 500 });
   await t.waitFor(".oo-board .oo-t", 6000, "the board, second time");
 });
 
-scenario("train", "Odd one out: Customize is one sheet behind a small icon, not shown before round one", async t => {
-  await t.open("#shot=gx:oo:lv-1", { settle: 600 });
-  await t.waitFor(".oo-board .oo-t", 6000, "level 1's board");
-  t.expect(!t.$(".oo-pk, .oo-sl"), "setup controls should not sit on the play screen itself");
-  const tune = await t.waitFor("[data-tune]", 4000, "the Customize icon");
-  await t.click(tune, { wait: 500 });
-  await t.waitFor(".cx-sh-head h3", 4000, "the Customize sheet");
-  t.expect(/customize/i.test(t.text(".cx-sh-head h3")), "the sheet should say Customize");
-  t.expect(t.$$("[data-len]").length === 3, "session length should offer Short, Standard and Long");
-  await t.click('[data-len="15"]', { wait: 400 });
-  t.expect(t.$('[data-len="15"]').classList.contains("on"), "Short did not get selected");
-  await t.click('[data-names="off"]', { wait: 400 });
-  t.expect(t.$('[data-names="off"]').classList.contains("on"), "Names off did not get selected");
-  await t.click("[data-done]", { wait: 500 });
-  t.expect(!t.$(".cx-sh-head h3"), "the sheet should close");
-  await t.waitFor(".oo-board .oo-t", 4000, "the board is still there after closing Customize");
+scenario("train", "Odd one out: Zen is one pill (no timer, no lives), a palette round, a 2-odd round, a miss", async t => {
+  await t.open("#shot=gx:oo:zen", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a Zen board");
+  t.expect(!t.$(".oo-hearts") && !t.$(".oo-tlimit"), "Zen should show no lives and no timer");
+  t.expect(t.$(".oo-ztally"), "Zen should show a quiet running tally");
+  t.expect(t.$(".oo-zenpill.on") && /zen/i.test(t.text(".oo-zenpill")), "the Zen pill should read on and say Zen");
+
+  await t.open("#shot=gx:oo:palette", { settle: 600 });
+  await t.waitFor(".oo-t.oo-pal", 6000, "a palette round");
+  t.expect(t.$$(".oo-t.oo-pal").length === 9, "a palette round should still be a 3 x 3 grid of patterned tiles");
+
+  await t.open("#shot=gx:oo:k2", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a 2-odd round");
+  const k = t.ev("OO_LAST && OO_LAST.ans && OO_LAST.ans.length");
+  t.expect(k === 2, `a k2 round should have two odd tiles, got ${k}`);
+
+  await t.open("#shot=gx:oo:miss", { settle: 1400 });
+  await t.waitFor(".oo-t.ring", 6000, "the odd tile ringed after a miss");
+  t.expect(t.$(".oo-t.miss"), "the tapped (wrong) tile should be marked");
+  t.expect(t.$(".oo-cmp"), "a miss should show both colors side by side");
+});
+
+scenario("train", "Odd one out: the end screen names the day's edge with three bars", async t => {
+  await t.open("#shot=gx:oo:end", { settle: 600 });
+  await t.waitFor(".result", 6000, "the end screen");
+  t.expect(t.$$(".oo-ebar").length === 3, "three bars: hue, saturation, value");
+  t.expect(t.$("h1").innerText.length > 5, "a headline naming the edge");
+  t.expect(t.$(".result [data-again]") && t.$(".result [data-keep]"), "Play again and Keep going should both be offered");
 });
 
 // Gradients (js/games/hue-*.js): the shelf opens the teaching board; swap the two tiles with real taps, then play
@@ -1781,11 +1791,17 @@ scenario("pages", "a long article reads inline (no door) with collapsible chapte
   const chapters = await t.waitFor(() => { const l = t.$$(".cp-page .ar-cs[data-ar-sec]"); return l.length >= 2 ? l : null; }, 10000, "Scarlet's chapters, collapsible and inline on the color page");
   const btns = chapters.map(c => c.querySelector("[data-ar-cs-btn]"));
   t.expect(btns[0].getAttribute("aria-expanded") === "true", "the first chapter should start open");
-  t.expect(btns.slice(1).some(b => b.getAttribute("aria-expanded") === "false"), "every chapter after the first started open -- at least one should start collapsed");
-  const secondBody = t.d.getElementById(btns[1].getAttribute("aria-controls"));
+  // David, 2026-10-10: the first 2-3 chapters (or ~350 words of them) start open, not just the first one --
+  // find the first chapter past that open run, rather than hardcoding "the second chapter".
+  const firstClosedIdx = btns.findIndex(b => b.getAttribute("aria-expanded") === "false");
+  t.expect(firstClosedIdx > 0, "every chapter started open -- at least one should start collapsed");
+  const closedBtn = btns[firstClosedIdx];
+  const secondBody = t.d.getElementById(closedBtn.getAttribute("aria-controls"));
   t.expect(secondBody && secondBody.hidden, "a collapsed chapter's body isn't actually hidden");
-  await t.click(btns[1], { wait: 350 });
-  t.expect(btns[1].getAttribute("aria-expanded") === "true" && !secondBody.hidden, "tapping a collapsed chapter's heading didn't open it");
+  const cont = t.$(".cp-page [data-ar-continue]");
+  t.expect(cont && /Continue reading/.test(t.text(cont)), "no \"Continue reading\" affordance before the first collapsed chapter");
+  await t.click(closedBtn, { wait: 350 });
+  t.expect(closedBtn.getAttribute("aria-expanded") === "true" && !secondBody.hidden, "tapping a collapsed chapter's heading didn't open it");
   t.expect(t.w.location.href.includes("#/color/scarlet"), "tapping a chapter heading navigated away from the color page");
   const expandAll = t.$(".cp-page [data-ar-expand-all]");
   t.expect(expandAll, "no Expand all / Collapse all control");
@@ -2113,8 +2129,11 @@ scenario("pages", "every painting tile on a color page opens its painting: the I
   await t.click("[data-back]", { wait: 600 });
   await t.waitFor(() => H.title(t) === "Ochre Brown", 8000, "Back to return to Ochre Brown from the rail");
 
-  // 2. "In the archive": the hero pin beside "N paintings come close to it" (rcReachSection)
+  // 2. "In the archive": the hero pin beside "N paintings come close to it" (rcReachSection) -- David, 2026-10-10:
+  // the numeric readings now live collapsed in "By the numbers", so open it first.
   paint = await freshPaint();
+  const byNumbers = await t.waitFor(() => t.$(".rp-bynumbers summary", paint), 8000, "the By the numbers disclosure");
+  await t.click(byNumbers, { wait: 300 });
   const archive = await t.waitFor(() => t.$(".rc-reach:not(.rc-reach-none)", paint), 20000, "the In the archive section");
   const hero = await t.waitFor(() => t.$(".rc-reach-pin [data-gi]", archive), 10000, "the archive's closest-painting pin");
   await t.click(hero, { wait: 700 });
@@ -3962,6 +3981,42 @@ scenario("sets", "Pair with on a color page: picker suggests, searches, try-on b
   await SP.lead(t);
   t.expect(t.$$(".sp-fact").length >= 5, "the relationship facts are missing");
 });
+// David, 2026-10-09 (the Pair Picker lane): three bugs in one screenshot of "Pair with…" for Chasseur (an alt
+// name for Phthalo Green) — the ring/sliders didn't update the preview until release, the trying half had a
+// white outline against the anchor half, and the art suggestions were thin. Covers all three plus the new
+// "Painters paired it with" row's honest provenance and its example-paintings info panel.
+scenario("sets", "Pair with…'s ring picker updates the try-on preview live while dragging, with no outline between the halves, and plenty of sourced art suggestions", async t => {
+  SP.placed();
+  await t.open("#/color/phthalo-green", { settle: 800, keepState: true });
+  const btn = await t.waitFor("[data-sx-pair]", 12000, "the Pair with… button");
+  await t.click(btn, { wait: 600 });
+  await t.waitFor(".sheet.sx-sheet .sx-opt", 6000, "the picker's suggestions");
+  // "Painters paired it with": plenty of suggestions (David, 2026-10-09: "a lot more"), every one honestly sourced
+  const artOpts = await t.waitFor(() => { const l = t.$$(".sx-sheet .sx-opt-art"); return l.length >= 12 ? l : null; }, 10000, "at least 12 'Painters paired it with' suggestions for Chasseur/Phthalo Green");
+  t.expect(artOpts.length >= 12, `expected >= 12 art suggestions, got ${artOpts.length}`);
+  t.expect(artOpts.every(b => /seen in \d+ paintings?/.test(t.text(b))), "an art suggestion is missing its honest 'seen in N paintings' provenance");
+  // tapping an art suggestion's ⓘ reveals example paintings (or an honest "none at this closeness"), not a navigation
+  await t.click(artOpts[0].querySelector("[data-sx-info]"), { force: true, wait: 400 });
+  await t.waitFor("[data-sx-art-info]:not([hidden])", 8000, "the example-paintings panel");
+  t.expect(!t.$(".sp-page"), "tapping ⓘ must not navigate away");
+  await t.waitFor(() => /gl-pin|closeness/.test(t.$("[data-sx-art-info]").innerHTML), 8000, "the example-paintings panel never resolved");
+  // the ring picker: opening it tries a color on at once, and every drag tick updates the preview live
+  await t.click(".sx-sheet [data-sx-any]", { force: true, wait: 400 });
+  const sv = await t.waitFor(".sx-sheet .cp-sv", 6000, "the saturation/brightness square");
+  t.expect(t.$(".sx-try-seg.trying"), "opening the ring picker didn't try a color on at once");
+  const r = sv.getBoundingClientRect();
+  const po = (x, y) => ({ bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 91, pointerType: "touch", isPrimary: true, view: t.w });
+  const before = t.$(".sx-try-seg.trying").style.getPropertyValue("--c");
+  sv.dispatchEvent(new t.w.PointerEvent("pointerdown", po(r.left + r.width * .15, r.top + r.height * .15)));
+  sv.dispatchEvent(new t.w.PointerEvent("pointermove", po(r.left + r.width * .88, r.top + r.height * .88)));
+  await t.tick(); await t.sleep(120); await t.tick();
+  const mid = t.$(".sx-try-seg.trying").style.getPropertyValue("--c");
+  t.expect(mid && mid !== before, `dragging the square didn't update the live preview mid-drag (was ${before}, still ${mid})`);
+  sv.dispatchEvent(new t.w.PointerEvent("pointerup", po(r.left + r.width * .88, r.top + r.height * .88)));
+  // no outline/border between the two halves: the only "trying" marker is CSS's small badge, never a box-shadow seam
+  const segShadow = t.ev("getComputedStyle(document.querySelector('.sx-try-seg.trying')).boxShadow");
+  t.expect(!segShadow || segShadow === "none", `the trying half still carries an outline box-shadow: ${segShadow}`);
+});
 // David, 2026-10-09: build a set from the camera (one color after another) or a photo (tap any spot, exact
 // pixel). The camera side feature-detects window.cameraPick, a sibling lane's build; this checks the honest
 // fallback (opens the camera) and the self-contained "From a photo" flow, which must work today either way.
@@ -4975,6 +5030,61 @@ scenario("paintings", "Pick a color arms the eyedropper: drag shows the loupe, r
   t.expect(!t.$(".iso"), "the guessing game opened after releasing an armed drag on the painting");
   t.expect(t.$(".gcr-sheet [data-gcr-open], .gcr-sheet .cp-sheet-primary"), "the readout has no way to open the color's page");
   t.expect(t.$(".gcr-sheet [data-gcr-where]"), "the readout has no \"Where else in this painting\" action");
+});
+// Found live (2026-10-10): js/paintzoom.js's own ".glz-img" never got the crossorigin attribute the painting
+// page's own hero image gets from js/gallery.js's glCORS(), so Look closer's "Pick" tool silently failed to
+// show a loupe or a readout for every museum image, even a genuinely CORS-safe one -- a drag just did nothing,
+// no error, nothing (eydSource's tainted-canvas catch returns null, sampleAndShow returns false). Select never
+// showed this because it probes/reads pixels through its own always-crossOrigin Image (js/segment.js), never
+// through ".glz-img" itself. This exercises the real path end to end with real pointer events.
+scenario("paintings", "Look closer's Pick tool: drag shows the loupe, release opens a plain readout with a hex", async t => {
+  await t.open("#/home", { settle: 300 });
+  t.ev(`window.glCommonsResolve = () => Promise.resolve(location.origin + "/icon-512.png")`);
+  t.ev(`galleryPage(14423, true)`);
+  await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 15000, "the Mona Lisa painting page");
+  await t.waitFor(() => t.$(".gl-hero > span").classList.contains("gl-tap"), 15000, "the picture becomes tappable once the resolved image is armed and readable");
+  await t.click(await t.waitFor("[data-glcloser]", 8000, "the Look closer button"), { wait: 500 });
+  const img = await t.waitFor(".glz-scrim.in .glz-img", 4000, "Look closer's own image");
+  await t.click(await t.waitFor('[data-glzv="pick"]', 4000, "the Pick tool"), { force: true, wait: 300 });
+  t.expect(t.$('[data-glzv="pick"]').classList.contains("on"), "the Pick tool doesn't show armed");
+  const r = img.getBoundingClientRect(), w = t.w;
+  const pt = (x, y, type) => img.dispatchEvent(new w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 11, pointerType: "touch", isPrimary: true, button: 0, view: w }));
+  const cx = r.left + r.width * .5, cy = r.top + r.height * .5;
+  pt(cx, cy, "pointerdown");
+  await t.sleep(80);
+  pt(cx + 10, cy + 6, "pointermove");
+  await t.waitFor(".eyd-loupe", 3000, "the eyedrop loupe while dragging in Look closer");
+  pt(cx + 10, cy + 6, "pointerup");
+  const sheet = await t.waitFor(".gcr-sheet, .sw-sheet", 4000, "the color readout sheet after releasing in Look closer");
+  t.expect(/^#[0-9A-F]{6}$/.test(t.text(".gcr-sheet .mono") || t.text(".sw-sheet .mono")), `the readout has no real hex (${t.text(".gcr-sheet .mono") || t.text(".sw-sheet .mono")})`);
+});
+// Cleveland (and anything else whose host can't be read here) used to just make the "Pick a color" button and
+// Look closer's "Pick" tool quietly vanish or go dead, with nothing explaining why (David's report, "the color
+// picker isn't working"). Both now say so on tap instead -- never a silent dead control.
+scenario("paintings", "an unreadable painting's Pick controls give an honest message instead of silently doing nothing", async t => {
+  await t.open("#/home", { settle: 300 });
+  // Cleveland's real failure mode is a picture that loads and displays completely normally (no crossorigin
+  // attribute is ever set for a host outside GL_CORS_HOSTS, so there's no CORS preflight to fail) -- only the
+  // canvas read at the end of testSample() throws, same as it genuinely does on Cleveland's own photos. The
+  // smoke harness's own --host-resolver-rules sends every external host to NXDOMAIN, which fails the IMAGE
+  // LOAD itself -- a different, noisier failure than Cleveland's -- so this stubs getImageData to throw instead,
+  // on an image (Mona Lisa, mocked to a local same-origin file so it loads instantly and for real) that would
+  // otherwise read fine: the same end state (a visible painting testSample() can't read) without touching the
+  // network block at all.
+  t.ev(`window.__glTaintTest = true; const _gid = CanvasRenderingContext2D.prototype.getImageData; CanvasRenderingContext2D.prototype.getImageData = function (...a) { if (window.__glTaintTest) throw new DOMException("tainted (smoke stub)", "SecurityError"); return _gid.apply(this, a); };`);
+  t.ev(`window.glCommonsResolve = () => Promise.resolve(location.origin + "/icon-512.png")`);
+  t.ev(`galleryPage(14423, true)`);
+  await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 15000, "the Mona Lisa painting page");
+  const btn = await t.waitFor("[data-glpickbtn]", 10000, "the Pick a color button (shown even though this image can't be read)");
+  t.expect(!btn.hidden, "the Pick a color button went silently missing instead of explaining itself");
+  await t.click(btn, { force: true, wait: 300 });
+  await t.waitFor(() => /can.t be read/i.test(t.text(".toast")), 3000, "an honest toast explaining why Pick can't work here");
+  t.expect(!btn.classList.contains("on"), "the Pick button armed anyway, with nothing to actually sample");
+  await t.click(await t.waitFor("[data-glcloser]", 8000, "the Look closer button"), { wait: 500 });
+  await t.waitFor(".glz-scrim.in", 4000, "Look closer");
+  await t.click(await t.waitFor('[data-glzv="pick"]', 4000, "Look closer's Pick tool"), { force: true, wait: 300 });
+  await t.waitFor(() => /can.t be read/i.test(t.text(".toast")), 3000, "Look closer's Pick tool also explains itself instead of a dead drag");
+  t.expect(!t.$('[data-glzv="pick"]').classList.contains("on"), "Look closer's Pick tool armed anyway, with nothing to actually sample");
 });
 // Lane H (design/IMPROVE-2026-10-08/PLAN.md): Across the line clicks. The anchor chip shows the word's own color,
 // a right answer offers the neighbor word, adding it makes a review card due tomorrow, a miss says "In ColorHub's

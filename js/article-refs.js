@@ -175,13 +175,16 @@ function arfPainter(slug) {
     const pal = [], palNames = [], typ = [], shares = [];
     A.clusters.forEach(cl => (cl.colors || []).forEach((n, k) => { const h = arfHex(n); if (h && !pal.includes(h)) { pal.push(h); palNames.push(n); typ.push(cl.typical); shares.push(cl.pct / 100 / Math.max(1, (cl.colors || []).length)); } }));
     if (!pal.length) return null;
-    const base = { kind: "painter", id: slug, name: A.name, sub: [A.country, A.n ? A.n + " paintings" : ""].filter(Boolean).join(" · "), pal, palNames, shares, typ, img: null, credit: null,
-      open: self => awPainter(slug),
+    const base = { kind: "painter", id: slug, name: A.name, sub: [A.country, A.n ? A.n + " paintings" : ""].filter(Boolean).join(" · "), pal, palNames, shares, typ, img: null, credit: null, paintingI: null,
+      // David, 2026-10-10: the figure's picture is really a specific painting (the one below, chosen because it
+      // holds this color best) -- tapping it opens THAT painting's page, never the painter's. The painter still
+      // gets a named link of their own (arfFigHTML's painterLink, wired by data-ar-painter in js/article.js).
+      open: self => base.paintingI != null ? galleryPage(base.paintingI, true, self.h) : awPainter(slug),
       // the picture is the most typical painting of the family of palettes that holds the closest color
       fill: hex => {
         const b = arfBest(hex, pal), pid = b && typ[b.i]; if (!pid) return Promise.resolve();
         const key = "painting:" + pid;
-        return arfFor(key, hex, "light").then(() => ARF_CACHE.get(key)).then(p => p && p.fill ? p.fill().then(() => { base.img = p.img; base.credit = p.credit; }) : null);
+        return arfFor(key, hex, "light").then(() => ARF_CACHE.get(key)).then(p => { if (!p) return null; base.paintingI = p.i != null ? p.i : null; return p.fill ? p.fill().then(() => { base.img = p.img; base.credit = p.credit; }) : null; });
       } };
     return base;
   });
@@ -277,11 +280,18 @@ function arfFigHTML(t, self, o) {
   const sub = [word, t.sub].filter(Boolean).join(" · ");
   const near = t.kind === "painting" || !nm || String(nm).toLowerCase() === String(self.n).toLowerCase() ? "" : ` · ${esc(nm)}`;
   const cov = t.kind === "painting" && t.cover != null ? `<span class="ar-fig-c">${esc(arfCoverPhrase(t.cover))}</span>` : "";
-  const aria = `${t.name}${t.sub ? ", " + t.sub : ""}. ${t.pctText} to ${self.n}. Open`;
+  // a painter figure's picture and tap target are really one of their paintings (base.open above opens it, not
+  // the painter), so the aria-label and visible name say "a painting by <painter>", and the painter gets their
+  // own small link under the card, never nested inside the painting's own button (David, 2026-10-10)
+  const isPainter = t.kind === "painter";
+  const openWhat = isPainter ? `A painting by ${t.name}` : t.name;
+  const aria = `${openWhat}${t.sub ? ", " + t.sub : ""}. ${t.pctText} to ${self.n}. Open`;
+  const painterLink = isPainter ? `<button type="button" class="ar-fig-painter" data-ar-painter="${esc(t.id)}">${esc(t.name)}&rsquo;s painter profile</button>` : "";
   return `<figure class="ar-fig${wide ? " ar-wide" : ""}" data-kind="${t.kind}" data-ar-fig="${esc(t.key)}"${o && o.gap ? " data-ar-gap" : ""}>
     <button type="button" class="ar-fig-b" data-ar-ref="${esc(t.key)}" aria-label="${esc(aria)}">${arfPicHTML(t)}
       <span class="ar-fig-tx"><small class="ar-fig-k">${esc(sub)}</small><b class="ar-fig-n">${esc(t.name)}</b>
         <span class="ar-fig-m"><span class="ar-fig-d" aria-hidden="true"><i style="--c:${self.h}"></i><i style="--c:${t.best.h}"></i></span><span>${esc(t.pctText)} to ${esc(self.n)}${near}</span></span>${cov}</span></button>
+    ${painterLink}
     ${arfCreditHTML(t.credit) || (!(t.img && t.img.src) && t.note ? `<figcaption class="ar-fig-cr">${esc(t.note)}</figcaption>` : "")}</figure>`;
 }
 // Where the color sits in a painting: a soft veil over every pixel that is not close to it. Only when the picture can be read
