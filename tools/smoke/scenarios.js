@@ -1735,9 +1735,14 @@ scenario("pages", "the focus view locks background scroll and shows the color's 
   await t.waitFor(".rp-focus.on", 2000, "the focus view");
   t.expect(t.d.documentElement.classList.contains("sheet-open"), "opening the focus view didn't lock the background scroll");
   const lockedY = t.w.scrollY;
-  const name = t.text(".rp-focus .rp-focus-name"), tag = t.text(".rp-focus .rp-focus-tag");
-  t.expect(name === "Teal", `the centered name reads "${name}"`);
+  // David, 2026-10-10: "full-screen color shouldn't show the name in the middle, keep it only in the corner" --
+  // no .rp-focus-name any more, and nothing else should land near the viewport center either.
+  t.expect(!t.$(".rp-focus-name"), "a centered name element still exists in the focus view");
+  const tag = t.text(".rp-focus .rp-focus-tag");
   t.expect(tag.includes("Teal") && /#[0-9A-F]{6}/.test(tag), `the corner tag doesn't show the color's name and hex: "${tag}"`);
+  const cx = t.w.innerWidth / 2, cy = t.w.innerHeight / 2, centerHit = t.d.elementFromPoint(cx, cy);
+  const nearCenterText = centerHit && typeof centerHit.closest === "function" && centerHit.closest(".rp-focus-tag, .cf-band .rp-focus-tag");
+  t.expect(!nearCenterText || !(centerHit.textContent || "").trim(), "a text element sits near the viewport center in the focus view");
   // scrolling or wheeling the page while the focus view is open must not move the real scroll position
   t.w.scrollTo(0, lockedY + 400);
   t.$(".rp-focus").dispatchEvent(new t.w.WheelEvent("wheel", { bubbles: true, cancelable: true, deltaY: 300 }));

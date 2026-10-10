@@ -210,18 +210,19 @@ function colorFocus(colors, opts = {}) {
   ov.style.touchAction = "none";
   ov.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
   if (!multi) {
-    // the single-color case: one full fill, the big centered name (its own fade) plus the quiet corner tag
+    // the single-color case: one full fill, with only the quiet corner tag -- no centered name (David, 2026-10-10:
+    // "full-screen color shouldn't show the name in the middle, keep it only in the corner" -- the color field
+    // itself should read clean, the corner tag is the one label, same as the multi/band case always was below)
     const { name, hex } = colors[0];
     ov.setAttribute("data-ink", ink(hex));
     ov.style.setProperty("--c", hex);
     ov.style.setProperty("--ox", (cx != null ? cx / innerWidth * 100 : 50) + "%");
     ov.style.setProperty("--oy", (cy != null ? cy / innerHeight * 100 : 50) + "%");
-    // the color's own name and hex, quietly in a corner (always on, independent of the big centered name's own
-    // fade -- a museum label, not part of "alone with the color"). David, 2026-10-09: "the color's name is in a
-    // small, ugly font -- not as pretty as before going full screen" -- the app's own display type now, not the
-    // mono code-ish line this used to be: the name in the serif display face at a generous size, the hex quietly
-    // beneath it in the sans, same contrast-aware ink (data-ink, already set above) either way.
-    ov.innerHTML = `<p class="rp-focus-name">${esc(name)}</p><div class="rp-focus-tag"><p class="rp-focus-tag-name">${esc(name)}</p><p class="rp-focus-tag-hex">${esc(String(hex).toUpperCase())}</p></div>`;
+    // the color's own name and hex, quietly in a corner -- a museum label, not part of "alone with the color".
+    // David, 2026-10-09: "the color's name is in a small, ugly font -- not as pretty as before going full screen"
+    // -- the app's own display type (the serif display face at a generous size), the hex quietly beneath it in
+    // the sans, same contrast-aware ink (data-ink, already set above) either way.
+    ov.innerHTML = `<div class="rp-focus-tag"><p class="rp-focus-tag-name">${esc(name)}</p><p class="rp-focus-tag-hex">${esc(String(hex).toUpperCase())}</p></div>`;
   } else {
     // 2+ colors: full-height (or, stacked, full-width) bands, each with its own name + hex in its own corner,
     // by its own contrast -- no single big name makes sense once there's more than one color to look at alone
@@ -231,16 +232,13 @@ function colorFocus(colors, opts = {}) {
   document.body.appendChild(ov);
   RP_FOCUS = ov;
   lockScroll();
-  let dimT = 0, wakeLock = null, dim = false;
-  // the dim-after-a-beat cycle is about the single big centered name only; a multi view has nothing to fade --
-  // its per-band tags are already the "quiet" version, so a tap on it always just closes
-  const schedule = () => { if (multi) return; clearTimeout(dimT); dimT = setTimeout(() => { dim = true; ov.classList.add("dim"); }, 2000); };
+  let wakeLock = null;
   try { if (navigator.wakeLock && navigator.wakeLock.request) navigator.wakeLock.request("screen").then(w => wakeLock = w).catch(() => {}); } catch (e) {}
-  requestAnimationFrame(() => { ov.classList.add("on"); schedule(); });
+  requestAnimationFrame(() => ov.classList.add("on"));
   let closed = false;
   const close = () => {
     if (closed) return; closed = true;
-    clearTimeout(dimT); if (wakeLock) { try { wakeLock.release(); } catch (e) {} }
+    if (wakeLock) { try { wakeLock.release(); } catch (e) {} }
     document.removeEventListener("keydown", onKey2);
     unlockScroll();
     ov.classList.remove("on"); ov.classList.add("closing"); buzz(4);
@@ -257,14 +255,11 @@ function colorFocus(colors, opts = {}) {
   // also restores the scroll lock (unlockScroll), so a navigation that skips the swipe-down/tap close still
   // leaves the next screen free to scroll.
   cleanup.push(close);
-  let sy = 0, sx = 0, dragging = false;
-  ov.addEventListener("pointerdown", e => { sy = e.clientY; sx = e.clientX; dragging = true; });
-  ov.addEventListener("pointerup", e => {
-    if (!dragging) return; dragging = false;
-    if (e.clientY - sy > 70 && Math.abs(e.clientX - sx) < 80) return close();   // swipe down, always returns
-    if (dim) { dim = false; ov.classList.remove("dim"); schedule(); return; }   // tap while dim: just bring the name back
-    close();   // tap while lit (or multi, which has no dim state at all): return to the page
-  });
+  // a tap anywhere, or a swipe down, always returns to the page -- there's no big name to dim/bring back any
+  // more (David, 2026-10-10), so the single-color case now behaves exactly like the multi/band case always did.
+  let dragging = false;
+  ov.addEventListener("pointerdown", () => { dragging = true; });
+  ov.addEventListener("pointerup", () => { if (dragging) { dragging = false; close(); } });
 }
 // the single-color entry point (the cover's own tap): rpCoverLike above, and the design-review shot hook
 // (js/boot.js #shot=rpfocus:<name>@<hex>), both still call this directly
