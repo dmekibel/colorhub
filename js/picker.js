@@ -77,7 +77,9 @@ function colorPicker(host, opts) {
   wheel.addEventListener("pointerdown", e => {
     const r = wheel.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
     const onSv = sv.contains(e.target) || e.target === sv;
-    wheel.setPointerCapture(e.pointerId);
+    // a synthetic pointer (no real active session, e.g. a test harness's dispatched PointerEvent) can't be
+    // captured; the drag still works fine without it (onpointermove below keeps listening on the wheel itself).
+    try { wheel.setPointerCapture(e.pointerId); } catch (err) {}
     const move = ev => {
       if (onSv) { const q = sv.getBoundingClientRect(); s = clamp((ev.clientX - q.left) / q.width, 0, 1); v = 1 - clamp((ev.clientY - q.top) / q.height, 0, 1); }
       else { h = (Math.atan2(ev.clientY - cy, ev.clientX - cx) * 180 / Math.PI + 90 + 360) % 360; }
