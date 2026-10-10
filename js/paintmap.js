@@ -13,8 +13,10 @@
 //   painter  one block per painter, the earliest painters first; inside a block, by date
 //   similar  one painting in the middle; the rest spiral out by how close their colors are (js/gallery.js glSimilar's
 //            matched-palette distance for the nearest 400, the average-color distance for the rest)
-// Filters are js/browse.js's (xbRun: color, years, painter, movement, country, museum), plus "your favorites"
-// (js/favs.js S.favArt), with live counts. The address carries all of it: #/paintings/map?arr=time&co=France&y0=1880&y1=1889
+// Filters are this file's own pmRun() -- color (multi, any/all, hue family, lightness), a year range (presets +
+// a decade histogram), multi-select country/region, movement, museum and painter -- plus "your favorites"
+// (js/favs.js S.favArt), with live per-value counts. AND across facets, OR within one. The address carries all
+// of it: #/paintings/map?arr=time&co=France,Italy&region=europe&y0=1850&y1=1900&hb=6
 //
 // Speed: one canvas; per frame only the cells inside the lens radius are visited (the layout is a dense grid, so
 // that's a rectangle of lookups, never a pass over every painting). Thumbnails load only for tiles on screen and big
@@ -118,8 +120,105 @@ function pmThumb(i) {
 const pmDom = i => { let b = 0; for (let j = 1; j < 6; j++) if (GAL.sh[i * 6 + j] > GAL.sh[i * 6 + b]) b = j; return b; };
 const pmHex = i => glHex(i, pmDom(i));
 
+// ---------- the richer filter (David, 2026-10-10: "select multiple things -- a color range, a time range,
+// multiple countries, or e.g. only Europe") ----------
+// js/browse.js's xbFresh()/xbRun() are Explore's own filter (single-value painter/mv/co/mus, "closest of any
+// hex") and are shared with js/browse-ui.js's whole screen -- widening THEIR shape to arrays would ripple
+// through every chip/button there that reads f.co etc as one number. So paintmap keeps f's EXISTING fields at
+// their "off" default (0 / -1) and adds its own array-shaped fields beside them for multi-select; pmRun() below
+// (not xbRun) is paintmap's own single-pass query, AND across every facet below, OR within each one -- the
+// legacy singles still work for any old link/caller (pmParse seeds a Set from them when nothing richer was
+// given, so a painting page's existing data-pmap="arr=color&p=<slug>" keeps working unchanged).
+//   coSet      country indices (1-based into F.meta.countries, xbFresh's own convention) -- OR'd with every
+//              country inside f.region, if one is set (a region chip is a bulk toggle INTO this same set, not
+//              a separate dimension -- see pmRegionToggle())
+//   region     the last region chip tapped, purely so pmActiveChips() can show "Europe" instead of 20 country
+//              names; matching itself only ever looks at coSet (already unioned in when the chip was tapped)
+//   painterSet/mvSet/musSet   multi-select, same OR-within-facet idea, for Painter/Movement/Museum
+//   colorMode  "any" (default: a painting counts if it's close to ANY picked hex) or "all" (close to EVERY one)
+//   hueBand    one of XB_FAMS's 9 family indices (0=Reds..8=Greys), matched against a painting's DOMINANT swatch
+//   l0/l1      a mean-lightness range (0-100, dark<->light), independent of any hex pick
+const pmFilterFresh = () => ({ ...xbFresh(), coSet: [], region: null, painterSet: [], mvSet: [], musSet: [], colorMode: "any", hueBand: null, l0: null, l1: null });
+// Western Europe / Northern Europe / Italy & Spain are deliberately tighter than "Europe" (which is every
+// European country in the dataset) -- each is its own bulk-select, not a strict partition of the broad one.
+const PM_REGIONS = [
+  ["europe", "Europe", ["Austria", "Belgium", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Netherlands", "Norway", "Poland", "Portugal", "Russia", "Spain", "Sweden", "Switzerland", "United Kingdom"]],
+  ["westEurope", "Western Europe", ["France", "Germany", "Belgium", "Netherlands", "Switzerland", "Austria", "United Kingdom", "Ireland"]],
+  ["northEurope", "Northern Europe", ["Denmark", "Norway", "Sweden", "Finland", "Estonia"]],
+  ["italySpain", "Italy & Spain", ["Italy", "Spain"]],
+  ["americas", "Americas", ["Brazil", "Canada", "Cuba", "Guatemala", "Mexico", "Peru", "United States"]],
+  ["eastAsia", "East Asia", ["China", "Japan", "Korea", "Mongolia", "Tibet"]],
+  ["southAsia", "South Asia", ["India", "Nepal", "Pakistan", "Sri Lanka", "Afghanistan"]],
+  ["middleEast", "Middle East", ["Egypt", "Iran", "Turkey", "Uzbekistan"]],
+];
+function pmRegionCountries(key, F) {
+  const r = PM_REGIONS.find(x => x[0] === key); if (!r) return [];
+  return r[2].map(name => F.meta.countries.indexOf(name) + 1).filter(v => v > 0);
+}
+// Renaissance/Baroque/1800s/Modern (David, 2026-10-10's own examples) -- the four quick presets for the Time
+// range. Loosely art-historical, not a strict textbook split (this dataset spans far more than Western art).
+const PM_TIME_PRESETS = [["ren", "Renaissance", 1400, 1600], ["baroque", "Baroque", 1600, 1750], ["1800s", "1800s", 1800, 1899], ["modern", "Modern", 1860, 1970]];
+// a painting's own dominant-swatch hue family (reuses XB_FAMS/xbFamOf's 9-way split, the same one Explore's
+// color chips already classify every painting by -- no new taxonomy, same "blues" a user already knows)
+const pmHueBandOf = (i, F) => F.fam[i * 6 + F.dom[i]];
+// per-hex, per-painting nearest ΔE2000 across its 6 swatches -- cached per hex (not per hex-LIST, unlike
+// js/browse.js's xbDE) because colorMode "all" needs each hex's OWN distance, not just the nearest-of-any
+let PM_DE1 = new Map();
+function pmDE1(F, hex) {
+  let e = PM_DE1.get(hex); if (e && e.N === F.N) return e.de;
+  if (PM_DE1.size > 24) PM_DE1.clear();   // a session never picks more than a handful of distinct hexes at once
+  const G = F.G, M = F.N * 6, de = new Float32Array(M).fill(1e3), Lb = G.lab, [tL, ta, tb] = lab(hex);
+  for (let m = 0; m < M; m++) { const o = m * 3, dL = Lb[o] - tL; if (dL > 28 || dL < -28) continue; const d = glDE(tL, ta, tb, Lb[o], Lb[o + 1], Lb[o + 2]); if (d < de[m]) de[m] = d; }
+  e = { N: F.N, de }; PM_DE1.set(hex, e); return de;
+}
+// the one query pass: AND across facets, OR within one (every *Set is OR'd internally, then every facet ANDs
+// with every other) -- same bitmask-exclusion trick js/browse.js's xbRun uses for live per-value counts, just
+// extended to multi-select dims and the two new ones (hue band, lightness)
+function pmRun(s, F) {
+  const f = s.f, G = F.G, N = F.N;
+  const coSet = f.coSet && f.coSet.length ? new Set(f.coSet) : (f.co ? new Set([f.co]) : null);
+  const painterSet = f.painterSet && f.painterSet.length ? new Set(f.painterSet) : (f.painter ? new Set([f.painter]) : null);
+  const mvSet = f.mvSet && f.mvSet.length ? new Set(f.mvSet) : (f.mv ? new Set([f.mv]) : null);
+  const musSet = f.musSet && f.musSet.length ? new Set(f.musSet) : (f.mus >= 0 ? new Set([f.mus]) : null);
+  const hasHex = f.hexes && f.hexes.length, mode = f.colorMode || "any";
+  const perHex = hasHex ? f.hexes.map(h => pmDE1(F, h)) : null;
+  const tol = f.tol;
+  const when = f.y0 != null || f.y1 != null, y0 = f.y0 == null ? -1e5 : f.y0, y1 = f.y1 == null ? 1e5 : f.y1;
+  const hasL = f.l0 != null || f.l1 != null, l0 = f.l0 == null ? -1e5 : f.l0, l1 = f.l1 == null ? 1e5 : f.l1;
+  const counts = { when: new Int32Array(XB_NDEC + 1), painter: new Int32Array(F.meta.artists.length + 1), mv: new Int32Array(F.meta.movements.length + 1), co: new Int32Array(F.meta.countries.length + 1),
+    mus: new Int32Array(G.src.length), hueBand: new Int32Array(9), color: 0, lightness: 0 };
+  const out = new Int32Array(N); let n = 0;
+  for (let i = 0; i < N; i++) {
+    let fail = 0;
+    if (hasHex) {
+      let ok;
+      if (mode === "all") { ok = true; for (const de of perHex) { let near = 1e3; for (let j = 0; j < 6; j++) { const d = de[i * 6 + j]; if (d < near) near = d; } if (near > tol) { ok = false; break; } } }
+      else { let near = 1e3; for (const de of perHex) for (let j = 0; j < 6; j++) { const d = de[i * 6 + j]; if (d < near) near = d; } ok = near <= tol; }
+      if (!ok) fail |= 1;
+    }
+    if (when) { const y = G.year[i]; if (y === GL_UNDATED || y < y0 || y > y1) fail |= 2; }
+    if (painterSet && !painterSet.has(F.artist[i])) fail |= 4;
+    if (mvSet && !mvSet.has(F.mv[i])) fail |= 8;
+    if (coSet && !coSet.has(F.country[i])) fail |= 16;
+    if (musSet && !musSet.has(G.mus[i])) fail |= 32;
+    if (f.hueBand != null && pmHueBandOf(i, F) !== f.hueBand) fail |= 64;
+    if (hasL) { const L = G.mean[i * 3]; if (L < l0 || L > l1) fail |= 128; }
+    if (fail === 0) out[n++] = i;
+    else if (fail & (fail - 1)) continue;
+    if (!(fail & ~1)) counts.color++;
+    if (!(fail & ~2)) { const d = F.dec[i]; counts.when[d < 0 ? XB_NDEC : d]++; }
+    if (!(fail & ~4)) counts.painter[F.artist[i]]++;
+    if (!(fail & ~8)) counts.mv[F.mv[i]]++;
+    if (!(fail & ~16)) counts.co[F.country[i]]++;
+    if (!(fail & ~32)) counts.mus[G.mus[i]]++;
+    if (!(fail & ~64)) counts.hueBand[pmHueBandOf(i, F)]++;
+    if (!(fail & ~128)) counts.lightness++;
+  }
+  return { list: out.slice(0, n), counts };
+}
+
 // ---------- the spec: what to show and how (the address's query) ----------
-const pmFresh = () => ({ arr: "color", f: xbFresh(), seed: -1, fav: 0, place: "avg", upToYear: null });
+const pmFresh = () => ({ arr: "color", f: pmFilterFresh(), seed: -1, fav: 0, place: "avg", upToYear: null, mag: null });
 // David, 2026-10-09: "a time scrubber with play (paintings appear decade by decade)" -- the dataset's own real
 // year span (excluding undated), computed once and cached. The scrubber's slider runs across this, not a guess.
 let PM_YEAR_RANGE = null;
@@ -135,12 +234,18 @@ function pmParse(q, F) {
   const pl = p.get("pl"); if (PM_PLACE.some(x => x[0] === pl)) s.place = pl;
   const f = s.f, num = k => { const v = p.get(k); return v != null && v !== "" && isFinite(+v) ? +v : null; };
   const uy = num("uy"); if (uy != null) s.upToYear = uy;
-  if (p.get("c")) { f.hexes = p.get("c").split(",").filter(h => /^[0-9a-f]{6}$/i.test(h)).map(h => "#" + h.toUpperCase()); f.name = f.hexes.length ? nameOf(f.hexes[0]).text : ""; f.tol = num("t") || 8; f.cover = num("m") != null ? num("m") : 2; }
+  const mg = num("mag"); if (mg != null) s.mag = clamp(mg, 0, 1);
+  if (p.get("c")) { f.hexes = p.get("c").split(",").filter(h => /^[0-9a-f]{6}$/i.test(h)).map(h => "#" + h.toUpperCase()); f.name = f.hexes.length === 1 ? nameOf(f.hexes[0]).text : ""; f.tol = num("t") || 8; f.cover = num("m") != null ? num("m") : 2; }
+  if (p.get("cm") === "all") f.colorMode = "all";
   f.y0 = num("y0"); f.y1 = num("y1");
-  if (p.get("p")) f.painter = F.slugIx.get(p.get("p")) || 0;
+  const hb = num("hb"); if (hb != null && hb >= 0 && hb < 9) f.hueBand = hb;
+  const l0 = num("l0"), l1 = num("l1"); if (l0 != null) f.l0 = l0; if (l1 != null) f.l1 = l1;
   const ix = (list, v) => v ? list.findIndex(x => routeSlug(x) === routeSlug(v)) + 1 : 0;
-  f.co = ix(F.meta.countries, p.get("co")); f.mv = ix(F.meta.movements, p.get("mv"));
-  if (p.get("mus")) f.mus = F.G.src.findIndex(x => x.k === p.get("mus"));
+  const ixSet = (list, csv) => csv ? csv.split(",").map(v => ix(list, v)).filter(v => v > 0) : [];
+  if (p.get("p")) f.painterSet = p.get("p").split(",").map(sl => F.slugIx.get(sl) || 0).filter(v => v > 0);
+  f.coSet = ixSet(F.meta.countries, p.get("co")); f.mvSet = ixSet(F.meta.movements, p.get("mv"));
+  const rg = p.get("region"); if (rg && PM_REGIONS.some(r => r[0] === rg)) { f.region = rg; pmRegionCountries(rg, F).forEach(v => { if (!f.coSet.includes(v)) f.coSet.push(v); }); }
+  if (p.get("mus")) f.musSet = p.get("mus").split(",").map(k => F.G.src.findIndex(x => x.k === k)).filter(v => v >= 0);
   const sd = num("seed"); if (sd != null && sd >= 0 && sd < F.N) s.seed = sd;
   if (p.get("fav") === "1") s.fav = 1;
   if (PM_NEEDS_SEED.has(s.arr) && s.seed < 0) s.arr = "color";
@@ -149,15 +254,20 @@ function pmParse(q, F) {
 function pmQS(s, F) {
   const f = s.f, out = [["arr", s.arr]];
   if (s.place && s.place !== "avg") out.push(["pl", s.place]);
-  if (f.hexes.length) { out.push(["c", f.hexes.map(h => h.slice(1).toLowerCase()).join(",")], ["t", f.tol], ["m", f.cover]); }
+  if (f.hexes.length) { out.push(["c", f.hexes.map(h => h.slice(1).toLowerCase()).join(",")], ["t", f.tol], ["m", f.cover]); if (f.hexes.length > 1 && f.colorMode === "all") out.push(["cm", "all"]); }
   if (f.y0 != null) out.push(["y0", f.y0]); if (f.y1 != null) out.push(["y1", f.y1]);
-  if (f.painter && F) out.push(["p", F.meta.artists[f.painter - 1][1]]);
-  if (f.co && F) out.push(["co", F.meta.countries[f.co - 1]]);
-  if (f.mv && F) out.push(["mv", F.meta.movements[f.mv - 1]]);
-  if (f.mus >= 0 && F) out.push(["mus", F.G.src[f.mus].k]);
+  if (f.hueBand != null) out.push(["hb", f.hueBand]);
+  if (f.l0 != null) out.push(["l0", f.l0]); if (f.l1 != null) out.push(["l1", f.l1]);
+  if (f.painterSet && f.painterSet.length && F) out.push(["p", f.painterSet.map(v => F.meta.artists[v - 1][1]).join(",")]);
+  if (f.region) out.push(["region", f.region]);
+  const extraCo = f.region ? (f.coSet || []).filter(v => !pmRegionCountries(f.region, F).includes(v)) : (f.coSet || []);
+  if (extraCo.length && F) out.push(["co", extraCo.map(v => F.meta.countries[v - 1]).join(",")]);
+  if (f.mvSet && f.mvSet.length && F) out.push(["mv", f.mvSet.map(v => F.meta.movements[v - 1]).join(",")]);
+  if (f.musSet && f.musSet.length && F) out.push(["mus", f.musSet.map(v => F.G.src[v].k).join(",")]);
   if (PM_NEEDS_SEED.has(s.arr) && s.seed >= 0) out.push(["seed", s.seed]);
   if (s.fav) out.push(["fav", 1]);
   if (s.upToYear != null) out.push(["uy", s.upToYear]);
+  if (s.mag != null) out.push(["mag", s.mag]);
   return out.map(([k, v]) => k + "=" + encodeURIComponent(v)).join("&");
 }
 // router.js ROUTED: the address and title of an open map
@@ -165,19 +275,48 @@ function pmRouteOf(spec) {
   const q = typeof spec === "string" ? spec.replace(/^\?/, "") : XBF ? pmQS(spec, XBF) : "";
   return { path: "paintings/map" + (q ? "?" + q : ""), title: "Painting map" };
 }
+// a region chip toggles ALL its countries into or out of coSet at once (David, 2026-10-10: "region groups that
+// select many at once") -- "on" if every one of them is already in, "off" (remove all of them) otherwise, so
+// re-tapping an active region cleanly undoes it rather than just adding duplicates.
+function pmRegionToggle(f, key, F) {
+  const countries = pmRegionCountries(key, F), set = new Set(f.coSet || []);
+  const allIn = countries.length > 0 && countries.every(v => set.has(v));
+  if (allIn) { countries.forEach(v => set.delete(v)); f.region = f.region === key ? null : f.region; }
+  else { countries.forEach(v => set.add(v)); f.region = key; }
+  f.coSet = [...set];
+}
+const XB_HUE_WORDS = XB_FAMS;   // "Reds".."Greys" (js/browse.js) -- the same 9-way split a user already knows
 // the filters in words: "France · 1880s · Monet"
 function pmWords(s, F) {
-  const c = xbChips(F, s.f).map(x => x.dim === "color" ? x.text : x.text);
-  if (s.fav) c.unshift("Your favorites");
+  const c = pmActiveChips(s, F).map(x => x.text);
   return c;
 }
-// the active filters as removable chips (David, 2026-10-09: filter-by-example's companion -- wherever a filter
-// came from, a chip here undoes exactly that one dimension). xbChips already knows every dimension's current
-// value and label; xbWithout already knows how to clear exactly one. "Your favorites" isn't an xbRun filter at
-// all (s.fav lives beside s.f), so it's synthesized as its own chip with dim "fav".
+// the active filters as removable chips (David, 2026-10-09: filter-by-example's companion; 2026-10-10: now one
+// COMPACT chip per facet even when it holds several values -- "Europe" rather than 20 country names, "3
+// painters" rather than 3 chips -- so "Europe · 1850-1900 · Blues ×" stays readable). dim here names the
+// FACET (place/when/color/painter/mv/mus/fav), not one value inside it; clearing a chip clears the whole facet.
 function pmActiveChips(s, F) {
-  const c = xbChips(F, s.f).map(x => ({ dim: x.dim, text: x.text }));
-  if (s.fav) c.unshift({ dim: "fav", text: "Your favorites" });
+  const f = s.f, c = [];
+  if (s.fav) c.push({ dim: "fav", text: "Your favorites" });
+  if (f.coSet && f.coSet.length) {
+    const region = PM_REGIONS.find(r => r[0] === f.region);
+    const exact = region && pmRegionCountries(f.region, F).length === f.coSet.length && pmRegionCountries(f.region, F).every(v => f.coSet.includes(v));
+    const names = f.coSet.map(v => F.meta.countries[v - 1]);
+    c.push({ dim: "co", text: exact ? region[1] : names.length === 1 ? names[0] : names.length <= 2 ? names.join(", ") : `${names[0]} +${names.length - 1}` });
+  }
+  if (f.y0 != null || f.y1 != null) {
+    const preset = PM_TIME_PRESETS.find(p => p[2] === f.y0 && p[3] === f.y1);
+    c.push({ dim: "when", text: preset ? preset[1] : `${f.y0 != null ? f.y0 : "…"}–${f.y1 != null ? f.y1 : "…"}` });
+  }
+  if (f.hexes.length) {
+    const names = f.hexes.map(h => nameOf(h).text);
+    c.push({ dim: "color", text: names.length === 1 ? names[0] : `${names.length} colors (${f.colorMode === "all" ? "all" : "any"})` });
+  }
+  if (f.hueBand != null) c.push({ dim: "hueBand", text: XB_HUE_WORDS[f.hueBand] });
+  if (f.l0 != null || f.l1 != null) c.push({ dim: "l", text: f.l0 != null && f.l1 != null ? `L ${f.l0}–${f.l1}` : f.l0 != null ? `Lighter than ${f.l0}` : `Darker than ${f.l1}` });
+  if (f.painterSet && f.painterSet.length) c.push({ dim: "painter", text: f.painterSet.length === 1 ? xbArtistName(F, f.painterSet[0]) : `${f.painterSet.length} painters` });
+  if (f.mvSet && f.mvSet.length) c.push({ dim: "mv", text: f.mvSet.length === 1 ? F.meta.movements[f.mvSet[0] - 1] : `${f.mvSet.length} movements` });
+  if (f.musSet && f.musSet.length) c.push({ dim: "mus", text: f.musSet.length === 1 ? F.G.src[f.musSet[0]].short : `${f.musSet.length} museums` });
   return c;
 }
 // the card's own three facets (David, 2026-10-09, the minimalist pass -- "filtering by example" stays, pared to
@@ -194,19 +333,32 @@ function pmFacetsOf(i, F) {
   if (F.country[i]) out.push({ dim: "co", val: F.country[i], label: "Same place" });
   return out;
 }
-// apply one facet to the filter spec in place (mirrors xbWithout's per-dim shape, the "set" half)
+// apply one facet to the filter spec in place -- a quick "narrow to exactly this" (so it REPLACES the facet's
+// whole set, the one place in this file multi-select is deliberately overridden rather than added to)
 function pmFacetApply(f, dim, val) {
-  if (dim === "painter") f.painter = val;
-  else if (dim === "co") f.co = val;
-  else if (dim === "mv") f.mv = val;
-  else if (dim === "mus") f.mus = val;
+  if (dim === "painter") { f.painterSet = [val]; f.painter = 0; }
+  else if (dim === "co") { f.coSet = [val]; f.co = 0; f.region = null; }
+  else if (dim === "mv") { f.mvSet = [val]; f.mv = 0; }
+  else if (dim === "mus") { f.musSet = [val]; f.mus = -1; }
   else if (dim === "when") { f.y0 = val[0]; f.y1 = val[1]; }
-  else if (dim === "color") { f.hexes = [val]; f.name = nameOf(val).text; f.tol = 8; f.cover = 5; }
+  else if (dim === "color") { f.hexes = [val]; f.name = nameOf(val).text; f.tol = 8; f.cover = 5; f.colorMode = "any"; }
+}
+// clear exactly one active facet (the chip's own ✕) -- the multi-select complement of pmFacetApply's "set"
+function pmChipClear(f, dim) {
+  if (dim === "fav") return "fav";   // handled by the caller (s.fav lives outside f)
+  if (dim === "co") { f.coSet = []; f.co = 0; f.region = null; }
+  else if (dim === "when") { f.y0 = null; f.y1 = null; }
+  else if (dim === "color") { f.hexes = []; f.name = ""; f.colorMode = "any"; }
+  else if (dim === "hueBand") f.hueBand = null;
+  else if (dim === "l") { f.l0 = null; f.l1 = null; }
+  else if (dim === "painter") { f.painterSet = []; f.painter = 0; }
+  else if (dim === "mv") { f.mvSet = []; f.mv = 0; }
+  else if (dim === "mus") { f.musSet = []; f.mus = -1; }
 }
 
 // ---------- the list: the filters, then your favorites ----------
 function pmList(s, F) {
-  let list = xbRun(F, s.f).list;
+  let list = pmRun(s, F).list;
   if (s.fav) {
     const ids = typeof fvArtList === "function" ? fvArtList() : [];
     const want = new Set(ids.map(r => r.i));
@@ -678,7 +830,15 @@ function pmOpen(spec, o = {}) {
   Promise.all([xbLoad(), pmThumbsLoad()]).then(([F]) => {
     if (!el.isConnected) return;
     const kept = !fresh && PM_STATE.get(from);
-    const s = kept || (typeof spec === "string" ? pmParse(spec, F) : { ...pmFresh(), ...spec, f: { ...xbFresh(), ...(spec && spec.f || {}) } });
+    // David, 2026-10-10: a spec OBJECT (not a URL string) can arrive from Explore's own single-value filter
+    // (js/browse-ui.js's data-xbmap: f.co/f.painter/f.mv/f.mus as plain numbers) -- seed the new *Set fields from
+    // whichever legacy singles it carries, the same back-compat pmParse already does for an old URL's p=/co=.
+    const specF = (spec && spec.f) || {}, sf = { ...pmFilterFresh(), ...specF };
+    if (!sf.coSet.length && specF.co) sf.coSet = [specF.co];
+    if (!sf.painterSet.length && specF.painter) sf.painterSet = [specF.painter];
+    if (!sf.mvSet.length && specF.mv) sf.mvSet = [specF.mv];
+    if (!sf.musSet.length && specF.mus >= 0) sf.musSet = [specF.mus];
+    const s = kept || (typeof spec === "string" ? pmParse(spec, F) : { ...pmFresh(), ...spec, f: sf });
     PM_STATE.set(from, s);
     pmMount(el, s, F);
   }).catch(err => {
@@ -720,7 +880,16 @@ function pmMount(el, s, F) {
   }
   // ---- the lens (js/honey.js's round fisheye): F(z) is how far from the middle a cell z cells away is drawn
   // far out, the lens softens (as on the color map), so the overview reads as one even mosaic
-  const M0N = 4.6, M1 = 1, SIG = 1.1;
+  // David, 2026-10-10: "a slider in Arrange for the zooming effect" -- the color map's own Magnify (js/home.js
+  // HM_FEEL_SPECS, hmFeelTweak) controls exactly this ratio (center size vs edge size) over its own lens
+  // formula; this is the paintmap-specific equivalent. s.mag is 0 (flat, no magnification) .. 1 (strong
+  // fisheye), null meaning "never touched" -- a simple linear map onto M0N landing EXACTLY on today's old fixed
+  // constant (4.6) at the slider's own midpoint (.5), so a session that never touches the slider looks
+  // identical to before, and the default thumb position is an honest read of where the lens already sits.
+  const PM_MAG_LO = 1, PM_MAG_HI = 8.2;   // M0N at mag=0 and mag=1; mag=.5 -> 4.6 (the old fixed value)
+  const pmM0NOf = m => PM_MAG_LO + (m == null ? .5 : clamp(m, 0, 1)) * (PM_MAG_HI - PM_MAG_LO);
+  let M0N = pmM0NOf(s.mag);
+  const M1 = 1, SIG = 1.1;
   let M0 = M0N, A = (M0 - M1) * SIG * .8862;
   const lensAt = () => { M0 = M1 + (M0N - M1) * clamp((Z - .22) / .5, .3, 1); A = (M0 - M1) * SIG * .8862; };
   const erf = x => { const sg = x < 0 ? -1 : 1; x = Math.abs(x); const t = 1 / (1 + .3275911 * x); return sg * (1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - .284496736) * t + .254829592) * t * Math.exp(-x * x)); };
@@ -1296,7 +1465,7 @@ function pmMount(el, s, F) {
     chipbar.innerHTML = chips.map((c, k) => `<button class="pmx-xchip" data-pmxclear="${k}">${esc(c.text)}<i>${ICON.x}</i></button>`).join("");
     chipbar.querySelectorAll("[data-pmxclear]").forEach(b => b.onclick = () => {
       const c = chips[+b.dataset.pmxclear]; buzz(5);
-      if (c.dim === "fav") s.fav = 0; else s.f = xbWithout(s.f, c.dim);
+      if (c.dim === "fav") s.fav = 0; else pmChipClear(s.f, c.dim);
       rebuild();
     });
   }
@@ -1305,7 +1474,7 @@ function pmMount(el, s, F) {
     lay = pmLayout(s, F); PM_NOW = { s, lay };
     wait.hidden = !!lay.n;
     if (!lay.n) wait.innerHTML = `Nothing matches all of that. <button class="wl" data-pmloosen>Clear the filters</button>`;
-    const lz = wait.querySelector("[data-pmloosen]"); if (lz) lz.onclick = () => { s.f = xbFresh(); s.fav = 0; rebuild(); };
+    const lz = wait.querySelector("[data-pmloosen]"); if (lz) lz.onclick = () => { s.f = pmFilterFresh(); s.fav = 0; rebuild(); };
     // David, 2026-10-09 ("Show it on the map opens at a different section, so I don't even see the painting that
     // brought me there"): caption() (below) keeps PM_PAN.set(lay.key, ...) up to date on EVERY center change,
     // including a plain pan with nothing opened -- so a seeded arrangement's remembered pan isn't "where you left
@@ -1350,7 +1519,7 @@ function pmMount(el, s, F) {
     if (document.querySelector(".sheet")) return;
     if (typeof stemJustClosed === "function" && stemJustClosed()) return;   // a ghost click right after closing must not reopen it (js/core.js)
     let tab = startTab === "filter" ? "filter" : "arrange";
-    let fopen = { co: false, painter: false }, fq = "";
+    let fopen = { co: false, painter: false, mv: false, mus: false }, fq = "", coq = "";
     const tabsHTML = `<div class="hm-ch-tabs pmx-tabs" role="tablist" aria-label="Arrange or filter the painting map">
         <button class="hm-ch-tab" data-tab="arrange" role="tab">Arrange</button>
         <button class="hm-ch-tab" data-tab="filter" role="tab">Filter</button>
@@ -1395,6 +1564,7 @@ function pmMount(el, s, F) {
           <button class="hm-arr-b${s.arr === k ? " on" : ""}" data-pmarr="${k}" role="radio" aria-checked="${s.arr === k}">
             <span class="hm-arr-pic">${PM_ICON[k]}</span><b>${esc(t)}</b></button>`).join("")}</div>
         <p class="hm-arr-sub">${PM_NEEDS_SEED.has(s.arr) && md ? `Around ${esc(md.t)}` : esc(PM_WHY[s.arr])}</p>
+        <div class="hm-feel"><label class="hm-feel-row" data-feel="mag"><span class="hm-feel-l">Magnify</span><span class="hm-feel-r"><i>Flat</i><input type="range" min="0" max="1" step="0.01" value="${s.mag == null ? .5 : s.mag}" data-pmmag aria-label="Magnify, flat to fisheye"><i>Fisheye</i></span></label></div>
         ${s.arr === "color" || s.arr === "time" || s.arr === "tones" ? `<div class="cx-sec"><b>Place by</b></div>
           <div class="hm-seg" role="radiogroup" aria-label="Place by">${PM_PLACE.map(([k, t]) => `<button class="${(s.place || "avg") === k ? "on" : ""}" data-pmplace="${k}">${esc(t)}</button>`).join("")}</div>` : ""}
         <div class="cx-sec"><b>Center on</b></div>
@@ -1424,54 +1594,109 @@ function pmMount(el, s, F) {
         const v = +e.target.value, [, hi] = pmYearRange(); s.upToYear = v >= hi ? null : v; rebuild(); renderArrange();
       };
       q$("[data-pmscrubplay]").onclick = () => { buzz(6); scrubPlay(); renderArrange(); };
+      // Magnify (David, 2026-10-10): live-applied without a full rebuild() -- M0N only feeds the lens (M0/A via
+      // lensAt()), never the layout itself, so re-running pmLayout() on every drag tick would be pure waste (and
+      // would even reset pan/zoom: lay.key folds in pmQS(), which now includes mag, so a never-seen mag value is
+      // a "fresh" key with no PM_PAN entry yet). Direct Z re-clamp + redraw instead; the address updates once the
+      // drag ends (change, not input) so a mid-drag value never clutters the URL/history.
+      q$("[data-pmmag]").oninput = e => { s.mag = clamp(+e.target.value, 0, 1); M0N = pmM0NOf(s.mag); lensAt(); Z = clamp(Z, zMin(), ZMAX); kick(); };
+      q$("[data-pmmag]").onchange = () => { try { ROUTE_NOW = "#/" + pmRouteOf(s).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {} };
     }
-    // ---- Filter: every chip with its count, applied live (no separate confirm -- matches the color map's
-    // non-modal Colors/Arrange sheet) ----
+    // ---- Filter: every facet with its count, applied live (no separate confirm -- matches the color map's
+    // non-modal Colors/Arrange sheet). David, 2026-10-10: "select multiple things -- a color range, a time
+    // range, multiple countries, or e.g. only Europe" -- Country/Movement/Museum/Painter are now toggle-many
+    // (OR within the facet); Color is a dual-handle year-free range already (f.y0/f.y1) now with presets and a
+    // decade histogram; Color gets multi-pick + an Any/All toggle + a hue-family quick-pick + a lightness
+    // range. pmRun() (not xbRun) does the actual matching and per-value counting for all of it.
     function renderFilter() {
-      const res = xbRun(F, s.f), C = res.counts;
+      const res = pmRun(s, F), C = res.counts;
       let n = res.list.length;
       const favIds = typeof fvArtList === "function" ? fvArtList() : [], favSet = new Set(favIds.map(r => r.i));
       if (s.fav) n = Array.from(res.list).filter(i => favSet.has(i)).length;
       const favN = Array.from(res.list).filter(i => favSet.has(i)).length;
       const chip = (attr, val, label, cnt, on) => `<button class="${on ? "on" : ""}" ${attr}="${esc(String(val))}"${!cnt && !on ? " disabled" : ""}>${esc(label)}${cnt != null ? `<em>${cnt.toLocaleString()}</em>` : ""}</button>`;
-      const f = s.f, top = (arr, k) => arr.map((name, j) => ({ name, v: j + 1, n: C[k][j + 1] })).filter(x => x.n || f[k] === x.v).sort((a, b) => b.n - a.n);
-      const cent = new Map(); for (let d = 0; d < XB_NDEC; d++) { const c = Math.floor((XB_DEC0 + d * 10) / 100) * 100; cent.set(c, (cent.get(c) || 0) + C.when[d]); }
-      const cOn = f.y0 != null && f.y1 != null ? Math.floor(f.y0 / 100) * 100 : null, decOn = f.y0 != null && f.y1 - f.y0 === 9;
-      const cents = [...cent.entries()].filter(([c, v]) => v || c === cOn).filter(([c]) => c >= 1300);
-      const decs = cOn != null ? Array.from({ length: 10 }, (_, j) => cOn + j * 10).map(y => ({ y, n: C.when[(y - XB_DEC0) / 10] || 0 })) : [];
+      const f = s.f;
+      const topMulti = (names, countArr, selSet) => names.map((name, j) => ({ name, v: j + 1, n: countArr[j + 1] })).filter(x => x.n || selSet.has(x.v)).sort((a, b) => b.n - a.n);
+      const [yrLo, yrHi] = pmYearRange();
+      const y0 = f.y0 == null ? yrLo : f.y0, y1 = f.y1 == null ? yrHi : f.y1;
+      const dLo = Math.max(0, Math.floor((yrLo - XB_DEC0) / 10)), dHi = Math.min(XB_NDEC - 1, Math.floor((yrHi - XB_DEC0) / 10));
+      const decadeBars = Array.from({ length: dHi - dLo + 1 }, (_, k) => C.when[dLo + k]);
+      const maxDecade = Math.max(1, ...decadeBars);
+      const pct = y => clamp((y - yrLo) / (yrHi - yrLo) * 100, 0, 100);
+      const activePreset = PM_TIME_PRESETS.find(p => p[2] === f.y0 && p[3] === f.y1);
       const cols = [...BASICS, ...ALL].filter(c => !c.basic || /^(Red|Blue|Green|Yellow|Pink|Purple|Orange|Brown)$/.test(c.n));
       const colsSorted = typeof glHueOrder === "function" ? glHueOrder(cols) : cols;
-      const cos = top(F.meta.countries, "co"), mvs = top(F.meta.movements, "mv"), pas = top(F.meta.artists.map(a => a[0]), "painter");
-      const pList = fq ? pas.filter(x => x.name.toLowerCase().includes(fq.toLowerCase())).slice(0, 24) : pas.slice(0, fopen.painter ? 40 : 10);
+      const coSelSet = new Set(f.coSet || []), mvSelSet = new Set(f.mvSet || []), musSelSet = new Set(f.musSet || []), paSelSet = new Set(f.painterSet || []);
+      const cos = topMulti(F.meta.countries, C.co, coSelSet), mvs = topMulti(F.meta.movements, C.mv, mvSelSet);
+      const pas = topMulti(F.meta.artists.map(a => a[0]), C.painter, paSelSet);
+      const musAll = F.G.src.map((m, k) => ({ name: m.short, v: k, n: C.mus[k] })).filter(x => x.n || musSelSet.has(x.v));
+      const coList = coq ? cos.filter(x => x.name.toLowerCase().includes(coq.toLowerCase())).slice(0, 30) : cos.slice(0, fopen.co ? 44 : 10);
+      const pList = fq ? pas.filter(x => x.name.toLowerCase().includes(fq.toLowerCase())).slice(0, 24) : pas.slice(0, fopen.painter ? 60 : 10);
+      const regionRow = PM_REGIONS.map(([key, label, names]) => {
+        const idx = names.map(nm => F.meta.countries.indexOf(nm) + 1).filter(v => v > 0);
+        const on = idx.length > 0 && idx.every(v => coSelSet.has(v));
+        const cnt = idx.reduce((s2, v) => s2 + (C.co[v] || 0), 0);
+        return chip("data-pmregion", key, label, cnt, on);
+      }).join("");
       q$("[data-pmbody]").innerHTML = `
         <div class="pmx-sh-top"><b>Filter</b><span>${n.toLocaleString()} ${n === 1 ? "painting" : "paintings"}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
         ${favIds.length ? `<div class="pmx-row"><span class="pmx-lab">Yours</span><div class="pmx-chips">${chip("data-pmfav", 1, "Your favorites", favN, !!s.fav)}</div></div>` : ""}
-        <div class="pmx-row"><span class="pmx-lab">Color</span><div class="pmx-sw">${colsSorted.map(c => `<button data-pmhex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" class="${f.hexes[0] === c.h.toUpperCase() ? "on" : ""}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
-          ${f.hexes.length ? `<p class="pmx-cap2"><i style="--c:${f.hexes[0]}"></i>${esc(f.name || nameOf(f.hexes[0]).text)} <span>· within ${f.tol}% · at least ${f.cover}% of the painting</span></p>` : ""}</div>
-        <div class="pmx-row"><span class="pmx-lab">When</span><div class="pmx-chips">${cents.map(([c, v]) => chip("data-pmcent", c, c + "s", v, cOn === c && !decOn)).join("")}</div>
-          ${decs.length ? `<div class="pmx-chips pmx-sub">${decs.map(d => chip("data-pmdec", d.y, d.y + "s", d.n, decOn && f.y0 === d.y)).join("")}</div>` : ""}</div>
-        <div class="pmx-row"><span class="pmx-lab">Country</span><div class="pmx-chips">${(fopen.co ? cos : cos.slice(0, 10)).map(x => chip("data-pmco", x.v, x.name, x.n, f.co === x.v)).join("")}${cos.length > 10 && !fopen.co ? `<button class="pmx-more" data-pmmore="co">All ${cos.length}</button>` : ""}</div></div>
-        ${mvs.length ? `<div class="pmx-row"><span class="pmx-lab">Movement</span><div class="pmx-chips">${mvs.map(x => chip("data-pmmv", x.v, x.name, x.n, f.mv === x.v)).join("")}</div></div>` : ""}
-        <div class="pmx-row"><span class="pmx-lab">Museum</span><div class="pmx-chips">${F.G.src.map((m, k) => chip("data-pmmus", k, m.short, C.mus[k], f.mus === k)).join("")}</div></div>
+        <div class="pmx-row"><span class="pmx-lab">Color</span><div class="pmx-sw">${colsSorted.map(c => `<button data-pmhex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" class="${f.hexes.includes(c.h.toUpperCase()) ? "on" : ""}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
+          ${f.hexes.length ? `<p class="pmx-cap2">${f.hexes.map(h => `<i style="--c:${h}"></i>`).join("")}${esc(f.hexes.length === 1 ? (f.name || nameOf(f.hexes[0]).text) : f.hexes.length + " colors")} <span>· within ${f.tol}%</span></p>
+          <div class="pmx-scrub"><span class="pmx-lab2">Closeness</span><input type="range" min="1" max="30" step="1" value="${f.tol}" data-pmtol aria-label="Color closeness"></div>
+          ${f.hexes.length > 1 ? `<div class="hm-seg pmx-colmode" role="radiogroup" aria-label="Match any or all colors"><button class="${(f.colorMode || "any") === "any" ? "on" : ""}" data-pmcolmode="any">Any</button><button class="${f.colorMode === "all" ? "on" : ""}" data-pmcolmode="all">All</button></div>` : ""}` : ""}
+          <p class="pmx-lab2">Hue family</p>
+          <div class="pmx-chips">${XB_HUE_WORDS.map((w, j) => chip("data-pmhue", j, w, C.hueBand[j], f.hueBand === j)).join("")}</div>
+          <p class="pmx-lab2">Lightness</p>
+          <div class="pmx-range2" style="--lo:${f.l0 == null ? 0 : f.l0}%;--hi:${f.l1 == null ? 100 : f.l1}%">
+            <input type="range" min="0" max="100" value="${f.l0 == null ? 0 : f.l0}" data-pml0 aria-label="Darker than">
+            <input type="range" min="0" max="100" value="${f.l1 == null ? 100 : f.l1}" data-pml1 aria-label="Lighter than"></div>
+          <p class="pmx-cap3"><span>Dark</span><span>Light</span></p></div>
+        <div class="pmx-row"><span class="pmx-lab">When</span>
+          <div class="pmx-chips">${PM_TIME_PRESETS.map(([k, t, p0, p1]) => chip("data-pmpreset", k, t, null, activePreset && activePreset[0] === k)).join("")}</div>
+          <div class="pmx-hist" aria-hidden="true">${decadeBars.map(n2 => `<i style="--h:${Math.max(.04, n2 / maxDecade)}"></i>`).join("")}</div>
+          <div class="pmx-range2" style="--lo:${pct(y0)}%;--hi:${pct(y1)}%">
+            <input type="range" min="${yrLo}" max="${yrHi}" step="1" value="${y0}" data-pmy0 aria-label="From year">
+            <input type="range" min="${yrLo}" max="${yrHi}" step="1" value="${y1}" data-pmy1 aria-label="To year"></div>
+          <p class="pmx-cap3"><span>${y0}</span><span>${y1}</span></p></div>
+        <div class="pmx-row"><span class="pmx-lab">Place</span>
+          <p class="pmx-lab2">Regions</p>
+          <div class="pmx-chips">${regionRow}</div>
+          <p class="pmx-lab2">Countries</p>
+          <label class="search pmx-find"><span>${ICON.search}</span><input data-pmcoq type="search" placeholder="Find a country" value="${esc(coq)}" autocomplete="off"></label>
+          <div class="pmx-chips">${coList.map(x => chip("data-pmco", x.v, x.name, x.n, coSelSet.has(x.v))).join("")}${!coq && !fopen.co && cos.length > 10 ? `<button class="pmx-more" data-pmmore="co">All ${cos.length}</button>` : ""}</div></div>
+        ${mvs.length ? `<div class="pmx-row"><span class="pmx-lab">Movement</span><div class="pmx-chips">${mvs.map(x => chip("data-pmmv", x.v, x.name, x.n, mvSelSet.has(x.v))).join("")}</div></div>` : ""}
+        <div class="pmx-row"><span class="pmx-lab">Museum</span><div class="pmx-chips">${musAll.map(x => chip("data-pmmus", x.v, x.name, x.n, musSelSet.has(x.v))).join("")}</div></div>
         <div class="pmx-row"><span class="pmx-lab">Painter</span>
           <label class="search pmx-find"><span>${ICON.search}</span><input data-pmq type="search" placeholder="Find a painter" value="${esc(fq)}" autocomplete="off"></label>
-          <div class="pmx-chips">${f.painter && !pList.some(x => x.v === f.painter) ? chip("data-pmp", f.painter, xbArtistName(F, f.painter), C.painter[f.painter], true) : ""}${pList.map(x => chip("data-pmp", x.v, x.name, x.n, f.painter === x.v)).join("")}${!fq && !fopen.painter && pas.length > 10 ? `<button class="pmx-more" data-pmmore="painter">More painters</button>` : ""}</div></div>`;
+          <div class="pmx-chips">${pList.map(x => chip("data-pmp", x.v, x.name, x.n, paSelSet.has(x.v))).join("")}${!fq && !fopen.painter && pas.length > 10 ? `<button class="pmx-more" data-pmmore="painter">More painters</button>` : ""}</div></div>`;
       const inp = q$("[data-pmq]");
       inp.oninput = () => { fq = inp.value.trim(); const pos = inp.selectionStart; renderFilter(); const ni = q$("[data-pmq]"); ni.focus(); try { ni.setSelectionRange(pos, pos); } catch (e) {} };
+      const coInp = q$("[data-pmcoq]");
+      coInp.oninput = () => { coq = coInp.value.trim(); const pos = coInp.selectionStart; renderFilter(); const ni = q$("[data-pmcoq]"); ni.focus(); try { ni.setSelectionRange(pos, pos); } catch (e) {} };
+      // live range sliders: 'input' (not the delegated click below) for drag feedback, kept from crossing past
+      // each other the same way a dual-handle slider always must (y0 can't pass y1, l0 can't pass l1)
+      const tolInp = q$("[data-pmtol]"); if (tolInp) tolInp.oninput = e => { f.tol = +e.target.value; buzz(2); rebuild(); renderFilter(); };
+      q$("[data-pmy0]").oninput = e => { f.y0 = Math.min(+e.target.value, f.y1 == null ? yrHi : f.y1); buzz(2); rebuild(); renderFilter(); };
+      q$("[data-pmy1]").oninput = e => { f.y1 = Math.max(+e.target.value, f.y0 == null ? yrLo : f.y0); buzz(2); rebuild(); renderFilter(); };
+      q$("[data-pml0]").oninput = e => { f.l0 = Math.min(+e.target.value, f.l1 == null ? 100 : f.l1); buzz(2); rebuild(); renderFilter(); };
+      q$("[data-pml1]").oninput = e => { f.l1 = Math.max(+e.target.value, f.l0 == null ? 0 : f.l0); buzz(2); rebuild(); renderFilter(); };
     }
     paneFilt.addEventListener("click", e => {
       const b = e.target.closest("button"); if (!b || b.disabled) return;
       const f = s.f, d = b.dataset;
-      if (d.pmreset != null) { s.f = xbFresh(); s.fav = 0; fq = ""; buzz(6); rebuild(); return renderFilter(); }
+      if (d.pmreset != null) { s.f = pmFilterFresh(); s.fav = 0; fq = ""; coq = ""; buzz(6); rebuild(); return renderFilter(); }
       if (d.pmmore) { fopen[d.pmmore] = true; return renderFilter(); }
       if (d.pmfav != null) s.fav = s.fav ? 0 : 1;
-      else if (d.pmhex) { const same = f.hexes[0] === d.pmhex.toUpperCase(); f.hexes = same ? [] : [d.pmhex.toUpperCase()]; f.name = same ? "" : d.name; f.tol = 8; f.cover = 5; }
-      else if (d.pmcent) { const c = +d.pmcent, on = f.y0 === c && f.y1 === c + 99; f.y0 = on ? null : c; f.y1 = on ? null : c + 99; }
-      else if (d.pmdec) { const y = +d.pmdec, on = f.y0 === y && f.y1 === y + 9; const c = Math.floor(y / 100) * 100; f.y0 = on ? c : y; f.y1 = on ? c + 99 : y + 9; }
-      else if (d.pmco) f.co = f.co === +d.pmco ? 0 : +d.pmco;
-      else if (d.pmmv) f.mv = f.mv === +d.pmmv ? 0 : +d.pmmv;
-      else if (d.pmmus) f.mus = f.mus === +d.pmmus ? -1 : +d.pmmus;
-      else if (d.pmp) f.painter = f.painter === +d.pmp ? 0 : +d.pmp;
+      else if (d.pmhex) { const h = d.pmhex.toUpperCase(), at = f.hexes.indexOf(h); if (at >= 0) { f.hexes.splice(at, 1); if (!f.hexes.length) f.name = ""; } else { f.hexes.push(h); if (f.hexes.length === 1) { f.name = d.name; f.tol = f.tol || 8; } } }
+      else if (d.pmcolmode) f.colorMode = d.pmcolmode;
+      else if (d.pmhue) f.hueBand = f.hueBand === +d.pmhue ? null : +d.pmhue;
+      else if (d.pmpreset) { const p = PM_TIME_PRESETS.find(x => x[0] === d.pmpreset), on = f.y0 === p[2] && f.y1 === p[3]; f.y0 = on ? null : p[2]; f.y1 = on ? null : p[3]; }
+      else if (d.pmregion) pmRegionToggle(f, d.pmregion, F);
+      else if (d.pmco) { const v = +d.pmco, set = new Set(f.coSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.coSet = [...set]; f.region = null; }
+      else if (d.pmmv) { const v = +d.pmmv, set = new Set(f.mvSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.mvSet = [...set]; }
+      else if (d.pmmus) { const v = +d.pmmus, set = new Set(f.musSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.musSet = [...set]; }
+      else if (d.pmp) { const v = +d.pmp, set = new Set(f.painterSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.painterSet = [...set]; }
       else return;
       buzz(5); rebuild(); renderFilter();
     });
