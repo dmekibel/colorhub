@@ -71,9 +71,6 @@
 .oo-rev [data-next]{width:100%;min-height:58px;justify-content:center;font-size:19px;font-weight:600;gap:10px}
 .oo-rev [data-next].ghost{min-height:58px;padding:0 22px 0 26px;background:var(--surface-2);color:var(--ink);font:600 19px/1 var(--sans);text-decoration:none;border-radius:var(--r-pill);justify-content:center}
 
-/* ---------- the journey map ---------- */
-.oo-map .deck-top{min-height:44px}
-.oo-tot{font:500 13px/1 var(--mono);color:#F2D78A;letter-spacing:.06em}
 .oo-title{margin:8px 0 6px}
 .oo-daily{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;width:100%;margin-top:22px;padding:16px;background:var(--surface-2);border-radius:var(--r-2);text-align:left;transition:transform .3s var(--spring)}
 .oo-daily:active{transform:scale(.98)}
@@ -83,39 +80,13 @@
 .oo-dgrid i.g,.oo-share .g i{background:#6AAA64}.oo-dgrid i.y,.oo-share .y i{background:#C9B458}.oo-dgrid i.x,.oo-share .x i{background:#3A3A3C}
 .oo-dt b{display:block;font:400 22px/1.1 var(--serif)}
 .oo-dt em{font-style:normal;font-size:13.5px;color:var(--soft)}
-.oo-eyeline{display:flex;flex-direction:column;gap:6px;width:100%;margin-top:14px;padding:14px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);text-align:left}
-.oo-eyeline + .oo-eyeline{margin-top:-1px;border-top:0;padding-top:13px}
-.oo-eyeline span{font:italic 400 17px/1.35 var(--serif);color:var(--ink)}
-.oo-eyeline b{display:flex;align-items:center;gap:4px;font:italic 400 17px/1 var(--serif);color:var(--soft)}
-.oo-eyeline svg{width:14px;height:14px}
-.oo-world{display:flex;flex-direction:column;gap:3px;margin:30px 0 4px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
-.oo-world b{font:400 24px/1.1 var(--serif)}
-.oo-world span{font:italic 400 17px/1.3 var(--serif);color:var(--soft)}
-.oo-node{position:relative;display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:center;width:100%;padding:13px 0;text-align:left;border-bottom:1px solid var(--rule);transition:opacity .25s}
-.oo-node:active{opacity:.6}
-.oo-node.locked{opacity:.34}
-.oo-node.cur .oo-mini{outline:2px solid var(--ink);outline-offset:3px}
 .oo-nt{min-width:0}
 .oo-nt b{display:block;font:400 21px/1.12 var(--serif)}
 .oo-nt b .mono{font:500 13px/1 var(--mono);color:var(--soft);margin-right:8px;vertical-align:3px}
-.oo-node.done .oo-nt b .mono{color:var(--good)}
 .oo-nt em{display:block;font-style:normal;font-size:14px;line-height:1.35;color:var(--soft);margin-top:3px}
-.oo-mini{position:relative;display:block;height:52px;width:calc(52px * var(--ar));margin:0 auto;background:var(--surface-2);border-radius:var(--r-1)}
-.oo-mini i{position:absolute;background:var(--c);border-radius:2px;transform:scale(.84)}
-.oo-mini i.oo-circle{border-radius:50%}
-.oo-mini i.oo-hex{clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);border-radius:0;transform:scale(.92)}
-.oo-mini.oo-b-busy{background:linear-gradient(90deg,#8A6E4E 50%,#3E5C74 50%)}
 .oo-st{display:flex;gap:3px}
 .oo-st i,.oo-star i{width:10px;height:10px;background:var(--rule);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
 .oo-st i.on,.oo-star.on i{background:#E8C66B}
-.oo-mixblock .oo-world{margin-top:34px}
-.oo-mxgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 4px}
-.oo-mx{display:flex;flex-direction:column;gap:5px;padding:14px;background:var(--surface-2);border-radius:var(--r-2);text-align:left;transition:transform .3s var(--spring)}
-.oo-mx:active{transform:scale(.97)}
-.oo-mx b{font:400 20px/1.05 var(--serif)}
-.oo-mx em{font-style:normal;font-size:14px;line-height:1.35;color:var(--soft);flex:1}
-.oo-mx.locked{opacity:.4}
-.oo-go{position:sticky;bottom:0;margin:18px calc(var(--g) * -1) 0;padding:18px var(--g) calc(var(--bottom) + 6px);background:linear-gradient(rgba(14,13,11,0),var(--ground) 32%)}
 
 /* ---------- results, share, misses ---------- */
 .oo-stars-row{display:flex;flex-wrap:wrap;gap:18px;margin:0 0 20px}
@@ -231,11 +202,6 @@
 .oo-pair{display:flex;gap:2px}
 .oo-pair i{width:22px;height:22px;background:var(--c)}
 .oo-pair i:first-child{border-radius:var(--r-1) 0 0 var(--r-1)}.oo-pair i:last-child{border-radius:0 var(--r-1) var(--r-1) 0}
-/* level up: the newly opened level glows once on the map */
-.oo-node.fresh .oo-mini{animation:ooFresh 1.8s var(--ease) .4s both}
-@keyframes ooFresh{0%{box-shadow:0 0 0 0 rgba(242,215,138,.75)}60%{box-shadow:0 0 0 12px rgba(242,215,138,0)}100%{box-shadow:none}}
-.oo-node.fresh .oo-nt em{color:#F2D78A}
-.oo-world.lit b::after{content:" · mastered";font:italic 400 17px/1 var(--serif);color:#F2D78A}
 .oo-empty{margin-top:22px;max-width:36ch}
 .oo-inbox{display:flex;flex-direction:column;width:100%;height:100%;min-height:0}
 .oo-inbox .drill-stage{flex:1}
@@ -276,7 +242,7 @@
 
 /* the board takes the room the stage has: a taller foot (a miss shows both colors, a line, Next) shrinks it, never overlaps it */
 @supports (width:1cqw){.oo-stage .oo-board{width:min(100cqw,100cqh * var(--ar));transition:width .35s var(--ease)}.oo-line .oo-stage .oo-board{width:min(100cqw,36dvh)}}
-.oo-map .fine,.oo-eye .fine,.oo-res .fine,.oo-jump .fine{font-size:14px}
+.oo-eye .fine,.oo-res .fine,.oo-jump .fine{font-size:14px}
 .oo-nt em,.oo-eyet small,.ey-row small{overflow-wrap:anywhere}
 .oo-eyet small,.ey-row small{display:block;font:400 13px/1.3 var(--sans);color:var(--faint)}
 .oo-lvs{margin:10px 0 0}
@@ -292,23 +258,10 @@
 .oo-pk-ch{margin-top:8px}
 .oo-pk-note{font:italic 400 17px/1.3 var(--serif);color:var(--soft);margin:10px 0 0;text-wrap:pretty}
 .oo-jumpnote{margin:6px 0 0}
-.oo-node.clr .oo-nt b .mono{color:var(--good)}
 .oo-jump{padding:4px 0 8px}
 .oo-jump .note{margin:6px 0 16px}
 
-/* ---------- Odd one out sessions (2026-10-09): Customize, the progress bar, dense grids, names on tiles, the climb ---------- */
-.oo-cust{display:flex;flex-direction:column;gap:12px}
-/* a thin rule between each control group (mode, difficulty, names, session length), so a sheet with five groups
-   reads as five groups, not one scroll of controls (craft critique, 2026-10-09) */
-.oo-setgap{height:1px;margin:2px 0;background:var(--rule)}
-.oo-sl{display:flex;flex-direction:column;gap:2px}
-.oo-sl-h{display:flex;justify-content:space-between;align-items:baseline;font:400 17px/1.3 var(--sans);color:var(--soft)}
-.oo-sl-h b{font:500 17px/1 var(--mono);color:var(--ink)}
-.oo-sl input{width:100%}
-.oo-prev{display:flex;justify-content:center;padding:6px 0 2px}
-.oo-prevg{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:var(--gg);width:min(46vw,190px);aspect-ratio:1}
-.oo-prevg i{background:var(--c);border-radius:calc(var(--gg) * .9)}
-.oo-ladhead{margin-top:22px}
+/* ---------- Odd one out sessions: the progress bar, dense grids, names on tiles ---------- */
 .oo-prog{flex:1;height:4px;margin:0 14px;border-radius:2px;background:var(--rule);overflow:hidden}
 .oo-prog i{display:block;height:100%;width:var(--w);background:var(--ink);border-radius:2px;transition:width .4s var(--ease)}
 /* a single disclosure for the end-of-session chart, stats and misses (David, 2026-10-09: one headline, one
@@ -323,12 +276,24 @@
 .oo-dense .oo-t.ring,.oo-dense .oo-t.miss,.oo-dense .oo-t.sel{outline-width:2px;outline-offset:1px;z-index:1}
 .oo-t .oo-tn{font-size:17px;line-height:1.15;pointer-events:none}
 .oo-t .oo-tn em{display:block;font:400 17px/1.2 var(--sans);font-style:normal;opacity:.85;margin-top:2px}
-.oo-climb{margin:18px 0 6px}
-.oo-climb svg{display:block;width:100%;height:auto}
-.oo-climb .path{fill:none;stroke:var(--soft);stroke-width:1.5;stroke-linejoin:round}
-.oo-climb .edge{stroke:#F2D78A;stroke-width:1.5;stroke-dasharray:4 4}
-.oo-climb circle.ok{fill:var(--good)}
-.oo-climb circle.no{fill:var(--ground,#0E0D0B);stroke:var(--bad);stroke-width:1.5}
-.oo-climb figcaption{display:flex;justify-content:space-between;margin-top:6px;font:400 15px/1.2 var(--sans);color:var(--soft)}
 .oo-sres h1 em{font-style:normal;color:#F2D78A}
 .oo-rp{font:500 15px/1 var(--mono);color:var(--soft);text-align:right}
+
+/* ---------- the simple game (2026-10-10): one screen, a growing grid, Arcade/Zen, a palette round, the timer ---------- */
+.oo-zenpill{height:30px;padding:0 14px;border-radius:var(--r-pill);background:var(--surface-2);color:var(--soft);font:italic 400 15px/1 var(--serif);transition:background .2s,color .2s;margin-right:-6px}
+.oo-zenpill.on{background:var(--ink);color:var(--ground,#0E0D0B)}
+.oo-ztally{flex:1;font:500 15px/1 var(--mono);color:var(--soft);text-align:center}
+/* a palette round: every tile tiles the same three colors; the odd tile has one of them nudged */
+.oo-t.oo-pal{background:linear-gradient(to bottom,var(--p0) 0 33.4%,var(--p1) 33.4% 66.7%,var(--p2) 66.7% 100%)}
+/* the per-round timer: a thin bar above the board that empties over the round's time limit */
+.oo-tlimit{display:block;width:100%;height:3px;border-radius:2px;background:var(--ink);transform-origin:left;margin-bottom:10px}
+.oo-tlimit.go{transition:transform var(--t,4s) linear;transform:scaleX(0)}
+@media (prefers-reduced-motion:reduce){.oo-tlimit.go{transition:none;transform:scaleX(0)}}
+/* the end screen: three small bars, hue / saturation / value, against where this run started */
+.oo-ebars{display:flex;flex-direction:column;gap:14px;margin-top:22px}
+.oo-ebar{display:grid;grid-template-columns:76px 1fr auto;align-items:center;gap:10px}
+.oo-ebar span{font:400 15px/1 var(--sans);color:var(--soft)}
+.oo-ebar i{display:block;height:6px;border-radius:3px;background:var(--rule);position:relative;overflow:hidden}
+.oo-ebar i::after{content:"";position:absolute;inset:0;width:var(--w);background:var(--ink);border-radius:3px;transition:width .5s var(--ease)}
+.oo-ebar b{font:500 15px/1 var(--mono);color:var(--ink);text-align:right}
+.oo-ebar em{display:block;font-style:normal;font-size:12px;color:var(--soft);text-align:right;grid-column:3;margin-top:2px}

@@ -828,6 +828,82 @@ function ooWhoseAlts(list, ease, rnd) {
   return { alts: [list[j], list[k]], ease: lo / (L - 1) };
 }
 
+// ======================================================================
+// The simple game (David, 2026-10-10): "very simple, always adapting... give you a flow state by making it just
+// hard enough". No menus: one screen, a 3 x 3 board, three separate staircases (hue, chroma, lightness), each
+// drawn near its own threshold (reusing the item-response estimate above: ooTheta/ooUpdate already track where
+// you're right about half the time, so a round drawn at OO_S_MULT x that threshold lands you right about 79% of
+// the time -- the "weighted staircase targeting 75-80%" the spec asks for, without a second machine to maintain).
+// A visibility floor per axis means a round is never drawn below what a phone screen can actually show; once a
+// threshold is sharp enough to hit the floor, difficulty keeps climbing through the grid (3 x 3 up to 9 x 9) and
+// the timer instead, never through an invisible gap.
+// ======================================================================
+const OO_S_FLOOR = { hue: 2.4, chroma: 2, light: 1.6 };   // ΔE00, as drawn: conservative, always visible on a phone
+const OO_S_MULT = 1.5;    // d = th x this lands right ~75% of the time in theory (OO_SLOPE=3, OO_LAPSE=.03; see ooP);
+// in practice the online estimate runs a little generous, which settles actual play closer to 78-80% (tools/oo_simple_sim.js)
+const OO_S_BREATHE_MULT = 1.7;    // a breather round (~93%): easier, for rhythm, not a reward
+const OO_S_MIN_COLS = 3, OO_S_MAX_COLS = 9;
+const OO_S_WINDOW = 8, OO_S_GROW_AT = .82, OO_S_SHRINK_AT = .4;   // rolling accuracy at this grid size
+
+// which axis the next round tests: weighted toward the one with the least evidence so far (interleaved, not round-robin)
+function ooSimpleAxis(model, rnd = Math.random) {
+  const ws = OO_AXES.map(j => 1 / (1 + ((model.j[j] && model.j[j].n) || 0)));
+  const sum = ws.reduce((a, b) => a + b, 0);
+  let r = rnd() * sum;
+  for (let i = 0; i < OO_AXES.length; i++) { r -= ws[i]; if (r <= 1e-9) return OO_AXES[i]; }
+  return OO_AXES[OO_AXES.length - 1];
+}
+// the gap to draw this round: near the axis's own threshold, a little jittered, never below the visibility floor.
+// ooMove only lands a round's actually-drawn difference within ~15% of the target (ooIn), so the target itself is
+// padded above the floor by that much -- the floor is a promise about what you SEE, not about the number asked for.
+const OO_S_FLOOR_PAD = 1.2;
+function ooSimpleD(model, axis, breather, rnd = Math.random) {
+  const th = ooTheta(model, axis, null), jit = .94 + rnd() * .12, mult = (breather ? OO_S_BREATHE_MULT : 1) * OO_S_MULT;
+  return Math.max(OO_S_FLOOR[axis] * OO_S_FLOOR_PAD, Math.min(OO_MAX, th * jit * mult));
+}
+// how many tiles are odd this round, and whether it's a palette round (David: "sometimes a palette, and one
+// color is off, and you tap which"). k4 only once the grid is big enough that four odd tiles isn't most of it.
+function ooSimpleShape(cols, rnd = Math.random) {
+  const r = rnd();
+  if (r < .1) return "palette";
+  if (cols >= 4 && r < .18) return "k4";
+  if (r < .35) return "k2";
+  return "one";
+}
+// a palette round: every tile shows the same three-color pattern; one tile has one of the three colors moved by d
+function ooPaletteRound(cols, axis, d, rnd = Math.random) {
+  for (let attempt = 0; attempt < 10; attempt++) {
+    const geo = ooCells("grid", cols, rnd), cells = geo.cells, N = cells.length;
+    const pal = [];
+    for (let i = 0; i < 3; i++) { let c, t2 = 0; do { c = ooBase(rnd, {}); t2++; } while (pal.some(p => ooGapDE(p, c) < 14) && t2 < 30); pal.push(c); }
+    const slot = Math.floor(rnd() * 3), sign = rnd() < .5 ? -1 : 1;
+    const m = ooMove(pal[slot], axis, sign, d) || ooMove(pal[slot], axis, -sign, d);
+    if (!m) continue;
+    const at = Math.floor(rnd() * N), colors = cells.map((_, i) => i === at ? m.hex : pal[slot]);
+    return { v: "palette", b: "grid", n: cols, cols, cells, aspect: geo.aspect, pal, slot, at, ans: [at], colors, odd: m.hex, base: pal[slot],
+      act: m.act, axis, judg: axis, dir: ooDirWord(pal[slot], m.hex), fam: ooFam(pal[slot]), g: 1 / N, vf: 1, bf: 1 };
+  }
+  return null;
+}
+// one round of the simple game. state: { model, cols }. breather: an easier round dropped in for rhythm.
+function ooSimpleRound(state, breather, rnd = Math.random) {
+  const axis = ooSimpleAxis(state.model, rnd), d = ooSimpleD(state.model, axis, breather, rnd), shape = ooSimpleShape(state.cols, rnd);
+  if (shape === "palette") { const r = ooPaletteRound(state.cols, axis, d, rnd); if (r) return Object.assign(r, { breather }); }
+  const k = shape === "k4" ? Math.min(4, state.cols * state.cols - 1) : shape === "k2" ? 2 : 1;
+  const r = ooRound({ v: "one", b: "grid", n: state.cols, d, axis, k, rnd });
+  return Object.assign(r, { breather, vf: 1, bf: 1 });
+}
+// grid growth: a rolling window of the last OO_S_WINDOW results at the current size: grow on a hot streak, shrink
+// on a cold one, hold otherwise. The floor stops the gap from shrinking further, so this is the difficulty knob
+// once an axis is already sharp.
+function ooSimpleGrid(cols, acc) {
+  if (acc.length < OO_S_WINDOW) return cols;
+  const rate = acc.reduce((a, b) => a + b, 0) / acc.length;
+  if (rate >= OO_S_GROW_AT) return Math.min(OO_S_MAX_COLS, cols + 1);
+  if (rate <= OO_S_SHRINK_AT) return Math.max(OO_S_MIN_COLS, cols - 1);
+  return cols;
+}
+
 if (typeof module !== "undefined") module.exports = {
   ooHash, ooRnd, ooShuf, OO_JUDG, OO_AXES, OO_START, OO_MIN, OO_MAX, OO_SLOPE, ooP, OO_TIER, OO_BREATH, OO_VF, OO_BF, ooModel, ooTheta, ooTheta0, ooUpdate, ooEye,
   ooStair, ooStairStep, ooStairScore, ooFam, OO_FAMS, ooBase, ooMove, ooMoveDir, ooDirWord, ooHuePair, ooDirChoices, OO_DIR_WORDS, ooCells, OO_SHAPES, ooRound, ooBand, ooPaintShift,
@@ -837,4 +913,6 @@ if (typeof module !== "undefined") module.exports = {
   OO_GRID_MIN, OO_GRID_MAX, OO_ODD_MAX, OO_SESSION_N, OO_SESSION_MORE, OO_UP, OO_DOWN, ooGapAt, ooXOfGap, ooSess, ooSessStep, ooSessEdge, ooSessStart, ooClassic, ooSessD, ooGapDE, OO_KC, OO_KH,
   OO_EDGE, ooEdgeTh, ooEdgeD, ooEdgeUpdate, ooPairRatioOf, ooWhoseAlts,
   ooPairsRound, ooPairClear, OO_PAIR_RATIO, ooLineRound, ooNameMargin, OO_LINE_MARGIN, OO_LINE_P0, OO_LINE_MIN, ooGradStrip, ooOrderRound, ooChangedRound, ooWasRound, ooNbackSeq, ooCountPick,
+  OO_S_FLOOR, OO_S_FLOOR_PAD, OO_S_MULT, OO_S_BREATHE_MULT, OO_S_MIN_COLS, OO_S_MAX_COLS, OO_S_WINDOW, OO_S_GROW_AT, OO_S_SHRINK_AT,
+  ooSimpleAxis, ooSimpleD, ooSimpleShape, ooPaletteRound, ooSimpleRound, ooSimpleGrid,
 };
