@@ -318,9 +318,11 @@ function segSheet(pool, onClose) {
       <button data-rgm="out" aria-pressed="false">Stands out</button>
     </div>
     <div class="pr-slide gl-slide rgs-slide" data-rgslide hidden><input type="range" data-rgk aria-label="How many colors"><span class="gl-kn-t" data-rgkn></span></div>
+    <div class="rgs-scroll" data-sheet-scroll>
     <div class="palette gl-strip" data-rgswatches></div>
     <div class="pal-names" data-rgrows></div>
     <p class="fine">Read from this painting's photograph, just inside the shape you selected. Screen colors are approximate.</p>
+    </div>
   `, { lock: false });
   sh.classList.add("rgs-sheet", "gl-pal-ui");
   const draw = () => {

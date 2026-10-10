@@ -57,8 +57,16 @@
 
 /* the selection's own palette sheet (js/segment.js segSheet) -- a compact version of the painting page's own
    strip + mode switcher + slider, reusing its CSS (.gl-pal-ui, .gl-strip, .gl-slide, .cnt-step/.cnt-b); the
-   same classes the old region sheet used (.rgs-*), now fed a live AI-selected pool instead of a precomputed one */
-.rgs-sheet{padding-bottom:calc(var(--bottom) + 16px)}
+   same classes the old region sheet used (.rgs-*), now fed a live AI-selected pool instead of a precomputed one.
+   David, 2026-10-10: "adding more colors (raising the count) pushes the menu up so it's hard to scroll normally;
+   it should extend downwards without panning" -- the base .sheet (app.css) is bottom-anchored with no fixed
+   height, so it grows upward as the swatch strip and name rows grow with the count. Same fix as js/settray.js's
+   .sx-pick-sheet: a fixed height with its own internal scroller ([data-sheet-scroll], js/core.js sheet()'s
+   supported shape for this) around just the part that grows, so the sheet's top edge never moves when the count
+   changes -- new colors extend downward inside that scroller instead. */
+.sheet.rgs-sheet{display:flex;flex-direction:column;overflow:hidden;padding-bottom:0;height:66dvh}
+.rgs-sheet>.grab,.rgs-sheet>.rgs-head,.rgs-sheet>.rgs-modes,.rgs-sheet>.pr-slide{flex:none}
+.rgs-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--bottom) + 16px)}
 .rgs-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:2px 0 12px}
 .rgs-head b{font:400 19px/1 var(--serif);color:var(--ink)}
 .rgs-head span{font:400 13px/1 var(--sans);color:var(--soft)}
