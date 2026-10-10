@@ -201,7 +201,18 @@ function ooBoardHTML(r, o = {}) {
     const st = `left:${pct(x)};top:${pct(y)};width:${pct(w)};height:${pct(h)};--c:${r.colors[i]}${c.rot ? `;--rot:${c.rot.toFixed(1)}deg` : ""}${o.breathe ? `;--bd:-${(Math.random() * 3.4).toFixed(2)}s;--bp:${(2.8 + Math.random() * 1.4).toFixed(2)}s` : ""}${img}`;
     return `<button class="oo-t oo-${c.shape}${r.paint ? " oo-pt" : ""}" data-i="${i}" style="${st}" aria-label="Tile ${i + 1}"></button>`;
   }).join("");
-  return `<div class="oo-board oo-b-${r.b}${full ? " oo-full" : ""}${o.breathe ? " oo-breathe" : ""}${g ? " oo-ground" : ""}${dense ? " oo-dense" : ""}" style="--ar:${r.aspect || 1};${bg}">${tiles}</div>`;
+  const board = `<div class="oo-board oo-b-${r.b}${full ? " oo-full" : ""}${o.breathe ? " oo-breathe" : ""}${g ? " oo-ground" : ""}${dense ? " oo-dense" : ""}" style="--ar:${r.aspect || 1};${bg}">${tiles}</div>`;
+  if (!full) return board;
+  // the TAPPABLE grid has to live inside the safe area (David, 2026-10-11: top tiles "hard to reach and cut
+  // off" under the status bar/Dynamic Island) -- but the color field should still read as full-bleed. So the
+  // same colors are drawn twice: a non-interactive copy fills the whole screen edge to edge behind (the "bleed",
+  // under the notch and the home indicator and the rounded corners, where nothing needs to be tapped), and the
+  // real, tappable board sits on top of it, inset to the safe area. Same palette, so it reads as one field that
+  // simply continues past the usable grid, not two different boards.
+  const bleed = r.cells.map((c, i) => `<i class="oo-t oo-${c.shape}" style="left:${pct(c.x)};top:${pct(c.y)};width:${pct(c.w)};height:${pct(c.h)};--c:${r.colors[i]}"></i>`).join("");
+  // deliberately NOT ".oo-board" -- every other place in this file (ooAsk, ooMeltGhost, onAnswer...) selects the
+  // real board with ".oo-board", and that query has to keep finding only the real, tappable one.
+  return `<div class="oo-boardouter"><div class="oo-boardbleed" aria-hidden="true">${bleed}</div>${board}</div>`;
 }
 // a ripple across the board from the tapped tile (calm: a small dip and lift, in order of distance)
 function ooRipple(board, from) {
@@ -228,6 +239,23 @@ function ooGhostCleanup() {
   clearTimeout(OO_GHOST.timer);
   OO_GHOST.clone.remove();
   OO_GHOST = null;
+}
+// the row x col aspect fed into ooSimpleDims has to match the REAL on-screen box the grid will render into, not
+// the stage's (viewport) box -- the tappable board is inset from the stage by the safe-area block below. Using
+// the stage's own aspect here produced tiles built for one shape and rendered into a measurably different one,
+// which read as "the transition leads to a different arrangement and then snaps" (David, 2026-10-11): the
+// entrance animation's per-tile stagger plays out against percentage positions that don't match the tile's real
+// rendered shape until the mismatch resolves, which looks like a snap to a different layout. Mirrors the CSS
+// inset rule in css/games.css (.oo-boardouter .oo-board.oo-full) exactly, so there is nothing left to reconcile
+// after the animation starts.
+function ooInsetAspect(stage) {
+  const r = stage.getBoundingClientRect();
+  if (!r.width || !r.height) return null;
+  const cs = getComputedStyle(document.documentElement);
+  const num = v => parseFloat(cs.getPropertyValue(v)) || 0;
+  const top = num("--top") + 40, bottom = num("--bottom") + 30, left = num("--left") + 16, right = num("--right") + 16;
+  const w = Math.max(40, r.width - left - right), h = Math.max(40, r.height - top - bottom);
+  return h / w;
 }
 function ooMeltGhost(ui) {
   ooGhostCleanup();
@@ -282,21 +310,19 @@ function ooShimmer(board, big) {
 // streaks, level-ups) -- none of them are mid-search.
 // the reveal card's two halves grow out of the tiles they came from (a FLIP: the half starts the size and
 // position of its origin tile, then relaxes to its real size), instead of appearing fully formed
-function ooRevealFlip(ui, originOdd, originField) {
+// the Albers inset square grows out of the odd tile it came from (a FLIP), instead of appearing fully formed
+function ooRevealFlip(ui, originOdd) {
   if (reduceMotion) return;
-  const halves = ui.foot.querySelectorAll(".oo-rv2-half");
-  if (halves.length !== 2) return;
-  const origins = [originField, originOdd];
-  halves.forEach((h, i) => {
-    const o = origins[i]; if (!o || !o.isConnected) return;
-    const hr = h.getBoundingClientRect(), or = o.getBoundingClientRect();
-    if (!hr.width || !hr.height) return;
-    const sx = or.width / hr.width, sy = or.height / hr.height;
-    const dx = (or.left + or.width / 2) - (hr.left + hr.width / 2), dy = (or.top + or.height / 2) - (hr.top + hr.height / 2);
-    h.style.transition = "none";
-    h.style.transform = `translate(${dx}px,${dy}px) scale(${sx},${sy})`;
-    requestAnimationFrame(() => { h.style.transition = "transform .42s var(--spring)"; h.style.transform = "none"; });
-  });
+  const h = ui.foot.querySelector(".oo-rv2-inset");
+  const o = originOdd;
+  if (!h || !o || !o.isConnected) return;
+  const hr = h.getBoundingClientRect(), or = o.getBoundingClientRect();
+  if (!hr.width || !hr.height) return;
+  const sx = or.width / hr.width, sy = or.height / hr.height;
+  const dx = (or.left + or.width / 2) - (hr.left + hr.width / 2), dy = (or.top + or.height / 2) - (hr.top + hr.height / 2);
+  h.style.transition = "none";
+  h.style.transform = `translate(${dx}px,${dy}px) scale(${sx},${sy})`;
+  requestAnimationFrame(() => { h.style.transition = "transform .42s var(--spring)"; h.style.transform = "none"; });
 }
 let OO_LAST = null;   // the round on screen (screenshot mode taps its answer: js/games/oo-shot.js)
 function ooAsk(ui, r, o = {}) {
@@ -700,27 +726,47 @@ function ooPickPalette() {
 }
 
 // ======================================================================
-// The reveal (David, 2026-10-11, rewritten to a TRUE full screen -- "remove the tiles entirely... a
-// super-minimal full-screen view of just the colors and their names"): the odd color and its field color as two
-// full-bleed halves, name + hex tucked in a corner of each, one small difference line, a tiny source note. Tap
-// anywhere moves on (the melt transition). Names are tappable ([data-swatch] morphs into that color's page
-// app-wide) and logged as a sighting so Learn benefits from every round, not just the ones about learning names.
+// The reveal (David, 2026-10-11, redesigned around how differences are actually seen and learned): the field
+// color fills the screen; the odd color sits as a centered Albers-style inset square, since a small inset
+// against a surrounding field is where a subtle difference is most visible -- far more than across a split with
+// the two names in opposite corners (an earlier version of this screen, which David called out as "not the
+// perfect UI to learn color differences and names"). The names sit together, right under the inset -- the odd
+// one large, the field one small and subordinate ("in <field>") -- both tappable to their pages. The direction
+// word gets a tiny "see it" strip: field, odd, and the same move exaggerated 3x, so "bluer" is something you can
+// actually see, not just read. The source is one small, truncated line at the very bottom, never overlapping
+// anything. Tap anywhere else moves on (the melt transition); a one-time hint teaches that for the first rounds.
 // ======================================================================
 const ooNm = h => { try { return typeof nameOf === "function" ? nameOf(h).n : h; } catch (e) { return h; } };
 function ooSeenLog(hex) {
   try { if (typeof learnerLog === "function") learnerLog({ type: "seen", color: hex, src: "game" }); } catch (e) {}
 }
+// the same move, pushed 3x further in the same Lab direction (clamped into gamut), so the reveal can show the
+// axis word as something visible, not just a word -- "bluer" next to a swatch that is unmistakably bluer
+function ooExaggerate(fieldHex, oddHex, mult = 3) {
+  try {
+    const F = lab(fieldHex), O = lab(oddHex), d = O.map((x, i) => x - F[i]);
+    for (const k of [mult, 2.2, 1.6, 1.15]) {
+      const P = F.map((x, i) => x + d[i] * k);
+      if (P[0] >= 2 && P[0] <= 98 && inGamut(...P)) return labHex(...P);
+    }
+  } catch (e) {}
+  return oddHex;
+}
 function ooRevealHTML(r, res, showNames = true) {
   const odd = r.odd, field = r.base, pair = odd && field && odd !== field;
   const no = pair && showNames ? ooNm(odd) : null, nf = pair && showNames ? ooNm(field) : null;
   if (pair) { ooSeenLog(odd); ooSeenLog(field); }   // the exposure is logged for Learn either way; only the on-screen label is optional
-  const lbl = (hex, name, corner) => name ? `<span class="oo-rv2-lbl oo-rv2-${corner}"><b>${esc(name)}</b><em class="mono">${esc(hex)}</em></span>` : "";
-  const half = (hex, name, corner) => `<button class="oo-rv2-half" data-swatch="${hex}" data-ink="${ink(hex)}" style="--c:${hex}">${lbl(hex, name, corner)}</button>`;
-  const halves = pair ? half(field, nf, "a") + half(odd, no, "b") : `<div class="oo-rv2-half" style="--c:${odd || field || "#5F5F5F"}"></div>`;
+  const fieldC = field || odd || "#5F5F5F", fi = ink(fieldC);
+  const inset = `<button class="oo-rv2-inset" data-swatch="${odd || field}" data-ink="${ink(odd || field)}" style="--c:${odd || field}" aria-label="${esc(no || "The odd color")}"></button>`;
+  const names = pair && showNames ? `
+    <button class="oo-rv2-oddname" data-swatch="${odd}"><b>${esc(no)}</b><em class="mono">${esc(odd)}</em></button>
+    <button class="oo-rv2-fieldname" data-swatch="${field}">in ${esc(nf)}</button>` : "";
   const diff = pair && r.dir ? `A touch ${esc(r.dir)}.` : r.none ? "Every tile was the same color." : res.ok ? "Right." : "The ringed tile was different.";
+  const exag = pair ? ooExaggerate(field, odd) : null;
+  const seeIt = exag ? `<div class="oo-rv2-see" aria-hidden="true"><i style="--c:${field}"></i><i style="--c:${odd}"></i><i style="--c:${exag}"></i></div>` : "";
   const src = r.paletteSource;
   const srcHTML = src ? `<button class="oo-rv2-src"${src.link ? "" : " disabled"}>${src.fromFav ? "" : "From "}${esc(src.label)}</button>` : "";
-  return { halves, diff, srcHTML, link: src && src.link };
+  return { fieldC, fi, inset, names, diff, seeIt, srcHTML, link: src && src.link };
 }
 
 // Survival and the Growing board: two stand-alone games beside the ladder (the Mix lists them). Their difference follows
@@ -942,7 +988,7 @@ function ooMap(opt = {}) {
     ooMeltGhost(ui);
     const enter = st.round === 0 ? null : st.grew ? "divide" : "settle"; st.grew = false;
     const breather = st.round > 0 && st.round % 5 === 4;
-    const aspect = (ui.stage.clientHeight / ui.stage.clientWidth) || 1.6;
+    const aspect = ooInsetAspect(ui.stage) || (ui.stage.clientHeight / ui.stage.clientWidth) || 1.6;
     let r = null;
     if (st.round === 0 && opt.forceShape) {
       const axis = ooSimpleAxis(model), skill = ooSimpleSkill(st.cols), fs = opt.forceShape;
@@ -954,7 +1000,11 @@ function ooMap(opt = {}) {
       for (let tries = 0; tries < 8 && !r; tries++) r = ooSimpleGradRound(rows, cols, richness, palette && palette.colors, skill, mix, d * bf, k, Math.random);
       if (r) Object.assign(r, { axis, judg: axis, mix, bf: r.gridType && r.gridType !== "flat" ? bf : 1, paletteSource: palette });
     }
-    if (!r) r = ooSimpleRound({ model, cols: st.cols, round: st.round, aspect, palette: ooPickPalette() }, breather);
+    // a run always starts chill and ramps toward the real, persisted skill over its first ~20 rounds (David,
+    // 2026-10-11) -- st.cols itself (the true skill ratchet, tracked on accuracy) is untouched by this; only
+    // what's fed into this round's size/richness band is ramped.
+    const rampCols = ooSimpleRampCols(st.cols, st.round);
+    if (!r) r = ooSimpleRound({ model, cols: rampCols, round: st.round, aspect, palette: ooPickPalette() }, breather);
     const o = { feedback: true, tileNames: false, resolveOdd: true, enter, pauseCtl: {} };   // names live in the reveal now, never crowding gapless tiles
     if (!zen && sim.timer) o.timeLimit = ooSimpleTime(st.cols);
     curPauseCtl = o.pauseCtl;
@@ -993,13 +1043,24 @@ function ooMap(opt = {}) {
     const rv = ooRevealHTML(r, res, sim.names);
     const rvEl = document.createElement("div");
     rvEl.className = "oo-reveal2" + (reduceMotion ? "" : " oo-in");
-    rvEl.innerHTML = `${rv.halves}<p class="oo-rv2-diff">${rv.diff}</p>${rv.srcHTML}${over ? `<p class="oo-rv2-end">See how you did ${ICON.arrow}</p>` : ""}`;
+    rvEl.dataset.ink = rv.fi;
+    rvEl.style.setProperty("--c", rv.fieldC);
+    // "Tap to continue" teaches the gesture for a player's first few reveals only (David, 2026-10-11)
+    const hintN = sim.revealHintN || 0, showHint = hintN < 3;
+    if (showHint) { sim.revealHintN = hintN + 1; save(); }
+    rvEl.innerHTML = `${rv.inset}
+      <div class="oo-rv2-names">${rv.names}</div>
+      <div class="oo-rv2-diffrow"><p class="oo-rv2-diff">${rv.diff}</p>${rv.seeIt}</div>
+      ${over ? `<p class="oo-rv2-end">See how you did ${ICON.arrow}</p>` : showHint ? `<p class="oo-rv2-hint">Tap to continue</p>` : ""}
+      ${rv.srcHTML}`;
     el.appendChild(rvEl);
-    // the two halves grow out of the tiles they came from (uses the reveal's own halves, now in rvEl)
-    ooRevealFlip({ foot: rvEl }, originOdd, originField);
+    // the inset grows out of the odd tile it came from
+    ooRevealFlip({ foot: rvEl }, originOdd);
     let gone = false;
     const g2 = () => { if (gone) return; gone = true; rvEl.remove(); if (over) end(); else nextRound(); };
     const srcBtn = rvEl.querySelector(".oo-rv2-src"); if (srcBtn && rv.link) srcBtn.onclick = e => { e.stopPropagation(); if (rv.link.kind === "painting") location.hash = "#/painting/" + String(rv.link.id).replace(/^painting-/, ""); else if (rv.link.kind === "look") location.hash = "#/look/" + rv.link.id; };
+    // tap anywhere advances -- only the inset, the two names and the source are [data-swatch]/explicit links
+    // (and those are a small fraction of the screen now, not most of it), so this always fires on an open tap
     rvEl.addEventListener("click", e => { if (!e.target.closest("[data-swatch],.oo-rv2-src,a")) g2(); });
     if (!zen) later(() => { if (!gone) g2(); }, 2500);
     buzz(res.ok ? (zen ? 8 : 10) : [10, 40, 10]);

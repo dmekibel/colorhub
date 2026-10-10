@@ -304,6 +304,20 @@
 .oo-simple .drill-foot{display:none}
 .oo-board.oo-full{position:relative;width:100%;height:100%;aspect-ratio:auto}
 .oo-full .oo-t{border-radius:0}
+/* a hairline seam (David, 2026-10-11: "without cell outlines the game feels a bit off") -- not a gap, just a
+   soft inset shade so tiles read as tiles while the field stays one continuous surface */
+.oo-full .oo-t{box-shadow:inset 0 0 0 .5px rgba(0,0,0,.16),inset 0 0 0 1px rgba(255,255,255,.035)}
+/* the tappable grid lives inside the safe area; the SAME colors bleed full-bleed behind it, non-interactive, so
+   the field still reads edge to edge under the status bar/Dynamic Island, the home indicator and the corners
+   (David, 2026-10-11: top tiles were "hard to reach and cut off") */
+.oo-boardouter{position:relative;width:100%;height:100%}
+/* a heavy blur over the same tile colors, scaled up slightly to cover its own blur overflow -- the bleed never
+   has to tile edge-to-edge perfectly against the inset board's different aspect (it did not, and showed as a
+   jagged seam), it just has to read as the same field continuing past the usable grid */
+.oo-boardbleed{position:absolute;inset:0;z-index:0;pointer-events:none;filter:blur(30px) saturate(1.08);transform:scale(1.1);overflow:hidden}
+.oo-boardbleed .oo-t{position:absolute;padding:0;background:var(--c);box-shadow:none}
+.oo-boardouter .oo-board.oo-full{position:absolute;z-index:1;width:auto;height:auto;
+  top:calc(var(--top) + 40px);left:calc(var(--left) + 16px);right:calc(var(--right) + 16px);bottom:calc(var(--bottom) + 30px)}
 .oo-board.oo-settle{transition:transform .35s var(--ease),opacity .35s var(--ease);transform:scale(.93);opacity:.5}
 @media (prefers-reduced-motion:reduce){.oo-board.oo-settle{transition:none}}
 /* the per-round timer: a true hairline pinned to the absolute top viewport edge, never a bar inside the layout */
@@ -330,24 +344,32 @@
 .oo-pset .item:last-child{border-bottom:0}
 @media (prefers-reduced-motion:reduce){.oo-pausefield,.oo-pausecard{transition:none}}
 
-/* ---------- the reveal (2026-10-11, "remove the tiles entirely"): a true full-screen view of just the two
-   colors and their names -- two full-height halves, a name+hex corner tag on each, one small difference line
-   centered, a tiny source note at the foot. Tap anywhere moves on. ---------- */
-.oo-reveal2{position:fixed;inset:0;z-index:11;display:flex}
+/* ---------- the reveal (2026-10-11, redesigned around how a difference is actually seen and learned): the
+   field color fills the screen; the odd color sits as a centered Albers-style inset square, where a subtle
+   difference reads far better than across a split. Names sit together right under the inset -- the odd one
+   large, the field one small and subordinate. A "see it" strip makes the direction word visible, not just read.
+   The source is one small truncated line at the very bottom. Tap anywhere (not the inset/names/source) moves on. */
+.oo-reveal2{position:fixed;inset:0;z-index:11;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:var(--c);padding:0 24px}
 .oo-reveal2.oo-in{animation:ooRevealIn .32s var(--ease) both}
 @keyframes ooRevealIn{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.oo-reveal2.oo-in{animation:none}}
-.oo-rv2-half{position:relative;flex:1;height:100%;background:var(--c);border:0;padding:0}
-.oo-rv2-lbl{position:absolute;display:flex;flex-direction:column;gap:2px;text-align:left}
-.oo-rv2-a{left:calc(var(--left) + 20px);top:calc(var(--top) + 20px)}
-.oo-rv2-b{right:calc(var(--right) + 20px);bottom:calc(var(--bottom) + 20px);text-align:right;align-items:flex-end}
-[data-ink="dark"] .oo-rv2-lbl{color:#141311}[data-ink="light"] .oo-rv2-lbl{color:#fff}
-.oo-rv2-lbl b{font:400 20px/1.15 var(--serif)}
-.oo-rv2-lbl em{font:500 12px/1 var(--mono);opacity:.7;font-style:normal}
-.oo-rv2-diff{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;margin:0;padding:8px 16px;border-radius:var(--r-pill);background:rgba(20,19,17,.78);color:#ECE8DF;font:italic 400 16px/1.25 var(--serif);text-align:center;max-width:78%;pointer-events:none}
-.oo-rv2-src{position:absolute;left:50%;bottom:calc(var(--bottom) + 16px);transform:translateX(-50%);z-index:1;font:italic 400 14px/1.2 var(--serif);color:#ECE8DF;opacity:.82;text-decoration:underline;text-underline-offset:3px;text-align:center;max-width:84%;background:transparent}
+.oo-reveal2[data-ink="dark"]{color:#141311}.oo-reveal2[data-ink="light"]{color:#fff}
+.oo-rv2-inset{width:min(46vw,220px);aspect-ratio:1;border-radius:22px;background:var(--c);border:0;padding:0;box-shadow:0 18px 44px -14px rgba(0,0,0,.45),0 0 0 1px rgba(0,0,0,.06)}
+.oo-rv2-names{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center}
+.oo-rv2-oddname{display:flex;flex-direction:column;align-items:center;gap:2px;background:transparent;border:0;padding:2px}
+.oo-rv2-oddname b{font:400 26px/1.15 var(--serif)}
+.oo-rv2-oddname em{font:500 13px/1 var(--mono);opacity:.72;font-style:normal}
+.oo-rv2-fieldname{background:transparent;border:0;padding:2px;font:italic 400 15px/1.2 var(--serif);opacity:.68}
+.oo-rv2-diffrow{display:flex;flex-direction:column;align-items:center;gap:10px}
+.oo-rv2-diff{margin:0;font:italic 400 16px/1.25 var(--serif);text-align:center;opacity:.9}
+.oo-rv2-see{display:flex;gap:3px;border-radius:var(--r-1);overflow:hidden;height:22px}
+.oo-rv2-see i{width:30px;height:100%;background:var(--c)}
+.oo-rv2-hint{position:absolute;left:50%;bottom:calc(var(--bottom) + 46px);transform:translateX(-50%);margin:0;font:italic 400 14px/1 var(--serif);opacity:.6;animation:ooHintFade 2.6s var(--ease) both}
+@keyframes ooHintFade{0%,70%{opacity:.6}100%{opacity:0}}
+.oo-rv2-src{position:absolute;left:16px;right:16px;bottom:calc(var(--bottom) + 14px);margin:0;font:italic 400 13px/1.2 var(--serif);opacity:.55;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:underline;text-underline-offset:3px;background:transparent;border:0}
 .oo-rv2-src:disabled{text-decoration:none}
-.oo-rv2-end{position:absolute;left:50%;top:calc(var(--top) + 22px);transform:translateX(-50%);z-index:1;margin:0;font:italic 400 15px/1 var(--serif);color:#ECE8DF;opacity:.85}
+.oo-rv2-end{position:absolute;left:50%;top:calc(var(--top) + 22px);transform:translateX(-50%);z-index:1;margin:0;font:italic 400 15px/1 var(--serif);opacity:.85}
+@media (prefers-reduced-motion:reduce){.oo-rv2-hint{animation:none;opacity:.6}}
 
 /* ---------- the motion language (2026-10-11), built around the ripple: a melting round change, a settling or
    dividing entrance, the odd tile resolving into its true color, streak shimmer/bloom, a shake and a glow pulse,
