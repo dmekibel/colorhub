@@ -1474,7 +1474,7 @@ scenario("train", "Odd one out: one tap from the shelf to the pre-game picker, P
   // a light pre-game choice, not the old-style setup screen (David, 2026-10-11): the real board is already
   // visible behind it at the last-used size, with a row of size chips, a grow toggle and a big Play
   t.expect(!t.$(".oo-pk") && !t.$(".oo-sl"), "a first tap on the shelf should never land on the old-style setup screen");
-  t.expect(t.$(".oo-pregame") && t.$$(".oo-sizechip").length === 4, "the pre-game picker should offer its size chips over the board");
+  t.expect(t.$(".oo-pregame") && t.$$(".oo-sizechip").length === 5, "the pre-game picker should offer its size chips over the board");
   t.expect(t.$(".oo-board .oo-t"), "the real board should already be visible (a preview) behind the picker");
   await t.click("[data-play]", { wait: 500 });
   t.expect(!t.$(".oo-pregame"), "tapping Play should dismiss the picker");
@@ -1713,30 +1713,62 @@ scenario("train", "Odd one out: Board picker (Full screen / Square) is independe
   t.ev("ooSimpleState().style = 'gradient'; ooSimpleState().board = 'full'; save(); 1");
 });
 
+// David, live-build feedback: "in the settings when u change something setting should not close" -- tapping the
+// actual Palette/Board rows (not a scripted state mutation) must keep the pause card open and apply live, same
+// as the size chips above. Only Resume, Exit or a tap outside should ever close it.
+scenario("train", "Odd one out: tapping Palette or Board in the pause menu applies live and keeps the card open", async t => {
+  await t.open("#shot=gx:oo:zen", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a Full screen Gradient board");
+  t.ev("document.querySelector('.oo-pause-mark').click(); 1");
+  await t.waitFor(".oo-pausecard.on", 2000, "the pause card");
+  // Board: Full screen -> Square
+  await t.click(t.$('.oo-pausecard.on [data-set="board"]'), { wait: 350 });
+  t.expect(t.$(".oo-pausecard.on"), "the card should still be open right after tapping Board");
+  t.expect(t.ev("ooSimpleState().board") === "square", "Board should have flipped to square");
+  t.expect(/Square/.test(t.$('.oo-pausecard.on [data-set="board"]').innerText), "the Board row's own label should update to Square");
+  // Palette: Gradient -> Classic (also hides the Board/Palette-intensity rows live, no close/reopen needed)
+  await t.click(t.$('.oo-pausecard.on [data-set="style"]'), { wait: 350 });
+  t.expect(t.$(".oo-pausecard.on"), "the card should still be open right after tapping Palette");
+  t.expect(t.ev("ooSimpleState().style") === "classic", "Palette should have flipped to Classic");
+  t.expect(!t.$('.oo-pausecard.on [data-set="board"]'), "the Board row should disappear live once Classic is picked, without closing the card");
+  // resume: the round waiting underneath is already Classic (forced square), applied the instant Palette was tapped
+  t.ev("document.querySelector('.oo-pausecard.on [data-resume]').click(); 1");
+  await t.waitFor(".oo-board .oo-t", 2000, "the board after resuming");
+  const after = t.ev("({ full: OO_LAST.full, rows: OO_LAST.rows, cols: OO_LAST.cols, gridType: OO_LAST.gridType })");
+  t.expect(after.full === false && after.rows === after.cols, `the live round should already be Classic's square board, got full=${after.full} ${after.rows}x${after.cols}`);
+  t.expect(after.gridType === "flat", `Classic should be a flat single color, got ${after.gridType}`);
+  // reset for later scenarios
+  t.ev("ooSimpleState().style = 'gradient'; ooSimpleState().board = 'full'; save(); 1");
+});
+
 // David, 2026-10-11, final word: a few fixed size chips (not a continuous range) plus a "Grows as you play"
-// toggle, shared by the pre-game sheet and the pause menu -- changing the chip in the pause menu takes effect
-// on the player's NEXT run, not the one in progress (changing the live board's size mid-round is exactly the
-// jolt this whole redesign removes).
-scenario("train", "Odd one out: the size-chip picker (pause menu) sets the next run's size and the grow toggle", async t => {
+// toggle, shared by the pre-game sheet and the pause menu.
+// David, live-build feedback (superseding the "deferred to next run" note this comment used to carry): "when I
+// change something setting should not close [and] should apply live" -- picking a chip now redraws the CURRENT,
+// still-unanswered round immediately (liveReRound(), oo-ui.js), hidden behind the dimmed pause field the whole
+// time, with the card staying open throughout.
+scenario("train", "Odd one out: the size-chip picker (pause menu) applies live and keeps the card open", async t => {
   await t.open("#shot=gx:oo:zen", { settle: 600 });
   await t.waitFor(".oo-board .oo-t", 6000, "a board");
-  await t.click(".oo-pause-mark", { wait: 400 });
+  t.ev("document.querySelector('.oo-pause-mark').click(); 1");
   await t.waitFor(".oo-pausecard.on", 2000, "the pause card");
-  t.expect(t.$(".oo-sizepicker") && t.$$(".oo-sizechip").length === 4, "the pause card should offer the same size-chip picker");
-  await t.click(t.$$(".oo-sizechip")[3], { wait: 300 });   // the densest chip (8 columns)
+  t.expect(t.$(".oo-sizepicker") && t.$$(".oo-sizechip").length === 5, "the pause card should offer the same size-chip picker");
+  await t.click(t.$$(".oo-sizechip")[4], { wait: 300 });   // the densest chip (8 columns, OO_SIZE_PRESETS' last)
   const sizeIdx = t.ev("ooSimpleState().sizeIdx");
-  t.expect(sizeIdx === 3, `picking the 4th chip should save sizeIdx 3, got ${sizeIdx}`);
-  t.expect(t.$$(".oo-sizechip")[3].classList.contains("on"), "the picked chip should show as selected");
+  t.expect(sizeIdx === 4, `picking the 5th chip should save sizeIdx 4, got ${sizeIdx}`);
+  t.expect(t.$$(".oo-sizechip")[4].classList.contains("on"), "the picked chip should show as selected");
+  t.expect(t.$(".oo-pausecard.on"), "the pause card should still be open right after picking a chip");
   const growBtn = t.$("[data-growkey]"), growBefore = /on/.test(growBtn.innerText);
   await t.click(growBtn, { wait: 300 });
   const growKey = growBtn.getAttribute("data-growkey"), growAfter = t.ev(`!!ooSimpleState().${growKey}`);
   t.expect(growAfter === !growBefore, "the grow toggle should flip and persist");
-  await t.click("[data-resume]", { wait: 400 });
-  // the NEXT run (Play again from a fresh entry) picks up the new size
-  t.ev("ooSimpleState().style = 'gradient'; ooMap({ zen: true, skipPicker: true }); 1");
-  await t.waitFor(".oo-board .oo-t", 6000, "the next run's board");
+  t.expect(t.$(".oo-pausecard.on"), "the pause card should still be open after the grow toggle too");
+  // the chip's effect is already live underneath the menu -- resuming reveals the 8-column board immediately,
+  // the SAME round that was paused, not a fresh entry
+  t.ev("document.querySelector('.oo-pausecard.on [data-resume]').click(); 1");
+  await t.waitFor(".oo-board .oo-t", 2000, "the board after resuming");
   const cols = t.ev("OO_LAST.cols");
-  t.expect(cols === 8, `the next run should start at the chosen 8-column size, got ${cols}`);
+  t.expect(cols === 8, `the live round should already be the chosen 8-column size on resume, got ${cols}`);
   t.ev("const s = ooSimpleState(); s.sizeIdx = 1; s." + growKey + " = " + growBefore + "; save(); 1");   // reset
 });
 
@@ -1754,14 +1786,15 @@ scenario("train", "Odd one out: every size chip moves the preview and the starte
   // querying the live document (not scoped to #app) during that ~260ms window can double-match stale chips/
   // tiles from the screen being replaced, so every ooMap() re-entry below clears any ghost immediately first.
   const killGhosts = "document.querySelectorAll('.fade-ghost').forEach(n => n.remove()); 1";
-  // -- Square mode: 5x5 through 9x9 --
+  // -- Square mode: 3x3 through 9x9 (David, live-build: "there are not options to make the tiles bigger" --
+  // added 3x3/4x4) --
   t.ev("ooSimpleState().style = 'gradient'; ooSimpleState().board = 'square'; save(); ooMap({ zen: true }); 1");
   t.ev(killGhosts);
   await t.waitFor(".oo-pregame .oo-sizechip", 6000, "the pre-game picker, Square mode");
   const sqChips = t.$$(".oo-sizechip");
-  t.expect(sqChips.length === 5, `Square should offer 5 size chips (5x5..9x9), got ${sqChips.length}`);
-  for (let i = 0; i < 5; i++) {
-    const size = 5 + i;
+  t.expect(sqChips.length === 7, `Square should offer 7 size chips (3x3..9x9), got ${sqChips.length}`);
+  for (let i = 0; i < 7; i++) {
+    const size = 3 + i;
     await t.click(t.$$(".oo-sizechip")[i], { wait: 250 });
     const saved = t.ev("ooSimpleState().squareCols");
     t.expect(saved === size, `tapping the ${size}x${size} chip should save squareCols ${size}, got ${saved}`);
@@ -1776,16 +1809,16 @@ scenario("train", "Odd one out: every size chip moves the preview and the starte
   // persistence: the next entry reopens the picker with 9x9 still selected
   t.ev("ooMap({ zen: true }); 1"); t.ev(killGhosts);
   await t.waitFor(".oo-pregame .oo-sizechip", 6000, "the picker again");
-  t.expect(t.$$(".oo-sizechip")[4].classList.contains("on"), "the picker should remember the 9x9 choice on the next entry");
+  t.expect(t.$$(".oo-sizechip")[6].classList.contains("on"), "the picker should remember the 9x9 choice on the next entry");
   await t.click("[data-play]", { wait: 500 });
   await t.waitFor(".oo-board .oo-t", 6000, "the board again");
-  // -- Full screen mode: the 4 original presets, unaffected by the Square fix --
+  // -- Full screen mode: 3/4/5/6/8 columns (3 added, same "bigger tiles" ask) --
   t.ev("ooSimpleState().board = 'full'; save(); ooMap({ zen: true }); 1"); t.ev(killGhosts);
   await t.waitFor(".oo-pregame .oo-sizechip", 6000, "the pre-game picker, Full screen mode");
   const fsChips = t.$$(".oo-sizechip");
-  t.expect(fsChips.length === 4, `Full screen should offer 4 size chips, got ${fsChips.length}`);
-  const presets = [4, 5, 6, 8];
-  for (let i = 0; i < 4; i++) {
+  t.expect(fsChips.length === 5, `Full screen should offer 5 size chips, got ${fsChips.length}`);
+  const presets = [3, 4, 5, 6, 8];
+  for (let i = 0; i < 5; i++) {
     await t.click(t.$$(".oo-sizechip")[i], { wait: 250 });
     const sizeIdx = t.ev("ooSimpleState().sizeIdx");
     t.expect(sizeIdx === i, `tapping chip ${i} should save sizeIdx ${i}, got ${sizeIdx}`);

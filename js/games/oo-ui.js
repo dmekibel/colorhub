@@ -883,18 +883,26 @@ const OO_S_AXIS_WORD = { hue: "Hue", light: "Value", chroma: "Saturation" };
 // the board size, picked before a run starts and held fixed through it (David, 2026-10-11, final word after
 // round-to-round variance and then a ramp both read as "overwhelming... less zen"): a handful of presets (size
 // scalars for ooSimpleDims -- the board's longer side), shown as chips ("3x4", "4x6"...) in the pre-game picker
-// and the pause menu. Index 1 (~4x6) is the first-timer default.
+// and the pause menu.
 // columns across (David, 2026-10-11: "too small makes it less fun... cap the densest option at ~8 columns on a
 // phone... 4-6 the sweet spot" -- 10+ dropped; a tablet/landscape session gets more room by the same min-tile-
 // size rule, via ooGrowCap, but the chip list itself stays this phone-sized set everywhere for one consistent
 // picker). Rows are derived to stay near-square (ooSimpleDims).
-const OO_SIZE_PRESETS = [4, 5, 6, 8];
-const OO_SIZE_DEFAULT_IDX = 1;   // 5 columns -- "4x6" was David's own first-timer example
+// David, live-build feedback: "there are not options to make the tiles bigger" -- added 3 columns, the biggest
+// tile Full screen can offer. A 2-column chip was tried and dropped: OO_S_MIN_COLS (oo-engine.js) floors every
+// board at 3 columns already (shared with the dual-handle slider elsewhere), so a "2" chip would silently land
+// on the exact same board as "3" -- a dead, confusing option, not a bigger one. The odd tile's own ΔE now
+// shrinks on bigger tiles to compensate (ooSimpleSizeBias, oo-engine.js), so 3 columns still has a real find in
+// it, not an instant pop.
+const OO_SIZE_PRESETS = [3, 4, 5, 6, 8];
+const OO_SIZE_DEFAULT_IDX = 2;   // 5 columns -- "4x6" was David's own first-timer example
 // Square board (David, 2026-10-11 bug fix): the Full-screen chips above are indices into OO_SIZE_PRESETS and
 // drive sim.sizeIdx, but Square always starts from sim.squareCols directly (ooStartCols below) -- rendering
 // those SAME chips while in Square mode let a player tap one, see it highlight, and watch nothing happen,
 // because the tap only ever touched sizeIdx. Square gets its own preset list and writes squareCols itself.
-const OO_SQUARE_PRESETS = [5, 6, 7, 8, 9];
+// David, live-build feedback: added 3x3 and 4x4, Square's own biggest-tile options (same OO_S_MIN_COLS floor
+// as above, so nothing smaller than 3x3 is offered).
+const OO_SQUARE_PRESETS = [3, 4, 5, 6, 7, 8, 9];
 // the real floor under "too small to be fun": no board ever grows (or starts, from the picker -- see below)
 // denser than one tile per ~50 CSS px of the stage's own width. On a 440-wide phone that's ~8 columns, matching
 // the explicit cap; a wider viewport (tablet, landscape) earns a little more room by the same rule.
@@ -1108,15 +1116,18 @@ function ooMap(opt = {}) {
       else if (k === "multiOdd") { sim.multiOdd = !sim.multiOdd; save(); buzz(4); }
       else if (k === "reveal") { sim.reveal = !sim.reveal; save(); buzz(4); }
       else if (k === "richMode") { sim.richMode = sim.richMode === "rich" ? "subtle" : "rich"; save(); buzz(4); }
-      else if (k === "style") { sim.style = sim.style === "classic" ? "gradient" : "classic"; save(); buzz(4); closePause(true); ooMap({ zen }); return; }
-      else if (k === "board") { sim.board = sim.board === "square" ? "full" : "square"; save(); buzz(4); closePause(true); ooMap({ zen }); return; }
+      else if (k === "style") { sim.style = sim.style === "classic" ? "gradient" : "classic"; save(); buzz(4); st.cols = ooStartCols(sim); liveReRound(); }
+      else if (k === "board") { sim.board = sim.board === "square" ? "full" : "square"; save(); buzz(4); st.cols = ooStartCols(sim); liveReRound(); }
       paintPause();
     });
-    // the same size-chip picker as the pre-game overlay (David, 2026-10-11: "the pause menu keeps the same
-    // picker") -- mid-run it only re-paints the pause card itself; the live board only picks up a new chosen
-    // size at the start of the player's NEXT run (changing it mid-round would be exactly the "tile count
-    // changing" jolt this whole redesign is about removing).
-    ooWireSizePicker(card, sim, () => { paintPause(); });
+    // David, live-build feedback: "when I change something setting should not close" -- every setting (size,
+    // board, style...) now applies live, in place, with the card staying open; only Resume/Exit/a tap outside
+    // closes it. This replaces TWO earlier, deliberate choices: style/board used to force a full ooMap() re-
+    // entry (which closed the card as a side effect), and a size-chip change used to defer to the player's next
+    // run rather than touch the live board. liveReRound() (below) is what makes this possible for all three: it
+    // redraws the CURRENT, still-unanswered round in place, hidden behind the dimmed pause field, so nothing
+    // visibly changes until Resume -- not a fresh entry, not a scored miss, not a wait for next time.
+    ooWireSizePicker(card, sim, () => { st.cols = ooStartCols(sim); liveReRound(); paintPause(); });
   }
   function openPause() {
     if (st.paused) return;
@@ -1146,6 +1157,11 @@ function ooMap(opt = {}) {
   // guards this, but the timers below need a single reference to cancel cleanly on quit/backgrounding too
   document.addEventListener("visibilitychange", ooGhostCleanup);
   let pauseAutoT = 0, curPauseCtl = {};
+  // regenerates the CURRENT, not-yet-answered round in place -- used only while paused, so a settings change
+  // (size/board/style) applies instantly without closing the card or scoring a miss (see the data-set handler
+  // above). It's just nextRound() again: st.round never advances until onAnswer runs, so this simply replaces
+  // whatever round was waiting, hidden behind the dimmed pause field the whole time.
+  function liveReRound() { nextRound(); if (curPauseCtl.pause) curPauseCtl.pause(); }
   function nextRound() {
     // the grid is fixed for the whole run now (David, 2026-10-11, final word): no band, no ramp, no hold-timer
     // -- st.cols only ever changes at a deliberate growth step (onAnswer, Arcade only, off by default in Zen),
@@ -1190,7 +1206,14 @@ function ooMap(opt = {}) {
       const mix = r.mix || (r.judg ? { [r.judg]: 1 } : null);
       if (mix) {
         const dom = Object.keys(mix).reduce((best, a) => mix[a] > mix[best] ? a : best, Object.keys(mix)[0]);
-        if (OO_AXES.includes(dom)) ooUpdate(model, dom, r.fam || ooFam(r.base || r.odd), res.act / ((r.vf || 1) * (r.bf || 1)), !!res.ok, r.g || 0);
+        // r.calTarget (oo-engine.js), not the realized res.act, once sizeBias is in play: a big-tile board's much
+        // smaller requested gap can't always be hit exactly (gamut/color-step clamping), and back-dividing a
+        // realized value that drifted upward by a small sizeBias inflated the model's estimate far more than any
+        // real threshold change -- found via tools/oo_simple_sim.js as a compounding "gets easier over time" drift.
+        // calTarget is the pre-sizeBias, model-space value the round actually AIMED for, already bf-compensated,
+        // so this is the exact same divide-out-bf-and-vf shape calibration always used, just size-independent.
+        const calIn = r.calTarget != null ? r.calTarget : res.act;
+        if (OO_AXES.includes(dom)) ooUpdate(model, dom, r.fam || ooFam(r.base || r.odd), calIn / ((r.vf || 1) * (r.bf || 1)), !!res.ok, r.g || 0);
       }
     }
     if (!res.ok && res.picked && res.right) ooLogMiss(res.right, res.picked, { game: "odd:simple", judg: r.judg, d: res.act });

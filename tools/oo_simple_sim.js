@@ -47,7 +47,11 @@ function run(truths, size0, seed, n = 400, aspect = 1.6, richMode = "subtle", gr
     }
     if (!r) continue;   // an unlucky draw (rare): skip, same as the UI would retry
     drawCount++;
-    const floor = E.OO_S_FLOOR[r.axis];
+    // David, live-build feedback ("way too obvious" on big tiles): bigger tiles make the SAME raw ΔE00 easier
+    // to see, so oo-engine.js's ooSimpleSizeBias shrinks the drawn gap on a big-tile (few-column) board -- the
+    // nominal floor (calibrated at a REFERENCE tile size) legitimately scales down right along with it; a
+    // correctly-shrunk big-tile round reading "below the floor" is the fix working, not a bug.
+    const floor = E.OO_S_FLOOR[r.axis] * (r.sizeBias || 1);
     if (r.act < floor - 1e-6) subFloor++;
     if (r.act <= floor * 1.5) floorRounds++;   // near the floor, whatever the model's own (possibly much sharper) estimate says
     richCount[r.gridType] = (richCount[r.gridType] || 0) + 1;
@@ -65,12 +69,25 @@ function run(truths, size0, seed, n = 400, aspect = 1.6, richMode = "subtle", gr
     // Only the dominant axis in the mix is updated, credited with the full gap -- splitting credit proportionally
     // across every axis in the mix systematically dragged every estimate down (a tiny secondary nudge got marked
     // "detected" on the strength of the dominant axis's much bigger move); matches js/games/oo-ui.js's onAnswer.
-    const mix = r.mix || { [r.axis]: 1 }, effAct = r.act / (r.bf || 1);
+    // effAct recovers the gap in REFERENCE-size, reference-richness units for judging the simulated eye's own
+    // physical/perceptual odds (ooP): both bf (richness inflated the request) and sizeBias (tile size shrank it)
+    // are presentation-space transforms, divided back out so a fixed truths[axis] threshold means the same thing
+    // at every board size and richness -- a smaller r.act on a big-tile board is genuinely EASIER to see, worth
+    // more here, exactly as sizeBias intends.
+    const mix = r.mix || { [r.axis]: 1 }, effAct = r.act / ((r.bf || 1) * (r.sizeBias || 1));
     const thAt = E.ooTheta(model, r.axis, null);   // the model's own threshold at the moment this round was drawn
     const blendTruth = Object.keys(mix).reduce((s, a) => s + mix[a] * truths[a], 0);
     const ok = rnd() < E.ooP(effAct, blendTruth, r.g || 0);
     const dom = Object.keys(mix).reduce((best, a) => mix[a] > mix[best] ? a : best, Object.keys(mix)[0]);
-    if (E.OO_AXES.includes(dom)) E.ooUpdate(model, dom, null, effAct, ok, r.g || 0);
+    // the MODEL's own feedback, unlike the eye's physical odds above, uses r.calTarget (oo-engine.js) -- the
+    // pre-sizeBias, model-space value the round actually AIMED for -- instead of back-dividing the realized
+    // r.act by sizeBias. A big-tile board's much smaller requested gap can't always be rendered exactly (gamut/
+    // color-step clamping has its own practical minimum step), and back-dividing a realized value that drifted
+    // upward by a small sizeBias inflated the model's estimate far more than any real threshold change: an
+    // earlier version of this compounded into a steadily-easier typical eye (settled accuracy crept over 90%).
+    // calTarget sidesteps this entirely -- same shape as js/games/oo-ui.js's onAnswer.
+    const calIn = (r.calTarget != null ? r.calTarget : effAct * (r.bf || 1)) / (r.vf || 1);
+    if (E.OO_AXES.includes(dom)) E.ooUpdate(model, dom, null, calIn, ok, r.g || 0);
     if (ok) {
       hits++;
       if (grows && size < gridHi && hits - hitsAtGrow >= growAt) { size++; grewCount++; hitsAtGrow = hits; growAt = 10 + Math.floor(rnd() * 3); }
@@ -245,6 +262,26 @@ console.log("\n== No flat boards, anywhere ==");
   }, 0);
   console.log(`  flat boards drawn across 4 runs of 120 rounds: ${allFlat} (must be 0)`);
   if (allFlat > 0) { console.log(`FAIL: ${allFlat} flat boards were drawn -- flat should be gone entirely now`); fail = true; }
+}
+// David, live-build feedback (4x9 Full screen, terracotta/coral gradients): "these are way too obvious" -- the
+// explicit ask was "check the first 5 rounds on 3-4 column boards... no round should be solvable at a glance".
+// A fresh/new player's model starts at OO_START (oo-engine.js), not yet calibrated by real play, so this is the
+// hardest case for "obvious": a big-tile board right from round 1, before the staircase has had a chance to
+// narrow in. ratio is the drawn gap divided by the model's OWN threshold estimate at that moment (same metric
+// as the "never an obvious pop" check above) -- "solvable at a glance" is treated the same way there: a gap
+// more than 2x the believed threshold.
+console.log("\n== Big tiles, fresh player: the first 5 rounds on a 3 or 4 column board are never solvable at a glance ==");
+{
+  // round index 4 (the "5th round") lands on the deliberate breather schedule (t % 5 === 4) -- intentionally
+  // easier "for rhythm, not a reward", same documented exception the "never an obvious pop" check above already
+  // carves out. Reported here either way, just not held to the same cap.
+  [3, 4].forEach(size => {
+    const { hist } = run({ hue: 1.8, light: 1.3, chroma: 2.3 }, size, 42000 + size, 5, 1.6, "subtle", size, false);
+    const ratios = hist.map(h => h.ratio.toFixed(2)).join(", ");
+    const worst = Math.max(...hist.filter(h => !h.breather).map(h => h.ratio));
+    console.log(`  ${size} columns, first 5 rounds' gap/threshold ratio: ${ratios} (worst non-breather ${worst.toFixed(2)}, must stay <= 2)`);
+    if (worst > 2) { console.log(`FAIL: a ${size}-column board drew an obvious, at-a-glance round in its first 5`); fail = true; }
+  });
 }
 console.log(fail ? "\nFAIL" : "\nPASS");
 process.exit(fail ? 1 : 0);

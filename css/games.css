@@ -338,8 +338,15 @@
 /* ---------- the pause mark + menu (David, refinement: "ONE subtle control" instead of separate exit/edit/
    settings buttons) -- a tiny glyph, always present, that opens a centered Night Gallery card over a dimmed,
    blurred field: Resume, Zen/Arcade, Settings, Exit. A swipe down from the top edge opens the same menu. ---------- */
-.oo-pause-mark{position:fixed;top:calc(var(--top) + 10px);left:calc(var(--left) + 10px);z-index:8;width:44px;height:44px;display:flex;align-items:center;justify-content:center;gap:3px;background:transparent;border:0}
-.oo-pause-mark i{width:13px;height:2px;border-radius:1px;background:#fff;opacity:.55;mix-blend-mode:difference}
+/* David, live-build feedback: "setting button also looks weird" -- the old "- -" (two thin mix-blend-mode
+   bars) read as a stray dash, not a control. A proper iOS-style floating glyph: a frosted, translucent round
+   button (36px visible, inside the existing 44px hit area, safe-area positioned) with a plain white pause
+   glyph. Frosted dark glass (not mix-blend-mode) reads reliably on any gradient underneath -- light or dark --
+   because it supplies its own contrast instead of inverting whatever's behind it. */
+.oo-pause-mark{position:fixed;top:calc(var(--top) + 10px);left:calc(var(--left) + 10px);z-index:8;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:transparent;border:0}
+.oo-pause-mark::before{content:"";position:absolute;width:36px;height:36px;border-radius:50%;background:rgba(18,17,15,.4);backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);border:1px solid rgba(255,255,255,.16);box-shadow:0 1px 5px rgba(0,0,0,.2)}
+.oo-pause-mark i{position:relative;width:3.5px;height:13px;border-radius:2px;background:#fff;opacity:.95}
+.oo-pause-mark i+i{margin-left:5px}
 .oo-pause-hint{position:fixed;top:calc(var(--top) + 14px);left:calc(var(--left) + 56px);z-index:8;padding:7px 12px;border-radius:var(--r-pill);background:rgba(20,19,17,.82);color:#ECE8DF;font:italic 400 14px/1 var(--serif);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .4s var(--ease)}
 .oo-pause-hint.on{opacity:1}
 .oo-pausefield{position:fixed;inset:0;z-index:9;background:rgba(10,10,8,.45);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
@@ -357,8 +364,13 @@
 /* the size picker (David, 2026-10-11, final word: a few fixed chips, not a continuous range -- "maybe the user
    selects the size before the game"), shared by the pre-game sheet and the pause menu. */
 .oo-sizepicker{margin-bottom:18px;text-align:left}
-.oo-sizechips{display:flex;gap:8px;margin-bottom:8px}
-.oo-sizechip{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;border-radius:var(--r-2);background:var(--surface-2);transition:background .2s,transform .2s var(--spring)}
+/* David, live-build feedback: "make sure the size control is clearly visible" -- Square now offers 7 chips
+   (3x3..9x9). Equal-flex division squeezed every chip as more were added, so the row scrolls horizontally at a
+   comfortable fixed chip width instead (5 or fewer chips -- Full screen's usual count -- still read as one full
+   row with no visible scrollbar needed on a phone). */
+.oo-sizechips{display:flex;gap:8px;margin-bottom:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.oo-sizechips::-webkit-scrollbar{display:none}
+.oo-sizechip{flex:0 0 58px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;border-radius:var(--r-2);background:var(--surface-2);transition:background .2s,transform .2s var(--spring)}
 .oo-sizechip.on{background:var(--ink)}
 .oo-sizechip:active{transform:scale(.94)}
 .oo-sizeicon{display:grid;grid-template-columns:repeat(var(--gc,3),5px);gap:2px}
