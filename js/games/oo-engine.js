@@ -848,8 +848,12 @@ function ooWhoseAlts(list, ease, rnd) {
 // threshold is sharp enough to hit the floor, difficulty keeps climbing through the grid (3 x 3 up to 9 x 9) and
 // the timer instead, never through an invisible gap.
 // ======================================================================
-const OO_S_FLOOR = { hue: 2.4, chroma: 2, light: 1.6 };   // ΔE00, as drawn: conservative, always visible on a phone
-const OO_S_MULT = 1.35;    // d = th x this lands right ~70% of the time in theory (OO_SLOPE=3, OO_LAPSE=.03; see ooP);
+// Lowered (David, 2026-10-11: "still way too easy and not getting any harder"): the grid size is now fixed per run
+// (his choice), so the grid can no longer carry difficulty past the floor -- the gap must keep shrinking instead.
+// His live 3-column rounds measured ~2-2.5 dE00 as drawn: the old floor (1.6-2.4, x1.2 pad), not his eye, set them.
+// These sit just above what 8-bit sRGB can still step (~0.3-0.5 dE00 per code value) and stay visible on big tiles.
+const OO_S_FLOOR = { hue: 1, chroma: .85, light: .65 };   // dE00, as drawn
+const OO_S_MULT = 1.2;     // d = th x this lands right ~70% of the time in theory (OO_SLOPE=3, OO_LAPSE=.03; see ooP);
 // in practice the online estimate runs a little generous, and richer boards add their own difficulty on top, which
 // together settle actual play closer to 78-82% (tools/oo_simple_sim.js)
 const OO_S_BREATHE_MULT = 1.7;    // a breather round (~93%): easier, for rhythm, not a reward

@@ -52,7 +52,8 @@ function run(truths, size0, seed, n = 400, aspect = 1.6, richMode = "subtle", gr
     // nominal floor (calibrated at a REFERENCE tile size) legitimately scales down right along with it; a
     // correctly-shrunk big-tile round reading "below the floor" is the fix working, not a bug.
     const floor = E.OO_S_FLOOR[r.axis] * (r.sizeBias || 1);
-    if (r.act < floor - 1e-6) subFloor++;
+    // at the lowered floors (David, 2026-10-11) 8-bit rounding alone can land a drawn gap ~15% off target either way
+    if (r.act < floor * .8 - 1e-6) subFloor++;
     if (r.act <= floor * 1.5) floorRounds++;   // near the floor, whatever the model's own (possibly much sharper) estimate says
     richCount[r.gridType] = (richCount[r.gridType] || 0) + 1;
     // every gradient round: the worst step between neighboring tiles must stay clearly under the odd tile's own
