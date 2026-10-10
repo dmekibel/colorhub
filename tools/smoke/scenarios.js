@@ -5602,7 +5602,7 @@ scenario("paintmap", "tier 0 (the shared atlas sheet) covers the whole default v
   // so the drawImage is gated on THIS CELL's own sheet bitmap (bm0) rather than one shared PM_ATLAS.bm0 -- still
   // unconditional in the sense that matters (no further per-cell async wait once PM_ATLAS itself is ready, since
   // every sheet in bm0s resolves together in one Promise.all before PM_ATLAS is ever set)
-  const t0Block = (src.match(/if \(PM_ATLAS && PM_ATLAS\.bm0s\) \{[\s\S]*?\n      \}/) || [""])[0];
+  const t0Block = (src.match(/if \(atlas && atlas\.bm0s\) \{[\s\S]*?\n      \}/) || [""])[0];
   t.expect(t0Block && /ctx\.drawImage\(bm0,/.test(t0Block), "couldn't find tier 0's per-cell drawImage -- check it hasn't grown an extra per-cell gate");
   const manifestExists = await fetch("/data/paintmap/manifest.json", { cache: "no-store" }).then(r => r.ok).catch(() => false);
   if (!manifestExists) { t.notes.push("data/paintmap/manifest.json not present in this checkout -- skipped the live load-time check, static check only"); return; }
@@ -5624,6 +5624,45 @@ scenario("paintmap", "tier 0 (the shared atlas sheet) covers the whole default v
   await t.sleep(400);
   const t1s = t.ev("PM_CTRL._qaTier1Stats()");
   t.expect(t1s && t1s.want > 0, "no cells asked for a tier-1 sheet after zooming in");
+});
+// David, 2026-10-10: "a more convenient way to view [the other archives]... and even on a map" -- the
+// "Collection" switch (js/paintmap.js's own PM_COLLECTIONS/pmAdapterBuild) lets the SAME map lay out Design
+// objects and Photography, not just Paintings. These three cover the map side of that: the switch itself
+// (col= in the address, same as every other spec field), its own atlas tier loading from data/paintmap/
+// <collection>/, hearting from the bottom card going into the generic fvItem* store (js/favs.js), and the
+// existing year-range filter (f.y0/f.y1) applying against a non-painting adapter's own G.year.
+scenario("paintmap", "switching Collection to Photography lays it out and draws from its own atlas", async t => {
+  await t.open("#/paintings/map?col=photography&arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec && t.w.PM_CTRL.spec.col === "photography" && t.w.PM_CTRL.count > 1000, 20000, "the map to lay out Photography (a few thousand photographs, not 24,000 paintings)");
+  t.expect(/Photography/.test(t.text(".pmx-title")), `top bar didn't say Photography: "${t.text(".pmx-title")}"`);
+  const manifestExists = await fetch("/data/paintmap/photography/manifest.json", { cache: "no-store" }).then(r => r.ok).catch(() => false);
+  if (!manifestExists) { t.notes.push("data/paintmap/photography/manifest.json not built in this checkout -- skipped the live atlas check"); return; }
+  let ready = false;
+  for (let i = 0; i < 60 && !ready; i++) { await t.tick(); await t.sleep(150); ready = t.ev("PM_CTRL._qaAtlasReady()") === true; }
+  if (!ready) { t.notes.push("Photography's tier 0 hadn't finished loading within the poll budget (same virtual-time gap the Paintings atlas scenario above documents)"); return; }
+  t.expect(ready, "Photography's own atlas tier 0 never reported ready");
+});
+scenario("paintmap", "hearting a photo from the map's bottom card appears in Kept (js/favs.js's generic store)", async t => {
+  await t.open("#/paintings/map?col=photography&arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec.col === "photography" && t.w.PM_CTRL.count > 1000 && t.w.PM_CTRL.drawn > 5, 20000, "Photography to lay out");
+  const cv = t.$(".pmx-cv"), r = cv.getBoundingClientRect(), c0 = t.w.PM_CTRL.center;
+  // tapping the cell that's ALREADY centered schedules an open (tap()'s double-tap-or-open branch, same as the
+  // very first paintmap scenario above) -- offset like that scenario does, so this lands on a DIFFERENT cell
+  // and takes the plain "fly to it, show the card, don't open" path instead.
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2 - 210, { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL.center >= 0 && t.w.PM_CTRL.center !== c0, 6000, "a different photograph centered under the tap");
+  await t.waitFor(".pmx-heart", 6000, "the bottom card's heart");
+  const before = t.ev("Object.keys(S.favItem || {}).length");
+  await t.click(".pmx-heart", { wait: 500 });
+  await t.waitFor(() => t.ev("Object.keys(S.favItem || {}).length") === before + 1, 6000, "the heart to add one kept item");
+  t.expect(t.ev("Object.values(S.favItem).some(r => r.kind === 'photography')"), "the new Kept entry wasn't tagged kind: \"photography\"");
+});
+scenario("paintmap", "filtering Photography to a narrow year range narrows the map (the address's own y0/y1)", async t => {
+  await t.open("#/paintings/map?col=photography&arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec.col === "photography" && t.w.PM_CTRL.count > 1000, 20000, "Photography to lay out unfiltered");
+  const total = t.w.PM_CTRL.count;
+  await t.open("#/paintings/map?col=photography&arr=color&y0=1939&y1=1943", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec.col === "photography" && t.w.PM_CTRL.count > 0 && t.w.PM_CTRL.count < total, 20000, `the 1939-1943 filter to narrow the set below its unfiltered count (${total})`);
 });
 scenario("favs", "a painting's heart (now in the top bar) and a double-tap on the picture both keep it; the shelf sorts favorites into kinds with counts, remembered", async t => {
   await t.open("#/gallery/8136", { settle: 800 });
@@ -5660,6 +5699,23 @@ scenario("favs", "a painting's heart (now in the top bar) and a double-tap on th
   t.expect(t.ev("S.fvCat") === "paintings", "the chosen kind isn't remembered");
   await t.click(".fva-grid .fva-pin", { wait: 900 });
   await t.waitFor(() => /#\/gallery\/8136/.test(t.w.location.hash), 10000, "a kept painting to open");
+});
+// David, 2026-10-10: "same favs store, appear in Studio's Kept" -- a Design object or a photograph hearted
+// anywhere (its own grid, or the map's bottom card) lands in js/favs.js's generic fvItem* store, and Studio's
+// Kept shelf (favShelf) shows it under its own "Archives" category, same as Paintings has its own.
+scenario("favs", "a design object hearted from its grid shows up in Studio's Kept, under Archives", async t => {
+  await t.open("#/design/browse", { settle: 900 });
+  await t.waitFor("#doBrFeed [data-fvi]", 15000, "a Keep heart on a tile");
+  const tile = t.$$("#doBrFeed [data-pin]")[0], id = tile.dataset.pin;
+  await t.click(tile.querySelector("[data-fvi]"), { wait: 500 });
+  t.expect(t.ev("Object.keys(S.favItem || {}).length") === 1, "hearting a tile didn't add to S.favItem");
+  // the only kept kind so far is Archives, so favShelf() goes straight to its shelf -- no tab bar to choose from
+  // (same minimalist rule every other single-kind case already follows, e.g. "nothing kept but paintings")
+  t.ev("S.fvCat = 'all'; save(); favShelf()");
+  await t.waitFor(".fva-grid [data-fvi-open]", 6000, "the Archives grid");
+  t.expect(t.ev("fvCatNow(fvCats())") === "archives", `expected the shelf to land on archives, got "${t.ev("fvCatNow(fvCats())")}"`);
+  await t.click(`[data-fvi-open="${id}"]`, { wait: 900 });
+  await t.waitFor(() => t.text(".p-title").length > 0 && !t.$(".fv-cat-archives"), 10000, "the kept object's own page to open");
 });
 
 // ---------- the bubble <-> page move and the exact return (js/mapxfer.js, honey.js HONEY_RET; David, 2026-10-08) ----------
@@ -6333,6 +6389,39 @@ scenario("design", "a big category pages instead of rendering every object at on
   t.expect(t.errors.length === 0, `console/window errors after leaving Design objects: ${t.errors.join(" | ")}`);
   const stuck = t.d.elementFromPoint(t.frame.clientWidth / 2, t.frame.clientHeight / 2);
   t.expect(stuck, "nothing at all is at the center of the screen after backing out of Design objects");
+});
+// David, 2026-10-10: "Browse all" (#/design/browse) -- every object, filterable by category/decade/maker,
+// sortable (date/color/maker), a Keep heart on every tile, and "See on the map" opening js/paintmap.js with
+// Design objects as the Collection. js/photography.js's own grid already had filters; it gets the same Sort +
+// hearts + map link added directly, covered by the second scenario below.
+scenario("design", "Browse all sorts, hearts a tile into Kept, and opens the map with Design objects selected", async t => {
+  await t.open("#/design/browse", { settle: 900 });
+  await t.waitFor(".p-title", 12000, "the Browse all page");
+  t.expect(/Browse all/.test(t.text(".p-title")), `title was "${t.text(".p-title")}"`);
+  await t.waitFor("#doBrFeed [data-pin]", 12000, "the unsorted grid");
+  await t.click('#doBrSort [data-dbs="date"]', { wait: 500 });
+  await t.waitFor(() => t.$('#doBrSort [data-dbs="date"]').classList.contains("on"), 6000, "the date sort chip to take the \"on\" state");
+  await t.waitFor(() => t.$$("#doBrFeed [data-pin]").length > 0, 8000, "the grid to redraw sorted by date");
+  await t.waitFor("#doBrFeed [data-fvi]", 8000, "a Keep heart on a tile");
+  const before = t.ev("Object.keys(S.favItem || {}).length");
+  await t.click(t.$$("#doBrFeed [data-fvi]")[0], { wait: 500 });
+  await t.waitFor(() => t.ev("Object.keys(S.favItem || {}).length") === before + 1, 6000, "the heart to add one kept item");
+  t.expect(t.ev("Object.values(S.favItem).some(r => r.kind === 'design')"), "the new Kept entry wasn't tagged kind: \"design\"");
+  await t.click("[data-do-map]", { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec && t.w.PM_CTRL.spec.col === "design", 15000, "the map to open with Design objects as the Collection");
+});
+scenario("design", "Photography's grid sorts, hearts a tile into Kept, and opens the map with Photography selected", async t => {
+  await t.open("#/photography", { settle: 900 });
+  await t.waitFor("#phFeed .pin", 12000, "the photography grid");
+  await t.click('#phSort [data-phs="date"]', { wait: 500 });
+  await t.waitFor(() => t.$$("#phFeed .pin").length > 0, 8000, "the grid to redraw sorted by date");
+  await t.waitFor("#phFeed [data-fvi]", 8000, "a Keep heart on a tile");
+  const before = t.ev("Object.keys(S.favItem || {}).length");
+  await t.click(t.$$("#phFeed [data-fvi]")[0], { wait: 500 });
+  await t.waitFor(() => t.ev("Object.keys(S.favItem || {}).length") === before + 1, 6000, "the heart to add one kept item");
+  t.expect(t.ev("Object.values(S.favItem).some(r => r.kind === 'photography')"), "the new Kept entry wasn't tagged kind: \"photography\"");
+  await t.click("[data-ph-map]", { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec && t.w.PM_CTRL.spec.col === "photography", 15000, "the map to open with Photography as the Collection");
 });
 // ================================================================== UKIYO-E PRINTS (js/ukiyoe.js, Archives lane)
 scenario("design", "the ukiyo-e grid opens with filters and a print opens with facts", async t => {
