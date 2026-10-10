@@ -843,6 +843,12 @@ const OO_S_MULT = 1.35;    // d = th x this lands right ~70% of the time in theo
 // in practice the online estimate runs a little generous, and richer boards add their own difficulty on top, which
 // together settle actual play closer to 78-82% (tools/oo_simple_sim.js)
 const OO_S_BREATHE_MULT = 1.7;    // a breather round (~93%): easier, for rhythm, not a reward
+// an "easiness ceiling" (David, 2026-10-11: "never super easy or super obvious -- a gradient where one tile
+// obviously stands out is boring for everybody"): however much richness, size-band or breather compensation
+// would inflate the drawn gap, it's capped relative to the player's own current threshold on that axis, AND to
+// an absolute ΔE00 well under "pops out at a glance" -- so even a first-time, chill-ramped round still takes a
+// real look (a few seconds), never a free answer.
+const OO_S_EASE_X = 2.5, OO_S_EASE_MAX = 11;
 const OO_S_MIN_COLS = 3, OO_S_MAX_COLS = 20;   // David, 2026-10-10: "the grid can go much bigger", "up to ~12x20"
 // -- this is a SIZE index (the board's longer side), not a literal column count once boards stop being square
 // (ooSimpleDims below turns it into rows x cols for the screen's own aspect)
@@ -927,8 +933,11 @@ function ooOklabToHexSafe(P) {
 // palettes, looks, high-lift painter pairs, and the player's own favorites), and the odd tile sits off of where
 // that gradient says it should be at its position. Difficulty is three things moving together: more tiles, a
 // richer gradient (more stops, a 2-D shape instead of a straight sweep), and a smaller gap -- never just one.
-const OO_S_GRAD_WARMUP = 2;    // the first couple of rounds are flat, so the very first board is the plain one
-const OO_S_FLAT_P = .07;       // flat past the warm-up is a rare palate-cleanser now, not the default
+// Flat boards are gone entirely (David, 2026-10-11: "remove flat boards entirely... beginners get a gentle but
+// visible two-color gradient"). OO_S_GRAD_WARMUP/OO_S_FLAT_P stay at 0, kept (not deleted) only because
+// ooSimpleGradColors/ooSimpleGradRound still accept "flat" as their last-resort, gamut-exhaustion safety net in
+// ooSimpleRound below -- an emergency fallback, never a deliberately dealt board.
+const OO_S_GRAD_WARMUP = 0, OO_S_FLAT_P = 0;
 const OO_S_RICH = {
   grad1: { stops: 2, shapes: ["vert", "horiz"] },
   grad2: { stops: 3, shapes: ["diag", "radial"] },
@@ -938,14 +947,40 @@ const OO_S_GRAD_F = { flat: 1, grad1: 1.12, grad2: 1.28, grad3: 1.45 };   // a r
 // skill: 0 (struggling, still on a small grid) .. 1 (sharp, near the grid cap) -- reuses the grid-size proxy
 // that already drives difficulty, so no second "how good are they" number needs tracking.
 const ooSimpleSkill = size => clamp((size - OO_S_MIN_COLS) / (OO_S_MAX_COLS - OO_S_MIN_COLS), 0, 1);
-// which richness this round draws: a rare flat break, else 2/3/4 stops with the mix shifting toward the richer
+// which richness this round draws: always a gradient now, 2/3/4 stops with the mix shifting toward the richer
 // tiers as skill rises (but never locked out at either end -- a beginner still meets a rich board sometimes, an
-// expert still gets an easy one, which is what keeps it feeling like a game and not a ladder).
+// expert still gets a gentler one, which is what keeps it feeling like a game and not a ladder).
 function ooSimpleGridType(skill, round, rnd = Math.random) {
-  if (round < OO_S_GRAD_WARMUP) return "flat";
-  if (rnd() < OO_S_FLAT_P) return "flat";
   const p1 = ooLerp(.72, .06, skill), p2 = ooLerp(.22, .34, skill), r = rnd();
   return r < p1 ? "grad1" : r < p1 + p2 ? "grad2" : "grad3";
+}
+// the grid SIZE varies round to round around a center, instead of one ratcheting number that holds flat (David,
+// 2026-10-11: "not ratchet up and stay tiny... some rounds bigger tiles, some smaller... always some variance
+// for fun and beauty"). A triangular-ish spread around the center, clamped to the grid's own min/max.
+const OO_S_BAND = 2;
+function ooSimpleRoundCols(centerCols, rnd = Math.random) {
+  const w = [.06, .16, .56, .16, .06], r = rnd();
+  let acc = 0, off = -OO_S_BAND;
+  for (let i = 0; i < w.length; i++) { acc += w[i]; if (r <= acc) { off = i - OO_S_BAND; break; } }
+  return clamp(Math.round(centerCols + off), OO_S_MIN_COLS, OO_S_MAX_COLS);
+}
+// landing away from the band's center changes how hard a round reads from size and tile count alone, before any
+// color is even considered: bigger tiles (fewer cols than center) are easier to scan, so the color move itself
+// is made a touch subtler to compensate; smaller tiles (more cols) are a touch clearer. Keeps every member of
+// the band "just hard enough", not just its center (David, 2026-10-11).
+function ooSizeBiasMult(actualCols, centerCols) {
+  const off = clamp(actualCols - centerCols, -OO_S_BAND, OO_S_BAND) / OO_S_BAND;   // -1..1
+  return ooLerp(.85, 1.15, (off + 1) / 2);
+}
+// a run always starts chill -- few, large tiles and a gentle gradient -- and ramps toward the real, persisted
+// skill level over its first ~20 rounds (David, 2026-10-11: "the longer you play, the more and smaller tiles...
+// so the start always feels easy and calm, then builds"), however sharp that saved skill already is. Feeding
+// this ramped value in as ooSimpleRound's own "cols" ramps the gradient's richness and pull right along with the
+// grid size, since both already key off the same skill number -- one ramp, not two to keep in sync.
+const OO_S_RAMP_ROUNDS = 20, OO_S_RAMP_FLOOR = OO_S_MIN_COLS + 1;
+function ooSimpleRampCols(trueCols, round) {
+  const t = clamp(round / OO_S_RAMP_ROUNDS, 0, 1);
+  return ooLerp(OO_S_RAMP_FLOOR, trueCols, t);
 }
 // the expected color field. stopHexes: 2-4 real colors (a curated or favorite palette, picked in oo-ui.js);
 // cycles through them if a tier needs more stops than it was given. skill sets how far the sweep's own span
@@ -1024,14 +1059,27 @@ function ooSimpleGradRound(rows, cols, richness, stopHexes, skill, mix, d, k, rn
 }
 // one round of the simple game. state: { model, cols (the size index), round, aspect?, palette? (a curated or
 // favorite { colors, label, link } from oo-ui.js's pool, or null) }. breather: an easier round for rhythm.
+// state.cols is the band's CENTER for this round, not a literal size -- the caller (oo-ui.js) already ramps it
+// from a chill floor up to the real, persisted skill over a run's first ~20 rounds (ooSimpleRampCols). This
+// function draws the round's actual size from a small band around that center (ooSimpleRoundCols) and nudges
+// the color gap the opposite way (ooSizeBiasMult) so every member of the band is "just hard enough", not only
+// the center.
 function ooSimpleRound(state, breather, rnd = Math.random) {
   const primary = ooSimpleAxis(state.model, rnd), d = ooSimpleD(state.model, primary, breather, rnd);
   const mix = ooSimpleMix(primary, rnd), skill = ooSimpleSkill(state.cols), richness = ooSimpleGridType(skill, state.round || 0, rnd);
-  const { rows, cols } = ooSimpleDims(state.cols, state.aspect || 1.6);
+  const roundCols = ooSimpleRoundCols(state.cols, rnd), sizeBias = ooSizeBiasMult(roundCols, state.cols);
+  const { rows, cols } = ooSimpleDims(roundCols, state.aspect || 1.6);
   const shape = ooSimpleShape(rows * cols, rnd), k = shape === "k4" ? Math.min(4, rows * cols - 1) : shape === "k2" ? 2 : 1;
-  const bf = OO_S_GRAD_F[richness] || 1, stopHexes = state.palette && state.palette.colors;
-  let r = ooSimpleGradRound(rows, cols, richness, stopHexes, skill, mix, d * bf, k, rnd);
-  if (!r) r = ooSimpleGradRound(rows, cols, "flat", stopHexes, skill, { [primary]: 1 }, d, k, rnd);   // should be rare; a plain fallback
+  const bf = (OO_S_GRAD_F[richness] || 1) * sizeBias, stopHexes = state.palette && state.palette.colors;
+  // the easiness ceiling: richness/size compensation can inflate d upward a lot (a rich board times a big-tile
+  // round could otherwise clear 2x on its own), but the drawn gap this round actually plays at never exceeds
+  // ~2.5x the player's own current threshold, nor an absolute ΔE00 that would read as an instant, obvious pop --
+  // while never dropping below the visibility floor. A known, accepted tradeoff (same as the floor elsewhere):
+  // a clipped round's credit to the IRT model is a slight underestimate of the "aimed for" d, not a correctness bug.
+  const thNow = ooTheta(state.model, primary, null), ease = Math.max(OO_S_FLOOR[primary] * OO_S_FLOOR_PAD, Math.min(OO_S_EASE_MAX, thNow * OO_S_EASE_X));
+  const dEff = Math.min(d * bf, ease);
+  let r = ooSimpleGradRound(rows, cols, richness, stopHexes, skill, mix, dEff, k, rnd);
+  if (!r) r = ooSimpleGradRound(rows, cols, "flat", stopHexes, skill, { [primary]: 1 }, Math.min(d, ease), k, rnd);   // should be rare; a plain fallback
   // belt and braces: an extreme d or an unusual stop near the edge of the screen's gamut could in principle
   // exhaust both attempts above. A round is never allowed to fail outright, so this last resort uses a base and
   // a gap that are always drawable, same emergency pattern ooRound itself falls back to.
@@ -1061,5 +1109,6 @@ if (typeof module !== "undefined") module.exports = {
   OO_S_FLOOR, OO_S_FLOOR_PAD, OO_S_MULT, OO_S_BREATHE_MULT, OO_S_MIN_COLS, OO_S_MAX_COLS, OO_S_WINDOW, OO_S_GROW_AT, OO_S_SHRINK_AT,
   ooLerp, ooSimpleDims, ooSimpleCells, ooOklab, ooOklabRgb, ooOklabInGamut, ooOklabHex, ooOklabMixRaw, ooOklabPathRaw, ooOklabToHexSafe,
   OO_S_GRAD_WARMUP, OO_S_FLAT_P, OO_S_RICH, OO_S_GRAD_F, ooSimpleSkill, ooSimpleGridType, ooSimpleGradColors, ooSimpleMix, ooMixDir, ooSimpleGradRound,
+  OO_S_BAND, ooSimpleRoundCols, ooSizeBiasMult, OO_S_RAMP_ROUNDS, OO_S_RAMP_FLOOR, ooSimpleRampCols, OO_S_EASE_X, OO_S_EASE_MAX,
   ooSimpleAxis, ooSimpleD, ooSimpleShape, ooSimpleRound, ooSimpleGrid,
 };

@@ -1480,6 +1480,15 @@ scenario("train", "Odd one out: Zen (no timer), a gapless full-bleed gradient bo
   t.expect(t.$(".oo-board.oo-full"), "the board should fill its play area (oo-full), not sit in a fixed square box");
   const gap = t.ev("(() => { const b = document.querySelector('.oo-board.oo-full'); if (!b) return null; const ts = [...b.querySelectorAll('.oo-t')].map(x => x.getBoundingClientRect()); if (ts.length < 2) return null; return Math.abs(ts[1].left - ts[0].right); })()");
   t.expect(gap == null || gap < 1, `full-bleed tiles should sit edge to edge with no gap, got ${gap}px`);
+  // the hairline seam (David, 2026-10-11: "without cell outlines the game feels a bit off")
+  const seam = t.ev("(() => { const t = document.querySelector('.oo-board.oo-full .oo-t'); return t ? getComputedStyle(t).boxShadow : null; })()");
+  t.expect(seam && seam !== "none", "tiles should carry a subtle seam (box-shadow), not sit edge to edge with zero separation");
+  // the TAPPABLE grid lives inside the safe area; the color field bleeds full-bleed behind it, non-interactive
+  // (David, 2026-10-11: top tiles were "hard to reach and cut off" under the status bar/Dynamic Island)
+  const insetTop = t.ev("(() => { const b = document.querySelector('.oo-board.oo-full'), s = document.querySelector('.oo-stage'); if (!b || !s) return null; return b.getBoundingClientRect().top - s.getBoundingClientRect().top; })()");
+  t.expect(insetTop != null && insetTop >= 20, `the tappable grid should start well below the stage's top edge, got ${insetTop}px`);
+  const bleedCount = t.ev("document.querySelectorAll('.oo-boardbleed .oo-t').length");
+  t.expect(bleedCount > 0, "a non-interactive bleed layer should fill the area outside the safe-area grid");
 
   // a gradient round: the WHOLE grid is one smooth palette (not a per-tile stripe pattern) -- every tile's own
   // color should differ a little from its neighbors, and exactly one should sit off of where the sweep says it
@@ -1490,14 +1499,24 @@ scenario("train", "Odd one out: Zen (no timer), a gapless full-bleed gradient bo
   t.expect(gridType === "grad3", `a forced grad3 round should say gridType grad3, got ${gridType}`);
   t.expect(uniq >= 7, `a gradient board's tiles should mostly be distinct colors, only ${uniq} of 9 were`);
   t.expect(gAns === 1, "a plain gradient round should have one odd tile");
-  // tap the odd tile and check the full-screen reveal: two big named halves, a difference line, a source
+  // tap the odd tile and check the full-screen reveal: an Albers inset, the odd name large, the field name
+  // small beneath, a difference line, a source -- then prove tapping it actually advances (David, 2026-10-11:
+  // "it gets stuck -- no way to continue to the next one")
   const tiles = t.$$(".oo-board .oo-t"), at = t.ev("OO_LAST.ans[0]");
+  const boardBefore = t.$("#oostage").innerHTML;
   await t.click(tiles[at], { wait: 500 });
   await t.waitFor(".oo-reveal2", 4000, "the full-screen reveal");
-  t.expect(t.$$(".oo-rv2-half").length === 2, "the reveal should show two big named color halves");
+  t.expect(t.$(".oo-rv2-inset"), "the reveal should show the odd color as a centered inset");
+  t.expect(t.$(".oo-rv2-oddname") && t.$(".oo-rv2-oddname").innerText.length > 1, "the reveal should name the odd color, large");
+  t.expect(t.$(".oo-rv2-fieldname") && /^in /.test(t.$(".oo-rv2-fieldname").innerText), "the field name should read \"in <name>\", small");
   t.expect(t.$(".oo-rv2-diff").innerText.length > 2, "the reveal should say how the colors differ");
+  t.expect(t.$(".oo-rv2-see"), "the reveal should show a see-it strip (field, odd, exaggerated)");
   t.expect(t.$(".oo-rv2-src"), "the reveal should name where the palette came from");
-  await t.click(".oo-reveal2", { wait: 400 });
+  // a tap on the open field (not the inset/names/source) must always advance to the next board
+  await t.click(".oo-reveal2", { wait: 500 });
+  t.expect(!t.$(".oo-reveal2"), "tapping the reveal didn't close it");
+  await t.waitFor(".oo-board .oo-t", 4000, "the next board after the reveal");
+  t.expect(t.$("#oostage").innerHTML !== boardBefore, "the board after the reveal is identical to the one before it");
 
   // a combined-axis round: the one odd tile moves along more than one judgment at once
   await t.open("#shot=gx:oo:combo", { settle: 600 });
@@ -1513,7 +1532,7 @@ scenario("train", "Odd one out: Zen (no timer), a gapless full-bleed gradient bo
   await t.open("#shot=gx:oo:miss", { settle: 1400 });
   await t.waitFor(".oo-t.ring", 6000, "the odd tile ringed after a miss");
   t.expect(t.$(".oo-t.miss"), "the tapped (wrong) tile should be marked");
-  t.expect(t.$(".oo-reveal2") && t.$$(".oo-rv2-half").length === 2, "a miss should still show the full-screen reveal's two named halves");
+  t.expect(t.$(".oo-reveal2") && t.$(".oo-rv2-inset") && t.$(".oo-rv2-oddname"), "a miss should still show the full-screen reveal's inset and names");
 });
 
 scenario("train", "Odd one out: the end screen names the day's edge with three bars", async t => {

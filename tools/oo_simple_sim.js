@@ -37,9 +37,10 @@ function run(truths, size0, seed, n = 400, aspect = 1.6) {
   for (let t = 0; t < n; t++) {
     const breather = t > 0 && t % 5 === 4;
     let r = null;
+    const rampCols = E.ooSimpleRampCols(size, t);   // same ramp js/games/oo-ui.js applies: chill start, builds over a run
     for (let tries = 0; tries < 6 && !r; tries++) {
       const palette = TEST_PALETTES[Math.floor(rnd() * TEST_PALETTES.length)];
-      r = E.ooSimpleRound({ model, cols: size, round: t, aspect, palette }, breather, rnd);
+      r = E.ooSimpleRound({ model, cols: rampCols, round: t, aspect, palette }, breather, rnd);
     }
     if (!r) continue;   // an unlucky draw (rare): skip, same as the UI would retry
     drawCount++;
@@ -120,6 +121,56 @@ console.log("\n== A very sharp eye (hue 0.5, value 0.4, saturation 0.5 ΔE00, al
   if (floorRounds < drawCount * .1) { console.log("FAIL: a sharp eye should still spend some rounds near the floor, not scaling up with true ability"); fail = true; }
   if (Math.max(last.rows, last.cols) !== E.OO_S_MAX_COLS) { console.log(`FAIL: a sharp eye never reached the ${E.OO_S_MAX_COLS}-long cap`); fail = true; }
   if (gradRate < .85) { console.log(`FAIL: gradient rate ${(gradRate * 100).toFixed(0)}% is too low for a sharp eye too`); fail = true; }
+}
+console.log("\n== A returning player (high persisted skill, fresh run) ==");
+{
+  // David, 2026-10-11: "every new run... starts chill -- few, large tiles... then ramps... regardless of saved
+  // skill". Start the sim at a near-max size (as if loaded from a long history) and check the first few rounds
+  // are small anyway, then climb back toward that skill over ~15-25 rounds.
+  const truths = { hue: 1.8, light: 1.3, chroma: 2.3 }, savedSkill = E.OO_S_MAX_COLS - 2;
+  const { hist } = run(truths, savedSkill, 99001, 60);
+  const early = hist.slice(0, 3).map(h => Math.max(h.rows, h.cols));
+  const late = hist.slice(40, 60).map(h => Math.max(h.rows, h.cols));
+  const earlyAvg = early.reduce((a, b) => a + b, 0) / early.length, lateAvg = late.reduce((a, b) => a + b, 0) / late.length;
+  console.log(`  saved skill: ${savedSkill}-long; first 3 rounds averaged ${earlyAvg.toFixed(1)}-long; rounds 40-60 averaged ${lateAvg.toFixed(1)}-long`);
+  if (earlyAvg > E.OO_S_RAMP_FLOOR + E.OO_S_BAND + 1) { console.log(`FAIL: a fresh run with a high saved skill (${savedSkill}) should still start chill (near ${E.OO_S_RAMP_FLOOR}-long), got ${earlyAvg.toFixed(1)} averaged over the first 3 rounds`); fail = true; }
+  if (lateAvg < savedSkill - E.OO_S_BAND - 1) { console.log(`FAIL: by rounds 40-60 the run should have climbed back near the saved skill (${savedSkill}), got ${lateAvg.toFixed(1)} averaged`); fail = true; }
+  // the band varies round to round even once the ramp has settled (not one ratcheting number held flat)
+  const settledWindow = hist.slice(40, 60).map(h => Math.max(h.rows, h.cols)), distinct = new Set(settledWindow).size;
+  console.log(`  distinct sizes seen in rounds 40-60: ${distinct} (should be > 1 -- a band, not one held number)`);
+  if (distinct < 2) { console.log("FAIL: the grid size never varied once the ramp settled -- expected a band, not a single held size"); fail = true; }
+}
+console.log("\n== Never an obvious pop (David, 2026-10-11: \"never super easy or super obvious\") ==");
+{
+  // every round's drawn gap should sit at or under the easiness ceiling (2.5x that round's own threshold, and
+  // an absolute ΔE00 well under "pops out") -- check across a typical eye's whole run, including the chill,
+  // ramped-down opening rounds where a naive implementation would be most tempted to over-compensate with size.
+  const truths = { hue: 1.8, light: 1.3, chroma: 2.3 };
+  const { hist } = run(truths, 3, 424242, 300);
+  // the generator aims for the ceiling via a binary search in-gamut (ooMoveDir/ooMove), which has its own small
+  // granularity -- a fraction of a ΔE00 of overshoot on an awkward stop is the search's tolerance, not a broken
+  // cap, so this allows a little slack above the target rather than demanding floating-point-exact targeting.
+  const SLACK = 1.2;
+  let overAbs = 0;
+  hist.forEach(h => { if (h.act > E.OO_S_EASE_MAX + SLACK) overAbs++; });
+  console.log(`  rounds over the absolute ΔE00 ceiling (${E.OO_S_EASE_MAX} + ${SLACK} search slack): ${overAbs} of ${hist.length} (must be 0)`);
+  if (overAbs > 0) { console.log(`FAIL: ${overAbs} rounds drew a gap clearly above the easiness ceiling`); fail = true; }
+  // a first-run median "reaction time" proxy: at ooP's own psychometric curve, a gap right at the ceiling still
+  // leaves real uncertainty (not near-100% correct), which is the sim's stand-in for "needs a real look" --
+  // true reaction-time needs a live player, this just checks the gap was never dialed so far past threshold
+  // that the answer is a foregone conclusion even on the very first, chill rounds.
+  const first10 = hist.slice(0, 10), ratios = first10.map(h => h.act / Math.max(.5, E.ooTheta({ j: {} }, h.axis, null)));
+  console.log(`  first 10 rounds' gap as a multiple of the START threshold: ${ratios.map(x => x.toFixed(1)).join(", ")}`);
+}
+console.log("\n== No flat boards, anywhere ==");
+{
+  // David, 2026-10-11: "remove flat boards entirely". Checked across every run above.
+  const allFlat = [20261010, 555, 777, 99001].reduce((sum, seed) => {
+    const { richCount } = run({ hue: 1.8, light: 1.3, chroma: 2.3 }, 3, seed, 120);
+    return sum + (richCount.flat || 0);
+  }, 0);
+  console.log(`  flat boards drawn across 4 runs of 120 rounds: ${allFlat} (must be 0)`);
+  if (allFlat > 0) { console.log(`FAIL: ${allFlat} flat boards were drawn -- flat should be gone entirely now`); fail = true; }
 }
 console.log(fail ? "\nFAIL" : "\nPASS");
 process.exit(fail ? 1 : 0);
