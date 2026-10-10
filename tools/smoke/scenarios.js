@@ -3447,6 +3447,31 @@ scenario("map", "Honeycomb look stays tiled at low zoom (not circles); Bubbles s
   t.expect(ms < 16, `a draw at Honeycomb's lowest (resting) zoom took ${ms.toFixed(1)}ms, wanted <16ms (no CPU throttle here, so real headroom matters)`);
   t.notes.push(`Honeycomb @ floor zoom ${floor.toFixed(2)}, every name: best draw ${ms.toFixed(1)}ms`);
 });
+// David, 2026-10-10, a live screenshot of ?v=202610102104 (Honeycomb, Grid/Hue, fisheye on): "You broke the
+// honeycomb -- weird overlap now... cells overlap each other like fish scales with thick black borders,
+// especially in the ring around the magnified center and outward; cells are rotated diamonds stacking over
+// neighbors instead of tiling." Root cause: the tiny-bubble LOD path (honeyCells, under the full per-neighbor
+// clip's 7px threshold) sized its hexagon from the bubble's OWN diameter alone, with no idea where its actual
+// neighbors were -- harmless for the forgiving circle it was always sized for, but a hexagon's straight edges
+// turned that same imprecision into visibly crossed tiles, worst exactly where Magnify's fisheye makes the
+// LOCAL size gradient steepest (a tiny bubble right beside a much bigger one). Fixed by bounding that radius
+// with the same real nearest-neighbor bisector the full clip already uses. This checks the fix holds at 3 zoom
+// levels, Magnify pushed high (the exact condition from the screenshot), with a real SAT polygon-overlap test
+// (honey.js HM_CTRL._overlapStat), not just the "is it tiled at all" check above.
+scenario("map", "no two drawn honeycomb cell polygons overlap, at 3 zoom levels, with Magnify high", async t => {
+  await H.homeReady(t);
+  t.ev('S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.arr = "map"; S.hm.ord = { map: "hue" }; S.hm.style = "honeycomb"; S.hm.feel = { mag: .95, space: .15, size: .5 }; hmHome();');
+  await t.waitFor(() => H.num(t.text(".hm-title small")) > 500, 10000, "every name to fill");
+  const floor = t.ev("HM_CTRL.zoomFloor()");
+  for (const [label, z] of [["floor (resting zoom-out)", floor], ["mid", (floor + 1) / 2], ["zoomed in (1x)", 1]]) {
+    t.ev(`HM_CTRL._qaForceZoom(${z})`);
+    await t.sleep(220);
+    const s = t.ev("HM_CTRL._overlapStat()");
+    t.expect(s.checked > 20, `${label}: too few tiled cells to judge (${s.checked})`);
+    t.expect(s.overlapping === 0, `${label}: ${s.overlapping}/${s.checked} cell pairs overlap (worst penetration ${s.worstPenetration}px)`);
+    t.notes.push(`${label}: ${s.checked} tiled cells, 0 overlapping`);
+  }
+});
 scenario("map", "the map keeps its pan and zoom when you open a color and come back", async t => {
   const cv = await H.homeReady(t), r = cv.getBoundingClientRect();
   const o = (x, y) => ({ bubbles: true, cancelable: true, clientX: r.left + x, clientY: r.top + y, pointerId: 11, pointerType: "touch", isPrimary: true, view: t.w });

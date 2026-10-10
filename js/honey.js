@@ -715,7 +715,30 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
   const half = gapPx / 2;
   drawn.forEach((b, n) => {
     if (b.d < 7 && !clipAll) {
-      const rin = Math.max(0, b.d * .44 - half);
+      let rin = Math.max(0, b.d * .44 - half);
+      // That self-only formula (just this bubble's own diameter) has no idea where its actual neighbors are --
+      // harmless for the forgiving circle it's always sized for (a little overlap there just reads as soft
+      // fuzz), but a hexagon's straight edges turn the same imprecision into visibly crossed, stacked tiles
+      // (David, 2026-10-10, a live screenshot: "cells overlap each other like fish scales... rotated diamonds
+      // stacking over neighbors instead of tiling"), worst exactly where Magnify's fisheye makes the LOCAL size
+      // gradient steepest (the ring around the magnified center, where a tiny bubble can sit right beside a
+      // much bigger one). Only the tiled looks (tinyHex) pay for this: the same reach-limited grid scan the
+      // real per-neighbor clip below already does, just for a radius bound instead of a full polygon.
+      if (tinyHex) {
+        const reach = Math.min(12, Math.ceil((b.d + maxD) * .75 / cell));
+        const ci0 = Math.floor(b.x / cell), cj0 = Math.floor(b.y / cell);
+        for (let i = ci0 - reach; i <= ci0 + reach; i++) for (let j = cj0 - reach; j <= cj0 + reach; j++) {
+          const a = grid.get(key(i, j)); if (!a) continue;
+          for (const m of a) {
+            if (m === n) continue;
+            const o = drawn[m], dist = Math.hypot(o.x - b.x, o.y - b.y);
+            if (dist < 1e-6 || dist > (b.d + o.d) * .75) continue;
+            const lim = dist / 2 - half;
+            if (lim < rin) rin = lim;
+          }
+        }
+        rin = Math.max(0, rin);
+      }
       b.poly = tinyHex ? tinyHex.map(p => [p[0] * rin, p[1] * rin]) : null;
       b.rin = rin; b.d0 = b.d; b.d = 2 * rin; return;
     }
@@ -2239,6 +2262,39 @@ function honeycomb(host, opts = {}) {
     _tinyPolyStat() {
       const tiny = drawn.filter(b => b.d0 != null && b.d0 < 7);
       return { tiny: tiny.length, poly: tiny.filter(b => b.poly).length, total: drawn.length };
+    },
+    // QA (tools/smoke map group): do any two currently-drawn cell polygons actually overlap -- real tiles
+    // (b.poly, both the full per-neighbor clip and the tiny-bubble hex) should only ever touch at a shared
+    // edge, never cross (David, 2026-10-10, a live screenshot: "cells overlap each other like fish scales...
+    // rotated diamonds stacking over neighbors"). Both polygon kinds are always convex, so a standard
+    // separating-axis test is exact, not an approximation; a cheap bounding-circle pre-filter (each polygon's
+    // own rin is its inradius, so rin*1.16 safely covers a hexagon's corners too) skips the vast majority of
+    // pairs before paying for SAT. This is QA-only, called once per check, not from the draw loop.
+    _overlapStat() {
+      const polys = drawn.filter(b => b.poly && b.poly.length >= 3 && b.rin > 0);
+      const sat = (p, q) => {
+        for (const poly of [p, q]) {
+          for (let i = 0; i < poly.length; i++) {
+            const a = poly[i], b2 = poly[(i + 1) % poly.length], nx = -(b2[1] - a[1]), ny = b2[0] - a[0];
+            let mn1 = Infinity, mx1 = -Infinity, mn2 = Infinity, mx2 = -Infinity;
+            for (const [x, y] of p) { const d = x * nx + y * ny; if (d < mn1) mn1 = d; if (d > mx1) mx1 = d; }
+            for (const [x, y] of q) { const d = x * nx + y * ny; if (d < mn2) mn2 = d; if (d > mx2) mx2 = d; }
+            if (mx1 < mn2 - .01 || mx2 < mn1 - .01) return false;   // a separating axis: no overlap
+          }
+        }
+        return true;
+      };
+      let pairs = 0, worst = 0;
+      for (let i = 0; i < polys.length; i++) {
+        const b = polys[i], bp = b.poly.map(p => [p[0] + b.x, p[1] + b.y]), bR = b.rin * 1.16;
+        for (let j = i + 1; j < polys.length; j++) {
+          const o = polys[j], dist = Math.hypot(o.x - b.x, o.y - b.y);
+          if (dist > bR + o.rin * 1.16) continue;   // bounding circles (corner-safe) don't even touch
+          const op = o.poly.map(p => [p[0] + o.x, p[1] + o.y]);
+          if (sat(bp, op)) { pairs++; const pen = bR + o.rin * 1.16 - dist; if (pen > worst) worst = pen; }
+        }
+      }
+      return { checked: polys.length, overlapping: pairs, worstPenetration: +worst.toFixed(2) };
     },
     // QA (tools/smoke home group): every currently-drawn bubble's REAL label font size in CSS px (honeyWrap's
     // cached per-name ratio times the bubble's current diameter), for bubbles that would actually draw one
