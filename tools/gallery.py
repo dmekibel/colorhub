@@ -115,6 +115,15 @@ SOURCES = {
     "commons": dict(name="Wikimedia Commons", short="Commons", credit="public domain · CC0 data (Wikidata)",
                     home="https://commons.wikimedia.org/wiki/Commons:Welcome", rec="https://www.wikidata.org/wiki/{num}"),
 }
+# Not separate real sources -- tools/corpus.py's build_rows() relabels any row "<src>2" when its id wasn't already
+# shipped (data/corpus-shipped-ids.json), whatever source it came from: raising an ARTIST_CAP_EXTRA cap can admit
+# a long-candidate row from ANY museum's own meta.json, not only a freshly-fetched Commons one. Each "*2" bucket
+# keeps a growth pass's newly-admitted rows out of its source's already-shipped, id-sorted group (which would
+# shift that group's existing gallery indices even though nothing was dropped) in its own trailing group instead.
+# Appended after the loop on purpose: this dict's key order is the gallery's group order (load_corpus()'s
+# `natural()`), and stable gallery indices for already-shipped paintings depend on nothing being inserted earlier.
+for _k in list(SOURCES):
+    SOURCES[_k + "2"] = dict(SOURCES[_k])
 CMA_IMG = re.compile(r"^https://openaccess-cdn\.clevelandart\.org/([^/]+)/\1_web\.jpg$")
 
 
@@ -396,6 +405,9 @@ def extract_pool(path, k=POOL, crop=None):
     return out
 
 
+REAL_SRCS = {"aic", "cma", "met", "nga", "rijks", "smk", "commons"}
+
+
 def img_cache_path(raw, src, cid):
     num = cid.split("-", 1)[1] if "-" in cid else cid
     return raw / src / "img" / f"{num}.jpg"
@@ -434,7 +446,10 @@ def run_pools(corpus, raw, workers=8):
         crop = x.get("crop") or None   # a painting with a crop box is sampled inside it (tools/crop_paintings.py)
         if x["id"] in done and made_with.get(x["id"]) == crop:
             continue
-        p = img_cache_path(raw, x["src"], x["id"])
+        # x["src"] may be a "<real>2" growth bucket (tools/corpus.py build_rows()) that exists only for gallery
+        # ordering -- the actual cached image always lives under the real adapter's research/_raw/<real>/img/.
+        real = x["src"][:-1] if x["src"].endswith("2") and x["src"][:-1] in REAL_SRCS else x["src"]
+        p = img_cache_path(raw, real, x["id"])
         if p.exists():
             jobs.append((x["id"], str(p), crop))
         else:

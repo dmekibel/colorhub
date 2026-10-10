@@ -51,6 +51,18 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
+# np.bitwise_count (used by dedupe()'s Hamming-distance check) only exists on numpy>=2.0; this environment runs
+# 1.26.4. Polyfill via an 8-bit popcount lookup table over the byte view, rather than requiring a numpy upgrade
+# that could ripple into every other tool in this repo.
+if not hasattr(np, "bitwise_count"):
+    _POPCOUNT8 = np.array([bin(i).count("1") for i in range(256)], dtype=np.uint8)
+
+    def _bitwise_count(x):
+        x = np.asarray(x)
+        view = x.view(np.uint8).reshape(x.shape + (x.dtype.itemsize,))
+        return _POPCOUNT8[view].sum(axis=-1).astype(x.dtype)
+    np.bitwise_count = _bitwise_count
+
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "research" / "_raw"
 UA = "ColorHubBot/1.0 (https://github.com/dmekibel/colorhub)"
@@ -867,7 +879,32 @@ BW_C = 0.6
 BW_DROPPED = Counter()
 
 
+# Gallery indices (ids.txt line i = app index i) are public: they're in saved favorites, share links
+# (#/gallery/<n>), smoke tests, atlas tile positions and the depth/what-links data. A rebuild that adds more
+# source candidates must never move or drop a painting that already shipped. PROTECTED_IDS (set by build_rows(),
+# below, from whatever is on disk -- i.e. already shipped -- before this run writes anything) is consulted by
+# dedupe() and cap_artists() so neither one ever drops a protected id; only genuinely new ids can be dropped or
+# capped away. A new id whose src is "commons" is further relabeled "commons2" (see build_rows()) so the WHOLE
+# set of already-shipped commons rows keeps its exact natural-sort order (new Wikidata QIDs interleaved among
+# old ones by the id-based sort gallery.py and write_corpus() both use would otherwise reshuffle old indices even
+# without anything being dropped) -- new commons rows land in their own group, sorted after every existing one.
+PROTECTED_IDS = set()
+
+
+SHIPPED_IDS_FILE = ROOT / "data" / "corpus-shipped-ids.json"
+
+
 def build_rows():
+    """PROTECTED_IDS: the ids that had already shipped as of the LAST clean build -- data/corpus-shipped-ids.json,
+    not whatever happens to be on disk right now (a build can be re-run mid-session after disk already picked up
+    a bad intermediate state; the committed snapshot is the only trustworthy "already shipped" baseline). Run
+    `python3 tools/corpus.py snapshot-ids` once after a build is verified stable and ready to ship, to refresh it
+    for the NEXT growth pass."""
+    PROTECTED_IDS.clear()
+    if SHIPPED_IDS_FILE.exists():
+        PROTECTED_IDS.update(json.loads(SHIPPED_IDS_FILE.read_text()))
+    else:
+        PROTECTED_IDS.update(r["id"] for r in load_corpus())  # first time: whatever is on disk now is the baseline
     BW_DROPPED.clear()
     app = app_names()
     app_lab = rgb_to_lab(np.array([hex_to_rgb(h) for _, h in app]))
@@ -902,6 +939,15 @@ def build_rows():
     merge_artists(rows)
     rows = dedupe(rows)
     rows = cap_artists(rows)
+    # Any row not in PROTECTED_IDS is new to the SHIPPED corpus as of data/corpus-shipped-ids.json -- not only a
+    # freshly-fetched one: raising an ARTIST_CAP_EXTRA cap can also admit a candidate that was already sitting in
+    # some source's meta.json all along but got capped away before today. Either way it gets its own "<src>2"
+    # trailing bucket (see the PROTECTED_IDS note above build_rows() and gallery.py's SOURCES dict, where every
+    # "*2" bucket is listed after every real one) instead of being inserted into its source's already-shipped,
+    # id-sorted group, which would shift that group's existing gallery indices even though nothing was dropped.
+    for r in rows:
+        if r["id"] not in PROTECTED_IDS and not r["src"].endswith("2"):
+            r["src"] = r["src"] + "2"
     rows.sort(key=lambda r: (r["y"] if r["y"] is not None else 99999, r["id"]))
     return rows, app
 
@@ -1010,7 +1056,11 @@ def title_words(t):
 def dedupe(rows):
     hashes = load_hashes(rows)
     rank = {s: i for i, s in enumerate(SRC)}
-    order = sorted(rows, key=lambda r: (rank[r["src"]], r["id"]))
+    # PROTECTED_IDS (set by build_rows() from what is already on disk before this build) always sort first, so a
+    # duplicate pair between an already-shipped painting and a newly-fetched one always drops the NEW one: a
+    # painting's presence (and so its gallery index -- see the module-level note above PROTECTED_IDS) never
+    # changes just because a later run adds more candidates.
+    order = sorted(rows, key=lambda r: (0 if r["id"] in PROTECTED_IDS else 1, rank.get(r["src"], len(rank)), r["id"]))
     H = np.array([hashes[r["id"]] for r in order], dtype=np.uint64)
     drop, pairs, seen = set(), [], {}
     for r in order:
@@ -1044,8 +1094,17 @@ def dedupe(rows):
 # so a museum that owns hundreds of one painter's sketches cannot outweigh a country or a decade.
 ARTIST_CAP = 50
 # painters whose range is the point of the archive get a larger cap (still spread evenly over their dated works): Sargent's
-# bright watercolors and plein-air oils (tools/sargent_extra.py) would otherwise be thinned back to the dark portraits
-ARTIST_CAP_EXTRA = {"John Singer Sargent": 300}
+# bright watercolors and plein-air oils (tools/sargent_extra.py) would otherwise be thinned back to the dark portraits.
+# 2026-10-10 (David: "I'm very interested in European art" -- depth for major painters): the European old masters
+# and Impressionist-era giants whose range across a career is itself part of the point get the same treatment.
+ARTIST_CAP_EXTRA = {
+    "John Singer Sargent": 300,
+    "Rembrandt van Rijn": 200, "Johannes Vermeer": 60, "Titian": 150, "Raphael": 120, "Leonardo da Vinci": 60,
+    "Claude Monet": 200, "Vincent van Gogh": 200, "Francisco Goya": 150, "J. M. W. Turner": 200,
+    "Albrecht Durer": 120, "Peter Paul Rubens": 200, "Diego Velazquez": 100, "Pierre-Auguste Renoir": 150,
+    "Edgar Degas": 150, "Paul Cezanne": 150, "Eugene Delacroix": 120, "Anthony van Dyck": 120,
+    "Jan van Eyck": 60, "Caravaggio": 80, "El Greco": 100, "Pieter Bruegel the Elder": 80,
+}
 CAPPED = {}
 
 
@@ -1059,9 +1118,19 @@ def cap_artists(rows):
     for a, rs in by.items():
         cap = ARTIST_CAP_EXTRA.get(a, ARTIST_CAP)
         if len(rs) > cap:
-            rs = sorted(rs, key=lambda r: (r["y"] if r["y"] is not None else 99999, r["id"]))
-            keep = {rs[i]["id"] for i in np.linspace(0, len(rs) - 1, cap).round().astype(int)}
-            drop.update(r["id"] for r in rs if r["id"] not in keep)
+            # PROTECTED_IDS (already shipped before this build) are never capped away -- only room left after
+            # them, if any, is filled by new candidates, evenly spread over their dates. A painter already at or
+            # over cap from protected rows alone gets no new ones (see the module-level note above PROTECTED_IDS).
+            old_rs = [r for r in rs if r["id"] in PROTECTED_IDS]
+            new_rs = [r for r in rs if r["id"] not in PROTECTED_IDS]
+            room = cap - len(old_rs)
+            if room > 0 and new_rs:
+                new_rs = sorted(new_rs, key=lambda r: (r["y"] if r["y"] is not None else 99999, r["id"]))
+                keep = {new_rs[i]["id"] for i in np.linspace(0, len(new_rs) - 1, min(room, len(new_rs)))
+                       .round().astype(int)}
+                drop.update(r["id"] for r in new_rs if r["id"] not in keep)
+            else:
+                drop.update(r["id"] for r in new_rs)
             CAPPED[a] = len(rs)
     if CAPPED:
         print(f"artists capped at {ARTIST_CAP}: " + ", ".join(f"{a} ({n})" for a, n in
@@ -1192,12 +1261,14 @@ EUROPE = {"France", "Italy", "United Kingdom", "Netherlands", "Germany", "Belgiu
           "Portugal", "Estonia", "Latvia", "Iceland", "Croatia", "Slovenia", "Romania", "Ukraine", "Luxembourg"}
 
 
-CITY = dict(aic="Chicago", cma="Cleveland", met="New York", nga="Washington", rijks="Amsterdam", smk="Copenhagen")
+CITY = dict(aic="Chicago", cma="Cleveland", met="New York", nga="Washington", rijks="Amsterdam", smk="Copenhagen",
+            commons="Wikimedia Commons", commons2="Wikimedia Commons")
 
 
 def src_counts(rs):
     c = Counter(r["src"] for r in rs)
-    return ", ".join(f"{c[s]} in {CITY[s]}" for s in SRC if c[s])
+    base = lambda s: s[:-1] if s.endswith("2") and s[:-1] in CITY else s
+    return ", ".join(f"{c[s]} in {CITY.get(base(s), s)}" for s in dict.fromkeys([*SRC, *c]) if c[s])
 
 
 def pct(x):
@@ -1461,7 +1532,7 @@ def write_corpus(out_rows):
     written = []
     idkey = lambda r: (r["id"].split("-", 1)[0], int(r["id"].split("-", 1)[1]) if r["id"].split("-", 1)[1].isdigit()
                        else 0, r["id"])
-    for s in SRC:
+    for s in dict.fromkeys([*SRC, *(r["src"] for r in out_rows)]):
         rs = sorted((r for r in out_rows if r["src"] == s), key=idkey)
         if not rs:
             continue
@@ -1494,9 +1565,14 @@ def write_outputs(rows, stats, finds, fetched, write_rows=True):
         out_rows.append(row)
     files = write_corpus(out_rows) if write_rows else [f for f in corpus_files() if "sargent" not in f.name]  # write_rows=False: tools/crop_paintings.py stats
     n_src = Counter(r["src"] for r in rows)
+    # commons2: a second output bucket for European-growth (2026-10-10) commons rows added after the paintings
+    # already shipped, so they sort after the original commons group instead of interleaving by QID (stable
+    # gallery indices -- see build_rows()'s OLD_IDS protection). Not a real fetch adapter, so it borrows commons'
+    # SRC metadata (name/api/license) for display and falls back to "commons" for its fetched-date.
+    src_info = lambda s: SRC.get(s) or SRC.get(s[:-1] if s.endswith("2") else s, SRC["commons"])
     meta = dict(
-        sources=[dict(id=s, name=SRC[s]["name"], api=SRC[s]["api"], license=SRC[s]["license"], n=n_src[s],
-                      fetched=fetched.get(s)) for s in SRC if n_src[s]],
+        sources=[dict(id=s, name=src_info(s)["name"], api=src_info(s)["api"], license=src_info(s)["license"],
+                      n=n_src[s], fetched=fetched.get(s, fetched.get("commons"))) for s in n_src if n_src[s]],
         count=len(rows), built=date.today().isoformat(),
         files=[str(p.relative_to(ROOT)) for p in files],
         method=[
@@ -1627,6 +1703,10 @@ def main(argv):
         build()
     if cmd == "status":
         status()
+    if cmd == "snapshot-ids":
+        SHIPPED_IDS_FILE.write_text(json.dumps([r["id"] for r in load_corpus()], separators=(",", ":")))
+        print(f"wrote {SHIPPED_IDS_FILE.relative_to(ROOT)}: {len(load_corpus())} ids (commit this after a build "
+              f"you've verified and are ready to ship, so the NEXT growth pass protects today's gallery indices)")
     if cmd == "sheet":
         n = int(argv[1]) if len(argv) > 1 else 10
         path = argv[2] if len(argv) > 2 else str(RAW / "corpus-contact.png")
