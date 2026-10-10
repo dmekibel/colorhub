@@ -53,7 +53,7 @@ measured dominant color (the same fallback every cell gets before its picture ha
   python3 tools/paintmap_atlas.py build --collection design
   python3 tools/paintmap_atlas.py build --collection photography
 """
-import json, os, random, sys, time, threading
+import hashlib, json, os, random, sys, time, threading
 import urllib.request, urllib.error
 from concurrent.futures import ThreadPoolExecutor
 from io import BytesIO
@@ -260,11 +260,69 @@ def process_one(i, item, retries=RETRIES):
             code_addr, crop = parse_line(item)
             kind, loc = thumb_url(code_addr)
         raw = fetch_bytes(kind, loc, retries=retries)
-        t0 = square_crop_resize(raw, crop, TIER0_TILE)
         t1 = square_crop_resize(raw, crop, TIER1_TILE)
-        return i, t0, t1, None
+        return i, t1, None
     except Exception as e:
-        return i, None, None, str(e)
+        return i, None, str(e)
+
+
+def tier0_from_tier1(out_dir, man):
+    """Rebuild every tier-0 sheet by downsampling each painting's OWN tier-1 cell (already on disk, one sheet per
+    GROUP_SIZE paintings) -- never re-fetched, never independently cropped from the source image a second time.
+
+    David (2026-10-10, live, 42,331 paintings): "the zoomed-out pictures aren't the same paintings as themselves
+    close up" -- the painting map's tier-0 overview sheet showed a DIFFERENT painting at a given gallery index
+    than the real tier-1/tier-2 thumbnail at that same index. tools/paintmap_atlas_check.py (fresh network fetch
+    vs. each tile) found tier-1 always correct but tier-0 wrong at ~50% of sampled indices scattered through the
+    pre-expansion range (0-23,777) -- not a constant offset, not confined to one group, so not a simple
+    off-by-N reordering bug to patch at one call site. The build loop used to fetch each painting ONCE and crop
+    it to BOTH TIER0_TILE and TIER1_TILE, pasting into two different sheet families from the same process_one()
+    call (see the old `t0 = square_crop_resize(...)` above) -- two independent paste sites, two independent
+    save-resume paths (tier0_sheets saved by save_tier0() every group; tier1 saved as its own g<N>.webp every
+    group), fed by whatever mix of build/resume/test runs actually touched this corpus across 2026-10-09/10 (a
+    `--limit 50` test run that "overwrote" tier-0 sheets per the 4c472879 commit message, a restore from git, two
+    more build passes with their own resumed/skipped groups) -- exactly the kind of history where ONE of two
+    parallel paste paths can drift from the other without either one, alone, ever being internally inconsistent.
+    Deriving tier-0 FROM tier-1 instead of from the source image a second time makes that drift structurally
+    impossible from here on: there is only one paste site (tier-1's, inside the main fetch loop) and tier-0 is a
+    pure, deterministic, local function of it, run as its own pass. Never touches the network.
+    """
+    t0, t1 = man["tier0"], man["tier1"]
+    cols0, tile0, per_sheet0 = t0["cols"], t0["tile"], t0["perSheet"]
+    n = man["n"]
+    sheets = [Image.new("RGBA", (cols0 * tile0, ceil(min(per_sheet0, n - s * per_sheet0) / cols0) * tile0),
+                         (0, 0, 0, 0))
+              for s in range(len(t0["sheets"]))]
+    num_groups = t1["numGroups"]
+    missing = []   # indices with no real tier-1 picture (a fetch failure the build left blank) -- js/paintmap.js
+    # treats these the same as "not yet in the atlas" (flat dominant-color fallback), never a wrong sprite
+    for g in range(num_groups):
+        lo, hi = g * t1["groupSize"], min(n, (g + 1) * t1["groupSize"])
+        gpath = os.path.join(out_dir, t1["file"].replace("{g}", str(g)))
+        if not os.path.exists(gpath):
+            missing.extend(range(lo, hi))
+            continue
+        g_im = Image.open(gpath).convert("RGBA")
+        cols1 = max(1, ceil(sqrt(hi - lo)))
+        for i in range(lo, hi):
+            local1 = i - lo
+            x1, y1 = (local1 % cols1) * t1["tile"], (local1 // cols1) * t1["tile"]
+            cell = g_im.crop((x1, y1, x1 + t1["tile"], y1 + t1["tile"]))
+            if cell.getextrema()[3][1] < 10:   # effectively-transparent tier-1 cell -> no real picture to derive
+                missing.append(i)              # from (lossy WEBP can leave a few nonzero alpha speckles, not 0)
+                continue
+            cell0 = cell.resize((tile0, tile0), Image.LANCZOS)
+            sheet0, local0 = divmod(i, per_sheet0)
+            x0, y0 = (local0 % cols0) * tile0, (local0 // cols0) * tile0
+            sheets[sheet0].paste(cell0, (x0, y0))
+        if (g + 1) % 10 == 0 or g == num_groups - 1:
+            print(f"  tier0-from-tier1: group {g + 1}/{num_groups} folded in")
+    for s, name in enumerate(t0["sheets"]):
+        atomic_save_webp(sheets[s], os.path.join(out_dir, name), Q0)
+    man["missing"] = missing
+    json.dump(man, open(os.path.join(out_dir, "manifest.json"), "w"))
+    print(f"tier0-from-tier1 done: {len(t0['sheets'])} sheets written, {len(missing)} cells left blank "
+          f"(no tier-1 picture at that index) -- recorded as manifest.missing")
 
 
 def load_lines_design():
@@ -385,7 +443,10 @@ def cmd_repair(workers, retries, limit):
     fixed, still_failed = 0, []
     t0 = time.time()
     # process group by group (bounds memory to one tier-1 canvas at a time, same as the main build; also means a
-    # Ctrl-C only loses the group currently in progress, same resumability contract as `build`)
+    # Ctrl-C only loses the group currently in progress, same resumability contract as `build`). tier-0 is no
+    # longer patched here directly -- process_one only fetches+crops tier-1 now (see tier0_from_tier1()'s
+    # docstring for why); call `tier0` after repair finishes to re-derive every tier-0 sheet from the patched
+    # tier-1 sheets, which also keeps the two tiers structurally unable to drift apart.
     for g in sorted(by_group):
         idxs = by_group[g]
         gpath = os.path.join(OUT, f"g{g}.webp")
@@ -395,21 +456,18 @@ def cmd_repair(workers, retries, limit):
         cols1, _ = grid1(hi - lo)
         results = {}
         with ThreadPoolExecutor(max_workers=workers) as ex:
-            for i, t0img, t1img, err in ex.map(lambda i: process_one(i, lines[i], retries), idxs):
-                results[i] = (t0img, t1img, err)
+            for i, t1img, err in ex.map(lambda i: process_one(i, lines[i], retries), idxs):
+                results[i] = (t1img, err)
         for i in idxs:
-            t0img, t1img, err = results[i]
+            t1img, err = results[i]
             if err:
                 still_failed.append((i, err))
                 continue
             fixed += 1
-            x0, y0 = (i % cols0) * TIER0_TILE, (i // cols0) * TIER0_TILE
-            tier0.paste(t0img, (x0, y0))
             local = i - lo
             x1, y1 = (local % cols1) * TIER1_TILE, (local // cols1) * TIER1_TILE
             group_canvas.paste(t1img, (x1, y1))
         atomic_save_webp(group_canvas, gpath, Q1)
-        atomic_save_webp(tier0, atlas0_path, Q0)   # re-saved after every group so a Ctrl-C loses at most one group
         print(f"repaired group {g}: {len(idxs)} cells, {dt_str(time.time() - t0)} elapsed so far, "
               f"{fixed} fixed / {len(still_failed)} still failing")
 
@@ -607,6 +665,17 @@ def main():
         cmd_resplit()
         return
 
+    if cmd == "tier0":
+        # rebuild every tier-0 sheet from the EXISTING tier-1 sheets on disk -- pure local image work, no
+        # network, no re-fetch. Use this to fix a tier-0/tier-1 desync (see tier0_from_tier1()'s docstring)
+        # without waiting on tens of thousands of re-fetches when tier-1 is already known-good.
+        man_path = os.path.join(OUT, "manifest.json")
+        if not os.path.exists(man_path):
+            raise SystemExit(f"no manifest at {man_path} -- run `build` first")
+        man = json.load(open(man_path))
+        tier0_from_tier1(OUT, man)
+        return
+
     lines = load_lines()
     n = len(lines)
     if limit:
@@ -616,31 +685,33 @@ def main():
     print(f"n={n} tier0 cols={cols0} per_sheet={per_sheet0} sheets={len(counts0)} ({cols0*TIER0_TILE}px wide, "
           f"<= {TIER0_MAXDIM}px per side) groups={num_groups} tier1 tile={TIER1_TILE}px group_size={GROUP_SIZE}")
 
+    tier0_names = [f"atlas0-{s}.webp" for s in range(len(counts0))]
+
     progress = load_progress()
     groups_done = set(progress.get("groups_done", []))
+    group_hash = dict(progress.get("group_hash", {}))   # group index (str) -> hash of ITS OWN source lines, as
+    # of the run that finished it -- see group_src_hash() below: a resumed run must never trust a "done" group
+    # whose underlying source lines have since changed (a corpus edit that reordered or relabeled rows within
+    # that range), which is exactly the class of bug behind David's 2026-10-10 report ("the zoomed-out pictures
+    # aren't the same paintings as themselves close up"): a resumed build skipped already-"done" groups without
+    # checking whether thumbs.txt still agreed with them at those indices.
     ok_count, fail_count = progress.get("ok_count", 0), progress.get("fail_count", 0)
     failures = []
 
-    # tier 0 is now several sheets (see TIER0_MAXDIM's comment) instead of one -- same resumability contract
-    # (re-saved after every completed group), just one canvas+path per sheet instead of one
-    tier0_names = [f"atlas0-{s}.webp" for s in range(len(counts0))]
-    tier0_paths = [os.path.join(OUT, name) for name in tier0_names]
-    tier0_sheets = []
-    for s, count in enumerate(counts0):
-        rows = ceil(count / cols0)
-        canvas = Image.new("RGBA", (cols0 * TIER0_TILE, rows * TIER0_TILE), (0, 0, 0, 0))
-        if os.path.exists(tier0_paths[s]) and groups_done:
-            try:
-                prev = Image.open(tier0_paths[s]).convert("RGBA")
-                if prev.size == canvas.size:
-                    canvas = prev
-            except Exception:
-                pass
-        tier0_sheets.append(canvas)
+    def group_src_hash(lo, hi):
+        return hashlib.sha1("\n".join(lines[lo:hi]).encode("utf-8")).hexdigest()
 
-    def save_tier0():
-        for s, canvas in enumerate(tier0_sheets):
-            atomic_save_webp(canvas, tier0_paths[s], q0)
+    stale = []
+    for g in sorted(groups_done):
+        lo, hi = g * GROUP_SIZE, min(n, (g + 1) * GROUP_SIZE)
+        if group_hash.get(str(g)) != group_src_hash(lo, hi):
+            stale.append(g)
+    if stale:
+        print(f"WARNING: {len(stale)} previously-'done' group(s) have source lines that no longer match what "
+              f"they were built from -- re-running them instead of trusting stale output: {stale[:20]}"
+              + (" ..." if len(stale) > 20 else ""))
+        for g in stale:
+            groups_done.discard(g)
 
     t_start = time.time()
     total_requests = 0
@@ -655,7 +726,7 @@ def main():
         group_canvas = Image.new("RGBA", (cols1 * TIER1_TILE, rows1 * TIER1_TILE), (0, 0, 0, 0))
         t_g0 = time.time()
         with ThreadPoolExecutor(max_workers=workers) as ex:
-            for i, t0img, t1img, err in ex.map(lambda i: process_one(i, lines[i]), range(lo, hi)):
+            for i, t1img, err in ex.map(lambda i: process_one(i, lines[i]), range(lo, hi)):
                 total_requests += 1
                 if err:
                     fail_count += 1
@@ -665,17 +736,16 @@ def main():
                         failures.append((i, err))
                     continue
                 ok_count += 1
-                sheet0, local0 = divmod(i, per_sheet0)   # tier0: algorithmic position, whole-dataset index
-                x0, y0 = (local0 % cols0) * TIER0_TILE, (local0 // cols0) * TIER0_TILE
-                tier0_sheets[sheet0].paste(t0img, (x0, y0))
-                local = i - lo  # tier1: position within this group
+                local = i - lo  # tier1: position within this group -- the ONLY paste site for a painting's
+                # picture now (tier 0 is a pure downsample of tier 1, built in one local pass below -- see
+                # tier0_from_tier1()'s docstring for why two independent paste sites was the actual bug)
                 x1, y1 = (local % cols1) * TIER1_TILE, (local // cols1) * TIER1_TILE
                 group_canvas.paste(t1img, (x1, y1))
         atomic_save_webp(group_canvas, os.path.join(OUT, f"g{g}.webp"), q1)
-        save_tier0()
         groups_done.add(g)
-        progress = {"groups_done": sorted(groups_done), "ok_count": ok_count, "fail_count": fail_count,
-                     "n": n, "num_groups": num_groups}
+        group_hash[str(g)] = group_src_hash(lo, hi)
+        progress = {"groups_done": sorted(groups_done), "group_hash": group_hash, "ok_count": ok_count,
+                     "fail_count": fail_count, "n": n, "num_groups": num_groups}
         save_progress(progress)
         dt = time.time() - t_g0
         print(f"group {g+1}/{num_groups} ({hi-lo} paintings) done in {dt:.1f}s "
@@ -687,6 +757,8 @@ def main():
         "tier1": {"tile": TIER1_TILE, "groupSize": GROUP_SIZE, "numGroups": num_groups, "file": "g{g}.webp"},
     }
     json.dump(manifest, open(os.path.join(OUT, "manifest.json"), "w"))
+    print("rebuilding tier 0 from tier 1 (local, no network) ...")
+    tier0_from_tier1(OUT, manifest)
     total_dt = time.time() - t_start
     print(f"done. {total_requests} requests in {total_dt:.1f}s, ok={ok_count} fail={fail_count}"
           + (f" (of which {skip_count} skipped -- ids.si.edu TLS or no image)" if skip_count else ""))

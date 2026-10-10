@@ -105,4 +105,20 @@ console.log(`articles-lite gate: ${liteErrors.length} problems`);
 const fetchedMiss = require("./check_fetched.js").checkFetched();
 fetchedMiss.forEach(x => console.log("FAIL  missing fetched file: " + x));
 console.log(`fetched-file gate: ${fetchedMiss.length} missing`);
-process.exit(errors.length || nameErrors.length || idsGate.errors.length || liteErrors.length || fetchedMiss.length ? 1 : 0);
+
+// Painting-map atlas gate (tools/paintmap_atlas_check.py --fast): David, 2026-10-10 -- "the zoomed-out pictures
+// aren't the same paintings as themselves close up" was a tier-0/tier-1 desync that no existing gate caught (the
+// ids gate above checks index-KEYED files, not the atlas sheets' own pixel content). --fast samples 40 LOCAL
+// ('L'-prefixed, img/gallery/...) paintings only -- no network -- so this stays a quick, always-on part of
+// `node tools/check.js`, not just something run by hand after a rebuild.
+let atlasErrors = [];
+if (fs.existsSync(path.join(__dirname, "../data/paintmap/manifest.json"))) {
+  const { spawnSync } = require("child_process");
+  const r = spawnSync("python3", ["tools/paintmap_atlas_check.py", "--fast"], { cwd: path.join(__dirname, ".."), encoding: "utf8" });
+  if (r.status !== 0) {
+    atlasErrors.push("paintmap atlas sample mismatch -- run: python3 tools/paintmap_atlas_check.py (see output below)");
+    console.log((r.stdout || "") + (r.stderr || ""));
+  }
+}
+console.log(`paintmap atlas gate: ${atlasErrors.length} problems`);
+process.exit(errors.length || nameErrors.length || idsGate.errors.length || liteErrors.length || fetchedMiss.length || atlasErrors.length ? 1 : 0);
