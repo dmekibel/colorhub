@@ -1074,13 +1074,16 @@ const OO_S_NEIGHBOR_CAP = .4;
 // (David: keep per-axis estimates clean most of the time); sometimes two or three axes move together, still
 // subtle overall, each contributing its share of the one target gap (so the staircase's own calibration -- the
 // gap size -- never changes, only how many judgments share the evidence from a single answer).
+// the odd tile's difference blends all three axes (David, 2026-10-11: "a different in all three at the same time...
+// different proportions... but if it's just like a set of only hue, that could be interesting"). Most rounds: the
+// tested (primary) axis leads at 45-70% and the other two share the rest, each at least ~10%. About one round in
+// five whose primary is hue stays pure hue -- a hue-only shift is the interesting rarity; light-only reads dull.
 function ooSimpleMix(primary, rnd = Math.random) {
-  if (rnd() < .55) return { [primary]: 1 };
-  const others = OO_AXES.filter(a => a !== primary), n = rnd() < .7 ? 1 : 2;
-  const extra = ooShuf(others, rnd).slice(0, n), wPrimary = .5 + rnd() * .25, rest = 1 - wPrimary;
-  const ws = extra.map(() => .3 + rnd()), sum = ws.reduce((a, b) => a + b, 0);
+  if (primary === "hue" && rnd() < .2) return { hue: 1 };
+  const others = OO_AXES.filter(a => a !== primary), wPrimary = .45 + rnd() * .25, rest = 1 - wPrimary;
+  const ws = others.map(() => .35 + rnd()), sum = ws.reduce((a, b) => a + b, 0);
   const mix = { [primary]: wPrimary };
-  extra.forEach((a, i) => { mix[a] = rest * ws[i] / sum; });
+  others.forEach((a, i) => { mix[a] = rest * ws[i] / sum; });
   return mix;
 }
 // a weighted combination of light/chroma/hue as one Lab direction at hex's own position (chroma moves radially
@@ -1237,7 +1240,7 @@ function ooSimpleRound(state, breather, rnd = Math.random) {
   const mix = ooSimpleMix(primary, rnd);
   const fieldAxis = ooFieldAxis(stopHexes);
   let renderMix = mix;
-  if (fieldAxis && fieldAxis !== "hue" && (mix.hue || 0) > .4) {
+  if (fieldAxis && fieldAxis !== "hue" && (mix.hue || 0) > .4 && mix.hue < 1) {
     const hueW = mix.hue;
     renderMix = { ...mix, hue: hueW * .4, [fieldAxis]: (mix[fieldAxis] || 0) + hueW * .6 };
   }
