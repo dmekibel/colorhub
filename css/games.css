@@ -295,3 +295,54 @@
 .oo-ebar i::after{content:"";position:absolute;inset:0;width:var(--w);background:var(--ink);border-radius:3px;transition:width .5s var(--ease)}
 .oo-ebar b{font:500 15px/1 var(--mono);color:var(--ink);text-align:right}
 .oo-ebar em{display:block;font-style:normal;font-size:12px;color:var(--soft);text-align:right;grid-column:3;margin-top:2px}
+/* the board fills the whole play area (David, 2026-10-11: "the board doesn't have to be square... even a 3x4
+   beginner board fills the whole play area"), rows x cols instead of always square, chrome minimal around it */
+.oo-simple .drill-head{padding-top:6px}
+.oo-simple .oo-head h2{font:400 22px/1.15 var(--serif);min-height:0;margin:0}
+.oo-simple .drill-stage{padding:8px 0;align-items:stretch;justify-content:stretch}
+.oo-simple .drill-foot{min-height:0}
+.oo-board.oo-full{position:relative;width:100%;height:100%;aspect-ratio:auto}
+.oo-board.oo-settle{transition:transform .35s var(--ease),opacity .35s var(--ease);transform:scale(.93);opacity:.5}
+@media (prefers-reduced-motion:reduce){.oo-board.oo-settle{transition:none}}
+/* ---------- the reveal card (2026-10-11): its own moment after every round, not a line of text ---------- */
+.oo-reveal{display:flex;flex-direction:column;gap:12px;width:100%;padding-top:6px}
+.oo-reveal.oo-in{animation:ooRevealUp .32s var(--ease) both}
+@keyframes ooRevealUp{from{transform:translateY(18px);opacity:0}to{transform:translateY(0);opacity:1}}
+@media (prefers-reduced-motion:reduce){.oo-reveal.oo-in{animation:none}}
+.oo-rv-halves{display:grid;grid-template-columns:1fr 1fr;gap:3px;border-radius:var(--r-2);overflow:hidden}
+.oo-rv-half{display:flex;flex-direction:column;justify-content:flex-end;gap:2px;height:104px;padding:12px;background:var(--c);text-align:left}
+.oo-rv-half[data-ink="dark"]{color:#141311}.oo-rv-half[data-ink="light"]{color:#fff}
+.oo-rv-half b{font:400 19px/1.15 var(--serif)}
+.oo-rv-half .mono{font:500 12px/1 var(--mono);opacity:.75}
+.oo-rv-diff{font:italic 400 17px/1.3 var(--serif);color:var(--ink);text-align:center;margin:0}
+.oo-rv-strip{display:flex;align-items:stretch;gap:3px;border-radius:var(--r-1);overflow:hidden;height:40px}
+.oo-rv-stop{flex:1;display:flex;align-items:flex-end;padding:6px 8px;background:var(--c)}
+.oo-rv-stop[data-ink="dark"]{color:#141311}.oo-rv-stop[data-ink="light"]{color:#fff}
+.oo-rv-stop em{font:italic 400 13px/1.1 var(--serif);font-style:italic}
+.oo-rv-src{align-self:center;font:italic 400 15px/1.2 var(--serif);color:var(--soft);text-decoration:underline;text-underline-offset:3px;text-align:center;max-width:90%}
+.oo-rv-src:disabled{text-decoration:none}
+
+/* ---------- the motion language (2026-10-11), built around the ripple: a melting round change, a settling or
+   dividing entrance, the odd tile resolving into its true color, streak shimmer/bloom, a shake and a glow pulse,
+   the reveal halves growing out of their own tiles. Everything here is transform/opacity/filter only (60fps,
+   no layout thrash) and every rule below is switched off under prefers-reduced-motion. ---------- */
+.oo-ghost{pointer-events:none}
+.oo-ghost .oo-t.oo-melt{transition:opacity .42s var(--ease) var(--dl,0ms),transform .42s var(--ease) var(--dl,0ms),filter .42s var(--ease) var(--dl,0ms);opacity:0;transform:scale(.8);filter:blur(3px)}
+.oo-t.oo-settle-in{animation:ooSettleIn .4s var(--spring) both;animation-delay:var(--dl,0ms)}
+@keyframes ooSettleIn{from{transform:scale(.72);opacity:0}to{transform:scale(1);opacity:1}}
+.oo-t.oo-divide-in{animation:ooDivideIn .48s var(--spring) both;animation-delay:var(--dl,0ms)}
+@keyframes ooDivideIn{0%{transform:scale(.35);opacity:0}55%{transform:scale(1.08);opacity:1}100%{transform:scale(1);opacity:1}}
+.oo-t.oo-resolve{transition:background-color .5s var(--ease)}
+.oo-t.oo-shimmer-t{animation:ooShimmerTile .6s var(--ease) var(--sdl,0ms)}
+@keyframes ooShimmerTile{50%{filter:brightness(1.4) saturate(1.1)}}
+.oo-board.oo-bloom{animation:ooBloom 1.4s var(--ease)}
+@keyframes ooBloom{0%{filter:brightness(1)}38%{filter:brightness(1.22)}100%{filter:brightness(1)}}
+.oo-simple .oo-t.miss{animation:ooShake .32s var(--ease)}
+@keyframes ooShake{15%,45%,75%{transform:translateX(-4px)}30%,60%,90%{transform:translateX(4px)}100%{transform:translateX(0)}}
+.oo-simple .oo-t.ring{animation:ooGlowPulse .55s var(--ease)}
+@keyframes ooGlowPulse{0%{box-shadow:0 0 0 2px var(--good)}50%{box-shadow:0 0 0 2px var(--good),0 0 14px 5px var(--good)}100%{box-shadow:0 0 0 2px var(--good)}}
+@media (prefers-reduced-motion:reduce){
+  .oo-ghost{display:none}
+  .oo-t.oo-settle-in,.oo-t.oo-divide-in,.oo-t.oo-shimmer-t,.oo-board.oo-bloom,.oo-simple .oo-t.miss,.oo-simple .oo-t.ring{animation:none}
+  .oo-t.oo-resolve{transition:none}
+}
