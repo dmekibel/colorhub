@@ -198,21 +198,31 @@
 /* David, 2026-10-09: "combine Colors and Arrange into one menu with a tab on top" -- the Colors/Arrange segmented
    switch replaces the old fixed title; the count line (now its own paragraph, same copy/placement as before)
    sits right under the whole header, not nested in it, so it reads the same under either tab. */
+/* David, 2026-10-10, a live screenshot: "labels left-aligned and cramped inside oversized pills, the selected
+   tab flips to a white/cream fill (banned)". A proper compact segmented control: centered labels in the app's
+   sans (matching every other segmented control in this sheet -- .hm-seg button), selected = the same subtle
+   raised --sel-fill surface .hm-seg/.hm-rung/.cx-chip already use (css/menus2.css), never a raw --ink fill. */
 .hm-ch-tabs{display:flex;gap:6px;flex:1;min-width:0}
-.hm-ch-tabs .hm-ch-tab{flex:1;height:40px;border:1px solid var(--rule);border-radius:var(--r-pill);background:none;font:400 17px/1 var(--serif);color:var(--soft)}
-.hm-ch-tabs .hm-ch-tab.on{background:var(--ink);border-color:var(--ink);color:#0E0D0B}
+.hm-ch-tabs .hm-ch-tab{flex:1;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid var(--rule);border-radius:var(--r-pill);background:none;font:400 15px/1 var(--sans);color:var(--soft);transition:background var(--dur-1,.2s),color var(--dur-1,.2s)}
+.hm-ch-tabs .hm-ch-tab.on{background:var(--sel-fill);color:var(--sel-ink);box-shadow:var(--sel-ring);border-color:transparent}
 .hm-chooser>.hm-count{padding:0 16px;margin:0 0 6px}
 .hm-chooser-acts{flex:none;display:flex;gap:6px}
 .hm-chooser-acts[hidden]{display:none}  /* the [hidden] attribute loses to this class's own display:flex otherwise -- same specificity, author beats UA, so the hidden pane's close button stays laid out and overlaps the tabs */
 .hm-chooser-acts .iconq{width:44px;height:44px}
 .hm-ch-x{background:var(--surface-2)}
-/* Arrange by: a strip of live pictures, the current one ringed in paper */
-.hm-arr{flex:none;display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scroll-snap-type:x proximity;padding:2px 16px 4px;scrollbar-width:none}
+/* Arrange by: a strip of live pictures, the current one ringed in paper. David, 2026-10-10 (a live screenshot):
+   "the shape tiles... leave a gap on the right -- distribute evenly across the width." There are always exactly
+   5 (HONEY_ARR_IDS, js/honey.js), so flex:1 fills the row evenly instead of scrolling fixed-width tiles past
+   it; overflow-x stays as a safety net (hidden unless a 6th arrangement is ever added and they genuinely don't
+   fit), not the normal path. The picture itself scales with its tile (an inline SVG, js/home.js hmArrIcon --
+   clean at any size, no blur) instead of a hard 72px, so it still shrinks gracefully at 375px. */
+.hm-arr{flex:none;display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;padding:2px 16px 4px;scrollbar-width:none}
 .hm-arr::-webkit-scrollbar{display:none}
-.hm-arr-b{flex:none;width:76px;display:flex;flex-direction:column;align-items:center;gap:6px;scroll-snap-align:center;transition:transform var(--dur-0,.12s) ease-out}
+.hm-arr-b{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:6px;transition:transform var(--dur-0,.12s) ease-out}
 .hm-arr-b:active{transform:scale(.94)}
-.hm-arr-pic{display:block;width:72px;height:72px;border-radius:18px;background:#0E0D0B;box-shadow:inset 0 0 0 1px var(--rule);overflow:hidden;transition:box-shadow .2s}
-.hm-arr-pic canvas{display:block;width:72px;height:72px}
+.hm-arr-pic{display:block;width:100%;max-width:72px;aspect-ratio:1;border-radius:18px;background:#0E0D0B;box-shadow:inset 0 0 0 1px var(--rule);overflow:hidden;transition:box-shadow .2s}
+.hm-arr-pic svg{display:block;width:100%;height:100%}
+.hm-arr-pic canvas{display:block;width:100%;height:100%}
 .hm-arr-b b{font:400 13px/1.15 var(--sans);color:var(--soft);text-align:center;width:100%;min-height:2.3em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .hm-arr-b.on .hm-arr-pic{box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--surface-1)}
 .hm-arr-b.on b{color:var(--ink)}
@@ -265,13 +275,22 @@
 .hm-feel-reset{align-self:flex-start;margin-top:6px;min-height:40px;padding:0 16px;border-radius:var(--r-pill);background:var(--surface-2);font:400 15px/1 var(--sans);color:var(--ink)}
 .hm-look-original{background:radial-gradient(circle at 50% 50%,#E7C35C 0 22%,transparent 23%),radial-gradient(circle at 18% 30%,#D9654F 0 14%,transparent 15%),radial-gradient(circle at 82% 30%,#4C7FD1 0 14%,transparent 15%),radial-gradient(circle at 20% 76%,#8C5AC2 0 13%,transparent 14%),radial-gradient(circle at 80% 76%,#4C9F70 0 13%,transparent 14%);box-shadow:none!important}
 @media (max-width:360px){.hm-fam b{font-size:16px}.hm-seg-n button{font-size:14.5px}.hm-feel-l{width:64px}}
-/* Arrange: one focused sheet, no taller than its content (the map keeps most of the screen) */
-.sheet.hm-sheet-panel.hm-sheet-arrange{height:auto}
+/* Arrange: David, 2026-10-10 (a live screenshot): "the Magnify row is cut off by the bottom of the sheet --
+   the sheet content must fit or scroll internally." height:auto was the bug, not the fix: with no BOUNDED
+   height on .sheet, .hm-chooser's flex:1/min-height:0 (what makes .hm-ch-scroll's own overflow-y:auto actually
+   engage, exactly as it already does correctly for the Colors tab below) had nothing to size against, so
+   content past the outer max-height (min(40dvh,400px), already the clamp Arrange's content was silently
+   hitting) was just hard clipped by that outer overflow:hidden instead of reachable by scrolling the inner
+   pane. Matching Colors' own (explicit, not auto) height restores that same already-working mechanism -- same
+   rendered footprint as before (the content was already being capped at this height, just without a way to
+   reach the rest), so Arrange's own fit-mode math (which measures the sheet's live top edge) is unaffected. */
+.sheet.hm-sheet-panel.hm-sheet-arrange{height:min(40dvh,400px)}
 /* Center on / Sort by: one compact row of small chips under the shapes. David, 2026-10-09: "the buttons
    slightly smaller" -- shorter than the 44px tap floor used everywhere else in this sheet on purpose: these are
    small secondary filters in a wide horizontal strip (generous side padding keeps the real hit area close to
-   44px even though the visible pill is 36px tall), not a first-time user's one next step. */
-.hm-ord{align-items:center;padding:8px 0 2px}
+   44px even though the visible pill is 36px tall), not a first-time user's one next step. A right-edge fade
+   (David, 2026-10-10: "a clear scroll fade") says there's more to scroll to instead of reading as cut off. */
+.hm-ord{align-items:center;padding:8px 0 2px;-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent)}
 .hm-ord[hidden]{display:none}
 .hm-ord-l{flex:none;font:400 14px/1 var(--sans);color:var(--soft);padding-right:2px}
 .hm-ord .hm-rung{min-width:0;min-height:36px;flex-direction:row;align-items:center;gap:6px;padding:0 13px;border-radius:var(--r-pill)}
