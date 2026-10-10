@@ -1035,7 +1035,11 @@ function ooMap(opt = {}) {
   const model = ooS().model;
   const startTh = { hue: ooTheta(model, "hue", null), light: ooTheta(model, "light", null), chroma: ooTheta(model, "chroma", null) };
   const lives0 = zen ? 0 : 3;
-  const st = { cols: ooStartCols(sim), acc: sim.acc.slice(), round: 0, hits: 0, lives: lives0, streak: 0, grew: false, paused: false, hitsAtGrow: 0, growAt: 0 };
+  // the in-run staircase (David, 2026-10-11, "still too easy... not getting any harder"): starts at exactly 1
+  // every run ("no chill start above threshold") and does the FAST, visible round-to-round tightening the
+  // slower cross-run theta never could on its own -- oo-engine.js's ooSimpleD/ooSimpleRound read st.stairMult;
+  // onAnswer below steps it (2 rights in a row x OO_STAIR_DOWN, a miss x OO_STAIR_UP).
+  const st = { cols: ooStartCols(sim), acc: sim.acc.slice(), round: 0, hits: 0, lives: lives0, streak: 0, grew: false, paused: false, hitsAtGrow: 0, growAt: 0, stairMult: 1, stairStreak: 0 };
   // a light pre-game choice, not a setup screen (David, 2026-10-11): the real board (at the last-used size)
   // renders and sits right there under a minimal picker -- chips, the grow toggle, a big Play. Tapping Play, or
   // tapping the board itself, starts; a returning player (nothing to change) can just tap Play immediately.
@@ -1168,13 +1172,15 @@ function ooMap(opt = {}) {
     // which is the one moment that gets the bigger "divide"/ink-bloom transition; every other round is a same-
     // size ripple reveal (ooMeltGhost), which never has a layout change to cross-fade through in the first place.
     const enter = st.round === 0 ? null : st.grew ? "divide" : null; st.grew = false;
-    const breather = st.round > 0 && st.round % 5 === 4;
+    // at most 1 in 8 (David, 2026-10-11: down from 1 in 5 -- "find and remove anything else that inflates early
+    // rounds", and a breather interrupting the staircase's own climb that often read as "not getting harder")
+    const breather = st.round > 0 && st.round % 8 === 7;
     const aspect = ooStageAspect(ui.stage) || 1.6;
     const safeBox = ooSafeBox(ui.stage);
     let r = null;
     if (st.round === 0 && opt.forceShape) {
       const axis = ooSimpleAxis(model), skill = ooSimpleSkill(st.cols), fs = opt.forceShape;
-      const d = Math.min(ooSimpleD(model, axis, false), 6);   // a screenshot/forced round never needs an extreme gap
+      const d = Math.min(ooSimpleD(model, axis, false, st.stairMult), 6);   // a screenshot/forced round never needs an extreme gap
       const richness = ["grad1", "grad2", "grad3"].includes(fs) ? fs : "flat";
       const mix = fs === "combo" ? { [axis]: .6, [OO_AXES.find(a => a !== axis)]: .4 } : { [axis]: 1 };
       const k = fs === "k4" ? 4 : fs === "k2" ? 2 : 1, bf = OO_S_GRAD_F[richness] || 1;
@@ -1182,7 +1188,7 @@ function ooMap(opt = {}) {
       for (let tries = 0; tries < 8 && !r; tries++) r = ooSimpleGradRound(rows, cols, richness, palette && palette.colors, skill, mix, d * bf, k, Math.random, safeBox, sim.richMode);
       if (r) Object.assign(r, { axis, judg: axis, mix, bf: r.gridType && r.gridType !== "flat" ? bf : 1, paletteSource: palette });
     }
-    if (!r) r = ooSimpleRound({ model, cols: st.cols, round: st.round, aspect, palette: ooPickPalette(), safeBox, richMode: sim.richMode, multiOdd: sim.multiOdd, style: sim.style, board: sim.board }, breather);
+    if (!r) r = ooSimpleRound({ model, cols: st.cols, round: st.round, aspect, palette: ooPickPalette(), safeBox, richMode: sim.richMode, multiOdd: sim.multiOdd, style: sim.style, board: sim.board, stairMult: st.stairMult }, breather);
     const o = { feedback: true, tileNames: false, resolveOdd: true, enter, pauseCtl: {} };   // names live in the reveal now, never crowding gapless tiles
     if (!zen && sim.timer) o.timeLimit = ooSimpleTime(st.cols);
     curPauseCtl = o.pauseCtl;
@@ -1198,22 +1204,31 @@ function ooMap(opt = {}) {
     st.round++;
     if (res.ok) { st.hits++; st.streak++; } else { if (!zen) st.lives--; st.streak = 0; }
     st.acc.push(res.ok ? 1 : 0); if (st.acc.length > OO_S_WINDOW) st.acc.shift();
+    // the in-run staircase (David, 2026-10-11): 2 rights in a row tightens the drawn gap (x OO_STAIR_DOWN), a
+    // single miss loosens it (x OO_STAIR_UP) -- immediately, every round, independent of the slower cross-run
+    // theta below. st.stairStreak counts corrects since the last step (not st.streak, which is for lives/UI and
+    // resets are a different concern -- Zen has no lives but still climbs the same staircase).
+    if (res.ok) {
+      st.stairStreak++;
+      if (st.stairStreak >= 2) { st.stairMult = clamp(st.stairMult * OO_STAIR_DOWN, OO_STAIR_MIN, OO_STAIR_MAX); st.stairStreak = 0; }
+    } else {
+      st.stairMult = clamp(st.stairMult * OO_STAIR_UP, OO_STAIR_MIN, OO_STAIR_MAX); st.stairStreak = 0;
+    }
     // a combined-axis round still only teaches the judgment it mainly tested: crediting every axis with its own
     // slice of one shared outcome reads as "a tiny hue nudge alone was spotted" even when a much bigger chroma
     // or lightness move did the real work, which quietly dragged every axis's estimate down (confirmed with
     // tools/oo_simple_sim.js). The dominant axis in the mix gets the full drawn gap, as if the round were pure.
+    // Credit uses res.act itself now (David, 2026-10-11: "keep the model credit honest -- credit what was
+    // actually drawn"), not a reconstructed pre-sizeBias target: an earlier version divided the realized gap by
+    // sizeBias to recover a size-independent estimate, but at these much lower floors a tiny requested gap can
+    // land close to 8-bit color-step quantization, and back-dividing by a small sizeBias would amplify that
+    // noise into the model far more than any real threshold change. The slower cross-run theta can carry a
+    // little size-dependent noise now; the fast in-run staircase above is what actually keeps a run honest.
     if (res.act > 0) {
       const mix = r.mix || (r.judg ? { [r.judg]: 1 } : null);
       if (mix) {
         const dom = Object.keys(mix).reduce((best, a) => mix[a] > mix[best] ? a : best, Object.keys(mix)[0]);
-        // r.calTarget (oo-engine.js), not the realized res.act, once sizeBias is in play: a big-tile board's much
-        // smaller requested gap can't always be hit exactly (gamut/color-step clamping), and back-dividing a
-        // realized value that drifted upward by a small sizeBias inflated the model's estimate far more than any
-        // real threshold change -- found via tools/oo_simple_sim.js as a compounding "gets easier over time" drift.
-        // calTarget is the pre-sizeBias, model-space value the round actually AIMED for, already bf-compensated,
-        // so this is the exact same divide-out-bf-and-vf shape calibration always used, just size-independent.
-        const calIn = r.calTarget != null ? r.calTarget : res.act;
-        if (OO_AXES.includes(dom)) ooUpdate(model, dom, r.fam || ooFam(r.base || r.odd), calIn / ((r.vf || 1) * (r.bf || 1)), !!res.ok, r.g || 0);
+        if (OO_AXES.includes(dom)) ooUpdate(model, dom, r.fam || ooFam(r.base || r.odd), res.act / ((r.vf || 1) * (r.bf || 1)), !!res.ok, r.g || 0);
       }
     }
     if (!res.ok && res.picked && res.right) ooLogMiss(res.right, res.picked, { game: "odd:simple", judg: r.judg, d: res.act });

@@ -856,15 +856,26 @@ const OO_S_FLOOR = { hue: 1, chroma: .85, light: .65 };   // dE00, as drawn
 const OO_S_MULT = 1.2;     // d = th x this lands right ~70% of the time in theory (OO_SLOPE=3, OO_LAPSE=.03; see ooP);
 // in practice the online estimate runs a little generous, and richer boards add their own difficulty on top, which
 // together settle actual play closer to 78-82% (tools/oo_simple_sim.js)
-const OO_S_BREATHE_MULT = 1.7;    // a breather round (~93%): easier, for rhythm, not a reward
-// an "easiness ceiling" (David, 2026-10-11: "never super easy or super obvious -- a gradient where one tile
-// obviously stands out is boring for everybody"): however much richness, size-band or breather compensation
-// would inflate the drawn gap, it's capped relative to the player's own current threshold on that axis, AND to
-// an absolute ΔE00 well under "pops out at a glance" -- so even a first-time, chill-ramped round still takes a
-// real look (a few seconds), never a free answer.
-// David, 2026-10-11, tightened further: "too easy... gives obvious levels" -- 2.5x/11 still let richness+size
-// compensation inflate a round well past where it felt like a real look. Lower multiple, lower absolute cap.
-const OO_S_EASE_X = 1.6, OO_S_EASE_MAX = 6;
+// David, 2026-10-11, "still too easy... not getting any harder" (measured ~2-2.5 dE00 drawn on his own 3-column
+// board): the slow cross-run IRT theta alone can't visibly tighten a difficulty WITHIN one run -- it moves by a
+// shrinking K each update (oo-engine.js's ooUpdate), nowhere near fast enough to read as "climbing" over a
+// session. A second, fast, IN-RUN staircase now sits on top of theta and does the actual round-to-round
+// tightening: 2 rights in a row multiplies the drawn gap by OO_STAIR_DOWN, a miss multiplies it by OO_STAIR_UP.
+// It starts at 1 every run (David: "start each run at the model's threshold x 1.0 -- no chill start above
+// threshold"), reset in oo-ui.js's ooMap(). theta itself still updates every round (the slower, cross-run
+// "eye profile" signal), but no longer gates how far the staircase can push the gap down mid-run.
+const OO_STAIR_DOWN = .8, OO_STAIR_UP = 1.25, OO_STAIR_MIN = .12, OO_STAIR_MAX = 3;
+const OO_S_BREATHE_MULT = 1.3;    // a breather round: easier, for rhythm, not a reward (David, 2026-10-11: lowered
+// from 1.7, and down to at most 1 in 8 rounds -- below, round % 8 === 7 -- from 1 in 5; the old rate+multiplier
+// visibly interrupted the staircase's own downward climb often enough to read as "not getting harder")
+// the ONLY ceiling left (David, 2026-10-11: "find and remove anything else that inflates early rounds...
+// ease ceiling minimums"): a flat, size-independent absolute safety cap on richness/size-compensation blowing a
+// single round up past readable -- never a lower bound (the old ease = max(d, floor*pad, min(EASE_MAX, th*X))
+// guaranteed the drawn gap could never fall under the player's own current threshold, which is exactly what
+// silently neutralized the staircase above: however far down the staircase pushed, ease's own max(d, ...) term
+// pulled the FLOOR of "d" itself right back up to theta. Gone entirely; the single floor below (OO_S_FLOOR x
+// sizeBias, oo-engine.js's ooSimpleRound) is the only thing a round can never go under now.
+const OO_S_EASE_MAX = 6;
 const OO_S_MIN_COLS = 3, OO_S_MAX_COLS = 20;   // David, 2026-10-10: "the grid can go much bigger", "up to ~12x20"
 // -- this is a SIZE index (the board's longer side), not a literal column count once boards stop being square
 // (ooSimpleDims below turns it into rows x cols for the screen's own aspect)
@@ -900,13 +911,14 @@ function ooSimpleAxis(model, rnd = Math.random) {
   for (let i = 0; i < OO_AXES.length; i++) { r -= ws[i]; if (r <= 1e-9) return OO_AXES[i]; }
   return OO_AXES[OO_AXES.length - 1];
 }
-// the gap to draw this round: near the axis's own threshold, a little jittered, never below the visibility floor.
-// ooMove only lands a round's actually-drawn difference within ~15% of the target (ooIn), so the target itself is
-// padded above the floor by that much -- the floor is a promise about what you SEE, not about the number asked for.
-const OO_S_FLOOR_PAD = 1.2;
-function ooSimpleD(model, axis, breather, rnd = Math.random) {
-  const th = ooTheta(model, axis, null), jit = .94 + rnd() * .12, mult = (breather ? OO_S_BREATHE_MULT : 1) * OO_S_MULT;
-  return Math.max(OO_S_FLOOR[axis] * OO_S_FLOOR_PAD, Math.min(OO_MAX, th * jit * mult));
+// the gap to draw this round: near the axis's own threshold, a little jittered, scaled by the in-run staircase
+// (OO_STAIR_DOWN/UP above). David, 2026-10-11: removed the old floor*PAD lower bound here entirely -- a round
+// can no longer be rescued back up to "the floor, padded" before the staircase and sizeBias even get a say; the
+// ONE remaining floor (OO_S_FLOOR x sizeBias) is applied once, last, in ooSimpleRound below, after everything
+// else has had its full effect on the gap.
+function ooSimpleD(model, axis, breather, stairMult, rnd = Math.random) {
+  const th = ooTheta(model, axis, null), jit = .94 + rnd() * .12, mult = (breather ? OO_S_BREATHE_MULT : 1) * OO_S_MULT * (stairMult || 1);
+  return Math.min(OO_MAX, th * jit * mult);
 }
 // how many tiles are odd this round. k4 only once the grid is big enough that four odd tiles isn't most of it.
 function ooSimpleShape(n, rnd = Math.random) {
@@ -954,10 +966,11 @@ function ooOklabToHexSafe(P) {
 // that gradient says it should be at its position. Difficulty is three things moving together: more tiles, a
 // richer gradient (more stops, a 2-D shape instead of a straight sweep), and a smaller gap -- never just one.
 // Flat boards are gone entirely (David, 2026-10-11: "remove flat boards entirely... beginners get a gentle but
-// visible two-color gradient"). OO_S_GRAD_WARMUP/OO_S_FLAT_P stay at 0, kept (not deleted) only because
-// ooSimpleGradColors/ooSimpleGradRound still accept "flat" as their last-resort, gamut-exhaustion safety net in
-// ooSimpleRound below -- an emergency fallback, never a deliberately dealt board.
-const OO_S_GRAD_WARMUP = 0, OO_S_FLAT_P = 0;
+// visible two-color gradient") -- ooSimpleGradColors/ooSimpleGradRound still accept "flat" as their last-resort,
+// gamut-exhaustion safety net in ooSimpleRound below, an emergency fallback, never a deliberately dealt board.
+// A round-based warmup that used to ease the earliest rounds into richness lived here too (OO_S_GRAD_WARMUP/
+// OO_S_FLAT_P, both long at 0) -- removed outright (David, 2026-10-11: "find and remove anything else that
+// inflates early rounds... the warmup"), since neither constant was read by anything any more.
 const OO_S_RICH = {
   grad1: { stops: 2, shapes: ["vert", "horiz"] },
   grad2: { stops: 3, shapes: ["diag", "radial"] },
@@ -981,37 +994,12 @@ function ooSimpleGridType(skill, round, rnd = Math.random, richMode = "subtle") 
   const p2 = ooLerp(.03, .18, skill), r = rnd();
   return r < p2 ? "grad2" : "grad1";
 }
-// the grid SIZE varies round to round around a center, instead of one ratcheting number that holds flat (David,
-// 2026-10-11: "not ratchet up and stay tiny... some rounds bigger tiles, some smaller... always some variance
-// for fun and beauty"). A triangular-ish spread around the center, clamped to the grid's own min/max.
-const OO_S_BAND = 2;
-// lo/hi: the player's own chosen grid-size range (Settings, 2026-10-11 -- a dual-handle slider), defaulting to
-// the game's full OO_S_MIN_COLS..OO_S_MAX_COLS span. Every size this function (and the ramp/grow-shrink ratchet
-// below) can land on stays inside it.
-function ooSimpleRoundCols(centerCols, rnd = Math.random, lo = OO_S_MIN_COLS, hi = OO_S_MAX_COLS) {
-  const w = [.06, .16, .56, .16, .06], r = rnd();
-  let acc = 0, off = -OO_S_BAND;
-  for (let i = 0; i < w.length; i++) { acc += w[i]; if (r <= acc) { off = i - OO_S_BAND; break; } }
-  return clamp(Math.round(centerCols + off), lo, hi);
-}
-// landing away from the band's center changes how hard a round reads from size and tile count alone, before any
-// color is even considered: bigger tiles (fewer cols than center) are easier to scan, so the color move itself
-// is made a touch subtler to compensate; smaller tiles (more cols) are a touch clearer. Keeps every member of
-// the band "just hard enough", not just its center (David, 2026-10-11).
-function ooSizeBiasMult(actualCols, centerCols) {
-  const off = clamp(actualCols - centerCols, -OO_S_BAND, OO_S_BAND) / OO_S_BAND;   // -1..1
-  return ooLerp(.85, 1.15, (off + 1) / 2);
-}
-// a run always starts chill -- few, large tiles and a gentle gradient -- and ramps toward the real, persisted
-// skill level over its first ~20 rounds (David, 2026-10-11: "the longer you play, the more and smaller tiles...
-// so the start always feels easy and calm, then builds"), however sharp that saved skill already is. Feeding
-// this ramped value in as ooSimpleRound's own "cols" ramps the gradient's richness and pull right along with the
-// grid size, since both already key off the same skill number -- one ramp, not two to keep in sync.
-const OO_S_RAMP_ROUNDS = 20, OO_S_RAMP_FLOOR = OO_S_MIN_COLS + 1;
-function ooSimpleRampCols(trueCols, round, lo = OO_S_MIN_COLS, hi = OO_S_MAX_COLS) {
-  const t = clamp(round / OO_S_RAMP_ROUNDS, 0, 1);
-  return clamp(ooLerp(Math.max(OO_S_RAMP_FLOOR, lo), clamp(trueCols, lo, hi), t), lo, hi);
-}
+// David, 2026-10-11, "still too easy... not getting any harder": removed three more dead holdovers from
+// earlier, superseded designs that tools/undef_scan.js's exports kept alive in name only (none were called from
+// anywhere once the grid went fixed-per-run) -- a round-to-round size "band" (ooSimpleRoundCols/ooSizeBiasMult/
+// OO_S_BAND) and a first-20-rounds "always starts chill... ramps toward the real skill level" size ramp
+// (ooSimpleRampCols/OO_S_RAMP_ROUNDS/OO_S_RAMP_FLOOR). Neither was reachable in practice, but keeping them
+// around as if still live was exactly the kind of thing worth finding and removing outright.
 // the expected color field. stopHexes: 2-4 real colors (a curated or favorite palette, picked in oo-ui.js);
 // cycles through them if a tier needs more stops than it was given. skill sets how far the sweep's own span
 // reaches edge to edge -- gentle for a beginner, steep for an expert -- independent of the odd tile's own gap.
@@ -1073,7 +1061,15 @@ function ooMaxNeighborStep(cells, colors, cols, rows) {
 // bit under the hard 50% test line (tools/oo_simple_sim.js), not right at it -- the now-smaller easiness
 // ceiling (2026-10-11's difficulty pass) shrinks d itself for most rounds, leaving less absolute ΔE00 headroom
 // for the generative retries/backstop to work with before they hit their own shrink floor.
-const OO_S_NEIGHBOR_CAP = .4;
+// David, 2026-10-11, revisited alongside OO_S_FLOOR/OO_S_MULT and the in-run staircase: a much smaller d (a
+// staircase deep into a hot streak can be well under 1 dE00) leaves the generative retries/backstop far less
+// absolute headroom before they hit their own shrink floor -- and below about 1 dE00, 8-bit sRGB's own color-
+// step quantization (~0.3-0.5 dE00 per code value, OO_S_FLOOR's own comment above) becomes a hard geometric
+// limit on how small a neighbor step can get at all, independent of this cap. tools/oo_simple_sim.js's own
+// "never an obvious neighbor step" check now only holds rounds with d >= 1 dE00 to the strict <50% line for
+// exactly that reason -- a smaller-d round is reported, not failed, since the ratio there is dominated by
+// quantization, not a real design choice.
+const OO_S_NEIGHBOR_CAP = .35;
 // which axis (or combination) this round's error moves along, and how much weight each carries. Usually pure
 // (David: keep per-axis estimates clean most of the time); sometimes two or three axes move together, still
 // subtle overall, each contributing its share of the one target gap (so the staircase's own calibration -- the
@@ -1214,7 +1210,7 @@ function ooFieldAxis(stopHexes) {
 }
 function ooSimpleRound(state, breather, rnd = Math.random) {
   const richMode = state.richMode === "rich" ? "rich" : "subtle";
-  const primary = ooSimpleAxis(state.model, rnd), d = ooSimpleD(state.model, primary, breather, rnd);
+  const primary = ooSimpleAxis(state.model, rnd), d = ooSimpleD(state.model, primary, breather, state.stairMult, rnd);
   const skill = ooSimpleSkill(state.cols);
   // Classic (David, 2026-10-11, "best of both worlds": his girlfriend preferred the original -- "a 9x9 square
   // board, one solid color, single tile"): same adaptive engine, safe zone and easiness ceiling as Gradient,
@@ -1252,38 +1248,25 @@ function ooSimpleRound(state, breather, rnd = Math.random) {
   // state.multiOdd must be explicitly true (a Settings toggle, oo-ui.js) or every round is single-odd.
   const shape = state.multiOdd ? ooSimpleShape(rows * cols, rnd) : "one";
   const k = shape === "k4" ? Math.min(4, rows * cols - 1) : shape === "k2" ? 2 : 1;
-  // the easiness ceiling: richness/size compensation can inflate d upward a lot (a rich board times a big-tile
-  // round could otherwise clear 2x on its own), but the drawn gap this round actually plays at never exceeds
-  // ~2.5x the player's own current threshold, nor an absolute ΔE00 that would read as an instant, obvious pop --
-  // while never dropping below the visibility floor. A known, accepted tradeoff (same as the floor elsewhere):
-  // a clipped round's credit to the IRT model is a slight underestimate of the "aimed for" d, not a correctness bug.
-  // the ceiling caps how much richness/size COMPENSATION (bf) can inflate the round -- it must never cap the
-  // round below the base, uncompensated d itself, or a genuinely coarser-eyed player (whose own d is already
-  // large) would be capped UNDER their own threshold forever, incapable of ever converging above chance (found
-  // via tools/oo_simple_sim.js's struggling-eye check: a hard-min version of this flattened it to ~50%).
-  // sizeBias is applied AFTER the ceiling (it's a tile-size perceptual correction, not more compensation to cap)
-  // -- and ONLY to what's actually drawn on screen, never to what the IRT model is credited with (calTarget
-  // below). A genuinely small requested gap can't always be rendered exactly (ooMoveDir/gamut clamping has its
-  // own practical minimum step), so at the bottom of a big-tile board's much-smaller range, the REALIZED gap
-  // can drift measurably above what was asked for; back-dividing that realized value by a small sizeBias (as an
-  // early version of this did) inflated the recovered model-space estimate far more than any real threshold
-  // change, and the inflated estimate then drew easier and easier rounds -- a compounding drift found by
-  // tools/oo_simple_sim.js (a typical eye's settled accuracy crept well above its target range). Crediting the
-  // model with the INTENDED pre-sizeBias target instead (calTarget, used by oo-ui.js in place of res.act) sidesteps
-  // this: the model only ever sees size-independent, size-INTENDED numbers, exactly as it did before this ask.
-  const thNow = ooTheta(state.model, primary, null), ease = Math.max(d, OO_S_FLOOR[primary] * OO_S_FLOOR_PAD, Math.min(OO_S_EASE_MAX, thNow * OO_S_EASE_X));
-  const calTarget = Math.min(d * bf, ease);
-  const dEff = calTarget * sizeBias;
+  // the ceiling: an absolute, flat safety cap only now (OO_S_EASE_MAX, model space) -- richness (bf) can still
+  // inflate a round, but never past this, and never with any LOWER bound any more (David, 2026-10-11: see
+  // OO_S_EASE_MAX's own comment above -- the old max(d, floor*pad, ...) lower-bound terms were exactly what
+  // neutralized the in-run staircase, since the gap could never fall under the player's own current theta).
+  // sizeBias is applied last, after the ceiling, to get the actual ON-SCREEN gap; the ONE floor left (David:
+  // "its only floor is the new OO_S_FLOOR x sizeBias") is applied last of all, on that final on-screen value.
+  const target = Math.min(d * bf, OO_S_EASE_MAX);
+  const floor = OO_S_FLOOR[primary] * sizeBias;
+  const dEff = Math.max(target * sizeBias, floor);
   let r = ooSimpleGradRound(rows, cols, richness, stopHexes, skill, renderMix, dEff, k, rnd, state.safeBox, richMode);
-  if (!r) r = ooSimpleGradRound(rows, cols, "flat", stopHexes, skill, { [primary]: 1 }, Math.min(d, ease) * sizeBias, k, rnd, state.safeBox, richMode);   // should be rare; a plain fallback
+  if (!r) r = ooSimpleGradRound(rows, cols, "flat", stopHexes, skill, { [primary]: 1 }, Math.max(Math.min(d, OO_S_EASE_MAX) * sizeBias, floor), k, rnd, state.safeBox, richMode);   // should be rare; a plain fallback
   // belt and braces: an extreme d or an unusual stop near the edge of the screen's gamut could in principle
   // exhaust both attempts above. A round is never allowed to fail outright, so this last resort uses a base and
   // a gap that are always drawable, same emergency pattern ooRound itself falls back to.
-  if (!r) r = ooSimpleGradRound(rows, cols, "flat", null, skill, { [primary]: 1 }, Math.min(d, 6) * sizeBias, k, rnd, state.safeBox, richMode);
+  if (!r) r = ooSimpleGradRound(rows, cols, "flat", null, skill, { [primary]: 1 }, Math.max(Math.min(d, 6) * sizeBias, floor), k, rnd, state.safeBox, richMode);
   // Classic truly has no palette (David, 2026-10-11: "no palettes") -- its base color comes from ooBase's own
   // family picker, not state.palette, so the reveal must never attribute it to a painting/look it didn't draw
   // from (state.palette may still be a real, unrelated pool entry computed upstream for the gradient path).
-  return Object.assign(r, { breather, axis: primary, judg: primary, mix, bf: r.gridType && r.gridType !== "flat" ? bf : 1, sizeBias, calTarget, paletteSource: classic ? null : (state.palette || null), full: !square, ease });
+  return Object.assign(r, { breather, axis: primary, judg: primary, mix, bf: r.gridType && r.gridType !== "flat" ? bf : 1, sizeBias, paletteSource: classic ? null : (state.palette || null), full: !square, ease: OO_S_EASE_MAX * sizeBias });
 }
 // grid growth: a rolling window of the last OO_S_WINDOW results at the current size: grow on a hot streak, shrink
 // on a cold one, hold otherwise. The floor stops the gap from shrinking further, so this is the difficulty knob
@@ -1306,10 +1289,11 @@ if (typeof module !== "undefined") module.exports = {
   OO_GRID_MIN, OO_GRID_MAX, OO_ODD_MAX, OO_SESSION_N, OO_SESSION_MORE, OO_UP, OO_DOWN, ooGapAt, ooXOfGap, ooSess, ooSessStep, ooSessEdge, ooSessStart, ooClassic, ooSessD, ooGapDE, OO_KC, OO_KH,
   OO_EDGE, ooEdgeTh, ooEdgeD, ooEdgeUpdate, ooPairRatioOf, ooWhoseAlts,
   ooPairsRound, ooPairClear, OO_PAIR_RATIO, ooLineRound, ooNameMargin, OO_LINE_MARGIN, OO_LINE_P0, OO_LINE_MIN, ooGradStrip, ooOrderRound, ooChangedRound, ooWasRound, ooNbackSeq, ooCountPick,
-  OO_S_FLOOR, OO_S_FLOOR_PAD, OO_S_MULT, OO_S_BREATHE_MULT, OO_S_MIN_COLS, OO_S_MAX_COLS, OO_S_WINDOW, OO_S_GROW_AT, OO_S_SHRINK_AT,
+  OO_S_FLOOR, OO_S_MULT, OO_S_BREATHE_MULT, OO_S_MIN_COLS, OO_S_MAX_COLS, OO_S_WINDOW, OO_S_GROW_AT, OO_S_SHRINK_AT,
+  OO_STAIR_DOWN, OO_STAIR_UP, OO_STAIR_MIN, OO_STAIR_MAX,
   ooLerp, ooSimpleDims, ooSimpleCells, ooOklab, ooOklabRgb, ooOklabInGamut, ooOklabHex, ooOklabMixRaw, ooOklabPathRaw, ooOklabToHexSafe,
-  OO_S_GRAD_WARMUP, OO_S_FLAT_P, OO_S_RICH, OO_S_GRAD_F, ooSimpleSkill, ooSimpleGridType, ooSimpleGradColors, ooSimpleMix, ooMixDir, ooSimpleGradRound,
-  OO_S_BAND, ooSimpleRoundCols, ooSizeBiasMult, OO_S_RAMP_ROUNDS, OO_S_RAMP_FLOOR, ooSimpleRampCols, OO_S_EASE_X, OO_S_EASE_MAX,
+  OO_S_RICH, OO_S_GRAD_F, ooSimpleSkill, ooSimpleGridType, ooSimpleGradColors, ooSimpleMix, ooMixDir, ooSimpleGradRound,
+  OO_S_EASE_MAX,
   ooCellSafe, ooSafeIdx, ooMaxNeighborStep, OO_S_NEIGHBOR_CAP,
   ooSimpleAxis, ooSimpleD, ooSimpleShape, ooSimpleRound, ooSimpleGrid, ooSimpleSizeBias, ooFieldAxis,
 };
