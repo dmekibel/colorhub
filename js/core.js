@@ -795,7 +795,9 @@ function closeStem(instant) {
   STEM_OPEN = false; STEM_CLOSED_AT = Date.now(); cornersBack();
   document.body.classList.remove("stem-open");
   if (STEM_KEY) { removeEventListener("keydown", STEM_KEY, true); STEM_KEY = null; }
-  document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.remove("on"); b.innerHTML = ROOMS_GLYPH; b.setAttribute("aria-expanded", "false"); });
+  // the Places pill keeps its "Places" label when the stem sinks back (David's corners restore, 2026-10-10):
+  // only the OPEN state swaps to a bare ✕, same as the old toggleStem always did.
+  document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.remove("on"); b.innerHTML = ROOMS_GLYPH + "<span>Places</span>"; b.setAttribute("aria-expanded", "false"); });
   // Home's right-corner menu (js/home.js doMenu) rides the same stem: its button gets its own face back
   document.querySelectorAll("[data-do-corner]").forEach(b => { b.classList.remove("on"); b.setAttribute("aria-expanded", "false"); if (b._html) b.innerHTML = b._html; });
   const gone = () => { if (s) s.remove(); if (sc) sc.remove(); };

@@ -58,22 +58,22 @@ const H = {
     await t.waitFor(() => /\d/.test(t.text(".hm-title small")) && !/Loading/.test(t.text(".hm-title small")), 10000, "the honeycomb to fill");
     return cv;
   },
-  // Home's right corner: one ⋯ button, opening the one Map sheet (design/SIMPLIFY/PLAN.md §9, js/places.js
-  // moreOpen("map") -- the old bespoke labeled arc, doMenu, is retired in its favor). which picks what to tap
-  // next inside it: "colors"/"arrange"/"map" open the "Colors & Arrange" row (the combined chooser, with its own
-  // tab inside); "learn" -> Study the map, "fav" -> Keep colors from the map, "search" -> Search, "surprise" ->
-  // Surprise me, "slideshow" -> Slideshow, "namer" -> Name any color. Colors|Paintings is NOT in here (see
-  // H.layer below).
-  mrRow(t, label) { return t.$$(".mr-sheet .mn-row").find(b => t.text(b).includes(label)); },
+  // Home's right corner: ⋯, restored 2026-10-10 to the labeled expanding-pill stem (js/home.js hmDoMenu;
+  // David's verdict on the Simplify pass's single ⋯ sheet). which picks what to tap next inside it:
+  // "colors"/"arrange"/"map" -> Colors & Arrange (the combined chooser, with its own tab inside); "learn" ->
+  // Study the map, "fav"/"keep" -> Keep colors, "surprise" -> Surprise me, "slideshow" -> Slideshow, "namer" ->
+  // Name any color, "settings" -> Settings. Colors|Paintings is NOT in here (see H.layer below); Search is NOT
+  // in here either any more -- it's the standalone top-of-map button (#hmTopSearch, David's 2026-10-10
+  // addendum), driven directly, not through this menu.
+  mrRow(t, id) { return t.$(`.rooms-stem.hm-do-stem [data-do="${id}"]`); },
   async menu(t, which) {
     await t.click("#hmDo", { wait: 120 });
-    await t.waitFor(".mr-sheet", 6000, "the right corner's Map sheet");
+    await t.waitFor(".rooms-stem.hm-do-stem.on", 6000, "the right corner's stem");
     if (!which) return;
-    const label = { colors: "Colors & Arrange", arrange: "Colors & Arrange", map: "Colors & Arrange",
-      learn: "Study the map", fav: "Keep colors from the map", search: "Search", surprise: "Surprise me",
-      slideshow: "Slideshow", namer: "Name any color" }[which] || which;
-    const row = H.mrRow(t, label);
-    t.expect(row, `no "${label}" row in the Map sheet`);
+    const id = { colors: "colors", arrange: "colors", map: "colors", learn: "study", fav: "keep", keep: "keep",
+      surprise: "surprise", slideshow: "slideshow", namer: "namer", settings: "settings" }[which] || which;
+    const row = H.mrRow(t, id);
+    t.expect(row, `no "${which}" row in the map's ⋯ stem`);
     await t.click(row, { wait: 200 });
   },
   // Colors|Paintings is a top-center switch on the map's own screen now (David, 2026-10-09), not a menu row.
@@ -338,9 +338,9 @@ scenario("home", "the color-page return (mxLand) never stalls waiting on data", 
 scenario("home", "Study the map lives only on the right corner, not duplicated in Train", async t => {
   await H.homeReady(t);
   await H.menu(t);
-  const rightLabels = t.$$(".mr-sheet .mn-row b").map(b => t.text(b));
+  const rightLabels = t.$$(".rooms-stem.hm-do-stem .rm-label b").map(b => t.text(b));
   t.expect(rightLabels.includes("Study the map"), `the right corner's menu has no Study the map: ${rightLabels.join(", ")}`);
-  t.d.querySelector(".scrim").dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
+  t.d.querySelector(".rm-scrim").dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
   await t.sleep(400);
   await t.open("#/train", { settle: 600 });
   t.expect(!t.$("[data-mapstudy]"), "the Train room still has its own Study the map tile");
@@ -918,32 +918,30 @@ scenario("home", "the map fills the full viewport before and after a horizontal 
 // was just closed. js/core.js's stemJustClosed() swallows an open attempt in the instant after a close.
 scenario("home", "closing a corner's menu stays closed (no ghost-click reopen)", async t => {
   await H.homeReady(t);
-  // Both corners open a plain modal sheet now (js/places.js placesOpen/moreOpen -- #hmDo's old bespoke
-  // bubble-arc stem, STEM_OPEN, is retired): each one covers this same spot with its own scrim, and each has
-  // its own 380ms "just closed" guard (js/home.js hmDoJustClosed, js/places.js placesJustClosed) against the
-  // same empirically-observed iOS quirk (a delayed synthetic click once the scrim is gone).
-  for (const [sel, sheetSel] of [["#hmDo", ".mr-sheet"], ["[data-rooms-corner]", ".pl-sheet-wrap"]]) {
-    const isOpen = () => !!t.$(sheetSel);
-    await t.click(sel, { wait: 200 });
-    t.expect(isOpen(), `${sel}: the menu did not open`);
+  // Both corners open the same expanding-pill stem now (restored 2026-10-10, js/places.js placesOpen /
+  // js/home.js hmDoMenu): each one covers the screen with its own scrim (.rm-scrim, with a cutout over that
+  // corner), riding the one shared guard (js/core.js STEM_OPEN/closeStem/stemJustClosed) against the same
+  // empirically-observed iOS quirk (a delayed synthetic click once the scrim is gone).
+  for (const sel of ["#hmDo", "[data-rooms-corner]"]) {
+    await t.click(sel, { wait: 0 });
+    await t.waitFor(".rooms-stem.on", 4000, `${sel}: the menu`);
     const btn = t.$(sel), r = btn.getBoundingClientRect();
-    // the sheet's own content now covers this corner's spot (a plain modal, no cutout) -- its "outside the
-    // sheet" area (near the top of the screen) is the equivalent real-finger tap that closes it.
+    // the scrim has a cutout right over the corner the stem rose from -- tap well away from it, near the top
+    // of the screen, the equivalent real-finger tap that closes it.
     const [cx, cy] = [t.w.innerWidth / 2, 40];
     const hit = t.d.elementFromPoint(cx, cy);
     const o = { bubbles: true, cancelable: true, clientX: cx, clientY: cy, pointerId: 3, pointerType: "touch", isPrimary: true, view: t.w };
     hit.dispatchEvent(new t.w.PointerEvent("pointerdown", o));
-    // the sheet animates its close over ~200-400ms and stays in the DOM until that finishes
-    await t.sleep(450);
-    t.expect(!isOpen(), `${sel}: tapping outside the open menu did not close it`);
-    // the removal timer runs after this; a ghost click landing on the real button once it's exposed again
-    // must not reopen the menu
-    await t.sleep(250);
+    // STEM_CLOSED_AT (js/core.js closeStem) is stamped the INSTANT the tap closes it, synchronously -- the
+    // "on" class comes off the same tick, well before the ~200-400ms removal animation finishes
+    await t.sleep(80);
+    t.expect(!t.$(".rooms-stem.on"), `${sel}: tapping outside the open menu did not close it`);
+    // a ghost click landing on the real button WELL WITHIN the 380ms guard window must not reopen the menu
     btn.dispatchEvent(new t.w.MouseEvent("click", { bubbles: true, cancelable: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2, view: t.w }));
     await t.sleep(150);
-    t.expect(!isOpen() && !t.$(".rooms-stem"), `${sel}: a click just after closing reopened the menu by itself`);
+    t.expect(!t.$(".rooms-stem.on"), `${sel}: a click just after closing reopened the menu by itself`);
     await t.sleep(2000);
-    t.expect(!isOpen() && !t.$(".rooms-stem"), `${sel}: the menu reopened on its own 2s after closing`);
+    t.expect(!t.$(".rooms-stem.on"), `${sel}: the menu reopened on its own 2s after closing`);
   }
 });
 
@@ -1173,40 +1171,56 @@ scenario("home", "View sheet filters · Surprise me · Search", async t => {
   }
   await t.click('[data-val="all"]', { wait: 100 });
   await t.waitFor(() => H.num(t.text("[data-count]")) === all, 8000, `All to bring back ${all} colors (says "${t.text("[data-count]")}")`);
-  // Surprise me and Search moved out of the Colors sheet's own header icons into labeled rows in the Map ⋯
-  // sheet's "Map tools"/"Show" groups (PLAN §4: no private icon-only buttons) -- close this sheet first, same
-  // as a person would, then drive them from there.
+  // Surprise me is a labeled row in the right corner's stem (David, 2026-10-10: restored to the expanding-pill
+  // menu) -- close this sheet first, same as a person would, then drive it from there.
   await t.click("[data-sheet-close]", { wait: 400 });
   await t.waitFor(() => !t.$(".hm-chooser"), 4000, "the Colors sheet to close");
   await H.menu(t, "surprise");
-  t.expect(!t.$(".hm-chooser") && !t.$(".mr-sheet"), "Surprise me left a sheet open");
-  await t.sleep(900);   // let the "fly to a new color" settle before the next ⋯ tap, same as a real second tap would
-  // Search reveals the field; typing narrows the honeycomb without errors
-  await H.menu(t, "search");
-  t.expect(!t.$("#hmSearch").hidden, "the search field did not appear");
-  const q = t.$("#hmq"); q.value = "teal"; q.dispatchEvent(new t.w.Event("input", { bubbles: true }));
-  await t.tick(); await t.sleep(600);
+  t.expect(!t.$(".hm-chooser") && !t.$(".rooms-stem"), "Surprise me left a sheet open");
+  await t.sleep(900);   // let the "fly to a new color" settle before the next tap, same as a real second tap would
+  // Search is the standalone top-of-map button now (David's 2026-10-10 addendum, #hmTopSearch), not a stem
+  // row: one tap opens the one global search (js/search.js searchOpen), focused and ready to type.
+  await t.click("#hmTopSearch", { wait: 300 });
+  await t.waitFor(".sr-sheet", 4000, "the global search sheet from the top-of-map button");
+  const q = t.$(".sr-input"); t.expect(q === t.d.activeElement, "the search field did not focus");
+  q.value = "teal"; q.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+  await t.tick(); await t.sleep(300);
+  t.expect(t.$(".sr-colors .sr-color"), "searching \"teal\" found no color results");
+  t.d.querySelector(".scrim").dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
+  await t.sleep(400);
   t.expect(cv.isConnected, "the honeycomb was replaced while searching");
 });
 
-// PLAN §3.1/§9: the left corner's old bubble-arc stem is now the Places sheet (js/places.js placesOpen).
-scenario("home", "Rooms corner opens the Places sheet; each place navigates", async t => {
+// PLAN §3.1/§9, restored 2026-10-10 (David's verdict on the Simplify corners): the Places menu is the
+// expanding-pill stem again (js/places.js placesOpen), not a full-screen sheet.
+scenario("home", "Rooms corner opens the Places stem; each place navigates", async t => {
   const rooms = [["learn", "Learn"], ["gym", "Train"], ["explore", "Museum"], ["studio", "Studio"]];
   for (const [id, label] of rooms) {
     await H.homeReady(t);
     await t.click("[data-rooms-corner]");
-    await t.waitFor(".pl-sheet-wrap", 4000, "the Places sheet");
-    const rows = t.$$(".pl-grid [data-pl-go]").map(b => b.dataset.plGo);
-    t.expect(rooms.every(([r]) => rows.includes(r)), `the Places sheet shows ${rows.join(", ")}`);
-    await t.click(`.pl-grid [data-pl-go="${id}"]`, { wait: 700 });
+    await t.waitFor(".rooms-stem.on", 4000, "the Places stem");
+    const rows = t.$$(".rooms-stem [data-pl]").map(b => b.dataset.pl);
+    t.expect(rooms.every(([r]) => rows.includes(r)) && rows.includes("colls"), `the Places stem shows ${rows.join(", ")}`);
+    await t.click(`.rooms-stem [data-pl="${id}"]`, { wait: 700 });
     await t.waitFor(`.room-sheet[data-room="${id}"]`, 6000, `the ${label} room`);
     t.expect(t.$(".room-sheet").innerText.length > 80, `the ${label} room is empty`);
   }
-  // from inside a room the sheet also holds Home, which goes back to the honeycomb
+  // from inside a room the stem also holds Map, which goes back to the honeycomb
   await t.click("[data-rooms-corner]");
-  await t.waitFor('.pl-grid [data-pl-go="home"]', 4000, "Home in the Places sheet");
-  await t.click('.pl-grid [data-pl-go="home"]', { wait: 900 });
-  await t.waitFor("canvas", 6000, "the honeycomb after Places > Home");
+  await t.waitFor('.rooms-stem [data-pl="home"]', 4000, "Map in the Places stem");
+  await t.click('.rooms-stem [data-pl="home"]', { wait: 900 });
+  await t.waitFor("canvas", 6000, "the honeycomb after Places > Map");
+});
+// David, 2026-10-10: tapping Collections opens the Museum's own grid of every collection as its own screen
+// (js/explore.js museumHome) -- never rendered inline in the Places stem (his objection to the Simplify
+// pass's full-screen Collections panel).
+scenario("home", "Places > Collections opens the Museum's collection grid, not an inline panel", async t => {
+  await H.homeReady(t);
+  await t.click("[data-rooms-corner]");
+  await t.waitFor('.rooms-stem [data-pl="colls"]', 4000, "Collections in the Places stem");
+  t.expect(!t.$(".rooms-stem .pl-colls"), "the collections grid rendered inline in the Places stem");
+  await t.click('.rooms-stem [data-pl="colls"]', { wait: 700 });
+  await t.waitFor(".mu-home", 8000, "the Museum's collection grid after Places > Collections");
 });
 
 // "Colors | Paintings" (David, 2026-10-09: "it should be more prominent... instead of colors you switch to
@@ -1240,8 +1254,8 @@ scenario("home", "Colors | Paintings: the top-center switch is bidirectional and
   // the save just written (S.hm.mode) actually carries over to the fresh page
   await t.open("#/today", { settle: 500, keepState: true });
   await t.click("[data-rooms-corner]");
-  await t.waitFor('.pl-grid [data-pl-go="home"]', 4000, "Home in the Places sheet");
-  await t.click('.pl-grid [data-pl-go="home"]', { wait: 900 });
+  await t.waitFor('.rooms-stem [data-pl="home"]', 4000, "Map in the Places stem");
+  await t.click('.rooms-stem [data-pl="home"]', { wait: 900 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "Rooms > Home to remember paintings mode");
   t.ev('S.hm.mode = "colors"; save();');   // leave state clean for later scenarios
 });
@@ -2224,7 +2238,7 @@ scenario("home", "the left menu's Learn room Recall opens the one Study flow, no
   await H.homeReady(t);
   t.ev("Object.values(S.cards).slice(0, 2).forEach(c => { c.due = addDays(today(), -1); }); save();");
   await t.click("[data-rooms-corner]", { wait: 300 });
-  await t.click('.pl-grid [data-pl-go="learn"]', { wait: 700 });
+  await t.click('.rooms-stem [data-pl="learn"]', { wait: 700 });
   await t.waitFor('.room-sheet[data-room="learn"]', 6000, "the Learn room");
   t.expect(/recall/i.test(t.text(".lh-hero-t")), `the Learn room hero reads "${t.text(".lh-hero-t")}" (wanted a recall count)`);
   await t.click("[data-study]", { wait: 400 });
@@ -3250,43 +3264,47 @@ scenario("map", "three bubble taps with Back between leave no stuck bubble and H
   }
   t.notes.push("3 opens mid-glide, no leftovers, centered on return");
 });
-// David, 2026-10-09 (design/SIMPLIFY/PLAN.md §9): the old labeled arc (doMenu: Study the map, Favorites,
-// Search, Colors & Arrange, Paintings -- "this menu is too long... Recall doesn't belong here") is retired for
-// the one Map ⋯ sheet (js/places.js moreOpen("map")), same component every other screen's ⋯ opens. Then, a
-// later correction: "it doesn't make sense that the painting map is accessed through [a menu]... make it a
-// small, always-visible segmented control" -- Colors|Paintings moved OUT of the sheet entirely, to a top-center
-// switch on the map's own screen (hmLayerSwitchHTML/hmWireLayerSwitch), so the sheet no longer carries it at all.
-scenario("map", "the right corner's Map sheet has no Recall · no Paintings row · nothing duplicated with the left menu", async t => {
+// David, 2026-10-10: the right corner's single ⋯ sheet (the Simplify pass) is retired back to the expanding-
+// pill stem (js/home.js hmDoMenu) -- "the bottom-right menu became uglier and harder to navigate... fewer
+// symbols, more monotone, boring and big." Still no Recall (it's in the left menu's Learn row) and no Paintings
+// row (Colors|Paintings is the top-center switch, hmLayerSwitchHTML/hmWireLayerSwitch) -- and Search is no
+// longer a row either: it moved to the standalone top-of-map button (#hmTopSearch, the same 2026-10-10 pass).
+scenario("map", "the right corner's stem has no Recall · no Paintings row · no Search row · nothing duplicated with the left menu", async t => {
   await H.homeReady(t);
   t.expect(t.$$(".screen.hm .corner").length === 2, `${t.$$(".screen.hm .corner").length} corner buttons on Home`);
   t.expect(!t.$("#hmMapStudy, [data-pr-study], #hmFav, #hmView"), "a verb still has its own button on Home");
   t.expect(t.$(".hm-layer"), "no top-center Colors|Paintings switch");
   t.expect(t.$$(".hm-layer [data-layer]").length === 2, "the layer switch should be exactly Colors/Paintings");
+  t.expect(t.$("#hmTopSearch"), "no standalone Search button at the top of the map");
   await H.menu(t);
-  const rowLabels = t.$$(".mr-sheet .mn-row b").map(b => t.text(b).trim());
+  const rowLabels = t.$$(".rooms-stem.hm-do-stem .rm-label b").map(b => t.text(b).trim());
   t.expect(!rowLabels.some(l => /recall/i.test(l)), `Recall is still in the right corner's menu: ${rowLabels.join(", ")}`);
   t.expect(!rowLabels.some(l => /^paintings$/i.test(l)), "Paintings still has its own row (it's the top-center switch now)");
-  for (const want of ["Colors & Arrange", "Study the map", "Keep colors from the map", "Search"]) {
-    t.expect(rowLabels.includes(want), `the Map sheet has no "${want}" row: ${rowLabels.join(", ")}`);
+  t.expect(!rowLabels.some(l => /^search$/i.test(l)), "Search is still a row in the right corner's stem (it's the top-of-map button now)");
+  for (const want of ["Colors & Arrange", "Study the map", "Keep colors", "Surprise me", "Name any color", "Slideshow", "Settings"]) {
+    t.expect(rowLabels.includes(want), `the right corner's stem has no "${want}" row: ${rowLabels.join(", ")}`);
   }
-  t.expect(t.$$(".mr-sheet .mn-row b").every(b => t.text(b).length > 2), "a menu row has no label");
+  t.expect(rowLabels.length <= 7, `the right corner's stem has ${rowLabels.length} rows, wanted ~7 or fewer`);
+  t.expect(rowLabels.every(b => b.length > 2), "a menu row has no label");
   // one home per action: none of the right menu's rows should duplicate a left (Places) place
   const rightLabels = rowLabels.map(l => l.toLowerCase());
   await H.keys(t, "Escape"); await t.sleep(500);
   await t.click("[data-rooms-corner]", { wait: 300 });
-  const leftLabels = t.$$(".pl-grid .pl-row .pl-txt b").map(b => t.text(b).trim().toLowerCase());
+  await t.waitFor(".rooms-stem.on", 4000, "the Places stem");
+  const leftLabels = t.$$(".rooms-stem .rm-label b").map(b => t.text(b).trim().toLowerCase());
+  t.expect(leftLabels.includes("collections"), `the Places stem has no Collections row: ${leftLabels.join(", ")}`);
   await H.keys(t, "Escape"); await t.sleep(500);
   for (const l of rightLabels) t.expect(!leftLabels.includes(l), `"${l}" appears in both the left and right menus`);
   await H.menu(t);
-  t.$(".scrim").dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
+  t.$(".rm-scrim").dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
   await t.sleep(500);
-  t.expect(!t.$(".mr-sheet"), "a tap outside did not close the menu");
-  // past the ghost-click guard window (hmDoJustClosed, 380ms past whichever of the scrim tap or the sheet's own
-  // removal -- up to ~400ms behind the tap -- stamps last) before the next real #hmDo tap
+  t.expect(!t.$(".rooms-stem"), "a tap outside did not close the menu");
+  // past the ghost-click guard window (js/core.js stemJustClosed, shared by both corners now) before the next
+  // real #hmDo tap
   await t.sleep(400);
   await H.menu(t);
   await H.keys(t, "Escape"); await t.sleep(500);
-  t.expect(!t.$(".mr-sheet"), "Escape did not close the menu");
+  t.expect(!t.$(".rooms-stem"), "Escape did not close the menu");
   await t.sleep(400);
   await H.menu(t, "learn");
   await t.waitFor(".pr-quick", 8000, "Study the map from the menu");

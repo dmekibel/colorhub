@@ -280,12 +280,32 @@
 .hm-sheet-arrange .hm-arr{margin:0 -16px;padding-top:4px}
 .hm-sheet-arrange .hm-arr-sub{padding:0;margin-top:2px}
 
-/* ---------- the right corner: one ⋯ button, opening the one Map sheet (js/places.js moreOpen; design/SIMPLIFY/
-   PLAN.md §9). The old labeled arc (doMenu, a bespoke stem only this corner had) is retired in its favor. ---------- */
+/* ---------- the right corner: ⋯, restored to the labeled expanding-pill stem (js/home.js hmDoMenu;
+   David, 2026-10-10, reversing the Simplify pass's single ⋯ sheet here). Shares .rooms-stem/.hm-do-stem/
+   .rm-bubble/.rm-art/.rm-label (css/menus2.css) with the left corner's Places stem -- only what's genuinely
+   new to THIS corner's rows lives here. ---------- */
 .hm-do{overflow:visible}
 .hm-do svg{width:20px;height:20px}
 .hm-do-n{position:absolute;top:-5px;right:-5px;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--paper);color:var(--paper-ink);
   font:500 12.5px/22px var(--sans);font-style:normal;text-align:center;font-variant-numeric:tabular-nums;box-shadow:0 0 0 2px var(--ground)}
+/* the Colors & Arrange row's own thumbnail: 4 live dots sampled from what's on screen, not a static glyph */
+.hm-do-dots{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;padding:4px;background:var(--s3)}
+.hm-do-dots i{border-radius:3px;display:block}
+/* Settings: a small gear at the column's end (David: "may be a small gear"), not a full 50px picture row */
+.hm-do-sm .rm-art{width:30px;height:30px;background:transparent;box-shadow:none;display:grid;place-items:center;color:var(--soft)}
+.hm-do-sm .rm-label b{font-size:18px}
+
+/* ---------- a Search button at the top of the map (David, 2026-10-10 addendum): the same opaque, round corner
+   style, aligned with the Colors | Paintings switch, safe-area aware. One tap opens the one global search
+   (js/search.js searchOpen), focused and ready to type -- dropped from the ⋯ stem above (one home per action). ---------- */
+.hm-top-search{position:fixed;z-index:4;top:calc(var(--top,0px) + 10px);right:16px;width:40px;height:40px;
+  border-radius:50%;background:var(--s2);border:1px solid var(--line-2);box-shadow:0 8px 24px rgba(0,0,0,.5);
+  display:grid;place-items:center;color:var(--ink);transition:transform var(--dur-0) ease-out,background var(--dur-1)}
+.hm-top-search svg{width:18px;height:18px}
+.hm-top-search:active{transform:scale(.92);background:var(--s3)}
+.hm.chrome-hide .hm-top-search{opacity:0;pointer-events:none}
+@supports (padding:max(0px)){.hm-top-search{top:calc(max(var(--top,0px),env(safe-area-inset-top)) + 10px)}}
+@media (orientation:landscape){.hm-top-search{right:calc(16px + var(--right))}}
 
 /* ---------- Colors | Paintings: an always-visible top-center switch, on the map's own screen, not a menu row
    (David, 2026-10-09: "it doesn't make sense that the painting map is accessed through [a menu]... make it a

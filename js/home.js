@@ -415,13 +415,10 @@ function hmWireLayerSwitch(el, cur, onSwitch) {
     buzz(6); onSwitch(b.dataset.layer);
   });
 }
-// #hmDo's own ghost-click guard, same empirically-observed iOS quirk js/core.js stemJustClosed/js/places.js
-// placesJustClosed exist for (David: "clicking it again minimizes it, and then automatically it expands again
-// by itself" -- a delayed synthetic click iOS can still fire once whatever covered the button is gone). moreOpen
-// (js/places.js) doesn't expose its own "just closed" flag, and its sheet is a generic modal with no cutout over
-// this corner the way the old bubble-arc stem's scrim had -- so this is self-contained here, the same pattern.
-let HM_DO_CLOSED_AT = 0;
-const hmDoJustClosed = () => Date.now() - HM_DO_CLOSED_AT < 380;
+// #hmDo's ghost-click guard: the shared one, js/core.js's STEM_OPEN/closeStem/stemJustClosed -- restored
+// 2026-10-10 (David's verdict on the Simplify corners) to the SAME machinery js/places.js's left-corner stem
+// uses, instead of a bespoke flag of its own (the old moreOpen-sheet era needed one; the stem's scrim already
+// has its own cutout over this corner, so the shared guard covers it exactly the way it covers the left one).
 
 function hmHome() {
   if (!S.placed) return welcome();
@@ -445,6 +442,7 @@ function hmHome() {
       <button class="hm-l18-hint" id="hmqHint" hidden></button>
     </div>
     ${hmLayerSwitchHTML("colors")}
+    <button class="hm-top-search" id="hmTopSearch" aria-label="Search">${ICON.search}</button>
     <button class="corner l pl-corner" data-rooms-corner aria-label="Places">${ROOMS_GLYPH}<span>Places</span></button>
     <button class="corner r hm-do" id="hmDo" data-do-corner aria-label="More" aria-haspopup="dialog" aria-expanded="false"></button>
   `, "fixed cx hm");
@@ -461,6 +459,12 @@ function hmHome() {
     const tip = $(".lr-maphint"); if (!tip) return;
     tip.classList.add("out"); later(() => tip.remove(), typeof reduceMotion !== "undefined" && reduceMotion ? 0 : 320);
   }
+  // David, 2026-10-10 addendum: a Search button at the top of the map, aligned with the Colors | Paintings
+  // switch -- one tap opens the ONE global search (js/search.js searchOpen), focused and ready to type, not
+  // the map's own older pulldown search box (openSearch/#hmSearch, below -- kept for the pull-down gesture).
+  // Dropped from the right corner's ⋯ stem in the same change (one home per action, not two).
+  const topSearchBtn = $("#hmTopSearch");
+  if (topSearchBtn) topSearchBtn.onclick = () => { hmDismissHint(); buzz(4); if (typeof searchOpen === "function") searchOpen({ from: "map-top" }); };
 
   // ---------- the honeycomb itself ----------
   let items = [], ctrl = null, gen = 0;
@@ -945,11 +949,13 @@ function hmHome() {
   const hmWatchTimer = setInterval(hmCornerWatch, 1000);
   cleanup.push(() => { hmWatchEvents.forEach(k => removeEventListener(k, hmCornerWatch)); document.removeEventListener("visibilitychange", hmCornerWatch); clearInterval(hmWatchTimer); });
   hmShowChrome(); cornersBack();   // every way into Home starts with both corners drawn and tappable
-  // ---------- the right corner: ⋯, the one Map sheet (design/SIMPLIFY/PLAN.md §9's day-0 contract, js/places.js
-  // moreOpen/moreRegister). Replaces the old 4-5-row bubble-arc stem (doMenu) David found "too long": Study the
-  // map, Favorites, Search, Colors & Arrange and Paintings now live as labeled rows inside the ONE sheet every
-  // other screen's ⋯ already opens, instead of a bespoke arc only this corner had. It still shows how many names
-  // are due, same as before. ----------
+  // ---------- the right corner: ⋯, restored to the labeled expanding-pill stem (David, 2026-10-10, on the
+  // Simplify pass's single ⋯ sheet: "the bottom-right menu became uglier and harder to navigate -- fewer
+  // symbols, more monotone, boring and big... both bottom-left and bottom-right buttons expanded upward along
+  // the side without going full screen"). Same shape and machinery as the left corner's Places stem
+  // (js/places.js placesOpen: STEM_OPEN/closeStem/cornersBack/growFrom/stemJustClosed, js/core.js), new
+  // content: real icons and colorful thumbnails, trimmed subtitles, ~7 rows, Settings a small gear at the end.
+  // It still shows how many names are due, same as before. ----------
   const doBtn = $("#hmDo");
   function paintDo() {
     const due = typeof dueList === "function" ? dueList().length : 0;
@@ -961,43 +967,9 @@ function hmHome() {
   // "Colors | Paintings" (David, 2026-10-09: "it should be more prominent... instead of colors you switch to
   // paintings"): the same floor, the archive's paintings instead of names, laid out by palette likeness
   // (js/paintmap.js, through the honeycomb's own fisheye). One tap; S.hm.mode remembers it (js/core.js hmGoFloor).
+  // It lives ONLY as the top-center switch (hmLayerSwitchHTML/hmWireLayerSwitch below) -- not a copy in this
+  // stem either (David, 2026-10-09: "probably not" to keeping one for discoverability).
   const hmGoPaintings = () => { if (S.hm.mode !== "paintings") { S.hm.mode = "paintings"; save(); } if (typeof pmGo === "function") pmGo("arr=color"); };
-  // moreRegister("map", ...): PLAN §3.3's depth ladder -- the mode switch and the two most-used doors sit right
-  // in the sheet; "Colors & Arrange" is one tap further into chooser() below (the ladder's own "two taps: a
-  // sub-page" tier), which already merges How many/Family/Tone/Collections/Arrange/Look/Feel/Edges into one
-  // non-modal sheet -- so this ISN'T rebuilding that sheet, just giving it one consistent front door.
-  // js/places.js moreOpen() already calls the real close() (js/core.js sheet()) before invoking a row's run() --
-  // unlockScroll/cornersBack/the esc listener are handled synchronously there, regardless of what happens to the
-  // DOM node next. Only the EXIT ANIMATION is still pending (close() delays scrim.remove()/sh.remove() by up to
-  // ~400ms so it can be seen), and every one of these rows opens ANOTHER sheet (chooser) or leaves the map
-  // interactive right away -- removing the node outright here, instead of waiting that out, is what stops it
-  // from sitting (still matching ".sheet"/".scrim", just invisible) over the live map or the next sheet, which
-  // both moreOpen's own re-entry guard and #hmDo's below would otherwise read as "something is still open" and
-  // silently refuse to act on. The old doMenu did the same thing (closeStem(true)) before its own actions.
-  const hmMoreRun = fn => () => { document.querySelectorAll(".sheet,.scrim").forEach(n => n.remove()); fn(); };
-  // Colors|Paintings lives ONLY as the top-center switch now (hmLayerSwitchHTML/hmWireLayerSwitch below) --
-  // David, 2026-10-09: "it doesn't make sense that the painting map is accessed through [a menu]... remove the
-  // Paintings row from any menu", and no, not a copy here either ("probably not" to keeping one for discoverability).
-  if (typeof moreRegister === "function") moreRegister("map", () => [
-    { title: "Show", items: [
-      { t: "Colors & Arrange", n: `${hlAll ? "Every name" : hmViewLabel()} · ${hmArrLabel()}`, run: hmMoreRun(() => chooser(S.hm.chooserTab === "arrange" ? "arrange" : "colors")) },
-      // David, 2026-10-09: "where can I access the slideshow deliberately?" -- it was an icon in the old Colors
-      // sheet header, Learn's Today card, and the 60s idle trigger, with no plain door of its own. A clear
-      // labeled row near the top of the sheet (not buried in "Map tools" below); the idle trigger and Learn's
-      // own entry stay exactly as they were.
-      typeof ssOpen === "function" && { t: "Slideshow", n: "Let the colors play", run: hmMoreRun(() => ssOpen()) },
-    ].filter(Boolean) },
-    // David, 2026-10-09: "this menu is too long... Recall doesn't belong here, it's already in the left menu" (the
-    // Places menu's Learn row, which leads with the due check-in) -- Study the map stays (its own "names near the
-    // middle" scope), and the Colors sheet's 4 icon-only header buttons (A1: no private symbols) move in here too.
-    { title: "Map tools", items: [
-      { t: "Search", n: "A color, a hex, a painter, a decade", run: hmMoreRun(() => openSearch()) },
-      typeof prQuick === "function" && { t: "Study the map", n: (typeof HONEY_HL !== "undefined" && HONEY_HL) ? honeyLitLabel().title : "Names near the middle", run: hmMoreRun(() => hmStudyCorner(ctrl, items)) },
-      typeof fvPickStart === "function" && { t: "Keep colors from the map", n: "Favorites", run: hmMoreRun(() => fvPickStart(el, ctrl)) },
-      { t: "Name any color", run: hmMoreRun(() => { XSTACK = []; X_ROOT = "home"; LAB.namer(); }) },
-      { t: "Surprise me", n: "A color you haven't met", run: hmMoreRun(() => hmDice()) },
-    ].filter(Boolean) },
-  ]);
   // featureRegister (js/search.js, loaded after home.js -- hence the typeof guard and doing this at runtime,
   // not module load): every arrangement findable by name from the one search (PLAN §3.7/§9 "each arrangement
   // and order"). Picking one jumps straight to the map with it applied, not just a shortcut to the sheet.
@@ -1005,30 +977,72 @@ function hmHome() {
     window.HM_FEATURES_REGISTERED = true;
     HONEY_ARR_IDS.forEach(id => featureRegister("arr-" + id, { t: HONEY_ARR[id].title, where: "Map · ⋯ · Colors & Arrange",
       words: "arrange arrangement shape map grid " + HONEY_ARR[id].title.toLowerCase(), run: () => { S.hm.arr = id; save(); if (typeof hmHome === "function") hmHome(); } }));
-    featureRegister("map-slideshow", { t: "Slideshow", where: "Map · ⋯ · Show", words: "slideshow play screensaver ambient auto colors",
+    featureRegister("map-slideshow", { t: "Slideshow", where: "Map · ⋯ · Slideshow", words: "slideshow play screensaver ambient auto colors",
       run: () => { if (typeof hmGoFloor === "function") hmGoFloor(); setTimeout(() => { if (typeof ssOpen === "function") ssOpen(); }, 0); } });
-    featureRegister("map-surprise", { t: "Surprise me", where: "Map · ⋯ · Map tools", words: "random dice unmet color",
+    featureRegister("map-surprise", { t: "Surprise me", where: "Map · ⋯ · Surprise me", words: "random dice unmet color",
       run: () => { if (typeof hmGoFloor === "function") hmGoFloor(); } });
-    featureRegister("map-namer", { t: "Name any color", where: "Map · ⋯ · Map tools", words: "eyedropper pick hex namer",
+    featureRegister("map-namer", { t: "Name any color", where: "Map · ⋯ · Name any color", words: "eyedropper pick hex namer",
       run: () => { XSTACK = []; X_ROOT = "home"; if (typeof LAB !== "undefined") LAB.namer(); } });
     featureRegister("map-lookfeel", { t: "Look & feel", where: "Map · ⋯ · Colors & Arrange", words: "magnify spacing size fisheye lens honeycomb bubbles",
       run: () => { S.hm.chooserTab = "arrange"; save(); if (typeof hmGoFloor === "function") hmGoFloor(); setTimeout(() => { if (typeof window.HM_CHOOSER === "function") window.HM_CHOOSER("arrange"); }, 350); } });
   }
-  doBtn.onclick = () => {
-    if (hmDoJustClosed() || document.querySelector(".sheet,.scrim,.rooms-stem")) return;
+  // a small gear, no keyline circle -- David: "Settings may be a small gear at the column's end" (the column's
+  // end is its top, farthest from the thumb: the row people reach for least).
+  const HM_DO_GEAR = `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3.1"/><path d="M12 3.6v2.5M12 17.9v2.5M20.4 12h-2.5M6.1 12H3.6M17.7 6.3l-1.8 1.8M8.1 15.9l-1.8 1.8M17.7 17.7l-1.8-1.8M8.1 8.1 6.3 6.3"/></svg>`;
+  function hmDoMenu() {
+    if (STEM_OPEN) { buzz(4); return closeStem(); }
+    if (stemJustClosed() || document.querySelector(".sheet,.scrim,.rooms-stem")) return;
     hmDismissHint(); buzz(4);
-    if (typeof moreOpen !== "function") return;
-    moreOpen("map");
-    // the common case (a tap on the scrim) is caught the instant it happens; a MutationObserver is the fallback
-    // for every other way the sheet can leave (swipe-down, Escape, a row) -- js/places.js placesOpen's own exact
-    // pattern (PLACES_CLOSED_AT), kept consistent with it on purpose: the observer re-stamping at actual removal
-    // (not the original tap) is deliberate there too, since that's closer to when the corner is visually exposed
-    // again -- right when a delayed ghost click would land.
-    const scrimEl = document.querySelector(".scrim");
-    if (scrimEl) scrimEl.addEventListener("pointerdown", () => { HM_DO_CLOSED_AT = Date.now(); }, { capture: true });
-    const doMo = new MutationObserver(() => { if (!document.querySelector(".mr-sheet")) { HM_DO_CLOSED_AT = Date.now(); doMo.disconnect(); } });
-    doMo.observe(document.body, { childList: true });
-  };
+    document.querySelectorAll(".rooms-stem,.rm-scrim").forEach(n => n.remove());   // one still sinking from a fast double tap
+    STEM_OPEN = true; document.body.classList.add("stem-open");
+    const ic = svg => `<span class="rm-art hm-do-ic">${svg}</span>`;
+    // the Colors & Arrange row's own thumbnail: 4 real dots sampled from what's on screen right now, the same
+    // "colorful dots icon" the old pre-Simplify arc used (not a static glyph -- it reflects the current view).
+    const dots = hs => `<span class="rm-art hm-do-ic hm-do-dots">${hs.slice(0, 4).map(h => `<i style="background:${esc(h)}"></i>`).join("")}</span>`;
+    const sample = items.filter((_, i) => i % Math.max(1, Math.floor(items.length / 4)) === 0).map(it => it.h);
+    const lit = typeof HONEY_HL !== "undefined" && HONEY_HL;
+    // top to bottom as read; the thumb's nearest (the bottom) is the map's own most-used control (PLAN §9's
+    // own "Colors & Arrange is one tap further" ladder, and David's "it should be more prominent").
+    const rows = [
+      { id: "settings", t: "Settings", art: ic(HM_DO_GEAR), small: true, attr: "data-do-settings" },
+      { id: "surprise", t: "Surprise me", n: "A color you haven't met", art: ic(ICON.dice), attr: "data-do-surprise" },
+      { id: "namer", t: "Name any color", art: ic(icon("pipette", 22)), attr: "data-do-namer" },
+      typeof fvPickStart === "function" && { id: "keep", t: "Keep colors", n: "From the map", art: ic(FV_HEART), attr: "data-do-keep" },
+      typeof prQuick === "function" && { id: "study", t: "Study the map", n: lit ? honeyLitLabel().title : "Names near the middle", art: ic(PR_ICON.cards), attr: "data-do-study" },
+      typeof ssOpen === "function" && { id: "slideshow", t: "Slideshow", n: "Let the colors play", art: ic(ICON.play), attr: "data-do-slideshow" },
+      { id: "colors", t: "Colors & Arrange", n: `${hlAll ? "Every name" : hmViewLabel()} · ${hmArrLabel()}`, art: dots(sample), attr: "data-do-colors" },
+    ].filter(Boolean);
+    const n = rows.length;
+    const scrim = document.createElement("div"); scrim.className = "rm-scrim rm-scrim-r";
+    scrim.addEventListener("pointerdown", e => { e.preventDefault(); e.stopPropagation(); buzz(4); closeStem(); });
+    scrim.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); });
+    scrim.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
+    const stem = document.createElement("div");
+    stem.className = "rooms-stem hm-do-stem"; stem.setAttribute("role", "menu"); stem.setAttribute("aria-label", "Map menu");
+    stem.style.setProperty("--n", n);
+    stem.innerHTML = rows.map((r, k) => {
+      const i = n - 1 - k;   // array written top-to-bottom as read; reversed into --i so the LAST row lands nearest the thumb
+      return `<button class="rm-bubble${r.small ? " hm-do-sm" : ""}" role="menuitem" data-do="${r.id}" ${r.attr || ""} style="--i:${i}">
+        ${r.art}<span class="rm-label"><b>${esc(r.t)}</b>${r.n ? `<em>${esc(r.n)}</em>` : ""}</span></button>`;
+    }).join("");
+    document.body.append(scrim, stem);
+    doBtn.classList.add("on"); doBtn.innerHTML = ICON.x; doBtn.setAttribute("aria-expanded", "true");
+    requestAnimationFrame(() => requestAnimationFrame(() => { scrim.classList.add("on"); stem.classList.add("on"); }));
+    STEM_KEY = e => { if (e.key === "Escape") { e.stopPropagation(); closeStem(); } };
+    addEventListener("keydown", STEM_KEY, true);
+    const run = fn => () => { document.querySelectorAll(".sheet,.scrim").forEach(n2 => n2.remove()); fn(); };
+    const acts = {
+      settings: run(() => { if (typeof ymSettingsSheet === "function") ymSettingsSheet(); }),
+      surprise: run(() => hmDice()),
+      namer: run(() => { XSTACK = []; X_ROOT = "home"; LAB.namer(); }),
+      keep: run(() => fvPickStart(el, ctrl)),
+      study: run(() => hmStudyCorner(ctrl, items)),
+      slideshow: run(() => ssOpen()),
+      colors: run(() => chooser(S.hm.chooserTab === "arrange" ? "arrange" : "colors")),
+    };
+    stem.querySelectorAll("[data-do]").forEach(b => b.onclick = () => { buzz(8); closeStem(true); const a = acts[b.dataset.do]; if (a) a(); });
+  }
+  doBtn.onclick = hmDoMenu;
   hmWireLayerSwitch(el, "colors", id => { if (id === "paintings") hmGoPaintings(); });
   // (the swipe-up-from-the-bottom shortcut to Learn is gone: David, 2026-10-08, a scroll near the bottom kept landing
   // in Learn. The rooms button is the way in.)

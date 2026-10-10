@@ -24,9 +24,15 @@ function searchCollectionMatches(q) {
   const ql = q.toLowerCase();
   return COLLECTIONS.filter(c => c.t.toLowerCase().includes(ql)).slice(0, 8);
 }
+// `words` is documented as an array, but a few registrations (js/home.js, js/paintmap.js) pass a plain
+// space-separated string instead -- normalize either shape here rather than at each call site, so a real
+// search (not just a lookup by exact id) never throws on one of them.
 function searchFeatureMatches(q) {
   const ql = q.toLowerCase();
-  return [...FEATURE_REGISTRY.entries()].filter(([, f]) => f.t.toLowerCase().includes(ql) || (f.words || []).some(w => w.toLowerCase().includes(ql))).slice(0, 8);
+  return [...FEATURE_REGISTRY.entries()].filter(([, f]) => {
+    const words = Array.isArray(f.words) ? f.words : typeof f.words === "string" ? f.words.split(/\s+/) : [];
+    return f.t.toLowerCase().includes(ql) || words.some(w => w.toLowerCase().includes(ql));
+  }).slice(0, 8);
 }
 function searchResultsHTML(q) {
   if (!q) return `<p class="fine sr-empty">Search colors, paintings, collections, and anything tucked behind ⋯.</p>`;
