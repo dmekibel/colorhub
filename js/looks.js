@@ -30,6 +30,39 @@ const lkAll = () => window.LOOKS || [];
 const lkGet = id => lkAll().find(l => l.id === id) || null;
 const lkStripes = (cols, cls = "lkx-str") => `<span class="${cls}">${cols.map(c => `<i style="--c:${c[0]};flex:${Math.max(c[2], .05)}"></i>`).join("")}</span>`;
 
+// ---------- palette provenance: every look mixes hand-picked palettes with ones measured from real photos
+// (David, 2026-10-10: "confused me what the palettes were" -- a look page must say, for whichever palette is
+// on screen, whether it was chosen by hand or measured, from what, and how many images, in one plain line).
+// Measured palettes are named two ways (tools: research/LOOKS.md): the original 104 looks' "Measured
+// overall/darks/lights/accents", and the 55 roster-widening/recovered looks (part 2/3 of that doc) whose only
+// palettes ARE the measured ones but are named "<Look name> palette" / "Darker side" / "Lighter side" instead --
+// checked against every look in data/looks.js (2026-10-10): those two patterns cover every non-"Measured ..."
+// palette name that has a `measured` block in its KB, with no look mixing a hand-picked and a generically-named
+// measured palette. Anything else was hand-picked. The source photos themselves were measured and discarded,
+// per that same method -- never stored -- so there is no thumbnail to show here; the count and source stand in
+// for it.
+const lkIsMeasured = p => /^Measured\b/.test(p.n) || /palette$/i.test(p.n) || /^(Darker|Lighter) side$/i.test(p.n);
+function lkPalLabel(p) {   // the tab/section label: "Golden phase -- curated" / "Measured: darks"
+  if (!lkIsMeasured(p)) return `${p.n} — curated`;
+  if (/^Measured\s+/.test(p.n)) return p.n.replace(/^Measured\s+/, "Measured: ");
+  if (/^Darker side$/i.test(p.n)) return "Measured: darks";
+  if (/^Lighter side$/i.test(p.n)) return "Measured: lights";
+  return "Measured: overall";   // "<Look name> palette"
+}
+function lkProvenance(p, kb, hasCurated) {
+  if (!lkIsMeasured(p)) return "Hand-picked to evoke the look, from its typical references — never sampled from one single image.";
+  const m = kb && kb.measured;
+  if (!m) return "Measured by color-clustering real photos tagged to the look, then discarded — details loading…";
+  const n = m.n_images || 0;
+  const src = m.source === "commons" ? "a Wikimedia Commons search for the look" : "its own page on the Aesthetics Wiki";
+  const subset = /darks$/i.test(p.n) || /^Darker side$/i.test(p.n) ? ", its darker clusters only"
+    : /lights$/i.test(p.n) || /^Lighter side$/i.test(p.n) ? ", its lighter clusters only"
+    : /accents$/i.test(p.n) ? ", its most saturated clusters only" : "";
+  const thin = n <= 3 ? " — a thin sample, read it as a rough signal, not a rule" : "";
+  const tail = hasCurated ? ", so it can read differently from the curated palettes above" : "";
+  return `Measured from ${n} photo${n === 1 ? "" : "s"} on ${src}${subset}${thin}; includes everything tagged, not just the look's most iconic image${tail}.`;
+}
+
 // ---------- palette distance ----------
 // A palette is [{L: lab, w: weight}]. Distance from A to B = each color of A to its nearest in B (CIEDE2000),
 // weighted by A's proportions; the symmetric distance averages both directions, so a palette missing half of
@@ -124,13 +157,19 @@ function lkOpen(id, opts = {}) {
   const ptgs = lkPaintings(look);
   const extra = lkOtherArchives(look);
   const row = (k, v) => v ? `<div class="lkx-row"><dt>${k}</dt><dd>${v}</dd></div>` : "";
+  const curated = look.pals.map((p, i) => ({ p, i })).filter(x => !lkIsMeasured(x.p));
+  const measured = look.pals.map((p, i) => ({ p, i })).filter(x => lkIsMeasured(x.p));
+  const tabBtn = (p, i) => `<button role="tab" data-pi="${i}" class="${i === pi ? "on" : ""}">${lkStripes(p.c, "lkx-dot")}<span>${esc(lkPalLabel(p))}</span></button>`;
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
     <div class="lkx-hero" id="lkh"></div>
     <p class="eyebrow p-type">Look · ${esc(look.era)}</p>
     <h1 class="p-title">${esc(look.name)}</h1>
     <p class="p-dek">${esc(look.essence)}</p>
-    <div class="lkx-tabs" role="tablist">${look.pals.map((p, i) => `<button role="tab" data-pi="${i}" class="${i === pi ? "on" : ""}">${lkStripes(p.c, "lkx-dot")}<span>${esc(p.n)}</span></button>`).join("")}</div>
+    ${look.pals.length > 1 || measured.length ? `<p class="lkx-explain">What these palettes are: curated ones are chosen by hand to show the look at its most typical; measured ones are color-clustered from real photos tagged to it, so they can read paler, greyer or more mixed than its most iconic image.</p>` : ""}
+    ${curated.length ? `<div class="lkx-tabs" role="tablist">${curated.map(x => tabBtn(x.p, x.i)).join("")}</div>` : ""}
+    ${measured.length ? `<div class="eyebrow lkx-sub lkx-measured-sub">${curated.length ? "Measured from the archive — what its own photos look like, not a hand-pick" : "Measured from the archive"}</div><div class="lkx-tabs" role="tablist">${measured.map(x => tabBtn(x.p, x.i)).join("")}</div>` : ""}
+    <p class="lkx-prov" id="lkprov"></p>
     <div class="lkx-cols" id="lkc"></div>
     <div class="lkx-acts"><button class="btn" data-studio>Open in Studio ${ICON.arrow}</button><button class="btn ghost" data-share>${ICON.share} Share</button></div>
     <dl class="lkx-rows">
@@ -151,13 +190,16 @@ function lkOpen(id, opts = {}) {
     ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "look:" + look.id, title: look.name }) : ""}
     <p class="fine lkx-credit">${look.aw ? `See also: <a href="https://aesthetics.fandom.com/wiki/${esc(look.aw)}" target="_blank" rel="noopener">Aesthetics Wiki</a>. ` : ""}Descriptions are ColorHub's own. Palettes are chosen by ColorHub and named from the ColorHub library; hex values are screen approximations.${imgs.length ? " Photos: Wikimedia Commons, public domain or CC0." : ""}</p>
   `, "article lkx-page");
+  let kb = null;   // filled in once data/aesthetics/kb/<id>.json lands; redraws the provenance line with its count/source
   const draw = () => {
     const p = look.pals[pi];
     el.querySelector("#lkh").innerHTML = p.c.map(c => `<i style="--c:${c[0]};flex:${Math.max(c[2], .06)}" data-ink="${ink(c[0])}" data-swatch="${c[0]}" role="button" aria-label="${esc(lkColName(c))}"><span class="mono">${Math.round(c[2] * 100)}%</span></i>`).join("");
     el.querySelector("#lkc").innerHTML = p.c.map((c, i) => { return `<button class="lkx-col" data-swatch="${c[0]}"><i style="--c:${c[0]}"></i><span><b>${esc(lkColName(c))}</b><em class="mono">${c[0]} · ${Math.round(c[2] * 100)}%</em></span>${ICON.arrow}</button>`; }).join("");
     el.querySelectorAll("[data-pi]").forEach(b => b.classList.toggle("on", +b.dataset.pi === pi));
+    const prov = el.querySelector("#lkprov"); if (prov) prov.textContent = lkProvenance(p, kb, curated.length > 0);
   };
   draw();
+  lkFetchKB(look.id).then(data => { kb = data; draw(); });
   const back = () => (LK_BACK || xToOrigin)();
   el.querySelector("[data-back]").onclick = back;
   onKey = e => { if (e.key === "Escape") back(); };

@@ -16,10 +16,14 @@
 .lkx-hero i:first-child{border-radius:var(--r-1) 0 0 var(--r-1)}.lkx-hero i:last-child{border-radius:0 var(--r-1) var(--r-1) 0}
 .lkx-hero i[data-ink="dark"]{color:var(--paper-ink)}.lkx-hero i[data-ink="light"]{color:#fff}
 .lkx-hero span{overflow:hidden;white-space:nowrap}
+.lkx-explain{margin-top:16px;font-size:14.5px;line-height:1.5;color:var(--soft);text-wrap:pretty}
 .lkx-tabs{display:flex;gap:8px;overflow-x:auto;margin:22px calc(-1 * var(--g)) 0;padding:0 var(--g) 2px;scrollbar-width:none}
 .lkx-tabs::-webkit-scrollbar{display:none}
 .lkx-tabs button{flex:none;display:flex;align-items:center;gap:9px;min-height:44px;padding:0 16px 0 10px;background:var(--surface-2);border-radius:var(--r-pill);font:400 17px/1 var(--serif);color:var(--soft);transition:color .2s,background .2s}
 .lkx-tabs button.on{color:var(--ink);background:var(--surface-3)}
+.lkx-measured-sub{margin:16px 0 0;font-size:13px}
+.lkx-measured-sub+.lkx-tabs{margin-top:10px}
+.lkx-prov{margin-top:12px;font-size:13.5px;line-height:1.45;color:var(--faint);text-wrap:pretty}
 .lkx-dot{display:flex;width:26px;height:18px;gap:0;border-radius:2px;overflow:hidden;flex:none}
 .lkx-dot i{background:var(--c);display:block;flex:1}
 .lkx-cols{margin-top:14px;border-top:1px solid var(--rule)}
