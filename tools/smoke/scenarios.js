@@ -4008,8 +4008,15 @@ scenario("sets", "Pair with…'s ring picker updates the try-on preview live whi
   const before = t.$(".sx-try-seg.trying").style.getPropertyValue("--c");
   sv.dispatchEvent(new t.w.PointerEvent("pointerdown", po(r.left + r.width * .15, r.top + r.height * .15)));
   sv.dispatchEvent(new t.w.PointerEvent("pointermove", po(r.left + r.width * .88, r.top + r.height * .88)));
-  await t.tick(); await t.sleep(120); await t.tick();
-  const mid = t.$(".sx-try-seg.trying").style.getPropertyValue("--c");
+  // colorPicker's onChange is rAF-throttled (js/picker.js update()), and under a heavily loaded machine's
+  // virtual-time Chrome a single rAF can be starved for a while, so a one-shot sample right after the move can
+  // still read the old color even though the drag genuinely works. Poll for the change instead (up to ~1.5s
+  // real time, same pattern other rAF-driven lanes use, e.g. the map's fly-to-fit tween) -- this still fails
+  // hard if the preview never updates, it just doesn't mistake "hasn't painted yet" for "broken".
+  const mid = await t.waitFor(() => {
+    const v = t.$(".sx-try-seg.trying").style.getPropertyValue("--c");
+    return v && v !== before ? v : null;
+  }, 1500, `the live preview to update mid-drag (was ${before})`, 1500);
   t.expect(mid && mid !== before, `dragging the square didn't update the live preview mid-drag (was ${before}, still ${mid})`);
   sv.dispatchEvent(new t.w.PointerEvent("pointerup", po(r.left + r.width * .88, r.top + r.height * .88)));
   // no outline/border between the two halves: the only "trying" marker is CSS's small badge, never a box-shadow seam
