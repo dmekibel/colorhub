@@ -61,11 +61,23 @@ function arBlocks(body) {
   return raw.map(t => String(t).replace(/\s*\n\s*/g, " ").trim()).filter(Boolean).map(arBlock);
 }
 const arList = v => v == null || v === "" ? [] : Array.isArray(v) ? v.filter(Boolean) : [v];
+// David, 2026-10-10: "that section should be way higher up... the most informative and interesting things should
+// be at the top" -- the name/origin chapter (if the writer put it later) reads before everything else, right
+// after the lede; this is a render-time reorder only (never touches the article file itself), so a deep link to
+// any chapter's own #s-<id> still works exactly as before.
+const AR_ORIGIN_RE = /^(the\s+)?(name|names?\s+and\s+origin|origin|naming|etymology|history|named)\b/i;
+function arOriginFirst(sections) {
+  const i = sections.findIndex(s => s.title && AR_ORIGIN_RE.test(s.title.trim()));
+  if (i <= 0) return sections;   // already first (or tied for it), or no such chapter
+  const copy = sections.slice(), [sec] = copy.splice(i, 1);
+  copy.unshift(sec);
+  return copy;
+}
 // A raw file -> the shape the renderer uses; null when it isn't an article at all.
 function arNorm(a, slug) {
   if (!a || typeof a !== "object" || Array.isArray(a)) return null;
-  const sections = (Array.isArray(a.sections) ? a.sections : []).filter(s => s && (s.body || s.title)).map((s, i) => ({
-    id: String(s.id || "s" + (i + 1)).replace(/[^a-z0-9_-]/gi, "-"), title: String(s.title || ""), blocks: arBlocks(s.body), actions: s.actions, rawBody: s.body }));
+  const sections = arOriginFirst((Array.isArray(a.sections) ? a.sections : []).filter(s => s && (s.body || s.title)).map((s, i) => ({
+    id: String(s.id || "s" + (i + 1)).replace(/[^a-z0-9_-]/gi, "-"), title: String(s.title || ""), blocks: arBlocks(s.body), actions: s.actions, rawBody: s.body })));
   if (!a.lede && !sections.length) return null;
   const notes = new Map();
   (Array.isArray(a.notes) ? a.notes : []).forEach((n, i) => { if (n) notes.set(+n.n || i + 1, { ...n, n: +n.n || i + 1 }); });
@@ -568,11 +580,20 @@ const AR_SECOPEN = new Map();   // slug -> Set<section id>, currently open
 function arSecWords(sec) {
   return sec.blocks.reduce((n, b) => n + arPlain(b.text != null ? b.text : [b.say, b.rec].filter(Boolean).join(" ")).split(/\s+/).filter(Boolean).length, 0);
 }
+// David, 2026-10-10: "you don't just read the intro -- you read multiple paragraphs" -- open chapters from the
+// top until the reader has had ~AR_OPEN_WORDS of chapter text (not counting the lede, which is already open in
+// the head above), or AR_OPEN_MAX chapters, whichever comes first. Always at least the first chapter.
+const AR_OPEN_WORDS = 350, AR_OPEN_MAX = 3;
 function arDefaultOpenIds(art) {
   const titled = art.sections.filter(s => s.title);
   if (!titled.length) return new Set();
-  const open = new Set([titled[0].id]);
-  if (titled.length > 1 && arSecWords(titled[0]) < 90) open.add(titled[1].id);   // a short first chapter: open the second too
+  const open = new Set();
+  let words = 0;
+  for (let i = 0; i < titled.length && open.size < AR_OPEN_MAX; i++) {
+    open.add(titled[i].id);
+    words += arSecWords(titled[i]);
+    if (words >= AR_OPEN_WORDS) break;
+  }
   return open;
 }
 function arOpenSet(art) {
@@ -780,17 +801,24 @@ function arFamilyHTML(art, self) { return famHTML(self, art.aside, null, arDisam
 // (collapsible), Family, You, Sources (collapsed), Test yourself (collapsed, final). The facts table (named
 // after / first recorded / source) moved to the color page's ID card.
 // opts.noFamily: the color page renders Family in its own slot instead (see arFamilyHTML above).
+// a quiet affordance between the open run and the first collapsed chapter (David, 2026-10-10): a clear, tappable
+// line of what's left, rather than an unlabeled chevron -- opens every remaining chapter and then removes itself.
+function arContinueHTML(n) {
+  if (n <= 0) return "";
+  return `<button type="button" class="ar-continue" data-ar-continue>Continue reading — ${n} more chapter${n === 1 ? "" : "s"}<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>`;
+}
 function arBodyHTML(art, self, opts = {}) {
   const toc = art.sections.filter(s => s.title), mins = arMinutes(art), short = mins <= AR_SHORT_MIN;
   const tocId = "ar-toc-" + art.slug.replace(/[^a-z0-9]/gi, "");
   const openSet = arOpenSet(art);
+  const firstClosed = toc.find(s => !openSet.has(s.id)), moreCount = firstClosed ? toc.length - toc.indexOf(firstClosed) : 0;
   return `<div class="ar ar-body" data-ar="${esc(art.slug)}">
     ${!short && toc.length > 1 ? `<div class="ar-bar" data-ar-bar>
       <button type="button" class="ar-bar-sum" data-ar-disc-btn aria-expanded="false" aria-controls="${tocId}"><span class="ar-bar-l">Contents</span><span class="ar-bar-c" data-ar-cur></span><span class="ar-bar-n mono" data-ar-pos></span><i class="ar-bar-i" aria-hidden="true"></i><i class="ar-bar-p" data-ar-prog></i></button>
       <div class="ar-bar-list" id="${tocId}" hidden>${toc.map((s, i) => `<button type="button" class="ar-bar-row" data-ar-go="ar-s-${esc(s.id)}"><span class="mono">${i + 1}</span><b>${esc(s.title)}</b></button>`).join("")}</div>
     </div>` : ""}
     ${toc.length > 1 ? `<button type="button" class="ar-expand-all" data-ar-expand-all>${openSet.size >= toc.length ? "Collapse all" : "Expand all"}</button>` : ""}
-    ${art.sections.map(s => arSectionHTML(s, art, self, !short && s.title ? { i: toc.indexOf(s) + 1, n: toc.length } : null, openSet.has(s.id))).join("")}
+    ${art.sections.map(s => (s === firstClosed ? arContinueHTML(moreCount) : "") + arSectionHTML(s, art, self, !short && s.title ? { i: toc.indexOf(s) + 1, n: toc.length } : null, openSet.has(s.id))).join("")}
     ${opts.noFamily ? "" : arFamilyHTML(art, self)}
     ${arYouHTML(self)}
     ${arNotesHTML(art)}
@@ -920,6 +948,21 @@ function arWire(root, art, self) {
   root.querySelectorAll("[data-ar-cs-btn]").forEach(btn => { if (btn.__arCsWired) return; btn.__arCsWired = true; btn.onclick = () => arSecToggle(root, art, btn); });
   const expandAll = root.querySelector("[data-ar-expand-all]");
   if (expandAll && !expandAll.__arWired) { expandAll.__arWired = true; expandAll.onclick = () => arExpandAllToggle(root, art, expandAll); }
+  // "Continue reading — N more chapters" (David, 2026-10-10): opens every chapter still collapsed and removes itself
+  const cont = root.querySelector("[data-ar-continue]");
+  if (cont && !cont.__arWired) {
+    cont.__arWired = true;
+    cont.onclick = () => {
+      root.querySelectorAll(".ar-cs[data-ar-sec] > [data-ar-cs-btn]").forEach(btn => {
+        if (btn.getAttribute("aria-expanded") === "true") return;
+        const panel = document.getElementById(btn.getAttribute("aria-controls")); if (!panel) return;
+        arAccordion(btn, panel);
+        const sec = btn.closest("[data-ar-sec]"), id = sec && sec.dataset.arSec; if (id) arOpenSet(art).add(id);
+      });
+      arSyncExpandAll(root);
+      cont.remove();
+    };
+  }
   arApplyPendingSection(root, art);
   if (typeof famWire === "function") famWire(root, self, art.aside);
   arWireClicks(root, art, self);
@@ -935,6 +978,8 @@ function arWireClicks(root, art, self) {
     const t = e.target;
     const fn = t.closest("[data-fn]"); if (fn) return arNoteSheet(art, +fn.dataset.fn);
     const rf = t.closest("[data-ar-ref]"); if (rf) return typeof arfOpen === "function" ? arfOpen(rf.dataset.arRef, self) : undefined;
+    // a painter figure's own small link (its picture opens the specific painting instead, via data-ar-ref above)
+    const pr = t.closest("[data-ar-painter]"); if (pr) return typeof awPainter === "function" ? awPainter(pr.dataset.arPainter) : undefined;
     const op = t.closest("[data-ar-open]"); if (op) return arOpenColor(op.dataset.arOpen, op.querySelector("i"));
     const sw = t.closest("[data-ar-swatch]"); if (sw) return arOpenSwatch(sw.dataset.arSwatch, sw.querySelector("i"));
     const wh = t.closest("[data-ar-which]"); if (wh) { e.preventDefault(); return arWhichPage(wh.dataset.arWhich); }
