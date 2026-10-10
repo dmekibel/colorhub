@@ -666,24 +666,41 @@ function glColorReadout(hex, ctx = {}) {
   const title = nm && nm.n ? nm.n : "Your color";
   const descLine = nm && nm.between ? `Between ${esc(nm.between.a.toLowerCase())} and ${esc(nm.between.b.toLowerCase())}`
     : nm && nm.mod ? esc(nm.text) : "";
+  const kept = typeof fvHas === "function" && fvHas(hex);
+  const pkBtn = typeof pkButtonHTML === "function" ? pkButtonHTML() : "";
+  // David, 2026-10-10: this readout opens from Look closer too, a full-screen layer of its own (.glz-scrim,
+  // z-index:60) -- a plain sheet (z-index:21) rendered BEHIND it, invisible until Look closer closed. {z:65}
+  // lifts both the sheet and its scrim above every full-screen picker, here and anywhere else this opens from.
   const { sh, close } = sheet(`
     <div class="pk-hero" style="--c:${hex}" data-ink="${ink(hex)}"></div>
     <div class="cp-sheet-title"><h2>${esc(title)}</h2><span class="mono">${hex}</span></div>
+    <p class="cp-sheet-saved">${ICON.check} Saved to Picked colors</p>
     ${descLine ? `<p class="cp-sheet-desc">${descLine}</p>` : ""}
     ${matchPct != null ? `<p class="cp-sheet-desc">${matchPct}% match to ${esc(nameOf(ctx.pal[near.i].h).n)} in this painting's palette</p>` : ""}
     <button class="cp-primary cp-sheet-primary" data-gcr-open>${nm && nm.n ? `Open ${esc(nm.n)}` : "See this color"}${ICON.arrow}</button>
     <div class="cp-sheet-links">
       ${ctx.locateHex ? `<button class="cp-link" data-gcr-where>Where else in this painting</button>` : ""}
       ${ctx.onAdd ? `<button class="cp-link" data-gcr-add>Add to this palette</button>` : ""}
+      <button class="cp-link" data-gcr-set>Add to a set</button>
+      <button class="cp-link" data-gcr-keep>${kept ? "Kept" : "Keep"}</button>
       <button class="cp-link" data-gcr-copy>Copy hex</button>
     </div>
-    <p class="fine">Sampled from the museum's photograph; screen colors are approximate.</p>`);
+    ${pkBtn ? `<div class="cp-sheet-pk">${pkBtn}</div>` : ""}
+    <p class="fine">Sampled from the museum's photograph; screen colors are approximate.</p>`, { z: 65 });
   sh.classList.add("sw-sheet", "gcr-sheet");
   sh.querySelector("[data-gcr-open]").onclick = () => { close(); if (typeof openTappedColor === "function") openTappedColor(hex); };
   const whereBtn = sh.querySelector("[data-gcr-where]");
   if (whereBtn) whereBtn.onclick = () => { buzz(5); ctx.locateHex(hex); close(); };
   const addBtn = sh.querySelector("[data-gcr-add]");
   if (addBtn) addBtn.onclick = () => { buzz(5); ctx.onAdd(hex); addBtn.textContent = "Added"; addBtn.disabled = true; };
+  const setBtn = sh.querySelector("[data-gcr-set]");
+  if (setBtn) setBtn.onclick = () => { buzz(5); close(); if (typeof sxPick === "function") sxPick(hex, { name: title }); };
+  const keepBtn = sh.querySelector("[data-gcr-keep]");
+  if (keepBtn) keepBtn.onclick = () => {
+    const on = !(typeof fvHas === "function" && fvHas(hex));
+    if (typeof fvSet === "function") fvSet(hex, title, on, "picked-readout");
+    buzz(on ? 10 : 6); keepBtn.textContent = on ? "Kept" : "Keep";
+  };
   const copyBtn = sh.querySelector("[data-gcr-copy]");
   if (copyBtn) copyBtn.onclick = () => {
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(hex).catch(() => {});

@@ -150,6 +150,11 @@
 .cp-sheet-primary{margin-top:20px}
 .cp-sheet-links{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px}
 .cp-link{font:italic 400 17px/1 var(--serif);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;color:var(--ink)}
+/* the readout's own confirmation + way to the rest of the swatch history (js/gallery.js glColorReadout,
+   js/picked.js pkButtonHTML) -- the pick itself already saved on release (js/eyedrop.js), this just says so */
+.cp-sheet-saved{display:flex;align-items:center;gap:6px;margin-top:8px;font:500 13px/1 var(--mono);color:var(--soft)}
+.cp-sheet-saved svg{width:13px;height:13px;flex:none}
+.cp-sheet-pk{margin-top:16px}
 
 /* ============================================================
    Rich color-page sections (js/richcolor.js): Painters, When and where, Often paired with, Harmonies, The

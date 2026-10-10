@@ -359,7 +359,7 @@ function sxPhotoFlow(start, o = {}) {
 function sxPhotoSheet(img, start, o = {}) {
   const picked = start.slice();
   const { sh, close } = sheet(`
-    <div class="sx-head"><div><p class="eyebrow">From a photo</p><h2>Press a spot for its color</h2></div></div>
+    <div class="sx-head"><div><p class="eyebrow">From a photo</p><h2>Press a spot for its color</h2></div><span data-pk-slot>${typeof pkButtonHTML === "function" ? pkButtonHTML() : ""}</span></div>
     <div class="sx-photo-wrap" data-sx-photo-wrap><img class="sx-photo-img" src="${img.src}" alt="" data-sx-photo-img><i class="sx-photo-pin" data-sx-photo-pin hidden></i></div>
     <p class="sx-sub" data-sx-photo-cap>Press and drag to find the exact spot — tap again for another.</p>
     <div class="sx-try-row" data-sx-photo-strip></div>
@@ -376,6 +376,10 @@ function sxPhotoSheet(img, start, o = {}) {
     onMove: place,
     onPick: (hex, p) => {
       place(hex, p); buzz(8);
+      // already saved to Picked colors by now (js/eyedrop.js commits before onPick fires); the slot's button
+      // appears on this very pick if it's the first one this session (pkButtonHTML() renders nothing at zero).
+      const pkSlot = sh.querySelector("[data-pk-slot]");
+      if (pkSlot && typeof pkButtonHTML === "function") pkSlot.innerHTML = pkButtonHTML();
       if (o.onPick) { o.onPick(hex); toast(`${sxNm(hex)} picked`); return; }
       if (sxHas(picked, hex)) { toast(`${sxNm(hex)} is already in your set`); return; }
       if (picked.length >= SX_MAX) { toast(`A set holds up to ${SX_MAX} colors`); return; }

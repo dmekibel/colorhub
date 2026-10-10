@@ -23,7 +23,7 @@ function glZoomOpen(opts) {
   const scrim = document.createElement("div");
   scrim.className = "glz-scrim";
   scrim.innerHTML = `
-    <div class="glz-top"><button class="tl-exit" data-glzclose aria-label="Done, back to the painting">${ICON.back}<span>Done</span></button><span class="glz-title">${esc(opts.title || "")}</span></div>
+    <div class="glz-top"><button class="tl-exit" data-glzclose aria-label="Done, back to the painting">${ICON.back}<span>Done</span></button><span class="glz-title">${esc(opts.title || "")}</span><span class="glz-pk-slot" data-glz-pk>${typeof pkButtonHTML === "function" ? pkButtonHTML() : ""}</span></div>
     <div class="glz-stage"><div class="glz-frame"><img class="glz-img" src="${esc(opts.src)}"${opts.cors ? ' crossorigin="anonymous"' : ""} alt="${esc(opts.alt || "")}"><canvas class="glz-cv" aria-hidden="true"></canvas></div></div>
     <div class="glz-tools">
       <div class="seg glz-seg" role="group" aria-label="Look at it">
@@ -244,6 +244,11 @@ function glZoomOpen(opts) {
     if (active === "pick" && typeof eyedropAttach === "function") {
       eyd = eyedropAttach(img, { onPick: hex => {
         if (typeof buzz === "function") buzz(6);
+        // the pick is already saved to Picked colors by now (js/eyedrop.js commits before this fires) -- the
+        // header's own stack button (added on first pick, since it renders nothing at zero) refreshes right
+        // here, so it's visible without leaving Look closer (David, 2026-10-10).
+        const pkSlot = scrim.querySelector("[data-glz-pk]");
+        if (pkSlot && typeof pkButtonHTML === "function") pkSlot.innerHTML = pkButtonHTML();
         if (typeof glColorReadout === "function") glColorReadout(hex, { pal: opts.pal, locateHex: opts.pix ? (h => {
           palHex = h;
           if (active !== "where") {

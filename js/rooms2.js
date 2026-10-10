@@ -335,6 +335,7 @@ function r2StudioHome() {
       <div class="r2-rail r2-phs" id="r2Ph" aria-busy="true">${[0, 1, 2].map(() => `<span class="r2-ph-wait"></span>`).join("")}</div>
       <div class="r2-empty" id="r2Empty" hidden><b class="title-3">Your photos and palettes land here</b><span>Point the camera or pick a photo, and its palette is waiting next time. Palettes you keep from the wheel come here too.</span></div>
       ${saved.length ? `<div class="r2-pals">${saved.slice(0, 4).map(palRow).join("")}${saved.length > 4 ? `<div class="r2-palmore" hidden>${saved.slice(4).map(palRow).join("")}</div><button class="r2-text" data-r2-more>All ${saved.length} palettes</button>` : ""}</div>` : ""}
+      ${typeof pkStudioRow === "function" ? pkStudioRow() : ""}
       ${typeof fvStudioRow === "function" ? fvStudioRow() : ""}
     </section>
 

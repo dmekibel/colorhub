@@ -20,10 +20,13 @@ const EYD_SIZES = [1, 3, 5, 11, 31];
 const EYD_LABEL = { 1: "Point", 3: "3×3", 5: "5×5", 11: "11×11", 31: "31×31 average" };
 const getSampleSize = () => EYD_SIZES.includes(S.sampleSize) ? S.sampleSize : 1;
 function setSampleSize(n) { S.sampleSize = EYD_SIZES.includes(n) ? n : 1; save(); }
-const eydSizeControlHTML = (compact) => `<div class="eyd-sizes seg" role="group" aria-label="Sample size">${EYD_SIZES.map(n => {
+// David, 2026-10-10: the old labels ("Point", "3×3" … "31×31 average") wrapped the fifth button onto its own
+// row at 320-440px. One row, equal-width segments, bare numbers everywhere (the caption under the control
+// says what they mean once, instead of repeating "average" on every button).
+const eydSizeControlHTML = (compact) => `<div class="eyd-sizes seg" role="group" aria-label="Sample size, pixels averaged per pick">${EYD_SIZES.map(n => {
   const on = n === getSampleSize();
-  return `<button type="button" data-eydsize="${n}" class="${on ? "on" : ""}" aria-pressed="${on}">${compact ? n : (n === 1 ? "Point" : n + "×" + n)}</button>`;
-}).join("")}</div>`;
+  return `<button type="button" data-eydsize="${n}" class="${on ? "on" : ""}" aria-pressed="${on}">${n}</button>`;
+}).join("")}</div>${compact ? "" : `<p class="eyd-sizes-cap">Pixels averaged per pick, centered on the exact spot</p>`}`;
 
 // the Settings sheet for the sample size (js/you.js "How you see" wires its row here)
 function eydSizeSheet() {
@@ -72,11 +75,12 @@ function eydSampleAt(src, fx, fy, size) {
 // ---------- the loupe: a small floating magnifier that follows the finger ----------
 let EYD_SESSION = null;   // the live drag, if any — so the size control can resample without a new touch
 function eyedropAttach(el, o = {}) {
-  let src = null, dragging = false, lastHex = null, loupe = null;
+  let src = null, dragging = false, lastHex = null, loupe = null, loupeToken = 0;
   const ensureSrc = () => (src = src || eydSource(el));
   const sess = { resample: null };
   const openLoupe = () => {
     if (loupe) return loupe;
+    loupeToken++;
     loupe = document.createElement("div"); loupe.className = "eyd-loupe";
     loupe.innerHTML = `<div class="eyd-loupe-mag"><canvas class="eyd-loupe-cv" width="132" height="132"></canvas><i class="eyd-loupe-cross"></i></div>
       <div class="eyd-loupe-info"><i class="eyd-loupe-sw"></i><span><b class="eyd-loupe-name"></b><em class="eyd-loupe-hex"></em></span></div>
@@ -100,13 +104,28 @@ function eyedropAttach(el, o = {}) {
     const sw = Math.min(half * 2 + 1, s.w - sx), sh = Math.min(half * 2 + 1, s.h - sy);
     cx.drawImage(s.c, sx, sy, sw, sh, 0, 0, 132, 132);
   };
+  // David, 2026-10-10: "the preview is too far above the actual thumb" — it sat 172px above the finger (far up
+  // the screen). GAP is the real empty space left between the fingertip and the loupe's own edge now: ~80pt,
+  // just clear of the thumb. Near the top edge there isn't 80pt plus the loupe's own height left above the
+  // point, so it flips to sit beside the finger instead of vanishing off-screen or overlapping the status bar.
+  const EYD_GAP = 80;
   const position = (clientX, clientY) => {
     if (!loupe) return;
     const lw = 140, vw = innerWidth || document.documentElement.clientWidth;
-    loupe.style.left = clamp(clientX, lw / 2 + 8, vw - lw / 2 - 8) + "px";
-    loupe.style.top = Math.max(8, clientY - 172) + "px";   // above the thumb, never under it
+    const approxH = loupe.offsetHeight || 224;
+    loupe.classList.remove("eyd-loupe-side-l", "eyd-loupe-side-r");
+    if (clientY - EYD_GAP - approxH >= 6) {
+      loupe.style.left = clamp(clientX, lw / 2 + 8, vw - lw / 2 - 8) + "px";
+      loupe.style.top = (clientY - EYD_GAP) + "px";
+    } else {
+      // not enough room above: flip to whichever side has more width to spare
+      const onRight = clientX < vw - lw - 40;
+      loupe.classList.add(onRight ? "eyd-loupe-side-r" : "eyd-loupe-side-l");
+      loupe.style.left = clamp(clientX, onRight ? 8 : lw + 40, onRight ? vw - lw - 40 : vw - 8) + "px";
+      loupe.style.top = clamp(clientY, approxH / 2 + 8, (innerHeight || document.documentElement.clientHeight) - approxH / 2 - 8) + "px";
+    }
   };
-  let lastPt = null;
+  let lastPt = null, lastShownHex = null;
   const sampleAndShow = (clientX, clientY, final) => {
     const s = ensureSrc(); if (!s) return false;
     const m = eydMap(el, clientX, clientY); if (!m) return false;
@@ -116,7 +135,13 @@ function eyedropAttach(el, o = {}) {
     loupe.querySelector(".eyd-loupe-sw").style.setProperty("--c", r.hex);
     loupe.querySelector(".eyd-loupe-name").textContent = nm && nm.n ? nm.n : "";
     loupe.querySelector(".eyd-loupe-hex").textContent = r.hex;
+    lastShownHex = r.hex;
     if (r.hex !== lastHex) { lastHex = r.hex; if (typeof buzz === "function") buzz(4); }
+    // the commit (pkAdd) happens BEFORE the caller's own onPick fires, so anything that caller shows — a
+    // readout sheet's "Saved" line, a Picked-colors button's count — already reflects this pick, immediately,
+    // not one render behind (David, 2026-10-10: this matters most in a full-screen picker like Look closer,
+    // where the caller's own UI is the only thing visible right then).
+    if (final && typeof pkAdd === "function") pkAdd(r.hex, { src: "eyedrop" });
     const fn = final ? o.onPick : o.onMove;
     if (typeof fn === "function") fn(r.hex, { x: r.px, y: r.py });
     return true;
@@ -129,10 +154,26 @@ function eyedropAttach(el, o = {}) {
     sampleAndShow(e.clientX, e.clientY, false);
   };
   const move = e => { if (!dragging) return; lastPt = { x: e.clientX, y: e.clientY }; sampleAndShow(e.clientX, e.clientY, false); };
+  // Picking = saving (David, 2026-10-10): releasing the finger commits the pick to the Picked colors swatch
+  // history (js/picked.js pkAdd) automatically — every eyedropper caller gets this for free, with no separate
+  // "add" step. A haptic plus a short "Saved" confirmation shows right inside the loupe (it morphs in place
+  // rather than vanishing instantly), so it's visible even when the caller's own onPick opens something else
+  // on top (a sheet, a new screen) a moment later.
   const end = e => {
     if (!dragging) return;
     dragging = false; if (EYD_SESSION === sess) EYD_SESSION = null;
-    sampleAndShow(e.clientX, e.clientY, true);
+    const ok = sampleAndShow(e.clientX, e.clientY, true);
+    if (ok && lastShownHex) {
+      if (typeof buzz === "function") buzz(14);
+      if (loupe) {
+        loupe.classList.add("eyd-loupe-picked");
+        const info = loupe.querySelector(".eyd-loupe-info");
+        if (info && !info.querySelector(".eyd-loupe-saved")) info.insertAdjacentHTML("beforeend", `<b class="eyd-loupe-saved">${typeof ICON !== "undefined" && ICON.check ? ICON.check : "✓"} Saved</b>`);
+        const tok = loupeToken;
+        setTimeout(() => { if (loupeToken === tok) closeLoupe(); }, 650);
+        return;
+      }
+    }
     closeLoupe();
   };
   const cancel = () => { dragging = false; if (EYD_SESSION === sess) EYD_SESSION = null; closeLoupe(); };

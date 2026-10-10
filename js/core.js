@@ -962,6 +962,10 @@ function sheet(html, opts = {}) {
   const doLock = opts.lock !== false;
   const scrim = document.createElement("div"), sh = document.createElement("div");
   scrim.className = "scrim"; sh.className = "sheet"; sh.setAttribute("role", "dialog");
+  // opts.z: lift this sheet (and its scrim) above a full-screen overlay already on screen (Look closer's
+  // .glz-scrim is z-index:60) -- David, 2026-10-10: a sheet opened from inside one was rendering BEHIND it,
+  // invisible until the overlay closed. Plain sheets never pass this; it's opt-in per caller.
+  if (opts.z) { scrim.style.zIndex = opts.z; sh.style.zIndex = opts.z + 1; }
   sh.innerHTML = `<div class="grab"></div>${html}`;
   let gone = false;
   const close = () => {

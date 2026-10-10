@@ -1,5 +1,9 @@
 /* js/eyedrop.js: the shared press-and-drag eyedropper's loupe. */
 .eyd-loupe{position:fixed;z-index:70;width:140px;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;transform:translate(-50%,-100%);filter:drop-shadow(0 10px 24px rgba(0,0,0,.55))}
+/* David, 2026-10-10: near the top edge there's no room to float the loupe above the finger (position() in
+   js/eyedrop.js), so it flips to sit beside it instead -- vertically centered on the touch point, never off-screen. */
+.eyd-loupe.eyd-loupe-side-r{transform:translate(0,-50%)}
+.eyd-loupe.eyd-loupe-side-l{transform:translate(-100%,-50%)}
 .eyd-loupe-mag{position:relative;width:132px;height:132px;border-radius:50%;overflow:hidden;background:var(--surface-2);box-shadow:0 0 0 3px rgba(236,232,223,.9),0 0 0 4px rgba(0,0,0,.4)}
 .eyd-loupe-cv{display:block;width:132px;height:132px;image-rendering:pixelated}
 .eyd-loupe-cross{position:absolute;left:50%;top:50%;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:50%;box-shadow:0 0 0 1.5px #fff,0 0 0 2.5px rgba(0,0,0,.6),inset 0 0 0 1.5px rgba(0,0,0,.6)}
@@ -9,8 +13,20 @@
 .eyd-loupe-name{font:400 14px/1.2 var(--serif);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .eyd-loupe-hex{font:500 12px/1 var(--mono);letter-spacing:0;font-style:normal;color:var(--soft)}
 .eyd-loupe .eyd-sizes{pointer-events:auto;padding:2px;transform:scale(.88)}
-.eyd-loupe .eyd-sizes button{min-height:30px;padding:0 10px;font:500 13px/1 var(--mono);font-style:normal}
+.eyd-loupe .eyd-sizes button{min-height:30px;padding:0 6px;font:500 13px/1 var(--mono);font-style:normal}
+/* Picking = saving (David, 2026-10-10): releasing commits the pick -- the loupe morphs into a brief "Saved"
+   confirmation in place, instead of just vanishing, so the save is seen even when a caller opens its own UI
+   right after. A quick, calm settle -- never a bounce or a loop (css/polish.css C2/C1 -- one envelope). */
+.eyd-loupe-picked .eyd-loupe-mag{box-shadow:0 0 0 3px rgba(236,232,223,.9),0 0 0 4px rgba(0,0,0,.4),0 0 0 7px rgba(255,191,0,.35)}
+.eyd-loupe-saved{display:inline-flex;align-items:center;gap:3px;flex:none;font:600 11px/1 var(--sans);letter-spacing:.01em;color:var(--paper-ink);background:var(--paper);padding:3px 8px;border-radius:999px;animation:eydSaved .22s var(--ease) both}
+.eyd-loupe-saved svg{width:11px;height:11px}
+@keyframes eydSaved{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
 @media (max-width:374px){.eyd-loupe{width:120px}.eyd-loupe-mag,.eyd-loupe-cv{width:112px;height:112px}}
 
-/* the same five-way control, plain (js/you.js Settings, and anywhere else that isn't the floating loupe) */
-.eyd-sizes.seg{flex-wrap:wrap}
+/* the same five-way control, plain (js/you.js Settings, and anywhere else that isn't the floating loupe).
+   David, 2026-10-10: "shows the first four in one row and the last one wrapped alone onto a second row —
+   ugly." One row, always: equal-width segments that shrink to fit rather than wrapping, bare numbers, with
+   eyd-sizes-cap (below) saying what they mean once instead of repeating it on every button. */
+.eyd-sizes.seg{flex-wrap:nowrap;width:100%;gap:2px}
+.eyd-sizes.seg button{flex:1 1 0;min-width:0;padding:0 2px;font-variant-numeric:tabular-nums}
+.eyd-sizes-cap{margin:6px 0 0;font:italic 400 13px/1.3 var(--serif);color:var(--soft);text-align:center}
