@@ -496,6 +496,72 @@ function fvArtOpen(id) {
 document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-fva-open]"); if (b) { e.preventDefault(); fvArtOpen(b.dataset.fvaOpen); } });
 
 // ======================================================================
+// 4b. Keep, for every other browsable archive (David, 2026-10-10: "even on a map... like things, sort them" --
+// Design objects, Photography, and whatever else gets a Browse-all grid or a map entry next). The SAME Keep
+// verb and heart as paintings (js/paintmap.js's own card, a grid tile's corner, a detail page), but keyed by
+// the node's own stable id and tagged with which collection it came from (kind) -- no gallery index to resolve,
+// since these corpora are loaded whole, synchronously, the moment their module's data has landed.
+// S.favItem = { "<id>": { kind, t, a, y, img, h, at } }. Additive, same shape discipline as S.favArt above: a
+// save without the key gets an empty one; one that isn't a plain object is kept aside, never dropped.
+function fvItemStore() {
+  const s = S.favItem;
+  if (s && typeof s === "object" && !Array.isArray(s)) return s;
+  if (s != null) S.favItemUnreadable = s;
+  return (S.favItem = {});
+}
+const fvItemHas = id => !!(id && fvItemStore()[id]);
+const fvItemCount = kind => Object.values(fvItemStore()).filter(r => !kind || r.kind === kind).length;
+// newest first; `kind` narrows to one collection ("design"/"photography"/…), omitted returns every kept item
+const fvItemList = kind => Object.entries(fvItemStore()).map(([id, r]) => ({ id, ...r })).filter(r => !kind || r.kind === kind)
+  .sort((a, b) => String(b.at || "").localeCompare(String(a.at || "")));
+// d: a "painting"-kind node (js/designobjects.js doNode / js/photography.js photographyNode) -- id/title/artist/
+// year/img/palette are all it needs, the same shape pin() already draws from.
+function fvItemRecord(kind, d) {
+  const dom = (d.palette && d.palette[0]) || {};
+  return { kind, t: d.title || "Untitled", a: d.artist || "", y: d.year || "", img: d.img || "", h: dom.h || "#3A3630", at: today() };
+}
+function fvItemSet(kind, d, on) {
+  const s = fvItemStore();
+  if (on && !s[d.id]) { s[d.id] = fvItemRecord(kind, d); try { if (typeof learnerLog === "function") learnerLog({ type: "like", color: { n: d.title, h: s[d.id].h }, src: kind }); } catch (e) {} }
+  if (!on) delete s[d.id];
+  save();
+}
+const fvItemThumb = r => `<span class="fva-im" style="--c:${esc(r.h || "#3A3630")}">${r.img ? `<img src="${esc(r.img)}" alt="" loading="lazy" decoding="async" style="object-fit:cover">` : ""}</span>`;
+// a tile's corner heart (grids: js/designobjects.js doGrid/doCategory, js/photography.js photographyGrid) --
+// the markup matches fvArtHeart's own [data-fva] button but with the id/kind baked into the dataset, since a
+// grid tile has no single `d` object sitting in scope the way a detail page's fvArtWire() does.
+const fvItemHeart = (kind, id) => { const on = fvItemHas(id); return `<button class="fva-heart fva-heart-tile${on ? " on" : ""}" data-fvi="${esc(id)}" data-fvi-kind="${esc(kind)}" aria-pressed="${on}" aria-label="${on ? "Remove from Kept" : "Keep this"}">${on ? FVA_HEART_ON : FVA_HEART}</button>`; };
+// one delegated handler covers every grid's heart buttons (and a detail page's, if it uses the same markup):
+// toggles the store, repaints just that button, and hands the caller its own lookup (idToNode) to build the
+// record from -- the grid already has its nodes in memory, no second fetch to find the one that got tapped.
+function fvItemWireGrid(el, idToNode) {
+  el.addEventListener("click", e => {
+    const b = e.target.closest("[data-fvi]"); if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    const id = b.dataset.fvi, kind = b.dataset.fviKind, n = idToNode(id); if (!n) return;
+    const on = !fvItemHas(id);
+    fvItemSet(kind, n, on); buzz(on ? 10 : 4);
+    b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); b.setAttribute("aria-label", on ? "Remove from Kept" : "Keep this");
+    b.innerHTML = on ? FVA_HEART_ON : FVA_HEART;
+    b.classList.remove("pop"); void b.offsetWidth; if (on) b.classList.add("pop");
+  });
+}
+// opens a kept item by id: design objects and photography both keep theirs loaded whole once their module's
+// own data has landed, so this just waits for it (doWhen/phWhen-equivalent) then calls that module's own opener.
+function fvItemOpen(id, kind) {
+  buzz(6);
+  if ((kind === "design" || id.startsWith("do-")) && typeof doOpenObject === "function") return doOpenObject(id);
+  if ((kind === "photography" || id.startsWith("photod-")) && typeof loadPhotography === "function") {
+    return loadPhotography().then(() => { const n = typeof photographyNodeById === "function" && photographyNodeById(id); if (n && typeof paintingPage === "function") paintingPage(n); else toast("This photograph isn't in the archive anymore"); });
+  }
+  toast("Can't open this item anymore");
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest && e.target.closest("[data-fvi-open]");
+  if (b) { e.preventDefault(); fvItemOpen(b.dataset.fviOpen, b.dataset.fviKind); }
+});
+
+// ======================================================================
 // 5. One shelf, by kind (David, 2026-10-08: "favorites shouldn't just be mixed together")
 // ======================================================================
 // Chips across the top: All · Colors · Paintings · Palettes · Pages, only the kinds that hold something, each with

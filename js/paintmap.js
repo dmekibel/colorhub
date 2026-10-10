@@ -54,21 +54,26 @@ const PM_WHY = {
 // by artist, ordered by date) and "similar" (whole-palette matching, already finer-grained than any one swatch)
 // are unaffected and ignore it.
 const PM_PLACE = [["avg", "Average"], ["main", "Main color"], ["standout", "Standout"]];
-function pmPlaceLab(i, place) {
-  if (!place || place === "avg") return [GAL.mean[i * 3], GAL.mean[i * 3 + 1], GAL.mean[i * 3 + 2]];
-  const j = place === "main" ? pmDom(i) : (() => { let b = 0, bc = -1; for (let t = 0; t < 6; t++) { const c = GAL.ch[i * 6 + t]; if (c > bc) { bc = c; b = t; } } return b; })();
+// David, 2026-10-10: every call here takes F now (js/paintmap-collections.js's dataset abstraction) -- F.G is
+// GAL itself when the map is showing Paintings (the default, byte-for-byte what this used to hardcode), or an
+// adapter's own GAL-shaped arrays when it's showing another collection (Design objects, Photography). Nothing
+// about the paintings math changed; it just reads through F.G instead of the bare global.
+function pmPlaceLab(i, place, F) {
+  const G = (F && F.G) || GAL;
+  if (!place || place === "avg") return [G.mean[i * 3], G.mean[i * 3 + 1], G.mean[i * 3 + 2]];
+  const j = place === "main" ? pmDom(i, F) : (() => { let b = 0, bc = -1; for (let t = 0; t < 6; t++) { const c = G.ch[i * 6 + t]; if (c > bc) { bc = c; b = t; } } return b; })();
   const o = (i * 6 + j) * 3;
-  return [GAL.lab[o], GAL.lab[o + 1], GAL.lab[o + 2]];
+  return [G.lab[o], G.lab[o + 1], G.lab[o + 2]];
 }
 // David, 2026-10-09: "Center on" -- a quick way to land the (otherwise generic) "around one painting" arrangement
 // on a painting chosen by some property of the CURRENT filtered list, not by having already found one yourself.
-// Each returns a gallery index (or -1 if the list is empty / has no favorite in it).
+// Each returns a gallery index (or -1 if the list is empty / has no favorite in it). 2026-10-10: takes F now too.
 const PM_CENTER = [
-  ["vivid", "Most vivid", list => { let b = -1, bv = -1; for (const i of list) if (GAL.C[i] > bv) { bv = GAL.C[i]; b = i; } return b; }],
-  ["grey", "Greyest", list => { let b = -1, bv = 1e9; for (const i of list) if (GAL.C[i] < bv) { bv = GAL.C[i]; b = i; } return b; }],
-  ["light", "Lightest", list => { let b = -1, bv = -1; for (const i of list) if (GAL.mean[i * 3] > bv) { bv = GAL.mean[i * 3]; b = i; } return b; }],
-  ["dark", "Darkest", list => { let b = -1, bv = 1e9; for (const i of list) if (GAL.mean[i * 3] < bv) { bv = GAL.mean[i * 3]; b = i; } return b; }],
-  ["fav", "A favorite", list => { const ids = typeof fvArtList === "function" ? fvArtList() : []; if (!ids.length) return -1; const want = new Set(ids.map(r => r.i)); for (const i of list) if (want.has(i)) return i; return -1; }],
+  ["vivid", "Most vivid", (list, F) => { const G = (F && F.G) || GAL; let b = -1, bv = -1; for (const i of list) if (G.C[i] > bv) { bv = G.C[i]; b = i; } return b; }],
+  ["grey", "Greyest", (list, F) => { const G = (F && F.G) || GAL; let b = -1, bv = 1e9; for (const i of list) if (G.C[i] < bv) { bv = G.C[i]; b = i; } return b; }],
+  ["light", "Lightest", (list, F) => { const G = (F && F.G) || GAL; let b = -1, bv = -1; for (const i of list) if (G.mean[i * 3] > bv) { bv = G.mean[i * 3]; b = i; } return b; }],
+  ["dark", "Darkest", (list, F) => { const G = (F && F.G) || GAL; let b = -1, bv = 1e9; for (const i of list) if (G.mean[i * 3] < bv) { bv = G.mean[i * 3]; b = i; } return b; }],
+  ["fav", "A favorite", (list, F) => { const ids = pmFavList(F); if (!ids.length) return -1; const want = new Set(ids.map(r => r.i)); for (const i of list) if (want.has(i)) return i; return -1; }],
 ];
 const PM_ICON = {
   color: sv('<circle cx="8" cy="8" r="3.2"/><circle cx="16" cy="8" r="3.2"/><circle cx="12" cy="15.5" r="3.2"/>', 22, 1.7),
@@ -86,6 +91,30 @@ const PM_ICON = {
   // the time scrubber's own Play/Pause (David, 2026-10-09): ICON.play (js/core.js) is the app-wide one; Pause doesn't exist yet elsewhere, so it's local here
   pause: sv('<path d="M9 5v14M15 5v14"/>', 20, 2.2),
 };
+// generic favorites across the keep store: paintings keep fvArtList() (keyed by gallery index i) unchanged;
+// every other collection keeps fvItemList() filtered to its own kind (js/favs.js's generic id-keyed store) and
+// is mapped to the SAME { i, ... } shape fvArtList() returns, so every caller above (favSet in draw(), the Filter
+// sheet's "Yours" chip, Center on "A favorite") stays written once and works for any collection.
+function pmFavList(F) {
+  if (!F || !F.col || F.col === "paintings") return typeof fvArtList === "function" ? fvArtList() : [];
+  return typeof fvItemList === "function" ? fvItemList(F.col).map(r => ({ ...r, i: F.ixOf ? F.ixOf(r.id) : -1 })).filter(r => r.i >= 0) : [];
+}
+const pmFavHas = (id, F) => (!F || !F.col || F.col === "paintings") ? (typeof fvArtHas === "function" && fvArtHas(id)) : (typeof fvItemHas === "function" && fvItemHas(id));
+const pmFavSet = (i, d, on, F) => { if (!F || !F.col || F.col === "paintings") { if (typeof fvArtSet === "function") fvArtSet(i, d, on); } else if (typeof fvItemSet === "function") fvItemSet(F.col, d, on); };
+// the bottom card's "d" (a detail row): paintings alone go through glDetailNow/glDetail's own lazy shard fetch
+// (unchanged); every other collection is already whole in memory the instant F exists, so this just reshapes
+// the node it already has into the same { id, t, a, co, img, crop } shape glDetailNow returns.
+function pmDetailNow(i, F) {
+  if (!F || !F.col || F.col === "paintings") return glDetailNow(i);
+  const n = F.nodes && F.nodes[i]; if (!n) return null;
+  return { id: n.id, t: n.title || "", a: n.artist || "", co: n.place || n.country || "", img: n.img || "", crop: null };
+}
+// the year as glYear(i) formats it ("1877", "480 BCE", "" for undated) -- for any collection, via its own F.G.
+function pmYearStr(i, F) {
+  if (!F || !F.col || F.col === "paintings") return glYear(i);
+  const G = F.G, y = G.year[i];
+  return y === GL_UNDATED ? "" : y < 0 ? `${-y} BCE` : String(y);
+}
 let PM_THUMBS = null, PM_THUMBS_P = null;
 const PM_PAN = new Map();     // layout key -> { x, y, s }: where you were, so Back from a painting lands on it again
 const PM_LAYOUTS = new Map(); // layout key -> layout (the color pass costs ~100 ms on 24,000 paintings: once is enough)
@@ -100,14 +129,22 @@ let PM_LANDMARKS = new Set();
 let PM_LANDMARKS_ON = false;
 
 // ---------- data ----------
-function pmThumbsLoad() {
+// Paintings only: data/gallery/thumbs.txt, one line per gallery index. Another collection's own thumb URL is
+// already sitting on its node (n.img, loaded whole by loadDesignObjects()/loadPhotography()) -- pmThumb() below
+// branches on the active collection instead of fetching a second thumbs file for it.
+function pmThumbsLoad(col) {
+  if (col && col !== "paintings") return Promise.resolve(null);
   if (PM_THUMBS) return Promise.resolve(PM_THUMBS);
   const v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
   return PM_THUMBS_P || (PM_THUMBS_P = fetch("data/gallery/thumbs.txt" + v).then(r => { if (!r.ok) throw new Error("thumbs " + r.status); return r.text(); })
     .then(t => (PM_THUMBS = t.split("\n"))).catch(e => { PM_THUMBS_P = null; throw e; }));
 }
 // a tile's picture address, and its frame crop ([l, t, r, b] in thousandths of the photo) or null
-function pmThumb(i) {
+function pmThumb(i, F) {
+  if (F && F.col && F.col !== "paintings") {
+    const n = F.nodes && F.nodes[i];
+    return n && n.img ? { url: n.img, crop: null } : null;
+  }
   const line = PM_THUMBS && PM_THUMBS[i]; if (!line) return null;
   const tab = line.indexOf("\t"), c = line.slice(0, tab < 0 ? undefined : tab), cr = tab < 0 ? "" : line.slice(tab + 1);
   const k = c[0], a = c.slice(1);
@@ -117,8 +154,14 @@ function pmThumb(i) {
   const crop = cr ? cr.split(",").map(Number) : null;
   return { url, crop: crop && crop.length === 4 ? crop : null };
 }
-const pmDom = i => { let b = 0; for (let j = 1; j < 6; j++) if (GAL.sh[i * 6 + j] > GAL.sh[i * 6 + b]) b = j; return b; };
-const pmHex = i => glHex(i, pmDom(i));
+const pmDom = (i, F) => { const G = (F && F.G) || GAL; let b = 0; for (let j = 1; j < 6; j++) if (G.sh[i * 6 + j] > G.sh[i * 6 + b]) b = j; return b; };
+// a cell's own hex (the dominant swatch): paintings go through glHex (GAL's Lab -> hex, unchanged); every other
+// collection already carries its swatches as real hex strings (js/designobjects.js doNode / js/photography.js
+// photographyNode's .palette), so this reads the hex straight off the node instead of a lossy Lab round-trip.
+const pmHex = (i, F) => {
+  if (F && F.col && F.col !== "paintings") { const n = F.nodes && F.nodes[i], p = n && n.palette && n.palette[pmDom(i, F)]; return (p && p.h) || "#3A3630"; }
+  return glHex(i, pmDom(i, F));
+};
 
 // ---------- the richer filter (David, 2026-10-10: "select multiple things -- a color range, a time range,
 // multiple countries, or e.g. only Europe") ----------
@@ -218,18 +261,25 @@ function pmRun(s, F) {
 }
 
 // ---------- the spec: what to show and how (the address's query) ----------
-const pmFresh = () => ({ arr: "color", f: pmFilterFresh(), seed: -1, fav: 0, place: "avg", upToYear: null, mag: null });
+const pmFresh = () => ({ arr: "color", f: pmFilterFresh(), seed: -1, fav: 0, place: "avg", upToYear: null, mag: null, col: "paintings" });
 // David, 2026-10-09: "a time scrubber with play (paintings appear decade by decade)" -- the dataset's own real
 // year span (excluding undated), computed once and cached. The scrubber's slider runs across this, not a guess.
 let PM_YEAR_RANGE = null;
-function pmYearRange() {
-  if (PM_YEAR_RANGE) return PM_YEAR_RANGE;
+const PM_COL_YEAR_RANGE = new Map();   // F.col (non-paintings) -> [lo, hi], cached the same way as PM_YEAR_RANGE
+function pmYearRange(F) {
+  const G = (F && F.G) || GAL, col = (F && F.col) || "paintings";
+  if (col === "paintings" && PM_YEAR_RANGE) return PM_YEAR_RANGE;
+  if (col !== "paintings" && PM_COL_YEAR_RANGE.has(col)) return PM_COL_YEAR_RANGE.get(col);
   let lo = 1e9, hi = -1e9;
-  for (let i = 0; i < GAL.n; i++) { const y = GAL.year[i]; if (y === GL_UNDATED) continue; if (y < lo) lo = y; if (y > hi) hi = y; }
-  return PM_YEAR_RANGE = [lo, hi];
+  for (let i = 0; i < G.n; i++) { const y = G.year[i]; if (y === GL_UNDATED) continue; if (y < lo) lo = y; if (y > hi) hi = y; }
+  if (lo > hi) { lo = 1900; hi = 1900; }   // a collection with no dated items at all (shouldn't happen, but pmYearRange must still return something finite)
+  const range = [lo, hi];
+  if (col === "paintings") PM_YEAR_RANGE = range; else PM_COL_YEAR_RANGE.set(col, range);
+  return range;
 }
 function pmParse(q, F) {
   const s = pmFresh(), p = new URLSearchParams(String(q || "").replace(/^\?/, ""));
+  s.col = (F && F.col) || "paintings";
   const a = p.get("arr"); if (PM_ARR.some(x => x[0] === a)) s.arr = a;
   const pl = p.get("pl"); if (PM_PLACE.some(x => x[0] === pl)) s.place = pl;
   const f = s.f, num = k => { const v = p.get(k); return v != null && v !== "" && isFinite(+v) ? +v : null; };
@@ -253,6 +303,7 @@ function pmParse(q, F) {
 }
 function pmQS(s, F) {
   const f = s.f, out = [["arr", s.arr]];
+  const col = s.col || (F && F.col) || "paintings"; if (col !== "paintings") out.push(["col", col]);
   if (s.place && s.place !== "avg") out.push(["pl", s.place]);
   if (f.hexes.length) { out.push(["c", f.hexes.map(h => h.slice(1).toLowerCase()).join(",")], ["t", f.tol], ["m", f.cover]); if (f.hexes.length > 1 && f.colorMode === "all") out.push(["cm", "all"]); }
   if (f.y0 != null) out.push(["y0", f.y0]); if (f.y1 != null) out.push(["y1", f.y1]);
@@ -270,10 +321,17 @@ function pmQS(s, F) {
   if (s.mag != null) out.push(["mag", s.mag]);
   return out.map(([k, v]) => k + "=" + encodeURIComponent(v)).join("&");
 }
-// router.js ROUTED: the address and title of an open map
-function pmRouteOf(spec) {
-  const q = typeof spec === "string" ? spec.replace(/^\?/, "") : XBF ? pmQS(spec, XBF) : "";
-  return { path: "paintings/map" + (q ? "?" + q : ""), title: "Painting map" };
+// router.js ROUTED: the address and title of an open map. F is optional (the two live call sites inside
+// pmMount -- the one engine every collection shares -- always pass their own already-loaded F); without it
+// (router.js's cold routeWrapAll wrap, which only ever sees whatever args a caller passed pmOpen), this falls
+// back to XBF for Paintings and to PM_COL_F_READY's synchronously-cached adapter for another collection, same
+// idea as XBF but already resolved by the time a map is open enough to call this.
+function pmRouteOf(spec, F) {
+  const col = (typeof spec === "string" ? new URLSearchParams(spec.replace(/^\?/, "")).get("col") : spec && spec.col) || (F && F.col) || "paintings";
+  if (!F) F = col === "paintings" ? XBF : PM_COL_F_READY.get(col);
+  const q = typeof spec === "string" ? spec.replace(/^\?/, "") : F ? pmQS(spec, F) : (col !== "paintings" ? "col=" + encodeURIComponent(col) : "");
+  const title = (PM_COLLECTIONS.find(c => c[0] === col) || PM_COLLECTIONS[0])[1];
+  return { path: "paintings/map" + (q ? "?" + q : ""), title: col === "paintings" ? "Painting map" : title + " map" };
 }
 // a region chip toggles ALL its countries into or out of coSet at once (David, 2026-10-10: "region groups that
 // select many at once") -- "on" if every one of them is already in, "off" (remove all of them) otherwise, so
@@ -324,13 +382,13 @@ function pmActiveChips(s, F) {
 // Movement, museum and color-swatch filters still exist -- in the sheet's Filter group (More options), not here.
 function pmFacetsOf(i, F) {
   const out = [];
-  if (F.artist[i]) out.push({ dim: "painter", val: F.artist[i], label: "Same painter" });
+  if (F.artist[i]) out.push({ dim: "painter", val: F.artist[i], label: "Same " + pmColLabel(F, "painter").toLowerCase() });
   const y = F.G.year[i];
   if (y !== GL_UNDATED) {
     const y0 = y < 1500 ? Math.floor(y / 100) * 100 : Math.floor(y / 10) * 10, y1 = y < 1500 ? y0 + 99 : y0 + 9;
     out.push({ dim: "when", val: [y0, y1], label: "Same decade" });
   }
-  if (F.country[i]) out.push({ dim: "co", val: F.country[i], label: "Same place" });
+  if (F.country[i]) out.push({ dim: "co", val: F.country[i], label: "Same " + pmColLabel(F, "co").toLowerCase() });
   return out;
 }
 // apply one facet to the filter spec in place -- a quick "narrow to exactly this" (so it REPLACES the facet's
@@ -360,7 +418,7 @@ function pmChipClear(f, dim) {
 function pmList(s, F) {
   let list = pmRun(s, F).list;
   if (s.fav) {
-    const ids = typeof fvArtList === "function" ? fvArtList() : [];
+    const ids = pmFavList(F);
     const want = new Set(ids.map(r => r.i));
     list = list.filter(i => want.has(i));
   }
@@ -368,8 +426,9 @@ function pmList(s, F) {
   // the scrubbed year. Undated paintings have nothing honest to compare against a year, so they stay hidden
   // until the scrubber reaches the real end of the range (the same moment it stops meaning anything to filter).
   if (s.upToYear != null) {
-    const [, hi] = pmYearRange();
-    if (s.upToYear < hi) list = list.filter(i => GAL.year[i] !== GL_UNDATED && GAL.year[i] <= s.upToYear);
+    const G = (F && F.G) || GAL;
+    const [, hi] = pmYearRange(F);
+    if (s.upToYear < hi) list = list.filter(i => G.year[i] !== GL_UNDATED && G.year[i] <= s.upToYear);
   }
   return list;
 }
@@ -386,20 +445,20 @@ function pmGridOf(items, X, Y, labels, start) {
 }
 const pmAt = (lay, cx, cy) => { const x = cx - lay.gx0, y = cy - lay.gy0; return x < 0 || y < 0 || x >= lay.GW || y >= lay.GH ? -1 : lay.grid[y * lay.GW + x]; };
 // mean color (CIELAB, by area) and dominant color, for the neighbor pass
-function pmFeat(list) {
-  const G = GAL, n = list.length, f = new Float32Array(n * 6);
+function pmFeat(list, F) {
+  const G = (F && F.G) || GAL, n = list.length, f = new Float32Array(n * 6);
   for (let k = 0; k < n; k++) {
-    const i = list[k], d = pmDom(i), o = (i * 6 + d) * 3;
+    const i = list[k], d = pmDom(i, F), o = (i * 6 + d) * 3;
     f[k * 6] = G.mean[i * 3]; f[k * 6 + 1] = G.mean[i * 3 + 1]; f[k * 6 + 2] = G.mean[i * 3 + 2];
     f[k * 6 + 3] = G.lab[o]; f[k * 6 + 4] = G.lab[o + 1]; f[k * 6 + 5] = G.lab[o + 2];
   }
   return f;
 }
 const pmHueKey = (a, b) => { let H = Math.atan2(b, a) * 180 / Math.PI; if (H < 0) H += 360; return (H - 330 + 360) % 360; };   // reds first, then oranges, browns, yellows, greens, blues, purples
-function pmLayColor(list, place) {
+function pmLayColor(list, place, F) {
   const n = list.length, cols = Math.max(1, Math.round(Math.sqrt(n / 1.55))), rows = Math.ceil(n / cols);
   const Lp = new Float32Array(n), Ap = new Float32Array(n), Bp = new Float32Array(n);
-  for (let k = 0; k < n; k++) { const c = pmPlaceLab(list[k], place); Lp[k] = c[0]; Ap[k] = c[1]; Bp[k] = c[2]; }
+  for (let k = 0; k < n; k++) { const c = pmPlaceLab(list[k], place, F); Lp[k] = c[0]; Ap[k] = c[1]; Bp[k] = c[2]; }
   const L = k => Lp[k], A = k => Ap[k], B = k => Bp[k];
   const idx = Array.from({ length: n }, (_, k) => k);
   const chroma = idx.filter(k => Math.hypot(A(k), B(k)) >= 5).sort((p, q) => pmHueKey(A(p), B(p)) - pmHueKey(A(q), B(q)));
@@ -416,14 +475,14 @@ function pmLayColor(list, place) {
     k2 += col.length;
   }
   const lay = pmGridOf(items, X, Y);
-  pmSmooth(lay, 120);
+  pmSmooth(lay, 120, F);
   return lay;
 }
 // the neighbor pass: try swapping each cell with its right or lower neighbor; keep the swap when the two then look
 // more like the cells around them (local, so the big light-to-dark and hue directions stay)
-function pmSmooth(lay, budget) {
+function pmSmooth(lay, budget, F) {
   const n = lay.n; if (n < 9) return;
-  const f = pmFeat(lay.items), g = lay.grid, W = lay.GW, H = lay.GH;
+  const f = pmFeat(lay.items, F), g = lay.grid, W = lay.GW, H = lay.GH;
   const d = (p, q) => { const a = p * 6, b = q * 6; let s = 0; for (let t = 0; t < 3; t++) { const e = f[a + t] - f[b + t]; s += e * e; } for (let t = 3; t < 6; t++) { const e = f[a + t] - f[b + t]; s += .5 * e * e; } return s; };
   const cost = (k, x, y, skip) => { let c = 0; for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { const xx = x + dx, yy = y + dy; if (xx < 0 || yy < 0 || xx >= W || yy >= H) continue; const q = g[yy * W + xx]; if (q >= 0 && q !== skip) c += d(k, q); } return c; };
   const t0 = performance.now(); let seed = 9301;
@@ -443,19 +502,19 @@ function pmSmooth(lay, budget) {
   }
 }
 // the year as a sortable number; undated last
-const pmYr = i => GAL.year[i] === GL_UNDATED ? 1e5 : GAL.year[i];
-function pmBand(i) {
-  const y = GAL.year[i];
+const pmYr = (i, F) => { const G = (F && F.G) || GAL; return G.year[i] === GL_UNDATED ? 1e5 : G.year[i]; };
+function pmBand(i, F) {
+  const G = (F && F.G) || GAL, y = G.year[i];
   if (y === GL_UNDATED) return { key: 1e6, label: "Undated" };
   if (y < 1500) { const c = Math.floor(y / 100) * 100; return { key: c, label: c < 0 ? `${-c} BCE` : `${c}–${c + 99}` }; }
   const d = Math.floor(y / 10) * 10; return { key: d, label: d + "s" };
 }
-function pmLayTime(list, place) {
+function pmLayTime(list, place, F) {
   const n = list.length, Wc = Math.max(3, Math.min(16, Math.round(Math.sqrt(n) / 2.2)));
   const bands = new Map();
-  list.forEach(i => { const b = pmBand(i); if (!bands.has(b.key)) bands.set(b.key, { ...b, items: [] }); bands.get(b.key).items.push(i); });
+  list.forEach(i => { const b = pmBand(i, F); if (!bands.has(b.key)) bands.set(b.key, { ...b, items: [] }); bands.get(b.key).items.push(i); });
   const keys = [...bands.keys()].sort((a, b) => a - b);
-  const Lv = i => pmPlaceLab(i, place)[0], Av = i => pmPlaceLab(i, place)[1], Bv = i => pmPlaceLab(i, place)[2];
+  const Lv = i => pmPlaceLab(i, place, F)[0], Av = i => pmPlaceLab(i, place, F)[1], Bv = i => pmPlaceLab(i, place, F)[2];
   const items = new Int32Array(n), X = new Int32Array(n), Y = new Int32Array(n), labels = [];
   const ox = Math.floor(Wc / 2);
   let y = 0, m = 0, start = null, half = n / 2, seen = 0;
@@ -499,16 +558,18 @@ function pmLayGroup(list, o) {
 }
 function pmLayPainter(list, F) {
   return pmLayGroup(list, {
-    groupOf: i => F.artist[i], sortWithin: (p, q) => pmYr(p) - pmYr(q),
-    keyRank: (a, arr) => { if (!a) return 2e5; const y = arr.map(pmYr).sort((p, q) => p - q); return y[y.length >> 1]; },
-    label: (a, c) => a ? xbArtistName(F, a) : "Artist unknown",
+    groupOf: i => F.artist[i], sortWithin: (p, q) => pmYr(p, F) - pmYr(q, F),
+    keyRank: (a, arr) => { if (!a) return 2e5; const y = arr.map(i => pmYr(i, F)).sort((p, q) => p - q); return y[y.length >> 1]; },
+    label: (a, c) => a ? xbArtistName(F, a) : (F.col === "design" ? "Maker unknown" : F.col === "photography" ? "Photographer unknown" : "Artist unknown"),
   });
 }
 // Families (David, 2026-10-09): the same shelves, grouped by movement instead of painter -- the biggest
-// movements first (keyRank left at its default, so the group-size tiebreak alone decides order).
+// movements first (keyRank left at its default, so the group-size tiebreak alone decides order). Reused as-is
+// for another collection's "Category" grouping (Design objects' cat, Photography's process) -- F.mv/F.meta.
+// movements just hold different values than a painting's own movement, same shape throughout.
 function pmLayFamilies(list, F) {
   return pmLayGroup(list, {
-    groupOf: i => F.mv[i], sortWithin: (p, q) => pmYr(p) - pmYr(q),
+    groupOf: i => F.mv[i], sortWithin: (p, q) => pmYr(p, F) - pmYr(q, F),
     label: (mv, c) => mv ? F.meta.movements[mv - 1] : "Unclassified",
   });
 }
@@ -516,19 +577,19 @@ function pmLayFamilies(list, F) {
 // (honeyToneGroup), applied to whichever color "Place by" already uses for position (pmPlaceLab) -- an island
 // per mood, hue-ordered inside, so the painter/movement groupings aren't the only way to read the set.
 const PM_TONE_ORDER = ["Vivid", "Light", "Muted", "Dark"];
-function pmToneOf(i, place) { const [L, a, b] = pmPlaceLab(i, place), C = Math.hypot(a, b); return L < 40 ? "Dark" : L >= 78 ? "Light" : C >= 45 ? "Vivid" : "Muted"; }
-function pmLayTones(list, place) {
+function pmToneOf(i, place, F) { const [L, a, b] = pmPlaceLab(i, place, F), C = Math.hypot(a, b); return L < 40 ? "Dark" : L >= 78 ? "Light" : C >= 45 ? "Vivid" : "Muted"; }
+function pmLayTones(list, place, F) {
   return pmLayGroup(list, {
-    groupOf: i => pmToneOf(i, place),
-    sortWithin: (p, q) => { const a = pmPlaceLab(p, place), b = pmPlaceLab(q, place); return pmHueKey(a[1], a[2]) - pmHueKey(b[1], b[2]); },
+    groupOf: i => pmToneOf(i, place, F),
+    sortWithin: (p, q) => { const a = pmPlaceLab(p, place, F), b = pmPlaceLab(q, place, F); return pmHueKey(a[1], a[2]) - pmHueKey(b[1], b[2]); },
     order: PM_TONE_ORDER, label: k => k,
   });
 }
 // the shared ordering behind both "around one painting" shapes (Rings, Spiral): nearest-to-seed first, by the
 // matched-palette distance for the 400 closest (js/gallery.js glSimilar's own technique), mean-color distance
 // for the rest -- unchanged from the old single "similar" arrangement, just no longer tied to one fixed layout.
-function pmSimilarOrder(list, seed) {
-  const G = GAL, m = G.mean, q = seed * 3, Lb = G.lab;
+function pmSimilarOrder(list, seed, F) {
+  const G = (F && F.G) || GAL, m = G.mean, q = seed * 3, Lb = G.lab;
   let L = Array.from(list).filter(i => i !== seed);
   const d0 = new Map();
   L.forEach(j => { const a = m[j * 3] - m[q], b = m[j * 3 + 1] - m[q + 1], c = m[j * 3 + 2] - m[q + 2], e = G.C[j] - G.C[seed]; d0.set(j, a * a + b * b + c * c + e * e); });
@@ -538,8 +599,8 @@ function pmSimilarOrder(list, seed) {
   return [seed, ...near, ...L.slice(400)];
 }
 // Rings: concentric square shells (the old "similar" layout, unchanged) -- a clean, bands-you-can-count read.
-function pmLayRings(list, seed) {
-  const L = pmSimilarOrder(list, seed);
+function pmLayRings(list, seed, F) {
+  const L = pmSimilarOrder(list, seed, F);
   const n = L.length, r = Math.ceil(Math.sqrt(n / Math.PI)) + 2, cells = [];
   for (let y = -r; y <= r; y++) for (let x = -r; x <= r; x++) cells.push([x, y, x * x + y * y, Math.atan2(y, x)]);
   cells.sort((a, b) => a[2] - b[2] || a[3] - b[3]);
@@ -565,8 +626,8 @@ function pmLayRings(list, seed) {
 // than the continuous-area formula, not looser, because of that outward rounding bias. 0.53 lands in the middle
 // of that zero-hole band with room either side, giving Spiral the same packing density Rings' own zero-gap
 // shells have (Rings enumerates literally every cell in ring order, the tightest possible reference point).
-function pmLaySpiral(list, seed) {
-  const L = pmSimilarOrder(list, seed), n = L.length, GOLD = Math.PI * (3 - Math.sqrt(5));
+function pmLaySpiral(list, seed, F) {
+  const L = pmSimilarOrder(list, seed, F), n = L.length, GOLD = Math.PI * (3 - Math.sqrt(5));
   const occupied = new Set(), X = new Int32Array(n), Y = new Int32Array(n);
   const key = (x, y) => (x + 20000) * 50000 + (y + 20000);
   for (let k = 0; k < n; k++) {
@@ -589,13 +650,13 @@ function pmLaySpiral(list, seed) {
   return pmGridOf(Int32Array.from(L), X, Y, [], [0, 0]);
 }
 function pmLayout(s, F) {
-  const list = pmList(s, F), key = pmQS(s, F) + "|" + list.length + "|" + (s.fav ? (typeof fvArtList === "function" ? fvArtList().map(r => r.i).join(",") : "") : "");
+  const list = pmList(s, F), key = pmQS(s, F) + "|" + list.length + "|" + (s.fav ? pmFavList(F).map(r => r.i).join(",") : "");
   let lay = PM_LAYOUTS.get(key);
   if (!lay) {
-    lay = s.arr === "time" ? pmLayTime(list, s.place) : s.arr === "painter" ? pmLayPainter(list, F)
-      : s.arr === "families" ? pmLayFamilies(list, F) : s.arr === "tones" ? pmLayTones(list, s.place)
-      : s.arr === "rings" ? pmLayRings(list, s.seed) : s.arr === "spiral" ? pmLaySpiral(list, s.seed)
-      : pmLayColor(list, s.place);
+    lay = s.arr === "time" ? pmLayTime(list, s.place, F) : s.arr === "painter" ? pmLayPainter(list, F)
+      : s.arr === "families" ? pmLayFamilies(list, F) : s.arr === "tones" ? pmLayTones(list, s.place, F)
+      : s.arr === "rings" ? pmLayRings(list, s.seed, F) : s.arr === "spiral" ? pmLaySpiral(list, s.seed, F)
+      : pmLayColor(list, s.place, F);
     lay.key = key; lay.arr = s.arr;
     PM_LAYOUTS.set(key, lay); if (PM_LAYOUTS.size > 8) PM_LAYOUTS.delete(PM_LAYOUTS.keys().next().value);
   }
@@ -622,7 +683,7 @@ const PM_BAKE = 144, PM_CACHE_MAX = 650, PM_BIG_MAX = 36, PM_FLIGHT = 14;
 function pmSafeHost(url) {
   try { return GL_CORS_HOSTS.has(new URL(url, location.href).hostname); } catch (e) { return false; }
 }
-function pmImages(onReady) {
+function pmImages(onReady, F) {
   const cache = new Map(), bigs = new Map();   // i -> { st: 0 loading | 1 ready | 2 failed, bm, ar, used } ; i -> HTMLImageElement (kept for the big tiles)
   let flying = 0, frame = 0, dead = false;
   const bake = (i, img, crop) => {
@@ -641,7 +702,7 @@ function pmImages(onReady) {
       const e = cache.get(i);
       if (e) { e.used = frame; if (big && e.st === 1 && !bigs.has(i) && e.url) pmBigLoad(i, e); continue; }
       if (flying >= PM_FLIGHT) continue;
-      const t = pmThumb(i); if (!t) { cache.set(i, { st: 2, used: frame }); continue; }
+      const t = pmThumb(i, F); if (!t) { cache.set(i, { st: 2, used: frame }); continue; }
       const local = t.url.startsWith("img/gallery/"), safe = local || pmSafeHost(t.url);
       const ent = { st: 0, used: frame, url: t.url, crop: t.crop, safe };
       const img = new Image(); img.decoding = "async"; if (!local && safe) img.crossOrigin = "anonymous"; ent.img = img;
@@ -701,7 +762,14 @@ function pmImages(onReady) {
 // script packed tiles in, same as data/gallery/thumbs.txt itself. Tier 2 (pmImages above) is unchanged except
 // for WHEN it runs: gated to b.d >= PM_T2_MIN now (used to start at a few px) -- "the existing thumbnails, only
 // for the few visible" per the design, with tier 0/1 covering every zoom level below that.
-let PM_ATLAS = null, PM_ATLAS_P = null;
+// atlas sheets, cached per collection (David, 2026-10-10: "Collection" on the map -- Paintings keeps its
+// existing data/paintmap/ root untouched; another collection's own sheets live at data/paintmap/<col>/,
+// built the same way by tools/paintmap_atlas.py's own --collection flag). PM_ATLAS_CACHE holds the resolved
+// {man,bm0s} once a collection's tier-0 sheets land (synchronous after that, for pmAtlasTier1's `want()` and
+// the QA hooks); PM_ATLAS_P tracks the in-flight promise per collection so a second mount of the same
+// collection just awaits it instead of re-fetching.
+const PM_ATLAS_CACHE = new Map(), PM_ATLAS_P = new Map();
+const pmAtlasBase = col => (col && col !== "paintings") ? `data/paintmap/${col}/` : "data/paintmap/";
 const PM_T1_MIN = 24, PM_T2_MIN = 120;
 // a decoded tier-1 sheet (2000x2000 at the build script's own GROUP_SIZE/TIER1_TILE, since David's iPhone 16 Pro
 // Max/2026-10-10: see tools/paintmap_atlas.py's GROUP_SIZE comment) costs ~16MB of raw bitmap memory --
@@ -735,18 +803,19 @@ function pmDecodeSheet(url) {
 // attempts, not infinite: a real 404/missing-build-output still surfaces the "didn't load" retry button
 // (js/paintmap.js's pmOpen .catch) instead of looping silently.
 const PM_ATLAS_RETRIES = 3;
-function pmAtlasLoad() {
-  if (PM_ATLAS) return Promise.resolve(PM_ATLAS);
-  if (PM_ATLAS_P) return PM_ATLAS_P;
-  const v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
-  const attempt = n => fetch("data/paintmap/manifest.json" + v).then(r => { if (!r.ok) throw new Error("manifest " + r.status); return r.json(); })
-    .then(man => Promise.all(man.tier0.sheets.map(name => pmDecodeSheet("data/paintmap/" + name + v)))
-      .then(bm0s => (PM_ATLAS = { man, bm0s })))
+function pmAtlasLoad(col) {
+  col = col || "paintings";
+  if (PM_ATLAS_CACHE.has(col)) return Promise.resolve(PM_ATLAS_CACHE.get(col));
+  if (PM_ATLAS_P.has(col)) return PM_ATLAS_P.get(col);
+  const base = pmAtlasBase(col), v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
+  const attempt = n => fetch(base + "manifest.json" + v).then(r => { if (!r.ok) throw new Error("manifest " + r.status); return r.json(); })
+    .then(man => Promise.all(man.tier0.sheets.map(name => pmDecodeSheet(base + name + v)))
+      .then(bm0s => { const atlas = { man, bm0s }; PM_ATLAS_CACHE.set(col, atlas); return atlas; }))
     .catch(e => {
       if (n < PM_ATLAS_RETRIES) return new Promise(res => setTimeout(res, 600 * Math.pow(2, n))).then(() => attempt(n + 1));
-      PM_ATLAS_P = null; throw e;
+      PM_ATLAS_P.delete(col); throw e;
     });
-  return (PM_ATLAS_P = attempt(0));
+  const p = attempt(0); PM_ATLAS_P.set(col, p); return p;
 }
 // tier 0: a painting's own cell -- which sheet (now several, each kept <= 2048px square for iOS/WebKit's safe
 // decode ceiling -- see tools/paintmap_atlas.py) plus the cell inside it, pure arithmetic, no lookup
@@ -767,13 +836,15 @@ function pmT1Rect(man, i) {
 function pmTState(map, i) { let s = map.get(i); if (!s) { s = {}; map.set(i, s); } return s; }
 function pmFadeAlpha(s, key, now, dur, rm) { if (s[key] == null) s[key] = now; return rm ? 1 : Math.min(1, (now - s[key]) / dur); }
 // tier 1 sheet cache: one entry per group, fetched at most once, LRU-evicted only under real pressure
-function pmAtlasTier1(onReady) {
+function pmAtlasTier1(onReady, col) {
+  col = col || "paintings";
+  const base = pmAtlasBase(col);
   const cache = new Map();   // group -> { st: 0 loading | 1 ready | 2 failed, bm, used }
   let frame = 0, dead = false;
   function want(groups) {
     frame++;
-    if (!PM_ATLAS) return;
-    const man = PM_ATLAS.man;
+    const atlas = PM_ATLAS_CACHE.get(col); if (!atlas) return;
+    const man = atlas.man;
     for (const g of groups) {
       const e = cache.get(g);
       if (e) { e.used = frame; continue; }
@@ -781,7 +852,7 @@ function pmAtlasTier1(onReady) {
       const ent = { st: 0, used: frame, bm: null };
       cache.set(g, ent);
       const v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
-      pmDecodeSheet("data/paintmap/" + man.tier1.file.replace("{g}", g) + v)
+      pmDecodeSheet(base + man.tier1.file.replace("{g}", g) + v)
         .then(bm => { if (dead) return; ent.bm = bm; ent.st = 1; onReady(); })
         .catch(() => { ent.st = 2; });
     }
@@ -795,6 +866,111 @@ function pmAtlasTier1(onReady) {
   return { get: g => cache.get(g), want, destroy: () => { dead = true; cache.forEach(e => e.bm && e.bm.close && e.bm.close()); cache.clear(); } };
 }
 
+// ---------- the dataset abstraction (David, 2026-10-10: "a more convenient way to view [the other archives],
+// similar to paintings, with filters -- and even on a map") ----------
+// PM_COLLECTIONS: every collection the map can lay out, Paintings first and unchanged. Each entry's build()
+// returns a Promise<F> shaped exactly like xbLoad()'s own F (G, meta, N, artist, country, mv, dec, fam, dom,
+// slugIx, col, nodes, ixOf) -- every function above (pmRun/pmList/pmLayout/pmPlaceLab/pmDom/pmHex/pmYr/pmBand/
+// pmYearRange/pmFeat/pmSimilarOrder) already reads ONLY through F (or F.G) now, so a correctly-shaped F is the
+// whole contract: nothing else in the engine needs to know which collection it's drawing.
+const PM_COLLECTIONS = [
+  ["paintings", "Paintings"],
+  ["design", "Design objects"],
+  ["photography", "Photography"],
+];
+// per-collection labels for the Filter sheet's row headers (David 2026-10-10: "facets adapted per collection" --
+// same rows, renamed to fit: a design object has a Maker, not a Painter; Photography's "movement" row is really
+// which of the three color PROCESSES made it).
+const PM_COL_LABELS = {
+  paintings: { painter: "Painter", mv: "Movement", co: "Place", mus: "Museum", noun: "painting", nounP: "paintings" },
+  design: { painter: "Maker", mv: "Category", co: "Place", mus: "Source", noun: "object", nounP: "objects" },
+  photography: { painter: "Photographer", mv: "Process", co: "Place", mus: "Source", noun: "photograph", nounP: "photographs" },
+};
+const pmColLabel = (F, key) => (PM_COL_LABELS[(F && F.col) || "paintings"] || PM_COL_LABELS.paintings)[key];
+const PM_COL_F = new Map();   // col -> Promise<F>, loaded once per session (same lifetime as XBF itself)
+const PM_COL_F_READY = new Map();   // col -> F, set once that promise resolves (pmRouteOf's sync fallback)
+// xbFamOf (js/browse.js) needs a hue ANGLE in degrees -- GAL carries that pre-baked (G.hu); an adapter's own Lab
+// array doesn't, so this derives it from a/b the same way pmHueKey's cousin elsewhere in this file already does.
+function pmHueDeg(a, b) { let H = Math.atan2(b, a) * 180 / Math.PI; return H < 0 ? H + 360 : H; }
+// builds a GAL-shaped G + xbBuild-shaped F from any array of "painting"-kind nodes (js/designobjects.js doNode /
+// js/photography.js photographyNode both already produce exactly this shape: id, title, artist, year, place,
+// img, palette ([{h,share,name}], up to 6, already real hex -- no Lab round-trip needed for color ITSELF, only
+// for the position math every arrangement already does in Lab space), plus whatever cfg below reads for maker/
+// place/category/museum. w/h when the node has them (Photography does; Design objects don't -- ar defaults to a
+// square 1, same as a painting with no recorded size would).
+function pmAdapterBuild(col, nodes, cfg) {
+  const N = nodes.length;
+  const mean = new Float32Array(N * 3), labArr = new Float32Array(N * 6 * 3), sh = new Float32Array(N * 6), ch = new Float32Array(N * 6);
+  const C = new Float32Array(N), year = new Int32Array(N), ar = new Float32Array(N), mus = new Int32Array(N), dec = new Int16Array(N);
+  const fam = new Uint8Array(N * 6), dom = new Uint8Array(N);
+  const artist = new Uint16Array(N), country = new Uint16Array(N), mv = new Uint16Array(N);
+  const artistIx = new Map(), countryIx = new Map(), mvIx = new Map(), srcIx = new Map();
+  const artists = [], countries = [], movements = [], src = [];
+  const slugIx = new Map(), byId = new Map();
+  for (let i = 0; i < N; i++) {
+    const n = nodes[i]; byId.set(n.id, i);
+    const pal = (n.palette || []).slice(0, 6);
+    let mL = 0, mA = 0, mB = 0, wsum = 0, bestSh = -1;
+    for (let j = 0; j < 6; j++) {
+      const p = pal[j], o = (i * 6 + j) * 3;
+      if (p) {
+        const [L, A, B] = lab(p.h);
+        labArr[o] = L; labArr[o + 1] = A; labArr[o + 2] = B;
+        sh[i * 6 + j] = p.share || 0; ch[i * 6 + j] = Math.hypot(A, B);
+        fam[i * 6 + j] = xbFamOf(L, ch[i * 6 + j], pmHueDeg(A, B));
+        if (sh[i * 6 + j] > bestSh) { bestSh = sh[i * 6 + j]; dom[i] = j; }
+        mL += L * (p.share || 0); mA += A * (p.share || 0); mB += B * (p.share || 0); wsum += (p.share || 0);
+      } else if (j > 0) {
+        // pad an under-6 palette with its own first swatch, so pmDom/pmPlaceLab/pmFeat never index an empty slot
+        labArr[o] = labArr[i * 18]; labArr[o + 1] = labArr[i * 18 + 1]; labArr[o + 2] = labArr[i * 18 + 2];
+      }
+    }
+    if (wsum > 0) { mean[i * 3] = mL / wsum; mean[i * 3 + 1] = mA / wsum; mean[i * 3 + 2] = mB / wsum; }
+    C[i] = Math.hypot(mean[i * 3 + 1], mean[i * 3 + 2]);
+    year[i] = n.year != null ? n.year : GL_UNDATED;
+    dec[i] = n.year != null ? clamp(Math.floor((n.year - XB_DEC0) / 10), 0, XB_NDEC - 1) : -1;
+    ar[i] = n.w && n.h ? n.h / n.w : 1;
+    const mkName = cfg.makerName(n), mkSlug = cfg.makerSlug(n) || (mkName ? routeSlug(mkName) : null);
+    if (mkName) { let ix = artistIx.get(mkSlug); if (ix == null) { artists.push([mkName, mkSlug]); ix = artists.length; artistIx.set(mkSlug, ix); slugIx.set(mkSlug, ix); } artist[i] = ix; }
+    const plName = cfg.placeName(n);
+    if (plName) { let ix = countryIx.get(plName); if (ix == null) { countries.push(plName); ix = countries.length; countryIx.set(plName, ix); } country[i] = ix; }
+    const catName = cfg.catName(n);
+    if (catName) { let ix = mvIx.get(catName); if (ix == null) { movements.push(catName); ix = movements.length; mvIx.set(catName, ix); } mv[i] = ix; }
+    const srcKey = cfg.srcKey(n), srcLabel = cfg.srcLabel(n);
+    if (srcKey) { let ix = srcIx.get(srcKey); if (ix == null) { src.push({ k: srcKey, short: srcLabel }); ix = src.length - 1; srcIx.set(srcKey, ix); } mus[i] = ix; }
+  }
+  if (!src.length) src.push({ k: col, short: "—" });
+  const G = { n: N, mean, lab: labArr, sh, ch, C, year, ar, src, mus, shard: N };
+  const meta = { artists, countries, movements };
+  return { G, meta, N, artist, country, mv, dec, fam, dom, slugIx, col, nodes, ixOf: id => { const v = byId.get(id); return v == null ? -1 : v; } };
+}
+const PM_COL_CFG = {
+  design: {
+    makerName: n => n.artist || null, makerSlug: n => n.makerSlug || null,
+    placeName: n => n.place || null, catName: n => n.catLabel || n.cat || null,
+    srcKey: n => n.src || "design", srcLabel: n => (typeof DO_SRC_LABEL !== "undefined" && DO_SRC_LABEL[n.src]) || n.imgSrcLabel || "Museum",
+  },
+  photography: {
+    makerName: n => (n.artist && n.artist !== "Photographer unknown") ? n.artist : null, makerSlug: n => n.photographerSlug || null,
+    placeName: n => n.country || null, catName: n => n.process ? n.process.replace(/ \(.*\)$/, "") : null,
+    srcKey: () => "commons", srcLabel: () => "Wikimedia Commons",
+  },
+};
+// loads (if needed) and returns the Promise<F> for a collection -- "paintings" defers to xbLoad() exactly as
+// before (zero behavior change, same cached XBF); anything else loads its own module's data once (David's
+// instruction: "keep the paintings dataset and all its behavior/URLs unchanged by default") and builds its
+// adapter once, cached here for the life of the session.
+function pmColLoad(col) {
+  if (!col || col === "paintings") return xbLoad();
+  if (PM_COL_F.has(col)) return PM_COL_F.get(col);
+  const loader = col === "design" ? (typeof loadDesignObjects === "function" ? loadDesignObjects() : Promise.reject(new Error("design objects unavailable")))
+    : col === "photography" ? (typeof loadPhotography === "function" ? loadPhotography() : Promise.reject(new Error("photography unavailable")))
+    : Promise.reject(new Error("unknown collection " + col));
+  const p = loader.then(nodes => { const F = pmAdapterBuild(col, nodes, PM_COL_CFG[col]); PM_COL_F_READY.set(col, F); return F; });
+  PM_COL_F.set(col, p);
+  return p;
+}
+
 // ---------- the screen ----------
 let PM_NOW = null;   // { s, lay } of the open map
 const PM_STATE = new Map();   // the address a map opened with -> its spec as you left it (filters and arrangement you changed)
@@ -803,14 +979,18 @@ function pmOpen(spec, o = {}) {
   // the map as you left it
   const from = typeof spec === "string" ? spec : JSON.stringify(spec || {}), fresh = o.fresh && !o._used;
   o._used = true;
+  // David, 2026-10-10: the "Collection" choice -- a plain string spec (an address) carries it as its own col=
+  // query param; an object spec (every other entry point) carries it as spec.col; default stays Paintings.
+  const col = (typeof spec === "string" ? new URLSearchParams(spec.replace(/^\?/, "")).get("col") : spec && spec.col) || "paintings";
+  const colTitle = (PM_COLLECTIONS.find(c => c[0] === col) || PM_COLLECTIONS[0])[1];
   const el = show(`
-    <div class="pmx-stage"><canvas class="pmx-cv" aria-label="Paintings as a map: drag to browse, pinch to zoom, tap the middle one to open it"></canvas><p class="pmx-wait">Laying out the paintings…</p></div>
+    <div class="pmx-stage"><canvas class="pmx-cv" aria-label="${esc(colTitle)} as a map: drag to browse, pinch to zoom, tap the middle one to open it"></canvas><p class="pmx-wait">Laying out the ${esc(colTitle.toLowerCase())}…</p></div>
     <header class="pmx-top">
       <button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>
-      <p class="pmx-title"><b>Paintings</b></p>
+      <p class="pmx-title"><b>${esc(colTitle)}</b></p>
       <button class="corner r pmx-do" data-do-corner aria-label="Arrange or filter" aria-haspopup="dialog">${PM_ICON.arrange}</button>
     </header>
-    ${typeof hmLayerSwitchHTML === "function" ? hmLayerSwitchHTML("paintings") : ""}
+    ${col === "paintings" && typeof hmLayerSwitchHTML === "function" ? hmLayerSwitchHTML("paintings") : ""}
     <div class="pmx-chipbar" data-pmchipbar hidden></div>
     <div class="pmx-walk" data-pmwalk hidden></div>
     <div class="pmx-facets" data-pmfacets hidden></div>
@@ -823,11 +1003,12 @@ function pmOpen(spec, o = {}) {
   back.onclick = () => xBack();
   onKey = e => { if (e.key === "Escape" && !document.querySelector(".sheet,.rooms-stem")) xBack(); };
   // the top-center Colors|Paintings switch (js/home.js hmWireLayerSwitch): the only way to move between the two
-  // layers now (David, 2026-10-09) -- the sheet's own "switch to the color map" icon is retired below.
-  if (typeof hmWireLayerSwitch === "function") hmWireLayerSwitch(el, "paintings", id => {
+  // layers now (David, 2026-10-09) -- the sheet's own "switch to the color map" icon is retired below. Only
+  // meaningful for the Paintings collection (the color honeycomb has no "Design objects" layer of its own).
+  if (col === "paintings" && typeof hmWireLayerSwitch === "function") hmWireLayerSwitch(el, "paintings", id => {
     if (id === "colors") { S.hm = S.hm || {}; S.hm.mode = "colors"; save(); if (typeof hmHome === "function") hmHome(); else xBack(); }
   });
-  Promise.all([xbLoad(), pmThumbsLoad()]).then(([F]) => {
+  Promise.all([pmColLoad(col), pmThumbsLoad(col)]).then(([F]) => {
     if (!el.isConnected) return;
     const kept = !fresh && PM_STATE.get(from);
     // David, 2026-10-10: a spec OBJECT (not a URL string) can arrive from Explore's own single-value filter
@@ -839,12 +1020,13 @@ function pmOpen(spec, o = {}) {
     if (!sf.mvSet.length && specF.mv) sf.mvSet = [specF.mv];
     if (!sf.musSet.length && specF.mus >= 0) sf.musSet = [specF.mus];
     const s = kept || (typeof spec === "string" ? pmParse(spec, F) : { ...pmFresh(), ...spec, f: sf });
+    s.col = col;
     PM_STATE.set(from, s);
     pmMount(el, s, F);
   }).catch(err => {
     if (!el.isConnected) return;
     console.warn(err);
-    el.querySelector(".pmx-wait").innerHTML = `The paintings didn't load. <button class="wl" data-pmretry>Try again</button>`;
+    el.querySelector(".pmx-wait").innerHTML = `The ${esc(colTitle.toLowerCase())} didn't load. <button class="wl" data-pmretry>Try again</button>`;
     el.querySelector("[data-pmretry]").onclick = () => pmOpen(spec, o);
   });
   return el;
@@ -866,10 +1048,11 @@ function pmMount(el, s, F) {
   // one, or a seeded entry point pins to one) and closes again the moment you start a new pan or tap empty space.
   let cardOpen = false;
   const PULSE_MS = 900;
-  const imgs = pmImages(() => kick());
-  const t1 = pmAtlasTier1(() => kick());
+  const imgs = pmImages(() => kick(), F);
+  let atlas = null;   // this mount's own resolved {man,bm0s} once pmAtlasLoad(F.col) lands (see draw()'s tier 0/1 passes below)
+  const t1 = pmAtlasTier1(() => kick(), F.col);
   const tierH = new Map();   // i -> { t1On, f0, f1 } (pmTState) -- tier 0/1 crossfade + hysteresis memory
-  pmAtlasLoad().then(() => { if (!dead) kick(); }).catch(() => {});   // tier 0: one shared sheet, loaded once per session (idempotent -- a second mount just resolves immediately)
+  pmAtlasLoad(F.col).then(a => { atlas = a; if (!dead) kick(); }).catch(() => {});   // tier 0: one shared sheet, loaded once per session (idempotent -- a second mount just resolves immediately)
   if (!PM_LANDMARKS.size && typeof rcLoadPortraits === "function") {
     rcLoadPortraits().then(port => {
       if (dead || !port) return;
@@ -981,14 +1164,14 @@ function pmMount(el, s, F) {
   let capTimer = 0;
   function caption() {
     if (centerK < 0 || !lay) { cap.hidden = true; facets.hidden = true; return; }
-    const i = lay.items[centerK], a = F.artist[i], y = glYear(i), by = [a ? xbArtistName(F, a) : "", y].filter(Boolean).join(" · ");
+    const i = lay.items[centerK], a = F.artist[i], y = pmYearStr(i, F), by = [a ? xbArtistName(F, a) : "", y].filter(Boolean).join(" · ");
     cap.hidden = !cardOpen; facets.hidden = !cardOpen;
-    const d = glDetailNow(i);
+    const d = pmDetailNow(i, F);
     cap.querySelector("[data-pmct]").textContent = d ? d.t : " ";
     cap.querySelector("[data-pmcb]").textContent = by || (d && d.co) || "";
-    cap.style.setProperty("--c", pmHex(i));
+    cap.style.setProperty("--c", pmHex(i, F));
     paintHeart(i, d);
-    if (!d) { clearTimeout(capTimer); capTimer = setTimeout(() => glDetail(i).then(() => { if (!dead && lay && lay.items[centerK] === i) caption(); }).catch(() => {}), 90); }
+    if (!d && (!F.col || F.col === "paintings")) { clearTimeout(capTimer); capTimer = setTimeout(() => glDetail(i).then(() => { if (!dead && lay && lay.items[centerK] === i) caption(); }).catch(() => {}), 90); }
     PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z, cardOpen });
     paintFacets(i);
     facets.hidden = !cardOpen;   // paintFacets() always unhides itself when it (re)builds the chip row -- cardOpen has the final say
@@ -1001,7 +1184,7 @@ function pmMount(el, s, F) {
   // (pmSimilarOrder's own first pass) over the current filtered list: fast enough for a one-off tap, and good
   // enough that "most similar" reads as true at a glance.
   function pmWalkCandidate(fromI, excludeSet) {
-    const G = GAL, m = G.mean, q = fromI * 3, painter = F.artist[fromI];
+    const G = F.G, m = G.mean, q = fromI * 3, painter = F.artist[fromI];
     let best = -1, bd = Infinity;
     for (const j of pmList(s, F)) {
       if (j === fromI || excludeSet.has(j)) continue;
@@ -1023,7 +1206,7 @@ function pmMount(el, s, F) {
   function paintWalk() {
     if (walk.length < 2) { walkBar.hidden = true; walkBar.innerHTML = ""; return; }
     walkBar.hidden = false;
-    walkBar.innerHTML = `<button class="pmx-walk-x" data-pmwalkx aria-label="End the walk">${ICON.x}</button>${walk.map((i, k) => `<button class="pmx-walk-dot${k === walk.length - 1 ? " cur" : ""}" data-pmwalkto="${k}" style="--c:${pmHex(i)}" aria-label="Step ${k + 1} of the walk"></button>`).join("")}`;
+    walkBar.innerHTML = `<button class="pmx-walk-x" data-pmwalkx aria-label="End the walk">${ICON.x}</button>${walk.map((i, k) => `<button class="pmx-walk-dot${k === walk.length - 1 ? " cur" : ""}" data-pmwalkto="${k}" style="--c:${pmHex(i, F)}" aria-label="Step ${k + 1} of the walk"></button>`).join("")}`;
     walkBar.querySelector("[data-pmwalkx]").onclick = () => { buzz(4); walk = []; paintWalk(); };
     walkBar.querySelectorAll("[data-pmwalkto]").forEach(b => b.onclick = () => {
       const k = +b.dataset.pmwalkto; if (k === walk.length - 1) return;
@@ -1036,7 +1219,7 @@ function pmMount(el, s, F) {
   // one sheet instance, so it degrades to a no-op (not an error) whenever the sheet isn't open to show it.
   function scrubUpdateUI() {
     const inp = document.querySelector("[data-pmscrub]");
-    const [lo, hi] = pmYearRange(), cur = s.upToYear == null ? hi : s.upToYear;
+    const [lo, hi] = pmYearRange(F), cur = s.upToYear == null ? hi : s.upToYear;
     if (inp) inp.value = cur;
     const lab = document.querySelector("[data-pmscrublabel]");
     if (lab) lab.textContent = s.upToYear == null ? "Showing every year" : `Up to ${cur}${cur >= hi ? "" : " (undated paintings join at the end)"}`;
@@ -1044,14 +1227,14 @@ function pmMount(el, s, F) {
     if (btn) { btn.classList.toggle("on", !!scrubTimer); btn.innerHTML = scrubTimer ? PM_ICON.pause : ICON.play; btn.setAttribute("aria-label", scrubTimer ? "Pause" : "Play"); }
   }
   function scrubStep() {
-    const [lo, hi] = pmYearRange(), cur = s.upToYear == null ? lo : s.upToYear;
+    const [lo, hi] = pmYearRange(F), cur = s.upToYear == null ? lo : s.upToYear;
     const next = cur + Math.max(5, Math.round((hi - lo) / 90));
     if (next >= hi) { s.upToYear = null; clearInterval(scrubTimer); scrubTimer = 0; } else s.upToYear = next;
     rebuild(); scrubUpdateUI();
   }
   function scrubPlay() {
     if (scrubTimer) { clearInterval(scrubTimer); scrubTimer = 0; scrubUpdateUI(); return; }
-    const [lo, hi] = pmYearRange();
+    const [lo, hi] = pmYearRange(F);
     if (s.upToYear == null || s.upToYear >= hi) s.upToYear = lo;
     rebuild(); scrubTimer = setInterval(scrubStep, 420); scrubUpdateUI();
   }
@@ -1072,21 +1255,21 @@ function pmMount(el, s, F) {
     paintWalk();
   }
   function paintHeart(i, d) {
-    const on = !!(d && typeof fvArtHas === "function" && fvArtHas(d.id));
-    heart.hidden = !d || typeof fvArtSet !== "function";
+    const on = !!(d && pmFavHas(d.id, F));
+    heart.hidden = !d;
     heart.classList.toggle("on", on); heart.setAttribute("aria-pressed", on);
     heart.setAttribute("aria-label", on ? "Remove from your favorites" : "Add to your favorites");
     heart.innerHTML = on ? FVA_HEART_ON : FVA_HEART;
   }
   function toggleHeart(only) {
     if (centerK < 0) return;
-    const i = lay.items[centerK], d = glDetailNow(i); if (!d || typeof fvArtSet !== "function") return;
-    const on = !fvArtHas(d.id); if (only && !on) { buzz(6); return; }
-    fvArtSet(i, d, on); buzz(on ? 10 : 4); paintHeart(i, d);
+    const i = lay.items[centerK], d = pmDetailNow(i, F); if (!d) return;
+    const on = !pmFavHas(d.id, F); if (only && !on) { buzz(6); return; }
+    pmFavSet(i, d, on, F); buzz(on ? 10 : 4); paintHeart(i, d);
     heart.classList.remove("pop"); void heart.offsetWidth; if (on) heart.classList.add("pop");
     // low: this heart sits in the map's own corner bar, not the fixed top bar, but a top toast would still cover
     // it the same way (David, 2026-10-09)
-    if (on) toast("In your favorites", { action: "See them", onAction: () => { S.fvCat = "paintings"; save(); XSTACK.push("favs"); favShelf(); }, low: true, ms: 3000 });
+    if (on) toast("In your favorites", { action: "See them", onAction: () => { if (!F.col || F.col === "paintings") { S.fvCat = "paintings"; save(); } XSTACK.push("favs"); favShelf(); }, low: true, ms: 3000 });
   }
   // ---- drawing
   function kick() { if (!raf && !dead) raf = requestAnimationFrame(frame); }
@@ -1126,7 +1309,7 @@ function pmMount(el, s, F) {
     const x0 = Math.floor(P[0] - R), x1 = Math.ceil(P[0] + R), y0 = Math.floor(P[1] - R), y1 = Math.ceil(P[1] + R);
     // David, 2026-10-09: "your favorites glowing on the map" -- one Set built once a frame (fvArtList's own
     // {i,...} records already carry the gallery index), not a per-cell favorites lookup.
-    const favSet = typeof fvArtList === "function" ? new Set(fvArtList().map(r => r.i)) : null;
+    const favSet = new Set(pmFavList(F).map(r => r.i));
     drawn = []; const wantImg = [], wantT1 = new Set();
     for (let y = Math.max(y0, lay.gy0); y <= Math.min(y1, lay.gy0 + lay.GH - 1); y++) {
       const row = (y - lay.gy0) * lay.GW;
@@ -1156,7 +1339,7 @@ function pmMount(el, s, F) {
         const m = Math.exp(-((z / .5) ** 2));
         let w = tw, h = th;
         if (m > .02) {
-          const ar = GAL.ar[i], B = d * (1 + .4 * m), cw = ar > 1 ? B / ar : B, ch = ar > 1 ? B : B * ar;
+          const ar = F.G.ar[i], B = d * (1 + .4 * m), cw = ar > 1 ? B / ar : B, ch = ar > 1 ? B : B * ar;
           w = tw + (cw - tw) * m; h = th + (ch - th) * m;
         }
         drawn.push({ k, i, x: mx, y: my, d, z, m, w, h });
@@ -1199,14 +1382,14 @@ function pmMount(el, s, F) {
       // shared edge snaps to the same device pixel from both sides) instead of snapping a center + a width,
       // which can leave a 1px seam or overlap between a cell and the neighbor it's supposed to touch
       const X = snapPx(X0), Y = snapPx(Y0), w = snapPx(X0 + w0) - X, h = snapPx(Y0 + h0) - Y;
-      if (m > .3) { ctx.save(); ctx.shadowColor = "rgba(0,0,0,.55)"; ctx.shadowBlur = 28; ctx.shadowOffsetY = 8; ctx.fillStyle = pmHex(i); ctx.fillRect(X, Y, w, h); ctx.restore(); }
-      else { ctx.fillStyle = pmHex(i); ctx.fillRect(X, Y, w, h); }
+      if (m > .3) { ctx.save(); ctx.shadowColor = "rgba(0,0,0,.55)"; ctx.shadowBlur = 28; ctx.shadowOffsetY = 8; ctx.fillStyle = pmHex(i, F); ctx.fillRect(X, Y, w, h); ctx.restore(); }
+      else { ctx.fillStyle = pmHex(i, F); ctx.fillRect(X, Y, w, h); }
       // tier 0: the one shared atlas sheet, drawn for EVERY cell the instant it's loaded -- no per-cell request,
       // so the whole archive shows its real tiny colors/shapes from the first frame the sheet lands, not just
       // whichever few hundred cells have individually streamed in by then. The base picture layer every other
       // tier below crossfades on top of (drawImage over drawImage, alpha<1 blends with what's already there).
-      if (PM_ATLAS && PM_ATLAS.bm0s) {
-        const ts0 = pmTState(tierH, i), r0 = pmT0Rect(PM_ATLAS.man, i), bm0 = PM_ATLAS.bm0s[r0.sheet];
+      if (atlas && atlas.bm0s) {
+        const ts0 = pmTState(tierH, i), r0 = pmT0Rect(atlas.man, i), bm0 = atlas.bm0s[r0.sheet];
         const a0 = pmFadeAlpha(ts0, "f0", t, 220, RM); if (a0 < 1) fading = true;
         if (bm0) { ctx.globalAlpha = a0; ctx.drawImage(bm0, r0.x, r0.y, r0.s, r0.s, X, Y, w, h); ctx.globalAlpha = 1; }
       }
@@ -1214,13 +1397,13 @@ function pmMount(el, s, F) {
       // request each, cached) once the cell reads as more than a speck -- replaces tier 0 by drawing over it.
       // hysteresis() (defined above for tier 2's own big/baked-square switch) keeps a cell parked near the
       // PM_T1_MIN boundary from flapping between tier 0 and tier 1 the same way it does for tier 2 below.
-      if (PM_ATLAS) {
-        const ts1 = pmTState(tierH, i), g = pmT1Group(PM_ATLAS.man, i);
+      if (atlas) {
+        const ts1 = pmTState(tierH, i), g = pmT1Group(atlas.man, i);
         if (hysteresis(ts1, "t1On", b.d / PM_T1_MIN, .75)) {
           wantT1.add(g);
           const te = t1.get(g);
           if (te && te.st === 1) {
-            const r1 = pmT1Rect(PM_ATLAS.man, i);
+            const r1 = pmT1Rect(atlas.man, i);
             const a1 = pmFadeAlpha(ts1, "f1", t, 220, RM); if (a1 < 1) fading = true;
             ctx.globalAlpha = a1;
             const q = r1.s, sw = w >= h ? q : q * w / h, sh = h >= w ? q : q * h / w;
@@ -1255,7 +1438,7 @@ function pmMount(el, s, F) {
         }
         ctx.globalAlpha = 1;
       }
-      if (b.d >= 40 && GAL.mean[i * 3] < 24) { ctx.strokeStyle = "rgba(236,232,223,.14)"; ctx.lineWidth = 1; ctx.strokeRect(X + .5, Y + .5, w - 1, h - 1); }
+      if (b.d >= 40 && F.G.mean[i * 3] < 24) { ctx.strokeStyle = "rgba(236,232,223,.14)"; ctx.lineWidth = 1; ctx.strokeRect(X + .5, Y + .5, w - 1, h - 1); }
       // your favorites glow (the same pink the heart icon turns "on"), kept subtle: a thin ring, not a halo
       if (favSet && favSet.size && b.d >= 7 && favSet.has(i)) {
         ctx.save(); const lw = Math.max(1.25, Math.min(2, b.d * .018));
@@ -1333,7 +1516,7 @@ function pmMount(el, s, F) {
     // at the 14px threshold above (zMin() also caps how far you can zoom out), so every on-screen eligible cell
     // now gets a turn in the queue, nearest the middle first, same as before.
     imgs.want(wantImg.reverse().slice(0, 2000));
-    if (PM_ATLAS) t1.want(wantT1);   // a handful of groups at most -- every cell on screen shares one of a few dozen sheets
+    if (atlas) t1.want(wantT1);   // a handful of groups at most -- every cell on screen shares one of a few dozen sheets
 
     const c = nearestK(P[0], P[1]); setCenter(c);
   }
@@ -1416,7 +1599,7 @@ function pmMount(el, s, F) {
       if (now - lastTapAt < 300) {
         clearTimeout(tapTimer); tapTimer = 0; lastTapAt = 0;
         bloomAt(x, y); toggleHeart(true);   // double-tap only adds, like the long press just above — never un-hearts
-        if (typeof sfxColor === "function") sfxColor(pmHex(b.k));
+        if (typeof sfxColor === "function") sfxColor(pmHex(b.k, F));
         return;
       }
       lastTapAt = now;
@@ -1444,9 +1627,14 @@ function pmMount(el, s, F) {
   function openK(k) {
     const i = lay.items[k];
     PM_PAN.set(lay.key, { x: lay.x[k], y: lay.y[k], s: Z, cardOpen: true });
-    // the map's color filter can hold a whole set (?c=hex1,hex2…, from a pair/set page's "as a map" link); carry
-    // all of it onto the painting, not just the first one (David, 2026-10-08).
-    buzz(8); galleryPage(i, true, s.f.hexes.length > 1 ? s.f.hexes : (s.f.hexes[0] || null), s.f.hexes.length ? s.f.tol : null);
+    buzz(8);
+    // David, 2026-10-10: Design objects and Photography are already fully loaded, whole nodes -- their own
+    // page opener takes the node (or id) directly, no gallery index to resolve. Paintings keep the exact path
+    // they always had, including carrying a whole color SET (?c=hex1,hex2…, from a pair/set page's "as a map"
+    // link) onto the painting, not just the first one (David, 2026-10-08).
+    if (F.col === "design" && typeof doOpenObject === "function") return doOpenObject(F.nodes[i].id);
+    if (F.col === "photography" && typeof paintingPage === "function") return paintingPage(F.nodes[i]);
+    galleryPage(i, true, s.f.hexes.length > 1 ? s.f.hexes : (s.f.hexes[0] || null), s.f.hexes.length ? s.f.tol : null);
   }
   el.querySelector("[data-pmopen]").onclick = () => { if (centerK >= 0) openK(centerK); };
   heart.onclick = () => toggleHeart(false);
@@ -1507,7 +1695,7 @@ function pmMount(el, s, F) {
   }
   function rebuild() {
     // the address follows (replace: a filter change is the same map, not a new page)
-    try { ROUTE_NOW = "#/" + pmRouteOf(s).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {}
+    try { ROUTE_NOW = "#/" + pmRouteOf(s, F).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {}
     build(false);
   }
   // ---- the corner and the title both open one compact, non-modal Arrange|Filter sheet (David, 2026-10-09: the
@@ -1556,9 +1744,11 @@ function pmMount(el, s, F) {
     // ---- Arrange: shape, place by (only where a painting's own color decides position), center on, and the
     // arc's old "Around this one" is now "Center on this painting" (also on the bottom card) ----
     function renderArrange() {
-      const mid = centerK >= 0 ? lay.items[centerK] : -1, md = mid >= 0 ? glDetailNow(mid) : null;
+      const mid = centerK >= 0 ? lay.items[centerK] : -1, md = mid >= 0 ? pmDetailNow(mid, F) : null;
       const list = pmList(s, F);
       paneArr.innerHTML = `
+        <div class="cx-sec"><b>Collection</b></div>
+        <div class="hm-seg pmx-col-seg" role="radiogroup" aria-label="Collection">${PM_COLLECTIONS.map(([k, t]) => `<button class="${(s.col || "paintings") === k ? "on" : ""}" data-pmcol="${k}">${esc(t)}</button>`).join("")}</div>
         <div class="cx-sec"><b>Shape</b></div>
         <div class="hm-arr pmx-arr" role="radiogroup" aria-label="Arrange by">${PM_ARR.map(([k, t]) => `
           <button class="hm-arr-b${s.arr === k ? " on" : ""}" data-pmarr="${k}" role="radio" aria-checked="${s.arr === k}">
@@ -1569,13 +1759,22 @@ function pmMount(el, s, F) {
           <div class="hm-seg" role="radiogroup" aria-label="Place by">${PM_PLACE.map(([k, t]) => `<button class="${(s.place || "avg") === k ? "on" : ""}" data-pmplace="${k}">${esc(t)}</button>`).join("")}</div>` : ""}
         <div class="cx-sec"><b>Center on</b></div>
         <div class="hm-seg hm-seg-n pmx-center-seg">${PM_CENTER.map(([k, t]) => {
-          const found = t === "A favorite" ? (typeof fvArtList === "function" && fvArtList().length) : true;
+          const found = t === "A favorite" ? pmFavList(F).length : true;
           return `<button data-pmcenterk="${k}"${found ? "" : " disabled"}>${esc(t)}</button>`;
         }).join("")}</div>
         <div class="cx-sec"><b>When</b></div>
-        <div class="pmx-scrub"><input type="range" min="${pmYearRange()[0]}" max="${pmYearRange()[1]}" step="5" value="${s.upToYear == null ? pmYearRange()[1] : s.upToYear}" data-pmscrub aria-label="Reveal paintings up to this year">
+        <div class="pmx-scrub"><input type="range" min="${pmYearRange(F)[0]}" max="${pmYearRange(F)[1]}" step="5" value="${s.upToYear == null ? pmYearRange(F)[1] : s.upToYear}" data-pmscrub aria-label="Reveal paintings up to this year">
           <button class="pmx-scrub-play${scrubTimer ? " on" : ""}" data-pmscrubplay aria-label="${scrubTimer ? "Pause" : "Play"}">${scrubTimer ? PM_ICON.pause : ICON.play}</button></div>
-        <p class="hm-arr-sub" data-pmscrublabel>${s.upToYear == null ? "Showing every year" : `Up to ${s.upToYear}${s.upToYear >= pmYearRange()[1] ? "" : " (undated paintings join at the end)"}`}</p>`;
+        <p class="hm-arr-sub" data-pmscrublabel>${s.upToYear == null ? "Showing every year" : `Up to ${s.upToYear}${s.upToYear >= pmYearRange(F)[1] ? "" : " (undated paintings join at the end)"}`}</p>`;
+      qa$("[data-pmcol]").forEach(b => b.onclick = () => {
+        const col = b.dataset.pmcol; if (col === (s.col || "paintings")) return;
+        buzz(6); close();
+        // a collection switch is a fresh map, start to finish (new G/F, new facets, new everything the sheet's
+        // own tabs show) -- re-opening with { fresh: true } re-mounts cleanly rather than trying to hot-swap
+        // F/G under the running draw loop's closures (every function above reads F fresh on every call, but
+        // THIS closure's own captured `F`/`s` can't be reassigned mid-session without re-running pmMount).
+        pmOpen({ col, arr: "color", f: pmFilterFresh(), seed: -1, fav: 0, place: "avg", upToYear: null, mag: s.mag }, { fresh: true });
+      });
       qa$("[data-pmarr]").forEach(b => b.onclick = () => {
         const id = b.dataset.pmarr; buzz(5);
         if (PM_NEEDS_SEED.has(id)) { if (mid < 0) return; s.seed = mid; s.arr = id; }
@@ -1586,12 +1785,12 @@ function pmMount(el, s, F) {
         const p = b.dataset.pmplace; if ((s.place || "avg") === p) return; buzz(5); s.place = p; rebuild(); renderArrange();
       });
       qa$("[data-pmcenterk]").forEach(b => b.onclick = () => {
-        const fn = PM_CENTER.find(c => c[0] === b.dataset.pmcenterk)[2], found = fn(list);
+        const fn = PM_CENTER.find(c => c[0] === b.dataset.pmcenterk)[2], found = fn(list, F);
         if (found < 0) return; buzz(6); s.seed = found; if (!PM_NEEDS_SEED.has(s.arr)) s.arr = "spiral"; rebuild(); renderArrange();
       });
       q$("[data-pmscrub]").oninput = e => {
         if (scrubTimer) { clearInterval(scrubTimer); scrubTimer = 0; }
-        const v = +e.target.value, [, hi] = pmYearRange(); s.upToYear = v >= hi ? null : v; rebuild(); renderArrange();
+        const v = +e.target.value, [, hi] = pmYearRange(F); s.upToYear = v >= hi ? null : v; rebuild(); renderArrange();
       };
       q$("[data-pmscrubplay]").onclick = () => { buzz(6); scrubPlay(); renderArrange(); };
       // Magnify (David, 2026-10-10): live-applied without a full rebuild() -- M0N only feeds the lens (M0/A via
@@ -1600,7 +1799,7 @@ function pmMount(el, s, F) {
       // a "fresh" key with no PM_PAN entry yet). Direct Z re-clamp + redraw instead; the address updates once the
       // drag ends (change, not input) so a mid-drag value never clutters the URL/history.
       q$("[data-pmmag]").oninput = e => { s.mag = clamp(+e.target.value, 0, 1); M0N = pmM0NOf(s.mag); lensAt(); Z = clamp(Z, zMin(), ZMAX); kick(); };
-      q$("[data-pmmag]").onchange = () => { try { ROUTE_NOW = "#/" + pmRouteOf(s).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {} };
+      q$("[data-pmmag]").onchange = () => { try { ROUTE_NOW = "#/" + pmRouteOf(s, F).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {} };
     }
     // ---- Filter: every facet with its count, applied live (no separate confirm -- matches the color map's
     // non-modal Colors/Arrange sheet). David, 2026-10-10: "select multiple things -- a color range, a time
@@ -1611,13 +1810,13 @@ function pmMount(el, s, F) {
     function renderFilter() {
       const res = pmRun(s, F), C = res.counts;
       let n = res.list.length;
-      const favIds = typeof fvArtList === "function" ? fvArtList() : [], favSet = new Set(favIds.map(r => r.i));
+      const favIds = pmFavList(F), favSet = new Set(favIds.map(r => r.i));
       if (s.fav) n = Array.from(res.list).filter(i => favSet.has(i)).length;
       const favN = Array.from(res.list).filter(i => favSet.has(i)).length;
       const chip = (attr, val, label, cnt, on) => `<button class="${on ? "on" : ""}" ${attr}="${esc(String(val))}"${!cnt && !on ? " disabled" : ""}>${esc(label)}${cnt != null ? `<em>${cnt.toLocaleString()}</em>` : ""}</button>`;
       const f = s.f;
       const topMulti = (names, countArr, selSet) => names.map((name, j) => ({ name, v: j + 1, n: countArr[j + 1] })).filter(x => x.n || selSet.has(x.v)).sort((a, b) => b.n - a.n);
-      const [yrLo, yrHi] = pmYearRange();
+      const [yrLo, yrHi] = pmYearRange(F);
       const y0 = f.y0 == null ? yrLo : f.y0, y1 = f.y1 == null ? yrHi : f.y1;
       const dLo = Math.max(0, Math.floor((yrLo - XB_DEC0) / 10)), dHi = Math.min(XB_NDEC - 1, Math.floor((yrHi - XB_DEC0) / 10));
       const decadeBars = Array.from({ length: dHi - dLo + 1 }, (_, k) => C.when[dLo + k]);
@@ -1638,8 +1837,10 @@ function pmMount(el, s, F) {
         const cnt = idx.reduce((s2, v) => s2 + (C.co[v] || 0), 0);
         return chip("data-pmregion", key, label, cnt, on);
       }).join("");
+      const nounP = pmColLabel(F, "nounP"), isPaintings = !F.col || F.col === "paintings";
+      const painterLab = pmColLabel(F, "painter"), coLab = pmColLabel(F, "co"), musLab = pmColLabel(F, "mus"), mvLab = pmColLabel(F, "mv");
       q$("[data-pmbody]").innerHTML = `
-        <div class="pmx-sh-top"><b>Filter</b><span>${n.toLocaleString()} ${n === 1 ? "painting" : "paintings"}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
+        <div class="pmx-sh-top"><b>Filter</b><span>${n.toLocaleString()} ${n === 1 ? pmColLabel(F, "noun") : nounP}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
         ${favIds.length ? `<div class="pmx-row"><span class="pmx-lab">Yours</span><div class="pmx-chips">${chip("data-pmfav", 1, "Your favorites", favN, !!s.fav)}</div></div>` : ""}
         <div class="pmx-row"><span class="pmx-lab">Color</span><div class="pmx-sw">${colsSorted.map(c => `<button data-pmhex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" class="${f.hexes.includes(c.h.toUpperCase()) ? "on" : ""}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
           ${f.hexes.length ? `<p class="pmx-cap2">${f.hexes.map(h => `<i style="--c:${h}"></i>`).join("")}${esc(f.hexes.length === 1 ? (f.name || nameOf(f.hexes[0]).text) : f.hexes.length + " colors")} <span>· within ${f.tol}%</span></p>
@@ -1659,17 +1860,17 @@ function pmMount(el, s, F) {
             <input type="range" min="${yrLo}" max="${yrHi}" step="1" value="${y0}" data-pmy0 aria-label="From year">
             <input type="range" min="${yrLo}" max="${yrHi}" step="1" value="${y1}" data-pmy1 aria-label="To year"></div>
           <p class="pmx-cap3"><span>${y0}</span><span>${y1}</span></p></div>
-        <div class="pmx-row"><span class="pmx-lab">Place</span>
-          <p class="pmx-lab2">Regions</p>
-          <div class="pmx-chips">${regionRow}</div>
-          <p class="pmx-lab2">Countries</p>
-          <label class="search pmx-find"><span>${ICON.search}</span><input data-pmcoq type="search" placeholder="Find a country" value="${esc(coq)}" autocomplete="off"></label>
+        <div class="pmx-row"><span class="pmx-lab">${esc(coLab)}</span>
+          ${isPaintings ? `<p class="pmx-lab2">Regions</p>
+          <div class="pmx-chips">${regionRow}</div>` : ""}
+          <p class="pmx-lab2">${isPaintings ? "Countries" : coLab}</p>
+          <label class="search pmx-find"><span>${ICON.search}</span><input data-pmcoq type="search" placeholder="Find a ${esc(coLab.toLowerCase())}" value="${esc(coq)}" autocomplete="off"></label>
           <div class="pmx-chips">${coList.map(x => chip("data-pmco", x.v, x.name, x.n, coSelSet.has(x.v))).join("")}${!coq && !fopen.co && cos.length > 10 ? `<button class="pmx-more" data-pmmore="co">All ${cos.length}</button>` : ""}</div></div>
-        ${mvs.length ? `<div class="pmx-row"><span class="pmx-lab">Movement</span><div class="pmx-chips">${mvs.map(x => chip("data-pmmv", x.v, x.name, x.n, mvSelSet.has(x.v))).join("")}</div></div>` : ""}
-        <div class="pmx-row"><span class="pmx-lab">Museum</span><div class="pmx-chips">${musAll.map(x => chip("data-pmmus", x.v, x.name, x.n, musSelSet.has(x.v))).join("")}</div></div>
-        <div class="pmx-row"><span class="pmx-lab">Painter</span>
-          <label class="search pmx-find"><span>${ICON.search}</span><input data-pmq type="search" placeholder="Find a painter" value="${esc(fq)}" autocomplete="off"></label>
-          <div class="pmx-chips">${pList.map(x => chip("data-pmp", x.v, x.name, x.n, paSelSet.has(x.v))).join("")}${!fq && !fopen.painter && pas.length > 10 ? `<button class="pmx-more" data-pmmore="painter">More painters</button>` : ""}</div></div>`;
+        ${mvs.length ? `<div class="pmx-row"><span class="pmx-lab">${esc(mvLab)}</span><div class="pmx-chips">${mvs.map(x => chip("data-pmmv", x.v, x.name, x.n, mvSelSet.has(x.v))).join("")}</div></div>` : ""}
+        <div class="pmx-row"><span class="pmx-lab">${esc(musLab)}</span><div class="pmx-chips">${musAll.map(x => chip("data-pmmus", x.v, x.name, x.n, musSelSet.has(x.v))).join("")}</div></div>
+        <div class="pmx-row"><span class="pmx-lab">${esc(painterLab)}</span>
+          <label class="search pmx-find"><span>${ICON.search}</span><input data-pmq type="search" placeholder="Find a ${esc(painterLab.toLowerCase())}" value="${esc(fq)}" autocomplete="off"></label>
+          <div class="pmx-chips">${pList.map(x => chip("data-pmp", x.v, x.name, x.n, paSelSet.has(x.v))).join("")}${!fq && !fopen.painter && pas.length > 10 ? `<button class="pmx-more" data-pmmore="painter">More ${esc(nounP)}</button>` : ""}</div></div>`;
       const inp = q$("[data-pmq]");
       inp.oninput = () => { fq = inp.value.trim(); const pos = inp.selectionStart; renderFilter(); const ni = q$("[data-pmq]"); ni.focus(); try { ni.setSelectionRange(pos, pos); } catch (e) {} };
       const coInp = q$("[data-pmcoq]");
@@ -1726,7 +1927,7 @@ function pmMount(el, s, F) {
     // QA (tier 0/1 atlas): whether the one shared tier-0 sheet has finished loading (every drawn cell gets its
     // own real tile the instant this is true -- see the draw loop's unconditional tier-0 pass), and how many of
     // the tier-1 groups the current view touched have loaded their sheet.
-    _qaAtlasReady: () => !!(PM_ATLAS && PM_ATLAS.bm0s && PM_ATLAS.bm0s.length),
+    _qaAtlasReady: () => !!(atlas && atlas.bm0s && atlas.bm0s.length),
     // QA: the zoom-out floor for the CURRENT layout -- PM_CTRL.zoom(_qaZMin()) should show the whole thing
     // (drawn === count), confirming zMin() isn't capped below what the layout actually needs (David, 2026-10-10)
     _qaZMin: () => zMin(),
@@ -1752,7 +1953,7 @@ function pmMount(el, s, F) {
       }
       return { fits: maxX <= cx + 2 && maxY <= cy + 2, maxX, maxY, halfW: cx, halfH: cy };
     },
-    _qaTier1Stats: () => { let have = 0, want = 0; const man = PM_ATLAS && PM_ATLAS.man; if (man) for (const b of drawn) { const g = pmT1Group(man, b.i); want++; const e = t1.get(g); if (e && e.st === 1) have++; } return { want, have }; } };
+    _qaTier1Stats: () => { let have = 0, want = 0; const man = atlas && atlas.man; if (man) for (const b of drawn) { const g = pmT1Group(man, b.i); want++; const e = t1.get(g); if (e && e.st === 1) have++; } return { want, have }; } };
 }
 
 // this file can load after router.js (on first use): give pmOpen its address now
