@@ -3,6 +3,7 @@
 //   map · fresh · shelf · eye · daily (gameDailyBoard in a host box) · result · line · line-ans · line-miss · whose · wplay (Whose palette? playing)
 //   first (the first board) · grad1 / grad2 / grad3 (a gradient round, gentle to rich) · combo (a combined-axis
 //   round) · k2 (a 2-odd round) · k4 (a 4-odd round) · zen (Zen mode) · big (a 16+ expert-size board)
+//   · pause (the on-demand pause menu open)
 //   ans (tap the right tile) · miss (tap a wrong tile) · end (the end screen) · mix-<id>[-ans] · step-<kind>
 function ooShotState() {
   const st = ooS(), day = today();
@@ -44,6 +45,8 @@ function ooShot(arg) {
   if (what === "big") { fresh(); const s = ooSimpleState(); s.cols = 16; save();
     return ooMap({ forceShape: "grad3", zen: true, palette: { colors: ["#9E9E83", "#576067", "#A99C4C", "#9D5D23"], label: "Wassily Kandinsky, Composition VII, 1913", link: { kind: "painting", id: "painting-composition-vii" } } }); }
   if (what === "zen") { fresh(); return ooMap({ zen: true }); }
+  // the on-demand pause menu (the ONE control during play): tap the pause mark, same as a real player would
+  if (what === "pause") { fresh(); ooMap({ zen: true }); return setTimeout(() => { const b = document.querySelector(".oo-pause-mark"); if (b) b.click(); }, 700); }
   if (what === "ans") { fresh(); ooMap(); return setTimeout(() => ooShotTap(true), 900); }
   if (what === "miss") { fresh(); ooMap(); return setTimeout(() => ooShotTap(false), 900); }
   if (what === "end") {

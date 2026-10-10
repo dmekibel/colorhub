@@ -961,7 +961,7 @@ function ooSimpleGradColors(rows, cols, richness, stopHexes, skill, rnd = Math.r
   const raw = stops.map(ooOklab), shape = ooPick(R.shapes, rnd);
   // a beginner's sweep keeps only part of the source palette's own contrast (pulled toward its mean, same colors,
   // gentler spread); an expert sees the palette at its own full contrast. Never pulled so far it's flat.
-  const pull = clamp(ooLerp(.4, 1, skill) * ooBtw(.92, 1.08, rnd), .3, 1);
+  const pull = clamp(ooLerp(.55, 1, skill) * ooBtw(.94, 1.06, rnd), .5, 1);   // never pulled so gentle the field reads as flat (David, 2026-10-11: "each board is a gorgeous color field")
   const mean = raw[0].map((_, i) => raw.reduce((a, s) => a + s[i], 0) / raw.length);
   const pulled = raw.map(s => ooOklabMixRaw(mean, s, pull));
   const colors = cells.map(c => {

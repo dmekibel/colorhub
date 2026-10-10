@@ -1428,32 +1428,42 @@ scenario("train", "every entry on the Train menu opens something (nothing locked
   t.notes.push(`${n} Train entries and ${d} drills opened`);
 });
 
-// David, 2026-10-10 ("very simple, always adapting"): one tap from the Train shelf lands straight on a 3 x 3
-// board -- no setup, no journey map, no level picker, no customize sheet. Arcade (a timer, three lives) is the
-// default; Zen is one small pill, not a menu. A miss reveals both colors; three misses in Arcade ends the run on
-// the three-bar end screen, which offers Play again / Keep going, never a map.
+// David, 2026-10-10 ("very simple, always adapting"), then 2026-10-11 ("TRUE full screen"): one tap from the
+// Train shelf lands straight on a true full-screen board -- no title, no counter, no always-visible buttons.
+// One subtle pause mark (top-left) is the only control; it opens a centered pause menu (Resume, Zen/Arcade,
+// Settings, Exit) over a dimmed field. A miss reveals both colors full-screen; three misses in Arcade ends the
+// run on the three-bar end screen, which offers Play again / Keep going, never a map.
 const ooTapRound = async t => {
   await t.waitFor(".oo-board .oo-t", 6000, "the board");
   t.expect(t.$$(".oo-board .oo-t").length >= 9, `${t.$$(".oo-board .oo-t").length} tiles`);
   const first = t.$("#oostage").innerHTML;
   await t.click(".oo-board .oo-t", { wait: 1200 });
-  t.expect(t.$("#oostage").innerHTML !== first || t.$(".result") || t.$("#oofoot").innerText.length > 5, "tapping a tile changed nothing");
+  t.expect(t.$("#oostage").innerHTML !== first || t.$(".result") || t.$(".oo-reveal2"), "tapping a tile changed nothing");
   let taps = 1;
   for (let i = 0; i < 60 && !t.$(".result"); i++) {
-    const b = t.$("[data-next]") || t.$(".oo-board .oo-t:not(.ring):not(.miss):not(:disabled)");
+    const b = t.$(".oo-reveal2") || t.$(".oo-board .oo-t:not(.ring):not(.miss):not(:disabled)");
     if (b) { await t.click(b, { force: true, wait: 400 }); taps++; } else await t.sleep(300);
   }
   await t.waitFor(".result", 6000, "the end screen");
   t.expect(t.$(".result").innerText.length > 40, "the end screen is empty");
   return taps;
 };
-scenario("train", "Odd one out: one tap from the shelf to the board, then a whole run", async t => {
+scenario("train", "Odd one out: one tap from the shelf to a true full-screen board, then a whole run", async t => {
   await t.open("#shot=gx:home", { settle: 600 });
   const st = await t.waitFor("[data-oo-map]", 6000, "the Odd one out shelf");
   await t.click(st, { wait: 700 });
   t.expect(!t.$("[data-play]") && !t.$(".oo-pk") && !t.$(".oo-sl"), "a first tap on the shelf should land on the board, not a setup screen");
-  t.expect(t.$(".oo-hearts") && t.$$(".oo-hearts i").length === 3, "Arcade should show three lives");
-  t.expect(/arcade/i.test(t.text(".oo-zenpill")), "the header should offer a Zen pill, defaulting to Arcade");
+  t.expect(!t.$(".oo-hearts") && !t.$(".oo-zenpill"), "nothing but the board and the pause mark should be visible during play");
+  t.expect(t.$(".oo-pause-mark"), "a subtle pause mark should always be present");
+  t.expect(t.$(".oo-pause-hint.on"), "the very first session should show the one-time pause hint");
+  // the pause mark opens the menu: lives, the Zen/Arcade pill and Settings all live there, not on the board
+  await t.click(".oo-pause-mark", { wait: 400 });
+  t.expect(t.$(".oo-pausecard.on"), "tapping the pause mark should open the pause card");
+  t.expect(t.$(".oo-hearts") && t.$$(".oo-hearts i").length === 3, "the pause card should show three lives in Arcade");
+  t.expect(/arcade/i.test(t.text(".oo-zenpill")), "the pause card should offer a Zen pill, defaulting to Arcade");
+  t.expect(t.$$(".oo-pset .item").length === 4, "the pause card should offer four settings: sound, haptics, names, timer");
+  await t.click("[data-resume]", { wait: 400 });
+  t.expect(!t.$(".oo-pausecard.on"), "Resume should close the pause card");
   const taps = await ooTapRound(t);
   t.notes.push(`${taps} taps to the end screen (first-timer, direct entry, Arcade's three lives)`);
   t.expect(!t.$(".result [data-map]") && t.$(".result [data-again]") && t.$(".result [data-keep]"), "the end screen should offer Play again / Keep going, not a map");
@@ -1463,13 +1473,13 @@ scenario("train", "Odd one out: one tap from the shelf to the board, then a whol
   await t.waitFor(".oo-board .oo-t", 6000, "the board, second time");
 });
 
-scenario("train", "Odd one out: Zen is one pill (no timer, no lives), a gradient round, a combined-axis round, a 2-odd round, a miss, the reveal card", async t => {
+scenario("train", "Odd one out: Zen (no timer), a gapless full-bleed gradient board, a combined-axis round, a 2-odd round, a miss, the full-screen reveal", async t => {
   await t.open("#shot=gx:oo:zen", { settle: 600 });
   await t.waitFor(".oo-board .oo-t", 6000, "a Zen board");
-  t.expect(!t.$(".oo-hearts") && !t.$(".oo-tlimit"), "Zen should show no lives and no timer");
-  t.expect(t.$(".oo-ztally"), "Zen should show a quiet running tally");
-  t.expect(t.$(".oo-zenpill.on") && /zen/i.test(t.text(".oo-zenpill")), "the Zen pill should read on and say Zen");
+  t.expect(!t.$(".oo-hearts") && !t.$(".oo-tlimit") && !t.$(".oo-zenpill"), "nothing but the board should show during Zen play");
   t.expect(t.$(".oo-board.oo-full"), "the board should fill its play area (oo-full), not sit in a fixed square box");
+  const gap = t.ev("(() => { const b = document.querySelector('.oo-board.oo-full'); if (!b) return null; const ts = [...b.querySelectorAll('.oo-t')].map(x => x.getBoundingClientRect()); if (ts.length < 2) return null; return Math.abs(ts[1].left - ts[0].right); })()");
+  t.expect(gap == null || gap < 1, `full-bleed tiles should sit edge to edge with no gap, got ${gap}px`);
 
   // a gradient round: the WHOLE grid is one smooth palette (not a per-tile stripe pattern) -- every tile's own
   // color should differ a little from its neighbors, and exactly one should sit off of where the sweep says it
@@ -1480,14 +1490,14 @@ scenario("train", "Odd one out: Zen is one pill (no timer, no lives), a gradient
   t.expect(gridType === "grad3", `a forced grad3 round should say gridType grad3, got ${gridType}`);
   t.expect(uniq >= 7, `a gradient board's tiles should mostly be distinct colors, only ${uniq} of 9 were`);
   t.expect(gAns === 1, "a plain gradient round should have one odd tile");
-  // tap the odd tile and check the reveal card: two big named halves, a difference line, a gradient strip, a source
+  // tap the odd tile and check the full-screen reveal: two big named halves, a difference line, a source
   const tiles = t.$$(".oo-board .oo-t"), at = t.ev("OO_LAST.ans[0]");
   await t.click(tiles[at], { wait: 500 });
-  await t.waitFor(".oo-reveal", 4000, "the reveal card");
-  t.expect(t.$$(".oo-rv-half").length === 2, "the reveal should show two big named color halves");
-  t.expect(t.$(".oo-rv-diff").innerText.length > 2, "the reveal should say how the colors differ");
-  t.expect(t.$(".oo-rv-strip"), "a gradient round's reveal should show the gradient's own key stops");
-  t.expect(t.$(".oo-rv-src"), "the reveal should name where the palette came from");
+  await t.waitFor(".oo-reveal2", 4000, "the full-screen reveal");
+  t.expect(t.$$(".oo-rv2-half").length === 2, "the reveal should show two big named color halves");
+  t.expect(t.$(".oo-rv2-diff").innerText.length > 2, "the reveal should say how the colors differ");
+  t.expect(t.$(".oo-rv2-src"), "the reveal should name where the palette came from");
+  await t.click(".oo-reveal2", { wait: 400 });
 
   // a combined-axis round: the one odd tile moves along more than one judgment at once
   await t.open("#shot=gx:oo:combo", { settle: 600 });
@@ -1503,8 +1513,7 @@ scenario("train", "Odd one out: Zen is one pill (no timer, no lives), a gradient
   await t.open("#shot=gx:oo:miss", { settle: 1400 });
   await t.waitFor(".oo-t.ring", 6000, "the odd tile ringed after a miss");
   t.expect(t.$(".oo-t.miss"), "the tapped (wrong) tile should be marked");
-  t.expect(t.$(".oo-reveal") && t.$$(".oo-rv-half").length === 2, "a miss should still show the reveal card's two named halves");
-  t.expect(t.$(".oo-board.oo-settle"), "the board should settle back while the reveal card is up");
+  t.expect(t.$(".oo-reveal2") && t.$$(".oo-rv2-half").length === 2, "a miss should still show the full-screen reveal's two named halves");
 });
 
 scenario("train", "Odd one out: the end screen names the day's edge with three bars", async t => {

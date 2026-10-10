@@ -187,9 +187,11 @@ function ooBoardHTML(r, o = {}) {
   // be square") and fill their stage edge to edge (oo-full), instead of the fixed aspect-ratio box every other
   // board type still uses.
   const full = r.rows != null, longSide = Math.max(r.rows || r.cols, r.cols);
-  // big grids (up to ~20 a side) keep about a 2 px seam and small corners, so the tiles stay big enough to see
+  // big grids (up to ~20 a side) keep about a 2 px seam and small corners, so the tiles stay big enough to see.
+  // The simple game's full-bleed board is completely gapless instead (David, 2026-10-11: "no space between
+  // tiles -- completely adjacent, edge to edge"), tile squares with no inner rounding.
   const dense = longSide > 6 && (r.b === "grid" || r.b === "busy");
-  const gap = r.b === "strip" ? .008 : r.b === "honey" || r.b === "ring" ? 0 : r.b === "mosaic" ? 0 : dense ? Math.min(.016, .09 / longSide) : .016;
+  const gap = full ? 0 : r.b === "strip" ? .008 : r.b === "honey" || r.b === "ring" ? 0 : r.b === "mosaic" ? 0 : dense ? Math.min(.016, .09 / longSide) : .016;
   const g = r.ground, bg = !g ? "" : g.split === "v" ? `background:linear-gradient(90deg,${g.a} 50%,${g.c} 50%)` : g.split === "h" ? `background:linear-gradient(180deg,${g.a} 50%,${g.c} 50%)`
     : g.split === "d" ? `background:linear-gradient(135deg,${g.a} 50%,${g.c} 50%)` : `background:conic-gradient(${g.a} 0 25%,${g.c} 0 50%,${g.a} 0 75%,${g.c} 0)`;
   const pct = x => (x * 100).toFixed(3) + "%";
@@ -215,8 +217,20 @@ function ooRipple(board, from) {
 // was considered and deliberately left out -- see the note by ooShimmer below.
 // ======================================================================
 // a solved board melts away as the next one arrives: a short-lived clone fades/blurs out in a wave from its own
-// center while the real board underneath renders and settles in, so advancing never waits on this to finish
+// center while the real board underneath renders and settles in, so advancing never waits on this to finish.
+// Only one ghost is ever alive at a time (David, 2026-10-11: "rapid taps must not stack ghosts") -- a rapid
+// retap cancels and removes the previous clone's timer and node immediately before starting the new one, and a
+// backgrounded tab (visibilitychange) sweeps up any ghost left mid-fade instead of leaving a stuck half-faded
+// board when the player comes back.
+let OO_GHOST = null;   // { clone, timer } for the one ghost currently fading, or null
+function ooGhostCleanup() {
+  if (!OO_GHOST) return;
+  clearTimeout(OO_GHOST.timer);
+  OO_GHOST.clone.remove();
+  OO_GHOST = null;
+}
 function ooMeltGhost(ui) {
+  ooGhostCleanup();
   if (reduceMotion) return;
   const board = ui.stage.querySelector(".oo-board");
   if (!board) return;
@@ -233,7 +247,8 @@ function ooMeltGhost(ui) {
     t.style.setProperty("--dl", Math.round(Math.hypot(x - cx, y - cy) * .55) + "ms");
     t.classList.add("oo-melt");
   });
-  later(() => clone.remove(), 500);
+  const timer = later(() => { if (OO_GHOST && OO_GHOST.clone === clone) OO_GHOST = null; clone.remove(); }, 500);
+  OO_GHOST = { clone, timer };
 }
 // the new board settles in (a gentle scale+fade, staggered from the center) or, right after the grid grows,
 // divides in (a livelier overshoot, the same stagger) -- "tiles split like cells dividing"
@@ -269,7 +284,7 @@ function ooShimmer(board, big) {
 // position of its origin tile, then relaxes to its real size), instead of appearing fully formed
 function ooRevealFlip(ui, originOdd, originField) {
   if (reduceMotion) return;
-  const halves = ui.foot.querySelectorAll(".oo-rv-half");
+  const halves = ui.foot.querySelectorAll(".oo-rv2-half");
   if (halves.length !== 2) return;
   const origins = [originField, originOdd];
   halves.forEach((h, i) => {
@@ -333,11 +348,34 @@ function ooAsk(ui, r, o = {}) {
       if (o.feedback !== false && o.tileNames !== false) ooTileNames(board, tiles, r, extra.picked);
       resolve({ ok: ok ? 1 : 0, ms, hint, act: r.act, right: r.odd, dir: r.dir, ...extra });
     };
-    // a per-round timer bar (the simple game): running out is a miss, same as a wrong tap
+    // a per-round timer bar (the simple game): running out is a miss, same as a wrong tap. Exposed via
+    // o.pauseCtl so the pause menu can genuinely stop the clock (not just hide it) while it's open.
+    let tlTimer = null, tlStart = 0, tlRemain = null;
     if (o.timeLimit && !o.flash) {
       stage.insertAdjacentHTML("afterbegin", `<i class="oo-tlimit" style="--t:${o.timeLimit}ms"></i>`);
       requestAnimationFrame(() => { const b = stage.querySelector(".oo-tlimit"); if (b) b.classList.add("go"); });
-      later(() => { if (!done) finish(false, { picked: null, timeout: true }); }, o.timeLimit);
+      tlStart = performance.now();
+      tlTimer = later(() => { if (!done) finish(false, { picked: null, timeout: true }); }, o.timeLimit);
+    }
+    if (o.pauseCtl) {
+      o.pauseCtl.pause = () => {
+        if (done) return;
+        tiles.forEach(t => t.disabled = true);
+        const tb = stage.querySelector(".oo-tlimit");
+        if (tb) { const cs = getComputedStyle(tb).transform; tb.style.transition = "none"; tb.style.transform = cs === "none" ? "" : cs; }
+        if (tlTimer) { clearTimeout(tlTimer); tlTimer = null; tlRemain = Math.max(0, o.timeLimit - (performance.now() - tlStart)); }
+      };
+      o.pauseCtl.resume = () => {
+        if (done) return;
+        tiles.forEach(t => t.disabled = false);
+        const tb = stage.querySelector(".oo-tlimit");
+        if (tb && tlRemain != null) {
+          tb.style.transition = "none"; tb.style.setProperty("--t", tlRemain + "ms"); void tb.offsetWidth;
+          requestAnimationFrame(() => { tb.style.transition = ""; tb.classList.add("go"); });
+          tlStart = performance.now();
+          tlTimer = later(() => { if (!done) finish(false, { picked: null, timeout: true }); }, tlRemain);
+        }
+      };
     }
     // which way: after the right tile, the six words (one gesture: a tap)
     const askDir = (el) => {
@@ -584,44 +622,64 @@ function ooBeautyKick() {
   try { if (typeof loadData === "function" && !window.LOOKS) loadData("looks"); } catch (e) {}
   try { if (typeof ooPairsLoad === "function") ooPairsLoad(); } catch (e) {}
 }
+// "Extremely beautiful colors" (David, 2026-10-11) means curated, not just real: a dim, muddy canvas (a lot of
+// Whistler's Mother is near-black greys) makes a boring, near-invisible board even though it's honest data. A
+// source has to clear a bar first: at least one properly vivid color, a decent average chroma, and enough
+// lightness range that a sweep actually reads as a sweep, not a shade of one grey.
+function ooBeautyGood(colors) {
+  if (!colors || colors.length < 2) return false;
+  let Ls = [], Cs = [];
+  for (const h of colors) { try { const [L, C] = lch(h); Ls.push(L); Cs.push(C); } catch (e) {} }
+  if (Ls.length < 2) return false;
+  const meanC = Cs.reduce((a, b) => a + b, 0) / Cs.length, maxC = Math.max(...Cs), maxL = Math.max(...Ls), Lrange = maxL - Math.min(...Ls);
+  // a wide ΔE spread or real chroma alone isn't enough: a painting can hold all of its contrast inside near-black
+  // shadow (Flemish oil varnish, a dim Whistler) and still pass a chroma/range check while reading as a muddy,
+  // nearly invisible board (David, 2026-10-11, caught exactly this -- a van Eyck still slipped through the first
+  // version of this gate). At least one stop has to be genuinely light, not just "lighter than the others" --
+  // but a narrow lightness range is fine on its own when the colors are simply, uniformly vivid (a kept set of
+  // saturated favorites, all mid-tone, needs no highlight-to-shadow spread to read as beautiful).
+  return maxC >= 28 && meanC >= 15 && maxL >= 48 && (Lrange >= 8 || meanC >= 22);
+}
 function ooBeautyPool() {
   const out = [];
   (window.PAINTINGS || []).forEach(p => {
     if (!p.palette || p.palette.length < 3) return;
     const cs = p.palette.slice().sort((a, b) => b.share - a.share).slice(0, 5).map(x => x.h);
-    out.push({ colors: cs, label: `${p.artist}, ${p.title}${p.year ? ", " + p.year : ""}`, link: { kind: "painting", id: p.id } });
+    if (ooBeautyGood(cs)) out.push({ colors: cs, label: `${p.artist}, ${p.title}${p.year ? ", " + p.year : ""}`, link: { kind: "painting", id: p.id } });
   });
   if (Array.isArray(window.LOOKS)) {
     window.LOOKS.forEach(l => (l.pals || []).forEach(p => {
       if (!p.c || p.c.length < 3) return;
-      out.push({ colors: p.c.map(x => x[0]).slice(0, 5), label: `${l.name} · ${p.n}`, link: { kind: "look", id: l.id } });
+      const cs = p.c.map(x => x[0]).slice(0, 5);
+      if (ooBeautyGood(cs)) out.push({ colors: cs, label: `${l.name} · ${p.n}`, link: { kind: "look", id: l.id } });
     }));
   }
   const P = window.OO_PAIRS;
   if (P && P.names && P.groups && P.groups.all) {
     P.groups.all.pairs.filter(pr => pr[4] >= 1.6).forEach(pr => {
       const a = P.names[pr[0]], b = P.names[pr[1]];
-      if (a && b) out.push({ colors: [a[1], b[1]], label: `${a[0]} and ${b[0]}, painted together often`, link: null });
+      if (a && b && ooBeautyGood([a[1], b[1]])) out.push({ colors: [a[1], b[1]], label: `${a[0]} and ${b[0]}, painted together often`, link: null });
     });
   }
   return out;
 }
-// the player's own kept colors and kept paintings, as gradient sources (David, 2026-10-11)
+// the player's own kept colors and kept paintings, as gradient sources (David, 2026-10-11) -- held to the same
+// beauty bar, so a round of muted favorites just quietly doesn't get drawn rather than making a dull board
 function ooFavPool() {
   const out = [];
   try {
     const favs = Object.keys(S.favs || {}).filter(k => /^#[0-9a-f]{6}$/i.test(k));
     if (favs.length >= 2) {
       const n = Math.min(4, Math.max(2, Math.floor(favs.length / 2))), picked = ooShuf(favs, Math.random).slice(0, n);
-      const names = picked.map(h => (typeof nameOf === "function" ? nameOf(h).n : h));
-      out.push({ colors: picked, label: `Your colors: ${names.join(" → ")}`, link: null, fromFav: true });
+      if (ooBeautyGood(picked)) { const names = picked.map(h => (typeof nameOf === "function" ? nameOf(h).n : h)); out.push({ colors: picked, label: `Your colors: ${names.join(" → ")}`, link: null, fromFav: true }); }
     }
   } catch (e) {}
   try {
     const arts = Object.values(S.favArt || {}).filter(a => a && a.h);
     arts.slice(0, 6).forEach(a => {
       const m = ooMove(a.h, "hue", 1, 14) || ooMove(a.h, "light", 1, 14);   // a gentle neighbor, so it's a real 2-stop sweep
-      out.push({ colors: [a.h, m ? m.hex : a.h], label: `From your favorite: ${a.a ? a.a + ", " : ""}${a.t || "a painting you kept"}`, link: null, fromFav: true });
+      const colors = [a.h, m ? m.hex : a.h];
+      if (ooBeautyGood(colors)) out.push({ colors, label: `From your favorite: ${a.a ? a.a + ", " : ""}${a.t || "a painting you kept"}`, link: null, fromFav: true });
     });
   } catch (e) {}
   return out;
@@ -642,37 +700,27 @@ function ooPickPalette() {
 }
 
 // ======================================================================
-// The reveal card (David, 2026-10-11): its own moment after every round, not a line of text. The board settles
-// back; a card of what you just saw slides up -- the odd color and its field color as two big named halves, one
-// line on how they differ, a gradient round's own key stops, and where the palette came from (tappable). Names
-// are tappable too ([data-swatch] morphs into that color's page app-wide) and logged as a sighting so Learn
-// benefits from every round, not just the ones that were about learning names.
+// The reveal (David, 2026-10-11, rewritten to a TRUE full screen -- "remove the tiles entirely... a
+// super-minimal full-screen view of just the colors and their names"): the odd color and its field color as two
+// full-bleed halves, name + hex tucked in a corner of each, one small difference line, a tiny source note. Tap
+// anywhere moves on (the melt transition). Names are tappable ([data-swatch] morphs into that color's page
+// app-wide) and logged as a sighting so Learn benefits from every round, not just the ones about learning names.
 // ======================================================================
 const ooNm = h => { try { return typeof nameOf === "function" ? nameOf(h).n : h; } catch (e) { return h; } };
 function ooSeenLog(hex) {
   try { if (typeof learnerLog === "function") learnerLog({ type: "seen", color: hex, src: "game" }); } catch (e) {}
 }
-function ooGradStops(r) {
-  const src = r.paletteSource && r.paletteSource.colors;
-  if (!src || src.length < 2) return null;
-  if (src.length <= 3) return src;
-  return [src[0], src[Math.floor(src.length / 2)], src[src.length - 1]];
-}
-function ooRevealHTML(r, res) {
+function ooRevealHTML(r, res, showNames = true) {
   const odd = r.odd, field = r.base, pair = odd && field && odd !== field;
-  const no = pair ? ooNm(odd) : null, nf = pair ? ooNm(field) : null;
-  if (pair) { ooSeenLog(odd); ooSeenLog(field); }
-  const halves = pair ? `<div class="oo-rv-halves">
-      <button class="oo-rv-half" data-swatch="${field}" data-ink="${ink(field)}" style="--c:${field}"><b>${esc(nf)}</b><span class="mono">${esc(field)}</span></button>
-      <button class="oo-rv-half" data-swatch="${odd}" data-ink="${ink(odd)}" style="--c:${odd}"><b>${esc(no)}</b><span class="mono">${esc(odd)}</span></button>
-    </div>` : "";
+  const no = pair && showNames ? ooNm(odd) : null, nf = pair && showNames ? ooNm(field) : null;
+  if (pair) { ooSeenLog(odd); ooSeenLog(field); }   // the exposure is logged for Learn either way; only the on-screen label is optional
+  const lbl = (hex, name, corner) => name ? `<span class="oo-rv2-lbl oo-rv2-${corner}"><b>${esc(name)}</b><em class="mono">${esc(hex)}</em></span>` : "";
+  const half = (hex, name, corner) => `<button class="oo-rv2-half" data-swatch="${hex}" data-ink="${ink(hex)}" style="--c:${hex}">${lbl(hex, name, corner)}</button>`;
+  const halves = pair ? half(field, nf, "a") + half(odd, no, "b") : `<div class="oo-rv2-half" style="--c:${odd || field || "#5F5F5F"}"></div>`;
   const diff = pair && r.dir ? `A touch ${esc(r.dir)}.` : r.none ? "Every tile was the same color." : res.ok ? "Right." : "The ringed tile was different.";
-  const stops = r.gridType && r.gridType !== "flat" ? ooGradStops(r) : null;
-  if (stops) stops.forEach(ooSeenLog);
-  const stripHTML = stops ? `<div class="oo-rv-strip">${stops.map(h => `<button class="oo-rv-stop" data-swatch="${h}" data-ink="${ink(h)}" style="--c:${h}"><em>${esc(ooNm(h))}</em></button>`).join("")}</div>` : "";
   const src = r.paletteSource;
-  const srcHTML = src ? `<button class="oo-rv-src"${src.link ? "" : " disabled"}>${src.fromFav ? "" : "Gradient from "}${esc(src.label)}</button>` : "";
-  return { halves, diff, stripHTML, srcHTML, link: src && src.link };
+  const srcHTML = src ? `<button class="oo-rv2-src"${src.link ? "" : " disabled"}>${src.fromFav ? "" : "From "}${esc(src.label)}</button>` : "";
+  return { halves, diff, srcHTML, link: src && src.link };
 }
 
 // Survival and the Growing board: two stand-alone games beside the ladder (the Mix lists them). Their difference follows
@@ -759,6 +807,9 @@ function ooSimpleState() {
   if (!Number.isInteger(o.cols) || o.cols < OO_S_MIN_COLS || o.cols > OO_S_MAX_COLS) o.cols = OO_S_MIN_COLS;
   if (!Array.isArray(o.acc)) o.acc = [];
   if (o.mode !== "zen") o.mode = "arcade";
+  if (o.names !== false) o.names = true;      // teach names after each round (pause menu toggle)
+  if (o.timer !== false) o.timer = true;      // the per-round Arcade timer (pause menu toggle; Zen has none regardless)
+  if (o.pauseHint == null) o.pauseHint = true; // the one-time "tap to pause" hint, shown once then cleared
   return o;
 }
 // the per-round timer: a little tighter as the grid grows (Arcade only)
@@ -794,6 +845,13 @@ function ooSimpleEnd(zen, startTh, model, stats, again) {
 }
 // the game itself: one tap in, straight to the board. opt.zen forces Zen; opt.forceShape ("flat" | "grad1d" |
 // "grad2d" | "combo" | "k2" | "k4") is a screenshot hook that pins the first round's shape.
+// TRUE full screen (David, 2026-10-11): only colors, edge to edge, under the status bar and home indicator too.
+// No title, no counter, no always-visible buttons during play -- ONE subtle control (David, refinement:
+// "instead of separate exit/edit/settings buttons, use ONE"): a small translucent pause mark, top-left, that
+// opens a centered pause menu (Resume, Zen/Arcade, Settings, Exit) over a dimmed/blurred board. A swipe down
+// from the top edge opens the same menu. The player is never trapped: the OS/browser back gesture exits
+// directly (no listener needed -- `go("gym")` is simply what's already behind this screen in history), and a
+// one-time hint teaches the pause mark the very first time someone plays.
 function ooMap(opt = {}) {
   if (!S.scr && !ooShotMode() && typeof screenCheck === "function") return screenCheck(() => ooMap(opt));
   eyeNamesReady();
@@ -803,28 +861,83 @@ function ooMap(opt = {}) {
   const model = ooS().model;
   const startTh = { hue: ooTheta(model, "hue", null), light: ooTheta(model, "light", null), chroma: ooTheta(model, "chroma", null) };
   const lives0 = zen ? 0 : 3;
-  const st = { cols: sim.cols, acc: sim.acc.slice(), round: 0, hits: 0, lives: lives0, streak: 0, grew: false };
+  const st = { cols: sim.cols, acc: sim.acc.slice(), round: 0, hits: 0, lives: lives0, streak: 0, grew: false, paused: false };
   const el = show(`
-    <header class="deck-top">
-      <button class="icon-btn" data-close aria-label="Close">${ICON.x}</button>
-      ${zen ? `<span class="oo-ztally" data-tally></span>` : `<div class="oo-hearts" aria-label="${lives0} lives">${Array.from({ length: lives0 }, () => `<i></i>`).join("")}</div>`}
-      <button class="oo-zenpill${zen ? " on" : ""}" data-zen aria-pressed="${zen}">${zen ? "Zen" : "Arcade"}</button>
-    </header>
     <div class="drill-head oo-head"><h2 id="ooq"></h2></div>
     <div class="drill-stage oo-stage" id="oostage"></div>
-    <div class="drill-foot oo-foot" id="oofoot"></div>`, "fixed drill station oo-play oo-simple");
+    <div class="drill-foot oo-foot" id="oofoot" hidden></div>
+    <button class="oo-pause-mark" data-pause aria-label="Pause"><i></i><i></i></button>
+    <span class="oo-pause-hint" data-hint>Tap to pause or leave</span>
+    <div class="oo-pausefield" id="oopausefield"></div>
+    <div class="oo-pausecard" id="oopausecard"></div>`, "fixed drill station oo-play oo-simple");
   const ui = { q: el.querySelector("#ooq"), stage: el.querySelector("#oostage"), foot: el.querySelector("#oofoot"), el };
   const quit = () => { save(); go("gym"); };
-  el.querySelector("[data-close]").onclick = quit;
-  onKey = e => { if (e.key === "Escape") quit(); };
-  el.querySelector("[data-zen]").onclick = () => { sim.mode = zen ? "arcade" : "zen"; save(); buzz(4); ooMap(); };
-  const tallyEl = el.querySelector("[data-tally]");
-  const paintTally = () => {
-    if (!tallyEl) return;
+  // the first time: a quiet hint by the mark, gone after 3s or at first touch, never again
+  if (sim.pauseHint) {
+    const hintEl = el.querySelector("[data-hint]");
+    later(() => hintEl.classList.add("on"), 400);
+    later(() => hintEl.classList.remove("on"), 3400);
+    sim.pauseHint = false; save();
+  }
+  // the pause menu: an opaque Night Gallery card over a dimmed, lightly blurred field -- Resume, the Zen/Arcade
+  // toggle, Settings (sound, haptics, names after each round, the timer), Exit. One place for everything that
+  // isn't play itself, so nothing else needs to live on the board.
+  const field = el.querySelector("#oopausefield"), card = el.querySelector("#oopausecard");
+  function paintPause() {
     const avg = Math.exp(OO_AXES.reduce((a, j) => a + Math.log(ooTheta(model, j, null)), 0) / 3);
-    tallyEl.textContent = `${st.hits} of ${st.round} · ${pctFmt(avg)}`;
-  };
-  paintTally();
+    card.innerHTML = `
+      <p class="eyebrow">Paused</p>
+      <h2>${st.hits} of ${st.round} · ${pctFmt(avg)}</h2>
+      ${!zen ? `<div class="oo-hearts" aria-label="${st.lives} lives" style="justify-content:center;margin:0 0 18px">${Array.from({ length: lives0 }, (_, i) => `<i${i >= st.lives ? ` class="gone"` : ""}></i>`).join("")}</div>` : ""}
+      <button class="btn" data-resume>Resume</button>
+      <button class="oo-zenpill${zen ? " on" : ""}" data-zen aria-pressed="${zen}">${zen ? "Zen" : "Arcade"}</button>
+      <div class="oo-pset">
+        <button class="item" data-set="sound">Sound: ${S.sound === false ? "off" : "on"} ${ICON.chev}</button>
+        <button class="item" data-set="haptics">Haptics: ${S.haptics === false ? "off" : "on"} ${ICON.chev}</button>
+        <button class="item" data-set="names">Names after each round: ${sim.names ? "on" : "off"} ${ICON.chev}</button>
+        <button class="item" data-set="timer">Timer: ${!zen && sim.timer ? "on" : "off"} ${ICON.chev}</button>
+      </div>
+      <button class="btn ghost" data-exit>Exit</button>`;
+    card.querySelector("[data-resume]").onclick = () => closePause();
+    card.querySelector("[data-zen]").onclick = () => { sim.mode = zen ? "arcade" : "zen"; save(); buzz(4); closePause(true); ooMap({ zen: !zen }); };
+    card.querySelector("[data-exit]").onclick = quit;
+    card.querySelectorAll("[data-set]").forEach(b => b.onclick = () => {
+      const k = b.dataset.set;
+      if (k === "sound") { sndSet("sound", S.sound === false); if (S.sound) buzz(4); }
+      else if (k === "haptics") { S.haptics = S.haptics === false; save(); if (S.haptics) buzz(4); }
+      else if (k === "names") { sim.names = !sim.names; save(); buzz(4); }
+      else if (k === "timer") { sim.timer = !sim.timer; save(); buzz(4); }
+      paintPause();
+    });
+  }
+  function openPause() {
+    if (st.paused) return;
+    st.paused = true; clearTimeout(pauseAutoT);
+    paintPause();
+    field.classList.add("on"); card.classList.add("on");
+    if (curPauseCtl.pause) curPauseCtl.pause();
+  }
+  function closePause(silent) {
+    if (!st.paused) return;
+    st.paused = false;
+    field.classList.remove("on"); card.classList.remove("on");
+    if (!silent && curPauseCtl.resume) curPauseCtl.resume();
+  }
+  el.querySelector("[data-pause]").onclick = () => { el.querySelector("[data-hint]").classList.remove("on"); openPause(); };
+  field.onclick = () => closePause();
+  onKey = e => { if (e.key === "Escape") { if (st.paused) closePause(); else quit(); } };
+  // a swipe down from the top edge opens the same menu, same as the pause mark
+  let pressXY = null;
+  ui.stage.addEventListener("pointerdown", e => { pressXY = { x: e.clientX, y: e.clientY }; }, { passive: true });
+  ui.stage.addEventListener("pointermove", e => {
+    if (!pressXY || st.paused) return;
+    if (pressXY.y < 32 && e.clientY - pressXY.y > 44) { openPause(); pressXY = null; }
+  }, { passive: true });
+  ["pointerup", "pointercancel", "pointerleave"].forEach(ev => ui.stage.addEventListener(ev, () => { pressXY = null; }, { passive: true }));
+  // one transition at a time (David, 2026-10-11: "rapid taps must not stack ghosts"); ooMeltGhost itself also
+  // guards this, but the timers below need a single reference to cancel cleanly on quit/backgrounding too
+  document.addEventListener("visibilitychange", ooGhostCleanup);
+  let pauseAutoT = 0, curPauseCtl = {};
   function nextRound() {
     ooMeltGhost(ui);
     const enter = st.round === 0 ? null : st.grew ? "divide" : "settle"; st.grew = false;
@@ -842,14 +955,14 @@ function ooMap(opt = {}) {
       if (r) Object.assign(r, { axis, judg: axis, mix, bf: r.gridType && r.gridType !== "flat" ? bf : 1, paletteSource: palette });
     }
     if (!r) r = ooSimpleRound({ model, cols: st.cols, round: st.round, aspect, palette: ooPickPalette() }, breather);
-    ui.foot.innerHTML = "";
-    const o = { feedback: true, tileNames: false, resolveOdd: true, enter };   // names live in the reveal card now, never crowding small tiles
-    if (!zen) o.timeLimit = ooSimpleTime(st.cols);
+    const o = { feedback: true, tileNames: false, resolveOdd: true, enter, pauseCtl: {} };   // names live in the reveal now, never crowding gapless tiles
+    if (!zen && sim.timer) o.timeLimit = ooSimpleTime(st.cols);
+    curPauseCtl = o.pauseCtl;
     ooAsk(ui, r, o).then(res => onAnswer(r, res));
   }
   function onAnswer(r, res) {
     if (!ui.stage.isConnected) return;
-    // captured before the reveal card replaces the foot and the board settles back, for the reveal halves' FLIP
+    // captured before the reveal replaces the whole screen, for the reveal halves' FLIP
     const tilesNow = [...ui.stage.querySelectorAll(".oo-t")];
     const originOdd = r.ans && r.ans.length ? tilesNow[r.ans[0]] : null;
     const originField = tilesNow.find((t, i) => r.ans && !r.ans.includes(i)) || null;
@@ -871,38 +984,27 @@ function ooMap(opt = {}) {
     const newCols = ooSimpleGrid(st.cols, st.acc);
     if (newCols !== st.cols) { st.grew = newCols > st.cols; st.cols = newCols; st.acc = []; }
     sim.cols = st.cols; sim.acc = st.acc.slice(); sim.last = today(); save();
-    if (!zen) { const hearts = el.querySelectorAll(".oo-hearts i"); if (hearts[st.lives]) hearts[st.lives].classList.add("gone"); }
-    paintTally();
     const over = !zen && st.lives <= 0;
     const board = ui.stage.querySelector(".oo-board");
-    // a streak moment: a luminous sweep every 5 in a row, a slower bloom every 10 -- before the board settles
-    // back, so the sweep plays on the full field
+    // a streak moment: a luminous sweep every 5 in a row, a slower bloom every 10
     if (res.ok && st.streak > 0 && st.streak % 5 === 0 && board) { const big = st.streak % 10 === 0; ooShimmer(board, big); buzz(big ? [12, 60, 12] : [8, 50, 8]); }
-    // the board settles back (David, 2026-10-11: "its own moment"); a reveal card slides up over it with what
-    // you just saw -- two big named halves, how they differ, a gradient's own key stops, and the palette's source
     if (board) board.classList.add("oo-settle");
-    const rv = ooRevealHTML(r, res);
-    ui.foot.innerHTML = `<div class="oo-reveal${reduceMotion ? "" : " oo-in"}">
-      ${rv.halves}
-      <p class="oo-rv-diff">${rv.diff}</p>
-      ${rv.stripHTML}
-      ${rv.srcHTML}
-      <button class="btn${res.ok && !over ? " ghost" : ""}" data-next>${over ? "See how you did" : "Next"} ${ICON.arrow}</button>
-    </div>`;
-    // the two halves grow out of the tiles they came from (David, 2026-10-11)
-    ooRevealFlip(ui, originOdd, originField);
-    // tap anywhere on the reveal (not a name or the source line) moves on, once -- the "Next" button sits INSIDE
-    // the reveal card, so its own click also bubbles to the card's tap-anywhere listener below; both must share
-    // one guard or a single tap fires two rounds (David 2026-10-11's reveal card surfaced this).
+    // the reveal: its own full-screen overlay, not a card over the board -- "remove the tiles entirely"
+    const rv = ooRevealHTML(r, res, sim.names);
+    const rvEl = document.createElement("div");
+    rvEl.className = "oo-reveal2" + (reduceMotion ? "" : " oo-in");
+    rvEl.innerHTML = `${rv.halves}<p class="oo-rv2-diff">${rv.diff}</p>${rv.srcHTML}${over ? `<p class="oo-rv2-end">See how you did ${ICON.arrow}</p>` : ""}`;
+    el.appendChild(rvEl);
+    // the two halves grow out of the tiles they came from (uses the reveal's own halves, now in rvEl)
+    ooRevealFlip({ foot: rvEl }, originOdd, originField);
     let gone = false;
-    const g2 = () => { if (gone) return; gone = true; if (over) end(); else nextRound(); };
-    ui.foot.querySelector("[data-next]").onclick = g2;
-    const srcBtn = ui.foot.querySelector(".oo-rv-src"); if (srcBtn && rv.link) srcBtn.onclick = e => { e.stopPropagation(); if (rv.link.kind === "painting") location.hash = "#/painting/" + String(rv.link.id).replace(/^painting-/, ""); else if (rv.link.kind === "look") location.hash = "#/look/" + rv.link.id; };
-    ui.foot.querySelector(".oo-reveal").addEventListener("click", e => { if (!e.target.closest("[data-swatch],.oo-rv-src,a")) g2(); });
+    const g2 = () => { if (gone) return; gone = true; rvEl.remove(); if (over) end(); else nextRound(); };
+    const srcBtn = rvEl.querySelector(".oo-rv2-src"); if (srcBtn && rv.link) srcBtn.onclick = e => { e.stopPropagation(); if (rv.link.kind === "painting") location.hash = "#/painting/" + String(rv.link.id).replace(/^painting-/, ""); else if (rv.link.kind === "look") location.hash = "#/look/" + rv.link.id; };
+    rvEl.addEventListener("click", e => { if (!e.target.closest("[data-swatch],.oo-rv2-src,a")) g2(); });
     if (!zen) later(() => { if (!gone) g2(); }, 2500);
     buzz(res.ok ? (zen ? 8 : 10) : [10, 40, 10]);
   }
-  function end() { ooSimpleEnd(zen, startTh, model, st, z => ooMap({ zen: z })); }
+  function end() { document.removeEventListener("visibilitychange", ooGhostCleanup); ooSimpleEnd(zen, startTh, model, st, z => ooMap({ zen: z })); }
   nextRound();
 }
 const ooEnter = () => ooMap();
