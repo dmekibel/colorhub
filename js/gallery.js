@@ -1172,9 +1172,9 @@ function glPage(i, d, fromHex, tol) {
   // by ctx, so a re-register on the same painting just replaces the closures with ones that see this draw's d/i).
   if (typeof moreRegister === "function") moreRegister("gallery", () => [
     { title: "Look", items: [
-      { t: "Where each color sits", n: "Opens Look closer", run: () => glZoomOpen({ src: glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "where", cors: !!glCORS(glBig(d.img)), sampleOk: canSample }) },
+      { t: "Where each color sits", n: "Opens Look closer", run: () => glZoomOpen({ src: sampleImg.src || glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "where", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
       { t: "Value and squint", n: "See the light structure, or the big shapes", run: openLookCloser },
-      { t: "Select an object", n: "Tap the thing you want", run: () => glZoomOpen({ src: glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "select", cors: !!glCORS(glBig(d.img)), sampleOk: canSample }) },
+      { t: "Select an object", n: "Tap the thing you want", run: () => glZoomOpen({ src: sampleImg.src || glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "select", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
     ] },
     { title: "Go", items: [
       ...(d.a ? [{ t: "The painter", n: d.a, run: () => { if (typeof awPainter === "function") awPainter(routeSlug(d.a)); } }] : []),
@@ -1332,7 +1332,11 @@ function glPage(i, d, fromHex, tol) {
   // open the plain color readout on release -- never js/isolate.js's guessing game, which stays reachable only
   // from the explicit "Test yourself" fold.
   let eyd = null, pickArmed = false;
-  const openLookCloser = () => { buzz(5); glZoomOpen({ src: glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, cors: !!glCORS(glBig(d.img)), sampleOk: canSample }); };
+  // src/cors come from the live sampleImg, not a fresh glCORS(glBig(d.img)) check: a Commons painting's own
+  // armSample() swaps in the already-resolved, CORS-capable thumb.wikimedia.org URL (glCommonsResolve, above)
+  // well after the page first drew, so re-deriving from the painting's raw (unresolved) URL here would always
+  // read as "not CORS-safe" for Commons and silently break Look closer's Pick tool for its ~40% of the corpus.
+  const openLookCloser = () => { buzz(5); glZoomOpen({ src: sampleImg.src || glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }); };
   const syncEyd = () => {
     if (eyd) { eyd.detach(); eyd = null; }
     if (pickArmed && canSample && typeof eyedropAttach === "function") {
@@ -1367,7 +1371,12 @@ function glPage(i, d, fromHex, tol) {
   // "Pick a color" (David, relayed 2026-10-09): the explicit way into the eyedropper now -- arms pickArmed,
   // which syncEyd() (above) turns into a live eyedropAttach() on the hero image
   const pickBtn = el.querySelector("[data-glpickbtn]");
-  if (pickBtn) pickBtn.onclick = () => {
+  if (pickBtn) pickBtn.onclick = e => {
+    // stopPropagation matters here: heroSpan's own click listener (below) treats pickArmed=true as its cue to
+    // step aside for the eyedropper instead of opening Look closer -- this click is still bubbling up to it
+    // when that check runs, so without this, the honest-message branch (which never arms anything) fell through
+    // into heroSpan's handler and opened Look closer right behind the toast, unannounced.
+    e.stopPropagation();
     if (!canSample) { toast("This museum's photo can't be read here, so colors can't be picked from it."); return; }   // honest, never a dead tap (David's own rule for Select, CLAUDE.md "never a silent dead button")
     pickArmed = !pickArmed; buzz(5); syncEyd();
   };

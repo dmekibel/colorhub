@@ -4972,7 +4972,7 @@ scenario("paintings", "Look closer's Pick tool: drag shows the loupe, release op
   await t.waitFor(() => t.$(".gl-hero > span").classList.contains("gl-tap"), 15000, "the picture becomes tappable once the resolved image is armed and readable");
   await t.click(await t.waitFor("[data-glcloser]", 8000, "the Look closer button"), { wait: 500 });
   const img = await t.waitFor(".glz-scrim.in .glz-img", 4000, "Look closer's own image");
-  await t.click(await t.waitFor('[data-glzv="pick"]', 4000, "the Pick tool"), { wait: 300 });
+  await t.click(await t.waitFor('[data-glzv="pick"]', 4000, "the Pick tool"), { force: true, wait: 300 });
   t.expect(t.$('[data-glzv="pick"]').classList.contains("on"), "the Pick tool doesn't show armed");
   const r = img.getBoundingClientRect(), w = t.w;
   const pt = (x, y, type) => img.dispatchEvent(new w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 11, pointerType: "touch", isPrimary: true, button: 0, view: w }));
@@ -4990,14 +4990,18 @@ scenario("paintings", "Look closer's Pick tool: drag shows the loupe, release op
 // picker isn't working"). Both now say so on tap instead -- never a silent dead control.
 scenario("paintings", "an unreadable painting's Pick controls give an honest message instead of silently doing nothing", async t => {
   await t.open("#/home", { settle: 300 });
-  // GAL.n is loaded from local data either way; only the IMAGE host is external, and the smoke harness's own
-  // --host-resolver-rules sends every external host to NXDOMAIN, so this painting's image never loads at all --
-  // the same end state (an image this host can't deliver readable pixels for) a real Cleveland CORS failure
-  // leaves it in, without needing network access to a real museum from this test.
-  t.ev(`typeof loadGallery === "function" ? loadGallery() : null`);
-  const gi = await t.waitFor(() => { if (!t.w.GAL) return null; for (let i = 0; i < t.w.GAL.n; i++) { const nm = t.w.GAL.src[t.w.GAL.mus[i]] && t.w.GAL.src[t.w.GAL.mus[i]].name; if (nm === "Cleveland Museum of Art") return i; } return null; }, 8000, "a Cleveland painting index");
-  t.ev(`galleryPage(${gi}, true)`);
-  await t.waitFor(() => !!t.$(".p-title") && t.text(".p-title").length > 0, 15000, "the painting page");
+  // Cleveland's real failure mode is a picture that loads and displays completely normally (no crossorigin
+  // attribute is ever set for a host outside GL_CORS_HOSTS, so there's no CORS preflight to fail) -- only the
+  // canvas read at the end of testSample() throws, same as it genuinely does on Cleveland's own photos. The
+  // smoke harness's own --host-resolver-rules sends every external host to NXDOMAIN, which fails the IMAGE
+  // LOAD itself -- a different, noisier failure than Cleveland's -- so this stubs getImageData to throw instead,
+  // on an image (Mona Lisa, mocked to a local same-origin file so it loads instantly and for real) that would
+  // otherwise read fine: the same end state (a visible painting testSample() can't read) without touching the
+  // network block at all.
+  t.ev(`window.__glTaintTest = true; const _gid = CanvasRenderingContext2D.prototype.getImageData; CanvasRenderingContext2D.prototype.getImageData = function (...a) { if (window.__glTaintTest) throw new DOMException("tainted (smoke stub)", "SecurityError"); return _gid.apply(this, a); };`);
+  t.ev(`window.glCommonsResolve = () => Promise.resolve(location.origin + "/icon-512.png")`);
+  t.ev(`galleryPage(14423, true)`);
+  await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 15000, "the Mona Lisa painting page");
   const btn = await t.waitFor("[data-glpickbtn]", 10000, "the Pick a color button (shown even though this image can't be read)");
   t.expect(!btn.hidden, "the Pick a color button went silently missing instead of explaining itself");
   await t.click(btn, { force: true, wait: 300 });
@@ -5005,7 +5009,7 @@ scenario("paintings", "an unreadable painting's Pick controls give an honest mes
   t.expect(!btn.classList.contains("on"), "the Pick button armed anyway, with nothing to actually sample");
   await t.click(await t.waitFor("[data-glcloser]", 8000, "the Look closer button"), { wait: 500 });
   await t.waitFor(".glz-scrim.in", 4000, "Look closer");
-  await t.click(await t.waitFor('[data-glzv="pick"]', 4000, "Look closer's Pick tool"), { wait: 300 });
+  await t.click(await t.waitFor('[data-glzv="pick"]', 4000, "Look closer's Pick tool"), { force: true, wait: 300 });
   await t.waitFor(() => /can.t be read/i.test(t.text(".toast")), 3000, "Look closer's Pick tool also explains itself instead of a dead drag");
   t.expect(!t.$('[data-glzv="pick"]').classList.contains("on"), "Look closer's Pick tool armed anyway, with nothing to actually sample");
 });
