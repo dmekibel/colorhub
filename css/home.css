@@ -294,6 +294,14 @@
 /* Settings: a small gear at the column's end (David: "may be a small gear"), not a full 50px picture row */
 .hm-do-sm .rm-art{width:30px;height:30px;background:transparent;box-shadow:none;display:grid;place-items:center;color:var(--soft)}
 .hm-do-sm .rm-label b{font-size:18px}
+/* Every other row's glyph (dice/pipette/heart/cards/play/gear): .rm-art is a plain <span>, inline by default, so
+   an <svg> dropped into it with no layout of its own just flows top-left under baseline rules -- the "broken
+   icons" David's screenshot showed. Center it properly, and pin the svg itself to display:block so there's no
+   stray inline whitespace gap pushing it off-center either. Every icon call in hmDoMenu (js/home.js) now also
+   asks for the SAME 22px, so none of these glyphs reads a different size from its neighbors (play and the two
+   24px-elsewhere icons -- heart, cards -- were the mismatched ones). */
+.hm-do-ic{display:grid;place-items:center}
+.hm-do-ic svg{display:block;flex:none}
 
 /* ---------- a Search button at the top of the map (David, 2026-10-10 addendum): the same opaque, round corner
    style, aligned with the Colors | Paintings switch, safe-area aware. One tap opens the one global search
