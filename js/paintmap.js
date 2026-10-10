@@ -810,7 +810,7 @@ function pmAtlasLoad(col) {
   const base = pmAtlasBase(col), v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
   const attempt = n => fetch(base + "manifest.json" + v).then(r => { if (!r.ok) throw new Error("manifest " + r.status); return r.json(); })
     .then(man => Promise.all(man.tier0.sheets.map(name => pmDecodeSheet(base + name + v)))
-      .then(bm0s => { const atlas = { man, bm0s }; PM_ATLAS_CACHE.set(col, atlas); return atlas; }))
+      .then(bm0s => { const atlas = { man, bm0s, missing: man.missing && man.missing.length ? new Set(man.missing) : null }; PM_ATLAS_CACHE.set(col, atlas); return atlas; }))
     .catch(e => {
       if (n < PM_ATLAS_RETRIES) return new Promise(res => setTimeout(res, 600 * Math.pow(2, n))).then(() => attempt(n + 1));
       PM_ATLAS_P.delete(col); throw e;
@@ -1404,7 +1404,11 @@ function pmMount(el, s, F) {
       // tile (wrap around the same sheet grid) rather than erroring -- a wrong sprite, not a missing one. Gate
       // both tiers on `i < atlas.man.n` so a too-new painting always falls through to the flat color swatch
       // (already drawn above) and tier 2's own per-painting loader (by real index, unaffected by this) instead.
-      const inAtlas = atlas && atlas.man && i < atlas.man.n;
+      // David, 2026-10-10 (the tier-0/tier-1 desync fix): a painting whose build-time fetch failed is left out of
+      // both sheet tiers (tier0_from_tier1() in tools/paintmap_atlas.py records it in manifest.missing rather
+      // than drawing a blank or stale cell) -- treated exactly like "too new for this atlas" (i >= man.n) below:
+      // fall through to the flat color swatch and tier 2's own per-painting loader, never a wrong/blank sprite.
+      const inAtlas = atlas && atlas.man && i < atlas.man.n && !(atlas.missing && atlas.missing.has(i));
       if (inAtlas && atlas.bm0s) {
         const ts0 = pmTState(tierH, i), r0 = pmT0Rect(atlas.man, i), bm0 = atlas.bm0s[r0.sheet];
         const a0 = pmFadeAlpha(ts0, "f0", t, 220, RM); if (a0 < 1) fading = true;
