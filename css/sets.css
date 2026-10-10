@@ -224,8 +224,15 @@ html.sheet-open .sx-tray,html.booth .sx-tray{display:none}
    chooser sheet) rather than position:sticky inside the sheet's position:fixed box, which some engines get
    wrong (the preview would stop tracking the scroll and drift off-screen). David, 2026-10-09: "too small" and
    "I scroll past the preview" — bigger, and stays in view while the candidate list scrolls underneath; it
-   shrinks a little once you've scrolled, so it never crowds the list, but the color and the actions stay put. */
-.sheet.sx-pick-sheet{display:flex;flex-direction:column;overflow:hidden;padding-bottom:0}
+   shrinks a little once you've scrolled, so it never crowds the list, but the color and the actions stay put.
+   The base .sheet (app.css) has no fixed height -- it shrinks to fit its content, up to max-height:88dvh, and
+   since it's bottom-anchored, a SHORTER sheet sits lower, with a taller top offset. "Painters paired it with"
+   and "In famous palettes" fill in asynchronously after the first paint; once there's enough art data to mine
+   (the common case), that late content alone can push the sheet from "fits without scrolling" past 88dvh,
+   which visibly shifts the whole sheet (and the pinned preview inside it) up the screen after the fact. Fixing
+   the sheet at its full allowed height from the first frame removes that reflow entirely -- content that
+   doesn't fill it just leaves [data-sheet-scroll] with a little extra (already-scrollable) room at the bottom. */
+.sheet.sx-pick-sheet{display:flex;flex-direction:column;overflow:hidden;padding-bottom:0;height:88dvh}
 .sx-pick-sheet>.grab{flex:none}
 .sx-pick-sheet>.sx-head,.sx-pick-sheet>.sx-try{flex:none}
 .sx-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--bottom) + 28px)}
