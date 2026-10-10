@@ -321,3 +321,28 @@
 .oo-rv-stop em{font:italic 400 13px/1.1 var(--serif);font-style:italic}
 .oo-rv-src{align-self:center;font:italic 400 15px/1.2 var(--serif);color:var(--soft);text-decoration:underline;text-underline-offset:3px;text-align:center;max-width:90%}
 .oo-rv-src:disabled{text-decoration:none}
+
+/* ---------- the motion language (2026-10-11), built around the ripple: a melting round change, a settling or
+   dividing entrance, the odd tile resolving into its true color, streak shimmer/bloom, a shake and a glow pulse,
+   the reveal halves growing out of their own tiles. Everything here is transform/opacity/filter only (60fps,
+   no layout thrash) and every rule below is switched off under prefers-reduced-motion. ---------- */
+.oo-ghost{pointer-events:none}
+.oo-ghost .oo-t.oo-melt{transition:opacity .42s var(--ease) var(--dl,0ms),transform .42s var(--ease) var(--dl,0ms),filter .42s var(--ease) var(--dl,0ms);opacity:0;transform:scale(.8);filter:blur(3px)}
+.oo-t.oo-settle-in{animation:ooSettleIn .4s var(--spring) both;animation-delay:var(--dl,0ms)}
+@keyframes ooSettleIn{from{transform:scale(.72);opacity:0}to{transform:scale(1);opacity:1}}
+.oo-t.oo-divide-in{animation:ooDivideIn .48s var(--spring) both;animation-delay:var(--dl,0ms)}
+@keyframes ooDivideIn{0%{transform:scale(.35);opacity:0}55%{transform:scale(1.08);opacity:1}100%{transform:scale(1);opacity:1}}
+.oo-t.oo-resolve{transition:background-color .5s var(--ease)}
+.oo-t.oo-shimmer-t{animation:ooShimmerTile .6s var(--ease) var(--sdl,0ms)}
+@keyframes ooShimmerTile{50%{filter:brightness(1.4) saturate(1.1)}}
+.oo-board.oo-bloom{animation:ooBloom 1.4s var(--ease)}
+@keyframes ooBloom{0%{filter:brightness(1)}38%{filter:brightness(1.22)}100%{filter:brightness(1)}}
+.oo-simple .oo-t.miss{animation:ooShake .32s var(--ease)}
+@keyframes ooShake{15%,45%,75%{transform:translateX(-4px)}30%,60%,90%{transform:translateX(4px)}100%{transform:translateX(0)}}
+.oo-simple .oo-t.ring{animation:ooGlowPulse .55s var(--ease)}
+@keyframes ooGlowPulse{0%{box-shadow:0 0 0 2px var(--good)}50%{box-shadow:0 0 0 2px var(--good),0 0 14px 5px var(--good)}100%{box-shadow:0 0 0 2px var(--good)}}
+@media (prefers-reduced-motion:reduce){
+  .oo-ghost{display:none}
+  .oo-t.oo-settle-in,.oo-t.oo-divide-in,.oo-t.oo-shimmer-t,.oo-board.oo-bloom,.oo-simple .oo-t.miss,.oo-simple .oo-t.ring{animation:none}
+  .oo-t.oo-resolve{transition:none}
+}

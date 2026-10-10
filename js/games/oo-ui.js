@@ -208,6 +208,81 @@ function ooRipple(board, from) {
   if (!f) return;
   tiles.forEach(t => { const b = t.getBoundingClientRect(), dd = Math.hypot(b.left - f.left, b.top - f.top); t.style.setProperty("--dl", Math.round(dd * .9) + "ms"); t.classList.remove("rip"); void t.offsetWidth; t.classList.add("rip"); });
 }
+// ======================================================================
+// The simple game's motion language (David, 2026-10-11: "more beautiful dynamics like [the ripple]"), built
+// around the ripple above rather than beside it. Every piece here is quality over quantity, all on
+// transform/opacity/filter (no layout thrash, 60fps), and every one checks `reduceMotion` first. Idle breathing
+// was considered and deliberately left out -- see the note by ooShimmer below.
+// ======================================================================
+// a solved board melts away as the next one arrives: a short-lived clone fades/blurs out in a wave from its own
+// center while the real board underneath renders and settles in, so advancing never waits on this to finish
+function ooMeltGhost(ui) {
+  if (reduceMotion) return;
+  const board = ui.stage.querySelector(".oo-board");
+  if (!board) return;
+  const elRect = ui.el.getBoundingClientRect(), bRect = board.getBoundingClientRect();
+  const clone = board.cloneNode(true);
+  clone.classList.add("oo-ghost");
+  Object.assign(clone.style, { position: "absolute", left: (bRect.left - elRect.left) + "px", top: (bRect.top - elRect.top) + "px",
+    width: bRect.width + "px", height: bRect.height + "px", margin: "0", zIndex: "5", pointerEvents: "none" });
+  ui.el.style.position = ui.el.style.position || "relative";
+  ui.el.appendChild(clone);
+  const cx = bRect.width / 2, cy = bRect.height / 2;
+  clone.querySelectorAll(".oo-t").forEach(t => {
+    const x = parseFloat(t.style.left) / 100 * bRect.width, y = parseFloat(t.style.top) / 100 * bRect.height;
+    t.style.setProperty("--dl", Math.round(Math.hypot(x - cx, y - cy) * .55) + "ms");
+    t.classList.add("oo-melt");
+  });
+  later(() => clone.remove(), 500);
+}
+// the new board settles in (a gentle scale+fade, staggered from the center) or, right after the grid grows,
+// divides in (a livelier overshoot, the same stagger) -- "tiles split like cells dividing"
+function ooEnterBoard(board, tiles, kind) {
+  if (reduceMotion || !kind) return;
+  const br = board.getBoundingClientRect(), cx = br.width / 2, cy = br.height / 2;
+  tiles.forEach(t => {
+    const x = parseFloat(t.style.left) / 100 * br.width, y = parseFloat(t.style.top) / 100 * br.height;
+    t.style.setProperty("--dl", Math.round(Math.hypot(x - cx, y - cy) * .35) + "ms");
+    t.classList.add(kind === "divide" ? "oo-divide-in" : "oo-settle-in");
+  });
+}
+// a streak moment: a luminous sweep across the field, diagonally (an approximation of "along the gradient" that
+// doesn't need to know which way any given gradient actually runs); every 10 is the slower, bigger bloom
+function ooShimmer(board, big) {
+  if (reduceMotion || !board) return;
+  board.querySelectorAll(".oo-t").forEach(t => {
+    const x = parseFloat(t.style.left) || 0, y = parseFloat(t.style.top) || 0;
+    t.style.setProperty("--sdl", Math.round((x + y) * 2.4) + "ms");
+    t.classList.remove("oo-shimmer-t"); void t.offsetWidth; t.classList.add("oo-shimmer-t");
+  });
+  if (big) { board.classList.remove("oo-bloom"); void board.offsetWidth; board.classList.add("oo-bloom"); later(() => board.classList.remove("oo-bloom"), 1500); }
+}
+// IDLE BREATHING, decided against (David asked for it to be a deliberate call): this game's whole point is
+// judging a color against its neighbors. Any motion of a tile's own color or brightness while you're still
+// looking -- even a "brightness-neutral" one is hard to guarantee truly neutral across every hue and a phone's
+// own display curve -- risks nudging the exact perception being measured and taught (the same reasoning as
+// "judge on booth grey" elsewhere in this app: the surround must stay honest). So the board is perfectly still
+// from the moment it's dealt until you answer; everything above happens only at the transitions around that
+// moment, which is also where every one of David's own examples lives (the ripple, the reveal, round changes,
+// streaks, level-ups) -- none of them are mid-search.
+// the reveal card's two halves grow out of the tiles they came from (a FLIP: the half starts the size and
+// position of its origin tile, then relaxes to its real size), instead of appearing fully formed
+function ooRevealFlip(ui, originOdd, originField) {
+  if (reduceMotion) return;
+  const halves = ui.foot.querySelectorAll(".oo-rv-half");
+  if (halves.length !== 2) return;
+  const origins = [originField, originOdd];
+  halves.forEach((h, i) => {
+    const o = origins[i]; if (!o || !o.isConnected) return;
+    const hr = h.getBoundingClientRect(), or = o.getBoundingClientRect();
+    if (!hr.width || !hr.height) return;
+    const sx = or.width / hr.width, sy = or.height / hr.height;
+    const dx = (or.left + or.width / 2) - (hr.left + hr.width / 2), dy = (or.top + or.height / 2) - (hr.top + hr.height / 2);
+    h.style.transition = "none";
+    h.style.transform = `translate(${dx}px,${dy}px) scale(${sx},${sy})`;
+    requestAnimationFrame(() => { h.style.transition = "transform .42s var(--spring)"; h.style.transform = "none"; });
+  });
+}
 let OO_LAST = null;   // the round on screen (screenshot mode taps its answer: js/games/oo-shot.js)
 function ooAsk(ui, r, o = {}) {
   if (r.b === "painting" && !r.paint) return ooPaintPrep(r).then(ok => {
@@ -221,6 +296,7 @@ function ooAsk(ui, r, o = {}) {
     q.textContent = o.teach ? o.teach : r.b === "painting" ? "Which patch was recolored?" : o.flash ? "Remember the board" : v === "one" && r.k > 1 ? `${OO_NUM_W[r.k] || r.k} tiles are different. Find them all.` : OO_Q[v] || OO_Q.one;
     stage.innerHTML = ooBoardHTML(r, o);
     const board = stage.querySelector(".oo-board"), tiles = [...board.querySelectorAll(".oo-t")];
+    ooEnterBoard(board, tiles, o.enter);
     let t0 = performance.now(), done = false, hint = false, sel = [];
     const btns = [];
     if (v === "count") btns.push(`<div class="oo-count">${[0, 1, 2, 3, 4].map(k => `<button class="oo-k" data-k="${k}">${k}</button>`).join("")}</div>`);
@@ -245,6 +321,14 @@ function ooAsk(ui, r, o = {}) {
       buzz(ok ? 10 : [10, 40, 10]);
       if (!ok || o.feedback === false) reveal(); else (r.ans || []).forEach(i => tiles[i] && tiles[i].classList.add("ring"));
       if (ok && extra.el) ooRipple(board, extra.el);
+      // the odd tile resolves into the color it should have been, timed to the ripple wave reaching it (David,
+      // 2026-10-11: "the odd tile resolving into its true neighbor color as the wave passes")
+      if (ok && o.resolveOdd && r.base && !reduceMotion) (r.ans || []).forEach(i => {
+        const tt = tiles[i]; if (!tt) return;
+        tt.classList.add("oo-resolve");
+        const dl = parseFloat(tt.style.getPropertyValue("--dl")) || 0;
+        later(() => { if (tt.isConnected) tt.style.setProperty("--c", r.base); }, dl + 90);
+      });
       if (r.k > 1 && v === "one") q.textContent = ok ? `Found all ${OO_NUM_W[r.k].toLowerCase()}.` : `${OO_NUM_W[r.k]} tiles were different.`;
       if (o.feedback !== false && o.tileNames !== false) ooTileNames(board, tiles, r, extra.picked);
       resolve({ ok: ok ? 1 : 0, ms, hint, act: r.act, right: r.odd, dir: r.dir, ...extra });
@@ -719,7 +803,7 @@ function ooMap(opt = {}) {
   const model = ooS().model;
   const startTh = { hue: ooTheta(model, "hue", null), light: ooTheta(model, "light", null), chroma: ooTheta(model, "chroma", null) };
   const lives0 = zen ? 0 : 3;
-  const st = { cols: sim.cols, acc: sim.acc.slice(), round: 0, hits: 0, lives: lives0 };
+  const st = { cols: sim.cols, acc: sim.acc.slice(), round: 0, hits: 0, lives: lives0, streak: 0, grew: false };
   const el = show(`
     <header class="deck-top">
       <button class="icon-btn" data-close aria-label="Close">${ICON.x}</button>
@@ -742,6 +826,8 @@ function ooMap(opt = {}) {
   };
   paintTally();
   function nextRound() {
+    ooMeltGhost(ui);
+    const enter = st.round === 0 ? null : st.grew ? "divide" : "settle"; st.grew = false;
     const breather = st.round > 0 && st.round % 5 === 4;
     const aspect = (ui.stage.clientHeight / ui.stage.clientWidth) || 1.6;
     let r = null;
@@ -757,14 +843,18 @@ function ooMap(opt = {}) {
     }
     if (!r) r = ooSimpleRound({ model, cols: st.cols, round: st.round, aspect, palette: ooPickPalette() }, breather);
     ui.foot.innerHTML = "";
-    const o = { feedback: true, tileNames: false };   // names live in the reveal card now, never crowding small tiles
+    const o = { feedback: true, tileNames: false, resolveOdd: true, enter };   // names live in the reveal card now, never crowding small tiles
     if (!zen) o.timeLimit = ooSimpleTime(st.cols);
     ooAsk(ui, r, o).then(res => onAnswer(r, res));
   }
   function onAnswer(r, res) {
     if (!ui.stage.isConnected) return;
+    // captured before the reveal card replaces the foot and the board settles back, for the reveal halves' FLIP
+    const tilesNow = [...ui.stage.querySelectorAll(".oo-t")];
+    const originOdd = r.ans && r.ans.length ? tilesNow[r.ans[0]] : null;
+    const originField = tilesNow.find((t, i) => r.ans && !r.ans.includes(i)) || null;
     st.round++;
-    if (res.ok) st.hits++; else if (!zen) st.lives--;
+    if (res.ok) { st.hits++; st.streak++; } else { if (!zen) st.lives--; st.streak = 0; }
     st.acc.push(res.ok ? 1 : 0); if (st.acc.length > OO_S_WINDOW) st.acc.shift();
     // a combined-axis round still only teaches the judgment it mainly tested: crediting every axis with its own
     // slice of one shared outcome reads as "a tiny hue nudge alone was spotted" even when a much bigger chroma
@@ -779,14 +869,18 @@ function ooMap(opt = {}) {
     }
     if (!res.ok && res.picked && res.right) ooLogMiss(res.right, res.picked, { game: "odd:simple", judg: r.judg, d: res.act });
     const newCols = ooSimpleGrid(st.cols, st.acc);
-    if (newCols !== st.cols) { st.cols = newCols; st.acc = []; }
+    if (newCols !== st.cols) { st.grew = newCols > st.cols; st.cols = newCols; st.acc = []; }
     sim.cols = st.cols; sim.acc = st.acc.slice(); sim.last = today(); save();
     if (!zen) { const hearts = el.querySelectorAll(".oo-hearts i"); if (hearts[st.lives]) hearts[st.lives].classList.add("gone"); }
     paintTally();
     const over = !zen && st.lives <= 0;
+    const board = ui.stage.querySelector(".oo-board");
+    // a streak moment: a luminous sweep every 5 in a row, a slower bloom every 10 -- before the board settles
+    // back, so the sweep plays on the full field
+    if (res.ok && st.streak > 0 && st.streak % 5 === 0 && board) { const big = st.streak % 10 === 0; ooShimmer(board, big); buzz(big ? [12, 60, 12] : [8, 50, 8]); }
     // the board settles back (David, 2026-10-11: "its own moment"); a reveal card slides up over it with what
     // you just saw -- two big named halves, how they differ, a gradient's own key stops, and the palette's source
-    const board = ui.stage.querySelector(".oo-board"); if (board) board.classList.add("oo-settle");
+    if (board) board.classList.add("oo-settle");
     const rv = ooRevealHTML(r, res);
     ui.foot.innerHTML = `<div class="oo-reveal${reduceMotion ? "" : " oo-in"}">
       ${rv.halves}
@@ -795,6 +889,8 @@ function ooMap(opt = {}) {
       ${rv.srcHTML}
       <button class="btn${res.ok && !over ? " ghost" : ""}" data-next>${over ? "See how you did" : "Next"} ${ICON.arrow}</button>
     </div>`;
+    // the two halves grow out of the tiles they came from (David, 2026-10-11)
+    ooRevealFlip(ui, originOdd, originField);
     // tap anywhere on the reveal (not a name or the source line) moves on, once -- the "Next" button sits INSIDE
     // the reveal card, so its own click also bubbles to the card's tap-anywhere listener below; both must share
     // one guard or a single tap fires two rounds (David 2026-10-11's reveal card surfaced this).
