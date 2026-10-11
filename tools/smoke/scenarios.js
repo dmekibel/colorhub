@@ -3676,6 +3676,45 @@ scenario("map", "no gap in the drawn interior at Magnify high or at the resting 
     t.notes.push(`${arr}: mag ${mag.checked}/0, floor ${rest.checked}/0`);
   }
 });
+// David, 2026-10-11, two live-screenshot regressions in the same lane: a close crop (Grid, Magnify .95) showed one
+// specific diagonal with NO seam line while its mirror-image neighbor had one, and ~11 more missing lines spread
+// across Grid mid-fling, all angles -- the "draw each edge once, from whichever cell sorts first by name" rule
+// was silently dropping edges (asymmetric tags, or the owner was the off-screen collar copy that never gets
+// drawn). Replaced with one Path2D holding every cell's full boundary (collar included), stroked once -- a
+// cell's edge ownership doesn't matter when nothing is drawn twice in separate paint operations. This checks the
+// actual PIXELS, not just the geometry (_qaCoverage/_overlapStat already covered that): at a random sample of
+// edge midpoints, the darkest nearby pixel should read meaningfully darker than a clean reference point in the
+// same cell, with no systemic floor at ~zero (that's what an unstroked edge looks like) -- in Grid at rest, at
+// Magnify .95, AND mid-fling (the exact fast-pan condition from the second screenshot).
+scenario("map", "every cell edge actually shows its seam pixel, including mid-fling", async t => {
+  await H.homeReady(t);
+  t.ev('S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.arr = "map"; S.hm.ord = { map: "hue" }; S.hm.style = "honeycomb"; hmHome();');
+  await t.waitFor(() => H.num(t.text(".hm-title small")) > 400, 10000, "every name to fill");
+  await t.sleep(300);
+  const rest = t.ev("HM_CTRL._qaSeamSample(900)");
+  t.expect(rest.n > 100, `rest: too few on-canvas edges to judge (${rest.n})`);
+  t.expect(rest.p5 > 3, `rest: the darkest-5% of edges barely darken at all (p5 ${rest.p5}, min ${rest.min}, median ${rest.median}) -- a real edge is likely missing its line`);
+  t.notes.push(`rest: n${rest.n} min${rest.min} p5${rest.p5} med${rest.median}`);
+  t.ev('S.hm.feel = { mag: .95, space: .15, size: .5 }; hmHome();');
+  await t.sleep(300);
+  const mag = t.ev("HM_CTRL._qaSeamSample(900)");
+  t.expect(mag.n > 100, `Magnify .95: too few on-canvas edges to judge (${mag.n})`);
+  t.expect(mag.p5 > 3, `Magnify .95: the darkest-5% of edges barely darken at all (p5 ${mag.p5}, min ${mag.min}, median ${mag.median})`);
+  t.notes.push(`mag: n${mag.n} min${mag.min} p5${mag.p5} med${mag.median}`);
+  // the exact mid-fling condition: a fast drag-release, sampled ~60ms after release (still gliding)
+  const cv = t.$("canvas"), r = cv.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  const o = (x, y) => ({ bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 21, pointerType: "touch", isPrimary: true, view: t.w });
+  cv.dispatchEvent(new t.w.PointerEvent("pointerdown", o(cx, cy)));
+  cv.dispatchEvent(new t.w.PointerEvent("pointermove", o(cx - 40, cy - 27)));
+  cv.dispatchEvent(new t.w.PointerEvent("pointermove", o(cx - 90, cy - 60)));
+  cv.dispatchEvent(new t.w.PointerEvent("pointermove", o(cx - 120, cy - 80)));
+  cv.dispatchEvent(new t.w.PointerEvent("pointerup", o(cx - 120, cy - 80)));
+  await t.sleep(60);
+  const fling = t.ev("HM_CTRL._qaSeamSample(900)");
+  t.expect(fling.n > 80, `mid-fling: too few on-canvas edges to judge (${fling.n})`);
+  t.expect(fling.p5 > 3, `mid-fling: the darkest-5% of edges barely darken at all (p5 ${fling.p5}, min ${fling.min}, median ${fling.median}) -- the fast-pan "thick moat" regression`);
+  t.notes.push(`mid-fling: n${fling.n} min${fling.min} p5${fling.p5} med${fling.median}`);
+});
 scenario("map", "the map keeps its pan and zoom when you open a color and come back", async t => {
   const cv = await H.homeReady(t), r = cv.getBoundingClientRect();
   const o = (x, y) => ({ bubbles: true, cancelable: true, clientX: r.left + x, clientY: r.top + y, pointerId: 11, pointerType: "touch", isPrimary: true, view: t.w });

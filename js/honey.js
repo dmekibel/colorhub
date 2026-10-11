@@ -756,11 +756,13 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
   //     in to the cell's own smaller natural radius: that moved only ONE vertex per open run and left its straight
   //     neighboring edge cutting across the middle of the cell, a worse, sharper notch than the plain bulge it was
   //     meant to fix; reverted). The fill touches its real neighbors exactly (bisect() has no inset); see
-  //     finishFrame's edge pass for the seam itself, drawn once per shared edge at a constant width.
-  //  Each surviving edge is tagged with the neighbor bubble that cut it (or null for an untouched, open edge),
-  //  carried in the parallel `tags` array returned alongside the polygon -- finishFrame's edge pass uses it to
-  //  draw each shared edge exactly once (from whichever of the two cells sorts first by name), instead of each
-  //  cell separately stroking its own boundary, which is what let two neighbors disagree on one edge's look.
+  //     finishFrame's seam pass, which strokes every cell's full boundary into one shared Path2D and paints it in
+  //     a single stroke() call -- a cell's own edge ownership doesn't matter there (tried tagging each edge with
+  //     the neighbor that cut it and letting only one side draw it, David 2026-10-11: some edges came out with no
+  //     line at all, because the two cells' independently-computed tags didn't always agree on who owned what, or
+  //     the owner was the off-screen collar copy that never got drawn; a single path stroked once can't miss an
+  //     edge, since every cell contributes its own full boundary and overlapping geometry in ONE stroke() call
+  //     doesn't double up in alpha the way two separate stroke() calls would).
   function clipTiled(n, b, nSides, ownR0) {
     const reach = tileReach(b.d), ci0 = Math.floor(b.x / cell), cj0 = Math.floor(b.y / cell);
     const cuts = []; let maxLim = 0;
@@ -771,25 +773,23 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
         const o = drawn[m], vx = o.x - b.x, vy = o.y - b.y, dist = Math.hypot(vx, vy);
         if (dist < 1e-6 || dist > tileCull(b.d, r0[m] * 2)) continue;
         const lim = bisect(n, m, dist);
-        cuts.push([vx / dist, vy / dist, lim, o]);
+        cuts.push(vx / dist, vy / dist, lim);
         if (lim > maxLim) maxLim = lim;
       }
     }
     const R0 = Math.max(ownR0, maxLim * 1.8 + 8);
-    let poly = [], tags = [];
-    for (let i = 0; i < nSides; i++) { const t = i / nSides * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); tags.push(null); }
-    for (const [ux, uy, lim, owner] of cuts) {
-      if (!poly.length) break;
-      // keep the side of the power bisector that faces this bubble; a KEPT original point's outgoing edge keeps
-      // its old tag (the same relation, maybe just shortened at the far end), a fresh intersection point's
-      // outgoing edge is tagged with THIS cut's neighbor (it's a piece of that cut's own line)
-      const out = [], outTags = [];
+    let poly = [];
+    for (let i = 0; i < nSides; i++) { const t = i / nSides * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
+    for (let c = 0; c < cuts.length && poly.length; c += 3) {
+      const ux = cuts[c], uy = cuts[c + 1], lim = cuts[c + 2];
+      // keep the side of the power bisector (the half that faces this bubble)
+      const out = [];
       for (let k = 0; k < poly.length; k++) {
         const p = poly[k], q = poly[(k + 1) % poly.length], dp = p[0] * ux + p[1] * uy - lim, dq = q[0] * ux + q[1] * uy - lim;
-        if (dp <= 0) { out.push(p); outTags.push(tags[k]); }
-        if ((dp <= 0) !== (dq <= 0)) { const t = dp / (dp - dq); out.push([p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t]); outTags.push(owner); }
+        if (dp <= 0) out.push(p);
+        if ((dp <= 0) !== (dq <= 0)) { const t = dp / (dp - dq); out.push([p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t]); }
       }
-      poly = out; tags = outTags;
+      poly = out;
     }
     // the inscribed circle: the nearest edge line to the center
     let rin = Infinity;
@@ -798,7 +798,7 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
       if (len < 1e-9) continue;
       rin = Math.min(rin, Math.abs(p[0] * ey - p[1] * ex) / len);
     }
-    return poly.length >= 3 ? { poly, tags, rin: isFinite(rin) ? rin : 0 } : { poly: null, tags: null, rin: 0 };
+    return poly.length >= 3 ? { poly, rin: isFinite(rin) ? rin : 0 } : { poly: null, rin: 0 };
   }
   drawn.forEach((b, n) => {
     if (b.d < 7 && !clipAll) {
@@ -809,8 +809,8 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
       // a tiny tiled cell: the SAME real power-diagram clip as an ordinary one, just a cheaper 8-sided start --
       // no more plain-circle fallback (David, 2026-10-11: "no gaps at any zoom"). At a few px the facets are
       // already sub-pixel, so dropping from 24 sides to 8 here costs nothing visible.
-      const { poly, tags, rin } = clipTiled(n, b, 8, b.d * .78);
-      b.poly = poly; b.tags = tags; b.rin = rin; b.d0 = b.d; b.d = 2 * rin; return;
+      const { poly, rin } = clipTiled(n, b, 8, b.d * .78);
+      b.poly = poly; b.rin = rin; b.d0 = b.d; b.d = 2 * rin; return;
     }
     if (shapeAmt <= .02) {   // Bubbles: unchanged -- the nearest plain-Voronoi bisector, no polygon needed
       const reach = Math.min(12, Math.ceil((b.d + maxD) * .75 / cell));
@@ -833,8 +833,8 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
     }
     // Tiled look: the real power diagram, at full (24-sided) resolution so an open edge rounds off smoothly
     // instead of showing a cheap polygon's facets.
-    const { poly, tags, rin } = clipTiled(n, b, 24, b.d * .8);
-    b.poly = poly; b.tags = tags; b.rin = rin; b.d0 = b.d; b.d = 2 * rin;
+    const { poly, rin } = clipTiled(n, b, 24, b.d * .8);
+    b.poly = poly; b.rin = rin; b.d0 = b.d; b.d = 2 * rin;
   });
   // Circles (Bubbles, shape 0): unchanged. A small bubble leaves room in its cell that its bigger neighbor can use
   // (the Magnifier's center next to its smaller first ring). Grow each circle, center outward, until it meets its
@@ -1403,6 +1403,9 @@ function honeycomb(host, opts = {}) {
     const shapeAmt = zc("shape");
     applyMotion(l, t);
     honeyCells(drawn, gapPx(), shapeAmt, L18_GROW, !!morph);
+    // every cell honeyCells just clipped, collar included -- kept so the seam pass below can still stroke an edge
+    // whose OTHER cell is just off-screen (its own edge would otherwise go unstroked once that collar is dropped).
+    const allDrawn = drawn;
     // drop the just-offscreen collar (buildFlatDrawn's HONEY_EDGE_MARGIN) now that it's done its job of clipping
     // -- cull after honeyCells runs, not before, so an edge cell is already shaped by a neighbor that's about to
     // scroll into view, instead of jumping once that neighbor's own point crosses the strict viewport rect.
@@ -1486,28 +1489,27 @@ function honeycomb(host, opts = {}) {
         ctx.globalAlpha = l.a;
       }
     }
-    // David, 2026-10-11 ("uneven outlines" -- some borders showed a seam, some didn't): one pass, after every fill,
-    // draws each SHARED edge exactly once -- never once per cell, which is what let two neighbors disagree (a
-    // light cell wants a dark line, the dark cell across the seam wants a light one; whichever happened to draw
-    // last won, cell by cell, with no fixed rule). An edge's owner (clipTiled's own tag, carried on b.tags) is
-    // whichever of the two cells sorts first by name -- arbitrary but stable, so the edge is drawn from exactly
-    // one side, at one constant width and color, everywhere. An open edge (tag null, the true outer boundary of
-    // the whole set) has no second cell to agree with, so it stays unstroked -- the plain fill meeting the
-    // background already reads as a clean silhouette.
+    // David, 2026-10-11 ("uneven outlines" -- some borders showed a seam, some didn't, confirmed with a close crop:
+    // one specific diagonal had no line at all while its neighbor did): first tried letting only one of the two
+    // cells sharing an edge draw it (clipTiled tagged each edge with the neighbor that cut it). That still missed
+    // edges -- the two cells' tags didn't always agree on who owned what, or the owner was a collar cell that
+    // never gets its own turn to draw. A single Path2D can't miss an edge: every cell (collar included, so an
+    // edge right at the screen border is still covered by its off-screen neighbor's own copy of it) adds its
+    // FULL closed boundary, and the whole path is stroked in exactly one stroke() call -- one paint operation, so
+    // two cells' overlapping copies of their shared edge don't double up in alpha the way two separate stroke()
+    // calls would, and the result is identical everywhere regardless of which cell "owns" a line that, as far as
+    // the canvas is concerned, was never owned by anyone to begin with.
     if (exact) {
-      ctx.globalAlpha = l.a; ctx.lineCap = "round"; ctx.lineWidth = Math.max(1, gapPx()); ctx.strokeStyle = "rgba(20,19,17,.4)";
-      ctx.beginPath();
-      for (const b of drawn) {
-        if (!b.poly || !b.tags) continue;
-        const nv = b.poly.length;
-        for (let k = 0; k < nv; k++) {
-          const owner = b.tags[k];
-          if (!owner || !(b.it.n < owner.it.n)) continue;
-          const p = b.poly[k], q = b.poly[(k + 1) % nv];
-          ctx.moveTo(b.x + p[0], b.y + p[1]); ctx.lineTo(b.x + q[0], b.y + q[1]);
-        }
+      const path = new Path2D();
+      for (const b of allDrawn) {
+        if (!b.poly || b.poly.length < 3) continue;
+        const p0 = b.poly[0];
+        path.moveTo(b.x + p0[0], b.y + p0[1]);
+        for (let k = 1; k < b.poly.length; k++) { const p = b.poly[k]; path.lineTo(b.x + p[0], b.y + p[1]); }
+        path.closePath();
       }
-      ctx.stroke();
+      ctx.globalAlpha = l.a; ctx.lineJoin = "round"; ctx.lineWidth = Math.max(1, gapPx()); ctx.strokeStyle = "rgba(20,19,17,.4)";
+      ctx.stroke(path);
     }
     ctx.globalAlpha = 1;
     if (ST.marks.size) honeyStudyMarks(ctx, drawn, ST.marks, t);
@@ -2461,6 +2463,59 @@ function honeycomb(host, opts = {}) {
         if (!covered(x, y)) { uncovered++; if (misses.length < 6) misses.push([+x.toFixed(1), +y.toFixed(1)]); }
       }
       return { checked, uncovered, hullPts: hull.length, misses };
+    },
+    // QA (tools/smoke map group): does every edge of every currently-drawn tiled cell actually show the seam
+    // stroke, with the SAME darkening everywhere -- not just "is there a polygon" (_overlapStat,
+    // _qaCoverage) but "did the pixels really get painted" (David, 2026-10-11: a close screenshot crop showed
+    // one specific edge with no line at all while its mirror-image neighbor had one -- a real rendering gap the
+    // geometry checks above can't see, since the polygons themselves were correct). For a random sample of edges,
+    // reads the actual canvas pixel at the edge's midpoint and at a clean reference point a few px toward that
+    // cell's own center (inside the fill, clear of the stroke), and reports how much darker the seam pixel is --
+    // every edge should darken by roughly the same amount (the one constant stroke, alpha-blended once), so a
+    // reported min of ~0 alongside a normal max means some edge never got stroked at all.
+    _qaSeamSample(maxEdges = 300) {
+      const edges = [];
+      for (const b of drawn) {
+        if (!b.poly || b.poly.length < 3 || b.rin < 5) continue;   // too small for a reliable reference point either way
+        const nv = b.poly.length;
+        for (let k = 0; k < nv; k++) {
+          const p = b.poly[k], q = b.poly[(k + 1) % nv], mxl = (p[0] + q[0]) / 2, myl = (p[1] + q[1]) / 2;
+          const mx = b.x + mxl, my = b.y + myl;
+          if (mx < 0 || my < 0 || mx > W || my > Hh) continue;   // stay on-canvas
+          // a clean reference point for THIS cell's own fill: off the edge's OWN inward normal, not toward the
+          // cell's generator point -- on an irregular (non-regular, off-center) polygon, "toward center" can pass
+          // close by a DIFFERENT edge's own stroke before clearing this one, silently reporting a real seam as "0
+          // darkening". The inward normal moves directly away from THIS edge and nothing else.
+          const ex = q[0] - p[0], ey = q[1] - p[1], len = Math.hypot(ex, ey) || 1;
+          let nx = ey / len, ny = -ex / len;   // perpendicular to the edge, one of the two directions
+          if (nx * (-mxl) + ny * (-myl) < 0) { nx = -nx; ny = -ny; }   // flip to point toward the generator point (always inside)
+          const off = Math.min(4, b.rin * .5), rx = mx + nx * off, ry = my + ny * off;
+          edges.push([mx, my, rx, ry]);
+        }
+      }
+      if (edges.length > maxEdges) { for (let i = edges.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [edges[i], edges[j]] = [edges[j], edges[i]]; } edges.length = maxEdges; }
+      const lum = (x, y) => { const d = ctx.getImageData(Math.round(x * dpr), Math.round(y * dpr), 1, 1).data; return .2126 * d[0] + .7152 * d[1] + .0722 * d[2]; };
+      // a 1 CSS px line is a fraction of a device px wide once antialiased, so its peak darkness can land on
+      // either of two neighboring pixels depending on sub-pixel phase -- a single exact sample at the geometric
+      // midpoint can land on the LIGHTER of the two by pure chance even when the stroke is genuinely there. The
+      // darkest pixel in a small box around the midpoint is what a person actually sees as "the line".
+      const darkestNear = (x, y) => {
+        let best = Infinity;
+        for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) { const v = lum(x + dx, y + dy); if (v < best) best = v; }
+        return best;
+      };
+      const darkenings = [];
+      for (const [mx, my, rx, ry] of edges) {
+        if (mx < 3 || my < 3 || rx < 1 || ry < 1 || mx > W - 3 || my > Hh - 3 || rx > W - 1 || ry > Hh - 1) continue;
+        const rl = lum(rx, ry);
+        if (rl < 30) continue;   // a near-black cell: the stroke's own color is in the same range, so no luminance
+        // drop could ever prove it's there -- genuinely nothing to measure, not a gap in coverage.
+        darkenings.push(Math.max(0, rl - darkestNear(mx, my)));
+      }
+      darkenings.sort((a, b2) => a - b2);
+      const n = darkenings.length, min = darkenings[0] ?? 0, max = darkenings[n - 1] ?? 0;
+      const p5 = darkenings[Math.floor(n * .05)] ?? 0, median = darkenings[Math.floor(n / 2)] ?? 0;
+      return { n, min: +min.toFixed(1), p5: +p5.toFixed(1), median: +median.toFixed(1), max: +max.toFixed(1) };
     },
     // QA (tools/smoke home group): every currently-drawn bubble's REAL label font size in CSS px (honeyWrap's
     // cached per-name ratio times the bubble's current diameter), for bubbles that would actually draw one
