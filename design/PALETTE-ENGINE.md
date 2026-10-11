@@ -339,6 +339,25 @@ The rigor critic's best catches, plus mine:
   - *Starry Night Over the Rhône* 17.7 vs 18.2 (it misses the small yellow lights);
   - *Bridge over a Pond of Water Lilies* 17.1 vs 16.2 (worse: it takes a dull grey the curator skipped).
 
+**More human examples, and how much people agree (2026-10-11).** Gathered into gitignored `research/_raw/datasets/` (evaluation only):
+- **Lin & Hanrahan, "Modeling How People Extract Color Themes from Images" (CHI 2013, Stanford).** 40 images (20 paintings: Monet, Seurat, Winslow Homer, Macke, Chikanobu; 20 photos). 40 Mechanical Turk workers each picked 5-color palettes per image, plus 11 artists on some images. People picked from a set of swatches offered per image. The official link is dead; the dataset came from the Internet Archive copy. No license stated, so it's used for testing only.
+- **O'Donovan, Agarwala & Hertzmann, "Color Compatibility From Large Datasets" (SIGGRAPH 2011).** Human ratings of 5-color palettes (Kuler, COLOURlovers, MTurk). CC BY-NC-SA, non-commercial: research and testing only, and nothing trained on it ships if the app is commercial. Not used yet.
+- **ColorLisa:** 133 unique hand-made 5-color palettes from 99 artists; 13–14 are paintings we hold (Mona Lisa, the Great Wave, Starry Night, Girl with a Pearl Earring, the Milkmaid, the Arnolfini Portrait, The Kiss, The Birth of Venus, La Grande Jatte, Monet's Water Lilies 1906 and Woman with a Parasol, The Scream).
+
+**The key measurement: people don't agree with each other much.** On Lin & Hanrahan's 20 paintings (mean CIEDE2000, matched one-to-one):
+
+| | Distance |
+|---|---|
+| one person vs another, same painting | **12.7** |
+| artists vs Turk workers | 13.8 |
+| area k-means vs each person | 13.8 |
+| our learned picker vs each person | **16.9** |
+
+What it means:
+1. **Our 13.1 against the Pinterest curator is roughly the size of the disagreement between two people.** So the picker is close to "another person's take" on that curator's cards. (Different images and a different swatch method, so this is a rough comparison, not proof.)
+2. **"Taste" is not one thing.** The picker learned one curator's lit, vivid style, and on ordinary people's palettes it does *worse* than plain area clustering (16.9 vs 13.8). The crowd's consensus is more representative; this curator is more selective.
+3. **So the engine should offer styles** (a representative one, close to the crowd, and curated ones like this board), and **learn the user's own taste** (§6). No single "correct" palette exists to chase.
+
 **Stage 2: the learning loop and vibration pairs.**
 - Ship the swipe deck, log every component score, and refit the weights. Pass if the learned weights predict held-out swipes better than the hand-set ones.
 - Vibration pairs: pass if Café Terrace's cobalt/orange is found without being pointed at.

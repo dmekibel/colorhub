@@ -67,6 +67,7 @@ function studio() {
       <button class="st-tile" data-taste="color"><span class="st-art st-duel"><i style="--c:#C8553D"></i><i style="--c:#3F7C8C"></i></span><b>Find your color</b><small>${S.fav ? `Yours: ${esc(S.fav.n)}-ish` : "About 20 taps. A map of the colors you love."}</small></button>
       <button class="st-tile" data-taste="palette"><span class="st-art st-duel st-duel-pal">${[["#EFE6D2", "#C8553D", "#E0A458", "#5B7F6E"], ["#1F2A44", "#4F6D7A", "#C0D6DF", "#EAEAEA"]].map(p => `<i>${p.map(h => `<b style="--c:${h}"></b>`).join("")}</i>`).join("")}</span><b>Find your palette</b><small>About 15 taps. Your palette dials and painters.</small></button>
     </div>
+    ${typeof tasteLadderIntro === "function" ? `<button class="qrow ldr-row" data-ladder><span><b>Teach it your eye</b><small>One growing model: colors, pairs, threes, palettes</small></span>${ICON.chev}</button>` : ""}
     ${typeof fvStudioRow === "function" ? fvStudioRow() : ""}
     ${phShelfHTML()}
     <div class="sec-head"><b>Your palettes</b><span>${saved.length || ""}</span></div>
@@ -75,6 +76,7 @@ function studio() {
   `, "studio", "studio");
   el.querySelectorAll("[data-lab]").forEach(b => b.onclick = () => LAB[b.dataset.lab]());
   el.querySelectorAll("[data-taste]").forEach(b => b.onclick = () => tasteIntro(b.dataset.taste));
+  const ldrRow = el.querySelector("[data-ladder]"); if (ldrRow) ldrRow.onclick = () => tasteLadderIntro();
   el.querySelector("[data-namer]").onclick = () => LAB.namer();
   const fvRow = el.querySelector("[data-fv-row]"); if (fvRow) fvRow.onclick = () => favShelf(() => go("studio"));   // js/favs.js
   el.querySelector("[data-wheel]").onclick = () => gamutWheel();

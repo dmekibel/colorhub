@@ -214,7 +214,196 @@ const TASTE = (() => {
     return { k, pair };
   }
 
-  return { sig, dot, rng, model, predict, update, choose, utility, spread, info, COLOR_PRIOR, colorFeat, maxC, lchToHex, colorItem, hexItem, colorPool, colorGrid, nextPair, extremes,
-    DIALS, PAL_PRIOR, palRaw, toZ, fromZ, palFeat, palItem, genPalette, dialRead, nextPalPair, hueDist };
+  // ======================================================================
+  // Engine v2 (design/TASTE-ENGINE.md): one growing model, four layers deep (Stage A; layer 5 is a Stage B hook).
+  // Every layer's features are computed for ANY set of colors (1 = a color, 2 = a pair, 3 = a triple, more = a
+  // palette), share-weighted, so a duel at any rung teaches every layer a little. Deeper layers get a smaller
+  // prior variance (a more skeptical prior), so they only move once the evidence supports them.
+  // ----------------------------------------------------------------------
+  const mean = a => a.length ? a.reduce((s, v) => s + v, 0) / a.length : 0;
+  const normShares = (shares, n) => { const a = shares && shares.length === n ? shares : new Array(n).fill(1 / n), t = a.reduce((x, y) => x + y, 0) || 1; return a.map(v => v / t); };
+
+  // ---------- layer 2: relationships between two colors (8 features) ----------
+  function pairRelFeat(L1, C1, H1, L2, C2, H2) {
+    const d = hueDist(H1, H2), s1 = Math.min(1, C1 / 30), s2 = Math.min(1, C2 / 30), sp = s1 * s2;
+    const bump = (x, at, w) => Math.exp(-(((x - at) / w) ** 2));
+    const warm1 = Math.cos((H1 - 60) * rad) * s1, warm2 = Math.cos((H2 - 60) * rad) * s2;
+    const vivM = clamp(Math.max(C1, C2) / 60, 0, 1) * clamp(1 - Math.min(C1, C2) / 60, 0, 1);
+    return [bump(d, 0, 40) * sp, bump(d, 45, 35) * sp, bump(d, 120, 35) * sp, bump(d, 180, 40) * sp,
+      Math.abs(L1 - L2) / 100, Math.abs(warm1 - warm2), 1 - Math.abs(C1 - C2) / 100, vivM];
+  }
+  function relFeat(cols, shares) {
+    const n = cols.length; if (n < 2) return new Array(8).fill(0);
+    const w = normShares(shares, n), P = cols.map(h => { const [L, C, H] = lch(h); return { L, C, H }; });
+    const sum = new Array(8).fill(0); let wsum = 0;
+    for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
+      const wt = w[i] * w[j], f = pairRelFeat(P[i].L, P[i].C, P[i].H, P[j].L, P[j].C, P[j].H);
+      for (let k = 0; k < 8; k++) sum[k] += wt * f[k]; wsum += wt;
+    }
+    return wsum > 1e-9 ? sum.map(v => v / wsum) : sum;
+  }
+
+  // ---------- layer 3 extras: four more structure features beside the six dials (4 features) ----------
+  function structExtra(cols, shares) {
+    const w = normShares(shares, cols.length);
+    const P = cols.map((h, i) => { const [L, a, b] = lab(h), C = Math.hypot(a, b); return { L, C, H: (Math.atan2(b, a) / rad + 360) % 360, w: w[i] }; });
+    const deepAnchor = P.reduce((m, p) => Math.max(m, p.L < 25 && p.w >= .05 ? p.w : 0), 0);
+    const colorful = P.filter(p => p.C >= 8);
+    let hueVar = 0, meanH = 0;
+    if (colorful.length >= 2) {
+      let sx = 0, sy = 0, sw = 0; colorful.forEach(p => { sx += p.w * Math.cos(p.H * rad); sy += p.w * Math.sin(p.H * rad); sw += p.w; });
+      hueVar = 1 - Math.hypot(sx, sy) / (sw || 1); meanH = (Math.atan2(sy, sx) / rad + 360) % 360;
+    }
+    const Ls = P.map(p => p.L), Lrange = (Math.max(...Ls) - Math.min(...Ls)) / 100;
+    const oneHueRamp = clamp((1 - hueVar) * Lrange * 2, 0, 1);
+    let analogVsComplement = 0;
+    if (colorful.length >= 2) {
+      let best2 = Infinity;
+      for (let seed = 0; seed < 180; seed += 15) {
+        let s = 0; colorful.forEach(p => { s += p.w * Math.min(hueDist(p.H, seed), hueDist(p.H, (seed + 180) % 360)) ** 2; });
+        if (s < best2) best2 = s;
+      }
+      const oneErr = colorful.reduce((s, p) => s + p.w * hueDist(p.H, meanH) ** 2, 0);
+      analogVsComplement = oneErr > 1e-6 ? clamp(1 - best2 / oneErr, -1, 1) : 0;   // >0 reads complementary (two arcs), <0 analogous (one arc)
+    }
+    const accentCount = cols.length ? cols.filter((_, i) => w[i] < .12).length / cols.length : 0;
+    return [deepAnchor, oneHueRamp, analogVsComplement, accentCount];
+  }
+
+  // ---------- layer 4: 12 hue-family affinities, smoothly binned so a hue near a boundary doesn't cliff (12 features) ----------
+  function famFeat(cols, shares) {
+    const w = normShares(shares, cols.length), out = new Array(12).fill(0);
+    cols.forEach((h, i) => {
+      const [, C, H] = lch(h), s = Math.min(1, C / 30);
+      for (let k = 0; k < 12; k++) out[k] += w[i] * s * Math.exp(-((hueDist(H, k * 30 + 15) / 22) ** 2));
+    });
+    return out;
+  }
+  // layer 5 (design doc §2): similarity to palettes you keep, in an offline-learned 12-number palette space
+  // (PCA of the 42,000-archive palette features, tools/taste_space.py). Stage B. The hook: when that space
+  // exists, concatenate its projection here and extend TASTE2_PRIOR with small-variance entries for it.
+  const layer5Feat = () => [];
+
+  // ---------- the combined feature vector: works for 1 color, a pair, a triple, or a whole palette ----------
+  function tasteFeat(cols, shares) {
+    const n = cols.length, w = normShares(shares, n);
+    const l1 = new Array(10).fill(0);
+    cols.forEach((h, i) => { const [L, C, H] = lch(h), f = colorFeat(L, C, H); for (let k = 0; k < 10; k++) l1[k] += w[i] * f[k]; });
+    const l2 = relFeat(cols, w);
+    const raw = palRaw(cols, w), z = toZ(raw), l3 = [...palFeat(z), ...structExtra(cols, w)];
+    const l4 = famFeat(cols, w);
+    return [...l1, ...l2, ...l3, ...l4, ...layer5Feat()];
+  }
+  const TASTE2_LAYERS = { l1: [0, 10], l2: [10, 18], l3: [18, 34], l4: [34, 46], l5: [46, 46] };
+  // deeper layers start with a smaller (more skeptical) prior variance -- Bayesian Occam, so a beginner's few
+  // taps can't overfit a family affinity or a context offset, but a regular's hundred taps can still move one.
+  const TASTE2_PRIOR = [...COLOR_PRIOR, ...new Array(8).fill(.6), ...PAL_PRIOR.map(v => v * .4), ...new Array(4).fill(.3), ...new Array(12).fill(.18)];
+  const model2 = () => model(TASTE2_PRIOR);
+
+  // ---------- §4: every signal, at its own weight ----------
+  const SIGNALS = { duel: 1, both: .5, neither: .5, keep: .7, skip: .7, heartPainting: .4, heartColor: .4, savePalette: .6, playWithPainter: .2 };
+  // a duel pick, or Both/Neither (reuses `choose`, which is already dimension-agnostic)
+  const chooseV2 = (m, xa, xb, pick, ref) => choose(m, xa, xb, pick, ref);
+  // keep/skip (3B, later): a palette beats (kept) or loses to (skipped) an average one
+  function signalKeepSkip(m, x, ref, kept) { update(m, sub(x, ref), kept ? .75 : .25, SIGNALS.keep); }
+  // the implicit-signal hook (hearts, saves, "play with" a painter): x beats a random reference, at its own soft weight.
+  // Stage B wires this in from favs.js / studio.js / musecolls.js; Stage A only defines it.
+  function signalImplicit(m, x, ref, kind) { update(m, sub(x, ref), .75, SIGNALS[kind] || .3); }
+
+  // ---------- best-of-four (Plackett-Luce, by pairwise decomposition) ----------
+  // `order` ranks item indices best to worst (full, or just the top one or two known). `levelWeights[k]` is the
+  // TOTAL evidence that rank k beat everything ranked below it, split evenly across however many of those
+  // comparisons that implies. A plain duel is worth 1.0; a best-of-four's winner is budgeted the same 1.0 (so
+  // split 1/3 across its three losers); a tapped runner-up adds a second round worth 0.5 (split across its two).
+  function updateRanking(m, items, order, levelWeights) {
+    for (let k = 0; k < order.length - 1 && k < levelWeights.length; k++) {
+      const rest = order.slice(k + 1); if (!rest.length) continue;
+      const wt = levelWeights[k] / rest.length;
+      rest.forEach(j => update(m, sub(items[order[k]].x, items[j].x), 1, wt));
+    }
+  }
+  const predictBest = (m, items) => items.reduce((bi, it, i) => utility(m, it.x) > utility(m, items[bi].x) ? i : bi, 0);
+
+  // ---------- §1: prediction-before-tap accuracy, over the last 30 scored questions ----------
+  function recordAcc(m, hit, chance) { m.acc = m.acc || []; m.acc.push({ hit: hit ? 1 : 0, chance }); if (m.acc.length > 30) m.acc.shift(); }
+  function accuracy(m) { const a = m.acc || []; return a.length ? { acc: mean(a.map(r => r.hit)), chance: mean(a.map(r => r.chance)), n: a.length } : { acc: .5, chance: .5, n: 0 }; }
+
+  // ---------- §5: slow forgetting -- inflate the covariance ~3% per week of use, so taste can drift ----------
+  function forget(m, weeks) { if (!weeks) return; const f = Math.pow(1.03, weeks); m.S = m.S.map(r => r.map(v => v * f)); }
+
+  // ---------- §3: next question -- most informative four times in five, Thompson-sampled the fifth ----------
+  function cholesky(S) {
+    const n = S.length, L = Array.from({ length: n }, () => new Array(n).fill(0));
+    for (let i = 0; i < n; i++) for (let j = 0; j <= i; j++) {
+      let s = S[i][j]; for (let k = 0; k < j; k++) s -= L[i][k] * L[j][k];
+      L[i][j] = i === j ? Math.sqrt(Math.max(s, 1e-10)) : s / (L[j][j] || 1e-10);
+    }
+    return L;
+  }
+  function sampleWeights(m, rand = Math.random) {
+    const L = cholesky(m.S), n = m.mu.length, z = new Array(n);
+    for (let i = 0; i < n; i++) { const u = rand() + 1e-12, v = rand(); z[i] = Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+    return L.map((row, i) => { let s = m.mu[i]; for (let k = 0; k <= i; k++) s += row[k] * z[k]; return s; });
+  }
+  // a duel pair from a pool of pre-built {h, x, ...} items, informative 4/5 of the time, Thompson-sampled 1/5
+  function nextDuelV2(m, pool, opt = {}) {
+    const { tries = 400, ok = () => true, skip = new Set(), rand = Math.random, exploreRate = .2 } = opt;
+    const thompson = rand() < exploreRate, w = thompson ? sampleWeights(m, rand) : null;
+    const cands = [];
+    for (let t = 0; t < tries; t++) {
+      const a = pool[rand() * pool.length | 0], b = pool[rand() * pool.length | 0];
+      if (a === b || skip.has(a) || skip.has(b) || !ok(a, b)) continue;
+      cands.push([thompson ? Math.abs(dot(w, sub(a.x, b.x))) : info(m, a.x, b.x), a, b]);
+    }
+    cands.sort((p, q) => q[0] - p[0]);
+    const top = cands.slice(0, thompson ? 1 : 3); if (!top.length) return [pool[0], pool[1]];
+    const [, a, b] = top[rand() * top.length | 0];
+    return [a, b];
+  }
+  // four candidates to go with `baseCols` (1 hex for step 2's anchor, 2 for step 3's pair): a close neighbor, a
+  // near-opposite, a same-family shade at a different lightness, and an informative "wildcard" -- kept visibly
+  // apart (minDE) from each other and from the base, so no two ever read as the same color.
+  function pickCandidates4(m, baseCols, pool, opt = {}) {
+    const { rand = Math.random, exploreRate = .2, skip = new Set(), minDE = 10 } = opt;
+    const baseH = baseCols.map(h => lch(h)[2]), baseL = baseCols.map(h => lch(h)[0]);
+    let sx = 0, sy = 0; baseH.forEach(H => { sx += Math.cos(H * rad); sy += Math.sin(H * rad); });
+    const meanHue = (Math.atan2(sy, sx) / rad + 360) % 360, meanL = mean(baseL);
+    const avail = pool.filter(c => !skip.has(c) && !baseCols.includes(c.h));
+    const far = (c, chosen) => chosen.every(o => de2000(c.h, o.h) > minDE) && baseCols.every(h => de2000(c.h, h) > minDE * .6);
+    const byTarget = t => avail.slice().sort((a, b) => Math.abs(hueDist(a.H, meanHue) - t) - Math.abs(hueDist(b.H, meanHue) - t));
+    const chosen = [];
+    for (const c of byTarget(25)) if (far(c, chosen)) { chosen.push(c); break; }       // a close neighbor
+    for (const c of byTarget(165)) if (far(c, chosen)) { chosen.push(c); break; }      // a near-opposite
+    const byShade = avail.filter(c => hueDist(c.H, meanHue) < 35).sort((a, b) => Math.abs(Math.abs(b.L - meanL) - 35) - Math.abs(Math.abs(a.L - meanL) - 35));
+    for (const c of byShade) if (far(c, chosen)) { chosen.push(c); break; }            // same family, a different shade
+    const thompson = rand() < exploreRate, w = thompson ? sampleWeights(m, rand) : null;
+    let best = null, bestScore = -Infinity;
+    for (const c of avail) {
+      if (!far(c, chosen)) continue;
+      const f = tasteFeat([...baseCols, c.h], null), score = thompson ? Math.abs(dot(w, f)) : spread(m, f);
+      if (score > bestScore) { bestScore = score; best = c; }
+    }
+    if (best) chosen.push(best);
+    for (const c of avail) { if (chosen.length >= 4) break; if (far(c, chosen)) chosen.push(c); }
+    return chosen.slice(0, 4);
+  }
+
+  // ---------- migration: fold the existing v1 color/palette beliefs into v2's layers 1 and 3 (never wipes v1) ----------
+  function migrateV1(colorRec, paletteRec) {
+    const m = model2();
+    if (colorRec && Array.isArray(colorRec.mu) && colorRec.mu.length === COLOR_PRIOR.length) {
+      for (let i = 0; i < 10; i++) { m.mu[i] = colorRec.mu[i]; if (colorRec.S && colorRec.S[i]) m.S[i][i] = Math.max(colorRec.S[i][i], 1e-4); }
+    }
+    if (paletteRec && Array.isArray(paletteRec.mu) && paletteRec.mu.length === PAL_PRIOR.length) {
+      for (let i = 0; i < 12; i++) { const k = 18 + i; m.mu[k] = paletteRec.mu[i]; if (paletteRec.S && paletteRec.S[i]) m.S[k][k] = Math.max(paletteRec.S[i][i], 1e-4); }
+    }
+    return m;
+  }
+
+  return { sig, dot, sub, rng, model, predict, update, choose, utility, spread, info, COLOR_PRIOR, colorFeat, maxC, lchToHex, colorItem, hexItem, colorPool, colorGrid, nextPair, extremes,
+    DIALS, PAL_PRIOR, palRaw, toZ, fromZ, palFeat, palItem, genPalette, dialRead, nextPalPair, hueDist,
+    // v2
+    tasteFeat, relFeat, famFeat, structExtra, TASTE2_PRIOR, TASTE2_LAYERS, model2, SIGNALS, chooseV2, signalKeepSkip, signalImplicit,
+    updateRanking, predictBest, recordAcc, accuracy, forget, sampleWeights, nextDuelV2, pickCandidates4, migrateV1 };
 })();
 if (typeof module !== "undefined") module.exports = TASTE;

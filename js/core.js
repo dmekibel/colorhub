@@ -285,7 +285,11 @@ const fresh = () => ({ v: 1, placed: null, start: 0, cards: {}, done: {}, tab: "
 // Progress is never thrown away. An older save is migrated step by step (bump STATE_V and add a step when the
 // shape changes); a save from a newer version is kept as it is; unknown keys always survive. A save that
 // can't be read is copied aside (KEY + "-unreadable") before anything is written over it.
-const STATE_V = 3;   // 2: S.learn, the Learner Model's event log (js/learner.js) · 3: cards for any color (js/learnmore.js)
+const STATE_V = 4;   // 2: S.learn, the Learner Model's event log (js/learner.js) · 3: cards for any color (js/learnmore.js) ·
+// 4: S.taste shape is guaranteed (js/tasteladder.js's v2 engine lives at S.taste.ladder). The actual v1 -> v2
+// belief conversion (TASTE.migrateV1) is lazy, done the first time the ladder trainer opens -- not here, since
+// js/tastemodel.js hasn't necessarily loaded yet when this runs at boot -- so S.taste.color/S.taste.palette are
+// read here only to decide the shape, never altered or dropped.
 function migrateState(d) {
   if (!d || typeof d !== "object" || Array.isArray(d)) return null;
   const s = Object.assign(fresh(), d);
@@ -308,7 +312,10 @@ function migrateState(d) {
     Object.entries(s.cards).forEach(([id, st]) => { const c = byId.get(id); if (c && st && typeof st === "object" && !st.n) { st.n = c.n; st.h = c.h; } });
     s.v = 3;
   }
-  // future steps go here: if (s.v < 4) { …; s.v = 4; }
+  // v4 (js/tasteladder.js): S.taste is always an object, never an array or a scalar, so the v2 engine has a safe
+  // place to add its own `ladder` key later without a migration race against js/tastemodel.js loading.
+  if (s.v < 4) { if (!s.taste || typeof s.taste !== "object" || Array.isArray(s.taste)) s.taste = s.taste ? { taste1Unreadable: s.taste } : {}; s.v = 4; }
+  // future steps go here: if (s.v < 5) { …; s.v = 5; }
   return s;
 }
 let S;
