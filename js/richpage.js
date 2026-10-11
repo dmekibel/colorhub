@@ -106,9 +106,24 @@ function rpFitName(h1) {
   h1.style.fontSize = "56px";
 }
 // the tapped color's one sentence (#7): "Yours is greener and a bit lighter than teal · 96% match"
+// lookDiff(a, b) says how b differs from a, so "yours is ___ than X" is lookDiff(X, yours) (it was reversed:
+// David's #C37FAC read "more vivid than pink orchid" when it's darker and duller)
 function rpYoursLine(name, hex, tapped) {
-  const d = lookDiff({ h: tapped, n: "Your color" }, { h: hex, n: name }), m = pctMatch(de2000(tapped, hex));
+  const d = lookDiff({ h: hex, n: name }, { h: tapped, n: "Your color" }), m = pctMatch(de2000(tapped, hex));
   return d === "almost the same" ? `Yours is almost the same as ${name.toLowerCase()} · ${m}` : `Yours is ${d} than ${name.toLowerCase()} · ${m}`;
+}
+// an in-between color's own descriptive name (David, 2026-10-11: "if pink orchid is the closest, this is muddy pink
+// orchid... so I can tell it's a unique color"): the nearest name plus up to two modifier words from the same
+// lookDiff, lightness then saturation then hue ("Deep dusty pink orchid"). A description, not a new canonical name.
+const RP_MOD = { lighter: "light", darker: "deep", "more vivid": "vivid", duller: "dusty", redder: "reddish", yellower: "yellowish", greener: "greenish", bluer: "bluish", purpler: "purplish" };
+const RP_MOD_ORDER = ["lighter", "darker", "more vivid", "duller", "redder", "yellower", "greener", "bluer", "purpler"];
+function rpYoursName(name, hex, tapped) {
+  const d = lookDiff({ h: hex, n: name }, { h: tapped, n: "Your color" });
+  if (d === "almost the same") return name;
+  const words = d.split(" and ").filter(w => RP_MOD[w]).sort((a, b) => RP_MOD_ORDER.indexOf(a) - RP_MOD_ORDER.indexOf(b)).map(w => RP_MOD[w]);
+  if (!words.length) return name;
+  const t = `${words.join(" ")} ${name.toLowerCase()}`;
+  return t.charAt(0).toUpperCase() + t.slice(1);
 }
 // One compact action row on the cover (David, 2026-10-09: "Learn it could be a small button next to the Pair
 // with… button, and the heart somewhere there as well"): Learn it (small pill, the row's primary), Pair with…,
@@ -125,7 +140,7 @@ function rpActionRowHTML(name, hex, tapped) {
 function rpCoverFoot(name, hex, tapped, entry) {
   const id = "rp-cov-" + Math.random().toString(36).slice(2, 8), rel = rpRelation(name, tapped, entry && entry.h || hex);
   return { id, html: `${rel ? `<span class="cp-chip">${esc(rel)}</span>` : ""}
-        <h1 class="rp-name">${esc(name)}</h1>
+        <h1 class="rp-name">${esc(tapped ? rpYoursName(name, entry && entry.h || hex, tapped) : name)}</h1>
         ${tapped ? `<p class="rp-yours">${esc(rpYoursLine(name, hex, tapped))}</p>` : `<p class="rp-tier" data-rp-tier></p>
         <p class="rp-def" data-rp-def></p><p class="rp-defsrc" data-rp-defsrc></p>`}
         ${!tapped ? rpActionRowHTML(name, hex, tapped) : ""}
@@ -855,7 +870,7 @@ function colorDossier(entry, o = {}) {
     <div class="c-hero cp-hero cp-hero-full${tapped ? " rp-split" : ""}" style="--c:${heroHex};--c2:${hex}" data-ink="${ink(heroHex)}">
       <button class="cp-close" data-back aria-label="Back">${ICON.back}</button>
       <div class="cp-hero-foot">
-        ${tapped ? `<div class="rp-split-band"><div class="rp-split-half rp-split-half-a" data-ink="${ink(heroHex)}"><b>Your color</b><span class="mono">${heroHex}</span></div><div class="rp-split-half rp-split-half-b" data-ink="${ink(hex)}"><b>${esc(name)}</b><span class="mono">${hex}</span></div></div>` : ""}
+        ${tapped ? `<div class="rp-split-band"><div class="rp-split-half rp-split-half-a" data-ink="${ink(heroHex)}"><b>${esc(rpYoursName(name, hex, heroHex))}</b><span class="mono">${heroHex}</span></div><div class="rp-split-half rp-split-half-b" data-ink="${ink(hex)}"><b>${esc(name)}</b><span class="mono">${hex}</span></div></div>` : ""}
         ${cover.html}
         ${typeof fvPageChip === "function" ? fvPageChip(hex) : ""}
       </div>
