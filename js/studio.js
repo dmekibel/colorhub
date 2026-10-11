@@ -409,7 +409,7 @@ function palPhotoView(p) {
   let curTitle = p.title || "";
   const titlePlaceholder = fmtDay(p.at) || "Your photo";
   const el = show(`
-    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span style="width:44px"></span></header>
+    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="gl-pa-btn" data-plvopen>Palette view</button></header>
     ${titleKind ? `<button class="pv-title${curTitle ? "" : " ph"}" data-rename aria-label="Rename">${esc(curTitle || titlePlaceholder)}</button>` : `<p class="eyebrow">${esc(p.from || "Photo")}</p>`}
     <div class="gl-pal-wrap">
     <div class="pv-img" id="himg"><img src="${p.img}" alt="Your photo"><canvas class="gl-lit-cv" data-pvlitcv aria-hidden="true"></canvas><div class="gl-mks" data-pvmks></div></div>
@@ -431,6 +431,7 @@ function palPhotoView(p) {
   `, "article studio gl-page");
   el.querySelector("[data-back]").onclick = xBack;
   onKey = e => { if (e.key === "Escape") xBack(); };
+  const plvBtn = el.querySelector("[data-plvopen]"); if (plvBtn) plvBtn.onclick = () => { if (typeof plvOpen === "function") plvOpen("photo", null, { pool, img: p.img, from: p.from || "Your photo" }); };
   const renameRow = () => el.querySelector("[data-rename]");
   const wireRename = () => {
     const row = renameRow(); if (!row) return;

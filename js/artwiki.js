@@ -461,7 +461,8 @@ function awPainter(slug, push = true) {
       <button class="aw-thumb" data-gi="${P.ctyp[k]}" ${P.ctyp[k] >= 0 ? "" : "disabled"} aria-label="Open the most typical painting"><img alt="" data-glimg="${P.ctyp[k]}"></button>
       <div class="aw-cl-b"><p class="aw-cl-t" data-gltitle="${P.ctyp[k]}">Palette ${k + 1}</p>
         <p class="aw-cl-s">${awPct(c.pct / 100)}% of his paintings here · ${c.size} of ${n}</p>
-        ${awStrip(c.colors.map(awHex), 26)}<p class="aw-cl-n">${c.colors.map(esc).join(", ")}</p></div></div>`).join("")}` : "";
+        ${awStrip(c.colors.map(awHex), 26)}<p class="aw-cl-n">${c.colors.map(esc).join(", ")}</p></div></div>`).join("")}
+    <button class="gl-pa-btn" data-plvopen="${esc(slug)}" style="margin-top:10px">Palette view</button>` : "";
 
   const finds = awPainterFindings(A, P, n);   // findings, in words, always with n (now a drawer in Colors)
   // colors: signature (museum-baselined), within-painting roles, avoided, pairs and chords
@@ -533,6 +534,7 @@ function awPainter(slug, push = true) {
   }
   // titles and images of the clusters' typical paintings
   el.querySelectorAll("[data-awpal]").forEach(b => b.onclick = () => { const t = el.querySelector("#aw-pal"); if (t) t.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" }); });
+  const plvBtn = el.querySelector("[data-plvopen]"); if (plvBtn) plvBtn.onclick = () => { if (typeof plvOpen === "function") plvOpen("painter", plvBtn.dataset.plvopen); };
   el.querySelectorAll("[data-gltitle]").forEach(t => { const i = +t.dataset.gltitle; if (i >= 0) glDetail(i).then(d => { if (t.isConnected) t.textContent = "The " + d.t.replace(/^(the|a|an)\s+/i, "") + " palette"; const im = el.querySelector(`[data-glimg="${i}"]`); if (im) { im.src = d.img; } }).catch(() => {}); });
   el.querySelectorAll("[data-glroom]").forEach(t => { const i = +t.dataset.glroom; if (i >= 0) glDetail(i).then(d => { if (t.isConnected) t.textContent = d.t.length > 26 ? d.t.slice(0, 25) + "…" : d.t; }).catch(() => {}); });
   el.querySelectorAll("[data-glimg]").forEach(im => { const i = +im.dataset.glimg; if (i >= 0) glDetail(i).then(d => { if (im.isConnected) im.src = d.img; }).catch(() => {}); });
