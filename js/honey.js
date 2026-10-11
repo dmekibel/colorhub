@@ -442,6 +442,11 @@ function honeyParseKey(k) { const [id, ord, p] = String(k || "").split("~"); ret
 // the same job — warm to cool across, light to dark down — so the dedicated shape is retired in its favor)
 const HONEY_ARR_OLD = { wheel: ["rings", "muted"], light: ["rings", "light"], path: ["rings", "common"], known: ["rings", "known"], pages: ["families", "chroma"], temp: ["map", "warm"] };
 const honeyIsLayout = k => ["wheel", "sunflower", "globe", "spiral", "mapTall", "mapWide"].includes(k) || !!(HONEY_ARR[honeyParseKey(k).id] && HONEY_ARR[honeyParseKey(k).id].make);
+// David, 2026-10-11 ("every ring has to be as big as possible, no gaps, or small equal ones"): the layouts whose
+// Bubbles look gets built-by-construction true concentric rings (honeyApplyRadialBubble below) instead of the raw
+// golden-spiral/hex-ring lattice -- Sunflower and Spiral (top-level keys) and the Rings/Sunflower arrangements
+// (any center-on order). Wheel and the grid shapes keep their own geometry untouched.
+const honeyIsRadialBubble = k => { if (k === "sunflower" || k === "spiral") return true; const { id } = honeyParseKey(k); return id === "sunflower" || id === "rings"; };
 // a small live picture of an arrangement, drawn from the actual colors (the View sheet's strip): every color a dot
 // at its place, fitted to the canvas. Uses the same layout cache as the map, so the tap that follows is instant.
 function honeyPreview(cv, raw, layoutKey) {
@@ -1169,7 +1174,7 @@ function honeycomb(host, opts = {}) {
     liveTweak = { ...(liveTweak || {}), m0: pm1 + (pm0 - pm1) * Math.max(.12, lk) };
   }
   let cfg = honeyResolveCfg(styleId, liveTweak, (opts.items && opts.items.length) || 101);
-  let lay = null, P = [0, 0], W = 0, Hh = 0, dpr = 1, base = 30, dead = false;
+  let lay = null, baseLay = null, P = [0, 0], W = 0, Hh = 0, dpr = 1, base = 30, dead = false;
   let Z = clamp(+opts.zoom || 1, .04, ZMAX), zAnim = null, ghost = null, ghostT0 = 0;
   // David, 2026-10-09: "it gets stuck sometimes when you pan and zoom" -- the last P/Z draw() itself actually
   // accepted (never a half-corrupted in-flight one), so any source of NaN/Infinity (a pinch computed from garbage
@@ -1226,6 +1231,63 @@ function honeycomb(host, opts = {}) {
     const z0 = Math.max(ZMIN + .01, Math.min(ZMAX, zs)), t = clamp((z0 - Z) / Math.max(.01, z0 - ZMIN), 0, 1);
     const v = cfg[k] + d * t;
     return k === "shape" ? clamp(v, 0, 1) : k === "m0" ? Math.max(cfg.m1 + .05, v) : Math.max(0, v);
+  }
+  // David, 2026-10-11 ("every ring around the center has to be as big as possible so there's no gaps... if there
+  // are gaps they have to be equidistant and small, for every circle on each ring", "minimize empty space, make
+  // the outer ones bigger"): the golden-angle spiral (Sunflower/Spiral) and the hex-ring lattice (Rings) place
+  // points at world positions whose EUCLIDEAN distance from the lens center isn't constant per "ring" (a hex
+  // ring's corners sit further out than its edge midpoints; the spiral has no rings at all, just ever-further
+  // points along one arm) -- the round fisheye then sizes each bubble from its own nearest neighbor, so uneven
+  // world spacing becomes uneven, random screen gaps. Fix by construction instead of by sizing after the fact:
+  // rebuild the world positions themselves so that, run through the SAME F()/localScale() lens this honeycomb
+  // already draws every other layout with, they land on true concentric SCREEN rings -- every circle on a ring
+  // the same size, every gap (within a ring and between rings) the same width. A nominal lens (s=1, no breathing,
+  // no "far" zoom-drift) is enough: F and localScale both carry "base*l.s" as a plain multiplicative prefactor,
+  // so whatever zoom/pan/style the LIVE lens ends up at later just rescales this whole picture uniformly (same
+  // reasoning zFloor()/boundsFit() already lean on for their own nominal-lens estimates) -- the equal-size,
+  // equal-gap property survives real use, not just at the moment this is built.
+  // Colors keep the ORIGINAL layout's own order (honeySunArr/honeyRingArr/honeySunflower/honeySpiral already
+  // place item i before item i+1 at a world radius that only grows, roughly hue-circular within each band) --
+  // chunking that sequence into the new rings in order, then sorting each chunk by its OWN original angle before
+  // handing out the new ring's evenly-spaced slots, keeps hue neighborhoods together without having to re-derive
+  // them from scratch.
+  function honeyApplyRadialBubble(rawLay) {
+    const pts0 = rawLay.pts, N = pts0.length;
+    if (!N || cfg.lensMode !== "round" || cfg.shape > .02 || !honeyIsRadialBubble(cfg.layout)) return rawLay;
+    const l0 = { s: 1, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig };
+    const gap = clamp(+cfg.gap, 0, .45) * 20;
+    const sizeAtR = Rpx => Rpx <= 1e-6 ? base * l0.m0 / 2 : base * localScale(Finv(Rpx, l0), l0) / 2;
+    const rings = [{ R: 0, r: Math.max(.4, sizeAtR(0)), count: 1 }];
+    let placed = 1, guard = 0;
+    while (placed < N && guard++ < 4000) {
+      const prev = rings[rings.length - 1];
+      let Rk = prev.R + prev.r * 2 + gap;
+      for (let i = 0; i < 6; i++) Rk = prev.R + prev.r + gap + sizeAtR(Rk);
+      const rStar = Math.max(.4, sizeAtR(Rk)), remaining = N - placed;
+      const sinArg = clamp((rStar + gap / 2) / Math.max(1e-6, Rk), -1, 1);
+      const nk = Math.max(2, Math.floor(Math.PI / Math.asin(Math.max(1e-6, sinArg))));
+      const count = Math.max(1, Math.min(nk, remaining));
+      let rk = rStar;
+      if (count >= 3) { const r2 = Rk * Math.sin(Math.PI / count) - gap / 2; if (r2 > rStar * .4) rk = r2; }
+      rings.push({ R: Rk, r: Math.max(.4, rk), count });
+      placed += count;
+    }
+    const newPts = []; let idx = 0;
+    for (const ring of rings) {
+      const chunk = pts0.slice(idx, idx + ring.count); idx += ring.count;
+      if (!chunk.length) continue;
+      if (ring.R <= 1e-6 || chunk.length === 1) { for (const q of chunk) newPts.push({ it: q.it, x: 0, y: 0, g: q.g }); continue; }
+      const z0 = Finv(ring.R, l0), m = chunk.length;
+      const ordered = chunk.slice().sort((a, b) => Math.atan2(a.y, a.x) - Math.atan2(b.y, b.x));
+      ordered.forEach((q, i) => { const t = i / m * 2 * Math.PI; newPts.push({ it: q.it, x: z0 * Math.cos(t), y: z0 * Math.sin(t), g: q.g }); });
+    }
+    const newLay = { ...rawLay, pts: newPts, edgeSet: new Set(), ghosts: [] };
+    newLay.ext = Math.max(.5, ...newPts.map(p => Math.hypot(p.x, p.y)));
+    if (rawLay.bounds) {
+      const gmap = new Map(newPts.map(q => [q.it, q.g || 0]));
+      newLay.bounds = honeyGroupBounds(newPts, it => gmap.get(it) || 0);
+    }
+    return newLay;
   }
   // The whole-layout fit (David, 2026-10-09: the Arrange sheet covers the middle of the map, so zoomed in "you
   // can barely see the difference between views" when a setting changes it; also reused by zFloor() just below,
@@ -2173,7 +2235,8 @@ function honeycomb(host, opts = {}) {
       const g = ghost.getContext("2d"); g.clearRect(0, 0, ghost.width, ghost.height); g.drawImage(cv, 0, 0); ghostT0 = performance.now();
     }
     cfg = honeyResolveCfg(styleId, liveTweak, raw.length);
-    lay = honeyLayout(raw, cfg.layout);
+    baseLay = honeyLayout(raw, cfg.layout);
+    lay = baseLay.finite && !baseLay.globe ? honeyApplyRadialBubble(baseLay) : baseLay;
     if (snap0 && !lay.globe) morph = l18MorphStart(snap0);
     ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX);
     const PAN = isHome ? HONEY_PAN : HONEY_PAN_ALT;
@@ -2320,6 +2383,10 @@ function honeycomb(host, opts = {}) {
   function applyTweak(partial) {
     liveTweak = { ...(liveTweak || {}), ...partial };
     cfg = honeyResolveCfg(styleId, liveTweak, lay ? lay.raw.length : 101);
+    // the Tweak panel's own sliders (m0/sig/gap/shape...) change the live cfg without a full setItems(); a radial
+    // Bubbles layout's world positions are baked FROM that cfg (honeyApplyRadialBubble, just above), so they need
+    // the same rebuild here or dragging "Center size"/"Gap" on Sunflower/Rings would silently stop doing anything.
+    if (baseLay) lay = baseLay.finite && !baseLay.globe ? honeyApplyRadialBubble(baseLay) : baseLay;
     ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX); draw();
   }
   // ---- fit mode (David, 2026-10-09: the Arrange sheet covers the middle of the map, so zoomed in "you can
@@ -2395,7 +2462,7 @@ function honeycomb(host, opts = {}) {
     lens: k => { if (!(liveTweak && liveTweak.m0 != null)) { const base0 = (HONEY_STYLES[styleId] || HONEY_STYLES.current).cfg, pm0 = base0.m0 != null ? base0.m0 : HONEY_CFG_BASE.m0, pm1 = base0.m1 != null ? base0.m1 : HONEY_CFG_BASE.m1; applyTweak({ m0: pm1 + (pm0 - pm1) * Math.max(.12, clamp(+k, 0, 2)) }); } },
     lensMode: m => applyTweak({ lensMode: m === "edges" ? "edges" : m === "none" ? "none" : "round" }),
     tweak: applyTweak,
-    resetTweak() { liveTweak = null; cfg = honeyResolveCfg(styleId, null, lay ? lay.raw.length : 101); ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX); draw(); },
+    resetTweak() { liveTweak = null; cfg = honeyResolveCfg(styleId, null, lay ? lay.raw.length : 101); if (baseLay) lay = baseLay.finite && !baseLay.globe ? honeyApplyRadialBubble(baseLay) : baseLay; ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX); draw(); },
     style(id, keepTweak = true) {
       styleId = HONEY_STYLES[id] ? id : styleId;
       if (!keepTweak) liveTweak = null;
