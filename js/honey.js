@@ -619,6 +619,10 @@ const HONEY_STYLES = {
 // zoom-out -- a tiny cell past r<3 already skips the hex-poly path and its label (honeyCellPath, finishFrame), so
 // the per-bubble cost out here is one cheap fill, not the full draw; phones stay smooth and safe; see the draw loop
 const HONEY_MAX_DRAWN = 5000;
+// the collar of just-offscreen neighbors buildFlatDrawn keeps around for honeyCells (see its own comment there) --
+// a fixed px margin, not scaled by zoom, since it only needs to cover ordinary cell sizes at the edge, not the
+// whole lens; finishFrame drops this collar again right after clipping.
+const HONEY_EDGE_MARGIN = 48;
 // motion (net lag + water breathe/ripple) is skipped past this many drawn bubbles, so it stays fast at the
 // biggest, most zoomed-out sets too — idle drift is unaffected (it only ever moves one pan value, not per-bubble)
 const HONEY_MOTION_BUDGET = Math.round(HONEY_MAX_DRAWN * .5);
@@ -702,55 +706,69 @@ const HONEY_HEX_UNIT = Array.from({ length: 6 }, (_, i) => { const a = (i * 60 +
 function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {   // clipAll (L18 glide): clip even tiny bubbles   // grow: how far a bubble may swell past its own lens size, as a fraction of its diameter
   if (!drawn.length) return;
   // Speed: the grid is sized to a TYPICAL bubble (not the biggest, which put thousands of tiny ones in every lookup),
-  // and each bubble searches only as many cells as its own size needs. Tiny bubbles (under ~7 px) skip the real
-  // per-neighbor cell clipping either way (too expensive to run on a few thousand of them every frame) -- but a
-  // tiled look still wants a TILED cell there, not a plain circle. David, 2026-10-09: "zoomed-out honeycomb
-  // spiral looks like circles" -- below, a fixed regular hexagon (the honeycomb lattice's own natural cell
-  // shape, not a pixel-exact Voronoi cell the way the full clip computes for a bigger bubble, but a solid
-  // mosaic at a glance, which is what low zoom needs) costs the same O(1) as the circle it replaces.
+  // and each bubble searches only as many cells as its own size needs. Bubbles (shape 0) keep their exact old path
+  // below unconditionally (David: "keep Bubbles exactly as it is") -- the rewrite below only touches a TILED look
+  // (shape > 0), tiny cells included: a tiled cell under ~7px still skips building a real polygon (too expensive on
+  // a few thousand of them, and invisible at that size anyway), but its radius now comes from its real neighbors'
+  // power bisectors too, not a self-only guess -- see the note just below for why that guess was the actual bug.
   // Reverted (David, 2026-10-10: "Why is my honeycomb still broken... bring it back to how it was"): the fixed
-  // tiny hexagons (e5db1847) never tiled the spiral layout cleanly; tiny cells are plain circles again, as before.
+  // tiny hexagons (e5db1847) never tiled the spiral layout cleanly; tiny tiled cells fall back to a bisector
+  // circle, not a fixed hexagon.
   const tinyHex = null;
   const ds = drawn.map(b => b.d).sort((a, c) => a - c), typ = ds[Math.floor(ds.length / 2)] || 8, maxD = ds[ds.length - 1] || 8;
   const cell = Math.max(4, typ * 1.3, maxD * 1.5 / 12), grid = new Map(), key = (i, j) => i * 100003 + j;
   drawn.forEach((b, n) => { const k = key(Math.floor(b.x / cell), Math.floor(b.y / cell)); let a = grid.get(k); if (!a) grid.set(k, a = []); a.push(n); });
   const half = gapPx / 2;
+  // David, 2026-10-11 (the power-diagram fix for Magnify's broken ring): every bubble's OWN original lens radius,
+  // captured once, before this pass starts overwriting b.d with each cell's clipped result. A plain Voronoi
+  // bisector sits at the dist/2 midpoint no matter how big either side is -- fine when neighbors are close in
+  // size, wrong once they differ a lot (Magnify's huge center cell next to its first ring): the big cell capped
+  // itself at its own starting size before ever reaching that midpoint (a black gap around it), while its small
+  // neighbor, with no idea how much room the big one actually needed, didn't cede enough of it either (the
+  // overlap, or the hole on its far side once IT then got clipped against its other neighbors -- "the ring where
+  // big cells meet small ones looks broken"). r0[] must be read from here on, never a live b.d/o.d: during this
+  // same forEach an already-processed neighbor's b.d has already been overwritten to ITS clipped result, which is
+  // not the lens size that actually earns it room.
+  const r0 = drawn.map(b => b.d / 2);
+  // the power (Laguerre) bisector between i and j: perpendicular to the line between their centers, at distance
+  //   t = (dist^2 + ri^2 - rj^2) / (2*dist)
+  // from i -- the plain dist/2 midpoint is just the special case ri === rj. This partitions the plane with no gaps
+  // and no overlaps regardless of how much the radii differ, and insetting by half the seam width keeps the seam
+  // a constant gapPx on both sides everywhere, big cell or small.
+  const bisect = (n, m, dist) => (dist * dist + r0[n] * r0[n] - r0[m] * r0[m]) / (2 * dist) - half;
+  // how far out (in grid cells) / how far away (in px) a tiled cell needs to look for a neighbor whose power
+  // bisector could still matter -- generous on purpose: unlike the plain dist/2 bisector, a power bisector can sit
+  // well past the midpoint when the two radii differ a lot, so a tighter reach here would silently drop exactly
+  // the big-vs-small neighbor pairs this fix is for.
+  const tileReach = d => Math.min(16, Math.ceil((d + maxD) * 1.7 / cell));
+  const tileCull = (d, dOther) => (d + dOther) * 1.7;
   drawn.forEach((b, n) => {
     if (b.d < 7 && !clipAll) {
-      let rin = Math.max(0, b.d * .44 - half);
-      // That self-only formula (just this bubble's own diameter) has no idea where its actual neighbors are --
-      // harmless for the forgiving circle it's always sized for (a little overlap there just reads as soft
-      // fuzz), but a hexagon's straight edges turn the same imprecision into visibly crossed, stacked tiles
-      // (David, 2026-10-10, a live screenshot: "cells overlap each other like fish scales... rotated diamonds
-      // stacking over neighbors instead of tiling"), worst exactly where Magnify's fisheye makes the LOCAL size
-      // gradient steepest (the ring around the magnified center, where a tiny bubble can sit right beside a
-      // much bigger one). Only the tiled looks (tinyHex) pay for this: the same reach-limited grid scan the
-      // real per-neighbor clip below already does, just for a radius bound instead of a full polygon.
-      if (tinyHex) {
-        const reach = Math.min(12, Math.ceil((b.d + maxD) * .75 / cell));
-        const ci0 = Math.floor(b.x / cell), cj0 = Math.floor(b.y / cell);
-        for (let i = ci0 - reach; i <= ci0 + reach; i++) for (let j = cj0 - reach; j <= cj0 + reach; j++) {
-          const a = grid.get(key(i, j)); if (!a) continue;
-          for (const m of a) {
-            if (m === n) continue;
-            const o = drawn[m], dist = Math.hypot(o.x - b.x, o.y - b.y);
-            if (dist < 1e-6 || dist > (b.d + o.d) * .75) continue;
-            const lim = dist / 2 - half;
-            if (lim < rin) rin = lim;
-          }
-        }
-        rin = Math.max(0, rin);
+      if (shapeAmt <= .02) {   // Bubbles: unchanged self-only guess (forgiving at circle size; see honeyWhere above)
+        let rin = Math.max(0, b.d * .44 - half);
+        b.poly = null; b.rin = rin; b.d0 = b.d; b.d = 2 * rin; return;
       }
-      b.poly = tinyHex ? tinyHex.map(p => [p[0] * rin, p[1] * rin]) : null;
-      b.rin = rin; b.d0 = b.d; b.d = 2 * rin; return;
+      // a tiny tiled cell: still drawn as a plain circle (too small for straight edges to read), but sized from
+      // its real neighbors via the same power bisector the big cells use below -- not the self-only guess, which
+      // had no idea a Magnify-sized neighbor might be sitting right next to it.
+      const reach = tileReach(b.d), ci0 = Math.floor(b.x / cell), cj0 = Math.floor(b.y / cell);
+      let r = b.d * .78;
+      for (let i = ci0 - reach; i <= ci0 + reach; i++) for (let j = cj0 - reach; j <= cj0 + reach; j++) {
+        const a = grid.get(key(i, j)); if (!a) continue;
+        for (const m of a) {
+          if (m === n) continue;
+          const dist = Math.hypot(drawn[m].x - b.x, drawn[m].y - b.y);
+          if (dist < 1e-6 || dist > tileCull(b.d, r0[m] * 2)) continue;
+          const lim = bisect(n, m, dist);
+          if (lim < r) r = lim;
+        }
+      }
+      b.poly = null; b.rin = Math.max(0, r); b.d0 = b.d; b.d = 2 * b.rin; return;
     }
-    const reach = Math.min(12, Math.ceil((b.d + maxD) * .75 / cell));
-    // start from a 16-gon a little bigger than the bubble's own lens size
-    const R0 = b.d * Math.max(.62, grow * 1.2); let poly = [];
-    const ci0 = Math.floor(b.x / cell), cj0 = Math.floor(b.y / cell);
-    // circles (shape 0) only need the cell's inscribed circle: the nearest bisector. No polygon clipping, which is
-    // most of the cost on big sets (and what made panning 2,700 colors janky on a phone).
-    if (shapeAmt <= .02) {
+    if (shapeAmt <= .02) {   // Bubbles: unchanged -- the nearest plain-Voronoi bisector, no polygon needed
+      const reach = Math.min(12, Math.ceil((b.d + maxD) * .75 / cell));
+      const R0 = b.d * Math.max(.62, grow * 1.2);
+      const ci0 = Math.floor(b.x / cell), cj0 = Math.floor(b.y / cell);
       let r = R0 * .98;
       for (let i = ci0 - reach; i <= ci0 + reach; i++) for (let j = cj0 - reach; j <= cj0 + reach; j++) {
         const a = grid.get(key(i, j)); if (!a) continue;
@@ -766,17 +784,23 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
       // overwrites b.rin, and must never shrink a bubble PAST this -- see that pass's own comment).
       b.poly = null; b.rin0 = b.rin = Math.max(0, r); b.d0 = b.d; b.d = 2 * b.rin; return;
     }
+    // Tiled look: the real power diagram. A generous starting polygon (1.6x the bubble's own radius, i.e. 0.8x its
+    // own diameter -- noticeably bigger than Bubbles' R0) so an interior cell is bounded only by its neighbors'
+    // bisectors, never by its own size before it ever reaches them; a cell with no neighbor in some direction (the
+    // outer edge of the whole set) is still capped there, by this same generous, nearly-round 16-gon, so that edge
+    // stays rounded instead of spiky.
+    const reach = tileReach(b.d), R0 = b.d * .8; let poly = [];
+    const ci0 = Math.floor(b.x / cell), cj0 = Math.floor(b.y / cell);
     for (let i = 0; i < 16; i++) { const t = i / 16 * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
-    const ci = Math.floor(b.x / cell), cj = Math.floor(b.y / cell);
-    for (let i = ci - reach; i <= ci + reach && poly.length; i++) for (let j = cj - reach; j <= cj + reach && poly.length; j++) {
+    for (let i = ci0 - reach; i <= ci0 + reach && poly.length; i++) for (let j = cj0 - reach; j <= cj0 + reach && poly.length; j++) {
       const a = grid.get(key(i, j)); if (!a) continue;
       for (const m of a) {
         if (m === n) continue;
         const o = drawn[m], vx = o.x - b.x, vy = o.y - b.y, dist = Math.hypot(vx, vy);
-        if (dist < 1e-6 || dist > (b.d + o.d) * .75) continue;
+        if (dist < 1e-6 || dist > tileCull(b.d, r0[m] * 2)) continue;
         (b.nb || (b.nb = [])).push([m, dist]);
-        const ux = vx / dist, uy = vy / dist, lim = dist / 2 - half;
-        // keep the side of the bisector (moved back by half the gap) that faces this bubble
+        const ux = vx / dist, uy = vy / dist, lim = bisect(n, m, dist);
+        // keep the side of the power bisector (moved back by half the gap) that faces this bubble
         const out = [];
         for (let k = 0; k < poly.length; k++) {
           const p = poly[k], q = poly[(k + 1) % poly.length], dp = p[0] * ux + p[1] * uy - lim, dq = q[0] * ux + q[1] * uy - lim;
@@ -795,9 +819,10 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
     }
     b.poly = poly.length >= 3 ? poly : null; b.rin = isFinite(rin) && b.poly ? rin : 0; b.d0 = b.d; b.d = 2 * b.rin;
   });
-  // Circles: a small bubble leaves room in its cell that its bigger neighbor can use (the Magnifier's center next to
-  // its smaller first ring). Grow each circle, center outward, until it meets its neighbors across the gap, never past
-  // its own lens size. Every step keeps r_a + r_b <= distance - gap, so circles still never overlap.
+  // Circles (Bubbles, shape 0): unchanged. A small bubble leaves room in its cell that its bigger neighbor can use
+  // (the Magnifier's center next to its smaller first ring). Grow each circle, center outward, until it meets its
+  // neighbors across the gap, never past its own lens size. Every step keeps r_a + r_b <= distance - gap, so
+  // circles still never overlap.
   // David, 2026-10-09: "this middle gap hasn't been filled" -- a Sunflower/Spiral's own innermost points, after the
   // fisheye stretches their real neighbors apart, can have a true (pass-1, gap-respecting) inscribed radius well
   // past d0*grow -- but this pass started from d0*grow every time regardless, SHRINKING those already-correct
@@ -1277,7 +1302,12 @@ function honeycomb(host, opts = {}) {
         x = cx + Math.sign(ex) * warp(ux, ia) * hx; y = cy + Math.sign(ey) * warp(uy, ia) * hy;
         d = l.K * pk * (Math.min(dwx, dwy) * (1 - cfg.fill) + Math.sqrt(dwx * dwy) * cfg.fill);
       }
-      if (x < -d || y < -d || x > W + d || y > Hh + d) return;
+      // David, 2026-10-11 (stability): a collar beyond the strict viewport, not just this point's own d, so a
+      // cell right at the screen edge is clipped against the same real neighbors whether that neighbor's center
+      // is a few px onscreen or just off it -- without this, a cell's shape could jump the instant a neighbor's
+      // OWN point crossed into view, instead of already reflecting it like every interior cell does. finishFrame
+      // drops this collar again right after honeyCells runs, so nothing outside the strict viewport ever draws.
+      if (x < -d - HONEY_EDGE_MARGIN || y < -d - HONEY_EDGE_MARGIN || x > W + d + HONEY_EDGE_MARGIN || y > Hh + d + HONEY_EDGE_MARGIN) return;
       if (d < 2.2) { tinyN++; return; }
       if (z < cbest) { cbest = z; cItem = p.it; }
       drawn.push({ it: p.it, x, y, d, z, k: p.it.n + "|" + Math.round((P[0] + ex) * 8) + "|" + Math.round((P[1] + ey) * 8) });
@@ -1356,6 +1386,10 @@ function honeycomb(host, opts = {}) {
     const shapeAmt = zc("shape");
     applyMotion(l, t);
     honeyCells(drawn, gapPx(), shapeAmt, L18_GROW, !!morph);
+    // drop the just-offscreen collar (buildFlatDrawn's HONEY_EDGE_MARGIN) now that it's done its job of clipping
+    // -- cull after honeyCells runs, not before, so an edge cell is already shaped by a neighbor that's about to
+    // scroll into view, instead of jumping once that neighbor's own point crosses the strict viewport rect.
+    if (!lay.globe) drawn = drawn.filter(b => b.x >= -b.d && b.y >= -b.d && b.x <= W + b.d && b.y <= Hh + b.d);
     // No snapping (David): a bubble's size eases to its new value over ~120 ms instead of jumping when its cell
     // changes. New bubbles (just entered the screen) start at their size; growth eases too.
     const dt = sizeT ? Math.min(100, t - sizeT) : 0; sizeT = t;
