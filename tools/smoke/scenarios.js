@@ -7297,3 +7297,14 @@ scenario("paintings", "Save palette adds a new entry to S.palettes, and Edit let
   const afterEdit = t.ev(`(S.palettes || []).length`);
   t.expect(afterEdit === after + 1, `saving from the editor should add one more entry to S.palettes (was ${after}, now ${afterEdit})`);
 });
+// David, 2026-10-11: "I should be able to select multiple color families in the map" -- S.hm.fam holds several,
+// comma-joined; the map shows their union, and an old single-family save still reads the same.
+scenario("home", "Colors sheet: several families can be on at once (their union is shown)", async t => {
+  await H.homeReady(t);
+  t.ev('S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.tone = ""; S.hm.fam = ""; save();');
+  const cnt = f => t.ev(`(() => { const all = (typeof ALL !== "undefined" ? ALL : []); return hmFiltered(all, { fam: ${JSON.stringify(f)} }).length; })()`);
+  const blues = cnt("Blues"), greens = cnt("Greens"), both = cnt("Blues,Greens");
+  t.expect(blues > 0 && greens > 0, `families came back empty (blues ${blues}, greens ${greens})`);
+  t.expect(both >= Math.max(blues, greens) && both <= blues + greens, `two families should show their union (blues ${blues}, greens ${greens}, both ${both})`);
+  t.notes.push(`Blues ${blues} + Greens ${greens} -> ${both}`);
+});

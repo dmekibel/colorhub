@@ -128,7 +128,7 @@ function hmView() {   // the saved view, upgrading older saves in place (unknown
   else if (HM_OLD_TONE[h.src]) { h.tone = HM_OLD_TONE[h.src]; h.src = "every-name"; }
   if (!/^stage:\d+$/.test(h.src) && !HM_EVERY.includes(h.src) && !hmSet(h.src)) h.src = "stage:100";
   h.filter = HM_KEEP[h.filter] ? h.filter : "all";
-  h.fam = CS_FAMS.includes(h.fam) ? h.fam : "";
+  h.fam = hmFams(h.fam).filter(f => CS_FAMS.includes(f)).join(",");
   h.tone = CS_TONES.some(t => t[0] === h.tone) ? h.tone : "";
   // the learning spiral and the sunflower were Looks; they're arrangements now
   if (!HONEY_ARR[h.arr] && !HONEY_ARR_OLD[h.arr]) h.arr = h.style === "spiral" ? "path" : h.style === "sunflower" ? "sunflower" : "map";
@@ -150,8 +150,11 @@ function hmSrcLabel(src) {
 }
 const hmToneWord = t => (CS_TONES.find(x => x[0] === t) || [])[1] || "";
 // "Vivid pinks · Every name · Learning": the family and tone lead, then the source, then what you know
+// David, 2026-10-11: "I should be able to select multiple color families in the map" -- S.hm.fam holds one family or
+// several, comma-joined ("Blues,Greens"), so every old save (one family, or "") still reads the same
+const hmFams = f => String(f || "").split(",").filter(Boolean);
 function hmViewLabel() {
-  const v = hmView(), fam = v.fam ? (v.tone ? `${hmToneWord(v.tone)} ${v.fam.toLowerCase()}` : v.fam) : v.tone ? hmToneWord(v.tone) : "";
+  const v = hmView(), fl = hmFams(v.fam), famTxt = fl.length > 2 ? `${fl.length} families` : fl.join(" and "), fam = famTxt ? (v.tone ? `${hmToneWord(v.tone)} ${famTxt.toLowerCase()}` : famTxt) : v.tone ? hmToneWord(v.tone) : "";
   const parts = [fam, hmSrcLabel(v.src)].filter(Boolean);
   if (v.filter !== "all") parts.push(HM_FILTERS.find(x => x[0] === v.filter)[1]);
   return parts.join(" · ");
@@ -159,7 +162,8 @@ function hmViewLabel() {
 // the filters on top of a source's items (any of them can be overridden, for the chips' counts)
 function hmFiltered(base, o = {}) {
   const v = hmView(), fam = "fam" in o ? o.fam : v.fam, tone = "tone" in o ? o.tone : v.tone, filter = "filter" in o ? o.filter : v.filter, keep = HM_KEEP[filter] || HM_KEEP.all;
-  return base.filter(it => (!fam || csFamilyHas(it, fam)) && (!tone || csTone(it, tone)) && keep(it));
+  const fl = hmFams(fam);
+  return base.filter(it => (!fl.length || fl.some(f => csFamilyHas(it, f))) && (!tone || csTone(it, tone)) && keep(it));
 }
 // the feel sliders as lens settings over the Look's own preset. Magnify: the middle-to-edge size ratio (flat at 0,
 // the preset's own ratio at .5, and past .75 on up to the old Magnifier's strong lens, about 9x with a tighter
@@ -634,7 +638,8 @@ function hmHome() {
       const rung = (src, big, small) => `<button class="hm-rung${v.src === src ? " on" : ""}" data-src="${src}"><b>${big}</b><small>${small}</small></button>`;
       const coll = HM_COLLECTIONS.map(hmSet).filter(Boolean);
       const dotsFor = s => filterColors(csBase(s.state.base), { ...s.state, n: 5 });
-      const famBtn = f => `<button class="hm-fam${v.fam === f ? " on" : ""}" data-famv="${f}"><span class="hm-fam-dots" data-dots></span><b>${f || "All"}</b><em data-n></em></button>`;
+      const famOn = f => f ? hmFams(v.fam).includes(f) : !v.fam;
+      const famBtn = f => `<button class="hm-fam${famOn(f) ? " on" : ""}" aria-pressed="${famOn(f)}" data-famv="${f}"><span class="hm-fam-dots" data-dots></span><b>${f || "All"}</b><em data-n></em></button>`;
       const segN = (key, opts) => `<div class="hm-seg hm-seg-n" data-key="${key}">${opts.map(([id, label]) => `<button class="${(v[key] || "") === id ? "on" : ""}" data-val="${id}"><span>${esc(label)}</span><em data-n></em></button>`).join("")}</div>`;
       colorsPane = `<div class="hm-ch-scroll" data-pane="colors" data-sheet-scroll>
         ${typeof fvPickStart === "function" ? `<button type="button" class="hm-keep-pick" data-keep-pick>${icon("heart", 18)}<span>Keep colors from the map</span></button>` : ""}
@@ -841,7 +846,8 @@ function hmHome() {
         qa("[data-famv]").forEach(b => {
           const f = b.dataset.famv, list = hmFiltered(baseItems, { fam: f }), n = list.length;
           b.querySelector("[data-n]").textContent = fmt(n);
-          b.classList.toggle("on", vv.fam === f); b.classList.toggle("off", !n && vv.fam !== f);
+          const on = f ? hmFams(vv.fam).includes(f) : !vv.fam;
+          b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); b.classList.toggle("off", !n && !on);
           const byL = list.map(it => [it, lch(it.h)[0]]).sort((x, y) => y[1] - x[1]), pick = byL.length ? [byL[0], byL[byL.length >> 1], byL[byL.length - 1]] : [];
           b.querySelector("[data-dots]").innerHTML = [...new Set(pick.map(x => x[0].h))].map(h => `<i style="background:${esc(h)}"></i>`).join("");
         });
@@ -858,7 +864,12 @@ function hmHome() {
         if (typeof HONEY_HL !== "undefined" && HONEY_HL) honeyHighlight(null);   // the view you chose becomes the map's subject
         after();
       });
-      qa("[data-famv]").forEach(b => b.onclick = () => { applyView("fam", b.dataset.famv); after(); });
+      // All clears; a family toggles in or out of the selection, so several can be on at once
+      qa("[data-famv]").forEach(b => b.onclick = () => {
+        const f = b.dataset.famv, cur = hmFams(S.hm.fam);
+        applyView("fam", !f ? "" : (cur.includes(f) ? cur.filter(x => x !== f) : [...cur, f]).join(","));
+        after();
+      });
       qa(".hm-seg-n").forEach(g => g.querySelectorAll("button").forEach(b => b.onclick = () => { applyView(g.dataset.key, b.dataset.val); after(); }));
       q("[data-clear]").onclick = () => { S.hm.fam = ""; S.hm.tone = ""; S.hm.filter = "all"; save(); buzz(6); after(); };
       refresh();
