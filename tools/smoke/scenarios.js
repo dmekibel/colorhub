@@ -3649,6 +3649,33 @@ scenario("map", "no two drawn honeycomb cell polygons overlap, at 3 zoom levels,
     t.notes.push(`${label}: ${s.checked} tiled cells, 0 overlapping`);
   }
 });
+// David, 2026-10-11, live screenshots of a shipped build: "a clear triangle" of black where four cells met in
+// Sunflower at Magnify .95, plus smaller dots at a few other triple points -- confirmed as the starting polygon
+// (R0) being sized off a cell's OWN diameter, which a small cell squeezed between much bigger ones can outgrow:
+// its real vertex (where two neighbors' bisectors cross) sits past R0, so the clip pre-empts it before it ever
+// gets there. Fixed by sizing R0 off the actual farthest real cut found, not the cell's own size (honeyCells'
+// clipTiled). This is the belt-and-braces check David asked for: sample random points well inside the drawn
+// field's convex hull (clear of the true, legitimately open outer edge) and confirm every one lands inside some
+// cell's real polygon (HM_CTRL._qaCoverage) -- across every arrangement that ships through Honeycomb, not just
+// the one in the screenshot, at Magnify high and at the resting zoom floor.
+scenario("map", "no gap in the drawn interior at Magnify high or at the resting floor, in every arrangement", async t => {
+  await H.homeReady(t);
+  for (const arr of ["map", "rings", "sunflower", "families"]) {
+    t.ev(`S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.arr = "${arr}"; S.hm.style = "honeycomb"; S.hm.feel = { mag: .95, space: .15, size: .5 }; hmHome();`);
+    await t.waitFor(() => H.num(t.text(".hm-title small")) > 400, 10000, `${arr}: every name to fill`);
+    await t.sleep(250);
+    const mag = t.ev("HM_CTRL._qaCoverage(400)");
+    t.expect(mag.checked > 50, `${arr} @ Magnify .95: too few sample points to judge (${mag.checked} of 400, ${mag.hullPts} hull pts)`);
+    t.expect(mag.uncovered === 0, `${arr} @ Magnify .95: ${mag.uncovered}/${mag.checked} points uncovered, e.g. ${JSON.stringify(mag.misses)}`);
+    const floor = t.ev("HM_CTRL.zoomFloor()");
+    t.ev(`HM_CTRL._qaForceZoom(${floor})`);
+    await t.sleep(220);
+    const rest = t.ev("HM_CTRL._qaCoverage(400)");
+    t.expect(rest.checked > 50, `${arr} @ resting floor: too few sample points to judge (${rest.checked} of 400, ${rest.hullPts} hull pts)`);
+    t.expect(rest.uncovered === 0, `${arr} @ resting floor: ${rest.uncovered}/${rest.checked} points uncovered, e.g. ${JSON.stringify(rest.misses)}`);
+    t.notes.push(`${arr}: mag ${mag.checked}/0, floor ${rest.checked}/0`);
+  }
+});
 scenario("map", "the map keeps its pan and zoom when you open a color and come back", async t => {
   const cv = await H.homeReady(t), r = cv.getBoundingClientRect();
   const o = (x, y) => ({ bubbles: true, cancelable: true, clientX: r.left + x, clientY: r.top + y, pointerId: 11, pointerType: "touch", isPrimary: true, view: t.w });
