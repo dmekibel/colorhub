@@ -102,8 +102,10 @@ function rpFitName(h1) {
   const avail = hero.clientWidth - 40, cs = getComputedStyle(h1), cv = rpFitName.cv || (rpFitName.cv = document.createElement("canvas").getContext("2d"));
   const lines = (txt, px) => { cv.font = `${cs.fontStyle} ${cs.fontWeight} ${px}px ${cs.fontFamily}`; let n = 1, w = 0; txt.split(/\s+/).forEach(word => { const ww = cv.measureText(word + " ").width; if (w + ww > avail && w > 0) { n++; w = 0; } w += ww; }); return n; };
   const txt = h1.textContent;
-  for (const [px, max] of [[96, 1], [80, 2], [72, 2], [64, 2]]) if (lines(txt, px) <= max) return void (h1.style.fontSize = px + "px");
-  h1.style.fontSize = "56px";
+  // longer titles (an in-between color's descriptive name, "Deep yellowish olive drab") step down further, so the
+  // bottom-anchored cover never grows up into the top controls
+  for (const [px, max] of [[96, 1], [80, 2], [72, 2], [64, 2], [56, 2], [48, 2]]) if (lines(txt, px) <= max) return void (h1.style.fontSize = px + "px");
+  h1.style.fontSize = "44px";
 }
 // the tapped color's one sentence (#7): "Yours is greener and a bit lighter than teal · 96% match"
 // lookDiff(a, b) says how b differs from a, so "yours is ___ than X" is lookDiff(X, yours) (it was reversed:
