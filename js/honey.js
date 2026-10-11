@@ -1449,7 +1449,9 @@ function honeycomb(host, opts = {}) {
     // it -- but if one ever is (a missed neighbor, a transient bad frame), what shows through is a neighbor's
     // color, never black.
     const exact = shapeAmt >= .98;
-    if (exact) for (const b of drawn) {
+    // only at full opacity: during a fade (the map's own fade-in, a dimmed backdrop) the disks and the fills stack
+    // their alpha, showing as light rims inside every cell (David, 2026-10-11: "weird highlights")
+    if (exact && ctx.globalAlpha >= .999) for (const b of drawn) {
       if (!b.poly) continue;
       let far = 0; for (const p of b.poly) { const d2 = p[0] * p[0] + p[1] * p[1]; if (d2 > far) far = d2; }
       ctx.beginPath(); ctx.arc(b.x, b.y, Math.sqrt(far), 0, 6.2832); ctx.fillStyle = b.it.h; ctx.fill();

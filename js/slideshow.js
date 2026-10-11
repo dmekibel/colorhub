@@ -116,8 +116,7 @@ function ssLayerHTML(spec) {
     const { a, b, diff } = spec;
     return `<div class="ss-layer ss-pair">
       <button class="ss-half" style="--c:${a.h}" data-ink="${ink(a.h)}" data-ss-open="a" aria-label="Open ${esc(a.n)}"><span class="ss-name ss-name-sm">${esc(a.n)}</span></button>
-      <button class="ss-half" style="--c:${b.h}" data-ink="${ink(b.h)}" data-ss-open="b" aria-label="Open ${esc(b.n)}"><span class="ss-name ss-name-sm">${esc(b.n)}</span></button>
-      <p class="ss-diff">${esc(b.n)} is ${esc(diff)} than ${esc(a.n.toLowerCase())}.</p>
+      <button class="ss-half" style="--c:${b.h}" data-ink="${ink(b.h)}" data-ss-open="b" aria-label="Open ${esc(b.n)}"><span class="ss-name ss-name-sm">${esc(b.n)}<span class="ss-diff">${diff === "almost the same" ? `Almost the same as ${esc(a.n.toLowerCase())}.` : `${esc(diff.charAt(0).toUpperCase() + diff.slice(1))} than ${esc(a.n.toLowerCase())}.`}</span></span></button>
     </div>`;
   }
   const c = spec.c;
@@ -143,8 +142,6 @@ function ssRenderLayer(spec) {
   wrap.innerHTML = ssLayerHTML(spec);
   const el = wrap.firstElementChild;
   stage.appendChild(el);
-  // Look-alikes: the names sit just above the caption pill, sized from its real height (1-3 lines), so they can never overlap
-  const diff = el.querySelector(".ss-diff"); if (diff) el.style.setProperty("--diffh", diff.offsetHeight + "px");
   ssWireLayer(el, spec);
   const old = [...stage.children].filter(x => x !== el);
   requestAnimationFrame(() => { el.classList.add("in"); old.forEach(o => o.classList.remove("in")); });
