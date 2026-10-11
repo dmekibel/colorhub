@@ -3,27 +3,34 @@
    Sort control, the active filters as removable chips, then the picture grid. */
 .ab{margin-top:18px}
 .ab-wait{margin:24px 0}
-.ab-tools{display:flex;align-items:center;gap:8px;margin:0 0 12px}
+.ab-tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 12px}
+.ab-count[hidden]{display:none}
 .ab-count{margin:0 0 12px;font:400 16px/1.2 var(--sans);color:var(--soft);font-variant-numeric:tabular-nums}
 .ab-btn{flex:none;display:flex;align-items:center;gap:7px;min-height:44px;padding:0 15px 0 12px;border-radius:var(--r-pill);background:var(--surface-2);color:var(--ink);font:400 16px/1 var(--serif);transition:transform .2s var(--spring)}
 .ab-btn svg{width:19px;height:19px;flex:none}
-.ab-btn em{display:grid;place-items:center;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--paper);color:var(--paper-ink);font:500 12px/1 var(--mono);font-style:normal}
+.ab-btn[data-ab-sortmenu] svg{width:14px;height:14px;color:var(--soft)}
+.ab-btn span{white-space:nowrap}
+.ab-btn em{display:grid;place-items:center;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--paper);color:var(--paper-ink);font:600 14px/1 var(--sans);font-style:normal}
 .ab-btn em[hidden]{display:none}
 .ab-btn:active{transform:scale(.95)}
-/* Sort: four pills that share the row; on a narrow phone with a long word ("Photographer") the row scrolls
-   sideways instead of clipping a label */
-.ab-sort{display:flex;gap:6px;margin:0 calc(-1 * var(--g)) 12px;padding:0 var(--g);overflow-x:auto;scrollbar-width:none}
-.ab-sort::-webkit-scrollbar{display:none}
-.ab-sort button{flex:1 0 auto;height:40px;padding:0 14px;border-radius:var(--r-pill);background:var(--surface-2);color:var(--ink);font:400 16px/1 var(--serif);white-space:nowrap;transition:transform .2s var(--spring)}
-.ab-sort button.on{background:var(--paper);color:var(--paper-ink)}
-.ab-sort button:active{transform:scale(.95)}
+/* Sort: one pill in the tool row that opens a short menu (each row says its direction: Oldest first,
+   Newest first), so the grid starts one row higher (craft critique, 2026-10-11) */
+.ab-sort-h{margin:4px 0 8px;font:400 26px/1 var(--serif)}
+.ab-sort-list{display:flex;flex-direction:column}
+.ab-sort-list button{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:0 4px;border-top:1px solid var(--rule);font:400 19px/1.2 var(--serif);color:var(--ink);text-align:left}
+.ab-sort-list button:first-child{border-top:0}
+.ab-sort-list button.on{color:var(--ink)}
+.ab-sort-list button svg{width:18px;height:18px}
 .ab-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
 .ab-chips[hidden]{display:none}
 .ab-xchip{background:var(--surface-2);color:var(--ink);font:400 16px/1 var(--serif)}
-.ab-clearall{min-height:34px;padding:0 6px;font:italic 400 16px/1 var(--serif);color:var(--soft);text-decoration:underline;text-underline-offset:3px}
+.ab-clearall{min-height:34px;padding:0 6px;font:400 16px/1 var(--sans);color:var(--soft);text-decoration:underline;text-underline-offset:3px}
 .ab-feed{min-height:200px}
 .ab-empty{padding:40px 0 30px;text-align:center}
-.ab-empty p{margin:0 0 14px;font:400 20px/1.3 var(--serif);color:var(--ink)}
+.ab-empty p{margin:0 0 6px;font:400 20px/1.3 var(--serif);color:var(--ink)}
+.ab-empty small{display:block;margin:0 0 18px;font:400 16px/1.4 var(--sans);color:var(--soft)}
+.ab-clear-btn{min-height:44px;padding:0 22px;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);font:400 17px/1 var(--serif)}
+.ab-clear-btn:active{transform:scale(.96)}
 .ab-more{display:block;margin:16px auto 6px;min-height:44px;padding:0 20px;border-radius:var(--r-pill);border:1px solid var(--rule);font:400 16px/1 var(--serif);color:var(--ink)}
 .ab-more span{color:var(--soft)}
 .ab-more:active{transform:scale(.96)}
@@ -34,3 +41,13 @@
 /* the map's Collection picker: six archives, two to a row (one row of six would overflow a 320px screen) */
 .pmx-col-seg{display:grid;grid-template-columns:1fr 1fr}
 .pmx-col-seg button{min-width:0;padding:0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* the Filter pane's own rhythm (shared with the map's sheet, css/paintmap.css): a breath above each sub-heading,
+   slider labels clear of the thumbs, one thin track, long chip labels wrap as text instead of ballooning */
+.pmx-lab2{margin-top:16px}
+.pmx-range2 input::-webkit-slider-runnable-track{background:transparent;border:0;height:30px}
+.pmx-range2 input::-webkit-slider-thumb{margin-top:2px}
+.pmx-cap3{margin-top:6px!important}
+.pmx-chips button{max-width:100%;line-height:1.25;padding-top:9px;padding-bottom:9px;text-align:left}
+/* a tile's Keep heart: 34px to look at, a 44px place to tap, and a firmer backing over pale plates */
+.fva-heart-tile{background:rgba(14,13,11,.72)}
+.fva-heart-tile::before{content:"";position:absolute;inset:-5px}

@@ -7096,6 +7096,13 @@ const AB = {
     await t.waitFor(".ab-filter-sheet [data-pmbody] .pmx-row", 6000, "the Filter sheet's rows");
   },
   labels(t) { return t.$$(".ab-filter-sheet .pmx-row > .pmx-lab").map(x => t.text(x)); },
+  // the Sort menu: open it, tap a row (it closes itself)
+  async sort(t, k, desc) {
+    await t.click("[data-ab-sortmenu]", { wait: 400 });
+    await t.waitFor(`.ab-sort-sheet [data-ab-sortk="${k}"][data-ab-desc="${desc ? 1 : 0}"]`, 4000, "the Sort menu");
+    await t.click(`.ab-sort-sheet [data-ab-sortk="${k}"][data-ab-desc="${desc ? 1 : 0}"]`, { wait: 500 });
+    await t.waitFor(() => !t.$(".ab-sort-sheet"), 4000, "the Sort menu to close");
+  },
   async closeSheet(t) { await t.click(".ab-filter-sheet [data-sheet-close]", { wait: 500 }); await t.waitFor(() => !t.$(".ab-filter-sheet"), 4000, "the sheet to close"); },
 };
 scenario("browse", "Design objects: Browse all uses the map's Filter sheet -- two categories OR, a decade preset ANDs, live counts, removable chips, the address", async t => {
@@ -7142,19 +7149,19 @@ scenario("browse", "Design objects: Sort by date (both ways), color and maker; S
   await t.click("[data-do-browse]", { wait: 600 });
   await t.waitFor("[data-ab-feed] [data-pin]", 20000, "Browse all");
   const yearsOf = () => t.ev(`(() => { const F = PM_COL_F_READY.get("design"); return [...document.querySelectorAll("[data-ab-feed] .masonry [data-pin]")].map(b => F.G.year[F.ixOf(b.dataset.pin)]); })()`);
-  await t.click('[data-ab-sortk="date"]', { wait: 400 });
+  await AB.sort(t, "date", false);
   const ord = t.ev(`(() => { const F = PM_COL_F_READY.get("design"), st = AB_STATE.get("design"); return abSorted(pmList(st.s, F), st, F).slice(0, 60).map(i => F.G.year[i]); })()`);
   t.expect(ord.every((y, k) => !k || y >= ord[k - 1]), "Oldest first isn't ascending");
-  t.expect(/Oldest/.test(t.text('[data-ab-sortk="date"]')), `date button reads "${t.text('[data-ab-sortk="date"]')}"`);
-  await t.click('[data-ab-sortk="date"]', { wait: 400 });
-  t.expect(/Newest/.test(t.text('[data-ab-sortk="date"]')), "a second tap didn't flip to Newest");
+  t.expect(t.text("[data-ab-sortlab]") === "Oldest first", `the Sort pill reads "${t.text("[data-ab-sortlab]")}"`);
+  await AB.sort(t, "date", true);
+  t.expect(t.text("[data-ab-sortlab]") === "Newest first", "Newest first didn't take");
   const ord2 = t.ev(`(() => { const F = PM_COL_F_READY.get("design"), st = AB_STATE.get("design"); return abSorted(pmList(st.s, F), st, F).slice(0, 60).map(i => F.G.year[i]); })()`);
   t.expect(ord2.every((y, k) => !k || y <= ord2[k - 1]), "Newest first isn't descending");
   t.expect(yearsOf().length > 0, "the grid is empty after sorting");
-  await t.click('[data-ab-sortk="color"]', { wait: 400 });
-  t.expect(t.$('[data-ab-sortk="color"]').classList.contains("on"), "Color didn't take");
-  await t.click('[data-ab-sortk="maker"]', { wait: 400 });
-  t.expect(t.text('[data-ab-sortk="maker"]') === "Maker", `maker sort is labeled "${t.text('[data-ab-sortk="maker"]')}"`);
+  await AB.sort(t, "color", false);
+  t.expect(t.ev(`AB_STATE.get("design").sort`) === "color", "By color didn't take");
+  await AB.sort(t, "maker", false);
+  t.expect(t.text("[data-ab-sortlab]") === "By maker", `maker sort is labeled "${t.text("[data-ab-sortlab]")}"`);
   const before = t.$$("[data-ab-feed] [data-pin]").length;
   await t.click("[data-ab-more]", { wait: 500 });
   t.expect(t.$$("[data-ab-feed] [data-pin]").length === before + 60, "Show more didn't add 60");
@@ -7198,7 +7205,7 @@ scenario("browse", "a filtered Photography address opens with its filter and sor
   const st = t.ev(`(() => { const s = AB_STATE.get("photography"); return { y0: s.s.f.y0, y1: s.s.f.y1, sort: s.sort, desc: s.desc }; })()`);
   t.expect(st.y0 === 1939 && st.y1 === 1943 && st.sort === "date" && st.desc, `state: ${JSON.stringify(st)}`);
   t.expect(t.$$("[data-ab-chips] [data-ab-clear]").length === 1, "no year chip");
-  t.expect(/Newest/.test(t.text('[data-ab-sortk="date"]')), "sort didn't come from the address");
+  t.expect(t.text("[data-ab-sortlab]") === "Newest first", "sort didn't come from the address");
 });
 for (const [hash, col, what, pageSel] of [["#/ukiyoe", "ukiyoe", "Ukiyo-e", ".palette .pal"], ["#/botanical", "botanical", "Botanical & bird plates", ".palette .pal"], ["#/pulp", "pulp", "Pulp covers", ".palette .pal"]]) {
   scenario("browse", `${what}: the shared grid filters by its own facets, sorts, keeps, and a tile opens its page`, async t => {
@@ -7212,7 +7219,7 @@ for (const [hash, col, what, pageSel] of [["#/ukiyoe", "ukiyoe", "Ukiyo-e", ".pa
     await t.click(pick, { wait: 300 });
     t.expect(AB.count(t) > 0 && AB.count(t) < total, `picking one facet value: ${AB.count(t)} of ${total}`);
     await AB.closeSheet(t);
-    await t.click('[data-ab-sortk="color"]', { wait: 400 });
+    await AB.sort(t, "color", false);
     const tile = t.$("[data-ab-feed] [data-pin]");
     await t.click(tile.querySelector("[data-fvi]"), { wait: 400 });
     t.expect(t.ev(`Object.values(S.favItem || {}).some(r => r.kind === ${JSON.stringify(col)})`), "the heart didn't keep it");
@@ -7232,6 +7239,8 @@ scenario("browse", "an empty result says so and offers to clear; Clear the filte
   await t.open("#/pulp?hb=6&l0=100&l1=100", { settle: 900 });
   await t.waitFor(".ab-empty", 6000, "the empty state");
   t.expect(/match all of that/.test(t.text(".ab-empty")), `empty copy: ${t.text(".ab-empty")}`);
+  t.expect(/Try removing Lightness 100/.test(t.text(".ab-empty")), `no "what to loosen" line: ${t.text(".ab-empty")}`);
+  t.expect(t.$("[data-ab-count]").hidden, "the count line repeats the empty state");
   await t.click(".ab-empty [data-ab-clearall]", { wait: 400 });
   await t.waitFor("[data-ab-feed] [data-pin]", 6000, "the covers back");
   t.expect(!t.$$("[data-ab-chips] [data-ab-clear]").length, "chips left after Clear");

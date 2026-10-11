@@ -21,6 +21,12 @@
 
 const AB_PAGE = 60;
 const AB_SORTS = [["featured", "Featured"], ["date", "Date"], ["color", "Color"], ["maker", "Maker"]];
+// the Sort menu's rows: a sort plus its direction, said in words (Date has two; the rest read one way)
+const AB_SORT_ROWS = [["featured", false, "Featured"], ["date", false, "Oldest first"], ["date", true, "Newest first"], ["color", false, "By color"], ["maker", false, "By maker"]];
+function abSortLabel(st, F) {
+  if (st.sort === "maker") return "By " + pmColLabel(F, "painter").toLowerCase();
+  return (AB_SORT_ROWS.find(r => r[0] === st.sort && r[1] === !!st.desc) || AB_SORT_ROWS[0])[2];
+}
 const AB_STATE = new Map();   // col -> { s: { f, fav, col }, sort, desc, shown }
 const AB_PATHS = { photography: "photography", pulp: "pulp", ukiyoe: "ukiyoe", botanical: "botanical", design: "design/browse" };
 let AB_PENDING = null;        // { col, qs } -- an address's query, read by the next abMount for that collection
@@ -124,9 +130,9 @@ function abWire(host, col, F, st, o) {
   host.innerHTML = `
     <div class="ab-tools">
       <button class="ab-btn" data-ab-filter aria-haspopup="dialog">${PM_ICON.filter}<span>Filter</span><em data-ab-nf hidden></em></button>
-      <button class="ab-btn" data-ab-map aria-label="See these on the map">${icon("map", 20)}<span>On the map</span></button>
+      <button class="ab-btn" data-ab-sortmenu aria-haspopup="dialog"><span data-ab-sortlab></span>${PM_ICON.down}</button>
+      <button class="ab-btn ab-btn-map" data-ab-map aria-label="See these on the map">${icon("map", 20)}<span>Map</span></button>
     </div>
-    <div class="ab-sort" role="radiogroup" aria-label="Sort" data-ab-sort></div>
     <div class="ab-chips" data-ab-chips hidden></div>
     <p class="ab-count" data-ab-count aria-live="polite"></p>
     <div data-ab-extra></div>
@@ -141,10 +147,8 @@ function abWire(host, col, F, st, o) {
     try { ROUTE_NOW = "#/" + path + (q ? "?" + q : ""); history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {}
   };
   function paintTools() {
-    $("[data-ab-sort]").innerHTML = AB_SORTS.map(([k, t]) => {
-      const on = st.sort === k, label = k === "date" && on ? (st.desc ? "Newest" : "Oldest") : k === "maker" ? pmColLabel(F, "painter") : t;
-      return `<button class="${on ? "on" : ""}" data-ab-sortk="${k}" role="radio" aria-checked="${on}"${k === "date" && on ? ` aria-label="Date, ${st.desc ? "newest" : "oldest"} first: tap to flip"` : ""}>${esc(label)}</button>`;
-    }).join("");
+    $("[data-ab-sortlab]").textContent = abSortLabel(st, F);
+    $("[data-ab-sortmenu]").setAttribute("aria-label", "Sort: " + abSortLabel(st, F));
     const chips = pmActiveChips(st.s, F), bar = $("[data-ab-chips]");
     bar.hidden = !chips.length;
     bar.innerHTML = chips.map((c, k) => `<button class="pmx-xchip ab-xchip" data-ab-clear="${k}">${esc(c.text)}<i>${ICON.x}</i></button>`).join("")
@@ -156,10 +160,13 @@ function abWire(host, col, F, st, o) {
   }
   function paintFeed() {
     const total = rows.length, page = rows.slice(0, st.shown).map(nodeOf);
-    $("[data-ab-count]").textContent = `${total.toLocaleString()} ${total === 1 ? noun : nounP}`;
+    const cnt = $("[data-ab-count]");
+    cnt.textContent = `${total.toLocaleString()} ${total === 1 ? noun : nounP}`; cnt.hidden = !total;
     if (!total) {
-      const any = pmActiveChips(st.s, F).length;
-      feed.innerHTML = `<div class="ab-empty"><p>${any ? `No ${esc(nounP)} match all of that.` : `No ${esc(nounP)} here yet.`}</p>${any ? `<button class="wl" data-ab-clearall>Clear the filters</button>` : ""}</div>`;
+      // say which filter to loosen: the last one added is the likeliest to have emptied it
+      const chips = pmActiveChips(st.s, F), last = chips[chips.length - 1];
+      feed.innerHTML = `<div class="ab-empty"><p>${chips.length ? `No ${esc(nounP)} match all of that.` : `No ${esc(nounP)} here yet.`}</p>
+        ${chips.length > 1 ? `<small>Try removing ${esc(last.text)}.</small>` : ""}${chips.length ? `<button class="ab-clear-btn" data-ab-clearall>Clear the filters</button>` : ""}</div>`;
       return;
     }
     byId = new Map(page.map(n => [n.id, n]));
@@ -178,12 +185,7 @@ function abWire(host, col, F, st, o) {
     const t = e.target;
     const p = t.closest("[data-pin]");
     if (p) { const n = byId.get(p.dataset.pin); if (n) { buzz(6); PM_COL_DEF[col].open(n); } return; }
-    const sk = t.closest("[data-ab-sortk]");
-    if (sk) {
-      const k = sk.dataset.abSortk; buzz(5);
-      if (st.sort === k) { if (k !== "date") return; st.desc = !st.desc; } else { st.sort = k; st.desc = false; }
-      redraw(); return;
-    }
+    if (t.closest("[data-ab-sortmenu]")) { buzz(5); abSortSheet(st, F, () => redraw()); return; }
     if (t.closest("[data-ab-more]")) { buzz(5); st.shown += AB_PAGE; paintFeed(); return; }
     if (t.closest("[data-ab-clearall]")) { buzz(6); st.s.f = pmFilterFresh(); st.s.fav = 0; redraw(); return; }
     const cl = t.closest("[data-ab-clear]");
@@ -203,6 +205,22 @@ function abWire(host, col, F, st, o) {
   });
   redraw(true);
   if (o.onReady) o.onReady(st, F);
+}
+// the Sort menu: five rows, the current one checked; a tap applies it and closes
+function abSortSheet(st, F, onChange) {
+  if (document.querySelector(".sheet")) return;
+  const rows = AB_SORT_ROWS.map(([k, d, t]) => [k, d, k === "maker" ? "By " + pmColLabel(F, "painter").toLowerCase() : t]);
+  const { sh, close } = sheet(`<p class="ab-sort-h">Sort</p><div class="ab-sort-list" role="radiogroup" aria-label="Sort">${rows.map(([k, d, t]) => {
+    const on = st.sort === k && !!st.desc === d;
+    return `<button role="radio" aria-checked="${on}" class="${on ? "on" : ""}" data-ab-sortk="${k}" data-ab-desc="${d ? 1 : 0}"><span>${esc(t)}</span>${on ? ICON.checkS : ""}</button>`;
+  }).join("")}</div>`);
+  sh.classList.add("ab-sort-sheet");
+  sh.querySelectorAll("[data-ab-sortk]").forEach(b => b.onclick = () => {
+    const k = b.dataset.abSortk, d = b.dataset.abDesc === "1";
+    buzz(5); close();
+    if (st.sort === k && !!st.desc === d) return;
+    st.sort = k; st.desc = d; onChange();
+  });
 }
 // the Filter sheet: the map's own pane (pmFilterPane), opened over the grid; every change redraws the grid
 // underneath at once, and the pane's own line says how many are left

@@ -359,7 +359,7 @@ function doBrowseAll(push = true) {
   const el = show(`
     ${worldTop("Design objects")}
     <h1 class="p-title">Browse all</h1>
-    <p class="p-dek">Every object in the archive, every category at once. Filter by category, maker, decade, place, museum or color; sort them; or lay them out by color on the map.</p>
+    <p class="p-dek">Every object in the archive, every category at once.</p>
     <div data-ab-host></div>
     <p class="fine">Colors are as photographed: museum photography, aging dyes and glazes, and a screen approximation all sit between an object and the hex shown.</p>
   `, "article wd");

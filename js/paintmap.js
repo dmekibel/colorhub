@@ -40,8 +40,10 @@ const PM_NEEDS_SEED = new Set(["rings", "spiral"]);
 // a maker, not a painter) -- Paintings keep PM_ARR/PM_WHY exactly
 function pmArrTitle(k, t, F) {
   if (!F || !F.col || F.col === "paintings") return t;
-  if (k === "painter") return "By " + pmColLabel(F, "painter").toLowerCase();
-  if (k === "families") return "By " + pmColLabel(F, "mv").toLowerCase();
+  // short enough for a Shape tile at 375px ("By photographer" clipped)
+  const cap = w => w[0].toUpperCase() + w.slice(1);
+  if (k === "painter") return cap(pmColLabel(F, "painterP"));
+  if (k === "families") return cap(pmColLabel(F, "mvP"));
   return t;
 }
 function pmArrWhy(k, F) {
@@ -386,7 +388,7 @@ function pmActiveChips(s, F) {
     c.push({ dim: "color", text: names.length === 1 ? names[0] : `${names.length} colors (${f.colorMode === "all" ? "all" : "any"})` });
   }
   if (f.hueBand != null) c.push({ dim: "hueBand", text: XB_HUE_WORDS[f.hueBand] });
-  if (f.l0 != null || f.l1 != null) c.push({ dim: "l", text: f.l0 != null && f.l1 != null ? `L ${f.l0}–${f.l1}` : f.l0 != null ? `Lighter than ${f.l0}` : `Darker than ${f.l1}` });
+  if (f.l0 != null || f.l1 != null) c.push({ dim: "l", text: f.l0 != null && f.l1 != null ? (f.l0 === f.l1 ? `Lightness ${f.l0}` : `Lightness ${f.l0}–${f.l1}`) : f.l0 != null ? `Lighter than ${f.l0}` : `Darker than ${f.l1}` });
   if (f.painterSet && f.painterSet.length) c.push({ dim: "painter", text: f.painterSet.length === 1 ? xbArtistName(F, f.painterSet[0]) : `${f.painterSet.length} ${pmColLabel(F, "painterP")}` });
   if (f.mvSet && f.mvSet.length) c.push({ dim: "mv", text: f.mvSet.length === 1 ? F.meta.movements[f.mvSet[0] - 1] : `${f.mvSet.length} ${pmColLabel(F, "mvP")}` });
   if (f.musSet && f.musSet.length) c.push({ dim: "mus", text: f.musSet.length === 1 ? F.G.src[f.musSet[0]].short : `${f.musSet.length} ${pmColLabel(F, "musP")}` });
