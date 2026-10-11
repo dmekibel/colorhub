@@ -3660,7 +3660,8 @@ scenario("map", "no two drawn honeycomb cell polygons overlap, at 3 zoom levels,
 // the one in the screenshot, at Magnify high and at the resting zoom floor.
 scenario("map", "no gap in the drawn interior at Magnify high or at the resting floor, in every arrangement", async t => {
   await H.homeReady(t);
-  for (const arr of ["map", "rings", "sunflower"]   // Families/Tones are islands with deliberate space between them: a single-hull test can't judge them) {
+  // Families/Tones are islands with deliberate space between them: a single-hull test can't judge them
+  for (const arr of ["map", "rings", "sunflower"]) {
     t.ev(`S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.arr = "${arr}"; S.hm.style = "honeycomb"; S.hm.feel = { mag: .95, space: .15, size: .5 }; hmHome();`);
     await t.waitFor(() => H.num(t.text(".hm-title small")) > 400, 10000, `${arr}: every name to fill`);
     await t.sleep(250);

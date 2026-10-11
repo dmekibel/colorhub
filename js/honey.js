@@ -816,9 +816,10 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
       // an edge cell keeps a honeycomb edge (David, 2026-10-11: "the edge stays honeycomb shaped, not rounded"):
       // start from the regular hexagon its nearest neighbor implies (inradius = that bisector), the same pointy-top
       // hexagon an interior lattice cell ends up as, so the outer sides read as the lattice continuing
-      let minLim = Infinity; for (let c = 2; c < cuts.length; c += 3) if (cuts[c] > 0) minLim = Math.min(minLim, cuts[c]);
+      // oriented to the lattice: the nearest neighbor sits square across one of its sides, as in the interior
+      let minLim = Infinity, nAng = 0; for (let c = 2; c < cuts.length; c += 3) if (cuts[c] > 0 && cuts[c] < minLim) { minLim = cuts[c]; nAng = Math.atan2(cuts[c - 1], cuts[c - 2]); }
       const Rh = (isFinite(minLim) ? minLim : b.d * .5) * 1.1547;
-      for (let i = 0; i < 6; i++) { const t = (i * 60 + 30) * Math.PI / 180; poly.push([Math.cos(t) * Rh, Math.sin(t) * Rh]); }
+      for (let i = 0; i < 6; i++) { const t = nAng + (i * 60 + 30) * Math.PI / 180; poly.push([Math.cos(t) * Rh, Math.sin(t) * Rh]); }
     } else {
       const R0 = Math.max(ownR0, maxLim * 1.8 + 8);
       for (let i = 0; i < nSides; i++) { const t = i / nSides * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
@@ -1496,7 +1497,9 @@ function honeycomb(host, opts = {}) {
     const exact = shapeAmt >= .98;
     // only at full opacity: during a fade (the map's own fade-in, a dimmed backdrop) the disks and the fills stack
     // their alpha, showing as light rims inside every cell (David, 2026-10-11: "weird highlights")
-    if (exact && ctx.globalAlpha >= .999) for (const b of drawn) {
+    // off (David, 2026-10-11, "looks odd"): at the outer edge these disks showed past the cells as round blobs; the
+    // interior is gapless by construction (checked by _qaCoverage), so the safety net only ever cost, never helped
+    if (false && exact && ctx.globalAlpha >= .999) for (const b of drawn) {
       if (!b.poly) continue;
       let far = 0; for (const p of b.poly) { const d2 = p[0] * p[0] + p[1] * p[1]; if (d2 > far) far = d2; }
       ctx.beginPath(); ctx.arc(b.x, b.y, Math.sqrt(far), 0, 6.2832); ctx.fillStyle = b.it.h; ctx.fill();
