@@ -724,6 +724,34 @@ function honeyEdgeSet(pts) {
   });
   return out;
 }
+// ghost points one lattice step past the outer edge (David, 2026-10-11: edge cells must be honeycomb, not arrows or
+// trapezoids): each edge point's interior neighbors reflected through it, kept where nothing real is near. They go
+// through the same lens as real points and clip the edge cells exactly the way interior neighbors do, then are
+// dropped before drawing -- so an edge cell is shaped like every other cell, by construction.
+function honeyGhosts(pts, edgeSet) {
+  const N = pts.length; if (N < 8) return [];
+  let sp; { const xs = pts.map(p => p.x), ys = pts.map(p => p.y); sp = Math.sqrt((Math.max(...xs) - Math.min(...xs)) * (Math.max(...ys) - Math.min(...ys)) / N) || 1; }
+  const G = new Map(), key = (i, j) => i * 100003 + j, add = (q, n) => { const k = key(Math.floor(q.x / sp), Math.floor(q.y / sp)); let a = G.get(k); if (!a) G.set(k, a = []); a.push(n); };
+  pts.forEach(add);
+  const near = (x, y, r) => { const ci = Math.floor(x / sp), cj = Math.floor(y / sp), R = Math.ceil(r / sp); let best = Infinity, bi = -1;
+    for (let i = ci - R; i <= ci + R; i++) for (let j = cj - R; j <= cj + R; j++) for (const m of G.get(key(i, j)) || []) { const d = Math.hypot(all[m].x - x, all[m].y - y); if (d < best) { best = d; bi = m; } }
+    return [best, bi]; };
+  const all = pts.slice(); let s = Infinity;
+  { const nn = []; for (let n = 0; n < N; n += Math.max(1, Math.floor(N / 200))) { all[n]; const [d] = (() => { let b = Infinity; const p = pts[n], ci = Math.floor(p.x / sp), cj = Math.floor(p.y / sp); for (let i = ci - 2; i <= ci + 2; i++) for (let j = cj - 2; j <= cj + 2; j++) for (const m of G.get(key(i, j)) || []) if (m !== n) b = Math.min(b, Math.hypot(pts[m].x - p.x, pts[m].y - p.y)); return [b]; })(); if (isFinite(d)) nn.push(d); } nn.sort((a, b) => a - b); s = nn[Math.floor(nn.length / 2)] || sp; }
+  const out = [];
+  pts.forEach((p, n) => {
+    if (!edgeSet.has(p.it)) return;
+    const ci = Math.floor(p.x / sp), cj = Math.floor(p.y / sp), R = Math.ceil(s * 1.3 / sp), nb = [];
+    for (let i = ci - R; i <= ci + R; i++) for (let j = cj - R; j <= cj + R; j++) for (const m of G.get(key(i, j)) || []) if (m !== n && m < N && pts[m].g === p.g && Math.hypot(pts[m].x - p.x, pts[m].y - p.y) <= s * 1.3) nb.push(m);
+    for (const m of nb) {
+      const gx = 2 * p.x - pts[m].x, gy = 2 * p.y - pts[m].y;
+      if (near(gx, gy, s)[0] < s * .6) continue;
+      const g = { x: gx, y: gy, g: p.g, it: p.it, ghost: true };
+      all.push(g); add(g, all.length - 1); out.push(g);
+    }
+  });
+  return out;
+}
 function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {   // clipAll (L18 glide): clip even tiny bubbles   // grow: how far a bubble may swell past its own lens size, as a fraction of its diameter
   if (!drawn.length) return;
   // Speed: the grid is sized to a TYPICAL bubble (not the biggest, which put thousands of tiny ones in every lookup),
@@ -1354,9 +1382,10 @@ function honeycomb(host, opts = {}) {
   function buildFlatDrawn(l, t) {
     const R = reach(l), cx = W / 2, cy = vcy(), hx = W / 2, hy = vy() / 2, ia = l.inner, round = cfg.lensMode === "round", pk = pack();
     drawn = []; let tinyN = 0, cbest = Infinity, cItem = null;
-    if (lay.finite && !lay.edgeSet) lay.edgeSet = honeyEdgeSet(lay.pts);
-    const edgeSet = lay.finite ? lay.edgeSet : null;
-    for (const p of lay.pts) copies(p, P, R, (ex, ey) => {
+    if (lay.finite && !lay.edgeSet) { lay.edgeSet = honeyEdgeSet(lay.pts); lay.ghosts = honeyGhosts(lay.pts, lay.edgeSet); }
+    const ghostPts = lay.finite && lay.ghosts && lay.ghosts.length ? lay.ghosts : null;
+    const edgeSet = lay.finite && !ghostPts ? lay.edgeSet : null;   // with ghosts, edge cells need no special start shape
+    for (const p of (ghostPts ? lay.pts.concat(ghostPts) : lay.pts)) copies(p, P, R, (ex, ey) => {
       const z = Math.hypot(ex, ey);
       let x, y, d;
       if (round) { const k = z ? F(z, l) / z : base * l.s * l.m0; x = cx + ex * k; y = cy + ey * k; d = base * l.s * localScale(z, l) * pk; }
@@ -1372,6 +1401,7 @@ function honeycomb(host, opts = {}) {
       // drops this collar again right after honeyCells runs, so nothing outside the strict viewport ever draws.
       if (x < -d - HONEY_EDGE_MARGIN || y < -d - HONEY_EDGE_MARGIN || x > W + d + HONEY_EDGE_MARGIN || y > Hh + d + HONEY_EDGE_MARGIN) return;
       if (d < 2.2) { tinyN++; return; }
+      if (p.ghost) { drawn.push({ it: p.it, x, y, d, z: 1e9, ghost: true, k: "ghost|" + Math.round(p.x * 8) + "|" + Math.round(p.y * 8) }); return; }
       if (z < cbest) { cbest = z; cItem = p.it; }
       drawn.push({ it: p.it, x, y, d, z, edge: !!(edgeSet && edgeSet.has(p.it)), k: p.it.n + "|" + Math.round((P[0] + ex) * 8) + "|" + Math.round((P[1] + ey) * 8) });
     });
@@ -1449,6 +1479,7 @@ function honeycomb(host, opts = {}) {
     const shapeAmt = zc("shape");
     applyMotion(l, t);
     honeyCells(drawn, gapPx(), shapeAmt, L18_GROW, !!morph);
+    if (drawn.some(b => b.ghost)) drawn = drawn.filter(b => !b.ghost);   // ghosts only shape the edge; never drawn
     // every cell honeyCells just clipped, collar included -- kept so the seam pass below can still stroke an edge
     // whose OTHER cell is just off-screen (its own edge would otherwise go unstroked once that collar is dropped).
     const allDrawn = drawn;
