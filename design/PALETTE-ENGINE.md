@@ -317,6 +317,47 @@ The rigor critic's best catches, plus mine:
 - **Monet, unchanged settings:** the gate should call many late water lilies "quiet", not invent oppositions.
 - **Reject the build if** the weights that satisfy van Gogh make Monet's dull paintings score "beautiful" about as often as random ones.
 
+**Stage 1 results (2026-10-11, `tools/palette_picker.py`).** Stage 1 became the *learned* picker (David's call), trained on the 171-card board (§4c).
+- **Held-out test, 85 cards it never saw:** mean ΔE00 **13.1** (median 12.7) from the curator's five. For comparison on the same cards: hand-made rules 14.6, area k-means 16.2, our current Diverse mode 17.4.
+  - The candidate ceiling (a perfect choice from its own candidates) is 5.5, so choosing remains the gap.
+  - Honesty notes: the held-out cards were scored three times. Once for the first version (12.7). Once after one feature round chosen by cross-validation on the training cards only (also 12.7). Once after fixing a bug that let 7 palettes stop short of five colors, which flattered the score; 13.1 is the corrected, final number.
+- **What it learned** (strongest weights): stay well apart from colors already chosen; take a color close to the most vivid in its family; prefer colors that cover some area; lean light; and avoid hue families that are huge on the canvas, in favor of distinct families.
+- **Nested sizes:** the 5 are always the first 5 of the 10 or 20, and the spacing loosens step by step so every size fills.
+- **Van Gogh check, a modest pass with a caveat.**
+  - 48% of his 200 archive paintings are from 1888–90; 70% of his top-scoring 10% are (14 of 20, ×1.5).
+  - Plain mean chroma gives the same 70%, so this doesn't yet show the score sees more than saturation, even though the two rank paintings almost independently (rank correlation 0.06).
+  - 20 paintings is a small sample; by my rough calculation it's borderline significant.
+- **Monet check, a fail as designed.** The structure rules call only 26% of his 27 water lilies "analogous" and 30% "complementary" (van Gogh 1888–90: 35% / 34%). The rules ignore area, so small pink lilies against green pads count as an opposing pair. **Area-aware rerun** (threshold fixed before running: each color's family must cover ≥ 5% of the canvas):
+  - Monet's water lilies moved the expected way: analogous 37%, complementary 19%.
+  - But van Gogh 1888–90 now reads analogous 46%, complementary 16%, so the rules still don't separate the two painters. Still a fail.
+  - Likely causes: five picks are too few to read a painting's structure, and the rules are my intuition rather than learned.
+  - Next: read structure from the painting's whole area-weighted color distribution, and judge it against a small set David labels by eye ("opposites" vs "neighbors"), not against my expectation.
+- **Five famous held-out paintings, chosen before running** (picker vs our current Diverse; lower is closer):
+  - *Café Terrace at Night* 7.9 vs 16.6 (nearly the curator's palette);
+  - *Portrait of Félix Fénéon* 13.2 vs 18.2;
+  - *Ophelia* 16.9 vs 17.6;
+  - *Starry Night Over the Rhône* 17.7 vs 18.2 (it misses the small yellow lights);
+  - *Bridge over a Pond of Water Lilies* 17.1 vs 16.2 (worse: it takes a dull grey the curator skipped).
+
+**More human examples, and how much people agree (2026-10-11).** Gathered into gitignored `research/_raw/datasets/` (evaluation only):
+- **Lin & Hanrahan, "Modeling How People Extract Color Themes from Images" (CHI 2013, Stanford).** 40 images (20 paintings: Monet, Seurat, Winslow Homer, Macke, Chikanobu; 20 photos). 40 Mechanical Turk workers each picked 5-color palettes per image, plus 11 artists on some images. People picked from a set of swatches offered per image. The official link is dead; the dataset came from the Internet Archive copy. No license stated, so it's used for testing only.
+- **O'Donovan, Agarwala & Hertzmann, "Color Compatibility From Large Datasets" (SIGGRAPH 2011).** Human ratings of 5-color palettes (Kuler, COLOURlovers, MTurk). CC BY-NC-SA, non-commercial: research and testing only, and nothing trained on it ships if the app is commercial. Not used yet.
+- **ColorLisa:** 133 unique hand-made 5-color palettes from 99 artists; 13–14 are paintings we hold (Mona Lisa, the Great Wave, Starry Night, Girl with a Pearl Earring, the Milkmaid, the Arnolfini Portrait, The Kiss, The Birth of Venus, La Grande Jatte, Monet's Water Lilies 1906 and Woman with a Parasol, The Scream).
+
+**The key measurement: people don't agree with each other much.** On Lin & Hanrahan's 20 paintings (mean CIEDE2000, matched one-to-one):
+
+| | Distance |
+|---|---|
+| one person vs another, same painting | **12.7** |
+| artists vs Turk workers | 13.8 |
+| area k-means vs each person | 13.8 |
+| our learned picker vs each person | **16.9** |
+
+What it means:
+1. **Our 13.1 against the Pinterest curator is roughly the size of the disagreement between two people.** So the picker is close to "another person's take" on that curator's cards. (Different images and a different swatch method, so this is a rough comparison, not proof.)
+2. **"Taste" is not one thing.** The picker learned one curator's lit, vivid style, and on ordinary people's palettes it does *worse* than plain area clustering (16.9 vs 13.8). The crowd's consensus is more representative; this curator is more selective.
+3. **So the engine should offer styles** (a representative one, close to the crowd, and curated ones like this board), and **learn the user's own taste** (§6). No single "correct" palette exists to chase.
+
 **Stage 2: the learning loop and vibration pairs.**
 - Ship the swipe deck, log every component score, and refit the weights. Pass if the learned weights predict held-out swipes better than the hand-set ones.
 - Vibration pairs: pass if Café Terrace's cobalt/orange is found without being pointed at.

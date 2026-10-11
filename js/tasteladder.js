@@ -1,0 +1,296 @@
+"use strict";
+// "Teach it your eye" (design/TASTE-ENGINE.md): the Stage A ladder trainer for the v2 taste engine
+// (js/tastemodel.js). Four rungs -- colors, pairs ("two that go together"), threes ("adding a third"), whole
+// palettes -- about 10 questions each, using the SAME growing model all the way through (every rung teaches
+// every layer a little). Candidates are real colors and real palettes pulled from data/paintings.js. Door in:
+// Studio's "Teach it your eye" row (js/studio.js) and #/taste/style (js/router.js).
+//
+// State: S.taste.ladder = { at, cur, m: {mu,S,n,acc}, steps: {<key>: {n, acc, done}}, stepAcc: {<key>: [...]},
+// recent: [last ~20 shown item keys] }. Additive and never touches S.taste.color / S.taste.palette (the old
+// engine keeps working for js/gallery.js's "Matches your taste").
+
+const LDR_ORDER = ["colors", "pairs", "threes", "palettes"];
+const LDR_STEPS = {
+  colors: { label: "Colors you like", kind: "duel", q: "Which color do you like more?" },
+  pairs: { label: "Two that go together", kind: "four", base: 1, q: "Which pair looks best?" },
+  threes: { label: "Adding a third", kind: "four", base: 2, q: "Which three look best together?" },
+  palettes: { label: "Whole palettes", kind: "duel", q: "Which palette would you rather live with?" },
+};
+const LDR_MIN = 6, LDR_MAX = 15;
+const ldrMean = a => a.length ? a.reduce((s, v) => s + v, 0) / a.length : 0;
+
+// ---------- real candidates, pulled once from data/paintings.js ----------
+let LDR_COLOR_POOL = null, LDR_PAIR_POOL = null, LDR_PAL_POOL = null;
+function ldrColorPool() {
+  if (LDR_COLOR_POOL) return LDR_COLOR_POOL;
+  const seen = new Map();
+  (window.PAINTINGS || []).forEach(p => (p.palette || []).forEach(c => { if (!seen.has(c.h)) seen.set(c.h, { h: c.h, from: p.title }); }));
+  LDR_COLOR_POOL = [...seen.values()].map(c => { const [L, C, H] = lch(c.h); return { ...c, L, C, H, x: TASTE.tasteFeat([c.h], null) }; });
+  return LDR_COLOR_POOL;
+}
+function ldrPairPool() {   // two colors from the same painting, for step 3's base pair
+  if (LDR_PAIR_POOL) return LDR_PAIR_POOL;
+  const out = [];
+  (window.PAINTINGS || []).forEach(p => { const cs = p.palette || []; for (let i = 0; i < cs.length; i++) for (let j = i + 1; j < cs.length; j++) out.push({ cols: [cs[i].h, cs[j].h], from: p.title }); });
+  LDR_PAIR_POOL = out;
+  return LDR_PAIR_POOL;
+}
+function ldrPalPool() {
+  if (LDR_PAL_POOL) return LDR_PAL_POOL;
+  LDR_PAL_POOL = (window.PAINTINGS || []).filter(p => p.palette && p.palette.length >= 3).map(p => {
+    const cols = p.palette.map(c => c.h), shares = p.palette.map(c => c.share);
+    return { cols, shares, from: p.title, x: TASTE.tasteFeat(cols, shares) };
+  });
+  return LDR_PAL_POOL;
+}
+
+// ---------- state ----------
+function ldrFresh() {
+  const m = (S.taste && (S.taste.color || S.taste.palette)) ? TASTE.migrateV1(S.taste.color, S.taste.palette) : TASTE.model2();
+  const steps = {}; LDR_ORDER.forEach(k => steps[k] = { n: 0, acc: null, done: false });
+  return { at: today(), cur: "colors", m: { mu: m.mu, S: m.S, n: 0, acc: [] }, steps, stepAcc: { colors: [], pairs: [], threes: [], palettes: [] }, recent: [] };
+}
+function ldrState() { S.taste = S.taste || {}; if (!S.taste.ladder) S.taste.ladder = ldrFresh(); return S.taste.ladder; }
+function ldrLeastCertain(ld) {
+  const next = LDR_ORDER.find(k => !ld.steps[k].done); if (next) return next;
+  return LDR_ORDER.slice().sort((a, b) => (ld.steps[a].acc ?? 1) - (ld.steps[b].acc ?? 1))[0];
+}
+function ldrRemember(ld, key) { ld.recent.push(key); if (ld.recent.length > 20) ld.recent.shift(); }
+function ldrStepPlateaued(hist) {
+  if (hist.length < LDR_MIN + 2) return false;
+  const half = hist.length >> 1, a1 = ldrMean(hist.slice(0, half).map(r => r.hit)), a2 = ldrMean(hist.slice(half).map(r => r.hit));
+  return hist.length >= LDR_MIN && Math.abs(a2 - a1) < .05;
+}
+
+// ---------- start screen ----------
+function tasteLadderIntro() {
+  const favN = Object.keys((S.favArt) || {}).length;
+  // vivid real colors from the paintings, spread around the wheel, building up rung by rung (1, 2, 3, 5 equal chips)
+  const demo = [];
+  ldrColorPool().filter(c => c.C > 20 && c.L > 25 && c.L < 85).sort((a, b) => b.C - a.C).forEach(c => {
+    if (demo.length < 5 && demo.every(d => Math.min(Math.abs(d.H - c.H), 360 - Math.abs(d.H - c.H)) > 40)) demo.push(c);
+  });
+  demo.sort((a, b) => a.H - b.H);
+  const demoHex = demo.map(c => c.h);
+  const steps = [["1", "Colors you like"], ["2", "Two that go together"], ["3", "Adding a third"], ["4", "Whole palettes"]];
+  const el = show(`
+    <header class="deck-top"><button class="icon-btn" data-close aria-label="Close">${ICON.x}</button><span class="eyebrow" style="flex:1">A taste test</span></header>
+    <p class="eyebrow tz-kick">${favN ? `Starting from ${favN} painting${favN === 1 ? "" : "s"} you kept` : "Grows deeper with every choice"}</p>
+    <h1 class="t-title">Teach it <em>your eye</em></h1>
+    <p class="tab-sub">The more you choose, the smarter it gets. Four short rungs, real colors from real paintings.</p>
+    <div class="ldr-steps">${steps.map(([n, t], i) => `<div class="ldr-step"><em>${n}</em><b>${esc(t)}</b><span class="ldr-chips" aria-hidden="true">${demoHex.slice(0, [1, 2, 3, 5][i]).map(h => `<i style="background:${h}"></i>`).join("")}</span></div>`).join("")}</div>
+    <button class="btn" data-go>Begin ${ICON.arrow}</button>
+  `, "taste ldr-intro");
+  el.querySelector("[data-close]").onclick = () => go("studio");
+  el.querySelector("[data-go]").onclick = () => { const ld = ldrState(); ld.cur = ldrLeastCertain(ld); save(); ldrRunStep(ld); };
+}
+
+// ---------- the duel rungs (colors, palettes): reuses tzDuel() from js/taste.js ----------
+function ldrRunDuel(ld, stepKey) {
+  const cfg = LDR_STEPS[stepKey], pool = stepKey === "colors" ? ldrColorPool() : ldrPalPool();
+  if (pool.length < 2) return ldrEnd(ld);
+  const ref = pool[0].x.map((_, i) => ldrMean(pool.map(p => p.x[i])));
+  const total = LDR_MAX, D = tzDuel(total);
+  const face = stepKey === "colors" ? c => `<span class="tz-plate" style="--c:${c.h}"></span>`
+    : p => `<span class="tz-opt-col">${ldrStripEq(p)}<small>From ${esc(p.from)}</small></span>`;
+  const step = () => {
+    const st = ld.steps[stepKey], hist = ld.stepAcc[stepKey];
+    if (st.n >= LDR_MAX || (st.n >= LDR_MIN && ldrStepPlateaued(hist))) { st.done = true; save(); return ldrAdvance(ld); }
+    const skipSet = new Set(pool.filter(p => ld.recent.includes(p.h || p.cols.join())));
+    const [a, b] = TASTE.nextDuelV2(ld.m, pool, { skip: skipSet, ok: stepKey === "palettes" ? (x, y) => x.cols.length === y.cols.length : () => true });
+    const predicted = TASTE.utility(ld.m, a.x) >= TASTE.utility(ld.m, b.x) ? 0 : 1;
+    const label = `${cfg.label} · ${st.n + 1}/${total}`;
+    D.ask(face(a), face(b), label, cfg.q, [a.h || a.cols[0], b.h || b.cols[0]], pick => {
+      TASTE.choose(ld.m, a.x, b.x, pick, ref);
+      const hit = pick === 0 ? predicted === 0 : pick === 1 ? predicted === 1 : null;
+      if (hit !== null) { TASTE.recordAcc(ld.m, hit, .5); hist.push({ hit: hit ? 1 : 0, chance: .5 }); }
+      st.n++; st.acc = ldrMean(hist.map(r => r.hit));
+      [a, b].forEach(x => ldrRemember(ld, x.h || x.cols.join()));
+      save(); step();
+    });
+  };
+  step();
+}
+// equal-size, equal-shape swatches for a palette comparison (David's rule): never weighted by share.
+function ldrStripEq(p) {
+  const order = p.shares ? p.shares.map((s, i) => i).sort((a, b) => p.shares[b] - p.shares[a]) : p.cols.map((_, i) => i);
+  return `<span class="tz-strip tz-eq">${order.map(i => `<i style="--c:${p.cols[i]}"></i>`).join("")}</span>`;
+}
+
+// ---------- the best-of-four rungs (pairs, threes) ----------
+function ldrFourShell(total) {
+  const el = show(`
+    <header class="deck-top"><button class="icon-btn" data-close aria-label="Close">${ICON.x}</button><div class="segs" id="lsegs">${"<i></i>".repeat(total)}</div><span class="left mono" id="lleft"></span></header>
+    <div class="tz-q"><p class="eyebrow" id="llabel"></p><h2 id="lq"></h2></div>
+    <div class="ldr-base" id="lbase"></div>
+    <div class="ldr-four" id="lfour"></div>
+    <div class="ldr-feedback" id="lfb"></div>
+    <button class="btn ghost ldr-skip" id="lskip">Skip</button>
+  `, "fixed ldr-run");
+  el.querySelector("[data-close]").onclick = () => go("studio");
+  const $ = s => el.querySelector(s), four = $("#lfour"), segs = $("#lsegs"), skipBtn = $("#lskip"), fb = $("#lfb"), base = $("#lbase");
+  let done = 0, locked = true, mode = "first", cb = null, items = null, bestIdx = -1, baseHtml = "", baseNow = [];
+  // each option is the whole combination (base colors + the candidate), drawn as equal swatches side by side, stacked
+  function paintFour(list) {
+    four.innerHTML = list.map((c, k) => `<button class="ldr-cand ldr-combo" data-k="${k}" aria-label="Option ${k + 1}">${[...baseNow, c.h].map(h => `<i style="--c:${h}"></i>`).join("")}</button>`).join("");
+  }
+  function pick(k) {
+    if (locked) return; locked = true; buzz(8);
+    four.querySelectorAll(".ldr-cand").forEach((b, j) => b.classList.toggle("win", j === k));
+    const seg = segs.children[done]; if (seg && mode === "first") { seg.style.setProperty("--c", items[k].h); seg.classList.add("on"); }
+    later(() => cb(k), reduceMotion ? 120 : 340);
+  }
+  four.addEventListener("click", e => { const b = e.target.closest(".ldr-cand"); if (b) pick(+b.dataset.k); });
+  skipBtn.onclick = () => { if (locked) return; locked = true; later(() => cb(null), 60); };
+  onKey = e => { const k = { "1": 0, "2": 1, "3": 2, "4": 3 }[e.key]; if (k !== undefined) pick(k); if (e.key === "Escape") skipBtn.onclick(); };
+  return {
+    ask(baseColors, baseLabel, label, q, four4, onBest) {
+      $("#llabel").textContent = label; $("#lq").textContent = q; $("#lleft").textContent = `${done + 1}/${total}`;
+      baseNow = baseColors;
+      base.innerHTML = baseLabel ? `<small>${esc(baseLabel)}</small>` : "";
+      fb.innerHTML = ""; skipBtn.hidden = true; mode = "first"; items = four4; locked = false;
+      paintFour(four4);
+      cb = k => { mode = "picked"; onBest(k); };
+    },
+    askRunnerUp(baseColors, winner, rest, onRunnerUp) {
+      base.innerHTML = `<small>Your pick is in. And the next best?</small>`;
+      fb.innerHTML = "";
+      items = rest; mode = "runner"; locked = false; skipBtn.hidden = false; skipBtn.textContent = "Skip";
+      paintFour(rest);
+      cb = k => onRunnerUp(k);
+    },
+    next() { done++; },
+  };
+}
+function ldrRunFour(ld, stepKey) {
+  const cfg = LDR_STEPS[stepKey], pool = ldrColorPool();
+  if (pool.length < 6) return ldrEnd(ld);
+  // the shared color(s) every option is built on: lively ones, so a round never starts from a flat grey
+  const lively = h => { const [L, C] = lch(h); return C > 18 && L > 25 && L < 85; };
+  const allBase = stepKey === "pairs" ? pool : ldrPairPool();
+  const liveBase = allBase.filter(b => stepKey === "pairs" ? lively(b.h) : b.cols.some(lively));
+  const basePool = liveBase.length >= 8 ? liveBase : allBase;
+  if (basePool.length < 1) return ldrEnd(ld);
+  const total = LDR_MAX, Sh = ldrFourShell(total);
+  const step = () => {
+    const st = ld.steps[stepKey], hist = ld.stepAcc[stepKey];
+    if (st.n >= LDR_MAX || (st.n >= LDR_MIN && ldrStepPlateaued(hist))) { st.done = true; save(); return ldrAdvance(ld); }
+    const baseItem = basePool[Math.random() * basePool.length | 0];
+    const baseCols = stepKey === "pairs" ? [baseItem.h] : baseItem.cols;
+    const skipSet = new Set(pool.filter(p => ld.recent.includes(p.h)));
+    const cands = TASTE.pickCandidates4(ld.m, baseCols, pool, { skip: skipSet });
+    if (cands.length < 4) { st.n++; return step(); }   // too sparse a pool this round; count it and move on
+    const items = cands.map(c => ({ h: c.h, from: c.from, x: TASTE.tasteFeat([...baseCols, c.h], null) }));
+    const predicted = TASTE.predictBest(ld.m, items);
+    const label = `${cfg.label} · ${st.n + 1}/${total}`, baseLabel = stepKey === "pairs" ? `From ${baseItem.from}` : `From ${baseItem.from}`;
+    Sh.ask(baseCols, baseLabel, label, cfg.q, items, bestK => {
+      TASTE.updateRanking(ld.m, items, [bestK, ...items.map((_, i) => i).filter(i => i !== bestK)], [1]);
+      const hit = predicted === bestK; TASTE.recordAcc(ld.m, hit, .25); hist.push({ hit: hit ? 1 : 0, chance: .25 });
+      items.forEach(it => ldrRemember(ld, it.h));
+      const rest = items.map((_, i) => i).filter(i => i !== bestK);
+      Sh.askRunnerUp(baseCols, items[bestK], rest.map(i => items[i]), runnerLocal => {
+        if (runnerLocal != null) {
+          const runnerIdx = rest[runnerLocal], remaining = rest.filter(i => i !== runnerIdx);
+          TASTE.updateRanking(ld.m, items, [runnerIdx, ...remaining], [.5]);
+        }
+        st.n++; st.acc = ldrMean(hist.map(r => r.hit)); save();
+        Sh.next(); step();
+      });
+    });
+  };
+  step();
+}
+
+// ---------- the ladder's traffic controller ----------
+function ldrRunStep(ld) {
+  ld.cur = ldrLeastCertain(ld);
+  const cfg = LDR_STEPS[ld.cur];
+  if (cfg.kind === "duel") ldrRunDuel(ld, ld.cur); else ldrRunFour(ld, ld.cur);
+}
+function ldrAdvance(ld) {
+  if (LDR_ORDER.every(k => ld.steps[k].done)) return ldrEnd(ld);
+  ldrRunStep(ld);
+}
+
+// ---------- end-of-session ----------
+// up to 3 confident findings: a 90% interval (|z|>1.645) that excludes "no preference", largest |z| first.
+const LDR_FINDING_DEFS = [
+  ...Array.from({ length: 12 }, (_, k) => ({ idx: 34 + k, pos: `lean toward ${LDR_FAMILY_NAME(k)}`, neg: `steer clear of ${LDR_FAMILY_NAME(k)}` })),
+  { idx: 10, pos: "choose colors close in hue over far ones", neg: "don't mind far-apart hues" },
+  { idx: 13, pos: "like complementary pairs (opposite hues)", neg: "avoid strongly opposite hues" },
+  { idx: 15, pos: "like a strong warm/cool contrast in a pair", neg: "prefer both colors to feel the same temperature" },
+  { idx: 17, pos: "like pairing one vivid color with one muted one", neg: "prefer two colors of a similar strength" },
+  { idx: 18, pos: "like strong contrast, not close values", neg: "like close values, not strong contrast" },
+  { idx: 19, pos: "like vivid color over muted", neg: "like muted color over vivid" },
+  { idx: 20, pos: "lean warm", neg: "lean cool" },
+  { idx: 21, pos: "like a wide hue spread in a palette", neg: "like a palette built from one hue" },
+  { idx: 22, pos: "like palettes with more colors", neg: "like palettes with fewer colors" },
+  { idx: 23, pos: "like one dominant field with small accents", neg: "like an even split between colors" },
+  { idx: 31, pos: "like one hue carried light to dark", neg: "don't go for a single-hue ramp" },
+  { idx: 33, pos: "like many small accent colors", neg: "like few, bold accents" },
+];
+function LDR_FAMILY_NAME(k) { return ["reds", "oranges", "ambers", "yellows", "chartreuses", "greens", "teals", "cyans", "blues", "violets", "magentas", "pinks"][k] || "that hue"; }
+function ldrFindings(m) {
+  const out = [];
+  LDR_FINDING_DEFS.forEach(d => {
+    const sd = Math.sqrt(Math.max(m.S[d.idx][d.idx], 1e-9)), z = m.mu[d.idx] / sd;
+    if (Math.abs(z) > 1.645) out.push({ text: z > 0 ? d.pos : d.neg, z: Math.abs(z), idx: d.idx, sign: z > 0 ? 1 : -1 });
+  });
+  return out.sort((a, b) => b.z - a.z).slice(0, 3);
+}
+// one small, real example for a finding: real swatches near the family it names, two real colors that show the
+// relationship, or a quick generated palette tuned toward the learned direction of the dial it names.
+const LDR_REL_TARGET = { 10: 15, 13: 180 };
+function ldrFindingExample(finding, pool) {
+  if (finding.idx >= 34) {
+    const k = finding.idx - 34, center = k * 30 + 15;
+    const cols = pool.slice().sort((a, b) => Math.abs(TASTE.hueDist(a.H, center)) - Math.abs(TASTE.hueDist(b.H, center))).slice(0, 4);
+    return `<span class="ldr-ex">${cols.map(c => `<i style="--c:${c.h}"></i>`).join("")}</span>`;
+  }
+  if (LDR_REL_TARGET[finding.idx] != null) {
+    const a = pool[0], target = LDR_REL_TARGET[finding.idx];
+    const b = pool.slice(1).sort((x, y) => Math.abs(TASTE.hueDist(x.H, a.H) - target) - Math.abs(TASTE.hueDist(y.H, a.H) - target))[0];
+    return `<span class="ldr-ex">${[a, b].map(c => `<i style="--c:${c.h}"></i>`).join("")}</span>`;
+  }
+  if (finding.idx >= 18 && finding.idx <= 23) {
+    const target = [0, 0, 0, 0, 0, 0]; target[finding.idx - 18] = 1.2 * finding.sign;
+    const pal = TASTE.genPalette(target, 7);
+    return `<span class="ldr-ex">${pal.cols.map(h => `<i style="--c:${h}"></i>`).join("")}</span>`;
+  }
+  const two = pool.slice(0, 2);
+  return `<span class="ldr-ex">${two.map(c => `<i style="--c:${c.h}"></i>`).join("")}</span>`;
+}
+function ldrEnd(ld) {
+  const acc = TASTE.accuracy(ld.m), n = LDR_ORDER.reduce((s, k) => s + ld.steps[k].n, 0);
+  const findings = ldrFindings(ld.m), pool = ldrColorPool();
+  const pct = v => Math.round(v * 100);
+  const headline = acc.n >= 4
+    ? `It now predicts your picks ${pct(acc.acc)}% of the time, up from chance (${pct(acc.chance)}%).`
+    : "It's just getting started.";
+  const el = show(`
+    <header class="art-top"><button class="icon-btn glass" data-close aria-label="Close">${ICON.x}</button></header>
+    <p class="eyebrow tz-kick">Teach it your eye · ${n} choice${n === 1 ? "" : "s"}</p>
+    <h1 class="t-title ldr-end-h">${esc(headline)}</h1>
+    ${findings.length ? `<div class="sec-head"><b>What it's learned</b><span>confident only</span></div>
+      <div class="ldr-findings">${findings.map(f => `<div class="ldr-finding">${ldrFindingExample(f, pool)}<p>You ${esc(f.text)}<small>${n} choices</small></p></div>`).join("")}</div>`
+      : `<div class="ldr-notsure"><p class="eyebrow">Not sure yet</p><p class="tab-sub">A few more choices and it'll have something to say. Taste takes a little evidence before it speaks.</p></div>`}
+    <div class="stack" style="margin-top:28px"><button class="btn" data-more>Teach it more ${ICON.arrow}</button></div>
+    <p class="fine">How it works: a Bradley-Terry/Plackett-Luce choice model, growing in four layers (colors, relationships, structure, families), updated after every tap. Deeper layers need more evidence before they move. Screens vary, and taste shifts with mood, so come back another day.</p>
+  `, "article tz-res ldr-end");
+  el.querySelector("[data-close]").onclick = () => go("studio");
+  el.querySelector("[data-more]").onclick = () => { LDR_ORDER.forEach(k => ld.steps[k].done = false); save(); ldrRunStep(ld); };
+}
+
+// ---------- screenshot mode (#shot=ladder:...) ----------
+function tasteLadderShot(arg = "intro") {
+  const [what, sub] = (arg || "intro").split("-");
+  if (what === "intro") return tasteLadderIntro();
+  if (what === "returning") { const ld = ldrState(); LDR_ORDER.forEach(k => { ld.steps[k].n = LDR_MIN; ld.steps[k].done = k !== "threes"; ld.steps[k].acc = .64; }); save(); return tasteLadderIntro(); }
+  if (what === "end") {
+    const ld = ldrState(); let seed = 11; const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    for (let t = 0; t < 60; t++) { const pool = ldrColorPool(), ref = pool[0].x.map((_, i) => ldrMean(pool.map(p => p.x[i]))); const [a, b] = TASTE.nextDuelV2(ld.m, pool, { rand }); TASTE.choose(ld.m, a.x, b.x, rand() < .5 ? 0 : 1, ref); TASTE.recordAcc(ld.m, rand() < .7, .5); }
+    LDR_ORDER.forEach(k => ld.steps[k].done = true); save();
+    return ldrEnd(ld);
+  }
+  if (what === "run") { const ld = ldrState(), key = sub || "colors", cfg = LDR_STEPS[key]; ld.cur = key; return cfg.kind === "duel" ? ldrRunDuel(ld, key) : ldrRunFour(ld, key); }
+}

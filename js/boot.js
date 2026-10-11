@@ -173,6 +173,7 @@ function shot(name) {
         S.lens = "world"; go("explore");
       }); }
     case "taste": return tasteShot(arg);
+    case "ladder": return tasteLadderShot(arg);   // js/tasteladder.js: ladder:intro · ladder:returning · ladder:end · ladder:run-<colors|pairs|threes|palettes>
     case "you": return ymShot(arg);   // js/you.js: you[:empty|:card]
     case "favs": return favShot(arg);   // js/favs.js: favs:<shelf|empty|pick|taste|rank:<method>>
     case "look": case "looks": case "lookyours": case "lookmatch": return lkShot(screen, arg, name.split(":")[2]);   // js/looks.js

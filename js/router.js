@@ -7,7 +7,7 @@
 //   #/color/<slug>  #/page/<id>  #/painting/<slug>  #/story/<id>     (add /more for the "More like this" closeup)
 //   #/photo/<id>  a photo saved in Studio (js/photos.js, IndexedDB on this device)
 //   #/studio/wheel  the gamut wheel · #/studio/palette/<id>  a saved palette (js/studio.js, in S.palettes)
-//   #/daily  #/challenge  #/taste/<color|palette>  #/lab/<harmony|contrast>  #/gallery/<n> (a museum painting)
+//   #/daily  #/challenge  #/taste/<color|palette|style>  #/lab/<harmony|contrast>  #/gallery/<n> (a museum painting)
 //   #/poem/<id>  #/passage/<id>  #/film/<id>   (js/poems.js, js/passages.js, js/films.js)
 //   #/practice  #/practice/<method>   build your own deck and study it (js/practice.js)
 //   #/pair/<a>+<b>  #/set/<a>-<b>-<c>…   a page for any pair or set of colors (js/setpage.js; the order given, which can be dragged)
@@ -101,6 +101,7 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["favShelf", () => routed("Your colors", "favorites")], ["favTaste", () => routed("Your taste", "favorites/taste")],   // js/favs.js, js/favprofile.js
   ["frStart", (m, c) => routed("Rank your colors", "favorites/rank/" + (m || "bws"))],   // js/favrank.js
   ["tasteIntro", k => k === "palette" ? routed("Find your palette", "taste/palette") : routed("Find your color", "taste/color")],
+  ["tasteLadderIntro", () => routed("Teach it your eye", "taste/style")],   // js/tasteladder.js
   ["glPage", (i, d, fromHex, tol) => routed(d && d.t || "Painting", "gallery/" + i + (fromHex ? "?c=" + ptCParam(fromHex) + (tol != null ? "&t=" + tol : "") : ""))],
   ["paintingsOfPage", (hexes, o) => { const h = typeof ptHexList === "function" ? ptHexList(hexes) : []; return h.length ? routed("Color in paintings", ptPath(h, { ...PT_PREF, mode: "all", sort: "cover", source: "paintings", ...(o || {}) })) : null; }],   // js/paintingsof.js (L26)
   ["chordsPage", () => routed("Masters' chords", "chords")],
@@ -146,7 +147,7 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["openSavedPalette", id => routed("Your palette", "studio/palette/" + id)],   // js/studio.js
   ["prHome", () => routed("Practice", "practice")], ["prPlay", m => PR_METHODS[m] ? routed(PR_METHODS[m].t, "practice/" + m) : null],   // js/practice.js
   ["r2DrillsPage", () => routed("Drills", "train/drills")], ["r2EyePage", () => routed("Your eye", "train/eye")],   // js/rooms2.js: Train's two rows
-  ["ooMap", () => routed("Odd one out", "odd")], ["ooEyePage", () => routed("Your eye", "odd/eye")],   // js/games/oo-ui.js
+  ["ooMap", o => o && o.with ? routed(`${o.with.name} · Odd one out`, `odd/${o.with.k}/${o.with.id}`) : routed("Odd one out", "odd")], ["ooEyePage", () => routed("Your eye", "odd/eye")],   // js/games/oo-ui.js
   ["hgMap", () => routed("Gradients", "hue")], ["hgDaily", () => routed("Today's gradient", "hue/daily")],   // js/games/hue-ui.js
   ["ooWhose", () => routed("Whose palette?", "odd/whose")], ["ooAcross", () => routed("Across the line", "line")], ["ooPairs", () => routed("Painters' pairs", "odd/pairs")],
   ["wwPlay", () => routed("Which way?", "whichway")],   // js/games/whichway.js
@@ -340,7 +341,7 @@ function openRoute(hash, initial = false) {
   }
   if (kind === "line" && typeof ooAcross === "function") { base(); XSTACK = []; ooAcross(); return true; }   // js/games/line.js
   if (kind === "whichway" && typeof wwPlay === "function") { base(); XSTACK = []; wwPlay(); return true; }   // js/games/whichway.js
-  if (kind === "odd" && typeof ooOpenRoute === "function") { base(); XSTACK = []; ooOpenRoute(id); return true; }   // js/games/oo-ui.js: #/odd, #/odd/eye, #/odd/whose, #/odd/pairs
+  if (kind === "odd" && typeof ooOpenRoute === "function") { base(); XSTACK = []; ooOpenRoute(id, more); return true; }   // js/games/oo-ui.js: #/odd, #/odd/eye, #/odd/whose, #/odd/pairs, #/odd/<painter|movement|decade|look>/<id> (oo-with.js)
   if (kind === "hue" && typeof hgOpenRoute === "function") { base(); XSTACK = []; hgOpenRoute(id); return true; }   // js/games/hue-ui.js: #/hue, #/hue/daily
   if (kind === "photo" && id && typeof photoPage === "function") { base(); XSTACK = []; photoPage(id); return true; }
   if (kind === "hub" && id && typeof arHubPage === "function") { base(); XSTACK = []; arHubPage(id); return true; }   // js/article.js
@@ -371,7 +372,7 @@ function openRoute(hash, initial = false) {
   }
   if (["painter", "movement", "decade", "country", "arthistory", "painters", "painter-index"].includes(kind) && typeof awOpenRoute === "function") { base(); XSTACK = []; awOpenRoute(kind, id, more); return true; }   // js/artwiki.js
   const simple = { daily: () => daily(), challenge: () => challenge(),
-    taste: () => tasteIntro(id === "palette" ? "palette" : "color"),
+    taste: () => id === "style" && typeof tasteLadderIntro === "function" ? tasteLadderIntro() : tasteIntro(id === "palette" ? "palette" : "color"),
     favorites: () => typeof favShelf !== "function" ? xToOrigin() : id === "taste" ? favTaste() : id === "rank" ? frStart(more || "bws", "all") : favShelf(),   // js/favs.js
     lab: () => id === "sounds" && typeof sndLab === "function" ? sndLab() : id === "honey" && typeof labHoney === "function" ? labHoney() : (LAB[id] && ["harmony", "contrast"].includes(id) ? LAB[id] : LAB.harmony)(),
     fashion: () => typeof fashionPage === "function" && fashionPage(id),

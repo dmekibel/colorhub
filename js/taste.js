@@ -16,6 +16,9 @@ function tzNamed(h) {
 }
 const tzOrder = p => p.shares.map((s, i) => i).sort((a, b) => p.shares[b] - p.shares[a]);
 const tzStrip = (p, cls = "tz-strip") => `<span class="${cls}">${tzOrder(p).map(i => `<i style="--c:${p.cols[i]};flex:${Math.max(p.shares[i], .012).toFixed(3)}"></i>`).join("")}</span>`;
+// David's comparison rule: whenever two palettes are compared, every swatch is the SAME size and shape, never
+// weighted by its real-world share -- shares are real content on a result screen, never on a duel.
+const tzStripEq = (p, cls = "tz-strip") => `<span class="${cls} tz-eq">${tzOrder(p).map(i => `<i style="--c:${p.cols[i]}"></i>`).join("")}</span>`;
 const TZ_MOVE = { contrast: ["less contrast", "more contrast"], vivid: ["more muted color", "more vivid color"], warm: ["cooler hues", "warmer hues"], spread: ["fewer hues", "a wider hue spread"], count: ["fewer colors", "more colors"], dom: ["an even split", "one dominant field"] };
 const TZ_ASK = { contrast: "contrast", vivid: "vividness", warm: "warmth", spread: "hue spread", count: "number of colors", dom: "proportions" };
 
@@ -262,7 +265,11 @@ function tzPalRun() {
   const step = () => {
     if (asked.length >= TZ_N) return loadCoreNames().then(() => tzPalResult(m));
     const { k, pair: [a, b] } = T.nextPalPair(m, asked), dial = T.DIALS[k].k, prop = dial === "dom";
-    D.ask(tzStrip(a), tzStrip(b), prop ? "Proportions" : `What changes: ${TZ_ASK[dial]}`,
+    // every dial but "count" already compares like with like (same number of colors); "count" is the one
+    // question that's actually about the number of colors, so its two options legitimately differ there -- but
+    // every swatch, on both sides, is still drawn at the same size (never weighted by share), per David's rule.
+    const face = p => dial === "count" ? `<span class="tz-opt-col">${tzStripEq(p)}<small>${p.cols.length} colors</small></span>` : tzStripEq(p);
+    D.ask(face(a), face(b), prop ? "Proportions" : `What changes: ${TZ_ASK[dial]}`,
       prop ? "Same colors · which balance?" : "Which palette would you rather live with?", [a.cols[0], b.cols[0]], pick => {
         asked.push(k); T.choose(m, a.x, b.x, pick, zero); step();
       });
@@ -371,7 +378,7 @@ function tzMaster() {
     const el = show(`
       <header class="deck-top"><button class="icon-btn" data-close aria-label="Close">${ICON.x}</button><div class="segs">${ptgs.map((_, j) => `<i class="${j < i ? "on" : ""}" style="--c:var(--ink)"></i>`).join("")}</div><span class="left mono">${i + 1}/${ptgs.length}</span></header>
       <div class="tz-q"><p class="eyebrow">Spot the master</p><h2>Which palette is the real painting?</h2></div>
-      <div class="tz-duel"><button class="tz-opt" data-k="0">${tzStrip(a)}</button><button class="tz-opt" data-k="1">${tzStrip(b)}</button></div>
+      <div class="tz-duel"><button class="tz-opt" data-k="0">${tzStripEq(a)}</button><button class="tz-opt" data-k="1">${tzStripEq(b)}</button></div>
       <div class="tz-reveal" id="rev"></div>
     `, "fixed tz-run");
     el.querySelector("[data-close]").onclick = () => tasteIntro("palette");

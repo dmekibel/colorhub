@@ -1403,6 +1403,30 @@ scenario("train", "check-in card opens the drill", async t => {
   t.expect(t.$$(".drill .segs i.on").length >= done0 + 3 || t.$(".result"), "answering three check-in rounds did not advance the progress bar");
 });
 
+scenario("train", "Teach it your eye: best-of-four pick + runner-up + Skip, and the equal-swatch palette duel", async t => {
+  await t.open("#shot=ladder:run-pairs", { settle: 500 });
+  await t.waitFor(() => t.$$(".ldr-cand").length === 4, 6000, "four best-of-four candidates");
+  const cands = t.$$(".ldr-cand"), w0 = cands[0].getBoundingClientRect().width;
+  t.expect(cands.every(c => Math.abs(c.getBoundingClientRect().width - w0) < 1), "the four candidates are not equal-size swatches");
+  t.expect(cands.every(c => c.querySelectorAll("i").length === 2), "each pairs option should show the whole pair (two swatches)");
+  const sw = [...cands[0].querySelectorAll("i")].map(i => i.getBoundingClientRect().width);
+  t.expect(Math.abs(sw[0] - sw[1]) < 1, "the two swatches in a pair option are not equal");
+  await t.click(cands[0], { wait: 500 });
+  await t.waitFor(() => /next best/i.test(t.$("#app").innerText), 4000, "the runner-up prompt");
+  t.expect(t.$$(".ldr-cand").length === 3, `expected 3 runner-up candidates, got ${t.$$(".ldr-cand").length}`);
+  const skip = t.$("#lskip");
+  t.expect(skip && !skip.hidden, "Skip isn't offered at the runner-up step");
+  await t.click(skip, { wait: 400 });
+  await t.waitFor(() => /2\/15/.test(t.$("#app").innerText), 4000, "the ladder didn't advance to question 2 after Skip");
+
+  await t.open("#shot=ladder:run-palettes", { settle: 500 });
+  await t.waitFor(() => t.$$(".tz-opt").length === 2, 6000, "the palette duel's two options");
+  const opts = t.$$(".tz-opt"), swA = [...opts[0].querySelectorAll(".tz-eq i")], swB = [...opts[1].querySelectorAll(".tz-eq i")];
+  t.expect(swA.length > 0 && swA.length === swB.length, `the two palettes don't have the same swatch count (${swA.length} vs ${swB.length})`);
+  const widths = [...swA, ...swB].map(i => i.getBoundingClientRect().width);
+  t.expect(Math.max(...widths) - Math.min(...widths) < 2, "the palette duel's swatches aren't equal width");
+});
+
 scenario("train", "every entry on the Train menu opens something (nothing locked)", async t => {
   // js/rooms2.js: Today (3), the six games, then Drills and Your eye; each tap must leave the room (a game, a
   // drill, a page) or answer with a sheet or a toast, with no error. Then every drill on the Drills page.
@@ -1911,6 +1935,51 @@ scenario("train", "Gradients: map and Choose mode and the daily board", async t 
   await t.click("[data-daily]", { wait: 700 });
   await t.waitFor(".hg-board .hg-s", 6000, "today's board");
   t.expect(/today/i.test(t.text("#hgq")), "the daily board has no title");
+});
+
+// "Play with…" (js/games/oo-with.js, David 2026-10-11): Odd one out with one painter's colors, a different
+// painting each round. Entry from an address, the pre-game title, a round labeled with its own painting, the
+// pause menu's search switching painter mid-run, and the end screen's mosaic of the paintings played.
+scenario("train", "Odd one out, Play with…: Monet's colors from an address, a painting a round, switch to van Gogh, the mosaic end", async t => {
+  await t.open("#shot=gx:oo:zen", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "a board");
+  t.ev("ooSimpleState().style = 'gradient'; save(); ooWithStart('painter', 'claude-monet', { zen: true }); 1");
+  await t.waitFor(".oo-pregame .oo-with-title", 8000, "the pre-game sheet naming Monet's colors");
+  t.expect(/Claude Monet/.test(t.$(".oo-with-title").innerText), "the pre-game title should name Claude Monet");
+  t.ev("document.querySelectorAll('.fade-ghost').forEach(n => n.remove()); document.querySelector('.oo-pregame [data-play]').click(); 1");
+  await t.waitFor(".oo-board .oo-t", 4000, "the first Monet board");
+  const src = t.ev("JSON.stringify({ label: OO_LAST.paletteSource && OO_LAST.paletteSource.label, plain: OO_LAST.paletteSource && OO_LAST.paletteSource.plain, link: OO_LAST.paletteSource && OO_LAST.paletteSource.link, n: OO_LAST.paletteSource && OO_LAST.paletteSource.colors.length })");
+  const o = JSON.parse(src);
+  t.expect(/^Round 1 · Claude Monet, /.test(o.label || ""), `round 1 should be labeled with a Monet painting, got ${o.label}`);
+  t.expect(o.plain && o.link && (o.link.kind === "gallery" || o.link.kind === "painting"), "the round's source should link to its painting");
+  t.expect(o.n >= 2 && o.n <= 3, `a round should be two (or three) similar colors, got ${o.n}`);
+  // a different painting next round
+  t.ev("document.querySelectorAll('.oo-t')[OO_LAST.ans[0]].click(); 1");
+  await t.waitFor(".oo-reveal2 .oo-rv2-src", 3000, "the reveal's source line");
+  t.expect(/Round 1 · Claude Monet/.test(t.$(".oo-rv2-src").innerText), "the reveal should name round 1's painting");
+  t.ev("document.querySelector('.oo-reveal2').click(); 1");
+  await t.sleep(500);
+  const l2 = t.ev("OO_LAST.paletteSource.label");
+  t.expect(/^Round 2 · Claude Monet, /.test(l2) && l2.slice(10) !== o.label.slice(10), `round 2 should be a different Monet painting, got ${l2}`);
+  // the pause menu: one row, a search, switch to van Gogh at the same size
+  t.ev("document.querySelector('.oo-pause-mark').click(); 1");
+  await t.waitFor(".oo-pausecard.on [data-with]", 2000, "the pause card's Play with row");
+  await t.click(".oo-pausecard [data-with]", { wait: 300 });   // a real finger can reach it
+  await t.waitFor(".oo-with-row[data-wk]", 6000, "the search's suggestions");
+  t.ev("const i = document.querySelector('.oo-with-q'); i.value = 'van gogh'; i.dispatchEvent(new Event('input')); 1");
+  await t.waitFor(".oo-with-row[data-wid='vincent-van-gogh']", 2000, "Vincent van Gogh in the results");
+  await t.click(".oo-with-row[data-wid='vincent-van-gogh']", { wait: 1200 });
+  t.ev("document.querySelectorAll('.fade-ghost').forEach(n => n.remove()); 1");
+  await t.waitFor(".oo-board .oo-t", 6000, "a van Gogh board");
+  const l3 = t.ev("OO_LAST.paletteSource && OO_LAST.paletteSource.label");
+  t.expect(/^Round 1 · Vincent van Gogh, /.test(l3 || ""), `the switch should start van Gogh at round 1, got ${l3}`);
+  // the end screen: the paintings played, as a mosaic, with accuracy
+  t.ev(`const col = OO_W_CACHE.get('painter/claude-monet'), s = ooWithSession(col); s.answer(s.next(1), true); s.answer(s.next(2), false);
+    ooSimpleEnd(true, { hue: 3, light: 3, chroma: 3 }, ooS().model, { round: 2, hits: 1, cols: 5 }, () => {}, s); 1`);
+  await t.waitFor(".oo-wres .oo-wmosaic .oo-wm", 3000, "the end screen's mosaic");
+  t.expect(/Claude Monet's palette/.test(t.$(".oo-wres h1").innerText), "the end screen should read Claude Monet's palette, played");
+  t.expect(t.$$(".oo-wres .oo-wm").length === 2 && t.$$(".oo-wres .oo-wm-miss").length === 1, "two paintings in the mosaic, the missed one marked");
+  t.expect(/1 of 2 right/.test(t.$(".oo-wres .lede").innerText), "the end screen should give the accuracy");
 });
 
 // Brand colors (js/games/brands-game.js): the Train tile opens a round (mode A: pick the brand from a swatch;

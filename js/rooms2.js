@@ -327,6 +327,7 @@ function r2StudioHome() {
       <div class="r2-grid">
         <button class="r2-tile wide2" data-wheel><span class="r2-pic r2-wheelpic"><span class="r2-mini" id="r2Mini"></span><span class="r2-wheelpal">${tri.concat(cols.slice(0, 3)).slice(0, 5).map(h => r2i(h)).join("")}</span></span><b class="r2-tn">Gamut wheel</b><span class="r2-tm">Lay a shape on the wheel, or start from Triad, Complement, Analogous or Square. What's inside is your palette.</span></button>
         <button class="r2-tile" data-lab="contrast"><span class="r2-pic r2-albers"><span style="--g:${light}"><b style="--c:${mid}"></b></span><span style="--g:${dark}"><b style="--c:${mid}"></b></span></span><b class="r2-tn">Albers</b><span class="r2-tm">One color, two looks</span></button>
+        ${typeof tasteLadderIntro === "function" ? `<button class="r2-tile wide2" data-ladder><span class="r2-pic r2-ladderpic">${["#9D5D23", "#B4922C", "#59896E", "#3C3E82", "#8C4347"].map(h => r2i(h)).join("")}</span><b class="r2-tn">Teach it your eye</b><span class="r2-tm">Pick the colors, pairs and palettes you like. The more you choose, the better it knows your taste.</span></button>` : ""}
       </div>
     </section>
 
@@ -348,6 +349,7 @@ function r2WireStudio(el) {
   on("[data-eye]", () => eye());
   on("[data-namer]", () => LAB.namer());
   on("[data-wheel]", () => gamutWheel());
+  on("[data-ladder]", () => tasteLadderIntro());
   on("[data-lab]", b => LAB[b.dataset.lab]());
   on("[data-id]", b => openSavedPalette(b.dataset.id));
   on("[data-fv-row]", () => favShelf(() => go("studio")));

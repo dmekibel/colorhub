@@ -937,6 +937,12 @@ function paintingPage(n) {
     ctx.putImageData(out, 0, 0);
     cv.classList.toggle("on", on >= 0);
   }));
+  // ⋯: Odd one out played with this painter's colors, this painting first (js/games/oo-with.js); nothing when
+  // the painter has too few paintings in the archive for a collection
+  if (n.artist && typeof ooWithItem === "function" && typeof moreRegister === "function") {
+    ooWithIndex();
+    moreRegister("painting", () => { const it = ooWithItem("painter", n.artist, { first: n.id }); return it.length ? [{ title: n.title, items: it }] : []; });
+  }
 }
 
 // (The color of the day, daily(), is now "Name today's color" in js/colordle.js; its share card is js/sharecard.js.)
