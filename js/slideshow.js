@@ -143,6 +143,8 @@ function ssRenderLayer(spec) {
   wrap.innerHTML = ssLayerHTML(spec);
   const el = wrap.firstElementChild;
   stage.appendChild(el);
+  // Look-alikes: the names sit just above the caption pill, sized from its real height (1-3 lines), so they can never overlap
+  const diff = el.querySelector(".ss-diff"); if (diff) el.style.setProperty("--diffh", diff.offsetHeight + "px");
   ssWireLayer(el, spec);
   const old = [...stage.children].filter(x => x !== el);
   requestAnimationFrame(() => { el.classList.add("in"); old.forEach(o => o.classList.remove("in")); });

@@ -25,7 +25,7 @@
 /* two close names, side by side, with the one-line distinction straddling the seam (js/lookalikes.js lookDiff) */
 .ss-layer.ss-pair{flex-direction:row;align-items:stretch;justify-content:stretch;padding:0}
 .ss-half{flex:1;appearance:none;border:0;background:var(--c);color:inherit;display:flex;align-items:flex-end;
-  justify-content:flex-start;padding:0 20px calc(var(--bottom) + 96px);cursor:pointer;-webkit-tap-highlight-color:transparent}
+  justify-content:flex-start;padding:0 20px calc(var(--bottom) + 60px + var(--diffh, 76px));cursor:pointer;-webkit-tap-highlight-color:transparent}
 .ss-half:active{opacity:.85}
 .ss-half[data-ink="dark"]{color:#141311}
 .ss-half[data-ink="light"]{color:#fff}
