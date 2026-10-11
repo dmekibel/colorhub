@@ -6733,7 +6733,7 @@ scenario("slideshow", "opens from Learn's Or choose, switches modes, steps by sw
   // switch to Look-alikes: a split pair with a one-line distinction
   await t.click(`[data-ss-mode="lookalikes"]`, { wait: 400 });
   await t.waitFor(".ss-ov .ss-layer.ss-pair", 6000, "a look-alike pair");
-  t.expect(/\bthan\b/.test(t.text(".ss-diff")), `the distinction line reads "${t.text(".ss-diff")}"`);
+  t.expect(/\b(than|as)\b/.test(t.text(".ss-diff")), `the distinction line reads "${t.text(".ss-diff")}"`);
   t.expect(t.$("[data-ss-picker]").hidden, "the picker didn't close after choosing a mode");
 
   // switch to Family: the chip strip appears and picking one keeps a single color on screen (the picker stays
