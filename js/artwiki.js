@@ -566,11 +566,13 @@ function awPainter(slug, push = true) {
     acts.appendChild(row);
   }
   acts.onclick = e => { const w = e.target.closest("[data-awwhose]"); if (w) whosePalette(w.dataset.awwhose); };
+  if (typeof ooWithIndex === "function") ooWithIndex();   // so ⋯ can offer "Play with their colors" (js/games/oo-with.js)
   // ⋯ (PLAN §3.6: "In ⋯: Filters, Their most typical painting, Sources") plus "Whose palette?", which used to
   // sit as a 4th surface button under the action row -- still one tap away, just not on the surface by default.
   if (typeof moreRegister === "function") moreRegister("painter", () => [
     { title: A.name, items: [
       ...(typeof whosePalette === "function" ? [{ t: "Whose palette?", n: `Guess ${A.name.split(" ").pop()} from five colors`, run: () => whosePalette(slug) }] : []),
+      ...(typeof ooWithItem === "function" ? ooWithItem("painter", slug) : []),   // js/games/oo-with.js: Odd one out with their colors
       { t: "Filters", n: "Sort their paintings", run: () => { const s = el.querySelector(".aw-wk-sort"); if (s) s.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" }); } },
       ...(P.typical >= 0 ? [{ t: "Their most typical painting", run: () => galleryPage(P.typical, true) }] : []),
       { t: "Sources", run: () => { const s = el.querySelector(".srcs"); if (s) s.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" }); } },
@@ -901,6 +903,11 @@ function awGroup(kind, key, push = true) {
   const g = gs[String(key)], x = ges[String(key)];
   if (!g || !x) { toast("No page for that"); return xToOrigin(); }
   if (push) XSTACK.push("aw:group:" + kind + ":" + key);
+  // ⋯ on a movement or decade page: Odd one out played with its paintings' colors (js/games/oo-with.js)
+  if ((kind === "movement" || kind === "decade") && typeof ooWithItem === "function" && typeof moreRegister === "function") {
+    ooWithIndex();
+    moreRegister(kind, () => { const it = ooWithItem(kind, String(key)); return it.length ? [{ title: kind === "decade" ? awDec(key) : String(key), items: it }] : []; });
+  }
   const title = kind === "decade" ? awDec(key) : String(key), n = g.n;
   // the n line carries the honesty note in one line; the longer explanation lives in Sources
   const nn = n.toLocaleString("en-US"), t = g.tiers || [n, 0, 0];

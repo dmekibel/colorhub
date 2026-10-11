@@ -800,7 +800,8 @@ function ooRevealHTML(r, res, showNames = true) {
   const exag = pair && !multi ? ooExaggerate(field, odd) : null;
   const seeIt = exag ? `<div class="oo-rv2-see" aria-hidden="true"><i style="--c:${field}"></i><i style="--c:${odd}"></i><i style="--c:${exag}"></i></div>` : "";
   const src = r.paletteSource;
-  const srcHTML = src ? `<button class="oo-rv2-src"${src.link ? "" : " disabled"}>${src.fromFav ? "" : "From "}${esc(src.label)}</button>` : "";
+  // a "Play with…" round names itself ("Round 7 · Claude Monet, Impression, Sunrise, 1872": src.plain, js/games/oo-with.js)
+  const srcHTML = src ? `<button class="oo-rv2-src"${src.link ? "" : " disabled"}>${src.fromFav || src.plain ? "" : "From "}${esc(src.label)}</button>` : "";
   return { fieldC, fi, inset, names, diff, seeIt, srcHTML, link: src && src.link };
 }
 
@@ -952,10 +953,12 @@ function ooWireSizePicker(root, sim, onChange) {
 }
 // a throwaway, non-scored round at the chosen size, just to show behind the pre-game sheet -- no click handlers
 // are wired (ooBoardHTML alone, not ooAsk), so it's naturally inert until the real first round (nextRound) draws
-function ooPreviewBoard(ui, st, sim) {
+function ooPreviewBoard(ui, st, sim, withSess) {
   const aspect = ooStageAspect(ui.stage) || 1.6;
-  const palette = sim.style === "classic" ? null : ooPickPalette();
-  const r = ooSimpleRound({ model: ooS().model, cols: st.cols, round: 0, aspect, palette, richMode: sim.richMode, multiOdd: false, style: sim.style, board: sim.board }, false, Math.random);
+  // "Play with…" previews round 1's own painting (next(1) is idempotent, so the real first round draws it too)
+  const style = withSess ? "gradient" : sim.style;
+  const palette = withSess ? withSess.next(1) : style === "classic" ? null : ooPickPalette();
+  const r = ooSimpleRound({ model: ooS().model, cols: st.cols, round: 0, aspect, palette, richMode: sim.richMode, multiOdd: false, style, board: sim.board }, false, Math.random);
   if (r) {
     ui.stage.innerHTML = ooBoardHTML(r, { feedback: true, tileNames: false });
     ui.stage.classList.toggle("oo-stage-square", r.full === false);   // same Square/Full-screen stretch fix as ooAsk
@@ -989,7 +992,7 @@ function ooSimpleState() {
 // the per-round timer: a little tighter as the grid grows (Arcade only)
 const ooSimpleTime = cols => Math.round(7000 - clamp((cols - OO_S_MIN_COLS) / (OO_S_MAX_COLS - OO_S_MIN_COLS), 0, 1) * 3800);
 // the end screen: one headline, three small bars (hue, saturation, value) against where you started this run
-function ooSimpleEnd(zen, startTh, model, stats, again) {
+function ooSimpleEnd(zen, startTh, model, stats, again, withSess) {
   const nowTh = { hue: ooTheta(model, "hue", null), light: ooTheta(model, "light", null), chroma: ooTheta(model, "chroma", null) };
   const rows = OO_AXES.map(a => ({ a, before: startTh[a], now: nowTh[a], d: Math.log(startTh[a] / nowTh[a]) }));
   const best = rows.reduce((x, y) => y.d > x.d ? y : x, rows[0]);
@@ -999,18 +1002,21 @@ function ooSimpleEnd(zen, startTh, model, stats, again) {
   const bar = row => { const w = clamp(100 - Math.log(row.now / OO_S_FLOOR[row.a]) / Math.log(OO_MAX / OO_S_FLOOR[row.a]) * 100, 6, 100);
     const moved = Math.abs(row.d) > .03;
     return `<div class="oo-ebar"><span>${OO_S_AXIS_WORD[row.a]}</span><i style="--w:${w.toFixed(0)}%"></i><b class="mono">${pctFmt(row.now)}</b>${moved ? `<em>${row.now < row.before ? "↓" : "↑"} from ${pctFmt(row.before)}</em>` : ""}</div>`; };
+  // "Play with…" leads with the paintings it played through (js/games/oo-with.js); the eye bars still follow
   const el = show(`
     <div style="flex:1"></div>
-    <p class="eyebrow">${zen ? "Zen" : "Arcade"} · ${stats.round} round${stats.round === 1 ? "" : "s"}</p>
+    ${withSess ? ooWithEndHTML(withSess, stats) : `<p class="eyebrow">${zen ? "Zen" : "Arcade"} · ${stats.round} round${stats.round === 1 ? "" : "s"}</p>
     <h1>${esc(headline)}</h1>
-    <p class="lede">${stats.hits} of ${stats.round} right · reached ${stats.cols} × ${stats.cols}${zen ? " · untimed" : ""}.</p>
+    <p class="lede">${stats.hits} of ${stats.round} right · reached ${stats.cols} × ${stats.cols}${zen ? " · untimed" : ""}.</p>`}
+    ${withSess ? `<p class="oo-wedge">${esc(headline)}</p>` : ""}
     <div class="oo-ebars">${rows.map(bar).join("")}</div>
     <div class="stack">
       <button class="btn" data-again>Play again ${ICON.arrow}</button>
       <button class="btn ghost" data-keep>Keep going</button>
     </div>
     <p class="fine">Your edge is the smallest difference you spot about four times in five, measured on this screen. Phone screens and room light move it from day to day.</p>
-  `, "result oo-res oo-sres");
+  `, "result oo-res oo-sres" + (withSess ? " oo-wres" : ""));
+  if (withSess) ooWithWireEnd(el, withSess);
   el.querySelector("[data-again]").onclick = () => again(zen);
   el.querySelector("[data-keep]").onclick = () => again(zen);
   onKey = e => { if (e.key === "Enter") el.querySelector("[data-again]").click(); };
@@ -1032,6 +1038,12 @@ function ooMap(opt = {}) {
   ooBeautyKick();
   const sim = ooSimpleState(), zen = opt.zen != null ? opt.zen : sim.mode === "zen";
   sim.mode = zen ? "zen" : "arcade"; save();
+  // "Play with…" (js/games/oo-with.js): every round's palette comes from one of this collection's paintings, a
+  // different one each round; the board is always a gradient then (Classic has no palette to play with)
+  const withCol = opt.with && typeof ooWithSession === "function" ? opt.with : null;
+  const withSess = withCol ? ooWithSession(withCol, opt.first) : null;
+  const styleNow = () => withSess ? "gradient" : sim.style;   // read live: the pause menu can switch Palette mid-run
+  const replay = o => ooMap({ ...o, with: withCol || undefined });
   const model = ooS().model;
   const startTh = { hue: ooTheta(model, "hue", null), light: ooTheta(model, "light", null), chroma: ooTheta(model, "chroma", null) };
   const lives0 = zen ? 0 : 3;
@@ -1054,6 +1066,7 @@ function ooMap(opt = {}) {
     <div class="oo-pausecard" id="oopausecard"></div>
     ${showPicker ? `<div class="oo-pregame" id="oopregame">
       <div class="oo-pregame-sheet">
+        ${withCol ? `<p class="oo-with-title"><span class="oo-with-dots">${ooWithDots(withCol).map(h => `<i style="--c:${h}"></i>`).join("")}</span><b>${esc(withCol.k === "painter" ? withCol.name + "'s colors" : withCol.k === "look" ? "The " + withCol.name + " look" : withCol.name)}</b><small>${withCol.k === "look" ? `${withCol.works.length} palettes, one a round` : `A different painting each round · ${withCol.n.toLocaleString()} paintings, ${withCol.sw.length} colors`}</small></p>` : ""}
         ${ooSizePickerHTML(sim, zen)}
         <button class="btn oo-pregame-play" data-play>Play ${ICON.arrow}</button>
       </div>
@@ -1070,11 +1083,11 @@ function ooMap(opt = {}) {
       st.cols = ooStartCols(sim);
       pregame.querySelector(".oo-sizepicker").outerHTML = ooSizePickerHTML(sim, zen);
       rewirePicker();
-      ooPreviewBoard(ui, st, sim);
+      ooPreviewBoard(ui, st, sim, withSess);
     }
     rewirePicker();
     pregame.addEventListener("click", e => { if (e.target === pregame) startPlay(); });   // "or tapping the board"
-    ooPreviewBoard(ui, st, sim);
+    ooPreviewBoard(ui, st, sim, withSess);
   }
   // the first time: a quiet hint by the mark, gone after 3s or at first touch, never again
   if (sim.pauseHint) {
@@ -1095,11 +1108,12 @@ function ooMap(opt = {}) {
       ${!zen ? `<div class="oo-hearts" aria-label="${st.lives} lives" style="justify-content:center;margin:0 0 18px">${Array.from({ length: lives0 }, (_, i) => `<i${i >= st.lives ? ` class="gone"` : ""}></i>`).join("")}</div>` : ""}
       <button class="btn" data-resume>Resume</button>
       <button class="oo-zenpill${zen ? " on" : ""}" data-zen aria-pressed="${zen}">${zen ? "Zen" : "Arcade"}</button>
+      ${typeof ooWithSheet === "function" ? `<button class="item oo-with-open" data-with>${withCol ? `Colors: ${esc(withCol.name)}` : "Play with…"} <small>${withCol ? "Change" : "A painter, movement or look"}</small>${ICON.chev}</button>` : ""}
       ${ooSizePickerHTML(sim, zen)}
       <div class="oo-pset">
-        <button class="item" data-set="style">Palette: ${sim.style === "classic" ? "Classic" : "Gradient"} ${ICON.chev}</button>
-        ${sim.style !== "classic" ? `<button class="item" data-set="board">Board: ${sim.board === "square" ? "Square" : "Full screen"} ${ICON.chev}</button>` : ""}
-        ${sim.style !== "classic" ? `<button class="item" data-set="richMode">Palette intensity: ${sim.richMode === "rich" ? "Rich" : "Subtle"} ${ICON.chev}</button>` : ""}
+        ${withCol ? "" : `<button class="item" data-set="style">Palette: ${sim.style === "classic" ? "Classic" : "Gradient"} ${ICON.chev}</button>`}
+        ${styleNow() !== "classic" ? `<button class="item" data-set="board">Board: ${sim.board === "square" ? "Square" : "Full screen"} ${ICON.chev}</button>` : ""}
+        ${styleNow() !== "classic" ? `<button class="item" data-set="richMode">Palette intensity: ${sim.richMode === "rich" ? "Rich" : "Subtle"} ${ICON.chev}</button>` : ""}
         <button class="item" data-set="multiOdd">Multiple odd tiles: ${sim.multiOdd ? "on" : "off"} ${ICON.chev}</button>
         <button class="item" data-set="reveal">Show colors between rounds: ${sim.reveal ? "on" : "off"} ${ICON.chev}</button>
         <button class="item" data-set="names">Names after each round: ${sim.names ? "on" : "off"} ${ICON.chev}</button>
@@ -1109,7 +1123,11 @@ function ooMap(opt = {}) {
       </div>
       <button class="btn ghost" data-exit>Exit</button>`;
     card.querySelector("[data-resume]").onclick = () => closePause();
-    card.querySelector("[data-zen]").onclick = () => { sim.mode = zen ? "arcade" : "zen"; save(); buzz(4); closePause(true); ooMap({ zen: !zen }); };
+    card.querySelector("[data-zen]").onclick = () => { sim.mode = zen ? "arcade" : "zen"; save(); buzz(4); closePause(true); replay({ zen: !zen }); };
+    // "Play with…": a small search inside this same card (js/games/oo-with.js); picking one starts a fresh run
+    // with its colors at the size already chosen, "All colors" goes back to the usual mix
+    const wb = card.querySelector("[data-with]");
+    if (wb) wb.onclick = () => { buzz(4); ooWithSheet(card, withCol, paintPause, col => { closePause(true); ooMap({ zen, skipPicker: true, with: col || undefined }); }); };
     card.querySelector("[data-exit]").onclick = quit;
     card.querySelectorAll("[data-set]").forEach(b => b.onclick = () => {
       const k = b.dataset.set;
@@ -1184,11 +1202,12 @@ function ooMap(opt = {}) {
       const richness = ["grad1", "grad2", "grad3"].includes(fs) ? fs : "flat";
       const mix = fs === "combo" ? { [axis]: .6, [OO_AXES.find(a => a !== axis)]: .4 } : { [axis]: 1 };
       const k = fs === "k4" ? 4 : fs === "k2" ? 2 : 1, bf = OO_S_GRAD_F[richness] || 1;
-      const { rows, cols } = ooSimpleDims(st.cols, aspect), palette = opt.palette || ooPickPalette();
+      const { rows, cols } = ooSimpleDims(st.cols, aspect), palette = opt.palette || (withSess ? withSess.next(st.round + 1) : ooPickPalette());
       for (let tries = 0; tries < 8 && !r; tries++) r = ooSimpleGradRound(rows, cols, richness, palette && palette.colors, skill, mix, d * bf, k, Math.random, safeBox, sim.richMode);
       if (r) Object.assign(r, { axis, judg: axis, mix, bf: r.gridType && r.gridType !== "flat" ? bf : 1, paletteSource: palette });
     }
-    if (!r) r = ooSimpleRound({ model, cols: st.cols, round: st.round, aspect, palette: ooPickPalette(), safeBox, richMode: sim.richMode, multiOdd: sim.multiOdd, style: sim.style, board: sim.board, stairMult: st.stairMult }, breather);
+    const palette = withSess ? withSess.next(st.round + 1) : ooPickPalette();
+    if (!r) r = ooSimpleRound({ model, cols: st.cols, round: st.round, aspect, palette, safeBox, richMode: sim.richMode, multiOdd: sim.multiOdd, style: styleNow(), board: sim.board, stairMult: st.stairMult }, breather);
     const o = { feedback: true, tileNames: false, resolveOdd: true, enter, pauseCtl: {} };   // names live in the reveal now, never crowding gapless tiles
     if (!zen && sim.timer) o.timeLimit = ooSimpleTime(st.cols);
     curPauseCtl = o.pauseCtl;
@@ -1202,6 +1221,7 @@ function ooMap(opt = {}) {
     const originOdd = r.ans && r.ans.length ? tilesNow[r.ans[0]] : null;
     const originField = tilesNow.find((t, i) => r.ans && !r.ans.includes(i)) || null;
     st.round++;
+    if (withSess) withSess.answer(r.paletteSource, res.ok);
     if (res.ok) { st.hits++; st.streak++; } else { if (!zen) st.lives--; st.streak = 0; }
     st.acc.push(res.ok ? 1 : 0); if (st.acc.length > OO_S_WINDOW) st.acc.shift();
     // the in-run staircase (David, 2026-10-11): 2 rights in a row tightens the drawn gap (x OO_STAIR_DOWN), a
@@ -1268,7 +1288,7 @@ function ooMap(opt = {}) {
       ooRevealFlip({ foot: rvEl }, originOdd);
       let gone = false;
       const g2 = () => { if (gone) return; gone = true; rvEl.remove(); proceed(); };
-      const srcBtn = rvEl.querySelector(".oo-rv2-src"); if (srcBtn && rv.link) srcBtn.onclick = e => { e.stopPropagation(); if (rv.link.kind === "painting") location.hash = "#/painting/" + String(rv.link.id).replace(/^painting-/, ""); else if (rv.link.kind === "look") location.hash = "#/look/" + rv.link.id; };
+      const srcBtn = rvEl.querySelector(".oo-rv2-src"); if (srcBtn && rv.link) srcBtn.onclick = e => { e.stopPropagation(); if (rv.link.kind === "gallery") location.hash = "#/gallery/" + rv.link.id; else if (rv.link.kind === "painting") location.hash = "#/painting/" + String(rv.link.id).replace(/^painting-/, ""); else if (rv.link.kind === "look") location.hash = "#/look/" + rv.link.id; };
       // tap anywhere advances -- only the inset, the two names and the source are [data-swatch]/explicit links
       // (and those are a small fraction of the screen now, not most of it), so this always fires on an open tap
       rvEl.addEventListener("click", e => { if (!e.target.closest("[data-swatch],.oo-rv2-src,a")) g2(); });
@@ -1290,7 +1310,7 @@ function ooMap(opt = {}) {
       later(() => { if (sim.reveal) showReveal(); else proceed(); }, 1200);
     }
   }
-  function end() { document.removeEventListener("visibilitychange", ooGhostCleanup); ooSimpleEnd(zen, startTh, model, st, z => ooMap({ zen: z })); }
+  function end() { document.removeEventListener("visibilitychange", ooGhostCleanup); ooSimpleEnd(zen, startTh, model, st, z => replay({ zen: z }), withSess); }
   if (!pregame) nextRound();   // with the picker up, the real first round only starts on Play (or a board tap)
 }
 const ooEnter = () => ooMap();
@@ -1398,8 +1418,10 @@ function ooRetired(k) {
   if (k === "order") return ooPlayMix("outoforder", { title: "Sort the strip", onQuit: () => go("gym") });
   return null;
 }
-function ooOpenRoute(id) {
+function ooOpenRoute(id, more) {
   if (id === "eye") return ooEyePage();
+  // #/odd/painter/<slug>, #/odd/movement/<slug>, #/odd/decade/<1870>, #/odd/look/<id>: "Play with…" (js/games/oo-with.js)
+  if (more && ["painter", "movement", "decade", "look"].includes(id) && typeof ooWithStart === "function") return ooWithStart(id, more).then(ok => { if (!ok) ooMap(); });
   if (id === "whose") return ooWhose();
   if (id === "line") return ooAcross();
   if (id === "pairs") return ooPairs();

@@ -146,7 +146,7 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["openSavedPalette", id => routed("Your palette", "studio/palette/" + id)],   // js/studio.js
   ["prHome", () => routed("Practice", "practice")], ["prPlay", m => PR_METHODS[m] ? routed(PR_METHODS[m].t, "practice/" + m) : null],   // js/practice.js
   ["r2DrillsPage", () => routed("Drills", "train/drills")], ["r2EyePage", () => routed("Your eye", "train/eye")],   // js/rooms2.js: Train's two rows
-  ["ooMap", () => routed("Odd one out", "odd")], ["ooEyePage", () => routed("Your eye", "odd/eye")],   // js/games/oo-ui.js
+  ["ooMap", o => o && o.with ? routed(`${o.with.name} · Odd one out`, `odd/${o.with.k}/${o.with.id}`) : routed("Odd one out", "odd")], ["ooEyePage", () => routed("Your eye", "odd/eye")],   // js/games/oo-ui.js
   ["hgMap", () => routed("Gradients", "hue")], ["hgDaily", () => routed("Today's gradient", "hue/daily")],   // js/games/hue-ui.js
   ["ooWhose", () => routed("Whose palette?", "odd/whose")], ["ooAcross", () => routed("Across the line", "line")], ["ooPairs", () => routed("Painters' pairs", "odd/pairs")],
   ["wwPlay", () => routed("Which way?", "whichway")],   // js/games/whichway.js
@@ -340,7 +340,7 @@ function openRoute(hash, initial = false) {
   }
   if (kind === "line" && typeof ooAcross === "function") { base(); XSTACK = []; ooAcross(); return true; }   // js/games/line.js
   if (kind === "whichway" && typeof wwPlay === "function") { base(); XSTACK = []; wwPlay(); return true; }   // js/games/whichway.js
-  if (kind === "odd" && typeof ooOpenRoute === "function") { base(); XSTACK = []; ooOpenRoute(id); return true; }   // js/games/oo-ui.js: #/odd, #/odd/eye, #/odd/whose, #/odd/pairs
+  if (kind === "odd" && typeof ooOpenRoute === "function") { base(); XSTACK = []; ooOpenRoute(id, more); return true; }   // js/games/oo-ui.js: #/odd, #/odd/eye, #/odd/whose, #/odd/pairs, #/odd/<painter|movement|decade|look>/<id> (oo-with.js)
   if (kind === "hue" && typeof hgOpenRoute === "function") { base(); XSTACK = []; hgOpenRoute(id); return true; }   // js/games/hue-ui.js: #/hue, #/hue/daily
   if (kind === "photo" && id && typeof photoPage === "function") { base(); XSTACK = []; photoPage(id); return true; }
   if (kind === "hub" && id && typeof arHubPage === "function") { base(); XSTACK = []; arHubPage(id); return true; }   // js/article.js

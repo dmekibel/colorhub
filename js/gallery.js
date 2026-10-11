@@ -1558,6 +1558,7 @@ function glPage(i, d, fromHex, tol) {
   // ⋯ (design/SIMPLIFY/PLAN.md §3.6/§9): everything that was on the painting page's surface but isn't one of
   // the 3 actions or the picture's own Pick a color / Look closer. Registered once per draw (moreRegister keys
   // by ctx, so a re-register on the same painting just replaces the closures with ones that see this draw's d/i).
+  if (d.a && typeof ooWithIndex === "function") ooWithIndex();
   if (typeof moreRegister === "function") moreRegister("gallery", () => [
     { title: "Look", items: [
       { t: "Where each color sits", n: "Opens Look closer", run: () => glZoomOpen({ src: sampleImg.src || glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "where", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
@@ -1568,6 +1569,7 @@ function glPage(i, d, fromHex, tol) {
       ...(d.a ? [{ t: "The painter", n: d.a, run: () => { if (typeof awPainter === "function") awPainter(routeSlug(d.a)); } }] : []),
       ...(d.rec ? [{ t: "Full size at the museum", n: src.name, run: () => window.open(d.rec, "_blank", "noopener") }] : []),
       ...(typeof playSet === "function" ? [{ t: "Play with these colors", run: () => csPlay(glSet, { back: () => galleryPage(i, false) }) }] : []),
+      ...(d.a && typeof ooWithItem === "function" ? ooWithItem("painter", d.a, { first: i }) : []),   // js/games/oo-with.js: this painting first, then their others
       { t: "Keep this palette", n: "Separately from the painting itself", run: () => csPalette(glSet) },
     ] },
   ]);
