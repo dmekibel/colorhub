@@ -42,7 +42,7 @@
 .plv-x-thumb{position:relative;margin-top:16px;border-radius:var(--r-1);overflow:hidden}
 .plv-x-thumb img{width:100%;display:block}
 .plv-x-dots{position:absolute;inset:0}
-.plv-x-dots i{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 0 2px #fff,0 1px 4px rgba(0,0,0,.5);transform:translate(-50%,-50%)}
+.plv-x-dots i{position:absolute;width:18px;height:18px;border-radius:50%;background:var(--c);box-shadow:0 0 0 2.5px #fff,0 1px 6px rgba(0,0,0,.55);transform:translate(-50%,-50%)}
 .plv-x .btn{margin-top:16px}
 
 /* ---------- swap sheet ---------- */
