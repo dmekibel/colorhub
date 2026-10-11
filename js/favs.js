@@ -548,11 +548,14 @@ function fvItemWireGrid(el, idToNode) {
 }
 // opens a kept item by id: design objects and photography both keep theirs loaded whole once their module's
 // own data has landed, so this just waits for it (doWhen/phWhen-equivalent) then calls that module's own opener.
+// Every archive goes through js/paintmap.js's collection registry (PM_COL_DEF: the module's own loader and page
+// opener), so Ukiyo-e, plates and pulp covers open from Kept exactly like Design objects and Photography do.
 function fvItemOpen(id, kind) {
   buzz(6);
-  if ((kind === "design" || id.startsWith("do-")) && typeof doOpenObject === "function") return doOpenObject(id);
-  if ((kind === "photography" || id.startsWith("photod-")) && typeof loadPhotography === "function") {
-    return loadPhotography().then(() => { const n = typeof photographyNodeById === "function" && photographyNodeById(id); if (n && typeof paintingPage === "function") paintingPage(n); else toast("This photograph isn't in the archive anymore"); });
+  const col = kind || (typeof abColOf === "function" ? abColOf({ id }) : null);
+  if (col && typeof PM_COL_DEF !== "undefined" && PM_COL_DEF[col] && typeof pmColLoad === "function") {
+    return pmColLoad(col).then(F => { const i = F.ixOf(id); if (i >= 0) PM_COL_DEF[col].open(F.nodes[i]); else toast("This isn't in the archive anymore"); })
+      .catch(() => toast("The archive didn't load"));
   }
   toast("Can't open this item anymore");
 }

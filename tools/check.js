@@ -121,4 +121,27 @@ if (fs.existsSync(path.join(__dirname, "../data/paintmap/manifest.json"))) {
   }
 }
 console.log(`paintmap atlas gate: ${atlasErrors.length} problems`);
-process.exit(errors.length || nameErrors.length || idsGate.errors.length || liteErrors.length || fetchedMiss.length || atlasErrors.length ? 1 : 0);
+// Collection atlases (data/paintmap/<collection>/, tools/paintmap_atlas.py --collection, David 2026-10-11): each
+// sheet places an item by its INDEX in that collection's data file, so a manifest built for a different item count
+// would draw some other item's picture. Every manifest's n must equal its corpus length today, and every sheet it
+// names must exist. (Pixel-level checks stay with tools/paintmap_atlas_check.py.)
+const colCorpus = {
+  design: () => ["poster", "graphic", "textile", "wallpaper", "ceramics", "glass", "furniture", "product", "costume", "stamps"]
+    .reduce((n, c) => { const f = path.join(__dirname, `../data/design/objects-${c}.json`); return n + (fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, "utf8")).length : 0); }, 0),
+  photography: () => JSON.parse(fs.readFileSync(path.join(__dirname, "../data/photography/photos.json"), "utf8")).length,
+  ukiyoe: () => JSON.parse(fs.readFileSync(path.join(__dirname, "../data/ukiyoe/prints.json"), "utf8")).length,
+  botanical: () => JSON.parse(fs.readFileSync(path.join(__dirname, "../data/botanical/plates.json"), "utf8")).length,
+  pulp: () => JSON.parse(fs.readFileSync(path.join(__dirname, "../data/design/objects-pulp.json"), "utf8")).length,
+};
+const colAtlasErrors = [];
+for (const col of Object.keys(colCorpus)) {
+  const dir = path.join(__dirname, `../data/paintmap/${col}`), mp = path.join(dir, "manifest.json");
+  if (!fs.existsSync(mp)) continue;
+  const man = JSON.parse(fs.readFileSync(mp, "utf8")), n = colCorpus[col]();
+  if (man.n !== n) colAtlasErrors.push(`${col}: atlas built for ${man.n} items, the corpus has ${n} -- rebuild: python3 tools/paintmap_atlas.py clean --collection ${col} && python3 tools/paintmap_atlas.py build --collection ${col}`);
+  const want = [...man.tier0.sheets, ...Array.from({ length: man.tier1.numGroups }, (_, g) => man.tier1.file.replace("{g}", g))];
+  want.filter(f => !fs.existsSync(path.join(dir, f))).forEach(f => colAtlasErrors.push(`${col}: sheet ${f} is missing`));
+}
+colAtlasErrors.forEach(x => console.log("FAIL  " + x));
+console.log(`collection atlas gate: ${colAtlasErrors.length} problems`);
+process.exit(errors.length || nameErrors.length || idsGate.errors.length || liteErrors.length || fetchedMiss.length || atlasErrors.length || colAtlasErrors.length ? 1 : 0);

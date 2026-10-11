@@ -309,6 +309,9 @@ function openRoute(hash, initial = false) {
   if (kind === "look" && id && typeof lkOpenRoute === "function") { base(); XSTACK = []; lkOpenRoute(id); return true; }   // js/looks.js
   if (kind === "subject" && id && more != null && typeof svOpenRoute === "function") { base(); XSTACK = []; svOpenRoute(id, more); return true; }   // js/subjectview.js: #/subject/<kind>/<id>, PAGES-AUDIT.md plan item 3
   if (kind === "source" && id && typeof sourcePage === "function") { base(); XSTACK = []; sourcePage(id); return true; }   // js/sources.js
+  // js/archbrowse.js: a browse grid's address with its filters and sort (#/photography?y0=1939&y1=1943&sort=date,
+  // #/design/browse?mv=Textiles) -- opens that room with the query applied; without a query the lines below run
+  if (hash.includes("?") && typeof abRouteOpen === "function" && abRouteOpen(hash.slice(2), base)) return true;
   if (kind === "pulp" && !id && typeof pulpGrid === "function") { base(); XSTACK = []; pulpGrid(false); return true; }   // js/pulp.js: #/pulp (a direct link to one cover, #/painting/pulp-<id>, needs the grid open first in this session)
   if (kind === "photography" && !id && typeof photographyGrid === "function") { base(); XSTACK = []; photographyGrid(false); return true; }   // js/photography.js: #/photography (a direct link to one photo, #/painting/photod-<id>, needs the grid open first)
   if (kind === "photographer" && id && typeof photographerPage === "function") { base(); XSTACK = []; photographerPage(id, false); return true; }   // js/photography.js

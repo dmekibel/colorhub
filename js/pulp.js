@@ -34,17 +34,10 @@ function pulpNode(o) {
   };
 }
 
-let PULP_FILTER = { mag: "", decade: null, artist: "" };
-
-function pulpFacets(rows) {
-  const mags = [...new Set(rows.map(r => r.mag).filter(Boolean))].sort((a, b) => rows.filter(r => r.mag === b).length - rows.filter(r => r.mag === a).length).slice(0, 24);
-  const decades = [...new Set(rows.map(r => r.decade).filter(d => d != null))].sort((a, b) => a - b);
-  const artists = [...new Set(rows.map(r => r.artist).filter(Boolean))].sort((a, b) => rows.filter(r => r.artist === b).length - rows.filter(r => r.artist === a).length).slice(0, 20);
-  return { mags, decades, artists };
-}
-function pulpFiltered() {
-  return (PULP || []).filter(r => (!PULP_FILTER.mag || r.mag === PULP_FILTER.mag) && (!PULP_FILTER.artist || r.artist === PULP_FILTER.artist)
-    && (PULP_FILTER.decade == null || r.decade === PULP_FILTER.decade));
+// magazines, busiest first (the World door's own count line)
+function pulpMags(rows) {
+  const m = new Map(); rows.forEach(r => { if (r.mag) m.set(r.mag, (m.get(r.mag) || 0) + 1); });
+  return [...m.keys()].sort((a, b) => m.get(b) - m.get(a));
 }
 
 // ---------------------------------------------------------------- the World door tile
@@ -52,7 +45,7 @@ function worldPulpSection(host) {
   host.innerHTML = `<p class="x-sub">Magazine and paperback cover art, 1890s-1960s: the newsstand's own vivid, high-contrast palette.</p>
     <div class="wd-tiles"><button class="wd-tile" data-wd="pulp"><span class="wd-art">${wdBars(["#C8232C", "#F2C53D", "#1C2B3A", "#E7861A", "#2E5C3E"])}</span><b>Pulp covers</b><span class="wd-sub">Loading…</span></button></div>`;
   const sub = host.querySelector(".wd-sub");
-  loadPulp().then(rows => { if (sub) sub.textContent = `${rows.length} covers, ${pulpFacets(rows).mags.length}+ magazines`; })
+  loadPulp().then(rows => { if (sub) sub.textContent = `${rows.length} covers, ${pulpMags(rows).length} magazines`; })
     .catch(() => { if (sub) sub.textContent = "Couldn't load"; });
   const b = host.querySelector('[data-wd="pulp"]'); if (b) b.onclick = () => pulpGrid();
 }
@@ -64,44 +57,13 @@ function pulpGrid(push = true) {
     ${worldTop("Pulp covers")}
     <h1 class="p-title">Pulp covers</h1>
     <p class="p-dek">Magazine and paperback cover art, public domain in the US (pre-1930, or marked public domain by its own source), from the Internet Archive's Pulp Magazine Archive and Wikimedia Commons. The paper is as scanned: yellowed stock, studio light, a few faded dyes.</p>
-    <div class="art-bubbles" id="pulpChips" role="tablist"></div>
-    <div id="pulpFeed"><p class="fine">Loading the covers…</p></div>
+    <div data-ab-host></div>
   `, "article");
   // David, 2026-10-10 (js/designobjects.js carries the full note): pulpGrid is ROUTED, so trail.js already
   // joined it as "r:pulp" when show() ran just above -- pushing the same token again here duplicated it, and
   // the grid's own ‹ (one pop) silently redrew this same screen instead of leaving it.
   worldBackWire(el, {}, () => (typeof xToOrigin === "function" ? xToOrigin() : exploreHome()));
-  // wired once: redraws (pulpDraw) only replace innerHTML, so one delegated listener covers every filter click and pin tap
-  el.querySelector("#pulpChips").onclick = e => {
-    const b = e.target.closest("[data-pf]"); if (!b) return;
-    const key = b.dataset.pf, v = b.dataset.pv;
-    PULP_FILTER[key] = key === "decade" ? (v === "" ? null : +v) : v;
-    buzz(6); pulpDraw(el);
-  };
-  el.addEventListener("click", e => {
-    const p = e.target.closest("[data-pin]"); if (p) { const n = (PULP || []).find(r => r.id === p.dataset.pin); if (n) paintingPage(n); return; }
-    if (e.target.closest("[data-retry]")) pulpGrid(false);
-  });
-  loadPulp().then(() => pulpDraw(el)).catch(() => {
-    const feed = el.querySelector("#pulpFeed"); if (feed) feed.innerHTML = `<p class="fine">The covers didn't load. <button class="wl" data-retry>Try again</button></p>`;
-  });
-}
-function pulpDraw(el) {
-  const rows = pulpFiltered(), { mags, decades, artists } = pulpFacets(PULP || []);
-  const chip = (label, on, attr) => `<button class="art-bubble pulp-chip${on ? " on" : ""}" ${attr}>${esc(label)}</button>`;
-  const chips = el.querySelector("#pulpChips");
-  if (chips) {
-    chips.innerHTML = [
-      chip("All magazines", !PULP_FILTER.mag, 'data-pf="mag" data-pv=""'),
-      ...mags.map(m => chip(m, PULP_FILTER.mag === m, `data-pf="mag" data-pv="${esc(m)}"`)),
-    ].join("") + `<span style="width:10px"></span>` + [
-      chip("All decades", PULP_FILTER.decade == null, 'data-pf="decade" data-pv=""'),
-      ...decades.map(d => chip(d + "s", PULP_FILTER.decade === d, `data-pf="decade" data-pv="${d}"`)),
-    ].join("") + `<span style="width:10px"></span>` + [
-      chip("All artists", !PULP_FILTER.artist, 'data-pf="artist" data-pv=""'),
-      ...artists.map(a => chip(a, PULP_FILTER.artist === a, `data-pf="artist" data-pv="${esc(a)}"`)),
-    ].join("");
-  }
-  const feed = el.querySelector("#pulpFeed");
-  if (feed) feed.innerHTML = rows.length ? masonry(rows.map(n => pin(n))) : `<p class="fine">No covers match. Try fewer filters.</p>`;
+  // the grid: js/archbrowse.js's shared one (the painting map's Filter sheet: magazine, artist, a decade range,
+  // color; Sort; Keep hearts; the map) -- David, 2026-10-11
+  abMount(el.querySelector("[data-ab-host]"), "pulp", { fresh: push });
 }

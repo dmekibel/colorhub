@@ -85,60 +85,22 @@ function ukOpenPrint(id) {
 }
 
 // ---------------------------------------------------------------- facets + filter state
-let UK_FILTER = { artist: "", decade: null };
-function ukFacets(rows) {
-  const artists = new Map();
-  rows.forEach(r => { if (r.artist) artists.set(r.artist, (artists.get(r.artist) || 0) + 1); });
-  const decadeCounts = new Map();
-  rows.forEach(r => { if (r.decade != null) decadeCounts.set(r.decade, (decadeCounts.get(r.decade) || 0) + 1); });
-  return {
-    artists: [...artists.entries()].sort((a, b) => b[1] - a[1]).slice(0, 16).map(([a]) => a),
-    decades: [...decadeCounts.entries()].sort((a, b) => a[0] - b[0]).map(([d]) => d),
-  };
-}
-function ukFiltered() {
-  return UK.filter(n => (!UK_FILTER.artist || n.artist === UK_FILTER.artist) && (UK_FILTER.decade == null || n.decade === UK_FILTER.decade));
-}
-
 // ---------------------------------------------------------------- the grid, #/ukiyoe
 function ukGrid(push = true) {
   if (!UK) { ukWhen(() => ukGrid(push)); return; }
-  UK_FILTER = { artist: "", decade: null };
   const el = show(`
     ${worldTop("Ukiyo-e prints")}
     <h1 class="p-title">Ukiyo-e prints</h1>
     <p class="p-dek">${UK.length.toLocaleString()} Japanese woodblock prints, public domain, from the Art Institute of Chicago and the Cleveland Museum of Art. A narrow natural palette — indigo, and a safflower pink-red that fades fastest — until Prussian blue arrived in the late 1820s.</p>
-    <div class="art-bubbles" id="ukChips" role="tablist"></div>
-    <div id="ukFeed"></div>
+    <div data-ab-host></div>
     <p class="fine">Colors are as scanned or photographed: aged paper, shifted and faded pigments, and the scan itself all sit between a print and the hex shown.</p>
   `, "article wd");
   // David, 2026-10-10 (js/designobjects.js carries the full note): ukGrid is ROUTED, so trail.js already
   // joined it as "r:ukiyoe" when show() ran just above -- pushing the same token again here duplicated it.
   worldBackWire(el, {}, () => (typeof xToOrigin === "function" ? xToOrigin() : exploreHome()));
-  const draw = () => {
-    const rows = ukFiltered(), { artists, decades } = ukFacets(UK);
-    const chip = (label, on, attr) => `<button class="art-bubble pulp-chip${on ? " on" : ""}" ${attr}>${esc(label)}</button>`;
-    const chips = el.querySelector("#ukChips");
-    if (chips) chips.innerHTML = [
-      chip("All artists", !UK_FILTER.artist, 'data-uf="artist" data-uv=""'),
-      ...artists.map(a => chip(a, UK_FILTER.artist === a, `data-uf="artist" data-uv="${esc(a)}"`)),
-    ].join("") + `<span style="width:10px"></span>` + [
-      chip("All decades", UK_FILTER.decade == null, 'data-uf="decade" data-uv=""'),
-      ...decades.map(d => chip(d + "s", UK_FILTER.decade === d, `data-uf="decade" data-uv="${d}"`)),
-    ].join("");
-    const feed = el.querySelector("#ukFeed");
-    if (feed) feed.innerHTML = rows.length ? masonry(rows.map(n => pin(n))) : `<p class="fine">No prints match. Try fewer filters.</p>`;
-  };
-  el.querySelector("#ukChips").onclick = e => {
-    const b = e.target.closest("[data-uf]"); if (!b) return;
-    const key = b.dataset.uf, v = b.dataset.uv;
-    UK_FILTER[key] = key === "decade" ? (v === "" ? null : +v) : v;
-    buzz(6); draw();
-  };
-  el.addEventListener("click", e => {
-    const p = e.target.closest("[data-pin]"); if (p) { const n = UK_BY_ID.get(p.dataset.pin); if (n) ukOpenPrint(n.id); }
-  });
-  draw();
+  // the grid: js/archbrowse.js's shared one (the painting map's Filter sheet: artist, a decade range, museum,
+  // color; Sort; Keep hearts; the map) -- David, 2026-10-11
+  abMount(el.querySelector("[data-ab-host]"), "ukiyoe", { fresh: push });
 }
 
 // ---------------------------------------------------------------- the World door tile

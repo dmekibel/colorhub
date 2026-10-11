@@ -52,6 +52,18 @@ measured dominant color (the same fallback every cell gets before its picture ha
 `build` prints how many cells were skipped for this reason when the run finishes.
   python3 tools/paintmap_atlas.py build --collection design
   python3 tools/paintmap_atlas.py build --collection photography
+
+David, 2026-10-11 ("Collection ... Design objects, Photography, or another archive"): three more collections, same
+contract -- each one's own data file in the SAME array order its js/ loader builds (ukiyoe: data/ukiyoe/prints.json;
+botanical: data/botanical/plates.json; pulp: data/design/objects-pulp.json), same tile sizes and the same <=2048px
+sheets. Ukiyo-e's Art Institute prints are already self-hosted (img/ukiyoe/aicu/), so they're read off disk;
+everything else is fetched from the same address the live app shows (js/ukiyoe.js UK_IMG_TPL, the plates' own
+img field, the pulp cover's own i field).
+  python3 tools/paintmap_atlas.py build --collection ukiyoe
+  python3 tools/paintmap_atlas.py build --collection botanical
+  python3 tools/paintmap_atlas.py build --collection pulp
+After a build whose network fetches partly failed, `repair`-style refills aren't available for v2 sheets yet:
+re-run `clean` + `build` for that collection (each is a few hundred to ~1,700 images), then `tier0`.
 """
 import hashlib, json, os, random, sys, time, threading
 import urllib.request, urllib.error
@@ -74,6 +86,10 @@ COLLECTION = "paintings"
 DESIGN_CATS = ["poster", "graphic", "textile", "wallpaper", "ceramics", "glass", "furniture", "product", "costume", "stamps"]
 DESIGN_DIR = os.path.join(ROOT, "data", "design")
 PHOTO_FILE = os.path.join(ROOT, "data", "photography", "photos.json")
+UKIYOE_FILE = os.path.join(ROOT, "data", "ukiyoe", "prints.json")
+BOTANICAL_FILE = os.path.join(ROOT, "data", "botanical", "plates.json")
+PULP_FILE = os.path.join(ROOT, "data", "design", "objects-pulp.json")
+COLLECTIONS = ("paintings", "design", "photography", "ukiyoe", "botanical", "pulp")
 # ids.si.edu (Cooper Hewitt chndm, National Postal Museum npmd) currently answers with an expired TLS cert --
 # skip, never bypass verification (David's explicit instruction). js/paintmap.js's own flat dominant-color fill
 # already covers a cell with no picture, so "skipped" here just means that cell never gets a real photo tile.
@@ -251,11 +267,23 @@ def process_one(i, item, retries=RETRIES):
             if resolved is None:
                 return i, None, None, "skipped (ids.si.edu TLS, or no image)"
             kind, loc, crop = resolved[0], resolved[1], None
-        elif COLLECTION == "photography":
+        elif COLLECTION in ("photography", "botanical"):
             img = item.get("img")
             if not img:
                 return i, None, None, "no image field"
             kind, loc, crop = "http", img, None
+        elif COLLECTION == "ukiyoe":
+            # js/ukiyoe.js UK_IMG_TPL: aicu is self-hosted under img/ukiyoe/aicu/<id>.jpg, cmau's i is a full URL
+            if item.get("src") == "aicu":
+                kind, loc, crop = "local", os.path.join(ROOT, "img", "ukiyoe", "aicu", f"{item.get('id')}.jpg"), None
+            elif item.get("i"):
+                kind, loc, crop = "http", item["i"], None
+            else:
+                return i, None, None, "no image field"
+        elif COLLECTION == "pulp":
+            if not item.get("i"):
+                return i, None, None, "no image field"
+            kind, loc, crop = "http", item["i"], None
         else:
             code_addr, crop = parse_line(item)
             kind, loc = thumb_url(code_addr)
@@ -346,6 +374,9 @@ def load_lines():
         return load_lines_design()
     if COLLECTION == "photography":
         return load_lines_photography()
+    if COLLECTION in ("ukiyoe", "botanical", "pulp"):
+        # file order: loadUkiyoe()/loadBotanical()/loadPulp() each map their one file 1:1, in order
+        return json.load(open({"ukiyoe": UKIYOE_FILE, "botanical": BOTANICAL_FILE, "pulp": PULP_FILE}[COLLECTION]))
     with open(THUMBS) as f:
         return [l.rstrip("\n") for l in f if l.strip() != "" or True]
 
@@ -636,8 +667,8 @@ def main():
         elif args[k] == "--collection": COLLECTION = args[k + 1]; k += 2
         else: k += 1
 
-    if COLLECTION not in ("paintings", "design", "photography"):
-        raise SystemExit(f"--collection must be paintings, design or photography (got {COLLECTION!r})")
+    if COLLECTION not in COLLECTIONS:
+        raise SystemExit(f"--collection must be one of {', '.join(COLLECTIONS)} (got {COLLECTION!r})")
     # a collection's own sheets live under data/paintmap/<collection>/, never mixed with Paintings' own root
     # files (OUT/PROGRESS are both derived from it, same as at module load -- recomputed here because that
     # original computation ran before --collection was known)
@@ -699,7 +730,8 @@ def main():
     failures = []
 
     def group_src_hash(lo, hi):
-        return hashlib.sha1("\n".join(lines[lo:hi]).encode("utf-8")).hexdigest()
+        # a JSON-row collection's lines are dicts, not strings (thumbs.txt's are): hash a stable dump of each
+        return hashlib.sha1("\n".join(l if isinstance(l, str) else json.dumps(l, sort_keys=True) for l in lines[lo:hi]).encode("utf-8")).hexdigest()
 
     stale = []
     for g in sorted(groups_done):

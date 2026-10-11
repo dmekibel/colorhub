@@ -53,7 +53,7 @@ function pin(n, extra = {}) {
     const fb = esc(((n.palette || [])[0] || {}).h || "#8a8a82");
     const noimg = `<span class="noimg" style="--c:${fb};aspect-ratio:${(1 / ar).toFixed(3)}"></span>`;
     return { h: 167 * ar + 64 + (why ? 44 : 0), html: `<button class="pin pin-art" data-pin="${id}">${badge}${src ? `<img src="${esc(src)}" alt="" loading="lazy" style="aspect-ratio:${(1 / ar).toFixed(3)}" onerror="this.outerHTML='${noimg.replace(/'/g, "\\'").replace(/"/g, "&quot;")}'">` : noimg}
-      ${(n.palette || []).length ? `<span class="mini-pal">${n.palette.map(c => `<i style="--c:${c.h};flex:${c.share}"></i>`).join("")}</span>` : ""}<b>${esc(n.title)}</b><small>${esc(n.artist || "")}${n.year ? " · " + esc(n.year) : ""}</small>${why}</button>` };
+      ${(n.palette || []).length ? `<span class="mini-pal">${n.palette.map(c => `<i style="--c:${c.h};flex:${c.share}"></i>`).join("")}</span>` : ""}<b>${esc(n.title)}</b><small>${esc([n.artist, n.year].filter(Boolean).join(" · "))}</small>${why}</button>` };
   }
   if (n.kind === "story") {
     return { h: 236 + (why ? 44 : 0), html: `<button class="pin pin-story" data-pin="${id}" style="--g:linear-gradient(150deg,${n.cover.join(",")})">${badge}<span class="ps"><span class="eyebrow">Story · ${n.slides.length} slides</span><b>${esc(n.title)}</b><small>${esc(n.dek)}</small></span>${why}</button>` };
@@ -898,6 +898,9 @@ function paintingPage(n) {
     ${n.commons ? `<section class="srcs"><h3>Image</h3><ul><li><a href="${esc(n.commons)}" target="_blank" rel="noopener">${esc(n.imgSrcLabel || "Wikimedia Commons")}</a> · ${esc(n.license || "Public domain")}</li></ul></section>` : ""}
   `, "article");
   wireArticle(el, n);
+  // a Keep heart in the top bar for an archive item (Design objects, Photography, Ukiyo-e, plates, pulp) --
+  // js/archbrowse.js abPageHeart, the same Kept store its grid tile and its map card write to (David, 2026-10-11)
+  if (typeof abPageHeart === "function") abPageHeart(el, n);
   // Phase 2 (js/photography.js): a photograph's byline opens its photographer's page, same pattern as a painter link
   const phLink = el.querySelector("[data-photographer]"); if (phLink) phLink.onclick = e => { e.stopPropagation(); if (typeof photographerPage === "function") photographerPage(phLink.dataset.photographer); };
   el.querySelectorAll("[data-ptgo]").forEach(b => b.onclick = () => { const t = ptSimilarPool(n).find(x => x.id === b.dataset.ptgo); if (t) paintingPage(t); });

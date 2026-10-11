@@ -36,6 +36,21 @@
 // painting's own position already comes from.
 const PM_ARR = [["color", "By color"], ["time", "By time"], ["painter", "By painter"], ["families", "Families"], ["tones", "Tones"], ["rings", "Rings"], ["spiral", "Spiral"]];
 const PM_NEEDS_SEED = new Set(["rings", "spiral"]);
+// an arrangement's name and one-line "why" in a collection's own words (David, 2026-10-11: a design object has
+// a maker, not a painter) -- Paintings keep PM_ARR/PM_WHY exactly
+function pmArrTitle(k, t, F) {
+  if (!F || !F.col || F.col === "paintings") return t;
+  if (k === "painter") return "By " + pmColLabel(F, "painter").toLowerCase();
+  if (k === "families") return "By " + pmColLabel(F, "mv").toLowerCase();
+  return t;
+}
+function pmArrWhy(k, F) {
+  if (!F || !F.col || F.col === "paintings") return PM_WHY[k];
+  if (k === "painter") return `A block for each ${pmColLabel(F, "painter").toLowerCase()}, earliest first`;
+  if (k === "families") return `A block for each ${pmColLabel(F, "mv").toLowerCase()}, the biggest first`;
+  if (k === "time") return "Oldest at the top, a band for each decade";
+  return PM_WHY[k];
+}
 const PM_WHY = {
   color: "Lighter toward the top, hues left to right",
   time: "Oldest at the top, a band for each decade",
@@ -363,7 +378,7 @@ function pmActiveChips(s, F) {
     c.push({ dim: "co", text: exact ? region[1] : names.length === 1 ? names[0] : names.length <= 2 ? names.join(", ") : `${names[0]} +${names.length - 1}` });
   }
   if (f.y0 != null || f.y1 != null) {
-    const preset = PM_TIME_PRESETS.find(p => p[2] === f.y0 && p[3] === f.y1);
+    const preset = pmTimePresets(F).find(p => p[2] === f.y0 && p[3] === f.y1);
     c.push({ dim: "when", text: preset ? preset[1] : `${f.y0 != null ? f.y0 : "…"}–${f.y1 != null ? f.y1 : "…"}` });
   }
   if (f.hexes.length) {
@@ -372,9 +387,9 @@ function pmActiveChips(s, F) {
   }
   if (f.hueBand != null) c.push({ dim: "hueBand", text: XB_HUE_WORDS[f.hueBand] });
   if (f.l0 != null || f.l1 != null) c.push({ dim: "l", text: f.l0 != null && f.l1 != null ? `L ${f.l0}–${f.l1}` : f.l0 != null ? `Lighter than ${f.l0}` : `Darker than ${f.l1}` });
-  if (f.painterSet && f.painterSet.length) c.push({ dim: "painter", text: f.painterSet.length === 1 ? xbArtistName(F, f.painterSet[0]) : `${f.painterSet.length} painters` });
-  if (f.mvSet && f.mvSet.length) c.push({ dim: "mv", text: f.mvSet.length === 1 ? F.meta.movements[f.mvSet[0] - 1] : `${f.mvSet.length} movements` });
-  if (f.musSet && f.musSet.length) c.push({ dim: "mus", text: f.musSet.length === 1 ? F.G.src[f.musSet[0]].short : `${f.musSet.length} museums` });
+  if (f.painterSet && f.painterSet.length) c.push({ dim: "painter", text: f.painterSet.length === 1 ? xbArtistName(F, f.painterSet[0]) : `${f.painterSet.length} ${pmColLabel(F, "painterP")}` });
+  if (f.mvSet && f.mvSet.length) c.push({ dim: "mv", text: f.mvSet.length === 1 ? F.meta.movements[f.mvSet[0] - 1] : `${f.mvSet.length} ${pmColLabel(F, "mvP")}` });
+  if (f.musSet && f.musSet.length) c.push({ dim: "mus", text: f.musSet.length === 1 ? F.G.src[f.musSet[0]].short : `${f.musSet.length} ${pmColLabel(F, "musP")}` });
   return c;
 }
 // the card's own three facets (David, 2026-10-09, the minimalist pass -- "filtering by example" stays, pared to
@@ -560,7 +575,7 @@ function pmLayPainter(list, F) {
   return pmLayGroup(list, {
     groupOf: i => F.artist[i], sortWithin: (p, q) => pmYr(p, F) - pmYr(q, F),
     keyRank: (a, arr) => { if (!a) return 2e5; const y = arr.map(i => pmYr(i, F)).sort((p, q) => p - q); return y[y.length >> 1]; },
-    label: (a, c) => a ? xbArtistName(F, a) : (F.col === "design" ? "Maker unknown" : F.col === "photography" ? "Photographer unknown" : "Artist unknown"),
+    label: (a, c) => a ? xbArtistName(F, a) : pmColLabel(F, "unknown"),
   });
 }
 // Families (David, 2026-10-09): the same shelves, grouped by movement instead of painter -- the biggest
@@ -877,14 +892,22 @@ const PM_COLLECTIONS = [
   ["paintings", "Paintings"],
   ["design", "Design objects"],
   ["photography", "Photography"],
+  // David, 2026-10-11: "or another archive" -- the three smaller archives join the same engine (each a few
+  // hundred to ~1,700 items, all already "painting"-kind nodes with measured palettes)
+  ["ukiyoe", "Ukiyo-e prints"],
+  ["botanical", "Botanical & bird plates"],
+  ["pulp", "Pulp covers"],
 ];
 // per-collection labels for the Filter sheet's row headers (David 2026-10-10: "facets adapted per collection" --
 // same rows, renamed to fit: a design object has a Maker, not a Painter; Photography's "movement" row is really
 // which of the three color PROCESSES made it).
 const PM_COL_LABELS = {
-  paintings: { painter: "Painter", mv: "Movement", co: "Place", mus: "Museum", noun: "painting", nounP: "paintings" },
-  design: { painter: "Maker", mv: "Category", co: "Place", mus: "Source", noun: "object", nounP: "objects" },
-  photography: { painter: "Photographer", mv: "Process", co: "Place", mus: "Source", noun: "photograph", nounP: "photographs" },
+  paintings: { mvP: "movements", musP: "museums", painter: "Painter", painterP: "painters", mv: "Movement", co: "Place", mus: "Museum", noun: "painting", nounP: "paintings", unknown: "Artist unknown" },
+  design: { mvP: "categories", musP: "museums", painter: "Maker", painterP: "makers", mv: "Category", co: "Place", mus: "Museum", noun: "object", nounP: "objects", unknown: "Maker unknown" },
+  photography: { mvP: "processes", musP: "sources", painter: "Photographer", painterP: "photographers", mv: "Process", co: "Place", mus: "Source", noun: "photograph", nounP: "photographs", unknown: "Photographer unknown" },
+  ukiyoe: { mvP: "series", musP: "museums", painter: "Artist", painterP: "artists", mv: "Series", co: "Place", mus: "Museum", noun: "print", nounP: "prints", unknown: "Artist unknown" },
+  botanical: { mvP: "kinds", musP: "books", painter: "Artist", painterP: "artists", mv: "Kind", co: "Place", mus: "Book", noun: "plate", nounP: "plates", unknown: "Artist unknown" },
+  pulp: { mvP: "magazines", musP: "sources", painter: "Artist", painterP: "artists", mv: "Magazine", co: "Place", mus: "Source", noun: "cover", nounP: "covers", unknown: "Artist unknown" },
 };
 const pmColLabel = (F, key) => (PM_COL_LABELS[(F && F.col) || "paintings"] || PM_COL_LABELS.paintings)[key];
 const PM_COL_F = new Map();   // col -> Promise<F>, loaded once per session (same lifetime as XBF itself)
@@ -947,7 +970,7 @@ function pmAdapterBuild(col, nodes, cfg) {
 const PM_COL_CFG = {
   design: {
     makerName: n => n.artist || null, makerSlug: n => n.makerSlug || null,
-    placeName: n => n.place || null, catName: n => n.catLabel || n.cat || null,
+    placeName: n => n.co || null, catName: n => n.catLabel || n.cat || null,
     srcKey: n => n.src || "design", srcLabel: n => (typeof DO_SRC_LABEL !== "undefined" && DO_SRC_LABEL[n.src]) || n.imgSrcLabel || "Museum",
   },
   photography: {
@@ -955,7 +978,56 @@ const PM_COL_CFG = {
     placeName: n => n.country || null, catName: n => n.process ? n.process.replace(/ \(.*\)$/, "") : null,
     srcKey: () => "commons", srcLabel: () => "Wikimedia Commons",
   },
+  ukiyoe: {
+    makerName: n => n.artist || null, makerSlug: () => null, placeName: () => null,
+    catName: n => n.series || null,   // no print in the corpus records a series yet: the row (and "By series") stays hidden until one does
+    srcKey: n => n.src || "ukiyoe", srcLabel: n => n.imgSrcLabel || "Museum",
+  },
+  botanical: {
+    makerName: n => n.artist || null, makerSlug: () => null, placeName: () => null,
+    catName: n => n.kindRaw === "bird" ? "Birds" : n.kindRaw === "plant" ? "Plants" : null,
+    srcKey: n => n.src || "botanical", srcLabel: n => (typeof BP_BOOK_LABEL !== "undefined" && BP_BOOK_LABEL[n.src]) || n.src,
+  },
+  pulp: {
+    makerName: n => n.artist || null, makerSlug: () => null, placeName: () => null,
+    catName: n => n.mag || null,
+    srcKey: n => n.src || "pulp", srcLabel: n => n.imgSrcLabel || "Archive",
+  },
 };
+// how each collection loads its nodes and opens one -- the module's own loader and page opener, so a tile on
+// the map or in a browse grid opens exactly the page that module's own grid opens
+const PM_COL_DEF = {
+  design: { load: () => loadDesignObjects(), open: n => doOpenObject(n.id) },
+  photography: { load: () => loadPhotography(), open: n => paintingPage(n) },
+  ukiyoe: { load: () => loadUkiyoe(), open: n => ukOpenPrint(n.id) },
+  botanical: { load: () => loadBotanical(), open: n => bpOpenPlate(n.id) },
+  pulp: { load: () => loadPulp(), open: n => paintingPage(n) },
+};
+// the When row's quick picks. Paintings keep their four art-history spans (Renaissance/Baroque/1800s/Modern);
+// every other collection gets four spans cut at its OWN date quartiles (rounded to decades), labeled with the
+// plain years -- a curated period name ("Baroque") would be wrong for a 1930s Kodachrome, and the quartiles
+// guarantee every pick holds about a quarter of what's there, never an empty chip.
+const PM_COL_PRESETS = new Map();
+function pmTimePresets(F) {
+  const col = (F && F.col) || "paintings";
+  if (col === "paintings") return PM_TIME_PRESETS;
+  if (PM_COL_PRESETS.has(col)) return PM_COL_PRESETS.get(col);
+  const G = F.G, ys = [];
+  for (let i = 0; i < G.n; i++) if (G.year[i] !== GL_UNDATED) ys.push(G.year[i]);
+  ys.sort((a, b) => a - b);
+  const out = [];
+  if (ys.length >= 40) {
+    const lo = ys[0], hi = ys[ys.length - 1], dec = y => Math.round(y / 10) * 10;
+    const cuts = [lo, ...[.25, .5, .75].map(q => dec(ys[Math.floor(q * (ys.length - 1))])), hi + 1];
+    for (let k = 0; k < 4; k++) {
+      const a = k ? cuts[k] : lo, b = cuts[k + 1] - 1;
+      if (b <= a || (out.length && a <= out[out.length - 1][3])) continue;
+      out.push(["q" + a, `${a}–${b}`, a, b]);
+    }
+  }
+  PM_COL_PRESETS.set(col, out);
+  return out;
+}
 // loads (if needed) and returns the Promise<F> for a collection -- "paintings" defers to xbLoad() exactly as
 // before (zero behavior change, same cached XBF); anything else loads its own module's data once (David's
 // instruction: "keep the paintings dataset and all its behavior/URLs unchanged by default") and builds its
@@ -963,12 +1035,135 @@ const PM_COL_CFG = {
 function pmColLoad(col) {
   if (!col || col === "paintings") return xbLoad();
   if (PM_COL_F.has(col)) return PM_COL_F.get(col);
-  const loader = col === "design" ? (typeof loadDesignObjects === "function" ? loadDesignObjects() : Promise.reject(new Error("design objects unavailable")))
-    : col === "photography" ? (typeof loadPhotography === "function" ? loadPhotography() : Promise.reject(new Error("photography unavailable")))
-    : Promise.reject(new Error("unknown collection " + col));
+  const def = PM_COL_DEF[col];
+  let loader; try { loader = def ? Promise.resolve(def.load()) : Promise.reject(new Error("unknown collection " + col)); } catch (e) { loader = Promise.reject(e); }
   const p = loader.then(nodes => { const F = pmAdapterBuild(col, nodes, PM_COL_CFG[col]); PM_COL_F_READY.set(col, F); return F; });
+  p.catch(() => PM_COL_F.delete(col));   // a failed load (offline) can be retried, never cached as failed
   PM_COL_F.set(col, p);
   return p;
+}
+
+// ---------- the Filter pane, shared (David, 2026-10-11: "the SAME filter-sheet pattern as the paintings map's
+// Filter sheet" for Design objects, Photography and the other archives' browse grids) ----------
+// Every facet with its live count (pmRun's bitmask-exclusion counts), applied the moment it's tapped: multi-
+// select color (closeness, any/all), hue family, a lightness range, time presets + a decade histogram over a
+// dual-handle year range, place (with region bulk-picks for paintings), category/movement, museum/source and
+// maker/painter (each OR within itself, AND across facets). Lifted out of pmMount's openSheet() whole -- for
+// Paintings it renders byte-for-byte what the map's own sheet always did (tools/smoke "the paintings map's
+// default ... is unchanged" guards that). For another collection the rows are renamed (PM_COL_LABELS), the
+// time presets come from that collection's own dates (pmTimePresets), and a facet the collection doesn't
+// really have (one museum, no recorded place) is left out instead of drawn as a row with nothing in it.
+//   root      an element holding a [data-pmbody] (the map's Filter pane, or a browse grid's sheet)
+//   s         the live spec ({ f, fav, col }) -- read fresh on every render, so a Reset that replaces s.f is fine
+//   onChange  called after every change (the map rebuilds; a grid redraws); the pane then re-renders itself
+function pmFilterPane(root, s, F, onChange) {
+  const fopen = { co: false, painter: false, mv: false, mus: false };
+  let fq = "", coq = "";
+  const q$ = sel => root.querySelector(sel);
+  const isPaintings = !F.col || F.col === "paintings";
+  function render() {
+    const res = pmRun(s, F), C = res.counts;
+    let n = res.list.length;
+    const favIds = pmFavList(F), favSet = new Set(favIds.map(r => r.i));
+    if (s.fav) n = Array.from(res.list).filter(i => favSet.has(i)).length;
+    const favN = Array.from(res.list).filter(i => favSet.has(i)).length;
+    // a chip with no count of its own (a time preset) is never disabled -- before 2026-10-11 `!cnt` read a
+    // missing count as zero, so the four presets drew greyed out and ignored every tap
+    const chip = (attr, val, label, cnt, on) => `<button class="${on ? "on" : ""}" ${attr}="${esc(String(val))}"${cnt != null && !cnt && !on ? " disabled" : ""}>${esc(label)}${cnt != null ? `<em>${cnt.toLocaleString()}</em>` : ""}</button>`;
+    const f = s.f;
+    const topMulti = (names, countArr, selSet) => names.map((name, j) => ({ name, v: j + 1, n: countArr[j + 1] })).filter(x => x.n || selSet.has(x.v)).sort((a, b) => b.n - a.n);
+    const [yrLo, yrHi] = pmYearRange(F);
+    const y0 = f.y0 == null ? yrLo : f.y0, y1 = f.y1 == null ? yrHi : f.y1;
+    const dLo = Math.max(0, Math.floor((yrLo - XB_DEC0) / 10)), dHi = Math.min(XB_NDEC - 1, Math.floor((yrHi - XB_DEC0) / 10));
+    const decadeBars = Array.from({ length: dHi - dLo + 1 }, (_, k) => C.when[dLo + k]);
+    const maxDecade = Math.max(1, ...decadeBars);
+    const pct = y => clamp((y - yrLo) / Math.max(1, yrHi - yrLo) * 100, 0, 100);
+    const presets = pmTimePresets(F);
+    const activePreset = presets.find(p => p[2] === f.y0 && p[3] === f.y1);
+    const cols = [...BASICS, ...ALL].filter(c => !c.basic || /^(Red|Blue|Green|Yellow|Pink|Purple|Orange|Brown)$/.test(c.n));
+    const colsSorted = typeof glHueOrder === "function" ? glHueOrder(cols) : cols;
+    const coSelSet = new Set(f.coSet || []), mvSelSet = new Set(f.mvSet || []), musSelSet = new Set(f.musSet || []), paSelSet = new Set(f.painterSet || []);
+    const cos = topMulti(F.meta.countries, C.co, coSelSet), mvs = topMulti(F.meta.movements, C.mv, mvSelSet);
+    const pas = topMulti(F.meta.artists.map(a => a[0]), C.painter, paSelSet);
+    const musAll = F.G.src.map((m, k) => ({ name: m.short, v: k, n: C.mus[k] })).filter(x => x.n || musSelSet.has(x.v));
+    const coList = coq ? cos.filter(x => x.name.toLowerCase().includes(coq.toLowerCase())).slice(0, 30) : cos.slice(0, fopen.co ? 44 : 10);
+    const pList = fq ? pas.filter(x => x.name.toLowerCase().includes(fq.toLowerCase())).slice(0, 24) : pas.slice(0, fopen.painter ? 60 : 10);
+    const regionRow = PM_REGIONS.map(([key, label, names]) => {
+      const idx = names.map(nm => F.meta.countries.indexOf(nm) + 1).filter(v => v > 0);
+      const on = idx.length > 0 && idx.every(v => coSelSet.has(v));
+      const cnt = idx.reduce((s2, v) => s2 + (C.co[v] || 0), 0);
+      return chip("data-pmregion", key, label, cnt, on);
+    }).join("");
+    const nounP = pmColLabel(F, "nounP");
+    const painterLab = pmColLabel(F, "painter"), coLab = pmColLabel(F, "co"), musLab = pmColLabel(F, "mus"), mvLab = pmColLabel(F, "mv");
+    // a facet another collection doesn't really have stays out (paintings always draw every row, as before):
+    // fewer than two places / sources to choose between, or no named makers at all
+    const showCo = isPaintings || F.meta.countries.length > 1 || coSelSet.size;
+    const showMus = isPaintings || F.G.src.length > 1;
+    const showPa = isPaintings || F.meta.artists.length > 0;
+    q$("[data-pmbody]").innerHTML = `
+      <div class="pmx-sh-top"><b>Filter</b><span>${n.toLocaleString()} ${n === 1 ? pmColLabel(F, "noun") : nounP}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
+      ${favIds.length ? `<div class="pmx-row"><span class="pmx-lab">Yours</span><div class="pmx-chips">${chip("data-pmfav", 1, "Your favorites", favN, !!s.fav)}</div></div>` : ""}
+      <div class="pmx-row"><span class="pmx-lab">Color</span><div class="pmx-sw">${colsSorted.map(c => `<button data-pmhex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" class="${f.hexes.includes(c.h.toUpperCase()) ? "on" : ""}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
+        ${f.hexes.length ? `<p class="pmx-cap2">${f.hexes.map(h => `<i style="--c:${h}"></i>`).join("")}${esc(f.hexes.length === 1 ? (f.name || nameOf(f.hexes[0]).text) : f.hexes.length + " colors")} <span>· within ${f.tol}%</span></p>
+        <div class="pmx-scrub"><span class="pmx-lab2">Closeness</span><input type="range" min="1" max="30" step="1" value="${f.tol}" data-pmtol aria-label="Color closeness"></div>
+        ${f.hexes.length > 1 ? `<div class="hm-seg pmx-colmode" role="radiogroup" aria-label="Match any or all colors"><button class="${(f.colorMode || "any") === "any" ? "on" : ""}" data-pmcolmode="any">Any</button><button class="${f.colorMode === "all" ? "on" : ""}" data-pmcolmode="all">All</button></div>` : ""}` : ""}
+        <p class="pmx-lab2">Hue family</p>
+        <div class="pmx-chips">${XB_HUE_WORDS.map((w, j) => chip("data-pmhue", j, w, C.hueBand[j], f.hueBand === j)).join("")}</div>
+        <p class="pmx-lab2">Lightness</p>
+        <div class="pmx-range2" style="--lo:${f.l0 == null ? 0 : f.l0}%;--hi:${f.l1 == null ? 100 : f.l1}%">
+          <input type="range" min="0" max="100" value="${f.l0 == null ? 0 : f.l0}" data-pml0 aria-label="Darker than">
+          <input type="range" min="0" max="100" value="${f.l1 == null ? 100 : f.l1}" data-pml1 aria-label="Lighter than"></div>
+        <p class="pmx-cap3"><span>Dark</span><span>Light</span></p></div>
+      <div class="pmx-row"><span class="pmx-lab">When</span>
+        ${presets.length ? `<div class="pmx-chips">${presets.map(([k, t]) => chip("data-pmpreset", k, t, null, activePreset && activePreset[0] === k)).join("")}</div>` : ""}
+        <div class="pmx-hist" aria-hidden="true">${decadeBars.map(n2 => `<i style="--h:${Math.max(.04, n2 / maxDecade)}"></i>`).join("")}</div>
+        <div class="pmx-range2" style="--lo:${pct(y0)}%;--hi:${pct(y1)}%">
+          <input type="range" min="${yrLo}" max="${yrHi}" step="1" value="${y0}" data-pmy0 aria-label="From year">
+          <input type="range" min="${yrLo}" max="${yrHi}" step="1" value="${y1}" data-pmy1 aria-label="To year"></div>
+        <p class="pmx-cap3"><span>${y0}</span><span>${y1}</span></p></div>
+      ${showCo ? `<div class="pmx-row"><span class="pmx-lab">${esc(coLab)}</span>
+        ${isPaintings ? `<p class="pmx-lab2">Regions</p>
+        <div class="pmx-chips">${regionRow}</div>` : ""}
+        ${isPaintings ? `<p class="pmx-lab2">Countries</p>` : ""}
+        ${isPaintings || cos.length > 10 ? `<label class="search pmx-find"><span>${ICON.search}</span><input data-pmcoq type="search" placeholder="Find a ${esc(coLab.toLowerCase())}" value="${esc(coq)}" autocomplete="off"></label>` : ""}
+        <div class="pmx-chips">${coList.map(x => chip("data-pmco", x.v, x.name, x.n, coSelSet.has(x.v))).join("")}${!coq && !fopen.co && cos.length > 10 ? `<button class="pmx-more" data-pmmore="co">All ${cos.length}</button>` : ""}</div></div>` : ""}
+      ${mvs.length ? `<div class="pmx-row"><span class="pmx-lab">${esc(mvLab)}</span><div class="pmx-chips">${mvs.map(x => chip("data-pmmv", x.v, x.name, x.n, mvSelSet.has(x.v))).join("")}</div></div>` : ""}
+      ${showMus ? `<div class="pmx-row"><span class="pmx-lab">${esc(musLab)}</span><div class="pmx-chips">${musAll.map(x => chip("data-pmmus", x.v, x.name, x.n, musSelSet.has(x.v))).join("")}</div></div>` : ""}
+      ${showPa ? `<div class="pmx-row"><span class="pmx-lab">${esc(painterLab)}</span>
+        ${isPaintings || pas.length > 10 ? `<label class="search pmx-find"><span>${ICON.search}</span><input data-pmq type="search" placeholder="Find a ${esc(painterLab.toLowerCase())}" value="${esc(fq)}" autocomplete="off"></label>` : ""}
+        <div class="pmx-chips">${pList.map(x => chip("data-pmp", x.v, x.name, x.n, paSelSet.has(x.v))).join("")}${!fq && !fopen.painter && pas.length > 10 ? `<button class="pmx-more" data-pmmore="painter">More ${esc(pmColLabel(F, "painterP"))}</button>` : ""}</div></div>` : ""}`;
+    const inp = q$("[data-pmq]");
+    if (inp) inp.oninput = () => { fq = inp.value.trim(); const pos = inp.selectionStart; render(); const ni = q$("[data-pmq]"); ni.focus(); try { ni.setSelectionRange(pos, pos); } catch (e) {} };
+    const coInp = q$("[data-pmcoq]");
+    if (coInp) coInp.oninput = () => { coq = coInp.value.trim(); const pos = coInp.selectionStart; render(); const ni = q$("[data-pmcoq]"); ni.focus(); try { ni.setSelectionRange(pos, pos); } catch (e) {} };
+    // live range sliders: 'input' (not the delegated click below) for drag feedback, kept from crossing past
+    // each other the same way a dual-handle slider always must (y0 can't pass y1, l0 can't pass l1)
+    const tolInp = q$("[data-pmtol]"); if (tolInp) tolInp.oninput = e => { f.tol = +e.target.value; buzz(2); onChange(); render(); };
+    q$("[data-pmy0]").oninput = e => { f.y0 = Math.min(+e.target.value, f.y1 == null ? yrHi : f.y1); buzz(2); onChange(); render(); };
+    q$("[data-pmy1]").oninput = e => { f.y1 = Math.max(+e.target.value, f.y0 == null ? yrLo : f.y0); buzz(2); onChange(); render(); };
+    q$("[data-pml0]").oninput = e => { f.l0 = Math.min(+e.target.value, f.l1 == null ? 100 : f.l1); buzz(2); onChange(); render(); };
+    q$("[data-pml1]").oninput = e => { f.l1 = Math.max(+e.target.value, f.l0 == null ? 0 : f.l0); buzz(2); onChange(); render(); };
+  }
+  root.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b || b.disabled || !root.contains(b)) return;
+    const f = s.f, d = b.dataset;
+    if (d.pmreset != null) { s.f = pmFilterFresh(); s.fav = 0; fq = ""; coq = ""; buzz(6); onChange(); return render(); }
+    if (d.pmmore) { fopen[d.pmmore] = true; return render(); }
+    if (d.pmfav != null) s.fav = s.fav ? 0 : 1;
+    else if (d.pmhex) { const h = d.pmhex.toUpperCase(), at = f.hexes.indexOf(h); if (at >= 0) { f.hexes.splice(at, 1); if (!f.hexes.length) f.name = ""; } else { f.hexes.push(h); if (f.hexes.length === 1) { f.name = d.name; f.tol = f.tol || 8; } } }
+    else if (d.pmcolmode) f.colorMode = d.pmcolmode;
+    else if (d.pmhue) f.hueBand = f.hueBand === +d.pmhue ? null : +d.pmhue;
+    else if (d.pmpreset) { const p = pmTimePresets(F).find(x => x[0] === d.pmpreset); if (!p) return; const on = f.y0 === p[2] && f.y1 === p[3]; f.y0 = on ? null : p[2]; f.y1 = on ? null : p[3]; }
+    else if (d.pmregion) pmRegionToggle(f, d.pmregion, F);
+    else if (d.pmco) { const v = +d.pmco, set = new Set(f.coSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.coSet = [...set]; f.region = null; }
+    else if (d.pmmv) { const v = +d.pmmv, set = new Set(f.mvSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.mvSet = [...set]; }
+    else if (d.pmmus) { const v = +d.pmmus, set = new Set(f.musSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.musSet = [...set]; }
+    else if (d.pmp) { const v = +d.pmp, set = new Set(f.painterSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.painterSet = [...set]; }
+    else return;
+    buzz(5); onChange(); render();
+  });
+  return { render };
 }
 
 // ---------- the screen ----------
@@ -1230,7 +1425,7 @@ function pmMount(el, s, F) {
     const [lo, hi] = pmYearRange(F), cur = s.upToYear == null ? hi : s.upToYear;
     if (inp) inp.value = cur;
     const lab = document.querySelector("[data-pmscrublabel]");
-    if (lab) lab.textContent = s.upToYear == null ? "Showing every year" : `Up to ${cur}${cur >= hi ? "" : " (undated paintings join at the end)"}`;
+    if (lab) lab.textContent = s.upToYear == null ? "Showing every year" : `Up to ${cur}${cur >= hi ? "" : ` (undated ${pmColLabel(F, "nounP")} join at the end)`}`;
     const btn = document.querySelector("[data-pmscrubplay]");
     if (btn) { btn.classList.toggle("on", !!scrubTimer); btn.innerHTML = scrubTimer ? PM_ICON.pause : ICON.play; btn.setAttribute("aria-label", scrubTimer ? "Pause" : "Play"); }
   }
@@ -1654,8 +1849,7 @@ function pmMount(el, s, F) {
     // page opener takes the node (or id) directly, no gallery index to resolve. Paintings keep the exact path
     // they always had, including carrying a whole color SET (?c=hex1,hex2…, from a pair/set page's "as a map"
     // link) onto the painting, not just the first one (David, 2026-10-08).
-    if (F.col === "design" && typeof doOpenObject === "function") return doOpenObject(F.nodes[i].id);
-    if (F.col === "photography" && typeof paintingPage === "function") return paintingPage(F.nodes[i]);
+    if (F.col && F.col !== "paintings") { const def = PM_COL_DEF[F.col]; if (def) def.open(F.nodes[i]); return; }
     galleryPage(i, true, s.f.hexes.length > 1 ? s.f.hexes : (s.f.hexes[0] || null), s.f.hexes.length ? s.f.tol : null);
   }
   el.querySelector("[data-pmopen]").onclick = () => { if (centerK >= 0) openK(centerK); };
@@ -1772,10 +1966,10 @@ function pmMount(el, s, F) {
         <div class="cx-sec"><b>Collection</b></div>
         <div class="hm-seg pmx-col-seg" role="radiogroup" aria-label="Collection">${PM_COLLECTIONS.map(([k, t]) => `<button class="${(s.col || "paintings") === k ? "on" : ""}" data-pmcol="${k}">${esc(t)}</button>`).join("")}</div>
         <div class="cx-sec"><b>Shape</b></div>
-        <div class="hm-arr pmx-arr" role="radiogroup" aria-label="Arrange by">${PM_ARR.map(([k, t]) => `
+        <div class="hm-arr pmx-arr" role="radiogroup" aria-label="Arrange by">${PM_ARR.filter(([k]) => k !== "families" || !F.col || F.col === "paintings" || F.meta.movements.length > 1).map(([k, t]) => `
           <button class="hm-arr-b${s.arr === k ? " on" : ""}" data-pmarr="${k}" role="radio" aria-checked="${s.arr === k}">
-            <span class="hm-arr-pic">${PM_ICON[k]}</span><b>${esc(t)}</b></button>`).join("")}</div>
-        <p class="hm-arr-sub">${PM_NEEDS_SEED.has(s.arr) && md ? `Around ${esc(md.t)}` : esc(PM_WHY[s.arr])}</p>
+            <span class="hm-arr-pic">${PM_ICON[k]}</span><b>${esc(pmArrTitle(k, t, F))}</b></button>`).join("")}</div>
+        <p class="hm-arr-sub">${PM_NEEDS_SEED.has(s.arr) && md ? `Around ${esc(md.t)}` : esc(pmArrWhy(s.arr, F))}</p>
         <div class="hm-feel"><label class="hm-feel-row" data-feel="mag"><span class="hm-feel-l">Magnify</span><span class="hm-feel-r"><i>Flat</i><input type="range" min="0" max="1" step="0.01" value="${s.mag == null ? .5 : s.mag}" data-pmmag aria-label="Magnify, flat to fisheye"><i>Fisheye</i></span></label></div>
         ${s.arr === "color" || s.arr === "time" || s.arr === "tones" ? `<div class="cx-sec"><b>Place by</b></div>
           <div class="hm-seg" role="radiogroup" aria-label="Place by">${PM_PLACE.map(([k, t]) => `<button class="${(s.place || "avg") === k ? "on" : ""}" data-pmplace="${k}">${esc(t)}</button>`).join("")}</div>` : ""}
@@ -1785,9 +1979,9 @@ function pmMount(el, s, F) {
           return `<button data-pmcenterk="${k}"${found ? "" : " disabled"}>${esc(t)}</button>`;
         }).join("")}</div>
         <div class="cx-sec"><b>When</b></div>
-        <div class="pmx-scrub"><input type="range" min="${pmYearRange(F)[0]}" max="${pmYearRange(F)[1]}" step="5" value="${s.upToYear == null ? pmYearRange(F)[1] : s.upToYear}" data-pmscrub aria-label="Reveal paintings up to this year">
+        <div class="pmx-scrub"><input type="range" min="${pmYearRange(F)[0]}" max="${pmYearRange(F)[1]}" step="5" value="${s.upToYear == null ? pmYearRange(F)[1] : s.upToYear}" data-pmscrub aria-label="Reveal ${esc(pmColLabel(F, "nounP"))} up to this year">
           <button class="pmx-scrub-play${scrubTimer ? " on" : ""}" data-pmscrubplay aria-label="${scrubTimer ? "Pause" : "Play"}">${scrubTimer ? PM_ICON.pause : ICON.play}</button></div>
-        <p class="hm-arr-sub" data-pmscrublabel>${s.upToYear == null ? "Showing every year" : `Up to ${s.upToYear}${s.upToYear >= pmYearRange(F)[1] ? "" : " (undated paintings join at the end)"}`}</p>`;
+        <p class="hm-arr-sub" data-pmscrublabel>${s.upToYear == null ? "Showing every year" : `Up to ${s.upToYear}${s.upToYear >= pmYearRange(F)[1] ? "" : ` (undated ${pmColLabel(F, "nounP")} join at the end)`}`}</p>`;
       qa$("[data-pmcol]").forEach(b => b.onclick = () => {
         const col = b.dataset.pmcol; if (col === (s.col || "paintings")) return;
         buzz(6); close();
@@ -1823,106 +2017,11 @@ function pmMount(el, s, F) {
       q$("[data-pmmag]").oninput = e => { s.mag = clamp(+e.target.value, 0, 1); M0N = pmM0NOf(s.mag); lensAt(); Z = clamp(Z, zMin(), ZMAX); kick(); };
       q$("[data-pmmag]").onchange = () => { try { ROUTE_NOW = "#/" + pmRouteOf(s, F).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {} };
     }
-    // ---- Filter: every facet with its count, applied live (no separate confirm -- matches the color map's
-    // non-modal Colors/Arrange sheet). David, 2026-10-10: "select multiple things -- a color range, a time
-    // range, multiple countries, or e.g. only Europe" -- Country/Movement/Museum/Painter are now toggle-many
-    // (OR within the facet); Color is a dual-handle year-free range already (f.y0/f.y1) now with presets and a
-    // decade histogram; Color gets multi-pick + an Any/All toggle + a hue-family quick-pick + a lightness
-    // range. pmRun() (not xbRun) does the actual matching and per-value counting for all of it.
-    function renderFilter() {
-      const res = pmRun(s, F), C = res.counts;
-      let n = res.list.length;
-      const favIds = pmFavList(F), favSet = new Set(favIds.map(r => r.i));
-      if (s.fav) n = Array.from(res.list).filter(i => favSet.has(i)).length;
-      const favN = Array.from(res.list).filter(i => favSet.has(i)).length;
-      const chip = (attr, val, label, cnt, on) => `<button class="${on ? "on" : ""}" ${attr}="${esc(String(val))}"${!cnt && !on ? " disabled" : ""}>${esc(label)}${cnt != null ? `<em>${cnt.toLocaleString()}</em>` : ""}</button>`;
-      const f = s.f;
-      const topMulti = (names, countArr, selSet) => names.map((name, j) => ({ name, v: j + 1, n: countArr[j + 1] })).filter(x => x.n || selSet.has(x.v)).sort((a, b) => b.n - a.n);
-      const [yrLo, yrHi] = pmYearRange(F);
-      const y0 = f.y0 == null ? yrLo : f.y0, y1 = f.y1 == null ? yrHi : f.y1;
-      const dLo = Math.max(0, Math.floor((yrLo - XB_DEC0) / 10)), dHi = Math.min(XB_NDEC - 1, Math.floor((yrHi - XB_DEC0) / 10));
-      const decadeBars = Array.from({ length: dHi - dLo + 1 }, (_, k) => C.when[dLo + k]);
-      const maxDecade = Math.max(1, ...decadeBars);
-      const pct = y => clamp((y - yrLo) / (yrHi - yrLo) * 100, 0, 100);
-      const activePreset = PM_TIME_PRESETS.find(p => p[2] === f.y0 && p[3] === f.y1);
-      const cols = [...BASICS, ...ALL].filter(c => !c.basic || /^(Red|Blue|Green|Yellow|Pink|Purple|Orange|Brown)$/.test(c.n));
-      const colsSorted = typeof glHueOrder === "function" ? glHueOrder(cols) : cols;
-      const coSelSet = new Set(f.coSet || []), mvSelSet = new Set(f.mvSet || []), musSelSet = new Set(f.musSet || []), paSelSet = new Set(f.painterSet || []);
-      const cos = topMulti(F.meta.countries, C.co, coSelSet), mvs = topMulti(F.meta.movements, C.mv, mvSelSet);
-      const pas = topMulti(F.meta.artists.map(a => a[0]), C.painter, paSelSet);
-      const musAll = F.G.src.map((m, k) => ({ name: m.short, v: k, n: C.mus[k] })).filter(x => x.n || musSelSet.has(x.v));
-      const coList = coq ? cos.filter(x => x.name.toLowerCase().includes(coq.toLowerCase())).slice(0, 30) : cos.slice(0, fopen.co ? 44 : 10);
-      const pList = fq ? pas.filter(x => x.name.toLowerCase().includes(fq.toLowerCase())).slice(0, 24) : pas.slice(0, fopen.painter ? 60 : 10);
-      const regionRow = PM_REGIONS.map(([key, label, names]) => {
-        const idx = names.map(nm => F.meta.countries.indexOf(nm) + 1).filter(v => v > 0);
-        const on = idx.length > 0 && idx.every(v => coSelSet.has(v));
-        const cnt = idx.reduce((s2, v) => s2 + (C.co[v] || 0), 0);
-        return chip("data-pmregion", key, label, cnt, on);
-      }).join("");
-      const nounP = pmColLabel(F, "nounP"), isPaintings = !F.col || F.col === "paintings";
-      const painterLab = pmColLabel(F, "painter"), coLab = pmColLabel(F, "co"), musLab = pmColLabel(F, "mus"), mvLab = pmColLabel(F, "mv");
-      q$("[data-pmbody]").innerHTML = `
-        <div class="pmx-sh-top"><b>Filter</b><span>${n.toLocaleString()} ${n === 1 ? pmColLabel(F, "noun") : nounP}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
-        ${favIds.length ? `<div class="pmx-row"><span class="pmx-lab">Yours</span><div class="pmx-chips">${chip("data-pmfav", 1, "Your favorites", favN, !!s.fav)}</div></div>` : ""}
-        <div class="pmx-row"><span class="pmx-lab">Color</span><div class="pmx-sw">${colsSorted.map(c => `<button data-pmhex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" class="${f.hexes.includes(c.h.toUpperCase()) ? "on" : ""}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
-          ${f.hexes.length ? `<p class="pmx-cap2">${f.hexes.map(h => `<i style="--c:${h}"></i>`).join("")}${esc(f.hexes.length === 1 ? (f.name || nameOf(f.hexes[0]).text) : f.hexes.length + " colors")} <span>· within ${f.tol}%</span></p>
-          <div class="pmx-scrub"><span class="pmx-lab2">Closeness</span><input type="range" min="1" max="30" step="1" value="${f.tol}" data-pmtol aria-label="Color closeness"></div>
-          ${f.hexes.length > 1 ? `<div class="hm-seg pmx-colmode" role="radiogroup" aria-label="Match any or all colors"><button class="${(f.colorMode || "any") === "any" ? "on" : ""}" data-pmcolmode="any">Any</button><button class="${f.colorMode === "all" ? "on" : ""}" data-pmcolmode="all">All</button></div>` : ""}` : ""}
-          <p class="pmx-lab2">Hue family</p>
-          <div class="pmx-chips">${XB_HUE_WORDS.map((w, j) => chip("data-pmhue", j, w, C.hueBand[j], f.hueBand === j)).join("")}</div>
-          <p class="pmx-lab2">Lightness</p>
-          <div class="pmx-range2" style="--lo:${f.l0 == null ? 0 : f.l0}%;--hi:${f.l1 == null ? 100 : f.l1}%">
-            <input type="range" min="0" max="100" value="${f.l0 == null ? 0 : f.l0}" data-pml0 aria-label="Darker than">
-            <input type="range" min="0" max="100" value="${f.l1 == null ? 100 : f.l1}" data-pml1 aria-label="Lighter than"></div>
-          <p class="pmx-cap3"><span>Dark</span><span>Light</span></p></div>
-        <div class="pmx-row"><span class="pmx-lab">When</span>
-          <div class="pmx-chips">${PM_TIME_PRESETS.map(([k, t, p0, p1]) => chip("data-pmpreset", k, t, null, activePreset && activePreset[0] === k)).join("")}</div>
-          <div class="pmx-hist" aria-hidden="true">${decadeBars.map(n2 => `<i style="--h:${Math.max(.04, n2 / maxDecade)}"></i>`).join("")}</div>
-          <div class="pmx-range2" style="--lo:${pct(y0)}%;--hi:${pct(y1)}%">
-            <input type="range" min="${yrLo}" max="${yrHi}" step="1" value="${y0}" data-pmy0 aria-label="From year">
-            <input type="range" min="${yrLo}" max="${yrHi}" step="1" value="${y1}" data-pmy1 aria-label="To year"></div>
-          <p class="pmx-cap3"><span>${y0}</span><span>${y1}</span></p></div>
-        <div class="pmx-row"><span class="pmx-lab">${esc(coLab)}</span>
-          ${isPaintings ? `<p class="pmx-lab2">Regions</p>
-          <div class="pmx-chips">${regionRow}</div>` : ""}
-          <p class="pmx-lab2">${isPaintings ? "Countries" : coLab}</p>
-          <label class="search pmx-find"><span>${ICON.search}</span><input data-pmcoq type="search" placeholder="Find a ${esc(coLab.toLowerCase())}" value="${esc(coq)}" autocomplete="off"></label>
-          <div class="pmx-chips">${coList.map(x => chip("data-pmco", x.v, x.name, x.n, coSelSet.has(x.v))).join("")}${!coq && !fopen.co && cos.length > 10 ? `<button class="pmx-more" data-pmmore="co">All ${cos.length}</button>` : ""}</div></div>
-        ${mvs.length ? `<div class="pmx-row"><span class="pmx-lab">${esc(mvLab)}</span><div class="pmx-chips">${mvs.map(x => chip("data-pmmv", x.v, x.name, x.n, mvSelSet.has(x.v))).join("")}</div></div>` : ""}
-        <div class="pmx-row"><span class="pmx-lab">${esc(musLab)}</span><div class="pmx-chips">${musAll.map(x => chip("data-pmmus", x.v, x.name, x.n, musSelSet.has(x.v))).join("")}</div></div>
-        <div class="pmx-row"><span class="pmx-lab">${esc(painterLab)}</span>
-          <label class="search pmx-find"><span>${ICON.search}</span><input data-pmq type="search" placeholder="Find a ${esc(painterLab.toLowerCase())}" value="${esc(fq)}" autocomplete="off"></label>
-          <div class="pmx-chips">${pList.map(x => chip("data-pmp", x.v, x.name, x.n, paSelSet.has(x.v))).join("")}${!fq && !fopen.painter && pas.length > 10 ? `<button class="pmx-more" data-pmmore="painter">More ${esc(nounP)}</button>` : ""}</div></div>`;
-      const inp = q$("[data-pmq]");
-      inp.oninput = () => { fq = inp.value.trim(); const pos = inp.selectionStart; renderFilter(); const ni = q$("[data-pmq]"); ni.focus(); try { ni.setSelectionRange(pos, pos); } catch (e) {} };
-      const coInp = q$("[data-pmcoq]");
-      coInp.oninput = () => { coq = coInp.value.trim(); const pos = coInp.selectionStart; renderFilter(); const ni = q$("[data-pmcoq]"); ni.focus(); try { ni.setSelectionRange(pos, pos); } catch (e) {} };
-      // live range sliders: 'input' (not the delegated click below) for drag feedback, kept from crossing past
-      // each other the same way a dual-handle slider always must (y0 can't pass y1, l0 can't pass l1)
-      const tolInp = q$("[data-pmtol]"); if (tolInp) tolInp.oninput = e => { f.tol = +e.target.value; buzz(2); rebuild(); renderFilter(); };
-      q$("[data-pmy0]").oninput = e => { f.y0 = Math.min(+e.target.value, f.y1 == null ? yrHi : f.y1); buzz(2); rebuild(); renderFilter(); };
-      q$("[data-pmy1]").oninput = e => { f.y1 = Math.max(+e.target.value, f.y0 == null ? yrLo : f.y0); buzz(2); rebuild(); renderFilter(); };
-      q$("[data-pml0]").oninput = e => { f.l0 = Math.min(+e.target.value, f.l1 == null ? 100 : f.l1); buzz(2); rebuild(); renderFilter(); };
-      q$("[data-pml1]").oninput = e => { f.l1 = Math.max(+e.target.value, f.l0 == null ? 0 : f.l0); buzz(2); rebuild(); renderFilter(); };
-    }
-    paneFilt.addEventListener("click", e => {
-      const b = e.target.closest("button"); if (!b || b.disabled) return;
-      const f = s.f, d = b.dataset;
-      if (d.pmreset != null) { s.f = pmFilterFresh(); s.fav = 0; fq = ""; coq = ""; buzz(6); rebuild(); return renderFilter(); }
-      if (d.pmmore) { fopen[d.pmmore] = true; return renderFilter(); }
-      if (d.pmfav != null) s.fav = s.fav ? 0 : 1;
-      else if (d.pmhex) { const h = d.pmhex.toUpperCase(), at = f.hexes.indexOf(h); if (at >= 0) { f.hexes.splice(at, 1); if (!f.hexes.length) f.name = ""; } else { f.hexes.push(h); if (f.hexes.length === 1) { f.name = d.name; f.tol = f.tol || 8; } } }
-      else if (d.pmcolmode) f.colorMode = d.pmcolmode;
-      else if (d.pmhue) f.hueBand = f.hueBand === +d.pmhue ? null : +d.pmhue;
-      else if (d.pmpreset) { const p = PM_TIME_PRESETS.find(x => x[0] === d.pmpreset), on = f.y0 === p[2] && f.y1 === p[3]; f.y0 = on ? null : p[2]; f.y1 = on ? null : p[3]; }
-      else if (d.pmregion) pmRegionToggle(f, d.pmregion, F);
-      else if (d.pmco) { const v = +d.pmco, set = new Set(f.coSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.coSet = [...set]; f.region = null; }
-      else if (d.pmmv) { const v = +d.pmmv, set = new Set(f.mvSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.mvSet = [...set]; }
-      else if (d.pmmus) { const v = +d.pmmus, set = new Set(f.musSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.musSet = [...set]; }
-      else if (d.pmp) { const v = +d.pmp, set = new Set(f.painterSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.painterSet = [...set]; }
-      else return;
-      buzz(5); rebuild(); renderFilter();
-    });
+    // ---- Filter: every facet with its count, applied live. The pane itself is pmFilterPane() (below, at the
+    // top level) since 2026-10-11 -- the same component js/archbrowse.js's browse grids open, so the map and the
+    // grids can never drift apart. Paintings render exactly what this function used to render inline.
+    const fpane = pmFilterPane(paneFilt, s, F, () => rebuild());
+    function renderFilter() { fpane.render(); }
     renderArrange(); renderFilter();
   }
   // ---- life cycle

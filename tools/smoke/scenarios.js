@@ -6275,6 +6275,43 @@ scenario("paintmap", "tier 0 (the shared atlas sheet) covers the whole default v
   const t1s = t.ev("PM_CTRL._qaTier1Stats()");
   t.expect(t1s && t1s.want > 0, "no cells asked for a tier-1 sheet after zooming in");
 });
+// Freeze (2026-10-11, before the shared filter pane + archive browse refactor): the PAINTINGS map's default
+// must stay exactly what it was. No col= in the address, the Collection switch on Paintings, the Filter sheet's
+// rows in their order with painting words (Painter/Movement/Museum, Regions + Countries), the four art-history
+// time presets, the eight region chips, and one compact removable chip per facet. If a later change to the
+// shared engine moves any of this for paintings, this fails.
+scenario("paintmap", "the paintings map's default (address, Collection, Filter rows, presets, regions, chips) is unchanged", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "the map to lay out");
+  const sp = t.w.PM_CTRL.spec;
+  t.expect(sp.col === "paintings", `default collection is ${sp.col}`);
+  t.expect(!/col=/.test(t.w.location.hash), `paintings address carries col=: ${t.w.location.hash}`);
+  t.expect(t.text(".pmx-title") === "Paintings", `title: "${t.text(".pmx-title")}"`);
+  t.expect(!!t.$("[data-hm-layer]"), "the Colors|Paintings layer switch is gone");
+  await t.click(".pmx-do", { wait: 400 });
+  await t.waitFor(".pmx-sheet [data-pmcol]", 4000, "the Collection row");
+  const onCol = t.$$(".pmx-sheet [data-pmcol]").filter(b => b.classList.contains("on")).map(b => b.dataset.pmcol);
+  t.expect(onCol.join() === "paintings", `Collection selection: ${onCol}`);
+  t.expect(t.$$(".pmx-sheet [data-pmcol]")[0].dataset.pmcol === "paintings", "Paintings isn't the first collection");
+  await t.click(".pmx-sheet [data-tab='filter']", { wait: 400 });
+  await t.waitFor("[data-pmbody] .pmx-row", 4000, "the filter rows");
+  const labels = t.$$("[data-pmbody] .pmx-row > .pmx-lab").map(x => t.text(x)).join("|");
+  t.expect(labels === "Color|When|Place|Movement|Museum|Painter", `filter rows: ${labels}`);
+  const presets = t.$$("[data-pmpreset]").map(b => b.dataset.pmpreset).join();
+  t.expect(presets === "ren,baroque,1800s,modern", `time presets: ${presets}`);
+  t.expect(t.$$("[data-pmregion]").length === 8, `region chips: ${t.$$("[data-pmregion]").length}`);
+  const sub = t.$$("[data-pmbody] .pmx-lab2").map(x => t.text(x));
+  t.expect(sub.includes("Regions") && sub.includes("Countries") && sub.includes("Hue family") && sub.includes("Lightness"), `sub-labels: ${sub}`);
+  t.expect(t.$$("[data-pmhue]").length === 9, "nine hue families");
+  t.expect(/paintings$/.test(t.text(".pmx-sh-top span")), `count line: ${t.text(".pmx-sh-top span")}`);
+  // one preset + one hue family -> two compact chips, and the address carries them the same way as before
+  await t.click("[data-pmpreset='baroque']", { wait: 300 });
+  await t.click("[data-pmhue='6']", { wait: 300 });
+  t.expect(/y0=1600&y1=1750/.test(t.w.location.hash) && /hb=6/.test(t.w.location.hash) && !/col=/.test(t.w.location.hash), `address: ${t.w.location.hash}`);
+  await t.click("[data-sheet-close]", { wait: 500 });
+  const chips = t.$$(".pmx-xchip").map(b => t.text(b)).join("|");
+  t.expect(chips === "Baroque|Blues", `chips: ${chips}`);
+});
 // David, 2026-10-10: "a more convenient way to view [the other archives]... and even on a map" -- the
 // "Collection" switch (js/paintmap.js's own PM_COLLECTIONS/pmAdapterBuild) lets the SAME map lay out Design
 // objects and Photography, not just Paintings. These three cover the map side of that: the switch itself
@@ -6355,8 +6392,8 @@ scenario("favs", "a painting's heart (now in the top bar) and a double-tap on th
 // Kept shelf (favShelf) shows it under its own "Archives" category, same as Paintings has its own.
 scenario("favs", "a design object hearted from its grid shows up in Studio's Kept, under Archives", async t => {
   await t.open("#/design/browse", { settle: 900 });
-  await t.waitFor("#doBrFeed [data-fvi]", 15000, "a Keep heart on a tile");
-  const tile = t.$$("#doBrFeed [data-pin]")[0], id = tile.dataset.pin;
+  await t.waitFor("[data-ab-feed] [data-fvi]", 15000, "a Keep heart on a tile");
+  const tile = t.$$("[data-ab-feed] [data-pin]")[0], id = tile.dataset.pin;
   await t.click(tile.querySelector("[data-fvi]"), { wait: 500 });
   t.expect(t.ev("Object.keys(S.favItem || {}).length") === 1, "hearting a tile didn't add to S.favItem");
   // the only kept kind so far is Archives, so favShelf() goes straight to its shelf -- no tab bar to choose from
@@ -7044,77 +7081,174 @@ scenario("design", "a big category pages instead of rendering every object at on
 // sortable (date/color/maker), a Keep heart on every tile, and "See on the map" opening js/paintmap.js with
 // Design objects as the Collection. js/photography.js's own grid already had filters; it gets the same Sort +
 // hearts + map link added directly, covered by the second scenario below.
-scenario("design", "Browse all sorts, hearts a tile into Kept, and opens the map with Design objects selected", async t => {
-  await t.open("#/design/browse", { settle: 900 });
-  await t.waitFor(".p-title", 12000, "the Browse all page");
+// ================================================================== THE ARCHIVE BROWSE GRID (js/archbrowse.js, David 2026-10-11:
+// "a proper browse view... reusing the SAME filter-sheet pattern as the paintings map's Filter sheet") -- Design
+// objects, Photography, Ukiyo-e, Botanical & bird plates and Pulp covers all share one grid: the map's own Filter
+// pane (pmFilterPane), Sort, Keep hearts, paging, the address, and "Map" carrying the filter over.
+const AB = {
+  async ready(t, hash, what) {
+    await t.open(hash, { settle: 900 });
+    await t.waitFor("[data-ab-feed] [data-pin]", 20000, `${what}: the grid's first tiles`);
+  },
+  count(t) { return +t.text("[data-ab-count]").replace(/[^0-9]/g, ""); },
+  async openFilter(t) {
+    await t.click("[data-ab-filter]", { wait: 400 });
+    await t.waitFor(".ab-filter-sheet [data-pmbody] .pmx-row", 6000, "the Filter sheet's rows");
+  },
+  labels(t) { return t.$$(".ab-filter-sheet .pmx-row > .pmx-lab").map(x => t.text(x)); },
+  async closeSheet(t) { await t.click(".ab-filter-sheet [data-sheet-close]", { wait: 500 }); await t.waitFor(() => !t.$(".ab-filter-sheet"), 4000, "the sheet to close"); },
+};
+scenario("browse", "Design objects: Browse all uses the map's Filter sheet -- two categories OR, a decade preset ANDs, live counts, removable chips, the address", async t => {
+  await AB.ready(t, "#/design/browse", "Design objects");
   t.expect(/Browse all/.test(t.text(".p-title")), `title was "${t.text(".p-title")}"`);
-  await t.waitFor("#doBrFeed [data-pin]", 12000, "the unsorted grid");
-  await t.click('#doBrSort [data-dbs="date"]', { wait: 500 });
-  await t.waitFor(() => t.$('#doBrSort [data-dbs="date"]').classList.contains("on"), 6000, "the date sort chip to take the \"on\" state");
-  await t.waitFor(() => t.$$("#doBrFeed [data-pin]").length > 0, 8000, "the grid to redraw sorted by date");
-  await t.waitFor("#doBrFeed [data-fvi]", 8000, "a Keep heart on a tile");
-  const before = t.ev("Object.keys(S.favItem || {}).length");
-  await t.click(t.$$("#doBrFeed [data-fvi]")[0], { wait: 500 });
-  await t.waitFor(() => t.ev("Object.keys(S.favItem || {}).length") === before + 1, 6000, "the heart to add one kept item");
-  t.expect(t.ev("Object.values(S.favItem).some(r => r.kind === 'design')"), "the new Kept entry wasn't tagged kind: \"design\"");
-  await t.click("[data-do-map]", { wait: 900 });
-  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec && t.w.PM_CTRL.spec.col === "design", 15000, "the map to open with Design objects as the Collection");
+  const total = AB.count(t);
+  t.expect(total > 10000, `count line says ${total}`);
+  // paged, never the whole archive at once (the stuck-screen bound)
+  t.expect(t.$$("[data-ab-feed] [data-pin]").length <= 60, `rendered ${t.$$("[data-ab-feed] [data-pin]").length} tiles at once`);
+  t.expect(!!t.$("[data-ab-more]"), "no Show more");
+  await AB.openFilter(t);
+  const labels = AB.labels(t).join("|");
+  t.expect(labels === "Color|When|Place|Category|Museum|Maker", `rows: ${labels}`);
+  t.expect(t.$$(".ab-filter-sheet .pmx-hist i").length > 5, "no decade histogram");
+  const cats = t.$$(".ab-filter-sheet [data-pmmv]");
+  t.expect(cats.length >= 5, "category chips missing");
+  const nA = +t.text(cats[0].querySelector("em")).replace(/\D/g, ""), nB = +t.text(cats[1].querySelector("em")).replace(/\D/g, "");
+  await t.click(cats[0], { wait: 300 });
+  await t.click(t.$$(".ab-filter-sheet [data-pmmv]").find(b => !b.classList.contains("on")), { wait: 300 });
+  t.expect(AB.count(t) === nA + nB, `two categories should OR: ${AB.count(t)} vs ${nA}+${nB}`);
+  const presets = t.$$(".ab-filter-sheet [data-pmpreset]");
+  t.expect(presets.length >= 3 && presets.every(b => !b.disabled), `time presets: ${presets.length}, some disabled`);
+  const two = AB.count(t);
+  await t.click(presets[1], { wait: 300 });
+  t.expect(AB.count(t) > 0 && AB.count(t) < two, `a decade preset should AND: ${AB.count(t)} of ${two}`);
+  t.expect(/[?&]mv=/.test(t.w.location.hash) && /[?&]y0=/.test(t.w.location.hash), `address: ${t.w.location.hash}`);
+  // every tile in the grid satisfies the filter (checked through the adapter, not the DOM text)
+  const ok = t.ev(`(() => { const F = PM_COL_F_READY.get("design"), st = AB_STATE.get("design"), want = new Set(st.s.f.mvSet);
+    return [...document.querySelectorAll("[data-ab-feed] [data-pin]")].every(b => { const i = F.ixOf(b.dataset.pin), y = F.G.year[i]; return want.has(F.mv[i]) && y >= st.s.f.y0 && y <= st.s.f.y1; }); })()`);
+  t.expect(ok, "a tile in the grid doesn't satisfy the filter");
+  await AB.closeSheet(t);
+  const chips = t.$$("[data-ab-chips] [data-ab-clear]").map(b => t.text(b));
+  t.expect(chips.length === 2 && chips.some(c => /categories/.test(c)), `chips: ${JSON.stringify(chips)}`);
+  await t.click("[data-ab-chips] [data-ab-clear]", { wait: 400 });
+  t.expect(t.$$("[data-ab-chips] [data-ab-clear]").length === 1, "a chip's × didn't clear its facet");
+  // the address reopens the same grid
+  const hash = t.w.location.hash, n = AB.count(t);
+  await AB.ready(t, hash, "the shared address");
+  t.expect(AB.count(t) === n, `the address reopened ${AB.count(t)}, not ${n}`);
 });
-scenario("design", "Photography's grid sorts, hearts a tile into Kept, and opens the map with Photography selected", async t => {
-  await t.open("#/photography", { settle: 900 });
-  await t.waitFor("#phFeed .pin", 12000, "the photography grid");
-  await t.click('#phSort [data-phs="date"]', { wait: 500 });
-  await t.waitFor(() => t.$$("#phFeed .pin").length > 0, 8000, "the grid to redraw sorted by date");
-  await t.waitFor("#phFeed [data-fvi]", 8000, "a Keep heart on a tile");
-  const before = t.ev("Object.keys(S.favItem || {}).length");
-  await t.click(t.$$("#phFeed [data-fvi]")[0], { wait: 500 });
-  await t.waitFor(() => t.ev("Object.keys(S.favItem || {}).length") === before + 1, 6000, "the heart to add one kept item");
-  t.expect(t.ev("Object.values(S.favItem).some(r => r.kind === 'photography')"), "the new Kept entry wasn't tagged kind: \"photography\"");
-  await t.click("[data-ph-map]", { wait: 900 });
-  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec && t.w.PM_CTRL.spec.col === "photography", 15000, "the map to open with Photography as the Collection");
+scenario("browse", "Design objects: Sort by date (both ways), color and maker; Show more pages; ‹ leaves Browse all", async t => {
+  await t.open("#/design", { settle: 900 });
+  await t.waitFor("[data-do-browse]", 15000, "the room");
+  await t.click("[data-do-browse]", { wait: 600 });
+  await t.waitFor("[data-ab-feed] [data-pin]", 20000, "Browse all");
+  const yearsOf = () => t.ev(`(() => { const F = PM_COL_F_READY.get("design"); return [...document.querySelectorAll("[data-ab-feed] .masonry [data-pin]")].map(b => F.G.year[F.ixOf(b.dataset.pin)]); })()`);
+  await t.click('[data-ab-sortk="date"]', { wait: 400 });
+  const ord = t.ev(`(() => { const F = PM_COL_F_READY.get("design"), st = AB_STATE.get("design"); return abSorted(pmList(st.s, F), st, F).slice(0, 60).map(i => F.G.year[i]); })()`);
+  t.expect(ord.every((y, k) => !k || y >= ord[k - 1]), "Oldest first isn't ascending");
+  t.expect(/Oldest/.test(t.text('[data-ab-sortk="date"]')), `date button reads "${t.text('[data-ab-sortk="date"]')}"`);
+  await t.click('[data-ab-sortk="date"]', { wait: 400 });
+  t.expect(/Newest/.test(t.text('[data-ab-sortk="date"]')), "a second tap didn't flip to Newest");
+  const ord2 = t.ev(`(() => { const F = PM_COL_F_READY.get("design"), st = AB_STATE.get("design"); return abSorted(pmList(st.s, F), st, F).slice(0, 60).map(i => F.G.year[i]); })()`);
+  t.expect(ord2.every((y, k) => !k || y <= ord2[k - 1]), "Newest first isn't descending");
+  t.expect(yearsOf().length > 0, "the grid is empty after sorting");
+  await t.click('[data-ab-sortk="color"]', { wait: 400 });
+  t.expect(t.$('[data-ab-sortk="color"]').classList.contains("on"), "Color didn't take");
+  await t.click('[data-ab-sortk="maker"]', { wait: 400 });
+  t.expect(t.text('[data-ab-sortk="maker"]') === "Maker", `maker sort is labeled "${t.text('[data-ab-sortk="maker"]')}"`);
+  const before = t.$$("[data-ab-feed] [data-pin]").length;
+  await t.click("[data-ab-more]", { wait: 500 });
+  t.expect(t.$$("[data-ab-feed] [data-pin]").length === before + 60, "Show more didn't add 60");
+  await t.click("[data-back]", { wait: 700 });
+  await t.waitFor(() => /#\/design$/.test(t.w.location.hash) && !t.$("[data-ab-feed]"), 8000, "‹ to leave Browse all for the room (one tap)");
 });
-// ================================================================== UKIYO-E PRINTS (js/ukiyoe.js, Archives lane)
-scenario("design", "the ukiyo-e grid opens with filters and a print opens with facts", async t => {
-  await t.open("#/ukiyoe", { settle: 900 });
-  await t.waitFor(".p-title", 15000, "the ukiyo-e room");
-  t.expect(/Ukiyo-e prints/.test(t.text(".p-title")), `room title was "${t.text(".p-title")}"`);
-  await t.waitFor("#ukFeed .pin", 12000, "at least one print in the grid");
-  const before = t.text(".p-title");
-  await t.click(t.$$("#ukFeed .pin")[0], { wait: 600 });
-  await t.waitFor(() => t.text(".p-title") !== before, 10000, "the print page to open");
-  await t.waitFor(".palette .pal", 8000, "the print's palette");
-  t.expect(t.$(".facts"), "no artist/date facts row on the print page");
+scenario("browse", "Photography has full parity: photographer/decade/place/process/color filters, sort, a Keep heart on tile and page (one store, in Kept), and Map carries the filter", async t => {
+  await AB.ready(t, "#/photography", "Photography");
+  await AB.openFilter(t);
+  const labels = AB.labels(t).join("|");
+  t.expect(labels === "Color|When|Place|Process|Photographer", `rows: ${labels}`);
+  const proc = t.$$(".ab-filter-sheet [data-pmmv]").map(b => t.text(b));
+  t.expect(proc.length === 3, `processes: ${JSON.stringify(proc)}`);
+  await t.click(".ab-filter-sheet [data-pmmv]", { wait: 300 });
+  await t.click(".ab-filter-sheet [data-pmhue='6']", { wait: 300 });
+  const n = AB.count(t);
+  t.expect(n > 0, "process + Blues left nothing");
+  await AB.closeSheet(t);
+  t.expect(!!t.$(".ph-how"), "one process picked, but no 'How it made color' link");
+  // Keep from the tile, then the page's own heart shows it kept (the same store), un-keep from the page
+  const tile = t.$("[data-ab-feed] [data-pin]"), id = tile.dataset.pin;
+  await t.click(tile.querySelector("[data-fvi]"), { wait: 400 });
+  t.expect(t.ev(`!!(S.favItem || {})[${JSON.stringify(id)}] && S.favItem[${JSON.stringify(id)}].kind === "photography"`), "the tile heart didn't keep it as photography");
+  await t.click(tile, { wait: 700 });
+  await t.waitFor(".art-top [data-fvi]", 8000, "the photo page's own heart");
+  t.expect(t.$(".art-top [data-fvi]").getAttribute("aria-pressed") === "true", "the page heart doesn't show it kept");
+  await t.click(".art-top [data-fvi]", { wait: 400 });
+  t.expect(!t.ev(`(S.favItem || {})[${JSON.stringify(id)}]`), "the page heart didn't un-keep it");
+  await t.click(".art-top [data-fvi]", { wait: 400 });
+  t.ev("S.fvCat = 'all'; save(); favShelf()");
+  await t.waitFor(`[data-fvi-open="${id}"]`, 6000, "the photo in Kept");
+  // back to the grid: the filter is still there, and Map carries it to the map
+  await AB.ready(t, "#/photography", "Photography again");
+  t.ev(`(() => { const st = AB_STATE.get("photography"); st.s.f.y0 = 1939; st.s.f.y1 = 1943; })()`);
+  await t.click("[data-ab-map]", { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec && t.w.PM_CTRL.spec.col === "photography" && t.w.PM_CTRL.count > 0, 20000, "the map with Photography");
+  t.expect(t.w.PM_CTRL.spec.f.y0 === 1939 && t.w.PM_CTRL.spec.f.y1 === 1943, `the map didn't get the year range: ${t.w.PM_CTRL.spec.f.y0}-${t.w.PM_CTRL.spec.f.y1}`);
 });
-scenario("design", "the ukiyo-e grid filters by artist", async t => {
-  await t.open("#/ukiyoe", { settle: 900 });
-  await t.waitFor("#ukChips [data-uf]", 12000, "artist/decade chips");
-  const artistChip = t.$$('#ukChips [data-uf="artist"]')[1];
-  t.expect(artistChip, "no specific artist chip rendered");
-  const beforeCount = (t.$$("#ukFeed .pin") || []).length;
-  await t.click(artistChip, { wait: 500 });
-  await t.waitFor(() => (t.$$("#ukFeed .pin") || []).length !== beforeCount || t.$(".fine"), 8000, "the grid to refilter");
+scenario("browse", "a filtered Photography address opens with its filter and sort", async t => {
+  await AB.ready(t, "#/photography?y0=1939&y1=1943&sort=date&desc=1", "Photography by address");
+  const st = t.ev(`(() => { const s = AB_STATE.get("photography"); return { y0: s.s.f.y0, y1: s.s.f.y1, sort: s.sort, desc: s.desc }; })()`);
+  t.expect(st.y0 === 1939 && st.y1 === 1943 && st.sort === "date" && st.desc, `state: ${JSON.stringify(st)}`);
+  t.expect(t.$$("[data-ab-chips] [data-ab-clear]").length === 1, "no year chip");
+  t.expect(/Newest/.test(t.text('[data-ab-sortk="date"]')), "sort didn't come from the address");
 });
-
-// ================================================================== BOTANICAL & BIRD PLATES (js/botanicalplates.js, Archives lane)
-scenario("design", "the botanical grid opens with bird/plant filters and a plate opens with facts", async t => {
-  await t.open("#/botanical", { settle: 900 });
-  await t.waitFor(".p-title", 15000, "the botanical room");
-  t.expect(/Botanical/.test(t.text(".p-title")), `room title was "${t.text(".p-title")}"`);
-  await t.waitFor("#bpFeed .pin", 12000, "at least one plate in the grid");
-  const before = t.text(".p-title");
-  await t.click(t.$$("#bpFeed .pin")[0], { wait: 600 });
-  await t.waitFor(() => t.text(".p-title") !== before, 10000, "the plate page to open");
-  await t.waitFor(".palette .pal", 8000, "the plate's palette");
+for (const [hash, col, what, pageSel] of [["#/ukiyoe", "ukiyoe", "Ukiyo-e", ".palette .pal"], ["#/botanical", "botanical", "Botanical & bird plates", ".palette .pal"], ["#/pulp", "pulp", "Pulp covers", ".palette .pal"]]) {
+  scenario("browse", `${what}: the shared grid filters by its own facets, sorts, keeps, and a tile opens its page`, async t => {
+    await AB.ready(t, hash, what);
+    const total = AB.count(t);
+    await AB.openFilter(t);
+    const labels = AB.labels(t);
+    t.expect(labels[0] === "Color" && labels[1] === "When" && labels.length >= 3, `rows: ${labels}`);
+    const pick = t.$(".ab-filter-sheet [data-pmmv]:not([disabled])") || t.$(".ab-filter-sheet [data-pmp]:not([disabled])") || t.$(".ab-filter-sheet [data-pmmus]:not([disabled])");
+    t.expect(pick, "no facet chip to pick");
+    await t.click(pick, { wait: 300 });
+    t.expect(AB.count(t) > 0 && AB.count(t) < total, `picking one facet value: ${AB.count(t)} of ${total}`);
+    await AB.closeSheet(t);
+    await t.click('[data-ab-sortk="color"]', { wait: 400 });
+    const tile = t.$("[data-ab-feed] [data-pin]");
+    await t.click(tile.querySelector("[data-fvi]"), { wait: 400 });
+    t.expect(t.ev(`Object.values(S.favItem || {}).some(r => r.kind === ${JSON.stringify(col)})`), "the heart didn't keep it");
+    const title = t.text(".p-title");
+    await t.click(tile, { wait: 700 });
+    await t.waitFor(() => t.text(".p-title") !== title && t.$(pageSel), 10000, "the item's own page");
+    t.expect(t.$(".art-top [data-fvi]") && t.$(".art-top [data-fvi]").getAttribute("aria-pressed") === "true", "the page heart doesn't show it kept");
+    // Kept opens it again through the same registry
+    t.ev("S.fvCat = 'all'; save(); favShelf()");
+    await t.waitFor("[data-fvi-open]", 6000, "Kept");
+    await t.click("[data-fvi-open]", { wait: 900 });
+    await t.waitFor(() => t.$(pageSel), 10000, "the kept item to open from Kept");
+  });
+}
+scenario("browse", "an empty result says so and offers to clear; Clear the filters brings everything back", async t => {
+  // Blues whose average lightness is exactly 100: nothing can match
+  await t.open("#/pulp?hb=6&l0=100&l1=100", { settle: 900 });
+  await t.waitFor(".ab-empty", 6000, "the empty state");
+  t.expect(/match all of that/.test(t.text(".ab-empty")), `empty copy: ${t.text(".ab-empty")}`);
+  await t.click(".ab-empty [data-ab-clearall]", { wait: 400 });
+  await t.waitFor("[data-ab-feed] [data-pin]", 6000, "the covers back");
+  t.expect(!t.$$("[data-ab-chips] [data-ab-clear]").length, "chips left after Clear");
 });
-scenario("design", "the botanical grid filters birds vs. botanical", async t => {
-  await t.open("#/botanical", { settle: 900 });
-  await t.waitFor("#bpChips [data-bf]", 12000, "kind/decade chips");
-  const birdChip = t.$$('#bpChips [data-bf="kind"][data-bv="bird"]')[0];
-  t.expect(birdChip, "no Birds filter chip rendered");
-  await t.click(birdChip, { wait: 500 });
-  await t.waitFor(() => t.$$("#bpFeed .pin").length > 0 || t.$(".fine"), 8000, "the grid to show only birds");
+scenario("paintmap", "the map's Collection picker lays out Ukiyo-e, plates and pulp, with each archive's own Filter rows", async t => {
+  for (const [col, row] of [["ukiyoe", "Artist"], ["botanical", "Kind"], ["pulp", "Magazine"], ["design", "Category"]]) {
+    await t.open(`#/paintings/map?col=${col}&arr=color`, { settle: 800 });
+    await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec && t.w.PM_CTRL.spec.col === col && t.w.PM_CTRL.count > 100 && t.w.PM_CTRL.drawn > 5, 20000, `the map to lay out ${col}`);
+    await t.click(".pmx-do", { wait: 400 });
+    await t.waitFor(".pmx-sheet [data-pmcol]", 4000, "the Collection row");
+    t.expect(t.$(`.pmx-sheet [data-pmcol="${col}"]`).classList.contains("on"), `${col} isn't the selected collection`);
+    await t.click(".pmx-sheet [data-tab='filter']", { wait: 400 });
+    const labels = t.$$("[data-pmbody] .pmx-row > .pmx-lab").map(x => t.text(x));
+    t.expect(labels.includes(row) && !labels.includes("Painter"), `${col} rows: ${labels}`);
+    t.expect(!t.$("[data-pmregion]"), `${col} shows painting regions`);
+  }
 });
-
 // ================================================================== PALETTE ENGINE: selector grid, Harmonies,
 // Shuffle, Save, Edit (David, 2026-10-10: "the palette extractions/selectors... scrolling through that top row
 // isn't convenient" / "Harmonies is a very important one" / "derive different palettes" / "how do we save a

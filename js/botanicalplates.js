@@ -27,6 +27,8 @@ let BP_WAIT_Q = [];
 const BP_SRC_LABEL = { audubon: "Wikimedia Commons (The Birds of America)", curtis: "Wikimedia Commons (Curtis's Botanical Magazine)",
   "redoute-fleurs": "Wikimedia Commons (Choix des plus belles fleurs)", "redoute-roses": "Wikimedia Commons (Les Roses)" };
 const BP_KIND_LABEL = { bird: "Bird plate", plant: "Botanical plate" };
+// the book each plate comes from, as the map/browse "Book" facet names it (js/paintmap.js PM_COL_CFG.botanical)
+const BP_BOOK_LABEL = { audubon: "The Birds of America", curtis: "Curtis's Botanical Magazine", "redoute-fleurs": "Choix des plus belles fleurs", "redoute-roses": "Les Roses" };
 
 // ---------------------------------------------------------------- cross-links to data/botany.js's color-word plants
 let BP_PLANT_RX = null;
@@ -133,57 +135,23 @@ function bpOpenPlate(id) {
 }
 
 // ---------------------------------------------------------------- facets + filter state
-let BP_FILTER = { kind: "", decade: null };
-function bpFacets(rows) {
-  const decadeCounts = new Map();
-  rows.forEach(r => { if (r.decade != null) decadeCounts.set(r.decade, (decadeCounts.get(r.decade) || 0) + 1); });
-  return { decades: [...decadeCounts.entries()].sort((a, b) => a[0] - b[0]).map(([d]) => d) };
-}
-function bpFiltered() {
-  return BP.filter(n => (!BP_FILTER.kind || n.kindRaw === BP_FILTER.kind) && (BP_FILTER.decade == null || n.decade === BP_FILTER.decade));
-}
-
 // ---------------------------------------------------------------- the grid, #/botanical
 function bpGrid(push = true) {
   if (!BP) { bpWhen(() => bpGrid(push)); return; }
-  BP_FILTER = { kind: "", decade: null };
   const nBird = BP.filter(n => n.kindRaw === "bird").length, nPlant = BP.length - nBird;
   const el = show(`
     ${worldTop("Botanical & bird plates")}
     <h1 class="p-title">Botanical &amp; bird plates</h1>
     <p class="p-dek">${BP.length.toLocaleString()} hand-colored natural-history plates, public domain, from Wikimedia Commons: ${nBird.toLocaleString()} birds (Audubon's "The Birds of America"), ${nPlant.toLocaleString()} botanical (Curtis's Botanical Magazine and Pierre-Joseph Redouté). Painted, then engraved and hand-colored plate by plate — no two copies are quite identical.</p>
-    <div class="art-bubbles" id="bpChips" role="tablist"></div>
-    <div id="bpFeed"></div>
+    <div data-ab-host></div>
     <p class="fine">Colors are as scanned or photographed: hand-applied color over a printed plate, aged paper, and a photography pass all sit between a plate and the hex shown.</p>
   `, "article wd");
   // David, 2026-10-10 (js/designobjects.js carries the full note): bpGrid is ROUTED, so trail.js already
   // joined it as "r:botanical" when show() ran just above -- pushing the same token again here duplicated it.
   worldBackWire(el, {}, () => (typeof xToOrigin === "function" ? xToOrigin() : exploreHome()));
-  const draw = () => {
-    const rows = bpFiltered(), { decades } = bpFacets(BP);
-    const chip = (label, on, attr) => `<button class="art-bubble pulp-chip${on ? " on" : ""}" ${attr}>${esc(label)}</button>`;
-    const chips = el.querySelector("#bpChips");
-    if (chips) chips.innerHTML = [
-      chip("All", !BP_FILTER.kind, 'data-bf="kind" data-bv=""'),
-      chip("Birds", BP_FILTER.kind === "bird", 'data-bf="kind" data-bv="bird"'),
-      chip("Botanical", BP_FILTER.kind === "plant", 'data-bf="kind" data-bv="plant"'),
-    ].join("") + `<span style="width:10px"></span>` + [
-      chip("All decades", BP_FILTER.decade == null, 'data-bf="decade" data-bv=""'),
-      ...decades.map(d => chip(d + "s", BP_FILTER.decade === d, `data-bf="decade" data-bv="${d}"`)),
-    ].join("");
-    const feed = el.querySelector("#bpFeed");
-    if (feed) feed.innerHTML = rows.length ? masonry(rows.map(n => pin(n))) : `<p class="fine">No plates match. Try fewer filters.</p>`;
-  };
-  el.querySelector("#bpChips").onclick = e => {
-    const b = e.target.closest("[data-bf]"); if (!b) return;
-    const key = b.dataset.bf, v = b.dataset.bv;
-    BP_FILTER[key] = key === "decade" ? (v === "" ? null : +v) : v;
-    buzz(6); draw();
-  };
-  el.addEventListener("click", e => {
-    const p = e.target.closest("[data-pin]"); if (p) { const n = BP_BY_ID.get(p.dataset.pin); if (n) bpOpenPlate(n.id); }
-  });
-  draw();
+  // the grid: js/archbrowse.js's shared one (the painting map's Filter sheet: birds or plants, the book, artist,
+  // a decade range, color; Sort; Keep hearts; the map) -- David, 2026-10-11
+  abMount(el.querySelector("[data-ab-host]"), "botanical", { fresh: push });
 }
 
 // ---------------------------------------------------------------- the World door tile
