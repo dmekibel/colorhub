@@ -3583,11 +3583,13 @@ scenario("map", "the per-cell seam stroke doesn't slow a continuous pan+pinch on
   t.expect(mean < 60 && p95 < 80, `frame time regressed badly: mean ${mean.toFixed(1)}ms, p95 ${p95.toFixed(1)}ms over ${log.length} frames`);
   t.notes.push(`${log.length} frames, mean ${mean.toFixed(1)}ms, p95 ${p95.toFixed(1)}ms`);
 });
-// David, 2026-10-09: "zoomed-out view of honeycomb spiral looks like circles" -- honeyCells()'s own tiny-bubble
-// shortcut (under 7px, too many to afford the real per-neighbor polygon clip) used to always fall back to a
-// plain circle, even in Honeycomb look. It now hands tiny bubbles a cheap fixed regular hexagon instead, so the
-// mosaic still reads as tiled at low zoom; Bubbles look is untouched (still plain circles, on purpose).
-scenario("map", "Tiny cells draw as plain circles at low zoom (the original look); frame time holds", async t => {
+// David, 2026-10-11 ("no gaps at any zoom"): honeyCells()'s tiny-bubble path (under 7px, too many to afford a
+// full-resolution polygon clip) now runs the SAME real power-diagram clip as an ordinary cell, just starting from
+// a cheaper 8-sided polygon instead of 24 -- not a plain circle, and not a fixed hexagon either (that e5db1847
+// attempt never tiled the spiral layout cleanly and was reverted; this is a different fix: a real per-neighbor
+// clip, just cheap). Every tiled tiny cell should come out a real polygon; Bubbles look is untouched (still
+// plain circles, on purpose).
+scenario("map", "Tiny cells tile as real (cheap) power-diagram polygons at low zoom; frame time holds", async t => {
   await H.homeReady(t);
   // Deep zoomed out (_qaForceZoom: a QA-only bypass of the ordinary zoom(z) clamp -- js/honey.js's own pinch-out
   // floor, raised earlier this chapter so "the whole layout fits", means a RESTING zoom rarely pushes a dense
@@ -3600,7 +3602,7 @@ scenario("map", "Tiny cells draw as plain circles at low zoom (the original look
   await t.sleep(200);
   const honeyStat = t.ev("HM_CTRL._tinyPolyStat()");
   t.expect(honeyStat.tiny > 20, `too few tiny cells to judge at this zoom (${honeyStat.tiny})`);
-  t.expect(honeyStat.poly === 0, `Honeycomb: ${honeyStat.poly}/${honeyStat.tiny} tiny cells drew as fixed hexagons (reverted: they should be circles)`);
+  t.expect(honeyStat.poly >= honeyStat.tiny * .95, `Honeycomb: only ${honeyStat.poly}/${honeyStat.tiny} tiny cells tiled (nearly every one should be a real polygon now)`);
   t.notes.push(`Honeycomb: ${honeyStat.poly}/${honeyStat.tiny} tiny cells tiled, ${honeyStat.total} drawn`);
   // Bubbles: the same tiny bubbles should still be plain circles (no regression the other way)
   t.ev('S.hm.style = "current"; hmHome();');

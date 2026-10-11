@@ -699,22 +699,14 @@ const honeyExtent = (theta, r, shapeAmt) => shapeAmt <= .02 ? r : r * (1 - shape
 //   shape 0 = the largest circle that fits in the cell (touching its nearest neighbors across the same gap)
 //   between = the circle blended toward the cell, so the corners round off
 // A bubble at the edge of what's drawn (neighbors culled) is also bounded by its own lens size, so it never balloons.
-// A unit regular hexagon (pointy-top, the same orientation as hmLookIcon's own honeycomb glyph in js/home.js),
-// reused below as the cheap tiled-cell shape for tiny bubbles -- six precomputed points, scaled per bubble by a
-// single multiply, instead of the full per-neighbor polygon clip.
-const HONEY_HEX_UNIT = Array.from({ length: 6 }, (_, i) => { const a = (i * 60 + 30) * Math.PI / 180; return [Math.cos(a), Math.sin(a)]; });
 function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {   // clipAll (L18 glide): clip even tiny bubbles   // grow: how far a bubble may swell past its own lens size, as a fraction of its diameter
   if (!drawn.length) return;
   // Speed: the grid is sized to a TYPICAL bubble (not the biggest, which put thousands of tiny ones in every lookup),
   // and each bubble searches only as many cells as its own size needs. Bubbles (shape 0) keep their exact old path
-  // below unconditionally (David: "keep Bubbles exactly as it is") -- the rewrite below only touches a TILED look
-  // (shape > 0), tiny cells included: a tiled cell under ~7px still skips building a real polygon (too expensive on
-  // a few thousand of them, and invisible at that size anyway), but its radius now comes from its real neighbors'
-  // power bisectors too, not a self-only guess -- see the note just below for why that guess was the actual bug.
-  // Reverted (David, 2026-10-10: "Why is my honeycomb still broken... bring it back to how it was"): the fixed
-  // tiny hexagons (e5db1847) never tiled the spiral layout cleanly; tiny tiled cells fall back to a bisector
-  // circle, not a fixed hexagon.
-  const tinyHex = null;
+  // below unconditionally (David: "keep Bubbles exactly as it is"). A TILED look (shape > 0) always gets a real
+  // power-diagram polygon now, tiny cells included (David, 2026-10-11: "no gaps at any zoom") -- clipTiled() below
+  // just gives a tiny cell fewer starting sides (8, vs 24 for an ordinary one) to keep a few thousand of them
+  // affordable; both sizes are the same real clip, so nothing visibly pops as a cell crosses that cost threshold.
   const ds = drawn.map(b => b.d).sort((a, c) => a - c), typ = ds[Math.floor(ds.length / 2)] || 8, maxD = ds[ds.length - 1] || 8;
   const cell = Math.max(4, typ * 1.3, maxD * 1.5 / 12), grid = new Map(), key = (i, j) => i * 100003 + j;
   drawn.forEach((b, n) => { const k = key(Math.floor(b.x / cell), Math.floor(b.y / cell)); let a = grid.get(k); if (!a) grid.set(k, a = []); a.push(n); });
@@ -742,28 +734,57 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
   // the big-vs-small neighbor pairs this fix is for.
   const tileReach = d => Math.min(16, Math.ceil((d + maxD) * 1.7 / cell));
   const tileCull = (d, dOther) => (d + dOther) * 1.7;
+  // Build a tiled cell's real shape: start from an nSides-gon of radius R0 (generous -- it must never be the thing
+  // that caps a big cell before it ever reaches its real neighbors; see the power-bisector note above for why that
+  // was the original Magnify-ring bug), then clip it against every real neighbor's power bisector. Where a real
+  // neighbor exists the result is exact; where none does (the open edge of the whole set) the cell is still bounded
+  // by this same generous, nearly-round nSides-gon, so that edge reads as a smooth, round silhouette rather than a
+  // spiky one -- not a tight hug (tried pulling an open vertex in to the cell's own smaller natural radius, David
+  // 2026-10-11: that moved only ONE vertex per open run and left its straight neighboring edge cutting across the
+  // middle of the cell -- a worse, sharper notch than the plain bulge it was meant to fix; reverted). The seam
+  // itself (bisect()'s own half-gap inset) is untouched either way, so two real neighbors still meet at exactly
+  // gapPx everywhere, big cell or small.
+  function clipTiled(n, b, nSides, R0) {
+    const reach = tileReach(b.d), ci0 = Math.floor(b.x / cell), cj0 = Math.floor(b.y / cell);
+    let poly = [];
+    for (let i = 0; i < nSides; i++) { const t = i / nSides * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
+    for (let i = ci0 - reach; i <= ci0 + reach && poly.length; i++) for (let j = cj0 - reach; j <= cj0 + reach && poly.length; j++) {
+      const a = grid.get(key(i, j)); if (!a) continue;
+      for (const m of a) {
+        if (m === n) continue;
+        const o = drawn[m], vx = o.x - b.x, vy = o.y - b.y, dist = Math.hypot(vx, vy);
+        if (dist < 1e-6 || dist > tileCull(b.d, r0[m] * 2)) continue;
+        const ux = vx / dist, uy = vy / dist, lim = bisect(n, m, dist);
+        // keep the side of the power bisector (moved back by half the gap) that faces this bubble
+        const out = [];
+        for (let k = 0; k < poly.length; k++) {
+          const p = poly[k], q = poly[(k + 1) % poly.length], dp = p[0] * ux + p[1] * uy - lim, dq = q[0] * ux + q[1] * uy - lim;
+          if (dp <= 0) out.push(p);
+          if ((dp <= 0) !== (dq <= 0)) { const t = dp / (dp - dq); out.push([p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t]); }
+        }
+        poly = out;
+      }
+    }
+    // the inscribed circle: the nearest edge line to the center
+    let rin = Infinity;
+    for (let k = 0; k < poly.length; k++) {
+      const p = poly[k], q = poly[(k + 1) % poly.length], ex = q[0] - p[0], ey = q[1] - p[1], len = Math.hypot(ex, ey);
+      if (len < 1e-9) continue;
+      rin = Math.min(rin, Math.abs(p[0] * ey - p[1] * ex) / len);
+    }
+    return poly.length >= 3 ? { poly, rin: isFinite(rin) ? rin : 0 } : { poly: null, rin: 0 };
+  }
   drawn.forEach((b, n) => {
     if (b.d < 7 && !clipAll) {
       if (shapeAmt <= .02) {   // Bubbles: unchanged self-only guess (forgiving at circle size; see honeyWhere above)
         let rin = Math.max(0, b.d * .44 - half);
         b.poly = null; b.rin = rin; b.d0 = b.d; b.d = 2 * rin; return;
       }
-      // a tiny tiled cell: still drawn as a plain circle (too small for straight edges to read), but sized from
-      // its real neighbors via the same power bisector the big cells use below -- not the self-only guess, which
-      // had no idea a Magnify-sized neighbor might be sitting right next to it.
-      const reach = tileReach(b.d), ci0 = Math.floor(b.x / cell), cj0 = Math.floor(b.y / cell);
-      let r = b.d * .78;
-      for (let i = ci0 - reach; i <= ci0 + reach; i++) for (let j = cj0 - reach; j <= cj0 + reach; j++) {
-        const a = grid.get(key(i, j)); if (!a) continue;
-        for (const m of a) {
-          if (m === n) continue;
-          const dist = Math.hypot(drawn[m].x - b.x, drawn[m].y - b.y);
-          if (dist < 1e-6 || dist > tileCull(b.d, r0[m] * 2)) continue;
-          const lim = bisect(n, m, dist);
-          if (lim < r) r = lim;
-        }
-      }
-      b.poly = null; b.rin = Math.max(0, r); b.d0 = b.d; b.d = 2 * b.rin; return;
+      // a tiny tiled cell: the SAME real power-diagram clip as an ordinary one, just a cheaper 8-sided start --
+      // no more plain-circle fallback (David, 2026-10-11: "no gaps at any zoom"). At a few px the facets are
+      // already sub-pixel, so dropping from 24 sides to 8 here costs nothing visible.
+      const { poly, rin } = clipTiled(n, b, 8, b.d * .78);
+      b.poly = poly; b.rin = rin; b.d0 = b.d; b.d = 2 * rin; return;
     }
     if (shapeAmt <= .02) {   // Bubbles: unchanged -- the nearest plain-Voronoi bisector, no polygon needed
       const reach = Math.min(12, Math.ceil((b.d + maxD) * .75 / cell));
@@ -784,40 +805,10 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
       // overwrites b.rin, and must never shrink a bubble PAST this -- see that pass's own comment).
       b.poly = null; b.rin0 = b.rin = Math.max(0, r); b.d0 = b.d; b.d = 2 * b.rin; return;
     }
-    // Tiled look: the real power diagram. A generous starting polygon (1.6x the bubble's own radius, i.e. 0.8x its
-    // own diameter -- noticeably bigger than Bubbles' R0) so an interior cell is bounded only by its neighbors'
-    // bisectors, never by its own size before it ever reaches them; a cell with no neighbor in some direction (the
-    // outer edge of the whole set) is still capped there, by this same generous, nearly-round 16-gon, so that edge
-    // stays rounded instead of spiky.
-    const reach = tileReach(b.d), R0 = b.d * .8; let poly = [];
-    const ci0 = Math.floor(b.x / cell), cj0 = Math.floor(b.y / cell);
-    for (let i = 0; i < 16; i++) { const t = i / 16 * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
-    for (let i = ci0 - reach; i <= ci0 + reach && poly.length; i++) for (let j = cj0 - reach; j <= cj0 + reach && poly.length; j++) {
-      const a = grid.get(key(i, j)); if (!a) continue;
-      for (const m of a) {
-        if (m === n) continue;
-        const o = drawn[m], vx = o.x - b.x, vy = o.y - b.y, dist = Math.hypot(vx, vy);
-        if (dist < 1e-6 || dist > tileCull(b.d, r0[m] * 2)) continue;
-        (b.nb || (b.nb = [])).push([m, dist]);
-        const ux = vx / dist, uy = vy / dist, lim = bisect(n, m, dist);
-        // keep the side of the power bisector (moved back by half the gap) that faces this bubble
-        const out = [];
-        for (let k = 0; k < poly.length; k++) {
-          const p = poly[k], q = poly[(k + 1) % poly.length], dp = p[0] * ux + p[1] * uy - lim, dq = q[0] * ux + q[1] * uy - lim;
-          if (dp <= 0) out.push(p);
-          if ((dp <= 0) !== (dq <= 0)) { const t = dp / (dp - dq); out.push([p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t]); }
-        }
-        poly = out;
-      }
-    }
-    // the inscribed circle: the nearest edge line to the center
-    let rin = Infinity;
-    for (let k = 0; k < poly.length; k++) {
-      const p = poly[k], q = poly[(k + 1) % poly.length], ex = q[0] - p[0], ey = q[1] - p[1], len = Math.hypot(ex, ey);
-      if (len < 1e-9) continue;
-      rin = Math.min(rin, Math.abs(p[0] * ey - p[1] * ex) / len);
-    }
-    b.poly = poly.length >= 3 ? poly : null; b.rin = isFinite(rin) && b.poly ? rin : 0; b.d0 = b.d; b.d = 2 * b.rin;
+    // Tiled look: the real power diagram, at full (24-sided) resolution so an open edge rounds off smoothly
+    // instead of showing a cheap polygon's facets.
+    const { poly, rin } = clipTiled(n, b, 24, b.d * .8);
+    b.poly = poly; b.rin = rin; b.d0 = b.d; b.d = 2 * rin;
   });
   // Circles (Bubbles, shape 0): unchanged. A small bubble leaves room in its cell that its bigger neighbor can use
   // (the Magnifier's center next to its smaller first ring). Grow each circle, center outward, until it meets its
