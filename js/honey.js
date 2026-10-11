@@ -619,6 +619,10 @@ const HONEY_STYLES = {
 // zoom-out -- a tiny cell past r<3 already skips the hex-poly path and its label (honeyCellPath, finishFrame), so
 // the per-bubble cost out here is one cheap fill, not the full draw; phones stay smooth and safe; see the draw loop
 const HONEY_MAX_DRAWN = 5000;
+// the collar of just-offscreen neighbors buildFlatDrawn keeps around for honeyCells (see its own comment there) --
+// a fixed px margin, not scaled by zoom, since it only needs to cover ordinary cell sizes at the edge, not the
+// whole lens; finishFrame drops this collar again right after clipping.
+const HONEY_EDGE_MARGIN = 48;
 // motion (net lag + water breathe/ripple) is skipped past this many drawn bubbles, so it stays fast at the
 // biggest, most zoomed-out sets too — idle drift is unaffected (it only ever moves one pan value, not per-bubble)
 const HONEY_MOTION_BUDGET = Math.round(HONEY_MAX_DRAWN * .5);
@@ -695,62 +699,195 @@ const honeyExtent = (theta, r, shapeAmt) => shapeAmt <= .02 ? r : r * (1 - shape
 //   shape 0 = the largest circle that fits in the cell (touching its nearest neighbors across the same gap)
 //   between = the circle blended toward the cell, so the corners round off
 // A bubble at the edge of what's drawn (neighbors culled) is also bounded by its own lens size, so it never balloons.
-// A unit regular hexagon (pointy-top, the same orientation as hmLookIcon's own honeycomb glyph in js/home.js),
-// reused below as the cheap tiled-cell shape for tiny bubbles -- six precomputed points, scaled per bubble by a
-// single multiply, instead of the full per-neighbor polygon clip.
-const HONEY_HEX_UNIT = Array.from({ length: 6 }, (_, i) => { const a = (i * 60 + 30) * Math.PI / 180; return [Math.cos(a), Math.sin(a)]; });
+// which points sit on the outer edge of the whole layout (David, 2026-10-11: "bring back the tiled edge"): judged
+// once per layout from the flat layout points, never from what happens to be on screen, so a cell cut off by the
+// viewport is never mistaken for an edge. An edge point has a wide empty sector among its lattice neighbors.
+function honeyEdgeSet(pts) {
+  const N = pts.length, out = new Set(); if (N < 8) { pts.forEach(p => out.add(p.it)); return out; }
+  const step = Math.max(1, Math.floor(N / 200)); let nn = [];
+  const cellG = new Map(), key = (i, j) => i * 100003 + j;
+  let sp = 0; { const xs = pts.map(p => p.x), ys = pts.map(p => p.y); sp = Math.sqrt((Math.max(...xs) - Math.min(...xs)) * (Math.max(...ys) - Math.min(...ys)) / N) || 1; }
+  pts.forEach((p, n) => { const k = key(Math.floor(p.x / sp), Math.floor(p.y / sp)); let a = cellG.get(k); if (!a) cellG.set(k, a = []); a.push(n); });
+  for (let n = 0; n < N; n += step) { const p = pts[n]; let best = Infinity; const ci = Math.floor(p.x / sp), cj = Math.floor(p.y / sp);
+    for (let i = ci - 2; i <= ci + 2; i++) for (let j = cj - 2; j <= cj + 2; j++) for (const m of cellG.get(key(i, j)) || []) if (m !== n) best = Math.min(best, Math.hypot(pts[m].x - p.x, pts[m].y - p.y));
+    if (isFinite(best)) nn.push(best); }
+  nn.sort((a, b) => a - b); const s = nn[Math.floor(nn.length / 2)] || sp, R = s * 1.9, rr = Math.ceil(R / sp);
+  pts.forEach((p, n) => {
+    const ci = Math.floor(p.x / sp), cj = Math.floor(p.y / sp), angs = [];
+    for (let i = ci - rr; i <= ci + rr; i++) for (let j = cj - rr; j <= cj + rr; j++) for (const m of cellG.get(key(i, j)) || []) {
+      if (m === n || pts[m].g !== p.g) continue; const dx = pts[m].x - p.x, dy = pts[m].y - p.y; if (dx * dx + dy * dy <= R * R) angs.push(Math.atan2(dy, dx));
+    }
+    if (angs.length < 3) { out.add(p.it); return; }
+    angs.sort((a, b) => a - b); let gap = angs[0] + 6.283185307 - angs[angs.length - 1];
+    for (let k = 1; k < angs.length; k++) gap = Math.max(gap, angs[k] - angs[k - 1]);
+    if (gap > 2.2) out.add(p.it);
+  });
+  return out;
+}
+// ghost points one lattice step past the outer edge (David, 2026-10-11: edge cells must be honeycomb, not arrows or
+// trapezoids): each edge point's interior neighbors reflected through it, kept where nothing real is near. They go
+// through the same lens as real points and clip the edge cells exactly the way interior neighbors do, then are
+// dropped before drawing -- so an edge cell is shaped like every other cell, by construction.
+function honeyGhosts(pts, edgeSet) {
+  const N = pts.length; if (N < 8) return [];
+  let sp; { const xs = pts.map(p => p.x), ys = pts.map(p => p.y); sp = Math.sqrt((Math.max(...xs) - Math.min(...xs)) * (Math.max(...ys) - Math.min(...ys)) / N) || 1; }
+  const G = new Map(), key = (i, j) => i * 100003 + j, add = (q, n) => { const k = key(Math.floor(q.x / sp), Math.floor(q.y / sp)); let a = G.get(k); if (!a) G.set(k, a = []); a.push(n); };
+  pts.forEach(add);
+  const near = (x, y, r) => { const ci = Math.floor(x / sp), cj = Math.floor(y / sp), R = Math.ceil(r / sp); let best = Infinity, bi = -1;
+    for (let i = ci - R; i <= ci + R; i++) for (let j = cj - R; j <= cj + R; j++) for (const m of G.get(key(i, j)) || []) { const d = Math.hypot(all[m].x - x, all[m].y - y); if (d < best) { best = d; bi = m; } }
+    return [best, bi]; };
+  const all = pts.slice(); let s = Infinity;
+  { const nn = []; for (let n = 0; n < N; n += Math.max(1, Math.floor(N / 200))) { all[n]; const [d] = (() => { let b = Infinity; const p = pts[n], ci = Math.floor(p.x / sp), cj = Math.floor(p.y / sp); for (let i = ci - 2; i <= ci + 2; i++) for (let j = cj - 2; j <= cj + 2; j++) for (const m of G.get(key(i, j)) || []) if (m !== n) b = Math.min(b, Math.hypot(pts[m].x - p.x, pts[m].y - p.y)); return [b]; })(); if (isFinite(d)) nn.push(d); } nn.sort((a, b) => a - b); s = nn[Math.floor(nn.length / 2)] || sp; }
+  const out = [];
+  pts.forEach((p, n) => {
+    if (!edgeSet.has(p.it)) return;
+    const ci = Math.floor(p.x / sp), cj = Math.floor(p.y / sp), R = Math.ceil(s * 1.3 / sp), nb = [];
+    for (let i = ci - R; i <= ci + R; i++) for (let j = cj - R; j <= cj + R; j++) for (const m of G.get(key(i, j)) || []) if (m !== n && m < N && pts[m].g === p.g && Math.hypot(pts[m].x - p.x, pts[m].y - p.y) <= s * 1.3) nb.push(m);
+    for (const m of nb) {
+      const gx = 2 * p.x - pts[m].x, gy = 2 * p.y - pts[m].y;
+      if (near(gx, gy, s)[0] < s * .6) continue;
+      const g = { x: gx, y: gy, g: p.g, it: p.it, ghost: true };
+      all.push(g); add(g, all.length - 1); out.push(g);
+    }
+  });
+  return out;
+}
 function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {   // clipAll (L18 glide): clip even tiny bubbles   // grow: how far a bubble may swell past its own lens size, as a fraction of its diameter
   if (!drawn.length) return;
   // Speed: the grid is sized to a TYPICAL bubble (not the biggest, which put thousands of tiny ones in every lookup),
-  // and each bubble searches only as many cells as its own size needs. Tiny bubbles (under ~7 px) skip the real
-  // per-neighbor cell clipping either way (too expensive to run on a few thousand of them every frame) -- but a
-  // tiled look still wants a TILED cell there, not a plain circle. David, 2026-10-09: "zoomed-out honeycomb
-  // spiral looks like circles" -- below, a fixed regular hexagon (the honeycomb lattice's own natural cell
-  // shape, not a pixel-exact Voronoi cell the way the full clip computes for a bigger bubble, but a solid
-  // mosaic at a glance, which is what low zoom needs) costs the same O(1) as the circle it replaces.
-  // Reverted (David, 2026-10-10: "Why is my honeycomb still broken... bring it back to how it was"): the fixed
-  // tiny hexagons (e5db1847) never tiled the spiral layout cleanly; tiny cells are plain circles again, as before.
-  const tinyHex = null;
+  // and each bubble searches only as many cells as its own size needs. Bubbles (shape 0) keep their exact old path
+  // below unconditionally (David: "keep Bubbles exactly as it is"). A TILED look (shape > 0) always gets a real
+  // power-diagram polygon now, tiny cells included (David, 2026-10-11: "no gaps at any zoom") -- clipTiled() below
+  // just gives a tiny cell fewer starting sides (8, vs 24 for an ordinary one) to keep a few thousand of them
+  // affordable; both sizes are the same real clip, so nothing visibly pops as a cell crosses that cost threshold.
   const ds = drawn.map(b => b.d).sort((a, c) => a - c), typ = ds[Math.floor(ds.length / 2)] || 8, maxD = ds[ds.length - 1] || 8;
   const cell = Math.max(4, typ * 1.3, maxD * 1.5 / 12), grid = new Map(), key = (i, j) => i * 100003 + j;
   drawn.forEach((b, n) => { const k = key(Math.floor(b.x / cell), Math.floor(b.y / cell)); let a = grid.get(k); if (!a) grid.set(k, a = []); a.push(n); });
   const half = gapPx / 2;
+  // David, 2026-10-11 (the power-diagram fix for Magnify's broken ring): every bubble's OWN original lens radius,
+  // captured once, before this pass starts overwriting b.d with each cell's clipped result. A plain Voronoi
+  // bisector sits at the dist/2 midpoint no matter how big either side is -- fine when neighbors are close in
+  // size, wrong once they differ a lot (Magnify's huge center cell next to its first ring): the big cell capped
+  // itself at its own starting size before ever reaching that midpoint (a black gap around it), while its small
+  // neighbor, with no idea how much room the big one actually needed, didn't cede enough of it either (the
+  // overlap, or the hole on its far side once IT then got clipped against its other neighbors -- "the ring where
+  // big cells meet small ones looks broken"). r0[] must be read from here on, never a live b.d/o.d: during this
+  // same forEach an already-processed neighbor's b.d has already been overwritten to ITS clipped result, which is
+  // not the lens size that actually earns it room.
+  const r0 = drawn.map(b => b.d / 2);
+  // the power (Laguerre) bisector between i and j: perpendicular to the line between their centers, at distance
+  //   t = (dist^2 + ri^2 - rj^2) / (2*dist)
+  // from i -- the plain dist/2 midpoint is just the special case ri === rj. This partitions the plane with NO GAP
+  // and no overlap regardless of how much the radii differ: two neighbors' fills touch exactly along this line.
+  // David, 2026-10-11 ("uneven outlines" -- some cell borders showed a seam, some didn't): this used to inset by
+  // half the gap, so each cell's FILL already stopped short of its true boundary and the background showed through
+  // the gapPx-wide strip between two inset fills -- a strip thin enough, and inconsistently rounded by anti-
+  // aliasing, to sometimes vanish and sometimes not. Tiled fills are zero-inset now (exact, gapless by
+  // construction); the seam is drawn separately, once per shared edge, at a constant width and color (the
+  // per-cell stroke below this function, and finishFrame's edge pass) -- see honeyCells' tiled branch.
+  const bisect = (n, m, dist) => (dist * dist + r0[n] * r0[n] - r0[m] * r0[m]) / (2 * dist);
+  // how far out (in grid cells) / how far away (in px) a tiled cell needs to look for a neighbor whose power
+  // bisector could still matter -- generous on purpose: unlike the plain dist/2 bisector, a power bisector can sit
+  // well past the midpoint when the two radii differ a lot, so a tighter reach here would silently drop exactly
+  // the big-vs-small neighbor pairs this fix is for.
+  const tileReach = d => Math.min(16, Math.ceil((d + maxD) * 1.7 / cell));
+  const tileCull = (d, dOther) => (d + dOther) * 1.7;
+  // Build a tiled cell's real shape. Two passes:
+  //  1. find every real neighbor within reach and the power-bisector cut it implies (direction + limit) -- gathered
+  //     once, then reused both to size the starting polygon and to actually clip it, so a neighbor is never
+  //     searched for twice.
+  //  2. start an nSides-gon at a radius R0 comfortably past the single farthest cut just found, then apply every
+  //     cut. David, 2026-10-11 ("a clear triangle" of black at a sunflower triple point, Magnify high): R0 used to
+  //     be a flat multiple of THIS cell's own size -- generous for an isolated or evenly-matched cell, but a small
+  //     cell squeezed between much bigger ones can have a real VERTEX (where two of its neighbors' bisectors cross)
+  //     well past its own size, even though every individual cut looks modest from its own center. Sizing R0 off
+  //     the actual farthest cut instead of the cell's own diameter means it can never be the thing that pre-empts a
+  //     real vertex, however lopsided the neighbors are -- and it's free: the clip loop's cost is in the number of
+  //     cuts and nSides, not in how big the starting circle is. Where no real neighbor exists in some direction (the
+  //     open edge of the whole set) the cell is still bounded by this same nearly-round nSides-gon, so that edge
+  //     reads as a smooth, round silhouette rather than a spiky one -- not a tight hug (tried pulling an open vertex
+  //     in to the cell's own smaller natural radius: that moved only ONE vertex per open run and left its straight
+  //     neighboring edge cutting across the middle of the cell, a worse, sharper notch than the plain bulge it was
+  //     meant to fix; reverted). The fill touches its real neighbors exactly (bisect() has no inset); see
+  //     finishFrame's seam pass, which strokes every cell's full boundary into one shared Path2D and paints it in
+  //     a single stroke() call -- a cell's own edge ownership doesn't matter there (tried tagging each edge with
+  //     the neighbor that cut it and letting only one side draw it, David 2026-10-11: some edges came out with no
+  //     line at all, because the two cells' independently-computed tags didn't always agree on who owned what, or
+  //     the owner was the off-screen collar copy that never got drawn; a single path stroked once can't miss an
+  //     edge, since every cell contributes its own full boundary and overlapping geometry in ONE stroke() call
+  //     doesn't double up in alpha the way two separate stroke() calls would).
+  function clipTiled(n, b, nSides, ownR0) {
+    const reach = tileReach(b.d), ci0 = Math.floor(b.x / cell), cj0 = Math.floor(b.y / cell);
+    const cuts = []; let maxLim = 0;
+    for (let i = ci0 - reach; i <= ci0 + reach; i++) for (let j = cj0 - reach; j <= cj0 + reach; j++) {
+      const a = grid.get(key(i, j)); if (!a) continue;
+      for (const m of a) {
+        if (m === n) continue;
+        const o = drawn[m], vx = o.x - b.x, vy = o.y - b.y, dist = Math.hypot(vx, vy);
+        if (dist < 1e-6 || dist > tileCull(b.d, r0[m] * 2)) continue;
+        const lim = bisect(n, m, dist);
+        cuts.push(vx / dist, vy / dist, lim);
+        if (lim > maxLim) maxLim = lim;
+      }
+    }
+    // open side = the outer edge of the whole set (no neighbor in some direction): there, the cell keeps its own
+    // natural size, the old tiled edge (David, 2026-10-11: "rounded edge looks ugly, bring back the tiled edge").
+    // Only a cell neighbored all round gets the generous start that lets it reach its true power-diagram vertices.
+    const angs = []; for (let c = 0; c < cuts.length; c += 3) angs.push(Math.atan2(cuts[c + 1], cuts[c]));
+    angs.sort((x, y) => x - y);
+    let gap = angs.length ? angs[0] + 6.283185307 - angs[angs.length - 1] : 6.3, gapFrom = angs.length ? angs[angs.length - 1] : 0;
+    for (let k = 1; k < angs.length; k++) if (angs[k] - angs[k - 1] > gap) { gap = angs[k] - angs[k - 1]; gapFrom = angs[k - 1]; }
+    // the layout itself decides (b.edge, honeyEdgeSet): a viewport-culled or wedged cell is never treated as edge
+    const open = !!b.edge;
+    let poly = [];
+    if (open) {
+      // an edge cell keeps a honeycomb edge (David, 2026-10-11: "the edge stays honeycomb shaped, not rounded"):
+      // start from the regular hexagon its nearest neighbor implies (inradius = that bisector), the same pointy-top
+      // hexagon an interior lattice cell ends up as, so the outer sides read as the lattice continuing
+      // oriented to the lattice: the nearest neighbor sits square across one of its sides, as in the interior
+      let minLim = Infinity, nAng = 0; for (let c = 2; c < cuts.length; c += 3) if (cuts[c] > 0 && cuts[c] < minLim) { minLim = cuts[c]; nAng = Math.atan2(cuts[c - 1], cuts[c - 2]); }
+      const Rh = (isFinite(minLim) ? minLim : b.d * .5) * 1.1547;
+      for (let i = 0; i < 6; i++) { const t = nAng + (i * 60 + 30) * Math.PI / 180; poly.push([Math.cos(t) * Rh, Math.sin(t) * Rh]); }
+    } else {
+      const R0 = Math.max(ownR0, maxLim * 1.8 + 8);
+      for (let i = 0; i < nSides; i++) { const t = i / nSides * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
+    }
+    for (let c = 0; c < cuts.length && poly.length; c += 3) {
+      const ux = cuts[c], uy = cuts[c + 1], lim = cuts[c + 2];
+      // keep the side of the power bisector (the half that faces this bubble)
+      const out = [];
+      for (let k = 0; k < poly.length; k++) {
+        const p = poly[k], q = poly[(k + 1) % poly.length], dp = p[0] * ux + p[1] * uy - lim, dq = q[0] * ux + q[1] * uy - lim;
+        if (dp <= 0) out.push(p);
+        if ((dp <= 0) !== (dq <= 0)) { const t = dp / (dp - dq); out.push([p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t]); }
+      }
+      poly = out;
+    }
+    // the inscribed circle: the nearest edge line to the center
+    let rin = Infinity;
+    for (let k = 0; k < poly.length; k++) {
+      const p = poly[k], q = poly[(k + 1) % poly.length], ex = q[0] - p[0], ey = q[1] - p[1], len = Math.hypot(ex, ey);
+      if (len < 1e-9) continue;
+      rin = Math.min(rin, Math.abs(p[0] * ey - p[1] * ex) / len);
+    }
+    return poly.length >= 3 ? { poly, rin: isFinite(rin) ? rin : 0 } : { poly: null, rin: 0 };
+  }
   drawn.forEach((b, n) => {
     if (b.d < 7 && !clipAll) {
-      let rin = Math.max(0, b.d * .44 - half);
-      // That self-only formula (just this bubble's own diameter) has no idea where its actual neighbors are --
-      // harmless for the forgiving circle it's always sized for (a little overlap there just reads as soft
-      // fuzz), but a hexagon's straight edges turn the same imprecision into visibly crossed, stacked tiles
-      // (David, 2026-10-10, a live screenshot: "cells overlap each other like fish scales... rotated diamonds
-      // stacking over neighbors instead of tiling"), worst exactly where Magnify's fisheye makes the LOCAL size
-      // gradient steepest (the ring around the magnified center, where a tiny bubble can sit right beside a
-      // much bigger one). Only the tiled looks (tinyHex) pay for this: the same reach-limited grid scan the
-      // real per-neighbor clip below already does, just for a radius bound instead of a full polygon.
-      if (tinyHex) {
-        const reach = Math.min(12, Math.ceil((b.d + maxD) * .75 / cell));
-        const ci0 = Math.floor(b.x / cell), cj0 = Math.floor(b.y / cell);
-        for (let i = ci0 - reach; i <= ci0 + reach; i++) for (let j = cj0 - reach; j <= cj0 + reach; j++) {
-          const a = grid.get(key(i, j)); if (!a) continue;
-          for (const m of a) {
-            if (m === n) continue;
-            const o = drawn[m], dist = Math.hypot(o.x - b.x, o.y - b.y);
-            if (dist < 1e-6 || dist > (b.d + o.d) * .75) continue;
-            const lim = dist / 2 - half;
-            if (lim < rin) rin = lim;
-          }
-        }
-        rin = Math.max(0, rin);
+      if (shapeAmt <= .02) {   // Bubbles: unchanged self-only guess (forgiving at circle size; see honeyWhere above)
+        let rin = Math.max(0, b.d * .44 - half);
+        b.poly = null; b.rin = rin; b.d0 = b.d; b.d = 2 * rin; return;
       }
-      b.poly = tinyHex ? tinyHex.map(p => [p[0] * rin, p[1] * rin]) : null;
-      b.rin = rin; b.d0 = b.d; b.d = 2 * rin; return;
+      // a tiny tiled cell: the SAME real power-diagram clip as an ordinary one, just a cheaper 8-sided start --
+      // no more plain-circle fallback (David, 2026-10-11: "no gaps at any zoom"). At a few px the facets are
+      // already sub-pixel, so dropping from 24 sides to 8 here costs nothing visible.
+      const { poly, rin } = clipTiled(n, b, 8, b.d * .78);
+      b.poly = poly; b.rin = rin; b.d0 = b.d; b.d = 2 * rin; return;
     }
-    const reach = Math.min(12, Math.ceil((b.d + maxD) * .75 / cell));
-    // start from a 16-gon a little bigger than the bubble's own lens size
-    const R0 = b.d * Math.max(.62, grow * 1.2); let poly = [];
-    const ci0 = Math.floor(b.x / cell), cj0 = Math.floor(b.y / cell);
-    // circles (shape 0) only need the cell's inscribed circle: the nearest bisector. No polygon clipping, which is
-    // most of the cost on big sets (and what made panning 2,700 colors janky on a phone).
-    if (shapeAmt <= .02) {
+    if (shapeAmt <= .02) {   // Bubbles: unchanged -- the nearest plain-Voronoi bisector, no polygon needed
+      const reach = Math.min(12, Math.ceil((b.d + maxD) * .75 / cell));
+      const R0 = b.d * Math.max(.62, grow * 1.2);
+      const ci0 = Math.floor(b.x / cell), cj0 = Math.floor(b.y / cell);
       let r = R0 * .98;
       for (let i = ci0 - reach; i <= ci0 + reach; i++) for (let j = cj0 - reach; j <= cj0 + reach; j++) {
         const a = grid.get(key(i, j)); if (!a) continue;
@@ -766,38 +903,15 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
       // overwrites b.rin, and must never shrink a bubble PAST this -- see that pass's own comment).
       b.poly = null; b.rin0 = b.rin = Math.max(0, r); b.d0 = b.d; b.d = 2 * b.rin; return;
     }
-    for (let i = 0; i < 16; i++) { const t = i / 16 * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
-    const ci = Math.floor(b.x / cell), cj = Math.floor(b.y / cell);
-    for (let i = ci - reach; i <= ci + reach && poly.length; i++) for (let j = cj - reach; j <= cj + reach && poly.length; j++) {
-      const a = grid.get(key(i, j)); if (!a) continue;
-      for (const m of a) {
-        if (m === n) continue;
-        const o = drawn[m], vx = o.x - b.x, vy = o.y - b.y, dist = Math.hypot(vx, vy);
-        if (dist < 1e-6 || dist > (b.d + o.d) * .75) continue;
-        (b.nb || (b.nb = [])).push([m, dist]);
-        const ux = vx / dist, uy = vy / dist, lim = dist / 2 - half;
-        // keep the side of the bisector (moved back by half the gap) that faces this bubble
-        const out = [];
-        for (let k = 0; k < poly.length; k++) {
-          const p = poly[k], q = poly[(k + 1) % poly.length], dp = p[0] * ux + p[1] * uy - lim, dq = q[0] * ux + q[1] * uy - lim;
-          if (dp <= 0) out.push(p);
-          if ((dp <= 0) !== (dq <= 0)) { const t = dp / (dp - dq); out.push([p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t]); }
-        }
-        poly = out;
-      }
-    }
-    // the inscribed circle: the nearest edge line to the center
-    let rin = Infinity;
-    for (let k = 0; k < poly.length; k++) {
-      const p = poly[k], q = poly[(k + 1) % poly.length], ex = q[0] - p[0], ey = q[1] - p[1], len = Math.hypot(ex, ey);
-      if (len < 1e-9) continue;
-      rin = Math.min(rin, Math.abs(p[0] * ey - p[1] * ex) / len);
-    }
-    b.poly = poly.length >= 3 ? poly : null; b.rin = isFinite(rin) && b.poly ? rin : 0; b.d0 = b.d; b.d = 2 * b.rin;
+    // Tiled look: the real power diagram, at full (24-sided) resolution so an open edge rounds off smoothly
+    // instead of showing a cheap polygon's facets.
+    const { poly, rin } = clipTiled(n, b, 24, b.d * .8);
+    b.poly = poly; b.rin = rin; b.d0 = b.d; b.d = 2 * rin;
   });
-  // Circles: a small bubble leaves room in its cell that its bigger neighbor can use (the Magnifier's center next to
-  // its smaller first ring). Grow each circle, center outward, until it meets its neighbors across the gap, never past
-  // its own lens size. Every step keeps r_a + r_b <= distance - gap, so circles still never overlap.
+  // Circles (Bubbles, shape 0): unchanged. A small bubble leaves room in its cell that its bigger neighbor can use
+  // (the Magnifier's center next to its smaller first ring). Grow each circle, center outward, until it meets its
+  // neighbors across the gap, never past its own lens size. Every step keeps r_a + r_b <= distance - gap, so
+  // circles still never overlap.
   // David, 2026-10-09: "this middle gap hasn't been filled" -- a Sunflower/Spiral's own innermost points, after the
   // fisheye stretches their real neighbors apart, can have a true (pass-1, gap-respecting) inscribed radius well
   // past d0*grow -- but this pass started from d0*grow every time regardless, SHRINKING those already-correct
@@ -827,31 +941,15 @@ function honeyRay(poly, t) {
   }
   return isFinite(best) ? best : 0;
 }
-// the bubble outline from its cell: the inscribed circle (shape 0), a TRUE regular hexagon (shape 1), or the
-// blend between. David, 2026-10-10 (two live screenshots): "the honeycomb is still broken... Center: proper
-// hexagons. Transition ring: the cells turn into rotated squares (diamonds)... Outer area: a diagonal lattice
-// of diamonds and squashed hexagons" -- and separately, "the borders and shapes are jumping... pop and flicker
-// between forms (diamond, hexagon, circle) from frame to frame."
-// Root cause of both: this used to trace b.poly -- the ACTUAL per-neighbor-clipped Voronoi cell (honeyCells,
-// above) -- as the shape-1 endpoint (honeyRay sampled b.poly's own edges). A Voronoi cell is only a regular
-// hexagon when its neighbors truly sit in a perfect hex ring around it; honeyGridArr's own lattice is a real
-// offset-row hex lattice in FLAT space, but the fisheye lens warps on-SCREEN positions non-uniformly away from
-// its focus, so the neighbor geometry the clip actually sees stops being hexagonal with distance from center --
-// exactly "proper hexagons" in the middle fading to "diamonds" and "squashed hexagons" outward. b.poly also
-// changes shape (vertex count and position) every time a culled-at-the-edge neighbor enters or leaves the
-// clip's search radius, or the 7px tiny-bubble threshold swaps b.poly for null -- both read as the shape
-// popping between methods frame to frame.
-// Fix: never draw b.poly's own shape. Draw a canonical, fixed-orientation regular hexagon (honeyHexR, the same
-// one honeyPath below already drew before the Voronoi-clip era) at every size, scaled to the ALREADY neighbor-
-// safe radius b.rin (still computed by honeyCells' real per-neighbor clip, so cells still never overlap) -- one
-// continuous shape method for every bubble, tiny or big, at every zoom, with no polygon vertices to jump.
+// the bubble outline from its cell: the inscribed circle (shape 0), the cell (shape 1), or the blend
 function honeyCellPath(ctx, b, shapeAmt, grow = 1) {
   ctx.beginPath();
   const r = b.rin * grow;
-  if (shapeAmt <= .02 || r < 3) { ctx.arc(b.x, b.y, Math.max(0, r), 0, 6.2832); return; }
+  if (!b.poly || shapeAmt <= .02 || r < 3) { ctx.arc(b.x, b.y, Math.max(0, r), 0, 6.2832); return; }
+  if (shapeAmt >= .98) { b.poly.forEach((p, i) => { const x = b.x + p[0] * grow, y = b.y + p[1] * grow; if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y); }); ctx.closePath(); return; }
   const n = r > 36 ? 36 : r > 14 ? 24 : 14;
   for (let i = 0; i <= n; i++) {
-    const t = i / n * 6.283185307, rr = (r * (1 - shapeAmt) + honeyHexR(t, r) * shapeAmt);
+    const t = i / n * 6.283185307, rr = (b.rin * (1 - shapeAmt) + honeyRay(b.poly, t) * shapeAmt) * grow;
     const x = b.x + Math.cos(t) * rr, y = b.y + Math.sin(t) * rr;
     if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y);
   }
@@ -1284,7 +1382,10 @@ function honeycomb(host, opts = {}) {
   function buildFlatDrawn(l, t) {
     const R = reach(l), cx = W / 2, cy = vcy(), hx = W / 2, hy = vy() / 2, ia = l.inner, round = cfg.lensMode === "round", pk = pack();
     drawn = []; let tinyN = 0, cbest = Infinity, cItem = null;
-    for (const p of lay.pts) copies(p, P, R, (ex, ey) => {
+    if (lay.finite && !lay.edgeSet) { lay.edgeSet = honeyEdgeSet(lay.pts); lay.ghosts = honeyGhosts(lay.pts, lay.edgeSet); }
+    const ghostPts = lay.finite && lay.ghosts && lay.ghosts.length ? lay.ghosts : null;
+    const edgeSet = lay.finite && !ghostPts ? lay.edgeSet : null;   // with ghosts, edge cells need no special start shape
+    for (const p of (ghostPts ? lay.pts.concat(ghostPts) : lay.pts)) copies(p, P, R, (ex, ey) => {
       const z = Math.hypot(ex, ey);
       let x, y, d;
       if (round) { const k = z ? F(z, l) / z : base * l.s * l.m0; x = cx + ex * k; y = cy + ey * k; d = base * l.s * localScale(z, l) * pk; }
@@ -1293,10 +1394,16 @@ function honeycomb(host, opts = {}) {
         x = cx + Math.sign(ex) * warp(ux, ia) * hx; y = cy + Math.sign(ey) * warp(uy, ia) * hy;
         d = l.K * pk * (Math.min(dwx, dwy) * (1 - cfg.fill) + Math.sqrt(dwx * dwy) * cfg.fill);
       }
-      if (x < -d || y < -d || x > W + d || y > Hh + d) return;
+      // David, 2026-10-11 (stability): a collar beyond the strict viewport, not just this point's own d, so a
+      // cell right at the screen edge is clipped against the same real neighbors whether that neighbor's center
+      // is a few px onscreen or just off it -- without this, a cell's shape could jump the instant a neighbor's
+      // OWN point crossed into view, instead of already reflecting it like every interior cell does. finishFrame
+      // drops this collar again right after honeyCells runs, so nothing outside the strict viewport ever draws.
+      if (x < -d - HONEY_EDGE_MARGIN || y < -d - HONEY_EDGE_MARGIN || x > W + d + HONEY_EDGE_MARGIN || y > Hh + d + HONEY_EDGE_MARGIN) return;
       if (d < 2.2) { tinyN++; return; }
+      if (p.ghost) { drawn.push({ it: p.it, x, y, d, z: 1e9, ghost: true, k: "ghost|" + Math.round(p.x * 8) + "|" + Math.round(p.y * 8) }); return; }
       if (z < cbest) { cbest = z; cItem = p.it; }
-      drawn.push({ it: p.it, x, y, d, z, k: p.it.n + "|" + Math.round((P[0] + ex) * 8) + "|" + Math.round((P[1] + ey) * 8) });
+      drawn.push({ it: p.it, x, y, d, z, edge: !!(edgeSet && edgeSet.has(p.it)), k: p.it.n + "|" + Math.round((P[0] + ex) * 8) + "|" + Math.round((P[1] + ey) * 8) });
     });
     // Safety: never draw more than ~5,000 bubbles. Far out on a big set some styles reached 50,000-120,000, which ran
     // a phone out of memory (a white or black screen). Past the budget, the zoom-out limit moves in to this zoom.
@@ -1372,21 +1479,36 @@ function honeycomb(host, opts = {}) {
     const shapeAmt = zc("shape");
     applyMotion(l, t);
     honeyCells(drawn, gapPx(), shapeAmt, L18_GROW, !!morph);
+    if (drawn.some(b => b.ghost)) drawn = drawn.filter(b => !b.ghost);   // ghosts only shape the edge; never drawn
+    // every cell honeyCells just clipped, collar included -- kept so the seam pass below can still stroke an edge
+    // whose OTHER cell is just off-screen (its own edge would otherwise go unstroked once that collar is dropped).
+    const allDrawn = drawn;
+    // drop the just-offscreen collar (buildFlatDrawn's HONEY_EDGE_MARGIN) now that it's done its job of clipping
+    // -- cull after honeyCells runs, not before, so an edge cell is already shaped by a neighbor that's about to
+    // scroll into view, instead of jumping once that neighbor's own point crosses the strict viewport rect.
+    if (!lay.globe) drawn = drawn.filter(b => b.x >= -b.d && b.y >= -b.d && b.x <= W + b.d && b.y <= Hh + b.d);
     // No snapping (David): a bubble's size eases to its new value over ~120 ms instead of jumping when its cell
     // changes. New bubbles (just entered the screen) start at their size; growth eases too.
     const dt = sizeT ? Math.min(100, t - sizeT) : 0; sizeT = t;
     // Only growth eases: a bubble whose cell just got smaller (a slider, a zoom) takes its new size at once, so two
     // bubbles never overlap mid-change (David: sliding the center size overlapped until the next pan). And while
     // any bubble is still growing toward its size, keep drawing frames so it finishes even when nothing else moves.
+    // David, 2026-10-11 ("thick black moat around a smaller regular hexagon" during a fast fling, Grid): a TILED
+    // cell's polygon already has the right shape and size every frame -- honeyCells just clipped it against every
+    // real neighbor's own bisector, confirmed in this exact failure by a one-off trace (40-50 real cuts, a normal
+    // hexagon). This easing pass used to scale that polygon down toward last frame's smaller size whenever it grew
+    // fast (exactly what happens as the lens sweeps past during a fling), which looks harmless for a lone circle
+    // but breaks a tiling outright: every neighbor is still drawn at ITS correct, un-eased boundary, so shrinking
+    // just this one cell toward its center pulls its edges in from where they're supposed to meet -- the moat.
+    // Bubbles (b.poly === null) have no shared edge to keep, so they still ease exactly as before.
     const ease = RM ? 1 : 1 - Math.exp(-dt / 120), mem = new Map();
     let easing = false;
     for (const b of drawn) {
       if (!b.k) continue;
       const prev = sizeMem.get(b.k);
-      if (prev != null && dt > 0 && prev < b.rin && !pinch && b.rin - prev > Math.max(1.2, prev * .1)) {   // L18: jumps ease; motion's own small steps don't
-        const r = prev + (b.rin - prev) * ease, f = b.rin > 0 ? r / b.rin : 1;
+      if (prev != null && dt > 0 && prev < b.rin && !pinch && !b.poly && b.rin - prev > Math.max(1.2, prev * .1)) {   // L18: jumps ease; motion's own small steps don't
+        const r = prev + (b.rin - prev) * ease;
         if (b.rin - r > .3) easing = true;
-        if (b.poly && Math.abs(f - 1) > .001) b.poly = b.poly.map(q => [q[0] * f, q[1] * f]);
         b.rin = r; b.d = 2 * r;
       }
       mem.set(b.k, b.rin);
@@ -1398,6 +1520,21 @@ function honeycomb(host, opts = {}) {
     const hlSet = hlItems();
     if (lay.spiral && !hlSet) l18StageRings(l);
     else if (lay.bounds && !hlSet && !morph) honeyBoundsDraw(l);
+    // David, 2026-10-11 (belt and braces against any remaining hole, however it happens): under every tiled cell,
+    // its own color filled out to the farthest vertex of its OWN polygon (never shrunk by a neighbor), in draw
+    // order. A correct tiling never shows this layer at all -- every real pixel is covered by the exact fill above
+    // it -- but if one ever is (a missed neighbor, a transient bad frame), what shows through is a neighbor's
+    // color, never black.
+    const exact = shapeAmt >= .98;
+    // only at full opacity: during a fade (the map's own fade-in, a dimmed backdrop) the disks and the fills stack
+    // their alpha, showing as light rims inside every cell (David, 2026-10-11: "weird highlights")
+    // off (David, 2026-10-11, "looks odd"): at the outer edge these disks showed past the cells as round blobs; the
+    // interior is gapless by construction (checked by _qaCoverage), so the safety net only ever cost, never helped
+    if (false && exact && ctx.globalAlpha >= .999) for (const b of drawn) {
+      if (!b.poly) continue;
+      let far = 0; for (const p of b.poly) { const d2 = p[0] * p[0] + p[1] * p[1]; if (d2 > far) far = d2; }
+      ctx.beginPath(); ctx.arc(b.x, b.y, Math.sqrt(far), 0, 6.2832); ctx.fillStyle = b.it.h; ctx.fill();
+    }
     for (const b of drawn) {
       const it = b.it, d = b.d * (b === pb ? 1 + .12 * pressK : 1), r = d / 2;
       honeyCellPath(ctx, b, shapeAmt, b === pb ? 1 + .12 * pressK : 1); ctx.fillStyle = it.h; ctx.fill();
@@ -1405,6 +1542,9 @@ function honeycomb(host, opts = {}) {
       if (ST.label && !ST.label(it.o)) { if (d >= 8 && it.L < 26) { ctx.lineWidth = Math.max(1, d * .025); ctx.strokeStyle = "rgba(236,232,223,.24)"; ctx.stroke(); } continue; }
       if (hlSet) { if (!hlSet.has(it)) { ctx.fillStyle = "rgba(14,13,11,.8)"; ctx.fill(); continue; } ctx.lineWidth = Math.max(1.5, d * .03); ctx.strokeStyle = "rgba(239,235,227,.95)"; ctx.stroke(); }
       if (d < 8) continue;
+      // the exact-polygon case gets ITS seam from the single shared-edge pass below; it must still get its NAME
+      // (a bare `continue` here skipped every label on the Honeycomb look, David 2026-10-11: "now there is none")
+      if (!exact) {
       // David, 2026-10-09: "any way to prevent these ugly holes between the colors?" -- at the magnified focus,
       // where sizes vary most, two neighboring cells' own independently-blended shapes (honeyCellPath's circle/
       // polygon mix) don't always meet pixel-exact, leaving a sliver of the background between them. The cheap
@@ -1412,6 +1552,7 @@ function honeycomb(host, opts = {}) {
       // edge, light on a dark cell and dark on a light one, reads as a deliberate boundary either way and masks
       // a stray sliver instead of leaving it bare. Was dark-cells-only; now every cell at a readable size gets one.
       ctx.lineWidth = Math.max(1, d * .018); ctx.strokeStyle = it.L < 50 ? `rgba(236,232,223,${it.L < 14 ? .34 : it.L < 26 ? .24 : .14})` : `rgba(14,13,11,${it.L > 86 ? .16 : .1})`; ctx.stroke();
+      }
       // a cheap pre-filter before the honeyWrap lookup: even the most compact name (honeyWrap's own best-case
       // fs ratio, ~.19) can't clear the legibility floor below roughly this diameter, so most of a crowded
       // frame's tiny cells skip the (cached, but still a Map lookup) call entirely
@@ -1431,6 +1572,28 @@ function honeycomb(host, opts = {}) {
         }
         ctx.globalAlpha = l.a;
       }
+    }
+    // David, 2026-10-11 ("uneven outlines" -- some borders showed a seam, some didn't, confirmed with a close crop:
+    // one specific diagonal had no line at all while its neighbor did): first tried letting only one of the two
+    // cells sharing an edge draw it (clipTiled tagged each edge with the neighbor that cut it). That still missed
+    // edges -- the two cells' tags didn't always agree on who owned what, or the owner was a collar cell that
+    // never gets its own turn to draw. A single Path2D can't miss an edge: every cell (collar included, so an
+    // edge right at the screen border is still covered by its off-screen neighbor's own copy of it) adds its
+    // FULL closed boundary, and the whole path is stroked in exactly one stroke() call -- one paint operation, so
+    // two cells' overlapping copies of their shared edge don't double up in alpha the way two separate stroke()
+    // calls would, and the result is identical everywhere regardless of which cell "owns" a line that, as far as
+    // the canvas is concerned, was never owned by anyone to begin with.
+    if (exact) {
+      const path = new Path2D();
+      for (const b of allDrawn) {
+        if (!b.poly || b.poly.length < 3) continue;
+        const p0 = b.poly[0];
+        path.moveTo(b.x + p0[0], b.y + p0[1]);
+        for (let k = 1; k < b.poly.length; k++) { const p = b.poly[k]; path.lineTo(b.x + p[0], b.y + p[1]); }
+        path.closePath();
+      }
+      ctx.globalAlpha = l.a; ctx.lineJoin = "round"; ctx.lineWidth = Math.max(1, gapPx()); ctx.strokeStyle = "rgba(20,19,17,.4)";
+      ctx.stroke(path);
     }
     ctx.globalAlpha = 1;
     if (ST.marks.size) honeyStudyMarks(ctx, drawn, ST.marks, t);
@@ -1961,7 +2124,7 @@ function honeycomb(host, opts = {}) {
   function geoOf(b) {
     if (!b || !(b.d > 0)) return null;
     const r = cv.getBoundingClientRect(), shp = zc("shape"), rays = [];
-    for (let i = 0; i < 72; i++) { const t = i / 72 * 6.283185307; rays.push(shp > .02 && b.rin >= 3 ? b.rin * (1 - shp) + honeyHexR(t, b.rin) * shp : b.rin); }
+    for (let i = 0; i < 72; i++) { const t = i / 72 * 6.283185307; rays.push(b.poly && shp > .02 && b.rin >= 3 ? b.rin * (1 - shp) + honeyRay(b.poly, t) * shp : b.rin); }
     const it = b.it;
     let label = null;
     // the same legibility gate the main draw loop uses (HONEY_LABEL_FS_MIN), so a bubble morphing into its own
@@ -2277,16 +2440,9 @@ function honeycomb(host, opts = {}) {
     // handles, under 7px -- see that function's own comment), how many have a real polygon (tiled, David,
     // 2026-10-09: "zoomed-out honeycomb... looks like circles") vs none (a plain circle). A style with a high
     // shapeAmt (Honeycomb) should tile even its tiniest cells; a low one (Bubbles) should still draw circles.
-    // QA (tools/smoke map group): among all currently-drawn cells, how many are big enough to actually show a
-    // shape (b.rin >= 3 -- below that honeyCellPath's own floor always draws a plain circle, hex vs circle
-    // being imperceptible under 3px regardless of look) vs how many of THOSE would render tiled (a hexagon).
-    // David, 2026-10-10: honeyCellPath (the real draw function) no longer looks at b.poly at all -- it blends
-    // toward a canonical hexagon (honeyHexR) driven only by shapeAmt and the bubble's own safe radius (b.rin),
-    // so this mirrors that same condition directly, true for every size class at once (there's no separate
-    // "tiny-bubble" rule left to test -- that's the fix).
     _tinyPolyStat() {
-      const big = drawn.filter(b => b.rin >= 3), shp = zc("shape");
-      return { big: big.length, tiled: shp > .02 ? big.length : 0, total: drawn.length };
+      const tiny = drawn.filter(b => b.d0 != null && b.d0 < 7);
+      return { tiny: tiny.length, poly: tiny.filter(b => b.poly).length, total: drawn.length };
     },
     // QA (tools/smoke map group): do any two currently-drawn cell polygons actually overlap -- real tiles
     // (b.poly, both the full per-neighbor clip and the tiny-bubble hex) should only ever touch at a shared
@@ -2295,19 +2451,31 @@ function honeycomb(host, opts = {}) {
     // separating-axis test is exact, not an approximation; a cheap bounding-circle pre-filter (each polygon's
     // own rin is its inradius, so rin*1.16 safely covers a hexagon's corners too) skips the vast majority of
     // pairs before paying for SAT. This is QA-only, called once per check, not from the draw loop.
+    // David, 2026-10-11: fills are zero-inset now (two real neighbors touch exactly, no gap -- the seam is a
+    // separate stroke, not a fill inset), so a correctly-tiled pair's own shared edge sits EXACTLY on a SAT
+    // separating axis -- the old boolean test ("is there any axis the polygons DON'T overlap on") would flag
+    // every such pair as overlapping from floating-point noise alone. This now computes the actual penetration
+    // DEPTH (the minimum positive overlap across every axis; zero or negative on any one axis means truly
+    // separated) and only counts a pair past a small tolerance that comfortably covers that noise but is still
+    // far under any real interpenetration this check has ever actually caught (multiple px, not a fraction of one).
     _overlapStat() {
-      const polys = drawn.filter(b => b.poly && b.poly.length >= 3 && b.rin > 0);
-      const sat = (p, q) => {
+      const polys = drawn.filter(b => b.poly && b.poly.length >= 3 && b.rin > 0), TOL = .75;
+      const penetration = (p, q) => {
+        let minOv = Infinity;
         for (const poly of [p, q]) {
           for (let i = 0; i < poly.length; i++) {
             const a = poly[i], b2 = poly[(i + 1) % poly.length], nx = -(b2[1] - a[1]), ny = b2[0] - a[0];
+            const len = Math.hypot(nx, ny); if (len < 1e-9) continue;
+            const ux = nx / len, uy = ny / len;
             let mn1 = Infinity, mx1 = -Infinity, mn2 = Infinity, mx2 = -Infinity;
-            for (const [x, y] of p) { const d = x * nx + y * ny; if (d < mn1) mn1 = d; if (d > mx1) mx1 = d; }
-            for (const [x, y] of q) { const d = x * nx + y * ny; if (d < mn2) mn2 = d; if (d > mx2) mx2 = d; }
-            if (mx1 < mn2 - .01 || mx2 < mn1 - .01) return false;   // a separating axis: no overlap
+            for (const [x, y] of p) { const d = x * ux + y * uy; if (d < mn1) mn1 = d; if (d > mx1) mx1 = d; }
+            for (const [x, y] of q) { const d = x * ux + y * uy; if (d < mn2) mn2 = d; if (d > mx2) mx2 = d; }
+            const ov = Math.min(mx1, mx2) - Math.max(mn1, mn2);
+            if (ov <= 0) return 0;   // a real separating axis: not overlapping at all
+            if (ov < minOv) minOv = ov;
           }
         }
-        return true;
+        return isFinite(minOv) ? minOv : 0;
       };
       let pairs = 0, worst = 0;
       for (let i = 0; i < polys.length; i++) {
@@ -2316,10 +2484,122 @@ function honeycomb(host, opts = {}) {
           const o = polys[j], dist = Math.hypot(o.x - b.x, o.y - b.y);
           if (dist > bR + o.rin * 1.16) continue;   // bounding circles (corner-safe) don't even touch
           const op = o.poly.map(p => [p[0] + o.x, p[1] + o.y]);
-          if (sat(bp, op)) { pairs++; const pen = bR + o.rin * 1.16 - dist; if (pen > worst) worst = pen; }
+          const pen = penetration(bp, op);
+          if (pen > TOL) { pairs++; if (pen > worst) worst = pen; }
         }
       }
       return { checked: polys.length, overlapping: pairs, worstPenetration: +worst.toFixed(2) };
+    },
+    // QA (tools/smoke map group): is every point well inside the drawn field actually covered by some cell, or is
+    // there a hole (David, 2026-10-11: "a clear triangle" of black at a sunflower triple point)? Builds the convex
+    // hull of every tiled cell's CENTER, shrinks it inward (margin() below) so the sample area stays well clear of
+    // the true, legitimately-open outer edge of the whole set (never a "hole" -- see clipTiled's own note), then
+    // fires random points inside that shrunk hull and checks each against every cell's real polygon, winding-
+    // agnostic (a point is "inside" a convex polygon when it sits on the same side of every edge as a known-
+    // interior point, here the cell's own center) and within one seam width of the edge still counts as covered.
+    // QA-only, called once per check, not from the draw loop.
+    _qaCoverage(samples = 300) {
+      const cells = drawn.filter(b => b.poly && b.poly.length >= 3);
+      if (cells.length < 8) return { checked: 0, uncovered: 0, hullPts: 0 };
+      // the pre-filter needs the CIRCUMSCRIBED reach (farthest vertex), not b.rin (the INSCRIBED radius, nearest
+      // edge) -- an irregular cell's farthest corner can sit well past its own inscribed circle, and using rin
+      // here was rejecting real candidate cells outright, reading as phantom holes this check never actually saw.
+      const far = cells.map(b => { let f = 0; for (const p of b.poly) { const d2 = p[0] * p[0] + p[1] * p[1]; if (d2 > f) f = d2; } return Math.sqrt(f); });
+      const pts = cells.map(b => [b.x, b.y]).sort((a, c) => a[0] - c[0] || a[1] - c[1]);
+      const cross = (o, a, b2) => (a[0] - o[0]) * (b2[1] - o[1]) - (a[1] - o[1]) * (b2[0] - o[0]);
+      const half = arr => { const h = []; for (const p of arr) { while (h.length >= 2 && cross(h[h.length - 2], h[h.length - 1], p) <= 0) h.pop(); h.push(p); } return h; };
+      const lower = half(pts), upper = half(pts.slice().reverse());
+      const hull = lower.slice(0, -1).concat(upper.slice(0, -1));
+      if (hull.length < 3) return { checked: 0, uncovered: 0, hullPts: hull.length };
+      const cx = hull.reduce((s, p) => s + p[0], 0) / hull.length, cy = hull.reduce((s, p) => s + p[1], 0) / hull.length;
+      // shrink toward the centroid, clear of the real open edge AND of buildFlatDrawn's own EDGE_MARGIN collar --
+      // a cell right at the edge of what's drawn this frame can genuinely have fewer neighbors to clip against
+      // than one with the whole lattice around it, since a neighbor just past the collar isn't in `drawn` at all;
+      // that's an edge-of-data effect, not the interior hole this check exists to catch.
+      const margin = .6;
+      const shull = hull.map(p => [cx + (p[0] - cx) * margin, cy + (p[1] - cy) * margin]);
+      const inHull = (x, y) => { for (let i = 0; i < shull.length; i++) { const a = shull[i], b2 = shull[(i + 1) % shull.length]; if ((b2[0] - a[0]) * (y - a[1]) - (b2[1] - a[1]) * (x - a[0]) < 0) return false; } return true; };
+      const xs = shull.map(p => p[0]), ys = shull.map(p => p[1]), x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+      const seam = Math.max(1, gapPx()) + .5;
+      const insideOf = (b, lx, ly) => {
+        for (let k = 0; k < b.poly.length; k++) {
+          const p = b.poly[k], q = b.poly[(k + 1) % b.poly.length], ex = q[0] - p[0], ey = q[1] - p[1], len = Math.hypot(ex, ey);
+          if (len < 1e-9) continue;
+          const cp = (ex * (ly - p[1]) - ey * (lx - p[0])) / len, co = (ex * (-p[1]) - ey * (-p[0])) / len;
+          if ((cp < 0) !== (co < 0) && Math.abs(cp) > seam) return false;
+        }
+        return true;
+      };
+      const covered = (x, y) => {
+        for (let i = 0; i < cells.length; i++) {
+          const b = cells[i], dx = x - b.x, dy = y - b.y, reach = far[i] + seam;
+          if (dx * dx + dy * dy > reach * reach) continue;
+          if (insideOf(b, dx, dy)) return true;
+        }
+        return false;
+      };
+      let checked = 0, uncovered = 0; const misses = [];
+      for (let i = 0; i < samples; i++) {
+        let x, y, tries = 0;
+        do { x = x0 + Math.random() * (x1 - x0); y = y0 + Math.random() * (y1 - y0); tries++; } while (!inHull(x, y) && tries < 30);
+        if (!inHull(x, y)) continue;
+        checked++;
+        if (!covered(x, y)) { uncovered++; if (misses.length < 6) misses.push([+x.toFixed(1), +y.toFixed(1)]); }
+      }
+      return { checked, uncovered, hullPts: hull.length, misses };
+    },
+    // QA (tools/smoke map group): does every edge of every currently-drawn tiled cell actually show the seam
+    // stroke, with the SAME darkening everywhere -- not just "is there a polygon" (_overlapStat,
+    // _qaCoverage) but "did the pixels really get painted" (David, 2026-10-11: a close screenshot crop showed
+    // one specific edge with no line at all while its mirror-image neighbor had one -- a real rendering gap the
+    // geometry checks above can't see, since the polygons themselves were correct). For a random sample of edges,
+    // reads the actual canvas pixel at the edge's midpoint and at a clean reference point a few px toward that
+    // cell's own center (inside the fill, clear of the stroke), and reports how much darker the seam pixel is --
+    // every edge should darken by roughly the same amount (the one constant stroke, alpha-blended once), so a
+    // reported min of ~0 alongside a normal max means some edge never got stroked at all.
+    _qaSeamSample(maxEdges = 300) {
+      const edges = [];
+      for (const b of drawn) {
+        if (!b.poly || b.poly.length < 3 || b.rin < 5) continue;   // too small for a reliable reference point either way
+        const nv = b.poly.length;
+        for (let k = 0; k < nv; k++) {
+          const p = b.poly[k], q = b.poly[(k + 1) % nv], mxl = (p[0] + q[0]) / 2, myl = (p[1] + q[1]) / 2;
+          const mx = b.x + mxl, my = b.y + myl;
+          if (mx < 0 || my < 0 || mx > W || my > Hh) continue;   // stay on-canvas
+          // a clean reference point for THIS cell's own fill: off the edge's OWN inward normal, not toward the
+          // cell's generator point -- on an irregular (non-regular, off-center) polygon, "toward center" can pass
+          // close by a DIFFERENT edge's own stroke before clearing this one, silently reporting a real seam as "0
+          // darkening". The inward normal moves directly away from THIS edge and nothing else.
+          const ex = q[0] - p[0], ey = q[1] - p[1], len = Math.hypot(ex, ey) || 1;
+          let nx = ey / len, ny = -ex / len;   // perpendicular to the edge, one of the two directions
+          if (nx * (-mxl) + ny * (-myl) < 0) { nx = -nx; ny = -ny; }   // flip to point toward the generator point (always inside)
+          const off = Math.min(4, b.rin * .5), rx = mx + nx * off, ry = my + ny * off;
+          edges.push([mx, my, rx, ry]);
+        }
+      }
+      if (edges.length > maxEdges) { for (let i = edges.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [edges[i], edges[j]] = [edges[j], edges[i]]; } edges.length = maxEdges; }
+      const lum = (x, y) => { const d = ctx.getImageData(Math.round(x * dpr), Math.round(y * dpr), 1, 1).data; return .2126 * d[0] + .7152 * d[1] + .0722 * d[2]; };
+      // a 1 CSS px line is a fraction of a device px wide once antialiased, so its peak darkness can land on
+      // either of two neighboring pixels depending on sub-pixel phase -- a single exact sample at the geometric
+      // midpoint can land on the LIGHTER of the two by pure chance even when the stroke is genuinely there. The
+      // darkest pixel in a small box around the midpoint is what a person actually sees as "the line".
+      const darkestNear = (x, y) => {
+        let best = Infinity;
+        for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) { const v = lum(x + dx, y + dy); if (v < best) best = v; }
+        return best;
+      };
+      const darkenings = [];
+      for (const [mx, my, rx, ry] of edges) {
+        if (mx < 3 || my < 3 || rx < 1 || ry < 1 || mx > W - 3 || my > Hh - 3 || rx > W - 1 || ry > Hh - 1) continue;
+        const rl = lum(rx, ry);
+        if (rl < 30) continue;   // a near-black cell: the stroke's own color is in the same range, so no luminance
+        // drop could ever prove it's there -- genuinely nothing to measure, not a gap in coverage.
+        darkenings.push(Math.max(0, rl - darkestNear(mx, my)));
+      }
+      darkenings.sort((a, b2) => a - b2);
+      const n = darkenings.length, min = darkenings[0] ?? 0, max = darkenings[n - 1] ?? 0;
+      const p5 = darkenings[Math.floor(n * .05)] ?? 0, median = darkenings[Math.floor(n / 2)] ?? 0;
+      return { n, min: +min.toFixed(1), p5: +p5.toFixed(1), median: +median.toFixed(1), max: +max.toFixed(1) };
     },
     // QA (tools/smoke home group): every currently-drawn bubble's REAL label font size in CSS px (honeyWrap's
     // cached per-name ratio times the bubble's current diameter), for bubbles that would actually draw one
@@ -2341,18 +2621,6 @@ function honeycomb(host, opts = {}) {
     // above is checking. This bypasses the clamp so a test can park there and read the result directly, instead
     // of trying to time a synthetic pinch gesture just right.
     _qaForceZoom(z) { Z = +z; draw(); },
-    // QA only (tools/smoke map group): David, 2026-10-10, "the borders and shapes are jumping... pop and
-    // flicker between forms... from frame to frame" while panning or zooming. _qaNudgePan moves the pan by a
-    // few px and redraws, exactly like a real drag would a couple of pointermove events in; _shapeSnapshot
-    // captures each currently-drawn cell's own radius (b.rin, the one value honeyCellPath's shape now depends
-    // on -- see its own comment) keyed by item name, so a test can diff two snapshots a nudge apart and assert
-    // the SAME cell didn't jump shape between them.
-    _qaNudgePan(dx, dy) { P = [P[0] + dx, P[1] + dy]; draw(); },
-    _shapeSnapshot() {
-      const m = {};
-      for (const b of drawn) if (b.it && b.rin > 0) m[b.it.n] = { rin: +b.rin.toFixed(3), x: +b.x.toFixed(2), y: +b.y.toFixed(2) };
-      return m;
-    },
     _qaState() { return { lay: !!lay, W, Hh, dead, visible, raf, phase, down: !!down, pinch: !!pinch, P: P.slice(), Z, drawnLen: drawn.length, fitMode, fitUserOverride, ptrsSize: ptrs.size }; },
     // David, 2026-10-09 ("panning gets stuck"): js/home.js's double-tap-to-close-Arrange (dblClose) stops the
     // second tap's pointerup from ever reaching this canvas's own pointerup listener (stopPropagation, ahead of

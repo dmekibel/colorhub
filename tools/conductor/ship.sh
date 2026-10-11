@@ -24,8 +24,10 @@ SNAP=/tmp/colorhub-ship-snap
 git -C "$SNAP" checkout -q --detach -f "$(git rev-parse HEAD)" && git -C "$SNAP" clean -qfd && cp index.html "$SNAP/index.html"
 ok=0
 if bash "$SNAP/tools/smoke.sh" > /tmp/smoke.log 2>&1; then ok=1; else
-  ok=1
-  for g in $(grep -A40 FAILURES /tmp/smoke.log | grep -oE '^  [a-z-]+ /' | awk '{print $1}' | sort -u); do
+  groups=$(grep -A40 FAILURES /tmp/smoke.log | grep -oE '^  [a-z-]+ /' | awk '{print $1}' | sort -u)
+  # a crash (syntax error, runner died) names no failed group: that's a failure, never a pass
+  if [ -z "$groups" ]; then ok=0; tail -5 /tmp/smoke.log; else ok=1; fi
+  for g in $groups; do
     bash "$SNAP/tools/smoke.sh" --group "$g" > /tmp/smoke-$g.log 2>&1 || { ok=0; grep -A6 FAILURES /tmp/smoke-$g.log; }
   done
 fi

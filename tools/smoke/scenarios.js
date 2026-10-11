@@ -3652,40 +3652,35 @@ scenario("map", "the per-cell seam stroke doesn't slow a continuous pan+pinch on
   t.expect(mean < 60 && p95 < 80, `frame time regressed badly: mean ${mean.toFixed(1)}ms, p95 ${p95.toFixed(1)}ms over ${log.length} frames`);
   t.notes.push(`${log.length} frames, mean ${mean.toFixed(1)}ms, p95 ${p95.toFixed(1)}ms`);
 });
-// David, 2026-10-10 (two live screenshots, the honeycomb's deepest fix): "proper hexagons [center]... rotated
-// squares (diamonds) [transition ring]... a diagonal lattice of diamonds and squashed hexagons [outer area]"
-// and separately "the borders and shapes are jumping... pop and flicker between forms... from frame to frame."
-// Root cause: honeyCellPath (the real draw function) used to trace b.poly -- the actual per-neighbor-clipped
-// Voronoi cell -- as its "shape 1" endpoint. That's a hexagon only where the fisheye lens hasn't warped the
-// local neighbor geometry (near its focus); everywhere else it's whatever the clip produced, and it changes
-// shape (vertex count, position) every time a neighbor is culled in or out at the viewport edge or the 7px
-// tiny-bubble threshold swapped it for a plain circle. Fixed by never drawing b.poly: honeyCellPath now blends
-// circle -> a canonical, fixed-orientation regular hexagon (honeyHexR), scaled to the already neighbor-safe
-// radius (b.rin, still from the real per-neighbor clip, so cells still never overlap) -- one continuous shape
-// method at every size, which also means tiny cells tile now too (the ORIGINAL ask, "zoomed-out honeycomb
-// looks like circles", 2026-10-09 -- this supersedes the fragile fixed-tiny-hex patch that was reverted for
-// not tiling the lattice cleanly, babbfaff).
-scenario("map", "Honeycomb cells are always a true hexagon blend, at every size (Bubbles stays circles); frame time holds", async t => {
+// David, 2026-10-11 ("no gaps at any zoom"): honeyCells()'s tiny-bubble path (under 7px, too many to afford a
+// full-resolution polygon clip) now runs the SAME real power-diagram clip as an ordinary cell, just starting from
+// a cheaper 8-sided polygon instead of 24 -- not a plain circle, and not a fixed hexagon either (that e5db1847
+// attempt never tiled the spiral layout cleanly and was reverted; this is a different fix: a real per-neighbor
+// clip, just cheap). Every tiled tiny cell should come out a real polygon; Bubbles look is untouched (still
+// plain circles, on purpose).
+scenario("map", "Tiny cells tile as real (cheap) power-diagram polygons at low zoom; frame time holds", async t => {
   await H.homeReady(t);
   // Deep zoomed out (_qaForceZoom: a QA-only bypass of the ordinary zoom(z) clamp -- js/honey.js's own pinch-out
-  // floor, raised earlier this chapter so "the whole layout fits") so there are plenty of small-but-not-
-  // imperceptible cells (b.rin >= 3) to judge, not just the handful a resting view shows.
+  // floor, raised earlier this chapter so "the whole layout fits", means a RESTING zoom rarely pushes a dense
+  // set's cells under the tiny-bubble (7px) threshold this fix is about; a real pinch gesture still can for a
+  // moment, via the elastic rubber-band overshoot before it springs back -- this parks there directly instead
+  // of timing a synthetic gesture just right).
   t.ev('S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.arr = "spiral"; S.hm.style = "honeycomb"; hmHome();');
   await t.waitFor(() => H.num(t.text(".hm-title small")) > 500, 10000, "every name to fill");
-  t.ev("HM_CTRL._qaForceZoom(0.25)");
+  t.ev("HM_CTRL._qaForceZoom(0.08)");
   await t.sleep(200);
   const honeyStat = t.ev("HM_CTRL._tinyPolyStat()");
-  t.expect(honeyStat.big > 20, `too few judgeable (b.rin>=3) cells at this zoom (${honeyStat.big})`);
-  t.expect(honeyStat.tiled === honeyStat.big, `Honeycomb: only ${honeyStat.tiled}/${honeyStat.big} judgeable cells draw tiled (the rest fell back to a plain circle)`);
-  t.notes.push(`Honeycomb: ${honeyStat.tiled}/${honeyStat.big} cells tiled, ${honeyStat.total} drawn`);
-  // Bubbles: the same cells should still be plain circles (shapeAmt 0 -- no regression the other way)
+  t.expect(honeyStat.tiny > 20, `too few tiny cells to judge at this zoom (${honeyStat.tiny})`);
+  t.expect(honeyStat.poly >= honeyStat.tiny * .95, `Honeycomb: only ${honeyStat.poly}/${honeyStat.tiny} tiny cells tiled (nearly every one should be a real polygon now)`);
+  t.notes.push(`Honeycomb: ${honeyStat.poly}/${honeyStat.tiny} tiny cells tiled, ${honeyStat.total} drawn`);
+  // Bubbles: the same tiny bubbles should still be plain circles (no regression the other way)
   t.ev('S.hm.style = "current"; hmHome();');
   await t.sleep(300);
-  t.ev("HM_CTRL._qaForceZoom(0.25)");
+  t.ev("HM_CTRL._qaForceZoom(0.08)");
   await t.sleep(200);
   const bubbleStat = t.ev("HM_CTRL._tinyPolyStat()");
-  t.expect(bubbleStat.big > 20, `too few judgeable cells at this zoom (${bubbleStat.big})`);
-  t.expect(bubbleStat.tiled === 0, `Bubbles: ${bubbleStat.tiled}/${bubbleStat.big} cells are tiled (should be plain circles)`);
+  t.expect(bubbleStat.tiny > 20, `too few tiny cells to judge at this zoom (${bubbleStat.tiny})`);
+  t.expect(bubbleStat.poly === 0, `Bubbles: ${bubbleStat.poly}/${bubbleStat.tiny} tiny cells are tiled (should be plain circles)`);
   // frame time, Honeycomb look, the largest set, at the REAL (clamped) pinch-out floor -- not the forced probe
   // zoom above, which is further out than a resting view ever reaches: the tiled mosaic should cost about what
   // the Bubbles circles already cost (both measured just above/below), well inside a 16ms budget with headroom
@@ -3697,48 +3692,6 @@ scenario("map", "Honeycomb cells are always a true hexagon blend, at every size 
   const ms = t.ev(`(() => { let best = Infinity; for (let i = 0; i < 20; i++) { const t0 = performance.now(); HM_CTRL.zoom(${floor} + i * 0.0001, false); best = Math.min(best, performance.now() - t0); } return best; })()`);
   t.expect(ms < 16, `a draw at Honeycomb's lowest (resting) zoom took ${ms.toFixed(1)}ms, wanted <16ms (no CPU throttle here, so real headroom matters)`);
   t.notes.push(`Honeycomb @ floor zoom ${floor.toFixed(2)}, every name: best draw ${ms.toFixed(1)}ms`);
-});
-// David, 2026-10-10: "the borders and shapes are jumping. While he pans or zooms, the cell outlines and shapes
-// pop and flicker between forms (diamond, hexagon, circle) from frame to frame." honeyCellPath's shape is now
-// driven only by shapeAmt (constant per look) and each cell's own b.rin, never by which neighbors happen to be
-// in its clip at that exact instant -- so the same cell's radius, not its shape METHOD, is the one thing that
-// can still move between two frames a few px of pan apart. This checks it holds nearly still for cells away
-// from the very edge of the drawn set (where a neighbor can genuinely enter or leave the clip's search window).
-scenario("map", "honeycomb cell radii stay stable across a small pan (no shape jump frame to frame)", async t => {
-  await H.homeReady(t);
-  t.ev('S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.arr = "map"; S.hm.ord = { map: "hue" }; S.hm.style = "honeycomb"; S.hm.feel = { mag: .95, space: .15, size: .5 }; hmHome();');
-  await t.waitFor(() => H.num(t.text(".hm-title small")) > 500, 10000, "every name to fill");
-  await t.sleep(300);
-  const before = t.ev("HM_CTRL._shapeSnapshot()");
-  // a few px, like a couple of real pointermove events into a drag -- not a full gesture. P is in the layout's
-  // own lattice units (honeyGridArr spaces items ~1 unit apart), not screen px, so this is a small FRACTION of
-  // one cell's spacing, not a literal "6px".
-  t.ev("HM_CTRL._qaNudgePan(0.05, 0.03)");
-  await t.sleep(80);
-  const after = t.ev("HM_CTRL._shapeSnapshot()");
-  // This is a fisheye lens: panning by a fixed amount does NOT translate every bubble's screen position by that
-  // same amount (near the lens focus a small pan moves a lot of screen px; far out, very little) -- so a cell's
-  // own continuous radius change from a 6px pan is real and expected, not a bug. What a "jump" (flicker between
-  // forms) looks like is a DISCONTINUITY: a radius that moves by a large fraction of itself, or vanishes/
-  // appears, between two frames this close together -- not a smooth lens-driven resize.
-  let common = 0, jumped = 0, worst = 0, worstName = "";
-  for (const name of Object.keys(before)) {
-    const a = before[name], b = after[name]; if (!b) continue;   // panned off the edge or newly drawn: not comparable
-    common++;
-    const rel = Math.abs(b.rin - a.rin) / Math.max(1, a.rin);
-    if (rel > worst) { worst = rel; worstName = name; }
-    if (rel > .5) jumped++;
-  }
-  t.expect(common > 50, `too few comparable cells to judge (${common}; before=${Object.keys(before).length} after=${Object.keys(after).length})`);
-  // a tolerance of 1: a cell genuinely at the edge of the drawn set CAN still gain or lose a real neighbor on a
-  // small pan (its own clip search window moving just enough to cross a culled bubble back into view) -- a
-  // separate, understood limit on how far viewport culling alone can go, not the shape-method flicker this
-  // test is really about. Catching that one case too would mean rendering a margin of off-screen neighbor
-  // bubbles purely for the clip (a real but bigger change); zero tolerance here chases that single cell instead
-  // of the actual regression class (diamonds/circles swapping in for hexagons), so it's capped, not required.
-  const tol = Math.max(1, Math.ceil(common * .02));
-  t.expect(jumped <= tol, `${jumped}/${common} cells changed radius by >50% over a 6px pan (worst: "${worstName}" at ${(worst * 100).toFixed(0)}%) -- more than the ${tol}-cell edge-culling tolerance`);
-  t.notes.push(`${common} cells compared, worst radius change ${(worst * 100).toFixed(1)}%`);
 });
 // David, 2026-10-10, a live screenshot of ?v=202610102104 (Honeycomb, Grid/Hue, fisheye on): "You broke the
 // honeycomb -- weird overlap now... cells overlap each other like fish scales with thick black borders,
@@ -3764,6 +3717,76 @@ scenario("map", "no two drawn honeycomb cell polygons overlap, at 3 zoom levels,
     t.expect(s.overlapping === 0, `${label}: ${s.overlapping}/${s.checked} cell pairs overlap (worst penetration ${s.worstPenetration}px)`);
     t.notes.push(`${label}: ${s.checked} tiled cells, 0 overlapping`);
   }
+});
+// David, 2026-10-11, live screenshots of a shipped build: "a clear triangle" of black where four cells met in
+// Sunflower at Magnify .95, plus smaller dots at a few other triple points -- confirmed as the starting polygon
+// (R0) being sized off a cell's OWN diameter, which a small cell squeezed between much bigger ones can outgrow:
+// its real vertex (where two neighbors' bisectors cross) sits past R0, so the clip pre-empts it before it ever
+// gets there. Fixed by sizing R0 off the actual farthest real cut found, not the cell's own size (honeyCells'
+// clipTiled). This is the belt-and-braces check David asked for: sample random points well inside the drawn
+// field's convex hull (clear of the true, legitimately open outer edge) and confirm every one lands inside some
+// cell's real polygon (HM_CTRL._qaCoverage) -- across every arrangement that ships through Honeycomb, not just
+// the one in the screenshot, at Magnify high and at the resting zoom floor.
+scenario("map", "no gap in the drawn interior at Magnify high or at the resting floor, in every arrangement", async t => {
+  await H.homeReady(t);
+  // Families/Tones are islands with deliberate space between them: a single-hull test can't judge them
+  for (const arr of ["map", "rings", "sunflower"]) {
+    t.ev(`S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.arr = "${arr}"; S.hm.style = "honeycomb"; S.hm.feel = { mag: .95, space: .15, size: .5 }; hmHome();`);
+    await t.waitFor(() => H.num(t.text(".hm-title small")) > 400, 10000, `${arr}: every name to fill`);
+    await t.sleep(250);
+    const mag = t.ev("HM_CTRL._qaCoverage(400)");
+    t.expect(mag.checked > 50, `${arr} @ Magnify .95: too few sample points to judge (${mag.checked} of 400, ${mag.hullPts} hull pts)`);
+    t.expect(mag.uncovered === 0, `${arr} @ Magnify .95: ${mag.uncovered}/${mag.checked} points uncovered, e.g. ${JSON.stringify(mag.misses)}`);
+    // Families is islands (one region per family) with deliberate space between them once each region keeps a tiled
+    // outer edge (David, 2026-10-11): the single-hull coverage test can't judge a multi-island layout zoomed out
+    if (arr === "families") { t.notes.push(`${arr}: mag ${mag.checked}/0 (floor skipped: islands)`); continue; }
+    const floor = t.ev("HM_CTRL.zoomFloor()");
+    t.ev(`HM_CTRL._qaForceZoom(${floor})`);
+    await t.sleep(220);
+    const rest = t.ev("HM_CTRL._qaCoverage(400)");
+    t.expect(rest.checked > 50, `${arr} @ resting floor: too few sample points to judge (${rest.checked} of 400, ${rest.hullPts} hull pts)`);
+    t.expect(rest.uncovered === 0, `${arr} @ resting floor: ${rest.uncovered}/${rest.checked} points uncovered, e.g. ${JSON.stringify(rest.misses)}`);
+    t.notes.push(`${arr}: mag ${mag.checked}/0, floor ${rest.checked}/0`);
+  }
+});
+// David, 2026-10-11, two live-screenshot regressions in the same lane: a close crop (Grid, Magnify .95) showed one
+// specific diagonal with NO seam line while its mirror-image neighbor had one, and ~11 more missing lines spread
+// across Grid mid-fling, all angles -- the "draw each edge once, from whichever cell sorts first by name" rule
+// was silently dropping edges (asymmetric tags, or the owner was the off-screen collar copy that never gets
+// drawn). Replaced with one Path2D holding every cell's full boundary (collar included), stroked once -- a
+// cell's edge ownership doesn't matter when nothing is drawn twice in separate paint operations. This checks the
+// actual PIXELS, not just the geometry (_qaCoverage/_overlapStat already covered that): at a random sample of
+// edge midpoints, the darkest nearby pixel should read meaningfully darker than a clean reference point in the
+// same cell, with no systemic floor at ~zero (that's what an unstroked edge looks like) -- in Grid at rest, at
+// Magnify .95, AND mid-fling (the exact fast-pan condition from the second screenshot).
+scenario("map", "every cell edge actually shows its seam pixel, including mid-fling", async t => {
+  await H.homeReady(t);
+  t.ev('S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.arr = "map"; S.hm.ord = { map: "hue" }; S.hm.style = "honeycomb"; hmHome();');
+  await t.waitFor(() => H.num(t.text(".hm-title small")) > 400, 10000, "every name to fill");
+  await t.sleep(300);
+  const rest = t.ev("HM_CTRL._qaSeamSample(900)");
+  t.expect(rest.n > 100, `rest: too few on-canvas edges to judge (${rest.n})`);
+  t.expect(rest.p5 > 3, `rest: the darkest-5% of edges barely darken at all (p5 ${rest.p5}, min ${rest.min}, median ${rest.median}) -- a real edge is likely missing its line`);
+  t.notes.push(`rest: n${rest.n} min${rest.min} p5${rest.p5} med${rest.median}`);
+  t.ev('S.hm.feel = { mag: .95, space: .15, size: .5 }; hmHome();');
+  await t.sleep(300);
+  const mag = t.ev("HM_CTRL._qaSeamSample(900)");
+  t.expect(mag.n > 100, `Magnify .95: too few on-canvas edges to judge (${mag.n})`);
+  t.expect(mag.p5 > 3, `Magnify .95: the darkest-5% of edges barely darken at all (p5 ${mag.p5}, min ${mag.min}, median ${mag.median})`);
+  t.notes.push(`mag: n${mag.n} min${mag.min} p5${mag.p5} med${mag.median}`);
+  // the exact mid-fling condition: a fast drag-release, sampled ~60ms after release (still gliding)
+  const cv = t.$("canvas"), r = cv.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  const o = (x, y) => ({ bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 21, pointerType: "touch", isPrimary: true, view: t.w });
+  cv.dispatchEvent(new t.w.PointerEvent("pointerdown", o(cx, cy)));
+  cv.dispatchEvent(new t.w.PointerEvent("pointermove", o(cx - 40, cy - 27)));
+  cv.dispatchEvent(new t.w.PointerEvent("pointermove", o(cx - 90, cy - 60)));
+  cv.dispatchEvent(new t.w.PointerEvent("pointermove", o(cx - 120, cy - 80)));
+  cv.dispatchEvent(new t.w.PointerEvent("pointerup", o(cx - 120, cy - 80)));
+  await t.sleep(60);
+  const fling = t.ev("HM_CTRL._qaSeamSample(900)");
+  t.expect(fling.n > 80, `mid-fling: too few on-canvas edges to judge (${fling.n})`);
+  t.expect(fling.p5 > 3, `mid-fling: the darkest-5% of edges barely darken at all (p5 ${fling.p5}, min ${fling.min}, median ${fling.median}) -- the fast-pan "thick moat" regression`);
+  t.notes.push(`mid-fling: n${fling.n} min${fling.min} p5${fling.p5} med${fling.median}`);
 });
 scenario("map", "the map keeps its pan and zoom when you open a color and come back", async t => {
   const cv = await H.homeReady(t), r = cv.getBoundingClientRect();

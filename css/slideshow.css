@@ -24,15 +24,15 @@
 
 /* two close names, side by side, with the one-line distinction straddling the seam (js/lookalikes.js lookDiff) */
 .ss-layer.ss-pair{flex-direction:row;align-items:stretch;justify-content:stretch;padding:0}
-.ss-half{flex:1;appearance:none;border:0;background:var(--c);color:inherit;display:flex;align-items:flex-end;
-  justify-content:flex-start;padding:0 20px calc(var(--bottom) + 96px);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ss-half{flex:1;appearance:none;border:0;background:var(--c);color:inherit;display:flex;flex-direction:column;align-items:flex-start;
+  justify-content:flex-end;text-align:left;padding:0 20px calc(var(--bottom) + 132px);cursor:pointer;-webkit-tap-highlight-color:transparent}
 .ss-half:active{opacity:.85}
 .ss-half[data-ink="dark"]{color:#141311}
 .ss-half[data-ink="light"]{color:#fff}
 .ss-name-sm{font:400 clamp(28px,8vw,46px)/1.02 var(--serif);letter-spacing:-.02em;text-wrap:balance}
-.ss-diff{position:absolute;left:50%;bottom:calc(var(--bottom) + 28px);transform:translateX(-50%);z-index:2;
-  max-width:88%;margin:0;padding:14px 22px;border-radius:var(--r-pill);background:#14130F;
-  color:#fff;font:400 17px/1.4 var(--serif);letter-spacing:0;text-align:center;text-wrap:pretty}
+/* the difference reads on the color itself, under the second name, in that half's own ink (David: "that ugly black pill doesn't match") */
+.ss-name-sm{position:relative;max-width:100%}
+.ss-diff{position:absolute;left:0;top:calc(100% + 10px);width:min(22ch,calc(50vw - 40px));margin:0;font:400 17px/1.4 var(--serif);letter-spacing:0;opacity:.86;text-wrap:pretty}
 
 /* top bar: close, Mode (opens a compact picker below), pause — three opaque capsules, never more, over the color.
    Law 1: the color is the interface, so chrome stays minimal at rest (David-critic fix, 2026-10-09). */
