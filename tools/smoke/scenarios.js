@@ -7409,6 +7409,13 @@ scenario("pv", "Palette view: categories render equal-swatch rows, the count sli
   t.ev(`document.querySelector('[data-plvcnt]')._countTo(2)`);
   await t.waitFor(() => rowsFirstCat().length && swCount(rowsFirstCat()[0]) === 2, 8000, "rows with 2 swatches after moving the slider");
   await t.waitFor(() => rowsFirstCat().length >= 10, 10000, "at least 10 rows at count 2");
+  // David, 2026-10-12: in For you, a bigger count sometimes left palettes unchanged or mixed sizes -- every row must
+  // have exactly the slider's count
+  t.ev(`document.querySelector('[data-plvcnt]')._countTo(7)`);
+  await t.waitFor(() => rowsFirstCat().length && swCount(rowsFirstCat()[0]) === 7, 8000, "rows with 7 swatches after moving the slider");
+  t.expect(rowsFirstCat().every(r => swCount(r) === 7), `at count 7, rows have ${[...new Set(rowsFirstCat().map(swCount))].join("/")} swatches`);
+  t.ev(`document.querySelector('[data-plvcnt]')._countTo(2)`);
+  await t.waitFor(() => rowsFirstCat().length && swCount(rowsFirstCat()[0]) === 2, 8000, "back to 2 swatches");
   // pin the first row, check the Pinned-here sheet
   const row0 = rowsFirstCat()[0];
   await t.click(t.$(".plv-heart", row0), { wait: 500 });
