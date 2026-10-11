@@ -59,6 +59,22 @@ const ptCoverWord = (m, mx) => mx ? `between ${m}% and ${mx}% of the painting` :
 const ptTolShort = t => t === 0 ? "Exact" : t + "%";
 const ptAutoFor = (hexes, st) => ciAuto(hexes, st, PT_TOL, PT_MIN);
 function ptNear(hex) { const n = nameOf(hex); return n.de < VERY_CLOSE_DE ? n.n : n.text; }
+// the color you actually came from, by name (David, 2026-10-11: "I came from Dark Cyan but the page says another
+// color"): only its hex travels in the address, so look back one step on the trail -- when that page was a color
+// with this exact hex, its own title wins over the nearest-name guess
+function ptCameName(hex) {
+  try {
+    for (let k = XSTACK.length - 1; k >= Math.max(0, XSTACK.length - 3); k--) {
+      const tok = XSTACK[k], i = tok.indexOf(":"); if (i < 0) continue;
+      const pre = tok.slice(0, i);
+      if (pre === "n" && k === XSTACK.length - 2) return decodeURIComponent(tok.slice(i + 1));   // a name page sent its own hex
+      if (pre !== "p" && pre !== "z") continue;
+      const n = typeof graph === "function" && graph().nodes.get(tok.slice(i + 1));
+      const h = n && (n.h || n.hex); if (h && h.toUpperCase() === hex.toUpperCase() && (n.title || n.n)) return n.title || n.n;
+    }
+  } catch (e) {}
+  return ptNear(hex);
+}
 
 // ---------- the loosen ladder (David, 2026-10-09: "results always satisfy the query; looseness is explicit") ----------
 // Never a silent "closest anyway" row: a painting on screen always really holds that color (or every one of the
@@ -506,7 +522,7 @@ function ptArrival(el, o) {
   return ptArrivalOne(el, host, o, hexes[0]);
 }
 function ptArrivalOne(el, host, o, hex) {
-  const nm = ptNear(hex), st = { tol: o.tol != null ? o.tol : 3 };
+  const nm = ptCameName(hex), st = { tol: o.tol != null ? o.tol : 3 };
   let res = null, mask = null, sel = -1, on = false, canvas = null, seq = 0, img = null, readable = false, known = false, more = false;
   host.hidden = false;
   // David, 2026-10-08: the painting stays the focus. The color you came from is one quiet row under the palette
