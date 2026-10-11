@@ -6698,24 +6698,25 @@ scenario("trail", "Close from color > painting > color: the map as it was, the t
 
 // David's iPhone (2026-10-09): on a color's cover, ‹ and the place pill sat on the status bar. With an iPhone's
 // safe area (59px, simulated here), every inner page's ‹ and place pill sit below it.
-scenario("pages", "with an iPhone safe area, ‹ and Close sit below the status bar on every kind of inner page", async t => {
-  const INSET = 59, bad = [];
-  for (const hash of ["#/color/cobalt", "#/name/rose-pink", "#/read/mauve", "#/hub/source:crayola", "#/gallery/15146", "#/pair/4f6b3a+c2412d"]) {
+// one scenario per kind of inner page (it was one 6-page loop that ran past the 120s scenario budget under load,
+// failing every ship with a timeout that said nothing about which page): same check, same simulated safe area
+for (const hash of ["#/color/cobalt", "#/name/ecru", "#/read/mauve", "#/hub/source:crayola", "#/gallery/15146", "#/pair/4f6b3a+c2412d"]) {
+  scenario("pages", `with an iPhone safe area: back and Close sit below the status bar on ${hash}`, async t => {
+    const INSET = 59, bad = [];
     await t.open(hash, { settle: 300 });
     { const st = t.w.document.createElement("style"); st.textContent = `:root{--top:${INSET}px !important}`; t.w.document.head.appendChild(st); }   // a simulated iPhone safe area
     t.w.location.hash = "#/home"; await t.sleep(300); t.w.location.hash = hash; await t.sleep(300);   // drawn again with the inset in place
-    // every one of these is a fresh, single-hop load, so the place pill correctly hides (‹ already leads to
-    // the map there too, PLAN §3.5 rule 8) -- only ‹ itself is guaranteed to exist here.
-    await t.waitFor(() => t.$("#app .screen [data-back]") && !t.$(".screen.waiting"), 15000, `‹ on ${hash}`);
+    // a fresh, single-hop load, so the place pill correctly hides (‹ already leads to the map, PLAN §3.5 rule 8)
+    await t.waitFor(() => t.$("#app .screen [data-back]") && !t.$(".screen.waiting"), 20000, `‹ on ${hash}`);
     t.w.scrollTo(0, 0); await t.sleep(80);
     for (const sel of ["[data-back]", "[data-tl-exit]"]) {
       const node = t.$("#app .screen " + sel); if (!node) continue;
       const r = node.getBoundingClientRect();
-      if (r.top < INSET + 6) bad.push(`${hash} ${sel} at ${Math.round(r.top)}px`);
+      if (r.top < INSET + 6) bad.push(`${sel} at ${Math.round(r.top)}px`);
     }
-  }
-  t.expect(!bad.length, `on the status bar: ${bad.join(", ")}`);
-});
+    t.expect(!bad.length, `on the status bar: ${bad.join(", ")}`);
+  });
+}
 
 // ================================================================== SLIDESHOW (js/slideshow.js)
 scenario("slideshow", "opens from Learn's Or choose, switches modes, steps by swipe and pause, and a name opens its page", async t => {
