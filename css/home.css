@@ -261,6 +261,11 @@
 .hm-seg-n button.on em{color:var(--paper-ink);opacity:.7}
 .hm-clear{display:block;margin:14px 0 0;min-height:44px;padding:0 18px;border-radius:var(--r-pill);background:var(--surface-2);font:400 16px/1 var(--sans);color:var(--ink)}
 .hm-clear[hidden]{display:none}
+/* Keep colors' own multi-select mode, one labeled row at the top of the Colors tab (David, 2026-10-11: a
+   single color moved to a long-press on the map itself; this is for choosing several at once). */
+.hm-keep-pick{display:flex;align-items:center;gap:10px;width:100%;min-height:48px;margin:0 0 16px;padding:0 16px;border-radius:var(--r-pill);background:var(--surface-2);color:var(--ink);font:400 16px/1 var(--sans)}
+.hm-keep-pick svg{flex:none;width:18px;height:18px;color:var(--soft)}
+.hm-keep-pick:active{background:var(--s3)}
 /* Look and the feel sliders: see the compact .hm-look-seg/.hm-feel-row rules further down (David, 2026-10-09,
    "more compact") -- this used to be a duplicate of that block under the old .hm-look-row/.hm-look-chip-card
    markup, which no longer exists; removed rather than left dead (and silently winning on specificity over the

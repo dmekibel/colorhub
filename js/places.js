@@ -59,8 +59,13 @@ function placesOpen() {
   STEM_OPEN = true; document.body.classList.add("stem-open");
   document.querySelectorAll(".rooms-stem,.rm-scrim").forEach(n => n.remove());   // one still sinking from a fast double tap
   const here = placesHere();
+  // Settings, farthest from the thumb (David, 2026-10-11, a live screenshot of the map's ⋯ menu: "way too many
+  // settings" -- it's app-level, not map-level, so it moved here, off the end of the column next to
+  // Collections, the other least-reached row). Still the one ymSettingsSheet() every ⋯ opens too -- one
+  // definition, now two doors, same as Keep colors below.
   const rows = PLACES_LIST.map(([id, label]) => ({ id, label, cur: id === here }))
-    .concat([{ id: "colls", label: "Collections", coll: true }]);
+    .concat([{ id: "colls", label: "Collections", coll: true }])
+    .concat(typeof ymSettingsSheet === "function" ? [{ id: "settings", label: "Settings", settings: true }] : []);
   const n = rows.length;
   const scrim = document.createElement("div"); scrim.className = "rm-scrim rm-scrim-l";
   scrim.addEventListener("pointerdown", e => { e.preventDefault(); e.stopPropagation(); buzz(4); closeStem(); });
@@ -74,6 +79,9 @@ function placesOpen() {
   stem.innerHTML = rows.map((r, i) => r.coll
     ? `<button class="rm-bubble" role="menuitem" data-pl="colls" style="--i:${i}">
         ${placesCollArt()}<span class="rm-label"><b>Collections</b><em>Every painting, poem, gem and look</em></span></button>`
+    : r.settings
+    ? `<button class="rm-bubble hm-do-sm" role="menuitem" data-pl="settings" style="--i:${i}">
+        <span class="rm-art hm-do-ic">${HM_GEAR_SVG}</span><span class="rm-label"><b>Settings</b></span></button>`
     : `<button class="rm-bubble${r.cur ? " cur" : ""}" role="menuitem" data-pl="${r.id}" style="--i:${i}">
         ${roomsBubbleArt(r.id)}<span class="rm-label"><b>${esc(r.label)}</b><em>${esc(r.cur ? "You're here" : roomsNote(r.id))}</em></span></button>`
   ).join("");
@@ -92,6 +100,7 @@ function placesOpen() {
       S.lens = "all"; save();
       return growFrom(art, () => go("explore"));
     }
+    if (id === "settings") { closeStem(); if (typeof ymSettingsSheet === "function") ymSettingsSheet(); return; }
     if (id === here) return closeStem();
     b.classList.add("go");
     closeStem();

@@ -58,20 +58,19 @@ const H = {
     await t.waitFor(() => /\d/.test(t.text(".hm-title small")) && !/Loading/.test(t.text(".hm-title small")), 10000, "the honeycomb to fill");
     return cv;
   },
-  // Home's right corner: ⋯, restored 2026-10-10 to the labeled expanding-pill stem (js/home.js hmDoMenu;
-  // David's verdict on the Simplify pass's single ⋯ sheet). which picks what to tap next inside it:
-  // "colors"/"arrange"/"map" -> Colors & Arrange (the combined chooser, with its own tab inside); "learn" ->
-  // Study the map, "fav"/"keep" -> Keep colors, "surprise" -> Surprise me, "slideshow" -> Slideshow, "namer" ->
-  // Name any color, "settings" -> Settings. Colors|Paintings is NOT in here (see H.layer below); Search is NOT
-  // in here either any more -- it's the standalone top-of-map button (#hmTopSearch, David's 2026-10-10
-  // addendum), driven directly, not through this menu.
+  // Home's right corner: ⋯, down to 3 rows (David, 2026-10-11, a live screenshot: "way too many settings" --
+  // Settings moved to the bottom of the Places menu, Surprise me/Name any color moved into the one search
+  // sheet's quick chips, Keep colors moved onto a long-press on any map cell, with its multi-select mode now a
+  // row inside Colors & Arrange). which picks what to tap next inside the stem: "colors"/"arrange"/"map" ->
+  // Colors & Arrange (the combined chooser, with its own tab inside); "learn" -> Study the map, "slideshow" ->
+  // Slideshow. Colors|Paintings is NOT in here (see H.layer below); Search is NOT in here either -- it's the
+  // standalone top-of-map button (#hmTopSearch), driven directly, not through this menu.
   mrRow(t, id) { return t.$(`.rooms-stem.hm-do-stem [data-do="${id}"]`); },
   async menu(t, which) {
     await t.click("#hmDo", { wait: 120 });
     await t.waitFor(".rooms-stem.hm-do-stem.on", 6000, "the right corner's stem");
     if (!which) return;
-    const id = { colors: "colors", arrange: "colors", map: "colors", learn: "study", fav: "keep", keep: "keep",
-      surprise: "surprise", slideshow: "slideshow", namer: "namer", settings: "settings" }[which] || which;
+    const id = { colors: "colors", arrange: "colors", map: "colors", learn: "study", slideshow: "slideshow" }[which] || which;
     const row = H.mrRow(t, id);
     t.expect(row, `no "${which}" row in the map's ⋯ stem`);
     await t.click(row, { wait: 200 });
@@ -1173,17 +1172,21 @@ scenario("home", "View sheet filters · Surprise me · Search", async t => {
   }
   await t.click('[data-val="all"]', { wait: 100 });
   await t.waitFor(() => H.num(t.text("[data-count]")) === all, 8000, `All to bring back ${all} colors (says "${t.text("[data-count]")}")`);
-  // Surprise me is a labeled row in the right corner's stem (David, 2026-10-10: restored to the expanding-pill
-  // menu) -- close this sheet first, same as a person would, then drive it from there.
+  // Surprise me moved into the one search sheet (David, 2026-10-11, a live screenshot of the ⋯ menu: "way too
+  // many settings" -- it's "a way of finding a color", so it's a quick chip under the search field now, not a
+  // stem row) -- close this sheet first, same as a person would, then drive it from there.
   await t.click("[data-sheet-close]", { wait: 400 });
   await t.waitFor(() => !t.$(".hm-chooser"), 4000, "the Colors sheet to close");
-  await H.menu(t, "surprise");
-  t.expect(!t.$(".hm-chooser") && !t.$(".rooms-stem"), "Surprise me left a sheet open");
-  await t.sleep(900);   // let the "fly to a new color" settle before the next tap, same as a real second tap would
-  // Search is the standalone top-of-map button now (David's 2026-10-10 addendum, #hmTopSearch), not a stem
-  // row: one tap opens the one global search (js/search.js searchOpen), focused and ready to type.
+  // Search is the standalone top-of-map button (David's 2026-10-10 addendum, #hmTopSearch), not a stem row:
+  // one tap opens the one global search (js/search.js searchOpen), focused and ready to type.
   await t.click("#hmTopSearch", { wait: 300 });
   await t.waitFor(".sr-sheet", 4000, "the global search sheet from the top-of-map button");
+  const surprise = t.$('[data-sr-quick="surprise"]'); t.expect(surprise, "no Surprise me chip under the search field");
+  await t.click(surprise, { wait: 300 });
+  t.expect(!t.$(".sr-sheet") && !t.$(".hm-chooser"), "Surprise me left a sheet open");
+  await t.sleep(900);   // let the "fly to a new color" settle before the next tap, same as a real second tap would
+  await t.click("#hmTopSearch", { wait: 300 });
+  await t.waitFor(".sr-sheet", 4000, "the global search sheet from the top-of-map button, a second time");
   const q = t.$(".sr-input"); t.expect(q === t.d.activeElement, "the search field did not focus");
   q.value = "teal"; q.dispatchEvent(new t.w.Event("input", { bubbles: true }));
   await t.tick(); await t.sleep(300);
@@ -3176,11 +3179,14 @@ scenario("studio", "Name any color, Eyedrop tab: a kept photo find logs to the L
   t.expect(find, `the new event(s) ${JSON.stringify(ev.slice(n0))} don't include a "find" with src "photo"`);
 });
 
-// David, 2026-10-09: the Colors sheet's own icon-only header buttons (this one included) moved to labeled rows
-// in the Map ⋯ sheet's "Map tools" group (PLAN §4: no private symbols) -- this now drives that row instead.
-scenario("home", "Map ⋯ sheet: Name any color", async t => {
+// David, 2026-10-11, a live screenshot of the ⋯ menu ("way too many settings"): Name any color moved off the
+// ⋯ stem into the one search sheet's quick chips -- "a way of finding a color" -- driven from there now.
+scenario("home", "Search sheet: Name any color", async t => {
   await H.homeReady(t);
-  await H.menu(t, "namer");
+  await t.click("#hmTopSearch", { wait: 300 });
+  await t.waitFor(".sr-sheet", 4000, "the global search sheet");
+  const namer = t.$('[data-sr-quick="namer"]'); t.expect(namer, "no Name any color chip under the search field");
+  await t.click(namer, { wait: 300 });
   await t.waitFor(".nmr-hero", 6000, "Name any color from Home");
 });
 
@@ -3774,7 +3780,12 @@ scenario("map", "three bubble taps with Back between leave no stuck bubble and H
 // symbols, more monotone, boring and big." Still no Recall (it's in the left menu's Learn row) and no Paintings
 // row (Colors|Paintings is the top-center switch, hmLayerSwitchHTML/hmWireLayerSwitch) -- and Search is no
 // longer a row either: it moved to the standalone top-of-map button (#hmTopSearch, the same 2026-10-10 pass).
-scenario("map", "the right corner's stem has no Recall · no Paintings row · no Search row · nothing duplicated with the left menu", async t => {
+// David, 2026-10-11, a live screenshot: "This is way too many settings" (7 rows). Rule: never delete a
+// feature, only move where it's reached -- Settings -> bottom of the Places menu (app-level, not map-level);
+// Surprise me/Name any color -> quick chips under the search field ("both are ways of finding a color"); Keep
+// colors -> a long-press on any map cell (js/home.js onPeek), with its multi-select mode a row inside Colors &
+// Arrange. Each of those new homes gets its own scenario below; this one is just the ⋯ stem's own shape now.
+scenario("map", "the right corner's stem is down to 3: Colors & Arrange, Study the map, Slideshow", async t => {
   await H.homeReady(t);
   t.expect(t.$$(".screen.hm .corner").length === 2, `${t.$$(".screen.hm .corner").length} corner buttons on Home`);
   t.expect(!t.$("#hmMapStudy, [data-pr-study], #hmFav, #hmView"), "a verb still has its own button on Home");
@@ -3786,11 +3797,15 @@ scenario("map", "the right corner's stem has no Recall · no Paintings row · no
   t.expect(!rowLabels.some(l => /recall/i.test(l)), `Recall is still in the right corner's menu: ${rowLabels.join(", ")}`);
   t.expect(!rowLabels.some(l => /^paintings$/i.test(l)), "Paintings still has its own row (it's the top-center switch now)");
   t.expect(!rowLabels.some(l => /^search$/i.test(l)), "Search is still a row in the right corner's stem (it's the top-of-map button now)");
-  for (const want of ["Colors & Arrange", "Study the map", "Keep colors", "Surprise me", "Name any color", "Slideshow", "Settings"]) {
+  for (const gone of ["Settings", "Surprise me", "Name any color", "Keep colors"]) {
+    t.expect(!rowLabels.includes(gone), `"${gone}" is still a row in the right corner's stem: ${rowLabels.join(", ")} (moved, not deleted -- see its own scenario)`);
+  }
+  for (const want of ["Colors & Arrange", "Study the map", "Slideshow"]) {
     t.expect(rowLabels.includes(want), `the right corner's stem has no "${want}" row: ${rowLabels.join(", ")}`);
   }
-  t.expect(rowLabels.length <= 7, `the right corner's stem has ${rowLabels.length} rows, wanted ~7 or fewer`);
+  t.expect(rowLabels.length === 3, `the right corner's stem has ${rowLabels.length} rows (${rowLabels.join(", ")}), wanted exactly 3`);
   t.expect(rowLabels.every(b => b.length > 2), "a menu row has no label");
+  t.expect(!t.$(".hm-do-dots i[style=''],.hm-do-dots i:not([style])"), "Colors & Arrange's dots icon has an unfilled dot (the empty-circle bug)");
   // one home per action: none of the right menu's rows should duplicate a left (Places) place
   const rightLabels = rowLabels.map(l => l.toLowerCase());
   await H.keys(t, "Escape"); await t.sleep(500);
@@ -3814,7 +3829,64 @@ scenario("map", "the right corner's stem has no Recall · no Paintings row · no
   await H.menu(t, "learn");
   await t.waitFor(".pr-quick", 8000, "Study the map from the menu");
 });
-
+// David, 2026-10-11: Settings moved to the bottom of the Places menu (app-level, not map-level) -- it's still
+// the one ymSettingsSheet() every ⋯ opens, just a different door.
+scenario("home", "Places menu: Settings opens the one Settings sheet, at the bottom of the column", async t => {
+  await H.homeReady(t);
+  await t.click("[data-rooms-corner]", { wait: 300 });
+  await t.waitFor('.rooms-stem [data-pl="settings"]', 4000, "Settings in the Places stem");
+  const ids = t.$$(".rooms-stem [data-pl]").map(b => b.dataset.pl);
+  t.expect(ids[ids.length - 1] === "settings", `Settings isn't the last row in the Places menu (order: ${ids.join(", ")})`);
+  await t.click('.rooms-stem [data-pl="settings"]', { wait: 700 });
+  await t.waitFor(".mn-sheet", 6000, "the Settings sheet (.mn-sheet, js/you.js ymSettingsSheet)");
+  t.expect(/settings/i.test(t.text(".mn-sheet h2,.mn-sheet .title-2,.mn-sheet")), `the opened sheet doesn't read like Settings: "${t.text(".mn-sheet").slice(0, 80)}"`);
+});
+// David, 2026-10-11: Keep colors moved off the ⋯ menu onto a long-press (480ms) on any map cell -- it keeps
+// that color directly (js/home.js onPeek/fvSet), with a one-time hint on the first long-press only.
+scenario("home", "long-press a map cell keeps that color, with a one-time hint", async t => {
+  await H.homeReady(t);
+  t.ev("delete S.keepHintSeen; delete S.favs; save();");
+  const cv = t.$("canvas"), r = cv.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  const o = { bubbles: true, cancelable: true, clientX: cx, clientY: cy, pointerId: 31, pointerType: "touch", isPrimary: true, view: t.w };
+  cv.dispatchEvent(new t.w.PointerEvent("pointerdown", o));
+  await t.sleep(560);   // honey.js's own 480ms long-press threshold, plus a margin
+  cv.dispatchEvent(new t.w.PointerEvent("pointerup", o));
+  await t.waitFor(() => t.ev("Object.keys(S.favs || {}).length") > 0, 4000, "a color to be kept after the long-press");
+  t.expect(t.ev("S.keepHintSeen"), "the one-time hint flag was never set");
+  const toastText = t.text(".toast");
+  t.expect(/kept/i.test(toastText), `the toast after keeping doesn't say "Kept": "${toastText}"`);
+  t.expect(/long-press/i.test(toastText), `the FIRST long-press's toast has no explanation of the gesture: "${toastText}"`);
+  await t.sleep(2300);   // the toast's own lifetime, so the second one isn't comparing against a leftover
+  // a second long-press (a different spot, so it's a different color) must NOT repeat the explanation
+  cv.dispatchEvent(new t.w.PointerEvent("pointerdown", { ...o, clientX: cx - 40, clientY: cy - 30, pointerId: 32 }));
+  await t.sleep(560);
+  cv.dispatchEvent(new t.w.PointerEvent("pointerup", { ...o, clientX: cx - 40, clientY: cy - 30, pointerId: 32 }));
+  await t.waitFor(() => t.ev("Object.keys(S.favs || {}).length") > 1 || /kept|isn't kept/i.test(t.text(".toast")), 4000, "a second long-press to do something");
+  const toast2 = t.text(".toast");
+  t.expect(!/long-press any color/i.test(toast2), `the SECOND long-press repeated the one-time hint: "${toast2}"`);
+});
+// David, 2026-10-11: "keep a 'Keep colors' entry inside the Colors & Arrange sheet for the multi-select mode" --
+// a single color is the long-press above; choosing several still wants this row.
+scenario("home", "Colors & Arrange: Keep colors opens the map's multi-select pick mode", async t => {
+  await H.homeReady(t);
+  await H.sheet(t, "colors");
+  const row = t.$("[data-keep-pick]"); t.expect(row, "no Keep colors row in the Colors & Arrange sheet");
+  t.expect(/keep/i.test(t.text(row)), `the row doesn't read like Keep colors: "${t.text(row)}"`);
+  await t.click(row, { wait: 500 });
+  t.expect(!t.$(".hm-chooser"), "the Colors & Arrange sheet did not close");
+  t.expect(t.$(".screen.hm.fv-picking") || t.d.documentElement.classList.contains("fv-picking") || t.$(".fv-pick-bar"), "no pick-mode UI appeared after Keep colors");
+});
+// David, 2026-10-11: Surprise me and Name any color moved into the one search sheet's quick chips ("both are
+// ways of finding a color") -- both chips are findable there regardless of query, not just by typing their name.
+scenario("home", "Search sheet: Surprise me and Name any color sit as quick chips under the field", async t => {
+  await H.homeReady(t);
+  await t.click("#hmTopSearch", { wait: 300 });
+  await t.waitFor(".sr-sheet", 4000, "the global search sheet");
+  const chips = t.$$(".sr-quick .sr-chip").map(b => t.text(b).trim());
+  t.expect(chips.includes("Surprise me"), `no "Surprise me" chip under the search field: ${chips.join(", ")}`);
+  t.expect(chips.includes("Name any color"), `no "Name any color" chip under the search field: ${chips.join(", ")}`);
+  t.expect(t.$(".sr-quick").compareDocumentPosition(t.$(".sr-body")) & 4, "the quick chips don't sit above the results body");
+});
 
 // ================================================================== LEARN (past the first units: js/learnmore.js)
 scenario("learn", "For you reaches past the first units: Study makes core cards due tomorrow", async t => {
