@@ -20,23 +20,35 @@ const LDR_MIN = 6, LDR_MAX = 15;
 const ldrMean = a => a.length ? a.reduce((s, v) => s + v, 0) / a.length : 0;
 
 // ---------- real candidates, pulled once from data/paintings.js ----------
-let LDR_COLOR_POOL = null, LDR_PAIR_POOL = null, LDR_PAL_POOL = null;
+// The curated set (data/taste/pool.json, tools/taste_pool.py): 400 lively 5-color palettes picked from the archive's
+// Diverse palettes, and their vivid colors. David, 2026-10-11: the 22 paintings' area palettes were ugly from the
+// first question. PAINTINGS stays as a fallback if the file can't load.
+let LDR_COLOR_POOL = null, LDR_PAIR_POOL = null, LDR_PAL_POOL = null, LDR_CURATED = null, LDR_CURATED_P = null;
+function ldrLoadPool() {
+  if (!LDR_CURATED_P) LDR_CURATED_P = fetch("data/taste/pool.json?v=1").then(r => r.ok ? r.json() : null).catch(() => null)
+    .then(d => { if (d && d.palettes && d.palettes.length) { LDR_CURATED = d; LDR_COLOR_POOL = LDR_PAIR_POOL = LDR_PAL_POOL = null; } return d; });
+  return LDR_CURATED_P;
+}
+const ldrFrom = (t, a) => { t = String(t || "").split(/[.;(]/)[0].trim(); if (t.length > 38) t = t.slice(0, 36).replace(/\s+\S*$/, "") + "…"; return a ? `${t}, ${a}` : t; };
 function ldrColorPool() {
   if (LDR_COLOR_POOL) return LDR_COLOR_POOL;
   const seen = new Map();
-  (window.PAINTINGS || []).forEach(p => (p.palette || []).forEach(c => { if (!seen.has(c.h)) seen.set(c.h, { h: c.h, from: p.title }); }));
+  if (LDR_CURATED) LDR_CURATED.colors.forEach(([h, t, a]) => { if (!seen.has(h)) seen.set(h, { h, from: ldrFrom(t, a) }); });
+  else (window.PAINTINGS || []).forEach(p => (p.palette || []).forEach(c => { if (!seen.has(c.h)) seen.set(c.h, { h: c.h, from: p.title }); }));
   LDR_COLOR_POOL = [...seen.values()].map(c => { const [L, C, H] = lch(c.h); return { ...c, L, C, H, x: TASTE.tasteFeat([c.h], null) }; });
   return LDR_COLOR_POOL;
 }
 function ldrPairPool() {   // two colors from the same painting, for step 3's base pair
   if (LDR_PAIR_POOL) return LDR_PAIR_POOL;
   const out = [];
-  (window.PAINTINGS || []).forEach(p => { const cs = p.palette || []; for (let i = 0; i < cs.length; i++) for (let j = i + 1; j < cs.length; j++) out.push({ cols: [cs[i].h, cs[j].h], from: p.title }); });
+  if (LDR_CURATED) LDR_CURATED.palettes.forEach(([cs, t, a]) => { for (let i = 0; i < cs.length; i++) for (let j = i + 1; j < cs.length; j++) out.push({ cols: [cs[i], cs[j]], from: ldrFrom(t, a) }); });
+  else (window.PAINTINGS || []).forEach(p => { const cs = p.palette || []; for (let i = 0; i < cs.length; i++) for (let j = i + 1; j < cs.length; j++) out.push({ cols: [cs[i].h, cs[j].h], from: p.title }); });
   LDR_PAIR_POOL = out;
   return LDR_PAIR_POOL;
 }
 function ldrPalPool() {
   if (LDR_PAL_POOL) return LDR_PAL_POOL;
+  if (LDR_CURATED) return LDR_PAL_POOL = LDR_CURATED.palettes.map(([cols, t, a]) => ({ cols, shares: cols.map(() => 1 / cols.length), from: ldrFrom(t, a), x: TASTE.tasteFeat(cols, null) }));
   LDR_PAL_POOL = (window.PAINTINGS || []).filter(p => p.palette && p.palette.length >= 3).map(p => {
     const cols = p.palette.map(c => c.h), shares = p.palette.map(c => c.share);
     return { cols, shares, from: p.title, x: TASTE.tasteFeat(cols, shares) };
@@ -64,6 +76,7 @@ function ldrStepPlateaued(hist) {
 
 // ---------- start screen ----------
 function tasteLadderIntro() {
+  if (!LDR_CURATED_P) { ldrLoadPool().then(() => { if (document.querySelector(".ldr-intro")) tasteLadderIntro(); }); }
   const favN = Object.keys((S.favArt) || {}).length;
   // vivid real colors from the paintings, spread around the wheel, building up rung by rung (1, 2, 3, 5 equal chips)
   const demo = [];
@@ -82,7 +95,7 @@ function tasteLadderIntro() {
     <button class="btn" data-go>Begin ${ICON.arrow}</button>
   `, "taste ldr-intro");
   el.querySelector("[data-close]").onclick = () => go("studio");
-  el.querySelector("[data-go]").onclick = () => { const ld = ldrState(); ld.cur = ldrLeastCertain(ld); save(); ldrRunStep(ld); };
+  el.querySelector("[data-go]").onclick = async () => { await ldrLoadPool(); const ld = ldrState(); ld.cur = ldrLeastCertain(ld); save(); ldrRunStep(ld); };
 }
 
 // ---------- the duel rungs (colors, palettes): reuses tzDuel() from js/taste.js ----------
@@ -283,6 +296,10 @@ function ldrEnd(ld) {
 
 // ---------- screenshot mode (#shot=ladder:...) ----------
 function tasteLadderShot(arg = "intro") {
+  if (!LDR_CURATED) return ldrLoadPool().then(() => tasteLadderShot2(arg));
+  return tasteLadderShot2(arg);
+}
+function tasteLadderShot2(arg) {
   const [what, sub] = (arg || "intro").split("-");
   if (what === "intro") return tasteLadderIntro();
   if (what === "returning") { const ld = ldrState(); LDR_ORDER.forEach(k => { ld.steps[k].n = LDR_MIN; ld.steps[k].done = k !== "threes"; ld.steps[k].acc = .64; }); save(); return tasteLadderIntro(); }
