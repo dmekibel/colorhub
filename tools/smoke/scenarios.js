@@ -3259,7 +3259,9 @@ scenario("studio", "Export sheet opens and Closest in the archive switches metri
 // ================================================================== YOUR COLORS (L23: favorites, ranking, taste)
 scenario("favs", "Home pick mode: tap and hold-sweep heart colors, Save keeps them", async t => {
   const cv = await H.homeReady(t);
-  await H.menu(t, "fav");
+  // Keep colors' pick mode now lives in the Colors & Arrange sheet (David, 2026-10-11: ⋯ menu cut to 3 rows)
+  await H.sheet(t, "colors");
+  await t.click("[data-keep-pick]", { wait: 500 });
   await t.waitFor(".fv-bar", 4000, "the pick bar");
   const count = () => +t.text(".fv-count b");
   t.expect(count() === 0, "pick mode starts with picks already made");
