@@ -1419,7 +1419,7 @@ scenario("train", "Teach it your eye: pick your top three of eight, Done / None 
   t.expect(ranks.join() === "1,2", `ranks after two taps: ${ranks.join() || "none"}`);
   t.expect(/done/i.test(t.$("#lskip").textContent), "the button doesn't turn into Done after a pick");
   await t.click(t.$("#lskip"), { wait: 500 });
-  await t.waitFor(() => /2\/15/.test(t.$("#app").innerText), 4000, "the ladder didn't advance to question 2 after Done");
+  await t.waitFor(() => /\b1 rated/.test(t.$("#app").innerText) && t.$$(".ldr-rank").every(r => !r.textContent), 4000, "the ladder didn't count the round and move on after Done");
 
   await t.open("#shot=ladder:run-palettes", { settle: 500 });
   await t.waitFor(() => t.$$(".ldr-cand").length === 8, 6000, "eight palette options");

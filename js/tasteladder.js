@@ -17,6 +17,10 @@ const LDR_STEPS = {
   palettes: { label: "Whole palettes", kind: "four", base: 0, n: 8, q: "Which palette do you like most?" },
 };
 const LDR_MIN = 6, LDR_MAX = 15;
+// David, 2026-10-11: no finish line ("like Midjourney, the more you rate the better it gets"). Rounds come in blocks of 8
+// that rotate colors -> pairs -> threes -> palettes forever; a running count, a check-in at each milestone, and
+// closing shows what it has learned so far.
+const LDR_BLOCK = 8, LDR_MILESTONES = [20, 50, 100, 200, 350, 500, 750, 1000, 1500, 2000];
 const ldrMean = a => a.length ? a.reduce((s, v) => s + v, 0) / a.length : 0;
 
 // ---------- real candidates, pulled once from data/paintings.js ----------
@@ -90,9 +94,9 @@ function tasteLadderIntro() {
     <header class="deck-top"><button class="icon-btn" data-close aria-label="Close">${ICON.x}</button><span class="eyebrow" style="flex:1">A taste test</span></header>
     <p class="eyebrow tz-kick">${favN ? `Starting from ${favN} painting${favN === 1 ? "" : "s"} you kept` : "Grows deeper with every choice"}</p>
     <h1 class="t-title">Teach it <em>your eye</em></h1>
-    <p class="tab-sub">The more you choose, the smarter it gets. Four short rungs, real colors from real paintings.</p>
+    <p class="tab-sub">${(ldrState().total || 0) ? `${ldrState().total.toLocaleString()} rated so far. ` : ""}Rate as long as you like: the more you rate, the better it knows your taste. Real colors from real paintings.</p>
     <div class="ldr-steps">${steps.map(([n, t], i) => `<div class="ldr-step"><em>${n}</em><b>${esc(t)}</b><span class="ldr-chips" aria-hidden="true">${demoHex.slice(0, [1, 2, 3, 5][i]).map(h => `<i style="background:${h}"></i>`).join("")}</span></div>`).join("")}</div>
-    <button class="btn" data-go>Begin ${ICON.arrow}</button>
+    <button class="btn" data-go>${(ldrState().total || 0) ? "Keep going" : "Begin"} ${ICON.arrow}</button>
   `, "taste ldr-intro");
   el.querySelector("[data-close]").onclick = () => go("studio");
   el.querySelector("[data-go]").onclick = async () => { await ldrLoadPool(); const ld = ldrState(); ld.cur = ldrLeastCertain(ld); save(); ldrRunStep(ld); };
@@ -145,7 +149,7 @@ function ldrSpread(pool, n) {
 }
 
 // ---------- the best-of-four rungs (pairs, threes) ----------
-function ldrFourShell(total) {
+function ldrFourShell(total, onClose) {
   const el = show(`
     <header class="deck-top"><button class="icon-btn" data-close aria-label="Close">${ICON.x}</button><div class="segs" id="lsegs">${"<i></i>".repeat(total)}</div><span class="left mono" id="lleft"></span></header>
     <div class="tz-q"><p class="eyebrow" id="llabel"></p><h2 id="lq"></h2></div>
@@ -153,7 +157,7 @@ function ldrFourShell(total) {
     <div class="ldr-four" id="lfour"></div>
     <button class="btn ghost ldr-skip" id="lskip">None of these</button>
   `, "fixed ldr-run");
-  el.querySelector("[data-close]").onclick = () => go("studio");
+  el.querySelector("[data-close]").onclick = () => onClose ? onClose() : go("studio");
   const $ = s => el.querySelector(s), four = $("#lfour"), segs = $("#lsegs"), skipBtn = $("#lskip"), base = $("#lbase");
   let done = 0, locked = true, cb = null, items = null, baseNow = [], picks = [], autoT = 0;
   // each option is the whole combination (base colors + the candidate), drawn as equal swatches side by side
@@ -184,8 +188,8 @@ function ldrFourShell(total) {
   skipBtn.onclick = finish;
   onKey = e => { const k = { "1": 0, "2": 1, "3": 2, "4": 3, "5": 4, "6": 5, "7": 6, "8": 7 }[e.key]; if (k !== undefined) pick(k); if (e.key === "Enter" || e.key === "Escape") finish(); };
   return {
-    ask(baseColors, baseLabel, label, q, list, onDone) {
-      $("#llabel").textContent = label; $("#lq").textContent = q; $("#lleft").textContent = `${done + 1}/${total}`;
+    ask(baseColors, baseLabel, label, q, list, onDone, right) {
+      $("#llabel").textContent = label; $("#lq").textContent = q; $("#lleft").textContent = right || `${done + 1}/${total}`;
       baseNow = baseColors; picks = [];
       base.innerHTML = `${baseLabel ? `<small>${esc(baseLabel)}</small>` : ""}<small class="ldr-hint"></small>`;
       items = list; locked = false; skipBtn.hidden = false;
@@ -204,10 +208,11 @@ function ldrRunFour(ld, stepKey) {
   const liveBase = stepKey === "colors" || isPal ? allBase : allBase.filter(b => stepKey === "pairs" ? lively(b.h) : b.cols.every(lively));
   const basePool = liveBase.length >= 8 ? liveBase : allBase;
   if (basePool.length < 1) return ldrEnd(ld);
-  const total = LDR_MAX, Sh = ldrFourShell(total);
+  const total = LDR_BLOCK, Sh = ldrFourShell(total, () => ldrEnd(ld));
+  let blockN = 0;
   const step = () => {
     const st = ld.steps[stepKey], hist = ld.stepAcc[stepKey];
-    if (st.n >= LDR_MAX || (st.n >= LDR_MIN && ldrStepPlateaued(hist))) { st.done = true; save(); return ldrAdvance(ld); }
+    if (blockN >= LDR_BLOCK) { st.done = true; save(); return ldrAdvance(ld); }
     const baseItem = basePool[Math.random() * basePool.length | 0];
     const baseCols = stepKey === "pairs" ? [baseItem.h] : baseItem.cols;
     const keyOf = p => p.cols ? p.cols.join("") : p.h;
@@ -225,8 +230,9 @@ function ldrRunFour(ld, stepKey) {
     const chance = 1 / cands.length;   // too sparse a pool this round; count it and move on
     const items = isPal ? cands : cands.map(c => ({ h: c.h, from: c.from, x: TASTE.tasteFeat([...baseCols, c.h], null) }));
     const predicted = TASTE.predictBest(ld.m, items);
-    const label = `${cfg.label} · ${st.n + 1}/${total}`, baseLabel = baseItem.from ? `From ${baseItem.from}` : "";
+    const label = cfg.label, baseLabel = baseItem.from ? `From ${baseItem.from}` : "";
     Sh.ask(baseCols, baseLabel, label, cfg.q, items, picks => {
+      blockN++; ld.total = (ld.total || 0) + 1;
       // Plackett-Luce, decomposed: 1st beats everything after it (weight 1), 2nd the rest (.5), 3rd the rest (.3);
       // "None of these" teaches nothing rather than guess at why
       if (picks.length) {
@@ -236,8 +242,9 @@ function ldrRunFour(ld, stepKey) {
       }
       items.forEach(it => ldrRemember(ld, keyOf(it)));
       st.n++; st.acc = hist.length ? ldrMean(hist.map(r => r.hit)) : null; save();
+      if (LDR_MILESTONES.includes(ld.total)) ldrMilestone(ld);
       Sh.next(); step();
-    });
+    }, `${(ld.total || 0).toLocaleString()} rated`);
   };
   step();
 }
@@ -248,9 +255,15 @@ function ldrRunStep(ld) {
   const cfg = LDR_STEPS[ld.cur];
   if (cfg.kind === "duel") ldrRunDuel(ld, ld.cur); else ldrRunFour(ld, ld.cur);
 }
-function ldrAdvance(ld) {
-  if (LDR_ORDER.every(k => ld.steps[k].done)) return ldrEnd(ld);
-  ldrRunStep(ld);
+function ldrAdvance(ld) {   // endless: the next kind of question in the rotation
+  ld.cur = LDR_ORDER[(LDR_ORDER.indexOf(ld.cur) + 1) % LDR_ORDER.length]; save();
+  const cfg = LDR_STEPS[ld.cur];
+  if (cfg.kind === "duel") ldrRunDuel(ld, ld.cur); else ldrRunFour(ld, ld.cur);
+}
+function ldrMilestone(ld) {   // a quiet check-in, honest numbers only
+  const a = TASTE.accuracy(ld.m);
+  toast(a.n >= 10 && a.acc > a.chance + .05 ? `${ld.total} rated · it picks your favorite ${Math.round(a.acc * 100)}% of the time (chance ${Math.round(a.chance * 100)}%)` : `${ld.total} rated · still learning you`);
+  buzz(12);
 }
 
 // ---------- end-of-session ----------
@@ -315,7 +328,7 @@ function ldrEnd(ld) {
     ${findings.length ? `<div class="sec-head"><b>What it's learned</b><span>confident only</span></div>
       <div class="ldr-findings">${findings.map(f => `<div class="ldr-finding">${ldrFindingExample(f, pool)}<p>You ${esc(f.text)}<small>${n} choices</small></p></div>`).join("")}</div>`
       : `<div class="ldr-notsure"><p class="eyebrow">Not sure yet</p><p class="tab-sub">A few more choices and it'll have something to say. Taste takes a little evidence before it speaks.</p></div>`}
-    <div class="stack" style="margin-top:28px"><button class="btn" data-more>Teach it more ${ICON.arrow}</button></div>
+    <div class="stack" style="margin-top:28px"><button class="btn" data-more>Keep going ${ICON.arrow}</button></div>
     <p class="fine">How it works: a Bradley-Terry/Plackett-Luce choice model, growing in four layers (colors, relationships, structure, families), updated after every tap. Deeper layers need more evidence before they move. Screens vary, and taste shifts with mood, so come back another day.</p>
   `, "article tz-res ldr-end");
   el.querySelector("[data-close]").onclick = () => go("studio");
