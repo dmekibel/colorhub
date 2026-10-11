@@ -777,7 +777,14 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
         if (lim > maxLim) maxLim = lim;
       }
     }
-    const R0 = Math.max(ownR0, maxLim * 1.8 + 8);
+    // open side = the outer edge of the whole set (no neighbor in some direction): there, the cell keeps its own
+    // natural size, the old tiled edge (David, 2026-10-11: "rounded edge looks ugly, bring back the tiled edge").
+    // Only a cell neighbored all round gets the generous start that lets it reach its true power-diagram vertices.
+    const angs = []; for (let c = 0; c < cuts.length; c += 3) angs.push(Math.atan2(cuts[c + 1], cuts[c]));
+    angs.sort((x, y) => x - y);
+    let gap = angs.length ? angs[0] + 6.283185307 - angs[angs.length - 1] : 6.3;
+    for (let k = 1; k < angs.length; k++) gap = Math.max(gap, angs[k] - angs[k - 1]);
+    const R0 = gap > 2.1 ? b.d * .62 : Math.max(ownR0, maxLim * 1.8 + 8);
     let poly = [];
     for (let i = 0; i < nSides; i++) { const t = i / nSides * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
     for (let c = 0; c < cuts.length && poly.length; c += 3) {
@@ -1463,7 +1470,9 @@ function honeycomb(host, opts = {}) {
       if (ST.label && !ST.label(it.o)) { if (d >= 8 && it.L < 26) { ctx.lineWidth = Math.max(1, d * .025); ctx.strokeStyle = "rgba(236,232,223,.24)"; ctx.stroke(); } continue; }
       if (hlSet) { if (!hlSet.has(it)) { ctx.fillStyle = "rgba(14,13,11,.8)"; ctx.fill(); continue; } ctx.lineWidth = Math.max(1.5, d * .03); ctx.strokeStyle = "rgba(239,235,227,.95)"; ctx.stroke(); }
       if (d < 8) continue;
-      if (exact) continue;   // the exact-polygon case gets ITS seam from the single shared-edge pass below, not here
+      // the exact-polygon case gets ITS seam from the single shared-edge pass below; it must still get its NAME
+      // (a bare `continue` here skipped every label on the Honeycomb look, David 2026-10-11: "now there is none")
+      if (!exact) {
       // David, 2026-10-09: "any way to prevent these ugly holes between the colors?" -- at the magnified focus,
       // where sizes vary most, two neighboring cells' own independently-blended shapes (honeyCellPath's circle/
       // polygon mix) don't always meet pixel-exact, leaving a sliver of the background between them. The cheap
@@ -1471,6 +1480,7 @@ function honeycomb(host, opts = {}) {
       // edge, light on a dark cell and dark on a light one, reads as a deliberate boundary either way and masks
       // a stray sliver instead of leaving it bare. Was dark-cells-only; now every cell at a readable size gets one.
       ctx.lineWidth = Math.max(1, d * .018); ctx.strokeStyle = it.L < 50 ? `rgba(236,232,223,${it.L < 14 ? .34 : it.L < 26 ? .24 : .14})` : `rgba(14,13,11,${it.L > 86 ? .16 : .1})`; ctx.stroke();
+      }
       // a cheap pre-filter before the honeyWrap lookup: even the most compact name (honeyWrap's own best-case
       // fs ratio, ~.19) can't clear the legibility floor below roughly this diameter, so most of a crowded
       // frame's tiny cells skip the (cached, but still a Map lookup) call entirely
