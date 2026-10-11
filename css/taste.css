@@ -157,3 +157,5 @@
 .ldr-finding small{display:block;font-size:13px;color:var(--soft);margin-top:4px}
 .ldr-notsure{padding:18px 0}
 .ldr-notsure .eyebrow{color:var(--faint)}
+
+.ldr-four.ldr-grid{grid-template-columns:1fr 1fr;gap:8px}

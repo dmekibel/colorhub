@@ -11,10 +11,10 @@
 
 const LDR_ORDER = ["colors", "pairs", "threes", "palettes"];
 const LDR_STEPS = {
-  colors: { label: "Colors you like", kind: "duel", q: "Which color do you like more?" },
-  pairs: { label: "Two that go together", kind: "four", base: 1, q: "Which pair looks best?" },
-  threes: { label: "Adding a third", kind: "four", base: 2, q: "Which three look best together?" },
-  palettes: { label: "Whole palettes", kind: "duel", q: "Which palette would you rather live with?" },
+  colors: { label: "Colors you like", kind: "four", base: 0, n: 8, q: "Which color do you like most?" },
+  pairs: { label: "Two that go together", kind: "four", base: 1, n: 8, q: "Which pair looks best?" },
+  threes: { label: "Adding a third", kind: "four", base: 2, n: 8, q: "Which three look best together?" },
+  palettes: { label: "Whole palettes", kind: "four", base: 0, n: 8, q: "Which palette do you like most?" },
 };
 const LDR_MIN = 6, LDR_MAX = 15;
 const ldrMean = a => a.length ? a.reduce((s, v) => s + v, 0) / a.length : 0;
@@ -67,7 +67,7 @@ function ldrLeastCertain(ld) {
   const next = LDR_ORDER.find(k => !ld.steps[k].done); if (next) return next;
   return LDR_ORDER.slice().sort((a, b) => (ld.steps[a].acc ?? 1) - (ld.steps[b].acc ?? 1))[0];
 }
-function ldrRemember(ld, key) { ld.recent.push(key); if (ld.recent.length > 20) ld.recent.shift(); }
+function ldrRemember(ld, key) { ld.recent.push(key); if (ld.recent.length > 60) ld.recent.shift(); }
 function ldrStepPlateaued(hist) {
   if (hist.length < LDR_MIN + 2) return false;
   const half = hist.length >> 1, a1 = ldrMean(hist.slice(0, half).map(r => r.hit)), a2 = ldrMean(hist.slice(half).map(r => r.hit));
@@ -130,6 +130,20 @@ function ldrStripEq(p) {
   return `<span class="tz-strip tz-eq">${order.map(i => `<i style="--c:${p.cols[i]}"></i>`).join("")}</span>`;
 }
 
+const ldrShuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
+// eight colors spread around: a random start, then each next one the farthest from those already picked (CIELAB)
+function ldrSpread(pool, n) {
+  if (pool.length <= n) return pool.slice();
+  const out = [pool[Math.random() * pool.length | 0]];
+  const d = (a, b) => Math.hypot(a.L - b.L, a.C * Math.cos(a.H * Math.PI / 180) - b.C * Math.cos(b.H * Math.PI / 180), a.C * Math.sin(a.H * Math.PI / 180) - b.C * Math.sin(b.H * Math.PI / 180));
+  while (out.length < n) {
+    let best = null, bd = -1;
+    for (let k = 0; k < 40; k++) { const c = pool[Math.random() * pool.length | 0]; if (out.includes(c)) continue; const m = Math.min(...out.map(o => d(o, c))); if (m > bd) { bd = m; best = c; } }
+    if (!best) break; out.push(best);
+  }
+  return out;
+}
+
 // ---------- the best-of-four rungs (pairs, threes) ----------
 function ldrFourShell(total) {
   const el = show(`
@@ -145,17 +159,18 @@ function ldrFourShell(total) {
   let done = 0, locked = true, mode = "first", cb = null, items = null, bestIdx = -1, baseHtml = "", baseNow = [];
   // each option is the whole combination (base colors + the candidate), drawn as equal swatches side by side, stacked
   function paintFour(list) {
-    four.innerHTML = list.map((c, k) => `<button class="ldr-cand ldr-combo" data-k="${k}" aria-label="Option ${k + 1}">${[...baseNow, c.h].map(h => `<i style="--c:${h}"></i>`).join("")}</button>`).join("");
+    four.classList.toggle("ldr-grid", list.length > 4);
+    four.innerHTML = list.map((c, k) => `<button class="ldr-cand ldr-combo" data-k="${k}" aria-label="Option ${k + 1}">${[...baseNow, ...(c.cols || [c.h])].map(h => `<i style="--c:${h}"></i>`).join("")}</button>`).join("");
   }
   function pick(k) {
     if (locked) return; locked = true; buzz(8);
     four.querySelectorAll(".ldr-cand").forEach((b, j) => b.classList.toggle("win", j === k));
-    const seg = segs.children[done]; if (seg && mode === "first") { seg.style.setProperty("--c", items[k].h); seg.classList.add("on"); }
+    const seg = segs.children[done]; if (seg && mode === "first") { seg.style.setProperty("--c", items[k].h || items[k].cols[2]); seg.classList.add("on"); }
     later(() => cb(k), reduceMotion ? 120 : 340);
   }
   four.addEventListener("click", e => { const b = e.target.closest(".ldr-cand"); if (b) pick(+b.dataset.k); });
   skipBtn.onclick = () => { if (locked) return; locked = true; later(() => cb(null), 60); };
-  onKey = e => { const k = { "1": 0, "2": 1, "3": 2, "4": 3 }[e.key]; if (k !== undefined) pick(k); if (e.key === "Escape") skipBtn.onclick(); };
+  onKey = e => { const k = { "1": 0, "2": 1, "3": 2, "4": 3, "5": 4, "6": 5, "7": 6, "8": 7 }[e.key]; if (k !== undefined) pick(k); if (e.key === "Escape") skipBtn.onclick(); };
   return {
     ask(baseColors, baseLabel, label, q, four4, onBest) {
       $("#llabel").textContent = label; $("#lq").textContent = q; $("#lleft").textContent = `${done + 1}/${total}`;
@@ -176,12 +191,12 @@ function ldrFourShell(total) {
   };
 }
 function ldrRunFour(ld, stepKey) {
-  const cfg = LDR_STEPS[stepKey], pool = ldrColorPool();
+  const cfg = LDR_STEPS[stepKey], isPal = stepKey === "palettes", pool = isPal ? ldrPalPool() : ldrColorPool();
   if (pool.length < 6) return ldrEnd(ld);
   // the shared color(s) every option is built on: lively ones, so a round never starts from a flat grey
   const lively = h => { const [L, C] = lch(h); return C > 18 && L > 25 && L < 85; };
-  const allBase = stepKey === "pairs" ? pool : ldrPairPool();
-  const liveBase = allBase.filter(b => stepKey === "pairs" ? lively(b.h) : b.cols.some(lively));
+  const allBase = stepKey === "colors" || isPal ? [{ cols: [] }] : stepKey === "pairs" ? pool : ldrPairPool();
+  const liveBase = stepKey === "colors" || isPal ? allBase : allBase.filter(b => stepKey === "pairs" ? lively(b.h) : b.cols.every(lively));
   const basePool = liveBase.length >= 8 ? liveBase : allBase;
   if (basePool.length < 1) return ldrEnd(ld);
   const total = LDR_MAX, Sh = ldrFourShell(total);
@@ -190,16 +205,26 @@ function ldrRunFour(ld, stepKey) {
     if (st.n >= LDR_MAX || (st.n >= LDR_MIN && ldrStepPlateaued(hist))) { st.done = true; save(); return ldrAdvance(ld); }
     const baseItem = basePool[Math.random() * basePool.length | 0];
     const baseCols = stepKey === "pairs" ? [baseItem.h] : baseItem.cols;
-    const skipSet = new Set(pool.filter(p => ld.recent.includes(p.h)));
-    const cands = TASTE.pickCandidates4(ld.m, baseCols, pool, { skip: skipSet });
-    if (cands.length < 4) { st.n++; return step(); }   // too sparse a pool this round; count it and move on
-    const items = cands.map(c => ({ h: c.h, from: c.from, x: TASTE.tasteFeat([...baseCols, c.h], null) }));
+    const keyOf = p => p.cols ? p.cols.join("") : p.h;
+    const skipSet = new Set(pool.filter(p => ld.recent.includes(keyOf(p))));
+    const fresh = pool.filter(p => !skipSet.has(p) && !baseCols.includes(p.h));
+    let cands;
+    if (isPal) cands = ldrShuffle(fresh).slice(0, cfg.n || 8);
+    else if (stepKey === "colors") cands = ldrSpread(fresh, cfg.n || 8);
+    else {   // four chosen by the model (informative + structured), the rest spread around the wheel
+      cands = TASTE.pickCandidates4(ld.m, baseCols, pool, { skip: skipSet });
+      const more = ldrSpread(fresh.filter(p => !cands.some(c => c.h === p.h)), (cfg.n || 8) - cands.length);
+      cands = ldrShuffle(cands.concat(more));
+    }
+    if (cands.length < 4) { st.n++; return step(); }
+    const chance = 1 / cands.length;   // too sparse a pool this round; count it and move on
+    const items = isPal ? cands : cands.map(c => ({ h: c.h, from: c.from, x: TASTE.tasteFeat([...baseCols, c.h], null) }));
     const predicted = TASTE.predictBest(ld.m, items);
-    const label = `${cfg.label} · ${st.n + 1}/${total}`, baseLabel = stepKey === "pairs" ? `From ${baseItem.from}` : `From ${baseItem.from}`;
+    const label = `${cfg.label} · ${st.n + 1}/${total}`, baseLabel = baseItem.from ? `From ${baseItem.from}` : "";
     Sh.ask(baseCols, baseLabel, label, cfg.q, items, bestK => {
       TASTE.updateRanking(ld.m, items, [bestK, ...items.map((_, i) => i).filter(i => i !== bestK)], [1]);
-      const hit = predicted === bestK; TASTE.recordAcc(ld.m, hit, .25); hist.push({ hit: hit ? 1 : 0, chance: .25 });
-      items.forEach(it => ldrRemember(ld, it.h));
+      const hit = predicted === bestK; TASTE.recordAcc(ld.m, hit, chance); hist.push({ hit: hit ? 1 : 0, chance });
+      items.forEach(it => ldrRemember(ld, keyOf(it)));
       const rest = items.map((_, i) => i).filter(i => i !== bestK);
       Sh.askRunnerUp(baseCols, items[bestK], rest.map(i => items[i]), runnerLocal => {
         if (runnerLocal != null) {
