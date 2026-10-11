@@ -419,6 +419,10 @@ function hmWireLayerSwitch(el, cur, onSwitch) {
 // 2026-10-10 (David's verdict on the Simplify corners) to the SAME machinery js/places.js's left-corner stem
 // uses, instead of a bespoke flag of its own (the old moreOpen-sheet era needed one; the stem's scrim already
 // has its own cutout over this corner, so the shared guard covers it exactly the way it covers the left one).
+// A small gear, no keyline circle -- module scope (not just hmHome's own closure) since js/places.js's Places
+// stem also wants it now (David, 2026-10-11: Settings moved off the map's ⋯ to the bottom of the Places menu,
+// app-level not map-level).
+const HM_GEAR_SVG = `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3.1"/><path d="M12 3.6v2.5M12 17.9v2.5M20.4 12h-2.5M6.1 12H3.6M17.7 6.3l-1.8 1.8M8.1 15.9l-1.8 1.8M17.7 17.7l-1.8-1.8M8.1 8.1 6.3 6.3"/></svg>`;
 
 function hmHome() {
   if (!S.placed) return welcome();
@@ -468,7 +472,22 @@ function hmHome() {
 
   // ---------- the honeycomb itself ----------
   let items = [], ctrl = null, gen = 0;
-  const onPeek = o => { if (o.c) peek(o.c); else if (typeof colorSheet === "function") colorSheet(o, c => hmOpenColor(c)); };
+  // David, 2026-10-11 (a live screenshot of the ⋯ menu, "way too many settings"): Keep colors moved off the ⋯
+  // menu entirely, onto a long still-press (480ms, honey.js's own threshold) on any map cell -- it keeps that
+  // color directly, same fvSet/fvHas every other heart in the app already uses, so it shows up in Studio › Kept
+  // immediately. Feedback every time (a haptic + a toast); the explanatory half of the toast ("long-press any
+  // color to keep it") shows once only (S.keepHintSeen), confirming the gesture the first time someone
+  // discovers it instead of a separate standing tooltip competing with the existing tap-to-open hint.
+  const onPeek = o => {
+    const h = o.h, n = o.n || (o.c && o.c.n) || h;
+    if (!h || typeof fvHas !== "function" || typeof fvSet !== "function") return;
+    const firstTime = !S.keepHintSeen;
+    if (firstTime) S.keepHintSeen = 1;
+    const on = !fvHas(h);
+    fvSet(h, n, on, "map-hold");
+    buzz(on ? 10 : 6);
+    toast(on ? (firstTime ? `Kept ${n} — long-press any color to keep it` : `Kept ${n}`) : `${n} isn't kept`);
+  };
   // a tap opens the real page straight away (ROADMAP §13: every name has one now) — one of the 101, or its
   // own name page (js/names.js); a long press still shows the quick peek sheet above. The page itself grows
   // from the tapped bubble (David, 2026-10-07: "any color in home, you should be able to click it to make it
@@ -618,6 +637,7 @@ function hmHome() {
       const famBtn = f => `<button class="hm-fam${v.fam === f ? " on" : ""}" data-famv="${f}"><span class="hm-fam-dots" data-dots></span><b>${f || "All"}</b><em data-n></em></button>`;
       const segN = (key, opts) => `<div class="hm-seg hm-seg-n" data-key="${key}">${opts.map(([id, label]) => `<button class="${(v[key] || "") === id ? "on" : ""}" data-val="${id}"><span>${esc(label)}</span><em data-n></em></button>`).join("")}</div>`;
       colorsPane = `<div class="hm-ch-scroll" data-pane="colors" data-sheet-scroll>
+        ${typeof fvPickStart === "function" ? `<button type="button" class="hm-keep-pick" data-keep-pick>${icon("heart", 18)}<span>Keep colors from the map</span></button>` : ""}
         <div class="cx-sec"><b>How many</b></div>
         <div class="hm-ladder">${HM_STAGES.map((n, i) => rung("stage:" + n, n.toLocaleString(), "Stage " + (i + 1))).join("")}${rung("every-name", everyNameCount.toLocaleString(), "Every name")}${shadeCount ? rung("every-shade", (everyNameCount + shadeCount).toLocaleString(), "Every shade") : ""}</div>
         <div class="cx-sec"><b>Family</b></div>
@@ -697,6 +717,10 @@ function hmHome() {
     const mo = new MutationObserver(() => { if (!sh.isConnected) { ro.disconnect(); if (ctrl) { if (tab === "arrange") ctrl.exitFit(); ctrl.setInset({ bottom: 0 }); } mo.disconnect(); } });
     mo.observe(document.body, { childList: true });
     qa("[data-sheet-close]").forEach(b => b.onclick = () => { buzz(4); close(); });
+    // Keep colors' own multi-select pick mode (David, 2026-10-11: "keep a 'Keep colors' entry inside the
+    // Colors & Arrange sheet for the multi-select mode" -- a single color is now a long-press on the map
+    // itself, js/home.js onPeek, but choosing SEVERAL still wants this mode).
+    { const kp = q("[data-keep-pick]"); if (kp) kp.onclick = () => { buzz(4); close(); if (typeof fvPickStart === "function") fvPickStart(el, ctrl); }; }
     // David: "tapping the top half instantly closes Arrange... I need to pan and zoom the map while choosing
     // arrangements... close it by double-tapping the map, the ✕, or swiping the sheet down." The scrim above the
     // sheet is pointer-events:none (css/home.css .hm-scrim-clear) in both tabs, so every tap/pan/pinch reaches
@@ -979,16 +1003,13 @@ function hmHome() {
       words: "arrange arrangement shape map grid " + HONEY_ARR[id].title.toLowerCase(), run: () => { S.hm.arr = id; save(); if (typeof hmHome === "function") hmHome(); } }));
     featureRegister("map-slideshow", { t: "Slideshow", where: "Map · ⋯ · Slideshow", words: "slideshow play screensaver ambient auto colors",
       run: () => { if (typeof hmGoFloor === "function") hmGoFloor(); setTimeout(() => { if (typeof ssOpen === "function") ssOpen(); }, 0); } });
-    featureRegister("map-surprise", { t: "Surprise me", where: "Map · ⋯ · Surprise me", words: "random dice unmet color",
-      run: () => { if (typeof hmGoFloor === "function") hmGoFloor(); } });
-    featureRegister("map-namer", { t: "Name any color", where: "Map · ⋯ · Name any color", words: "eyedropper pick hex namer",
+    featureRegister("map-surprise", { t: "Surprise me", where: "Map · Search", words: "random dice unmet color",
+      run: () => { if (typeof hmGoFloor === "function") hmGoFloor(); setTimeout(() => { if (typeof hmDice === "function") hmDice(); }, 0); } });
+    featureRegister("map-namer", { t: "Name any color", where: "Map · Search", words: "eyedropper pick hex namer",
       run: () => { XSTACK = []; X_ROOT = "home"; if (typeof LAB !== "undefined") LAB.namer(); } });
     featureRegister("map-lookfeel", { t: "Look & feel", where: "Map · ⋯ · Colors & Arrange", words: "magnify spacing size fisheye lens honeycomb bubbles",
       run: () => { S.hm.chooserTab = "arrange"; save(); if (typeof hmGoFloor === "function") hmGoFloor(); setTimeout(() => { if (typeof window.HM_CHOOSER === "function") window.HM_CHOOSER("arrange"); }, 350); } });
   }
-  // a small gear, no keyline circle -- David: "Settings may be a small gear at the column's end" (the column's
-  // end is its top, farthest from the thumb: the row people reach for least).
-  const HM_DO_GEAR = `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3.1"/><path d="M12 3.6v2.5M12 17.9v2.5M20.4 12h-2.5M6.1 12H3.6M17.7 6.3l-1.8 1.8M8.1 15.9l-1.8 1.8M17.7 17.7l-1.8-1.8M8.1 8.1 6.3 6.3"/></svg>`;
   function hmDoMenu() {
     if (STEM_OPEN) { buzz(4); return closeStem(); }
     if (stemJustClosed() || document.querySelector(".sheet,.scrim,.rooms-stem")) return;
@@ -998,19 +1019,21 @@ function hmHome() {
     const ic = svg => `<span class="rm-art hm-do-ic">${svg}</span>`;
     // the Colors & Arrange row's own thumbnail: 4 real dots sampled from what's on screen right now, the same
     // "colorful dots icon" the old pre-Simplify arc used (not a static glyph -- it reflects the current view).
-    const dots = hs => `<span class="rm-art hm-do-ic hm-do-dots">${hs.slice(0, 4).map(h => `<i style="background:${esc(h)}"></i>`).join("")}</span>`;
+    // Its own class, kept SEPARATE from .hm-do-ic's centering rule (css/home.css) -- they used to share it,
+    // and .hm-do-ic{display:grid;place-items:center} (added for the plain-svg rows below) clobbered the dots'
+    // own 2x2 grid-template, collapsing all 4 into one spot -- an empty-looking circle, David's screenshot bug.
+    const dots = hs => `<span class="rm-art hm-do-dots">${hs.slice(0, 4).map(h => `<i style="background:${esc(h)}"></i>`).join("")}</span>`;
     const sample = items.filter((_, i) => i % Math.max(1, Math.floor(items.length / 4)) === 0).map(it => it.h);
     const lit = typeof HONEY_HL !== "undefined" && HONEY_HL;
-    // top to bottom as read; the thumb's nearest (the bottom) is the map's own most-used control (PLAN §9's
-    // own "Colors & Arrange is one tap further" ladder, and David's "it should be more prominent").
+    // David, 2026-10-11, a live screenshot: "way too many settings" (7 rows). Down to the 3 that are genuinely
+    // ABOUT the map itself -- Settings moved to the Places menu (app-level, not map-level), Surprise me/Name
+    // any color moved into the one search sheet (both are ways of FINDING a color), Keep colors moved onto a
+    // long-press on any map cell (see onPeek above) with the sheet's own multi-select pick mode still reachable
+    // from inside Colors & Arrange. Nothing deleted -- every one of those still works, just reached from where
+    // it actually belongs. Top to bottom as read; the thumb's nearest (the bottom) is the map's own most-used
+    // control (PLAN §9's own "Colors & Arrange is one tap further" ladder, and David's "it should be more
+    // prominent").
     const rows = [
-      { id: "settings", t: "Settings", art: ic(HM_DO_GEAR), small: true, attr: "data-do-settings" },
-      { id: "surprise", t: "Surprise me", n: "A color you haven't met", art: ic(icon("dice", 22)), attr: "data-do-surprise" },
-      { id: "namer", t: "Name any color", art: ic(icon("pipette", 22)), attr: "data-do-namer" },
-      // David, 2026-10-10 (a live screenshot): "consistent 22px icons" -- FV_HEART/PR_ICON.cards/ICON.play are
-      // each sized for the spot they were first drawn for (24/24/18), not this stem, so every glyph here asks
-      // icon() directly at 22px instead of reusing those constants.
-      typeof fvPickStart === "function" && { id: "keep", t: "Keep colors", n: "From the map", art: ic(icon("heart", 22)), attr: "data-do-keep" },
       typeof prQuick === "function" && { id: "study", t: "Study the map", n: lit ? honeyLitLabel().title : "Names near the middle", art: ic(icon("learn", 22)), attr: "data-do-study" },
       typeof ssOpen === "function" && { id: "slideshow", t: "Slideshow", n: "Let the colors play", art: ic(icon("play", 22)), attr: "data-do-slideshow" },
       { id: "colors", t: "Colors & Arrange", n: `${hlAll ? "Every name" : hmViewLabel()} · ${hmArrLabel()}`, art: dots(sample), attr: "data-do-colors" },
@@ -1035,10 +1058,6 @@ function hmHome() {
     addEventListener("keydown", STEM_KEY, true);
     const run = fn => () => { document.querySelectorAll(".sheet,.scrim").forEach(n2 => n2.remove()); fn(); };
     const acts = {
-      settings: run(() => { if (typeof ymSettingsSheet === "function") ymSettingsSheet(); }),
-      surprise: run(() => hmDice()),
-      namer: run(() => { XSTACK = []; X_ROOT = "home"; LAB.namer(); }),
-      keep: run(() => fvPickStart(el, ctrl)),
       study: run(() => hmStudyCorner(ctrl, items)),
       slideshow: run(() => ssOpen()),
       colors: run(() => chooser(S.hm.chooserTab === "arrange" ? "arrange" : "colors")),
@@ -1352,9 +1371,28 @@ function hmShot(arg) {
   if (/^subject:/.test(arg)) setTimeout(() => { const [, kind, id, label] = arg.split(":"); if (typeof svOpen === "function") svOpen({ kind, id, label: label ? decodeURIComponent(label) : id }); }, 300);
   if (/^find:/.test(arg)) setTimeout(() => window.HM_SEARCH && window.HM_SEARCH(arg.slice(5)), 300);
   if (arg === "rooms") setTimeout(() => hmTap(document.querySelector("[data-rooms-corner]")), 150);
+  // home:places-settings -- design review / debug only: opens the Places stem, then taps its Settings row
+  // (David, 2026-10-11: Settings moved to the bottom of the Places menu).
+  if (arg === "places-settings") {
+    setTimeout(() => hmTap(document.querySelector("[data-rooms-corner]")), 150);
+    setTimeout(() => { const b = document.querySelector('.rooms-stem [data-pl="settings"]'); if (b) hmTap(b); }, 700);
+  }
   if (arg === "views") setTimeout(() => window.HM_CHOOSER && window.HM_CHOOSER("show"), 150);   // the Colors sheet
   if (arg === "arrange") setTimeout(() => window.HM_CHOOSER && window.HM_CHOOSER("look"), 150);   // the Arrange sheet
   if (arg === "do") setTimeout(() => { const b = document.getElementById("hmDo"); if (b) b.click(); }, 150);   // the right corner's menu
   if (arg === "look") setTimeout(() => window.HM_CHOOSER && window.HM_CHOOSER("look"), 150);   // the long-press shortcut, without the long-press
   if (arg === "search") setTimeout(() => { if (window.HM_SEARCH) window.HM_SEARCH(""); }, 150);
+  // home:topsearch -- design review / debug only: taps the top-of-map Search button (#hmTopSearch), opening
+  // the one global search sheet (js/search.js searchOpen), the same tap a person makes.
+  if (arg === "topsearch") setTimeout(() => hmTap(document.querySelector("#hmTopSearch")), 150);
+  // home:longpress -- design review / debug only: a real 480ms+ pointer hold at the canvas center, the same
+  // gesture onPeek (js/home.js) keeps a color from (David, 2026-10-11: Keep colors moved onto this gesture),
+  // for a screenshot of its one-time hint toast without a real finger.
+  if (arg === "longpress") setTimeout(() => {
+    const cv = document.querySelector(".screen.hm canvas"); if (!cv) return;
+    const r = cv.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
+    const o = { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 51, pointerType: "touch", isPrimary: true, view: window };
+    cv.dispatchEvent(new PointerEvent("pointerdown", o));
+    setTimeout(() => cv.dispatchEvent(new PointerEvent("pointerup", o)), 560);
+  }, 400);
 }

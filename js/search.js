@@ -47,10 +47,20 @@ function searchResultsHTML(q) {
 // searchOpen({ q, scope, from }): a full-screen search, opened over whatever's behind it. `from` is just a
 // breadcrumb for callers/analytics -- it doesn't change what's searched (PLAN §3.7: scope chips sit on top,
 // but the index itself is always the whole app).
+// David, 2026-10-11 (a live screenshot of the map's ⋯ menu: "way too many settings"): Name any color and
+// Surprise me moved off that menu into this one search -- "both are ways of finding a color", so they sit as
+// two quiet, always-there chips right under the field (not query-dependent results, and not buried behind
+// typing a word for them). They run the SAME featureRegister entries ("map-namer"/"map-surprise", js/home.js)
+// the dynamic word-search already finds them by, so there's exactly one definition of each action, not two.
+const SEARCH_QUICK = [["namer", "map-namer", "pipette", "Name any color"], ["surprise", "map-surprise", "dice", "Surprise me"]];
+function searchQuickHTML() {
+  return `<div class="sr-quick">${SEARCH_QUICK.map(([key, , glyph, t]) => `<button type="button" class="sr-chip" data-sr-quick="${key}">${icon(glyph, 18)}<span>${esc(t)}</span></button>`).join("")}</div>`;
+}
 function searchOpen(o = {}) {
   if (document.querySelector(".sheet,.rooms-stem")) return;
   const html = `<div class="sr-sheet">
     <div class="sr-field"><span>${ICON.search}</span><input type="search" class="sr-input" placeholder="Search colors, paintings, collections…" autocomplete="off" aria-label="Search" value="${esc(o.q || "")}"></div>
+    ${searchQuickHTML()}
     <div class="sr-body">${searchResultsHTML(o.q || "")}</div>
   </div>`;
   const { sh, close } = sheet(html);
@@ -60,6 +70,8 @@ function searchOpen(o = {}) {
   inp.addEventListener("input", run);
   setTimeout(() => { try { inp.focus({ preventScroll: true }); } catch (e) {} }, 60);
   sh.addEventListener("click", e => {
+    const q = e.target.closest("[data-sr-quick]");
+    if (q) { const reg = SEARCH_QUICK.find(x => x[0] === q.dataset.srQuick); const feat = reg && FEATURE_REGISTRY.get(reg[1]); close(); if (feat) { buzz(8); feat.run(); } return; }
     const c = e.target.closest("[data-sr-color]");
     if (c) { close(); buzz(8); if (typeof openTappedColor === "function") openTappedColor(c.dataset.h); else if (typeof routeColor === "function") { const n = routeColor(c.dataset.srColor); if (n) location.hash = "#/color/" + routeSlug(n.n); } return; }
     const co = e.target.closest("[data-sr-coll]");
