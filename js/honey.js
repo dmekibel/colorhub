@@ -699,6 +699,31 @@ const honeyExtent = (theta, r, shapeAmt) => shapeAmt <= .02 ? r : r * (1 - shape
 //   shape 0 = the largest circle that fits in the cell (touching its nearest neighbors across the same gap)
 //   between = the circle blended toward the cell, so the corners round off
 // A bubble at the edge of what's drawn (neighbors culled) is also bounded by its own lens size, so it never balloons.
+// which points sit on the outer edge of the whole layout (David, 2026-10-11: "bring back the tiled edge"): judged
+// once per layout from the flat layout points, never from what happens to be on screen, so a cell cut off by the
+// viewport is never mistaken for an edge. An edge point has a wide empty sector among its lattice neighbors.
+function honeyEdgeSet(pts) {
+  const N = pts.length, out = new Set(); if (N < 8) { pts.forEach(p => out.add(p.it)); return out; }
+  const step = Math.max(1, Math.floor(N / 200)); let nn = [];
+  const cellG = new Map(), key = (i, j) => i * 100003 + j;
+  let sp = 0; { const xs = pts.map(p => p.x), ys = pts.map(p => p.y); sp = Math.sqrt((Math.max(...xs) - Math.min(...xs)) * (Math.max(...ys) - Math.min(...ys)) / N) || 1; }
+  pts.forEach((p, n) => { const k = key(Math.floor(p.x / sp), Math.floor(p.y / sp)); let a = cellG.get(k); if (!a) cellG.set(k, a = []); a.push(n); });
+  for (let n = 0; n < N; n += step) { const p = pts[n]; let best = Infinity; const ci = Math.floor(p.x / sp), cj = Math.floor(p.y / sp);
+    for (let i = ci - 2; i <= ci + 2; i++) for (let j = cj - 2; j <= cj + 2; j++) for (const m of cellG.get(key(i, j)) || []) if (m !== n) best = Math.min(best, Math.hypot(pts[m].x - p.x, pts[m].y - p.y));
+    if (isFinite(best)) nn.push(best); }
+  nn.sort((a, b) => a - b); const s = nn[Math.floor(nn.length / 2)] || sp, R = s * 1.9, rr = Math.ceil(R / sp);
+  pts.forEach((p, n) => {
+    const ci = Math.floor(p.x / sp), cj = Math.floor(p.y / sp), angs = [];
+    for (let i = ci - rr; i <= ci + rr; i++) for (let j = cj - rr; j <= cj + rr; j++) for (const m of cellG.get(key(i, j)) || []) {
+      if (m === n || pts[m].g !== p.g) continue; const dx = pts[m].x - p.x, dy = pts[m].y - p.y; if (dx * dx + dy * dy <= R * R) angs.push(Math.atan2(dy, dx));
+    }
+    if (angs.length < 3) { out.add(p.it); return; }
+    angs.sort((a, b) => a - b); let gap = angs[0] + 6.283185307 - angs[angs.length - 1];
+    for (let k = 1; k < angs.length; k++) gap = Math.max(gap, angs[k] - angs[k - 1]);
+    if (gap > 2.2) out.add(p.it);
+  });
+  return out;
+}
 function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {   // clipAll (L18 glide): clip even tiny bubbles   // grow: how far a bubble may swell past its own lens size, as a fraction of its diameter
   if (!drawn.length) return;
   // Speed: the grid is sized to a TYPICAL bubble (not the biggest, which put thousands of tiny ones in every lookup),
@@ -782,11 +807,22 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
     // Only a cell neighbored all round gets the generous start that lets it reach its true power-diagram vertices.
     const angs = []; for (let c = 0; c < cuts.length; c += 3) angs.push(Math.atan2(cuts[c + 1], cuts[c]));
     angs.sort((x, y) => x - y);
-    let gap = angs.length ? angs[0] + 6.283185307 - angs[angs.length - 1] : 6.3;
-    for (let k = 1; k < angs.length; k++) gap = Math.max(gap, angs[k] - angs[k - 1]);
-    const R0 = gap > 2.1 ? b.d * .62 : Math.max(ownR0, maxLim * 1.8 + 8);
+    let gap = angs.length ? angs[0] + 6.283185307 - angs[angs.length - 1] : 6.3, gapFrom = angs.length ? angs[angs.length - 1] : 0;
+    for (let k = 1; k < angs.length; k++) if (angs[k] - angs[k - 1] > gap) { gap = angs[k] - angs[k - 1]; gapFrom = angs[k - 1]; }
+    // the layout itself decides (b.edge, honeyEdgeSet): a viewport-culled or wedged cell is never treated as edge
+    const open = !!b.edge;
     let poly = [];
-    for (let i = 0; i < nSides; i++) { const t = i / nSides * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
+    if (open) {
+      // an edge cell keeps a honeycomb edge (David, 2026-10-11: "the edge stays honeycomb shaped, not rounded"):
+      // start from the regular hexagon its nearest neighbor implies (inradius = that bisector), the same pointy-top
+      // hexagon an interior lattice cell ends up as, so the outer sides read as the lattice continuing
+      let minLim = Infinity; for (let c = 2; c < cuts.length; c += 3) if (cuts[c] > 0) minLim = Math.min(minLim, cuts[c]);
+      const Rh = (isFinite(minLim) ? minLim : b.d * .5) * 1.1547;
+      for (let i = 0; i < 6; i++) { const t = (i * 60 + 30) * Math.PI / 180; poly.push([Math.cos(t) * Rh, Math.sin(t) * Rh]); }
+    } else {
+      const R0 = Math.max(ownR0, maxLim * 1.8 + 8);
+      for (let i = 0; i < nSides; i++) { const t = i / nSides * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
+    }
     for (let c = 0; c < cuts.length && poly.length; c += 3) {
       const ux = cuts[c], uy = cuts[c + 1], lim = cuts[c + 2];
       // keep the side of the power bisector (the half that faces this bubble)
@@ -1317,6 +1353,8 @@ function honeycomb(host, opts = {}) {
   function buildFlatDrawn(l, t) {
     const R = reach(l), cx = W / 2, cy = vcy(), hx = W / 2, hy = vy() / 2, ia = l.inner, round = cfg.lensMode === "round", pk = pack();
     drawn = []; let tinyN = 0, cbest = Infinity, cItem = null;
+    if (lay.finite && !lay.edgeSet) lay.edgeSet = honeyEdgeSet(lay.pts);
+    const edgeSet = lay.finite ? lay.edgeSet : null;
     for (const p of lay.pts) copies(p, P, R, (ex, ey) => {
       const z = Math.hypot(ex, ey);
       let x, y, d;
@@ -1334,7 +1372,7 @@ function honeycomb(host, opts = {}) {
       if (x < -d - HONEY_EDGE_MARGIN || y < -d - HONEY_EDGE_MARGIN || x > W + d + HONEY_EDGE_MARGIN || y > Hh + d + HONEY_EDGE_MARGIN) return;
       if (d < 2.2) { tinyN++; return; }
       if (z < cbest) { cbest = z; cItem = p.it; }
-      drawn.push({ it: p.it, x, y, d, z, k: p.it.n + "|" + Math.round((P[0] + ex) * 8) + "|" + Math.round((P[1] + ey) * 8) });
+      drawn.push({ it: p.it, x, y, d, z, edge: !!(edgeSet && edgeSet.has(p.it)), k: p.it.n + "|" + Math.round((P[0] + ex) * 8) + "|" + Math.round((P[1] + ey) * 8) });
     });
     // Safety: never draw more than ~5,000 bubbles. Far out on a big set some styles reached 50,000-120,000, which ran
     // a phone out of memory (a white or black screen). Past the budget, the zoom-out limit moves in to this zoom.
