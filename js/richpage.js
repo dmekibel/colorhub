@@ -99,7 +99,7 @@ function rpRelation(name, tapped, hex) {
 // the foot stack's name fits one line at 96px, else two lines at the largest of 80/72/64, else 56
 function rpFitName(h1) {
   const hero = h1.closest(".cp-hero"); if (!hero || !hero.clientWidth) return;
-  const avail = hero.clientWidth - 40, cs = getComputedStyle(h1), cv = rpFitName.cv || (rpFitName.cv = document.createElement("canvas").getContext("2d"));
+  const avail = Math.min(hero.clientWidth, window.innerWidth || hero.clientWidth) - 40, cs = getComputedStyle(h1), cv = rpFitName.cv || (rpFitName.cv = document.createElement("canvas").getContext("2d"));
   const lines = (txt, px) => { cv.font = `${cs.fontStyle} ${cs.fontWeight} ${px}px ${cs.fontFamily}`; let n = 1, w = 0; txt.split(/\s+/).forEach(word => { const ww = cv.measureText(word + " ").width; if (w + ww > avail && w > 0) { n++; w = 0; } w += ww; }); return n; };
   const txt = h1.textContent;
   // longer titles (an in-between color's descriptive name, "Deep yellowish olive drab") step down further, so the
@@ -120,6 +120,8 @@ function rpYoursLine(name, hex, tapped) {
 const RP_MOD = { lighter: "light", darker: "deep", "more vivid": "vivid", duller: "dusty", redder: "reddish", yellower: "yellowish", greener: "greenish", bluer: "bluish", purpler: "purplish" };
 const RP_MOD_ORDER = ["lighter", "darker", "more vivid", "duller", "redder", "yellower", "greener", "bluer", "purpler"];
 function rpYoursName(name, hex, tapped) {
+  // only a near color earns "modifier + name"; a far one would read as nonsense ("light bluish teal" for a pink)
+  if (de2000(tapped, hex) > 12) return name;
   const d = lookDiff({ h: hex, n: name }, { h: tapped, n: "Your color" });
   if (d === "almost the same") return name;
   const words = d.split(" and ").filter(w => RP_MOD[w]).sort((a, b) => RP_MOD_ORDER.indexOf(a) - RP_MOD_ORDER.indexOf(b)).map(w => RP_MOD[w]);
