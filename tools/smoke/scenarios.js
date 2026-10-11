@@ -1403,28 +1403,30 @@ scenario("train", "check-in card opens the drill", async t => {
   t.expect(t.$$(".drill .segs i.on").length >= done0 + 3 || t.$(".result"), "answering three check-in rounds did not advance the progress bar");
 });
 
-scenario("train", "Teach it your eye: best-of-four pick + runner-up + Skip, and the equal-swatch palette duel", async t => {
+scenario("train", "Teach it your eye: pick your top three of eight, Done / None of these, and equal-swatch palettes", async t => {
   await t.open("#shot=ladder:run-pairs", { settle: 500 });
-  await t.waitFor(() => t.$$(".ldr-cand").length === 4, 6000, "four best-of-four candidates");
+  await t.waitFor(() => t.$$(".ldr-cand").length === 8, 6000, "eight pair options");
   const cands = t.$$(".ldr-cand"), w0 = cands[0].getBoundingClientRect().width;
-  t.expect(cands.every(c => Math.abs(c.getBoundingClientRect().width - w0) < 1), "the four candidates are not equal-size swatches");
+  t.expect(cands.every(c => Math.abs(c.getBoundingClientRect().width - w0) < 1), "the eight options are not equal size");
   t.expect(cands.every(c => c.querySelectorAll("i").length === 2), "each pairs option should show the whole pair (two swatches)");
   const sw = [...cands[0].querySelectorAll("i")].map(i => i.getBoundingClientRect().width);
   t.expect(Math.abs(sw[0] - sw[1]) < 1, "the two swatches in a pair option are not equal");
-  await t.click(cands[0], { wait: 500 });
-  await t.waitFor(() => /next best/i.test(t.$("#app").innerText), 4000, "the runner-up prompt");
-  t.expect(t.$$(".ldr-cand").length === 3, `expected 3 runner-up candidates, got ${t.$$(".ldr-cand").length}`);
   const skip = t.$("#lskip");
-  t.expect(skip && !skip.hidden, "Skip isn't offered at the runner-up step");
-  await t.click(skip, { wait: 400 });
-  await t.waitFor(() => /2\/15/.test(t.$("#app").innerText), 4000, "the ladder didn't advance to question 2 after Skip");
+  t.expect(skip && !skip.hidden && /none/i.test(skip.textContent), "\"None of these\" isn't offered before a pick");
+  await t.click(cands[0], { wait: 200 });
+  await t.click(t.$$(".ldr-cand")[3], { wait: 200 });
+  const ranks = t.$$(".ldr-rank").map(r => r.textContent).filter(Boolean);
+  t.expect(ranks.join() === "1,2", `ranks after two taps: ${ranks.join() || "none"}`);
+  t.expect(/done/i.test(t.$("#lskip").textContent), "the button doesn't turn into Done after a pick");
+  await t.click(t.$("#lskip"), { wait: 500 });
+  await t.waitFor(() => /\b1 rated/.test(t.$("#app").innerText) && t.$$(".ldr-rank").every(r => !r.textContent), 4000, "the ladder didn't count the round and move on after Done");
 
   await t.open("#shot=ladder:run-palettes", { settle: 500 });
-  await t.waitFor(() => t.$$(".tz-opt").length === 2, 6000, "the palette duel's two options");
-  const opts = t.$$(".tz-opt"), swA = [...opts[0].querySelectorAll(".tz-eq i")], swB = [...opts[1].querySelectorAll(".tz-eq i")];
-  t.expect(swA.length > 0 && swA.length === swB.length, `the two palettes don't have the same swatch count (${swA.length} vs ${swB.length})`);
-  const widths = [...swA, ...swB].map(i => i.getBoundingClientRect().width);
-  t.expect(Math.max(...widths) - Math.min(...widths) < 2, "the palette duel's swatches aren't equal width");
+  await t.waitFor(() => t.$$(".ldr-cand").length === 8, 6000, "eight palette options");
+  const counts = t.$$(".ldr-cand").map(o => o.querySelectorAll("i").length);
+  t.expect(counts.every(n => n === counts[0] && n >= 3), `the palettes don't all have the same swatch count (${counts.join(",")})`);
+  const widths = t.$$(".ldr-cand i").map(i => i.getBoundingClientRect().width);
+  t.expect(Math.max(...widths) - Math.min(...widths) < 2, "the palette swatches aren't equal width");
 });
 
 scenario("train", "every entry on the Train menu opens something (nothing locked)", async t => {
