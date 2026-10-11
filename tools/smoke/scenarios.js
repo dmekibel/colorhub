@@ -1403,7 +1403,7 @@ scenario("train", "check-in card opens the drill", async t => {
   t.expect(t.$$(".drill .segs i.on").length >= done0 + 3 || t.$(".result"), "answering three check-in rounds did not advance the progress bar");
 });
 
-scenario("train", "Teach it your eye: pick one of eight + runner-up + Skip, and equal-swatch palettes", async t => {
+scenario("train", "Teach it your eye: pick your top three of eight, Done / None of these, and equal-swatch palettes", async t => {
   await t.open("#shot=ladder:run-pairs", { settle: 500 });
   await t.waitFor(() => t.$$(".ldr-cand").length === 8, 6000, "eight pair options");
   const cands = t.$$(".ldr-cand"), w0 = cands[0].getBoundingClientRect().width;
@@ -1411,13 +1411,15 @@ scenario("train", "Teach it your eye: pick one of eight + runner-up + Skip, and 
   t.expect(cands.every(c => c.querySelectorAll("i").length === 2), "each pairs option should show the whole pair (two swatches)");
   const sw = [...cands[0].querySelectorAll("i")].map(i => i.getBoundingClientRect().width);
   t.expect(Math.abs(sw[0] - sw[1]) < 1, "the two swatches in a pair option are not equal");
-  await t.click(cands[0], { wait: 500 });
-  await t.waitFor(() => /next best/i.test(t.$("#app").innerText), 4000, "the runner-up prompt");
-  t.expect(t.$$(".ldr-cand").length === 7, `expected 7 runner-up candidates, got ${t.$$(".ldr-cand").length}`);
   const skip = t.$("#lskip");
-  t.expect(skip && !skip.hidden, "Skip isn't offered at the runner-up step");
-  await t.click(skip, { wait: 400 });
-  await t.waitFor(() => /2\/15/.test(t.$("#app").innerText), 4000, "the ladder didn't advance to question 2 after Skip");
+  t.expect(skip && !skip.hidden && /none/i.test(skip.textContent), "\"None of these\" isn't offered before a pick");
+  await t.click(cands[0], { wait: 200 });
+  await t.click(t.$$(".ldr-cand")[3], { wait: 200 });
+  const ranks = t.$$(".ldr-rank").map(r => r.textContent).filter(Boolean);
+  t.expect(ranks.join() === "1,2", `ranks after two taps: ${ranks.join() || "none"}`);
+  t.expect(/done/i.test(t.$("#lskip").textContent), "the button doesn't turn into Done after a pick");
+  await t.click(t.$("#lskip"), { wait: 500 });
+  await t.waitFor(() => /2\/15/.test(t.$("#app").innerText), 4000, "the ladder didn't advance to question 2 after Done");
 
   await t.open("#shot=ladder:run-palettes", { settle: 500 });
   await t.waitFor(() => t.$$(".ldr-cand").length === 8, 6000, "eight palette options");

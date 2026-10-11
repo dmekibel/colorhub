@@ -151,41 +151,46 @@ function ldrFourShell(total) {
     <div class="tz-q"><p class="eyebrow" id="llabel"></p><h2 id="lq"></h2></div>
     <div class="ldr-base" id="lbase"></div>
     <div class="ldr-four" id="lfour"></div>
-    <div class="ldr-feedback" id="lfb"></div>
-    <button class="btn ghost ldr-skip" id="lskip">Skip</button>
+    <button class="btn ghost ldr-skip" id="lskip">None of these</button>
   `, "fixed ldr-run");
   el.querySelector("[data-close]").onclick = () => go("studio");
-  const $ = s => el.querySelector(s), four = $("#lfour"), segs = $("#lsegs"), skipBtn = $("#lskip"), fb = $("#lfb"), base = $("#lbase");
-  let done = 0, locked = true, mode = "first", cb = null, items = null, bestIdx = -1, baseHtml = "", baseNow = [];
-  // each option is the whole combination (base colors + the candidate), drawn as equal swatches side by side, stacked
+  const $ = s => el.querySelector(s), four = $("#lfour"), segs = $("#lsegs"), skipBtn = $("#lskip"), base = $("#lbase");
+  let done = 0, locked = true, cb = null, items = null, baseNow = [], picks = [], autoT = 0;
+  // each option is the whole combination (base colors + the candidate), drawn as equal swatches side by side
   function paintFour(list) {
     four.classList.toggle("ldr-grid", list.length > 4);
-    four.innerHTML = list.map((c, k) => `<button class="ldr-cand ldr-combo" data-k="${k}" aria-label="Option ${k + 1}">${[...baseNow, ...(c.cols || [c.h])].map(h => `<i style="--c:${h}"></i>`).join("")}</button>`).join("");
+    four.innerHTML = list.map((c, k) => `<button class="ldr-cand ldr-combo" data-k="${k}" aria-label="Option ${k + 1}">${[...baseNow, ...(c.cols || [c.h])].map(h => `<i style="--c:${h}"></i>`).join("")}<b class="ldr-rank" aria-hidden="true"></b></button>`).join("");
+  }
+  // your top three, in order: tap 1st, 2nd, 3rd; tap a ranked one again to take it (and those after it) back
+  function paintRanks() {
+    four.querySelectorAll(".ldr-cand").forEach((b, j) => { const r = picks.indexOf(j); b.classList.toggle("win", r >= 0); b.querySelector(".ldr-rank").textContent = r >= 0 ? r + 1 : ""; b.setAttribute("aria-pressed", r >= 0); });
+    skipBtn.textContent = picks.length ? "Done" : "None of these";
+    base.querySelector("small.ldr-hint").textContent = picks.length === 0 ? "Tap your favorite, then your 2nd and 3rd" : picks.length < 3 ? `Now your ${picks.length === 1 ? "2nd" : "3rd"}, or Done` : "";
+  }
+  function finish() {
+    if (locked) return; locked = true; clearTimeout(autoT);
+    const seg = segs.children[done];
+    if (seg && picks.length) { const w = items[picks[0]]; seg.style.setProperty("--c", w.h || w.cols[2]); seg.classList.add("on"); }
+    later(() => cb(picks.slice()), reduceMotion ? 80 : 240);
   }
   function pick(k) {
-    if (locked) return; locked = true; buzz(8);
-    four.querySelectorAll(".ldr-cand").forEach((b, j) => b.classList.toggle("win", j === k));
-    const seg = segs.children[done]; if (seg && mode === "first") { seg.style.setProperty("--c", items[k].h || items[k].cols[2]); seg.classList.add("on"); }
-    later(() => cb(k), reduceMotion ? 120 : 340);
+    if (locked) return; buzz(6); clearTimeout(autoT);
+    const r = picks.indexOf(k);
+    if (r >= 0) picks = picks.slice(0, r); else if (picks.length < 3) picks.push(k);
+    paintRanks();
+    if (picks.length === 3) autoT = later(finish, reduceMotion ? 200 : 650);
   }
   four.addEventListener("click", e => { const b = e.target.closest(".ldr-cand"); if (b) pick(+b.dataset.k); });
-  skipBtn.onclick = () => { if (locked) return; locked = true; later(() => cb(null), 60); };
-  onKey = e => { const k = { "1": 0, "2": 1, "3": 2, "4": 3, "5": 4, "6": 5, "7": 6, "8": 7 }[e.key]; if (k !== undefined) pick(k); if (e.key === "Escape") skipBtn.onclick(); };
+  skipBtn.onclick = finish;
+  onKey = e => { const k = { "1": 0, "2": 1, "3": 2, "4": 3, "5": 4, "6": 5, "7": 6, "8": 7 }[e.key]; if (k !== undefined) pick(k); if (e.key === "Enter" || e.key === "Escape") finish(); };
   return {
-    ask(baseColors, baseLabel, label, q, four4, onBest) {
+    ask(baseColors, baseLabel, label, q, list, onDone) {
       $("#llabel").textContent = label; $("#lq").textContent = q; $("#lleft").textContent = `${done + 1}/${total}`;
-      baseNow = baseColors;
-      base.innerHTML = baseLabel ? `<small>${esc(baseLabel)}</small>` : "";
-      fb.innerHTML = ""; skipBtn.hidden = true; mode = "first"; items = four4; locked = false;
-      paintFour(four4);
-      cb = k => { mode = "picked"; onBest(k); };
-    },
-    askRunnerUp(baseColors, winner, rest, onRunnerUp) {
-      base.innerHTML = `<small>Your pick is in. And the next best?</small>`;
-      fb.innerHTML = "";
-      items = rest; mode = "runner"; locked = false; skipBtn.hidden = false; skipBtn.textContent = "Skip";
-      paintFour(rest);
-      cb = k => onRunnerUp(k);
+      baseNow = baseColors; picks = [];
+      base.innerHTML = `${baseLabel ? `<small>${esc(baseLabel)}</small>` : ""}<small class="ldr-hint"></small>`;
+      items = list; locked = false; skipBtn.hidden = false;
+      paintFour(list); paintRanks();
+      cb = onDone;
     },
     next() { done++; },
   };
@@ -221,19 +226,17 @@ function ldrRunFour(ld, stepKey) {
     const items = isPal ? cands : cands.map(c => ({ h: c.h, from: c.from, x: TASTE.tasteFeat([...baseCols, c.h], null) }));
     const predicted = TASTE.predictBest(ld.m, items);
     const label = `${cfg.label} · ${st.n + 1}/${total}`, baseLabel = baseItem.from ? `From ${baseItem.from}` : "";
-    Sh.ask(baseCols, baseLabel, label, cfg.q, items, bestK => {
-      TASTE.updateRanking(ld.m, items, [bestK, ...items.map((_, i) => i).filter(i => i !== bestK)], [1]);
-      const hit = predicted === bestK; TASTE.recordAcc(ld.m, hit, chance); hist.push({ hit: hit ? 1 : 0, chance });
+    Sh.ask(baseCols, baseLabel, label, cfg.q, items, picks => {
+      // Plackett-Luce, decomposed: 1st beats everything after it (weight 1), 2nd the rest (.5), 3rd the rest (.3);
+      // "None of these" teaches nothing rather than guess at why
+      if (picks.length) {
+        const rest = items.map((_, i) => i).filter(i => !picks.includes(i));
+        TASTE.updateRanking(ld.m, items, [...picks, ...rest], [1, .5, .3].slice(0, picks.length));
+        const hit = predicted === picks[0]; TASTE.recordAcc(ld.m, hit, chance); hist.push({ hit: hit ? 1 : 0, chance });
+      }
       items.forEach(it => ldrRemember(ld, keyOf(it)));
-      const rest = items.map((_, i) => i).filter(i => i !== bestK);
-      Sh.askRunnerUp(baseCols, items[bestK], rest.map(i => items[i]), runnerLocal => {
-        if (runnerLocal != null) {
-          const runnerIdx = rest[runnerLocal], remaining = rest.filter(i => i !== runnerIdx);
-          TASTE.updateRanking(ld.m, items, [runnerIdx, ...remaining], [.5]);
-        }
-        st.n++; st.acc = ldrMean(hist.map(r => r.hit)); save();
-        Sh.next(); step();
-      });
+      st.n++; st.acc = hist.length ? ldrMean(hist.map(r => r.hit)) : null; save();
+      Sh.next(); step();
     });
   };
   step();
