@@ -7380,3 +7380,68 @@ scenario("home", "Colors sheet: several families can be on at once (their union 
   t.expect(both >= Math.max(blues, greens) && both <= blues + greens, `two families should show their union (blues ${blues}, greens ${greens}, both ${both})`);
   t.notes.push(`Blues ${blues} + Greens ${greens} -> ${both}`);
 });
+
+// ---------- Palette view (js/paletteview.js) ----------
+// David, 2026-10-11: a full-screen, scrollable feed of palettes derived live from one source (a painting, a
+// painter or a photo), sorted into categories, with pin/save and a per-color swap sheet (Suggested / From
+// source / Adjust). This walks the painting entry point end to end.
+scenario("pv", "Palette view: categories render equal-swatch rows, the count slider changes swatch count, pin + Save, and the swap sheet edits a slot", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  await t.waitFor("[data-glpalacts] [data-plvopen]", 15000, "the Palette view button on the painting page");
+  await t.click("[data-glpalacts] [data-plvopen]", { wait: 500 });
+  await t.waitFor(".plv-screen .plv-row-wrap", 15000, "the Palette view feed");
+  const rowsFirstCat = () => t.$$(".plv-screen .plv-row-wrap");
+  await t.waitFor(() => rowsFirstCat().length >= 10, 10000, "at least 10 rows in the first category's feed");
+  const swCount = row => t.$$(".plv-sw-row > i", row).length;
+  const n0 = swCount(rowsFirstCat()[0]);
+  t.expect(rowsFirstCat().every(r => swCount(r) === n0), "not every row in the feed has the same swatch count");
+  const w0 = t.$$(".plv-sw-row > i", rowsFirstCat()[0])[0].getBoundingClientRect().width;
+  t.expect(t.$$(".plv-sw-row > i", rowsFirstCat()[0]).every(i => Math.abs(i.getBoundingClientRect().width - w0) < 1), "a row's swatches aren't equal width");
+  // a second category
+  const chips = t.$$("[data-plvcat]");
+  t.expect(chips.length >= 2, "fewer than two category chips available");
+  await t.click(chips[1], { wait: 500 });
+  await t.waitFor(() => t.$$(".plv-screen .plv-row-wrap").length >= 10, 10000, "at least 10 rows in the second category's feed");
+  await t.click(chips[0], { wait: 500 });   // back to "For you" for the rest of this walk
+  await t.waitFor(() => rowsFirstCat().length >= 10, 10000, "the first category's feed again");
+  // the count slider: 2 colors per row
+  await t.waitFor(() => t.w.eval("document.querySelector('[data-plvcnt]')._countTo"), 8000, "the count slider's countify controller");
+  t.ev(`document.querySelector('[data-plvcnt]')._countTo(2)`);
+  await t.waitFor(() => rowsFirstCat().length && swCount(rowsFirstCat()[0]) === 2, 8000, "rows with 2 swatches after moving the slider");
+  await t.waitFor(() => rowsFirstCat().length >= 10, 10000, "at least 10 rows at count 2");
+  // pin the first row, check the Pinned-here sheet
+  const row0 = rowsFirstCat()[0];
+  await t.click(t.$(".plv-heart", row0), { wait: 500 });
+  t.expect(t.$(".plv-heart", row0).classList.contains("on"), "the heart didn't turn on after pinning");
+  await t.click("[data-plvpins]", { wait: 500 });
+  await t.waitFor(".plv-pins", 8000, "the Pinned-here sheet");
+  t.expect(/Pinned here · 1/.test(t.text(".plv-pins .mn-title")), `the pinned sheet doesn't show 1 (${t.text(".plv-pins .mn-title")})`);
+  const before = t.ev(`(S.palettes || []).length`);
+  await t.click(".plv-pins [data-plvsave]", { wait: 500 });
+  const after = t.ev(`(S.palettes || []).length`);
+  t.expect(after === before + 1, `Save should add one entry to S.palettes (was ${before}, now ${after})`);
+  // close via direct removal (the scrim's own close() plays a real-time CSS animation before removing itself,
+  // which doesn't reliably advance under this harness's virtual-time Chrome -- same workaround other sheet-
+  // closing scenarios in this file use)
+  t.ev("document.querySelectorAll('.scrim,.sheet').forEach(n => n.remove()); document.documentElement.classList.remove('sheet-open'); document.body.style.top=''");
+  // the swap sheet: open the first row's expanded view, swap slot 1 via Suggested
+  await t.click(t.$("[data-plvrow]", row0), { wait: 500 });
+  await t.waitFor(".plv-x", 8000, "the expanded palette sheet");
+  const slot0Before = t.ev(`document.querySelectorAll(".plv-x-c")[0].style.getPropertyValue("--c")`);
+  await t.click(t.$$(".plv-x-c")[0], { wait: 500 });
+  await t.waitFor(".plv-swap", 8000, "the swap sheet");
+  const opt = await t.waitFor(() => t.$$(".plv-swap-grid [data-plvpick]")[0], 8000, "a Suggested alternative");
+  await t.click(opt, { wait: 400 });
+  await t.click("[data-mn-close]", { wait: 500 });   // close the swap sheet -- confirms the edit (close()+finish() run synchronously)
+  // the swap sheet's own slide-down animation doesn't reliably advance under this harness's virtual-time Chrome;
+  // the edit (item.edited, the Edited badge, the training update) already happened synchronously above, so just
+  // clear its now-redundant DOM rather than waiting on the animation to remove it
+  // under reduceMotion (headless Chrome) close() removes the swap sheet immediately, with no animation to wait
+  // out -- only clean up a leftover if one is still there, so this never deletes the expand sheet underneath it
+  t.ev("const sh = [...document.querySelectorAll('.sheet')], sc = [...document.querySelectorAll('.scrim')]; if (sh.length > 1) sh[sh.length - 1].remove(); if (sc.length > 1) sc[sc.length - 1].remove();");
+  t.expect(t.$("[data-plvreset]"), "the expand sheet doesn't offer Reset to original after a swap (no edited state recorded)");
+  const slot0After = t.ev(`document.querySelectorAll(".plv-x-c")[0].style.getPropertyValue("--c")`);
+  t.expect(slot0After.toUpperCase() !== slot0Before.toUpperCase(), "slot 1's color didn't change after the swap");
+  t.ev("document.querySelectorAll('.scrim,.sheet').forEach(n => n.remove()); document.documentElement.classList.remove('sheet-open'); document.body.style.top=''");   // close the expand sheet
+  t.expect(/Edited/.test(t.text(row0)), "the feed row doesn't show the Edited badge after the swap was confirmed");
+});

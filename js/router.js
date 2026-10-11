@@ -120,6 +120,10 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   // svOpenRoute (data/analysis/groups.json's own keys, same as awGroup does for the art wiki's own movement/
   // decade/country pages below).
   ["svOpen", subject => subject && subject.kind && subject.id != null ? routed(subject.label || String(subject.id), "subject/" + subject.kind + "/" + routeSlug(String(subject.id))) : null],
+  // Palette view (js/paletteview.js): a live, derived-on-device feed of palettes from a painting, painter or
+  // photo. A photo's id is usually null (no stable address for an in-session upload) — plvOpen still runs the
+  // screen either way, just without a route title; router.js's "pv" kind below (openRoute) handles a cold load.
+  ["plvOpen", (kind, id) => kind && id != null ? routed("Palette view", "pv/" + kind + "/" + id) : null],
   ["pulpGrid", () => routed("Pulp covers", "pulp")],   // js/pulp.js: the World door for pulp magazine/paperback covers   // js/looks.js
   ["photographyGrid", () => routed("Photography", "photography")],   // js/photography.js: the World door for the color-photography archive
   ["doGrid", () => routed("Design objects", "design")],   // js/designobjects.js: the World door for posters/textiles/ceramics/etc.
@@ -309,6 +313,7 @@ function openRoute(hash, initial = false) {
   }
   if (kind === "look" && id && typeof lkOpenRoute === "function") { base(); XSTACK = []; lkOpenRoute(id); return true; }   // js/looks.js
   if (kind === "subject" && id && more != null && typeof svOpenRoute === "function") { base(); XSTACK = []; svOpenRoute(id, more); return true; }   // js/subjectview.js: #/subject/<kind>/<id>, PAGES-AUDIT.md plan item 3
+  if (kind === "pv" && id && more != null && typeof plvOpen === "function") { base(); XSTACK = []; plvOpen(id, more); return true; }   // js/paletteview.js: #/pv/<painting|painter>/<id>; a photo has no stable address, never arrives here
   if (kind === "source" && id && typeof sourcePage === "function") { base(); XSTACK = []; sourcePage(id); return true; }   // js/sources.js
   if (kind === "pulp" && !id && typeof pulpGrid === "function") { base(); XSTACK = []; pulpGrid(false); return true; }   // js/pulp.js: #/pulp (a direct link to one cover, #/painting/pulp-<id>, needs the grid open first in this session)
   if (kind === "photography" && !id && typeof photographyGrid === "function") { base(); XSTACK = []; photographyGrid(false); return true; }   // js/photography.js: #/photography (a direct link to one photo, #/painting/photod-<id>, needs the grid open first)

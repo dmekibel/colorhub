@@ -1381,7 +1381,7 @@ function glPage(i, d, fromHex, tol) {
     const host = el.querySelector("[data-glpalacts]"), histHost = el.querySelector("[data-glshufhist]");
     if (!host) return;
     host.hidden = isHarm || mode === "pick" || pal.length < 2;
-    if (!host.hidden) host.innerHTML = `<button class="gl-pa-btn" data-glshuffle>${GL_ICON_DICE}<span>Shuffle</span></button><button class="gl-pa-btn" data-gledit>Edit</button><button class="gl-pa-btn solid" data-glsave>Save palette</button>`;
+    if (!host.hidden) host.innerHTML = `<button class="gl-pa-btn" data-glshuffle>${GL_ICON_DICE}<span>Shuffle</span></button><button class="gl-pa-btn" data-gledit>Edit</button><button class="gl-pa-btn solid" data-glsave>Save palette</button><button class="gl-pa-btn" data-plvopen>Palette view</button>`;
     const s = SHUF[mode];
     if (!histHost) return;
     histHost.hidden = isHarm || !s || s.seeds.length < 2;
@@ -1640,6 +1640,7 @@ function glPage(i, d, fromHex, tol) {
     if (e.target.closest("[data-glshuffle]")) return shuffleMode(mode);
     if (e.target.closest("[data-gledit]")) return glEditOpen(curPal().map(p => p.h), { title: d.t, label: (GL_MODES.find(m => m[0] === mode) || [, ""])[1], pool, onSave: (hexes, name) => glSavePalette(hexes, name) });
     if (e.target.closest("[data-glsave]")) { const lbl = (GL_MODES.find(m => m[0] === mode) || [, ""])[1]; return glSavePalette(curPal().map(p => p.h), glSaveName(d.t, mode === "out" ? "" : lbl)); }
+    if (e.target.closest("[data-plvopen]") && typeof plvOpen === "function") return plvOpen("painting", i);
   };
   const shufHistHost = el.querySelector("[data-glshufhist]");
   if (shufHistHost) shufHistHost.onclick = e => { const b = e.target.closest("[data-glshufgo]"); if (b) shuffleHistoryTo(mode, +b.dataset.glshufgo); };

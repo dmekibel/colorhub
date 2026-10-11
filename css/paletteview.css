@@ -1,0 +1,62 @@
+/* Palette view (js/paletteview.js): a full-screen feed of live-derived palettes. Museum-editorial, same
+   tokens as the rest of the app — the color is the interface, chrome stays opaque and quiet. */
+
+.plv-screen{padding-bottom:40px}
+.plv-loading{padding:60px 0;text-align:center}
+.plv-src{margin:2px 0 10px;font:italic 400 17px/1.3 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ---------- chips + count ---------- */
+.plv-chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px 0 12px;margin:0 calc(-1 * var(--g));padding-left:var(--g);padding-right:var(--g)}
+.plv-chips::-webkit-scrollbar{display:none}
+.plv-chips button{flex:none;min-height:40px;padding:0 16px;border-radius:var(--r-pill);background:var(--surface-2);color:var(--soft);font:400 15px/1 var(--serif);letter-spacing:0;text-transform:none;white-space:nowrap;transition:background .2s,color .2s}
+.plv-chips button.on{background:var(--paper);color:var(--paper-ink)}
+.plv-count-row{display:flex;align-items:center;gap:12px;padding:4px 0 14px}
+.plv-count-row>span{font-size:13px;color:var(--faint);flex:none}
+.plv-count-row input[type=range]{flex:1}
+.plv-count-n{flex:none;min-width:22px;text-align:right;font:500 15px/1 var(--mono);color:var(--ink)}
+.plv-foryou-note{font-size:14px;color:var(--faint);margin:0 0 12px;line-height:1.4}
+.plv-foryou-note button{color:var(--ink);text-decoration:underline;text-underline-offset:3px;font-size:14px}
+
+/* ---------- the feed ---------- */
+.plv-feed{display:flex;flex-direction:column;gap:10px}
+.plv-row-wrap{position:relative;display:flex;align-items:stretch;gap:8px}
+.plv-row{flex:1;min-width:0;display:block;height:64px;border-radius:var(--r-2);overflow:hidden;position:relative;transition:transform .15s var(--ease)}
+.plv-row:active{transform:scale(.985)}
+.plv-sw-row{display:flex;width:100%;height:100%}
+.plv-sw-row>i{flex:1;min-width:0;background:var(--c)}
+.plv-edited{position:absolute;left:8px;bottom:6px;font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.42);padding:3px 7px;border-radius:var(--r-pill)}
+.plv-heart{flex:none;width:44px;height:64px;display:grid;place-items:center;color:var(--faint);border-radius:var(--r-2);background:var(--surface-2);transition:color .2s,transform .2s var(--spring)}
+.plv-heart.on{color:#F2A7B5}
+.plv-heart:active{transform:scale(.88)}
+.plv-sentinel{height:1px}
+.plv-end{padding:26px 0;text-align:center}
+
+/* ---------- expand sheet ---------- */
+.plv-x-sw{display:flex;gap:4px;height:120px;margin-top:4px}
+.plv-x-c{flex:1;min-width:0;background:var(--c);border-radius:var(--r-1);position:relative;transition:transform .15s}
+.plv-x-c:active{transform:scale(.96)}
+.plv-x-c::after{content:"";position:absolute;inset:0;border-radius:var(--r-1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.plv-x-names{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.plv-x-name{min-height:36px;padding:0 12px;border-radius:var(--r-pill);background:var(--surface-2);color:var(--ink);font-size:14px}
+.plv-x-reset{display:block;margin-top:10px;color:var(--faint);font-size:14px;text-decoration:underline;text-underline-offset:3px}
+.plv-x-thumb{position:relative;margin-top:16px;border-radius:var(--r-1);overflow:hidden}
+.plv-x-thumb img{width:100%;display:block}
+.plv-x-dots{position:absolute;inset:0}
+.plv-x-dots i{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 0 2px #fff,0 1px 4px rgba(0,0,0,.5);transform:translate(-50%,-50%)}
+.plv-x .btn{margin-top:16px}
+
+/* ---------- swap sheet ---------- */
+.plv-swap-preview{margin-top:4px}
+.plv-swap-preview .plv-sw-row{height:40px;border-radius:var(--r-1);overflow:hidden}
+.plv-swap-tabs{margin-top:14px;width:100%}
+.plv-swap-tabs button{flex:1}
+.plv-swap-body{margin-top:16px;min-height:160px}
+.plv-swap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.plv-swap-opt{aspect-ratio:1;border-radius:var(--r-1);background:var(--c);transition:transform .15s}
+.plv-swap-opt:active{transform:scale(.92)}
+.plv-swap-img img{width:100%;border-radius:var(--r-1);display:block;touch-action:none}
+
+/* ---------- pinned-here sheet ---------- */
+.plv-pin-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--rule)}
+.plv-pin-row .plv-sw-row{flex:1;min-width:0;height:40px;border-radius:var(--r-1);overflow:hidden}
+.plv-pin-save{flex:none;min-height:40px;padding:0 16px;border-radius:var(--r-pill);background:var(--surface-2);color:var(--ink);font:400 15px/1 var(--serif);letter-spacing:0;text-transform:none}
