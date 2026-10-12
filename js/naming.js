@@ -104,6 +104,20 @@ function nameOf(color, opts = {}) {
   text = text.charAt(0).toUpperCase() + text.slice(1);   // "Pale salmon", "Between teal and slate"
   return { n: top.n, h: top.h, de: Math.round(top.de * 10) / 10, mod, text, near, between, met: coreWordMet(top.entry) };
 }
+// David, 2026-10-12: "extend descriptive in-between naming to every place a user picks an arbitrary color" --
+// the color picker, Look closer's eyedropper (and its shared loupe), Studio's photo palette, a painting's
+// palette chips, the swap sheet's eyedropper. One shared helper, reusing js/richpage.js's own rpYoursName()
+// (the same wording an in-between color or a tapped photo color already gets: "Muddy pink orchid", up to two
+// modifier words by biggest-difference, never a new name) instead of nameOf()'s own single-word modifier
+// grammar -- that system stays exactly as it was for every OTHER caller of nameOf(), this only changes what a
+// PICKED (arbitrary, off-palette) color shows. `hex` is the picked color; `nm` is its nameOf() result (pass
+// one in if the caller already has it, to skip a redundant nearest-name search).
+function nameOfTapped(hex, nm) {
+  nm = nm || nameOf(hex);
+  if (!nm.n) return nm.text || hex;
+  if (nm.de > 12) return nm.text;   // too far for a sensible modifier -- nameOf's own "between X and Y"/"no close name" stands
+  return typeof rpYoursName === "function" ? rpYoursName(nm.n, nm.h, hex) : nm.n;
+}
 
 // started once the first screen is on, same pattern as prefetchWiki() (js/loader.js): usually loaded well
 // before anyone taps a swatch, so nameOf() rarely has to fall back.

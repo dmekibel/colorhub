@@ -78,7 +78,11 @@ LAB.namer = (hex, push = true) => {
   function render() {
     const nm = nameOf(cur, { n: 6 }), taught = BYNAME.get(nm.n.toLowerCase());
     const hero = $("#hero"), top = $("#top"); top.style.setProperty("--c", cur); top.dataset.ink = ink(cur); hero.dataset.swatch = cur;
-    nmrFit($("#name"), nm.text);
+    // David, 2026-10-12: the color picker's hero name, like every other "you picked an arbitrary color" spot,
+    // reads the descriptive name (js/naming.js nameOfTapped, js/richpage.js's rpYoursName wording) instead of
+    // nameOf()'s own single-word modifier; nmrFit already shrinks-to-fit rather than truncating, so the
+    // (sometimes longer) descriptive text never needs special handling here.
+    nmrFit($("#name"), typeof nameOfTapped === "function" ? nameOfTapped(cur, nm) : nm.text);
     $("#sub").innerHTML = nm.between ? `Between two names <span class="mono">${cur}</span>` : `${pctMatch(nm.de)} <span class="mono">${cur}</span>`;
     const list = nm.between ? nm.near.slice(0, 4) : nm.near.slice(1, 5);
     const decDigits = pctMatchDecimal(list.map(x => x.de));   // several matches shown in one list: never a false tie

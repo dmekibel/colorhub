@@ -691,9 +691,13 @@ function glColorReadout(hex, ctx = {}) {
   const nm = typeof nameOf === "function" ? nameOf(hex) : null;
   const near = ctx.pal && ctx.pal.length ? glNearestSwatch(ctx.pal, hex) : null;
   const matchPct = near && near.de < NEAR_DE ? Math.max(1, Math.round((1 - near.de / NEAR_DE) * 100)) : null;
-  const title = nm && nm.n ? nm.n : "Your color";
-  const descLine = nm && nm.between ? `Between ${esc(nm.between.a.toLowerCase())} and ${esc(nm.between.b.toLowerCase())}`
-    : nm && nm.mod ? esc(nm.text) : "";
+  // David, 2026-10-12: the picked color's own title reads descriptively (js/naming.js nameOfTapped) when it's
+  // close enough to a real name to earn one ("Muddy pink orchid"), not just the bare nearest name -- the
+  // "Open <name>" action below still opens the real underlying page, so it keeps the bare name on purpose.
+  const title = nm && nm.n ? (typeof nameOfTapped === "function" ? nameOfTapped(hex, nm) : nm.n) : "Your color";
+  // the modifier case now lives in `title` itself (nameOfTapped), so descLine only ever covers "between" --
+  // never shown twice.
+  const descLine = nm && nm.between ? `Between ${esc(nm.between.a.toLowerCase())} and ${esc(nm.between.b.toLowerCase())}` : "";
   const kept = typeof fvHas === "function" && fvHas(hex);
   const pkBtn = typeof pkButtonHTML === "function" ? pkButtonHTML() : "";
   // David, 2026-10-10: this readout opens from Look closer too, a full-screen layer of its own (.glz-scrim,
@@ -783,8 +787,13 @@ function glStandOut(pool, k, prior, seed) {
 function glName(h) {
   const nm = nameOf(h);
   if (nm.between) return { t: nm.n, sub: `between ${nm.between.a.toLowerCase()} and ${nm.between.b.toLowerCase()}`, n: nm.n };
-  let t = nm.text;
-  if (nm.mod) { const L = lch(nm.h)[0]; if ((L < 22 && /^(dark|deep|pale|light)$/.test(nm.mod)) || (L > 90 && /^(pale|light|dark|deep)$/.test(nm.mod))) t = nm.n; }
+  // David, 2026-10-12: a picked/palette color this close to a real name reads better with js/naming.js's
+  // nameOfTapped() (js/richpage.js's rpYoursName wording, "Muddy pink orchid") than nameOf()'s own single-word
+  // modifier -- same guard against a nonsense word at an extreme lightness ("Dark black", "Pale white") still
+  // applies, now checked against the first word of whatever nameOfTapped() actually returned.
+  let t = typeof nameOfTapped === "function" ? nameOfTapped(h, nm) : nm.text;
+  const firstWord = (t.match(/^(\S+)/) || [])[1] || "";
+  if (/^(dark|deep|pale|light)$/i.test(firstWord)) { const L = lch(nm.h)[0]; if ((L < 22 && /^(dark|deep|pale|light)$/i.test(firstWord)) || (L > 90 && /^(pale|light|dark|deep)$/i.test(firstWord))) t = nm.n; }
   return { t, sub: "", n: nm.n };
 }
 const glPctTxt = s => s < .005 ? "under 1%" : Math.round(s * 100) + "%";

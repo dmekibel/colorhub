@@ -133,7 +133,9 @@ function eyedropAttach(el, o = {}) {
     openLoupe(); position(clientX, clientY); drawLoupe(s, r.px, r.py);
     const nm = typeof nameOf === "function" ? nameOf(r.hex) : null;
     loupe.querySelector(".eyd-loupe-sw").style.setProperty("--c", r.hex);
-    loupe.querySelector(".eyd-loupe-name").textContent = nm && nm.n ? nm.n : "";
+    // David, 2026-10-12: the live loupe reads the descriptive name too (js/naming.js nameOfTapped), same as
+    // every other "you picked an arbitrary color" spot -- css/eyedrop.css wraps it to 2 lines, never an ellipsis.
+    loupe.querySelector(".eyd-loupe-name").textContent = nm && nm.n ? (typeof nameOfTapped === "function" ? nameOfTapped(r.hex, nm) : nm.n) : "";
     loupe.querySelector(".eyd-loupe-hex").textContent = r.hex;
     lastShownHex = r.hex;
     if (r.hex !== lastHex) { lastHex = r.hex; if (typeof buzz === "function") buzz(4); }
