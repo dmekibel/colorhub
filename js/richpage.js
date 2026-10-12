@@ -124,7 +124,9 @@ function rpYoursName(name, hex, tapped) {
   if (de2000(tapped, hex) > 12) return name;
   const d = lookDiff({ h: hex, n: name }, { h: tapped, n: "Your color" });
   if (d === "almost the same") return name;
-  const words = d.split(" and ").filter(w => RP_MOD[w]).sort((a, b) => RP_MOD_ORDER.indexOf(a) - RP_MOD_ORDER.indexOf(b)).map(w => RP_MOD[w]);
+  // a hue word the name already carries is dropped ("greenish bottle green" reads as a stutter)
+  const lower = name.toLowerCase(), hueRoot = { redder: "red", yellower: "yellow", greener: "green", bluer: "blue", purpler: "purpl" };
+  const words = d.split(" and ").filter(w => RP_MOD[w] && !(hueRoot[w] && lower.includes(hueRoot[w]))).sort((a, b) => RP_MOD_ORDER.indexOf(a) - RP_MOD_ORDER.indexOf(b)).map(w => RP_MOD[w]);
   if (!words.length) return name;
   const t = `${words.join(" ")} ${name.toLowerCase()}`;
   return t.charAt(0).toUpperCase() + t.slice(1);
