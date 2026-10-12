@@ -22,17 +22,18 @@
 .ss-line{margin:0;max-width:34ch;font:400 17px/1.4 var(--serif);letter-spacing:0;opacity:.86;text-wrap:pretty}
 .ss-line:empty{display:none}
 
-/* two close names, side by side, with the one-line distinction straddling the seam (js/lookalikes.js lookDiff) */
-.ss-layer.ss-pair{flex-direction:row;align-items:stretch;justify-content:stretch;padding:0}
-.ss-half{flex:1;appearance:none;border:0;background:var(--c);color:inherit;display:flex;flex-direction:column;align-items:flex-start;
-  justify-content:flex-end;text-align:left;padding:0 20px calc(var(--bottom) + 132px);cursor:pointer;-webkit-tap-highlight-color:transparent}
+/* every slide is two colors (David, 2026-10-12): the main one fills the top 80%, a close neighbor the bottom
+   20% band. Names only, each in its own half's ink; tap either to open its page. */
+.ss-layer.ss-pair{flex-direction:column;align-items:stretch;justify-content:stretch;padding:0}
+.ss-half{appearance:none;border:0;background:var(--c);color:inherit;display:flex;flex-direction:column;align-items:flex-start;
+  justify-content:flex-end;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent;min-height:0}
+.ss-main{flex:4 1 0;padding:0 28px 28px}
+.ss-band{flex:1 1 0;justify-content:center;padding:0 72px calc(var(--bottom) * .6) 28px}
 .ss-half:active{opacity:.85}
 .ss-half[data-ink="dark"]{color:#141311}
 .ss-half[data-ink="light"]{color:#fff}
-.ss-name-sm{font:400 clamp(28px,8vw,46px)/1.02 var(--serif);letter-spacing:-.02em;text-wrap:balance}
-/* the difference reads on the color itself, under the second name, in that half's own ink (David: "that ugly black pill doesn't match") */
-.ss-name-sm{position:relative;max-width:100%}
-.ss-diff{position:absolute;left:0;top:calc(100% + 10px);width:min(22ch,calc(50vw - 40px));margin:0;font:400 17px/1.4 var(--serif);letter-spacing:0;opacity:.86;text-wrap:pretty}
+.ss-name-big{font:400 clamp(44px,13vw,86px)/.96 var(--serif);letter-spacing:-.03em;text-wrap:balance;max-width:100%;overflow-wrap:break-word}
+.ss-name-sm{font:400 clamp(24px,7vw,34px)/1.05 var(--serif);letter-spacing:-.015em;text-wrap:balance;max-width:100%;overflow-wrap:break-word}
 
 /* top bar: close, Mode (opens a compact picker below), pause — three opaque capsules, never more, over the color.
    Law 1: the color is the interface, so chrome stays minimal at rest (David-critic fix, 2026-10-09). */
@@ -67,10 +68,10 @@
 
 .ss-hint{position:absolute;right:18px;bottom:calc(var(--bottom) + 18px);z-index:3;margin:0;
   font:400 13px/1 var(--sans);color:rgba(255,255,255,.55);text-shadow:0 1px 3px rgba(0,0,0,.4)}
-.ss-layer[data-ink="dark"] ~ .ss-hint,.ss-pair .ss-half[data-ink="dark"]+.ss-half[data-ink="dark"]~.ss-hint{color:rgba(0,0,0,.45)}
+.ss-layer[data-ink="dark"] ~ .ss-hint,.ss-pair:has(.ss-band[data-ink="dark"]) ~ .ss-hint{color:rgba(0,0,0,.45)}
 
 @media (max-width:359px){
-  .ss-name-btn{font-size:clamp(38px,14vw,72px)}
+  .ss-name-btn,.ss-name-big{font-size:clamp(38px,14vw,72px)}
   .ss-top{gap:6px;padding:0 12px}
   .ss-mode-btn{padding:0 10px}
 }
@@ -84,8 +85,8 @@
    (app.css) add the real inset on top of the existing padding; 0px in every other case. */
 @media (orientation:landscape){
   .ss-layer{padding-left:calc(28px + var(--left));padding-right:calc(28px + var(--right))}
-  .ss-half:first-child{padding-left:calc(20px + var(--left))}
-  .ss-half:last-child{padding-right:calc(20px + var(--right))}
+  .ss-half{padding-left:calc(28px + var(--left))}
+  .ss-main{padding-right:calc(28px + var(--right))}
   .ss-top{padding-left:calc(16px + var(--left));padding-right:calc(16px + var(--right))}
   .ss-picker{left:calc(16px + var(--left));right:calc(16px + var(--right))}
   .ss-hint{right:calc(18px + var(--right))}

@@ -4,8 +4,10 @@
 // entertainment — never a lesson, never graded. Four modes:
 //   shuffle     random names, weighted toward ones you haven't met yet (the Learner Model, js/learner.js)
 //   family      one family (Blues, Pinks…), walking light to dark and back
-//   lookalikes  two close names side by side with their one-line difference (js/lookalikes.js)
 //   today       starts on today's color (js/graph.js dailyColor()), then falls back to shuffle
+// Every slide is two colors (David, 2026-10-12): the mode's color fills 80% of the screen and a close neighbor
+// (same family when one is chosen) fills the band below, names only — no fact line, no difference line, no
+// separate Look-alikes mode (every slide is one now; an old saved "lookalikes" falls back to Shuffle).
 // Entry points: a manual button (Learn's "Or choose" row, the map's Colors sheet), and an idle trigger (60s of
 // no input on a calm screen: the map, or Learn's own Today home — never mid-deck, mid-drill or while typing).
 // Reached at #/slideshow (and #/slideshow/<mode>); it is an overlay (js/core.js sheet()), not a new screen, so
@@ -21,7 +23,6 @@ const SS_FAM_CYCLE = typeof LN_FAMS !== "undefined" ? LN_FAMS : ["Reds", "Pinks"
 const SS_MODES = [
   ["shuffle", "Shuffle", icon("shuffle", 16)],
   ["family", "Family", icon("colors", 16)],
-  ["lookalikes", "Look-alikes", icon("compare", 16)],
   ["today", "Today", icon("today", 16)],
 ];
 const SS_ICON = {
@@ -55,29 +56,8 @@ function ssPickWeighted(excludeSet) {
 function ssFamilyList(fam) {
   return ssPool().filter(c => { try { return setFamily(c.h) === fam; } catch (e) { return false; } }).sort((a, b) => lch(b.h)[0] - lch(a.h)[0]);
 }
-// a short, honest fact: the article's own lede, else the app color's origin line, else a loaded wiki facet —
-// never invented, and skipped entirely when there's nothing on file
-function ssFirstSentence(s) { return String(s || "").replace(/\s+/g, " ").trim().split(/(?<=[.!?])\s/)[0] || ""; }
-function ssFactFor(c) {
-  const app = typeof BYNAME !== "undefined" ? BYNAME.get(String(c.n).toLowerCase()) : null;
-  const fromWiki = () => {
-    try {
-      if (typeof wikiReady !== "function" || !wikiReady() || typeof colorNode !== "function") return "";
-      const node = colorNode(app || c);
-      const f = node && node.wiki && node.wiki.facets && node.wiki.facets[0];
-      return f ? ssFirstSentence(typeof plainText === "function" ? plainText(f.text) : f.text) : "";
-    } catch (e) { return ""; }
-  };
-  if (typeof arLoad !== "function" || typeof routeSlug !== "function") return Promise.resolve(fromWiki());
-  return arLoad(routeSlug(c.n)).then(art => {
-    if (art && art.lede) return ssFirstSentence(art.lede);
-    if (app && app.o) return ssFirstSentence(app.o);
-    return fromWiki();
-  }).catch(() => (app && app.o ? ssFirstSentence(app.o) : fromWiki()));
-}
-
 // ---------- building slides ----------
-function ssNextSpec() {
+function ssMainSpec() {
   const mode = SS.mode;
   if (mode === "today" && !SS.usedToday) {
     SS.usedToday = true;
@@ -94,14 +74,21 @@ function ssNextSpec() {
     }
     return { type: "single", c };
   }
-  if (mode === "lookalikes") {
-    const a = ssPickWeighted(SS.recentSet);
-    const cands = (typeof lookalikes === "function" ? lookalikes(a, 8) : []).filter(o => o.d >= SS_MIN_DE && o.d <= SS_MAX_DE);
-    const pick = cands[0] || (typeof lookalikes === "function" ? lookalikes(a, 1)[0] : null);
-    if (pick) return { type: "pair", a, b: pick.x, diff: lookDiff(a, pick.x) };
-    return { type: "single", c: a };
-  }
   return { type: "single", c: ssPickWeighted(SS.recentSet) };
+}
+// the 20% band: a close neighbor of the main color, close enough to compare and far enough to tell apart;
+// in Family mode it stays inside that family
+function ssPartner(a) {
+  if (typeof lookalikes !== "function") return null;
+  const all = lookalikes(a, 16).filter(o => o.x && o.x.n !== a.n);
+  const inFam = SS.mode === "family" ? all.filter(o => { try { return setFamily(o.x.h) === SS.fam; } catch (e) { return false; } }) : all;
+  const ok = l => l.filter(o => o.d >= SS_MIN_DE && o.d <= SS_MAX_DE);
+  const pick = ok(inFam)[0] || inFam[0] || ok(all)[0] || all[0];
+  return pick ? pick.x : null;
+}
+function ssNextSpec() {
+  const one = ssMainSpec(), a = one.c, b = ssPartner(a);
+  return b ? { type: "pair", a, b } : one;
 }
 function ssRemember(spec) {
   const names = spec.type === "pair" ? [spec.a.n, spec.b.n] : [spec.c.n];
@@ -113,16 +100,15 @@ function ssRemember(spec) {
 function ssLog(c, src) { try { learnerLog({ type: "seen", color: { n: c.n, h: c.h }, src: src || "page" }); } catch (e) {} }
 function ssLayerHTML(spec) {
   if (spec.type === "pair") {
-    const { a, b, diff } = spec;
+    const { a, b } = spec;
     return `<div class="ss-layer ss-pair">
-      <button class="ss-half" style="--c:${a.h}" data-ink="${ink(a.h)}" data-ss-open="a" aria-label="Open ${esc(a.n)}"><span class="ss-name ss-name-sm">${esc(a.n)}</span></button>
-      <button class="ss-half" style="--c:${b.h}" data-ink="${ink(b.h)}" data-ss-open="b" aria-label="Open ${esc(b.n)}"><span class="ss-name ss-name-sm">${esc(b.n)}<span class="ss-diff">${diff === "almost the same" ? `Almost the same as ${esc(a.n.toLowerCase())}.` : `${esc(diff.charAt(0).toUpperCase() + diff.slice(1))} than ${esc(a.n.toLowerCase())}.`}</span></span></button>
+      <button class="ss-half ss-main" style="--c:${a.h}" data-ink="${ink(a.h)}" data-ss-open="a" aria-label="Open ${esc(a.n)}"><span class="ss-name ss-name-big">${esc(a.n)}</span></button>
+      <button class="ss-half ss-band" style="--c:${b.h}" data-ink="${ink(b.h)}" data-ss-open="b" aria-label="Open ${esc(b.n)}"><span class="ss-name ss-name-sm">${esc(b.n)}</span></button>
     </div>`;
   }
   const c = spec.c;
   return `<div class="ss-layer" style="--c:${c.h}" data-ink="${ink(c.h)}">
     <button class="ss-name-btn" data-ss-open="c" aria-label="Open ${esc(c.n)}">${esc(c.n)}</button>
-    <p class="ss-line" data-ss-line></p>
   </div>`;
 }
 function ssWireLayer(layer, spec) {
@@ -132,8 +118,6 @@ function ssWireLayer(layer, spec) {
     b.addEventListener("click", e => { e.stopPropagation(); open(b.dataset.ssOpen); });
   });
   (spec.type === "pair" ? [spec.a, spec.b] : [spec.c]).forEach(c => ssLog(c, "page"));
-  const line = layer.querySelector("[data-ss-line]");
-  if (line) ssFactFor(spec.c || spec.a).then(text => { if (line.isConnected) { if (text) line.textContent = text; else line.remove(); } });
 }
 // renders `spec` as the new top layer, fading the old one(s) out underneath
 function ssRenderLayer(spec) {
