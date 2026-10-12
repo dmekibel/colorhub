@@ -1295,8 +1295,8 @@ function glPage(i, d, fromHex, tol) {
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${typeof fvArtHeart === "function" && d.id ? fvArtHeart(d.id) : ""}</header>
     <div class="gl-pal-wrap">
     <div class="gl-hero gl-full-w" style="--c:${avg}"><span style="width:min(100%, calc(var(--hero-vh, 62dvh) / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas><div class="gl-hero-dots" data-glherodots aria-hidden="true"></div>
-    <button class="gl-closer" data-glcloser>${ICON.search}<span>Look closer</span></button>
-    <button class="gl-closer gl-pick-btn" data-glpickbtn hidden aria-pressed="false">${icon("pipette", 17)}<span>Pick a color</span></button></span></div>
+    <button class="gl-closer" data-glcloser aria-label="Look closer">${ICON.search}<span>Look closer</span></button>
+    <button class="gl-closer gl-pick-btn" data-glpickbtn hidden aria-pressed="false" aria-label="Pick a color">${icon("pipette", 17)}<span>Pick a color</span></button></span></div>
     <div class="gl-id">
     <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
     <h1 class="p-title">${esc(d.t)}</h1>
@@ -1569,7 +1569,19 @@ function glPage(i, d, fromHex, tol) {
     sentinel._io = new IntersectionObserver(entries => { if (entries[0].isIntersecting) { const got = plvLoadMore(plvSplitCat, kk); if (got) renderSplitFeed(); } }, { root: feedEl, rootMargin: "600px" });
     sentinel._io.observe(sentinel);
     feedEl.querySelectorAll(".gl-feed-row").forEach(r => r.classList.toggle("on", +r.dataset.glfeedidx === plvFocusIdx));
-    if (splitFocusIO) splitFocusIO.disconnect();
+    // if a scroll has already armed the focus observer (below), keep every row -- including ones this call
+    // just added -- under it; re-observing an already-observed element is a no-op, not a duplicate.
+    if (splitFocusIO) feedEl.querySelectorAll(".gl-feed-row").forEach(r => splitFocusIO.observe(r));
+  }
+  // coordinator, 2026-10-12: "the first screen should focus the TOP row, not the 4th one... scrolling then
+  // moves the focus." An IntersectionObserver fires once immediately on attach, for whatever already sits in
+  // the center band at scrollTop 0 -- on a feed taller than the box, that's a few rows down, not row 0 (row 0
+  // is marked current directly, above, whenever the feed is (re)built). So the observer is never created until
+  // the first real scroll: by then its own first callback already reflects the scrolled-to position, which is
+  // exactly the row that should take focus -- no separate "ignore the first one" bookkeeping to keep in sync.
+  function armSplitFocusObserver() {
+    if (splitFocusIO || !splitEl) return;
+    const feedEl = splitEl.querySelector("[data-glsplitfeed]");
     splitFocusIO = new IntersectionObserver(entries => { entries.forEach(en => { if (en.isIntersecting) setSplitFocus(+en.target.dataset.glfeedidx); }); }, { root: feedEl, rootMargin: "-45% 0px -45% 0px", threshold: 0 });
     feedEl.querySelectorAll(".gl-feed-row").forEach(r => splitFocusIO.observe(r));
   }
@@ -1598,6 +1610,7 @@ function glPage(i, d, fromHex, tol) {
       const idx = +b.dataset.glfeedidx; if (idx === plvFocusIdx) return;
       buzz(5); setSplitFocus(idx);
     };
+    splitEl.querySelector("[data-glsplitfeed]").addEventListener("scroll", armSplitFocusObserver, { passive: true });
   }
   function enterSplitMode() {
     if (!plvAvail.length || splitMode) return;
@@ -1610,9 +1623,15 @@ function glPage(i, d, fromHex, tol) {
     document.body.appendChild(splitEl);
     document.body.style.overflow = "hidden";
     mode = plvSplitCat; locate = null;
+    // every open starts on the top row, even a re-open of a category/count you'd already scrolled through --
+    // scrolling (not just re-opening) is what should ever move the focus (coordinator, 2026-10-12). splitFocusIO
+    // is already null here (a fresh splitEl each entry, exitSplitMode disconnects it on the way out), so it
+    // naturally stays unarmed until the first real scroll -- see armSplitFocusObserver, above.
+    plvFocusIdx = 0;
     renderSplitChips();
     ensureSplitSlider();
     renderSplitFeed();
+    const feedEl = splitEl.querySelector("[data-glsplitfeed]"); if (feedEl) feedEl.scrollTop = 0;
     drawPalette();
   }
   function exitSplitMode() {

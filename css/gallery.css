@@ -195,13 +195,26 @@
 .gl-split-top .gl-hero{margin:0;padding:0;width:100%;--hero-vh:40vh}
 /* a tall/narrow panel (a hanging scroll, say) can compute a span narrower than the "Pick a color"/"Look closer"
    pair needs at this box's smaller height -- a floor keeps them apart; .gl-split-top's own overflow:hidden
-   above crops anything past 45vh that this then adds, never spilling into the chips below. */
-.gl-split-top .gl-hero>span{min-width:230px}
+   above crops anything past 45vh that this then adds, never spilling into the chips below. Below that floor
+   (a container query on the span itself, since its width is what the two buttons actually compete for) each
+   button drops its label and becomes a plain icon circle with a real gap between them -- both buttons already
+   carry their own aria-label, so the accessible name survives the text disappearing. */
+.gl-split-top .gl-hero>span{min-width:230px;container-type:inline-size}
+@container (max-width:300px){
+  .gl-split-top .gl-closer{width:40px;padding:0;justify-content:center;gap:0}
+  .gl-split-top .gl-closer span{display:none}
+  .gl-split-top .gl-closer{right:8px}
+  .gl-split-top .gl-pick-btn{right:auto;left:8px}
+}
 .gl-split-done{position:absolute;top:calc(var(--top) + 10px);right:14px;z-index:3;display:flex;align-items:center;gap:6px;min-height:40px;padding:0 14px 0 10px;border-radius:999px;background:rgba(14,13,11,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;font:500 15px/1 var(--sans)}
 .gl-split-done svg{width:18px;height:18px}
 .gl-split-chips-row{flex:none;padding:12px var(--g) 0}
 .gl-split-chips-row .gl-modes{margin:0;padding:0}
-.gl-split .gl-slide{flex:none;margin:2px var(--g) 0;height:44px}
+/* the draggable track's own thumb (app.css .cnt-wrap/input[type=range]) rendered tall enough to peek out under
+   the first feed row at this box's tighter spacing -- split mode keeps only the -/+ stepper (same control,
+   same curK, no separate state), never the track, so nothing can ever show through from above. */
+.gl-split .gl-slide.cnt-wrap{flex:none;display:flex;justify-content:flex-end;margin:6px var(--g) 0;height:44px}
+.gl-split .gl-slide input[type=range]{display:none}
 .gl-split-feed{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:10px var(--g) calc(var(--bottom) + 20px);display:flex;flex-direction:column;gap:8px}
 .gl-split-feed .plv-sentinel{height:1px;flex:none}
 /* .gl-feed-row also carries .plv-row (js/paletteview.js's plvSwatchRow markup, reused as-is) -- paletteview.css
