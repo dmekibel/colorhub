@@ -179,6 +179,33 @@
    pinned while you change palette types below it -- at this size that would eat the whole screen. "Look closer"
    (the full-screen view) is the way to keep studying it while the palette controls stay reachable. */
 .gl-pal-wrap .gl-hero{margin:0 calc(-1 * var(--g));padding:0 var(--g) 10px}
+/* Palette view, inline (coordinator, 2026-10-12): "as you scroll down into the palettes, the painting pins at
+   the top... it doesn't scroll away." The 2026-10-09 note above un-pinned the hero because at its old size
+   (up to 62dvh) a sticky hero ate the whole screen -- so this pins it again, but capped to ~40-45dvh, same
+   spirit as that fix. .gl-pin-wrap holds exactly [hero, title, chips, slider, feed]: the hero stays sticky only
+   while that group is still in view, then scrolls away with the rest once you pass the feed -- it never pins
+   through Findings, Similar palettes or the map link below.
+   David's own in-page chip grid doesn't need redoing for this: plv's extra category chips (For you, Vivid,
+   Gradients, Pastels, Darks, Neutrals + accent, Opposites, the family chips) are appended to the SAME
+   GL_MODES-shaped `have` list (js/gallery.js PLV_TUPLES) the classic modes already render through, so they get
+   the existing tile grid, pin/score/More collapsing and caption for free. */
+.gl-pin-wrap{position:relative}
+.gl-pin-wrap .gl-hero{position:sticky;top:calc(var(--top) + 54px);z-index:2;background:var(--ground)}
+/* the title/painter line and the chips + slider stay reachable the whole time, even while scrolling moves them
+   up through the sticky painting's own screen band (a sticky element paints over whatever normal-flow content
+   scrolls past underneath it) -- only the feed itself is meant to pass behind the pinned painting, the same
+   "scrolling through the palettes while it stays put" effect the chips/slider/dots already get by staying put. */
+.gl-pin-wrap .gl-id,.gl-pin-wrap .gl-modes-f,.gl-pin-wrap .gl-slide{position:relative;z-index:3;background:var(--ground)}
+.gl-hero-dots{position:absolute;inset:0;pointer-events:none}
+.gl-hero-dots i{position:absolute;width:12px;height:12px;border-radius:50%;box-shadow:0 0 0 2px #fff,0 1px 6px rgba(0,0,0,.5);transform:translate(-50%,-50%);background:var(--c)}
+@media (prefers-reduced-motion:no-preference){.gl-hero-dots i{transition:left .3s var(--ease),top .3s var(--ease),opacity .3s var(--ease)}}
+.gl-feed-area[hidden]{display:none}
+.gl-feed-area{margin-top:4px}
+.gl-feed{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.gl-feed .plv-sentinel{height:1px;flex:none}
+.gl-feed-row{height:56px;border-radius:var(--r-2,10px);overflow:hidden;transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+.gl-feed-row:active{transform:scale(.985)}
+.gl-feed-row.on{box-shadow:0 0 0 2px var(--ink)}
 /* David, 2026-10-09 ("weird that you need to scroll far down just to get who and why"): title, painter, date and
    museum sit right under the pinned image, above the palette strip, so who/when/where/why never needs a scroll.
    Kept short on purpose -- the eyebrow/title/dek are the same elements the painting used to show lower on the

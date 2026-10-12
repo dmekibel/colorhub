@@ -1215,6 +1215,38 @@ function glPage(i, d, fromHex, tol) {
   let modesOpen = false;   // "at most 5 chips, chosen per painting, plus More" (David, 2026-10-09)
   let locate = null;       // a palette swatch tapped on the strip: { j, hex } — dims the rest, glows where it sits
   let painterOrder = null, painterRank = -1;   // this painter's paintings (chronological if dated), once loaded — swipe the picture to move along it
+  // ---------- Palette view, inline (coordinator, 2026-10-12: "it should be built into the painting page so it
+  // stays in this view but you can scroll through many palettes") ----------
+  // js/paletteview.js's own generators, run on this same measured pool: its categories (For you, Vivid,
+  // Gradients, Pastels, Darks, Neutrals + accent, Opposites, the family chips) become extra chips after the
+  // classic modes, each backed by a live, scrollable feed instead of one palette. plvGens/plvAvail are built
+  // once per painting (the pool never changes); plvItems/plvPage/plvFocusIdx/plvRendered are per (chip, count)
+  // and rebuilt lazily in plvPalFor() whenever either changes — see PLV_* globals in js/paletteview.js.
+  const plvPrepped = pool.length >= 2 && typeof plvPrep === "function" ? plvPrep(pool) : [];
+  const plvGens = plvPrepped.length >= 2 && typeof plvGenerators === "function" ? plvGenerators(plvPrepped) : {};
+  const plvAvail = plvPrepped.length >= 2 && typeof plvAvailable === "function" ? plvAvailable(plvPrepped) : [];
+  const isPlvChip = () => !!plvGens[mode];
+  let plvItems = [], plvPage = 0, plvFocusIdx = 0, plvRendered = 0, plvFeedKey = null, plvFocusIO = null;
+  function plvLoadMore(m, k) {
+    if (!plvFeedKey || !plvGens[m]) return 0;
+    const batch = plvGenPage(plvFeedKey, plvGens[m], k, plvPage++);
+    plvItems.push(...batch);
+    return batch.length;
+  }
+  // the k actually used for a plv category never exceeds 10 (its generators aren't built for long counts) even
+  // when the shared slider is sitting at a classic mode's larger max -- the slider itself re-ranges per mode
+  // (drawModes, below), so this only guards the moment of switching into a plv chip before that re-range lands.
+  function plvPalFor(m, k) {
+    const kk = Math.max(2, Math.min(k, 10, plvPrepped.length));
+    const key = "g" + i + "|" + m + "|" + kk;
+    if (plvFeedKey !== key) { plvFeedKey = key; plvItems = []; plvPage = 0; plvFocusIdx = 0; plvRendered = 0; plvLoadMore(m, kk); }
+    if (!plvItems.length) return null;
+    const cols = plvItems[Math.min(plvFocusIdx, plvItems.length - 1)];
+    // not `fixed`: the slider stays live for a plv category (2-10), same shared control as every classic mode
+    return { pal: cols.map(h => ({ h, share: 1 / cols.length })), max: Math.max(2, Math.min(10, plvPrepped.length)),
+      cap: "A live combination built from this painting's own measured colors — not sized by canvas area." };
+  }
+  const glModeLabel = m => { const c = GL_MODES.find(x => x[0] === m); if (c) return c[1]; const p = plvAvail.find(x => x.id === m); return p ? p.label : ""; };
   // ---------- Shuffle + Harmonies (David, 2026-10-10) ----------
   // SHUF[mode] = { seeds: [0, ...re-rolls], idx }: seed 0 is always the original, honest derivation; every
   // Shuffle appends a new seed and a small history row lets you step back to an earlier roll without re-rolling.
@@ -1224,6 +1256,7 @@ function glPage(i, d, fromHex, tol) {
   let harmFilter = "all"; // the sub-chip (All/Complementary/Analogous/Triad/Split/Tetrad/Mono/Warm-cool/Accent)
   let harmMoreOpen = false;   // "show the best ~6, More for the rest" (David, 2026-10-10: no arbitrary cap at 10)
   const modeSet = (m, k) => {
+    if (plvGens[m]) return plvPalFor(m, k);
     if (m === "out") return { pal: glStandOut(pool.length ? pool : pal6, pool.length ? k : 6, prior, seedOf("out")), max: pool.length ? Math.min(pool.length, 20) : 6 };
     if (m === "area") return { pal: pool.length ? glPoolByArea(pool, k, seedOf("area")) : pal6, max: pool.length ? Math.min(pool.length, 20) : 6 };
     if (m === "diverse") return { pal: pool.length ? glPoolDiverse(pool, k, seedOf("diverse")) : pal6, max: pool.length ? Math.min(pool.length, 20) : 6 };
@@ -1257,7 +1290,8 @@ function glPage(i, d, fromHex, tol) {
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${typeof fvArtHeart === "function" && d.id ? fvArtHeart(d.id) : ""}</header>
     <div class="gl-pal-wrap">
-    <div class="gl-hero gl-full-w" style="--c:${avg}"><span style="width:min(100%, calc(62dvh / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas>
+    <div class="gl-pin-wrap" data-glpinwrap>
+    <div class="gl-hero gl-full-w" style="--c:${avg}"><span style="width:min(100%, calc(44dvh / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas><div class="gl-hero-dots" data-glherodots aria-hidden="true"></div>
     <button class="gl-closer" data-glcloser>${ICON.search}<span>Look closer</span></button>
     <button class="gl-closer gl-pick-btn" data-glpickbtn hidden aria-pressed="false">${icon("pipette", 17)}<span>Pick a color</span></button></span></div>
     <div class="gl-id">
@@ -1267,10 +1301,12 @@ function glPage(i, d, fromHex, tol) {
     <p class="gl-id-src">${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}</p>
     <div class="gl-why" data-glwhy hidden></div>
     </div>
-    <div class="gl-pal-ui">
-    <div class="palette gl-strip" data-glswatches></div>
     <div class="gl-modes-f" data-glfade><div class="gl-modes" data-glorder role="group" aria-label="Palette type"></div></div>
     <div class="pr-slide gl-slide" data-glslide hidden><input type="range" data-glk aria-label="How many colors"><span class="gl-kn-t" data-glkn>6 colors</span></div>
+    <div class="gl-feed-area" data-glfeedarea hidden><div class="gl-feed" data-glfeed></div></div>
+    </div>
+    <div class="gl-pal-ui">
+    <div class="palette gl-strip" data-glswatches></div>
     <p class="gl-locate" data-gllocate hidden></p>
     <p class="gl-cap" data-glcap></p>
     <div class="pal-names" data-glrows></div>
@@ -1371,7 +1407,7 @@ function glPage(i, d, fromHex, tol) {
       arrive.hidden = false; arrive.textContent = nm ? `No close swatch; the nearest is ${nm.text}, ${pctDiff(near.de)}.` : "No close swatch in this palette.";
     }
     if (el._awPal && pal.length) el._awPal(pal);   // the Analysis readings follow the palette on screen (js/artwiki.js)
-    litDraw(pal); drawLocate(pal);
+    litDraw(pal); drawLocate(pal); drawHeroDots(pal);
     const acts = el.querySelector("[data-csacts]"); if (acts) acts.hidden = !pal.length;
   };
   // Shuffle / Edit / Save for the current single palette (every mode but Harmonies, which gives each of its own
@@ -1381,7 +1417,12 @@ function glPage(i, d, fromHex, tol) {
     const host = el.querySelector("[data-glpalacts]"), histHost = el.querySelector("[data-glshufhist]");
     if (!host) return;
     host.hidden = isHarm || mode === "pick" || pal.length < 2;
-    if (!host.hidden) host.innerHTML = `<button class="gl-pa-btn" data-glshuffle>${GL_ICON_DICE}<span>Shuffle</span></button><button class="gl-pa-btn" data-gledit>Edit</button><button class="gl-pa-btn solid" data-glsave>Save palette</button><button class="gl-pa-btn" data-plvopen>Palette view</button>`;
+    // a plv category has no single "reroll" to speak of -- you scroll the feed instead -- so Shuffle (and its
+    // history row, below) drops out for one of those chips; Edit and Save keep working on whichever row is
+    // focused (coordinator, 2026-10-12: "Hearts, Save and Edit keep working on the current one"). The standalone
+    // Palette view button is gone now that its feed lives inline (same brief: "can go once the feed is inline").
+    if (!host.hidden) host.innerHTML = (isPlvChip() ? "" : `<button class="gl-pa-btn" data-glshuffle>${GL_ICON_DICE}<span>Shuffle</span></button>`)
+      + `<button class="gl-pa-btn" data-gledit>Edit</button><button class="gl-pa-btn solid" data-glsave>Save palette</button>`;
     const s = SHUF[mode];
     if (!histHost) return;
     histHost.hidden = isHarm || !s || s.seeds.length < 2;
@@ -1427,14 +1468,23 @@ function glPage(i, d, fromHex, tol) {
   // small fixed k, never the full slider-driven palette, so the tile itself stays compact and cheap to compute.
   const glTilePreview = key => {
     try {
+      // a plv category's own preview is a throwaway 4-color draw, never routed through modeSet/plvPalFor --
+      // that function owns the real feed's paging/focus state, and a tile for a chip that ISN'T active yet must
+      // never reset it (every tile's preview redraws on every drawModes(), including the active one's neighbors).
+      if (plvGens[key]) { const c = plvGens[key](4, glRng(plvHash(key) || 1)) || []; return c.slice(0, 4).map(h => `<i style="--c:${h}"></i>`).join(""); }
       const prev = key === "harmony" ? (harmCards.length ? harmCards[0].pal : (pool.length >= 3 ? (glHarmonyFamily(pool, 4, 0, "all")[0] || {}).pal : null))
         : (modeSet(key, 4) || {}).pal;
       return (prev || []).slice(0, 4).map(p => `<i style="--c:${p.h}"></i>`).join("");
     } catch (e) { return ""; }
   };
+  // David, 2026-10-12: "the existing modes become the first chips of one row, followed by Palette view's
+  // categories" -- plv's own [{id,label}] chips are appended to `have` as GL_MODES-shaped tuples (a synthetic
+  // caption, since they're not canvas-area readings), so glPickChips' existing pin/score/More pipeline, the
+  // caption lookup and Edit/Save's label all treat them exactly like any other mode, no special-casing needed.
+  const PLV_TUPLES = plvAvail.map(c => [c.id, c.label, "A live combination built from this painting's own measured colors — not sized by canvas area.", "A live combination from the painting's own colors"]);
   const drawModes = set => {
     const have = GL_MODES.filter(m => m[0] === "out" || m[0] === "area" || m[0] === "pick" || (m[0] === "diverse" && pool.length > 1)
-      || (m[0] === "harmony" && pool.length >= 3 && glHarmonyCandidates(pool).cands.length) || (pool.length && glModeSet(m[0], pool, 6, row)));
+      || (m[0] === "harmony" && pool.length >= 3 && glHarmonyCandidates(pool).cands.length) || (pool.length && glModeSet(m[0], pool, 6, row))).concat(PLV_TUPLES);
     const { shown, moreCount } = glPickChips(have, row, modesOpen);
     const host = el.querySelector("[data-glorder]"), key = shown.map(m => m[0]).join() + "|" + moreCount;
     if (host.dataset.k !== key) {
@@ -1456,12 +1506,51 @@ function glPage(i, d, fromHex, tol) {
     }
     el.querySelector("[data-glkn]").textContent = kk + " colors";
     // one line under the controls; a tap opens the full sentence (the painting stays the focus)
-    const def = GL_MODES.find(m => m[0] === mode), full = set.cap || def[2], short = mode === "pick" ? full : def[3] || full;
+    const def = GL_MODES.find(m => m[0] === mode) || [], full = set.cap || def[2], short = mode === "pick" ? full : (def[3] || full);
     const cap = el.querySelector("[data-glcap]");
     cap.classList.toggle("open", capOpen || short === full);
     cap.innerHTML = `<button class="gl-cap-t" data-glcapt aria-expanded="${capOpen}"${short === full ? " disabled" : ""}>${esc(capOpen ? full : short)}</button>` + (mode === "pick" && picks.length ? `<button class="aw-link" data-glclear>Start over</button>` : "");
     const sel = host.querySelector(".on"); if (sel && host.scrollWidth > host.clientWidth) { const l = sel.offsetLeft - (host.clientWidth - sel.offsetWidth) / 2; host.scrollTo ? host.scrollTo({ left: l }) : (host.scrollLeft = l); }
     glFadeEdges(el.querySelector("[data-glfade]"), host);
+    drawPlvFeed();
+  };
+  // the inline feed (coordinator, 2026-10-12): under the chips, a scrolling list of palettes for whichever plv
+  // category is active -- classic modes have none (one palette is the whole point; Shuffle already gives
+  // variety). Focusing a row near the middle of the screen, or tapping one, makes it the page's current
+  // palette (modeSet's plv branch above reads plvFocusIdx), which redraws the strip/names/dots below exactly
+  // as any other mode would. New pages come from js/paletteview.js's own plvGenPage, paged/cached by
+  // painting+category+count so re-opening the same combination doesn't regenerate or reshuffle it.
+  const setPlvFocus = idx => {
+    if (idx === plvFocusIdx || idx < 0 || idx >= plvItems.length) return;
+    plvFocusIdx = idx; locate = null; drawPalette();
+  };
+  const drawPlvFeed = () => {
+    const area = el.querySelector("[data-glfeedarea]"), feedEl = el.querySelector("[data-glfeed]");
+    if (!area || !feedEl) return;
+    const active = isPlvChip();
+    area.hidden = !active;
+    if (!active) { if (plvFocusIO) { plvFocusIO.disconnect(); plvFocusIO = null; } return; }
+    if (feedEl.dataset.k !== plvFeedKey) { feedEl.dataset.k = plvFeedKey; feedEl.innerHTML = ""; plvRendered = 0; }
+    const frag = document.createDocumentFragment();
+    for (; plvRendered < plvItems.length; plvRendered++) {
+      const row = document.createElement("button");
+      row.type = "button"; row.className = "plv-row gl-feed-row"; row.dataset.glfeedidx = plvRendered;
+      row.innerHTML = plvSwatchRow(plvItems[plvRendered]);
+      frag.appendChild(row);
+    }
+    feedEl.appendChild(frag);
+    let sentinel = feedEl.querySelector(".plv-sentinel");
+    if (!sentinel) { sentinel = document.createElement("div"); sentinel.className = "plv-sentinel"; }
+    feedEl.appendChild(sentinel);   // always last
+    if (sentinel._io) sentinel._io.disconnect();
+    sentinel._io = new IntersectionObserver(entries => { if (entries[0].isIntersecting) { const got = plvLoadMore(mode, Math.max(2, Math.min(curK, 10, plvPrepped.length))); if (got) drawPlvFeed(); } }, { rootMargin: "700px" });
+    sentinel._io.observe(sentinel);
+    feedEl.querySelectorAll(".gl-feed-row").forEach(r => r.classList.toggle("on", +r.dataset.glfeedidx === plvFocusIdx));
+    // "focus = the feed row nearest the vertical center of the bottom pane" (here: the band just under the
+    // pinned painting, roughly the screen's vertical middle, since the page itself scrolls now)
+    if (plvFocusIO) plvFocusIO.disconnect();
+    plvFocusIO = new IntersectionObserver(entries => { entries.forEach(en => { if (en.isIntersecting) setPlvFocus(+en.target.dataset.glfeedidx); }); }, { root: null, rootMargin: "-50% 0px -45% 0px", threshold: 0 });
+    feedEl.querySelectorAll(".gl-feed-row").forEach(r => plvFocusIO.observe(r));
   };
   // "Show on painting": the painting dimmed everywhere except where one of these colors lives (a read of the
   // photo at 320px on the long side -- up from 140, David's audit 2026-10-09: "coarse blocky pixel clusters...
@@ -1486,6 +1575,28 @@ function glPage(i, d, fromHex, tol) {
     if (!locHex) { cv.classList.remove("on"); return; }
     const P = litBuild(); if (!P) { cv.classList.remove("on"); return; }
     glPaintMask(cv, P, locHex); cv.classList.add("on");
+  };
+  // location dots for the whole current palette, coordinator 2026-10-12: "the painting pins at the top... with
+  // the dots for the palette in focus (your precomputed Lab grid)". litBuild() already is that precompute --
+  // one small (320px-long-side) Lab read of the photo, built once and cached in lit.pix -- reused here instead
+  // of reading the image again, so a focus change (scrolling the feed, tapping a row) is just a nearest-pixel
+  // lookup per color against a grid that already exists. Unreadable or no image yet: no dots, never an empty
+  // box -- the painting itself still shows, exactly as litDraw already treats the same case.
+  const glMultiDots = pal => {
+    const P = litBuild(); if (!P) return null;
+    return pal.map(p => {
+      const t = lab(p.h); let best = null, bd = Infinity;
+      for (let j = 0; j < P.w * P.h; j++) {
+        const dL = P.L[j * 3] - t[0], da = P.L[j * 3 + 1] - t[1], db = P.L[j * 3 + 2] - t[2], dd = dL * dL + da * da + db * db;
+        if (dd < bd) { bd = dd; best = { x: (j % P.w) / P.w, y: (j / P.w | 0) / P.h }; }
+      }
+      return best;
+    });
+  };
+  const drawHeroDots = pal => {
+    const host = el.querySelector("[data-glherodots]"); if (!host) return;
+    const dots = lit.ok && pal.length ? glMultiDots(pal) : null;
+    host.innerHTML = dots ? dots.map((dt, j) => dt ? `<i style="--c:${pal[j].h};left:${(dt.x * 100).toFixed(2)}%;top:${(dt.y * 100).toFixed(2)}%"></i>` : "").join("") : "";
   };
   // "Where else in this painting" for a color that ISN'T necessarily one of the palette chips (an eyedropped
   // pixel from glColorReadout's readout card, D+E of the same brief) — same paint, no palette index needed; a
@@ -1630,6 +1741,12 @@ function glPage(i, d, fromHex, tol) {
     buzz(5); drawPalette();
   };
   el.querySelector("[data-glorder]").onscroll = () => glFadeEdges(el.querySelector("[data-glfade]"), el.querySelector("[data-glorder]"));
+  const feedHost = el.querySelector("[data-glfeed]");
+  if (feedHost) feedHost.onclick = e => {
+    const b = e.target.closest("[data-glfeedidx]"); if (!b) return;
+    const idx = +b.dataset.glfeedidx; if (idx === plvFocusIdx) return;
+    buzz(5); setPlvFocus(idx);
+  };
   el.querySelector("[data-glcap]").onclick = e => {
     if (e.target.closest("[data-glclear]")) { picks.length = 0; clearDots(); buzz(5); drawPalette(); return; }
     if (e.target.closest("[data-glcapt]")) { capOpen = !capOpen; buzz(4); drawPalette(); }
@@ -1638,9 +1755,8 @@ function glPage(i, d, fromHex, tol) {
   const palActsHost = el.querySelector("[data-glpalacts]");
   if (palActsHost) palActsHost.onclick = e => {
     if (e.target.closest("[data-glshuffle]")) return shuffleMode(mode);
-    if (e.target.closest("[data-gledit]")) return glEditOpen(curPal().map(p => p.h), { title: d.t, label: (GL_MODES.find(m => m[0] === mode) || [, ""])[1], pool, onSave: (hexes, name) => glSavePalette(hexes, name) });
-    if (e.target.closest("[data-glsave]")) { const lbl = (GL_MODES.find(m => m[0] === mode) || [, ""])[1]; return glSavePalette(curPal().map(p => p.h), glSaveName(d.t, mode === "out" ? "" : lbl)); }
-    if (e.target.closest("[data-plvopen]") && typeof plvOpen === "function") return plvOpen("painting", i);
+    if (e.target.closest("[data-gledit]")) return glEditOpen(curPal().map(p => p.h), { title: d.t, label: glModeLabel(mode), pool, onSave: (hexes, name) => glSavePalette(hexes, name) });
+    if (e.target.closest("[data-glsave]")) { const lbl = glModeLabel(mode); return glSavePalette(curPal().map(p => p.h), glSaveName(d.t, mode === "out" ? "" : lbl)); }
   };
   const shufHistHost = el.querySelector("[data-glshufhist]");
   if (shufHistHost) shufHistHost.onclick = e => { const b = e.target.closest("[data-glshufgo]"); if (b) shuffleHistoryTo(mode, +b.dataset.glshufgo); };

@@ -4084,9 +4084,10 @@ scenario("paintings", "a painting's identity (title, painter, museum) sits above
   const heroTop = hero.getBoundingClientRect().top, idTop = id.getBoundingClientRect().top, stripTop = strip.getBoundingClientRect().top;
   t.expect(idTop >= heroTop, "the identity block isn't under the pinned image");
   t.expect(stripTop > idTop, "the palette strip isn't below the identity block (title/painter/date/museum)");
-  // the smoke iframe is 375x812 (tools/smoke/harness.js); the palette strip should still be reachable without
-  // scrolling the page at that height (440x956 is checked separately with a real screenshot -- see colorhub-verify)
-  t.expect(stripTop < 812, `the palette strip sits at y=${Math.round(stripTop)}, below the 812px fold`);
+  // coordinator, 2026-10-12: the painting now pins at the top (~44dvh) with the mode chips and the exact-count
+  // slider stacked under it, above the strip -- at the smoke iframe's 375x812 that combination no longer fits
+  // above the fold on its own, by design (David: "as you scroll down into the palettes, the painting pins at
+  // the top"). The strip reaching the fold unscrolled was the old, un-pinned layout's guarantee, not this one's.
 });
 // David, relayed 2026-10-09 ("usually tapping a color should open the color, not the segmentation of it"):
 // a strip tile opens its color's page in one tap, the app-wide [data-swatch] rule (CLAUDE.md).
@@ -5733,12 +5734,13 @@ scenario("paintings", "lane A: a painting page leads with what stands out; Name 
   const L0 = t.ev(`lab(getComputedStyle(document.querySelector("[data-glswatches] .pal")).getPropertyValue("--c").trim())[0]`);
   t.expect(L0 > 30, `the first chip is a near-black (L* ${Math.round(L0)})`);
   // David, 2026-10-08: the palette is right under the identity block, and both fit one screen so you can change types and sizes.
-  // David, 2026-10-09: the identity block (title, painter, date, museum, why it matters) now sits between the pinned
-  // image and the palette, so the strip follows the identity block, not the image, directly.
-  const idB = t.$(".gl-id").getBoundingClientRect().bottom, stripB = t.$("[data-glswatches]").getBoundingClientRect().bottom;
-  t.expect(stripB <= t.ev("innerHeight"), `the palette strip sits below the first screen (${Math.round(stripB)})`);
-  t.expect(t.$("[data-glswatches]").getBoundingClientRect().top - idB < 24, "the palette strip isn't right under the identity block");
-  t.expect(t.$("[data-glorder]").getBoundingClientRect().top - stripB < 24, "the palette types aren't right under the strip");
+  // coordinator, 2026-10-12: the mode chips (and the exact-count slider) now sit between the identity block and
+  // the strip, inside the pinned group that stays on top while you scroll into the inline palette feed -- the
+  // strip follows the chips now, not the other way around, and no longer has to fit the first screen on its own.
+  const idB = t.$(".gl-id").getBoundingClientRect().bottom, modesTop = t.$("[data-glorder]").getBoundingClientRect().top;
+  const modesB = t.$("[data-glorder]").getBoundingClientRect().bottom, stripTop = t.$("[data-glswatches]").getBoundingClientRect().top;
+  t.expect(modesTop - idB < 24, "the palette types aren't right under the identity block");
+  t.expect(stripTop - modesB < 120, "the palette strip isn't right under the palette types (and its slider)");
   const nTypes = t.$$("[data-glorder] [data-glo]").length;
   t.expect(nTypes >= 5, `only ${nTypes} palette types`);
   // David's rebuild brief, 2026-10-09: "at most 5 chips, chosen per painting, plus More" -- Shadows may be
@@ -7298,6 +7300,31 @@ scenario("paintings", "the mode switcher is a tile grid with Harmonies among the
   t.expect(order[0] === "area" && order[1] === "out" && order.includes("harmony") && order.indexOf("harmony") < 3, `the first tiles were [${order.join(",")}], Harmonies should be among the first few`);
   t.expect(t.$$("[data-glorder] .gl-tile-prev i").length > 0, "a tile's preview strip has no swatches");
 });
+// coordinator, 2026-10-12: "it should be built into the painting page so it stays in this view but you can
+// scroll through many palettes." js/paletteview.js's own categories (For you, Vivid, Gradients...) are appended
+// as extra chips after the classic modes (same tile grid, behind More); picking one shows a scrolling feed of
+// live palettes under the chips, and focusing/tapping a row makes it the page's current palette -- the strip,
+// the named rows below and the painting's location dots all follow it, same as any classic mode would.
+scenario("paintings", "a plv category chip shows a live feed; tapping a row updates the strip and the painting's dots, and drops Shuffle (but not Edit/Save)", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  await t.waitFor("[data-glorder] [data-glo]", 15000, "the mode switcher");
+  if (!t.$('[data-glo="foryou"]')) await t.click("[data-glmore]", { wait: 300 });
+  const chip = await t.waitFor('[data-glo="foryou"]', 8000, "the For you plv chip (behind More)");
+  await t.click(chip, { force: true, wait: 400 });
+  t.expect(!t.$("[data-glfeedarea]").hidden, "the inline feed area didn't open for a plv chip");
+  await t.waitFor(() => t.$$("[data-glfeed] [data-glfeedidx]").length >= 2, 10000, "at least 2 rows in the live feed");
+  const rows = () => t.$$("[data-glfeed] [data-glfeedidx]");
+  const n0 = t.$$(".plv-sw-row > i", rows()[0]).length;
+  t.expect(n0 > 0 && rows().every(r => t.$$(".plv-sw-row > i", r).length === n0), "not every feed row has the same, nonzero swatch count");
+  const row1 = rows()[1], row1Cols = t.$$(".plv-sw-row > i", row1).map(i => getComputedStyle(i).getPropertyValue("--c").trim().toUpperCase());
+  await t.click(row1, { force: true, wait: 400 });
+  t.expect(row1.classList.contains("on"), "tapping a feed row didn't focus it");
+  const stripCols = t.ev(`[...document.querySelectorAll("[data-glswatches] .pal")].map(b => b.style.getPropertyValue("--c").trim().toUpperCase())`);
+  t.expect(JSON.stringify(stripCols) === JSON.stringify(row1Cols), `the strip (${stripCols.join(",")}) didn't follow the focused row (${row1Cols.join(",")})`);
+  t.expect(t.$$("[data-glpalacts] button").length >= 2, "Edit/Save aren't offered for a plv palette");
+  t.expect(!t.$("[data-glpalacts] [data-glshuffle]"), "Shuffle still shows for a plv category (it has nothing to reroll -- you scroll instead)");
+  t.expect(!t.$("[data-glpalacts] [data-plvopen]"), "the old standalone Palette view button is still here; the feed is inline now");
+});
 scenario("paintings", "Harmonies shows several relation cards, each built only from real colors in the painting's own pool", async t => {
   await t.open("#/gallery/777", { settle: 800 });
   const harmTile = await t.waitFor(() => t.$$("[data-glo]").find(b => b.dataset.glo === "harmony"), 15000, "the Harmonies tile");
@@ -7384,11 +7411,14 @@ scenario("home", "Colors sheet: several families can be on at once (their union 
 // ---------- Palette view (js/paletteview.js) ----------
 // David, 2026-10-11: a full-screen, scrollable feed of palettes derived live from one source (a painting, a
 // painter or a photo), sorted into categories, with pin/save and a per-color swap sheet (Suggested / From
-// source / Adjust). This walks the painting entry point end to end.
+// source / Adjust). coordinator, 2026-10-12: a painting's own feed now lives inline on the painting page (see
+// the "paintings" group's own plv coverage below), and its "Palette view" button is gone -- this standalone
+// screen stays only for sources with no page of their own to hold a feed (a painter, a photo), so this walks
+// the painter entry point instead of the painting one.
 scenario("pv", "Palette view: categories render equal-swatch rows, the count slider changes swatch count, pin + Save, and the swap sheet edits a slot", async t => {
-  await t.open("#/gallery/12", { settle: 800 });
-  await t.waitFor("[data-glpalacts] [data-plvopen]", 15000, "the Palette view button on the painting page");
-  await t.click("[data-glpalacts] [data-plvopen]", { wait: 500 });
+  await t.open("#/painter/abraham-bloemaert", { settle: 800 });
+  await t.waitFor("[data-plvopen]", 15000, "the Palette view button on the painter page");
+  await t.click("[data-plvopen]", { wait: 500 });
   await t.waitFor(".plv-screen .plv-row-wrap", 15000, "the Palette view feed");
   const rowsFirstCat = () => t.$$(".plv-screen .plv-row-wrap");
   await t.waitFor(() => rowsFirstCat().length >= 10, 10000, "at least 10 rows in the first category's feed");
