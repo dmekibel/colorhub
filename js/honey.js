@@ -833,11 +833,13 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
     // open side = the outer edge of the whole set (no neighbor in some direction): there, the cell keeps its own
     // natural size, the old tiled edge (David, 2026-10-11: "rounded edge looks ugly, bring back the tiled edge").
     // Only a cell neighbored all round gets the generous start that lets it reach its true power-diagram vertices.
-    const angs = []; for (let c = 0; c < cuts.length; c += 3) angs.push(Math.atan2(cuts[c + 1], cuts[c]));
-    angs.sort((x, y) => x - y);
-    let gap = angs.length ? angs[0] + 6.283185307 - angs[angs.length - 1] : 6.3, gapFrom = angs.length ? angs[angs.length - 1] : 0;
-    for (let k = 1; k < angs.length; k++) if (angs[k] - angs[k - 1] > gap) { gap = angs[k] - angs[k - 1]; gapFrom = angs[k - 1]; }
-    // the layout itself decides (b.edge, honeyEdgeSet): a viewport-culled or wedged cell is never treated as edge
+    // the layout itself decides (b.edge, honeyEdgeSet): a viewport-culled or wedged cell is never treated as edge.
+    // David, 2026-10-12 (CPU-profiled under 4x throttle, clipTiled the single biggest cost in the draw loop):
+    // this used to also build its own `angs` (every cut's angle, sorted) to find the widest angular gap -- a
+    // full array build + sort() per cell, every frame -- but nothing downstream ever reads the result (`gap`/
+    // `gapFrom`/`angs` itself): openness is already decided by `b.edge` above, and the open branch below finds
+    // its own nearest-neighbor angle directly from `cuts`. Confirmed dead (removing it changes no output: same
+    // 12 screenshot pairs, AE=0) and removed outright rather than left as unread work.
     const open = !!b.edge;
     let poly = [];
     if (open) {
@@ -873,6 +875,14 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
     return poly.length >= 3 ? { poly, rin: isFinite(rin) ? rin : 0 } : { poly: null, rin: 0 };
   }
   drawn.forEach((b, n) => {
+    // A ghost's own shape is never drawn -- finishFrame filters every b.ghost entry out right after honeyCells
+    // returns (honeyGhosts' whole point is to BE A NEIGHBOR for a real edge cell's clip, nothing more). In the
+    // tiled branch below, clipTiled only ever reads OTHER cells' raw x/y and their r0[] (captured once, up top,
+    // before any cell's own poly/rin is touched) -- never a neighbor's .poly or post-clip .rin/.d -- so a
+    // ghost's own clipTiled() call is pure waste whenever shape is tiled. (Bubbles, shapeAmt<=.02, is different:
+    // the growth pass a few lines down reads a real cell's neighbors' .rin directly off `drawn`, ghosts
+    // included, so a ghost's rin there is NOT optional -- left exactly as it was.)
+    if (b.ghost && shapeAmt > .02) { b.poly = null; b.rin = 0; b.d0 = b.d; b.d = 0; return; }
     if (b.d < 7 && !clipAll) {
       if (shapeAmt <= .02) {   // Bubbles: unchanged self-only guess (forgiving at circle size; see honeyWhere above)
         let rin = Math.max(0, b.d * .44 - half);
