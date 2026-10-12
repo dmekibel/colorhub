@@ -179,6 +179,51 @@
    pinned while you change palette types below it -- at this size that would eat the whole screen. "Look closer"
    (the full-screen view) is the way to keep studying it while the palette controls stay reachable. */
 .gl-pal-wrap .gl-hero{margin:0 calc(-1 * var(--g));padding:0 var(--g) 10px}
+/* Palette view, split mode (coordinator, 2026-10-12): the default page is unchanged from main -- classic modes
+   only, the hero sized exactly as before (var(--hero-vh, 62dvh), unset here so it falls through to 62dvh).
+   One more tile, "Browse palettes", opens a dedicated full-screen split (js/gallery.js enterSplitMode): a
+   plain `position:fixed` overlay, same pattern as css/paintzoom.css's Look closer, so nothing here is sticky
+   and nothing can ever land on top of anything else -- the hero and the controls above the feed are flex:none
+   siblings that never move; only .gl-split-feed scrolls. */
+.gl-hero-dots{position:absolute;inset:0;pointer-events:none}
+.gl-hero-dots i{position:absolute;width:12px;height:12px;border-radius:50%;box-shadow:0 0 0 2px #fff,0 1px 6px rgba(0,0,0,.5);transform:translate(-50%,-50%);background:var(--c)}
+@media (prefers-reduced-motion:no-preference){.gl-hero-dots i{transition:left .3s var(--ease),top .3s var(--ease),opacity .3s var(--ease)}}
+.gl-tile-browse{background:var(--sel-fill,#2B2823)}
+.gl-tile-browse.on{box-shadow:var(--sel-ring,inset 0 0 0 1.5px rgba(236,232,223,.22))}
+.gl-split{position:fixed;inset:0;z-index:55;display:flex;flex-direction:column;background:var(--ground)}
+.gl-split-top{flex:none;height:45vh;min-height:260px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:var(--top)}
+.gl-split-top .gl-hero{margin:0;padding:0;width:100%;--hero-vh:40vh}
+/* a tall/narrow panel (a hanging scroll, say) can compute a span narrower than the "Pick a color"/"Look closer"
+   pair needs at this box's smaller height -- a floor keeps them apart; .gl-split-top's own overflow:hidden
+   above crops anything past 45vh that this then adds, never spilling into the chips below. Below that floor
+   (a container query on the span itself, since its width is what the two buttons actually compete for) each
+   button drops its label and becomes a plain icon circle with a real gap between them -- both buttons already
+   carry their own aria-label, so the accessible name survives the text disappearing. */
+.gl-split-top .gl-hero>span{min-width:230px;container-type:inline-size}
+@container (max-width:300px){
+  .gl-split-top .gl-closer{width:40px;padding:0;justify-content:center;gap:0}
+  .gl-split-top .gl-closer span{display:none}
+  .gl-split-top .gl-closer{right:8px}
+  .gl-split-top .gl-pick-btn{right:auto;left:8px}
+}
+.gl-split-done{position:absolute;top:calc(var(--top) + 10px);right:14px;z-index:3;display:flex;align-items:center;gap:6px;min-height:40px;padding:0 14px 0 10px;border-radius:999px;background:rgba(14,13,11,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;font:500 15px/1 var(--sans)}
+.gl-split-done svg{width:18px;height:18px}
+.gl-split-chips-row{flex:none;padding:12px var(--g) 0}
+.gl-split-chips-row .gl-modes{margin:0;padding:0}
+/* the draggable track's own thumb (app.css .cnt-wrap/input[type=range]) rendered tall enough to peek out under
+   the first feed row at this box's tighter spacing -- split mode keeps only the -/+ stepper (same control,
+   same curK, no separate state), never the track, so nothing can ever show through from above. */
+.gl-split .gl-slide.cnt-wrap{flex:none;display:flex;justify-content:flex-end;margin:6px var(--g) 0;height:44px}
+.gl-split .gl-slide input[type=range]{display:none}
+.gl-split-feed{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:10px var(--g) calc(var(--bottom) + 20px);display:flex;flex-direction:column;gap:8px}
+.gl-split-feed .plv-sentinel{height:1px;flex:none}
+/* .gl-feed-row also carries .plv-row (js/paletteview.js's plvSwatchRow markup, reused as-is) -- paletteview.css
+   loads after this file and its .plv-row{flex:1;height:64px} would otherwise win on source order alone (equal
+   specificity), shrinking every row to near-nothing in .gl-split-feed's flex column. The extra .gl-split-feed
+   ancestor in this selector is what wins the tie-break, not load order. */
+.gl-split-feed .gl-feed-row{flex:none;height:56px;border-radius:var(--r-2,10px);overflow:hidden;transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+.gl-split-feed .gl-feed-row:active{transform:scale(.985)}
+.gl-split-feed .gl-feed-row.on{box-shadow:0 0 0 2px var(--ink)}
 /* David, 2026-10-09 ("weird that you need to scroll far down just to get who and why"): title, painter, date and
    museum sit right under the pinned image, above the palette strip, so who/when/where/why never needs a scroll.
    Kept short on purpose -- the eyebrow/title/dek are the same elements the painting used to show lower on the

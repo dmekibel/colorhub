@@ -7303,6 +7303,39 @@ scenario("paintings", "the mode switcher is a tile grid with Harmonies among the
   t.expect(order[0] === "area" && order[1] === "out" && order.includes("harmony") && order.indexOf("harmony") < 3, `the first tiles were [${order.join(",")}], Harmonies should be among the first few`);
   t.expect(t.$$("[data-glorder] .gl-tile-prev i").length > 0, "a tile's preview strip has no swatches");
 });
+// coordinator, 2026-10-12 (after a sticky-hero version proved fragile): the default page is untouched from
+// main -- classic modes only, no plv categories mixed into the grid. One more tile, "Browse palettes", opens a
+// dedicated full-screen split: the painting fixed in the top ~45% with location dots for the palette in focus,
+// a plv category row, the shared count slider, and the feed in its own scroller below. Focusing/tapping a row
+// makes it the page's current palette; Done leaves split mode keeping it.
+scenario("paintings", "Browse palettes opens a split screen; a feed row becomes the painting's current palette (dots, strip, Edit/Save) and Done keeps it", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  await t.waitFor("[data-glorder] [data-glo]", 15000, "the mode switcher");
+  t.expect(!t.$$("[data-glorder] [data-glo]").some(b => /^(foryou|vivid|gradients|pastels|darks|neutrals|opposites|pink|red|orange|yellow|green|teal|blue|purple|brown)$/.test(b.dataset.glo)),
+    "a plv category id leaked into the classic chip grid -- the default page must stay exactly as it was on main");
+  const browse = await t.waitFor("[data-glbrowse]", 8000, "the Browse palettes tile");
+  await t.click(browse, { wait: 500 });
+  await t.waitFor(".gl-split", 8000, "the split-mode overlay");
+  t.expect(t.$(".gl-split .gl-hero"), "the painting didn't move into the split-mode top box");
+  await t.waitFor(() => t.$$("[data-glsplitfeed] [data-glfeedidx]").length >= 2, 10000, "at least 2 rows in the split feed");
+  const rows = () => t.$$("[data-glsplitfeed] [data-glfeedidx]");
+  const n0 = t.$$(".plv-sw-row > i", rows()[0]).length;
+  t.expect(n0 > 0 && rows().every(r => t.$$(".plv-sw-row > i", r).length === n0), "not every feed row has the same, nonzero swatch count");
+  const dotsBefore = t.ev(`[...document.querySelectorAll("[data-glherodots] i")].length`);
+  const row1 = rows()[1], row1Cols = t.$$(".plv-sw-row > i", row1).map(i => getComputedStyle(i).getPropertyValue("--c").trim().toUpperCase());
+  await t.click(row1, { force: true, wait: 500 });
+  t.expect(row1.classList.contains("on"), "tapping a feed row didn't focus it");
+  t.expect(t.ev(`[...document.querySelectorAll("[data-glherodots] i")].length`) >= 1 || dotsBefore >= 1, "no location dots appeared on the pinned painting for the focused palette");
+  const stripCols = t.ev(`[...document.querySelectorAll("[data-glswatches] .pal")].map(b => b.style.getPropertyValue("--c").trim().toUpperCase())`);
+  t.expect(JSON.stringify(stripCols) === JSON.stringify(row1Cols), `the strip (${stripCols.join(",")}) didn't follow the focused row (${row1Cols.join(",")})`);
+  await t.click("[data-glsplitdone]", { force: true, wait: 400 });
+  t.expect(!t.$(".gl-split"), "Done didn't close the split overlay");
+  t.expect(t.$(".gl-hero"), "the painting didn't come back to the default page after Done");
+  const stripAfter = t.ev(`[...document.querySelectorAll("[data-glswatches] .pal")].map(b => b.style.getPropertyValue("--c").trim().toUpperCase())`);
+  t.expect(JSON.stringify(stripAfter) === JSON.stringify(row1Cols), "the focused palette wasn't kept as current after Done");
+  t.expect(t.$$("[data-glpalacts] button").length >= 2, "Edit/Save aren't offered for the kept palette");
+  t.expect(!t.$("[data-glpalacts] [data-glshuffle]"), "Shuffle shows for a plv category (it has nothing to reroll -- you scroll instead)");
+});
 scenario("paintings", "Harmonies shows several relation cards, each built only from real colors in the painting's own pool", async t => {
   await t.open("#/gallery/777", { settle: 800 });
   const harmTile = await t.waitFor(() => t.$$("[data-glo]").find(b => b.dataset.glo === "harmony"), 15000, "the Harmonies tile");
@@ -7389,11 +7422,14 @@ scenario("home", "Colors sheet: several families can be on at once (their union 
 // ---------- Palette view (js/paletteview.js) ----------
 // David, 2026-10-11: a full-screen, scrollable feed of palettes derived live from one source (a painting, a
 // painter or a photo), sorted into categories, with pin/save and a per-color swap sheet (Suggested / From
-// source / Adjust). This walks the painting entry point end to end.
+// source / Adjust). coordinator, 2026-10-12: a painting's own feed now lives inline on the painting page (see
+// the "paintings" group's own plv coverage below), and its "Palette view" button is gone -- this standalone
+// screen stays only for sources with no page of their own to hold a feed (a painter, a photo), so this walks
+// the painter entry point instead of the painting one.
 scenario("pv", "Palette view: categories render equal-swatch rows, the count slider changes swatch count, pin + Save, and the swap sheet edits a slot", async t => {
-  await t.open("#/gallery/12", { settle: 800 });
-  await t.waitFor("[data-glpalacts] [data-plvopen]", 15000, "the Palette view button on the painting page");
-  await t.click("[data-glpalacts] [data-plvopen]", { wait: 500 });
+  await t.open("#/painter/abraham-bloemaert", { settle: 800 });
+  await t.waitFor("[data-plvopen]", 15000, "the Palette view button on the painter page");
+  await t.click("[data-plvopen]", { wait: 500 });
   await t.waitFor(".plv-screen .plv-row-wrap", 15000, "the Palette view feed");
   const rowsFirstCat = () => t.$$(".plv-screen .plv-row-wrap");
   await t.waitFor(() => rowsFirstCat().length >= 10, 10000, "at least 10 rows in the first category's feed");
