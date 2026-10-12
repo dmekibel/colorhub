@@ -179,33 +179,38 @@
    pinned while you change palette types below it -- at this size that would eat the whole screen. "Look closer"
    (the full-screen view) is the way to keep studying it while the palette controls stay reachable. */
 .gl-pal-wrap .gl-hero{margin:0 calc(-1 * var(--g));padding:0 var(--g) 10px}
-/* Palette view, inline (coordinator, 2026-10-12): "as you scroll down into the palettes, the painting pins at
-   the top... it doesn't scroll away." The 2026-10-09 note above un-pinned the hero because at its old size
-   (up to 62dvh) a sticky hero ate the whole screen -- so this pins it again, but capped to ~40-45dvh, same
-   spirit as that fix. .gl-pin-wrap holds exactly [hero, title, chips, slider, feed]: the hero stays sticky only
-   while that group is still in view, then scrolls away with the rest once you pass the feed -- it never pins
-   through Findings, Similar palettes or the map link below.
-   David's own in-page chip grid doesn't need redoing for this: plv's extra category chips (For you, Vivid,
-   Gradients, Pastels, Darks, Neutrals + accent, Opposites, the family chips) are appended to the SAME
-   GL_MODES-shaped `have` list (js/gallery.js PLV_TUPLES) the classic modes already render through, so they get
-   the existing tile grid, pin/score/More collapsing and caption for free. */
-.gl-pin-wrap{position:relative}
-.gl-pin-wrap .gl-hero{position:sticky;top:calc(var(--top) + 54px);z-index:2;background:var(--ground)}
-/* the title/painter line and the chips + slider stay reachable the whole time, even while scrolling moves them
-   up through the sticky painting's own screen band (a sticky element paints over whatever normal-flow content
-   scrolls past underneath it) -- only the feed itself is meant to pass behind the pinned painting, the same
-   "scrolling through the palettes while it stays put" effect the chips/slider/dots already get by staying put. */
-.gl-pin-wrap .gl-id,.gl-pin-wrap .gl-modes-f,.gl-pin-wrap .gl-slide{position:relative;z-index:3;background:var(--ground)}
+/* Palette view, split mode (coordinator, 2026-10-12): the default page is unchanged from main -- classic modes
+   only, the hero sized exactly as before (var(--hero-vh, 62dvh), unset here so it falls through to 62dvh).
+   One more tile, "Browse palettes", opens a dedicated full-screen split (js/gallery.js enterSplitMode): a
+   plain `position:fixed` overlay, same pattern as css/paintzoom.css's Look closer, so nothing here is sticky
+   and nothing can ever land on top of anything else -- the hero and the controls above the feed are flex:none
+   siblings that never move; only .gl-split-feed scrolls. */
 .gl-hero-dots{position:absolute;inset:0;pointer-events:none}
 .gl-hero-dots i{position:absolute;width:12px;height:12px;border-radius:50%;box-shadow:0 0 0 2px #fff,0 1px 6px rgba(0,0,0,.5);transform:translate(-50%,-50%);background:var(--c)}
 @media (prefers-reduced-motion:no-preference){.gl-hero-dots i{transition:left .3s var(--ease),top .3s var(--ease),opacity .3s var(--ease)}}
-.gl-feed-area[hidden]{display:none}
-.gl-feed-area{margin-top:4px}
-.gl-feed{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-.gl-feed .plv-sentinel{height:1px;flex:none}
-.gl-feed-row{height:56px;border-radius:var(--r-2,10px);overflow:hidden;transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
-.gl-feed-row:active{transform:scale(.985)}
-.gl-feed-row.on{box-shadow:0 0 0 2px var(--ink)}
+.gl-tile-browse{background:var(--sel-fill,#2B2823)}
+.gl-tile-browse.on{box-shadow:var(--sel-ring,inset 0 0 0 1.5px rgba(236,232,223,.22))}
+.gl-split{position:fixed;inset:0;z-index:55;display:flex;flex-direction:column;background:var(--ground)}
+.gl-split-top{flex:none;height:45vh;min-height:260px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:var(--top)}
+.gl-split-top .gl-hero{margin:0;padding:0;width:100%;--hero-vh:40vh}
+/* a tall/narrow panel (a hanging scroll, say) can compute a span narrower than the "Pick a color"/"Look closer"
+   pair needs at this box's smaller height -- a floor keeps them apart; .gl-split-top's own overflow:hidden
+   above crops anything past 45vh that this then adds, never spilling into the chips below. */
+.gl-split-top .gl-hero>span{min-width:230px}
+.gl-split-done{position:absolute;top:calc(var(--top) + 10px);right:14px;z-index:3;display:flex;align-items:center;gap:6px;min-height:40px;padding:0 14px 0 10px;border-radius:999px;background:rgba(14,13,11,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;font:500 15px/1 var(--sans)}
+.gl-split-done svg{width:18px;height:18px}
+.gl-split-chips-row{flex:none;padding:12px var(--g) 0}
+.gl-split-chips-row .gl-modes{margin:0;padding:0}
+.gl-split .gl-slide{flex:none;margin:2px var(--g) 0;height:44px}
+.gl-split-feed{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:10px var(--g) calc(var(--bottom) + 20px);display:flex;flex-direction:column;gap:8px}
+.gl-split-feed .plv-sentinel{height:1px;flex:none}
+/* .gl-feed-row also carries .plv-row (js/paletteview.js's plvSwatchRow markup, reused as-is) -- paletteview.css
+   loads after this file and its .plv-row{flex:1;height:64px} would otherwise win on source order alone (equal
+   specificity), shrinking every row to near-nothing in .gl-split-feed's flex column. The extra .gl-split-feed
+   ancestor in this selector is what wins the tie-break, not load order. */
+.gl-split-feed .gl-feed-row{flex:none;height:56px;border-radius:var(--r-2,10px);overflow:hidden;transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+.gl-split-feed .gl-feed-row:active{transform:scale(.985)}
+.gl-split-feed .gl-feed-row.on{box-shadow:0 0 0 2px var(--ink)}
 /* David, 2026-10-09 ("weird that you need to scroll far down just to get who and why"): title, painter, date and
    museum sit right under the pinned image, above the palette strip, so who/when/where/why never needs a scroll.
    Kept short on purpose -- the eyebrow/title/dek are the same elements the painting used to show lower on the

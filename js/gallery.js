@@ -1215,18 +1215,21 @@ function glPage(i, d, fromHex, tol) {
   let modesOpen = false;   // "at most 5 chips, chosen per painting, plus More" (David, 2026-10-09)
   let locate = null;       // a palette swatch tapped on the strip: { j, hex } — dims the rest, glows where it sits
   let painterOrder = null, painterRank = -1;   // this painter's paintings (chronological if dated), once loaded — swipe the picture to move along it
-  // ---------- Palette view, inline (coordinator, 2026-10-12: "it should be built into the painting page so it
-  // stays in this view but you can scroll through many palettes") ----------
-  // js/paletteview.js's own generators, run on this same measured pool: its categories (For you, Vivid,
-  // Gradients, Pastels, Darks, Neutrals + accent, Opposites, the family chips) become extra chips after the
-  // classic modes, each backed by a live, scrollable feed instead of one palette. plvGens/plvAvail are built
-  // once per painting (the pool never changes); plvItems/plvPage/plvFocusIdx/plvRendered are per (chip, count)
-  // and rebuilt lazily in plvPalFor() whenever either changes — see PLV_* globals in js/paletteview.js.
+  // ---------- Palette view, split mode (coordinator, 2026-10-12: a sticky hero in the page's normal flow was
+  // fragile -- the chip grid grew too long mixed into the classic tiles, and the painting could land on top of
+  // its own controls while scrolling. The default page is untouched from main: classic modes only. One more
+  // tile, "Browse palettes", switches to a dedicated full-screen split: the painting fixed in the top ~45%
+  // (plain `position:fixed`, never sticky) with location dots for the palette in focus, a plv category row,
+  // the shared count slider, and the feed in its OWN scroller below -- nothing can ever overlap anything else,
+  // since only one region on screen scrolls at a time. Back out (Done) keeps the last-focused palette current. ----------
+  // js/paletteview.js's own generators, run on this same measured pool. plvGens/plvAvail are built once per
+  // painting (the pool never changes); plvItems/plvPage/plvFocusIdx/plvRendered are per (category, count) and
+  // rebuilt lazily in plvPalFor()/ensureSplitFeedKey() whenever either changes.
   const plvPrepped = pool.length >= 2 && typeof plvPrep === "function" ? plvPrep(pool) : [];
   const plvGens = plvPrepped.length >= 2 && typeof plvGenerators === "function" ? plvGenerators(plvPrepped) : {};
   const plvAvail = plvPrepped.length >= 2 && typeof plvAvailable === "function" ? plvAvailable(plvPrepped) : [];
-  const isPlvChip = () => !!plvGens[mode];
-  let plvItems = [], plvPage = 0, plvFocusIdx = 0, plvRendered = 0, plvFeedKey = null, plvFocusIO = null;
+  let plvItems = [], plvPage = 0, plvFocusIdx = 0, plvRendered = 0, plvFeedKey = null;
+  let splitMode = false, splitEl = null, splitFocusIO = null, plvSplitCat = null;
   function plvLoadMore(m, k) {
     if (!plvFeedKey || !plvGens[m]) return 0;
     const batch = plvGenPage(plvFeedKey, plvGens[m], k, plvPage++);
@@ -1235,7 +1238,7 @@ function glPage(i, d, fromHex, tol) {
   }
   // the k actually used for a plv category never exceeds 10 (its generators aren't built for long counts) even
   // when the shared slider is sitting at a classic mode's larger max -- the slider itself re-ranges per mode
-  // (drawModes, below), so this only guards the moment of switching into a plv chip before that re-range lands.
+  // (drawModes, below), so this only guards the moment mode first becomes a plv id before that re-range lands.
   function plvPalFor(m, k) {
     const kk = Math.max(2, Math.min(k, 10, plvPrepped.length));
     const key = "g" + i + "|" + m + "|" + kk;
@@ -1247,6 +1250,7 @@ function glPage(i, d, fromHex, tol) {
       cap: "A live combination built from this painting's own measured colors — not sized by canvas area." };
   }
   const glModeLabel = m => { const c = GL_MODES.find(x => x[0] === m); if (c) return c[1]; const p = plvAvail.find(x => x.id === m); return p ? p.label : ""; };
+  const isPlvChip = () => !!plvGens[mode];
   // ---------- Shuffle + Harmonies (David, 2026-10-10) ----------
   // SHUF[mode] = { seeds: [0, ...re-rolls], idx }: seed 0 is always the original, honest derivation; every
   // Shuffle appends a new seed and a small history row lets you step back to an earlier roll without re-rolling.
@@ -1290,8 +1294,7 @@ function glPage(i, d, fromHex, tol) {
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${typeof fvArtHeart === "function" && d.id ? fvArtHeart(d.id) : ""}</header>
     <div class="gl-pal-wrap">
-    <div class="gl-pin-wrap" data-glpinwrap>
-    <div class="gl-hero gl-full-w" style="--c:${avg}"><span style="width:min(100%, calc(44dvh / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas><div class="gl-hero-dots" data-glherodots aria-hidden="true"></div>
+    <div class="gl-hero gl-full-w" style="--c:${avg}"><span style="width:min(100%, calc(var(--hero-vh, 62dvh) / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas><div class="gl-hero-dots" data-glherodots aria-hidden="true"></div>
     <button class="gl-closer" data-glcloser>${ICON.search}<span>Look closer</span></button>
     <button class="gl-closer gl-pick-btn" data-glpickbtn hidden aria-pressed="false">${icon("pipette", 17)}<span>Pick a color</span></button></span></div>
     <div class="gl-id">
@@ -1301,12 +1304,10 @@ function glPage(i, d, fromHex, tol) {
     <p class="gl-id-src">${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}</p>
     <div class="gl-why" data-glwhy hidden></div>
     </div>
-    <div class="gl-modes-f" data-glfade><div class="gl-modes" data-glorder role="group" aria-label="Palette type"></div></div>
-    <div class="pr-slide gl-slide" data-glslide hidden><input type="range" data-glk aria-label="How many colors"><span class="gl-kn-t" data-glkn>6 colors</span></div>
-    <div class="gl-feed-area" data-glfeedarea hidden><div class="gl-feed" data-glfeed></div></div>
-    </div>
     <div class="gl-pal-ui">
     <div class="palette gl-strip" data-glswatches></div>
+    <div class="gl-modes-f" data-glfade><div class="gl-modes" data-glorder role="group" aria-label="Palette type"></div></div>
+    <div class="pr-slide gl-slide" data-glslide hidden><input type="range" data-glk aria-label="How many colors"><span class="gl-kn-t" data-glkn>6 colors</span></div>
     <p class="gl-locate" data-gllocate hidden></p>
     <p class="gl-cap" data-glcap></p>
     <div class="pal-names" data-glrows></div>
@@ -1338,6 +1339,10 @@ function glPage(i, d, fromHex, tol) {
     <details class="gl-quiz-fold"><summary>Test yourself</summary><div class="gl-quiz" data-glquiz></div></details>
   `, "article gl-page");
   const route = "#/gallery/" + i, heroSpan = el.querySelector(".gl-hero > span");
+  // stable references into the hero's own innards (not re-queried through `el` later): split mode moves the
+  // whole .gl-hero node out to a body-level overlay and back (buildSplitEl/exitSplitMode, below), so anything
+  // that looked it up via el.querySelector() after that move would just come back null.
+  const litCvEl = heroSpan.querySelector("[data-gllitcv]"), heroDotsEl = heroSpan.querySelector("[data-glherodots]");
   // first-run hint (David, 2026-10-09: "it should be more prominent"), once -- same "fades out at the first touch
   // anywhere" pattern as the honeycomb's own first-run hint (js/learn.js lrMapHint), but inline beside the button
   // itself (not position:fixed) since this page scrolls and the button isn't pinned to one spot on screen
@@ -1468,32 +1473,39 @@ function glPage(i, d, fromHex, tol) {
   // small fixed k, never the full slider-driven palette, so the tile itself stays compact and cheap to compute.
   const glTilePreview = key => {
     try {
-      // a plv category's own preview is a throwaway 4-color draw, never routed through modeSet/plvPalFor --
-      // that function owns the real feed's paging/focus state, and a tile for a chip that ISN'T active yet must
-      // never reset it (every tile's preview redraws on every drawModes(), including the active one's neighbors).
-      if (plvGens[key]) { const c = plvGens[key](4, glRng(plvHash(key) || 1)) || []; return c.slice(0, 4).map(h => `<i style="--c:${h}"></i>`).join(""); }
       const prev = key === "harmony" ? (harmCards.length ? harmCards[0].pal : (pool.length >= 3 ? (glHarmonyFamily(pool, 4, 0, "all")[0] || {}).pal : null))
         : (modeSet(key, 4) || {}).pal;
       return (prev || []).slice(0, 4).map(p => `<i style="--c:${p.h}"></i>`).join("");
     } catch (e) { return ""; }
   };
-  // David, 2026-10-12: "the existing modes become the first chips of one row, followed by Palette view's
-  // categories" -- plv's own [{id,label}] chips are appended to `have` as GL_MODES-shaped tuples (a synthetic
-  // caption, since they're not canvas-area readings), so glPickChips' existing pin/score/More pipeline, the
-  // caption lookup and Edit/Save's label all treat them exactly like any other mode, no special-casing needed.
-  const PLV_TUPLES = plvAvail.map(c => [c.id, c.label, "A live combination built from this painting's own measured colors — not sized by canvas area.", "A live combination from the painting's own colors"]);
+  // the entry tile's own preview: a throwaway 4-color draw from the default category (For you, or whichever
+  // plv offers for this painting), never routed through plvPalFor -- that owns the real split feed's state,
+  // and a tile preview redraws on every drawModes() regardless of whether split mode is even open.
+  const glBrowsePreview = () => {
+    try {
+      const cat = plvAvail.find(c => c.id === "foryou") ? "foryou" : (plvAvail[0] && plvAvail[0].id);
+      if (!cat || !plvGens[cat]) return "";
+      const c = plvGens[cat](4, glRng(plvHash(cat + ":" + i) || 1)) || [];
+      return c.slice(0, 4).map(h => `<i style="--c:${h}"></i>`).join("");
+    } catch (e) { return ""; }
+  };
+  // the default page is unchanged from main: classic modes only, in the existing tile grid (pin/score/More).
+  // One more tile, always shown (never behind More, since it's the door to everything else), opens split mode.
   const drawModes = set => {
     const have = GL_MODES.filter(m => m[0] === "out" || m[0] === "area" || m[0] === "pick" || (m[0] === "diverse" && pool.length > 1)
-      || (m[0] === "harmony" && pool.length >= 3 && glHarmonyCandidates(pool).cands.length) || (pool.length && glModeSet(m[0], pool, 6, row))).concat(PLV_TUPLES);
+      || (m[0] === "harmony" && pool.length >= 3 && glHarmonyCandidates(pool).cands.length) || (pool.length && glModeSet(m[0], pool, 6, row)));
     const { shown, moreCount } = glPickChips(have, row, modesOpen);
-    const host = el.querySelector("[data-glorder]"), key = shown.map(m => m[0]).join() + "|" + moreCount;
+    const browseOk = plvAvail.length >= 2;
+    const host = el.querySelector("[data-glorder]"), key = shown.map(m => m[0]).join() + "|" + moreCount + "|" + (browseOk ? 1 : 0);
     if (host.dataset.k !== key) {
       host.dataset.k = key;
       host.classList.add("gl-tiles");
       host.innerHTML = shown.map(m => `<button class="gl-tile" data-glo="${m[0]}" aria-pressed="false"><span class="gl-tile-prev">${glTilePreview(m[0])}</span><b>${m[1]}</b></button>`).join("")
-        + (moreCount ? `<button class="gl-tile gl-tile-more" data-glmore>More<em>${moreCount}</em></button>` : modesOpen && have.length > 5 ? `<button class="gl-tile gl-tile-more" data-glmore>Fewer</button>` : "");
+        + (moreCount ? `<button class="gl-tile gl-tile-more" data-glmore>More<em>${moreCount}</em></button>` : modesOpen && have.length > 5 ? `<button class="gl-tile gl-tile-more" data-glmore>Fewer</button>` : "")
+        + (browseOk ? `<button class="gl-tile gl-tile-browse" data-glbrowse><span class="gl-tile-prev">${glBrowsePreview()}</span><b>Browse palettes</b></button>` : "");
     }
     host.querySelectorAll("[data-glo]").forEach(b => { const on = b.dataset.glo === mode; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
+    const browseTile = host.querySelector("[data-glbrowse]"); if (browseTile) browseTile.classList.toggle("on", !!plvGens[mode]);
     const slide = el.querySelector("[data-glslide]"), inp = slide.querySelector("input"), kk = Math.min(Math.max(curK, 2), set.max);
     // Every mode that reads from the pool gets the same 2-20 "how many colors" slider now (David's palette-engine
     // brief, 2026-10-09: "a slider for all of them" -- only the structurally-fixed readings stay without one: a
@@ -1512,25 +1524,34 @@ function glPage(i, d, fromHex, tol) {
     cap.innerHTML = `<button class="gl-cap-t" data-glcapt aria-expanded="${capOpen}"${short === full ? " disabled" : ""}>${esc(capOpen ? full : short)}</button>` + (mode === "pick" && picks.length ? `<button class="aw-link" data-glclear>Start over</button>` : "");
     const sel = host.querySelector(".on"); if (sel && host.scrollWidth > host.clientWidth) { const l = sel.offsetLeft - (host.clientWidth - sel.offsetWidth) / 2; host.scrollTo ? host.scrollTo({ left: l }) : (host.scrollLeft = l); }
     glFadeEdges(el.querySelector("[data-glfade]"), host);
-    drawPlvFeed();
   };
-  // the inline feed (coordinator, 2026-10-12): under the chips, a scrolling list of palettes for whichever plv
-  // category is active -- classic modes have none (one palette is the whole point; Shuffle already gives
-  // variety). Focusing a row near the middle of the screen, or tapping one, makes it the page's current
-  // palette (modeSet's plv branch above reads plvFocusIdx), which redraws the strip/names/dots below exactly
-  // as any other mode would. New pages come from js/paletteview.js's own plvGenPage, paged/cached by
-  // painting+category+count so re-opening the same combination doesn't regenerate or reshuffle it.
-  const setPlvFocus = idx => {
-    if (idx === plvFocusIdx || idx < 0 || idx >= plvItems.length) return;
-    plvFocusIdx = idx; locate = null; drawPalette();
-  };
-  const drawPlvFeed = () => {
-    const area = el.querySelector("[data-glfeedarea]"), feedEl = el.querySelector("[data-glfeed]");
-    if (!area || !feedEl) return;
-    const active = isPlvChip();
-    area.hidden = !active;
-    if (!active) { if (plvFocusIO) { plvFocusIO.disconnect(); plvFocusIO = null; } return; }
-    if (feedEl.dataset.k !== plvFeedKey) { feedEl.dataset.k = plvFeedKey; feedEl.innerHTML = ""; plvRendered = 0; }
+  // ---------- split mode: the painting fixed top ~45%, a plv category row, the shared slider, and the feed in
+  // its own scroller below (coordinator, 2026-10-12, after a sticky-hero version proved fragile: "switch to a
+  // sturdier approach... nothing on the page can overlap anything else while scrolling, at any scroll
+  // position"). A plain full-screen overlay (position:fixed, same pattern as js/paintzoom.js's Look closer)
+  // sidesteps the whole class of sticky/overlap problems: only ONE region (the feed) ever scrolls, the hero
+  // and the controls above it are flex:none siblings that never move. The real hero DOM node (with its already
+  // -resolved CORS/sample state, js/gallery.js armSample below) is moved in and back out, not cloned, so
+  // nothing needs re-probing. Back out (Done) keeps whatever was focused as the page's current palette: `mode`
+  // tracks the active plv category the whole time split mode is open, and plvFocusIdx/plvItems/plvFeedKey are
+  // the same state modeSet()'s plv branch (plvPalFor, above) already reads for any mode.
+  const glSplitDefaultCat = () => plvAvail.find(c => c.id === "foryou") ? "foryou" : (plvAvail[0] && plvAvail[0].id);
+  function renderSplitChips() {
+    const host = splitEl.querySelector("[data-glsplitchips]");
+    host.innerHTML = plvAvail.map(c => `<button class="${c.id === plvSplitCat ? "on" : ""}" data-glsplitcat="${c.id}">${esc(c.label)}</button>`).join("");
+  }
+  function ensureSplitSlider() {
+    const slide = splitEl.querySelector("[data-glsplitslide]"), inp = slide.querySelector("input");
+    const max = Math.max(2, Math.min(10, plvPrepped.length)), kk = Math.min(Math.max(curK, 2), max);
+    countify(inp, { min: 2, max, value: kk, out: splitEl.querySelector("[data-glsplitkn]"),
+      onSet: (v, final) => { curK = v; locate = null; renderSplitFeed(); drawPalette(); if (final) buzz(5); } });
+    splitEl.querySelector("[data-glsplitkn]").textContent = kk + " colors";
+  }
+  function renderSplitFeed() {
+    const kk = Math.max(2, Math.min(curK, 10, plvPrepped.length)), key = "g" + i + "|" + plvSplitCat + "|" + kk;
+    if (plvFeedKey !== key) { plvFeedKey = key; plvItems = []; plvPage = 0; plvFocusIdx = 0; plvRendered = 0; plvLoadMore(plvSplitCat, kk); }
+    const feedEl = splitEl.querySelector("[data-glsplitfeed]");
+    if (feedEl.dataset.k !== plvFeedKey) { feedEl.dataset.k = plvFeedKey; feedEl.innerHTML = ""; plvRendered = 0; if (splitFocusIO) { splitFocusIO.disconnect(); splitFocusIO = null; } }
     const frag = document.createDocumentFragment();
     for (; plvRendered < plvItems.length; plvRendered++) {
       const row = document.createElement("button");
@@ -1543,15 +1564,68 @@ function glPage(i, d, fromHex, tol) {
     if (!sentinel) { sentinel = document.createElement("div"); sentinel.className = "plv-sentinel"; }
     feedEl.appendChild(sentinel);   // always last
     if (sentinel._io) sentinel._io.disconnect();
-    sentinel._io = new IntersectionObserver(entries => { if (entries[0].isIntersecting) { const got = plvLoadMore(mode, Math.max(2, Math.min(curK, 10, plvPrepped.length))); if (got) drawPlvFeed(); } }, { rootMargin: "700px" });
+    // root: feedEl -- the feed is its own scroller now, not the page, so both the infinite-scroll sentinel and
+    // the focus band below are scoped to it and never misfire against the (now motionless) rest of the screen.
+    sentinel._io = new IntersectionObserver(entries => { if (entries[0].isIntersecting) { const got = plvLoadMore(plvSplitCat, kk); if (got) renderSplitFeed(); } }, { root: feedEl, rootMargin: "600px" });
     sentinel._io.observe(sentinel);
     feedEl.querySelectorAll(".gl-feed-row").forEach(r => r.classList.toggle("on", +r.dataset.glfeedidx === plvFocusIdx));
-    // "focus = the feed row nearest the vertical center of the bottom pane" (here: the band just under the
-    // pinned painting, roughly the screen's vertical middle, since the page itself scrolls now)
-    if (plvFocusIO) plvFocusIO.disconnect();
-    plvFocusIO = new IntersectionObserver(entries => { entries.forEach(en => { if (en.isIntersecting) setPlvFocus(+en.target.dataset.glfeedidx); }); }, { root: null, rootMargin: "-50% 0px -45% 0px", threshold: 0 });
-    feedEl.querySelectorAll(".gl-feed-row").forEach(r => plvFocusIO.observe(r));
-  };
+    if (splitFocusIO) splitFocusIO.disconnect();
+    splitFocusIO = new IntersectionObserver(entries => { entries.forEach(en => { if (en.isIntersecting) setSplitFocus(+en.target.dataset.glfeedidx); }); }, { root: feedEl, rootMargin: "-45% 0px -45% 0px", threshold: 0 });
+    feedEl.querySelectorAll(".gl-feed-row").forEach(r => splitFocusIO.observe(r));
+  }
+  function setSplitFocus(idx) {
+    if (idx === plvFocusIdx || idx < 0 || idx >= plvItems.length) return;
+    plvFocusIdx = idx; locate = null; drawPalette();   // drawPalette() already redraws drawHeroDots(curPal())
+    splitEl.querySelectorAll(".gl-feed-row").forEach(r => r.classList.toggle("on", +r.dataset.glfeedidx === idx));
+  }
+  function buildSplitEl() {
+    splitEl = document.createElement("div");
+    splitEl.className = "gl-split";
+    splitEl.innerHTML = `
+      <div class="gl-split-top" data-glsplittop></div>
+      <button class="gl-split-done" data-glsplitdone>${ICON.back}<span>Done</span></button>
+      <div class="gl-split-chips-row"><div class="gl-modes" data-glsplitchips role="group" aria-label="Palette category"></div></div>
+      <div class="pr-slide gl-slide" data-glsplitslide><input type="range" data-glsplitk aria-label="How many colors"><span class="gl-kn-t" data-glsplitkn></span></div>
+      <div class="gl-split-feed" data-glsplitfeed></div>`;
+    splitEl.querySelector("[data-glsplitdone]").onclick = () => { buzz(5); exitSplitMode(); };
+    splitEl.querySelector("[data-glsplitchips]").onclick = e => {
+      const b = e.target.closest("[data-glsplitcat]"); if (!b || b.dataset.glsplitcat === plvSplitCat) return;
+      buzz(5); plvSplitCat = b.dataset.glsplitcat; mode = plvSplitCat; locate = null;
+      renderSplitChips(); renderSplitFeed(); drawPalette();
+    };
+    splitEl.querySelector("[data-glsplitfeed]").onclick = e => {
+      const b = e.target.closest("[data-glfeedidx]"); if (!b) return;
+      const idx = +b.dataset.glfeedidx; if (idx === plvFocusIdx) return;
+      buzz(5); setSplitFocus(idx);
+    };
+  }
+  function enterSplitMode() {
+    if (!plvAvail.length || splitMode) return;
+    if (!plvSplitCat || !plvGens[plvSplitCat]) plvSplitCat = glSplitDefaultCat();
+    if (!plvSplitCat) return;
+    splitMode = true;
+    buildSplitEl();
+    const heroEl = el.querySelector(".gl-hero");
+    splitEl.querySelector("[data-glsplittop]").appendChild(heroEl);
+    document.body.appendChild(splitEl);
+    document.body.style.overflow = "hidden";
+    mode = plvSplitCat; locate = null;
+    renderSplitChips();
+    ensureSplitSlider();
+    renderSplitFeed();
+    drawPalette();
+  }
+  function exitSplitMode() {
+    if (!splitMode) return;
+    splitMode = false;
+    const heroEl = splitEl.querySelector(".gl-hero"), palWrap = el.querySelector(".gl-pal-wrap");
+    if (heroEl && palWrap) palWrap.insertBefore(heroEl, palWrap.firstChild);   // the hero's own first position
+    document.body.style.overflow = "";
+    if (splitFocusIO) { splitFocusIO.disconnect(); splitFocusIO = null; }
+    splitEl.remove(); splitEl = null;
+    locate = null;
+    drawPalette();
+  }
   // "Show on painting": the painting dimmed everywhere except where one of these colors lives (a read of the
   // photo at 320px on the long side -- up from 140, David's audit 2026-10-09: "coarse blocky pixel clusters...
   // reads as a glitch" on the Madrazo portrait -- only where the image host allows a canvas read)
@@ -1569,7 +1643,7 @@ function glPage(i, d, fromHex, tol) {
   // that the three-way "On the painting" switch is gone (David, 2026-10-09: redundant with tap-to-locate); the
   // actual mask math is glPaintMask() below, shared with js/paintzoom.js's own "Where" and with litDrawHex
   const litDraw = pal => {
-    const cv = el.querySelector("[data-gllitcv]");
+    const cv = litCvEl;
     if (!cv) return;
     const locHex = adHocHex || (locate && pal[locate.j] && pal[locate.j].h);
     if (!locHex) { cv.classList.remove("on"); return; }
@@ -1594,8 +1668,10 @@ function glPage(i, d, fromHex, tol) {
     });
   };
   const drawHeroDots = pal => {
-    const host = el.querySelector("[data-glherodots]"); if (!host) return;
-    const dots = lit.ok && pal.length ? glMultiDots(pal) : null;
+    const host = heroDotsEl; if (!host) return;
+    // the default page is unchanged from main: location dots are a split-mode-only reading (coordinator,
+    // 2026-10-12), so the painting never grows a multi-color overlay outside the feature that explains it.
+    const dots = splitMode && lit.ok && pal.length ? glMultiDots(pal) : null;
     host.innerHTML = dots ? dots.map((dt, j) => dt ? `<i style="--c:${pal[j].h};left:${(dt.x * 100).toFixed(2)}%;top:${(dt.y * 100).toFixed(2)}%"></i>` : "").join("") : "";
   };
   // "Where else in this painting" for a color that ISN'T necessarily one of the palette chips (an eyedropped
@@ -1603,7 +1679,7 @@ function glPage(i, d, fromHex, tol) {
   // later drawPalette() naturally clears it since litDraw() only looks at adHocHex/locate, never both at once
   let adHocHex = null;
   const litDrawHex = hex => {
-    const cv = el.querySelector("[data-gllitcv]"); if (!cv) return;
+    const cv = litCvEl; if (!cv) return;
     const P = litBuild(); if (!P) return;
     adHocHex = hex; locate = null; glPaintMask(cv, P, hex); cv.classList.add("on");
   };
@@ -1734,6 +1810,7 @@ function glPage(i, d, fromHex, tol) {
   cleanup.push(() => removeEventListener("click", locSwallow, true));
   el.querySelector("[data-glorder]").onclick = e => {
     if (e.target.closest("[data-glmore]")) { modesOpen = !modesOpen; buzz(5); drawPalette(); return; }
+    if (e.target.closest("[data-glbrowse]")) { buzz(6); enterSplitMode(); return; }
     const b = e.target.closest("[data-glo]"); if (!b || b.dataset.glo === mode) return;
     mode = b.dataset.glo; locate = null;
     capOpen = false;
@@ -1741,12 +1818,6 @@ function glPage(i, d, fromHex, tol) {
     buzz(5); drawPalette();
   };
   el.querySelector("[data-glorder]").onscroll = () => glFadeEdges(el.querySelector("[data-glfade]"), el.querySelector("[data-glorder]"));
-  const feedHost = el.querySelector("[data-glfeed]");
-  if (feedHost) feedHost.onclick = e => {
-    const b = e.target.closest("[data-glfeedidx]"); if (!b) return;
-    const idx = +b.dataset.glfeedidx; if (idx === plvFocusIdx) return;
-    buzz(5); setPlvFocus(idx);
-  };
   el.querySelector("[data-glcap]").onclick = e => {
     if (e.target.closest("[data-glclear]")) { picks.length = 0; clearDots(); buzz(5); drawPalette(); return; }
     if (e.target.closest("[data-glcapt]")) { capOpen = !capOpen; buzz(4); drawPalette(); }
@@ -1885,7 +1956,7 @@ function glPage(i, d, fromHex, tol) {
         },
       });
     }
-    const btn = el.querySelector("[data-glpickbtn]");
+    const btn = pickBtn;
     // always shown once the image has been tested (never silently gone -- a painting whose host can't be read,
     // like Cleveland's, still gets a button that explains itself on tap, per pickBtn.onclick above)
     if (btn) { btn.classList.toggle("on", pickArmed); btn.setAttribute("aria-pressed", pickArmed); btn.hidden = false; }
