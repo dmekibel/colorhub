@@ -6731,11 +6731,14 @@ scenario("slideshow", "opens from Learn's Or choose, switches modes, steps by sw
   await t.click("[data-ss-mode-btn]", { wait: 300 });
   await t.waitFor(() => !t.$("[data-ss-picker]").hidden, 3000, "the mode picker to open");
 
-  // switch to Look-alikes: a split pair with a one-line distinction
-  await t.click(`[data-ss-mode="lookalikes"]`, { wait: 400 });
-  await t.waitFor(".ss-ov .ss-layer.ss-pair", 6000, "a look-alike pair");
-  t.expect(/\b(than|as)\b/.test(t.text(".ss-diff")), `the distinction line reads "${t.text(".ss-diff")}"`);
-  t.expect(t.$("[data-ss-picker]").hidden, "the picker didn't close after choosing a mode");
+  // every slide is two colors, names only: the main one on top (~80%), a close neighbor in the band (~20%)
+  t.expect(!t.$("[data-ss-mode='lookalikes']"), "the separate Look-alikes mode is still offered");
+  await t.click("[data-ss-mode-btn]", { wait: 300 });
+  await t.waitFor(".ss-ov .ss-layer.in.ss-pair", 6000, "a two-color slide");
+  { const m = t.$(".ss-layer.in .ss-main").getBoundingClientRect(), b = t.$(".ss-layer.in .ss-band").getBoundingClientRect(), share = m.height / (m.height + b.height);
+    t.expect(share > .76 && share < .84, `the main color takes ${Math.round(share * 100)}% of the height, expected ~80%`); }
+  t.expect(!t.$(".ss-diff") && !t.$(".ss-line"), "a description line is still on the slide");
+  t.expect(t.$("[data-ss-picker]").hidden, "the picker didn't close after tapping the Mode button again");
 
   // switch to Family: the chip strip appears and picking one keeps a single color on screen (the picker stays
   // open for a family pick, since picking the family is still part of choosing the mode)
@@ -6743,13 +6746,15 @@ scenario("slideshow", "opens from Learn's Or choose, switches modes, steps by sw
   await t.click(`[data-ss-mode="family"]`, { wait: 400 });
   await t.waitFor(() => !t.$("[data-ss-famstrip]").hidden, 4000, "the family chip strip");
   await t.click(`[data-ss-fam="Greens"]`, { wait: 500 });
-  await t.waitFor(".ss-ov .ss-layer:not(.ss-pair)", 6000, "a single-color slide for Greens");
+  await t.waitFor(() => t.$(".ss-layer.in.ss-pair") && t.ev(`setFamily(${JSON.stringify(t.$(".ss-layer.in .ss-main").style.getPropertyValue("--c"))})`) === "Greens", 6000, "a two-color Greens slide");
+  { const bh = t.$(".ss-layer.in .ss-band").style.getPropertyValue("--c");
+    t.expect(t.ev(`setFamily(${JSON.stringify(bh)})`) === "Greens", `the band color ${bh} isn't a Green`); }
   t.expect(t.$("[data-ss-picker]").hidden, "the picker didn't close after picking a family");
 
   // back to Shuffle: a tap pauses (manual session), a second tap resumes
   await t.click("[data-ss-mode-btn]", { wait: 300 });
   await t.click(`[data-ss-mode="shuffle"]`, { wait: 400 });
-  await t.waitFor(".ss-ov .ss-layer:not(.ss-pair)", 4000, "a shuffled slide");
+  await t.waitFor(".ss-ov .ss-layer.in.ss-pair", 4000, "a shuffled slide");
   await t.click(".ss-stage", { pointer: true, wait: 300 });
   t.expect(/resume/i.test(t.el("[data-ss-pause]").getAttribute("aria-label")), "a tap on the stage did not pause");
   await t.click(".ss-stage", { pointer: true, wait: 300 });
@@ -6769,10 +6774,10 @@ scenario("slideshow", "opens from Learn's Or choose, switches modes, steps by sw
   // viewer's tap lands well inside a dwell, and ssScheduleNext() restarts the clock on every step regardless)
   if (!/resume/i.test(t.el("[data-ss-pause]").getAttribute("aria-label"))) await t.click("[data-ss-pause]", { pointer: true, wait: 300 });
   t.expect(/resume/i.test(t.el("[data-ss-pause]").getAttribute("aria-label")), "could not pause before the name tap");
-  await t.waitFor(".ss-layer.in .ss-name-btn", 4000, "the current slide's name button, settled");
+  await t.waitFor(".ss-layer.in .ss-main", 4000, "the current slide's main color, settled");
 
   // tapping the name opens that color's real page, and leaving it returns to the Learn room, not the slideshow
-  await t.click(".ss-layer.in .ss-name-btn", { wait: 600 });
+  await t.click(".ss-layer.in .ss-main", { wait: 600 });
   await t.waitFor(".cp-page", 8000, "a color page after tapping its name");
   t.expect(!t.$(".ss-ov"), "the slideshow is still open behind the color page");
   await t.click("[data-back]", { wait: 500 });
@@ -6794,8 +6799,8 @@ scenario("slideshow", "Today mode starts on today's color, and the Mode pill rel
   await t.click("[data-ss-mode='today']", { wait: 500 });
   // waitFor the TEXT, not just the element: it already existed (the shuffle mode's own first slide) before this
   // click, so a plain existence check would resolve instantly on the stale name, before ssRebuild() repaints it
-  await t.waitFor(() => t.text(".ss-ov .ss-name-btn") === today, 6000, "the slide to land on today's color after switching modes");
-  t.expect(t.text(".ss-ov .ss-name-btn") === today, `the first slide is "${t.text(".ss-ov .ss-name-btn")}", expected today's color "${today}"`);
+  await t.waitFor(() => t.text(".ss-ov .ss-layer.in .ss-name-big") === today, 6000, "the slide to land on today's color after switching modes");
+  t.expect(t.text(".ss-ov .ss-layer.in .ss-name-big") === today, `the first slide is "${t.text(".ss-ov .ss-layer.in .ss-name-big")}", expected today's color "${today}"`);
   t.expect(/today/i.test(t.text("[data-ss-mode-btn] .lbl")), `the Mode button should still read Today on slide 1, reads "${t.text("[data-ss-mode-btn] .lbl")}"`);
   // step past today's color: the mode has handed off to Shuffle, so the pill must say so honestly, never still "Today"
   await t.click(".ss-stage", { pointer: true, wait: 300 });   // pause, so the test's own step is the only one that advances
@@ -7409,6 +7414,13 @@ scenario("pv", "Palette view: categories render equal-swatch rows, the count sli
   t.ev(`document.querySelector('[data-plvcnt]')._countTo(2)`);
   await t.waitFor(() => rowsFirstCat().length && swCount(rowsFirstCat()[0]) === 2, 8000, "rows with 2 swatches after moving the slider");
   await t.waitFor(() => rowsFirstCat().length >= 10, 10000, "at least 10 rows at count 2");
+  // David, 2026-10-12: in For you, a bigger count sometimes left palettes unchanged or mixed sizes -- every row must
+  // have exactly the slider's count
+  t.ev(`document.querySelector('[data-plvcnt]')._countTo(7)`);
+  await t.waitFor(() => rowsFirstCat().length && swCount(rowsFirstCat()[0]) === 7, 8000, "rows with 7 swatches after moving the slider");
+  t.expect(rowsFirstCat().every(r => swCount(r) === 7), `at count 7, rows have ${[...new Set(rowsFirstCat().map(swCount))].join("/")} swatches`);
+  t.ev(`document.querySelector('[data-plvcnt]')._countTo(2)`);
+  await t.waitFor(() => rowsFirstCat().length && swCount(rowsFirstCat()[0]) === 2, 8000, "back to 2 swatches");
   // pin the first row, check the Pinned-here sheet
   const row0 = rowsFirstCat()[0];
   await t.click(t.$(".plv-heart", row0), { wait: 500 });

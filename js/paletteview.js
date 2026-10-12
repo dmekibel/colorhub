@@ -138,8 +138,11 @@ function plvGenFamily(fam, C, prepped, k, rng) {
 function plvGenForYou(gens, k, rng) {
   const keys = Object.keys(gens).filter(x => x !== "foryou");
   if (!keys.length) return null;
-  const pick = keys[Math.floor(rng() * keys.length)];
-  return gens[pick](k, rng);
+  // David, 2026-10-12: "changing number of colors doesn't affect the palette... inconsistent": some styles return fewer
+  // colors than asked. Try styles in random order and keep only one that delivers exactly k.
+  const order = keys.slice().sort(() => rng() - .5);
+  for (const key of order) { const cols = gens[key](k, rng); if (cols && cols.length === k) return cols; }
+  return null;
 }
 
 // which chips this source's pool actually supports (only families/categories with enough real colors)
@@ -219,7 +222,8 @@ function plvGenPage(key, gen, count, pageIdx) {
   let tries = 0;
   while (collected.length < 24 && tries < 500) {
     tries++;
-    const cols = gen(count, rng); if (!cols || cols.length < Math.min(count, 2)) continue;
+    // exactly the count the slider says, so every palette in the feed has the same number of colors
+    const cols = gen(count, rng); if (!cols || cols.length !== count) continue;
     const sig = cols.slice().sort().join("|");
     if (collected.some(c => c.sig === sig)) continue;
     if (plvTooSimilar(cols, st.allShown)) continue;
@@ -302,7 +306,7 @@ function plvRender(el, kind, id, src) {
   if (prepped.length < 2) { el.querySelector(".plv-loading").innerHTML = `<p class="fine">Not enough measured colors here yet.</p>`; return; }
   const gens = plvGenerators(prepped), avail = plvAvailable(prepped);
   const m = plvModel(), untrained = !m || m.n < 20;
-  let cat = "foryou", count = 5, ITEMS = [], page = 0, feedRef = null, scrollBuf = [], rendered = 0;
+  let cat = "foryou", count = Math.min(5, prepped.length), ITEMS = [], page = 0, feedRef = null, scrollBuf = [], rendered = 0;
 
   const feedKey = () => srcKey + "|" + cat + "|" + count;
   const genForCat = () => gens[cat] || gens.foryou;
@@ -324,7 +328,7 @@ function plvRender(el, kind, id, src) {
   el.querySelector(".plv-loading").remove();
 
   const cnt = countify(el.querySelector("[data-plvcnt]"), {
-    min: 2, max: 10, value: count, out: el.querySelector("[data-plvcntn]"),
+    min: 2, max: Math.max(2, Math.min(10, prepped.length)), value: Math.min(count, prepped.length), out: el.querySelector("[data-plvcntn]"),
     onSet: (v, final) => { if (final && v !== count) { count = v; resetFeed(); } },
   });
 
@@ -466,7 +470,17 @@ function plvExpand(item, ctx) {
   // the thumbnail with dots: only for a readable source image (gracefully absent otherwise)
   if (ctx.src.img && ctx.src.canRead) {
     const thumb = sh.querySelector("[data-plvthumb]"), img = thumb.querySelector("img");
-    img.onload = () => { const dots = plvDots(img, cols()); thumb.hidden = false; thumb.querySelector("[data-plvdots]").innerHTML = dots ? dots.map((d, i) => d ? `<i style="--c:${cols()[i]};left:${(d.x * 100).toFixed(2)}%;top:${(d.y * 100).toFixed(2)}%"></i>` : "").join("") : ""; };
+    // David, 2026-10-12: "the visualization of where we took each color didn't show up" -- the image was loaded without
+    // CORS, so reading its pixels threw (a tainted canvas) and every dot silently vanished. Ask for CORS first (the
+    // museum servers we use allow it); if a server refuses, show the picture anyway and say why the dots are missing.
+    let triedPlain = false;
+    img.crossOrigin = "anonymous";
+    img.onerror = () => { if (triedPlain) return; triedPlain = true; img.removeAttribute("crossorigin"); img.src = ctx.src.img; };
+    img.onload = () => {
+      const dots = triedPlain ? null : plvDots(img, cols()); thumb.hidden = false;
+      thumb.querySelector("[data-plvdots]").innerHTML = dots ? dots.map((d, i) => d ? `<i style="--c:${cols()[i]};left:${(d.x * 100).toFixed(2)}%;top:${(d.y * 100).toFixed(2)}%"></i>` : "").join("") : "";
+      if (!dots && !thumb.querySelector(".plv-x-nodots")) thumb.insertAdjacentHTML("afterend", `<p class="fine plv-x-nodots">This museum's image server doesn't let ColorHub read its pixels, so where each color sits can't be shown here.</p>`);
+    };
     img.src = ctx.src.img;
   }
 }
@@ -504,6 +518,8 @@ function plvSwapSheet(item, slot, ctx, onDone) {
         body.innerHTML = `<div class="plv-swap-img"><img alt=""></div><p class="fine">Drag over the picture to pick a color.</p>`;
         const img = body.querySelector("img");
         img.onload = () => { try { eyedropAttach(img, { onMove: hex => apply(hex), onPick: hex => apply(hex) }); } catch (e) { body.insertAdjacentHTML("beforeend", `<div class="plv-swap-grid">${prepped.map(p => `<button type="button" class="plv-swap-opt" data-plvpick2="${p.h}" style="--c:${p.h}"></button>`).join("")}</div>`); body.querySelectorAll("[data-plvpick2]").forEach(b => b.onclick = () => apply(b.dataset.plvpick2)); } };
+        img.crossOrigin = "anonymous";   // the eyedropper reads pixels: without CORS the canvas is tainted
+        img.onerror = () => { if (img.dataset.plain) return; img.dataset.plain = 1; img.removeAttribute("crossorigin"); img.src = ctx.src.img; };
         img.src = ctx.src.img;
       } else {
         body.innerHTML = `<p class="fine">This source's picture isn't readable here — pick from its colors instead.</p><div class="plv-swap-grid">${prepped.map(p => `<button type="button" class="plv-swap-opt" data-plvpick2="${p.h}" style="--c:${p.h}"></button>`).join("")}</div>`;
