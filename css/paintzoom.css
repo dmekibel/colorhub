@@ -106,17 +106,17 @@
 
 /* ---- Pick: the palette editor (js/paintzoom.js "Pick: the palette editor") ---- */
 /* the loupes live inside .glz-frame (so they ride pinch and pan exactly) and counter-scale by --iz, which keeps
-   them one size on screen. A ring of the sampled color with a white and a dark hairline on both edges, so it reads
-   on pale and on black paint alike; the middle is hollow, so the exact spot stays visible. */
+   them one size on screen. A solid circle of the sampled color (David, 2026-10-20: a circle, not a donut) with a white
+   and a dark hairline edge, so it reads on pale and on black paint alike; the drag lens shows the exact spot. */
 .glz-pk-layer{position:absolute;inset:0;pointer-events:none}
 .glz-pk-layer[hidden]{display:none}
 .glz-lp{position:absolute;width:40px;height:40px;border-radius:50%;pointer-events:auto;touch-action:none;cursor:grab;
   transform:translate(-50%,-50%) scale(var(--iz,1));
-  background:radial-gradient(circle,transparent 0 5px,rgba(0,0,0,.75) 5px 6.1px,#fff 6.1px 7.4px,var(--c) 7.4px 15px,#fff 15px 16.3px,rgba(0,0,0,.75) 16.3px 17.4px,transparent 17.6px);
+  background:radial-gradient(circle,var(--c) 0 13px,#fff 13px 14.6px,rgba(0,0,0,.75) 14.6px 15.8px,transparent 16px);
   filter:drop-shadow(0 1px 3px rgba(0,0,0,.45));-webkit-tap-highlight-color:transparent}
 .glz-lp::before{content:"";position:absolute;inset:-6px;border-radius:50%}
 .glz-lp.on{width:50px;height:50px;z-index:2;
-  background:radial-gradient(circle,transparent 0 6px,rgba(0,0,0,.8) 6px 7.3px,#fff 7.3px 9px,var(--c) 9px 19px,#fff 19px 20.7px,rgba(0,0,0,.8) 20.7px 22px,transparent 22.2px)}
+  background:radial-gradient(circle,var(--c) 0 17px,#fff 17px 19.2px,rgba(0,0,0,.8) 19.2px 20.6px,transparent 20.8px)}
 .glz-lp.drag{cursor:grabbing;z-index:3}
 .glz-lp.drop{animation:glzlp-in .24s var(--spring)}
 .glz-lp.out{opacity:0;scale:.6;transition:opacity .15s var(--ease),scale .15s var(--ease)}
