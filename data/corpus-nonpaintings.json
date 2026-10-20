@@ -16,5 +16,17 @@
     "artist": "Soga Shohaku",
     "title": "Handwritten Letter",
     "reason": "Personal correspondence catalogued as an object, not a painting. See design/CORPUS-NONPAINTINGS.md."
+  },
+  {
+    "id": "commons-Q121545841",
+    "artist": "Vincent van Gogh",
+    "title": "Daedalus fixing wings onto the shoulders of his son Icarus",
+    "reason": "Wikidata credits Van Gogh with a 1658 baroque painting (he was born in 1853): a wrong attribution, not his work."
+  },
+  {
+    "id": "commons-Q22116578",
+    "artist": "Rembrandt van Rijn",
+    "title": "Portrait of an old man (book page with printed caption)",
+    "reason": "A photographed book page with printed caption text, not the painting itself."
   }
 ]

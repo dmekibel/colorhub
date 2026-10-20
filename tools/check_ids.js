@@ -89,7 +89,7 @@ function checkIds() {
   }
   if (has("data/gallery/thumbs.txt")) { const tl = rd("data/gallery/thumbs.txt").split("\n").filter(Boolean).length; if (tl !== N) err(`data/gallery/thumbs.txt has ${tl} lines, the gallery ${N}: rebuild with tools/paintmap_thumbs.py`); }
   else err("data/gallery/thumbs.txt is missing (tools/gallery.py deletes it): rebuild with tools/paintmap_thumbs.py");
-  if (has("data/paintmap/manifest.json")) { const mn = rj("data/paintmap/manifest.json").n; if (mn !== N) err(`data/paintmap/manifest.json n=${mn}, the gallery ${N}: the painting map atlas is out of date: python3 tools/paintmap_atlas.py build` (incremental; tools/rebuild_all.sh --atlas)); }
+  if (has("data/paintmap/manifest.json")) { const mn = rj("data/paintmap/manifest.json").n; if (mn !== N) err(`data/paintmap/manifest.json n=${mn}, the gallery ${N}: the painting map atlas is out of date: run tools/rebuild_all.sh --atlas (incremental)`); }
   return { errors, warnings, N };
 }
 
