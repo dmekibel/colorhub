@@ -5759,7 +5759,7 @@ scenario("paintings", "lane A: a painting page leads with what stands out; Name 
   t.expect(t.$("[data-glswatches]").getBoundingClientRect().top - idB < 24, "the palette strip isn't right under the identity block");
   t.expect(t.$("[data-glorder]").getBoundingClientRect().top - stripB < 24, "the palette types aren't right under the strip");
   const nTypes = t.$$("[data-glorder] [data-glo]").length;
-  t.expect(nTypes >= 5, `only ${nTypes} palette types`);
+  t.expect(nTypes >= 4, `only ${nTypes} palette types`);
   // David's rebuild brief, 2026-10-09: "at most 5 chips, chosen per painting, plus More" -- Shadows may be
   // behind it, so open More first if it's not one of the five shown
   if (!t.$('[data-glo="shadows"]')) await t.click("[data-glmore]", { wait: 300 });
@@ -5843,102 +5843,9 @@ scenario("paintings", "a plain tap on the painting opens Look closer, not the co
 // D+E of the same brief, now gated behind the explicit "Pick a color" button (eyedropper icon): once armed,
 // press-and-drag shows the magnifier loupe (js/eyedrop.js eyedropAttach), and release opens a plain color
 // readout -- never js/isolate.js's "guess its name" game.
-scenario("paintings", "Pick a color arms the eyedropper: drag shows the loupe, release opens a plain readout, never the guessing game", async t => {
-  await t.open("#/home", { settle: 300 });
-  t.ev(`window.glCommonsResolve = () => Promise.resolve(location.origin + "/icon-512.png")`);
-  t.ev(`galleryPage(14423, true)`);
-  await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 15000, "the Mona Lisa painting page");
-  const img = await t.waitFor(() => { const s = t.$(".gl-hero > span"); return s && s.classList.contains("gl-tap") && t.$(".gl-hero img"); }, 15000, "the painting's image, readable for sampling");
-  await t.click(await t.waitFor("[data-glpickbtn]", 8000, "the Pick a color button"), { force: true, wait: 300 });
-  t.expect(t.$("[data-glpickbtn]").classList.contains("on"), "the Pick a color button doesn't show armed");
-  const r = img.getBoundingClientRect(), w = t.w;
-  const pt = (x, y, type) => img.dispatchEvent(new w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 7, pointerType: "touch", isPrimary: true, button: 0, view: w }));
-  const cx = r.left + r.width * .5, cy = r.top + r.height * .5;
-  pt(cx, cy, "pointerdown");
-  await t.sleep(80);
-  pt(cx + 10, cy + 6, "pointermove");
-  await t.waitFor(".eyd-loupe", 3000, "the eyedrop loupe while dragging, armed");
-  t.expect(!t.$(".iso"), "the guessing game opened from an armed drag on the painting");
-  pt(cx + 10, cy + 6, "pointerup");
-  await t.waitFor(".gcr-sheet, .sw-sheet", 4000, "the color readout sheet after releasing");
-  t.expect(!t.$(".iso"), "the guessing game opened after releasing an armed drag on the painting");
-  t.expect(t.$(".gcr-sheet [data-gcr-open], .gcr-sheet .cp-sheet-primary"), "the readout has no way to open the color's page");
-  t.expect(t.$(".gcr-sheet [data-gcr-where]"), "the readout has no \"Where else in this painting\" action");
-});
-// Found live (2026-10-10): js/paintzoom.js's own ".glz-img" never got the crossorigin attribute the painting
-// page's own hero image gets from js/gallery.js's glCORS(), so Look closer's "Pick" tool silently failed to
-// show a loupe or a readout for every museum image, even a genuinely CORS-safe one -- a drag just did nothing,
-// no error, nothing (eydSource's tainted-canvas catch returns null, sampleAndShow returns false). Select never
-// showed this because it probes/reads pixels through its own always-crossOrigin Image (js/segment.js), never
-// through ".glz-img" itself. This exercises the real path end to end with real pointer events.
-scenario("paintings", "Look closer's Pick tool: drag shows the loupe, release opens a plain readout with a hex", async t => {
-  await t.open("#/home", { settle: 300 });
-  t.ev(`window.glCommonsResolve = () => Promise.resolve(location.origin + "/icon-512.png")`);
-  t.ev(`galleryPage(14423, true)`);
-  await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 15000, "the Mona Lisa painting page");
-  await t.waitFor(() => t.$(".gl-hero > span").classList.contains("gl-tap"), 15000, "the picture becomes tappable once the resolved image is armed and readable");
-  await t.click(await t.waitFor("[data-glcloser]", 8000, "the Look closer button"), { wait: 500 });
-  const img = await t.waitFor(".glz-scrim.in .glz-img", 4000, "Look closer's own image");
-  await t.click(await t.waitFor('[data-glzv="pick"]', 4000, "the Pick tool"), { force: true, wait: 300 });
-  t.expect(t.$('[data-glzv="pick"]').classList.contains("on"), "the Pick tool doesn't show armed");
-  const r = img.getBoundingClientRect(), w = t.w;
-  const pt = (x, y, type) => img.dispatchEvent(new w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 11, pointerType: "touch", isPrimary: true, button: 0, view: w }));
-  const cx = r.left + r.width * .5, cy = r.top + r.height * .5;
-  pt(cx, cy, "pointerdown");
-  await t.sleep(80);
-  pt(cx + 10, cy + 6, "pointermove");
-  await t.waitFor(".eyd-loupe", 3000, "the eyedrop loupe while dragging in Look closer");
-  pt(cx + 10, cy + 6, "pointerup");
-  const sheet = await t.waitFor(".gcr-sheet, .sw-sheet", 4000, "the color readout sheet after releasing in Look closer");
-  t.expect(/^#[0-9A-F]{6}$/.test(t.text(".gcr-sheet .mono") || t.text(".sw-sheet .mono")), `the readout has no real hex (${t.text(".gcr-sheet .mono") || t.text(".sw-sheet .mono")})`);
-});
-// David, 2026-10-10: "After you pick a color in full screen (Look closer), you can't see it until after you
-// exit full screen." The readout sheet (js/gallery.js glColorReadout, {z:65}) opened BEHIND Look closer's own
-// full-screen layer (.glz-scrim, z-index:60) -- present in the DOM, but visually hidden and untappable, so a
-// DOM-presence check alone (the test just above) can't catch this. elementFromPoint at the sheet's own visible
-// location is the real test: it must resolve inside the sheet, not inside Look closer underneath it.
-scenario("paintings", "Look closer's pick readout is visible and on top while the viewer is still open, not hidden behind it", async t => {
-  await t.open("#/home", { settle: 300 });
-  t.ev(`window.glCommonsResolve = () => Promise.resolve(location.origin + "/icon-512.png")`);
-  t.ev(`galleryPage(14423, true)`);
-  await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 15000, "the Mona Lisa painting page");
-  await t.waitFor(() => t.$(".gl-hero > span").classList.contains("gl-tap"), 15000, "the picture becomes tappable once readable");
-  await t.click(await t.waitFor("[data-glcloser]", 8000, "the Look closer button"), { wait: 500 });
-  const img = await t.waitFor(".glz-scrim.in .glz-img", 4000, "Look closer's own image");
-  await t.click(await t.waitFor('[data-glzv="pick"]', 4000, "the Pick tool"), { force: true, wait: 300 });
-  const r = img.getBoundingClientRect(), w = t.w;
-  const pt = (x, y, type) => img.dispatchEvent(new w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 13, pointerType: "touch", isPrimary: true, button: 0, view: w }));
-  const cx = r.left + r.width * .5, cy = r.top + r.height * .5;
-  pt(cx, cy, "pointerdown");
-  await t.sleep(80);
-  pt(cx + 10, cy + 6, "pointermove");
-  await t.waitFor(".eyd-loupe", 3000, "the loupe while dragging in Look closer");
-  pt(cx + 10, cy + 6, "pointerup");
-  // a stale sheet from an earlier scenario in this same group can still match the plain selector (sheet() always
-  // appends to the END of body, so the LAST match is this pick's own, freshly opened one -- never the first).
-  await t.waitFor(".gcr-sheet, .sw-sheet", 4000, "the readout sheet after releasing");
-  // the slide-up animation runs on the compositor's real clock inside Look closer's own continuous redraw loop,
-  // which can starve it of a frame for longer than any sane wait here -- that's a timing question, not what
-  // this test is about. Force it to its settled end state directly, the same thing a finished animation would
-  // leave behind, so the one thing actually being tested (is the sheet's STACKING above Look closer, z-index-
-  // wise) isn't entangled with a separate animation-timing question.
-  await t.ev(`document.querySelectorAll(".gcr-sheet, .sw-sheet").forEach(s => { s.style.animation = "none"; s.style.transform = "none"; })`);
-  // the loupe (z-index:70, higher than even the fixed sheet) lingers for its own short "Saved" confirmation on
-  // a real setTimeout, which runs on the virtual clock here and so won't fire on its own without a real network
-  // tick -- already covered by the eyedrop group's own test; remove it so it can't be mistaken for the bug this
-  // test is actually checking (the sheet's z-index relative to Look closer, not the loupe's closing timer).
-  await t.ev(`document.querySelectorAll(".eyd-loupe").forEach(l => l.remove())`);
-  const sheets = t.$$(".gcr-sheet, .sw-sheet"), sheet = sheets[sheets.length - 1];
-  t.expect(sheet, "the readout sheet after releasing vanished before it could be measured");
-  t.expect(t.$(".glz-scrim.in"), "Look closer closed on its own after a pick — this test needs it still open");
-  const rr = sheet.getBoundingClientRect(), px = rr.left + rr.width / 2, py = rr.top + 20;
-  const hit = await t.ev(`(() => { const el = document.elementFromPoint(${px}, ${py}); if (!el) return "none"; if (el.closest(".gcr-sheet, .sw-sheet")) return "sheet"; if (el.closest(".glz-scrim")) return "look-closer"; return "other:" + el.tagName.toLowerCase() + "." + el.className; })()`);
-  t.expect(hit === "sheet", `the readout isn't actually on top where it's drawn — elementFromPoint there hit "${hit}", not the sheet (rect=${JSON.stringify(rr)}, inner=${t.w.innerWidth}x${t.w.innerHeight})`);
-  t.expect(t.$(".gcr-sheet .pk-stackbtn, .sw-sheet .pk-stackbtn, .glz-top .pk-stackbtn"), "no Picked colors button visible inside Look closer right after a pick");
-});
-// Cleveland (and anything else whose host can't be read here) used to just make the "Pick a color" button and
-// Look closer's "Pick" tool quietly vanish or go dead, with nothing explaining why (David's report, "the color
-// picker isn't working"). Both now say so on tap instead -- never a silent dead control.
+// (2026-10-20) The one-shot eyedropper and its readout were replaced by the palette editor; it is covered by
+// "Pick a color opens the palette editor..." below.
+
 scenario("paintings", "an unreadable painting's Pick controls give an honest message instead of silently doing nothing", async t => {
   await t.open("#/home", { settle: 300 });
   // Cleveland's real failure mode is a picture that loads and displays completely normally (no crossorigin

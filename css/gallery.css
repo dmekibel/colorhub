@@ -289,14 +289,22 @@
    2026-10-10: "the palette extractions/selectors... scrolling through that top row isn't convenient"). Only
    `.gl-modes.gl-tiles` (the painting page's own container) gets this -- js/studio.js's photo page keeps the
    plain scrolling `.gl-modes` pill row above untouched. */
-.gl-modes.gl-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;overflow:visible;padding:2px 0 0}
-.gl-tile{flex:none;height:auto;min-height:60px;padding:9px 11px 8px;border-radius:var(--r-tile,10px);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;text-align:left}
+.gl-modes.gl-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:62px;gap:8px;overflow:visible;padding:2px var(--g) 0}
+.gl-tile{flex:none;height:auto;min-height:0;min-width:0;padding:0 12px;border-radius:var(--r-tile,10px);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;text-align:left}
+.gl-modes.gl-tiles .gl-tile{height:100%;border-radius:12px;padding:0 12px}
 .gl-tile-prev{display:flex;width:100%;height:9px;border-radius:3px;overflow:hidden}
 .gl-tile-prev i{flex:1;background:var(--c)}
 .gl-tile-prev:empty{display:none}
 .gl-tile b{font:500 14px/1.15 var(--sans);color:inherit;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
-.gl-tile-more{grid-column:1 / -1;flex-direction:row;align-items:center;justify-content:center;min-height:40px;gap:8px}
-.gl-tile-more em{font-style:normal;color:var(--faint)}
+.gl-tile-more .gl-tile-prev{gap:3px}
+.gl-tile-dots i{flex:none;width:calc((100% - 6px)/3);background:var(--faint,#8C877C);opacity:.55}
+.gl-tile b em{font-style:normal;color:var(--faint);font-weight:400}
+.gl-modes.gl-tiles .gl-tile.on{box-shadow:var(--sel-ring,inset 0 0 0 2px rgba(236,232,223,.5))}
+.gl-seg-row{display:flex;align-items:center;gap:12px;margin:12px 0 0}
+.gl-seg-l{flex:none;font:500 13px/1 var(--sans);color:var(--soft)}
+.gl-seg{flex:1;min-width:0;display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:2px;border-radius:999px;background:var(--s1,#171512);box-shadow:inset 0 0 0 1px var(--line,rgba(236,232,223,.10))}
+.gl-seg button{height:36px;border-radius:999px;font:500 14px/1 var(--sans);color:var(--soft);padding:0 8px;white-space:nowrap;transition:background .12s,color .12s}
+.gl-seg button.on{background:var(--sel-fill,#2B2823);color:var(--sel-ink,var(--ink));box-shadow:var(--sel-ring,inset 0 0 0 1.5px rgba(236,232,223,.22))}
 .gl-pal-ui .gl-slide{display:flex;align-items:center;gap:10px;margin:2px 0 0;height:44px}
 .gl-pal-ui .gl-slide[hidden]{display:none}
 /* Shuffle / Edit / Save for the current single palette, and its short re-roll history (every mode but

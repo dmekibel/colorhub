@@ -847,6 +847,10 @@ function glName(h) {
   if (/^(dark|deep|pale|light)$/i.test(firstWord)) { const L = lch(nm.h)[0]; if ((L < 22 && /^(dark|deep|pale|light)$/i.test(firstWord)) || (L > 90 && /^(pale|light|dark|deep)$/i.test(firstWord))) t = nm.n; }
   return { t, sub: "", n: nm.n };
 }
+// Proportional | Equal swatch widths (David, 2026-10-20: "switch off the proportional percentage preview and show the
+// palette equal"). One remembered choice across paintings; Proportional stays the default.
+const glEqGet = () => { try { return localStorage.getItem("colorhub-palwidths") === "eq"; } catch (e) { return false; } };
+const glEqSet = on => { try { localStorage.setItem("colorhub-palwidths", on ? "eq" : "prop"); } catch (e) {} };
 const glPctTxt = s => s < .005 ? "under 1%" : Math.round(s * 100) + "%";
 // js/thingquiz.js + css/thingquiz.css: listed in index.html once the conductor adds the tags; until then (and if a
 // cached index.html lacks them) they load here, once, the moment a painting page opens
@@ -913,7 +917,7 @@ function glPickChips(have, row, open) {
   // smoke failure: "the first tiles were [out,area,diverse,accents]", Harmonies pushed to 5th).
   const pinned = GL_PINNED_MODES.map(k => have.find(m => m[0] === k)).filter(Boolean);
   const rest = have.filter(m => !GL_PINNED_MODES.includes(m[0])).map(m => ({ m, s: glChipScore(m[0], row) })).sort((a, b) => b.s - a.s);
-  const topKeys = new Set(rest.slice(0, 5 - pinned.length).map(r => r.m[0]));
+  const topKeys = new Set(rest.slice(0, 4 - pinned.length).map(r => r.m[0]));
   const shown = [...pinned, ...have.filter(m => !GL_PINNED_MODES.includes(m[0]) && topKeys.has(m[0]))];
   return { shown, moreCount: have.length - shown.length };
 }
@@ -1273,6 +1277,7 @@ function glPage(i, d, fromHex, tol) {
   const picks = [];    // "Pick from the painting": colors the visitor tapped
   const lit = { ok: false, img: null, pix: null };   // the photo's pixels, once the host lets a canvas read them
   let capOpen = false;
+  let eqW = glEqGet();   // swatch widths: false = Proportional, true = Equal
   let modesOpen = false;   // "at most 5 chips, chosen per painting, plus More" (David, 2026-10-09)
   let locate = null;       // a palette swatch tapped on the strip: { j, hex } — dims the rest, glows where it sits
   let painterOrder = null, painterRank = -1;   // this painter's paintings (chronological if dated), once loaded — swipe the picture to move along it
@@ -1368,6 +1373,7 @@ function glPage(i, d, fromHex, tol) {
     <div class="gl-pal-ui">
     <div class="palette gl-strip" data-glswatches></div>
     <div class="gl-modes-f" data-glfade><div class="gl-modes" data-glorder role="group" aria-label="Palette type"></div></div>
+    <div class="gl-seg-row"><span class="gl-seg-l" id="glwl">Widths</span><div class="gl-seg" role="group" aria-labelledby="glwl"><button data-glw="prop" aria-pressed="true">Proportional</button><button data-glw="eq" aria-pressed="false">Equal</button></div></div>
     <div class="pr-slide gl-slide" data-glslide hidden><input type="range" data-glk aria-label="How many colors"><span class="gl-kn-t" data-glkn>6 colors</span></div>
     <p class="gl-locate" data-gllocate hidden></p>
     <p class="gl-cap" data-glcap></p>
@@ -1451,10 +1457,10 @@ function glPage(i, d, fromHex, tol) {
     // press a swatch adds it to your set", since that's the same gesture slot) and an explicit row action in
     // the expanded list (the [data-locate] glyph there, the one nested-control exemption js/swatch.js's capture
     // delegate already recognizes, same as the old strip glyph did).
-    stripH.innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}${locate && locate.j === j ? " loc" : ""}" data-glj="${j}" data-swatch="${p.h}" style="--c:${p.h};flex:${(Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.pick ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
+    stripH.innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}${locate && locate.j === j ? " loc" : ""}" data-glj="${j}" data-swatch="${p.h}" style="--c:${p.h};flex:${eqW ? 1 : (Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.pick || eqW ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
     rowsH.innerHTML = pal.map((p, j) => {
       const nm = glName(p.h), fam = !nm.sub && !p.out && typeof familyOf === "function" && familyOf(p.h);
-      const sub = [p.out ? "Stands out" : nm.sub ? nm.sub.charAt(0).toUpperCase() + nm.sub.slice(1) : fam ? fam.head.n + " family" : "", p.pick ? "Picked" : glPctTxt(p.share)].filter(Boolean).join(" · ");
+      const sub = [p.out ? "Stands out" : nm.sub ? nm.sub.charAt(0).toUpperCase() + nm.sub.slice(1) : fam ? fam.head.n + " family" : "", p.pick ? "Picked" : eqW ? "" : glPctTxt(p.share)].filter(Boolean).join(" · ");
       return `<button class="pal-name${near && near.i === j ? " on" : ""}${locate && locate.j === j ? " loc" : ""}" data-swatch="${p.h}" data-glj="${j}"><i style="--c:${p.h}" data-ink="${ink(p.h)}"></i><b>${esc(nm.t)}</b><span>${esc(p.out && nm.sub ? sub + " · " + nm.sub : sub)}</span><em class="mono">${p.h}</em><i class="pal-where" data-locate="${j}" tabindex="0" role="button" aria-pressed="${locate && locate.j === j}" aria-label="Where ${esc(nameOf(p.h).n)} is on the painting">${GL_WHERE_ICON}</i></button>`;
     }).join("");
     }
@@ -1513,7 +1519,7 @@ function glPage(i, d, fromHex, tol) {
     listHost.innerHTML = shown.length ? shown.map((c, j) => `
       <div class="gl-hcard" data-hc="${j}">
         <div class="gl-hcard-top"><b>${esc(c.label)}</b><span>${c.fitPct}% fit</span></div>
-        <div class="palette gl-strip gl-hcard-strip">${c.pal.map(p => `<button class="pal" data-swatch="${p.h}" style="--c:${p.h};flex:${(Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("")}</div>
+        <div class="palette gl-strip gl-hcard-strip">${c.pal.map(p => `<button class="pal" data-swatch="${p.h}" style="--c:${p.h};flex:${eqW ? 1 : (Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${eqW ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("")}</div>
         <div class="gl-hcard-names">${c.pal.map(p => esc(nameOf(p.h).n)).join(" · ")}</div>
         <div class="gl-hcard-acts"><button class="gl-pa-btn" data-hcedit="${j}">Edit</button><button class="gl-pa-btn solid" data-hcsave="${j}">Save palette</button></div>
       </div>`).join("") : `<p class="fine">No ${harmFilter === "all" ? "clear relation" : harmCardName(harmFilter).toLowerCase()} shows up among this painting's own colors. Try Shuffle, or another type.</p>`;
@@ -1562,10 +1568,11 @@ function glPage(i, d, fromHex, tol) {
       host.dataset.k = key;
       host.classList.add("gl-tiles");
       host.innerHTML = shown.map(m => `<button class="gl-tile" data-glo="${m[0]}" aria-pressed="false"><span class="gl-tile-prev">${glTilePreview(m[0])}</span><b>${m[1]}</b></button>`).join("")
-        + (moreCount ? `<button class="gl-tile gl-tile-more" data-glmore>More<em>${moreCount}</em></button>` : modesOpen && have.length > 5 ? `<button class="gl-tile gl-tile-more" data-glmore>Fewer</button>` : "")
+        + (moreCount ? `<button class="gl-tile gl-tile-more" data-glmore aria-expanded="false"><span class="gl-tile-prev gl-tile-dots" aria-hidden="true"><i></i><i></i><i></i></span><b>More <em>${moreCount}</em></b></button>` : modesOpen && have.length > 4 ? `<button class="gl-tile gl-tile-more" data-glmore aria-expanded="true"><span class="gl-tile-prev gl-tile-dots" aria-hidden="true"><i></i><i></i><i></i></span><b>Fewer</b></button>` : "")
         + (browseOk ? `<button class="gl-tile gl-tile-browse" data-glbrowse><span class="gl-tile-prev">${glBrowsePreview()}</span><b>Browse palettes</b></button>` : "");
     }
     host.querySelectorAll("[data-glo]").forEach(b => { const on = b.dataset.glo === mode; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
+    el.querySelectorAll("[data-glw]").forEach(b => { const on = (b.dataset.glw === "eq") === eqW; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
     const browseTile = host.querySelector("[data-glbrowse]"); if (browseTile) browseTile.classList.toggle("on", !!plvGens[mode]);
     const slide = el.querySelector("[data-glslide]"), inp = slide.querySelector("input"), kk = Math.min(Math.max(curK, 2), set.max);
     // Every mode that reads from the pool gets the same 2-20 "how many colors" slider now (David's palette-engine
@@ -1888,6 +1895,11 @@ function glPage(i, d, fromHex, tol) {
   };
   addEventListener("click", locSwallow, true);
   cleanup.push(() => removeEventListener("click", locSwallow, true));
+  el.querySelector(".gl-seg-row").onclick = e => {
+    const b = e.target.closest("[data-glw]"); if (!b) return;
+    const eq = b.dataset.glw === "eq"; if (eq === eqW) return;
+    eqW = eq; glEqSet(eq); buzz(5); drawPalette();
+  };
   el.querySelector("[data-glorder]").onclick = e => {
     if (e.target.closest("[data-glmore]")) { modesOpen = !modesOpen; buzz(5); drawPalette(); return; }
     if (e.target.closest("[data-glbrowse]")) { buzz(6); enterSplitMode(); return; }
