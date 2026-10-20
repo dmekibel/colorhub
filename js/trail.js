@@ -188,7 +188,12 @@ function tlDecorate(el) {
   const roomy = (nav && nav.querySelector(".nav-r")) || (!nav && !bar && !back.classList.contains("cp-close") && !crowded);
   if (roomy && !back.querySelector(".tl-back-label")) back.insertAdjacentHTML("beforeend", `<span class="tl-back-label">${esc(tlBackLabel())}</span>`);
   back.setAttribute("aria-label", `Back to ${esc(tlBackLabel())}`);
-  const pillHtml = tlPillHides() ? "" : tlPillHTML();
+  // a painting page (David, 2026-10-20): the top-right pill opens the painting map arranged around THIS painting
+  // ("Similar") instead of closing back to the color map; Back, the pull-down and the trail sheet still go home
+  const simGi = el.querySelector("[data-similar-gi]") ? el.querySelector("[data-similar-gi]").dataset.similarGi : null;
+  const pillHtml = simGi != null && typeof GL_ICON_MAP !== "undefined"
+    ? `<button class="tl-exit" data-glsimilar="${simGi}" aria-label="Similar paintings on the map">${GL_ICON_MAP}<span>Similar</span></button>`
+    : tlPillHides() ? "" : tlPillHTML();
   const bothHtml = TL_MORE_HTML + pillHtml;
   // a richpage.js page carries BOTH headers at once (the full-bleed .cp-hero and the pinned .rp-bar that slides
   // in once you scroll past it) -- not an either/or, so this stays two independent checks, same as the Close
@@ -242,7 +247,14 @@ function tlgSnapshot() {
 // xBack() on it pops that single entry and lands on the origin anyway -- reachesOrigin covers that case too,
 // not just the no-trail one.
 function tlgDest(el, axis) {
-  if (axis === "y") { const toMap = !xFallbackTab(); return { toMap, go: () => tlExit(null) }; }
+  if (axis === "y") {
+    // David, 2026-10-20: a painting opened from the PAINTING map pulls down back to that painting map, where you left
+    // it (its pan is kept in PM_PAN), not all the way out to the color map; any other trail closes to its origin as before
+    let pm = -1;
+    for (let k = XSTACK.length - 2; k >= 0; k--) if (String(XSTACK[k]).startsWith("r:paintings/map")) { pm = k; break; }
+    if (pm >= 0) return { toMap: false, go: () => tlJump(pm) };
+    const toMap = !xFallbackTab(); return { toMap, go: () => tlExit(null) };
+  }
   const onTrail = !!el.dataset.tl, reachesOrigin = !onTrail || XSTACK.length <= 1, toMap = reachesOrigin && !xFallbackTab();
   return { toMap, go: () => { if (onTrail) xBack(); else tlToOrigin(); } };
 }
@@ -472,6 +484,8 @@ document.addEventListener("click", e => {
   xBack();
 }, true);
 document.addEventListener("click", e => {
+  const sim = e.target.closest && e.target.closest("[data-glsimilar]");
+  if (sim) { e.preventDefault(); buzz(6); location.hash = "#/paintings/map?arr=spiral&seed=" + sim.dataset.glsimilar; return; }
   const x = e.target.closest && e.target.closest("[data-tl-exit]");
   if (x && app.contains(x)) { e.preventDefault(); tlExit(x); }
 });
