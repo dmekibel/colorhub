@@ -826,6 +826,16 @@ function clampCorners() {
 addEventListener("resize", clampCorners);
 addEventListener("focusout", () => later(clampCorners, 150));
 if (window.visualViewport) visualViewport.addEventListener("resize", () => later(clampCorners, 60));
+// the on-screen keyboard (2026-10-20, David: the search sheet slid under the status bar with the keyboard up): --kb is the
+// keyboard's height and --vvh the visible height, so a bottom sheet with a text field can sit above the keyboard and stay
+// below the clock (css/places.css .sheet.sr-sheet-wrap). iOS shrinks visualViewport, not innerHeight, for the keyboard.
+function kbVars() {
+  const vv = window.visualViewport; if (!vv) return;
+  const de = document.documentElement, kb = Math.max(0, innerHeight - vv.height - vv.offsetTop);
+  de.style.setProperty("--kb", (kb > 60 ? kb : 0) + "px");
+  de.style.setProperty("--vvh", vv.height + "px");
+}
+if (window.visualViewport) { visualViewport.addEventListener("resize", kbVars); visualViewport.addEventListener("scroll", kbVars); kbVars(); }
 addEventListener("orientationchange", () => later(clampCorners, 60));
 function closeStem(instant) {
   const s = document.querySelector(".rooms-stem"), sc = document.querySelector(".rm-scrim");

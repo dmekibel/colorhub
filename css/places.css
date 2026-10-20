@@ -7,6 +7,10 @@
    interaction: it shares .rooms-stem/.rm-bubble/.rm-art/.rm-label with the right corner's stem (css/menus2.css);
    only the Collections row's own mosaic thumbnail is new. */
 .mr-sheet-wrap .sheet,.sr-sheet-wrap .sheet{max-height:84dvh;overflow-y:auto;overscroll-behavior:contain}
+/* search sheets (the class sits ON the sheet): above the keyboard, never under the status bar, the field pinned on top while
+   results scroll (David, 2026-10-20). --kb/--vvh come from js/core.js kbVars(). */
+.sheet.sr-sheet-wrap{bottom:var(--kb,0px);max-height:min(84dvh,calc(var(--vvh,100dvh) - var(--top,0px) - 12px));overflow-y:auto;overscroll-behavior:contain}
+.sheet.sr-sheet-wrap .sr-field{position:sticky;top:0;z-index:2;box-shadow:0 -10px 0 10px var(--surface-1)}
 /* Collections' own row art: a small mosaic of 4 covers (David, 2026-10-10), distinct from every place's single
    live picture -- "Browse everything", not one room's own content. */
 .pl-coll-art{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;background:var(--ground)}
