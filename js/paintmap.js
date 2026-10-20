@@ -609,11 +609,14 @@ function pmLayColor(list, place, F) {
   for (let k = 0; k < n; k++) { const c = pmPlaceLab(list[k], place, F); Lp[k] = c[0]; Ap[k] = c[1]; Bp[k] = c[2]; }
   const L = k => Lp[k], A = k => Ap[k], B = k => Bp[k];
   const idx = Array.from({ length: n }, (_, k) => k);
-  const chroma = idx.filter(k => Math.hypot(A(k), B(k)) >= 5).sort((p, q) => pmHueKey(A(p), B(p)) - pmHueKey(A(q), B(q)));
-  const greys = idx.filter(k => Math.hypot(A(k), B(k)) < 5);
-  // the near-neutral paintings go where the warm olives meet the greens (hue key ~140), not at either end
-  const cut = chroma.findIndex(k => pmHueKey(A(k), B(k)) >= 140);
-  const order = cut < 0 ? chroma.concat(greys) : chroma.slice(0, cut).concat(greys, chroma.slice(cut));
+  // the near-neutral paintings (chroma under 5) used to sit in one block mid-sequence, which read as a grey stripe cutting the hue
+  // order in two (David, 2026-10-21). Now the hue order runs unbroken (warm to greens to blues to purples) and the greys form their
+  // own band at the far right edge. The band is ordered cool-to-warm by the slight tint they do have (so the cool end meets the purples), which
+  // keeps every grey column a full light-to-dark column like its neighbours: no white or black column, no hard edge.
+  const isGrey = k => Math.hypot(A(k), B(k)) < 5;
+  const chroma = idx.filter(k => !isGrey(k)).sort((p, q) => pmHueKey(A(p), B(p)) - pmHueKey(A(q), B(q)));
+  const greys = idx.filter(isGrey).sort((p, q) => B(p) - B(q));
+  const order = chroma.concat(greys);
   const X = new Int32Array(n), Y = new Int32Array(n), items = new Int32Array(n);
   const ox = Math.floor(cols / 2), oy = Math.floor(rows / 2);
   let k2 = 0;
