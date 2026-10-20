@@ -34,13 +34,20 @@
 // packing as By painter, just grouped by F.mv instead of F.artist); Tones buckets by mood (Vivid/Light/Muted/
 // Dark, the same honeyToneGroup split honey.js's own Tones shape uses) under whichever "Place by" color the
 // painting's own position already comes from.
-const PM_ARR = [["color", "By color"], ["time", "By time"], ["painter", "By painter"], ["families", "Families"], ["tones", "Tones"], ["rings", "Rings"], ["spiral", "Spiral"]];
+// Third field = where it makes sense: omitted = every map, "multi" = only when the map holds many painters (By painter and
+// Families are one block when it holds one), "solo" = only when the map is scoped to ONE painter (David, 2026-10-20: the
+// painter page's map). One list, filtered by pmArrFor(); the sheet is never forked.
+const PM_ARR = [["color", "By color"], ["time", "By time"], ["painter", "By painter", "multi"], ["families", "Families", "multi"], ["museum", "By museum", "solo"], ["tones", "Tones"], ["rings", "Rings"], ["spiral", "Spiral"]];
+const pmSolo = s => !!(s && s.f && s.f.painterSet && s.f.painterSet.length === 1);
+const pmArrFor = s => PM_ARR.filter(a => !a[2] || (a[2] === "solo") === pmSolo(s));
+const pmArrOk = s => pmArrFor(s).some(a => a[0] === s.arr);
 const PM_NEEDS_SEED = new Set(["rings", "spiral"]);
 const PM_WHY = {
   color: "Lighter toward the top, hues left to right",
   time: "Oldest at the top, a band for each decade",
   painter: "A block for each painter, earliest first",
   families: "A block for each movement, the biggest first",
+  museum: "A block for each museum, the biggest collection first",
   tones: "An island per mood: vivid, light, muted, dark",
   rings: "Concentric rings: the nearer the middle, the closer the colors",
   spiral: "A continuous spiral, nearest first, no seams between rings",
@@ -79,6 +86,7 @@ const PM_ICON = {
   color: sv('<circle cx="8" cy="8" r="3.2"/><circle cx="16" cy="8" r="3.2"/><circle cx="12" cy="15.5" r="3.2"/>', 22, 1.7),
   time: sv('<path d="M4 6h16M4 12h16M4 18h16"/><path d="M8 4v4M14 10v4M10 16v4"/>', 22, 1.7),
   painter: sv('<rect x="3.5" y="4" width="7" height="7" rx="1.2"/><rect x="13.5" y="4" width="7" height="4" rx="1.2"/><rect x="13.5" y="11" width="7" height="9" rx="1.2"/><rect x="3.5" y="14" width="7" height="6" rx="1.2"/>', 22, 1.7),
+  museum: sv('<path d="M3.5 9.5L12 4l8.5 5.5M5.5 10.5v7M10 10.5v7M14 10.5v7M18.5 10.5v7M3.5 19.5h17"/>', 22, 1.7),
   families: sv('<circle cx="7" cy="7" r="3.4"/><circle cx="16.5" cy="6.5" r="2.4"/><circle cx="7" cy="16.5" r="2.4"/><circle cx="17" cy="16" r="3"/>', 22, 1.7),
   tones: sv('<circle cx="7" cy="7" r="3.6"/><circle cx="17" cy="7" r="2.2"/><circle cx="7" cy="17" r="2.2"/><circle cx="17" cy="17" r="3.6"/>', 22, 1.7),
   rings: sv('<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7.5" stroke-dasharray="2.5 3"/><circle cx="12" cy="12" r="10.5" stroke-dasharray="1.5 2.5"/>', 22, 1.6),
@@ -277,6 +285,34 @@ function pmYearRange(F) {
   if (col === "paintings") PM_YEAR_RANGE = range; else PM_COL_YEAR_RANGE.set(col, range);
   return range;
 }
+// One painter's own span (David, 2026-10-20): the year slider, its histogram and the quick ranges of a one-painter map
+// run across THAT painter's real dates, not 1400-2000. Cached per painter. total = every painting of theirs on the map.
+const PM_SOLO_YEARS = new Map();
+function pmSoloYears(a, F) {
+  const key = (F.col || "paintings") + ":" + a;
+  let e = PM_SOLO_YEARS.get(key); if (e && e.N === F.N) return e;
+  const G = F.G, ys = []; let total = 0;
+  for (let i = 0; i < F.N; i++) { if (F.artist[i] !== a) continue; total++; if (G.year[i] !== GL_UNDATED) ys.push(G.year[i]); }
+  ys.sort((p, q) => p - q);
+  // a lone stray date (one Van Gogh dated 1658 in the data) must not stretch the slider across three centuries: trim
+  // an end that sits more than 25 years outside the 2nd/98th percentile
+  let lo = ys.length ? ys[0] : 1900, hi = ys.length ? ys[ys.length - 1] : 1900;
+  if (ys.length > 20) { const a2 = ys[Math.floor(ys.length * .02)], b2 = ys[Math.ceil(ys.length * .98) - 1]; if (lo < a2 - 25) lo = a2; if (hi > b2 + 25) hi = b2; }
+  e = { N: F.N, total, ys, r: [lo, hi] };
+  if (PM_SOLO_YEARS.size > 12) PM_SOLO_YEARS.clear();
+  PM_SOLO_YEARS.set(key, e); return e;
+}
+// three quick ranges that each hold about a third of the painter's dated works (so "Late" is never empty)
+function pmSoloPresets(e) {
+  const n = e.ys.length, [lo, hi] = e.r;
+  if (n < 9 || hi - lo < 3) return [];
+  const q1 = e.ys[Math.floor(n / 3)], q2 = e.ys[Math.floor(2 * n / 3)], qm = e.ys[Math.floor(n / 2)];
+  if (lo < q1 && q1 < q2 && q2 < hi) return [["early", "Early years", lo, q1], ["middle", "Middle years", q1 + 1, q2], ["late", "Late years", q2 + 1, hi]];
+  if (lo < qm && qm < hi) return [["early", "Early years", lo, qm], ["late", "Late years", qm + 1, hi]];   // the work is bunched into few years: halves
+  return [];
+}
+// a dot of each hue family's own color on its chip (the same nine names as XB_FAMS)
+const PM_HUE_DOT = ["#C0392B", "#E8A0B4", "#E07B1F", "#8A5A2B", "#E8C547", "#5B8C3A", "#3A6EA5", "#7D5BA6", "#8A8A8A"];
 function pmParse(q, F) {
   const s = pmFresh(), p = new URLSearchParams(String(q || "").replace(/^\?/, ""));
   s.col = (F && F.col) || "paintings";
@@ -299,6 +335,7 @@ function pmParse(q, F) {
   const sd = num("seed"); if (sd != null && sd >= 0 && sd < F.N) s.seed = sd;
   if (p.get("fav") === "1") s.fav = 1;
   if (PM_NEEDS_SEED.has(s.arr) && s.seed < 0) s.arr = "color";
+  if (!pmArrOk(s)) s.arr = "color";   // By painter / Families mean nothing for one painter; By museum only means something for one
   return s;
 }
 function pmQS(s, F) {
@@ -371,7 +408,7 @@ function pmActiveChips(s, F) {
     c.push({ dim: "color", text: names.length === 1 ? names[0] : `${names.length} colors (${f.colorMode === "all" ? "all" : "any"})` });
   }
   if (f.hueBand != null) c.push({ dim: "hueBand", text: XB_HUE_WORDS[f.hueBand] });
-  if (f.l0 != null || f.l1 != null) c.push({ dim: "l", text: f.l0 != null && f.l1 != null ? `L ${f.l0}–${f.l1}` : f.l0 != null ? `Lighter than ${f.l0}` : `Darker than ${f.l1}` });
+  if (f.l0 != null || f.l1 != null) c.push({ dim: "l", text: f.l0 != null && f.l1 != null ? `Lightness ${f.l0}–${f.l1}` : f.l0 != null ? `Lighter than ${f.l0}` : `Darker than ${f.l1}` });
   if (f.painterSet && f.painterSet.length) c.push({ dim: "painter", text: f.painterSet.length === 1 ? xbArtistName(F, f.painterSet[0]) : `${f.painterSet.length} painters` });
   if (f.mvSet && f.mvSet.length) c.push({ dim: "mv", text: f.mvSet.length === 1 ? F.meta.movements[f.mvSet[0] - 1] : `${f.mvSet.length} movements` });
   if (f.musSet && f.musSet.length) c.push({ dim: "mus", text: f.musSet.length === 1 ? F.G.src[f.musSet[0]].short : `${f.musSet.length} museums` });
@@ -503,16 +540,20 @@ function pmSmooth(lay, budget, F) {
 }
 // the year as a sortable number; undated last
 const pmYr = (i, F) => { const G = (F && F.G) || GAL; return G.year[i] === GL_UNDATED ? 1e5 : G.year[i]; };
-function pmBand(i, F) {
+function pmBand(i, F, yearly) {
   const G = (F && F.G) || GAL, y = G.year[i];
   if (y === GL_UNDATED) return { key: 1e6, label: "Undated" };
+  if (yearly && y >= 1500) return { key: y, label: String(y) };
   if (y < 1500) { const c = Math.floor(y / 100) * 100; return { key: c, label: c < 0 ? `${-c} BCE` : `${c}–${c + 99}` }; }
   const d = Math.floor(y / 10) * 10; return { key: d, label: d + "s" };
 }
-function pmLayTime(list, place, F) {
-  const n = list.length, Wc = Math.max(3, Math.min(16, Math.round(Math.sqrt(n) / 2.2)));
+function pmLayTime(list, place, F, wide) {
+  // wide (a one-painter map): ~1,000 works in 14 columns made a 14x78 sliver on a phone; ~sqrt(n) columns frames it
+  const n = list.length, Wc = wide ? Math.max(6, Math.min(30, Math.round(Math.sqrt(n) * .9))) : Math.max(3, Math.min(16, Math.round(Math.sqrt(n) / 2.2)));
   const bands = new Map();
-  list.forEach(i => { const b = pmBand(i, F); if (!bands.has(b.key)) bands.set(b.key, { ...b, items: [] }); bands.get(b.key).items.push(i); });
+  // a one-painter map whose work sits in a few decades gets a band per YEAR (a decade-only band would be one big block)
+  const yearly = !!wide && new Set(Array.from(list, i => pmBand(i, F).key)).size <= 4;
+  list.forEach(i => { const b = pmBand(i, F, yearly); if (!bands.has(b.key)) bands.set(b.key, { ...b, items: [] }); bands.get(b.key).items.push(i); });
   const keys = [...bands.keys()].sort((a, b) => a - b);
   const Lv = i => pmPlaceLab(i, place, F)[0], Av = i => pmPlaceLab(i, place, F)[1], Bv = i => pmPlaceLab(i, place, F)[2];
   const items = new Int32Array(n), X = new Int32Array(n), Y = new Int32Array(n), labels = [];
@@ -571,6 +612,13 @@ function pmLayFamilies(list, F) {
   return pmLayGroup(list, {
     groupOf: i => F.mv[i], sortWithin: (p, q) => pmYr(p, F) - pmYr(q, F),
     label: (mv, c) => mv ? F.meta.movements[mv - 1] : "Unclassified",
+  });
+}
+// By museum (one-painter maps): the same shelves, one block per museum holding the painter's works, the biggest first.
+function pmLayMuseum(list, F) {
+  return pmLayGroup(list, {
+    groupOf: i => F.G.mus[i], sortWithin: (p, q) => pmYr(p, F) - pmYr(q, F),
+    label: (m, c) => F.G.src[m] ? F.G.src[m].short : "Elsewhere",
   });
 }
 // Tones (David, 2026-10-09): the same Vivid/Light/Muted/Dark split honey.js's own Tones shape uses
@@ -653,7 +701,8 @@ function pmLayout(s, F) {
   const list = pmList(s, F), key = pmQS(s, F) + "|" + list.length + "|" + (s.fav ? pmFavList(F).map(r => r.i).join(",") : "");
   let lay = PM_LAYOUTS.get(key);
   if (!lay) {
-    lay = s.arr === "time" ? pmLayTime(list, s.place, F) : s.arr === "painter" ? pmLayPainter(list, F)
+    lay = s.arr === "time" ? pmLayTime(list, s.place, F, pmSolo(s)) : s.arr === "painter" ? pmLayPainter(list, F)
+      : s.arr === "museum" ? pmLayMuseum(list, F)
       : s.arr === "families" ? pmLayFamilies(list, F) : s.arr === "tones" ? pmLayTones(list, s.place, F)
       : s.arr === "rings" ? pmLayRings(list, s.seed, F) : s.arr === "spiral" ? pmLaySpiral(list, s.seed, F)
       : pmLayColor(list, s.place, F);
@@ -1035,6 +1084,8 @@ function pmMount(el, s, F) {
   const cv = el.querySelector(".pmx-cv"), ctx = cv.getContext("2d"), wait = el.querySelector(".pmx-wait");
   const RM = reduceMotion, cap = el.querySelector("[data-pmcap]"), heart = el.querySelector("[data-pmheart]");
   const facets = el.querySelector("[data-pmfacets]"), chipbar = el.querySelector("[data-pmchipbar]"), walkBar = el.querySelector("[data-pmwalk]");
+  const scopedFresh = () => ({ ...pmFilterFresh(), painterSet: pmSolo(s) ? s.f.painterSet.slice() : [] });   // "clear the filters" must never drop the one-painter scope
+  const yrRange = () => pmSolo(s) ? pmSoloYears(s.f.painterSet[0], F).r : pmYearRange(F);   // the scrubber's span: one painter's own years, or the whole dataset's
   let walk = [];   // "Walk from here" (David, 2026-10-09): the gallery indices visited this walk, in order; [] when none is active
   let scrubTimer = 0;   // the time scrubber's own Play timer (0 = not playing); lives here, not inside openSheet, so it survives a sheet close/reopen
   let lay = null, W = 0, H = 0, dpr = 1, base = 46;
@@ -1111,7 +1162,8 @@ function pmMount(el, s, F) {
     // bbox check below caught). Matches _qaBBoxFits()'s own corner math.
     const halfW = Math.max(Math.abs(lay.gx0 - P[0]), Math.abs(lay.gx0 + lay.GW - 1 - P[0])) + .7;
     const halfH = Math.max(Math.abs(lay.gy0 - P[1]), Math.abs(lay.gy0 + lay.GH - 1 - P[1])) + .7;
-    const fits = zc => fzAt(zc, halfW) <= W / 2 && fzAt(zc, halfH) <= H / 2;
+    const inset = pmSolo(s) ? soloInset() : 0;   // one-painter map: keep the layout below the filter chip row (symmetric, so it stays centered)
+    const fits = zc => fzAt(zc, halfW) <= W / 2 && fzAt(zc, halfH) <= H / 2 - inset;
     if (fits(1)) return 1;   // already fits at the ordinary zoom (a small/sparse set) -- never force MORE zoom-out than that
     // fits(z) is true for SMALL z (zoomed out, content small on screen) and false for LARGE z (zoomed in,
     // content overflows) -- the opposite monotonicity from honey.js's own search() -- so the bisection here
@@ -1144,6 +1196,8 @@ function pmMount(el, s, F) {
   // genuinely sparse ones this was for.
   const fitZoomFor = l => {
     if (!l.GW || !l.GH || !base) return 1;
+    // one painter's map (a few hundred to ~1,500 works): open with the WHOLE oeuvre in frame, not a 100-tile window onto it
+    if (pmSolo(s)) { const zm = zMin(); if (zm < 1) return zm; }
     const perUnit = Math.min(W / (l.GW + 1.4), H / (l.GH + 1.4));
     return clamp(Math.max(1, perUnit / base), zMin(), ZMAX);
   };
@@ -1227,7 +1281,7 @@ function pmMount(el, s, F) {
   // one sheet instance, so it degrades to a no-op (not an error) whenever the sheet isn't open to show it.
   function scrubUpdateUI() {
     const inp = document.querySelector("[data-pmscrub]");
-    const [lo, hi] = pmYearRange(F), cur = s.upToYear == null ? hi : s.upToYear;
+    const [lo, hi] = yrRange(), cur = s.upToYear == null ? hi : s.upToYear;
     if (inp) inp.value = cur;
     const lab = document.querySelector("[data-pmscrublabel]");
     if (lab) lab.textContent = s.upToYear == null ? "Showing every year" : `Up to ${cur}${cur >= hi ? "" : " (undated paintings join at the end)"}`;
@@ -1235,14 +1289,14 @@ function pmMount(el, s, F) {
     if (btn) { btn.classList.toggle("on", !!scrubTimer); btn.innerHTML = scrubTimer ? PM_ICON.pause : ICON.play; btn.setAttribute("aria-label", scrubTimer ? "Pause" : "Play"); }
   }
   function scrubStep() {
-    const [lo, hi] = pmYearRange(F), cur = s.upToYear == null ? lo : s.upToYear;
-    const next = cur + Math.max(5, Math.round((hi - lo) / 90));
+    const [lo, hi] = yrRange(), cur = s.upToYear == null ? lo : s.upToYear;
+    const next = cur + Math.max(pmSolo(s) ? 2 : 5, Math.round((hi - lo) / 90));
     if (next >= hi) { s.upToYear = null; clearInterval(scrubTimer); scrubTimer = 0; } else s.upToYear = next;
     rebuild(); scrubUpdateUI();
   }
   function scrubPlay() {
     if (scrubTimer) { clearInterval(scrubTimer); scrubTimer = 0; scrubUpdateUI(); return; }
-    const [lo, hi] = pmYearRange(F);
+    const [lo, hi] = yrRange();
     if (s.upToYear == null || s.upToYear >= hi) s.upToYear = lo;
     rebuild(); scrubTimer = setInterval(scrubStep, 420); scrubUpdateUI();
   }
@@ -1663,28 +1717,66 @@ function pmMount(el, s, F) {
 
   // ---- the chrome: back, the static title, one settings button; a removable chip for every active filter
   function chrome() {
-    paintChipbar();
+    paintChipbar(); syncDo();
+  }
+  // a one-painter map gets a LABELED corner (David, 2026-10-20: "an arrange button"); the same bottom-right place and
+  // look as the icon corner every other map has, just wide enough to carry its word. --pmx-dow tells the caption card
+  // how much room to leave.
+  // the bottom edge of the chip row (it wraps to two lines when several filters are on), plus a little air
+  function soloInset() { if (chipbar.hidden) return 0; const r = chipbar.getBoundingClientRect(), c = cv.getBoundingClientRect(); return Math.max(0, r.bottom - c.top) + 8; }
+  function syncDo() {
+    const lab = pmSolo(s);
+    if (doBtn.classList.contains("pmx-do-lab") !== lab) {
+      doBtn.classList.toggle("pmx-do-lab", lab);
+      doBtn.innerHTML = lab ? `${doBtn._html}<span>Arrange</span>` : doBtn._html;
+    }
+    el.style.setProperty("--pmx-dow", lab ? Math.ceil(doBtn.getBoundingClientRect().width || 128) + "px" : "");
   }
   // removable active-filter chips atop the map (David, 2026-10-09): the primary way to SEE and UNDO a filter,
   // whichever way it got set (the Filter tab, or a tap on a painting's own facet) -- opening the sheet is no
   // longer required just to clear one thing.
   function paintChipbar() {
-    const chips = pmActiveChips(s, F);
+    const chips = pmActiveChips(s, F), solo = pmSolo(s);
+    // one-painter map: the painter is the scope, not a filter (no ✕); a quiet count says how much of their work you're
+    // looking at ("212 of 975 paintings", a tap opens Filter); the time scrubber shows up as a chip too; Clear removes
+    // every filter at once while keeping the painter.
+    let total = 0;
+    if (solo) {
+      chips.sort((p, q) => (q.dim === "painter") - (p.dim === "painter"));   // the scope first, then what narrows it
+      if (s.upToYear != null && s.upToYear < yrRange()[1]) chips.push({ dim: "uy", text: "Up to " + s.upToYear });
+      total = pmSoloYears(s.f.painterSet[0], F).total;
+    }
     chipbar.hidden = !chips.length;
     if (!chips.length) return;
-    chipbar.innerHTML = chips.map((c, k) => `<button class="pmx-xchip" data-pmxclear="${k}">${esc(c.text)}<i>${ICON.x}</i></button>`).join("");
+    const nf = solo ? chips.filter(c => c.dim !== "painter").length : 0;
+    chipbar.classList.toggle("pmx-chipbar-wrap", solo);
+    chipbar.innerHTML = chips.map((c, k) => solo && c.dim === "painter"
+      ? `<button class="pmx-xchip pmx-xscope" data-pmxclear="${k}" aria-label="${esc(c.text)}: show every painter">${esc(c.text)}<i>${ICON.x}</i></button><button class="pmx-xchip pmx-xcount" data-pmxfilter aria-label="Filter: ${lay.n.toLocaleString()} of ${total.toLocaleString()} paintings">${lay.n === total ? total.toLocaleString() : lay.n.toLocaleString() + " of " + total.toLocaleString()} ${total === 1 ? "painting" : "paintings"}${PM_ICON.filter}</button>`
+      : `<button class="pmx-xchip" data-pmxclear="${k}">${esc(c.text)}<i>${ICON.x}</i></button>`).join("")
+      + (nf > 1 ? `<button class="pmx-xchip pmx-xall" data-pmxall>Clear all</button>` : "");
     chipbar.querySelectorAll("[data-pmxclear]").forEach(b => b.onclick = () => {
       const c = chips[+b.dataset.pmxclear]; buzz(5);
-      if (c.dim === "fav") s.fav = 0; else pmChipClear(s.f, c.dim);
+      if (c.dim === "uy") { if (scrubTimer) { clearInterval(scrubTimer); scrubTimer = 0; } s.upToYear = null; }
+      else if (c.dim === "fav") s.fav = 0; else pmChipClear(s.f, c.dim);
       rebuild();
     });
+    const cf = chipbar.querySelector("[data-pmxfilter]"); if (cf) cf.onclick = () => { buzz(4); openSheet("filter"); };
+    const ca = chipbar.querySelector("[data-pmxall]"); if (ca) ca.onclick = () => { buzz(6); if (scrubTimer) { clearInterval(scrubTimer); scrubTimer = 0; } s.f = scopedFresh(); s.fav = 0; s.upToYear = null; rebuild(); };
   }
   function build(keepPan) {
     const t0 = performance.now();
+    if (!pmArrOk(s)) { s.arr = "color"; s.seed = -1; }   // e.g. the painter scope was cleared while By museum was showing
     lay = pmLayout(s, F); PM_NOW = { s, lay };
+    if (pmSolo(s)) paintChipbar();   // its real height (one line or two) decides the top inset the fit below uses
     wait.hidden = !!lay.n;
-    if (!lay.n) wait.innerHTML = `Nothing matches all of that. <button class="wl" data-pmloosen>Clear the filters</button>`;
-    const lz = wait.querySelector("[data-pmloosen]"); if (lz) lz.onclick = () => { s.f = pmFilterFresh(); s.fav = 0; rebuild(); };
+    if (!lay.n) {
+      if (pmSolo(s)) {
+        const parts = pmActiveChips(s, F).filter(c => c.dim !== "painter").sort((p, q) => (p.dim === "when") - (q.dim === "when")).map(c => c.text);
+        if (s.upToYear != null) parts.push("up to " + s.upToYear);
+        wait.innerHTML = `${parts.length ? `Nothing in ${esc(parts.join(", "))}.` : "No paintings here."} <button class="wl" data-pmloosen>Loosen the range</button>`;
+      } else wait.innerHTML = `Nothing matches all of that. <button class="wl" data-pmloosen>Clear the filters</button>`;
+    }
+    const lz = wait.querySelector("[data-pmloosen]"); if (lz) lz.onclick = () => { s.f = scopedFresh(); s.fav = 0; if (pmSolo(s)) s.upToYear = null; rebuild(); };
     // David, 2026-10-09 ("Show it on the map opens at a different section, so I don't even see the painting that
     // brought me there"): caption() (below) keeps PM_PAN.set(lay.key, ...) up to date on EVERY center change,
     // including a plain pan with nothing opened -- so a seeded arrangement's remembered pan isn't "where you left
@@ -1699,7 +1791,7 @@ function pmMount(el, s, F) {
     const pinned = PM_NEEDS_SEED.has(s.arr) && s.seed >= 0;
     const mem = pinned ? null : PM_PAN.get(lay.key);
     if (mem && !keepPan) { P = [mem.x, mem.y]; Z = mem.s; }
-    else if (!keepPan) { P = lay.start.slice(); Z = fitZoomFor(lay); const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
+    else if (!keepPan) { P = pmSolo(s) ? [lay.gx0 + (lay.GW - 1) / 2, lay.gy0 + (lay.GH - 1) / 2] : lay.start.slice(); Z = fitZoomFor(lay); const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; if (pmSolo(s) && !pinned) { const zm = zMin(); if (zm < 1) Z = zm; } }   // (the snap above moved P a little: re-fit from where it actually sits)
     if (keepPan) { const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
     Z = clamp(Z, zMin(), ZMAX);
     // the card itself (David, 2026-10-09): opens for a reason -- a seed just pinned the view to one painting
@@ -1729,7 +1821,7 @@ function pmMount(el, s, F) {
     if (document.querySelector(".sheet")) return;
     if (typeof stemJustClosed === "function" && stemJustClosed()) return;   // a ghost click right after closing must not reopen it (js/core.js)
     let tab = startTab === "filter" ? "filter" : "arrange";
-    let fopen = { co: false, painter: false, mv: false, mus: false }, fq = "", coq = "";
+    let fopen = { co: false, painter: false, mv: false, mus: false }, fq = "", coq = "", curPresets = PM_TIME_PRESETS;
     const tabsHTML = `<div class="hm-ch-tabs pmx-tabs" role="tablist" aria-label="Arrange or filter the painting map">
         <button class="hm-ch-tab" data-tab="arrange" role="tab">Arrange</button>
         <button class="hm-ch-tab" data-tab="filter" role="tab">Filter</button>
@@ -1769,10 +1861,10 @@ function pmMount(el, s, F) {
       const mid = centerK >= 0 ? lay.items[centerK] : -1, md = mid >= 0 ? pmDetailNow(mid, F) : null;
       const list = pmList(s, F);
       paneArr.innerHTML = `
-        <div class="cx-sec"><b>Collection</b></div>
-        <div class="hm-seg pmx-col-seg" role="radiogroup" aria-label="Collection">${PM_COLLECTIONS.map(([k, t]) => `<button class="${(s.col || "paintings") === k ? "on" : ""}" data-pmcol="${k}">${esc(t)}</button>`).join("")}</div>
+        ${pmSolo(s) ? "" : `<div class="cx-sec"><b>Collection</b></div>
+        <div class="hm-seg pmx-col-seg" role="radiogroup" aria-label="Collection">${PM_COLLECTIONS.map(([k, t]) => `<button class="${(s.col || "paintings") === k ? "on" : ""}" data-pmcol="${k}">${esc(t)}</button>`).join("")}</div>`}
         <div class="cx-sec"><b>Shape</b></div>
-        <div class="hm-arr pmx-arr" role="radiogroup" aria-label="Arrange by">${PM_ARR.map(([k, t]) => `
+        <div class="hm-arr pmx-arr" role="radiogroup" aria-label="Arrange by">${pmArrFor(s).map(([k, t]) => `
           <button class="hm-arr-b${s.arr === k ? " on" : ""}" data-pmarr="${k}" role="radio" aria-checked="${s.arr === k}">
             <span class="hm-arr-pic">${PM_ICON[k]}</span><b>${esc(t)}</b></button>`).join("")}</div>
         <p class="hm-arr-sub">${PM_NEEDS_SEED.has(s.arr) && md ? `Around ${esc(md.t)}` : esc(PM_WHY[s.arr])}</p>
@@ -1784,10 +1876,10 @@ function pmMount(el, s, F) {
           const found = t === "A favorite" ? pmFavList(F).length : true;
           return `<button data-pmcenterk="${k}"${found ? "" : " disabled"}>${esc(t)}</button>`;
         }).join("")}</div>
-        <div class="cx-sec"><b>When</b></div>
-        <div class="pmx-scrub"><input type="range" min="${pmYearRange(F)[0]}" max="${pmYearRange(F)[1]}" step="5" value="${s.upToYear == null ? pmYearRange(F)[1] : s.upToYear}" data-pmscrub aria-label="Reveal paintings up to this year">
+        <div class="cx-sec"><b>${pmSolo(s) ? "Watch it grow" : "When"}</b></div>
+        <div class="pmx-scrub"><input type="range" min="${yrRange()[0]}" max="${yrRange()[1]}" step="${pmSolo(s) ? 1 : 5}" value="${s.upToYear == null ? yrRange()[1] : s.upToYear}" data-pmscrub aria-label="Reveal paintings up to this year"${pmSolo(s) ? ' data-solo' : ""}>
           <button class="pmx-scrub-play${scrubTimer ? " on" : ""}" data-pmscrubplay aria-label="${scrubTimer ? "Pause" : "Play"}">${scrubTimer ? PM_ICON.pause : ICON.play}</button></div>
-        <p class="hm-arr-sub" data-pmscrublabel>${s.upToYear == null ? "Showing every year" : `Up to ${s.upToYear}${s.upToYear >= pmYearRange(F)[1] ? "" : " (undated paintings join at the end)"}`}</p>`;
+        <p class="hm-arr-sub" data-pmscrublabel>${s.upToYear == null ? "Showing every year" : `Up to ${s.upToYear}${s.upToYear >= yrRange()[1] ? "" : " (undated paintings join at the end)"}`}</p>`;
       qa$("[data-pmcol]").forEach(b => b.onclick = () => {
         const col = b.dataset.pmcol; if (col === (s.col || "paintings")) return;
         buzz(6); close();
@@ -1812,7 +1904,7 @@ function pmMount(el, s, F) {
       });
       q$("[data-pmscrub]").oninput = e => {
         if (scrubTimer) { clearInterval(scrubTimer); scrubTimer = 0; }
-        const v = +e.target.value, [, hi] = pmYearRange(F); s.upToYear = v >= hi ? null : v; rebuild(); renderArrange();
+        const v = +e.target.value, [, hi] = yrRange(); s.upToYear = v >= hi ? null : v; rebuild(); renderArrange();
       };
       q$("[data-pmscrubplay]").onclick = () => { buzz(6); scrubPlay(); renderArrange(); };
       // Magnify (David, 2026-10-10): live-applied without a full rebuild() -- M0N only feeds the lens (M0/A via
@@ -1835,16 +1927,18 @@ function pmMount(el, s, F) {
       const favIds = pmFavList(F), favSet = new Set(favIds.map(r => r.i));
       if (s.fav) n = Array.from(res.list).filter(i => favSet.has(i)).length;
       const favN = Array.from(res.list).filter(i => favSet.has(i)).length;
-      const chip = (attr, val, label, cnt, on) => `<button class="${on ? "on" : ""}" ${attr}="${esc(String(val))}"${!cnt && !on ? " disabled" : ""}>${esc(label)}${cnt != null ? `<em>${cnt.toLocaleString()}</em>` : ""}</button>`;
+      const chip = (attr, val, label, cnt, on, dot) => `<button class="${on ? "on" : ""}" ${attr}="${esc(String(val))}"${cnt != null && !cnt && !on ? " disabled" : ""}>${dot ? `<i class="pmx-dot" style="--c:${dot}"></i>` : ""}${esc(label)}${cnt != null ? `<em>${cnt.toLocaleString()}</em>` : ""}</button>`;
       const f = s.f;
       const topMulti = (names, countArr, selSet) => names.map((name, j) => ({ name, v: j + 1, n: countArr[j + 1] })).filter(x => x.n || selSet.has(x.v)).sort((a, b) => b.n - a.n);
-      const [yrLo, yrHi] = pmYearRange(F);
+      const solo = pmSolo(s), sy = solo ? pmSoloYears(f.painterSet[0], F) : null;
+      const [yrLo, yrHi] = yrRange();
       const y0 = f.y0 == null ? yrLo : f.y0, y1 = f.y1 == null ? yrHi : f.y1;
       const dLo = Math.max(0, Math.floor((yrLo - XB_DEC0) / 10)), dHi = Math.min(XB_NDEC - 1, Math.floor((yrHi - XB_DEC0) / 10));
       const decadeBars = Array.from({ length: dHi - dLo + 1 }, (_, k) => C.when[dLo + k]);
       const maxDecade = Math.max(1, ...decadeBars);
-      const pct = y => clamp((y - yrLo) / (yrHi - yrLo) * 100, 0, 100);
-      const activePreset = PM_TIME_PRESETS.find(p => p[2] === f.y0 && p[3] === f.y1);
+      const pct = y => clamp((y - yrLo) / Math.max(1, yrHi - yrLo) * 100, 0, 100);
+      curPresets = solo ? pmSoloPresets(sy) : PM_TIME_PRESETS;
+      const activePreset = curPresets.find(p => p[2] === f.y0 && p[3] === f.y1);
       const cols = [...BASICS, ...ALL].filter(c => !c.basic || /^(Red|Blue|Green|Yellow|Pink|Purple|Orange|Brown)$/.test(c.n));
       const colsSorted = typeof glHueOrder === "function" ? glHueOrder(cols) : cols;
       const coSelSet = new Set(f.coSet || []), mvSelSet = new Set(f.mvSet || []), musSelSet = new Set(f.musSet || []), paSelSet = new Set(f.painterSet || []);
@@ -1861,7 +1955,38 @@ function pmMount(el, s, F) {
       }).join("");
       const nounP = pmColLabel(F, "nounP"), isPaintings = !F.col || F.col === "paintings";
       const painterLab = pmColLabel(F, "painter"), coLab = pmColLabel(F, "co"), musLab = pmColLabel(F, "mus"), mvLab = pmColLabel(F, "mv");
-      q$("[data-pmbody]").innerHTML = `
+      // the pieces, composed in the usual order for a map of many painters, or in the order a one-painter map wants
+      const hueChips = XB_HUE_WORDS.map((w, j) => chip("data-pmhue", j, w, C.hueBand[j], f.hueBand === j, solo ? PM_HUE_DOT[j] : null)).join("");
+      const lightHTML = `<div class="pmx-range2" style="--lo:${f.l0 == null ? 0 : f.l0}%;--hi:${f.l1 == null ? 100 : f.l1}%">
+            <input type="range" min="0" max="100" value="${f.l0 == null ? 0 : f.l0}" data-pml0 aria-label="Darker than">
+            <input type="range" min="0" max="100" value="${f.l1 == null ? 100 : f.l1}" data-pml1 aria-label="Lighter than"></div>
+          <p class="pmx-cap3"><span>Dark</span><span>Light</span></p>`;
+      const swHTML = `<div class="pmx-sw">${colsSorted.map(c => `<button data-pmhex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" class="${f.hexes.includes(c.h.toUpperCase()) ? "on" : ""}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
+          ${f.hexes.length ? `<p class="pmx-cap2">${f.hexes.map(h => `<i style="--c:${h}"></i>`).join("")}${esc(f.hexes.length === 1 ? (f.name || nameOf(f.hexes[0]).text) : f.hexes.length + " colors")} <span>· within ${f.tol}%</span></p>
+          <div class="pmx-scrub"><span class="pmx-lab2">Closeness</span><input type="range" min="1" max="30" step="1" value="${f.tol}" data-pmtol aria-label="Color closeness"></div>
+          ${f.hexes.length > 1 ? `<div class="hm-seg pmx-colmode" role="radiogroup" aria-label="Match any or all colors"><button class="${(f.colorMode || "any") === "any" ? "on" : ""}" data-pmcolmode="any">Any</button><button class="${f.colorMode === "all" ? "on" : ""}" data-pmcolmode="all">All</button></div>` : ""}` : ""}`;
+      const whenHTML = `${curPresets.length ? `<div class="pmx-chips">${curPresets.map(([k, t2]) => chip("data-pmpreset", k, t2, null, activePreset && activePreset[0] === k)).join("")}</div>` : ""}
+          <div class="pmx-hist" aria-hidden="true">${decadeBars.map(n2 => `<i style="--h:${Math.max(.04, n2 / maxDecade)}"></i>`).join("")}</div>
+          <div class="pmx-range2" style="--lo:${pct(y0)}%;--hi:${pct(y1)}%">
+            <input type="range" min="${yrLo}" max="${yrHi}" step="1" value="${y0}" data-pmy0 aria-label="From year">
+            <input type="range" min="${yrLo}" max="${yrHi}" step="1" value="${y1}" data-pmy1 aria-label="To year"></div>
+          <p class="pmx-cap3"><span>${y0}</span><span>${y1}</span></p>`;
+      const musSorted = solo ? musAll.slice().sort((p, q) => q.n - p.n) : musAll, musShow = solo && !fopen.mus ? musSorted.filter((x, k) => k < 8 || musSelSet.has(x.v)) : musSorted;
+      const musMore = solo && !fopen.mus && musSorted.length > musShow.length ? `<button class="pmx-more" data-pmmore="mus">All ${musSorted.length}</button>` : "";
+      const favRow = favIds.length ? `<div class="pmx-row"><span class="pmx-lab">Yours</span><div class="pmx-chips">${chip("data-pmfav", 1, "Your favorites", favN, !!s.fav)}</div></div>` : "";
+      if (solo) q$("[data-pmbody]").innerHTML = `
+        <div class="pmx-sh-top"><b>Filter</b><span>${n === sy.total ? n.toLocaleString() : n.toLocaleString() + " of " + sy.total.toLocaleString()} ${sy.total === 1 ? pmColLabel(F, "noun") : nounP}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
+        ${n ? "" : `<p class="pmx-none">Nothing matches all of that. Loosen a range, or Reset.</p>`}
+        ${favRow}
+        <div class="pmx-row"><span class="pmx-lab">Color family</span><div class="pmx-chips">${hueChips}</div>
+          <p class="pmx-lab2">Lightness</p>${lightHTML}</div>
+        ${yrHi > yrLo ? `<div class="pmx-row"><span class="pmx-lab">Years</span>${whenHTML}</div>` : ""}
+        <div class="pmx-row"><span class="pmx-lab">A color you pick</span>${swHTML}</div>
+        ${musSorted.length > 1 ? `<div class="pmx-row"><span class="pmx-lab">${esc(musLab)}</span><div class="pmx-chips">${musShow.map(x => chip("data-pmmus", x.v, x.name, x.n, musSelSet.has(x.v))).join("")}${musMore}</div></div>` : ""}
+        <div class="pmx-row"><span class="pmx-lab">Add another ${esc(painterLab.toLowerCase())}</span>
+          <label class="search pmx-find"><span>${ICON.search}</span><input data-pmq type="search" placeholder="Find a ${esc(painterLab.toLowerCase())}" value="${esc(fq)}" autocomplete="off"></label>
+          <div class="pmx-chips">${pList.map(x => chip("data-pmp", x.v, x.name, x.n, paSelSet.has(x.v))).join("")}</div></div>`;
+      else q$("[data-pmbody]").innerHTML = `
         <div class="pmx-sh-top"><b>Filter</b><span>${n.toLocaleString()} ${n === 1 ? pmColLabel(F, "noun") : nounP}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
         ${favIds.length ? `<div class="pmx-row"><span class="pmx-lab">Yours</span><div class="pmx-chips">${chip("data-pmfav", 1, "Your favorites", favN, !!s.fav)}</div></div>` : ""}
         <div class="pmx-row"><span class="pmx-lab">Color</span><div class="pmx-sw">${colsSorted.map(c => `<button data-pmhex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" class="${f.hexes.includes(c.h.toUpperCase()) ? "on" : ""}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
@@ -1894,27 +2019,27 @@ function pmMount(el, s, F) {
           <label class="search pmx-find"><span>${ICON.search}</span><input data-pmq type="search" placeholder="Find a ${esc(painterLab.toLowerCase())}" value="${esc(fq)}" autocomplete="off"></label>
           <div class="pmx-chips">${pList.map(x => chip("data-pmp", x.v, x.name, x.n, paSelSet.has(x.v))).join("")}${!fq && !fopen.painter && pas.length > 10 ? `<button class="pmx-more" data-pmmore="painter">More ${esc(nounP)}</button>` : ""}</div></div>`;
       const inp = q$("[data-pmq]");
-      inp.oninput = () => { fq = inp.value.trim(); const pos = inp.selectionStart; renderFilter(); const ni = q$("[data-pmq]"); ni.focus(); try { ni.setSelectionRange(pos, pos); } catch (e) {} };
+      if (inp) inp.oninput = () => { fq = inp.value.trim(); const pos = inp.selectionStart; renderFilter(); const ni = q$("[data-pmq]"); ni.focus(); try { ni.setSelectionRange(pos, pos); } catch (e) {} };
       const coInp = q$("[data-pmcoq]");
-      coInp.oninput = () => { coq = coInp.value.trim(); const pos = coInp.selectionStart; renderFilter(); const ni = q$("[data-pmcoq]"); ni.focus(); try { ni.setSelectionRange(pos, pos); } catch (e) {} };
+      if (coInp) coInp.oninput = () => { coq = coInp.value.trim(); const pos = coInp.selectionStart; renderFilter(); const ni = q$("[data-pmcoq]"); ni.focus(); try { ni.setSelectionRange(pos, pos); } catch (e) {} };
       // live range sliders: 'input' (not the delegated click below) for drag feedback, kept from crossing past
       // each other the same way a dual-handle slider always must (y0 can't pass y1, l0 can't pass l1)
       const tolInp = q$("[data-pmtol]"); if (tolInp) tolInp.oninput = e => { f.tol = +e.target.value; buzz(2); rebuild(); renderFilter(); };
-      q$("[data-pmy0]").oninput = e => { f.y0 = Math.min(+e.target.value, f.y1 == null ? yrHi : f.y1); buzz(2); rebuild(); renderFilter(); };
-      q$("[data-pmy1]").oninput = e => { f.y1 = Math.max(+e.target.value, f.y0 == null ? yrLo : f.y0); buzz(2); rebuild(); renderFilter(); };
+      const yIn = q$("[data-pmy0]"); if (yIn) yIn.oninput = e => { f.y0 = Math.min(+e.target.value, f.y1 == null ? yrHi : f.y1); buzz(2); rebuild(); renderFilter(); };
+      if (yIn) q$("[data-pmy1]").oninput = e => { f.y1 = Math.max(+e.target.value, f.y0 == null ? yrLo : f.y0); buzz(2); rebuild(); renderFilter(); };
       q$("[data-pml0]").oninput = e => { f.l0 = Math.min(+e.target.value, f.l1 == null ? 100 : f.l1); buzz(2); rebuild(); renderFilter(); };
       q$("[data-pml1]").oninput = e => { f.l1 = Math.max(+e.target.value, f.l0 == null ? 0 : f.l0); buzz(2); rebuild(); renderFilter(); };
     }
     paneFilt.addEventListener("click", e => {
       const b = e.target.closest("button"); if (!b || b.disabled) return;
       const f = s.f, d = b.dataset;
-      if (d.pmreset != null) { s.f = pmFilterFresh(); s.fav = 0; fq = ""; coq = ""; buzz(6); rebuild(); return renderFilter(); }
+      if (d.pmreset != null) { s.f = scopedFresh(); s.fav = 0; if (pmSolo(s)) s.upToYear = null; fq = ""; coq = ""; buzz(6); rebuild(); return renderFilter(); }
       if (d.pmmore) { fopen[d.pmmore] = true; return renderFilter(); }
       if (d.pmfav != null) s.fav = s.fav ? 0 : 1;
       else if (d.pmhex) { const h = d.pmhex.toUpperCase(), at = f.hexes.indexOf(h); if (at >= 0) { f.hexes.splice(at, 1); if (!f.hexes.length) f.name = ""; } else { f.hexes.push(h); if (f.hexes.length === 1) { f.name = d.name; f.tol = f.tol || 8; } } }
       else if (d.pmcolmode) f.colorMode = d.pmcolmode;
       else if (d.pmhue) f.hueBand = f.hueBand === +d.pmhue ? null : +d.pmhue;
-      else if (d.pmpreset) { const p = PM_TIME_PRESETS.find(x => x[0] === d.pmpreset), on = f.y0 === p[2] && f.y1 === p[3]; f.y0 = on ? null : p[2]; f.y1 = on ? null : p[3]; }
+      else if (d.pmpreset) { const p = curPresets.find(x => x[0] === d.pmpreset), on = f.y0 === p[2] && f.y1 === p[3]; f.y0 = on ? null : p[2]; f.y1 = on ? null : p[3]; }
       else if (d.pmregion) pmRegionToggle(f, d.pmregion, F);
       else if (d.pmco) { const v = +d.pmco, set = new Set(f.coSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.coSet = [...set]; f.region = null; }
       else if (d.pmmv) { const v = +d.pmmv, set = new Set(f.mvSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.mvSet = [...set]; }
@@ -1987,6 +2112,6 @@ if (typeof routeWrapAll === "function") routeWrapAll();
 if (typeof featureRegister === "function") {
   featureRegister("paintings-floor", { t: "Paintings", where: "Map · ⋯ · Colors | Paintings", words: "paintings map archive gallery by color",
     run: () => { if (typeof S !== "undefined") { S.hm = S.hm || {}; S.hm.mode = "paintings"; } pmGo("arr=color"); } });
-  PM_ARR.forEach(([id, title]) => featureRegister("pm-arr-" + id, { t: `Paintings: ${title}`, where: "Paintings · ⋯ · Arrange",
+  PM_ARR.filter(a => a[2] !== "solo").forEach(([id, title]) => featureRegister("pm-arr-" + id, { t: `Paintings: ${title}`, where: "Paintings · ⋯ · Arrange",
     words: "paintings arrange arrangement shape " + title.toLowerCase(), run: () => { if (typeof S !== "undefined") { S.hm = S.hm || {}; S.hm.mode = "paintings"; } pmGo("arr=" + id); } }));
 }

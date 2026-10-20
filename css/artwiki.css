@@ -312,3 +312,21 @@
 .aw-cx-tr u::before{content:"";position:absolute;left:6px;bottom:14px;width:2px;height:28px;background:var(--ink);opacity:.5}
 .aw-cx-ax{display:flex;justify-content:space-between;margin-top:10px;font:italic 400 17px/1 var(--serif);color:var(--faint)}
 @media (max-width:374px){.aw-cx-h{flex-wrap:wrap}.aw-cx-h em{text-align:left}}
+
+/* painter page: the map button up top (the page's one paper button), direction arrow in the active sort chip,
+   and the Palettes / Size chips (David, 2026-10-20) */
+.aw-pmap-top{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:52px;margin:16px 0 0;padding:0 22px;border:0;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);font:400 21px/1 var(--serif);letter-spacing:-.01em;transition:opacity .2s}
+.aw-pmap-top:active{opacity:.7}
+.aw-pmap-top svg{width:20px;height:20px;flex:none;color:var(--paper-ink)}
+.aw-chipbtn{display:inline-flex;align-items:center;gap:6px}
+.aw-chipbtn:active{opacity:.7}
+.aw-dirarr{display:inline-flex}
+.aw-dirarr svg{width:15px;height:15px}
+.aw-wk-look[hidden]{display:none}
+
+/* one calm row: sort picker, Palettes, Size (coordinator review, 2026-10-20) */
+.aw-wk-look{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}
+.aw-look2{display:contents}
+.aw-look2[hidden]{display:none}
+.aw-wk-look .aw-chipbtn{padding:0 10px;letter-spacing:0;white-space:nowrap}
+.aw-sortsel{appearance:none;-webkit-appearance:none;padding-right:26px!important;color:var(--ink);cursor:pointer;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23b9b4aa' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9l7 7 7-7'/%3E%3C/svg%3E") no-repeat right 9px center}

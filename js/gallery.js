@@ -375,8 +375,9 @@ function glSimilar(i, k = 5) {
 function glPinHTML(i, o = {}) {
   const d = glDetailNow(i), pal = glPal(i), dom = pal.reduce((a, b) => b.share > a.share ? b : a);
   const box = o.imH ? `height:${o.imH}px` : `aspect-ratio:${(1 / glAR(i)).toFixed(3)}`;
-  return `<button class="gl-pin${d ? "" : " wait"}" data-gi="${i}"${o.pos ? ` style="${o.pos}"` : ""}><span class="gl-im" style="--c:${dom.h};${box}">${d ? `<img src="${esc(d.img)}" alt="" loading="lazy" decoding="async"${glCropStyle(i, d, glAR(i))}>` : ""}${o.badge ? `<span class="gl-badge">${esc(o.badge)}</span>` : ""}</span>`
-    + `<span class="mini-pal">${pal.map(c => `<i style="--c:${c.h};flex:${c.share.toFixed(3)}"></i>`).join("")}</span><b>${d ? esc(d.t) : ""}</b><small>${d ? glByline(i, d) : ""}</small></button>`;
+  const pl = o.plain ? " plain" : "";
+  return `<button class="gl-pin${pl}${d ? "" : " wait"}" data-gi="${i}"${o.pos ? ` style="${o.pos}"` : ""}${o.plain && d ? ` aria-label="${esc(d.t)}"` : ""}><span class="gl-im" style="--c:${dom.h};${box}">${d ? `<img src="${esc(d.img)}" alt="" loading="lazy" decoding="async"${glCropStyle(i, d, glAR(i))}>` : ""}${o.badge && !o.plain ? `<span class="gl-badge">${esc(o.badge)}</span>` : ""}</span>`
+    + (o.plain ? `</button>` : `<span class="mini-pal">${pal.map(c => `<i style="--c:${c.h};flex:${c.share.toFixed(3)}"></i>`).join("")}</span><b>${d ? esc(d.t) : ""}</b>${o.noByline ? "" : `<small>${d ? glByline(i, d) : ""}</small>`}</button>`);
 }
 // fill in the pins under root that are still waiting for their shard
 function glFill(root) {
@@ -387,26 +388,37 @@ function glFill(root) {
     const i = +el.dataset.gi, d = glDetailNow(i); if (!d) return;
     el.classList.remove("wait");
     el.querySelector(".gl-im").insertAdjacentHTML("afterbegin", `<img src="${esc(d.img)}" alt="" loading="lazy" decoding="async"${glCropStyle(i, d, glAR(i))}>`);
-    el.querySelector("b").textContent = d.t; el.querySelector("small").innerHTML = glByline(i, d);
+    const tb = el.querySelector("b"), sm = el.querySelector("small");   // plain pins (pictures only) have neither
+    if (el.classList.contains("plain")) el.setAttribute("aria-label", d.t);
+    if (tb) tb.textContent = d.t; if (sm) sm.innerHTML = glByline(i, d);
   })).catch(() => {}));
 }
-// The virtualized masonry: two columns, each pin in the shorter one. Pins are placed in order and each goes to the
-// shorter column, so their tops never decrease: a binary search finds the first pin near the screen.
+// The virtualized masonry: N columns (2 to 5), each pin in the shortest one. Pins are placed in order and each goes to
+// the shortest column, so their tops never decrease: a binary search finds the first pin near the screen.
+// res.cols = starting columns; res.plain = pictures only; res.pinch = pinch steps the columns (anchored under the
+// fingers) and res.onCols(n) hears every change. Four or more columns are always pictures only: no room for text.
+const GL_GAPS = { 2: [14, 22], 3: [10, 16], 4: [6, 6], 5: [4, 4] };
 function glGrid(host, res) {
-  const list = res.list, n = list.length, gap = 14, vgap = 22, live = new Map();
-  let W = 0, colW = 0, top, col, hh;
+  const list = res.list, n = list.length, live = new Map();
+  let cols = Math.max(2, Math.min(5, res.cols | 0 || 2)), plain = !!res.plain;
+  let W = 0, colW = 0, gap = 14, vgap = 22, txt = GL_TXT, top, col, hh;
+  const isPlain = () => plain || cols >= 4;
   const layout = () => {
-    W = host.clientWidth || Math.min(innerWidth, 540) - 44; colW = (W - gap) / 2;
+    W = host.clientWidth || Math.min(innerWidth, 540) - 44;
+    [gap, vgap] = GL_GAPS[cols]; txt = isPlain() ? 0 : cols === 3 ? GL_TXT - 19 : GL_TXT;
+    colW = (W - gap * (cols - 1)) / cols;   // 3 across: palette + title only, the byline has no room
     top = new Float32Array(n); col = new Uint8Array(n); hh = new Float32Array(n);
-    let c0 = 0, c1 = 0;
+    const ends = new Array(cols).fill(0);
     for (let k = 0; k < n; k++) {
-      const h = Math.round(colW * glAR(list[k])) + GL_TXT; hh[k] = h;
-      if (c0 <= c1) { top[k] = c0; c0 += h + vgap; } else { top[k] = c1; col[k] = 1; c1 += h + vgap; }
+      const h = Math.round(colW * glAR(list[k])) + txt; hh[k] = h;
+      let c = 0; for (let j = 1; j < cols; j++) if (ends[j] < ends[c]) c = j;
+      top[k] = ends[c]; col[k] = c; ends[c] += h + vgap;
     }
-    host.style.height = Math.max(0, Math.max(c0, c1) - vgap) + "px";
+    host.style.height = Math.max(0, Math.max(...ends) - vgap) + "px";
   };
   const draw = () => {
     if (!host.isConnected || host.offsetParent === null) return;
+    const cw = host.clientWidth; if (cw > 40 && Math.abs(cw - W) > 1) relayout();   // laid out while the page was still narrow or hidden
     const r = host.getBoundingClientRect(), y0 = -r.top - 600, y1 = -r.top + innerHeight + 1000;
     let lo = 0, hi = n;
     while (lo < hi) { const m = (lo + hi) >> 1; if (top[m] < y0 - 900) lo = m + 1; else hi = m; }
@@ -415,8 +427,8 @@ function glGrid(host, res) {
     live.forEach((el, k) => { if (!want.has(k)) { el.remove(); live.delete(k); } });
     const add = [...want].filter(k => !live.has(k));
     if (add.length) {
-      const tmp = document.createElement("div");
-      tmp.innerHTML = add.map(k => glPinHTML(list[k], { imH: hh[k] - GL_TXT, badge: res.badge && res.badge(list[k]), pos: `left:${col[k] ? colW + gap : 0}px;top:${top[k]}px;width:${colW}px;height:${hh[k]}px` })).join("");
+      const tmp = document.createElement("div"), pl = isPlain();
+      tmp.innerHTML = add.map(k => glPinHTML(list[k], { imH: hh[k] - txt, plain: pl, noByline: !pl && cols === 3, badge: res.badge && res.badge(list[k]), pos: `left:${col[k] * (colW + gap)}px;top:${top[k]}px;width:${colW}px;height:${hh[k]}px` })).join("");
       [...tmp.children].forEach((el, j) => { live.set(add[j], el); host.appendChild(el); });
       glFill(host);
     }
@@ -424,14 +436,47 @@ function glGrid(host, res) {
   };
   let raf = 0;
   const onScroll = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; draw(); }); };
-  const onResize = () => { if (Math.abs((host.clientWidth || W) - W) > 1) { layout(); live.forEach(el => el.remove()); live.clear(); } draw(); };
+  const relayout = () => { layout(); live.forEach(el => el.remove()); live.clear(); };
+  const onResize = () => { if (Math.abs((host.clientWidth || W) - W) > 1) relayout(); draw(); };
   addEventListener("scroll", onScroll, { passive: true });
   addEventListener("resize", onResize);
+  // change the columns, keeping the painting under (fx, fy) (viewport px) exactly where it is
+  const setCols = (c, fx, fy) => {
+    c = Math.max(2, Math.min(5, c)); if (c === cols || !n) return false;
+    const vy = fy == null ? innerHeight / 2 : fy, r = host.getBoundingClientRect(), y = vy - r.top, x = (fx == null ? W / 2 : fx) - r.left;
+    const cx = Math.max(0, Math.min(cols - 1, Math.floor(x / (colW + gap))));
+    let a = 0; for (let k = 0; k < n; k++) if (col[k] === cx && top[k] <= y) a = k;
+    const frac = hh[a] ? Math.max(0, Math.min(1, (y - top[a]) / hh[a])) : 0;
+    cols = c; relayout();
+    const r2 = host.getBoundingClientRect();
+    scrollBy(0, r2.top + top[a] + frac * hh[a] - vy);
+    draw(); if (res.onCols) res.onCols(cols);
+    return true;
+  };
+  const setPlain = v => { plain = !!v; relayout(); draw(); };
+  // two fingers: spreading apart (zoom in) means fewer, bigger paintings; pinching in means more. One step per ~28% change
+  let pd = 0;
+  const dist = t => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+  const mid = t => [(t[0].clientX + t[1].clientX) / 2, (t[0].clientY + t[1].clientY) / 2];
+  const onTS = e => { if (e.touches.length === 2) { pd = dist(e.touches); e.stopPropagation(); } else pd = 0; };
+  const onTM = e => {
+    if (!pd || e.touches.length !== 2) return;
+    e.preventDefault(); e.stopPropagation();
+    const d = dist(e.touches), ratio = d / pd, m = mid(e.touches);
+    if (ratio > 1.28 || ratio < 0.78) { if (setCols(cols + (ratio > 1 ? -1 : 1), m[0], m[1])) buzz(6); pd = d; }
+  };
+  const onTE = e => { if (e.touches.length < 2) pd = 0; };
+  if (res.pinch) {
+    host.style.touchAction = "pan-y"; host.setAttribute("data-nopull", "");
+    host.addEventListener("touchstart", onTS, { passive: false });
+    host.addEventListener("touchmove", onTM, { passive: false });
+    host.addEventListener("touchend", onTE, { passive: true }); host.addEventListener("touchcancel", onTE, { passive: true });
+  }
   const destroy = () => { removeEventListener("scroll", onScroll); removeEventListener("resize", onResize); cancelAnimationFrame(raf); live.clear(); };
   cleanup.push(destroy);
   host.innerHTML = "";
   layout(); draw();
-  return { draw, destroy };
+  return { draw, destroy, setCols, setPlain, get cols() { return cols; } };
 }
 
 // ---------- the Paintings lens ----------

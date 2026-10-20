@@ -420,3 +420,7 @@
 .gl-pe-acts{display:flex;gap:10px;margin-top:16px}
 .gl-pe-acts .gl-pa-btn{flex:1;justify-content:center}
 .gl-pe-save{flex:2}
+
+/* pictures-only pins (painter page: Palettes off, or 4 and 5 across) */
+.gl-pin.plain{contain:layout paint}
+.gl-pin.plain .gl-im{height:100%}
