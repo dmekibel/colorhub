@@ -25,11 +25,11 @@ function checkIds() {
   const files = [];
   if (has("data/corpus.json")) files.push("data/corpus.json");
   if (has("data/corpus")) fs.readdirSync(path.join(ROOT, "data/corpus")).filter(f => f.endsWith(".json")).sort().forEach(f => files.push("data/corpus/" + f));
-  const seen = new Set();
+  const seen = new Set(), nonp = has("data/corpus-nonpaintings.json") ? new Set(rj("data/corpus-nonpaintings.json").map(x => x.id)) : new Set();
   for (const f of files) {
     let data = rj(f);
     if (!Array.isArray(data)) data = data.rows || [];
-    for (const x of data) if (!seen.has(x.id) && x.img && (x.p || []).length === 6) seen.add(x.id);
+    for (const x of data) if (!seen.has(x.id) && !nonp.has(x.id) && x.img && (x.p || []).length === 6) seen.add(x.id);
   }
   const corpusN = seen.size;
 
@@ -73,6 +73,23 @@ function checkIds() {
   if (oob) err(`data/artists/p/*.json: ${oob} gallery indices outside 0..${N - 1}: ${FIX_AW}`);
   if (wrong) err(`data/artists/p/*.json: ${wrong} gallery indices point at another painter's painting: ${FIX_AW}`);
   if (kOff.length) warn(`data/artists/meta.json k (paintings per painter) is stale for ${kOff.length} painter(s): ${kOff.slice(0, 3).join("; ")}: rebuild with tools/wikidata_artists.py`);
+
+  // 5. every other file that stores a gallery index (2026-10-20: portraits.json kept the 2026-10-09 order for ten days, so Van Gogh's
+  //    page showed a Bonnard and a Vermeer; nothing checked it). Each stored index must point at that painter's own painting.
+  if (has("data/artists/portraits.json")) {
+    const pa = rj("data/artists/portraits.json").a || {};
+    let bad = 0, total = 0;
+    for (const [slug, r] of Object.entries(pa)) {
+      const m = meta[slug]; if (!m) continue;
+      const por = r.portrait && r.portrait.src === "self" ? r.portrait.gi : null;   // src "other" is a portrait BY someone else, so it rightly names another painter
+      const gis = [...((r.famous) || []), por].filter(g => g != null && g >= 0);
+      for (const g of gis) { total++; if (!(g < N) || names[g] !== m.n) bad++; }
+    }
+    if (bad) err(`data/artists/portraits.json: ${bad} of ${total} stored gallery indices point at another painter's painting: rebuild with tools/artwiki_portraits.py`);
+  }
+  if (has("data/gallery/thumbs.txt")) { const tl = rd("data/gallery/thumbs.txt").split("\n").filter(Boolean).length; if (tl !== N) err(`data/gallery/thumbs.txt has ${tl} lines, the gallery ${N}: rebuild with tools/paintmap_thumbs.py`); }
+  else err("data/gallery/thumbs.txt is missing (tools/gallery.py deletes it): rebuild with tools/paintmap_thumbs.py");
+  if (has("data/paintmap/manifest.json")) { const mn = rj("data/paintmap/manifest.json").n; if (mn !== N) err(`data/paintmap/manifest.json n=${mn}, the gallery ${N}: the painting map atlas is out of date: python3 tools/paintmap_atlas.py clean && python3 tools/paintmap_atlas.py build`); }
   return { errors, warnings, N };
 }
 

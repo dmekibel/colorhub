@@ -142,6 +142,17 @@ def load_nonpaintings():
     return {x["id"] for x in json.loads(f.read_text(encoding="utf-8"))} if f.exists() else set()
 
 
+def _clear_impossible_year(x):
+    """A painting dated outside its painter's lifetime (+-1) carries a restoration, catalogue or sitter date, not the date it
+    was painted: clear it to "undated" (tools/audit_artists.py LIFE, 2026-10-20). Only for the painters listed there."""
+    from audit_artists import LIFE
+    span = LIFE.get(x.get("a"))
+    y = x.get("y")
+    if span and y is not None and not (span[0] - 1 <= y <= span[1] + 1):
+        return dict(x, y=None)
+    return x
+
+
 def load_corpus(aliases=True):
     """Corpus rows in gallery order. With aliases (the default) a painter's spelling variants are folded into one
     name ("Hilaire Germain Edgar Degas" -> "Edgar Degas") so every later stage sees one identity per painter."""
@@ -159,6 +170,7 @@ def load_corpus(aliases=True):
             seen.add(x["id"])
             if x.get("a") in al:
                 x = dict(x, a=al[x["a"]])
+            x = _clear_impossible_year(x)
             rows.append(x)
     order = {k: i for i, k in enumerate(SOURCES)}
 
@@ -541,16 +553,17 @@ def main():
         no_pool += not pl
         pool_bytes += len(pl)
         det = [x["id"], x.get("t") or "Untitled", x.get("a"), x.get("co"), x.get("mv"), img, rec, li, wi, hi, pl]
-        if x.get("crop"):
-            det.append(x["crop"])   # [l, t, r, b] in thousandths: the painting inside its frame/wall (tools/crop_paintings.py)
+        show_crop = x.get("crop") if x.get("cf") != "l" else None   # a low-confidence (central 70%) crop only steers the color measuring; never trim what people SEE on a guess
+        if show_crop:
+            det.append(show_crop)   # [l, t, r, b] in thousandths: the painting inside its frame/wall (tools/crop_paintings.py)
         details.append(det)
 
         r = ratio.get(x["id"]) or x.get("r") or (x["h"] / x["w"] if x.get("w") and x.get("h") else None)
         if not r:
             no_size += 1
             r = 1.25
-        if x.get("crop"):   # the box and its pins are the painting's own shape, not the museum photo's
-            cl, ct, cr, cb = x["crop"]
+        if show_crop:   # the box and its pins are the painting's own shape, not the museum photo's
+            cl, ct, cr, cb = show_crop
             r = r * (cb - ct) / (cr - cl)
         o = k * REC
         y = x.get("y")

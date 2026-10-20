@@ -83,7 +83,7 @@ const twMood = r => (r.warm = twWarm(r.hh), r);
 let TW_MET = null, TW_MET_P = null;
 function twLoadMetrics() {
   if (TW_MET) return Promise.resolve(TW_MET);
-  return TW_MET_P || (TW_MET_P = fetch("data/gallery/metrics.bin").then(r => { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); }).then(b => (TW_MET = new Uint8Array(b))).catch(e => { TW_MET_P = null; throw e; }));
+  return TW_MET_P || (TW_MET_P = fetch("data/gallery/metrics.bin" + (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "")).then(r => { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); }).then(b => (TW_MET = new Uint8Array(b))).catch(e => { TW_MET_P = null; throw e; }));
 }
 function twRec(i) {
   const b = TW_MET, o = i * TW_REC;

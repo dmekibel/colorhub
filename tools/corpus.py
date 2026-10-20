@@ -609,6 +609,14 @@ def wanted_crops():
         rc = CP.row_crop(res)
         if rc:
             out[k] = rc
+    # hand fixes always win (2026-10-20, "no wrong crops"): data/crop-overrides.json {id: "none" | [l, t, r, b] permille}
+    ov = ROOT / "data" / "crop-overrides.json"
+    if ov.exists():
+        for k, v in json.loads(ov.read_text()).items():
+            if v == "none":
+                out.pop(k, None)
+            elif isinstance(v, list) and len(v) == 4:
+                out[k] = (v, None)
     return out
 
 
@@ -1099,10 +1107,10 @@ ARTIST_CAP = 50
 # and Impressionist-era giants whose range across a career is itself part of the point get the same treatment.
 ARTIST_CAP_EXTRA = {
     "John Singer Sargent": 300,
-    "Rembrandt van Rijn": 200, "Johannes Vermeer": 60, "Titian": 150, "Raphael": 120, "Leonardo da Vinci": 60,
-    "Claude Monet": 900, "Vincent van Gogh": 900, "Francisco Goya": 150, "J. M. W. Turner": 200,
-    "Albrecht Durer": 120, "Peter Paul Rubens": 200, "Diego Velazquez": 100, "Pierre-Auguste Renoir": 150,
-    "Edgar Degas": 150, "Paul Cezanne": 150, "Eugene Delacroix": 120, "Anthony van Dyck": 120,
+    "Rembrandt van Rijn": 400, "Johannes Vermeer": 60, "Titian": 150, "Raphael": 120, "Leonardo da Vinci": 60,
+    "Claude Monet": 1500, "Vincent van Gogh": 1500, "Francisco Goya": 150, "J. M. W. Turner": 500,
+    "Albrecht Durer": 120, "Peter Paul Rubens": 200, "Diego Velazquez": 100, "Pierre-Auguste Renoir": 500,
+    "Edgar Degas": 400, "Paul Cezanne": 300, "Paul Cézanne": 300, "Paul Gauguin": 200, "Georges Seurat": 100, "Édouard Manet": 200, "Eugene Delacroix": 120, "Anthony van Dyck": 120,
     "Jan van Eyck": 60, "Caravaggio": 80, "El Greco": 100, "Pieter Bruegel the Elder": 80,
 }
 CAPPED = {}

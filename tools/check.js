@@ -121,4 +121,8 @@ if (fs.existsSync(path.join(__dirname, "../data/paintmap/manifest.json"))) {
   }
 }
 console.log(`paintmap atlas gate: ${atlasErrors.length} problems`);
-process.exit(errors.length || nameErrors.length || idsGate.errors.length || liteErrors.length || fetchedMiss.length || atlasErrors.length ? 1 : 0);
+// Cache gate (tools/check_fetch_versions.js): every data/ fetch carries the ?v= tag, so a phone never mixes old data with new.
+const fvGate = require("./check_fetch_versions.js").bad;
+fvGate.forEach(b => console.log("FAIL  " + b));
+console.log(`fetch-version gate: ${fvGate.length} problems`);
+process.exit(errors.length || fvGate.length || nameErrors.length || idsGate.errors.length || liteErrors.length || fetchedMiss.length || atlasErrors.length ? 1 : 0);

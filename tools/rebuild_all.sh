@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# Rebuild everything that is keyed to the gallery order, in the one order that works, then run every gate.
+# Run it after ANY change to data/corpus/*.json, data/corpus-nonpaintings.json or tools/gallery.py.
+#
+#   tools/rebuild_all.sh            # gallery -> derived files -> thumbs -> pages -> gates (atlas only checked)
+#   tools/rebuild_all.sh --atlas    # also rebuild the painting-map atlas (re-fetches every thumbnail: slow, needed
+#                                   # whenever the painting COUNT or ORDER changed -- the ids gate tells you)
+#
+# Why one script (2026-10-20): the chain is order-dependent and a half-finished run silently breaks the app. gallery.py deletes
+# metrics.bin and thumbs.txt; portraits.json kept an old order for ten days and Van Gogh's page showed a Bonnard. Every step
+# here is also covered by node tools/check_ids.js, which names the tool that fixes whatever is out of step.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+ATLAS=0; [ "${1:-}" = "--atlas" ] && ATLAS=1
+step() { echo; echo "== $*"; }
+
+step "audit the new art (dates, same-painting duplicates, non-paintings) -- read it before shipping"
+python3 tools/audit_artists.py | grep -E "^[A-Z].*rows|DATE" || true
+
+step "gallery (deletes metrics.bin and thumbs.txt; the steps below put them back)"
+python3 tools/gallery.py --raw research/_raw | tail -1 | cut -c1-160
+for s in analyze metrics_build facets artwiki_build; do step "$s"; python3 tools/$s.py | tail -1 | cut -c1-160; done
+step "painter counts, movements, portraits and most-famous rails (all store gallery positions)"
+python3 tools/wikidata_artists.py | tail -1 | cut -c1-160
+python3 tools/artwiki_portraits.py | tail -2 | cut -c1-160
+step "painting-map thumbnails list"
+python3 tools/paintmap_thumbs.py | tail -1
+if [ "$ATLAS" = 1 ]; then
+  step "painting-map atlas (slow: fetches every thumbnail once)"
+  python3 tools/paintmap_atlas.py clean && python3 tools/paintmap_atlas.py build | tail -3 | cut -c1-160
+fi
+step "crawlable pages"
+python3 tools/pages.py | tail -1 | cut -c1-160
+
+step "gates"
+node tools/check_ids.js
+node tools/check.js | tail -8
+node tools/check_wiki.js | tail -1; node tools/check_names.js | tail -1; node tools/check_solvable.js | tail -1; node tools/check_aliases.js | tail -1
+echo; echo "Done. Bump the ?v= tag in index.html, run tools/smoke.sh, then commit and push."

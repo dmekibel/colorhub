@@ -37,11 +37,13 @@ import numpy as np
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 import corpus as C  # noqa: E402
+from audit_artists import ALIAS  # noqa: E402
 
 ARTIST, QID = sys.argv[1], sys.argv[2]
 SLUG = re.sub(r"[^a-z]+", "", ARTIST.lower())
 CACHE = C.RAW / SLUG
 OUT = ROOT / "data" / "corpus" / f"zz-commons-{SLUG}-1.json"
+LIFE = tuple(int(x) for x in sys.argv[sys.argv.index("--life") + 1].split("-")) if "--life" in sys.argv else None   # e.g. 1853-1890
 MAX_NEW = int(sys.argv[sys.argv.index("--max") + 1]) if "--max" in sys.argv else 800   # range, not volume: one painter must not outweigh a decade or a country (corpus.py ARTIST_CAP_EXTRA = 300)
 KEEP_INST = {"painting", "watercolor painting", "gouache painting", "mixed media", "portrait", "work of art", "artificial physical object"}
 WATER = re.compile(r"water ?colou?r|gouache|aquarelle", re.I)
@@ -116,6 +118,8 @@ def candidates(by):
             continue
         it["cls"] = medium_class(it)
         it["y"] = min(it["years"]) if it["years"] else None
+        if it["y"] is not None and LIFE and not (LIFE[0] - 1 <= it["y"] <= LIFE[1] + 1):
+            it["y"] = None   # a restoration or catalogue date, not when it was painted
         out.append(it)
     return out
 
@@ -200,7 +204,7 @@ def build_rows(cands, pals):
 def existing_sargents():
     out = []
     for r in C.load_corpus():
-        if (r.get("a") or "") == ARTIST:
+        if ALIAS.get(r.get("a"), r.get("a")) == ARTIST:
             out.append(r)
     return out
 
@@ -219,9 +223,21 @@ def drop_duplicates(new, old):
             except Exception:
                 hashes[r["id"]] = 0
         return hashes[r["id"]]
+    def tkey(t):
+        return re.sub(r"[^a-z ]", "", (t or "").lower()).strip()
+    old_by_title = defaultdict(list)
+    for o in old:
+        if len(tkey(o["t"])) > 6:
+            old_by_title[tkey(o["t"])].append(o)
     for r in sorted(new, key=lambda r: r["id"]):
         if r["img"] in seen_img:
             dropped.append((r["id"], "same image")); continue
+        # the same painting held by a museum we already read (AIC, NGA...) and listed again on Wikidata/Commons: the photographs
+        # differ, so the image hash misses it, but artist + title + year (+-2) + overall color agree (2026-10-20 audit)
+        twin = next((o for o in old_by_title.get(tkey(r["t"]), [])
+                     if (r["y"] is None or o["y"] is None or abs(r["y"] - o["y"]) <= 2) and abs(o["L"] - r["L"]) < 8 and abs(o["C"] - r["C"]) < 8), None)
+        if twin:
+            dropped.append((r["id"], "same painting as " + twin["id"])); continue
         hr = h_of(r)
         dup = None
         if hr:

@@ -35,9 +35,11 @@ const GL_WHERE_ICON = sv('<circle cx="12" cy="12" r="5.5"/><path d="M12 2.5v4M12
 const GL_ICON_DICE = sv('<rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="8.5" cy="8.5" r="1.3" fill="currentColor" stroke="none"/><circle cx="15.5" cy="8.5" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="8.5" cy="15.5" r="1.3" fill="currentColor" stroke="none"/><circle cx="15.5" cy="15.5" r="1.3" fill="currentColor" stroke="none"/>', 16, 1.6);
 
 // ---------- loading ----------
+// Every gallery file carries the same ?v= as the scripts, so a phone never pairs a cached old index.bin or shard with new painter data.
+function galVer() { return typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : ""; }
 function loadGallery() {
   if (GAL) return Promise.resolve(GAL);
-  const get = (f, kind) => fetch(GAL_DIR + f).then(r => { if (!r.ok) throw new Error(f + " " + r.status); return r[kind](); });
+  const get = (f, kind) => fetch(GAL_DIR + f + galVer()).then(r => { if (!r.ok) throw new Error(f + " " + r.status); return r[kind](); });
   return GAL_LOADING || (GAL_LOADING = Promise.all([get("index.json", "json"), get("index.bin", "arrayBuffer")])
     .then(([head, buf]) => (GAL = glBuild(head, new Uint8Array(buf))))
     .catch(e => { GAL_LOADING = null; throw e; }));
@@ -70,7 +72,7 @@ function glBuild(head, b) {
 function glShard(k) {
   const have = GL_SHARDS.get(k);
   if (have) return Array.isArray(have) ? Promise.resolve(have) : have;
-  const p = fetch(`${GAL_DIR}d/${String(k).padStart(3, "0")}.json`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  const p = fetch(`${GAL_DIR}d/${String(k).padStart(3, "0")}.json` + galVer()).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(rows => { GL_SHARDS.set(k, rows); return rows; }).catch(e => { GL_SHARDS.delete(k); throw e; });
   GL_SHARDS.set(k, p);
   return p;

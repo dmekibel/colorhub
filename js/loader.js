@@ -12,6 +12,15 @@
 const DATA_SRC = { "wiki-colors": "data/wiki-colors.js", "wiki-nodes": "data/wiki-nodes.js", "stories": "data/stories.js", "images": "data/images.js" };
 const WIKI_FILES = Object.keys(DATA_SRC);
 const DATA_VER = ((document.currentScript && document.currentScript.src || "").match(/[?&]v=([^&]+)/) || [])[1] || "";
+// FETCH_VERSIONING: every fetch of a file under data/ gets the same ?v= as the scripts, in this one place, so new code can never
+// forget it (2026-10-20: a cached old gallery index under new painter data showed Bonnard on Van Gogh's page). tools/check_fetch_versions.js
+// fails the build if this wrapper goes missing.
+if (DATA_VER && typeof window.fetch === "function" && !window.fetch.__versioned) {
+  const rawFetch = window.fetch.bind(window);
+  window.fetch = (u, o) => (typeof u === "string" && /^(\.\/)?data\//.test(u) && !/[?&]v=/.test(u)
+    ? rawFetch(u + (u.includes("?") ? "&" : "?") + "v=" + DATA_VER, o) : rawFetch(u, o));
+  window.fetch.__versioned = true;
+}
 const DATA_LOADS = {}, DATA_DONE = {};
 let WIKI_LOAD = null, WIKI_OK = false, WIKI_FORCE = false;
 
