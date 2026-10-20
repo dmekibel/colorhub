@@ -105,6 +105,53 @@ def items(rows):
     return by
 
 
+# ---- Commons categories (2026-10-20): Wikidata lists only a fraction of many painters' works (73 Serovs; the Tretyakov and the
+# Russian Museum publish no open data), while Wikimedia Commons files far more under "Category:Paintings by <name>". With
+# --commons-cat, those files join the candidates as rows with id "commons-F<pageid>"; every filter, duplicate check, crop and
+# palette below treats them like Wikidata items. Subcategories are followed (depth 2) only when their name says paintings or
+# portraits and not drawings, sketches, prints, photos or letters.
+CAT_SKIP = re.compile(r"drawing|sketch|print|etching|lithograph|photograph|letter|stamp|postcard|book|illustration|sculpture|study sheet|signature|exhibition|museum|in museums|details? of", re.I)
+CAT_KEEP = re.compile(r"painting|portrait|landscape|still life|works by|by ", re.I)
+
+
+def commons_category(cat, depth=2):
+    import urllib.parse
+    base = "https://commons.wikimedia.org/w/api.php?format=json&action=query&generator=categorymembers&gcmtype=file|subcat&gcmlimit=500" \
+           "&prop=imageinfo&iiprop=url|extmetadata&iiextmetadatafilter=DateTimeOriginal|ObjectName&gcmtitle="
+    C.SRC.setdefault("commonsapi", dict(dir=CACHE, gap=0.5, workers=1))
+    seen_cats, files, todo = set(), {}, [(cat if cat.startswith("Category:") else "Category:" + cat, 0)]
+    while todo:
+        c, d = todo.pop(0)
+        if c in seen_cats:
+            continue
+        seen_cats.add(c)
+        cont = ""
+        while True:
+            r = C.fetch("commonsapi", base + urllib.parse.quote(c) + cont)
+            for pg in (r.get("query", {}).get("pages", {}) or {}).values():
+                t = pg.get("title", "")
+                if pg.get("ns") == 14:
+                    if d + 1 <= depth and CAT_KEEP.search(t) and not CAT_SKIP.search(t):
+                        todo.append((t, d + 1))
+                elif pg.get("ns") == 6 and re.search(r"\.(jpe?g|png|tiff?)$", t, re.I) and not CAT_SKIP.search(t):
+                    files[pg["pageid"]] = pg
+            if "continue" not in r:
+                break
+            cont = "&" + urllib.parse.urlencode(r["continue"])
+    out = {}
+    for pid, pg in files.items():
+        fname = pg["title"].split(":", 1)[1]
+        md = ((pg.get("imageinfo") or [{}])[0].get("extmetadata") or {})
+        strip = lambda v: re.sub(r"<[^>]+>", "", str((v or {}).get("value", ""))).strip()
+        title = strip(md.get("ObjectName")) or re.sub(r"\.(jpe?g|png|tiff?)$", "", fname, flags=re.I).replace("_", " ")
+        years = [int(y) for y in re.findall(r"\b(1[2-9]\d\d)\b", strip(md.get("DateTimeOriginal")))]
+        q = f"F{pid}"
+        out[q] = dict(q=q, t=title[:160], img="http://commons.wikimedia.org/wiki/Special:FilePath/" + urllib.parse.quote(fname),
+                      years=years[:1], coll=set(), inst={"painting"}, mat=set(), h=None, w=None, co=set(), ext=set())
+    print(f"commons category {cat}: {len(seen_cats)} categories, {len(out)} image files", flush=True)
+    return out
+
+
 def medium_class(it):
     mats = " ".join(it["mat"]) + " " + " ".join(it["inst"])
     if WATER.search(mats):
@@ -211,7 +258,7 @@ def build_rows(cands, pals):
         row = dict(id=key, src="commons", t=C.clean_title(it["t"]) if it["t"] and not re.match(r"^Q\d+$", it["t"]) else "Untitled",
                    a=ARTIST, y=it["y"], co=co or None, mv=None, img=thumb(it["img"], 400),
                    p=[[C.rgb_to_hex(rgbs[i]), shares[i], app[V[i]][0], C.family(Ls[i], Cs[i], Hs[i])] for i in range(len(shares))],
-                   L=round(p["L"], 1), C=round(p["C"], 1), url="https://www.wikidata.org/wiki/" + it["q"])
+                   L=round(p["L"], 1), C=round(p["C"], 1), url=("https://commons.wikimedia.org/wiki/File:" + it["img"].rsplit("/", 1)[1]) if it["q"].startswith("F") else "https://www.wikidata.org/wiki/" + it["q"])
         row["_cls"], row["_coll"] = it["cls"], sorted(it["coll"])[:1]
         row["_ext"], row["_colls"] = sorted(it["ext"]), sorted(it["coll"])
         rows.append(row)
@@ -228,7 +275,9 @@ def existing_sargents():
 
 def drop_duplicates(new, old):
     """corpus.py's own tests: same image URL; same dhash with similar L/C and a similar middle of the picture."""
-    seen_img = {r["img"] for r in old}
+    import urllib.parse as _up
+    norm = lambda u: _up.unquote(str(u)).split("?")[0].rsplit("/", 1)[-1].replace(" ", "_").lower()   # one file, however it was encoded
+    seen_img = {norm(r["img"]) for r in old}
     keep, dropped = [], []
     old_by_id = {o["id"]: o for o in old}
     def hd_note(r, oid):   # the museum row is only our own small copy (AIC blocks hotlinking): use this Commons file for display
@@ -253,7 +302,7 @@ def drop_duplicates(new, old):
         if len(tkey(o["t"])) > 6:
             old_by_title[tkey(o["t"])].append(o)
     for r in sorted(new, key=lambda r: r["id"]):
-        if r["img"] in seen_img:
+        if norm(r["img"]) in seen_img:
             dropped.append((r["id"], "same image")); continue
         # the same painting held by a museum we already read (AIC, NGA...) and listed again on Wikidata/Commons: the photographs
         # differ, so the image hash misses it, but artist + title + year (+-2) + overall color agree (2026-10-20 audit)
@@ -286,7 +335,7 @@ def drop_duplicates(new, old):
                     dup = o["id"]; break
         if dup:
             dropped.append((r["id"], "near-duplicate of " + dup)); continue
-        keep.append(r); pool.append(r); seen_img.add(r["img"])
+        keep.append(r); pool.append(r); seen_img.add(norm(r["img"]))
     return keep, dropped
 
 
@@ -306,12 +355,17 @@ def spread(rows, n):
 
 def main():
     if "--status" in sys.argv:
-        by = items(sparql()); c = candidates(by)
+        by = items(sparql())
+        if "--commons-cat" in sys.argv:
+            by.update({k: v for k, v in commons_category(sys.argv[sys.argv.index("--commons-cat") + 1]).items() if k not in by})
+        c = candidates(by)
         print(len(by), "items,", len(c), "painting-like;", Counter(x["cls"] for x in c))
         return
     if OUT.exists():
         OUT.unlink()      # this script owns that shard: rebuild it from scratch so a re-run is idempotent
     by = items(sparql())
+    if "--commons-cat" in sys.argv:   # files Wikidata doesn't list (an image Wikidata already uses is dropped as "same image")
+        by.update({k: v for k, v in commons_category(sys.argv[sys.argv.index("--commons-cat") + 1]).items() if k not in by})
     cands = candidates(by)
     print(f"{len(by)} Sargent items with an image; {len(cands)} painting-like; classes {dict(Counter(x['cls'] for x in cands))}", flush=True)
     existing_ids = {r["id"] for r in C.load_corpus()}
