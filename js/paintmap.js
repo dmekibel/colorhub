@@ -1529,8 +1529,13 @@ function pmMount(el, s, F) {
         // FOR). Capping the gap at a FRACTION of the cell's own size (never more than 15% of it) leaves a
         // visible seam at ordinary sizes exactly as before (15% only binds below ~10px, where the old flat
         // formula was already smaller than that) while guaranteeing a sub-10px cell still has real area left.
-        const gap = Math.min(6, Math.min(tw, th) * .15, 1 + Math.min(tw, th) * .05);
-        tw = Math.min(tw, th * 1.5) - gap; th = Math.min(th, (x1 - x0) * 1.5) - gap;
+        // David, 2026-10-21 (fully zoomed out the dark seams read as a black screen-door grid): the seam itself now
+        // fades to nothing between ~16px cells (unchanged above that) and ~3px cells (butted together), and below
+        // that the tile bleeds a half pixel past its place and drops the 3:2 cap so no dark backing or bar is left;
+        // at 16px+ `sm` is exactly 1, so ordinary zoom is pixel-identical to before.
+        const cs = Math.min(tw, th), sm = cs >= 16 ? 1 : cs <= 3 ? 0 : (u => u * u * (3 - 2 * u))((cs - 3) / 13);
+        const gap = Math.min(6, cs * .15, 1 + cs * .05) * sm, bleed = .5 * (1 - sm), cap = 1.5 + 8.5 * (1 - sm);
+        tw = Math.min(tw, th * cap) - gap + bleed; th = Math.min(th, (x1 - x0) * cap) - gap + bleed;
         const mx = (x0 + x1) / 2, my = (y0 + y1) / 2, d = Math.max(tw, th);
         if (d < .6 || mx < -d || my < -d || mx > W + d || my > H + d) continue;
         const i = lay.items[k];

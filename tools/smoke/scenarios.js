@@ -7514,7 +7514,7 @@ async function pinchAnchorRun(t, cv, ctl, tag) {
     cv.dispatchEvent(ev);
     t.expect(ev.defaultPrevented, `${tag}: ${label} did not preventDefault (the page would zoom/scroll)`);
     let cur = null, cd = 1e9;
-    for (const b of ctl._qaBubbles(5000)) if (b.key === c2.key) { const d = Math.hypot(b.x - c2.x, b.y - c2.y); if (d < cd) { cd = d; cur = b; } }
+    for (const b of ctl._qaBubbles(100000)) if (b.key === c2.key) { const d = Math.hypot(b.x - c2.x, b.y - c2.y); if (d < cd) { cd = d; cur = b; } }
     t.expect(cur && cd <= 3, `${tag}: ${label} moved the cell under the cursor by ${cd.toFixed(1)}px`);
   }
   t.notes.push(`anchor ${tag}: worst error ${worst.toFixed(2)}px over ${steps} steps`);
