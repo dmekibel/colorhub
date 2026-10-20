@@ -1037,8 +1037,11 @@ function pmOpen(spec, o = {}) {
     <header class="pmx-top">
       <button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>
       <p class="pmx-title"><b>${esc(colTitle)}</b></p>
-      <button class="corner r pmx-do" data-do-corner aria-label="Arrange or filter" aria-haspopup="dialog">${PM_ICON.arrange}</button>
+      <span class="pmx-sp" aria-hidden="true"></span>
     </header>
+    <button class="hm-top-search pmx-search" data-pmsearch aria-label="Search paintings and painters">${ICON.search}</button>
+    <button class="corner l pl-corner" data-rooms-corner aria-label="Places">${ROOMS_GLYPH}<span>Places</span></button>
+    <button class="corner r hm-do pmx-do" data-do-corner aria-label="More" aria-haspopup="dialog">${ICON.more}</button>
     ${col === "paintings" && typeof hmLayerSwitchHTML === "function" ? hmLayerSwitchHTML("paintings") : ""}
     <div class="pmx-chipbar" data-pmchipbar hidden></div>
     <div class="pmx-walk" data-pmwalk hidden></div>
@@ -1719,19 +1722,9 @@ function pmMount(el, s, F) {
   function chrome() {
     paintChipbar(); syncDo();
   }
-  // a one-painter map gets a LABELED corner (David, 2026-10-20: "an arrange button"); the same bottom-right place and
-  // look as the icon corner every other map has, just wide enough to carry its word. --pmx-dow tells the caption card
-  // how much room to leave.
   // the bottom edge of the chip row (it wraps to two lines when several filters are on), plus a little air
   function soloInset() { if (chipbar.hidden) return 0; const r = chipbar.getBoundingClientRect(), c = cv.getBoundingClientRect(); return Math.max(0, r.bottom - c.top) + 8; }
-  function syncDo() {
-    const lab = pmSolo(s);
-    if (doBtn.classList.contains("pmx-do-lab") !== lab) {
-      doBtn.classList.toggle("pmx-do-lab", lab);
-      doBtn.innerHTML = lab ? `${doBtn._html}<span>Arrange</span>` : doBtn._html;
-    }
-    el.style.setProperty("--pmx-dow", lab ? Math.ceil(doBtn.getBoundingClientRect().width || 128) + "px" : "");
-  }
+  function syncDo() {}   // the corner is the same "⋮" on every map now (the color map's look); kept as a hook for chrome()
   // removable active-filter chips atop the map (David, 2026-10-09): the primary way to SEE and UNDO a filter,
   // whichever way it got set (the Filter tab, or a tap on a painting's own facet) -- opening the sheet is no
   // longer required just to clear one thing.
@@ -1817,6 +1810,50 @@ function pmMount(el, s, F) {
   // no separate confirm step). Replaces the old radial stem menu and the standalone Filter-only sheet.
   const doBtn = el.querySelector(".pmx-do"); doBtn._html = doBtn.innerHTML;
   doBtn.onclick = () => openSheet("arrange");
+  el.querySelector("[data-pmsearch]").onclick = () => openFind();
+  // ---- the round search button (the color map's own, js/home.js #hmTopSearch): painters and paintings in one field.
+  // A painter scopes the map to them (the same painterSet the Filter tab's chips set); a painting is centered and its
+  // card opened. Painting titles come from the detail shards already loaded for this map (the gallery fetches titles
+  // lazily, js/gallery.js), so it finds what you have been looking at; painters are always the whole list.
+  let artN = null;
+  function findPainters(q) {
+    if (!artN) { artN = new Int32Array(F.meta.artists.length + 1); for (let i = 0; i < F.N; i++) artN[F.artist[i]]++; }
+    const ql = q.toLowerCase();
+    return F.meta.artists.map((a, j) => ({ v: j + 1, name: a[0], n: artN[j + 1] })).filter(x => x.n && x.name.toLowerCase().includes(ql))
+      .sort((a, b) => (b.name.toLowerCase().startsWith(ql) - a.name.toLowerCase().startsWith(ql)) || b.n - a.n).slice(0, 6);
+  }
+  function findWorks(q) {
+    if (!lay) return [];
+    const ql = q.toLowerCase(), out = [];
+    for (let k = 0; k < lay.n && out.length < 8; k++) {
+      const i = lay.items[k], d = pmDetailNow(i, F);
+      if (d && d.t && d.t.toLowerCase().includes(ql)) out.push({ k, i, t: d.t, a: F.artist[i] ? xbArtistName(F, F.artist[i]) : "", y: pmYearStr(i, F), c: pmHex(i, F) });
+    }
+    return out;
+  }
+  function openFind() {
+    if (document.querySelector(".sheet,.rooms-stem")) return;
+    const painterLab = pmColLabel(F, "painter"), nounP = pmColLabel(F, "nounP");
+    const { sh, close } = sheet(`<div class="sr-sheet"><div class="sr-field"><span>${ICON.search}</span><input type="search" class="sr-input" placeholder="Find a ${esc(painterLab.toLowerCase())} or a title" autocomplete="off" aria-label="Search the map"></div><div class="sr-body" data-pmfb></div></div>`);
+    sh.classList.add("sr-sheet-wrap", "pmx-findsheet");
+    const inp = sh.querySelector(".sr-input"), body = sh.querySelector("[data-pmfb]");
+    const run = () => {
+      const q = inp.value.trim();
+      if (!q) { body.innerHTML = `<p class="fine sr-empty">Type a ${esc(painterLab.toLowerCase())} to see only their work, or a title to go to it.</p>`; return; }
+      const ps = findPainters(q), ws = findWorks(q);
+      if (!ps.length && !ws.length) { body.innerHTML = `<p class="fine sr-empty">Nothing by that name on this map.</p>`; return; }
+      body.innerHTML = (ps.length ? `<h3 class="title-3 sr-h">${esc(painterLab)}s</h3><ul class="sr-list">${ps.map(x => `<li><button class="sr-row" data-pmfp="${x.v}"><b>${esc(x.name)}</b><small>${x.n.toLocaleString()} ${x.n === 1 ? esc(pmColLabel(F, "noun")) : esc(nounP)}</small></button></li>`).join("")}</ul>` : "")
+        + (ws.length ? `<h3 class="title-3 sr-h">${esc(nounP.charAt(0).toUpperCase() + nounP.slice(1))}</h3><ul class="sr-list">${ws.map(x => `<li><button class="sr-row" data-pmfw="${x.k}"><span class="sr-dot" style="background:${x.c}"></span><b>${esc(x.t)}</b><small>${esc([x.a, x.y].filter(Boolean).join(" · "))}</small></button></li>`).join("")}</ul>` : "");
+    };
+    run();
+    inp.addEventListener("input", run);
+    setTimeout(() => { try { inp.focus({ preventScroll: true }); } catch (e) {} }, 60);
+    sh.addEventListener("click", e => {
+      const p = e.target.closest("[data-pmfp]"), w = e.target.closest("[data-pmfw]");
+      if (p) { buzz(6); close(); s.f.painterSet = [+p.dataset.pmfp]; s.fav = 0; rebuild(); return; }
+      if (w) { const k = +w.dataset.pmfw; buzz(6); close(); cardOpen = true; glideTo([lay.x[k], lay.y[k]], 420, Math.max(Z, PM_TAP_ZOOM)); setTimeout(() => { if (!dead) { setCenter(k); caption(); } }, 440); }
+    });
+  }
   function openSheet(startTab) {
     if (document.querySelector(".sheet")) return;
     if (typeof stemJustClosed === "function" && stemJustClosed()) return;   // a ghost click right after closing must not reopen it (js/core.js)

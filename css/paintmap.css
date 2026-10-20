@@ -40,7 +40,7 @@
 .pmx-xchip:active{transform:scale(.95)}
 
 /* filtering by example (David, 2026-10-09): the centered painting's own facets, each one tap = "only these" */
-.pmx-facets{position:absolute;z-index:3;left:12px;right:16px;bottom:calc(var(--corner-b,calc(var(--bottom) + 12px)) + var(--corner,56px) + 8px);
+.pmx-facets{position:absolute;z-index:3;left:12px;right:16px;bottom:calc(var(--corner-b,calc(var(--bottom) + 12px)) + var(--corner,56px) * 2 + 16px);
   display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;pointer-events:none}
 .pmx-facets[hidden]{display:none}
 .pmx-facets::-webkit-scrollbar{display:none}
@@ -54,7 +54,7 @@
 
 /* "Walk from here" (David, 2026-10-09): a trail of small dots, one per step, above the facets row; the current
    step is ringed and bigger. Stacks above .pmx-facets regardless of DOM order (both are position:absolute). */
-.pmx-walk{position:absolute;z-index:3;left:12px;right:16px;bottom:calc(var(--corner-b,calc(var(--bottom) + 12px)) + var(--corner,56px) + 52px);
+.pmx-walk{position:absolute;z-index:3;left:12px;right:16px;bottom:calc(var(--corner-b,calc(var(--bottom) + 12px)) + var(--corner,56px) * 2 + 60px);
   display:flex;align-items:center;gap:7px;overflow-x:auto;scrollbar-width:none;pointer-events:none}
 .pmx-walk[hidden]{display:none}
 .pmx-walk::-webkit-scrollbar{display:none}
@@ -67,7 +67,7 @@
 .pmx-walk-dot:active{transform:scale(.85)}
 
 /* bottom: the painting in the middle, named; "center on this" and the heart beside it; the corner at the right */
-.pmx-cap{position:absolute;z-index:3;left:12px;right:calc(16px + var(--pmx-dow,var(--corner,56px)) + 10px);bottom:var(--corner-b,calc(var(--bottom) + 12px));min-height:var(--corner,56px);
+.pmx-cap{position:absolute;z-index:3;left:12px;right:16px;bottom:calc(var(--corner-b,calc(var(--bottom) + 12px)) + var(--corner,56px) + 8px);min-height:var(--corner,56px);
   display:flex;align-items:center;gap:4px;padding:4px 4px 4px 0;border-radius:var(--r-2);background:var(--surface-2);border:1px solid rgba(236,232,223,.12);box-shadow:0 8px 24px rgba(0,0,0,.45)}
 .pmx-cap[hidden]{display:none}
 .pmx-cap::before{content:"";flex:none;align-self:stretch;width:6px;margin-right:8px;border-radius:var(--r-2) 0 0 var(--r-2);background:var(--c,#3A3630)}
@@ -80,7 +80,7 @@
 .pmx-heart.on{color:#E8787A}
 .pmx-heart:active{transform:scale(.88)}
 .pmx-heart.pop svg{animation:fvaPop .42s var(--spring)}
-.pmx-do svg{width:22px;height:22px}
+.pmx-do svg{width:20px;height:20px}
 .pmx-bloom{position:fixed;z-index:6}
 
 /* the arc (Home's right-corner menu): the current arrangement is ringed */
@@ -146,14 +146,9 @@
 
 /* One-painter map (David, 2026-10-20): the corner carries its word, the chip row says how much of the painter you're
    seeing, and the Filter tab leads with hue and years. */
-.pmx-do.pmx-do-lab{width:auto;display:flex;align-items:center;gap:9px;padding:0 20px 0 16px;border-radius:var(--r-pill);font:500 16px/1 var(--sans);color:var(--ink)}
-.pmx-do.pmx-do-lab svg{flex:none;width:20px;height:20px}
 .pmx-xcount{padding:0 14px;gap:8px;color:rgba(236,232,223,.98)}
 .pmx-xcount svg{width:15px;height:15px;flex:none;opacity:.8}
 .pmx-xall{padding:0 14px;color:rgba(236,232,223,.98)}
 .pmx-dot{flex:none;align-self:center;width:12px;height:12px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
 .pmx-none{margin:2px 0 8px;font:italic 400 17px/1.35 var(--serif);color:var(--soft)}
 .pmx-chipbar.pmx-chipbar-wrap{flex-wrap:wrap;overflow:visible;row-gap:6px}
-/* the labeled corner sits under the open sheet: step aside rather than peek out above its handle */
-body:has(.pmx-sheet) .pmx-do.pmx-do-lab{opacity:0;pointer-events:none}
-.pmx-do.pmx-do-lab{transition:opacity .18s}
