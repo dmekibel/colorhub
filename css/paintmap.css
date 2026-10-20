@@ -28,7 +28,8 @@
 /* David, 2026-10-09: a removable chip for every active filter, atop the map -- the primary way to SEE and undo
    one, whichever way it got set (the Filter tab, or a tap on a painting's own facet chip below), replacing a
    trip into the sheet just to clear one thing. */
-.pmx-chipbar{position:absolute;z-index:3;left:0;right:0;top:calc(var(--top) + 108px);display:flex;gap:6px;
+.pmx-chipbar{position:absolute;z-index:3;left:0;right:0;top:calc(var(--top) + 64px);   /* right under the header (was +108: room for a retired "why" pill, an empty band) */
+  display:flex;gap:6px;
   overflow-x:auto;padding:0 12px;scrollbar-width:none;pointer-events:none}
 .pmx-chipbar[hidden]{display:none}
 .pmx-chipbar::-webkit-scrollbar{display:none}
