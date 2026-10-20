@@ -338,8 +338,22 @@ def main():
         if any(i in gset for i in x + y): p["genre"] += 1
         if any(i in tset for i in x + y): p["thing"] += 1
         if x or y: p["any"] += 1
-    out = {"v": 1, "tags": tags, "grp": grp, "ia": ia, "it": it, "im": [],
+    # keep the model-detected "im" (tools/subjects_clip.py) by painting id, remapped by tag NAME in case indices moved
+    im = [[] for _ in ids]
+    old_prov_im = None
+    try:
+        old = json.load(open(ROOT / "data" / "gallery" / "subjects.json", encoding="utf-8"))
+        oids = (ROOT / "data" / "gallery" / "ids.txt").read_text().splitlines()
+        old_prov_im = (old.get("prov") or {}).get("im")
+        byid = {pid: x for pid, x in zip(oids, old.get("im") or []) if x}
+        for k, pid in enumerate(ids):
+            im[k] = [[ix[old["tags"][t]], c] for t, c in byid.get(pid, []) if old["tags"][t] in ix]
+    except Exception:
+        pass
+    out = {"v": 1, "tags": tags, "grp": grp, "ia": ia, "it": it, "im": im,
            "prov": {k: dict(v) for k, v in prov.items()}}
+    if old_prov_im:
+        out["prov"]["im"] = old_prov_im
     (ROOT / "data" / "gallery" / "subjects.json").write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     print(f"subjects.json: {len(ids)} paintings, {len(tags)} tags ({len(icons)} iconography)")
 

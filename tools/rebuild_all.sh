@@ -28,6 +28,8 @@ step "painting-map thumbnails list"
 python3 tools/paintmap_thumbs.py | tail -1
 step "subject tags (Wikidata genre/depicts for new paintings, polite and resumable; follows ids.txt order)"
 python3 tools/subjects.py | tail -1
+step "model-detected subject tags (CLIP on cached images; skips quietly if research/_raw/clipenv is missing; new paintings only)"
+python3 tools/subjects_clip.py | tail -2
 if [ "$ATLAS" != 0 ]; then
   step "painting-map atlas ($([ "$ATLAS" = 2 ] && echo "full rebuild: hours" || echo "incremental: only changed groups"))"
   [ "$ATLAS" = 2 ] && python3 tools/paintmap_atlas.py clean
