@@ -53,6 +53,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
+import corpus as CORP  # noqa: E402  (METHOD, pick_pool: the shared vivid measurement)
 import library as LIB  # noqa: E402  (labs, load_library, silly_names, pick_lib, JP_WORKS)
 from paintings import PIGMENT_SINCE  # noqa: E402
 
@@ -87,7 +88,7 @@ YEAR0 = 20000
 POOL = 40       # dynamic-palette candidates kept per painting: headroom above the live slider's 20-color top
                 # (ROADMAP §13 / David 2026-10-09 "any count via one shared slider, 2-20") so picking 20 still
                 # drops a few near-duplicates by distinctness, AND every present hue family gets a fair shot
-POOL_SIDE = 512 # long side of the copy the pool k-means runs on -- was 120 (a thumbnail so small it was shaving
+POOL_SIDE = 160 # long side of the copy the pool k-means runs on -- was 120 (a thumbnail so small it was shaving
                 # chroma off thin brushwork before clustering even started); 512 keeps run time sane (~1.2s/
                 # painting measured) while giving fine brushstroke colors (a sleeve, a sash, a flower) enough
                 # pixels to form their own cluster
@@ -321,122 +322,19 @@ def crop_image(im, crop):
 
 
 def extract_pool(path, k=POOL, crop=None):
-    """Over-cluster in OKLab (OVERSEG_MIN-ish groups), represent each by a real pixel (medoid, never a blended
-    average -- "never pick muddy averages"), then pick k: first one seat per hue family that clears
-    HUE_FLOOR_SHARE (the diagnosis fix: a small, locally concentrated, genuinely-present color family -- a
-    lilac sleeve against an all-brown canvas -- is never allowed to lose every seat to a crowd of browns), then
-    fill the rest by the original share^.6 x chroma x distinctness greedy rule for area coverage. A final
-    min-spacing pass (MIN_SPACE_OK) drops near-duplicates either pass reached for."""
+    """The painting's pool of up to k colors with area shares, METHOD "vivid-v2" (tools/corpus.py: pick_pool). Every color is a
+    real vivid pixel (never a cluster mean), and any lightness x hue x chroma cell or blob of color covering >= 0.2% of the
+    picture is guaranteed a seat, so a small vivid detail (a red dress, a navy suit) is never averaged away. Returns
+    [(hex, share), ...] by share, descending."""
     im = crop_image(Image.open(path).convert("RGB"), crop)
-    w0, h0 = im.size
-    sc = min(1.0, POOL_SIDE / max(w0, h0))
-    w, h = max(1, round(w0 * sc)), max(1, round(h0 * sc))
-    if (w, h) != (w0, h0):
-        im = im.resize((w, h), Image.BOX)
-    arr = np.asarray(im, dtype=np.float64)
-    lin = _srgb_to_lin(arr)
-    px = _oklab_fwd(lin[..., 0], lin[..., 1], lin[..., 2]).reshape(-1, 3)
-    N = len(px)
-    if N == 0:
+    s = min(1.0, POOL_SIDE / max(im.size))
+    if s < 1:
+        im = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))), Image.BOX)
+    X = CORP.rgb_to_lab(np.asarray(im, dtype=np.float64).reshape(-1, 3))
+    if len(X) == 0:
         return []
-    # canvas-level stats used by the hue-floor scoring: the share-weighted mean color (for "contrast vs
-    # surroundings") and each pixel's (x, y) on the sampled grid (for "spatial compactness" -- a concentrated
-    # patch like a sleeve scores higher than the same area scattered as noise across the canvas)
-    mean_col = px.mean(0)
-    ys, xs = np.divmod(np.arange(N), w)
-    diag = math.hypot(w, h) or 1.0
-
-    rnd = _Rnd()
-    K = min(N, max(OVERSEG_MIN, k * 2))
-    cents = [px[int(rnd() * N) % N]]
-    dmin = ((px - cents[0]) ** 2).sum(1)
-    while len(cents) < K:
-        tot = dmin.sum()
-        if tot <= 0:
-            break
-        t = rnd() * tot
-        i = min(int(np.searchsorted(np.cumsum(dmin), t)), N - 1)
-        cents.append(px[i])
-        dmin = np.minimum(dmin, ((px - cents[-1]) ** 2).sum(1))
-    C = np.array(cents)
-    for _ in range(14):
-        d2 = ((px[:, None, :] - C[None, :, :]) ** 2).sum(-1)
-        lab = d2.argmin(1)
-        C = np.array([px[lab == j].mean(0) if np.any(lab == j) else C[j] for j in range(len(C))])
-    d2 = ((px[:, None, :] - C[None, :, :]) ** 2).sum(-1)
-    lab = d2.argmin(1)
-    groups = []
-    for j in range(len(C)):
-        idxs = np.nonzero(lab == j)[0]
-        if not len(idxs):
-            continue
-        order = idxs[np.argsort(d2[idxs, j])]
-        core = order[:max(1, math.ceil(len(order) * .6))]
-        chroma = np.hypot(px[core, 1], px[core, 2])
-        top = core[np.argsort(-chroma)][:max(1, math.ceil(len(core) * .3))]
-        blend = px[top].mean(0)
-        # medoid snap: the single real pixel (among the chroma-top subset) nearest the blended center -- the
-        # stored color is always a color that actually exists in the painting, never an average of several
-        medoid_i = top[int(np.argmin(((px[top] - blend) ** 2).sum(1)))]
-        col = np.array(px[medoid_i])   # a plain copy (not a view), used as a numpy array only for math below
-        share = len(idxs) / N
-        spread = math.hypot(float(xs[idxs].std()), float(ys[idxs].std())) / diag
-        compact = 1.0 / (1.0 + 6.0 * spread)                      # tighter spatial spread -> closer to 1
-        contrast = float(np.hypot(*(col[1:] - mean_col[1:]))) + abs(float(col[0] - mean_col[0])) * .5
-        groups.append({"gid": j, "col": col, "share": share, "compact": compact, "contrast": contrast})
-    groups = [g for g in groups if g["share"] > .0015]
-    if not groups:
-        return []
-
-    def chroma_of(g):
-        return math.hypot(g["col"][1], g["col"][2])
-
-    def hue_of(g):
-        return math.degrees(math.atan2(g["col"][2], g["col"][1])) % 360
-
-    # ---- pass 1: one reserved seat per hue family actually present above HUE_FLOOR_SHARE (the diagnosis fix) ----
-    by_bin = {}
-    for g in groups:
-        if chroma_of(g) < .02:         # near-neutral: no stable hue, leave it to the area-coverage pass
-            continue
-        b = int(hue_of(g) // (360 / HUE_BINS)) % HUE_BINS
-        by_bin.setdefault(b, []).append(g)
-    picked, picked_ids = [], set()
-    for b, gs in by_bin.items():
-        tot_share = sum(x["share"] for x in gs)
-        if tot_share < HUE_FLOOR_SHARE:
-            continue
-        best = max(gs, key=lambda g: (g["share"] ** .5) * chroma_of(g) * g["compact"] * (.4 + g["contrast"]))
-        picked.append(best)
-        picked_ids.add(best["gid"])
-
-    # ---- pass 2: fill the rest by area-coverage fidelity (the original share^.6 x chroma x distinctness rule) ----
-    left = [g for g in groups if g["gid"] not in picked_ids]
-    while len(picked) < k and left:
-        bi, bs = 0, -1.0
-        for i, g in enumerate(left):
-            near = min(float(np.sqrt(((g["col"] - p["col"]) ** 2).sum())) for p in picked) if picked else 1.0
-            s = (g["share"] ** .6) * (.5 + 3 * chroma_of(g)) * min(1.0, near / .14) ** 1.5
-            if s > bs:
-                bi, bs = i, s
-        picked.append(left.pop(bi))
-
-    # ---- final min-spacing de-dup: never two picks closer than MIN_SPACE_OK (a ΔE_ok-ish floor) ----
-    picked.sort(key=lambda g: -g["share"])
-    final_picks = []
-    for g in picked:
-        if all(float(np.sqrt(((g["col"] - p["col"]) ** 2).sum())) >= MIN_SPACE_OK for p in final_picks):
-            final_picks.append(g)
-    if not final_picks:
-        final_picks = picked[:1]
-
-    # ---- re-measure: every canvas pixel goes to its nearest surviving pick, so the shipped shares are honest ----
-    PC = np.array([p["col"] for p in final_picks])
-    final = ((px[:, None, :] - PC[None, :, :]) ** 2).sum(-1).argmin(1)
-    counts = np.bincount(final, minlength=len(final_picks))
-    out = [(_ok_hex(p["col"]), counts[j] / N) for j, p in enumerate(final_picks) if counts[j] > 0]
-    out.sort(key=lambda x: -x[1])
-    return out
+    S, sh = CORP.pick_pool(X, k)
+    return [(CORP.rgb_to_hex(c), float(w)) for c, w in zip(CORP.lab_to_rgb(S), sh)]
 
 
 REAL_SRCS = {"aic", "cma", "met", "nga", "rijks", "smk", "commons"}
@@ -474,11 +372,11 @@ def run_pools(corpus, raw, workers=8):
             if line.strip():
                 r = json.loads(line)
                 done[r["key"]] = r["pl"]
-                made_with[r["key"]] = r.get("crop") or None   # the newest line for a key wins
+                made_with[r["key"]] = (r.get("crop") or None, r.get("m"))   # the newest line for a key wins
     jobs, no_img = [], 0
     for x in corpus:
         crop = x.get("crop") or None   # a painting with a crop box is sampled inside it (tools/crop_paintings.py)
-        if x["id"] in done and made_with.get(x["id"]) == crop:
+        if x["id"] in done and made_with.get(x["id"]) == (crop, CORP.METHOD):   # another METHOD (or a changed crop) recomputes
             continue
         # x["src"] may be a "<real>2" growth bucket (tools/corpus.py build_rows()) that exists only for gallery
         # ordering -- the actual cached image always lives under the real adapter's research/_raw/<real>/img/.
@@ -501,7 +399,7 @@ def run_pools(corpus, raw, workers=8):
                     continue
                 pl = pack_pool(entries)
                 done[key] = pl
-                f.write(json.dumps({"key": key, "pl": pl, "crop": crop_of[key]}) + "\n")
+                f.write(json.dumps({"key": key, "pl": pl, "crop": crop_of[key], "m": CORP.METHOD}) + "\n")
                 if i % 500 == 0:
                     f.flush()
                     print(f"pools {i + 1}/{len(jobs)}  {time.time() - t0:.0f}s", flush=True)

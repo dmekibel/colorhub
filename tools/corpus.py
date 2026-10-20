@@ -64,12 +64,15 @@ if not hasattr(np, "bitwise_count"):
     np.bitwise_count = _bitwise_count
 
 ROOT = Path(__file__).resolve().parent.parent
-RAW = ROOT / "research" / "_raw"
+import os as _os
+# COLORHUB_RAW lets a worktree read the main checkout's image/palette caches (research/_raw is gitignored)
+RAW = Path(_os.environ["COLORHUB_RAW"]) if _os.environ.get("COLORHUB_RAW") else ROOT / "research" / "_raw"
 UA = "ColorHubBot/1.0 (https://github.com/dmekibel/colorhub)"
 PAL_CACHE = RAW / "corpus-palettes.jsonl"
 HASH_CACHE = RAW / "corpus-hashes.jsonl"
 IMG_W = 200          # cached image width
-K_SIDE = 120         # long side of the copy k-means runs on
+K_SIDE = 160         # long side of the copy the color measurement runs on
+METHOD = "vivid-v2"   # stored as "m" on every corpus-palettes.jsonl / corpus-pool.jsonl line; a line made by another method is recomputed
 K = 6
 CHROMA_W = 1.5
 THIS = sys.modules[__name__]
@@ -620,6 +623,193 @@ def wanted_crops():
     return out
 
 
+# ---------------------------------------------------------------------------------------------
+# Vivid measurement (METHOD "vivid-v2", 2026-10-21). The old six-color palette was k-means MEANS picked by area, so a small
+# vivid region (Renoir's red dress, 4% of the picture; the navy suit, 0.3%) averaged into a muddy neighbor or lost its seat.
+# Now: (1) every color is a REAL pixel, the medoid of the high-chroma part of its group, never a mean; (2) coverage is
+# guaranteed by construction (any lightness x hue x chroma cell holding >= CELL_SHARE of the picture, and any dense blob of
+# color the clusters missed, contributes a candidate); (3) the six are chosen by visual weight (marginal area^0.2 x a chroma
+# bonus x distinctness from what is already chosen), not raw area. Everything here is deterministic and numpy-only.
+# ---------------------------------------------------------------------------------------------
+CELL_SHARE = 0.002     # a lightness x hue x chroma cell (or color blob) this large must contribute a candidate
+COVER_RADIUS = 5.0     # dE76: a blob of color further than this from every candidate gets its own
+
+
+def kmeans_labels(X, k, iters=25, seed=1):
+    """Fast Lloyd k-means (k-means++ seeding, one run) on (N,3); returns labels."""
+    rng = np.random.default_rng(seed)
+    n = len(X)
+    idx = [int(rng.integers(n))]
+    d = ((X - X[idx[0]]) ** 2).sum(1)
+    for _ in range(1, k):
+        s = d.sum()
+        i = int(rng.choice(n, p=d / s)) if s > 0 else int(rng.integers(n))
+        idx.append(i)
+        d = np.minimum(d, ((X - X[i]) ** 2).sum(1))
+    Cn = X[idx].copy()
+    xx = (X * X).sum(1)[:, None]
+    for _ in range(iters):
+        lab = (xx - 2 * X @ Cn.T + (Cn * Cn).sum(1)[None]).argmin(1)
+        cnt = np.bincount(lab, minlength=k)
+        new = np.stack([np.bincount(lab, weights=X[:, j], minlength=k) for j in range(3)], 1) / np.maximum(cnt, 1)[:, None]
+        new[cnt == 0] = Cn[cnt == 0]
+        done = np.abs(new - Cn).max() < 1e-2
+        Cn = new
+        if done:
+            break
+    return (xx - 2 * X @ Cn.T + (Cn * Cn).sum(1)[None]).argmin(1)
+
+
+def vivid_rep(P, top=0.3):
+    """One real pixel standing for the group P (n,3 Lab): the medoid of its `top` most chromatic fraction."""
+    if len(P) > 3:
+        c = np.hypot(P[:, 1], P[:, 2])
+        P = P[c >= np.partition(c, int(len(c) * (1 - top)))[int(len(c) * (1 - top))]]
+    return P[((P - P.mean(0)) ** 2).sum(1).argmin()]
+
+
+def cell_reps(X, min_share=CELL_SHARE, top=0.25, weights=False):
+    """Coverage guarantee: split pixels into 3 lightness bands x 12 hue sectors (6 for the near-neutral tier) x 3 chroma tiers (C* 5-12, 12-25, 25+);
+    every cell holding >= min_share of the picture contributes its vivid representative."""
+    N = len(X)
+    c = np.hypot(X[:, 1], X[:, 2])
+    h = np.degrees(np.arctan2(X[:, 2], X[:, 1])) % 360
+    cb = np.digitize(c, [5, 12, 25])
+    hue_bin = np.where(cb == 1, (h // 60) * 2, h // 30).astype(int) % 12   # near-neutrals (C* 5-12) have a shaky hue: 6 wide sectors
+    key = (np.digitize(X[:, 0], [35, 65]) * 12 + hue_bin) * 4 + cb
+    key = np.where(cb > 0, key, -1 - np.digitize(X[:, 0], [20, 40, 60, 80]))   # near-neutrals (C* < 5): five lightness cells
+    out, wts = [], []
+    order = np.argsort(key, kind="stable")
+    ks, starts = np.unique(key[order], return_index=True)
+    ends = list(starts[1:]) + [N]
+    for kk, a, b in zip(ks, starts, ends):
+        if b - a >= min_share * N:
+            out.append(vivid_rep(X[order[a:b]], top))
+            wts.append((b - a) / N)
+    return (out, wts) if weights else out
+
+
+def cover_reps(X, R, radius=COVER_RADIUS, min_share=CELL_SHARE, max_new=24, weights=False):
+    """Dense blobs of color further than `radius` (dE76) from every candidate so far each get a representative."""
+    N = len(X)
+    unc = ((X[:, None, :] - R[None]) ** 2).sum(-1).min(1) > radius ** 2
+    out, wts = [], []
+    for _ in range(max_new):
+        idx = np.nonzero(unc)[0]
+        if len(idx) < min_share * N:
+            break
+        P = X[idx]
+        cell = np.floor(P / (radius * 0.9)).astype(np.int64)
+        _, inv, cnt = np.unique(cell, axis=0, return_inverse=True, return_counts=True)
+        inv = inv.ravel()
+        j = int(cnt.argmax())
+        if cnt[j] < min_share * N * 0.5:
+            break
+        near = ((P - P[inv == j].mean(0)) ** 2).sum(1) <= radius ** 2
+        if near.sum() < min_share * N:
+            unc[idx[inv == j]] = False
+            continue
+        out.append(vivid_rep(P[near], 0.5))
+        wts.append(near.sum() / N)
+        unc[idx[near]] = False
+    return (out, wts) if weights else out
+
+
+def candidate_colors(X, k=24, split=False):
+    """(M,3) Lab candidates, each a real pixel: vivid representatives of k clusters, plus the coverage reps (cells, blobs),
+    plus the lightest and darkest significant tones (the 3% tails). With split=True also returns the number of leading
+    cluster reps and a weight per candidate (the share of the picture the group it stands for covers)."""
+    N = len(X)
+    lab = kmeans_labels(X * np.array([1, CHROMA_W, CHROMA_W]), k)
+    reps, wts = [], []
+    for j in range(k):
+        n = int((lab == j).sum())
+        if n >= max(2, 0.002 * N):
+            reps.append(vivid_rep(X[lab == j]))
+            wts.append(n / N)
+    nc = len(reps)
+    cr, cw = cell_reps(X, weights=True)
+    reps += cr
+    wts += cw
+    L = X[:, 0]
+    lo, hi = np.quantile(L, [0.03, 0.97])
+    reps += [vivid_rep(X[L >= hi], 0.5), vivid_rep(X[L <= lo], 0.5)]
+    wts += [0.03, 0.03]
+    R = np.array(reps)
+    er, ew = cover_reps(X, R, weights=True)
+    if er:
+        R = np.vstack([R, np.array(er)])
+        wts += ew
+    return (R, nc, np.array(wts)) if split else R   # split: rows [0, nc) are cluster reps, the rest are coverage reps
+
+
+def pick_visual(X, R, n=6, mind=8.0, ex=0.2, cb=2.0, near=7.0, dist=60.0):
+    """The n colors with the most visual weight: greedy on (area not yet represented)^ex x (1 + cb x chroma/40) x
+    min(1, dE2000-to-chosen / dist), never closer than `mind` (dE2000) to a chosen one. The dominant neutral
+    (>= 12% of the picture, C* < 15) always goes in first. Area enters at a low power so a 0.3% navy suit can outrank a
+    5% mid-brown; the chroma and distinctness terms keep the six from being six browns."""
+    N = len(X)
+    nr = (np.sqrt(((X[:, None, :] - R[None]) ** 2).sum(-1)) <= near)
+    Cc = np.hypot(R[:, 1], R[:, 2])
+    dd = de2000(R, R)
+    share = np.bincount(((X[:, None, :] - R[None]) ** 2).sum(-1).argmin(1), minlength=len(R)) / N
+    covered = np.zeros(N, bool)
+    chosen = []
+    j = int(share.argmax())
+    if share[j] > 0.12 and Cc[j] < 15:
+        chosen.append(j)
+        covered |= nr[:, j]
+    while len(chosen) < n:
+        marg = (nr & ~covered[:, None]).sum(0) / N
+        best, bs = None, -1.0
+        for i in range(len(R)):
+            if i in chosen or marg[i] < 0.0015:
+                continue
+            dm = dd[i, chosen].min() if chosen else dist
+            if chosen and dm < mind:
+                continue
+            s = marg[i] ** ex * (1 + cb * min(Cc[i], 60) / 40) * min(1.0, dm / dist)
+            if s > bs:
+                best, bs = i, s
+        if best is None:
+            break
+        chosen.append(best)
+        covered |= nr[:, best]
+    return R[chosen]
+
+
+def pick_pool(X, k=40, spacing=3.0, wide=12.0, ex=0.5, cover_ex=0.15, frac=0.6):
+    """The dynamic-palette pool: up to k colors, each a real vivid pixel. Coverage reps (cells, blobs, light and dark tails)
+    are seated first (up to 80% of the pool) on weight^cover_ex x chroma bonus, so a small distinct color is not outranked
+    by a bigger one; the cluster reps then fill the rest on weight^ex x chroma bonus. Never closer than `spacing` (dE76)
+    to a seated color. Returns (Lab colors (m,3), shares (m,)) by share."""
+    R, nc, W = candidate_colors(X, split=True)
+    Cc = np.hypot(R[:, 1], R[:, 2])
+    chosen = []
+
+    def seat(cands, limit, e, spacing):
+        sc = W[cands] ** e * (1 + Cc[cands] / 40)
+        for q in np.argsort(-sc, kind="stable"):
+            if len(chosen) >= limit:
+                return
+            i = cands[q]
+            if not chosen or np.sqrt(((R[chosen] - R[i]) ** 2).sum(1)).min() >= spacing:
+                chosen.append(i)
+
+    seat(list(range(nc, len(R))), int(k * frac), cover_ex, wide)
+    seat(list(range(len(R))), k, ex, spacing)
+    S = R[chosen]
+    sh = assign_shares(X, S)
+    o = np.argsort(-sh, kind="stable")
+    return S[o], sh[o]
+
+
+def assign_shares(X, S):
+    """Area share of each color in S: every pixel goes to its nearest one (so the shares sum to 1)."""
+    cnt = np.bincount(((X[:, None, :] - S[None]) ** 2).sum(-1).argmin(1), minlength=len(S))
+    return cnt / cnt.sum()
+
+
 def palette_of(path, crop=None):
     im = crop_to(Image.open(path).convert("RGB"), crop)
     a = np.asarray(im, dtype=np.float64)
@@ -639,16 +829,15 @@ def palette_of(path, crop=None):
     bg = backdrop_mask(X, im.height, im.width)
     if bg is not None:
         X = X[~bg]
-    lab = kmeans(X * np.array([1, CHROMA_W, CHROMA_W]), K)
-    counts = np.bincount(lab, minlength=K)
-    order = [j for j in np.argsort(-counts) if counts[j] > 0]
-    cent = np.array([X[lab == j].mean(0) for j in order])
-    shares = counts[order] / counts.sum()
     Lp, Cp, _ = lch(X)
+    S = pick_visual(X, candidate_colors(X), K)
+    shares = assign_shares(X, S)
+    order = np.argsort(-shares, kind="stable")
+    cent, shares = S[order], shares[order]
     return dict(lab=np.round(cent, 2).tolist(), share=np.round(shares, 4).tolist(),
                 L=round(float(Lp.mean()), 2), C=round(float(Cp.mean()), 2),
                 size=[im.width, im.height], trim=[l, t, r, b], bg=round(float(bg.mean()), 3) if bg is not None else 0,
-                crop=list(crop) if crop else None)
+                crop=list(crop) if crop else None, m=METHOD)
 
 
 def _palette_job(args):
@@ -670,7 +859,7 @@ def run_palettes(workers=6):
             key = f"{src}-{x['id']}"
             p = img_path(src, x["id"])
             want, cf = crops.get(key) or (None, None)   # a changed crop box recomputes the palette; the newest line wins
-            if p.exists() and (key not in done or (done[key].get("crop") or None) != want):
+            if p.exists() and (key not in done or done[key].get("m") != METHOD or (done[key].get("crop") or None) != want):
                 jobs.append((key, str(p), want, cf))
     print(f"palettes: {len(done)} cached, {len(jobs)} to compute", flush=True)
     if not jobs:
