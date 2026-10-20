@@ -282,7 +282,7 @@ def drop_duplicates(new, old):
     old_by_id = {o["id"]: o for o in old}
     def hd_note(r, oid):   # the museum row is only our own small copy (AIC blocks hotlinking): use this Commons file for display
         o = old_by_id.get(oid)
-        if o and str(o.get("img", "")).startswith("img/gallery/"):
+        if o and (str(o.get("img", "")).startswith("img/gallery/") or o["id"].split("-", 1)[0] in ("aic", "smk")):   # served from our small copy
             HD[oid] = r["img"]
     pool = list(old)
     hashes = {}

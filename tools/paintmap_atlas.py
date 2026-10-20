@@ -211,6 +211,25 @@ def square_crop_resize(raw, crop, tile):
     return im
 
 
+_IDS = None
+def local_copy(i):
+    """The corpus's own cached copy of gallery painting i (2026-10-20): every painting added by tools/artist_extra.py or
+    tools/corpus.py was already downloaded to research/_raw/<src>/img/<id>.jpg, the same photo the crop was measured on,
+    so the atlas reads it from disk instead of fetching ~25,000 thumbnails again (hours under Wikimedia's rate limits)."""
+    global _IDS
+    if _IDS is None:
+        p = os.path.join(GAL, "ids.txt")
+        _IDS = open(p).read().split("\n") if os.path.exists(p) else []
+    if i >= len(_IDS) or "-" not in _IDS[i]:
+        return None
+    src, rid = _IDS[i].split("-", 1)
+    path = os.path.join(ROOT, "research", "_raw", src, "img", rid + ".jpg")
+    if not os.path.exists(path):
+        return None
+    with open(path, "rb") as f:
+        return f.read()
+
+
 def parse_line(line):
     tab = line.find("\t")
     code_addr = line if tab < 0 else line[:tab]
@@ -259,6 +278,9 @@ def process_one(i, item, retries=RETRIES):
         else:
             code_addr, crop = parse_line(item)
             kind, loc = thumb_url(code_addr)
+            local = local_copy(i)
+            if local:   # the corpus already downloaded this painting (research/_raw/<src>/img): no network at all
+                return i, square_crop_resize(local, crop, TIER1_TILE), None
         raw = fetch_bytes(kind, loc, retries=retries)
         t1 = square_crop_resize(raw, crop, TIER1_TILE)
         return i, t1, None
