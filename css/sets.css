@@ -300,3 +300,39 @@ html.sheet-open .sx-tray,html.booth .sx-tray{display:none}
 .sp-dots{position:absolute;top:6px;right:6px;z-index:1;display:flex;gap:3px;padding:3px 4px;border-radius:var(--r-pill);background:rgba(14,13,11,.5)}
 .sp-dot{width:7px;height:7px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.5);opacity:.3}
 .sp-dot.on{opacity:1}
+
+/* ---------- the palette page's preview (Lane E, 2026-10-20): one control, four looks ---------- */
+.sp-title-big{display:block}
+.sp-title-big button{display:inline}
+.sp-from{display:flex;align-items:flex-start;gap:14px;margin:0}
+.sp-from .sp-title{flex:1;min-width:0;display:block;margin:0;overflow-wrap:anywhere;text-wrap:balance;font-size:clamp(28px,7.4vw,34px);line-height:1.08}   /* a painting title runs long: a size down from the name-chain title */
+.sp-from-img{flex:none;width:64px;height:80px;margin:4px 0 0;border-radius:var(--r-1);overflow:hidden;background:var(--surface-2);box-shadow:inset 0 0 0 1px rgba(236,232,223,.12)}
+.sp-from-img img{display:block;width:100%;height:100%;object-fit:cover}
+.sp-from-img:active{filter:brightness(1.1)}
+.sp-views{display:flex;gap:2px;margin:20px 0 0;padding:3px;border-radius:var(--r-pill);background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--rule)}
+.sp-views button{flex:1 1 auto;min-width:0;height:40px;padding:0 10px;border-radius:var(--r-pill);font:500 15px/1 var(--sans);color:var(--soft);white-space:nowrap;transition:background .2s var(--ease),color .2s var(--ease)}
+.sp-views button.on{background:var(--paper);color:var(--paper-ink)}
+.sp-vshort{display:none}
+@media (max-width:359px){.sp-vlong{display:none}.sp-vshort{display:inline}.sp-views button{padding:0 6px;font-size:14px}}
+.sp-vpane[hidden]{display:none}
+.sp-vpane .sp-strip{margin-top:12px}
+.sp-strip button{min-width:0}
+.sp-grid{display:grid;grid-template-columns:repeat(var(--cols,4),1fr);gap:6px;margin:12px 0 0}
+.sp-grid button{aspect-ratio:1;border-radius:var(--r-1);background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.12)}
+.sp-grid button:active{filter:brightness(1.08)}
+.sp-poster{margin:12px auto 0;max-width:340px;padding:7% 7% 9%;background:var(--paper);border-radius:var(--r-1);box-shadow:0 14px 30px -18px rgba(0,0,0,.7)}
+.sp-poster-in{position:relative;aspect-ratio:80/100;background:var(--paper)}
+.sp-poster-in button{position:absolute;background:var(--c);box-shadow:inset 0 0 0 .5px rgba(20,19,17,.18)}
+.sp-poster-in button:active{filter:brightness(1.06)}
+.sp-onp{margin:12px 0 0;display:flex;gap:8px;align-items:stretch}
+.sp-onp-stage{position:relative;flex:1;min-width:0;line-height:0;border-radius:var(--r-1);overflow:hidden;background:var(--surface-2);box-shadow:inset 0 0 0 1px rgba(236,232,223,.1);cursor:pointer}
+.sp-onp-stage img{display:block;width:100%;height:auto;max-height:70vh;object-fit:contain}
+.sp-pin{position:absolute;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;background:var(--c);border:3px solid #F3F0EA;box-shadow:0 0 0 1px rgba(14,13,11,.55),0 2px 8px rgba(0,0,0,.5)}
+.sp-pin:active{transform:scale(1.15)}
+.sp-onp-bars{flex:none;width:44px;display:flex;flex-direction:column;border-radius:var(--r-1);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(236,232,223,.1)}
+.sp-onp-bars button{flex:1;min-height:0;background:var(--c)}
+.sp-nt{flex:1;min-width:0;font:400 19px/1.2 var(--serif)}
+.sp-nt b{display:inline;font:inherit}
+.sp-nt small{font:400 14px/1.2 var(--sans);color:var(--soft)}
+.sp-strip .sp-expand{position:absolute;flex:none;min-width:38px}
+.sp-from .sp-title{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}

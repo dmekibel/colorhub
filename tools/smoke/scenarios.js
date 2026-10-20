@@ -4864,6 +4864,27 @@ scenario("sets", "a pair page: facts and paintings and Add a color makes a trio"
   await t.click(".sp-page .sp-plus ~ button, .sp-names [data-swatch]", { force: true, wait: 800 });
   await t.waitFor(".cp-page .cp-hero-foot h1", 12000, "a color page from the trio");
 });
+scenario("sets", "a palette built from a painting: short title, one preview control with the looks, no '+' in the bar", async t => {
+  SP.placed();
+  const hx = ["#2F5D50", "#7FA38B", "#C9D2B8", "#8A6FA8", "#3B4A7A", "#E3B5C2", "#F2EBD5"];
+  await t.open("#/today", { settle: 400, keepState: true });
+  t.ev(`S.palettes = [{ id: "e1", cols: ${JSON.stringify(hx)}, from: "A painting", at: today(), painting: { i: null, t: "A test painting" } }]; save()`);
+  await t.open("#/set/" + hx.map(h => h.slice(1).toLowerCase()).join("-"), { settle: 800, keepState: true });
+  await t.waitFor(".sp-page .sp-views", 12000, "the set page with its preview control");
+  await t.waitFor(".sp-page .sp-title-from", 6000, "the From <painting> title");
+  t.expect(/^From A test painting/.test(t.text(".sp-title-from")), "the title doesn't say where the palette came from");
+  t.expect(/7 colors/.test(t.ev(`[...document.querySelectorAll(".sp-page .eyebrow")].pop().textContent`)), "the eyebrow doesn't say 7 colors: " + t.ev(`[...document.querySelectorAll(".sp-page .eyebrow")].map(e => e.textContent).join("|")`));
+  t.expect(!t.$(".sp-strip [data-sp-add], .sp-strip .sp-plus-sw"), "the bar still holds a '+' segment");
+  t.expect(t.$$(".sp-names .sp-name").length === 7 && t.$(".sp-names .sp-name-add"), "the list should hold 7 rows and a quiet Add a color row");
+  const vis = () => t.ev(`[...document.querySelectorAll(".sp-page [data-vpane]")].filter(p => !p.hidden).map(p => p.dataset.vpane).join()`);
+  t.expect(t.$$(".sp-views button").length === 3, "no painting index, so three views (Strip, Swatches, Poster)");
+  t.expect(vis() === "strip", "Strip should be the default view");
+  await t.click('.sp-views [data-view="swatches"]', { wait: 300 });
+  t.expect(vis() === "swatches" && t.$$(".sp-grid button").length === 7, "Swatches view doesn't show 7 tiles");
+  await t.click('.sp-views [data-view="poster"]', { wait: 300 });
+  t.expect(vis() === "poster" && t.$$(".sp-poster-in button").length === 7, "Poster view doesn't use every color");
+  t.ev(`localStorage.removeItem("colorhub-sp-view")`);
+});
 scenario("sets", "double-tap the top swatches keeps the palette (a heart burst); a single tap still opens that color", async t => {
   SP.placed();
   await t.open("#/pair/4f6b3a+c2412d", { settle: 800, keepState: true });

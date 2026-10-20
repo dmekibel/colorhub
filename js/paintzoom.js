@@ -480,15 +480,18 @@ function glZoomOpen(opts) {
   pkActEl.addEventListener("click", e => {
     if (!e.target.closest("[data-glzpksave]")) return;
     const hexes = PKS.picks.map(p => p.hex); if (hexes.length < 2) return;
+    // the painting it came from, with where each color was picked (fractions of the image), so the palette's page
+    // can show the painting and a dot at every pick (js/setpage.js, "On the painting")
+    const pref = { i: opts.galleryIndex != null ? opts.galleryIndex : null, t: opts.title || "", pts: PKS.picks.map(p => [String(p.hex).toUpperCase(), +(+p.fx).toFixed(4), +(+p.fy).toFixed(4)]) };
     const ex = PKS.savedId && (S.palettes || []).find(x => x.id === PKS.savedId);
     if (ex) {
-      ex.cols = hexes.slice(); ex.at = today(); save();
+      ex.cols = hexes.slice(); ex.at = today(); ex.painting = pref; save();
       if (typeof buzz === "function") buzz([10, 30, 20]);
-      if (typeof toast === "function") toast("Kept palette updated", { action: "Open", onAction: () => { if (typeof spPage === "function") spPage(hexes, { push: true }); } });
+      if (typeof toast === "function") toast("Kept palette updated", { action: "Open", onAction: () => { if (typeof spPage === "function") spPage(hexes, { push: true, painting: pref }); } });
     } else if (typeof glSavePalette === "function") {
-      const sp = glSavePalette(hexes, glSaveName(opts.title || "A painting", "My palette"));
+      const sp = glSavePalette(hexes, glSaveName(opts.title || "A painting", "My palette"), false, pref);
       if (!sp) return;
-      sp.painting = { i: opts.galleryIndex != null ? opts.galleryIndex : null, t: opts.title || "" }; save(); PKS.savedId = sp.id;
+      PKS.savedId = sp.id;
     }
     PKS.savedSig = hexes.join(); pkRenderAct();
   });

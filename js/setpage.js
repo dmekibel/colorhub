@@ -9,6 +9,7 @@
 const SP_STRENGTH = [["subtle", "Subtle", .4], ["clear", "Clear", .7], ["bold", "Bold", 1]];
 const SP_ICON_GRIP = sv('<circle cx="9" cy="6" r="1.5" fill="currentColor" stroke="none"/><circle cx="15" cy="6" r="1.5" fill="currentColor" stroke="none"/><circle cx="9" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="9" cy="18" r="1.5" fill="currentColor" stroke="none"/><circle cx="15" cy="18" r="1.5" fill="currentColor" stroke="none"/>', 18);
 const SP_MIN_N = 5;        // fewer paintings than this and we don't talk about painters' habits
+const SP_MAX = 100;        // a palette built from a painting can hold up to 100 colors (js/paintzoom.js PK_MAX)
 const SP_Q = 5;            // the index takes up to five colors at once
 let SP_STR = "clear", SP_SEQ = 0;
 
@@ -30,7 +31,7 @@ const spHex = h => /^#?[0-9a-f]{6}$/i.test(String(h || "")) ? "#" + String(h).re
 // order is no longer forced dark-to-light — it's whatever order the colors arrived in, or were dragged to).
 function spCanon(hexes) {
   const out = [];
-  (Array.isArray(hexes) ? hexes : String(hexes || "").split(/[+,\-]/)).map(spHex).filter(Boolean).forEach(h => { if (!out.some(x => de2000(x, h) < 1) && out.length < 8) out.push(h); });
+  (Array.isArray(hexes) ? hexes : String(hexes || "").split(/[+,\-]/)).map(spHex).filter(Boolean).forEach(h => { if (!out.some(x => de2000(x, h) < 1) && out.length < SP_MAX) out.push(h); });
   return out;
 }
 const spPath = hexes => (hexes.length === 2 ? "pair/" + hexes.map(h => h.slice(1).toLowerCase()).join("+") : "set/" + hexes.map(h => h.slice(1).toLowerCase()).join("-"));
@@ -38,7 +39,68 @@ const spNm = h => { const n = nameOf(h); return n.de < VERY_CLOSE_DE && !n.betwe
 const spList = a => a.length <= 1 ? a.join("") : a.length === 2 ? a.join(" and ") : a.slice(0, -1).join(", ") + " and " + a[a.length - 1];
 const spTimes = l => (l >= 10 ? Math.round(l) : l.toFixed(1)) + "×";
 const spNum = n => Math.round(n).toLocaleString("en-US");
-const spTitle = hexes => hexes.map(spNm).join(" + ");
+// ---------- names for the list and the title (Lane E, 2026-10-20) ----------
+// A picked color's descriptive name can embed an obscure token ("Bluish MSU green") or double a hue word ("Purplish
+// poppy purple"). Only on this page: such a name gives way to the nearest real name that reads cleanly, with its match
+// ("Pine · 96% match"). nameOf()/nameOfTapped() and every other page are untouched.
+const SP_OBSCURE = /\b(msu|ucla|usc|byu|lsu|psu|nyu|mit|ncs|ral|cmyk|ufo|ysl|bpg|cg)\b/i;
+const SP_HUE_STEM = { reddish: "red", yellowish: "yellow", greenish: "green", bluish: "blu", purplish: "purpl", orangish: "orang", pinkish: "pink" };
+const spObscure = (name, mod) => /\b[A-Z]{2,5}\b/.test(name) || /\d/.test(name) || SP_OBSCURE.test(name)
+  || !!(mod && SP_HUE_STEM[mod.toLowerCase()] && new RegExp(SP_HUE_STEM[mod.toLowerCase()], "i").test(name));
+function spListName(h) {
+  const nm = nameOf(h, { n: 8 });
+  if (!nm.n) return { n: h };
+  if (nm.de < VERY_CLOSE_DE && !nm.between) return { n: nm.n };
+  if (nm.between || !nm.mod || !spObscure(nm.n, nm.mod)) return { n: nm.text || h };
+  const alt = (nm.near || []).find(x => x.de < NEAR_DE && !spObscure(x.n, ""));
+  return alt ? { n: alt.n, match: pctMatch(alt.de) } : { n: nm.text || h };
+}
+// a palette's heading: a pair or trio chains its names; a bigger one says two of them and how many more
+const spTitleName = h => { const nm = nameOf(h, { n: 8 }); const c = (nm.near || []).find(x => !spObscure(x.n, "")); return c ? c.n : (nm.n || h); };
+const spShort = hexes => {
+  const ns = []; hexes.forEach(h => { const n = spTitleName(h); if (ns.length < 2 && !ns.includes(n)) ns.push(n); });
+  const more = hexes.length - ns.length;
+  return more > 0 ? `${ns.join(", ")} and ${more} more` : ns.join(" and ");
+};
+const spTitle = hexes => hexes.length <= 3 ? hexes.map(spNm).join(" + ") : spShort(hexes);
+// the painting a palette was built from (Look closer > Pick > Save): handed in, or found on the kept palette
+function spPaintingRef(hexes, o) {
+  let r = o && o.painting;
+  if (!r) {
+    const up = hexes.map(h => h.toUpperCase());
+    const p = (S.palettes || []).find(x => x && x.painting && Array.isArray(x.cols) && up.every(h => x.cols.some(c => String(c).toUpperCase() === h)));
+    r = p && p.painting;
+  }
+  return r && (r.i != null || r.t) ? r : null;
+}
+// view choice: remembered, never required
+const SP_VIEW_KEY = "colorhub-sp-view";
+const spViewGet = () => { try { return localStorage.getItem(SP_VIEW_KEY) || "strip"; } catch (e) { return "strip"; } };
+const spViewSet = v => { try { localStorage.setItem(SP_VIEW_KEY, v); } catch (e) {} };
+// swatch-grid columns: the fewest empty cells in the last row (ties: more columns, for bigger sets)
+function spGridCols(k) {
+  if (k <= 4) return Math.max(k, 1);
+  const opts = k <= 12 ? [3, 4] : k <= 20 ? [4, 5] : [5, 6];
+  let best = opts[0], bs = -1;
+  opts.forEach(c => { const f = k / (c * Math.ceil(k / c)); if (f >= bs) { bs = f; best = c; } });
+  return best;
+}
+// a calm color-block print: the quiet colors take the room, the vivid ones are accents (about 60-30-10), then
+// the blocks are cut by weight, longest side first. Deterministic: same palette, same poster.
+function spPosterBlocks(hexes) {
+  const items = hexes.map((h, i) => { const [L, C] = lch(h); return { h, i, w: Math.max(.12, Math.min(1, 1 / Math.pow(1 + C / 20, 1.5) * (L > 94 || L < 6 ? .85 : 1))) }; })
+    .sort((a, b) => b.w - a.w || a.i - b.i);
+  const out = [], sum = l => l.reduce((a, b) => a + b.w, 0);
+  const lay = (list, x, y, w, h) => {
+    if (list.length === 1) { out.push({ h: list[0].h, x, y, w, ht: h }); return; }
+    const tot = sum(list); let acc = 0, cut = 1, bd = 9;
+    for (let j = 0; j < list.length - 1; j++) { acc += list[j].w; const d = Math.abs(acc - tot / 2); if (d < bd) { bd = d; cut = j + 1; } }
+    const a = list.slice(0, cut), b = list.slice(cut), f = sum(a) / tot;
+    if (w >= h) { lay(a, x, y, w * f, h); lay(b, x + w * f, y, w * (1 - f), h); } else { lay(a, x, y, w, h * f); lay(b, x, y + h * f, w, h * (1 - f)); }
+  };
+  lay(items, 0, 0, 80, 100);
+  return out;
+}
 // the five most distinct colors (farthest-point, from the most vivid), for queries the index caps at five
 function spPickQ(hexes) {
   if (hexes.length <= SP_Q) return hexes.slice();
@@ -252,15 +314,40 @@ function spPage(hexes, o = {}) {
   // you're already on that exact color) and long-press on any swatch already adds it to the tray (js/settray.js),
   // so the full-screen look gets its own small control on the cover itself rather than overloading either gesture.
   const expandBtn = `<button class="sp-expand icon-btn glass" data-sp-expand aria-label="View full screen, side by side">${ICON.search}</button>`;
+  // ---- the look of the page (Lane E, 2026-10-20) ----
+  // Pairs keep their two plates. Three or more get a title that never chains more than three names, one preview
+  // control (Strip / Swatches / On the painting / Poster, remembered), the list, and a quiet "Add a color" row.
+  const ref = k >= 3 ? spPaintingRef(hexes, o) : null, onPaint = !!(ref && ref.i != null), big = k > 3 || !!ref;
+  const listNames = hexes.map(spListName);
+  const views = pair ? [] : [["strip", "Strip"], ["swatches", "Swatches"], ...(onPaint ? [["painting", "On the painting"]] : []), ["poster", "Poster"]];
+  let view = spViewGet(); if (!views.some(v => v[0] === view)) view = "strip";
+  const tn = []; hexes.forEach((h, i) => { const n = spTitleName(h); if (tn.length < 2 && !tn.some(x => x.n === n)) tn.push({ n, h }); });
+  const shortText = tn.map(x => x.n).join(", ") + (k > tn.length ? ` and ${k - tn.length} more` : "");
+  const sizeCls = t => t.length > 44 ? " longer" : t.length > 24 ? " long" : "";
+  const titleHtml = ref
+    ? `<div class="sp-from">${onPaint ? `<button class="sp-from-img" data-sp-from aria-label="Open ${esc(ref.t || "the painting")}"><img alt="" data-sp-fromimg></button>` : ""}<h1 class="p-title sp-title sp-title-from${sizeCls(ref.t || "")}">From ${esc(ref.t || "a painting")}</h1></div>`
+    : big ? `<h1 class="p-title sp-title sp-title-big${sizeCls(shortText)}">${tn.map(x => `<button data-swatch="${x.h}">${esc(x.n)}</button>`).join(", ")}${k > tn.length ? ` and ${k - tn.length} more` : ""}</h1>`
+    : `<h1 class="p-title sp-title${sizeCls(names.join(""))}">${names.map((n, i) => `<button data-swatch="${hexes[i]}">${esc(n)}</button>`).join(`<span class="sp-plus">+</span>`)}</h1>`;
+  const poster = pair ? "" : spPosterBlocks(hexes).map(b => `<button data-swatch="${b.h}" style="--c:${b.h};left:${(b.x / .8).toFixed(3)}%;top:${b.y.toFixed(3)}%;width:${(b.w / .8).toFixed(3)}%;height:${b.ht.toFixed(3)}%" aria-label="${esc(spNm(b.h))}"></button>`).join("");
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
-    <p class="eyebrow p-type">${pair ? "A pair" : k === 3 ? "A trio" : `A palette of ${k}`}</p>
-    <h1 class="p-title sp-title${names.join("").length > 44 ? " longer" : names.join("").length > 24 ? " long" : ""}">${names.map((n, i) => `<button data-swatch="${hexes[i]}">${esc(n)}</button>`).join(`<span class="sp-plus">+</span>`)}</h1>
+    <p class="eyebrow p-type">${pair ? "A pair" : ref ? `${k} colors` : k === 3 ? "A trio" : `A palette of ${k}`}</p>
+    ${titleHtml}
     ${o.undo ? `<div class="sp-undo" data-undo-bar><span>${esc(o.applied || "Changed")}.</span><button data-undo>Undo</button></div>` : ""}
     ${pair ? `<div class="sp-pair" data-dbltap>${plate(hexes[0], hexes[1], 0)}${plate(hexes[1], hexes[0], 1)}${k < 8 ? `<button class="sp-pair-add" data-sp-add aria-label="Add a color">${sv('<path d="M12 5v14M5 12h14"/>', 20, 1.8)}</button>` : ""}${expandBtn}</div>`
-      : `<div class="sp-strip" data-strip data-dbltap>${hexes.map(h => `<button data-swatch="${h}" style="--c:${h};flex:1" aria-label="${esc(spNm(h))}"></button>`).join("")}${k < 8 ? `<button class="sp-plus-sw" data-sp-add aria-label="Add a color">${sv('<path d="M12 5v14M5 12h14"/>', 20, 1.8)}</button>` : ""}${expandBtn}</div>
-         <p class="sp-strip-cap" data-stripcap>Equal shares. Press and drag a segment to reorder.</p>
-         <div class="sp-names" data-names>${hexes.map((h, i) => `<span class="sp-name"><button data-swatch="${h}"><i style="--c:${h}"></i><b>${esc(names[i])}</b><em class="mono">${h}</em></button><button class="sp-handle" data-handle="${i}" aria-label="Drag to reorder ${esc(names[i])}">${SP_ICON_GRIP}</button><button class="sp-drop" data-drop="${i}" aria-label="Remove ${esc(names[i])}">${SX_ICON_X}</button></span>`).join("")}${k < 8 ? `<button class="sp-name-add" data-sp-add><span class="sp-plus-sw sp-plus-row">${sv('<path d="M12 5v14M5 12h14"/>', 20, 1.8)}</span><b>Add a color</b></button>` : ""}</div>`}
+      : `<div class="sp-views" role="group" aria-label="Preview">${views.map(([v, t]) => `<button data-view="${v}" aria-pressed="${v === view}" class="${v === view ? "on" : ""}">${v === "painting" ? `<span class="sp-vlong">On the painting</span><span class="sp-vshort">Painting</span>` : t}</button>`).join("")}</div>
+         <div class="sp-vpane" data-vpane="strip"${view === "strip" ? "" : " hidden"}>
+           <div class="sp-strip" data-strip data-dbltap>${hexes.map((h, i) => `<button data-swatch="${h}" style="--c:${h};flex:1" aria-label="${esc(listNames[i].n)}"></button>`).join("")}${expandBtn}</div>
+           <p class="sp-strip-cap" data-stripcap>Equal shares. Press and drag a segment to reorder.</p>
+         </div>
+         <div class="sp-vpane" data-vpane="swatches"${view === "swatches" ? "" : " hidden"}>
+           <div class="sp-grid" style="--cols:${spGridCols(k)}">${hexes.map((h, i) => `<button data-swatch="${h}" style="--c:${h}" aria-label="${esc(listNames[i].n)}"></button>`).join("")}</div>
+         </div>
+         ${onPaint ? `<div class="sp-vpane" data-vpane="painting" data-onp${view === "painting" ? "" : " hidden"}><p class="fine">Loading the painting…</p></div>` : ""}
+         <div class="sp-vpane" data-vpane="poster"${view === "poster" ? "" : " hidden"}>
+           <div class="sp-poster"><div class="sp-poster-in">${poster}</div></div>
+         </div>
+         <div class="sp-names" data-names>${hexes.map((h, i) => `<span class="sp-name"><button data-swatch="${h}"><i style="--c:${h}"></i><span class="sp-nt"><b>${esc(listNames[i].n)}</b>${listNames[i].match ? `<small> · ${listNames[i].match}</small>` : ""}</span><em class="mono">${h}</em></button><button class="sp-handle" data-handle="${i}" aria-label="Drag to reorder ${esc(listNames[i].n)}">${SP_ICON_GRIP}</button><button class="sp-drop" data-drop="${i}" aria-label="Remove ${esc(listNames[i].n)}">${SX_ICON_X}</button></span>`).join("")}${k < SP_MAX ? `<button class="sp-name-add" data-sp-add><span class="sp-plus-sw sp-plus-row">${sv('<path d="M12 5v14M5 12h14"/>', 20, 1.8)}</span><b>Add a color</b></button>` : ""}</div>`}
     <p class="sp-lead" data-lead aria-live="polite">Reading the paintings…</p>
     <div class="sp-acts" data-acts></div>
     <section class="sp-sec"><h3>${pair ? "How they relate" : "How they work together"}</h3><div class="sp-facts">${(pair ? spPairFacts(hexes[0], hexes[1]) : spSetFacts(hexes, spScheme(hexes))).map(([t, s]) => `<div class="sp-fact"><b>${t}</b><p>${esc(s)}</p></div>`).join("")}</div></section>
@@ -289,6 +376,21 @@ function spPage(hexes, o = {}) {
   addEventListener("scroll", onScroll, { passive: true }); onScroll();
   cleanup.push(() => removeEventListener("scroll", onScroll));
   const $ = s => el.querySelector(s), my = ++SP_SEQ, live = () => my === SP_SEQ && el.isConnected;
+  // ---- the painting this palette came from: thumbnail by the title, and the "On the painting" preview ----
+  if (onPaint) {
+    const pts = new Map((Array.isArray(ref.pts) ? ref.pts : []).map(r => [String(r[0]).toUpperCase(), [+r[1], +r[2]]]));
+    const placed = hexes.every(h => { const q = pts.get(h.toUpperCase()); return q && isFinite(q[0]) && isFinite(q[1]); });
+    loadGallery().then(() => glDetail(ref.i)).then(d => {
+      if (!live()) return;
+      const th = $("[data-sp-fromimg]"); if (th) th.src = d.img;
+      const host = $("[data-onp]"); if (!host) return;
+      const src = typeof glBig === "function" ? glBig(d.img) : d.img;
+      const dots = placed ? hexes.map((h, i) => { const q = pts.get(h.toUpperCase()); return `<button class="sp-pin" data-swatch="${h}" style="--c:${h};left:${(q[0] * 100).toFixed(2)}%;top:${(q[1] * 100).toFixed(2)}%" aria-label="${esc(listNames[i].n)}"></button>`; }).join("") : "";
+      const bars = placed ? "" : `<div class="sp-onp-bars">${hexes.map((h, i) => `<button data-swatch="${h}" style="--c:${h}" aria-label="${esc(listNames[i].n)}"></button>`).join("")}</div>`;
+      host.innerHTML = `<div class="sp-onp${placed ? "" : " beside"}"><div class="sp-onp-stage" data-sp-from role="button" tabindex="0" aria-label="Open ${esc(d.t || ref.t || "the painting")}"><img src="${esc(src)}" alt="${esc(d.t || ref.t || "The painting")}">${dots}</div>${bars}</div>
+        <p class="sp-strip-cap">${placed ? "Each dot sits where its color was picked. Tap the painting to open it." : "The painting beside the palette it gave. Tap the painting to open it."}</p>`;
+    }).catch(() => { if (!live()) return; const host = $("[data-onp]"); if (host) host.innerHTML = `<p class="fine">This painting didn't load just now.</p>`; });
+  }
   // "map" here is csActions' shared "See its colors" door (js/colorset.js, js/palettehive.js): this set's own
   // colors in their own honeycomb, sized by share -- David, 2026-10-09, didn't want a pair/set lit among all
   // the map's other names, so this is new, not a replacement of anything setpage.js had before.
@@ -528,6 +630,15 @@ function spPage(hexes, o = {}) {
     // a painting from one of these rails arrived from the whole set, not just one color of it (David, 2026-10-08):
     // ptArrival (js/paintingsof.js) measures each of `hexes` on that painting itself, so the weakest-cover guess
     // this used to make here isn't needed any more.
+    const vb = e.target.closest("[data-view]");
+    if (vb) {
+      const v = vb.dataset.view; buzz(4); spViewSet(v);
+      el.querySelectorAll("[data-view]").forEach(b => { const on = b === vb; b.classList.toggle("on", on); b.setAttribute("aria-pressed", String(on)); });
+      el.querySelectorAll("[data-vpane]").forEach(pn => { pn.hidden = pn.dataset.vpane !== v; });
+      return;
+    }
+    const sf = e.target.closest("[data-sp-from]");
+    if (sf && onPaint && !e.target.closest("[data-swatch]")) { buzz(5); return galleryPage(ref.i, true); }
     const g = e.target.closest("[data-gi]");
     if (g) return galleryPage(+g.dataset.gi, true, hexes, CI_STD.tol);
     const pr = e.target.closest("[data-pair]"); if (pr) { buzz(6); return spPage(pr.dataset.pair.split("+")); }

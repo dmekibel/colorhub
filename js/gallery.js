@@ -1089,17 +1089,18 @@ const GL_HARM_CHIPS = [["all", "All"], ["comp", "Complementary"], ["analogous", 
 // newest first, capped at 60 -- so a painting's palette shows up in Studio's Kept exactly like any other saved one.
 // an auto name, editable before Save: "<Painting> — <Relation/mode>" (empty label -> just the painting's title)
 function glSaveName(title, label) { return label ? `${title} — ${label}` : title; }
-function glSavePalette(hexes, name, openAfter) {
+function glSavePalette(hexes, name, openAfter, painting) {
   hexes = (hexes || []).filter(Boolean);
   if (hexes.length < 2) return null;
   S.palettes = Array.isArray(S.palettes) ? S.palettes : [];
   const id = typeof plMakeId === "function" ? plMakeId() : "pl" + Date.now().toString(36);
   const p = { id, cols: hexes.slice(), from: "A painting", name: (name || "").trim(), at: today() };
+  if (painting) p.painting = painting;   // the painting it came from: js/setpage.js titles the palette "From <painting>"
   S.palettes.unshift(p);
   S.palettes = S.palettes.slice(0, 60);
   save();
   buzz([10, 30, 20]);
-  toast(`Saved to Kept${p.name ? " · " + p.name : ""}`, { action: "Open", onAction: () => { if (typeof spPage === "function") spPage(hexes, { push: true }); } });
+  toast(`Saved to Kept${p.name ? " · " + p.name : ""}`, { action: "Open", onAction: () => { if (typeof spPage === "function") spPage(hexes, { push: true, painting: p.painting }); } });
   return p;
 }
 
@@ -1905,8 +1906,8 @@ function glPage(i, d, fromHex, tol) {
   const palActsHost = el.querySelector("[data-glpalacts]");
   if (palActsHost) palActsHost.onclick = e => {
     if (e.target.closest("[data-glshuffle]")) return shuffleMode(mode);
-    if (e.target.closest("[data-gledit]")) return glEditOpen(curPal().map(p => p.h), { title: d.t, label: glModeLabel(mode), pool, onSave: (hexes, name) => glSavePalette(hexes, name) });
-    if (e.target.closest("[data-glsave]")) { const lbl = glModeLabel(mode); return glSavePalette(curPal().map(p => p.h), glSaveName(d.t, mode === "out" ? "" : lbl)); }
+    if (e.target.closest("[data-gledit]")) return glEditOpen(curPal().map(p => p.h), { title: d.t, label: glModeLabel(mode), pool, onSave: (hexes, name) => glSavePalette(hexes, name, false, { i, t: d.t }) });
+    if (e.target.closest("[data-glsave]")) { const lbl = glModeLabel(mode); return glSavePalette(curPal().map(p => p.h), glSaveName(d.t, mode === "out" ? "" : lbl), false, { i, t: d.t }); }
   };
   const shufHistHost = el.querySelector("[data-glshufhist]");
   if (shufHistHost) shufHistHost.onclick = e => { const b = e.target.closest("[data-glshufgo]"); if (b) shuffleHistoryTo(mode, +b.dataset.glshufgo); };
@@ -1921,8 +1922,8 @@ function glPage(i, d, fromHex, tol) {
     const ed = e.target.closest("[data-hcedit]"), sv2 = e.target.closest("[data-hcsave]");
     if (ed || sv2) {
       const card = harmCards[+(ed || sv2).dataset[ed ? "hcedit" : "hcsave"]]; if (!card) return;
-      if (ed) return glEditOpen(card.pal.map(p => p.h), { title: d.t, label: card.label, pool, onSave: (hexes, name) => glSavePalette(hexes, name) });
-      return glSavePalette(card.pal.map(p => p.h), glSaveName(d.t, card.label));
+      if (ed) return glEditOpen(card.pal.map(p => p.h), { title: d.t, label: card.label, pool, onSave: (hexes, name) => glSavePalette(hexes, name, false, { i, t: d.t }) });
+      return glSavePalette(card.pal.map(p => p.h), glSaveName(d.t, card.label), false, { i, t: d.t });
     }
   };
   // the painter's own hue habits sharpen "stands out" (a camel that's rare for van Dyck), quietly, once they load
