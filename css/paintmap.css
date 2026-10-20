@@ -114,7 +114,10 @@
 .pmx-chips button:disabled{opacity:.38}
 .pmx-chips button:active{transform:scale(.95)}
 .pmx-chips .pmx-more{background:none;color:var(--soft);font-style:italic;text-decoration:underline;text-underline-offset:3px}
-.pmx-sw{display:flex;gap:6px;overflow-x:auto;margin:0 calc(-1 * var(--g));padding:2px var(--g) 6px;scrollbar-width:none}
+/* the swatch strip bleeds to the sheet's own 16px padding (not --g, which is 24px and made the sheet scroll sideways), and the
+   sheet's scroller is vertical-only, so no row can ever push the whole sheet side to side (David, 2026-10-20) */
+.pmx-sw{display:flex;gap:6px;overflow-x:auto;margin:0 -16px;padding:2px 16px 6px;scrollbar-width:none}
+.pmx-chooser .hm-ch-scroll{overflow-x:hidden}
 .pmx-sw::-webkit-scrollbar{display:none}
 .pmx-sw button{flex:none;width:40px;height:40px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);transition:transform .2s var(--spring)}
 .pmx-sw button.on{box-shadow:0 0 0 2px var(--surface-1),0 0 0 4px var(--paper)}
