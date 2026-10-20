@@ -41,7 +41,8 @@
 .pmx-xchip:active{transform:scale(.95)}
 
 /* filtering by example (David, 2026-10-09): the centered painting's own facets, each one tap = "only these" */
-.pmx-facets{position:absolute;z-index:3;left:12px;right:16px;bottom:calc(var(--corner-b,calc(var(--bottom) + 12px)) + var(--corner,56px) * 2 + 16px);
+.pmx-facets{position:absolute;z-index:3;left:0;right:0;padding:0 36px 0 12px;scroll-padding:0 36px 0 12px;-webkit-overflow-scrolling:touch;
+  -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);bottom:calc(var(--corner-b,calc(var(--bottom) + 12px)) + var(--corner,56px) * 2 + 16px + var(--cap-x,0px));
   display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;pointer-events:none}
 .pmx-facets[hidden]{display:none}
 .pmx-facets::-webkit-scrollbar{display:none}
@@ -55,7 +56,7 @@
 
 /* "Walk from here" (David, 2026-10-09): a trail of small dots, one per step, above the facets row; the current
    step is ringed and bigger. Stacks above .pmx-facets regardless of DOM order (both are position:absolute). */
-.pmx-walk{position:absolute;z-index:3;left:12px;right:16px;bottom:calc(var(--corner-b,calc(var(--bottom) + 12px)) + var(--corner,56px) * 2 + 60px);
+.pmx-walk{position:absolute;z-index:3;left:12px;right:16px;bottom:calc(var(--corner-b,calc(var(--bottom) + 12px)) + var(--corner,56px) * 2 + 60px + var(--cap-x,0px));
   display:flex;align-items:center;gap:7px;overflow-x:auto;scrollbar-width:none;pointer-events:none}
 .pmx-walk[hidden]{display:none}
 .pmx-walk::-webkit-scrollbar{display:none}
@@ -74,6 +75,7 @@
 .pmx-cap::before{content:"";flex:none;align-self:stretch;width:6px;margin-right:8px;border-radius:var(--r-2) 0 0 var(--r-2);background:var(--c,#3A3630)}
 .pmx-cap-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;padding:6px 0;text-align:left;color:var(--ink)}
 .pmx-cap-main b{font:400 18px/1.15 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pmx-cap.two .pmx-cap-main b,.pmx-cap.two .pmx-cap-main small{white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
 .pmx-cap-main small{font-size:14px;line-height:1.2;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pmx-heart{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:var(--soft);transition:color .2s,transform .2s var(--spring)}
 .pmx-heart svg{width:21px;height:21px}
@@ -156,3 +158,8 @@
 .pmx-dot{flex:none;align-self:center;width:12px;height:12px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
 .pmx-none{margin:2px 0 8px;font:italic 400 17px/1.35 var(--serif);color:var(--soft)}
 .pmx-chipbar.pmx-chipbar-wrap{flex-wrap:wrap;overflow:visible;row-gap:6px}
+
+/* the search sheet's rows: a long suggestion ("Dutch · Baroque era · 1860–1880") wraps instead of clipping, the count stays whole */
+.pmx-findsheet .sr-row b{flex:1;min-width:0;overflow-wrap:anywhere}
+.pmx-findsheet .sr-row small{flex:none;text-align:right;white-space:nowrap}
+.pmx-findsheet .sr-none{display:block;margin-bottom:4px;font:400 17px/1.3 var(--serif);color:var(--ink)}

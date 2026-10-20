@@ -451,6 +451,100 @@ function pmChipClear(f, dim) {
   else if (dim === "mus") { f.musSet = []; f.mus = -1; }
 }
 
+// ---------- the smarter map search (David, 2026-10-20) ----------
+// "Russia 1860-80s", "Dutch Baroque", "Monet 1890s": a query is split into pieces the map already has facets for
+// (country, movement, years, painter), each shown as a tappable suggestion row with a live count, and applied as
+// the same removable filter chips the Filter tab makes. Pure parsing here; counting and the sheet live in openFind().
+const PMQ_DEMONYMS = {
+  "Afghanistan": ["afghan"], "Austria": ["austrian"], "Belgium": ["belgian", "flemish"], "Brazil": ["brazilian"], "Canada": ["canadian"],
+  "China": ["chinese"], "Cuba": ["cuban"], "Czechia": ["czech", "bohemian"], "Denmark": ["danish", "dane"], "Egypt": ["egyptian"],
+  "Estonia": ["estonian"], "Finland": ["finnish"], "France": ["french"], "Germany": ["german"], "Greece": ["greek"],
+  "Guatemala": ["guatemalan"], "Hungary": ["hungarian"], "India": ["indian"], "Iran": ["iranian", "persian", "persia"], "Ireland": ["irish"],
+  "Italy": ["italian"], "Japan": ["japanese"], "Korea": ["korean"], "Mexico": ["mexican"], "Mongolia": ["mongolian"],
+  "Nepal": ["nepalese", "nepali"], "Netherlands": ["dutch", "holland", "netherlandish"], "Norway": ["norwegian"], "Pakistan": ["pakistani"],
+  "Peru": ["peruvian"], "Poland": ["polish"], "Portugal": ["portuguese"], "Romania": ["romanian"], "Russia": ["russian"],
+  "Spain": ["spanish"], "Sri Lanka": ["sri lankan", "ceylon"], "Sweden": ["swedish", "swede"], "Switzerland": ["swiss"], "Tibet": ["tibetan"],
+  "Turkey": ["turkish", "ottoman"], "United Kingdom": ["british", "english", "britain", "england", "uk", "scottish", "scotland", "welsh"],
+  "United States": ["american", "america", "usa", "us"], "Uzbekistan": ["uzbek"], "Australia": ["australian"], "Algeria": ["algerian"], "Ethiopia": ["ethiopian"]
+};
+const PMQ_STOP = new Set(["paintings", "painting", "art", "artwork", "artworks", "works", "by", "from", "in", "of", "the", "and", "between", "painters", "painter", "during", "around", "circa", "a", "an", "to", "until", "through"]);
+// where a movement tag is sparse or missing on the map, its textbook era still answers the question (shown as its own row)
+const PMQ_ERAS = { baroque: [1600, 1750, "Baroque era"], renaissance: [1400, 1600, "Renaissance"], rococo: [1730, 1790, "Rococo era"], romantic: [1800, 1850, "Romantic era"], neoclassic: [1760, 1830, "Neoclassical era"] };
+const PMQ_ORDER = { painter: 0, co: 1, mv: 2, when: 3 };
+const pmqKey = w => String(w).toLowerCase().replace(/[^a-z0-9]/g, "");
+const pmqStem = k => { const r = k.replace(/(ical|istic|ists|ist|ism|ic|al)$/, ""); return r.length >= 4 ? r : k; };
+const pmqCache = new WeakMap();
+function pmqTables(F) {
+  let T = pmqCache.get(F); if (T) return T;
+  const co = new Map(), cname = new Map(), mv = new Map();
+  F.meta.countries.forEach((n, j) => {
+    const dm = PMQ_DEMONYMS[n] || [];
+    co.set(pmqKey(n), j + 1); cname.set(j + 1, dm[0] ? dm[0][0].toUpperCase() + dm[0].slice(1) : n);
+    dm.forEach(d => { if (!co.has(pmqKey(d))) co.set(pmqKey(d), j + 1); });
+  });
+  F.meta.movements.forEach((n, j) => { const st = pmqStem(pmqKey(n)); if (!mv.has(st)) mv.set(st, j + 1); });
+  const rg = new Map(PM_REGIONS.map(r => [pmqKey(r[1]), r]));
+  rg.set("european", PM_REGIONS[0]);
+  pmqCache.set(F, T = { co, cname, mv, rg }); return T;
+}
+const pmqYr = (a, b) => ({ y0: a, y1: b, label: a === b ? String(a) : `${a}–${b}` });
+// years: 1888 / 1880s / 1800s / 1860-80 / 1860–80s / 1860 to 1880 / 19th century / late 1800s / early 1880s
+function pmqYears(t) {
+  let m;
+  const part = (a, c, n) => n === 10 ? (c === "early" ? [a, a + 3] : c === "mid" ? [a + 4, a + 6] : [a + 7, a + 9]) : c === "early" ? [a, a + Math.round(n * .33) - 1] : c === "mid" ? [a + Math.round(n * .33), a + Math.round(n * .67) - 1] : [a + Math.round(n * .67), a + n - 1];
+  if ((m = t.match(/\b(early|mid|late)[ -]+(?:(\d{1,2})(?:st|nd|rd|th)[ -]+century|(1\d{3}|20\d{2})s)\b/))) {
+    const cen = m[2] ? (+m[2] - 1) * 100 : +m[3], span = m[2] || +m[3] % 100 === 0 ? 100 : 10;
+    const [y0, y1] = part(cen, m[1], span);
+    return { ...pmqYr(y0, y1), rest: t.replace(m[0], " ") };
+  }
+  if ((m = t.match(/\b(1\d{3}|20\d{2})(s)?\s*(?:-|to|until|through)\s*(1\d{3}|20\d{2}|\d{2})(s)?\b/))) {
+    const a = +m[1]; let b = +m[3];
+    if (m[3].length === 2) { b = Math.floor(a / 100) * 100 + b; if (b < a) b += 100; }
+    if (m[4] && b % 10 === 0) b += 9;
+    if (b >= a) return { ...pmqYr(a, b), rest: t.replace(m[0], " ") };
+  }
+  if ((m = t.match(/\b(\d{1,2})(?:st|nd|rd|th)[ -]+century\b/))) { const c = (+m[1] - 1) * 100; return { ...pmqYr(c, c + 99), rest: t.replace(m[0], " ") }; }
+  if ((m = t.match(/\b(1\d{3}|20\d{2})s\b/))) { const a = +m[1]; return { ...pmqYr(a, a + (a % 100 === 0 && a < 2000 ? 99 : 9)), rest: t.replace(m[0], " ") }; }
+  if ((m = t.match(/\b(1\d{3}|20\d{2})\b/))) return { ...pmqYr(+m[1], +m[1]), rest: t.replace(m[0], " ") };
+  return null;
+}
+// -> { pieces: [{kind:"when"|"co"|"mv", label, ...}], rest }   (a painter is added by the caller from what is left in rest)
+function pmqParse(q, F) {
+  let t = " " + q.toLowerCase().replace(/[‐-―−]/g, "-").replace(/[,;:!?()"“”]/g, " ") + " ";
+  const pieces = [], yr = pmqYears(t);
+  if (yr) { t = yr.rest; pieces.push({ kind: "when", y0: yr.y0, y1: yr.y1, label: yr.label }); }
+  const T = pmqTables(F), words = t.split(/\s+/).filter(Boolean), used = words.map(() => false);
+  for (let i = 0; i < words.length; i++) {
+    if (used[i]) continue;
+    for (let len = Math.min(3, words.length - i); len >= 1; len--) {
+      const k = pmqKey(words.slice(i, i + len).join("")); if (!k) continue;
+      let hit = null;
+      if (T.co.has(k)) { const ix = T.co.get(k); hit = { kind: "co", vals: [ix], label: F.meta.countries[ix - 1], adj: T.cname.get(ix) }; }
+      else if (T.rg.has(k)) { const r = T.rg.get(k); hit = { kind: "co", vals: pmRegionCountries(r[0], F), region: r[0], label: r[1], adj: r[1] }; }
+      else {
+        const st = pmqStem(k), ix = T.mv.get(st), era = PMQ_ERAS[st];
+        if (ix || era) hit = { kind: "mv", val: ix || 0, era: era || null, label: ix ? F.meta.movements[ix - 1] : era[2] };
+      }
+      if (!hit || (hit.kind === "co" && !hit.vals.length)) continue;
+      const prev = hit.kind === "co" && pieces.find(p => p.kind === "co");
+      if (prev && !prev.region && !hit.region) { prev.vals.push(...hit.vals); prev.label += " + " + hit.label; prev.adj += " or " + hit.adj; }
+      else if (!pieces.some(p => p.kind === hit.kind)) pieces.push(hit);
+      for (let j = 0; j < len; j++) used[i + j] = true;
+      i += len - 1; break;
+    }
+  }
+  let left = words.filter((w, i) => !used[i]);
+  if (pieces.length) left = left.filter(w => !PMQ_STOP.has(w));
+  return { pieces, rest: left.join(" ").trim() };
+}
+// put one piece on a filter spec (in place); the Filter tab's own fields, so the usual removable chips appear
+function pmqApply(f, p) {
+  if (p.kind === "when") { f.y0 = p.y0; f.y1 = p.y1; }
+  else if (p.kind === "co") { f.coSet = p.vals.slice(); f.co = 0; f.region = p.region || null; }
+  else if (p.kind === "mv") { f.mvSet = [p.val]; f.mv = 0; }
+  else if (p.kind === "painter") { f.painterSet = [p.val]; f.painter = 0; }
+}
+
 // ---------- the list: the filters, then your favorites ----------
 function pmList(s, F) {
   let list = pmRun(s, F).list;
@@ -1227,6 +1321,15 @@ function pmMount(el, s, F) {
     caption();
   }
   let capTimer = 0;
+  // a title or byline that doesn't fit on one line takes a second one (never cut mid-word), and the chip rows above lift
+  // by the extra height. Measured after layout (the card may only just have been unhidden), so it runs a frame later.
+  function fitCap() {
+    if (dead) return;
+    cap.classList.remove("two"); el.style.removeProperty("--cap-x");
+    if (cap.hidden) return;
+    const cb = cap.querySelector("[data-pmct]"), cs = cap.querySelector("[data-pmcb]"), h0 = cap.offsetHeight;
+    if (cb.scrollWidth > cb.clientWidth + 1 || cs.scrollWidth > cs.clientWidth + 1) { cap.classList.add("two"); el.style.setProperty("--cap-x", Math.max(0, cap.offsetHeight - h0) + "px"); }
+  }
   function caption() {
     if (centerK < 0 || !lay) { cap.hidden = true; facets.hidden = true; return; }
     const i = lay.items[centerK], a = F.artist[i], y = pmYearStr(i, F), by = [a ? xbArtistName(F, a) : "", y].filter(Boolean).join(" · ");
@@ -1235,6 +1338,7 @@ function pmMount(el, s, F) {
     cap.querySelector("[data-pmct]").textContent = d ? d.t : " ";
     cap.querySelector("[data-pmcb]").textContent = by || (d && d.co) || "";
     cap.style.setProperty("--c", pmHex(i, F));
+    requestAnimationFrame(fitCap);
     paintHeart(i, d);
     if (!d && (!F.col || F.col === "paintings")) { clearTimeout(capTimer); capTimer = setTimeout(() => glDetail(i).then(() => { if (!dead && lay && lay.items[centerK] === i) caption(); }).catch(() => {}), 90); }
     PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z, cardOpen });
@@ -1310,7 +1414,7 @@ function pmMount(el, s, F) {
   function paintFacets(i) {
     const fs = pmFacetsOf(i, F);
     facets.hidden = false;
-    facets.innerHTML = `${fs.map((fc, k) => `<button class="pmx-fchip" data-pmfacet="${k}">${esc(fc.label)}</button>`).join("")}<button class="pmx-fchip pmx-fchip-open" data-pmopen2>Open</button><button class="pmx-fchip pmx-fchip-arrange" data-pmarrange-go>Arrange around this</button><button class="pmx-fchip pmx-fchip-walk" data-pmwalk-go>Walk from here</button>`;
+    facets.innerHTML = `${fs.map((fc, k) => `<button class="pmx-fchip" data-pmfacet="${k}">${esc(fc.label)}</button>`).join("")}<button class="pmx-fchip pmx-fchip-open" data-pmopen2>Open</button><button class="pmx-fchip pmx-fchip-arrange" data-pmarrange-go>Around this</button><button class="pmx-fchip pmx-fchip-walk" data-pmwalk-go>Walk from here</button>`;
     facets.querySelector("[data-pmopen2]").onclick = () => openK(centerK);
     facets.querySelector("[data-pmarrange-go]").onclick = () => arrangeAround(i);
     facets.querySelector("[data-pmwalk-go]").onclick = () => doWalk();
@@ -1811,6 +1915,27 @@ function pmMount(el, s, F) {
   const doBtn = el.querySelector(".pmx-do"); doBtn._html = doBtn.innerHTML;
   doBtn.onclick = () => openSheet("arrange");
   el.querySelector("[data-pmsearch]").onclick = () => openFind();
+  // ---- the corners must come back to exactly where they were after a search (David, 2026-10-20: after the keyboard
+  // went up and down, Places and the dots sat low, nearly off the bottom). Root cause: js/core.js clampCorners() runs on
+  // every window resize and on every sheet close; with the keyboard up, innerHeight is short, so it sees the corners
+  // "overflowing" and writes an inline bottom (0) that nothing clears if no later resize fires. While the keyboard is up
+  // the corners must keep their CSS position, so any inline override is wiped then; with it down the normal clamp
+  // (short landscape screens) runs again. Heals on resize, visualViewport changes, focus leaving the field and whenever
+  // a sheet is removed from the page.
+  let ihMax = innerHeight, iwWas = innerWidth;
+  const kbUp = () => { if (innerWidth !== iwWas) { iwWas = innerWidth; ihMax = innerHeight; } ihMax = Math.max(ihMax, innerHeight); return innerHeight < ihMax - 120; };
+  const healCorners = () => {
+    if (dead || !el.isConnected) return;
+    if (kbUp()) el.querySelectorAll(".corner").forEach(b => { b.style.bottom = ""; });
+    else if (typeof clampCorners === "function") clampCorners();
+  };
+  const healSoon = () => { healCorners(); [120, 360, 800].forEach(ms => setTimeout(healCorners, ms)); };
+  addEventListener("resize", healCorners);
+  if (window.visualViewport) visualViewport.addEventListener("resize", healCorners);
+  el.addEventListener("focusout", healSoon, true);
+  const sheetWatch = new MutationObserver(() => { if (!document.querySelector(".sheet")) healSoon(); });
+  sheetWatch.observe(document.body, { childList: true });
+  cleanup.push(() => { removeEventListener("resize", healCorners); if (window.visualViewport) visualViewport.removeEventListener("resize", healCorners); sheetWatch.disconnect(); });
   // ---- the round search button (the color map's own, js/home.js #hmTopSearch): painters and paintings in one field.
   // A painter scopes the map to them (the same painterSet the Filter tab's chips set); a painting is centered and its
   // card opened. Painting titles come from the detail shards already loaded for this map (the gallery fetches titles
@@ -1819,7 +1944,7 @@ function pmMount(el, s, F) {
   function findPainters(q) {
     if (!artN) { artN = new Int32Array(F.meta.artists.length + 1); for (let i = 0; i < F.N; i++) artN[F.artist[i]]++; }
     const ql = q.toLowerCase();
-    return F.meta.artists.map((a, j) => ({ v: j + 1, name: a[0], n: artN[j + 1] })).filter(x => x.n && x.name.toLowerCase().includes(ql))
+    return F.meta.artists.map((a, j) => ({ v: j + 1, name: a[0], n: artN[j + 1] })).filter(x => x.n && (" " + x.name.toLowerCase().replace(/[-'’.]/g, " ")).includes(" " + ql))   // word starts only: "monet" must not find "Simonet"
       .sort((a, b) => (b.name.toLowerCase().startsWith(ql) - a.name.toLowerCase().startsWith(ql)) || b.n - a.n).slice(0, 6);
   }
   function findWorks(q) {
@@ -1833,23 +1958,81 @@ function pmMount(el, s, F) {
   }
   function openFind() {
     if (document.querySelector(".sheet,.rooms-stem")) return;
-    const painterLab = pmColLabel(F, "painter"), nounP = pmColLabel(F, "nounP");
-    const { sh, close } = sheet(`<div class="sr-sheet"><div class="sr-field"><span>${ICON.search}</span><input type="search" class="sr-input" placeholder="Find a ${esc(painterLab.toLowerCase())} or a title" autocomplete="off" aria-label="Search the map"></div><div class="sr-body" data-pmfb></div></div>`);
+    const painterLab = pmColLabel(F, "painter"), nounP = pmColLabel(F, "nounP"), nounS = pmColLabel(F, "noun");
+    const { sh, close } = sheet(`<div class="sr-sheet"><div class="sr-field"><span>${ICON.search}</span><input type="search" class="sr-input" placeholder="Painter, place, style or years" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Search the map"></div><div class="sr-body" data-pmfb></div></div>`);
     sh.classList.add("sr-sheet-wrap", "pmx-findsheet");
     const inp = sh.querySelector(".sr-input"), body = sh.querySelector("[data-pmfb]");
+    const cap = x => x.charAt(0).toUpperCase() + x.slice(1);
+    const cache = new Map();
+    let rows = [];
+    // the live count of one suggestion: the map's own filter pass, with this suggestion's pieces laid over the filters already on
+    const countOf = ps => {
+      const key = JSON.stringify([ps.map(p => [p.kind, p.val, p.vals, p.y0, p.y1]), s.f.y0, s.f.y1, s.f.coSet, s.f.mvSet, s.f.painterSet, s.f.hexes, s.f.hueBand, s.f.l0, s.f.l1, s.f.musSet]);
+      if (cache.has(key)) return cache.get(key);
+      const f = { ...s.f }; ps.forEach(p => pmqApply(f, p));
+      const n = pmRun({ f }, F).list.length; cache.set(key, n); return n;
+    };
+    const nLine = n => `${n.toLocaleString()} ${n === 1 ? esc(nounS) : esc(nounP)}`;
+    const rowHTML = (r, k) => `<li><button class="sr-row" data-pmq="${k}"><b>${esc(r.ps.slice().sort((a, b) => PMQ_ORDER[a.kind] - PMQ_ORDER[b.kind]).map(p => p.label).join(" · "))}</b><small>${nLine(r.n)}</small></button></li>`;
+    const addRow = (ps) => { const n = countOf(ps); if (!n) return null; if (rows.some(r => r.ps.length === ps.length && r.ps.every((p, i) => p.label === ps[i].label && p.kind === ps[i].kind))) return null; const r = { ps, n }; rows.push(r); return r; };
     const run = () => {
-      const q = inp.value.trim();
-      if (!q) { body.innerHTML = `<p class="fine sr-empty">Type a ${esc(painterLab.toLowerCase())} to see only their work, or a title to go to it.</p>`; return; }
-      const ps = findPainters(q), ws = findWorks(q);
-      if (!ps.length && !ws.length) { body.innerHTML = `<p class="fine sr-empty">Nothing by that name on this map.</p>`; return; }
-      body.innerHTML = (ps.length ? `<h3 class="title-3 sr-h">${esc(painterLab)}s</h3><ul class="sr-list">${ps.map(x => `<li><button class="sr-row" data-pmfp="${x.v}"><b>${esc(x.name)}</b><small>${x.n.toLocaleString()} ${x.n === 1 ? esc(pmColLabel(F, "noun")) : esc(nounP)}</small></button></li>`).join("")}</ul>` : "")
-        + (ws.length ? `<h3 class="title-3 sr-h">${esc(nounP.charAt(0).toUpperCase() + nounP.slice(1))}</h3><ul class="sr-list">${ws.map(x => `<li><button class="sr-row" data-pmfw="${x.k}"><span class="sr-dot" style="background:${x.c}"></span><b>${esc(x.t)}</b><small>${esc([x.a, x.y].filter(Boolean).join(" · "))}</small></button></li>`).join("")}</ul>` : "");
+      const q = inp.value.trim(); rows = [];
+      if (!q) { body.innerHTML = `<p class="fine sr-empty">Try a ${esc(painterLab.toLowerCase())}, a title, or mix a place, a style and years: “Russia 1860–80s”, “Dutch Baroque”, “Monet 1890s”.</p>`; return; }
+      const { pieces, rest } = pmqParse(q, F);
+      let html = "", note = "";
+      let title = rest || q;
+      if (pieces.length) {
+        // what is left over may name a painter: it joins the pieces as one more piece
+        const hits = rest ? findPainters(rest) : [];
+        const base = pieces.slice();
+        const mvp = base.find(p => p.kind === "mv"), hasYr = base.some(p => p.kind === "when");
+        const sets = [];   // each: the pieces of one combined suggestion
+        const withEra = (arr) => arr.map(p => p.kind === "mv" ? { kind: "when", y0: p.era[0], y1: p.era[1], label: p.era[2] } : p);
+        const tagSet = base.filter(p => !(p.kind === "mv" && !p.val));
+        const eraSet = mvp && mvp.era && !hasYr ? withEra(base) : null;
+        const painterPiece = hits[0] ? { kind: "painter", val: hits[0].v, label: hits[0].name } : null;
+        const mk = arr => painterPiece ? [...arr, painterPiece] : arr;
+        if (tagSet.length) sets.push(mk(tagSet));
+        if (eraSet) sets.push(mk(eraSet));
+        sets.sort((a, b) => countOf(b) - countOf(a));   // the fuller answer first (a sparse movement tag vs. its whole era)
+        // all of it first, then each piece alone
+        sets.forEach(a => addRow(a));
+        const singles = base.length > 1 || painterPiece ? [...base.filter(p => !(p.kind === "mv" && !p.val)), ...(painterPiece ? [painterPiece] : [])] : [];
+        if (singles.length > 1) singles.forEach(p => addRow([p]));
+        if (eraSet && !rows.length) addRow(withEra(base));
+        const allOf = sets.some(a => countOf(a) > 0);
+        if (rows.length) html += `<h3 class="title-3 sr-h">${allOf ? "Filter the map" : "Closest matches"}</h3><ul class="sr-list">${rows.map(rowHTML).join("")}</ul>`;
+        if (mvp && !mvp.val && hasYr) note += `<p class="fine sr-empty">${esc(cap(mvp.label.replace(/ era$/, "")))} isn't a tag on this map, so only the years were used.</p>`;
+        if (!allOf) {
+          // a designed empty state: say exactly what was asked for, and what to loosen
+          const bits = base.filter(p => p.kind !== "when"), yrs = base.find(p => p.kind === "when");
+          const who = bits.map(p => p.kind === "co" ? (p.adj || p.label) : p.label).join(" ");
+          const hasOther = pmActiveChips(s, F).some(c => !["when", "co", "mv", "painter"].includes(c.dim));
+          note = `<p class="fine sr-empty"><b class="sr-none">No ${esc(who ? who + " " : "")}${esc(nounP)}${painterPiece ? " by " + esc(painterPiece.label) : ""}${yrs ? " from " + esc(yrs.label) : ""}.</b> ${yrs ? "Try a wider range." : "Try dropping a word."}${hasOther ? " Some of your other filters are still on." : ""}</p>`;
+        }
+        if (hits.length > (painterPiece ? 1 : 0)) {
+          const more = hits.slice(1).map(x => { const pr = { kind: "painter", val: x.v, label: x.name }; const r = addRow([...base.filter(p => !(p.kind === "mv" && !p.val)), pr]); return r; }).filter(Boolean);
+          if (more.length) html += `<h3 class="title-3 sr-h">${esc(painterLab)}s</h3><ul class="sr-list">${more.map(r => rowHTML(r, rows.indexOf(r))).join("")}</ul>`;
+        }
+        title = hits.length ? "" : rest;
+      }
+      const ps2 = !pieces.length && q ? findPainters(q) : [];
+      const ws = title ? findWorks(title) : [];
+      if (!pieces.length) {
+        if (!ps2.length && !ws.length) { body.innerHTML = `<p class="fine sr-empty"><b class="sr-none">Nothing matches “${esc(q)}”.</b> Try a ${esc(painterLab.toLowerCase())}, a country, a style like Impressionism, or years like 1880s.</p>`; return; }
+        html += (ps2.length ? `<h3 class="title-3 sr-h">${esc(painterLab)}s</h3><ul class="sr-list">${ps2.map(x => `<li><button class="sr-row" data-pmfp="${x.v}"><b>${esc(x.name)}</b><small>${x.n.toLocaleString()} ${x.n === 1 ? esc(nounS) : esc(nounP)}</small></button></li>`).join("")}</ul>` : "");
+      } else if (rest && !ws.length && !(rest && findPainters(rest).length)) {
+        note += `<p class="fine sr-empty">No ${esc(painterLab.toLowerCase())} or title matches “${esc(rest)}”, so it was left out.</p>`;
+      }
+      html += (ws.length ? `<h3 class="title-3 sr-h">${esc(cap(nounP))}</h3><ul class="sr-list">${ws.map(x => `<li><button class="sr-row" data-pmfw="${x.k}"><span class="sr-dot" style="background:${x.c}"></span><b>${esc(x.t)}</b><small>${esc([x.a, x.y].filter(Boolean).join(" · "))}</small></button></li>`).join("")}</ul>` : "");
+      body.innerHTML = note + html;
     };
     run();
     inp.addEventListener("input", run);
     setTimeout(() => { try { inp.focus({ preventScroll: true }); } catch (e) {} }, 60);
     sh.addEventListener("click", e => {
-      const p = e.target.closest("[data-pmfp]"), w = e.target.closest("[data-pmfw]");
+      const p = e.target.closest("[data-pmfp]"), w = e.target.closest("[data-pmfw]"), g = e.target.closest("[data-pmq]");
+      if (g) { const r = rows[+g.dataset.pmq]; if (!r) return; buzz(6); close(); r.ps.forEach(pc => pmqApply(s.f, pc)); s.fav = 0; rebuild(); return; }
       if (p) { buzz(6); close(); s.f.painterSet = [+p.dataset.pmfp]; s.fav = 0; rebuild(); return; }
       if (w) { const k = +w.dataset.pmfw; buzz(6); close(); cardOpen = true; glideTo([lay.x[k], lay.y[k]], 420, Math.max(Z, PM_TAP_ZOOM)); setTimeout(() => { if (!dead) { setCenter(k); caption(); } }, 440); }
     });

@@ -808,17 +808,24 @@ function cornersBack() {
 // chase that through another CSS unit, this is a direct, CSS-unit-agnostic safety net: measure every corner
 // against the real viewport and nudge it up by whatever it overflows, in device pixels, no guessing. Clears its
 // own inline override first, so a later resize/rotate back to a tall viewport un-clamps it again.
+// Keep the corners on screen (2026-10-20 fix): the old version moved a cut-off corner DOWN (cur - over) instead of up, and
+// ran while the keyboard was open (a short innerHeight), so after a search the corners stayed low. Now: never while typing,
+// always raise (never lower), and re-check when the keyboard closes.
 function clampCorners() {
+  const typing = document.activeElement && /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName);
   document.querySelectorAll(".corner").forEach(b => {
     b.style.bottom = "";
+    if (typing) return;
     const r = b.getBoundingClientRect(), over = r.bottom - innerHeight;
     if (over > 0.5) {
       const cur = parseFloat(getComputedStyle(b).bottom) || 0;
-      b.style.bottom = Math.max(0, cur - over - 1) + "px";
+      b.style.bottom = (cur + over + 1) + "px";
     }
   });
 }
 addEventListener("resize", clampCorners);
+addEventListener("focusout", () => later(clampCorners, 150));
+if (window.visualViewport) visualViewport.addEventListener("resize", () => later(clampCorners, 60));
 addEventListener("orientationchange", () => later(clampCorners, 60));
 function closeStem(instant) {
   const s = document.querySelector(".rooms-stem"), sc = document.querySelector(".rm-scrim");

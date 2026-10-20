@@ -104,7 +104,8 @@ const glByline = (i, d) => { const who = d.a || d.co || "", y = glYear(i); retur
 // a bigger copy for the painting page: IIIF servers take any width; other museums' URLs are used as they are
 // our own small copies (img/gallery/...) are only 200px wide: shown smaller so they stay crisp, or swapped for a big image
 const glSmall = d => /^img\/gallery\//.test(d.img || "");
-const glBig = url => String(url || "").replace(/\/full\/!?\d*,\d*\/0\/default\.jpg$/, "/full/843,/0/default.jpg");
+const glBig = url => String(url || "").replace(/\/full\/!?\d*,\d*\/0\/default\.jpg$/, "/full/843,/0/default.jpg")
+  .replace(/(commons\.wikimedia\.org\/wiki\/Special:FilePath\/[^?]+)\?width=\d+$/, "$1?width=1280");   // Commons scales any file to any width
 
 // ---------- the dynamic palette (ROADMAP §13, 3/6/12/20): a pool of up to 24 colors per painting
 // (tools/gallery.py's extract_pool(), the same over-cluster-then-greedy-pick method as js/studio.js

@@ -57,6 +57,8 @@ import library as LIB  # noqa: E402  (labs, load_library, silly_names, pick_lib,
 from paintings import PIGMENT_SINCE  # noqa: E402
 
 OUT = ROOT / "data" / "gallery"
+# museum rows we only hold as small local copies, mapped to a sharp Commons file of the same painting (tools/artist_extra.py)
+HD_IMAGES = json.loads((ROOT / "data" / "hd-images.json").read_text()) if (ROOT / "data" / "hd-images.json").exists() else {}
 SHARD = 100     # paintings per detail shard: a screen of results spread over the whole corpus loads ~30 small files
 REC = 30        # bytes per painting in index.bin
 YEAR0 = 20000
@@ -572,8 +574,11 @@ def main():
         pl = pools.get(x["id"], "")
         no_pool += not pl
         pool_bytes += len(pl)
+        swapped = x["id"] in HD_IMAGES and str(img).startswith("img/gallery/")
+        if swapped:
+            img = HD_IMAGES[x["id"]]   # the same painting's sharp Commons file instead of our 200px copy (data/hd-images.json)
         det = [x["id"], x.get("t") or "Untitled", x.get("a"), x.get("co"), x.get("mv"), img, rec, li, wi, hi, pl]
-        show_crop = x.get("crop") if x.get("cf") != "l" else None   # a low-confidence (central 70%) crop only steers the color measuring; never trim what people SEE on a guess
+        show_crop = x.get("crop") if x.get("cf") != "l" and not swapped else None   # a crop measured on our small copy doesn't fit the Commons photo   # a low-confidence (central 70%) crop only steers the color measuring; never trim what people SEE on a guess
         if show_crop:
             det.append(show_crop)   # [l, t, r, b] in thousandths: the painting inside its frame/wall (tools/crop_paintings.py)
         details.append(det)

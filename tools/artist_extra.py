@@ -46,20 +46,26 @@ OUT = ROOT / "data" / ("corpus-staging" if "--stage" in sys.argv else "corpus") 
 OUT.parent.mkdir(parents=True, exist_ok=True)
 LIFE = tuple(int(x) for x in sys.argv[sys.argv.index("--life") + 1].split("-")) if "--life" in sys.argv else None   # e.g. 1853-1890
 MAX_NEW = int(sys.argv[sys.argv.index("--max") + 1]) if "--max" in sys.argv else 800   # range, not volume: one painter must not outweigh a decade or a country (corpus.py ARTIST_CAP_EXTRA = 300)
-KEEP_INST = {"painting", "watercolor painting", "gouache painting", "mixed media", "portrait", "work of art", "artificial physical object"}
+HD = {}   # museum row id -> a sharper Commons image of the same painting, merged into data/hd-images.json
+HD_FILE = ROOT / "data" / "hd-images.json"
+MUSEUM_SRC = {"Art Institute of Chicago": "aic", "Metropolitan Museum of Art": "met", "National Gallery of Art": "nga",
+              "Cleveland Museum of Art": "cma", "Rijksmuseum": "rijks", "National Gallery of Denmark": "smk", "Statens Museum for Kunst": "smk"}
+KEEP_INST = {"painting", "watercolor painting", "gouache painting", "mixed media", "portrait", "work of art", "artificial physical object",
+             "fresco", "mural", "panel painting", "altarpiece", "tondo", "diptych", "triptych", "polyptych", "tempera painting", "oil painting"}   # Raphael, Michelangelo, early masters
 WATER = re.compile(r"water ?colou?r|gouache|aquarelle", re.I)
 OIL = re.compile(r"\boil\b|oil paint", re.I)
 
-QUERY = """SELECT ?item ?itemLabel ?img ?inc ?collLabel ?instLabel ?matLabel ?h ?w ?cLabel WHERE {
+QUERY = """SELECT ?item ?itemLabel ?img ?inc ?collLabel ?instLabel ?matLabel ?h ?w ?cLabel ?aicid ?metid WHERE {
  ?item wdt:P170 wd:%s . ?item wdt:P18 ?img .
  OPTIONAL { ?item wdt:P571 ?inc } OPTIONAL { ?item wdt:P195 ?coll } OPTIONAL { ?item wdt:P31 ?inst }
- OPTIONAL { ?item wdt:P186 ?mat } OPTIONAL { ?item wdt:P2048 ?h } OPTIONAL { ?item wdt:P2049 ?w } OPTIONAL { ?item wdt:P495 ?c }
+ OPTIONAL { ?item wdt:P186 ?mat } OPTIONAL { ?item wdt:P2048 ?h } OPTIONAL { ?item wdt:P2049 ?w } OPTIONAL { ?item wdt:P495 ?c } OPTIONAL { ?item wdt:P4610 ?aicid } OPTIONAL { ?item wdt:P3634 ?metid }
  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". } }""" % QID
 
 
 def sparql():
     CACHE.mkdir(parents=True, exist_ok=True)
-    p = CACHE / "wd.json"
+    import hashlib
+    p = CACHE / f"wd-{hashlib.sha1(QUERY.encode()).hexdigest()[:8]}.json"   # keyed to the query: a changed query re-fetches
     if p.exists():
         return json.loads(p.read_text())
     url = "https://query.wikidata.org/sparql?format=json&query=" + urllib.parse.quote(QUERY)
@@ -74,7 +80,7 @@ def items(rows):
     by = {}
     for b in rows:
         q = b["item"]["value"].rsplit("/", 1)[1]
-        it = by.setdefault(q, dict(q=q, t=None, img=None, years=[], coll=set(), inst=set(), mat=set(), h=None, w=None, co=set()))
+        it = by.setdefault(q, dict(q=q, t=None, img=None, years=[], coll=set(), inst=set(), mat=set(), h=None, w=None, co=set(), ext=set()))
         v = lambda k: b[k]["value"] if k in b else None
         it["t"] = it["t"] or v("itemLabel")
         it["img"] = it["img"] or v("img")
@@ -82,6 +88,10 @@ def items(rows):
             m = re.match(r"^(-?\d{4})", v("inc"))
             if m:
                 it["years"].append(int(m.group(1)))
+        if v("aicid"):
+            it["ext"].add("aic-" + v("aicid"))
+        if v("metid"):
+            it["ext"].add("met-" + v("metid"))
         for k, f in (("collLabel", "coll"), ("instLabel", "inst"), ("matLabel", "mat"), ("cLabel", "co")):
             if v(k):
                 it[f].add(v(k))
@@ -203,6 +213,7 @@ def build_rows(cands, pals):
                    p=[[C.rgb_to_hex(rgbs[i]), shares[i], app[V[i]][0], C.family(Ls[i], Cs[i], Hs[i])] for i in range(len(shares))],
                    L=round(p["L"], 1), C=round(p["C"], 1), url="https://www.wikidata.org/wiki/" + it["q"])
         row["_cls"], row["_coll"] = it["cls"], sorted(it["coll"])[:1]
+        row["_ext"], row["_colls"] = sorted(it["ext"]), sorted(it["coll"])
         rows.append(row)
     return rows
 
@@ -219,6 +230,11 @@ def drop_duplicates(new, old):
     """corpus.py's own tests: same image URL; same dhash with similar L/C and a similar middle of the picture."""
     seen_img = {r["img"] for r in old}
     keep, dropped = [], []
+    old_by_id = {o["id"]: o for o in old}
+    def hd_note(r, oid):   # the museum row is only our own small copy (AIC blocks hotlinking): use this Commons file for display
+        o = old_by_id.get(oid)
+        if o and str(o.get("img", "")).startswith("img/gallery/"):
+            HD[oid] = r["img"]
     pool = list(old)
     hashes = {}
     def h_of(r):
@@ -231,6 +247,7 @@ def drop_duplicates(new, old):
         return hashes[r["id"]]
     def tkey(t):
         return re.sub(r"[^a-z ]", "", (t or "").lower()).strip()
+    old_ids = {o["id"] for o in old}
     old_by_title = defaultdict(list)
     for o in old:
         if len(tkey(o["t"])) > 6:
@@ -240,10 +257,21 @@ def drop_duplicates(new, old):
             dropped.append((r["id"], "same image")); continue
         # the same painting held by a museum we already read (AIC, NGA...) and listed again on Wikidata/Commons: the photographs
         # differ, so the image hash misses it, but artist + title + year (+-2) + overall color agree (2026-10-20 audit)
+        # the same painting by museum record (2026-10-20: AIC's "The Bedroom" came back from Wikidata as "Bedroom in Arles"):
+        # Wikidata carries the museum's own object id (P4610 AIC, P3634 Met) -> an exact match; or it names a collection we
+        # already read, and that museum's row by the same painter has the same year (+-1) and overall color, whatever the title
+        ext = next((e for e in r.get("_ext", []) if e in old_ids), None)
+        if ext:
+            hd_note(r, ext); dropped.append((r["id"], "same museum record as " + ext)); continue
+        srcs = {MUSEUM_SRC[c] for c in r.get("_colls", []) if c in MUSEUM_SRC}
+        held = next((o for o in old if o["id"].split("-", 1)[0] in srcs and r["y"] is not None and o["y"] is not None
+                     and abs(r["y"] - o["y"]) <= 1 and abs(o["L"] - r["L"]) < 8 and abs(o["C"] - r["C"]) < 9), None)
+        if held:
+            hd_note(r, held["id"]); dropped.append((r["id"], "same painting held by " + held["id"])); continue
         twin = next((o for o in old_by_title.get(tkey(r["t"]), [])
                      if (r["y"] is None or o["y"] is None or abs(r["y"] - o["y"]) <= 2) and abs(o["L"] - r["L"]) < 8 and abs(o["C"] - r["C"]) < 8), None)
         if twin:
-            dropped.append((r["id"], "same painting as " + twin["id"])); continue
+            hd_note(r, twin["id"]); dropped.append((r["id"], "same painting as " + twin["id"])); continue
         hr = h_of(r)
         dup = None
         if hr:
@@ -307,6 +335,11 @@ def main():
     line = lambda r: json.dumps(r, ensure_ascii=False, separators=(",", ":"))
     OUT.write_text("[\n" + ",\n".join(line(r) for r in out) + "\n]\n", encoding="utf-8")
     print(f"wrote {OUT.relative_to(ROOT)}: {len(out)} rows, {OUT.stat().st_size / 1e3:.0f} KB")
+    if HD:
+        cur = json.loads(HD_FILE.read_text()) if HD_FILE.exists() else {}
+        cur.update(HD)
+        HD_FILE.write_text(json.dumps(dict(sorted(cur.items())), indent=0, ensure_ascii=False) + "\n")
+        print(f"hd-images: {len(HD)} museum paintings get a sharper Commons image ({len(cur)} in all)")
     # Lightness story, before the analysis proper
     def mean_L(rs):
         return sum(r["L"] for r in rs) / max(len(rs), 1)

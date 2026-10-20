@@ -6266,7 +6266,7 @@ scenario("paintmap", "the card's Same painter / Same decade / Same place chips n
   await t.tapAt(cv0, r00.left + r00.width / 2, r00.top + r00.height / 2 - 150, { wait: 900 });
   await t.waitFor(".pmx-facets button", 6000, "the card's facet chips");
   const labels = t.$$(".pmx-facets button").map(b => t.text(b));
-  t.expect(labels.every(l => ["Same painter", "Same decade", "Same place", "Open", "Arrange around this", "Walk from here"].includes(l)), `unexpected chip label(s): ${JSON.stringify(labels)}`);
+  t.expect(labels.every(l => ["Same painter", "Same decade", "Same place", "Open", "Around this", "Walk from here"].includes(l)), `unexpected chip label(s): ${JSON.stringify(labels)}`);
   t.expect(!labels.includes("undefined"), `a chip rendered the literal text "undefined": ${JSON.stringify(labels)}`);
   const facetBtn = t.$$(".pmx-facets button").find(b => ["Same painter", "Same decade", "Same place"].includes(t.text(b)));
   t.expect(facetBtn, "no Same painter/decade/place chip to test (this painting has none of the three?)");
