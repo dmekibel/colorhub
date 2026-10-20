@@ -1735,6 +1735,19 @@ function pmMount(el, s, F) {
   // ---- gestures: drag to pan (the middle follows the thumb), pinch or wheel to zoom, flick to glide, a tap opens or brings
   const pts = new Map(); let drag = null, pinch = null, press = null;
   const toPlane = (dx, dy) => [dx / (K() * M0), dy / (K() * M0)];
+  // Anchor-fixed zoom (David, 2026-10-21): the map is drawn through the round lens (draw(): screen = middle + e * Fz(|e|)/|e|,
+  // e = cell - P), so "the point under the fingers" is found by inverting that lens, and after a zoom P is re-solved so the
+  // same plane point sits under the same screen point again. Screen points are canvas-local px.
+  const planeAt = (sx, sy) => {
+    lensAt(); const vx = sx - W / 2, vy = sy - H / 2, r = Math.hypot(vx, vy);
+    if (r < 1e-6) return [P[0], P[1]];
+    const z = Finv(r); return [P[0] + vx / r * z, P[1] + vy / r * z];
+  };
+  const anchorAt = (q, sx, sy) => {   // set P so plane point q is drawn at screen (sx, sy) at the CURRENT Z
+    lensAt(); const vx = sx - W / 2, vy = sy - H / 2, r = Math.hypot(vx, vy), z = r < 1e-6 ? 0 : Finv(r);
+    P = r < 1e-6 ? [q[0], q[1]] : [q[0] - vx / r * z, q[1] - vy / r * z]; clampPan();
+  };
+  const localXY = (x, y) => { const r = cv.getBoundingClientRect(); return [x - r.left, y - r.top]; };
   function settle() {
     const k = nearestK(P[0], P[1]); if (k < 0) return;
     glideTo([lay.x[k], lay.y[k]], 260, Z < zMin() ? zMin() : undefined);   // spring back up out of the rubber band
@@ -1754,7 +1767,8 @@ function pmMount(el, s, F) {
       }, 480);
     } else if (pts.size === 2) {
       clearTimeout(press); press = null;
-      const [a, b] = [...pts.values()]; pinch = { d0: Math.hypot(a[0] - b[0], a[1] - b[1]), z0: Z }; if (drag) drag.moved = true;
+      const [a, b] = [...pts.values()], m = localXY((a[0] + b[0]) / 2, (a[1] + b[1]) / 2); glide = null; V = [0, 0];
+      pinch = { d0: Math.hypot(a[0] - b[0], a[1] - b[1]), z0: Z, q: planeAt(m[0], m[1]) }; if (drag) drag.moved = true;
       hideCard();
     }
   });
@@ -1763,7 +1777,9 @@ function pmMount(el, s, F) {
     pts.set(e.pointerId, [e.clientX, e.clientY]);
     if (pinch && pts.size >= 2) {
       const [a, b] = [...pts.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]);
-      Z = Math.min(ZMAX, rubberLo(pinch.z0 * d / Math.max(10, pinch.d0), zMin())); kick(); return;
+      Z = Math.min(ZMAX, rubberLo(pinch.z0 * d / Math.max(10, pinch.d0), zMin()));
+      const m = localXY((a[0] + b[0]) / 2, (a[1] + b[1]) / 2); anchorAt(pinch.q, m[0], m[1]);   // zoom about, and pan with, the fingers' midpoint
+      kick(); return;
     }
     if (!drag) return;
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
@@ -1788,7 +1804,11 @@ function pmMount(el, s, F) {
     kick();
   };
   cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
-  cv.addEventListener("wheel", e => { e.preventDefault(); touched = true; Z = Math.min(ZMAX, rubberLo(Z * Math.exp(-e.deltaY * .0015), zMin())); kick(); clearTimeout(cv._wt); cv._wt = setTimeout(settle, 180); }, { passive: false });
+  cv.addEventListener("wheel", e => {
+    e.preventDefault(); touched = true; glide = null; V = [0, 0];
+    const m = localXY(e.clientX, e.clientY), q = planeAt(m[0], m[1]);   // zoom about the cursor (trackpad pinch = ctrl+wheel, much finer steps)
+    const dy = e.deltaMode === 1 ? e.deltaY * 33 : e.deltaY;
+    Z = Math.min(ZMAX, rubberLo(Z * Math.exp(-dy * (e.ctrlKey ? .01 : .0015)), zMin())); anchorAt(q, m[0], m[1]); kick(); clearTimeout(cv._wt); cv._wt = setTimeout(settle, 180); }, { passive: false });
   cv.addEventListener("contextmenu", e => e.preventDefault());
   function hitAt(x, y) {
     const r = cv.getBoundingClientRect(), px = x - r.left, py = y - r.top;
@@ -2325,6 +2345,7 @@ function pmMount(el, s, F) {
     // test establish an arbitrary pan deterministically (a real drag gesture would be slow and imprecise);
     // _qaPZ reads it back the same way, for the before/after comparison across a Back round trip
     _qaPZ: () => ({ P: P.slice(), Z, cardOpen }),
+    _qaBubbles: (n = 400) => (draw(clock), drawn).slice(0, n).map(b => ({ key: b.k, x: b.x, y: b.y, d: b.d })),   // QA: where cells are drawn right now (the pinch-anchor test)
     _qaSetPZ: (x, y, z) => { P = [x, y]; Z = clamp(z, zMin(), ZMAX); centerK = -1; setCenter(lay.n ? nearestK(P[0], P[1]) : -1); PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z }); kick(); },
     // QA (tools/smoke paintmap group): a real network fetch of data/artists/portraits.json doesn't reliably
     // resolve inside the virtual-time test harness, so a forced override makes "landmarks label themselves" a

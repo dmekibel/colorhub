@@ -52,8 +52,8 @@ const H = {
   dist: (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]),
   slug: (t, n) => t.w.eval("routeSlug")(n),   // router.js keeps routeSlug in the app's own global scope
   num: s => +(/[\d,]+/.exec(s || "") || ["0"])[0].replace(/,/g, ""),
-  async homeReady(t, hash = "#shot=home") {
-    await t.open(hash);
+  async homeReady(t, hash = "#shot=home", opt) {
+    await t.open(hash, opt);
     const cv = await t.waitFor("canvas", 10000, "the honeycomb canvas");
     await t.waitFor(() => /\d/.test(t.text(".hm-title small")) && !/Loading/.test(t.text(".hm-title small")), 10000, "the honeycomb to fill");
     return cv;
@@ -7469,4 +7469,70 @@ scenario("paintmap", "a painting page lists its subjects, detected ones labeled,
   t.expect(/Subjects/.test(line) && /detected:\s*Candle/.test(line), `the Subjects line reads "${line}"`);
   await t.click(t.$$(".gl-subj-b")[0], { wait: 1500 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20 && /subj=/.test(t.w.location.hash), 12000, "the map filtered to that subject");
+});
+
+// ---- pinch zoom is anchor-fixed on both maps (David, 2026-10-21): "when fully zoomed out, pinch zoom does not
+// zoom around where my fingers are". Two synthetic touches are placed on one drawn cell, spread apart (zoom in) and
+// back (zoom out) while the midpoint also drifts (two-finger pan); after every step the SAME cell must still be
+// drawn under the fingers' midpoint (within 3px). `ctl` is the map's QA controller (_qaBubbles = what is drawn now).
+async function pinchAnchorRun(t, cv, ctl, tag) {
+  const w = t.w, r = cv.getBoundingClientRect();
+  const mk = (type, id, x, y) => new w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: id, pointerType: "touch", isPrimary: id === 1, view: w });
+  await t.sleep(120);
+  // an anchor cell off-center (about 12% right, 14% above the middle), the nearest drawn one
+  const tx = r.width * .62, ty = r.height * .36;
+  const bs = ctl._qaBubbles(2000);
+  let best = null, bd = 1e9;
+  for (const b of bs) { const d = Math.hypot(b.x - tx, b.y - ty); if (d < bd) { bd = d; best = b; } }
+  t.expect(best, `${tag}: no cell drawn to anchor on`);
+  const key = best.key; const mx = r.left + best.x, my = r.top + best.y; let worst = 0, steps = 0; const errs = [];
+  const gap = 40;
+  cv.dispatchEvent(mk("pointerdown", 1, mx - gap, my)); cv.dispatchEvent(mk("pointerdown", 2, mx + gap, my));
+  const seq = [];   // (spread, drift) triples: out, then back, with the midpoint wandering
+  for (let i = 1; i <= 12; i++) seq.push([gap + i * 8, i * 2.5, i * 1.5]);
+  for (let i = 11; i >= 0; i--) seq.push([gap + i * 8 - 10, 30 - i * 1, 18 - i * .5]);
+  for (const [g, dx, dy] of seq) {
+    const cx = mx + dx, cy = my + dy;
+    cv.dispatchEvent(mk("pointermove", 1, cx - g, cy)); cv.dispatchEvent(mk("pointermove", 2, cx + g, cy));
+    await t.sleep(120);
+    let cur = null, cd = 1e9;   // a wrapping map repeats every cell: the copy nearest the fingers is the one we hold
+    for (const b of ctl._qaBubbles(5000)) if (b.key === key) { const d = Math.hypot(r.left + b.x - cx, r.top + b.y - cy); if (d < cd) { cd = d; cur = b; } }
+    if (!cur) continue;   // zoomed out of the drawn set; nothing to compare this step
+    const err = Math.hypot(r.left + cur.x - cx, r.top + cur.y - cy); steps++;
+    if (err > worst) worst = err;
+    errs.push(Math.round(g) + ":" + err.toFixed(1));
+  }
+  cv.dispatchEvent(mk("pointerup", 1, mx, my)); cv.dispatchEvent(mk("pointerup", 2, mx, my));
+  t.expect(steps >= 8, `${tag}: the anchor cell was only measurable on ${steps} steps`);
+  t.expect(worst <= 3, `${tag}: pinch anchor drifted ${worst.toFixed(2)}px from the fingers' midpoint (limit 3px): ${errs.join(" ")}`);
+  // desktop: a trackpad pinch (ctrl+wheel) and a plain mouse wheel zoom about the cursor too, and the page is not scrolled/zoomed
+  for (const [label, init] of [["ctrl-wheel", { ctrlKey: true, deltaY: -40 }], ["mouse wheel", { deltaY: -100 }]]) {
+    await t.sleep(250);
+    const bs2 = ctl._qaBubbles(2000); let c2 = null, d2 = 1e9;
+    for (const b of bs2) { const d = Math.hypot(b.x - tx, b.y - ty); if (d < d2) { d2 = d; c2 = b; } }
+    const wx = r.left + c2.x, wy = r.top + c2.y, ev = new w.WheelEvent("wheel", Object.assign({ bubbles: true, cancelable: true, clientX: wx, clientY: wy, view: w }, init));
+    cv.dispatchEvent(ev);
+    t.expect(ev.defaultPrevented, `${tag}: ${label} did not preventDefault (the page would zoom/scroll)`);
+    let cur = null, cd = 1e9;
+    for (const b of ctl._qaBubbles(5000)) if (b.key === c2.key) { const d = Math.hypot(b.x - c2.x, b.y - c2.y); if (d < cd) { cd = d; cur = b; } }
+    t.expect(cur && cd <= 3, `${tag}: ${label} moved the cell under the cursor by ${cd.toFixed(1)}px`);
+  }
+  t.notes.push(`anchor ${tag}: worst error ${worst.toFixed(2)}px over ${steps} steps`);
+}
+scenario("paintmap", "pinch zooms about the fingers' midpoint and two-finger pan follows it (painting map)", async t => {
+  for (const size of [null, [440, 956]]) {   // 375x812 (the frame default) and David's 440x956
+    await t.open("#/paintings/map?arr=color", { settle: 800, size: size || undefined });
+    await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+    t.ev("PM_CTRL.zoom(0)");   // fully zoomed out (clamped to the floor)
+    await t.sleep(300);
+    await pinchAnchorRun(t, t.$(".pmx-cv"), t.w.PM_CTRL, "painting map " + (size ? size.join("x") : "375x812"));
+  }
+});
+scenario("home", "pinch zooms about the fingers' midpoint and two-finger pan follows it (color map)", async t => {
+  for (const size of [null, [440, 956]]) {
+    await H.homeReady(t, "#shot=home", size ? { size } : undefined);
+    t.ev("HM_CTRL._qaRecenter()");
+    await t.sleep(1800);   // past the map's opening bloom (it grows the lens on its own, which is not the pinch's doing)
+    await pinchAnchorRun(t, t.$(".hc-cv"), t.w.HM_CTRL, "color map " + (size ? size.join("x") : "375x812"));
+  }
 });

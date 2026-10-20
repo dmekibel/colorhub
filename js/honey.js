@@ -2069,19 +2069,20 @@ function honeycomb(host, opts = {}) {
       // this one frame's update instead of computing garbage from it; the next move (fingers apart again) just
       // picks back up normally.
       if (!(d0 > 1e-3)) return;
-      // L18: a light low-pass on the fingers (half a frame of lag), so pixel jitter never shakes the whole map
-      pinch.sd = pinch.sd == null ? d0 : pinch.sd + (d0 - pinch.sd) * .55;
-      pinch.sm = pinch.sm ? [pinch.sm[0] + (mid0[0] - pinch.sm[0]) * .55, pinch.sm[1] + (mid0[1] - pinch.sm[1]) * .55] : mid0;
-      const d = pinch.sd, mid = pinch.sm;
+      // Anchor-fixed pinch (David, 2026-10-21): the map point first under the fingers' midpoint stays under it. The
+      // fingers are used raw (a low-pass left the map a beat behind them, so it slid off the anchor), and the lens
+      // is read AFTER the new zoom is set (it depends on Z; reading it first left the anchor one frame stale).
+      pinch.sd = d0; pinch.sm = mid0;
+      const d = d0, mid = mid0;
       if (Math.abs(d0 - pinch.d0) > 8) { pinch.moved = true; if (fitMode) fitUserOverride = true; }
-      const zNew = rubber(pinch.Z0 * d / pinch.d0);
+      const zNew = rubber(pinch.Z0 * d / pinch.d0), zOld = Z;
       let pNew = P;
+      if (!Number.isFinite(zNew) || zNew < ZMIN / 4 || zNew > ZMAX * 4) return;
+      Z = zNew;
       if (!lay.globe) { const o = offAt(mid[0], mid[1], lens(0)); pNew = [pinch.W0[0] - o[0], pinch.W0[1] - o[1]]; }
-      // a non-finite or wildly-out-of-range result (corrupt coordinates, a stale/ghost second pointer) must never
-      // reach P/Z directly -- draw()'s own recovery net would catch it a frame late anyway, but skipping it here
-      // keeps the current gesture usable instead of aborting it.
-      if (!Number.isFinite(zNew) || zNew < ZMIN / 4 || zNew > ZMAX * 4 || !Number.isFinite(pNew[0]) || !Number.isFinite(pNew[1])) return;
-      Z = zNew; P = pNew;
+      // a non-finite result (corrupt coordinates, a stale/ghost second pointer) must never reach P/Z
+      if (!Number.isFinite(pNew[0]) || !Number.isFinite(pNew[1])) { Z = zOld; return; }
+      P = pNew;
       draw(); return;
     }
     if (!down) return;
@@ -2183,6 +2184,11 @@ function honeycomb(host, opts = {}) {
       e.preventDefault(); touched = true; phase = "idle"; spring = null;
       if (lay.globe) P = [P[0] + e.deltaX / GLOBE_ROT_K, clamp(P[1] + e.deltaY / GLOBE_ROT_K, -1.5, 1.5)];
       else { const k = centerK(lens(0)); P = [P[0] + e.deltaX / k, P[1] + e.deltaY / k]; }
+    }
+    else if (e.deltaX === 0 && e.deltaY !== 0 && (e.deltaMode !== 0 || (Number.isInteger(e.deltaY) && Math.abs(e.deltaY) >= 40))) {   // a mouse wheel (notched), not a trackpad scroll: zoom about the cursor
+      e.preventDefault(); touched = true; phase = "idle"; spring = null; zAnim = null;
+      const dy = e.deltaMode === 1 ? e.deltaY * 33 : e.deltaY;
+      zoomAround(rubber(clamp(Z * Math.exp(-dy * .0022), ZMIN * .8, ZMAX * 1.2)), x, y);
     }
     else return;
     draw(); clearTimeout(wheelT);
@@ -2698,6 +2704,7 @@ function honeycomb(host, opts = {}) {
     // above is checking. This bypasses the clamp so a test can park there and read the result directly, instead
     // of trying to time a synthetic pinch gesture just right.
     _qaForceZoom(z) { Z = +z; draw(); },
+    _qaBubbles(n = 400) { return drawn.slice(0, n).map(b => ({ key: b.it.n, x: b.x, y: b.y, d: b.d })); },   // QA: where bubbles are drawn right now (the pinch-anchor test)
     _qaState() { return { lay: !!lay, W, Hh, dead, visible, raf, phase, down: !!down, pinch: !!pinch, P: P.slice(), Z, drawnLen: drawn.length, fitMode, fitUserOverride, ptrsSize: ptrs.size }; },
     // David, 2026-10-09 ("panning gets stuck"): js/home.js's double-tap-to-close-Arrange (dblClose) stops the
     // second tap's pointerup from ever reaching this canvas's own pointerup listener (stopPropagation, ahead of
