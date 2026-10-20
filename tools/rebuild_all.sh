@@ -40,4 +40,6 @@ step "gates"
 node tools/check_ids.js
 node tools/check.js | tail -8
 node tools/check_wiki.js | tail -1; node tools/check_names.js | tail -1; node tools/check_solvable.js | tail -1; node tools/check_aliases.js | tail -1
+step "upload the data to Cloudflare R2 (data.chromatlas.app) -- BEFORE the push that bumps ?v="
+if [ -f ~/.chromatlas-r2 ]; then python3 tools/r2_sync.py | tail -2; else echo "no ~/.chromatlas-r2: skipped (the live site falls back to the repo's own copy)"; fi
 echo; echo "Done. Bump the ?v= tag in index.html, run tools/smoke.sh, then commit and push."

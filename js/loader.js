@@ -15,10 +15,19 @@ const DATA_VER = ((document.currentScript && document.currentScript.src || "").m
 // FETCH_VERSIONING: every fetch of a file under data/ gets the same ?v= as the scripts, in this one place, so new code can never
 // forget it (2026-10-20: a cached old gallery index under new painter data showed Bonnard on Van Gogh's page). tools/check_fetch_versions.js
 // fails the build if this wrapper goes missing.
+// DATA_BASE (2026-10-21): on the live site the heavy data (gallery, analysis, painting-map sheets, painter files, facets) is
+// served from Cloudflare R2 at data.chromatlas.app (tools/r2_sync.py uploads it, BEFORE each push that bumps ?v=); a failed
+// R2 request falls back to the same file on the site itself. Local dev reads local files.
+const DATA_BASE = /(^|\.)chromatlas\.app$|github\.io$/.test(location.hostname) ? "https://data.chromatlas.app/" : "";
+const DATA_R2 = /^(\.\/)?data\/(gallery|analysis|paintmap|artists|facets)\//;
 if (DATA_VER && typeof window.fetch === "function" && !window.fetch.__versioned) {
   const rawFetch = window.fetch.bind(window);
-  window.fetch = (u, o) => (typeof u === "string" && /^(\.\/)?data\//.test(u) && !/[?&]v=/.test(u)
-    ? rawFetch(u + (u.includes("?") ? "&" : "?") + "v=" + DATA_VER, o) : rawFetch(u, o));
+  window.fetch = (u, o) => {
+    if (typeof u !== "string" || !/^(\.\/)?data\//.test(u)) return rawFetch(u, o);
+    const local = /[?&]v=/.test(u) ? u : u + (u.includes("?") ? "&" : "?") + "v=" + DATA_VER;
+    if (!DATA_BASE || !DATA_R2.test(u)) return rawFetch(local, o);
+    return rawFetch(DATA_BASE + local.replace(/^\.\//, ""), o).then(r => r.ok ? r : rawFetch(local, o), () => rawFetch(local, o));
+  };
   window.fetch.__versioned = true;
 }
 const DATA_LOADS = {}, DATA_DONE = {};
