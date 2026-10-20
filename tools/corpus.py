@@ -1100,7 +1100,7 @@ ARTIST_CAP = 50
 ARTIST_CAP_EXTRA = {
     "John Singer Sargent": 300,
     "Rembrandt van Rijn": 200, "Johannes Vermeer": 60, "Titian": 150, "Raphael": 120, "Leonardo da Vinci": 60,
-    "Claude Monet": 200, "Vincent van Gogh": 200, "Francisco Goya": 150, "J. M. W. Turner": 200,
+    "Claude Monet": 900, "Vincent van Gogh": 900, "Francisco Goya": 150, "J. M. W. Turner": 200,
     "Albrecht Durer": 120, "Peter Paul Rubens": 200, "Diego Velazquez": 100, "Pierre-Auguste Renoir": 150,
     "Edgar Degas": 150, "Paul Cezanne": 150, "Eugene Delacroix": 120, "Anthony van Dyck": 120,
     "Jan van Eyck": 60, "Caravaggio": 80, "El Greco": 100, "Pieter Bruegel the Elder": 80,
