@@ -1828,7 +1828,7 @@ function glPage(i, d, fromHex, tol) {
   if (typeof moreRegister === "function") moreRegister("gallery", () => [
     { title: "Look", items: [
       { t: "Where each color sits", n: "Opens Look closer", run: () => glZoomOpen({ src: glZoomSrc(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "where", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
-      { t: "Value and squint", n: "See the light structure, or the big shapes", run: openLookCloser },
+      { t: "Value and squint", n: "See the light structure, or the big shapes", run: () => openLookCloser() },
       { t: "Select an object", n: "Tap the thing you want", run: () => glZoomOpen({ src: glZoomSrc(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "select", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
     ] },
     { title: "Go", items: [
@@ -1840,7 +1840,7 @@ function glPage(i, d, fromHex, tol) {
     ] },
   ]);
   if (typeof featureRegister === "function") {
-    featureRegister("gl-pick", { t: "Pick a color", where: "A painting · on the picture", words: ["eyedropper", "sample", "pipette"], run: () => { if (canSample) { pickArmed = true; syncEyd(); } else toast("This museum's photo can't be read here, so colors can't be picked from it."); } });
+    featureRegister("gl-pick", { t: "Pick a color", where: "A painting · on the picture", words: ["eyedropper", "sample", "pipette"], run: () => { if (canSample) openLookCloser("pick"); else toast("This museum's photo can't be read here, so colors can't be picked from it."); } });
     featureRegister("gl-where", { t: "Where a color sits on a painting", where: "A painting · ⋯ · Look", words: ["where", "locate", "highlight"], run: () => toast("Open a painting, then ⋯ · Where each color sits") });
   }
   // the How-many slider is wired by countify() itself (built lazily inside drawModes, see kCtl) -- its onSet
@@ -2017,7 +2017,7 @@ function glPage(i, d, fromHex, tol) {
   // armSample() swaps in the already-resolved, CORS-capable thumb.wikimedia.org URL (glCommonsResolve, above)
   // well after the page first drew, so re-deriving from the painting's raw (unresolved) URL here would always
   // read as "not CORS-safe" for Commons and silently break Look closer's Pick tool for its ~40% of the corpus.
-  const openLookCloser = () => { buzz(5); glZoomOpen({ src: glZoomSrc(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }); };
+  const openLookCloser = (startTool) => { buzz(5); glZoomOpen({ src: glZoomSrc(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample, startTool: startTool || null }); };
   const syncEyd = () => {
     if (eyd) { eyd.detach(); eyd = null; }
     if (pickArmed && canSample && typeof eyedropAttach === "function") {
@@ -2048,7 +2048,7 @@ function glPage(i, d, fromHex, tol) {
   }
   // "Look closer": the same picture, full screen, with pinch-zoom/pan and Value/Squint/Where (js/paintzoom.js)
   const closerBtn = el.querySelector("[data-glcloser]");
-  if (closerBtn) closerBtn.onclick = openLookCloser;
+  if (closerBtn) closerBtn.onclick = () => openLookCloser();
   // "Pick a color" (David, relayed 2026-10-09): the explicit way into the eyedropper now -- arms pickArmed,
   // which syncEyd() (above) turns into a live eyedropAttach() on the hero image
   const pickBtn = el.querySelector("[data-glpickbtn]");
@@ -2059,7 +2059,11 @@ function glPage(i, d, fromHex, tol) {
     // into heroSpan's handler and opened Look closer right behind the toast, unannounced.
     e.stopPropagation();
     if (!canSample) { toast("This museum's photo can't be read here, so colors can't be picked from it."); return; }   // honest, never a dead tap (David's own rule for Select, CLAUDE.md "never a silent dead button")
-    pickArmed = !pickArmed; buzz(5); syncEyd();
+    // David, 2026-10-20: "Pick a color" is the palette editor now -- Look closer opens straight into its Pick mode
+    // (js/paintzoom.js): tap anywhere for a loupe + swatch, drag loupes, reorder, save. The long-press shortcut on the
+    // picture below still arms the quick one-color eyedropper here.
+    if (pickArmed) { pickArmed = false; syncEyd(); }
+    openLookCloser("pick");
   };
   // "Pick from the painting": a small ring where each color was taken (the page's own tap-dot, kept)
   const dotAt = [];

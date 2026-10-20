@@ -5,9 +5,9 @@
 //   Value   greyscale, to see the light structure without color getting in the way
 //   Squint  blurred, so the big shapes read before the detail does (a classic painting-study trick)
 //   Where   pick a palette color; everywhere else dims, same as the page's own Highlight
-//   Pick    the eyedropper, explicit here too (David, relayed 2026-10-09: "pressing on the picture should make
-//           it full screen, instead of instantly starting the color picker" -- a plain drag pans/zooms as
-//           always; Pick arms eyedropAttach instead, same loupe + readout as the painting page's own button)
+//   Pick    the palette editor (David, 2026-10-20): tap the painting to drop a loupe + a swatch, drag loupes (the
+//           swatch follows live), reorder/remove swatches, save the palette. Pan and pinch stay live; see "Pick: the
+//           palette editor" below. (Replaced the one-shot eyedropAttach version.)
 //   Select  tap the thing you want (the dress, the sky, the sleeve) and get a real object mask, not a guessed
 //           color region -- MobileSAM, on-device (js/segment.js, greenlit 2026-10-09 after a measured
 //           prototype). Replaces the old precomputed SLIC "Region" tool entirely (data/regions/,
@@ -19,17 +19,23 @@
 // Select, kept for callers that still pass it), startTool: "value"|"squint"|"where"|"pick"|"select"|null (opens
 // straight into that tool -- js/gallery.js's ⋯ › Look group, PLAN §3.6, jumps here instead of making the
 // visitor pick the tool twice) }
+const GLZ_PALETTES = {};   // Pick editor: each painting's palette, kept for the session (key g<index> or the image src)
 function glZoomOpen(opts) {
   const scrim = document.createElement("div");
   scrim.className = "glz-scrim";
   scrim.innerHTML = `
     <div class="glz-top"><button class="tl-exit" data-glzclose aria-label="Done, back to the painting">${ICON.back}<span>Done</span></button><span class="glz-title">${esc(opts.title || "")}</span><span class="glz-pk-slot" data-glz-pk>${typeof pkButtonHTML === "function" ? pkButtonHTML() : ""}</span></div>
-    <div class="glz-stage"><div class="glz-frame"><img class="glz-img" src="${esc(opts.src)}"${opts.cors ? ' crossorigin="anonymous"' : ""} alt="${esc(opts.alt || "")}"><canvas class="glz-cv" aria-hidden="true"></canvas></div></div>
+    <div class="glz-stage"><div class="glz-frame"><img class="glz-img" src="${esc(opts.src)}"${opts.cors ? ' crossorigin="anonymous"' : ""} alt="${esc(opts.alt || "")}"><canvas class="glz-cv" aria-hidden="true"></canvas><div class="glz-pk-layer" data-glzpklayer hidden></div></div><div class="glz-lens" data-glzlens hidden aria-hidden="true"><canvas width="102" height="102"></canvas><i></i></div></div>
     <div class="glz-tools">
       <div class="seg glz-seg" role="group" aria-label="Look at it">
         <button data-glzv="value">Value</button><button data-glzv="squint">Squint</button>${opts.pix ? `<button data-glzv="where">Where</button>` : ""}${typeof eyedropAttach === "function" ? `<button data-glzv="pick">${typeof icon === "function" ? icon("pipette", 15) : ""}<span>Pick</span></button>` : ""}${opts.src && typeof segProbe === "function" ? `<button data-glzv="select" hidden>Select</button>` : ""}
       </div>
       <div class="glz-pal" hidden role="group" aria-label="Which color"></div>
+      <div class="glz-pk" data-glzpk hidden>
+        <div class="glz-pk-info" data-glzpkinfo aria-live="polite"></div>
+        <div class="glz-pk-strip" data-glzpkstrip role="listbox" aria-label="Your palette, in order"></div>
+        <div class="glz-pk-act" data-glzpkact></div>
+      </div>
       <div class="glz-sel" data-glzsel hidden>
         <div class="glz-sel-prog" data-glzselprog hidden>
           <p class="glz-sel-prog-label" data-glzselproglabel></p>
@@ -91,10 +97,11 @@ function glZoomOpen(opts) {
     if (!Number.isFinite(Z) || Z <= 0) Z = fitZ || 1;
     if (!Number.isFinite(P[0])) P[0] = 0; if (!Number.isFinite(P[1])) P[1] = 0;
     frame.style.transform = `translate(${P[0]}px,${P[1]}px) scale(${Z})`;
+    frame.style.setProperty("--iz", String(1 / Z));   // the Pick loupes live inside the frame and counter-scale, so they stay one size on screen but glued to their painting point
   };
   const springFrame = (ms, after) => {
-    frame.style.transition = `transform ${ms}ms var(--spring)`;
-    const done = () => { frame.style.transition = ""; frame.removeEventListener("transitionend", done); if (after) after(); };
+    frame.style.transition = `transform ${ms}ms var(--spring)`; scrim.classList.add("glz-spring");
+    const done = () => { frame.style.transition = ""; scrim.classList.remove("glz-spring"); frame.removeEventListener("transitionend", done); if (after) after(); };
     frame.addEventListener("transitionend", done);
   };
   const resetView = () => { computeFit(); Z = fitZ; P = [0, 0]; frame.style.transition = ""; apply(); };
@@ -128,7 +135,8 @@ function glZoomOpen(opts) {
   // (pointerup, pointercancel, lostpointercapture, touchcancel -- iOS doesn't always send the first two) clears
   // it, a pointer older than STALE_MS is pruned defensively (a stuck phantom finger from a dropped event would
   // otherwise wedge pinch math forever), and every computed value is checked finite before it reaches style.
-  // Stepped aside entirely while "Pick" or "Select" is active (their own tap/drag handlers own the gesture then).
+  // Stepped aside entirely while "Select" is active (its own tap handler owns the gesture then). Pick keeps pan and
+  // pinch live (its pickers are glued to image coordinates); a still tap there drops a picker.
   const pts = new Map(); let drag = null, pinch = null, raf = null;
   const STALE_MS = 2500;
   const stopMomentum = () => { if (raf) { cancelAnimationFrame(raf); raf = null; } };
@@ -175,13 +183,15 @@ function glZoomOpen(opts) {
       return;
     }
     if (!aborted && pts.size > 1) return;
-    if (!aborted && drag && !drag.moved) { if (!maybeDoubleTap(drag.x, drag.y)) snapBack(); }
+    // Pick: a still tap on the painting drops a new picker (pan and pinch stay live; double-tap zoom steps aside)
+    if (!aborted && drag && !drag.moved && active === "pick") { pkTap(drag.x, drag.y); snapBack(); }
+    else if (!aborted && drag && !drag.moved) { if (!maybeDoubleTap(drag.x, drag.y)) snapBack(); }
     else if (!aborted && drag && drag.moved && (Math.abs(drag.vx) > .02 || Math.abs(drag.vy) > .02)) startMomentum(drag.vx, drag.vy);
     else snapBack();
     drag = null;
   };
   stage.addEventListener("pointerdown", e => {
-    if (active === "pick" || active === "select") return;
+    if (active === "select") return;
     stopMomentum(); frame.style.transition = "";
     const now = performance.now();
     for (const [id, v] of pts) if (now - v.t > STALE_MS) pts.delete(id);
@@ -218,7 +228,7 @@ function glZoomOpen(opts) {
   stage.addEventListener("lostpointercapture", endPointer);
   stage.addEventListener("touchcancel", () => endPointer(null));
   stage.addEventListener("wheel", e => {
-    if (active === "pick" || active === "select") return;
+    if (active === "select") return;
     e.preventDefault(); stopMomentum(); frame.style.transition = "";
     zoomAt(e.clientX, e.clientY, Z * Math.exp(-e.deltaY * .0015), false);
   }, { passive: false });
@@ -239,28 +249,253 @@ function glZoomOpen(opts) {
       if (!ok) { btn.disabled = true; btn.title = "Select isn't available for this museum's photo yet"; }
     });
   }
-  let eyd = null;
-  const syncPick = () => {
-    if (eyd) { eyd.detach(); eyd = null; }
-    if (active === "pick" && typeof eyedropAttach === "function") {
-      eyd = eyedropAttach(img, { onPick: hex => {
-        if (typeof buzz === "function") buzz(6);
-        // the pick is already saved to Picked colors by now (js/eyedrop.js commits before this fires) -- the
-        // header's own stack button (added on first pick, since it renders nothing at zero) refreshes right
-        // here, so it's visible without leaving Look closer (David, 2026-10-10).
-        const pkSlot = scrim.querySelector("[data-glz-pk]");
-        if (pkSlot && typeof pkButtonHTML === "function") pkSlot.innerHTML = pkButtonHTML();
-        if (typeof glColorReadout === "function") glColorReadout(hex, { pal: opts.pal, locateHex: opts.pix ? (h => {
-          palHex = h;
-          if (active !== "where") {
-            active = "where";
-            scrim.querySelectorAll("[data-glzv]").forEach(b => { const on = b.dataset.glzv === "where"; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
-            scrim.querySelector(".glz-img").style.filter = ""; scrim.querySelector(".glz-pal").hidden = false; syncPick();
-          }
-          drawPalRow(); drawWhere();
-        }) : null });
-      } });
+  // ===== Pick: the palette editor (David, 2026-10-20) =====
+  // Tap the painting and a small loupe (a ring filled with the sampled color, hollow in the middle so the exact
+  // spot stays visible) lands there; its color becomes a square swatch in the strip below. Every loupe stays on
+  // the painting. Drag one and its swatch updates live; select a swatch and its loupe is the active one (and the
+  // other way round). Loupes are stored in IMAGE space (fx, fy = 0..1 of the picture) and live inside the zoomed
+  // frame, counter-scaled by --iz, so pinch and pan can never separate a loupe from its painting point. The pixel
+  // source is the same one the old Pick used (js/eyedrop.js eydSource/eydSampleAt), so a host that can't be read
+  // is still answered honestly, never silently. The palette is kept per painting in GLZ_PALETTES for the session.
+  // EXCEPTION to "one tap on a color opens its page" (David, 2026-10-08): inside this editor a tap on a swatch
+  // SELECTS it (it has to, to reorder, remove and adjust). The open-the-page affordance is the explicit name
+  // button above the strip, with an arrow.
+  const pkKey = opts.galleryIndex != null ? "g" + opts.galleryIndex : String(opts.src || "");
+  const PKS = GLZ_PALETTES[pkKey] || (GLZ_PALETTES[pkKey] = { picks: [], active: null, seq: 0, savedId: null, savedSig: "" });
+  const pkLayer = scrim.querySelector("[data-glzpklayer]"), pkPanel = scrim.querySelector("[data-glzpk]"), pkInfo = scrim.querySelector("[data-glzpkinfo]");
+  const pkStrip = scrim.querySelector("[data-glzpkstrip]"), pkActEl = scrim.querySelector("[data-glzpkact]"), pkLens = scrim.querySelector("[data-glzlens]");
+  const PK_MAX = 100, pkEls = new Map();
+  let pkSrc = null, pkBlocked = false, pkSwallowClick = 0;
+  const pkGet = id => PKS.picks.find(p => p.id === id);
+  const pkSource = () => {
+    if (!pkSrc || pkSrc.key !== img.currentSrc) { const s2 = typeof eydSource === "function" ? eydSource(img) : null; pkSrc = s2 ? Object.assign(s2, { key: img.currentSrc }) : null; }
+    return pkSrc;
+  };
+  img.addEventListener("load", () => { pkSrc = null; });
+  const pkSample = (fx, fy) => {
+    const s2 = pkSource(); if (!s2) { pkBlocked = true; return null; }
+    const r = eydSampleAt(s2, fx, fy, typeof getSampleSize === "function" ? getSampleSize() : 1);
+    return r ? r.hex : null;
+  };
+  const pkNameOf = hex => {
+    const nm = typeof nameOf === "function" ? nameOf(hex) : null;
+    return { nm, label: nm && nm.n ? (typeof nameOfTapped === "function" ? nameOfTapped(hex, nm) : nm.n) : "Your color" };
+  };
+  // image fraction -> screen point (the picture's rect already carries the live pan/zoom)
+  const pkScreen = p => { const r = img.getBoundingClientRect(); return { x: r.left + p.fx * r.width, y: r.top + p.fy * r.height }; };
+  const pkEl = p => {
+    let el = pkEls.get(p.id);
+    if (!el) {
+      el = document.createElement("div"); el.className = "glz-lp"; el.dataset.id = p.id; el.setAttribute("role", "button");
+      pkLayer.appendChild(el); pkEls.set(p.id, el); pkBindLoupe(el, p.id);
     }
+    el.style.left = (p.fx * 100) + "%"; el.style.top = (p.fy * 100) + "%"; el.style.setProperty("--c", p.hex);
+    el.setAttribute("aria-label", `Color ${PKS.picks.indexOf(p) + 1}, ${pkNameOf(p.hex).label}. Drag to move.`);
+    el.classList.toggle("on", p.id === PKS.active);
+    return el;
+  };
+  const pkSig = () => PKS.picks.map(p => p.hex).join();
+  const pkRenderInfo = () => {
+    const a = pkGet(PKS.active);
+    if (pkBlocked) { pkInfo.innerHTML = `<p class="glz-pk-hint">This museum's photo can't be read here, so colors can't be picked from it.</p>`; return; }
+    if (!a) { pkInfo.innerHTML = `<p class="glz-pk-hint">${PKS.picks.length ? "Select a color to see its name." : "Tap the painting to pick a color."}</p>`; return; }
+    const { nm, label } = pkNameOf(a.hex), n = PKS.picks.length;
+    pkInfo.innerHTML = `<button class="glz-pk-name" data-glzpkopen aria-label="Open the page for ${esc(nm && nm.n ? nm.n : label)}"><span>${esc(label)}</span>${typeof ICON !== "undefined" ? ICON.arrow : ""}</button>
+      <p class="glz-pk-sub"><span class="glz-pk-hex">${esc(a.hex)}</span><span aria-hidden="true"> · </span>${PKS.picks.indexOf(a) + 1} of ${n}</p>`;
+  };
+  const pkRenderAct = () => {
+    const n = PKS.picks.length, saved = n >= 2 && PKS.savedSig === pkSig();
+    pkActEl.innerHTML = `<button class="glz-pk-save" data-glzpksave${n < 2 || saved ? " disabled" : ""}>${saved ? "Saved to Kept" : "Save palette"}</button>${n === 1 ? `<span class="glz-pk-note">Add one more color to save</span>` : n > 1 ? `<span class="glz-pk-note">${n} colors</span>` : ""}`;
+  };
+  const pkRenderStrip = () => {
+    const keep = pkStrip.scrollLeft;
+    pkStrip.innerHTML = PKS.picks.map(p => {
+      const on = p.id === PKS.active;
+      return `<div class="glz-sw-w" data-id="${p.id}"><button class="glz-sw${on ? " on" : ""}" style="--c:${p.hex}" role="option" aria-selected="${on}" aria-label="${esc(pkNameOf(p.hex).label)}, ${p.hex}"></button>${on ? `<button class="glz-sw-x" data-glzpkx aria-label="Remove this color"><svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>` : ""}</div>`;
+    }).join("") + `<button class="glz-sw glz-sw-add" data-glzpkadd aria-label="Add a color">+</button>`;
+    pkStrip.scrollLeft = keep;
+  };
+  const pkSyncLayer = () => {
+    const ids = new Set(PKS.picks.map(p => p.id));
+    for (const [id, el] of pkEls) if (!ids.has(id)) { el.remove(); pkEls.delete(id); }
+    PKS.picks.forEach(pkEl);
+  };
+  const pkRender = () => { pkSyncLayer(); pkRenderStrip(); pkRenderInfo(); pkRenderAct(); };
+  const pkScrollToActive = smooth => {
+    const w = pkStrip.querySelector(`.glz-sw-w[data-id="${PKS.active}"]`); if (!w) return;
+    const L = w.offsetLeft - (pkStrip.clientWidth - w.offsetWidth) / 2;
+    pkStrip.scrollTo({ left: Math.max(0, L), behavior: smooth ? "smooth" : "auto" });
+  };
+  // pan the painting so a selected loupe that is off screen comes back into view
+  const pkReveal = p => {
+    const s2 = stage.getBoundingClientRect(), q = pkScreen(p);
+    if (q.x > s2.left + 28 && q.x < s2.right - 28 && q.y > s2.top + 28 && q.y < s2.bottom - 28) return;
+    springFrame(320); P = clampP([P[0] + (s2.left + s2.width / 2 - q.x), P[1] + (s2.top + s2.height / 2 - q.y)], Z, false); apply();
+  };
+  const pkSelect = (id, o = {}) => {
+    if (PKS.active === id && !o.force) return;
+    PKS.active = id; pkSyncLayer(); pkRenderStrip(); pkRenderInfo();
+    if (o.scroll !== false) pkScrollToActive(true);
+    const p = pkGet(id); if (p && o.reveal) pkReveal(p);
+  };
+  const pkAddAt = (fx, fy) => {
+    if (PKS.picks.length >= PK_MAX) { if (typeof toast === "function") toast(`${PK_MAX} colors is the most a palette holds here.`); return null; }
+    const hex = pkSample(fx, fy); if (!hex) { pkRenderInfo(); return null; }
+    const p = { id: "k" + (++PKS.seq), fx, fy, hex };
+    PKS.picks.push(p); PKS.active = p.id;
+    pkRender(); pkEls.get(p.id).classList.add("drop"); setTimeout(() => { const e2 = pkEls.get(p.id); if (e2) e2.classList.remove("drop"); }, 260);
+    pkScrollToActive(true);
+    if (typeof buzz === "function") buzz(6);
+    return p;
+  };
+  // a still tap on the painting (see endPointer)
+  const pkTap = (x, y) => { const m = typeof eydMap === "function" ? eydMap(img, x, y) : null; if (m) pkAddAt(m.fx, m.fy); };
+  // "+" drops a loupe in the middle of what you're looking at, nudged clear of any loupe already there
+  const pkAddCenter = () => {
+    const s2 = stage.getBoundingClientRect(); let x = s2.left + s2.width / 2, y = s2.top + s2.height / 2;
+    for (let k = 0; k < 90 && PKS.picks.some(p => { const q = pkScreen(p); return Math.hypot(q.x - x, q.y - y) < 30; }); k++) { x += 34; if (x > s2.right - 30) { x = s2.left + 40; y += 34; } }
+    const m = typeof eydMap === "function" ? eydMap(img, x, y) : null;
+    pkAddAt(m ? m.fx : .5, m ? m.fy : .5);
+  };
+  const pkRemove = id => {
+    const i = PKS.picks.findIndex(p => p.id === id); if (i < 0) return;
+    const gone = PKS.picks[i], el = pkEls.get(id);
+    PKS.picks.splice(i, 1);
+    const next = PKS.picks[Math.min(i, PKS.picks.length - 1)];
+    PKS.active = next ? next.id : null;
+    if (el) { el.classList.add("out"); pkEls.delete(id); setTimeout(() => el.remove(), 160); }
+    pkRender(); pkScrollToActive(true);
+    if (typeof buzz === "function") buzz(5);
+    if (typeof toast === "function") toast("Color removed", { undo: () => { PKS.picks.splice(Math.min(i, PKS.picks.length), 0, gone); PKS.active = gone.id; pkRender(); pkScrollToActive(true); } });
+  };
+  // ----- dragging a loupe: a magnified lens floats above it so the finger never hides the spot -----
+  const pkShowLens = (p, hex) => {
+    const s2 = pkSource(); if (!s2) return;
+    const c = pkLens.querySelector("canvas"), cx = c.getContext("2d"), half = 8;
+    const px = clamp(Math.round(p.fx * s2.w), 0, s2.w - 1), py = clamp(Math.round(p.fy * s2.h), 0, s2.h - 1);
+    const sx = clamp(px - half, 0, Math.max(0, s2.w - 17)), sy = clamp(py - half, 0, Math.max(0, s2.h - 17));
+    cx.imageSmoothingEnabled = false; cx.clearRect(0, 0, 102, 102);
+    cx.drawImage(s2.c, sx, sy, Math.min(17, s2.w), Math.min(17, s2.h), 0, 0, 102, 102);
+    pkLens.style.setProperty("--c", hex); pkLens.hidden = false;
+    const q = pkScreen(p), sr = stage.getBoundingClientRect();   // the lens is positioned inside the stage
+    let lx = q.x - sr.left, ly = q.y - sr.top - 84;
+    if (ly - 54 < 4) { ly = q.y - sr.top; lx += q.x - sr.left < sr.width / 2 ? 84 : -84; }   // no room above: beside it instead
+    pkLens.style.left = clamp(lx, 58, sr.width - 58) + "px"; pkLens.style.top = ly + "px";
+  };
+  function pkBindLoupe(el, id) {
+    let d = null;
+    el.addEventListener("pointerdown", e => {
+      e.stopPropagation(); e.preventDefault();
+      const p = pkGet(id); if (!p) return;
+      stopMomentum(); const q = pkScreen(p);
+      d = { pid: e.pointerId, ox: q.x - e.clientX, oy: q.y - e.clientY, x0: e.clientX, y0: e.clientY, moved: false };
+      try { el.setPointerCapture(e.pointerId); } catch (err) {}
+      if (PKS.active !== id) { if (typeof buzz === "function") buzz(4); pkSelect(id); }
+    });
+    el.addEventListener("pointermove", e => {
+      if (!d || e.pointerId !== d.pid) return;
+      e.stopPropagation();
+      if (!d.moved && Math.hypot(e.clientX - d.x0, e.clientY - d.y0) < 4) return;
+      d.moved = true; el.classList.add("drag");
+      const p = pkGet(id); if (!p) return;
+      const r = img.getBoundingClientRect();
+      p.fx = clamp((e.clientX + d.ox - r.left) / r.width, 0, 1); p.fy = clamp((e.clientY + d.oy - r.top) / r.height, 0, 1);
+      const hex = pkSample(p.fx, p.fy); if (hex) p.hex = hex;
+      el.style.left = (p.fx * 100) + "%"; el.style.top = (p.fy * 100) + "%"; el.style.setProperty("--c", p.hex);
+      const sw = pkStrip.querySelector(`.glz-sw-w[data-id="${id}"] .glz-sw`); if (sw) sw.style.setProperty("--c", p.hex);
+      pkRenderInfo(); pkRenderAct(); pkShowLens(p, p.hex);
+    });
+    const end = e => {
+      if (!d || e.pointerId !== d.pid) return; e.stopPropagation();
+      const moved = d.moved; d = null; el.classList.remove("drag"); pkLens.hidden = true;
+      try { el.releasePointerCapture(e.pointerId); } catch (err) {}
+      if (moved && e.type === "pointerup") { if (typeof buzz === "function") buzz(6); pkRenderStrip(); }
+    };
+    el.addEventListener("pointerup", end); el.addEventListener("pointercancel", end); el.addEventListener("lostpointercapture", e => e.stopPropagation());
+  }
+  // ----- the strip: tap selects, the x removes, long-press then drag reorders -----
+  let pkLift = null;
+  const pkStepOf = items => items.length > 1 ? items[1].offsetLeft - items[0].offsetLeft : 54;
+  const pkLiftMove = () => {
+    const L = pkLift; if (!L) return;
+    const tx = L.cx - L.x0 + (pkStrip.scrollLeft - L.sl0), items = L.items;
+    L.el.style.transform = `translateX(${tx}px) scale(1.12)`;
+    const to = clamp(Math.round(L.from + tx / L.step), 0, items.length - 1); L.to = to;
+    items.forEach((it, j) => { if (j === L.from) return; const sh = L.from < to && j > L.from && j <= to ? -L.step : L.from > to && j < L.from && j >= to ? L.step : 0; it.style.transform = sh ? `translateX(${sh}px)` : ""; });
+  };
+  const pkLiftTick = () => {
+    const L = pkLift; if (!L) return;
+    const r = pkStrip.getBoundingClientRect(), edge = 44;
+    if (L.cx < r.left + edge) pkStrip.scrollLeft -= 9; else if (L.cx > r.right - edge) pkStrip.scrollLeft += 9;
+    pkLiftMove(); L.raf = requestAnimationFrame(pkLiftTick);
+  };
+  pkStrip.addEventListener("pointerdown", e => {
+    const w = e.target.closest(".glz-sw-w"); if (!w || e.target.closest("[data-glzpkx]") || pkLift) return;
+    const items = [...pkStrip.querySelectorAll(".glz-sw-w")], from = items.indexOf(w);
+    const L = { el: w, from, to: from, items, step: pkStepOf(items), x0: e.clientX, y0: e.clientY, cx: e.clientX, sl0: pkStrip.scrollLeft, pid: e.pointerId, lifted: false, timer: 0, raf: 0 };
+    L.timer = setTimeout(() => {
+      L.lifted = true; pkLift = L; L.sl0 = pkStrip.scrollLeft; L.x0 = L.cx;
+      if (typeof buzz === "function") buzz(8);
+      w.classList.add("lift"); pkStrip.classList.add("lifting");
+      try { pkStrip.setPointerCapture(L.pid); } catch (err) {}
+      L.raf = requestAnimationFrame(pkLiftTick);
+    }, 360);
+    pkStrip._arm = L;
+  });
+  pkStrip.addEventListener("pointermove", e => {
+    const L = pkStrip._arm; if (!L || e.pointerId !== L.pid) return;
+    L.cx = e.clientX; if (L.lifted) pkLiftMove();
+    if (!L.lifted && Math.hypot(e.clientX - L.x0, e.clientY - L.y0) > 8) { clearTimeout(L.timer); pkStrip._arm = null; }
+  });
+  pkStrip.addEventListener("touchmove", e => { if (pkLift) e.preventDefault(); }, { passive: false });
+  pkStrip.addEventListener("contextmenu", e => e.preventDefault());
+  const pkLiftEnd = (e, commit) => {
+    const L = pkStrip._arm; if (!L || (e && e.pointerId !== L.pid)) return;
+    clearTimeout(L.timer); pkStrip._arm = null;
+    if (!L.lifted) return;
+    cancelAnimationFrame(L.raf); pkLift = null; pkSwallowClick = performance.now();
+    try { pkStrip.releasePointerCapture(L.pid); } catch (err) {}
+    const to = commit ? L.to : L.from;
+    L.el.style.transition = "transform .2s var(--spring)"; L.el.style.transform = `translateX(${(to - L.from) * L.step}px)`;
+    L.el.classList.remove("lift");
+    setTimeout(() => {
+      pkStrip.classList.remove("lifting");
+      if (to !== L.from) { const [m] = PKS.picks.splice(L.from, 1); PKS.picks.splice(to, 0, m); if (typeof buzz === "function") buzz(5); }
+      pkRenderStrip(); pkRenderInfo(); pkRenderAct();
+    }, 200);
+  };
+  pkStrip.addEventListener("pointerup", e => pkLiftEnd(e, true));
+  pkStrip.addEventListener("pointercancel", e => pkLiftEnd(e, false));
+  pkStrip.addEventListener("click", e => {
+    if (performance.now() - pkSwallowClick < 400) return;
+    if (e.target.closest("[data-glzpkx]")) { const w = e.target.closest(".glz-sw-w"); if (w) pkRemove(w.dataset.id); return; }
+    if (e.target.closest("[data-glzpkadd]")) { if (typeof buzz === "function") buzz(5); pkAddCenter(); return; }
+    const w = e.target.closest(".glz-sw-w");
+    if (w) { if (typeof buzz === "function") buzz(4); pkSelect(w.dataset.id, { reveal: true, force: true }); }
+  });
+  pkInfo.addEventListener("click", e => {
+    if (!e.target.closest("[data-glzpkopen]")) return;
+    const a = pkGet(PKS.active); if (a && typeof openTappedColor === "function") openTappedColor(a.hex);
+  });
+  pkActEl.addEventListener("click", e => {
+    if (!e.target.closest("[data-glzpksave]")) return;
+    const hexes = PKS.picks.map(p => p.hex); if (hexes.length < 2) return;
+    const ex = PKS.savedId && (S.palettes || []).find(x => x.id === PKS.savedId);
+    if (ex) {
+      ex.cols = hexes.slice(); ex.at = today(); save();
+      if (typeof buzz === "function") buzz([10, 30, 20]);
+      if (typeof toast === "function") toast("Kept palette updated", { action: "Open", onAction: () => { if (typeof spPage === "function") spPage(hexes, { push: true }); } });
+    } else if (typeof glSavePalette === "function") {
+      const sp = glSavePalette(hexes, glSaveName(opts.title || "A painting", "My palette"));
+      if (!sp) return;
+      sp.painting = { i: opts.galleryIndex != null ? opts.galleryIndex : null, t: opts.title || "" }; save(); PKS.savedId = sp.id;
+    }
+    PKS.savedSig = hexes.join(); pkRenderAct();
+  });
+  const pkEnter = on => {
+    pkPanel.hidden = !on; pkLayer.hidden = !on;
+    if (!on) { pkLens.hidden = true; return; }
+    pkBlocked = false; pkRender(); requestAnimationFrame(() => pkScrollToActive(false));
   };
   // Select: an accumulated list of tap points in this image's own resized pixel space (js/segment.js's
   // segEncode/segPointForTap), each +1 (add) or 0 (remove); every tap re-runs the decoder (fast -- see
@@ -389,7 +624,7 @@ function glZoomOpen(opts) {
     if (active !== "where") { cv.classList.remove("on"); palHex = null; } else drawPalRow();
     const { wrap } = selEls(); if (wrap) wrap.hidden = active !== "select";
     if (active === "select") selActivate(); else { selReset(); if (active !== "where") cv.classList.remove("on"); }
-    drawWhere(); syncPick();
+    drawWhere(); pkEnter(active === "pick");
   };
   const drawPalRow = () => {
     const box = scrim.querySelector(".glz-pal");
@@ -432,9 +667,11 @@ function glZoomOpen(opts) {
   // anything else (or a tool this image can't offer) falls back to the plain zoomed view, never a dead screen.
   if (opts.startTool === "where" && opts.pix) setMode("where");
   else if (opts.startTool === "select" && opts.src) setMode("select");
+  else if (opts.startTool === "pick" && typeof eydSource === "function") setMode("pick");
   // a QA accessor for the gesture fuzz test (tools/smoke/scenarios.js), the same pattern js/honey.js exposes
   // via HM_CTRL._qaState -- the raw camera state plus the bounds it should always be within, so the test can
   // assert on the gesture machinery itself rather than reading rendered pixels back out of a transform string
-  scrim._glzQA = { state: () => ({ Z, P: P.slice(), fitZ, maxZ, natW, natH }), stopMomentum: () => stopMomentum(), reset: () => resetView() };
+  scrim._glzQA = { state: () => ({ Z, P: P.slice(), fitZ, maxZ, natW, natH }), stopMomentum: () => stopMomentum(), reset: () => resetView(),
+    pk: () => ({ picks: PKS.picks.map(p => ({ id: p.id, fx: p.fx, fy: p.fy, hex: p.hex })), active: PKS.active, blocked: pkBlocked }), pkTap: (x, y) => pkTap(x, y) };
   return { close };
 }

@@ -7493,3 +7493,26 @@ scenario("pv", "Palette view: categories render equal-swatch rows, the count sli
   t.ev("document.querySelectorAll('.scrim,.sheet').forEach(n => n.remove()); document.documentElement.classList.remove('sheet-open'); document.body.style.top=''");   // close the expand sheet
   t.expect(/Edited/.test(t.text(row0)), "the feed row doesn't show the Edited badge after the swap was confirmed");
 });
+// Look closer's Pick mode is the palette editor (David, 2026-10-20): "Pick a color" opens it, a tap drops a loupe + a
+// swatch, the palette survives closing and reopening, and Save puts it in Kept.
+scenario("paintings", "Pick a color opens the palette editor: taps add loupes and swatches that persist and Save keeps them", async t => {
+  await t.open("#/gallery/5", { settle: 800 });
+  const btn = await t.waitFor("[data-glpickbtn]:not([hidden])", 15000, "the Pick a color button");
+  await t.click(btn, { force: true, wait: 900 });
+  await t.waitFor(".glz-scrim [data-glzpk]:not([hidden])", 8000, "the palette editor panel");
+  t.expect(/tap the painting/i.test(t.text(".glz-pk-info")), "the first-time hint is missing");
+  const pts = [[.3, .3], [.6, .5], [.5, .8]];
+  t.ev(`(() => { const s = document.querySelector(".glz-scrim"), im = s.querySelector(".glz-img"), r = im.getBoundingClientRect();
+    ${JSON.stringify(pts)}.forEach(([fx, fy]) => s._glzQA.pkTap(r.left + fx * r.width, r.top + fy * r.height)); })()`);
+  t.expect(t.$$(".glz-lp").length === 3 && t.$$(".glz-sw-w").length === 3, `expected 3 loupes and 3 swatches, got ${t.$$(".glz-lp").length}/${t.$$(".glz-sw-w").length}`);
+  t.expect(t.$(".glz-sw.on") && t.$(".glz-lp.on"), "the last pick should be the active swatch and loupe");
+  const first = t.$(".glz-sw-w .glz-sw");
+  await t.click(first, { force: true, wait: 200 });
+  t.expect(t.$(".glz-sw-w .glz-sw").classList.contains("on"), "tapping a swatch should select it");
+  await t.click(t.$("[data-glzclose]"), { force: true, wait: 500 });
+  await t.click(await t.waitFor("[data-glpickbtn]:not([hidden])", 8000, "the Pick a color button again"), { force: true, wait: 900 });
+  t.expect(t.$$(".glz-sw-w").length === 3, "the palette should still be there after closing and reopening");
+  const kept0 = t.ev(`(S.palettes || []).length`);
+  await t.click(t.$("[data-glzpksave]"), { force: true, wait: 400 });
+  t.expect(t.ev(`(S.palettes || []).length`) === kept0 + 1, "Save palette should add one kept palette");
+});

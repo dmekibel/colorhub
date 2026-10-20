@@ -103,3 +103,56 @@
     padding:14px calc(14px + var(--right)) calc(var(--bottom) + 14px) 14px;overflow-y:auto}
   .glz-pal{justify-content:flex-start}
 }
+
+/* ---- Pick: the palette editor (js/paintzoom.js "Pick: the palette editor") ---- */
+/* the loupes live inside .glz-frame (so they ride pinch and pan exactly) and counter-scale by --iz, which keeps
+   them one size on screen. A ring of the sampled color with a white and a dark hairline on both edges, so it reads
+   on pale and on black paint alike; the middle is hollow, so the exact spot stays visible. */
+.glz-pk-layer{position:absolute;inset:0;pointer-events:none}
+.glz-pk-layer[hidden]{display:none}
+.glz-lp{position:absolute;width:40px;height:40px;border-radius:50%;pointer-events:auto;touch-action:none;cursor:grab;
+  transform:translate(-50%,-50%) scale(var(--iz,1));
+  background:radial-gradient(circle,transparent 0 5px,rgba(0,0,0,.75) 5px 6.1px,#fff 6.1px 7.4px,var(--c) 7.4px 15px,#fff 15px 16.3px,rgba(0,0,0,.75) 16.3px 17.4px,transparent 17.6px);
+  filter:drop-shadow(0 1px 3px rgba(0,0,0,.45));-webkit-tap-highlight-color:transparent}
+.glz-lp::before{content:"";position:absolute;inset:-6px;border-radius:50%}
+.glz-lp.on{width:50px;height:50px;z-index:2;
+  background:radial-gradient(circle,transparent 0 6px,rgba(0,0,0,.8) 6px 7.3px,#fff 7.3px 9px,var(--c) 9px 19px,#fff 19px 20.7px,rgba(0,0,0,.8) 20.7px 22px,transparent 22.2px)}
+.glz-lp.drag{cursor:grabbing;z-index:3}
+.glz-lp.drop{animation:glzlp-in .24s var(--spring)}
+.glz-lp.out{opacity:0;scale:.6;transition:opacity .15s var(--ease),scale .15s var(--ease)}
+@keyframes glzlp-in{from{scale:1.7;opacity:0}to{scale:1;opacity:1}}
+.glz-spring .glz-lp{transition:transform .32s var(--spring)}
+/* the lens that floats above a loupe while it's dragged, so the finger never covers the spot */
+.glz-lens{position:absolute;z-index:5;width:108px;height:108px;margin:-54px 0 0 -54px;border-radius:50%;pointer-events:none;
+  background:#000;box-shadow:0 0 0 4px var(--c,#fff),0 0 0 6px #fff,0 6px 18px rgba(0,0,0,.55);overflow:hidden}
+.glz-lens[hidden]{display:none}
+.glz-lens canvas{display:block;width:100%;height:100%}
+.glz-lens i{position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;box-shadow:0 0 0 1.5px #fff,0 0 0 3px rgba(0,0,0,.65)}
+.glz-pk{width:100%;max-width:560px;display:flex;flex-direction:column;gap:6px}
+.glz-pk[hidden]{display:none}
+.glz-pk-info{min-height:50px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.glz-pk-hint{margin:0;font:400 16px/1.35 var(--sans);color:var(--soft)}
+.glz-pk-name{display:inline-flex;align-items:center;gap:8px;max-width:100%;min-height:30px;padding:0 4px;color:var(--ink);font:400 21px/1.2 var(--serif)}
+.glz-pk-name span{min-width:0;overflow-wrap:anywhere}
+.glz-pk-name svg{flex:none;width:16px;height:16px;opacity:.8}
+.glz-pk-sub{margin:0;font:400 15px/1.3 var(--sans);color:var(--soft);font-variant-numeric:tabular-nums}
+.glz-pk-hex{letter-spacing:.02em}
+.glz-pk-strip{display:flex;gap:10px;align-items:center;overflow-x:auto;overflow-y:hidden;padding:12px 6px 10px;touch-action:pan-x;scrollbar-width:none;-webkit-overflow-scrolling:touch;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.glz-pk-strip::-webkit-scrollbar{display:none}
+.glz-pk-strip>:first-child{margin-left:auto}.glz-pk-strip>:last-child{margin-right:auto}   /* centered while it fits, scrolls from the left once it doesn't */
+.glz-pk-strip.lifting{touch-action:none;overflow-x:hidden}
+.glz-sw-w{position:relative;flex:none;width:44px;height:44px;transition:transform .18s var(--ease)}
+.glz-sw{flex:none;width:44px;height:44px;border-radius:10px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(128,128,128,.55);-webkit-tap-highlight-color:transparent}
+.glz-sw.on{outline:2px solid var(--ink);outline-offset:3px}
+.glz-sw-w.lift{z-index:4;transition:none;filter:drop-shadow(0 6px 10px rgba(0,0,0,.55))}
+.glz-sw-add{display:flex;align-items:center;justify-content:center;background:transparent;box-shadow:none;border:1.5px dashed rgba(236,232,223,.45);color:var(--ink);font:300 26px/1 var(--sans)}
+.glz-sw-add:active{background:rgba(236,232,223,.1)}
+.glz-sw-x{position:absolute;top:-9px;right:-9px;width:22px;height:22px;border-radius:50%;background:var(--ink);color:#141311;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px rgba(6,6,5,.9);z-index:2}
+.glz-sw-x::after{content:"";position:absolute;inset:-11px}
+.glz-pk-act{display:flex;align-items:center;justify-content:center;gap:14px;min-height:46px}
+.glz-pk-save{height:46px;padding:0 26px;border-radius:var(--r-pill,999px);background:var(--paper,#ECE8DF);color:var(--paper-ink,#141311);font:400 18px/1 var(--serif)}
+.glz-pk-save:disabled{opacity:.4}
+.glz-pk-note{font:400 15px/1.3 var(--sans);color:var(--soft)}
+@media (prefers-reduced-motion:reduce){.glz-lp.drop{animation:none}.glz-sw-w,.glz-spring .glz-lp{transition:none}}
+@media (orientation:landscape){.glz-pk-act{justify-content:flex-start}.glz-pk-info{align-items:flex-start;text-align:left}}
+@media (max-width:359px){.glz-seg button[data-glzv]{padding:0 10px}.glz-seg button[data-glzv="pick"]{padding:0 10px 0 9px}}
