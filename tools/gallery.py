@@ -567,6 +567,10 @@ def main():
         # hi: a bigger image for the painting page when the grid uses our small copy ("" = none reachable)
         if x["id"].startswith("commons-") and "?width=400" in (x["img"] or ""):
             hi = x["img"].replace("?width=400", "?width=1200")  # Commons is hotlinked directly: always a sharper copy
+        elif img != x["img"] and x["id"].startswith("aic-") and "/full/" in (x["img"] or ""):
+            # AIC's IIIF server does serve other sites up to 843 px wide (its documented cap; 1686 is refused), with CORS:
+            # four times our 200 px copy, for the painting page and Look closer (checked 2026-10-20)
+            hi = re.sub(r"/full/[^/]+/0/", "/full/843,/0/", x["img"])
         elif img != x["img"] and x["id"].startswith("smk-"):
             hi = (x["img"] or "").replace("/full/400,/0/", "/full/1000,/0/")
         else:

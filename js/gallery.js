@@ -103,6 +103,9 @@ const glYear = i => { const y = GAL.year[i]; return y === GL_UNDATED ? "" : y < 
 const glByline = (i, d) => { const who = d.a || d.co || "", y = glYear(i); return `<span>${esc(who)}</span>${y ? `<em>${who ? " · " : ""}${y}</em>` : ""}`; };
 // a bigger copy for the painting page: IIIF servers take any width; other museums' URLs are used as they are
 // our own small copies (img/gallery/...) are only 200px wide: shown smaller so they stay crisp, or swapped for a big image
+// Look closer zooms in, so it asks for the biggest copy a host serves to other sites: Commons scales any file (2048 px),
+// IIIF museums take any width up to their cap (AIC refuses past 843, so its URLs stay as they are)
+const glZoomSrc = u => String(u || "").replace(/(Special:FilePath\/[^?]+)\?width=\d+$/, "$1?width=2048");
 const glSmall = d => /^img\/gallery\//.test(d.img || "");
 const glBig = url => String(url || "").replace(/\/full\/!?\d*,\d*\/0\/default\.jpg$/, "/full/843,/0/default.jpg")
   .replace(/(commons\.wikimedia\.org\/wiki\/Special:FilePath\/[^?]+)\?width=\d+$/, "$1?width=1280");   // Commons scales any file to any width
@@ -1824,9 +1827,9 @@ function glPage(i, d, fromHex, tol) {
   if (d.a && typeof ooWithIndex === "function") ooWithIndex();
   if (typeof moreRegister === "function") moreRegister("gallery", () => [
     { title: "Look", items: [
-      { t: "Where each color sits", n: "Opens Look closer", run: () => glZoomOpen({ src: sampleImg.src || glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "where", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
+      { t: "Where each color sits", n: "Opens Look closer", run: () => glZoomOpen({ src: glZoomSrc(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "where", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
       { t: "Value and squint", n: "See the light structure, or the big shapes", run: openLookCloser },
-      { t: "Select an object", n: "Tap the thing you want", run: () => glZoomOpen({ src: sampleImg.src || glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "select", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
+      { t: "Select an object", n: "Tap the thing you want", run: () => glZoomOpen({ src: glZoomSrc(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "select", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
     ] },
     { title: "Go", items: [
       ...(d.a ? [{ t: "The painter", n: d.a, run: () => { if (typeof awPainter === "function") awPainter(routeSlug(d.a)); } }] : []),
@@ -2014,7 +2017,7 @@ function glPage(i, d, fromHex, tol) {
   // armSample() swaps in the already-resolved, CORS-capable thumb.wikimedia.org URL (glCommonsResolve, above)
   // well after the page first drew, so re-deriving from the painting's raw (unresolved) URL here would always
   // read as "not CORS-safe" for Commons and silently break Look closer's Pick tool for its ~40% of the corpus.
-  const openLookCloser = () => { buzz(5); glZoomOpen({ src: sampleImg.src || glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }); };
+  const openLookCloser = () => { buzz(5); glZoomOpen({ src: glZoomSrc(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }); };
   const syncEyd = () => {
     if (eyd) { eyd.detach(); eyd = null; }
     if (pickArmed && canSample && typeof eyedropAttach === "function") {
