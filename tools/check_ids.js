@@ -46,6 +46,8 @@ function checkIds() {
   if (sz("data/gallery/metrics.bin") !== N * 27) err(`data/gallery/metrics.bin is ${sz("data/gallery/metrics.bin")} bytes, ${N} x 27 = ${N * 27} expected: rebuild with tools/metrics_build.py`);
   if (has("data/facets/facets.json")) { const fn = rj("data/facets/facets.json").n; if (fn !== N) err(`data/facets/facets.json n=${fn}, the gallery ${N}: rebuild with tools/facets.py`); }
 
+  if (has("data/gallery/subjects.json")) { const sj = rj("data/gallery/subjects.json"); if (sj.ia.length !== N || sj.it.length !== N) err(`data/gallery/subjects.json has ${sj.ia.length}/${sj.it.length} entries, the gallery ${N}: rebuild with tools/subjects.py`); }
+
   // 3. analysis shards (same order, id by id)
   let at = 0, anErr = 0;
   for (let k = 0; k * head.shard < N && !anErr; k++) {

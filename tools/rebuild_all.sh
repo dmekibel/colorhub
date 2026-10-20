@@ -26,6 +26,8 @@ python3 tools/wikidata_artists.py | tail -1 | cut -c1-160
 python3 tools/artwiki_portraits.py | tail -2 | cut -c1-160
 step "painting-map thumbnails list"
 python3 tools/paintmap_thumbs.py | tail -1
+step "subject tags (Wikidata genre/depicts for new paintings, polite and resumable; follows ids.txt order)"
+python3 tools/subjects.py | tail -1
 if [ "$ATLAS" != 0 ]; then
   step "painting-map atlas ($([ "$ATLAS" = 2 ] && echo "full rebuild: hours" || echo "incremental: only changed groups"))"
   [ "$ATLAS" = 2 ] && python3 tools/paintmap_atlas.py clean
