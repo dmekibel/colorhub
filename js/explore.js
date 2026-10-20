@@ -72,11 +72,39 @@ function pairPin(a, b, label) {
   return { h: 190, html: `<button class="pin pin-pair" data-pin="${esc(a.id)}"><span class="pair2"><span style="--c:${a.h}" data-ink="${ink(a.h)}"><b>${esc(a.title)}</b></span><span style="--c:${b.h}" data-ink="${ink(b.h)}"><b>${esc(b.title)}</b></span></span><small>${esc(label)}</small></button>` };
 }
 // two columns, each pin placed in the shorter one
+// Progressive (2026-10-20, David: "A problem repeatedly occurred" on #/ukiyoe): a collection of 1,711 prints rendered
+// every pin at once -- ~19,000 nodes and a 231,000 px page -- and iOS Safari killed the tab. Now only the first
+// MASONRY_STEP pins render; the rest wait in MASONRY_REST and the next batch is appended to the shorter column as the
+// sentinel nears the screen (one passive scroll listener for every masonry on any page).
+const MASONRY_STEP = 60, MASONRY_REST = new Map();
+let MASONRY_SEQ = 0;
 function masonry(pins) {
   const cols = [[], []], hgt = [0, 0];
-  pins.forEach(p => { const k = hgt[0] <= hgt[1] ? 0 : 1; cols[k].push(p.html); hgt[k] += p.h + 10; });
-  return `<div class="masonry"><div>${cols[0].join("")}</div><div>${cols[1].join("")}</div></div>`;
+  const place = list => list.forEach(p => { const k = hgt[0] <= hgt[1] ? 0 : 1; cols[k].push(p.html); hgt[k] += p.h + 10; });
+  place(pins.slice(0, MASONRY_STEP));
+  let more = "";
+  if (pins.length > MASONRY_STEP) {
+    const id = ++MASONRY_SEQ;
+    MASONRY_REST.set(id, { rest: pins.slice(MASONRY_STEP), hgt });
+    more = `<div class="masonry-more" data-masonry="${id}" aria-hidden="true"></div>`;
+    setTimeout(masonryGrow, 60);
+  }
+  return `<div class="masonry"><div>${cols[0].join("")}</div><div>${cols[1].join("")}</div></div>${more}`;
 }
+function masonryGrow() {
+  document.querySelectorAll(".masonry-more[data-masonry]").forEach(sent => {
+    const st = MASONRY_REST.get(+sent.dataset.masonry);
+    if (!st || !st.rest.length) { sent.remove(); return; }
+    if (sent.getBoundingClientRect().top > innerHeight + 1600) return;
+    const grid = sent.previousElementSibling; if (!grid || !grid.classList.contains("masonry")) return;
+    const add = [[], []];
+    st.rest.splice(0, MASONRY_STEP).forEach(p => { const k = st.hgt[0] <= st.hgt[1] ? 0 : 1; add[k].push(p.html); st.hgt[k] += p.h + 10; });
+    grid.children[0].insertAdjacentHTML("beforeend", add[0].join(""));
+    grid.children[1].insertAdjacentHTML("beforeend", add[1].join(""));
+    if (!st.rest.length) { MASONRY_REST.delete(+sent.dataset.masonry); sent.remove(); } else setTimeout(masonryGrow, 60);
+  });
+}
+{ let t = 0; addEventListener("scroll", () => { if (!t) t = setTimeout(() => { t = 0; masonryGrow(); }, 80); }, { passive: true }); }   // a timer, not rAF: rAF pauses in a background tab and a stuck flag would block every later scroll
 
 // ---------- what each lens shows ----------
 function lensSections(lens) {

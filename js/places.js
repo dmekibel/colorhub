@@ -64,7 +64,7 @@ function placesOpen() {
   // Collections, the other least-reached row). Still the one ymSettingsSheet() every ⋯ opens too -- one
   // definition, now two doors, same as Keep colors below.
   const rows = PLACES_LIST.map(([id, label]) => ({ id, label, cur: id === here }))
-    .concat([{ id: "colls", label: "Collections", coll: true }])
+    // (Collections removed, David 2026-10-20: "Collections and Museum" are redundant -- it only opened the Museum's own grid)
     .concat(typeof ymSettingsSheet === "function" ? [{ id: "settings", label: "Settings", settings: true }] : []);
   const n = rows.length;
   const scrim = document.createElement("div"); scrim.className = "rm-scrim rm-scrim-l";

@@ -1205,7 +1205,7 @@ scenario("home", "Rooms corner opens the Places stem; each place navigates", asy
     await t.click("[data-rooms-corner]");
     await t.waitFor(".rooms-stem.on", 4000, "the Places stem");
     const rows = t.$$(".rooms-stem [data-pl]").map(b => b.dataset.pl);
-    t.expect(rooms.every(([r]) => rows.includes(r)) && rows.includes("colls"), `the Places stem shows ${rows.join(", ")}`);
+    t.expect(rooms.every(([r]) => rows.includes(r)) && !rows.includes("colls"), `the Places stem shows ${rows.join(", ")}`);
     await t.click(`.rooms-stem [data-pl="${id}"]`, { wait: 700 });
     await t.waitFor(`.room-sheet[data-room="${id}"]`, 6000, `the ${label} room`);
     t.expect(t.$(".room-sheet").innerText.length > 80, `the ${label} room is empty`);
@@ -1219,13 +1219,11 @@ scenario("home", "Rooms corner opens the Places stem; each place navigates", asy
 // David, 2026-10-10: tapping Collections opens the Museum's own grid of every collection as its own screen
 // (js/explore.js museumHome) -- never rendered inline in the Places stem (his objection to the Simplify
 // pass's full-screen Collections panel).
-scenario("home", "Places > Collections opens the Museum's collection grid, not an inline panel", async t => {
+scenario("home", "Places has no Collections row (it duplicated Museum, David 2026-10-20); Museum opens the collection grid", async t => {
   await H.homeReady(t);
   await t.click("[data-rooms-corner]");
-  await t.waitFor('.rooms-stem [data-pl="colls"]', 4000, "Collections in the Places stem");
-  t.expect(!t.$(".rooms-stem .pl-colls"), "the collections grid rendered inline in the Places stem");
-  await t.click('.rooms-stem [data-pl="colls"]', { wait: 700 });
-  await t.waitFor(".mu-home", 8000, "the Museum's collection grid after Places > Collections");
+  await t.waitFor(".rooms-stem.on", 4000, "the Places stem");
+  t.expect(!t.$('.rooms-stem [data-pl="colls"]'), "a Collections row is back in the Places stem");
 });
 
 // "Colors | Paintings" (David, 2026-10-09: "it should be more prominent... instead of colors you switch to
@@ -3885,7 +3883,7 @@ scenario("map", "the right corner's stem is down to 3: Colors & Arrange, Study t
   await t.click("[data-rooms-corner]", { wait: 300 });
   await t.waitFor(".rooms-stem.on", 4000, "the Places stem");
   const leftLabels = t.$$(".rooms-stem .rm-label b").map(b => t.text(b).trim().toLowerCase());
-  t.expect(leftLabels.includes("collections"), `the Places stem has no Collections row: ${leftLabels.join(", ")}`);
+  t.expect(!leftLabels.includes("collections"), `the Places stem still has a Collections row: ${leftLabels.join(", ")}`);
   await H.keys(t, "Escape"); await t.sleep(500);
   for (const l of rightLabels) t.expect(!leftLabels.includes(l), `"${l}" appears in both the left and right menus`);
   await H.menu(t);
