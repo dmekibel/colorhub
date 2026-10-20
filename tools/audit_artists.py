@@ -17,6 +17,11 @@ LIFE = {
     "Johannes Vermeer": (1632, 1675), "J. M. W. Turner": (1775, 1851), "Paul Cézanne": (1839, 1906),
     "Edgar Degas": (1834, 1917), "Pierre-Auguste Renoir": (1841, 1919), "Paul Gauguin": (1848, 1903),
     "Georges Seurat": (1859, 1891), "Édouard Manet": (1832, 1883), "John Singer Sargent": (1856, 1925),
+    "Gustav Klimt": (1862, 1918), "Edvard Munch": (1863, 1944), "Henri de Toulouse-Lautrec": (1864, 1901), "Mary Cassatt": (1844, 1926),
+    "Berthe Morisot": (1841, 1895), "Joaquín Sorolla": (1863, 1923), "James McNeill Whistler": (1834, 1903), "Winslow Homer": (1836, 1910),
+    "Camille Pissarro": (1830, 1903), "Alfred Sisley": (1839, 1899), "Caravaggio": (1571, 1610), "Titian": (1490, 1576),
+    "Diego Velázquez": (1599, 1660), "Francisco Goya": (1746, 1828), "Sandro Botticelli": (1445, 1510), "Peter Paul Rubens": (1577, 1640),
+    "Wassily Kandinsky": (1866, 1944),
 }
 ALIAS = {"Paul Cezanne": "Paul Cézanne", "Joseph Mallord William Turner": "J. M. W. Turner", "Hilaire Germain Edgar Degas": "Edgar Degas",
          "Edouard Manet": "Édouard Manet", "Rembrandt Harmensz. van Rijn": "Rembrandt van Rijn"}

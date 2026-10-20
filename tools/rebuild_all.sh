@@ -3,15 +3,16 @@
 # Run it after ANY change to data/corpus/*.json, data/corpus-nonpaintings.json or tools/gallery.py.
 #
 #   tools/rebuild_all.sh            # gallery -> derived files -> thumbs -> pages -> gates (atlas only checked)
-#   tools/rebuild_all.sh --atlas    # also rebuild the painting-map atlas (re-fetches every thumbnail: slow, needed
-#                                   # whenever the painting COUNT or ORDER changed -- the ids gate tells you)
+#   tools/rebuild_all.sh --atlas       # also update the painting-map atlas, incrementally: only groups whose paintings
+#                                      # changed are fetched (the gallery order is append-only, so a new batch = minutes)
+#   tools/rebuild_all.sh --atlas-full  # rebuild every atlas sheet from scratch (hours; only if sheets are suspect)
 #
 # Why one script (2026-10-20): the chain is order-dependent and a half-finished run silently breaks the app. gallery.py deletes
 # metrics.bin and thumbs.txt; portraits.json kept an old order for ten days and Van Gogh's page showed a Bonnard. Every step
 # here is also covered by node tools/check_ids.js, which names the tool that fixes whatever is out of step.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-ATLAS=0; [ "${1:-}" = "--atlas" ] && ATLAS=1
+ATLAS=0; [ "${1:-}" = "--atlas" ] && ATLAS=1; [ "${1:-}" = "--atlas-full" ] && ATLAS=2
 step() { echo; echo "== $*"; }
 
 step "audit the new art (dates, same-painting duplicates, non-paintings) -- read it before shipping"
@@ -25,9 +26,10 @@ python3 tools/wikidata_artists.py | tail -1 | cut -c1-160
 python3 tools/artwiki_portraits.py | tail -2 | cut -c1-160
 step "painting-map thumbnails list"
 python3 tools/paintmap_thumbs.py | tail -1
-if [ "$ATLAS" = 1 ]; then
-  step "painting-map atlas (slow: fetches every thumbnail once)"
-  python3 tools/paintmap_atlas.py clean && python3 tools/paintmap_atlas.py build | tail -3 | cut -c1-160
+if [ "$ATLAS" != 0 ]; then
+  step "painting-map atlas ($([ "$ATLAS" = 2 ] && echo "full rebuild: hours" || echo "incremental: only changed groups"))"
+  [ "$ATLAS" = 2 ] && python3 tools/paintmap_atlas.py clean
+  python3 tools/paintmap_atlas.py build | tail -3 | cut -c1-160
 fi
 step "crawlable pages"
 python3 tools/pages.py | tail -1 | cut -c1-160

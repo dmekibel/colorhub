@@ -42,7 +42,8 @@ from audit_artists import ALIAS  # noqa: E402
 ARTIST, QID = sys.argv[1], sys.argv[2]
 SLUG = re.sub(r"[^a-z]+", "", ARTIST.lower())
 CACHE = C.RAW / SLUG
-OUT = ROOT / "data" / "corpus" / f"zz-commons-{SLUG}-1.json"
+OUT = ROOT / "data" / ("corpus-staging" if "--stage" in sys.argv else "corpus") / f"zz-commons-{SLUG}-1.json"   # --stage: fetched and measured, but not in the app until moved into data/corpus/
+OUT.parent.mkdir(parents=True, exist_ok=True)
 LIFE = tuple(int(x) for x in sys.argv[sys.argv.index("--life") + 1].split("-")) if "--life" in sys.argv else None   # e.g. 1853-1890
 MAX_NEW = int(sys.argv[sys.argv.index("--max") + 1]) if "--max" in sys.argv else 800   # range, not volume: one painter must not outweigh a decade or a country (corpus.py ARTIST_CAP_EXTRA = 300)
 KEEP_INST = {"painting", "watercolor painting", "gouache painting", "mixed media", "portrait", "work of art", "artificial physical object"}
@@ -84,8 +85,13 @@ def items(rows):
         for k, f in (("collLabel", "coll"), ("instLabel", "inst"), ("matLabel", "mat"), ("cLabel", "co")):
             if v(k):
                 it[f].add(v(k))
-        it["h"] = it["h"] or (float(v("h")) if v("h") else None)
-        it["w"] = it["w"] or (float(v("w")) if v("w") else None)
+        def num(x):   # Wikidata can hold an "unknown value" node here instead of a number
+            try:
+                return float(x) if x else None
+            except ValueError:
+                return None
+        it["h"] = it["h"] or num(v("h"))
+        it["w"] = it["w"] or num(v("w"))
     return by
 
 

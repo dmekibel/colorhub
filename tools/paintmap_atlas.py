@@ -688,6 +688,18 @@ def main():
     tier0_names = [f"atlas0-{s}.webp" for s in range(len(counts0))]
 
     progress = load_progress()
+    # incremental by default (2026-10-20): .progress.json is not in git, so the tracked manifest.json also keeps each tier-1
+    # sheet's source hash ("groupHash"). With the gallery order append-only (tools/gallery.py append_only()), a new batch
+    # leaves every earlier group's lines unchanged, so only the last partial group and the new ones are fetched: minutes,
+    # not hours. `clean` + `build` still forces a full rebuild.
+    man_path0 = os.path.join(OUT, "manifest.json")
+    if not progress.get("groups_done") and os.path.exists(man_path0):
+        old_man = json.load(open(man_path0))
+        gh = old_man.get("groupHash") or {}
+        if gh and old_man.get("tier1", {}).get("groupSize") == GROUP_SIZE:
+            progress = {"groups_done": [int(g) for g in gh if os.path.exists(os.path.join(OUT, f"g{g}.webp"))],
+                        "group_hash": gh, "ok_count": 0, "fail_count": 0}
+            print(f"incremental: {len(progress['groups_done'])} groups known from manifest.json")
     groups_done = set(progress.get("groups_done", []))
     group_hash = dict(progress.get("group_hash", {}))   # group index (str) -> hash of ITS OWN source lines, as
     # of the run that finished it -- see group_src_hash() below: a resumed run must never trust a "done" group
@@ -755,7 +767,12 @@ def main():
         "v": 2, "n": n,
         "tier0": {"tile": TIER0_TILE, "cols": cols0, "perSheet": per_sheet0, "sheets": tier0_names},
         "tier1": {"tile": TIER1_TILE, "groupSize": GROUP_SIZE, "numGroups": num_groups, "file": "g{g}.webp"},
+        "groupHash": {k: v for k, v in group_hash.items() if int(k) < num_groups},
     }
+    for g in range(num_groups, num_groups + 50):   # a shrunken gallery leaves stale tail sheets behind: remove them
+        stale_sheet = os.path.join(OUT, f"g{g}.webp")
+        if os.path.exists(stale_sheet):
+            os.remove(stale_sheet)
     json.dump(manifest, open(os.path.join(OUT, "manifest.json"), "w"))
     print("rebuilding tier 0 from tier 1 (local, no network) ...")
     tier0_from_tier1(OUT, manifest)

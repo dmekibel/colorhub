@@ -179,7 +179,27 @@ def load_corpus(aliases=True):
         return (order.get(x["src"], len(order)), x["src"], [(0, int(t), "") if t.isdigit() else (1, 0, t)
                                                              for t in re.findall(r"\d+|\D+", rest)])
     rows.sort(key=natural)
-    return rows, files
+    return append_only(rows), files
+
+
+def append_only(rows):
+    """Stable gallery positions (2026-10-20). The previous data/gallery/ids.txt is the ledger: every painting already there keeps
+    its index; new paintings go after them (in natural order). Inserting new rows mid-order used to shift every index after
+    them, so every file that stores a gallery position went stale at once and the painting-map atlas had to be rebuilt from
+    scratch (hours). Now a batch only appends, and tools/paintmap_atlas.py rebuilds just the groups whose paintings changed.
+    A removed painting (corpus-nonpaintings.json, a dropped duplicate) still closes its gap and shifts the rows after it;
+    that is rare, and tools/check_ids.js catches anything left out of step. COLORHUB_REORDER=1 rebuilds in plain natural order."""
+    import os
+    ledger = OUT / "ids.txt"
+    if os.environ.get("COLORHUB_REORDER") or not ledger.exists():
+        return rows
+    pos = {k: i for i, k in enumerate(ledger.read_text(encoding="utf-8").split("\n")) if k}
+    known = sorted((r for r in rows if r["id"] in pos), key=lambda r: pos[r["id"]])
+    new = [r for r in rows if r["id"] not in pos]
+    gone = len(pos) - len(known)
+    print(f"append-only order: {len(known)} kept in place, {len(new)} new appended at the end"
+          + (f", {gone} removed (rows after the first removal shift)" if gone else ""))
+    return known + new
 
 
 def sizes(raw):

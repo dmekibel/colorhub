@@ -1111,7 +1111,7 @@ ARTIST_CAP_EXTRA = {
     "Claude Monet": 1500, "Vincent van Gogh": 1500, "Francisco Goya": 150, "J. M. W. Turner": 500,
     "Albrecht Durer": 120, "Peter Paul Rubens": 200, "Diego Velazquez": 100, "Pierre-Auguste Renoir": 500,
     "Edgar Degas": 400, "Paul Cezanne": 300, "Paul Cézanne": 300, "Paul Gauguin": 200, "Georges Seurat": 100, "Édouard Manet": 200, "Eugene Delacroix": 120, "Anthony van Dyck": 120,
-    "Jan van Eyck": 60, "Caravaggio": 80, "El Greco": 100, "Pieter Bruegel the Elder": 80,
+    "Jan van Eyck": 60, "Gustav Klimt": 150, "Edvard Munch": 300, "Henri de Toulouse-Lautrec": 300, "Mary Cassatt": 200, "Berthe Morisot": 200, "Joaquín Sorolla": 300, "James McNeill Whistler": 200, "Winslow Homer": 300, "Camille Pissarro": 400, "Alfred Sisley": 300, "Diego Velázquez": 100, "Sandro Botticelli": 120, "Wassily Kandinsky": 200, "Caravaggio": 80, "El Greco": 100, "Pieter Bruegel the Elder": 80,
 }
 CAPPED = {}
 
