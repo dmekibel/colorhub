@@ -163,3 +163,9 @@
 .pmx-findsheet .sr-row b{flex:1;min-width:0;overflow-wrap:anywhere}
 .pmx-findsheet .sr-row small{flex:none;text-align:right;white-space:nowrap}
 .pmx-findsheet .sr-none{display:block;margin-bottom:4px;font:400 17px/1.3 var(--serif);color:var(--ink)}
+
+/* swipeable chip rows (David, 2026-10-20: "this needs to be scrollable"): the rows let touches fall through to the map
+   (pointer-events:none), so the map's own drag took every swipe and the row never scrolled. Each row now takes its own touches
+   and scrolls sideways only; only that thin strip stops panning the map. */
+.pmx-facets,.pmx-chipbar,.pmx-walk{pointer-events:auto;touch-action:pan-x;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.pmx-fchip,.pmx-xchip{touch-action:pan-x}
