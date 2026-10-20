@@ -82,7 +82,7 @@ const dnWin = (g, t) => !!g && !!t && (g.n === t.n || dnNorm(g.n) === dnNorm(t.n
 // The share line: the number and the count only, never the name
 function dnShareText(rec, no) {
   const n = rec.g.length, got = rec.ok ? (rec.hint ? `${n}/${DN_MAX}, with 4 choices` : `${n}/${DN_MAX}`) : `X/${DN_MAX}`;
-  return `ColorHub · Today's color No. ${no} · ${got}`;
+  return `Chromatlas · Today's color No. ${no} · ${got}`;
 }
 // The decoys for the 4-choice fallback: the target's nearest core names (same neighborhood, so three blues, not a
 // blue and a yellow), skipping words already guessed, each at least 4 apart from the others so every choice is
@@ -279,4 +279,4 @@ function dnShareSpec(rec, no, t, list = CORE_NAMES || []) {
   return { layout: "guesses", note: `Today's color, No. ${no}`, title: rec.ok ? (rec.hint ? `${n} of ${DN_MAX}, with choices` : `${n} of ${DN_MAX}`) : `Not today`,
     sub: rec.ok ? "Each row is one guess, in its own color." : "Six guesses, then the color itself.", rows };
 }
-const dnShare = (rec, no, t) => cardShare(dnShareSpec(rec, no, t), dnShareText(rec, no), routeURL("daily"), `colorhub-color-${no}.png`);
+const dnShare = (rec, no, t) => cardShare(dnShareSpec(rec, no, t), dnShareText(rec, no), routeURL("daily"), `chromatlas-color-${no}.png`);

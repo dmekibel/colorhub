@@ -44,6 +44,101 @@ function loadGallery() {
     .then(([head, buf]) => (GAL = glBuild(head, new Uint8Array(buf))))
     .catch(e => { GAL_LOADING = null; throw e; }));
 }
+// ---------- subjects (data/gallery/subjects.json, built by tools/subjects.py + tools/subjects_clip.py) ----------
+// What a painting shows: genre ("g"), things ("t"), iconography ("i"). Three sources per painting, in rank order:
+// ia = authority (museum / Wikidata), it = words in the title, im = detected by a model from the picture (kept only at
+// >=85% measured precision). All three count in filters and search; a detected tag is always labeled "detected" wherever
+// tags are listed, and authority / title tags always come first. Loaded lazily, only when a subject feature is used.
+let SUBJ = null, SUBJ_LOADING = null;
+const SUBJ_GENRE_PLURAL = { "portrait": "Portraits", "self-portrait": "Self-portraits", "group portrait": "Group portraits", "landscape": "Landscapes", "seascape": "Seascapes",
+  "cityscape": "Cityscapes", "architecture": "Architecture", "still life": "Still lifes", "flowers": "Flowers", "religious": "Religious", "mythological": "Mythological",
+  "history": "History", "battle": "Battles", "genre scene": "Genre scenes", "interior": "Interiors", "nude": "Nudes", "animal": "Animals", "allegory": "Allegory",
+  "vanitas": "Vanitas", "hunting": "Hunting", "abstract": "Abstract", "orientalist": "Orientalist", "fantasy": "Fantasy", "music & dance": "Music and dance" };
+// tags that are noise (or a painter's name) as something to search or list; they stay in the data, just never offered
+const SUBJ_HIDE = new Set(["part", "container", "pen", "orb", "malleolus", "armpit", "toe", "intergluteal cleft", "mons pubis", "toplessness", "décolletage", "beheaded head",
+  "clothed male, naked female", "Order of Charles III", "tableware", "crock (dishware)", "fauteuil", "landscape painting", "Rembrandt", "Jacek Malczewski", "David", "Jerome", "Moses", "Judith"]);
+// a few words that mean several tags at once (or a different word for one)
+const SUBJ_ALIAS = { "portrait": ["portrait", "self-portrait", "group portrait"], "landscape": ["landscape", "landscape painting"], "flower": ["flowers", "flower"],
+  "mythology": ["mythological"], "religion": ["religious"], "war": ["battle"], "sailboat": ["boat", "ship"], "kid": ["child"], "children": ["child"],
+  "women": ["woman"], "men": ["man"], "christ": ["Jesus Christ"], "jesus": ["Jesus Christ"], "crucifixion": ["crucifixion", "crucifixion of Jesus"], "naked": ["nude"] };
+// two tags for one thing (a genre and a thing, or a long and a short name): counted and filtered as one, the first name kept
+const SUBJ_FOLD = { "flowers": "flower", "landscape painting": "landscape", "crucifixion of Jesus": "crucifixion" };
+const subjCap = n => n.charAt(0).toUpperCase() + n.slice(1);
+function subjPlural(n) {
+  if (SUBJ_GENRE_PLURAL[n]) return SUBJ_GENRE_PLURAL[n];
+  if (/^[A-Z]/.test(n) || /[A-Z]/.test(n.slice(1)) || /\s(of|and)\s/.test(n) || /^(fruit|sky|snow|bread|night|sun|moon|sea|dance|prayer|smoking|washing|bathing)$/.test(n)) return subjCap(n);
+  if (n === "woman") return "Women"; if (n === "man") return "Men"; if (n === "child") return "Children"; if (n === "fish") return "Fish";
+  if (/[^aeiou]y$/.test(n)) return subjCap(n.slice(0, -1)) + "ies";
+  if (/(s|x|ch|sh)$/.test(n)) return subjCap(n) + "es";
+  return subjCap(n) + "s";
+}
+function loadSubjects() {
+  if (SUBJ) return Promise.resolve(SUBJ);
+  return SUBJ_LOADING || (SUBJ_LOADING = fetch("data/gallery/subjects.json").then(r => { if (!r.ok) throw new Error("subjects " + r.status); return r.json(); })
+    .then(d => (SUBJ = subjBuild(d))).catch(e => { SUBJ_LOADING = null; throw e; }));
+}
+function subjBuild(d) {
+  const N = d.ia.length, T = d.tags.length, off = new Int32Array(N + 1);
+  let tot = 0;
+  for (let i = 0; i < N; i++) tot += d.ia[i].length + d.it[i].length + d.im[i].length;
+  const tg = new Uint8Array(tot), kd = new Uint8Array(tot), nAll = new Int32Array(T);
+  const fold = Int16Array.from(d.tags, (n, t) => SUBJ_FOLD[n] && d.tags.indexOf(SUBJ_FOLD[n]) >= 0 ? d.tags.indexOf(SUBJ_FOLD[n]) : t);
+  const genre = new Int16Array(N).fill(-1);
+  let m = 0;
+  for (let i = 0; i < N; i++) {
+    const seen = new Set(); off[i] = m;
+    const add = (t0, k) => { if (genre[i] < 0 && d.grp[t0] === "g") genre[i] = t0; const t = fold[t0]; if (seen.has(t)) return; seen.add(t); tg[m] = t; kd[m] = k; m++; nAll[t]++; };
+    d.ia[i].forEach(t => add(t, 0)); d.it[i].forEach(t => add(t, 1)); d.im[i].forEach(r => add(r[0], 2));
+  }
+  off[N] = m;
+  const S = { N, tags: d.tags, grp: d.grp, off, tg, kd, n: nAll, hide: d.tags.map(t => SUBJ_HIDE.has(t)), idx: new Map(d.tags.map((t, k) => [t, k])), look: null, genre, fold };
+  return S;
+}
+// one painting's subjects as [{t, name, grp, det}], authority and title first, detected last
+function subjOf(i) {
+  if (!SUBJ || i < 0 || i >= SUBJ.N) return [];
+  const out = [];
+  for (let k = SUBJ.off[i]; k < SUBJ.off[i + 1]; k++) { const t = SUBJ.tg[k]; if (!SUBJ.hide[t]) out.push({ t, name: SUBJ.tags[t], grp: SUBJ.grp[t], det: SUBJ.kd[k] === 2 }); }
+  return out;
+}
+const subjHas = (i, flag) => { for (let k = SUBJ.off[i], e = SUBJ.off[i + 1]; k < e; k++) if (flag[SUBJ.tg[k]]) return true; return false; };
+const subjFlags = set => { const f = new Uint8Array(SUBJ.tags.length); set.forEach(t => { f[t] = 1; }); return f; };
+const subjName = t => SUBJ && SUBJ.tags[t] != null ? subjCap(SUBJ.tags[t]) : "";
+// the removable chip's words for a set of tags
+function subjSetLabel(set) {
+  if (!SUBJ || !set || !set.length) return "";
+  const key = [...set].sort((a, b) => a - b).join();
+  for (const names of Object.values(SUBJ_ALIAS)) {
+    const ix = [...new Set(names.map(n => SUBJ.idx.get(n)).filter(v => v != null).map(v => SUBJ.fold[v]))];
+    if (ix.length === set.length && ix.slice().sort((a, b) => a - b).join() === key) return names[0] === "portrait" ? "Portraits" : subjPlural(names[0]);
+  }
+  return set.length === 1 ? subjPlural(SUBJ.tags[set[0]]) : `${subjPlural(SUBJ.tags[set[0]])} +${set.length - 1}`;
+}
+// "boats", "still life", "Portraits" -> { tags: [...], label } or null. words = already-lowercased query words (1 to 3 of them).
+function subjFind(words) {
+  if (!SUBJ) return null;
+  if (!SUBJ.look) {
+    const L = new Map(), key = w => String(w).toLowerCase().replace(/[^a-z0-9]/g, "");
+    SUBJ.tags.forEach((n, t) => { if (!SUBJ.hide[t] && SUBJ.fold[t] === t && SUBJ.n[t] >= 20) { const k = key(n); if (k && !L.has(k)) L.set(k, [t]); } });
+    Object.entries(SUBJ_ALIAS).forEach(([w, names]) => { const ix = [...new Set(names.map(n => SUBJ.idx.get(n)).filter(v => v != null).map(v => SUBJ.fold[v]))]; if (ix.length) L.set(key(w), ix); });
+    SUBJ.look = { L, key };
+  }
+  const { L, key } = SUBJ.look, k = key(words.join(""));
+  if (k.length < 3) return null;
+  const tries = [k, k.replace(/ies$/, "y"), k.replace(/es$/, ""), k.replace(/s$/, "")];
+  for (const c of tries) if (L.has(c)) { const tags = L.get(c); return { tags: tags.slice(), label: subjSetLabel(tags) }; }
+  return null;
+}
+// the genre a painting is filed under for "Sort by subject" and "By subject" (-1 = no genre known)
+const subjGenreOf = i => SUBJ && i >= 0 && i < SUBJ.N ? SUBJ.genre[i] : -1;
+const subjGenreLabel = g => g < 0 ? "Other subjects" : subjPlural(SUBJ.tags[g]);
+// a painting's tags as one quiet line under the byline: Subjects: Portrait · Book · detected: Candle (each one a tap into the map)
+function subjLineHTML(i) {
+  const all = subjOf(i); if (!all.length) return "";
+  const main = all.filter(x => !x.det).slice(0, 5), det = all.filter(x => x.det).slice(0, 4);
+  const btn = x => `<button class="gl-subj-b" data-glsubj="${x.t}">${esc(subjCap(x.name))}</button>`, dot = '<i aria-hidden="true"> · </i>';
+  return `<span class="gl-subj-l">Subjects</span> ${main.map(btn).join(dot)}${det.length ? `${main.length ? dot : ""}<span class="gl-subj-d">detected:</span> ${det.map(btn).join(dot)}` : ""}`;
+}
 // sRGB -> linear, as a table (same formula as lab() in core.js)
 const GL_LIN = Float32Array.from({ length: 256 }, (_, v) => { v /= 255; return v > .04045 ? ((v + .055) / 1.055) ** 2.4 : v / 12.92; });
 function glBuild(head, b) {
@@ -1393,16 +1488,17 @@ function glPage(i, d, fromHex, tol) {
     <button class="gl-pmap gl-pmap-top" data-pmap="arr=spiral&seed=${i}">${GL_ICON_MAP}<span>Similar paintings on the map</span>${ICON.chev}</button>
     </div></div>
     <div class="gl-under">${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}</div>
+    <p class="gl-subj" data-glsubj-line hidden></p>
     <div class="gl-finds"><div class="sec-head"><b>Findings</b><span>as photographed</span></div>
     <div class="gl-roles" data-glroles></div>
     <div class="aw-cx" data-glctx></div>
-    <p class="fine">Computed by ColorHub, not by the museum, from its photograph. Names are the nearest of about 1,000. Old varnish and the photograph shift color, and screens differ.</p>
+    <p class="fine">Computed by Chromatlas, not by the museum, from its photograph. Names are the nearest of about 1,000. Old varnish and the photograph shift color, and screens differ.</p>
     <details class="gl-finds-more"><summary>More</summary><div data-awan></div></details></div>
     <div class="gl-morepainter" data-glmorepainter></div>
     ${typeof twSection === "function" ? `<div data-glsim></div>` : `<div class="sec-head gl-sim-h"><b>Similar palettes</b><span>by color, not subject</span></div>
     <div class="gl-rail" data-glsim></div>`}
     <button class="gl-pmap" data-pmap="arr=spiral&seed=${i}">${GL_ICON_MAP}<span>Similar paintings, on the map</span>${ICON.chev}</button>
-    <section class="srcs"><h3>Image and data</h3><ul><li>${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? ` · ${esc(src.credit)}` : ""}</li><li>Palette and color names computed by ColorHub from the museum's image</li></ul></section>
+    <section class="srcs"><h3>Image and data</h3><ul><li>${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? ` · ${esc(src.credit)}` : ""}</li><li>Palette and color names computed by Chromatlas from the museum's image</li></ul></section>
     <details class="gl-quiz-fold"><summary>Test yourself</summary><div class="gl-quiz" data-glquiz></div></details>
   `, "article gl-page");
   const route = "#/gallery/" + i, heroSpan = el.querySelector(".gl-hero > span");
@@ -1814,6 +1910,16 @@ function glPage(i, d, fromHex, tol) {
   };
   drawPalette();
   if (typeof awPaintingHook === "function") awPaintingHook(el, i, d, { pool, curPal });
+  loadSubjects().then(() => {
+    const ln = el.querySelector("[data-glsubj-line]"), h = subjLineHTML(i);
+    if (!ln || !el.isConnected || !h) return;
+    ln.innerHTML = h; ln.hidden = false;
+    ln.onclick = e => {
+      const t = e.target.closest("[data-glsubj]"); if (!t) return;
+      buzz(6); const tag = +t.dataset.glsubj;
+      pmLoad().then(() => pmGo({ ...pmFresh(), f: { ...pmFilterFresh(), subjSet: [tag] } }));
+    };
+  }).catch(() => {});
   // The surface action row (coordinator fix, 2026-10-10: the heart moved back to the top bar -- David,
   // relayed 2026-10-09, "make the heart on any painting much closer up... visible without scrolling" --
   // js/trail.js tlDecorate now treats a [data-fva] heart as one of the bar's allowed slots, same as the color
@@ -2092,7 +2198,7 @@ function glPage(i, d, fromHex, tol) {
     return "#" + [rr, gg, bb].map(v => clamp(Math.round(v / n), 0, 255).toString(16).padStart(2, "0")).join("").toUpperCase();
   };
   // the arriving color: pinned above the palette, with how much of this canvas it covers and where (js/paintingsof.js, L26)
-  if (fromHex && typeof ptArrival === "function") arrival = ptArrival(el, { i, hex: fromHex, tol, pool, heroSpan, getImg: () => sampleImg, onMap: () => { if (locate) { locate = null; drawPalette(); } }, why: "This museum's image server doesn't let ColorHub read its pixels, so the map isn't available for this painting." });
+  if (fromHex && typeof ptArrival === "function") arrival = ptArrival(el, { i, hex: fromHex, tol, pool, heroSpan, getImg: () => sampleImg, onMap: () => { if (locate) { locate = null; drawPalette(); } }, why: "This museum's image server doesn't let Chromatlas read its pixels, so the map isn't available for this painting." });
   if (typeof fvArtWire === "function") fvArtWire(el, i, d, heroSpan);   // the heart lives in the top bar (visible without scrolling); a long press or a double-tap on the picture keeps it too (js/favs.js)
   // David's own host list (GL_CORS_HOSTS, above) says a museum's CDN always echoes its CORS header, but a real
   // CDN (Imperva etc.) can flake on any single request -- found live on the Met, where the exact same URL got

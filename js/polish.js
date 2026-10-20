@@ -1,6 +1,6 @@
 "use strict";
 // Shared design components (lane L12, DESIGN-SYSTEM.md + design/GENIUS-PANEL-1.md "L12 · Design lead").
-// The organizing idea: ColorHub is one map of all color, which you light up by learning to name and see it.
+// The organizing idea: Chromatlas is one map of all color, which you light up by learning to name and see it.
 // Three small pieces every screen gets for free, with no per-screen wiring:
 //   1. The squint key: one value-only toggle on every image and palette, so seeing value becomes a habit.
 //   2. The lesson-complete moment: plates settle in, one "done" haptic.

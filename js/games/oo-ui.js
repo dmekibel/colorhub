@@ -1357,7 +1357,7 @@ const ooFamHex = f => { const F = OO_FAMS[f]; const h = F.h[0] <= F.h[1] ? (F.h[
 // The daily seed board, as a step another screen calls (the dailies belong to L25: challenge.js and daily()).
 // gameDailyBoard(container, day = today(), opts) plays six rounds at fixed differences, the same for everyone on
 // that day, inside the container, and resolves { day, num, res: [{ ok, ms, act, base, odd }], hits, min, text }.
-// text is a plain share line (no emoji grid): "ColorHub · Odd one out #1: 5 of 6, down to 1.8% different".
+// text is a plain share line (no emoji grid): "Chromatlas · Odd one out #1: 5 of 6, down to 1.8% different".
 // ======================================================================
 function gameDailyBoard(box, day = today(), opts = {}) {
   const rounds = ooDaily(day);

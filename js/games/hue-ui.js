@@ -655,7 +655,7 @@ function hgCard(board, num, r) {
     cx.fillStyle = "#ECE8DF"; cx.font = "400 68px 'Instrument Serif', Georgia, serif"; cx.fillText(`Gradients #${num}`, 60, 590);
     cx.fillStyle = "#C9C4B8"; cx.font = "italic 400 34px 'Instrument Serif', Georgia, serif";
     cx.fillText(`${r.moves} moves · par ${r.par} · ${r.hints ? r.hints + " hint" + (r.hints > 1 ? "s" : "") : "no hints"}`, 60, 640);
-    cx.fillStyle = "#A39E92"; cx.font = "400 28px 'Instrument Serif', Georgia, serif"; cx.fillText(`${HG_SHAPE_NAME[board.geo.shape]} · ColorHub`, 60, 696);
+    cx.fillStyle = "#A39E92"; cx.font = "400 28px 'Instrument Serif', Georgia, serif"; cx.fillText(`${HG_SHAPE_NAME[board.geo.shape]} · Chromatlas`, 60, 696);
     return cv.toDataURL("image/png");
   } catch (e) { return ""; }
 }

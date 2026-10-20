@@ -970,7 +970,7 @@ function xbDial(o = {}) {
   const index = () => {
     if (IX) return IX;
     const rows = [], seen = new Set(), add = (n, h, note) => { const k = n.toLowerCase() + h; if (!seen.has(k) && /^#[0-9a-f]{6}$/i.test(h)) { seen.add(k); rows.push({ n, h: h.toUpperCase(), note, s: n.normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase() }); } };
-    EVERY().forEach(c => add(c.n, c.h, "ColorHub"));
+    EVERY().forEach(c => add(c.n, c.h, "Chromatlas"));
     (CORE_NAMES || []).forEach(e => { add(e.n, e.h, ""); (e.also || []).forEach(a => add(a, e.h, `another name for ${e.n}`)); });
     // the 2,700-name library, through js/colorsets.js's csItems() (the naming gate keeps the raw list in naming/graph)
     (typeof csItems === "function" ? csItems() : []).forEach(e => { if (!e.c) add(e.n, e.h, ((e.lib && e.lib.src) || []).filter(s => s !== "app").map(s => (typeof SRC_LABEL !== "undefined" && SRC_LABEL[s]) || s).slice(0, 1).join("")); });

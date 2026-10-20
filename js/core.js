@@ -1,5 +1,5 @@
 "use strict";
-// ColorHub core: utilities, color math, data index, progress state, screen plumbing, tab bar.
+// Chromatlas core: utilities, color math, data index, progress state, screen plumbing, tab bar.
 // Plain scripts (no modules, no build). Top-level names are shared across js/*.js, so keep them unique.
 const D = window.DATA;
 const app = document.getElementById("app");
@@ -706,7 +706,7 @@ function show(html, cls = "", tab = null) {
 // Every tab's home opens with the same line: the brand on the left, the tab's own actions and the menu (⋯) on the right.
 // Kept for the rooms that still build their own header this way (Train, Explore, Studio); Learn builds the new
 // Room header (.room-head) directly. The brand is still a quick way home, same as the Rooms corner's Home bubble.
-const tabHead = (acts = "") => `<header class="bar"><button class="brand" data-hm-brand aria-label="Back to the map">${LOGO}<span>ColorHub</span></button><span class="bar-r">${acts}<button class="icon-btn" data-menu aria-label="Settings and more">${ICON.dots}</button></span></header>`;
+const tabHead = (acts = "") => `<header class="bar"><button class="brand" data-hm-brand aria-label="Back to the map">${LOGO}<span>Chromatlas</span></button><span class="bar-r">${acts}<button class="icon-btn" data-menu aria-label="Settings and more">${ICON.dots}</button></span></header>`;
 // Every inner screen: back (or close, for a task) on the left, the title in the middle, an optional action on the right.
 const navTop = (title = "", o = {}) => `<header class="nav-top"><button class="icon-btn" ${o.close ? `data-close aria-label="Close">${ICON.x}` : `data-back aria-label="Back">${ICON.back}`}</button><span class="nav-title">${title}</span><span class="nav-r">${o.right || ""}</span></header>`;
 

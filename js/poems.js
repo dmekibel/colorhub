@@ -224,7 +224,7 @@ async function poemPage(id, opts = {}) {
     if (g.c == null) return `<button class="pw note" data-g="${esc(key)}">${esc(text)}</button>`;
     return poemWord(text, poemColor(g.c).h, `data-g="${esc(key)}"`);
   };
-  const tr = poem.tr ? (poem.tr === "ColorHub's plain translation" ? `ColorHub's plain translation` : `Translated by ${esc(poem.tr)}`) : "";
+  const tr = poem.tr ? (poem.tr === "ColorHub's plain translation" ? `Chromatlas's plain translation` : `Translated by ${esc(poem.tr)}`) : "";
   const src = poem.src ? `${poem.url ? `<a href="${esc(poem.url)}" target="_blank" rel="noopener">${esc(poem.src)}</a>` : esc(poem.src)}${poem.pub ? `, ${poem.pub}` : ""}` : "";
   const origText = hasOrig ? `<div class="pm-text pm-orig lang-${esc(r.trad === "Japanese" ? "ja" : r.trad === "Chinese" ? "zh" : r.trad === "Persian" ? "fa" : "x")}" ${r.trad === "Persian" ? 'dir="rtl"' : ""}>
       <p class="eyebrow">${esc(r.trad)}</p>${poemTextHTML(poem.o, poem.om, oword)}

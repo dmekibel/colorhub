@@ -309,9 +309,9 @@ function awFamousRail(slug, n) {
     <div class="gl-rail" data-awfamous>${list.map(i => glPinHTML(i)).join("")}</div>`;
 }
 // ---- the life's work: sort, filter, three views ----
-const AW_WORKS_SORT = [["year", "Year"], ["L", "Lightness"], ["C", "Vivid"], ["mus", "Museum"], ["fam", "Family"]];
+const AW_WORKS_SORT = [["year", "Year"], ["L", "Lightness"], ["C", "Vivid"], ["mus", "Museum"], ["fam", "Family"], ["subj", "Subject"]];
 // the two directions of each sort, in plain words: [how it starts, flipped]
-const AW_SORT_DIR = { year: ["Oldest first", "Newest first"], L: ["Darkest first", "Lightest first"], C: ["Most vivid first", "Least vivid first"], mus: ["Museum A to Z", "Museum Z to A"], fam: ["Palette 1 first", "Palette 1 last"] };
+const AW_SORT_DIR = { year: ["Oldest first", "Newest first"], L: ["Darkest first", "Lightest first"], C: ["Most vivid first", "Least vivid first"], mus: ["Museum A to Z", "Museum Z to A"], fam: ["Palette 1 first", "Palette 1 last"], subj: ["By subject"] };
 const AW_VIEW_KEY = "colorhub-aw-view";   // the painter page's view choices: { rev: {sort: true}, pal: bool, cols: 2-5 }
 function awViewLoad() {
   let v = {}; try { v = JSON.parse(localStorage.getItem(AW_VIEW_KEY) || "{}") || {}; } catch (e) {}
@@ -320,7 +320,7 @@ function awViewLoad() {
 function awViewSave(st) { try { localStorage.setItem(AW_VIEW_KEY, JSON.stringify({ rev: st.rev, pal: st.pal, cols: st.cols })); } catch (e) {} }
 // the one sort picker: every sort in both directions, the current one shown (a native select styled as a chip)
 function awSortSelect(keys, st) {
-  return `<select class="aw-chipbtn aw-sortsel" data-wksel aria-label="Sort">${AW_WORKS_SORT.filter(([k]) => keys.includes(k)).map(([k]) => [0, 1].map(f => `<option value="${k}:${f}"${st.sort === k && !!st.rev[k] === !!f ? " selected" : ""}>${AW_SORT_DIR[k][f]}</option>`).join("")).join("")}</select>`;
+  return `<select class="aw-chipbtn aw-sortsel" data-wksel aria-label="Sort">${AW_WORKS_SORT.filter(([k]) => keys.includes(k)).map(([k]) => (AW_SORT_DIR[k][1] ? [0, 1] : [0]).map(f => `<option value="${k}:${f}"${st.sort === k && !!st.rev[k] === !!f ? " selected" : ""}>${AW_SORT_DIR[k][f]}</option>`).join("")).join("")}</select>`;
 }
 function awWorksRows(P, A) {
   const clusters = A.clusters || [];
@@ -360,12 +360,13 @@ function awWorksSection(slug, m, A, P) {
     <div class="aw-wk-views"><div class="seg" role="tablist" aria-label="View"><button class="on" data-wkview="grid">Grid</button><button data-wkview="timeline">Timeline</button></div>
       ${typeof mapSelect === "function" ? `<button class="aw-wk-map" data-wkmap>${GL_ICON_MAP}<span>Color map</span></button>` : ""}</div>
     <div class="aw-wk-sort aw-wk-look">${awSortSelect(AW_WORKS_SORT.map(r => r[0]).filter(k => (k !== "mus" || museums.length > 1) && (k !== "fam" || famOK)), { sort: "year", rev: awViewLoad().rev })}<span class="aw-look2" data-wklook><button class="aw-chipbtn" data-wkpal aria-pressed="true">Palettes on</button><button class="aw-chipbtn" data-wksize aria-label="Columns">2 across</button></span></div>
-    ${(decades.length > 1 || museums.length > 1 || names.length) ? `<details class="aw-more" data-wkfilter><summary>Filter</summary>
+    ${`<details class="aw-more" data-wkfilter><summary>Filter</summary>
       ${decades.length > 1 ? `<div class="aw-wk-filt"><label>From <b data-wkd0>${decades[0]}</b> to <b data-wkd1>${decades[decades.length - 1] + 9}</b></label>
         <div class="aw-wk-range"><input type="range" data-wkr="0" min="${decades[0]}" max="${decades[decades.length - 1]}" step="10" value="${decades[0]}"><input type="range" data-wkr="1" min="${decades[0]}" max="${decades[decades.length - 1]}" step="10" value="${decades[decades.length - 1]}"></div></div>` : ""}
       ${museums.length > 1 ? `<p class="aw-lbl">Museum</p><div class="aw-chips">${museums.map(ms => `<button class="aw-chipbtn" data-wkmus="${esc(ms)}">${esc(ms)}</button>`).join("")}</div>` : ""}
       ${names.length ? `<p class="aw-lbl">A lot of this color</p><div class="aw-chips">${names.map(nm => `<button class="aw-wk-csw" data-wkcolor="${awHex(nm)}" aria-label="Filter by ${esc(nm)}"><i style="--c:${awHex(nm)}"></i><span>${esc(nm)}</span></button>`).join("")}<button class="aw-chipbtn" data-wkcolorclear hidden>Clear</button></div><p class="fine" data-wkcolornote hidden></p>` : ""}
-    </details>` : ""}
+      <div data-wksubjrow hidden><p class="aw-lbl">Subject</p><div class="aw-chips" data-wksubjchips></div></div>
+    </details>`}
     <div class="aw-wk-mount gl-grid" data-wkmount></div>`;
 }
 function awWorksWire(el, slug, m, A, P) {
@@ -376,12 +377,13 @@ function awWorksWire(el, slug, m, A, P) {
   const byGi = new Map(rows.map(r => [r.gi, r]));
   const decades = [...new Set(rows.filter(r => r.y != null).map(r => Math.floor(r.y / 10) * 10))].sort((a, b) => a - b);
   const vs = awViewLoad();
-  const st = { sort: "year", rev: vs.rev, pal: vs.pal, cols: vs.cols, view: "grid", d0: decades[0], d1: decades.length ? decades[decades.length - 1] + 9 : null, mus: new Set(), colorHex: null, colorTol: 14 };
-  let gridCtl = null;
-  const filtered = () => rows.filter(r =>
+  const st = { sort: "year", rev: vs.rev, pal: vs.pal, cols: vs.cols, view: "grid", d0: decades[0], d1: decades.length ? decades[decades.length - 1] + 9 : null, mus: new Set(), colorHex: null, colorTol: 14, subj: new Set() };
+  let gridCtl = null, subjCtls = [];
+  const filtered = () => { const sf = st.subj.size && SUBJ ? subjFlags(st.subj) : null; return rows.filter(r =>
     (r.y == null || st.d0 == null || (r.y >= st.d0 && r.y <= st.d1)) &&
     (!st.mus.size || st.mus.has(r.mus)) &&
-    (!st.colorHex || awColorNear(r.gi, st.colorHex) <= st.colorTol));
+    (!sf || subjHas(r.gi, sf)) &&
+    (!st.colorHex || awColorNear(r.gi, st.colorHex) <= st.colorTol)); };
   const sorted = list => {
     const copy = list.slice(), sg = st.rev[st.sort] ? -1 : 1;
     if (st.sort === "year") copy.sort((a, b) => (a.y == null) - (b.y == null) || sg * ((a.y || 0) - (b.y || 0)));   // undated last, either way
@@ -389,6 +391,8 @@ function awWorksWire(el, slug, m, A, P) {
     else if (st.sort === "C") copy.sort((a, b) => sg * (b.C - a.C));
     else if (st.sort === "mus") copy.sort((a, b) => sg * a.mus.localeCompare(b.mus));
     else if (st.sort === "fam") copy.sort((a, b) => (a.fam < 0) - (b.fam < 0) || sg * (a.fam - b.fam));
+    else if (st.sort === "subj" && SUBJ) { const n = new Map(); copy.forEach(r => { const g = subjGenreOf(r.gi); n.set(g, (n.get(g) || 0) + 1); });
+      copy.sort((a, b) => { const ga = subjGenreOf(a.gi), gb = subjGenreOf(b.gi); return (ga < 0) - (gb < 0) || n.get(gb) - n.get(ga) || ga - gb || (a.y == null) - (b.y == null) || (a.y || 0) - (b.y || 0); }); }
     return copy;
   };
   const badge = r => !r ? "" : st.sort === "year" ? ((gridCtl ? gridCtl.cols : st.cols) >= 3 ? "" : r.y != null ? awY(r.y) : "undated") : st.sort === "mus" ? r.mus : st.sort === "fam" ? (r.fam >= 0 ? "Palette " + (r.fam + 1) : "") : "";
@@ -400,6 +404,7 @@ function awWorksWire(el, slug, m, A, P) {
   };
   const draw = () => {
     if (gridCtl) { gridCtl.destroy(); gridCtl = null; }
+    subjCtls.forEach(c => c.destroy()); subjCtls = [];
     const list = sorted(filtered());
     const look = el.querySelector("[data-wklook]");
     if (look) { look.hidden = st.view !== "grid" || !list.length; drawLook(); }
@@ -423,6 +428,13 @@ function awWorksWire(el, slug, m, A, P) {
       });
       mount.innerHTML = `<div class="gl-rail aw-wk-rail">${html}</div>`;
       glFill(mount);
+    } else if (st.sort === "subj" && SUBJ) {
+      // one small labeled section per genre (the list is already grouped), each its own grid; a pinch in one sets the columns of all
+      const groups = []; list.forEach(r => { const g = subjGenreOf(r.gi), last = groups[groups.length - 1]; if (last && last.g === g) last.rows.push(r); else groups.push({ g, rows: [r] }); });
+      mount.innerHTML = groups.map((gr, k) => `<section class="aw-subj-sec"><p class="aw-subj-h"><b>${esc(subjGenreLabel(gr.g))}</b><span>${gr.rows.length}</span></p><div class="aw-subj-m gl-grid" data-wksm="${k}"></div></section>`).join("");
+      groups.forEach((gr, k) => { const host = mount.querySelector(`[data-wksm="${k}"]`);
+        subjCtls.push(glGrid(host, { list: gr.rows.map(r => r.gi), badge: null, cols: st.cols, plain: !st.pal, pinch: true,
+          onCols: c => { st.cols = c; awViewSave(st); drawLook(); subjCtls.forEach(x => x.setCols(c)); } })); });
     } else {
       mount.innerHTML = "";
       gridCtl = glGrid(mount, { list: list.map(r => r.gi), badge: gi => badge(byGi.get(gi)), cols: st.cols, plain: !st.pal, pinch: true,
@@ -438,7 +450,23 @@ function awWorksWire(el, slug, m, A, P) {
     draw();
   });
   const sel = el.querySelector("[data-wksel]");
-  if (sel) sel.onchange = () => { const [k, f] = sel.value.split(":"); st.sort = k; st.rev[k] = f === "1"; awViewSave(st); buzz(5); draw(); };
+  if (sel) sel.onchange = () => { const [k, f] = sel.value.split(":"); st.sort = k; st.rev[k] = f === "1"; awViewSave(st); buzz(5);
+    if (k === "subj" && !SUBJ) { mount.innerHTML = `<p class="fine">Reading what each painting shows…</p>`; loadSubjects().then(draw).catch(() => { st.sort = "year"; sel.value = "year:0"; toast("Subjects didn't load"); draw(); }); }
+    else draw(); };
+  // Subject filter: this painter's own top subjects with counts, once the data is in (nothing shows if it never loads)
+  const subjRowEl = el.querySelector("[data-wksubjrow]"), subjChips = el.querySelector("[data-wksubjchips]");
+  let subjMore = false;
+  const drawSubjChips = () => {
+    if (!SUBJ || !subjChips) return;
+    const cnt = new Map(); rows.forEach(r => { const seen = new Set(); subjOf(r.gi).forEach(x => { if (!seen.has(x.t)) { seen.add(x.t); cnt.set(x.t, (cnt.get(x.t) || 0) + 1); } }); });
+    const all = [...cnt].filter(([t, n]) => n >= 2 || st.subj.has(t)).sort((a, b) => (st.subj.has(b[0]) - st.subj.has(a[0])) || b[1] - a[1]);
+    if (!all.length) { subjRowEl.hidden = true; return; }
+    const show = subjMore ? all.slice(0, 40) : all.filter(([t], k) => k < 8 || st.subj.has(t));
+    subjRowEl.hidden = false;
+    subjChips.innerHTML = show.map(([t, n]) => `<button class="aw-chipbtn${st.subj.has(t) ? " on" : ""}" data-wksubj="${t}">${esc(subjName(t))} <em class="aw-chipn">${n}</em></button>`).join("")
+      + (!subjMore && all.length > show.length ? `<button class="aw-chipbtn" data-wksubjmore>More subjects</button>` : "");
+  };
+  if (subjRowEl) loadSubjects().then(() => { if (el.isConnected) drawSubjChips(); }).catch(() => {});
   el.addEventListener("click", e => {
     const v = e.target.closest("[data-wkview]"); if (v) { el.querySelectorAll("[data-wkview]").forEach(b => b.classList.toggle("on", b === v)); st.view = v.dataset.wkview; buzz(5); return draw(); }
     if (e.target.closest("[data-wkpal]")) {
@@ -446,6 +474,8 @@ function awWorksWire(el, slug, m, A, P) {
       awViewSave(st); buzz(5); return draw();
     }
     if (e.target.closest("[data-wksize]")) { st.cols = st.cols >= 5 ? 2 : st.cols + 1; awViewSave(st); buzz(5); return draw(); }
+    const sj = e.target.closest("[data-wksubj]"); if (sj) { const t = +sj.dataset.wksubj; if (st.subj.has(t)) st.subj.delete(t); else st.subj.add(t); buzz(5); drawSubjChips(); return draw(); }
+    if (e.target.closest("[data-wksubjmore]")) { subjMore = true; return drawSubjChips(); }
     const ms = e.target.closest("[data-wkmus]"); if (ms) { const on = ms.classList.toggle("on"); if (on) st.mus.add(ms.dataset.wkmus); else st.mus.delete(ms.dataset.wkmus); return draw(); }
     const cw = e.target.closest("[data-wkcolor]"); if (cw) { st.colorHex = cw.dataset.wkcolor; st.colorTol = 14; el.querySelectorAll("[data-wkcolor]").forEach(b => b.classList.toggle("on", b === cw)); const cl = el.querySelector("[data-wkcolorclear]"); if (cl) cl.hidden = false; return draw(); }
     if (e.target.closest("[data-wkcolorclear], [data-wkcolorclear2]")) { st.colorHex = null; el.querySelectorAll("[data-wkcolor]").forEach(b => b.classList.remove("on")); const cl = el.querySelector("[data-wkcolorclear]"); if (cl) cl.hidden = true; return draw(); }
@@ -544,7 +574,7 @@ function awPainter(slug, push = true) {
     <div class="aw-acts" data-aw-acts></div>
     ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "painter:" + slug, title: A.name }) : ""}
     <section class="srcs"><h3>Sources</h3><ul>
-      <li>Colors measured by ColorHub from museum photographs (${A.n} paintings by ${esc(A.name)} in the archive); every figure is as photographed, screen color only.</li>
+      <li>Colors measured by Chromatlas from museum photographs (${A.n} paintings by ${esc(A.name)} in the archive); every figure is as photographed, screen color only.</li>
       ${m.q ? `<li>Dates, nationality, movement, teachers and portrait: <a href="https://www.wikidata.org/wiki/${m.q}" target="_blank" rel="noopener">Wikidata</a> (CC0)${m.wp ? ` · <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(m.wp)}" target="_blank" rel="noopener">Wikipedia</a>` : ""}${m.img ? ` · portrait: <a href="https://commons.wikimedia.org/wiki/File:${encodeURIComponent(m.img)}" target="_blank" rel="noopener">Wikimedia Commons</a>` : ""}</li>` : `<li>No Wikidata match was found for this name, so dates come from the paintings themselves.</li>`}
     </ul></section>`, "article aw-page");
   awWire(el);
@@ -630,7 +660,7 @@ function awPainterLite(slug, push = true) {
     <div class="aw-head"><div><p class="eyebrow p-type">Painter</p><h1 class="p-title">${esc(L.n)}</h1>${dek ? `<p class="p-dek">${esc(dek)}</p>` : ""}</div></div>
     <p class="aw-sub">${awPlural(n, "painting")} in our archive${n < 10 ? " -- too few for a full profile (signature colors, palette families, findings), so this is just the paintings themselves, each with its own measured palette." : ", but not yet enough documented about the painter for a full profile -- this is just the paintings themselves, each with its own measured palette."}</p>
     <div class="aw-wk-mount gl-grid" data-awlitegrid></div>
-    <section class="srcs"><h3>Sources</h3><ul><li>Colors measured by ColorHub from museum photographs (${n} painting${n === 1 ? "" : "s"} by ${esc(L.n)} in the archive); every figure is as photographed, screen color only.</li></ul></section>`, "article aw-page aw-lite");
+    <section class="srcs"><h3>Sources</h3><ul><li>Colors measured by Chromatlas from museum photographs (${n} painting${n === 1 ? "" : "s"} by ${esc(L.n)} in the archive); every figure is as photographed, screen color only.</li></ul></section>`, "article aw-page aw-lite");
   awWire(el);
   const mount = el.querySelector("[data-awlitegrid]");
   if (mount) glGrid(mount, { list: L.ix });
@@ -976,7 +1006,7 @@ function awGroup(kind, key, push = true) {
     <button class="btn ghost" data-awcolor="${anyHex}">Everything painted in ${esc(nameOf(anyHex).n.toLowerCase())} ${ICON.arrow}</button>
     ${pn}
     ${typeof linksHereHTML === "function" ? linksHereHTML({ id: kind + ":" + key, title }) : ""}
-    <section class="srcs"><h3>Sources</h3><ul><li>Computed by ColorHub from ${n} museum photographs; screen colors, as photographed. The most typical painting is the one nearest the group's average lightness, chroma, warmth and color spread.</li>${srcNote}${kind === "movement" ? `<li>Movement tags: museum records, and Wikidata (CC0).</li>` : ""}</ul></section>`, "article aw-page");
+    <section class="srcs"><h3>Sources</h3><ul><li>Computed by Chromatlas from ${n} museum photographs; screen colors, as photographed. The most typical painting is the one nearest the group's average lightness, chroma, warmth and color spread.</li>${srcNote}${kind === "movement" ? `<li>Movement tags: museum records, and Wikidata (CC0).</li>` : ""}</ul></section>`, "article aw-page");
   awWire(el);
   if (typeof wireLinks === "function") wireLinks(el);
   awFillHighlight(el);

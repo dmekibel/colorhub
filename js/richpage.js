@@ -51,7 +51,7 @@ const rpCap = s => s.charAt(0).toUpperCase() + s.slice(1);
 // definition (truth pass, 2026-10-08): the story's own first sentence (cut at its colon when long), else the color's
 // authored line, else the ISCC-NBS descriptor when it doesn't contradict the name's own modifier ("Light Rosolane
 // Purple" is never "Deep purplish pink"), else a differential definition from the nearest named neighbor. A
-// sentence of three words or fewer ("Dark blue.") never wins over a real one, and the source is never "ColorHub".
+// sentence of three words or fewer ("Dark blue.") never wins over a real one, and the source is never "Chromatlas".
 const RP_LIGHT_W = /\b(light|pale|bright|brilliant|pastel|baby|powder|pallid)\b/i, RP_DARK_W = /\b(dark|deep|blackish|dusky)\b/i;
 const rpContradicts = (name, desc) => (RP_LIGHT_W.test(name) && RP_DARK_W.test(desc)) || (RP_DARK_W.test(name) && /\b(light|pale|brilliant|pallid)\b/i.test(desc));
 function rpFirstSentence(t) {
@@ -941,7 +941,7 @@ function colorDossier(entry, o = {}) {
       { t: "Share", run: () => {
         if (typeof sharePalette === "function") return sharePalette([{ h: heroHex }], name, h => ({ nm: nameOf(h) }));
         const url = typeof shareURL === "function" ? shareURL("color/" + routeSlug(name)) : location.href;
-        if (navigator.share) navigator.share({ text: name + " · ColorHub", url }).catch(() => {});
+        if (navigator.share) navigator.share({ text: name + " · Chromatlas", url }).catch(() => {});
         else { try { navigator.clipboard.writeText(url); toast("Copied the link"); } catch (e) {} }
       } },
     ] },

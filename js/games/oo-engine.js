@@ -520,11 +520,11 @@ function ooDaily(key) {
   const rnd = ooRnd(ooHash("oo-daily:" + key)), kinds = ooShuf(OO_DAILY_KINDS, rnd).slice(0, 6);
   return OO_DAILY_D.map((d, i) => { const [v, b, n] = kinds[i]; return ooRound({ v, b, n, d, rnd, count: v === "count" ? 1 + Math.floor(rnd() * 4) : undefined }); });
 }
-// the share line: plain words, no emoji grid ("ColorHub · Odd one out #1: 5 of 6, down to 1.8% different")
+// the share line: plain words, no emoji grid ("Chromatlas · Odd one out #1: 5 of 6, down to 1.8% different")
 function ooShareText(key, res) {
   const hits = res.filter(r => r.ok).length, seen = res.filter(r => r.ok && r.act > 0).map(r => r.act), min = seen.length ? Math.min(...seen) : null;
   const pct = n => `${n >= 10 ? n.toFixed(0) : n.toFixed(1)}%`;
-  return `ColorHub · Odd one out #${ooDayNum(key)}: ${hits} of ${res.length}${min != null ? `, down to ${pct(min)} different` : ""}`;
+  return `Chromatlas · Odd one out #${ooDayNum(key)}: ${hits} of ${res.length}${min != null ? `, down to ${pct(min)} different` : ""}`;
 }
 
 // ---------- the Mix games: pure generators ----------

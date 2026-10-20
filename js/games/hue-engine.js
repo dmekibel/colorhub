@@ -587,9 +587,9 @@ function hgDailySpec(key, srcs) {
   const src = srcs[ord[mod(num - 1, ord.length)]];
   return { id: "daily:" + key, daily: key, num, shape: R.s, n: R.n, m: R.m, K: R.K, anchors: "half", twist: null, mode: null, pal: src.pal, T: 3.6, seed: "daily:" + key, deal: "daily:" + key, src };
 }
-// the plain share line (no spoilers, no emoji): "ColorHub · Gradients #4 · Honeycomb: 31 moves (par 27), no hints"
+// the plain share line (no spoilers, no emoji): "Chromatlas · Gradients #4 · Honeycomb: 31 moves (par 27), no hints"
 function hgShareText(num, shape, r) {
-  return `ColorHub · Gradients #${num} · ${HG_SHAPE_NAME[shape] || "Board"}: ${r.moves} move${r.moves === 1 ? "" : "s"} (par ${r.par})${r.hints ? `, ${r.hints} hint${r.hints === 1 ? "" : "s"}` : ", no hints"}`;
+  return `Chromatlas · Gradients #${num} · ${HG_SHAPE_NAME[shape] || "Board"}: ${r.moves} move${r.moves === 1 ? "" : "s"} (par ${r.par})${r.hints ? `, ${r.hints} hint${r.hints === 1 ? "" : "s"}` : ", no hints"}`;
 }
 
 // ---------- the Gardens: flowers as screen approximations (petal light and deep, leaf, the shade between) ----------

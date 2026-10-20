@@ -124,7 +124,7 @@ function dpPlates(e) {
 }
 // the share: the score and the painting's palette as plates (ringed for each round you got); never its title,
 // painter or date, so a friend can still play it
-const dpShareText = (hits, no) => `ColorHub · Today's painting No. ${no} · ${hits.filter(Boolean).length} of 5`;
+const dpShareText = (hits, no) => `Chromatlas · Today's painting No. ${no} · ${hits.filter(Boolean).length} of 5`;
 const dpShareSpec = (e, hits, no) => ({ layout: "palette", note: `Today's painting, No. ${no}`, title: `${hits.filter(Boolean).length} of 5`,
   sub: "Five ways of looking at one painting.", plates: dpPlates(e).map((h, i) => ({ h, hit: !!hits[i] })) });
 const DP_WORDS = ["None", "One", "Two", "Three", "Four", "Five"];
@@ -383,7 +383,7 @@ function challengeDone(fresh, e) {
   const img = el.querySelector(".dp-whole img"); img.onerror = () => { if (img.src.indexOf(e.img) < 0) img.src = e.img; };
   el.querySelector("[data-close]").onclick = () => go(S.tab || "learn");
   el.querySelectorAll("[data-open]").forEach(b => b.onclick = () => dpOpenPainting(e));
-  el.querySelector("[data-share]").onclick = () => cardShare(dpShareSpec(e, hits, no), dpShareText(hits, no), routeURL("challenge"), `colorhub-painting-${no}.png`);
+  el.querySelector("[data-share]").onclick = () => cardShare(dpShareSpec(e, hits, no), dpShareText(hits, no), routeURL("challenge"), `chromatlas-painting-${no}.png`);
   const nm = el.querySelector("[data-name]"); if (nm) nm.onclick = () => daily();
   if (fresh) buzz(got >= 4 ? [10, 30, 20] : 10);
 }

@@ -1396,7 +1396,7 @@ function prResults(sess, o = {}) {
     const a = f.answer || {}, yours = a.h && (a.kind !== "claim" || a.yes) ? `<i style="--c:${a.h}"></i>` : `<i class="none"></i>`;
     return `<button class="pr-row pr-miss" data-open="${i}"><span class="pr-pair2"><i style="--c:${f.it.h}"></i>${yours}</span><span class="pr-rowt"><b>${esc(prName(f.it))}</b><small>${prAnswerLine(f)}</small></span>${PR_ICON.chev}</button>`;
   }).join("");
-  const shareText = `ColorHub · ${M.t} · ${sess.items.length} colors · ${String(title).replace(/<[^>]+>/g, "")}`;
+  const shareText = `Chromatlas · ${M.t} · ${sess.items.length} colors · ${String(title).replace(/<[^>]+>/g, "")}`;
   const el = show(`<header class="pr-top"><button class="pr-x" data-close aria-label="Close">${prX()}</button><span class="pr-grow"></span><span class="pr-note">${esc(M.t)}</span></header>
     ${prPlate(sess.items, "pr-plate-res" + (win ? " win" : ""))}
     <h1 class="pr-t1 pr-res-t">${title}</h1>

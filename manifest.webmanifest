@@ -1,6 +1,6 @@
 {
-  "name": "ColorHub",
-  "short_name": "ColorHub",
+  "name": "Chromatlas",
+  "short_name": "Chromatlas",
   "description": "Learn the names of colors, one family at a time.",
   "start_url": "./",
   "scope": "./",

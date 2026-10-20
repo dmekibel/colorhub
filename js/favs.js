@@ -275,7 +275,7 @@ function fvEmptyShelf(back) {
     <div class="fv-empty">
       <div class="fv-bubbles" aria-hidden="true"><i style="--c:#C8553D"></i><i style="--c:#E0A458"></i><i style="--c:#3F7C8C"></i></div>
       <h1 class="title-1">Nothing hearted <em>yet</em></h1>
-      <p class="lead">Heart the colors you love. ColorHub ranks them, learns your taste, and finds the painter whose palette is closest to yours.</p>
+      <p class="lead">Heart the colors you love. Chromatlas ranks them, learns your taste, and finds the painter whose palette is closest to yours.</p>
       <button class="btn" data-pick>Keep colors ${ICON.arrow}</button>
       <button class="btn ghost" data-test>Or take the 20-tap taste test</button>
     </div>`, "fv fv-shelf");
@@ -344,8 +344,8 @@ function fvShare() {
     });
     x.fillStyle = "#CFC9BC"; x.font = `italic 400 44px ${SER}`;
     tzWrap(x, line, W - 2 * pad).slice(0, 2).forEach((l, i) => x.fillText(l, pad, 1118 + i * 56));
-    x.fillStyle = "#837E73"; x.font = `400 36px ${SER}`; x.fillText("ColorHub", pad, 1270);
-  }, "colorhub-my-colors.png", "My colors", routeURL("favorites"));
+    x.fillStyle = "#837E73"; x.font = `400 36px ${SER}`; x.fillText("Chromatlas", pad, 1270);
+  }, "chromatlas-my-colors.png", "My colors", routeURL("favorites"));
 }
 
 // ======================================================================

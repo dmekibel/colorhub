@@ -11,7 +11,7 @@ function welcome() {
   for (let i = 0; i < cols; i++) strips.push(chroma.slice(i * per, (i + 1) * per).sort((a, b) => b.L - a.L));
   strips.push(neutrals);
   const el = show(`
-    <header class="bar"><div class="brand">${LOGO}<span>ColorHub</span></div></header>
+    <header class="bar"><div class="brand">${LOGO}<span>Chromatlas</span></div></header>
     <div class="wall" aria-hidden="true">${strips.map((s, k) => `<div class="strip" style="--k:${k}">${s.map(p => `<i style="--c:${p.c.h}"></i>`).join("")}</div>`).join("")}</div>
     <div class="copy">
       <h1>Name the colors <em>you see.</em></h1>
@@ -293,7 +293,7 @@ function placed(log) {
       (pass3 ? " You know many designer's words already, so those units will go quickly." : "");
   const shown = [...t2, ...t3];
   const el = show(`
-    <header class="bar"><div class="brand">${LOGO}<span>ColorHub</span></div></header>
+    <header class="bar"><div class="brand">${LOGO}<span>Chromatlas</span></div></header>
     ${shown.length ? `<div class="chips${shown.length > 9 ? " compact" : ""}">${shown.map((x, k) => `<div class="chip ${x.ok ? "" : "miss"}" style="--c:${x.c.h};--k:${k}"><i><b class="mark ${x.ok ? "y" : "n"}">${x.ok ? ICON.checkS : ICON.xS}</b></i><span>${esc(x.c.n)}</span></div>`).join("")}</div>` : `<div style="flex:1"></div>`}
     <p class="eyebrow">Your starting point</p>
     <h1><em>${esc(D.tiers[tier].name)}</em></h1>
@@ -508,7 +508,7 @@ function about() {
 function backupProgress() {
   S.backedUp = today(); save();
   const blob = new Blob([JSON.stringify(S, null, 1)], { type: "application/json" });
-  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `colorhub-backup-${today()}.json`; a.click();
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `chromatlas-backup-${today()}.json`; a.click();
   toast("Backup saved");
 }
 function restoreProgress() {
@@ -517,7 +517,7 @@ function restoreProgress() {
     const f = inp.files[0]; if (!f) return;
     f.text().then(t => {
       try { const d = migrateState(JSON.parse(t)); if (!d || !d.cards) throw 0; S = d; pickMigrate(S); save(); toast("Progress restored"); go("learn"); }
-      catch (e) { toast("That file isn't a ColorHub backup"); }
+      catch (e) { toast("That file isn't a Chromatlas backup"); }
     });
   };
   inp.click();
@@ -529,7 +529,7 @@ function restoreProgress() {
 function installHint() {
   const keep = keepCard(), snoozed = S.installNo && (S.installNo === true || daysSince(S.installNo) < 30);
   if (standalone() || snoozed || !Object.keys(S.done).length || !(INSTALL_EVT || isIOS())) return keep;
-  return `<section class="inst"><div><b>Keep ColorHub on your Home Screen</b><span>${INSTALL_EVT ? "It opens full screen, like an app, and works offline." : "Tap Share, then “Add to Home Screen”. It opens full screen, works offline, and keeps your progress safe: Safari can clear a website's data after a week away."}</span></div>
+  return `<section class="inst"><div><b>Keep Chromatlas on your Home Screen</b><span>${INSTALL_EVT ? "It opens full screen, like an app, and works offline." : "Tap Share, then “Add to Home Screen”. It opens full screen, works offline, and keeps your progress safe: Safari can clear a website's data after a week away."}</span></div>
     <div class="inst-act">${INSTALL_EVT ? `<button class="btn ghost" data-install>Install ${ICON.arrow}</button>` : ""}<button class="btn ghost" data-inst-no>Not now</button></div></section>${keep}`;
 }
 function wireInstall(el) {

@@ -330,3 +330,10 @@
 .aw-look2[hidden]{display:none}
 .aw-wk-look .aw-chipbtn{padding:0 10px;letter-spacing:0;white-space:nowrap}
 .aw-sortsel{appearance:none;-webkit-appearance:none;padding-right:26px!important;color:var(--ink);cursor:pointer;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23b9b4aa' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9l7 7 7-7'/%3E%3C/svg%3E") no-repeat right 9px center}
+/* Life's work sorted by subject: one small labeled section per genre (js/artwiki.js awWorksWire) */
+.aw-subj-sec + .aw-subj-sec{margin-top:26px}
+.aw-subj-h{display:flex;align-items:baseline;gap:10px;margin:0 0 12px;font:400 15px/1.2 var(--sans);color:var(--ink)}
+.aw-subj-h b{font:500 15px/1.2 var(--sans)}
+.aw-subj-h span{font:400 13px/1 var(--mono);color:var(--faint)}
+.aw-chipn{font-style:normal;font:500 12px/1 var(--mono);color:var(--faint)}
+.aw-chipbtn.on .aw-chipn{color:inherit;opacity:.8}

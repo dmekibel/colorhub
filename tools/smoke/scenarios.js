@@ -5872,7 +5872,7 @@ scenario("paintings", "an unreadable painting's Pick controls give an honest mes
   t.expect(!t.$('[data-glzv="pick"]').classList.contains("on"), "Look closer's Pick tool armed anyway, with nothing to actually sample");
 });
 // Lane H (design/IMPROVE-2026-10-08/PLAN.md): Across the line clicks. The anchor chip shows the word's own color,
-// a right answer offers the neighbor word, adding it makes a review card due tomorrow, a miss says "In ColorHub's
+// a right answer offers the neighbor word, adding it makes a review card due tomorrow, a miss says "In Chromatlas's
 // map", and each answer is logged to the Learner Model with names.
 scenario("train", "Across the line: anchor, add the neighbor word, honest miss, answers logged with names", async t => {
   await t.open("#/train", { settle: 600 });
@@ -5896,7 +5896,7 @@ scenario("train", "Across the line: anchor, add the neighbor word, honest miss, 
   await t.click("[data-next]", { wait: 700 });
   await t.waitFor(".oo-line .oo-board .oo-t:not(:disabled)", 10000, "the second board");
   await t.click(t.$$(".oo-line .oo-board .oo-t")[(t.ev("OO_LAST.ans[0]") + 1) % t.$$(".oo-line .oo-board .oo-t").length], { force: true, wait: 700 });
-  t.expect(/In ColorHub's map/.test(t.text("#oofoot")), `the miss line isn't honest: "${t.text("#oofoot")}"`);
+  t.expect(/In Chromatlas's map/.test(t.text("#oofoot")), `the miss line isn't honest: "${t.text("#oofoot")}"`);
   t.expect(t.ev("S.learn.ev.some(r => r.e === 'confuse' && r.src === 'across' && r.c && r.b)"), "the miss wasn't logged as a named mix-up");
 });
 
@@ -7441,4 +7441,32 @@ scenario("paintings", "Pick a color opens the palette editor: taps add loupes an
   const kept0 = t.ev(`(S.palettes || []).length`);
   await t.click(t.$("[data-glzpksave]"), { force: true, wait: 400 });
   t.expect(t.ev(`(S.palettes || []).length`) === kept0 + 1, "Save palette should add one kept palette");
+});
+
+// Subjects (2026-10-21): the map search reads subject words ("Monet boats", "Dutch still life 1650s") as a removable chip with a
+// live count, and By subject groups the map into one block per genre.
+scenario("paintmap", "map search reads subject words: 'Monet boats' filters to a removable Boats chip; By subject arranges by genre", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  await t.click("[data-pmsearch]", { wait: 500 });
+  await t.waitFor(".sr-input", 4000, "the map search");
+  const q = t.$(".sr-input"); q.value = "Monet boats"; q.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+  await t.waitFor(() => /Boats/.test((t.$(".sr-row") || {}).textContent || ""), 12000, "a Boats suggestion with a live count");
+  const row = t.$(".sr-row"); t.expect(/Monet/.test(row.textContent) && /\d+ paintings?/.test(row.textContent), `the suggestion reads "${row.textContent}"`);
+  await t.click(row, { wait: 1500 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 5 && t.w.PM_CTRL.count < 400, 8000, "the map to narrow to Monet's boats");
+  t.expect(t.$$(".pmx-xchip").some(c => /Boats/.test(c.textContent)), "no removable Boats chip");
+  t.expect(/subj=boat/.test(t.w.location.hash), `the address doesn't name the subject: ${t.w.location.hash}`);
+  await t.open("#/paintings/map?arr=subject", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.spec.arr === "subject", 20000, "the By subject map");
+  const labels = t.w.PM_CTRL.lay().labels.map(l => l.text);
+  t.expect(labels.includes("Portraits") && labels.includes("Landscapes") && labels[labels.length - 1] === "Other subjects", `By subject blocks: ${labels.join(", ")}`);
+});
+scenario("paintmap", "a painting page lists its subjects, detected ones labeled, and a tap opens the map filtered to it", async t => {
+  await t.open("#/gallery/14945", { settle: 800 });
+  await t.waitFor("[data-glsubj-line]:not([hidden])", 10000, "the Subjects line");
+  const line = t.$("[data-glsubj-line]").textContent;
+  t.expect(/Subjects/.test(line) && /detected:\s*Candle/.test(line), `the Subjects line reads "${line}"`);
+  await t.click(t.$$(".gl-subj-b")[0], { wait: 1500 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20 && /subj=/.test(t.w.location.hash), 12000, "the map filtered to that subject");
 });

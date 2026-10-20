@@ -432,3 +432,10 @@
 /* pictures-only pins (painter page: Palettes off, or 4 and 5 across) */
 .gl-pin.plain{contain:layout paint}
 .gl-pin.plain .gl-im{height:100%}
+/* Subjects line under a painting's byline (js/gallery.js subjLineHTML): quiet, each subject one tap into the map; detected tags say so */
+.gl-subj{margin:22px 0 -4px;font:400 14px/1.45 var(--sans);color:var(--soft)}
+.gl-subj[hidden]{display:none}
+.gl-subj-l{color:var(--faint);margin-right:2px}
+.gl-subj-d{color:var(--faint);font-style:italic}
+.gl-subj-b{font:inherit;color:var(--ink);background:none;border:0;padding:10px 3px;margin:-10px 0;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;cursor:pointer}
+.gl-subj i{font-style:normal;color:var(--faint)}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Crawlable copies of ColorHub's pages, for search engines and link previews.
+"""Crawlable copies of Chromatlas's pages, for search engines and link previews.
 
 The app routes with hashes (#/color/teal), which search engines don't index and chat apps can't preview.
 This writes a small static HTML page for every color, wiki page and painting, each with a real <title>,
@@ -117,7 +117,7 @@ BOT = r"bot|crawl|spider|slurp|facebookexternalhit|embedly|preview|whatsapp|tele
 
 def page(path, route, title, desc, image, body, img_w=1200, img_h=630, kind="article"):
     url = SITE + path
-    full = f"{title} · ColorHub"
+    full = f"{title} · Chromatlas"
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -127,7 +127,7 @@ def page(path, route, title, desc, image, body, img_w=1200, img_h=630, kind="art
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{esc(url)}">
 <meta property="og:type" content="{kind}">
-<meta property="og:site_name" content="ColorHub">
+<meta property="og:site_name" content="Chromatlas">
 <meta property="og:title" content="{esc(full)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{esc(url)}">
@@ -142,9 +142,9 @@ def page(path, route, title, desc, image, body, img_w=1200, img_h=630, kind="art
 </head>
 <body>
 <main>
-<p class="top"><a href="../../">ColorHub</a></p>
+<p class="top"><a href="../../">Chromatlas</a></p>
 {body}
-<p><a class="go" href="../../#/{route}">Open in ColorHub</a></p>
+<p><a class="go" href="../../#/{route}">Open in Chromatlas</a></p>
 <p class="fine">Hex values are screen approximations. Every page lists its sources.</p>
 </main>
 </body>
@@ -215,7 +215,7 @@ def main():
     for c in s.colors:
         sl, w = slug(c["n"]), d["WIKI_COLORS"].get(c["n"])
         facets = (w or {}).get("facets", [])
-        desc = clip(facets[0]["text"] if facets else c.get("o") or c.get("d") or f"{c['n']}, {c['h']}: one of the color names you can learn on ColorHub.")
+        desc = clip(facets[0]["text"] if facets else c.get("o") or c.get("d") or f"{c['n']}, {c['h']}: one of the color names you can learn on Chromatlas.")
         nb = s.by_name.get(str(c.get("vs", "")).lower())
         parts = [f'<div class="sw" style="background:{c["h"]}"></div>',
                  f'<p class="meta">{"Basic color word" if c.get("basic") else esc(c.get("unit", ""))}</p>',
@@ -293,7 +293,7 @@ def main():
         h, l, sat = colorsys.rgb_to_hls(*(v / 255 for v in rgb(c["h"])))
         return (sat < .15 or l < .08 or l > .94, round((h + .03) % 1, 4), -round(l, 4), c["n"])
     wall = sorted(s.colors, key=hue_key)
-    chip_image([(c["h"], 1 / len(wall)) for c in wall], "ColorHub", "LEARN THE NAMES OF COLORS", os.path.join(ROOT, "og/app.png")); write("og/app.png")
+    chip_image([(c["h"], 1 / len(wall)) for c in wall], "Chromatlas", "LEARN THE NAMES OF COLORS", os.path.join(ROOT, "og/app.png")); write("og/app.png")
 
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + "".join(f"  <url><loc>{esc(u)}</loc></url>\n" for u in urls) + "</urlset>\n")

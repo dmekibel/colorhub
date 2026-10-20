@@ -1,5 +1,5 @@
 "use strict";
-// ColorHub sound (js/sound.js). Every sound is synthesized here with the Web Audio API: no audio files, no libraries.
+// Chromatlas sound (js/sound.js). Every sound is synthesized here with the Web Audio API: no audio files, no libraries.
 // The feel: soft, warm, rounded and a little bubbly (marimba, kalimba, glass and music-box plucks, gentle pops, airy
 // whooshes), quiet and tactile, never arcade-y. The ambient bed is a slow, sparse felt piano. Design note: design/SOUND.md.
 //

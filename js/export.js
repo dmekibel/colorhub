@@ -91,19 +91,19 @@ function exCSS(cols, opts = {}) {
   const rows = exRows(cols, opts);
   const lines = rows.flatMap(r => [`  --${r.slug}: ${r.h}; /* ${r.ok}${r.role ? " · " + r.role : ""}${r.share != null ? " · " + exPct(r.share) : ""} */`,
     ...r.tints.map(t => `  --${r.slug}-${t.key}: ${t.h}; /* ${exFmtOk(t.h)} */`)]);
-  return `/* ColorHub · ${exTitle(opts)} · ${cols.length} color${cols.length === 1 ? "" : "s"}${opts.note ? "\n   " + opts.note : ""}\n   ${exHeadNote} */\n:root {\n${lines.join("\n")}\n}\n`;
+  return `/* Chromatlas · ${exTitle(opts)} · ${cols.length} color${cols.length === 1 ? "" : "s"}${opts.note ? "\n   " + opts.note : ""}\n   ${exHeadNote} */\n:root {\n${lines.join("\n")}\n}\n`;
 }
 function exTailwind(cols, opts = {}) {
   const rows = exRows(cols, opts);
   const body = rows.map(r => r.tints.length
     ? `        "${r.slug}": {\n          DEFAULT: "${r.h}",\n${r.tints.map(t => `          ${t.key}: "${t.h}",`).join("\n")}\n        },`
     : `        "${r.slug}": "${r.h}",`).join("\n");
-  return `// ColorHub · ${exTitle(opts)}${opts.note ? " · " + opts.note : ""}\n// ${exHeadNote}\n// Paste inside tailwind.config.js, in theme.extend.\nmodule.exports = {\n  theme: {\n    extend: {\n      colors: {\n${body}\n      },\n    },\n  },\n};\n`;
+  return `// Chromatlas · ${exTitle(opts)}${opts.note ? " · " + opts.note : ""}\n// ${exHeadNote}\n// Paste inside tailwind.config.js, in theme.extend.\nmodule.exports = {\n  theme: {\n    extend: {\n      colors: {\n${body}\n      },\n    },\n  },\n};\n`;
 }
 function exGPL(cols, opts = {}) {
   const rows = exRows(cols, opts), pad = n => String(n).padStart(3, " ");
   const lines = rows.flatMap(r => [[r.h, r.name], ...r.tints.map(t => [t.h, `${r.name} ${t.key}`])]).map(([h, n]) => `${exRgb(h).map(pad).join(" ")}\t${n}`);
-  return `GIMP Palette\nName: ${exTitle(opts).replace(/[\r\n]+/g, " ")}\nColumns: ${Math.min(8, lines.length)}\n# ColorHub · ${exHeadNote}\n${lines.join("\n")}\n`;
+  return `GIMP Palette\nName: ${exTitle(opts).replace(/[\r\n]+/g, " ")}\nColumns: ${Math.min(8, lines.length)}\n# Chromatlas · ${exHeadNote}\n${lines.join("\n")}\n`;
 }
 const exXml = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&apos;" }[c]));
 function exSVG(cols, opts = {}) {
@@ -122,7 +122,7 @@ function exSVG(cols, opts = {}) {
   }).join("");
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">\n<title>${exXml(exTitle(opts))}</title>\n<desc>${exXml(exHeadNote + (opts.note ? " " + opts.note : ""))}</desc>\n`
     + `<rect width="${W}" height="${H}" fill="#EFEBE3"/>\n<text x="${pad}" y="44" font-family="Georgia, serif" font-size="28" fill="#141311">${exXml(exTitle(opts))}</text>\n${plates}\n`
-    + `<text x="${pad}" y="${H - 14}" font-family="Georgia, serif" font-style="italic" font-size="12" fill="#5E5A51">Made in ColorHub. ${exXml(exHeadNote)}</text>\n</svg>\n`;
+    + `<text x="${pad}" y="${H - 14}" font-family="Georgia, serif" font-style="italic" font-size="12" fill="#5E5A51">Made in Chromatlas. ${exXml(exHeadNote)}</text>\n</svg>\n`;
 }
 
 // ---------- binary formats ----------
@@ -224,7 +224,7 @@ function exOpenSheet(opts) {
     if (c) { exCopy(exBuild(c.dataset.exCopy, cols, o())); buzz(6); }
     if (f) {
       const fmt = EX_FORMATS.find(x => x.k === f.dataset.exFile), data = exBuild(fmt.k, cols, o());
-      const name = fmt.k === "tailwind" ? "tailwind.colorhub-" + slug + ".js" : `colorhub-${slug}.${fmt.ext}`;
+      const name = fmt.k === "tailwind" ? "tailwind.chromatlas-" + slug + ".js" : `chromatlas-${slug}.${fmt.ext}`;
       const r = await exDeliver(name, fmt.mime, data);
       if (r === "saved") toast("Saved " + name); else if (r === "shared") buzz(8);
     }

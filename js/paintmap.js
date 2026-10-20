@@ -37,9 +37,9 @@
 // Third field = where it makes sense: omitted = every map, "multi" = only when the map holds many painters (By painter and
 // Families are one block when it holds one), "solo" = only when the map is scoped to ONE painter (David, 2026-10-20: the
 // painter page's map). One list, filtered by pmArrFor(); the sheet is never forked.
-const PM_ARR = [["color", "By color"], ["time", "By time"], ["painter", "By painter", "multi"], ["families", "Families", "multi"], ["museum", "By museum", "solo"], ["tones", "Tones"], ["rings", "Rings"], ["spiral", "Spiral"]];
+const PM_ARR = [["color", "By color"], ["time", "By time"], ["painter", "By painter", "multi"], ["families", "Families", "multi"], ["museum", "By museum", "solo"], ["subject", "By subject"], ["tones", "Tones"], ["rings", "Rings"], ["spiral", "Spiral"]];
 const pmSolo = s => !!(s && s.f && s.f.painterSet && s.f.painterSet.length === 1);
-const pmArrFor = s => PM_ARR.filter(a => !a[2] || (a[2] === "solo") === pmSolo(s));
+const pmArrFor = s => PM_ARR.filter(a => (!a[2] || (a[2] === "solo") === pmSolo(s)) && (a[0] !== "subject" || (s.col || "paintings") === "paintings"));
 const pmArrOk = s => pmArrFor(s).some(a => a[0] === s.arr);
 const PM_NEEDS_SEED = new Set(["rings", "spiral"]);
 const PM_WHY = {
@@ -48,6 +48,7 @@ const PM_WHY = {
   painter: "A block for each painter, earliest first",
   families: "A block for each movement, the biggest first",
   museum: "A block for each museum, the biggest collection first",
+  subject: "A block for each kind of picture: portraits, landscapes, still lifes, the biggest first",
   tones: "An island per mood: vivid, light, muted, dark",
   rings: "Concentric rings: the nearer the middle, the closer the colors",
   spiral: "A continuous spiral, nearest first, no seams between rings",
@@ -87,6 +88,7 @@ const PM_ICON = {
   time: sv('<path d="M4 6h16M4 12h16M4 18h16"/><path d="M8 4v4M14 10v4M10 16v4"/>', 22, 1.7),
   painter: sv('<rect x="3.5" y="4" width="7" height="7" rx="1.2"/><rect x="13.5" y="4" width="7" height="4" rx="1.2"/><rect x="13.5" y="11" width="7" height="9" rx="1.2"/><rect x="3.5" y="14" width="7" height="6" rx="1.2"/>', 22, 1.7),
   museum: sv('<path d="M3.5 9.5L12 4l8.5 5.5M5.5 10.5v7M10 10.5v7M14 10.5v7M18.5 10.5v7M3.5 19.5h17"/>', 22, 1.7),
+  subject: sv('<rect x="3.5" y="4" width="7.5" height="7.5" rx="1.4"/><rect x="13" y="4" width="7.5" height="7.5" rx="3.75"/><path d="M3.5 20l3.75-6.5L11 20zM13 20h7.5"/>', 22, 1.7),
   families: sv('<circle cx="7" cy="7" r="3.4"/><circle cx="16.5" cy="6.5" r="2.4"/><circle cx="7" cy="16.5" r="2.4"/><circle cx="17" cy="16" r="3"/>', 22, 1.7),
   tones: sv('<circle cx="7" cy="7" r="3.6"/><circle cx="17" cy="7" r="2.2"/><circle cx="7" cy="17" r="2.2"/><circle cx="17" cy="17" r="3.6"/>', 22, 1.7),
   rings: sv('<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7.5" stroke-dasharray="2.5 3"/><circle cx="12" cy="12" r="10.5" stroke-dasharray="1.5 2.5"/>', 22, 1.6),
@@ -186,10 +188,11 @@ const pmHex = (i, F) => {
 //   region     the last region chip tapped, purely so pmActiveChips() can show "Europe" instead of 20 country
 //              names; matching itself only ever looks at coSet (already unioned in when the chip was tapped)
 //   painterSet/mvSet/musSet   multi-select, same OR-within-facet idea, for Painter/Movement/Museum
+//   subjSet    subject tags (data/gallery/subjects.json via js/gallery.js loadSubjects): a painting matches if ANY of its tags (authority, title or detected) is in the set; paintings only
 //   colorMode  "any" (default: a painting counts if it's close to ANY picked hex) or "all" (close to EVERY one)
 //   hueBand    one of XB_FAMS's 9 family indices (0=Reds..8=Greys), matched against a painting's DOMINANT swatch
 //   l0/l1      a mean-lightness range (0-100, dark<->light), independent of any hex pick
-const pmFilterFresh = () => ({ ...xbFresh(), coSet: [], region: null, painterSet: [], mvSet: [], musSet: [], colorMode: "any", hueBand: null, l0: null, l1: null });
+const pmFilterFresh = () => ({ ...xbFresh(), coSet: [], region: null, painterSet: [], mvSet: [], musSet: [], subjSet: [], colorMode: "any", hueBand: null, l0: null, l1: null });
 // Western Europe / Northern Europe / Italy & Spain are deliberately tighter than "Europe" (which is every
 // European country in the dataset) -- each is its own bulk-select, not a strict partition of the broad one.
 const PM_REGIONS = [
@@ -231,13 +234,15 @@ function pmRun(s, F) {
   const painterSet = f.painterSet && f.painterSet.length ? new Set(f.painterSet) : (f.painter ? new Set([f.painter]) : null);
   const mvSet = f.mvSet && f.mvSet.length ? new Set(f.mvSet) : (f.mv ? new Set([f.mv]) : null);
   const musSet = f.musSet && f.musSet.length ? new Set(f.musSet) : (f.mus >= 0 ? new Set([f.mus]) : null);
+  const subjOn = !!SUBJ && (F.col || "paintings") === "paintings" && N <= SUBJ.N;
+  const subjFlag = subjOn && f.subjSet && f.subjSet.length ? subjFlags(f.subjSet) : null;
   const hasHex = f.hexes && f.hexes.length, mode = f.colorMode || "any";
   const perHex = hasHex ? f.hexes.map(h => pmDE1(F, h)) : null;
   const tol = f.tol;
   const when = f.y0 != null || f.y1 != null, y0 = f.y0 == null ? -1e5 : f.y0, y1 = f.y1 == null ? 1e5 : f.y1;
   const hasL = f.l0 != null || f.l1 != null, l0 = f.l0 == null ? -1e5 : f.l0, l1 = f.l1 == null ? 1e5 : f.l1;
   const counts = { when: new Int32Array(XB_NDEC + 1), painter: new Int32Array(F.meta.artists.length + 1), mv: new Int32Array(F.meta.movements.length + 1), co: new Int32Array(F.meta.countries.length + 1),
-    mus: new Int32Array(G.src.length), hueBand: new Int32Array(9), color: 0, lightness: 0 };
+    mus: new Int32Array(G.src.length), hueBand: new Int32Array(9), color: 0, lightness: 0, subj: subjOn ? new Int32Array(SUBJ.tags.length) : null };
   const out = new Int32Array(N); let n = 0;
   for (let i = 0; i < N; i++) {
     let fail = 0;
@@ -254,6 +259,7 @@ function pmRun(s, F) {
     if (musSet && !musSet.has(G.mus[i])) fail |= 32;
     if (f.hueBand != null && pmHueBandOf(i, F) !== f.hueBand) fail |= 64;
     if (hasL) { const L = G.mean[i * 3]; if (L < l0 || L > l1) fail |= 128; }
+    if (subjFlag && !subjHas(i, subjFlag)) fail |= 256;
     if (fail === 0) out[n++] = i;
     else if (fail & (fail - 1)) continue;
     if (!(fail & ~1)) counts.color++;
@@ -264,6 +270,7 @@ function pmRun(s, F) {
     if (!(fail & ~32)) counts.mus[G.mus[i]]++;
     if (!(fail & ~64)) counts.hueBand[pmHueBandOf(i, F)]++;
     if (!(fail & ~128)) counts.lightness++;
+    if (subjOn && !(fail & ~256)) for (let k = SUBJ.off[i], e = SUBJ.off[i + 1]; k < e; k++) counts.subj[SUBJ.tg[k]]++;
   }
   return { list: out.slice(0, n), counts };
 }
@@ -332,6 +339,7 @@ function pmParse(q, F) {
   f.coSet = ixSet(F.meta.countries, p.get("co")); f.mvSet = ixSet(F.meta.movements, p.get("mv"));
   const rg = p.get("region"); if (rg && PM_REGIONS.some(r => r[0] === rg)) { f.region = rg; pmRegionCountries(rg, F).forEach(v => { if (!f.coSet.includes(v)) f.coSet.push(v); }); }
   if (p.get("mus")) f.musSet = p.get("mus").split(",").map(k => F.G.src.findIndex(x => x.k === k)).filter(v => v >= 0);
+  if (p.get("subj") && SUBJ) f.subjSet = p.get("subj").split(",").map(k => SUBJ.tags.findIndex(n => routeSlug(n) === k)).filter(v => v >= 0);
   const sd = num("seed"); if (sd != null && sd >= 0 && sd < F.N) s.seed = sd;
   if (p.get("fav") === "1") s.fav = 1;
   if (PM_NEEDS_SEED.has(s.arr) && s.seed < 0) s.arr = "color";
@@ -352,6 +360,7 @@ function pmQS(s, F) {
   if (extraCo.length && F) out.push(["co", extraCo.map(v => F.meta.countries[v - 1]).join(",")]);
   if (f.mvSet && f.mvSet.length && F) out.push(["mv", f.mvSet.map(v => F.meta.movements[v - 1]).join(",")]);
   if (f.musSet && f.musSet.length && F) out.push(["mus", f.musSet.map(v => F.G.src[v].k).join(",")]);
+  if (f.subjSet && f.subjSet.length && SUBJ) out.push(["subj", f.subjSet.map(v => routeSlug(SUBJ.tags[v])).join(",")]);
   if (PM_NEEDS_SEED.has(s.arr) && s.seed >= 0) out.push(["seed", s.seed]);
   if (s.fav) out.push(["fav", 1]);
   if (s.upToYear != null) out.push(["uy", s.upToYear]);
@@ -412,6 +421,7 @@ function pmActiveChips(s, F) {
   if (f.painterSet && f.painterSet.length) c.push({ dim: "painter", text: f.painterSet.length === 1 ? xbArtistName(F, f.painterSet[0]) : `${f.painterSet.length} painters` });
   if (f.mvSet && f.mvSet.length) c.push({ dim: "mv", text: f.mvSet.length === 1 ? F.meta.movements[f.mvSet[0] - 1] : `${f.mvSet.length} movements` });
   if (f.musSet && f.musSet.length) c.push({ dim: "mus", text: f.musSet.length === 1 ? F.G.src[f.musSet[0]].short : `${f.musSet.length} museums` });
+  if (f.subjSet && f.subjSet.length && SUBJ) c.push({ dim: "subj", text: subjSetLabel(f.subjSet) });
   return c;
 }
 // the card's own three facets (David, 2026-10-09, the minimalist pass -- "filtering by example" stays, pared to
@@ -449,6 +459,7 @@ function pmChipClear(f, dim) {
   else if (dim === "painter") { f.painterSet = []; f.painter = 0; }
   else if (dim === "mv") { f.mvSet = []; f.mv = 0; }
   else if (dim === "mus") { f.musSet = []; f.mus = -1; }
+  else if (dim === "subj") f.subjSet = [];
 }
 
 // ---------- the smarter map search (David, 2026-10-20) ----------
@@ -470,7 +481,7 @@ const PMQ_DEMONYMS = {
 const PMQ_STOP = new Set(["paintings", "painting", "art", "artwork", "artworks", "works", "by", "from", "in", "of", "the", "and", "between", "painters", "painter", "during", "around", "circa", "a", "an", "to", "until", "through"]);
 // where a movement tag is sparse or missing on the map, its textbook era still answers the question (shown as its own row)
 const PMQ_ERAS = { baroque: [1600, 1750, "Baroque era"], renaissance: [1400, 1600, "Renaissance"], rococo: [1730, 1790, "Rococo era"], romantic: [1800, 1850, "Romantic era"], neoclassic: [1760, 1830, "Neoclassical era"] };
-const PMQ_ORDER = { painter: 0, co: 1, mv: 2, when: 3 };
+const PMQ_ORDER = { painter: 0, co: 1, mv: 2, subj: 2.5, when: 3 };
 const pmqKey = w => String(w).toLowerCase().replace(/[^a-z0-9]/g, "");
 const pmqStem = k => { const r = k.replace(/(ical|istic|ists|ist|ism|ic|al)$/, ""); return r.length >= 4 ? r : k; };
 const pmqCache = new WeakMap();
@@ -525,9 +536,14 @@ function pmqParse(q, F) {
         const st = pmqStem(k), ix = T.mv.get(st), era = PMQ_ERAS[st];
         if (ix || era) hit = { kind: "mv", val: ix || 0, era: era || null, label: ix ? F.meta.movements[ix - 1] : era[2] };
       }
+      if (!hit && (F.col || "paintings") === "paintings" && typeof subjFind === "function") {   // a subject: "boats", "dogs", "still life", "portraits"
+        const sj = subjFind(words.slice(i, i + len));
+        if (sj) hit = { kind: "subj", vals: sj.tags, label: sj.label };
+      }
       if (!hit || (hit.kind === "co" && !hit.vals.length)) continue;
-      const prev = hit.kind === "co" && pieces.find(p => p.kind === "co");
-      if (prev && !prev.region && !hit.region) { prev.vals.push(...hit.vals); prev.label += " + " + hit.label; prev.adj += " or " + hit.adj; }
+      const prev = (hit.kind === "co" || hit.kind === "subj") && pieces.find(p => p.kind === hit.kind);
+      if (prev && hit.kind === "subj") { prev.vals = [...new Set([...prev.vals, ...hit.vals])]; prev.label += " + " + hit.label; }
+      else if (prev && !prev.region && !hit.region) { prev.vals.push(...hit.vals); prev.label += " + " + hit.label; prev.adj += " or " + hit.adj; }
       else if (!pieces.some(p => p.kind === hit.kind)) pieces.push(hit);
       for (let j = 0; j < len; j++) used[i + j] = true;
       i += len - 1; break;
@@ -543,6 +559,7 @@ function pmqApply(f, p) {
   else if (p.kind === "co") { f.coSet = p.vals.slice(); f.co = 0; f.region = p.region || null; }
   else if (p.kind === "mv") { f.mvSet = [p.val]; f.mv = 0; }
   else if (p.kind === "painter") { f.painterSet = [p.val]; f.painter = 0; }
+  else if (p.kind === "subj") f.subjSet = p.vals.slice();
 }
 
 // ---------- the list: the filters, then your favorites ----------
@@ -672,7 +689,7 @@ function pmLayTime(list, place, F, wide) {
 // movement instead of painter, same shelves) -- one block per group, each block's own internal order its own
 // business (chronological for painter/movement blocks).
 function pmLayGroup(list, o) {
-  const n = list.length, Wc = Math.max(4, Math.min(18, Math.round(Math.sqrt(n) / 1.6)));
+  const n = list.length, Wc = o.wc ? o.wc(n) : Math.max(4, Math.min(18, Math.round(Math.sqrt(n) / 1.6)));
   const groups = new Map();
   list.forEach(i => { const g = o.groupOf(i); if (!groups.has(g)) groups.set(g, []); groups.get(g).push(i); });
   groups.forEach(arr => arr.sort(o.sortWithin));
@@ -713,6 +730,16 @@ function pmLayMuseum(list, F) {
   return pmLayGroup(list, {
     groupOf: i => F.G.mus[i], sortWithin: (p, q) => pmYr(p, F) - pmYr(q, F),
     label: (m, c) => F.G.src[m] ? F.G.src[m].short : "Elsewhere",
+  });
+}
+// By subject: one block per genre (portraits, landscapes, still lifes...), the biggest first, "Other subjects" last. A painting is filed
+// under its first genre tag, authority and title before detected (js/gallery.js subjGenreOf).
+function pmLaySubject(list, F) {
+  return pmLayGroup(list, {
+    groupOf: i => subjGenreOf(i), sortWithin: (p, q) => pmYr(p, F) - pmYr(q, F),
+    keyRank: g => g < 0 ? 1 : 0,
+    wc: n => Math.max(8, Math.round(Math.sqrt(n) * 1.3)),   // a few big blocks side by side, not one tall column (74,000 paintings at 18 across is 4,000 rows)
+    label: g => subjGenreLabel(g),
   });
 }
 // Tones (David, 2026-10-09): the same Vivid/Light/Muted/Dark split honey.js's own Tones shape uses
@@ -797,6 +824,7 @@ function pmLayout(s, F) {
   if (!lay) {
     lay = s.arr === "time" ? pmLayTime(list, s.place, F, pmSolo(s)) : s.arr === "painter" ? pmLayPainter(list, F)
       : s.arr === "museum" ? pmLayMuseum(list, F)
+      : s.arr === "subject" && SUBJ ? pmLaySubject(list, F)
       : s.arr === "families" ? pmLayFamilies(list, F) : s.arr === "tones" ? pmLayTones(list, s.place, F)
       : s.arr === "rings" ? pmLayRings(list, s.seed, F) : s.arr === "spiral" ? pmLaySpiral(list, s.seed, F)
       : pmLayColor(list, s.place, F);
@@ -1154,7 +1182,8 @@ function pmOpen(spec, o = {}) {
   if (col === "paintings" && typeof hmWireLayerSwitch === "function") hmWireLayerSwitch(el, "paintings", id => {
     if (id === "colors") { S.hm = S.hm || {}; S.hm.mode = "colors"; save(); if (typeof hmHome === "function") hmHome(); else xBack(); }
   });
-  Promise.all([pmColLoad(col), pmThumbsLoad(col)]).then(([F]) => {
+  const wantSubj = col === "paintings" && /subj/.test(typeof spec === "string" ? spec : JSON.stringify(spec || {}));   // an address or a spec that names a subject needs its data before the first layout
+  Promise.all([pmColLoad(col), pmThumbsLoad(col), wantSubj ? loadSubjects().catch(() => null) : null]).then(([F]) => {
     if (!el.isConnected) return;
     const kept = !fresh && PM_STATE.get(from);
     // David, 2026-10-10: a spec OBJECT (not a URL string) can arrive from Explore's own single-value filter
@@ -1959,7 +1988,7 @@ function pmMount(el, s, F) {
   function openFind() {
     if (document.querySelector(".sheet,.rooms-stem")) return;
     const painterLab = pmColLabel(F, "painter"), nounP = pmColLabel(F, "nounP"), nounS = pmColLabel(F, "noun");
-    const { sh, close } = sheet(`<div class="sr-sheet"><div class="sr-field"><span>${ICON.search}</span><input type="search" class="sr-input" placeholder="Painter, place, style or years" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Search the map"></div><div class="sr-body" data-pmfb></div></div>`);
+    const { sh, close } = sheet(`<div class="sr-sheet"><div class="sr-field"><span>${ICON.search}</span><input type="search" class="sr-input" placeholder="Painter, place, subject or years" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Search the map"></div><div class="sr-body" data-pmfb></div></div>`);
     sh.classList.add("sr-sheet-wrap", "pmx-findsheet");
     const inp = sh.querySelector(".sr-input"), body = sh.querySelector("[data-pmfb]");
     const cap = x => x.charAt(0).toUpperCase() + x.slice(1);
@@ -1967,7 +1996,7 @@ function pmMount(el, s, F) {
     let rows = [];
     // the live count of one suggestion: the map's own filter pass, with this suggestion's pieces laid over the filters already on
     const countOf = ps => {
-      const key = JSON.stringify([ps.map(p => [p.kind, p.val, p.vals, p.y0, p.y1]), s.f.y0, s.f.y1, s.f.coSet, s.f.mvSet, s.f.painterSet, s.f.hexes, s.f.hueBand, s.f.l0, s.f.l1, s.f.musSet]);
+      const key = JSON.stringify([ps.map(p => [p.kind, p.val, p.vals, p.y0, p.y1]), s.f.y0, s.f.y1, s.f.coSet, s.f.mvSet, s.f.painterSet, s.f.hexes, s.f.hueBand, s.f.l0, s.f.l1, s.f.musSet, s.f.subjSet, !!SUBJ]);
       if (cache.has(key)) return cache.get(key);
       const f = { ...s.f }; ps.forEach(p => pmqApply(f, p));
       const n = pmRun({ f }, F).list.length; cache.set(key, n); return n;
@@ -1977,8 +2006,10 @@ function pmMount(el, s, F) {
     const addRow = (ps) => { const n = countOf(ps); if (!n) return null; if (rows.some(r => r.ps.length === ps.length && r.ps.every((p, i) => p.label === ps[i].label && p.kind === ps[i].kind))) return null; const r = { ps, n }; rows.push(r); return r; };
     const run = () => {
       const q = inp.value.trim(); rows = [];
-      if (!q) { body.innerHTML = `<p class="fine sr-empty">Try a ${esc(painterLab.toLowerCase())}, a title, or mix a place, a style and years: “Russia 1860–80s”, “Dutch Baroque”, “Monet 1890s”.</p>`; return; }
-      const { pieces, rest } = pmqParse(q, F);
+      if (!q) { body.innerHTML = `<p class="fine sr-empty">Try a ${esc(painterLab.toLowerCase())}, a title, or mix a place, a style and years: “Russia 1860–80s”, “Dutch Baroque”, “Monet boats”, “portraits 1880s”.</p>`; return; }
+      let { pieces, rest } = pmqParse(q, F);
+      // a painter's name that happens to hold a subject word ("Man Ray"): the whole query names a painter, so it is one
+      if (pieces.length && !rest && pieces.every(p => p.kind === "subj") && findPainters(q).length) { pieces = []; rest = q; }
       let html = "", note = "";
       let title = rest || q;
       if (pieces.length) {
@@ -2005,10 +2036,10 @@ function pmMount(el, s, F) {
         if (mvp && !mvp.val && hasYr) note += `<p class="fine sr-empty">${esc(cap(mvp.label.replace(/ era$/, "")))} isn't a tag on this map, so only the years were used.</p>`;
         if (!allOf) {
           // a designed empty state: say exactly what was asked for, and what to loosen
-          const bits = base.filter(p => p.kind !== "when"), yrs = base.find(p => p.kind === "when");
+          const bits = base.filter(p => p.kind !== "when" && p.kind !== "subj"), yrs = base.find(p => p.kind === "when"), sjp = base.find(p => p.kind === "subj");
           const who = bits.map(p => p.kind === "co" ? (p.adj || p.label) : p.label).join(" ");
           const hasOther = pmActiveChips(s, F).some(c => !["when", "co", "mv", "painter"].includes(c.dim));
-          note = `<p class="fine sr-empty"><b class="sr-none">No ${esc(who ? who + " " : "")}${esc(nounP)}${painterPiece ? " by " + esc(painterPiece.label) : ""}${yrs ? " from " + esc(yrs.label) : ""}.</b> ${yrs ? "Try a wider range." : "Try dropping a word."}${hasOther ? " Some of your other filters are still on." : ""}</p>`;
+          note = `<p class="fine sr-empty"><b class="sr-none">No ${esc(who ? who + " " : "")}${esc(nounP)}${sjp ? " of " + esc(sjp.label.toLowerCase()) : ""}${painterPiece ? " by " + esc(painterPiece.label) : ""}${yrs ? " from " + esc(yrs.label) : ""}.</b> ${yrs ? "Try a wider range." : "Try dropping a word."}${hasOther ? " Some of your other filters are still on." : ""}</p>`;
         }
         if (hits.length > (painterPiece ? 1 : 0)) {
           const more = hits.slice(1).map(x => { const pr = { kind: "painter", val: x.v, label: x.name }; const r = addRow([...base.filter(p => !(p.kind === "mv" && !p.val)), pr]); return r; }).filter(Boolean);
@@ -2028,6 +2059,7 @@ function pmMount(el, s, F) {
       body.innerHTML = note + html;
     };
     run();
+    if ((F.col || "paintings") === "paintings" && !SUBJ) loadSubjects().then(() => { if (inp.isConnected && inp.value.trim()) { cache.clear(); run(); } }).catch(() => {});
     inp.addEventListener("input", run);
     setTimeout(() => { try { inp.focus({ preventScroll: true }); } catch (e) {} }, 60);
     sh.addEventListener("click", e => {
@@ -2041,7 +2073,7 @@ function pmMount(el, s, F) {
     if (document.querySelector(".sheet")) return;
     if (typeof stemJustClosed === "function" && stemJustClosed()) return;   // a ghost click right after closing must not reopen it (js/core.js)
     let tab = startTab === "filter" ? "filter" : "arrange";
-    let fopen = { co: false, painter: false, mv: false, mus: false }, fq = "", coq = "", curPresets = PM_TIME_PRESETS;
+    let fopen = { co: false, painter: false, mv: false, mus: false, subj: false }, fq = "", coq = "", curPresets = PM_TIME_PRESETS;
     const tabsHTML = `<div class="hm-ch-tabs pmx-tabs" role="tablist" aria-label="Arrange or filter the painting map">
         <button class="hm-ch-tab" data-tab="arrange" role="tab">Arrange</button>
         <button class="hm-ch-tab" data-tab="filter" role="tab">Filter</button>
@@ -2111,6 +2143,7 @@ function pmMount(el, s, F) {
       });
       qa$("[data-pmarr]").forEach(b => b.onclick = () => {
         const id = b.dataset.pmarr; buzz(5);
+        if (id === "subject" && !SUBJ) { loadSubjects().then(() => { if (dead) return; s.arr = id; s.seed = -1; rebuild(); renderArrange(); }).catch(() => toast("Subjects didn't load")); return; }
         if (PM_NEEDS_SEED.has(id)) { if (mid < 0) return; s.seed = mid; s.arr = id; }
         else { if (s.arr === id) return; s.arr = id; s.seed = -1; } // a stale seed from a prior Rings/Spiral shouldn't linger into Color/Time/Painter
         rebuild(); renderArrange();
@@ -2193,6 +2226,11 @@ function pmMount(el, s, F) {
           <p class="pmx-cap3"><span>${y0}</span><span>${y1}</span></p>`;
       const musSorted = solo ? musAll.slice().sort((p, q) => q.n - p.n) : musAll, musShow = solo && !fopen.mus ? musSorted.filter((x, k) => k < 8 || musSelSet.has(x.v)) : musSorted;
       const musMore = solo && !fopen.mus && musSorted.length > musShow.length ? `<button class="pmx-more" data-pmmore="mus">All ${musSorted.length}</button>` : "";
+      // Subject: this scope's own top subjects with counts ("Portrait 22 · Landscape 9"); a detected tag counts like any other
+      const sjSel = new Set(f.subjSet || []);
+      const sjAll = C.subj ? SUBJ.tags.map((nm, t) => ({ t, nm, n: C.subj[t] })).filter(x => !SUBJ.hide[x.t] && (x.n || sjSel.has(x.t))).sort((p, q) => (sjSel.has(q.t) - sjSel.has(p.t)) || q.n - p.n) : [];
+      const sjShow = fopen.subj ? sjAll.slice(0, 80) : sjAll.filter((x, k) => k < 10 || sjSel.has(x.t));
+      const subjHTML = sjAll.length ? `<div class="pmx-row"><span class="pmx-lab">Subject</span><div class="pmx-chips">${sjShow.map(x => chip("data-pmsubj", x.t, subjCap(x.nm), x.n, sjSel.has(x.t))).join("")}${!fopen.subj && sjAll.length > sjShow.length ? `<button class="pmx-more" data-pmmore="subj">More subjects</button>` : ""}</div></div>` : "";
       const favRow = favIds.length ? `<div class="pmx-row"><span class="pmx-lab">Yours</span><div class="pmx-chips">${chip("data-pmfav", 1, "Your favorites", favN, !!s.fav)}</div></div>` : "";
       if (solo) q$("[data-pmbody]").innerHTML = `
         <div class="pmx-sh-top"><b>Filter</b><span>${n === sy.total ? n.toLocaleString() : n.toLocaleString() + " of " + sy.total.toLocaleString()} ${sy.total === 1 ? pmColLabel(F, "noun") : nounP}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
@@ -2201,6 +2239,7 @@ function pmMount(el, s, F) {
         <div class="pmx-row"><span class="pmx-lab">Color family</span><div class="pmx-chips">${hueChips}</div>
           <p class="pmx-lab2">Lightness</p>${lightHTML}</div>
         ${yrHi > yrLo ? `<div class="pmx-row"><span class="pmx-lab">Years</span>${whenHTML}</div>` : ""}
+        ${subjHTML}
         <div class="pmx-row"><span class="pmx-lab">A color you pick</span>${swHTML}</div>
         ${musSorted.length > 1 ? `<div class="pmx-row"><span class="pmx-lab">${esc(musLab)}</span><div class="pmx-chips">${musShow.map(x => chip("data-pmmus", x.v, x.name, x.n, musSelSet.has(x.v))).join("")}${musMore}</div></div>` : ""}
         <div class="pmx-row"><span class="pmx-lab">Add another ${esc(painterLab.toLowerCase())}</span>
@@ -2227,6 +2266,7 @@ function pmMount(el, s, F) {
             <input type="range" min="${yrLo}" max="${yrHi}" step="1" value="${y0}" data-pmy0 aria-label="From year">
             <input type="range" min="${yrLo}" max="${yrHi}" step="1" value="${y1}" data-pmy1 aria-label="To year"></div>
           <p class="pmx-cap3"><span>${y0}</span><span>${y1}</span></p></div>
+        ${subjHTML}
         <div class="pmx-row"><span class="pmx-lab">${esc(coLab)}</span>
           ${isPaintings ? `<p class="pmx-lab2">Regions</p>
           <div class="pmx-chips">${regionRow}</div>` : ""}
@@ -2264,11 +2304,13 @@ function pmMount(el, s, F) {
       else if (d.pmco) { const v = +d.pmco, set = new Set(f.coSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.coSet = [...set]; f.region = null; }
       else if (d.pmmv) { const v = +d.pmmv, set = new Set(f.mvSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.mvSet = [...set]; }
       else if (d.pmmus) { const v = +d.pmmus, set = new Set(f.musSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.musSet = [...set]; }
+      else if (d.pmsubj) { const v = +d.pmsubj, set = new Set(f.subjSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.subjSet = [...set]; }
       else if (d.pmp) { const v = +d.pmp, set = new Set(f.painterSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.painterSet = [...set]; }
       else return;
       buzz(5); rebuild(); renderFilter();
     });
     renderArrange(); renderFilter();
+    if (!SUBJ && (s.col || "paintings") === "paintings") loadSubjects().then(() => { if (sh.isConnected) renderFilter(); }).catch(() => {});
   }
   // ---- life cycle
   const ro = new ResizeObserver(() => size()); ro.observe(cv);
@@ -2277,6 +2319,7 @@ function pmMount(el, s, F) {
   // precise mid-pan spot P was actually sitting at the moment you tapped a painting open. Save the real P/Z.
   cleanup.push(() => { dead = true; clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); t1.destroy(); if (lay) PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z, cardOpen }); });
   size(); build(false);
+  if (s.f.subjSet && s.f.subjSet.length) { try { ROUTE_NOW = "#/" + pmRouteOf(s, F).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {} }   // opened from a painting's subject tap: the address names the filter
   window.PM_CTRL = { get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length; }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); },
     // QA: the raw pan/zoom (David, 2026-10-10, "Back should restore the exact prior view") -- _qaSetPZ lets a
     // test establish an arbitrary pan deterministically (a real drag gesture would be slow and imprecise);

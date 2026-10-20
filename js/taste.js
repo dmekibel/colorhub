@@ -12,7 +12,7 @@ const tzRound = (a, d = 3) => a.map(v => Array.isArray(v) ? tzRound(v, d) : +v.t
 // the most precise name for a color (nameOf(), ROADMAP §13's one naming system), plus the nearest taught word
 function tzNamed(h) {
   const nm = nameOf(h), [pair] = nearestColors(h, 1), isApp = !!BYNAME.get(nm.n.toLowerCase());
-  return { h, n: nm.text, src: isApp ? "ColorHub" : (nm.near[0] && srcLine(nm.near[0].entry)) || "Nearest name", d: nm.de, word: pair ? pair[0].n : nm.n, wordD: pair ? pair[1] : 0 };
+  return { h, n: nm.text, src: isApp ? "Chromatlas" : (nm.near[0] && srcLine(nm.near[0].entry)) || "Nearest name", d: nm.de, word: pair ? pair[0].n : nm.n, wordD: pair ? pair[1] : 0 };
 }
 const tzOrder = p => p.shares.map((s, i) => i).sort((a, b) => p.shares[b] - p.shares[a]);
 const tzStrip = (p, cls = "tz-strip") => `<span class="${cls}">${tzOrder(p).map(i => `<i style="--c:${p.cols[i]};flex:${Math.max(p.shares[i], .012).toFixed(3)}"></i>`).join("")}</span>`;
@@ -433,7 +433,7 @@ function tzShareColor(R, top, low, reading) {
     x.fillStyle = "#9A958A"; x.font = "500 24px 'Geist Mono', monospace"; x.fillText(`LEAST FAVORITE · ${low.h}`, 256, 1135);
     x.fillStyle = "#CFC9BC"; x.font = "italic 400 40px 'Instrument Serif', Georgia, serif";
     tzWrap(x, reading, 936).slice(0, 2).forEach((l, i) => x.fillText(l, 72, 1225 + i * 48));
-  }, "colorhub-my-color.png", `My color: ${top.n}`, routeURL("taste/color"));
+  }, "chromatlas-my-color.png", `My color: ${top.n}`, routeURL("taste/color"));
 }
 function tzSharePal(pal, read, painter) {
   tzShareCanvas(x => {
@@ -446,7 +446,7 @@ function tzSharePal(pal, read, painter) {
       x.fillStyle = r.strength < .45 ? "#5F5B53" : "#ECE8DF"; x.beginPath(); x.arc(72 + clamp((r.z + 2) / 4, 0, 1) * 936, y + 23, 11, 0, 2 * Math.PI); x.fill();
     });
     if (painter) { x.fillStyle = "#CFC9BC"; x.font = "italic 400 42px 'Instrument Serif', Georgia, serif"; tzWrap(x, `Closest painting: ${painter}`, 936).slice(0, 2).forEach((l, i) => x.fillText(l, 72, 1250 + i * 50)); }
-  }, "colorhub-my-palette.png", "My palette", routeURL("taste/palette"));
+  }, "chromatlas-my-palette.png", "My palette", routeURL("taste/palette"));
 }
 
 // ---------- screenshot mode (boot.js #shot=taste:...): a simulated person answers, in memory only ----------

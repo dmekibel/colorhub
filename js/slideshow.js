@@ -249,7 +249,7 @@ function ssOpen(mode, opts = {}) {
     SS = { mode, fam: S.ssFamily, recentSet: new Set(), recentOrder: [], famList: null, famIdx: 0, famDir: 1, usedToday: false,
       history: [], pos: -1, sh, close, fromIdle, timer: 0, paused: false, wake: null, _myPop: false };
     try { history.pushState({ ch: 1 }, "", "#/slideshow" + (mode ? "/" + mode : "")); } catch (e) {}
-    document.title = "Slideshow · ColorHub";
+    document.title = "Slideshow · Chromatlas";
     ssWakeAcquire();
     sh.querySelector("[data-ss-close]").onclick = () => close();
     const modeBtn = sh.querySelector("[data-ss-mode-btn]"), picker = sh.querySelector("[data-ss-picker]");

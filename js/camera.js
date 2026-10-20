@@ -235,18 +235,18 @@ function segOverlay(prep, keepIdx) {
 function eyeOffReason(e) {
   const ios = typeof isIOS === "function" && isIOS(), standalone_ = typeof standalone === "function" && standalone();
   const insecure = location.protocol !== "https:" && location.hostname !== "localhost" && location.hostname !== "127.0.0.1";
-  if (insecure) return { head: "This page isn't secure", fix: "The camera only works on https:// (or localhost). Open ColorHub over a secure link, then try again." };
+  if (insecure) return { head: "This page isn't secure", fix: "The camera only works on https:// (or localhost). Open Chromatlas over a secure link, then try again." };
   if (!navigator.mediaDevices || typeof navigator.mediaDevices.getUserMedia !== "function") {
-    if (ios && standalone_) return { head: "This iPhone can't open the camera here", fix: "Home Screen apps got camera access in iOS 16.4. Update iOS, or open ColorHub in Safari instead of from the Home Screen icon." };
+    if (ios && standalone_) return { head: "This iPhone can't open the camera here", fix: "Home Screen apps got camera access in iOS 16.4. Update iOS, or open Chromatlas in Safari instead of from the Home Screen icon." };
     return { head: "This browser can't open a camera", fix: "Try Safari or Chrome, or name the colors in a photo instead." };
   }
   const name = e && e.name;
   if (name === "NotAllowedError" || name === "PermissionDeniedError" || name === "SecurityError") {
     return { head: "Camera access is off", fix: ios
-      ? (standalone_ ? "Open Settings > ColorHub (or Safari) > Camera and turn it on, then come back and try again." : "Open Settings > Safari > Camera (or tap the camera icon by the address bar) and allow it, then try again.")
+      ? (standalone_ ? "Open Settings > Chromatlas (or Safari) > Camera and turn it on, then come back and try again." : "Open Settings > Safari > Camera (or tap the camera icon by the address bar) and allow it, then try again.")
       : "Allow camera access for this site -- usually the camera or lock icon by the address bar -- then try again." };
   }
-  if (name === "NotFoundError" || name === "DevicesNotFoundError") return { head: "No camera here", fix: "This device doesn't have a camera ColorHub can use." };
+  if (name === "NotFoundError" || name === "DevicesNotFoundError") return { head: "No camera here", fix: "This device doesn't have a camera Chromatlas can use." };
   if (name === "NotReadableError" || name === "TrackStartError") return { head: "The camera's busy", fix: "Another app may be using it right now. Close it and try again." };
   return { head: "No camera here", fix: "" };
 }

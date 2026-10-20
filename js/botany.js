@@ -1,5 +1,5 @@
 "use strict";
-// Botany: the plants behind ColorHub's color names, dye plants, why-plants-are-colored essays, Greenaway's
+// Botany: the plants behind Chromatlas's color names, dye plants, why-plants-are-colored essays, Greenaway's
 // 1884 language of flowers, and Werner's 1821 plant pairings. Data: data/botany.js (window.BOTANY), loaded
 // in the background, same pattern as js/passages.js and js/films.js.
 // Pushes a "Botany" entry onto js/world.js's shared WORLD_SECTIONS array ({ key, title, render(host) }, the
@@ -59,7 +59,7 @@ function btBuildNodes() {
   const factsFor = pairs => (pairs || []).map(([label, value]) => ({ label, value }));
   B.plants.forEach(p => {
     const id = "bt:plant:" + p.id;
-    g.nodes.set(id, { kind: "botany", type: "botplant", id, title: p.plant, dek: "The plant behind ColorHub's " + p.color + ".",
+    g.nodes.set(id, { kind: "botany", type: "botplant", id, title: p.plant, dek: "The plant behind Chromatlas's " + p.color + ".",
       facts: factsFor(p.facts), body: p.body, colors: [p.color], sources: p.sources, swatches: swFor([p.color]) });
     btPlantByColor.set(p.color, id);
   });
@@ -101,7 +101,7 @@ function btWorldSection(host) {
     return;
   }
   const B = window.BOTANY;
-  host.innerHTML = `<p class="x-sub">The plants behind ColorHub's color names, what grew the dyes before chemistry did, and a Victorian flower dictionary.</p>
+  host.innerHTML = `<p class="x-sub">The plants behind Chromatlas's color names, what grew the dyes before chemistry did, and a Victorian flower dictionary.</p>
     <div class="wd-tiles">${BT_TILES.map(([k, t, s]) => wdTile(`data-bt="${k}"`, t, s(B), btCover(k, B))).join("")}</div>`;
   host.querySelectorAll("[data-bt]").forEach(b => b.onclick = () => b.dataset.bt === "flori" ? btFloriPage() : btListPage(b.dataset.bt));
 }
@@ -198,7 +198,7 @@ function btFloriPage(opts = {}) {
     <div class="lens-key in-page psg-fams">${PSG_FAMS.map(([k, t]) => `<button class="${k === btFam ? "on" : ""}" data-fam="${esc(k)}">${k !== "all" ? `<i style="--c:${BYNAME.get(k.toLowerCase()).h}"></i>` : ""}${esc(t)}</button>`).join("")}</div>
     <div class="sec-head" id="bt-head"><b>Flowers</b><span></span></div>
     <div id="bt-list"></div>
-    <p class="fine">${withColor.length} of ${B.flori.length} flowers are matched here to a ColorHub color; the rest are listed by name and meaning only.</p>
+    <p class="fine">${withColor.length} of ${B.flori.length} flowers are matched here to a Chromatlas color; the rest are listed by name and meaning only.</p>
     <section class="srcs"><h3>Source</h3><ul><li>Kate Greenaway, Language of Flowers (1884), public domain.</li>
       <li>Floriography dictionaries contradicted each other even in the 1800s; treat any single meaning as one writer's opinion, not a fixed fact.</li></ul></section>
   `, "article bt-flori-page");

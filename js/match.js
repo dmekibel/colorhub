@@ -643,6 +643,6 @@ function matchShelves() {
 const wireMatch = root => root.querySelectorAll("[data-mt]").forEach(b => { b.onclick = () => openMatch(b.dataset.mt); });
 // A preview of the two shelves (index.html#shot=match:list).
 function mtShelfDemo() {
-  const el = show(`<header class="bar"><div class="brand">${LOGO}<span>ColorHub</span></div><span class="eyebrow">Applied</span></header>${matchShelves()}`, "gym", "gym");
+  const el = show(`<header class="bar"><div class="brand">${LOGO}<span>Chromatlas</span></div><span class="eyebrow">Applied</span></header>${matchShelves()}`, "gym", "gym");
   wireMatch(el);
 }

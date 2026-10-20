@@ -737,7 +737,7 @@ function lsResults(sess, r) {
   const title = all ? (items.length === 1 ? `<em>Climbed</em>` : `All ${items.length} <em>climbed</em>`) : `${climbedList.length} of ${items.length} <em>climbed</em>`;
   const mono = v => `<span class="pr-code">${v}</span>`;
   const tiles = [[pct + "%", "first try"], [r.bestCombo, "best streak"], [prTime(ms), "time"], ...(r.bossMs != null ? [[prTime(r.bossMs), newBest && best != null ? "a new best" : best != null ? `final round · best ${prTime(best)}` : "final round"]] : [])];
-  const shareText = `ColorHub · ${o.label || "A color set"} · ${String(title).replace(/<[^>]+>/g, "")} · ${pct}% first try · best streak ${r.bestCombo}${r.bossMs != null ? ` · final round ${prTime(r.bossMs)}` : ""}`;
+  const shareText = `Chromatlas · ${o.label || "A color set"} · ${String(title).replace(/<[^>]+>/g, "")} · ${pct}% first try · best streak ${r.bestCombo}${r.bossMs != null ? ` · final round ${prTime(r.bossMs)}` : ""}`;
   const el = show(`<header class="pr-top"><button class="pr-x" data-close aria-label="Close">${prX()}</button><span class="pr-grow"></span><span class="pr-note">Study</span></header>
     ${prPlate(o.pin && o.pin.length ? o.pin : items, "pr-plate-res" + (all ? " win" : ""))}
     <h1 class="pr-t1 pr-res-t">${title}</h1>

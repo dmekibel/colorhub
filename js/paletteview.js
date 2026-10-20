@@ -479,7 +479,7 @@ function plvExpand(item, ctx) {
     img.onload = () => {
       const dots = triedPlain ? null : plvDots(img, cols()); thumb.hidden = false;
       thumb.querySelector("[data-plvdots]").innerHTML = dots ? dots.map((d, i) => d ? `<i style="--c:${cols()[i]};left:${(d.x * 100).toFixed(2)}%;top:${(d.y * 100).toFixed(2)}%"></i>` : "").join("") : "";
-      if (!dots && !thumb.querySelector(".plv-x-nodots")) thumb.insertAdjacentHTML("afterend", `<p class="fine plv-x-nodots">This museum's image server doesn't let ColorHub read its pixels, so where each color sits can't be shown here.</p>`);
+      if (!dots && !thumb.querySelector(".plv-x-nodots")) thumb.insertAdjacentHTML("afterend", `<p class="fine plv-x-nodots">This museum's image server doesn't let Chromatlas read its pixels, so where each color sits can't be shown here.</p>`);
     };
     img.src = ctx.src.img;
   }

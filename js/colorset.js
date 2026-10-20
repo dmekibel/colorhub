@@ -121,7 +121,7 @@ function csShare(set) {
   set = csGet(set); if (!set || !set.colors.length) return;
   if (typeof sharePalette === "function") return sharePalette(set.colors, set.title || "A palette", h => ({ nm: nameOf(h) }));
   const url = set.src && typeof shareURL === "function" ? shareURL(set.src) : location.href;
-  if (navigator.share) navigator.share({ text: `${set.title || "Colors"} · ColorHub`, url }).catch(() => {});
+  if (navigator.share) navigator.share({ text: `${set.title || "Colors"} · Chromatlas`, url }).catch(() => {});
   else { try { navigator.clipboard.writeText(url); toast("Copied the link"); } catch (e) {} }
 }
 // what to compare with when nothing is given: the last other set you looked at (the Learner Model's trail)

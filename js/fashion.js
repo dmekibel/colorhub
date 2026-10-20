@@ -150,7 +150,7 @@ function fxGarment(id, opts = {}) {
     const r = d && d.byId.get(id);
     if (!r) { host.innerHTML = d ? `<p class="fine">That garment isn't in the archive.</p>` : fxErr; return; }
     const mu = fxMuseum(r), pal = r.p;
-    document.title = `${r.t} · ColorHub`;
+    document.title = `${r.t} · Chromatlas`;
     host.innerHTML = `
       <div class="fx-hero" style="aspect-ratio:${Math.max(.6, Math.min(1.6, 1 / (r.ar || 1.3))).toFixed(3)}"><img src="${esc(r.img)}" alt="${esc(r.t)}" referrerpolicy="no-referrer" onload="this.classList.add('ld')"></div>
       <p class="eyebrow p-type">${esc(d.groupLabel[r.g] || "")}${r.d ? " · " + esc(r.d) : ""}</p>
@@ -163,7 +163,7 @@ function fxGarment(id, opts = {}) {
       <div id="fx-like"></div>
       <section class="srcs"><h3>Image and record</h3><ul>
         <li>${esc(mu.license === "CC0" ? "CC0 image from" : "Public domain image from")} <a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(mu.name)}</a>. Open the record for full credit, dimensions and more photographs.</li>
-        <li>Colors measured by ColorHub: six k-means clusters in CIELAB after masking the studio backdrop. Names: the nearest of 2,700 named colors. Hex values are screen approximations.</li>
+        <li>Colors measured by Chromatlas: six k-means clusters in CIELAB after masking the studio backdrop. Names: the nearest of 2,700 named colors. Hex values are screen approximations.</li>
       </ul></section>`;
     // similar palettes: the garments whose six colors are nearest (each color matched to its closest, weighted by share)
     // (a cheap pass on the share-weighted mean color keeps the exact pass to 240 candidates)

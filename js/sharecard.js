@@ -46,8 +46,8 @@ function cardHead(x, spec) {
 function cardFoot(x) {
   // the wordmark: a small bubble and the name, bottom right, quiet
   x.font = `400 44px ${CARD_SERIF}`;
-  const w = x.measureText("ColorHub").width, X = CARD_W - CARD_M - w, Y = CARD_H - CARD_M + 4;
-  x.fillStyle = CARD_INK.paper; x.fillText("ColorHub", X, Y);
+  const w = x.measureText("Chromatlas").width, X = CARD_W - CARD_M - w, Y = CARD_H - CARD_M + 4;
+  x.fillStyle = CARD_INK.paper; x.fillText("Chromatlas", X, Y);
   x.beginPath(); x.arc(X - 30, Y - 14, 12, 0, Math.PI * 2); x.fillStyle = CARD_INK.paper; x.fill();
 }
 const CARD_LAYOUT = {

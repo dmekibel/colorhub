@@ -1,5 +1,5 @@
 "use strict";
-// Gems: the minerals and organic gems behind ColorHub's colors, why each one is the color it is (impurity,
+// Gems: the minerals and organic gems behind Chromatlas's colors, why each one is the color it is (impurity,
 // charge transfer, color center or structure), three short essays on the chemistry and physics of gem color,
 // and a curated palette of typical shades per entry. Data: data/gems.js (window.GEMS), loaded in the
 // background, same pattern as js/botany.js and js/passages.js.

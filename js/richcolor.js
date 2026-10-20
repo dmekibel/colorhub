@@ -45,7 +45,7 @@ function rcWireOpen(host, hex) {
 // can offer "Related reading" -- never surfaced as "closest of the 101" (David, 2026-10-08).
 const rcHasArticle = name => !!BYNAME.get(String(name).toLowerCase());
 // data/core-names.json's `src` codes (tools/build_core_names.py), in plain words, for the "Also called" block.
-const RC_SRC_LABEL = { app: "ColorHub", css: "a CSS color keyword", wiki: "Wikipedia", xkcd: "the xkcd color survey", "iscc-nbs": "ISCC-NBS, 1955", ridgway: "Ridgway, 1912" };
+const RC_SRC_LABEL = { app: "Chromatlas", css: "a CSS color keyword", wiki: "Wikipedia", xkcd: "the xkcd color survey", "iscc-nbs": "ISCC-NBS, 1955", ridgway: "Ridgway, 1912" };
 const rcSrcLabels = list => (list || []).map(s => RC_SRC_LABEL[s] || s).filter((v, i, a) => a.indexOf(v) === i).join(", ");
 
 // The nearest core name (by CIEDE2000) that actually has data in `has` (a function of a name), within `cap`. Most

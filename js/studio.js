@@ -733,7 +733,7 @@ function sharePalette(cols, from, named) {
   x.fillStyle = "#F3F3F1"; x.font = "400 92px 'Instrument Serif', Georgia, serif"; x.fillText(from || "A palette", m, 1180);
   x.fillStyle = "#8C8A84"; x.font = "500 30px 'Geist Mono', monospace"; x.fillText("MADE IN COLORHUB", m, 1250);
   cv.toBlob(async blob => {
-    const file = new File([blob], "colorhub-palette.png", { type: "image/png" });
+    const file = new File([blob], "chromatlas-palette.png", { type: "image/png" });
     try { if (navigator.canShare && navigator.canShare({ files: [file] })) return await navigator.share({ files: [file] }); } catch (e) { if (e && e.name === "AbortError") return; }
     const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = file.name; a.click(); toast("Saved the image");
   }, "image/png");

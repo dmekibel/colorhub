@@ -4,12 +4,12 @@
 // neighbor name, often closer to its nearest tile than the in-name tiles are to each other, so the odd one isn't
 // the most different tile: it's the one on the other side of a word. A name is a lens; this trains the edges.
 // The generator is ooLineRound (js/games/oo-engine.js, tested by tools/line_test.js); names come from nameOf().
-// Honest: the boundaries are ColorHub's nearest-name regions (dictionaries draw them differently), and words
+// Honest: the boundaries are Chromatlas's nearest-name regions (dictionaries draw them differently), and words
 // only modestly change what we see (Winawer 2007), so the copy claims nothing more. The neighbor's name is
 // revealed only after the tap (recall before reveal).
 // Making it click (design/IMPROVE-2026-10-08/PLAN.md Lane H, train.md §5): the word's own color sits above the
 // board as an anchor; rounds are drawn only where the edge is confident (the odd tile's name wins by 30%+); the
-// words are your own Learn words once you have six; a miss says plainly that this is ColorHub's map; every
+// words are your own Learn words once you have six; a miss says plainly that this is Chromatlas's map; every
 // reveal offers the neighbor word as a new review card; and each answer goes to the Learner Model with names.
 
 // nameOf, remembered per hex while boards are searched (the generator asks about the same colors many times)
@@ -121,7 +121,7 @@ OO_MIXPLAY.across = function (ui, it) {
       }, 0);
       const lk = (h, n) => `<span class="wl wl-c eye-n" style="--c:${h}" data-swatch="${h}">${esc(n)}</span>`;
       const line = ok ? `Right: this one crossed into ${lk(rd.odd, ooLow(rd.nb))}. It sits only <b class="mono">${pctFmt(rd.act)}</b> from the nearest ${esc(ooLow(rd.cat))}, ${rd.trapOk ? "closer than some of the others are to each other." : "but over the line."}`
-        : `In ColorHub's map, this side is ${lk(rd.odd, ooLow(rd.nb))}. Yours is still ${lk(rd.colors[i], ooLow(rd.cat))}, <b class="mono">${pctFmt(de2000(rd.colors[i], rd.odd))}</b> away. Dictionaries draw the line a little differently.`;
+        : `In Chromatlas's map, this side is ${lk(rd.odd, ooLow(rd.nb))}. Yours is still ${lk(rd.colors[i], ooLow(rd.cat))}, <b class="mono">${pctFmt(de2000(rd.colors[i], rd.odd))}</b> away. Dictionaries draw the line a little differently.`;
       // no hex pair goes to the eye's miss list: a word edge is a naming answer, logged above with names
       resolve({ ok: ok ? 1 : 0, ms, act: rd.act, picked: ok ? null : rd.colors[i], noModel: true, hold: true, line: line + ooLineAddRow(rd), cmp: null,
         mc: ok ? null : { you: { n: rd.cat, h: rd.colors[i] }, was: { n: rd.nb, h: rd.odd }, wasLabel: "Across the line" } });

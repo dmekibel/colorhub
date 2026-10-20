@@ -182,13 +182,13 @@ function lkOpen(id, opts = {}) {
     <section class="lkx-sec"><h3>Where the name comes from</h3><p>${esc(look.origin)}</p><p class="lkx-fuzzy"><b>How fuzzy is it?</b> ${esc(look.fuzzy)}</p></section>
     ${imgs.length || ptgs.length || extra.length ? `<section class="lkx-sec"><h3>Where to see it</h3>
       ${imgs.length ? `<div class="lkx-strip lkx-imgs">${imgs.map(f => `<figure class="lkx-fig"><img src="${esc(f.src)}" alt="${esc(f.alt || "")}" loading="lazy"${f.w ? ` width="${f.w}" height="${f.h}"` : ""}><figcaption>${esc(f.caption || "")}<span><a href="${esc(f.commons)}" target="_blank" rel="noopener">${esc(f.credit || "Wikimedia Commons")}</a></span></figcaption></figure>`).join("")}</div>` : ""}
-      ${ptgs.length ? `<div class="eyebrow lkx-sub">Closest paintings in ColorHub, by palette</div><div class="lkx-strip">${ptgs.map(x => `<button class="lkx-ptg" data-node="${esc(x.n.id)}">${x.n.thumb || x.n.img ? `<img src="${esc(x.n.thumb || x.n.img)}" alt="" loading="lazy">` : ""}<span class="lkx-mini">${x.n.palette.map(c => `<i style="--c:${c.h};flex:${c.share}"></i>`).join("")}</span><b>${esc(x.n.title)}</b><small>${esc(x.n.artist || "")} · <span class="mono">${x.score}%</span> · ${esc(look.pals[x.pi].n)}</small></button>`).join("")}</div>` : ""}
-      ${extra.length ? `<div class="eyebrow lkx-sub">Also in ColorHub</div><div class="chips-wrap">${extra.map(x => `<button class="pchip" data-node="${esc(x.id)}">${x.h ? `<i style="--c:${x.h}"></i>` : ""}${esc(x.title)}<em class="mono">${x.score}%</em></button>`).join("")}</div>` : ""}
+      ${ptgs.length ? `<div class="eyebrow lkx-sub">Closest paintings in Chromatlas, by palette</div><div class="lkx-strip">${ptgs.map(x => `<button class="lkx-ptg" data-node="${esc(x.n.id)}">${x.n.thumb || x.n.img ? `<img src="${esc(x.n.thumb || x.n.img)}" alt="" loading="lazy">` : ""}<span class="lkx-mini">${x.n.palette.map(c => `<i style="--c:${c.h};flex:${c.share}"></i>`).join("")}</span><b>${esc(x.n.title)}</b><small>${esc(x.n.artist || "")} · <span class="mono">${x.score}%</span> · ${esc(look.pals[x.pi].n)}</small></button>`).join("")}</div>` : ""}
+      ${extra.length ? `<div class="eyebrow lkx-sub">Also in Chromatlas</div><div class="chips-wrap">${extra.map(x => `<button class="pchip" data-node="${esc(x.id)}">${x.h ? `<i style="--c:${x.h}"></i>` : ""}${esc(x.title)}<em class="mono">${x.score}%</em></button>`).join("")}</div>` : ""}
     </section>` : ""}
     ${related.length ? `<section class="lkx-sec"><h3>Related looks</h3><div class="lkx-strip lkx-rel">${related.map(r => `<button class="lkx-relc" data-lk="${esc(r.id)}">${lkStripes(r.pals[0].c)}<b>${esc(r.name)}</b><small>${esc(r.era)}</small></button>`).join("")}</div></section>` : ""}
     <div class="lkx-acts"><button class="btn ghost" data-webfam="${esc(look.id)}">See its family tree ${ICON.arrow}</button></div>
     ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "look:" + look.id, title: look.name }) : ""}
-    <p class="fine lkx-credit">${look.aw ? `See also: <a href="https://aesthetics.fandom.com/wiki/${esc(look.aw)}" target="_blank" rel="noopener">Aesthetics Wiki</a>. ` : ""}Descriptions are ColorHub's own. Palettes are chosen by ColorHub and named from the ColorHub library; hex values are screen approximations.${imgs.length ? " Photos: Wikimedia Commons, public domain or CC0." : ""}</p>
+    <p class="fine lkx-credit">${look.aw ? `See also: <a href="https://aesthetics.fandom.com/wiki/${esc(look.aw)}" target="_blank" rel="noopener">Aesthetics Wiki</a>. ` : ""}Descriptions are Chromatlas's own. Palettes are chosen by Chromatlas and named from the Chromatlas library; hex values are screen approximations.${imgs.length ? " Photos: Wikimedia Commons, public domain or CC0." : ""}</p>
   `, "article lkx-page");
   let kb = null;   // filled in once data/aesthetics/kb/<id>.json lands; redraws the provenance line with its count/source
   const draw = () => {
@@ -212,7 +212,7 @@ function lkOpen(id, opts = {}) {
   el.querySelector("[data-share]").onclick = () => {
     const p = look.pals[pi];
     cardShare({ layout: "palette", note: `${LK_CAT_ONE[look.cat] || "Look"} · ${look.era}`, title: look.name, sub: p.n, plates: p.c.map(c => ({ h: c[0] })) },
-      `${look.name} · ${p.n} · ColorHub`, shareURL("look/" + look.id));
+      `${look.name} · ${p.n} · Chromatlas`, shareURL("look/" + look.id));
   };
   el.addEventListener("click", e => {
     const n = e.target.closest("[data-node]"); if (n) { e.preventDefault(); return lkNode(n.dataset.node, look.id, pi); }
@@ -247,7 +247,7 @@ function lkLoadKB(look, el) {
     const media = (kb.media || []).length ? `<div class="eyebrow lkx-sub">Further viewing</div><ul class="lkx-finds">${kb.media.map(x => `<li><b>${esc(x.title)}</b>${x.note ? ` — ${esc(x.note)}` : ""}</li>`).join("")}</ul>` : "";
     const lineageSec = lineageRows || media ? `<section class="lkx-sec"><h3>Lineage and reach</h3><dl class="lkx-rows lkx-lineage">${lineageRows}</dl>${media}</section>` : "";
     const article = kb.article ? `<section class="lkx-sec"><h3>In depth</h3><p>${esc(kb.article)}</p></section>` : "";
-    const src = kb.sources && kb.sources.length ? `<p class="fine lkx-credit">Facts (decade, motifs, key colors) from the <a href="${esc(kb.sources[0].url)}" target="_blank" rel="noopener">Aesthetics Wiki (CC BY-SA)</a>; all prose on this page is ColorHub's own.</p>` : "";
+    const src = kb.sources && kb.sources.length ? `<p class="fine lkx-credit">Facts (decade, motifs, key colors) from the <a href="${esc(kb.sources[0].url)}" target="_blank" rel="noopener">Aesthetics Wiki (CC BY-SA)</a>; all prose on this page is Chromatlas's own.</p>` : "";
     box.innerHTML = findSec + lineageSec + article + src;
   });
 }

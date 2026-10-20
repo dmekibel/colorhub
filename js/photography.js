@@ -273,7 +273,7 @@ function phpDraw(el, slug) {
     <div id="phpGrid"></div>
     ${leastTypical && leastTypical.id !== (typical || {}).id ? `<div class="sec-head"><b>Least typical</b><span>furthest from the average</span></div>
       <div class="ph-single">${pin(leastTypical).html}</div>` : ""}
-    <section class="srcs"><h3>Sources</h3><ul><li>Colors measured by ColorHub from Wikimedia Commons' own scans (${s.n} photographs by ${esc(s.name)} in the archive); every figure is as scanned, screen color only.</li></ul></section>
+    <section class="srcs"><h3>Sources</h3><ul><li>Colors measured by Chromatlas from Wikimedia Commons' own scans (${s.n} photographs by ${esc(s.name)} in the archive); every figure is as scanned, screen color only.</li></ul></section>
     ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "photographer:" + slug, title: s.name }) : ""}
   `;
   const grid = body.querySelector("#phpGrid"); if (grid) grid.innerHTML = masonry(photos.map(n => pin(n)));

@@ -67,7 +67,7 @@ function routeCommit(tab) {
   const url = SHOT ? undefined : "#/" + r.path;
   try { history[replace ? "replaceState" : "pushState"](tab ? { ch: 1, tab } : { ch: 1 }, "", url); } catch (e) {}
   if (url) ROUTE_NOW = url;
-  document.title = r.title ? `${r.title} · ColorHub` : "ColorHub";
+  document.title = r.title ? `${r.title} · Chromatlas` : "Chromatlas";
 }
 
 // ---------- wrapping the screens ----------

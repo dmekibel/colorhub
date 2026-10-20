@@ -138,7 +138,7 @@ function agNodePage(id) {
       ${essence ? `<p class="p-dek">${esc(essence)}</p>` : ""}
       ${n.place ? `<p class="fine">${esc(n.place)}</p>` : ""}
       ${sectionsHTML}
-      <section class="srcs"><h3>Sources</h3><ul><li>${esc(n.source || "ColorHub's own curation.")}</li>${n.type === "subculture" ? "<li>The palette shown is ColorHub's own illustrative choice, not measured from source photographs.</li>" : ""}</ul></section>
+      <section class="srcs"><h3>Sources</h3><ul><li>${esc(n.source || "Chromatlas's own curation.")}</li>${n.type === "subculture" ? "<li>The palette shown is Chromatlas's own illustrative choice, not measured from source photographs.</li>" : ""}</ul></section>
     `, "article");
     el.querySelector("[data-back]").onclick = () => xToOrigin();
     el.addEventListener("click", e => { const b = e.target.closest("[data-agnode]"); if (b) { e.preventDefault(); const t = AG.nodes.get(b.dataset.agnode); if (t) agOpen(t); } });

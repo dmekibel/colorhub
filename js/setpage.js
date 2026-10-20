@@ -414,7 +414,7 @@ function spPage(hexes, o = {}) {
     ] },
   ]);
   if (typeof featureRegister === "function") featureRegister("set-edit", { t: "Reorder or remove a color in a set", where: "A set or pair · ⋯", words: ["reorder", "remove", "drag", "edit"], run: () => toast("Open a set, then ⋯ · Edit colors") });
-  try { document.title = `${spTitle(hexes)} · ColorHub`; } catch (e) {}
+  try { document.title = `${spTitle(hexes)} · Chromatlas`; } catch (e) {}
 
   const ctx = { swap: null, painter: null };
   const q = spPickQ(hexes), qNote = q.length < k ? ` Measured on its ${q.length} most distinct colors (${spList(q.map(spNm).map(s => s.toLowerCase()))}); the index takes five at a time.` : "";

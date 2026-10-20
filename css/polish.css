@@ -1,4 +1,4 @@
-/* ColorHub polish layer (lane L12, design lead, 2026-10-08). Loaded last. Three parts:
+/* Chromatlas polish layer (lane L12, design lead, 2026-10-08). Loaded last. Three parts:
    1. Shell: the Room header, the bottom fade under the Rooms corner, the stem on short screens.
    2. Motion and touch: one enter/exit for screens and sheets, one pressed state, the lesson-complete moment,
       fly-to-the-map, all on the DESIGN-SYSTEM §8 tokens. Reduce Motion turns every move into a fade.

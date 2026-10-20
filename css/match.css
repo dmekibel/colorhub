@@ -1,4 +1,4 @@
-/* ColorHub Match engine (Train > Applied): reference, your version, controls, lock, reveal.
+/* Chromatlas Match engine (Train > Applied): reference, your version, controls, lock, reveal.
    Same "Museum editorial" rules as app.css: hairlines, serif titles, mono small caps.
    Images sit on a neutral grey mat (no warm tint), so judging a cast or a light isn't biased by the chrome. */
 .match{--mat:#262626}

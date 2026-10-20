@@ -52,7 +52,7 @@ function tlKind(hash) {
 }
 // a picture of the screen for its row: the hero's color, its first photograph, or a few of its colors
 function tlCapture(el) {
-  const h1 = el.querySelector("h1"), title = (h1 && h1.textContent.trim().replace(/\s+/g, " ")) || document.title.replace(/ · ColorHub$/, "");
+  const h1 = el.querySelector("h1"), title = (h1 && h1.textContent.trim().replace(/\s+/g, " ")) || document.title.replace(/ · Chromatlas$/, "");
   const hero = el.querySelector(".c-hero, .z-color");
   const c = hero ? (hero.style.getPropertyValue("--c") || "").trim() : "";
   const im = c ? null : [...el.querySelectorAll("img")].find(i => (i.currentSrc || i.src) && !/^data:/.test(i.src) && !i.closest("header"));

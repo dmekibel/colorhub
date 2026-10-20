@@ -305,7 +305,7 @@ const ptPath = (hexes, st) => "paintings-of/" + ptSpec(hexes, st);
 function ptSyncURL(hexes, st) {
   const path = ptPath(hexes, st), url = "#/" + path;
   try { if (location.hash !== url) { history.replaceState(history.state, "", url); ROUTE_NOW = url; } } catch (e) {}
-  document.title = `${hexes.map(ptNear).join(" + ")} in paintings · ColorHub`;
+  document.title = `${hexes.map(ptNear).join(" + ")} in paintings · Chromatlas`;
 }
 let PT_PAGE = null;
 function paintingsOfPage(hexes, o = {}) {

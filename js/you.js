@@ -243,7 +243,7 @@ function youPage() {
     if (b.dataset.pal) return openSavedPalette(b.dataset.pal);
     if (k === "map") { S.hm = S.hm || {}; S.hm.filter = "learned"; save(); buzz(8); return roomToFloor(b); }
     if (k === "learn") return go("learn");
-    if (k === "share") { buzz(8); return cardShare(ymShareSpec(mine), `${owned} colors I can name now, learned on ColorHub.`, routeURL("today"), "colorhub-my-colors.png"); }
+    if (k === "share") { buzz(8); return cardShare(ymShareSpec(mine), `${owned} colors I can name now, learned on Chromatlas.`, routeURL("today"), "chromatlas-my-colors.png"); }
     if (k === "favs") { S.fvCat = "colors"; return favShelf(); }
     if (k === "favart") { S.fvCat = "paintings"; save(); return favShelf(); }
     if (k === "ftaste") return favTaste();
