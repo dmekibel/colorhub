@@ -3,3 +3,6 @@
 .claude/
 node_modules/
 research/_raw/
+
+# working screenshots from design reviews: kept locally, never published (the site must stay under GitHub Pages 1 GB)
+design/review-shots/

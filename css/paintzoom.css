@@ -164,3 +164,4 @@
   font:500 14px/1 var(--sans);color:var(--ink);white-space:nowrap;pointer-events:none;animation:glzHint .3s var(--ease) both;transition:opacity .45s var(--ease)}
 .glz-hint.out{opacity:0}
 @keyframes glzHint{from{opacity:0;transform:translate(-50%,6px)}}
+.glz-cap{display:none}

@@ -26,6 +26,7 @@ function glZoomOpen(opts) {
   scrim.innerHTML = `
     <div class="glz-top"><button class="tl-exit" data-glzclose aria-label="Done, back to the painting">${ICON.back}<span>Done</span></button><span class="glz-title">${esc(opts.title || "")}</span><span class="glz-zc" data-glzzc role="group" aria-label="Zoom"><button type="button" data-glzfit>Fit</button><button type="button" data-glz100>100%</button></span>${opts.onDetails ? `<button type="button" class="glz-details" data-glzdetails>Open the page</button>` : ""}<span class="glz-pk-slot" data-glz-pk>${typeof pkButtonHTML === "function" ? pkButtonHTML() : ""}</span></div>
     <div class="glz-stage"><div class="glz-frame"><img class="glz-img" src="${esc(opts.src)}"${opts.cors ? ' crossorigin="anonymous"' : ""} alt="${esc(opts.alt || "")}"><canvas class="glz-cv" aria-hidden="true"></canvas><div class="glz-pk-layer" data-glzpklayer hidden></div></div><div class="glz-lens" data-glzlens hidden aria-hidden="true"><canvas width="102" height="102"></canvas><i></i></div></div>
+    <p class="glz-cap" aria-hidden="true"><b>${esc(opts.title || "")}</b>${opts.sub ? `<span>${esc(opts.sub)}</span>` : ""}</p>
     <div class="glz-tools">
       <div class="seg glz-seg" role="group" aria-label="Look at it">
         <button data-glzv="value">Value</button><button data-glzv="squint">Squint</button>${opts.pix ? `<button data-glzv="where">Where</button>` : ""}${typeof eyedropAttach === "function" ? `<button data-glzv="pick">${typeof icon === "function" ? icon("pipette", 15) : ""}<span>Pick</span></button>` : ""}${opts.src && typeof segProbe === "function" ? `<button data-glzv="select" hidden>Select</button>` : ""}
@@ -74,14 +75,17 @@ function glZoomOpen(opts) {
   // Zoomed up to 4x fit with loupeOn, the mouse position across the window maps to the position across the picture
   // (the window's left edge shows the picture's left edge), eased ~120ms. Past 4x (or after a wheel/trackpad move)
   // it is a free zoom: drag pans, two-finger scroll pans 1:1, wheel/pinch zooms about the cursor. Space freezes the loupe.
-  const LP = !!opts.fromRect;
+  const DESKV = document.documentElement.classList.contains("desk");
+  const LP = !!opts.fromRect || DESKV;
   let firstShown = false, enterRect = null, closed = false, loupeOn = false, spaceDown = false, lastPtype = "touch", armPos = null, lastMouse = null, tgt = null, lpRaf = 0, lpT = 0;
   const LP_MAX = 4.05;
   let fitZ = 1, maxZ = 8, natW = 0, natH = 0;
   const computeFit = () => {
     natW = img.naturalWidth || 0; natH = img.naturalHeight || 0;
     const r = stage.getBoundingClientRect();
-    const f = (natW && natH && r.width && r.height) ? Math.min(r.width / natW, r.height / natH) : 1;
+    // desktop: the whole painting with breathing room on black (immersive, David 2026-10-21)
+    const pad = DESKV ? Math.max(36, Math.min(r.width, r.height) * .05) : 0;
+    const f = (natW && natH && r.width && r.height) ? Math.min((r.width - 2 * pad) / natW, (r.height - 2 * pad) / natH) : 1;
     fitZ = Number.isFinite(f) && f > 0 ? f : 1;
     maxZ = fitZ * 8;
   };
@@ -723,8 +727,24 @@ function glZoomOpen(opts) {
     const v = e.target.closest("[data-glzv]"); if (v) { if (typeof buzz === "function") buzz(5); setMode(v.dataset.glzv); return; }
     const c = e.target.closest("[data-glzc]"); if (c) { if (typeof buzz === "function") buzz(5); palHex = palHex === c.dataset.glzc ? null : c.dataset.glzc; drawPalRow(); drawWhere(); }
   };
+  // Immersive desktop viewer (David, 2026-10-21): the controls and caption fade after ~2s without mouse movement and come back on
+  // movement; a tool in use keeps them. The browser's real fullscreen is requested too (the click is the user gesture); leaving it
+  // with Esc closes the viewer. Blocked or unsupported: silently stays a full-window black page.
+  let idleT = 0, fsOn = false;
+  const wake = () => {
+    scrim.classList.remove("idle"); clearTimeout(idleT);
+    if (!DESKV) return;
+    idleT = setTimeout(() => { if (closed) return; if (active || scrim.querySelector(".glz-top:hover,.glz-tools:hover")) { wake(); return; } scrim.classList.add("idle"); }, 2000);
+  };
+  const onFs = () => { if (fsOn && !document.fullscreenElement && !closed) close(); };
+  if (DESKV) {
+    scrim.addEventListener("pointermove", wake); scrim.addEventListener("pointerdown", wake); wake();
+    try { const rq = scrim.requestFullscreen && scrim.requestFullscreen({ navigationUI: "hide" }); if (rq && rq.then) rq.then(() => { fsOn = true; document.addEventListener("fullscreenchange", onFs); }).catch(() => {}); } catch (e) {}
+  }
   const close = () => {
     if (closed) return; closed = true;
+    clearTimeout(idleT); document.removeEventListener("fullscreenchange", onFs);
+    if (fsOn && document.fullscreenElement) { try { document.exitFullscreen().catch(() => {}); } catch (e) {} }
     stopMomentum(); cancelAnimationFrame(lpRaf); window.removeEventListener("resize", onResize);
     document.body.style.overflow = prevOverflow; scrim.remove(); window.removeEventListener("keydown", onKey, true);
   };
