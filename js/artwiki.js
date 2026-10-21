@@ -154,7 +154,7 @@ function awWait(fn, args, need) {
     if (SHOW_N !== tok) return;
     ROUTE_REPLACE = true;
     fn(...args);
-  }).catch(() => { toast("This page didn't load"); });
+  }).catch(() => { if (SHOW_N === tok && typeof routeFailed === "function") routeFailed(() => awWait(fn, args, need)); else toast("This page didn't load"); });
   return true;
 }
 const awHex = name => (AW.nh && AW.nh.get(String(name).toLowerCase())) || "#808080";
@@ -1212,7 +1212,8 @@ function awOpenRoute(kind, id, more) {
   if (AW.ready) return run();
   ROUTE_NEXT = routed("", kind + (id ? "/" + id : ""));
   waitScreen(); ROUTE_REPLACE = true;
-  awLoad().then(run).catch(() => go(S.tab || "learn"));
+  const tok = SHOW_N;
+  awLoad().then(run).catch(() => { if (SHOW_N === tok) routeFailed(() => awOpenRoute(kind, id, more)); });
 }
 // A painting photo that fails to load (offline, a museum link gone) leaves its quiet frame, never the browser's
 // broken-image icon.

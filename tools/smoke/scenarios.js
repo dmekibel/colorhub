@@ -7549,3 +7549,27 @@ scenario("home", "pinch zooms about the fingers' midpoint and two-finger pan fol
     await pinchAnchorRun(t, t.$(".hc-cv"), t.w.HM_CTRL, "color map " + (size ? size.join("x") : "375x812"));
   }
 });
+
+// David, 2026-10-21: an address opened cold must land on ITS page, on a phone and on a desktop window (the desktop
+// layer adds a nav bar and a footer around the same screens). Five routes, each from a fresh profile: the heading
+// and the address must both be the page asked for, and never the map or Today.
+scenario("paintings", "five cold addresses open their own page at 375x812 and 1440x900", async t => {
+  const routes = [
+    ["#/painter/claude-monet", () => t.$(".aw-page") && /Claude Monet/.test(t.text(".aw-page h1")), "Claude Monet"],
+    ["#/painting/starry-night", () => /Starry Night/.test(t.text("#app h1")), "The Starry Night"],
+    ["#/color/scarlet", () => t.$(".cp-page .cp-hero-foot h1") && H.title(t).toLowerCase() === "scarlet", "Scarlet"],
+    ["#/page/alchemy", () => /Alchemy/.test(t.text("#app h1")), "Alchemy"],
+    ["#/gallery/12", () => t.$(".gl-page") && t.text("#app h1").length > 2, "a gallery painting"],
+  ];
+  for (const size of [null, [1440, 900]]) {
+    for (const [hash, ok, what] of routes) {
+      await t.open(hash, size ? { size, settle: 600 } : { settle: 600 });
+      const label = `${hash} at ${size ? size.join("x") : "375x812"}`;
+      await t.waitFor(ok, 15000, `${what} on a cold load of ${label}`);
+      await t.sleep(500);
+      t.expect(t.w.location.hash.split("?")[0] === hash, `${label}: the address became ${t.w.location.hash}`);
+      t.expect(!t.$("#app .hm canvas") && !t.$("#app .screen.waiting"), `${label}: still a map or a loading placeholder`);
+      t.expect(/Chromatlas/.test(t.d.title) && !/^Chromatlas$/.test(t.d.title), `${label}: the tab title is "${t.d.title}"`);
+    }
+  }
+});

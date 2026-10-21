@@ -208,6 +208,27 @@ function routeNoName(slug) {
   el.querySelectorAll("[data-nn]").forEach(b => b.onclick = () => openCoreName(b.dataset.h, b.dataset.nn));
   const bk = el.querySelector("[data-back]"); if (bk) bk.onclick = () => xBack();
 }
+// an address for a page/painting/story we don't have: say so on that address (it used to bounce to the map)
+function routeMissing(kind, id) {
+  ROUTE_NEXT = routed("Not found", kind + "/" + id); ROUTE_REPLACE = true;
+  const el = show(`<header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
+    <h2 style="margin:24px 16px 8px">We don't have that page</h2>
+    <p class="fine" style="margin:0 16px 16px">There is no ${esc(kind)} called "${esc(String(id).replace(/-/g, " "))}". The link may be old or mistyped.</p>
+    <button class="btn" data-home style="margin:0 16px">Open the map</button>`, "article");
+  const bk = el.querySelector("[data-back]"); if (bk) bk.onclick = () => xBack();
+  el.querySelector("[data-home]").onclick = () => xToOrigin();
+}
+// A page whose data didn't arrive (offline, a blocked host): say so ON that page's own address, with a way to try
+// again. It used to drop to the current tab's home, so a good link looked like it opened the wrong page.
+function routeFailed(retry) {
+  if (!app.querySelector(".screen.waiting")) return toast("This page didn't load");
+  const el = show(`<header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
+    <h2 style="margin:24px 16px 8px">This page didn't load</h2>
+    <p class="fine" style="margin:0 16px 16px">The data for it didn't arrive. Check your connection and try again.</p>
+    <button class="btn" data-retry style="margin:0 16px">Try again</button>`, "article");
+  const bk = el.querySelector("[data-back]"); if (bk) bk.onclick = () => xBack();
+  el.querySelector("[data-retry]").onclick = () => { ROUTE_REPLACE = true; retry(); };
+}
 // initial: first load. The address is opened on top of its tab's home, so Back lands somewhere sensible.
 function openRoute(hash, initial = false) {
   if (!/^#\/./.test(hash || "")) return false;
@@ -292,7 +313,7 @@ function openRoute(hash, initial = false) {
     ROUTE_NEXT = routed("", parts.slice(0, more === "more" ? 3 : 2).join("/"));
     whenWiki(() => {
       const n = node();
-      if (!n) return xToOrigin();
+      if (!n) return routeMissing(kind, id);
       XSTACK = [];
       if (more === "more") return closeup(n);
       return n.kind === "story" ? storyPlayer(n) : openNode(n, true, null);
