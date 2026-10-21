@@ -2258,10 +2258,11 @@ function glPage(i, d, fromHex, tol) {
     // (pickArmed, the "Pick a color" button), eyedropAttach (armSample's syncEyd) already owns the gesture on
     // pointerdown/up directly, well before this delayed click fires -- so this branch steps aside for it.
     if (pickArmed) return;
-    // desktop: the click lands zoomed in about the clicked point, then the mouse looks around (js/paintzoom.js loupe)
+    // desktop (David, 2026-10-21: "first click painting page, second click full screen, third zoom"): this click opens the immersive
+    // viewer at FIT (the whole painting on black, growing out of the picture); a click in the viewer then zooms in (js/paintzoom.js loupeClick)
     if (document.documentElement.classList.contains("desk") && e.clientX != null) {
       const r = sampleImg.getBoundingClientRect();
-      return openLookCloser(null, { fromRect: { left: r.left, top: r.top, width: r.width, height: r.height }, focal: { fx: clamp((e.clientX - r.left) / (r.width || 1), 0, 1), fy: clamp((e.clientY - r.top) / (r.height || 1), 0, 1), cx: e.clientX, cy: e.clientY } });
+      return openLookCloser(null, { fromRect: { left: r.left, top: r.top, width: r.width, height: r.height } });
     }
     openLookCloser();
   };

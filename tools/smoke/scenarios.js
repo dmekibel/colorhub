@@ -7703,6 +7703,9 @@ scenario("paintmap", "desktop: a map click opens the page then a click on its pi
   const img = t.$(".gl-hero img");
   await t.click(img, { wait: 600 });
   await t.waitFor(".glz-scrim", 8000, "the click on the picture to open the zoom viewer");
+  await t.sleep(700);
+  const curZoom = t.$(".glz-stage").dataset.cur;   // undefined when the smoke browser cannot load the image: then nothing has zoomed either
+  t.expect(curZoom !== "loupe" && curZoom !== "free", `the second click should open the viewer at fit (the whole painting), not zoomed: ${curZoom}`);
   t.d.body.dispatchEvent(new w.KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
   await t.waitFor(() => !t.$(".glz-scrim"), 4000, "Esc to close the viewer");
   t.expect(/#\/gallery\//.test(w.location.hash), `Esc left the page (${w.location.hash})`);
