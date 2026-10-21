@@ -6,7 +6,7 @@
 // Nothing here changes a screen's own code: the bar lives outside #app, and the footer is appended to the finished screen.
 const DESK_Q = "(min-width:900px) and (hover:hover) and (pointer:fine)";
 const DESK_MQ = typeof matchMedia === "function" ? matchMedia(DESK_Q) : null;
-const DESK_LINKS = [["home", "Explore", "#/home"], ["museum", "Museum", "#/museum"], ["learn", "Learn", "#/today"], ["train", "Train", "#/train"], ["studio", "Studio", "#/studio"], ["daily", "Today", "#/daily"]];
+const DESK_LINKS = [["home", "Explore", "#/home"], ["museum", "Museum", "#/museum"], ["learn", "Learn", "#/today"], ["train", "Train", "#/train"], ["studio", "Studio", "#/studio"], ["daily", "Today", "#/feed"]];
 // which nav link a route belongs to (by its first address segment)
 const DESK_SECTION = {
   home: "home", map: "home", paintings: "home", color: "home", name: "home", pair: "home", set: "home", hue: "home",
@@ -16,7 +16,7 @@ const DESK_SECTION = {
   today: "learn", learnit: "learn", practice: "learn", welcome: "learn", learn: "learn", read: "learn",
   train: "train", lab: "train", taste: "train", challenge: "train", odd: "train", which: "train", whichway: "train", chords: "train",
   studio: "studio", photo: "studio", you: "studio",
-  daily: "daily",
+  daily: "daily", feed: "daily",
 };
 const deskSection = () => { const seg = (location.hash.replace(/^#\/?/, "").split(/[/?]/)[0] || "home").toLowerCase(); return DESK_SECTION[seg] || ""; };
 

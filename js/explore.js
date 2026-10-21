@@ -677,7 +677,7 @@ function openNode(n, push = true, tapped) {
 // When the trail runs out it goes back to where it started (X_ROOT, set by js/trail.js whenever a room or the map
 // shows, and by router.js for a page opened from an address): that room, or else the map. Never a guessed room
 // (David, 2026-10-08: "sometimes the app takes you to the Explore page without you wanting to").
-const xFallbackTab = () => ["learn", "gym", "explore", "studio"].includes(X_ROOT) ? X_ROOT : null;
+const xFallbackTab = () => ["learn", "gym", "explore", "studio", "feed"].includes(X_ROOT) ? X_ROOT : null;
 function xToOrigin() {
   const r = xFallbackTab();
   if (r) return go(r);

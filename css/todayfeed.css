@@ -1,0 +1,116 @@
+/* The Today feed (js/todayfeed.js). A masonry of mixed cards: columns are real elements (2 on a phone, 3 on a tablet,
+   4-5 on a desktop), each card goes into the shortest one, so nothing moves while images load (every box has its
+   aspect ratio and its text height before the picture arrives). Opaque surfaces, tokens from app.css, no glass. */
+.tf-screen{--tf-gap:12px;padding-left:var(--g);padding-right:var(--g)}
+.tf-head,.tf-chips,.tf-feed{flex:none}
+.tf-head{align-items:flex-end;flex-wrap:wrap;row-gap:2px;padding-bottom:6px}
+.tf-head .note{font-size:17px;color:var(--soft)}
+
+/* the filter chips: single choice, sticky under the header, opaque */
+.tf-chips{position:sticky;top:0;z-index:5;display:flex;gap:8px;margin:0 calc(-1 * var(--g));padding:10px var(--g) 12px;background:var(--ground);overflow-x:auto;scrollbar-width:none;touch-action:pan-x}
+.tf-chips::-webkit-scrollbar{display:none}
+.tf-chip{flex:none;height:40px;padding:0 18px;border-radius:var(--r-pill);background:var(--surface-2);border:1px solid var(--rule);color:var(--soft);font:500 16px/1 var(--sans);transition:background .15s,color .15s,border-color .15s,transform .12s var(--ease)}
+.tf-chip:active{transform:scale(.97)}
+.tf-chip.on{background:var(--paper);border-color:var(--paper);color:var(--paper-ink)}
+@media (hover:hover){.tf-chip:not(.on):hover{background:var(--surface-3);color:var(--ink)}}
+
+.tf-feed{min-height:60vh;padding-bottom:var(--tabh)}
+.tf-cols{display:flex;gap:var(--tf-gap);align-items:flex-start}
+.tf-col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:var(--tf-gap)}
+
+/* every card: a button, one tap opens it. Press = a small settle, never a wiggle. */
+.tf-card{position:relative;display:block;width:100%;overflow:hidden;border-radius:var(--r-2);background:var(--surface-2);color:var(--ink);text-align:left;
+  transition:transform .14s var(--ease),filter .14s,box-shadow .2s;-webkit-tap-highlight-color:transparent}
+.tf-card:active{transform:scale(.985);filter:brightness(.93)}
+.tf-card:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.tf-card b{display:block;font-weight:400}
+.tf-card small{display:block;font:400 15px/1.3 var(--sans);color:var(--soft)}
+
+/* painting: picture (dominant color holds the place), its palette strip, title + painter */
+.tf-im{position:relative;display:block;width:100%;background:var(--c,#2A2822);overflow:hidden}
+.tf-im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s var(--ease)}
+.tf-im img.on{opacity:1}
+.tf-pal{display:flex;height:6px}
+.tf-pal i{display:block;background:var(--c)}
+.tf-tx{display:block;padding:10px 12px 12px}
+.tf-paint .tf-tx,.tf-palette .tf-tx{height:84px;overflow:hidden}
+.tf-paint b,.tf-palette b{font:400 18px/1.15 var(--serif);letter-spacing:-.005em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.3em}
+.tf-paint small,.tf-palette small{margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tf-paint small em,.tf-paint small span{font-style:normal}
+.tf-paint.wait .tf-tx::before,.tf-palette.wait .tf-tx::before{content:"";display:block;width:62%;height:14px;margin:4px 0 20px;border-radius:7px;background:var(--surface-3);opacity:.7}
+.tf-paint.wait .tf-tx b,.tf-palette.wait .tf-tx b{display:none}
+.tf-card.off .tf-tx::before{opacity:.35;animation:none}
+.tf-card.off .tf-tx small::after{content:"Offline";color:var(--soft)}
+
+/* palette: equal stripes, then where it is from */
+.tf-stripes{display:flex;width:100%}
+.tf-stripes i{flex:1;display:block;background:var(--c)}
+
+/* color: the card is the color. ink is chosen for contrast on the color itself */
+.tf-color{display:flex;flex-direction:column;justify-content:flex-end;gap:5px;padding:14px;background:var(--c);color:var(--ink)}
+.tf-color b{font:400 24px/1.02 var(--serif);letter-spacing:-.015em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tf-color span{font:400 15px/1.3 var(--sans);opacity:.88}
+
+/* color of the day: big, the first card */
+.tf-cotd{display:flex;flex-direction:column;justify-content:flex-end;gap:14px;padding:20px 20px 22px;aspect-ratio:1/1.02;margin-bottom:var(--tf-gap);background:var(--c);color:var(--ink)}
+.tf-cotd-t{display:block}
+.tf-cotd em{display:block;font:italic 400 18px/1.2 var(--serif);opacity:.88;margin-bottom:6px}
+.tf-cotd b{font:400 clamp(52px,17vw,76px)/.88 var(--serif);letter-spacing:-.035em;overflow-wrap:anywhere}
+.tf-cotd-s{display:block;font:400 17px/1.4 var(--sans);opacity:.92}
+.tf-go{display:flex;align-items:center;gap:6px;margin-top:12px;font:500 16px/1 var(--sans);font-style:normal}
+.tf-go svg{width:18px;height:18px}
+
+/* article: a color hero with its name, then the first line of its story and the read time */
+.tf-hero{display:flex;align-items:flex-end;aspect-ratio:1/.6;padding:12px 14px;background:var(--c);color:var(--ink)}
+.tf-hero b{font:400 28px/1 var(--serif);letter-spacing:-.02em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.tf-art .tf-tx{padding:12px 14px 14px}
+.tf-lede{display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;font:400 16px/1.38 var(--sans);color:var(--ink)}
+.tf-art small{margin-top:8px;color:var(--soft)}
+
+/* the one game card: small, a swatch and a question. Never the first card. */
+.tf-game{display:flex;align-items:center;gap:14px;padding:14px;background:var(--surface-3)}
+.tf-dot{flex:none;width:44px;height:44px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+.tf-game .tf-tx,.tf-cont .tf-tx{padding:0;min-width:0}
+.tf-game b,.tf-cont b{font:400 20px/1.1 var(--serif)}
+.tf-game small,.tf-cont small{margin-top:3px}
+
+/* continue learning: your colors due today, or the next unit */
+.tf-cont{display:block;padding:14px;background:var(--surface-3)}
+.tf-strip{display:flex;height:34px;margin-bottom:12px;border-radius:8px;overflow:hidden}
+.tf-strip i{flex:1;display:block;background:var(--c)}
+
+/* loading: the day's real colors, calm (no grey boxes, no shimmer sweep) */
+.tf-sk .tf-card.sk{background:var(--c);opacity:.5;animation:tfBreathe 1.8s ease-in-out infinite;pointer-events:none}
+.tf-sk .tf-col:nth-child(n+3){display:none}
+@media (min-width:700px){.tf-sk .tf-col:nth-child(3){display:flex}}
+html.desk .tf-sk .tf-col{display:flex}
+@keyframes tfBreathe{50%{opacity:.8}}
+@media (prefers-reduced-motion:reduce){.tf-sk .tf-card.sk{animation:none;opacity:.65}.tf-im img{transition:none}.tf-card{transition:none}}
+
+.tf-state{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:48px 4px}
+.tf-state .btn{margin-top:10px}
+.tf-end{padding:36px 0 12px;text-align:center;font:italic 400 17px/1.3 var(--serif);color:var(--soft)}
+.tf-more{height:1px}
+.tf-sent{display:block;height:1px;margin-top:-1px;flex:none;pointer-events:none}
+.tf-chips.stuck::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:var(--top);background:var(--ground)}
+.tf-chips.stuck{border-bottom:1px solid var(--rule)}
+html.desk .tf-chips.stuck::before{display:none}
+
+@media (min-width:700px){.room-sheet>.screen.tf-screen{max-width:none;padding-left:32px;padding-right:32px}.tf-chips{margin:0 -32px;padding-left:32px;padding-right:32px}
+  .tf-cotd{aspect-ratio:auto;min-height:300px;flex-direction:row;align-items:flex-end;justify-content:space-between;gap:36px}.tf-cotd-t{flex:1 1 55%}.tf-cotd-s{flex:1 1 40%;max-width:440px}}
+@media (max-width:359px){.tf-screen{--tf-gap:10px}.tf-color b{font-size:21px}.tf-hero b{font-size:24px}}
+
+/* ---------- desktop: the width is used, hover lifts ---------- */
+html.desk .room-sheet>.screen.tf-screen{padding-left:max(var(--dkg),calc((100% - 1400px) / 2));padding-right:max(var(--dkg),calc((100% - 1400px) / 2))}
+html.desk .tf-screen{--tf-gap:16px}
+html.desk .tf-head{padding-bottom:10px}
+html.desk .tf-chips{top:var(--dkn);margin:0;padding-left:0;padding-right:0}
+html.desk .tf-card{cursor:pointer}
+html.desk .tf-card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.5);filter:brightness(1.06)}
+html.desk .tf-card:active{transform:translateY(-1px) scale(.992)}
+html.desk .tf-chip{cursor:pointer}
+html.desk .tf-color b{font-size:26px}
+html.desk .tf-cotd{aspect-ratio:auto;min-height:300px;flex-direction:row;align-items:flex-end;justify-content:space-between;gap:48px;padding:36px 40px}
+html.desk .tf-cotd-t{flex:1 1 55%}
+html.desk .tf-cotd b{font-size:clamp(80px,9vw,132px)}
+html.desk .tf-cotd-s{flex:1 1 38%;max-width:480px;font-size:19px}
