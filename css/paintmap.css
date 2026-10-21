@@ -30,7 +30,7 @@
    trip into the sheet just to clear one thing. */
 .pmx-chipbar{position:absolute;z-index:3;left:0;right:0;top:calc(var(--top) + 64px);   /* right under the header (was +108: room for a retired "why" pill, an empty band) */
   display:flex;gap:6px;
-  overflow-x:auto;padding:0 12px;scrollbar-width:none;pointer-events:none}
+  overflow-x:auto;padding:0 max(16px,env(safe-area-inset-right)) 0 max(16px,env(safe-area-inset-left));scroll-padding-left:max(16px,env(safe-area-inset-left));scrollbar-width:none;pointer-events:none}
 .pmx-chipbar[hidden]{display:none}
 .pmx-chipbar::-webkit-scrollbar{display:none}
 .pmx-xchip{pointer-events:auto;flex:none;display:flex;align-items:center;gap:6px;height:34px;padding:0 6px 0 14px;

@@ -149,6 +149,8 @@ html.desk .lh-room>:not(.room-head):not(.lh-hero):not(.lh-wheel-sec):not(.lh-cho
 html.desk .pmx{--dk-b:28px;--dk-row:calc(var(--dk-b) + var(--corner,48px) + 10px)}
 html.desk .pmx .pmx-cap{left:28px;right:calc(28px + var(--corner,48px) + 12px);bottom:var(--dk-b)}
 html.desk .pmx .pmx-facets{bottom:calc(var(--dk-row) + var(--cap-x,0px));padding-left:28px;scroll-padding-left:28px}
+/* the chip row keeps the same 28px margin as the corner buttons (a chip hugging the window's left edge read as clipped) */
+html.desk .pmx .pmx-chipbar{padding-left:28px;padding-right:28px;scroll-padding-left:28px;box-sizing:border-box}
 html.desk .pmx .pmx-walk{left:28px;bottom:calc(var(--dk-row) + 44px + var(--cap-x,0px))}
 
 /* ---------- the museum painting page (#/gallery/<n>): the painting large and sticky on the left, everything about it on the right;
