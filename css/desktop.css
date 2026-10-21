@@ -1,0 +1,77 @@
+/* The desktop website layer (js/desktop.js, 2026-10-21). Everything here sits behind html.desk, which js/desktop.js sets only for
+   (min-width:900px) and (hover:hover) and (pointer:fine) -- a phone or tablet never matches, so the phone app is untouched.
+   Loaded last on purpose: it overrides the phone rules with the same specificity or one class more. */
+html.desk{--dkn:60px;--dkw:1180px;--dkg:clamp(32px,5vw,64px);--top:var(--dkn)}   /* --top is the phone's status-bar inset; here it is the bar, so every top-anchored thing clears it */
+
+/* ---------- the top navigation bar ---------- */
+html.desk #dk-nav{position:fixed;left:0;right:0;top:0;height:var(--dkn);z-index:50;display:flex;align-items:center;gap:36px;padding:0 var(--dkg);
+  background:rgba(14,13,11,.86);-webkit-backdrop-filter:blur(18px) saturate(1.2);backdrop-filter:blur(18px) saturate(1.2);border-bottom:1px solid var(--rule)}
+html.desk .dk-brand{display:flex;align-items:center;gap:10px;color:var(--ink);font:400 24px/1 var(--serif);letter-spacing:-.01em;white-space:nowrap}
+html.desk .dk-brand svg{width:24px;height:24px}
+html.desk .dk-links{display:flex;align-items:center;gap:4px;margin-right:auto}
+html.desk #dk-nav a{text-decoration:none}
+html.desk .dk-links a{position:relative;display:flex;align-items:center;height:36px;padding:0 14px;border-radius:var(--r-pill);color:var(--soft);font:500 15px/1 var(--sans);transition:color .15s,background .15s}
+html.desk .dk-links a:hover{color:var(--ink);background:rgba(236,232,223,.07)}
+html.desk .dk-links a.on{color:var(--ink);background:rgba(236,232,223,.11)}
+html.desk .dk-links a:focus-visible,html.desk .dk-brand:focus-visible,html.desk .dk-search:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+html.desk .dk-search{display:flex;align-items:center;gap:10px;width:min(340px,30vw);height:38px;padding:0 8px 0 14px;border-radius:var(--r-pill);background:var(--surface-2);border:1px solid var(--rule);color:var(--soft);font:400 14.5px/1 var(--sans);text-align:left;cursor:pointer;transition:border-color .15s,background .15s}
+html.desk .dk-search:hover{border-color:var(--rule-strong);background:var(--surface-3)}
+html.desk .dk-search svg{flex:none;width:17px;height:17px}
+html.desk .dk-search span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html.desk .dk-search kbd{flex:none;display:grid;place-items:center;width:24px;height:24px;border-radius:6px;border:1px solid var(--rule);font:500 12px/1 var(--mono);color:var(--faint)}
+
+/* the bar takes the top of every screen: pages start below it, the maps run beneath it */
+html.desk .pl-corner,html.desk .hm-top-search{display:none}
+
+/* ---------- pages: a centered web column, not a phone strip ---------- */
+html.desk .screen:not(.cp-page){max-width:760px;padding-left:var(--dkg);padding-right:var(--dkg);padding-bottom:0}
+html.desk .screen.fixed,html.desk .screen.cx{max-width:none;padding:0}
+html.desk .room-sheet{top:0}
+html.desk .room-sheet>.screen{max-width:none;padding-left:max(var(--dkg),calc((100% - 1120px) / 2));padding-right:max(var(--dkg),calc((100% - 1120px) / 2));padding-top:calc(var(--dkn) + 28px)}
+html.desk .room-sheet::after{display:none}
+
+/* ---------- sheets become centered dialogs ---------- */
+html.desk .scrim{background:rgba(6,6,5,.62);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+html.desk .sheet{inset:0;margin:auto;bottom:auto;width:min(520px,calc(100vw - 64px));height:fit-content;max-height:min(760px,calc(100vh - 96px));border-radius:var(--r-3);border:1px solid var(--rule);
+  padding:28px 28px 26px;animation:dkDialogIn .22s var(--ease) both;box-shadow:0 30px 90px rgba(0,0,0,.6)}
+html.desk .sheet .grab{display:none}
+@keyframes dkDialogIn{from{opacity:0;transform:translateY(10px) scale(.985)}}
+
+/* ---------- footer ---------- */
+html.desk .dk-foot{margin:96px calc(-1 * var(--dkg)) 0;border-top:1px solid var(--rule);padding:36px var(--dkg) 44px;color:var(--faint)}
+html.desk .dk-foot-in{max-width:var(--dkw);margin:0 auto;display:grid;grid-template-columns:1.1fr 1.6fr auto;gap:40px;align-items:start}
+html.desk .dk-foot-brand b{display:block;font:400 22px/1.1 var(--serif);color:var(--ink)}
+html.desk .dk-foot-brand span{display:block;margin-top:6px;font:400 14px/1.4 var(--sans)}
+html.desk .dk-foot-note{margin:0;font:400 14px/1.6 var(--sans);color:var(--faint);max-width:520px}
+html.desk .dk-foot-links{display:flex;flex-wrap:wrap;gap:6px 20px;font:500 14px/1 var(--sans)}
+html.desk .dk-foot-links a{color:var(--soft);text-decoration:none}
+html.desk .dk-foot-links a:hover{color:var(--ink)}
+
+/* ---------- the color page: the color on the left, everything about it on the right (the phone's landscape lane, widened) ---------- */
+html.desk{--cp-cover-w:clamp(380px,36vw,560px)}
+html.desk .screen.cp-page{max-width:none;padding-left:calc(var(--cp-cover-w) + var(--dkg));padding-right:var(--dkg)}
+html.desk .cp-page .cp-hero.cp-hero-full{top:var(--dkn);height:calc(100dvh - var(--dkn));padding:20px 32px 32px 32px}
+html.desk .cp-page .cp-close{top:20px}
+html.desk .cp-page .cp-hero h1.rp-name{font-size:clamp(64px,9vw,120px)}
+html.desk .screen.cp-page>:not(.cp-hero){max-width:880px}
+html.desk .cp-page .dk-foot{margin-left:0;margin-right:calc(-1 * var(--dkg));max-width:none}
+html.desk .cp-page .dk-foot-in{grid-template-columns:1fr;gap:18px}
+html.desk .screen.cp-page{padding-top:calc(var(--dkn) + 28px)}
+html.desk .cp-page .tl-more-float{top:20px;left:72px;right:auto}
+
+/* ---------- the painting page: the painting on the left, its palette and notes on the right ---------- */
+html.desk .screen.article:has(>.ptg){max-width:1320px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);column-gap:clamp(36px,4.5vw,72px);align-items:start;padding-top:12px}
+html.desk .screen:has(>.ptg)>*{grid-column:2;min-width:0}
+html.desk .screen:has(>.ptg)>.art-top{grid-column:1/-1}
+html.desk .screen:has(>.ptg)>.ptg{grid-column:1;grid-row:2/span 40;position:sticky;top:calc(var(--dkn) + 20px)}
+html.desk .screen:has(>.ptg)>.dk-foot{grid-column:1/-1}
+html.desk .screen:has(>.ptg) .p-title{font-size:clamp(44px,4.4vw,64px);line-height:1}
+html.desk .screen:has(>.ptg) .p-body{font-size:18px;line-height:1.65}
+
+/* ---------- the painter page: a wide page, the works in a many-across grid ---------- */
+html.desk .screen.aw-page{max-width:1240px}
+html.desk .aw-page .aw-head,html.desk .aw-page .aw-sub,html.desk .aw-page .aw-find{max-width:760px}
+html.desk .aw-page .aw-pt-hero{margin:24px 0 0}
+html.desk .aw-page .aw-pt-open,html.desk .aw-page .aw-pt-hero>img{border-radius:var(--r-2);max-height:min(56vh,560px)}
+html.desk .aw-page .gl-rail{margin:0;padding-left:0;padding-right:0}
+html.desk .aw-page .aw-head .p-title,html.desk .aw-page .aw-head h1{font-size:clamp(48px,5vw,72px)}

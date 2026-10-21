@@ -496,10 +496,14 @@ function glFill(root) {
 // the shortest column, so their tops never decrease: a binary search finds the first pin near the screen.
 // res.cols = starting columns; res.plain = pictures only; res.pinch = pinch steps the columns (anchored under the
 // fingers) and res.onCols(n) hears every change. Four or more columns are always pictures only: no room for text.
-const GL_GAPS = { 2: [14, 22], 3: [10, 16], 4: [6, 6], 5: [4, 4] };
+const GL_GAPS = { 2: [14, 22], 3: [10, 16], 4: [6, 6], 5: [4, 4], 6: [4, 4], 7: [4, 4], 8: [4, 4] };
+// a wide desktop window (js/desktop.js sets html.desk) has room for more across: up to 8, and the starting count grows with the width
+const glDesk = () => document.documentElement.classList.contains("desk");
+const glMaxCols = () => glDesk() ? 8 : 5;
 function glGrid(host, res) {
   const list = res.list, n = list.length, live = new Map();
-  let cols = Math.max(2, Math.min(5, res.cols | 0 || 2)), plain = !!res.plain;
+  let cols = Math.max(2, Math.min(glMaxCols(), res.cols | 0 || 2)), plain = !!res.plain;
+  if (glDesk() && host.clientWidth > 700) cols = Math.max(cols, Math.min(8, Math.round(host.clientWidth / ((res.cols | 0) >= 3 ? 190 : 230))));
   let W = 0, colW = 0, gap = 14, vgap = 22, txt = GL_TXT, top, col, hh;
   const isPlain = () => plain || cols >= 4;
   const layout = () => {
@@ -541,7 +545,7 @@ function glGrid(host, res) {
   addEventListener("resize", onResize);
   // change the columns, keeping the painting under (fx, fy) (viewport px) exactly where it is
   const setCols = (c, fx, fy) => {
-    c = Math.max(2, Math.min(5, c)); if (c === cols || !n) return false;
+    c = Math.max(2, Math.min(glMaxCols(), c)); if (c === cols || !n) return false;
     const vy = fy == null ? innerHeight / 2 : fy, r = host.getBoundingClientRect(), y = vy - r.top, x = (fx == null ? W / 2 : fx) - r.left;
     const cx = Math.max(0, Math.min(cols - 1, Math.floor(x / (colW + gap))));
     let a = 0; for (let k = 0; k < n; k++) if (col[k] === cx && top[k] <= y) a = k;
