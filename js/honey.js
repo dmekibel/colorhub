@@ -1233,7 +1233,7 @@ function honeycomb(host, opts = {}) {
   let lastGoodP = [0, 0], lastGoodZ = 1;
   let phase = "idle", spring = null, touched = RM || SHOOT, visible = true, raf = 0, last = 0;
   let bloom = RM || SHOOT ? 1 : 0, bloomT0 = performance.now(), pressed = null, pressK = 0, drawn = [], center = null, settled = null;
-  let ZMIN = .4;
+  let ZMIN = .4, ZFIT = .4;   // ZMIN: the zoom-out limit (PM-style: well past the fit); ZFIT: where a finite layout just fits the window (the old limit) -- fit flights and the far-style ramp stay on it
   // ---- "alive" motion state: idle drift (wanders after a pause), the net's finger-lag (Plag chases P, always),
   // water's tap ripples, and the panel inset (ctrl.setInset, so a bottom sheet never covers the magnified middle)
   let Plag = [0, 0], lastInput = performance.now(), driftT0 = 0, driftTeff = 0, driftAnchor = [0, 0], touchXY = null, ripples = [];
@@ -1278,7 +1278,7 @@ function honeycomb(host, opts = {}) {
   function zc(k) {
     const d = cfg.far && cfg.far[k]; if (!d) return cfg[k];
     const p = HONEY_STYLES[styleId], zs = p && p.initialZoom ? p.initialZoom(lay ? lay.raw.length : 101) : 1;
-    const z0 = Math.max(ZMIN + .01, Math.min(ZMAX, zs)), t = clamp((z0 - Z) / Math.max(.01, z0 - ZMIN), 0, 1);
+    const z0 = Math.max(ZFIT + .01, Math.min(ZMAX, zs)), t = clamp((z0 - Z) / Math.max(.01, z0 - ZFIT), 0, 1);
     const v = cfg[k] + d * t;
     return k === "shape" ? clamp(v, 0, 1) : k === "m0" ? Math.max(cfg.m1 + .05, v) : Math.max(0, v);
   }
@@ -1419,7 +1419,7 @@ function honeycomb(host, opts = {}) {
   };
   // zoom limits for a wrapping set. A manual zMinUser (preset or Tweak "Zoom-out limit") is a hard floor: once
   // reached it does not rubber-band back to a closer zoom ("stays that far out").
-  const zFloor = () => {
+  const zFitFloor = () => {
     if (!lay || !W) return .4;
     if (lay.globe) return .5;   // a sphere's own math (not F/Finv) sizes it; a fixed, generous range is enough
     const search = ok => { let lo = .03, hi = ZMAX; if (!ok(hi)) return ZMAX; for (let i = 0; i < 24; i++) { const m = (lo + hi) / 2; if (ok(m)) hi = m; else lo = m; } return hi; };
@@ -1465,6 +1465,19 @@ function honeycomb(host, opts = {}) {
     }
     if (cfg.lensMode === "round") return clamp(search(fits(1.5)), .15, search(fits(.5)));
     return clamp(need(1.5), ABS_ZMIN, clamp(need(.5), .15, ZMAX));
+  };
+  // David, 2026-10-21: "it doesn't let you zoom out past a certain point ... the limit is too close." For a finite layout
+  // (every map by default: the all-colors spiral, a cluster of any size, the wheel, families) the limit used to be the zoom
+  // where the whole layout just fits the window (zFitFloor), so there was never any room around it and a small set could not
+  // be pushed back at all. The limit is now ZOUT of that fit: the whole layout about a quarter-to-a-third of the window, with
+  // clear space around it. Fit flights (Arrange fit, boundsFit) and the far-style ramp stay on ZFIT, so they land where they did.
+  // A wrapping layout keeps its own tuned floor (its copies would line up into a moire pattern further out).
+  const ZOUT = .28, ZOUT_ABS = .006;
+  const zFloor = () => {
+    const f = zFitFloor(); ZFIT = f;
+    if (!lay || !W) return f;
+    if (lay.globe) return Math.max(.12, f * .5);
+    return lay.finite ? Math.max(ZOUT_ABS, f * ZOUT) : f;
   };
   const offAt = (sx, sy, l) => {
     const dx = sx - W / 2, dy = sy - vcy();
@@ -2504,7 +2517,7 @@ function honeycomb(host, opts = {}) {
       if (fitMode && o.arrange) { fitUserOverride = false; flyToFit(true); }
       else if (fitMode) { if (!fitUserOverride) flyToFit(true); }
       else if (o.arrange && hlOn && HONEY_HL) l18FrameLit();
-      else if (o.arrange && arr && arr.fit && !lay.globe) { P = [0, 0]; Plag = P.slice(); zoomTo(Math.max(ZMIN, Math.min(Z, ZMIN * 1.3)), W / 2, vcy()); }
+      else if (o.arrange && arr && arr.fit && !lay.globe) { P = [0, 0]; Plag = P.slice(); zoomTo(Math.max(ZFIT, Math.min(Z, ZFIT * 1.3)), W / 2, vcy()); }
       // a new order travels to the middle (for Center on, where the chosen color now sits)
       else if (o.recenter && lay.finite && !lay.globe && lay.pts.length) { const c = lay.pts.reduce((m, q) => Math.hypot(q.x, q.y) < Math.hypot(m.x, m.y) ? q : m, lay.pts[0]); P = [c.x, c.y]; Plag = P.slice(); draw(); }
     },
@@ -2562,6 +2575,8 @@ function honeycomb(host, opts = {}) {
       return it.o;
     },
     zoomValue: () => Z,
+    _qaZ: () => Z,
+    zoomFit: () => ZFIT,   // QA: where a finite layout just fits the window (the old limit)
     zoomFloor: () => ZMIN,   // QA (tools/smoke home group): the ordinary pinch-out limit, recomputed per layout
     panValue: () => [P[0], P[1], Z],   // QA: the pan a return to Home must keep
     // QA (tools/smoke map-return): finish a spring or zoom in flight at once (headless frames don't always run)
