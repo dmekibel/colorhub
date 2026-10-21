@@ -36,12 +36,30 @@ function deskFooterHTML() {
     <nav class="dk-foot-links" aria-label="Footer">${DESK_LINKS.map(([, label, href]) => `<a href="${href}">${label}</a>`).join("")}</nav>
   </div></footer>`;
 }
+// Breadcrumbs from the trail (js/trail.js): Explore > Painters > Monet. Every step but the last is a link that walks back
+// to that page (tlJump), the first goes to where the trail started (tlToOrigin). Only a page that is on the trail gets one.
+function deskCrumbs() {
+  if (!document.documentElement.classList.contains("desk")) return;
+  const scr = document.querySelector("#app .screen");
+  if (!scr || scr.querySelector(".dk-crumbs") || !scr.dataset.tl || typeof XSTACK === "undefined" || !XSTACK.length || typeof tlMetaFor !== "function") return;
+  const esc2 = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  const last = XSTACK.length - 1, parts = [`<button type="button" data-dkc="o">${esc2(typeof tlOriginName === "function" ? tlOriginName() : "Explore")}</button>`];
+  XSTACK.forEach((tok, i) => {
+    const t = (tlMetaFor(tok) || {}).title || "Page";
+    parts.push(i === last ? `<span aria-current="page">${esc2(t)}</span>` : `<button type="button" data-dkc="${i}">${esc2(t)}</button>`);
+  });
+  const nav = document.createElement("nav"); nav.className = "dk-crumbs"; nav.setAttribute("aria-label", "Breadcrumb");
+  nav.innerHTML = parts.join('<i aria-hidden="true">›</i>');
+  nav.addEventListener("click", e => { const b = e.target.closest("[data-dkc]"); if (!b) return; if (b.dataset.dkc === "o") tlToOrigin(); else tlJump(+b.dataset.dkc); });
+  const top = scr.querySelector(":scope>.art-top");   // the Back row: the crumbs sit in it, so a page's own grid is never disturbed
+  if (top && top.firstElementChild) { nav.classList.add("in-top"); top.firstElementChild.after(nav); } else scr.insertBefore(nav, scr.firstChild);
+}
 // A page gets the footer when it is a real page (a scrolling screen), not a map, a game or a full-bleed stage.
 function deskFoot() {
   if (!document.documentElement.classList.contains("desk")) return;
   const scr = document.querySelector("#app .screen");
   if (!scr || scr.querySelector(".dk-foot")) return;
-  if (/\b(fixed|cx|deck|drill|station|meet|eye|hm|booth)\b/.test(scr.className) || scr.querySelector("canvas.hc-cv,canvas.pmx-cv")) return;
+  if (/\b(fixed|cx|deck|drill|station|meet|eye|hm|booth)\b/.test(scr.className) || scr.querySelector(":scope>[data-close],:scope>header>[data-close]") || scr.querySelector("canvas.hc-cv,canvas.pmx-cv")) return;
   scr.insertAdjacentHTML("beforeend", deskFooterHTML());
 }
 
@@ -61,7 +79,7 @@ function deskInstall() {
   apply();
   if (!DESK_MQ.matches) return;
   // the footer follows every screen the app draws (#app is re-rendered on each show())
-  new MutationObserver(() => { deskMarkActive(); deskFoot(); }).observe(document.getElementById("app"), { childList: true });
+  new MutationObserver(() => { deskMarkActive(); deskFoot(); deskCrumbs(); }).observe(document.getElementById("app"), { childList: true });
   addEventListener("hashchange", deskMarkActive);
   addEventListener("popstate", deskMarkActive);
   const openSearch = () => { if (typeof searchOpen === "function") searchOpen(); };

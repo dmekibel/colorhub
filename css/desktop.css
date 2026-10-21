@@ -116,3 +116,24 @@ html.desk .aw-page .aw-pt-open,html.desk .aw-page .aw-pt-hero>img{max-height:420
 /* the Back / More row is part of the page here (the bar above already stays put), so text never slides under it */
 html.desk .screen:has(>.ptg)>.art-top,html.desk .aw-page>.art-top{position:static}
 html.desk .screen.explore.mu-home .pl-colls:has(>:nth-child(3):last-child){grid-template-columns:repeat(3,1fr)}
+
+/* ---------- slice 2: breadcrumbs from the trail ---------- */
+html.desk .screen>.dk-crumbs.dk-crumbs{grid-column:1/-1}
+html.desk .art-top>.dk-crumbs{flex:1;min-width:0;margin:0 0 0 18px;flex-wrap:nowrap}
+html.desk .art-top>.dk-crumbs button{white-space:nowrap}
+html.desk .dk-crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px;margin:14px 0 4px;font:500 14px/1.3 var(--sans);color:var(--faint);min-width:0}
+html.desk .dk-crumbs button{background:none;border:0;padding:4px 2px;font:inherit;color:var(--soft);cursor:pointer;border-radius:4px}
+html.desk .dk-crumbs button:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+html.desk .dk-crumbs span{color:var(--ink);max-width:40ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+html.desk .dk-crumbs i{font-style:normal;color:var(--faint)}
+html.desk .screen.cp-page>.dk-crumbs{max-width:880px}
+
+/* ---------- slice 2: Learn is two columns (today's study on the left, your color wheel on the right) ---------- */
+html.desk .room-sheet>.screen.lh-room{max-width:none;padding-left:max(var(--dkg),calc((100% - 1120px) / 2));padding-right:max(var(--dkg),calc((100% - 1120px) / 2));
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"head head" "hero wheel" "choose wheel" "hint hint" "foot foot";column-gap:clamp(36px,5vw,80px);align-items:start}
+html.desk .lh-room>.room-head{grid-area:head}
+html.desk .lh-room>.lh-hero{grid-area:hero}
+html.desk .lh-room>.lh-wheel-sec{grid-area:wheel;position:sticky;top:calc(var(--dkn) + 20px)}
+html.desk .lh-room>.lh-choose{grid-area:choose}
+html.desk .lh-room>.dk-foot{grid-area:foot}
+html.desk .lh-room>:not(.room-head):not(.lh-hero):not(.lh-wheel-sec):not(.lh-choose):not(.dk-foot){grid-area:hint}

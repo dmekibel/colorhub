@@ -1038,6 +1038,12 @@ function sheet(html, opts = {}) {
     if (gone) return; gone = true; if (doLock) unlockScroll(); cornersBack(); if (sh._esc) removeEventListener("keydown", sh._esc, true);
     if (reduceMotion) { scrim.remove(); sh.remove(); return; }
     scrim.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, fill: "forwards" }).onfinish = () => scrim.remove();
+    // a desktop dialog (css/desktop.css centers it) leaves with a quick fade and a small shrink, never a slide down the window
+    if (document.documentElement.classList.contains("desk")) {
+      sh.animate([{ opacity: 1, transform: "scale(1)" }, { opacity: 0, transform: "scale(.97)" }], { duration: 150, easing: "ease-out", fill: "forwards" }).onfinish = () => sh.remove();
+      setTimeout(() => { scrim.remove(); sh.remove(); }, 400);
+      return;
+    }
     sh.animate([{ transform: getComputedStyle(sh).transform === "none" ? "none" : getComputedStyle(sh).transform }, { transform: "translateY(105%)" }], { duration: 240, easing: "cubic-bezier(.3,0,.8,.2)", fill: "forwards" }).onfinish = () => sh.remove();
     setTimeout(() => { scrim.remove(); sh.remove(); }, 400);
   };
