@@ -137,3 +137,12 @@ html.desk .lh-room>.lh-wheel-sec{grid-area:wheel;position:sticky;top:calc(var(--
 html.desk .lh-room>.lh-choose{grid-area:choose}
 html.desk .lh-room>.dk-foot{grid-area:foot}
 html.desk .lh-room>:not(.room-head):not(.lh-hero):not(.lh-wheel-sec):not(.lh-choose):not(.dk-foot){grid-area:hint}
+
+/* ---------- painting map bottom bar (desktop only) ----------
+   On the phone the caption bar stacks ABOVE the corner button's row (--corner-b is the phone's bottom inset + gap), which
+   left a strip of tiles under it. On desktop the corner sits at bottom:28px, so the caption bar shares that row: flush to
+   the same 28px margin, ending just left of the corner button, and the facet chips and walk dots stack above it. */
+html.desk .pmx{--dk-b:28px;--dk-row:calc(var(--dk-b) + var(--corner,48px) + 10px)}
+html.desk .pmx .pmx-cap{left:28px;right:calc(28px + var(--corner,48px) + 12px);bottom:var(--dk-b)}
+html.desk .pmx .pmx-facets{bottom:calc(var(--dk-row) + var(--cap-x,0px));padding-left:28px;scroll-padding-left:28px}
+html.desk .pmx .pmx-walk{left:28px;bottom:calc(var(--dk-row) + 44px + var(--cap-x,0px))}
