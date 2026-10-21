@@ -1,3 +1,76 @@
+# Update 2026-10-21 12:40: 104,726 paintings LIVE (c263c1bd)
+Italian + Russian staging merged, palette method vivid-v2 applied to EVERY painting (150k pool lines), subject tags done, atlas incremental,
+data uploaded to R2, all gates green. Lessons: set OMP/OPENBLAS/VECLIB threads to 1 in pool workers (rebuild_all.sh does; was 75x slower);
+`tools/rebuild_all.sh --atlas --skip-gallery` resumes after a finished gallery.py. FOLLOW-UPS: paintmap smoke scenarios are flaky since the
+first load grew (thumbs.txt 8 MB + 11 atlas sheets ~15 MB): give them longer waits; consider lazier atlas tiers for phones; check painter
+statistics after the color re-measure (mean chroma shifted); more Commons-category passes for the ~150 icons; the Italian/Russian painters'
+pages need a visual spot check; rename leftovers in data text ("ColorHub").
+
+# State, 2026-10-21 (end of the long coordinator session; read this first)
+
+**Live:** https://chromatlas.app (GitHub Pages, custom domain, HTTPS). Heavy data is served from Cloudflare R2 at
+https://data.chromatlas.app (bucket chromatlas-data, edge-cached; js/loader.js DATA_BASE with a fallback to the repo copy;
+`python3 tools/r2_sync.py` uploads changed files; key in ~/.chromatlas-r2, never commit it). Cloudflare is reachable through
+the Cloudflare MCP (account 041c8f332ceba311c523162ef6f29cef, zone chromatlas.app).
+**Archive:** 74,525 paintings. Gallery order is APPEND-ONLY (ids.txt is the ledger); `tools/rebuild_all.sh --atlas` is the one
+command after any corpus change (incremental atlas from cached images: minutes). Staged art waits in data/corpus-staging/
+(not read by the app) until moved into data/corpus/ and rebuilt.
+**Shipped 2026-10-20/21:** painter page (sort direction, Palettes, 2-5 across + pinch, map on top), one-painter map (Arrange,
+filters, count chips), map chrome like the color map, smart map search (country/movement/years/painter combos), palette editor
+(Pick a color), palette page redesign (4 previews), palette-mode grid + Proportional|Equal, Similar button, pull-down back to
+the painting map, Ukiyo-e crash fix (progressive masonry), duplicate removal by museum record, HD Commons images for AIC,
+subject tags (data/gallery/subjects.json: authority + title + CLIP "im"; 90% tagged), palette answer key
+(data/palette-golden.json + tools/check_palettes.py).
+**In flight when this was written (the old session merges these, then stops):**
+- Lane H palette measuring fix: CODE MERGED (tools/corpus.py, tools/gallery.py METHOD="vivid-v2"; tools/check_palettes.py --live: Renoir pool 5/5, six 4/5; before/after sheet research/_raw/palette-before-after.png looked right). NOT YET APPLIED: every painting must be re-measured (~3-4 h at 8-10 workers): recompute the six-color palettes of all corpus rows (corpus.run_palettes + a patch step like crop_paintings.py apply) and the pools (gallery.py run_pools recomputes lines whose "m" differs), then rebuild_all.sh --atlas, review painter stats (they shift: mean C* +6.5), r2_sync, push. Do it AFTER the Italian/Russian data update.
+- Lane I DONE and pushed (d7f458c7): Chromatlas everywhere in the UI + subject features (painter page By subject, map search
+  "Monet boats", By subject arrangement, Subjects line). Left: data files still say "ColorHub" in some text (paintings.js,
+  stories.js, wiki-*.js...) -> a data pass; "Madonna" has no subject tag yet (add to the vocabulary); smoke "sets" has one
+  flaky long-press scenario.
+- Italian batch (85 painters, Wikidata + Commons categories) downloading to staging; Russians (78, Commons pass) already staged.
+  Next data update = move staging -> corpus, `tools/rebuild_all.sh --atlas`, gates, smoke, r2_sync, push.
+**Next after that (recommended order):** Commons-category completeness pass for the ~150 icons; Spanish/British/American/Nordic
+schools; non-Western painting (Met/CMA/AIC APIs); stop committing heavy data to git now that R2 serves it; video-landing pages
+for the colors and paintings the first videos feature (cutroom); Kept palettes open the new palette page.
+**Ask David for:** 10-20 more hand-made palettes via Pick a color (answer keys).
+
+# Coordinator plan, 2026-10-20 (Opus strategy pass; overrides older "next" lists below)
+
+**The goal beyond the goal:** launch **Chromatlas** (name decided 2026-10-19; LAUNCH.md's "Mauve" is superseded). The first launch
+moment is the VIDEOS, not the App Store: cutroom has vermilion (v28) and ultramarine (v6) nearly done, built on this app's
+palette data. Viewers will land on the web app, so its first impression, the colors and paintings the videos feature, and the
+name on screen matter more right now than more art or new features.
+
+**Order (each step lands, passes gates, and is pushed before the next):**
+1. Data lane (A): finish the atlas rebuild, commit the data ALONE (one revertible commit), push. Fixes the live Van Gogh page
+   (stale portraits.json showed a Bonnard and Vermeers).
+2. Data lane (A), BEFORE any more art: an append-only gallery order. Freeze today's order in a ledger; new paintings only append.
+   Why: inserting mid-order shifts every stored position (the stale-file bug class), forces a 30+ minute full atlas rebuild, and
+   rewrites ~100 MB of data per artist batch. The repo pack is already 599 MB (GitHub Pages: keep under ~1 GB) and the app plans
+   to bundle all data offline (App Store cellular download limit ~200 MB). With append-only, a batch touches only the tail.
+   Same step: a size budget gate (tools/check.js fails if bundled data grows past a set budget), a golden set (~50 famous works
+   that must appear on their painter's page, with that painter's portrait or famous work as the hero), stamps on derived files,
+   a pre-push hook running check.js + one smoke group, and fix the one known-failing smoke scenario (studio "Name any color") so
+   the gates can be trusted.
+2b. VIDEO-LANDING lane (before the videos post): rename the site to Chromatlas on screen, in titles and Open Graph previews;
+   make the color pages and painting pages the videos feature (ultramarine, vermilion, the Milkmaid, Titian, Cassatt, Manet,
+   Ingres...) correct and beautiful, and seed the golden set with exactly those; a clear "get the app / join the waitlist" line.
+   Ask cutroom's latest render for the exact list of colors and paintings shown.
+3. UI lanes B (painter page slice 1) and C (painter map Arrange/filters), already running in worktrees: merge B, then C, after
+   the coordinator reviews 440x956 screenshots; one fresh-context craft critique on the merged result. Then queue (not before):
+   portrait carousel (data side first: portraits.json holds a list), "Show frame" toggle, timeline scrubber, "his yellows" chips.
+4. Launch-readiness lane (replaces a generic roadmap triage): one page, what blocks Mauve v1 (Capacitor wrap + offline bundle,
+   native bits for guideline 4.2, onboarding paywall, RevenueCat, store assets), and which ROADMAP/NOTES-TRACKER items matter for
+   v1 vs later vs drop. Top 5 by payoff.
+5. More artists only after step 2, and only for painters the videos or the golden set need.
+
+**David-only, outward-facing:** before the first video posts, buy chromatlas.app (and .com if cheap) and claim YouTube @chromatlas
+(TikTok and Instagram are done). The Apple Developer account ($99/yr) can wait until the Capacitor build starts: App Store
+Connect cannot hold a name without an app record anyway.
+
+**How the coordinator works:** decides in-repo things itself, brings David pros/cons + a recommendation (never an open
+question), max 2 Sonnet agents at once, only lane A commits under data/, only the coordinator bumps ?v= and pushes.
+
 # Handoff, 2026-10-08 (end of the big build session)
 
 Read in this order: `CLAUDE.md` (rules), this file (state), `NOTES-TRACKER.md` (every open note from David, in order), `ROADMAP.md` (approved backlog and build order), `DESIGN.md`
