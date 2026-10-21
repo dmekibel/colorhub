@@ -6495,6 +6495,64 @@ scenario("paintmap", "filtering Photography to a narrow year range narrows the m
   await t.open("#/paintings/map?col=photography&arr=color&y0=1939&y1=1943", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec.col === "photography" && t.w.PM_CTRL.count > 0 && t.w.PM_CTRL.count < total, 20000, `the 1939-1943 filter to narrow the set below its unfiltered count (${total})`);
 });
+// David, 2026-10-21: "photograph page needs a like button, and photographer needs a show-all-photos-on-map button
+// at the top, same as painter" (+ design objects the same, and filter by object type).
+scenario("paintmap", "a photograph page has the heart in the top bar; it toggles, persists in S.favItem and shows in Kept", async t => {
+  await t.open("#/photography", { settle: 800 });
+  t.ev("loadPhotography(); loadPhotographers()");
+  await t.waitFor(() => t.ev("!!(PH && PH_STATS)"), 15000, "photography data");
+  const slug = t.ev(`PH_STATS.slice().sort((x, y) => y.n - x.n)[0].slug`);
+  await t.open("#/photographer/" + slug, { settle: 800 });
+  await t.waitFor("#phpGrid [data-pin]", 12000, "the photographer's photo grid");
+  await t.click("#phpGrid [data-pin]", { wait: 700 });
+  await t.waitFor(".art-top [data-fvi]", 8000, "the heart in the photograph page's top bar");
+  const id = t.$(".art-top [data-fvi]").dataset.fvi;
+  t.expect(/^photod-/.test(id), "heart id is not a photograph id: " + id);
+  t.expect(t.$(".art-top [data-fvi]").getAttribute("aria-pressed") === "false", "heart should start off");
+  await t.click(".art-top [data-fvi]", { wait: 400 });
+  t.expect(t.$(".art-top [data-fvi]").getAttribute("aria-pressed") === "true", "heart did not turn on");
+  t.expect(t.ev(`!!(S.favItem && S.favItem[${JSON.stringify(id)}] && S.favItem[${JSON.stringify(id)}].kind === "photography")`), "S.favItem has no photography record");
+  t.ev(`favShelf()`); await t.sleep(600);
+  await t.waitFor(`[data-fvi-open="${id}"]`, 8000, "the photograph in Kept");
+});
+scenario("paintmap", "a photographer page's Photo map button opens the photography map scoped to them, count = their photographs", async t => {
+  await t.open("#/photography", { settle: 800 });
+  t.ev("loadPhotography(); loadPhotographers()");
+  await t.waitFor(() => t.ev("!!(PH && PH_STATS)"), 15000, "photography data");
+  const slug = t.ev(`PH_STATS.slice().sort((x, y) => y.n - x.n)[0].slug`);
+  await t.open("#/photographer/" + slug, { settle: 800 });
+  await t.waitFor(".aw-pmap-top", 12000, "the Photo map button at the top");
+  const want = t.ev(`PH.filter(n => n.photographerSlug === ${JSON.stringify(slug)}).length`);
+  await t.click(".aw-pmap-top", { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec && t.w.PM_CTRL.spec.col === "photography" && t.w.PM_CTRL.count > 0, 20000, "the photography map");
+  t.expect(t.w.PM_CTRL.count === want, `map count ${t.w.PM_CTRL.count} is not the photographer's ${want}`);
+  t.expect(/\bp=/.test(t.w.location.hash), "address does not carry the photographer: " + t.w.location.hash);
+});
+scenario("paintmap", "a design object page has the heart (kind design, shown in Kept); its type filters the design map via &type=", async t => {
+  await t.open("#/design", { settle: 800 });
+  await t.waitFor(() => t.ev("!!(DO && DO.length > 1000)"), 20000, "design objects to load");
+  const id = t.ev(`DO.find(n => n.objType === "Furniture").id`);
+  t.ev(`doOpenObject(${JSON.stringify(id)})`);
+  await t.waitFor(".art-top [data-fvi]", 8000, "the heart in the design object's top bar");
+  await t.click(".art-top [data-fvi]", { wait: 400 });
+  t.expect(t.ev(`S.favItem[${JSON.stringify(id)}] && S.favItem[${JSON.stringify(id)}].kind === "design"`), "no design record in S.favItem");
+  const want = t.ev(`DO.filter(n => n.objType === "Furniture").length`);
+  await t.open("#/paintings/map?col=design&arr=color&type=furniture", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec && t.w.PM_CTRL.spec.col === "design" && t.w.PM_CTRL.count > 0, 20000, "the design map");
+  t.expect(t.w.PM_CTRL.count === want, `type=furniture gave ${t.w.PM_CTRL.count}, expected ${want}`);
+  t.expect(/Furniture/.test(t.text("[data-pmchipbar]")), "no removable Furniture chip: " + t.text("[data-pmchipbar]"));
+});
+scenario("paintmap", "a maker page's Design map button opens the design map scoped to that maker", async t => {
+  await t.open("#/design", { settle: 800 });
+  await t.waitFor(() => t.ev("!!(DO && DO_MAKERS && DO_MAKERS.length)"), 20000, "design makers");
+  const slug = t.ev(`doSlug(DO_MAKERS.slice().sort((a, b) => b.n - a.n)[0].a)`);
+  t.ev(`doMakerPage(${JSON.stringify(slug)})`);
+  await t.waitFor(".aw-pmap-top", 8000, "the Design map button");
+  const want = t.ev(`DO.filter(n => n.makerSlug === ${JSON.stringify(slug)}).length`);
+  await t.click(".aw-pmap-top", { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.spec && t.w.PM_CTRL.spec.col === "design" && t.w.PM_CTRL.count > 0, 20000, "the design map");
+  t.expect(t.w.PM_CTRL.count === want, `maker map count ${t.w.PM_CTRL.count} is not ${want}`);
+});
 scenario("favs", "a painting's heart (now in the top bar) and a double-tap on the picture both keep it; the shelf sorts favorites into kinds with counts, remembered", async t => {
   await t.open("#/gallery/8136", { settle: 800 });
   await t.waitFor("[data-fva]", 14000, "the heart under the painting");

@@ -764,7 +764,9 @@ function connSection(n) {
   }).join("")}</section>`;
 }
 const sourcesHTML = list => list && list.length ? `<section class="srcs"><h3>Sources</h3><ul>${list.map(s => `<li>${/^https?:\/\//.test(s) ? `<a href="${esc(s)}" target="_blank" rel="noopener">${esc(s.replace(/^https?:\/\/(www\.)?/, "").slice(0, 60))}</a>` : esc(s)}</li>`).join("")}</ul></section>` : "";
-const artTop = n => `<header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="glass-pill" data-web>${ICON.explore}<span>More like this</span></button></header>`;
+// photographs and design objects keep with the same heart as a painting (js/favs.js fvItem*)
+const ptKeepKind = n => n && n.typeLabel === "Photograph" ? "photography" : n && n.typeLabel === "Design object" ? "design" : null;
+const artTop = n => `<header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="glass-pill" data-web>${ICON.explore}<span>More like this</span></button>${n && n.id && typeof fvItemHeart === "function" && ptKeepKind(n) ? fvItemHeart(ptKeepKind(n), n.id, true) : ""}</header>`;
 function wireArticle(el, n) {
   el.querySelector("[data-back]").onclick = xBack;
   el.querySelector("[data-web]").onclick = () => closeup(n);
@@ -926,6 +928,9 @@ function paintingPage(n) {
     ${n.commons ? `<section class="srcs"><h3>Image</h3><ul><li><a href="${esc(n.commons)}" target="_blank" rel="noopener">${esc(n.imgSrcLabel || "Wikimedia Commons")}</a> · ${esc(n.license || "Public domain")}</li></ul></section>` : ""}
   `, "article");
   wireArticle(el, n);
+  // a photograph or design object keeps with the same heart as a painting, in the same top-bar spot (js/favs.js fvItem*: S.favItem,
+  // keyed by the photograph's id, shown in Kept > Archives); this reuses the grid's delegated handler
+  if (ptKeepKind(n) && typeof fvItemWireGrid === "function") fvItemWireGrid(el.querySelector(".art-top"), () => n);
   // Phase 2 (js/photography.js): a photograph's byline opens its photographer's page, same pattern as a painter link
   const phLink = el.querySelector("[data-photographer]"); if (phLink) phLink.onclick = e => { e.stopPropagation(); if (typeof photographerPage === "function") photographerPage(phLink.dataset.photographer); };
   el.querySelectorAll("[data-ptgo]").forEach(b => b.onclick = () => { const t = ptSimilarPool(n).find(x => x.id === b.dataset.ptgo); if (t) paintingPage(t); });

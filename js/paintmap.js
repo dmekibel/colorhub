@@ -192,7 +192,7 @@ const pmHex = (i, F) => {
 //   colorMode  "any" (default: a painting counts if it's close to ANY picked hex) or "all" (close to EVERY one)
 //   hueBand    one of XB_FAMS's 9 family indices (0=Reds..8=Greys), matched against a painting's DOMINANT swatch
 //   l0/l1      a mean-lightness range (0-100, dark<->light), independent of any hex pick
-const pmFilterFresh = () => ({ ...xbFresh(), coSet: [], region: null, painterSet: [], mvSet: [], musSet: [], subjSet: [], colorMode: "any", hueBand: null, l0: null, l1: null });
+const pmFilterFresh = () => ({ ...xbFresh(), coSet: [], region: null, painterSet: [], mvSet: [], musSet: [], tySet: [], subjSet: [], colorMode: "any", hueBand: null, l0: null, l1: null });
 // Western Europe / Northern Europe / Italy & Spain are deliberately tighter than "Europe" (which is every
 // European country in the dataset) -- each is its own bulk-select, not a strict partition of the broad one.
 const PM_REGIONS = [
@@ -234,6 +234,7 @@ function pmRun(s, F) {
   const painterSet = f.painterSet && f.painterSet.length ? new Set(f.painterSet) : (f.painter ? new Set([f.painter]) : null);
   const mvSet = f.mvSet && f.mvSet.length ? new Set(f.mvSet) : (f.mv ? new Set([f.mv]) : null);
   const musSet = f.musSet && f.musSet.length ? new Set(f.musSet) : (f.mus >= 0 ? new Set([f.mus]) : null);
+  const tySet = F.ty && f.tySet && f.tySet.length ? new Set(f.tySet) : null;   // object type (Design objects only, F.ty)
   const subjOn = !!SUBJ && (F.col || "paintings") === "paintings" && N <= SUBJ.N;
   const subjFlag = subjOn && f.subjSet && f.subjSet.length ? subjFlags(f.subjSet) : null;
   const hasHex = f.hexes && f.hexes.length, mode = f.colorMode || "any";
@@ -242,7 +243,7 @@ function pmRun(s, F) {
   const when = f.y0 != null || f.y1 != null, y0 = f.y0 == null ? -1e5 : f.y0, y1 = f.y1 == null ? 1e5 : f.y1;
   const hasL = f.l0 != null || f.l1 != null, l0 = f.l0 == null ? -1e5 : f.l0, l1 = f.l1 == null ? 1e5 : f.l1;
   const counts = { when: new Int32Array(XB_NDEC + 1), painter: new Int32Array(F.meta.artists.length + 1), mv: new Int32Array(F.meta.movements.length + 1), co: new Int32Array(F.meta.countries.length + 1),
-    mus: new Int32Array(G.src.length), hueBand: new Int32Array(9), color: 0, lightness: 0, subj: subjOn ? new Int32Array(SUBJ.tags.length) : null };
+    mus: new Int32Array(G.src.length), ty: new Int32Array(((F.meta.types || []).length) + 1), hueBand: new Int32Array(9), color: 0, lightness: 0, subj: subjOn ? new Int32Array(SUBJ.tags.length) : null };
   const out = new Int32Array(N); let n = 0;
   for (let i = 0; i < N; i++) {
     let fail = 0;
@@ -260,6 +261,7 @@ function pmRun(s, F) {
     if (f.hueBand != null && pmHueBandOf(i, F) !== f.hueBand) fail |= 64;
     if (hasL) { const L = G.mean[i * 3]; if (L < l0 || L > l1) fail |= 128; }
     if (subjFlag && !subjHas(i, subjFlag)) fail |= 256;
+    if (tySet && !tySet.has(F.ty[i])) fail |= 512;
     if (fail === 0) out[n++] = i;
     else if (fail & (fail - 1)) continue;
     if (!(fail & ~1)) counts.color++;
@@ -270,6 +272,7 @@ function pmRun(s, F) {
     if (!(fail & ~32)) counts.mus[G.mus[i]]++;
     if (!(fail & ~64)) counts.hueBand[pmHueBandOf(i, F)]++;
     if (!(fail & ~128)) counts.lightness++;
+    if (F.ty && !(fail & ~512)) counts.ty[F.ty[i]]++;
     if (subjOn && !(fail & ~256)) for (let k = SUBJ.off[i], e = SUBJ.off[i + 1]; k < e; k++) counts.subj[SUBJ.tg[k]]++;
   }
   return { list: out.slice(0, n), counts };
@@ -339,6 +342,7 @@ function pmParse(q, F) {
   f.coSet = ixSet(F.meta.countries, p.get("co")); f.mvSet = ixSet(F.meta.movements, p.get("mv"));
   const rg = p.get("region"); if (rg && PM_REGIONS.some(r => r[0] === rg)) { f.region = rg; pmRegionCountries(rg, F).forEach(v => { if (!f.coSet.includes(v)) f.coSet.push(v); }); }
   if (p.get("mus")) f.musSet = p.get("mus").split(",").map(k => F.G.src.findIndex(x => x.k === k)).filter(v => v >= 0);
+  if (p.get("type") && F.meta.types) f.tySet = p.get("type").split(",").map(v => F.meta.types.findIndex(t => routeSlug(t) === v) + 1).filter(v => v > 0);
   if (p.get("subj") && SUBJ) f.subjSet = p.get("subj").split(",").map(k => SUBJ.tags.findIndex(n => routeSlug(n) === k)).filter(v => v >= 0);
   const sd = num("seed"); if (sd != null && sd >= 0 && sd < F.N) s.seed = sd;
   if (p.get("walk") === "1" && s.seed >= 0) s.walkStart = 1;   // the painting page's "Walk from here": take the first step on arrival
@@ -361,6 +365,7 @@ function pmQS(s, F) {
   if (extraCo.length && F) out.push(["co", extraCo.map(v => F.meta.countries[v - 1]).join(",")]);
   if (f.mvSet && f.mvSet.length && F) out.push(["mv", f.mvSet.map(v => F.meta.movements[v - 1]).join(",")]);
   if (f.musSet && f.musSet.length && F) out.push(["mus", f.musSet.map(v => F.G.src[v].k).join(",")]);
+  if (f.tySet && f.tySet.length && F && F.meta.types) out.push(["type", f.tySet.map(v => routeSlug(F.meta.types[v - 1])).join(",")]);
   if (f.subjSet && f.subjSet.length && SUBJ) out.push(["subj", f.subjSet.map(v => routeSlug(SUBJ.tags[v])).join(",")]);
   if (PM_NEEDS_SEED.has(s.arr) && s.seed >= 0) out.push(["seed", s.seed]);
   if (s.fav) out.push(["fav", 1]);
@@ -422,6 +427,7 @@ function pmActiveChips(s, F) {
   if (f.painterSet && f.painterSet.length) c.push({ dim: "painter", text: f.painterSet.length === 1 ? xbArtistName(F, f.painterSet[0]) : `${f.painterSet.length} painters` });
   if (f.mvSet && f.mvSet.length) c.push({ dim: "mv", text: f.mvSet.length === 1 ? F.meta.movements[f.mvSet[0] - 1] : `${f.mvSet.length} movements` });
   if (f.musSet && f.musSet.length) c.push({ dim: "mus", text: f.musSet.length === 1 ? F.G.src[f.musSet[0]].short : `${f.musSet.length} museums` });
+  if (f.tySet && f.tySet.length && F.meta.types) c.push({ dim: "ty", text: f.tySet.length === 1 ? F.meta.types[f.tySet[0] - 1] : `${f.tySet.length} types` });
   if (f.subjSet && f.subjSet.length && SUBJ) c.push({ dim: "subj", text: subjSetLabel(f.subjSet) });
   return c;
 }
@@ -460,6 +466,7 @@ function pmChipClear(f, dim) {
   else if (dim === "painter") { f.painterSet = []; f.painter = 0; }
   else if (dim === "mv") { f.mvSet = []; f.mv = 0; }
   else if (dim === "mus") { f.musSet = []; f.mus = -1; }
+  else if (dim === "ty") f.tySet = [];
   else if (dim === "subj") f.subjSet = [];
 }
 
@@ -1101,7 +1108,8 @@ function pmAdapterBuild(col, nodes, cfg) {
   const fam = new Uint8Array(N * 6), dom = new Uint8Array(N);
   const artist = new Uint16Array(N), country = new Uint16Array(N), mv = new Uint16Array(N);
   const artistIx = new Map(), countryIx = new Map(), mvIx = new Map(), srcIx = new Map();
-  const artists = [], countries = [], movements = [], src = [];
+  const artists = [], countries = [], movements = [], src = [], types = [];
+  const tyIx = new Map(), ty = new Uint16Array(N);
   const slugIx = new Map(), byId = new Map();
   for (let i = 0; i < N; i++) {
     const n = nodes[i]; byId.set(n.id, i);
@@ -1132,17 +1140,20 @@ function pmAdapterBuild(col, nodes, cfg) {
     if (plName) { let ix = countryIx.get(plName); if (ix == null) { countries.push(plName); ix = countries.length; countryIx.set(plName, ix); } country[i] = ix; }
     const catName = cfg.catName(n);
     if (catName) { let ix = mvIx.get(catName); if (ix == null) { movements.push(catName); ix = movements.length; mvIx.set(catName, ix); } mv[i] = ix; }
+    const tyName = cfg.typeName ? cfg.typeName(n) : null;
+    if (tyName) { let ix = tyIx.get(tyName); if (ix == null) { types.push(tyName); ix = types.length; tyIx.set(tyName, ix); } ty[i] = ix; }
     const srcKey = cfg.srcKey(n), srcLabel = cfg.srcLabel(n);
     if (srcKey) { let ix = srcIx.get(srcKey); if (ix == null) { src.push({ k: srcKey, short: srcLabel }); ix = src.length - 1; srcIx.set(srcKey, ix); } mus[i] = ix; }
   }
   if (!src.length) src.push({ k: col, short: "—" });
   const G = { n: N, mean, lab: labArr, sh, ch, C, year, ar, src, mus, shard: N };
   const meta = { artists, countries, movements };
-  return { G, meta, N, artist, country, mv, dec, fam, dom, slugIx, col, nodes, ixOf: id => { const v = byId.get(id); return v == null ? -1 : v; } };
+  if (types.length) meta.types = types;
+  return { G, meta, N, artist, country, mv, dec, ty: types.length ? ty : null, fam, dom, slugIx, col, nodes, ixOf: id => { const v = byId.get(id); return v == null ? -1 : v; } };
 }
 const PM_COL_CFG = {
   design: {
-    makerName: n => n.artist || null, makerSlug: n => n.makerSlug || null,
+    makerName: n => n.artist || null, makerSlug: n => n.makerSlug || null, typeName: n => n.objType || null,
     placeName: n => n.place || null, catName: n => n.catLabel || n.cat || null,
     srcKey: n => n.src || "design", srcLabel: n => (typeof DO_SRC_LABEL !== "undefined" && DO_SRC_LABEL[n.src]) || n.imgSrcLabel || "Museum",
   },
@@ -2119,7 +2130,7 @@ function pmMount(el, s, F) {
     const nf = solo ? chips.filter(c => c.dim !== "painter").length : 0;
     chipbar.classList.toggle("pmx-chipbar-wrap", solo);
     chipbar.innerHTML = chips.map((c, k) => solo && c.dim === "painter"
-      ? `<button class="pmx-xchip pmx-xscope" data-pmxclear="${k}" aria-label="${esc(c.text)}: show every painter">${esc(c.text)}<i>${ICON.x}</i></button><button class="pmx-xchip pmx-xcount" data-pmxfilter aria-label="Filter: ${lay.n.toLocaleString()} of ${total.toLocaleString()} paintings">${lay.n === total ? total.toLocaleString() : lay.n.toLocaleString() + " of " + total.toLocaleString()} ${total === 1 ? "painting" : "paintings"}${PM_ICON.filter}</button>`
+      ? `<button class="pmx-xchip pmx-xscope" data-pmxclear="${k}" aria-label="${esc(c.text)}: show every ${esc(pmColLabel(F, "painter").toLowerCase())}">${esc(c.text)}<i>${ICON.x}</i></button><button class="pmx-xchip pmx-xcount" data-pmxfilter aria-label="Filter: ${lay.n.toLocaleString()} of ${total.toLocaleString()} ${esc(pmColLabel(F, "nounP"))}">${lay.n === total ? total.toLocaleString() : lay.n.toLocaleString() + " of " + total.toLocaleString()} ${esc(pmColLabel(F, total === 1 ? "noun" : "nounP"))}${PM_ICON.filter}</button>`
       : `<button class="pmx-xchip" data-pmxclear="${k}">${esc(c.text)}<i>${ICON.x}</i></button>`).join("")
       + (nf > 1 ? `<button class="pmx-xchip pmx-xall" data-pmxall>Clear all</button>` : "");
     chipbar.querySelectorAll("[data-pmxclear]").forEach(b => b.onclick = () => {
@@ -2238,7 +2249,7 @@ function pmMount(el, s, F) {
     let rows = [];
     // the live count of one suggestion: the map's own filter pass, with this suggestion's pieces laid over the filters already on
     const countOf = ps => {
-      const key = JSON.stringify([ps.map(p => [p.kind, p.val, p.vals, p.y0, p.y1]), s.f.y0, s.f.y1, s.f.coSet, s.f.mvSet, s.f.painterSet, s.f.hexes, s.f.hueBand, s.f.l0, s.f.l1, s.f.musSet, s.f.subjSet, !!SUBJ]);
+      const key = JSON.stringify([ps.map(p => [p.kind, p.val, p.vals, p.y0, p.y1]), s.f.y0, s.f.y1, s.f.coSet, s.f.mvSet, s.f.painterSet, s.f.hexes, s.f.hueBand, s.f.l0, s.f.l1, s.f.musSet, s.f.tySet, s.f.subjSet, !!SUBJ]);
       if (cache.has(key)) return cache.get(key);
       const f = { ...s.f }; ps.forEach(p => pmqApply(f, p));
       const n = pmRun({ f }, F).list.length; cache.set(key, n); return n;
@@ -2439,6 +2450,7 @@ function pmMount(el, s, F) {
       const coSelSet = new Set(f.coSet || []), mvSelSet = new Set(f.mvSet || []), musSelSet = new Set(f.musSet || []), paSelSet = new Set(f.painterSet || []);
       const cos = topMulti(F.meta.countries, C.co, coSelSet), mvs = topMulti(F.meta.movements, C.mv, mvSelSet);
       const pas = topMulti(F.meta.artists.map(a => a[0]), C.painter, paSelSet);
+      const tySelSet = new Set(f.tySet || []), tys = F.meta.types ? topMulti(F.meta.types, C.ty, tySelSet).sort((a, b) => (a.name === "Other") - (b.name === "Other") || b.n - a.n) : [];
       const musAll = F.G.src.map((m, k) => ({ name: m.short, v: k, n: C.mus[k] })).filter(x => x.n || musSelSet.has(x.v));
       const coList = coq ? cos.filter(x => x.name.toLowerCase().includes(coq.toLowerCase())).slice(0, 30) : cos.slice(0, fopen.co ? 44 : 10);
       const pList = fq ? pas.filter(x => x.name.toLowerCase().includes(fq.toLowerCase())).slice(0, 24) : pas.slice(0, fopen.painter ? 60 : 10);
@@ -2515,6 +2527,7 @@ function pmMount(el, s, F) {
           <p class="pmx-lab2">${isPaintings ? "Countries" : coLab}</p>
           <label class="search pmx-find"><span>${ICON.search}</span><input data-pmcoq type="search" placeholder="Find a ${esc(coLab.toLowerCase())}" value="${esc(coq)}" autocomplete="off"></label>
           <div class="pmx-chips">${coList.map(x => chip("data-pmco", x.v, x.name, x.n, coSelSet.has(x.v))).join("")}${!coq && !fopen.co && cos.length > 10 ? `<button class="pmx-more" data-pmmore="co">All ${cos.length}</button>` : ""}</div></div>
+        ${tys.length ? `<div class="pmx-row"><span class="pmx-lab">Object type</span><div class="pmx-chips">${tys.map(x => chip("data-pmty", x.v, x.name, x.n, tySelSet.has(x.v))).join("")}</div></div>` : ""}
         ${mvs.length ? `<div class="pmx-row"><span class="pmx-lab">${esc(mvLab)}</span><div class="pmx-chips">${mvs.map(x => chip("data-pmmv", x.v, x.name, x.n, mvSelSet.has(x.v))).join("")}</div></div>` : ""}
         <div class="pmx-row"><span class="pmx-lab">${esc(musLab)}</span><div class="pmx-chips">${musAll.map(x => chip("data-pmmus", x.v, x.name, x.n, musSelSet.has(x.v))).join("")}</div></div>
         <div class="pmx-row"><span class="pmx-lab">${esc(painterLab)}</span>
@@ -2545,6 +2558,7 @@ function pmMount(el, s, F) {
       else if (d.pmregion) pmRegionToggle(f, d.pmregion, F);
       else if (d.pmco) { const v = +d.pmco, set = new Set(f.coSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.coSet = [...set]; f.region = null; }
       else if (d.pmmv) { const v = +d.pmmv, set = new Set(f.mvSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.mvSet = [...set]; }
+      else if (d.pmty) { const v = +d.pmty, set = new Set(f.tySet || []); if (set.has(v)) set.delete(v); else set.add(v); f.tySet = [...set]; }
       else if (d.pmmus) { const v = +d.pmmus, set = new Set(f.musSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.musSet = [...set]; }
       else if (d.pmsubj) { const v = +d.pmsubj, set = new Set(f.subjSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.subjSet = [...set]; }
       else if (d.pmp) { const v = +d.pmp, set = new Set(f.painterSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.painterSet = [...set]; }
