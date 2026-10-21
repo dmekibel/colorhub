@@ -530,7 +530,7 @@ const fvItemThumb = r => `<span class="fva-im" style="--c:${esc(r.h || "#3A3630"
 // a tile's corner heart (grids: js/designobjects.js doGrid/doCategory, js/photography.js photographyGrid) --
 // the markup matches fvArtHeart's own [data-fva] button but with the id/kind baked into the dataset, since a
 // grid tile has no single `d` object sitting in scope the way a detail page's fvArtWire() does.
-const fvItemHeart = (kind, id) => { const on = fvItemHas(id); return `<button class="fva-heart fva-heart-tile${on ? " on" : ""}" data-fvi="${esc(id)}" data-fvi-kind="${esc(kind)}" aria-pressed="${on}" aria-label="${on ? "Remove from Kept" : "Keep this"}">${on ? FVA_HEART_ON : FVA_HEART}</button>`; };
+const fvItemHeart = (kind, id, bar) => { const on = fvItemHas(id); return `<button class="fva-heart${bar ? "" : " fva-heart-tile"}${on ? " on" : ""}" data-fvi="${esc(id)}" data-fvi-kind="${esc(kind)}" aria-pressed="${on}" aria-label="${on ? "Remove from Kept" : "Keep this"}">${on ? FVA_HEART_ON : FVA_HEART}</button>`; };
 // one delegated handler covers every grid's heart buttons (and a detail page's, if it uses the same markup):
 // toggles the store, repaints just that button, and hands the caller its own lookup (idToNode) to build the
 // record from -- the grid already has its nodes in memory, no second fetch to find the one that got tapped.

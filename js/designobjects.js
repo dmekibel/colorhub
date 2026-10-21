@@ -95,9 +95,35 @@ function doFactsFor(o, catLabel, museum) {
   if (o.a) f.push({ label: "Maker", value: o.a });
   if (o.y) f.push({ label: "Date", value: String(o.y) });
   f.push({ label: "Category", value: catLabel });
+  f.push({ label: "Type", value: doTypeOf(o) });
   if (o.co) f.push({ label: "Place", value: o.co });
   if (museum) f.push({ label: "Collection", value: museum });
   return f;
+}
+// Object type (David, 2026-10-21: "filter by design object type"): the records carry a raw museum "ty" string
+// (261 distinct values across the museums: "affiches", "glas", "textiel", "weaving - coverlet"...). This folds them
+// into ~20 plain types, first matching rule wins; anything unmatched falls back to its category, else "Other".
+// Pure client-side reading of the existing field; no data file changes.
+const DO_TYPE_RULES = [
+  ["Postage stamps", /postage|stamp|numismat/], ["Book & magazine covers", /magazine|book cover|album|sewing.*book|instruction book|^book/],
+  ["Posters & advertisements", /poster|affiche|advertis|trade card|membership/], ["Greeting cards & ephemera", /valentine|greeting|playing card|ephemera|souvenir|print, trade|theater|fashion plate|maps?$/],
+  ["Wallpaper", /wallcover|wallpaper|mural|decorated paper|papier|^paper$|sierpapier/], ["Jewelry", /jewel|necklace|pendant|cameo|chatelaine/],
+  ["Lighting", /lighting|candle|lamp|sconce/], ["Furniture", /furniture|chair|seating|^table$|sideboard|cabinet|chest|^stand$|^screen|mirror|fire screen/],
+  ["Weapons & arms", /firearm|weapon|^arms|helmet|sword/], ["Glass", /^glas|glass|paperweight|sulphide/],
+  ["Ceramics & tiles", /ceram|porcel|porselein|earthenware|stoneware|^tiles?$|teapot|teaware|tea service|tableware$|^vase|pitcher|jar|bowl|^plate|dish|compote|ewer/],
+  ["Metalwork & silver", /metal|silver|pewter|cutlery|spoon|enamel|bronze|copper|iron|gold|andiron|fireplace|ornament/],
+  ["Costume & fashion", /costume|dress|kimono|robe|coat|tunic|obi|haori|ensemble|shawl|collar|skirt|suit|vest|waistcoat|tie$|sash|shirt|^fan|pleated fan|wrap|gown|bathing|riding|knickerbocker|negl|accessor|bag|bingata/],
+  ["Textiles", /textil|textiel|weav|embroid|lace|needlework|sampler|swatch|quilt|coverlet|blanket|trimming|knotted|^length|basketry|carpet|tapestry|sample book|carrier/],
+  ["Containers & boxes", /container|box|snuff|vinaigrette|vessel|bottle|drinking|water dropper|fishbowl|holder/],
+  ["Drawings & prints", /draw|print|sketch|architect|elevation|plan$|design|graphite|gouache|^ink|interior|landscape|seascape|nature|mythology|kunst/],
+  ["Toys, figures & sculpture", /figure|sculpt|toy|animal|bust|statuette|miniature|stone|carving/],
+  ["Tools & instruments", /tool|appliance|timepiece|clock|musical|hardware|writing|transport|model|industrial|thorne/],
+];
+const DO_CAT_TYPE = { poster: "Posters & advertisements", graphic: "Drawings & prints", textile: "Textiles", wallpaper: "Wallpaper", ceramics: "Ceramics & tiles", glass: "Glass", furniture: "Furniture", product: "Tools & instruments", costume: "Costume & fashion", stamps: "Postage stamps" };
+function doTypeOf(o) {
+  const t = String(o.ty || "").toLowerCase().trim();
+  for (const [name, re] of DO_TYPE_RULES) if (re.test(t)) return name;
+  return DO_CAT_TYPE[o.cat] || "Other";
 }
 function doNode(o) {
   const palette = (o.p || []).map(([h, share, ci]) => ({ h, share, name: doColorName(ci) || h }));
@@ -114,7 +140,7 @@ function doNode(o) {
     facts: doFactsFor(o, catLabel, museum),
     note: doFindingFor(o, catLabel, decade),
     commons: doSourceUrl(o), license: DO_LICENSE[o.src] || "Public domain", imgSrcLabel: museum,
-    cat: o.cat, catLabel, src: o.src,
+    cat: o.cat, catLabel, src: o.src, objType: doTypeOf(o), rawType: o.ty || null,
   };
 }
 function loadDesignObjects() {
@@ -242,6 +268,7 @@ function doMakerPage(slug, opts = {}) {
     ${worldTop(`Maker${(m.cat || []).length ? " · " + m.cat.map(c => DO_CAT_LABEL[c] || c).join(", ") : ""}`)}
     <h1 class="p-title">${esc(m.a)}</h1>
     <p class="p-dek">${m.n.toLocaleString()} object${m.n === 1 ? "" : "s"} in the archive${m.y ? `, ${m.y[0]}–${m.y[1]}` : ""}.</p>
+    ${objs.length >= 2 ? `<button class="aw-pmap-top" data-pmap="col=design&arr=color&p=${esc(slug)}">${typeof GL_ICON_MAP !== "undefined" ? GL_ICON_MAP : ""}<span>Design map</span></button>` : ""}
     ${pal.length ? `<div class="palette">${pal.map(p => `<button class="pal" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.pct, 1.5)}"><span>${p.pct}%</span></button>`).join("")}</div>
     <div class="pal-names">${pal.map(p => `<button class="pal-name" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(p.name)}</b></button>`).join("")}</div>` : ""}
     ${sig.length ? `<div class="sec-head"><b>Signature colors</b><span>used more than other makers here</span></div>
@@ -350,7 +377,7 @@ function doCategory(cat, push = true) {
 // category/decade/maker, sort by date/color/maker, a Keep heart on every tile, and "See on the map" to lay
 // this exact filtered set out on js/paintmap.js's own map (the "Collection" picker there defaults to Design
 // objects when opened this way, via spec.col).
-let DO_BR_FILTER = { cat: "", decade: null, maker: "" }, DO_BR_SORT = "default";
+let DO_BR_FILTER = { cat: "", decade: null, maker: "", type: "" }, DO_BR_SORT = "default";
 const DO_BR_SORTS = [["default", "Default"], ["date", "Oldest first"], ["color", "By color"], ["maker", "By maker"]];
 function doBrFacets(rows) {
   const by = (key, cap) => { const m = new Map(); rows.forEach(r => { const v = r[key]; if (v) m.set(v, (m.get(v) || 0) + 1); }); return [...m.entries()].sort((a, b) => b[1] - a[1]).slice(0, cap).map(([v]) => v); };
@@ -359,10 +386,11 @@ function doBrFacets(rows) {
     cats: DO_CATS.filter(c => rows.some(r => r.cat === c)),
     decades: [...decadeCounts.keys()].sort((a, b) => a - b),
     makers: by("artist", 24).filter(Boolean),
+    types: (() => { const m = new Map(); rows.forEach(r => m.set(r.objType, (m.get(r.objType) || 0) + 1)); return [...m.entries()].sort((a, b) => (a[0] === "Other") - (b[0] === "Other") || b[1] - a[1]); })(),
   };
 }
 function doBrFiltered() {
-  return DO.filter(n => (!DO_BR_FILTER.cat || n.cat === DO_BR_FILTER.cat) && (DO_BR_FILTER.decade == null || n.decade === DO_BR_FILTER.decade) && (!DO_BR_FILTER.maker || n.artist === DO_BR_FILTER.maker));
+  return DO.filter(n => (!DO_BR_FILTER.cat || n.cat === DO_BR_FILTER.cat) && (!DO_BR_FILTER.type || n.objType === DO_BR_FILTER.type) && (DO_BR_FILTER.decade == null || n.decade === DO_BR_FILTER.decade) && (!DO_BR_FILTER.maker || n.artist === DO_BR_FILTER.maker));
 }
 // By color sorts on the dominant swatch's hue (pmHueKey, js/paintmap.js -- the exact same red-to-purple sweep
 // the map's own "By color" arrangement uses, so the grid and the map read the same way).
@@ -378,9 +406,10 @@ function doBrSorted(rows) {
   }
   return rows;
 }
+const types0 = () => { const t = []; (DO || []).forEach(n => { if (n.objType && !t.includes(n.objType)) t.push(n.objType); }); return t; };   // same first-seen order as js/paintmap.js's adapter builds meta.types in
 function doBrowseAll(push = true) {
   if (!DO) { doWhen(() => doBrowseAll(push)); return; }
-  DO_BR_FILTER = { cat: "", decade: null, maker: "" }; DO_BR_SORT = "default";
+  DO_BR_FILTER = { cat: "", decade: null, maker: "", type: "" }; DO_BR_SORT = "default";
   const el = show(`
     ${worldTop("Design objects")}
     <h1 class="p-title">Browse all</h1>
@@ -394,7 +423,7 @@ function doBrowseAll(push = true) {
   if (push && typeof XSTACK !== "undefined") XSTACK.push("r:design/browse");
   worldBackWire(el, {}, () => doGrid(false));
   const draw = () => {
-    const all = doBrFiltered(), rows = doBrSorted(all), { cats, decades, makers } = doBrFacets(DO);
+    const all = doBrFiltered(), rows = doBrSorted(all), { cats, decades, makers, types } = doBrFacets(DO);
     const chip = (label, on, attr) => `<button class="art-bubble pulp-chip${on ? " on" : ""}" ${attr}>${esc(label)}</button>`;
     const sortRow = el.querySelector("#doBrSort");
     if (sortRow) sortRow.innerHTML = DO_BR_SORTS.map(([k, t]) => chip(t, DO_BR_SORT === k, `data-dbs="${k}"`)).join("");
@@ -402,6 +431,9 @@ function doBrowseAll(push = true) {
     if (chips) chips.innerHTML = [
       chip("All categories", !DO_BR_FILTER.cat, 'data-dbf="cat" data-dbv=""'),
       ...cats.map(c => chip(DO_CAT_LABEL[c] || c, DO_BR_FILTER.cat === c, `data-dbf="cat" data-dbv="${esc(c)}"`)),
+    ].join("") + `<span style="width:10px"></span>` + [
+      chip("All types", !DO_BR_FILTER.type, 'data-dbf="type" data-dbv=""'),
+      ...types.map(([t, k]) => chip(`${t} ${k.toLocaleString()}`, DO_BR_FILTER.type === t, `data-dbf="type" data-dbv="${esc(t)}"`)),
     ].join("") + `<span style="width:10px"></span>` + [
       chip("All decades", DO_BR_FILTER.decade == null, 'data-dbf="decade" data-dbv=""'),
       ...decades.map(d => chip(d + "s", DO_BR_FILTER.decade === d, `data-dbf="decade" data-dbv="${d}"`)),
@@ -420,7 +452,7 @@ function doBrowseAll(push = true) {
     // this grid's own filters (category/decade/maker) don't carry over 1:1 to the map's own filter sheet state
     // today -- opening fresh and pointing David at the "Collection" switch (already set to Design objects) is
     // more honest than silently dropping half the filter if the shapes don't line up.
-    pmOpen({ col: "design" }, { fresh: true });
+    pmOpen({ col: "design", arr: "color", f: { tySet: DO_BR_FILTER.type ? [Math.max(0, types0().indexOf(DO_BR_FILTER.type)) + 1] : [] } }, { fresh: true });
   };
   el.querySelector("#doBrSort").onclick = e => { const b = e.target.closest("[data-dbs]"); if (!b) return; DO_BR_SORT = b.dataset.dbs; buzz(5); draw(); };
   el.querySelector("#doBrChips").onclick = e => {

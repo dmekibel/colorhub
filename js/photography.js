@@ -260,6 +260,7 @@ function phpDraw(el, slug) {
   const notableProcess = s.processes[0] && s.processes[0][1] / s.n >= 0.8 ? s.processes[0][0] : null;
   body.innerHTML = `
     <div class="aw-head"><div><p class="eyebrow p-type">Photographer</p><h1 class="p-title">${esc(s.name)}</h1><p class="p-dek">${esc(span)}${span && procs ? " · " : ""}${esc(procs)}</p></div></div>
+    ${photos.length >= 2 ? `<button class="aw-pmap-top" data-pmap="col=photography&arr=color&p=${esc(slug)}">${typeof GL_ICON_MAP !== "undefined" ? GL_ICON_MAP : ""}<span>Photo map</span></button>` : ""}
     ${typical ? `<section class="aw-hl">
       <button class="aw-hl-img" data-open-typical style="--c:${esc((typical.palette[0] || {}).h || "#222")};aspect-ratio:${typical.w && typical.h ? (typical.w / typical.h).toFixed(4) : 1}" aria-label="Open the most typical photograph"><img src="${esc(typical.img)}" alt="" loading="lazy"></button>
       <p class="aw-hl-cap"><em>Most typical</em><span>${esc(typical.title)}${typical.year ? ", " + typical.year : ""}</span></p>
