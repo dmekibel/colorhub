@@ -6072,6 +6072,26 @@ scenario("paintmap", "entering the map from 5 different paintings always centers
 // Blues (a hue-family quick-pick) together should narrow the result, and every painting actually on screen
 // must satisfy all three at once (never just "the count looks right" -- a real per-painting check against the
 // same data the filter itself reads: F.country, F.G.year, pmHueBandOf()).
+// David, 2026-10-21: the painting map always says how many paintings you are looking at (the quiet pill under the
+// Colors|Paintings switch); narrowed, it reads "n of total" and is word for word the Filter sheet's own line.
+scenario("paintmap", "the corner count shows the total, and a filter changes it to the Filter sheet's number", async t => {
+  const num = s => +String(s).replace(/,/g, "").split(" ")[0];
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "the map to lay out");
+  const total = t.w.PM_CTRL.count;
+  await t.waitFor(() => { const b = t.$("[data-pmcount]"); return b && !b.hidden && num(b.textContent) === total; }, 5000, "the count to show the total");
+  t.expect(/^[\d,]+ paintings$/.test(t.$("[data-pmcount]").textContent), `unfiltered wording: "${t.$("[data-pmcount]").textContent}"`);
+  await t.open("#/paintings/map?arr=color&co=Russia", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 0 && t.w.PM_CTRL.count < total, 20000, "the Russia map to lay out");
+  const n = t.w.PM_CTRL.count;
+  await t.waitFor(() => { const b = t.$("[data-pmcount]"); return b && /of/.test(b.textContent) && num(b.textContent) === n; }, 5000, "the count to narrow");
+  const line = t.$("[data-pmcount]").textContent;
+  t.expect(line === n.toLocaleString() + " of " + total.toLocaleString() + " paintings", `narrowed wording: "${line}"`);
+  await t.click("[data-pmcount]", { wait: 600 });
+  await t.waitFor(".pmx-sh-top span", 5000, "the Filter sheet");
+  t.expect(t.text(".pmx-sh-top span") === line, `the sheet says "${t.text(".pmx-sh-top span")}", the corner "${line}"`);
+  await t.click("[data-sheet-close]", { wait: 500 });
+});
 scenario("paintmap", "Europe + 1850-1900 + Blues narrows correctly; every visible painting satisfies all three", async t => {
   await t.open("#/paintings/map?arr=color", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "the unfiltered map to lay out");

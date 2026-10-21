@@ -169,3 +169,13 @@
    and scrolls sideways only; only that thin strip stops panning the map. */
 .pmx-facets,.pmx-chipbar,.pmx-walk{pointer-events:auto;touch-action:pan-x;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
 .pmx-fchip,.pmx-xchip{touch-action:pan-x}
+
+/* the always-on count (js/paintmap.js paintCount): centered under the Colors|Paintings switch, an opaque dark pill like the
+   other chrome; the removable filter chips drop one row so the two never touch. Tabular numerals: no wiggle while it ticks. */
+.pmx-count{position:absolute;z-index:3;left:50%;transform:translateX(-50%);top:calc(max(var(--top,0px),env(safe-area-inset-top)) + 54px);height:30px;padding:0 14px;max-width:calc(100% - 32px);
+  border-radius:var(--r-pill);background:rgba(14,13,11,.86);color:rgba(236,232,223,.96);font:400 14px/30px var(--sans);white-space:nowrap;
+  font-variant-numeric:tabular-nums;-webkit-tap-highlight-color:transparent;transition:transform .2s var(--spring)}
+.pmx-count[hidden]{display:none}
+.pmx-count:active{transform:translateX(-50%) scale(.96)}
+.pmx-cnum{font-weight:500}
+.pmx-hascount .pmx-chipbar:not(.pmx-chipbar-wrap){top:calc(var(--top) + 94px)}
