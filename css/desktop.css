@@ -225,3 +225,38 @@ html.desk:has(.glz-scrim) #dk-nav{display:none}
 html.desk .glz-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;border-radius:var(--r-3);padding:4px}
 html.desk .glz-seg button[data-glzv]{padding:0 10px;justify-content:center;min-height:40px}
 html.desk .glz-tools{justify-content:flex-start;padding-top:28px}
+
+/* ---------- audit 2026-10-21 (painting views): pages that were still a phone column in a wide window ---------- */
+/* a footer inside a narrow page column wraps to two rows instead of squeezing the note into a sliver */
+html.desk .screen:not(.aw-page):not(.gl-page):not(:has(>.ptg)):not(.closeup):not(.plv-screen) .dk-foot-in{grid-template-columns:minmax(0,1fr) auto;gap:20px 40px}
+html.desk .screen:not(.aw-page):not(.gl-page):not(:has(>.ptg)):not(.closeup):not(.plv-screen) .dk-foot-note{grid-column:1/-1;grid-row:2;max-width:none}
+/* "More like this" closeup (#/painting/<slug>/more): the painting large and sticky on the left, its words on the right, the neighbors four across below */
+html.desk .screen.closeup{max-width:1320px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);column-gap:clamp(36px,4.5vw,72px);align-items:start;padding-top:12px}
+html.desk .closeup>*{grid-column:1/-1;min-width:0}
+html.desk .closeup>.art-top{position:static}
+html.desk .closeup>.z-hero{grid-column:1;grid-row:2/span 4;position:sticky;top:calc(var(--dkn) + 20px);margin:0}
+html.desk .closeup>.z-hero img{max-height:calc(100dvh - var(--dkn) - 80px);object-fit:contain}
+html.desk .closeup>.z-title,html.desk .closeup>.z-meta,html.desk .closeup>.z-sum,html.desk .closeup>.z-btns{grid-column:2}
+html.desk .closeup>.z-title{font-size:clamp(44px,4.4vw,64px);line-height:1;margin-top:0}
+html.desk .closeup>.z-sum{font-size:18px;line-height:1.65}
+html.desk .closeup>.sec-head{margin-top:56px}
+html.desk .closeup .masonry{display:block;column-count:4;column-gap:14px}
+html.desk .closeup .masonry>div{display:contents}
+html.desk .closeup .masonry .pin{break-inside:avoid;margin-bottom:22px}
+@media (max-width:1100px){html.desk .closeup .masonry{column-count:3}}
+/* Palette view (#/pv/...): the controls in a left column, the palettes two across on the right */
+html.desk .screen.plv-screen{max-width:1320px;display:grid;grid-template-columns:minmax(300px,380px) minmax(0,1fr);column-gap:clamp(32px,4vw,64px);align-items:start;padding-top:12px}
+html.desk .plv-screen>*{grid-column:1/-1;min-width:0}
+html.desk .plv-screen>.art-top{position:static}
+html.desk .plv-screen>.plv-src,html.desk .plv-screen>.plv-chips,html.desk .plv-screen>.plv-count-row,html.desk .plv-screen>.plv-foryou-note{grid-column:1}
+html.desk .plv-screen>.plv-chips{flex-wrap:wrap;overflow:visible;margin:0;padding:2px 0 14px}
+html.desk .plv-screen>.plv-feed{grid-column:2;grid-row:2/span 5;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+html.desk .plv-screen>.plv-sentinel,html.desk .plv-screen>.plv-end{grid-column:1/-1}
+/* the painters list: three across, not one long phone list */
+html.desk .aw-page .aw-pt-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:32px}
+@media (max-width:1100px){html.desk .aw-page .aw-pt-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* the Museum lenses and Saved (#/museum/saved): a wide page, the pins four across */
+html.desk .screen.article:has(>.x-feed){max-width:1240px}
+html.desk .x-feed .masonry{display:block;column-count:4;column-gap:14px}
+html.desk .x-feed .masonry>div{display:contents}
+html.desk .x-feed .masonry .pin{break-inside:avoid;margin-bottom:22px}

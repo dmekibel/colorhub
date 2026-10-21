@@ -7619,3 +7619,27 @@ scenario("home", "Today feed: cards, a chip filter, a card opens and Back return
   await t.click(t.$(".tf-game"), { wait: 800 });
   await t.waitFor(() => t.w.location.hash === "#/daily", 12000, "the daily game to open from its card");
 });
+// David, 2026-10-21 (desktop): "click it again, it should zoom in". At desktop width the second click on the open card opens
+// Look closer (the picture itself) instead of the painting page; Esc brings the card back; "Open the page" is in its toolbar.
+// The smoke browser has no hover/pointer:fine media and no outside network, so the scenario sets html.desk itself and fakes the
+// full-size image's load; what it checks is the wiring: first click = card, second = viewer, Esc = back on the map card.
+scenario("paintmap", "desktop: the second click on the open card opens the zoom viewer and Esc closes it", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800, size: [1440, 900] });
+  t.d.documentElement.classList.add("desk");
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  const cv = t.$(".pmx-cv"), r = cv.getBoundingClientRect();
+  await t.tapAt(cv, r.left + r.width / 2 + 260, r.top + r.height / 2 - 120, { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL._qaPZ().cardOpen, 6000, "the first click to open the card");
+  await t.sleep(600);
+  t.expect(!t.$(".glz-scrim"), "the first click already opened the viewer");
+  const w = t.w;
+  w.Image = function () { const o = { naturalWidth: 0 }; Object.defineProperty(o, "src", { set() { setTimeout(() => { o.naturalWidth = 100; if (o.onload) o.onload(); }, 0); } }); return o; };
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2, { wait: 600 });
+  await t.waitFor(".glz-scrim", 8000, "the second click to open the zoom viewer");
+  t.expect(!/#\/gallery\//.test(w.location.hash), `the second click opened the page (${w.location.hash})`);
+  t.expect(t.$("[data-glzdetails]"), "no Open the page button in the viewer");
+  t.d.body.dispatchEvent(new w.KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+  await t.waitFor(() => !t.$(".glz-scrim"), 4000, "Esc to close the viewer");
+  t.expect(/paintings\/map/.test(w.location.hash), `Esc left the map (${w.location.hash})`);
+  t.expect(w.PM_CTRL._qaPZ().cardOpen, "the card did not survive the viewer");
+});

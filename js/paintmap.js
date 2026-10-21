@@ -1881,7 +1881,7 @@ function pmMount(el, s, F) {
   let zoomBusy = false, zoomPill = null;
   async function zoomK(b, x, y) {
     if (zoomBusy) return; zoomBusy = true;
-    const i = lay.items[b.k], giveUp = (why) => { console.warn("zoomK fallback", why); zoomBusy = false; openK(b.k); };
+    const i = lay.items[b.k], giveUp = (why) => { zoomBusy = false; openK(b.k); };
     try {
       let d = pmDetailNow(i, F); if (!d && (!F.col || F.col === "paintings")) d = await glDetail(i);
       if (dead) { zoomBusy = false; return; }
