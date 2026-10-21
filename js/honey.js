@@ -805,6 +805,8 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
   // the big-vs-small neighbor pairs this fix is for.
   const tileReach = d => Math.min(16, Math.ceil((d + maxD) * 1.7 / cell));
   const tileCull = (d, dOther) => (d + dOther) * 1.7;
+  const CB = 4, cmax = new Map();   // the biggest member (its diameter, r0 * 2) of each CB x CB block of grid cells
+  drawn.forEach((o, m) => { const k = key(Math.floor(Math.floor(o.x / cell) / CB), Math.floor(Math.floor(o.y / cell) / CB)), v = r0[m] * 2; if (!(cmax.get(k) >= v)) cmax.set(k, v); });
   // Build a tiled cell's real shape. Two passes:
   //  1. find every real neighbor within reach and the power-bisector cut it implies (direction + limit) -- gathered
   //     once, then reused both to size the starting polygon and to actually clip it, so a neighbor is never
@@ -832,15 +834,28 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
   function clipTiled(n, b, nSides, ownR0) {
     const reach = tileReach(b.d), ci0 = Math.floor(b.x / cell), cj0 = Math.floor(b.y / cell);
     const cuts = []; let maxLim = 0;
-    for (let i = ci0 - reach; i <= ci0 + reach; i++) for (let j = cj0 - reach; j <= cj0 + reach; j++) {
-      const a = grid.get(key(i, j)); if (!a) continue;
-      for (const m of a) {
-        if (m === n) continue;
-        const o = drawn[m], vx = o.x - b.x, vy = o.y - b.y, dist = Math.hypot(vx, vy);
-        if (dist < 1e-6 || dist > tileCull(b.d, r0[m] * 2)) continue;
-        const lim = bisect(n, m, dist);
-        cuts.push(vx / dist, vy / dist, lim);
-        if (lim > maxLim) maxLim = lim;
+    // Speed (2026-10-21, the all-colors map: ~1,760 cells, mostly tiny ones next to one big magnified one, so `reach`
+    // sits at its cap of 16 = 1,089 grid lookups per cell per frame): the same scan, same order, same cuts, but a
+    // block of CB x CB grid cells is skipped whole when even its biggest member could not pass tileCull from the
+    // nearest point of the block (a lower bound on every member's distance), and empty blocks cost one lookup.
+    for (let i = ci0 - reach; i <= ci0 + reach; i++) {
+      const bi = Math.floor(i / CB), rx0 = bi * CB * cell, rx1 = rx0 + CB * cell, ddx = b.x < rx0 ? rx0 - b.x : b.x > rx1 ? b.x - rx1 : 0;
+      for (let j = cj0 - reach; j <= cj0 + reach;) {
+        const bj = Math.floor(j / CB), jEnd = Math.min(cj0 + reach, (bj + 1) * CB - 1), mx = cmax.get(key(bi, bj));
+        if (mx === undefined) { j = jEnd + 1; continue; }
+        const ry0 = bj * CB * cell, ry1 = ry0 + CB * cell, ddy = b.y < ry0 ? ry0 - b.y : b.y > ry1 ? b.y - ry1 : 0;
+        if (Math.hypot(ddx, ddy) > tileCull(b.d, mx)) { j = jEnd + 1; continue; }
+        for (; j <= jEnd; j++) {
+          const a = grid.get(key(i, j)); if (!a) continue;
+          for (const m of a) {
+            if (m === n) continue;
+            const o = drawn[m], vx = o.x - b.x, vy = o.y - b.y, dist = Math.sqrt(vx * vx + vy * vy);   // (sqrt, not hypot: hypot is the slow one)
+            if (dist < 1e-6 || dist > tileCull(b.d, r0[m] * 2)) continue;
+            const lim = bisect(n, m, dist);
+            cuts.push(vx / dist, vy / dist, lim);
+            if (lim > maxLim) maxLim = lim;
+          }
+        }
       }
     }
     // open side = the outer edge of the whole set (no neighbor in some direction): there, the cell keeps its own
@@ -867,8 +882,19 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
       const R0 = Math.max(ownR0, maxLim * 1.8 + 8);
       for (let i = 0; i < nSides; i++) { const t = i / nSides * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
     }
+    // Speed (2026-10-21, 4x-throttled profile of the all-colors map: this loop was the frame): a cut whose bisector sits at
+    // least as far out as the polygon's farthest vertex keeps every vertex, so it changes nothing. Bring the nearest few
+    // cuts to the front, then skip every cut that can no longer reach the shrinking polygon. Half-plane clipping does not
+    // depend on the order, so the shape is the same (to float rounding) as applying every cut in turn.
+    const nc = cuts.length / 3;    if (nc > 8) for (let s2 = 0; s2 < 7; s2++) {
+      let bi = s2, bl = cuts[s2 * 3 + 2];
+      for (let c = s2 + 1; c < nc; c++) if (cuts[c * 3 + 2] < bl) { bl = cuts[c * 3 + 2]; bi = c; }
+      if (bi !== s2) for (let q = 0; q < 3; q++) { const t = cuts[s2 * 3 + q]; cuts[s2 * 3 + q] = cuts[bi * 3 + q]; cuts[bi * 3 + q] = t; }
+    }
+    let polyR2 = 0; for (const p of poly) { const r2 = p[0] * p[0] + p[1] * p[1]; if (r2 > polyR2) polyR2 = r2; }
     for (let c = 0; c < cuts.length && poly.length; c += 3) {
       const ux = cuts[c], uy = cuts[c + 1], lim = cuts[c + 2];
+      if (lim >= 0 && lim * lim >= polyR2) continue;
       // keep the side of the power bisector (the half that faces this bubble)
       const out = [];
       for (let k = 0; k < poly.length; k++) {
@@ -877,6 +903,7 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
         if ((dp <= 0) !== (dq <= 0)) { const t = dp / (dp - dq); out.push([p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t]); }
       }
       poly = out;
+      polyR2 = 0; for (const p of poly) { const r2 = p[0] * p[0] + p[1] * p[1]; if (r2 > polyR2) polyR2 = r2; }
     }
     // the inscribed circle: the nearest edge line to the center
     let rin = Infinity;

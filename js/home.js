@@ -117,6 +117,10 @@ const HM_FEEL0 = { mag: .62, space: .15, size: .5 };
 const HM_OLD_TONE = { pastels: "light", vivid: "vivid", muted: "muted", darks: "dark" };
 function hmView() {   // the saved view, upgrading older saves in place (unknown keys kept)
   const h = S.hm, old = h.set;
+  if (!h.dv) {   // a new map (no choices saved yet) opens on every color: the Spiral, Honeycomb look, everyday words in the middle (migrateState v6 moves the old untouched default the same way)
+    if (!h.src && !h.set && !h.arr && !h.style) { h.src = "every-name"; h.arr = "sunflower"; h.style = "honeycomb"; h.ord = { ...(h.ord || {}), sunflower: "common" }; }
+    h.dv = 1;
+  }
   if (!h.src) {
     h.src = /^stage:\d+$/.test(old || "") ? old : old && hmSet(old) && !["101", "learned", "learning", "notmet"].includes(old) ? old : "stage:100";
     h.filter = { learned: "learned", learning: "learning", notmet: "new" }[old] || "all";
@@ -428,6 +432,14 @@ function hmWireLayerSwitch(el, cur, onSwitch) {
 // app-level not map-level).
 const HM_GEAR_SVG = `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3.1"/><path d="M12 3.6v2.5M12 17.9v2.5M20.4 12h-2.5M6.1 12H3.6M17.7 6.3l-1.8 1.8M8.1 15.9l-1.8 1.8M17.7 17.7l-1.8-1.8M8.1 8.1 6.3 6.3"/></svg>`;
 
+// The first view of a map nobody has zoomed yet: about the same number of big readable cells (~45) on any screen, so the
+// 440x956 phone keeps its zoom (1) and a desktop window zooms in by the square root of its extra area (cell count ~ area / zoom^2).
+// Once the user zooms, S.hm.zoom is theirs (onZoom saves it) and this never overrides it.
+function hmStartZoom() {
+  const a = (innerWidth || 440) * Math.max(300, (innerHeight || 956) - 60);
+  return Math.round(Math.min(2.2, Math.max(1, Math.sqrt(a / (440 * 956)))) * 100) / 100;
+}
+
 function hmHome() {
   if (!S.placed) return welcome();
   S.hm = S.hm || {};
@@ -576,7 +588,7 @@ function hmHome() {
     if (typeof paintDo === "function") paintDo();
     const tw = hmLiveTweak(hmView());
     if (ctrl) ctrl.update({ items, soft, arrange: !!ro.arrange, tweak: tw, style: hmView().style });
-    else ctrl = honeycomb(viewEl, { items, style: v.style, tweak: tw, zoom: S.hm.zoom || 1, pick, onPeek, centerFirst: true,
+    else ctrl = honeycomb(viewEl, { items, style: v.style, tweak: tw, zoom: S.hm.zoom || hmStartZoom(), pick, onPeek, centerFirst: true,
       onZoom: z => { S.hm.zoom = Math.round(z * 100) / 100; save(); } });
     window.HM_CTRL = ctrl;   // the map, for js/polish.js flyToMap()
     hmWireChrome();
