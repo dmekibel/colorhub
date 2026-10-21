@@ -1814,9 +1814,22 @@ function pmMount(el, s, F) {
   cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
   cv.addEventListener("wheel", e => {
     e.preventDefault(); touched = true; glide = null; V = [0, 0];
-    const m = localXY(e.clientX, e.clientY), q = planeAt(m[0], m[1]);   // zoom about the cursor (trackpad pinch = ctrl+wheel, much finer steps)
-    const dy = e.deltaMode === 1 ? e.deltaY * 33 : e.deltaY;
-    Z = Math.min(ZMAX, rubberLo(Z * Math.exp(-dy * (e.ctrlKey ? .01 : .0015)), zMin())); anchorAt(q, m[0], m[1]); kick(); clearTimeout(cv._wt); cv._wt = setTimeout(settle, 180); }, { passive: false });
+    const m = localXY(e.clientX, e.clientY), q = planeAt(m[0], m[1]), kind = wheelKind(e);
+    if (kind === "pad") {   // two-finger scroll pans, 1:1: the plane point under the cursor moves by -delta (Figma / Google Maps)
+      anchorAt(q, m[0] - wheelPx(e, e.deltaX), m[1] - wheelPx(e, e.deltaY)); hideCard();
+    } else {   // zoom about the cursor (trackpad pinch = ctrl+wheel, much finer steps; a notched mouse wheel)
+      const dy = wheelPx(e, e.deltaY || e.deltaX);
+      Z = Math.min(ZMAX, rubberLo(Z * Math.exp(-dy * (kind === "pinch" ? .01 : .0015)), zMin())); anchorAt(q, m[0], m[1]);
+    }
+    kick(); clearTimeout(cv._wt); cv._wt = setTimeout(settle, 180); }, { passive: false });
+  // desktop Safari pinch (gesture events): zoom about the cursor, never the page
+  let gz0 = 1;
+  cv.addEventListener("gesturestart", e => { e.preventDefault(); gz0 = Z; glide = null; V = [0, 0]; });
+  cv.addEventListener("gesturechange", e => {
+    e.preventDefault(); touched = true; const m = localXY(e.clientX, e.clientY), q = planeAt(m[0], m[1]);
+    Z = Math.min(ZMAX, rubberLo(gz0 * e.scale, zMin())); anchorAt(q, m[0], m[1]); kick(); clearTimeout(cv._wt); cv._wt = setTimeout(settle, 180);
+  });
+  cv.addEventListener("gestureend", e => e.preventDefault());
   cv.addEventListener("contextmenu", e => e.preventDefault());
   function hitAt(x, y) {
     const r = cv.getBoundingClientRect(), px = x - r.left, py = y - r.top;

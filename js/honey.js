@@ -2179,21 +2179,31 @@ function honeycomb(host, opts = {}) {
     if (!lay) return;
     lastInput = performance.now(); fly = null;
     const [x, y] = local(e);
-    if (e.ctrlKey) { e.preventDefault(); touched = true; phase = "idle"; spring = null; zAnim = null; zoomAround(rubber(clamp(Z * Math.exp(-e.deltaY * .012), ZMIN * .8, ZMAX * 1.2)), x, y); }
-    else if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-      e.preventDefault(); touched = true; phase = "idle"; spring = null;
-      if (lay.globe) P = [P[0] + e.deltaX / GLOBE_ROT_K, clamp(P[1] + e.deltaY / GLOBE_ROT_K, -1.5, 1.5)];
-      else { const k = centerK(lens(0)); P = [P[0] + e.deltaX / k, P[1] + e.deltaY / k]; }
-    }
-    else if (e.deltaX === 0 && e.deltaY !== 0 && (e.deltaMode !== 0 || (Number.isInteger(e.deltaY) && Math.abs(e.deltaY) >= 40))) {   // a mouse wheel (notched), not a trackpad scroll: zoom about the cursor
+    const kind = wheelKind(e);
+    if (kind === "pinch") { e.preventDefault(); touched = true; phase = "idle"; spring = null; zAnim = null; zoomAround(rubber(clamp(Z * Math.exp(-e.deltaY * .012), ZMIN * .8, ZMAX * 1.2)), x, y); }
+    else if (kind === "pad") {   // two-finger scroll: pan, 1:1 with the fingers (the point under the cursor moves by -delta)
       e.preventDefault(); touched = true; phase = "idle"; spring = null; zAnim = null;
-      const dy = e.deltaMode === 1 ? e.deltaY * 33 : e.deltaY;
+      const dx = wheelPx(e, e.deltaX), dy = wheelPx(e, e.deltaY);
+      if (lay.globe) P = [P[0] + dx / GLOBE_ROT_K, clamp(P[1] + dy / GLOBE_ROT_K, -1.5, 1.5)];
+      else { const l = lens(0), a = offAt(x, y, l), b = offAt(x + dx, y + dy, l); P = [P[0] + b[0] - a[0], P[1] + b[1] - a[1]]; }
+    }
+    else {   // a mouse wheel (notched): zoom about the cursor
+      e.preventDefault(); touched = true; phase = "idle"; spring = null; zAnim = null;
+      const dy = wheelPx(e, e.deltaY || e.deltaX);
       zoomAround(rubber(clamp(Z * Math.exp(-dy * .0022), ZMIN * .8, ZMAX * 1.2)), x, y);
     }
-    else return;
     draw(); clearTimeout(wheelT);
     wheelT = setTimeout(() => { if (Z < ZMIN || Z > ZMAX) zoomTo(clamp(Z, ZMIN, ZMAX), x, y); else { if (opts.onZoom) opts.onZoom(Z); if (!lay.globe) snap(); } }, 160);
   }, { passive: false });
+  // desktop Safari pinch (gesture events; Chrome and Firefox send ctrl+wheel instead): zoom about the cursor, never the page
+  let gz0 = 1;
+  cv.addEventListener("gesturestart", e => { e.preventDefault(); gz0 = Z; });
+  cv.addEventListener("gesturechange", e => {
+    e.preventDefault(); if (!lay) return; lastInput = performance.now(); fly = null; touched = true; phase = "idle"; spring = null; zAnim = null;
+    const [x, y] = local(e); zoomAround(rubber(clamp(gz0 * e.scale, ZMIN * .8, ZMAX * 1.2)), x, y); draw();
+    clearTimeout(wheelT); wheelT = setTimeout(() => { if (Z < ZMIN || Z > ZMAX) zoomTo(clamp(Z, ZMIN, ZMAX), x, y); else { if (opts.onZoom) opts.onZoom(Z); if (!lay.globe) snap(); } }, 160);
+  });
+  cv.addEventListener("gestureend", e => e.preventDefault());
   cap.onclick = () => { if (center) open(center, drawn.find(b => b.it === center)); };
 
   // A drawn bubble's exact on-screen shape, for the bubble-becomes-its-page move (js/mapxfer.js): its center in

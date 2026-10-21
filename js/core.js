@@ -6,6 +6,23 @@ const app = document.getElementById("app");
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+// Trackpad or mouse? (David, 2026-10-21: both maps behave like Figma / Google Maps on a Mac.) A wheel event is a pinch
+// (ctrlKey), a "pad" (two-finger scroll: small smooth pixel deltas, often with deltaX) or a "mouse" (line-mode deltas, or
+// whole ~100px notches with no deltaX). The first event of a burst decides, and the verdict is kept until the burst has
+// been quiet for 250ms, so a fast trackpad flick (whose deltas get large and whole) never flips to zoom mid-gesture.
+let WHEEL_DEV = "", WHEEL_AT = 0;
+function wheelKind(e) {
+  if (e.ctrlKey) return "pinch";
+  const now = performance.now();
+  if (WHEEL_DEV && now - WHEEL_AT < 250) { WHEEL_AT = now; return WHEEL_DEV; }
+  const ay = Math.abs(e.deltaY);
+  WHEEL_DEV = e.deltaMode !== 0 ? "mouse" : e.deltaX !== 0 || !Number.isInteger(e.deltaY) || ay < 50 ? "pad" : "mouse";
+  WHEEL_AT = now;
+  return WHEEL_DEV;
+}
+// pixels for one wheel event (line-mode deltas are ~33px a line)
+const wheelPx = (e, d) => e.deltaMode === 1 ? d * 33 : e.deltaMode === 2 ? d * 400 : d;
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 // Haptics: Android vibrates; iPhone Safari has no vibrate(), but toggling a hidden switch control
 // (<input type=checkbox switch>, Safari 17.4+) gives a light system tap. A wrong answer taps twice.

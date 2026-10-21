@@ -7517,6 +7517,19 @@ async function pinchAnchorRun(t, cv, ctl, tag) {
     for (const b of ctl._qaBubbles(100000)) if (b.key === c2.key) { const d = Math.hypot(b.x - c2.x, b.y - c2.y); if (d < cd) { cd = d; cur = b; } }
     t.expect(cur && cd <= 3, `${tag}: ${label} moved the cell under the cursor by ${cd.toFixed(1)}px`);
   }
+  // a trackpad two-finger scroll (pixel-mode deltas, with deltaX) PANS 1:1: the cell under the cursor moves by -delta
+  for (const [dxv, dyv] of [[30.5, -20.25], [12.5, -14.5]]) {
+    await t.sleep(400);   // past the wheel burst memory, so each is its own gesture
+    const bs3 = ctl._qaBubbles(2000); let c3 = null, d3 = 1e9;
+    for (const b of bs3) { const d = Math.hypot(b.x - tx, b.y - ty); if (d < d3) { d3 = d; c3 = b; } }
+    t.expect(c3, `${tag}: no cell drawn clear of the edges to pan`);
+    const ev = new w.WheelEvent("wheel", { bubbles: true, cancelable: true, clientX: r.left + c3.x, clientY: r.top + c3.y, deltaX: dxv, deltaY: dyv, deltaMode: 0, view: w });
+    cv.dispatchEvent(ev);
+    t.expect(ev.defaultPrevented, `${tag}: a pixel-mode wheel did not preventDefault`);
+    let cur = null, cd = 1e9;
+    for (const b of ctl._qaBubbles(100000)) if (b.key === c3.key) { const d = Math.hypot(b.x - (c3.x - dxv), b.y - (c3.y - dyv)); if (d < cd) { cd = d; cur = b; } }
+    t.expect(cur && cd <= 3, `${tag}: a trackpad scroll (${dxv},${dyv}) moved the cell ${cd.toFixed(1)}px from where the fingers' delta puts it`);
+  }
   t.notes.push(`anchor ${tag}: worst error ${worst.toFixed(2)}px over ${steps} steps`);
 }
 scenario("paintmap", "pinch zooms about the fingers' midpoint and two-finger pan follows it (painting map)", async t => {
