@@ -189,3 +189,17 @@ html.desk .gl-split>.gl-split-chips-row{padding-top:72px}
 html.desk .gl-split>.gl-split-feed{padding-bottom:40px}
 html.desk .gl-split-done{top:20px;right:28px}
 html.desk .gl-page>.dk-foot{margin-left:calc(-1 * var(--dkg));margin-right:calc(-1 * var(--dkg))}
+
+/* ---------- the Colors / Arrange / Filter sheet becomes a docked side panel (David, 2026-10-21: "the preview of the whole map is
+   tiny and invisible unlike on mobile") ----------
+   The color map's Colors & Arrange sheet and the painting map's Arrange | Filter sheet are both .sheet.hm-sheet-panel. On desktop
+   they no longer cover the middle of the window: a 380px panel on the right, under the top bar, no scrim, nothing modal. The map's
+   own screen gives up that strip (its width shrinks, so the canvas re-measures and the map stays centered in what is left), and
+   keeps panning and zooming while the panel is open. The phone's bottom sheet is untouched (this is all behind html.desk). */
+html.desk .sheet.hm-sheet-panel.hm-sheet-panel{inset:var(--dkn) 0 0 auto;margin:0;width:380px;height:auto;max-height:none;border-radius:0;border:0;border-left:1px solid var(--rule);
+  box-shadow:-18px 0 44px rgba(0,0,0,.32);padding:0;animation:dkDockIn .26s var(--ease) both}
+@keyframes dkDockIn{from{opacity:0;transform:translateX(24px)}}
+html.desk .scrim.hm-scrim-clear{display:none}
+html.desk:has(.sheet.hm-sheet-panel) #app>.screen.fixed{right:380px}
+html.desk:has(.sheet.hm-sheet-panel) .hm-layer{left:calc(50% - 190px)}
+html.desk:has(.sheet.hm-sheet-panel) .corner.r{right:calc(380px + 28px)}

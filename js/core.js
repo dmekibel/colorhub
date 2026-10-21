@@ -302,7 +302,7 @@ const fresh = () => ({ v: 1, placed: null, start: 0, cards: {}, done: {}, tab: "
 // Progress is never thrown away. An older save is migrated step by step (bump STATE_V and add a step when the
 // shape changes); a save from a newer version is kept as it is; unknown keys always survive. A save that
 // can't be read is copied aside (KEY + "-unreadable") before anything is written over it.
-const STATE_V = 5;   // 2: S.learn, the Learner Model's event log (js/learner.js) · 3: cards for any color (js/learnmore.js) ·
+const STATE_V = 6;   // 2: S.learn, the Learner Model's event log (js/learner.js) · 3: cards for any color (js/learnmore.js) ·
 // 4: S.taste shape is guaranteed (js/tasteladder.js's v2 engine lives at S.taste.ladder). The actual v1 -> v2
 // belief conversion (TASTE.migrateV1) is lazy, done the first time the ladder trainer opens -- not here, since
 // js/tastemodel.js hasn't necessarily loaded yet when this runs at boot -- so S.taste.color/S.taste.palette are
@@ -335,7 +335,20 @@ function migrateState(d) {
   // v5 (js/paletteview.js): S.plv { "<kind>:<id>": [{cols, cat, at}] } — pinned palettes, per source. Guaranteed
   // an object so a new pin never has to guard against an older save; never wipes anything already there.
   if (s.v < 5) { if (!s.plv || typeof s.plv !== "object" || Array.isArray(s.plv)) s.plv = s.plv ? { plvUnreadable: s.plv } : {}; s.v = 5; }
-  // future steps go here: if (s.v < 6) { …; s.v = 6; }
+  // v6 (js/home.js hmView, David 2026-10-21): the Explore > Colors map opens on EVERY color as the Spiral in the
+  // Honeycomb look, zoomed in on the everyday words. A save still sitting on the old untouched default (Stage 100,
+  // Grid, Bubbles, no filters) moves to the new default; anything David or a user chose (another stage, arrangement,
+  // Look, family, tone...) is left exactly as it was. S.hm.dv marks it done, so it never runs twice.
+  if (s.v < 6) {
+    const h = s.hm;
+    if (h && typeof h === "object" && !Array.isArray(h) && !h.dv) {
+      const same = (!h.src || h.src === "stage:100") && (!h.arr || h.arr === "map") && (!h.style || h.style === "original") && !h.fam && !h.tone && (!h.filter || h.filter === "all") && !h.set && !h.endless;
+      if (same) { h.src = "every-name"; h.arr = "sunflower"; h.style = "honeycomb"; h.ord = Object.assign({}, h.ord && typeof h.ord === "object" ? h.ord : {}, { sunflower: "common" }); delete h.zoom; }
+      h.dv = 1;
+    }
+    s.v = 6;
+  }
+  // future steps go here: if (s.v < 7) { …; s.v = 7; }
   return s;
 }
 let S;

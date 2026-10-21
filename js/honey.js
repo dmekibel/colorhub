@@ -55,7 +55,10 @@ function honeyNorm(o) {
   const [L, a, b] = lab(o.h), C = Math.hypot(a, b);
   let H = Math.atan2(b, a) * 180 / Math.PI; if (H < 0) H += 360;
   it = { o, n: o.n, h: o.h, c: o.c || null, lib: o.lib || (o.src ? o : null), lab: [L, a, b], L, C, H,
-    ink: ink(o.h) === "dark" ? "rgba(20,19,17,.86)" : "rgba(255,255,255,.93)" };
+    // the name's ink: pure near-black or pure white, whichever has the higher real WCAG contrast against THIS bubble's own
+    // color, fully opaque (David, 2026-10-21: names on the outer rings read as the bubble's own color: an alpha-blended
+    // ink on a mid or dark bubble was a ~2:1 smudge). Black or white always reaches >= 4.5:1 on any color.
+    ink: contrastRatio(o.h, "#0B0A09") >= contrastRatio(o.h, "#FFFFFF") ? "#0B0A09" : "#FFFFFF" };
   HONEY_NORM.set(o, it);
   return it;
 }
@@ -674,6 +677,7 @@ const HONEY_WRAP = new Map();
 // never reach the floor -- the expensive part (ctx.measureText, picking the wrap) runs once per unique name,
 // ever, not once per cell per frame.
 const HONEY_LABEL_FS_MIN = 7;
+const HONEY_LABEL_FS_HOME = 11;   // the Home map hides a name smaller than this instead of drawing a smudge (David, 2026-10-21); other honeycombs (palette views) keep 7
 function honeyWrap(ctx, name) {
   let w = HONEY_WRAP.get(name); if (w) return w;
   const maxW = 76, words = name.split(" ");
@@ -805,6 +809,8 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
   // the big-vs-small neighbor pairs this fix is for.
   const tileReach = d => Math.min(16, Math.ceil((d + maxD) * 1.7 / cell));
   const tileCull = (d, dOther) => (d + dOther) * 1.7;
+  const CB = 4, cmax = new Map();   // the biggest member (its diameter, r0 * 2) of each CB x CB block of grid cells
+  drawn.forEach((o, m) => { const k = key(Math.floor(Math.floor(o.x / cell) / CB), Math.floor(Math.floor(o.y / cell) / CB)), v = r0[m] * 2; if (!(cmax.get(k) >= v)) cmax.set(k, v); });
   // Build a tiled cell's real shape. Two passes:
   //  1. find every real neighbor within reach and the power-bisector cut it implies (direction + limit) -- gathered
   //     once, then reused both to size the starting polygon and to actually clip it, so a neighbor is never
@@ -832,15 +838,28 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
   function clipTiled(n, b, nSides, ownR0) {
     const reach = tileReach(b.d), ci0 = Math.floor(b.x / cell), cj0 = Math.floor(b.y / cell);
     const cuts = []; let maxLim = 0;
-    for (let i = ci0 - reach; i <= ci0 + reach; i++) for (let j = cj0 - reach; j <= cj0 + reach; j++) {
-      const a = grid.get(key(i, j)); if (!a) continue;
-      for (const m of a) {
-        if (m === n) continue;
-        const o = drawn[m], vx = o.x - b.x, vy = o.y - b.y, dist = Math.hypot(vx, vy);
-        if (dist < 1e-6 || dist > tileCull(b.d, r0[m] * 2)) continue;
-        const lim = bisect(n, m, dist);
-        cuts.push(vx / dist, vy / dist, lim);
-        if (lim > maxLim) maxLim = lim;
+    // Speed (2026-10-21, the all-colors map: ~1,760 cells, mostly tiny ones next to one big magnified one, so `reach`
+    // sits at its cap of 16 = 1,089 grid lookups per cell per frame): the same scan, same order, same cuts, but a
+    // block of CB x CB grid cells is skipped whole when even its biggest member could not pass tileCull from the
+    // nearest point of the block (a lower bound on every member's distance), and empty blocks cost one lookup.
+    for (let i = ci0 - reach; i <= ci0 + reach; i++) {
+      const bi = Math.floor(i / CB), rx0 = bi * CB * cell, rx1 = rx0 + CB * cell, ddx = b.x < rx0 ? rx0 - b.x : b.x > rx1 ? b.x - rx1 : 0;
+      for (let j = cj0 - reach; j <= cj0 + reach;) {
+        const bj = Math.floor(j / CB), jEnd = Math.min(cj0 + reach, (bj + 1) * CB - 1), mx = cmax.get(key(bi, bj));
+        if (mx === undefined) { j = jEnd + 1; continue; }
+        const ry0 = bj * CB * cell, ry1 = ry0 + CB * cell, ddy = b.y < ry0 ? ry0 - b.y : b.y > ry1 ? b.y - ry1 : 0;
+        if (Math.hypot(ddx, ddy) > tileCull(b.d, mx)) { j = jEnd + 1; continue; }
+        for (; j <= jEnd; j++) {
+          const a = grid.get(key(i, j)); if (!a) continue;
+          for (const m of a) {
+            if (m === n) continue;
+            const o = drawn[m], vx = o.x - b.x, vy = o.y - b.y, dist = Math.sqrt(vx * vx + vy * vy);   // (sqrt, not hypot: hypot is the slow one)
+            if (dist < 1e-6 || dist > tileCull(b.d, r0[m] * 2)) continue;
+            const lim = bisect(n, m, dist);
+            cuts.push(vx / dist, vy / dist, lim);
+            if (lim > maxLim) maxLim = lim;
+          }
+        }
       }
     }
     // open side = the outer edge of the whole set (no neighbor in some direction): there, the cell keeps its own
@@ -867,8 +886,19 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
       const R0 = Math.max(ownR0, maxLim * 1.8 + 8);
       for (let i = 0; i < nSides; i++) { const t = i / nSides * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
     }
+    // Speed (2026-10-21, 4x-throttled profile of the all-colors map: this loop was the frame): a cut whose bisector sits at
+    // least as far out as the polygon's farthest vertex keeps every vertex, so it changes nothing. Bring the nearest few
+    // cuts to the front, then skip every cut that can no longer reach the shrinking polygon. Half-plane clipping does not
+    // depend on the order, so the shape is the same (to float rounding) as applying every cut in turn.
+    const nc = cuts.length / 3;    if (nc > 8) for (let s2 = 0; s2 < 7; s2++) {
+      let bi = s2, bl = cuts[s2 * 3 + 2];
+      for (let c = s2 + 1; c < nc; c++) if (cuts[c * 3 + 2] < bl) { bl = cuts[c * 3 + 2]; bi = c; }
+      if (bi !== s2) for (let q = 0; q < 3; q++) { const t = cuts[s2 * 3 + q]; cuts[s2 * 3 + q] = cuts[bi * 3 + q]; cuts[bi * 3 + q] = t; }
+    }
+    let polyR2 = 0; for (const p of poly) { const r2 = p[0] * p[0] + p[1] * p[1]; if (r2 > polyR2) polyR2 = r2; }
     for (let c = 0; c < cuts.length && poly.length; c += 3) {
       const ux = cuts[c], uy = cuts[c + 1], lim = cuts[c + 2];
+      if (lim >= 0 && lim * lim >= polyR2) continue;
       // keep the side of the power bisector (the half that faces this bubble)
       const out = [];
       for (let k = 0; k < poly.length; k++) {
@@ -877,6 +907,7 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
         if ((dp <= 0) !== (dq <= 0)) { const t = dp / (dp - dq); out.push([p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t]); }
       }
       poly = out;
+      polyR2 = 0; for (const p of poly) { const r2 = p[0] * p[0] + p[1] * p[1]; if (r2 > polyR2) polyR2 = r2; }
     }
     // the inscribed circle: the nearest edge line to the center
     let rin = Infinity;
@@ -1179,6 +1210,7 @@ function honeycomb(host, opts = {}) {
   const vig = host.querySelector(".hc-vig"), cv = host.querySelector("canvas"), ctx = cv.getContext("2d"), cap = host.querySelector(".hc-cap");
   const RM = reduceMotion, SHOOT = typeof SHOT !== "undefined" && !!SHOT, ZMAX = 2.5, ABS_ZMIN = .04, M = 2.2;
   const isHome = !!(host.closest && host.closest(".hm"));   // the Home map: the one whose view a page returns to
+  const LABEL_MIN = isHome ? HONEY_LABEL_FS_HOME : HONEY_LABEL_FS_MIN, LABEL_RAMP = isHome ? .12 : 2;
   let springTo = null, zTo = null;   // the glide (and zoom) a touch interrupted, while that touch is still a tap
   let frozen = 0;   // when a bubble opened a page (0: none): the view saved at that moment must not be overwritten on the way out
   let vigK = -1, vigOpSet = -1;
@@ -1462,13 +1494,18 @@ function honeycomb(host, opts = {}) {
   function buildFlatDrawn(l, t) {
     const R = reach(l), cx = W / 2, cy = vcy(), hx = W / 2, hy = vy() / 2, ia = l.inner, round = cfg.lensMode === "round", pk = pack();
     drawn = []; let tinyN = 0, cbest = Infinity, cItem = null;
+    // a size floor for a small set (David, 2026-10-21: "magnification broken on the outer rings, in the middle it works"): the
+    // fisheye shrinks everything away from its focus, so on a 100-color map an outer ring fell to ~70 px (or less on a phone)
+    // beside a 250 px middle. A bubble in a set this small never drops under a tappable 28 px while you are zoomed in
+    // (the floor eases away as you zoom out, so the whole map still fits); cells clip each other, so nothing overlaps.
+    const minD = isHome && round && lay.raw && lay.raw.length <= 400 ? 28 * Math.min(1, Z / .6) : 0;
     if (lay.finite && !lay.edgeSet) { lay.edgeSet = honeyEdgeSet(lay.pts); lay.ghosts = honeyGhosts(lay.pts, lay.edgeSet); }
     const ghostPts = lay.finite && lay.ghosts && lay.ghosts.length ? lay.ghosts : null;
     const edgeSet = lay.finite && !ghostPts ? lay.edgeSet : null;   // with ghosts, edge cells need no special start shape
     for (const p of (ghostPts ? lay.pts.concat(ghostPts) : lay.pts)) copies(p, P, R, (ex, ey) => {
       const z = Math.hypot(ex, ey);
       let x, y, d;
-      if (round) { const k = z ? F(z, l) / z : base * l.s * l.m0; x = cx + ex * k; y = cy + ey * k; d = base * l.s * localScale(z, l) * pk; }
+      if (round) { const k = z ? F(z, l) / z : base * l.s * l.m0; x = cx + ex * k; y = cy + ey * k; d = base * l.s * localScale(z, l) * pk; if (minD && d < minD) d = minD; }
       else {
         const ux = Math.abs(ex * l.K / hx), uy = Math.abs(ey * l.K / hy), dwx = dwarp(ux, ia), dwy = dwarp(uy, ia);
         x = cx + Math.sign(ex) * warp(ux, ia) * hx; y = cy + Math.sign(ey) * warp(uy, ia) * hy;
@@ -1636,10 +1673,10 @@ function honeycomb(host, opts = {}) {
       // a cheap pre-filter before the honeyWrap lookup: even the most compact name (honeyWrap's own best-case
       // fs ratio, ~.19) can't clear the legibility floor below roughly this diameter, so most of a crowded
       // frame's tiny cells skip the (cached, but still a Map lookup) call entirely
-      if (d * .19 < HONEY_LABEL_FS_MIN) continue;
+      if (d * .19 < LABEL_MIN) continue;
       const w = honeyWrap(ctx, it.n), fsReal = w.fs * d;
-      if (fsReal >= HONEY_LABEL_FS_MIN) {
-        const la = Math.min(1, (fsReal - HONEY_LABEL_FS_MIN) / 2);   // a quick ~2px fade right at the floor, not a hard pop
+      if (fsReal >= LABEL_MIN) {
+        const la = Math.min(1, (fsReal - LABEL_MIN) / LABEL_RAMP);   // a very quick fade right at the floor, not a hard pop, and never a half-strength name
         const fs = Math.min(fsReal, 30), lh = fs * 1.02;
         const sub = Math.min(1, Math.max(0, (d - 150) / 30)), subH = sub ? fs * .9 : 0;
         const y0 = b.y - (w.lines.length - 1) * lh / 2 + fs * .06 - subH / 2;
@@ -2223,11 +2260,11 @@ function honeycomb(host, opts = {}) {
     for (let i = 0; i < 72; i++) { const t = i / 72 * 6.283185307; rays.push(b.poly && shp > .02 && b.rin >= 3 ? b.rin * (1 - shp) + honeyRay(b.poly, t) * shp : b.rin); }
     const it = b.it;
     let label = null;
-    // the same legibility gate the main draw loop uses (HONEY_LABEL_FS_MIN), so a bubble morphing into its own
+    // the same legibility gate the main draw loop uses (LABEL_MIN), so a bubble morphing into its own
     // page starts from exactly the label state it was actually showing, not the old labelMin-based guess
     if (!(ST.label && !ST.label(it.o))) {
       const w = honeyWrap(ctx, it.n), fsReal = w.fs * b.d;
-      if (fsReal >= HONEY_LABEL_FS_MIN) { const fs = Math.min(fsReal, 30); label = { lines: w.lines, fs, lh: fs * 1.02, ink: it.ink }; }
+      if (fsReal >= LABEL_MIN) { const fs = Math.min(fsReal, 30); label = { lines: w.lines, fs, lh: fs * 1.02, ink: it.ink }; }
     }
     return { x: r.left + b.x, y: r.top + b.y, d: b.d, rays, label, h: it.h, n: it.n };
   }
@@ -2704,17 +2741,17 @@ function honeycomb(host, opts = {}) {
     },
     // QA (tools/smoke home group): every currently-drawn bubble's REAL label font size in CSS px (honeyWrap's
     // cached per-name ratio times the bubble's current diameter), for bubbles that would actually draw one
-    // (HONEY_LABEL_FS_MIN or above) -- so a test (or a screenshot-driven check) can confirm nothing smaller
+    // (LABEL_MIN or above) -- so a test (or a screenshot-driven check) can confirm nothing smaller
     // than the verified legibility floor ever gets a label, and report the smallest one actually shown.
     _labelFsStat() {
       const fs = [];
       for (const b of drawn) {
         if (!b.it || !(b.d > 0)) continue;
         const w = honeyWrap(ctx, b.it.n), real = w.fs * b.d;
-        if (real >= HONEY_LABEL_FS_MIN) fs.push(+real.toFixed(2));
+        if (real >= LABEL_MIN) fs.push(+real.toFixed(2));
       }
       fs.sort((a, c) => a - c);
-      return { n: fs.length, min: fs[0] ?? null, max: fs[fs.length - 1] ?? null, floor: HONEY_LABEL_FS_MIN };
+      return { n: fs.length, min: fs[0] ?? null, max: fs[fs.length - 1] ?? null, floor: LABEL_MIN };
     },
     // QA only: the ordinary zoom(z) always clamps to [ZMIN,ZMAX] (the pinch-out floor), but a real pinch can
     // still swing well past it for a moment (rubber(), the elastic overshoot before it springs back) -- which
