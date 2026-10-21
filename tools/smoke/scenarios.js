@@ -6075,6 +6075,18 @@ scenario("paintmap", "entering the map from 5 different paintings always centers
 // same data the filter itself reads: F.country, F.G.year, pmHueBandOf()).
 // David, 2026-10-21: the painting map always says how many paintings you are looking at (the quiet pill under the
 // Colors|Paintings switch); narrowed, it reads "n of total" and is word for word the Filter sheet's own line.
+// David, 2026-10-21: "da Vinci map looks like a mess, lots of repeats" -- the repeats were duplicate corpus rows, never the layout.
+// This pins the layout's half: a one-painter map draws each painting key at most once, and its chip row sits inside the window.
+scenario("paintmap", "a one-painter map draws each painting once and its chip is inside the window", async t => {
+  await t.open("#/paintings/map?arr=color&p=vincent-van-gogh", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 100 && t.w.PM_CTRL._qaBubbles(2000).length > 20, 20000, "the one-painter map to lay out");
+  const keys = t.w.PM_CTRL._qaBubbles(5000).map(b => b.key);
+  t.expect(new Set(keys).size === keys.length, `a painting is drawn twice: ${keys.length} tiles, ${new Set(keys).size} distinct`);
+  t.expect(keys.length <= t.w.PM_CTRL.count, `${keys.length} tiles drawn for ${t.w.PM_CTRL.count} paintings`);
+  await t.waitFor(".pmx-xcount", 5000, "the one-painter count chip");
+  const r = t.$(".pmx-xscope").getBoundingClientRect(), c = t.$(".pmx-xcount").getBoundingClientRect();
+  t.expect(r.left >= 12 && c.right <= t.w.innerWidth - 8 && r.top > 0, `the chip row is outside the window: left ${r.left}, right ${c.right}`);
+});
 scenario("paintmap", "the corner count shows the total, and a filter changes it to the Filter sheet's number", async t => {
   const num = s => +String(s).replace(/,/g, "").split(" ")[0];
   await t.open("#/paintings/map?arr=color", { settle: 800 });
