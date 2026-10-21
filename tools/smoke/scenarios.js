@@ -7529,7 +7529,7 @@ async function pinchAnchorRun(t, cv, ctl, tag) {
     cv.dispatchEvent(mk("pointermove", 1, cx - g, cy)); cv.dispatchEvent(mk("pointermove", 2, cx + g, cy));
     await t.sleep(120);
     let cur = null, cd = 1e9;   // a wrapping map repeats every cell: the copy nearest the fingers is the one we hold
-    for (const b of ctl._qaBubbles(5000)) if (b.key === key) { const d = Math.hypot(r.left + b.x - cx, r.top + b.y - cy); if (d < cd) { cd = d; cur = b; } }
+    for (const b of ctl._qaBubbles(200000)) if (b.key === key) { const d = Math.hypot(r.left + b.x - cx, r.top + b.y - cy); if (d < cd) { cd = d; cur = b; } }
     if (!cur) continue;   // zoomed out of the drawn set; nothing to compare this step
     const err = Math.hypot(r.left + cur.x - cx, r.top + cur.y - cy); steps++;
     if (err > worst) worst = err;
