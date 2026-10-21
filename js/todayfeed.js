@@ -125,7 +125,7 @@ function tfCard(it) {
     case "color":
       return `<button type="button" class="tf-card tf-color" data-tf="name" data-n="${esc(it.n)}" data-h="${it.h}" style="--c:${it.h};--ink:${tfInk(it.h)};aspect-ratio:1/${it.r.toFixed(2)}"><b>${esc(it.n)}</b>${tfWhat(it.lede) ? `<span>${esc(tfWhat(it.lede))}</span>` : ""}</button>`;
     case "art":
-      return `<button type="button" class="tf-card tf-art" data-tf="name" data-n="${esc(it.n)}" data-h="${it.h}"><span class="tf-hero" style="--c:${it.h};--ink:${tfInk(it.h)}"><b>${esc(it.n)}</b></span><span class="tf-tx"><span class="tf-lede">${esc(tfSentence(it.lede, 125))}</span><small>Article · ${tfRead(it.words)} min read</small></span></button>`;
+      return `<button type="button" class="tf-card tf-art" data-tf="name" data-n="${esc(it.n)}" data-h="${it.h}"><span class="tf-hero" style="--c:${it.h};--ink:${tfInk(it.h)}"><b>${esc(it.n)}</b></span><span class="tf-tx"><span class="tf-lede">${esc(tfSentence(it.lede, 400))}</span><small>Article · ${tfRead(it.words)} min read</small></span></button>`;
     case "cotd":
       return `<button type="button" class="tf-card tf-cotd" data-tf="name" data-n="${esc(it.n)}" data-h="${it.h}" style="--c:${it.h};--ink:${tfInk(it.h)}"><span class="tf-cotd-t"><em>Color of the day</em><b>${esc(it.n)}</b></span><span class="tf-cotd-s">${esc(tfSentence(it.lede, 240))}<i class="tf-go">Read its story ${ICON.arrow}</i></span></button>`;
     case "game": {
@@ -177,10 +177,13 @@ function tfSkeleton(k) {
   const hs = [1.25, .9, 1.1, 1.4, .95, 1.2, 1.05, 1.3, .85, 1.15];
   return `<div class="tf-cols tf-sk" aria-hidden="true">${[0, 1, 2, 3, 4].map(c => `<div class="tf-col">${[0, 1, 2].map(r => { const n = c + r * 5; return `<div class="tf-card sk" style="--c:${hexes[n % hexes.length]};aspect-ratio:1/${hs[n % hs.length]}"></div>`; }).join("")}</div>`).join("")}</div>`;
 }
-const tfColCount = w => document.documentElement.classList.contains("desk") ? (w >= 1240 ? 5 : w >= 900 ? 4 : 3) : w >= 700 ? 3 : 2;
+// bring the chosen chip fully into the chip row (the row scrolls sideways on a narrow phone)
+function tfChipInView(row, b) { const l = b.offsetLeft - 20, r = b.offsetLeft + b.offsetWidth + 20; if (l < row.scrollLeft) row.scrollTo({ left: Math.max(0, l), behavior: "smooth" }); else if (r > row.scrollLeft + row.clientWidth) row.scrollTo({ left: r - row.clientWidth, behavior: "smooth" }); }
+const tfColCount =w => document.documentElement.classList.contains("desk") ? (w >= 1240 ? 5 : w >= 900 ? 4 : 3) : w >= 700 ? 3 : 2;
 
 function todayFeed() {
   const back = typeof BACK_RENDER !== "undefined" && BACK_RENDER, k = today();
+  if (S.tab !== "feed") { S.tab = "feed"; save(); }   // the place you were last: every "go(S.tab)" Close or Back (the daily game's ✕) comes back here
   const streak = typeof chStreak === "function" ? chStreak() : 0;
   const el = show(`<header class="room-head tf-head"><h1 class="title-1">Today</h1><span class="note">${esc(tfDate(k))}${streak > 0 ? ` · ${streak}-day streak` : ""}</span></header>
     <i class="tf-sent" aria-hidden="true"></i>
@@ -195,7 +198,7 @@ function todayFeed() {
   const paint = restore => tfPaint(el, host, st, tfFilter(), restore, stop);
   chips.addEventListener("click", e => {
     const b = e.target.closest("[data-tf-f]"); if (!b || b.dataset.tfF === tfFilter() || !st) return;
-    buzz(4); S.tf = { ...(S.tf || {}), filter: b.dataset.tfF }; save(); setChips();
+    buzz(4); S.tf = { ...(S.tf || {}), filter: b.dataset.tfF }; save(); setChips(); tfChipInView(chips, b);
     st.shown[b.dataset.tfF] = 0; tfScrollTo(el, 0); paint(false);
   });
   // the chips stick under the top; once they do, a strip of ground color covers the status-bar zone above them (no layout change)
@@ -248,7 +251,7 @@ function tfPaint(scr, host, st, f, restore, stop) {
   // coming Back: the cards that were on screen are drawn again (heights are known up front), then the scroll goes where it was
   if (restore && st.y && st.y[f]) { const y = st.y[f]; tfScrollTo(scr, y); requestAnimationFrame(() => tfScrollTo(scr, y)); }
   if (typeof IntersectionObserver === "function") {
-    const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)) { if (n < list.length) add(n + TF_BATCH); io.unobserve(more); if (n < list.length) io.observe(more); } }, { rootMargin: "1400px 0px" });
+    const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)) { if (n < list.length) add(n + TF_BATCH); io.unobserve(more); if (n < list.length) io.observe(more); } }, { root: /(auto|scroll)/.test(getComputedStyle(scr).overflowY) ? scr : null, rootMargin: "1400px 0px" });
     io.observe(more); live.push(() => io.disconnect());
   } else add(list.length);
   let rt = 0;

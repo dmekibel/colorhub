@@ -943,8 +943,8 @@ addEventListener("popstate", e => {
   try { if (btn) btn.click(); else if (!app.querySelector(".room-sheet")) go(S.tab || "learn"); } finally { HIST_POP = false; }
 });
 function go(tab) {
-  if (tab === "feed" && typeof todayFeed === "function") return todayFeed();   // the Today feed (js/todayfeed.js): its own place, not a remembered tab
   S.tab = tab; save();
+  if (tab === "feed" && typeof todayFeed === "function") return todayFeed();   // the Today feed (js/todayfeed.js); S.tab = "feed" so every "go(S.tab)" Close/Back lands on it
   if (typeof X_ROOT !== "undefined") X_ROOT = null;
   // (no questionnaire wall before Train: color vision is one row on Train > Your eye, js/rooms2.js)
   if (tab === "gym") return gymHome();
