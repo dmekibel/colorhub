@@ -111,3 +111,7 @@ html.desk .screen.aw-page>.aw-head,html.desk .screen.aw-page>.aw-pmap-top{grid-c
 html.desk .screen.aw-page>.aw-pt-hero{grid-column:2;grid-row:2/span 2;margin:0}
 html.desk .aw-page .aw-pmap-top{max-width:360px;align-self:start}
 html.desk .aw-page .aw-pt-open,html.desk .aw-page .aw-pt-hero>img{max-height:420px}
+
+/* the Back / More row is part of the page here (the bar above already stays put), so text never slides under it */
+html.desk .screen:has(>.ptg)>.art-top,html.desk .aw-page>.art-top{position:static}
+html.desk .screen.explore.mu-home .pl-colls:has(>:nth-child(3):last-child){grid-template-columns:repeat(3,1fr)}
