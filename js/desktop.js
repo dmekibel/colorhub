@@ -82,7 +82,12 @@ function deskInstall() {
   new MutationObserver(() => { deskMarkActive(); deskFoot(); deskCrumbs(); }).observe(document.getElementById("app"), { childList: true });
   addEventListener("hashchange", deskMarkActive);
   addEventListener("popstate", deskMarkActive);
-  const openSearch = () => { if (typeof searchOpen === "function") searchOpen(); };
+  // on a painting map the nav search is that map's own search (painter, place, subject, years), not the general one
+  const openSearch = () => {
+    const pm = document.querySelector("[data-pmsearch]");
+    if (pm) { pm.click(); return; }   // it exists only while a painting map is the screen; desktop CSS may hide the button itself
+    if (typeof searchOpen === "function") searchOpen();
+  };
   document.addEventListener("click", e => { if (e.target.closest && e.target.closest("[data-dk-search]")) openSearch(); });
   document.addEventListener("keydown", e => {
     if (!root.classList.contains("desk")) return;
