@@ -1458,6 +1458,7 @@ function glPage(i, d, fromHex, tol) {
   const avg = (typeof G.mean !== "undefined" && G.mean) ? labHex(G.mean[i * 3], G.mean[i * 3 + 1], G.mean[i * 3 + 2]) : dom;
   const el = show(`
     <header class="art-top" data-similar-gi="${i}"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${typeof fvArtHeart === "function" && d.id ? fvArtHeart(d.id) : ""}</header>
+    <div class="gl-cols">
     <div class="gl-pal-wrap">
     <div class="gl-hero gl-full-w" style="--c:${avg}"><span style="width:min(100%, calc(var(--hero-vh, 62dvh) / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas><div class="gl-hero-dots" data-glherodots aria-hidden="true"></div>
     <button class="gl-closer" data-glcloser aria-label="Look closer">${ICON.search}<span>Look closer</span></button>
@@ -1466,7 +1467,8 @@ function glPage(i, d, fromHex, tol) {
     <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
     <h1 class="p-title">${esc(d.t)}</h1>
     <p class="p-dek">${d.a ? `<button class="aw-link" data-awpainter="${esc(routeSlug(d.a))}">${esc(d.a)}</button>` : "Artist unknown"}${[d.co, d.mv].filter(Boolean).map(x => ` · ${esc(x)}`).join("")}</p>
-    <p class="gl-id-src">${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}</p>
+    <p class="gl-id-src">${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? `<span class="gl-dk-credit"> · ${esc(src.credit)}</span>` : ""}</p>
+    <div class="gl-dk-acts"><button class="gl-dk-btn" data-dkpick hidden aria-pressed="false">${icon("pipette", 18)}<span>Pick a color</span></button><button class="gl-dk-btn" data-dkcloser>${ICON.search}<span>Look closer</span></button></div>
     <div class="gl-why" data-glwhy hidden></div>
     </div>
     <div class="gl-pal-ui">
@@ -1498,6 +1500,7 @@ function glPage(i, d, fromHex, tol) {
     <div class="aw-cx" data-glctx></div>
     <p class="fine">Computed by Chromatlas, not by the museum, from its photograph. Names are the nearest of about 1,000. Old varnish and the photograph shift color, and screens differ.</p>
     <details class="gl-finds-more"><summary>More</summary><div data-awan></div></details></div>
+    </div>
     <div class="gl-morepainter" data-glmorepainter></div>
     ${typeof twSection === "function" ? `<div data-glsim></div>` : `<div class="sec-head gl-sim-h"><b>Similar palettes</b><span>by color, not subject</span></div>
     <div class="gl-rail" data-glsim></div>`}
@@ -2172,6 +2175,8 @@ function glPage(i, d, fromHex, tol) {
   // "Look closer": the same picture, full screen, with pinch-zoom/pan and Value/Squint/Where (js/paintzoom.js)
   const closerBtn = el.querySelector("[data-glcloser]");
   if (closerBtn) closerBtn.onclick = () => openLookCloser();
+  const dkClose = el.querySelector("[data-dkcloser]");   // desktop's own two buttons beside the title (css/desktop.css hides the pills on the picture there); they just drive the pills
+  if (dkClose) dkClose.onclick = () => openLookCloser();
   // "Pick a color" (David, relayed 2026-10-09): the explicit way into the eyedropper now -- arms pickArmed,
   // which syncEyd() (above) turns into a live eyedropAttach() on the hero image
   const pickBtn = el.querySelector("[data-glpickbtn]");
@@ -2188,6 +2193,12 @@ function glPage(i, d, fromHex, tol) {
     if (pickArmed) { pickArmed = false; syncEyd(); }
     openLookCloser("pick");
   };
+  const dkPick = el.querySelector("[data-dkpick]");
+  if (dkPick && pickBtn) {
+    dkPick.onclick = e => pickBtn.onclick(e);
+    const dkSync = () => { dkPick.hidden = pickBtn.hidden; dkPick.setAttribute("aria-pressed", pickBtn.getAttribute("aria-pressed") || "false"); };
+    dkSync(); new MutationObserver(dkSync).observe(pickBtn, { attributes: true });
+  }
   // "Pick from the painting": a small ring where each color was taken (the page's own tap-dot, kept)
   const dotAt = [];
   function clearDots() { heroSpan.querySelectorAll(".gl-pick-dot").forEach(n => n.remove()); }

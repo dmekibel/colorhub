@@ -146,3 +146,46 @@ html.desk .pmx{--dk-b:28px;--dk-row:calc(var(--dk-b) + var(--corner,48px) + 10px
 html.desk .pmx .pmx-cap{left:28px;right:calc(28px + var(--corner,48px) + 12px);bottom:var(--dk-b)}
 html.desk .pmx .pmx-facets{bottom:calc(var(--dk-row) + var(--cap-x,0px));padding-left:28px;scroll-padding-left:28px}
 html.desk .pmx .pmx-walk{left:28px;bottom:calc(var(--dk-row) + 44px + var(--cap-x,0px))}
+
+/* ---------- the museum painting page (#/gallery/<n>): the painting large and sticky on the left, everything about it on the right;
+   the painter's other works and similar palettes run the full width below ---------- */
+html.desk .screen.article.gl-page:has(>.gl-cols){max-width:1400px;padding-left:var(--dkg);padding-right:var(--dkg);padding-top:12px}
+html.desk .gl-page>.art-top{position:static}
+html.desk .gl-page>*{min-width:0}
+html.desk .gl-cols{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);column-gap:clamp(36px,4.5vw,72px);row-gap:0;align-items:start;margin-top:8px}
+html.desk .gl-cols>.gl-pal-wrap{display:contents}
+html.desk .gl-cols>*,html.desk .gl-pal-wrap>*{min-width:0}
+html.desk .gl-cols .gl-hero{grid-column:1;grid-row:1/span 12;position:sticky;top:calc(var(--dkn) + 16px);margin:0;padding:0;--hero-vh:calc(100dvh - var(--dkn) - 100px);
+  border-radius:var(--r-2);overflow:hidden;min-height:0}
+html.desk .gl-cols .gl-hero>span{max-width:100%}
+html.desk .gl-cols .gl-closer{display:none}   /* the two actions are real buttons beside the title here, not pills on the picture */
+html.desk .gl-cols>:not(.gl-pal-wrap):not(.gl-hero),html.desk .gl-pal-wrap>:not(.gl-hero){grid-column:2}
+html.desk .gl-cols .gl-id{margin-top:0}
+html.desk .gl-cols .gl-id .p-title{font-size:clamp(40px,3.8vw,60px);line-height:1.02;overflow-wrap:anywhere}
+html.desk .gl-cols .gl-id .p-dek{font-size:18px}
+html.desk .gl-cols .gl-id-src{font-size:14px;margin-top:8px}
+html.desk .gl-dk-credit{display:inline}
+html.desk .gl-dk-acts{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 22px}
+html.desk .gl-dk-btn{display:inline-flex;align-items:center;gap:9px;height:46px;padding:0 20px 0 16px;border-radius:var(--r-pill);background:var(--surface-2);color:var(--ink);
+  box-shadow:inset 0 0 0 1px var(--rule);font:500 15.5px/1 var(--sans);cursor:pointer;transition:background .15s,box-shadow .15s}
+html.desk .gl-dk-btn[hidden]{display:none}
+html.desk .gl-dk-btn:hover{background:var(--surface-3);box-shadow:inset 0 0 0 1px var(--rule-strong)}
+html.desk .gl-dk-btn[aria-pressed="true"]{background:rgba(236,232,223,.92);color:#0E0D0B}
+html.desk .gl-dk-btn svg{width:18px;height:18px}
+html.desk .gl-page .gl-pal-ui .palette.gl-strip{height:64px}
+@media (min-width:1280px){html.desk .gl-cols .gl-modes.gl-tiles{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* below the two columns: full width */
+html.desk .gl-page>.gl-morepainter{margin-top:56px}
+html.desk .gl-page .gl-rail{margin-left:0;margin-right:0;padding-left:0;padding-right:0}
+html.desk .gl-page .gl-rail>.pin-art img,html.desk .gl-page .gl-rail>.gl-pin .gl-im{height:clamp(170px,14vw,230px)}
+html.desk .gl-page>.gl-morepainter .gl-rail{flex-wrap:wrap;overflow:visible;row-gap:22px}
+/* "Browse palettes": the full-window split is the painting on the left, the palette feed on the right */
+html.desk .gl-split{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr);column-gap:0}
+html.desk .gl-split>.gl-split-top{grid-column:1;grid-row:1/span 3;height:100%;min-height:0;padding:0 var(--dkg)}
+html.desk .gl-split>.gl-split-top .gl-hero{--hero-vh:calc(100dvh - 120px);width:100%}
+html.desk .gl-split>.gl-split-chips-row,html.desk .gl-split>.gl-slide,html.desk .gl-split>.gl-split-feed{grid-column:2;max-width:640px;justify-self:stretch;box-sizing:border-box}
+html.desk .gl-split .gl-slide.cnt-wrap{width:auto}
+html.desk .gl-split>.gl-split-chips-row{padding-top:72px}
+html.desk .gl-split>.gl-split-feed{padding-bottom:40px}
+html.desk .gl-split-done{top:20px;right:28px}
+html.desk .gl-page>.dk-foot{margin-left:calc(-1 * var(--dkg));margin-right:calc(-1 * var(--dkg))}

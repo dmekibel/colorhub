@@ -228,6 +228,8 @@
    museum sit right under the pinned image, above the palette strip, so who/when/where/why never needs a scroll.
    Kept short on purpose -- the eyebrow/title/dek are the same elements the painting used to show lower on the
    page (gl-roles still follows, further down); this block just moves them above the palette. */
+.gl-cols{display:contents}   /* invisible on the phone; css/desktop.css makes it the two columns */
+.gl-dk-acts,.gl-dk-credit{display:none}
 .gl-id{margin-top:14px}
 .gl-id .p-title{margin-top:6px}
 .gl-id .p-dek{margin-top:6px}
