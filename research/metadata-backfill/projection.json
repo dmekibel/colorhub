@@ -143,51 +143,51 @@
  "top15_after_if_citizenship": [
   [
    "Italy",
-   28857
+   29881
   ],
   [
    "France",
-   19322
+   19670
   ],
   [
    "Netherlands",
-   12282
+   12089
   ],
   [
    "Russia",
-   10930
+   8067
   ],
   [
    "Germany",
-   5540
-  ],
-  [
-   "Spain",
-   5454
+   6123
   ],
   [
    "United Kingdom",
-   5308
+   5305
   ],
   [
    "United States",
-   4752
+   4821
   ],
   [
-   "Austria",
-   3165
+   "Spain",
+   3944
+  ],
+  [
+   "Belgium",
+   3298
   ],
   [
    "Sweden",
    3043
   ],
   [
-   "Belgium",
-   2507
+   "Poland",
+   2839
   ],
   [
-   "Poland",
-   2286
+   "Austria",
+   2533
   ],
   [
    "Denmark",
@@ -198,12 +198,12 @@
    1140
   ],
   [
-   "India",
-   728
+   "Estonia",
+   1015
   ]
  ],
  "birth_vs_citizenship": {
-  "rows_that_differ": 7812,
+  "rows_that_differ": 4198,
   "top_painters": [
    [
     [
@@ -223,43 +223,11 @@
    ],
    [
     [
-     "Francesco Hayez",
-     "Italy",
-     "Austria"
-    ],
-    565
-   ],
-   [
-    [
-     "Peter Paul Rubens",
-     "Germany",
-     "Spain"
-    ],
-    553
-   ],
-   [
-    [
-     "Anthony van Dyck",
-     "Belgium",
-     "Spain"
-    ],
-    400
-   ],
-   [
-    [
      "Camille Pissarro",
      "United States",
      "France"
     ],
     398
-   ],
-   [
-    [
-     "El Greco",
-     "Greece",
-     "Spain"
-    ],
-    397
    ],
    [
     [
@@ -271,11 +239,11 @@
    ],
    [
     [
-     "Marcello Bacciarelli",
-     "Italy",
-     "Russia"
+     "Alexej von Jawlensky",
+     "Russia",
+     "Germany"
     ],
-    231
+    323
    ],
    [
     [
@@ -287,27 +255,27 @@
    ],
    [
     [
-     "Taras Shevchenko",
-     "Ukraine",
-     "Russia"
+     "Boris Grigoriev",
+     "Russia",
+     "France"
     ],
-    215
+    181
    ],
    [
     [
-     "Frans Hals",
-     "Belgium",
-     "Netherlands"
+     "Henryk Siemiradzki",
+     "Russia",
+     "Poland"
     ],
-    207
+    172
    ],
    [
     [
-     "Raphael",
-     "Italy",
-     "Germany"
+     "Chaïm Soutine",
+     "Russia",
+     "France"
     ],
-    168
+    164
    ],
    [
     [
@@ -319,14 +287,6 @@
    ],
    [
     [
-     "Frans Snyders",
-     "Belgium",
-     "Spain"
-    ],
-    160
-   ],
-   [
-    [
      "Gaspard Dughet",
      "Italy",
      "France"
@@ -335,75 +295,115 @@
    ],
    [
     [
-     "Ants Laikmaa",
-     "Estonia",
-     "Russia"
-    ],
-    155
-   ],
-   [
-    [
-     "Johann Köler",
-     "Estonia",
-     "Russia"
-    ],
-    134
-   ],
-   [
-    [
-     "Józef Brandt",
-     "Poland",
-     "Russia"
-    ],
-    131
-   ],
-   [
-    [
-     "Ferdynand Ruszczyc",
-     "Belarus",
-     "Russia"
-    ],
-    122
-   ],
-   [
-    [
-     "Eduard Hau",
-     "Estonia",
-     "Russia"
-    ],
-    118
-   ],
-   [
-    [
-     "Erich von Kügelgen",
-     "Germany",
-     "Russia"
-    ],
-    117
-   ],
-   [
-    [
-     "Julie Wilhelmine Hagen-Schwarz",
-     "Latvia",
-     "Russia"
-    ],
-    104
-   ],
-   [
-    [
-     "January Suchodolski",
-     "Belarus",
-     "Russia"
-    ],
-    98
-   ],
-   [
-    [
      "David Klöcker Ehrenstrahl",
      "Germany",
      "Sweden"
     ],
     96
+   ],
+   [
+    [
+     "Franciszek Żmurko",
+     "Ukraine",
+     "Poland"
+    ],
+    85
+   ],
+   [
+    [
+     "Hans Holbein the Younger",
+     "Germany",
+     "Switzerland"
+    ],
+    72
+   ],
+   [
+    [
+     "Kazimierz Alchimowicz",
+     "Belarus",
+     "Russia"
+    ],
+    71
+   ],
+   [
+    [
+     "Albert Bierstadt",
+     "Germany",
+     "United States"
+    ],
+    69
+   ],
+   [
+    [
+     "Thomas Cole",
+     "United Kingdom",
+     "United States"
+    ],
+    55
+   ],
+   [
+    [
+     "Witold Pruszkowski",
+     "Ukraine",
+     "Poland"
+    ],
+    51
+   ],
+   [
+    [
+     "Karl Alexander von Winkler",
+     "Estonia",
+     "Germany"
+    ],
+    42
+   ],
+   [
+    [
+     "Leopold Horovitz",
+     "Slovakia",
+     "Hungary"
+    ],
+    38
+   ],
+   [
+    [
+     "Stanisław Chlebowski",
+     "Ukraine",
+     "Poland"
+    ],
+    35
+   ],
+   [
+    [
+     "Jean Petitot",
+     "Switzerland",
+     "France"
+    ],
+    16
+   ],
+   [
+    [
+     "Bertholet Flémal",
+     "Belgium",
+     "Germany"
+    ],
+    3
+   ],
+   [
+    [
+     "Hendrik Potuyl",
+     "Germany",
+     "Netherlands"
+    ],
+    2
+   ],
+   [
+    [
+     "Ottmar Elliger",
+     "Sweden",
+     "Germany"
+    ],
+    2
    ]
   ]
  },

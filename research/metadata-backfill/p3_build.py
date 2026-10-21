@@ -123,10 +123,13 @@ for lab, rs in by_label.items():
         for q in p["cit"]:
             co, how = modern_country(q)
             if co: src = "citizenship"; how = "p27"; break
-    cit = None
-    for q in p["cit"][:3]:
-        cit, _h = modern_country(q)
-        if cit: break
+    cit = None; cits = []
+    for q in p["cit"]:
+        c1, _h = modern_country(q)
+        if _h == "hist": continue      # Russian Empire / Soviet Union / Prussia ... name no modern state: no citizenship signal
+        if c1 and c1 not in cits: cits.append(c1)
+    cit = cits[0] if cits else None
+    cit_single = cits[0] if len(cits) == 1 else None
     mvs = fold_mv(p["mv"])
     g = next((GENDER[x] for x in p["sex"] if x in GENDER), "other" if p["sex"] else None)
     conf = m["conf"] * (1.0 if src == "birth" and how in ("p17", "self", "p131") else 0.8 if src else 0.0)
@@ -143,7 +146,7 @@ for lab, rs in by_label.items():
     app = app_name(co)
     if app != co: rec["country_note"] = "kept Russia (existing label); Wikidata birth country " + str(co)
     rec["country_app"] = app
-    rec["country_p27"] = app_name(cit)
+    rec["country_p27"] = app_name(cit); rec["country_p27_single"] = app_name(cit_single); rec["country_p27_all"] = [app_name(x) for x in cits]
     painters[lab] = rec
 
 matched = [l for l, r in painters.items() if r.get("q")]
