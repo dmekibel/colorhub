@@ -72,6 +72,14 @@ const HONEY_NEUTRAL_C = 16;
 const honeyGridHueKey = it => it.C < HONEY_NEUTRAL_C ? -1000 + (100 - it.L) : (it.H - 15 + 360) % 360;
 // k tunes the tile's aspect: smaller k = more rows, taller tile (today's shipped "mapTall"); bigger k = fewer
 // rows, wider tile (the original "mapWide").
+// Desktop only (html.desk, js/desktop.js): the bounded tile is shaped like the window instead of like a phone. Rows per
+// column ~ sqrt(N*k), so the tile is about 1 / (.866 * k) times as wide as it is tall; k = 1 / (.866 * aspect) makes it the
+// window's own shape (never taller than the phone's own k). A phone gets k back untouched.
+function honeyAspectK(k) {
+  if (typeof document === "undefined" || !document.documentElement.classList.contains("desk")) return k;
+  const a = innerWidth / Math.max(320, innerHeight - 70);
+  return Math.min(k, Math.max(.5, +(1 / (.866 * a)).toFixed(2)));
+}
 function honeyMap(items, k) {
   const N = items.length, h0 = Math.max(2, Math.round(Math.sqrt(N * k)));
   let best = null;
@@ -421,7 +429,7 @@ const HONEY_ARR = {
   // now the home screen's own name (NAV.map, js/core.js) -- a label-only rename to "Grid" so the two don't collide
   // in the Map ⋯ sheet ("Grid · Hue across..."). The id stays "map" everywhere (saves, HONEY_ARR_IDS, addresses).
   map: { title: "Grid", kind: "grid", def: "hue", sub: "Hue across, light to dark down",
-    make: (items, ord) => honeySortGrid(items, HONEY_SORT[ord] || HONEY_SORT.light, 1.9) },
+    make: (items, ord) => honeySortGrid(items, HONEY_SORT[ord] || HONEY_SORT.light, honeyAspectK(1.9)) },
   rings: { title: "Rings", kind: "radial", def: "light", sub: "Rings from the middle out, hue going round",
     make: (items, ord, p) => { const o = HONEY_CENTER[ord] || HONEY_CENTER.light; return honeyRingArr(items, o.rank(items, p), o.group && o.group(items)); } },
   sunflower: { title: "Sunflower", kind: "radial", def: "vivid", sub: "A golden spiral from the middle out, hue going round",
@@ -554,7 +562,7 @@ function honeyLayout(raw, layoutKey) {
   const pk = honeyParseKey(layoutKey), arr = HONEY_ARR[pk.id] && HONEY_ARR[pk.id].make ? HONEY_ARR[pk.id] : null, spec = arr ? honeyOrderSpec(pk.id, pk.ord) : null;
   const items0 = spec && spec.sig ? raw.map(honeyNorm) : null;
   // an order that depends on your progress (Your words, First met) or on data still loading (Painted) keys on it too
-  const key = `${layoutKey}|${HONEY_ENDLESS ? "e" : "b"}|${raw.length}|${hs >>> 0}${items0 ? "|" + honeyNameHash(spec.sig(items0)) : ""}${spec && spec.needs === "painted" ? (HONEY_PAINTED ? "|P" : "|p") : ""}`;
+  const key = `${layoutKey}|${HONEY_ENDLESS ? "e" : "b"}${honeyAspectK(1.9) < 1.9 ? "d" + honeyAspectK(1.9) : ""}|${raw.length}|${hs >>> 0}${items0 ? "|" + honeyNameHash(spec.sig(items0)) : ""}${spec && spec.needs === "painted" ? (HONEY_PAINTED ? "|P" : "|p") : ""}`;
   const hit = HONEY_LAYOUTS.get(key); if (hit && hit.raw === raw) return hit;
   const items = items0 || raw.map(honeyNorm);
   let lay;
@@ -568,7 +576,7 @@ function honeyLayout(raw, layoutKey) {
   else if (items.length < HONEY_FINITE) lay = honeyCluster(items);
   else {
     // bounded, the map is one tile shaped like the phone (taller than the endless strip, which mirrored it)
-    lay = honeyMap(items, HONEY_ENDLESS ? HONEY_MAP_K[layoutKey] || HONEY_MAP_K.mapTall : 1.9);
+    lay = honeyMap(items, HONEY_ENDLESS ? HONEY_MAP_K[layoutKey] || HONEY_MAP_K.mapTall : honeyAspectK(1.9));
     // L18 (David: endless mirroring "makes it harder to find the color you need"): by default the map is ONE bounded
     // world, each color exactly once, centered; panning rubber-bands at the edges and zoom-out fits the whole map.
     // The old endless tiling stays behind HONEY_ENDLESS (View > Look, off by default).

@@ -604,7 +604,10 @@ function pmFeat(list, F) {
 }
 const pmHueKey = (a, b) => { let H = Math.atan2(b, a) * 180 / Math.PI; if (H < 0) H += 360; return (H - 330 + 360) % 360; };   // reds first, then oranges, browns, yellows, greens, blues, purples
 function pmLayColor(list, place, F) {
-  const n = list.length, cols = Math.max(1, Math.round(Math.sqrt(n / 1.55))), rows = Math.ceil(n / cols);
+  // a desktop window is landscape: a small map (one painter, a filtered set) is framed like the window, not like a phone
+  // (html.desk, js/desktop.js; the whole museum's map keeps its own shape, its thumbnails are cut for it)
+  const n = list.length, deskA = n <= 4000 && document.documentElement.classList.contains("desk") ? Math.min(1.7, innerWidth / Math.max(320, innerHeight - 70)) : 0;
+  const cols = Math.max(1, Math.round(deskA ? Math.sqrt(n * deskA) : Math.sqrt(n / 1.55))), rows = Math.ceil(n / cols);
   const Lp = new Float32Array(n), Ap = new Float32Array(n), Bp = new Float32Array(n);
   for (let k = 0; k < n; k++) { const c = pmPlaceLab(list[k], place, F); Lp[k] = c[0]; Ap[k] = c[1]; Bp[k] = c[2]; }
   const L = k => Lp[k], A = k => Ap[k], B = k => Bp[k];
