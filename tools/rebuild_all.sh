@@ -11,15 +11,18 @@
 # metrics.bin and thumbs.txt; portraits.json kept an old order for ten days and Van Gogh's page showed a Bonnard. Every step
 # here is also covered by node tools/check_ids.js, which names the tool that fixes whatever is out of step.
 set -euo pipefail
+# one thread per worker: numpy otherwise spawns dozens of threads in each of the 8 pool workers (load average 300 on 10 cores, 5x slower)
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1
 cd "$(dirname "$0")/.."
-ATLAS=0; [ "${1:-}" = "--atlas" ] && ATLAS=1; [ "${1:-}" = "--atlas-full" ] && ATLAS=2
+ATLAS=0; SKIPGAL=0
+for a in "$@"; do case "$a" in --atlas) ATLAS=1;; --atlas-full) ATLAS=2;; --skip-gallery) SKIPGAL=1;; esac; done   # --skip-gallery: resume after a gallery.py that already finished
 step() { echo; echo "== $*"; }
 
 step "audit the new art (dates, same-painting duplicates, non-paintings) -- read it before shipping"
 python3 tools/audit_artists.py | grep -E "^[A-Z].*rows|DATE" || true
 
 step "gallery (deletes metrics.bin and thumbs.txt; the steps below put them back)"
-python3 tools/gallery.py --raw research/_raw | tail -1 | cut -c1-160
+[ "$SKIPGAL" = 1 ] || python3 tools/gallery.py --raw research/_raw | tail -1 | cut -c1-160
 for s in analyze metrics_build facets artwiki_build; do step "$s"; python3 tools/$s.py | tail -1 | cut -c1-160; done
 step "painter counts, movements, portraits and most-famous rails (all store gallery positions)"
 python3 tools/wikidata_artists.py | tail -1 | cut -c1-160
