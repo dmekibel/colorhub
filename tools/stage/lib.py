@@ -80,13 +80,17 @@ def clean(r):
     return None
 
 
-def stage(museum, api_total, raw, norm, license, url_of, pre_drops=None, select_src=None):
+def stage(museum, api_total, raw, norm, license, url_of, pre_drops=None, select_src=None, group_cap=True):
     """raw: records (each with 'id') that passed the museum's own filter (pre_drops: Counter of what that filter
     removed). Applies corpus.py's select() (text pages, group cap, hand-listed non-paintings), then held / twin /
     clean, and writes the files."""
     held = Held()
     drops = Counter(pre_drops or {})
-    sel_ids = {x["id"] for x in C.select(select_src or museum, raw)}
+    if group_cap:
+        sel_ids = {x["id"] for x in C.select(select_src or museum, raw)}
+    else:  # a source whose ids are not leaves of books: text pages and hand-listed non-paintings only
+        sel_ids = {x["id"] for x in raw if not C.TEXT_PAGE.search(x.get("title") or "")
+                   and f"{museum}-{x['id']}" not in held.nonpaint}
     rows, seen_here, held_n = [], set(), 0
     for x in raw:
         if x["id"] not in sel_ids:
