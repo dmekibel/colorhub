@@ -130,3 +130,235 @@ Total first-pass gap across 404 Russia-born painters with a positive gap: 5470 (
 - Boris Schatz (Q893776, Lithuania): held 0, WD 0, Cat 2/53, gap 53
 - Witold Wojtkiewicz (Q2093769, Poland): held 0, WD 25, Cat 0/52, gap 52
 - Aleksander Lesser (Q3270591, Poland): held 0, WD 21, Cat 0/52, gap 52
+
+## Staged result
+
+**4789 new paintings staged** in 229 files under data/corpus-staging/ (309 painters). Not read by the app. 0 of them share an id or a Commons file with data/corpus; 0 duplicate ids inside staging.
+Row shape = the existing zz-commons rows (id commons-Q.../commons-F..., src, t, a, y, co null, mv null, img = Special:FilePath?width=400, p = 6 palette entries, L, C, url) plus one extra key `orig` (the original upload.wikimedia.org file URL, no query string).
+Palettes are measured with the repo's current tools/corpus.py palette_of on a 200 px copy of the 400 px thumbnail; the real vivid-v2 re-measure still happens in gallery.py when the rows move into data/corpus.
+`a` uses the name the corpus already holds for that painter (matched through the backfill Wikidata Q), so rows join the existing painter page; unmatched painters carry their Wikidata English label.
+
+### By painter (top 80 by staged rows)
+
+| Painter | Staged | Held before |
+|---|---|---|
+| Konstantin Gorbatov | 248 | 0 |
+| Vasily Surikov | 225 | 8 |
+| Vladimir Makovsky | 195 | 6 |
+| Kuzma Petrov-Vodkin | 183 | 2 |
+| Ilya Mashkov | 170 | 1 |
+| Alexei Savrasov | 163 | 6 |
+| Andrei Mironov | 140 | 0 |
+| Konstantin Korovin | 133 | 13 |
+| Nikolai Sverchkov | 131 | 3 |
+| Alexey Akindinov | 106 | 0 |
+| Karl Bryullov | 96 | 65 |
+| Alexei Harlamov | 95 | 0 |
+| Ivan Makarov | 82 | 7 |
+| Arkady Rylov | 77 | 1 |
+| Aristarkh Lentulov | 76 | 4 |
+| Fyodor Alekseyev | 73 | 2 |
+| Nikolay Nikanorovich Dubovskoy | 72 | 3 |
+| Fyodor Bronnikov | 68 | 2 |
+| Leonid Solomatkin | 62 | 2 |
+| Abram Arkhipov | 61 | 1 |
+| Ivan Kulikov | 58 | 0 |
+| Constantin Westchiloff | 56 | 0 |
+| Vasily Perov | 55 | 17 |
+| Fyodor Vasilyev | 54 | 124 |
+| Konstantin Yuon | 49 | 0 |
+| Filipp Malyavin | 45 | 2 |
+| Alexander Varnek | 42 | 6 |
+| Lev Lagorio | 40 | 0 |
+| Natalia Goncharova | 35 | 0 |
+| Vassily Maximov | 35 | 4 |
+| Jalmari Ruokokoski | 33 | 0 |
+| Simon Kozhin | 31 | 0 |
+| Carl Ludwig Johann Christineck | 30 | 6 |
+| Orest Kiprensky | 30 | 8 |
+| Robert Falk | 30 | 0 |
+| Nikolai Dmitriev-Orenburgsky | 28 | 1 |
+| Sergey Malyutin | 28 | 2 |
+| Vasily Vereshchagin | 28 | 382 |
+| Aleksey Kivshenko | 27 | 1 |
+| Alexander Fedorovich Pershakov | 26 | 4 |
+| Alexey Vassilievich Tyranov | 26 | 5 |
+| Ilya Repin | 26 | 264 |
+| Isaac Levitan | 26 | 256 |
+| Nikolay Argunov | 26 | 6 |
+| Pavel Filonov | 26 | 2 |
+| Arkhip Kuindzhi | 25 | 303 |
+| Mikhail Matyushin | 25 | 1 |
+| Grigory Gurkin | 24 | 0 |
+| Vladimir Tatlin | 24 | 5 |
+| Stepan Shchukin | 23 | 1 |
+| Aleksey Antropov | 22 | 11 |
+| Nikolay Koshelev | 22 | 1 |
+| Alfred Hirv | 21 | 0 |
+| Grigory Soroka | 21 | 3 |
+| Ivan Argunov | 21 | 5 |
+| Konstantin Savitsky | 21 | 2 |
+| Alexandre Jacovleff | 20 | 2 |
+| Andrey Shishkin | 20 | 0 |
+| Eugene Lanceray | 20 | 1 |
+| Maria Feodorova | 20 | 0 |
+| El Lissitzky | 19 | 1 |
+| Grigory Gagarin | 19 | 1 |
+| Yefim Volkov | 19 | 1 |
+| Mikhail Vrubel | 18 | 24 |
+| Nadezhda Udaltsova | 18 | 0 |
+| Carl Christian Philipp Reichel | 17 | 1 |
+| Martiros Saryan | 17 | 0 |
+| Mikhail Larionov | 17 | 0 |
+| Vasily Andreevich Tropinin | 17 | 32 |
+| Lukian Popov | 16 | 0 |
+| Nikolai Ge | 16 | 10 |
+| Bogdan Willewalde | 15 | 2 |
+| Grigory Chernetsov | 15 | 1 |
+| Illarion Mikhailovich Pryanishnikov | 15 | 0 |
+| Konstantin Trutovsky | 15 | 1 |
+| Albert Nikolayevitch Benois | 14 | 0 |
+| Dmitri Zhilinsky | 14 | 0 |
+| Vladimir Osipovich Sherwood | 14 | 0 |
+| Yelena Polenova | 14 | 0 |
+| Alexandre Roubtzoff | 13 | 0 |
+| ... 229 more painters | 792 | |
+
+### Collections pass (Wikidata paintings P195 in a Russian museum, creator a Russian-citizen painter)
+
+Source query: items with collection located in Russia + P18 + P170 whose creator has Russian / Russian Empire / USSR citizenship. Most of the 3,576 items were already in the corpus (about 2,500 same id), so few are new. "russia" = creator born in Russia or no birth record; "empire" = creator born in Ukraine, Belarus, Lithuania or Armenia (Repin, Levitan and the like: they stay credited to their own country by the backfill rule, listed here so you can decide).
+
+| Pass | Collection | Staged | File |
+|---|---|---|---|
+| russia | tretyakov | 3 | data/corpus-staging/zz-commons-rucolltretyakov-1.json |
+| russia | russianmuseum | 33 | data/corpus-staging/zz-commons-rucollrussianmuseum-1.json |
+| russia | yekaterinburg | 18 | data/corpus-staging/zz-commons-rucollyekaterinburg-1.json |
+| russia | regional | 94 | data/corpus-staging/zz-commons-rucollregional-1.json |
+| russia | hermitage | 8 | data/corpus-staging/zz-commons-rucollhermitage-1.json |
+| russia | pushkin | 1 | data/corpus-staging/zz-commons-rucollpushkin-1.json |
+| empire | russianmuseum | 25 | data/corpus-staging/zz-commons-rucollrussianmuseumempire-1.json |
+| empire | yekaterinburg | 4 | data/corpus-staging/zz-commons-rucollyekaterinburgempire-1.json |
+| empire | regional | 39 | data/corpus-staging/zz-commons-rucollregionalempire-1.json |
+| empire | tretyakov | 5 | data/corpus-staging/zz-commons-rucolltretyakovempire-1.json |
+| empire | radishchev | 1 | data/corpus-staging/zz-commons-rucollradishchevempire-1.json |
+
+Per-museum Commons categories "Paintings by <X> in the Tretyakov Gallery / Russian Museum / Pushkin Museum" (226 categories, 207 resolved to a painter) were walked as extra roots for those painters; their new rows sit in the painter files (suffix -2, -3, ...).
+Not reachable as a collection: Commons has no "Paintings in the Hermitage Museum" / "Peterhof" category trees by artist for Russian painters (the names asked for do not exist; Hermitage Russian paintings come only through Wikidata, 8 new rows), and the Tretyakov / Russian Museum open data is not on Commons in bulk, which is why the new count stays small: the earlier Russian batch (78 painters) already holds most of what Commons has.
+
+### Dropped (approximate counts; a file can hit one rule only, first rule wins)
+
+| Reason | Count |
+|---|---|
+| file: drawing/print/photo/detail/copy by name or category | 1894 |
+| too small (under 300 px or 0.25 MP) | 1144 |
+| wd: not a painting class | 392 |
+| clean: photo of a hall/exhibition/frame, not a painting | 242 |
+| clean: cross-file duplicate (same id or same Commons file) | 207 |
+| coll: wd: not a painting class | 178 |
+| B: near-greyscale image (black-and-white photo of a picture) | 173 |
+| wd: title/file says drawing/print/detail/copy | 169 |
+| near-duplicate file of the same work (same title and year) | 158 |
+| B: same picture by image hash (existing or new) | 133 |
+| coll: too small (under 300 px or 0.25 MP) | 120 |
+| icon (listed separately) | 81 |
+| coll: wd: title/file says drawing/print/detail/copy | 35 |
+| file: also in another painter's category (doubtful) | 24 |
+| file: not raster | 16 |
+| coll: twin of an existing row (artist + title + year) | 11 |
+| wd: not a raster image | 10 |
+| clean: title says sketch/preparatory/print (second pass) | 4 |
+| coll: wd: not a raster image | 3 |
+| coll: icon (listed separately) | 3 |
+| B: image fetch failed | 1 |
+| already in data/corpus (same id / same Commons file) | 9941 |
+| twin of an existing row (artist + title + year +-2) | 99 |
+
+### Orthodox icons (kept OUT of staging; 61 found, first 60 listed: painter / id / title / file)
+
+- Alexey Akindinov / F135552471 / Alexey Akindinov. Icon — Jesus Christ — the Savior of the World. 2018- / Alexey Akindinov. Icon — Jesus Christ — the Savior of the Wo
+- Alexey Akindinov / F135552264 / Alexey Akindinov. Icon — Saints Peter and Fevronia of Murom. 2018-2019 / Alexey Akindinov. Icon — Saints Peter and Fevronia of Murom.
+- Alexey Akindinov / F135551785 / Alexey Akindinov. Icon — St. Vasily I Bishop of Ryazan and Murom. 2018 / Alexey Akindinov. Icon — St. Vasily I Bishop of Ryazan and M
+- Alexey Akindinov / F134258476 / Alexey Akindinov. Veil of the Most Holy Theotokos. 2015 / Alexey Akindinov. Veil of the Most Holy Theotokos. 2015.jpg
+- Illarion Mikhailovich Pryanishnikov / F157629 / Easter Processionlabel QS:Len,"Easter Procession"label QS:Lde,"Oster-P / Illarion Michajlowitsch Prjanischnikow 001.jpg
+- Ivan Kulikov / F16716635 / Russian:  «Старинный обряд благословения невесты в городе Муроме.»Anci / Ivan Kulikov Ancient rite of blessing the bride in Murom 190
+- Aleksey Kivshenko / F66985838 / Russia 3573 - BIG Decision (4166103552) / Russia 3573 - BIG Decision (4166103552).jpg
+- Konstantin Trutovsky / F80423466 / Разлучница / Разлучница.jpg
+- Konstantin Trutovsky / F56420963 / Живописное обозрение 1891, № 01-26 (6 янв. - 30 июня); № 27-52 (7 июля / Живописное обозрение 1891, № 01-26 (6 янв. - 30 июня); № 27-
+- Pavel Filonov / F218929 / Countenances (Faces on an Icon) / Pavel Filonov Faces.jpg
+- Vassily Maximov / F155066 / Russian:  «Больной муж»Sick Husbandtitle QS:P1476,ru:"Больной муж"labe / Wassilij Maximowitsch Maximow 002.jpg
+- Vassily Maximov / F36549071 / Максимов В.М. Красный угол в избе. 1869 / Максимов В.М. Красный угол в избе. 1869.jpg
+- Vassily Maximov / F22781582 / Максимов Красный-угол-в-избе 1869 / Максимов Красный-угол-в-избе 1869.jpg
+- Andrei Mironov / F113787985 / Russian:  «Портрет игумена Никона (Воробьёва)»Portrait of Abbot Nikon  / Nikon (Vorobyov). A. Mironov.jpg
+- Andrei Mironov / F33960434 / Saint Panteleimon. A.N. Mironov / Saint Panteleimon. A.N. Mironov.jpg
+- Andrei Mironov / F33960629 / The face of Christ not made by hand. Artist A.N. Mironov / The face of Christ not made by hand. Artist A.N. Mironov.jpg
+- Vladimir Makovsky / F156011881 / Vladimir Makovsky — Icon of Christ Pantacrator (1894) / Vladimir Makovsky — Icon of Christ Pantacrator (1894).jpg
+- Vladimir Makovsky / F156011882 / Vladimir Makovsky — Icon of Jesus Christ (1894) / Vladimir Makovsky — Icon of Jesus Christ (1894).jpg
+- Vladimir Makovsky / F156011888 / Vladimir Makovsky — The Iconographer (1891) / Vladimir Makovsky — The Iconographer (1891).jpg
+- Vladimir Makovsky / F56381340 / Живописное обозрение 1890, № 01-26 (1 янв. - 24 июня); № 27-52 (1 июля / Живописное обозрение 1890, № 01-26 (1 янв. - 24 июня); № 27-
+- Vasily Vereshchagin / F65922292 / Икона Николы с верховьев реки Пинеги / Икона Николы с верховьев реки Пинеги (Верещагин).jpg
+- Vasily Vereshchagin / F3125490 / Icon of St Nicholas from the Upper Reaches of the River Pinegalabel QS / Икона Николы с верховья реки Пинеги.jpg
+- Vasily Vereshchagin / F69579438 / Иконостас деревянной церкви Иоанна Богослова на Ишне, близ Ростова Яро / Иконостас деревянной церкви Иоанна Богослова на Ишне.jpg
+- Vasily Vereshchagin / F69643055 / Иконостас церкви в селе Белая Слуда Вологодской губернии / Иконостас церкви в селе Белая Слуда Вологодской губернии.jpg
+- Konstantin Korovin / F114231125 / Exposition La collection Morozov - icônes de l’art moderne - Fondation / Exposition La collection Morozov - icônes de l’art moderne -
+- Konstantin Korovin / F114231126 / Exposition La collection Morozov - icônes de l’art moderne - Fondation / Exposition La collection Morozov - icônes de l’art moderne -
+- Konstantin Korovin / F114181509 / Portrait of Ivan Abramovich Morozov. Konstantin Korovin. 1903 / Portrait of Ivan Abramovich Morozov. Konstantin Korovin. 190
+- Konstantin Korovin / F114230851 / "Portrait de F.I. Chaliapine" de K. Korovine (Fondation Vuitton, Paris / "Portrait de F.I. Chaliapine" de K. Korovine (Fondation Vuit
+- Konstantin Korovin / F114231067 / Exposition La collection Morozov - icônes de l’art moderne - Fondation / Exposition La collection Morozov - icônes de l’art moderne -
+- Konstantin Korovin / F114181535 / Portrait de l'artiste Konstantine Korovine. Valentin Serov. 1891 / Portrait de l'artiste Konstantine Korovine. Valentin Serov. 
+- collections / Q61754887 / Welcomming the Icon / Савицкий К. А. (1878) Встреча иконы.jpg
+- Alexei Savrasov / F69967066 / У иконы. Богомольцы / Savrasov icon pilgrims.jpg
+- Kuzma Petrov-Vodkin / F10596995 / Vasya / Kuzma Petrov-Vodkin (Russian 1878-1939), 'Vasya', Christie's
+- Kuzma Petrov-Vodkin / F143974168 / Троица. Эскиз витража для Троицкого собора в Сумах / Троица. Эскиз витража для Троицкого собора в Сумах.jpg
+- Kuzma Petrov-Vodkin / F16779431 / Здание с иконой богоматери, Александровский парк / Здание с иконой богоматери, Александровский парк.jpg
+- Kuzma Petrov-Vodkin / F16776531 / Майоликовая икона Богоматери, Александровский парк, 5 / Майоликовая икона Богоматери, Александровский парк, 5.jpg
+- Nikolay Koshelev / F114645840 / Василий Юрьевич Квашня во время охоты в лесу находит на большой сосне  / Василий Юрьевич Квашня во время охоты в лесу находит на боль
+- Natalia Goncharova / F8894853 / WLA lacma Archangel Michael / WLA lacma Archangel Michael.jpg
+- Pyotr Shamshin / F11739162 / ProcleConstantinoble / ProcleConstantinoble.jpg
+- Pavel Korin / F25719702 / Нестеров М.В. портрет П. Коріна 1925 / Нестеров М.В. портрет П. Коріна 1925.jpg
+- Mikhail Nesterov / F90472399 / Портрет художника Павла Коріна (Михайло Нестеров, 1925) / Портрет художника Павла Коріна (Михайло Нестеров, 1925).jpg
+- Evgraf Semenovich Sorokin / F12038838 / Razval (Evgraf Sorokin) / Razval (Evgraf Sorokin).jpg
+- Ilya Mashkov / F114181681 / Autoportrait. Ilia Machkov. 1911 / Autoportrait. Ilia Machkov. 1911.jpg
+- Ilya Mashkov / F114231132 / Exposition La collection Morozov - icônes de l’art moderne - Fondation / Exposition La collection Morozov - icônes de l’art moderne -
+- Ilya Mashkov / F114181689 / Nature morte. Plateau de fruits. Ilia Machkov. 1910 / Nature morte. Plateau de fruits. Ilia Machkov. 1910.jpg
+- Vladimir Borovikovsky / F15876621 / The Archangel Gabriel (From The Annunciation)label QS:Lru,"Архангел Га / Archangel Gabriel from the Annunciation.jpg
+- Vladimir Borovikovsky / F15876575 / The Virgin Mary (From The Annunciation)label QS:Lru,"Дева Мария (из "Б / GRM Inv. J-3177.jpg
+- Vladimir Borovikovsky / F15876720 / St Mark the Evangelistlabel QS:Lru,"Евангелист Марк"label QS:Len,"St M / GRM Inv. J-3179.jpg
+- Vladimir Borovikovsky / F15876952 / St Matthew the Evangelistlabel QS:Lru,"Евангелист Матфей"label QS:Len, / GRM Inv. J-3181.jpg
+- Vladimir Borovikovsky / F15876999 / St John the Evangelistlabel QS:Lru,"Евангелист Иоанн"label QS:Len,"St  / GRM Inv. J-3182.jpg
+- Vladimir Borovikovsky / F15881590 / GRM Inv. JB-407 / GRM Inv. JB-407.jpg
+- Vladimir Borovikovsky / F76338441 / King Davidlabel QS:Lru,"Царь Давид"label QS:Len,"King David" / King David by Borovikovsky.jpg
+- Vladimir Borovikovsky / F15877067 / St. Catherinelabel QS:Lru,"Святая Екатерина"label QS:Len,"St. Catherin / S.Catherine by Borovikovskiy (Russian museum).jpg
+- Vladimir Borovikovsky / F15876803 / St Luke the Evangelistlabel QS:Lru,"Евангелист Лука"label QS:Len,"St L / St Luke the Evangelist.jpg
+- Mikhail Nesterov / F50465933 / Saint Olga by Nesterov (1927, GTG) / Saint Olga by Nesterov (1927, GTG).jpg
+- Ilya Repin / Q20800356 / Young Boy Carrying an Icon, sketch / Ilja Jefimovitš Repin - Young Boy Carrying an Icon, sketch -
+- Valentin Serov / F114181634 / Sirène. Valentin Serov. 1896 / Sirène. Valentin Serov. 1896.jpg
+- collections / Q47509308 / Icon of St Nicholas from the Upper Reaches of the River Pinega / Икона Николы с верховьев реки Пинеги (Верещагин).jpg
+- Mikhail Vrubel / Q4089584 / The Mother of God with the child (Vrubel) / Mikhail-Vrubel-Icon.png
+- Andrei Petrovich Ryabushkin / F4471028 / У чудотворной иконы / У чудотворной иконы.jpg
+
+### Doubtful attributions (dropped, not staged; 17 listed up to 30 per painter): file is also in another painter's "Paintings by ..." category
+
+- Vladimir Makovsky: Живописное обозрение 1890, № 01-26 (1 янв. - 24 июня); № 27-52 (1 июля (also in Paintings by Vasily Surikov)
+- Pavel Svinyin: Tableau of Indian Faces MET DP276571.jpg (also in Paintings by John Lewis Krimmel)
+- Illarion Mikhailovich Pryanishnikov: Memorial Service for Illarion Mikhaylovich Pryanishnikov (1900).jpg (also in Paintings by Aleksey Korin)
+- Illarion Mikhailovich Pryanishnikov: Perov-Pryanishnikov.jpg (also in Paintings by Vasilij Perov)
+- Eugene Lanceray: Ivan Bilibin by B.Kustodiev (1914).jpg (also in Paintings by Boris Kustodiev)
+- Vassily Maximov: Живописное обозрение 1890, № 01-26 (1 янв. - 24 июня); № 27-52 (1 июля (also in Paintings by Carl Theodor von Piloty)
+- Lev Lagorio: Appolinary Goravsky. Portrait of Lev Lagorio.jpg (also in Paintings by Apollinary Goravsky)
+- Vladimir Makovsky: Ilya Repin, Vasily Polenov, Vladimir Makovsky — The Bouquet of Flowers (also in Paintings by Vasiliy Polenov)
+- Alexandre Jacovleff: V.Shukhaev in sailor suite by A.Yakovlev.jpg (also in Paintings by Vasily Shukhaev)
+- Alexandre Jacovleff: Vasily Shukhaev in his studio by A.Yakovlev (1928, priv.coll.).jpg (also in Paintings by Vasily Shukhaev)
+- Mikhail Matyushin: Exhibition of Works by Petrograd Artists of All Trends, 1918-1923.jpg (also in Paintings by Kazimir Malevich)
+- Leon Benois: Партрэт Л. Н. Бенуа.JPG (also in Paintings by Oleksandr Murashko)
+- Pavel Korin: Mikhail Nesterov 051.jpg (also in Paintings by Mikhail Nesterov)
+- Pavel Korin: P.D. Korin by M.Nesterov.jpg (also in Paintings by Mikhail Nesterov)
+- Ivan Puni: Newspaper article about Tramway V exhibition.jpg (also in Paintings by Kazimir Malevich)
+- Aristarkh Lentulov: Interiors of New Tretyakov Gallery P1060734.JPG (also in Paintings by Alexandra Exter)
+- Lyubov Popova: Динамический супрематизм № 57 в ГТГ (2).jpg (also in Paintings by Ivan Kliun)
+
+### Known weak spots
+
+- About 20% of titles are Cyrillic or transliterated Russian from Commons file names (kept as the original, per the rule; no English Wikidata label exists for those works). About 6% are "Untitled" (file name was only a number / the painter's name).
+- Near-duplicate photos of the same painting are caught by title+year and a 9x8 difference hash plus an 8x8 colour signature; two different photos of one painting with very different colour casts can still both survive (seen once in Surikov: "Pir Valtasara" and "Belshazzar's Feast").
+- Oil studies ("etude") are kept as paintings; anything titled sketch / preparatory / drawing / print / album / detail / FRAME photo is dropped. Photos taken inside museum halls were filtered by title only.
+- Painters credited by Wikidata citizenship alone (not birth) may be Russian-Empire minorities (Tatar, Estonian, Finnish-Karelian); they are staged only when born in Russia.
