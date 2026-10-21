@@ -75,6 +75,7 @@ html.desk .aw-page .aw-head,html.desk .aw-page .aw-sub,html.desk .aw-page .aw-fi
 html.desk .aw-page .aw-pt-hero{margin:24px 0 0}
 html.desk .aw-page .aw-pt-open,html.desk .aw-page .aw-pt-hero>img{border-radius:var(--r-2);max-height:min(56vh,560px)}
 html.desk .aw-page .gl-rail{margin:0;padding-left:0;padding-right:0}
+html.desk .aw-page [data-wkpal]{display:none}   /* four or more across is pictures only, so there is no palettes switch to offer */
 html.desk .aw-page .aw-head .p-title,html.desk .aw-page .aw-head h1{font-size:clamp(48px,5vw,72px)}
 
 /* ---------- the rooms: Museum is a wide shelf of covers; Learn, Train and Studio are narrower working pages ---------- */

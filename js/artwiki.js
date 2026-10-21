@@ -315,9 +315,9 @@ const AW_SORT_DIR = { year: ["Oldest first", "Newest first"], L: ["Darkest first
 const AW_VIEW_KEY = "colorhub-aw-view";   // the painter page's view choices: { rev: {sort: true}, pal: bool, cols: 2-5 }
 function awViewLoad() {
   let v = {}; try { v = JSON.parse(localStorage.getItem(AW_VIEW_KEY) || "{}") || {}; } catch (e) {}
-  return { rev: v.rev && typeof v.rev === "object" ? v.rev : {}, pal: v.pal !== false, cols: [2, 3, 4, 5].includes(v.cols) ? v.cols : 2 };
+  return { rev: v.rev && typeof v.rev === "object" ? v.rev : {}, pal: v.pal !== false, cols: [2, 3, 4, 5].includes(v.cols) ? v.cols : 2, dcols: [3, 4, 5, 6, 7, 8].includes(v.dcols) ? v.dcols : 6 };   // dcols: the desktop window's own count (4, 6 or 8 across; a pinch can land between)
 }
-function awViewSave(st) { try { localStorage.setItem(AW_VIEW_KEY, JSON.stringify({ rev: st.rev, pal: st.pal, cols: st.cols })); } catch (e) {} }
+function awViewSave(st) { try { localStorage.setItem(AW_VIEW_KEY, JSON.stringify({ rev: st.rev, pal: st.pal, cols: st.cols, dcols: st.dcols })); } catch (e) {} }
 // the one sort picker: every sort in both directions, the current one shown (a native select styled as a chip)
 function awSortSelect(keys, st) {
   return `<select class="aw-chipbtn aw-sortsel" data-wksel aria-label="Sort">${AW_WORKS_SORT.filter(([k]) => keys.includes(k)).map(([k]) => (AW_SORT_DIR[k][1] ? [0, 1] : [0]).map(f => `<option value="${k}:${f}"${st.sort === k && !!st.rev[k] === !!f ? " selected" : ""}>${AW_SORT_DIR[k][f]}</option>`).join("")).join("")}</select>`;
@@ -377,7 +377,7 @@ function awWorksWire(el, slug, m, A, P) {
   const byGi = new Map(rows.map(r => [r.gi, r]));
   const decades = [...new Set(rows.filter(r => r.y != null).map(r => Math.floor(r.y / 10) * 10))].sort((a, b) => a - b);
   const vs = awViewLoad();
-  const st = { sort: "year", rev: vs.rev, pal: vs.pal, cols: vs.cols, view: "grid", d0: decades[0], d1: decades.length ? decades[decades.length - 1] + 9 : null, mus: new Set(), colorHex: null, colorTol: 14, subj: new Set() };
+  const st = { sort: "year", rev: vs.rev, pal: vs.pal, cols: vs.cols, dcols: vs.dcols, view: "grid", d0: decades[0], d1: decades.length ? decades[decades.length - 1] + 9 : null, mus: new Set(), colorHex: null, colorTol: 14, subj: new Set() };
   let gridCtl = null, subjCtls = [];
   const filtered = () => { const sf = st.subj.size && SUBJ ? subjFlags(st.subj) : null; return rows.filter(r =>
     (r.y == null || st.d0 == null || (r.y >= st.d0 && r.y <= st.d1)) &&
@@ -395,12 +395,14 @@ function awWorksWire(el, slug, m, A, P) {
       copy.sort((a, b) => { const ga = subjGenreOf(a.gi), gb = subjGenreOf(b.gi); return (ga < 0) - (gb < 0) || n.get(gb) - n.get(ga) || ga - gb || (a.y == null) - (b.y == null) || (a.y || 0) - (b.y || 0); }); }
     return copy;
   };
+  const nCols = () => typeof glDesk === "function" && glDesk() ? st.dcols : st.cols;   // the desktop window keeps its own count
+  const setNCols = c => { if (typeof glDesk === "function" && glDesk()) st.dcols = c; else st.cols = c; };
   const badge = r => !r ? "" : st.sort === "year" ? ((gridCtl ? gridCtl.cols : st.cols) >= 3 ? "" : r.y != null ? awY(r.y) : "undated") : st.sort === "mus" ? r.mus : st.sort === "fam" ? (r.fam >= 0 ? "Palette " + (r.fam + 1) : "") : "";
   const drawLook = () => {   // the chips that mirror the grid, after a pinch changed the columns
     const look = el.querySelector("[data-wklook]"); if (!look) return;
     const pb = look.querySelector("[data-wkpal]"), sz = look.querySelector("[data-wksize]"), palOn = st.pal && st.cols < 4;
     if (pb) { pb.classList.toggle("on", palOn); pb.setAttribute("aria-pressed", palOn); pb.textContent = palOn ? "Palettes on" : "Palettes off"; }
-    if (sz) { sz.textContent = `${st.cols} across`; sz.setAttribute("aria-label", `Size: ${st.cols} across. Tap for another size.`); }
+    if (sz) { const c = nCols(); sz.textContent = `${c} across`; sz.setAttribute("aria-label", `Size: ${c} across. Tap for another size.`); }
   };
   const draw = () => {
     if (gridCtl) { gridCtl.destroy(); gridCtl = null; }
@@ -433,12 +435,12 @@ function awWorksWire(el, slug, m, A, P) {
       const groups = []; list.forEach(r => { const g = subjGenreOf(r.gi), last = groups[groups.length - 1]; if (last && last.g === g) last.rows.push(r); else groups.push({ g, rows: [r] }); });
       mount.innerHTML = groups.map((gr, k) => `<section class="aw-subj-sec"><p class="aw-subj-h"><b>${esc(subjGenreLabel(gr.g))}</b><span>${gr.rows.length}</span></p><div class="aw-subj-m gl-grid" data-wksm="${k}"></div></section>`).join("");
       groups.forEach((gr, k) => { const host = mount.querySelector(`[data-wksm="${k}"]`);
-        subjCtls.push(glGrid(host, { list: gr.rows.map(r => r.gi), badge: null, cols: st.cols, plain: !st.pal, pinch: true,
-          onCols: c => { st.cols = c; awViewSave(st); drawLook(); subjCtls.forEach(x => x.setCols(c)); } })); });
+        subjCtls.push(glGrid(host, { list: gr.rows.map(r => r.gi), badge: null, cols: nCols(), exact: true, plain: !st.pal, pinch: true,
+          onCols: c => { setNCols(c); awViewSave(st); drawLook(); subjCtls.forEach(x => x.setCols(c)); } })); });
     } else {
       mount.innerHTML = "";
-      gridCtl = glGrid(mount, { list: list.map(r => r.gi), badge: gi => badge(byGi.get(gi)), cols: st.cols, plain: !st.pal, pinch: true,
-        onCols: c => { st.cols = c; awViewSave(st); drawLook(); } });
+      gridCtl = glGrid(mount, { list: list.map(r => r.gi), badge: gi => badge(byGi.get(gi)), cols: nCols(), exact: true, plain: !st.pal, pinch: true,
+        onCols: c => { setNCols(c); awViewSave(st); drawLook(); } });
     }
   };
   el.querySelectorAll("[data-wkr]").forEach(inp => inp.oninput = () => {
@@ -473,7 +475,7 @@ function awWorksWire(el, slug, m, A, P) {
       if (st.cols >= 4) { st.cols = 3; st.pal = true; } else st.pal = !st.pal;   // palettes need room: step back to 3 across
       awViewSave(st); buzz(5); return draw();
     }
-    if (e.target.closest("[data-wksize]")) { st.cols = st.cols >= 5 ? 2 : st.cols + 1; awViewSave(st); buzz(5); return draw(); }
+    if (e.target.closest("[data-wksize]")) { if (typeof glDesk === "function" && glDesk()) { const o = [4, 6, 8]; st.dcols = o.find(x => x > st.dcols) || o[0]; } else st.cols = st.cols >= 5 ? 2 : st.cols + 1; awViewSave(st); buzz(5); return draw(); }
     const sj = e.target.closest("[data-wksubj]"); if (sj) { const t = +sj.dataset.wksubj; if (st.subj.has(t)) st.subj.delete(t); else st.subj.add(t); buzz(5); drawSubjChips(); return draw(); }
     if (e.target.closest("[data-wksubjmore]")) { subjMore = true; return drawSubjChips(); }
     const ms = e.target.closest("[data-wkmus]"); if (ms) { const on = ms.classList.toggle("on"); if (on) st.mus.add(ms.dataset.wkmus); else st.mus.delete(ms.dataset.wkmus); return draw(); }

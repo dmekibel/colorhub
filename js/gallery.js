@@ -503,7 +503,7 @@ const glMaxCols = () => glDesk() ? 8 : 5;
 function glGrid(host, res) {
   const list = res.list, n = list.length, live = new Map();
   let cols = Math.max(2, Math.min(glMaxCols(), res.cols | 0 || 2)), plain = !!res.plain;
-  if (glDesk() && host.clientWidth > 700) cols = Math.max(cols, Math.min(8, Math.round(host.clientWidth / ((res.cols | 0) >= 3 ? 190 : 230))));
+  if (glDesk() && host.clientWidth > 700 && !res.exact) cols = Math.max(cols, Math.min(8, Math.round(host.clientWidth / ((res.cols | 0) >= 3 ? 190 : 230))));
   let W = 0, colW = 0, gap = 14, vgap = 22, txt = GL_TXT, top, col, hh;
   const isPlain = () => plain || cols >= 4;
   const layout = () => {
