@@ -1536,7 +1536,7 @@ function pmMount(el, s, F) {
   // middle (and every cell at ordinary zoom, where nothing is below the threshold) still go through the tile loop as before.
   let rz = { zS: Infinity, R: 0, rS: 0 };   // the raster zone of the last draw (hitAt + the QA counters read it)
   let rb = null, rbLay = null, rbCol = null;
-  const RASTER_PX = 1000000;   // raster pixel budget per frame; a bigger canvas renders at a lower scale and is stretched
+  const RASTER_PX = 1400000;   // raster pixel budget per frame; a bigger canvas renders at a lower scale and is stretched
   function rasterColors() {
     if (rbCol && rbLay === lay) return rbCol;
     const n = lay.n, c = new Uint32Array(n);
