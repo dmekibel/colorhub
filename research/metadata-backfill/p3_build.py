@@ -19,7 +19,7 @@ P = jl_load("painters.jsonl"); PL = jl_load("places.jsonl"); LB = jl_load("label
 fac = json.load(open(ROOT + "/data/facets/facets.json"))
 APP_CO = set(fac["countries"]); APP_MV = {m.lower(): m for m in fac["movements"]}
 
-NORM = {"Kingdom of the Netherlands": "Netherlands", "Czech Republic": "Czechia", "South Korea": "Korea", "North Korea": "Korea",
+NORM = {"Scotland": "United Kingdom", "England": "United Kingdom", "Wales": "United Kingdom", "Northern Ireland": "United Kingdom", "Kingdom of the Netherlands": "Netherlands", "Czech Republic": "Czechia", "South Korea": "Korea", "North Korea": "Korea",
         "People's Republic of China": "China", "Russian Federation": "Russia", "United States of America": "United States",
         "Kingdom of Denmark": "Denmark", "Türkiye": "Turkey", "Republic of Ireland": "Ireland", "Republic of China": "Taiwan",
         "Kingdom of Norway": "Norway", "Kingdom of Sweden": "Sweden", "Kingdom of Spain": "Spain", "Kingdom of Belgium": "Belgium",
@@ -123,6 +123,10 @@ for lab, rs in by_label.items():
         for q in p["cit"]:
             co, how = modern_country(q)
             if co: src = "citizenship"; how = "p27"; break
+    cit = None
+    for q in p["cit"][:3]:
+        cit, _h = modern_country(q)
+        if cit: break
     mvs = fold_mv(p["mv"])
     g = next((GENDER[x] for x in p["sex"] if x in GENDER), "other" if p["sex"] else None)
     conf = m["conf"] * (1.0 if src == "birth" and how in ("p17", "self", "p131") else 0.8 if src else 0.0)
@@ -132,10 +136,14 @@ for lab, rs in by_label.items():
     if m["via"].startswith("label-ambiguous"): rec["alt"] = m.get("alt")
     # app naming rule: a painter whose rows already say Russia keeps Russia when Wikidata puts the birthplace in a
     # former Soviet/imperial republic that the app has no label for (the Russian batch convention)
-    app = co
-    if co and co not in APP_CO and ex and ex.most_common(1)[0][0] == "Russia" and ex["Russia"] / sum(ex.values()) >= 0.5:
-        app = "Russia"; rec["country_note"] = "kept Russia (existing label); Wikidata birth country " + co
+    def app_name(c):
+        if c and c not in APP_CO and ex and ex.most_common(1)[0][0] == "Russia" and ex["Russia"] / sum(ex.values()) >= 0.5:
+            return "Russia"
+        return c
+    app = app_name(co)
+    if app != co: rec["country_note"] = "kept Russia (existing label); Wikidata birth country " + str(co)
     rec["country_app"] = app
+    rec["country_p27"] = app_name(cit)
     painters[lab] = rec
 
 matched = [l for l, r in painters.items() if r.get("q")]
@@ -154,8 +162,9 @@ json.dump(dict(v=1, built="2026-10-21", policy="country = painter birth country 
 print(json.dumps(stat, indent=1))
 
 # ---------------- paintings
+CD = json.load(open(SCR + "/cdate_years.json")) if os.path.exists(SCR + "/cdate_years.json") else {}
 paintings = {}; dis = collections.defaultdict(list); disn = collections.Counter(); fill = collections.Counter()
-before = collections.Counter(); after = collections.Counter(); ybefore = 0; yafter = 0; mvb = 0; mva = 0
+before = collections.Counter(); after = collections.Counter(); after_cit = collections.Counter(); policy_diff = collections.Counter(); policy_ex = collections.Counter(); ybefore = 0; yafter = 0; mvb = 0; mva = 0
 TY = [re.compile(r"(?:,|\()\s*(?:c\.?|ca\.?|circa|um|around)?\s*(1[2-9]\d\d)\s*(?:ca\.?)?\s*\)?\s*$", re.I), re.compile(r"\b(?:c\.|ca\.|circa)\s*(1[2-9]\d\d)\b", re.I)]
 
 
@@ -184,16 +193,21 @@ for r in rows:
             c, _ = modern_country(x)
             if c: wc = c; break
     if r["co"]:
-        before[r["co"]] += 1; after[r["co"]] += 1
+        before[r["co"]] += 1; after[r["co"]] += 1; after_cit[r["co"]] += 1
         if pc and pc != r["co"]: diff_example("country_vs_painter_birth", dict(id=pid, painter=r["a"], existing=r["co"], wikidata=pc))
         if wc and wc != r["co"]: diff_example("country_vs_painting_P495", dict(id=pid, existing=r["co"], P495=wc))
     else:
+        if pr and pc:
+            cc = pr.get("country_p27") or pc
+            after_cit[cc] += 1
+            if cc != pc: policy_diff["rows"] += 1; policy_ex[(r["a"], pc, cc)] += 1
         c = pc; cs = "painter" if pc else None
         if not c and wc: c = wc; cs = "P495"
         if c:
             out["co"] = c
             if cs != "painter": out["cs"] = cs
             after[c] += 1; fill["co"] += 1
+            if not pc: after_cit[c] += 1
     # ---- year
     if r["y"]:
         ybefore += 1; yafter += 1
@@ -208,6 +222,8 @@ for r in rows:
                 ys = "P571"; ya = 1 if p == 8 else 0
                 if p == 8: y = y // 10 * 10 + 5 if y % 10 == 0 else y
             else: y = None
+        if y is None and not q and pid in CD:
+            y, ya = CD[pid]; ys = "commons-date"
         if y is None and not q:
             ty = title_year(r["t"])
             if ty: y, ys, ya = ty, "title", 0
@@ -242,12 +258,13 @@ for r in rows:
             if raw: out["mvr"] = raw[:2]
     if out: paintings[pid] = out
 
-json.dump(dict(v=1, built="2026-10-21", note="Only blanks are filled. co/y/mv fill an empty field; coll/gen/mvr are new fields. Keys: co country, cs country source if not the painter's (P495), y year, ya=1 year is a decade midpoint, ys year source if not P571 (title), mv movement, ms movement source if not the painting's own P135 (painter), coll collection, gen genres, mvr unfolded raw movement labels.",
+json.dump(dict(v=1, built="2026-10-21", note="Only blanks are filled. co/y/mv fill an empty field; coll/gen/mvr are new fields. Keys: co country, cs country source if not the painter's (P495), y year, ya=1 year is a decade midpoint, ys year source if not P571 (commons-date = Commons file DateTimeOriginal, title = year in the title), mv movement, ms movement source if not the painting's own P135 (painter), coll collection, gen genres, mvr unfolded raw movement labels.",
                rows=paintings), open(OUT + "/paintings.json", "w"), ensure_ascii=False, separators=(",", ":"))
 top = lambda c, n=15: [[k, v] for k, v in c.most_common(n)]
 proj = dict(rows=len(rows), fill=dict(fill), country_before_total=sum(before.values()), country_after_total=sum(after.values()),
             year_before=ybefore, year_after=yafter, movement_before=mvb, movement_after=mva,
-            top15_before=top(before), top15_after=top(after),
+            top15_before=top(before), top15_after=top(after), top15_after_if_citizenship=top(after_cit),
+            birth_vs_citizenship=dict(rows_that_differ=policy_diff["rows"], top_painters=[[list(k), v] for k, v in policy_ex.most_common(25)]),
             watch={k: [before[k], after[k]] for k in ["Russia", "United Kingdom", "United States", "France", "Italy", "Germany", "Netherlands", "Spain", "Ukraine"]},
             new_countries={k: v for k, v in sorted(after.items(), key=lambda kv: -kv[1]) if k not in APP_CO},
             disagreements=dict(counts=dict(disn), examples=dis))

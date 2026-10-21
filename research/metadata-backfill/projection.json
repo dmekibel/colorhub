@@ -1,0 +1,719 @@
+{
+ "rows": 114046,
+ "fill": {
+  "mv_painter": 54604,
+  "co": 70319,
+  "coll": 60109,
+  "gen": 40498,
+  "mv_painting": 3959,
+  "y_title": 1846,
+  "y_commons-date": 82,
+  "y_P571": 23
+ },
+ "country_before_total": 40928,
+ "country_after_total": 111247,
+ "year_before": 92279,
+ "year_after": 94230,
+ "movement_before": 803,
+ "movement_after": 59366,
+ "top15_before": [
+  [
+   "Netherlands",
+   8378
+  ],
+  [
+   "France",
+   7252
+  ],
+  [
+   "Italy",
+   3624
+  ],
+  [
+   "United States",
+   3423
+  ],
+  [
+   "Spain",
+   2662
+  ],
+  [
+   "Sweden",
+   2266
+  ],
+  [
+   "Denmark",
+   1895
+  ],
+  [
+   "Germany",
+   1879
+  ],
+  [
+   "United Kingdom",
+   1830
+  ],
+  [
+   "Austria",
+   1777
+  ],
+  [
+   "Russia",
+   1326
+  ],
+  [
+   "Belgium",
+   1190
+  ],
+  [
+   "India",
+   727
+  ],
+  [
+   "Japan",
+   697
+  ],
+  [
+   "China",
+   635
+  ]
+ ],
+ "top15_after": [
+  [
+   "Italy",
+   30997
+  ],
+  [
+   "France",
+   18393
+  ],
+  [
+   "Netherlands",
+   12247
+  ],
+  [
+   "Russia",
+   9649
+  ],
+  [
+   "United Kingdom",
+   5360
+  ],
+  [
+   "Germany",
+   5178
+  ],
+  [
+   "United States",
+   5093
+  ],
+  [
+   "Spain",
+   3945
+  ],
+  [
+   "Belgium",
+   3142
+  ],
+  [
+   "Sweden",
+   2949
+  ],
+  [
+   "Austria",
+   2532
+  ],
+  [
+   "Poland",
+   2496
+  ],
+  [
+   "Denmark",
+   2115
+  ],
+  [
+   "Norway",
+   1140
+  ],
+  [
+   "Estonia",
+   834
+  ]
+ ],
+ "top15_after_if_citizenship": [
+  [
+   "Italy",
+   28857
+  ],
+  [
+   "France",
+   19322
+  ],
+  [
+   "Netherlands",
+   12282
+  ],
+  [
+   "Russia",
+   10930
+  ],
+  [
+   "Germany",
+   5540
+  ],
+  [
+   "Spain",
+   5454
+  ],
+  [
+   "United Kingdom",
+   5308
+  ],
+  [
+   "United States",
+   4752
+  ],
+  [
+   "Austria",
+   3165
+  ],
+  [
+   "Sweden",
+   3043
+  ],
+  [
+   "Belgium",
+   2507
+  ],
+  [
+   "Poland",
+   2286
+  ],
+  [
+   "Denmark",
+   2115
+  ],
+  [
+   "Norway",
+   1140
+  ],
+  [
+   "India",
+   728
+  ]
+ ],
+ "birth_vs_citizenship": {
+  "rows_that_differ": 7812,
+  "top_painters": [
+   [
+    [
+     "Wassily Kandinsky",
+     "Russia",
+     "Germany"
+    ],
+    813
+   ],
+   [
+    [
+     "Eliseu Visconti",
+     "Italy",
+     "Brazil"
+    ],
+    600
+   ],
+   [
+    [
+     "Francesco Hayez",
+     "Italy",
+     "Austria"
+    ],
+    565
+   ],
+   [
+    [
+     "Peter Paul Rubens",
+     "Germany",
+     "Spain"
+    ],
+    553
+   ],
+   [
+    [
+     "Anthony van Dyck",
+     "Belgium",
+     "Spain"
+    ],
+    400
+   ],
+   [
+    [
+     "Camille Pissarro",
+     "United States",
+     "France"
+    ],
+    398
+   ],
+   [
+    [
+     "El Greco",
+     "Greece",
+     "Spain"
+    ],
+    397
+   ],
+   [
+    [
+     "François Gérard",
+     "Italy",
+     "France"
+    ],
+    358
+   ],
+   [
+    [
+     "Marcello Bacciarelli",
+     "Italy",
+     "Russia"
+    ],
+    231
+   ],
+   [
+    [
+     "Paul Burman",
+     "Ukraine",
+     "Estonia"
+    ],
+    223
+   ],
+   [
+    [
+     "Taras Shevchenko",
+     "Ukraine",
+     "Russia"
+    ],
+    215
+   ],
+   [
+    [
+     "Frans Hals",
+     "Belgium",
+     "Netherlands"
+    ],
+    207
+   ],
+   [
+    [
+     "Raphael",
+     "Italy",
+     "Germany"
+    ],
+    168
+   ],
+   [
+    [
+     "Lawrence Alma-Tadema",
+     "Netherlands",
+     "Belgium"
+    ],
+    162
+   ],
+   [
+    [
+     "Frans Snyders",
+     "Belgium",
+     "Spain"
+    ],
+    160
+   ],
+   [
+    [
+     "Gaspard Dughet",
+     "Italy",
+     "France"
+    ],
+    157
+   ],
+   [
+    [
+     "Ants Laikmaa",
+     "Estonia",
+     "Russia"
+    ],
+    155
+   ],
+   [
+    [
+     "Johann Köler",
+     "Estonia",
+     "Russia"
+    ],
+    134
+   ],
+   [
+    [
+     "Józef Brandt",
+     "Poland",
+     "Russia"
+    ],
+    131
+   ],
+   [
+    [
+     "Ferdynand Ruszczyc",
+     "Belarus",
+     "Russia"
+    ],
+    122
+   ],
+   [
+    [
+     "Eduard Hau",
+     "Estonia",
+     "Russia"
+    ],
+    118
+   ],
+   [
+    [
+     "Erich von Kügelgen",
+     "Germany",
+     "Russia"
+    ],
+    117
+   ],
+   [
+    [
+     "Julie Wilhelmine Hagen-Schwarz",
+     "Latvia",
+     "Russia"
+    ],
+    104
+   ],
+   [
+    [
+     "January Suchodolski",
+     "Belarus",
+     "Russia"
+    ],
+    98
+   ],
+   [
+    [
+     "David Klöcker Ehrenstrahl",
+     "Germany",
+     "Sweden"
+    ],
+    96
+   ]
+  ]
+ },
+ "watch": {
+  "Russia": [
+   1326,
+   9649
+  ],
+  "United Kingdom": [
+   1830,
+   5360
+  ],
+  "United States": [
+   3423,
+   5093
+  ],
+  "France": [
+   7252,
+   18393
+  ],
+  "Italy": [
+   3624,
+   30997
+  ],
+  "Germany": [
+   1879,
+   5178
+  ],
+  "Netherlands": [
+   8378,
+   12247
+  ],
+  "Spain": [
+   2662,
+   3945
+  ],
+  "Ukraine": [
+   0,
+   633
+  ]
+ },
+ "new_countries": {
+  "Ukraine": 633,
+  "Belarus": 291,
+  "Latvia": 108,
+  "Lithuania": 75,
+  "Slovakia": 54,
+  "Philippines": 9,
+  "Slovenia": 9,
+  "Indonesia": 9,
+  "Malta": 3,
+  "Suriname": 2,
+  "Chile": 1,
+  "El Salvador": 1,
+  "Guyana": 1
+ },
+ "disagreements": {
+  "counts": {
+   "country_vs_painter_birth": 6277,
+   "year_vs_P571": 124,
+   "country_vs_painting_P495": 4,
+   "year_rejected_implausible_for_painter": 470
+  },
+  "examples": {
+   "country_vs_painter_birth": [
+    {
+     "id": "aic-9",
+     "painter": "David Dalhoff Neal",
+     "existing": "Italy",
+     "wikidata": "United States"
+    },
+    {
+     "id": "aic-11",
+     "painter": "Walter Shirlaw",
+     "existing": "United States",
+     "wikidata": "United Kingdom"
+    },
+    {
+     "id": "aic-138",
+     "painter": "George Hitchcock",
+     "existing": "Netherlands",
+     "wikidata": "United States"
+    },
+    {
+     "id": "aic-864",
+     "painter": "Quentin Massys",
+     "existing": "Netherlands",
+     "wikidata": "Belgium"
+    },
+    {
+     "id": "aic-4575",
+     "painter": "Jan Sanders van Hemessen",
+     "existing": "Netherlands",
+     "wikidata": "Belgium"
+    },
+    {
+     "id": "aic-4749",
+     "painter": "John Singer Sargent",
+     "existing": "United Kingdom",
+     "wikidata": "Italy"
+    },
+    {
+     "id": "aic-5344",
+     "painter": "Jeremiah Meyer",
+     "existing": "United Kingdom",
+     "wikidata": "Germany"
+    },
+    {
+     "id": "aic-6005",
+     "painter": "Camille Pissarro",
+     "existing": "France",
+     "wikidata": "United States"
+    },
+    {
+     "id": "aic-7161",
+     "painter": "Eusebius Johann Alphen",
+     "existing": "Germany",
+     "wikidata": "Austria"
+    },
+    {
+     "id": "aic-7218",
+     "painter": "Pierre Edouard Gautier d'Agoty",
+     "existing": "France",
+     "wikidata": "Italy"
+    },
+    {
+     "id": "aic-7452",
+     "painter": "Luke Sullivan",
+     "existing": "United Kingdom",
+     "wikidata": "Ireland"
+    },
+    {
+     "id": "aic-8475",
+     "painter": "Charles Robert Leslie",
+     "existing": "United States",
+     "wikidata": "United Kingdom"
+    },
+    {
+     "id": "aic-8953",
+     "painter": "Peter Paul Rubens",
+     "existing": "Belgium",
+     "wikidata": "Germany"
+    },
+    {
+     "id": "aic-8958",
+     "painter": "James McNeill Whistler",
+     "existing": "France",
+     "wikidata": "United States"
+    },
+    {
+     "id": "aic-8980",
+     "painter": "Vasily Kandinsky",
+     "existing": "Germany",
+     "wikidata": "Russia"
+    },
+    {
+     "id": "aic-8983",
+     "painter": "Vasily Kandinsky",
+     "existing": "Germany",
+     "wikidata": "Russia"
+    },
+    {
+     "id": "aic-8987",
+     "painter": "Vasily Kandinsky",
+     "existing": "Germany",
+     "wikidata": "Russia"
+    },
+    {
+     "id": "aic-8991",
+     "painter": "Vasily Kandinsky",
+     "existing": "Germany",
+     "wikidata": "Russia"
+    },
+    {
+     "id": "aic-9681",
+     "painter": "Charles Boit",
+     "existing": "United Kingdom",
+     "wikidata": "Sweden"
+    },
+    {
+     "id": "aic-11025",
+     "painter": "John Smibert",
+     "existing": "United States",
+     "wikidata": "United Kingdom"
+    }
+   ],
+   "year_vs_P571": [
+    {
+     "id": "commons-Q116912704",
+     "existing": 1663,
+     "P571": 1645
+    },
+    {
+     "id": "commons-Q11694943",
+     "existing": 1575,
+     "P571": 1555
+    },
+    {
+     "id": "commons-Q117112820",
+     "existing": 1400,
+     "P571": 1320
+    },
+    {
+     "id": "commons-Q17492047",
+     "existing": 1947,
+     "P571": 1908
+    },
+    {
+     "id": "commons-Q19162971",
+     "existing": 1600,
+     "P571": 1585
+    },
+    {
+     "id": "commons-Q19897960",
+     "existing": 1440,
+     "P571": 1454
+    },
+    {
+     "id": "commons-Q2067336",
+     "existing": 1501,
+     "P571": 1626
+    },
+    {
+     "id": "commons-Q22342728",
+     "existing": 1700,
+     "P571": 1667
+    },
+    {
+     "id": "commons-Q26250",
+     "existing": 1866,
+     "P571": 1850
+    },
+    {
+     "id": "commons-Q27697487",
+     "existing": 1550,
+     "P571": 1516
+    },
+    {
+     "id": "commons-Q27697655",
+     "existing": 1550,
+     "P571": 1530
+    },
+    {
+     "id": "commons-Q27698590",
+     "existing": 1550,
+     "P571": 1577
+    },
+    {
+     "id": "commons-Q27699421",
+     "existing": 1700,
+     "P571": 1615
+    },
+    {
+     "id": "commons-Q27749067",
+     "existing": 1650,
+     "P571": 1670
+    },
+    {
+     "id": "commons-Q27751588",
+     "existing": 1670,
+     "P571": 1650
+    },
+    {
+     "id": "commons-Q27755989",
+     "existing": 1750,
+     "P571": 1717
+    },
+    {
+     "id": "commons-Q27757051",
+     "existing": 1750,
+     "P571": 1730
+    },
+    {
+     "id": "commons-Q27780683",
+     "existing": 1870,
+     "P571": 1640
+    },
+    {
+     "id": "commons-Q27780846",
+     "existing": 1850,
+     "P571": 1880
+    },
+    {
+     "id": "commons-Q27970307",
+     "existing": 1450,
+     "P571": 1480
+    }
+   ],
+   "country_vs_painting_P495": [
+    {
+     "id": "commons-Q17491277",
+     "existing": "United States",
+     "P495": "France"
+    },
+    {
+     "id": "commons-Q50106027",
+     "existing": "Russia",
+     "P495": "Germany"
+    },
+    {
+     "id": "commons-Q107438866",
+     "existing": "Netherlands",
+     "P495": "Spain"
+    },
+    {
+     "id": "commons-Q29866358",
+     "existing": "Netherlands",
+     "P495": "Spain"
+    }
+   ]
+  }
+ }
+}

@@ -22,8 +22,8 @@ files = sorted({v for v in todo.values() if v})
 print(len(todo), "rows without a year;", len(files), "file titles", flush=True)
 C = jl_load("cdate.jsonl")
 need = [f for f in files if f not in C]
-for i in range(0, len(need), 50):
-    ch = need[i:i + 50]
+for i in range(0, len(need), 20):
+    ch = need[i:i + 20]
     d = get(CAPI, dict(action="query", prop="imageinfo", iiprop="extmetadata", iiextmetadatafilter="DateTimeOriginal|DateTime",
                        titles="|".join("File:" + f for f in ch), format="json", maxlag=5, redirects=1))
     pages = d.get("query", {}).get("pages", {})
@@ -38,7 +38,7 @@ for i in range(0, len(need), 50):
         src = red.get("File:" + t, "File:" + t); src = norm.get(src, src)
         got[src[5:]] = val
     for f in ch: jl_add("cdate.jsonl", f, got.get(f)); C[f] = got.get(f)
-    if (i // 50) % 20 == 0: print(i, "/", len(need), flush=True)
+    if (i // 20) % 50 == 0: print(i, "/", len(need), flush=True)
 
 
 def parse(s):
