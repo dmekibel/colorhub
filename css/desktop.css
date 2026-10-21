@@ -35,6 +35,10 @@ html.desk .scrim{background:rgba(6,6,5,.62);-webkit-backdrop-filter:blur(3px);ba
 html.desk .sheet.sheet{inset:0;margin:auto;width:min(520px,calc(100vw - 64px));height:fit-content;max-height:min(760px,calc(100vh - 96px));border-radius:var(--r-3);border:1px solid var(--rule);
   padding:28px 28px 26px;animation:dkDialogIn .22s var(--ease) both;box-shadow:0 30px 90px rgba(0,0,0,.6)}
 html.desk .sheet .grab{display:none}
+/* full-screen sheets (the color slideshow, .ss-full) stay full-screen: they are not dialogs */
+html.desk .sheet.sheet.ss-full{inset:0;margin:0;width:auto;height:auto;max-height:none;border:0;border-radius:0;padding:0;box-shadow:none;animation:fade var(--dur-1) ease both}
+html.desk .sheet.ss-full .grab{display:block}
+html.desk:has(.sheet.ss-full) #dk-nav{display:none}
 html.desk .sheet.sr-sheet-wrap{margin-top:max(80px,11vh)}
 @keyframes dkDialogIn{from{opacity:0;transform:translateY(10px) scale(.985)}}
 
