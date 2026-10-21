@@ -341,6 +341,7 @@ function pmParse(q, F) {
   if (p.get("mus")) f.musSet = p.get("mus").split(",").map(k => F.G.src.findIndex(x => x.k === k)).filter(v => v >= 0);
   if (p.get("subj") && SUBJ) f.subjSet = p.get("subj").split(",").map(k => SUBJ.tags.findIndex(n => routeSlug(n) === k)).filter(v => v >= 0);
   const sd = num("seed"); if (sd != null && sd >= 0 && sd < F.N) s.seed = sd;
+  if (p.get("walk") === "1" && s.seed >= 0) s.walkStart = 1;   // the painting page's "Walk from here": take the first step on arrival
   if (p.get("fav") === "1") s.fav = 1;
   if (PM_NEEDS_SEED.has(s.arr) && s.seed < 0) s.arr = "color";
   if (!pmArrOk(s)) s.arr = "color";   // By painter / Families mean nothing for one painter; By museum only means something for one
@@ -1238,6 +1239,7 @@ function pmMount(el, s, F) {
   const scopedFresh = () => ({ ...pmFilterFresh(), painterSet: pmSolo(s) ? s.f.painterSet.slice() : [] });   // "clear the filters" must never drop the one-painter scope
   const yrRange = () => pmSolo(s) ? pmSoloYears(s.f.painterSet[0], F).r : pmYearRange(F);   // the scrubber's span: one painter's own years, or the whole dataset's
   let walk = [];   // "Walk from here" (David, 2026-10-09): the gallery indices visited this walk, in order; [] when none is active
+  if (s.walkStart) { s.walkStart = 0; const from0 = s.seed, nx = from0 >= 0 ? pmWalkCandidate(from0, new Set([from0])) : -1; if (nx >= 0) { walk = [from0, nx]; s.seed = nx; s.arr = "spiral"; } }
   let scrubTimer = 0;   // the time scrubber's own Play timer (0 = not playing); lives here, not inside openSheet, so it survives a sheet close/reopen
   let lay = null, W = 0, H = 0, dpr = 1, base = 46;
   let P = [0, 0], Z = 1, V = [0, 0], glide = null, raf = 0, dead = false, centerK = -1, lastTick = 0, drawn = [];
@@ -1906,6 +1908,32 @@ function pmMount(el, s, F) {
       hideCard();
     }
   });
+  // desktop hover: a pointer cursor over a painting and, after ~400ms still, a quiet caption (title, painter, year) by the cursor
+  let tip = null, tipT = 0, tipK = -1;
+  function hideTip() { clearTimeout(tipT); tipT = 0; tipK = -1; if (tip) { tip.remove(); tip = null; } cv.classList.remove("hov"); }
+  function hoverTip(e) {
+    if (!DESKM() || e.pointerType !== "mouse" || e.buttons) { if (tip || tipK >= 0) hideTip(); return; }
+    const b = hitAt(e.clientX, e.clientY);
+    cv.classList.toggle("hov", !!b);
+    if (!b) { if (tip || tipK >= 0) hideTip(); return; }
+    if (tip) { tip.style.left = Math.min(innerWidth - 340, e.clientX + 16) + "px"; tip.style.top = Math.min(innerHeight - 70, e.clientY + 18) + "px"; }
+    if (b.k === tipK) return;
+    clearTimeout(tipT); if (tip) { tip.remove(); tip = null; } tipK = b.k;
+    const x = e.clientX, y = e.clientY;
+    tipT = setTimeout(async () => {
+      if (dead || tipK !== b.k) return;
+      const i = lay.items[b.k]; let d = pmDetailNow(i, F);
+      if (!d && (!F.col || F.col === "paintings")) { try { d = await glDetail(i); } catch (er) {} if (dead || tipK !== b.k) return; }
+      if (!d) return;
+      const a = F.artist[i], yr = pmYearStr(i, F), by = [a ? xbArtistName(F, a) : "", yr].filter(Boolean).join(" \u00b7 ");
+      tip = document.createElement("div"); tip.className = "pmx-tip"; tip.innerHTML = `<b>${esc(d.t)}</b>${by ? `<span>${esc(by)}</span>` : ""}`;
+      tip.style.left = Math.min(innerWidth - 340, x + 16) + "px"; tip.style.top = Math.min(innerHeight - 70, y + 18) + "px"; document.body.appendChild(tip);
+    }, 400);
+  }
+  cv.addEventListener("pointerleave", hideTip);
+  cv.addEventListener("pointerdown", hideTip);
+  cv.addEventListener("wheel", hideTip, { passive: true });
+  cv.addEventListener("pointermove", hoverTip);
   cv.addEventListener("pointermove", e => {
     if (!pts.has(e.pointerId)) return;
     pts.set(e.pointerId, [e.clientX, e.clientY]);
@@ -1970,45 +1998,15 @@ function pmMount(el, s, F) {
   // same ~280ms js/gallery.js and js/swatch.js use, so a quick second tap can be caught first and turned into
   // the heart burst + toggle instead of opening the page
   let lastTapAt = 0, tapTimer = 0;
-  // Desktop (David, 2026-10-21: "click it again, it should zoom in"): the first click opens the card, the second click on the
-  // open card flies into the picture itself -- the full-size copy in Look closer (js/paintzoom.js), growing out of the card and
-  // landing zoomed on the clicked point, then the mouse looks around by hovering. "Open the page" in its toolbar and the card's
-  // Open chip still go to the painting page. A phone keeps its tap: the second tap opens the page.
-  let zoomBusy = false, zoomPill = null;
-  async function zoomK(b, x, y) {
-    if (zoomBusy) return; zoomBusy = true;
-    const i = lay.items[b.k], giveUp = (why) => { zoomBusy = false; openK(b.k); };
-    try {
-      let d = pmDetailNow(i, F); if (!d && (!F.col || F.col === "paintings")) d = await glDetail(i);
-      if (dead) { zoomBusy = false; return; }
-      if (!d || !d.img || typeof glZoomOpen !== "function") return giveUp();
-      let url = d.hi || (typeof glBig === "function" ? glBig(d.img) : d.img), cors = false;
-      if (typeof glCommonsFilename === "function" && glCommonsFilename(url)) { const res = await glCommonsResolve(url, 2048); if (res) { url = res; cors = true; } else url = glZoomSrc(url); }
-      else { url = typeof glZoomSrc === "function" ? glZoomSrc(url) : url; cors = typeof glCORS === "function" && !!glCORS(url); }
-      const pre = new Image(); if (cors) pre.crossOrigin = "anonymous";
-      const pillT = setTimeout(() => { zoomPill = document.createElement("div"); zoomPill.className = "pmx-zload"; zoomPill.textContent = "Opening the full-size painting\u2026"; el.appendChild(zoomPill); }, 160);
-      await new Promise(res => { pre.onload = res; pre.onerror = res; pre.src = url; });
-      clearTimeout(pillT); if (zoomPill) { zoomPill.remove(); zoomPill = null; }
-      if (dead) { zoomBusy = false; return; }
-      if (!pre.naturalWidth) return giveUp("image " + url);
-      let sampleOk = false; try { const c = document.createElement("canvas"); c.width = c.height = 1; c.getContext("2d").drawImage(pre, 0, 0, 1, 1); c.getContext("2d").getImageData(0, 0, 1, 1); sampleOk = true; } catch (e) {}
-      const r = cv.getBoundingClientRect(), fromRect = { left: r.left + b.x - b.w / 2, top: r.top + b.y - b.h / 2, width: b.w, height: b.h };
-      const fx = clamp((x - fromRect.left) / (b.w || 1), 0, 1), fy = clamp((y - fromRect.top) / (b.h || 1), 0, 1);
-      buzz(6);
-      glZoomOpen({ src: url, alt: d.t, title: d.t, pal: (!F.col || F.col === "paintings") && typeof glPal === "function" ? glPal(i) : [], pix: null, galleryIndex: i, cors, sampleOk,
-        fromRect, focal: { fx, fy, cx: x, cy: y }, onDetails: () => openK(b.k) });
-    } catch (e) { return giveUp(String(e)); }
-    zoomBusy = false;
-  }
+  // Desktop (David, 2026-10-21, correcting the two-step: "I don't want the painting zoomed in when you click it in the map"): a
+  // click on a painting opens its PAGE straight away, no glide and no card; the map stays exactly as it is, so Back lands on it.
+  // The zoom viewer is a click on the picture on that page (js/gallery.js). A phone keeps the card and its taps below.
+  const DESKM = () => document.documentElement.classList.contains("desk");
   function tap(x, y) {
     const b = hitAt(x, y); if (!b) { hideCard(); return; }   // tap-away: empty space closes whatever's open
+    if (DESKM()) { hideTip(); buzz(5); openK(b.k, true); return; }
     if (b.k === centerK && b.z < .6) {
-      const wasOpen = cardOpen;
       showCard();   // a tap always shows the name, even on the already-centered painting about to open
-      if (document.documentElement.classList.contains("desk")) {
-        if (wasOpen) { clearTimeout(tapTimer); tapTimer = 0; lastTapAt = 0; zoomK(b, x, y); }
-        return;
-      }
       const now = performance.now();
       if (now - lastTapAt < 300) {
         clearTimeout(tapTimer); tapTimer = 0; lastTapAt = 0;
@@ -2038,9 +2036,9 @@ function pmMount(el, s, F) {
   function arrangeAround(i) {
     buzz(8); s.seed = i; if (!PM_NEEDS_SEED.has(s.arr)) s.arr = "spiral"; rebuild();
   }
-  function openK(k) {
+  function openK(k, keepView) {
     const i = lay.items[k];
-    PM_PAN.set(lay.key, { x: lay.x[k], y: lay.y[k], s: Z, cardOpen: true });
+    PM_PAN.set(lay.key, keepView ? { x: P[0], y: P[1], s: Z, cardOpen: false } : { x: lay.x[k], y: lay.y[k], s: Z, cardOpen: true });
     buzz(8);
     // David, 2026-10-10: Design objects and Photography are already fully loaded, whole nodes -- their own
     // page opener takes the node (or id) directly, no gallery index to resolve. Paintings keep the exact path
@@ -2542,7 +2540,7 @@ function pmMount(el, s, F) {
   // David, 2026-10-10: "Back should take me to that exact spot instead of reloading the position" -- this used
   // to save the SNAPPED cell position (lay.x[centerK], lay.y[centerK]) on the way out, rounding away whatever
   // precise mid-pan spot P was actually sitting at the moment you tapped a painting open. Save the real P/Z.
-  cleanup.push(() => { dead = true; clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); t1.destroy(); if (lay) PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z, cardOpen }); });
+  cleanup.push(() => { dead = true; hideTip(); clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); t1.destroy(); if (lay) PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z, cardOpen }); });
   size(); build(false);
   if (s.f.subjSet && s.f.subjSet.length) { try { ROUTE_NOW = "#/" + pmRouteOf(s, F).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {} }   // opened from a painting's subject tap: the address names the filter
   window.PM_CTRL = { get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length + rasterCount(); }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); },

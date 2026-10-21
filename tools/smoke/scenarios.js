@@ -7631,27 +7631,29 @@ scenario("home", "Today feed: cards, a chip filter, a card opens and Back return
   await t.click(t.$(".tf-game"), { wait: 800 });
   await t.waitFor(() => t.w.location.hash === "#/daily", 12000, "the daily game to open from its card");
 });
-// David, 2026-10-21 (desktop): "click it again, it should zoom in". At desktop width the second click on the open card opens
-// Look closer (the picture itself) instead of the painting page; Esc brings the card back; "Open the page" is in its toolbar.
-// The smoke browser has no hover/pointer:fine media and no outside network, so the scenario sets html.desk itself and fakes the
-// full-size image's load; what it checks is the wiring: first click = card, second = viewer, Esc = back on the map card.
-scenario("paintmap", "desktop: the second click on the open card opens the zoom viewer and Esc closes it", async t => {
+// David, 2026-10-21 (desktop): "when you click on the map, I want the page to open. Then when you click on it again, then I want what we
+// described." On a desktop a click on a painting tile opens its page directly (no card, no glide); a click on the page's picture opens
+// the immersive zoom viewer (black, hover-pan); Esc returns to the page; Back returns to the map. The smoke browser has no hover media,
+// so the scenario sets html.desk itself.
+scenario("paintmap", "desktop: a map click opens the page then a click on its picture opens the zoom viewer and Esc and Back return", async t => {
   await t.open("#/paintings/map?arr=color", { settle: 800, size: [1440, 900] });
   t.d.documentElement.classList.add("desk");
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
-  const cv = t.$(".pmx-cv"), r = cv.getBoundingClientRect();
+  const cv = t.$(".pmx-cv"), r = cv.getBoundingClientRect(), w = t.w;
+  const pz0 = w.PM_CTRL._qaPZ();
   await t.tapAt(cv, r.left + r.width / 2 + 260, r.top + r.height / 2 - 120, { wait: 900 });
-  await t.waitFor(() => t.w.PM_CTRL._qaPZ().cardOpen, 6000, "the first click to open the card");
-  await t.sleep(600);
-  t.expect(!t.$(".glz-scrim"), "the first click already opened the viewer");
-  const w = t.w;
-  w.Image = function () { const o = { naturalWidth: 0 }; Object.defineProperty(o, "src", { set() { setTimeout(() => { o.naturalWidth = 100; if (o.onload) o.onload(); }, 0); } }); return o; };
-  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2, { wait: 600 });
-  await t.waitFor(".glz-scrim", 8000, "the second click to open the zoom viewer");
-  t.expect(!/#\/gallery\//.test(w.location.hash), `the second click opened the page (${w.location.hash})`);
-  t.expect(t.$("[data-glzdetails]"), "no Open the page button in the viewer");
+  await t.waitFor(() => /#\/gallery\//.test(w.location.hash), 8000, "the click on a tile to open the painting page");
+  t.expect(!t.$(".glz-scrim"), "the click opened the viewer");
+  await t.waitFor(".gl-hero img", 8000, "the painting page");
+  t.expect(t.$(".gl-dk-chip"), "no Same painter / Same decade / Walk chips on the page");
+  const img = t.$(".gl-hero img");
+  await t.click(img, { wait: 600 });
+  await t.waitFor(".glz-scrim", 8000, "the click on the picture to open the zoom viewer");
   t.d.body.dispatchEvent(new w.KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
   await t.waitFor(() => !t.$(".glz-scrim"), 4000, "Esc to close the viewer");
-  t.expect(/paintings\/map/.test(w.location.hash), `Esc left the map (${w.location.hash})`);
-  t.expect(w.PM_CTRL._qaPZ().cardOpen, "the card did not survive the viewer");
+  t.expect(/#\/gallery\//.test(w.location.hash), `Esc left the page (${w.location.hash})`);
+  w.history.back();
+  await t.waitFor(() => /paintings\/map/.test(w.location.hash) && w.PM_CTRL && w.PM_CTRL._qaPZ, 8000, "Back to the map");
+  const pz1 = w.PM_CTRL._qaPZ();
+  t.expect(Math.abs(pz1.Z - pz0.Z) < 1e-6 && Math.hypot(pz1.P[0] - pz0.P[0], pz1.P[1] - pz0.P[1]) < 1e-3, `Back did not restore the view (${JSON.stringify(pz0)} -> ${JSON.stringify(pz1)})`);
 });

@@ -1469,6 +1469,10 @@ function glPage(i, d, fromHex, tol) {
     <p class="p-dek">${d.a ? `<button class="aw-link" data-awpainter="${esc(routeSlug(d.a))}">${esc(d.a)}</button>` : "Artist unknown"}${[d.co, d.mv].filter(Boolean).map(x => ` · ${esc(x)}`).join("")}</p>
     <p class="gl-id-src">${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? `<span class="gl-dk-credit"> · ${esc(src.credit)}</span>` : ""}</p>
     <div class="gl-dk-acts"><button class="gl-dk-btn" data-dkpick hidden aria-pressed="false">${icon("pipette", 18)}<span>Pick a color</span></button><button class="gl-dk-btn" data-dkcloser>${ICON.search}<span>Look closer</span></button></div>
+    ${(() => { /* desktop: the map's card chips live here now (a click on the map opens this page directly) */
+      const y = G.year[i], y0 = y === GL_UNDATED ? null : y < 1500 ? Math.floor(y / 100) * 100 : Math.floor(y / 10) * 10, y1 = y0 == null ? null : y < 1500 ? y0 + 99 : y0 + 9;
+      return `<div class="gl-dk-map" role="group" aria-label="On the map">${d.a ? `<button type="button" class="gl-dk-chip" data-pmap="arr=color&p=${esc(routeSlug(d.a))}">Same painter</button>` : ""}${y0 != null ? `<button type="button" class="gl-dk-chip" data-pmap="arr=color&y0=${y0}&y1=${y1}">Same decade</button>` : ""}<button type="button" class="gl-dk-chip" data-pmap="arr=spiral&seed=${i}">Similar</button><button type="button" class="gl-dk-chip" data-pmap="arr=spiral&seed=${i}&walk=1">Walk from here</button></div>`;
+    })()}
     <div class="gl-why" data-glwhy hidden></div>
     </div>
     <div class="gl-pal-ui">
@@ -2143,7 +2147,7 @@ function glPage(i, d, fromHex, tol) {
   // armSample() swaps in the already-resolved, CORS-capable thumb.wikimedia.org URL (glCommonsResolve, above)
   // well after the page first drew, so re-deriving from the painting's raw (unresolved) URL here would always
   // read as "not CORS-safe" for Commons and silently break Look closer's Pick tool for its ~40% of the corpus.
-  const openLookCloser = (startTool) => { buzz(5); glZoomOpen({ src: glZoomSrc(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample, startTool: startTool || null }); };
+  const openLookCloser = (startTool, at) => { buzz(5); glZoomOpen({ ...(at || {}), sub: [d.a, glYear(i)].filter(Boolean).join(" · "), src: glZoomSrc(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample, startTool: startTool || null }); };
   const syncEyd = () => {
     if (eyd) { eyd.detach(); eyd = null; }
     if (pickArmed && canSample && typeof eyedropAttach === "function") {
@@ -2254,6 +2258,11 @@ function glPage(i, d, fromHex, tol) {
     // (pickArmed, the "Pick a color" button), eyedropAttach (armSample's syncEyd) already owns the gesture on
     // pointerdown/up directly, well before this delayed click fires -- so this branch steps aside for it.
     if (pickArmed) return;
+    // desktop: the click lands zoomed in about the clicked point, then the mouse looks around (js/paintzoom.js loupe)
+    if (document.documentElement.classList.contains("desk") && e.clientX != null) {
+      const r = sampleImg.getBoundingClientRect();
+      return openLookCloser(null, { fromRect: { left: r.left, top: r.top, width: r.width, height: r.height }, focal: { fx: clamp((e.clientX - r.left) / (r.width || 1), 0, 1), fy: clamp((e.clientY - r.top) / (r.height || 1), 0, 1), cx: e.clientX, cy: e.clientY } });
+    }
     openLookCloser();
   };
   // swipe the picture left/right to move to the next/previous painting by the same painter (trail-aware: a
@@ -2289,6 +2298,7 @@ function glPage(i, d, fromHex, tol) {
       return;
     }
     glTapAt = now;
+    if (document.documentElement.classList.contains("desk")) { glTapAt = 0; heroTap(e); return; }   // a mouse click opens the viewer at once (the 280ms wait is for a phone's double-tap heart)
     glTapT = setTimeout(() => { glTapAt = 0; heroTap(e); }, 280);
   });
   el.querySelector("[data-back]").onclick = xBack;
