@@ -1306,7 +1306,7 @@ function pmMount(el, s, F) {
   // (lens-correct) fzAt() per axis, like js/honey.js's own zFloor() `search()` does for the color map, fixes
   // both: each axis checked on its own terms, through the actual curve the draw loop uses, not an approximation
   // of it.
-  const zMin = () => {
+  const zFit = () => {
     if (!lay || !lay.GW || !lay.GH || !base) return .18;
     // the farthest the bbox's own edges are from the CURRENT pan center, per axis -- not just GW/2 and GH/2,
     // because P isn't always centered in the layout (David, 2026-10-10: "By painter" never re-centers P at
@@ -1337,6 +1337,13 @@ function pmMount(el, s, F) {
     for (let i = 0; i < 60; i++) { const m = (lo + hi) / 2; if (fits(m)) lo = m; else hi = m; }
     return Math.min(1, lo);
   };
+  // David, 2026-10-21: "it doesn't let you zoom out past a certain point ... now the limit is too close." zFit() above is
+  // where the whole layout just fits the window (or Z = 1 for a small set that already fits); that used to BE the zoom-out
+  // limit, so a small or filtered set could never be pushed back to sit small in the middle of the window, and a big one
+  // stopped at wall-to-wall. The floor is now PM_ZOOM_OUT of the fit: the whole layout shrinks to about a quarter-to-a-third
+  // of the window, whatever the item count. Fit flights (a new arrangement, Show it on the map) still land at zFit()/fitZoomFor.
+  const PM_ZOOM_OUT = .28;
+  const zMin = () => zFit() * PM_ZOOM_OUT;
   // a gentle rubber band BELOW the floor (David, 2026-10-10, "keep a gentle rubber band below it") -- same shape
   // as js/honey.js's own rubber(): a power curve that lets an active pinch/wheel gesture overshoot past zMin()
   // a little rather than hard-stopping dead, but settle() (released touch, or the wheel's own idle timeout)
@@ -1350,9 +1357,9 @@ function pmMount(el, s, F) {
   const fitZoomFor = l => {
     if (!l.GW || !l.GH || !base) return 1;
     // one painter's map (a few hundred to ~1,500 works): open with the WHOLE oeuvre in frame, not a 100-tile window onto it
-    if (pmSolo(s)) { const zm = zMin(); if (zm < 1) return zm; }
+    if (pmSolo(s)) { const zm = zFit(); if (zm < 1) return zm; }
     const perUnit = Math.min(W / (l.GW + 1.4), H / (l.GH + 1.4));
-    return clamp(Math.max(1, perUnit / base), zMin(), ZMAX);
+    return clamp(Math.max(1, perUnit / base), zFit(), ZMAX);
   };
   function size() {
     const r = cv.getBoundingClientRect(); W = r.width; H = r.height; dpr = Math.min(3, devicePixelRatio || 1);
@@ -2140,7 +2147,7 @@ function pmMount(el, s, F) {
     const pinned = PM_NEEDS_SEED.has(s.arr) && s.seed >= 0;
     const mem = pinned ? null : PM_PAN.get(lay.key);
     if (mem && !keepPan) { P = [mem.x, mem.y]; Z = mem.s; }
-    else if (!keepPan) { P = pmSolo(s) ? [lay.gx0 + (lay.GW - 1) / 2, lay.gy0 + (lay.GH - 1) / 2] : lay.start.slice(); Z = fitZoomFor(lay); const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; if (pmSolo(s) && !pinned) { const zm = zMin(); if (zm < 1) Z = zm; } }   // (the snap above moved P a little: re-fit from where it actually sits)
+    else if (!keepPan) { P = pmSolo(s) ? [lay.gx0 + (lay.GW - 1) / 2, lay.gy0 + (lay.GH - 1) / 2] : lay.start.slice(); Z = fitZoomFor(lay); const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; if (pmSolo(s) && !pinned) { const zm = zFit(); if (zm < 1) Z = zm; } }   // (the snap above moved P a little: re-fit from where it actually sits)
     if (keepPan) { const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
     Z = clamp(Z, zMin(), ZMAX);
     // the card itself (David, 2026-10-09): opens for a reason -- a seed just pinned the view to one painting
@@ -2565,6 +2572,8 @@ function pmMount(el, s, F) {
     // QA: the zoom-out floor for the CURRENT layout -- PM_CTRL.zoom(_qaZMin()) should show the whole thing
     // (drawn === count), confirming zMin() isn't capped below what the layout actually needs (David, 2026-10-10)
     _qaZMin: () => zMin(),
+    _qaZ: () => Z,
+    _qaZFit: () => zFit(),   // where the whole layout just fits (the old zoom-out floor); zMin() is PM_ZOOM_OUT of it
     // forces one synchronous draw (lensAt() + draw()) without waiting on requestAnimationFrame -- the smoke
     // harness's own timing can starve rAF well past an ordinary sleep (same gap the tier-0 atlas scenario above
     // documents), so a direct PM_CTRL.zoom()-then-redraw check needs this rather than a real frame
