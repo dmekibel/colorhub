@@ -842,6 +842,8 @@ function pmLayout(s, F) {
 
 // ---------- thumbnails: load the few on screen, bake each once, recycle ----------
 const PM_BAKE = 144, PM_CACHE_MAX = 650, PM_BIG_MAX = 36, PM_FLIGHT = 14;
+// full pictures held at once: 36 on a phone (a 440x956 or smaller window), growing with a larger window's area up to 72
+const pmBigMaxFor = (w, h) => Math.max(PM_BIG_MAX, Math.min(72, Math.round(PM_BIG_MAX * (w || 0) * (h || 0) / (440 * 956))));
 // Canvas taint, corrected (2026-10-09, after measuring only ~62% of drawn cells showed a real photo and finding
 // why): drawing a cross-origin image onto a canvas WITHOUT a crossorigin request the host actually honors does
 // leave THAT canvas unreadable (toDataURL/getImageData throw), and the taint spreads to any other canvas it's
@@ -860,8 +862,15 @@ const PM_BAKE = 144, PM_CACHE_MAX = 650, PM_BIG_MAX = 36, PM_FLIGHT = 14;
 function pmSafeHost(url) {
   try { return GL_CORS_HOSTS.has(new URL(url, location.href).hostname); } catch (e) { return false; }
 }
-function pmImages(onReady, F) {
-  const cache = new Map(), bigs = new Map();   // i -> { st: 0 loading | 1 ready | 2 failed, bm, ar, used } ; i -> HTMLImageElement (kept for the big tiles)
+// David, 2026-10-21 ("most pictures are jittering at this distance", desktop painting map): the full-picture cache (bigs) holds
+// PM_BIG_MAX pictures, but a desktop window shows far more tiles that want one than that (71 wanted at the default close zoom,
+// 36 held). Every load evicted the oldest, which was still wanted, the next frame re-requested it, its load evicted another...
+// an endless load/evict loop: ~15 redraws a second at REST, each tile flipping between its full picture and its 144px baked
+// square (whole-canvas pixel diff 243/255 between frames of a still map). Now want() works out which tiles may hold a full
+// picture (the biggest PM_BIG_MAX, or bigMax() on a window larger than a phone), only those are ever requested, and eviction
+// drops a picture that is no longer in that set first. A set that fits settles and the map goes quiet.
+function pmImages(onReady, F, bigMax) {
+  const cache = new Map(), bigs = new Map(); let keepBig = new Set();   // i -> { st: 0 loading | 1 ready | 2 failed, bm, ar, used } ; i -> HTMLImageElement (kept for the big tiles)
   let flying = 0, frame = 0, dead = false;
   const bake = (i, img, crop) => {
     const nw = img.naturalWidth, nh = img.naturalHeight;
@@ -875,8 +884,10 @@ function pmImages(onReady, F) {
   };
   function want(list) {   // list: gallery indices, most wanted first; also tells which ones need the full picture
     frame++;
-    for (const [i, big] of list) {
-      const e = cache.get(i);
+    const cap = bigMax ? bigMax() : PM_BIG_MAX; keepBig = new Set();
+    for (const [i, big] of list) if (big && keepBig.size < cap) keepBig.add(i);   // list is biggest-first
+    for (const [i] of list) {
+      const e = cache.get(i), big = keepBig.has(i);
       if (e) { e.used = frame; if (big && e.st === 1 && !bigs.has(i) && e.url) pmBigLoad(i, e); continue; }
       if (flying >= PM_FLIGHT) continue;
       const t = pmThumb(i, F); if (!t) { cache.set(i, { st: 2, used: frame }); continue; }
@@ -892,7 +903,7 @@ function pmImages(onReady, F) {
           // less-cropped picture, kept for the always-biggest centered/magnified cell) is no longer reserved for
           // a CORS-answering host either; pmBigLoad just has to avoid requesting crossorigin from a host that
           // won't honor it (that would fail the load outright, not merely taint a canvas nothing reads).
-          try { const b = bake(i, img, t.crop); ent.bm = b.cv; ent.src = b.src; ent.st = 1; ent.t0 = performance.now(); if (big) { bigs.set(i, img); trimBig(); } } catch (err) { ent.st = 2; }
+          try { const b = bake(i, img, t.crop); ent.bm = b.cv; ent.src = b.src; ent.st = 1; ent.t0 = performance.now(); if (big) { bigs.set(i, img); trimBig(); if (!bigs.has(i)) ent.bigLoading = false; } } catch (err) { ent.st = 2; }
           onReady();
         });
       };
@@ -915,7 +926,14 @@ function pmImages(onReady, F) {
     img.onerror = () => { e.bigLoading = false; };
     img.src = e.url;
   }
-  function trimBig() { while (bigs.size > PM_BIG_MAX) { const k = bigs.keys().next().value; bigs.delete(k); const e = cache.get(k); if (e) e.bigLoading = false; } }
+  function trimBig() {   // over the cap: drop pictures nothing wants any more first (oldest first), a wanted one only if it must
+    const cap = bigMax ? bigMax() : PM_BIG_MAX;
+    while (bigs.size > cap) {
+      let k = null; for (const j of bigs.keys()) if (!keepBig.has(j)) { k = j; break; }
+      if (k === null) k = bigs.keys().next().value;
+      bigs.delete(k); const e = cache.get(k); if (e) e.bigLoading = false;
+    }
+  }
   const stats = () => { let ok = 0, wait = 0, bad = 0; cache.forEach(e => e.st === 1 ? ok++ : e.st === 0 ? wait++ : bad++); return { ok, wait, bad, flying, bigs: bigs.size }; };
   return { get: i => cache.get(i), big: i => bigs.get(i), want, stats, destroy: () => { dead = true; cache.clear(); bigs.clear(); } };
 }
@@ -1231,7 +1249,7 @@ function pmMount(el, s, F) {
   // one, or a seeded entry point pins to one) and closes again the moment you start a new pan or tap empty space.
   let cardOpen = false;
   const PULSE_MS = 900;
-  const imgs = pmImages(() => kick(), F);
+  const imgs = pmImages(() => kick(), F, () => pmBigMaxFor(W, H));
   let atlas = null;   // this mount's own resolved {man,bm0s} once pmAtlasLoad(F.col) lands (see draw()'s tier 0/1 passes below)
   const t1 = pmAtlasTier1(() => kick(), F.col);
   const tierH = new Map();   // i -> { t1On, f0, f1 } (pmTState) -- tier 0/1 crossfade + hysteresis memory
@@ -1628,7 +1646,7 @@ function pmMount(el, s, F) {
             const r1 = pmT1Rect(atlas.man, i);
             const a1 = pmFadeAlpha(ts1, "f1", t, 220, RM); if (a1 < 1) fading = true;
             ctx.globalAlpha = a1;
-            const q = r1.s, sw = w >= h ? q : q * w / h, sh = h >= w ? q : q * h / w;
+            const q = r1.s, sw = w0 >= h0 ? q : q * w0 / h0, sh = h0 >= w0 ? q : q * h0 / w0;   // the shape from the unsnapped size: a 1px snap step must not rescale the crop
             ctx.drawImage(te.bm, r1.x + (q - sw) / 2, r1.y + (q - sh) / 2, sw, sh, X, Y, w, h);
             ctx.globalAlpha = 1;
           }
@@ -1638,8 +1656,11 @@ function pmMount(el, s, F) {
       // actually big enough to show more than tier 1 already does (b.d >= PM_T2_MIN, used to start at a few px
       // and stream in every cell that ever scrolled by, which was the original "waterfall of thousands of
       // requests" this whole tiered system replaces). Drawn exactly as before, over tiers 0/1.
-      if (b.d >= PM_T2_MIN) wantImg.push([i, b.d > 92 || m > .3]);
-      if (e && e.st === 1 && b.d >= PM_T2_MIN) {
+      // the tier-2 layer has the same dead zone as tier 1 (David, 2026-10-21): a tile that dwells at ~120px used to swap
+      // its sharper picture in and out as its size crossed PM_T2_MIN by a pixel or two while panning (tiles of 100-300px
+      // are exactly this band on a desktop window); now it turns on at PM_T2_MIN and off only below 75% of it
+      if (b.d >= PM_T2_MIN || (e && e.t2On)) wantImg.push([i, b.d > 92 || m > .3]);
+      if (e && e.st === 1 && hysteresis(e, "t2On", b.d / PM_T2_MIN, .75)) {
         if (e.fadeT == null) e.fadeT = t;
         const age = t - e.fadeT, a = RM ? 1 : Math.min(1, age / 260); if (a < 1) fading = true;
         ctx.globalAlpha = a;
@@ -1649,14 +1670,19 @@ function pmMount(el, s, F) {
         const qualifies = hysteresis(e, "closeOn", closeScore, .75);
         const big = qualifies && imgs.big(i);
         if (big) {   // from the full picture: crop (frame away), then cover the tile's own shape
-          const sr = e.src, ta = h / w; let sw = sr.sw, sh = sr.sh;
+          const sr = e.src, ta = h0 / w0; let sw = sr.sw, sh = sr.sh;
           if (sh / sw > ta) sh = sw * ta; else sw = sh / ta;
-          ctx.drawImage(big, sr.sx + (sr.sw - sw) / 2, sr.sy + (sr.sh - sh) / 2, sw, sh, X, Y, w, h);
+          // the source rect follows the SNAPPED dest rect at the same scale (pixels of picture per screen pixel stay what the
+          // unsnapped size says), so a 1px snap step moves the edge of the picture, never rescales it (the shimmer while moving)
+          const sc = sw / w0, scy = sh / h0, ow = w * sc, oh = h * scy;
+          const ox = Math.max(0, Math.min(big.naturalWidth - ow, sr.sx + (sr.sw - sw) / 2 + (X - X0) * sc)), oy = Math.max(0, Math.min(big.naturalHeight - oh, sr.sy + (sr.sh - sh) / 2 + (Y - Y0) * scy));
+          ctx.drawImage(big, ox, oy, ow, oh, X, Y, w, h);
         } else if (qualifies) {   // still only the baked square: show it as the square crop at the middle size
           const s = Math.max(w, h); ctx.save(); ctx.beginPath(); ctx.rect(X, Y, w, h); ctx.clip(); ctx.drawImage(e.bm, b.x - s / 2, b.y - s / 2, s, s); ctx.restore();
         } else {   // the baked square, cover-cropped to the tile's shape
-          const q = PM_BAKE, sw = w >= h ? q : q * w / h, sh = h >= w ? q : q * h / w;
-          ctx.drawImage(e.bm, (q - sw) / 2, (q - sh) / 2, sw, sh, X, Y, w, h);
+          const q = PM_BAKE, sw = w0 >= h0 ? q : q * w0 / h0, sh = h0 >= w0 ? q : q * h0 / w0;
+          const sc = sw / w0, scy = sh / h0, ow = w * sc, oh = h * scy;
+          ctx.drawImage(e.bm, Math.max(0, Math.min(q - ow, (q - sw) / 2 + (X - X0) * sc)), Math.max(0, Math.min(q - oh, (q - sh) / 2 + (Y - Y0) * scy)), ow, oh, X, Y, w, h);
         }
         ctx.globalAlpha = 1;
       }

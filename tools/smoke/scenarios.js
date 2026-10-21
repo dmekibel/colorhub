@@ -6321,7 +6321,7 @@ scenario("paintmap", "tier 2 (the per-painting loader) is gated to close-ups onl
   t.expect(cap >= 1000, `the per-frame candidate cap is ${cap || "(not found)"}, back near the old 160 -- it should comfortably exceed anything a phone screen holds`);
   t.expect(t2min >= 80, `PM_T2_MIN is ${t2min || "(not found)"}px -- tier 2 (individual requests) should only run for the few close-up cells, now that tier 0/1 cover the rest`);
   t.expect(t1min > 0 && t1min < t2min, `PM_T1_MIN (${t1min || "(not found)"}) should sit below PM_T2_MIN (${t2min || "(not found)"}) -- tier 1 covers the gap tier 0's tiny tiles leave below tier 2's close-ups`);
-  t.expect(/wantImg\.push\(\[i, b\.d > 92 \|\| m > \.3\]\);\s*\n\s*if \(e && e\.st === 1 && b\.d >= PM_T2_MIN\)/.test(src), "the per-painting loader's want/draw gate no longer matches PM_T2_MIN -- check it hasn't drifted back to a low constant");
+  t.expect(/b\.d >= PM_T2_MIN \|\| \(e && e\.t2On\)\) wantImg\.push\(\[i, b\.d > 92 \|\| m > \.3\]\);\s*\n\s*if \(e && e\.st === 1 && hysteresis\(e, "t2On", b\.d \/ PM_T2_MIN, \.75\)\)/.test(src), "the per-painting loader's want/draw gate no longer matches PM_T2_MIN -- check it hasn't drifted back to a low constant");
   await t.open("#/paintings/map", { settle: 1500 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "the map to lay out");
 });
