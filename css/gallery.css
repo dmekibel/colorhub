@@ -441,3 +441,4 @@
 .gl-subj-d{color:var(--faint);font-style:italic}
 .gl-subj-b{font:inherit;color:var(--ink);background:none;border:0;padding:10px 3px;margin:-10px 0;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;cursor:pointer}
 .gl-subj i{font-style:normal;color:var(--faint)}
+.gl-dk-map{display:none}

@@ -211,14 +211,14 @@ html.desk:has(.sheet.hm-sheet-panel) .hm-layer{left:calc(50% - 190px)}
 html.desk:has(.sheet.hm-sheet-panel) .corner.r{right:calc(380px + 28px)}
 
 /* ---------- Look closer (the full-window painting viewer): a real desktop toolbar, the painting as large as the window allows, the tools in a rail ---------- */
-html.desk .glz-scrim{grid-template-columns:minmax(0,1fr) 300px}
+html.desk .glz-scrim{display:block;background:#000}
 html.desk .glz-top{padding:14px 28px;gap:12px}
 html.desk .glz-title{font-size:20px;margin-left:6px}
 html.desk .glz-zc{display:inline-flex;gap:4px;padding:3px;border-radius:999px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--rule)}
 html.desk .glz-zc button{height:32px;padding:0 14px;border-radius:999px;color:var(--ink);font:500 14px/1 var(--sans)}
 html.desk .glz-zc button:hover{background:rgba(236,232,223,.12)}
 html.desk .glz-details:hover{filter:brightness(.92)}
-html.desk .glz-tools{padding:20px 28px 28px 20px;border-left:1px solid var(--rule);gap:18px}
+html.desk .glz-tools{padding:20px 28px 28px 20px;gap:18px}
 html.desk .glz-stage[data-cur="fit"],html.desk .glz-stage[data-cur="fit"] *{cursor:zoom-in}
 html.desk .glz-stage[data-cur="loupe"],html.desk .glz-stage[data-cur="loupe"] *{cursor:move}
 html.desk .glz-stage[data-cur="free"],html.desk .glz-stage[data-cur="free"] *{cursor:grab}
@@ -226,7 +226,20 @@ html.desk .glz-stage[data-cur="free"]:active,html.desk .glz-stage[data-cur="free
 html.desk:has(.glz-scrim) #dk-nav{display:none}
 html.desk .glz-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;border-radius:var(--r-3);padding:4px}
 html.desk .glz-seg button[data-glzv]{padding:0 10px;justify-content:center;min-height:40px}
-html.desk .glz-tools{justify-content:flex-start;padding-top:28px}
+html.desk .glz-tools{justify-content:flex-start;padding-top:84px}
+/* immersive (David, 2026-10-21): the painting alone on pure black, the whole window; the toolbar, the tools rail and a quiet caption
+   float over it and fade after ~2s without mouse movement (js/paintzoom.js .idle), coming back on movement */
+html.desk .glz-stage{position:absolute;inset:0;background:#000}
+html.desk .glz-top{position:absolute;left:0;right:0;top:0;z-index:6;background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,0));transition:opacity .4s var(--ease)}
+html.desk .glz-tools{position:absolute;right:0;top:0;bottom:0;width:300px;z-index:5;pointer-events:none;transition:opacity .4s var(--ease)}
+html.desk .glz-tools>*{pointer-events:auto}
+html.desk .glz-cap{position:absolute;left:28px;bottom:24px;z-index:5;margin:0;max-width:min(520px,45vw);display:flex;flex-direction:column;gap:3px;pointer-events:none;color:var(--ink);text-shadow:0 1px 8px #000;transition:opacity .4s var(--ease)}
+html.desk .glz-cap b{font:500 17px/1.3 var(--serif)}
+html.desk .glz-cap span{font:400 14px/1.3 var(--sans);color:var(--soft)}
+html.desk .glz-title{visibility:hidden}
+html.desk .glz-scrim.idle .glz-top,html.desk .glz-scrim.idle .glz-tools,html.desk .glz-scrim.idle .glz-cap{opacity:0;pointer-events:none}
+html.desk .glz-scrim.idle .glz-stage[data-cur="loupe"],html.desk .glz-scrim.idle .glz-stage[data-cur="loupe"] *{cursor:none}
+html.desk:has(.glz-scrim) .corner,html.desk:has(.glz-scrim) .dk-crumbs{visibility:hidden}
 
 /* ---------- audit 2026-10-21 (painting views): pages that were still a phone column in a wide window ---------- */
 /* a footer inside a narrow page column wraps to two rows instead of squeezing the note into a sliver */
@@ -262,3 +275,12 @@ html.desk .screen.article:has(>.x-feed){max-width:1240px}
 html.desk .x-feed .masonry{display:block;column-count:4;column-gap:14px}
 html.desk .x-feed .masonry>div{display:contents}
 html.desk .x-feed .masonry .pin{break-inside:avoid;margin-bottom:22px}
+html.desk .gl-hero>span,html.desk .gl-hero>span.gl-tap{cursor:zoom-in}
+html.desk .gl-dk-map{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 20px}
+html.desk .gl-dk-map::before{content:"On the map";font:500 13px/1 var(--sans);color:var(--soft);margin-right:4px}
+html.desk .gl-dk-chip{height:34px;padding:0 14px;border-radius:var(--r-pill);background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--rule-strong);font:500 14px/1 var(--sans);cursor:pointer;transition:background .15s}
+html.desk .gl-dk-chip:hover{background:var(--surface-2)}
+html.desk .pmx-cv.hov{cursor:pointer}
+.pmx-tip{position:fixed;z-index:30;pointer-events:none;max-width:320px;padding:9px 13px;border-radius:12px;background:rgba(14,13,11,.92);box-shadow:inset 0 0 0 1px rgba(236,232,223,.16);color:var(--ink);font:500 14px/1.3 var(--sans);display:flex;flex-direction:column;gap:2px;animation:glzHint .15s var(--ease) both}
+.pmx-tip b{font:500 14.5px/1.3 var(--serif)}
+.pmx-tip span{font:400 13px/1.3 var(--sans);color:var(--soft)}
