@@ -21,27 +21,39 @@ if not csv_p.exists():
 csv.field_size_limit(sys.maxsize)
 C.SRC["met"]["gap"] = 0.0  # pacing is done below
 held = Held()
-cands, total_pd, n_csv = [], 0, 0
+cands, total_pd, n_csv, held_pre, set_aside = [], 0, 0, 0, 0
+# Departments whose "Paintings" are not Western (Asian scrolls and screens, Islamic, Egyptian, Africa/Oceania/Americas)
+NON_WESTERN = {"Asian Art", "Islamic Art", "Egyptian Art", "Ancient West Asian Art", "Musical Instruments",
+               "Arts of Africa, Oceania, and the Americas"}
 with open(csv_p, newline="", encoding="utf-8-sig") as f:
     for r in csv.DictReader(f):
         n_csv += 1
         if r.get("Is Public Domain") == "True" and M.is_painting(r.get("Classification") or "", r.get("Object Name")):
             total_pd += 1
             oid = int(r["Object ID"])
-            if f"met-{oid}" not in held.ids:
+            if f"met-{oid}" in held.ids:
+                held_pre += 1
+            elif r.get("Department") in NON_WESTERN:
+                set_aside += 1
+            else:
                 cands.append(oid)
 print(f"met: CSV {n_csv} objects, {total_pd} public-domain paintings, {len(cands)} not held", flush=True)
 
-obj_p = SCR / "met_objects.jsonl"
+import os
+REV = bool(os.environ.get("MET_REVERSE"))
+obj_p = SCR / ("met_objects_b.jsonl" if REV else "met_objects.jsonl")
 have = {}
-if obj_p.exists():
-    for line in obj_p.read_text().splitlines():
+for q in (SCR / "met_objects.jsonl", SCR / "met_objects_b.jsonl"):
+  if q.exists():
+    for line in q.read_text().splitlines():
         try:
             x = json.loads(line)
             have[x["objectID"]] = x
         except Exception:
             pass
 todo = [i for i in cands if i not in have]
+if REV:
+    todo.reverse()
 print(f"met: {len(have)} cached, {len(todo)} to fetch", flush=True)
 lock, out = threading.Lock(), obj_p.open("a")
 state = dict(n=0, gap=0.25, bad=0)
@@ -87,6 +99,8 @@ for oid in todo:
 out.flush()
 print(f"met: fetched {state['n']}, failed {state['bad']}", flush=True)
 
+if REV:
+    sys.exit(0)  # fetch only; the forward run stages
 raw, pre = [], {}
 for oid in cands:
     x = have.get(oid)
@@ -100,4 +114,6 @@ for oid in cands:
         pre["no primary image"] = pre.get("no primary image", 0) + 1
     else:
         raw.append(dict(x, id=x["objectID"]))
-stage("met", total_pd, raw, lambda x: C.norm_record("met", x), "CC0", lambda x: x.get("objectURL"), pre)
+stage("met", total_pd, raw, lambda x: C.norm_record("met", x), "CC0", lambda x: x.get("objectURL"),
+      dict(pre, **({"non-Western department (Asian Art, Islamic, Egyptian, Africa/Oceania/Americas)": set_aside}
+                   if set_aside else {})), held_pre=held_pre)

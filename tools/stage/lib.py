@@ -24,6 +24,12 @@ OUT.mkdir(parents=True, exist_ok=True)
 (SCR / "stats").mkdir(parents=True, exist_ok=True)
 
 
+NON_WESTERN_CO = {"China", "Japan", "Korea", "India", "Tibet", "Nepal", "Afghanistan", "Pakistan", "Bangladesh",
+                  "Sri Lanka", "Thailand", "Cambodia", "Vietnam", "Indonesia", "Myanmar", "Burma", "Iran", "Iraq",
+                  "Egypt", "Mongolia", "Bhutan", "Uzbekistan", "Laos", "Taiwan", "Syria", "Ethiopia", "Nigeria",
+                  "Kyrgyzstan", "Turkmenistan", "Tajikistan", "Malaysia", "Singapore", "Yemen", "Saudi Arabia"}
+
+
 def _k(s):
     return re.sub(r"[^a-z0-9]", "", (s or "").lower())
 
@@ -80,7 +86,7 @@ def clean(r):
     return None
 
 
-def stage(museum, api_total, raw, norm, license, url_of, pre_drops=None, select_src=None, group_cap=True):
+def stage(museum, api_total, raw, norm, license, url_of, pre_drops=None, select_src=None, group_cap=True, held_pre=0):
     """raw: records (each with 'id') that passed the museum's own filter (pre_drops: Counter of what that filter
     removed). Applies corpus.py's select() (text pages, group cap, hand-listed non-paintings), then held / twin /
     clean, and writes the files."""
@@ -91,7 +97,7 @@ def stage(museum, api_total, raw, norm, license, url_of, pre_drops=None, select_
     else:  # a source whose ids are not leaves of books: text pages and hand-listed non-paintings only
         sel_ids = {x["id"] for x in raw if not C.TEXT_PAGE.search(x.get("title") or "")
                    and f"{museum}-{x['id']}" not in held.nonpaint}
-    rows, seen_here, held_n = [], set(), 0
+    rows, seen_here, held_n = [], set(), held_pre
     for x in raw:
         if x["id"] not in sel_ids:
             drops["text page / group cap / hand-listed non-painting"] += 1
@@ -110,6 +116,9 @@ def stage(museum, api_total, raw, norm, license, url_of, pre_drops=None, select_
         why = clean(r)
         if why:
             drops[why] += 1
+            continue
+        if r.get("co") in NON_WESTERN_CO:
+            drops["non-Western painting (Asian/Islamic/African), set aside"] += 1
             continue
         if held.is_twin(r):
             drops["artist+title+year twin of a held/staged row"] += 1
