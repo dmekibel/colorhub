@@ -1189,6 +1189,7 @@ function pmOpen(spec, o = {}) {
     <button class="corner l pl-corner" data-rooms-corner aria-label="Places">${ROOMS_GLYPH}<span>Places</span></button>
     <button class="corner r hm-do pmx-do" data-do-corner aria-label="More" aria-haspopup="dialog">${ICON.more}</button>
     ${col === "paintings" && typeof hmLayerSwitchHTML === "function" ? hmLayerSwitchHTML("paintings") : ""}
+    <button class="pmx-count" data-pmcount hidden></button>
     <div class="pmx-chipbar" data-pmchipbar hidden></div>
     <div class="pmx-walk" data-pmwalk hidden></div>
     <div class="pmx-facets" data-pmfacets hidden></div>
@@ -1923,8 +1924,31 @@ function pmMount(el, s, F) {
 
   // ---- the chrome: back, the static title, one settings button; a removable chip for every active filter
   function chrome() {
-    paintChipbar(); syncDo();
+    paintChipbar(); syncDo(); paintCount();
   }
+  // the quiet count in the top-center, under the Colors|Paintings switch (David, 2026-10-21: the map should always say how
+  // many paintings you are looking at). Same number the Filter sheet shows (lay.n = pmRun's list, favorites and the time
+  // scrubber applied): "104,726 paintings", and once something narrows it "1,326 of 104,726 paintings". The one-painter map
+  // already has this as the chip beside the painter's name (paintChipbar), so it stays hidden there. A tap opens Filter.
+  let cntShown = -1, cntRaf = 0;
+  function paintCount() {
+    const b = el.querySelector("[data-pmcount]"); if (!b) return;
+    const nounP = pmColLabel(F, "nounP"), nounS = pmColLabel(F, "noun"), total = F.N | 0;
+    b.hidden = pmSolo(s) || !lay || !total || !lay.n && !pmActiveChips(s, F).length;
+    el.classList.toggle("pmx-hascount", !b.hidden);
+    if (b.hidden) { cntShown = -1; return; }
+    const n = lay.n, narrowed = n !== total;
+    const put = v => { b.innerHTML = `<span class="pmx-cnum">${Math.round(v).toLocaleString()}</span>${narrowed ? ` of ${total.toLocaleString()}` : ""} ${total === 1 || (!narrowed && n === 1) ? esc(nounS) : esc(nounP)}`; };
+    b.setAttribute("aria-label", `${n.toLocaleString()}${narrowed ? " of " + total.toLocaleString() : ""} ${n === 1 && !narrowed ? nounS : nounP}. Open Filter`);
+    b.dataset.n = n;
+    cancelAnimationFrame(cntRaf);
+    const from = cntShown, t0 = performance.now(), D = 320;
+    cntShown = n;
+    if (RM || from < 0 || from === n) { put(n); return; }
+    const step = now => { const k = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - k, 3); put(from + (n - from) * e); if (k < 1) cntRaf = requestAnimationFrame(step); else put(n); };
+    cntRaf = requestAnimationFrame(step);
+  }
+  el.querySelector("[data-pmcount]").onclick = () => { buzz(4); openSheet("filter"); };
   // the bottom edge of the chip row (it wraps to two lines when several filters are on), plus a little air
   function soloInset() { if (chipbar.hidden) return 0; const r = chipbar.getBoundingClientRect(), c = cv.getBoundingClientRect(); return Math.max(0, r.bottom - c.top) + 8; }
   function syncDo() {}   // the corner is the same "⋮" on every map now (the color map's look); kept as a hook for chrome()
@@ -2316,7 +2340,7 @@ function pmMount(el, s, F) {
           <label class="search pmx-find"><span>${ICON.search}</span><input data-pmq type="search" placeholder="Find a ${esc(painterLab.toLowerCase())}" value="${esc(fq)}" autocomplete="off"></label>
           <div class="pmx-chips">${pList.map(x => chip("data-pmp", x.v, x.name, x.n, paSelSet.has(x.v))).join("")}</div></div>`;
       else q$("[data-pmbody]").innerHTML = `
-        <div class="pmx-sh-top"><b>Filter</b><span>${n.toLocaleString()} ${n === 1 ? pmColLabel(F, "noun") : nounP}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
+        <div class="pmx-sh-top"><b>Filter</b><span>${n === F.N ? n.toLocaleString() : n.toLocaleString() + " of " + F.N.toLocaleString()} ${F.N === 1 || (n === F.N && n === 1) ? pmColLabel(F, "noun") : nounP}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
         ${favIds.length ? `<div class="pmx-row"><span class="pmx-lab">Yours</span><div class="pmx-chips">${chip("data-pmfav", 1, "Your favorites", favN, !!s.fav)}</div></div>` : ""}
         <div class="pmx-row"><span class="pmx-lab">Color</span><div class="pmx-sw">${colsSorted.map(c => `<button data-pmhex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" class="${f.hexes.includes(c.h.toUpperCase()) ? "on" : ""}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
           ${f.hexes.length ? `<p class="pmx-cap2">${f.hexes.map(h => `<i style="--c:${h}"></i>`).join("")}${esc(f.hexes.length === 1 ? (f.name || nameOf(f.hexes[0]).text) : f.hexes.length + " colors")} <span>· within ${f.tol}%</span></p>
