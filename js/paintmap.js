@@ -1874,10 +1874,45 @@ function pmMount(el, s, F) {
   // same ~280ms js/gallery.js and js/swatch.js use, so a quick second tap can be caught first and turned into
   // the heart burst + toggle instead of opening the page
   let lastTapAt = 0, tapTimer = 0;
+  // Desktop (David, 2026-10-21: "click it again, it should zoom in"): the first click opens the card, the second click on the
+  // open card flies into the picture itself -- the full-size copy in Look closer (js/paintzoom.js), growing out of the card and
+  // landing zoomed on the clicked point, then the mouse looks around by hovering. "Open the page" in its toolbar and the card's
+  // Open chip still go to the painting page. A phone keeps its tap: the second tap opens the page.
+  let zoomBusy = false, zoomPill = null;
+  async function zoomK(b, x, y) {
+    if (zoomBusy) return; zoomBusy = true;
+    const i = lay.items[b.k], giveUp = (why) => { zoomBusy = false; openK(b.k); };
+    try {
+      let d = pmDetailNow(i, F); if (!d && (!F.col || F.col === "paintings")) d = await glDetail(i);
+      if (dead) { zoomBusy = false; return; }
+      if (!d || !d.img || typeof glZoomOpen !== "function") return giveUp();
+      let url = d.hi || (typeof glBig === "function" ? glBig(d.img) : d.img), cors = false;
+      if (typeof glCommonsFilename === "function" && glCommonsFilename(url)) { const res = await glCommonsResolve(url, 2048); if (res) { url = res; cors = true; } else url = glZoomSrc(url); }
+      else { url = typeof glZoomSrc === "function" ? glZoomSrc(url) : url; cors = typeof glCORS === "function" && !!glCORS(url); }
+      const pre = new Image(); if (cors) pre.crossOrigin = "anonymous";
+      const pillT = setTimeout(() => { zoomPill = document.createElement("div"); zoomPill.className = "pmx-zload"; zoomPill.textContent = "Opening the full-size painting\u2026"; el.appendChild(zoomPill); }, 160);
+      await new Promise(res => { pre.onload = res; pre.onerror = res; pre.src = url; });
+      clearTimeout(pillT); if (zoomPill) { zoomPill.remove(); zoomPill = null; }
+      if (dead) { zoomBusy = false; return; }
+      if (!pre.naturalWidth) return giveUp("image " + url);
+      let sampleOk = false; try { const c = document.createElement("canvas"); c.width = c.height = 1; c.getContext("2d").drawImage(pre, 0, 0, 1, 1); c.getContext("2d").getImageData(0, 0, 1, 1); sampleOk = true; } catch (e) {}
+      const r = cv.getBoundingClientRect(), fromRect = { left: r.left + b.x - b.w / 2, top: r.top + b.y - b.h / 2, width: b.w, height: b.h };
+      const fx = clamp((x - fromRect.left) / (b.w || 1), 0, 1), fy = clamp((y - fromRect.top) / (b.h || 1), 0, 1);
+      buzz(6);
+      glZoomOpen({ src: url, alt: d.t, title: d.t, pal: (!F.col || F.col === "paintings") && typeof glPal === "function" ? glPal(i) : [], pix: null, galleryIndex: i, cors, sampleOk,
+        fromRect, focal: { fx, fy, cx: x, cy: y }, onDetails: () => openK(b.k) });
+    } catch (e) { return giveUp(String(e)); }
+    zoomBusy = false;
+  }
   function tap(x, y) {
     const b = hitAt(x, y); if (!b) { hideCard(); return; }   // tap-away: empty space closes whatever's open
     if (b.k === centerK && b.z < .6) {
+      const wasOpen = cardOpen;
       showCard();   // a tap always shows the name, even on the already-centered painting about to open
+      if (document.documentElement.classList.contains("desk")) {
+        if (wasOpen) { clearTimeout(tapTimer); tapTimer = 0; lastTapAt = 0; zoomK(b, x, y); }
+        return;
+      }
       const now = performance.now();
       if (now - lastTapAt < 300) {
         clearTimeout(tapTimer); tapTimer = 0; lastTapAt = 0;

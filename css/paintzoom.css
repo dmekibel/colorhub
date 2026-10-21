@@ -156,3 +156,11 @@
 @media (prefers-reduced-motion:reduce){.glz-lp.drop{animation:none}.glz-sw-w,.glz-spring .glz-lp{transition:none}}
 @media (orientation:landscape){.glz-pk-act{justify-content:flex-start}.glz-pk-info{align-items:flex-start;text-align:left}}
 @media (max-width:359px){.glz-seg button[data-glzv]{padding:0 10px}.glz-seg button[data-glzv="pick"]{padding:0 10px 0 9px}}
+
+/* ---- opened from a map card (js/paintzoom.js: the Details button, and on a desktop the Fit/100% buttons and the loupe hint) ---- */
+.glz-zc{display:none}
+.glz-details{flex:none;height:38px;padding:0 16px;border-radius:999px;background:rgba(236,232,223,.92);color:#0E0D0B;font:500 14.5px/1 var(--sans)}
+.glz-hint{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:4;padding:9px 16px;border-radius:999px;background:rgba(14,13,11,.78);box-shadow:inset 0 0 0 1px rgba(236,232,223,.16);
+  font:500 14px/1 var(--sans);color:var(--ink);white-space:nowrap;pointer-events:none;animation:glzHint .3s var(--ease) both;transition:opacity .45s var(--ease)}
+.glz-hint.out{opacity:0}
+@keyframes glzHint{from{opacity:0;transform:translate(-50%,6px)}}
