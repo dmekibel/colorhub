@@ -55,7 +55,10 @@ function honeyNorm(o) {
   const [L, a, b] = lab(o.h), C = Math.hypot(a, b);
   let H = Math.atan2(b, a) * 180 / Math.PI; if (H < 0) H += 360;
   it = { o, n: o.n, h: o.h, c: o.c || null, lib: o.lib || (o.src ? o : null), lab: [L, a, b], L, C, H,
-    ink: ink(o.h) === "dark" ? "rgba(20,19,17,.86)" : "rgba(255,255,255,.93)" };
+    // the name's ink: pure near-black or pure white, whichever has the higher real WCAG contrast against THIS bubble's own
+    // color, fully opaque (David, 2026-10-21: names on the outer rings read as the bubble's own color: an alpha-blended
+    // ink on a mid or dark bubble was a ~2:1 smudge). Black or white always reaches >= 4.5:1 on any color.
+    ink: contrastRatio(o.h, "#0B0A09") >= contrastRatio(o.h, "#FFFFFF") ? "#0B0A09" : "#FFFFFF" };
   HONEY_NORM.set(o, it);
   return it;
 }
@@ -674,6 +677,7 @@ const HONEY_WRAP = new Map();
 // never reach the floor -- the expensive part (ctx.measureText, picking the wrap) runs once per unique name,
 // ever, not once per cell per frame.
 const HONEY_LABEL_FS_MIN = 7;
+const HONEY_LABEL_FS_HOME = 11;   // the Home map hides a name smaller than this instead of drawing a smudge (David, 2026-10-21); other honeycombs (palette views) keep 7
 function honeyWrap(ctx, name) {
   let w = HONEY_WRAP.get(name); if (w) return w;
   const maxW = 76, words = name.split(" ");
@@ -1206,6 +1210,7 @@ function honeycomb(host, opts = {}) {
   const vig = host.querySelector(".hc-vig"), cv = host.querySelector("canvas"), ctx = cv.getContext("2d"), cap = host.querySelector(".hc-cap");
   const RM = reduceMotion, SHOOT = typeof SHOT !== "undefined" && !!SHOT, ZMAX = 2.5, ABS_ZMIN = .04, M = 2.2;
   const isHome = !!(host.closest && host.closest(".hm"));   // the Home map: the one whose view a page returns to
+  const LABEL_MIN = isHome ? HONEY_LABEL_FS_HOME : HONEY_LABEL_FS_MIN, LABEL_RAMP = isHome ? .12 : 2;
   let springTo = null, zTo = null;   // the glide (and zoom) a touch interrupted, while that touch is still a tap
   let frozen = 0;   // when a bubble opened a page (0: none): the view saved at that moment must not be overwritten on the way out
   let vigK = -1, vigOpSet = -1;
@@ -1489,13 +1494,18 @@ function honeycomb(host, opts = {}) {
   function buildFlatDrawn(l, t) {
     const R = reach(l), cx = W / 2, cy = vcy(), hx = W / 2, hy = vy() / 2, ia = l.inner, round = cfg.lensMode === "round", pk = pack();
     drawn = []; let tinyN = 0, cbest = Infinity, cItem = null;
+    // a size floor for a small set (David, 2026-10-21: "magnification broken on the outer rings, in the middle it works"): the
+    // fisheye shrinks everything away from its focus, so on a 100-color map an outer ring fell to ~70 px (or less on a phone)
+    // beside a 250 px middle. A bubble in a set this small never drops under a tappable 28 px while you are zoomed in
+    // (the floor eases away as you zoom out, so the whole map still fits); cells clip each other, so nothing overlaps.
+    const minD = isHome && round && lay.raw && lay.raw.length <= 400 ? 28 * Math.min(1, Z / .6) : 0;
     if (lay.finite && !lay.edgeSet) { lay.edgeSet = honeyEdgeSet(lay.pts); lay.ghosts = honeyGhosts(lay.pts, lay.edgeSet); }
     const ghostPts = lay.finite && lay.ghosts && lay.ghosts.length ? lay.ghosts : null;
     const edgeSet = lay.finite && !ghostPts ? lay.edgeSet : null;   // with ghosts, edge cells need no special start shape
     for (const p of (ghostPts ? lay.pts.concat(ghostPts) : lay.pts)) copies(p, P, R, (ex, ey) => {
       const z = Math.hypot(ex, ey);
       let x, y, d;
-      if (round) { const k = z ? F(z, l) / z : base * l.s * l.m0; x = cx + ex * k; y = cy + ey * k; d = base * l.s * localScale(z, l) * pk; }
+      if (round) { const k = z ? F(z, l) / z : base * l.s * l.m0; x = cx + ex * k; y = cy + ey * k; d = base * l.s * localScale(z, l) * pk; if (minD && d < minD) d = minD; }
       else {
         const ux = Math.abs(ex * l.K / hx), uy = Math.abs(ey * l.K / hy), dwx = dwarp(ux, ia), dwy = dwarp(uy, ia);
         x = cx + Math.sign(ex) * warp(ux, ia) * hx; y = cy + Math.sign(ey) * warp(uy, ia) * hy;
@@ -1663,10 +1673,10 @@ function honeycomb(host, opts = {}) {
       // a cheap pre-filter before the honeyWrap lookup: even the most compact name (honeyWrap's own best-case
       // fs ratio, ~.19) can't clear the legibility floor below roughly this diameter, so most of a crowded
       // frame's tiny cells skip the (cached, but still a Map lookup) call entirely
-      if (d * .19 < HONEY_LABEL_FS_MIN) continue;
+      if (d * .19 < LABEL_MIN) continue;
       const w = honeyWrap(ctx, it.n), fsReal = w.fs * d;
-      if (fsReal >= HONEY_LABEL_FS_MIN) {
-        const la = Math.min(1, (fsReal - HONEY_LABEL_FS_MIN) / 2);   // a quick ~2px fade right at the floor, not a hard pop
+      if (fsReal >= LABEL_MIN) {
+        const la = Math.min(1, (fsReal - LABEL_MIN) / LABEL_RAMP);   // a very quick fade right at the floor, not a hard pop, and never a half-strength name
         const fs = Math.min(fsReal, 30), lh = fs * 1.02;
         const sub = Math.min(1, Math.max(0, (d - 150) / 30)), subH = sub ? fs * .9 : 0;
         const y0 = b.y - (w.lines.length - 1) * lh / 2 + fs * .06 - subH / 2;
@@ -2250,11 +2260,11 @@ function honeycomb(host, opts = {}) {
     for (let i = 0; i < 72; i++) { const t = i / 72 * 6.283185307; rays.push(b.poly && shp > .02 && b.rin >= 3 ? b.rin * (1 - shp) + honeyRay(b.poly, t) * shp : b.rin); }
     const it = b.it;
     let label = null;
-    // the same legibility gate the main draw loop uses (HONEY_LABEL_FS_MIN), so a bubble morphing into its own
+    // the same legibility gate the main draw loop uses (LABEL_MIN), so a bubble morphing into its own
     // page starts from exactly the label state it was actually showing, not the old labelMin-based guess
     if (!(ST.label && !ST.label(it.o))) {
       const w = honeyWrap(ctx, it.n), fsReal = w.fs * b.d;
-      if (fsReal >= HONEY_LABEL_FS_MIN) { const fs = Math.min(fsReal, 30); label = { lines: w.lines, fs, lh: fs * 1.02, ink: it.ink }; }
+      if (fsReal >= LABEL_MIN) { const fs = Math.min(fsReal, 30); label = { lines: w.lines, fs, lh: fs * 1.02, ink: it.ink }; }
     }
     return { x: r.left + b.x, y: r.top + b.y, d: b.d, rays, label, h: it.h, n: it.n };
   }
@@ -2731,17 +2741,17 @@ function honeycomb(host, opts = {}) {
     },
     // QA (tools/smoke home group): every currently-drawn bubble's REAL label font size in CSS px (honeyWrap's
     // cached per-name ratio times the bubble's current diameter), for bubbles that would actually draw one
-    // (HONEY_LABEL_FS_MIN or above) -- so a test (or a screenshot-driven check) can confirm nothing smaller
+    // (LABEL_MIN or above) -- so a test (or a screenshot-driven check) can confirm nothing smaller
     // than the verified legibility floor ever gets a label, and report the smallest one actually shown.
     _labelFsStat() {
       const fs = [];
       for (const b of drawn) {
         if (!b.it || !(b.d > 0)) continue;
         const w = honeyWrap(ctx, b.it.n), real = w.fs * b.d;
-        if (real >= HONEY_LABEL_FS_MIN) fs.push(+real.toFixed(2));
+        if (real >= LABEL_MIN) fs.push(+real.toFixed(2));
       }
       fs.sort((a, c) => a - c);
-      return { n: fs.length, min: fs[0] ?? null, max: fs[fs.length - 1] ?? null, floor: HONEY_LABEL_FS_MIN };
+      return { n: fs.length, min: fs[0] ?? null, max: fs[fs.length - 1] ?? null, floor: LABEL_MIN };
     },
     // QA only: the ordinary zoom(z) always clamps to [ZMIN,ZMAX] (the pinch-out floor), but a real pinch can
     // still swing well past it for a moment (rubber(), the elastic overshoot before it springs back) -- which

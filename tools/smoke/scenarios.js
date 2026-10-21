@@ -479,7 +479,7 @@ scenario("home", "Arrange's fit mode frames the whole layout above the sheet, fo
     // force it again, then redo the same setInset+enterFit it does, exactly like a real device would once the
     // (real, time-accurate) entrance actually finished
     t.ev(`(() => { const sh = document.querySelector(".sheet.hm-sheet-arrange"), v = document.querySelector(".cx-view"); if (!sh || !v) return; const r = sh.getBoundingClientRect(); HM_CTRL.setInset({ bottom: Math.max(0, v.getBoundingClientRect().bottom - r.top) }); HM_CTRL.enterFit(); })()`);
-    await t.sleep(900);
+    await t.sleep(2400);   // (the default map is every name now: its fit flight takes a few more frames)
     forceAnims(); await t.sleep(200);
     const sheet = t.$(".sheet.hm-sheet-arrange"); t.expect(sheet, `${why}: no Arrange sheet`);
     const sheetTop = sheet.getBoundingClientRect().top;
@@ -1160,7 +1160,7 @@ scenario("home", "View sheet: families tell the truth and combine with tone and 
 });
 
 scenario("home", "View sheet filters · Surprise me · Search", async t => {
-  const cv = await H.homeReady(t);
+  let cv = await H.homeReady(t);
   await H.sheet(t, "colors");
   const all = H.num(t.text("[data-count]"));
   const seg = t.$$('.hm-seg[data-key="filter"] button');
@@ -1185,6 +1185,7 @@ scenario("home", "View sheet filters · Surprise me · Search", async t => {
   await t.click(surprise, { wait: 300 });
   t.expect(!t.$(".sr-sheet") && !t.$(".hm-chooser"), "Surprise me left a sheet open");
   await t.sleep(900);   // let the "fly to a new color" settle before the next tap, same as a real second tap would
+  cv = t.$("canvas");   // Surprise me goes through hmGoFloor (hmHome), which may legitimately rebuild the map screen: judge the search sheet's own open/close against the map that is on screen now
   await t.click("#hmTopSearch", { wait: 300 });
   await t.waitFor(".sr-sheet", 4000, "the global search sheet from the top-of-map button, a second time");
   const q = t.$(".sr-input"); t.expect(q === t.d.activeElement, "the search field did not focus");

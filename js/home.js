@@ -433,11 +433,11 @@ function hmWireLayerSwitch(el, cur, onSwitch) {
 const HM_GEAR_SVG = `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3.1"/><path d="M12 3.6v2.5M12 17.9v2.5M20.4 12h-2.5M6.1 12H3.6M17.7 6.3l-1.8 1.8M8.1 15.9l-1.8 1.8M17.7 17.7l-1.8-1.8M8.1 8.1 6.3 6.3"/></svg>`;
 
 // The first view of a map nobody has zoomed yet: about the same number of big readable cells (~45) on any screen, so the
-// 440x956 phone keeps its zoom (1) and a desktop window zooms in by the square root of its extra area (cell count ~ area / zoom^2).
+// 440x956 phone keeps its zoom (1.15) and a desktop window zooms in by the square root of its extra area (cell count ~ area / zoom^2).
 // Once the user zooms, S.hm.zoom is theirs (onZoom saves it) and this never overrides it.
 function hmStartZoom() {
   const a = (innerWidth || 440) * Math.max(300, (innerHeight || 956) - 60);
-  return Math.round(Math.min(2.2, Math.max(1, Math.sqrt(a / (440 * 956)))) * 100) / 100;
+  return Math.round(Math.min(2.5, Math.max(1, Math.sqrt(a / (440 * 956))) * 1.15) * 100) / 100;   // x1.15: every name at the start is big enough to carry its label (the label floor is 11 px)
 }
 
 function hmHome() {
@@ -551,7 +551,7 @@ function hmHome() {
     // colors finds its own bubble instead of all collapsing onto the few a small stage holds. Not saved; clearing the
     // constellation (its bar's ✕) brings your own view back. It stays among every name while it's lit, so coming
     // back from Learn these, Find them or a color page finds the same constellation, not one collapsed onto a stage.
-    if (typeof HONEY_HL !== "undefined" && HONEY_HL && (HONEY_HL.fresh || HONEY_HL.every) && !every) {
+    if (typeof HONEY_HL !== "undefined" && HONEY_HL && (HONEY_HL.fresh || HONEY_HL.every) && v.src !== "every-shade") {   // (also when the map already shows every name, the new default: the selection still picks its own arrangement)
       if (!LONG_NAMES || !CORE_NAMES) { await Promise.all([loadCoreNames(), loadLongNames()]); if (!el.isConnected || g !== gen) return; }
       items = hmEveryNameItems(); hlAll = true; HONEY_HL.every = true;
       // David: "pick the appropriate view for the list of colors so they're minimally scattered." Chosen once per
@@ -703,7 +703,7 @@ function hmHome() {
     // insetCur tween), ctrl.enterFit() flies the map to show the whole thing centered above the sheet, and every
     // setting change re-fits (js/honey.js update()) so the change reads at a glance; exitFit() below flies back
     // to the pan/zoom you had, on any way the sheet closes.
-    const measureInset = () => { if (ctrl && sh.isConnected) { const r = sh.getBoundingClientRect(); ctrl.setInset({ bottom: Math.max(0, viewEl.getBoundingClientRect().bottom - r.top) }); } };   // measured to the map's own bottom (it reaches past innerHeight on an iPhone Home Screen app)
+    const measureInset = () => { if (ctrl && sh.isConnected) { const r = sh.getBoundingClientRect(); if (document.documentElement.classList.contains("desk")) return ctrl.setInset({ bottom: 0 }); /* desktop: a docked side panel (css/desktop.css), the map's own width gives up its strip, nothing sits below it */ ctrl.setInset({ bottom: Math.max(0, viewEl.getBoundingClientRect().bottom - r.top) }); } };   // measured to the map's own bottom (it reaches past innerHeight on an iPhone Home Screen app)
     // David, 2026-10-09: "the FIRST fit on opening the sheet is wrong... the refit after a Look change is
     // right." The sheet's own entrance is a CSS animation (css/polish.css .sheet{animation:sheetIn var(--grow)
     // ...}), and --grow is 420ms (app.css) -- a full 120ms longer than the flat 300ms this used to wait before
