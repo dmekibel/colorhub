@@ -1598,7 +1598,7 @@ function pmMount(el, s, F) {
       }
     }
     rb.c.getContext("2d").putImageData(rb.id, 0, 0);
-    const sm0 = ctx.imageSmoothingEnabled; ctx.imageSmoothingEnabled = sc < 1;
+    const sm0 = ctx.imageSmoothingEnabled; ctx.imageSmoothingEnabled = false;
     ctx.drawImage(rb.c, 0, 0, rw, rh, 0, 0, W, H);
     ctx.imageSmoothingEnabled = sm0;
     rz = { zS, R, rS };
@@ -1623,6 +1623,18 @@ function pmMount(el, s, F) {
       if (sx >= 0 && sx < W && sy >= 0 && sy < H) n++;
     }
     return n;
+  }
+  // the raster zone's cells as {key, x, y, d} records, thinned by a fixed stride so at most ~limit come back (QA only)
+  function rasterCells(limit) {
+    if (!lay || rz.zS === Infinity || limit <= 0) return [];
+    lensAt(); const cx = W / 2, cy = H / 2, all = [];
+    for (let k = 0; k < lay.n; k++) {
+      const ex = lay.x[k] - P[0], ey = lay.y[k] - P[1], z = Math.hypot(ex, ey); if (z <= rz.zS || z > rz.R) continue;
+      const f = Fz(z) / z, sx = cx + ex * f, sy = cy + ey * f;
+      if (sx >= 0 && sx < W && sy >= 0 && sy < H) all.push({ key: k, x: sx, y: sy, d: K() * Math.min(magR(z), tanR(z)) });
+    }
+    if (all.length <= limit) return all;
+    const stride = Math.ceil(all.length / limit); return all.filter((_, j) => j % stride === 0);
   }
   function draw(t) {
     lensAt();
@@ -2555,7 +2567,7 @@ function pmMount(el, s, F) {
     // test establish an arbitrary pan deterministically (a real drag gesture would be slow and imprecise);
     // _qaPZ reads it back the same way, for the before/after comparison across a Back round trip
     _qaPZ: () => ({ P: P.slice(), Z, cardOpen }),
-    _qaBubbles: (n = 400) => (draw(clock), drawn).slice(0, n).map(b => ({ key: b.k, x: b.x, y: b.y, d: b.d })),   // QA: where cells are drawn right now (the pinch-anchor test)
+    _qaBubbles: (n = 400) => { draw(clock); const out = drawn.slice(0, n).map(b => ({ key: b.k, x: b.x, y: b.y, d: b.d })); return out.length < n ? out.concat(rasterCells(n - out.length)) : out; },   // QA: where cells are drawn right now (the pinch-anchor test); the pixel zone's cells follow, thinned to fit n
     _qaSetPZ: (x, y, z) => { P = [x, y]; Z = clamp(z, zMin(), ZMAX); centerK = -1; setCenter(lay.n ? nearestK(P[0], P[1]) : -1); PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z }); kick(); },
     // QA (tools/smoke paintmap group): a real network fetch of data/artists/portraits.json doesn't reliably
     // resolve inside the virtual-time test harness, so a forced override makes "landmarks label themselves" a
@@ -2573,6 +2585,7 @@ function pmMount(el, s, F) {
     // (drawn === count), confirming zMin() isn't capped below what the layout actually needs (David, 2026-10-10)
     _qaZMin: () => zMin(),
     _qaZ: () => Z,
+    _qaHitAt: (x, y) => { const b = hitAt(x, y); return b ? { i: b.i, k: b.k, d: b.d } : null; },   // QA: what a tap at client (x, y) would hit (tile or raster zone)
     _qaZFit: () => zFit(),   // where the whole layout just fits (the old zoom-out floor); zMin() is PM_ZOOM_OUT of it
     // forces one synchronous draw (lensAt() + draw()) without waiting on requestAnimationFrame -- the smoke
     // harness's own timing can starve rAF well past an ordinary sleep (same gap the tier-0 atlas scenario above

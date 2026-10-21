@@ -3727,6 +3727,25 @@ scenario("map", "no two drawn honeycomb cell polygons overlap, at 3 zoom levels,
     t.notes.push(`${label}: ${s.checked} tiled cells, 0 overlapping`);
   }
 });
+// David, 2026-10-21: "when the painting map has a small amount of paintings or more it doesn't let you zoom out past a certain point; same
+// with the color map" / "that point can exist but further back; now the limit is too close." The color map's floor used to be where the
+// whole finite layout just fits the window (HM_CTRL.zoomFit()); it is now ~28% of that, for a 25-color set and for every name alike,
+// and a real ctrl+wheel out settles there (with the rubber band below it).
+scenario("map", "the color map zooms out well past where its whole layout just fits, small set and every name", async t => {
+  await H.homeReady(t);
+  for (const [src, label] of [["stage:25", "25 colors"], ["every-name", "every name"]]) {
+    t.ev(`S.hm.src = "${src}"; S.hm.filter = "all"; S.hm.arr = "map"; delete S.hm.zoom; hmHome();`);
+    await t.waitFor(() => H.num(t.text(".hm-title small")) > 5, 10000, `${label} to fill`);
+    await t.sleep(300);
+    const fit = t.ev("HM_CTRL.zoomFit()"), floor = t.ev("HM_CTRL.zoomFloor()");
+    t.expect(floor <= fit * .35, `${label}: the zoom-out floor ${floor.toFixed(3)} should be well past the fit zoom ${fit.toFixed(3)}`);
+    t.ev(`(() => { const cv = document.querySelector(".screen.hm canvas"); const r = cv.getBoundingClientRect(); for (let i = 0; i < 160; i++) cv.dispatchEvent(new WheelEvent("wheel", { deltaY: 80, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2, ctrlKey: true, bubbles: true, cancelable: true })); })()`);
+    // (held, not settled: the spring back up to the floor is an animation frame this harness can starve; the rubber band keeps Z within [~55%, 100%+] of the floor)
+    const zNow = t.w.HM_CTRL._qaZ();
+    t.expect(zNow <= fit * .4 && zNow >= floor * .5, `${label}: the wheel zoom-out reached ${zNow.toFixed(3)}, wanted well past the fit ${fit.toFixed(3)} and not past the rubber band below the floor ${floor.toFixed(3)}`);
+    t.notes.push(`${label}: fit ${fit.toFixed(3)}, floor ${floor.toFixed(3)}`);
+  }
+});
 // David, 2026-10-11, live screenshots of a shipped build: "a clear triangle" of black where four cells met in
 // Sunflower at Magnify .95, plus smaller dots at a few other triple points -- confirmed as the starting polygon
 // (R0) being sized off a cell's OWN diameter, which a small cell squeezed between much bigger ones can outgrow:
@@ -6032,6 +6051,41 @@ scenario("paintmap", "at the zoom floor, the whole layout fits on screen -- Grid
   await checkFits("arr=painter", "By painter");
   await checkFits("arr=time", "Time");
 });
+// David, 2026-10-21: "on desktop, painting map, zooming out all the way makes the app work way too slowly." Fully out, the whole archive
+// (114k cells, 2-6px each) used to be drawn as 114k tiles (~500ms a frame in headless software, ~2.7s on a throttled phone). The far, tiny
+// cells are now one pixel pass (inverse lens -> grid cell -> color array). The bound is deliberately generous (this harness has no GPU and
+// shares a CPU with other Chrome runs); the old path cost several times it. Taps in the pixel zone must still find their cell.
+scenario("paintmap", "fully zoomed out, the whole archive draws fast, every cell is counted, and a tap in the far mosaic finds a painting", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 100000, 30000, "the whole archive to lay out");
+  t.ev("PM_CTRL.zoom(PM_CTRL._qaZFit())"); t.ev("PM_CTRL._qaForceDraw()");
+  const ms = t.ev("(() => { let best = Infinity; for (let i = 0; i < 4; i++) { const t0 = performance.now(); PM_CTRL._qaForceDraw(); best = Math.min(best, performance.now() - t0); } return best; })()");
+  t.expect(ms < 150, `a full zoom-out draw of ${t.w.PM_CTRL.count} paintings took ${ms.toFixed(0)}ms (wanted <150ms; the per-tile path took ~500ms+)`);
+  const n = t.w.PM_CTRL.count, drawn = t.w.PM_CTRL.drawn;
+  t.expect(drawn >= n * .98, `at the fit zoom every cell should be on screen: drawn ${drawn} of ${n}`);
+  const cv = t.$(".pmx-cv"), r = cv.getBoundingClientRect(); let hits = 0, tries = 0;
+  for (let dx = -40; dx <= 40; dx += 20) for (let dy = -60; dy <= 60; dy += 20) { tries++; if (t.ev(`PM_CTRL._qaHitAt(${r.left + r.width / 2 + dx}, ${r.top + r.height / 2 + dy})`)) hits++; }
+  t.expect(hits >= tries * .8, `taps on the packed mosaic should find a painting: ${hits}/${tries}`);
+  t.ev("(() => { const l = PM_CTRL.lay(); PM_CTRL._qaSetPZ(l.start[0], l.start[1], 1); PM_CTRL._qaForceDraw(); })()");   // leave the remembered pan/zoom at the ordinary view for later scenarios
+  t.notes.push(`full zoom-out: ${n} paintings, best draw ${ms.toFixed(0)}ms, ${hits}/${tries} taps found a cell`);
+});
+// David, 2026-10-21: "when the painting map has a small amount of paintings or more it doesn't let you zoom out past a certain point ...
+// now the limit is too close." The floor used to be where the whole layout just fits (or Z=1 for a small set); it is now ~28% of that, for
+// any item count, with the rubber band below it. A real ctrl+wheel (trackpad pinch) out must settle at the new floor, well past the old one.
+scenario("paintmap", "zooming out goes well past where the whole layout just fits, for a big and a small set, and settles at the new floor", async t => {
+  for (const [qs, label] of [["arr=color", "the whole archive"], ["arr=color&y0=1500&y1=1504", "829 paintings"], ["arr=color&y0=1650&y1=1651", "a small slice"]]) {
+    await t.open(`#/paintings/map?${qs}`, { settle: 800 });
+    await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 5 && t.w.PM_CTRL._qaZFit, 30000, `${label}: the map to lay out`);
+    const fit = t.ev("PM_CTRL._qaZFit()"), floor = t.ev("PM_CTRL._qaZMin()");
+    t.expect(floor <= fit * .35, `${label}: the zoom-out floor ${floor.toFixed(4)} should be well past the fit zoom ${fit.toFixed(4)}`);
+    t.ev(`(() => { const cv = document.querySelector(".pmx-cv"); for (let i = 0; i < 160; i++) cv.dispatchEvent(new WheelEvent("wheel", { deltaY: 80, clientX: cv.clientWidth / 2, clientY: cv.clientHeight / 2, ctrlKey: true, bubbles: true, cancelable: true })); })()`);
+    await t.waitFor(() => Math.abs(t.w.PM_CTRL._qaZ() - t.w.PM_CTRL._qaZMin()) < t.w.PM_CTRL._qaZMin() * .02, 4000, `${label}: the wheel zoom-out to settle at the floor`);
+    t.expect(t.w.PM_CTRL._qaZ() <= fit * .35, `${label}: settled at ${t.w.PM_CTRL._qaZ().toFixed(4)}, not well past the fit ${fit.toFixed(4)}`);
+    t.ev("PM_CTRL._qaForceDraw()");
+    t.ev("(() => { const l = PM_CTRL.lay(); PM_CTRL._qaSetPZ(l.start[0], l.start[1], 1); PM_CTRL._qaForceDraw(); })()");   // leave the remembered pan/zoom at the ordinary view for later scenarios
+    t.notes.push(`${label}: fit ${fit.toFixed(4)}, floor ${floor.toFixed(4)} (${(floor / fit * 100).toFixed(0)}% of fit)`);
+  }
+});
 // David's screenshot, 2026-10-09: "when I look at a painting and tap 'Show it on the map', it opens the map at a
 // different section, so I don't even see the painting that brought me there." Root cause: caption() keeps
 // PM_PAN.set(lay.key, ...) current on every center change, including a plain pan with nothing opened -- so a
@@ -7569,7 +7623,7 @@ scenario("paintmap", "pinch zooms about the fingers' midpoint and two-finger pan
   for (const size of [null, [440, 956]]) {   // 375x812 (the frame default) and David's 440x956
     await t.open("#/paintings/map?arr=color", { settle: 800, size: size || undefined });
     await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
-    t.ev("PM_CTRL.zoom(0)");   // fully zoomed out (clamped to the floor)
+    t.ev("PM_CTRL.zoom(PM_CTRL._qaZFit())");   // fully zoomed out: the whole layout just fits (the zoom-out floor itself is now ~28% of this; see the floor scenario)
     await t.sleep(300);
     await pinchAnchorRun(t, t.$(".pmx-cv"), t.w.PM_CTRL, "painting map " + (size ? size.join("x") : "375x812"));
   }
