@@ -23,7 +23,7 @@
 
 const routeSlug = s => String(s).normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 const APP_BASE = () => location.origin + location.pathname.replace(/[^/]*$/, "");
-const TAB_ROUTE = { learn: ["today", "Learn"], gym: ["train", "Train"], explore: ["museum", NAV_MUSEUM], studio: ["studio", "Studio"], you: ["you", "You"] };   // you: js/you.js
+const TAB_ROUTE = { feed: ["feed", "Today"], learn: ["today", "Learn"], gym: ["train", "Train"], explore: ["museum", NAV_MUSEUM], studio: ["studio", "Studio"], you: ["you", "You"] };   // you: js/you.js
 const LENS_ROUTE = { art: "art", ideas: "ideas", world: "world", saved: "saved" };   // "For you" (the pager) is plain #/explore
 const LENS_TITLE = { art: "Art", ideas: "Ideas", world: "World", saved: "Saved" };
 // legacy lens tokens, from before Paintings/Poems merged into Art and Colors was dropped (links, bookmarks, S.lens left over from an old save)
@@ -264,6 +264,8 @@ function openRoute(hash, initial = false) {
   if (kind === "studio" && id === "palette" && more && typeof openSavedPalette === "function") { base(); XSTACK = []; openSavedPalette(more); return true; }
   // the family tree (js/aesthetics-graph.js): #/web, #/web/focus/<nodeId>, #/web/node/<nodeId>
   if (kind === "web" && typeof agOpenRoute === "function") { base(); XSTACK = []; agOpenRoute(id, more); return true; }
+  // the Today feed (js/todayfeed.js): a room-style screen of its own, #/feed (#/today stays Learn)
+  if (kind === "feed" && typeof todayFeed === "function") { base(); XSTACK = []; todayFeed(); return true; }
   // the floor (the honeycomb, js/home.js): not a tab, so it's its own address
   if (kind === "home" && typeof hmHome === "function") { base(); XSTACK = []; hmHome(); return true; }
   if (kind === "map" && id && more != null && typeof hmMapRoute === "function") { base(); XSTACK = []; hmMapRoute(id, more); return true; }   // js/home.js: #/map/gallery/<i>, #/map/painting/<slug>

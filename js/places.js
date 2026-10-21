@@ -13,7 +13,7 @@
 // ---------- the Places stem ----------
 // Every place, in order (PLAN §3.1): the floor plus the four rooms that rise from it. Each row shows its own
 // live art and note (js/core.js roomsBubbleArt/roomsNote, unchanged -- the same pictures the old stem used).
-const PLACES_LIST = [["home", NAV_MAP], ...ROOMS_LIST];
+const PLACES_LIST = [["home", NAV_MAP], ["feed", "Today"], ...ROOMS_LIST];   // Today: the feed (js/todayfeed.js)
 const placesHere = () => { const r = document.querySelector(".room-sheet"); return r ? r.dataset.room : "home"; };
 // Collections' own row art: a small mosaic of 4 covers (David, 2026-10-10), not a swatch dot -- a plain,
 // recognizable "many small pictures" glyph, distinct from every room's single live picture. Real, not a

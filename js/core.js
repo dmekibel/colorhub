@@ -769,6 +769,7 @@ function roomsBubbleArt(id) {
     const cols = (due.length ? due : ALL.slice(0, 8)).map(c => c.h);
     return `<span class="rm-art rm-art-strip">${cols.map(h => `<i style="background:${h}"></i>`).join("")}</span>`;
   }
+  if (id === "feed") return `<span class="rm-art rm-art-strip">${["#CFA41C", "#A03623", "#3B638C", "#8A9A5B", "#EED9C4", "#464196"].map(h => `<i style="background:${h}"></i>`).join("")}</span>`;   // Today (js/todayfeed.js)
   if (typeof hmStemToday === "function") { const t = hmStemToday()[id]; if (t && t.art) return t.art; }   // L18 B2: what's inside today
   // Train: an odd-one-out board in miniature, one tile a shade off (DESIGN-SYSTEM §2: "today's station tile")
   if (id === "gym") { const hu = (new Date().getDate() * 37) % 360, h = lchHex(56, 28, hu), o = lchHex(63, 28, hu);
@@ -787,6 +788,7 @@ function roomsNote(id) {
     if (id === "explore") return "Paintings, poems, the world";
     if (id === "studio") return "Wheel, camera, palettes";
     if (id === "home") return NAV_MAP_NOTE;
+    if (id === "feed") return "Paintings, palettes, colors";
     if (id === "you" && typeof ymNote === "function") return ymNote();   // js/you.js
   } catch (e) {}
   return "";
@@ -942,6 +944,7 @@ addEventListener("popstate", e => {
 });
 function go(tab) {
   S.tab = tab; save();
+  if (tab === "feed" && typeof todayFeed === "function") return todayFeed();   // the Today feed (js/todayfeed.js); S.tab = "feed" so every "go(S.tab)" Close/Back lands on it
   if (typeof X_ROOT !== "undefined") X_ROOT = null;
   // (no questionnaire wall before Train: color vision is one row on Train > Your eye, js/rooms2.js)
   if (tab === "gym") return gymHome();
