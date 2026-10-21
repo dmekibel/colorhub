@@ -32,9 +32,10 @@ html.desk .room-sheet::after{display:none}
 
 /* ---------- sheets become centered dialogs ---------- */
 html.desk .scrim{background:rgba(6,6,5,.62);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
-html.desk .sheet{inset:0;margin:auto;bottom:auto;width:min(520px,calc(100vw - 64px));height:fit-content;max-height:min(760px,calc(100vh - 96px));border-radius:var(--r-3);border:1px solid var(--rule);
+html.desk .sheet.sheet{inset:0;margin:auto;width:min(520px,calc(100vw - 64px));height:fit-content;max-height:min(760px,calc(100vh - 96px));border-radius:var(--r-3);border:1px solid var(--rule);
   padding:28px 28px 26px;animation:dkDialogIn .22s var(--ease) both;box-shadow:0 30px 90px rgba(0,0,0,.6)}
 html.desk .sheet .grab{display:none}
+html.desk .sheet.sr-sheet-wrap{margin-top:max(80px,11vh)}
 @keyframes dkDialogIn{from{opacity:0;transform:translateY(10px) scale(.985)}}
 
 /* ---------- footer ---------- */
@@ -75,3 +76,38 @@ html.desk .aw-page .aw-pt-hero{margin:24px 0 0}
 html.desk .aw-page .aw-pt-open,html.desk .aw-page .aw-pt-hero>img{border-radius:var(--r-2);max-height:min(56vh,560px)}
 html.desk .aw-page .gl-rail{margin:0;padding-left:0;padding-right:0}
 html.desk .aw-page .aw-head .p-title,html.desk .aw-page .aw-head h1{font-size:clamp(48px,5vw,72px)}
+
+/* ---------- the rooms: Museum is a wide shelf of covers; Learn, Train and Studio are narrower working pages ---------- */
+html.desk .room-sheet>.screen.lh-room,html.desk .room-sheet>.screen.r2{padding-left:max(var(--dkg),calc((100% - 940px) / 2));padding-right:max(var(--dkg),calc((100% - 940px) / 2))}
+html.desk .room-sheet>.screen.lh-room,html.desk .room-sheet>.screen.r2-studio{padding-left:max(var(--dkg),calc((100% - 780px) / 2));padding-right:max(var(--dkg),calc((100% - 780px) / 2))}
+html.desk .screen.explore.mu-home .pl-colls{grid-template-columns:repeat(4,1fr);gap:14px}
+
+/* ---------- map chrome: corners get real desktop margins, the first-run hint is a pill, not a bar ---------- */
+html.desk .lr-maphint{width:max-content;max-width:480px;bottom:32px}
+html.desk .corner{bottom:28px}
+html.desk .corner.r{right:28px}
+html.desk .corner.l{left:28px}
+
+/* ---------- hover and focus: quiet, on everything you can tap ---------- */
+html.desk button,html.desk [role="button"],html.desk summary,html.desk a[href],html.desk .gl-pin,html.desk [data-hex],html.desk [data-gi]{cursor:pointer}
+html.desk .pl-ctile,html.desk .gs-tile,html.desk .st-tile,html.desk .sg-card,html.desk .r2-ic,html.desk .gl-pin .gl-im,html.desk .pchip,html.desk .wl>*,html.desk .mn-row,html.desk .sr-row{transition:transform .18s var(--ease),box-shadow .18s,background-color .18s,filter .18s}
+html.desk .pl-ctile:hover,html.desk .gs-tile:hover,html.desk .st-tile:hover,html.desk .sg-card:hover,html.desk .r2-ic:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.4),inset 0 0 0 1px rgba(236,232,223,.16)}
+html.desk .gl-pin:hover .gl-im{filter:brightness(1.12)}
+html.desk .btn:hover,html.desk .icon-btn:hover,html.desk .corner:hover{filter:brightness(1.12)}
+html.desk .mn-row:hover,html.desk .sr-row:hover,html.desk .sheet .item:hover{background:rgba(236,232,223,.06)}
+html.desk :focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+/* ---------- a clear Back: the chevron grows a word on a page that has no other label ---------- */
+html.desk .art-top>[data-back]:has(>svg:only-child){width:auto;display:inline-flex;align-items:center;gap:6px;padding:0 16px 0 10px;border-radius:var(--r-pill)}
+html.desk .art-top>[data-back]:has(>svg:only-child)::after{content:"Back";font:500 14.5px/1 var(--sans)}
+
+/* the first-run tip on the map is a pill near the corner, not a bar across the window */
+html.desk .orient-tip{left:auto;right:100px;bottom:34px;width:max-content;max-width:420px}
+
+/* painter page, top: who they are on the left, a portrait of their work on the right */
+html.desk .screen.aw-page{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(32px,4vw,64px);align-items:start}
+html.desk .screen.aw-page>*{grid-column:1/-1;min-width:0}
+html.desk .screen.aw-page>.aw-head,html.desk .screen.aw-page>.aw-pmap-top{grid-column:1}
+html.desk .screen.aw-page>.aw-pt-hero{grid-column:2;grid-row:2/span 2;margin:0}
+html.desk .aw-page .aw-pmap-top{max-width:360px;align-self:start}
+html.desk .aw-page .aw-pt-open,html.desk .aw-page .aw-pt-hero>img{max-height:420px}
