@@ -3475,10 +3475,18 @@ scenario("map", "zoomed out: a tap zooms onto a tiny bubble, the next tap opens 
 scenario("map", "stage glide: no overlap at a quarter, half and three quarters of the way", async t => {
   await H.homeReady(t);
   const res = [];
-  for (const n of [250, 50, 1000]) {
-    const r = t.ev(`HM_CTRL._morphCheck(hmStageItems(${n}))`);
-    t.expect(r.ok, `glide to ${n}: ${JSON.stringify(r)}`);
-    res.push(`${n}: ${r.out.map(o => o.drawn).join("/")}`);
+  // The map used to open on Bubbles and now opens on the Honeycomb; this guards both. Bubbles never overlap at any moment of the glide.
+  for (const style of ["original", "honeycomb"]) {
+    t.ev(`S.hm.style = "${style}"; hmHome();`);
+    await t.waitFor(() => t.$$(".screen.hm").length === 1 && H.num(t.text(".hm-title small")) > 500, 15000, `${style} map to fill`);
+    for (const n of [250, 50, 1000]) {
+      const r = t.ev(`HM_CTRL._morphCheck(hmStageItems(${n}))`);
+      // Honeycomb: tiled cells ride along with their centers while colors trade places, so a few readable ones cross for a moment
+      // (under 6% of what is drawn); Bubbles keep the strict rule
+      const crossing = Math.max(...r.out.map(o => o.bigBad / Math.max(1, o.drawn)));
+      t.expect(style === "original" ? r.ok : crossing <= .06, `${style}: glide to ${n}: ${JSON.stringify(r)}`);
+      res.push(`${style} ${n}: ${r.out.map(o => o.drawn).join("/")}`);
+    }
   }
   t.notes.push(res.join(", "));
 });
@@ -3621,8 +3629,11 @@ scenario("map", "panning keeps the resting seams, and fast pans and pinches at e
       c2.dispatchEvent(new t.w.PointerEvent("pointerdown", o(230, 400, 10)));
       for (let i = 1; i <= 20; i++) { c2.dispatchEvent(new t.w.PointerEvent("pointermove", o(150 - i * 3 + (i % 3), 400 + (i % 2)))); c2.dispatchEvent(new t.w.PointerEvent("pointermove", o(230 + i * 3, 400 - (i % 2), 10))); }
       c2.dispatchEvent(new t.w.PointerEvent("pointerup", o(90, 400, 10))); c2.dispatchEvent(new t.w.PointerEvent("pointerup", o(90, 400)));
+      // a finite layout (the Spiral the Colors map opens on) lets a fling carry the view past its edge and springs back; judge the
+      // resting view once that spring and the zoom have landed (an endless layout, like Grid, is never off its edge, so this is the same view there)
+      t.ev("HM_CTRL._settle()");
       const st = t.ev("HM_CTRL._gapStat()");
-      t.expect(st.n > 6 && st.w > 0 && st.h > 0, `${src} at zoom ${z}: ${JSON.stringify(st)}`); t.notes.push(`${src}@${z}: ${st.n} drawn, seam ${st.gap}/${st.p90}`);
+      t.expect(st.n > (z >= 2 ? 2 : 6) && st.w > 0 && st.h > 0, `${src} at zoom ${z}: ${JSON.stringify(st)}`);   // (at zoom 2.5 one magnified cell is wider than the phone: a few cells is a full canvas) t.notes.push(`${src}@${z}: ${st.n} drawn, seam ${st.gap}/${st.p90}`);
     }
   }
 });
@@ -3776,6 +3787,39 @@ scenario("map", "no gap in the drawn interior at Magnify high or at the resting 
     t.expect(rest.uncovered === 0, `${arr} @ resting floor: ${rest.uncovered}/${rest.checked} points uncovered, e.g. ${JSON.stringify(rest.misses)}`);
     t.notes.push(`${arr}: mag ${mag.checked}/0, floor ${rest.checked}/0`);
   }
+});
+// David, 2026-10-21, twice ("you STILL haven't fixed the weird gaps in the magnification when it's off center"): Bubbles on the
+// Spiral or Rings, the lens (the middle of the screen) well away from the layout's own middle, left black rings between arcs of
+// big bubbles while others stayed tiny. Cause: a circle packs a stretched lattice only as well as the stretch is even, and the
+// Gaussian fisheye took the tangential stretch down 2.2x faster than the radial one around its edge (honey.js tailLens: Bubbles
+// now use a power-law tail, so the two stretches never differ by more than 1.47x). This pans three steps off the middle in each
+// direction at both zooms, at default and high Magnify, and bounds the biggest empty circle (HM_CTRL._qaEmptyGap: its radius as a
+// multiple of the nearest bubble's own radius; it was 1.7 to 6.0 before, a tidy lattice of circles is about 0.6).
+scenario("map", "Bubbles on the Spiral and Rings: no big black voids when the lens is off the layout's center", async t => {
+  await H.homeReady(t);
+  const worst = [];
+  for (const arr of ["sunflower", "rings"]) for (const mag of [.62, 1]) {
+    t.ev(`S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.arr = "${arr}"; S.hm.style = "original"; S.hm.feel = { mag: ${mag}, space: .15, size: .5 }; hmHome();`);
+    await t.waitFor(() => t.$$(".screen.hm").length === 1 && H.num(t.text(".hm-title small")) > 400, 15000, `${arr}: every name to fill`);
+    await t.sleep(250);
+    const cv = t.$(".screen.hm canvas"), r = cv.getBoundingClientRect();
+    const o = (x, y) => ({ bubbles: true, cancelable: true, clientX: r.left + x, clientY: r.top + y, pointerId: 31, pointerType: "touch", isPrimary: true, view: t.w });
+    for (const z of [1, 1.9]) for (const [fx, fy] of [[0, 0], [-.3, -.2], [.4, .25]]) {
+      t.ev("HM_CTRL._qaRecenter()"); t.ev(`HM_CTRL.zoom(${z}, false)`); t.ev("HM_CTRL._settle()");
+      for (let k = 0; k < (fx || fy ? 3 : 0); k++) {
+        cv.dispatchEvent(new t.w.PointerEvent("pointerdown", o(r.width / 2, r.height / 2)));
+        for (let i = 1; i <= 8; i++) cv.dispatchEvent(new t.w.PointerEvent("pointermove", o(r.width / 2 + fx * r.width * i / 8, r.height / 2 + fy * r.height * i / 8)));
+        cv.dispatchEvent(new t.w.PointerEvent("pointerup", o(r.width / 2 + fx * r.width, r.height / 2 + fy * r.height)));
+        t.ev("HM_CTRL._settle()");
+      }
+      t.ev("HM_CTRL._settle(); HM_CTRL._qaFlush()");
+      const g = t.ev("HM_CTRL._qaEmptyGap()");
+      t.expect(g.samples > 200, `${arr} mag ${mag} z ${z} pan ${fx},${fy}: too few samples to judge (${JSON.stringify(g)})`);
+      t.expect(g.maxRel <= 1.5, `${arr} @ Magnify ${mag}, zoom ${z}, panned ${fx},${fy}: an empty circle ${g.maxRel}x the nearest bubble's radius (${g.maxPx}px; ${Math.round(g.uncovered * 100)}% uncovered)`);
+      worst.push(g.maxRel);
+    }
+  }
+  t.notes.push(`largest empty circle / nearest bubble radius, worst ${Math.max(...worst)} over ${worst.length} views`);
 });
 // David, 2026-10-11, two live-screenshot regressions in the same lane: a close crop (Grid, Magnify .95) showed one
 // specific diagonal with NO seam line while its mirror-image neighbor had one, and ~11 more missing lines spread

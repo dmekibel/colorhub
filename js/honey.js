@@ -763,6 +763,11 @@ function honeyGhosts(pts, edgeSet) {
     for (const m of nb) {
       const gx = 2 * p.x - pts[m].x, gy = 2 * p.y - pts[m].y;
       if (near(gx, gy, s)[0] < s * .6) continue;
+      // a ghost stands for the empty sea outside an edge; where real points still surround it (a spiral's lattice has the odd gap
+      // inside the disc) it would only punch a hole in the tiling, so it is dropped (the same open-sector test honeyEdgeSet uses)
+      { const ci2 = Math.floor(gx / sp), cj2 = Math.floor(gy / sp), RR = Math.ceil(s * 1.9 / sp), as = [];
+        for (let i = ci2 - RR; i <= ci2 + RR; i++) for (let j = cj2 - RR; j <= cj2 + RR; j++) for (const m of G.get(key(i, j)) || []) { const q = all[m]; if (q.ghost) continue; const ddx = q.x - gx, ddy = q.y - gy; if (ddx * ddx + ddy * ddy <= s * 1.9 * s * 1.9) as.push(Math.atan2(ddy, ddx)); }
+        if (as.length >= 3) { as.sort((a, b) => a - b); let gp = as[0] + 6.283185307 - as[as.length - 1]; for (let k = 1; k < as.length; k++) gp = Math.max(gp, as[k] - as[k - 1]); if (gp <= 2.2) continue; } }
       const g = { x: gx, y: gy, g: p.g, it: p.it, ghost: true };
       all.push(g); add(g, all.length - 1); out.push(g);
     }
@@ -1258,11 +1263,26 @@ function honeycomb(host, opts = {}) {
   const lens = t => {
     const e = 1 - Math.pow(1 - bloom, 3), br = phase === "drift" ? 1 + .028 * Math.sin(t / 1000 * Math.PI * 2 / 3.8) : 1;
     const s = (.72 + .28 * e) * l18Spread(Z);
-    return { s, a: e, m0: zc("m0") * br, m1: zc("m1"), sig: zc("sig") * l18Flat(Z), K: base * s * M * br, inner: inner() };
+    return { s, a: e, m0: zc("m0") * br, m1: zc("m1"), sig: zc("sig") * (lay && lay.radialBub ? 1 : l18Flat(Z)), K: base * s * M * br, inner: inner() };
   };
-  const F = (z, l) => base * l.s * (l.m1 * z + (l.m0 - l.m1) * l.sig * .8862 * honeyErf(z / l.sig));
-  const magR = (z, l) => l.m1 + (l.m0 - l.m1) * Math.exp(-((z / l.sig) ** 2));            // radial derivative (F')
-  const tanR = (z, l) => z ? (l.m1 * z + (l.m0 - l.m1) * l.sig * .8862 * honeyErf(z / l.sig)) / z : l.m0;   // tangential (F(z)/z, bare)
+  // Two falloffs. Tiled looks (Honeycomb) keep the Gaussian one: its cells fill the plane however much the radial and tangential
+  // stretch differ. Bubbles are circles, and a circle packs a stretched lattice only as well as the stretch is even (David, twice:
+  // "weird gaps in the magnification when it's off center"): the Gaussian lens takes tangential stretch F/z down 2.2x faster than
+  // radial stretch F' around its edge, which leaves black rings between arcs of big bubbles wherever the lens sits. So Bubbles
+  // use a smooth power-law tail, F/z = m1 + (m0-m1) * (1 + (z/s)^2)^(-a/2): the middle matches the Gaussian (same size at the
+  // focus and within ~2 lens widths), and F' = (F/z) * (1 - a*x^2/(1+x^2)) can never fall under (1-a) of F/z, so the two stretches
+  // differ by at most 1/(1-a) = 1.47x anywhere, at any distance from the hub or the lens (a property of the profile, not a tuning).
+  const tailLens = () => cfg.shape <= .02;
+  const TAIL_A = .32, TAIL_S = .32;
+  const tailW = (z, l) => { const x = z / (l.sig * TAIL_S); return Math.pow(1 + x * x, -TAIL_A / 2); };
+  const F = (z, l) => tailLens() ? base * l.s * z * (l.m1 + (l.m0 - l.m1) * tailW(z, l))
+    : base * l.s * (l.m1 * z + (l.m0 - l.m1) * l.sig * .8862 * honeyErf(z / l.sig));
+  const magR = (z, l) => {                                                                  // radial derivative (F')
+    if (!tailLens()) return l.m1 + (l.m0 - l.m1) * Math.exp(-((z / l.sig) ** 2));
+    const x = z / (l.sig * TAIL_S), x2 = x * x; return l.m1 + (l.m0 - l.m1) * tailW(z, l) * (1 - TAIL_A * x2 / (1 + x2));
+  };
+  const tanR = (z, l) => tailLens() ? l.m1 + (l.m0 - l.m1) * tailW(z, l)                    // tangential (F(z)/z, bare)
+    : z ? (l.m1 * z + (l.m0 - l.m1) * l.sig * .8862 * honeyErf(z / l.sig)) / z : l.m0;
   // local bubble scale: blended between the radial derivative (fill 0, the old look — gaps open up in the outer
   // rings because the tangential spacing stays wider than the radial size) and the tangential spacing (fill 1).
   const localScale = (z, l) => Math.pow(magR(z, l), 1 - cfg.fill) * Math.pow(tanR(z, l), cfg.fill);
@@ -1331,7 +1351,7 @@ function honeycomb(host, opts = {}) {
       const ordered = chunk.slice().sort((a, b) => Math.atan2(a.y, a.x) - Math.atan2(b.y, b.x));
       ordered.forEach((q, i) => { const t = i / m * 2 * Math.PI; newPts.push({ it: q.it, x: z0 * Math.cos(t), y: z0 * Math.sin(t), g: q.g }); });
     }
-    const newLay = { ...rawLay, pts: newPts, edgeSet: new Set(), ghosts: [] };
+    const newLay = { ...rawLay, pts: newPts, edgeSet: new Set(), ghosts: [], radialBub: true };
     newLay.ext = Math.max(.5, ...newPts.map(p => Math.hypot(p.x, p.y)));
     if (rawLay.bounds) {
       const gmap = new Map(newPts.map(q => [q.it, q.g || 0]));
@@ -1952,14 +1972,19 @@ function honeycomb(host, opts = {}) {
     const out = [];
     for (const u of [.25, .5, .75]) {
       m.t0 = performance.now() - u * morphMs; morph = m; draw(performance.now());
-      let bad = 0;
+      let bad = 0, bigBad = 0;
       for (let i = 0; i < drawn.length; i++) for (let j = i + 1; j < drawn.length; j++) {
-        const a = drawn[i], c = drawn[j], dd = Math.hypot(a.x - c.x, a.y - c.y); if (dd < (a.d + c.d) / 2 - .3) { bad++; if (bad < 4) out.ex = (out.ex || []).concat([[a.it.n, c.it.n, +dd.toFixed(2), +a.d.toFixed(2), +c.d.toFixed(2), a.z === 1e9, c.z === 1e9, !!a.poly, !!c.poly]]); }
+        const a = drawn[i], c = drawn[j], dd = Math.hypot(a.x - c.x, a.y - c.y); if (dd < (a.d + c.d) / 2 - .3) {
+          bad++; if (bad < 4) out.ex = (out.ex || []).concat([[a.it.n, c.it.n, +dd.toFixed(2), +a.d.toFixed(2), +c.d.toFixed(2), a.z === 1e9, c.z === 1e9, !!a.poly, !!c.poly]]);
+          // two readable colors that both stay on the map: the only overlap a viewer could see (a tiled cell's polygon rides along with its
+          // center while its neighbors trade places, so tiny cells and the ones shrinking away can cross for a moment)
+          if (a.d >= 14 && c.d >= 14 && a.z !== 1e9 && c.z !== 1e9) bigBad++;
+        }
       }
-      out.push({ u, drawn: drawn.length, bad, ex: out.ex }); out.ex = null;
+      out.push({ u, drawn: drawn.length, bad, bigBad, ex: out.ex }); out.ex = null;
     }
     morph = null; draw();
-    return { ok: out.every(r => !r.bad), out };
+    return { ok: out.every(r => !r.bad), okReadable: out.every(r => !r.bigBad), out };
   }
   // L18 H4: a freshly lit constellation is framed: centered on its middle and zoomed out just enough to hold it all
   function l18FrameLit() {
@@ -2582,6 +2607,44 @@ function honeycomb(host, opts = {}) {
     // QA (tools/smoke map-return): finish a spring or zoom in flight at once (headless frames don't always run)
     _settle() { if (phase === "spring" && spring) { P = spring.X.slice(); spring = null; phase = "idle"; } if (zAnim) { Z = zAnim.to; zAnim = null; } insetCur = insetBottom; Plag = P.slice(); draw(); return [P[0], P[1], Z]; },
     _morphCheck: items => l18MorphCheck(items),
+    _qaFlush() { sizeMem = new Map(); sizeT = 0; draw(); },   // QA: draw every bubble at its true size now (no growth easing carried over from the last view)
+    // QA (tools/smoke map group): how big are the holes between the drawn bubbles? Samples a grid over the middle 80% of
+    // the drawn field (the convex hull of every readable bubble's center, shrunk toward its centroid so the true open
+    // edge never counts) and, at each sample, the distance to the nearest bubble's edge (a circle of d/2, or a tiled cell's
+    // inscribed radius, with its real polygon test). Returns the biggest empty circle (px and as a multiple of the
+    // nearest bubble's own radius), the share of the field left uncovered, and how many bubbles were readable.
+    _qaEmptyGap(step = 8) {
+      const bs = drawn.filter(b => b.d >= 11 && !b.ghost); if (bs.length < 8) return { n: bs.length, maxPx: 0, maxRel: 0, uncovered: 0, samples: 0 };
+      const pts = bs.map(b => [b.x, b.y]).sort((a, c) => a[0] - c[0] || a[1] - c[1]);
+      const cross = (o, a, b2) => (a[0] - o[0]) * (b2[1] - o[1]) - (a[1] - o[1]) * (b2[0] - o[0]);
+      const half = arr => { const h = []; for (const p of arr) { while (h.length >= 2 && cross(h[h.length - 2], h[h.length - 1], p) <= 0) h.pop(); h.push(p); } return h; };
+      const hull = half(pts).slice(0, -1).concat(half(pts.slice().reverse()).slice(0, -1));
+      if (hull.length < 3) return { n: bs.length, maxPx: 0, maxRel: 0, uncovered: 0, samples: 0 };
+      const cx = hull.reduce((s, p) => s + p[0], 0) / hull.length, cy = hull.reduce((s, p) => s + p[1], 0) / hull.length;
+      const sh = hull.map(p => [cx + (p[0] - cx) * .8, cy + (p[1] - cy) * .8]);
+      const inH = (x, y) => { for (let i = 0; i < sh.length; i++) { const a = sh[i], b2 = sh[(i + 1) % sh.length]; if ((b2[0] - a[0]) * (y - a[1]) - (b2[1] - a[1]) * (x - a[0]) < 0) return false; } return true; };
+      const xs = sh.map(p => p[0]), ys = sh.map(p => p[1]);
+      const x0 = Math.max(0, Math.min(...xs)), x1 = Math.min(W, Math.max(...xs)), y0 = Math.max(0, Math.min(...ys)), y1 = Math.min(Hh, Math.max(...ys));
+      const gs = 64, grid = new Map(), key = (i, j) => i * 4099 + j;
+      bs.forEach((b, n) => { const k = key(Math.floor(b.x / gs), Math.floor(b.y / gs)); let a = grid.get(k); if (!a) grid.set(k, a = []); a.push(n); });
+      const maxR = Math.max(...bs.map(b => b.d / 2)), rr = Math.ceil((maxR + 40) / gs);
+      let samples = 0, unc = 0, maxPx = 0, maxRel = 0;
+      for (let y = y0; y <= y1; y += step) for (let x = x0; x <= x1; x += step) {
+        if (!inH(x, y)) continue; samples++;
+        const ci = Math.floor(x / gs), cj = Math.floor(y / gs); let m = Infinity, rb = 1;
+        for (let i = ci - rr; i <= ci + rr; i++) for (let j = cj - rr; j <= cj + rr; j++) for (const n of grid.get(key(i, j)) || []) {
+          const b = bs[n], dist = Math.hypot(b.x - x, b.y - y), r = b.poly ? Math.max(b.rin || 0, 0) : b.d / 2;
+          let e = dist - r;
+          if (b.poly && b.poly.length >= 3) { let inside = true; for (let k = 0; k < b.poly.length && inside; k++) { const p = b.poly[k], q = b.poly[(k + 1) % b.poly.length]; const c1 = (q[0] - p[0]) * (y - b.y - p[1]) - (q[1] - p[1]) * (x - b.x - p[0]), c0 = (q[0] - p[0]) * (-p[1]) - (q[1] - p[1]) * (-p[0]); if ((c1 < 0) !== (c0 < 0) && Math.abs(c1) > 1e-6) inside = false; } if (inside) e = 0; else e = Math.max(0, e); }
+          if (e < m) { m = e; rb = Math.max(r, 6); }
+        }
+        if (!isFinite(m)) m = 1e3;
+        if (m > 1.5) unc++;
+        if (m > maxPx) maxPx = m;
+        if (m / rb > maxRel) maxRel = m / rb;
+      }
+      return { n: bs.length, samples, uncovered: samples ? +(unc / samples).toFixed(3) : 0, maxPx: +maxPx.toFixed(1), maxRel: +maxRel.toFixed(2) };
+    },
     // QA (tools/smoke map group): the median seam between each readable bubble and its nearest neighbor, in px
     _gapStat() {
       const big = drawn.filter(b => b.d >= 12), gs = [];
