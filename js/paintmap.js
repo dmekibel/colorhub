@@ -1523,22 +1523,118 @@ function pmMount(el, s, F) {
     const pad = 1;
     P[0] = clamp(P[0], lay.gx0 - pad, lay.gx0 + lay.GW - 1 + pad); P[1] = clamp(P[1], lay.gy0 - pad, lay.gy0 + lay.GH - 1 + pad);
   }
+  // ---- the zoomed-out mosaic (David, 2026-10-21: "on desktop, zooming out all the way makes the app work way too slowly").
+  // Fully out, the whole archive (114k cells) is on screen at ~2-6px each; drawing it as 114k tiles (a lens-mapped rect,
+  // a fillRect and a drawImage apiece) cost ~500ms a frame. Where cells are that small a tile carries no more than its
+  // color, so everything farther from the middle than zS (where a cell shrinks below rasterThr() px) is rendered ONCE PER
+  // FRAME as pixels instead: each screen pixel inverts the SAME lens (a radius table built from Fz) to the grid cell under
+  // it and reads that cell's color from a typed array -- W*H lookups no matter how many cells there are, no per-cell
+  // objects, no canvas state changes -- then one drawImage puts the bitmap under the tiles. The seam between cells is
+  // reproduced per pixel from the same formula the tile path uses, so the two zones read as one mosaic. Cells nearer the
+  // middle (and every cell at ordinary zoom, where nothing is below the threshold) still go through the tile loop as before.
+  let rz = { zS: Infinity, R: 0, rS: 0 };   // the raster zone of the last draw (hitAt + the QA counters read it)
+  let rb = null, rbLay = null, rbCol = null;
+  const RASTER_PX = 1000000;   // raster pixel budget per frame; a bigger canvas renders at a lower scale and is stretched
+  function rasterColors() {
+    if (rbCol && rbLay === lay) return rbCol;
+    const n = lay.n, c = new Uint32Array(n);
+    for (let k = 0; k < n; k++) { const h = pmHex(lay.items[k], F), v = parseInt(h.slice(1, 7), 16) || 0; c[k] = (0xFF000000 | (v & 255) << 16 | (v >> 8 & 255) << 8 | v >> 16) >>> 0; }
+    rbLay = lay; rbCol = c; return c;
+  }
+  const rasterThr = () => clamp(Math.sqrt(W * H / 30000), 5, 12);
+  // the plane distance zS beyond which a cell is smaller than the threshold (Infinity = no raster zone at this zoom)
+  function rasterEdge(R) {
+    if (!lay || lay.n < 4000) return Infinity;
+    const thr = rasterThr(), kk = K(), cs = z => kk * Math.min(magR(z), tanR(z));
+    if (cs(R) >= thr) return Infinity;
+    if (cs(0) <= thr) return 0;
+    let lo = 0, hi = R; for (let i = 0; i < 30; i++) { const m = (lo + hi) / 2; if (cs(m) > thr) lo = m; else hi = m; }
+    return hi;
+  }
+  const smoothSeam = cs => cs >= 16 ? 1 : cs <= 3 ? 0 : (u => u * u * (3 - 2 * u))((cs - 3) / 13);
+  function rasterDraw(zS, R) {
+    const col = rasterColors(), kk = K(), cx = W / 2, cy = H / 2;
+    const rS = zS > 0 ? Fz(zS) : 0, rMax = Math.hypot(W, H) / 2 + 2, TS = .5, nT = Math.ceil((rMax - rS) / TS) + 2;
+    const sc = Math.min(1, Math.sqrt(RASTER_PX / (W * H))), rw = Math.max(1, Math.round(W * sc)), rh = Math.max(1, Math.round(H * sc));
+    if (!rb || rb.w !== rw || rb.h !== rh) {
+      const c = document.createElement("canvas"); c.width = rw; c.height = rh;
+      const id = c.getContext("2d").createImageData(rw, rh); rb = { c, w: rw, h: rh, id, u32: new Uint32Array(id.data.buffer), zt: new Float32Array(0), gt: new Float32Array(0) };
+    }
+    if (rb.zt.length < nT + 2) { rb.zt = new Float32Array(nT + 64); rb.gt = new Float32Array(nT + 64); }
+    const zt = rb.zt, gt = rb.gt;
+    for (let j = 0, zlo = zS; j < nT + 2; j++) {   // radius r_j = rS + j*TS -> plane distance (monotone, so each bisection starts at the last answer)
+      const r = rS + j * TS; let lo = zlo, hi = Math.max(R + 2, zlo + 1);
+      for (let it = 0; it < 22; it++) { const m = (lo + hi) / 2; if (Fz(m) > r) hi = m; else lo = m; }
+      const z = (lo + hi) / 2; zt[j] = z; zlo = lo;
+      const cs = kk * Math.min(magR(z), tanR(z)), sm = smoothSeam(cs);
+      gt[j] = Math.min(6, cs * .15, 1 + cs * .05) * sm / Math.max(cs, 1e-3) * .5;   // half the seam, as a fraction of a cell
+    }
+    const u32 = rb.u32, GW = lay.GW, GH = lay.GH, grid = lay.grid, inv = 1 / sc, BG = 0xFF0B0D0E | 0;   // BG: #0E0D0B as ABGR
+    const ox = P[0] - lay.gx0 + .5, oy = P[1] - lay.gy0 + .5, iTS = 1 / TS;   // plane coords shifted so a floor is a plain |0 (the grid index) while the point is inside the grid
+    let o = 0;
+    for (let py = 0; py < rh; py++) {
+      const dy = (py + .5) * inv - cy, dy2 = dy * dy;
+      for (let px = 0; px < rw; px++, o++) {
+        const dx = (px + .5) * inv - cx, r = Math.sqrt(dx * dx + dy2);
+        if (r < rS) { u32[o] = 0; continue; }
+        const ti = (r - rS) * iTS, j = ti | 0, z = zt[j] + (zt[j + 1] - zt[j]) * (ti - j);
+        if (z > R) { u32[o] = BG; continue; }
+        const q = r < 1e-6 ? 0 : z / r, fx = ox + dx * q, fy = oy + dy * q;
+        if (fx < 0 || fy < 0) { u32[o] = BG; continue; }
+        const gx = fx | 0, gy = fy | 0;
+        if (gx >= GW || gy >= GH) { u32[o] = BG; continue; }
+        const k = grid[gy * GW + gx]; if (k < 0) { u32[o] = BG; continue; }
+        const e = .5 - gt[j], ux = fx - gx - .5, uy = fy - gy - .5;
+        u32[o] = (ux > e || ux < -e || uy > e || uy < -e) ? BG : col[k];
+      }
+    }
+    rb.c.getContext("2d").putImageData(rb.id, 0, 0);
+    const sm0 = ctx.imageSmoothingEnabled; ctx.imageSmoothingEnabled = sc < 1;
+    ctx.drawImage(rb.c, 0, 0, rw, rh, 0, 0, W, H);
+    ctx.imageSmoothingEnabled = sm0;
+    rz = { zS, R, rS };
+  }
+  // a cell the raster zone drew, as hitAt()'s record (the tile path pushes these into `drawn`; the raster zone has none)
+  function rasterHit(px, py) {
+    if (!lay || rz.zS === Infinity) return null;
+    const dx = px - W / 2, dy = py - H / 2, r = Math.hypot(dx, dy); if (r < rz.rS) return null;
+    lensAt(); const z = Finv(r), q = r < 1e-6 ? 0 : z / r, ix = Math.round(P[0] + dx * q), iy = Math.round(P[1] + dy * q);
+    if (ix < lay.gx0 || iy < lay.gy0 || ix >= lay.gx0 + lay.GW || iy >= lay.gy0 + lay.GH) return null;
+    const k = lay.grid[(iy - lay.gy0) * lay.GW + ix - lay.gx0]; if (k < 0) return null;
+    const ex = ix - P[0], ey = iy - P[1], zc = Math.hypot(ex, ey), f = zc < 1e-6 ? K() * M0 : Fz(zc) / zc, cs = K() * Math.min(magR(zc), tanR(zc));
+    return { k, i: lay.items[k], x: W / 2 + ex * f, y: H / 2 + ey * f, d: cs, z: zc, m: 0, w: cs, h: cs };
+  }
+  // how many cells the raster zone shows right now (PM_CTRL.drawn / QA: "every cell is on screen" stays checkable)
+  function rasterCount() {
+    if (!lay || rz.zS === Infinity) return 0;
+    lensAt(); let n = 0; const cx = W / 2, cy = H / 2;
+    for (let k = 0; k < lay.n; k++) {
+      const ex = lay.x[k] - P[0], ey = lay.y[k] - P[1], z = Math.hypot(ex, ey); if (z <= rz.zS || z > rz.R) continue;
+      const f = Fz(z) / z, sx = cx + ex * f, sy = cy + ey * f;
+      if (sx >= 0 && sx < W && sy >= 0 && sy < H) n++;
+    }
+    return n;
+  }
   function draw(t) {
     lensAt();
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.fillStyle = "#0E0D0B"; ctx.fillRect(0, 0, W, H);
     const cx = W / 2, cy = H / 2, R = Finv(Math.hypot(W, H) / 2 + 40), k0 = K();
+    const zS = rasterEdge(R), Rt = Math.min(R, zS);   // tiles only within Rt of the middle; the far, tiny cells are pixels (see rasterDraw)
+    ctx.fillStyle = "#0E0D0B";
+    if (zS === Infinity) ctx.fillRect(0, 0, W, H);
+    else { const rr = Fz(zS) + 3; ctx.fillRect(cx - rr, cy - rr, rr * 2, rr * 2); }   // the raster paints its own background everywhere outside the tile disc
     const map = (ex, ey) => { const z = Math.hypot(ex, ey), f = z < 1e-6 ? K() * M0 : Fz(z) / z; return [cx + ex * f, cy + ey * f]; };
-    const x0 = Math.floor(P[0] - R), x1 = Math.ceil(P[0] + R), y0 = Math.floor(P[1] - R), y1 = Math.ceil(P[1] + R);
+    const x0 = Math.floor(P[0] - Rt), x1 = Math.ceil(P[0] + Rt), y0 = Math.floor(P[1] - Rt), y1 = Math.ceil(P[1] + Rt);
     // David, 2026-10-09: "your favorites glowing on the map" -- one Set built once a frame (fvArtList's own
     // {i,...} records already carry the gallery index), not a per-cell favorites lookup.
     const favSet = new Set(pmFavList(F).map(r => r.i));
+    if (zS < Infinity) rasterDraw(zS, R); else rz.zS = Infinity;
     drawn = []; const wantImg = [], wantT1 = new Set();
     for (let y = Math.max(y0, lay.gy0); y <= Math.min(y1, lay.gy0 + lay.GH - 1); y++) {
       const row = (y - lay.gy0) * lay.GW;
       for (let x = Math.max(x0, lay.gx0); x <= Math.min(x1, lay.gx0 + lay.GW - 1); x++) {
         const k = lay.grid[row + x - lay.gx0]; if (k < 0) continue;
-        const ex = x - P[0], ey = y - P[1], z = Math.hypot(ex, ey); if (z > R) continue;
+        const ex = x - P[0], ey = y - P[1], z = Math.hypot(ex, ey); if (z > R || z > zS) continue;
         const [sx, sy] = map(ex, ey);
         // as big as its neighbors' places allow: the screen distance to the cell beside it and the one above or below
         // (the lens squeezes the two directions differently away from the middle), so the seams stay even
@@ -1864,7 +1960,7 @@ function pmMount(el, s, F) {
   function hitAt(x, y) {
     const r = cv.getBoundingClientRect(), px = x - r.left, py = y - r.top;
     for (let j = drawn.length - 1; j >= 0; j--) { const b = drawn[j]; if (Math.abs(px - b.x) <= b.w / 2 && Math.abs(py - b.y) <= b.h / 2) return b; }
-    return null;
+    return rasterHit(px, py);
   }
   function bloomAt(x, y) {
     const bl = document.createElement("i"); bl.className = "fva-bloom pmx-bloom"; bl.innerHTML = FVA_HEART_ON;
@@ -2449,7 +2545,7 @@ function pmMount(el, s, F) {
   cleanup.push(() => { dead = true; clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); t1.destroy(); if (lay) PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z, cardOpen }); });
   size(); build(false);
   if (s.f.subjSet && s.f.subjSet.length) { try { ROUTE_NOW = "#/" + pmRouteOf(s, F).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {} }   // opened from a painting's subject tap: the address names the filter
-  window.PM_CTRL = { get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length; }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); },
+  window.PM_CTRL = { get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length + rasterCount(); }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); },
     // QA: the raw pan/zoom (David, 2026-10-10, "Back should restore the exact prior view") -- _qaSetPZ lets a
     // test establish an arbitrary pan deterministically (a real drag gesture would be slow and imprecise);
     // _qaPZ reads it back the same way, for the before/after comparison across a Back round trip
