@@ -24,7 +24,7 @@ function glZoomOpen(opts) {
   const scrim = document.createElement("div");
   scrim.className = "glz-scrim";
   scrim.innerHTML = `
-    <div class="glz-top"><button class="tl-exit" data-glzclose aria-label="Done, back to the painting">${ICON.back}<span>Done</span></button><span class="glz-title">${esc(opts.title || "")}</span><span class="glz-pk-slot" data-glz-pk>${typeof pkButtonHTML === "function" ? pkButtonHTML() : ""}</span></div>
+    <div class="glz-top"><button class="tl-exit" data-glzclose aria-label="Done, back to the painting">${ICON.back}<span>Done</span></button><span class="glz-title">${esc(opts.title || "")}</span><span class="glz-zc" data-glzzc role="group" aria-label="Zoom"><button type="button" data-glzfit>Fit</button><button type="button" data-glz100>100%</button></span>${opts.onDetails ? `<button type="button" class="glz-details" data-glzdetails>Open the page</button>` : ""}<span class="glz-pk-slot" data-glz-pk>${typeof pkButtonHTML === "function" ? pkButtonHTML() : ""}</span></div>
     <div class="glz-stage"><div class="glz-frame"><img class="glz-img" src="${esc(opts.src)}"${opts.cors ? ' crossorigin="anonymous"' : ""} alt="${esc(opts.alt || "")}"><canvas class="glz-cv" aria-hidden="true"></canvas><div class="glz-pk-layer" data-glzpklayer hidden></div></div><div class="glz-lens" data-glzlens hidden aria-hidden="true"><canvas width="102" height="102"></canvas><i></i></div></div>
     <div class="glz-tools">
       <div class="seg glz-seg" role="group" aria-label="Look at it">
@@ -70,6 +70,13 @@ function glZoomOpen(opts) {
   // it snaps back in bounds on release. Zoom itself is never rubber-banded -- David's ask was literal ("never
   // smaller"), so pinch/wheel are hard-clamped to [fitZ, maxZ] every frame, no overshoot to correct later.
   let Z = 1, P = [0, 0], active = null, palHex = null;
+  // The hover-pan loupe (desktop, opened from a map card; David, 2026-10-21). LP = this viewer was opened from a card.
+  // Zoomed up to 4x fit with loupeOn, the mouse position across the window maps to the position across the picture
+  // (the window's left edge shows the picture's left edge), eased ~120ms. Past 4x (or after a wheel/trackpad move)
+  // it is a free zoom: drag pans, two-finger scroll pans 1:1, wheel/pinch zooms about the cursor. Space freezes the loupe.
+  const LP = !!opts.fromRect;
+  let firstShown = false, enterRect = null, closed = false, loupeOn = false, spaceDown = false, lastPtype = "touch", armPos = null, lastMouse = null, tgt = null, lpRaf = 0, lpT = 0;
+  const LP_MAX = 4.05;
   let fitZ = 1, maxZ = 8, natW = 0, natH = 0;
   const computeFit = () => {
     natW = img.naturalWidth || 0; natH = img.naturalHeight || 0;
@@ -97,6 +104,7 @@ function glZoomOpen(opts) {
     if (!Number.isFinite(Z) || Z <= 0) Z = fitZ || 1;
     if (!Number.isFinite(P[0])) P[0] = 0; if (!Number.isFinite(P[1])) P[1] = 0;
     frame.style.transform = `translate(${P[0]}px,${P[1]}px) scale(${Z})`;
+    if (LP) stage.dataset.cur = Z <= fitZ * 1.05 ? "fit" : (loupeOn && !spaceDown && Z <= fitZ * LP_MAX) ? "loupe" : "free";
     frame.style.setProperty("--iz", String(1 / Z));   // the Pick loupes live inside the frame and counter-scale, so they stay one size on screen but glued to their painting point
   };
   const springFrame = (ms, after) => {
@@ -114,7 +122,27 @@ function glZoomOpen(opts) {
   if (img.crossOrigin) img.addEventListener("error", () => {
     const src = img.src; img.crossOrigin = null; img.addEventListener("load", resetView, { once: true }); img.src = ""; img.src = src;
   }, { once: true });
-  if (img.complete && img.naturalWidth) resetView(); else img.addEventListener("load", resetView);
+  // Opened from a map card (opts.fromRect = the card's rectangle on screen, opts.focal = the clicked point as 0..1 of the picture):
+  // the picture grows out of the card and lands zoomed in on the point that was clicked (David, 2026-10-21), ~260ms ease-out, no bounce.
+  const ZIN_EASE = "cubic-bezier(.2,.7,.2,1)";
+  const enterFrom = () => {
+    const fr = opts.fromRect; if (!fr || !natW || !natH || !fr.width || !fr.height) return;
+    const r = stage.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    const z0 = Math.min(fr.width / natW, fr.height / natH), p0 = [fr.left + fr.width / 2 - cx, fr.top + fr.height / 2 - cy];
+    enterRect = { z0, p0 };
+    let z1 = fitZ, p1 = [0, 0];
+    if (opts.focal) {
+      z1 = clamp(fitZ * 2.5, fitZ, maxZ);
+      p1 = clampP([-(opts.focal.fx - .5) * natW * z1, -(opts.focal.fy - .5) * natH * z1], z1, false);
+    }
+    loupeOn = !!opts.focal; if (loupeOn) { armPos = { x: opts.focal.cx, y: opts.focal.cy }; showHint(); }
+    frame.style.transition = "none"; Z = z0; P = p0; apply(); frame.getBoundingClientRect();
+    if (matchMedia("(prefers-reduced-motion:reduce)").matches) { Z = z1; P = p1; frame.style.transition = ""; apply(); return; }
+    frame.style.transition = `transform 260ms ${ZIN_EASE}`; Z = z1; P = p1; apply();
+    setTimeout(() => { if (!closed) frame.style.transition = ""; }, 300);
+  };
+  const firstShow = () => { resetView(); if (!firstShown) { firstShown = true; enterFrom(); } };
+  if (img.complete && img.naturalWidth) firstShow(); else img.addEventListener("load", firstShow);
   const onResize = () => {
     computeFit(); Z = clamp(Z, fitZ, maxZ); P = clampP(P, Z, false);
     frame.style.transition = ""; apply();
@@ -169,7 +197,9 @@ function glZoomOpen(opts) {
     lastTapT = isDouble ? 0 : now; lastTapX = x; lastTapY = y;
     if (!isDouble) return false;
     if (typeof buzz === "function") buzz(6);
-    zoomAt(x, y, Z > fitZ * 1.15 ? fitZ : Math.min(maxZ, fitZ * 2.5), false);
+    // a mouse (html.desk): double-click toggles Fit and real size (100%, one image pixel per screen pixel)
+    const real = document.documentElement.classList.contains("desk") && fitZ < .9 ? 1 : Math.min(maxZ, fitZ * 2.5);
+    zoomAt(x, y, Z > fitZ * 1.15 ? fitZ : real, false);
     springFrame(280);
     return true;
   };
@@ -185,13 +215,14 @@ function glZoomOpen(opts) {
     if (!aborted && pts.size > 1) return;
     // Pick: a still tap on the painting drops a new picker (pan and pinch stay live; double-tap zoom steps aside)
     if (!aborted && drag && !drag.moved && active === "pick") { pkTap(drag.x, drag.y); snapBack(); }
-    else if (!aborted && drag && !drag.moved) { if (!maybeDoubleTap(drag.x, drag.y)) snapBack(); }
+    else if (!aborted && drag && !drag.moved) { if (LP && lastPtype === "mouse") loupeClick(drag.x, drag.y); else if (!maybeDoubleTap(drag.x, drag.y)) snapBack(); }
     else if (!aborted && drag && drag.moved && (Math.abs(drag.vx) > .02 || Math.abs(drag.vy) > .02)) startMomentum(drag.vx, drag.vy);
     else snapBack();
     drag = null;
   };
   stage.addEventListener("pointerdown", e => {
     if (active === "select") return;
+    lastPtype = e.pointerType || "mouse";
     stopMomentum(); frame.style.transition = "";
     const now = performance.now();
     for (const [id, v] of pts) if (now - v.t > STALE_MS) pts.delete(id);
@@ -206,6 +237,7 @@ function glZoomOpen(opts) {
     }
   });
   stage.addEventListener("pointermove", e => {
+    if (LP && e.pointerType === "mouse" && !e.buttons) { hoverMove(e.clientX, e.clientY); return; }
     if (!pts.has(e.pointerId)) return;
     pts.set(e.pointerId, { x: e.clientX, y: e.clientY, t: performance.now() });
     if (pinch && pts.size >= 2) {
@@ -217,6 +249,7 @@ function glZoomOpen(opts) {
     if (drag && pts.size === 1) {
       if (!drag.moved && Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 6) return;
       drag.moved = true;
+      if (LP && lastPtype === "mouse" && loupeOn && Z <= fitZ * LP_MAX) { drag.x = e.clientX; drag.y = e.clientY; return; }   // in the loupe the mouse looks around by hovering; a drag does nothing
       const dx = e.clientX - drag.x, dy = e.clientY - drag.y, now = performance.now(), dt = Math.max(1, now - drag.lastT);
       drag.vx = dx / dt; drag.vy = dy / dt; drag.lastT = now;
       P = clampP([P[0] + dx, P[1] + dy], Z, true);
@@ -230,8 +263,54 @@ function glZoomOpen(opts) {
   stage.addEventListener("wheel", e => {
     if (active === "select") return;
     e.preventDefault(); stopMomentum(); frame.style.transition = "";
+    if (LP) {
+      const k = wheelKind(e);
+      if (k === "pad" && Z > fitZ * 1.02) { loupeOn = false; P = clampP([P[0] - wheelPx(e, e.deltaX), P[1] - wheelPx(e, e.deltaY)], Z, false); apply(); return; }   // two-finger scroll pans 1:1
+      loupeOn = false;
+      zoomAt(e.clientX, e.clientY, Z * Math.exp(-wheelPx(e, e.deltaY) * (k === "pinch" ? .01 : .0015)), false);
+      return;
+    }
     zoomAt(e.clientX, e.clientY, Z * Math.exp(-e.deltaY * .0015), false);
   }, { passive: false });
+  // ---- the loupe's own pieces ----
+  const ZEASE = "cubic-bezier(.2,.7,.2,1)";
+  const animTo = fn => { frame.style.transition = `transform 260ms ${ZEASE}`; fn(); lpT = performance.now() + 300; setTimeout(() => { if (!closed && performance.now() >= lpT - 5) frame.style.transition = ""; }, 310); };
+  const loupeActive = () => LP && loupeOn && !spaceDown && Z > fitZ * 1.05 && Z <= fitZ * LP_MAX;
+  const hoverTarget = (mx, my) => {
+    const r = stage.getBoundingClientRect(), [lx, ly] = panLimit(Z);
+    const u = clamp((mx - r.left) / (r.width || 1), 0, 1), v = clamp((my - r.top) / (r.height || 1), 0, 1);
+    return [(.5 - u) * 2 * lx, (.5 - v) * 2 * ly];   // left edge of the window = left edge of the picture; an axis that already fits has no range, so stays centered
+  };
+  const lpStep = now => {
+    lpRaf = 0; if (!loupeActive() || !tgt) return;
+    const dt = Math.min(48, now - (lpStep.t || now)); lpStep.t = now;
+    const a = 1 - Math.exp(-dt / 45);
+    P = [P[0] + (tgt[0] - P[0]) * a, P[1] + (tgt[1] - P[1]) * a]; apply();
+    if (Math.abs(tgt[0] - P[0]) > .3 || Math.abs(tgt[1] - P[1]) > .3) lpRaf = requestAnimationFrame(lpStep); else { P = tgt.slice(); apply(); lpStep.t = 0; }
+  };
+  const hoverMove = (mx, my) => {
+    lastMouse = { x: mx, y: my };
+    if (armPos) { if (Math.hypot(mx - armPos.x, my - armPos.y) < 5) return; armPos = null; }
+    if (!loupeActive() || performance.now() < lpT) return;
+    frame.style.transition = ""; tgt = hoverTarget(mx, my);
+    if (!lpRaf) { lpStep.t = 0; lpRaf = requestAnimationFrame(lpStep); }
+  };
+  const goFit = () => { loupeOn = false; animTo(() => { Z = fitZ; P = [0, 0]; apply(); }); };
+  const loupeClick = (x, y) => {
+    if (Z > fitZ * 1.15) { goFit(); return; }
+    loupeOn = true; armPos = { x, y }; showHint();
+    animTo(() => zoomAt(x, y, fitZ * 2.5, false));
+  };
+  function showHint() {
+    let seen = false; try { seen = !!localStorage.getItem("glz-loupe-hint"); localStorage.setItem("glz-loupe-hint", "1"); } catch (e) {}
+    if (seen || !stage) return;
+    const h = document.createElement("div"); h.className = "glz-hint"; h.textContent = "Move to look around \u00b7 Esc to close"; stage.appendChild(h);
+    setTimeout(() => h.classList.add("out"), 3200); setTimeout(() => h.remove(), 3700);
+  }
+  if (LP) {
+    document.addEventListener("keydown", e => { if (e.key === " " && loupeOn && !closed) { e.preventDefault(); spaceDown = true; apply(); } });
+    document.addEventListener("keyup", e => { if (e.key === " " && spaceDown) { spaceDown = false; armPos = lastMouse; apply(); } });
+  }
   stage.addEventListener("contextmenu", e => e.preventDefault());
   // "Pick": eyedropAttach (js/eyedrop.js) on the zoomed image itself, armed only while this tool is active, so
   // it never fights the pan/pinch handlers above (D+E of David's palette-engine brief, 2026-10-09). The readout
@@ -644,16 +723,29 @@ function glZoomOpen(opts) {
     const v = e.target.closest("[data-glzv]"); if (v) { if (typeof buzz === "function") buzz(5); setMode(v.dataset.glzv); return; }
     const c = e.target.closest("[data-glzc]"); if (c) { if (typeof buzz === "function") buzz(5); palHex = palHex === c.dataset.glzc ? null : c.dataset.glzc; drawPalRow(); drawWhere(); }
   };
-  let closed = false;
   const close = () => {
     if (closed) return; closed = true;
-    stopMomentum(); window.removeEventListener("resize", onResize);
-    document.body.style.overflow = prevOverflow; scrim.remove(); document.removeEventListener("keydown", onKey);
+    stopMomentum(); cancelAnimationFrame(lpRaf); window.removeEventListener("resize", onResize);
+    document.body.style.overflow = prevOverflow; scrim.remove(); window.removeEventListener("keydown", onKey, true);
   };
-  const onKey = e => { if (e.key === "Escape") close(); };
-  document.addEventListener("keydown", onKey);
-  scrim.querySelector("[data-glzclose]").onclick = close;
-  scrim.addEventListener("click", e => { if (e.target === scrim) close(); });
+  const stepTo = z => { const r = stage.getBoundingClientRect(); stopMomentum(); loupeOn = false; animTo(() => zoomAt(r.left + r.width / 2, r.top + r.height / 2, z, false)); };
+  const closeBack = () => {   // from a map card: shrink back into it; anywhere else (or a gesture away) just close
+    if (closed || !enterRect || matchMedia("(prefers-reduced-motion:reduce)").matches) return close();
+    stopMomentum(); frame.style.transition = `transform 220ms ${ZIN_EASE}`; scrim.style.transition = "opacity .22s var(--ease)"; scrim.classList.remove("in");
+    Z = enterRect.z0; P = enterRect.p0; frame.style.transform = `translate(${P[0]}px,${P[1]}px) scale(${Z})`;
+    setTimeout(close, 230);
+  };
+  const onKey = e => {
+    if (e.key === "Escape") { e.stopImmediatePropagation(); e.preventDefault(); if (LP && Z > fitZ * 1.15) goFit(); else closeBack(); return; }
+    if (e.target && /^(INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
+    if (e.key === "+" || e.key === "=") stepTo(Z * 1.5); else if (e.key === "-") stepTo(Z / 1.5); else if (e.key === "0") stepTo(fitZ);
+  };
+  window.addEventListener("keydown", onKey, true);
+  scrim.querySelector("[data-glzclose]").onclick = closeBack;
+  scrim.addEventListener("click", e => { if (e.target === scrim) closeBack(); });
+  scrim.querySelector("[data-glzfit]").onclick = () => { loupeOn = false; stepTo(fitZ); };
+  scrim.querySelector("[data-glz100]").onclick = () => { loupeOn = false; stepTo(fitZ < 1 ? 1 : Math.min(maxZ, fitZ * 2.5)); };
+  const dBtn = scrim.querySelector("[data-glzdetails]"); if (dBtn) dBtn.onclick = () => { close(); opts.onDetails(); };
   // the scrim lives on <body>, outside the screen it opened over (so pinch/pan isn't clipped by the screen's own
   // transform), same reason js/richpage.js's rp-bar does. That means the screen swap that show() does on ANY
   // navigation away -- forward to another page, or Back/the iOS swipe-back gesture, which both re-render through

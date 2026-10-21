@@ -207,3 +207,21 @@ html.desk .scrim.hm-scrim-clear{display:none}
 html.desk:has(.sheet.hm-sheet-panel) #app>.screen.fixed{right:380px}
 html.desk:has(.sheet.hm-sheet-panel) .hm-layer{left:calc(50% - 190px)}
 html.desk:has(.sheet.hm-sheet-panel) .corner.r{right:calc(380px + 28px)}
+
+/* ---------- Look closer (the full-window painting viewer): a real desktop toolbar, the painting as large as the window allows, the tools in a rail ---------- */
+html.desk .glz-scrim{grid-template-columns:minmax(0,1fr) 300px}
+html.desk .glz-top{padding:14px 28px;gap:12px}
+html.desk .glz-title{font-size:20px;margin-left:6px}
+html.desk .glz-zc{display:inline-flex;gap:4px;padding:3px;border-radius:999px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--rule)}
+html.desk .glz-zc button{height:32px;padding:0 14px;border-radius:999px;color:var(--ink);font:500 14px/1 var(--sans)}
+html.desk .glz-zc button:hover{background:rgba(236,232,223,.12)}
+html.desk .glz-details:hover{filter:brightness(.92)}
+html.desk .glz-tools{padding:20px 28px 28px 20px;border-left:1px solid var(--rule);gap:18px}
+html.desk .glz-stage[data-cur="fit"],html.desk .glz-stage[data-cur="fit"] *{cursor:zoom-in}
+html.desk .glz-stage[data-cur="loupe"],html.desk .glz-stage[data-cur="loupe"] *{cursor:move}
+html.desk .glz-stage[data-cur="free"],html.desk .glz-stage[data-cur="free"] *{cursor:grab}
+html.desk .glz-stage[data-cur="free"]:active,html.desk .glz-stage[data-cur="free"]:active *{cursor:grabbing}
+html.desk:has(.glz-scrim) #dk-nav{display:none}
+html.desk .glz-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;border-radius:var(--r-3);padding:4px}
+html.desk .glz-seg button[data-glzv]{padding:0 10px;justify-content:center;min-height:40px}
+html.desk .glz-tools{justify-content:flex-start;padding-top:28px}
