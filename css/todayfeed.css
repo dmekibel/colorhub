@@ -7,7 +7,7 @@
 .tf-head .note{font-size:17px;color:var(--soft)}
 
 /* the filter chips: single choice, sticky under the header, opaque */
-.tf-chips{position:sticky;top:0;z-index:5;display:flex;gap:8px;margin:0 calc(-1 * var(--g));padding:10px var(--g) 12px;background:var(--ground);overflow-x:auto;scrollbar-width:none;touch-action:pan-x}
+.tf-chips{position:sticky;top:-18px;z-index:5;display:flex;gap:8px;margin:0 calc(-1 * var(--g));padding:10px var(--g) 12px;background:var(--ground);overflow-x:auto;scrollbar-width:none;touch-action:pan-x}
 .tf-chips::-webkit-scrollbar{display:none}
 .tf-chip{flex:none;height:40px;padding:0 18px;border-radius:var(--r-pill);background:var(--surface-2);border:1px solid var(--rule);color:var(--soft);font:500 16px/1 var(--sans);transition:background .15s,color .15s,border-color .15s,transform .12s var(--ease)}
 .tf-chip:active{transform:scale(.97)}
@@ -105,7 +105,7 @@ html.desk .tf-chips.stuck::before{display:none}
 html.desk .room-sheet>.screen.tf-screen{padding-left:max(var(--dkg),calc((100% - 1400px) / 2));padding-right:max(var(--dkg),calc((100% - 1400px) / 2))}
 html.desk .tf-screen{--tf-gap:16px}
 html.desk .tf-head{padding-bottom:10px}
-html.desk .tf-chips{top:var(--dkn);margin:0;padding-left:0;padding-right:0}
+html.desk .tf-chips{top:-28px;margin:0;padding-left:0;padding-right:0}
 html.desk .tf-card{cursor:pointer}
 html.desk .tf-card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.5);filter:brightness(1.06)}
 html.desk .tf-card:active{transform:translateY(-1px) scale(.992)}

@@ -7573,3 +7573,28 @@ scenario("paintings", "five cold addresses open their own page at 375x812 and 14
     }
   }
 });
+
+// David, 2026-10-21: Today is a feed (js/todayfeed.js, #/feed). It opens with cards, a chip filters, a card tap opens its
+// page and Back returns to the feed (scroll kept), and the old daily game still opens from its card.
+scenario("home", "Today feed: cards, a chip filter, a card opens and Back returns, the daily game opens from its card", async t => {
+  await t.open("#/feed", { settle: 600 });
+  await t.waitFor(() => t.$$(".tf-col .tf-card:not(.sk)").length >= 12, 20000, "the feed to show cards");
+  const first = t.$$(".tf-col .tf-card")[0];
+  t.expect(!first.classList.contains("tf-game"), "the game card is the first card");
+  t.expect(t.$(".tf-cotd") && t.$(".tf-game") && t.$(".tf-cont"), "the color of the day, the game card and Continue learning should all be in All");
+  await t.click(t.$("[data-tf-f=paint]"), { wait: 500 });
+  await t.waitFor(() => t.$$(".tf-col .tf-card").length >= 12 && t.$$(".tf-col .tf-card").every(c => c.classList.contains("tf-paint")), 8000, "the Paintings chip to show only paintings");
+  await t.click(t.$("[data-tf-f=all]"), { wait: 500 });
+  const sc = t.$(".tf-screen"); sc.scrollTop = 500; await t.sleep(300);
+  const card = t.$$(".tf-col .tf-card").find(c => (c.dataset.tf === "name" || c.dataset.tf === "paint") && c.getBoundingClientRect().top > 150);
+  await t.click(card, { wait: 800 });
+  const y = t.ev("TF.y.all");
+  t.expect(y > 200, `the feed did not remember its scroll (${y})`);
+  await t.waitFor(() => !t.$(".tf-screen") && t.w.location.hash !== "#/feed", 12000, "a card to open its page");
+  t.w.history.back();
+  await t.waitFor(() => t.$(".tf-screen") && t.w.location.hash === "#/feed", 12000, "Back to return to the feed");
+  await t.sleep(500);
+  t.expect(Math.abs(t.$(".tf-screen").scrollTop - y) < 40, `Back lost the scroll (${y} -> ${t.$(".tf-screen").scrollTop})`);
+  await t.click(t.$(".tf-game"), { wait: 800 });
+  await t.waitFor(() => t.w.location.hash === "#/daily", 12000, "the daily game to open from its card");
+});
