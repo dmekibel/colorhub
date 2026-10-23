@@ -196,14 +196,63 @@ function glCropStyle(i, d, ab) {
 const glYear = i => { const y = GAL.year[i]; return y === GL_UNDATED ? "" : y < 0 ? `${-y} BCE` : String(y); };
 // artist (or country) and year; the name gives way before the year does
 const glByline = (i, d) => { const who = d.a || d.co || "", y = glYear(i); return `<span>${esc(who)}</span>${y ? `<em>${who ? " · " : ""}${y}</em>` : ""}`; };
-// a bigger copy for the painting page: IIIF servers take any width; other museums' URLs are used as they are
-// our own small copies (img/gallery/...) are only 200px wide: shown smaller so they stay crisp, or swapped for a big image
-// Look closer zooms in, so it asks for the biggest copy a host serves to other sites: Commons scales any file (2048 px),
-// IIIF museums take any width up to their cap (AIC refuses past 843, so its URLs stay as they are)
-const glZoomSrc = u => String(u || "").replace(/(Special:FilePath\/[^?]+)\?width=\d+$/, "$1?width=2048");
+// Three sizes of one painting (research/image-size-upgrade-2026-10-23.md has the host-by-host measurements):
+//   "mid"  = what the page and lists draw first: only hosts proven to serve it, so the first frame can't break;
+//   "page" = the sharp copy the painting page swaps in after the first frame (data-hi; a failure keeps the mid copy);
+//   "zoom" = the biggest copy a host serves other sites, for Look closer (paintzoom.js falls back to the page copy).
+// Our own small copies (img/gallery/...) are only 200px wide: shown smaller so they stay crisp, or swapped for a big image.
+// Hosts that cap or refuse: the Art Institute (AIC) refuses past 843, the National Museum Sweden serves 800 at most,
+// SMK's thumbnail endpoint is already 1600, Cleveland's _web is 900 (its _print is 3400 but sends no CORS header).
+const GL_SZ = { mid: 0, page: 1, zoom: 2 };
+function glSized(url, tier) {
+  let u = String(url || ""); const t = GL_SZ[tier] != null ? GL_SZ[tier] : 0;
+  if (/^http:\/\/nationalmuseumse\.iiifhosting\.com\//.test(u)) u = u.replace(/^http:/, "https:");
+  if (/commons\.wikimedia\.org\/wiki\/Special:FilePath\//.test(u)) return u.replace(/\?width=\d+$/, "?width=" + (t === 2 ? 2048 : 1280));   // Commons scales any file to any width
+  const m = u.match(/^(https?:\/\/([^/]+)\/.*)\/full\/[^/]*\/0\/default\.jpg$/);
+  if (m) {
+    const host = m[2], at = sz => m[1] + "/full/" + sz + "/0/default.jpg";
+    if (host === "iiif.micr.io" || host === "api.nga.gov") return at(["843,", "1600,", "!3000,3000"][t]);   // Rijksmuseum, National Gallery of Art
+    if (host === "www.artic.edu") return at("843,");
+    if (host === "nationalmuseumse.iiifhosting.com") return t ? at("800,") : u;                                  // serves 800 at most; 843+ answers 501
+    if (host === "iip-thumb.smk.dk") return t ? at(["", "1600,", "!3000,3000"][t]) : u;
+    return u;
+  }
+  if (/^https:\/\/ids\.si\.edu\/ids\/deliveryService\?/.test(u)) return u.replace(/([?&]max=)\d+/, "$1" + [800, 1600, 3000][t]);   // Smithsonian (SAAM, Freer|Gallery, NMAfA)
+  if (/^https:\/\/images\.metmuseum\.org\/CRDImages\/[^/]+\/(?:mobile-large|web-large|original)\//.test(u)) return t ? u.replace(/\/(?:mobile-large|web-large|original)\//, "/original/") : u;   // original is 2000-4000 px, 1-4 MB
+  if (/^https:\/\/openaccess-cdn\.clevelandart\.org\/.+_(?:web|print)\.jpg$/.test(u)) return t === 2 ? u.replace(/_(?:web|print)\.jpg$/, "_print.jpg") : u.replace(/_print\.jpg$/, "_web.jpg");   // _print is 3400 px, ~5 MB
+  return u;
+}
+const glZoomSrc = u => glSized(u, "zoom");
+// what glZoomOpen needs: the biggest copy, and the one already on the page to fall back to if that URL fails
+const glZoomOpts = u => { const z = glSized(u, "zoom"); return z !== u ? { src: z, fallback: u } : { src: u }; };
 const glSmall = d => /^img\/gallery\//.test(d.img || "");
-const glBig = url => String(url || "").replace(/\/full\/!?\d*,\d*\/0\/default\.jpg$/, "/full/843,/0/default.jpg")
-  .replace(/(commons\.wikimedia\.org\/wiki\/Special:FilePath\/[^?]+)\?width=\d+$/, "$1?width=1280");   // Commons scales any file to any width
+const glBig = url => glSized(url, "mid");
+// the sharp copy for the painting page's swap-in: the stored hi-res if there is one, else the host's page size when it differs
+// from the first frame. Yale (no size in its URL) has its own resolver below.
+const glYale = url => /^https:\/\/media\.collections\.yale\.edu\/thumbnail\/ycba\/obj\/\d+$/.test(String(url || ""));
+const glHiSrc = d => {
+  if (!d.hi && glYale(d.img)) return d.img;
+  const p = glSized(d.hi || d.img, "page");
+  return d.hi || p !== glBig(d.img) ? p : "";
+};
+// a picture shown big outside the painting page (a painter's page): after its first frame is up, load the page size in the
+// background and swap it in when it arrives. Display only (no canvas reads), so no CORS; any failure keeps the first frame.
+function glSharpen(im, d) {
+  const hi = glHiSrc(d); if (!im || !hi || glSmall(d) && !d.hi) return;
+  const go = u => { if (!u) return; const b = new Image(); b.onload = () => { if (im.isConnected) im.src = b.src; }; b.src = u; };
+  if (glYale(hi)) glYaleResolve(hi).then(go); else go(hi);
+}
+// Yale's thumbnail redirects to a short-lived S3 link; its IIIF server (full size, 775-900 px, CORS-open) is found from the
+// object's manifest, which also sends CORS headers. One request per object, cached.
+const GL_YALE_CACHE = new Map();
+function glYaleResolve(url) {
+  const n = String(url || "").match(/\/obj\/(\d+)$/); if (!n) return Promise.resolve(null);
+  if (!GL_YALE_CACHE.has(n[1])) GL_YALE_CACHE.set(n[1], fetch("https://manifests.collections.yale.edu/ycba/obj/" + n[1]).then(r => r.ok ? r.json() : null).then(j => {
+    const body = j && j.items && j.items[0] && j.items[0].items && j.items[0].items[0].items && j.items[0].items[0].items[0].body;
+    return body && /^https:\/\/images\.collections\.yale\.edu\/iiif\/2\/[^/]+\/full\/full\/0\/default\.jpg$/.test(body.id || "") ? body.id : null;
+  }).catch(() => null));
+  return GL_YALE_CACHE.get(n[1]);
+}
 
 // ---------- the dynamic palette (ROADMAP §13, 3/6/12/20): a pool of up to 24 colors per painting
 // (tools/gallery.py's extract_pool(), the same over-cluster-then-greedy-pick method as js/studio.js
@@ -1460,7 +1509,7 @@ function glPage(i, d, fromHex, tol) {
     <header class="art-top" data-similar-gi="${i}"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${typeof fvArtHeart === "function" && d.id ? fvArtHeart(d.id) : ""}</header>
     <div class="gl-cols">
     <div class="gl-pal-wrap">
-    <div class="gl-hero gl-full-w" style="--c:${avg}"><span style="width:min(100%, calc(var(--hero-vh, 62dvh) / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas><div class="gl-hero-dots" data-glherodots aria-hidden="true"></div>
+    <div class="gl-hero gl-full-w" style="--c:${avg}"><span style="width:min(100%, calc(var(--hero-vh, 62dvh) / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${glHiSrc(d) ? ` data-hi="${esc(glHiSrc(d))}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas><div class="gl-hero-dots" data-glherodots aria-hidden="true"></div>
     <button class="gl-closer" data-glcloser aria-label="Look closer">${ICON.search}<span>Look closer</span></button>
     <button class="gl-closer gl-pick-btn" data-glpickbtn hidden aria-pressed="false" aria-label="Pick a color">${icon("pipette", 17)}<span>Pick a color</span></button></span></div>
     <div class="gl-id">
@@ -1952,9 +2001,9 @@ function glPage(i, d, fromHex, tol) {
   if (d.a && typeof ooWithIndex === "function") ooWithIndex();
   if (typeof moreRegister === "function") moreRegister("gallery", () => [
     { title: "Look", items: [
-      { t: "Where each color sits", n: "Opens Look closer", run: () => glZoomOpen({ src: glZoomSrc(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "where", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
+      { t: "Where each color sits", n: "Opens Look closer", run: () => glZoomOpen({ ...glZoomOpts(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "where", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
       { t: "Value and squint", n: "See the light structure, or the big shapes", run: () => openLookCloser() },
-      { t: "Select an object", n: "Tap the thing you want", run: () => glZoomOpen({ src: glZoomSrc(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "select", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
+      { t: "Select an object", n: "Tap the thing you want", run: () => glZoomOpen({ ...glZoomOpts(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "select", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
     ] },
     { title: "Go", items: [
       ...(d.a ? [{ t: "The painter", n: d.a, run: () => { if (typeof awPainter === "function") awPainter(routeSlug(d.a)); } }] : []),
@@ -2120,14 +2169,17 @@ function glPage(i, d, fromHex, tol) {
       const big = new Image(); if (cors) big.crossOrigin = "anonymous";
       big.onload = () => {
         if (!hiImg.isConnected) return;
-        if (cors) hiImg.crossOrigin = "anonymous";
+        if (cors) hiImg.crossOrigin = "anonymous"; else hiImg.removeAttribute("crossorigin");
         hiImg.src = big.src; hiImg.classList.add("hi"); armSample(hiImg);
       };
-      big.onerror = () => {};   // quietly keep the small copy if even the fallback fails
+      // a CORS host that drops its header on this request (the Met's CDN does) still shows the sharp copy, just unreadable
+      // (Pick then honestly finds nothing); if even that fails the small copy stays
+      big.onerror = () => { if (!cors) return; const plain = new Image(); plain.onload = () => { if (!hiImg.isConnected) return; hiImg.removeAttribute("crossorigin"); hiImg.src = plain.src; hiImg.classList.add("hi"); armSample(hiImg); }; plain.src = url; };
       big.src = url;
     };
     const hiUrl = hiImg.dataset.hi, commonsFn = glCommonsFilename(hiUrl);
     if (commonsFn) glCommonsResolve(hiUrl, 1200).then(resolved => swap(resolved || hiUrl, !!resolved));
+    else if (glYale(hiUrl)) glYaleResolve(hiUrl).then(u => { if (u) swap(u, true); });
     else swap(hiUrl, !!glCORS(hiUrl));
   }
   // tap the painting to name a spot (ROADMAP §13): only where the image's host allows a canvas read (local
@@ -2147,7 +2199,7 @@ function glPage(i, d, fromHex, tol) {
   // armSample() swaps in the already-resolved, CORS-capable thumb.wikimedia.org URL (glCommonsResolve, above)
   // well after the page first drew, so re-deriving from the painting's raw (unresolved) URL here would always
   // read as "not CORS-safe" for Commons and silently break Look closer's Pick tool for its ~40% of the corpus.
-  const openLookCloser = (startTool, at) => { buzz(5); glZoomOpen({ ...(at || {}), sub: [d.a, glYear(i)].filter(Boolean).join(" · "), src: glZoomSrc(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample, startTool: startTool || null }); };
+  const openLookCloser = (startTool, at) => { buzz(5); glZoomOpen({ ...(at || {}), sub: [d.a, glYear(i)].filter(Boolean).join(" · "), ...glZoomOpts(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample, startTool: startTool || null }); };
   const syncEyd = () => {
     if (eyd) { eyd.detach(); eyd = null; }
     if (pickArmed && canSample && typeof eyedropAttach === "function") {
@@ -2208,11 +2260,12 @@ function glPage(i, d, fromHex, tol) {
   function clearDots() { heroSpan.querySelectorAll(".gl-pick-dot").forEach(n => n.remove()); }
   function addDot(h) { const q = dotAt.find(o => o.h === h); if (!q) return; const dot = document.createElement("span"); dot.className = "gl-tap-dot gl-pick-dot"; dot.style.left = q.x + "px"; dot.style.top = q.y + "px"; dot.style.background = h; heroSpan.appendChild(dot); }
   const sampleHex = (x, y) => {
-    const c = document.createElement("canvas"), W = sampleImg.naturalWidth, H = sampleImg.naturalHeight; c.width = W; c.height = H;
-    const cx = c.getContext("2d", { willReadFrequently: true }); cx.drawImage(sampleImg, 0, 0);
+    const c = document.createElement("canvas"), W = sampleImg.naturalWidth, H = sampleImg.naturalHeight;
     const r = sampleImg.getBoundingClientRect(), px = Math.round(x / r.width * W), py = Math.round(y / r.height * H), half = 3;
     const bx = clamp(px - half, 0, W - 1), by = clamp(py - half, 0, H - 1), bw = Math.min(half * 2 + 1, W - bx), bh = Math.min(half * 2 + 1, H - by);
-    const data = cx.getImageData(bx, by, bw, bh).data; let rr = 0, gg = 0, bb = 0, n = 0;
+    c.width = bw; c.height = bh;   // only the 7x7 patch is drawn (a 4000 px original as a whole canvas would be 16 MP)
+    const cx = c.getContext("2d", { willReadFrequently: true }); cx.drawImage(sampleImg, bx, by, bw, bh, 0, 0, bw, bh);
+    const data = cx.getImageData(0, 0, bw, bh).data; let rr = 0, gg = 0, bb = 0, n = 0;
     for (let k = 0; k < data.length; k += 4) { rr += data[k]; gg += data[k + 1]; bb += data[k + 2]; n++; }
     return "#" + [rr, gg, bb].map(v => clamp(Math.round(v / n), 0, 255).toString(16).padStart(2, "0")).join("").toUpperCase();
   };
@@ -2337,7 +2390,7 @@ function glPage(i, d, fromHex, tol) {
 // Access API exposes a CORS path, the way Commons' MediaWiki API did) — neither openaccess-api.clevelandart.org
 // (the JSON API itself) nor any size on openaccess-cdn.clevelandart.org (web/print/full) sends
 // Access-Control-Allow-Origin, with or without an Origin header, so there's no door in anywhere in that chain.
-const GL_CORS_HOSTS = new Set(["api.nga.gov", "iiif.micr.io", "images.metmuseum.org", "api.smk.dk", "iip-thumb.smk.dk"]);
+const GL_CORS_HOSTS = new Set(["api.nga.gov", "iiif.micr.io", "images.metmuseum.org", "api.smk.dk", "iip-thumb.smk.dk", "ids.si.edu", "nationalmuseumse.iiifhosting.com", "images.collections.yale.edu"]);   // ids.si.edu, the Nationalmuseum and Yale's IIIF server added 2026-10-23 (all send Access-Control-Allow-Origin: *)
 function glCORS(url) {
   try { return GL_CORS_HOSTS.has(new URL(String(url || ""), location.href).hostname) ? ' crossorigin="anonymous"' : ""; }
   catch (e) { return ""; }

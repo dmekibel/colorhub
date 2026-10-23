@@ -123,9 +123,14 @@ function glZoomOpen(opts) {
   // missing, the <img> doesn't just lose pixel-read access -- it fails to load AT ALL, leaving Look closer's
   // whole stage blank. One retry without crossOrigin keeps the picture visible; Pick/Where then honestly find
   // nothing to read (opts.sampleOk below), instead of a dead, unexplained gap where the painting should be.
-  if (img.crossOrigin) img.addEventListener("error", () => {
-    const src = img.src; img.crossOrigin = null; img.addEventListener("load", resetView, { once: true }); img.src = ""; img.src = src;
-  }, { once: true });
+  // opts.fallback is the smaller copy the page already shows: if the big URL fails for any reason (a host that
+  // doesn't serve that size, a dropped request) the viewer falls back to it first, then to the no-crossorigin retry.
+  let zFell = !opts.fallback, zPlain = !img.crossOrigin;
+  img.addEventListener("error", () => {
+    if (!zFell) { zFell = true; img.addEventListener("load", resetView, { once: true }); img.src = opts.fallback; return; }
+    if (zPlain) return;
+    zPlain = true; const src = img.src; img.crossOrigin = null; img.addEventListener("load", resetView, { once: true }); img.src = ""; img.src = src;
+  });
   // Opened from a map card (opts.fromRect = the card's rectangle on screen, opts.focal = the clicked point as 0..1 of the picture):
   // the picture grows out of the card and lands zoomed in on the point that was clicked (David, 2026-10-21), ~260ms ease-out, no bounce.
   const ZIN_EASE = "cubic-bezier(.2,.7,.2,1)";

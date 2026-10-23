@@ -126,7 +126,7 @@ function awFillHighlight(el) {
   const i = +b.dataset.awhl;
   glDetail(i).then(d => {
     if (!b.isConnected) return;
-    const im = b.querySelector("img"); im.src = glSmall(d) ? d.img : glBig(d.img); im.alt = d.t;
+    const im = b.querySelector("img"); im.src = glSmall(d) ? d.img : glBig(d.img); im.alt = d.t; glSharpen(im, d);
     const t = el.querySelector("[data-awhlt]"), y = glYear(i);
     if (t) t.textContent = d.t + (y ? ", " + y : "");
     b.setAttribute("aria-label", "Open " + d.t);
@@ -291,7 +291,7 @@ function awFillPortrait(el) {
   const gi = +b.dataset.pthero, im = b.querySelector("[data-ptimg]"); if (!im) return;
   glDetail(gi).then(d => {
     if (!b.isConnected) return;
-    im.src = glSmall(d) ? d.img : glBig(d.img); im.alt = d.t; b.setAttribute("aria-label", "Open " + d.t);
+    im.src = glSmall(d) ? d.img : glBig(d.img); im.alt = d.t; glSharpen(im, d); b.setAttribute("aria-label", "Open " + d.t);
     // this hero is standing in for a missing portrait (awPortraitHero): caption it as what it actually is
     const cap = b.querySelector("[data-ptnoport]");
     if (cap) { const name = cap.dataset.ptnoport, yr = glYear(gi); cap.textContent = `${d.t}${yr ? ", " + yr : ""} — no portrait of ${name} in the archive`; }
