@@ -140,6 +140,13 @@ for _k, _n, _s, _h in (("staedel", "Städel Museum, Frankfurt", "Städel", "http
                        ("wales", "Amgueddfa Cymru – Museum Wales", "Museum Wales", "https://museum.wales/art/")):
     SOURCES[_k] = dict(name=_n, short=_s, credit="public domain image (Wikimedia Commons) · CC0 data", home=_h, rec=_DE_WD)
     SOURCES[_k + "cc"] = dict(name=_n, short=_s, credit=_CC, home=_h, rec=_DE_WD)
+# 2026-10-24: Commons rows whose file carries an attribution licence, and the US museum feeds staged the same day.
+# Added after the "*2" loop for the same reason (no existing group index moves).
+SOURCES["commonscc"] = dict(SOURCES["commons"], credit="image CC BY or CC BY-SA, licence and author on its Commons file page (the link) · CC0 data (Wikidata)")
+for _k, _n, _s, _h, _r in (("yuag", "Yale University Art Gallery", "Yale Art Gallery", "https://artgallery.yale.edu/collection", "https://artgallery.yale.edu/collection/object/{num}"),
+                           ("npg", "Smithsonian National Portrait Gallery", "NPG", "https://npg.si.edu/portraits", "https://www.si.edu/object/{num}"),
+                           ("chndm", "Cooper Hewitt, Smithsonian Design Museum", "Cooper Hewitt", "https://www.cooperhewitt.org/collection/", "https://www.si.edu/object/{num}")):
+    SOURCES[_k] = dict(name=_n, short=_s, credit="CC0 (Smithsonian Open Access / museum open data)" if _k != "yuag" else "CC0 (Yale open data)", home=_h, rec=_r)
 CMA_IMG = re.compile(r"^https://openaccess-cdn\.clevelandart\.org/([^/]+)/\1_web\.jpg$")
 
 
