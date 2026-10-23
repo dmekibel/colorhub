@@ -60,7 +60,7 @@ def sparql(q, gap=1.5, tries=5):
 
 
 def api(params, gap=1.2, tries=5):
-    params = dict(params, format="json", maxlag=5)
+    params = dict(params, format="json", maxlag=int(os.environ.get("WD_MAXLAG", "5")))
     k = _key("api", params)
     if k.exists():
         return json.load(open(k))
