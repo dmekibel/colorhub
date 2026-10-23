@@ -251,6 +251,9 @@ const ICON_ADD = sv('<path d="M12 5v14M5 12h14"/>', 24, 2);
 const EYE_WORDS = { 1: "Point", 3: "Tiny", 5: "Small", 11: "Medium", 31: "Wide" };
 const eyeSizeHTML = () => `<div class="eye-size" role="group" aria-label="How many pixels to average under the circle">${EYD_SIZES.map(n => `<button type="button" data-eydsize="${n}" aria-pressed="${n === getSampleSize()}" class="${n === getSampleSize() ? "on" : ""}">${EYE_WORDS[n]}</button>`).join("")}</div><p class="eye-size-cap" id="sizeCap"></p>`;
 const eyeSizeCap = () => { const n = getSampleSize(); return n === 1 ? "Reads one pixel" : `Averages ${n} × ${n} pixels`; };
+// David, 2026-10-23 (second pass: "still hard to use and overwhelming"): the live screen is now just the picture, the
+// circle, one line saying what it is, and three buttons -- Photos, the shutter, Add. Everything else (how much to
+// average, white balance, the exposure lock, the "close read" caveat) lives behind the ⋯ button, one sheet.
 function eye(opts = {}) {
   const el = show(`
     <div class="eye-stage" id="stage">
@@ -258,19 +261,15 @@ function eye(opts = {}) {
       <i class="eye-ret" id="ret"><b class="eye-ret-h"></b><b class="eye-ret-v"></b></i>
       <i class="eye-flash" id="flash"></i>
     </div>
-    <header class="eye-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eye-hint" id="hint"><b class="eye-live-dot" id="liveDot" aria-hidden="true"></b><span id="hintText">${esc(opts.title || "Drag to move the circle")}</span></span><span class="eye-top-r"><button class="icon-btn glass eye-lock" id="lock" hidden aria-label="Lock exposure and white balance" aria-pressed="false">${ICON_LOCK}</button><button class="icon-btn glass eye-wb" id="wb" aria-label="White balance: tap, then tap something white or grey" aria-pressed="false">WB</button></span></header>
+    <header class="eye-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eye-hint" id="hint" hidden><span id="hintText"></span></span><button class="icon-btn glass" id="more" aria-label="Camera settings: how much to read, white balance">${ICON.more}</button></header>
     <div class="eye-card" id="card">
-      <button class="eye-name" id="nm"><i id="chip"></i><span><b id="big">Looking…</b><em id="src"></em></span></button>
-      <p class="eye-hex mono" id="hexline"></p>
-      <button class="eye-mine" id="mine"></button>
-      ${eyeSizeHTML()}
+      <button class="eye-read" id="nm"><i id="chip"></i><span><b id="big">Looking…</b><em class="mono" id="hexline"></em></span>${ICON.chev}</button>
       <div class="eye-picks" id="picks" hidden></div>
       <div class="eye-bar">
-        <label class="eye-side-wrap"><span class="eye-side" aria-hidden="true">${ICON_PHOTO}</span><b class="eye-lbl">Choose a photo</b><input type="file" accept="image/*" id="file" hidden></label>
-        <span class="eye-side-wrap" id="shutWrap"><button class="eye-shut" id="shut" aria-label="Take a photo"><i></i></button><b class="eye-lbl">Take photo</b></span>
-        <span class="eye-side-wrap"><button class="eye-side eye-add" id="add" aria-label="Add this color">${ICON_ADD}</button><b class="eye-lbl" id="addLbl">Add color</b></span>
+        <label class="eye-side" aria-label="Choose a photo">${ICON_PHOTO}<input type="file" accept="image/*" id="file" hidden></label>
+        <button class="eye-shut" id="shut" aria-label="Take a photo"><i></i></button>
+        <button class="eye-side eye-add" id="add" aria-label="Add this color">${ICON_ADD}</button>
       </div>
-      <p class="eye-note">Phones adjust color on their own, so this is a close read.</p>
     </div>
     <div class="eye-off" id="off" hidden>
       <p class="eyebrow" id="offEyebrow">No camera here</p>
@@ -282,9 +281,9 @@ function eye(opts = {}) {
   const $ = s => el.querySelector(s);
   const PICK = opts.pick ? { multi: !!opts.multi, list: [], onPick: opts.onPick, onDone: opts.onDone } : null;
   const list = PICK ? PICK.list : [];
-  if (PICK) { $("#shutWrap").hidden = true; $("#addLbl").textContent = PICK.multi ? "Add" : "Use this color"; }
+  if (PICK) { $("#shut").hidden = true; if (!PICK.multi) { $("#add").innerHTML = ICON.check || ICON_ADD; $("#add").setAttribute("aria-label", "Use this color"); } }
   const vid = $("#vid"), ret = $("#ret"), stage = $("#stage");
-  let stream = null, track = null, raf = 0, cur = null, smooth = null, last = 0, at = [.5, .36], wb = null, wbArm = false, hwLocked = false, drag = null;
+  let stream = null, track = null, raf = 0, cur = null, smooth = null, last = 0, at = [.5, .4], wb = null, wbArm = false, hwLocked = false, drag = null, lockable = false;
   const read = hex => wb ? wb(hex) : hex;
   const stop = () => { cancelAnimationFrame(raf); if (stream) stream.getTracks().forEach(t => t.stop()); stream = null; track = null; };
   cleanup.push(stop);
@@ -294,6 +293,9 @@ function eye(opts = {}) {
   const leaveAfter = fn => { fn(); if (app.contains(el)) go(S.tab || "explore"); };
   $("[data-back]").onclick = () => { stop(); leaveAfter(() => PICK && PICK.onDone && PICK.onDone(list.slice())); };
   loadCoreNames();
+  // a short instruction only when there is one to give (white balance armed, or a caller's own title)
+  const hint = () => { const t = wbArm ? "Tap something white or grey" : (opts.title || ""); $("#hint").hidden = !t; $("#hintText").textContent = t; };
+  hint();
 
   // the stage fraction (0..1 on screen) -> the video's own fraction, through the exact cover-crop the screen draws
   const geom = () => { const R = stage.getBoundingClientRect(), w = vid.videoWidth, h = vid.videoHeight, k = Math.max(R.width / w, R.height / h); return { R, w, h, k, ox: (R.width - w * k) / 2, oy: (R.height - h * k) / 2 }; };
@@ -305,19 +307,17 @@ function eye(opts = {}) {
     return [clamp(a2[0], .02, Math.max(.05, x)), clamp(a2[1], .02, Math.max(.05, y))];
   };
   const placeRet = instant => { ret.style.transition = instant ? "none" : ""; ret.style.left = at[0] * 100 + "%"; ret.style.top = at[1] * 100 + "%"; };
-  const syncSize = () => { $("#sizeCap").textContent = eyeSizeCap(); el.querySelectorAll("[data-eydsize]").forEach(b => { const on = +b.dataset.eydsize === getSampleSize(); b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); }); };
-  syncSize();
+  placeRet(true);
 
+  let lastName = "";
   const paint = (hex, nameHex) => {
     if (!hex) return;
-    nameHex = nameHex || hex;
-    const nm = nameOf(nameHex), nx = nm.near.find(x => x.n !== nm.n && x.de < 12);
-    cur = { hex, nm, nx };
+    const nm = nameOf(nameHex || hex);
+    cur = { hex, nm };
     ret.style.setProperty("--c", hex); $("#chip").style.setProperty("--c", hex);
     $("#big").textContent = nm.text;
-    $("#src").textContent = nm.de < VERY_CLOSE_DE ? "Nearest of about 1,000 names" : `Nearest of about 1,000 names · ${pctDiff(nm.de)}`;
     $("#hexline").textContent = hex;
-    $("#mine").innerHTML = nx ? `<i style="--c:${nx.h}"></i><span>Also near <b>${esc(nx.n)}</b></span><em>${pctDiff(nx.de)}</em>` : "";
+    if (nm.text !== lastName) { if (lastName) buzz(3); lastName = nm.text; }   // a light tick each time the name changes, so aiming can be felt
   };
   // the swatch and hex always show the RAW reading; only the name eases between readings (a Lab-smoothed point
   // feeds nameOf), so sensor noise can't flicker the name every frame without touching the sampled color itself
@@ -334,33 +334,36 @@ function eye(opts = {}) {
     raf = requestAnimationFrame(tick);
     if (!vid.videoWidth || t - last < 80) return;
     last = t; sampleNow();
-    if (typeof twLive === "function") twLive(vid, stage);   // the closest painting in the archive to what the camera sees (js/twins.js)
   };
 
-  // white balance: the next tap picks the reference. That reference keeps isoSample's bigger, noise-averaged patch.
-  const hintNow = () => $("#hintText").textContent = wbArm ? "Tap something white or grey" : (opts.title || "Drag to move the circle");
-  const wbBtn = $("#wb");
-  const setWb = f => { wb = f; wbBtn.classList.toggle("on", !!f); wbBtn.setAttribute("aria-pressed", f ? "true" : "false"); smooth = null; };
-  wbBtn.onclick = () => {
-    if (wb) { setWb(null); wbArm = false; toast("White balance off"); }
-    else { wbArm = !wbArm; wbBtn.classList.toggle("arm", wbArm); }
-    hintNow();
-  };
-  // Lock: ask the camera hardware itself to stop re-adjusting exposure and white balance, where it allows it
-  const lockBtn = $("#lock");
+  // white balance: the next tap picks the reference, read with isoSample's bigger, noise-averaged patch
+  const setWb = f => { wb = f; smooth = null; };
   const lockMode = (modes, want) => modes && modes.includes(want) ? want : null;
-  lockBtn.onclick = async () => {
+  const toggleLock = async () => {
     if (!track || typeof track.getCapabilities !== "function") return;
     const cap = track.getCapabilities(), next = !hwLocked, adv = [];
     const em = lockMode(cap.exposureMode, next ? "manual" : "continuous"), wm = lockMode(cap.whiteBalanceMode, next ? "manual" : "continuous");
     if (!em && !wm) { toast("This camera won't lock exposure or white balance"); return; }
     if (em) adv.push({ exposureMode: em });
     if (wm) adv.push({ whiteBalanceMode: wm });
-    try {
-      await track.applyConstraints({ advanced: adv });
-      hwLocked = next; lockBtn.classList.toggle("on", hwLocked); lockBtn.setAttribute("aria-pressed", String(hwLocked));
-      toast(hwLocked ? "Exposure and white balance locked" : "Back to auto"); buzz(8);
-    } catch (e) { toast("Couldn't lock this camera"); }
+    try { await track.applyConstraints({ advanced: adv }); hwLocked = next; toast(hwLocked ? "Exposure and white balance locked" : "Back to auto"); buzz(8); }
+    catch (e) { toast("Couldn't lock this camera"); }
+  };
+  // ⋯: every setting in one place, so the live screen stays clear
+  $("#more").onclick = () => {
+    const { sh, close } = sheet(`<div class="mn-confirm eye-sheet">${mnHead("Camera")}
+      <p class="eye-sh-h">How much to read under the circle</p>${eyeSizeHTML()}
+      <p class="eye-sh-h">If the colors look off</p>
+      <div class="eye-sh-acts"><button class="pv-pill${wb ? " on" : ""}" data-wb>${wb ? "White balance on · turn off" : "Set white balance"}</button>${lockable ? `<button class="pv-pill${hwLocked ? " on" : ""}" data-lock>${hwLocked ? "Locked · unlock" : "Lock exposure"}</button>` : ""}</div>
+      <p class="mn-body eye-sh-note">Phones adjust color on their own, so this is a close read, not a lab measurement.</p></div>`);
+    const sync = () => { sh.querySelector("#sizeCap").textContent = eyeSizeCap(); sh.querySelectorAll("[data-eydsize]").forEach(b => { const on = +b.dataset.eydsize === getSampleSize(); b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); }); };
+    sync();
+    sh.addEventListener("click", e => {
+      const sz = e.target.closest("[data-eydsize]");
+      if (sz) { setSampleSize(+sz.dataset.eydsize); buzz(6); sync(); sampleNow(false); return; }
+      if (e.target.closest("[data-wb]")) { close(); if (wb) { setWb(null); toast("White balance off"); } else { wbArm = true; hint(); } return; }
+      if (e.target.closest("[data-lock]")) { close(); toggleLock(); }
+    });
   };
 
   // the circle: a tap puts it there, a drag moves it by how far the finger moved (so the finger never covers it)
@@ -369,10 +372,9 @@ function eye(opts = {}) {
     if (wbArm) {
       const R = stage.getBoundingClientRect(), [fx, fy] = toNative((e.clientX - R.left) / R.width, (e.clientY - R.top) / R.height);
       const ref = vid.videoWidth ? isoSample(vid, fx, fy) : null, f = ref && wbFrom(ref);
-      wbArm = false; wbBtn.classList.remove("arm");
-      if (f) { setWb(f); toast("White set"); sampleNow(false); }
-      else toast("Too dark or too colorful. Try white or grey");
-      hintNow(); buzz(5); return;
+      wbArm = false; hint();
+      if (f) { setWb(f); toast("White set"); sampleNow(false); } else toast("Too dark or too colorful. Try white or grey");
+      buzz(5); return;
     }
     drag = { x: e.clientX, y: e.clientY, at0: at.slice(), moved: false };
     try { stage.setPointerCapture(e.pointerId); } catch (err) {}
@@ -397,26 +399,24 @@ function eye(opts = {}) {
   };
   stage.addEventListener("pointerup", endDrag); stage.addEventListener("pointercancel", endDrag);
 
-  // how many pixels to average (the shared sample size, js/eyedrop.js)
-  el.querySelectorAll("[data-eydsize]").forEach(b => b.onclick = () => { setSampleSize(+b.dataset.eydsize); buzz(6); syncSize(); sampleNow(false); });
-
-  // the shutter: a real photo. It is saved to Studio at full size and opens its own page, where it can be analyzed.
+  // the shutter: a real photo, saved to Studio, opening already reading the part under the circle (js/photos.js)
   $("#shut").onclick = () => {
     if (!vid.videoWidth) return;
     const w = vid.videoWidth, h = vid.videoHeight, k = Math.min(1, 2000 / Math.max(w, h)), c = document.createElement("canvas");
     c.width = Math.round(w * k); c.height = Math.round(h * k); c.getContext("2d").drawImage(vid, 0, 0, c.width, c.height);
+    const [sfx, sfy] = toNative(at[0], at[1]);
     vid.pause();
     if (!reduceMotion) { const fl = $("#flash"); fl.classList.remove("snap"); void fl.offsetWidth; fl.classList.add("snap"); }
     buzz(12);
-    phCaptureAndOpen(c, "From the camera", { seed: (([fx, fy]) => ({ fx, fy }))(toNative(at[0], at[1])) });   // what the circle was on becomes the first selection
+    phCaptureAndOpen(c, "From the camera", { seed: { fx: sfx, fy: sfy } });
   };
 
-  // Add color: into the strip below (a palette you build), or, in pick mode, to the caller
+  // +: into a small strip (a palette you build as you go), or, in pick mode, to the caller
   const renderPicks = () => {
     const p = $("#picks"); p.hidden = !list.length;
     p.innerHTML = list.map(h => `<i style="--c:${h}"></i>`).join("") + (!list.length ? "" : PICK
       ? (PICK.multi ? `<button class="eye-picks-done" data-act="done">Done · ${list.length}</button>` : "")
-      : `<button class="eye-picks-clear" data-act="clear">Clear</button><button class="eye-picks-done" data-act="save">Save palette · ${list.length}</button>`);
+      : `<button class="eye-picks-clear" data-act="clear">Clear</button><button class="eye-picks-done" data-act="save">Save palette</button>`);
   };
   $("#add").onclick = () => {
     if (!cur) return;
@@ -425,22 +425,20 @@ function eye(opts = {}) {
     if (list.length >= 20) return toast("That's 20 colors. Save this palette first.");
     list.push(hex); PICK && PICK.onPick && PICK.onPick(hex, { src: "camera" });
     if (typeof learnerLog === "function") learnerLog({ type: "seen", color: { n: nm.n, h: hex }, src: "camera" });
-    buzz(10); renderPicks(); toast(`${nm.text} added`);
+    buzz(10); renderPicks();
   };
   $("#picks").onclick = e => {
     const b = e.target.closest("[data-act]"); if (!b) return;
     if (b.dataset.act === "clear") { list.length = 0; buzz(6); renderPicks(); return; }
     if (b.dataset.act === "done") { buzz(10); stop(); leaveAfter(() => PICK.onDone && PICK.onDone(list.slice())); return; }
     if (b.dataset.act === "save") {
-      const cols = list.slice(); keepPalette(cols, "Eyedropper");
+      const cols = list.slice(); keepPalette(cols, "Camera");
       const kept = (S.palettes || []).find(p => p.cols.join() === cols.join());
       if (kept) { stop(); openSavedPalette(kept.id); }
     }
   };
-  // a tap on either name is a kept find: you looked, the app named it, and you chose to open it (js/learner.js learnerLog "find")
-  const logFind = (n, h) => { if (typeof learnerLog === "function") learnerLog({ type: "find", color: { n, h }, src: "camera" }); };
-  $("#nm").onclick = () => { if (!cur) return; logFind(cur.nm.n, cur.hex); openTappedColor(cur.hex); };   // one tap opens the page, not a sheet
-  $("#mine").onclick = () => { if (cur && cur.nx) { logFind(cur.nx.n, cur.nx.h); openTappedColor(cur.nx.h); } };
+  // a tap on the name opens its page: you looked, the app named it, and you chose to open it (js/learner.js "find")
+  $("#nm").onclick = () => { if (!cur) return; if (typeof learnerLog === "function") learnerLog({ type: "find", color: { n: cur.nm.n, h: cur.hex }, src: "camera" }); openTappedColor(cur.hex); };
 
   // a photo from the library goes the same road as the shutter (or, in pick mode, to the caller's drag picker)
   const fromFile = f => {
@@ -476,10 +474,7 @@ function eye(opts = {}) {
     vid.srcObject = stream; vid.play().catch(() => {});
     track = stream.getVideoTracks()[0] || null;
     if (track && typeof track.getCapabilities === "function") {
-      try {
-        const cap = track.getCapabilities();
-        if ((cap.exposureMode && cap.exposureMode.includes("manual")) || (cap.whiteBalanceMode && cap.whiteBalanceMode.includes("manual"))) lockBtn.hidden = false;
-      } catch (e) {}
+      try { const cap = track.getCapabilities(); lockable = !!((cap.exposureMode && cap.exposureMode.includes("manual")) || (cap.whiteBalanceMode && cap.whiteBalanceMode.includes("manual"))); } catch (e) {}
     }
     raf = requestAnimationFrame(tick);
   })();

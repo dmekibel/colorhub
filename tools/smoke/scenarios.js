@@ -3035,10 +3035,14 @@ scenario("studio", "camera: a refused permission gets its own fix-it message, an
   })()`);
   await t.click("[data-eye]", { wait: 500 });
   await t.waitFor("#vid", 6000, "the live camera screen");
-  t.expect(/take photo/i.test(t.$(".eye-side-wrap #shut").parentElement.textContent), "the shutter should say Take photo");
-  t.expect(!t.$("#liveDot").hidden, "the live dot should show while the feed is live");
-  t.expect(t.$$("[data-eydsize]").length === 5, "the camera should offer five sample sizes");
-  t.expect(t.$("[data-eydsize].on") && +t.$("[data-eydsize].on").dataset.eydsize > 1, "the default read should be an average, not one pixel");
+  // the live screen stays clear: the picture, one name line, three buttons; settings live behind ⋯
+  t.expect(t.$("#shut") && t.$("#add") && t.$(".eye-card label.eye-side"), "the three buttons (Photos, shutter, Add) should be there");
+  t.expect(!t.$(".eye-card [data-eydsize]"), "the sample size belongs in the ⋯ sheet, not on the live screen");
+  await t.click("#more", { wait: 300 });
+  t.expect(t.$$(".eye-sheet [data-eydsize]").length === 5, "the ⋯ sheet should offer five sample sizes");
+  t.expect(t.$(".eye-sheet [data-eydsize].on") && +t.$(".eye-sheet [data-eydsize].on").dataset.eydsize > 1, "the default read should be an average, not one pixel");
+  t.ev("(() => { const s = [...document.querySelectorAll('.scrim')].pop(); if (s) s.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, cancelable: true })); })()");
+  await t.sleep(500);
   await t.waitFor(() => t.$("#big") && t.$("#big").textContent !== "Looking…", 8000, "a live color name");
   const left = t.ev("document.getElementById('big').textContent");
   // drag the circle across the frame: the name must change (the old camera could only read the middle)
