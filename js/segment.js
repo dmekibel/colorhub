@@ -118,6 +118,13 @@ async function segFetchOne(url, onBytes) {
   return buf.buffer;
 }
 
+// true when every model file is already in the Cache API (a selection made before), so using it costs no download
+function segModelCached() {
+  if (window.__segStub) return Promise.resolve(true);
+  if (SEG_READY) return Promise.resolve(true);
+  if (typeof caches === "undefined") return Promise.resolve(false);
+  return caches.open(SEG_CACHE_NAME).then(c => Promise.all(SEG_FILES.map(f => c.match(f.url)))).then(r => r.every(Boolean)).catch(() => false);
+}
 let SEG_WORKER = null, SEG_READY = null, SEG_MSG_ID = 0;
 const SEG_PENDING = new Map();   // msg id -> { resolve, reject }
 function segRPC(type, data, transfer) {

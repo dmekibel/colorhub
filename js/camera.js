@@ -408,7 +408,7 @@ function eye(opts = {}) {
     vid.pause();
     if (!reduceMotion) { const fl = $("#flash"); fl.classList.remove("snap"); void fl.offsetWidth; fl.classList.add("snap"); }
     buzz(12);
-    phCaptureAndOpen(c, "From the camera");
+    phCaptureAndOpen(c, "From the camera", { seed: (([fx, fy]) => ({ fx, fy }))(toNative(at[0], at[1])) });   // what the circle was on becomes the first selection
   };
 
   // Add color: into the strip below (a palette you build), or, in pick mode, to the caller

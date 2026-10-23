@@ -61,12 +61,13 @@ function phDownscale(canvas, maxSide = PH_MAX_SIDE) {
 // extracted — js/studio.js extractPool(), the same pool shape js/gallery.js's glPoolDecode hands the shared
 // palette-type engine) and opens its own page. If saving fails, it falls back to the old in-memory paletteView
 // (not addressed, not kept).
-function phCaptureAndOpen(canvas, from) {
+// opts.seed {fx,fy}: a point to select straight away (the camera circle), so the photo opens already reading that part
+function phCaptureAndOpen(canvas, from, opts = {}) {
   const small = phDownscale(canvas), pool = extractPool(small);
   const id = phMakeId();
   phBlobFromCanvas(small).then(blob => phSave({ id, blob, pool, at: today(), title: "", from: from || "" }))
-    .then(rec => { XSTACK.push("ph:" + id); phOpenRecord(id, rec); })
-    .catch(() => { paletteView({ img: small.toDataURL("image/jpeg", .85), pool, from }); phWarn(); });
+    .then(rec => { XSTACK.push("ph:" + id); phOpenRecord(id, rec, opts); })
+    .catch(() => { paletteView({ img: small.toDataURL("image/jpeg", .85), pool, from, seed: opts.seed }); phWarn(); });
 }
 
 // ---------- the photo page: an address, Back one step at a time, delete with a confirm ----------
@@ -84,11 +85,11 @@ function photoPage(id, push = true) {
 }
 // the actual renderer (what router.js gives an address): kept separate from photoPage so going back to an
 // already-fetched record (xStep's "ph:" case) doesn't need to touch IndexedDB again.
-function phOpenRecord(id, rec) {
+function phOpenRecord(id, rec, opts = {}) {
   // a photo saved before 2026-10-09 has pals{3,6,10} instead of a pool: its 10-color palette stands in as a
   // pool (fewer colors than a fresh extractPool(), but every palette type still works from it)
   const pool = rec.pool || (rec.pals && (rec.pals[10] || rec.pals[6] || rec.pals[3]) || []).map(c => ({ h: c.h, share: c.share }));
-  paletteView({ img: phURL(rec), pool, from: rec.from || "Your photo", title: rec.title || "", at: rec.at, photoId: id });
+  paletteView({ img: phURL(rec), pool, from: rec.from || "Your photo", title: rec.title || "", at: rec.at, photoId: id, seed: opts.seed });
 }
 // renaming (ROADMAP.md §17 job #2): the title is tappable on the photo's own page (js/studio.js's paletteView)
 // and saves straight to IndexedDB, same record, so it shows on the shelf next time too.

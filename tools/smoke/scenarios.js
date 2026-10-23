@@ -3152,6 +3152,19 @@ scenario("studio", "photo page: Select a part by Color range (fuzziness, only to
   t.expect(t.$(".pv-img.tool-pick"), "the photo should be in eyedropper mode");
 });
 
+scenario("studio", "a camera photo opens already reading the part under the circle, with a verdict line and one-tap color suggestions", async t => {
+  await t.open("#shot=studio", { settle: 400 });
+  t.ev(`(() => { const c = document.createElement("canvas"); c.width = 300; c.height = 200; const x = c.getContext("2d");
+    x.fillStyle = "#2B2A4C"; x.fillRect(0, 0, 300, 200); x.fillStyle = "#A8323F"; x.fillRect(80, 30, 140, 150); x.fillStyle = "#7E1F2B"; x.fillRect(80, 120, 140, 60);
+    phCaptureAndOpen(c, "From the camera", { seed: { fx: .5, fy: .4 } }); })()`);
+  await t.waitFor(() => t.$(".pv-seg-cv.on") && /Selected: \d+%/.test((t.$("[data-pvseginfo]") || {}).textContent || ""), 10000, "the part under the circle selected straight away");
+  t.expect(/^Mostly /.test(t.$("[data-pvverdict]").textContent), `no verdict line: "${t.$("[data-pvverdict]").textContent}"`);
+  const chips = t.$$("[data-pvcolor]");
+  t.expect(chips.length >= 2, `Color range should suggest the photo's main colors, got ${chips.length}`);
+  await t.click(chips[chips.length - 1], { wait: 400 });
+  t.expect(t.$(".pv-seg-cv.on"), "a suggestion chip should leave a selection");
+});
+
 scenario("studio", "photo page: Select a part by Object uses the segmentation model (stubbed), with + and - taps and Undo", async t => {
   await t.open("#shot=studiopv:segment", { settle: 2400 });
   await t.waitFor(".pv-seg-cv.on", 6000, "the Color range selection first");

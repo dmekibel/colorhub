@@ -634,7 +634,7 @@ function palPhotoView(p) {
   // One soft mask (alpha 0..1 on a grid) feeds the dimmed overlay and the part's own palette.
   let tool = null, eyd = null;
   const seg = { method: S.segMethod === "color" ? "color" : "object", sign: 1, pts: [], cseeds: [], fuzz: 18, contig: true, feather: 0, fill: false,
-    prep: null, raw: null, gw: 0, gh: 0, alpha: null, frac: 0, t: 0, ready: false, busy: false, loading: false, pending: null, failed: false };
+    prep: null, raw: null, gw: 0, gh: 0, alpha: null, frac: 0, t: 0, ready: false, busy: false, loading: false, pending: null, failed: false, parts: null, partsBusy: false };
   const panel = el.querySelector("[data-pvpanel]"), note = el.querySelector("[data-pvtapnote]"), segCv = el.querySelector("[data-pvsegcv]");
   const NOTE_DEFAULT = note.textContent;
   const SEG_NOTE = { object: "Tap a thing in the photo. The AI finds its edges.", color: "Tap a color. Everything that close to it is selected." };
@@ -650,17 +650,18 @@ function palPhotoView(p) {
   const soft = (d, f) => d <= f * .5 ? 1 : d >= f ? 0 : 1 - (d - f * .5) / (f * .5);
   const colorRaw = () => {
     const P = seg.prep || (seg.prep = segPrep(img, img.naturalWidth, img.naturalHeight)), { sw, sh, L, A, B } = P, n = sw * sh, a = new Float32Array(n);
-    const plus = seg.cseeds.filter(s => s.sign), minus = seg.cseeds.filter(s => !s.sign), f = seg.fuzz;
+    const plus = seg.cseeds.filter(s => s.sign), minus = seg.cseeds.filter(s => !s.sign), f = seg.fuzz, anyHit = new Uint8Array(n);
     for (let i = 0; i < n; i++) {
       let v = 0;
-      for (const s of plus) { const d = segDe(L, A, B, i, s.lab[0], s.lab[1], s.lab[2]); const w = soft(d, f); if (w > v) v = w; }
+      for (const s of plus) { const d = segDe(L, A, B, i, s.lab[0], s.lab[1], s.lab[2]); const w = soft(d, f); if (w > v) v = w; if (s.any && w >= .5) anyHit[i] = 1; }
       for (const s of minus) { if (!v) break; v *= 1 - soft(segDe(L, A, B, i, s.lab[0], s.lab[1], s.lab[2]), f); }
       a[i] = v;
     }
     if (seg.contig && plus.length) {
       // Contiguous: keep only the regions (of the half-selected-or-more pixels) a "+" tap landed in, plus a one-pixel soft fringe
       const keep = new Uint8Array(n), stack = new Int32Array(n); let sp = 0;
-      for (const s of plus) { const i = s.iy * sw + s.ix; if (a[i] >= .5 && !keep[i]) { keep[i] = 1; stack[sp++] = i; } }
+      for (const s of plus) { if (s.any) continue; const i = s.iy * sw + s.ix; if (a[i] >= .5 && !keep[i]) { keep[i] = 1; stack[sp++] = i; } }
+      for (let i = 0; i < n; i++) if (anyHit[i] && a[i] >= .5 && !keep[i]) { keep[i] = 1; stack[sp++] = i; }   // a suggested color: every place it appears
       while (sp) {
         const i = stack[--sp], x = i % sw;
         for (const j of [x > 0 ? i - 1 : -1, x < sw - 1 ? i + 1 : -1, i - sw, i + sw]) if (j >= 0 && j < n && !keep[j] && a[j] >= .5) { keep[j] = 1; stack[sp++] = j; }
@@ -696,7 +697,15 @@ function palPhotoView(p) {
     const { alpha: a, gw, gh } = seg; if (!a) { segCv.classList.remove("on"); return; }
     segCv.width = gw; segCv.height = gh;
     const x = segCv.getContext("2d"), id = x.createImageData(gw, gh), d = id.data;
-    for (let i = 0, o = 0; i < a.length; i++, o += 4) { d[o] = 14; d[o + 1] = 13; d[o + 2] = 11; d[o + 3] = Math.round((1 - a[i]) * 165); }
+    // the edge of the selection gets a light line (about 1.5 screen pixels, whatever the mask's own size), so what's
+    // in reads at a glance instead of only by the dimming outside it
+    const t = Math.max(1, Math.round(gw / 420)), n = a.length;
+    for (let i = 0, o = 0; i < n; i++, o += 4) {
+      const inside = a[i] >= .5, x0 = i % gw;
+      const edge = inside && ((x0 >= t && a[i - t] < .5) || (x0 < gw - t && a[i + t] < .5) || (i >= gw * t && a[i - gw * t] < .5) || (i < n - gw * t && a[i + gw * t] < .5));
+      if (edge) { d[o] = 243; d[o + 1] = 243; d[o + 2] = 241; d[o + 3] = 235; }
+      else { d[o] = 14; d[o + 1] = 13; d[o + 2] = 11; d[o + 3] = Math.round((1 - a[i]) * 165); }
+    }
     x.putImageData(id, 0, 0); segCv.classList.add("on");
   };
   // the part's own pool: crop to its bounding box at (up to) 320px, clear everything outside the mask, and run the
@@ -735,14 +744,61 @@ function palPhotoView(p) {
       const np = on >= 12 ? makePool() : null;
       if (!np || !np.length) { if (segHas()) toast("That's too small to read. Tap a bigger part."); return; }
       segPool = np; pool = np; editedPal = null;
-      drawPalette();
+      drawPalette(); verdict();
     };
     if (now) apply(); else seg.t = setTimeout(apply, 140);
+  };
+  // one plain line about the part: its main color, and its shadows and lights when they read as other names
+  const verdict = () => {
+    const v = panel.querySelector("[data-pvverdict]"); if (!v) return;
+    if (!segPool || !segPool.length) { v.textContent = ""; return; }
+    const main = glPoolByArea(segPool, 1)[0], big = segPool.filter(c => c.share >= .06), nm = h => glName(h).t.toLowerCase();
+    const byL = big.slice().sort((p, q) => lab(p.h)[0] - lab(q.h)[0]), dark = byL[0], light = byL[byL.length - 1];
+    const bits = [`Mostly ${nm(main.h)}`];
+    if (dark && nm(dark.h) !== nm(main.h)) bits.push(`${nm(dark.h)} in the shadows`);
+    if (light && light !== dark && nm(light.h) !== nm(main.h)) bits.push(`${nm(light.h)} in the light`);
+    v.textContent = bits.join(", ").replace(/, ([^,]*)$/, bits.length > 2 ? ", and $1" : ", $1") + ".";
+  };
+  // ----- one-tap suggestions: parts the AI finds by itself (Object), or the photo's own main colors (Color range) -----
+  const partsHTML = () => {
+    if (seg.method === "color") {
+      const top = glPoolByArea(basePool, 6).filter(c => c.share >= .03).slice(0, 4);
+      return top.map(c => `<button class="pv-chip" data-pvcolor="${c.h}"><i style="--c:${c.h}"></i>${esc(glName(c.h).t)}</button>`).join("");
+    }
+    if (!seg.ready) return "";
+    if (!seg.parts) return `<span class="pv-chip-wait">Finding parts…</span>`;
+    return seg.parts.map((q, i) => `<button class="pv-chip" data-pvpart="${i}"><i style="--c:${q.h}"></i>${esc(glName(q.h).t)}<em>${Math.round(q.frac * 100)}%</em></button>`).join("");
+  };
+  const partsDraw = () => { const h = panel.querySelector("[data-pvsugg]"); if (h) { h.innerHTML = partsHTML(); h.hidden = !h.innerHTML; } };
+  // Object: probe a 3x3 grid of points with the model, keep the distinct sizable shapes (overlap under 60%), biggest first
+  const findParts = async () => {
+    if (seg.parts || seg.partsBusy || !seg.ready) return;
+    seg.partsBusy = true;
+    const found = [];
+    try {
+      if (!SEG_CUR || SEG_CUR.src !== img.src) await segEncode(img);
+      for (const fy of [.25, .5, .75]) for (const fx of [.25, .5, .75]) {
+        if (!el.isConnected) return;
+        const { mask, mw, mh } = await segDecode([{ x: fx * SEG_CUR.rw, y: fy * SEG_CUR.rh, label: 1 }]);
+        const bin = new Uint8Array(mw * mh); let area = 0;
+        for (let i = 0; i < bin.length; i++) if (mask[i] > 0) { bin[i] = 1; area++; }
+        const frac = area / bin.length;
+        if (frac < .02 || frac > .9) continue;
+        if (found.some(q => { let both = 0, either = 0; for (let i = 0; i < bin.length; i += 3) { if (bin[i] && q.bin[i]) both++; if (bin[i] || q.bin[i]) either++; } return either && both / either > .6; })) continue;
+        const pl = segPoolFromMask(mask, mw, mh);
+        if (pl.length) found.push({ fx, fy, frac, bin, h: pl.reduce((a, b) => b.share > a.share ? b : a).h });
+      }
+    } catch (e) {}
+    seg.partsBusy = false;
+    // two shapes that read as the same color name would make two identical chips ("Ecru", "Ecru"): keep the bigger one
+    const seen = new Set();
+    seg.parts = found.sort((p, q) => q.frac - p.frac).filter(q => { const k = glName(q.h).t; if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, 4);
+    if (seg.method === "object" && tool === "seg") partsDraw();
   };
   const segReset = () => {
     seg.pts = []; seg.cseeds = []; seg.raw = null; seg.alpha = null; seg.frac = 0; clearTimeout(seg.t);
     segCv.classList.remove("on"); segPool = null; pool = basePool; editedPal = null;
-    segInfo(); drawPalette();
+    segInfo(); drawPalette(); verdict();
   };
   // ----- Object: MobileSAM, downloaded once (~46 MB, cached), the photo encoded once, then every tap is fast -----
   const objEnsure = () => {
@@ -757,7 +813,8 @@ function palPhotoView(p) {
       say(`Downloading the selection AI · ${Math.round(frac * 100)}% of ${mb} MB, just once`);
     }).then(() => { const pr = panel.querySelector("[data-pvprog]"); if (pr) pr.hidden = true; say("Reading this photo…"); return segEncode(img); })
       .then(() => {
-        seg.ready = true; seg.loading = false; if (mine()) segInfo();
+        seg.ready = true; seg.loading = false; if (mine()) { segInfo(); partsDraw(); }
+        findParts();
         if (seg.pending) { const p = seg.pending; seg.pending = null; objTap(p[0], p[1]); }
       })
       .catch(() => {
@@ -807,7 +864,9 @@ function palPhotoView(p) {
   const segPanelHTML = () => `
     <div class="seg pv-method" role="group" aria-label="How to select">${[["object", "Object"], ["color", "Color range"]].map(([k, t]) => `<button data-pvm="${k}" class="${seg.method === k ? "on" : ""}" aria-pressed="${seg.method === k}">${t}</button>`).join("")}</div>
     <p class="pv-seginfo" data-pvseginfo></p>
+    <p class="pv-verdict" data-pvverdict></p>
     <i class="pv-prog" data-pvprog hidden></i>
+    <div class="pv-sugg" data-pvsugg aria-label="Suggested parts"></div>
     <div class="pv-acts pv-acts4">
       <button class="pv-pill${seg.sign ? " on" : ""}" data-pvsign="1" aria-pressed="${!!seg.sign}">+ Add</button>
       <button class="pv-pill${seg.sign ? "" : " on"}" data-pvsign="0" aria-pressed="${!seg.sign}">− Remove</button>
@@ -824,7 +883,7 @@ function palPhotoView(p) {
     if (m === "object" && seg.failed) { toast("The selection AI isn't available here."); m = "color"; }
     seg.method = m; S.segMethod = m; save();
     segReset();
-    panel.innerHTML = segPanelHTML(); segInfo();
+    panel.innerHTML = segPanelHTML(); segInfo(); partsDraw(); verdict();
     note.textContent = SEG_NOTE[m];
     if (m === "object") objEnsure();
   }
@@ -844,7 +903,7 @@ function palPhotoView(p) {
       if (mode !== "pick") setMode("pick");
     } else if (tool === "seg") {
       note.textContent = SEG_NOTE[seg.method];
-      panel.innerHTML = segPanelHTML(); segInfo();
+      panel.innerHTML = segPanelHTML(); segInfo(); partsDraw(); verdict();
       if (seg.method === "object") objEnsure();
     } else {
       note.textContent = NOTE_DEFAULT;
@@ -860,6 +919,10 @@ function palPhotoView(p) {
     const mb = e.target.closest("[data-pvm]"); if (mb) { if (mb.dataset.pvm !== seg.method) { setMethod(mb.dataset.pvm); buzz(5); } return; }
     const sg = e.target.closest("[data-pvsign]");
     if (sg) { seg.sign = +sg.dataset.pvsign; panel.querySelectorAll("[data-pvsign]").forEach(b => { const on = +b.dataset.pvsign === seg.sign; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); }); buzz(5); return; }
+    const pc = e.target.closest("[data-pvcolor]");
+    if (pc) { seg.cseeds = [{ ix: 0, iy: 0, lab: lab(pc.dataset.pvcolor), sign: 1, any: true }]; if (!seg.prep) seg.prep = segPrep(img, img.naturalWidth, img.naturalHeight); buzz(8); seg.raw = colorRaw(); refresh(true); return; }
+    const pp = e.target.closest("[data-pvpart]");
+    if (pp && seg.parts) { const q = seg.parts[+pp.dataset.pvpart]; if (q && !seg.busy) { seg.pts = [{ fx: q.fx, fy: q.fy, sign: 1 }]; buzz(8); objDecode(); } return; }
     if (e.target.closest("[data-pvundo]")) { if (segHas()) segUndo(); return; }
     if (e.target.closest("[data-pvsegclear]")) { segReset(); buzz(6); return; }
     const ct = e.target.closest("[data-pvcontig]");
@@ -876,6 +939,17 @@ function palPhotoView(p) {
       refresh(false);
     }
   });
+  // the camera's circle (js/camera.js, through js/photos.js): the photo opens already reading that part. Object when
+  // the AI is already on this phone (no surprise 46 MB download), Color range otherwise; the choice isn't saved.
+  if (p.seed) {
+    const go1 = () => typeof segModelCached === "function" ? segModelCached().then(ok => {
+      if (!el.isConnected) return;
+      seg.method = ok && !seg.failed ? "object" : "color";
+      setTool("seg"); segTap(p.seed.fx, p.seed.fy);
+      const top = el.querySelector(".pv-img"); if (top && top.scrollIntoView) top.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
+    }) : null;
+    if (img.complete && img.naturalWidth) go1(); else img.addEventListener("load", go1, { once: true });
+  }
   cleanup.push(() => { if (eyd) eyd.detach(); });
   el._pvSegTap = segTap;   // design review (js/boot.js studiopv:segment) taps a part without a finger
   el._pvSetTool = setTool;
