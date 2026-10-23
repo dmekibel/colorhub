@@ -37,7 +37,7 @@ function dnTarget(k = today(), list = CORE_NAMES) {
   const o = dnOrder(list), n = chNumber(k) - 1;
   return o[((n % o.length) + o.length) % o.length];
 }
-const dnZone = h => { h = (h + 360) % 360; return h < 55 || h >= 345 ? "redder" : h < 130 ? "yellower" : h < 190 ? "greener" : h < 280 ? "bluer" : "purpler"; };
+const dnZone = hueZoneWord;
 const dnNextZone = (h, s) => { const z0 = dnZone(h); for (let d = 1; d < 360; d++) { const z = dnZone(h + s * d); if (z !== z0) return z; } return z0; };
 // Which way today's color (t) lies from a guess (g), per axis. Each axis: { st: same|near|far, word, v }.
 function dnAxes(g, t) {

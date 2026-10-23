@@ -39,7 +39,12 @@ const VERY_CLOSE_DE = 3, NEAR_DE = 8;   // ROADMAP §13's thresholds
 // leans. Exactly one modifier, picked from whichever of lightness/chroma/hue is the biggest difference between
 // the target color and its nearest name — the same "biggest difference wins" weighting as lookDiff()
 // (js/lookalikes.js), just producing one absolute word ("pale salmon") instead of a comparative sentence.
-const hueLean = h => { h = (h + 360) % 360; return h < 40 || h >= 345 ? "reddish" : h < 100 ? "yellowish" : h < 170 ? "greenish" : h < 260 ? "bluish" : "purplish"; };
+// David, 2026-10-23: "Reddish old pink" for #C09DA4 was wrong. In CIELAB, red sits at hue ~25-40 degrees; pinks, roses and
+// raspberries sit at 0-25, and hot pink / magenta wrap past 340 and on to ~330. Moving a pink toward a LOWER hue
+// moves it toward magenta (rosier, more purple), never toward red. So "red" begins at hue 15, and below that (through
+// the wrap down to 280) the direction word is purpler. One shared vocabulary for every comparison sentence.
+const hueZoneWord = h => { h = (h + 360) % 360; return h >= 15 && h < 55 ? "redder" : h >= 55 && h < 130 ? "yellower" : h >= 130 && h < 190 ? "greener" : h >= 190 && h < 280 ? "bluer" : "purpler"; };
+const hueLean = h => { h = (h + 360) % 360; return h >= 15 && h < 40 ? "reddish" : h >= 40 && h < 100 ? "yellowish" : h >= 100 && h < 170 ? "greenish" : h >= 170 && h < 260 ? "bluish" : "purplish"; };
 // Words a name may already carry, by axis: a modifier never doubles up on its own axis ("pale dark jungle green").
 const MOD_AXIS_WORDS = { L: /\b(light|pale|dark|deep|dusky|bright)\b/i, C: /\b(grey|gray|greyish|grayish|dusty|dull|vivid|bright|neon|electric)\b/i,
   H: /\b(reddish|yellowish|greenish|bluish|purplish|orangish|pinkish)\b/i };
@@ -169,7 +174,7 @@ function jpNoteLine(notes) {
 // Also how crowded this corner of color is: the names within a small ΔE. A direction with nothing in reach
 // (cap 25 ΔE) comes back null: a gap in our names, not in English.
 const COMPASS_CAP = 25, COMPASS_CROWD_DE = 5;
-const compassHueWord = h => { h = (h + 360) % 360; return h < 55 || h >= 345 ? "redder" : h < 130 ? "yellower" : h < 190 ? "greener" : h < 280 ? "bluer" : "purpler"; };
+const compassHueWord = hueZoneWord;
 const compassHasLibrary = () => typeof LONG_NAMES !== "undefined" && !!LONG_NAMES;
 function compassOf(hex, selfName) {
   hex = String(hex).toUpperCase();

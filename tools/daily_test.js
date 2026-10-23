@@ -97,7 +97,7 @@ const day = n => run(`addDays("2026-10-07", ${n})`);
       ok(["redder", "yellower", "greener", "bluer", "purpler"].includes(a.H.word), `${g}->${t}: hue word "${a.H.word}"`);
       // the word names the hue zone (the same zones as lookDiff) the guess turns into, going the way today's hue
       // lies; for a turn over 60 degrees, the zone today's hue sits in
-      const Z = [[55, "redder"], [130, "yellower"], [190, "greener"], [280, "bluer"], [345, "purpler"], [361, "redder"]];
+      const Z = [[15, "purpler"], [55, "redder"], [130, "yellower"], [190, "greener"], [280, "bluer"], [361, "purpler"]];
       const zone = h => { h = ((h % 360) + 360) % 360; return Z.find(z => h < z[0])[1]; };
       const hg = Math.atan2(bg, ag) * 180 / Math.PI, ht = Math.atan2(bt, at) * 180 / Math.PI;
       let dh = ht - hg; if (dh > 180) dh -= 360; if (dh < -180) dh += 360;

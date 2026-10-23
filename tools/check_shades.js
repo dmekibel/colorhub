@@ -14,7 +14,7 @@ const shadesFile = path.join(ROOT, "data", "shades.json");
 const VERY_CLOSE_DE = 3, NEAR_DE = 8;   // js/naming.js
 const MOD_AXIS_WORDS = { L: /\b(light|pale|dark|deep|dusky|bright)\b/i, C: /\b(grey|gray|greyish|grayish|dusty|dull|vivid|bright|neon|electric)\b/i,
   H: /\b(reddish|yellowish|greenish|bluish|purplish|orangish|pinkish)\b/i };
-const hueLean = h => { h = (h + 360) % 360; return h < 40 || h >= 345 ? "reddish" : h < 100 ? "yellowish" : h < 170 ? "greenish" : h < 260 ? "bluish" : "purplish"; };
+const hueLean = h => { h = (h + 360) % 360; return h >= 15 && h < 40 ? "reddish" : h >= 40 && h < 100 ? "yellowish" : h >= 100 && h < 170 ? "greenish" : h >= 170 && h < 260 ? "bluish" : "purplish"; };
 
 // pickModifier, ported 1:1 from js/naming.js
 function pickModifier(nameLch, targetLch, name = "") {

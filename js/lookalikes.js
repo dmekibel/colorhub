@@ -20,7 +20,7 @@ function lookDiff(a, b) {
   let dH = Hb - Ha; if (dH > 180) dH -= 360; if (dH < -180) dH += 360;
   // one fixed hue vocabulary, the way Webster's Third / Godlove defined colors: redder, yellower, greener, bluer, purpler
   // (never "more teal": a direction word must not be a color name, or "teal is more teal than viridian" happens)
-  const hueWord = h => { h = (h + 360) % 360; return h < 55 || h >= 345 ? "redder" : h < 130 ? "yellower" : h < 190 ? "greener" : h < 280 ? "bluer" : "purpler"; };
+  const hueWord = hueZoneWord;
   const parts = [];
   if (Math.abs(dL) >= 4) parts.push([Math.abs(dL), dL > 0 ? "lighter" : "darker"]);
   if (Math.abs(dC) >= 5) parts.push([Math.abs(dC) * .8, dC > 0 ? "more vivid" : "duller"]);
