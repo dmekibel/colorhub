@@ -3122,22 +3122,47 @@ scenario("studio", "Select a part: the grown region stays inside the dress, and 
   t.expect(Math.abs(r.hiSum - 1) < .01, `shares at the max don't sum to 100% (${r.hiSum})`);
 });
 
-scenario("studio", "photo page: Select a part tints the rest away and re-reads the palette of just that part; Eyedropper owns the drag", async t => {
-  await t.open("#shot=studiopv:segment", { settle: 2200 });
+scenario("studio", "photo page: Select a part by Color range (fuzziness, only touching areas, fill holes, feather) reads just that part; Eyedropper owns the drag", async t => {
+  await t.open("#shot=studiopv:segment", { settle: 2400 });
   await t.waitFor(".pv-seg-cv.on", 6000, "the selected-part overlay");
+  t.expect(t.$('[data-pvm="color"].on'), "the design-review shot should be in Color range");
   t.expect(/Selected: \d+% of the photo/.test(t.$("[data-pvseginfo]").textContent), `no selection readout: "${t.$("[data-pvseginfo]") && t.$("[data-pvseginfo]").textContent}"`);
-  const names = t.$$("[data-pvrows] .pal-name b").map(b => b.textContent).join(" | ");
-  const hexes = t.$$("[data-pvrows] .pal-name em").map(b => b.textContent);
-  t.expect(hexes.length >= 2, `the part's palette should list its shades, got ${hexes.length}`);
-  // every shade of the dress is a red: no navy ground, skin or grey leaks in
-  const bad = hexes.filter(h => { const [r, g, b] = [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)); return !(r > g * 1.6 && r > b * 1.4); });
-  t.expect(!bad.length, `colors outside the dress leaked into its palette: ${bad.join(" ")} (${names})`);
+  const reds = () => t.$$("[data-pvrows] .pal-name em").map(b => b.textContent);
+  const isRed = h => { const [r, g, b] = [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)); return r > g * 1.6 && r > b * 1.4; };
+  t.expect(reds().length >= 2, `the part's palette should list its shades, got ${reds().length}`);
+  t.expect(reds().every(isRed), `colors outside the dress leaked into its palette: ${reds().join(" ")}`);
+  const pct = () => +(t.$("[data-pvseginfo]").textContent.match(/(\d+)%/) || [0, 0])[1];
+  const p0 = pct();
+  // the dark fold is a hole in a tight color selection: Fill holes must take it in
+  const fz = t.$("[data-pvfuzz]"); fz.value = 10; fz.dispatchEvent(new Event("input", { bubbles: true })); await t.sleep(300);
+  const pTight = pct();
+  await t.click("[data-pvfill]", { wait: 300 });
+  t.expect(pct() >= pTight, `Fill holes should never shrink the selection (${pTight}% -> ${pct()}%)`);
+  // Only touching areas off: the same colors anywhere in the photo count too, so it can only grow or stay
+  await t.click("[data-pvcontig]", { wait: 300 });
+  t.expect(t.$("[data-pvcontig][aria-pressed=false]"), "Only touching areas didn't turn off");
+  const fe = t.$("[data-pvfeather]"); fe.value = 6; fe.dispatchEvent(new Event("input", { bubbles: true })); await t.sleep(300);
+  t.expect(t.$("[data-pvfeatherv]").textContent === "6", "Feather value not shown");
+  t.expect(p0 > 0, "nothing was selected at first");
   await t.click("[data-pvsegclear]", { wait: 300 });
   t.expect(!t.$(".pv-seg-cv.on"), "Clear should remove the overlay");
   t.expect(t.$$("[data-pvrows] .pal-name").length >= 3, "Clear should bring back the whole photo's palette");
   await t.click('[data-pvt="pick"]', { wait: 300 });
   t.expect(t.$("[data-pvpanel] [data-eydsize]"), "the Eyedropper tool should offer the sample size");
   t.expect(t.$(".pv-img.tool-pick"), "the photo should be in eyedropper mode");
+});
+
+scenario("studio", "photo page: Select a part by Object uses the segmentation model (stubbed), with + and - taps and Undo", async t => {
+  await t.open("#shot=studiopv:segment", { settle: 2400 });
+  await t.waitFor(".pv-seg-cv.on", 6000, "the Color range selection first");
+  t.ev('window.__segStub = true; const e = document.querySelector(".screen.studio"); e._pvSetMethod("object"); setTimeout(() => e._pvSegTap(.3, .5), 300)');
+  await t.waitFor(() => t.$(".pv-seg-cv.on") && /Selected: \d+%/.test(t.$("[data-pvseginfo]").textContent), 8000, "the AI selection overlay");
+  t.expect(t.$('[data-pvm="object"].on'), "Object should be the method");
+  t.expect(/Selected: \d+%/.test(t.$("[data-pvseginfo]").textContent), "no selection readout for Object");
+  await t.click('[data-pvsign="0"]', { wait: 150 });
+  t.ev('document.querySelector(".screen.studio")._pvSegTap(.32, .52)'); await t.sleep(400);
+  await t.click("[data-pvundo]", { wait: 400 });
+  t.expect(t.$(".pv-seg-cv.on"), "Undo of the - tap should keep the first selection");
 });
 
 scenario("studio", "photo palette: mode chips, slider and a chip opens its page", async t => {

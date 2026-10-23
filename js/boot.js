@@ -85,9 +85,10 @@ function shot(name) {
     // a Studio photo palette, for design review (ROADMAP §17 job #1 screenshots): a synthetic canvas run
     // through the real extractPalette()/studioFromImage(), never a saved or uploaded photo
     case "studiopv": {
+      const [arg1, arg2] = (arg || "").split(":");   // studiopv:segment[:object]
       const c = document.createElement("canvas"); c.width = 300; c.height = 200;
       const x = c.getContext("2d");
-      if (arg === "segment") {
+      if (arg1 === "segment") {
         // studiopv:segment -- design review of Select a part (js/studio.js palPhotoView): a red "dress" with a fold
         // on a navy ground with a skin patch and a grey patch, the tool tapped on the dress
         x.fillStyle = "#2B2A4C"; x.fillRect(0, 0, 300, 200);
@@ -99,8 +100,8 @@ function shot(name) {
          ["#3F7C8C", 100, 110, 100, 90], ["#8C5E58", 200, 110, 100, 90]].forEach(([h, bx, by, bw, bh]) => { x.fillStyle = h; x.fillRect(bx, by, bw, bh); });
       }
       studioFromImage(c, "From a photo");
-      if (arg === "segment") later2(() => { const e = document.querySelector(".screen.studio"); if (e && e._pvSetTool) { e._pvSetTool("seg"); e._pvSegTap(.3, .5); } }, 900);
-      if (arg === "pick") later2(() => { const e = document.querySelector(".screen.studio"); if (e && e._pvSetTool) e._pvSetTool("pick"); }, 700);
+      if (arg1 === "segment") later2(() => { const e = document.querySelector(".screen.studio"); if (e && e._pvSetTool) { e._pvSetTool("seg"); e._pvSetMethod(arg2 === "object" ? "object" : "color"); later2(() => e._pvSegTap(.3, .5), 300); } }, 900);
+      if (arg1 === "pick") later2(() => { const e = document.querySelector(".screen.studio"); if (e && e._pvSetTool) e._pvSetTool("pick"); }, 700);
       return;
     }
     // the camera eye (js/camera.js), for design-review screenshots only: eye stands in a fake camera stream (a
