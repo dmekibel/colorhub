@@ -3351,7 +3351,13 @@ scenario("studio", "Isolator: guess, reveal alone, hold to see it back, try anot
   await t.open("#shot=studiopv", { settle: 900 });
   const img = await t.waitFor(() => { const i = t.$(".pv-img img"); return i && i.complete && i.naturalWidth ? i : null; }, 8000, "the photo");
   const r = img.getBoundingClientRect();
+  // David, 2026-10-23: a tap on a photo picks a color now; it must never open the quiz
   img.dispatchEvent(new t.w.MouseEvent("click", { bubbles: true, clientX: r.left + r.width * .5, clientY: r.top + r.height * .5, view: t.w }));
+  await t.sleep(500);
+  t.expect(!t.$(".iso"), "a tap on the photo opened the guess-the-name quiz instead of the color picker");
+  t.expect(t.$(".pv-img.tool-pick"), "the photo should open with the Eyedropper on");
+  // the Isolator itself still works where it's opened on purpose
+  t.ev(`isoOpen({ src: document.querySelector(".pv-img img"), fx: .5, fy: .5, from: "photo", ref: "photo" })`);
   await t.waitFor(".iso .iso-opts button", 6000, "the four options");
   t.expect(t.$$(".iso-opts button").length >= 3, "fewer than three options");
   await t.click(".iso-opts button", { force: true, wait: 700 });

@@ -415,7 +415,7 @@ function palPhotoView(p) {
     ${titleKind ? `<button class="pv-title${curTitle ? "" : " ph"}" data-rename aria-label="Rename">${esc(curTitle || titlePlaceholder)}</button>` : `<p class="eyebrow">${esc(p.from || "Photo")}</p>`}
     <div class="gl-pal-wrap">
     <div class="pv-img" id="himg"><img src="${p.img}" alt="Your photo"><canvas class="gl-lit-cv" data-pvlitcv aria-hidden="true"></canvas><canvas class="pv-seg-cv" data-pvsegcv aria-hidden="true"></canvas><div class="gl-mks" data-pvmks></div></div>
-    <p class="pv-tapnote" data-pvtapnote>Tap the photo to guess a spot's name, then see it alone.</p>
+    <p class="pv-tapnote" data-pvtapnote>Press and drag over the photo. Let go to add the color.</p>
     <div class="pv-tools"><div class="seg" role="group" aria-label="Tools" data-pvtools><button data-pvt="pick" aria-pressed="false">Eyedropper</button><button data-pvt="seg" aria-pressed="false">Select a part</button></div></div>
     <div class="pv-panel" data-pvpanel hidden></div>
     <div class="gl-pal-ui">
@@ -570,7 +570,7 @@ function palPhotoView(p) {
         sxPick(c.h, { title: "Replace with", onPick: h2 => { const next = pal.slice(); next[j] = { ...c, h: h2 }; pushUndo(`Replaced ${nm.t}`); editedPal = next; drawPalette(); buzz(8); toast(`Replaced ${nm.t}`, { undo: doUndo }); } });
         return;
       }
-      if (e.target.closest("[data-frompic]")) { frompic = j; close(); toast("Tap the photo to pick the new color"); }
+      if (e.target.closest("[data-frompic]")) { frompic = j; close(); setTool("pick"); toast("Tap the photo to pick the new color"); }
     };
   };
   el.querySelector("[data-pvedit]").onclick = e => {
@@ -616,8 +616,8 @@ function palPhotoView(p) {
       const j = frompic; frompic = null; const pal = (editedPal || curSet().pal).slice(), c = pal[j]; if (!c) return;
       pushUndo(`Replaced ${glName(c.h).t}`); pal[j] = { ...c, h: hex }; editedPal = pal; buzz(8); drawPalette(); toast("Replaced", { undo: doUndo }); return;
     }
-    if (mode === "pick") { if (!picks.includes(hex) && picks.length < 12) picks.push(hex); buzz(6); drawPalette(); return; }
-    if (typeof isoOpen === "function") { buzz(6); isoOpen({ src: img, fx: (e.clientX - r.left) / r.width, fy: (e.clientY - r.top) / r.height, from: "photo", ref: p.photoId != null ? "photo:" + p.photoId : "photo" }); }
+    if (mode === "pick") { if (!picks.includes(hex) && picks.length < 12) picks.push(hex); buzz(6); drawPalette(); }
+    // David, 2026-10-23: a tap on a photo never opens the guess-the-name quiz (the Isolator) any more; it picks
   });
 
   // ---------- the two tools on the photo (David, 2026-10-23) ----------
@@ -639,6 +639,11 @@ function palPhotoView(p) {
   const NOTE_DEFAULT = note.textContent;
   const SEG_NOTE = { object: "Tap a thing in the photo. The AI finds its edges.", color: "Tap a color. Everything that close to it is selected." };
   const addPick = hex => {
+    // Edit's "Pick from the photo" (frompic) takes the next pick as the replacement color, whatever tool is on
+    if (frompic != null) {
+      const j = frompic; frompic = null; const pal = (editedPal || curSet().pal).slice(), c = pal[j]; if (!c) return;
+      pushUndo(`Replaced ${glName(c.h).t}`); pal[j] = { ...c, h: hex }; editedPal = pal; buzz(8); drawPalette(); toast("Replaced", { undo: doUndo }); return;
+    }
     if (picks.includes(hex)) { buzz(4); return; }
     if (picks.length >= 12) { toast("12 colors is the most. Start over to pick more."); return; }
     picks.push(hex);
@@ -888,8 +893,10 @@ function palPhotoView(p) {
     if (m === "object") objEnsure();
   }
   const sizeSync = () => { const c = panel.querySelector("#sizeCap"); if (c) c.textContent = eyeSizeCap(); panel.querySelectorAll("[data-eydsize]").forEach(b => { const on = +b.dataset.eydsize === getSampleSize(); b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); }); };
+  // one tool is always on (David, 2026-10-23: "when you click on the photo it opens a quiz instead of the color
+  // picker"): Eyedropper by default, Select a part when chosen or when a camera photo opens on the circle's part
   function setTool(t) {
-    if (t === tool) t = null;
+    if (t === tool) return;
     tool = t;
     if (eyd) { eyd.detach(); eyd = null; }
     span.classList.toggle("tool-pick", tool === "pick"); span.classList.toggle("tool-seg", tool === "seg");
@@ -899,8 +906,7 @@ function palPhotoView(p) {
       note.textContent = "Press and drag over the photo. Let go to add the color.";
       panel.innerHTML = `<p class="pv-panel-cap">Average of</p>${eyeSizeHTML()}`;
       eyd = eyedropAttach(img, { onPick: addPick });
-      sizeSync();
-      if (mode !== "pick") setMode("pick");
+      sizeSync();   // the palette stays as computed until the first pick switches it to "Pick from it" (addPick)
     } else if (tool === "seg") {
       note.textContent = SEG_NOTE[seg.method];
       panel.innerHTML = segPanelHTML(); segInfo(); partsDraw(); verdict();
@@ -949,7 +955,7 @@ function palPhotoView(p) {
       const top = el.querySelector(".pv-img"); if (top && top.scrollIntoView) top.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
     }) : null;
     if (img.complete && img.naturalWidth) go1(); else img.addEventListener("load", go1, { once: true });
-  }
+  } else setTool("pick");   // an uploaded photo opens ready to pick, the same page a camera photo opens on
   cleanup.push(() => { if (eyd) eyd.detach(); });
   el._pvSegTap = segTap;   // design review (js/boot.js studiopv:segment) taps a part without a finger
   el._pvSetTool = setTool;
@@ -974,7 +980,7 @@ function paletteView(p) {
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Studio · ${esc(p.from || "Palette")}${p.at ? " · " + esc(p.at) : ""}</span><span style="width:44px"></span></header>
     ${titleKind ? `<button class="pv-title${curTitle ? "" : " ph"}" data-rename aria-label="Rename">${esc(curTitle || titlePlaceholder)}</button>` : ""}
-    ${hasImg ? `<div class="pv-img"><img src="${p.img}" alt="Your photo. Tap a spot to guess its name."><div id="dots"></div></div><p class="pv-tapnote">Tap a spot in the photo to guess its name, then see it alone.</p>` : ""}
+    ${hasImg ? `<div class="pv-img"><img src="${p.img}" alt="Your photo. Tap a spot to guess its name."><div id="dots"></div></div><p class="pv-tapnote">Press and drag over the photo to pick a color.</p>` : ""}
     <div class="pv-ctrl">
       ${hasImg ? `<div class="seg" id="cnt">${counts.map(k => `<button class="${k === n ? "on" : ""}" data-n="${k}">${k}</button>`).join("")}</div>` : ""}
       <div class="seg" id="look">${[["stripes", "Stripes"], ["weighted", "By area"], ["chips", "Chips"]].filter(x => hasImg || x[0] !== "weighted").map(([k, t]) => `<button class="${k === look ? "on" : ""}" data-look="${k}">${t}</button>`).join("")}</div>
@@ -1044,15 +1050,9 @@ function paletteView(p) {
   exLongCopy(el.querySelector("#hlist"));   // one tap opens the color's page; press and hold copies the hex
   const hexes = () => colsNow().map(c => c.h);
   el.querySelector("[data-export]").onclick = () => exOpenSheet({ cols: colsNow(), title: curTitle || p.from || "Palette" });
-  // the Isolator: tap a spot on the photo, guess its name, then see it alone on grey (js/isolate.js)
+  // a tap on the photo picks a color (the shared eyedropper, js/eyedrop.js), never the guess-the-name quiz
   const pvImg = el.querySelector(".pv-img img");
-  if (pvImg) pvImg.addEventListener("click", e => {
-    if (typeof isoOpen !== "function" || !pvImg.naturalWidth) return;
-    const r = pvImg.getBoundingClientRect(), k = Math.min(r.width / pvImg.naturalWidth, r.height / pvImg.naturalHeight), dw = pvImg.naturalWidth * k, dh = pvImg.naturalHeight * k;
-    const fx = (e.clientX - r.left - (r.width - dw) / 2) / dw, fy = (e.clientY - r.top - (r.height - dh) / 2) / dh;
-    if (fx < 0 || fx > 1 || fy < 0 || fy > 1) return;
-    isoOpen({ src: pvImg, fx, fy, from: "photo", ref: p.photoId != null ? "photo:" + p.photoId : "photo" });
-  });
+  if (pvImg && typeof eyedropAttach === "function") { const d = eyedropAttach(pvImg, {}); cleanup.push(() => d.detach()); pvImg.style.touchAction = "none"; }
   el.querySelector("[data-keep]").onclick = e => { if (p.savedId != null) return; keepPalette(hexes(), p.from || "Palette"); e.currentTarget.textContent = "Kept"; };
   el.querySelector("[data-share]").onclick = () => sharePalette(colsNow(), curTitle || p.from, named);
   const del = el.querySelector("[data-del]");
