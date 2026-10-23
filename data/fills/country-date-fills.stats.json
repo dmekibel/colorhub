@@ -1,158 +1,233 @@
 {
- "rows": 105219,
- "missing_country": 66810,
- "missing_year": 20419,
- "impossible_year_rows": 361,
- "artists_resolved": 2866,
- "artists_rejected": 3,
+ "rows": 190808,
+ "missing_country": 24563,
+ "missing_year": 27228,
+ "impossible_year_rows": 1114,
+ "artists_resolved": 5833,
+ "artists_rejected": 23,
  "p571_outcomes": {
-  "p571-none": 7797,
-  "p571-implausible": 170,
-  "p571-ok": 22,
+  "p571-none": 15114,
+  "p571-implausible": 296,
+  "p571-ok": 34,
   "p571-ambiguous": 5,
-  "p571-file-date": 12785
+  "p571-file-date": 12891
  },
  "unmapped_wikidata_country_labels": [
   [
-   "Kingdom of Galicia and Lodomeria",
-   3
+   "New Spain",
+   26
   ],
   [
-   "Byzantine Empire",
-   2
-  ],
-  [
-   "Duchy of Urbino",
-   2
-  ],
-  [
-   "Seventeen Provinces",
-   2
-  ],
-  [
-   "Free City of Kraków",
-   2
-  ],
-  [
-   "Electorate of Bavaria",
-   2
-  ],
-  [
-   "Frankfurt",
-   2
-  ],
-  [
-   "Grand Principality of Moscow",
-   2
+   "Duchy of Saxe-Weimar-Eisenach",
+   12
   ],
   [
    "Grand Duchy of Hesse",
-   2
+   12
   ],
   [
-   "Three Leagues",
-   1
+   "Serbia",
+   12
   ],
   [
-   "Signoria di Correggio",
-   1
+   "Irish Free State",
+   10
   ],
   [
-   "Florence",
-   1
+   "Free City of Kraków",
+   10
   ],
   [
-   "Principality of Reuss-Gera",
-   1
+   "Duchy of Warsaw",
+   10
   ],
   [
-   "French constitutional monarchy",
-   1
+   "Seventeen Provinces",
+   8
+  ],
+  [
+   "Duchy of Brunswick",
+   8
+  ],
+  [
+   "Duchy of Holstein",
+   8
+  ],
+  [
+   "Duchy of Anhalt",
+   8
+  ],
+  [
+   "Duchy of Urbino",
+   6
+  ],
+  [
+   "Kingdom of Galicia and Lodomeria",
+   6
+  ],
+  [
+   "Anhalt-Dessau",
+   6
   ],
   [
    "Duchy of Burgundy",
-   1
+   4
   ],
   [
-   "Principality of Catalonia",
-   1
-  ],
-  [
-   "Transpadane Republic",
-   1
-  ],
-  [
-   "Cisalpine Republic",
-   1
-  ],
-  [
-   "Italian Republic",
-   1
+   "Byzantine Empire",
+   4
   ],
   [
    "Kingdom of Lombardy–Venetia",
-   1
+   4
   ],
   [
    "Duchy of Bavaria",
-   1
+   4
   ],
   [
    "Prince-Bishopric of Trent",
-   1
-  ],
-  [
-   "Duchy of Saxe-Hildburghausen",
-   1
+   4
   ],
   [
    "statelessness",
-   1
+   4
   ],
   [
-   "Chile",
-   1
+   "County of Burgundy",
+   4
+  ],
+  [
+   "Electorate of Bavaria",
+   4
+  ],
+  [
+   "Frankfurt",
+   4
+  ],
+  [
+   "Duchy of Saxe-Meiningen",
+   4
+  ],
+  [
+   "Grand Principality of Moscow",
+   4
   ]
  ],
  "fills": {
-  "co/artist-country/low": 1,
-  "co/artist-country/med": 2555,
-  "co/record/high": 33,
-  "co/wikidata/high": 1,
-  "co/wikidata/low": 9185,
-  "co/wikidata/med": 52116,
-  "y-replace/artist-years/low": 348,
+  "co/artist-country/low": 19,
+  "co/artist-country/med": 460,
+  "co/record/high": 45,
+  "co/wikidata/high": 57,
+  "co/wikidata/low": 1495,
+  "co/wikidata/med": 16807,
+  "y-replace/artist-years/low": 1086,
+  "y-replace/record/high": 1,
   "y-replace/record/med": 1,
-  "y-replace/wikidata/high": 9,
-  "y-replace/wikidata/med": 3,
-  "y/artist-years/low": 19536,
-  "y/wikidata/high": 7,
+  "y-replace/wikidata/high": 15,
+  "y-replace/wikidata/med": 11,
+  "y/artist-years/low": 25869,
+  "y/wikidata/high": 5,
   "y/wikidata/med": 3
  },
- "country_still_unknown": 2906,
- "year_still_unknown": 847,
+ "country_still_unknown": 5680,
+ "year_still_unknown": 1325,
  "samples_guess": [
   {
-   "id": "commons-F35189912",
-   "artist": "Giovanni Benedetto Castiglione",
-   "title": "Grechetto, sturi per tre teste di vitelli, genova",
-   "co": "Italy",
-   "co_how": "wikidata",
-   "co_conf": "med",
-   "co_rule": "artist-P27 Q40823 (Giovanni Benedetto Castiglione) via meta",
+   "id": "commons-F35189850",
+   "artist": "Bernardo Strozzi",
+   "title": "Santa teresa in gloria",
    "yest": true,
-   "y": 1646,
+   "y": 1622,
    "y_how": "artist-years",
    "y_conf": "low",
-   "y_rule": "life 1609-1664: middle of 1629-1664 (birth+20 to death, cap 1955)",
-   "span": 35,
-   "how": "mixed",
-   "conf": "mixed"
+   "y_rule": "life 1581-1644: middle of 1601-1644 (birth+20 to death, cap 1955)",
+   "span": 43,
+   "how": "artist-years",
+   "conf": "low"
   },
   {
-   "id": "commons-Q43221325",
+   "id": "commons-Q18599096",
+   "artist": "Gösta von Hennigs",
+   "title": "Music-Hall Scene",
+   "yest": true,
+   "y": 1913,
+   "y_how": "artist-years",
+   "y_conf": "low",
+   "y_rule": "life 1866-1941: middle of 1886-1941 (birth+20 to death, cap 1955)",
+   "span": 55,
+   "how": "artist-years",
+   "conf": "low"
+  },
+  {
+   "id": "commons-Q130783023",
+   "artist": "Paul Cézanne",
+   "title": "Two fruits",
+   "yest": true,
+   "y": 1882,
+   "y_how": "artist-years",
+   "y_conf": "low",
+   "y_rule": "life 1839-1906: middle of 1859-1906 (birth+20 to death, cap 1955)",
+   "span": 47,
+   "how": "artist-years",
+   "conf": "low"
+  },
+  {
+   "id": "commons-F153364847",
+   "artist": "Dosso Dossi",
+   "title": "San sebastiano, 1526 ca., da ss. annunziata a cremona",
+   "yest": true,
+   "y": 1526,
+   "y_how": "artist-years",
+   "y_conf": "low",
+   "y_rule": "artist-dated-works: middle of 10th-90th percentile of 120 dated works",
+   "span": 24,
+   "how": "artist-years",
+   "conf": "low"
+  },
+  {
+   "id": "commons-F81128097",
+   "artist": "Giovanni di Paolo",
+   "title": "sant'agnese",
+   "yest": true,
+   "y": 1452,
+   "y_how": "artist-years",
+   "y_conf": "low",
+   "y_rule": "life 1403-1482: middle of 1423-1482 (birth+20 to death, cap 1955)",
+   "span": 59,
+   "how": "artist-years",
+   "conf": "low"
+  },
+  {
+   "id": "commons-Q18689338",
+   "artist": "Sebastián López de Arteaga",
+   "title": "Christ on the Cross",
+   "yest": true,
+   "y": 1643,
+   "y_how": "artist-years",
+   "y_conf": "low",
+   "y_rule": "life 1610-1656: middle of 1630-1656 (birth+20 to death, cap 1955)",
+   "span": 26,
+   "how": "artist-years",
+   "conf": "low"
+  },
+  {
+   "id": "commons-Q117213857",
+   "artist": "Ludvík Kohl",
+   "title": "Interior of St. Vitus Cathedral in Prague",
+   "yest": true,
+   "y": 1793,
+   "y_how": "artist-years",
+   "y_conf": "low",
+   "y_rule": "life 1746-1821: middle of 1766-1821 (birth+20 to death, cap 1955)",
+   "span": 55,
+   "how": "artist-years",
+   "conf": "low"
+  },
+  {
+   "id": "commons-Q20795274",
    "artist": "Elias Brenner",
-   "title": "Okänd man",
+   "title": "Portrait of a man",
    "yest": true,
    "y": 1692,
    "y_how": "artist-years",
@@ -163,122 +238,30 @@
    "conf": "low"
   },
   {
-   "id": "commons-Q18599818",
-   "artist": "Carl Stefan Bennet",
-   "title": "Review in Ladugårdsgärde Fields during Czar Nicolaus' Visit ",
+   "id": "commons-Q18573963",
+   "artist": "Hugo Salmson",
+   "title": "Gathering Poppies. Study",
    "yest": true,
-   "y": 1849,
+   "y": 1878,
    "y_how": "artist-years",
    "y_conf": "low",
-   "y_rule": "life 1800-1878: middle of 1820-1878 (birth+20 to death, cap 1955)",
+   "y_rule": "life 1843-1894: middle of 1863-1894 (birth+20 to death, cap 1955)",
+   "span": 31,
+   "how": "artist-years",
+   "conf": "low"
+  },
+  {
+   "id": "commons-F127683376",
+   "artist": "Wassily Kandinsky",
+   "title": "Page du carnet de Nina Kandinsky, 16-514690",
+   "yest": true,
+   "y": 1915,
+   "y_how": "artist-years",
+   "y_conf": "low",
+   "y_rule": "life 1866-1944: middle of 1886-1944 (birth+20 to death, cap 1955)",
    "span": 58,
    "how": "artist-years",
    "conf": "low"
-  },
-  {
-   "id": "commons-F15452982",
-   "artist": "Dosso Dossi",
-   "title": "Sts John and Bartholomew with Donorslabel QS:Len,\"Sts John a",
-   "co": "Italy",
-   "co_how": "artist-country",
-   "co_conf": "med",
-   "co_rule": "corpus-majority 100% of 5 rows",
-   "coest": true,
-   "how": "artist-country",
-   "conf": "med"
-  },
-  {
-   "id": "commons-F76597916",
-   "artist": "Giovanni Battista Tiepolo",
-   "title": "Trionfo dell'Aurora - Affresco soffitto salone nobile Villa ",
-   "co": "Italy",
-   "co_how": "wikidata",
-   "co_conf": "med",
-   "co_rule": "artist-P27 Q186202 (Giovanni Battista Tiepolo) via meta",
-   "yest": true,
-   "y": 1743,
-   "y_how": "artist-years",
-   "y_conf": "low",
-   "y_rule": "life 1696-1770: middle of 1716-1770 (birth+20 to death, cap 1955)",
-   "span": 54,
-   "how": "mixed",
-   "conf": "mixed"
-  },
-  {
-   "id": "commons-Q50813002",
-   "artist": "Nicolas Lancret",
-   "title": "Par une tendre chansonette...",
-   "yest": true,
-   "y": 1726,
-   "y_how": "artist-years",
-   "y_conf": "low",
-   "y_rule": "life 1689-1743: middle of 1709-1743 (birth+20 to death, cap 1955)",
-   "span": 34,
-   "how": "artist-years",
-   "conf": "low"
-  },
-  {
-   "id": "commons-Q119801291",
-   "artist": "Sebastiano Ricci",
-   "title": "Italian Classical Landscape",
-   "co": "Italy",
-   "co_how": "wikidata",
-   "co_conf": "med",
-   "co_rule": "artist-P27 Q506483 (Sebastiano Ricci) via meta",
-   "yest": true,
-   "y": 1706,
-   "y_how": "artist-years",
-   "y_conf": "low",
-   "y_rule": "life 1659-1734: middle of 1679-1734 (birth+20 to death, cap 1955)",
-   "span": 55,
-   "how": "mixed",
-   "conf": "mixed"
-  },
-  {
-   "id": "commons-Q56628738",
-   "artist": "Giovanni Battista Moroni",
-   "title": "Portrait of Angelica Agliardi de Nicolinis",
-   "co": "Italy",
-   "co_how": "artist-country",
-   "co_conf": "med",
-   "co_rule": "corpus-majority 100% of 5 rows",
-   "coest": true,
-   "how": "artist-country",
-   "conf": "med"
-  },
-  {
-   "id": "commons-Q28126776",
-   "artist": "Edgar Degas",
-   "title": "Bathers",
-   "co": "France",
-   "co_how": "wikidata",
-   "co_conf": "med",
-   "co_rule": "artist-P27 Q46373 (Edgar Degas) via painting-P170",
-   "yest": true,
-   "y": 1885,
-   "y_how": "artist-years",
-   "y_conf": "low",
-   "y_rule": "life 1834-1917: middle of 1854-1917 (birth+20 to death, cap 1955)",
-   "span": 63,
-   "how": "mixed",
-   "conf": "mixed"
-  },
-  {
-   "id": "commons-F133049749",
-   "artist": "Pietro Perugino",
-   "title": "Raffaello, trinità (1505-1508) e santi del perugino (1521), ",
-   "co": "Italy",
-   "co_how": "wikidata",
-   "co_conf": "low",
-   "co_rule": "artist-birthplace-P19-P17 Q5827 via meta",
-   "yest": true,
-   "y": 1495,
-   "y_how": "artist-years",
-   "y_conf": "low",
-   "y_rule": "life 1448-1523: middle of 1468-1523 (birth+20 to death, cap 1955)",
-   "span": 55,
-   "how": "mixed",
-   "conf": "mixed"
   }
  ]
 }
