@@ -185,7 +185,7 @@ class Api:
         self.sleep, self.last, self.n = sleep, 0.0, 0
 
     def get(self, base, params):
-        url = base + "?" + urllib.parse.urlencode(dict(params, format="json", maxlag=5))
+        url = base + "?" + urllib.parse.urlencode(dict(params, format="json", maxlag=600))   # read-only, one request at a time: only the query-service lag (wdqs) was blocking us
         for attempt in range(7):
             wait = self.last + self.sleep - time.time()
             if wait > 0:
@@ -217,7 +217,7 @@ class Api:
                 continue
             if "error" in d:
                 if d["error"].get("code") == "maxlag":
-                    time.sleep(max(5, int(ra or 5)))
+                    time.sleep(max(45, int(ra or 45)))   # Wikidata replication lag: wait it out, do not hammer
                     continue
                 raise Abort("API error: %s" % d["error"])
             return d

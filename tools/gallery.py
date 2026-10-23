@@ -127,6 +127,18 @@ SOURCES = {
 # `natural()`), and stable gallery indices for already-shipped paintings depend on nothing being inserted earlier.
 for _k in list(SOURCES):
     SOURCES[_k + "2"] = dict(SOURCES[_k])
+# German/British museums (2026-10-23): paintings staged from each museum's Wikidata collection + Commons image
+# (tools/stage/de_gb.py). Rows with a plain public-domain/CC0 file use the museum's own src ("<code>"); rows whose Commons
+# file carries an attribution licence (CC BY / CC BY-SA) use "<code>cc", whose `url` is the Commons file page, which states
+# the exact licence version and author. Added AFTER the "*2" loop so no existing group index moves.
+_DE_WD = "https://www.wikidata.org/wiki/{num}"
+_CC = "image CC BY or CC BY-SA, licence and author on its Commons file page (the museum link) · CC0 data"
+for _k, _n, _s, _h in (("staedel", "Städel Museum, Frankfurt", "Städel", "https://sammlung.staedelmuseum.de/en"),
+                       ("bsb", "Bavarian State Painting Collections", "Pinakothek", "https://www.sammlung.pinakothek.de/en"),
+                       ("smb", "Staatliche Museen zu Berlin", "Berlin SMB", "https://recherche.smb.museum"),
+                       ("wales", "Amgueddfa Cymru – Museum Wales", "Museum Wales", "https://museum.wales/art/")):
+    SOURCES[_k] = dict(name=_n, short=_s, credit="public domain image (Wikimedia Commons) · CC0 data", home=_h, rec=_DE_WD)
+    SOURCES[_k + "cc"] = dict(name=_n, short=_s, credit=_CC, home=_h, rec=_DE_WD)
 CMA_IMG = re.compile(r"^https://openaccess-cdn\.clevelandart\.org/([^/]+)/\1_web\.jpg$")
 
 
