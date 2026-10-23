@@ -7685,7 +7685,7 @@ async function pinchAnchorRun(t, cv, ctl, tag) {
     cv.dispatchEvent(mk("pointermove", 1, cx - g, cy)); cv.dispatchEvent(mk("pointermove", 2, cx + g, cy));
     await t.sleep(120);
     let cur = null, cd = 1e9;   // a wrapping map repeats every cell: the copy nearest the fingers is the one we hold
-    for (const b of ctl._qaBubbles(200000)) if (b.key === key) { const d = Math.hypot(r.left + b.x - cx, r.top + b.y - cy); if (d < cd) { cd = d; cur = b; } }
+    for (const b of ctl._qaBubbles(400000)) if (b.key === key) { const d = Math.hypot(r.left + b.x - cx, r.top + b.y - cy); if (d < cd) { cd = d; cur = b; } }
     if (!cur) continue;   // zoomed out of the drawn set; nothing to compare this step
     const err = Math.hypot(r.left + cur.x - cx, r.top + cur.y - cy); steps++;
     if (err > worst) worst = err;
@@ -7703,7 +7703,7 @@ async function pinchAnchorRun(t, cv, ctl, tag) {
     cv.dispatchEvent(ev);
     t.expect(ev.defaultPrevented, `${tag}: ${label} did not preventDefault (the page would zoom/scroll)`);
     let cur = null, cd = 1e9;
-    for (const b of ctl._qaBubbles(100000)) if (b.key === c2.key) { const d = Math.hypot(b.x - c2.x, b.y - c2.y); if (d < cd) { cd = d; cur = b; } }
+    for (const b of ctl._qaBubbles(400000)) if (b.key === c2.key) { const d = Math.hypot(b.x - c2.x, b.y - c2.y); if (d < cd) { cd = d; cur = b; } }
     t.expect(cur && cd <= 3, `${tag}: ${label} moved the cell under the cursor by ${cd.toFixed(1)}px`);
   }
   // a trackpad two-finger scroll (pixel-mode deltas, with deltaX) PANS 1:1: the cell under the cursor moves by -delta
@@ -7716,7 +7716,7 @@ async function pinchAnchorRun(t, cv, ctl, tag) {
     cv.dispatchEvent(ev);
     t.expect(ev.defaultPrevented, `${tag}: a pixel-mode wheel did not preventDefault`);
     let cur = null, cd = 1e9;
-    for (const b of ctl._qaBubbles(100000)) if (b.key === c3.key) { const d = Math.hypot(b.x - (c3.x - dxv), b.y - (c3.y - dyv)); if (d < cd) { cd = d; cur = b; } }
+    for (const b of ctl._qaBubbles(400000)) if (b.key === c3.key) { const d = Math.hypot(b.x - (c3.x - dxv), b.y - (c3.y - dyv)); if (d < cd) { cd = d; cur = b; } }
     t.expect(cur && cd <= 3, `${tag}: a trackpad scroll (${dxv},${dyv}) moved the cell ${cd.toFixed(1)}px from where the fingers' delta puts it`);
   }
   t.notes.push(`anchor ${tag}: worst error ${worst.toFixed(2)}px over ${steps} steps`);
