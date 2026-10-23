@@ -1,27 +1,17 @@
 "use strict";
-// The color eye: point the camera at anything and it names the exact pixel in the middle of the frame, live,
-// from the ~1,000 core names, with the next-nearest name underneath. Freeze to tap any spot, keep a find, or
-// turn the whole frame into a palette. Cameras shift color, so the copy says so plainly.
+// The color eye: point the camera at anything and it names the color under a circle you move around, live, from
+// the ~1,000 core names, with the next-nearest name underneath. The shutter takes a real photo and opens it in
+// Studio, where it can be analyzed (Eyedropper, Select a part: js/studio.js). Cameras shift color, so the copy
+// says so plainly.
 //
-// David, 2026-10-09, exact pixel: isoSample's patch (js/isolate.js) is a touch-friendly average (about 5% of
-// the short edge) built for the tap-to-guess games. The camera reads differently: eyeSample() below samples the
-// reticle's exact pixel (or a small Photoshop-style average -- getSampleSize(), js/eyedrop.js: Point through
-// 31x31, shared with the rest of the app's eyedroppers) straight off the SOURCE's native resolution -- the
-// <video> or <img> element itself, never a canvas that was resized to fit the screen. Live, that's ~12 times a
-// second; only the NAME shown eases between readings (Lab-smoothed), never the sampled color or hex, so flicker
-// can't quietly swap in a slightly-wrong swatch. Freezing pauses the <video> itself (it keeps its last decoded,
-// full-resolution frame), and a tap on the frozen frame maps back through the exact cover-crop transform the
-// screen drew it with (toNative), so a tap always samples where it looks like it's sampling.
-//
-// David, 2026-10-09, no quiz after a pick: freezing is an exposure, not a test. It's logged to the Learner
-// Model as "seen" once, immediately -- never as an "answer". Naming it never interrupts with a guess-the-name
-// step (that's the Isolator's job elsewhere: js/isolate.js, opened from a photo or a painting, not from here).
-// After a freeze the card offers Keep (your colors), Add to a palette (the set tray) or Pick another.
+// Sampling: eyeSample() below reads an n x n square (n = getSampleSize(), js/eyedrop.js: Point through 31x31,
+// default a medium average) straight off the SOURCE's native resolution -- the <video> or <img> element itself,
+// never a canvas that was resized to fit the screen. Live, that's ~12 times a second; only the NAME shown eases
+// between readings (Lab-smoothed), never the sampled color or hex, so flicker can't swap in a slightly-wrong swatch.
 //
 // Optional white balance: tap WB, then something white or grey; readings are then corrected by von Kries
-// scaling (wbFrom in js/accuracy.js), so that reference comes out neutral. That reference sampling deliberately
-// keeps isoSample's bigger, noise-averaged patch -- a reliable reference benefits from it; the live read does
-// not. Lock asks the camera hardware itself to hold exposure and white balance steady (MediaStreamTrack.
+// scaling (wbFrom in js/accuracy.js). That reference sampling keeps isoSample's bigger, noise-averaged patch.
+// Lock asks the camera hardware itself to hold exposure and white balance steady (MediaStreamTrack.
 // applyConstraints), where the device allows it; it's hidden when the camera reports no such capability.
 
 // ---------- exact-pixel sampling (n x n, n = getSampleSize() at the call site), always off the source's native
@@ -41,16 +31,13 @@ function eyeSample(src, w, h, fx, fy, n = 2) {
 }
 
 const ICON_PHOTO = sv('<rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5.5-5.5L6 19"/>', 22, 1.8);
-const ICON_PAL = sv('<rect x="3" y="6" width="4" height="12" rx="1"/><rect x="8.5" y="6" width="4" height="12" rx="1"/><rect x="14" y="6" width="7" height="12" rx="1"/>', 22, 1.8);
 const ICON_LOCK = sv('<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>', 20, 1.8);
-const ICON_SHADES = sv('<path d="M12 3l8 4.6v9.1L12 21l-8-4.3V7.6z"/><path d="M12 3v18M4 7.6l8 4.4 8-4.4"/>', 22, 1.6);
-const ICON_HONEY = sv('<path d="M8 4.2l8 0 4 6.8-4 6.8-8 0-4-6.8z"/>', 20, 1.6);
 
-// ---------- "Shades of this" (David, 2026-10-09): segment the object the reticle is pointing at from a frozen
-// frame, then read out the array of related shades that really exist inside it, by percentage.
+// ---------- Select a part (David, 2026-10-09; now used by the photo page, js/studio.js, 2026-10-23): segment
+// the object the person tapped, so "what color is the dress" has an answer: the shades that really exist inside it.
 //
 // 1. Segment: region-growing flood fill from the seed pixel, over a ~480px-long-edge downscale of the native
-//    frame (never the on-screen display copy), using an adaptive CIELAB tolerance against the region's running
+//    photo (never the on-screen display copy), using an adaptive CIELAB tolerance against the region's running
 //    mean AND the immediate neighbor pixel -- so folds and shadows of the same fabric keep joining while a
 //    skin or background edge stops it -- tightened near a Sobel edge on L* so a real boundary stops it even
 //    when the color gap alone wouldn't. Typed arrays + an explicit stack keep this comfortably under budget.
@@ -250,36 +237,40 @@ function eyeOffReason(e) {
   if (name === "NotReadableError" || name === "TrackStartError") return { head: "The camera's busy", fix: "Another app may be using it right now. Close it and try again." };
   return { head: "No camera here", fix: "" };
 }
-// opts (David, 2026-10-09, cameraPick/photoPick): { pick, multi, onPick(hex,meta), onDone(hexes), title, forcePhoto }.
-// Plain eye() (no opts) is the Train > Your eye camera screen, unchanged. Pick mode swaps the frozen card's own
-// actions for "Use this color" (single) or "Add" + a running strip + "Done" (multi) -- never Keep/tray/quiz --
-// and forcePhoto skips getUserMedia entirely, going straight to "choose a photo" (photoPick's door).
+
+// opts: { pick, multi, onPick(hex,meta), onDone(hexes), title, forcePhoto }.
+// Plain eye() (no opts) is the Train > Your eye camera screen. Pick mode (cameraPick) swaps "Add color" for the
+// caller's own "Use" (single) or "Add" + a running strip + "Done" (multi), and has no shutter.
+//
+// David, 2026-10-23: the old camera froze one frame and left you stuck in it with a single pixel. Now the camera
+// stays live and does two separate jobs. (1) The eyedropper: a circle you drag around the live view, reading the
+// AVERAGE of a small square under it by default (Point, Tiny, Small, Medium or Wide: the same sample size the
+// loupe uses elsewhere), with "Add color" building a palette strip as you go. (2) The shutter: takes a real photo,
+// saves it to Studio and opens its page (js/photos.js), where Eyedropper and Select a part (js/studio.js) analyze it.
+const ICON_ADD = sv('<path d="M12 5v14M5 12h14"/>', 24, 2);
+const EYE_WORDS = { 1: "Point", 3: "Tiny", 5: "Small", 11: "Medium", 31: "Wide" };
+const eyeSizeHTML = () => `<div class="eye-size" role="group" aria-label="How many pixels to average under the circle">${EYD_SIZES.map(n => `<button type="button" data-eydsize="${n}" aria-pressed="${n === getSampleSize()}" class="${n === getSampleSize() ? "on" : ""}">${EYE_WORDS[n]}</button>`).join("")}</div><p class="eye-size-cap" id="sizeCap"></p>`;
+const eyeSizeCap = () => { const n = getSampleSize(); return n === 1 ? "Reads one pixel" : `Averages ${n} × ${n} pixels`; };
 function eye(opts = {}) {
   const el = show(`
     <div class="eye-stage" id="stage">
       <video id="vid" playsinline muted autoplay></video>
-      <canvas id="still" hidden></canvas>
       <i class="eye-ret" id="ret"><b class="eye-ret-h"></b><b class="eye-ret-v"></b></i>
       <i class="eye-flash" id="flash"></i>
     </div>
-    <header class="eye-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eye-hint" id="hint"><b class="eye-live-dot" id="liveDot" aria-hidden="true"></b><span id="hintText">${esc(opts.title || "Live — point at anything")}</span></span><span class="eye-top-r"><button class="icon-btn glass eye-lock" id="lock" hidden aria-label="Lock exposure and white balance" aria-pressed="false">${ICON_LOCK}</button><button class="icon-btn glass eye-wb" id="wb" aria-label="White balance: tap, then tap something white or grey" aria-pressed="false">WB</button></span></header>
+    <header class="eye-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eye-hint" id="hint"><b class="eye-live-dot" id="liveDot" aria-hidden="true"></b><span id="hintText">${esc(opts.title || "Drag to move the circle")}</span></span><span class="eye-top-r"><button class="icon-btn glass eye-lock" id="lock" hidden aria-label="Lock exposure and white balance" aria-pressed="false">${ICON_LOCK}</button><button class="icon-btn glass eye-wb" id="wb" aria-label="White balance: tap, then tap something white or grey" aria-pressed="false">WB</button></span></header>
     <div class="eye-card" id="card">
       <button class="eye-name" id="nm"><i id="chip"></i><span><b id="big">Looking…</b><em id="src"></em></span></button>
       <p class="eye-hex mono" id="hexline"></p>
       <button class="eye-mine" id="mine"></button>
+      ${eyeSizeHTML()}
       <div class="eye-picks" id="picks" hidden></div>
-      <div class="eye-acts" id="acts" hidden>
-        <button data-act="keep" id="keepBtn">Keep</button>
-        <button data-act="tray">Add to a palette</button>
-        <button data-act="again">Pick another</button>
-      </div>
-      <button class="eye-shades" id="shadesBtn" hidden>${ICON_SHADES}<span>Shades of this</span></button>
-      <p class="eye-note">Phones auto-adjust color and exposure, so this is a close read, not a lab measurement.</p>
       <div class="eye-bar">
-        <label class="eye-side" aria-label="Choose a photo">${ICON_PHOTO}<input type="file" accept="image/*" id="file" hidden></label>
-        <span class="eye-shut-wrap"><button class="eye-shut" id="shut" aria-label="Freeze the frame (this does not record video)"><i></i></button><b class="eye-shut-label" id="shutLabel">Freeze</b></span>
-        <button class="eye-side" id="pal" aria-label="Palette from this frame">${ICON_PAL}</button>
+        <label class="eye-side-wrap"><span class="eye-side" aria-hidden="true">${ICON_PHOTO}</span><b class="eye-lbl">Choose a photo</b><input type="file" accept="image/*" id="file" hidden></label>
+        <span class="eye-side-wrap" id="shutWrap"><button class="eye-shut" id="shut" aria-label="Take a photo"><i></i></button><b class="eye-lbl">Take photo</b></span>
+        <span class="eye-side-wrap"><button class="eye-side eye-add" id="add" aria-label="Add this color">${ICON_ADD}</button><b class="eye-lbl" id="addLbl">Add color</b></span>
       </div>
+      <p class="eye-note">Phones adjust color on their own, so this is a close read.</p>
     </div>
     <div class="eye-off" id="off" hidden>
       <p class="eyebrow" id="offEyebrow">No camera here</p>
@@ -289,39 +280,33 @@ function eye(opts = {}) {
     </div>
   `, "fixed eye");
   const $ = s => el.querySelector(s);
-  // pick-for-caller mode: swap the frozen card's own actions, never Keep/Add to a palette/Pick another/quiz.
-  // multi's Done lives in the picks strip, not in #acts: #acts only shows while frozen, but Done has to stay
-  // reachable after "Add" sends the camera back live for the next color.
   const PICK = opts.pick ? { multi: !!opts.multi, list: [], onPick: opts.onPick, onDone: opts.onDone } : null;
-  if (PICK) {
-    $("#acts").innerHTML = PICK.multi ? `<button data-act="add" id="addBtn">Add</button>` : `<button data-act="use" id="useBtn">Use this color</button>`;
-    $("#shadesBtn").remove();
-  }
-  const renderPicks = () => {
-    if (!PICK || !PICK.multi) return;
-    const p = $("#picks"); if (!p) return;
-    p.hidden = !PICK.list.length;
-    p.innerHTML = PICK.list.map(h => `<i style="--c:${h}"></i>`).join("") + (PICK.list.length ? `<button class="eye-picks-done" data-act="done" id="doneBtn">Done · ${PICK.list.length}</button>` : "");
-  };
-  const vid = $("#vid"), still = $("#still"), ret = $("#ret"), stage = $("#stage");
-  let stream = null, track = null, frozen = false, raf = 0, cur = null, smooth = null, last = 0, at = [.5, .5], wb = null, wbArm = false, hwLocked = false, loggedThisFreeze = false;
-  let capKind = "camera";   // "camera" | "photo": the live feed, or a chosen image (js/learner.js learnerLog "find"/"seen")
-  // the transform from a stage-fraction tap to the source's own fraction: the same cover-crop scale + offset the
-  // freeze canvas was drawn with, so a tap samples the exact pixel it looks like it's pointing at (toNative)
-  let camSrc = null, camW = 0, camH = 0, camK = 1, camOx = 0, camOy = 0;
+  const list = PICK ? PICK.list : [];
+  if (PICK) { $("#shutWrap").hidden = true; $("#addLbl").textContent = PICK.multi ? "Add" : "Use this color"; }
+  const vid = $("#vid"), ret = $("#ret"), stage = $("#stage");
+  let stream = null, track = null, raf = 0, cur = null, smooth = null, last = 0, at = [.5, .36], wb = null, wbArm = false, hwLocked = false, drag = null;
   const read = hex => wb ? wb(hex) : hex;
   const stop = () => { cancelAnimationFrame(raf); if (stream) stream.getTracks().forEach(t => t.stop()); stream = null; track = null; };
   cleanup.push(stop);
   // pick mode's own onDone often navigates on its own (settray's finish() opens the set page) -- calling go()
-  // unconditionally right after would stomp on that. show() always replaces #app's content -- the OLD screen
-  // is moved into a fading .fade-ghost under <body> for its exit animation, not removed, so el.isConnected
-  // alone stays true even after a real navigation; app.contains(el) is the one that actually tells "did this
-  // screen leave #app". Only fall back to leaving the screen ourselves when it didn't (a hash comparison isn't
-  // reliable either: an unrouted inner screen like this one falls back to the current tab's own address,
-  // which a caller's navigation can legitimately land on too).
+  // unconditionally right after would stomp on that. show() moves the OLD screen into a fading ghost, so
+  // el.isConnected stays true after a real navigation; app.contains(el) is what tells "did this screen leave".
   const leaveAfter = fn => { fn(); if (app.contains(el)) go(S.tab || "explore"); };
-  $("[data-back]").onclick = () => { stop(); leaveAfter(() => PICK && PICK.onDone && PICK.onDone(PICK.list.slice())); };
+  $("[data-back]").onclick = () => { stop(); leaveAfter(() => PICK && PICK.onDone && PICK.onDone(list.slice())); };
   loadCoreNames();
+
+  // the stage fraction (0..1 on screen) -> the video's own fraction, through the exact cover-crop the screen draws
+  const geom = () => { const R = stage.getBoundingClientRect(), w = vid.videoWidth, h = vid.videoHeight, k = Math.max(R.width / w, R.height / h); return { R, w, h, k, ox: (R.width - w * k) / 2, oy: (R.height - h * k) / 2 }; };
+  const toNative = (sfx, sfy) => { const g = geom(); return [clamp((sfx * g.R.width - g.ox) / g.k / g.w, 0, 1), clamp((sfy * g.R.height - g.oy) / g.k / g.h, 0, 1)]; };
+  // keep the circle out from under the bottom card (or the side rail in landscape): where it can't be seen it can't be aimed
+  const bound = a2 => {
+    const R = stage.getBoundingClientRect(), C = $("#card").getBoundingClientRect(), side = C.width < R.width * .8;
+    const x = side ? (C.left - R.left - 34) / R.width : .98, y = side ? .98 : (C.top - R.top - 34) / R.height;
+    return [clamp(a2[0], .02, Math.max(.05, x)), clamp(a2[1], .02, Math.max(.05, y))];
+  };
+  const placeRet = instant => { ret.style.transition = instant ? "none" : ""; ret.style.left = at[0] * 100 + "%"; ret.style.top = at[1] * 100 + "%"; };
+  const syncSize = () => { $("#sizeCap").textContent = eyeSizeCap(); el.querySelectorAll("[data-eydsize]").forEach(b => { const on = +b.dataset.eydsize === getSampleSize(); b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); }); };
+  syncSize();
 
   const paint = (hex, nameHex) => {
     if (!hex) return;
@@ -332,69 +317,28 @@ function eye(opts = {}) {
     $("#big").textContent = nm.text;
     $("#src").textContent = nm.de < VERY_CLOSE_DE ? "Nearest of about 1,000 names" : `Nearest of about 1,000 names · ${pctDiff(nm.de)}`;
     $("#hexline").textContent = hex;
-    // second line: the next-nearest name, one tap to its page (every name is equal)
     $("#mine").innerHTML = nx ? `<i style="--c:${nx.h}"></i><span>Also near <b>${esc(nx.n)}</b></span><em>${pctDiff(nx.de)}</em>` : "";
-    syncKeepBtn();
   };
-  const syncKeepBtn = () => { const b = $("#keepBtn"); if (b && cur) b.textContent = typeof fvHas === "function" && fvHas(cur.hex) ? "Kept" : "Keep"; };
-  // live: sample about every 80ms (roughly 12 times a second). The swatch and hex always show the RAW exact
-  // reading; only the name eases between readings (a Lab-smoothed point feeds nameOf), so sensor noise can't
-  // flicker the name every frame without ever touching what's shown as the sampled color itself.
-  const tick = t => {
-    raf = requestAnimationFrame(tick);
-    if (frozen || !vid.videoWidth || t - last < 80) return;
-    last = t;
-    const hex = read(eyeSample(vid, vid.videoWidth, vid.videoHeight, .5, .5, getSampleSize()));
+  // the swatch and hex always show the RAW reading; only the name eases between readings (a Lab-smoothed point
+  // feeds nameOf), so sensor noise can't flicker the name every frame without touching the sampled color itself
+  const sampleNow = (ease = true) => {
+    if (!vid.videoWidth) return;
+    const [fx, fy] = toNative(at[0], at[1]);
+    const hex = read(eyeSample(vid, vid.videoWidth, vid.videoHeight, fx, fy, getSampleSize()));
     if (!hex) return;
     const L = lab(hex);
-    smooth = smooth ? smooth.map((x, i) => x + (L[i] - x) * .45) : L;
+    smooth = smooth && ease ? smooth.map((x, i) => x + (L[i] - x) * .45) : L;
     paint(hex, labHex(...smooth));
+  };
+  const tick = t => {
+    raf = requestAnimationFrame(tick);
+    if (!vid.videoWidth || t - last < 80) return;
+    last = t; sampleNow();
     if (typeof twLive === "function") twLive(vid, stage);   // the closest painting in the archive to what the camera sees (js/twins.js)
   };
-  const toNative = (sfx, sfy) => {
-    const R = stage.getBoundingClientRect();
-    const sx = (sfx * R.width - camOx) / camK, sy = (sfy * R.height - camOy) / camK;
-    return [clamp(sx / camW, 0, 1), clamp(sy / camH, 0, 1)];
-  };
-  const freeze = (src, w, h) => {
-    frozen = true; el.classList.add("frozen"); loggedThisFreeze = false;
-    if (src === vid) vid.pause();   // the <video> keeps its last decoded, full-resolution frame while paused
-    camSrc = src; camW = w; camH = h;
-    // draw what's on screen (cover-cropped) so a tap LOOKS like it lands where it samples; the sample itself
-    // always comes from camSrc at full resolution through toNative(), never from this display-sized copy
-    const R = stage.getBoundingClientRect(), k = Math.max(R.width / w, R.height / h), dpr = Math.min(devicePixelRatio || 1, 2);
-    camK = k; camOx = (R.width - w * k) / 2; camOy = (R.height - h * k) / 2;
-    still.width = R.width * dpr; still.height = R.height * dpr; still.hidden = false;
-    const c = still.getContext("2d"); c.drawImage(src, camOx * dpr, camOy * dpr, w * k * dpr, h * k * dpr);
-    vid.style.visibility = "hidden";
-    $("#hintText").textContent = opts.title && !PICK ? opts.title : "Frozen — tap anywhere to name it";
-    $("#liveDot").hidden = true;
-    $("#acts").hidden = false;
-    if (!PICK) $("#shadesBtn").hidden = false;
-    $("#shut").setAttribute("aria-label", "Back to live (tap to unfreeze)");
-    $("#shutLabel").textContent = "Live";
-    // a snap of brightness, like a photo shutter -- a camera cue, never a recording one (David, 2026-10-09:
-    // "the video feature is confusing" -- this freezes one frame, it never records)
-    if (!reduceMotion) { const fl = $("#flash"); fl.classList.remove("snap"); void fl.offsetWidth; fl.classList.add("snap"); }
-    at = [.5, .5]; placeRet();
-    paint(read(eyeSample(camSrc, camW, camH, .5, .5, getSampleSize())));
-    // a freeze is an exposure, not a quiz answer: log it once to the Learner Model as "seen" (js/learner.js)
-    if (typeof learnerLog === "function" && cur && !loggedThisFreeze) { loggedThisFreeze = true; learnerLog({ type: "seen", color: { n: cur.nm.n, h: cur.hex }, src: capKind }); }
-    buzz(10);
-  };
-  const live = () => {
-    frozen = false; capKind = "camera"; el.classList.remove("frozen"); still.hidden = true; vid.style.visibility = ""; $("#acts").hidden = true;
-    const sb = $("#shadesBtn"); if (sb) sb.hidden = true;
-    $("#hintText").textContent = opts.title || "Live — point at anything"; $("#liveDot").hidden = false;
-    $("#shut").setAttribute("aria-label", "Freeze the frame (this does not record video)"); $("#shutLabel").textContent = "Freeze";
-    if (stream) vid.play().catch(() => {});
-    at = [.5, .5]; placeRet();
-  };
-  const placeRet = () => { ret.style.left = at[0] * 100 + "%"; ret.style.top = at[1] * 100 + "%"; };
-  // white balance: the next tap picks the reference (live: the middle circle; frozen: where you tap). A
-  // reliable reference benefits from isoSample's bigger, noise-averaged patch (js/isolate.js) -- unlike the
-  // live read above, this one point is deliberately not the exact-pixel eyeSample.
-  const hintNow = () => $("#hintText").textContent = wbArm ? (frozen ? "Tap something white or grey" : "Aim the circle at white or grey, tap") : frozen ? "Frozen — tap anywhere to name it" : "Live — point at anything";
+
+  // white balance: the next tap picks the reference. That reference keeps isoSample's bigger, noise-averaged patch.
+  const hintNow = () => $("#hintText").textContent = wbArm ? "Tap something white or grey" : (opts.title || "Drag to move the circle");
   const wbBtn = $("#wb");
   const setWb = f => { wb = f; wbBtn.classList.toggle("on", !!f); wbBtn.setAttribute("aria-pressed", f ? "true" : "false"); smooth = null; };
   wbBtn.onclick = () => {
@@ -418,75 +362,108 @@ function eye(opts = {}) {
       toast(hwLocked ? "Exposure and white balance locked" : "Back to auto"); buzz(8);
     } catch (e) { toast("Couldn't lock this camera"); }
   };
+
+  // the circle: a tap puts it there, a drag moves it by how far the finger moved (so the finger never covers it)
   stage.addEventListener("pointerdown", e => {
+    if (!e.isPrimary) return;
     if (wbArm) {
-      const R = stage.getBoundingClientRect(), p = frozen ? [(e.clientX - R.left) / R.width, (e.clientY - R.top) / R.height] : [.5, .5];
-      const ref = frozen ? isoSample(still, p[0], p[1]) : vid.videoWidth ? isoSample(vid, .5, .5) : null;
-      const f = ref && wbFrom(ref);
+      const R = stage.getBoundingClientRect(), [fx, fy] = toNative((e.clientX - R.left) / R.width, (e.clientY - R.top) / R.height);
+      const ref = vid.videoWidth ? isoSample(vid, fx, fy) : null, f = ref && wbFrom(ref);
       wbArm = false; wbBtn.classList.remove("arm");
-      if (f) { setWb(f); toast("White set"); if (frozen) paint(read(eyeSample(camSrc, camW, camH, at[0], at[1], getSampleSize()))); }
+      if (f) { setWb(f); toast("White set"); sampleNow(false); }
       else toast("Too dark or too colorful. Try white or grey");
       hintNow(); buzz(5); return;
     }
-    if (!frozen) return;
-    const R = stage.getBoundingClientRect(), sfx = (e.clientX - R.left) / R.width, sfy = (e.clientY - R.top) / R.height;
-    at = [sfx, sfy]; placeRet();
-    const [fx, fy] = toNative(sfx, sfy);
-    paint(read(eyeSample(camSrc, camW, camH, fx, fy, getSampleSize()))); buzz(5);
+    drag = { x: e.clientX, y: e.clientY, at0: at.slice(), moved: false };
+    try { stage.setPointerCapture(e.pointerId); } catch (err) {}
   });
-  $("#shut").onclick = () => {
-    if (frozen) return stream ? live() : null;
-    if (vid.videoWidth) freeze(vid, vid.videoWidth, vid.videoHeight);
-  };
-  // after a freeze: Keep (your colors), Add to a palette (the set tray) or Pick another -- never a name-it quiz.
-  // In pick mode (cameraPick/photoPick) these three are swapped for the caller's own Use/Add+Done instead.
-  $("#acts").onclick = e => {
-    const b = e.target.closest("[data-act]"); if (!b || !cur) return;
-    const act = b.dataset.act;
-    if (PICK) {
-      if (act === "use") { buzz(10); stop(); PICK.onPick && PICK.onPick(cur.hex, { src: capKind }); leaveAfter(() => PICK.onDone && PICK.onDone([cur.hex])); }
-      else if (act === "add") {
-        PICK.list.push(cur.hex); PICK.onPick && PICK.onPick(cur.hex, { src: capKind }); buzz(10); renderPicks();
-        toast(`${nameOf(cur.hex).text} added`);
-        if (capKind === "camera") live();
-      }
-      return;
+  stage.addEventListener("pointermove", e => {
+    if (!drag || !e.isPrimary) return;
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (!drag.moved && Math.hypot(dx, dy) > 6) drag.moved = true;
+    if (!drag.moved) return;
+    const R = stage.getBoundingClientRect();
+    at = bound([drag.at0[0] + dx / R.width, drag.at0[1] + dy / R.height]);
+    placeRet(true); sampleNow(false);
+  });
+  const endDrag = e => {
+    if (!drag) return;
+    if (!drag.moved && e.type === "pointerup") {
+      const R = stage.getBoundingClientRect();
+      at = bound([(e.clientX - R.left) / R.width, (e.clientY - R.top) / R.height]);
+      placeRet(false); sampleNow(false); buzz(5);
     }
-    if (act === "keep") { if (typeof fvSet === "function") fvSet(cur.hex, cur.nm.n, true, "camera"); toast("Kept"); syncKeepBtn(); buzz(8); }
-    else if (act === "tray") { if (typeof sxAdd === "function") sxAdd(cur.hex); buzz(8); }
-    else if (act === "again") { if (capKind === "photo") $("#file").click(); else live(); }
+    drag = null;
   };
-  // Done lives in the picks strip (renderPicks above), reachable whether frozen or back live for the next color
-  if (PICK && PICK.multi) $("#picks").onclick = e => {
-    if (!e.target.closest('[data-act="done"]')) return;
-    buzz(10); stop(); leaveAfter(() => PICK.onDone && PICK.onDone(PICK.list.slice()));
+  stage.addEventListener("pointerup", endDrag); stage.addEventListener("pointercancel", endDrag);
+
+  // how many pixels to average (the shared sample size, js/eyedrop.js)
+  el.querySelectorAll("[data-eydsize]").forEach(b => b.onclick = () => { setSampleSize(+b.dataset.eydsize); buzz(6); syncSize(); sampleNow(false); });
+
+  // the shutter: a real photo. It is saved to Studio at full size and opens its own page, where it can be analyzed.
+  $("#shut").onclick = () => {
+    if (!vid.videoWidth) return;
+    const w = vid.videoWidth, h = vid.videoHeight, k = Math.min(1, 2000 / Math.max(w, h)), c = document.createElement("canvas");
+    c.width = Math.round(w * k); c.height = Math.round(h * k); c.getContext("2d").drawImage(vid, 0, 0, c.width, c.height);
+    vid.pause();
+    if (!reduceMotion) { const fl = $("#flash"); fl.classList.remove("snap"); void fl.offsetWidth; fl.classList.add("snap"); }
+    buzz(12);
+    phCaptureAndOpen(c, "From the camera");
   };
-  if (!PICK) $("#shadesBtn").onclick = () => eyeShadesOpen({ camSrc, camW, camH, fx: toNative(at[0], at[1])[0], fy: toNative(at[0], at[1])[1], title: cur && cur.nm ? cur.nm.text : "" });
+
+  // Add color: into the strip below (a palette you build), or, in pick mode, to the caller
+  const renderPicks = () => {
+    const p = $("#picks"); p.hidden = !list.length;
+    p.innerHTML = list.map(h => `<i style="--c:${h}"></i>`).join("") + (!list.length ? "" : PICK
+      ? (PICK.multi ? `<button class="eye-picks-done" data-act="done">Done · ${list.length}</button>` : "")
+      : `<button class="eye-picks-clear" data-act="clear">Clear</button><button class="eye-picks-done" data-act="save">Save palette · ${list.length}</button>`);
+  };
+  $("#add").onclick = () => {
+    if (!cur) return;
+    const hex = cur.hex, nm = cur.nm;
+    if (PICK && !PICK.multi) { buzz(10); stop(); PICK.onPick && PICK.onPick(hex, { src: "camera" }); leaveAfter(() => PICK.onDone && PICK.onDone([hex])); return; }
+    if (list.length >= 20) return toast("That's 20 colors. Save this palette first.");
+    list.push(hex); PICK && PICK.onPick && PICK.onPick(hex, { src: "camera" });
+    if (typeof learnerLog === "function") learnerLog({ type: "seen", color: { n: nm.n, h: hex }, src: "camera" });
+    buzz(10); renderPicks(); toast(`${nm.text} added`);
+  };
+  $("#picks").onclick = e => {
+    const b = e.target.closest("[data-act]"); if (!b) return;
+    if (b.dataset.act === "clear") { list.length = 0; buzz(6); renderPicks(); return; }
+    if (b.dataset.act === "done") { buzz(10); stop(); leaveAfter(() => PICK.onDone && PICK.onDone(list.slice())); return; }
+    if (b.dataset.act === "save") {
+      const cols = list.slice(); keepPalette(cols, "Eyedropper");
+      const kept = (S.palettes || []).find(p => p.cols.join() === cols.join());
+      if (kept) { stop(); openSavedPalette(kept.id); }
+    }
+  };
   // a tap on either name is a kept find: you looked, the app named it, and you chose to open it (js/learner.js learnerLog "find")
-  const logFind = (n, h) => { if (typeof learnerLog === "function") learnerLog({ type: "find", color: { n, h }, src: capKind }); };
-  $("#nm").onclick = () => { if (!cur) return; logFind(cur.nm.n, cur.hex); openTappedColor(cur.hex); };   // David, 2026-10-07: one tap opens the page, not the sheet
+  const logFind = (n, h) => { if (typeof learnerLog === "function") learnerLog({ type: "find", color: { n, h }, src: "camera" }); };
+  $("#nm").onclick = () => { if (!cur) return; logFind(cur.nm.n, cur.hex); openTappedColor(cur.hex); };   // one tap opens the page, not a sheet
   $("#mine").onclick = () => { if (cur && cur.nx) { logFind(cur.nx.n, cur.nx.h); openTappedColor(cur.nx.h); } };
+
+  // a photo from the library goes the same road as the shutter (or, in pick mode, to the caller's drag picker)
   const fromFile = f => {
     if (!f) return;
     const img = new Image();
-    img.onload = () => { stop(); capKind = "photo"; el.classList.remove("nocam"); $("#off").hidden = true; freeze(img, img.naturalWidth, img.naturalHeight); URL.revokeObjectURL(img.src); };
+    img.onload = () => {
+      URL.revokeObjectURL(img.src);
+      if (PICK) { stop(); photoPickOpen(img, { multi: PICK.multi, title: opts.title, onPick: PICK.onPick }, hexes => PICK.onDone && PICK.onDone(hexes)); return; }
+      const w = img.naturalWidth, h = img.naturalHeight, k = Math.min(1, 2000 / Math.max(w, h)), c = document.createElement("canvas");
+      c.width = Math.max(1, Math.round(w * k)); c.height = Math.max(1, Math.round(h * k)); c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      stop(); phCaptureAndOpen(c, "From a photo");
+    };
+    img.onerror = () => toast("That photo didn't load");
     img.src = URL.createObjectURL(f);
   };
   $("#file").onchange = e => fromFile(e.target.files[0]);
   $("#file2").onchange = e => fromFile(e.target.files[0]);
-  $("#pal").onclick = () => {
-    const src = frozen ? still : vid;
-    if (!src.width && !src.videoWidth) return;
-    const c = document.createElement("canvas"), w = frozen ? still.width : vid.videoWidth, h = frozen ? still.height : vid.videoHeight, k = Math.min(1, 900 / Math.max(w, h));
-    c.width = w * k; c.height = h * k; c.getContext("2d").drawImage(src, 0, 0, c.width, c.height);
-    stop(); phCaptureAndOpen(c, "From the camera");
-  };
 
   (async () => {
-    // photoPick: skip getUserMedia entirely and go straight to "choose a photo" (the same honest no-camera door)
+    // photoPick-style: skip getUserMedia entirely and go straight to "choose a photo" (the same honest no-camera door)
     if (opts.forcePhoto) { el.classList.add("nocam"); $("#off").hidden = false; later(() => { const f2 = $("#file2"); if (f2) f2.click(); }, 30); return; }
     try {
-      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment", width: { ideal: 1280 } }, audio: false });
+      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment", width: { ideal: 1920 } }, audio: false });
     } catch (e) {
       const r = eyeOffReason(e);
       el.classList.add("nocam"); $("#off").hidden = false;
@@ -506,106 +483,6 @@ function eye(opts = {}) {
     }
     raf = requestAnimationFrame(tick);
   })();
-}
-
-// ---------- the "Shades of this" sheet: adjust the segmented region, then read its shades out ----------
-// o: { camSrc, camW, camH, fx, fy, title } -- the same native-resolution source and source-fraction seed the
-// frozen eye card samples from (toNative), so the segmentation starts exactly where the reticle is pointing.
-function eyeShadesOpen(o) {
-  const { camSrc, camW, camH, fx, fy, title } = o;
-  if (!camSrc || !camW || !camH) return;
-  const prep = segPrep(camSrc, camW, camH);
-  let tolMult = 1, grow = segGrow(prep, fx, fy, tolMult), km, dendro, maxD = 2, kNow = 6, shades = [], sort = "share", hlIdx = -1;
-  const recluster = () => {
-    km = segKmeans(prep, grow, Math.min(40, grow.count));
-    dendro = segDendrogram(km.clusters);
-    maxD = segMaxDistinct(dendro);
-    kNow = Math.min(kNow, maxD);
-    shades = segShades(prep, km, dendro, kNow);
-    hlIdx = -1;
-  };
-  recluster(); kNow = Math.min(6, maxD); shades = segShades(prep, km, dendro, kNow);
-  const { sh, close } = sheet(`
-    <p class="eyebrow">Shades of this</p>
-    <h2 class="shd-h">${esc(title || "What's really there")}</h2>
-    <div class="shd-stage" data-shd-stage><canvas class="shd-base" data-shd-base></canvas><canvas class="shd-mask" data-shd-mask></canvas></div>
-    <label class="shd-tol"><span>Tighter</span><input type="range" min="40" max="220" value="100" data-shd-tol aria-label="Tighter or wider, re-grows the region"><span>Wider</span></label>
-    <div class="shd-count"><b>How many shades</b><span class="shd-n-row"><input type="range" data-shd-n><b class="shd-n-out" data-shd-nout></b></span></div>
-    <div class="shd-strip" data-shd-strip></div>
-    <div class="shd-sort" role="group" aria-label="Sort the list"><button class="on" data-sort="share">By share</button><button data-sort="light">Light → dark</button></div>
-    <div class="shd-list" data-shd-list></div>
-    <div class="shd-acts">
-      <button data-shd="keep">Keep</button>
-      <button data-shd="honey">${ICON_HONEY}<span>See its colors</span></button>
-      <button data-shd="share">Share</button>
-    </div>
-    <p class="eye-note">Camera exposure, white balance and lighting shift these shades. Lock (top bar) helps.</p>
-  `);
-  sh.classList.add("shd-sheet");
-  const base = sh.querySelector("[data-shd-base]"), maskCv = sh.querySelector("[data-shd-mask]"), stageEl = sh.querySelector("[data-shd-stage]");
-  const drawBase = () => {
-    const w = Math.max(240, stageEl.clientWidth || 320), h = Math.round(w * camH / camW);
-    [base, maskCv].forEach(c => { c.width = w; c.height = h; });
-    base.getContext("2d").drawImage(camSrc, 0, 0, w, h);
-  };
-  const paintOverlay = keepIdx => {
-    const ov = segOverlay(prep, keepIdx), x = maskCv.getContext("2d");
-    x.clearRect(0, 0, maskCv.width, maskCv.height);
-    x.imageSmoothingEnabled = true;
-    x.drawImage(ov, 0, 0, maskCv.width, maskCv.height);
-  };
-  const regionIdx = () => { const out = []; for (let i = 0; i < grow.mask.length; i++) if (grow.mask[i]) out.push(i); return out; };
-  const showRegion = () => { hlIdx = -1; paintOverlay(regionIdx()); sh.querySelectorAll("[data-hl]").forEach(b => b.classList.remove("on")); };
-  drawBase(); showRegion();
-
-  function renderStrip() {
-    const list = sort === "light" ? shades.slice().sort((a, b) => lab(a.hex)[0] - lab(b.hex)[0]) : shades;
-    sh.querySelector("[data-shd-strip]").innerHTML = list.map(s => `<div class="shd-seg" style="--c:${s.hex};flex:${Math.max(s.share, .02).toFixed(4)}"></div>`).join("");
-    sh.querySelector("[data-shd-list]").innerHTML = list.map(s => {
-      const realI = shades.indexOf(s);
-      return `<div class="shd-row"><button class="shd-sw" data-hl="${realI}" style="--c:${s.hex}" aria-label="Highlight ${esc(s.name)} in the photo"></button><button class="shd-name" data-open="${s.hex}">${esc(s.name)}</button><span class="shd-pct">${pctFmt(s.share * 100)}</span></div>`;
-    }).join("");
-  }
-  const countOut = sh.querySelector("[data-shd-nout]");
-  countify(sh.querySelector("[data-shd-n]"), {
-    min: 2, max: maxD, value: kNow, out: countOut,
-    onSet: v => { kNow = v; shades = segShades(prep, km, dendro, kNow); showRegion(); renderStrip(); },
-  });
-  countOut.textContent = kNow;
-  renderStrip();
-
-  let tolT = 0;
-  sh.querySelector("[data-shd-tol]").addEventListener("input", e => {
-    tolMult = (+e.target.value) / 100;
-    grow = segGrow(prep, fx, fy, tolMult);
-    showRegion();
-    clearTimeout(tolT);
-    tolT = setTimeout(() => { recluster(); kNow = Math.min(kNow, maxD); shades = segShades(prep, km, dendro, kNow); renderStrip(); }, 120);
-  });
-  sh.addEventListener("click", e => {
-    const sortBtn = e.target.closest("[data-sort]");
-    if (sortBtn) { sort = sortBtn.dataset.sort; sh.querySelectorAll("[data-sort]").forEach(b => b.classList.toggle("on", b === sortBtn)); renderStrip(); return; }
-    const hl = e.target.closest("[data-hl]");
-    if (hl) {
-      const i = +hl.dataset.hl;
-      buzz(5);
-      if (hlIdx === i) { showRegion(); return; }
-      hlIdx = i; paintOverlay(shades[i].pix);
-      sh.querySelectorAll("[data-hl]").forEach(b => b.classList.toggle("on", +b.dataset.hl === i));
-      return;
-    }
-    const open = e.target.closest("[data-open]");
-    if (open) { close(); openTappedColor(open.dataset.open); return; }
-    const act = e.target.closest("[data-shd]");
-    if (!act) return;
-    const k = act.dataset.shd;
-    if (k === "keep") { if (typeof keepPalette === "function") keepPalette(shades.map(s => s.hex), title ? `Shades of ${title}` : "Shades of this"); buzz(10); }
-    // David, 2026-10-09: "showing it on the color map is a useless feature" -- these shades, alone, sized by
-    // share, in their own honeycomb (js/palettehive.js), not dimmed in among all ~2,700 other names. Replaces
-    // both the old flat shdHoneycomb screen and its separate "Show on the big map" button with the one real view.
-    else if (k === "honey") { close(); if (typeof openPaletteHive === "function") openPaletteHive({ title: title ? `Shades of ${title}` : "Shades of this", colors: shades.map(s => ({ h: s.hex, n: s.name, share: s.share })), source: "camera" }); }
-    else if (k === "share") { if (typeof sharePalette === "function") sharePalette(shades.map(s => ({ h: s.hex })), title ? `Shades of ${title}` : "Shades of this", h => ({ nm: nameOf(h) })); else toast("Sharing isn't ready here yet"); }
-  });
 }
 
 // ---------- public pick APIs (David, 2026-10-09): cameraPick({ onPick(hex,meta), multi, title }) opens this

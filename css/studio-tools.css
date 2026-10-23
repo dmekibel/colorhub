@@ -176,3 +176,26 @@
 .pv-edit[aria-pressed="true"],[data-pvedit].on{background:var(--paper);color:var(--paper-ink)}
 .gl-strip .pal .pv-rm{position:absolute;top:4px;right:4px;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:rgba(14,13,11,.55);color:#fff;font:400 13px/1 var(--sans);font-style:normal}
 .pal-name .pv-rm{display:none}
+
+/* ---------- the photo page's two tools (js/studio.js palPhotoView): Eyedropper, Select a part ---------- */
+.pv-tools{margin:14px 0 0}
+.pv-tools .seg{display:flex;width:100%}
+.pv-tools .seg button{flex:1 1 0}
+.pv-panel{margin:12px 0 0;padding:14px 0 4px;border-top:1px solid var(--rule)}
+.pv-panel[hidden]{display:none}
+.pv-panel-cap{font:400 15px/1 var(--serif);color:var(--soft);margin:0 0 8px}
+.pv-panel .eye-size{margin-top:0;background:var(--surface-2)}
+.pv-panel .eye-size button.on{background:var(--paper);color:var(--paper-ink)}
+.pv-panel .eye-size-cap{color:var(--soft)}
+.pv-seginfo{font:400 19px/1.2 var(--serif);margin:0 0 12px;color:var(--ink)}
+.pv-segtol{display:flex;align-items:center;gap:10px;margin:0 0 14px;font:400 15px/1 var(--serif);color:var(--soft)}
+.pv-segtol input{flex:1}
+.pv-acts{display:flex;gap:8px}
+.pv-pill{flex:1 1 0;min-height:44px;padding:0 14px;border-radius:var(--r-pill);background:var(--surface-2);font:400 17px/1 var(--serif);color:var(--ink);text-align:center;transition:background var(--dur-1),color var(--dur-1),transform .2s var(--spring)}
+.pv-pill:active{transform:scale(.97)}
+.pv-pill[hidden]{display:none}
+.pv-pill.on{background:var(--paper);color:var(--paper-ink)}
+.pv-seg-cv{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;opacity:0;transition:opacity .2s var(--ease)}
+.pv-seg-cv.on{opacity:1}
+.pv-img.tool-pick img{touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.pv-img.tool-seg img{cursor:pointer}

@@ -3025,23 +3025,33 @@ scenario("studio", "camera: a refused permission gets its own fix-it message, an
   t.expect(/camera access/i.test(t.$("#offEyebrow").textContent), `a refused permission should say so, got "${t.$("#offEyebrow").textContent}"`);
   t.expect(t.$("#offFix").textContent.length > 10, "no fix-it instructions for a refused permission");
   await t.click("[data-back]", { wait: 500 });
-  // a real (fake-device) stream: the live view names a color, the shutter is a plain circle with a "Freeze"
-  // label (never a square -- that's the video record/stop shape), and a tap announces "Live" with a dot, not red
+  // a real (fake-device) stream: the live view names a color, the shutter is a plain circle labeled "Take photo"
+  // (never a square -- that's the video record/stop shape), the circle can be dragged, and Add color builds a strip
   t.ev(`(() => {
     const c = document.createElement("canvas"); c.width = 320; c.height = 320;
-    const x = c.getContext("2d"); x.fillStyle = "#4C6B8C"; x.fillRect(0, 0, 320, 320);
+    const x = c.getContext("2d"); x.fillStyle = "#4C6B8C"; x.fillRect(0, 0, 160, 320); x.fillStyle = "#C8553D"; x.fillRect(160, 0, 160, 320);
     const stream = typeof c.captureStream === "function" ? c.captureStream() : null;
     if (stream) navigator.mediaDevices.getUserMedia = () => Promise.resolve(stream);
   })()`);
   await t.click("[data-eye]", { wait: 500 });
   await t.waitFor("#vid", 6000, "the live camera screen");
-  t.expect(t.$("#shutLabel").textContent === "Freeze", `the shutter should say "Freeze" while live, got "${t.$("#shutLabel").textContent}"`);
+  t.expect(/take photo/i.test(t.$(".eye-side-wrap #shut").parentElement.textContent), "the shutter should say Take photo");
   t.expect(!t.$("#liveDot").hidden, "the live dot should show while the feed is live");
-  t.expect(/live/i.test(t.$("#hintText").textContent), `the live hint should say so plainly, got "${t.$("#hintText").textContent}"`);
-  await t.click("#shut", { wait: 400 });
-  t.expect(t.$("#shutLabel").textContent === "Live", `the shutter should say "Live" once frozen, got "${t.$("#shutLabel").textContent}"`);
-  t.expect(t.$("#liveDot").hidden, "the live dot should hide once frozen");
-  t.expect(/frozen/i.test(t.$("#hintText").textContent), `the frozen hint should say so plainly, got "${t.$("#hintText").textContent}"`);
+  t.expect(t.$$("[data-eydsize]").length === 5, "the camera should offer five sample sizes");
+  t.expect(t.$("[data-eydsize].on") && +t.$("[data-eydsize].on").dataset.eydsize > 1, "the default read should be an average, not one pixel");
+  await t.waitFor(() => t.$("#big") && t.$("#big").textContent !== "Looking…", 8000, "a live color name");
+  const left = t.ev("document.getElementById('big').textContent");
+  // drag the circle across the frame: the name must change (the old camera could only read the middle)
+  t.ev(`(() => { const st = document.getElementById("stage"); const R = st.getBoundingClientRect();
+    const ev = (type, x, y) => st.dispatchEvent(new PointerEvent(type, { pointerId: 1, isPrimary: true, clientX: x, clientY: y, bubbles: true }));
+    const y = R.top + R.height / 2; ev("pointerdown", R.left + R.width * .25, y); ev("pointermove", R.left + R.width * .6, y); ev("pointermove", R.left + R.width * .85, y); ev("pointerup", R.left + R.width * .85, y); })()`);
+  await t.sleep(300);
+  const right = t.ev("document.getElementById('big').textContent");
+  t.expect(left !== right, `dragging the circle should change what it names (both read "${left}")`);
+  await t.click("#add", { wait: 200 });
+  await t.click("#add", { wait: 200 });
+  t.expect(t.$$("#picks i").length === 2, `Add color twice should show 2 swatches, got ${t.$$("#picks i").length}`);
+  t.expect(t.$("#picks [data-act=save]"), "no Save palette once colors are added");
 });
 
 // David, 2026-10-09: the camera eye must read the reticle's exact pixel (or at most a 2x2 average), never a
@@ -3073,12 +3083,12 @@ scenario("studio", "the camera eye's exact-pixel sampler doesn't blur across a c
   t.expect(got.nearRight === "#0000FF", `~1.5px right of the boundary should still read pure blue (exact pixel, not a blur), got ${got.nearRight}`);
 });
 
-// David, 2026-10-09: "Shades of this" -- point at a dress, get the array of reds that really exist inside it,
+// David, 2026-10-09: "Select a part" (was Shades of this) -- tap a dress, get the array of reds that really exist inside it,
 // not the background, skin or shadows. Tested directly against the pipeline (js/camera.js: segPrep/segGrow/
 // segKmeans/segDendrogram/segMaxDistinct/segShades), the same functions the sheet calls, with a synthetic frame
 // a red "dress" (gradient shading + a fold, still one fabric) on a contrasting background with a skin-tone
 // patch and a grey patch, both clearly outside it.
-scenario("studio", "Shades of this: the grown region stays inside the dress, and shares always sum to 100%", async t => {
+scenario("studio", "Select a part: the grown region stays inside the dress, and shares always sum to 100%", async t => {
   await t.open("#shot=studio", { settle: 300 });
   const r = t.ev(`(() => {
     const c = document.createElement("canvas"); c.width = 300; c.height = 300;
@@ -3112,27 +3122,22 @@ scenario("studio", "Shades of this: the grown region stays inside the dress, and
   t.expect(Math.abs(r.hiSum - 1) < .01, `shares at the max don't sum to 100% (${r.hiSum})`);
 });
 
-scenario("studio", "Shades of this: the sheet opens on a frozen frame, the count slider is instant, and a name opens its page", async t => {
-  await t.open("#shot=eye:shades", { settle: 1400 });
-  await t.waitFor(".shd-sheet", 6000, "the Shades of this sheet");
-  const n0 = t.$$(".shd-list .shd-row").length;
-  t.expect(n0 >= 2, `only ${n0} shades listed`);
-  const slider = t.$("[data-shd-n]");
-  t.expect(slider, "no 'how many shades' slider");
-  const max = +slider.max;
-  slider._countTo(max);
-  await t.sleep(150);
-  const nMax = t.$$(".shd-list .shd-row").length;
-  t.expect(nMax === max, `asking for the max (${max}) on the slider shows ${nMax} rows`);
-  slider._countTo(2);
-  await t.sleep(150);
-  t.expect(t.$$(".shd-list .shd-row").length === 2, "the slider back at 2 doesn't show 2 shades");
-  const sw = t.$(".shd-list .shd-sw");
-  await t.click(sw, { wait: 200 });
-  t.expect(sw.classList.contains("on"), "tapping a shade's swatch didn't highlight it");
-  const name = t.$(".shd-list .shd-name");
-  await t.click(name, { force: true, wait: 500 });
-  t.expect(t.$(".cp-page") || /^#\/(page|color)\//.test(t.w.location.hash), "tapping a shade's name didn't open its page");
+scenario("studio", "photo page: Select a part tints the rest away and re-reads the palette of just that part; Eyedropper owns the drag", async t => {
+  await t.open("#shot=studiopv:segment", { settle: 2200 });
+  await t.waitFor(".pv-seg-cv.on", 6000, "the selected-part overlay");
+  t.expect(/Selected: \d+% of the photo/.test(t.$("[data-pvseginfo]").textContent), `no selection readout: "${t.$("[data-pvseginfo]") && t.$("[data-pvseginfo]").textContent}"`);
+  const names = t.$$("[data-pvrows] .pal-name b").map(b => b.textContent).join(" | ");
+  const hexes = t.$$("[data-pvrows] .pal-name em").map(b => b.textContent);
+  t.expect(hexes.length >= 2, `the part's palette should list its shades, got ${hexes.length}`);
+  // every shade of the dress is a red: no navy ground, skin or grey leaks in
+  const bad = hexes.filter(h => { const [r, g, b] = [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)); return !(r > g * 1.6 && r > b * 1.4); });
+  t.expect(!bad.length, `colors outside the dress leaked into its palette: ${bad.join(" ")} (${names})`);
+  await t.click("[data-pvsegclear]", { wait: 300 });
+  t.expect(!t.$(".pv-seg-cv.on"), "Clear should remove the overlay");
+  t.expect(t.$$("[data-pvrows] .pal-name").length >= 3, "Clear should bring back the whole photo's palette");
+  await t.click('[data-pvt="pick"]', { wait: 300 });
+  t.expect(t.$("[data-pvpanel] [data-eydsize]"), "the Eyedropper tool should offer the sample size");
+  t.expect(t.$(".pv-img.tool-pick"), "the photo should be in eyedropper mode");
 });
 
 scenario("studio", "photo palette: mode chips, slider and a chip opens its page", async t => {

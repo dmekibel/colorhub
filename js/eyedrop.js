@@ -12,14 +12,17 @@
 //
 //   eyedropAttach(imgOrCanvasEl, { onMove(hex, {x,y}), onPick(hex, {x,y}) }) -> { detach() }
 //   getSampleSize() / setSampleSize(n) -> one of EYD_SIZES, Photoshop-style ("Point" through a 31x31 average),
-//     stored in S.sampleSize (migrateState-safe: js/core.js's fresh() defaults it, so an older save just inherits
-//     Point the first time it's read, same as any other key fresh() adds).
+//     stored in S.sampleSize once chosen (S.sampleSet marks a real choice; before that it reads as an 11x11
+//     average, never the old silent "Point").
 //   eydSizeControlHTML(compact) -> the same five-way control, for the loupe and for Settings (js/you.js).
 
 const EYD_SIZES = [1, 3, 5, 11, 31];
 const EYD_LABEL = { 1: "Point", 3: "3×3", 5: "5×5", 11: "11×11", 31: "31×31 average" };
-const getSampleSize = () => EYD_SIZES.includes(S.sampleSize) ? S.sampleSize : 1;
-function setSampleSize(n) { S.sampleSize = EYD_SIZES.includes(n) ? n : 1; save(); }
+// David, 2026-10-23: a single pixel is noisy (one speck of grain or glare names the wrong color), so until the
+// person picks a size themselves (sampleSet) the default is an 11x11 average. Point stays one tap away.
+const EYD_DEFAULT = 11;
+const getSampleSize = () => S.sampleSet && EYD_SIZES.includes(S.sampleSize) ? S.sampleSize : EYD_DEFAULT;
+function setSampleSize(n) { S.sampleSize = EYD_SIZES.includes(n) ? n : EYD_DEFAULT; S.sampleSet = true; save(); }
 // David, 2026-10-10: the old labels ("Point", "3×3" … "31×31 average") wrapped the fifth button onto its own
 // row at 320-440px. One row, equal-width segments, bare numbers everywhere (the caption under the control
 // says what they mean once, instead of repeating "average" on every button).

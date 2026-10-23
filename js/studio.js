@@ -383,7 +383,8 @@ const PV_CAP = {
   area: ["Sized by how much each covers", "Every color sized by how much of the photo it covers."],
 };
 function palPhotoView(p) {
-  const pool = p.pool;
+  const basePool = p.pool;
+  let pool = basePool, segPool = null;   // segPool: the palette of the part picked with Select a part, in place of the whole photo's
   let curK = 6, mode = "out", where = typeof S !== "undefined" && S && GL_WHERE.some(w => w[0] === S.palWhere) ? S.palWhere : "off", capOpen = false;
   let pvKCtl = null;   // the countify() controller for [data-pvk], built once, re-ranged per mode (js/core.js)
   let editedPal = null;   // once the visitor edits (remove/replace/nudge/reorder), this overrides the computed set
@@ -395,7 +396,7 @@ function palPhotoView(p) {
     if (m === "area") return { pal: glPoolByArea(pool, k), max: Math.min(pool.length, 20) };
     if (m === "diverse") return { pal: glPoolDiverse(pool, k), max: Math.min(pool.length, 20) };
     if (m === "pick") return { pal: picks.map(h => ({ h, share: 1 / picks.length, pick: true })), max: 12, fixed: true,
-      cap: picks.length ? "Colors you took from the photo. Tap it for more, a swatch to open its page." : "Tap the photo to take a color, up to 12." };
+      cap: picks.length ? "Colors you took from the photo. Tap it for more, a swatch to open its page." : "Press and drag over the photo to take a color, up to 12." };
     return glModeSet(m, pool, k, null);
   };
   const curSet = () => editedPal ? { pal: editedPal, max: 24, fixed: true, cap: "Edited by hand." } : (modeSet(mode, curK) || modeSet("out", curK));
@@ -403,7 +404,8 @@ function palPhotoView(p) {
   // "Diverse" (David's palette-engine brief, 2026-10-09: farthest-point sampling in OKLab, guarantees every
   // distinct hue family in this photo's pool above a small floor gets a seat) is a photo-agnostic mode, same as
   // out/area/pick -- it operates on the whole pool, not a filtered subset, so it belongs in this always-on list
-  const have = GL_MODES.filter(m => m[0] === "out" || m[0] === "area" || m[0] === "pick" || (m[0] === "diverse" && pool.length > 1) || glModeSet(m[0], pool, 6, null));
+  const haveModes = () => GL_MODES.filter(m => m[0] === "out" || m[0] === "area" || m[0] === "pick" || (m[0] === "diverse" && pool.length > 1) || glModeSet(m[0], pool, 6, null));
+  let modesKey = "";
   const dom = pool.reduce((a, b) => b.share > a.share ? b : a).h;
   const titleKind = p.photoId != null ? "photo" : null;
   let curTitle = p.title || "";
@@ -412,11 +414,13 @@ function palPhotoView(p) {
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="gl-pa-btn" data-plvopen>Palette view</button></header>
     ${titleKind ? `<button class="pv-title${curTitle ? "" : " ph"}" data-rename aria-label="Rename">${esc(curTitle || titlePlaceholder)}</button>` : `<p class="eyebrow">${esc(p.from || "Photo")}</p>`}
     <div class="gl-pal-wrap">
-    <div class="pv-img" id="himg"><img src="${p.img}" alt="Your photo"><canvas class="gl-lit-cv" data-pvlitcv aria-hidden="true"></canvas><div class="gl-mks" data-pvmks></div></div>
+    <div class="pv-img" id="himg"><img src="${p.img}" alt="Your photo"><canvas class="gl-lit-cv" data-pvlitcv aria-hidden="true"></canvas><canvas class="pv-seg-cv" data-pvsegcv aria-hidden="true"></canvas><div class="gl-mks" data-pvmks></div></div>
     <p class="pv-tapnote" data-pvtapnote>Tap the photo to guess a spot's name, then see it alone.</p>
+    <div class="pv-tools"><div class="seg" role="group" aria-label="Tools" data-pvtools><button data-pvt="pick" aria-pressed="false">Eyedropper</button><button data-pvt="seg" aria-pressed="false">Select a part</button></div></div>
+    <div class="pv-panel" data-pvpanel hidden></div>
     <div class="gl-pal-ui">
     <div class="palette gl-strip" data-pvswatches></div>
-    <div class="gl-modes-f" data-pvfade><div class="gl-modes" data-pvorder role="group" aria-label="Palette type">${have.map(m => `<button data-pvo="${m[0]}" aria-pressed="false">${m[1]}</button>`).join("")}</div></div>
+    <div class="gl-modes-f" data-pvfade><div class="gl-modes" data-pvorder role="group" aria-label="Palette type"></div></div>
     <div class="pr-slide gl-slide" data-pvslide hidden><input type="range" data-pvk aria-label="How many colors"><span class="gl-kn-t" data-pvkn>6 colors</span></div>
     <div class="gl-where" data-pvwhere><span>On the photo</span><div class="gl-where-seg" role="group" aria-label="Show where each color is on the photo">${GL_WHERE.map(([k, t]) => `<button data-pvw="${k}" aria-pressed="false">${t}</button>`).join("")}</div></div>
     <p class="gl-cap" data-pvcap></p>
@@ -459,6 +463,9 @@ function palPhotoView(p) {
   const pushUndo = (label) => { undoPal = (editedPal || curSet().pal).map(c => ({ ...c })); undoLabel = label; };
   const doUndo = () => { if (!undoPal) return; editedPal = undoPal; undoPal = null; drawPalette(); buzz(6); };
   const drawPalette = () => {
+    const hv = haveModes(); if (!hv.some(m => m[0] === mode)) { mode = "out"; editedPal = null; }
+    const key = hv.map(m => m[0]).join();
+    if (key !== modesKey) { modesKey = key; el.querySelector("[data-pvorder]").innerHTML = hv.map(m => `<button data-pvo="${m[0]}" aria-pressed="false">${m[1]}</button>`).join(""); }
     const set = curSet(), pal = set.pal;
     el.querySelector("[data-pvorder]").querySelectorAll("button").forEach(b => { const on = b.dataset.pvo === mode; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
     const slide = el.querySelector("[data-pvslide]"), inp = slide.querySelector("input"), kk = Math.min(Math.max(curK, 2), set.max);
@@ -475,7 +482,7 @@ function palPhotoView(p) {
     cap.classList.toggle("open", capOpen || short === full);
     cap.innerHTML = `<button class="gl-cap-t" data-pvcapt aria-expanded="${capOpen}"${short === full ? " disabled" : ""}>${esc(capOpen ? full : short)}</button>` + (mode === "pick" && picks.length ? `<button class="aw-link" data-pvclear>Start over</button>` : "");
     const wh = el.querySelector("[data-pvwhere]");
-    wh.hidden = mode === "pick" || editing;
+    wh.hidden = mode === "pick" || editing || !!segPool;
     wh.querySelectorAll("[data-pvw]").forEach(b => { const on = b.dataset.pvw === where; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
     const sel = el.querySelector("[data-pvorder] .on"); const host = el.querySelector("[data-pvorder]");
     if (sel && host.scrollWidth > host.clientWidth) { const l = sel.offsetLeft - (host.clientWidth - sel.offsetWidth) / 2; host.scrollTo ? host.scrollTo({ left: l }) : (host.scrollLeft = l); }
@@ -500,14 +507,14 @@ function palPhotoView(p) {
   const litBuild = () => { if (!lit.img) return null; if (!lit.pix) lit.pix = palPix(lit.img); return lit.pix; };
   const litDraw = pal => {
     const cv = el.querySelector("[data-pvlitcv]"); if (!cv) return;
-    if (where !== "lit" || !pal.length || typeof palHighlightPaint !== "function") { cv.classList.remove("on"); return; }
+    if (where !== "lit" || segPool || !pal.length || typeof palHighlightPaint !== "function") { cv.classList.remove("on"); return; }
     const pix = litBuild(); if (!pix || !palHighlightPaint(cv, pix, pal)) { cv.classList.remove("on"); return; }
     cv.classList.add("on");
   };
   const markDraw = pal => {
     const host = el.querySelector("[data-pvmks]"), span = el.querySelector("#himg"), img = span.querySelector("img");
     if (!host) return;
-    if (where !== "mark" || !pal.length || typeof palMarkerFind !== "function" || !img.naturalWidth) { host.innerHTML = ""; return; }
+    if (where !== "mark" || segPool || !pal.length || typeof palMarkerFind !== "function" || !img.naturalWidth) { host.innerHTML = ""; return; }
     const pix = litBuild(); if (!pix) { host.innerHTML = ""; return; }
     const num = mode !== "pick";
     const found = palMarkerFind(pix, pal);
@@ -516,7 +523,7 @@ function palPhotoView(p) {
     host.innerHTML = found.map((o, q) => { const h = pal[o.k].h; return `<button class="gl-mk${o.n ? " sm" : ""}${fresh ? " in" : ""}" data-swatch="${h}" data-ink="${ink(h)}" style="left:${(o.fx * 100).toFixed(2)}%;top:${(o.fy * 100).toFixed(2)}%;--c:${h};--d:${q * 20}ms" aria-label="${esc(glName(h).t)}, color ${o.k + 1}">${o.n || !num ? "" : o.k + 1}</button>`; }).join("");
   };
   const setWhere = w => { if (w === where) return; where = w; if (typeof S !== "undefined" && S) { S.palWhere = w; save(); } drawPalette(); };
-  const setMode = m => { if (m === mode) return; mode = m; editedPal = null; capOpen = false; buzz(5); drawPalette(); };
+  const setMode = m => { if (m === mode) return; mode = m; editedPal = null; capOpen = false; buzz(5); if (m === "pick" && !tool) setTool("pick"); drawPalette(); };
   palLoad().then(() => { if (el.isConnected) drawPalette(); }).catch(() => {});
   drawPalette();
   if (typeof twSection === "function") twSection(el.querySelector("#twins"), pool, { what: "your photo", key: "img", img: () => el.querySelector(".pv-img img"), rich: () => typeof twRichPool === "function" ? twRichPool(el.querySelector(".pv-img img")) : null });
@@ -579,8 +586,8 @@ function palPhotoView(p) {
     if (!editing) return;
     const row = e.target.closest("[data-pvj]"); if (row) { e.stopPropagation(); e.preventDefault(); openEditSheet(+row.dataset.pvj); }
   }, true);
-  el.querySelector("[data-pvsave]").onclick = () => { const pal = curSet().pal; if (!pal.length) return; keepPalette(pal.map(c => c.h), curTitle || p.from || "Palette"); };
-  el.querySelector("[data-share]").onclick = () => sharePalette(curSet().pal, curTitle || p.from, h => ({ nm: glName(h), fam: typeof familyOf === "function" && familyOf(h) }));
+  el.querySelector("[data-pvsave]").onclick = () => { const pal = curSet().pal; if (!pal.length) return; keepPalette(pal.map(c => c.h), (curTitle || p.from || "Palette") + (segPool && mode !== "pick" ? " · selected part" : "")); };
+  el.querySelector("[data-share]").onclick = () => sharePalette(curSet().pal, (curTitle || p.from) + (segPool && mode !== "pick" ? " · selected part" : ""), h => ({ nm: glName(h), fam: typeof familyOf === "function" && familyOf(h) }));
   el.querySelector("[data-export]").onclick = () => exOpenSheet({ cols: curSet().pal, title: curTitle || p.from || "Palette" });
   exLongCopy(el.querySelector("[data-pvrows]"));
   const delPhoto = el.querySelector("[data-delphoto]");
@@ -602,6 +609,8 @@ function palPhotoView(p) {
   span.addEventListener("click", e => {
     if (e.target.closest(".gl-mk")) return;
     const r = span.getBoundingClientRect(); if (e.clientX < r.left || e.clientY < r.top || e.clientX > r.right || e.clientY > r.bottom) return;
+    if (tool === "pick") return;   // the eyedropper owns the gesture (press and drag, release to add)
+    if (tool === "seg") { segTap((e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height); return; }
     const hex = sampleAt(e.clientX, e.clientY); if (!hex) return;
     if (frompic != null) {
       const j = frompic; frompic = null; const pal = (editedPal || curSet().pal).slice(), c = pal[j]; if (!c) return;
@@ -610,6 +619,127 @@ function palPhotoView(p) {
     if (mode === "pick") { if (!picks.includes(hex) && picks.length < 12) picks.push(hex); buzz(6); drawPalette(); return; }
     if (typeof isoOpen === "function") { buzz(6); isoOpen({ src: img, fx: (e.clientX - r.left) / r.width, fy: (e.clientY - r.top) / r.height, from: "photo", ref: p.photoId != null ? "photo:" + p.photoId : "photo" }); }
   });
+
+  // ---------- the two tools on the photo (David, 2026-10-23) ----------
+  // Eyedropper: press and drag anywhere on the photo, a magnified loupe names what is under the finger, release
+  // adds the color to "Picked" (js/eyedrop.js, the same picker as everywhere; Point or an average, set below).
+  // Select a part: tap the dress, the shoe, the nail. The part is grown from the tap (js/camera.js segGrow), the
+  // rest of the photo dims, and the palette below becomes the palette OF THAT PART, same types, same slider.
+  let tool = null, eyd = null;
+  const seg = { prep: null, seeds: [], tol: 1.3, add: false, mask: null, count: 0, t: 0 };
+  const panel = el.querySelector("[data-pvpanel]"), note = el.querySelector("[data-pvtapnote]"), segCv = el.querySelector("[data-pvsegcv]");
+  const NOTE_DEFAULT = note.textContent;
+  const addPick = hex => {
+    if (picks.includes(hex)) { buzz(4); return; }
+    if (picks.length >= 12) { toast("12 colors is the most. Start over to pick more."); return; }
+    picks.push(hex);
+    if (mode !== "pick") { mode = "pick"; editedPal = null; capOpen = false; }
+    drawPalette();
+  };
+  const segClearOverlay = () => { segCv.classList.remove("on"); };
+  const segPaintOverlay = () => {
+    const prep = seg.prep; if (!prep || !seg.mask) return;
+    const idx = []; for (let i = 0; i < seg.mask.length; i++) if (seg.mask[i]) idx.push(i);
+    segCv.width = prep.sw; segCv.height = prep.sh;
+    segCv.getContext("2d").drawImage(segOverlay(prep, idx), 0, 0);
+    segCv.classList.add("on");
+  };
+  // the part's own pool: crop to its bounding box at (up to) 320px, clear everything outside the mask, and run the
+  // same extractPool a whole photo gets, so the shares are shares OF THE PART
+  const segMakePool = () => {
+    const prep = seg.prep, { sw, sh, mask } = prep && seg.mask ? { sw: prep.sw, sh: prep.sh, mask: seg.mask } : {};
+    if (!prep || !mask) return null;
+    let x0 = sw, y0 = sh, x1 = -1, y1 = -1;
+    for (let i = 0; i < mask.length; i++) if (mask[i]) { const x = i % sw, y = (i / sw) | 0; if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+    if (x1 < 0) return null;
+    const bw = x1 - x0 + 1, bh = y1 - y0 + 1, W = img.naturalWidth, H = img.naturalHeight;
+    const sx = x0 / sw * W, sy = y0 / sh * H, cw = Math.max(1, bw / sw * W), ch = Math.max(1, bh / sh * H), k = Math.min(1, 320 / Math.max(cw, ch));
+    const c = document.createElement("canvas"); c.width = Math.max(1, Math.round(cw * k)); c.height = Math.max(1, Math.round(ch * k));
+    const x = c.getContext("2d"); x.drawImage(img, sx, sy, cw, ch, 0, 0, c.width, c.height);
+    const m = document.createElement("canvas"); m.width = sw; m.height = sh;
+    const mx = m.getContext("2d"), id = mx.createImageData(sw, sh);
+    for (let i = 0; i < mask.length; i++) id.data[i * 4 + 3] = mask[i] ? 255 : 0;
+    mx.putImageData(id, 0, 0);
+    x.globalCompositeOperation = "destination-in"; x.drawImage(m, x0, y0, bw, bh, 0, 0, c.width, c.height);
+    return extractPool(c);
+  };
+  const segInfo = () => {
+    const n = panel.querySelector("[data-pvseginfo]"); if (!n) return;
+    const pct = seg.prep && seg.count ? seg.count / (seg.prep.sw * seg.prep.sh) * 100 : 0;
+    n.textContent = seg.count ? `Selected: ${pct < 1 ? "under 1" : Math.round(pct)}% of the photo` : "Nothing selected yet";
+    const clr = panel.querySelector("[data-pvsegclear]"); if (clr) clr.hidden = !seg.count;
+  };
+  const segRebuild = (now) => {
+    const prep = seg.prep, mask = new Uint8Array(prep.sw * prep.sh);
+    seg.seeds.forEach(([fx, fy]) => { const g = segGrow(prep, fx, fy, seg.tol); for (let i = 0; i < mask.length; i++) if (g.mask[i]) mask[i] = 1; });
+    let count = 0; for (let i = 0; i < mask.length; i++) if (mask[i]) count++;
+    seg.mask = mask; seg.count = count;
+    segPaintOverlay(); segInfo();
+    clearTimeout(seg.t);
+    const apply = () => {
+      const np = count >= 12 ? segMakePool() : null;
+      if (!np || !np.length) { toast("That's too small to read. Tap a bigger part."); return; }
+      segPool = np; pool = np; editedPal = null;
+      note.textContent = "Tap another spot to select again.";
+      drawPalette();
+    };
+    if (now) apply(); else seg.t = setTimeout(apply, 140);
+  };
+  function segTap(fx, fy) {
+    if (!img.naturalWidth) return;
+    if (!seg.prep) seg.prep = segPrep(img, img.naturalWidth, img.naturalHeight);
+    seg.seeds = seg.add && seg.seeds.length ? seg.seeds.concat([[fx, fy]]) : [[fx, fy]];
+    seg.add = false; const ab = panel.querySelector("[data-pvsegadd]"); if (ab) { ab.classList.remove("on"); ab.setAttribute("aria-pressed", "false"); }
+    buzz(8); segRebuild(true);
+  }
+  const segClear = () => {
+    seg.seeds = []; seg.mask = null; seg.count = 0; clearTimeout(seg.t);
+    segClearOverlay(); segPool = null; pool = basePool; editedPal = null;
+    note.textContent = tool === "seg" ? "Tap a part of the photo, like the dress." : NOTE_DEFAULT;
+    segInfo(); drawPalette();
+  };
+  const sizeSync = () => { const c = panel.querySelector("#sizeCap"); if (c) c.textContent = eyeSizeCap(); panel.querySelectorAll("[data-eydsize]").forEach(b => { const on = +b.dataset.eydsize === getSampleSize(); b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); }); };
+  function setTool(t) {
+    if (t === tool) t = null;
+    tool = t;
+    if (eyd) { eyd.detach(); eyd = null; }
+    span.classList.toggle("tool-pick", tool === "pick"); span.classList.toggle("tool-seg", tool === "seg");
+    el.querySelectorAll("[data-pvt]").forEach(b => { const on = b.dataset.pvt === tool; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
+    panel.hidden = !tool;
+    if (tool === "pick") {
+      note.textContent = "Press and drag over the photo. Let go to add the color.";
+      panel.innerHTML = `<p class="pv-panel-cap">Average of</p>${eyeSizeHTML()}`;
+      eyd = eyedropAttach(img, { onPick: addPick });
+      sizeSync();
+      if (mode !== "pick") setMode("pick");
+    } else if (tool === "seg") {
+      note.textContent = seg.count ? "Tap another spot to select again." : "Tap a part of the photo, like the dress.";
+      panel.innerHTML = `<p class="pv-seginfo" data-pvseginfo></p>
+        <label class="pv-segtol"><span>Tighter</span><input type="range" min="40" max="220" value="${Math.round(seg.tol * 100)}" data-pvsegtol aria-label="Tighter or wider: how much counts as part of it"><span>Wider</span></label>
+        <div class="pv-acts"><button class="pv-pill" data-pvsegadd aria-pressed="false">Add another part</button><button class="pv-pill" data-pvsegclear ${seg.count ? "" : "hidden"}>Clear</button></div>`;
+      segInfo();
+    } else {
+      note.textContent = segPool ? "Tap another spot to select again." : NOTE_DEFAULT;
+      panel.innerHTML = "";
+    }
+    buzz(5);
+  }
+  el.querySelector("[data-pvtools]").onclick = e => { const b = e.target.closest("[data-pvt]"); if (b) setTool(b.dataset.pvt); };
+  panel.addEventListener("click", e => {
+    const sz = e.target.closest("[data-eydsize]");
+    if (sz) { setSampleSize(+sz.dataset.eydsize); buzz(6); sizeSync(); return; }
+    if (e.target.closest("[data-pvsegclear]")) { segClear(); buzz(6); return; }
+    const ad = e.target.closest("[data-pvsegadd]");
+    if (ad) { seg.add = !seg.add; ad.classList.toggle("on", seg.add); ad.setAttribute("aria-pressed", seg.add); buzz(5); if (seg.add) note.textContent = "Tap the next part to add it."; }
+  });
+  panel.addEventListener("input", e => {
+    if (!e.target.matches("[data-pvsegtol]")) return;
+    seg.tol = +e.target.value / 100;
+    if (seg.seeds.length) segRebuild(false);
+  });
+  cleanup.push(() => { if (eyd) eyd.detach(); });
+  el._pvSegTap = segTap;   // design review (js/boot.js studiopv:segment) taps a part without a finger
+  el._pvSetTool = setTool;
 }
 
 // ---------- palette view: count, percentages and three looks; keep, copy or share ----------
