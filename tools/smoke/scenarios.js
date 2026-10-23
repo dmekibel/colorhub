@@ -3038,11 +3038,8 @@ scenario("studio", "camera: a refused permission gets its own fix-it message, an
   // the live screen stays clear: the picture, one name line, three buttons; settings live behind ⋯
   t.expect(t.$("#shut") && t.$("#add") && t.$(".eye-card label.eye-side"), "the three buttons (Photos, shutter, Add) should be there");
   t.expect(!t.$(".eye-card [data-eydsize]"), "the sample size belongs in the ⋯ sheet, not on the live screen");
-  await t.click("#more", { wait: 300 });
-  t.expect(t.$$(".eye-sheet [data-eydsize]").length === 5, "the ⋯ sheet should offer five sample sizes");
-  t.expect(t.$(".eye-sheet [data-eydsize].on") && +t.$(".eye-sheet [data-eydsize].on").dataset.eydsize > 1, "the default read should be an average, not one pixel");
-  t.ev("(() => { const s = [...document.querySelectorAll('.scrim')].pop(); if (s) s.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, cancelable: true })); })()");
-  await t.sleep(500);
+  t.expect(t.$("#ret").offsetWidth > 22, "the circle should start big enough to average, not read one pixel");
+  t.expect(t.$("#chip.eye-split"), "the dot should be split: your color beside the named color");
   await t.waitFor(() => t.$("#big") && t.$("#big").textContent !== "Looking…", 8000, "a live color name");
   const left = t.ev("document.getElementById('big').textContent");
   // drag the circle across the frame: the name must change (the old camera could only read the middle)
@@ -3052,7 +3049,20 @@ scenario("studio", "camera: a refused permission gets its own fix-it message, an
   await t.sleep(300);
   const right = t.ev("document.getElementById('big').textContent");
   t.expect(left !== right, `dragging the circle should change what it names (both read "${left}")`);
+  // two fingers pinch the circle: its size is how much it reads
+  const w0 = t.$("#ret").offsetWidth;
+  t.ev(`(() => { const st = document.getElementById("stage"), R = st.getBoundingClientRect(), cx = R.left + R.width / 2, cy = R.top + R.height * .35;
+    const ev = (type, id, x) => st.dispatchEvent(new PointerEvent(type, { pointerId: id, isPrimary: id === 1, clientX: x, clientY: cy, bubbles: true }));
+    ev("pointerdown", 1, cx - 20); ev("pointerdown", 2, cx + 20); ev("pointermove", 2, cx + 60); ev("pointerup", 2, cx + 60); ev("pointerup", 1, cx - 20); })()`);
+  await t.sleep(200);
+  t.expect(t.$("#ret").offsetWidth > w0, `pinching out should grow the circle (${w0} -> ${t.$("#ret").offsetWidth})`);
+  // hold still to lock; the name line says Held; a tap goes live again
+  t.ev(`(() => { const st = document.getElementById("stage"), R = st.getBoundingClientRect(); st.dispatchEvent(new PointerEvent("pointerdown", { pointerId: 7, isPrimary: true, clientX: R.left + 100, clientY: R.top + 120, bubbles: true })); })()`);
+  await t.sleep(600);
+  t.ev(`(() => { const st = document.getElementById("stage"), R = st.getBoundingClientRect(); st.dispatchEvent(new PointerEvent("pointerup", { pointerId: 7, isPrimary: true, clientX: R.left + 100, clientY: R.top + 120, bubbles: true })); })()`);
+  t.expect(t.$("#ret.held") && /Held/.test(t.$("#hexline").textContent), "holding should lock the reading");
   await t.click("#add", { wait: 200 });
+  t.expect(!t.$("#ret.held"), "adding a held color should go live again");
   await t.click("#add", { wait: 200 });
   t.expect(t.$$("#picks i").length === 2, `Add color twice should show 2 swatches, got ${t.$$("#picks i").length}`);
   t.expect(t.$("#picks [data-act=save]"), "no Save palette once colors are added");
@@ -3163,6 +3173,7 @@ scenario("studio", "a camera photo opens already reading the part under the circ
     phCaptureAndOpen(c, "From the camera", { seed: { fx: .5, fy: .4 } }); })()`);
   await t.waitFor(() => t.$(".pv-seg-cv.on") && /Selected: \d+%/.test((t.$("[data-pvseginfo]") || {}).textContent || ""), 10000, "the part under the circle selected straight away");
   t.expect(/^Mostly /.test(t.$("[data-pvverdict]").textContent), `no verdict line: "${t.$("[data-pvverdict]").textContent}"`);
+  await t.waitFor(() => t.$$("[data-pvcolor]").length >= 2, 6000, "the main-color suggestion chips");
   const chips = t.$$("[data-pvcolor]");
   t.expect(chips.length >= 2, `Color range should suggest the photo's main colors, got ${chips.length}`);
   await t.click(chips[chips.length - 1], { wait: 400 });

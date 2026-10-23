@@ -17,17 +17,22 @@
 // ---------- exact-pixel sampling (n x n, n = getSampleSize() at the call site), always off the source's native
 // resolution, never the display-sized copy ----------
 let EYE_PROBE = null;
+// n above 24 (the camera's pinch-sized circle can cover hundreds of native pixels) is drawn down into a 24x24 probe
+// first, so the read stays cheap at 12 times a second; the 24x24 cells are then averaged in linear light as before.
 function eyeSample(src, w, h, fx, fy, n = 2) {
   if (!src || !w || !h) return null;
-  if (!EYE_PROBE) { const c = document.createElement("canvas"); c.width = c.height = n; EYE_PROBE = c.getContext("2d", { willReadFrequently: true }); }
-  if (EYE_PROBE.canvas.width !== n) { EYE_PROBE.canvas.width = n; EYE_PROBE.canvas.height = n; }
+  n = Math.max(1, Math.min(Math.round(n), w, h));
+  const m = Math.min(n, 24);
+  if (!EYE_PROBE) { const c = document.createElement("canvas"); c.width = c.height = m; EYE_PROBE = c.getContext("2d", { willReadFrequently: true }); }
+  if (EYE_PROBE.canvas.width !== m) { EYE_PROBE.canvas.width = m; EYE_PROBE.canvas.height = m; }
+  EYE_PROBE.imageSmoothingEnabled = m < n; EYE_PROBE.imageSmoothingQuality = "high";
   const x = clamp(Math.round(fx * w) - (n >> 1), 0, Math.max(0, w - n)), y = clamp(Math.round(fy * h) - (n >> 1), 0, Math.max(0, h - n));
-  try { EYE_PROBE.clearRect(0, 0, n, n); EYE_PROBE.drawImage(src, x, y, n, n, 0, 0, n, n); }
+  try { EYE_PROBE.clearRect(0, 0, m, m); EYE_PROBE.drawImage(src, x, y, n, n, 0, 0, m, m); }
   catch (e) { return null; }
-  const d = EYE_PROBE.getImageData(0, 0, n, n).data;
-  let r = 0, g = 0, b = 0; const m = d.length / 4;
+  const d = EYE_PROBE.getImageData(0, 0, m, m).data;
+  let r = 0, g = 0, b = 0; const cells = d.length / 4;
   for (let p = 0; p < d.length; p += 4) { r += lin8(d[p]); g += lin8(d[p + 1]); b += lin8(d[p + 2]); }
-  return ("#" + isoEncode(r / m) + isoEncode(g / m) + isoEncode(b / m)).toUpperCase();
+  return ("#" + isoEncode(r / cells) + isoEncode(g / cells) + isoEncode(b / cells)).toUpperCase();
 }
 
 const ICON_PHOTO = sv('<rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5.5-5.5L6 19"/>', 22, 1.8);
@@ -254,16 +259,24 @@ const eyeSizeCap = () => { const n = getSampleSize(); return n === 1 ? "Reads on
 // David, 2026-10-23 (second pass: "still hard to use and overwhelming"): the live screen is now just the picture, the
 // circle, one line saying what it is, and three buttons -- Photos, the shutter, Add. Everything else (how much to
 // average, white balance, the exposure lock, the "close read" caveat) lives behind the ⋯ button, one sheet.
+// Third pass (David: "the most functional, efficient and clever UI"):
+//  - the circle IS the sample: pinch it bigger and it averages everything inside it, pinch it small (under ~22px)
+//    and it reads the single pixel at its center. No size setting anywhere.
+//  - hold anywhere to lock the reading (the ring closes, a firm tick); a tap goes live again. A locked color is what
+//    the + adds and the name opens, so a shaking hand never changes the answer.
+//  - the dot beside the name is split: your color on the left, the named color on the right, with how close they are.
+const EYE_RING_MIN = 16, EYE_RING_MAX = 200, EYE_RING_POINT = 22;
 function eye(opts = {}) {
   const el = show(`
     <div class="eye-stage" id="stage">
       <video id="vid" playsinline muted autoplay></video>
       <i class="eye-ret" id="ret"><b class="eye-ret-h"></b><b class="eye-ret-v"></b></i>
+      <span class="eye-ring-cap" id="ringCap" hidden></span>
       <i class="eye-flash" id="flash"></i>
     </div>
     <header class="eye-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eye-hint" id="hint" hidden><span id="hintText"></span></span><button class="icon-btn glass" id="more" aria-label="Camera settings: how much to read, white balance">${ICON.more}</button></header>
     <div class="eye-card" id="card">
-      <button class="eye-read" id="nm"><i id="chip"></i><span><b id="big">Looking…</b><em class="mono" id="hexline"></em></span>${ICON.chev}</button>
+      <button class="eye-read" id="nm"><i class="eye-split" id="chip"><b></b><b></b></i><span><b id="big">Looking…</b><em id="hexline"></em></span>${ICON.chev}</button>
       <div class="eye-picks" id="picks" hidden></div>
       <div class="eye-bar">
         <label class="eye-side" aria-label="Choose a photo">${ICON_PHOTO}<input type="file" accept="image/*" id="file" hidden></label>
@@ -284,6 +297,8 @@ function eye(opts = {}) {
   if (PICK) { $("#shut").hidden = true; if (!PICK.multi) { $("#add").innerHTML = ICON.check || ICON_ADD; $("#add").setAttribute("aria-label", "Use this color"); } }
   const vid = $("#vid"), ret = $("#ret"), stage = $("#stage");
   let stream = null, track = null, raf = 0, cur = null, smooth = null, last = 0, at = [.5, .4], wb = null, wbArm = false, hwLocked = false, drag = null, lockable = false;
+  let ring = clamp(+S.camRing || 46, EYE_RING_MIN, EYE_RING_MAX), held = false, holdT = 0, pinch = null;
+  const ptrs = new Map();
   const read = hex => wb ? wb(hex) : hex;
   const stop = () => { cancelAnimationFrame(raf); if (stream) stream.getTracks().forEach(t => t.stop()); stream = null; track = null; };
   cleanup.push(stop);
@@ -294,7 +309,9 @@ function eye(opts = {}) {
   $("[data-back]").onclick = () => { stop(); leaveAfter(() => PICK && PICK.onDone && PICK.onDone(list.slice())); };
   loadCoreNames();
   // a short instruction only when there is one to give (white balance armed, or a caller's own title)
-  const hint = () => { const t = wbArm ? "Tap something white or grey" : (opts.title || ""); $("#hint").hidden = !t; $("#hintText").textContent = t; };
+  let teach = (S.camTips || 0) < 2 && !opts.title ? "Pinch the circle · hold to lock" : "";
+  if (teach) { S.camTips = (S.camTips || 0) + 1; save(); later(() => { teach = ""; hint(); }, 4500); }
+  const hint = () => { const t = wbArm ? "Tap something white or grey" : (opts.title || teach); $("#hint").hidden = !t; $("#hintText").textContent = t; };
   hint();
 
   // the stage fraction (0..1 on screen) -> the video's own fraction, through the exact cover-crop the screen draws
@@ -306,17 +323,25 @@ function eye(opts = {}) {
     const x = side ? (C.left - R.left - 34) / R.width : .98, y = side ? .98 : (C.top - R.top - 34) / R.height;
     return [clamp(a2[0], .02, Math.max(.05, x)), clamp(a2[1], .02, Math.max(.05, y))];
   };
-  const placeRet = instant => { ret.style.transition = instant ? "none" : ""; ret.style.left = at[0] * 100 + "%"; ret.style.top = at[1] * 100 + "%"; };
+  const placeRet = instant => {
+    ret.style.transition = instant ? "none" : ""; ret.style.left = at[0] * 100 + "%"; ret.style.top = at[1] * 100 + "%";
+    ret.style.setProperty("--d", ring + "px"); ret.classList.toggle("point", ring <= EYE_RING_POINT); ret.classList.toggle("held", held);
+  };
   placeRet(true);
+  // native pixels to average: one at a point-sized ring, otherwise the square that fits inside the circle on screen
+  const sampleN = () => { if (ring <= EYE_RING_POINT || !vid.videoWidth) return 1; return Math.max(2, Math.round(ring * .7 / geom().k)); };
+  const ringCap = show_ => { const c = $("#ringCap"); c.hidden = !show_; if (!show_) return; c.textContent = ring <= EYE_RING_POINT ? "One pixel" : "Averaging inside the circle"; c.style.left = at[0] * 100 + "%"; c.style.top = `calc(${at[1] * 100}% + ${ring / 2 + 16}px)`; };
+  const setHeld = on => { held = on; placeRet(true); $("#card").classList.toggle("held", held); if (on) buzz(18); };
 
   let lastName = "";
   const paint = (hex, nameHex) => {
     if (!hex) return;
     const nm = nameOf(nameHex || hex);
     cur = { hex, nm };
-    ret.style.setProperty("--c", hex); $("#chip").style.setProperty("--c", hex);
+    ret.style.setProperty("--c", hex);
+    const chip = $("#chip"); chip.style.setProperty("--c", hex); chip.style.setProperty("--n", nm.h || hex);
     $("#big").textContent = nm.text;
-    $("#hexline").textContent = hex;
+    $("#hexline").innerHTML = `<span class="mono">${hex}</span> · ${esc(pctMatch(de2000(hex, nm.h || hex)))}${held ? ` · <b class="eye-held">Held</b>` : ""}`;
     if (nm.text !== lastName) { if (lastName) buzz(3); lastName = nm.text; }   // a light tick each time the name changes, so aiming can be felt
   };
   // the swatch and hex always show the RAW reading; only the name eases between readings (a Lab-smoothed point
@@ -324,7 +349,7 @@ function eye(opts = {}) {
   const sampleNow = (ease = true) => {
     if (!vid.videoWidth) return;
     const [fx, fy] = toNative(at[0], at[1]);
-    const hex = read(eyeSample(vid, vid.videoWidth, vid.videoHeight, fx, fy, getSampleSize()));
+    const hex = read(eyeSample(vid, vid.videoWidth, vid.videoHeight, fx, fy, sampleN()));
     if (!hex) return;
     const L = lab(hex);
     smooth = smooth && ease ? smooth.map((x, i) => x + (L[i] - x) * .45) : L;
@@ -333,7 +358,7 @@ function eye(opts = {}) {
   const tick = t => {
     raf = requestAnimationFrame(tick);
     if (!vid.videoWidth || t - last < 80) return;
-    last = t; sampleNow();
+    last = t; if (!held) sampleNow();
   };
 
   // white balance: the next tap picks the reference, read with isoSample's bigger, noise-averaged patch
@@ -352,52 +377,78 @@ function eye(opts = {}) {
   // ⋯: every setting in one place, so the live screen stays clear
   $("#more").onclick = () => {
     const { sh, close } = sheet(`<div class="mn-confirm eye-sheet">${mnHead("Camera")}
-      <p class="eye-sh-h">How much to read under the circle</p>${eyeSizeHTML()}
+      <p class="mn-body">Pinch the circle to read a bigger or smaller area: small reads one pixel, big averages everything inside it. Hold anywhere to lock the reading; tap to go live.</p>
       <p class="eye-sh-h">If the colors look off</p>
       <div class="eye-sh-acts"><button class="pv-pill${wb ? " on" : ""}" data-wb>${wb ? "White balance on · turn off" : "Set white balance"}</button>${lockable ? `<button class="pv-pill${hwLocked ? " on" : ""}" data-lock>${hwLocked ? "Locked · unlock" : "Lock exposure"}</button>` : ""}</div>
       <p class="mn-body eye-sh-note">Phones adjust color on their own, so this is a close read, not a lab measurement.</p></div>`);
-    const sync = () => { sh.querySelector("#sizeCap").textContent = eyeSizeCap(); sh.querySelectorAll("[data-eydsize]").forEach(b => { const on = +b.dataset.eydsize === getSampleSize(); b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); }); };
-    sync();
     sh.addEventListener("click", e => {
-      const sz = e.target.closest("[data-eydsize]");
-      if (sz) { setSampleSize(+sz.dataset.eydsize); buzz(6); sync(); sampleNow(false); return; }
       if (e.target.closest("[data-wb]")) { close(); if (wb) { setWb(null); toast("White balance off"); } else { wbArm = true; hint(); } return; }
       if (e.target.closest("[data-lock]")) { close(); toggleLock(); }
     });
   };
 
-  // the circle: a tap puts it there, a drag moves it by how far the finger moved (so the finger never covers it)
+  // the circle, by touch: one finger taps it somewhere or drags it (by how far the finger moved, so the finger never
+  // covers it); holding still for a moment locks the reading; two fingers pinch its size (= how much it averages)
+  const R0 = () => stage.getBoundingClientRect();
   stage.addEventListener("pointerdown", e => {
-    if (!e.isPrimary) return;
+    ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    try { stage.setPointerCapture(e.pointerId); } catch (err) {}
+    if (ptrs.size === 2) {
+      clearTimeout(holdT); drag = null;
+      const [p, q] = [...ptrs.values()];
+      pinch = { d0: Math.hypot(p.x - q.x, p.y - q.y) || 1, r0: ring };
+      if (held) setHeld(false);
+      ringCap(true); return;
+    }
+    if (ptrs.size > 2) return;
     if (wbArm) {
-      const R = stage.getBoundingClientRect(), [fx, fy] = toNative((e.clientX - R.left) / R.width, (e.clientY - R.top) / R.height);
+      const R = R0(), [fx, fy] = toNative((e.clientX - R.left) / R.width, (e.clientY - R.top) / R.height);
       const ref = vid.videoWidth ? isoSample(vid, fx, fy) : null, f = ref && wbFrom(ref);
       wbArm = false; hint();
       if (f) { setWb(f); toast("White set"); sampleNow(false); } else toast("Too dark or too colorful. Try white or grey");
-      buzz(5); return;
+      buzz(5); drag = null; return;
     }
-    drag = { x: e.clientX, y: e.clientY, at0: at.slice(), moved: false };
-    try { stage.setPointerCapture(e.pointerId); } catch (err) {}
+    drag = { x: e.clientX, y: e.clientY, at0: at.slice(), moved: false, locked: false, wasHeld: held };
+    clearTimeout(holdT);
+    holdT = setTimeout(() => { if (drag && !drag.moved && !pinch && cur) { drag.locked = true; setHeld(true); paint(cur.hex, smooth && labHex(...smooth)); } }, 420);   // locks exactly what was on screen
   });
   stage.addEventListener("pointermove", e => {
-    if (!drag || !e.isPrimary) return;
+    if (!ptrs.has(e.pointerId)) return;
+    ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pinch && ptrs.size >= 2) {
+      const [p, q] = [...ptrs.values()];
+      ring = clamp(pinch.r0 * Math.hypot(p.x - q.x, p.y - q.y) / pinch.d0, EYE_RING_MIN, EYE_RING_MAX);
+      placeRet(true); ringCap(true); sampleNow(false); return;
+    }
+    if (!drag) return;
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
-    if (!drag.moved && Math.hypot(dx, dy) > 6) drag.moved = true;
+    if (!drag.moved && Math.hypot(dx, dy) > 6) { drag.moved = true; clearTimeout(holdT); if (held) setHeld(false); }
     if (!drag.moved) return;
-    const R = stage.getBoundingClientRect();
+    const R = R0();
     at = bound([drag.at0[0] + dx / R.width, drag.at0[1] + dy / R.height]);
     placeRet(true); sampleNow(false);
   });
-  const endDrag = e => {
+  const endPtr = e => {
+    ptrs.delete(e.pointerId);
+    if (pinch) {
+      if (ptrs.size < 2) { pinch = null; S.camRing = Math.round(ring); save(); later(() => ringCap(false), 700); drag = null; buzz(5); }
+      return;
+    }
+    clearTimeout(holdT);
     if (!drag) return;
-    if (!drag.moved && e.type === "pointerup") {
-      const R = stage.getBoundingClientRect();
-      at = bound([(e.clientX - R.left) / R.width, (e.clientY - R.top) / R.height]);
-      placeRet(false); sampleNow(false); buzz(5);
+    if (!drag.moved && !drag.locked && e.type === "pointerup") {
+      if (drag.wasHeld) setHeld(false);   // a tap while held goes live again, right where the circle is
+      else {
+        const R = R0();
+        at = bound([(e.clientX - R.left) / R.width, (e.clientY - R.top) / R.height]);
+        placeRet(false); buzz(5);
+      }
+      sampleNow(false);
     }
     drag = null;
   };
-  stage.addEventListener("pointerup", endDrag); stage.addEventListener("pointercancel", endDrag);
+  stage.addEventListener("pointerup", endPtr); stage.addEventListener("pointercancel", endPtr);
+  stage.addEventListener("contextmenu", e => e.preventDefault());
 
   // the shutter: a real photo, saved to Studio, opening already reading the part under the circle (js/photos.js)
   $("#shut").onclick = () => {
@@ -426,6 +477,7 @@ function eye(opts = {}) {
     list.push(hex); PICK && PICK.onPick && PICK.onPick(hex, { src: "camera" });
     if (typeof learnerLog === "function") learnerLog({ type: "seen", color: { n: nm.n, h: hex }, src: "camera" });
     buzz(10); renderPicks();
+    if (held) setHeld(false);
   };
   $("#picks").onclick = e => {
     const b = e.target.closest("[data-act]"); if (!b) return;
