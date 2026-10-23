@@ -182,7 +182,7 @@ function arfPainting(id) {
           // copy): without it, a lead picture backed by a local thumbnail (img/gallery/...) stayed at that
           // thumbnail's own small size forever, stretched to the lead box's full width -- blurry (David,
           // 2026-10-09). arfLead below does the same progressive swap glPage does.
-          base.img = d.img ? { src: d.img, hi: d.hi || "", cors: /^img\//.test(d.img) || (typeof glCORS === "function" && glCORS(d.img) !== ""), crop: d.crop || null } : null;
+          base.img = d.img ? { src: d.img, hi: (typeof glHiSrc === "function" ? glHiSrc(d) : d.hi) || "", cors: /^img\//.test(d.img) || (typeof glCORS === "function" && glCORS(d.img) !== ""), crop: d.crop || null } : null;
           base.credit = { credit: src.name + (src.credit ? " · " + src.credit : ""), url: d.rec || "", licenseUrl: "" };
         }) };
       return base;
@@ -591,6 +591,7 @@ function arfLead(place, art, self) {
         };
         const hiUrl = hiImg.dataset.hi, commonsFn = glCommonsFilename(hiUrl);
         if (commonsFn) glCommonsResolve(hiUrl, 1200).then(resolved => swap(resolved || hiUrl, !!resolved));
+        else if (typeof glYale === "function" && glYale(hiUrl)) glYaleResolve(hiUrl).then(u => { if (u) swap(u, true); });
         else swap(hiUrl, !!(typeof glCORS === "function" && glCORS(hiUrl)));
       }
     }

@@ -40,8 +40,10 @@ function eydSizeSheet() {
 }
 // ---------- the pixel source: the element drawn once to an offscreen canvas at native size ----------
 function eydSource(el) {
-  const w = el.naturalWidth || el.width, h = el.naturalHeight || el.height;
+  let w = el.naturalWidth || el.width, h = el.naturalHeight || el.height;
   if (!w || !h) return null;
+  // a 3000-4000 px museum original (the Met's, Smithsonian's) would be a 16 MP canvas, over iOS's limit: read it at ~6 MP
+  const k = Math.min(1, Math.sqrt(6e6 / (w * h))); if (k < 1) { w = Math.max(1, Math.round(w * k)); h = Math.max(1, Math.round(h * k)); }
   const c = document.createElement("canvas"); c.width = w; c.height = h;
   const cx = c.getContext("2d", { willReadFrequently: true });
   try { cx.drawImage(el, 0, 0, w, h); cx.getImageData(0, 0, 1, 1); } catch (e) { return null; }
