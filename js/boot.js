@@ -101,7 +101,7 @@ function shot(name) {
       }
       studioFromImage(c, "From a photo");
       if (arg1 === "segment") later2(() => { const e = document.querySelector(".screen.studio"); if (e && e._pvSetTool) { e._pvSetTool("seg"); e._pvSetMethod(arg2 === "object" ? "object" : "color"); later2(() => e._pvSegTap(.3, .5), 300); } }, 900);
-      if (arg1 === "pick") later2(() => { const e = document.querySelector(".screen.studio"); if (e && e._pvSetTool) e._pvSetTool("pick"); }, 700);
+      if (arg1 === "pick") later2(() => { const e = document.querySelector(".screen.studio"); if (e && e._pvAddDot) [[.25, .3], [.75, .25], [.5, .78]].forEach(([fx, fy]) => e._pvAddDot(fx, fy)); }, 900);   // studiopv:pick -- three color circles, for design review
       return;
     }
     // the camera eye (js/camera.js), for design-review screenshots only: eye stands in a fake camera stream (a

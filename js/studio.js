@@ -404,7 +404,8 @@ function palPhotoView(p) {
   // "Diverse" (David's palette-engine brief, 2026-10-09: farthest-point sampling in OKLab, guarantees every
   // distinct hue family in this photo's pool above a small floor gets a seat) is a photo-agnostic mode, same as
   // out/area/pick -- it operates on the whole pool, not a filtered subset, so it belongs in this always-on list
-  const haveModes = () => GL_MODES.filter(m => m[0] === "out" || m[0] === "area" || m[0] === "pick" || (m[0] === "diverse" && pool.length > 1) || glModeSet(m[0], pool, 6, null));
+  // "Pick from it" is left out: the circles on the photo (Your colors, below the photo) are how a photo is picked from
+  const haveModes = () => GL_MODES.filter(m => m[0] !== "pick" && (m[0] === "out" || m[0] === "area" || (m[0] === "diverse" && pool.length > 1) || glModeSet(m[0], pool, 6, null)));
   let modesKey = "";
   const dom = pool.reduce((a, b) => b.share > a.share ? b : a).h;
   const titleKind = p.photoId != null ? "photo" : null;
@@ -414,9 +415,10 @@ function palPhotoView(p) {
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="gl-pa-btn" data-plvopen>Palette view</button></header>
     ${titleKind ? `<button class="pv-title${curTitle ? "" : " ph"}" data-rename aria-label="Rename">${esc(curTitle || titlePlaceholder)}</button>` : `<p class="eyebrow">${esc(p.from || "Photo")}</p>`}
     <div class="gl-pal-wrap">
-    <div class="pv-img" id="himg"><img src="${p.img}" alt="Your photo"><canvas class="gl-lit-cv" data-pvlitcv aria-hidden="true"></canvas><canvas class="pv-seg-cv" data-pvsegcv aria-hidden="true"></canvas><div class="gl-mks" data-pvmks></div></div>
-    <p class="pv-tapnote" data-pvtapnote>Press and drag over the photo. Let go to add the color.</p>
-    <div class="pv-tools"><div class="seg" role="group" aria-label="Tools" data-pvtools><button data-pvt="pick" aria-pressed="false">Eyedropper</button><button data-pvt="seg" aria-pressed="false">Select a part</button></div></div>
+    <div class="pv-img" id="himg"><img src="${p.img}" alt="Your photo"><canvas class="gl-lit-cv" data-pvlitcv aria-hidden="true"></canvas><canvas class="pv-seg-cv" data-pvsegcv aria-hidden="true"></canvas><div class="gl-mks" data-pvmks></div><div class="pv-dots" data-pvdots></div></div>
+    <p class="pv-tapnote" data-pvtapnote>Tap the photo to read a color. Drag a circle to move it.</p>
+    <div class="pv-yours" data-pvyours hidden></div>
+    <div class="pv-tools"><div class="pv-read" role="group" aria-label="How each circle reads: the exact pixel or an average around it"><span>Read</span>${[[1, "Exact"], [3, "3×3"], [5, "5×5"], [11, "11×11"]].map(([n, t]) => `<button data-pvread="${n}">${t}</button>`).join("")}</div><button class="pv-pill pv-segbtn" data-pvsegt aria-pressed="false">Select a part</button></div>
     <div class="pv-panel" data-pvpanel hidden></div>
     <div class="gl-pal-ui">
     <div class="palette gl-strip" data-pvswatches></div>
@@ -523,7 +525,7 @@ function palPhotoView(p) {
     host.innerHTML = found.map((o, q) => { const h = pal[o.k].h; return `<button class="gl-mk${o.n ? " sm" : ""}${fresh ? " in" : ""}" data-swatch="${h}" data-ink="${ink(h)}" style="left:${(o.fx * 100).toFixed(2)}%;top:${(o.fy * 100).toFixed(2)}%;--c:${h};--d:${q * 20}ms" aria-label="${esc(glName(h).t)}, color ${o.k + 1}">${o.n || !num ? "" : o.k + 1}</button>`; }).join("");
   };
   const setWhere = w => { if (w === where) return; where = w; if (typeof S !== "undefined" && S) { S.palWhere = w; save(); } drawPalette(); };
-  const setMode = m => { if (m === mode) return; mode = m; editedPal = null; capOpen = false; buzz(5); if (m === "pick" && !tool) setTool("pick"); drawPalette(); };
+  const setMode = m => { if (m === mode) return; mode = m; editedPal = null; capOpen = false; buzz(5); drawPalette(); };
   palLoad().then(() => { if (el.isConnected) drawPalette(); }).catch(() => {});
   drawPalette();
   if (typeof twSection === "function") twSection(el.querySelector("#twins"), pool, { what: "your photo", key: "img", img: () => el.querySelector(".pv-img img"), rich: () => typeof twRichPool === "function" ? twRichPool(el.querySelector(".pv-img img")) : null });
@@ -570,7 +572,7 @@ function palPhotoView(p) {
         sxPick(c.h, { title: "Replace with", onPick: h2 => { const next = pal.slice(); next[j] = { ...c, h: h2 }; pushUndo(`Replaced ${nm.t}`); editedPal = next; drawPalette(); buzz(8); toast(`Replaced ${nm.t}`, { undo: doUndo }); } });
         return;
       }
-      if (e.target.closest("[data-frompic]")) { frompic = j; close(); setTool("pick"); toast("Tap the photo to pick the new color"); }
+      if (e.target.closest("[data-frompic]")) { frompic = j; close(); setTool(null); toast("Tap the photo to pick the new color"); }
     };
   };
   el.querySelector("[data-pvedit]").onclick = e => {
@@ -609,15 +611,8 @@ function palPhotoView(p) {
   span.addEventListener("click", e => {
     if (e.target.closest(".gl-mk")) return;
     const r = span.getBoundingClientRect(); if (e.clientX < r.left || e.clientY < r.top || e.clientX > r.right || e.clientY > r.bottom) return;
-    if (tool === "pick") return;   // the eyedropper owns the gesture (press and drag, release to add)
-    if (tool === "seg") { segTap((e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height); return; }
-    const hex = sampleAt(e.clientX, e.clientY); if (!hex) return;
-    if (frompic != null) {
-      const j = frompic; frompic = null; const pal = (editedPal || curSet().pal).slice(), c = pal[j]; if (!c) return;
-      pushUndo(`Replaced ${glName(c.h).t}`); pal[j] = { ...c, h: hex }; editedPal = pal; buzz(8); drawPalette(); toast("Replaced", { undo: doUndo }); return;
-    }
-    if (mode === "pick") { if (!picks.includes(hex) && picks.length < 12) picks.push(hex); buzz(6); drawPalette(); }
-    // David, 2026-10-23: a tap on a photo never opens the guess-the-name quiz (the Isolator) any more; it picks
+    // the color circles own every other touch (pointerdown, below); a click only matters while selecting a part
+    if (tool === "seg") segTap((e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height);
   });
 
   // ---------- the two tools on the photo (David, 2026-10-23) ----------
@@ -632,11 +627,80 @@ function palPhotoView(p) {
   //    (Photoshop's Contiguous). + taps add colors, - taps subtract them.
   // Both then share Fill holes (anything the selection fully surrounds joins it) and Feather (a blur of the edge).
   // One soft mask (alpha 0..1 on a grid) feeds the dimmed overlay and the part's own palette.
-  let tool = null, eyd = null;
+  let tool;   // tool: null (the color circles) or "seg" (Select a part); undefined until the first setTool
   const seg = { method: S.segMethod === "color" ? "color" : "object", sign: 1, pts: [], cseeds: [], fuzz: 18, contig: true, feather: 0, fill: false,
     prep: null, raw: null, gw: 0, gh: 0, alpha: null, frac: 0, t: 0, ready: false, busy: false, loading: false, pending: null, failed: false, parts: null, partsBusy: false };
   const panel = el.querySelector("[data-pvpanel]"), note = el.querySelector("[data-pvtapnote]"), segCv = el.querySelector("[data-pvsegcv]");
   const NOTE_DEFAULT = note.textContent;
+  // ---------- the color circles (David, 2026-10-24: "you open an image or take a picture, then you can select any part
+  // of the image to show its color: a circle with the color on screen, slide it around to change it, tap somewhere
+  // else to select more colors; segmenting is optional; palettes below"). Each tap drops a circle filled with the
+  // color under it (the shared sampler, js/eyedrop.js, averaging the usual small square); dragging a circle -- or
+  // keeping the finger down after dropping one -- slides it, recoloring live, with its name floating above it so the
+  // finger never hides the answer. The circles' colors list as "Your colors" under the photo. ----------
+  const dots = [];   // { fx, fy, hex }
+  let activeDot = -1, ddrag = null, dsrc = null;
+  const dotsHost = el.querySelector("[data-pvdots]"), yoursHost = el.querySelector("[data-pvyours]");
+  const readAt = (fx, fy) => { dsrc = dsrc || (typeof eydSource === "function" ? eydSource(img) : null); if (!dsrc) return null; const r = eydSampleAt(dsrc, fx, fy, getSampleSize()); return r && r.hex; };
+  const dotName = hex => typeof nameOfTapped === "function" ? nameOfTapped(hex) : nameOf(hex).text;
+  const drawDots = () => {
+    const a = dots[activeDot];
+    dotsHost.innerHTML = dots.map((d, i) => `<i class="pv-dot${i === activeDot ? " on" : ""}" data-pvdot="${i}" style="left:${(d.fx * 100).toFixed(2)}%;top:${(d.fy * 100).toFixed(2)}%;--c:${d.hex}"></i>`).join("")
+      + (a ? `<span class="pv-dot-name${a.fy < .14 ? " below" : ""}" style="left:${(clamp(a.fx, .12, .88) * 100).toFixed(2)}%;top:${(a.fy * 100).toFixed(2)}%">${esc(dotName(a.hex))}</span>` : "");
+  };
+  const drawYours = () => {
+    yoursHost.hidden = !dots.length;
+    yoursHost.innerHTML = !dots.length ? "" : `<div class="pv-yours-head"><b>Your colors</b>${dots.length >= 2 ? `<button class="aw-link" data-pvysave>Save as palette</button>` : ""}<button class="aw-link" data-pvyclear>Clear</button></div>`
+      + dots.map((d, i) => `<div class="pv-yrow${i === activeDot ? " on" : ""}"><button class="pv-yname" data-swatch="${d.hex}"><i style="--c:${d.hex}"></i><b>${esc(dotName(d.hex))}</b><em class="mono">${d.hex}</em></button><button class="pv-yx" data-pvyx="${i}" aria-label="Remove this color">${ICON.x}</button></div>`).join("");
+  };
+  // a screen point -> the photo's own fractions, kept inside the picture while a circle is being dragged
+  const mapIn = (cx, cy) => { const r = img.getBoundingClientRect(); return { fx: clamp((cx - r.left) / r.width, 0, 1), fy: clamp((cy - r.top) / r.height, 0, 1) }; };
+  const addDot = (fx, fy) => {
+    const hex = readAt(fx, fy); if (!hex) return -1;
+    if (dots.length >= 12) { toast("12 colors is the most. Remove one first."); return -1; }
+    dots.push({ fx, fy, hex });
+    if (typeof learnerLog === "function") learnerLog({ type: "seen", color: { n: nameOf(hex).n, h: hex }, src: "photo" });
+    return dots.length - 1;
+  };
+  span.addEventListener("pointerdown", e => {
+    if (tool === "seg" || !e.isPrimary || e.button > 0 || e.target.closest(".gl-mk")) return;
+    const r = img.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) return;
+    e.preventDefault();
+    const m = mapIn(e.clientX, e.clientY);
+    if (frompic != null) { const hex = readAt(m.fx, m.fy); if (hex) addPick(hex); return; }
+    const hit = e.target.closest("[data-pvdot]");
+    const i = hit ? +hit.dataset.pvdot : addDot(m.fx, m.fy);
+    if (i < 0) return;
+    buzz(hit ? 5 : 9);
+    activeDot = i; ddrag = { i, ox: dots[i].fx - m.fx, oy: dots[i].fy - m.fy, name: dotName(dots[i].hex) };
+    try { span.setPointerCapture(e.pointerId); } catch (err) {}
+    drawDots(); drawYours();
+  });
+  span.addEventListener("pointermove", e => {
+    if (!ddrag) return;
+    const m = mapIn(e.clientX, e.clientY), d = dots[ddrag.i]; if (!d) return;
+    d.fx = clamp(m.fx + ddrag.ox, 0, 1); d.fy = clamp(m.fy + ddrag.oy, 0, 1);
+    d.hex = readAt(d.fx, d.fy) || d.hex;
+    const nm = dotName(d.hex); if (nm !== ddrag.name) { ddrag.name = nm; buzz(3); }
+    drawDots();
+  });
+  const dotUp = () => { if (!ddrag) return; ddrag = null; drawYours(); };
+  span.addEventListener("pointerup", dotUp); span.addEventListener("pointercancel", dotUp);
+  span.addEventListener("contextmenu", e => e.preventDefault());
+  // how each circle reads (the shared sample size, js/eyedrop.js): below the photo, never over it. A change re-reads every circle.
+  const readSync = () => el.querySelectorAll("[data-pvread]").forEach(b => { const on = +b.dataset.pvread === getSampleSize(); b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
+  readSync();
+  el.querySelector(".pv-read").onclick = e => {
+    const b = e.target.closest("[data-pvread]"); if (!b) return;
+    setSampleSize(+b.dataset.pvread); readSync(); buzz(5);
+    dots.forEach(d => { d.hex = readAt(d.fx, d.fy) || d.hex; }); drawDots(); drawYours();
+  };
+  yoursHost.addEventListener("click", e => {
+    const x = e.target.closest("[data-pvyx]");
+    if (x) { e.stopPropagation(); dots.splice(+x.dataset.pvyx, 1); activeDot = Math.min(activeDot, dots.length - 1); buzz(6); drawDots(); drawYours(); return; }
+    if (e.target.closest("[data-pvyclear]")) { dots.length = 0; activeDot = -1; buzz(6); drawDots(); drawYours(); return; }
+    if (e.target.closest("[data-pvysave]")) keepPalette(dots.map(d => d.hex), curTitle || p.from || "Photo");
+  });
   const SEG_NOTE = { object: "Tap a thing in the photo. The AI finds its edges.", color: "Tap a color. Everything that close to it is selected." };
   const addPick = hex => {
     // Edit's "Pick from the photo" (frompic) takes the next pick as the replacement color, whatever tool is on
@@ -644,11 +708,6 @@ function palPhotoView(p) {
       const j = frompic; frompic = null; const pal = (editedPal || curSet().pal).slice(), c = pal[j]; if (!c) return;
       pushUndo(`Replaced ${glName(c.h).t}`); pal[j] = { ...c, h: hex }; editedPal = pal; buzz(8); drawPalette(); toast("Replaced", { undo: doUndo }); return;
     }
-    if (picks.includes(hex)) { buzz(4); return; }
-    if (picks.length >= 12) { toast("12 colors is the most. Start over to pick more."); return; }
-    picks.push(hex);
-    if (mode !== "pick") { mode = "pick"; editedPal = null; capOpen = false; }
-    drawPalette();
   };
   const segHas = () => seg.method === "object" ? seg.pts.length > 0 : seg.cseeds.length > 0;
   // ----- the raw mask, per method -----
@@ -892,36 +951,26 @@ function palPhotoView(p) {
     note.textContent = SEG_NOTE[m];
     if (m === "object") objEnsure();
   }
-  const sizeSync = () => { const c = panel.querySelector("#sizeCap"); if (c) c.textContent = eyeSizeCap(); panel.querySelectorAll("[data-eydsize]").forEach(b => { const on = +b.dataset.eydsize === getSampleSize(); b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); }); };
-  // one tool is always on (David, 2026-10-23: "when you click on the photo it opens a quiz instead of the color
-  // picker"): Eyedropper by default, Select a part when chosen or when a camera photo opens on the circle's part
+  // Select a part is optional: one button turns it on (the panel opens, taps select instead of dropping circles) and off
   function setTool(t) {
     if (t === tool) return;
     tool = t;
-    if (eyd) { eyd.detach(); eyd = null; }
-    span.classList.toggle("tool-pick", tool === "pick"); span.classList.toggle("tool-seg", tool === "seg");
-    el.querySelectorAll("[data-pvt]").forEach(b => { const on = b.dataset.pvt === tool; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
-    panel.hidden = !tool;
-    if (tool === "pick") {
-      note.textContent = "Press and drag over the photo. Let go to add the color.";
-      panel.innerHTML = `<p class="pv-panel-cap">Average of</p>${eyeSizeHTML()}`;
-      eyd = eyedropAttach(img, { onPick: addPick });
-      sizeSync();   // the palette stays as computed until the first pick switches it to "Pick from it" (addPick)
-    } else if (tool === "seg") {
+    const on = tool === "seg", sb = el.querySelector("[data-pvsegt]");
+    span.classList.toggle("tool-seg", on); span.classList.toggle("tool-dots", !on);
+    sb.classList.toggle("on", on); sb.setAttribute("aria-pressed", on); sb.textContent = on ? "Done selecting" : "Select a part";
+    panel.hidden = !on;
+    if (on) {
       note.textContent = SEG_NOTE[seg.method];
       panel.innerHTML = segPanelHTML(); segInfo(); partsDraw(); verdict();
       if (seg.method === "object") objEnsure();
     } else {
-      note.textContent = NOTE_DEFAULT;
+      note.textContent = segPool ? "Tap the photo to read a color. The palettes below are for the part you selected." : NOTE_DEFAULT;
       panel.innerHTML = "";
     }
-    buzz(5);
   }
-  el.querySelector("[data-pvtools]").onclick = e => { const b = e.target.closest("[data-pvt]"); if (b) setTool(b.dataset.pvt); };
+  el.querySelector("[data-pvsegt]").onclick = () => { setTool(tool === "seg" ? null : "seg"); buzz(5); };
   const toggle = (b, on) => { b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); buzz(5); };
   panel.addEventListener("click", e => {
-    const sz = e.target.closest("[data-eydsize]");
-    if (sz) { setSampleSize(+sz.dataset.eydsize); buzz(6); sizeSync(); return; }
     const mb = e.target.closest("[data-pvm]"); if (mb) { if (mb.dataset.pvm !== seg.method) { setMethod(mb.dataset.pvm); buzz(5); } return; }
     const sg = e.target.closest("[data-pvsign]");
     if (sg) { seg.sign = +sg.dataset.pvsign; panel.querySelectorAll("[data-pvsign]").forEach(b => { const on = +b.dataset.pvsign === seg.sign; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); }); buzz(5); return; }
@@ -945,21 +994,15 @@ function palPhotoView(p) {
       refresh(false);
     }
   });
-  // the camera's circle (js/camera.js, through js/photos.js): the photo opens already reading that part. Object when
-  // the AI is already on this phone (no surprise 46 MB download), Color range otherwise; the choice isn't saved.
-  if (p.seed) {
-    const go1 = () => typeof segModelCached === "function" ? segModelCached().then(ok => {
-      if (!el.isConnected) return;
-      seg.method = ok && !seg.failed ? "object" : "color";
-      setTool("seg"); segTap(p.seed.fx, p.seed.fy);
-      const top = el.querySelector(".pv-img"); if (top && top.scrollIntoView) top.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
-    }) : null;
-    if (img.complete && img.naturalWidth) go1(); else img.addEventListener("load", go1, { once: true });
-  } else setTool("pick");   // an uploaded photo opens ready to pick, the same page a camera photo opens on
-  cleanup.push(() => { if (eyd) eyd.detach(); });
+  // start on the circles; a camera photo (js/camera.js, through js/photos.js) opens with a circle already where the
+  // camera's circle was, so the color you were pointing at is there waiting
+  setTool(null);
+  const placeSeed = () => { if (!p.seed || !el.isConnected) return; const i = addDot(p.seed.fx, p.seed.fy); if (i >= 0) { activeDot = i; drawDots(); drawYours(); } };
+  if (img.complete && img.naturalWidth) placeSeed(); else img.addEventListener("load", placeSeed, { once: true });
   el._pvSegTap = segTap;   // design review (js/boot.js studiopv:segment) taps a part without a finger
   el._pvSetTool = setTool;
   el._pvSetMethod = setMethod;
+  el._pvAddDot = (fx, fy) => { const i = addDot(fx, fy); if (i >= 0) { activeDot = i; drawDots(); drawYours(); } };
 }
 
 // ---------- palette view: count, percentages and three looks; keep, copy or share ----------

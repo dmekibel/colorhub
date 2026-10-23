@@ -218,3 +218,31 @@
 .pv-chip i{width:28px;height:28px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);flex:none}
 .pv-chip em{font:500 13px/1 var(--mono);font-style:normal;color:var(--soft)}
 .pv-chip-wait{font:italic 400 16px/40px var(--serif);color:var(--soft)}
+/* the color circles on a photo (js/studio.js palPhotoView, 2026-10-24): tap drops one, drag slides it */
+.pv-img.tool-dots img{touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;cursor:crosshair}
+.pv-dots{position:absolute;inset:0;pointer-events:none}
+.pv-img.tool-seg .pv-dots{opacity:.35}
+.pv-dot{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:var(--c);pointer-events:auto;
+  box-shadow:0 0 0 2.5px #F3F3F1,0 0 0 4px rgba(0,0,0,.35),0 6px 14px rgba(0,0,0,.35);transition:transform .15s var(--ease)}
+.pv-img.tool-seg .pv-dot{pointer-events:none}
+.pv-dot.on{transform:scale(1.18);box-shadow:0 0 0 3px #F3F3F1,0 0 0 4.5px rgba(0,0,0,.4),0 8px 18px rgba(0,0,0,.4)}
+.pv-dot-name{position:absolute;transform:translate(-50%,calc(-100% - 30px));padding:7px 12px;border-radius:var(--r-pill);background:rgba(14,13,11,.86);color:#F3F3F1;font:400 16px/1.1 var(--serif);white-space:nowrap;max-width:70vw;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+.pv-dot-name.below{transform:translate(-50%,30px)}
+.pv-yours{margin:14px 0 0;border-top:1px solid var(--rule)}
+.pv-yours[hidden]{display:none}
+.pv-yours-head{display:flex;align-items:center;gap:14px;padding:14px 0 6px}
+.pv-yours-head b{flex:1;font:400 19px/1 var(--serif)}
+.pv-yrow{display:flex;align-items:center;border-bottom:1px solid var(--rule)}
+.pv-yname{flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:10px 0;text-align:left}
+.pv-yname i{width:30px;height:30px;border-radius:50%;background:var(--c);flex:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+.pv-yname b{flex:1;min-width:0;font:400 17px/1.2 var(--serif);color:var(--ink)}
+.pv-yname em{font:500 13px/1 var(--mono);font-style:normal;color:var(--soft)}
+.pv-yrow.on .pv-yname b{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.pv-yx{width:44px;height:44px;display:grid;place-items:center;color:var(--soft)}
+.pv-yx svg{width:18px;height:18px}
+.pv-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pv-segbtn{flex:0 0 auto}
+.pv-read{display:flex;align-items:center;gap:2px;padding:3px;border-radius:var(--r-pill);background:var(--surface-2);flex:1 1 auto}
+.pv-read span{padding:0 8px 0 10px;font:400 15px/1 var(--serif);color:var(--soft)}
+.pv-read button{flex:1 1 0;min-height:36px;padding:0 4px;border-radius:var(--r-pill);font:400 15px/1 var(--serif);color:var(--soft)}
+.pv-read button.on{background:var(--paper);color:var(--paper-ink)}

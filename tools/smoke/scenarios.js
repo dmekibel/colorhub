@@ -3161,23 +3161,36 @@ scenario("studio", "photo page: Select a part by Color range (fuzziness, only to
   await t.click("[data-pvsegclear]", { wait: 300 });
   t.expect(!t.$(".pv-seg-cv.on"), "Clear should remove the overlay");
   t.expect(t.$$("[data-pvrows] .pal-name").length >= 3, "Clear should bring back the whole photo's palette");
-  await t.click('[data-pvt="pick"]', { wait: 300 });
-  t.expect(t.$("[data-pvpanel] [data-eydsize]"), "the Eyedropper tool should offer the sample size");
-  t.expect(t.$(".pv-img.tool-pick"), "the photo should be in eyedropper mode");
+  await t.click("[data-pvsegt]", { wait: 300 });
+  t.expect(t.$(".pv-img.tool-dots"), "Done selecting should go back to the color circles");
+  t.expect(t.$$("[data-pvread]").length === 4 && !t.$(".pv-img [data-pvread]"), "the Exact/average setting belongs below the photo, not on it");
 });
 
-scenario("studio", "a camera photo opens already reading the part under the circle, with a verdict line and one-tap color suggestions", async t => {
+scenario("studio", "photo page: a camera photo opens with a color circle where the camera's circle was; tap adds circles, drag recolors one, Your colors lists them", async t => {
   await t.open("#shot=studio", { settle: 400 });
   t.ev(`(() => { const c = document.createElement("canvas"); c.width = 300; c.height = 200; const x = c.getContext("2d");
-    x.fillStyle = "#2B2A4C"; x.fillRect(0, 0, 300, 200); x.fillStyle = "#A8323F"; x.fillRect(80, 30, 140, 150); x.fillStyle = "#7E1F2B"; x.fillRect(80, 120, 140, 60);
-    phCaptureAndOpen(c, "From the camera", { seed: { fx: .5, fy: .4 } }); })()`);
-  await t.waitFor(() => t.$(".pv-seg-cv.on") && /Selected: \d+%/.test((t.$("[data-pvseginfo]") || {}).textContent || ""), 10000, "the part under the circle selected straight away");
-  t.expect(/^Mostly /.test(t.$("[data-pvverdict]").textContent), `no verdict line: "${t.$("[data-pvverdict]").textContent}"`);
-  await t.waitFor(() => t.$$("[data-pvcolor]").length >= 2, 6000, "the main-color suggestion chips");
-  const chips = t.$$("[data-pvcolor]");
-  t.expect(chips.length >= 2, `Color range should suggest the photo's main colors, got ${chips.length}`);
-  await t.click(chips[chips.length - 1], { wait: 400 });
-  t.expect(t.$(".pv-seg-cv.on"), "a suggestion chip should leave a selection");
+    x.fillStyle = "#2B2A4C"; x.fillRect(0, 0, 300, 200); x.fillStyle = "#A8323F"; x.fillRect(150, 0, 150, 200);
+    phCaptureAndOpen(c, "From the camera", { seed: { fx: .25, fy: .5 } }); })()`);
+  await t.waitFor(".pv-dot", 10000, "the circle from the camera");
+  t.expect(t.$$(".pv-yrow").length === 1, "Your colors should list the camera's color");
+  const first = t.$(".pv-yname em").textContent;
+  const img = t.$(".pv-img img"), r = img.getBoundingClientRect();
+  const ev = (type, x, y) => img.dispatchEvent(new t.w.PointerEvent(type, { pointerId: 3, isPrimary: true, clientX: x, clientY: y, bubbles: true }));
+  // a tap on the red half adds a second circle
+  ev("pointerdown", r.left + r.width * .8, r.top + r.height * .5); ev("pointerup", r.left + r.width * .8, r.top + r.height * .5);
+  await t.sleep(200);
+  t.expect(t.$$(".pv-dot").length === 2 && t.$$(".pv-yrow").length === 2, "a tap should add a second circle and row");
+  t.expect(t.$$(".pv-yname em")[1].textContent !== first, "the second circle should read the other color");
+  // drag the first circle over to the red half: its color follows
+  const d0 = t.$('[data-pvdot="0"]').getBoundingClientRect();
+  t.$('[data-pvdot="0"]').dispatchEvent(new t.w.PointerEvent("pointerdown", { pointerId: 4, isPrimary: true, clientX: d0.left + 17, clientY: d0.top + 17, bubbles: true }));
+  ev("pointermove", r.left + r.width * .7, r.top + r.height * .5); ev("pointerup", r.left + r.width * .7, r.top + r.height * .5);
+  await t.sleep(200);
+  t.expect(t.$$(".pv-yname em")[0].textContent !== first, "dragging a circle should change its color");
+  await t.click('[data-pvread="1"]', { wait: 200 });
+  t.expect(t.$('[data-pvread="1"].on'), "Exact should turn on below the photo");
+  await t.click('[data-pvyx="1"]', { wait: 200 });
+  t.expect(t.$$(".pv-dot").length === 1, "removing a color should remove its circle");
 });
 
 scenario("studio", "photo page: Select a part by Object uses the segmentation model (stubbed), with + and - taps and Undo", async t => {
@@ -3355,7 +3368,7 @@ scenario("studio", "Isolator: guess, reveal alone, hold to see it back, try anot
   img.dispatchEvent(new t.w.MouseEvent("click", { bubbles: true, clientX: r.left + r.width * .5, clientY: r.top + r.height * .5, view: t.w }));
   await t.sleep(500);
   t.expect(!t.$(".iso"), "a tap on the photo opened the guess-the-name quiz instead of the color picker");
-  t.expect(t.$(".pv-img.tool-pick"), "the photo should open with the Eyedropper on");
+  t.expect(t.$(".pv-img.tool-dots"), "the photo should open on the color circles");
   // the Isolator itself still works where it's opened on purpose
   t.ev(`isoOpen({ src: document.querySelector(".pv-img img"), fx: .5, fy: .5, from: "photo", ref: "photo" })`);
   await t.waitFor(".iso .iso-opts button", 6000, "the four options");
