@@ -6,3 +6,5 @@ research/_raw/
 
 # working screenshots from design reviews: kept locally, never published (the site must stay under GitHub Pages 1 GB)
 design/review-shots/
+data/fills/_cache.json
+data/fills/_cache.tmp
