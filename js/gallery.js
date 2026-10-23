@@ -40,8 +40,9 @@ function galVer() { return typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" +
 function loadGallery() {
   if (GAL) return Promise.resolve(GAL);
   const get = (f, kind) => fetch(GAL_DIR + f + galVer()).then(r => { if (!r.ok) throw new Error(f + " " + r.status); return r[kind](); });
-  return GAL_LOADING || (GAL_LOADING = Promise.all([get("index.json", "json"), get("index.bin", "arrayBuffer")])
-    .then(([head, buf]) => (GAL = glBuild(head, new Uint8Array(buf))))
+  // est.json (tools/gallery.py): which years / countries are estimates. Optional: without it everything reads as measured, as before.
+  return GAL_LOADING || (GAL_LOADING = Promise.all([get("index.json", "json"), get("index.bin", "arrayBuffer"), get("est.json", "json").catch(() => null)])
+    .then(([head, buf, est]) => (GAL = glEst(glBuild(head, new Uint8Array(buf)), est)))
     .catch(e => { GAL_LOADING = null; throw e; }));
 }
 // ---------- subjects (data/gallery/subjects.json, built by tools/subjects.py + tools/subjects_clip.py) ----------
@@ -193,7 +194,35 @@ function glCropStyle(i, d, ab) {
   const f = v => v.toFixed(3);
   return ` style="inset:auto;max-width:none;object-fit:fill;width:${f(W)}%;height:${f(H)}%;left:${f(L)}%;top:${f(T)}%"`;
 }
-const glYear = i => { const y = GAL.year[i]; return y === GL_UNDATED ? "" : y < 0 ? `${-y} BCE` : String(y); };
+// Estimated years and countries (data/gallery/est.json). yspan[i] = width in years of the plausible range (0 = measured); coest[i] = 1 when
+// the country is only the painter's nationality.
+function glEst(G, est) {
+  G.yspan = new Uint16Array(G.n); G.coest = new Uint8Array(G.n);
+  if (est && Array.isArray(est.y)) est.y.forEach((k, j) => { if (k >= 0 && k < G.n) G.yspan[k] = Math.max(1, Math.min(65535, (est.yspan && est.yspan[j]) || 1)); });
+  if (est && Array.isArray(est.co)) est.co.forEach(k => { if (k >= 0 && k < G.n) G.coest[k] = 1; });
+  return G;
+}
+const glYearEst = i => !!(GAL.yspan && GAL.yspan[i] && GAL.year[i] !== GL_UNDATED);
+const glCoEst = i => !!(GAL.coest && GAL.coest[i]);
+// the bare year ("1495", "480 BCE", "" for undated): for numbers and sorting. For anything a person reads use glYear.
+const glYearRaw = i => { const y = GAL.year[i]; return y === GL_UNDATED ? "" : y < 0 ? `${-y} BCE` : String(y); };
+// the year as people read it: "about 1495" when it is an estimate, never a bare guess
+const glYear = i => { const t = glYearRaw(i); return t && glYearEst(i) ? "about " + t : t; };
+// the one plain note on the painting page, or "" when nothing here is estimated
+function glEstNote(i) {
+  const G = GAL, out = [];
+  if (glYearEst(i)) {
+    const y = G.year[i], sp = G.yspan[i];
+    let rng = "";
+    if (sp >= 10) {   // the estimate is the middle of the range: show it rounded to 5 years
+      const r5 = v => Math.round(v / 5) * 5, lo = r5(y - sp / 2), hi = r5(y + sp / 2), f = v => v < 0 ? `${-v} BCE` : String(v);
+      if (hi > lo) rng = ` (${f(lo)}–${f(hi)} possible)`;
+    }
+    out.push(`Year estimated from the painter’s working years${rng}.`);
+  }
+  if (glCoEst(i)) out.push("Country from the painter’s nationality.");
+  return out.join(" ");
+}
 // artist (or country) and year; the name gives way before the year does
 const glByline = (i, d) => { const who = d.a || d.co || "", y = glYear(i); return `<span>${esc(who)}</span>${y ? `<em>${who ? " · " : ""}${y}</em>` : ""}`; };
 // Three sizes of one painting (research/image-size-upgrade-2026-10-23.md has the host-by-host measurements):
@@ -1517,10 +1546,11 @@ function glPage(i, d, fromHex, tol) {
     <h1 class="p-title">${esc(d.t)}</h1>
     <p class="p-dek">${d.a ? `<button class="aw-link" data-awpainter="${esc(routeSlug(d.a))}">${esc(d.a)}</button>` : "Artist unknown"}${[d.co, d.mv].filter(Boolean).map(x => ` · ${esc(x)}`).join("")}</p>
     <p class="gl-id-src">${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? `<span class="gl-dk-credit"> · ${esc(src.credit)}</span>` : ""}</p>
+    ${glEstNote(i) ? `<p class="gl-est-note">${esc(glEstNote(i))}</p>` : ""}
     <div class="gl-dk-acts"><button class="gl-dk-btn" data-dkpick hidden aria-pressed="false">${icon("pipette", 18)}<span>Pick a color</span></button><button class="gl-dk-btn" data-dkcloser>${ICON.search}<span>Look closer</span></button></div>
     ${(() => { /* desktop: the map's card chips live here now (a click on the map opens this page directly) */
       const y = G.year[i], y0 = y === GL_UNDATED ? null : y < 1500 ? Math.floor(y / 100) * 100 : Math.floor(y / 10) * 10, y1 = y0 == null ? null : y < 1500 ? y0 + 99 : y0 + 9;
-      return `<div class="gl-dk-map" role="group" aria-label="On the map">${d.a ? `<button type="button" class="gl-dk-chip" data-pmap="arr=color&p=${esc(routeSlug(d.a))}">Same painter</button>` : ""}${y0 != null ? `<button type="button" class="gl-dk-chip" data-pmap="arr=color&y0=${y0}&y1=${y1}">Same decade</button>` : ""}<button type="button" class="gl-dk-chip" data-pmap="arr=spiral&seed=${i}">Similar</button><button type="button" class="gl-dk-chip" data-pmap="arr=spiral&seed=${i}&walk=1">Walk from here</button></div>`;
+      return `<div class="gl-dk-map" role="group" aria-label="On the map">${d.a ? `<button type="button" class="gl-dk-chip" data-pmap="arr=color&p=${esc(routeSlug(d.a))}">Same painter</button>` : ""}${y0 != null ? `<button type="button" class="gl-dk-chip" data-pmap="arr=color&y0=${y0}&y1=${y1}">${glYearEst(i) ? "Around the same decade" : "Same decade"}</button>` : ""}<button type="button" class="gl-dk-chip" data-pmap="arr=spiral&seed=${i}">Similar</button><button type="button" class="gl-dk-chip" data-pmap="arr=spiral&seed=${i}&walk=1">Walk from here</button></div>`;
     })()}
     <div class="gl-why" data-glwhy hidden></div>
     </div>

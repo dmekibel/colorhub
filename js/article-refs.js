@@ -170,7 +170,7 @@ function arfPainting(id) {
     return find.then(i => {
       if (!(i >= 0 && i < G.n)) return null;
       const pal = glPal(i), src = G.src[G.mus[i]] || { name: "Museum" };
-      const yr = typeof glYear === "function" ? String(glYear(i) || "") : "", year = yr ? (/BCE/.test(yr) ? -parseInt(yr, 10) : parseInt(yr, 10)) : null;
+      const yr = typeof glYearRaw === "function" ? String(glYearRaw(i) || "") : "", year = yr ? (/BCE/.test(yr) ? -parseInt(yr, 10) : parseInt(yr, 10)) : null;
       const base = { kind: "painting", id, i, year, name: "A painting", sub: "", pal: pal.map(p => p.h), shares: pal.map(p => p.share), img: null, credit: null,
         // the same weighting as the gallery's own badges: each palette color within 12 counts, fading to nothing at 12
         cover: hex => pal.reduce((t, p) => { const d = arfDE(hex, p.h); return d < 12 ? t + p.share * (1 - (d / 12) ** 2) : t; }, 0),
@@ -429,7 +429,7 @@ async function arfEnhance(root, art, self) {
   if (gaps.length) {
     let paint = [];
     if (typeof loadGallery === "function" && typeof npGalleryHits === "function") {
-      try { await loadGallery(); paint = npGalleryHits(self.h, 6).filter(h => !shownIdx.has(h[0]) && inTime({ kind: "painting", year: parseInt(glYear(h[0]), 10) || null })).slice(0, gaps.length + 3).map(h => "painting:" + h[0]); } catch (e) { paint = []; }
+      try { await loadGallery(); paint = npGalleryHits(self.h, 6).filter(h => !shownIdx.has(h[0]) && inTime({ kind: "painting", year: parseInt(glYearRaw(h[0]), 10) || null })).slice(0, gaps.length + 3).map(h => "painting:" + h[0]); } catch (e) { paint = []; }
     }
     if (!alive()) return;
     const extra = things.filter(t => t.ok && !shown.has(t.key) && !chosen.some(c => c.key === t.key) && t.kind !== "painting").sort((a, b) => a.de - b.de).slice(0, 4).map(t => t.key);

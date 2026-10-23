@@ -440,7 +440,7 @@ function pmFacetsOf(i, F) {
   const y = F.G.year[i];
   if (y !== GL_UNDATED) {
     const y0 = y < 1500 ? Math.floor(y / 100) * 100 : Math.floor(y / 10) * 10, y1 = y < 1500 ? y0 + 99 : y0 + 9;
-    out.push({ dim: "when", val: [y0, y1], label: "Same decade" });
+    out.push({ dim: "when", val: [y0, y1], label: F.G === GAL && typeof glYearEst === "function" && glYearEst(i) ? "Around the same decade" : "Same decade" });
   }
   if (F.country[i]) out.push({ dim: "co", val: F.country[i], label: "Same " + pmColLabel(F, "co").toLowerCase() });
   return out;

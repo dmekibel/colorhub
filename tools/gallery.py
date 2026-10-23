@@ -28,6 +28,7 @@ Output: data/gallery/ (deleted and rewritten each run)
                onto 0..255) · u8 mean L* x 2.5 · u8 mean C* x 3 · 6 x (R, G, B, share x 250).
                About 30 bytes a painting: 40,000 paintings is 1.2 MB.
   ids.txt      painting ids, one per line, in index order (line i = gallery index i). For the article reader's [[painting:<id>]].
+  est.json     {"y": [indices with an estimated year], "yspan": [their range width in years], "co": [indices with an estimated country]}. Loaded with the index.
   names.json   the library names used: [[name, hex, "src src", kanji?, meaning?]]. Loaded with the first painting page.
   d/NNN.json   detail shards of `shard` paintings (index order): [id, title, artist, country, movement, image URL,
                record URL, [library name index x 6], [app word index x 6], hi image URL, pool]. Loaded for the
@@ -418,8 +419,34 @@ def run_pools(corpus, raw, workers=8):
     return done
 
 
+def est_sidecar(corpus):
+    """est.json (2026-10-23): which gallery positions show an ESTIMATED year or country, so the app can say "about 1495" instead of
+    showing a guess as exact. y = indices whose year is estimated (corpus yest), yspan = the width in years of the plausible
+    range, same order (0 when unknown); co = indices whose country comes from the painter's nationality (coest).
+    A year cleared to undated is never listed. index.bin and ids.txt are untouched."""
+    y, yspan, co = [], [], []
+    for k, x in enumerate(corpus):
+        if x.get("yest") and x.get("y") is not None:
+            y.append(k)
+            yspan.append(int(x.get("span") or 0))
+        if x.get("coest") and x.get("co"):
+            co.append(k)
+    return {"y": y, "yspan": yspan, "co": co}
+
+
+def write_est(corpus, out):
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "est.json").write_text(json.dumps(est_sidecar(corpus), separators=(",", ":")), encoding="utf-8")
+
+
 def main():
     args = sys.argv[1:]
+    if "--est-only" in args:   # just the sidecar, from the current corpus order; --out <dir> to write somewhere else
+        o = Path(args[args.index("--out") + 1]) if "--out" in args else OUT
+        corpus, _ = load_corpus()
+        write_est(corpus, o)
+        print(f"est.json -> {o}")
+        return
     raw = Path(args[args.index("--raw") + 1]) if "--raw" in args else ROOT / "research" / "_raw"
     shard = int(args[args.index("--shard") + 1]) if "--shard" in args else SHARD
     corpus, files = load_corpus()
@@ -534,6 +561,7 @@ def main():
     (OUT / "index.bin").write_bytes(bytes(index))
     names = json.dumps(libs, ensure_ascii=False, separators=(",", ":")).replace('],["', '],\n["')
     (OUT / "names.json").write_text(names, encoding="utf-8")
+    write_est(corpus, OUT)
     n_sh = 0
     for s in range(0, len(details), shard):
         text = json.dumps(details[s:s + shard], ensure_ascii=False, separators=(",", ":")).replace('],["', '],\n["')
