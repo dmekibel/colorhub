@@ -1008,7 +1008,7 @@ function pmLaySubject(list, F) {
 // look.json (small, has the island table) when a painting map opens, a .bin only when its layout is first drawn.
 // A missing, short or stale file (n or hash not matching) hides the option; a shared address that names it falls back to color.
 const PM_LOOK = { st: 0, meta: null, pm: null, rp: null, V: { keep: null, c30: null, c60: null } };   // st: 0 unknown, 2 ready, 3 unavailable. V[v] = { meta, grid, isl, bad }
-const PM_LK_DEF = { lay: "isl", sp: .1, col: 30, lab: 1 };
+const PM_LK_DEF = { lay: "isl", sp: .05, col: 30, lab: 1 };
 // the window shape the island cloud is stretched to (a phone is tall, a desktop wide), in quarter steps so a resize does not relay out every frame
 const pmLookAsp = () => clamp(Math.round(innerWidth / Math.max(300, innerHeight) * 4) / 4, .4, 2);
 const PM_LK_KEY = "pm-look-opts";
