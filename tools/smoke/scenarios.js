@@ -7926,6 +7926,38 @@ scenario("paintings", "Save palette adds a new entry to S.palettes, and Edit let
   const afterEdit = t.ev(`(S.palettes || []).length`);
   t.expect(afterEdit === after + 1, `saving from the editor should add one more entry to S.palettes (was ${after}, now ${afterEdit})`);
 });
+// David, 2026-10-24: the saved-palette full-screen preview is one shared viewer (js/palettefull.js) reachable from every palette.
+scenario("paintings", "Palette full screen: opens from the painting's strip with the current palette, a mode switch changes the render, an edit shows up, and close returns exactly", async t => {
+  await t.open("#/gallery/777", { settle: 800 });
+  await t.waitFor("[data-glswatches] [data-glj]", 15000, "the palette strip");
+  const hexesOf = () => t.ev(`[...document.querySelectorAll('[data-glswatches] [data-swatch]')].map(b => b.dataset.swatch.toUpperCase()).join()`);
+  const strip = hexesOf(), hash0 = t.ev("location.hash");
+  await t.click(await t.waitFor(".gl-seg-row [data-pf-open]", 8000, "the Full screen button by the strip"), { wait: 500 });
+  await t.waitFor(".palfull [data-pf-stage] .pf-it", 5000, "the full-screen palette viewer");
+  const scrollY0 = t.ev("document.body.style.top ? -parseFloat(document.body.style.top) : scrollY");
+  const shown = () => t.ev(`[...document.querySelectorAll('.palfull [data-pf-stage] .pf-it')].map(e => e.style.getPropertyValue('--c').toUpperCase()).join()`);
+  t.expect(shown() === strip, `full screen shows ${shown()} but the strip is ${strip}`);
+  const html0 = t.ev(`document.querySelector('.palfull [data-pf-stage]').innerHTML`);
+  await t.click(t.$('.palfull [data-pf-mode="circles"]'), { wait: 400 });
+  t.expect(t.ev(`document.querySelector('.palfull [data-pf-stage]').innerHTML`) !== html0 && t.$(".palfull [data-pf-stage] .pf-circ"), "switching to Circles didn't change the render");
+  t.expect(/approximate/.test(t.ev(`document.querySelector('.palfull').textContent`)), "the 'Screen colors are approximate' line is missing");
+  await t.click(t.$(".palfull [data-pf-close]"), { wait: 600 });
+  t.expect(!t.$(".palfull") && t.ev("location.hash") === hash0 && Math.abs(t.ev("scrollY") - scrollY0) < 4, `closing full screen didn't return to the same page and scroll (overlay ${!!t.$(".palfull")}, ${hash0} -> ${t.ev("location.hash")}, scroll ${scrollY0} -> ${t.ev("scrollY")})`);
+});
+scenario("paintings", "Palette full screen from the palette editor shows the edit, and closing returns to the editor", async t => {
+  await t.open("#/gallery/777", { settle: 800 });
+  await t.waitFor("[data-glswatches] [data-glj]", 15000, "the palette strip");
+  const shown = () => t.ev(`[...document.querySelectorAll('.palfull [data-pf-stage] .pf-it')].map(e => e.style.getPropertyValue('--c').toUpperCase()).join()`);
+  await t.click(await t.waitFor("[data-gledit]", 8000, "the Edit button"), { wait: 500 });
+  await t.waitFor(() => t.$$(".gl-edit-sheet [data-ge-row]").length >= 3, 8000, "the editor rows");
+  await t.click(t.$('.gl-edit-sheet [data-ge-rm="2"]'), { wait: 300 });
+  const left = t.ev(`[...document.querySelectorAll('.gl-edit-sheet [data-ge-swap]')].map(b => b.style.getPropertyValue('--c').toUpperCase()).join()`);
+  await t.click(t.$(".gl-edit-sheet [data-pf-open]"), { wait: 500 });
+  await t.waitFor(".palfull [data-pf-stage] .pf-it", 5000, "full screen from the editor");
+  t.expect(shown() === left, `full screen from the editor shows ${shown()} but the edit is ${left}`);
+  await t.click(t.$(".palfull [data-pf-close]"), { wait: 600 });
+  t.expect(!t.$(".palfull") && t.$(".gl-edit-sheet"), "closing full screen should leave the editor open");
+});
 // David, 2026-10-11: "I should be able to select multiple color families in the map" -- S.hm.fam holds several,
 // comma-joined; the map shows their union, and an old single-family save still reads the same.
 scenario("home", "Colors sheet: several families can be on at once (their union is shown)", async t => {
