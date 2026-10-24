@@ -2506,6 +2506,21 @@ scenario("pages", "a color's cover line shows plain words, never [[link]] or [1]
   t.expect(/dusky shade of green/i.test(hero), `the cover's definition line is missing: "${hero.replace(/\s+/g, " ").slice(0, 160)}"`);
 });
 
+// David, 2026-10-24: "Button overlapping text is bad": on an in-between color's cover the Back and Map buttons sat on top of
+// the two-up band's text. Nothing in the cover may sit under the top controls (Back, Map / Close).
+scenario("pages", "an in-between color's cover text never sits under the Back and Map buttons", async t => {
+  await t.open("#/color/teal", { settle: 300 });
+  const sw = t.d.createElement("button"); sw.dataset.swatch = "#987B4A"; sw.style.cssText = "position:fixed;left:150px;top:300px;width:60px;height:60px;z-index:9999";
+  t.d.body.appendChild(sw);
+  await t.click(sw, { wait: 700 }); sw.remove();
+  await t.waitFor(() => t.$(".rp-split-band"), 8000, "the two-up band of an in-between color");
+  t.w.scrollTo(0, 0); await t.sleep(300);
+  // the Back / Map pills sit at --top + 14 and are ~44px tall, so the cover's first line must start below --top + 58
+  const top = parseFloat(t.ev("getComputedStyle(document.documentElement).getPropertyValue('--top')")) || 0;
+  const bandTop = t.$(".rp-split-band").getBoundingClientRect().top, heroTop = t.$(".cp-hero").getBoundingClientRect().top;
+  t.expect(bandTop - heroTop >= top + 58, `the two-up band starts ${Math.round(bandTop - heroTop)}px into the cover but the Back / Map pills reach ${Math.round(top + 58)}px: they overlap the text`);
+});
+
 // David, 2026-10-09 on an in-between color's page ("Your color · Dark olive brown... diagonal triangle in the
 // top-right corner"): the split cover used to paint the matched name's color as a diagonal wedge, clip-path'd
 // into the hero's top-right corner -- exactly where a full-bleed hero's own "✕ Close" pill also lives
