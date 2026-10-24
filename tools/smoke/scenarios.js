@@ -3072,7 +3072,6 @@ scenario("studio", "camera: a refused permission gets its own fix-it message, an
   // the live screen stays clear: the picture, one name line, three buttons; settings live behind ⋯
   t.expect(t.$("#shut") && t.$("#add") && t.$(".eye-card label.eye-side"), "the three buttons (Photos, shutter, Add) should be there");
   t.expect(!t.$(".eye-card [data-eydsize]"), "the sample size belongs in the ⋯ sheet, not on the live screen");
-  t.expect(t.$("#ret").offsetWidth > 22, "the circle should start big enough to average, not read one pixel");
   t.expect(t.$("#chip.eye-split"), "the dot should be split: your color beside the named color");
   await t.waitFor(() => t.$("#big") && t.$("#big").textContent !== "Looking…", 8000, "a live color name");
   const left = t.ev("document.getElementById('big').textContent");
@@ -3083,13 +3082,12 @@ scenario("studio", "camera: a refused permission gets its own fix-it message, an
   await t.sleep(300);
   const right = t.ev("document.getElementById('big').textContent");
   t.expect(left !== right, `dragging the circle should change what it names (both read "${left}")`);
-  // two fingers pinch the circle: its size is how much it reads
-  const w0 = t.$("#ret").offsetWidth;
-  t.ev(`(() => { const st = document.getElementById("stage"), R = st.getBoundingClientRect(), cx = R.left + R.width / 2, cy = R.top + R.height * .35;
-    const ev = (type, id, x) => st.dispatchEvent(new PointerEvent(type, { pointerId: id, isPrimary: id === 1, clientX: x, clientY: cy, bubbles: true }));
-    ev("pointerdown", 1, cx - 20); ev("pointerdown", 2, cx + 20); ev("pointermove", 2, cx + 60); ev("pointerup", 2, cx + 60); ev("pointerup", 1, cx - 20); })()`);
-  await t.sleep(200);
-  t.expect(t.$("#ret").offsetWidth > w0, `pinching out should grow the circle (${w0} -> ${t.$("#ret").offsetWidth})`);
+  // how much the circle reads is a setting in ⋯ (2x2 by default), never a pinch on the picture
+  await t.click("#more", { wait: 300 });
+  t.expect(t.$$(".eye-sheet [data-eydsize]").length === 5, "the ⋯ sheet should offer five read sizes");
+  t.expect(t.$(".eye-sheet [data-eydsize].on") && t.$(".eye-sheet [data-eydsize].on").dataset.eydsize === "2", "the default read should be a 2x2 average");
+  t.ev("(() => { const s = [...document.querySelectorAll('.scrim')].pop(); if (s) s.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, cancelable: true })); })()");
+  await t.sleep(500);
   // hold still to lock; the name line says Held; a tap goes live again
   t.ev(`(() => { const st = document.getElementById("stage"), R = st.getBoundingClientRect(); st.dispatchEvent(new PointerEvent("pointerdown", { pointerId: 7, isPrimary: true, clientX: R.left + 100, clientY: R.top + 120, bubbles: true })); })()`);
   await t.sleep(600);
@@ -3221,13 +3219,9 @@ scenario("studio", "photo page: a camera photo opens with a color circle where t
   ev("pointermove", r.left + r.width * .7, r.top + r.height * .5); ev("pointerup", r.left + r.width * .7, r.top + r.height * .5);
   await t.sleep(200);
   t.expect(t.$$(".pv-yname em")[0].textContent !== first, "dragging a circle should change its color");
-  // two fingers pinch the selected circle: bigger reads more
-  const sz0 = t.$('[data-pvdot="0"]').offsetWidth, rr = img.getBoundingClientRect(), cy = rr.top + rr.height * .5;
-  const pe = (type, id, x) => img.dispatchEvent(new t.w.PointerEvent(type, { pointerId: id, isPrimary: id === 11, clientX: x, clientY: cy, bubbles: true }));
-  t.$('[data-pvdot="0"]').dispatchEvent(new t.w.PointerEvent("pointerdown", { pointerId: 11, isPrimary: true, clientX: rr.left + 20, clientY: cy, bubbles: true }));
-  pe("pointerdown", 12, rr.left + 60); pe("pointermove", 12, rr.left + 140); pe("pointerup", 12, rr.left + 140); pe("pointerup", 11, rr.left + 20);
-  await t.sleep(200);
-  t.expect(t.$('[data-pvdot="0"]').offsetWidth > sz0, `pinching should grow the circle (${sz0} -> ${t.$('[data-pvdot="0"]').offsetWidth})`);
+  t.expect(t.$('[data-pvread="2"].on'), "circles should read a 2x2 average by default");
+  await t.click('[data-pvread="1"]', { wait: 200 });
+  t.expect(t.$('[data-pvread="1"].on'), "Exact should turn on below the photo");
   await t.click('[data-pvlens="value"]', { wait: 200 });
   t.expect(/grayscale/.test(img.style.filter), "the Value lens should show the photo in greys");
   await t.click('[data-pvyx="1"]', { wait: 200 });
