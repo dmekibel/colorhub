@@ -578,3 +578,14 @@
 .cf-close{position:absolute;z-index:2;top:calc(env(safe-area-inset-top,0px) + 10px);right:calc(env(safe-area-inset-right,0px) + 12px);width:44px;height:44px;border-radius:50%;border:0;display:grid;place-items:center;background:rgba(20,19,17,.55);color:#fff;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .cf-close svg{width:18px;height:18px;stroke:currentColor;fill:none}
 .rp-focus.cf-stack .cf-band .rp-focus-tag{right:calc(env(safe-area-inset-right,0px) + 64px)}
+
+/* the color page is a feed with the article as its first tab (David, 2026-10-25): the chip row sits right under the hero and
+   stays pinned (js/feed.js); the sections of the article live in .rp-about under it */
+.rp-tabs{margin-top:0;padding-bottom:8px}
+.rp-tabs .fd-bar{top:0}
+.rp-about[hidden]{display:none}
+.rp-about>:first-child{margin-top:28px}
+.fd-pre .fd-chip.dis{opacity:.5;border-style:dashed;pointer-events:none}
+.rp-tabs .sec-head[hidden]{display:none}
+.rp-tabs .sec-head{justify-content:flex-end;margin-top:8px;margin-bottom:0}
+.rp-tabs .sec-head b,.rp-tabs .sec-head span{display:none}

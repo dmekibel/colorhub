@@ -185,13 +185,7 @@ function rpActionRowHTML(name, hex, tapped) {
     <button type="button" class="rp-learnpill${label.known ? " rp-learnpill-known" : ""}" data-learnit>${label.known ? ICON.check || "" : ""}<span>${esc(label.t)}</span>${!label.known ? `<em>2 min</em>` : ""}</button>
     ${typeof sxPairBtnHTML === "function" ? sxPairBtnHTML(learnHex, name) : ""}
     <button type="button" class="icon-btn rp-heart${liked ? " saved" : ""}" data-fvh data-rp-heart aria-label="${liked ? "Remove from your colors" : "Add to your colors"}" aria-pressed="${liked}">${liked ? ICON.heartOn : ICON.heart}</button>
-    ${rpExploreBtnHTML()}
   </div>`;
-}
-// David, 2026-10-24: "from the very beginning, when you click on a color, the explore button should be somewhere there."
-// A quiet pill on the cover (same pill family as Learn it / Pair with), one tap to the Keep exploring feed.
-function rpExploreBtnHTML() {
-  return `<button type="button" class="rp-explore" data-rp-explore aria-label="Explore: keep exploring this color"><span>Explore</span>${ICON.down}</button>`;
 }
 function rpCoverFoot(name, hex, tapped, entry) {
   const id = "rp-cov-" + Math.random().toString(36).slice(2, 8), rel = rpRelation(name, tapped, entry && entry.h || hex);
@@ -200,7 +194,7 @@ function rpCoverFoot(name, hex, tapped, entry) {
         ${tapped ? `<p class="rp-yours">${esc(rpYoursLine(name, hex, tapped))}</p>` : `<p class="rp-tier" data-rp-tier></p>
         <p class="rp-def" data-rp-def></p><p class="rp-defsrc" data-rp-defsrc></p>`}
         ${!tapped ? rpActionRowHTML(name, hex, tapped) : ""}
-        <span class="rp-hexrow"><button class="mono cp-hex" data-copy="${tapped || hex}">${tapped || hex}</button>${tapped && typeof fvSet === "function" ? `<button class="rp-saveyours" data-rp-saveyours>${typeof fvHas === "function" && fvHas(tapped) ? "Saved to your colors" : "Save your color"}</button>` : ""}</span>${tapped ? `<div class="rp-actrow">${typeof sxPairBtnHTML === "function" ? sxPairBtnHTML(tapped || hex, name) : ""}${rpExploreBtnHTML()}</div>` : ""}` };
+        <span class="rp-hexrow"><button class="mono cp-hex" data-copy="${tapped || hex}">${tapped || hex}</button>${tapped && typeof fvSet === "function" ? `<button class="rp-saveyours" data-rp-saveyours>${typeof fvHas === "function" && fvHas(tapped) ? "Saved to your colors" : "Save your color"}</button>` : ""}</span>${tapped ? `<div class="rp-actrow">${typeof sxPairBtnHTML === "function" ? sxPairBtnHTML(tapped || hex, name) : ""}</div>` : ""}` };
 }
 // a quick, good-enough legibility lift for the liking-moment fill: blend the page's color toward white or black
 // until it reads against the heart's own dark surface, without a full perceptual model (it's a decoration, not a swatch)
@@ -716,23 +710,25 @@ function rpBarHTML(name, hex) {
 function rpBarSync(el) {
   const has = { story: !!el.querySelector(".ar-door,.ar-head,.rp-twin"), paint: !!el.querySelector(".rp-paint"), family: !!el.querySelector(".ar-fam"), id: !!el.querySelector(".rp-idcard"), explore: !!el.querySelector("[data-rpfeed]") };
   const bar = el.querySelector(".rp-bar") || document.querySelector("body > .rp-bar"); if (!bar) return;
-  bar.querySelectorAll("[data-rp-jump]").forEach(b => { b.hidden = !has[b.dataset.rpJump]; });
+  // the page's own chip row (About · Paintings · …, js/feed.js) replaces these jump chips and the Explore pill: one row, not two
+  const tabs = !!el.querySelector("[data-rpfeed] .fd-chips");
+  bar.querySelectorAll("[data-rp-jump]").forEach(b => { b.hidden = tabs || !has[b.dataset.rpJump]; });
 }
 function rpBarWire(el) {
   const bar = el.querySelector(".rp-bar"), hero = el.querySelector(".cp-hero"); if (!bar || !hero) return;
   const scrollTo = t => { if (!t) return; const y = t.getBoundingClientRect().top + scrollY - bar.offsetHeight - 8; window.scrollTo({ top: Math.max(0, y), behavior: reduceMotion ? "auto" : "smooth" }); };
-  const cover = el.querySelector("[data-rp-explore]");
-  if (cover) cover.addEventListener("click", () => { buzz && buzz(5); fdJump(el.querySelector("[data-rpfeed]")); });
   bar.addEventListener("click", e => {
     if (e.target.closest("[data-rp-back]")) return xBack();
     if (e.target.closest("[data-rp-top]")) return window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
     const j = e.target.closest("[data-rp-jump]"); if (!j) return;
-    const k = j.dataset.rpJump;
-    if (k === "story") return scrollTo(el.querySelector(".ar-door,.ar-head,.rp-twin"));
-    if (k === "paint") return scrollTo(el.querySelector(".rp-paint"));
-    if (k === "family") return scrollTo(el.querySelector(".ar-fam"));
-    if (k === "id") return scrollTo(el.querySelector(".rp-idcard"));
-    if (k === "explore") return fdJump(el.querySelector("[data-rpfeed]"));   // David, 2026-10-24: Keep exploring is so far down it takes forever to get there
+    const k = j.dataset.rpJump, feed = el.querySelector("[data-rpfeed]");
+    // the sections live in the About tab: open it first when another tab is showing
+    const inAbout = f => { if (feed && feed.dataset.fdTab && feed.dataset.fdTab !== "about" && feed.fdChip) { feed.fdChip("about"); return setTimeout(f, 60); } f(); };
+    if (k === "story") return inAbout(() => scrollTo(el.querySelector(".ar-door,.ar-head,.rp-twin")));
+    if (k === "paint") return inAbout(() => scrollTo(el.querySelector(".rp-paint")));
+    if (k === "family") return inAbout(() => scrollTo(el.querySelector(".ar-fam")));
+    if (k === "id") return inAbout(() => scrollTo(el.querySelector(".rp-idcard")));
+    if (k === "explore") { if (feed && feed.dataset.fdTab === "about" && feed.fdChip) feed.fdChip("paintings"); return fdJump(feed); }
   });
   // it lives on <body>, not in the screen: the screen's entrance animation leaves a transform that would pin a fixed bar to the page.
   // Defensive: a fast Back-then-forward can call this again before the last page's own cleanup has run (David,
@@ -940,11 +936,27 @@ function rpSplitWire(el, name, hex, tapped) {
 // Test yourself lives collapsed at the end of the chapters themselves.
 // entry {n, h, src?, also?, notes?, shade?}; o: { tapped, cls, facet (a story built from the wiki, js/article.js
 // arFacetArt), codes [[k, v]], node }. Returns the screen; the caller wires its own save/share icons, if any.
+function rpStartChip() {
+  const prev = typeof XSTACK !== "undefined" && XSTACK.length > 1 ? String(XSTACK[XSTACK.length - 2]) : "";
+  return /^(g:|pt:|aw:|sv:|pal:|ph:)/.test(prev) || /^r:.*(\/paintings\/map|\/gallery\/|\/painting\/)/.test(prev) ? "paintings" : "about";
+}
 function colorDossier(entry, o = {}) {
   const backNav = BACK_RENDER;   // read before show() clears it: the Keep exploring feed at the foot puts itself back where it was on a Back (js/feed.js)
   const name = entry.n, hex = entry.h, tapped = o.tapped ? String(o.tapped).toUpperCase() : null, heroHex = tapped || hex;
   const famC = typeof rcFamC === "function" ? rcFamC(heroHex) : null;
   const cover = rpCoverFoot(name, hex, tapped, entry);
+  // David, 2026-10-25: "the explorer doesn't make sense to be at the very bottom": the feed is the body of the page and the
+  // article is its first tab (About). Where you start depends on how you arrived: from a painting, the map or a painter you are
+  // browsing, so Paintings; from anywhere else (Learn, search, a new color) the article first. A Back restores the tab you left.
+  const memo0 = backNav && typeof FD_MEMO !== "undefined" ? FD_MEMO.get("c:" + heroHex.toUpperCase()) : null;
+  const startChip = memo0 && memo0.chip ? memo0.chip : rpStartChip();
+  const secHTML = `<div class="ar-head" data-ar-head hidden></div>
+    <div class="ar-body" data-ar-body hidden></div>
+    ${rpPaintSectionHTML(name, heroHex, entry, famC)}
+    <div class="ar-fam-host" data-ar-fam-host hidden></div>
+    ${rpIdCardHTML()}
+    ${rpNextHTML()}
+    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "c:" + name, title: name }) : ""}`;
   const el = show(`
     <div class="c-hero cp-hero cp-hero-full${tapped ? " rp-split" : ""}" style="--c:${heroHex};--c2:${hex}" data-ink="${ink(heroHex)}">
       <button class="cp-close" data-back aria-label="Back">${ICON.back}</button>
@@ -957,14 +969,9 @@ function colorDossier(entry, o = {}) {
     ${rpBarHTML(name, heroHex)}
     ${rpAlsoHTML(name, hex, tapped)}
     ${entry.shade ? `<p class="fine np-shade">A described shade: ${esc(entry.shade.base)} made ${esc(entry.shade.mod)}${o.shadeBase ? `. <button class="link" data-shade-base>See ${esc(entry.shade.base)}</button>` : "."}</p>` : ""}
-    <div class="ar-head" data-ar-head hidden></div>
-    <div class="ar-body" data-ar-body hidden></div>
-    ${rpPaintSectionHTML(name, heroHex, entry, famC)}
-    <div class="ar-fam-host" data-ar-fam-host hidden></div>
-    ${rpIdCardHTML()}
-    ${rpNextHTML()}
-    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "c:" + name, title: name }) : ""}
-    ${typeof fdMountColor === "function" ? `<section class="gl-feed rp-feed" data-rpfeed aria-label="Keep exploring"></section>` : ""}
+    ${typeof fdMountColor === "function" ? `<section class="gl-feed rp-feed rp-tabs" data-rpfeed aria-label="About this color, and keep exploring">
+      <div class="fd-bar fd-pre"><div class="fd-chips" role="tablist" aria-label="About this color, or keep exploring">${[["about", "About"], ...FDC_CHIPS].map(([k, t]) => `<button class="fd-chip${k === startChip ? " on" : ""}${k === "about" || k === startChip ? "" : " dis"}" role="tab" data-fc="${k}" aria-selected="${k === startChip}">${t}</button>`).join("")}</div></div>
+      <div class="rp-about" data-rp-about${startChip === "about" ? "" : " hidden"}>${secHTML}</div></section>` : secHTML}
     <p class="fine rp-last">Screen colors are approximate. Painting figures are measured from museum photographs of aged, varnished paintings.</p>
   `, "article cp-page" + (o.cls ? " " + o.cls : ""));
   el.style.setProperty("--c", heroHex);   // the page's own faint tint (css/colorpage.css .screen.cp-page)
@@ -994,7 +1001,7 @@ function colorDossier(entry, o = {}) {
   rpBarWire(el);
   // Keep exploring (js/feed.js): the endless feed of paintings and more at the very bottom, with chips for what counts as related.
   // On a Back it is built at once so the page is as tall as it was and the scroll lands on the same tile.
-  if (typeof fdMountColor === "function") fdMountColor(el.querySelector("[data-rpfeed]"), { sub: { hex: heroHex.toUpperCase(), name, tapped }, backNav });
+  if (typeof fdMountColor === "function") fdMountColor(el.querySelector("[data-rpfeed]"), { sub: { hex: heroHex.toUpperCase(), name, tapped }, backNav, about: el.querySelector("[data-rp-about]"), startChip });
   if (tapped) rpSplitWire(el, name, hex, tapped);
   if (typeof rcWireOpen === "function") rcWireOpen(el, heroHex);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });

@@ -197,7 +197,7 @@ function fdTrim(keep) {
 function fdMount(host, o) {
   if (!host || !GAL) return;
   const sub = o.sub || null, isColor = !!sub, i = isColor ? -1 : o.i, d = o.d, G = GAL, SKEY = isColor ? "c:" + sub.hex : i, memo = o.backNav ? FD_MEMO.get(SKEY) : null;
-  const CHIPS = isColor ? FDC_CHIPS : FD_CHIPS, RANK = isColor ? FDC_RANK : FD_RANK, LEADS = isColor ? FDC_LEAD : FD_LEAD, STORE = isColor ? FDC_ST : FD_ST, FALL = isColor ? "paintings" : "color";
+  const CHIPS = isColor ? (o.about ? [["about", "About"], ...FDC_CHIPS] : FDC_CHIPS) : FD_CHIPS, RANK = isColor ? FDC_RANK : FD_RANK, LEADS = isColor ? FDC_LEAD : FD_LEAD, STORE = isColor ? FDC_ST : FD_ST, FALL = isColor ? "paintings" : "color";
   const st = { ...(memo && memo.chip ? { chip: memo.chip, metric: memo.metric, color: memo.color | 0 } : STORE) };   // re-read from FD_ST when the feed is built (start)   // this page's chip; a Back brings back the chip the feed was left on
   const save = () => { Object.assign(STORE, st); fdSaveState(); };
   const ctx = { i, d, o, sub, kind: isColor ? "color" : "painting", key: SKEY, F: typeof XBF !== "undefined" && XBF && XBF.G === GAL ? XBF : null, _q: null, q() { return this._q || (this._q = twQuery(o.cols, { self: i })); } };
@@ -211,15 +211,25 @@ function fdMount(host, o) {
   const live = new Map(), wantShard = new Map();
   const off = k => isColor ? (FDC_OFF.get(SKEY) || {})[k] || "" : (FD_OFF[k] ? FD_OFF[k](ctx) : "");
   const abOf = it => it.sk || it.card || it.head ? it.ab : Math.min(2.3, Math.max(.4, G.ar[it.j]));
+  const aboutEl = isColor && o.about ? o.about : null; if (aboutEl) aboutEl.remove();   // the article tab survives the feed being drawn around it
   host.innerHTML = `<div class="sec-head"><b>Keep exploring</b><span>closest first</span><button type="button" class="fd-size" data-fdsize></button></div>
     <div class="fd-bar"><div class="fd-chips" role="tablist" aria-label="What counts as related"></div></div>
     <p class="fd-lead" aria-live="polite"></p>
     <div class="fd-grid" role="group" aria-label="${isColor ? "Paintings and more that hold this color" : "Related paintings, closest first"}"></div>
     <div class="fd-state"></div>`;
   const bar = host.querySelector(".fd-bar"), chipsEl = host.querySelector(".fd-chips"), lead = host.querySelector(".fd-lead"), grid = host.querySelector(".fd-grid"), state = host.querySelector(".fd-state");
+  if (aboutEl) bar.insertAdjacentElement("afterend", aboutEl);
   const artTop = () => document.querySelector(isColor ? ".rp-bar" : ".gl-page > .art-top");   // the bar the chips sit under: a painting's back bar, or a color page's pinned name bar
   const setBarTop = () => { if (glDesk()) { bar.style.top = ""; return; }   // on a wide window the fixed top bar is the one to sit under (css)
     const a = artTop(); bar.style.top = (a ? Math.round(a.getBoundingClientRect().height) - 1 : 0) + "px"; };
+
+  // ----- the About tab (a color page): the article is the first chip; the feed's own parts hide while it shows -----
+  const secHead = host.querySelector(".sec-head");
+  if (aboutEl && secHead) bar.insertAdjacentElement("afterend", secHead);   // under the chips: just the density button, and only on the feed tabs
+  const showAbout = on => { if (!aboutEl) return; aboutEl.hidden = !on; lead.hidden = on; grid.hidden = on; state.hidden = on; if (secHead) secHead.hidden = on; host.dataset.fdTab = on ? "about" : eff; };
+  // a tab change keeps the chips where they are: if you had scrolled below the top of this section, it lands on its top
+  const tabTop = force => { const a = artTop(), ah = a ? a.getBoundingClientRect().height : 0, y = host.getBoundingClientRect().top + scrollY - ah; if (force || scrollY > y + 4) scrollTo(0, Math.max(0, y)); };
+  host.fdChip = k => { const b = chipsEl.querySelector(`[data-fc="${k}"]`); if (b) b.click(); };
 
   // ----- chips -----
   const effective = () => { const k = st.chip; return !off(k) ? k : FALL; };
@@ -239,6 +249,9 @@ function fdMount(host, o) {
     const b = e.target.closest("[data-fc]"); if (!b) return;
     const k = b.dataset.fc, why = off(k);
     if (why) { buzz(4); leadDraw(why); return; }
+    const deep = aboutEl ? scrollY > host.getBoundingClientRect().top + scrollY - (artTop() ? artTop().getBoundingClientRect().height : 0) + 4 : false;
+    if (aboutEl && k === "about") { if (eff === "about") return; st.chip = "about"; save(); buzz(4); chipsDraw(); showAbout(true); if (deep) tabTop(true); return; }
+    if (aboutEl && eff === "about") { showAbout(false); st.chip = k; save(); buzz(4); rerank(false); if (deep) { tabTop(true); setTimeout(() => tabTop(true), 60); setTimeout(() => tabTop(true), 400); } return; }   // About -> a feed tab: the chips stay where they are
     if (!isColor && k === "color" && eff === "color") return bySheet();
     if (k === st.chip && k === eff) return;
     st.chip = k; save(); buzz(4); rerank(true);
@@ -402,6 +415,8 @@ function fdMount(host, o) {
   function rerank(scrollUp) {
     const mine = ++tok, was = scrollUp && built && gridTop() < scrollY + 80;   // you were down in the old list: land at the new first tile, just under the chips
     chipsDraw(); leadDraw("");
+    if (aboutEl && eff === "about") { tok++; showAbout(true); return; }
+    showAbout(false);
     const k = key(), hit = FD_CACHE.get(k), t0 = performance.now();
     const done = res => {
       if (mine !== tok || gone) return;
@@ -518,7 +533,7 @@ function fdMount(host, o) {
   function start() {
     if (built || gone) return; built = true;
     zoom = gzAttach(grid, { cols: () => cols, min: () => 1, max: fdMaxCols, colW: () => colW, setCols });
-    if (!memo) Object.assign(st, STORE);
+    if (!memo) { Object.assign(st, STORE); if (aboutEl && o.startChip) st.chip = o.startChip === "paintings" && STORE.chip !== "about" && FDC_CHIPS.some(c => c[0] === STORE.chip) ? STORE.chip : o.startChip; }
     setBarTop(); chipsDraw();
     addEventListener("scroll", onScroll, { passive: true }); addEventListener("resize", onResize);
     rerank(false);
@@ -763,6 +778,7 @@ function fdMountColor(host, o) {
   let started = false;
   const go = () => fdMount(host, o);
   const wait = () => { started = true; if (GAL) go(); else loadGallery().then(go).catch(() => { host.insertAdjacentHTML("beforeend", `<p class="fine">The paintings didn't load.</p>`); }); };
+  if (o.about) return wait();   // the feed is the body of the page now (chips right under the hero): draw it at once
   // the page is still filling in when it is drawn, so "near" also needs the reader to have started scrolling (or a page too short to scroll)
   const near = () => { if (host.getBoundingClientRect().top < innerHeight * 2.6 && (scrollY > 200 || document.documentElement.scrollHeight < innerHeight * 1.3)) { removeEventListener("scroll", near); wait(); } };
   if (!host.style.minHeight) host.style.minHeight = "1px";

@@ -4523,52 +4523,37 @@ scenario("paintings", "a painting page has a Keep exploring jump near the top; o
   const after = t.ev("document.querySelector('[data-glfeed]').getBoundingClientRect().top");
   t.expect(after < 130 && after > -20, `the feed did not land under the top bar (top ${after}, window ${vh}, ${JSON.stringify(st)} ${JSON.stringify(t.ev("({ sy: scrollY, dh: document.documentElement.scrollHeight, mh: document.querySelector('[data-glfeed]').style.minHeight, h: document.querySelector('[data-glfeed]').offsetHeight, kids: document.querySelector('[data-glfeed]').children.length, cs: (c => [c.minHeight, c.height, c.maxHeight, c.contain, c.contentVisibility, c.position, c.transitionProperty, c.transitionDuration, document.querySelector('[data-glfeed]').getAnimations().length].join('|'))(getComputedStyle(document.querySelector('[data-glfeed]'))), cls: document.querySelector('[data-glfeed]').className, same: document.querySelectorAll('[data-glfeed]').length, disp: getComputedStyle(document.querySelector('[data-glfeed]')).display, par: document.querySelector('[data-glfeed]').parentElement.className })"))})`);
 });
-scenario("pages", "a color page shows Explore on first paint, keeps it in the pinned header at every scroll depth, and both ask to scroll to the feed", async t => {
+scenario("pages", "a color page puts the chip row (About, Paintings, ...) right under the cover on first paint, with no Explore pill, and About shows the article", async t => {
   await t.open("#/color/teal", { settle: 900 });
-  await t.waitFor("[data-rpfeed]", 15000, "the feed's host on the color page");
-  const btn = t.$("[data-rp-explore]");
-  t.expect(btn, "the cover has no Explore button");
-  const r = t.ev("(() => { const q = document.querySelector('[data-rp-explore]').getBoundingClientRect(); return { t: q.top, b: q.bottom, h: innerHeight, w: q.width }; })()");
-  t.expect(r.t >= 0 && r.b <= r.h && r.w > 60, `the cover's Explore button is not fully on the first screen (${JSON.stringify(r)})`);
-  t.expect(!/[↓→]/.test(t.text(btn)) && btn.querySelector("svg"), "the cover Explore button should use an svg glyph, not a text arrow");
-  // headless Chrome does not run smooth scrolls to the end: record the scroll the button asks for
-  t.ev("window.__st = null; const o = window.scrollTo; window.scrollTo = function (a, b) { if (typeof a === 'object') { window.__st = a; return o.call(window, Object.assign({}, a, { behavior: 'auto' })); } return o.call(window, a, b); };");
-  t.ev("document.querySelector('[data-rp-explore]').click()");
-  await t.sleep(500);
-  let st = t.ev("window.__st");
-  t.expect(st && st.top > 300, `the cover Explore button did not ask to scroll down to the feed (${JSON.stringify(st)})`);
-  // the pinned header is on screen (not transformed away) at three depths, Explore visible even when slim
-  for (const y of [1000, 1800, 1200]) {
-    t.w.scrollTo(0, y); await t.sleep(500);
-    await t.waitFor(() => t.ev("document.querySelector('body > .rp-bar').classList.contains('on')") || null, 4000, `the pinned header at scroll ${y}`).catch(() => null);
-    const bar = t.ev("(() => { const b = document.querySelector('body > .rp-bar'), r = b.getBoundingClientRect(), e = b.querySelector('[data-rp-jump=explore]'), er = e.getBoundingClientRect(); return { sy: scrollY, hb: document.querySelector('.cp-hero').getBoundingClientRect().bottom, on: b.classList.contains('on'), top: r.top, bottom: r.bottom, ex: !e.hidden && er.width > 30 && er.right <= innerWidth + 1, eo: getComputedStyle(e).opacity }; })()");
-    t.expect(bar.on && bar.top >= -1 && bar.bottom > 20, `the pinned header is not on screen at scroll ${y} (${JSON.stringify(bar)})`);
-    t.expect(bar.ex && bar.eo === "1", `the header's Explore button is missing or faded at scroll ${y} (${JSON.stringify(bar)})`);
-  }
-  t.w.scrollTo(0, 1000); await t.sleep(600);
-  t.ev("window.__st = null; document.querySelector('body > .rp-bar [data-rp-jump=explore]').click()");
-  await t.sleep(500);
-  st = t.ev("window.__st"); const feedTop = t.ev("document.querySelector('[data-rpfeed]').getBoundingClientRect().top"), vh = t.ev("innerHeight");
-  t.expect(st && st.top > 700, `the header Explore button did not ask to scroll down to the feed (${JSON.stringify(st)})`);
-  t.expect(feedTop < vh, `the feed is still below the screen after the header button (top ${feedTop}, window ${vh})`);
-  await t.sleep(1800);
-  const landed = t.ev("document.querySelector('[data-rpfeed]').getBoundingClientRect().top");
-  t.expect(landed < 130 && landed > -20, `the feed did not land just under the pinned header (top ${landed}; ${JSON.stringify(t.ev("({ mh: document.querySelector('[data-rpfeed]').style.minHeight, h: document.querySelector('[data-rpfeed]').offsetHeight, sy: scrollY, dh: document.documentElement.scrollHeight, ih: innerHeight, bar: document.querySelector('body > .rp-bar').offsetHeight })"))})`);
+  await t.waitFor("[data-rpfeed] .fd-chips", 15000, "the chip row under the cover");
+  t.expect(!t.$("[data-rp-explore]"), "the cover still has the old Explore pill");
+  const r = t.ev("(() => { const q = document.querySelector('[data-rpfeed] .fd-chips').getBoundingClientRect(); return { t: q.top, b: q.bottom, h: innerHeight }; })()");
+  t.expect(r.t > 100 && r.b < r.h - 40, `the chip row is not on the first screen under the cover (${JSON.stringify(r)})`);
+  t.expect(t.text(".fd-chip.on") === "About" && !t.$("[data-rp-about]").hidden, "a cold open should start on About with the article showing");
+  const pinned = t.ev("(() => { const b = document.querySelector('body > .rp-bar'); return b ? [...b.querySelectorAll('[data-rp-jump]')].every(x => x.hidden) : true; })()");
+  t.expect(pinned, "the pinned header still shows its own jump chips and Explore above the page's chip row");
 });
-scenario("pages", "an in-between color's cover also has Explore on first paint", async t => {
+scenario("pages", "an in-between color's page also has the chip row on first paint", async t => {
   await t.open("#/color/teal", { settle: 300 });
   const sw = t.d.createElement("button"); sw.dataset.swatch = "#292C10"; sw.style.cssText = "position:fixed;left:150px;top:300px;width:60px;height:60px;z-index:9999";
   t.d.body.appendChild(sw);
   await t.click(sw, { wait: 400 }); sw.remove();
   await t.waitFor(() => /Your color/.test(H.chip(t)), 10000, "a 'Your color' page for #292C10");
-  const r = t.ev("(() => { const b = document.querySelector('[data-rp-explore]'); if (!b) return null; const q = b.getBoundingClientRect(); return { t: q.top, b: q.bottom, h: innerHeight }; })()");
-  t.expect(r && r.t >= 0 && r.b <= r.h, `the in-between cover has no Explore button on the first screen (${JSON.stringify(r)})`);
+  await t.waitFor("[data-rpfeed] .fd-chips", 15000, "the chip row under the in-between cover");
+  t.expect(!t.$("[data-rp-explore]"), "the in-between cover still has the old Explore pill");
+  // its cover (the two-up band, the save line, the runner-up names) is taller than a plain color's, so the chips may sit below the first
+  // screen; what matters is that no article precedes them: the sections live inside the feed's About tab
+  t.expect(t.$("[data-rpfeed] [data-ar-body]") && t.$("[data-rpfeed] .rp-paint"), "the article's sections should sit inside the feed's About tab, after the chip row");
 });
 
-scenario("paintings", "desktop 1440x900: Keep exploring shows tiles at the bottom of a painting page and a color page", async t => {
+scenario("paintings", "desktop 1440x900: Keep exploring shows tiles on a painting page (at the bottom) and a color page (Paintings tab)", async t => {
   const probe = async (hash, host) => {
     await t.open(hash, { settle: 900, size: [1440, 900] });
     await t.waitFor(host, 15000, "the feed host on " + hash);
+    if (host === "[data-rpfeed]") {   // a color page opens on About: tap Paintings once the real chip row is up
+      await t.waitFor(() => t.$("[data-rpfeed] .fd-bar:not(.fd-pre) .fd-chip[data-fc=paintings]") ? true : null, 25000, "the real chip row");
+      await t.click(".fd-chip[data-fc=paintings]", { wait: 400 });
+    }
     t.w.scrollTo(0, 1e7); await t.sleep(900); t.w.scrollTo(0, 1e7); await t.sleep(600);
     const info = t.ev(`(() => { const h = document.querySelector(${JSON.stringify(host)}); if (!h) return 'no host'; const r = h.getBoundingClientRect(); return JSON.stringify({ top: Math.round(r.top), w: Math.round(r.width), h: Math.round(r.height), tiles: h.querySelectorAll('.fd-tile[data-fk]').length, chips: h.querySelectorAll('.fd-chip').length, gh: h.querySelector('.fd-grid') && h.querySelector('.fd-grid').style.height, gw: h.querySelector('.fd-grid') && h.querySelector('.fd-grid').clientWidth, st: (h.querySelector('.fd-state')||{}).innerHTML, lead: (h.querySelector('.fd-lead')||{}).textContent, kids: h.querySelector('.fd-grid') && h.querySelector('.fd-grid').children.length, sy: scrollY, dh: document.documentElement.scrollHeight }); })()`);
     return JSON.parse(info);
@@ -4639,8 +4624,10 @@ scenario("paintings", "the Explore pill is on the first screen of a painting pag
 // ---------- Keep exploring on a COLOR page (js/feed.js fdMount with sub = a color, mounted by js/richpage.js) ----------
 async function cfeedOpen(t, hash, chip) {
   await t.open(hash, { settle: 900 });
-  await t.waitFor("[data-rpfeed]", 15000, "the feed's host at the foot of the color page");
-  t.ev(`Object.assign(FDC_ST, { chip: ${JSON.stringify(chip || "paintings")}, metric: "overall", color: 0 })`);
+  await t.waitFor("[data-rpfeed]", 15000, "the feed's host under the color page's cover");
+  // a cold open starts on About (the article); the chip row is a placeholder until the paintings load, then real
+  await t.waitFor(() => t.$("[data-rpfeed] .fd-bar:not(.fd-pre) .fd-chip[data-fc=paintings]") ? true : null, 25000, "the real chip row");
+  await t.click(`.fd-chip[data-fc=${chip || "paintings"}]`, { wait: 300 });
   await t.waitFor(() => { const h = t.$("[data-rpfeed]"); if (h) t.w.scrollTo(0, h.getBoundingClientRect().top + t.w.scrollY - 200); return t.$$(".fd-tile[data-fk]").length >= 4 ? true : null; }, 25000, "the color feed's first tiles");
   await t.sleep(500);
 }
@@ -4650,23 +4637,28 @@ async function cfeedChip(t, chip) {
   await t.waitFor(() => t.$(`.fd-chip.on[data-fc=${chip}]`) && !t.$(".fd-tile.sk") && t.$(".fd-tile[data-fk='0'] .fd-cap") ? true : null, 25000, "the " + chip + " ranking");
   await t.sleep(300);
 }
-scenario("pages", "Keep exploring on a color page: the feed is at the very bottom, closest painting first, and the cover and the fine print are untouched", async t => {
+scenario("pages", "Keep exploring on a color page: the feed is the body under the cover (About first), closest painting first, and the cover and the fine print are untouched", async t => {
   await cfeedOpen(t, "#/color/teal");
   const feed = t.$("[data-rpfeed]");
-  t.expect(feed && /Keep exploring/.test(t.text(feed.querySelector(".sec-head"))), "the Keep exploring heading is missing on the color page");
-  t.expect(t.$$(".fd-chip").map(b => t.text(b)).join() === "Paintings,Painters,Era,Place,Other worlds,Close colors", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}"`);
-  t.expect(t.text(".fd-chip.on") === "Paintings", "Paintings is not on by default");
-  // it sits after "What links here" and before the last fine-print line, and the page's own cover is still there
-  const order = [".rp-idcard", "[data-rpfeed]", ".rp-last"].map(s => t.$(s)), pos = (a, b) => a.compareDocumentPosition(b) & 4;
-  t.expect(order.every(Boolean) && pos(order[0], order[1]) && pos(order[1], order[2]), "the feed isn't between the ID card and the last fine-print line");
+  t.expect(feed, "the feed host is missing on the color page");
+  t.expect(t.$$(".fd-chip").map(b => t.text(b)).join() === "About,Paintings,Painters,Era,Place,Other worlds,Close colors", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}"`);
+  t.expect(t.text(".fd-chip.on") === "Paintings", "Paintings did not turn on when tapped");
+  t.expect(t.$("[data-rp-about]").hidden, "the article should hide while Paintings shows");
+  // the cover comes first, then the feed (its About pane holds the ID card), then the last fine-print line
+  const order = [".cp-hero", "[data-rpfeed]", ".rp-last"].map(s => t.$(s)), pos = (a, b) => a.compareDocumentPosition(b) & 4;
+  t.expect(order.every(Boolean) && pos(order[0], order[1]) && pos(order[1], order[2]), "the feed isn't between the cover and the last fine-print line");
+  t.expect(t.$("[data-rp-about] .rp-idcard"), "the ID card isn't inside the About tab");
   t.expect(t.$(".cp-hero .rp-name"), "the color page's cover is gone");
-  const caps = feedCaps(t), pct = caps.map(c => parseFloat((c.match(/^([\d.]+)% match$/) || [])[1] || NaN));
-  t.expect(caps.length >= 4 && pct.every((p, k) => p >= 1 && (k === 0 || p <= pct[k - 1])), `captions aren't plain "NN% match", closest first: ${caps.slice(0, 6)}`);
+  const caps = feedCaps(t);
+  t.expect(caps.length >= 4 && !caps.some(c => /% match/.test(c)), `the paintings feed should show no match percent: ${caps.slice(0, 6)}`);
   const first = t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items[0].j`);
   t.expect(Number.isInteger(first) && t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items.length`) >= 24, "the top of the ranking isn't cached (rank once, page through)");
-  // the first tile is the nearest patch, whatever the area (closeness beats coverage): nothing in the cache is closer
-  t.expect(t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items.filter(it => /^[\d.]+%/.test(it.cap)).every((it, k, a) => k === 0 || parseFloat(it.cap) <= parseFloat(a[0].cap) + 1)`), "a later tile is clearly closer than the first");
   t.expect(t.$$(".fd-tile[data-fk] .fd-cap, .fd-tile[data-fk] .fd-by").every(e => parseFloat(getComputedStyle(e).fontSize) >= 15), "caption text is smaller than body size");
+  // About brings the article back in place and hides the feed's own parts; Paintings returns
+  await t.click(".fd-chip[data-fc=about]", { wait: 300 });
+  t.expect(!t.$("[data-rp-about]").hidden && t.$(".fd-grid").hidden, "About didn't swap in the article");
+  await t.click(".fd-chip[data-fc=paintings]", { wait: 300 });
+  t.expect(t.$("[data-rp-about]").hidden && !t.$(".fd-grid").hidden, "Paintings didn't swap the feed back");
   t.notes.push(`color feed first ranking ${t.ev("FD_LAST.ms")} ms`);
 });
 scenario("pages", "Keep exploring on a color page: each chip re-ranks with its own plain captions", async t => {
@@ -4674,10 +4666,10 @@ scenario("pages", "Keep exploring on a color page: each chip re-ranks with its o
   await cfeedChip(t, "painters");
   t.expect(/^(Used most|Also used) by \S/.test(t.text(".fd-tile[data-fk='0'] .fd-cap")), `Painters caption: "${t.text(".fd-tile[data-fk='0'] .fd-cap")}"`);
   await cfeedChip(t, "era");
-  const decs = feedCaps(t).map(c => (c.match(/^(\d{3})0s · [\d.]+% match$/) || [])[1]);
-  t.expect(decs.length >= 4 && decs.every(Boolean), `Era captions don't say the decade: ${feedCaps(t).slice(0, 4)}`);
+  const decs = feedCaps(t).map(c => (c.match(/^(\d{3})0s$/) || [])[1]);
+  t.expect(decs.length >= 4 && decs.every(Boolean), `Era captions don't say just the decade: ${feedCaps(t).slice(0, 4)}`);
   await cfeedChip(t, "place");
-  t.expect(feedCaps(t).slice(0, 3).every(c => /^[A-Z][^·]+ · [\d.]+% match$/.test(c)), `Place captions: ${feedCaps(t).slice(0, 3)}`);
+  t.expect(feedCaps(t).slice(0, 3).every(c => /^[A-Z][^·%]+$/.test(c)), `Place captions: ${feedCaps(t).slice(0, 3)}`);
   await cfeedChip(t, "worlds");
   t.expect(feedCaps(t).slice(0, 3).every(c => /^In /.test(c)), `Other worlds captions: ${feedCaps(t).slice(0, 3)}`);
   t.expect(t.$(".fd-tile.fd-card"), "Other worlds has no card");
@@ -4685,7 +4677,7 @@ scenario("pages", "Keep exploring on a color page: each chip re-ranks with its o
   t.expect(feedCaps(t).slice(0, 3).every(c => /^[\d.]+% match$/.test(c)), `Close colors captions: ${feedCaps(t).slice(0, 3)}`);
   // back on Paintings the first tile is the closest again (cached: instant)
   await cfeedChip(t, "paintings");
-  t.expect(/^[\d.]+% match$/.test(feedCaps(t)[0]), "Paintings didn't come back");
+  t.expect(t.$(".fd-tile[data-fk='0']"), "Paintings didn't come back");
   t.expect(t.ev(`JSON.parse(sessionStorage.getItem("colorhub-feed-color")).chip`) === "paintings", "the chip choice isn't remembered for the session");
 });
 scenario("pages", "Keep exploring on a color page: a chip with nothing for this color is disabled with a plain reason", async t => {
@@ -4693,7 +4685,8 @@ scenario("pages", "Keep exploring on a color page: a chip with nothing for this 
   t.ev(`fdcOff("c:#008080", "era", "Too few paintings that hold this color have a year, so there is no era to read.")`);
   await cfeedOpen(t, "#/color/teal");
   t.ev(`fdcOff("c:#008080", "era", "Too few paintings that hold this color have a year, so there is no era to read.")`);
-  await t.click(".fd-chip[data-fc=paintings]", { wait: 200 });
+  await t.click(".fd-chip[data-fc=about]", { wait: 200 });
+  await t.click(".fd-chip[data-fc=paintings]", { wait: 300 });
   await t.click(".fd-chip[data-fc=era]", { wait: 300 });
   const era = t.$(".fd-chip[data-fc=era]");
   t.expect(era.getAttribute("aria-disabled") === "true", "Era isn't disabled");
@@ -4720,7 +4713,7 @@ scenario("pages", "Keep exploring on a color page: a tile opens its painting, an
 scenario("pages", "Keep exploring on an in-between color: the feed measures the tapped color, and a close name opens with the exact color", async t => {
   await cfeedOpen(t, "#/color/teal?c=2f8f8a");
   const caps = feedCaps(t);
-  t.expect(caps.length >= 4 && caps.every(c => /^[\d.]+% match$/.test(c)), `captions: ${caps.slice(0, 4)}`);
+  t.expect(caps.length >= 4 && !caps.some(c => /% match/.test(c)), `captions: ${caps.slice(0, 4)}`);
   t.expect(t.ev(`!!FD_CACHE.get("c:#2F8F8A|paintings|overall|0")`), "the feed is not keyed to the tapped color");
   t.expect(/Your color/.test(t.text(".cp-chip")), "this isn't the tapped-color page");
   await cfeedChip(t, "close");
@@ -5771,6 +5764,8 @@ const TRL = {
     }
     t.expect(gem, "no color in the second painting has a gem on its page");
     seen.push({ hash: TRL.hash(t), y: 0, n: TRL.depth(t) });
+    // a color page opened from a painting starts on its Paintings tab: the gem lives in the About tab
+    const aboutChip = t.$("#app .screen .fd-chip[data-fc=about]"); if (aboutChip && !aboutChip.classList.contains("on")) await t.click(aboutChip, { wait: 400 });
     const gf = gem.closest("details:not([open])"); if (gf) await t.click(gf.querySelector("summary"), { wait: 300 });
     await t.click(gem, { wait: 600 });
     await TRL.atHash(t, /^#\/gem\//, "the gem page");
