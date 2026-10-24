@@ -108,7 +108,11 @@
 /* a side-by-side band is narrower than the full viewport a vw-based clamp assumes, so its name shrinks to fit a
    pair or trio instead of overflowing/wrapping badly -- stacked (full-width) bands keep the fuller size. Still
    the same serif display face either way, just scaled to the space. */
-.cf-band .rp-focus-tag-name{font-size:max(12px,min(clamp(20px,6vw,28px),calc(100vw / var(--n,3) * .2)));overflow-wrap:anywhere}
+.cf-band .rp-focus-tag-name{font-size:max(11px,min(clamp(20px,6vw,28px),calc(100vw / var(--n,3) * .13)));line-height:1.1;overflow-wrap:break-word;hyphens:manual}
+/* side-by-side columns (landscape): the label gets the column's width less a small gutter, and the hex shrinks with it,
+   so a name reads as small horizontal words, never a vertical stack of letters (David, 2026-10-25) */
+.rp-focus.cf-multi:not(.cf-stack) .cf-band .rp-focus-tag{left:min(16px,calc(100vw / var(--n,3) * .08));right:min(16px,calc(100vw / var(--n,3) * .08))}
+.rp-focus.cf-multi:not(.cf-stack) .cf-band .rp-focus-tag-hex{font-size:clamp(9px,calc(100vw / var(--n,3) * .07),13px);letter-spacing:.03em}
 .rp-focus.cf-stack .cf-band .rp-focus-tag-name{font-size:clamp(28px,9vw,40px)}
 /* stacked bands: name and hex share one line, centered in their own band, sized to the band so a short band
    (landscape, 6+ colors) never spills over its neighbor; the first band centers in what's left under the status
