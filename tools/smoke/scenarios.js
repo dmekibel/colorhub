@@ -4386,6 +4386,115 @@ scenario("paintings", "swiping the picture moves to the next/previous painting b
   await t.click(TRL.screenBack(t), { wait: 500 });
   t.expect(t.text(".p-title") === title0, "Back after a swipe didn't return to the first painting");
 });
+// ---------- Keep exploring (js/feed.js): the Pinterest-style feed at the foot of every painting page (David, 2026-10-24) ----------
+// open a painting, reset the remembered chip (sessionStorage survives the reloads between scenarios), scroll until the feed is built
+async function feedOpen(t, i, chip) {
+  await t.open("#/gallery/" + i, { settle: 600 });
+  await t.waitFor("[data-glfeed]", 15000, "the feed's host at the foot of the painting page");
+  t.ev(`Object.assign(FD_ST, { chip: ${JSON.stringify(chip || "color")}, metric: "overall", color: 0 })`);
+  await feedScroll(t);
+}
+async function feedScroll(t) {
+  await t.waitFor(() => { t.w.scrollTo(0, 1e7); return t.$$(".fd-tile[data-fk]").length >= 6 ? true : null; }, 20000, "the feed's first tiles");
+  await t.sleep(400);
+}
+const feedCaps = t => t.$$(".fd-tile[data-fk] .fd-cap").map(e => t.text(e));
+const feedTop = t => { const r = t.$(".fd-grid").getBoundingClientRect(); return r.top + t.w.scrollY; };
+scenario("paintings", "Keep exploring: a feed at the bottom of a painting page, four chips, closest palette first, 24 at a time, a bounded number of live pictures", async t => {
+  await feedOpen(t, 12);
+  t.expect(t.$(".gl-feed .sec-head") && /Keep exploring/.test(t.text(".gl-feed .sec-head")), "the Keep exploring heading is missing");
+  t.expect(t.$$(".fd-chip").map(b => t.text(b).replace(/ ·.*/, "")).join() === "Color,Painter,Era,Place", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}", not Color, Painter, Era, Place`);
+  t.expect(/^Color/.test(t.text(".fd-chip.on")) && !/·/.test(t.text(".fd-chip.on")), `Color is not on by default: "${t.text(".fd-chip.on")}"`);
+  const caps = feedCaps(t), pct = caps.map(c => +((c.match(/(\d+)%/) || [])[1] || NaN));
+  t.expect(caps.length >= 6 && caps.every(c => /^Close palette · \d+%$/.test(c)), `captions don't say why in plain words: ${caps.slice(0, 4)}`);
+  t.expect(pct.every((p, k) => k === 0 || p <= pct[k - 1]), `not closest first: ${pct}`);
+  // the first tile is exactly what the page's own "More like this" would rank first
+  const want = t.ev(`glSimilarPal(twPal(twQuery(glTwCols(glPoolDecode(glDetailNow(12).pl), glPal(12)), { self: 12 })), 1, { exclude: 12, pairs: false, noEra: true }).list[0].i`);
+  t.expect(t.ev(`FD_CACHE.get("12|color|overall|0").items[0].j`) === want, "the first tile is not the closest painting by overall palette");
+  // every tile's box exists before its picture: the grid's height is reserved, and tiles hold their size
+  const h0 = t.$(".fd-grid").style.height, boxes = t.$$(".fd-tile[data-fk]").map(e => e.style.height).join();
+  // infinite scroll: each trip to the end adds 24 until the list runs out; never more than 40 live pictures
+  let maxImgs = 0, hs = [];
+  for (let n = 0; n < 8; n++) { t.w.scrollBy(0, 900); await t.sleep(250); maxImgs = Math.max(maxImgs, t.$$(".fd-tile img").length); hs.push(parseFloat(t.$(".fd-grid").style.height)); }
+  t.expect(maxImgs <= 40, `${maxImgs} live pictures at once (the budget is 40)`);
+  t.expect(hs[hs.length - 1] > parseFloat(h0), `scrolling on didn't bring more tiles (grid ${h0} -> ${hs[hs.length - 1]})`);
+  t.expect(t.$$(".fd-tile[data-fk]").length < 60, "far-off tiles are not being unloaded");
+  t.check(t.$$(".fd-tile[data-fk]").every(e => e.style.height), "a tile has no reserved height");
+  t.notes.push(`first feed ${t.ev("FD_LAST.ms")} ms (rank + first tiles), tiles ${boxes.split(",").length}`);
+});
+scenario("paintings", "Keep exploring: each chip re-ranks, the first tile is the closest by that measure, and a chip that can't apply says why", async t => {
+  await feedOpen(t, 12);
+  const first = () => t.ev(`FD_LAST.chip + "|" + FD_LAST.metric`);
+  const key0 = t.text(".fd-tile[data-fk='0'] .fd-by");
+  // Era: nearest in year first: same year, then 1 yr earlier / later ...
+  await t.click(".fd-chip[data-fc=era]", { wait: 300 });
+  await t.waitFor(() => t.text(".fd-chip.on") === "Era" && t.$(".fd-tile[data-fk='0'] .fd-cap") && !t.$(".fd-tile.sk") ? true : null, 10000, "the Era ranking");
+  const gaps = feedCaps(t).map(c => c === "Same year" ? 0 : +((c.match(/(\d+) yrs? (earlier|later)/) || [])[1] || NaN));
+  t.expect(gaps.length >= 6 && gaps.every((g, k) => g >= 0 && (k === 0 || g >= gaps[k - 1])), `Era is not nearest in year first: ${feedCaps(t).slice(0, 8)}`);
+  // Painter: the same painter first
+  await t.click(".fd-chip[data-fc=painter]", { wait: 300 });
+  await t.waitFor(() => t.text(".fd-chip.on") === "Painter" && /^Also /.test(t.text(".fd-tile[data-fk='0'] .fd-cap")) ? true : null, 20000, "the Painter ranking (its facets load first)");
+  t.expect(/Same painter first/.test(t.text(".fd-lead")), `the Painter lead line reads "${t.text(".fd-lead")}"`);
+  // Place: the same country first, nearest in time
+  await t.click(".fd-chip[data-fc=place]", { wait: 300 });
+  await t.waitFor(() => t.text(".fd-chip.on") === "Place" && / · /.test(t.text(".fd-tile[data-fk='0'] .fd-cap")) ? true : null, 20000, "the Place ranking");
+  const country = t.text(".fd-tile[data-fk='0'] .fd-cap").split(" · ")[0];
+  t.expect(feedCaps(t).slice(0, 4).every(c => c.startsWith(country)), `Place doesn't lead with the same country: ${feedCaps(t).slice(0, 4)}`);
+  // Color's "by…" sheet: Mood re-ranks (the caption speaks of mood), and the chip says which
+  await t.click(".fd-chip[data-fc=color]", { wait: 300 });
+  t.expect(/^Color/.test(t.text(".fd-chip.on")), "Color didn't come back on");
+  await t.click(".fd-chip.on", { wait: 500 });
+  const sheet = await t.waitFor(".fd-sheet", 5000, "the by… sheet");
+  t.expect(/Overall palette/.test(t.text(sheet)) && /Mood/.test(t.text(sheet)) && /One color/.test(t.text(sheet)), "the by… sheet doesn't list the metrics");
+  await t.click(sheet.querySelector("[data-m=mood]"), { wait: 400 });
+  await t.waitFor(() => /mood$/.test(t.text(".fd-tile[data-fk='0'] .fd-cap")) ? true : null, 20000, "the Mood ranking");
+  t.expect(/^Color · Mood/.test(t.text(".fd-chip.on")), `the chip doesn't name Mood: "${t.text(".fd-chip.on")}"`);
+  // a painting with no year: Era is disabled with a plain reason (and the feed shows color instead of nothing)
+  const idx = t.ev(`(() => { for (let j = 300; j < GAL.n; j++) if (GAL.year[j] === GL_UNDATED) return j; return -1; })()`);
+  t.expect(idx > 0, "found no undated painting");
+  await t.open("#/gallery/" + idx, { settle: 600 });
+  t.ev(`Object.assign(FD_ST, { chip: "era", metric: "overall", color: 0 })`);
+  await feedScroll(t);
+  const era = t.$(".fd-chip[data-fc=era]");
+  t.expect(era.getAttribute("aria-disabled") === "true", "Era isn't disabled on a painting with no year");
+  t.expect(/^Color/.test(t.text(".fd-chip.on")) && /no year/i.test(t.text(".fd-lead")), `no plain reason or fallback: on "${t.text(".fd-chip.on")}", lead "${t.text(".fd-lead")}"`);
+});
+scenario("paintings", "Keep exploring: a tile opens its painting with the chip still on, at the top; Back returns to the exact feed position", async t => {
+  await feedOpen(t, 12, "era");
+  await t.waitFor(() => t.text(".fd-chip.on") === "Era" && !t.$(".fd-tile.sk") ? true : null, 10000, "Era");
+  for (let n = 0; n < 7; n++) { t.w.scrollBy(0, 700); await t.sleep(250); }   // deep enough that more than one page has loaded
+  const tile = t.$$(".fd-tile[data-fk]").find(e => +e.dataset.fk >= 10);
+  t.expect(tile, "no tile past the first page to tap");
+  tile.scrollIntoView({ block: "center" }); await t.sleep(500);
+  const k = tile.dataset.fk, y0 = tile.getBoundingClientRect().top, hash0 = TRL.hash(t), sc0 = t.w.scrollY;
+  t.expect(+k >= 10, `expected to be deep in the feed, at tile ${k}`);
+  await t.click(tile, { wait: 900 });
+  await TRL.atHash(t, /^#\/gallery\/\d+$/, "the tapped painting's page");
+  t.expect(TRL.hash(t) !== hash0, "the tap didn't open another painting");
+  t.expect(t.w.scrollY < 40, `the new page isn't at the top (scrollY ${t.w.scrollY})`);
+  await feedScroll(t);
+  t.expect(t.text(".fd-chip.on") === "Era", `the chip didn't stay on Era: "${t.text(".fd-chip.on")}"`);
+  // Back: the same painting, the same tile, at the same height on the screen
+  await t.click(TRL.screenBack(t), { wait: 600 });
+  await TRL.atHash(t, new RegExp("^" + hash0.replace(/[#/]/g, "\\$&") + "$"), "the previous painting");
+  const back = await t.waitFor(() => t.$(`.fd-tile[data-fk='${k}']`), 10000, "the tile you left from");
+  await t.sleep(2400);   // the page above settles; the feed holds the tile where it was
+  const y1 = t.$(`.fd-tile[data-fk='${k}']`).getBoundingClientRect().top;
+  t.expect(Math.abs(y1 - y0) <= 4, `Back put the tile at ${Math.round(y1)}px, it was at ${Math.round(y0)}px (scroll ${Math.round(sc0)} -> ${Math.round(t.w.scrollY)})`);
+  t.expect(t.text(".fd-chip.on") === "Era", "Back lost the chip");
+});
+scenario("paintings", "Keep exploring: the end of the feed says so, and a picture that fails to load is a designed state, not a hole", async t => {
+  await feedOpen(t, 12, "era");
+  await t.waitFor(() => t.text(".fd-chip.on") === "Era" && !t.$(".fd-tile.sk") ? true : null, 10000, "Era");
+  // a picture that won't load: the tile keeps its box, says so, and still opens
+  const img = t.$(".fd-tile[data-fk='0'] img");
+  if (img) { img.dataset.retry = "1"; img.src = "/__no_such_picture__.jpg"; await t.waitFor(() => t.$(".fd-tile[data-fk='0'] .fd-err") ? true : null, 8000, "the picture-unavailable state"); }
+  t.expect(t.$(".fd-tile[data-fk='0']") && t.$(".fd-tile[data-fk='0'] .fd-cap"), "a failed picture removed the tile");
+  // page to the end (300 items = 13 pages)
+  const end = await t.waitFor(() => { t.w.scrollTo(0, 1e7); return t.$(".fd-end"); }, 60000, "the end-of-feed line", 30000);
+  t.expect(end && /That is everything close to this one\./.test(t.text(end)), "the end-of-feed line never appeared");
+  t.expect(t.$("[data-fdup]"), "the end of the feed has no way back up");
+});
 // David's polish pass, 2026-10-09: a compact action row (Keep, Share, On the map — Play only once a real game is
 // wired, never Learn or Compare, which don't belong on this page any more), and "Findings" + "Analysis" merged
 // into one section with the strongest lines first and the rest behind one "More".
