@@ -477,12 +477,12 @@ const FDC_LEAD = { paintings: () => "Closest to this color first", painters: () 
 let FDC_ST = (() => { try { const s = JSON.parse(sessionStorage.getItem("colorhub-feed-color") || "null"); if (s && s.chip && FDC_CHIPS.some(c => c[0] === s.chip)) return { chip: s.chip, metric: "overall", color: 0 }; } catch (e) {} return { chip: "paintings", metric: "overall", color: 0 }; })();
 // a painting qualifies only if the color's neighborhood (matched colors summed, within the match tolerance) is a visible part of it:
 // at least FDC_MIN_SHARE percent of the canvas, never a speck. Fewer than ~300 qualifying is said honestly (the end line), not padded.
-const FDC_TOL = 8, FDC_MIN_SHARE = 2, FDC_FLOOR_SHARE = 2, FDC_BONUS = .3;
+const FDC_TOL = 6, FDC_MIN_SHARE = 2, FDC_FLOOR_SHARE = 2, FDC_BONUS = .3;
 const FDC_OFF = new Map();       // "c:#HEX" -> { chip: plain reason }
 const FDC_BASE = new Map();      // "#HEX" -> Promise<{ rows: [{ i, de, cover }], near }>
 const fdcOff = (key, chip, why) => { const m = FDC_OFF.get(key) || {}; m[chip] = why; FDC_OFF.set(key, m); };
 
-// every painting that holds this color visibly, closest first: matched colors within ΔE 8 covering at least 2% of the canvas, never a speck, never a wider reach. Only if nothing qualifies at all, the soft-coverage ranking (js/colorindex.js ciClosest) so the list is never empty. Cached per color.
+// every painting that holds this color visibly, closest first: matched palette colors within ΔE 6 covering at least 2% of the canvas, never a speck, never a wider reach. Only if nothing qualifies at all, the soft-coverage ranking (js/colorindex.js ciClosest) so the list is never empty. Cached per color.
 const FDC_THIN = 60, FDC_NB_SHARE = 4;   // a neighbor must be plainly present (4%) in its own paintings: it is already one step away   // fewer than this qualify strictly: the same scroll goes on with the neighbors' own paintings
 // the named colors nearest this one (learnable names and the archive's), nearest first: for an in-between color its own page's winner is among them
 async function fdcNearNames(sub, n, maxDe) {
@@ -493,16 +493,38 @@ async function fdcNearNames(sub, n, maxDe) {
   const seen = new Set();
   return nearestCore(lab(hex), pool, n * 3 + 30).filter(x => { const k = x.n.toLowerCase(); if ((!tapped && k === name.toLowerCase()) || seen.has(k) || (maxDe && x.de > maxDe)) return false; seen.add(k); return true; }).slice(0, n);
 }
+// WHY THIS READS THE GALLERY AND NOT data/colorindex: that index was built 2026-10-09 for 23,778 paintings, in the gallery order of that day, and
+// the gallery has since grown to 200,000+ and been re-ordered, so ids >= ~12,000 name the wrong painting (a dark Henner portrait "held" 5% of a
+// periwinkle: it was another painting's pixels) and 90% of the archive was never in it. The gallery's own six-color palettes (GAL.lab / GAL.sh,
+// the data every painting page and js/twins.js read) are aligned with the paintings by construction.
+// fdcScan: for every painting, the share of its canvas in palette colors within tol (ΔE2000) of the color, and the REAL nearest palette
+// color's distance. Never a bin center: GAL.lab are the paintings' own cluster colors.
+function fdcScan(hex, tol, minShare) {
+  const G = GAL, N = G.n, [tL, ta, tb] = lab(hex), Lb = G.lab, sh = G.sh, out = [], lim = tol * 1.75 + .5;
+  for (let i = 0; i < N; i++) {
+    let cover = 0, best = 99;
+    for (let j = 0; j < 6; j++) {
+      const k = i * 6 + j, o = k * 3, dL = Lb[o] - tL;
+      if (sh[k] <= 0) continue;
+      if (dL > lim || dL < -lim) { const d0 = Math.abs(dL) / 1.75; if (d0 < best) best = d0; continue; }   // ΔE00 is at least |ΔL| / 1.75: far past any tolerance
+      const d = glDE(tL, ta, tb, Lb[o], Lb[o + 1], Lb[o + 2]);
+      if (d < best) best = d;
+      if (d <= tol) { const q = d / (tol * 1.25); cover += sh[k] * 100 * (1 - q * q); }   // a cluster is a blob around its mean: its share counts fully at the color and fades toward the edge (as glNear does)
+    }
+    if (cover >= minShare && cover > 0) out.push({ i, de: best, cover });
+  }
+  return out;
+}
 function fdcBase(sub) {
   const hex = sub.hex.toUpperCase();
   if (FDC_BASE.has(hex)) return FDC_BASE.get(hex);
-  const q = (h, min) => paintingsWith([h], { tol: FDC_TOL, minCover: min, maxCover: null, mode: "all", sort: "close", source: "paintings" });
+  const q = async (h, min) => ({ rows: fdcScan(h, FDC_TOL, min) });
   // closeness dominates; presence (sqrt of the share, capped) breaks ties and demotes anything barely there
   const sc = r => r.de - FDC_BONUS * Math.min(Math.sqrt(Math.max(0, r.cover)), 3);
   const keep = (rs, seen) => rs.filter(r => !seen.has(r.i)).map(r => ({ i: r.i, de: r.de, cover: r.cover })).sort((a, b) => sc(a) - sc(b));
   const p = (async () => {
     await loadGallery();
-    // presence is measured at the match tolerance (ΔE 8), never wider: a wider reach would count greys and browns as "the color"
+    // presence is measured at the match tolerance (ΔE 6), never wider: a wider reach would count greys and browns as "the color"
     let res = await q(hex, FDC_MIN_SHARE), seen = new Set(), rows = keep(res.rows, seen).slice(0, 3000).map(r => ({ ...r, g: -1 })), near = false;
     rows.forEach(r => seen.add(r.i));
     const groups = [];
@@ -516,7 +538,7 @@ function fdcBase(sub) {
         rows = rows.concat(rs.map(r => ({ ...r, g: groups.length - 1 })));
       }
     }
-    if (!rows.length) { const cl = await ciClosest([hex], res, { max: 300 }); rows = cl.rows.map(r => ({ i: r.i, de: r.de, cover: r.cover, g: -1 })); near = true; }
+    if (!rows.length) { rows = fdcScan(hex, 99, 0).sort((a, b) => a.de - b.de).slice(0, 300).map(r => ({ ...r, g: -1 })); near = true; }   // nothing holds it visibly: the nearest patches, named for what they are
     return { rows, near, groups };
   })();
   FDC_BASE.set(hex, p); if (FDC_BASE.size > 4) FDC_BASE.delete(FDC_BASE.keys().next().value);
