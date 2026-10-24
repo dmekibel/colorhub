@@ -11,8 +11,8 @@ const tzPct = (sorted, v) => { let lo = 0, hi = sorted.length; while (lo < hi) {
 const tzRound = (a, d = 3) => a.map(v => Array.isArray(v) ? tzRound(v, d) : +v.toFixed(d));
 // the most precise name for a color (nameOf(), ROADMAP §13's one naming system), plus the nearest taught word
 function tzNamed(h) {
-  const nm = nameOf(h), [pair] = nearestColors(h, 1), isApp = !!BYNAME.get(nm.n.toLowerCase());
-  return { h, n: nm.text, src: isApp ? "Chromatlas" : (nm.near[0] && srcLine(nm.near[0].entry)) || "Nearest name", d: nm.de, word: pair ? pair[0].n : nm.n, wordD: pair ? pair[1] : 0 };
+  const nm = nameOf(h), isApp = !!BYNAME.get(nm.n.toLowerCase());
+  return { h, n: nm.text, src: isApp ? "Chromatlas" : (nm.near[0] && srcLine(nm.near[0].entry)) || "Nearest name", d: nm.de, word: nm.n, wordD: nm.de };
 }
 const tzOrder = p => p.shares.map((s, i) => i).sort((a, b) => p.shares[b] - p.shares[a]);
 const tzStrip = (p, cls = "tz-strip") => `<span class="${cls}">${tzOrder(p).map(i => `<i style="--c:${p.cols[i]};flex:${Math.max(p.shares[i], .012).toFixed(3)}"></i>`).join("")}</span>`;

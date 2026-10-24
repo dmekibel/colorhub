@@ -2472,6 +2472,28 @@ scenario("pages", "a tapped in-between hex opens its nearest name with 'Your col
   t.expect(sawYours >= 1, "none of the in-between colors showed a 'Your color' page");
 });
 
+// David, 2026-10-24: an in-between color's page lists the next-nearest names right under the cover ("It could also be
+// called"), the winner restated, each row an equal-swatch pair that opens that name's page with the exact color kept.
+scenario("pages", "an in-between color lists its runner-up names under the cover and a row opens that name with your color", async t => {
+  await t.open("#/color/teal", { settle: 300 });
+  const hex = "#C37FAC";
+  const sw = t.d.createElement("button"); sw.dataset.swatch = hex; sw.style.cssText = "position:fixed;left:150px;top:300px;width:60px;height:60px;z-index:9999";
+  t.d.body.appendChild(sw);
+  await t.click(sw, { wait: 400 }); sw.remove();
+  await t.waitFor(() => /Your color/.test(H.chip(t)), 10000, "a 'Your color' page for " + hex);
+  const sec = await t.waitFor(() => t.$("[data-rp-also]"), 5000, "the 'It could also be called' section");
+  t.expect(/It could also be called/.test(sec.textContent), "the section is not titled 'It could also be called'");
+  t.expect(/^Closest: .+ · \d+(\.\d)?%/.test(t.text(".rp-also-win")), `the winner line reads "${t.text(".rp-also-win")}"`);
+  const rows = t.$$(".rp-also-row", sec);
+  t.expect(rows.length >= 1 && rows.length <= 6, `${rows.length} rows, expected 1-6`);
+  rows.forEach(r => { const sws = r.querySelectorAll(".rp-also-sw i"); t.expect(sws.length === 2 && Math.abs(sws[0].getBoundingClientRect().width - sws[1].getBoundingClientRect().width) < 1, "the pair's swatches are not equal"); });
+  const heroTop = t.$(".cp-hero-full").getBoundingClientRect().bottom, secTop = sec.getBoundingClientRect().top;
+  t.expect(secTop - heroTop < 200, `the section sits ${Math.round(secTop - heroTop)}px under the cover, not right under it`);
+  const first = rows[0].dataset.rpAlsoN;
+  await t.click(rows[0], { wait: 500 });
+  await t.waitFor(() => /Your color/.test(H.chip(t)) && t.$(".cp-hero-full") && getComputedStyle(t.$(".cp-hero-full")).getPropertyValue("--c").trim().toUpperCase() === hex, 10000, `the ${first} page, still showing ${hex}`);
+});
+
 // David, 2026-10-09 on an in-between color's page ("Your color · Dark olive brown... diagonal triangle in the
 // top-right corner"): the split cover used to paint the matched name's color as a diagonal wedge, clip-path'd
 // into the hero's top-right corner -- exactly where a full-bleed hero's own "✕ Close" pill also lives

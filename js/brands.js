@@ -21,10 +21,11 @@ function bdLoad() {
 function bdWhen(fn) { bdLoad().then(d => { if (d) fn(d); }); }
 
 // ---------- color math helpers shared with the game ----------
-// the nearest of the app's ~1,000 core names (BASICS + ALL, always loaded from data/colors.js)
+// the nearest of the ~1,000 core names, by nameOf() (js/naming.js): the same name the tapped page opens as
+// (it used nearestColors(), the 101 app colors only, and could name a different color than the page that opened)
 function bdNearest(hex) {
-  const [hit] = nearestColors(hex, 1);
-  return hit ? { n: hit[0].n, h: hit[0].h, d: hit[1] } : null;
+  const nm = nameOf(hex);
+  return nm.n ? { n: nm.n, h: nm.h, d: nm.de } : null;
 }
 const bdAllColors = b => (b.colors || []).map(c => c.hex);
 // the brand's single best-known color, for list art and the game's answer key

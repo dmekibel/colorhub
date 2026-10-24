@@ -118,6 +118,8 @@ function rpYoursLine(name, hex, tapped) {
 // orchid... so I can tell it's a unique color"): the nearest name plus up to two modifier words from the same
 // lookDiff, lightness then saturation then hue ("Deep dusty pink orchid"). A description, not a new canonical name.
 const RP_MOD = { lighter: "light", darker: "deep", "more vivid": "vivid", duller: "dusty", redder: "reddish", yellower: "yellowish", greener: "greenish", bluer: "bluish", purpler: "purplish" };
+// a modifier never doubles up on an axis the name already speaks ("light" on "Light mauve", "vivid" on "Dusty lavender"): js/naming.js MOD_AXIS_WORDS
+const RP_AXIS = { lighter: "L", darker: "L", "more vivid": "C", duller: "C", redder: "H", yellower: "H", greener: "H", bluer: "H", purpler: "H" };
 const RP_MOD_ORDER = ["lighter", "darker", "more vivid", "duller", "redder", "yellower", "greener", "bluer", "purpler"];
 function rpYoursName(name, hex, tapped) {
   // only a near color earns "modifier + name"; a far one would read as nonsense ("light bluish teal" for a pink)
@@ -126,10 +128,35 @@ function rpYoursName(name, hex, tapped) {
   if (d === "almost the same") return name;
   // a hue word the name already carries is dropped ("greenish bottle green" reads as a stutter)
   const lower = name.toLowerCase(), hueRoot = { redder: "red", yellower: "yellow", greener: "green", bluer: "blue", purpler: "purpl" };
-  const words = d.split(" and ").filter(w => RP_MOD[w] && !(hueRoot[w] && lower.includes(hueRoot[w]))).sort((a, b) => RP_MOD_ORDER.indexOf(a) - RP_MOD_ORDER.indexOf(b)).map(w => RP_MOD[w]);
+  const words = d.split(" and ").filter(w => RP_MOD[w] && !(hueRoot[w] && lower.includes(hueRoot[w])) && !(typeof MOD_AXIS_WORDS !== "undefined" && MOD_AXIS_WORDS[RP_AXIS[w]].test(name))).sort((a, b) => RP_MOD_ORDER.indexOf(a) - RP_MOD_ORDER.indexOf(b)).map(w => RP_MOD[w]);
   if (!words.length) return name;
   const t = `${words.join(" ")} ${name.toLowerCase()}`;
   return t.charAt(0).toUpperCase() + t.slice(1);
+}
+// "It could also be called" (David, 2026-10-24, "in case you clicked on the wrong article"): right under an in-between
+// color's cover, the winner restated and the next-nearest names (js/naming.js nameCandidates, the same ranking and
+// distance nameOf() used to pick this page), each as its own descriptive name beside equal swatches (yours | theirs).
+// A row opens that name's page with the exact color still shown.
+function rpAlsoHTML(name, hex, tapped) {
+  if (!tapped || typeof nameCandidates !== "function") return "";
+  const rows = nameCandidates(tapped, 6, 12, name);
+  if (!rows.length) return "";
+  const m = pctMatch(de2000(tapped, hex)).replace(" match", "");
+  return `<section class="rp-also" data-rp-also aria-label="It could also be called">
+    <h2>It could also be called</h2>
+    <p class="rp-also-win">Closest: <b>${esc(name)}</b> · ${m}</p>
+    <div class="rp-also-list">${rows.map(r => `<button type="button" class="rp-also-row" data-rp-also-n="${esc(r.n)}" data-rp-also-h="${r.h}">
+      <span class="rp-also-sw" aria-hidden="true"><i style="--c:${tapped}"></i><i style="--c:${r.h}"></i></span>
+      <b>${esc(rpYoursName(r.n, r.h, tapped))}</b><em>${pctMatch(r.de).replace(" match", "")}</em></button>`).join("")}</div>
+  </section>`;
+}
+// open a given name's page with the tapped color still shown (js/swatch.js openTappedColor does this for the nearest one)
+function rpOpenNameAs(n, h, tapped) {
+  const taught = BYNAME.get(String(n).toLowerCase());
+  buzz(6);
+  if (taught) return openNode(colorNode(taught), true, tapped);
+  const entry = (CORE_NAMES || coreFallback()).find(e => e.n.toLowerCase() === String(n).toLowerCase()) || { n, h, src: ["app"], rank: null };
+  return namePage(entry, true, tapped);
 }
 // One compact action row on the cover (David, 2026-10-09: "Learn it could be a small button next to the Pair
 // with… button, and the heart somewhere there as well"): Learn it (small pill, the row's primary), Pair with…,
@@ -882,6 +909,7 @@ function colorDossier(entry, o = {}) {
       </div>
     </div>
     ${rpBarHTML(name, heroHex)}
+    ${rpAlsoHTML(name, hex, tapped)}
     ${entry.shade ? `<p class="fine np-shade">A described shade: ${esc(entry.shade.base)} made ${esc(entry.shade.mod)}${o.shadeBase ? `. <button class="link" data-shade-base>See ${esc(entry.shade.base)}</button>` : "."}</p>` : ""}
     <div class="ar-head" data-ar-head hidden></div>
     <div class="ar-body" data-ar-body hidden></div>
@@ -897,6 +925,7 @@ function colorDossier(entry, o = {}) {
   onKey = e => { if (e.key === "Escape") xBack(); };
   wireLinks(el);
   el.addEventListener("click", e => { const s = e.target.closest("[data-src-open]"); if (s) { e.preventDefault(); if (typeof sourcePage === "function") sourcePage(s.dataset.srcOpen); } });
+  el.querySelectorAll("[data-rp-also-n]").forEach(b => b.onclick = () => rpOpenNameAs(b.dataset.rpAlsoN, b.dataset.rpAlsoH, tapped));
   rpStoryFill(el, name, hex, o);
   rpCoverFill(el, name, hex, heroHex, entry);
   rpCoverLike(el, name, hex);

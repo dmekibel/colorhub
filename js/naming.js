@@ -68,6 +68,13 @@ function nearestCore(hexOrLab, list, n = 5) {
   return list.map(e => ({ n: e.n, h: e.h, de: de2000(L, e.lab), entry: e }))
     .sort((a, b) => a.de - b.de).slice(0, n);
 }
+// The runner-up list for an in-between color's page (js/richpage.js rpAlsoHTML): the SAME list and the SAME distance
+// nameOf() ranks with, so its first entry is always nameOf()'s winner (tools/check_nearest.js asserts it). `skip` drops
+// one name (the page's own); only names within `maxDe` dE2000 (rpYoursName's own limit) are kept.
+function nameCandidates(hex, n = 6, maxDe = 12, skip = "") {
+  const list = CORE_NAMES || coreFallback(), seen = new Set(), sk = String(skip).toLowerCase();
+  return nearestCore(lab(hex), list, 40).filter(x => { const k = x.n.toLowerCase(); if (k === sk || seen.has(k) || x.de > maxDe) return false; seen.add(k); return true; }).slice(0, n);
+}
 // Has the learner met this word? Only the app's 101 are ever taught today (ROADMAP §13-14's vocabulary ladder
 // is a later job): a core-list word beyond those 101 is always "new" until then.
 function coreWordMet(entry) {
