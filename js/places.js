@@ -14,6 +14,10 @@
 // Every place, in order (PLAN §3.1): the floor plus the four rooms that rise from it. Each row shows its own
 // live art and note (js/core.js roomsBubbleArt/roomsNote, unchanged -- the same pictures the old stem used).
 const PLACES_LIST = [["home", NAV_MAP], ["feed", "Today"], ...ROOMS_LIST];   // Today: the feed (js/todayfeed.js)
+// Learn, Train and Studio used to be three look-alike round multicolor discs (David, 2026-10-24); each now has its own
+// silhouette AND tint, in the same 48 px disc the other rows use. Map, Today and Museum keep their live art.
+const PLACES_GLYPH = { learn: ["book", "#A3C97D"], gym: ["train", "#83A6EE"], studio: ["studio", "#C69BDD"] };
+const placesGlyphArt = id => { const [ic, c] = PLACES_GLYPH[id]; return `<span class="rm-art pl-glyph" style="--pa:${c}">${icon(ic, 26)}</span>`; };
 const placesHere = () => { const r = document.querySelector(".room-sheet"); return r ? r.dataset.room : "home"; };
 // Collections' own row art: a small mosaic of 4 covers (David, 2026-10-10), not a swatch dot -- a plain,
 // recognizable "many small pictures" glyph, distinct from every room's single live picture. Real, not a
@@ -83,7 +87,7 @@ function placesOpen() {
     ? `<button class="rm-bubble hm-do-sm" role="menuitem" data-pl="settings" style="--i:${i}">
         <span class="rm-art hm-do-ic">${HM_GEAR_SVG}</span><span class="rm-label"><b>Settings</b></span></button>`
     : `<button class="rm-bubble${r.cur ? " cur" : ""}" role="menuitem" data-pl="${r.id}" style="--i:${i}">
-        ${roomsBubbleArt(r.id)}<span class="rm-label"><b>${esc(r.label)}</b><em>${esc(r.cur ? "You're here" : roomsNote(r.id))}</em></span></button>`
+        ${PLACES_GLYPH[r.id] ? placesGlyphArt(r.id) : roomsBubbleArt(r.id)}<span class="rm-label"><b>${esc(r.label)}</b><em>${esc(r.cur ? "You're here" : roomsNote(r.id))}</em></span></button>`
   ).join("");
   document.body.append(scrim, stem);
   document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.add("on"); b.innerHTML = ICON.x; b.setAttribute("aria-expanded", "true"); });

@@ -455,6 +455,7 @@ const ICON_PATHS = {
   museum: '<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 15.5l4.5-4.5 4 4 3-3 5.5 5.5"/><circle cx="15.5" cy="8.8" r="1.4"/>',
   studio: '<path d="M12 3.5a8.5 8.5 0 1 0 0 17c1.3 0 1.9-.9 1.6-2-.4-1.4.4-2.6 1.9-2.6H17a3.5 3.5 0 0 0 3.5-3.5c0-4.9-3.8-8.9-8.5-8.9z"/><circle cx="7.8" cy="11.2" r="1.1" fill="currentColor" stroke="none"/><circle cx="10.5" cy="7.6" r="1.1" fill="currentColor" stroke="none"/><circle cx="14.8" cy="7.9" r="1.1" fill="currentColor" stroke="none"/>',
   you: '<circle cx="12" cy="8.5" r="3.7"/><path d="M5 20c.8-3.8 3.6-5.6 7-5.6s6.2 1.8 7 5.6"/>',
+  book: '<path d="M12 6.8C10 5.2 7 4.6 3.5 5v12.6c3.5-.4 6.5.2 8.5 1.8 2-1.6 5-2.2 8.5-1.8V5c-3.5-.4-6.5.2-8.5 1.8zM12 6.8v12.6"/>',   // Learn's place glyph (js/places.js)
   rooms: '<circle cx="6" cy="6" r="2"/><circle cx="6" cy="12" r="2"/><circle cx="6" cy="18" r="2"/><path d="M11 6h8M11 12h8M11 18h8"/>',
   colors: '<circle cx="12" cy="8.7" r="4.7"/><circle cx="8.7" cy="14.6" r="4.7"/><circle cx="15.3" cy="14.6" r="4.7"/>',
   arrange: '<path d="M4 7h9M17.5 7H20M4 17h2.5M11 17h9"/><circle cx="15.2" cy="7" r="2.3"/><circle cx="8.8" cy="17" r="2.3"/>',
