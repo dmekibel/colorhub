@@ -25,7 +25,7 @@ Files (all little-endian), `<sfx>` is "" or "-reduced":
 import json, struct, time
 import numpy as np
 
-GAP = 7            # clear cells between any two islands at spread 1
+GAP = 6            # clear cells between any two islands at spread 1
 MIN_N = 150        # smaller clusters merge into their nearest neighbor
 BIG_N = 9000       # a cluster above this is cut into sub-islands of ~SUB_N
 SUB_N = 4500
@@ -155,7 +155,7 @@ def assign(P, cx, cy):
 def place(cen, r, par):
     """Centers (cells) for the islands: UMAP centroids scaled, then relaxed until every pair is clear by GAP (SUB_GAP for siblings)."""
     K = len(r)
-    sc = np.sqrt((r ** 2).sum() / max(1e-9, ((cen - cen.mean(0)) ** 2).sum())) * 1.15
+    sc = np.sqrt((r ** 2).sum() / max(1e-9, ((cen - cen.mean(0)) ** 2).sum())) * 0.8
     base = (cen - cen.mean(0)) * sc
     p = base.copy()
     for it in range(1500):
