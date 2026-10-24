@@ -1008,7 +1008,9 @@ function pmLaySubject(list, F) {
 // look.json (small, has the island table) when a painting map opens, a .bin only when its layout is first drawn.
 // A missing, short or stale file (n or hash not matching) hides the option; a shared address that names it falls back to color.
 const PM_LOOK = { st: 0, meta: null, pm: null, rp: null, V: { keep: null, c30: null, c60: null } };   // st: 0 unknown, 2 ready, 3 unavailable. V[v] = { meta, grid, isl, bad }
-const PM_LK_DEF = { lay: "isl", sp: .35, col: 30, lab: 1 };
+const PM_LK_DEF = { lay: "isl", sp: .1, col: 30, lab: 1 };
+// the window shape the island cloud is stretched to (a phone is tall, a desktop wide), in quarter steps so a resize does not relay out every frame
+const pmLookAsp = () => clamp(Math.round(innerWidth / Math.max(300, innerHeight) * 4) / 4, .4, 2);
 const PM_LK_KEY = "pm-look-opts";
 function pmLkSaved() { try { const o = JSON.parse(localStorage.getItem(PM_LK_KEY)); return o && typeof o === "object" ? o : {}; } catch (e) { return {}; } }
 function pmLkSave(o) { try { localStorage.setItem(PM_LK_KEY, JSON.stringify(o)); } catch (e) {} }
@@ -1182,15 +1184,21 @@ function pmIslRelax(px, py, r, par, gap, gapSib) {
     if (!bad) break;
   }
 }
-function pmLayLookIsl(list, D, o, withLabels) {
+function pmLayLookIsl(list, D, o, withLabels, asp) {
   const m = D.meta, I = m.islands, K = I.length, d = D.isl, n = list.length, f = 1 + o.sp * 1.6, GAP = m.gap || 7, GAPS = m.gapSib || 3;
   const items = Int32Array.from(list), X = new Int32Array(n), Y = new Int32Array(n), cnt = new Int32Array(K);
   const whole = n === m.n;
   for (let t = 0; t < n; t++) cnt[d.id[list[t]]]++;
   const cx = new Float64Array(K), cy = new Float64Array(K), r = new Float64Array(K), par = I.map(q => q.par);
   let cellX = null, cellY = null, slot = null;
+  // the cloud's own shape is stretched to the window's (centers only), then pushed apart again where that made islands touch
+  const stretch = rr => { let a0 = 1e9, a1 = -1e9, b0 = 1e9, b1 = -1e9; for (let k = 0; k < K; k++) if (cnt[k]) { a0 = Math.min(a0, I[k].cx - rr[k]); a1 = Math.max(a1, I[k].cx + rr[k]); b0 = Math.min(b0, I[k].cy - rr[k]); b1 = Math.max(b1, I[k].cy + rr[k]); }
+    return clamp(Math.sqrt((asp || 1) / Math.max(.2, (a1 - a0) / Math.max(1, b1 - b0))), .5, 2.2); };
   if (whole) {   // the stored cells; centers scale with the spread
-    for (let k = 0; k < K; k++) { cx[k] = I[k].cx * f; cy[k] = I[k].cy * f; r[k] = I[k].r; }
+    const g = stretch(Array.from(I, q => q.r)), qx = Float64Array.from(I, q => q.cx * g), qy = Float64Array.from(I, q => q.cy / g);
+    for (let k = 0; k < K; k++) r[k] = I[k].r;
+    pmIslRelax(qx, qy, r, par, GAP, GAPS);
+    for (let k = 0; k < K; k++) { cx[k] = qx[k] * f; cy[k] = qy[k] * f; }
     for (let t = 0; t < n; t++) { const i = list[t], k = d.id[i]; X[t] = Math.round(d.lx[i] + cx[k] - I[k].mx); Y[t] = Math.round(d.ly[i] + cy[k] - I[k].my); }
   } else {   // a filter: each island's remaining paintings refill a smaller blob of their own; islands that emptied are gone
     const frac = Math.sqrt(n / m.n), at = new Int32Array(K + 1), pl = new Int32Array(n);
@@ -1208,8 +1216,10 @@ function pmLayLookIsl(list, D, o, withLabels) {
       let sx = 0, sy = 0; for (let j = 0; j < c; j++) { sx += b.x[j]; sy += b.y[j]; }
       const mx = sx / c, my = sy / c; let rr = 0;
       for (let j = 0; j < c; j++) rr = Math.max(rr, Math.hypot(b.x[j] - mx, b.y[j] - my));
-      cellX[k] = { a, cell, b, mx, my }; r[k] = rr + .5; px[k] = I[k].cx * frac; py[k] = I[k].cy * frac; live.push(k);
+      cellX[k] = { a, cell, b, mx, my }; r[k] = rr + .5; live.push(k);
     }
+    const g = stretch(r);
+    for (const k of live) { px[k] = I[k].cx * frac * g; py[k] = I[k].cy * frac / g; }
     const lx = Float64Array.from(live, k => px[k]), ly = Float64Array.from(live, k => py[k]), lr = Float64Array.from(live, k => r[k]);
     pmIslRelax(lx, ly, lr, live.map(k => par[k]), GAP, GAPS);
     live.forEach((k, j) => { cx[k] = lx[j] * f; cy[k] = ly[j] * f; });
@@ -1229,13 +1239,13 @@ function pmLayLookIsl(list, D, o, withLabels) {
   const isl = [];
   for (let k = 0; k < K; k++) if (cnt[k]) isl.push({ k, n: cnt[k], x0: bx0[k] - sx, x1: bx1[k] - sx, y0: by0[k] - sy, y1: by1[k] - sy, text: withLabels && whole ? I[k].lab : "" });
   const big = isl.reduce((a, q) => !a || q.n > a.n ? q : a, null);
-  const lay = pmGridOf(items, X, Y, [], big ? [Math.round((big.x0 + big.x1) / 2), Math.round((big.y0 + big.y1) / 2)] : [0, 0]);
+  const lay = pmGridOf(items, X, Y, [], [0, 0]);   // the middle of the whole cloud: the first view frames every island
   lay.islands = isl;
   return lay;
 }
 function pmLayLook(list, F, s) {
   const o = pmLk(s);
-  return pmLookKind(s) === "isl" ? pmLayLookIsl(list, PM_LOOK.V[pmLookV(s)], o, !!o.lab) : pmLayLookGrid(list, PM_LOOK.V.keep.grid, F);
+  return pmLookKind(s) === "isl" ? pmLayLookIsl(list, PM_LOOK.V[pmLookV(s)], o, !!o.lab, pmLookAsp()) : pmLayLookGrid(list, PM_LOOK.V.keep.grid, F);
 }
 // Tones (David, 2026-10-09): the same Vivid/Light/Muted/Dark split honey.js's own Tones shape uses
 // (honeyToneGroup), applied to whichever color "Place by" already uses for position (pmPlaceLab) -- an island
@@ -1314,7 +1324,7 @@ function pmLaySpiral(list, seed, F) {
   return pmGridOf(Int32Array.from(L), X, Y, [], [0, 0]);
 }
 function pmLayout(s, F) {
-  const list = pmList(s, F), key = pmQS(s, F) + "|" + list.length + "|" + (s.fav ? pmFavList(F).map(r => r.i).join(",") : "");
+  const list = pmList(s, F), key = pmQS(s, F) + "|" + list.length + (s.arr === "look" ? "|a" + pmLookAsp() : "") + "|" + (s.fav ? pmFavList(F).map(r => r.i).join(",") : "");
   let lay = PM_LAYOUTS.get(key);
   if (!lay) {
     const arr = s.arr === "look" && !pmLookReady(s) ? "color" : s.arr;   // look.bin not here yet (the caller loads it and rebuilds): never cache the stand-in
@@ -1885,8 +1895,9 @@ function pmMount(el, s, F) {
     // all, so a layout with gy0=1..4787 while P stays at [0,0] needs almost DOUBLE the naive half-extent to
     // reach its far edge -- halving Z from what a symmetric assumption would compute, same exact-2x gap the QA
     // bbox check below caught). Matches _qaBBoxFits()'s own corner math.
-    const halfW = Math.max(Math.abs(lay.gx0 - P[0]), Math.abs(lay.gx0 + lay.GW - 1 - P[0])) + .7;
-    const halfH = Math.max(Math.abs(lay.gy0 - P[1]), Math.abs(lay.gy0 + lay.GH - 1 - P[1])) + .7;
+    let halfW = Math.max(Math.abs(lay.gx0 - P[0]), Math.abs(lay.gx0 + lay.GW - 1 - P[0])) + .7;
+    let halfH = Math.max(Math.abs(lay.gy0 - P[1]), Math.abs(lay.gy0 + lay.GH - 1 - P[1])) + .7;
+    if (lay.islands) { halfW = (lay.GW / 2) * 1.05 + .7; halfH = (lay.GH / 2) * 1.05 + .7; }   // islands: always framed from the middle of the cloud, with a modest margin
     const inset = pmSolo(s) ? soloInset() : 0;   // one-painter map: keep the layout below the filter chip row (symmetric, so it stays centered)
     const fits = zc => fzAt(zc, halfW) <= W / 2 && fzAt(zc, halfH) <= H / 2 - inset;
     if (fits(1)) return 1;   // already fits at the ordinary zoom (a small/sparse set) -- never force MORE zoom-out than that
@@ -1929,6 +1940,7 @@ function pmMount(el, s, F) {
   const fitZoomFor = l => {
     if (!l.GW || !l.GH || !base) return 1;
     // one painter's map (a few hundred to ~1,500 works): open with the WHOLE oeuvre in frame, not a 100-tile window onto it
+    if (l.islands) return Math.min(ZMAX, zFit() * (W < 700 ? 1.7 : 1));   // islands: the whole cloud in frame (a phone starts a step closer, so the biggest islands carry their names)
     if (pmSolo(s)) { const zm = zFit(); if (zm < 1) return zm; }
     const perUnit = Math.min(W / (l.GW + 1.4), H / (l.GH + 1.4));
     return clamp(Math.max(1, perUnit / base), zFit(), ZMAX);
@@ -2511,12 +2523,13 @@ function pmMount(el, s, F) {
         const ex = (q.x0 + q.x1) / 2 - P[0], ey = q.y0 - .7 - P[1], z = Math.hypot(ex, ey); if (z > R) continue;
         const f = z < 1e-6 ? 0 : Fz(z) / z, sx = cx + ex * f, sy = cy + ey * f, cell = k0 * Math.min(magR(z), tanR(z));
         const wpx = (q.x1 - q.x0 + 1) * cell;
-        if (wpx < 96 || sx < -wpx || sx > W + wpx || sy < 36 || sy > H + 20) continue;
+        if (wpx < 58 || sx < -wpx || sx > W + wpx || sy < 150 || sy > H - 100) continue;   // clear of the count pill above and the buttons below
         const fs = Math.min(22, Math.max(15, wpx / 12));
         ctx.font = `400 ${fs}px "Instrument Serif", Georgia, serif`;
-        let txt = q.text; const room = Math.max(120, wpx * 1.5);
-        if (ctx.measureText(txt).width > room) { while (txt.length > 2 && ctx.measureText(txt + "…").width > room) txt = txt.slice(0, -1); txt += "…"; }
-        const tw = ctx.measureText(txt).width, rx0 = sx - tw / 2 - 6, rx1 = sx + tw / 2 + 6, ry0 = sy - fs - 3, ry1 = sy + 6;
+        const txt = q.text;
+        const tw = ctx.measureText(txt).width; if (tw > Math.max(190, wpx * 1.8)) continue;   // a whole name or none, never a cut one
+        const rx0 = sx - tw / 2 - 6, rx1 = sx + tw / 2 + 6, ry0 = sy - fs - 3, ry1 = sy + 6;
+        if (rx0 < 4 || rx1 > W - 4) continue;   // never cut by the edge
         if (placedI.some(p => rx0 < p.rx1 && rx1 > p.rx0 && ry0 < p.ry1 && ry1 > p.ry0)) continue;
         placedI.push({ rx0, rx1, ry0, ry1 });
         ctx.fillStyle = "rgba(14,13,11,.8)"; ctx.fillRect(rx0, ry0, rx1 - rx0, ry1 - ry0);
@@ -2839,8 +2852,8 @@ function pmMount(el, s, F) {
     const mem = pinned || foc ? null : PM_PAN.get(lay.key);
     if (foc) { P = [lay.x[foc.k], lay.y[foc.k]]; Z = fo.z > 0 ? fo.z : fitZoomFor(lay); const zf = zFit(); if (Z < zf) Z = zf; }   // keep your zoom, unless the new layout is smaller than the window at it
     else if (mem && !keepPan) { P = [mem.x, mem.y]; Z = mem.s; }
-    else if (!keepPan) { P = pmSolo(s) ? [lay.gx0 + (lay.GW - 1) / 2, lay.gy0 + (lay.GH - 1) / 2] : lay.start.slice(); Z = fitZoomFor(lay); const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; if (pmSolo(s) && !pinned) { const zm = zFit(); if (zm < 1) Z = zm; } }   // (the snap above moved P a little: re-fit from where it actually sits)
-    if (keepPan) { const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
+    else if (!keepPan) { P = pmSolo(s) ? [lay.gx0 + (lay.GW - 1) / 2, lay.gy0 + (lay.GH - 1) / 2] : lay.start.slice(); Z = fitZoomFor(lay); const k = lay.islands ? -1 : nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; if (pmSolo(s) && !pinned) { const zm = zFit(); if (zm < 1) Z = zm; } }   // (the snap above moved P a little: re-fit from where it actually sits)
+    if (keepPan && !lay.islands) { const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
     Z = clamp(Z, zMin(), ZMAX);
     // the card itself (David, 2026-10-09): opens for a reason -- a seed just pinned the view to one painting
     // (a tap, Walk, a Center-on preset, a fresh entry point) -- and stays closed for a plain dense browse, same
