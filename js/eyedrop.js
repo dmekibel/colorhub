@@ -48,8 +48,10 @@ function eydSource(el) {
   // a 3000-4000 px museum original (the Met's, Smithsonian's) would be a 16 MP canvas, over iOS's limit: read it at ~6 MP
   const k = Math.min(1, Math.sqrt(6e6 / (w * h))); if (k < 1) { w = Math.max(1, Math.round(w * k)); h = Math.max(1, Math.round(h * k)); }
   const c = document.createElement("canvas"); c.width = w; c.height = h;
-  const cx = c.getContext("2d", { willReadFrequently: true });
-  try { cx.drawImage(el, 0, 0, w, h); cx.getImageData(0, 0, 1, 1); } catch (e) { return null; }
+  const cx = c.getContext("2d", { willReadFrequently: true }); if (!cx) return null;
+  // a canvas whose middle pixel is fully transparent (not decoded yet, or refused for memory) would read every pick as
+  // #000000 (David's photo screenshot, 2026-10-24): never use it, so the next touch tries again
+  try { cx.drawImage(el, 0, 0, w, h); if (!cx.getImageData(w >> 1, h >> 1, 1, 1).data[3]) return null; } catch (e) { return null; }
   return { c, cx, w, h };
 }
 // a screen point -> the fraction of the picture it's over (0..1 each way), accounting for object-fit:contain's

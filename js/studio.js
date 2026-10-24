@@ -385,7 +385,9 @@ const PV_CAP = {
 function palPhotoView(p) {
   const basePool = p.pool;
   let pool = basePool, segPool = null;   // segPool: the palette of the part picked with Select a part, in place of the whole photo's
-  let curK = 6, mode = "out", where = typeof S !== "undefined" && S && GL_WHERE.some(w => w[0] === S.palWhere) ? S.palWhere : "off", capOpen = false;
+  // "On the photo" markers start off on a photo, whatever a painting page last left on (David, 2026-10-24: numbered
+  // markers piled on top of his own color circles); turning them on here is a choice for this photo only
+  let curK = 6, mode = "out", where = "off", capOpen = false;
   let pvKCtl = null;   // the countify() controller for [data-pvk], built once, re-ranged per mode (js/core.js)
   let editedPal = null;   // once the visitor edits (remove/replace/nudge/reorder), this overrides the computed set
   let undoPal = null, undoLabel = "";
@@ -612,7 +614,7 @@ function palPhotoView(p) {
     if (e.target.closest(".gl-mk")) return;
     const r = span.getBoundingClientRect(); if (e.clientX < r.left || e.clientY < r.top || e.clientX > r.right || e.clientY > r.bottom) return;
     // the color circles own every other touch (pointerdown, below); a click only matters while selecting a part
-    if (tool === "seg") segTap((e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height);
+    if (tool === "seg") { const m = mapIn(e.clientX, e.clientY); segTap(m.fx, m.fy); }   // against the picture, not its letterboxed frame
   });
 
   // ---------- the two tools on the photo (David, 2026-10-23) ----------
@@ -641,22 +643,43 @@ function palPhotoView(p) {
   const dots = [];   // { fx, fy, hex }
   let activeDot = -1, ddrag = null, dsrc = null;
   const dotsHost = el.querySelector("[data-pvdots]"), yoursHost = el.querySelector("[data-pvyours]");
-  const readAt = (fx, fy) => { dsrc = dsrc || (typeof eydSource === "function" ? eydSource(img) : null); if (!dsrc) return null; const r = eydSampleAt(dsrc, fx, fy, getSampleSize()); return r && r.hex; };
-  const dotName = hex => typeof nameOfTapped === "function" ? nameOfTapped(hex) : nameOf(hex).text;
-  const drawDots = () => {
-    const a = dots[activeDot];
-    dotsHost.innerHTML = dots.map((d, i) => `<i class="pv-dot${i === activeDot ? " on" : ""}" data-pvdot="${i}" style="left:${(d.fx * 100).toFixed(2)}%;top:${(d.fy * 100).toFixed(2)}%;--c:${d.hex}"></i>`).join("")
-      + (a ? `<span class="pv-dot-name${a.fy < .14 ? " below" : ""}" style="left:${(clamp(a.fx, .12, .88) * 100).toFixed(2)}%;top:${(a.fy * 100).toFixed(2)}%">${esc(dotName(a.hex))}</span>` : "");
+  // the pixels the circles read: the photo drawn once at up to 1200px (plenty for color, and small enough that an
+  // iPhone never hands back a blank canvas -- David's screenshot, 2026-10-24: every circle read #000000). A canvas that
+  // comes back empty (alpha 0: not decoded yet, or refused for memory) is never kept, so the next tap tries again.
+  const makeSrc = () => {
+    const w = img.naturalWidth, h = img.naturalHeight; if (!w || !h) return null;
+    const k = Math.min(1, 1200 / Math.max(w, h)), c = document.createElement("canvas");
+    c.width = Math.max(1, Math.round(w * k)); c.height = Math.max(1, Math.round(h * k));
+    const cx = c.getContext("2d", { willReadFrequently: true }); if (!cx) return null;
+    try { cx.drawImage(img, 0, 0, c.width, c.height); if (!cx.getImageData(c.width >> 1, c.height >> 1, 1, 1).data[3]) return null; } catch (e) { return null; }
+    return { c, cx, w: c.width, h: c.height };
   };
+  const readAt = (fx, fy) => { dsrc = dsrc || makeSrc(); if (!dsrc) return null; const r = eydSampleAt(dsrc, fx, fy, getSampleSize()); return r && r.hex; };
+  const dotName = hex => typeof nameOfTapped === "function" ? nameOfTapped(hex) : nameOf(hex).text;
+  // where the picture itself sits inside the photo frame: a tall photo in a wide frame is letterboxed (object-fit:
+  // contain), so circles are placed against the picture, never the frame (David's screenshot: circles off the image)
+  const picBox = () => {
+    const r = img.getBoundingClientRect(), sr = span.getBoundingClientRect(), ar = img.naturalWidth / img.naturalHeight || 1, bar = r.width / r.height || 1;
+    let w = r.width, h = r.height, ox = 0, oy = 0;
+    if (ar > bar) { h = r.width / ar; oy = (r.height - h) / 2; } else { w = r.height * ar; ox = (r.width - w) / 2; }
+    return { x: r.left - sr.left + ox, y: r.top - sr.top + oy, w, h, left: r.left + ox, top: r.top + oy };
+  };
+  const drawDots = () => {
+    const a = dots[activeDot], b = picBox(), px = d => `left:${(b.x + d.fx * b.w).toFixed(1)}px;top:${(b.y + d.fy * b.h).toFixed(1)}px`;
+    dotsHost.innerHTML = dots.map((d, i) => `<i class="pv-dot${i === activeDot ? " on" : ""}" data-pvdot="${i}" style="${px(d)};--c:${d.hex}"></i>`).join("")
+      + (a ? `<span class="pv-dot-name${a.fy < .14 ? " below" : ""}" style="${px({ fx: clamp(a.fx, .15, .85), fy: a.fy })}">${esc(dotName(a.hex))}</span>` : "");
+  };
+  const onResize = () => { if (dots.length) drawDots(); };
+  addEventListener("resize", onResize); cleanup.push(() => removeEventListener("resize", onResize));
   const drawYours = () => {
     yoursHost.hidden = !dots.length;
     yoursHost.innerHTML = !dots.length ? "" : `<div class="pv-yours-head"><b>Your colors</b>${dots.length >= 2 ? `<button class="aw-link" data-pvysave>Save as palette</button>` : ""}<button class="aw-link" data-pvyclear>Clear</button></div>`
       + dots.map((d, i) => `<div class="pv-yrow${i === activeDot ? " on" : ""}"><button class="pv-yname" data-swatch="${d.hex}"><i style="--c:${d.hex}"></i><b>${esc(dotName(d.hex))}</b><em class="mono">${d.hex}</em></button><button class="pv-yx" data-pvyx="${i}" aria-label="Remove this color">${ICON.x}</button></div>`).join("");
   };
   // a screen point -> the photo's own fractions, kept inside the picture while a circle is being dragged
-  const mapIn = (cx, cy) => { const r = img.getBoundingClientRect(); return { fx: clamp((cx - r.left) / r.width, 0, 1), fy: clamp((cy - r.top) / r.height, 0, 1) }; };
+  const mapIn = (cx, cy) => { const b = picBox(); return { fx: clamp((cx - b.left) / b.w, 0, 1), fy: clamp((cy - b.top) / b.h, 0, 1) }; };
   const addDot = (fx, fy) => {
-    const hex = readAt(fx, fy); if (!hex) return -1;
+    const hex = readAt(fx, fy); if (!hex) { toast("The photo is still loading. Tap again in a moment."); return -1; }
     if (dots.length >= 12) { toast("12 colors is the most. Remove one first."); return -1; }
     dots.push({ fx, fy, hex });
     if (typeof learnerLog === "function") learnerLog({ type: "seen", color: { n: nameOf(hex).n, h: hex }, src: "photo" });
@@ -664,7 +687,9 @@ function palPhotoView(p) {
   };
   span.addEventListener("pointerdown", e => {
     if (tool === "seg" || !e.isPrimary || e.button > 0 || e.target.closest(".gl-mk")) return;
-    const r = img.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) return;
+    const hit0 = e.target.closest("[data-pvdot]"), b = picBox();
+    // a tap on the empty bars beside a letterboxed picture does nothing (a circle itself is always grabbable)
+    if (!hit0 && (e.clientX < b.left || e.clientX > b.left + b.w || e.clientY < b.top || e.clientY > b.top + b.h)) return;
     e.preventDefault();
     const m = mapIn(e.clientX, e.clientY);
     if (frompic != null) { const hex = readAt(m.fx, m.fy); if (hex) addPick(hex); return; }
@@ -998,7 +1023,9 @@ function palPhotoView(p) {
   // camera's circle was, so the color you were pointing at is there waiting
   setTool(null);
   const placeSeed = () => { if (!p.seed || !el.isConnected) return; const i = addDot(p.seed.fx, p.seed.fy); if (i >= 0) { activeDot = i; drawDots(); drawYours(); } };
-  if (img.complete && img.naturalWidth) placeSeed(); else img.addEventListener("load", placeSeed, { once: true });
+  // wait for the photo to be fully decoded (iOS can report it loaded before its pixels are readable)
+  const whenDecoded = () => img.decode ? img.decode().catch(() => {}) : Promise.resolve();
+  if (img.complete && img.naturalWidth) whenDecoded().then(placeSeed); else img.addEventListener("load", () => whenDecoded().then(placeSeed), { once: true });
   el._pvSegTap = segTap;   // design review (js/boot.js studiopv:segment) taps a part without a finger
   el._pvSetTool = setTool;
   el._pvSetMethod = setMethod;
