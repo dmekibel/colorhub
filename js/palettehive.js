@@ -29,7 +29,7 @@
 // A tapped cell closes the sheet and opens that color's page in one tap (js/swatch.js openTappedColor); Back
 // from there returns to the sheet's own source page, never to the hive.
 
-const PH_MIN_N = 3, PH_MAXN = 200, PH_GAP = 3;
+const PH_MIN_N = 3, PH_MAXN = 200, PH_GAP = 3;   // o.maxCap lifts PH_MAXN (the painter's color map, js/paintercolors.js, goes to 400)
 const PH_ZMIN = .12, PH_ZMAX = 8;
 const PH_ARR = [["share", "By share"], ["hue", "By hue"], ["light", "Light → dark"], ["spiral", "Spiral"]];
 const PH_GA = Math.PI * (3 - Math.sqrt(5));   // the golden angle -- the same spiral honey.js's Sunflower/Spiral layouts use
@@ -57,23 +57,25 @@ function phAnchor(arr, it, i, n, W, H) {
   return [Math.cos(a) * r, Math.sin(a) * r];
 }
 function phOrderKey(arr, it) {
+  if (arr === "custom") return 0;
   if (arr === "hue" || arr === "spiral") return it.C < 14 ? -1000 + (100 - it.L) : it.H;
   if (arr === "light") return -it.L;
   return -(it.share || 0);
 }
-function phLayout(colors, arr, W, H) {
+function phLayout(colors, arr, W, H, ext = {}) {
   if (!colors.length) return [];
-  const withLch = colors.map(c => { const [L, C, H2] = lch(c.h); return { h: c.h, n: c.n || phName(c), share: c.share != null ? c.share : 1 / colors.length, L, C, H: H2 }; });
-  const ordered = withLch.sort((a, b) => phOrderKey(arr, a) - phOrderKey(arr, b));
+  const withLch = colors.map(c => { const [L, C, H2] = lch(c.h); return { ...c, h: c.h, n: c.n || phName(c), share: c.share != null ? c.share : 1 / colors.length, L, C, H: H2 }; });
+  const okey = ext.order || (it => phOrderKey(arr, it));
+  const ordered = withLch.sort((a, b) => okey(a) - okey(b));
   const totalShare = ordered.reduce((a, c) => a + c.share, 0) || 1;
-  const targetArea = Math.max(1, W * H * .5);
-  const minR = Math.max(13, Math.min(W, H) * .028), maxR = Math.min(W, H) * .34;
+  const targetArea = Math.max(1, W * H * (ext.fill || .5));
+  const minR = ext.minR || Math.max(13, Math.min(W, H) * .028), maxR = ext.maxR || Math.min(W, H) * .34;
   const nodes = ordered.map((it, i) => {
     const r = clamp(Math.sqrt(targetArea * (it.share / totalShare) / Math.PI), minR, maxR);
-    const [ax, ay] = phAnchor(arr, it, i, ordered.length, W, H);
+    const [ax, ay] = ext.anchor ? ext.anchor(it, i, ordered.length, W, H) : phAnchor(arr, it, i, ordered.length, W, H);
     return { ...it, r, x: ax, y: ay, ax, ay };
   });
-  const spring = arr === "hue" || arr === "light" ? .06 : 0;
+  const spring = ext.spring != null ? ext.spring : arr === "hue" || arr === "light" ? .06 : 0;
   // "share"/"spiral": pull toward the middle every step, not just toward each node's own loose spiral seed --
   // repulsion alone only stops OVERLAP, it never closes a gap between bubbles that never touched in the first
   // place, which left the whole cluster sitting at its spread-out seed spacing with a big dead margin around it
@@ -110,20 +112,26 @@ function openPaletteHive(o = {}) {
   // the floor is PH_MIN_N (3) UNLESS the thing itself holds fewer than that (a pair is 2 colors, full stop) --
   // never force a slider past what's really there (David, 2026-10-09: "don't write the word different" -- the
   // same honesty rule as everywhere else: say what's real, not a padded-out number).
-  const max = clamp(o.max != null ? o.max : (poolFn ? PH_MAXN : seed.length), 1, PH_MAXN);
+  // js/paintercolors.js drives this same sheet with more options: arrs (its own arrangements), itemsFn(arr, n) (the
+  // items for an arrangement), layoutFn(arr, items, W, H) (its own placement, via phLayout's ext), noCount(arr),
+  // label2(arr, node) (the second line in a big cell), under(ctx, ws, zoom, arr) (row labels), onTap(node), sub(arr), fine.
+  const arrs = o.arrs || PH_ARR, itemsFn = typeof o.itemsFn === "function" ? o.itemsFn : null;
+  const capN = o.maxCap || PH_MAXN;
+  const max = clamp(o.max != null ? o.max : (poolFn ? capN : seed.length), 1, capN);
   const minN = Math.min(PH_MIN_N, max);
   const title = o.title || "Colors", kindLabel = PH_SRC_LABEL[o.source] || "Colors";
-  let count = clamp(seed.length || minN, minN, max), arr = "share";
-  const getColors = n => (poolFn ? (poolFn(n) || []) : seed).slice(0, Math.min(n, max));
+  let count = clamp(o.count0 || seed.length || minN, minN, max), arr = o.arr0 || arrs[0][0];
+  const getColors = n => itemsFn ? (itemsFn(arr, n) || []) : (poolFn ? (poolFn(n) || []) : seed).slice(0, Math.min(n, max));
 
   const { sh, close } = sheet(`
     <p class="eyebrow">${esc(kindLabel)}</p>
     <h1 class="ph-title">${esc(title)}</h1>
     <p class="ph-sub" data-ph-sub></p>
     <div class="ph-count"><label class="ph-count-l"><span>How many</span><input type="range" aria-label="How many colors"><b data-ph-n></b></label></div>
-    <div class="ph-arr" role="group" aria-label="Arrange">${PH_ARR.map(([k, t]) => `<button class="ph-arr-b${k === arr ? " on" : ""}" data-ph-arr="${k}">${t}</button>`).join("")}</div>
+    <div class="ph-arr" role="group" aria-label="Arrange">${arrs.map(([k, t]) => `<button class="ph-arr-b${k === arr ? " on" : ""}" data-ph-arr="${k}">${t}</button>`).join("")}</div>
     <div class="ph-stage" data-ph-stage><canvas class="ph-cv" aria-label="Every color here, sized by how much of it there is. Drag to pan, pinch to zoom, tap a color to open its page."></canvas></div>
-    <p class="fine ph-fine">Screen colors are approximate${o.subtitle ? " · " + esc(o.subtitle) : ""}.</p>
+    ${o.cta ? `<button type="button" class="ph-cta" data-ph-cta>${esc(o.cta.label)} ${typeof ICON !== "undefined" && ICON.arrow || ""}</button>` : ""}
+    <p class="fine ph-fine">${o.fine ? esc(o.fine) : `Screen colors are approximate${o.subtitle ? " · " + esc(o.subtitle) : ""}.`}</p>
   `);
   sh.classList.add("ph-sheet");
   const stage = sh.querySelector("[data-ph-stage]"), cv = sh.querySelector(".ph-cv"), ctx = cv.getContext("2d");
@@ -162,18 +170,24 @@ function openPaletteHive(o = {}) {
   function hitTest(sx, sy) {
     const [wx, wy] = screenToWorld(sx, sy);
     let best = null, bd = Infinity;
-    for (const n of nodes) { const d = Math.hypot(n.x - wx, n.y - wy); if (d <= n.r && d < bd) { bd = d; best = n; } }
+    for (const n of nodes) { if (n.ghost) continue; const d = Math.hypot(n.x - wx, n.y - wy); if (d <= n.r && d < bd) { bd = d; best = n; } }
     return best;
   }
   function draw(e) {
     if (dead) return;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
+    if (o.under) o.under(ctx, worldToScreen, zoom, arr, W, H);
     const list = animFrom && e != null ? nodes.map((n, i) => { const f = animFrom[i]; return f ? { ...n, x: f.x + (n.x - f.x) * e, y: f.y + (n.y - f.y) * e, r: f.r + (n.r - f.r) * e } : n; }) : nodes;
     list.forEach(n => {
+      if (n.ghost) return;
       const [sx, sy] = worldToScreen(n.x, n.y), rr = Math.max(.4, n.r * zoom) * (pressed === n ? .94 : 1);
-      ctx.beginPath(); ctx.arc(sx, sy, rr, 0, 6.283185307); ctx.fillStyle = n.h; ctx.fill();
-      if (rr >= 9) { ctx.lineWidth = Math.max(1, rr * .025); ctx.strokeStyle = n.L < 50 ? `rgba(236,232,223,${n.L < 14 ? .3 : .18})` : "rgba(14,13,11,.12)"; ctx.stroke(); }
+      ctx.beginPath(); ctx.arc(sx, sy, rr, 0, 6.283185307);
+      if (n.hollow) {   // used far LESS than their peers: a ring, not a disc (the color is still the color, just absent)
+        ctx.globalAlpha = .22; ctx.fillStyle = n.h; ctx.fill(); ctx.globalAlpha = 1;
+        ctx.lineWidth = Math.max(2, rr * .07); ctx.strokeStyle = n.L < 32 ? "rgba(236,232,223,.6)" : n.h; ctx.stroke();   // a near-black ring would vanish on the dark stage
+      } else { ctx.fillStyle = n.h; ctx.fill(); }
+      if (rr >= 9 && !n.hollow) { ctx.lineWidth = Math.max(1, rr * .025); ctx.strokeStyle = n.L < 50 ? `rgba(236,232,223,${n.L < 14 ? .3 : .18})` : "rgba(14,13,11,.12)"; ctx.stroke(); }
       const d = rr * 2;
       if (d * .19 < HONEY_LABEL_FS_MIN) return;
       const w = honeyWrap(ctx, n.n), fsReal = w.fs * d;
@@ -181,9 +195,9 @@ function openPaletteHive(o = {}) {
       const fs = Math.min(fsReal, 28), lh = fs * 1.02, showPct = d > 64;
       const y0 = sy - (w.lines.length - 1) * lh / 2 + fs * .06 - (showPct ? fs * .46 : 0);
       ctx.font = `${fs}px "Instrument Serif",Georgia,serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
-      ctx.fillStyle = inkHex(n.h); ctx.globalAlpha = Math.min(1, (fsReal - HONEY_LABEL_FS_MIN) / 2);
+      ctx.fillStyle = n.hollow ? "#ECE8DF" : inkHex(n.h); ctx.globalAlpha = Math.min(1, (fsReal - HONEY_LABEL_FS_MIN) / 2);
       w.lines.forEach((s, i2) => ctx.fillText(s, sx, y0 + i2 * lh));
-      if (showPct) { ctx.font = `500 ${Math.min(13, d * .05)}px "Geist Mono",ui-monospace,monospace`; ctx.globalAlpha *= .78; ctx.fillText(pctFmt(n.share * 100), sx, y0 + (w.lines.length - 1) * lh + fs * 1.05); }
+      if (showPct) { ctx.font = `500 ${o.label2 ? clamp(d * .085, 11, 16) : Math.min(13, d * .05)}px "Geist Mono",ui-monospace,monospace`; ctx.globalAlpha *= .78; ctx.fillText(o.label2 ? (o.label2(arr, n) || "") : pctFmt(n.share * 100), sx, y0 + (w.lines.length - 1) * lh + fs * 1.05); }
       ctx.globalAlpha = 1;
     });
   }
@@ -199,12 +213,12 @@ function openPaletteHive(o = {}) {
   }
   function relayout(animate) {
     const cols = getColors(count), prev = nodes;
-    nodes = phLayout(cols, arr, W, H);
+    nodes = (o.layoutFn && o.layoutFn(arr, cols, W, H)) || phLayout(cols, arr, W, H);
     fitView();
-    subEl.textContent = PH_SUB;
+    subEl.textContent = o.sub ? o.sub(arr) : PH_SUB;
     if (animate && !RM && prev.length) {
-      const prevBy = new Map(prev.map(n => [n.h, n]));
-      animFrom = nodes.map(n => { const p = prevBy.get(n.h); return p ? { x: p.x, y: p.y, r: p.r } : { x: n.x, y: n.y, r: 0 }; });
+      const prevBy = new Map(prev.map(n => [n.key || n.h, n]));
+      animFrom = nodes.map(n => { const p = prevBy.get(n.key || n.h); return p ? { x: p.x, y: p.y, r: p.r } : { x: n.x, y: n.y, r: 0 }; });
       animT0 = performance.now(); runAnim();
     } else { animFrom = null; draw(); }
   }
@@ -257,7 +271,9 @@ function openPaletteHive(o = {}) {
     if (!down) return;
     const d = down; down = null;
     if (!d.moved && d.node && performance.now() - d.t < 500) {
-      const hex = d.node.h; pressed = null; buzz(6); close(); openTappedColor(hex); return;
+      const hex = d.node.h; pressed = null; buzz(6);
+      if (o.onTap) { o.onTap(d.node, close); return; }
+      close(); openTappedColor(hex); return;
     }
     pressed = null; draw();
   };
@@ -271,13 +287,20 @@ function openPaletteHive(o = {}) {
   addEventListener("blur", onBlur); addEventListener("pagehide", onBlur);
 
   // ---------- controls ----------
+  const ctaB = sh.querySelector("[data-ph-cta]");
+  if (ctaB) ctaB.onclick = () => { buzz(6); const run = o.cta.run; teardown(); close(); run(); };
   const nOut = sh.querySelector("[data-ph-n]"), input = sh.querySelector(".ph-count input");
   nOut.textContent = count;
+  const countBox = sh.querySelector(".ph-count");
+  const syncCount = () => { countBox.hidden = !!(o.noCount && o.noCount(arr)); };
+  syncCount();
   countify(input, { min: minN, max, value: count, out: nOut, onSet: (v, final) => { nOut.textContent = v; if (v === count) return; count = v; relayout(true); if (final) buzz(3); } });
   sh.querySelectorAll("[data-ph-arr]").forEach(b => b.onclick = () => {
     if (b.dataset.phArr === arr) return;
     buzz(4); arr = b.dataset.phArr;
     sh.querySelectorAll("[data-ph-arr]").forEach(x => x.classList.toggle("on", x === b));
+    syncCount();
+    try { const bar = b.parentElement; bar.scrollTo({ left: b.offsetLeft - bar.clientWidth / 2 + b.offsetWidth / 2, behavior: reduceMotion ? "auto" : "smooth" }); } catch (e) {}
     relayout(true);
   });
 
@@ -289,7 +312,10 @@ function openPaletteHive(o = {}) {
   // QA hook (tools/smoke/scenarios.js), same pattern as js/home.js's window.HM_CTRL: every field reads the live
   // closure state, never a snapshot, so it stays correct across a slider change, an arrangement switch or a pinch.
   const DEBUG = {
-    count: () => nodes.length,
+    count: () => nodes.filter(n => !n.ghost).length,
+    arr: () => arr,
+    nodes: () => nodes.filter(n => !n.ghost).map(n => ({ h: n.h, key: n.key, r: n.r, x: n.x, y: n.y, share: n.share, hollow: !!n.hollow })),
+    setArr: k => { const b = sh.querySelector(`[data-ph-arr="${k}"]`); if (b) b.click(); },
     max: () => max,
     hexAt: i => nodes[i] && nodes[i].h,
     screenOf(hex) {

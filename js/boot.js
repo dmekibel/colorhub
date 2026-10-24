@@ -193,6 +193,7 @@ function shot(name) {
       if (act === "tuned") Object.assign(S.cb, { tuned: true, state: { ...cxState(cxNorm(ch)), hue: [190, 280], L: [30, 80] } });
       return colorExplorer({ focus: dailyColor(), pick: c => closeup(colorNode(c)), shot: ["wheel", "tuned"].includes(act) ? "" : act });
     }
+    case "pcolors": { const [, sl = "vincent-van-gogh", ar = ""] = name.split(":"); return awOpenRoute("painter", sl, "colors") || (ar && setTimeout(() => { const b = document.querySelector(`[data-ph-arr="${ar}"]`); if (b) b.click(); }, 6000)); }   // painter's color map (js/paintercolors.js): pcolors:<slug>:<share|hue|light|decade|peers>
     case "gallery": return galleryShot(name.slice(8));   // gallery, gallery:scroll=600, gallery:color=Cobalt, gallery:adjust=Cobalt, gallery:page=12, gallery:cpage=Cobalt
     case "world": case "fashiondecades": case "fashiondecade": case "fashionera": case "fashioncoty": case "fashionhouse": case "fashionhistory": case "garments": case "garment": case "fxcolor":
       return typeof worldShot === "function" && worldShot(screen, arg);   // js/world.js

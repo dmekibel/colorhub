@@ -358,7 +358,7 @@ function awWorksSection(slug, m, A, P) {
   return `<div class="sec-head" id="aw-works"><b>Life's work</b><span data-wkcount>${rows.length} paintings</span></div>
     <p class="aw-sub">Every painting here, his. Sort, filter, or look at them on the map.</p>
     <div class="aw-wk-views"><div class="seg" role="tablist" aria-label="View"><button class="on" data-wkview="grid">Grid</button><button data-wkview="timeline">Timeline</button></div>
-      ${typeof mapSelect === "function" ? `<button class="aw-wk-map" data-wkmap>${GL_ICON_MAP}<span>Color map</span></button>` : ""}</div>
+      ${typeof pcOpen === "function" ? `<button class="aw-wk-map" data-wkmap>${GL_ICON_MAP}<span>Their colors</span></button>` : ""}</div>
     <div class="aw-wk-sort aw-wk-look">${awSortSelect(AW_WORKS_SORT.map(r => r[0]).filter(k => (k !== "mus" || museums.length > 1) && (k !== "fam" || famOK)), { sort: "year", rev: awViewLoad().rev })}<span class="aw-look2" data-wklook><button class="aw-chipbtn" data-wkpal aria-pressed="true">Palettes on</button><button class="aw-chipbtn" data-wksize aria-label="Columns">2 across</button></span></div>
     ${`<details class="aw-more" data-wkfilter><summary>Filter</summary>
       ${decades.length > 1 ? `<div class="aw-wk-filt"><label>From <b data-wkd0>${decades[0]}</b> to <b data-wkd1>${decades[decades.length - 1] + 9}</b></label>
@@ -482,7 +482,7 @@ function awWorksWire(el, slug, m, A, P) {
     const cw = e.target.closest("[data-wkcolor]"); if (cw) { st.colorHex = cw.dataset.wkcolor; st.colorTol = 14; el.querySelectorAll("[data-wkcolor]").forEach(b => b.classList.toggle("on", b === cw)); const cl = el.querySelector("[data-wkcolorclear]"); if (cl) cl.hidden = false; return draw(); }
     if (e.target.closest("[data-wkcolorclear], [data-wkcolorclear2]")) { st.colorHex = null; el.querySelectorAll("[data-wkcolor]").forEach(b => b.classList.remove("on")); const cl = el.querySelector("[data-wkcolorclear]"); if (cl) cl.hidden = true; return draw(); }
     if (e.target.closest("[data-wkloosen]")) { st.colorTol += 8; return draw(); }
-    if (e.target.closest("[data-wkmap]")) return mapSelect({ title: A.name, colors: awPainterHexes(A, P), source: "painter", id: slug });
+    if (e.target.closest("[data-wkmap]")) return pcOpen(slug);   // the painter's own color map (js/paintercolors.js), not colors lit among the big shared map
   });
   draw();
 }
@@ -561,7 +561,7 @@ function awPainter(slug, push = true) {
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
     <div class="aw-head"><div><p class="eyebrow p-type">Painter</p><h1 class="p-title">${esc(A.name)}</h1><p class="p-dek">${dek}</p></div></div>
-    ${n >= 2 ? `<button class="aw-pmap-top" data-pmap="arr=color&p=${esc(slug)}">${GL_ICON_MAP}<span>Painting map</span></button>` : ""}
+    ${n >= 2 ? `<div class="aw-map-row"><button class="aw-pmap-top" data-pmap="arr=color&p=${esc(slug)}">${GL_ICON_MAP}<span>Painting map</span></button>${typeof pcOpen === "function" ? `<button class="aw-pcolors" data-awcolors="${esc(slug)}" aria-label="${esc(A.name)}'s colors, sized by how much they use each">${icon("map", 20)}<span>Their colors</span></button>` : ""}</div>` : ""}
     ${awPortraitHero(slug, A, P, small ? [] : awSigChips(P.sig, P.ix))}
     ${awFamousRail(slug, n)}
     ${awWorksSection(slug, m, A, P)}
@@ -622,7 +622,7 @@ function awPainter(slug, push = true) {
     const hx = awPainterHexes(A, P);
     paintSet = colorSet({ kind: "painter", id: slug, title: A.name, colors: hx.map(h => ({ h })), src: "painter/" + slug,
       ...(hx.length > 3 ? { pick: k => hx.slice(0, k).map(h => ({ h })), max: hx.length } : {}) });
-    const row = csActions(paintSet, { only: ["keep", "map"], back: () => awPainter(slug, false) });
+    const row = csActions(paintSet, { only: ["keep", "map"], labels: { map: "Their colors" }, back: () => awPainter(slug, false) });
     const cmp = document.createElement("button"); cmp.className = "cs-act"; cmp.dataset.awvs = slug; cmp.innerHTML = `${ICON.search}<span>Compare</span>`;
     row.insertBefore(cmp, row.firstChild);
     row.style.setProperty("--n", row.children.length); row.dataset.n = row.children.length;
@@ -1190,6 +1190,7 @@ document.addEventListener("click", e => {
   const g = e.target.closest("[data-awgroup]"); if (g) { e.preventDefault(); const [k, v] = g.dataset.awgroup.split("|"); return awGroup(k, k === "decade" ? +v : v); }
   const ix = e.target.closest("[data-awindex]"); if (ix) { e.preventDefault(); return awIndex(); }
   const vs = e.target.closest("[data-awvs]"); if (vs) { e.preventDefault(); return awVs(vs.dataset.awvs || "", ""); }
+  const pc = e.target.closest("[data-awcolors]"); if (pc && typeof pcOpen === "function") { e.preventDefault(); buzz(6); return pcOpen(pc.dataset.awcolors); }
 });
 function awStep(tok) {
   const [, kind, a, b] = tok.split(":");
@@ -1203,7 +1204,7 @@ function awOpenRoute(kind, id, more) {
     // awPainter() itself now tries the full profile first and falls back to the lite page (every other named
     // painter, tools/painters_lite.py) before giving up -- see its own comment. A cold #/painter/<slug> link
     // (shared, bookmarked, or the browser's own history replay) gets the exact same fallback a live tap does.
-    if (kind === "painter") return awPainter(id);
+    if (kind === "painter") { awPainter(id); if (more === "colors" && typeof pcOpenRoute === "function") pcOpenRoute(id); return; }   // #/painter/<slug>/colors: the painter's color map over the page (js/paintercolors.js)
     if (kind === "arthistory") return awIndex();
     if (kind === "painter-index") return awPainters();
     if (kind === "painters") return awVs(id && AW.meta.a[id] ? id : "", more && AW.meta.a[more] ? more : "");
