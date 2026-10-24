@@ -1,0 +1,16 @@
+{
+ "v": 1,
+ "n": 206345,
+ "w": 365,
+ "h": 566,
+ "hash": "63c818b0",
+ "built": "2026-10-24",
+ "model": "ViT-B-32 laion2b_s34b_b79k",
+ "method": "PCA(50) -> UMAP(2-D, 15 neighbors) -> recursive median split onto an even grid",
+ "mitigation": {},
+ "sources": {
+  "image": 172127,
+  "tile": 33683,
+  "imputed": 535
+ }
+}
