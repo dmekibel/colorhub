@@ -8270,6 +8270,10 @@ scenario("paintmap", "By look: the option appears, switching keeps the painting 
   t.expect(t.w.PM_CTRL.center === i0, `By look moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
   const full = t.ev("PM_CTRL.lay().n");
   t.expect(full === meta.n, `By look should hold every painting (${full} of ${meta.n})`);
+  // the Even grid layout (a setting; Islands is the default): a filter refills it with no voids
+  await t.click('.pmx-sheet [data-pmlk="lay"][data-v="grid"]', { force: true, wait: 600 });
+  await t.waitFor(() => !t.w.PM_CTRL.lay().islands && t.w.PM_CTRL.lay().arr === "look", 15000, "the Even grid layout (look.bin) to load");
+  t.expect(t.w.PM_CTRL.center === i0, `Even grid moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
   const y = t.ev(`GAL.year[${i0}]`);
   t.ev(`PM_CTRL.spec.f.y0 = ${y - 15}; PM_CTRL.spec.f.y1 = ${y + 15}; PM_CTRL.rebuild()`);
   const lay = t.ev("(() => { const l = PM_CTRL.lay(); return { n: l.n, GW: l.GW, GH: l.GH, arr: l.arr }; })()");
@@ -8279,4 +8283,48 @@ scenario("paintmap", "By look: the option appears, switching keeps the painting 
   t.ev("PM_CTRL.spec.f.y0 = null; PM_CTRL.spec.f.y1 = null; PM_CTRL.rebuild()");
   await t.click('.pmx-sheet [data-pmarr="color"]', { force: true, wait: 700 });
   t.expect(t.w.PM_CTRL.center === i0, `leaving By look moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+});
+
+// By look Islands (David, 2026-10-24: "maybe each thing should be an island"): natural clusters laid out apart with empty space between.
+scenario("paintmap", "By look islands: every painting once and apart with space between; names never overlap; settings persist; focus is kept; a filter compacts", async t => {
+  const i0 = await pmFocusOpen(t);
+  const meta = await t.w.fetch("data/gallery/look.json").then(r => r.ok ? r.json() : null).catch(() => null);
+  if (!meta || !meta.islands) { t.expect(true, "no islands table in this checkout: Islands is hidden by design"); return; }
+  t.ev("try { localStorage.removeItem('pm-look-opts'); } catch (e) {}");
+  await t.click(".pmx-do", { wait: 400 });
+  await t.waitFor(".pmx-sheet [data-pmarr=\"look\"]", 6000, "the By look choice in Arrange");
+  await t.click('.pmx-sheet [data-pmarr="look"]', { force: true, wait: 600 });
+  await t.waitFor(() => t.w.PM_CTRL.spec.arr === "look" && (t.w.PM_CTRL.lay().islands || []).length > 10, 20000, "the islands layout to load");
+  t.expect(t.w.PM_CTRL.center === i0, `Islands moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  const st = t.ev(`(() => { const l = PM_CTRL.lay(); let c = 0; for (let g = 0; g < l.grid.length; g++) if (l.grid[g] >= 0) c++;
+    const seen = new Set(l.items); return { n: l.n, filled: c, uniq: seen.size, area: l.GW * l.GH, isl: l.islands.length, labeled: l.islands.filter(q => q.text).length, sumN: l.islands.reduce((a, q) => a + q.n, 0) }; })()`);
+  t.expect(st.n === meta.n && st.uniq === meta.n && st.filled === meta.n, `every painting exactly once: ${JSON.stringify(st)}`);
+  t.expect(st.sumN === meta.n, `every painting belongs to one island: ${st.sumN} of ${meta.n}`);
+  t.expect(st.area > st.n * 1.6, `no empty space between islands: ${st.area} cells for ${st.n} paintings`);
+  t.expect(st.labeled >= 5, `too few island names (${st.labeled})`);
+  // names: shown only when the island is wide enough on screen, and never on top of each other
+  let shown = 0; const tried = [];
+  for (const m of [4, 8]) { t.ev(`PM_CTRL.zoom(PM_CTRL.zFit() * ${m})`); await t.waitFor(() => t.w.PM_CTRL.islLabels.length > 0, 900, "an island name", 900).catch(() => null); const r = t.ev("PM_CTRL.islLabels.map(q => [q.rx0, q.rx1, q.ry0, q.ry1])"); shown = Math.max(shown, r.length); tried.push(`${m}x:${r.length}`);
+    for (let i = 0; i < r.length; i++) for (let j = i + 1; j < r.length; j++) t.expect(!(r[i][0] < r[j][1] && r[i][1] > r[j][0] && r[i][2] < r[j][3] && r[i][3] > r[j][2]), "two island names overlap"); }
+  t.expect(shown >= 1, `no island name ever showed when zoomed to an island (${tried.join(" ")}, Z ${t.ev("PM_CTRL.Z")}, fit ${t.ev("PM_CTRL.zFit()")})`);
+  t.ev("PM_CTRL.zoom(1)");
+  // settings: live, remembered, in the address, and the painting stays in the middle
+  const c1 = t.w.PM_CTRL.center;
+  await t.click('.pmx-sheet [data-pmlk="lab"][data-v="0"]', { force: true, wait: 500 });
+  t.expect(t.ev("PM_CTRL.lay().islands.every(q => !q.text)"), "Labels Off still left names");
+  t.expect(/lb=0/.test(t.w.location.hash), `the address doesn't carry Labels off (${t.w.location.hash})`);
+  t.expect(t.ev("JSON.parse(localStorage.getItem('pm-look-opts')).lab") === 0, "Labels off isn't remembered on this phone");
+  const w0 = t.ev("PM_CTRL.lay().GW");
+  t.ev("(() => { const e = document.querySelector('[data-pmlksp]'); e.value = 1; e.dispatchEvent(new Event('input', { bubbles: true })); })()");
+  await t.waitFor(() => t.w.PM_CTRL.lay().GW > w0 * 1.15, 1500, "the wider island spread", 1500).catch(() => null);
+  t.expect(t.ev("PM_CTRL.lay().GW") > w0 * 1.15, `Island spread wide didn't widen the map (${w0} -> ${t.ev("PM_CTRL.lay().GW")})`);
+  t.expect(t.w.PM_CTRL.center === c1, `a setting moved you off your painting: ${c1} -> ${t.w.PM_CTRL.center}`);
+  // a filter keeps the islands for what is left and drops the empty ones
+  const y = t.ev(`GAL.year[${c1}]`);
+  t.ev(`PM_CTRL.spec.f.y0 = ${y - 10}; PM_CTRL.spec.f.y1 = ${y + 10}; PM_CTRL.rebuild()`);
+  const f = t.ev(`(() => { const l = PM_CTRL.lay(); let c = 0; for (let g = 0; g < l.grid.length; g++) if (l.grid[g] >= 0) c++; return { n: l.n, filled: c, isl: l.islands.length, sumN: l.islands.reduce((a, q) => a + q.n, 0) }; })()`);
+  t.expect(f.n > 50 && f.n < meta.n && f.filled === f.n && f.sumN === f.n && f.isl >= 2 && f.isl <= meta.islands.length, `a filtered islands map is off: ${JSON.stringify(f)}`);
+  t.expect(t.w.PM_CTRL.center === c1, `a filter moved you off your painting in Islands: ${c1} -> ${t.w.PM_CTRL.center}`);
+  t.ev("PM_CTRL.spec.f.y0 = null; PM_CTRL.spec.f.y1 = null; PM_CTRL.rebuild()");
+  t.ev("try { localStorage.removeItem('pm-look-opts'); } catch (e) {}");
 });

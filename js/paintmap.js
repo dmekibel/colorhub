@@ -473,6 +473,10 @@ function pmParse(q, F) {
   const f = s.f, num = k => { const v = p.get(k); return v != null && v !== "" && isFinite(+v) ? +v : null; };
   const uy = num("uy"); if (uy != null) s.upToYear = uy;
   const mg = num("mag"); if (mg != null) s.mag = clamp(mg, 0, 1);
+  if (p.get("lk") === "isl" || p.get("lk") === "grid") s.lkl = p.get("lk");   // By look settings (the address wins over this phone's saved choice)
+  const lsp = num("lsp"); if (lsp != null) s.lks = clamp(lsp, 0, 1);
+  if (/^(0|30|60)$/.test(p.get("lc") || "")) s.lkc = +p.get("lc");
+  if (p.get("lb") === "0" || p.get("lb") === "1") s.lkb = +p.get("lb");
   if (p.get("c")) { f.hexes = p.get("c").split(",").filter(h => /^[0-9a-f]{6}$/i.test(h)).map(h => "#" + h.toUpperCase()); f.name = f.hexes.length === 1 ? nameOf(f.hexes[0]).text : ""; f.tol = num("t") || 8; f.cover = num("m") != null ? num("m") : 2; }
   if (p.get("cm") === "all") f.colorMode = "all";
   if (p.get("cm") === "overall" && f.hexes.length) {
@@ -504,6 +508,7 @@ function pmQS(s, F) {
   const f = s.f, out = [["arr", s.arr]];
   const col = s.col || (F && F.col) || "paintings"; if (col !== "paintings") out.push(["col", col]);
   if (s.place && s.place !== "avg") out.push(["pl", s.place]);
+  if (s.arr === "look") { const o = pmLk(s); out.push(["lk", o.lay], ["lsp", +o.sp.toFixed(2)], ["lc", o.col], ["lb", o.lab]); }
   if (f.hexes.length) { out.push(["c", f.hexes.map(h => h.slice(1).toLowerCase()).join(",")], ["t", f.tol], ["m", f.cover]); if (f.hexes.length > 1 && f.colorMode === "all") out.push(["cm", "all"]); if (f.colorMode === "overall") { out.push(["cm", "overall"], ["sh", (f.shares || []).join(",")]); if (f.name) out.push(["nm", f.name]); } }
   if (f.y0 != null) out.push(["y0", f.y0]); if (f.y1 != null) out.push(["y1", f.y1]);
   if (f.hueBand != null) out.push(["hb", f.hueBand]);
@@ -994,35 +999,92 @@ function pmLaySubject(list, F) {
     label: g => subjGenreLabel(g),
   });
 }
-// By look (David, 2026-10-24: "a map arranged by vibe"). data/gallery/look.bin holds one grid cell per painting, built offline by
-// tools/look_layout.py from the CLIP image model's own distances (512-d -> UMAP -> an even grid), so paintings the model finds alike
-// sit together. Loaded lazily: look.json (tiny) when a painting map opens, look.bin (~0.8 MB) only when By look is first needed.
+// By look (David, 2026-10-24: "a map arranged by vibe"). The image model's own distances (CLIP, 512-d -> UMAP, tools/look_layout.py) put
+// paintings it finds alike near each other. Two layouts of the same cloud, both built offline:
+//   Islands (default)  data/gallery/look-islands.bin: the cloud's natural clusters, each a compact roundish blob of even cells, set apart
+//                      at their UMAP centroids with plain empty space between (nothing is drawn there). Names come from look.json.
+//   Even grid          data/gallery/look.bin: one even rectangle, every painting one cell.
+// "Photo-format effect: Reduce" swaps in look-reduced*.json/.bin (same pipeline, vectors centered per museum). Everything loads lazily:
+// look.json (small, has the island table) when a painting map opens, a .bin only when its layout is first drawn.
 // A missing, short or stale file (n or hash not matching) hides the option; a shared address that names it falls back to color.
-const PM_LOOK = { st: 0, meta: null, n: 0, W: 0, H: 0, x: null, y: null, pm: null, pb: null };   // st: 0 unknown, 2 ready, 3 unavailable
-const pmLookReady = () => PM_LOOK.st === 2 && !!PM_LOOK.x;
-const pmLookShown = s => (s.col || "paintings") === "paintings" && !!PM_LOOK.meta && PM_LOOK.st !== 3;
-function pmLookProbe(F) {   // the small file: is there a look map for exactly this gallery?
-  if (PM_LOOK.pm) return PM_LOOK.pm;
-  return PM_LOOK.pm = fetch("data/gallery/look.json").then(r => r.ok ? r.json() : null).then(m => {
-    if (m && m.v === 1 && m.n === F.N) PM_LOOK.meta = m; else PM_LOOK.st = 3;
-    return PM_LOOK.meta;
-  }).catch(() => { PM_LOOK.pm = null; return null; });
+const PM_LOOK = { st: 0, meta: null, pm: null, rp: null, V: { keep: null, c30: null, c60: null } };   // st: 0 unknown, 2 ready, 3 unavailable. V[v] = { meta, grid, isl, bad }
+const PM_LK_DEF = { lay: "isl", sp: .35, col: 30, lab: 1 };
+const PM_LK_KEY = "pm-look-opts";
+function pmLkSaved() { try { const o = JSON.parse(localStorage.getItem(PM_LK_KEY)); return o && typeof o === "object" ? o : {}; } catch (e) { return {}; } }
+function pmLkSave(o) { try { localStorage.setItem(PM_LK_KEY, JSON.stringify(o)); } catch (e) {} }
+// The four By look settings, resolved: the address (s.lk*) wins, then what this phone last chose, then the defaults.
+// col = Color influence: 0 None, 30 Some, 60 A lot (the weight of the painting's own colors against the image model's view when the cloud was laid out)
+function pmLk(s) {
+  const sv = pmLkSaved(), pick = (a, b, d) => a != null ? a : b != null ? b : d;
+  const col = +pick(s.lkc, sv.col, PM_LK_DEF.col);
+  return { lay: pick(s.lkl, sv.lay, PM_LK_DEF.lay) === "grid" ? "grid" : "isl", sp: clamp(+pick(s.lks, sv.sp, PM_LK_DEF.sp), 0, 1),
+    col: col >= 45 ? 60 : col >= 15 ? 30 : 0, lab: +pick(s.lkb, sv.lab, PM_LK_DEF.lab) ? 1 : 0 };
 }
-function pmLookEnsure(F) {   // resolves true when By look can be drawn
-  if (pmLookReady()) return Promise.resolve(true);
-  if (PM_LOOK.st === 3) return Promise.resolve(false);
-  return PM_LOOK.pb || (PM_LOOK.pb = pmLookProbe(F).then(m => {
-    if (!m) { PM_LOOK.st = 3; return false; }
-    return fetch("data/gallery/look.bin").then(r => r.ok ? r.arrayBuffer() : null).then(b => {
+const PM_LOOK_FILES = { keep: { json: "look.json", grid: "look.bin", isl: "look-islands.bin" }, c30: { json: "look-c30.json", isl: "look-islands-c30.bin" }, c60: { json: "look-c60.json", isl: "look-islands-c60.bin" } };
+const PM_LOOK_COLS = [[0, "None", "keep"], [30, "Some", "c30"], [60, "A lot", "c60"]];
+// the data variant a spec actually uses for Islands (a color variant that is missing or broken quietly falls back to None)
+function pmLookV(s) { const w = pmLk(s).col, v = w ? "c" + w : "keep", D = PM_LOOK.V[v]; return D && D.meta && !D.dead ? v : "keep"; }
+function pmLookKind(s) {
+  const D = PM_LOOK.V[pmLookV(s)];
+  return pmLk(s).lay === "isl" && D && D.meta && D.meta.islands && !D.bad.isl ? "isl" : "grid";
+}
+const pmLookHave = s => { const k = pmLookKind(s), D = PM_LOOK.V[k === "isl" ? pmLookV(s) : "keep"]; return !!D && !!D[k]; };
+const pmLookReady = s => PM_LOOK.st === 2 && pmLookHave(s);
+const pmLookShown = s => (s.col || "paintings") === "paintings" && !!PM_LOOK.meta && PM_LOOK.st !== 3;
+const pmLookColsOn = () => PM_LOOK_COLS.filter(c => { const D = PM_LOOK.V[c[2]]; return D && D.meta && !D.dead && !D.bad.isl; });
+const pmLookHasIsl = () => !!(PM_LOOK.V.keep && PM_LOOK.V.keep.meta && PM_LOOK.V.keep.meta.islands && !PM_LOOK.V.keep.bad.isl);
+function pmLookProbeOne(F, v) {
+  return fetch("data/gallery/" + PM_LOOK_FILES[v].json).then(r => r.ok ? r.json() : null).then(m => {
+    if (m && m.v === 1 && m.n === F.N) PM_LOOK.V[v] = { meta: m, grid: null, isl: null, bad: {}, pb: {}, dead: false }; else m = null;
+    return m;
+  });
+}
+function pmLookProbe(F) {   // the small files: is there a look map for exactly this gallery?
+  if (PM_LOOK.pm) return PM_LOOK.pm;
+  PM_LOOK.rp = Promise.all(["c30", "c60"].map(v => pmLookProbeOne(F, v).catch(() => null)));   // the optional Color influence variants, in parallel
+  return PM_LOOK.pm = pmLookProbeOne(F, "keep").then(m => { if (m) PM_LOOK.meta = m; else PM_LOOK.st = 3; return PM_LOOK.meta; }).catch(() => { PM_LOOK.pm = null; return null; });
+}
+function pmLookBin(F, v, kind) {   // one .bin into typed arrays; false when it is missing or does not match
+  const D = PM_LOOK.V[v], m = D.meta;
+  if (D[kind]) return Promise.resolve(true);
+  if (D.bad[kind]) return Promise.resolve(false);
+  return D.pb[kind] || (D.pb[kind] = fetch("data/gallery/" + PM_LOOK_FILES[v][kind]).then(r => r.ok ? r.arrayBuffer() : null).then(b => {
+    const dv = b && new DataView(b), hs = parseInt(m.hash, 16);
+    if (kind === "grid") {
       if (!b || b.byteLength !== 24 + m.n * 4) throw 0;
-      const dv = new DataView(b);
-      if (dv.getUint32(0, true) !== 0x4B4F4F4C || dv.getUint32(8, true) !== m.n || dv.getUint32(12, true) !== m.w || dv.getUint32(16, true) !== m.h || dv.getUint32(20, true) !== parseInt(m.hash, 16)) throw 0;   // "LOOK", n, W, H, ids hash
+      if (dv.getUint32(0, true) !== 0x4B4F4F4C || dv.getUint32(8, true) !== m.n || dv.getUint32(12, true) !== m.w || dv.getUint32(16, true) !== m.h || dv.getUint32(20, true) !== hs) throw 0;   // "LOOK", n, W, H, ids hash
       const x = new Uint16Array(m.n), y = new Uint16Array(m.n);
       for (let i = 0, o = 24; i < m.n; i++, o += 4) { x[i] = dv.getUint16(o, true); y[i] = dv.getUint16(o + 2, true); }
-      Object.assign(PM_LOOK, { st: 2, n: m.n, W: m.w, H: m.h, x, y });
-      return true;
-    }).catch(() => { PM_LOOK.st = 3; return false; });
-  }));
+      D.grid = { n: m.n, W: m.w, H: m.h, x, y };
+    } else {
+      const K = m.islands.length;
+      if (!b || b.byteLength !== 20 + m.n * 3) throw 0;
+      if (dv.getUint32(0, true) !== 0x4C53494C || dv.getUint32(8, true) !== m.n || dv.getUint32(12, true) !== K || dv.getUint32(16, true) !== hs) throw 0;   // "LISL", n, islands, ids hash
+      D.isl = { id: new Uint8Array(b, 20, m.n), lx: new Uint8Array(b, 20 + m.n, m.n), ly: new Uint8Array(b, 20 + 2 * m.n, m.n) };
+    }
+    return true;
+  }).catch(() => { D.bad[kind] = true; return false; }));
+}
+function pmLookEnsure(F, s) {   // resolves true when By look can be drawn with this spec's settings
+  s = s || {};
+  if (PM_LOOK.st === 3) return Promise.resolve(false);
+  if (PM_LOOK.st === 2 && pmLookReady(s)) return Promise.resolve(true);
+  return pmLookProbe(F).then(m => {
+    if (!m) { PM_LOOK.st = 3; return false; }
+    return (pmLk(s).col ? PM_LOOK.rp : Promise.resolve(null)).then(() => {
+      const kind = pmLookKind(s), v = kind === "isl" ? pmLookV(s) : "keep";
+      return pmLookBin(F, v, kind).then(ok => {
+        if (!ok && v !== "keep") PM_LOOK.V[v].dead = true;
+        if (!ok) return pmLookBin(F, "keep", kind === "isl" ? "isl" : "grid").then(ok2 => ok2 || pmLookBin(F, "keep", "grid"));
+        return true;
+      });
+    });
+  }).then(ok => {
+    if (ok && pmLookHave(s)) { PM_LOOK.st = 2; return true; }
+    if (ok) return pmLookEnsure(F, s);   // the first choice failed and the fallback has now loaded: re-evaluate once
+    if (!(PM_LOOK.V.keep && (PM_LOOK.V.keep.grid || PM_LOOK.V.keep.isl))) PM_LOOK.st = 3;
+    return false;
+  });
 }
 // Quickselect by rank so the median split below is linear per level: idx[lo..hi) is reordered so idx[k] holds the k-th smallest by c (all distinct).
 function pmSelect(idx, lo, hi, k, c) {
@@ -1055,8 +1117,8 @@ function pmEvenGrid(px, py, W) {
   }
   return { X, Y, H };
 }
-function pmLayLook(list, F) {
-  const L = PM_LOOK, n = list.length, items = Int32Array.from(list);
+function pmLayLookGrid(list, L, F) {
+  const n = list.length, items = Int32Array.from(list);
   let X, Y, W, H;
   if (n === L.n) {   // the whole museum: the stored cells as they are
     W = L.W; H = L.H; X = new Int32Array(n); Y = new Int32Array(n);
@@ -1071,6 +1133,109 @@ function pmLayLook(list, F) {
   const ox = W >> 1;
   for (let k = 0; k < n; k++) X[k] -= ox;
   return pmGridOf(items, X, Y, [], [0, Math.round(H / 2)]);
+}
+// ---- Islands. The same blob and the same recursive split tools/look_islands.py uses, so a filtered island refills as a compact blob.
+// The n cells nearest the middle of a rotated, wavy ellipse, as {x, y} arrays shifted to start at 0.
+function pmBlob(n, ang, aspect, seed) {
+  const R = Math.floor(Math.sqrt(n / Math.PI) * aspect * 1.45) + 6, S = 2 * R + 1, tot = S * S;
+  const c = Math.cos(ang), s = Math.sin(ang), sa = Math.sqrt(aspect), ph = [0, 1, 2].map(j => { const v = Math.sin(seed * 12.9898 + j * 78.233) * 43758.5453; return (v - Math.floor(v)) * 6.2832; });
+  const d = new Float64Array(tot), ix = new Int32Array(tot);
+  for (let t = 0; t < tot; t++) {
+    const gx = (t % S) - R, gy = Math.floor(t / S) - R, u = (gx * c + gy * s) / sa, v = (-gx * s + gy * c) * sa, th = Math.atan2(v, u);
+    d[t] = Math.hypot(u, v) / (1 + .09 * Math.sin(2 * th + ph[0]) + .06 * Math.sin(3 * th + ph[1]) + .035 * Math.sin(5 * th + ph[2])) * 4096 + t * 1e-6;   // ties by position
+    ix[t] = t;
+  }
+  pmSelect(ix, 0, tot, n - 1, d);
+  const cx = new Int32Array(n), cy = new Int32Array(n);
+  let x0 = 1e9, y0 = 1e9;
+  for (let k = 0; k < n; k++) { const t = ix[k]; cx[k] = (t % S) - R; cy[k] = Math.floor(t / S) - R; if (cx[k] < x0) x0 = cx[k]; if (cy[k] < y0) y0 = cy[k]; }
+  for (let k = 0; k < n; k++) { cx[k] -= x0; cy[k] -= y0; }
+  return { x: cx, y: cy };
+}
+// Points (px, py: small ints) onto the same number of cells (cx, cy): cut the cell set along its longer side and the points at the same
+// count along the same axis, down to single cells. Returns the cell index for each point.
+function pmSplitCells(px, py, cx, cy) {
+  const m = px.length, out = new Int32Array(m), pi = new Int32Array(m), ci = new Int32Array(m);
+  const kpx = new Float64Array(m), kpy = new Float64Array(m), kcx = new Float64Array(m), kcy = new Float64Array(m);
+  for (let i = 0; i < m; i++) { pi[i] = ci[i] = i; kpx[i] = px[i] * 262144 + i; kpy[i] = py[i] * 262144 + i; kcx[i] = cx[i] * 4096 + cy[i]; kcy[i] = cy[i] * 4096 + cx[i]; }
+  const st = [[0, m]];
+  while (st.length) {
+    const [lo, hi] = st.pop();
+    if (hi - lo === 1) { out[pi[lo]] = ci[lo]; continue; }
+    let a0 = 1e9, a1 = -1e9, b0 = 1e9, b1 = -1e9;
+    for (let t = lo; t < hi; t++) { const c = ci[t]; if (cx[c] < a0) a0 = cx[c]; if (cx[c] > a1) a1 = cx[c]; if (cy[c] < b0) b0 = cy[c]; if (cy[c] > b1) b1 = cy[c]; }
+    const useX = a1 - a0 >= b1 - b0, h = (hi - lo) >> 1, k = lo + h;
+    pmSelect(ci, lo, hi, k, useX ? kcx : kcy); pmSelect(pi, lo, hi, k, useX ? kpx : kpy);
+    st.push([lo, k], [k, hi]);
+  }
+  return out;
+}
+// Push circles apart (centers p, radii r) until every pair is clear by gap (gapSib between islands that share a parent). In place.
+function pmIslRelax(px, py, r, par, gap, gapSib) {
+  const K = r.length;
+  for (let it = 0; it < 400; it++) {
+    let bad = 0;
+    for (let i = 0; i < K; i++) for (let j = i + 1; j < K; j++) {
+      const dx = px[j] - px[i], dy = py[j] - py[i], d = Math.hypot(dx, dy) + 1e-9, need = r[i] + r[j] + (par[i] === par[j] ? gapSib : gap);
+      if (d < need - .01) { const sh = (need - d) / 2 + .001, ux = dx / d, uy = dy / d; px[j] += ux * sh; py[j] += uy * sh; px[i] -= ux * sh; py[i] -= uy * sh; bad++; }
+    }
+    if (!bad) break;
+  }
+}
+function pmLayLookIsl(list, D, o, withLabels) {
+  const m = D.meta, I = m.islands, K = I.length, d = D.isl, n = list.length, f = 1 + o.sp * 1.6, GAP = m.gap || 7, GAPS = m.gapSib || 3;
+  const items = Int32Array.from(list), X = new Int32Array(n), Y = new Int32Array(n), cnt = new Int32Array(K);
+  const whole = n === m.n;
+  for (let t = 0; t < n; t++) cnt[d.id[list[t]]]++;
+  const cx = new Float64Array(K), cy = new Float64Array(K), r = new Float64Array(K), par = I.map(q => q.par);
+  let cellX = null, cellY = null, slot = null;
+  if (whole) {   // the stored cells; centers scale with the spread
+    for (let k = 0; k < K; k++) { cx[k] = I[k].cx * f; cy[k] = I[k].cy * f; r[k] = I[k].r; }
+    for (let t = 0; t < n; t++) { const i = list[t], k = d.id[i]; X[t] = Math.round(d.lx[i] + cx[k] - I[k].mx); Y[t] = Math.round(d.ly[i] + cy[k] - I[k].my); }
+  } else {   // a filter: each island's remaining paintings refill a smaller blob of their own; islands that emptied are gone
+    const frac = Math.sqrt(n / m.n), at = new Int32Array(K + 1), pl = new Int32Array(n);
+    for (let k = 0; k < K; k++) at[k + 1] = at[k] + cnt[k];
+    const fill = new Int32Array(K);
+    for (let t = 0; t < n; t++) { const k = d.id[list[t]]; pl[at[k] + fill[k]++] = t; }
+    cellX = new Array(K); cellY = new Array(K);
+    const px = new Float64Array(K), py = new Float64Array(K), live = [];
+    for (let k = 0; k < K; k++) {
+      const c = cnt[k]; if (!c) continue;
+      const b = pmBlob(c, I[k].an, I[k].as, k);
+      const a = pl.subarray(at[k], at[k + 1]), qx = new Int32Array(c), qy = new Int32Array(c);
+      for (let j = 0; j < c; j++) { qx[j] = d.lx[list[a[j]]]; qy[j] = d.ly[list[a[j]]]; }
+      const cell = pmSplitCells(qx, qy, b.x, b.y);
+      let sx = 0, sy = 0; for (let j = 0; j < c; j++) { sx += b.x[j]; sy += b.y[j]; }
+      const mx = sx / c, my = sy / c; let rr = 0;
+      for (let j = 0; j < c; j++) rr = Math.max(rr, Math.hypot(b.x[j] - mx, b.y[j] - my));
+      cellX[k] = { a, cell, b, mx, my }; r[k] = rr + .5; px[k] = I[k].cx * frac; py[k] = I[k].cy * frac; live.push(k);
+    }
+    const lx = Float64Array.from(live, k => px[k]), ly = Float64Array.from(live, k => py[k]), lr = Float64Array.from(live, k => r[k]);
+    pmIslRelax(lx, ly, lr, live.map(k => par[k]), GAP, GAPS);
+    live.forEach((k, j) => { cx[k] = lx[j] * f; cy[k] = ly[j] * f; });
+    for (const k of live) { const q = cellX[k]; for (let j = 0; j < q.a.length; j++) { const t = q.a[j], c = q.cell[j]; X[t] = Math.round(q.b.x[c] + cx[k] - q.mx); Y[t] = Math.round(q.b.y[c] + cy[k] - q.my); } }
+    cellX = cellY = null;
+  }
+  // frame: the middle of everything sits at 0,0; each island's box (for its label and for finding the way back from the gaps)
+  let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+  const bx0 = new Float64Array(K).fill(1e9), by0 = new Float64Array(K).fill(1e9), bx1 = new Float64Array(K).fill(-1e9), by1 = new Float64Array(K).fill(-1e9);
+  for (let t = 0; t < n; t++) {
+    const k = d.id[list[t]], x = X[t], y = Y[t];
+    if (x < bx0[k]) bx0[k] = x; if (x > bx1[k]) bx1[k] = x; if (y < by0[k]) by0[k] = y; if (y > by1[k]) by1[k] = y;
+  }
+  for (let k = 0; k < K; k++) if (cnt[k]) { x0 = Math.min(x0, bx0[k]); x1 = Math.max(x1, bx1[k]); y0 = Math.min(y0, by0[k]); y1 = Math.max(y1, by1[k]); }
+  const sx = n ? Math.round((x0 + x1) / 2) : 0, sy = n ? Math.round((y0 + y1) / 2) : 0;
+  for (let t = 0; t < n; t++) { X[t] -= sx; Y[t] -= sy; }
+  const isl = [];
+  for (let k = 0; k < K; k++) if (cnt[k]) isl.push({ k, n: cnt[k], x0: bx0[k] - sx, x1: bx1[k] - sx, y0: by0[k] - sy, y1: by1[k] - sy, text: withLabels && whole ? I[k].lab : "" });
+  const big = isl.reduce((a, q) => !a || q.n > a.n ? q : a, null);
+  const lay = pmGridOf(items, X, Y, [], big ? [Math.round((big.x0 + big.x1) / 2), Math.round((big.y0 + big.y1) / 2)] : [0, 0]);
+  lay.islands = isl;
+  return lay;
+}
+function pmLayLook(list, F, s) {
+  const o = pmLk(s);
+  return pmLookKind(s) === "isl" ? pmLayLookIsl(list, PM_LOOK.V[pmLookV(s)], o, !!o.lab) : pmLayLookGrid(list, PM_LOOK.V.keep.grid, F);
 }
 // Tones (David, 2026-10-09): the same Vivid/Light/Muted/Dark split honey.js's own Tones shape uses
 // (honeyToneGroup), applied to whichever color "Place by" already uses for position (pmPlaceLab) -- an island
@@ -1152,8 +1317,8 @@ function pmLayout(s, F) {
   const list = pmList(s, F), key = pmQS(s, F) + "|" + list.length + "|" + (s.fav ? pmFavList(F).map(r => r.i).join(",") : "");
   let lay = PM_LAYOUTS.get(key);
   if (!lay) {
-    const arr = s.arr === "look" && !pmLookReady() ? "color" : s.arr;   // look.bin not here yet (the caller loads it and rebuilds): never cache the stand-in
-    lay = arr === "look" ? pmLayLook(list, F) : s.arr === "time" ? pmLayTime(list, s.place, F, pmSolo(s)) : s.arr === "painter" ? pmLayPainter(list, F)
+    const arr = s.arr === "look" && !pmLookReady(s) ? "color" : s.arr;   // look.bin not here yet (the caller loads it and rebuilds): never cache the stand-in
+    lay = arr === "look" ? pmLayLook(list, F, s) : s.arr === "time" ? pmLayTime(list, s.place, F, pmSolo(s)) : s.arr === "painter" ? pmLayPainter(list, F)
       : s.arr === "museum" ? pmLayMuseum(list, F)
       : s.arr === "subject" && SUBJ ? pmLaySubject(list, F)
       : s.arr === "families" ? pmLayFamilies(list, F) : s.arr === "tones" ? pmLayTones(list, s.place, F)
@@ -1781,6 +1946,14 @@ function pmMount(el, s, F) {
       if (Math.max(Math.abs(x - cx), Math.abs(y - cy)) !== r) continue;
       const k = pmAt(lay, x, y); if (k < 0) continue; const d = (x - px) ** 2 + (y - py) ** 2; if (d < bd) { bd = d; best = k; }
     }
+    if (best < 0 && lay.islands && lay.islands.length) {   // out in the empty space between islands: the nearest island's painting along the way in
+      let q = null, qd = 1e18;
+      for (const i of lay.islands) { const dx = Math.max(i.x0 - px, 0, px - i.x1), dy = Math.max(i.y0 - py, 0, py - i.y1), d = dx * dx + dy * dy; if (d < qd) { qd = d; q = i; } }
+      if (q) {
+        const tx = (q.x0 + q.x1) / 2, ty = (q.y0 + q.y1) / 2, L = Math.hypot(tx - px, ty - py) || 1;
+        for (let t = 0; t <= L; t++) { const k = pmAt(lay, Math.round(px + (tx - px) * t / L), Math.round(py + (ty - py) * t / L)); if (k >= 0) return k; }
+      }
+    }
     return best;
   };
   function setCenter(k) {
@@ -1817,10 +1990,33 @@ function pmMount(el, s, F) {
     paintFacets(i);
     facets.hidden = !cardOpen;   // paintFacets() always unhides itself when it (re)builds the chip row -- cardOpen has the final say
   }
+  // By look settings (David, 2026-10-24): Layout, Island spread, Photo-format effect, Labels. Each applies live and is remembered on this
+  // phone (pmLkSave); the address carries them too. rebuild() keeps the painting you are on in the middle.
+  function lookSettingsHTML() {
+    const o = pmLk(s), isl = pmLookKind(s) === "isl" || (o.lay === "isl" && pmLookHasIsl());
+    const seg = (k, opts, cur, label) => `<div class="hm-seg" role="radiogroup" aria-label="${label}">${opts.map(([v, t]) => `<button class="${String(cur) === String(v) ? "on" : ""}" data-pmlk="${k}" data-v="${v}" role="radio" aria-checked="${String(cur) === String(v)}">${t}</button>`).join("")}</div>`;
+    const filtered = pmList(s, F).length !== F.N;
+    return `${pmLookHasIsl() ? `<div class="cx-sec"><b>Layout</b></div>${seg("lay", [["isl", "Islands"], ["grid", "Even grid"]], o.lay, "Layout")}
+        <p class="hm-arr-sub">${o.lay === "isl" ? "The clusters the image model found, each its own island." : "One even block, every painting the same distance apart."}</p>` : ""}
+        ${isl ? `<div class="hm-feel"><label class="hm-feel-row"><span class="hm-feel-l">Spread</span><span class="hm-feel-r"><i>Tight</i><input type="range" min="0" max="1" step="0.01" value="${o.sp}" data-pmlksp aria-label="Island spread, tight to wide"><i>Wide</i></span></label></div>` : ""}
+        ${isl && pmLookColsOn().length > 1 ? `<div class="cx-sec"><b>Color influence</b></div>${seg("col", pmLookColsOn().map(c => [c[0], c[1]]), o.col, "Color influence")}
+        <p class="hm-arr-sub">${o.col ? "The paintings' colors also shape where they sit, so colors flow across the map." : "Placed only by what the image model sees: subject, style and mood."}</p>` : ""}
+        ${isl ? `<div class="cx-sec"><b>Labels</b></div>${seg("lab", [[1, "On"], [0, "Off"]], o.lab, "Island labels")}
+        <p class="hm-arr-sub">${filtered && o.lab ? "Names describe the whole museum, so they hide while a filter is on." : "Named from the image model's reading of what each island holds."}</p>` : ""}`;
+  }
+  function lookSet(k, v, live, redraw) {
+    const o = pmLk(s), nv = k === "sp" ? +v : k === "lay" ? v : +v;
+    if (k !== "sp" && String(o[k]) === String(nv)) return;
+    buzz(live ? 0 : 5);
+    s[{ lay: "lkl", sp: "lks", col: "lkc", lab: "lkb" }[k]] = nv;
+    pmLkSave(Object.assign(pmLkSaved(), { [k]: nv }));
+    const go = () => { if (dead) return; rebuild(); if (!live && redraw) redraw(); };
+    if (pmLookReady(s)) go(); else pmLookEnsure(F, s).then(ok => { if (!ok) toast("The look map didn't load", { low: true }); go(); });
+  }
   // First time By look is chosen, one honest line about where the order comes from (never claimed as fact)
   function lookHint() {
     let seen = 0; try { seen = localStorage.getItem("pm-look-seen"); localStorage.setItem("pm-look-seen", "1"); } catch (e) {}
-    if (!seen) toast("Placed by an image model: paintings it finds alike sit together.", { low: true, ms: 4200 });
+    if (!seen) toast("Placed by an image model: paintings it finds alike sit together. Island names come from what each one holds.", { low: true, ms: 5200 });
   }
   function showCard() { if (!cardOpen) { cardOpen = true; caption(); } }
   function hideCard() { if (cardOpen) { cardOpen = false; caption(); } }
@@ -2305,6 +2501,29 @@ function pmMount(el, s, F) {
         if (room - tw > 40) { ctx.font = `500 ${Math.max(11, fs * .55)}px "Geist Mono", Menlo, monospace`; ctx.fillStyle = "rgba(163,158,146,.9)"; ctx.fillText(L.n.toLocaleString(), sx + tw + 8, sy); }
       }
     }
+    // By look islands: each island's name sits just above its top edge, centered; only where the island is wide enough on screen to
+    // carry it (so a label never names a speck), biggest islands first, and a label that would overlap one already placed is skipped.
+    if (lay.islands && lay.islands.some(q => q.text)) {
+      ctx.textBaseline = "alphabetic"; ctx.textAlign = "center";
+      const placedI = []; islRects = placedI;
+      for (const q of lay.islands) {
+        if (!q.text) continue;
+        const ex = (q.x0 + q.x1) / 2 - P[0], ey = q.y0 - .7 - P[1], z = Math.hypot(ex, ey); if (z > R) continue;
+        const f = z < 1e-6 ? 0 : Fz(z) / z, sx = cx + ex * f, sy = cy + ey * f, cell = k0 * Math.min(magR(z), tanR(z));
+        const wpx = (q.x1 - q.x0 + 1) * cell;
+        if (wpx < 96 || sx < -wpx || sx > W + wpx || sy < 36 || sy > H + 20) continue;
+        const fs = Math.min(22, Math.max(15, wpx / 12));
+        ctx.font = `400 ${fs}px "Instrument Serif", Georgia, serif`;
+        let txt = q.text; const room = Math.max(120, wpx * 1.5);
+        if (ctx.measureText(txt).width > room) { while (txt.length > 2 && ctx.measureText(txt + "…").width > room) txt = txt.slice(0, -1); txt += "…"; }
+        const tw = ctx.measureText(txt).width, rx0 = sx - tw / 2 - 6, rx1 = sx + tw / 2 + 6, ry0 = sy - fs - 3, ry1 = sy + 6;
+        if (placedI.some(p => rx0 < p.rx1 && rx1 > p.rx0 && ry0 < p.ry1 && ry1 > p.ry0)) continue;
+        placedI.push({ rx0, rx1, ry0, ry1 });
+        ctx.fillStyle = "rgba(14,13,11,.8)"; ctx.fillRect(rx0, ry0, rx1 - rx0, ry1 - ry0);
+        ctx.fillStyle = "rgba(236,232,223,.96)"; ctx.fillText(txt, sx, sy);
+      }
+      ctx.textAlign = "left";
+    }
     // David, 2026-10-09: "zooming out doesn't load the stuff" -- this cap used to be 160, which silently excluded
     // every cell beyond the nearest ~160 from ever being requested at all, however long you waited: want()'s own
     // PM_FLIGHT (14 concurrent) and PM_CACHE_MAX (650) already bound real network/memory use, so the extra slice
@@ -2642,7 +2861,7 @@ function pmMount(el, s, F) {
   }
   // The painting you are on, captured BEFORE a settings change (Phase A). centerK is always the cell nearest the middle; a
   // glide in flight counts at its destination. lastFocus survives an empty result so loosening comes back to the same painting.
-  let lastFocus = null;
+  let lastFocus = null, islRects = [];
   function focusNow() {
     if (lay && lay.n && centerK >= 0) {
       let k = centerK;
@@ -2977,6 +3196,7 @@ function pmMount(el, s, F) {
           <button class="hm-arr-b${s.arr === k ? " on" : ""}" data-pmarr="${k}" role="radio" aria-checked="${s.arr === k}">
             <span class="hm-arr-pic">${PM_ICON[k]}</span><b>${esc(t)}</b></button>`).join("")}</div>
         <p class="hm-arr-sub">${PM_NEEDS_SEED.has(s.arr) && md ? `Around ${esc(md.t)}` : esc(PM_WHY[s.arr])}</p>
+        ${s.arr === "look" ? lookSettingsHTML() : ""}
         <div class="hm-feel"><label class="hm-feel-row" data-feel="mag"><span class="hm-feel-l">Magnify</span><span class="hm-feel-r"><i>Flat</i><input type="range" min="0" max="1" step="0.01" value="${s.mag == null ? .5 : s.mag}" data-pmmag aria-label="Magnify, flat to fisheye"><i>Fisheye</i></span></label></div>
         ${s.arr === "color" || s.arr === "time" || s.arr === "tones" ? `<div class="cx-sec"><b>Place by</b></div>
           <div class="hm-seg" role="radiogroup" aria-label="Place by">${PM_PLACE.map(([k, t]) => `<button class="${(s.place || "avg") === k ? "on" : ""}" data-pmplace="${k}">${esc(t)}</button>`).join("")}</div>` : ""}
@@ -3000,13 +3220,20 @@ function pmMount(el, s, F) {
       });
       qa$("[data-pmarr]").forEach(b => b.onclick = () => {
         const id = b.dataset.pmarr; buzz(5);
-        if (id === "look" && !pmLookReady()) { pmLookEnsure(F).then(ok => { if (dead) return; if (!ok) { toast("The look map didn't load", { low: true }); renderArrange(); return; } s.arr = id; s.seed = -1; lookHint(); rebuild(); renderArrange(); }); return; }
+        if (id === "look" && !pmLookReady(s)) { pmLookEnsure(F, s).then(ok => { if (dead) return; if (!ok) { toast("The look map didn't load", { low: true }); renderArrange(); return; } s.arr = id; s.seed = -1; lookHint(); rebuild(); renderArrange(); }); return; }
         if (id === "look") lookHint();
         if (id === "subject" && !SUBJ) { loadSubjects().then(() => { if (dead) return; s.arr = id; s.seed = -1; rebuild(); renderArrange(); }).catch(() => toast("Subjects didn't load")); return; }
         if (PM_NEEDS_SEED.has(id)) { if (mid < 0) return; s.seed = mid; s.arr = id; }
         else { if (s.arr === id) return; s.arr = id; s.seed = -1; } // a stale seed from a prior Rings/Spiral shouldn't linger into Color/Time/Painter
         rebuild(); renderArrange();
       });
+      qa$("[data-pmlk]").forEach(b => b.onclick = () => lookSet(b.dataset.pmlk, b.dataset.v, false, renderArrange));
+      const lsp = q$("[data-pmlksp]");
+      if (lsp) {
+        let raf = 0;
+        lsp.oninput = e => { const v = +e.target.value; if (raf) cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { raf = 0; lookSet("sp", v, true); }); };
+        lsp.onchange = () => { try { ROUTE_NOW = "#/" + pmRouteOf(s, F).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {} };
+      }
       qa$("[data-pmplace]").forEach(b => b.onclick = () => {
         const p = b.dataset.pmplace; if ((s.place || "avg") === p) return; buzz(5); s.place = p; rebuild(); renderArrange();
       });
@@ -3187,9 +3414,9 @@ function pmMount(el, s, F) {
   const firstBuild = () => { if (pmMatchReady(F, s.f)) build(false); else palWait(() => build(false)); };
   size();
   if ((s.col || "paintings") === "paintings") pmLookProbe(F);   // the tiny look.json: decides whether the Arrange sheet offers By look
-  if (s.arr === "look" && !pmLookReady()) pmLookEnsure(F).then(ok => { if (dead) return; if (!ok) s.arr = "color"; firstBuild(); }); else firstBuild();
+  if (s.arr === "look" && !pmLookReady(s)) pmLookEnsure(F, s).then(ok => { if (dead) return; if (!ok) s.arr = "color"; firstBuild(); }); else firstBuild();
   if (s.f.subjSet && s.f.subjSet.length) { try { ROUTE_NOW = "#/" + pmRouteOf(s, F).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {} }   // opened from a painting's subject tap: the address names the filter
-  window.PM_CTRL = { rebuild: o => rebuild(o), get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length + rasterCount(); }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); },
+  window.PM_CTRL = { get islLabels() { return islRects; }, get Z() { return Z; }, zFit: () => zFit(), rebuild: o => rebuild(o), get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length + rasterCount(); }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); },
     // QA: the raw pan/zoom (David, 2026-10-10, "Back should restore the exact prior view") -- _qaSetPZ lets a
     // test establish an arbitrary pan deterministically (a real drag gesture would be slow and imprecise);
     // _qaPZ reads it back the same way, for the before/after comparison across a Back round trip
