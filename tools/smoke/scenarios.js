@@ -3163,7 +3163,7 @@ scenario("studio", "photo page: Select a part by Color range (fuzziness, only to
   t.expect(t.$$("[data-pvrows] .pal-name").length >= 3, "Clear should bring back the whole photo's palette");
   await t.click("[data-pvsegt]", { wait: 300 });
   t.expect(t.$(".pv-img.tool-dots"), "Done selecting should go back to the color circles");
-  t.expect(t.$$("[data-pvread]").length === 4 && !t.$(".pv-img [data-pvread]"), "the Exact/average setting belongs below the photo, not on it");
+  t.expect(t.$$("[data-pvlens]").length === 3 && !t.$(".pv-img [data-pvlens]"), "the lenses belong below the photo, not on it");
 });
 
 scenario("studio", "photo page: a camera photo opens with a color circle where the camera's circle was; tap adds circles, drag recolors one, Your colors lists them", async t => {
@@ -3187,8 +3187,15 @@ scenario("studio", "photo page: a camera photo opens with a color circle where t
   ev("pointermove", r.left + r.width * .7, r.top + r.height * .5); ev("pointerup", r.left + r.width * .7, r.top + r.height * .5);
   await t.sleep(200);
   t.expect(t.$$(".pv-yname em")[0].textContent !== first, "dragging a circle should change its color");
-  await t.click('[data-pvread="1"]', { wait: 200 });
-  t.expect(t.$('[data-pvread="1"].on'), "Exact should turn on below the photo");
+  // two fingers pinch the selected circle: bigger reads more
+  const sz0 = t.$('[data-pvdot="0"]').offsetWidth, rr = img.getBoundingClientRect(), cy = rr.top + rr.height * .5;
+  const pe = (type, id, x) => img.dispatchEvent(new t.w.PointerEvent(type, { pointerId: id, isPrimary: id === 11, clientX: x, clientY: cy, bubbles: true }));
+  t.$('[data-pvdot="0"]').dispatchEvent(new t.w.PointerEvent("pointerdown", { pointerId: 11, isPrimary: true, clientX: rr.left + 20, clientY: cy, bubbles: true }));
+  pe("pointerdown", 12, rr.left + 60); pe("pointermove", 12, rr.left + 140); pe("pointerup", 12, rr.left + 140); pe("pointerup", 11, rr.left + 20);
+  await t.sleep(200);
+  t.expect(t.$('[data-pvdot="0"]').offsetWidth > sz0, `pinching should grow the circle (${sz0} -> ${t.$('[data-pvdot="0"]').offsetWidth})`);
+  await t.click('[data-pvlens="value"]', { wait: 200 });
+  t.expect(/grayscale/.test(img.style.filter), "the Value lens should show the photo in greys");
   await t.click('[data-pvyx="1"]', { wait: 200 });
   t.expect(t.$$(".pv-dot").length === 1, "removing a color should remove its circle");
 });
