@@ -15,11 +15,11 @@
 // live art and note (js/core.js roomsBubbleArt/roomsNote, unchanged -- the same pictures the old stem used).
 const PLACES_LIST = [["home", NAV_MAP], ["feed", "Today"], ...ROOMS_LIST];   // Today: the feed (js/todayfeed.js)
 // Today's stripes read like Learn's (David, 2026-10-24). Same 48 px disc as the other rows, real colors, a different subject:
-// a small sunrise over a color horizon (default), or a mosaic of the feed's differently sized tiles ("mosaic", for comparison).
-// Studio keeps its own rainbow disc with a camera on it. Learn, Train, Map, Museum and Settings are untouched.
-function placesTodayArt(variant) {
-  if (variant === "mosaic") return `<span class="rm-art pl-today"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="5" width="21" height="24" rx="3" fill="#CFA41C"/><rect x="28" y="5" width="15" height="13" rx="3" fill="#A03623"/><rect x="28" y="20" width="15" height="23" rx="3" fill="#3B638C"/><rect x="5" y="31" width="21" height="12" rx="3" fill="#8A9A5B"/></svg></span>`;
-  return `<span class="rm-art pl-today"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="plsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#464196"/><stop offset=".55" stop-color="#A03623"/><stop offset="1" stop-color="#CFA41C"/></linearGradient></defs><rect width="48" height="30" fill="url(#plsky)"/><path d="M14 30a10 10 0 0 1 20 0z" fill="#EED9C4"/><rect y="30" width="48" height="6" fill="#3B638C"/><rect y="36" width="48" height="6" fill="#8A9A5B"/><rect y="42" width="48" height="6" fill="#2D4D70"/></svg></span>`;
+// a masonry of four differently sized rounded tiles, like the Today feed itself (never parallel bars). The colors are the same
+// pigment set Today's old strip used (roomsBubbleArt "feed"). Studio keeps its own rainbow disc with a camera on it.
+function placesTodayArt() {
+  const c = ["#CFA41C", "#A03623", "#3B638C", "#8A9A5B"];
+  return `<span class="rm-art pl-today"><svg viewBox="0 0 48 48" shape-rendering="geometricPrecision" aria-hidden="true"><rect x="5" y="5" width="21" height="24" rx="3" fill="${c[0]}"/><rect x="28" y="5" width="15" height="13" rx="3" fill="${c[1]}"/><rect x="28" y="20" width="15" height="23" rx="3" fill="${c[2]}"/><rect x="5" y="31" width="21" height="12" rx="3" fill="${c[3]}"/></svg></span>`;
 }
 function placesStudioArt() {
   return roomsBubbleArt("studio").replace("</span>", `<b class="pl-cam">${icon("camera", 24)}</b></span>`);
