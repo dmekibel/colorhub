@@ -222,12 +222,15 @@
 .pv-img.tool-dots img{touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;cursor:crosshair}
 .pv-dots{position:absolute;inset:0;pointer-events:none}
 .pv-img.tool-seg .pv-dots{opacity:.35}
-.pv-dot{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:var(--c);pointer-events:auto;
-  box-shadow:0 0 0 2.5px #F3F3F1,0 0 0 4px rgba(0,0,0,.35),0 6px 14px rgba(0,0,0,.35);transition:transform .15s var(--ease)}
+/* hollow, like the camera's circle: its size is what it reads (a white ring, the color as a band outside it) */
+.pv-dot{position:absolute;width:var(--d,30px);height:var(--d,30px);margin:calc(var(--d,30px) / -2) 0 0 calc(var(--d,30px) / -2);border-radius:50%;pointer-events:auto;
+  box-shadow:0 0 0 2px #F3F3F1,0 0 0 3px rgba(0,0,0,.3),0 0 0 7px var(--c),0 0 0 8px rgba(0,0,0,.25);transition:box-shadow .15s var(--ease)}
 .pv-img.tool-seg .pv-dot{pointer-events:none}
-.pv-dot.on{transform:scale(1.18);box-shadow:0 0 0 3px #F3F3F1,0 0 0 4.5px rgba(0,0,0,.4),0 8px 18px rgba(0,0,0,.4)}
-.pv-dot-name{position:absolute;transform:translate(-50%,calc(-100% - 30px));padding:7px 12px;border-radius:var(--r-pill);background:rgba(14,13,11,.86);color:#F3F3F1;font:400 16px/1.1 var(--serif);white-space:nowrap;max-width:70vw;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
-.pv-dot-name.below{transform:translate(-50%,30px)}
+.pv-dot::before{content:"";position:absolute;inset:-14px;border-radius:50%}
+.pv-dot.point::after{content:"";position:absolute;left:50%;top:50%;width:4px;height:4px;margin:-2px;border-radius:50%;background:#F3F3F1;box-shadow:0 0 0 1px rgba(0,0,0,.4)}
+.pv-dot.on{box-shadow:0 0 0 3px #F3F3F1,0 0 0 4px rgba(0,0,0,.35),0 0 0 10px var(--c),0 0 0 11px rgba(0,0,0,.3)}
+.pv-dot-name{position:absolute;transform:translate(-50%,calc(-100% - var(--d,30px) / 2 - 18px));padding:6px 11px;border-radius:var(--r-pill);background:rgba(14,13,11,.82);color:#F3F3F1;font:400 15px/1.1 var(--serif);white-space:nowrap;max-width:70vw;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+.pv-dot-name.below{transform:translate(-50%,calc(var(--d,30px) / 2 + 18px))}
 .pv-yours{margin:14px 0 0;border-top:1px solid var(--rule)}
 .pv-yours[hidden]{display:none}
 .pv-yours-head{display:flex;align-items:center;gap:14px;padding:14px 0 6px}
@@ -246,3 +249,20 @@
 .pv-read span{padding:0 8px 0 10px;font:400 15px/1 var(--serif);color:var(--soft)}
 .pv-read button{flex:1 1 0;min-height:36px;padding:0 4px;border-radius:var(--r-pill);font:400 15px/1 var(--serif);color:var(--soft)}
 .pv-read button.on{background:var(--paper);color:var(--paper-ink)}
+/* the photo (or the photo a saved palette came from) pinned in the top half, its palette as swatches right under it;
+   everything else scrolls beneath (David, 2026-10-24) */
+.pv-hero{position:sticky;top:calc(var(--top) + 64px);z-index:4;margin:0 calc(-1 * var(--g));padding:0 var(--g) 10px;background:var(--ground)}
+.pv-hero .pv-img{margin-top:0}
+.pv-hero .pv-img img{max-height:calc(50dvh - 70px)}
+.gl-page .pv-hero .palette.gl-strip{display:flex;height:44px;margin-top:8px;border-radius:var(--r-tile,6px);overflow:hidden}
+.pv-hero-strip{display:flex;height:44px;margin-top:8px;border-radius:var(--r-tile,6px);overflow:hidden}
+.pv-hero-strip button{flex:1 1 0;background:var(--c)}
+.pv-hero-open{display:inline-block;margin:6px 0 4px}
+/* a held circle never scrolls the page, up or sideways */
+.pv-img.tool-dots,.pv-img.tool-dots *{touch-action:none}
+.pv-dots{overflow:hidden}
+.screen.gl-page.studio{overflow-x:clip}
+.pv-hero::after{content:"";position:absolute;left:0;right:0;top:100%;height:18px;background:linear-gradient(var(--ground),rgba(14,13,11,0));pointer-events:none}
+.pv-has-hero .pv-ctrl,.pv-has-hero #pv{display:none}
+.pv-lens{flex:1 1 auto;display:flex}
+.pv-lens button{flex:1 1 0}

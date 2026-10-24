@@ -242,13 +242,18 @@ function openSavedPalette(id, push = true) {
   const p = plGet(id);
   if (!p) { toast("That palette isn't here anymore"); return xToOrigin(); }
   if (push && XSTACK[XSTACK.length - 1] !== "pal:" + id) XSTACK.push("pal:" + id);
-  paletteView({ cols: p.cols.map(h => ({ h })), from: p.from, title: p.name || "", savedId: id });
+  const open = heroImg => paletteView({ cols: p.cols.map(h => ({ h })), from: p.from, title: p.name || "", savedId: id, heroImg, heroPhoto: p.photo });
+  // a palette taken from a photo opens with that photo on top (David, 2026-10-24: "every palette connected to an image
+  // keeps the image"); if the photo was deleted since, it opens plain
+  if (p.photo != null && typeof phGet === "function") phGet(p.photo).then(rec => open(rec ? phURL(rec) : null)).catch(() => open(null));
+  else open(null);
 }
 
-function keepPalette(cols, from) {
+// opts.photo: the id of the photo the palette came from (js/photos.js), so the palette always opens with its picture
+function keepPalette(cols, from, opts = {}) {
   S.palettes = S.palettes || [];
   if (S.palettes.some(p => p.cols.join() === cols.join())) return toast("Already kept");
-  S.palettes.unshift({ id: plMakeId(), cols: cols.slice(), from, at: today() }); S.palettes = S.palettes.slice(0, 60); save();
+  S.palettes.unshift(Object.assign({ id: plMakeId(), cols: cols.slice(), from, at: today() }, opts.photo != null ? { photo: opts.photo } : {})); S.palettes = S.palettes.slice(0, 60); save();
   buzz(10); toast("Kept in your palettes");
 }
 
@@ -385,7 +390,9 @@ const PV_CAP = {
 function palPhotoView(p) {
   const basePool = p.pool;
   let pool = basePool, segPool = null;   // segPool: the palette of the part picked with Select a part, in place of the whole photo's
-  let curK = 6, mode = "out", where = typeof S !== "undefined" && S && GL_WHERE.some(w => w[0] === S.palWhere) ? S.palWhere : "off", capOpen = false;
+  // "On the photo" markers start off on a photo, whatever a painting page last left on (David, 2026-10-24: numbered
+  // markers piled on top of his own color circles); turning them on here is a choice for this photo only
+  let curK = 6, mode = "out", where = "off", capOpen = false;
   let pvKCtl = null;   // the countify() controller for [data-pvk], built once, re-ranged per mode (js/core.js)
   let editedPal = null;   // once the visitor edits (remove/replace/nudge/reorder), this overrides the computed set
   let undoPal = null, undoLabel = "";
@@ -415,13 +422,15 @@ function palPhotoView(p) {
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="gl-pa-btn" data-plvopen>Palette view</button></header>
     ${titleKind ? `<button class="pv-title${curTitle ? "" : " ph"}" data-rename aria-label="Rename">${esc(curTitle || titlePlaceholder)}</button>` : `<p class="eyebrow">${esc(p.from || "Photo")}</p>`}
     <div class="gl-pal-wrap">
+    <div class="pv-hero">
     <div class="pv-img" id="himg"><img src="${p.img}" alt="Your photo"><canvas class="gl-lit-cv" data-pvlitcv aria-hidden="true"></canvas><canvas class="pv-seg-cv" data-pvsegcv aria-hidden="true"></canvas><div class="gl-mks" data-pvmks></div><div class="pv-dots" data-pvdots></div></div>
-    <p class="pv-tapnote" data-pvtapnote>Tap the photo to read a color. Drag a circle to move it.</p>
+    <div class="palette gl-strip" data-pvswatches></div>
+    </div>
+    <p class="pv-tapnote" data-pvtapnote>Tap the photo to read a color. Drag a circle to move it, pinch it to read more or less.</p>
     <div class="pv-yours" data-pvyours hidden></div>
-    <div class="pv-tools"><div class="pv-read" role="group" aria-label="How each circle reads: the exact pixel or an average around it"><span>Read</span>${[[1, "Exact"], [3, "3×3"], [5, "5×5"], [11, "11×11"]].map(([n, t]) => `<button data-pvread="${n}">${t}</button>`).join("")}</div><button class="pv-pill pv-segbtn" data-pvsegt aria-pressed="false">Select a part</button></div>
+    <div class="pv-tools"><div class="seg pv-lens" role="group" aria-label="How to look at the photo">${[["", "Original"], ["value", "Value"], ["squint", "Squint"]].map(([k, t]) => `<button data-pvlens="${k}" class="${k ? "" : "on"}" aria-pressed="${!k}">${t}</button>`).join("")}</div><button class="pv-pill pv-segbtn" data-pvsegt aria-pressed="false">Select a part</button></div>
     <div class="pv-panel" data-pvpanel hidden></div>
     <div class="gl-pal-ui">
-    <div class="palette gl-strip" data-pvswatches></div>
     <div class="gl-modes-f" data-pvfade><div class="gl-modes" data-pvorder role="group" aria-label="Palette type"></div></div>
     <div class="pr-slide gl-slide" data-pvslide hidden><input type="range" data-pvk aria-label="How many colors"><span class="gl-kn-t" data-pvkn>6 colors</span></div>
     <div class="gl-where" data-pvwhere><span>On the photo</span><div class="gl-where-seg" role="group" aria-label="Show where each color is on the photo">${GL_WHERE.map(([k, t]) => `<button data-pvw="${k}" aria-pressed="false">${t}</button>`).join("")}</div></div>
@@ -581,14 +590,16 @@ function palPhotoView(p) {
     if (editing && !editedPal) editedPal = curSet().pal.map(c => ({ ...c }));
     buzz(5); drawPalette();
   };
-  el.querySelector(".gl-pal-ui").addEventListener("click", e => {
+  const editClick = e => {
     const rm = e.target.closest("[data-pvrm]");
     if (rm) { e.stopPropagation(); const j = +rm.dataset.pvrm, pal = (editedPal || curSet().pal).slice(), c = pal[j]; if (!c) return;
       pushUndo(`Removed ${glName(c.h).t}`); editedPal = pal.filter((_, i) => i !== j); drawPalette(); buzz(8); toast(`Removed ${glName(c.h).t}`, { undo: doUndo }); return; }
     if (!editing) return;
     const row = e.target.closest("[data-pvj]"); if (row) { e.stopPropagation(); e.preventDefault(); openEditSheet(+row.dataset.pvj); }
-  }, true);
-  el.querySelector("[data-pvsave]").onclick = () => { const pal = curSet().pal; if (!pal.length) return; keepPalette(pal.map(c => c.h), (curTitle || p.from || "Palette") + (segPool && mode !== "pick" ? " · selected part" : "")); };
+  };
+  el.querySelector(".gl-pal-ui").addEventListener("click", editClick, true);
+  el.querySelector("[data-pvswatches]").addEventListener("click", editClick, true);   // the strip lives up in the pinned top half
+  el.querySelector("[data-pvsave]").onclick = () => { const pal = curSet().pal; if (!pal.length) return; keepPalette(pal.map(c => c.h), (curTitle || p.from || "Palette") + (segPool && mode !== "pick" ? " · selected part" : ""), { photo: p.photoId }); };
   el.querySelector("[data-share]").onclick = () => sharePalette(curSet().pal, (curTitle || p.from) + (segPool && mode !== "pick" ? " · selected part" : ""), h => ({ nm: glName(h), fam: typeof familyOf === "function" && familyOf(h) }));
   el.querySelector("[data-export]").onclick = () => exOpenSheet({ cols: curSet().pal, title: curTitle || p.from || "Palette" });
   exLongCopy(el.querySelector("[data-pvrows]"));
@@ -612,7 +623,7 @@ function palPhotoView(p) {
     if (e.target.closest(".gl-mk")) return;
     const r = span.getBoundingClientRect(); if (e.clientX < r.left || e.clientY < r.top || e.clientX > r.right || e.clientY > r.bottom) return;
     // the color circles own every other touch (pointerdown, below); a click only matters while selecting a part
-    if (tool === "seg") segTap((e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height);
+    if (tool === "seg") { const m = mapIn(e.clientX, e.clientY); segTap(m.fx, m.fy); }   // against the picture, not its letterboxed frame
   });
 
   // ---------- the two tools on the photo (David, 2026-10-23) ----------
@@ -638,37 +649,89 @@ function palPhotoView(p) {
   // color under it (the shared sampler, js/eyedrop.js, averaging the usual small square); dragging a circle -- or
   // keeping the finger down after dropping one -- slides it, recoloring live, with its name floating above it so the
   // finger never hides the answer. The circles' colors list as "Your colors" under the photo. ----------
-  const dots = [];   // { fx, fy, hex }
+  // David, 2026-10-24 (one system with the camera): each circle is hollow and its size IS what it reads -- pinch it
+  // bigger to average everything inside it, small (16px or less) to read the single pixel at its center
+  const dots = [];   // { fx, fy, hex, r } -- r: the circle's diameter as a share of the picture's width
   let activeDot = -1, ddrag = null, dsrc = null;
   const dotsHost = el.querySelector("[data-pvdots]"), yoursHost = el.querySelector("[data-pvyours]");
-  const readAt = (fx, fy) => { dsrc = dsrc || (typeof eydSource === "function" ? eydSource(img) : null); if (!dsrc) return null; const r = eydSampleAt(dsrc, fx, fy, getSampleSize()); return r && r.hex; };
-  const dotName = hex => typeof nameOfTapped === "function" ? nameOfTapped(hex) : nameOf(hex).text;
-  const drawDots = () => {
-    const a = dots[activeDot];
-    dotsHost.innerHTML = dots.map((d, i) => `<i class="pv-dot${i === activeDot ? " on" : ""}" data-pvdot="${i}" style="left:${(d.fx * 100).toFixed(2)}%;top:${(d.fy * 100).toFixed(2)}%;--c:${d.hex}"></i>`).join("")
-      + (a ? `<span class="pv-dot-name${a.fy < .14 ? " below" : ""}" style="left:${(clamp(a.fx, .12, .88) * 100).toFixed(2)}%;top:${(a.fy * 100).toFixed(2)}%">${esc(dotName(a.hex))}</span>` : "");
+  // the pixels the circles read: the photo drawn once at up to 1200px (plenty for color, and small enough that an
+  // iPhone never hands back a blank canvas -- David's screenshot, 2026-10-24: every circle read #000000). A canvas that
+  // comes back empty (alpha 0: not decoded yet, or refused for memory) is never kept, so the next tap tries again.
+  const makeSrc = () => {
+    const w = img.naturalWidth, h = img.naturalHeight; if (!w || !h) return null;
+    const k = Math.min(1, 1200 / Math.max(w, h)), c = document.createElement("canvas");
+    c.width = Math.max(1, Math.round(w * k)); c.height = Math.max(1, Math.round(h * k));
+    const cx = c.getContext("2d", { willReadFrequently: true }); if (!cx) return null;
+    try { cx.drawImage(img, 0, 0, c.width, c.height); if (!cx.getImageData(c.width >> 1, c.height >> 1, 1, 1).data[3]) return null; } catch (e) { return null; }
+    return { c, cx, w: c.width, h: c.height };
   };
+  const DOT_POINT = 16;
+  const dotPx = d => d && d.r ? d.r * picBox().w : 30;
+  const readAt = (fx, fy, d) => {
+    dsrc = dsrc || makeSrc(); if (!dsrc) return null;
+    const px = dotPx(d), n = px <= DOT_POINT ? 1 : Math.max(2, Math.round(px * .7 * dsrc.w / picBox().w));
+    const r = eydSampleAt(dsrc, fx, fy, n); return r && r.hex;
+  };
+  const dotName = hex => typeof nameOfTapped === "function" ? nameOfTapped(hex) : nameOf(hex).text;
+  // where the picture itself sits inside the photo frame: a tall photo in a wide frame is letterboxed (object-fit:
+  // contain), so circles are placed against the picture, never the frame (David's screenshot: circles off the image)
+  const picBox = () => {
+    const r = img.getBoundingClientRect(), sr = span.getBoundingClientRect(), ar = img.naturalWidth / img.naturalHeight || 1, bar = r.width / r.height || 1;
+    let w = r.width, h = r.height, ox = 0, oy = 0;
+    if (ar > bar) { h = r.width / ar; oy = (r.height - h) / 2; } else { w = r.height * ar; ox = (r.width - w) / 2; }
+    return { x: r.left - sr.left + ox, y: r.top - sr.top + oy, w, h, left: r.left + ox, top: r.top + oy };
+  };
+  const drawDots = () => {
+    const a = dots[activeDot], b = picBox(), px = d => `left:${(b.x + d.fx * b.w).toFixed(1)}px;top:${(b.y + d.fy * b.h).toFixed(1)}px`;
+    if (b.w > 20) dots.forEach(d => { if (!d.r) d.r = 30 / b.w; });
+    const dpx = d => (d.r ? d.r * b.w : 30).toFixed(1) + "px";
+    dotsHost.innerHTML = dots.map((d, i) => `<i class="pv-dot${i === activeDot ? " on" : ""}${d.r && d.r * b.w <= DOT_POINT ? " point" : ""}" data-pvdot="${i}" style="${px(d)};--c:${d.hex};--d:${dpx(d)}"></i>`).join("")
+      + (a ? `<span class="pv-dot-name${a.fy < .14 ? " below" : ""}" style="${px({ fx: clamp(a.fx, .15, .85), fy: a.fy })};--d:${dpx(a)}">${esc(dotName(a.hex))}</span>` : "");
+  };
+  // the picture can change size after the circles are placed (it settles into the pinned top half, the window turns):
+  // put them back on the same spots of the picture whenever it does
+  const onResize = () => { if (dots.length && !ddrag) drawDots(); };
+  if (typeof ResizeObserver === "function") { const ro = new ResizeObserver(onResize); ro.observe(img); cleanup.push(() => ro.disconnect()); }
+  else { addEventListener("resize", onResize); cleanup.push(() => removeEventListener("resize", onResize)); }
   const drawYours = () => {
     yoursHost.hidden = !dots.length;
     yoursHost.innerHTML = !dots.length ? "" : `<div class="pv-yours-head"><b>Your colors</b>${dots.length >= 2 ? `<button class="aw-link" data-pvysave>Save as palette</button>` : ""}<button class="aw-link" data-pvyclear>Clear</button></div>`
       + dots.map((d, i) => `<div class="pv-yrow${i === activeDot ? " on" : ""}"><button class="pv-yname" data-swatch="${d.hex}"><i style="--c:${d.hex}"></i><b>${esc(dotName(d.hex))}</b><em class="mono">${d.hex}</em></button><button class="pv-yx" data-pvyx="${i}" aria-label="Remove this color">${ICON.x}</button></div>`).join("");
   };
   // a screen point -> the photo's own fractions, kept inside the picture while a circle is being dragged
-  const mapIn = (cx, cy) => { const r = img.getBoundingClientRect(); return { fx: clamp((cx - r.left) / r.width, 0, 1), fy: clamp((cy - r.top) / r.height, 0, 1) }; };
+  const mapIn = (cx, cy) => { const b = picBox(); return { fx: clamp((cx - b.left) / b.w, 0, 1), fy: clamp((cy - b.top) / b.h, 0, 1) }; };
   const addDot = (fx, fy) => {
-    const hex = readAt(fx, fy); if (!hex) return -1;
+    // a new circle takes the last one's size; with no size yet (or no laid-out picture to measure against) it gets the
+    // default 30px the first time it's drawn
+    const r = (dots[activeDot] && dots[activeDot].r) || null;
+    const hex = readAt(fx, fy, { r }); if (!hex) { toast("The photo is still loading. Tap again in a moment."); return -1; }
     if (dots.length >= 12) { toast("12 colors is the most. Remove one first."); return -1; }
-    dots.push({ fx, fy, hex });
+    dots.push({ fx, fy, hex, r });
     if (typeof learnerLog === "function") learnerLog({ type: "seen", color: { n: nameOf(hex).n, h: hex }, src: "photo" });
     return dots.length - 1;
   };
+  const ptrs = new Map(); let pinch = null;
   span.addEventListener("pointerdown", e => {
-    if (tool === "seg" || !e.isPrimary || e.button > 0 || e.target.closest(".gl-mk")) return;
-    const r = img.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) return;
+    if (tool === "seg") return;
+    if (e.isPrimary) { ptrs.clear(); pinch = null; }   // a new first finger is a new gesture: forget any touch whose end was lost
+    ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (ptrs.size === 2 && dots[activeDot]) {
+      // a second finger: pinch the circle that's selected (the one with its name showing)
+      const [p1, p2] = [...ptrs.values()];
+      pinch = { d0: Math.hypot(p1.x - p2.x, p1.y - p2.y) || 1, r0: dots[activeDot].r };
+      if (dragRaf) cancelAnimationFrame(dragRaf); ddrag = null; dragPt = null;
+      try { span.setPointerCapture(e.pointerId); } catch (err) {}
+      e.preventDefault(); return;
+    }
+    if (!e.isPrimary || e.button > 0 || e.target.closest(".gl-mk")) return;
+    const hit0 = e.target.closest("[data-pvdot]"), b = picBox();
+    // a tap on the empty bars beside a letterboxed picture does nothing (a circle itself is always grabbable)
+    if (!hit0 && (e.clientX < b.left || e.clientX > b.left + b.w || e.clientY < b.top || e.clientY > b.top + b.h)) return;
     e.preventDefault();
     const m = mapIn(e.clientX, e.clientY);
     if (frompic != null) { const hex = readAt(m.fx, m.fy); if (hex) addPick(hex); return; }
     const hit = e.target.closest("[data-pvdot]");
+    if (hit) activeDot = +hit.dataset.pvdot;
     const i = hit ? +hit.dataset.pvdot : addDot(m.fx, m.fy);
     if (i < 0) return;
     buzz(hit ? 5 : 9);
@@ -676,30 +739,56 @@ function palPhotoView(p) {
     try { span.setPointerCapture(e.pointerId); } catch (err) {}
     drawDots(); drawYours();
   });
-  span.addEventListener("pointermove", e => {
-    if (!ddrag) return;
-    const m = mapIn(e.clientX, e.clientY), d = dots[ddrag.i]; if (!d) return;
+  // a drag moves just that circle and its name, once per animation frame, at the finger's latest position: no
+  // re-render under the finger (that was the jitter), and the page never scrolls while a circle is held
+  let dragPt = null, dragRaf = 0;
+  const dragFrame = () => {
+    dragRaf = 0; if (!ddrag || !dragPt) return;
+    const m = mapIn(dragPt.x, dragPt.y), d = dots[ddrag.i]; if (!d) return;
     d.fx = clamp(m.fx + ddrag.ox, 0, 1); d.fy = clamp(m.fy + ddrag.oy, 0, 1);
-    d.hex = readAt(d.fx, d.fy) || d.hex;
-    const nm = dotName(d.hex); if (nm !== ddrag.name) { ddrag.name = nm; buzz(3); }
-    drawDots();
+    d.hex = readAt(d.fx, d.fy, d) || d.hex;
+    const b = picBox(), dot = dotsHost.querySelector(`[data-pvdot="${ddrag.i}"]`), tag = dotsHost.querySelector(".pv-dot-name");
+    if (dot) { dot.style.left = (b.x + d.fx * b.w).toFixed(1) + "px"; dot.style.top = (b.y + d.fy * b.h).toFixed(1) + "px"; dot.style.setProperty("--c", d.hex); }
+    const nm = dotName(d.hex);
+    if (tag) { tag.style.left = (b.x + clamp(d.fx, .15, .85) * b.w).toFixed(1) + "px"; tag.style.top = (b.y + d.fy * b.h).toFixed(1) + "px"; tag.classList.toggle("below", d.fy < .14); if (tag.textContent !== nm) tag.textContent = nm; }
+    if (nm !== ddrag.name) { ddrag.name = nm; buzz(3); }
+  };
+  span.addEventListener("pointermove", e => {
+    if (ptrs.has(e.pointerId)) ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pinch && ptrs.size >= 2) {
+      e.preventDefault();
+      const [p1, p2] = [...ptrs.values()], d = dots[activeDot]; if (!d) return;
+      const w = picBox().w || 1;
+      d.r = clamp((pinch.r0 || 30 / w) * Math.hypot(p1.x - p2.x, p1.y - p2.y) / pinch.d0, 10 / w, 180 / w);
+      d.hex = readAt(d.fx, d.fy, d) || d.hex;
+      drawDots(); return;
+    }
+    if (!ddrag) return;
+    e.preventDefault();
+    dragPt = { x: e.clientX, y: e.clientY };
+    if (!dragRaf) dragRaf = requestAnimationFrame(dragFrame);
   });
-  const dotUp = () => { if (!ddrag) return; ddrag = null; drawYours(); };
+  span.addEventListener("touchmove", e => { if (ddrag || pinch) e.preventDefault(); }, { passive: false });   // iOS: no page scroll under a held circle
+  const dotUp = e => {
+    ptrs.delete(e.pointerId);
+    if (pinch) { if (ptrs.size < 2) { pinch = null; buzz(5); drawYours(); } return; }
+    if (!ddrag) return; if (dragRaf) { cancelAnimationFrame(dragRaf); dragFrame(); } ddrag = null; dragPt = null; drawYours();
+  };
   span.addEventListener("pointerup", dotUp); span.addEventListener("pointercancel", dotUp);
   span.addEventListener("contextmenu", e => e.preventDefault());
-  // how each circle reads (the shared sample size, js/eyedrop.js): below the photo, never over it. A change re-reads every circle.
-  const readSync = () => el.querySelectorAll("[data-pvread]").forEach(b => { const on = +b.dataset.pvread === getSampleSize(); b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
-  readSync();
-  el.querySelector(".pv-read").onclick = e => {
-    const b = e.target.closest("[data-pvread]"); if (!b) return;
-    setSampleSize(+b.dataset.pvread); readSync(); buzz(5);
-    dots.forEach(d => { d.hex = readAt(d.fx, d.fy) || d.hex; }); drawDots(); drawYours();
+  // lenses, the same as a painting's Look closer: Value (greys only, to judge light and dark) and Squint (the big shapes)
+  el.querySelector(".pv-lens").onclick = e => {
+    const b = e.target.closest("[data-pvlens]"); if (!b) return;
+    const k = b.dataset.pvlens;
+    img.style.filter = k === "value" ? "grayscale(1)" : k === "squint" ? "blur(min(2.5vw,16px))" : "";
+    el.querySelectorAll("[data-pvlens]").forEach(x => { const on = x === b; x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); });
+    buzz(5);
   };
   yoursHost.addEventListener("click", e => {
     const x = e.target.closest("[data-pvyx]");
     if (x) { e.stopPropagation(); dots.splice(+x.dataset.pvyx, 1); activeDot = Math.min(activeDot, dots.length - 1); buzz(6); drawDots(); drawYours(); return; }
     if (e.target.closest("[data-pvyclear]")) { dots.length = 0; activeDot = -1; buzz(6); drawDots(); drawYours(); return; }
-    if (e.target.closest("[data-pvysave]")) keepPalette(dots.map(d => d.hex), curTitle || p.from || "Photo");
+    if (e.target.closest("[data-pvysave]")) keepPalette(dots.map(d => d.hex), curTitle || p.from || "Photo", { photo: p.photoId });
   });
   const SEG_NOTE = { object: "Tap a thing in the photo. The AI finds its edges.", color: "Tap a color. Everything that close to it is selected." };
   const addPick = hex => {
@@ -998,7 +1087,9 @@ function palPhotoView(p) {
   // camera's circle was, so the color you were pointing at is there waiting
   setTool(null);
   const placeSeed = () => { if (!p.seed || !el.isConnected) return; const i = addDot(p.seed.fx, p.seed.fy); if (i >= 0) { activeDot = i; drawDots(); drawYours(); } };
-  if (img.complete && img.naturalWidth) placeSeed(); else img.addEventListener("load", placeSeed, { once: true });
+  // wait for the photo to be fully decoded (iOS can report it loaded before its pixels are readable)
+  const whenDecoded = () => img.decode ? img.decode().catch(() => {}) : Promise.resolve();
+  if (img.complete && img.naturalWidth) whenDecoded().then(placeSeed); else img.addEventListener("load", () => whenDecoded().then(placeSeed), { once: true });
   el._pvSegTap = segTap;   // design review (js/boot.js studiopv:segment) taps a part without a finger
   el._pvSetTool = setTool;
   el._pvSetMethod = setMethod;
@@ -1023,6 +1114,7 @@ function paletteView(p) {
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Studio · ${esc(p.from || "Palette")}${p.at ? " · " + esc(p.at) : ""}</span><span style="width:44px"></span></header>
     ${titleKind ? `<button class="pv-title${curTitle ? "" : " ph"}" data-rename aria-label="Rename">${esc(curTitle || titlePlaceholder)}</button>` : ""}
+    ${p.heroImg ? `<div class="pv-hero"><div class="pv-img"><img src="${p.heroImg}" alt="The photo this palette came from"></div><div class="pv-hero-strip">${(p.cols || []).map(c => `<button data-swatch="${c.h}" style="--c:${c.h}" aria-label="${esc(nameOf(c.h).text)}"></button>`).join("")}</div></div>${p.heroPhoto != null ? `<button class="aw-link pv-hero-open" data-openphoto>Open the photo</button>` : ""}` : ""}
     ${hasImg ? `<div class="pv-img"><img src="${p.img}" alt="Your photo. Tap a spot to guess its name."><div id="dots"></div></div><p class="pv-tapnote">Press and drag over the photo to pick a color.</p>` : ""}
     <div class="pv-ctrl">
       ${hasImg ? `<div class="seg" id="cnt">${counts.map(k => `<button class="${k === n ? "on" : ""}" data-n="${k}">${k}</button>`).join("")}</div>` : ""}
@@ -1039,6 +1131,7 @@ function paletteView(p) {
     ${p.photoId != null ? `<button class="btn ghost" data-delphoto style="margin-top:10px">Delete this photo</button>` : ""}
     ${hasImg ? `<p class="fine">Colors are grouped by similarity (k-means in OKLab) on a small copy of the image; "by area" shows how much of the picture each one covers. A small, striking color that the groups miss is added as an accent.</p>` : ""}
   `, "article studio");
+  if (p.heroImg) el.classList.add("pv-has-hero");   // the swatches under the photo are the palette: no second big stripe block
   // every paletteView is a leaf of the shared back trail (ROADMAP.md §17 jobs #1-2): whoever opened it (the
   // photo shelf, the saved-palettes shelf, the gamut wheel's own "Views & export") already pushed its place on
   // XSTACK, so Back always just pops one step, same as a color page or a closeup.
@@ -1102,6 +1195,7 @@ function paletteView(p) {
   if (del) del.onclick = () => { S.palettes = (S.palettes || []).filter(x => x.id !== p.savedId); save(); toast("Removed"); studio(); };
   const delPhoto = el.querySelector("[data-delphoto]");
   if (delPhoto) delPhoto.onclick = () => phDeleteConfirm(p.photoId, () => go("studio"));
+  const op = el.querySelector("[data-openphoto]"); if (op) op.onclick = () => photoPage(p.heroPhoto);
 }
 
 // a 1080x1350 card: the palette as tall stripes with names
