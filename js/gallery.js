@@ -629,7 +629,7 @@ function glGrid(host, res) {
   addEventListener("scroll", onScroll, { passive: true });
   addEventListener("resize", onResize);
   // change the columns, keeping the painting under (fx, fy) (viewport px) exactly where it is
-  const setCols = (c, fx, fy) => {
+  const setCols = (c, fx, fy, toY) => {
     c = Math.max(2, Math.min(glMaxCols(), c)); if (c === cols || !n) return false;
     const vy = fy == null ? innerHeight / 2 : fy, r = host.getBoundingClientRect(), y = vy - r.top, x = (fx == null ? W / 2 : fx) - r.left;
     const cx = Math.max(0, Math.min(cols - 1, Math.floor(x / (colW + gap))));
@@ -637,30 +637,14 @@ function glGrid(host, res) {
     const frac = hh[a] ? Math.max(0, Math.min(1, (y - top[a]) / hh[a])) : 0;
     cols = c; relayout();
     const r2 = host.getBoundingClientRect();
-    scrollBy(0, r2.top + top[a] + frac * hh[a] - vy);
+    scrollBy(0, r2.top + top[a] + frac * hh[a] - (toY == null ? vy : toY));
     draw(); if (res.onCols) res.onCols(cols);
     return true;
   };
   const setPlain = v => { plain = !!v; relayout(); draw(); };
-  // two fingers: spreading apart (zoom in) means fewer, bigger paintings; pinching in means more. One step per ~28% change
-  let pd = 0;
-  const dist = t => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
-  const mid = t => [(t[0].clientX + t[1].clientX) / 2, (t[0].clientY + t[1].clientY) / 2];
-  const onTS = e => { if (e.touches.length === 2) { pd = dist(e.touches); e.stopPropagation(); } else pd = 0; };
-  const onTM = e => {
-    if (!pd || e.touches.length !== 2) return;
-    e.preventDefault(); e.stopPropagation();
-    const d = dist(e.touches), ratio = d / pd, m = mid(e.touches);
-    if (ratio > 1.28 || ratio < 0.78) { if (setCols(cols + (ratio > 1 ? -1 : 1), m[0], m[1])) buzz(6); pd = d; }
-  };
-  const onTE = e => { if (e.touches.length < 2) pd = 0; };
-  if (res.pinch) {
-    host.style.touchAction = "pan-y"; host.setAttribute("data-nopull", "");
-    host.addEventListener("touchstart", onTS, { passive: false });
-    host.addEventListener("touchmove", onTM, { passive: false });
-    host.addEventListener("touchend", onTE, { passive: true }); host.addEventListener("touchcancel", onTE, { passive: true });
-  }
-  const destroy = () => { removeEventListener("scroll", onScroll); removeEventListener("resize", onResize); cancelAnimationFrame(raf); live.clear(); };
+  // two fingers, trackpad pinch, ctrl+wheel and + / -: js/gridzoom.js scales the grid live under the fingers and settles on a column count
+  const zoom = res.pinch ? gzAttach(host, { cols: () => cols, min: () => 2, max: glMaxCols, colW: () => colW, setCols }) : null;
+  const destroy = () => { removeEventListener("scroll", onScroll); removeEventListener("resize", onResize); cancelAnimationFrame(raf); live.clear(); if (zoom) zoom.destroy(); };
   cleanup.push(destroy);
   host.innerHTML = "";
   layout(); draw();
