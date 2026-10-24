@@ -6725,8 +6725,8 @@ scenario("paintmap", "the card's Same painter / Same decade / Same place chips n
   await t.tapAt(cv0, r00.left + r00.width / 2, r00.top + r00.height / 2 - 150, { wait: 900 });
   await t.waitFor(".pmx-facets button", 6000, "the card's facet chips");
   const labels = t.$$(".pmx-facets button").map(b => t.text(b));
-  // Phase B (2026-10-24): the three presets carry a live count after their words ("Same painter 377"); More, Open, Around this and Walk follow
-  t.expect(labels.every(l => /^(Same painter|Same era here|Around the same era here|Same era|Around the same era|More|Open|Around this|Walk from here)/.test(l)), `unexpected chip label(s): ${JSON.stringify(labels)}`);
+  // Phase B (2026-10-24): the three presets carry a live count after their words ("Same painter 377"); More follows; Open is the card itself, Around this and Walk live in More
+  t.expect(labels.every(l => /^(Same painter|Same era here|Around the same era here|Same era|Around the same era|More)/.test(l)), `unexpected chip label(s): ${JSON.stringify(labels)}`);
   t.expect(!labels.some(l => /undefined/.test(l)), `a chip rendered the literal text "undefined": ${JSON.stringify(labels)}`);
   const facetBtn = t.$$(".pmx-facets [data-pmpre]").find(b => !b.disabled);
   t.expect(facetBtn, "no preset chip to test (this painting has none?)");
@@ -6744,9 +6744,11 @@ scenario("paintmap", "Walk from here steps to a different painter each time", as
   // the card (and its Walk chip) only opens on a tap now -- tap an off-center painting to open it first
   const cv0 = t.$(".pmx-cv"), r00 = cv0.getBoundingClientRect();
   await t.tapAt(cv0, r00.left + r00.width / 2, r00.top + r00.height / 2 - 150, { wait: 900 });
-  await t.waitFor(".pmx-facets [data-pmwalk-go]", 6000, "the Walk from here chip");
+  await t.waitFor(".pmx-facets [data-pmmore2]", 6000, "the More chip");
   const start = t.w.PM_CTRL.center, startPainter = t.ev(`typeof XBF !== "undefined" ? XBF.artist[${start}] : null`);
-  await t.click(".pmx-facets [data-pmwalk-go]", { wait: 700 });
+  await t.click(".pmx-facets [data-pmmore2]", { wait: 500 });
+  await t.waitFor(".pmx-moresheet [data-pmwalk-go]", 4000, "Walk from here at the top of More");
+  await t.click(".pmx-moresheet [data-pmwalk-go]", { wait: 700 });
   t.expect(t.w.PM_CTRL.spec.arr === "spiral", `Walk from here didn't center on a new painting: ${t.w.PM_CTRL.spec.arr}`);
   const step1 = t.w.PM_CTRL.spec.seed;
   t.expect(step1 >= 0 && step1 !== start, "Walk from here didn't move to a new painting");
@@ -8489,4 +8491,17 @@ scenario("paintmap", "By vibe islands: every painting once and apart with space 
   t.expect(t.w.PM_CTRL.center === c1, `a filter moved you off your painting in Islands: ${c1} -> ${t.w.PM_CTRL.center}`);
   t.ev("PM_CTRL.spec.f.y0 = null; PM_CTRL.spec.f.y1 = null; PM_CTRL.rebuild()");
   t.ev("try { localStorage.removeItem('pm-look-opts'); } catch (e) {}");
+});
+
+scenario("paintmap", "the card is one row of chips; tapping the card opens the painting; Around this seeds from More", async t => {
+  const i0 = await pmCardOpen(t);
+  t.expect(t.$$(".pmx-facets .pmx-frow").length === 1, "the bottom stack should be ONE row of chips");
+  t.expect(!t.$(".pmx-facets [data-pmopen2],.pmx-facets [data-pmwalk-go],.pmx-facets [data-pmarrange-go]"), "Open / Around this / Walk are still pills in the row");
+  t.expect(t.$(".pmx-cap-go"), "the card has no chevron");
+  await t.click("[data-pmmore2]", { wait: 500 });
+  await t.click(".pmx-moresheet [data-pmarrange-go]", { wait: 700 });
+  t.expect(t.w.PM_CTRL.spec.arr === "spiral" && t.w.PM_CTRL.spec.seed === i0, `Around this didn't seed on the painting (${t.w.PM_CTRL.spec.arr}, ${t.w.PM_CTRL.spec.seed} vs ${i0})`);
+  await t.waitFor(() => t.$(".pmx-cap-main") && !t.$(".pmx-cap").hidden, 4000, "the card");
+  await t.click(".pmx-cap-main", { wait: 600 });
+  await t.waitFor(() => /#\/gallery\//.test(t.w.location.hash), 10000, "the card to open the painting");
 });
