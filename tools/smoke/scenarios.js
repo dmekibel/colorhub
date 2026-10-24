@@ -4518,7 +4518,7 @@ scenario("pages", "Keep exploring on a color page: the feed is at the very botto
   const first = t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items[0].j`);
   t.expect(Number.isInteger(first) && t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items.length`) >= 24, "the top of the ranking isn't cached (rank once, page through)");
   // the first tile is the nearest patch, whatever the area (closeness beats coverage): nothing in the cache is closer
-  t.expect(t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items.every((it, k, a) => k === 0 || parseInt(it.cap) <= parseInt(a[0].cap))`), "a later tile is closer than the first");
+  t.expect(t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items.every((it, k, a) => k === 0 || parseInt(it.cap) <= parseInt(a[0].cap) + 1)`), "a later tile is clearly closer than the first");
   t.expect(t.$$(".fd-tile[data-fk] .fd-cap, .fd-tile[data-fk] .fd-by").every(e => parseFloat(getComputedStyle(e).fontSize) >= 15), "caption text is smaller than body size");
   t.notes.push(`color feed first ranking ${t.ev("FD_LAST.ms")} ms`);
 });

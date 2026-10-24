@@ -472,23 +472,28 @@ const FDC_CHIPS = [["paintings", "Paintings"], ["painters", "Painters"], ["era",
 const FDC_LEAD = { paintings: () => "Closest to this color first", painters: () => "Painters who use this color most", era: () => "Nearest in time to the era with the most of it", place: () => "The country with the most of it first, then its region",
   worlds: () => "Gems, flowers, films, fashion, design and words that hold this color", close: () => "The names that sit closest to this color" };
 let FDC_ST = (() => { try { const s = JSON.parse(sessionStorage.getItem("colorhub-feed-color") || "null"); if (s && s.chip && FDC_CHIPS.some(c => c[0] === s.chip)) return { chip: s.chip, metric: "overall", color: 0 }; } catch (e) {} return { chip: "paintings", metric: "overall", color: 0 }; })();
+// a painting qualifies only if the color's neighborhood (matched colors summed, within the match tolerance) is a visible part of it:
+// at least FDC_MIN_SHARE percent of the canvas, never a speck. Fewer than ~300 qualifying is said honestly (the end line), not padded.
+const FDC_TOL = 8, FDC_MIN_SHARE = 2, FDC_FLOOR_SHARE = 2, FDC_BONUS = .3;
 const FDC_OFF = new Map();       // "c:#HEX" -> { chip: plain reason }
 const FDC_BASE = new Map();      // "#HEX" -> Promise<{ rows: [{ i, de, cover }], near }>
 const fdcOff = (key, chip, why) => { const m = FDC_OFF.get(key) || {}; m[chip] = why; FDC_OFF.set(key, m); };
 
-// every painting that holds this color, closest first: tol 10 and a tenth of a percent of the canvas, widened to 20 for a rare color
-// and, if still nothing, the soft-coverage ranking (js/colorindex.js ciClosest) so the list is never empty. Cached per color.
+// every painting that holds this color visibly, closest first: matched colors within ΔE 8 covering at least 2% of the canvas, never a speck, never a wider reach. Only if nothing qualifies at all, the soft-coverage ranking (js/colorindex.js ciClosest) so the list is never empty. Cached per color.
 function fdcBase(hex) {
   hex = hex.toUpperCase();
   if (FDC_BASE.has(hex)) return FDC_BASE.get(hex);
-  const q = tol => paintingsWith([hex], { tol, minCover: .1, maxCover: null, mode: "all", sort: "close", source: "paintings" });
+  const q = min => paintingsWith([hex], { tol: FDC_TOL, minCover: min, maxCover: null, mode: "all", sort: "close", source: "paintings" });
   const p = (async () => {
     await loadGallery();
-    let res = await q(10), rows = res.rows;
-    if (rows.length < 150) { const r2 = await q(20); if (r2.rows.length > rows.length) { res = r2; rows = r2.rows; } }
+    // presence is measured at the match tolerance (ΔE 8), never wider: a wider reach would count greys and browns as "the color"
+    let res = await q(FDC_MIN_SHARE), rows = res.rows;
+    if (rows.length < 60) { const r2 = await q(FDC_FLOOR_SHARE); if (r2.rows.length > rows.length) { res = r2; rows = r2.rows; } }   // a rare color: the visible floor, still never a speck
     let near = false;
     if (!rows.length) { const cl = await ciClosest([hex], res, { max: 300 }); rows = cl.rows; near = true; }
-    return { rows: rows.slice(0, 3000).map(r => ({ i: r.i, de: r.de, cover: r.cover })), near };
+    // closeness dominates; presence (sqrt of the share, capped) breaks ties and demotes anything barely there
+    const sc = r => r.de - FDC_BONUS * Math.min(Math.sqrt(Math.max(0, r.cover)), 3);
+    return { rows: rows.map(r => ({ i: r.i, de: r.de, cover: r.cover })).sort((a, b) => sc(a) - sc(b)).slice(0, 3000), near };
   })();
   FDC_BASE.set(hex, p); if (FDC_BASE.size > 4) FDC_BASE.delete(FDC_BASE.keys().next().value);
   p.catch(() => FDC_BASE.delete(hex));
