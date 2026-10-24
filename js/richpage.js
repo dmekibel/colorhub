@@ -55,7 +55,10 @@ const rpCap = s => s.charAt(0).toUpperCase() + s.slice(1);
 const RP_LIGHT_W = /\b(light|pale|bright|brilliant|pastel|baby|powder|pallid)\b/i, RP_DARK_W = /\b(dark|deep|blackish|dusky)\b/i;
 const rpContradicts = (name, desc) => (RP_LIGHT_W.test(name) && RP_DARK_W.test(desc)) || (RP_DARK_W.test(name) && /\b(light|pale|brilliant|pallid)\b/i.test(desc));
 function rpFirstSentence(t) {
-  let s = String(t || "").split(/(?<=[.!?])\s/)[0].trim();
+  // story and color text carries link/footnote/emphasis markup ([[green|green]], [1], *dusky*): the cover shows plain words
+  // (David, 2026-10-24: "[[green|green]]" showed raw on Dusky Green's cover)
+  const plain = typeof arPlain === "function" ? arPlain : s => String(s).replace(/\[\[(?:[^\]|]+\|)?([^\]]+)\]\]/g, "$1").replace(/\s*\[\d[\d,\s–-]*\]/g, "");
+  let s = plain(String(t || "")).split(/(?<=[.!?])\s/)[0].trim();
   if (s.length > 150) s = s.split(/[:;\u2014]\s?/)[0].replace(/[,\s]+$/, "") + ".";
   return s.length <= 150 && s.split(/\s+/).length >= 4 ? s : "";
 }

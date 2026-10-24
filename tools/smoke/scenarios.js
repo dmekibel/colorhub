@@ -2496,6 +2496,16 @@ scenario("pages", "an in-between color lists its runner-up names under the cover
   await t.waitFor(() => /Your color/.test(H.chip(t)) && t.$(".cp-hero-full") && getComputedStyle(t.$(".cp-hero-full")).getPropertyValue("--c").trim().toUpperCase() === hex, 10000, `the ${first} page, still showing ${hex}`);
 });
 
+// David, 2026-10-24: Dusky Green's cover showed "[[green|green]]" -- the story's link markup, raw, in the one-line
+// definition (243 articles open with a link in their first sentence). No color page may show markup in its cover.
+scenario("pages", "a color's cover line shows plain words, never [[link]] or [1] markup (Dusky Green)", async t => {
+  await t.open("#/color/dusky-green", { settle: 600 });
+  await t.waitFor(() => t.$(".cp-hero-full"), 8000, "the Dusky Green page");
+  const hero = t.$(".cp-hero-full").textContent;
+  t.expect(!/\[\[|\]\]|\[\d/.test(hero), `the cover shows raw markup: "${hero.replace(/\s+/g, " ").slice(0, 160)}"`);
+  t.expect(/dusky shade of green/i.test(hero), `the cover's definition line is missing: "${hero.replace(/\s+/g, " ").slice(0, 160)}"`);
+});
+
 // David, 2026-10-09 on an in-between color's page ("Your color · Dark olive brown... diagonal triangle in the
 // top-right corner"): the split cover used to paint the matched name's color as a diagonal wedge, clip-path'd
 // into the hero's top-right corner -- exactly where a full-bleed hero's own "✕ Close" pill also lives
