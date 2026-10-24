@@ -1531,4 +1531,11 @@
 ["Pale Hortense Violet","#E0B7F2","ridgway iscc-nbs"],
 ["Pink","#F28DB2","app css wiki xkcd iscc-nbs maerz-paul ridgway"],
 ["Paradise Pink","#E63E62","wiki"],
-["Red-Violet (Crayola)","#C0448F","wiki"]]
+["Red-Violet (Crayola)","#C0448F","wiki"],
+["Traffic White","#F7FBF5","ral"],
+["Android Green","#3DDC84","wiki xkcd"],
+["Frostbite","#E936A7","wiki"],
+["Aqua Green","#12E193","xkcd iscc-nbs maerz-paul"],
+["Jungle Green","#29AB87","wiki xkcd iscc-nbs maerz-paul"],
+["Velvet","#750851","xkcd"],
+["Amethyst","#9966CC","app wiki xkcd iscc-nbs maerz-paul"]]
