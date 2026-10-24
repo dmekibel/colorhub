@@ -2837,8 +2837,11 @@ function pmMount(el, s, F) {
     // (Rings, Spiral, Walk, Center on) is its own anchor and keeps its own rule.
     let foc = null;
     if (s.hit && lay.n && s.f.hexes.length) {   // an entry point from a color or a palette: land on the painting that matches best, at a zoom that shows its neighborhood
-      s.hit = 0; const bk = pmBestMatch(lay, s.f, F);
-      if (bk >= 0) fo = { i: lay.items[bk], z: .8, open: false };
+      s.hit = 0;
+      // a palette that came from a painting (on=<index>): that painting is the palette's parent, so it sits in the middle
+      // (if the filter happens to drop it, the closest in color lands there instead and the quiet line offers it back)
+      if (s.on != null && s.on >= 0) { fo = { i: s.on, z: .8, open: false }; s.on = -1; }
+      else { const bk = pmBestMatch(lay, s.f, F); if (bk >= 0) fo = { i: lay.items[bk], z: .8, open: false }; }
     }
     if (s.on != null && s.on >= 0 && lay.n && !fo) { fo = { i: s.on, z: 0, open: true }; s.on = -1; }   // z 0: fit the whole filtered set (a one-painter map opens whole)
     if (fo && lay.n && !pinned && !keepPan) {

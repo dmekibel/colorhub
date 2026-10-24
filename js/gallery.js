@@ -207,13 +207,17 @@ function glEst(G, est) {
 const glPalSpec = i => {
   const G = GAL, h = [], sh = []; let tot = 0;
   for (let j = 0; j < 6; j++) { const s = G.sh[i * 6 + j]; if (s > 0) { h.push(glHex(i, j).slice(1).toLowerCase()); sh.push(s); tot += s; } }
-  return `arr=color&c=${h.join(",")}&cm=overall&sh=${sh.map(x => (x / (tot || 1)).toFixed(3)).join(",")}&t=14&at=1&m=0&hit=1&nm=${encodeURIComponent("This painting's palette")}`;
+  return `arr=spiral&seed=${i}&c=${h.join(",")}&cm=overall&sh=${sh.map(x => (x / (tot || 1)).toFixed(3)).join(",")}&t=14&at=1&m=0&nm=${encodeURIComponent("This painting's palette")}`;
 };
 // the same filter for a derived palette on screen (Stands out, a harmony card, a shuffle, an edit): its own colors and shares
-const glPalSpecOf = (pal, name) => {
-  const rows = pal.filter(p => p && p.h), tot = rows.reduce((a, p) => a + (p.share > 0 ? p.share : 0), 0), eq = !(tot > 0);
-  const sh = rows.map(p => eq ? 1 / rows.length : p.share / tot);
-  return `arr=color&c=${rows.map(p => p.h.slice(1).toLowerCase()).join(",")}&cm=overall&sh=${sh.map(x => x.toFixed(3)).join(",")}&t=14&at=1&m=0&hit=1&nm=${encodeURIComponent(name)}`;
+const glPalSpecOf = (pal, name, on) => {
+  // "Holds every color" (cm=all), not "same overall palette": every color here was taken from this painting, so the
+  // painting itself always holds them all and stays on the map, in the middle (on=). A shuffled, trimmed or edited
+  // palette no longer has this painting's shares, so the overall match would often drop its own parent.
+  const rows = pal.filter(p => p && p.h);
+  // arr=spiral&seed= puts this painting in the middle and spreads the rest outward by how close they are to it, so the
+  // far edge of the map is the least like it (David, 2026-10-25)
+  return `${on >= 0 ? `arr=spiral&seed=${on}` : "arr=color&hit=1"}&c=${rows.map(p => p.h.slice(1).toLowerCase()).join(",")}&cm=all&t=10&m=0&nm=${encodeURIComponent(name)}`;
 };
 const glYearEst = i => !!(GAL.yspan && GAL.yspan[i] && GAL.year[i] !== GL_UNDATED);
 const glCoEst = i => !!(GAL.coest && GAL.coest[i]);
@@ -1267,7 +1271,7 @@ function glFullScreen(hexes) { if (typeof colorFocus === "function") colorFocus(
 // "Find paintings" on a derived palette (David, 2026-10-24): the palette page the favorites open ("Closest in the
 // archive", js/twins.js), for the palette on screen and without saving it. Back returns to this painting.
 // "Find paintings" on a derived palette (David, 2026-10-24): the painting map filtered to this palette on screen
-function glFindWith(pal, label) { if (typeof pmGo === "function") pmGo(glPalSpecOf(pal, label ? label + " palette" : "This palette")); }
+function glFindWith(i, pal, label) { if (typeof pmGo === "function") pmGo(glPalSpecOf(pal, label ? label + " palette" : "This palette", i)); }
 // ---------- saving a derived palette (David, 2026-10-10: "how do we save a palette once derived?") ----------
 // The same store as Picked colors' Build (js/picked.js pkSaveAsPalette) and the set page (js/setpage.js): S.palettes,
 // newest first, capped at 60 -- so a painting's palette shows up in Studio's Kept exactly like any other saved one.
@@ -2127,7 +2131,7 @@ function glPage(i, d, fromHex, tol) {
   const palActsHost = el.querySelector("[data-glpalacts]");
   if (palActsHost) palActsHost.onclick = e => {
     if (e.target.closest("[data-glshuffle]")) return shuffleMode(mode);
-    if (e.target.closest("[data-glfind]")) { buzz(5); return glFindWith(curPal(), glModeLabel(mode)); }
+    if (e.target.closest("[data-glfind]")) { buzz(5); return glFindWith(i, curPal(), glModeLabel(mode)); }
     if (e.target.closest("[data-glfull]")) { buzz(5); return glFullScreen(curPal().map(p => p.h)); }
     if (e.target.closest("[data-gledit]")) return glEditOpen(curPal().map(p => p.h), { title: d.t, label: glModeLabel(mode), pool, onSave: (hexes, name) => glSavePalette(hexes, name, false, { i, t: d.t }) });
     if (e.target.closest("[data-glsave]")) { const lbl = glModeLabel(mode); return glSavePalette(curPal().map(p => p.h), glSaveName(d.t, mode === "out" ? "" : lbl), false, { i, t: d.t }); }
@@ -2143,7 +2147,7 @@ function glPage(i, d, fromHex, tol) {
     if (e.target.closest("[data-glharmshuffle]")) return shuffleMode("harmony");
     const go = e.target.closest("[data-glharmgo]"); if (go) return shuffleHistoryTo("harmony", +go.dataset.glharmgo);
     const fi = e.target.closest("[data-hcfind]");
-    if (fi) { const card = harmCards[+fi.dataset.hcfind]; if (card) { buzz(5); glFindWith(card.pal, card.label); } return; }
+    if (fi) { const card = harmCards[+fi.dataset.hcfind]; if (card) { buzz(5); glFindWith(i, card.pal, card.label); } return; }
     const fu = e.target.closest("[data-hcfull]");
     if (fu) { const card = harmCards[+fu.dataset.hcfull]; if (card) { buzz(5); glFullScreen(card.pal.map(p => p.h)); } return; }
     const ed = e.target.closest("[data-hcedit]"), sv2 = e.target.closest("[data-hcsave]");
