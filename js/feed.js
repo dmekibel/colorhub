@@ -453,7 +453,7 @@ function fdMount(host, o) {
   const near = () => { if (!built && host.getBoundingClientRect().top < innerHeight * 2.6) { removeEventListener("scroll", near); start(); } };
   const destroy = () => { gone = true; tok++; removeEventListener("scroll", near); removeEventListener("scroll", onScroll); removeEventListener("resize", onResize); live.clear(); };
   cleanup.push(destroy);
-  host.style.minHeight = "1px";
+  if (!host.style.minHeight) host.style.minHeight = "1px";   // never undo fdJump's taller one
   if (memo) start(); else { addEventListener("scroll", near, { passive: true }); near(); }
   return { start, destroy };
 }
@@ -663,13 +663,31 @@ async function fdcProbe(ctx) {
   while (FD_CACHE.size > 24) FD_CACHE.delete(FD_CACHE.keys().next().value);
 }
 // the color page's mount: waits for the bottom to come near, then the gallery (the tiles are paintings), then the feed
+// "Explore" jump (David, 2026-10-24: "take you where Keep exploring is at the TOP so the paintings take up the full screen").
+// Root cause of the old short landing: the feed is built lazily and its host was ~8px tall when the smooth scroll began, so the
+// document was too short to scroll the host to the top and the browser stopped with the heading at the bottom of the screen.
+// So: give the host a real height (the visible area under the pinned bar) first, aim at the host's top just under the bar, and
+// re-aim twice after the feed has mounted and settled unless the reader has taken over with a finger, wheel or key.
+function fdJump(host) {
+  if (!host) return;
+  const hb = () => { const a = document.querySelector(".rp-bar") || document.querySelector(".gl-page > .art-top"); return typeof glDesk === "function" && glDesk() ? 60 : (a && a.offsetHeight || 56); };
+  const top = () => host.getBoundingClientRect().top - hb();
+  host.style.transition = "none";   // a global "transition: all" otherwise eases min-height 1px -> full and a stuck transition leaves the page too short to scroll
+  host.style.minHeight = Math.max(240, innerHeight - hb()) + "px";
+  let manual = false; const evs = ["wheel", "touchstart", "keydown", "mousedown"];
+  const cleanupIn = () => evs.forEach(e => removeEventListener(e, stop, true)), stop = () => { manual = true; cleanupIn(); };
+  evs.forEach(e => addEventListener(e, stop, { capture: true, passive: true }));
+  const go = beh => scrollTo({ top: Math.max(0, scrollY + top()), behavior: reduceMotion ? "auto" : beh });
+  go("smooth");
+  [1100, 2200].forEach((ms, n) => setTimeout(() => { if (!manual && host.isConnected && Math.abs(top()) > 4) go("smooth"); if (n) cleanupIn(); }, ms));
+}
 function fdMountColor(host, o) {
   if (!host) return;
   const go = () => fdMount(host, o);
   const wait = () => { if (GAL) go(); else loadGallery().then(go).catch(() => { host.insertAdjacentHTML("beforeend", `<p class="fine">The paintings didn't load.</p>`); }); };
   // the page is still filling in when it is drawn, so "near" also needs the reader to have started scrolling (or a page too short to scroll)
   const near = () => { if (host.getBoundingClientRect().top < innerHeight * 2.6 && (scrollY > 200 || document.documentElement.scrollHeight < innerHeight * 1.3)) { removeEventListener("scroll", near); wait(); } };
-  host.style.minHeight = "1px";
+  if (!host.style.minHeight) host.style.minHeight = "1px";
   if (o.backNav && FD_MEMO.has("c:" + o.sub.hex)) return wait();
   addEventListener("scroll", near, { passive: true }); cleanup.push(() => removeEventListener("scroll", near)); near();
 }

@@ -36,7 +36,8 @@
    The hero already bleeds to every edge (.cp-page .cp-hero above); at 100dvh its bottom edge lands exactly on
    the viewport's own bottom, so the rest of the page (primary row, strip, shelves…) sits one scroll away. */
 /* David, 2026-10-09: the lede's first line should peek above the fold -- about half the screen, not nearly all of it */
-.cp-hero-full{height:min(58svh,540px);min-height:420px}
+.cp-hero-full{height:auto;min-height:max(420px,min(58svh,540px))}
+.cp-page .cp-hero.cp-hero-full{padding-top:calc(var(--top) + 64px)}   /* grows with its content instead of sliding the top lines up under the Back / Map buttons (David, 2026-10-24: "button overlapping text is bad"): 64px is the controls' row */
 .cp-close{position:absolute;top:calc(var(--top) + 14px);left:20px;width:36px;height:36px;display:grid;place-items:center;z-index:2;transition:transform .2s var(--spring)}
 .cp-close:active{transform:scale(.88)}
 .cp-close svg{width:24px;height:24px}
