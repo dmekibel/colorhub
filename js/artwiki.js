@@ -521,7 +521,7 @@ function awPainter(slug, push = true) {
       <button class="aw-thumb" data-gi="${P.ctyp[k]}" ${P.ctyp[k] >= 0 ? "" : "disabled"} aria-label="Open the most typical painting"><img alt="" data-glimg="${P.ctyp[k]}"></button>
       <div class="aw-cl-b"><p class="aw-cl-t" data-gltitle="${P.ctyp[k]}">Palette ${k + 1}</p>
         <p class="aw-cl-s">${awPct(c.pct / 100)}% of his paintings here · ${c.size} of ${n}</p>
-        ${awStrip(c.colors.map(awHex), 26)}<p class="aw-cl-n">${c.colors.map(esc).join(", ")}</p></div></div>`).join("")}
+        ${awStrip(c.colors.map(awHex), 26)}<p class="aw-cl-n">${c.colors.map(esc).join(", ")}</p><button type="button" class="pf-btn aw-cl-full" data-palfull="${c.colors.map(awHex).join(",")}" data-palfull-title="${esc(A.name || slug)}: palette ${k + 1}" data-palfull-source="Painter" data-palfull-from=".aw-strip">${typeof PF_ICON_FULL !== "undefined" ? PF_ICON_FULL : ""}<span>Full screen</span></button></div></div>`).join("")}
     <button class="gl-pa-btn" data-plvopen="${esc(slug)}" style="margin-top:10px">Palette view</button>` : "";
 
   const finds = awPainterFindings(A, P, n);   // findings, in words, always with n (now a drawer in Colors)

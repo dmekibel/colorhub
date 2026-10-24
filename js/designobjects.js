@@ -270,6 +270,7 @@ function doMakerPage(slug, opts = {}) {
     <p class="p-dek">${m.n.toLocaleString()} object${m.n === 1 ? "" : "s"} in the archive${m.y ? `, ${m.y[0]}–${m.y[1]}` : ""}.</p>
     ${objs.length >= 2 ? `<button class="aw-pmap-top" data-pmap="col=design&arr=color&p=${esc(slug)}">${typeof GL_ICON_MAP !== "undefined" ? GL_ICON_MAP : ""}<span>Design map</span></button>` : ""}
     ${pal.length ? `<div class="palette">${pal.map(p => `<button class="pal" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.pct, 1.5)}"><span>${p.pct}%</span></button>`).join("")}</div>
+    ${palFullLink(pal.map(p => p.h), m.a || "Design", "Design")}
     <div class="pal-names">${pal.map(p => `<button class="pal-name" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(p.name)}</b></button>`).join("")}</div>` : ""}
     ${sig.length ? `<div class="sec-head"><b>Signature colors</b><span>used more than other makers here</span></div>
     <div class="chips-wrap">${sig.map(s => `<button class="pchip" data-swatch="${s.h}"><i style="--c:${s.h}"></i>${esc(s.name)}<em>${s.lift}× lift</em></button>`).join("")}</div>` : ""}

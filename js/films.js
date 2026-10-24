@@ -34,7 +34,7 @@ function filmPage(f) {
   const links = f.links || [];
   const hero = f.early && f.img
     ? `${archFig(f.img)}
-       ${(f.palette || []).length ? `<div class="palette film-sampled">${f.palette.map(c => `<button class="pal" style="--c:${c.h};flex:${Math.max(c.share, .08)}" data-ink="${ink(c.h)}" data-to="c:${esc(c.app)}"><span>${Math.round(c.share * 100)}%</span></button>`).join("")}</div><p class="fine film-note">Sampled from this scan. Old prints fade, so the colors are the scan's, not the premiere's.</p>` : ""}`
+       ${(f.palette || []).length ? `<div class="palette film-sampled">${f.palette.map(c => `<button class="pal" style="--c:${c.h};flex:${Math.max(c.share, .08)}" data-ink="${ink(c.h)}" data-to="c:${esc(c.app)}"><span>${Math.round(c.share * 100)}%</span></button>`).join("")}</div>${palFullLink(f.palette.map(c => c.h), f.title || "Film", "Film")}<p class="fine film-note">Sampled from this scan. Old prints fade, so the colors are the scan's, not the premiere's.</p>` : ""}`
     : `<div class="film-hero">${f.colors.map(c => `<button style="--c:${c.h}" data-ink="${ink(c.h)}" data-to="c:${esc(c.app)}"><span>${esc(c.name)}</span></button>`).join("")}</div><p class="eyebrow film-cap">Colors discussed · chosen by name, not sampled</p>`;
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>

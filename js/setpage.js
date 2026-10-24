@@ -313,7 +313,7 @@ function spPage(hexes, o = {}) {
   // opens that one color's own page (a stronger action than richpage's cover tap, which never navigates since
   // you're already on that exact color) and long-press on any swatch already adds it to the tray (js/settray.js),
   // so the full-screen look gets its own small control on the cover itself rather than overloading either gesture.
-  const expandBtn = `<button class="sp-expand icon-btn glass" data-sp-expand aria-label="View full screen, side by side">${ICON.search}</button>`;
+  const expandBtn = "";   // the labeled "Full screen" button under the strip replaces the old unlabeled icon on it (js/palettefull.js)
   // ---- the look of the page (Lane E, 2026-10-20) ----
   // Pairs keep their two plates. Three or more get a title that never chains more than three names, one preview
   // control (Strip / Swatches / On the painting / Poster, remembered), the list, and a quiet "Add a color" row.
@@ -334,11 +334,12 @@ function spPage(hexes, o = {}) {
     <p class="eyebrow p-type">${pair ? "A pair" : ref ? `${k} colors` : k === 3 ? "A trio" : `A palette of ${k}`}</p>
     ${titleHtml}
     ${o.undo ? `<div class="sp-undo" data-undo-bar><span>${esc(o.applied || "Changed")}.</span><button data-undo>Undo</button></div>` : ""}
-    ${pair ? `<div class="sp-pair" data-dbltap>${plate(hexes[0], hexes[1], 0)}${plate(hexes[1], hexes[0], 1)}${k < 8 ? `<button class="sp-pair-add" data-sp-add aria-label="Add a color">${sv('<path d="M12 5v14M5 12h14"/>', 20, 1.8)}</button>` : ""}${expandBtn}</div>`
+    ${pair ? `<div class="sp-pair" data-dbltap>${plate(hexes[0], hexes[1], 0)}${plate(hexes[1], hexes[0], 1)}${k < 8 ? `<button class="sp-pair-add" data-sp-add aria-label="Add a color">${sv('<path d="M12 5v14M5 12h14"/>', 20, 1.8)}</button>` : ""}${expandBtn}</div><div class="sp-full-row">${typeof palFullBtn === "function" ? palFullBtn() : ""}</div>`
       : `<div class="sp-views" role="group" aria-label="Preview">${views.map(([v, t]) => `<button data-view="${v}" aria-pressed="${v === view}" class="${v === view ? "on" : ""}">${v === "painting" ? `<span class="sp-vlong">On the painting</span><span class="sp-vshort">Painting</span>` : t}</button>`).join("")}</div>
          <div class="sp-vpane" data-vpane="strip"${view === "strip" ? "" : " hidden"}>
            <div class="sp-strip" data-strip data-dbltap>${hexes.map((h, i) => `<button data-swatch="${h}" style="--c:${h};flex:1" aria-label="${esc(listNames[i].n)}"></button>`).join("")}${expandBtn}</div>
            <p class="sp-strip-cap" data-stripcap>Equal shares. Press and drag a segment to reorder.</p>
+           <div class="sp-full-row">${typeof palFullBtn === "function" ? palFullBtn() : ""}</div>
          </div>
          <div class="sp-vpane" data-vpane="swatches"${view === "swatches" ? "" : " hidden"}>
            <div class="sp-grid" style="--cols:${spGridCols(k)}">${hexes.map((h, i) => `<button data-swatch="${h}" style="--c:${h}" aria-label="${esc(listNames[i].n)}"></button>`).join("")}</div>
@@ -360,8 +361,14 @@ function spPage(hexes, o = {}) {
     <p class="fine sp-fine">Paintings are measured pixel by pixel in the museums' own photographs of varnished paintings, so colors are as photographed and screen colors are approximate. A painting “holds” a color when something within 4% of it covers at least 1% of the canvas. “× chance” compares with the colors being scattered independently: a tendency in these photographs, not a rule of painting.</p>
   `, "article sp-page");
   el.querySelector("[data-back]").onclick = xBack;
-  const expBtn = el.querySelector("[data-sp-expand]");
-  if (expBtn) expBtn.onclick = e => { e.stopPropagation(); buzz(5); if (typeof colorFocus === "function") colorFocus(hexes.map((h, i) => ({ name: names[i], hex: h }))); };
+  const spFull = e => {
+    e.stopPropagation(); buzz(5);
+    const strip = el.querySelector("[data-strip]") || el.querySelector(".sp-pair");
+    const kept = (S.palettes || []).find(p => p.cols.join() === hexes.join());
+    if (typeof palFullOpen === "function") palFullOpen(hexes.slice(), { title: (kept && kept.name) || "Palette", source: kept ? "Kept" : "Palette", from: strip, onSave: kept ? null : () => keepPalette(hexes.slice(), "Palette") });
+    else if (typeof colorFocus === "function") colorFocus(hexes.map(h => ({ name: nameOf(h).text, hex: h })));
+  };
+  el.addEventListener("click", e => { if (e.target.closest(".sp-full-row [data-pf-open]")) spFull(e); });
   el.addEventListener("swatch-dbltap", e => {
     const was = (S.palettes || []).some(p => p.cols.join() === hexes.join());
     heartBurst(el, e.detail.x, e.detail.y);

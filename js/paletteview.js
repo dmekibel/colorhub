@@ -359,6 +359,7 @@ function plvRender(el, kind, id, src) {
     const row = document.createElement("div");
     row.className = "plv-row-wrap";
     row.innerHTML = `<button type="button" class="plv-row" data-plvrow>${plvSwatchRow(item.edited || item.cols)}${item.edited ? `<span class="plv-edited">Edited</span>` : ""}</button>
+      <button type="button" class="plv-full" data-plvfull aria-label="View this palette full screen">${PF_ICON_FULL}</button>
       <button type="button" class="plv-heart ${plvIsPinned(srcKey, item.edited || item.cols) ? "on" : ""}" data-plvheart aria-label="Pin">${plvIsPinned(srcKey, item.edited || item.cols) ? ICON.heartOn : ICON.heart}</button>`;
     row._item = item;
     return row;
@@ -396,6 +397,7 @@ function plvRender(el, kind, id, src) {
         plvExpand(item, { srcKey, cat, src, prepped, gens, m: plvModel(), feedRef, onPinChange });
       };
       row.querySelector("[data-plvheart]").onclick = () => doPin(row, item);
+      row.querySelector("[data-plvfull]").onclick = () => { buzz(5); palFullOpen(item.edited || item.cols, { title: src.title || "Palette", source: "Palette view", from: row.querySelector("[data-plvrow]"), onSave: () => { if (!plvIsPinned(srcKey, item.edited || item.cols)) doPin(row, item); } }); };
     });
   }
 
@@ -442,6 +444,7 @@ function plvExpand(item, ctx) {
     <div class="plv-x-names">${names().map((n, i) => `<button type="button" class="plv-x-name" data-swatch="${cols()[i]}">${esc(n.text || n.n || cols()[i])}</button>`).join("")}</div>
     ${item.edited ? `<button type="button" class="plv-x-reset" data-plvreset>Reset to original</button>` : ""}
     <div class="plv-x-thumb" data-plvthumb hidden><img alt="${esc(ctx.src.title || "")}"><div class="plv-x-dots" data-plvdots></div></div>
+    ${palFullBtn("Full screen", "plv-x-full")}
     <button type="button" class="btn ${plvIsPinned(ctx.srcKey, cols()) ? "ghost" : ""}" data-plvxpin>${plvIsPinned(ctx.srcKey, cols()) ? "Pinned · remove" : "Pin this palette"}</button>
   </div>`;
   const { sh, close } = sheet(render());
@@ -460,6 +463,7 @@ function plvExpand(item, ctx) {
     pinBtn.textContent = on ? "Pinned · remove" : "Pin this palette"; pinBtn.classList.toggle("ghost", on);
   }
   wireSwatches();
+  sh.querySelector("[data-pf-open]").onclick = () => { buzz(5); palFullOpen(cols(), { title: ctx.src.title || "Palette", source: "Palette view", from: sh.querySelector(".plv-x-sw") }); };
   sh.querySelector("[data-plvxpin]").onclick = () => {
     const on = plvIsPinned(ctx.srcKey, cols());
     if (on) S.plv[ctx.srcKey] = plvPins(ctx.srcKey).filter(p => p.cols.join("|") !== cols().join("|"));

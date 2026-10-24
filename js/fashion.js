@@ -157,6 +157,7 @@ function fxGarment(id, opts = {}) {
       <h1 class="p-title fx-title">${esc(r.t)}</h1>
       ${r.by ? `<p class="p-dek">${esc(r.by)}</p>` : ""}
       <div class="palette fx-pal">${pal.map(p => `<button class="pal" style="--c:${p[0]};flex:${Math.max(p[1], .07)}" data-ink="${ink(p[0])}" data-swatch="${p[0]}" aria-label="${esc(p[2])}"><span class="mono">${Math.round(p[1] * 100)}%</span></button>`).join("")}</div>
+      ${palFullLink(pal.map(p => p[0]), r.t || "Fashion", "Fashion")}
       <div class="pal-names">${pal.map(p => `<button class="pal-name" data-swatch="${p[0]}"><i style="--c:${p[0]}"></i><b>${esc(p[2])}</b><em class="mono">${p[0]} · ${Math.round(p[1] * 100)}%</em></button>`).join("")}</div>
       <dl class="facts">${[["Date", r.d], ["Culture", r.cul || d.groupLabel[r.g]], ["Medium", r.m], ["Museum", mu.name]].filter(x => x[1]).map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>
       ${r.url ? `<a class="btn ghost fx-rec" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(mu.short)} record ${ICON.arrow}</a>` : ""}

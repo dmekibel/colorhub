@@ -153,6 +153,7 @@ function gamutWheel(preset = "Warm", initPts = null, push = true) {
     <div class="gw-pal" id="pal"></div>
     <div class="h-list" id="hlist"></div>
     <div class="row2" style="margin-top:18px"><button class="btn" data-keep>Keep it</button><button class="btn ghost" data-open>Views & export</button></div>
+    <div class="pv-full-row">${palFullBtn()}</div>
     <p class="p-body">${linkText("Painters call this a gamut mask. Mix only from colors inside the shape and a picture holds together, because every color shares the same few ingredients. The idea comes from the painter James Gurney; the [[color-wheel]] here is perceptual, so colors facing each other are the eye's opposites, not the painter's-wheel pairs (see [[complementary-colors|complements]]).")}</p>
     <p class="fine">The wheel is OKLab hue (Björn Ottosson, 2020) (the old Harmony lab is folded into this wheel's Triad, Complement, Analogous and Square). Rim: the most vivid screen color of each hue. Center: grey. The palette is the shape's corners, plus a light and a dark mixed from its middle. Inspired by <a href="https://petertdonahue.com/" target="_blank" rel="noopener">Peter Donahue (Color Nerd)</a>: his Color Fidget and ColorDisk.</p>
   `, "article lab studio");
@@ -214,6 +215,7 @@ function gamutWheel(preset = "Warm", initPts = null, push = true) {
   el.querySelector("[data-names]").onclick = e => { names = S.wheelNames = !names; save(); e.currentTarget.classList.toggle("on", names); drawNames(); };
   exLongCopy(el.querySelector("#hlist"));   // one tap opens the color's page; press and hold copies the hex
   el.querySelector("[data-keep]").onclick = () => { keepPalette(cur, "Gamut wheel"); };
+  el.querySelector(".pv-full-row [data-pf-open]").onclick = () => { buzz(5); palFullOpen(cur, { title: "Gamut wheel", source: "Studio", from: el.querySelector("#pal"), onSave: () => keepPalette(cur, "Gamut wheel") }); };
   // the result view is one step further down the same trail: Back from it returns to this exact shape (gwReopen below)
   el.querySelector("[data-open]").onclick = () => { if (XSTACK[XSTACK.length - 1] !== "wheelview") XSTACK.push("wheelview"); paletteView({ cols: cur.map(h => ({ h })), from: "Gamut wheel" }); };
   requestAnimationFrame(setup);
@@ -437,6 +439,7 @@ function palPhotoView(p) {
     <div class="gl-where" data-pvwhere><span>On the photo</span><div class="gl-where-seg" role="group" aria-label="Show where each color is on the photo">${GL_WHERE.map(([k, t]) => `<button data-pvw="${k}" aria-pressed="false">${t}</button>`).join("")}</div></div>
     <p class="gl-cap" data-pvcap></p>
     <div class="row2 pv-save-row"><button class="btn solid" data-pvsave>Save palette</button><button class="btn ghost" data-pvedit aria-pressed="false">Edit</button></div>
+    <div class="pv-full-row">${palFullBtn()}</div>
     <div class="pal-names" data-pvrows></div>
     </div></div>
     <div data-csacts></div>
@@ -601,6 +604,7 @@ function palPhotoView(p) {
   el.querySelector(".gl-pal-ui").addEventListener("click", editClick, true);
   el.querySelector("[data-pvswatches]").addEventListener("click", editClick, true);   // the strip lives up in the pinned top half
   el.querySelector("[data-pvsave]").onclick = () => { const pal = curSet().pal; if (!pal.length) return; keepPalette(pal.map(c => c.h), (curTitle || p.from || "Palette") + (segPool && mode !== "pick" ? " · selected part" : ""), { photo: p.photoId }); };
+  el.querySelector(".pv-full-row [data-pf-open]").onclick = () => { buzz(5); const pal = curSet().pal; if (!pal.length) return; palFullOpen(pal.map(c => ({ hex: c.h, share: c.share })), { title: curTitle || p.from || "Palette", source: "Studio", from: el.querySelector("[data-pvswatches]"), onSave: () => el.querySelector("[data-pvsave]").click() }); };
   el.querySelector("[data-share]").onclick = () => sharePalette(curSet().pal, (curTitle || p.from) + (segPool && mode !== "pick" ? " · selected part" : ""), h => ({ nm: glName(h), fam: typeof familyOf === "function" && familyOf(h) }));
   el.querySelector("[data-export]").onclick = () => exOpenSheet({ cols: curSet().pal, title: curTitle || p.from || "Palette" });
   exLongCopy(el.querySelector("[data-pvrows]"));
@@ -1097,6 +1101,7 @@ function paletteView(p) {
       ${hasImg ? `<button class="seg-t ${pct ? "on" : ""}" data-pct>%</button>` : ""}
     </div>
     <div class="pv-pal" id="pv"></div>
+    <div class="pv-full-row">${palFullBtn()}</div>
     <div class="h-list" id="hlist"></div>
     <div data-csacts></div>
     <div class="row2" style="margin-top:18px"><button class="btn" data-keep>${p.savedId != null ? "Kept" : "Keep it"}</button><button class="btn ghost" data-share>${ICON.share} Share</button></div>
@@ -1161,6 +1166,7 @@ function paletteView(p) {
   exLongCopy(el.querySelector("#hlist"));   // one tap opens the color's page; press and hold copies the hex
   const hexes = () => colsNow().map(c => c.h);
   el.querySelector("[data-export]").onclick = () => exOpenSheet({ cols: colsNow(), title: curTitle || p.from || "Palette" });
+  el.querySelector(".pv-full-row [data-pf-open]").onclick = () => { buzz(5); palFullOpen(colsNow().map(c => ({ hex: c.h, share: hasImg && pct ? c.share : undefined })), { title: curTitle || p.from || "Palette", source: p.savedId != null ? "Kept" : "Studio", from: el.querySelector("#pv"), onSave: p.savedId != null ? null : () => { keepPalette(hexes(), p.from || "Palette"); const k = el.querySelector("[data-keep]"); if (k) k.textContent = "Kept"; } }); };
   // a tap on the photo picks a color (the shared eyedropper, js/eyedrop.js), never the guess-the-name quiz
   const pvImg = el.querySelector(".pv-img img");
   if (pvImg && typeof eyedropAttach === "function") { const d = eyedropAttach(pvImg, {}); cleanup.push(() => d.detach()); pvImg.style.touchAction = "none"; }

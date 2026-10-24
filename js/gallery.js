@@ -1342,6 +1342,7 @@ function glEditOpen(hexes, opts = {}) {
         ${typeof pkList === "function" && pkList().length ? `<p class="fine">Picked colors</p><div class="gl-pe-swopts">${pkList().slice(0, 10).map(c => `<button type="button" class="gl-pe-swopt" data-ge-addfrom="${c.h}" style="--c:${c.h}" aria-label="${esc(nameOf(c.h).n)}"></button>`).join("")}</div>` : ""}</div>` : ""}
       <div class="gl-pe-acts">
         <button type="button" class="gl-pa-btn" data-ge-shuffle${items.length === locked.size ? " disabled" : ""}>${GL_ICON_DICE}<span>Shuffle unlocked</span></button>
+        ${typeof palFullBtn === "function" ? palFullBtn("Full screen", "gl-pa-btn") : ""}
         <button type="button" class="btn solid gl-pe-save" data-ge-save>Save palette</button>
       </div>`;
     wireDrag();
@@ -1402,6 +1403,7 @@ function glEditOpen(hexes, opts = {}) {
     if (e.target.closest("[data-ge-add]")) { swapFor = swapFor === "add" ? -1 : "add"; buzz(5); render(); return; }
     const addfrom = e.target.closest("[data-ge-addfrom]");
     if (addfrom && items.length < 20) { items.push(addfrom.dataset.geAddfrom.toUpperCase()); swapFor = -1; buzz(6); render(); return; }
+    if (e.target.closest("[data-pf-open]")) { buzz(5); return palFullOpen(items.map((h, k) => ({ hex: h, locked: locked.has(k) })), { title: (sh.querySelector("[data-ge-name]") || {}).value || opts.title || "Palette", source: "Your edit", from: sh.querySelector("[data-ge-list]") }); }
     if (e.target.closest("[data-ge-shuffle]")) {
       if (locked.size >= items.length) return;
       const next = glEditShuffle(items, locked, pool);
@@ -1567,7 +1569,7 @@ function glPage(i, d, fromHex, tol) {
     <div class="gl-pal-ui">
     <div class="palette gl-strip" data-glswatches></div>
     <div class="gl-modes-f" data-glfade><div class="gl-modes" data-glorder role="group" aria-label="Palette type"></div></div>
-    <div class="gl-seg-row"><span class="gl-seg-l" id="glwl">Widths</span><div class="gl-seg" role="group" aria-labelledby="glwl"><button data-glw="prop" aria-pressed="true">Proportional</button><button data-glw="eq" aria-pressed="false">Equal</button></div></div>
+    <div class="gl-seg-row"><span class="gl-seg-l" id="glwl">Widths</span><div class="gl-seg" role="group" aria-labelledby="glwl"><button data-glw="prop" aria-pressed="true">Proportional</button><button data-glw="eq" aria-pressed="false">Equal</button></div>${typeof palFullBtn === "function" ? palFullBtn("Full screen", "gl-full") : ""}</div>
     <div class="pr-slide gl-slide" data-glslide hidden><input type="range" data-glk aria-label="How many colors"><span class="gl-kn-t" data-glkn>6 colors</span></div>
     <p class="gl-locate" data-gllocate hidden></p>
     <p class="gl-cap" data-glcap></p>
@@ -1720,7 +1722,7 @@ function glPage(i, d, fromHex, tol) {
         <div class="gl-hcard-top"><b>${esc(c.label)}</b><span>${c.fitPct}% fit</span></div>
         <div class="palette gl-strip gl-hcard-strip">${c.pal.map(p => `<button class="pal" data-swatch="${p.h}" style="--c:${p.h};flex:${eqW ? 1 : (Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${eqW ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("")}</div>
         <div class="gl-hcard-names">${c.pal.map(p => esc(nameOf(p.h).n)).join(" · ")}</div>
-        <div class="gl-hcard-acts"><button class="gl-pa-btn" data-hcedit="${j}">Edit</button><button class="gl-pa-btn solid" data-hcsave="${j}">Save palette</button></div>
+        <div class="gl-hcard-acts"><button class="gl-pa-btn" data-hcfull="${j}">Full screen</button><button class="gl-pa-btn" data-hcedit="${j}">Edit</button><button class="gl-pa-btn solid" data-hcsave="${j}">Save palette</button></div>
       </div>`).join("") : `<p class="fine">No ${harmFilter === "all" ? "clear relation" : harmCardName(harmFilter).toLowerCase()} shows up among this painting's own colors. Try Shuffle, or another type.</p>`;
     moreBtn.hidden = harmCards.length <= 6;
     if (!moreBtn.hidden) moreBtn.textContent = harmMoreOpen ? "Fewer" : `More (${harmCards.length - 6})`;
@@ -2105,6 +2107,7 @@ function glPage(i, d, fromHex, tol) {
   addEventListener("click", locSwallow, true);
   cleanup.push(() => removeEventListener("click", locSwallow, true));
   el.querySelector(".gl-seg-row").onclick = e => {
+    if (e.target.closest("[data-pf-open]")) { buzz(5); return palFullOpen(curPal().map(p => ({ hex: p.h, share: p.share })), { title: d.t, source: glModeLabel(mode), from: stripEl, equal: eqW, onSave: () => glSavePalette(curPal().map(p => p.h), glSaveName(d.t, mode === "out" ? "" : glModeLabel(mode)), false, { i, t: d.t }), onEdit: () => glEditOpen(curPal().map(p => p.h), { title: d.t, label: glModeLabel(mode), pool, onSave: (hexes, name) => glSavePalette(hexes, name, false, { i, t: d.t }) }) }); }
     const b = e.target.closest("[data-glw]"); if (!b) return;
     const eq = b.dataset.glw === "eq"; if (eq === eqW) return;
     eqW = eq; glEqSet(eq); buzz(5); drawPalette();
@@ -2140,6 +2143,8 @@ function glPage(i, d, fromHex, tol) {
     if (e.target.closest("[data-glharmmore]")) { harmMoreOpen = !harmMoreOpen; buzz(5); drawPalette(); return; }
     if (e.target.closest("[data-glharmshuffle]")) return shuffleMode("harmony");
     const go = e.target.closest("[data-glharmgo]"); if (go) return shuffleHistoryTo("harmony", +go.dataset.glharmgo);
+    const hf = e.target.closest("[data-hcfull]");
+    if (hf && harmCards[+hf.dataset.hcfull]) { buzz(5); const card = harmCards[+hf.dataset.hcfull]; return palFullOpen(card.pal.map(p => ({ hex: p.h, share: p.share })), { title: d.t, source: card.label, from: hf.closest(".gl-hcard") }); }
     const ed = e.target.closest("[data-hcedit]"), sv2 = e.target.closest("[data-hcsave]");
     if (ed || sv2) {
       const card = harmCards[+(ed || sv2).dataset[ed ? "hcedit" : "hcsave"]]; if (!card) return;

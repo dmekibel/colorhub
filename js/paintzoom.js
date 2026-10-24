@@ -393,7 +393,7 @@ function glZoomOpen(opts) {
   };
   const pkRenderAct = () => {
     const n = PKS.picks.length, saved = n >= 2 && PKS.savedSig === pkSig();
-    pkActEl.innerHTML = `<button class="glz-pk-save" data-glzpksave${n < 2 || saved ? " disabled" : ""}>${saved ? "Saved to Kept" : "Save palette"}</button>${n === 1 ? `<span class="glz-pk-note">Add one more color to save</span>` : n > 1 ? `<span class="glz-pk-note">${n} colors</span>` : ""}`;
+    pkActEl.innerHTML = `<button class="glz-pk-save" data-glzpksave${n < 2 || saved ? " disabled" : ""}>${saved ? "Saved to Kept" : "Save palette"}</button>${n === 1 ? `<span class="glz-pk-note">Add one more color to save</span>` : n > 1 ? `<span class="glz-pk-note">${n} colors</span>` : ""}${n >= 1 && typeof palFullBtn === "function" ? palFullBtn("Full screen", "glz-pk-full") : ""}`;
   };
   const pkRenderStrip = () => {
     const keep = pkStrip.scrollLeft;
@@ -566,6 +566,7 @@ function glZoomOpen(opts) {
     const a = pkGet(PKS.active); if (a && typeof openTappedColor === "function") openTappedColor(a.hex);
   });
   pkActEl.addEventListener("click", e => {
+    if (e.target.closest("[data-pf-open]")) { if (typeof palFullOpen === "function") palFullOpen(PKS.picks.map(p => p.hex), { title: opts.title || "Your palette", source: "Picked colors", from: pkStrip, onSave: PKS.picks.length >= 2 && PKS.savedSig !== pkSig() ? () => { const b = pkActEl.querySelector("[data-glzpksave]"); if (b && !b.disabled) b.click(); } : null }); return; }
     if (!e.target.closest("[data-glzpksave]")) return;
     const hexes = PKS.picks.map(p => p.hex); if (hexes.length < 2) return;
     // the painting it came from, with where each color was picked (fractions of the image), so the palette's page
