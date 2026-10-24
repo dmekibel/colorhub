@@ -706,7 +706,7 @@ function rpBarWire(el) {
   const bar = el.querySelector(".rp-bar"), hero = el.querySelector(".cp-hero"); if (!bar || !hero) return;
   const scrollTo = t => { if (!t) return; const y = t.getBoundingClientRect().top + scrollY - bar.offsetHeight - 8; window.scrollTo({ top: Math.max(0, y), behavior: reduceMotion ? "auto" : "smooth" }); };
   const cover = el.querySelector("[data-rp-explore]");
-  if (cover) cover.addEventListener("click", () => { buzz && buzz(5); scrollTo(el.querySelector("[data-rpfeed]")); });
+  if (cover) cover.addEventListener("click", () => { buzz && buzz(5); fdJump(el.querySelector("[data-rpfeed]")); });
   bar.addEventListener("click", e => {
     if (e.target.closest("[data-rp-back]")) return xBack();
     if (e.target.closest("[data-rp-top]")) return window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
@@ -716,7 +716,7 @@ function rpBarWire(el) {
     if (k === "paint") return scrollTo(el.querySelector(".rp-paint"));
     if (k === "family") return scrollTo(el.querySelector(".ar-fam"));
     if (k === "id") return scrollTo(el.querySelector(".rp-idcard"));
-    if (k === "explore") return scrollTo(el.querySelector("[data-rpfeed]"));   // David, 2026-10-24: Keep exploring is so far down it takes forever to get there
+    if (k === "explore") return fdJump(el.querySelector("[data-rpfeed]"));   // David, 2026-10-24: Keep exploring is so far down it takes forever to get there
   });
   // it lives on <body>, not in the screen: the screen's entrance animation leaves a transform that would pin a fixed bar to the page.
   // Defensive: a fast Back-then-forward can call this again before the last page's own cleanup has run (David,

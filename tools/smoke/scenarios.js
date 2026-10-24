@@ -4511,12 +4511,17 @@ scenario("paintings", "a painting page has a Keep exploring jump near the top; o
   const before = t.ev("document.querySelector('[data-glfeed]').getBoundingClientRect().top"), vh = t.ev("innerHeight");
   t.expect(before > vh, `the feed is already on screen before the tap (top ${before}, window ${vh})`);
   // headless Chrome does not run smooth scrolls to the end, so watch what the tap asks for, then check an instant jump lands
-  t.ev("window.__sj = null; const o = Element.prototype.scrollIntoView; Element.prototype.scrollIntoView = function (a) { window.__sj = { feed: this.matches('[data-glfeed]'), opt: a }; return o.call(this, Object.assign({}, a, { behavior: 'auto' })); };");
-  await t.click("[data-glfeedjump]", { wait: 600 });
-  const sj = t.ev("window.__sj");
-  t.expect(sj && sj.feed, "the Keep exploring button did not scroll the feed into view");
+  // the Explore pill is on the picture, on the first screen, with no scrolling
+  const pill = t.ev("(() => { const b = [...document.querySelectorAll('[data-glfeedjump]')].find(x => x.offsetWidth); if (!b) return null; const q = b.getBoundingClientRect(); return { t: q.top, b: q.bottom, txt: b.textContent.trim(), svg: !!b.querySelector('svg') }; })()");
+  t.expect(pill && pill.t >= 0 && pill.b <= vh && pill.txt === "Explore" && pill.svg, `no Explore pill on the first screen (${JSON.stringify(pill)})`);
+  t.ev("window.__st = null; const o = window.scrollTo; window.scrollTo = function (a, b) { if (typeof a === 'object') { window.__st = a; return o.call(window, Object.assign({}, a, { behavior: 'auto' })); } return o.call(window, a, b); };");
+  await t.click("[data-glfeedjump]", { wait: 900 });
+  const st = t.ev("window.__st");
+  t.expect(st && st.top > 300, `the Explore pill did not ask to scroll to the feed (${JSON.stringify(st)})`);
+  // after the feed has built, the feed's heading sits just under the top bar and its tiles fill the screen
+  await t.sleep(1500);
   const after = t.ev("document.querySelector('[data-glfeed]').getBoundingClientRect().top");
-  t.expect(after < vh, `the feed is still below the screen after the tap (top ${after}, window ${vh})`);
+  t.expect(after < 130 && after > -20, `the feed did not land under the top bar (top ${after}, window ${vh}, ${JSON.stringify(st)} ${JSON.stringify(t.ev("({ sy: scrollY, dh: document.documentElement.scrollHeight, mh: document.querySelector('[data-glfeed]').style.minHeight, h: document.querySelector('[data-glfeed]').offsetHeight, kids: document.querySelector('[data-glfeed]').children.length, cs: (c => [c.minHeight, c.height, c.maxHeight, c.contain, c.contentVisibility, c.position, c.transitionProperty, c.transitionDuration, document.querySelector('[data-glfeed]').getAnimations().length].join('|'))(getComputedStyle(document.querySelector('[data-glfeed]'))), cls: document.querySelector('[data-glfeed]').className, same: document.querySelectorAll('[data-glfeed]').length, disp: getComputedStyle(document.querySelector('[data-glfeed]')).display, par: document.querySelector('[data-glfeed]').parentElement.className })"))})`);
 });
 scenario("pages", "a color page shows Explore on first paint, keeps it in the pinned header at every scroll depth, and both ask to scroll to the feed", async t => {
   await t.open("#/color/teal", { settle: 900 });
@@ -4546,6 +4551,9 @@ scenario("pages", "a color page shows Explore on first paint, keeps it in the pi
   st = t.ev("window.__st"); const feedTop = t.ev("document.querySelector('[data-rpfeed]').getBoundingClientRect().top"), vh = t.ev("innerHeight");
   t.expect(st && st.top > 700, `the header Explore button did not ask to scroll down to the feed (${JSON.stringify(st)})`);
   t.expect(feedTop < vh, `the feed is still below the screen after the header button (top ${feedTop}, window ${vh})`);
+  await t.sleep(1800);
+  const landed = t.ev("document.querySelector('[data-rpfeed]').getBoundingClientRect().top");
+  t.expect(landed < 130 && landed > -20, `the feed did not land just under the pinned header (top ${landed}; ${JSON.stringify(t.ev("({ mh: document.querySelector('[data-rpfeed]').style.minHeight, h: document.querySelector('[data-rpfeed]').offsetHeight, sy: scrollY, dh: document.documentElement.scrollHeight, ih: innerHeight, bar: document.querySelector('body > .rp-bar').offsetHeight })"))})`);
 });
 scenario("pages", "an in-between color's cover also has Explore on first paint", async t => {
   await t.open("#/color/teal", { settle: 300 });
