@@ -15,6 +15,8 @@
 /* Arrangement: a segmented control, equal width, self-evident text labels (no private icons) */
 .ph-arr{display:flex;gap:2px;padding:3px;border-radius:var(--r-pill);background:rgba(236,232,223,.06);margin-top:12px;flex:none;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .ph-arr::-webkit-scrollbar{display:none}
+.ph-mode{margin-top:14px}.ph-mode+.ph-arr{margin-top:8px}
+.pc-bar{height:4px;border-radius:2px;background:rgba(236,232,223,.12);margin:16px 0 22px;overflow:hidden}.pc-bar i{display:block;height:100%;width:0;background:var(--paper);transition:width .25s ease}
 .ph-arr-b{flex:1 0 auto;padding:0 14px;min-height:40px;border-radius:calc(var(--r-pill) - 2px);font:400 13px/1 var(--sans);color:var(--soft);white-space:nowrap}
 .ph-arr-b.on{background:var(--paper);color:var(--paper-ink)}
 .ph-arr-b:active{transform:scale(.97)}

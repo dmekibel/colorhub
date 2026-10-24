@@ -121,13 +121,15 @@ function openPaletteHive(o = {}) {
   const minN = Math.min(PH_MIN_N, max);
   const title = o.title || "Colors", kindLabel = PH_SRC_LABEL[o.source] || "Colors";
   let count = clamp(o.count0 || seed.length || minN, minN, max), arr = o.arr0 || arrs[0][0];
-  const getColors = n => itemsFn ? (itemsFn(arr, n) || []) : (poolFn ? (poolFn(n) || []) : seed).slice(0, Math.min(n, max));
+  const modes = o.modes || null; let mode = o.mode0 || (modes && modes[0][0]) || "";
+  const getColors = n => itemsFn ? (itemsFn(arr, n, mode) || []) : (poolFn ? (poolFn(n) || []) : seed).slice(0, Math.min(n, max));
 
   const { sh, close } = sheet(`
     <p class="eyebrow">${esc(kindLabel)}</p>
     <h1 class="ph-title">${esc(title)}</h1>
     <p class="ph-sub" data-ph-sub></p>
     <div class="ph-count"><label class="ph-count-l"><span>How many</span><input type="range" aria-label="How many colors"><b data-ph-n></b></label></div>
+    ${modes ? `<div class="ph-arr ph-mode" role="group" aria-label="Which colors">${modes.map(([k, t]) => `<button class="ph-arr-b${k === mode ? " on" : ""}" data-ph-mode="${k}">${t}</button>`).join("")}</div>` : ""}
     <div class="ph-arr" role="group" aria-label="Arrange">${arrs.map(([k, t]) => `<button class="ph-arr-b${k === arr ? " on" : ""}" data-ph-arr="${k}">${t}</button>`).join("")}</div>
     <div class="ph-stage" data-ph-stage><canvas class="ph-cv" aria-label="Every color here, sized by how much of it there is. Drag to pan, pinch to zoom, tap a color to open its page."></canvas></div>
     ${o.cta ? `<button type="button" class="ph-cta" data-ph-cta>${esc(o.cta.label)} ${typeof ICON !== "undefined" && ICON.arrow || ""}</button>` : ""}
@@ -215,7 +217,7 @@ function openPaletteHive(o = {}) {
     const cols = getColors(count), prev = nodes;
     nodes = (o.layoutFn && o.layoutFn(arr, cols, W, H)) || phLayout(cols, arr, W, H);
     fitView();
-    subEl.textContent = o.sub ? o.sub(arr) : PH_SUB;
+    subEl.textContent = o.sub ? o.sub(arr, mode) : PH_SUB;
     if (animate && !RM && prev.length) {
       const prevBy = new Map(prev.map(n => [n.key || n.h, n]));
       animFrom = nodes.map(n => { const p = prevBy.get(n.key || n.h); return p ? { x: p.x, y: p.y, r: p.r } : { x: n.x, y: n.y, r: 0 }; });
@@ -292,9 +294,15 @@ function openPaletteHive(o = {}) {
   const nOut = sh.querySelector("[data-ph-n]"), input = sh.querySelector(".ph-count input");
   nOut.textContent = count;
   const countBox = sh.querySelector(".ph-count");
-  const syncCount = () => { countBox.hidden = !!(o.noCount && o.noCount(arr)); };
+  const syncCount = () => { countBox.hidden = !!(o.noCount && o.noCount(arr, mode)); };
   syncCount();
   countify(input, { min: minN, max, value: count, out: nOut, onSet: (v, final) => { nOut.textContent = v; if (v === count) return; count = v; relayout(true); if (final) buzz(3); } });
+  sh.querySelectorAll("[data-ph-mode]").forEach(b => b.onclick = () => {
+    if (b.dataset.phMode === mode) return;
+    buzz(4); mode = b.dataset.phMode;
+    sh.querySelectorAll("[data-ph-mode]").forEach(x => x.classList.toggle("on", x === b));
+    syncCount(); relayout(true);
+  });
   sh.querySelectorAll("[data-ph-arr]").forEach(b => b.onclick = () => {
     if (b.dataset.phArr === arr) return;
     buzz(4); arr = b.dataset.phArr;
@@ -314,6 +322,8 @@ function openPaletteHive(o = {}) {
   const DEBUG = {
     count: () => nodes.filter(n => !n.ghost).length,
     arr: () => arr,
+    mode: () => mode,
+    setMode: k => { const b = sh.querySelector(`[data-ph-mode="${k}"]`); if (b) b.click(); },
     nodes: () => nodes.filter(n => !n.ghost).map(n => ({ h: n.h, key: n.key, r: n.r, x: n.x, y: n.y, share: n.share, hollow: !!n.hollow })),
     setArr: k => { const b = sh.querySelector(`[data-ph-arr="${k}"]`); if (b) b.click(); },
     max: () => max,

@@ -64,11 +64,65 @@ async function pcLoad(slug) {
   return p;
 }
 
+// ---------- the vivid reading: what the painter is KNOWN for ----------
+// David's standing rule (painter colors are vivid, not average): the dark grounds, browns and greys every painter
+// has swamp a plain count. So the default reads each of up to 60 of their paintings' own measured pools (the 24-color
+// pools in data/gallery/d, the same ones the painting page's palettes come from), keeps each painting's most vivid
+// distinct colors (chroma first, then how much of the canvas), and counts how many paintings hold each named color.
+const PC_VIV_N = 60, PC_VIV_PER = 7, PC_VIV_CACHE = new Map();
+function pcVividPick(pool) {
+  const P = pool.map(p => { const c = lch(p.h); return { h: p.h, share: p.share, L: c[0], C: c[1], lab: lab(p.h) }; });
+  let cand = P.filter(p => p.C >= 24 && p.L >= 14 && p.L <= 96);
+  if (cand.length < 3) cand = P.filter(p => p.C >= 14 && p.L >= 12);   // a low-key painting: its most colorful, still never a plain neutral
+  cand.sort((a, b) => Math.pow(b.share + .004, .28) * (b.C + 6) - Math.pow(a.share + .004, .28) * (a.C + 6));
+  const out = [], bins = new Map();   // at most two per 30-degree hue bin, so a painting's blues and greens are not crowded out by its many browns
+  for (const p of cand) {
+    if (out.length >= PC_VIV_PER) break;
+    const bin = Math.floor(lch(p.h)[2] / 30);
+    if ((bins.get(bin) || 0) >= 2 || !out.every(q => de2000(q.lab, p.lab) >= 13)) continue;
+    out.push(p); bins.set(bin, (bins.get(bin) || 0) + 1);
+  }
+  return out;
+}
+function pcLoadVivid(D, onProgress) {
+  if (PC_VIV_CACHE.has(D.slug)) return PC_VIV_CACHE.get(D.slug);
+  const p = (async () => {
+    await Promise.all([awLoad(), loadGallery()]);
+    const { P } = await awPainterLoad(D.slug);
+    const all = (P.ix || []).filter(j => j >= 0), total = all.length;
+    if (!total) return null;
+    const pick = total <= PC_VIV_N ? all : Array.from({ length: PC_VIV_N }, (_, k) => all[Math.floor(k * total / PC_VIV_N)]);
+    const by = new Map(), decN = new Map(); let done = 0, N = 0;
+    const one = async i => {
+      const d = await glDetail(i), pool = glPoolDecode(d.pl);
+      done++; if (onProgress) onProgress(done, pick.length);
+      if (!pool.length) return;
+      N++;
+      const y = GAL.year[i], dec = y !== GL_UNDATED && y > -20000 ? Math.floor(y / 10) * 10 : null, seen = new Set();
+      if (dec != null) decN.set(dec, (decN.get(dec) || 0) + 1);
+      pcVividPick(pool).forEach(c => {
+        const nm = nameOf(c.h).text; if (!nm || seen.has(nm)) return; seen.add(nm);
+        let o = by.get(nm); if (!o) { o = { n: nm, h: c.h, C: c.C, count: 0, dec: new Map() }; by.set(nm, o); }
+        if (c.C > o.C) { o.C = c.C; o.h = c.h; }
+        o.count++; if (dec != null) o.dec.set(dec, (o.dec.get(dec) || 0) + 1);
+      });
+    };
+    for (let k = 0; k < pick.length; k += 6) await Promise.all(pick.slice(k, k + 6).map(one));
+    const items = [...by.values()].sort((a, b) => b.count - a.count || b.C - a.C).slice(0, PC_CAP);
+    return items.length >= 3 && N >= 1 ? { items, N, decN, total } : null;
+  })();
+  PC_VIV_CACHE.set(D.slug, p);
+  p.then(v => { if (!v) PC_VIV_CACHE.delete(D.slug); }, () => PC_VIV_CACHE.delete(D.slug));
+  return p;
+}
+
 // ---------- the five arrangements ----------
 const PC_ARRS = [["share", "By use"], ["hue", "By hue"], ["light", "By lightness"], ["decade", "By decade"], ["peers", "Against peers"]];
+const pcView = (D, mode) => mode === "vivid" && D.vivid ? D.vivid : { items: D.items, N: D.N, decN: D.decN };
 const pcDecades = D => [...D.decN.entries()].filter(([, n]) => n >= PC_MIN_DECADE_N).map(([d]) => d).sort((a, b) => a - b);
 
-function pcItems(D, arr, n) {
+function pcItems(D0, arr, n, mode) {
+  const D = { ...D0, ...pcView(D0, mode) };
   if (arr === "decade") {
     const decs = pcDecades(D), k = decs.length <= 2 ? 12 : decs.length <= 4 ? 9 : decs.length <= 7 ? 6 : 5, out = [];
     decs.forEach(d => {
@@ -151,6 +205,30 @@ function pcDecadeLayout(items) {
   const groups = [...by.keys()].sort((a, b) => a - b).map(d => ({ label: `${d}s`, sub: `${pcNum(by.get(d)[0].decTotal)} ${pcWord(by.get(d)[0].decTotal)}`, items: by.get(d) }));
   return pcRowsLayout(groups, Math.max(...items.map(i => i.share), .001));
 }
+// By use: the most-used color is the single disc at the center, the next ones ring it, and size falls off outward.
+// Deterministic greedy packing: biggest first, each new circle goes to the free spot (tangent to a placed circle)
+// nearest the center.
+function pcPackLayout(items) {
+  const list = items.slice().sort((a, b) => b.share - a.share || String(a.n).localeCompare(String(b.n))), mx = Math.max(list[0] ? list[0].share : 0, .001), R0 = 60, GAP = 3;
+  const nodes = [];
+  list.forEach(it => {
+    const [L, C, H] = lch(it.h), r = Math.max(11, R0 * Math.sqrt(it.share / mx)), nd = { ...it, L, C, H, r, x: 0, y: 0 };
+    if (nodes.length) {
+      let best = null, bd = Infinity;
+      const from = nodes.slice(-40).concat(nodes.slice(0, 6));
+      for (const q of from) for (let k = 0; k < 20; k++) {
+        const a = k / 20 * 6.2832 + (nodes.length % 7) * .13, d = q.r + r + GAP, x = q.x + Math.cos(a) * d, y = q.y + Math.sin(a) * d, dc = Math.hypot(x, y);
+        if (dc >= bd) continue;
+        let ok = true;
+        for (const o of nodes) if (Math.hypot(o.x - x, o.y - y) < o.r + r + GAP - .01) { ok = false; break; }
+        if (ok) { bd = dc; best = [x, y]; }
+      }
+      if (best) { nd.x = best[0]; nd.y = best[1]; } else { nd.x = bd === Infinity ? nodes[nodes.length - 1].x + 400 : 0; }
+    }
+    nodes.push(nd);
+  });
+  return nodes;
+}
 function pcPeersLayout(items) {
   const more = items.filter(i => !i.hollow), less = items.filter(i => i.hollow), groups = [];
   if (more.length) groups.push({ label: "More than peers", sub: `${more.length} ${more.length === 1 ? "color" : "colors"}`, items: more });
@@ -159,36 +237,51 @@ function pcPeersLayout(items) {
 }
 
 // ---------- the sheet ----------
-const PC_FINE = "Counted from each painting's three main colors, as photographed through varnish. Screen colors are approximate.";
 function pcOpen(slug, o = {}) {
   if (!slug) return null;
-  let H = null, dead = false, rowsNow = [], colsNow = null, hive = null;
-  const wait = typeof toast === "function";
-  pcLoad(slug).then(D => {
+  let dead = false, rowsNow = [], colsNow = null, hive = null, wait = null;
+  const say = typeof toast === "function" ? toast : () => {};
+  pcLoad(slug).then(async D => {
     if (dead) return;
-    if (!D) { if (wait) toast("This painter's colors aren't measured yet"); return; }
-    H = D;
+    if (!D) { say("This painter's colors aren't measured yet"); return; }
+    // the vivid reading (a few seconds the first time: a calm progress sheet, then cached)
+    let viv = null;
+    if (!PC_VIV_CACHE.has(slug)) {
+      const nm = D.name, { sh, close } = sheet(`<p class="eyebrow">Painter</p><h1 class="ph-title">${esc(nm)}'s colors</h1>
+        <p class="ph-sub" data-pcp>Reading ${esc(nm)}'s paintings…</p><div class="pc-bar"><i data-pcbar></i></div>`);
+      wait = close;
+      const txt = sh.querySelector("[data-pcp]"), bar = sh.querySelector("[data-pcbar]");
+      try { viv = await pcLoadVivid(D, (k, n) => { if (txt.isConnected) { txt.textContent = `Reading ${nm}'s paintings… ${k} of ${n}`; bar.style.width = Math.round(k / n * 100) + "%"; } }); } catch (e) { viv = null; }
+      if (!sh.isConnected) { dead = true; return; }   // closed while reading
+      wait = null; close();
+    } else { try { viv = await pcLoadVivid(D); } catch (e) { viv = null; } }
+    if (dead) return;
+    D.vivid = viv;
+    const modes = viv ? [["vivid", "Vivid colors"], ["all", "All colors"]] : null;
     const arrs = PC_ARRS.filter(([k]) => k !== "decade" || pcDecades(D).length >= 2).filter(([k]) => k !== "peers" || D.peers.length >= 3);
     const total = Math.min(D.items.length, PC_CAP);
-    const sub = arr => {
-      const nm = D.name;
+    const V = mode => pcView(D, mode);
+    const sub = (arr, mode) => {
+      const nm = D.name, v = V(mode), vivid = mode === "vivid" && !!D.vivid;
       if (D.few) return `Only ${D.N} ${pcWord(D.N)} here. Too few to say much; read this as a sketch, not a finding.`;
-      if (arr === "share") return `Every color ${nm} uses, sized by how many of their ${pcNum(D.N)} paintings hold it.`;
+      if (arr === "share") return vivid ? `What gives ${nm} their character: the vivid colors, sized by how many of the ${pcNum(v.N)} paintings we read hold them. Blacks, browns and greys every painter has are left out.`
+        : `All the colors ${nm} uses, including the dark grounds, sized by how many of their ${pcNum(D.N)} paintings hold each among their three main colors.`;
       if (arr === "hue") return "Around the ring by hue, darker colors toward the middle and lighter ones outside.";
       if (arr === "light") return "Darkest on the left to lightest on the right.";
-      if (arr === "decade") return `How the palette changed: each color's share of that decade's paintings.`;
+      if (arr === "decade") return `How the palette changed: each color's share of that decade's paintings${vivid ? ", among their vivid colors" : ""}.`;
       const more = D.peers.filter(x => x.lift >= 1).length, less = D.peers.length - more;
       return !more ? `Nothing stands clearly above painters of the same country and decade; these are the colors ${nm} uses much less (rings).` : !less ? `The colors ${nm} uses much more than painters of the same country and decade.` : "Discs: used more than painters of the same country and decade. Rings: used less.";
     };
     hive = openPaletteHive({
-      title: `${D.name}'s colors`, source: "painter",
-      colors: pcItems(D, "share", PC_DEF), arrs, arr0: o.arr && arrs.some(a => a[0] === o.arr) ? o.arr : "share",
-      itemsFn: (arr, n) => pcItems(D, arr, n), max: total, maxCap: PC_CAP, count0: Math.min(PC_DEF, total),
-      noCount: arr => arr === "decade" || arr === "peers",
-      sub, fine: PC_FINE,
+      title: `${D.name}'s colors`, source: "painter", modes, mode0: viv ? "vivid" : "all",
+      colors: pcItems(D, "share", PC_DEF, viv ? "vivid" : "all"), arrs, arr0: o.arr && arrs.some(a => a[0] === o.arr) ? o.arr : "share",
+      itemsFn: (arr, n, mode) => pcItems(D, arr, n, mode), max: total, maxCap: PC_CAP, count0: Math.min(PC_DEF, total),
+      noCount: (arr, mode) => arr === "decade" || arr === "peers" || mode === "vivid",
+      sub, fine: "Read from each painting's measured palette, as photographed through varnish. Screen colors are approximate.",
       layoutFn: (arr, items, W, Ht) => {
         rowsNow = []; colsNow = null;
         if (arr === "decade") { const r = pcDecadeLayout(items); rowsNow = r.rows; return r.nodes; }
+        if (arr === "share") return pcPackLayout(items);
         if (arr === "hue") return phLayout(items, "hue", W, Ht, { anchor: pcRingAt(pcRange(items)), spring: .08, fill: .3 });
         if (arr === "light") { const r = pcColumnLayout(items); colsNow = r.ends; return r.nodes; }
         if (arr === "peers") { const r = pcPeersLayout(items); rowsNow = r.rows; return r.nodes; }
@@ -213,15 +306,16 @@ function pcOpen(slug, o = {}) {
         ctx.restore();
       },
       onTap: (nd, close) => {
-        const it = D.items.find(x => x.h === nd.h);
-        PC_CTX = { hex: nd.h.toUpperCase(), name: nd.n, slug: D.slug, painter: D.name, count: it ? it.count : nd.count, N: D.N, t: performance.now() };
+        const mode = window.PH_DEBUG && PH_DEBUG.mode ? PH_DEBUG.mode() : "all", v = V(mode);
+        const it = v.items.find(x => x.h === nd.h) || D.items.find(x => x.h === nd.h);
+        PC_CTX = { hex: nd.h.toUpperCase(), name: nd.n, slug: D.slug, painter: D.name, count: it ? it.count : nd.count, N: it && v.items.includes(it) ? v.N : D.N, vivid: mode === "vivid" && !!D.vivid, t: performance.now() };
         close(); openTappedColor(nd.h);
       },
     });
     pcAddress(slug);
     if (hive && hive.close) { const c0 = hive.close; hive.close = () => { dead = true; c0(); }; }
-  }).catch(() => { if (!dead && wait) toast("The painter's colors didn't load"); });
-  return { close: () => { dead = true; if (hive && hive.close) hive.close(); } };
+  }).catch(() => { if (!dead) say("The painter's colors didn't load"); });
+  return { close: () => { dead = true; if (wait) wait(); if (hive && hive.close) hive.close(); } };
 }
 
 // #/painter/<slug>/colors: the painter's page under, the color map over it (closing reveals the page, like any sheet)
@@ -250,7 +344,7 @@ function pcColorLine(hex, host, name) {
   if (!same) return;
   const el = document.createElement("div");
   el.className = "pc-use";
-  el.innerHTML = `<p><b>${esc(c.painter)}</b> holds this in <b>${pcNum(c.count)} of ${pcNum(c.N)}</b> ${pcWord(c.N)}, as one of their three main colors.</p>
+  el.innerHTML = `<p><b>${esc(c.painter)}</b> holds this in <b>${pcNum(c.count)} of ${pcNum(c.N)}</b> ${pcWord(c.N)}${c.vivid ? " we read, among their vivid colors" : ", as one of their three main colors"}.</p>
     <button type="button" class="pc-use-b" data-pmap="p=${esc(c.slug)}&c=${c.hex.replace("#", "")}&t=8&m=2">See ${esc(c.painter)}'s paintings with it ${ICON.arrow}</button>`;
   host.prepend(el);
 }
