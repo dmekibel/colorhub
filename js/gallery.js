@@ -1586,7 +1586,7 @@ function glPage(i, d, fromHex, tol) {
     ${!S.pmMapHintSeen ? `<p class="gl-pmap-hint" data-glpmhint><i aria-hidden="true"></i><span>New: browse paintings by how alike their colors are</span></p>` : ""}
     <button class="gl-pmap gl-pmap-top" data-pmap="arr=spiral&seed=${i}">${GL_ICON_MAP}<span>Similar paintings on the map</span>${ICON.chev}</button>
     <button class="gl-pmap gl-pmap-pal" data-pmap="${glPalSpec(i)}">${GL_ICON_MAP}<span>Find paintings with this palette</span>${ICON.chev}</button>
-    <button class="gl-pmap gl-pmap-jump" data-glfeedjump>${ICON.chev}<span>Keep exploring: paintings like this</span></button>
+    <button class="gl-pmap gl-pmap-jump" data-glfeedjump>${ICON.down}<span>Keep exploring: paintings like this</span></button>
     </div></div>
     <div class="gl-under">${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}</div>
     <p class="gl-subj" data-glsubj-line hidden></p>
