@@ -7913,3 +7913,58 @@ scenario("paintmap", "desktop: a map click opens the page then a click on its pi
   const pz1 = w.PM_CTRL._qaPZ();
   t.expect(Math.abs(pz1.Z - pz0.Z) < 1e-6 && Math.hypot(pz1.P[0] - pz0.P[0], pz1.P[1] - pz0.P[1]) < 1e-3, `Back did not restore the view (${JSON.stringify(pz0)} -> ${JSON.stringify(pz1)})`);
 });
+
+// ---- Phase A (David, 2026-10-24): "if I adjust the settings ... the painting that I'm on would stay in the middle" ----
+// A helper the scenarios below share: open the color map, center a dated painting by the QA hook, return its gallery index.
+async function pmFocusOpen(t, hash = "#/paintings/map?arr=color") {
+  await t.open(hash, { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  const k = t.ev(`(() => { const lay = PM_CTRL.lay(), G = GAL; let k = Math.floor(lay.n / 3); for (; k < lay.n; k++) { const i = lay.items[k]; if (G.year[i] !== GL_UNDATED && G.year[i] > 1700 && G.year[i] < 1900 && XBF.artist[i] && XBF.country[i]) return k; } return -1; })()`);
+  t.expect(k >= 0, "no dated painting with a painter and a country to stand on");
+  t.ev(`PM_CTRL._qaSetPZ(PM_CTRL.lay().x[${k}], PM_CTRL.lay().y[${k}], 1)`);
+  return t.ev(`PM_CTRL.lay().items[${k}]`);
+}
+scenario("paintmap", "focus: a year range change keeps the painting in the middle", async t => {
+  const i0 = await pmFocusOpen(t), y = t.ev(`GAL.year[${i0}]`);
+  t.expect(t.w.PM_CTRL.center === i0, "the standing painting isn't in the middle");
+  t.ev(`PM_CTRL.spec.f.y0 = ${y - 40}; PM_CTRL.spec.f.y1 = ${y + 40}; PM_CTRL.rebuild()`);
+  t.expect(t.w.PM_CTRL.count < 60000 && t.w.PM_CTRL.count > 0, `the range didn't narrow the map (${t.w.PM_CTRL.count})`);
+  t.expect(t.w.PM_CTRL.center === i0, `the year range moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  t.ev(`PM_CTRL.spec.f.y0 = ${y - 10}; PM_CTRL.spec.f.y1 = ${y + 10}; PM_CTRL.rebuild()`);
+  t.expect(t.w.PM_CTRL.center === i0, `a tighter range moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  t.ev("PM_CTRL.spec.f.y0 = null; PM_CTRL.spec.f.y1 = null; PM_CTRL.rebuild()");
+  t.expect(t.w.PM_CTRL.center === i0, `clearing the range moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+});
+scenario("paintmap", "focus: Arrange color -> time -> color and Place by keep the painting in the middle", async t => {
+  const i0 = await pmFocusOpen(t);
+  await t.click(".pmx-do", { wait: 400 });
+  await t.waitFor(".pmx-sheet [data-pmarr]", 4000, "the Arrange choices");
+  for (const arr of ["time", "color", "painter", "color"]) {
+    await t.click(`.pmx-sheet [data-pmarr="${arr}"]`, { force: true, wait: 700 });
+    t.expect(t.w.PM_CTRL.spec.arr === arr, `didn't switch to ${arr}`);
+    t.expect(t.w.PM_CTRL.center === i0, `Arrange ${arr} moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  }
+  for (const pl of ["main", "standout", "avg"]) {
+    await t.click(`.pmx-sheet [data-pmplace="${pl}"]`, { force: true, wait: 700 });
+    t.expect(t.w.PM_CTRL.center === i0, `Place by ${pl} moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  }
+});
+scenario("paintmap", "focus: a filter keeps the painting; narrowing it out lands on the closest-color painting with Bring it back", async t => {
+  const i0 = await pmFocusOpen(t), y = t.ev(`GAL.year[${i0}]`);
+  const painter = t.ev(`XBF.artist[${i0}]`);
+  t.ev(`PM_CTRL.spec.f.painterSet = [${painter}]; PM_CTRL.rebuild()`);
+  t.expect(t.w.PM_CTRL.center === i0, `a painter filter moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  t.expect(t.$("[data-pmnote]").hidden, "the 'outside' line showed although the painting is inside the filter");
+  t.ev("PM_CTRL.spec.f.painterSet = []; PM_CTRL.rebuild()");
+  t.expect(t.w.PM_CTRL.center === i0, "clearing the painter filter moved you off your painting");
+  const out = [["ren", 1400, 1600], ["baroque", 1600, 1750], ["1800s", 1800, 1899], ["modern", 1860, 1970]].find(p => y < p[1] || y > p[2]);
+  t.ev(`PM_CTRL.spec.f.y0 = ${out[1]}; PM_CTRL.spec.f.y1 = ${out[2]}; PM_CTRL.rebuild()`);
+  const c1 = t.w.PM_CTRL.center;
+  t.expect(c1 !== i0 && c1 >= 0, `the painting is outside the range, so the map should land on another one (${c1})`);
+  const dist = t.ev(`(() => { const m = XBF.G.mean, d = (a, b) => Math.hypot(m[a * 3] - m[b * 3], m[a * 3 + 1] - m[b * 3 + 1], m[a * 3 + 2] - m[b * 3 + 2]), lay = PM_CTRL.lay(); let best = 1e9; for (let k = 0; k < lay.n; k++) best = Math.min(best, d(${i0}, lay.items[k])); return [d(${i0}, ${c1}), best]; })()`);
+  t.expect(dist[0] <= dist[1] + 1e-3, `the landing painting isn't the closest in color (${dist[0]} vs ${dist[1]})`);
+  t.expect(!t.$("[data-pmnote]").hidden && /outside/.test(t.text("[data-pmnote]")) && /Bring it back/.test(t.text("[data-pmnote]")), `no 'Your painting is outside ... Bring it back' line: "${t.text("[data-pmnote]")}"`);
+  await t.click("[data-pmnotego]", { wait: 700 });
+  t.expect(t.w.PM_CTRL.center === i0, `Bring it back didn't land on your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  t.expect(t.$("[data-pmnote]").hidden, "the line stayed after Bring it back");
+});

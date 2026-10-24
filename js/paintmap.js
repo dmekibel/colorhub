@@ -470,6 +470,49 @@ function pmChipClear(f, dim) {
   else if (dim === "subj") f.subjSet = [];
 }
 
+// ---------- Phase A: the painting you are on stays put (David, 2026-10-24) ----------
+// A settings change never moves you away from the painting you are looking at. build() lands on it again through one
+// choke point (pmMount's focusLand); these are its pure parts.
+// The painting in the new list that looks most like gallery item i: the mean color (CIELAB, by area), ties by year.
+function pmNearestInColor(lay, i, F) {
+  const G = (F && F.G) || GAL, m = G.mean, q = i * 3, y0 = G.year[i] === GL_UNDATED ? null : G.year[i];
+  let best = -1, bd = Infinity;
+  for (let k = 0; k < lay.n; k++) {
+    const j = lay.items[k], a = m[j * 3] - m[q], b = m[j * 3 + 1] - m[q + 1], c = m[j * 3 + 2] - m[q + 2];
+    let d = a * a + b * b + c * c;
+    if (y0 != null && G.year[j] !== GL_UNDATED) d += Math.abs(G.year[j] - y0) * 1e-4;   // a tie-break only: color decides
+    if (d < bd) { bd = d; best = k; }
+  }
+  return best;
+}
+const pmCloneSpec = s => ({ ...s, f: JSON.parse(JSON.stringify(s.f)) });
+// Why gallery item i is not in the list, and the smallest change that brings it back (one step per filter facet).
+// -> { text: "1750–1850", fix(s) } or null when it is already there.
+function pmOutsideWhy(s, F, i) {
+  const G = (F && F.G) || GAL, has = sp => pmList(sp, F).includes(i);
+  if (has(s)) return null;
+  const y = G.year[i], chips = pmActiveChips(s, F);
+  if (s.upToYear != null) chips.push({ dim: "uy", text: "Up to " + s.upToYear });
+  const widen = {
+    when: sp => { const f = sp.f; if (y === GL_UNDATED) { f.y0 = null; f.y1 = null; } else { if (f.y0 != null) f.y0 = Math.min(f.y0, y); if (f.y1 != null) f.y1 = Math.max(f.y1, y); } },
+    uy: sp => { if (y === GL_UNDATED) sp.upToYear = null; else sp.upToYear = Math.max(sp.upToYear, y); },
+    co: sp => { const f = sp.f; f.coSet = [...new Set([...(f.coSet || []), F.country[i]].filter(Boolean))]; f.region = null; },
+    painter: sp => { const f = sp.f; f.painterSet = [...new Set([...(f.painterSet || []), F.artist[i]].filter(Boolean))]; },
+    mv: sp => { const f = sp.f; f.mvSet = [...new Set([...(f.mvSet || []), F.mv[i]].filter(Boolean))]; },
+    mus: sp => { const f = sp.f; f.musSet = [...new Set([...(f.musSet || []), G.mus[i]])]; }
+  };
+  const drop = (sp, dim) => { if (dim === "uy") sp.upToYear = null; else if (dim === "fav") sp.fav = 0; else pmChipClear(sp.f, dim); };
+  const copyInto = (t, sp) => { const nx = pmCloneSpec(sp); t.f = nx.f; t.fav = nx.fav; t.upToYear = nx.upToYear; };
+  for (const c of chips) {
+    const sp = pmCloneSpec(s);
+    if (widen[c.dim]) widen[c.dim](sp); else drop(sp, c.dim);
+    if (!has(sp)) { sp.f = pmCloneSpec(s).f; sp.upToYear = s.upToYear; sp.fav = s.fav; drop(sp, c.dim); }   // widening was not enough: remove that one filter
+    if (has(sp)) return { text: c.text, fix: t => copyInto(t, sp) };
+  }
+  const sp = pmCloneSpec(s); chips.forEach(c => { if (!has(sp)) drop(sp, c.dim); });
+  return { text: "your filters", fix: t => copyInto(t, sp) };
+}
+
 // ---------- the smarter map search (David, 2026-10-20) ----------
 // "Russia 1860-80s", "Dutch Baroque", "Monet 1890s": a query is split into pieces the map already has facets for
 // (country, movement, years, painter), each shown as a tappable suggestion row with a live count, and applied as
@@ -1270,6 +1313,7 @@ function pmOpen(spec, o = {}) {
     ${col === "paintings" && typeof hmLayerSwitchHTML === "function" ? hmLayerSwitchHTML("paintings") : ""}
     <button class="pmx-count" data-pmcount hidden></button>
     <div class="pmx-chipbar" data-pmchipbar hidden></div>
+    <div class="pmx-note" data-pmnote role="status" hidden></div>
     <div class="pmx-walk" data-pmwalk hidden></div>
     <div class="pmx-facets" data-pmfacets hidden></div>
     <div class="pmx-cap" data-pmcap hidden>
@@ -1551,13 +1595,13 @@ function pmMount(el, s, F) {
     const [lo, hi] = yrRange(), cur = s.upToYear == null ? lo : s.upToYear;
     const next = cur + Math.max(pmSolo(s) ? 2 : 5, Math.round((hi - lo) / 90));
     if (next >= hi) { s.upToYear = null; clearInterval(scrubTimer); scrubTimer = 0; } else s.upToYear = next;
-    rebuild(); scrubUpdateUI();
+    rebuild({ nofocus: true }); scrubUpdateUI();
   }
   function scrubPlay() {
     if (scrubTimer) { clearInterval(scrubTimer); scrubTimer = 0; scrubUpdateUI(); return; }
     const [lo, hi] = yrRange();
     if (s.upToYear == null || s.upToYear >= hi) s.upToYear = lo;
-    rebuild(); scrubTimer = setInterval(scrubStep, 420); scrubUpdateUI();
+    rebuild({ nofocus: true }); scrubTimer = setInterval(scrubStep, 420); scrubUpdateUI();
   }
   // filter-by-example (David, 2026-10-09, the minimalist pass): up to 3 fixed "only this" chips (Same painter/
   // decade/place), Open, Arrange around this, and Walk from here.
@@ -2219,7 +2263,7 @@ function pmMount(el, s, F) {
     const cf = chipbar.querySelector("[data-pmxfilter]"); if (cf) cf.onclick = () => { buzz(4); openSheet("filter"); };
     const ca = chipbar.querySelector("[data-pmxall]"); if (ca) ca.onclick = () => { buzz(6); if (scrubTimer) { clearInterval(scrubTimer); scrubTimer = 0; } s.f = scopedFresh(); s.fav = 0; s.upToYear = null; rebuild(); };
   }
-  function build(keepPan) {
+  function build(keepPan, fo) {
     const t0 = performance.now();
     if (!pmArrOk(s)) { s.arr = "color"; s.seed = -1; }   // e.g. the painter scope was cleared while By museum was showing
     lay = pmLayout(s, F); PM_NOW = { s, lay };
@@ -2245,8 +2289,20 @@ function pmMount(el, s, F) {
     // opens, the seed already equals whatever's centered -- PM_PAN and lay.start agree. Unseeded arrangements
     // (color/time/painter, no single anchor) still use PM_PAN as before, so a big dense browse resumes correctly.
     const pinned = PM_NEEDS_SEED.has(s.arr) && s.seed >= 0;
-    const mem = pinned ? null : PM_PAN.get(lay.key);
-    if (mem && !keepPan) { P = [mem.x, mem.y]; Z = mem.s; }
+    // Phase A (David, 2026-10-24: "if I adjust the settings, the painting that I'm on would stay in the middle"): every
+    // rebuild() hands build() the painting you were on (fo). If it is still in the new list it lands in the middle at your
+    // zoom; if the settings filtered it out, the closest painting in color does, and a quiet line offers it back. A seed
+    // (Rings, Spiral, Walk, Center on) is its own anchor and keeps its own rule.
+    let foc = null;
+    if (fo && lay.n && !pinned && !keepPan) {
+      let fk = -1; for (let q = 0; q < lay.n; q++) if (lay.items[q] === fo.i) { fk = q; break; }
+      const out = fk < 0;
+      if (out) fk = pmNearestInColor(lay, fo.i, F);
+      if (fk >= 0) foc = { k: fk, out, fo };
+    }
+    const mem = pinned || foc ? null : PM_PAN.get(lay.key);
+    if (foc) { P = [lay.x[foc.k], lay.y[foc.k]]; Z = fo.z > 0 ? fo.z : 1; const zf = zFit(); if (Z < zf) Z = zf; }   // keep your zoom, unless the new layout is smaller than the window at it
+    else if (mem && !keepPan) { P = [mem.x, mem.y]; Z = mem.s; }
     else if (!keepPan) { P = pmSolo(s) ? [lay.gx0 + (lay.GW - 1) / 2, lay.gy0 + (lay.GH - 1) / 2] : lay.start.slice(); Z = fitZoomFor(lay); const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; if (pmSolo(s) && !pinned) { const zm = zFit(); if (zm < 1) Z = zm; } }   // (the snap above moved P a little: re-fit from where it actually sits)
     if (keepPan) { const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
     Z = clamp(Z, zMin(), ZMAX);
@@ -2257,16 +2313,49 @@ function pmMount(el, s, F) {
     // arrangement's remembered pan (mem) now also remembers whether the card was open, so leaving a painting's
     // card open, opening a painting, then Back, lands back with that same card open (not silently closed just
     // because this arrangement has no single seed to open it reflexively like Rings/Spiral do).
-    if (!keepPan) cardOpen = mem ? !!mem.cardOpen : pinned;
+    if (!keepPan) cardOpen = foc ? (fo.open && !foc.out) : mem ? !!mem.cardOpen : pinned;
     centerK = -1; drawn = []; setCenter(lay.n ? nearestK(P[0], P[1]) : -1); chrome(); kick();
+    const why = foc && foc.out ? pmOutsideWhy(s, F, fo.i) : null;
+    paintNote(why ? { i: fo.i, ...why } : null);
+    if (foc) { pulseI = lay.items[foc.k]; pulseT0 = clock; }
+    if (foc) lastFocus = { i: lay.items[foc.k], z: Z, open: cardOpen };
     // a brief highlight on the painting an entry point promised, so it reads as "you're here", not just a jump cut
     if (pinned && !keepPan && centerK >= 0) { pulseI = lay.items[centerK]; pulseT0 = clock; }
     if (window.PM_DEBUG) console.log("paintmap layout", s.arr, lay.n, Math.round(performance.now() - t0) + "ms");
   }
-  function rebuild() {
+  // The painting you are on, captured BEFORE a settings change (Phase A). centerK is always the cell nearest the middle; a
+  // glide in flight counts at its destination. lastFocus survives an empty result so loosening comes back to the same painting.
+  let lastFocus = null;
+  function focusNow() {
+    if (lay && lay.n && centerK >= 0) {
+      let k = centerK;
+      if (glide) { const gk = nearestK(glide.b[0], glide.b[1]); if (gk >= 0) k = gk; }
+      lastFocus = { i: lay.items[k], z: glide && glide.z ? glide.z[1] : Z, open: cardOpen };
+    }
+    return lastFocus;
+  }
+  // o.focus: land on this painting instead (an entry point, Bring it back); o.nofocus: a cinematic step (the time Play) that is allowed to move
+  function rebuild(o) {
+    const fo = o && o.nofocus ? null : o && o.focus ? o.focus : focusNow();
     // the address follows (replace: a filter change is the same map, not a new page)
     try { ROUTE_NOW = "#/" + pmRouteOf(s, F).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {}
-    build(false);
+    build(false, fo);
+  }
+  // the quiet line when the painting you were on is outside the new settings: "Your painting is outside 1750–1850 · Bring it back"
+  const noteEl = el.querySelector("[data-pmnote]");
+  function paintNote(n) {
+    if (!noteEl) return;
+    if (!n) { noteEl.hidden = true; noteEl.innerHTML = ""; return; }
+    noteEl.hidden = false;
+    noteEl.innerHTML = `<span>Your painting is outside ${esc(n.text)}</span><button class="pmx-note-go" data-pmnotego>Bring it back</button><button class="pmx-note-x" data-pmnotex aria-label="Dismiss">${ICON.x}</button>`;
+    const ref = !chipbar.hidden ? chipbar : el.querySelector("[data-pmcount]");
+    const top = ref && !ref.hidden ? ref.getBoundingClientRect().bottom - el.getBoundingClientRect().top + 8 : 0;
+    noteEl.style.top = top ? top + "px" : "";
+    noteEl.querySelector("[data-pmnotex]").onclick = () => { buzz(3); paintNote(null); };
+    noteEl.querySelector("[data-pmnotego]").onclick = () => {
+      buzz(8); n.fix(s); s.fav = s.fav || 0; paintNote(null);
+      rebuild({ focus: { i: n.i, z: Z, open: true } });
+    };
   }
   // ---- the corner and the title both open one compact, non-modal Arrange|Filter sheet (David, 2026-10-09: the
   // same Arrange+Filter parity the color map's chooser() has -- shapes/sort/place-by/center-on, live-applied,
@@ -2653,7 +2742,7 @@ function pmMount(el, s, F) {
   cleanup.push(() => { dead = true; hideTip(); clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); t1.destroy(); clearTimeout(hideTimer); document.removeEventListener("visibilitychange", onVis); if (!released) pmAtlasRelease(F.col); if (lay) PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z, cardOpen }); });
   size(); build(false);
   if (s.f.subjSet && s.f.subjSet.length) { try { ROUTE_NOW = "#/" + pmRouteOf(s, F).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {} }   // opened from a painting's subject tap: the address names the filter
-  window.PM_CTRL = { get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length + rasterCount(); }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); },
+  window.PM_CTRL = { rebuild: o => rebuild(o), get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length + rasterCount(); }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); },
     // QA: the raw pan/zoom (David, 2026-10-10, "Back should restore the exact prior view") -- _qaSetPZ lets a
     // test establish an arbitrary pan deterministically (a real drag gesture would be slow and imprecise);
     // _qaPZ reads it back the same way, for the before/after comparison across a Back round trip

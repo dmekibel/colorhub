@@ -179,3 +179,14 @@
 .pmx-count:active{transform:translateX(-50%) scale(.96)}
 .pmx-cnum{font-weight:500}
 .pmx-hascount .pmx-chipbar:not(.pmx-chipbar-wrap){top:calc(var(--top) + 94px)}
+
+/* Phase A (David, 2026-10-24): the quiet line when the painting you were on is outside the new settings */
+.pmx-note{position:absolute;z-index:3;left:12px;right:12px;top:calc(var(--top) + 108px);display:flex;align-items:center;gap:10px;min-height:44px;padding:4px 6px 4px 16px;
+  border-radius:var(--r-pill);background:rgba(14,13,11,.94);color:rgba(236,232,223,.96);font:400 15px/1.25 var(--serif);box-shadow:0 6px 22px rgba(0,0,0,.35);pointer-events:auto}
+.pmx-note[hidden]{display:none}
+.pmx-note span{flex:1;min-width:0;overflow-wrap:anywhere}
+.pmx-note-go{flex:none;height:36px;padding:0 14px;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);font:500 15px/1 var(--sans);white-space:nowrap;transition:transform .2s var(--spring)}
+.pmx-note-go:active{transform:scale(.95)}
+.pmx-note-x{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:rgba(236,232,223,.12);color:rgba(236,232,223,.9)}
+.pmx-note-x svg{width:12px;height:12px}
+html.desk .pmx .pmx-note{left:28px;right:auto;max-width:520px}
