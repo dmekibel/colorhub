@@ -1039,6 +1039,7 @@ function hmHome() {
     hmDismissHint(); buzz(4);
     document.querySelectorAll(".rooms-stem,.rm-scrim").forEach(n => n.remove());   // one still sinking from a fast double tap
     STEM_OPEN = true; document.body.classList.add("stem-open");
+    const ic = svg => `<span class="rm-art hm-do-ic">${svg}</span>`;
     // the Colors & Arrange row's own thumbnail: 4 real dots sampled from what's on screen right now, the same
     // "colorful dots icon" the old pre-Simplify arc used (not a static glyph -- it reflects the current view).
     // Its own class, kept SEPARATE from .hm-do-ic's centering rule (css/home.css) -- they used to share it,
@@ -1056,9 +1057,9 @@ function hmHome() {
     // control (PLAN §9's own "Colors & Arrange is one tap further" ladder, and David's "it should be more
     // prominent").
     const rows = [
-      typeof prQuick === "function" && { id: "study", t: "Study the map", n: lit ? honeyLitLabel().title : "Names near the middle", art: placeGlyph("study", 26, "rm-art"), attr: "data-do-study" },
-      typeof ssOpen === "function" && { id: "slideshow", t: "Slideshow", n: "Let the colors play", art: placeGlyph("slideshow", 26, "rm-art"), attr: "data-do-slideshow" },
-      { id: "colors", t: "Colors & Arrange", n: `${hlAll ? "Every name" : hmViewLabel()} · ${hmArrLabel()}`, art: placeGlyph("colors", 26, "rm-art"), live: dots(sample), attr: "data-do-colors" },
+      typeof prQuick === "function" && { id: "study", t: "Study the map", n: lit ? honeyLitLabel().title : "Names near the middle", art: ic(icon("learn", 22)), attr: "data-do-study" },
+      typeof ssOpen === "function" && { id: "slideshow", t: "Slideshow", n: "Let the colors play", art: ic(icon("play", 22)), attr: "data-do-slideshow" },
+      { id: "colors", t: "Colors & Arrange", n: `${hlAll ? "Every name" : hmViewLabel()} · ${hmArrLabel()}`, art: dots(sample), attr: "data-do-colors" },
     ].filter(Boolean);
     const n = rows.length;
     const scrim = document.createElement("div"); scrim.className = "rm-scrim rm-scrim-r";
@@ -1071,7 +1072,7 @@ function hmHome() {
     stem.innerHTML = rows.map((r, k) => {
       const i = n - 1 - k;   // array written top-to-bottom as read; reversed into --i so the LAST row lands nearest the thumb
       return `<button class="rm-bubble${r.small ? " hm-do-sm" : ""}" role="menuitem" data-do="${r.id}" ${r.attr || ""} style="--i:${i}">
-        ${r.art}<span class="rm-label"><b>${esc(r.t)}</b>${r.n ? `<em>${esc(r.n)}</em>` : ""}</span>${r.live ? `<span class="rm-live" aria-hidden="true">${r.live}</span>` : ""}</button>`;
+        ${r.art}<span class="rm-label"><b>${esc(r.t)}</b>${r.n ? `<em>${esc(r.n)}</em>` : ""}</span></button>`;
     }).join("");
     document.body.append(scrim, stem);
     doBtn.classList.add("on"); doBtn.innerHTML = ICON.x; doBtn.setAttribute("aria-expanded", "true");

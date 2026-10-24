@@ -73,36 +73,3 @@
 @media (orientation:landscape){.orient-tip{left:calc(16px + var(--left));right:calc(16px + var(--right))}}
 @keyframes orientGlow{0%,100%{box-shadow:0 4px 14px rgba(0,0,0,.38)}50%{box-shadow:0 0 0 6px rgba(255,191,0,.35),0 4px 14px rgba(0,0,0,.38)}}
 .corner.orient-glow{animation:orientGlow 1.6s ease-in-out}
-
-/* ---------- the place icons (David, 2026-10-24: "better visual distinction for the logos of the buttons in Places") ----------
-   js/core.js placeGlyph(): each destination has its own silhouette and ONE accent hue, pigment-like and calm, all >= 4.5:1
-   on the dark ground. The glyph and a thin ring wear the accent; the room you're in fills solid. Words always sit beside it. */
-.pg{--pa:#B9B3A6;display:inline-grid;place-items:center;color:var(--pa);flex:none}
-.pg svg{display:block}
-.pg[data-pa="map"]{--pa:#6FBFAE}      /* verdigris  */
-.pg[data-pa="today"]{--pa:#E3B24F}    /* ochre      */
-.pg[data-pa="learn"]{--pa:#A3C97D}    /* leaf green */
-.pg[data-pa="train"]{--pa:#83A6EE}    /* cobalt     */
-.pg[data-pa="museum"]{--pa:#E58B6D}   /* terracotta */
-.pg[data-pa="studio"]{--pa:#C69BDD}   /* wisteria   */
-.pg[data-pa="settings"]{--pa:#BDB7AA} /* neutral    */
-/* the stem's round glyph: a quiet accent tint, a 1.5 px accent ring, the glyph at 26 px in a 48 px target */
-.rooms-stem .rm-bubble .pg.rm-art{width:48px;height:48px;border-radius:50%;background:var(--s3);
-  background:color-mix(in srgb,var(--pa) 15%,var(--s3));box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--pa) 58%,transparent)}
-/* where you are: solid accent, ground-colored glyph (never a paper ring) */
-.rooms-stem .rm-bubble.cur .pg.rm-art{background:var(--pa);color:#14130F;box-shadow:none}
-/* the place's live picture, small and trailing, so a dark painting can never be the only thing telling rows apart */
-.rooms-stem .rm-live{flex:none;width:34px;height:34px;border-radius:10px;overflow:hidden;position:relative;margin-left:2px;
-  box-shadow:inset 0 0 0 1px var(--line-2);background:var(--ground)}
-.rooms-stem .rm-live .rm-art,.rooms-stem .rm-bubble:active .rm-live .rm-art{position:absolute;left:0;top:0;width:48px;height:48px;border-radius:0;
-  transform:scale(.7083);transform-origin:0 0}
-.rooms-stem .rm-bubble{padding-right:14px}
-.rooms-stem.hm-do-stem .rm-bubble{padding-right:3px;padding-left:14px}
-.rooms-stem .rm-label em{max-width:calc(100vw - 205px)}
-/* the desktop bar: glyph + word, accent on the glyph only, 44 px targets */
-html.desk .dk-links a{height:44px;gap:8px;padding:0 14px 0 10px}
-html.desk .dk-links a .pg{opacity:.9}
-html.desk .dk-links a.on .pg{opacity:1}
-html.desk .dk-links a.on{box-shadow:inset 0 -2px 0 0 var(--ink)}
-/* ⋯ sheet rows that carry a place glyph */
-.mn-lead .pg{width:32px;height:32px}

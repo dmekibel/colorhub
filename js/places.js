@@ -76,13 +76,14 @@ function placesOpen() {
   stem.style.setProperty("--n", n);
   // a straight stack up the left edge, nearest-first (David, 2026-10-08: "straight up along the side"): Map
   // leads (you're usually a tap from it), then Learn/Train/Museum/Studio, Collections furthest (least-used).
-  // every row: its own glyph + accent in the corner-side circle (js/core.js placeGlyph), the words, and -- where the
-  // place has one -- its live picture as a small trailing thumb, so the live art never has to carry the row alone
-  stem.innerHTML = rows.map((r, i) => r.settings
-    ? `<button class="rm-bubble" role="menuitem" data-pl="settings" style="--i:${i}">
-        ${placeGlyph("settings", 26, "rm-art")}<span class="rm-label"><b>Settings</b></span></button>`
-    : `<button class="rm-bubble${r.cur ? " cur" : ""}" role="menuitem" data-pl="${r.id}" data-pa="${PLACE_ACCENT[r.id] || r.id}" style="--i:${i}">
-        ${placeGlyph(r.id, 26, "rm-art")}<span class="rm-label"><b>${esc(r.label)}</b><em>${esc(r.cur ? "You're here" : roomsNote(r.id))}</em></span><span class="rm-live" aria-hidden="true">${roomsBubbleArt(r.id)}</span></button>`
+  stem.innerHTML = rows.map((r, i) => r.coll
+    ? `<button class="rm-bubble" role="menuitem" data-pl="colls" style="--i:${i}">
+        ${placesCollArt()}<span class="rm-label"><b>Collections</b><em>Every painting, poem, gem and look</em></span></button>`
+    : r.settings
+    ? `<button class="rm-bubble hm-do-sm" role="menuitem" data-pl="settings" style="--i:${i}">
+        <span class="rm-art hm-do-ic">${HM_GEAR_SVG}</span><span class="rm-label"><b>Settings</b></span></button>`
+    : `<button class="rm-bubble${r.cur ? " cur" : ""}" role="menuitem" data-pl="${r.id}" style="--i:${i}">
+        ${roomsBubbleArt(r.id)}<span class="rm-label"><b>${esc(r.label)}</b><em>${esc(r.cur ? "You're here" : roomsNote(r.id))}</em></span></button>`
   ).join("");
   document.body.append(scrim, stem);
   document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.add("on"); b.innerHTML = ICON.x; b.setAttribute("aria-expanded", "true"); });
@@ -141,7 +142,7 @@ function moreOpen(ctx) {
   const html = `<div class="mr-sheet">
     <button type="button" class="mr-search" data-mr-search>${ICON.search}<span>Search</span></button>
     ${groups.map(moreGroupHTML).join("")}
-    <section class="mn-group"><button type="button" class="mn-row" data-mr-settings><span class="mn-lead">${placeGlyph("settings", 24)}</span><span class="mn-txt"><b>Settings</b></span><span class="mn-chev">${ICON.chev}</span></button></section>
+    <section class="mn-group"><button type="button" class="mn-row" data-mr-settings>${ICON.chev ? "" : ""}<span class="mn-txt"><b>Settings</b></span><span class="mn-chev">${ICON.chev}</span></button></section>
   </div>`;
   const { sh, close } = sheet(html);
   sh.classList.add("mr-sheet-wrap");

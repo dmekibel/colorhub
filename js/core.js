@@ -449,19 +449,12 @@ const ICON_PATHS = {
   pipette: '<path d="M14.5 5.5l4 4M16.6 3.4a2.1 2.1 0 0 1 3 0l1 1a2.1 2.1 0 0 1 0 3L18 10l-4-4zM13 8l-8 8v3h3l8-8"/>',
   bolt: '<path d="M13 3L5 13.5h6.5L10.5 21 19 10.5h-6.5z"/>',
   // places (the rooms and the map)
-  // the places each get their own silhouette (David, 2026-10-24: "the logos of the buttons in Places all look similar"):
-  // map = a honeycomb of three hexagons, learn = an open book, museum = a columned building (it used to be the same
-  // picture frame as "painting"), today = a sunrise, settings = a real cog, slideshow = a screen with play, studymap = a lens over a hexagon
-  map: '<g transform="translate(-.83 0)"><path d="M8.5 3l4.33 2.5v5L8.5 13l-4.33-2.5v-5zM17.17 3l4.33 2.5v5L17.17 13l-4.34-2.5v-5zM12.83 10.5l4.33 2.5v5l-4.33 2.5-4.33-2.5v-5z"/></g>',
-  learn: '<path d="M12 6.8C10 5.2 7 4.6 3.5 5v12.6c3.5-.4 6.5.2 8.5 1.8 2-1.6 5-2.2 8.5-1.8V5c-3.5-.4-6.5.2-8.5 1.8zM12 6.8v12.6"/>',
+  map: '<path d="M12 3.2l7.6 4.4v8.8L12 20.8l-7.6-4.4V7.6z"/><circle cx="12" cy="12" r="2.2"/>',
+  learn: '<rect x="7.5" y="3.5" width="12" height="15" rx="2.5"/><path d="M4.5 7.5V18a3 3 0 0 0 3 3h8"/>',
   train: '<path d="M2.8 12S6.2 5.8 12 5.8 21.2 12 21.2 12 17.8 18.2 12 18.2 2.8 12 2.8 12z"/><circle cx="12" cy="12" r="3"/>',
-  museum: '<path d="M3.5 9.5L12 4l8.5 5.5zM6 12.5v5M10 12.5v5M14 12.5v5M18 12.5v5M3.5 20.5h17"/>',
+  museum: '<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 15.5l4.5-4.5 4 4 3-3 5.5 5.5"/><circle cx="15.5" cy="8.8" r="1.4"/>',
   studio: '<path d="M12 3.5a8.5 8.5 0 1 0 0 17c1.3 0 1.9-.9 1.6-2-.4-1.4.4-2.6 1.9-2.6H17a3.5 3.5 0 0 0 3.5-3.5c0-4.9-3.8-8.9-8.5-8.9z"/><circle cx="7.8" cy="11.2" r="1.1" fill="currentColor" stroke="none"/><circle cx="10.5" cy="7.6" r="1.1" fill="currentColor" stroke="none"/><circle cx="14.8" cy="7.9" r="1.1" fill="currentColor" stroke="none"/>',
   you: '<circle cx="12" cy="8.5" r="3.7"/><path d="M5 20c.8-3.8 3.6-5.6 7-5.6s6.2 1.8 7 5.6"/>',
-  sunrise: '<path d="M6 16.5a6 6 0 0 1 12 0M2.8 16.5h3.2M18 16.5h3.2M12 4.2v2.6M5.4 8.4l1.9 1.9M18.6 8.4l-1.9 1.9M7.5 20.5h9"/>',
-  settings: '<circle cx="12" cy="12" r="3"/><path d="' + (() => { let d = ""; const n = 8; for (let i = 0; i < n; i++) { const a = i * 2 * Math.PI / n, h = Math.PI / n, f = (r, t) => (12 + r * Math.sin(a + t)).toFixed(2) + " " + (12 - r * Math.cos(a + t)).toFixed(2); d += (i ? "L" : "M") + f(6.9, -h * .8) + "L" + f(9.3, -h * .42) + "L" + f(9.3, h * .42) + "L" + f(6.9, h * .8); } return d + "Z"; })() + '"/>',
-  slideshow: '<rect x="3" y="4" width="18" height="12.5" rx="2.5"/><path d="M10.3 7.4v5.7l4.8-2.85zM9 20.5h6"/>',
-  studymap: '<circle cx="10.5" cy="10.5" r="6.8"/><path d="M15.6 15.6L20.5 20.5M10.5 7.7l2.4 1.4v2.8l-2.4 1.4-2.4-1.4V9.1z"/>',
   rooms: '<circle cx="6" cy="6" r="2"/><circle cx="6" cy="12" r="2"/><circle cx="6" cy="18" r="2"/><path d="M11 6h8M11 12h8M11 18h8"/>',
   colors: '<circle cx="12" cy="8.7" r="4.7"/><circle cx="8.7" cy="14.6" r="4.7"/><circle cx="15.3" cy="14.6" r="4.7"/>',
   arrange: '<path d="M4 7h9M17.5 7H20M4 17h2.5M11 17h9"/><circle cx="15.2" cy="7" r="2.3"/><circle cx="8.8" cy="17" r="2.3"/>',
@@ -480,14 +473,6 @@ const ICON_PATHS = {
   look: '<path d="M4 6h16M4 12h16M4 18h16"/><path d="M9 4v4M15 10v4M8 16v4"/>',
 };
 const icon = (name, size = 22) => sv(ICON_PATHS[name] || "", size);
-// ---------- the place icons (David, 2026-10-24) ----------
-// Every destination = its own silhouette (ICON_PATHS) + ONE accent hue (css/places.css [data-pa]), so a place reads by shape
-// AND color: map verdigris, today ochre, learn leaf, train cobalt, museum terracotta, studio wisteria, settings neutral.
-// The words always stay beside them (DESIGN-CANON A1). placeGlyph(id) is the one door: the Places stem, the right corner's
-// stem, the desktop nav and the ⋯ sheet all draw it. One stroke weight (the optical 1.75), round caps and joins.
-const PLACE_ICON = { home: "map", map: "map", feed: "sunrise", daily: "sunrise", learn: "learn", gym: "train", train: "train", explore: "museum", museum: "museum", studio: "studio", settings: "settings", study: "studymap", slideshow: "slideshow", colors: "arrange", search: "search" };
-const PLACE_ACCENT = { home: "map", feed: "today", daily: "today", gym: "train", explore: "museum", study: "map", slideshow: "map", colors: "map" };   // id -> accent key when it isn't its own id
-const placeGlyph = (id, size = 26, cls = "") => `<span class="pg${cls ? " " + cls : ""}" data-pa="${PLACE_ACCENT[id] || id}" aria-hidden="true">${icon(PLACE_ICON[id] || "map", size)}</span>`;
 const ICON = {
   x: icon("x"), xBig: icon("x", 30), check: icon("check", 30), checkS: icon("check", 13), xS: icon("x", 13),
   dots: icon("more"), more: icon("more"), arrow: icon("arrow", 20), up: icon("up", 18), down: icon("down", 18), chev: icon("chev", 18), back: icon("back"),

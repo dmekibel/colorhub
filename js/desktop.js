@@ -22,7 +22,7 @@ const deskSection = () => { const seg = (location.hash.replace(/^#\/?/, "").spli
 
 function deskNavHTML() {
   return `<a class="dk-brand" href="#/home" aria-label="Chromatlas, the map">${typeof LOGO === "string" ? LOGO : ""}<span>Chromatlas</span></a>
-  <nav class="dk-links" aria-label="Main">${DESK_LINKS.map(([id, label, href]) => `<a href="${href}" data-dk="${id}">${typeof placeGlyph === "function" ? placeGlyph(id === "home" ? "map" : id, 24) : ""}<span>${label}</span></a>`).join("")}</nav>
+  <nav class="dk-links" aria-label="Main">${DESK_LINKS.map(([id, label, href]) => `<a href="${href}" data-dk="${id}">${label}</a>`).join("")}</nav>
   <button class="dk-search" type="button" data-dk-search aria-label="Search">${typeof ICON === "object" ? ICON.search : ""}<span>Search colors, paintings, painters</span><kbd>/</kbd></button>`;
 }
 function deskMarkActive() {
