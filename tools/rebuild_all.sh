@@ -25,6 +25,8 @@ step "gallery (deletes metrics.bin and thumbs.txt; the steps below put them back
 [ "$SKIPGAL" = 1 ] || python3 tools/gallery.py --raw research/_raw | tail -1 | cut -c1-160
 step "By look layout (CLIP embeddings -> UMAP -> even grid; fills missing embeddings first; skips quietly without research/_raw/clipenv; a rebuild may move every painting)"
 { python3 tools/subjects_clip.py --embed-only && python3 tools/look_layout.py; } 2>&1 | tail -2 | cut -c1-160 || true
+step "By vibe neighbors (exact top-60 by CLIP cosine per painting -> data/gallery/vibe/*.bin; served from R2; skips quietly without the venv)"
+python3 tools/vibe_knn.py 2>&1 | tail -2 | cut -c1-160 || true
 for s in analyze metrics_build facets artwiki_build; do step "$s"; python3 tools/$s.py | tail -1 | cut -c1-160; done
 step "painter counts, movements, portraits and most-famous rails (all store gallery positions)"
 python3 tools/wikidata_artists.py | tail -1 | cut -c1-160
