@@ -110,6 +110,10 @@
    the same serif display face either way, just scaled to the space. */
 .cf-band .rp-focus-tag-name{font-size:clamp(20px,6vw,28px)}
 .rp-focus.cf-stack .cf-band .rp-focus-tag-name{font-size:clamp(28px,9vw,40px)}
+/* stacked bands: the label sits at the top of its own band; the first band clears the status bar / Dynamic Island
+   (David, 2026-10-24: "no space on top cuz iPhone curvature"), and no band carries the home-indicator inset */
+.rp-focus.cf-stack .cf-band .rp-focus-tag{top:14px;bottom:auto}
+.rp-focus.cf-stack .cf-band:first-child .rp-focus-tag{top:calc(env(safe-area-inset-top,0px) + 14px)}
 @media (prefers-reduced-motion:reduce){.rp-focus.cf-multi{transform:none}}
 
 /* ---------- the look-alike strip: no label, the diff line right under it ---------- */
