@@ -1508,9 +1508,12 @@ function glPage(i, d, fromHex, tol) {
   let harmMoreOpen = false;   // "show the best ~6, More for the rest" (David, 2026-10-10: no arbitrary cap at 10)
   const modeSet = (m, k) => {
     if (plvGens[m]) return plvPalFor(m, k);
-    if (m === "out") return { pal: glStandOut(pool.length ? pool : pal6, pool.length ? k : 6, prior, seedOf("out")), max: pool.length ? Math.min(pool.length, 20) : 6 };
-    if (m === "area") return { pal: pool.length ? glPoolByArea(pool, k, seedOf("area")) : pal6, max: pool.length ? Math.min(pool.length, 20) : 6 };
-    if (m === "diverse") return { pal: pool.length ? glPoolDiverse(pool, k, seedOf("diverse")) : pal6, max: pool.length ? Math.min(pool.length, 20) : 6 };
+    // no pool (43% of the archive has none: no cached image at build time) = the six colors in the index; the count
+    // still works down to 2, by the biggest areas, instead of the slider moving while the palette stood still
+    const six = k => k >= pal6.length ? pal6 : pal6.slice().sort((a, b) => b.share - a.share).slice(0, Math.max(2, k));
+    if (m === "out") return { pal: glStandOut(pool.length ? pool : pal6, pool.length ? k : Math.min(k, 6), prior, seedOf("out")), max: pool.length ? Math.min(pool.length, 20) : 6 };
+    if (m === "area") return { pal: pool.length ? glPoolByArea(pool, k, seedOf("area")) : six(k), max: pool.length ? Math.min(pool.length, 20) : 6 };
+    if (m === "diverse") return { pal: pool.length ? glPoolDiverse(pool, k, seedOf("diverse")) : six(k), max: pool.length ? Math.min(pool.length, 20) : 6 };
     if (m === "harmony") {
       harmCards = pool.length >= 3 ? glHarmonyFamily(pool, k, seedOf("harmony"), harmFilter) : [];
       return harmCards.length ? { pal: harmCards[0].pal, max: 20, harmony: true } : null;
@@ -2271,6 +2274,11 @@ function glPage(i, d, fromHex, tol) {
   function armSample(img) {
     sampleImg = img; canSample = testSample(img); heroSpan.classList.toggle("gl-tap", canSample); if (arrival) arrival.image(img, canSample);
     lit.ok = canSample; lit.img = img; lit.pix = null;
+    // a painting whose data ships no color pool gets one read live from the picture, when the museum lets a canvas
+    // read it: the same 2-20 count then works as on any other painting (David, 2026-10-24: "+/- isn't working")
+    if (canSample && !pool.length && typeof twRichPool === "function") {
+      try { const live = twRichPool(img); if (live && live.length > 6) { live.sort((a, b) => b.share - a.share).forEach(c => pool.push({ h: c.h, share: c.share })); } } catch (e) { /* tainted canvas: the six stay */ }
+    }
     syncEyd();
     drawPalette();
   }
