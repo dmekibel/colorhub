@@ -14,6 +14,17 @@
 // Every place, in order (PLAN §3.1): the floor plus the four rooms that rise from it. Each row shows its own
 // live art and note (js/core.js roomsBubbleArt/roomsNote, unchanged -- the same pictures the old stem used).
 const PLACES_LIST = [["home", NAV_MAP], ["feed", "Today"], ...ROOMS_LIST];   // Today: the feed (js/todayfeed.js)
+// Today's stripes read like Learn's (David, 2026-10-24). Same 48 px disc as the other rows, real colors, a different subject:
+// a small sunrise over a color horizon (default), or a mosaic of the feed's differently sized tiles ("mosaic", for comparison).
+// Studio keeps its own rainbow disc with a camera on it. Learn, Train, Map, Museum and Settings are untouched.
+function placesTodayArt(variant) {
+  if (variant === "mosaic") return `<span class="rm-art pl-today"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="5" width="21" height="24" rx="3" fill="#CFA41C"/><rect x="28" y="5" width="15" height="13" rx="3" fill="#A03623"/><rect x="28" y="20" width="15" height="23" rx="3" fill="#3B638C"/><rect x="5" y="31" width="21" height="12" rx="3" fill="#8A9A5B"/></svg></span>`;
+  return `<span class="rm-art pl-today"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="plsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#464196"/><stop offset=".55" stop-color="#A03623"/><stop offset="1" stop-color="#CFA41C"/></linearGradient></defs><rect width="48" height="30" fill="url(#plsky)"/><path d="M14 30a10 10 0 0 1 20 0z" fill="#EED9C4"/><rect y="30" width="48" height="6" fill="#3B638C"/><rect y="36" width="48" height="6" fill="#8A9A5B"/><rect y="42" width="48" height="6" fill="#2D4D70"/></svg></span>`;
+}
+function placesStudioArt() {
+  return roomsBubbleArt("studio").replace("</span>", `<b class="pl-cam">${icon("camera", 24)}</b></span>`);
+}
+const placesArt = id => id === "feed" ? placesTodayArt() : id === "studio" ? placesStudioArt() : roomsBubbleArt(id);
 const placesHere = () => { const r = document.querySelector(".room-sheet"); return r ? r.dataset.room : "home"; };
 // Collections' own row art: a small mosaic of 4 covers (David, 2026-10-10), not a swatch dot -- a plain,
 // recognizable "many small pictures" glyph, distinct from every room's single live picture. Real, not a
@@ -83,7 +94,7 @@ function placesOpen() {
     ? `<button class="rm-bubble hm-do-sm" role="menuitem" data-pl="settings" style="--i:${i}">
         <span class="rm-art hm-do-ic">${HM_GEAR_SVG}</span><span class="rm-label"><b>Settings</b></span></button>`
     : `<button class="rm-bubble${r.cur ? " cur" : ""}" role="menuitem" data-pl="${r.id}" style="--i:${i}">
-        ${roomsBubbleArt(r.id)}<span class="rm-label"><b>${esc(r.label)}</b><em>${esc(r.cur ? "You're here" : roomsNote(r.id))}</em></span></button>`
+        ${placesArt(r.id)}<span class="rm-label"><b>${esc(r.label)}</b><em>${esc(r.cur ? "You're here" : roomsNote(r.id))}</em></span></button>`
   ).join("");
   document.body.append(scrim, stem);
   document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.add("on"); b.innerHTML = ICON.x; b.setAttribute("aria-expanded", "true"); });

@@ -73,3 +73,9 @@
 @media (orientation:landscape){.orient-tip{left:calc(16px + var(--left));right:calc(16px + var(--right))}}
 @keyframes orientGlow{0%,100%{box-shadow:0 4px 14px rgba(0,0,0,.38)}50%{box-shadow:0 0 0 6px rgba(255,191,0,.35),0 4px 14px rgba(0,0,0,.38)}}
 .corner.orient-glow{animation:orientGlow 1.6s ease-in-out}
+
+/* Today / Studio place pictures (js/places.js placesArt): same 48 px disc as the other rows */
+.rooms-stem .rm-art.pl-today{background:var(--ground);display:block}
+.rooms-stem .rm-art.pl-today svg{display:block;width:100%;height:100%}
+.rooms-stem .rm-art .pl-cam{position:absolute;inset:0;display:grid;place-items:center;color:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.55)) drop-shadow(0 0 1px rgba(0,0,0,.5))}
+.rooms-stem .rm-art .pl-cam svg{display:block}
