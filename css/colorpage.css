@@ -108,12 +108,16 @@
 /* a side-by-side band is narrower than the full viewport a vw-based clamp assumes, so its name shrinks to fit a
    pair or trio instead of overflowing/wrapping badly -- stacked (full-width) bands keep the fuller size. Still
    the same serif display face either way, just scaled to the space. */
-.cf-band .rp-focus-tag-name{font-size:clamp(20px,6vw,28px)}
+.cf-band .rp-focus-tag-name{font-size:max(12px,min(clamp(20px,6vw,28px),calc(100vw / var(--n,3) * .2)));overflow-wrap:anywhere}
 .rp-focus.cf-stack .cf-band .rp-focus-tag-name{font-size:clamp(28px,9vw,40px)}
-/* stacked bands: the label sits at the top of its own band; the first band clears the status bar / Dynamic Island
-   (David, 2026-10-24: "no space on top cuz iPhone curvature"), and no band carries the home-indicator inset */
-.rp-focus.cf-stack .cf-band .rp-focus-tag{top:14px;bottom:auto}
-.rp-focus.cf-stack .cf-band:first-child .rp-focus-tag{top:calc(env(safe-area-inset-top,0px) + 14px)}
+/* stacked bands: name and hex share one line, centered in their own band, sized to the band so a short band
+   (landscape, 6+ colors) never spills over its neighbor; the first band centers in what's left under the status
+   bar / Dynamic Island (David, 2026-10-24: "no space on top cuz iPhone curvature"); no band carries the
+   home-indicator inset. --n is the band count, set in js/richpage.js colorFocus */
+.rp-focus.cf-stack .cf-band .rp-focus-tag{top:50%;bottom:auto;transform:translateY(-50%);display:flex;align-items:baseline;flex-wrap:wrap;column-gap:12px}
+.rp-focus.cf-stack .cf-band:first-child .rp-focus-tag{top:calc(50% + env(safe-area-inset-top,0px) / 2)}
+.rp-focus.cf-stack .cf-band .rp-focus-tag-name{font-size:min(clamp(28px,9vw,40px),calc(100vh / var(--n,6) * .45))}
+.rp-focus.cf-stack .cf-band .rp-focus-tag-hex{margin:0}
 @media (prefers-reduced-motion:reduce){.rp-focus.cf-multi{transform:none}}
 
 /* ---------- the look-alike strip: no label, the diff line right under it ---------- */

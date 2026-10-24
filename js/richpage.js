@@ -269,10 +269,12 @@ function colorFocus(colors, opts = {}) {
   // 4+ always stacks (full-width, so each band stays a real band, not a sliver); a pair or trio stays side by
   // side down to a real phone width (375-440px: David's own device and the smoke harness both live there) and
   // only falls back to stacked below that -- "pick what reads best" (David, 2026-10-09), not a fixed rule
-  const { cx, cy } = opts, multi = colors.length > 1, stacked = colors.length >= 4 || innerWidth < 340;
+  // landscape (wider than tall) keeps full-height columns, any count: a short stacked band can't hold a name
+  const { cx, cy } = opts, multi = colors.length > 1, isStacked = () => innerWidth < 340 || (colors.length >= 4 && innerHeight >= innerWidth), stacked = isStacked();
   const reduce = typeof reduceMotion !== "undefined" && reduceMotion;
   const ov = document.createElement("div");
   ov.className = "rp-focus" + (multi ? " cf-multi" + (stacked ? " cf-stack" : "") : "");
+  ov.style.setProperty("--n", colors.length);
   // David, 2026-10-09: "tapping the color to go full screen shouldn't let me scroll down in the full screen --
   // right now it does." lockScroll() (js/core.js) is the one iOS-safe body lock every sheet already uses (pins
   // the body at its own scroll offset instead of overflow:hidden, which would jump it to the top); touch-action
@@ -300,6 +302,9 @@ function colorFocus(colors, opts = {}) {
     ov.innerHTML = colors.map(({ name, hex }) =>
       `<div class="cf-band" style="--c:${hex}" data-ink="${ink(hex)}"><div class="rp-focus-tag"><p class="rp-focus-tag-name">${esc(name)}</p><p class="rp-focus-tag-hex">${esc(String(hex).toUpperCase())}</p></div></div>`).join("");
   }
+  // turning the phone while it's open flips columns <-> stacked
+  const onResize = () => ov.classList.toggle("cf-stack", multi && isStacked());
+  if (multi) addEventListener("resize", onResize);
   document.body.appendChild(ov);
   RP_FOCUS = ov;
   lockScroll();
@@ -311,6 +316,7 @@ function colorFocus(colors, opts = {}) {
     if (closed) return; closed = true;
     if (wakeLock) { try { wakeLock.release(); } catch (e) {} }
     document.removeEventListener("keydown", onKey2);
+    removeEventListener("resize", onResize);
     unlockScroll();
     ov.classList.remove("on"); ov.classList.add("closing"); buzz(4);
     RP_FOCUS = null;
