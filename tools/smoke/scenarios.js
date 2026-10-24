@@ -4412,7 +4412,7 @@ const feedTop = t => { const r = t.$(".fd-grid").getBoundingClientRect(); return
 scenario("paintings", "Keep exploring: a feed at the bottom of a painting page, four chips, closest palette first, 24 at a time, a bounded number of live pictures", async t => {
   await feedOpen(t, 12);
   t.expect(t.$(".gl-feed .sec-head") && /Keep exploring/.test(t.text(".gl-feed .sec-head")), "the Keep exploring heading is missing");
-  t.expect(t.$$(".fd-chip").map(b => t.text(b).replace(/ ·.*/, "")).join() === "Color,Painter,Era,Place", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}", not Color, Painter, Era, Place`);
+  t.expect(t.$$(".fd-chip").map(b => t.text(b).replace(/ ·.*/, "")).join() === "Color,Vibe,Painter,Era,Place", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}", not Color, Vibe, Painter, Era, Place`);
   t.expect(/^Color/.test(t.text(".fd-chip.on")) && !/·/.test(t.text(".fd-chip.on")), `Color is not on by default: "${t.text(".fd-chip.on")}"`);
   const caps = feedCaps(t), pct = caps.map(c => +((c.match(/(\d+)%/) || [])[1] || NaN));
   t.expect(caps.length >= 6 && caps.every(c => /^Close palette · \d+%$/.test(c)), `captions don't say why in plain words: ${caps.slice(0, 4)}`);
@@ -4577,6 +4577,64 @@ scenario("paintings", "desktop 1440x900: Keep exploring shows tiles at the botto
   t.expect(p.tiles >= 6 && p.w > 400, "no feed tiles on the desktop painting page: " + JSON.stringify(p));
   const c = await probe("#/color/teal", "[data-rpfeed]");
   t.expect(c.tiles >= 4 && c.w > 400, "no feed tiles on the desktop color page: " + JSON.stringify(c));
+});
+// A scripted two-finger pinch on a grid inside the page: fires real touch events and samples the grid's transform each frame
+// (the harness clock is virtual, so the fingers are moved from here, one step at a time, never by a timer inside the page)
+const PINCH_JS = `window.__pf = (sel, type, d) => { const g = document.querySelector(sel), cx = innerWidth / 2, cy = Math.min(innerHeight / 2, 380), tgt = document.elementFromPoint(cx, cy) || g;
+  const ts = type === "touchend" ? [] : [0, 1].map(i => ({ identifier: i, target: tgt, clientX: cx + (i ? 1 : -1) * d / 2, clientY: cy }));
+  const e = new Event(type, { bubbles: true, cancelable: true }); e.touches = ts; e.targetTouches = ts; e.changedTouches = ts; tgt.dispatchEvent(e); return g.style.transform; }; 1`;
+async function pinchRun(t, sel, d0, d1, steps) {
+  t.ev(PINCH_JS); t.ev(`__pf(${JSON.stringify(sel)}, "touchstart", ${d0})`);
+  for (let k = 1; k <= steps; k++) { t.ev(`__pf(${JSON.stringify(sel)}, "touchmove", ${d0 + (d1 - d0) * k / steps})`); await t.tick(); await t.sleep(120); await t.tick(); }
+  t.ev(`__pf(${JSON.stringify(sel)}, "touchend", 0)`);
+}
+scenario("paintings", "Keep exploring: a Vibe chip re-ranks by the picture model and says plainly when there is none", async t => {
+  await feedOpen(t, 12, "color");
+  const chips = t.$$(".fd-chip").map(e => t.text(e));
+  t.expect(chips.join("|") === "Color|Vibe|Painter|Era|Place", "chips are not Color, Vibe, Painter, Era, Place: " + chips.join("|"));
+  t.ev(`try { localStorage.removeItem("colorhub-vibe-explained"); } catch (e) {} 1`);
+  await t.click(".fd-chip[data-fc='vibe']", { wait: 300 });
+  await t.waitFor(() => t.text(".fd-chip.on") === "Vibe" && !t.$(".fd-tile.sk") && t.$(".fd-tile[data-fk]") ? true : null, 10000, "the Vibe feed");
+  t.expect(/picture model finds them/.test(t.text(".fd-lead")), "no one-line Vibe explainer: " + t.text(".fd-lead"));
+  const want = await t.ev("vibeNeighbors(12, 1).then(r => r[0].i)");
+  const first = t.ev("(() => { const el = document.querySelector('.fd-tile[data-fk=\"0\"]'); return el ? el.getAttribute('aria-label') : ''; })()");
+  t.expect(want >= 0 && first, "no first vibe tile");
+  const title = await t.waitFor(() => t.ev(`(() => { const d = glDetailNow(${want}); return d ? d.t : null; })()`), 6000, "the first neighbor's details");
+  t.expect(first.indexOf(title) === 0, `the first Vibe tile is not the model's nearest (${first} vs ${title})`);
+  t.expect(/vibe/i.test(first), "the first tile has no vibe caption: " + first);
+  // the reader finds nothing: the chip goes dim with a plain reason
+  await t.open("#/gallery/40", { settle: 300 });
+  await t.waitFor("[data-glfeed]", 15000, "feed host");
+  t.ev("window.vibeNeighbors = () => Promise.resolve([]); 1");
+  t.ev(`Object.assign(FD_ST, { chip: "color" }); 1`); await feedScroll(t);
+  await t.waitFor(() => t.$(".fd-chip[data-fc='vibe'].dis") ? true : null, 8000, "the Vibe chip dimmed when the reader returns nothing");
+  t.ev(`document.querySelector(".fd-chip[data-fc='vibe']").click(); 1`); await t.sleep(300);
+  t.expect(/picture model/.test(t.text(".fd-lead")) && t.$(".fd-lead.why"), "a dim Vibe chip gives no reason");
+});
+scenario("paintings", "Keep exploring: a pinch zooms the feed live and settles on a column count and remembers it", async t => {
+  await feedOpen(t, 12, "color");
+  t.ev(`try { localStorage.removeItem("colorhub-feed-view"); } catch (e) {} 1`);
+  const c0 = +t.text("[data-fdsize]").split(" ")[0];
+  t.ev("GZ_DBG.scales.length = 0; 1");
+  await pinchRun(t, ".fd-grid", 200, 90, 10);
+  const sc = t.ev("GZ_DBG.scales");
+  t.expect(sc.length >= 2 && new Set(sc).size >= 2 && sc[0] < 1, "the pinch showed no intermediate scales: " + JSON.stringify(sc));
+  await t.sleep(700);
+  const c1 = +t.text("[data-fdsize]").split(" ")[0];
+  t.expect(c1 > c0 && c1 <= 6, `pinching in did not add columns (${c0} -> ${c1})`);
+  t.expect(JSON.parse(t.ev(`localStorage.getItem("colorhub-feed-view")`) || "{}").cols === c1, "the density was not remembered");
+  t.expect(t.ev("document.querySelector('.fd-grid').style.transform") === "", "the grid is left scaled after settling");
+  t.ev(`window.dispatchEvent(new KeyboardEvent("keydown", { key: "+" })); 1`); await t.sleep(500);
+  t.expect(+t.text("[data-fdsize]").split(" ")[0] === c1 - 1, "the + key did not give one column fewer");
+  const n = t.$$(".fd-tile img").length; t.expect(n <= 120, "too many live pictures: " + n);
+});
+scenario("paintings", "the Explore pill is on the first screen of a painting page at 440x956 and 320x640", async t => {
+  for (const size of [[440, 956], [320, 640]]) {
+    await t.open("#/gallery/12", { settle: 800, size });
+    await t.waitFor("[data-glfeedjump]", 15000, "the Explore pill");
+    const pill = t.ev("(() => { const b = [...document.querySelectorAll('[data-glfeedjump]')].find(x => x.offsetWidth); if (!b) return null; const q = b.getBoundingClientRect(); return { t: q.top, b: q.bottom, l: q.left, r: q.right, w: innerWidth, h: innerHeight, svg: !!b.querySelector('svg') }; })()");
+    t.expect(pill && pill.t >= 0 && pill.b <= pill.h && pill.l >= 0 && pill.r <= pill.w && pill.svg, "the Explore pill is not fully on the first screen at " + size + ": " + JSON.stringify(pill));
+  }
 });
 // ---------- Keep exploring on a COLOR page (js/feed.js fdMount with sub = a color, mounted by js/richpage.js) ----------
 async function cfeedOpen(t, hash, chip) {

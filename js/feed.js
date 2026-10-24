@@ -29,11 +29,12 @@ const fdLiveMax = cols => cols <= 3 ? FD_LIVE_MAX : Math.min(FD_LIVE_CAP, FD_LIV
 const fdMaxCols = () => typeof glDesk === "function" && glDesk() ? 10 : 6;
 const fdGapsFor = (cols, W) => cols <= 2 ? [12, 18] : cols <= 4 ? (W >= 860 && cols <= 5 ? [16, 22] : [10, 16]) : cols <= 6 ? [6, 10] : [4, 8];
 const fdPctOnly = cap => { const m = /(\d+)%/.exec(cap || ""); return m ? m[1] + "%" : ""; };
-const FD_CHIPS = [["color", "Color"], ["painter", "Painter"], ["era", "Era"], ["place", "Place"]];
+const FD_CHIPS = [["color", "Color"], ["vibe", "Vibe"], ["painter", "Painter"], ["era", "Era"], ["place", "Place"]];
 const FD_SHORT = { overall: "Overall", dominant: "Dominant", accents: "Accents", mood: "Mood", light: "Light", color: "One color", layout: "Layout" };
 const FD_METRIC_HELP = { overall: "The whole palette, matched by area", dominant: "Only the three biggest colors", accents: "The small vivid colors", mood: "Key, color, contrast and warmth together",
   light: "Where the darks and lights sit", color: "The most canvas near one of its colors", layout: "Where the colors sit in the picture" };
 const FD_LEAD = { color: m => ({ overall: "Closest palette first", dominant: "Closest big colors first", accents: "Closest accents first", mood: "Closest mood first", light: "Closest light first", color: "Most of that color first", layout: "Closest layout first" })[m],
+  vibe: () => fdVibeSeen() ? "Closest vibe first" : "Vibe: how alike the picture model finds them (subject, style, mood, color)",
   painter: () => "Same painter first, then painters kindred in place and era", era: () => "Nearest in year first", place: () => "Same country first, then the region, nearest in time" };
 let FD_ST = (() => { try { const s = JSON.parse(sessionStorage.getItem("colorhub-feed") || "null"); if (s && s.chip) return { chip: s.chip, metric: s.metric || "overall", color: s.color | 0 }; } catch (e) {} return { chip: "color", metric: "overall", color: 0 }; })();
 const fdSaveState = () => { try { sessionStorage.setItem("colorhub-feed", JSON.stringify(FD_ST)); sessionStorage.setItem("colorhub-feed-color", JSON.stringify(FDC_ST)); } catch (e) {} };   // the painting feed's chip and the color feed's chip are remembered separately
@@ -142,10 +143,24 @@ async function fdRankPainter(ctx) {
   }
   return { items: own.concat(kin).slice(0, 400) };
 }
-const FD_RANK = { color: fdRankColor, painter: fdRankPainter, era: fdRankEra, place: fdRankPlace };
+// Vibe (js/vibe.js: the picture model's fingerprints, behind the map's By vibe): the painting's 60 nearest, closest first. The model gives a
+// similarity, never a percentage worth showing, so a tile says only how close the band is. Nothing here is ranked by us.
+const FD_VIBE_KEY = "colorhub-vibe-explained";
+const fdVibeSeen = () => { try { return localStorage.getItem(FD_VIBE_KEY) === "1"; } catch (e) { return true; } };
+const fdVibeMark = () => { try { localStorage.setItem(FD_VIBE_KEY, "1"); } catch (e) {} };
+const fdVibeCap = sim => sim >= .72 ? "Very similar vibe" : sim >= .6 ? "Similar vibe" : "Related vibe";
+const FD_VIBE_NONE = "The picture model hasn't looked at this painting yet, so Vibe has nothing to compare.";
+async function fdRankVibe(ctx) {
+  const nb = typeof vibeNeighbors === "function" ? await vibeNeighbors(ctx.i, 60) : [];
+  const items = nb.filter(n => n.i !== ctx.i && n.i >= 0 && n.i < GAL.n && n.sim > 0).map(n => ({ j: n.i, cap: fdVibeCap(n.sim), sim: n.sim }));
+  if (!items.length) { ctx.vibeOff = true; return { empty: FD_VIBE_NONE }; }
+  return { items, end: "That is everything the model finds close to this one", map: `arr=look&on=${ctx.i}` };
+}
+const FD_RANK = { color: fdRankColor, vibe: fdRankVibe, painter: fdRankPainter, era: fdRankEra, place: fdRankPlace };
 // can this chip work for this painting? [reason when it can't]. Year is in the index; country and painter are known from the detail row
 // at once (d.co, d.a) and checked against the facets when those load.
 const FD_OFF = {
+  vibe: ctx => ctx.vibeOff ? FD_VIBE_NONE : "",
   era: ctx => GAL.year[ctx.i] === GL_UNDATED ? "No year is known for this painting, so Era has nothing to measure from." : "",
   place: ctx => ctx.F && !ctx.F.country[ctx.i] || (!ctx.F && !ctx.d.co) ? "No country is known for this painting, so Place has nothing to measure from." : "",
   painter: ctx => ctx.F && !ctx.F.artist[ctx.i] || (!ctx.F && !ctx.d.a) ? "No painter is known for this painting." : "",
@@ -186,7 +201,7 @@ function fdMount(host, o) {
   const st = { ...(memo && memo.chip ? { chip: memo.chip, metric: memo.metric, color: memo.color | 0 } : STORE) };   // re-read from FD_ST when the feed is built (start)   // this page's chip; a Back brings back the chip the feed was left on
   const save = () => { Object.assign(STORE, st); fdSaveState(); };
   const ctx = { i, d, o, sub, kind: isColor ? "color" : "painting", key: SKEY, F: typeof XBF !== "undefined" && XBF && XBF.G === GAL ? XBF : null, _q: null, q() { return this._q || (this._q = twQuery(o.cols, { self: i })); } };
-  let curEnd = "", curLead = "", eff = st.chip, items = [], shown = 0, tok = 0, built = false, gone = false, fk = 0;
+  let curEnd = "", curMap = "", curLead = "", eff = st.chip, items = [], shown = 0, tok = 0, built = false, gone = false, fk = 0;
   let W = 0, cols = 2, colW = 0, gap = 12, vgap = 18, txt = 52, top = null, col = null, hh = null, ends = [], pinSkew = null, dense = false, capPct = false, zoom = null;
   const VKEY = isColor ? "colorhub-feed-view-color" : "colorhub-feed-view";
   const viewLoad = () => { try { const v = JSON.parse(localStorage.getItem(VKEY) || "null") || {}; return { cols: v.cols | 0, dcols: v.dcols | 0 }; } catch (e) { return { cols: 0, dcols: 0 }; } };
@@ -256,7 +271,7 @@ function fdMount(host, o) {
     W = grid.clientWidth || Math.min(innerWidth, 540) - 40;
     cols = colsFor(W); [gap, vgap] = fdGapsFor(cols, W);
     colW = (W - gap * (cols - 1)) / cols;
-    dense = cols >= 5 || colW < FD_DENSE_W;
+    dense = (cols >= 5 && colW < 150) || colW < FD_DENSE_W;   // 5+ across on a phone; a wide window's 5 across still has room for words
     txt = dense ? (capPct ? 28 : 0) : colW < 146 ? 72 : 50; grid.classList.toggle("narrow", !dense && colW < 146);   // a 320 px screen: the caption may take two lines, so the number is never cut off
     grid.classList.toggle("dense", dense); grid.classList.toggle("nocap", dense && !capPct); sizeDraw();
     top = new Float32Array(items.length); col = new Uint8Array(items.length); hh = new Float32Array(items.length);
@@ -355,7 +370,7 @@ function fdMount(host, o) {
   function relayoutAll() { const keep = shown; live.forEach(el => el.remove()); live.clear(); relayout(); shown = keep; draw(); }
   function stateDraw() {
     if (!items.length || items[0].sk) { state.innerHTML = ""; return; }
-    state.innerHTML = shown >= items.length ? (isColor ? `<p class="fd-end">${esc(curEnd || "That is everything close to this color.")}</p><button class="fd-up" data-fdup>Back to the top of this color</button>` : `<p class="fd-end">That is everything close to this one.</p><button class="fd-up" data-fdup>Back to this painting</button>`) : "";
+    state.innerHTML = shown >= items.length ? (isColor ? `<p class="fd-end">${esc(curEnd || "That is everything close to this color.")}</p><button class="fd-up" data-fdup>Back to the top of this color</button>` : `<p class="fd-end">${esc(curEnd || "That is everything close to this one.")}</p>${curMap ? `<button class="fd-up" data-pmap="${esc(curMap)}">See them on the map</button> ` : ""}<button class="fd-up" data-fdup>Back to this painting</button>`) : "";
   }
   state.onclick = e => {
     if (e.target.closest("[data-fdup]")) { buzz(4); scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }); return; }
@@ -375,12 +390,13 @@ function fdMount(host, o) {
       state.innerHTML = `<p class="fd-empty">${esc(res.empty)}</p>${res.alt ? `<button class="fd-up" data-fdalt>Match by overall palette</button>` : ""}`;
       leadDraw(""); return;
     }
-    curLead = res.lead || ""; curEnd = res.end || ""; items = res.items; if (!items.length) { apply({ empty: "Nothing else in the archive is close to this one in that way." }); return; }
+    curLead = res.lead || ""; curEnd = res.end || ""; curMap = res.map || ""; items = res.items; if (!items.length) { apply({ empty: "Nothing else in the archive is close to this one in that way." }); return; }
     live.forEach(el => el.remove()); live.clear();
     capPct = items.some(x => !x.head && !x.sk && fdPctOnly(x.cap));
     const want0 = memo ? memo.shown : FD_PAGE;
     shown = Math.min(items.length, Math.max(FD_PAGE, want0)); fk = Math.max(0, items.findIndex(x => !x.head));
     relayout(); stateDraw(); leadDraw(""); draw();
+    if (eff === "vibe" && !isColor) fdVibeMark();   // the one-line explainer is shown once, the first time Vibe is on screen
     FD_LAST = { chip: eff, metric: st.metric, ms: Math.round(ms), n: items.length };
   }
   function rerank(scrollUp) {
@@ -390,6 +406,7 @@ function fdMount(host, o) {
     const done = res => {
       if (mine !== tok || gone) return;
       if (res.items) { FD_CACHE.set(k, res); if (FD_CACHE.size > 24) FD_CACHE.delete(FD_CACHE.keys().next().value); }
+      if (!isColor && res.empty && eff === "vibe" && ctx.vibeOff) { chipsDraw(); return rerank(false); }   // no vibe for this painting: the chip goes dim with the reason, and Color shows instead
       if (isColor && res.empty && eff !== FALL && !res.alt) { fdcOff(SKEY, eff, res.empty); chipsDraw(); return rerank(false); }   // this chip has nothing for this color: it is disabled from now on, with the reason, and Paintings shows instead
       apply(res, performance.now() - t0);
       if (was) scrollTo(0, Math.max(0, gridTop() - bar.getBoundingClientRect().height - (artTop() ? artTop().getBoundingClientRect().height : 0) - 8));
@@ -405,9 +422,10 @@ function fdMount(host, o) {
     if (memo) run(); else setTimeout(run, 24);   // let the skeleton paint first (a Back builds it at once)
   }
   // once the feed is up: the facets, loaded quietly, decide whether Painter and Place apply to this painting
-  let facetsAsked = false;
+  let facetsAsked = false, vibeAsked = false;
   function afterBuild() {
     if (isColor) { if (!facetsAsked) { facetsAsked = true; setTimeout(() => fdcProbe(ctx).then(() => { if (!gone) { const was = eff; chipsDraw(); if (was !== eff) rerank(false); } }), 600); } return; }
+    if (!vibeAsked && typeof vibeNeighbors === "function") { vibeAsked = true; setTimeout(() => vibeNeighbors(i, 1).then(r => { if (gone || r.length) return; ctx.vibeOff = true; const was = eff; chipsDraw(); if (was !== eff) rerank(false); }), 500); }
     if (facetsAsked || ctx.F) return; facetsAsked = true;
     setTimeout(() => xbLoad().then(F => { if (gone || F.G !== GAL) return; ctx.F = F; const was = eff; chipsDraw(); if (was !== eff) rerank(false); }).catch(() => {}), 700);
   }
