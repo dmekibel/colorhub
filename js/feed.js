@@ -19,6 +19,16 @@
 //    FD_OFF if it can be unavailable for a painting. Nothing else in this file knows which chips exist.
 
 const FD_PAGE = 24, FD_LIVE_MAX = 40, FD_KEEP = 300;
+// Density (David, 2026-10-24: "the explore page should be able to zoom out similar to the other painting scroll"): 1 to 6 tiles across on a
+// phone, up to 10 on a desktop window; pinch / ctrl+wheel / + - (js/gridzoom.js, shared with the painter page) change it, and the choice is
+// remembered per feed (colorhub-feed-view, colorhub-feed-view-color) and per device kind (cols for a phone, dcols for a wide window).
+// 5+ across, or any tile narrower than FD_DENSE_W px, shows the match percent only (a tile too narrow for words); a long-press shows all of it.
+// The live-picture budget grows with the density (smaller tiles, more of them on screen), and the page size with it so the scroll fills the screen.
+const FD_DENSE_W = 100, FD_LIVE_CAP = 120;
+const fdLiveMax = cols => cols <= 3 ? FD_LIVE_MAX : Math.min(FD_LIVE_CAP, FD_LIVE_MAX + 20 * (cols - 3));
+const fdMaxCols = () => typeof glDesk === "function" && glDesk() ? 10 : 6;
+const fdGapsFor = (cols, W) => cols <= 2 ? [12, 18] : cols <= 4 ? (W >= 860 && cols <= 5 ? [16, 22] : [10, 16]) : cols <= 6 ? [6, 10] : [4, 8];
+const fdPctOnly = cap => { const m = /(\d+)%/.exec(cap || ""); return m ? m[1] + "%" : ""; };
 const FD_CHIPS = [["color", "Color"], ["painter", "Painter"], ["era", "Era"], ["place", "Place"]];
 const FD_SHORT = { overall: "Overall", dominant: "Dominant", accents: "Accents", mood: "Mood", light: "Light", color: "One color", layout: "Layout" };
 const FD_METRIC_HELP = { overall: "The whole palette, matched by area", dominant: "Only the three biggest colors", accents: "The small vivid colors", mood: "Key, color, contrast and warmth together",
@@ -177,11 +187,16 @@ function fdMount(host, o) {
   const save = () => { Object.assign(STORE, st); fdSaveState(); };
   const ctx = { i, d, o, sub, kind: isColor ? "color" : "painting", key: SKEY, F: typeof XBF !== "undefined" && XBF && XBF.G === GAL ? XBF : null, _q: null, q() { return this._q || (this._q = twQuery(o.cols, { self: i })); } };
   let curEnd = "", curLead = "", eff = st.chip, items = [], shown = 0, tok = 0, built = false, gone = false, fk = 0;
-  let W = 0, cols = 2, colW = 0, gap = 12, vgap = 18, txt = 52, top = null, col = null, hh = null, ends = [], pinSkew = null;
+  let W = 0, cols = 2, colW = 0, gap = 12, vgap = 18, txt = 52, top = null, col = null, hh = null, ends = [], pinSkew = null, dense = false, capPct = false, zoom = null;
+  const VKEY = isColor ? "colorhub-feed-view-color" : "colorhub-feed-view";
+  const viewLoad = () => { try { const v = JSON.parse(localStorage.getItem(VKEY) || "null") || {}; return { cols: v.cols | 0, dcols: v.dcols | 0 }; } catch (e) { return { cols: 0, dcols: 0 }; } };
+  const view = viewLoad();
+  const viewSave = () => { try { localStorage.setItem(VKEY, JSON.stringify(view)); } catch (e) {} };
+  const wide = () => typeof glDesk === "function" && glDesk();
   const live = new Map(), wantShard = new Map();
   const off = k => isColor ? (FDC_OFF.get(SKEY) || {})[k] || "" : (FD_OFF[k] ? FD_OFF[k](ctx) : "");
   const abOf = it => it.sk || it.card || it.head ? it.ab : Math.min(2.3, Math.max(.4, G.ar[it.j]));
-  host.innerHTML = `<div class="sec-head"><b>Keep exploring</b><span>closest first</span></div>
+  host.innerHTML = `<div class="sec-head"><b>Keep exploring</b><span>closest first</span><button type="button" class="fd-size" data-fdsize></button></div>
     <div class="fd-bar"><div class="fd-chips" role="tablist" aria-label="What counts as related"></div></div>
     <p class="fd-lead" aria-live="polite"></p>
     <div class="fd-grid" role="group" aria-label="${isColor ? "Paintings and more that hold this color" : "Related paintings, closest first"}"></div>
@@ -235,12 +250,15 @@ function fdMount(host, o) {
   }
 
   // ----- layout (a masonry whose boxes are known from the index before anything loads) -----
-  const colsFor = w => w < 560 ? 2 : w < 860 ? 3 : Math.max(3, Math.min(5, Math.floor((w + 14) / 254)));
+  const colsFor = w => { const want = wide() ? view.dcols : view.cols; return want >= 1 ? Math.min(fdMaxCols(), want) : w < 560 ? 2 : w < 860 ? 3 : Math.max(3, Math.min(5, Math.floor((w + 14) / 254))); };
+  const sizeDraw = () => { const b = host.querySelector("[data-fdsize]"); if (!b) return; b.textContent = `${cols} across`; b.setAttribute("aria-label", `Size: ${cols} across. Tap for another size, or pinch.`); };
   const relayout = () => {
     W = grid.clientWidth || Math.min(innerWidth, 540) - 40;
-    cols = colsFor(W); [gap, vgap] = cols === 2 ? [12, 18] : [16, 22];
+    cols = colsFor(W); [gap, vgap] = fdGapsFor(cols, W);
     colW = (W - gap * (cols - 1)) / cols;
-    txt = colW < 146 ? 72 : 50; grid.classList.toggle("narrow", colW < 146);   // a 320 px screen: the caption may take two lines, so the number is never cut off
+    dense = cols >= 5 || colW < FD_DENSE_W;
+    txt = dense ? (capPct ? 28 : 0) : colW < 146 ? 72 : 50; grid.classList.toggle("narrow", !dense && colW < 146);   // a 320 px screen: the caption may take two lines, so the number is never cut off
+    grid.classList.toggle("dense", dense); grid.classList.toggle("nocap", dense && !capPct); sizeDraw();
     top = new Float32Array(items.length); col = new Uint8Array(items.length); hh = new Float32Array(items.length);
     ends = new Array(cols).fill(0);
     place(0);
@@ -258,12 +276,13 @@ function fdMount(host, o) {
 
   // ----- tiles -----
   const domOf = j => { let b = 0; for (let y = 1; y < 6; y++) if (G.sh[j * 6 + y] > G.sh[j * 6 + b]) b = y; return glHex(j, b); };
+  const capOf = it => dense ? fdPctOnly(it.cap) : it.cap;
   function tileHTML(k) {
     const it = items[k], pos = `left:${col[k] * (colW + gap)}px;top:${top[k]}px;width:${colW}px;height:${hh[k]}px`;
     if (it.head) return `<div class="fd-head${it.sub ? " sub" : ""}" style="top:${top[k]}px;height:${hh[k]}px"${it.sub ? ` role="heading" aria-level="3"` : ` role="separator" aria-label="${esc(it.text)}"`}>${it.sub ? `<i style="--c:${it.h}"></i>` : ""}<span>${esc(it.text)}</span></div>`;
-    if (it.card) return `<button class="fd-tile fd-card" data-fk="${k}" tabindex="${k === fk ? 0 : -1}" style="${pos}" aria-label="${esc(it.title + ". " + it.cap + (it.sub ? ", " + it.sub : ""))}"><span class="fd-im" data-ink="${ink(it.h)}" style="--c:${it.h};height:${hh[k] - txt}px"><span class="fd-ct" style="color:${ink(it.h) === "dark" ? "#141311" : "#fff"}">${esc(it.title)}</span></span><span class="fd-cap">${esc(it.cap)}</span><span class="fd-by"><span>${esc(it.sub || "")}</span></span></button>`;
+    if (it.card) return `<button class="fd-tile fd-card" data-fk="${k}" tabindex="${k === fk ? 0 : -1}" style="${pos}" aria-label="${esc(it.title + ". " + it.cap + (it.sub ? ", " + it.sub : ""))}"><span class="fd-im" data-ink="${ink(it.h)}" style="--c:${it.h};height:${hh[k] - txt}px"><span class="fd-ct" style="color:${ink(it.h) === "dark" ? "#141311" : "#fff"}">${esc(it.title)}</span></span><span class="fd-cap">${esc(capOf(it))}</span><span class="fd-by"><span>${esc(it.sub || "")}</span></span></button>`;
     if (it.sk) return `<div class="fd-tile sk" style="${pos}" aria-hidden="true"><span class="fd-im" style="height:${hh[k] - txt}px"></span><span class="fd-cap"></span><span class="fd-by"></span></div>`;
-    return `<button class="fd-tile wait" data-fk="${k}" tabindex="${k === fk ? 0 : -1}" style="${pos}"><span class="fd-im" style="--c:${domOf(it.j)};height:${hh[k] - txt}px"><span class="fd-ov"></span></span><span class="fd-cap">${esc(it.cap)}</span><span class="fd-by"></span></button>`;
+    return `<button class="fd-tile wait" data-fk="${k}" tabindex="${k === fk ? 0 : -1}" style="${pos}"><span class="fd-im" style="--c:${domOf(it.j)};height:${hh[k] - txt}px"><span class="fd-ov"></span></span><span class="fd-cap">${esc(capOf(it))}</span><span class="fd-by"></span></button>`;
   }
   function fillCard(el, k) {   // a thing that isn't a painting (a gem, a film, a color): its own color is the tile; a photo covers it when there is one
     const it = items[k]; if (!it.img || el.querySelector("img")) return;
@@ -278,6 +297,7 @@ function fdMount(host, o) {
     el.setAttribute("aria-label", `${title}${who ? ", " + who : ""}. ${it.cap}`);
     el.querySelector(".fd-by").innerHTML = it.byTitle ? `<span>${esc(title)}</span>${glYear(it.j) ? `<em> · ${esc(glYear(it.j))}</em>` : ""}` : glByline(it.j, dd);   // "Also Monet" already names the painter: the line below gives the picture's title instead
     el.querySelector(".fd-ov").innerHTML = `<b>${esc(title)}</b><small>${esc(who)}${glYear(it.j) ? " · " + esc(glYear(it.j)) : ""}</small>`;
+    el.dataset.pk = `${title}\n${who}${glYear(it.j) ? " · " + glYear(it.j) : ""}\n${it.cap}`;   // what a long-press shows when the tile is too small to say it
     const im = el.querySelector(".fd-im"), img = document.createElement("img"), mid = glSized(dd.img, "mid");
     img.alt = ""; img.decoding = "async"; img.draggable = false;
     const crop = glCropStyle(it.j, dd, abOf(it)), mm = /style="([^"]*)"/.exec(crop); if (mm) img.style.cssText = mm[1];
@@ -303,13 +323,13 @@ function fdMount(host, o) {
   function draw() {
     if (gone || !grid.isConnected || !shown || !top) return;
     const cw = grid.clientWidth; if (cw > 40 && Math.abs(cw - W) > 1) { relayoutAll(); return; }
-    const r = grid.getBoundingClientRect(), y0 = -r.top - innerHeight * .7, y1 = -r.top + innerHeight * 1.7;
+    const r = grid.getBoundingClientRect(), dn = cols >= 5, y0 = -r.top - innerHeight * (dn ? .5 : .7), y1 = -r.top + innerHeight * (dn ? 1.4 : 1.7), liveMax = fdLiveMax(cols);
     let lo = 0, hi = shown;
     while (lo < hi) { const m = (lo + hi) >> 1; if (top[m] < y0 - 900) lo = m + 1; else hi = m; }
     let wantSet = [], last = lo;
     for (let k = lo; k < shown && top[k] <= y1; k++) { if (top[k] + hh[k] >= y0) wantSet.push(k); last = k; }
-    if (wantSet.length > FD_LIVE_MAX) {   // never more than FD_LIVE_MAX live pictures: keep the ones nearest the middle of the screen
-      const mid = -r.top + innerHeight / 2; wantSet.sort((a, b) => Math.abs(top[a] + hh[a] / 2 - mid) - Math.abs(top[b] + hh[b] / 2 - mid)); wantSet = wantSet.slice(0, FD_LIVE_MAX);
+    if (wantSet.length > liveMax) {   // never more than the budget of live pictures (40, more as the tiles shrink): keep the ones nearest the middle of the screen
+      const mid = -r.top + innerHeight / 2; wantSet.sort((a, b) => Math.abs(top[a] + hh[a] / 2 - mid) - Math.abs(top[b] + hh[b] / 2 - mid)); wantSet = wantSet.slice(0, liveMax);
     }
     const ws = new Set(wantSet);
     live.forEach((el, k) => { if (!ws.has(k)) { const im = el.querySelector("img"); if (im) im.removeAttribute("src"); el.remove(); live.delete(k); } });
@@ -328,9 +348,9 @@ function fdMount(host, o) {
     if (nx.length) { nx.forEach(k => { const s = Math.floor(items[k].j / G.shard); if (!FD_SHARDS.includes(s)) FD_SHARDS.push(s); glShard(s).catch(() => {}); }); }
     fdTrim(liveShards());
     // near the end of what is shown: 24 more (the boxes are known from the index, so nothing moves)
-    if (shown < items.length && r.bottom - innerHeight < innerHeight * 1.6) grow();
+    if (shown < items.length && r.bottom - innerHeight < innerHeight * (dn ? 1.1 : 1.6)) grow();
   }
-  function more() { const k0 = shown; shown = Math.min(items.length, shown + FD_PAGE); place(k0); stateDraw(); }   // 24 more tiles: only their boxes, appended below
+  function more() { const k0 = shown; shown = Math.min(items.length, shown + FD_PAGE * Math.max(1, Math.ceil(cols / 2))); place(k0); stateDraw(); }   // a page is 24 tiles at 2 across, more as they shrink, so one page always fills a screen   // 24 more tiles: only their boxes, appended below
   function grow() { more(); requestAnimationFrame(draw); }
   function relayoutAll() { const keep = shown; live.forEach(el => el.remove()); live.clear(); relayout(); shown = keep; draw(); }
   function stateDraw() {
@@ -357,6 +377,7 @@ function fdMount(host, o) {
     }
     curLead = res.lead || ""; curEnd = res.end || ""; items = res.items; if (!items.length) { apply({ empty: "Nothing else in the archive is close to this one in that way." }); return; }
     live.forEach(el => el.remove()); live.clear();
+    capPct = items.some(x => !x.head && !x.sk && fdPctOnly(x.cap));
     const want0 = memo ? memo.shown : FD_PAGE;
     shown = Math.min(items.length, Math.max(FD_PAGE, want0)); fk = Math.max(0, items.findIndex(x => !x.head));
     relayout(); stateDraw(); leadDraw(""); draw();
@@ -391,8 +412,43 @@ function fdMount(host, o) {
     setTimeout(() => xbLoad().then(F => { if (gone || F.G !== GAL) return; ctx.F = F; const was = eff; chipsDraw(); if (was !== eff) rerank(false); }).catch(() => {}), 700);
   }
 
+  // ----- zoom: pinch, trackpad pinch, ctrl+wheel and + / - (js/gridzoom.js, the same module as the painter page's grid) -----
+  // the density changes with the tile under (fx, fy) kept exactly where it is (toY: where it should end up, when the fingers have moved)
+  const setCols = (c, fx, fy, toY) => {
+    c = Math.max(1, Math.min(fdMaxCols(), c)); if (c === cols || !shown) return false;
+    const r = grid.getBoundingClientRect(), vy = fy == null ? innerHeight / 2 : fy, y = vy - r.top, x = (fx == null ? W / 2 : fx) - r.left;
+    const cx = Math.max(0, Math.min(cols - 1, Math.floor(x / (colW + gap))));
+    let a = Math.max(0, items.findIndex(z => !z.head)); for (let k = 0; k < shown; k++) if (!items[k].head && col[k] === cx && top[k] <= y) a = k;
+    const frac = hh[a] ? Math.max(0, Math.min(1, (y - top[a]) / hh[a])) : 0;
+    if (wide()) view.dcols = c; else view.cols = c; viewSave();
+    relayoutAll();
+    const r2 = grid.getBoundingClientRect(); scrollBy(0, r2.top + top[a] + frac * hh[a] - (toY == null ? vy : toY));
+    draw(); return true;
+  };
+  host.querySelector("[data-fdsize]").onclick = () => { if (zoom) { const mx = fdMaxCols(); zoom.step((cols >= mx ? 1 : cols + 1) - cols); } };
+  // a tile too small to say anything: a long press shows its title, painter, year and the whole caption
+  let peekEl = null, peekT = 0, peekXY = null, peeked = 0;
+  const peekOff = () => { clearTimeout(peekT); if (peekEl) { peekEl.remove(); peekEl = null; } };
+  grid.addEventListener("pointerdown", e => {
+    const t = e.target.closest(".fd-tile[data-fk]"); if (!t || e.isPrimary === false) return;
+    peekXY = [e.clientX, e.clientY]; clearTimeout(peekT);
+    peekT = setTimeout(() => {
+      if (!t.dataset.pk) return; const q = t.getBoundingClientRect(); peeked = Date.now(); buzz(5);
+      peekEl = document.createElement("div"); peekEl.className = "fd-peek"; peekEl.setAttribute("role", "status");
+      const [a, b, c] = t.dataset.pk.split("\n"); peekEl.innerHTML = `<b>${esc(a)}</b><span>${esc(b)}</span><em>${esc(c)}</em>`;
+      document.body.appendChild(peekEl);
+      const w = peekEl.offsetWidth, h = peekEl.offsetHeight, x = Math.max(8, Math.min(innerWidth - w - 8, q.left + q.width / 2 - w / 2)), y = q.top - h - 8 >= 8 ? q.top - h - 8 : q.bottom + 8;
+      peekEl.style.left = x + "px"; peekEl.style.top = y + "px";
+    }, 420);
+  });
+  grid.addEventListener("pointermove", e => { if (peekXY && Math.hypot(e.clientX - peekXY[0], e.clientY - peekXY[1]) > 8) { peekXY = null; if (!peekEl) clearTimeout(peekT); } });
+  ["pointerup", "pointercancel"].forEach(ev => addEventListener(ev, () => { peekXY = null; clearTimeout(peekT); if (peekEl) setTimeout(peekOff, 900); }));
+  addEventListener("scroll", peekOff, { passive: true });
+  grid.addEventListener("contextmenu", e => { if (e.target.closest(".fd-tile")) e.preventDefault(); });
+
   // ----- keys, taps, position -----
   grid.onclick = e => {
+    if (Date.now() - peeked < 700) { e.preventDefault(); return; }   // the tap that ended a long-press is not an open
     const t = e.target.closest(".fd-tile[data-fk]"); if (!t) return;
     const it = items[+t.dataset.fk]; buzz(6); leave(); if (it.card) it.open(); else galleryPage(it.j, true, isColor ? sub.hex : null);
   };
@@ -443,6 +499,7 @@ function fdMount(host, o) {
   const onResize = () => { setBarTop(); if (Math.abs((grid.clientWidth || W) - W) > 1) relayoutAll(); };
   function start() {
     if (built || gone) return; built = true;
+    zoom = gzAttach(grid, { cols: () => cols, min: () => 1, max: fdMaxCols, colW: () => colW, setCols });
     if (!memo) Object.assign(st, STORE);
     setBarTop(); chipsDraw();
     addEventListener("scroll", onScroll, { passive: true }); addEventListener("resize", onResize);
@@ -451,7 +508,7 @@ function fdMount(host, o) {
   }
   // built once the bottom is near (within ~1.6 screens): a scroll listener, not an IntersectionObserver, which a hidden tab may never run
   const near = () => { if (!built && host.getBoundingClientRect().top < innerHeight * 2.6) { removeEventListener("scroll", near); start(); } };
-  const destroy = () => { gone = true; tok++; removeEventListener("scroll", near); removeEventListener("scroll", onScroll); removeEventListener("resize", onResize); live.clear(); };
+  const destroy = () => { gone = true; tok++; peekOff(); if (zoom) zoom.destroy(); removeEventListener("scroll", near); removeEventListener("scroll", onScroll); removeEventListener("resize", onResize); live.clear(); };
   cleanup.push(destroy);
   if (!host.style.minHeight) host.style.minHeight = "1px";   // never undo fdJump's taller one
   if (memo) start(); else { addEventListener("scroll", near, { passive: true }); near(); }
