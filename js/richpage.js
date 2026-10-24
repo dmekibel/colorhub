@@ -334,9 +334,19 @@ function colorFocus(colors, opts = {}) {
   cleanup.push(close);
   // a tap anywhere, or a swipe down, always returns to the page -- there's no big name to dim/bring back any
   // more (David, 2026-10-10), so the single-color case now behaves exactly like the multi/band case always did.
-  let dragging = false;
-  ov.addEventListener("pointerdown", () => { dragging = true; });
-  ov.addEventListener("pointerup", () => { if (dragging) { dragging = false; close(); } });
+  // David, 2026-10-24: with 2+ colors a tap on a band opens that color's page (the one tap rule); the layer closes
+  // with the ✕ at top-right, a swipe down, or Escape. A single color still closes on any tap.
+  let dragging = false, y0 = 0;
+  ov.addEventListener("pointerdown", e => { dragging = true; y0 = e.clientY; });
+  ov.addEventListener("pointerup", e => {
+    if (!dragging) return; dragging = false;
+    if (!multi || e.clientY - y0 > 60) return close();
+    if (e.target.closest(".cf-close")) return close();
+    const band = e.target.closest(".cf-band");
+    if (band && typeof openTappedColor === "function") { const hex = band.style.getPropertyValue("--c").trim(); close(); openTappedColor(hex); }
+  });
+  ov.addEventListener("pointercancel", () => { dragging = false; });
+  if (multi) ov.insertAdjacentHTML("beforeend", `<button type="button" class="cf-close" aria-label="Close">${typeof sv === "function" ? sv('<path d="M6 6l12 12M18 6L6 18"/>', 18, 1.8) : "&times;"}</button>`);
 }
 // the single-color entry point (the cover's own tap): rpCoverLike above, and the design-review shot hook
 // (js/boot.js #shot=rpfocus:<name>@<hex>), both still call this directly
