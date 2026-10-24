@@ -688,10 +688,10 @@ function rpBarHTML(name, hex) {
   const hair = typeof rcContrast === "function" && rcContrast(hex, "#0E0D0B") < 1.6 ? " rp-bar-hair" : "";
   return `<div class="rp-bar${hair}" style="--c:${hex}" data-ink="${ink(hex)}" aria-hidden="true">
     <button class="rp-bar-back" data-rp-back aria-label="Back">${ICON.back}</button><button class="rp-bar-name" data-rp-top>${esc(name)}</button>
-    <nav class="rp-bar-chips">${[["story", "Story"], ["paint", "Paintings"], ["family", "Family"], ["id", "ID"]].map(([k, t]) => `<button data-rp-jump="${k}" hidden>${t}</button>`).join("")}</nav></div>`;
+    <nav class="rp-bar-chips">${[["story", "Story"], ["paint", "Paintings"], ["family", "Family"], ["id", "ID"], ["explore", "Explore \u2193"]].map(([k, t]) => `<button data-rp-jump="${k}" hidden>${t}</button>`).join("")}</nav></div>`;
 }
 function rpBarSync(el) {
-  const has = { story: !!el.querySelector(".ar-door,.ar-head,.rp-twin"), paint: !!el.querySelector(".rp-paint"), family: !!el.querySelector(".ar-fam"), id: !!el.querySelector(".rp-idcard") };
+  const has = { story: !!el.querySelector(".ar-door,.ar-head,.rp-twin"), paint: !!el.querySelector(".rp-paint"), family: !!el.querySelector(".ar-fam"), id: !!el.querySelector(".rp-idcard"), explore: !!el.querySelector("[data-rpfeed]") };
   const bar = el.querySelector(".rp-bar") || document.querySelector("body > .rp-bar"); if (!bar) return;
   bar.querySelectorAll("[data-rp-jump]").forEach(b => { b.hidden = !has[b.dataset.rpJump]; });
 }
@@ -707,6 +707,7 @@ function rpBarWire(el) {
     if (k === "paint") return scrollTo(el.querySelector(".rp-paint"));
     if (k === "family") return scrollTo(el.querySelector(".ar-fam"));
     if (k === "id") return scrollTo(el.querySelector(".rp-idcard"));
+    if (k === "explore") return scrollTo(el.querySelector("[data-rpfeed]"));   // David, 2026-10-24: Keep exploring is so far down it takes forever to get there
   });
   // it lives on <body>, not in the screen: the screen's entrance animation leaves a transform that would pin a fixed bar to the page.
   // Defensive: a fast Back-then-forward can call this again before the last page's own cleanup has run (David,

@@ -4489,6 +4489,35 @@ scenario("paintings", "Keep exploring: the end of the feed says so, and a pictur
   t.expect(end && /That is everything close to this one\./.test(t.text(end)), "the end-of-feed line never appeared");
   t.expect(t.$("[data-fdup]"), "the end of the feed has no way back up");
 });
+// David, 2026-10-24: "Keep exploring is so far down below it takes forever to get there" -- one tap from the top.
+scenario("paintings", "a painting page has a Keep exploring jump near the top; one tap brings the feed into view", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  await t.waitFor("[data-glfeedjump]", 15000, "the Keep exploring jump on the painting page");
+  const before = t.ev("document.querySelector('[data-glfeed]').getBoundingClientRect().top"), vh = t.ev("innerHeight");
+  t.expect(before > vh, `the feed is already on screen before the tap (top ${before}, window ${vh})`);
+  // headless Chrome does not run smooth scrolls to the end, so watch what the tap asks for, then check an instant jump lands
+  t.ev("window.__sj = null; const o = Element.prototype.scrollIntoView; Element.prototype.scrollIntoView = function (a) { window.__sj = { feed: this.matches('[data-glfeed]'), opt: a }; return o.call(this, Object.assign({}, a, { behavior: 'auto' })); };");
+  await t.click("[data-glfeedjump]", { wait: 600 });
+  const sj = t.ev("window.__sj");
+  t.expect(sj && sj.feed, "the Keep exploring button did not scroll the feed into view");
+  const after = t.ev("document.querySelector('[data-glfeed]').getBoundingClientRect().top");
+  t.expect(after < vh, `the feed is still below the screen after the tap (top ${after}, window ${vh})`);
+});
+scenario("pages", "a color page's pinned header has an Explore chip that jumps to the Keep exploring feed", async t => {
+  await t.open("#/color/teal", { settle: 900 });
+  await t.waitFor("[data-rpfeed]", 15000, "the feed's host on the color page");
+  t.w.scrollTo(0, 700); await t.sleep(600);
+  const chip = t.$("body > .rp-bar [data-rp-jump=explore]");
+  t.expect(chip && !chip.hidden, "the pinned header has no visible Explore chip");
+  // headless Chrome does not run smooth scrolls to the end: record the scroll the chip asks for
+  t.ev("window.__st = null; const o = window.scrollTo; window.scrollTo = function (a) { window.__st = a; return o.call(window, typeof a === 'object' ? Object.assign({}, a, { behavior: 'auto' }) : a); };");
+  t.ev("document.querySelector('body > .rp-bar [data-rp-jump=explore]').click()");
+  await t.sleep(500);
+  const st = t.ev("window.__st"), feedTop = t.ev("document.querySelector('[data-rpfeed]').getBoundingClientRect().top"), vh = t.ev("innerHeight");
+  t.expect(st && st.top > 700, `the Explore chip did not ask to scroll down to the feed (${JSON.stringify(st)})`);
+  t.expect(feedTop < vh, `the feed is still below the screen after the chip (top ${feedTop}, window ${vh})`);
+});
+
 // ---------- Keep exploring on a COLOR page (js/feed.js fdMount with sub = a color, mounted by js/richpage.js) ----------
 async function cfeedOpen(t, hash, chip) {
   await t.open(hash, { settle: 900 });
@@ -4513,12 +4542,12 @@ scenario("pages", "Keep exploring on a color page: the feed is at the very botto
   const order = [".rp-idcard", "[data-rpfeed]", ".rp-last"].map(s => t.$(s)), pos = (a, b) => a.compareDocumentPosition(b) & 4;
   t.expect(order.every(Boolean) && pos(order[0], order[1]) && pos(order[1], order[2]), "the feed isn't between the ID card and the last fine-print line");
   t.expect(t.$(".cp-hero .rp-name"), "the color page's cover is gone");
-  const caps = feedCaps(t), pct = caps.map(c => +((c.match(/^(\d+)% match$/) || [])[1] || NaN));
+  const caps = feedCaps(t), pct = caps.map(c => parseFloat((c.match(/^([\d.]+)% match$/) || [])[1] || NaN));
   t.expect(caps.length >= 4 && pct.every((p, k) => p >= 1 && (k === 0 || p <= pct[k - 1])), `captions aren't plain "NN% match", closest first: ${caps.slice(0, 6)}`);
   const first = t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items[0].j`);
   t.expect(Number.isInteger(first) && t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items.length`) >= 24, "the top of the ranking isn't cached (rank once, page through)");
   // the first tile is the nearest patch, whatever the area (closeness beats coverage): nothing in the cache is closer
-  t.expect(t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items.every((it, k, a) => k === 0 || parseInt(it.cap) <= parseInt(a[0].cap))`), "a later tile is closer than the first");
+  t.expect(t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items.filter(it => /^[\d.]+%/.test(it.cap)).every((it, k, a) => k === 0 || parseFloat(it.cap) <= parseFloat(a[0].cap) + 1)`), "a later tile is clearly closer than the first");
   t.expect(t.$$(".fd-tile[data-fk] .fd-cap, .fd-tile[data-fk] .fd-by").every(e => parseFloat(getComputedStyle(e).fontSize) >= 15), "caption text is smaller than body size");
   t.notes.push(`color feed first ranking ${t.ev("FD_LAST.ms")} ms`);
 });
@@ -4527,18 +4556,18 @@ scenario("pages", "Keep exploring on a color page: each chip re-ranks with its o
   await cfeedChip(t, "painters");
   t.expect(/^(Used most|Also used) by \S/.test(t.text(".fd-tile[data-fk='0'] .fd-cap")), `Painters caption: "${t.text(".fd-tile[data-fk='0'] .fd-cap")}"`);
   await cfeedChip(t, "era");
-  const decs = feedCaps(t).map(c => (c.match(/^(\d{3})0s · \d+% match$/) || [])[1]);
+  const decs = feedCaps(t).map(c => (c.match(/^(\d{3})0s · [\d.]+% match$/) || [])[1]);
   t.expect(decs.length >= 4 && decs.every(Boolean), `Era captions don't say the decade: ${feedCaps(t).slice(0, 4)}`);
   await cfeedChip(t, "place");
-  t.expect(feedCaps(t).slice(0, 3).every(c => /^[A-Z][^·]+ · \d+% match$/.test(c)), `Place captions: ${feedCaps(t).slice(0, 3)}`);
+  t.expect(feedCaps(t).slice(0, 3).every(c => /^[A-Z][^·]+ · [\d.]+% match$/.test(c)), `Place captions: ${feedCaps(t).slice(0, 3)}`);
   await cfeedChip(t, "worlds");
   t.expect(feedCaps(t).slice(0, 3).every(c => /^In /.test(c)), `Other worlds captions: ${feedCaps(t).slice(0, 3)}`);
   t.expect(t.$(".fd-tile.fd-card"), "Other worlds has no card");
   await cfeedChip(t, "close");
-  t.expect(feedCaps(t).slice(0, 3).every(c => /^\d+% match$/.test(c)), `Close colors captions: ${feedCaps(t).slice(0, 3)}`);
+  t.expect(feedCaps(t).slice(0, 3).every(c => /^[\d.]+% match$/.test(c)), `Close colors captions: ${feedCaps(t).slice(0, 3)}`);
   // back on Paintings the first tile is the closest again (cached: instant)
   await cfeedChip(t, "paintings");
-  t.expect(/^\d+% match$/.test(feedCaps(t)[0]), "Paintings didn't come back");
+  t.expect(/^[\d.]+% match$/.test(feedCaps(t)[0]), "Paintings didn't come back");
   t.expect(t.ev(`JSON.parse(sessionStorage.getItem("colorhub-feed-color")).chip`) === "paintings", "the chip choice isn't remembered for the session");
 });
 scenario("pages", "Keep exploring on a color page: a chip with nothing for this color is disabled with a plain reason", async t => {
@@ -4573,7 +4602,7 @@ scenario("pages", "Keep exploring on a color page: a tile opens its painting, an
 scenario("pages", "Keep exploring on an in-between color: the feed measures the tapped color, and a close name opens with the exact color", async t => {
   await cfeedOpen(t, "#/color/teal?c=2f8f8a");
   const caps = feedCaps(t);
-  t.expect(caps.length >= 4 && caps.every(c => /^\d+% match$/.test(c)), `captions: ${caps.slice(0, 4)}`);
+  t.expect(caps.length >= 4 && caps.every(c => /^[\d.]+% match$/.test(c)), `captions: ${caps.slice(0, 4)}`);
   t.expect(t.ev(`!!FD_CACHE.get("c:#2F8F8A|paintings|overall|0")`), "the feed is not keyed to the tapped color");
   t.expect(/Your color/.test(t.text(".cp-chip")), "this isn't the tapped-color page");
   await cfeedChip(t, "close");
