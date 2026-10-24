@@ -39,7 +39,7 @@ small areas a 24-color pool merges away. tools/color_index.py prints the two sid
 
 Palette-only corpora (--items): [{id, y?, a?, mv?, co?, colors: [[hex, share], ...]}]; every item is coarse.
 """
-import json, math, re, sys, time
+import json, math, os, re, sys, time
 from pathlib import Path
 
 import numpy as np
@@ -94,7 +94,10 @@ def varint(n):
 def image_cells(path):
     from PIL import Image
     import library as LIB
-    im = np.asarray(Image.open(path).convert("RGB"))
+    img = Image.open(path).convert("RGB")
+    if img.width > 220:                       # the 400 px thumbs (measure-img) are brought down to the 200 px the index was tuned on
+        img = img.resize((200, max(1, round(img.height * 200 / img.width))), Image.BILINEAR)
+    im = np.asarray(img)
     n = im.shape[0] * im.shape[1]
     keys = cell_key(LIB.rgb_to_lab(im.reshape(-1, 3)))
     u, c = np.unique(keys, return_counts=True)
@@ -122,6 +125,27 @@ def _job(a):
         return i, u[m], c[m], None
     except Exception as e:
         return i, None, None, str(e)
+
+
+def find_image(raw, x, cache):
+    """A painting's cached photo, wherever it lives: research/_raw/<src>/img/<num>.jpg (the museum caches), the Commons
+    cache (research/_raw/commons/img/<num>.jpg, also used by commonscc), and research/_raw/measure-img/<id>.jpg (400 px
+    thumbs fetched by tools/measure_staged.py for staged rows). Returns a path or None."""
+    cid, src = x["id"], x["src"]
+    num = cid.split("-", 1)[1] if "-" in cid else cid
+    for d, name in ((raw / src / "img", num + ".jpg"), (raw / "commons" / "img", num + ".jpg"),
+                    (raw / "measure-img", cid.replace("/", "_") + ".jpg")):
+        files = cache.get(d)
+        if files is None:
+            files = cache[d] = set(os.listdir(d)) if d.is_dir() else set()
+        if name in files:
+            return d / name
+    return None
+
+
+def ids_hash(path):
+    import hashlib
+    return hashlib.sha1(Path(path).read_bytes()).hexdigest()[:12]
 
 
 def unpack_pool(pl):
@@ -229,10 +253,17 @@ def build_paintings(args):
             if line.strip():
                 r = json.loads(line)
                 pools[r["key"]] = r["pl"]
-    jobs, fallback = [], []
+    ids_file = ROOT / "data" / "gallery" / "ids.txt"
+    gids = ids_file.read_text(encoding="utf-8").split("\n")
+    if not args.get("limit") and [x["id"] for x in rows] != gids:
+        raise SystemExit("corpus order differs from data/gallery/ids.txt: rebuild the gallery first (item numbers must be gallery indices)")
+    jobs, fallback, dcache = [], [], {}
     for i, x in enumerate(rows):
-        p = G.img_cache_path(raw, x["src"], x["id"])
-        (jobs if p.exists() else fallback).append((i, str(p)) if p.exists() else i)
+        p = find_image(raw, x, dcache)
+        if p:
+            jobs.append((i, str(p)))
+        else:
+            fallback.append(i)
     print(f"{n} paintings: {len(jobs)} with a cached photo, {len(fallback)} coarse", flush=True)
     keys, covs = [None] * n, [None] * n
     from multiprocessing import Pool
@@ -270,6 +301,9 @@ def build_paintings(args):
                                      {"artists": arts, "movements": mvl, "countries": col}, "paintings")
     print(f"index: {head['postings']:,} postings, {head['cells']:,} cells, {len(head['leaves'])} shards, {total / 1e6:.1f} MB, "
           f"{len(coarse)} coarse, {time.time() - t0:.0f}s", flush=True)
+    head["ids"] = ids_hash(ids_file)          # sha1 of data/gallery/ids.txt: tools/check_ids.js fails when it no longer matches
+    head["images"] = len(jobs) - bad
+    (Path(args["out"]) / "index.json").write_text(json.dumps(head, separators=(",", ":")))
     return rows, head, built, meta_rows, arts
 
 
@@ -353,17 +387,26 @@ def affinity(args, rows, head, built, meta_rows, arts):
             M[k].append(sparse.csr_matrix(m.T.astype(np.float32)))
     M = {k: sparse.hstack(v).tocsr() for k, v in M.items()}
     print(f"membership done {time.time() - t0:.0f}s", flush=True)
-    covm = {k: (Cp @ M[k]).tocsc() for k in M}                           # item x name coverage
-    def count(k, c):
-        return np.asarray((covm[k] >= c).sum(0)).ravel()
-    n_std = count("4", STD_COVER)
-    P = (covm["4"] >= STD_COVER).astype(np.float32).tocsr()
+    # item chunks keep the item x name coverage matrices small enough for 200k paintings
+    cnt = {"exact": np.zeros(V, np.int64), "3": np.zeros(V, np.int64), "4": np.zeros(V, np.int64), "10": np.zeros(V, np.int64), "4_5": np.zeros(V, np.int64)}
+    Pparts = []
+    for i0 in range(0, n, 20000):
+        Cc = Cp[i0:i0 + 20000]
+        cm = {k: (Cc @ M[k]).tocsc() for k in M}
+        cnt["exact"] += np.asarray((cm["exact"] >= COV0).sum(0)).ravel()
+        cnt["3"] += np.asarray((cm["3"] >= .05).sum(0)).ravel()
+        cnt["4"] += np.asarray((cm["4"] >= STD_COVER).sum(0)).ravel()
+        cnt["10"] += np.asarray((cm["10"] >= .01).sum(0)).ravel()
+        cnt["4_5"] += np.asarray((cm["4"] >= .05).sum(0)).ravel()
+        Pparts.append((cm["4"] >= STD_COVER).astype(np.float32).tocsr())
+        del cm
+    n_std = cnt["4"]
+    P = sparse.vstack(Pparts).tocsr()
     pair = (P.T @ P).toarray()
     de_names = np.zeros((V, V), dtype=np.float32)
     for v0 in range(0, V, 64):
         de_names[v0:v0 + 64] = LIB.de2000(vlab[v0:v0 + 64], vlab)
-    facts = {"exact_any": count("exact", COV0), "3_5": count("3", .05), "4_1": n_std, "10_1": count("10", .01),
-             "4_5": count("4", .05)}
+    facts = {"exact_any": cnt["exact"], "3_5": cnt["3"], "4_1": n_std, "10_1": cnt["10"], "4_5": cnt["4_5"]}
     shards = {}
     nn = n_std.astype(np.float64)
     exp = np.outer(nn, nn) / n

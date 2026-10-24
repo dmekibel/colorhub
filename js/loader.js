@@ -19,7 +19,7 @@ const DATA_VER = ((document.currentScript && document.currentScript.src || "").m
 // served from Cloudflare R2 at data.chromatlas.app (tools/r2_sync.py uploads it, BEFORE each push that bumps ?v=); a failed
 // R2 request falls back to the same file on the site itself. Local dev reads local files.
 const DATA_BASE = /(^|\.)chromatlas\.app$|github\.io$/.test(location.hostname) ? "https://data.chromatlas.app/" : "";
-const DATA_R2 = /^(\.\/)?data\/(gallery|analysis|paintmap|artists|facets)\//;
+const DATA_R2 = /^(\.\/)?data\/(gallery|analysis|paintmap|artists|facets|colorindex)\//;
 if (DATA_VER && typeof window.fetch === "function" && !window.fetch.__versioned) {
   const rawFetch = window.fetch.bind(window);
   window.fetch = (u, o) => {
