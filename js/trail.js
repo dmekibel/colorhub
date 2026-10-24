@@ -459,14 +459,14 @@ function tlReplay(tok) {
 // a page whose content arrives after it's drawn (a gallery shelf, poems) can be too short for the remembered scroll
 // on the first frame; keep trying for a moment, and stop the instant the reader touches the page
 function tlHoldScroll() {
-  const want = SCROLL_BY_HASH.get(ROUTE_NOW);
-  if (!want) return;
+  if (!SCROLL_BY_HASH.get(ROUTE_NOW)) return;
   let n = 0, stop = false;
   const quit = () => { stop = true; };
   addEventListener("touchstart", quit, { once: true, passive: true }); addEventListener("wheel", quit, { once: true, passive: true });
   const tick = () => {
     if (stop || ++n > 12) return;
-    if (Math.abs(scrollY - want) > 4) scrollTo(0, want);
+    const want = SCROLL_BY_HASH.get(ROUTE_NOW);   // read each time: a page that knows better (the painting feed anchors on a tile, js/feed.js) updates it
+    if (want && Math.abs(scrollY - want) > 4) scrollTo(0, want);
     setTimeout(tick, 120);
   };
   setTimeout(tick, 80);

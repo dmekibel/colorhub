@@ -32,9 +32,8 @@ function glSimilarPal(pal, k = 5, o = {}) {
   const N = G.n, m = G.mean, d0 = new Float32Array(N), Lb = G.lab, sh = G.sh;
   for (let j = 0; j < N; j++) { const a = m[j * 3] - mL, b = m[j * 3 + 1] - ma, c = m[j * 3 + 2] - mb; d0[j] = a * a + b * b + c * c; }
   if (o.exclude != null && o.exclude >= 0) d0[o.exclude] = Infinity;
-  // the best 240 on average color: the 240th smallest value is the cut (a native sort of a copy, no comparator)
-  const cut = d0.slice().sort()[Math.min(239, N - 1)], cand = [];
-  for (let j = 0; j < N; j++) if (d0[j] <= cut && d0[j] !== Infinity) cand.push(j);
+  // the best 240 (o.cands) on average color, picked without sorting the whole archive (twTopK)
+  const cand = Array.from(twTopK(d0, Math.min(o.cands || 240, N - 1)));
   const matched = j => {
     let a = 0, b = 0;
     for (const p of P) { let best = 1e9; for (let y = 0; y < 6; y++) { const o3 = (j * 6 + y) * 3, d = glDE(p.lab[0], p.lab[1], p.lab[2], Lb[o3], Lb[o3 + 1], Lb[o3 + 2]); if (d < best) best = d; } a += p.s * best; }
@@ -118,11 +117,32 @@ function twRichPool(img) {
 }
 
 // ---------- the scorers: each returns ranked [[i, score]] (low is close) plus whatever its card needs ----------
+// The K lowest scores of a typed array (Infinity = out), as indices, closest first, without sorting all ~200,000: a
+// 4,096-value sample gives a cut a little above the K-th value, one pass gathers what falls under it, and only those are sorted.
+// Ties fall back to the lower index, so the result is stable. (Also used by js/feed.js.)
+function twTopK(score, K) {
+  const n = score.length; let m = 0;
+  for (let j = 0; j < n; j++) { const v = score[j]; if (v !== Infinity && v === v) m++; }
+  if (!m || K < 1) return [];
+  const smp = [], stride = Math.max(1, Math.floor(n / 4096));
+  for (let j = 0; j < n; j += stride) { const v = score[j]; if (v !== Infinity && v === v) smp.push(v); }
+  smp.sort((a, b) => a - b);
+  let frac = Math.min(1, 1.7 * K / m), cand;
+  for (;;) {
+    const cut = frac >= 1 || !smp.length ? Infinity : smp[Math.min(smp.length - 1, Math.floor(frac * smp.length))];
+    cand = [];
+    for (let j = 0; j < n; j++) { const v = score[j]; if (v <= cut && v !== Infinity) cand.push(j); }
+    if (cand.length >= Math.min(K, m) || frac >= 1) break;
+    frac = Math.min(1, frac * 2.5);
+  }
+  cand.sort((a, b) => score[a] - score[b] || a - b);
+  return cand.length > K ? cand.slice(0, K) : cand;
+}
+const TW_TOP = 220;
 function twRankAll(score, N, self) {
   const arr = new Float32Array(N);
   for (let j = 0; j < N; j++) arr[j] = j === self ? Infinity : score(j);
-  const idx = Int32Array.from({ length: N }, (_, j) => j).filter(j => arr[j] !== Infinity).sort((a, b) => arr[a] - arr[b]).slice(0, 220);
-  return Array.from(idx, j => [j, arr[j]]);
+  return Array.from(twTopK(arr, TW_TOP), j => [j, arr[j]]);
 }
 let TW_TOP3 = null;
 function twDominantIdx() {
@@ -161,8 +181,8 @@ function twScoreMood(q) { const ranked = twRankAll(j => twMoodDist(q.stats, twRe
 function twScoreLight(q) { const ranked = twRankAll(j => twEMD(q.stats.Lh, twRec(j).Lh), GAL.n, q.self); return { ranked, P: q.pool.slice(0, 3) }; }
 function twScoreColor(q, hex) {
   const s = glNear(hex); if (q.self >= 0) s[q.self] = 0;
-  const idx = Int32Array.from({ length: GAL.n }, (_, j) => j).filter(j => s[j] > .01).sort((a, b) => s[b] - s[a]).slice(0, 220);
-  return { ranked: Array.from(idx, j => [j, 1 - s[j]]), P: [{ h: hex, s: 1, lab: lab(hex) }] };
+  const sc = new Float32Array(GAL.n); for (let j = 0; j < sc.length; j++) sc[j] = s[j] > .01 ? 1 - s[j] : Infinity;
+  return { ranked: Array.from(twTopK(sc, TW_TOP), j => [j, sc[j]]), P: [{ h: hex, s: 1, lab: lab(hex) }] };
 }
 
 // ---------- layout: a 4 x 4 grid of average colors ----------

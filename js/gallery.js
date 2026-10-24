@@ -1448,6 +1448,7 @@ function galleryPage(i, push = true, fromHex = null, tol = null) {
   }).catch(() => toast("This painting didn't load"));
 }
 function glPage(i, d, fromHex, tol) {
+  const backNav = BACK_RENDER;   // read before show() clears it: "Keep exploring" (js/feed.js) puts the feed back where it was on a Back
   // fromHex is one hex, or (arriving from a pair/set page) the whole set: keep the array for ptArrival
   // (js/paintingsof.js), but a single hex for anything here that only ever highlighted one swatch.
   const fromPrimary = Array.isArray(fromHex) ? fromHex[0] : fromHex;
@@ -1600,6 +1601,7 @@ function glPage(i, d, fromHex, tol) {
     <button class="gl-pmap" data-pmap="arr=spiral&seed=${i}">${GL_ICON_MAP}<span>Similar paintings, on the map</span>${ICON.chev}</button>
     <section class="srcs"><h3>Image and data</h3><ul><li>${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? ` · ${esc(src.credit)}` : ""}</li><li>Palette and color names computed by Chromatlas from the museum's image</li></ul></section>
     <details class="gl-quiz-fold"><summary>Test yourself</summary><div class="gl-quiz" data-glquiz></div></details>
+    <section class="gl-feed" data-glfeed aria-label="Keep exploring"></section>
   `, "article gl-page");
   const route = "#/gallery/" + i, heroSpan = el.querySelector(".gl-hero > span");
   // stable references into the hero's own innards (not re-queried through `el` later): split mode moves the
@@ -2408,14 +2410,23 @@ function glPage(i, d, fromHex, tol) {
     // matched on the accents by default, near-blacks (L* < 20) left out: every old painting shares the varnish browns,
     // so twins by overall palette were five near-identical dark rectangles (IMPROVE-2026-10-08 A15)
     if (typeof twSection === "function") {
-      const lit = (pool.length >= 3 ? pool : pal6).filter(p => lab(p.h)[0] >= 20);
-      const cols = lit.length >= 3 ? lit : (pool.length >= 3 ? pool : pal6);
+      const cols = glTwCols(pool, pal6);
       const ct = cols.reduce((a, p) => a + (p.share || 0), 0) || 1;
       if (cols.some(p => lch(p.h)[1] >= 25 && (p.share || 0) / ct < .12) && !rail._tw) rail._tw = { metric: "accents" };   // twins.js keeps a preset metric
       return twSection(rail, cols, { self: i, what: "this painting", title: "More like this, by…", img: () => canSample ? sampleImg : null });
     }
     rail.innerHTML = glSimilar(i, 5).map(j => glPinHTML(j)).join(""); glFill(rail);
   }, 40);
+  // "Keep exploring" (js/feed.js): the Pinterest-style feed at the very bottom. Coming Back to this page it is built at once,
+  // so the page is as tall as it was and the scroll lands on the same tile; otherwise it waits until the bottom is near.
+  const feedOpts = { i, d, cols: glTwCols(pool, pal6), img: () => canSample ? sampleImg : null, backNav };
+  if (typeof fdMount === "function") { if (backNav && fdHasMemo(i)) fdMount(el.querySelector("[data-glfeed]"), feedOpts); else later(() => fdMount(el.querySelector("[data-glfeed]"), feedOpts), 60); }
+}
+// the colors a painting is matched on in "More like this" and "Keep exploring": its palette without the near-blacks (L* < 20),
+// which every old varnished painting shares (IMPROVE-2026-10-08 A15), unless too few are left
+function glTwCols(pool, pal6) {
+  const lit = (pool.length >= 3 ? pool : pal6).filter(p => lab(p.h)[0] >= 20);
+  return lit.length >= 3 ? lit : (pool.length >= 3 ? pool : pal6);
 }
 // crossorigin="anonymous" lets a canvas read the image later (tap-to-name), but it only helps — and only loads
 // at all — on a host that actually answers every hop with Access-Control-Allow-Origin (checked by hand, 2026-10,
