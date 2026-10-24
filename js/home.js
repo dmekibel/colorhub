@@ -1323,7 +1323,7 @@ function hmPaintingSet(n) {
   const colors = [...by.values()].sort((a, b) => b.share - a.share);
   // the full measured pool when there is one (a museum painting's ~24 colors), so the map's How many can show more
   const pool = n.pool && n.pool.length > colors.length ? n.pool : null;
-  return colorSet({ kind: "painting", id: n.id || n.title, title: pool ? n.title : `${n.title} · ${colors.length} named color${colors.length === 1 ? "" : "s"} · as photographed`, colors, src: n.src || "painting/" + routeSlug(String(n.id || "").replace(/^painting-/, "")),
+  return colorSet({ kind: "painting", id: n.id || n.title, title: pool ? n.title : `${n.title} · ${colors.length} named color${colors.length === 1 ? "" : "s"} · as photographed`, painter: n.artist || "", colors, src: n.src || "painting/" + routeSlug(String(n.id || "").replace(/^painting-/, "")),
     ...(pool ? { pick: csPoolPick(pool), max: pool.length } : {}) });
 }
 function hmMapRoute(kind, id) {

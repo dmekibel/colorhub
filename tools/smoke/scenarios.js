@@ -8505,3 +8505,60 @@ scenario("paintmap", "the card is one row of chips; tapping the card opens the p
   await t.click(".pmx-cap-main", { wait: 600 });
   await t.waitFor(() => /#\/gallery\//.test(t.w.location.hash), 10000, "the card to open the painting");
 });
+
+// David, 2026-10-24: "see a painter only through color: a color map of the painter where the size of a node is based
+// on how much they use that color... and maybe other ways to organize." The painter page's Their colors opens the
+// painter's own color map (js/paintercolors.js on js/palettehive.js): their colors only, area = how many of their
+// paintings hold the color, five arrangements, one tap on a node = that color's page with the painter's use.
+scenario("pages", "painter's color map: opens from the painter page, size follows use, every arrangement lays out, a node opens its color", async t => {
+  await t.open("#/painter/vincent-van-gogh", { settle: 600 });
+  await t.waitFor(".aw-page", 15000, "the painter page");
+  const btn = await t.waitFor(".aw-pcolors", 8000, "the painter page's Their colors button");
+  await t.click(btn, { wait: 500 });
+  await t.waitFor(".ph-sheet", 12000, "the color map sheet");
+  await t.waitFor(() => t.ev("window.PH_DEBUG && PH_DEBUG.count()") > 0, 60000, "the painter's colors to lay out (vivid reading)");
+  t.expect(t.ev("PH_DEBUG.mode()") === "vivid", "the default isn't the Vivid colors reading");
+  t.expect(t.$$("[data-ph-mode]").length === 2, "no Vivid | All colors toggle");
+  // vivid: his character, not the dark ground -- the biggest nodes are never near-black
+  const top = t.ev("PH_DEBUG.nodes()").sort((a, b) => b.r - a.r).slice(0, 5).map(n => t.ev(`lch(${JSON.stringify(n.h)})[0]`));
+  t.expect(top.every(L => L > 22), `a near-black color is among the biggest vivid nodes (${top.map(x => Math.round(x))})`);
+  t.expect(/van Gogh/i.test(t.text(".ph-title")), `the sheet isn't titled for the painter: ${t.text(".ph-title")}`);
+  t.expect(t.w.location.hash === "#/painter/vincent-van-gogh/colors", `the address while open is ${t.w.location.hash}`);
+  const chips = t.$$("[data-ph-arr]").map(b => b.dataset.phArr);
+  t.expect(["share", "hue", "light", "decade"].every(k => chips.includes(k)), `missing arrangements: ${chips}`);
+  // size follows use: a bigger share never gets a smaller circle (equal only where the min/max clamps meet)
+  const raw = t.ev("PH_DEBUG.nodes()"), maxShare = Math.max(...raw.map(n => n.share));
+  const centre = raw.slice().sort((a, b) => Math.hypot(a.x, a.y) - Math.hypot(b.x, b.y))[0];
+  t.expect(centre.share === maxShare, `By use: the node nearest the center (share ${centre.share}) isn't the most used (${maxShare})`);
+  const ns = raw.slice().sort((a, b) => b.share - a.share);
+  t.expect(ns.length >= 20, `only ${ns.length} colors for Van Gogh`);
+  for (let i = 1; i < ns.length; i++) t.expect(ns[i].r <= ns[i - 1].r + 0.01, `circle ${i} is bigger than a more-used one (${ns[i].r} > ${ns[i - 1].r})`);
+  t.expect(ns[0].r > ns[ns.length - 1].r * 1.5, "the most used color isn't clearly bigger than the least");
+  // every arrangement lays out: finite positions, something drawn, the right shape of layout
+  for (const arr of ["hue", "light", "decade", "peers"]) {
+    if (!chips.includes(arr)) continue;
+    t.ev(`PH_DEBUG.setArr(${JSON.stringify(arr)})`);
+    await t.waitFor(() => t.ev("PH_DEBUG.arr()") === arr && t.ev("PH_DEBUG.count()") > 0, 6000, `${arr} to lay out`);
+    await t.sleep(500);
+    const nn = t.ev("PH_DEBUG.nodes()");
+    t.expect(nn.length > 0 && nn.every(n => isFinite(n.x) && isFinite(n.y) && n.r > 0), `${arr}: a node has no finite place`);
+    if (arr === "decade") t.expect(new Set(nn.map(n => Math.round(n.y / 40))).size >= 2, "By decade shows only one row");
+    if (arr === "peers") t.expect(nn.some(n => n.hollow), "Against peers shows no hollow (avoided) colors for Van Gogh");
+  }
+  // All colors (incl. the dark grounds) is one tap away
+  t.ev(`PH_DEBUG.setMode("all")`);
+  await t.waitFor(() => t.ev("PH_DEBUG.mode()") === "all" && t.ev("PH_DEBUG.count()") > 0, 6000, "All colors");
+  t.ev(`PH_DEBUG.setMode("vivid")`);
+  await t.waitFor(() => t.ev("PH_DEBUG.mode()") === "vivid", 6000, "Vivid colors again");
+  // one tap on a node opens its color page, carrying the painter's use
+  t.ev(`PH_DEBUG.setArr("share")`);
+  await t.waitFor(() => t.ev("PH_DEBUG.arr()") === "share", 4000, "By use again");
+  await t.sleep(600);
+  const hex = t.ev("PH_DEBUG.hexAt(0)"), at = t.ev(`PH_DEBUG.screenOf(${JSON.stringify(hex)})`);
+  t.expect(at, "couldn't find the biggest node's screen position");
+  await t.tapAt(t.$(".ph-cv"), at.x, at.y, { wait: 500 });
+  await t.waitFor(() => /^#\/(c|name)\//.test(t.w.location.hash), 8000, "a color page after tapping a node");
+  t.expect(!t.$(".ph-sheet"), "the color map is still open after tapping a node");
+  await t.waitFor(".pc-use", 12000, "the painter's use line on the color page");
+  t.expect(/van Gogh holds this in \d[\d,]* of \d[\d,]* paintings/.test(t.text(".pc-use")), `the use line reads: ${t.text(".pc-use")}`);
+});

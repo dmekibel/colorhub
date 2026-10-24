@@ -13,8 +13,11 @@
 .ph-count-l b{flex:none;min-width:2.4ch;text-align:right;font:400 20px/1 var(--serif);font-variant-numeric:tabular-nums}
 
 /* Arrangement: a segmented control, equal width, self-evident text labels (no private icons) */
-.ph-arr{display:flex;gap:2px;padding:3px;border-radius:var(--r-pill);background:rgba(236,232,223,.06);margin-top:12px;flex:none}
-.ph-arr-b{flex:1;min-height:36px;border-radius:calc(var(--r-pill) - 2px);font:400 13px/1 var(--sans);color:var(--soft);white-space:nowrap}
+.ph-arr{display:flex;gap:2px;padding:3px;border-radius:var(--r-pill);background:rgba(236,232,223,.06);margin-top:12px;flex:none;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.ph-arr::-webkit-scrollbar{display:none}
+.ph-mode{margin-top:14px}.ph-mode+.ph-arr{margin-top:8px}
+.pc-bar{height:4px;border-radius:2px;background:rgba(236,232,223,.12);margin:16px 0 22px;overflow:hidden}.pc-bar i{display:block;height:100%;width:0;background:var(--paper);transition:width .25s ease}
+.ph-arr-b{flex:1 0 auto;padding:0 14px;min-height:40px;border-radius:calc(var(--r-pill) - 2px);font:400 13px/1 var(--sans);color:var(--soft);white-space:nowrap}
 .ph-arr-b.on{background:var(--paper);color:var(--paper-ink)}
 .ph-arr-b:active{transform:scale(.97)}
 
@@ -24,5 +27,19 @@
 .ph-cv{position:absolute;inset:0;display:block;touch-action:none}
 
 .ph-fine{margin-top:10px;flex:none}
+/* a door out of the sheet (a painting's "All of <painter>'s colors"): a quiet pill under the stage, thumb reach */
+.ph-cta{flex:none;margin-top:12px;min-height:48px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);font:400 18px/1 var(--serif);letter-spacing:-.01em}
+.ph-cta svg{width:18px;height:18px}
+.ph-cta:active{opacity:.7}
+
+/* the color page's line after a tap on a painter's color map (js/paintercolors.js pcColorLine) */
+.pc-use{margin:0 0 14px;padding:12px 14px;border-radius:var(--r-2);background:var(--surface-2,rgba(236,232,223,.07))}
+.pc-use p{font:400 16px/1.45 var(--sans);color:var(--ink)}
+.pc-use b{font-weight:600}
+.pc-use-b{margin-top:8px;min-height:44px;padding:0 4px;display:inline-flex;align-items:center;gap:6px;font:400 15px/1 var(--sans);color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.pc-use-b svg{width:16px;height:16px}
 
 @media (max-width:374px){ .ph-title{font-size:25px} }
+
+/* desktop: a roomy centered panel (the generic desktop sheet is a short 520px card, too small for a map) */
+html.desk .sheet.sheet.ph-sheet{width:min(760px,calc(100vw - 64px));height:calc(100vh - 96px);max-height:min(860px,calc(100vh - 96px));max-width:none}

@@ -31,6 +31,8 @@ function colorSet(o = {}) {
     colors.push(out);
   });
   const set = { kind, id, key: kind + ":" + id, title: String(o.title || ""), colors, src: o.src || "" };
+  // the painter behind a painting (a name): "See its colors" on a painting offers All of <painter>'s colors (js/paintercolors.js)
+  if (o.painter) set.painter = { name: String(o.painter), slug: typeof routeSlug === "function" ? routeSlug(String(o.painter)) : String(o.painter) };
   // a set drawn from a bigger pool (a painting's measured colors): pick(k) -> its k biggest, as { h, n?, share? }, so
   // the map's "How many" can show more or fewer of them (honey.js honeyLitBar). max: how many the pool holds.
   if (typeof o.pick === "function" && o.max > 0) { set.pick = o.pick; set.max = Math.min(CS_POOL_MAX, o.max | 0); }
@@ -190,10 +192,20 @@ function csActions(set, o = {}) {
     // what's useful is this thing's OWN colors, sized by share, nothing else on screen (js/palettehive.js). A
     // set built with a pool (gallery's csPoolPick, a subject's svPool) carries pick/max already, so the slider
     // here goes all the way to the real measured count, recomputed at every step, never a truncated top-24.
+    // David, 2026-10-24: "I never liked the See colors on map feature, which shows the color map with some colors
+    // highlighted in random spots." A painter's colors open the painter's own color map (js/paintercolors.js); a
+    // painting opens its own colors, sized by share, with a door to All of <painter>'s colors. Neither ever lights
+    // colors up among the big shared map any more (mapSelect/csOnMap stay for the callers that still want that).
     if (k === "map") {
-      if (typeof openPaletteHive === "function") openPaletteHive({ title: s.title, subtitle: s.src && s.kind === "painting" ? "as photographed" : "", colors: s.colors, source: s.kind, poolFn: s.pick, max: s.max });
-      else if (typeof mapSelect === "function") mapSelect({ title: s.title, colors: s.colors, source: s.kind, id: s.id, src: s.src });
-      else csOnMap(s);
+      if (s.kind === "painter" && s.id && typeof pcOpen === "function") pcOpen(s.id);
+      else if (typeof openPaletteHive === "function") {
+        const pr = s.kind === "painting" && s.painter && typeof pcOpen === "function" && (typeof AW === "undefined" || !AW.ready || awHasPainter(s.painter.slug)) ? s.painter : null;
+        openPaletteHive({ title: s.kind === "painting" ? "This painting's colors" : s.title, subtitle: s.src && s.kind === "painting" ? "as photographed" : "", colors: s.colors, source: s.kind, poolFn: s.pick, max: s.max,
+          ...(s.kind === "painting" && s.title ? { sub: () => `${s.title}. Sized by how much of the canvas each covers.` } : {}),
+          ...(pr ? { cta: { label: `All of ${pr.name}'s colors`, run: () => pcOpen(pr.slug) } } : {}) });
+      }
+      else if (s.kind !== "painting" && typeof mapSelect === "function") mapSelect({ title: s.title, colors: s.colors, source: s.kind, id: s.id, src: s.src });
+      else if (s.kind !== "painting") csOnMap(s);
     }
     else if (k === "learn") csLearn(s, { back: o.back });
     else if (k === "play") csPlay(s, { back: o.back });

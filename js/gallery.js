@@ -1536,7 +1536,7 @@ function glPage(i, d, fromHex, tol) {
   const shuffleHistoryTo = (m, idx) => { const s = SHUF[m]; if (!s || idx === s.idx) return; s.idx = idx; locate = null; buzz(5); drawPalette(); };
   // the ColorSet verbs (js/colorset.js): this painting's palette, at whatever size the slider shows. Declared
   // early so both the action row and the coverage row's Learn button (David, 2026-10-09) can use it.
-  const glSet = () => colorSet({ kind: "painting", id: "g" + i, title: d.t, colors: curPal().map(p => ({ h: p.h, share: p.share })), src: "gallery/" + i,
+  const glSet = () => colorSet({ kind: "painting", id: "g" + i, title: d.t, painter: d.a || "", colors: curPal().map(p => ({ h: p.h, share: p.share })), src: "gallery/" + i,
     ...(pool.length > 3 && (mode === "out" || mode === "area") && typeof csPoolPick === "function" ? { pick: csPoolPick(pool), max: pool.length } : {}) });
   const dom = pal6.reduce((a, b) => b.share > a.share ? b : a).h;
   // the surround behind the picture (when it doesn't fill the full width) tints with the painting's own average

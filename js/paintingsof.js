@@ -210,6 +210,7 @@ function paintingsOfSection(hex, host, o = {}) {
       <div class="pt-tuner" data-pt-tuner hidden></div>
       <div class="pt-pairs-host" data-pt-pairs></div>`;
     host.querySelector("[data-pt-quick]").innerHTML = `<div class="pt-chips">${PT_PRE_TOL.map(([t, v]) => `<button data-pre-tol="${v}">${t}</button>`).join("")}</div>`;
+    if (typeof pcColorLine === "function") pcColorLine(hex, host, name);   // arrived from a painter's color map: "Van Gogh holds this in 212 of 1,233 paintings"
   };
   const refresh = () => {
     const my = ++seq, rail = host.querySelector("[data-pt-rail]");
