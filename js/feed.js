@@ -623,7 +623,6 @@ function fdcBase(sub) {
   p.catch(() => FDC_BASE.delete(hex));
   return p;
 }
-const fdcMatch = de => pctMatch(Math.max(0, de));
 
 function fdcRankPaintings(ctx) {
   return fdcBase(ctx.sub).then(b => {
@@ -635,7 +634,7 @@ function fdcRankPaintings(ctx) {
         items.push({ head: 1, sub: 1, text: b.groups[r.g].n, h: b.groups[r.g].h });
       }
       g = r.g;
-      items.push({ j: r.i, cap: r.g >= 0 ? `${b.groups[r.g].n} · ${fdcMatch(r.de)}` : fdcMatch(r.de) });
+      items.push({ j: r.i, cap: r.g >= 0 ? b.groups[r.g].n : "" });   // no percent (David, 2026-10-25): the order already says closest first
     }
     return b.groups.length ? { items, lead: "Closest to this color first, then the paintings of its neighbors", end: "That is everything close to this color and its neighbors." } : { items };
   });
@@ -663,7 +662,7 @@ async function fdcRankEra(ctx) {
   const dec = new Map(); pool.slice(0, 300).forEach(r => { const d = Math.floor(G.year[r.i] / 10); dec.set(d, (dec.get(d) || 0) + 1); });
   const top = [...dec.entries()].sort((a, b2) => b2[1] - a[1] || a[0] - b2[0])[0][0], y0 = top * 10 + 5;
   const sc = pool.map(r => [r, Math.abs(G.year[r.i] - y0) + r.de * 2]).sort((a, b2) => a[1] - b2[1]).slice(0, FD_KEEP);
-  return { lead: `Nearest the ${top * 10}s, the decade with the most of this color`, items: sc.map(([r]) => ({ j: r.i, cap: `${Math.floor(G.year[r.i] / 10) * 10}s · ${fdcMatch(r.de)}` })), end: b.groups.length ? "That is everything close to this color and its neighbors." : "" };
+  return { lead: `Nearest the ${top * 10}s, the decade with the most of this color`, items: sc.map(([r]) => ({ j: r.i, cap: `${Math.floor(G.year[r.i] / 10) * 10}s` })), end: b.groups.length ? "That is everything close to this color and its neighbors." : "" };
 }
 async function fdcRankPlace(ctx) {
   const [b, F] = await Promise.all([fdcBase(ctx.sub), fdFacets()]), pool = b.rows.filter(r => F.country[r.i]);
@@ -676,7 +675,7 @@ async function fdcRankPlace(ctx) {
     items.push([r, tier * 100 + r.de]);
   }
   items.sort((a, b2) => a[1] - b2[1]);
-  return { lead: `${F.meta.countries[co - 1]} first, the country with the most of this color, then its region`, items: items.slice(0, FD_KEEP).map(([r]) => ({ j: r.i, cap: `${F.meta.countries[F.country[r.i] - 1]} · ${fdcMatch(r.de)}` })), end: b.groups.length ? "That is everything close to this color and its neighbors." : "" };
+  return { lead: `${F.meta.countries[co - 1]} first, the country with the most of this color, then its region`, items: items.slice(0, FD_KEEP).map(([r]) => ({ j: r.i, cap: F.meta.countries[F.country[r.i] - 1] })), end: b.groups.length ? "That is everything close to this color and its neighbors." : "" };
 }
 
 // ---------- Other worlds: one card per thing, a few from each world in turn ----------
