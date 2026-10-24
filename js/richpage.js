@@ -404,7 +404,7 @@ function rpDrawersWire(el, name, hex) {
   const open = (id, scroll) => { drawers.forEach(d => { const on = d.dataset.rpDrawer === id; if (on) d.open = true; else if (d.open) d.open = false; if (on && scroll) setTimeout(() => d.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" }), 30); }); };
   drawers.forEach(d => d.querySelector("summary").addEventListener("click", () => { if (!d.open) drawers.forEach(o => { if (o !== d) o.open = false; }); }));
   // a paintings figure is a door to its evidence: the color's own In paintings page (js/paintingsof.js); other cards open their drawer
-  el.addEventListener("click", e => { const b = e.target.closest("[data-rp-door]"); if (!b) return; if (b.dataset.rpDoor === "paint" && typeof paintingsOfPage === "function") return paintingsOfPage([hex], { back: true }); open(b.dataset.rpDoor, true); });
+  el.addEventListener("click", e => { const b = e.target.closest("[data-rp-door]"); if (!b) return; if (b.dataset.rpDoor === "paint" && typeof paintingsDoor === "function") return paintingsDoor([hex], { back: true }); open(b.dataset.rpDoor, true); });
   // headlines, and a drawer with nothing in it is not drawn
   const head = (id, t) => { const h = el.querySelector(`[data-rp-head="${id}"]`); if (h && t && !h.textContent) h.textContent = t; };
   rpGraph(name).then(g => {
@@ -810,7 +810,7 @@ function rpPaintFill(el, name, hex, entry, famC) {
     const cards = rpGlanceCards(name, hex, g, rr && rr[name]);
     if (!cards.length) { box.remove(); return; }
     box.innerHTML = `<p class="rp-findings-h">In the archive</p><ul class="rp-findings">${cards.map(c => `<li><button type="button" data-rp-door="${c.door}"><b>${esc(c.fig)}</b> ${esc(c.text)}</button></li>`).join("")}</ul>`;
-    box.addEventListener("click", e => { const b = e.target.closest("[data-rp-door]"); if (b && b.dataset.rpDoor === "paint" && typeof paintingsOfPage === "function") paintingsOfPage([hex], { back: true }); });
+    box.addEventListener("click", e => { const b = e.target.closest("[data-rp-door]"); if (b && b.dataset.rpDoor === "paint" && typeof paintingsDoor === "function") paintingsDoor([hex], { back: true }); });
   });
   colorPoems(sec.querySelector(".c-poems"), entry);
   if (typeof worldColorRow === "function") worldColorRow(sec, { kind: "color", h: hex, title: name }, famC);
@@ -971,7 +971,7 @@ function colorDossier(entry, o = {}) {
   // namePage() (route #/page/<id>, ctx "page") -- both need the same ⋯ groups for the page actually on screen.
   const rpMoreGroups = () => [
     { title: "This color", items: [
-      { t: "Find it in paintings", run: () => { if (typeof paintingsOfPage === "function") paintingsOfPage([heroHex], { back: true }); } },
+      { t: "Find it in paintings", run: () => { if (typeof paintingsDoor === "function") paintingsDoor([heroHex], { back: true }); } },
       { t: "See it on the map", run: () => { if (typeof mapSelect === "function") mapSelect({ title: name, colors: [{ h: heroHex, n: name }], source: "color", id: routeSlug(name), src: "color/" + routeSlug(name) }); } },
       { t: "Test yourself", run: () => {
         const sec = el.querySelector("#ar-s-questions"); if (!sec) { toast("No questions for this color yet"); return; }

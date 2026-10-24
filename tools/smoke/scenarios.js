@@ -6444,16 +6444,18 @@ scenario("paintmap", "the card's Same painter / Same decade / Same place chips n
   await t.tapAt(cv0, r00.left + r00.width / 2, r00.top + r00.height / 2 - 150, { wait: 900 });
   await t.waitFor(".pmx-facets button", 6000, "the card's facet chips");
   const labels = t.$$(".pmx-facets button").map(b => t.text(b));
-  t.expect(labels.every(l => ["Same painter", "Same decade", "Same place", "Open", "Around this", "Walk from here"].includes(l)), `unexpected chip label(s): ${JSON.stringify(labels)}`);
-  t.expect(!labels.includes("undefined"), `a chip rendered the literal text "undefined": ${JSON.stringify(labels)}`);
-  const facetBtn = t.$$(".pmx-facets button").find(b => ["Same painter", "Same decade", "Same place"].includes(t.text(b)));
-  t.expect(facetBtn, "no Same painter/decade/place chip to test (this painting has none of the three?)");
+  // Phase B (2026-10-24): the three presets carry a live count after their words ("Same painter 377"); More, Open, Around this and Walk follow
+  t.expect(labels.every(l => /^(Same painter|Same era here|Around the same era here|Same era|Around the same era|More|Open|Around this|Walk from here)/.test(l)), `unexpected chip label(s): ${JSON.stringify(labels)}`);
+  t.expect(!labels.some(l => /undefined/.test(l)), `a chip rendered the literal text "undefined": ${JSON.stringify(labels)}`);
+  const facetBtn = t.$$(".pmx-facets [data-pmpre]").find(b => !b.disabled);
+  t.expect(facetBtn, "no preset chip to test (this painting has none?)");
   const before = t.w.PM_CTRL.count, label = t.text(facetBtn);
   await t.click(facetBtn, { wait: 700 });
   t.expect(t.w.PM_CTRL.count > 0 && t.w.PM_CTRL.count <= before, `tapping "${label}" didn't narrow the map (${t.w.PM_CTRL.count} of ${before})`);
   await t.waitFor(".pmx-chipbar [data-pmxclear]", 4000, "a removable chip for the filter just applied");
-  await t.click(t.$(".pmx-chipbar [data-pmxclear]"), { wait: 700 });
-  t.expect(t.w.PM_CTRL.count === before, `clearing the top chip didn't restore the full count (now ${t.w.PM_CTRL.count}, was ${before})`);
+  // "Same era here" is two filters (a country and a span of years), so it shows two removable chips: remove them one by one
+  for (let n = 0; n < 4 && t.$(".pmx-chipbar [data-pmxclear]"); n++) await t.click(t.$(".pmx-chipbar [data-pmxclear]"), { wait: 700 });
+  t.expect(t.w.PM_CTRL.count === before, `clearing the top chip(s) didn't restore the full count (now ${t.w.PM_CTRL.count}, was ${before})`);
 });
 scenario("paintmap", "Walk from here steps to a different painter each time", async t => {
   await t.open("#/paintings/map?arr=color", { settle: 800 });
@@ -7936,4 +7938,201 @@ scenario("paintmap", "desktop: a map click opens the page then a click on its pi
   await t.waitFor(() => /paintings\/map/.test(w.location.hash) && w.PM_CTRL && w.PM_CTRL._qaPZ, 8000, "Back to the map");
   const pz1 = w.PM_CTRL._qaPZ();
   t.expect(Math.abs(pz1.Z - pz0.Z) < 1e-6 && Math.hypot(pz1.P[0] - pz0.P[0], pz1.P[1] - pz0.P[1]) < 1e-3, `Back did not restore the view (${JSON.stringify(pz0)} -> ${JSON.stringify(pz1)})`);
+});
+
+// ---- Phase A (David, 2026-10-24): "if I adjust the settings ... the painting that I'm on would stay in the middle" ----
+// A helper the scenarios below share: open the color map, center a dated painting by the QA hook, return its gallery index.
+async function pmFocusOpen(t, hash = "#/paintings/map?arr=color") {
+  await t.open(hash, { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  const k = t.ev(`(() => { const lay = PM_CTRL.lay(), G = GAL; let k = Math.floor(lay.n / 3); for (; k < lay.n; k++) { const i = lay.items[k]; if (G.year[i] !== GL_UNDATED && G.year[i] > 1700 && G.year[i] < 1900 && XBF.artist[i] && XBF.country[i]) return k; } return -1; })()`);
+  t.expect(k >= 0, "no dated painting with a painter and a country to stand on");
+  t.ev(`PM_CTRL._qaSetPZ(PM_CTRL.lay().x[${k}], PM_CTRL.lay().y[${k}], 1)`);
+  return t.ev(`PM_CTRL.lay().items[${k}]`);
+}
+scenario("paintmap", "focus: a year range change keeps the painting in the middle", async t => {
+  const i0 = await pmFocusOpen(t), y = t.ev(`GAL.year[${i0}]`);
+  t.expect(t.w.PM_CTRL.center === i0, "the standing painting isn't in the middle");
+  t.ev(`PM_CTRL.spec.f.y0 = ${y - 40}; PM_CTRL.spec.f.y1 = ${y + 40}; PM_CTRL.rebuild()`);
+  t.expect(t.w.PM_CTRL.count < 60000 && t.w.PM_CTRL.count > 0, `the range didn't narrow the map (${t.w.PM_CTRL.count})`);
+  t.expect(t.w.PM_CTRL.center === i0, `the year range moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  t.ev(`PM_CTRL.spec.f.y0 = ${y - 10}; PM_CTRL.spec.f.y1 = ${y + 10}; PM_CTRL.rebuild()`);
+  t.expect(t.w.PM_CTRL.center === i0, `a tighter range moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  t.ev("PM_CTRL.spec.f.y0 = null; PM_CTRL.spec.f.y1 = null; PM_CTRL.rebuild()");
+  t.expect(t.w.PM_CTRL.center === i0, `clearing the range moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+});
+scenario("paintmap", "focus: Arrange color -> time -> color and Place by keep the painting in the middle", async t => {
+  const i0 = await pmFocusOpen(t);
+  await t.click(".pmx-do", { wait: 400 });
+  await t.waitFor(".pmx-sheet [data-pmarr]", 4000, "the Arrange choices");
+  for (const arr of ["time", "color", "painter", "color"]) {
+    await t.click(`.pmx-sheet [data-pmarr="${arr}"]`, { force: true, wait: 700 });
+    t.expect(t.w.PM_CTRL.spec.arr === arr, `didn't switch to ${arr}`);
+    t.expect(t.w.PM_CTRL.center === i0, `Arrange ${arr} moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  }
+  for (const pl of ["main", "standout", "avg"]) {
+    await t.click(`.pmx-sheet [data-pmplace="${pl}"]`, { force: true, wait: 700 });
+    t.expect(t.w.PM_CTRL.center === i0, `Place by ${pl} moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  }
+});
+scenario("paintmap", "focus: a filter keeps the painting; narrowing it out lands on the closest-color painting with Bring it back", async t => {
+  const i0 = await pmFocusOpen(t), y = t.ev(`GAL.year[${i0}]`);
+  const painter = t.ev(`XBF.artist[${i0}]`);
+  t.ev(`PM_CTRL.spec.f.painterSet = [${painter}]; PM_CTRL.rebuild()`);
+  t.expect(t.w.PM_CTRL.center === i0, `a painter filter moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  t.expect(t.$("[data-pmnote]").hidden, "the 'outside' line showed although the painting is inside the filter");
+  t.ev("PM_CTRL.spec.f.painterSet = []; PM_CTRL.rebuild()");
+  t.expect(t.w.PM_CTRL.center === i0, "clearing the painter filter moved you off your painting");
+  const out = [["ren", 1400, 1600], ["baroque", 1600, 1750], ["1800s", 1800, 1899], ["modern", 1860, 1970]].find(p => y < p[1] || y > p[2]);
+  t.ev(`PM_CTRL.spec.f.y0 = ${out[1]}; PM_CTRL.spec.f.y1 = ${out[2]}; PM_CTRL.rebuild()`);
+  const c1 = t.w.PM_CTRL.center;
+  t.expect(c1 !== i0 && c1 >= 0, `the painting is outside the range, so the map should land on another one (${c1})`);
+  const dist = t.ev(`(() => { const m = XBF.G.mean, d = (a, b) => Math.hypot(m[a * 3] - m[b * 3], m[a * 3 + 1] - m[b * 3 + 1], m[a * 3 + 2] - m[b * 3 + 2]), lay = PM_CTRL.lay(); let best = 1e9; for (let k = 0; k < lay.n; k++) best = Math.min(best, d(${i0}, lay.items[k])); return [d(${i0}, ${c1}), best]; })()`);
+  t.expect(dist[0] <= dist[1] + 1e-3, `the landing painting isn't the closest in color (${dist[0]} vs ${dist[1]})`);
+  t.expect(!t.$("[data-pmnote]").hidden && /outside/.test(t.text("[data-pmnote]")) && /Bring it back/.test(t.text("[data-pmnote]")), `no 'Your painting is outside ... Bring it back' line: "${t.text("[data-pmnote]")}"`);
+  await t.click("[data-pmnotego]", { wait: 700 });
+  t.expect(t.w.PM_CTRL.center === i0, `Bring it back didn't land on your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  t.expect(t.$("[data-pmnote]").hidden, "the line stayed after Bring it back");
+});
+
+// ---- Phase B (David, 2026-10-24): presets under a painting -- three chips with live counts and a More sheet of toggles that combine ----
+// Opens the color map, taps an off-center painting so its card opens, returns its gallery index.
+async function pmCardOpen(t, hash = "#/paintings/map?arr=color") {
+  await t.open(hash, { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  const cv = t.$(".pmx-cv"), r = cv.getBoundingClientRect();
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2 - 150, { wait: 900 });
+  await t.waitFor(".pmx-facets [data-pmpre]", 6000, "the card's preset chips");
+  t.ev("PM_CTRL._qaSkipGlide()"); await t.sleep(150);   // the harness can leave the tap's glide mid-ease: land it
+  await t.waitFor(".pmx-facets [data-pmpre]", 6000, "the card's preset chips after landing");
+  return t.w.PM_CTRL.center;
+}
+scenario("paintmap", "presets: each of the three chips narrows the map, keeps your painting in the middle, shows a count, and a second tap removes it", async t => {
+  const i0 = await pmCardOpen(t), before = t.w.PM_CTRL.count;
+  const chips = t.$$(".pmx-facets [data-pmpre]"); t.expect(chips.length >= 2, `only ${chips.length} preset chip(s) for a painting with a painter, a country and a year`);
+  const ids = chips.map(b => b.dataset.pmpre);
+  for (const k of ids) {
+    await t.waitFor(() => /\d/.test(t.text(`.pmx-facets [data-pmpre="${k}"] em`)), 8000, "the live count on a preset chip");
+    const b = t.$(`.pmx-facets [data-pmpre="${k}"]`), label = t.text(b);
+    if (b.disabled) continue;
+    await t.click(b, { wait: 700 });
+    t.expect(t.w.PM_CTRL.count > 0 && t.w.PM_CTRL.count <= before, `"${label}" didn't narrow the map (${t.w.PM_CTRL.count} of ${before})`);
+    t.expect(t.w.PM_CTRL.center === i0, `"${label}" moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+    t.expect(t.$(`.pmx-facets [data-pmpre="${k}"]`).classList.contains("on"), `"${label}" doesn't show as on`);
+    t.expect(t.$(".pmx-chipbar [data-pmxclear]"), `no removable chip for "${label}"`);
+    await t.click(t.$(`.pmx-facets [data-pmpre="${k}"]`), { wait: 700 });   // a second tap removes it
+    t.expect(t.w.PM_CTRL.count === before, `a second tap on "${label}" didn't restore the map (${t.w.PM_CTRL.count} vs ${before})`);
+    t.expect(t.w.PM_CTRL.center === i0, `removing "${label}" moved you off your painting`);
+  }
+});
+scenario("paintmap", "More: toggles combine, each narrows and keeps the painting, Clear these restores, estimated years say 'around'", async t => {
+  const i0 = await pmCardOpen(t), before = t.w.PM_CTRL.count;
+  await t.click("[data-pmmore2]", { wait: 500 });
+  await t.waitFor(".pmx-moresheet [data-tg]", 4000, "the More sheet");
+  const ids = t.$$(".pmx-moresheet [data-tg]").map(b => b.dataset.tg);
+  for (const want of ["painter", "co", "decade", "w25"]) t.expect(ids.includes(want), `More has no "${want}" toggle (has ${JSON.stringify(ids)})`);
+  await t.click('.pmx-moresheet [data-tg="co"]', { wait: 700 });
+  const nCo = t.w.PM_CTRL.count; t.expect(nCo > 0 && nCo < before, `Same country didn't narrow (${nCo} of ${before})`);
+  t.expect(t.w.PM_CTRL.center === i0, "Same country moved you off your painting");
+  await t.click('.pmx-moresheet [data-tg="w25"]', { wait: 700 });
+  const nW = t.w.PM_CTRL.count; t.expect(nW > 0 && nW < nCo, `Within 25 years on top of Same country didn't narrow further (${nW} vs ${nCo})`);
+  t.expect(t.w.PM_CTRL.center === i0, "Within 25 years moved you off your painting");
+  await t.click('.pmx-moresheet [data-tg="decade"]', { wait: 700 });   // the decade replaces the window: the two are one dimension
+  t.expect(t.w.PM_CTRL.center === i0, "Same decade moved you off your painting");
+  await t.click(".pmx-moresheet [data-pmmoreclear]", { wait: 700 });
+  t.expect(t.w.PM_CTRL.count === before, `Clear these didn't restore the map (${t.w.PM_CTRL.count} vs ${before})`);
+  t.expect(t.w.PM_CTRL.center === i0, "Clear these moved you off your painting");
+  // an estimated year widens and says so: use a painting whose year is only estimated
+  const est = t.ev("(() => { const G = GAL; if (!G.yspan) return -1; for (let i = 0; i < G.n; i++) if (G.yspan[i] > 8 && G.year[i] !== GL_UNDATED && XBF.country[i]) return i; return -1; })()");
+  if (est >= 0) {
+    const lab = t.ev(`pmPresetsOf(${est}, XBF).map(p => p.label).join("|")`);
+    t.expect(/Around the same era/.test(lab), `an estimated year should say "Around the same era": ${lab}`);
+    const sp = t.ev(`[pmEraSpan(${est}, XBF, 25), GAL.year[${est}], GAL.yspan[${est}]]`);
+    t.expect(sp[0][1] - sp[0][0] > 50, `an estimated year should widen the era (${JSON.stringify(sp)})`);
+  } else t.notes.push("no estimated years in this checkout: skipped the 'Around' label check");
+});
+
+// ---- Phase H (David, 2026-10-24): a color or a palette as a FILTER on the painting map ----
+const PM_HEX = "e9967a";
+scenario("paintmap", "a color is a filter: only paintings that hold it stay, centered on the closest, a chip says how many, x restores everything and keeps the painting", async t => {
+  await t.open(`#/paintings/map?arr=color&c=${PM_HEX}&t=8&m=0&hit=1`, { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 0 && t.w.PM_CTRL.drawn > 5, 20000, "the filtered map to lay out");
+  const total = t.ev("XBF.N"), n = t.w.PM_CTRL.count;
+  t.expect(n > 20 && n < total / 2, `the color should keep a few of the paintings, not all or none: ${n} of ${total}`);
+  const chk = t.ev(`(() => { const de = pmDE1(XBF, "#${PM_HEX.toUpperCase()}"), lay = PM_CTRL.lay(); let worst = 0, best = 1e9, bi = -1; const sc = i => { let m = 1e9; for (let j = 0; j < 6; j++) m = Math.min(m, de[i * 6 + j]); return m; };
+    for (let k = 0; k < lay.n; k++) { const m = sc(lay.items[k]); if (m > worst) worst = m; if (m < best) { best = m; bi = lay.items[k]; } }
+    return { worst, best, bi, center: PM_CTRL.center, centerScore: sc(PM_CTRL.center) }; })()`);
+  t.expect(chk.worst <= 8 + 1e-3, `a painting without the color is on the map (nearest swatch dE ${chk.worst})`);
+  t.expect(Math.abs(chk.centerScore - chk.best) < 1e-3, `the map isn't centered on the closest painting (${chk.centerScore} vs ${chk.best})`);
+  const chipTxt = t.text(".pmx-xcolor");
+  t.expect(/paintings/.test(chipTxt) && chipTxt.replace(/,/g, "").includes(String(n)), `the chip should read "<name> · ${n.toLocaleString()} paintings": "${chipTxt}"`);
+  t.expect(t.text("[data-pmcount]").replace(/,/g, "").includes(String(n)), "the corner count disagrees with the chip");
+  await t.click(".pmx-xcl-x", { wait: 900 });
+  t.expect(t.w.PM_CTRL.count === total, `x didn't restore every painting (${t.w.PM_CTRL.count} of ${total})`);
+  t.expect(t.w.PM_CTRL.center === chk.center, `x moved you off the painting you were on: ${chk.center} -> ${t.w.PM_CTRL.center}`);
+  t.expect(!t.$(".pmx-xcolor") && t.$(".pmx-chipbar").hidden, "the color chip stayed after x");
+});
+scenario("paintmap", "the closeness panel: a looser setting never shows fewer paintings; two colors offer Holds every color and Same overall palette", async t => {
+  await t.open(`#/paintings/map?arr=color&c=${PM_HEX},3a7d44&t=6&m=0&cm=all&hit=1`, { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 0 && t.w.PM_CTRL.drawn > 5, 20000, "the two-color map to lay out");
+  const tight = t.w.PM_CTRL.count;
+  await t.click("[data-pmxclose]", { wait: 500 });
+  await t.waitFor(".pmx-close [data-pmctol]", 4000, "the closeness panel");
+  t.expect(t.$(".pmx-close [data-pmcmode]") && t.$$(".pmx-close [data-pmcmode]").length === 2, "two colors should offer both modes");
+  t.ev("(() => { const i = document.querySelector('[data-pmctol]'); i.value = 14; i.dispatchEvent(new Event('input', { bubbles: true })); })()");
+  await t.sleep(600);
+  t.expect(t.w.PM_CTRL.count >= tight, `a looser closeness showed fewer paintings (${t.w.PM_CTRL.count} < ${tight})`);
+  t.expect(/\d/.test(t.text("[data-pmcn]")), "the panel doesn't show the live count");
+  await t.click('.pmx-close [data-pmcmode="overall"]', { wait: 300 });
+  await t.waitFor(() => t.w.PM_CTRL.spec.f.colorMode === "overall" && !/Matching/.test(t.text("[data-pmnote]")), 30000, "the overall-palette table to finish", 40000);
+  t.expect(t.w.PM_CTRL.count >= 0, "the overall palette mode left no map");
+});
+scenario("paintmap", "a painting's palette finds paintings with the same overall palette, centered on itself", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "the map");
+  const i = t.ev("PM_CTRL.lay().items[Math.floor(PM_CTRL.lay().n / 2)]");
+  await t.open(`#/gallery/${i}`, { settle: 800 });
+  await t.waitFor(".gl-pmap-pal", 8000, "Find paintings with this palette on the painting page");
+  t.expect(/Find paintings with this palette/.test(t.text(".gl-pmap-pal")), "the button doesn't say what it does");
+  await t.click(".gl-pmap-pal", { wait: 600 });
+  await t.waitFor(() => /paintings\/map/.test(t.w.location.hash) && t.w.PM_CTRL && t.w.PM_CTRL.count > 0 && !t.w.PM_CTRL.spec.hit, 40000, "the palette map to land", 50000);
+  t.expect(t.w.PM_CTRL.spec.f.colorMode === "overall", "the map should use Same overall palette");
+  t.expect(t.w.PM_CTRL.center === i, `the map should open centered on the painting itself: ${i} -> ${t.w.PM_CTRL.center}`);
+  t.expect(t.w.PM_CTRL.count < t.ev("XBF.N") / 4, `a palette should keep a small part of the museum (${t.w.PM_CTRL.count})`);
+  t.expect(/This painting's palette/.test(t.text(".pmx-xcolor")), `no palette chip: "${t.text(".pmx-chipbar")}"`);
+});
+scenario("paintmap", "the color's Paintings door opens the map; As a list is remembered and so is Where it lives", async t => {
+  await t.open("#/today", { settle: 600 });
+  t.ev("S.paintDoor = undefined");
+  t.ev(`paintingsDoor(["#3A7D44"], { back: true })`);
+  await t.waitFor(() => /paintings\/map/.test(t.w.location.hash) && t.w.PM_CTRL && t.w.PM_CTRL.count > 0, 20000, "the door to open the map");
+  await t.click("[data-pmxclose]", { wait: 500 });
+  await t.waitFor("[data-pmclist]", 4000, "the list button in the closeness panel");
+  await t.click("[data-pmclist]", { wait: 600 });
+  await t.waitFor(() => /paintings-of/.test(t.w.location.hash), 8000, "the list page");
+  t.expect(t.ev("S.paintDoor") === "list", "As a list wasn't remembered");
+  t.ev(`paintingsDoor(["#3A7D44"], { back: true })`);
+  await t.waitFor(() => /paintings-of/.test(t.w.location.hash) && t.$("[data-pmapdoor]"), 8000, "the door to open the list this time");
+  await t.click("[data-pmapdoor]", { wait: 600 });
+  await t.waitFor(() => /paintings\/map/.test(t.w.location.hash) && t.w.PM_CTRL && t.w.PM_CTRL.count > 0, 20000, "Where it lives to open the map");
+  t.expect(t.ev("S.paintDoor") === "map", "Where it lives wasn't remembered");
+});
+
+scenario("paintmap", "a map opened on a painting (on=) centers that painting, whatever the filters", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "the map");
+  const i = t.ev("(() => { const lay = PM_CTRL.lay(); for (let k = Math.floor(lay.n / 2); k < lay.n; k++) { const j = lay.items[k]; if (GAL.year[j] !== GL_UNDATED && XBF.artist[j]) return j; } return -1; })()");
+  t.expect(i >= 0, "no painting to stand on");
+  const y = t.ev(`GAL.year[${i}]`);
+  await t.open(`#/paintings/map?arr=color&on=${i}&y0=${y - 30}&y1=${y + 30}`, { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 0 && t.w.PM_CTRL.count < 150000 && t.w.PM_CTRL.drawn > 5, 20000, "the filtered map");
+  t.expect(t.w.PM_CTRL.center === i, `the map should open on the painting it was asked for: ${i} -> ${t.w.PM_CTRL.center}`);
+});
+scenario("paintmap", "a color nothing holds that closely says so and offers Loosen the closeness", async t => {
+  await t.open("#/paintings/map?arr=color&c=00ff00,ff00ff&cm=all&t=1&m=0&hit=1", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.$("[data-pmloosen2]"), 20000, "the empty state with its fix");
+  t.expect(/hold/.test(t.text(".pmx-wait")), `the empty state doesn't say what happened: "${t.text(".pmx-wait")}"`);
+  t.expect(t.w.PM_CTRL.count === 0, "expected an empty map");
+  for (let n = 0; n < 6 && t.$("[data-pmloosen2]"); n++) await t.click("[data-pmloosen2]", { wait: 700 });
+  t.expect(t.w.PM_CTRL.count > 0, "loosening the closeness never brought paintings back");
 });
