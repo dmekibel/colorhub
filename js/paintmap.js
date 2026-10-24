@@ -189,10 +189,12 @@ const pmHex = (i, F) => {
 //              names; matching itself only ever looks at coSet (already unioned in when the chip was tapped)
 //   painterSet/mvSet/musSet   multi-select, same OR-within-facet idea, for Painter/Movement/Museum
 //   subjSet    subject tags (data/gallery/subjects.json via js/gallery.js loadSubjects): a painting matches if ANY of its tags (authority, title or detected) is in the set; paintings only
-//   colorMode  "any" (default: a painting counts if it's close to ANY picked hex) or "all" (close to EVERY one)
+//   colorMode  "any" (default: a painting counts if it's close to ANY picked hex), "all" (close to EVERY one: "Holds every color") or
+//              "overall" ("Same overall palette": the whole palette within tol of the picked one, an earth mover's distance weighted by
+//              f.shares, see pmPalAsync)
 //   hueBand    one of XB_FAMS's 9 family indices (0=Reds..8=Greys), matched against a painting's DOMINANT swatch
 //   l0/l1      a mean-lightness range (0-100, dark<->light), independent of any hex pick
-const pmFilterFresh = () => ({ ...xbFresh(), coSet: [], region: null, painterSet: [], mvSet: [], musSet: [], tySet: [], subjSet: [], colorMode: "any", hueBand: null, l0: null, l1: null });
+const pmFilterFresh = () => ({ ...xbFresh(), coSet: [], region: null, painterSet: [], mvSet: [], musSet: [], tySet: [], subjSet: [], colorMode: "any", shares: null, hueBand: null, l0: null, l1: null });
 // Western Europe / Northern Europe / Italy & Spain are deliberately tighter than "Europe" (which is every
 // European country in the dataset) -- each is its own bulk-select, not a strict partition of the broad one.
 const PM_REGIONS = [
@@ -225,6 +227,141 @@ function pmDE1(F, hex) {
   for (let m = 0; m < M; m++) { const o = m * 3, dL = Lb[o] - tL; if (dL > 28 || dL < -28) continue; const d = glDE(tL, ta, tb, Lb[o], Lb[o + 1], Lb[o + 2]); if (d < de[m]) de[m] = d; }
   e = { N: F.N, de }; PM_DE1.set(hex, e); return de;
 }
+// ---------- Phase H: a color or a palette as a FILTER (David, 2026-10-24) ----------
+// "i want only the ones that exist to be visible": the map shows ONLY the paintings that hold the color (never glow-and-dim).
+//   Holds every color   f.colorMode "all": each picked color must be in the painting within f.tol (CIEDE2000, pmDE1 above).
+//   Same overall palette   f.colorMode "overall": the cost of turning one whole palette into the other, in CIELAB, weighted by
+//   how much of the canvas each color covers (an earth mover's distance over the six colors and their shares).
+// Both need a table over every painting (a first color: 206,000 x 6 distances, ~150 ms; a palette: ~1.3M comparisons plus a small
+// transport problem for the plausible ones, seconds). That is more than a frame, so the tables are built in short time slices
+// (~10 ms, yielding between) and the map you are on stays alive under a quiet "Matching ... 40%" line. Tables are cached; a
+// closer palette setting only computes the paintings that can pass, and loosening the slider only computes the extra ones.
+// (No Worker: a copy of the 25 MB color table would cost more memory than the slices cost time, and iOS is memory-bound.)
+const PM_PAL_MAX = 14;   // the loosest "Same overall palette" goes (CIELAB units): beyond it tens of thousands of paintings match
+let PM_PAL = null;      // { key, lb: Float32Array, dist: Float32Array, upTo } the last palette asked for
+const pmYieldQ = [], pmYieldCh = typeof MessageChannel === "function" ? new MessageChannel() : null;
+if (pmYieldCh) pmYieldCh.port1.onmessage = () => { const r = pmYieldQ.shift(); if (r) r(); };
+const pmYield = () => new Promise(res => { if (pmYieldCh) { pmYieldQ.push(res); pmYieldCh.port2.postMessage(0); } else setTimeout(res, 0); });
+const pmPalKey = (F, f) => F.N + "|" + f.hexes.join(",") + "|" + (f.shares || []).map(x => (+x).toFixed(3)).join(",");
+const pmPalDist = (F, f) => (PM_PAL && PM_PAL.key === pmPalKey(F, f) ? PM_PAL.dist : null);
+// is the table this filter needs already built?
+function pmMatchReady(F, f) {
+  if (!f.hexes || !f.hexes.length) return true;
+  if (f.colorMode === "overall") return !!(PM_PAL && PM_PAL.key === pmPalKey(F, f) && PM_PAL.upTo >= Math.min(PM_PAL_MAX, Math.ceil(f.tol)));
+  return f.hexes.every(h => { const e = PM_DE1.get(h); return e && e.N === F.N; });
+}
+// the exact earth mover's distance of two small palettes (w: K weights, v: M weights, each summing to 1; D[a*6+m] the distances):
+// successive cheapest augmenting paths in the flow network source -> query colors -> painting colors -> sink
+const EMD_F = new Int8Array(120), EMD_T = new Int8Array(120), EMD_C = new Float64Array(120), EMD_W = new Float64Array(120), EMD_ND = new Float64Array(16), EMD_PV = new Int16Array(16);
+function pmEMD(w, K, v, M, D) {
+  let ne = 0; const T = K + M + 1;
+  const add = (a, b, cap, cost) => { EMD_F[ne] = a; EMD_T[ne] = b; EMD_C[ne] = cap; EMD_W[ne] = cost; ne++; EMD_F[ne] = b; EMD_T[ne] = a; EMD_C[ne] = 0; EMD_W[ne] = -cost; ne++; };
+  for (let a = 0; a < K; a++) add(0, 1 + a, w[a], 0);
+  for (let a = 0; a < K; a++) for (let m = 0; m < M; m++) add(1 + a, 1 + K + m, 9, D[a * 6 + m]);
+  for (let m = 0; m < M; m++) add(1 + K + m, T, v[m], 0);
+  let cost = 0, flow = 0;
+  for (let it = 0; it < 60 && flow < 1 - 1e-7; it++) {
+    EMD_ND.fill(1e9, 0, T + 1); EMD_ND[0] = 0;
+    for (let pass = 0; pass <= T; pass++) {
+      let ch = false;
+      for (let e = 0; e < ne; e++) if (EMD_C[e] > 1e-9 && EMD_ND[EMD_F[e]] + EMD_W[e] < EMD_ND[EMD_T[e]] - 1e-12) { EMD_ND[EMD_T[e]] = EMD_ND[EMD_F[e]] + EMD_W[e]; EMD_PV[EMD_T[e]] = e; ch = true; }
+      if (!ch) break;
+    }
+    if (EMD_ND[T] >= 1e8) break;
+    let f = 9; for (let x = T; x !== 0; x = EMD_F[EMD_PV[x]]) f = Math.min(f, EMD_C[EMD_PV[x]]);
+    for (let x = T; x !== 0; x = EMD_F[EMD_PV[x]]) { EMD_C[EMD_PV[x]] -= f; EMD_C[EMD_PV[x] ^ 1] += f; }
+    flow += f; cost += f * EMD_ND[T];
+  }
+  return cost;
+}
+// the table of one color: the nearest swatch distance (CIEDE2000) of every painting, built in slices. alive() false -> abandon.
+async function pmDE1Async(F, hex, onPct, alive) {
+  const have = PM_DE1.get(hex); if (have && have.N === F.N) return true;
+  const G = F.G, M = F.N * 6, de = new Float32Array(M).fill(1e3), Lb = G.lab, [tL, ta, tb] = lab(hex);
+  let m = 0;
+  while (m < M) {
+    const t0 = performance.now();
+    while (m < M) {
+      const o = m * 3, dL = Lb[o] - tL;
+      if (dL <= 28 && dL >= -28) { const d = glDE(tL, ta, tb, Lb[o], Lb[o + 1], Lb[o + 2]); if (d < de[m]) de[m] = d; }
+      m++; if ((m & 1023) === 0 && performance.now() - t0 > 10) break;
+    }
+    if (onPct) onPct(m / M);
+    if (m < M) { await pmYield(); if (alive && !alive()) return false; }
+  }
+  if (PM_DE1.size > 24) PM_DE1.clear();
+  PM_DE1.set(hex, { N: F.N, de }); return true;
+}
+// the table of one palette: first a cheap lower bound for every painting (each side's weighted nearest-color distance), then the exact
+// distance only for paintings whose bound is within the closeness asked for (f.tol); a looser tol later adds the paintings in between.
+async function pmPalAsync(F, f, onPct, alive) {
+  const key = pmPalKey(F, f), G = F.G, N = F.N, Lb = G.lab, sh = G.sh, K = f.hexes.length;
+  const q = f.hexes.map(h => lab(h)), w = new Float64Array(6), sw = (f.shares && f.shares.length === K ? f.shares : f.hexes.map(() => 1)).reduce((a, b) => a + b, 0) || 1;
+  for (let a = 0; a < K; a++) w[a] = ((f.shares && f.shares.length === K ? f.shares[a] : 1) || 0) / sw;
+  if (!PM_PAL || PM_PAL.key !== key) PM_PAL = { key, lb: null, dist: new Float32Array(N).fill(999), upTo: 0 };
+  const T = PM_PAL, D = new Float64Array(36), vv = new Float64Array(6), idx = new Int8Array(6), colMin = new Float64Array(6);
+  // one painting: fills D/vv/idx, returns M (0 when it has no measured colors); and its bound through lbOut[0]
+  const lbOut = new Float64Array(1);
+  const prep = i => {
+    const j0 = i * 6; let tot = 0; for (let j = 0; j < 6; j++) tot += sh[j0 + j];
+    if (!(tot > 0)) return 0;
+    let M = 0; for (let j = 0; j < 6; j++) if (sh[j0 + j] > 0) { idx[M] = j; vv[M] = sh[j0 + j] / tot; colMin[M] = 9e9; M++; }
+    let lb1 = 0, lb2 = 0;
+    for (let a = 0; a < K; a++) {
+      let rowMin = 9e9;
+      for (let m = 0; m < M; m++) {
+        const o = (j0 + idx[m]) * 3, dL = q[a][0] - Lb[o], da = q[a][1] - Lb[o + 1], db = q[a][2] - Lb[o + 2], d = Math.sqrt(dL * dL + da * da + db * db);
+        D[a * 6 + m] = d; if (d < rowMin) rowMin = d; if (d < colMin[m]) colMin[m] = d;
+      }
+      lb1 += w[a] * rowMin;
+    }
+    for (let m = 0; m < M; m++) lb2 += vv[m] * colMin[m];
+    lbOut[0] = Math.max(lb1, lb2); return M;
+  };
+  const sliced = async (from, body, lo, hi) => {   // run body(i) over [0, N) in slices, reporting progress in [lo, hi]
+    let i = 0;
+    while (i < N) {
+      const t0 = performance.now();
+      while (i < N) { body(i); i++; if ((i & 255) === 0 && performance.now() - t0 > 10) break; }
+      if (onPct) onPct(lo + (hi - lo) * i / N);
+      if (i < N) { await pmYield(); if (alive && !alive()) return false; }
+    }
+    return true;
+  };
+  if (!T.lb) {
+    const lb = new Float32Array(N).fill(999);
+    if (!await sliced(0, i => { if (prep(i)) lb[i] = lbOut[0]; }, 0, .3)) return false;
+    T.lb = lb;
+  }
+  const want = Math.min(PM_PAL_MAX, Math.ceil(f.tol)), from = T.upTo, lb = T.lb, dist = T.dist;
+  if (want > from) {
+    if (!await sliced(0, i => { const b = lb[i]; if (b > from && b <= want) { const M = prep(i); if (M) dist[i] = pmEMD(w, K, vv, M, D); } }, .3, 1)) return false;
+    T.upTo = want;
+  }
+  return true;
+}
+// make the tables this filter needs ready; resolves true when they are, false when asked to stop (alive() false)
+async function pmMatchCompute(F, f, onPct, alive) {
+  if (pmMatchReady(F, f)) return true;
+  if (f.colorMode === "overall") return pmPalAsync(F, f, onPct, alive);
+  const miss = f.hexes.filter(h => { const e = PM_DE1.get(h); return !(e && e.N === F.N); });
+  for (let k = 0; k < miss.length; k++) if (!await pmDE1Async(F, miss[k], p => { if (onPct) onPct((k + p) / miss.length); }, alive)) return false;
+  return true;
+}
+// how well a painting matches the picked color(s): lower is closer (the best match opens the map)
+function pmMatchScore(F, f) {
+  if (f.colorMode === "overall") { const pd = pmPalDist(F, f); return pd ? i => pd[i] : null; }
+  const per = f.hexes.map(h => pmDE1(F, h)), all = f.colorMode === "all" || f.hexes.length === 1;
+  return i => { let out = all ? 0 : 1e9; for (const de of per) { let near = 1e9; for (let j = 0; j < 6; j++) { const d = de[i * 6 + j]; if (d < near) near = d; } out = all ? Math.max(out, near) : Math.min(out, near); } return out; };
+}
+// the cell in this layout that matches the filter's color(s) best (-1 when none)
+function pmBestMatch(lay, f, F) {
+  if (!f.hexes || !f.hexes.length || !lay.n) return -1;
+  const sc = pmMatchScore(F, f); if (!sc) return -1;
+  let best = -1, bd = Infinity; for (let k = 0; k < lay.n; k++) { const d = sc(lay.items[k]); if (d < bd) { bd = d; best = k; } }
+  return best;
+}
+
 // the one query pass: AND across facets, OR within one (every *Set is OR'd internally, then every facet ANDs
 // with every other) -- same bitmask-exclusion trick js/browse.js's xbRun uses for live per-value counts, just
 // extended to multi-select dims and the two new ones (hue band, lightness)
@@ -238,7 +375,8 @@ function pmRun(s, F) {
   const subjOn = !!SUBJ && (F.col || "paintings") === "paintings" && N <= SUBJ.N;
   const subjFlag = subjOn && f.subjSet && f.subjSet.length ? subjFlags(f.subjSet) : null;
   const hasHex = f.hexes && f.hexes.length, mode = f.colorMode || "any";
-  const perHex = hasHex ? f.hexes.map(h => pmDE1(F, h)) : null;
+  const overall = hasHex && mode === "overall", pd = overall ? pmPalDist(F, f) : null;   // Same overall palette: the distance table must already be computed (pmMount waits for it)
+  const perHex = hasHex && !overall ? f.hexes.map(h => pmDE1(F, h)) : null;
   const tol = f.tol;
   const when = f.y0 != null || f.y1 != null, y0 = f.y0 == null ? -1e5 : f.y0, y1 = f.y1 == null ? 1e5 : f.y1;
   const hasL = f.l0 != null || f.l1 != null, l0 = f.l0 == null ? -1e5 : f.l0, l1 = f.l1 == null ? 1e5 : f.l1;
@@ -249,7 +387,8 @@ function pmRun(s, F) {
     let fail = 0;
     if (hasHex) {
       let ok;
-      if (mode === "all") { ok = true; for (const de of perHex) { let near = 1e3; for (let j = 0; j < 6; j++) { const d = de[i * 6 + j]; if (d < near) near = d; } if (near > tol) { ok = false; break; } } }
+      if (overall) ok = !!pd && pd[i] <= tol;
+      else if (mode === "all") { ok = true; for (const de of perHex) { let near = 1e3; for (let j = 0; j < 6; j++) { const d = de[i * 6 + j]; if (d < near) near = d; } if (near > tol) { ok = false; break; } } }
       else { let near = 1e3; for (const de of perHex) for (let j = 0; j < 6; j++) { const d = de[i * 6 + j]; if (d < near) near = d; } ok = near <= tol; }
       if (!ok) fail |= 1;
     }
@@ -333,6 +472,12 @@ function pmParse(q, F) {
   const mg = num("mag"); if (mg != null) s.mag = clamp(mg, 0, 1);
   if (p.get("c")) { f.hexes = p.get("c").split(",").filter(h => /^[0-9a-f]{6}$/i.test(h)).map(h => "#" + h.toUpperCase()); f.name = f.hexes.length === 1 ? nameOf(f.hexes[0]).text : ""; f.tol = num("t") || 8; f.cover = num("m") != null ? num("m") : 2; }
   if (p.get("cm") === "all") f.colorMode = "all";
+  if (p.get("cm") === "overall" && f.hexes.length) {
+    f.colorMode = "overall"; f.tol = Math.min(f.tol, PM_PAL_MAX); if (p.get("at") === "1") f.auto = 1; if (p.get("nm")) f.name = p.get("nm").slice(0, 60);
+    const sh = (p.get("sh") || "").split(",").map(Number).filter(x => isFinite(x) && x >= 0);
+    f.shares = sh.length === f.hexes.length ? sh : f.hexes.map(() => 1 / f.hexes.length);
+  }
+  if (p.get("hit") === "1") s.hit = 1;   // an entry point from a color or a palette: open centered on the closest match (never written back to the address)
   f.y0 = num("y0"); f.y1 = num("y1");
   const hb = num("hb"); if (hb != null && hb >= 0 && hb < 9) f.hueBand = hb;
   const l0 = num("l0"), l1 = num("l1"); if (l0 != null) f.l0 = l0; if (l1 != null) f.l1 = l1;
@@ -355,7 +500,7 @@ function pmQS(s, F) {
   const f = s.f, out = [["arr", s.arr]];
   const col = s.col || (F && F.col) || "paintings"; if (col !== "paintings") out.push(["col", col]);
   if (s.place && s.place !== "avg") out.push(["pl", s.place]);
-  if (f.hexes.length) { out.push(["c", f.hexes.map(h => h.slice(1).toLowerCase()).join(",")], ["t", f.tol], ["m", f.cover]); if (f.hexes.length > 1 && f.colorMode === "all") out.push(["cm", "all"]); }
+  if (f.hexes.length) { out.push(["c", f.hexes.map(h => h.slice(1).toLowerCase()).join(",")], ["t", f.tol], ["m", f.cover]); if (f.hexes.length > 1 && f.colorMode === "all") out.push(["cm", "all"]); if (f.colorMode === "overall") { out.push(["cm", "overall"], ["sh", (f.shares || []).join(",")]); if (f.name) out.push(["nm", f.name]); } }
   if (f.y0 != null) out.push(["y0", f.y0]); if (f.y1 != null) out.push(["y1", f.y1]);
   if (f.hueBand != null) out.push(["hb", f.hueBand]);
   if (f.l0 != null) out.push(["l0", f.l0]); if (f.l1 != null) out.push(["l1", f.l1]);
@@ -420,7 +565,7 @@ function pmActiveChips(s, F) {
   }
   if (f.hexes.length) {
     const names = f.hexes.map(h => nameOf(h).text);
-    c.push({ dim: "color", text: names.length === 1 ? names[0] : `${names.length} colors (${f.colorMode === "all" ? "all" : "any"})` });
+    c.push({ dim: "color", text: names.length === 1 ? names[0] : f.name ? f.name : f.colorMode === "overall" ? `Palette of ${names.length} colors` : f.colorMode === "all" ? `Holds all ${names.length} colors` : `Any of ${names.length} colors` });
   }
   if (f.hueBand != null) c.push({ dim: "hueBand", text: XB_HUE_WORDS[f.hueBand] });
   if (f.l0 != null || f.l1 != null) c.push({ dim: "l", text: f.l0 != null && f.l1 != null ? `Lightness ${f.l0}–${f.l1}` : f.l0 != null ? `Lighter than ${f.l0}` : `Darker than ${f.l1}` });
@@ -431,20 +576,66 @@ function pmActiveChips(s, F) {
   if (f.subjSet && f.subjSet.length && SUBJ) c.push({ dim: "subj", text: subjSetLabel(f.subjSet) });
   return c;
 }
-// the card's own three facets (David, 2026-10-09, the minimalist pass -- "filtering by example" stays, pared to
-// the card's own 3-chip budget): Same painter / Same decade / Same place, only the ones that actually apply.
-// Movement, museum and color-swatch filters still exist -- in the sheet's Filter group (More options), not here.
-function pmFacetsOf(i, F) {
-  const out = [];
-  if (F.artist[i]) out.push({ dim: "painter", val: F.artist[i], label: "Same " + pmColLabel(F, "painter").toLowerCase() });
-  const y = F.G.year[i];
-  if (y !== GL_UNDATED) {
-    const y0 = y < 1500 ? Math.floor(y / 100) * 100 : Math.floor(y / 10) * 10, y1 = y < 1500 ? y0 + 99 : y0 + 9;
-    out.push({ dim: "when", val: [y0, y1], label: F.G === GAL && typeof glYearEst === "function" && glYearEst(i) ? "Around the same decade" : "Same decade" });
-  }
-  if (F.country[i]) out.push({ dim: "co", val: F.country[i], label: "Same " + pmColLabel(F, "co").toLowerCase() });
+// ---------- Phase B: presets under a painting (David, 2026-10-24) ----------
+// "pre-built filters ... everything by this painter, painters from the same country, from the same era". Each is a patch on
+// the ordinary filter spec (the same facets the Filter sheet sets), so every preset narrows the map, shows as the usual
+// removable chip, goes through Phase A's focus rule, and a second tap on it removes it. A preset knows how to apply itself,
+// how to undo itself and whether it is on right now.
+const pmSameSet = (a, b) => !!a && a.length === b.length && b.every(x => a.includes(x));
+const pmIsEst = (i, F) => !!(F.G === GAL && typeof glYearEst === "function" && glYearEst(i));
+// the years around a painting: +-half, widened by half the estimate's own range when the year is only estimated (honest: "around")
+function pmEraSpan(i, F, half) {
+  const y = F.G.year[i]; if (y === GL_UNDATED) return null;
+  const sp = F.G === GAL && GAL.yspan ? GAL.yspan[i] || 0 : 0, w = half + Math.ceil(sp / 2);
+  return [y - w, y + w];
+}
+function pmDecadeSpan(i, F) {
+  const y = F.G.year[i]; if (y === GL_UNDATED) return null;
+  const y0 = y < 1500 ? Math.floor(y / 100) * 100 : Math.floor(y / 10) * 10;
+  return [y0, y < 1500 ? y0 + 99 : y0 + 9];
+}
+// a painting's own palette as a search: its (up to six) swatches and their shares
+function pmPaletteOf(i, F) {
+  if (F.col && F.col !== "paintings") return null;
+  const G = F.G, hexes = [], shares = [];
+  for (let j = 0; j < 6; j++) { const sh = G.sh[i * 6 + j]; if (!(sh > 0)) continue; hexes.push(glHex(i, j).toUpperCase()); shares.push(sh); }
+  const tot = shares.reduce((a, b) => a + b, 0) || 1;
+  return hexes.length ? { hexes, shares: shares.map(x => Math.round(x / tot * 1000) / 1000) } : null;
+}
+const PM_PAL_CLOSE = PM_PAL_MAX;   // where a painting's own palette starts (f.auto then tightens it to the smallest setting that still leaves ~48 paintings)
+function pmTogglesOf(i, F) {
+  const out = [], G = F.G, lbl = k => pmColLabel(F, k).toLowerCase();
+  const a = F.artist[i], c = F.country[i], mv = F.mv ? F.mv[i] : 0, mus = G.mus ? G.mus[i] : -1;
+  const est = pmIsEst(i, F), aroundOr = (t) => est ? t.replace(/^Same/, "Around the same") : t;
+  const when = (sp) => ({ patch: f => { f.y0 = sp[0]; f.y1 = sp[1]; }, clear: f => { f.y0 = null; f.y1 = null; }, on: f => f.y0 === sp[0] && f.y1 === sp[1] });
+  if (a) out.push({ id: "painter", group: "who", label: "Same " + lbl("painter"), sub: xbArtistName(F, a), patch: f => { f.painterSet = [a]; f.painter = 0; }, clear: f => { f.painterSet = []; f.painter = 0; }, on: f => pmSameSet(f.painterSet, [a]) });
+  if (c) out.push({ id: "co", group: "where", label: !F.col || F.col === "paintings" ? "Same country" : "Same " + lbl("co"), sub: F.meta.countries[c - 1], patch: f => { f.coSet = [c]; f.region = null; }, clear: f => { f.coSet = []; f.co = 0; f.region = null; }, on: f => pmSameSet(f.coSet, [c]) });
+  if (mv && F.meta.movements) out.push({ id: "mv", group: "where", label: "Same " + lbl("mv"), sub: F.meta.movements[mv - 1], patch: f => { f.mvSet = [mv]; f.mv = 0; }, clear: f => { f.mvSet = []; f.mv = 0; }, on: f => pmSameSet(f.mvSet, [mv]) });
+  if (mus >= 0 && G.src && G.src[mus]) out.push({ id: "mus", group: "where", label: "Same " + lbl("mus"), sub: G.src[mus].short, patch: f => { f.musSet = [mus]; f.mus = -1; }, clear: f => { f.musSet = []; f.mus = -1; }, on: f => pmSameSet(f.musSet, [mus]) });
+  const dec = pmDecadeSpan(i, F);
+  if (dec) out.push({ id: "decade", group: "when", label: aroundOr("Same decade"), sub: dec[0] < 1500 ? `${dec[0]}s–${dec[1]}` : `${dec[0]}–${dec[1]}`, ...when(dec) });
   return out;
 }
+const PM_WITHIN = [10, 25, 50, 100];
+// the three chips under a painting, by what applies
+function pmPresetsOf(i, F) {
+  const out = [], a = F.artist[i], c = F.country[i], est = pmIsEst(i, F), near = pmEraSpan(i, F, 25), far = pmEraSpan(i, F, 50);
+  if (a) out.push({ id: "painter", label: "Same " + pmColLabel(F, "painter").toLowerCase(), patch: f => { f.painterSet = [a]; f.painter = 0; }, clear: f => { f.painterSet = []; f.painter = 0; }, on: f => pmSameSet(f.painterSet, [a]) });
+  if (near && c) out.push({ id: "erahere", label: est ? "Around the same era here" : "Same era here", patch: f => { f.coSet = [c]; f.region = null; f.y0 = near[0]; f.y1 = near[1]; }, clear: f => { f.coSet = []; f.co = 0; f.region = null; f.y0 = null; f.y1 = null; }, on: f => pmSameSet(f.coSet, [c]) && f.y0 === near[0] && f.y1 === near[1] });
+  if (far) out.push({ id: "era", label: est ? "Around the same era" : "Same era", patch: f => { f.y0 = far[0]; f.y1 = far[1]; }, clear: f => { f.y0 = null; f.y1 = null; }, on: f => f.y0 === far[0] && f.y1 === far[1] });
+  return out;
+}
+const PM_COUNT_CACHE = new Map();
+// how many paintings a patch would leave, on top of the filters already on (a live count; cached per filter state)
+function pmPatchCount(s, F, p, i) {
+  const key = i + "|" + p.id + "|" + JSON.stringify([s.f, s.fav, s.upToYear]) + "|" + F.N;
+  if (PM_COUNT_CACHE.has(key)) return PM_COUNT_CACHE.get(key);
+  const sp = pmCloneSpec(s); p.patch(sp.f);
+  const n = pmList(sp, F).length;
+  if (PM_COUNT_CACHE.size > 80) PM_COUNT_CACHE.clear();
+  PM_COUNT_CACHE.set(key, n); return n;
+}
+
 // apply one facet to the filter spec in place -- a quick "narrow to exactly this" (so it REPLACES the facet's
 // whole set, the one place in this file multi-select is deliberately overridden rather than added to)
 function pmFacetApply(f, dim, val) {
@@ -460,7 +651,7 @@ function pmChipClear(f, dim) {
   if (dim === "fav") return "fav";   // handled by the caller (s.fav lives outside f)
   if (dim === "co") { f.coSet = []; f.co = 0; f.region = null; }
   else if (dim === "when") { f.y0 = null; f.y1 = null; }
-  else if (dim === "color") { f.hexes = []; f.name = ""; f.colorMode = "any"; }
+  else if (dim === "color") { f.hexes = []; f.name = ""; f.colorMode = "any"; f.shares = null; }
   else if (dim === "hueBand") f.hueBand = null;
   else if (dim === "l") { f.l0 = null; f.l1 = null; }
   else if (dim === "painter") { f.painterSet = []; f.painter = 0; }
@@ -1607,16 +1798,32 @@ function pmMount(el, s, F) {
   // decade/place), Open, Arrange around this, and Walk from here.
   // David, 2026-10-10: a tap no longer seeds/rebuilds (it's a plain fly-to now -- see tap()'s own comment), so
   // "arrange the neighbors around this painting" needed its own explicit chip instead of riding along for free.
+  // Phase B (David, 2026-10-24): the row under a painting is three presets and "More". Each preset carries a live count
+  // ("Same era here · 412"), filled in a beat after the row appears so the card never waits on it; a second tap removes it.
+  let facetTok = 0;
   function paintFacets(i) {
-    const fs = pmFacetsOf(i, F);
+    const pr = pmPresetsOf(i, F), tok = ++facetTok;
     facets.hidden = false;
-    facets.innerHTML = `${fs.map((fc, k) => `<button class="pmx-fchip" data-pmfacet="${k}">${esc(fc.label)}</button>`).join("")}<button class="pmx-fchip pmx-fchip-open" data-pmopen2>Open</button><button class="pmx-fchip pmx-fchip-arrange" data-pmarrange-go>Around this</button><button class="pmx-fchip pmx-fchip-walk" data-pmwalk-go>Walk from here</button>`;
+    const chipHTML = (p, k) => { const on = p.on(s.f); return `<button class="pmx-fchip pmx-fpre${on ? " on" : ""}" data-pmpre="${k}" aria-pressed="${on}"><span>${esc(p.label)}</span><em data-pmprec></em></button>`; };
+    facets.innerHTML = `${pr.length ? `<div class="pmx-frow">${pr.map(chipHTML).join("")}</div>` : ""}<div class="pmx-frow"><button class="pmx-fchip pmx-fmore" data-pmmore2>More</button><button class="pmx-fchip pmx-fchip-open" data-pmopen2>Open</button><button class="pmx-fchip pmx-fchip-arrange" data-pmarrange-go>Around this</button><button class="pmx-fchip pmx-fchip-walk" data-pmwalk-go>Walk from here</button></div>`;
     facets.querySelector("[data-pmopen2]").onclick = () => openK(centerK);
     facets.querySelector("[data-pmarrange-go]").onclick = () => arrangeAround(i);
     facets.querySelector("[data-pmwalk-go]").onclick = () => doWalk();
-    facets.querySelectorAll("[data-pmfacet]").forEach(b => b.onclick = () => {
-      const fc = fs[+b.dataset.pmfacet]; buzz(6); pmFacetApply(s.f, fc.dim, fc.val); rebuild();
+    facets.querySelector("[data-pmmore2]").onclick = () => { buzz(4); openMore(i); };
+    facets.querySelectorAll("[data-pmpre]").forEach(b => b.onclick = () => {
+      if (b.disabled) return;
+      const p = pr[+b.dataset.pmpre]; buzz(6);
+      if (p.on(s.f)) p.clear(s.f); else p.patch(s.f);
+      rebuild({ focus: { i, z: Z, open: true } });   // the painting these chips were made for stays in the middle (a glide may still be settling onto it)
     });
+    if (cardOpen) pr.forEach((p, k) => setTimeout(() => {
+      if (dead || tok !== facetTok || !cardOpen) return;
+      const b = facets.querySelector(`[data-pmpre="${k}"]`); if (!b) return;
+      const on = p.on(s.f), n = on ? lay.n : pmPatchCount(s, F, p, i);
+      b.querySelector("[data-pmprec]").textContent = n.toLocaleString();
+      b.setAttribute("aria-label", `${p.label}: ${n.toLocaleString()} ${n === 1 ? pmColLabel(F, "noun") : pmColLabel(F, "nounP")}${on ? ", on. Tap to remove" : ""}`);
+      if (!on && n <= 1) { b.disabled = true; b.classList.add("none"); }
+    }, 30 + k * 40));
     paintWalk();
   }
   function paintHeart(i, d) {
@@ -2235,6 +2442,13 @@ function pmMount(el, s, F) {
   // removable active-filter chips atop the map (David, 2026-10-09): the primary way to SEE and UNDO a filter,
   // whichever way it got set (the Filter tab, or a tap on a painting's own facet) -- opening the sheet is no
   // longer required just to clear one thing.
+  // the color / palette chip: swatches, its name, the live count, and a tap on it opens the closeness panel; its own x removes it
+  function colorChipHTML(c, k) {
+    const f = s.f, n = lay ? lay.n : 0, noun = pmColLabel(F, n === 1 ? "noun" : "nounP");
+    const dots = f.hexes.slice(0, 6).map(h => `<i class="pmx-xdot" style="--c:${h}"></i>`).join("");
+    return `<span class="pmx-xchip pmx-xcolor"><button class="pmx-xcl-main" data-pmxclose aria-label="${esc(c.text)}: ${n.toLocaleString()} ${esc(noun)}. Change how close">${dots}<b>${esc(c.text)}</b><span> · ${n.toLocaleString()} ${esc(noun)}</span></button><button class="pmx-xcl-x" data-pmxclear="${k}" aria-label="Remove ${esc(c.text)} and show every painting"><i>${ICON.x}</i></button></span>`
+      + (f.colorMode !== "overall" && (!F.col || F.col === "paintings") ? `<button class="pmx-xchip pmx-xlist" data-pmxlist>As a list</button>` : "");
+  }
   function paintChipbar() {
     const chips = pmActiveChips(s, F), solo = pmSolo(s);
     // one-painter map: the painter is the scope, not a filter (no ✕); a quiet count says how much of their work you're
@@ -2246,12 +2460,14 @@ function pmMount(el, s, F) {
       if (s.upToYear != null && s.upToYear < yrRange()[1]) chips.push({ dim: "uy", text: "Up to " + s.upToYear });
       total = pmSoloYears(s.f.painterSet[0], F).total;
     }
+    if (!solo) chips.sort((p, q) => (q.dim === "color") - (p.dim === "color"));   // a color or a palette is the question you asked: it leads
     chipbar.hidden = !chips.length;
-    if (!chips.length) return;
+    if (!chips.length) { chipbar.innerHTML = ""; return; }
     const nf = solo ? chips.filter(c => c.dim !== "painter").length : 0;
     chipbar.classList.toggle("pmx-chipbar-wrap", solo);
     chipbar.innerHTML = chips.map((c, k) => solo && c.dim === "painter"
       ? `<button class="pmx-xchip pmx-xscope" data-pmxclear="${k}" aria-label="${esc(c.text)}: show every ${esc(pmColLabel(F, "painter").toLowerCase())}">${esc(c.text)}<i>${ICON.x}</i></button><button class="pmx-xchip pmx-xcount" data-pmxfilter aria-label="Filter: ${lay.n.toLocaleString()} of ${total.toLocaleString()} ${esc(pmColLabel(F, "nounP"))}">${lay.n === total ? total.toLocaleString() : lay.n.toLocaleString() + " of " + total.toLocaleString()} ${esc(pmColLabel(F, total === 1 ? "noun" : "nounP"))}${PM_ICON.filter}</button>`
+      : c.dim === "color" && s.f.hexes.length ? colorChipHTML(c, k)
       : `<button class="pmx-xchip" data-pmxclear="${k}">${esc(c.text)}<i>${ICON.x}</i></button>`).join("")
       + (nf > 1 ? `<button class="pmx-xchip pmx-xall" data-pmxall>Clear all</button>` : "");
     chipbar.querySelectorAll("[data-pmxclear]").forEach(b => b.onclick = () => {
@@ -2261,6 +2477,8 @@ function pmMount(el, s, F) {
       rebuild();
     });
     const cf = chipbar.querySelector("[data-pmxfilter]"); if (cf) cf.onclick = () => { buzz(4); openSheet("filter"); };
+    const cc = chipbar.querySelector("[data-pmxclose]"); if (cc) cc.onclick = () => { buzz(4); openClose(); };
+    const cl = chipbar.querySelector("[data-pmxlist]"); if (cl) cl.onclick = () => { buzz(5); const f = s.f; if (typeof S !== "undefined") { S.paintDoor = "list"; save(); } if (typeof paintingsOfPage === "function") paintingsOfPage(f.hexes, { tol: f.tol <= 30 ? Math.min(f.tol, 12) : 8, mode: "all", push: true }); };
     const ca = chipbar.querySelector("[data-pmxall]"); if (ca) ca.onclick = () => { buzz(6); if (scrubTimer) { clearInterval(scrubTimer); scrubTimer = 0; } s.f = scopedFresh(); s.fav = 0; s.upToYear = null; rebuild(); };
   }
   function build(keepPan, fo) {
@@ -2294,6 +2512,10 @@ function pmMount(el, s, F) {
     // zoom; if the settings filtered it out, the closest painting in color does, and a quiet line offers it back. A seed
     // (Rings, Spiral, Walk, Center on) is its own anchor and keeps its own rule.
     let foc = null;
+    if (s.hit && lay.n && s.f.hexes.length) {   // an entry point from a color or a palette: land on the painting that matches best, at a zoom that shows its neighborhood
+      s.hit = 0; const bk = pmBestMatch(lay, s.f, F);
+      if (bk >= 0) fo = { i: lay.items[bk], z: .8, open: false };
+    }
     if (fo && lay.n && !pinned && !keepPan) {
       let fk = -1; for (let q = 0; q < lay.n; q++) if (lay.items[q] === fo.i) { fk = q; break; }
       const out = fk < 0;
@@ -2339,14 +2561,41 @@ function pmMount(el, s, F) {
     const fo = o && o.nofocus ? null : o && o.focus ? o.focus : focusNow();
     // the address follows (replace: a filter change is the same map, not a new page)
     try { ROUTE_NOW = "#/" + pmRouteOf(s, F).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {}
+    if (!pmMatchReady(F, s.f)) return palWait(() => build(false, fo));
     build(false, fo);
+  }
+  // A color or palette needs its distance table first (pmMatchCompute, in time slices): the map you were on stays up and alive
+  // under a quiet "Matching 206,345 paintings · 40%" line, then lands (the first open shows the same line over the empty stage)
+  let palSeq = 0;
+  function palWait(then) {
+    const my = ++palSeq, f = s.f, noun = pmColLabel(F, "nounP");
+    const say = pct => {
+      if (!lay) { wait.hidden = false; wait.textContent = `Finding ${noun} with this palette · ${Math.round(pct * 100)}%`; return; }
+      noteEl.hidden = false; noteEl.className = "pmx-note pmx-note-busy";
+      noteEl.innerHTML = `<span>Matching ${F.N.toLocaleString()} ${esc(noun)} · ${Math.round(pct * 100)}%</span>`;
+      const ref = !chipbar.hidden ? chipbar : null; noteEl.style.top = ref ? ref.getBoundingClientRect().bottom - el.getBoundingClientRect().top + 8 + "px" : "";
+    };
+    say(0);
+    pmMatchCompute(F, f, p => { if (my === palSeq && !dead) say(p); }, () => my === palSeq && !dead).then(ok => {
+      if (dead || my !== palSeq) return;
+      noteEl.className = "pmx-note"; noteEl.hidden = true; noteEl.innerHTML = "";
+      if (!ok) return;
+      // "close" for a painting's own palette: the tightest setting that still leaves a map to look at (a distinctive palette has few
+      // near twins, a common one has hundreds), never looser than where it started
+      if (s.f.auto && s.f.colorMode === "overall") {
+        s.f.auto = 0; const pd = pmPalDist(F, s.f);
+        if (pd) { const cnt = new Int32Array(PM_PAL_MAX + 2); for (let i = 0; i < pd.length; i++) { const d = Math.ceil(pd[i]); if (d <= PM_PAL_MAX) cnt[d]++; } let acc = 0, pick = s.f.tol; for (let tt = 1; tt <= s.f.tol; tt++) { acc += cnt[tt]; if (acc >= 48) { pick = tt; break; } } s.f.tol = Math.max(3, pick); }
+        try { ROUTE_NOW = "#/" + pmRouteOf(s, F).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {}
+      }
+      then();
+    });
   }
   // the quiet line when the painting you were on is outside the new settings: "Your painting is outside 1750–1850 · Bring it back"
   const noteEl = el.querySelector("[data-pmnote]");
   function paintNote(n) {
     if (!noteEl) return;
-    if (!n) { noteEl.hidden = true; noteEl.innerHTML = ""; return; }
-    noteEl.hidden = false;
+    if (!n) { if (noteEl.classList.contains("pmx-note-busy")) return; noteEl.hidden = true; noteEl.innerHTML = ""; return; }
+    noteEl.className = "pmx-note"; noteEl.hidden = false;
     noteEl.innerHTML = `<span>Your painting is outside ${esc(n.text)}</span><button class="pmx-note-go" data-pmnotego>Bring it back</button><button class="pmx-note-x" data-pmnotex aria-label="Dismiss">${ICON.x}</button>`;
     const ref = !chipbar.hidden ? chipbar : el.querySelector("[data-pmcount]");
     const top = ref && !ref.hidden ? ref.getBoundingClientRect().bottom - el.getBoundingClientRect().top + 8 : 0;
@@ -2487,6 +2736,97 @@ function pmMount(el, s, F) {
       if (p) { buzz(6); close(); s.f.painterSet = [+p.dataset.pmfp]; s.fav = 0; rebuild(); return; }
       if (w) { const k = +w.dataset.pmfw; buzz(6); close(); cardOpen = true; glideTo([lay.x[k], lay.y[k]], 420, Math.max(Z, PM_TAP_ZOOM)); setTimeout(() => { if (!dead) { setCenter(k); caption(); } }, 440); }
     });
+  }
+  // "More" under a painting (Phase B): toggles that combine (AND), each with a live count, applied live while the map stays
+  // visible behind a docked panel. Teacher / students / influences are left out: that data (the Wikidata links) is not
+  // loaded in the browser for this map, so there is nothing honest to count.
+  function openMore(i) {
+    if (document.querySelector(".sheet")) return;
+    if (typeof stemJustClosed === "function" && stemJustClosed()) return;
+    const d = pmDetailNow(i, F), name = d && d.t ? d.t : "this painting";
+    const tg = pmTogglesOf(i, F), pal = pmPaletteOf(i, F), est = pmIsEst(i, F);
+    const palT = pal && { id: "palette", label: "Close palette", sub: "Paintings with nearly the same colors", patch: f => { f.hexes = pal.hexes.slice(); f.shares = pal.shares.slice(); f.colorMode = "overall"; f.tol = PM_PAL_CLOSE; f.auto = 1; f.cover = 0; f.name = "This painting's palette"; }, clear: f => { f.hexes = []; f.shares = null; f.name = ""; f.colorMode = "any"; f.auto = 0; }, on: f => f.colorMode === "overall" && pmSameSet(f.hexes, pal.hexes) };
+    const withinT = N => { const sp = pmEraSpan(i, F, N); return sp && { id: "w" + N, label: `Within ${N} years`, patch: f => { f.y0 = sp[0]; f.y1 = sp[1]; }, clear: f => { f.y0 = null; f.y1 = null; }, on: f => f.y0 === sp[0] && f.y1 === sp[1] }; };
+    const within = PM_WITHIN.map(withinT).filter(Boolean);
+    const { sh, close } = sheet(`<div class="hm-chooser pmx-chooser pmx-more">
+        <div class="hm-ch-head" data-sheet-grab><b class="pmx-more-t">Around ${esc(name)}</b><button class="iconq hm-ch-x" data-sheet-close aria-label="Close">${ICON.x}</button></div>
+        <div class="hm-ch-scroll" data-sheet-scroll><div class="pmx-more-top"><span data-pmmoren></span><button class="pmx-reset" data-pmmoreclear>Clear these</button></div><div data-pmmorebody></div></div>
+      </div>`, { lock: false });
+    sh.classList.add("pmx-sheet", "pmx-moresheet", "hm-sheet-panel", "hm-sheet-arrange");
+    sh.setAttribute("aria-label", "Narrow the map around this painting");
+    const scrim = sh.previousElementSibling; if (scrim && scrim.classList.contains("scrim")) scrim.classList.add("hm-scrim-clear");
+    const body = sh.querySelector("[data-pmmorebody]"), nEl = sh.querySelector("[data-pmmoren]"), clr = sh.querySelector("[data-pmmoreclear]");
+    sh.querySelector("[data-sheet-close]").onclick = () => { buzz(4); close(); };
+    const noun = n => n === 1 ? pmColLabel(F, "noun") : pmColLabel(F, "nounP");
+    const all = () => [...tg, ...within, ...(palT ? [palT] : [])];
+    let tok = 0;
+    const row = (p, on) => `<button class="pmx-tg${on ? " on" : ""}" data-tg="${p.id}" role="switch" aria-checked="${on}"><span class="pmx-tg-t"><b>${esc(p.label)}</b>${p.sub ? `<small>${esc(p.sub)}</small>` : ""}</span><em data-tgn="${p.id}"></em><i class="pmx-tg-sw" aria-hidden="true"></i></button>`;
+    function render() {
+      const my = ++tok, f = s.f, onW = within.find(p => p.on(f)), anyOn = all().some(p => p.on(f));
+      const grp = g => tg.filter(p => p.group === g).map(p => row(p, p.on(f))).join("");
+      const dec = tg.find(p => p.id === "decade");
+      body.innerHTML = `${grp("who")}${grp("where")}
+        ${dec || within.length ? `<p class="pmx-more-h">${est ? "Around the same time" : "Same time"}</p>${dec ? row(dec, dec.on(f)) : ""}
+        ${within.length ? `<div class="hm-seg pmx-within" role="radiogroup" aria-label="Within this many years">${within.map(p => `<button class="${p.on(f) ? "on" : ""}" data-tg="${p.id}" role="radio" aria-checked="${p.on(f)}">${p.label.replace("Within ", "").replace(" years", " yrs")}</button>`).join("")}</div>` : ""}` : ""}
+        ${palT ? `<p class="pmx-more-h">Colors</p>${row(palT, palT.on(f))}` : ""}`;
+      nEl.textContent = `${lay.n.toLocaleString()} ${noun(lay.n)}`;
+      clr.hidden = !anyOn;
+      const todo = all().filter(p => !within.includes(p) || p === onW);
+      (function next() {
+        if (dead || my !== tok || !sh.isConnected) return;
+        const p = todo.shift(); if (!p) return;
+        const on = p.on(s.f), n = on ? lay.n : p.id === "palette" ? null : pmPatchCount(s, F, p, i);
+        const el2 = body.querySelector(`[data-tgn="${p.id}"]`);
+        if (el2 && n != null) { el2.textContent = n.toLocaleString(); const b = el2.closest("button"); if (n <= 1 && !on) { b.disabled = true; b.classList.add("none"); } }
+        setTimeout(next, 16);
+      })();
+    }
+    body.addEventListener("click", e => {
+      const b = e.target.closest("[data-tg]"); if (!b || b.disabled) return;
+      const p = all().find(x => x.id === b.dataset.tg); if (!p) return;
+      buzz(5);
+      if (p.on(s.f)) p.clear(s.f);
+      else { if (p.id === "decade" || p.id[0] === "w") { s.f.y0 = null; s.f.y1 = null; } p.patch(s.f); }   // a decade and a "within" window are two ways to say the same dimension
+      rebuild({ focus: { i, z: Z, open: true } }); render();
+    });
+    clr.onclick = () => { buzz(6); all().forEach(p => { if (p.on(s.f)) p.clear(s.f); }); rebuild({ focus: { i, z: Z, open: true } }); render(); };
+    render();
+  }
+  // the closeness panel of a color or a palette (Phase H): how close a painting must be, from exact to loose, with the number of
+  // paintings it leaves updating as you drag; two plain modes once there are several colors. The map stays visible behind it.
+  function openClose() {
+    if (document.querySelector(".sheet")) return;
+    if (typeof stemJustClosed === "function" && stemJustClosed()) return;
+    const f = s.f; if (!f.hexes.length) return;
+    const { sh, close } = sheet(`<div class="hm-chooser pmx-chooser pmx-close">
+        <div class="hm-ch-head" data-sheet-grab><b class="pmx-more-t" data-pmcname></b><button class="iconq hm-ch-x" data-sheet-close aria-label="Close">${ICON.x}</button></div>
+        <div class="hm-ch-scroll" data-sheet-scroll><div data-pmcbody></div></div>
+      </div>`, { lock: false });
+    sh.classList.add("pmx-sheet", "pmx-moresheet", "hm-sheet-panel", "hm-sheet-arrange");
+    sh.setAttribute("aria-label", "How close a painting must be");
+    const scrim = sh.previousElementSibling; if (scrim && scrim.classList.contains("scrim")) scrim.classList.add("hm-scrim-clear");
+    sh.querySelector("[data-sheet-close]").onclick = () => { buzz(4); close(); };
+    const body = sh.querySelector("[data-pmcbody]");
+    const render = () => {
+      const f2 = s.f; if (!f2.hexes.length) { close(); return; }
+      const many = f2.hexes.length > 1, ov = f2.colorMode === "overall", n = lay ? lay.n : 0, noun = pmColLabel(F, n === 1 ? "noun" : "nounP");
+      sh.querySelector("[data-pmcname]").innerHTML = `${f2.hexes.slice(0, 6).map(h => `<i class="pmx-xdot" style="--c:${h}"></i>`).join("")}${esc(pmActiveChips(s, F).find(c => c.dim === "color").text)}`;
+      body.innerHTML = `<p class="pmx-close-n"><b data-pmcn>${n.toLocaleString()}</b> ${esc(noun)}</p>
+        ${many ? `<div class="hm-seg pmx-close-mode" role="radiogroup" aria-label="How the colors are matched"><button class="${ov ? "" : "on"}" data-pmcmode="all" role="radio" aria-checked="${!ov}">Holds every color</button><button class="${ov ? "on" : ""}" data-pmcmode="overall" role="radio" aria-checked="${ov}">Same overall palette</button></div>
+        <p class="pmx-close-why">${ov ? "The closest whole palettes: how much of the canvas each color covers matters." : "Each color must appear in the painting, in any amount."}</p>` : ""}
+        <label class="pmx-close-row"><span class="pmx-lab2">How close</span><span class="pmx-close-ends"><i>Exact</i><input type="range" min="1" max="${ov ? PM_PAL_MAX : 30}" step="1" value="${Math.min(f2.tol, ov ? PM_PAL_MAX : 30)}" data-pmctol aria-label="Closeness, exact to loose"><i>Loose</i></span></label>`;
+      const tol = body.querySelector("[data-pmctol]");
+      tol.oninput = e => { f2.tol = +e.target.value; buzz(2); rebuild(); const nn = body.querySelector("[data-pmcn]"); if (nn && lay) nn.textContent = lay.n.toLocaleString(); };
+      body.querySelectorAll("[data-pmcmode]").forEach(b => b.onclick = () => {
+        const m = b.dataset.pmcmode; if ((f2.colorMode === "overall" ? "overall" : "all") === m) return; buzz(5);
+        f2.colorMode = m; f2.tol = m === "overall" ? PM_PAL_CLOSE : 8;
+        if (m === "overall" && !(f2.shares && f2.shares.length === f2.hexes.length)) f2.shares = f2.hexes.map(() => 1 / f2.hexes.length);
+        rebuild(); render();
+      });
+    };
+    render();
+    // the number keeps up while the table of a new palette is still being computed
+    const poll = setInterval(() => { if (!sh.isConnected) { clearInterval(poll); return; } const nn = body.querySelector("[data-pmcn]"); if (nn && lay) nn.textContent = lay.n.toLocaleString(); }, 400);
   }
   function openSheet(startTab) {
     if (document.querySelector(".sheet")) return;
@@ -2717,7 +3057,11 @@ function pmMount(el, s, F) {
       if (d.pmreset != null) { s.f = scopedFresh(); s.fav = 0; if (pmSolo(s)) s.upToYear = null; fq = ""; coq = ""; buzz(6); rebuild(); return renderFilter(); }
       if (d.pmmore) { fopen[d.pmmore] = true; return renderFilter(); }
       if (d.pmfav != null) s.fav = s.fav ? 0 : 1;
-      else if (d.pmhex) { const h = d.pmhex.toUpperCase(), at = f.hexes.indexOf(h); if (at >= 0) { f.hexes.splice(at, 1); if (!f.hexes.length) f.name = ""; } else { f.hexes.push(h); if (f.hexes.length === 1) { f.name = d.name; f.tol = f.tol || 8; } } }
+      else if (d.pmhex) {
+        const h = d.pmhex.toUpperCase(), at = f.hexes.indexOf(h);
+        if (at >= 0) { f.hexes.splice(at, 1); if (f.shares) f.shares.splice(at, 1); if (!f.hexes.length) { f.name = ""; f.colorMode = "any"; f.shares = null; } }
+        else { f.hexes.push(h); if (f.shares) f.shares.push(1 / Math.max(1, f.hexes.length)); if (f.hexes.length === 1) { f.name = d.name; f.tol = f.tol || 8; } }
+      }
       else if (d.pmcolmode) f.colorMode = d.pmcolmode;
       else if (d.pmhue) f.hueBand = f.hueBand === +d.pmhue ? null : +d.pmhue;
       else if (d.pmpreset) { const p = curPresets.find(x => x[0] === d.pmpreset), on = f.y0 === p[2] && f.y1 === p[3]; f.y0 = on ? null : p[2]; f.y1 = on ? null : p[3]; }
@@ -2740,7 +3084,7 @@ function pmMount(el, s, F) {
   // to save the SNAPPED cell position (lay.x[centerK], lay.y[centerK]) on the way out, rounding away whatever
   // precise mid-pan spot P was actually sitting at the moment you tapped a painting open. Save the real P/Z.
   cleanup.push(() => { dead = true; hideTip(); clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); t1.destroy(); clearTimeout(hideTimer); document.removeEventListener("visibilitychange", onVis); if (!released) pmAtlasRelease(F.col); if (lay) PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z, cardOpen }); });
-  size(); build(false);
+  size(); if (pmMatchReady(F, s.f)) build(false); else palWait(() => build(false));
   if (s.f.subjSet && s.f.subjSet.length) { try { ROUTE_NOW = "#/" + pmRouteOf(s, F).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {} }   // opened from a painting's subject tap: the address names the filter
   window.PM_CTRL = { rebuild: o => rebuild(o), get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length + rasterCount(); }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); },
     // QA: the raw pan/zoom (David, 2026-10-10, "Back should restore the exact prior view") -- _qaSetPZ lets a

@@ -190,3 +190,61 @@
 .pmx-note-x{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:rgba(236,232,223,.12);color:rgba(236,232,223,.9)}
 .pmx-note-x svg{width:12px;height:12px}
 html.desk .pmx .pmx-note{left:28px;right:auto;max-width:520px}
+
+/* Phase B (David, 2026-10-24): three presets with live counts + More under a painting; a second tap on one removes it */
+.pmx-fpre em{font:400 14px/1 var(--sans);font-style:normal;font-variant-numeric:tabular-nums;color:rgba(236,232,223,.72)}
+.pmx-fpre em:not(:empty)::before{content:"·";margin-right:6px}
+.pmx-fpre.on{background:var(--paper);color:var(--paper-ink)}
+.pmx-fpre.on em{color:var(--paper-ink);opacity:.7}
+.pmx-fpre.none{opacity:.5}
+.pmx-fmore{box-shadow:inset 0 0 0 1px rgba(236,232,223,.3)}
+/* the More panel: one switch row per narrowing, the count on the right, the map visible behind (docked at the side on a desktop) */
+.pmx-more-t{font:400 19px/1.2 var(--serif);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pmx-more-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 0 8px;font:400 15px/1.2 var(--sans);color:var(--soft);font-variant-numeric:tabular-nums}
+.pmx-more-h{margin:14px 0 6px;font:400 15px/1.2 var(--sans);color:var(--soft)}
+.pmx-tg{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;padding:6px 0;border-bottom:1px solid var(--rule);text-align:left;color:var(--ink)}
+.pmx-tg-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.pmx-tg-t b{font:400 17px/1.2 var(--serif)}
+.pmx-tg-t small{font:400 14px/1.25 var(--sans);color:var(--soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pmx-tg em{flex:none;font:400 15px/1 var(--sans);font-style:normal;font-variant-numeric:tabular-nums;color:var(--soft)}
+.pmx-tg-sw{flex:none;position:relative;width:44px;height:26px;border-radius:13px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--rule);transition:background .2s}
+.pmx-tg-sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--soft);transition:transform .22s var(--spring),background .2s}
+.pmx-tg.on .pmx-tg-sw{background:var(--paper)}
+.pmx-tg.on .pmx-tg-sw::after{transform:translateX(18px);background:var(--paper-ink)}
+.pmx-tg.none{opacity:.45}
+.pmx-within{margin:8px 0 0}
+.pmx-within button{font-family:var(--sans);font-size:15px}
+
+/* Phase H (David, 2026-10-24): a color or a palette as the question the map answers -- the chip leads, carries the live count,
+   opens its closeness panel; its own x brings everything back */
+.pmx-xcolor{padding:0;gap:0;height:38px;overflow:hidden}
+.pmx-xcl-main{display:flex;align-items:center;gap:8px;height:100%;padding:0 6px 0 12px;color:inherit;font:inherit;white-space:nowrap}
+.pmx-xcl-main b{font:500 15px/1 var(--sans)}
+.pmx-xcl-main span{font:400 15px/1 var(--sans);color:rgba(236,232,223,.78);font-variant-numeric:tabular-nums}
+.pmx-xcl-x{display:grid;place-items:center;height:100%;padding:0 8px 0 4px;color:inherit}
+.pmx-xcl-x i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:rgba(236,232,223,.14)}
+.pmx-xchip .pmx-xdot,.pmx-xdot{flex:none;display:inline-block;width:14px;height:14px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);margin-right:-3px}
+.pmx-xdot:last-of-type{margin-right:0}
+.pmx-xlist{padding:0 14px;height:38px;color:rgba(236,232,223,.98);box-shadow:inset 0 0 0 1px rgba(236,232,223,.28)}
+.pmx-note-busy{justify-content:center;padding:4px 16px;font-variant-numeric:tabular-nums}
+.pmx-close-n{margin:2px 0 10px;font:400 17px/1.2 var(--serif);color:var(--soft)}
+.pmx-close-n b{font:400 34px/1 var(--serif);color:var(--ink);font-variant-numeric:tabular-nums;margin-right:4px}
+.pmx-close-mode{margin:4px 0 6px}
+.pmx-close-mode button{font-family:var(--sans);font-size:15px;padding:0 6px}
+.pmx-close-why{margin:0 0 12px;font:400 14px/1.35 var(--sans);color:var(--soft)}
+.pmx-close-row{display:block;margin-top:6px}
+.pmx-close-ends{display:flex;align-items:center;gap:10px;margin-top:6px}
+.pmx-close-ends i{flex:none;font:400 14px/1 var(--sans);font-style:normal;color:var(--soft)}
+.pmx-close-ends input{flex:1;min-width:0}
+.pmx-more-t .pmx-xdot{margin-right:-3px}
+.pmx-more-t .pmx-xdot:last-of-type{margin-right:8px}
+
+/* two calm rows under a painting: its presets (with counts), then More / Open / Around this / Walk. Each row scrolls sideways on its own. */
+.pmx-facets{flex-direction:column;align-items:stretch;gap:6px;overflow:visible;padding:0;-webkit-mask-image:none;mask-image:none}
+.pmx-frow{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:0 36px 0 12px;scroll-padding:0 36px 0 12px;touch-action:pan-x;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
+  -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
+.pmx-frow::-webkit-scrollbar{display:none}
+.pmx-walk{bottom:calc(var(--corner-b,calc(var(--bottom) + 12px)) + var(--corner,56px) * 2 + 102px + var(--cap-x,0px))}
+html.desk .pmx .pmx-facets{padding-left:0}
+html.desk .pmx .pmx-frow{padding-left:28px;scroll-padding-left:28px}
+html.desk .pmx .pmx-walk{bottom:calc(var(--dk-row) + 86px + var(--cap-x,0px))}

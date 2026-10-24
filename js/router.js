@@ -433,7 +433,9 @@ function pmGo(spec, fromAddress) {
 }
 document.addEventListener("click", e => {
   const b = e.target.closest && e.target.closest("[data-pmap]"); if (!b) return;
-  e.preventDefault(); e.stopPropagation(); buzz(6); pmGo(b.dataset.pmap);
+  e.preventDefault(); e.stopPropagation(); buzz(6);
+  if (b.hasAttribute("data-pmapdoor") && typeof S !== "undefined") { S.paintDoor = "map"; if (typeof save === "function") save(); }   // "Where it lives": remembered for the color's Paintings door (js/paintingsof.js paintingsDoor)
+  pmGo(b.dataset.pmap);
 }, true);
 
 // a typed or linked #/ address while the app is open (Back between our own entries is handled in core.js)

@@ -202,6 +202,13 @@ function glEst(G, est) {
   if (est && Array.isArray(est.co)) est.co.forEach(k => { if (k >= 0 && k < G.n) G.coest[k] = 1; });
   return G;
 }
+// "Find paintings with this palette" (David, 2026-10-24): the painting's own colors and their shares as a map filter, closeness "close"
+// (js/paintmap.js Same overall palette); the map opens on the closest match, which is this painting itself
+const glPalSpec = i => {
+  const G = GAL, h = [], sh = []; let tot = 0;
+  for (let j = 0; j < 6; j++) { const s = G.sh[i * 6 + j]; if (s > 0) { h.push(glHex(i, j).slice(1).toLowerCase()); sh.push(s); tot += s; } }
+  return `arr=color&c=${h.join(",")}&cm=overall&sh=${sh.map(x => (x / (tot || 1)).toFixed(3)).join(",")}&t=14&at=1&m=0&hit=1&nm=${encodeURIComponent("This painting's palette")}`;
+};
 const glYearEst = i => !!(GAL.yspan && GAL.yspan[i] && GAL.year[i] !== GL_UNDATED);
 const glCoEst = i => !!(GAL.coest && GAL.coest[i]);
 // the bare year ("1495", "480 BCE", "" for undated): for numbers and sorting. For anything a person reads use glYear.
@@ -1550,7 +1557,7 @@ function glPage(i, d, fromHex, tol) {
     <div class="gl-dk-acts"><button class="gl-dk-btn" data-dkpick hidden aria-pressed="false">${icon("pipette", 18)}<span>Pick a color</span></button><button class="gl-dk-btn" data-dkcloser>${ICON.search}<span>Look closer</span></button></div>
     ${(() => { /* desktop: the map's card chips live here now (a click on the map opens this page directly) */
       const y = G.year[i], y0 = y === GL_UNDATED ? null : y < 1500 ? Math.floor(y / 100) * 100 : Math.floor(y / 10) * 10, y1 = y0 == null ? null : y < 1500 ? y0 + 99 : y0 + 9;
-      return `<div class="gl-dk-map" role="group" aria-label="On the map">${d.a ? `<button type="button" class="gl-dk-chip" data-pmap="arr=color&p=${esc(routeSlug(d.a))}">Same painter</button>` : ""}${y0 != null ? `<button type="button" class="gl-dk-chip" data-pmap="arr=color&y0=${y0}&y1=${y1}">${glYearEst(i) ? "Around the same decade" : "Same decade"}</button>` : ""}<button type="button" class="gl-dk-chip" data-pmap="arr=spiral&seed=${i}">Similar</button><button type="button" class="gl-dk-chip" data-pmap="arr=spiral&seed=${i}&walk=1">Walk from here</button></div>`;
+      return `<div class="gl-dk-map" role="group" aria-label="On the map">${d.a ? `<button type="button" class="gl-dk-chip" data-pmap="arr=color&p=${esc(routeSlug(d.a))}">Same painter</button>` : ""}${y0 != null ? `<button type="button" class="gl-dk-chip" data-pmap="arr=color&y0=${y0}&y1=${y1}">${glYearEst(i) ? "Around the same decade" : "Same decade"}</button>` : ""}<button type="button" class="gl-dk-chip" data-pmap="arr=spiral&seed=${i}">Similar</button><button type="button" class="gl-dk-chip" data-pmap="${glPalSpec(i)}">Find this palette</button><button type="button" class="gl-dk-chip" data-pmap="arr=spiral&seed=${i}&walk=1">Walk from here</button></div>`;
     })()}
     <div class="gl-why" data-glwhy hidden></div>
     </div>
@@ -1575,6 +1582,7 @@ function glPage(i, d, fromHex, tol) {
     <div data-csacts></div>
     ${!S.pmMapHintSeen ? `<p class="gl-pmap-hint" data-glpmhint><i aria-hidden="true"></i><span>New: browse paintings by how alike their colors are</span></p>` : ""}
     <button class="gl-pmap gl-pmap-top" data-pmap="arr=spiral&seed=${i}">${GL_ICON_MAP}<span>Similar paintings on the map</span>${ICON.chev}</button>
+    <button class="gl-pmap gl-pmap-pal" data-pmap="${glPalSpec(i)}">${GL_ICON_MAP}<span>Find paintings with this palette</span>${ICON.chev}</button>
     </div></div>
     <div class="gl-under">${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}</div>
     <p class="gl-subj" data-glsubj-line hidden></p>

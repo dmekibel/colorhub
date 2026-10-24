@@ -281,6 +281,16 @@ function paintingsOfSection(hex, host, o = {}) {
 }
 
 // ---------- the full screen: one color or a set ----------
+// The Paintings door of a color (David, 2026-10-24: "when u press paintings it shows u the area of the painting map with the same
+// color"): "Where it lives" opens the painting map showing ONLY the paintings that hold it, centered on the closest one;
+// "As a list" is today's page. The choice is remembered (S.paintDoor) and either view offers the other.
+function paintingsDoor(hexes, o = {}) {
+  const hs = ptHexList(hexes), door = (typeof S !== "undefined" && S.paintDoor) || "map";
+  if (door === "map" && hs.length && hs.length <= 3 && typeof pmGo === "function" && !o.list) {
+    return pmGo(`arr=color&c=${hs.map(h => h.slice(1).toLowerCase()).join(",")}&t=8&m=0${hs.length > 1 ? "&cm=all" : ""}&hit=1`);
+  }
+  return paintingsOfPage(hexes, o);
+}
 const ptHexList = h => (Array.isArray(h) ? h : String(h || "").split(/[+,]/)).map(x => "#" + String(x).replace(/^#+/, "").toUpperCase()).filter(x => /^#[0-9A-F]{6}$/.test(x)).slice(0, 5);
 function ptSpec(hexes, st) {
   const q = [`t=${st.tol}`, `m=${st.minCover}`];
@@ -332,7 +342,7 @@ function paintingsOfPage(hexes, o = {}) {
       <input class="pt-range" type="range" min="2" step="1" data-mt-input aria-label="How many of the colors a painting must hold">
     </div>
     <div class="pt-acts" data-acts></div>
-    <button class="gl-pmap pt-pmap" data-pmap="arr=color&c=${hexes.map(h => h.slice(1).toLowerCase()).join(",")}&t=${st.tol}&m=${st.minCover || 0}">${GL_ICON_MAP}<span>See them as a map</span>${ICON.chev}</button>
+    <button class="gl-pmap pt-pmap" data-pmapdoor data-pmap="arr=color&c=${hexes.map(h => h.slice(1).toLowerCase()).join(",")}&t=${st.tol}&m=${st.minCover || 0}${hexes.length > 1 ? "&cm=all" : ""}&hit=1">${GL_ICON_MAP}<span>Where it lives, on the map</span>${ICON.chev}</button>
     <details class="pt-stats" data-stats hidden><summary>What the numbers say</summary><div data-statsbody></div></details>
     <div class="pt-sortrow" data-sortrow><div class="pt-seg">${PT_SORTS.map(([k, t]) => `<button data-sort="${k}">${t}</button>`).join("")}</div></div>
     <div class="pt-results" data-results><p class="fine">Finding paintings…</p></div>
