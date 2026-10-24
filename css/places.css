@@ -73,8 +73,3 @@
 @media (orientation:landscape){.orient-tip{left:calc(16px + var(--left));right:calc(16px + var(--right))}}
 @keyframes orientGlow{0%,100%{box-shadow:0 4px 14px rgba(0,0,0,.38)}50%{box-shadow:0 0 0 6px rgba(255,191,0,.35),0 4px 14px rgba(0,0,0,.38)}}
 .corner.orient-glow{animation:orientGlow 1.6s ease-in-out}
-
-/* Learn / Train / Studio rows: a tinted disc with its own glyph (js/places.js PLACES_GLYPH); the other rows are unchanged */
-.rooms-stem .rm-art.pl-glyph{display:grid;place-items:center;color:var(--pa);background:var(--s3);
-  background:color-mix(in srgb,var(--pa) 15%,var(--s3));box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--pa) 58%,transparent)}
-.rooms-stem .rm-bubble.cur .rm-art.pl-glyph{background:var(--pa);color:#14130F;box-shadow:none}
