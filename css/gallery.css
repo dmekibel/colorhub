@@ -511,3 +511,8 @@ html.desk .fd-bar{top:calc(var(--dkn,60px) - 1px)}
 .fd-grid.narrow .fd-ct{font-size:18px}
 .fd-im.has-img .fd-ct{position:absolute;left:0;right:0;bottom:0;padding:34px 10px 10px;text-align:left;color:#fff!important;background:linear-gradient(transparent,rgba(14,13,11,.82) 70%);-webkit-line-clamp:2;font-size:17px}
 .fd-card .fd-im img{border-radius:inherit}
+/* a divider ("Close colors") and a neighbor's name inside the color feed: full width, calm */
+.fd-head{position:absolute;left:0;right:0;display:flex;align-items:flex-end;gap:10px;padding-bottom:8px;color:var(--ink);pointer-events:none}
+.fd-head:not(.sub){border-bottom:1px solid var(--rule-strong);font:400 22px/1.2 var(--serif)}
+.fd-head.sub{align-items:center;font:500 17px/1.2 var(--sans);color:var(--soft)}
+.fd-head i{width:18px;height:18px;border-radius:50%;background:var(--c);border:1px solid var(--rule-strong);flex:none}

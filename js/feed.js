@@ -176,11 +176,11 @@ function fdMount(host, o) {
   const st = { ...(memo && memo.chip ? { chip: memo.chip, metric: memo.metric, color: memo.color | 0 } : STORE) };   // re-read from FD_ST when the feed is built (start)   // this page's chip; a Back brings back the chip the feed was left on
   const save = () => { Object.assign(STORE, st); fdSaveState(); };
   const ctx = { i, d, o, sub, kind: isColor ? "color" : "painting", key: SKEY, F: typeof XBF !== "undefined" && XBF && XBF.G === GAL ? XBF : null, _q: null, q() { return this._q || (this._q = twQuery(o.cols, { self: i })); } };
-  let curLead = "", eff = st.chip, items = [], shown = 0, tok = 0, built = false, gone = false, fk = 0;
+  let curEnd = "", curLead = "", eff = st.chip, items = [], shown = 0, tok = 0, built = false, gone = false, fk = 0;
   let W = 0, cols = 2, colW = 0, gap = 12, vgap = 18, txt = 52, top = null, col = null, hh = null, ends = [], pinSkew = null;
   const live = new Map(), wantShard = new Map();
   const off = k => isColor ? (FDC_OFF.get(SKEY) || {})[k] || "" : (FD_OFF[k] ? FD_OFF[k](ctx) : "");
-  const abOf = it => it.sk || it.card ? it.ab : Math.min(2.3, Math.max(.4, G.ar[it.j]));
+  const abOf = it => it.sk || it.card || it.head ? it.ab : Math.min(2.3, Math.max(.4, G.ar[it.j]));
   host.innerHTML = `<div class="sec-head"><b>Keep exploring</b><span>closest first</span></div>
     <div class="fd-bar"><div class="fd-chips" role="tablist" aria-label="What counts as related"></div></div>
     <p class="fd-lead" aria-live="polite"></p>
@@ -247,6 +247,7 @@ function fdMount(host, o) {
   };
   const place = k0 => {
     for (let k = k0; k < shown; k++) {
+      if (items[k].head) { const t = Math.max(...ends), h = items[k].sub ? 44 : 60; top[k] = t; col[k] = 0; hh[k] = h; ends.fill(t + h + vgap); continue; }   // a divider or a group's name: the full width, below everything above it
       const h = Math.round(colW * abOf(items[k])) + txt; hh[k] = h;
       let c = 0; for (let j = 1; j < cols; j++) if (ends[j] < ends[c]) c = j;
       top[k] = ends[c]; col[k] = c; ends[c] += h + vgap;
@@ -259,6 +260,7 @@ function fdMount(host, o) {
   const domOf = j => { let b = 0; for (let y = 1; y < 6; y++) if (G.sh[j * 6 + y] > G.sh[j * 6 + b]) b = y; return glHex(j, b); };
   function tileHTML(k) {
     const it = items[k], pos = `left:${col[k] * (colW + gap)}px;top:${top[k]}px;width:${colW}px;height:${hh[k]}px`;
+    if (it.head) return `<div class="fd-head${it.sub ? " sub" : ""}" style="top:${top[k]}px;height:${hh[k]}px"${it.sub ? ` role="heading" aria-level="3"` : ` role="separator" aria-label="${esc(it.text)}"`}>${it.sub ? `<i style="--c:${it.h}"></i>` : ""}<span>${esc(it.text)}</span></div>`;
     if (it.card) return `<button class="fd-tile fd-card" data-fk="${k}" tabindex="${k === fk ? 0 : -1}" style="${pos}" aria-label="${esc(it.title + ". " + it.cap + (it.sub ? ", " + it.sub : ""))}"><span class="fd-im" data-ink="${ink(it.h)}" style="--c:${it.h};height:${hh[k] - txt}px"><span class="fd-ct" style="color:${ink(it.h) === "dark" ? "#141311" : "#fff"}">${esc(it.title)}</span></span><span class="fd-cap">${esc(it.cap)}</span><span class="fd-by"><span>${esc(it.sub || "")}</span></span></button>`;
     if (it.sk) return `<div class="fd-tile sk" style="${pos}" aria-hidden="true"><span class="fd-im" style="height:${hh[k] - txt}px"></span><span class="fd-cap"></span><span class="fd-by"></span></div>`;
     return `<button class="fd-tile wait" data-fk="${k}" tabindex="${k === fk ? 0 : -1}" style="${pos}"><span class="fd-im" style="--c:${domOf(it.j)};height:${hh[k] - txt}px"><span class="fd-ov"></span></span><span class="fd-cap">${esc(it.cap)}</span><span class="fd-by"></span></button>`;
@@ -288,7 +290,7 @@ function fdMount(host, o) {
     img.src = fdSrc(dd, colW);
     im.insertBefore(img, im.firstChild);
   }
-  function want(k) { if (items[k].card) return; const s = Math.floor(items[k].j / G.shard); if (!wantShard.has(s)) wantShard.set(s, []); wantShard.get(s).push(k); }
+  function want(k) { if (items[k].card || items[k].head) return; const s = Math.floor(items[k].j / G.shard); if (!wantShard.has(s)) wantShard.set(s, []); wantShard.get(s).push(k); }
   function shards(ks) {
     ks.forEach(want);
     wantShard.forEach((list, s) => {
@@ -297,7 +299,7 @@ function fdMount(host, o) {
       glShard(s).then(() => list.forEach(k => { const el = live.get(k); if (el) fill(el, k); }), () => { list.forEach(k => { const el = live.get(k); if (el && !el.querySelector(".fd-err")) { el.classList.remove("wait"); el.querySelector(".fd-im").classList.add("err"); el.querySelector(".fd-im").insertAdjacentHTML("beforeend", `<span class="fd-err">Didn't load</span>`); } }); });
     });
   }
-  const liveShards = () => new Set([...live.keys()].filter(k => items[k] && !items[k].sk && !items[k].card).map(k => Math.floor(items[k].j / G.shard)).concat(isColor ? [] : [Math.floor(i / G.shard)]));
+  const liveShards = () => new Set([...live.keys()].filter(k => items[k] && !items[k].sk && !items[k].card && !items[k].head).map(k => Math.floor(items[k].j / G.shard)).concat(isColor ? [] : [Math.floor(i / G.shard)]));
   function draw() {
     if (gone || !grid.isConnected || !shown || !top) return;
     const cw = grid.clientWidth; if (cw > 40 && Math.abs(cw - W) > 1) { relayoutAll(); return; }
@@ -315,13 +317,14 @@ function fdMount(host, o) {
     if (add.length) {
       const tmp = document.createElement("div"); tmp.innerHTML = add.map(tileHTML).join("");
       const waiting = [];
-      [...tmp.children].forEach((el, n) => { const k = add[n]; live.set(k, el); grid.appendChild(el); if (items[k].card) fillCard(el, k); else if (!items[k].sk) { if (glDetailNow(items[k].j)) fill(el, k); else waiting.push(k); } });
+      [...tmp.children].forEach((el, n) => { const k = add[n]; live.set(k, el); grid.appendChild(el); if (items[k].head) {} else if (items[k].card) fillCard(el, k); else if (!items[k].sk) { if (glDetailNow(items[k].j)) fill(el, k); else waiting.push(k); } });
       if (waiting.length) shards(waiting);
     }
     // the roving tab stop: the tile that last had focus, else the first one on screen
-    if (!live.has(fk)) { const f = Math.min(...live.keys()); live.forEach((el, k) => el.tabIndex = k === f ? 0 : -1); } else live.forEach((el, k) => { if (!items[k].sk) el.tabIndex = k === fk ? 0 : -1; });
+    const tabbable = [...live.keys()].filter(k => !items[k].head);
+    if (!live.has(fk)) { const f = Math.min(...tabbable); live.forEach((el, k) => { if (!items[k].head) el.tabIndex = k === f ? 0 : -1; }); } else live.forEach((el, k) => { if (!items[k].sk && !items[k].head) el.tabIndex = k === fk ? 0 : -1; });
     // the next few tiles' details, so they are ready before they arrive
-    const nx = []; for (let k = last + 1; k < Math.min(shown, last + 13); k++) if (!items[k].sk && !items[k].card) { const s = Math.floor(items[k].j / G.shard); if (!Array.isArray(GL_SHARDS.get(s))) nx.push(k); }
+    const nx = []; for (let k = last + 1; k < Math.min(shown, last + 13); k++) if (!items[k].sk && !items[k].card && !items[k].head) { const s = Math.floor(items[k].j / G.shard); if (!Array.isArray(GL_SHARDS.get(s))) nx.push(k); }
     if (nx.length) { nx.forEach(k => { const s = Math.floor(items[k].j / G.shard); if (!FD_SHARDS.includes(s)) FD_SHARDS.push(s); glShard(s).catch(() => {}); }); }
     fdTrim(liveShards());
     // near the end of what is shown: 24 more (the boxes are known from the index, so nothing moves)
@@ -332,7 +335,7 @@ function fdMount(host, o) {
   function relayoutAll() { const keep = shown; live.forEach(el => el.remove()); live.clear(); relayout(); shown = keep; draw(); }
   function stateDraw() {
     if (!items.length || items[0].sk) { state.innerHTML = ""; return; }
-    state.innerHTML = shown >= items.length ? (isColor ? `<p class="fd-end">That is everything close to this color.</p><button class="fd-up" data-fdup>Back to the top of this color</button>` : `<p class="fd-end">That is everything close to this one.</p><button class="fd-up" data-fdup>Back to this painting</button>`) : "";
+    state.innerHTML = shown >= items.length ? (isColor ? `<p class="fd-end">${esc(curEnd || "That is everything close to this color.")}</p><button class="fd-up" data-fdup>Back to the top of this color</button>` : `<p class="fd-end">That is everything close to this one.</p><button class="fd-up" data-fdup>Back to this painting</button>`) : "";
   }
   state.onclick = e => {
     if (e.target.closest("[data-fdup]")) { buzz(4); scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }); return; }
@@ -352,10 +355,10 @@ function fdMount(host, o) {
       state.innerHTML = `<p class="fd-empty">${esc(res.empty)}</p>${res.alt ? `<button class="fd-up" data-fdalt>Match by overall palette</button>` : ""}`;
       leadDraw(""); return;
     }
-    curLead = res.lead || ""; items = res.items; if (!items.length) { apply({ empty: "Nothing else in the archive is close to this one in that way." }); return; }
+    curLead = res.lead || ""; curEnd = res.end || ""; items = res.items; if (!items.length) { apply({ empty: "Nothing else in the archive is close to this one in that way." }); return; }
     live.forEach(el => el.remove()); live.clear();
     const want0 = memo ? memo.shown : FD_PAGE;
-    shown = Math.min(items.length, Math.max(FD_PAGE, want0)); fk = 0;
+    shown = Math.min(items.length, Math.max(FD_PAGE, want0)); fk = Math.max(0, items.findIndex(x => !x.head));
     relayout(); stateDraw(); leadDraw(""); draw();
     FD_LAST = { chip: eff, metric: st.metric, ms: Math.round(ms), n: items.length };
   }
@@ -404,12 +407,12 @@ function fdMount(host, o) {
   grid.addEventListener("keydown", e => {
     const t = e.target.closest(".fd-tile[data-fk]"); if (!t) return;
     const k = +t.dataset.fk; let n = -1;
-    if (e.key === "ArrowDown" || e.key === "ArrowUp") { const s = e.key === "ArrowDown" ? 1 : -1; for (let m = k + s; m >= 0 && m < items.length && Math.abs(m - k) <= cols * 6; m += s) { while (m >= shown && shown < items.length) more(); if (col[m] === col[k]) { n = m; break; } } }
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") { const s = e.key === "ArrowDown" ? 1 : -1; for (let m = k + s; m >= 0 && m < items.length && Math.abs(m - k) <= cols * 6; m += s) { while (m >= shown && shown < items.length) more(); if (col[m] === col[k] && !items[m].head) { n = m; break; } } }
     else if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
       const c = col[k] + (e.key === "ArrowRight" ? 1 : -1); if (c < 0 || c >= cols) return;
       const mid = top[k] + hh[k] / 2; let best = 1e9;
-      for (let m = Math.max(0, k - cols * 4); m < Math.min(shown, k + cols * 4); m++) if (col[m] === c) { const dd = Math.abs(top[m] + hh[m] / 2 - mid); if (dd < best) { best = dd; n = m; } }
-    } else if (e.key === "Home") n = 0;
+      for (let m = Math.max(0, k - cols * 4); m < Math.min(shown, k + cols * 4); m++) if (col[m] === c && !items[m].head) { const dd = Math.abs(top[m] + hh[m] / 2 - mid); if (dd < best) { best = dd; n = m; } }
+    } else if (e.key === "Home") n = Math.max(0, items.findIndex(x => !x.head));
     if (n < 0) return;
     e.preventDefault(); focusK(n);
   });
@@ -480,20 +483,41 @@ const FDC_BASE = new Map();      // "#HEX" -> Promise<{ rows: [{ i, de, cover }]
 const fdcOff = (key, chip, why) => { const m = FDC_OFF.get(key) || {}; m[chip] = why; FDC_OFF.set(key, m); };
 
 // every painting that holds this color visibly, closest first: matched colors within ΔE 8 covering at least 2% of the canvas, never a speck, never a wider reach. Only if nothing qualifies at all, the soft-coverage ranking (js/colorindex.js ciClosest) so the list is never empty. Cached per color.
-function fdcBase(hex) {
-  hex = hex.toUpperCase();
+const FDC_THIN = 60, FDC_NB_SHARE = 4;   // a neighbor must be plainly present (4%) in its own paintings: it is already one step away   // fewer than this qualify strictly: the same scroll goes on with the neighbors' own paintings
+// the named colors nearest this one (learnable names and the archive's), nearest first: for an in-between color its own page's winner is among them
+async function fdcNearNames(sub, n, maxDe) {
+  const { hex, name, tapped } = sub;
+  if (typeof loadLongNames === "function") await loadLongNames().catch(() => {});
+  const core = CORE_NAMES || coreFallback(), learn = new Set(core.map(e => e.n.toLowerCase()));
+  const pool = core.concat((LONG_NAMES || []).filter(e => !learn.has(e.n.toLowerCase()))); pool.forEach(e => { if (!e.lab) e.lab = lab(e.h); });
+  const seen = new Set();
+  return nearestCore(lab(hex), pool, n * 3 + 30).filter(x => { const k = x.n.toLowerCase(); if ((!tapped && k === name.toLowerCase()) || seen.has(k) || (maxDe && x.de > maxDe)) return false; seen.add(k); return true; }).slice(0, n);
+}
+function fdcBase(sub) {
+  const hex = sub.hex.toUpperCase();
   if (FDC_BASE.has(hex)) return FDC_BASE.get(hex);
-  const q = min => paintingsWith([hex], { tol: FDC_TOL, minCover: min, maxCover: null, mode: "all", sort: "close", source: "paintings" });
+  const q = (h, min) => paintingsWith([h], { tol: FDC_TOL, minCover: min, maxCover: null, mode: "all", sort: "close", source: "paintings" });
+  // closeness dominates; presence (sqrt of the share, capped) breaks ties and demotes anything barely there
+  const sc = r => r.de - FDC_BONUS * Math.min(Math.sqrt(Math.max(0, r.cover)), 3);
+  const keep = (rs, seen) => rs.filter(r => !seen.has(r.i)).map(r => ({ i: r.i, de: r.de, cover: r.cover })).sort((a, b) => sc(a) - sc(b));
   const p = (async () => {
     await loadGallery();
     // presence is measured at the match tolerance (ΔE 8), never wider: a wider reach would count greys and browns as "the color"
-    let res = await q(FDC_MIN_SHARE), rows = res.rows;
-    if (rows.length < 60) { const r2 = await q(FDC_FLOOR_SHARE); if (r2.rows.length > rows.length) { res = r2; rows = r2.rows; } }   // a rare color: the visible floor, still never a speck
-    let near = false;
-    if (!rows.length) { const cl = await ciClosest([hex], res, { max: 300 }); rows = cl.rows; near = true; }
-    // closeness dominates; presence (sqrt of the share, capped) breaks ties and demotes anything barely there
-    const sc = r => r.de - FDC_BONUS * Math.min(Math.sqrt(Math.max(0, r.cover)), 3);
-    return { rows: rows.map(r => ({ i: r.i, de: r.de, cover: r.cover })).sort((a, b) => sc(a) - sc(b)).slice(0, 3000), near };
+    let res = await q(hex, FDC_MIN_SHARE), seen = new Set(), rows = keep(res.rows, seen).slice(0, 3000).map(r => ({ ...r, g: -1 })), near = false;
+    rows.forEach(r => seen.add(r.i));
+    const groups = [];
+    // too few to be a feed: carry on with the next-nearest named colors, one at a time, each held to the same rule against ITS OWN color
+    if (rows.length < FDC_THIN) {
+      for (const x of await fdcNearNames(sub, 14, 12)) {
+        if (rows.length >= 150) break;
+        if (de2000(x.h, hex) < 1) continue;
+        const rs = keep((await q(x.h, FDC_NB_SHARE)).rows, seen).slice(0, 60); if (!rs.length) continue;
+        rs.forEach(r => seen.add(r.i)); groups.push({ n: x.n, h: x.h });
+        rows = rows.concat(rs.map(r => ({ ...r, g: groups.length - 1 })));
+      }
+    }
+    if (!rows.length) { const cl = await ciClosest([hex], res, { max: 300 }); rows = cl.rows.map(r => ({ i: r.i, de: r.de, cover: r.cover, g: -1 })); near = true; }
+    return { rows, near, groups };
   })();
   FDC_BASE.set(hex, p); if (FDC_BASE.size > 4) FDC_BASE.delete(FDC_BASE.keys().next().value);
   p.catch(() => FDC_BASE.delete(hex));
@@ -502,10 +526,22 @@ function fdcBase(hex) {
 const fdcMatch = de => pctMatch(Math.max(0, de));
 
 function fdcRankPaintings(ctx) {
-  return fdcBase(ctx.sub.hex).then(b => b.rows.length ? { items: b.rows.slice(0, FD_KEEP).map(r => ({ j: r.i, cap: fdcMatch(r.de) })) } : { empty: "No painting in the archive holds this color yet." });
+  return fdcBase(ctx.sub).then(b => {
+    if (!b.rows.length) return { empty: "No painting in the archive holds this color yet." };
+    const items = []; let g = -1;
+    for (const r of b.rows.slice(0, FD_KEEP)) {
+      if (r.g !== g && r.g >= 0) {   // a new neighbor: its name, once, calmly (the first also gets the divider)
+        if (g === -1) items.push({ head: 1, text: "Close colors" });
+        items.push({ head: 1, sub: 1, text: b.groups[r.g].n, h: b.groups[r.g].h });
+      }
+      g = r.g;
+      items.push({ j: r.i, cap: r.g >= 0 ? `${b.groups[r.g].n} · ${fdcMatch(r.de)}` : fdcMatch(r.de) });
+    }
+    return b.groups.length ? { items, lead: "Closest to this color first, then the paintings of its neighbors", end: "That is everything close to this color and its neighbors." } : { items };
+  });
 }
 async function fdcRankPainters(ctx) {
-  const { hex, name } = ctx.sub, [b, F] = await Promise.all([fdcBase(hex), fdFacets()]);
+  const { hex, name } = ctx.sub, [b, F] = await Promise.all([fdcBase(ctx.sub), fdFacets()]);
   await rcLoadArtists();
   let rows = (RC_ARTISTS || {})[name];
   if (!rows || !rows.length) { const near = rcNearestWith(hex, name, n => ((RC_ARTISTS || {})[n] || []).length); rows = near ? RC_ARTISTS[near.n] : []; }
@@ -522,16 +558,16 @@ async function fdcRankPainters(ctx) {
   return items.length ? { items } : { empty: "No painter in the archive stands out for this color yet." };
 }
 async function fdcRankEra(ctx) {
-  const b = await fdcBase(ctx.sub.hex), G = GAL, pool = b.rows.filter(r => G.year[r.i] !== GL_UNDATED);
-  if (pool.length < 6) return { empty: "Too few paintings that hold this color have a year, so there is no era to read." };
+  const b = await fdcBase(ctx.sub), G = GAL, pool = b.rows.filter(r => G.year[r.i] !== GL_UNDATED);
+  if (pool.length < 30) return { empty: "Too few paintings that hold this color or its neighbors have a year, so there is no era to read." };
   const dec = new Map(); pool.slice(0, 300).forEach(r => { const d = Math.floor(G.year[r.i] / 10); dec.set(d, (dec.get(d) || 0) + 1); });
   const top = [...dec.entries()].sort((a, b2) => b2[1] - a[1] || a[0] - b2[0])[0][0], y0 = top * 10 + 5;
   const sc = pool.map(r => [r, Math.abs(G.year[r.i] - y0) + r.de * 2]).sort((a, b2) => a[1] - b2[1]).slice(0, FD_KEEP);
-  return { lead: `Nearest the ${top * 10}s, the decade with the most of this color`, items: sc.map(([r]) => ({ j: r.i, cap: `${Math.floor(G.year[r.i] / 10) * 10}s · ${fdcMatch(r.de)}` })) };
+  return { lead: `Nearest the ${top * 10}s, the decade with the most of this color`, items: sc.map(([r]) => ({ j: r.i, cap: `${Math.floor(G.year[r.i] / 10) * 10}s · ${fdcMatch(r.de)}` })), end: b.groups.length ? "That is everything close to this color and its neighbors." : "" };
 }
 async function fdcRankPlace(ctx) {
-  const [b, F] = await Promise.all([fdcBase(ctx.sub.hex), fdFacets()]), pool = b.rows.filter(r => F.country[r.i]);
-  if (pool.length < 6) return { empty: "Too few paintings that hold this color have a country on record, so there is no place to read." };
+  const [b, F] = await Promise.all([fdcBase(ctx.sub), fdFacets()]), pool = b.rows.filter(r => F.country[r.i]);
+  if (pool.length < 30) return { empty: "Too few paintings that hold this color or its neighbors have a country on record, so there is no place to read." };
   const cn = new Map(); pool.slice(0, 300).forEach(r => cn.set(F.country[r.i], (cn.get(F.country[r.i]) || 0) + 1));
   const co = [...cn.entries()].sort((a, b2) => b2[1] - a[1] || a[0] - b2[0])[0][0], tiers = fdRegions(F, co), items = [];
   for (const r of pool) {
@@ -540,7 +576,7 @@ async function fdcRankPlace(ctx) {
     items.push([r, tier * 100 + r.de]);
   }
   items.sort((a, b2) => a[1] - b2[1]);
-  return { lead: `${F.meta.countries[co - 1]} first, the country with the most of this color, then its region`, items: items.slice(0, FD_KEEP).map(([r]) => ({ j: r.i, cap: `${F.meta.countries[F.country[r.i] - 1]} · ${fdcMatch(r.de)}` })) };
+  return { lead: `${F.meta.countries[co - 1]} first, the country with the most of this color, then its region`, items: items.slice(0, FD_KEEP).map(([r]) => ({ j: r.i, cap: `${F.meta.countries[F.country[r.i] - 1]} · ${fdcMatch(r.de)}` })), end: b.groups.length ? "That is everything close to this color and its neighbors." : "" };
 }
 
 // ---------- Other worlds: one card per thing, a few from each world in turn ----------
@@ -587,12 +623,7 @@ async function fdcRankWorlds(ctx) {
 
 // ---------- Close colors: the names that sit nearest (the "It could also be called" ranking for an in-between color) ----------
 async function fdcRankClose(ctx) {
-  const { hex, name, tapped } = ctx.sub;
-  if (typeof loadLongNames === "function") await loadLongNames().catch(() => {});
-  const core = CORE_NAMES || coreFallback(), learn = new Set(core.map(e => e.n.toLowerCase()));
-  const pool = core.concat((LONG_NAMES || []).filter(e => !learn.has(e.n.toLowerCase()))); pool.forEach(e => { if (!e.lab) e.lab = lab(e.h); });
-  const seen = new Set(), me = { h: hex, n: tapped ? "Your color" : name };
-  const rows = nearestCore(lab(hex), pool, 90).filter(x => { const k = x.n.toLowerCase(); if ((!tapped && k === name.toLowerCase()) || seen.has(k)) return false; seen.add(k); return true; }).slice(0, 60);
+  const { hex, name, tapped } = ctx.sub, me = { h: hex, n: tapped ? "Your color" : name }, rows = await fdcNearNames(ctx.sub, 60, 0);
   if (!rows.length) return { empty: "No other name sits close to this color." };
   return { items: rows.map(r => ({ card: 1, ab: .95, h: r.h, title: r.n, cap: pctMatch(r.de), sub: lookDiff(me, { h: r.h, n: r.n }), open: () => rpOpenNameAs(r.n, r.h, tapped || null) })) };
 }
