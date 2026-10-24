@@ -209,6 +209,12 @@ const glPalSpec = i => {
   for (let j = 0; j < 6; j++) { const s = G.sh[i * 6 + j]; if (s > 0) { h.push(glHex(i, j).slice(1).toLowerCase()); sh.push(s); tot += s; } }
   return `arr=color&c=${h.join(",")}&cm=overall&sh=${sh.map(x => (x / (tot || 1)).toFixed(3)).join(",")}&t=14&at=1&m=0&hit=1&nm=${encodeURIComponent("This painting's palette")}`;
 };
+// the same filter for a derived palette on screen (Stands out, a harmony card, a shuffle, an edit): its own colors and shares
+const glPalSpecOf = (pal, name) => {
+  const rows = pal.filter(p => p && p.h), tot = rows.reduce((a, p) => a + (p.share > 0 ? p.share : 0), 0), eq = !(tot > 0);
+  const sh = rows.map(p => eq ? 1 / rows.length : p.share / tot);
+  return `arr=color&c=${rows.map(p => p.h.slice(1).toLowerCase()).join(",")}&cm=overall&sh=${sh.map(x => x.toFixed(3)).join(",")}&t=14&at=1&m=0&hit=1&nm=${encodeURIComponent(name)}`;
+};
 const glYearEst = i => !!(GAL.yspan && GAL.yspan[i] && GAL.year[i] !== GL_UNDATED);
 const glCoEst = i => !!(GAL.coest && GAL.coest[i]);
 // the bare year ("1495", "480 BCE", "" for undated): for numbers and sorting. For anything a person reads use glYear.
@@ -1260,15 +1266,8 @@ const GL_HARM_CHIPS = [["all", "All"], ["comp", "Complementary"], ["analogous", 
 function glFullScreen(hexes) { if (typeof colorFocus === "function") colorFocus(hexes.map(h => ({ name: nameOf(h).n, hex: h }))); }
 // "Find paintings" on a derived palette (David, 2026-10-24): the palette page the favorites open ("Closest in the
 // archive", js/twins.js), for the palette on screen and without saving it. Back returns to this painting.
-let GL_FIND_LAST = null;
-function glFindWith(i, pal, label, title) {
-  if (typeof paletteView !== "function") return;
-  GL_FIND_LAST = { i, pal: pal.map(p => ({ h: p.h, share: p.share })), label, title };
-  if (XSTACK[XSTACK.length - 1] !== "g:" + i) XSTACK.push("g:" + i);   // the painting you leave...
-  XSTACK.push("glfind");                                              // ...and this page, which Back pops
-  glFindShow();
-}
-function glFindShow() { const f = GL_FIND_LAST; if (f) paletteView({ cols: f.pal, from: (f.title ? f.title + " · " : "") + f.label }); }
+// "Find paintings" on a derived palette (David, 2026-10-24): the painting map filtered to this palette on screen
+function glFindWith(pal, label) { if (typeof pmGo === "function") pmGo(glPalSpecOf(pal, label ? label + " palette" : "This palette")); }
 // ---------- saving a derived palette (David, 2026-10-10: "how do we save a palette once derived?") ----------
 // The same store as Picked colors' Build (js/picked.js pkSaveAsPalette) and the set page (js/setpage.js): S.palettes,
 // newest first, capped at 60 -- so a painting's palette shows up in Studio's Kept exactly like any other saved one.
@@ -2125,7 +2124,7 @@ function glPage(i, d, fromHex, tol) {
   const palActsHost = el.querySelector("[data-glpalacts]");
   if (palActsHost) palActsHost.onclick = e => {
     if (e.target.closest("[data-glshuffle]")) return shuffleMode(mode);
-    if (e.target.closest("[data-glfind]")) { buzz(5); return glFindWith(i, curPal(), glModeLabel(mode), d.t); }
+    if (e.target.closest("[data-glfind]")) { buzz(5); return glFindWith(curPal(), glModeLabel(mode)); }
     if (e.target.closest("[data-glfull]")) { buzz(5); return glFullScreen(curPal().map(p => p.h)); }
     if (e.target.closest("[data-gledit]")) return glEditOpen(curPal().map(p => p.h), { title: d.t, label: glModeLabel(mode), pool, onSave: (hexes, name) => glSavePalette(hexes, name, false, { i, t: d.t }) });
     if (e.target.closest("[data-glsave]")) { const lbl = glModeLabel(mode); return glSavePalette(curPal().map(p => p.h), glSaveName(d.t, mode === "out" ? "" : lbl), false, { i, t: d.t }); }
@@ -2141,7 +2140,7 @@ function glPage(i, d, fromHex, tol) {
     if (e.target.closest("[data-glharmshuffle]")) return shuffleMode("harmony");
     const go = e.target.closest("[data-glharmgo]"); if (go) return shuffleHistoryTo("harmony", +go.dataset.glharmgo);
     const fi = e.target.closest("[data-hcfind]");
-    if (fi) { const card = harmCards[+fi.dataset.hcfind]; if (card) { buzz(5); glFindWith(i, card.pal, card.label, d.t); } return; }
+    if (fi) { const card = harmCards[+fi.dataset.hcfind]; if (card) { buzz(5); glFindWith(card.pal, card.label); } return; }
     const fu = e.target.closest("[data-hcfull]");
     if (fu) { const card = harmCards[+fu.dataset.hcfull]; if (card) { buzz(5); glFullScreen(card.pal.map(p => p.h)); } return; }
     const ed = e.target.closest("[data-hcedit]"), sv2 = e.target.closest("[data-hcsave]");
