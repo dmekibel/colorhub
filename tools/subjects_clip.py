@@ -3,6 +3,7 @@
 
   python3 tools/subjects_clip.py              # embed images not yet cached (resumable), then label and write "im"
   python3 tools/subjects_clip.py --label-only # skip embedding, just re-label from the cached embeddings
+  python3 tools/subjects_clip.py --embed-only # only fill the embeddings cache (used by look_layout.py / rebuild_all.sh), no labelling
   python3 tools/subjects_clip.py --report     # also print the per-tag precision table
 
 Needs the venv at research/_raw/clipenv (torch + open_clip_torch; NOT in the repo): the script re-runs itself under it, and
@@ -98,7 +99,10 @@ class ImgDS:
         from PIL import Image
         s, r = self.todo[k].split("-", 1)
         try:
-            im = Image.open(RAW / s / "img" / f"{r}.jpg")
+            f = RAW / s / "img" / f"{r}.jpg"
+            if not f.exists():
+                f = RAW / "measure-img" / f"{self.todo[k]}.jpg"   # staged-measure cache (tools/measure_staged.py)
+            im = Image.open(f)
             im.draft("RGB", (448, 448))
             return self.pre(im.convert("RGB")), 1
         except Exception:
@@ -183,6 +187,8 @@ def main():
         have = EMB_IDS.read_text().splitlines(); arr = np.load(EMB)
     else:
         have, arr = embed_new(ids, torch, model, pre, dev)
+        if "--embed-only" in sys.argv:
+            print(f"embed-only: {len(have)} cached embeddings"); return
     row = {k: i for i, k in enumerate(have)}
     idx = np.array([row.get(i, -1) for i in ids]); ok = idx >= 0
     E = np.zeros((len(ids), 512), np.float32); E[ok] = arr[idx[ok]].astype(np.float32)

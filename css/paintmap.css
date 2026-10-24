@@ -77,6 +77,7 @@
 .pmx-cap-main b{font:400 18px/1.15 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pmx-cap.two .pmx-cap-main b,.pmx-cap.two .pmx-cap-main small{white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
 .pmx-cap-main small{font-size:14px;line-height:1.2;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pmx-look-tag{font-style:italic}
 .pmx-heart{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:var(--soft);transition:color .2s,transform .2s var(--spring)}
 .pmx-heart svg{width:21px;height:21px}
 .pmx-heart[hidden]{display:none}

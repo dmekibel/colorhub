@@ -39,6 +39,10 @@ function checkIds() {
   const gIds = rd("data/gallery/ids.txt").split("\n");
   if (gIds.length !== N) err(`data/gallery/ids.txt has ${gIds.length} ids, the gallery ${N}: ${FIX_GALLERY}`);
   if (new Set(gIds).size !== gIds.length) err("data/gallery/ids.txt has duplicate ids");
+  if (fs.existsSync(path.join(ROOT, "data/gallery/look.bin"))) {   // By look layout: its header must name THIS ids.txt (a stale one is hidden by the app, but say so)
+    const b = fs.readFileSync(path.join(ROOT, "data/gallery/look.bin")), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
+    if (b.length < 24 || b.readUInt32LE(8) !== gIds.length || b.readUInt32LE(20) !== parseInt(h, 16) || b.length !== 24 + 4 * gIds.length) warn("data/gallery/look.bin is out of step with ids.txt (By look is hidden until it is rebuilt): python3 tools/look_layout.py");
+  }
   const shardIds = [], names = [];
   for (let k = 0; k * head.shard < N; k++) for (const r of rj(`data/gallery/d/${shardName(k)}.json`)) { shardIds.push(r[0]); names.push(r[2]); }
   if (shardIds.length !== gIds.length || shardIds.some((id, i) => id !== gIds[i])) err(`data/gallery/ids.txt order differs from the detail shards d/*.json: ${FIX_GALLERY}`);

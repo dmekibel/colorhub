@@ -8146,3 +8146,28 @@ scenario("paintmap", "a color nothing holds that closely says so and offers Loos
   for (let n = 0; n < 6 && t.$("[data-pmloosen2]"); n++) await t.click("[data-pmloosen2]", { wait: 700 });
   t.expect(t.w.PM_CTRL.count > 0, "loosening the closeness never brought paintings back");
 });
+
+// ---- By look (David, 2026-10-24: "a map arranged by vibe"): data/gallery/look.bin from the CLIP image model -----------------------------
+// Passes trivially when look.json is absent: the option is hidden then, which is the designed fallback.
+scenario("paintmap", "By look: the option appears, switching keeps the painting in the middle, a filter refills a compact grid with no voids", async t => {
+  const i0 = await pmFocusOpen(t);
+  const meta = await t.w.fetch("data/gallery/look.json").then(r => r.ok ? r.json() : null).catch(() => null);
+  if (!meta) { t.expect(true, "no look.json in this checkout: By look is hidden by design"); return; }
+  await t.click(".pmx-do", { wait: 400 });
+  await t.waitFor(".pmx-sheet [data-pmarr=\"look\"]", 6000, "the By look choice in Arrange");
+  await t.click('.pmx-sheet [data-pmarr="look"]', { force: true, wait: 600 });
+  await t.waitFor(() => t.w.PM_CTRL.spec.arr === "look" && t.w.PM_CTRL.lay().arr === "look", 15000, "the look layout (look.bin) to load and lay out");
+  t.expect(/image model/i.test(t.text(".pmx-sheet .hm-arr-sub")), "the Arrange line doesn't say it comes from an image model");
+  t.expect(t.w.PM_CTRL.center === i0, `By look moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  const full = t.ev("PM_CTRL.lay().n");
+  t.expect(full === meta.n, `By look should hold every painting (${full} of ${meta.n})`);
+  const y = t.ev(`GAL.year[${i0}]`);
+  t.ev(`PM_CTRL.spec.f.y0 = ${y - 15}; PM_CTRL.spec.f.y1 = ${y + 15}; PM_CTRL.rebuild()`);
+  const lay = t.ev("(() => { const l = PM_CTRL.lay(); return { n: l.n, GW: l.GW, GH: l.GH, arr: l.arr }; })()");
+  t.expect(lay.arr === "look" && lay.n > 50 && lay.n < full, `the filter didn't narrow By look (${JSON.stringify(lay)})`);
+  t.expect(lay.GW * lay.GH - lay.n < lay.GW, `a filtered By look map has voids: ${lay.GW}x${lay.GH} cells for ${lay.n} paintings`);
+  t.expect(t.w.PM_CTRL.center === i0, `a filter moved you off your painting in By look: ${i0} -> ${t.w.PM_CTRL.center}`);
+  t.ev("PM_CTRL.spec.f.y0 = null; PM_CTRL.spec.f.y1 = null; PM_CTRL.rebuild()");
+  await t.click('.pmx-sheet [data-pmarr="color"]', { force: true, wait: 700 });
+  t.expect(t.w.PM_CTRL.center === i0, `leaving By look moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+});
