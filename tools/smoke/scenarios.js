@@ -2483,14 +2483,16 @@ scenario("pages", "an in-between color lists its runner-up names under the cover
   await t.waitFor(() => /Your color/.test(H.chip(t)), 10000, "a 'Your color' page for " + hex);
   const sec = await t.waitFor(() => t.$("[data-rp-also]"), 5000, "the 'It could also be called' section");
   t.expect(/It could also be called/.test(sec.textContent), "the section is not titled 'It could also be called'");
-  t.expect(/^Closest: .+ · \d+(\.\d)?%/.test(t.text(".rp-also-win")), `the winner line reads "${t.text(".rp-also-win")}"`);
+  t.expect(/^Closest everyday name: .+ · \d+(\.\d)?%/.test(t.text(".rp-also-win")), `the winner line reads "${t.text(".rp-also-win")}"`);
   const rows = t.$$(".rp-also-row", sec);
   t.expect(rows.length >= 1 && rows.length <= 6, `${rows.length} rows, expected 1-6`);
   rows.forEach(r => { const sws = r.querySelectorAll(".rp-also-sw i"); t.expect(sws.length === 2 && Math.abs(sws[0].getBoundingClientRect().width - sws[1].getBoundingClientRect().width) < 1, "the pair's swatches are not equal"); });
   const heroTop = t.$(".cp-hero-full").getBoundingClientRect().bottom, secTop = sec.getBoundingClientRect().top;
   t.expect(secTop - heroTop < 200, `the section sits ${Math.round(secTop - heroTop)}px under the cover, not right under it`);
-  const first = rows[0].dataset.rpAlsoN;
-  await t.click(rows[0], { wait: 500 });
+  await t.waitFor(() => typeof t.w.loadLongNames !== "function" || t.ev("LONG_NAMES && LONG_NAMES.length > 0"), 8000, "the archive names to load (the section widens to them)");
+  await new Promise(r => setTimeout(r, 300));
+  const row0 = t.$(".rp-also-row"), first = row0.dataset.rpAlsoN;   // re-read: the section is redrawn once the archive lands
+  await t.click(row0, { wait: 500 });
   await t.waitFor(() => /Your color/.test(H.chip(t)) && t.$(".cp-hero-full") && getComputedStyle(t.$(".cp-hero-full")).getPropertyValue("--c").trim().toUpperCase() === hex, 10000, `the ${first} page, still showing ${hex}`);
 });
 

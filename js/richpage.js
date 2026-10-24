@@ -139,23 +139,37 @@ function rpYoursName(name, hex, tapped) {
 // A row opens that name's page with the exact color still shown.
 function rpAlsoHTML(name, hex, tapped) {
   if (!tapped || typeof nameCandidates !== "function") return "";
-  const rows = nameCandidates(tapped, 6, 12, name);
+  // the whole archive once it has loaded (js/naming.js nameCandidatesWide), the learnable names until then;
+  // rpAlsoWiden() redraws this section when the archive lands
+  const wide = typeof nameCandidatesWide === "function", rows = wide ? nameCandidatesWide(tapped, 6, 12, name) : nameCandidates(tapped, 6, 12, name);
   if (!rows.length) return "";
   const m = pctMatch(de2000(tapped, hex)).replace(" match", "");
   return `<section class="rp-also" data-rp-also aria-label="It could also be called">
     <h2>It could also be called</h2>
-    <p class="rp-also-win">Closest: <b>${esc(name)}</b> · ${m}</p>
+    <p class="rp-also-win">Closest everyday name: <b>${esc(name)}</b> · ${m}</p>
     <div class="rp-also-list">${rows.map(r => `<button type="button" class="rp-also-row" data-rp-also-n="${esc(r.n)}" data-rp-also-h="${r.h}">
       <span class="rp-also-sw" aria-hidden="true"><i style="--c:${tapped}"></i><i style="--c:${r.h}"></i></span>
-      <b>${esc(rpYoursName(r.n, r.h, tapped))}</b><em>${pctMatch(r.de).replace(" match", "")}</em></button>`).join("")}</div>
+      <span class="rp-also-t"><b>${esc(rpYoursName(r.n, r.h, tapped))}</b>${r.src ? `<small>${esc(r.src)}</small>` : ""}</span><em>${pctMatch(r.de).replace(" match", "")}</em></button>`).join("")}</div>
   </section>`;
+}
+// once the archive (data/library.json) has loaded, redraw the section with archive names in it
+function rpAlsoWiden(el, name, hex, tapped) {
+  if (!tapped || typeof loadLongNames !== "function") return;
+  loadLongNames().then(() => {
+    const box = el.querySelector("[data-rp-also]"); if (!box || !el.isConnected) return;
+    const t = document.createElement("div"); t.innerHTML = rpAlsoHTML(name, hex, tapped);
+    const fresh = t.firstElementChild; if (!fresh) return;
+    box.replaceWith(fresh);
+    fresh.querySelectorAll("[data-rp-also-n]").forEach(b => b.onclick = () => rpOpenNameAs(b.dataset.rpAlsoN, b.dataset.rpAlsoH, tapped));
+  }).catch(() => {});
 }
 // open a given name's page with the tapped color still shown (js/swatch.js openTappedColor does this for the nearest one)
 function rpOpenNameAs(n, h, tapped) {
   const taught = BYNAME.get(String(n).toLowerCase());
   buzz(6);
   if (taught) return openNode(colorNode(taught), true, tapped);
-  const entry = (CORE_NAMES || coreFallback()).find(e => e.n.toLowerCase() === String(n).toLowerCase()) || { n, h, src: ["app"], rank: null };
+  const entry = (CORE_NAMES || coreFallback()).find(e => e.n.toLowerCase() === String(n).toLowerCase())
+    || (typeof findLongName === "function" && findLongName(String(n))) || { n, h, src: ["app"], rank: null };   // an archive-only name opens its own archive page
   return namePage(entry, true, tapped);
 }
 // One compact action row on the cover (David, 2026-10-09: "Learn it could be a small button next to the Pair
@@ -926,6 +940,7 @@ function colorDossier(entry, o = {}) {
   wireLinks(el);
   el.addEventListener("click", e => { const s = e.target.closest("[data-src-open]"); if (s) { e.preventDefault(); if (typeof sourcePage === "function") sourcePage(s.dataset.srcOpen); } });
   el.querySelectorAll("[data-rp-also-n]").forEach(b => b.onclick = () => rpOpenNameAs(b.dataset.rpAlsoN, b.dataset.rpAlsoH, tapped));
+  rpAlsoWiden(el, name, hex, tapped);
   rpStoryFill(el, name, hex, o);
   rpCoverFill(el, name, hex, heroHex, entry);
   rpCoverLike(el, name, hex);

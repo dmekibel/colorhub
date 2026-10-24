@@ -75,6 +75,18 @@ function nameCandidates(hex, n = 6, maxDe = 12, skip = "") {
   const list = CORE_NAMES || coreFallback(), seen = new Set(), sk = String(skip).toLowerCase();
   return nearestCore(lab(hex), list, 40).filter(x => { const k = x.n.toLowerCase(); if (k === sk || seen.has(k) || x.de > maxDe) return false; seen.add(k); return true; }).slice(0, n);
 }
+// The same runner-up list widened to the whole archive (David, 2026-10-24: "yes widen it"): the ~900 learnable names
+// plus every archive color (data/library.json, js/graph.js loadLongNames), so a rarer real name (a Ridgway, a pigment, a
+// Crayola) can show up for an in-between color. Opt-in on purpose: nameOf() and the page title keep the learnable set,
+// and tools/check_nearest.js keeps asserting nameCandidates() (the narrow list) against nameOf(). Each row says
+// whether it is a learnable name (`learn`) and, for an archive-only one, where the name comes from (`src`).
+function nameCandidatesWide(hex, n = 6, maxDe = 12, skip = "") {
+  const core = CORE_NAMES || coreFallback(), learn = new Set(core.map(e => e.n.toLowerCase()));
+  const pool = core.concat((LONG_NAMES || []).filter(e => !learn.has(e.n.toLowerCase())));
+  const seen = new Set(), sk = String(skip).toLowerCase();
+  return nearestCore(lab(hex), pool, 60).filter(x => { const k = x.n.toLowerCase(); if (k === sk || seen.has(k) || x.de > maxDe) return false; seen.add(k); return true; })
+    .slice(0, n).map(x => ({ ...x, learn: learn.has(x.n.toLowerCase()), src: learn.has(x.n.toLowerCase()) ? "" : (typeof srcLine === "function" ? srcLine(x.entry) : "") }));
+}
 // Has the learner met this word? Only the app's 101 are ever taught today (ROADMAP §13-14's vocabulary ladder
 // is a later job): a core-list word beyond those 101 is always "new" until then.
 function coreWordMet(entry) {
