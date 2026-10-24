@@ -185,7 +185,13 @@ function rpActionRowHTML(name, hex, tapped) {
     <button type="button" class="rp-learnpill${label.known ? " rp-learnpill-known" : ""}" data-learnit>${label.known ? ICON.check || "" : ""}<span>${esc(label.t)}</span>${!label.known ? `<em>2 min</em>` : ""}</button>
     ${typeof sxPairBtnHTML === "function" ? sxPairBtnHTML(learnHex, name) : ""}
     <button type="button" class="icon-btn rp-heart${liked ? " saved" : ""}" data-fvh data-rp-heart aria-label="${liked ? "Remove from your colors" : "Add to your colors"}" aria-pressed="${liked}">${liked ? ICON.heartOn : ICON.heart}</button>
+    ${rpExploreBtnHTML()}
   </div>`;
+}
+// David, 2026-10-24: "from the very beginning, when you click on a color, the explore button should be somewhere there."
+// A quiet pill on the cover (same pill family as Learn it / Pair with), one tap to the Keep exploring feed.
+function rpExploreBtnHTML() {
+  return `<button type="button" class="rp-explore" data-rp-explore aria-label="Explore: keep exploring this color"><span>Explore</span>${ICON.down}</button>`;
 }
 function rpCoverFoot(name, hex, tapped, entry) {
   const id = "rp-cov-" + Math.random().toString(36).slice(2, 8), rel = rpRelation(name, tapped, entry && entry.h || hex);
@@ -194,7 +200,7 @@ function rpCoverFoot(name, hex, tapped, entry) {
         ${tapped ? `<p class="rp-yours">${esc(rpYoursLine(name, hex, tapped))}</p>` : `<p class="rp-tier" data-rp-tier></p>
         <p class="rp-def" data-rp-def></p><p class="rp-defsrc" data-rp-defsrc></p>`}
         ${!tapped ? rpActionRowHTML(name, hex, tapped) : ""}
-        <span class="rp-hexrow"><button class="mono cp-hex" data-copy="${tapped || hex}">${tapped || hex}</button>${tapped && typeof fvSet === "function" ? `<button class="rp-saveyours" data-rp-saveyours>${typeof fvHas === "function" && fvHas(tapped) ? "Saved to your colors" : "Save your color"}</button>` : ""}</span>${tapped && typeof sxPairBtnHTML === "function" ? sxPairBtnHTML(tapped || hex, name) : ""}` };
+        <span class="rp-hexrow"><button class="mono cp-hex" data-copy="${tapped || hex}">${tapped || hex}</button>${tapped && typeof fvSet === "function" ? `<button class="rp-saveyours" data-rp-saveyours>${typeof fvHas === "function" && fvHas(tapped) ? "Saved to your colors" : "Save your color"}</button>` : ""}</span>${tapped ? `<div class="rp-actrow">${typeof sxPairBtnHTML === "function" ? sxPairBtnHTML(tapped || hex, name) : ""}${rpExploreBtnHTML()}</div>` : ""}` };
 }
 // a quick, good-enough legibility lift for the liking-moment fill: blend the page's color toward white or black
 // until it reads against the heart's own dark surface, without a full perceptual model (it's a decoration, not a swatch)
@@ -688,7 +694,8 @@ function rpBarHTML(name, hex) {
   const hair = typeof rcContrast === "function" && rcContrast(hex, "#0E0D0B") < 1.6 ? " rp-bar-hair" : "";
   return `<div class="rp-bar${hair}" style="--c:${hex}" data-ink="${ink(hex)}" aria-hidden="true">
     <button class="rp-bar-back" data-rp-back aria-label="Back">${ICON.back}</button><button class="rp-bar-name" data-rp-top>${esc(name)}</button>
-    <nav class="rp-bar-chips">${[["story", "Story"], ["paint", "Paintings"], ["family", "Family"], ["id", "ID"], ["explore", "Explore \u2193"]].map(([k, t]) => `<button data-rp-jump="${k}" hidden>${t}</button>`).join("")}</nav></div>`;
+    <nav class="rp-bar-chips">${[["story", "Story"], ["paint", "Paintings"], ["family", "Family"], ["id", "ID"]].map(([k, t]) => `<button data-rp-jump="${k}" hidden>${t}</button>`).join("")}</nav>
+    <button class="rp-bar-explore" data-rp-jump="explore" hidden aria-label="Explore: keep exploring this color"><span>Explore</span>${ICON.down}</button></div>`;
 }
 function rpBarSync(el) {
   const has = { story: !!el.querySelector(".ar-door,.ar-head,.rp-twin"), paint: !!el.querySelector(".rp-paint"), family: !!el.querySelector(".ar-fam"), id: !!el.querySelector(".rp-idcard"), explore: !!el.querySelector("[data-rpfeed]") };
@@ -698,6 +705,8 @@ function rpBarSync(el) {
 function rpBarWire(el) {
   const bar = el.querySelector(".rp-bar"), hero = el.querySelector(".cp-hero"); if (!bar || !hero) return;
   const scrollTo = t => { if (!t) return; const y = t.getBoundingClientRect().top + scrollY - bar.offsetHeight - 8; window.scrollTo({ top: Math.max(0, y), behavior: reduceMotion ? "auto" : "smooth" }); };
+  const cover = el.querySelector("[data-rp-explore]");
+  if (cover) cover.addEventListener("click", () => { buzz && buzz(5); scrollTo(el.querySelector("[data-rpfeed]")); });
   bar.addEventListener("click", e => {
     if (e.target.closest("[data-rp-back]")) return xBack();
     if (e.target.closest("[data-rp-top]")) return window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
@@ -745,7 +754,9 @@ function rpBarWire(el) {
   };
   const onScroll = () => check();   // direct, not rAF: still updates in a background tab
   document.addEventListener("scroll", onScroll, { passive: true, capture: true });
-  cleanup.push(() => { document.removeEventListener("scroll", onScroll, true); bar.remove(); });
+  window.addEventListener("resize", onScroll);
+  document.addEventListener("scrollend", onScroll, true);   // a last check when a flick settles, so the bar can never be left off the screen
+  cleanup.push(() => { document.removeEventListener("scroll", onScroll, true); document.removeEventListener("scrollend", onScroll, true); window.removeEventListener("resize", onScroll); bar.remove(); });
   setTimeout(() => { rpBarSync(el); check(); }, 400);   // a Back that lands mid-page shows it at once
 }
 

@@ -70,7 +70,7 @@
 [data-ink="dark"] .rp-heart{background:rgba(255,255,255,.4)}
 .rp-heart.saved svg{fill:currentColor}
 /* 320px: Learn it + heart keep priority; Pair with becomes the row's third item and may wrap alone */
-@media (max-width:339px){.rp-actrow{row-gap:8px}.rp-learnpill{order:1}.rp-heart{order:2}.sx-pairbtn{order:3;flex-basis:100%}}
+@media (max-width:339px){.rp-actrow{row-gap:8px}.rp-learnpill{order:1}.rp-heart{order:2}.sx-pairbtn{order:3}.rp-explore{order:4}}
 /* the liking moment: the heart fills with the page's own color, anticipation -> impact -> settle */
 .rp-heart.rp-like-go{animation:rpHeartLike .5s var(--spring,ease)}
 @keyframes rpHeartLike{0%{transform:scale(1)}30%{transform:scale(.82)}55%{transform:scale(1.22);background:var(--rp-heart-c);color:#fff}100%{transform:scale(1);background:var(--rp-heart-c);color:#fff}}
@@ -428,6 +428,16 @@
 .rp-bar-chips::-webkit-scrollbar{display:none}
 .rp-bar-chips button{flex:none;min-height:30px;padding:0 2px;background:none;border:0;color:inherit;opacity:.75;font:400 14px/1 var(--sans)}
 .rp-bar-chips button[hidden]{display:none}
+/* Explore stays in the slim state: it sits outside the fading chip list, so it never moves or fades (David, 2026-10-24) */
+.rp-bar-explore,.rp-explore{display:inline-flex;align-items:center;gap:5px;border-radius:var(--r-pill);font:500 14px/1 var(--sans);color:inherit;flex:none}
+.rp-bar-explore{height:30px;padding:0 9px 0 12px;background:none;border:1px solid currentColor;border-color:color-mix(in srgb,currentColor 40%,transparent)}
+.rp-bar-explore[hidden]{display:none}
+.rp-bar-explore svg,.rp-explore svg{width:15px;height:15px;flex:none}
+/* the cover's own Explore pill: a quiet outlined pill under the actions, legible on any cover color */
+.rp-explore{height:40px;padding:0 14px 0 16px;margin-top:10px;font-size:15px;background:rgba(20,19,17,.28);border:1px solid rgba(236,232,223,.5);color:#F3F0EA}
+[data-ink="dark"] .rp-explore{background:rgba(255,255,255,.34);border-color:rgba(20,19,17,.4);color:#1A1814}
+.rp-actrow .rp-explore{margin-top:0}
+.rp-explore:active{transform:scale(.97)}
 /* David, 2026-10-09: reading down slims the bar further (name + back only); a little scroll up brings the tabs
    straight back. The bar's own height never changes (it's one row already), so this is a quiet fade+slide. */
 .rp-bar.collapsed .rp-bar-chips{opacity:0;transform:translateX(6px);pointer-events:none}

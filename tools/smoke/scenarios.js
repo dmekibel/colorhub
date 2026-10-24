@@ -4503,19 +4503,43 @@ scenario("paintings", "a painting page has a Keep exploring jump near the top; o
   const after = t.ev("document.querySelector('[data-glfeed]').getBoundingClientRect().top");
   t.expect(after < vh, `the feed is still below the screen after the tap (top ${after}, window ${vh})`);
 });
-scenario("pages", "a color page's pinned header has an Explore chip that jumps to the Keep exploring feed", async t => {
+scenario("pages", "a color page shows Explore on first paint, keeps it in the pinned header at every scroll depth, and both ask to scroll to the feed", async t => {
   await t.open("#/color/teal", { settle: 900 });
   await t.waitFor("[data-rpfeed]", 15000, "the feed's host on the color page");
-  t.w.scrollTo(0, 700); await t.sleep(600);
-  const chip = t.$("body > .rp-bar [data-rp-jump=explore]");
-  t.expect(chip && !chip.hidden, "the pinned header has no visible Explore chip");
-  // headless Chrome does not run smooth scrolls to the end: record the scroll the chip asks for
-  t.ev("window.__st = null; const o = window.scrollTo; window.scrollTo = function (a) { window.__st = a; return o.call(window, typeof a === 'object' ? Object.assign({}, a, { behavior: 'auto' }) : a); };");
-  t.ev("document.querySelector('body > .rp-bar [data-rp-jump=explore]').click()");
+  const btn = t.$("[data-rp-explore]");
+  t.expect(btn, "the cover has no Explore button");
+  const r = t.ev("(() => { const q = document.querySelector('[data-rp-explore]').getBoundingClientRect(); return { t: q.top, b: q.bottom, h: innerHeight, w: q.width }; })()");
+  t.expect(r.t >= 0 && r.b <= r.h && r.w > 60, `the cover's Explore button is not fully on the first screen (${JSON.stringify(r)})`);
+  t.expect(!/[↓→]/.test(t.text(btn)) && btn.querySelector("svg"), "the cover Explore button should use an svg glyph, not a text arrow");
+  // headless Chrome does not run smooth scrolls to the end: record the scroll the button asks for
+  t.ev("window.__st = null; const o = window.scrollTo; window.scrollTo = function (a, b) { if (typeof a === 'object') { window.__st = a; return o.call(window, Object.assign({}, a, { behavior: 'auto' })); } return o.call(window, a, b); };");
+  t.ev("document.querySelector('[data-rp-explore]').click()");
   await t.sleep(500);
-  const st = t.ev("window.__st"), feedTop = t.ev("document.querySelector('[data-rpfeed]').getBoundingClientRect().top"), vh = t.ev("innerHeight");
-  t.expect(st && st.top > 700, `the Explore chip did not ask to scroll down to the feed (${JSON.stringify(st)})`);
-  t.expect(feedTop < vh, `the feed is still below the screen after the chip (top ${feedTop}, window ${vh})`);
+  let st = t.ev("window.__st");
+  t.expect(st && st.top > 300, `the cover Explore button did not ask to scroll down to the feed (${JSON.stringify(st)})`);
+  // the pinned header is on screen (not transformed away) at three depths, Explore visible even when slim
+  for (const y of [1000, 1800, 1200]) {
+    t.w.scrollTo(0, y); await t.sleep(500);
+    await t.waitFor(() => t.ev("document.querySelector('body > .rp-bar').classList.contains('on')") || null, 4000, `the pinned header at scroll ${y}`).catch(() => null);
+    const bar = t.ev("(() => { const b = document.querySelector('body > .rp-bar'), r = b.getBoundingClientRect(), e = b.querySelector('[data-rp-jump=explore]'), er = e.getBoundingClientRect(); return { sy: scrollY, hb: document.querySelector('.cp-hero').getBoundingClientRect().bottom, on: b.classList.contains('on'), top: r.top, bottom: r.bottom, ex: !e.hidden && er.width > 30 && er.right <= innerWidth + 1, eo: getComputedStyle(e).opacity }; })()");
+    t.expect(bar.on && bar.top >= -1 && bar.bottom > 20, `the pinned header is not on screen at scroll ${y} (${JSON.stringify(bar)})`);
+    t.expect(bar.ex && bar.eo === "1", `the header's Explore button is missing or faded at scroll ${y} (${JSON.stringify(bar)})`);
+  }
+  t.w.scrollTo(0, 1000); await t.sleep(600);
+  t.ev("window.__st = null; document.querySelector('body > .rp-bar [data-rp-jump=explore]').click()");
+  await t.sleep(500);
+  st = t.ev("window.__st"); const feedTop = t.ev("document.querySelector('[data-rpfeed]').getBoundingClientRect().top"), vh = t.ev("innerHeight");
+  t.expect(st && st.top > 700, `the header Explore button did not ask to scroll down to the feed (${JSON.stringify(st)})`);
+  t.expect(feedTop < vh, `the feed is still below the screen after the header button (top ${feedTop}, window ${vh})`);
+});
+scenario("pages", "an in-between color's cover also has Explore on first paint", async t => {
+  await t.open("#/color/teal", { settle: 300 });
+  const sw = t.d.createElement("button"); sw.dataset.swatch = "#292C10"; sw.style.cssText = "position:fixed;left:150px;top:300px;width:60px;height:60px;z-index:9999";
+  t.d.body.appendChild(sw);
+  await t.click(sw, { wait: 400 }); sw.remove();
+  await t.waitFor(() => /Your color/.test(H.chip(t)), 10000, "a 'Your color' page for #292C10");
+  const r = t.ev("(() => { const b = document.querySelector('[data-rp-explore]'); if (!b) return null; const q = b.getBoundingClientRect(); return { t: q.top, b: q.bottom, h: innerHeight }; })()");
+  t.expect(r && r.t >= 0 && r.b <= r.h, `the in-between cover has no Explore button on the first screen (${JSON.stringify(r)})`);
 });
 
 // ---------- Keep exploring on a COLOR page (js/feed.js fdMount with sub = a color, mounted by js/richpage.js) ----------
