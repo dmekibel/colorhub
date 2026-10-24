@@ -511,6 +511,9 @@ function fdMount(host, o) {
   const destroy = () => { gone = true; tok++; peekOff(); if (zoom) zoom.destroy(); removeEventListener("scroll", near); removeEventListener("scroll", onScroll); removeEventListener("resize", onResize); live.clear(); };
   cleanup.push(destroy);
   if (!host.style.minHeight) host.style.minHeight = "1px";   // never undo fdJump's taller one
+  // the page may settle AFTER this is mounted (a wide window's two columns, late images, fonts) and bring the feed up to the screen with no scroll
+  // event at all, so a scroll listener alone never starts it (the desktop bug of 2026-10-24: heading, zero tiles): also look every 400 ms until built
+  const poll = setInterval(() => { if (built || gone || !host.isConnected) clearInterval(poll); else near(); }, 400);
   if (memo) start(); else { addEventListener("scroll", near, { passive: true }); near(); }
   return { start, destroy };
 }
@@ -740,11 +743,14 @@ function fdJump(host) {
 }
 function fdMountColor(host, o) {
   if (!host) return;
+  let started = false;
   const go = () => fdMount(host, o);
-  const wait = () => { if (GAL) go(); else loadGallery().then(go).catch(() => { host.insertAdjacentHTML("beforeend", `<p class="fine">The paintings didn't load.</p>`); }); };
+  const wait = () => { started = true; if (GAL) go(); else loadGallery().then(go).catch(() => { host.insertAdjacentHTML("beforeend", `<p class="fine">The paintings didn't load.</p>`); }); };
   // the page is still filling in when it is drawn, so "near" also needs the reader to have started scrolling (or a page too short to scroll)
   const near = () => { if (host.getBoundingClientRect().top < innerHeight * 2.6 && (scrollY > 200 || document.documentElement.scrollHeight < innerHeight * 1.3)) { removeEventListener("scroll", near); wait(); } };
   if (!host.style.minHeight) host.style.minHeight = "1px";
   if (o.backNav && FD_MEMO.has("c:" + o.sub.hex)) return wait();
-  addEventListener("scroll", near, { passive: true }); cleanup.push(() => removeEventListener("scroll", near)); near();
+  addEventListener("scroll", near, { passive: true });
+  const poll = setInterval(() => { if (!host.isConnected || started) clearInterval(poll); else near(); }, 400);   // the page settles after mount with no scroll event: look again until it starts
+  cleanup.push(() => { removeEventListener("scroll", near); clearInterval(poll); }); near();
 }

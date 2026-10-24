@@ -4565,6 +4565,19 @@ scenario("pages", "an in-between color's cover also has Explore on first paint",
   t.expect(r && r.t >= 0 && r.b <= r.h, `the in-between cover has no Explore button on the first screen (${JSON.stringify(r)})`);
 });
 
+scenario("paintings", "desktop 1440x900: Keep exploring shows tiles at the bottom of a painting page and a color page", async t => {
+  const probe = async (hash, host) => {
+    await t.open(hash, { settle: 900, size: [1440, 900] });
+    await t.waitFor(host, 15000, "the feed host on " + hash);
+    t.w.scrollTo(0, 1e7); await t.sleep(900); t.w.scrollTo(0, 1e7); await t.sleep(600);
+    const info = t.ev(`(() => { const h = document.querySelector(${JSON.stringify(host)}); if (!h) return 'no host'; const r = h.getBoundingClientRect(); return JSON.stringify({ top: Math.round(r.top), w: Math.round(r.width), h: Math.round(r.height), tiles: h.querySelectorAll('.fd-tile[data-fk]').length, chips: h.querySelectorAll('.fd-chip').length, gh: h.querySelector('.fd-grid') && h.querySelector('.fd-grid').style.height, gw: h.querySelector('.fd-grid') && h.querySelector('.fd-grid').clientWidth, st: (h.querySelector('.fd-state')||{}).innerHTML, lead: (h.querySelector('.fd-lead')||{}).textContent, kids: h.querySelector('.fd-grid') && h.querySelector('.fd-grid').children.length, sy: scrollY, dh: document.documentElement.scrollHeight }); })()`);
+    return JSON.parse(info);
+  };
+  const p = await probe("#/gallery/12", "[data-glfeed]");
+  t.expect(p.tiles >= 6 && p.w > 400, "no feed tiles on the desktop painting page: " + JSON.stringify(p));
+  const c = await probe("#/color/teal", "[data-rpfeed]");
+  t.expect(c.tiles >= 4 && c.w > 400, "no feed tiles on the desktop color page: " + JSON.stringify(c));
+});
 // ---------- Keep exploring on a COLOR page (js/feed.js fdMount with sub = a color, mounted by js/richpage.js) ----------
 async function cfeedOpen(t, hash, chip) {
   await t.open(hash, { settle: 900 });
