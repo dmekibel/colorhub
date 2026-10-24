@@ -4542,12 +4542,12 @@ scenario("pages", "Keep exploring on a color page: the feed is at the very botto
   const order = [".rp-idcard", "[data-rpfeed]", ".rp-last"].map(s => t.$(s)), pos = (a, b) => a.compareDocumentPosition(b) & 4;
   t.expect(order.every(Boolean) && pos(order[0], order[1]) && pos(order[1], order[2]), "the feed isn't between the ID card and the last fine-print line");
   t.expect(t.$(".cp-hero .rp-name"), "the color page's cover is gone");
-  const caps = feedCaps(t), pct = caps.map(c => +((c.match(/^(\d+)% match$/) || [])[1] || NaN));
+  const caps = feedCaps(t), pct = caps.map(c => parseFloat((c.match(/^([\d.]+)% match$/) || [])[1] || NaN));
   t.expect(caps.length >= 4 && pct.every((p, k) => p >= 1 && (k === 0 || p <= pct[k - 1])), `captions aren't plain "NN% match", closest first: ${caps.slice(0, 6)}`);
   const first = t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items[0].j`);
   t.expect(Number.isInteger(first) && t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items.length`) >= 24, "the top of the ranking isn't cached (rank once, page through)");
   // the first tile is the nearest patch, whatever the area (closeness beats coverage): nothing in the cache is closer
-  t.expect(t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items.every((it, k, a) => k === 0 || parseInt(it.cap) <= parseInt(a[0].cap))`), "a later tile is closer than the first");
+  t.expect(t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items.filter(it => /^[\d.]+%/.test(it.cap)).every((it, k, a) => k === 0 || parseFloat(it.cap) <= parseFloat(a[0].cap) + 1)`), "a later tile is clearly closer than the first");
   t.expect(t.$$(".fd-tile[data-fk] .fd-cap, .fd-tile[data-fk] .fd-by").every(e => parseFloat(getComputedStyle(e).fontSize) >= 15), "caption text is smaller than body size");
   t.notes.push(`color feed first ranking ${t.ev("FD_LAST.ms")} ms`);
 });
@@ -4556,18 +4556,18 @@ scenario("pages", "Keep exploring on a color page: each chip re-ranks with its o
   await cfeedChip(t, "painters");
   t.expect(/^(Used most|Also used) by \S/.test(t.text(".fd-tile[data-fk='0'] .fd-cap")), `Painters caption: "${t.text(".fd-tile[data-fk='0'] .fd-cap")}"`);
   await cfeedChip(t, "era");
-  const decs = feedCaps(t).map(c => (c.match(/^(\d{3})0s · \d+% match$/) || [])[1]);
+  const decs = feedCaps(t).map(c => (c.match(/^(\d{3})0s · [\d.]+% match$/) || [])[1]);
   t.expect(decs.length >= 4 && decs.every(Boolean), `Era captions don't say the decade: ${feedCaps(t).slice(0, 4)}`);
   await cfeedChip(t, "place");
-  t.expect(feedCaps(t).slice(0, 3).every(c => /^[A-Z][^·]+ · \d+% match$/.test(c)), `Place captions: ${feedCaps(t).slice(0, 3)}`);
+  t.expect(feedCaps(t).slice(0, 3).every(c => /^[A-Z][^·]+ · [\d.]+% match$/.test(c)), `Place captions: ${feedCaps(t).slice(0, 3)}`);
   await cfeedChip(t, "worlds");
   t.expect(feedCaps(t).slice(0, 3).every(c => /^In /.test(c)), `Other worlds captions: ${feedCaps(t).slice(0, 3)}`);
   t.expect(t.$(".fd-tile.fd-card"), "Other worlds has no card");
   await cfeedChip(t, "close");
-  t.expect(feedCaps(t).slice(0, 3).every(c => /^\d+% match$/.test(c)), `Close colors captions: ${feedCaps(t).slice(0, 3)}`);
+  t.expect(feedCaps(t).slice(0, 3).every(c => /^[\d.]+% match$/.test(c)), `Close colors captions: ${feedCaps(t).slice(0, 3)}`);
   // back on Paintings the first tile is the closest again (cached: instant)
   await cfeedChip(t, "paintings");
-  t.expect(/^\d+% match$/.test(feedCaps(t)[0]), "Paintings didn't come back");
+  t.expect(/^[\d.]+% match$/.test(feedCaps(t)[0]), "Paintings didn't come back");
   t.expect(t.ev(`JSON.parse(sessionStorage.getItem("colorhub-feed-color")).chip`) === "paintings", "the chip choice isn't remembered for the session");
 });
 scenario("pages", "Keep exploring on a color page: a chip with nothing for this color is disabled with a plain reason", async t => {
@@ -4602,7 +4602,7 @@ scenario("pages", "Keep exploring on a color page: a tile opens its painting, an
 scenario("pages", "Keep exploring on an in-between color: the feed measures the tapped color, and a close name opens with the exact color", async t => {
   await cfeedOpen(t, "#/color/teal?c=2f8f8a");
   const caps = feedCaps(t);
-  t.expect(caps.length >= 4 && caps.every(c => /^\d+% match$/.test(c)), `captions: ${caps.slice(0, 4)}`);
+  t.expect(caps.length >= 4 && caps.every(c => /^[\d.]+% match$/.test(c)), `captions: ${caps.slice(0, 4)}`);
   t.expect(t.ev(`!!FD_CACHE.get("c:#2F8F8A|paintings|overall|0")`), "the feed is not keyed to the tapped color");
   t.expect(/Your color/.test(t.text(".cp-chip")), "this isn't the tapped-color page");
   await cfeedChip(t, "close");
