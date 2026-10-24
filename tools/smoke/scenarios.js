@@ -6197,6 +6197,19 @@ scenario("paintmap", "fully zoomed out, the whole archive draws fast, every cell
   t.ev("(() => { const l = PM_CTRL.lay(); PM_CTRL._qaSetPZ(l.start[0], l.start[1], 1); PM_CTRL._qaForceDraw(); })()");   // leave the remembered pan/zoom at the ordinary view for later scenarios
   t.notes.push(`full zoom-out: ${n} paintings, best draw ${ms.toFixed(0)}ms, ${hits}/${tries} taps found a cell`);
 });
+// David, 2026-10-24: iOS killed the page ("A problem repeatedly occurred") when tier 0 alone decoded to ~333 MB. The decoded tier-0 sheets
+// must stay under 120 MB for the whole archive (and tier 0 + tier 1 under 200 MB).
+scenario("paintmap", "memory budget: decoded tier-0 sheets stay under 120 MB", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 100000, 30000, "the whole archive to lay out");
+  await t.waitFor(() => t.ev("PM_CTRL._qaAtlasReady()"), 30000, "tier 0 to decode");
+  t.ev("PM_CTRL.zoom(PM_CTRL._qaZFit())"); t.ev("PM_CTRL._qaForceDraw()");
+  const m = t.ev("PM_CTRL._qaMem()");
+  t.expect(m.tier0MB > 1, `tier 0 should be decoded and counted: ${JSON.stringify(m)}`);
+  t.expect(m.tier0MB <= 120, `decoded tier-0 sheets are ${m.tier0MB} MB for ${t.w.PM_CTRL.count} paintings (budget 120 MB; ${JSON.stringify(m)})`);
+  t.expect(m.totalMB <= 200, `tier 0 + tier 1 decoded is ${m.totalMB} MB (budget 200 MB)`);
+  t.notes.push(`decoded memory: tier 0 ${m.tier0MB} MB, tier 1 ${m.tier1MB} MB for ${t.w.PM_CTRL.count} paintings`);
+});
 // David, 2026-10-21: "when the painting map has a small amount of paintings or more it doesn't let you zoom out past a certain point ...
 // now the limit is too close." The floor used to be where the whole layout just fits (or Z=1 for a small set); it is now ~28% of that, for
 // any item count, with the rubber band below it. A real ctrl+wheel (trackpad pinch) out must settle at the new floor, well past the old one.

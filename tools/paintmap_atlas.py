@@ -59,7 +59,7 @@ from concurrent.futures import ThreadPoolExecutor
 from io import BytesIO
 from math import ceil, sqrt
 
-from PIL import Image
+from PIL import Image, ImageFilter
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 GAL = os.path.join(ROOT, "data", "gallery")
@@ -79,7 +79,10 @@ PHOTO_FILE = os.path.join(ROOT, "data", "photography", "photos.json")
 # already covers a cell with no picture, so "skipped" here just means that cell never gets a real photo tile.
 DESIGN_SKIP_SRC = {"chndm", "npmd"}
 
-TIER0_TILE = 20
+SHARPEN_R, SHARPEN_PCT = 0.8, 90
+TIER0_TILE = 12   # was 20. Decoded memory is what kills iPhones: a tier-0 tile costs tile^2 x 4 B in the browser
+# (20px = 1.6 KB/painting = 333 MB at 206k paintings = WebContent killed by iOS; 12px = 0.58 KB = 119 MB).
+# Change it locally with `python3 tools/paintmap_atlas.py tier0 --tile N` (re-derives from tier-1, no network).
 TIER1_TILE = 80
 GROUP_SIZE = 625   # David's iPhone 16 Pro Max, Home Screen app (WKWebView), 2026-10-10: "every painting is not
 # loaded at once" -- a single 3100x3080 (~9.6MP) tier-0 sheet and 3120x3120 tier-1 sheets (at the old 1500/sheet)
@@ -92,7 +95,7 @@ GROUP_SIZE = 625   # David's iPhone 16 Pro Max, Home Screen app (WKWebView), 202
 # ceiling) by splitting tier 0 across TIER0_SHEETS small sheets and shrinking tier-1's groupSize from 1500 to 625
 # (25 cols x 80px = 2000px, under the ceiling; was 39 cols = 3120px, over it). `resplit` (below) rebuilds both
 # from the EXISTING sheets with pure local image slicing -- no re-fetching the ~23,778 source paintings.
-TIER0_MAXDIM = 2040   # <= 2048; 2040 is an exact multiple of TIER0_TILE (20)
+TIER0_MAXDIM = 2040   # <= 2048; 2040 is an exact multiple of 8, 10, 12, 20 (check before picking another tile)
 Q0, Q1 = 78, 76
 WORKERS = 20
 PER_HOST = 6
@@ -334,6 +337,8 @@ def tier0_from_tier1(out_dir, man):
                 missing.append(i)              # from (lossy WEBP can leave a few nonzero alpha speckles, not 0)
                 continue
             cell0 = cell.resize((tile0, tile0), Image.LANCZOS)
+            if tile0 < 20:   # a small tile is upscaled 3-6x on screen: a light unsharp mask keeps it from reading as mush
+                cell0 = cell0.filter(ImageFilter.UnsharpMask(radius=SHARPEN_R, percent=SHARPEN_PCT, threshold=0))
             sheet0, local0 = divmod(i, per_sheet0)
             x0, y0 = (local0 % cols0) * tile0, (local0 // cols0) * tile0
             sheets[sheet0].paste(cell0, (x0, y0))
@@ -643,7 +648,8 @@ def dt_str(s):
 
 
 def main():
-    global COLLECTION, OUT, PROGRESS
+    global COLLECTION, OUT, PROGRESS, TIER0_TILE
+    TILE_ARG = None
     args = sys.argv[1:]
     cmd = args[0] if args else "build"
     workers, limit, start_group, q0, q1, retries = WORKERS, None, 0, Q0, Q1, RETRIES
@@ -655,6 +661,7 @@ def main():
         elif args[k] == "--quality0": q0 = int(args[k + 1]); k += 2
         elif args[k] == "--quality1": q1 = int(args[k + 1]); k += 2
         elif args[k] == "--retries": retries = int(args[k + 1]); k += 2
+        elif args[k] == "--tile": TILE_ARG = int(args[k + 1]); k += 2
         elif args[k] == "--collection": COLLECTION = args[k + 1]; k += 2
         else: k += 1
 
@@ -695,6 +702,15 @@ def main():
         if not os.path.exists(man_path):
             raise SystemExit(f"no manifest at {man_path} -- run `build` first")
         man = json.load(open(man_path))
+        if TILE_ARG:   # re-lay tier 0 at a new tile size (memory budget): new cols/perSheet/sheet list, old sheets removed
+            assert TIER0_MAXDIM % TILE_ARG == 0, f"{TIER0_MAXDIM} must be a multiple of the tile"
+            TIER0_TILE = TILE_ARG
+            cols0, per_sheet0, counts0 = tier0_layout(man["n"])
+            for name in man["tier0"]["sheets"]:
+                pth = os.path.join(OUT, name)
+                if os.path.exists(pth): os.remove(pth)
+            man["tier0"] = {"tile": TIER0_TILE, "cols": cols0, "perSheet": per_sheet0,
+                            "sheets": [f"atlas0-{s}.webp" for s in range(len(counts0))]}
         tier0_from_tier1(OUT, man)
         return
 

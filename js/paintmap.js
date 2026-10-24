@@ -974,12 +974,20 @@ function pmImages(onReady, F, bigMax) {
 const PM_ATLAS_CACHE = new Map(), PM_ATLAS_P = new Map();
 const pmAtlasBase = col => (col && col !== "paintings") ? `data/paintmap/${col}/` : "data/paintmap/";
 const PM_T1_MIN = 24, PM_T2_MIN = 120;
-// a decoded tier-1 sheet (2000x2000 at the build script's own GROUP_SIZE/TIER1_TILE, since David's iPhone 16 Pro
-// Max/2026-10-10: see tools/paintmap_atlas.py's GROUP_SIZE comment) costs ~16MB of raw bitmap memory --
-// PM_T1_CACHE_MAX=6 caps that around ~96MB even if every sheet in the dataset gets touched in one session,
-// comfortably inside what a phone browser (or a Home Screen app's tighter WKWebView budget) affords a
-// background canvas, without thrashing on an ordinary pan
-const PM_T1_CACHE_MAX = 6;
+// David, 2026-10-24: iOS killed the WebContent process ("A problem repeatedly occurred") once tier 0 alone decoded to
+// ~333 MB (20 sheets x 16.6 MB at 206k paintings). Total decoded budget (tier 0 + tier 1 + tier 2) is now computed and
+// logged (pmMemReport); tier 0 is laid out at 12 px tiles (0.58 KB a painting); tier 1 keeps small per-cell bitmaps, never
+// whole decoded sheets (see pmAtlasTier1). Everything is released shortly after the map unmounts or the tab is hidden.
+const PM_LOWMEM = (() => { try { return /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1) || (navigator.deviceMemory && navigator.deviceMemory <= 4); } catch (e) { return false; } })();
+const PM_T0_BUDGET_MB = 120;   // tier-0 decoded bytes above this are a bug (tools/smoke/scenarios.js asserts it)
+const pmBmBytes = bm => bm ? (bm.width || 0) * (bm.height || 0) * 4 : 0;
+// decoded bytes per tier of the live map (tier 2 = the few big per-painting images pmImages holds)
+function pmMemReport(atlas, t1) {
+  let b0 = 0, b1 = 0;
+  if (atlas && atlas.bm0s) atlas.bm0s.forEach(bm => { b0 += pmBmBytes(bm); });
+  if (t1 && t1.bytes) b1 = t1.bytes();
+  return { tier0MB: +(b0 / 1048576).toFixed(1), tier1MB: +(b1 / 1048576).toFixed(1), totalMB: +((b0 + b1) / 1048576).toFixed(1), budgetMB: PM_T0_BUDGET_MB };
+}
 // iOS Safari (confirmed buggy pre-17, and createImageBitmap from a Blob can still fail under memory pressure on
 // ANY version, which is exactly David's 2026-10-10 Home Screen app report -- "every painting is not loaded at
 // once"): createImageBitmap has no partial-failure mode, so ONE failed decode used to leave PM_ATLAS null, and
@@ -1006,14 +1014,38 @@ function pmDecodeSheet(url) {
 // attempts, not infinite: a real 404/missing-build-output still surfaces the "didn't load" retry button
 // (js/paintmap.js's pmOpen .catch) instead of looping silently.
 const PM_ATLAS_RETRIES = 3;
+// decode the sheets a few at a time (not all at once: fetched blobs + decoded bitmaps both live during the peak)
+function pmDecodeAll(urls, conc) {
+  const out = new Array(urls.length); let next = 0, failed = null;
+  const worker = () => { if (failed || next >= urls.length) return Promise.resolve(); const k = next++;
+    return pmDecodeSheet(urls[k]).then(bm => { out[k] = bm; return worker(); }); };
+  return Promise.all(Array.from({ length: Math.min(conc, urls.length) }, worker)).then(() => out)
+    .catch(e => { failed = e; out.forEach(bm => bm && bm.close && bm.close()); throw e; });
+}
+// users of a collection's decoded tier 0; the last one leaving schedules the release (a quick return, e.g. Back from a
+// painting, cancels it), so a closed map never keeps ~100 MB of bitmaps alive behind the rest of the app
+const PM_ATLAS_USERS = new Map(), PM_ATLAS_REL = new Map();
+function pmAtlasAcquire(col) { col = col || "paintings"; PM_ATLAS_USERS.set(col, (PM_ATLAS_USERS.get(col) || 0) + 1); clearTimeout(PM_ATLAS_REL.get(col)); PM_ATLAS_REL.delete(col); }
+function pmAtlasRelease(col, delay) {
+  col = col || "paintings"; const n = (PM_ATLAS_USERS.get(col) || 1) - 1; PM_ATLAS_USERS.set(col, n);
+  if (n > 0) return;
+  clearTimeout(PM_ATLAS_REL.get(col));
+  PM_ATLAS_REL.set(col, setTimeout(() => pmAtlasDrop(col), delay == null ? 15000 : delay));
+}
+function pmAtlasDrop(col) {
+  if (PM_ATLAS_USERS.get(col) > 0) return;
+  const a = PM_ATLAS_CACHE.get(col); if (a && a.bm0s) a.bm0s.forEach(bm => bm && bm.close && bm.close());
+  PM_ATLAS_CACHE.delete(col); PM_ATLAS_P.delete(col); PM_ATLAS_REL.delete(col);
+}
 function pmAtlasLoad(col) {
   col = col || "paintings";
   if (PM_ATLAS_CACHE.has(col)) return Promise.resolve(PM_ATLAS_CACHE.get(col));
   if (PM_ATLAS_P.has(col)) return PM_ATLAS_P.get(col);
   const base = pmAtlasBase(col), v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
   const attempt = n => fetch(base + "manifest.json" + v).then(r => { if (!r.ok) throw new Error("manifest " + r.status); return r.json(); })
-    .then(man => Promise.all(man.tier0.sheets.map(name => pmDecodeSheet(base + name + v)))
-      .then(bm0s => { const atlas = { man, bm0s, missing: man.missing && man.missing.length ? new Set(man.missing) : null }; PM_ATLAS_CACHE.set(col, atlas); return atlas; }))
+    .then(man => pmDecodeAll(man.tier0.sheets.map(name => base + name + v), PM_LOWMEM ? 2 : 4)
+      .then(bm0s => { const atlas = { man, bm0s, missing: man.missing && man.missing.length ? new Set(man.missing) : null }; PM_ATLAS_CACHE.set(col, atlas);
+        try { console.info("[paintmap] tier 0 decoded", JSON.stringify(pmMemReport(atlas, null))); } catch (e) {} return atlas; }))
     .catch(e => {
       if (n < PM_ATLAS_RETRIES) return new Promise(res => setTimeout(res, 600 * Math.pow(2, n))).then(() => attempt(n + 1));
       PM_ATLAS_P.delete(col); throw e;
@@ -1038,35 +1070,70 @@ function pmT1Rect(man, i) {
 // ever drawn, never freed for the life of a map session), trivial next to the sheets/bitmaps themselves
 function pmTState(map, i) { let s = map.get(i); if (!s) { s = {}; map.set(i, s); } return s; }
 function pmFadeAlpha(s, key, now, dur, rm) { if (s[key] == null) s[key] = now; return rm ? 1 : Math.min(1, (now - s[key]) / dur); }
-// tier 1 sheet cache: one entry per group, fetched at most once, LRU-evicted only under real pressure
+// tier 1, per CELL (David, 2026-10-24). A tier-1 sheet is 2000x2000 (~16 MB decoded) holding 625 paintings in GALLERY order,
+// but the map lays paintings out by color/painter/time, so the cells on one phone screen come from dozens of different
+// sheets (measured: ~90 sheets, 1.5 GB decoded, in Color at ~60px cells) -- that, not tier 0, is what made iOS kill the
+// page. So a sheet is only ever decoded TRANSIENTLY: fetched (HTTP-cached), decoded, each wanted 80x80 cell copied out to
+// its own small bitmap (25 KB), the sheet closed. Resident memory is the cell LRU: at most max(PM_T1_CELLS, 1.3 x what is
+// on screen) cells. A few sheets (PM_T1_CONC) are processed at once, the groups with the most wanted cells first.
+const PM_T1_CELLS = PM_LOWMEM ? 700 : 1200, PM_T1_CELLS_HARD = PM_LOWMEM ? 1500 : 3200;
+const PM_T1_CONC = PM_LOWMEM ? 3 : 4;   // sheets decoded at once (each is ~16 MB for a moment, then closed)
+function pmCutCell(src, x, y, s) {
+  if (typeof createImageBitmap === "function") return createImageBitmap(src, x, y, s, s).catch(() => pmCutCanvas(src, x, y, s));
+  return Promise.resolve(pmCutCanvas(src, x, y, s));
+}
+function pmCutCanvas(src, x, y, s) { const cv = document.createElement("canvas"); cv.width = cv.height = s; cv.getContext("2d").drawImage(src, x, y, s, s, 0, 0, s, s); return cv; }
 function pmAtlasTier1(onReady, col) {
   col = col || "paintings";
   const base = pmAtlasBase(col);
-  const cache = new Map();   // group -> { st: 0 loading | 1 ready | 2 failed, bm, used }
-  let frame = 0, dead = false;
-  function want(groups) {
-    frame++;
-    const atlas = PM_ATLAS_CACHE.get(col); if (!atlas) return;
-    const man = atlas.man;
-    for (const g of groups) {
-      const e = cache.get(g);
-      if (e) { e.used = frame; continue; }
-      if (g < 0 || g >= man.tier1.numGroups) continue;
-      const ent = { st: 0, used: frame, bm: null };
-      cache.set(g, ent);
+  const cells = new Map();   // painting index -> { bm, used } (ready tiles only)
+  const need = new Map();    // group -> Set of painting indices wanted and not yet cut
+  const failed = new Set();  // groups whose sheet failed (retried at most twice, a few seconds apart)
+  const tries = new Map(), inflight = new Set();
+  let frame = 0, dead = false, running = 0, wantedNow = 1;
+  function pump() {
+    while (!dead && running < PM_T1_CONC) {
+      const atlas = PM_ATLAS_CACHE.get(col); if (!atlas) return;
+      let best = -1, bestN = 0;
+      need.forEach((set, g) => { if (set.size > bestN) { best = g; bestN = set.size; } });
+      if (best < 0) return;
+      running++; inflight.add(best);
+      const man = atlas.man, set = need.get(best); need.delete(best);
       const v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
-      pmDecodeSheet(base + man.tier1.file.replace("{g}", g) + v)
-        .then(bm => { if (dead) return; ent.bm = bm; ent.st = 1; onReady(); })
-        .catch(() => { ent.st = 2; });
-    }
-    if (cache.size > PM_T1_CACHE_MAX) {
-      const old = [...cache.entries()].filter(([, x]) => x.st !== 0 && x.used !== frame).sort((a, b) => a[1].used - b[1].used);
-      for (let k = 0; k < cache.size - PM_T1_CACHE_MAX && k < old.length; k++) {
-        const [g, ent] = old[k]; if (ent.bm && ent.bm.close) ent.bm.close(); cache.delete(g);
-      }
+      const lo = best * man.tier1.groupSize, hi = Math.min(man.n, lo + man.tier1.groupSize), cols = Math.max(1, Math.ceil(Math.sqrt(hi - lo))), T = man.tier1.tile;
+      pmDecodeSheet(base + man.tier1.file.replace("{g}", best) + v).then(sheet => {
+        const idx = [...set].filter(i => !cells.has(i));
+        return Promise.all(idx.map(i => pmCutCell(sheet, ((i - lo) % cols) * T, Math.floor((i - lo) / cols) * T, T).then(bm => { if (dead) { bm.close && bm.close(); return; } cells.set(i, { bm, used: frame }); })))
+          .then(() => { if (sheet.close) sheet.close(); });
+      }).catch(() => { const n = (tries.get(best) || 0) + 1; tries.set(best, n); if (n >= 2) failed.add(best); })
+        .then(() => { running--; inflight.delete(best); if (!dead) { trim(); onReady(); pump(); } });
     }
   }
-  return { get: g => cache.get(g), want, destroy: () => { dead = true; cache.forEach(e => e.bm && e.bm.close && e.bm.close()); cache.clear(); } };
+  function trim() {
+    const cap = Math.min(PM_T1_CELLS_HARD, Math.max(PM_T1_CELLS, Math.round(wantedNow * 1.3)));
+    if (cells.size <= cap) return;
+    const old = [...cells.entries()].filter(([, e]) => e.used !== frame).sort((a, b) => a[1].used - b[1].used);
+    for (let k = 0; k < cells.size - cap && k < old.length; k++) { const e = old[k][1]; if (e.bm.close) e.bm.close(); cells.delete(old[k][0]); }
+  }
+  // list: painting indices that want a tier-1 picture this frame
+  function want(list) {
+    frame++; wantedNow = list.length;
+    const atlas = PM_ATLAS_CACHE.get(col); if (!atlas) return;
+    const man = atlas.man;
+    // groups no longer on screen drop out of the queue (they were queued by an earlier view)
+    const fresh = new Map();
+    for (const i of list) {
+      const c = cells.get(i); if (c) { c.used = frame; continue; }
+      const g = pmT1Group(man, i); if (g < 0 || g >= man.tier1.numGroups || failed.has(g) || inflight.has(g)) continue;
+      let s = fresh.get(g); if (!s) fresh.set(g, s = new Set()); s.add(i);
+    }
+    need.clear(); fresh.forEach((s, g) => need.set(g, s));
+    trim(); pump();
+  }
+  return { cell: i => { const c = cells.get(i); return c ? c.bm : null; }, want,
+    bytes: () => { let b = 0; cells.forEach(e => { b += pmBmBytes(e.bm); }); return b; }, size: () => cells.size,
+    drop: () => { cells.forEach(e => e.bm.close && e.bm.close()); cells.clear(); need.clear(); },
+    destroy: () => { dead = true; cells.forEach(e => e.bm.close && e.bm.close()); cells.clear(); need.clear(); } };
 }
 
 // ---------- the dataset abstraction (David, 2026-10-10: "a more convenient way to view [the other archives],
@@ -1267,7 +1334,18 @@ function pmMount(el, s, F) {
   let atlas = null;   // this mount's own resolved {man,bm0s} once pmAtlasLoad(F.col) lands (see draw()'s tier 0/1 passes below)
   const t1 = pmAtlasTier1(() => kick(), F.col);
   const tierH = new Map();   // i -> { t1On, f0, f1 } (pmTState) -- tier 0/1 crossfade + hysteresis memory
-  pmAtlasLoad(F.col).then(a => { atlas = a; if (!dead) kick(); }).catch(() => {});   // tier 0: one shared sheet, loaded once per session (idempotent -- a second mount just resolves immediately)
+  pmAtlasAcquire(F.col);
+  const loadAtlas = () => pmAtlasLoad(F.col).then(a => { atlas = a; if (!dead) kick(); }).catch(() => {});
+  loadAtlas();
+  // a hidden tab (Instagram's browser, the Home Screen app in the background) frees its decoded sheets after 20 s and
+  // re-decodes them from the HTTP cache on return; iOS kills the biggest backgrounded WebContent first
+  let hideTimer = 0, released = false;
+  const onVis = () => {
+    clearTimeout(hideTimer);
+    if (document.hidden) hideTimer = setTimeout(() => { if (dead || !document.hidden) return; t1.drop(); atlas = null; released = true; pmAtlasRelease(F.col, 0); }, 20000);
+    else if (!dead && released) { released = false; pmAtlasAcquire(F.col); loadAtlas(); }
+  };
+  document.addEventListener("visibilitychange", onVis);   // tier 0: one shared sheet, loaded once per session (idempotent -- a second mount just resolves immediately)
   if (!PM_LANDMARKS.size && typeof rcLoadPortraits === "function") {
     rcLoadPortraits().then(port => {
       if (dead || !port) return;
@@ -1661,7 +1739,7 @@ function pmMount(el, s, F) {
     // {i,...} records already carry the gallery index), not a per-cell favorites lookup.
     const favSet = new Set(pmFavList(F).map(r => r.i));
     if (zS < Infinity) rasterDraw(zS, R); else rz.zS = Infinity;
-    drawn = []; const wantImg = [], wantT1 = new Set();
+    drawn = []; const wantImg = [], wantT1 = [];
     for (let y = Math.max(y0, lay.gy0); y <= Math.min(y1, lay.gy0 + lay.GH - 1); y++) {
       const row = (y - lay.gy0) * lay.GW;
       for (let x = Math.max(x0, lay.gx0); x <= Math.min(x1, lay.gx0 + lay.GW - 1); x++) {
@@ -1767,16 +1845,15 @@ function pmMount(el, s, F) {
       // hysteresis() (defined above for tier 2's own big/baked-square switch) keeps a cell parked near the
       // PM_T1_MIN boundary from flapping between tier 0 and tier 1 the same way it does for tier 2 below.
       if (inAtlas) {
-        const ts1 = pmTState(tierH, i), g = pmT1Group(atlas.man, i);
+        const ts1 = pmTState(tierH, i);
         if (hysteresis(ts1, "t1On", b.d / PM_T1_MIN, .75)) {
-          wantT1.add(g);
-          const te = t1.get(g);
-          if (te && te.st === 1) {
-            const r1 = pmT1Rect(atlas.man, i);
+          wantT1.push(i);
+          const te = t1.cell(i);
+          if (te) {
             const a1 = pmFadeAlpha(ts1, "f1", t, 220, RM); if (a1 < 1) fading = true;
             ctx.globalAlpha = a1;
-            const q = r1.s, sw = w0 >= h0 ? q : q * w0 / h0, sh = h0 >= w0 ? q : q * h0 / w0;   // the shape from the unsnapped size: a 1px snap step must not rescale the crop
-            ctx.drawImage(te.bm, r1.x + (q - sw) / 2, r1.y + (q - sh) / 2, sw, sh, X, Y, w, h);
+            const q = atlas.man.tier1.tile, sw = w0 >= h0 ? q : q * w0 / h0, sh = h0 >= w0 ? q : q * h0 / w0;   // the shape from the unsnapped size: a 1px snap step must not rescale the crop
+            ctx.drawImage(te, (q - sw) / 2, (q - sh) / 2, sw, sh, X, Y, w, h);
             ctx.globalAlpha = 1;
           }
         }
@@ -1894,7 +1971,7 @@ function pmMount(el, s, F) {
     // at the 14px threshold above (zMin() also caps how far you can zoom out), so every on-screen eligible cell
     // now gets a turn in the queue, nearest the middle first, same as before.
     imgs.want(wantImg.reverse().slice(0, 2000));
-    if (atlas) t1.want(wantT1);   // a handful of groups at most -- every cell on screen shares one of a few dozen sheets
+    if (atlas) t1.want(wantT1);   // the cells that want a tier-1 picture; each sheet is decoded once, transiently, and cut into per-cell bitmaps
 
     const c = nearestK(P[0], P[1]); setCenter(c);
   }
@@ -2573,7 +2650,7 @@ function pmMount(el, s, F) {
   // David, 2026-10-10: "Back should take me to that exact spot instead of reloading the position" -- this used
   // to save the SNAPPED cell position (lay.x[centerK], lay.y[centerK]) on the way out, rounding away whatever
   // precise mid-pan spot P was actually sitting at the moment you tapped a painting open. Save the real P/Z.
-  cleanup.push(() => { dead = true; hideTip(); clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); t1.destroy(); if (lay) PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z, cardOpen }); });
+  cleanup.push(() => { dead = true; hideTip(); clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); t1.destroy(); clearTimeout(hideTimer); document.removeEventListener("visibilitychange", onVis); if (!released) pmAtlasRelease(F.col); if (lay) PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z, cardOpen }); });
   size(); build(false);
   if (s.f.subjSet && s.f.subjSet.length) { try { ROUTE_NOW = "#/" + pmRouteOf(s, F).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {} }   // opened from a painting's subject tap: the address names the filter
   window.PM_CTRL = { get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length + rasterCount(); }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); },
@@ -2594,6 +2671,7 @@ function pmMount(el, s, F) {
     // QA (tier 0/1 atlas): whether the one shared tier-0 sheet has finished loading (every drawn cell gets its
     // own real tile the instant this is true -- see the draw loop's unconditional tier-0 pass), and how many of
     // the tier-1 groups the current view touched have loaded their sheet.
+    _qaMem: () => pmMemReport(atlas, t1),
     _qaAtlasReady: () => !!(atlas && atlas.bm0s && atlas.bm0s.length),
     // QA: the zoom-out floor for the CURRENT layout -- PM_CTRL.zoom(_qaZMin()) should show the whole thing
     // (drawn === count), confirming zMin() isn't capped below what the layout actually needs (David, 2026-10-10)
@@ -2623,7 +2701,7 @@ function pmMount(el, s, F) {
       }
       return { fits: maxX <= cx + 2 && maxY <= cy + 2, maxX, maxY, halfW: cx, halfH: cy };
     },
-    _qaTier1Stats: () => { let have = 0, want = 0; const man = atlas && atlas.man; if (man) for (const b of drawn) { const g = pmT1Group(man, b.i); want++; const e = t1.get(g); if (e && e.st === 1) have++; } return { want, have }; } };
+    _qaTier1Stats: () => { let have = 0, want = 0; const man = atlas && atlas.man; if (man) for (const b of drawn) { want++; if (t1.cell(b.i)) have++; } return { want, have }; } };
 }
 
 // this file can load after router.js (on first use): give pmOpen its address now
