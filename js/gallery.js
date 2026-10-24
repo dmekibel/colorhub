@@ -1258,6 +1258,17 @@ const GL_HARM_CHIPS = [["all", "All"], ["comp", "Complementary"], ["analogous", 
 
 // Preview a derived palette full screen without saving it (David, 2026-10-24): the same bands view the set page uses.
 function glFullScreen(hexes) { if (typeof colorFocus === "function") colorFocus(hexes.map(h => ({ name: nameOf(h).n, hex: h }))); }
+// "Find paintings" on a derived palette (David, 2026-10-24): the palette page the favorites open ("Closest in the
+// archive", js/twins.js), for the palette on screen and without saving it. Back returns to this painting.
+let GL_FIND_LAST = null;
+function glFindWith(i, pal, label, title) {
+  if (typeof paletteView !== "function") return;
+  GL_FIND_LAST = { i, pal: pal.map(p => ({ h: p.h, share: p.share })), label, title };
+  if (XSTACK[XSTACK.length - 1] !== "g:" + i) XSTACK.push("g:" + i);   // the painting you leave...
+  XSTACK.push("glfind");                                              // ...and this page, which Back pops
+  glFindShow();
+}
+function glFindShow() { const f = GL_FIND_LAST; if (f) paletteView({ cols: f.pal, from: (f.title ? f.title + " · " : "") + f.label }); }
 // ---------- saving a derived palette (David, 2026-10-10: "how do we save a palette once derived?") ----------
 // The same store as Picked colors' Build (js/picked.js pkSaveAsPalette) and the set page (js/setpage.js): S.palettes,
 // newest first, capped at 60 -- so a painting's palette shows up in Studio's Kept exactly like any other saved one.
@@ -1680,7 +1691,7 @@ function glPage(i, d, fromHex, tol) {
     // focused (coordinator, 2026-10-12: "Hearts, Save and Edit keep working on the current one"). The standalone
     // Palette view button is gone now that its feed lives inline (same brief: "can go once the feed is inline").
     if (!host.hidden) host.innerHTML = (isPlvChip() ? "" : `<button class="gl-pa-btn" data-glshuffle>${GL_ICON_DICE}<span>Shuffle</span></button>`)
-      + `<button class="gl-pa-btn" data-glfull>Full screen</button><button class="gl-pa-btn" data-gledit>Edit</button><button class="gl-pa-btn solid" data-glsave>Save palette</button>`;
+      + `<button class="gl-pa-btn" data-glfull>Full screen</button><button class="gl-pa-btn" data-glfind>Find paintings</button><button class="gl-pa-btn" data-gledit>Edit</button><button class="gl-pa-btn solid" data-glsave>Save palette</button>`;
     const s = SHUF[mode];
     if (!histHost) return;
     histHost.hidden = isHarm || !s || s.seeds.length < 2;
@@ -1707,7 +1718,7 @@ function glPage(i, d, fromHex, tol) {
         <div class="gl-hcard-top"><b>${esc(c.label)}</b><span>${c.fitPct}% fit</span></div>
         <div class="palette gl-strip gl-hcard-strip">${c.pal.map(p => `<button class="pal" data-swatch="${p.h}" style="--c:${p.h};flex:${eqW ? 1 : (Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${eqW ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("")}</div>
         <div class="gl-hcard-names">${c.pal.map(p => esc(nameOf(p.h).n)).join(" · ")}</div>
-        <div class="gl-hcard-acts"><button class="gl-pa-btn" data-hcfull="${j}">Full screen</button><button class="gl-pa-btn" data-hcedit="${j}">Edit</button><button class="gl-pa-btn solid" data-hcsave="${j}">Save palette</button></div>
+        <div class="gl-hcard-acts"><button class="gl-pa-btn" data-hcfull="${j}">Full screen</button><button class="gl-pa-btn" data-hcfind="${j}">Find paintings</button><button class="gl-pa-btn" data-hcedit="${j}">Edit</button><button class="gl-pa-btn solid" data-hcsave="${j}">Save palette</button></div>
       </div>`).join("") : `<p class="fine">No ${harmFilter === "all" ? "clear relation" : harmCardName(harmFilter).toLowerCase()} shows up among this painting's own colors. Try Shuffle, or another type.</p>`;
     moreBtn.hidden = harmCards.length <= 6;
     if (!moreBtn.hidden) moreBtn.textContent = harmMoreOpen ? "Fewer" : `More (${harmCards.length - 6})`;
@@ -2114,6 +2125,7 @@ function glPage(i, d, fromHex, tol) {
   const palActsHost = el.querySelector("[data-glpalacts]");
   if (palActsHost) palActsHost.onclick = e => {
     if (e.target.closest("[data-glshuffle]")) return shuffleMode(mode);
+    if (e.target.closest("[data-glfind]")) { buzz(5); return glFindWith(i, curPal(), glModeLabel(mode), d.t); }
     if (e.target.closest("[data-glfull]")) { buzz(5); return glFullScreen(curPal().map(p => p.h)); }
     if (e.target.closest("[data-gledit]")) return glEditOpen(curPal().map(p => p.h), { title: d.t, label: glModeLabel(mode), pool, onSave: (hexes, name) => glSavePalette(hexes, name, false, { i, t: d.t }) });
     if (e.target.closest("[data-glsave]")) { const lbl = glModeLabel(mode); return glSavePalette(curPal().map(p => p.h), glSaveName(d.t, mode === "out" ? "" : lbl), false, { i, t: d.t }); }
@@ -2128,6 +2140,8 @@ function glPage(i, d, fromHex, tol) {
     if (e.target.closest("[data-glharmmore]")) { harmMoreOpen = !harmMoreOpen; buzz(5); drawPalette(); return; }
     if (e.target.closest("[data-glharmshuffle]")) return shuffleMode("harmony");
     const go = e.target.closest("[data-glharmgo]"); if (go) return shuffleHistoryTo("harmony", +go.dataset.glharmgo);
+    const fi = e.target.closest("[data-hcfind]");
+    if (fi) { const card = harmCards[+fi.dataset.hcfind]; if (card) { buzz(5); glFindWith(i, card.pal, card.label, d.t); } return; }
     const fu = e.target.closest("[data-hcfull]");
     if (fu) { const card = harmCards[+fu.dataset.hcfull]; if (card) { buzz(5); glFullScreen(card.pal.map(p => p.h)); } return; }
     const ed = e.target.closest("[data-hcedit]"), sv2 = e.target.closest("[data-hcsave]");
