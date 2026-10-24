@@ -4489,6 +4489,35 @@ scenario("paintings", "Keep exploring: the end of the feed says so, and a pictur
   t.expect(end && /That is everything close to this one\./.test(t.text(end)), "the end-of-feed line never appeared");
   t.expect(t.$("[data-fdup]"), "the end of the feed has no way back up");
 });
+// David, 2026-10-24: "Keep exploring is so far down below it takes forever to get there" -- one tap from the top.
+scenario("paintings", "a painting page has a Keep exploring jump near the top; one tap brings the feed into view", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  await t.waitFor("[data-glfeedjump]", 15000, "the Keep exploring jump on the painting page");
+  const before = t.ev("document.querySelector('[data-glfeed]').getBoundingClientRect().top"), vh = t.ev("innerHeight");
+  t.expect(before > vh, `the feed is already on screen before the tap (top ${before}, window ${vh})`);
+  // headless Chrome does not run smooth scrolls to the end, so watch what the tap asks for, then check an instant jump lands
+  t.ev("window.__sj = null; const o = Element.prototype.scrollIntoView; Element.prototype.scrollIntoView = function (a) { window.__sj = { feed: this.matches('[data-glfeed]'), opt: a }; return o.call(this, Object.assign({}, a, { behavior: 'auto' })); };");
+  await t.click("[data-glfeedjump]", { wait: 600 });
+  const sj = t.ev("window.__sj");
+  t.expect(sj && sj.feed, "the Keep exploring button did not scroll the feed into view");
+  const after = t.ev("document.querySelector('[data-glfeed]').getBoundingClientRect().top");
+  t.expect(after < vh, `the feed is still below the screen after the tap (top ${after}, window ${vh})`);
+});
+scenario("pages", "a color page's pinned header has an Explore chip that jumps to the Keep exploring feed", async t => {
+  await t.open("#/color/teal", { settle: 900 });
+  await t.waitFor("[data-rpfeed]", 15000, "the feed's host on the color page");
+  t.w.scrollTo(0, 700); await t.sleep(600);
+  const chip = t.$("body > .rp-bar [data-rp-jump=explore]");
+  t.expect(chip && !chip.hidden, "the pinned header has no visible Explore chip");
+  // headless Chrome does not run smooth scrolls to the end: record the scroll the chip asks for
+  t.ev("window.__st = null; const o = window.scrollTo; window.scrollTo = function (a) { window.__st = a; return o.call(window, typeof a === 'object' ? Object.assign({}, a, { behavior: 'auto' }) : a); };");
+  t.ev("document.querySelector('body > .rp-bar [data-rp-jump=explore]').click()");
+  await t.sleep(500);
+  const st = t.ev("window.__st"), feedTop = t.ev("document.querySelector('[data-rpfeed]').getBoundingClientRect().top"), vh = t.ev("innerHeight");
+  t.expect(st && st.top > 700, `the Explore chip did not ask to scroll down to the feed (${JSON.stringify(st)})`);
+  t.expect(feedTop < vh, `the feed is still below the screen after the chip (top ${feedTop}, window ${vh})`);
+});
+
 // ---------- Keep exploring on a COLOR page (js/feed.js fdMount with sub = a color, mounted by js/richpage.js) ----------
 async function cfeedOpen(t, hash, chip) {
   await t.open(hash, { settle: 900 });

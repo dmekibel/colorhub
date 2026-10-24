@@ -1586,6 +1586,7 @@ function glPage(i, d, fromHex, tol) {
     ${!S.pmMapHintSeen ? `<p class="gl-pmap-hint" data-glpmhint><i aria-hidden="true"></i><span>New: browse paintings by how alike their colors are</span></p>` : ""}
     <button class="gl-pmap gl-pmap-top" data-pmap="arr=spiral&seed=${i}">${GL_ICON_MAP}<span>Similar paintings on the map</span>${ICON.chev}</button>
     <button class="gl-pmap gl-pmap-pal" data-pmap="${glPalSpec(i)}">${GL_ICON_MAP}<span>Find paintings with this palette</span>${ICON.chev}</button>
+    <button class="gl-pmap gl-pmap-jump" data-glfeedjump>${ICON.chev}<span>Keep exploring: paintings like this</span></button>
     </div></div>
     <div class="gl-under">${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}</div>
     <p class="gl-subj" data-glsubj-line hidden></p>
@@ -2420,6 +2421,9 @@ function glPage(i, d, fromHex, tol) {
   // "Keep exploring" (js/feed.js): the Pinterest-style feed at the very bottom. Coming Back to this page it is built at once,
   // so the page is as tall as it was and the scroll lands on the same tile; otherwise it waits until the bottom is near.
   const feedOpts = { i, d, cols: glTwCols(pool, pal6), img: () => canSample ? sampleImg : null, backNav };
+  // the Keep exploring feed is the bottom of a long page: one tap from the top gets there (David, 2026-10-24: "it takes forever")
+  const jumpBtn = el.querySelector("[data-glfeedjump]");
+  if (jumpBtn) jumpBtn.onclick = () => { const t = el.querySelector("[data-glfeed]"); if (t) { buzz(5); t.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" }); } };
   if (typeof fdMount === "function") { if (backNav && fdHasMemo(i)) fdMount(el.querySelector("[data-glfeed]"), feedOpts); else later(() => fdMount(el.querySelector("[data-glfeed]"), feedOpts), 60); }
 }
 // the colors a painting is matched on in "More like this" and "Keep exploring": its palette without the near-blacks (L* < 20),
