@@ -4489,6 +4489,98 @@ scenario("paintings", "Keep exploring: the end of the feed says so, and a pictur
   t.expect(end && /That is everything close to this one\./.test(t.text(end)), "the end-of-feed line never appeared");
   t.expect(t.$("[data-fdup]"), "the end of the feed has no way back up");
 });
+// ---------- Keep exploring on a COLOR page (js/feed.js fdMount with sub = a color, mounted by js/richpage.js) ----------
+async function cfeedOpen(t, hash, chip) {
+  await t.open(hash, { settle: 900 });
+  await t.waitFor("[data-rpfeed]", 15000, "the feed's host at the foot of the color page");
+  t.ev(`Object.assign(FDC_ST, { chip: ${JSON.stringify(chip || "paintings")}, metric: "overall", color: 0 })`);
+  await t.waitFor(() => { const h = t.$("[data-rpfeed]"); if (h) t.w.scrollTo(0, h.getBoundingClientRect().top + t.w.scrollY - 200); return t.$$(".fd-tile[data-fk]").length >= 4 ? true : null; }, 25000, "the color feed's first tiles");
+  await t.sleep(500);
+}
+// a chip click, then wait for the new ranking's tiles (the skeleton is gone and tile 0 has its caption)
+async function cfeedChip(t, chip) {
+  await t.click(`.fd-chip[data-fc=${chip}]`, { wait: 300 });
+  await t.waitFor(() => t.$(`.fd-chip.on[data-fc=${chip}]`) && !t.$(".fd-tile.sk") && t.$(".fd-tile[data-fk='0'] .fd-cap") ? true : null, 25000, "the " + chip + " ranking");
+  await t.sleep(300);
+}
+scenario("pages", "Keep exploring on a color page: the feed is at the very bottom, closest painting first, and the cover and the fine print are untouched", async t => {
+  await cfeedOpen(t, "#/color/teal");
+  const feed = t.$("[data-rpfeed]");
+  t.expect(feed && /Keep exploring/.test(t.text(feed.querySelector(".sec-head"))), "the Keep exploring heading is missing on the color page");
+  t.expect(t.$$(".fd-chip").map(b => t.text(b)).join() === "Paintings,Painters,Era,Place,Other worlds,Close colors", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}"`);
+  t.expect(t.text(".fd-chip.on") === "Paintings", "Paintings is not on by default");
+  // it sits after "What links here" and before the last fine-print line, and the page's own cover is still there
+  const order = [".rp-idcard", "[data-rpfeed]", ".rp-last"].map(s => t.$(s)), pos = (a, b) => a.compareDocumentPosition(b) & 4;
+  t.expect(order.every(Boolean) && pos(order[0], order[1]) && pos(order[1], order[2]), "the feed isn't between the ID card and the last fine-print line");
+  t.expect(t.$(".cp-hero .rp-name"), "the color page's cover is gone");
+  const caps = feedCaps(t), pct = caps.map(c => +((c.match(/^(\d+)% match$/) || [])[1] || NaN));
+  t.expect(caps.length >= 4 && pct.every((p, k) => p >= 1 && (k === 0 || p <= pct[k - 1])), `captions aren't plain "NN% match", closest first: ${caps.slice(0, 6)}`);
+  const first = t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items[0].j`);
+  t.expect(Number.isInteger(first) && t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items.length`) >= 24, "the top of the ranking isn't cached (rank once, page through)");
+  // the first tile is the nearest patch, whatever the area (closeness beats coverage): nothing in the cache is closer
+  t.expect(t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items.every((it, k, a) => k === 0 || parseInt(it.cap) <= parseInt(a[0].cap))`), "a later tile is closer than the first");
+  t.expect(t.$$(".fd-tile[data-fk] .fd-cap, .fd-tile[data-fk] .fd-by").every(e => parseFloat(getComputedStyle(e).fontSize) >= 15), "caption text is smaller than body size");
+  t.notes.push(`color feed first ranking ${t.ev("FD_LAST.ms")} ms`);
+});
+scenario("pages", "Keep exploring on a color page: each chip re-ranks with its own plain captions", async t => {
+  await cfeedOpen(t, "#/color/teal");
+  await cfeedChip(t, "painters");
+  t.expect(/^(Used most|Also used) by \S/.test(t.text(".fd-tile[data-fk='0'] .fd-cap")), `Painters caption: "${t.text(".fd-tile[data-fk='0'] .fd-cap")}"`);
+  await cfeedChip(t, "era");
+  const decs = feedCaps(t).map(c => (c.match(/^(\d{3})0s · \d+% match$/) || [])[1]);
+  t.expect(decs.length >= 4 && decs.every(Boolean), `Era captions don't say the decade: ${feedCaps(t).slice(0, 4)}`);
+  await cfeedChip(t, "place");
+  t.expect(feedCaps(t).slice(0, 3).every(c => /^[A-Z][^·]+ · \d+% match$/.test(c)), `Place captions: ${feedCaps(t).slice(0, 3)}`);
+  await cfeedChip(t, "worlds");
+  t.expect(feedCaps(t).slice(0, 3).every(c => /^In /.test(c)), `Other worlds captions: ${feedCaps(t).slice(0, 3)}`);
+  t.expect(t.$(".fd-tile.fd-card"), "Other worlds has no card");
+  await cfeedChip(t, "close");
+  t.expect(feedCaps(t).slice(0, 3).every(c => /^\d+% match$/.test(c)), `Close colors captions: ${feedCaps(t).slice(0, 3)}`);
+  // back on Paintings the first tile is the closest again (cached: instant)
+  await cfeedChip(t, "paintings");
+  t.expect(/^\d+% match$/.test(feedCaps(t)[0]), "Paintings didn't come back");
+  t.expect(t.ev(`JSON.parse(sessionStorage.getItem("colorhub-feed-color")).chip`) === "paintings", "the chip choice isn't remembered for the session");
+});
+scenario("pages", "Keep exploring on a color page: a chip with nothing for this color is disabled with a plain reason", async t => {
+  await t.open("#/color/teal", { settle: 600 });
+  t.ev(`fdcOff("c:#008080", "era", "Too few paintings that hold this color have a year, so there is no era to read.")`);
+  await cfeedOpen(t, "#/color/teal");
+  t.ev(`fdcOff("c:#008080", "era", "Too few paintings that hold this color have a year, so there is no era to read.")`);
+  await t.click(".fd-chip[data-fc=paintings]", { wait: 200 });
+  await t.click(".fd-chip[data-fc=era]", { wait: 300 });
+  const era = t.$(".fd-chip[data-fc=era]");
+  t.expect(era.getAttribute("aria-disabled") === "true", "Era isn't disabled");
+  t.expect(/no era to read/.test(t.text(".fd-lead")) && t.text(".fd-chip.on") === "Paintings", `no plain reason on tap: lead "${t.text(".fd-lead")}"`);
+  t.ev(`FDC_OFF.delete("c:#008080")`);
+});
+scenario("pages", "Keep exploring on a color page: a tile opens its painting, and Back returns to the exact feed position", async t => {
+  await cfeedOpen(t, "#/color/teal");
+  for (let n = 0; n < 6; n++) { t.w.scrollBy(0, 700); await t.sleep(250); }
+  const tile = t.$$(".fd-tile[data-fk]").find(e => +e.dataset.fk >= 8);
+  t.expect(tile, "no tile past the first screens to tap");
+  tile.scrollIntoView({ block: "center" }); await t.sleep(500);
+  const k = tile.dataset.fk, y0 = tile.getBoundingClientRect().top, hash0 = TRL.hash(t);
+  await t.click(tile, { wait: 900 });
+  await TRL.atHash(t, /^#\/gallery\/\d+/, "the tapped painting's page");
+  t.expect(t.w.scrollY < 40, `the painting page isn't at the top (scrollY ${t.w.scrollY})`);
+  await t.click(TRL.screenBack(t), { wait: 600 });
+  await TRL.atHash(t, new RegExp("^" + hash0.replace(/[#/?=]/g, "\\$&") + "$"), "the color page");
+  await t.waitFor(() => t.$(`.fd-tile[data-fk='${k}']`), 15000, "the tile you left from");
+  await t.sleep(2400);
+  const y1 = t.$(`.fd-tile[data-fk='${k}']`).getBoundingClientRect().top;
+  t.expect(Math.abs(y1 - y0) <= 4, `Back put the tile at ${Math.round(y1)}px, it was at ${Math.round(y0)}px`);
+});
+scenario("pages", "Keep exploring on an in-between color: the feed measures the tapped color, and a close name opens with the exact color", async t => {
+  await cfeedOpen(t, "#/color/teal?c=2f8f8a");
+  const caps = feedCaps(t);
+  t.expect(caps.length >= 4 && caps.every(c => /^\d+% match$/.test(c)), `captions: ${caps.slice(0, 4)}`);
+  t.expect(t.ev(`!!FD_CACHE.get("c:#2F8F8A|paintings|overall|0")`), "the feed is not keyed to the tapped color");
+  t.expect(/Your color/.test(t.text(".cp-chip")), "this isn't the tapped-color page");
+  await cfeedChip(t, "close");
+  const card = t.$(".fd-tile.fd-card[data-fk]"); t.expect(card, "no close-color card");
+  await t.click(card, { wait: 900 });
+  await t.waitFor(() => /Your color/.test(t.text(".cp-chip")) ? true : null, 10000, "the opened name's page with Your color");
+});
 // David's polish pass, 2026-10-09: a compact action row (Keep, Share, On the map — Play only once a real game is
 // wired, never Learn or Compare, which don't belong on this page any more), and "Findings" + "Analysis" merged
 // into one section with the strongest lines first and the rest behind one "More".

@@ -504,3 +504,10 @@
 }
 html.desk .gl-feed{margin-top:72px}
 html.desk .fd-bar{top:calc(var(--dkn,60px) - 1px)}
+/* Keep exploring on a color page (js/feed.js, subject = a color): a tile that is not a painting is a card in its own color */
+.rp-feed{margin-top:56px;padding-bottom:8px}
+.fd-card .fd-im{display:flex;align-items:center;justify-content:center;padding:12px;border:1px solid var(--rule)}
+.fd-ct{position:relative;z-index:1;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:5;overflow:hidden;text-align:center;font:400 20px/1.2 var(--serif);letter-spacing:-.01em;overflow-wrap:anywhere}
+.fd-grid.narrow .fd-ct{font-size:18px}
+.fd-im.has-img .fd-ct{position:absolute;left:0;right:0;bottom:0;padding:34px 10px 10px;text-align:left;color:#fff!important;background:linear-gradient(transparent,rgba(14,13,11,.82) 70%);-webkit-line-clamp:2;font-size:17px}
+.fd-card .fd-im img{border-radius:inherit}

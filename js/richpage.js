@@ -913,6 +913,7 @@ function rpSplitWire(el, name, hex, tapped) {
 // entry {n, h, src?, also?, notes?, shade?}; o: { tapped, cls, facet (a story built from the wiki, js/article.js
 // arFacetArt), codes [[k, v]], node }. Returns the screen; the caller wires its own save/share icons, if any.
 function colorDossier(entry, o = {}) {
+  const backNav = BACK_RENDER;   // read before show() clears it: the Keep exploring feed at the foot puts itself back where it was on a Back (js/feed.js)
   const name = entry.n, hex = entry.h, tapped = o.tapped ? String(o.tapped).toUpperCase() : null, heroHex = tapped || hex;
   const famC = typeof rcFamC === "function" ? rcFamC(heroHex) : null;
   const cover = rpCoverFoot(name, hex, tapped, entry);
@@ -935,6 +936,7 @@ function colorDossier(entry, o = {}) {
     ${rpIdCardHTML()}
     ${rpNextHTML()}
     ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "c:" + name, title: name }) : ""}
+    ${typeof fdMountColor === "function" ? `<section class="gl-feed rp-feed" data-rpfeed aria-label="Keep exploring"></section>` : ""}
     <p class="fine rp-last">Screen colors are approximate. Painting figures are measured from museum photographs of aged, varnished paintings.</p>
   `, "article cp-page" + (o.cls ? " " + o.cls : ""));
   el.style.setProperty("--c", heroHex);   // the page's own faint tint (css/colorpage.css .screen.cp-page)
@@ -962,6 +964,9 @@ function colorDossier(entry, o = {}) {
   rpNextFill(el, name, heroHex);
   rpHoldWalk(el, name, heroHex);
   rpBarWire(el);
+  // Keep exploring (js/feed.js): the endless feed of paintings and more at the very bottom, with chips for what counts as related.
+  // On a Back it is built at once so the page is as tall as it was and the scroll lands on the same tile.
+  if (typeof fdMountColor === "function") fdMountColor(el.querySelector("[data-rpfeed]"), { sub: { hex: heroHex.toUpperCase(), name, tapped }, backNav });
   if (tapped) rpSplitWire(el, name, hex, tapped);
   if (typeof rcWireOpen === "function") rcWireOpen(el, heroHex);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
