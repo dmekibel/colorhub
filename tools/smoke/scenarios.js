@@ -2506,6 +2506,21 @@ scenario("pages", "a color's cover line shows plain words, never [[link]] or [1]
   t.expect(/dusky shade of green/i.test(hero), `the cover's definition line is missing: "${hero.replace(/\s+/g, " ").slice(0, 160)}"`);
 });
 
+// David, 2026-10-24: "Button overlapping text is bad": on an in-between color's cover the Back and Map buttons sat on top of
+// the two-up band's text. Nothing in the cover may sit under the top controls (Back, Map / Close).
+scenario("pages", "an in-between color's cover text never sits under the Back and Map buttons", async t => {
+  await t.open("#/color/teal", { settle: 300 });
+  const sw = t.d.createElement("button"); sw.dataset.swatch = "#987B4A"; sw.style.cssText = "position:fixed;left:150px;top:300px;width:60px;height:60px;z-index:9999";
+  t.d.body.appendChild(sw);
+  await t.click(sw, { wait: 700 }); sw.remove();
+  await t.waitFor(() => t.$(".rp-split-band"), 8000, "the two-up band of an in-between color");
+  t.w.scrollTo(0, 0); await t.sleep(300);
+  // the Back / Map pills sit at --top + 14 and are ~44px tall, so the cover's first line must start below --top + 58
+  const top = parseFloat(t.ev("getComputedStyle(document.documentElement).getPropertyValue('--top')")) || 0;
+  const bandTop = t.$(".rp-split-band").getBoundingClientRect().top, heroTop = t.$(".cp-hero").getBoundingClientRect().top;
+  t.expect(bandTop - heroTop >= top + 58, `the two-up band starts ${Math.round(bandTop - heroTop)}px into the cover but the Back / Map pills reach ${Math.round(top + 58)}px: they overlap the text`);
+});
+
 // David, 2026-10-09 on an in-between color's page ("Your color · Dark olive brown... diagonal triangle in the
 // top-right corner"): the split cover used to paint the matched name's color as a diagonal wedge, clip-path'd
 // into the hero's top-right corner -- exactly where a full-bleed hero's own "✕ Close" pill also lives
@@ -4496,12 +4511,17 @@ scenario("paintings", "a painting page has a Keep exploring jump near the top; o
   const before = t.ev("document.querySelector('[data-glfeed]').getBoundingClientRect().top"), vh = t.ev("innerHeight");
   t.expect(before > vh, `the feed is already on screen before the tap (top ${before}, window ${vh})`);
   // headless Chrome does not run smooth scrolls to the end, so watch what the tap asks for, then check an instant jump lands
-  t.ev("window.__sj = null; const o = Element.prototype.scrollIntoView; Element.prototype.scrollIntoView = function (a) { window.__sj = { feed: this.matches('[data-glfeed]'), opt: a }; return o.call(this, Object.assign({}, a, { behavior: 'auto' })); };");
-  await t.click("[data-glfeedjump]", { wait: 600 });
-  const sj = t.ev("window.__sj");
-  t.expect(sj && sj.feed, "the Keep exploring button did not scroll the feed into view");
+  // the Explore pill is on the picture, on the first screen, with no scrolling
+  const pill = t.ev("(() => { const b = [...document.querySelectorAll('[data-glfeedjump]')].find(x => x.offsetWidth); if (!b) return null; const q = b.getBoundingClientRect(); return { t: q.top, b: q.bottom, txt: b.textContent.trim(), svg: !!b.querySelector('svg') }; })()");
+  t.expect(pill && pill.t >= 0 && pill.b <= vh && pill.txt === "Explore" && pill.svg, `no Explore pill on the first screen (${JSON.stringify(pill)})`);
+  t.ev("window.__st = null; const o = window.scrollTo; window.scrollTo = function (a, b) { if (typeof a === 'object') { window.__st = a; return o.call(window, Object.assign({}, a, { behavior: 'auto' })); } return o.call(window, a, b); };");
+  await t.click("[data-glfeedjump]", { wait: 900 });
+  const st = t.ev("window.__st");
+  t.expect(st && st.top > 300, `the Explore pill did not ask to scroll to the feed (${JSON.stringify(st)})`);
+  // after the feed has built, the feed's heading sits just under the top bar and its tiles fill the screen
+  await t.sleep(1500);
   const after = t.ev("document.querySelector('[data-glfeed]').getBoundingClientRect().top");
-  t.expect(after < vh, `the feed is still below the screen after the tap (top ${after}, window ${vh})`);
+  t.expect(after < 130 && after > -20, `the feed did not land under the top bar (top ${after}, window ${vh}, ${JSON.stringify(st)} ${JSON.stringify(t.ev("({ sy: scrollY, dh: document.documentElement.scrollHeight, mh: document.querySelector('[data-glfeed]').style.minHeight, h: document.querySelector('[data-glfeed]').offsetHeight, kids: document.querySelector('[data-glfeed]').children.length, cs: (c => [c.minHeight, c.height, c.maxHeight, c.contain, c.contentVisibility, c.position, c.transitionProperty, c.transitionDuration, document.querySelector('[data-glfeed]').getAnimations().length].join('|'))(getComputedStyle(document.querySelector('[data-glfeed]'))), cls: document.querySelector('[data-glfeed]').className, same: document.querySelectorAll('[data-glfeed]').length, disp: getComputedStyle(document.querySelector('[data-glfeed]')).display, par: document.querySelector('[data-glfeed]').parentElement.className })"))})`);
 });
 scenario("pages", "a color page shows Explore on first paint, keeps it in the pinned header at every scroll depth, and both ask to scroll to the feed", async t => {
   await t.open("#/color/teal", { settle: 900 });
@@ -4531,6 +4551,9 @@ scenario("pages", "a color page shows Explore on first paint, keeps it in the pi
   st = t.ev("window.__st"); const feedTop = t.ev("document.querySelector('[data-rpfeed]').getBoundingClientRect().top"), vh = t.ev("innerHeight");
   t.expect(st && st.top > 700, `the header Explore button did not ask to scroll down to the feed (${JSON.stringify(st)})`);
   t.expect(feedTop < vh, `the feed is still below the screen after the header button (top ${feedTop}, window ${vh})`);
+  await t.sleep(1800);
+  const landed = t.ev("document.querySelector('[data-rpfeed]').getBoundingClientRect().top");
+  t.expect(landed < 130 && landed > -20, `the feed did not land just under the pinned header (top ${landed}; ${JSON.stringify(t.ev("({ mh: document.querySelector('[data-rpfeed]').style.minHeight, h: document.querySelector('[data-rpfeed]').offsetHeight, sy: scrollY, dh: document.documentElement.scrollHeight, ih: innerHeight, bar: document.querySelector('body > .rp-bar').offsetHeight })"))})`);
 });
 scenario("pages", "an in-between color's cover also has Explore on first paint", async t => {
   await t.open("#/color/teal", { settle: 300 });
@@ -6702,8 +6725,8 @@ scenario("paintmap", "the card's Same painter / Same decade / Same place chips n
   await t.tapAt(cv0, r00.left + r00.width / 2, r00.top + r00.height / 2 - 150, { wait: 900 });
   await t.waitFor(".pmx-facets button", 6000, "the card's facet chips");
   const labels = t.$$(".pmx-facets button").map(b => t.text(b));
-  // Phase B (2026-10-24): the three presets carry a live count after their words ("Same painter 377"); More, Open, Around this and Walk follow
-  t.expect(labels.every(l => /^(Same painter|Same era here|Around the same era here|Same era|Around the same era|More|Open|Around this|Walk from here)/.test(l)), `unexpected chip label(s): ${JSON.stringify(labels)}`);
+  // Phase B (2026-10-24): the three presets carry a live count after their words ("Same painter 377"); More follows; Open is the card itself, Around this and Walk live in More
+  t.expect(labels.every(l => /^(Same painter|Same era here|Around the same era here|Same era|Around the same era|More)/.test(l)), `unexpected chip label(s): ${JSON.stringify(labels)}`);
   t.expect(!labels.some(l => /undefined/.test(l)), `a chip rendered the literal text "undefined": ${JSON.stringify(labels)}`);
   const facetBtn = t.$$(".pmx-facets [data-pmpre]").find(b => !b.disabled);
   t.expect(facetBtn, "no preset chip to test (this painting has none?)");
@@ -6721,9 +6744,11 @@ scenario("paintmap", "Walk from here steps to a different painter each time", as
   // the card (and its Walk chip) only opens on a tap now -- tap an off-center painting to open it first
   const cv0 = t.$(".pmx-cv"), r00 = cv0.getBoundingClientRect();
   await t.tapAt(cv0, r00.left + r00.width / 2, r00.top + r00.height / 2 - 150, { wait: 900 });
-  await t.waitFor(".pmx-facets [data-pmwalk-go]", 6000, "the Walk from here chip");
+  await t.waitFor(".pmx-facets [data-pmmore2]", 6000, "the More chip");
   const start = t.w.PM_CTRL.center, startPainter = t.ev(`typeof XBF !== "undefined" ? XBF.artist[${start}] : null`);
-  await t.click(".pmx-facets [data-pmwalk-go]", { wait: 700 });
+  await t.click(".pmx-facets [data-pmmore2]", { wait: 500 });
+  await t.waitFor(".pmx-moresheet [data-pmwalk-go]", 4000, "Walk from here at the top of More");
+  await t.click(".pmx-moresheet [data-pmwalk-go]", { wait: 700 });
   t.expect(t.w.PM_CTRL.spec.arr === "spiral", `Walk from here didn't center on a new painting: ${t.w.PM_CTRL.spec.arr}`);
   const step1 = t.w.PM_CTRL.spec.seed;
   t.expect(step1 >= 0 && step1 !== start, "Walk from here didn't move to a new painting");
@@ -8395,20 +8420,20 @@ scenario("paintmap", "a color nothing holds that closely says so and offers Loos
   t.expect(t.w.PM_CTRL.count > 0, "loosening the closeness never brought paintings back");
 });
 
-// ---- By look (David, 2026-10-24: "a map arranged by vibe"): data/gallery/look.bin from the CLIP image model -----------------------------
+// ---- By vibe (David, 2026-10-24: "a map arranged by vibe"): data/gallery/look.bin from the CLIP image model -----------------------------
 // Passes trivially when look.json is absent: the option is hidden then, which is the designed fallback.
-scenario("paintmap", "By look: the option appears, switching keeps the painting in the middle, a filter refills a compact grid with no voids", async t => {
+scenario("paintmap", "By vibe: the option appears, switching keeps the painting in the middle, a filter refills a compact grid with no voids", async t => {
   const i0 = await pmFocusOpen(t);
   const meta = await t.w.fetch("data/gallery/look.json").then(r => r.ok ? r.json() : null).catch(() => null);
-  if (!meta) { t.expect(true, "no look.json in this checkout: By look is hidden by design"); return; }
+  if (!meta) { t.expect(true, "no look.json in this checkout: By vibe is hidden by design"); return; }
   await t.click(".pmx-do", { wait: 400 });
-  await t.waitFor(".pmx-sheet [data-pmarr=\"look\"]", 6000, "the By look choice in Arrange");
+  await t.waitFor(".pmx-sheet [data-pmarr=\"look\"]", 6000, "the By vibe choice in Arrange");
   await t.click('.pmx-sheet [data-pmarr="look"]', { force: true, wait: 600 });
   await t.waitFor(() => t.w.PM_CTRL.spec.arr === "look" && t.w.PM_CTRL.lay().arr === "look", 15000, "the look layout (look.bin) to load and lay out");
   t.expect(/image model/i.test(t.text(".pmx-sheet .hm-arr-sub")), "the Arrange line doesn't say it comes from an image model");
-  t.expect(t.w.PM_CTRL.center === i0, `By look moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  t.expect(t.w.PM_CTRL.center === i0, `By vibe moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
   const full = t.ev("PM_CTRL.lay().n");
-  t.expect(full === meta.n, `By look should hold every painting (${full} of ${meta.n})`);
+  t.expect(full === meta.n, `By vibe should hold every painting (${full} of ${meta.n})`);
   // the Even grid layout (a setting; Islands is the default): a filter refills it with no voids
   await t.click('.pmx-sheet [data-pmlk="lay"][data-v="grid"]', { force: true, wait: 600 });
   await t.waitFor(() => !t.w.PM_CTRL.lay().islands && t.w.PM_CTRL.lay().arr === "look", 15000, "the Even grid layout (look.bin) to load");
@@ -8416,22 +8441,22 @@ scenario("paintmap", "By look: the option appears, switching keeps the painting 
   const y = t.ev(`GAL.year[${i0}]`);
   t.ev(`PM_CTRL.spec.f.y0 = ${y - 15}; PM_CTRL.spec.f.y1 = ${y + 15}; PM_CTRL.rebuild()`);
   const lay = t.ev("(() => { const l = PM_CTRL.lay(); return { n: l.n, GW: l.GW, GH: l.GH, arr: l.arr }; })()");
-  t.expect(lay.arr === "look" && lay.n > 50 && lay.n < full, `the filter didn't narrow By look (${JSON.stringify(lay)})`);
-  t.expect(lay.GW * lay.GH - lay.n < lay.GW, `a filtered By look map has voids: ${lay.GW}x${lay.GH} cells for ${lay.n} paintings`);
-  t.expect(t.w.PM_CTRL.center === i0, `a filter moved you off your painting in By look: ${i0} -> ${t.w.PM_CTRL.center}`);
+  t.expect(lay.arr === "look" && lay.n > 50 && lay.n < full, `the filter didn't narrow By vibe (${JSON.stringify(lay)})`);
+  t.expect(lay.GW * lay.GH - lay.n < lay.GW, `a filtered By vibe map has voids: ${lay.GW}x${lay.GH} cells for ${lay.n} paintings`);
+  t.expect(t.w.PM_CTRL.center === i0, `a filter moved you off your painting in By vibe: ${i0} -> ${t.w.PM_CTRL.center}`);
   t.ev("PM_CTRL.spec.f.y0 = null; PM_CTRL.spec.f.y1 = null; PM_CTRL.rebuild()");
   await t.click('.pmx-sheet [data-pmarr="color"]', { force: true, wait: 700 });
-  t.expect(t.w.PM_CTRL.center === i0, `leaving By look moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  t.expect(t.w.PM_CTRL.center === i0, `leaving By vibe moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
 });
 
-// By look Islands (David, 2026-10-24: "maybe each thing should be an island"): natural clusters laid out apart with empty space between.
-scenario("paintmap", "By look islands: every painting once and apart with space between; names never overlap; settings persist; focus is kept; a filter compacts", async t => {
+// By vibe Islands (David, 2026-10-24: "maybe each thing should be an island"): natural clusters laid out apart with empty space between.
+scenario("paintmap", "By vibe islands: every painting once and apart with space between; names never overlap; settings persist; focus is kept; a filter compacts", async t => {
   const i0 = await pmFocusOpen(t);
   const meta = await t.w.fetch("data/gallery/look.json").then(r => r.ok ? r.json() : null).catch(() => null);
   if (!meta || !meta.islands) { t.expect(true, "no islands table in this checkout: Islands is hidden by design"); return; }
   t.ev("try { localStorage.removeItem('pm-look-opts'); } catch (e) {}");
   await t.click(".pmx-do", { wait: 400 });
-  await t.waitFor(".pmx-sheet [data-pmarr=\"look\"]", 6000, "the By look choice in Arrange");
+  await t.waitFor(".pmx-sheet [data-pmarr=\"look\"]", 6000, "the By vibe choice in Arrange");
   await t.click('.pmx-sheet [data-pmarr="look"]', { force: true, wait: 600 });
   await t.waitFor(() => t.w.PM_CTRL.spec.arr === "look" && (t.w.PM_CTRL.lay().islands || []).length > 10, 20000, "the islands layout to load");
   t.expect(t.w.PM_CTRL.center === i0, `Islands moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
@@ -8510,4 +8535,15 @@ scenario("pages", "painter's color map: opens from the painter page, size follow
   t.expect(!t.$(".ph-sheet"), "the color map is still open after tapping a node");
   await t.waitFor(".pc-use", 12000, "the painter's use line on the color page");
   t.expect(/van Gogh holds this in \d[\d,]* of 1,\d{3} paintings/.test(t.text(".pc-use")), `the use line reads: ${t.text(".pc-use")}`);
+scenario("paintmap", "the card is one row of chips; tapping the card opens the painting; Around this seeds from More", async t => {
+  const i0 = await pmCardOpen(t);
+  t.expect(t.$$(".pmx-facets .pmx-frow").length === 1, "the bottom stack should be ONE row of chips");
+  t.expect(!t.$(".pmx-facets [data-pmopen2],.pmx-facets [data-pmwalk-go],.pmx-facets [data-pmarrange-go]"), "Open / Around this / Walk are still pills in the row");
+  t.expect(t.$(".pmx-cap-go"), "the card has no chevron");
+  await t.click("[data-pmmore2]", { wait: 500 });
+  await t.click(".pmx-moresheet [data-pmarrange-go]", { wait: 700 });
+  t.expect(t.w.PM_CTRL.spec.arr === "spiral" && t.w.PM_CTRL.spec.seed === i0, `Around this didn't seed on the painting (${t.w.PM_CTRL.spec.arr}, ${t.w.PM_CTRL.spec.seed} vs ${i0})`);
+  await t.waitFor(() => t.$(".pmx-cap-main") && !t.$(".pmx-cap").hidden, 4000, "the card");
+  await t.click(".pmx-cap-main", { wait: 600 });
+  await t.waitFor(() => /#\/gallery\//.test(t.w.location.hash), 10000, "the card to open the painting");
 });

@@ -37,7 +37,7 @@
 // Third field = where it makes sense: omitted = every map, "multi" = only when the map holds many painters (By painter and
 // Families are one block when it holds one), "solo" = only when the map is scoped to ONE painter (David, 2026-10-20: the
 // painter page's map). One list, filtered by pmArrFor(); the sheet is never forked.
-const PM_ARR = [["color", "By color"], ["time", "By time"], ["painter", "By painter", "multi"], ["families", "Families", "multi"], ["museum", "By museum", "solo"], ["subject", "By subject"], ["look", "By look"], ["tones", "Tones"], ["rings", "Rings"], ["spiral", "Spiral"]];
+const PM_ARR = [["color", "By color"], ["time", "By time"], ["painter", "By painter", "multi"], ["families", "Families", "multi"], ["museum", "By museum", "solo"], ["subject", "By subject"], ["look", "By vibe"], ["tones", "Tones"], ["rings", "Rings"], ["spiral", "Spiral"]];
 const pmSolo = s => !!(s && s.f && s.f.painterSet && s.f.painterSet.length === 1);
 const pmArrFor = s => PM_ARR.filter(a => (!a[2] || (a[2] === "solo") === pmSolo(s)) && (a[0] !== "subject" || (s.col || "paintings") === "paintings") && (a[0] !== "look" || pmLookShown(s)));
 // "By look" may still be unknown (a shared address opens it before look.json has answered): keep it until it has said no
@@ -53,7 +53,7 @@ const PM_WHY = {
   tones: "An island per mood: vivid, light, muted, dark",
   rings: "Concentric rings: the nearer the middle, the closer the colors",
   spiral: "A continuous spiral, nearest first, no seams between rings",
-  look: "By look, from an image model. Paintings that look alike sit together. The picture model's view: subject, style, mood and color.",
+  look: "By vibe, from an image model. Paintings with a similar vibe sit together. The picture model's view of vibe: subject, style, mood and color.",
 };
 // David, 2026-10-09: "Place by" -- which of a painting's own colors decides WHERE it sits, for the two
 // arrangements position actually comes from a color (color, time). The default (and the only option before this)
@@ -1764,9 +1764,10 @@ function pmOpen(spec, o = {}) {
     <div class="pmx-chipbar" data-pmchipbar hidden></div>
     <div class="pmx-note" data-pmnote role="status" hidden></div>
     <div class="pmx-walk" data-pmwalk hidden></div>
+    <div class="pmx-scrim" data-pmscrim aria-hidden="true"></div>
     <div class="pmx-facets" data-pmfacets hidden></div>
     <div class="pmx-cap" data-pmcap hidden>
-      <button class="pmx-cap-main" data-pmopen><b data-pmct></b><small data-pmcb></small></button>
+      <button class="pmx-cap-main" data-pmopen aria-label="Open this painting"><b data-pmct></b><small data-pmcb></small><i class="pmx-cap-go" aria-hidden="true">${ICON.chev}</i></button>
       <button class="pmx-heart" data-pmheart aria-label="Add to your favorites"></button>
     </div>
   `, "fixed cx pmx");
@@ -1988,12 +1989,12 @@ function pmMount(el, s, F) {
   function caption() {
     if (centerK < 0 || !lay) { cap.hidden = true; facets.hidden = true; return; }
     const i = lay.items[centerK], a = F.artist[i], y = pmYearStr(i, F), by = [a ? xbArtistName(F, a) : "", y].filter(Boolean).join(" · ");
-    cap.hidden = !cardOpen; facets.hidden = !cardOpen;
+    cap.hidden = !cardOpen; facets.hidden = !cardOpen; el.classList.toggle("pmx-cardopen", !!cardOpen);
     const d = pmDetailNow(i, F);
     cap.querySelector("[data-pmct]").textContent = d ? d.t : " ";
     cap.querySelector("[data-pmcb]").textContent = by || (d && d.co) || "";
     let lt = cap.querySelector("[data-pmclook]");
-    if (s.arr === "look") { if (!lt) { lt = document.createElement("small"); lt.className = "pmx-look-tag"; lt.dataset.pmclook = ""; cap.querySelector(".pmx-cap-main").appendChild(lt); } lt.textContent = "By look, from an image model"; } else if (lt) lt.remove();
+    if (s.arr === "look") { if (!lt) { lt = document.createElement("small"); lt.className = "pmx-look-tag"; lt.dataset.pmclook = ""; cap.querySelector(".pmx-cap-main").appendChild(lt); } lt.textContent = "By vibe, from an image model"; } else if (lt) lt.remove();
     cap.style.setProperty("--c", pmHex(i, F));
     requestAnimationFrame(fitCap);
     paintHeart(i, d);
@@ -2023,12 +2024,12 @@ function pmMount(el, s, F) {
     s[{ lay: "lkl", sp: "lks", col: "lkc", lab: "lkb" }[k]] = nv;
     pmLkSave(Object.assign(pmLkSaved(), { [k]: nv }));
     const go = () => { if (dead) return; rebuild(); if (!live && redraw) redraw(); };
-    if (pmLookReady(s)) go(); else pmLookEnsure(F, s).then(ok => { if (!ok) toast("The look map didn't load", { low: true }); go(); });
+    if (pmLookReady(s)) go(); else pmLookEnsure(F, s).then(ok => { if (!ok) toast("The vibe map didn't load", { low: true }); go(); });
   }
-  // First time By look is chosen, one honest line about where the order comes from (never claimed as fact)
+  // First time By vibe is chosen, one honest line about where the order comes from (never claimed as fact)
   function lookHint() {
     let seen = 0; try { seen = localStorage.getItem("pm-look-seen"); localStorage.setItem("pm-look-seen", "1"); } catch (e) {}
-    if (!seen) toast("Placed by an image model: paintings it finds alike sit together. Island names come from what each one holds.", { low: true, ms: 5200 });
+    if (!seen) toast("The picture model's view of vibe: subject, style, mood and color. Paintings it finds alike sit together; island names come from what each one holds.", { low: true, ms: 5200 });
   }
   function showCard() { if (!cardOpen) { cardOpen = true; caption(); } }
   function hideCard() { if (cardOpen) { cardOpen = false; caption(); } }
@@ -2103,10 +2104,7 @@ function pmMount(el, s, F) {
     const pr = pmPresetsOf(i, F), tok = ++facetTok;
     facets.hidden = false;
     const chipHTML = (p, k) => { const on = p.on(s.f); return `<button class="pmx-fchip pmx-fpre${on ? " on" : ""}" data-pmpre="${k}" aria-pressed="${on}"><span>${esc(p.label)}</span><em data-pmprec></em></button>`; };
-    facets.innerHTML = `${pr.length ? `<div class="pmx-frow">${pr.map(chipHTML).join("")}</div>` : ""}<div class="pmx-frow"><button class="pmx-fchip pmx-fmore" data-pmmore2>More</button><button class="pmx-fchip pmx-fchip-open" data-pmopen2>Open</button><button class="pmx-fchip pmx-fchip-arrange" data-pmarrange-go>Around this</button><button class="pmx-fchip pmx-fchip-walk" data-pmwalk-go>Walk from here</button></div>`;
-    facets.querySelector("[data-pmopen2]").onclick = () => openK(centerK);
-    facets.querySelector("[data-pmarrange-go]").onclick = () => arrangeAround(i);
-    facets.querySelector("[data-pmwalk-go]").onclick = () => doWalk();
+    facets.innerHTML = `<div class="pmx-frow">${pr.map(chipHTML).join("")}<button class="pmx-fchip pmx-fmore" data-pmmore2>More</button></div>`;
     facets.querySelector("[data-pmmore2]").onclick = () => { buzz(4); openMore(i); };
     facets.querySelectorAll("[data-pmpre]").forEach(b => b.onclick = () => {
       if (b.disabled) return;
@@ -2118,7 +2116,7 @@ function pmMount(el, s, F) {
       if (dead || tok !== facetTok || !cardOpen) return;
       const b = facets.querySelector(`[data-pmpre="${k}"]`); if (!b) return;
       const on = p.on(s.f), n = on ? lay.n : pmPatchCount(s, F, p, i);
-      b.querySelector("[data-pmprec]").textContent = n >= 10000 ? Math.round(n / 1000) + "k" : n.toLocaleString();
+      b.querySelector("[data-pmprec]").textContent = n >= 10000 ? Math.round(n / 1000) + "k" : n >= 1000 && innerWidth <= 460 ? (n / 1000).toFixed(1).replace(".0", "") + "k" : n.toLocaleString();
       b.setAttribute("aria-label", `${p.label}: ${n.toLocaleString()} ${n === 1 ? pmColLabel(F, "noun") : pmColLabel(F, "nounP")}${on ? ", on. Tap to remove" : ""}`);
       if (!on && n <= 1) { b.disabled = true; b.classList.add("none"); }
     }, 30 + k * 40));
@@ -3077,13 +3075,15 @@ function pmMount(el, s, F) {
     const within = PM_WITHIN.map(withinT).filter(Boolean);
     const { sh, close } = sheet(`<div class="hm-chooser pmx-chooser pmx-more">
         <div class="hm-ch-head" data-sheet-grab><b class="pmx-more-t" title="${esc(name)}">Around this painting</b><button class="iconq hm-ch-x" data-sheet-close aria-label="Close">${ICON.x}</button></div>
-        <div class="hm-ch-scroll" data-sheet-scroll><div class="pmx-more-top"><span data-pmmoren></span><button class="pmx-reset" data-pmmoreclear>Clear these</button></div><div data-pmmorebody></div></div>
+        <div class="hm-ch-scroll" data-sheet-scroll><div class="pmx-more-acts"><button class="pmx-act" data-pmarrange-go><b>Around this painting</b><small>Arrange the neighbors by how alike they are</small></button><button class="pmx-act" data-pmwalk-go><b>Walk from here</b><small>Step to the most similar painter, again and again</small></button></div><div class="pmx-more-top"><span data-pmmoren></span><button class="pmx-reset" data-pmmoreclear>Clear these</button></div><div data-pmmorebody></div></div>
       </div>`, { lock: false });
     sh.classList.add("pmx-sheet", "pmx-moresheet", "hm-sheet-panel", "hm-sheet-arrange");
     sh.setAttribute("aria-label", "Narrow the map around this painting");
     const scrim = sh.previousElementSibling; if (scrim && scrim.classList.contains("scrim")) scrim.classList.add("hm-scrim-clear");
     const body = sh.querySelector("[data-pmmorebody]"), nEl = sh.querySelector("[data-pmmoren]"), clr = sh.querySelector("[data-pmmoreclear]");
     sh.querySelector("[data-sheet-close]").onclick = () => { buzz(4); close(); };
+    sh.querySelector("[data-pmarrange-go]").onclick = () => { close(); arrangeAround(i); };
+    sh.querySelector("[data-pmwalk-go]").onclick = () => { close(); doWalk(); };
     const noun = n => n === 1 ? pmColLabel(F, "noun") : pmColLabel(F, "nounP");
     const all = () => [...tg, ...within, ...(palT ? [palT] : [])];
     let tok = 0;
@@ -3233,7 +3233,7 @@ function pmMount(el, s, F) {
       });
       qa$("[data-pmarr]").forEach(b => b.onclick = () => {
         const id = b.dataset.pmarr; buzz(5);
-        if (id === "look" && !pmLookReady(s)) { pmLookEnsure(F, s).then(ok => { if (dead) return; if (!ok) { toast("The look map didn't load", { low: true }); renderArrange(); return; } s.arr = id; s.seed = -1; lookHint(); rebuild(); renderArrange(); }); return; }
+        if (id === "look" && !pmLookReady(s)) { pmLookEnsure(F, s).then(ok => { if (dead) return; if (!ok) { toast("The vibe map didn't load", { low: true }); renderArrange(); return; } s.arr = id; s.seed = -1; lookHint(); rebuild(); renderArrange(); }); return; }
         if (id === "look") lookHint();
         if (id === "subject" && !SUBJ) { loadSubjects().then(() => { if (dead) return; s.arr = id; s.seed = -1; rebuild(); renderArrange(); }).catch(() => toast("Subjects didn't load")); return; }
         if (PM_NEEDS_SEED.has(id)) { if (mid < 0) return; s.seed = mid; s.arr = id; }

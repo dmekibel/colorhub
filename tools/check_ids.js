@@ -43,6 +43,10 @@ function checkIds() {
     const b = fs.readFileSync(path.join(ROOT, "data/gallery/look.bin")), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
     if (b.length < 24 || b.readUInt32LE(8) !== gIds.length || b.readUInt32LE(20) !== parseInt(h, 16) || b.length !== 24 + 4 * gIds.length) warn("data/gallery/look.bin is out of step with ids.txt (By look is hidden until it is rebuilt): python3 tools/look_layout.py");
   }
+  if (fs.existsSync(path.join(ROOT, "data/gallery/vibe/index.json"))) {   // By vibe neighbors (feed): header must name THIS ids.txt
+    const v = rj("data/gallery/vibe/index.json"), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
+    if (v.n !== gIds.length || v.ids_hash !== h) warn("data/gallery/vibe/ is out of step with ids.txt (the feed's Vibe ranking is empty until it is rebuilt): python3 tools/vibe_knn.py");
+  }
   const shardIds = [], names = [];
   for (let k = 0; k * head.shard < N; k++) for (const r of rj(`data/gallery/d/${shardName(k)}.json`)) { shardIds.push(r[0]); names.push(r[2]); }
   if (shardIds.length !== gIds.length || shardIds.some((id, i) => id !== gIds[i])) err(`data/gallery/ids.txt order differs from the detail shards d/*.json: ${FIX_GALLERY}`);

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Painting-map "By look" arrangement: paintings the picture model finds alike sit together.
+"""Painting-map "By vibe" arrangement (internal id: look): paintings the picture model finds alike sit together.
 
   python3 tools/look_layout.py              # build data/gallery/look.bin + look.json from the cached CLIP embeddings
   python3 tools/look_layout.py --sheets     # also write contact sheets of random neighborhoods to design/review-shots/look/

@@ -235,6 +235,12 @@
 .gl-id .p-title{margin-top:6px}
 .gl-id .p-dek{margin-top:6px}
 .gl-id-src{margin-top:4px;font:400 13px/1.3 var(--mono);color:var(--faint)}
+/* phones: a glass pill at the picture's top corner, like Look closer at the bottom; wide windows: a real button under the title (css/desktop.css hides the picture pills there) */
+.gl-explore-ov{top:10px;bottom:auto}
+.gl-explore-ov svg{width:15px;height:15px}
+.gl-page .gl-explore{display:none}
+html.desk .gl-page .gl-explore{display:inline-flex}
+.gl-page .gl-explore{margin-top:14px;background:transparent;color:var(--ink);border:1px solid var(--rule-2,rgba(236,232,223,.4))}
 .gl-id-src a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 /* "Why it matters": one or two lines from this painting's own Analysis findings (js/artwiki.js awPaintingWhy),
    the only per-painting prose the corpus currently has. Quiet until there's something to say. */
