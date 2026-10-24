@@ -16,13 +16,13 @@
 //     average, never the old silent "Point").
 //   eydSizeControlHTML(compact) -> the same five-way control, for the loupe and for Settings (js/you.js).
 
-const EYD_SIZES = [1, 3, 5, 11, 31];
-const EYD_LABEL = { 1: "Point", 3: "3×3", 5: "5×5", 11: "11×11", 31: "31×31 average" };
-// David, 2026-10-23: a single pixel is noisy (one speck of grain or glare names the wrong color), so until the
-// person picks a size themselves (sampleSet) the default is an 11x11 average. Point stays one tap away.
-const EYD_DEFAULT = 11;
-const getSampleSize = () => S.sampleSet && EYD_SIZES.includes(S.sampleSize) ? S.sampleSize : EYD_DEFAULT;
-function setSampleSize(n) { S.sampleSize = EYD_SIZES.includes(n) ? n : EYD_DEFAULT; S.sampleSet = true; save(); }
+const EYD_SIZES = [1, 2, 5, 11, 31];
+const EYD_LABEL = { 1: "Exact", 2: "2×2", 5: "5×5", 11: "11×11", 31: "31×31" };
+// David, 2026-10-24: every picker reads a 2x2 average unless the person picks another size in a setting below the
+// picture (never by pinching on it). S.sampleV marks a choice made under this rule; older choices start over at 2x2.
+const EYD_DEFAULT = 2;
+const getSampleSize = () => S.sampleV === 2 && EYD_SIZES.includes(S.sampleSize) ? S.sampleSize : EYD_DEFAULT;
+function setSampleSize(n) { S.sampleSize = EYD_SIZES.includes(n) ? n : EYD_DEFAULT; S.sampleV = 2; save(); }
 // David, 2026-10-10: the old labels ("Point", "3×3" … "31×31 average") wrapped the fifth button onto its own
 // row at 320-440px. One row, equal-width segments, bare numbers everywhere (the caption under the control
 // says what they mean once, instead of repeating "average" on every button).
@@ -68,9 +68,10 @@ function eydMap(el, clientX, clientY) {
 }
 function eydSampleAt(src, fx, fy, size) {
   const px = clamp(Math.round(fx * src.w), 0, src.w - 1), py = clamp(Math.round(fy * src.h), 0, src.h - 1);
-  const half = (size - 1) / 2;
-  const bx = clamp(px - half, 0, src.w - 1), by = clamp(py - half, 0, src.h - 1);
-  const bw = Math.max(1, Math.min(Math.round(half * 2 + 1), src.w - bx)), bh = Math.max(1, Math.min(Math.round(half * 2 + 1), src.h - by));
+  // an n x n square around the point (even sizes, like 2x2, take the pixel and the ones right and below it)
+  const n0 = Math.max(1, Math.round(size)), lo = Math.floor((n0 - 1) / 2);
+  const bx = clamp(px - lo, 0, src.w - 1), by = clamp(py - lo, 0, src.h - 1);
+  const bw = Math.max(1, Math.min(n0, src.w - bx)), bh = Math.max(1, Math.min(n0, src.h - by));
   const data = src.cx.getImageData(bx, by, bw, bh).data;
   let rr = 0, gg = 0, bb = 0, n = 0;
   for (let k = 0; k < data.length; k += 4) { rr += data[k]; gg += data[k + 1]; bb += data[k + 2]; n++; }
