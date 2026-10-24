@@ -392,7 +392,7 @@ function fdMount(host, o) {
     }
     curLead = res.lead || ""; curEnd = res.end || ""; curMap = res.map || ""; items = res.items; if (!items.length) { apply({ empty: "Nothing else in the archive is close to this one in that way." }); return; }
     live.forEach(el => el.remove()); live.clear();
-    capPct = items.some(x => !x.head && !x.sk && fdPctOnly(x.cap));
+    capPct = false;   // David, 2026-10-24: zoomed out, the percent under each tile "looks ugly": dense tiles are bare pictures (a long-press still shows everything)
     const want0 = memo ? memo.shown : FD_PAGE;
     shown = Math.min(items.length, Math.max(FD_PAGE, want0)); fk = Math.max(0, items.findIndex(x => !x.head));
     relayout(); stateDraw(); leadDraw(""); draw();
