@@ -4253,7 +4253,7 @@ scenario("paintings", "a pair's paintings, the masters' chords, and a painting w
   await t.waitFor(".sp-page .sp-pair", 12000, "a pair page opened from a chord");
   // the color is one of this painting's own six palette swatches, so "covers" is guaranteed rather than tied to
   // whatever an arbitrary hex happens to be close to -- gallery order shifts whenever the corpus does
-  await t.open("#/gallery/15146?c=8A7A48&t=10", { settle: 800 });
+  await t.open("#/gallery/15146?c=6C8484&t=10", { settle: 800 });   // 6C8484: the grey-teal ground of Bellini's Portrait of a Man, 12% of its photo within 10% (measured from the pixels; the color index is rebuilt for today's gallery order)
   await t.waitFor(() => /covers/.test(t.text(".pt-arrive")), 14000, "the pinned coverage line");
   // David, 2026-10-08: the color you came from sits under the palette, one quiet row; the tolerance opens on a tap
   t.expect(t.$(".pt-arrive").getBoundingClientRect().top > t.$("[data-glrows]").getBoundingClientRect().top, "the arriving color sits above the palette");

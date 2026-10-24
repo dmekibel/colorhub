@@ -56,6 +56,13 @@ function checkIds() {
 
   if (has("data/gallery/subjects.json")) { const sj = rj("data/gallery/subjects.json"); if (sj.ia.length !== N || sj.it.length !== N) err(`data/gallery/subjects.json has ${sj.ia.length}/${sj.it.length} entries, the gallery ${N}: rebuild with tools/subjects.py`); }
 
+  // 2b. the finer color index (data/colorindex/, tools/color_index.py): item numbers are gallery indices, so it must name THIS ids.txt
+  if (has("data/colorindex/index.json")) {
+    const ci = rj("data/colorindex/index.json"), h = require("crypto").createHash("sha1").update(fs.readFileSync(path.join(ROOT, "data/gallery/ids.txt"))).digest("hex").slice(0, 12);
+    if (ci.n !== N) err(`data/colorindex/index.json n=${ci.n}, the gallery ${N}: rebuild with tools/color_index.py --raw research/_raw (the color page's "In paintings" row shows the wrong paintings until then)`);
+    else if (ci.ids !== h) err(`data/colorindex/index.json was built for a different data/gallery/ids.txt (${ci.ids || "no hash"} vs ${h}): rebuild with tools/color_index.py --raw research/_raw`);
+  }
+
   // 3. analysis shards (same order, id by id)
   let at = 0, anErr = 0;
   for (let k = 0; k * head.shard < N && !anErr; k++) {
