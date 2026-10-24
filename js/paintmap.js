@@ -477,6 +477,7 @@ function pmParse(q, F) {
     const sh = (p.get("sh") || "").split(",").map(Number).filter(x => isFinite(x) && x >= 0);
     f.shares = sh.length === f.hexes.length ? sh : f.hexes.map(() => 1 / f.hexes.length);
   }
+  const on = num("on"); if (on != null && on >= 0 && F && on < F.N) s.on = on;   // a painting page's chip: open the map with THIS painting in the middle (never written back to the address)
   if (p.get("hit") === "1") s.hit = 1;   // an entry point from a color or a palette: open centered on the closest match (never written back to the address)
   f.y0 = num("y0"); f.y1 = num("y1");
   const hb = num("hb"); if (hb != null && hb >= 0 && hb < 9) f.hueBand = hb;
@@ -1820,7 +1821,7 @@ function pmMount(el, s, F) {
       if (dead || tok !== facetTok || !cardOpen) return;
       const b = facets.querySelector(`[data-pmpre="${k}"]`); if (!b) return;
       const on = p.on(s.f), n = on ? lay.n : pmPatchCount(s, F, p, i);
-      b.querySelector("[data-pmprec]").textContent = n.toLocaleString();
+      b.querySelector("[data-pmprec]").textContent = n >= 10000 ? Math.round(n / 1000) + "k" : n.toLocaleString();
       b.setAttribute("aria-label", `${p.label}: ${n.toLocaleString()} ${n === 1 ? pmColLabel(F, "noun") : pmColLabel(F, "nounP")}${on ? ", on. Tap to remove" : ""}`);
       if (!on && n <= 1) { b.disabled = true; b.classList.add("none"); }
     }, 30 + k * 40));
@@ -2446,8 +2447,7 @@ function pmMount(el, s, F) {
   function colorChipHTML(c, k) {
     const f = s.f, n = lay ? lay.n : 0, noun = pmColLabel(F, n === 1 ? "noun" : "nounP");
     const dots = f.hexes.slice(0, 6).map(h => `<i class="pmx-xdot" style="--c:${h}"></i>`).join("");
-    return `<span class="pmx-xchip pmx-xcolor"><button class="pmx-xcl-main" data-pmxclose aria-label="${esc(c.text)}: ${n.toLocaleString()} ${esc(noun)}. Change how close">${dots}<b>${esc(c.text)}</b><span> · ${n.toLocaleString()} ${esc(noun)}</span></button><button class="pmx-xcl-x" data-pmxclear="${k}" aria-label="Remove ${esc(c.text)} and show every painting"><i>${ICON.x}</i></button></span>`
-      + (f.colorMode !== "overall" && (!F.col || F.col === "paintings") ? `<button class="pmx-xchip pmx-xlist" data-pmxlist>As a list</button>` : "");
+    return `<span class="pmx-xchip pmx-xcolor"><button class="pmx-xcl-main" data-pmxclose aria-label="${esc(c.text)}: ${n.toLocaleString()} ${esc(noun)}. Change how close">${dots}<b>${esc(c.text)}</b><span> · ${n.toLocaleString()} ${esc(noun)}</span>${PM_ICON.filter}</button><button class="pmx-xcl-x" data-pmxclear="${k}" aria-label="Remove ${esc(c.text)} and show every painting"><i>${ICON.x}</i></button></span>`;
   }
   function paintChipbar() {
     const chips = pmActiveChips(s, F), solo = pmSolo(s);
@@ -2478,7 +2478,7 @@ function pmMount(el, s, F) {
     });
     const cf = chipbar.querySelector("[data-pmxfilter]"); if (cf) cf.onclick = () => { buzz(4); openSheet("filter"); };
     const cc = chipbar.querySelector("[data-pmxclose]"); if (cc) cc.onclick = () => { buzz(4); openClose(); };
-    const cl = chipbar.querySelector("[data-pmxlist]"); if (cl) cl.onclick = () => { buzz(5); const f = s.f; if (typeof S !== "undefined") { S.paintDoor = "list"; save(); } if (typeof paintingsOfPage === "function") paintingsOfPage(f.hexes, { tol: f.tol <= 30 ? Math.min(f.tol, 12) : 8, mode: "all", push: true }); };
+
     const ca = chipbar.querySelector("[data-pmxall]"); if (ca) ca.onclick = () => { buzz(6); if (scrubTimer) { clearInterval(scrubTimer); scrubTimer = 0; } s.f = scopedFresh(); s.fav = 0; s.upToYear = null; rebuild(); };
   }
   function build(keepPan, fo) {
@@ -2486,12 +2486,17 @@ function pmMount(el, s, F) {
     if (!pmArrOk(s)) { s.arr = "color"; s.seed = -1; }   // e.g. the painter scope was cleared while By museum was showing
     lay = pmLayout(s, F); PM_NOW = { s, lay };
     if (pmSolo(s)) paintChipbar();   // its real height (one line or two) decides the top inset the fit below uses
-    wait.hidden = !!lay.n;
+    wait.hidden = !!lay.n; wait.classList.remove("pmx-wait-empty"); if (lay.n) wait.textContent = "";
     if (!lay.n) {
       if (pmSolo(s)) {
         const parts = pmActiveChips(s, F).filter(c => c.dim !== "painter").sort((p, q) => (p.dim === "when") - (q.dim === "when")).map(c => c.text);
         if (s.upToYear != null) parts.push("up to " + s.upToYear);
         wait.innerHTML = `${parts.length ? `Nothing in ${esc(parts.join(", "))}.` : "No paintings here."} <button class="wl" data-pmloosen>Loosen the range</button>`;
+      } else if (s.f.hexes.length) {   // a color or a palette that nothing holds this closely: say so, and offer the one step that helps
+        const ov = s.f.colorMode === "overall", maxTol = ov ? PM_PAL_MAX : 30, can = s.f.tol < maxTol;
+        wait.classList.add("pmx-wait-empty");
+        wait.innerHTML = `<span class="pmx-empty-t">No ${esc(pmColLabel(F, "nounP"))} hold ${ov ? "this palette" : s.f.hexes.length > 1 ? "all of these colors" : "this color"} that closely.</span><span class="pmx-empty-a">${can ? `<button class="pmx-ebtn" data-pmloosen2>Loosen the closeness</button>` : ""}<button class="pmx-ebtn${can ? " ghost" : ""}" data-pmloosen>${pmActiveChips(s, F).length > 1 ? "Clear the filters" : "Show every painting"}</button></span>`;
+        const l2 = wait.querySelector("[data-pmloosen2]"); if (l2) l2.onclick = () => { s.f.tol = Math.min(maxTol, s.f.tol + (ov ? 3 : 6)); rebuild({ focus: lastFocus }); };
       } else wait.innerHTML = `Nothing matches all of that. <button class="wl" data-pmloosen>Clear the filters</button>`;
     }
     const lz = wait.querySelector("[data-pmloosen]"); if (lz) lz.onclick = () => { s.f = scopedFresh(); s.fav = 0; if (pmSolo(s)) s.upToYear = null; rebuild(); };
@@ -2516,6 +2521,7 @@ function pmMount(el, s, F) {
       s.hit = 0; const bk = pmBestMatch(lay, s.f, F);
       if (bk >= 0) fo = { i: lay.items[bk], z: .8, open: false };
     }
+    if (s.on != null && s.on >= 0 && lay.n && !fo) { fo = { i: s.on, z: 0, open: true }; s.on = -1; }   // z 0: fit the whole filtered set (a one-painter map opens whole)
     if (fo && lay.n && !pinned && !keepPan) {
       let fk = -1; for (let q = 0; q < lay.n; q++) if (lay.items[q] === fo.i) { fk = q; break; }
       const out = fk < 0;
@@ -2523,7 +2529,7 @@ function pmMount(el, s, F) {
       if (fk >= 0) foc = { k: fk, out, fo };
     }
     const mem = pinned || foc ? null : PM_PAN.get(lay.key);
-    if (foc) { P = [lay.x[foc.k], lay.y[foc.k]]; Z = fo.z > 0 ? fo.z : 1; const zf = zFit(); if (Z < zf) Z = zf; }   // keep your zoom, unless the new layout is smaller than the window at it
+    if (foc) { P = [lay.x[foc.k], lay.y[foc.k]]; Z = fo.z > 0 ? fo.z : fitZoomFor(lay); const zf = zFit(); if (Z < zf) Z = zf; }   // keep your zoom, unless the new layout is smaller than the window at it
     else if (mem && !keepPan) { P = [mem.x, mem.y]; Z = mem.s; }
     else if (!keepPan) { P = pmSolo(s) ? [lay.gx0 + (lay.GW - 1) / 2, lay.gy0 + (lay.GH - 1) / 2] : lay.start.slice(); Z = fitZoomFor(lay); const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; if (pmSolo(s) && !pinned) { const zm = zFit(); if (zm < 1) Z = zm; } }   // (the snap above moved P a little: re-fit from where it actually sits)
     if (keepPan) { const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
@@ -2749,7 +2755,7 @@ function pmMount(el, s, F) {
     const withinT = N => { const sp = pmEraSpan(i, F, N); return sp && { id: "w" + N, label: `Within ${N} years`, patch: f => { f.y0 = sp[0]; f.y1 = sp[1]; }, clear: f => { f.y0 = null; f.y1 = null; }, on: f => f.y0 === sp[0] && f.y1 === sp[1] }; };
     const within = PM_WITHIN.map(withinT).filter(Boolean);
     const { sh, close } = sheet(`<div class="hm-chooser pmx-chooser pmx-more">
-        <div class="hm-ch-head" data-sheet-grab><b class="pmx-more-t">Around ${esc(name)}</b><button class="iconq hm-ch-x" data-sheet-close aria-label="Close">${ICON.x}</button></div>
+        <div class="hm-ch-head" data-sheet-grab><b class="pmx-more-t" title="${esc(name)}">Around this painting</b><button class="iconq hm-ch-x" data-sheet-close aria-label="Close">${ICON.x}</button></div>
         <div class="hm-ch-scroll" data-sheet-scroll><div class="pmx-more-top"><span data-pmmoren></span><button class="pmx-reset" data-pmmoreclear>Clear these</button></div><div data-pmmorebody></div></div>
       </div>`, { lock: false });
     sh.classList.add("pmx-sheet", "pmx-moresheet", "hm-sheet-panel", "hm-sheet-arrange");
@@ -2814,9 +2820,12 @@ function pmMount(el, s, F) {
       body.innerHTML = `<p class="pmx-close-n"><b data-pmcn>${n.toLocaleString()}</b> ${esc(noun)}</p>
         ${many ? `<div class="hm-seg pmx-close-mode" role="radiogroup" aria-label="How the colors are matched"><button class="${ov ? "" : "on"}" data-pmcmode="all" role="radio" aria-checked="${!ov}">Holds every color</button><button class="${ov ? "on" : ""}" data-pmcmode="overall" role="radio" aria-checked="${ov}">Same overall palette</button></div>
         <p class="pmx-close-why">${ov ? "The closest whole palettes: how much of the canvas each color covers matters." : "Each color must appear in the painting, in any amount."}</p>` : ""}
-        <label class="pmx-close-row"><span class="pmx-lab2">How close</span><span class="pmx-close-ends"><i>Exact</i><input type="range" min="1" max="${ov ? PM_PAL_MAX : 30}" step="1" value="${Math.min(f2.tol, ov ? PM_PAL_MAX : 30)}" data-pmctol aria-label="Closeness, exact to loose"><i>Loose</i></span></label>`;
+        <p class="pmx-close-word" data-pmcword>${ov ? (f2.tol <= 4 ? "Nearly the same palette" : f2.tol <= 9 ? "A close palette" : "Related palettes") : (f2.tol <= 4 ? "Almost exactly this color" : f2.tol <= 12 ? "A close match" : "Anything related")}</p>
+        <label class="pmx-close-row"><span class="pmx-lab2">How close</span><span class="pmx-close-ends"><i>Exact</i><input type="range" min="1" max="${ov ? PM_PAL_MAX : 30}" step="1" value="${Math.min(f2.tol, ov ? PM_PAL_MAX : 30)}" data-pmctol aria-label="Closeness, exact to loose"><i>Loose</i></span></label>
+        ${!ov && (!F.col || F.col === "paintings") ? `<button class="pmx-ebtn ghost pmx-close-list" data-pmclist>See them as a list</button>` : ""}`;
       const tol = body.querySelector("[data-pmctol]");
-      tol.oninput = e => { f2.tol = +e.target.value; buzz(2); rebuild(); const nn = body.querySelector("[data-pmcn]"); if (nn && lay) nn.textContent = lay.n.toLocaleString(); };
+      const lst = body.querySelector("[data-pmclist]"); if (lst) lst.onclick = () => { buzz(5); close(); if (typeof S !== "undefined") { S.paintDoor = "list"; save(); } if (typeof paintingsOfPage === "function") paintingsOfPage(f2.hexes, { tol: Math.min(f2.tol, 12), mode: "all", push: true }); };
+      tol.oninput = e => { f2.tol = +e.target.value; const w = body.querySelector("[data-pmcword]"); if (w) w.textContent = ov ? (f2.tol <= 4 ? "Nearly the same palette" : f2.tol <= 9 ? "A close palette" : "Related palettes") : (f2.tol <= 4 ? "Almost exactly this color" : f2.tol <= 12 ? "A close match" : "Anything related"); buzz(2); rebuild(); const nn = body.querySelector("[data-pmcn]"); if (nn && lay) nn.textContent = lay.n.toLocaleString(); };
       body.querySelectorAll("[data-pmcmode]").forEach(b => b.onclick = () => {
         const m = b.dataset.pmcmode; if ((f2.colorMode === "overall" ? "overall" : "all") === m) return; buzz(5);
         f2.colorMode = m; f2.tol = m === "overall" ? PM_PAL_CLOSE : 8;
@@ -3110,6 +3119,7 @@ function pmMount(el, s, F) {
     // (drawn === count), confirming zMin() isn't capped below what the layout actually needs (David, 2026-10-10)
     _qaZMin: () => zMin(),
     _qaZ: () => Z,
+    _qaCard: () => showCard(),   // QA: open the painting card for whatever is in the middle (a real tap needs frames the headless run may not give)
     _qaHitAt: (x, y) => { const b = hitAt(x, y); return b ? { i: b.i, k: b.k, d: b.d } : null; },   // QA: what a tap at client (x, y) would hit (tile or raster zone)
     _qaZFit: () => zFit(),   // where the whole layout just fits (the old zoom-out floor); zMin() is PM_ZOOM_OUT of it
     // forces one synchronous draw (lensAt() + draw()) without waiting on requestAnimationFrame -- the smoke

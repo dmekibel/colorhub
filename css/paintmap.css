@@ -201,7 +201,7 @@ html.desk .pmx .pmx-note{left:28px;right:auto;max-width:520px}
 /* the More panel: one switch row per narrowing, the count on the right, the map visible behind (docked at the side on a desktop) */
 .pmx-more-t{font:400 19px/1.2 var(--serif);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pmx-more-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 0 8px;font:400 15px/1.2 var(--sans);color:var(--soft);font-variant-numeric:tabular-nums}
-.pmx-more-h{margin:14px 0 6px;font:400 15px/1.2 var(--sans);color:var(--soft)}
+.pmx-more-h{margin:20px 0 6px;font:400 15px/1.2 var(--sans);color:var(--soft)}
 .pmx-tg{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;padding:6px 0;border-bottom:1px solid var(--rule);text-align:left;color:var(--ink)}
 .pmx-tg-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .pmx-tg-t b{font:400 17px/1.2 var(--serif)}
@@ -248,3 +248,17 @@ html.desk .pmx .pmx-note{left:28px;right:auto;max-width:520px}
 html.desk .pmx .pmx-facets{padding-left:0}
 html.desk .pmx .pmx-frow{padding-left:28px;scroll-padding-left:28px}
 html.desk .pmx .pmx-walk{bottom:calc(var(--dk-row) + 86px + var(--cap-x,0px))}
+
+.pmx-xcl-main svg{flex:none;width:15px;height:15px;opacity:.75}
+
+/* the empty state of a color nothing holds that closely: plain words (not italic), one filled fix and one quiet way out */
+.pmx-wait-empty{font:400 19px/1.35 var(--serif);color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:18px}
+.pmx-empty-a{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.pmx-ebtn{height:48px;padding:0 22px;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);font:500 16px/1 var(--sans);transition:transform .2s var(--spring)}
+.pmx-ebtn.ghost{background:none;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(236,232,223,.35)}
+.pmx-ebtn:active{transform:scale(.96)}
+
+.pmx-xcl-main b{max-width:48vw;overflow:hidden;text-overflow:ellipsis}
+.pmx-close-word{margin:2px 0 0;font:400 15px/1.3 var(--sans);color:var(--ink)}
+.pmx-close-list{margin-top:16px}
+.pmx-fpre,.pmx-fchip{padding:0 12px}

@@ -8082,8 +8082,9 @@ scenario("paintmap", "the color's Paintings door opens the map; As a list is rem
   t.ev("S.paintDoor = undefined");
   t.ev(`paintingsDoor(["#3A7D44"], { back: true })`);
   await t.waitFor(() => /paintings\/map/.test(t.w.location.hash) && t.w.PM_CTRL && t.w.PM_CTRL.count > 0, 20000, "the door to open the map");
-  await t.waitFor(".pmx-xlist", 4000, "the As a list button");
-  await t.click(".pmx-xlist", { wait: 600 });
+  await t.click("[data-pmxclose]", { wait: 500 });
+  await t.waitFor("[data-pmclist]", 4000, "the list button in the closeness panel");
+  await t.click("[data-pmclist]", { wait: 600 });
   await t.waitFor(() => /paintings-of/.test(t.w.location.hash), 8000, "the list page");
   t.expect(t.ev("S.paintDoor") === "list", "As a list wasn't remembered");
   t.ev(`paintingsDoor(["#3A7D44"], { back: true })`);
@@ -8091,4 +8092,23 @@ scenario("paintmap", "the color's Paintings door opens the map; As a list is rem
   await t.click("[data-pmapdoor]", { wait: 600 });
   await t.waitFor(() => /paintings\/map/.test(t.w.location.hash) && t.w.PM_CTRL && t.w.PM_CTRL.count > 0, 20000, "Where it lives to open the map");
   t.expect(t.ev("S.paintDoor") === "map", "Where it lives wasn't remembered");
+});
+
+scenario("paintmap", "a map opened on a painting (on=) centers that painting, whatever the filters", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "the map");
+  const i = t.ev("(() => { const lay = PM_CTRL.lay(); for (let k = Math.floor(lay.n / 2); k < lay.n; k++) { const j = lay.items[k]; if (GAL.year[j] !== GL_UNDATED && XBF.artist[j]) return j; } return -1; })()");
+  t.expect(i >= 0, "no painting to stand on");
+  const y = t.ev(`GAL.year[${i}]`);
+  await t.open(`#/paintings/map?arr=color&on=${i}&y0=${y - 30}&y1=${y + 30}`, { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 0 && t.w.PM_CTRL.count < 150000 && t.w.PM_CTRL.drawn > 5, 20000, "the filtered map");
+  t.expect(t.w.PM_CTRL.center === i, `the map should open on the painting it was asked for: ${i} -> ${t.w.PM_CTRL.center}`);
+});
+scenario("paintmap", "a color nothing holds that closely says so and offers Loosen the closeness", async t => {
+  await t.open("#/paintings/map?arr=color&c=00ff00,ff00ff&cm=all&t=1&m=0&hit=1", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.$("[data-pmloosen2]"), 20000, "the empty state with its fix");
+  t.expect(/hold/.test(t.text(".pmx-wait")), `the empty state doesn't say what happened: "${t.text(".pmx-wait")}"`);
+  t.expect(t.w.PM_CTRL.count === 0, "expected an empty map");
+  for (let n = 0; n < 6 && t.$("[data-pmloosen2]"); n++) await t.click("[data-pmloosen2]", { wait: 700 });
+  t.expect(t.w.PM_CTRL.count > 0, "loosening the closeness never brought paintings back");
 });
