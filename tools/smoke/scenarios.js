@@ -4829,6 +4829,38 @@ scenario("paintings", "desktop 1440x900: Keep exploring shows tiles on a paintin
   const c = await probe("#/color/teal", "[data-rpfeed]");
   t.expect(c.tiles >= 4 && c.w > 400, "no feed tiles on the desktop color page: " + JSON.stringify(c));
 });
+// David, 2026-10-25 (desktop): "scrolling in the painting page Explore gets stuck and refuses to scroll... it doesn't scroll when your mouse is on
+// a painting." A plain wheel over a tile / the hero / the bar must never be preventDefault'ed (only ctrl+wheel, the pinch, may be), nothing may
+// sit over the tiles, and the feed must keep growing as the page is scrolled to its end (more tiles laid out, or stand-ins, before the bar stops).
+scenario("paintings", "desktop 1440x900: the wheel scrolls over a tile and the picture; the feed keeps growing at the bottom", async t => {
+  await t.open("#/gallery/12", { settle: 900, size: [1440, 900] });
+  await t.waitFor("[data-glfeed] .fd-bar:not(.fd-pre) .fd-chip[data-fc=color]", 25000, "the real chip row");
+  await t.click(".fd-chip[data-fc=color]", { wait: 600 });
+  await t.waitFor(() => t.$("[data-glfeed] .fd-tile[data-fk]") ? true : null, 15000, "feed tiles");
+  const wheel = (el, init) => { const r = el.getBoundingClientRect(), ev = new t.w.WheelEvent("wheel", Object.assign({ bubbles: true, cancelable: true, clientX: r.left + r.width / 2, clientY: Math.max(5, Math.min(t.w.innerHeight - 5, r.top + r.height / 2)), view: t.w }, init)); el.dispatchEvent(ev); return ev.defaultPrevented; };
+  const tile = t.$("[data-glfeed] .fd-tile[data-fk]"), hero = t.$(".gl-hero img") || t.$(".gl-hero"), bar = t.$("[data-glfeed] .fd-bar");
+  for (const [label, el] of [["a tile", tile], ["the hero picture", hero], ["the sticky bar", bar]]) {
+    if (!el) continue;
+    for (const init of [{ deltaY: 100 }, { deltaY: 4.5, deltaX: 0.5 }, { deltaY: 3, deltaMode: 1 }])
+      t.expect(!wheel(el, init), `a plain wheel over ${label} was preventDefault'ed (${JSON.stringify(init)}): the page would not scroll`);
+  }
+  // a pinch burst (ctrl+wheel) must not leave the grid in a state that swallows the wheel that follows it
+  wheel(tile, { ctrlKey: true, deltaY: -3 }); wheel(tile, { ctrlKey: true, deltaY: -2 }); await t.sleep(600);
+  t.expect(!wheel(tile, { deltaY: 100 }), "a plain wheel after a pinch burst was preventDefault'ed");
+  t.expect(!t.$(".tlg-back"), "a pull-down backdrop layer (.tlg-back) is left mounted over the page");
+  t.w.scrollTo(0, 1500); await t.sleep(300);
+  const hit = t.ev(`(() => { const e = document.querySelector('[data-glfeed] .fd-tile[data-fk]'); if (!e) return 'none'; const r = e.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2; if (y < 0 || y > innerHeight) return 'offscreen'; const h = document.elementFromPoint(x, y); return h && e.contains(h) ? 'ok' : 'covered by ' + (h && h.tagName + '.' + h.className); })()`);
+  t.expect(hit === "ok" || hit === "offscreen", "a feed tile is covered at its center: " + hit);
+  // scroll to the very end again and again (each time a real scroll event, as a wheel at the end would give): the laid-out height (tiles, or
+  // stand-ins) must grow within a second, never stop at a wall; a scrollbar that ends is the page that "refuses to scroll"
+  const dh = () => t.ev("document.documentElement.scrollHeight"); let grew = 0, last = await dh(); const seq = [];
+  for (let n = 0; n < 6; n++) {
+    t.w.scrollTo(0, last); t.w.dispatchEvent(new t.w.Event("scroll"));
+    for (let k = 0; k < 12; k++) { await t.sleep(100); if ((await dh()) > last + 200) break; }
+    const now = await dh(); if (now > last + 200) grew++; seq.push(last + ">" + now); last = Math.min(now, 3e6);
+  }
+  t.expect(grew >= 5, `the feed stopped growing at the bottom: it grew on ${grew} of 6 tries to the end (${seq.join(" ")})`);
+});
 // A scripted two-finger pinch on a grid inside the page: fires real touch events and samples the grid's transform each frame
 // (the harness clock is virtual, so the fingers are moved from here, one step at a time, never by a timer inside the page)
 const PINCH_JS = `window.__pf = (sel, type, d) => { const g = document.querySelector(sel), cx = innerWidth / 2, cy = Math.min(innerHeight / 2, 380), tgt = document.elementFromPoint(cx, cy) || g;

@@ -100,7 +100,18 @@ function gzAttach(host, o) {
     if (!reduceMotion && !st.raf) st.raf = requestAnimationFrame(write);
     clearTimeout(st.idle); st.idle = setTimeout(() => { st.wheel = false; end(); }, GZ_IDLE_MS);
   };
-  host.addEventListener("wheel", onWheel, { passive: false });
+  // A wheel listener that can preventDefault makes the browser hand EVERY wheel over the grid to the main thread first (Safari: the whole
+  // grid becomes a non-fast-scrollable region), so while pictures decode or a page of tiles is laid out, the mouse wheel / trackpad scroll
+  // over a painting stalls and "refuses to scroll" while it works over the gutter (David, 2026-10-25, desktop). Chromium needs the
+  // listener for a trackpad pinch (a ctrl+wheel with no key down) and blocks only the first event of a sequence; Safari pinches with
+  // gesture events (no wheel), so there the listener exists only while Control / Command is actually held (a mouse ctrl+wheel).
+  const SAFARI = /^((?!chrome|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent);
+  let armed = false;
+  const arm = on => { if (on === armed) return; armed = on; if (on) host.addEventListener("wheel", onWheel, { passive: false }); else host.removeEventListener("wheel", onWheel); };
+  const onKey = e => { if (e.key === "Control" || e.key === "Meta") arm(e.type === "keydown"); };
+  const onBlur = () => arm(false);
+  if (!SAFARI) arm(true);
+  else { addEventListener("keydown", onKey); addEventListener("keyup", onKey); addEventListener("blur", onBlur); }
 
   // ----- keys: + / = bigger tiles (fewer across), - / _ smaller -----
   function step(delta, fx, fy) {   // delta -1 = one column fewer (bigger tiles), +1 = one more
@@ -113,7 +124,7 @@ function gzAttach(host, o) {
     settle(c, 1);   // the picture starts as the OLD layout (scale 1/sF in the new one) and eases to the new
     return true;
   }
-  const api = { destroy() { clearStyle(); cancelAnimationFrame(st.raf); clearTimeout(st.idle); GZ_SET.delete(api); host.removeEventListener("touchstart", onTS); host.removeEventListener("touchmove", onTM); host.removeEventListener("touchend", onTE); host.removeEventListener("touchcancel", onTE); host.removeEventListener("wheel", onWheel); }, step, host, get busy() { return st.on; } };
+  const api = { destroy() { clearStyle(); cancelAnimationFrame(st.raf); clearTimeout(st.idle); GZ_SET.delete(api); host.removeEventListener("touchstart", onTS); host.removeEventListener("touchmove", onTM); host.removeEventListener("touchend", onTE); host.removeEventListener("touchcancel", onTE); arm(false); removeEventListener("keydown", onKey); removeEventListener("keyup", onKey); removeEventListener("blur", onBlur); }, step, host, get busy() { return st.on; } };
   GZ_SET.add(api);
   return api;
 }
