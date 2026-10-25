@@ -89,3 +89,9 @@
 .tl-foot{margin-top:4px}
 .tl-list li+li .tl-foot{border-top:1px solid var(--rule);border-radius:0;padding-top:12px}
 .tl-list li:has(.tl-foot)+li .tl-foot{border-top:0;padding-top:8px}
+
+/* the page a painting was opened from, held under it while the painting is pulled down (js/trail.js tlgPrevLayer): behind #app (z-index:1),
+   scrolled to where it was left, dimmed a little until the painting leaves */
+.tlg-back{position:fixed;inset:0;overflow:hidden;background:var(--ground);pointer-events:none}
+.tlg-back>.screen{animation:none}
+.tlg-dim{position:fixed;inset:0;z-index:99999;background:#000;opacity:.14;pointer-events:none}

@@ -261,14 +261,60 @@ function tlgDest(el, axis) {
   const onTrail = !!el.dataset.tl, reachesOrigin = !onTrail || XSTACK.length <= 1, toMap = reachesOrigin && !xFallbackTab();
   return { toMap, go: () => { if (onTrail) xBack(); else tlToOrigin(); } };
 }
+// The screen a painting page replaced, kept alive (detached) so a pull-down shows the real page underneath, exactly as left (David, 2026-10-25:
+// "behind it should not be a black screen but the actual page that was before"). core.js show() calls tlgStash for every screen; only ONE is
+// ever held, and it is let go as soon as the next non-painting screen is drawn. A swipe to the next painting replaces the page but not what is
+// underneath (TLG_KEEP_PREV), so the backdrop stays the list you came from.
+let TLG_PREV = null, TLG_KEEP_PREV = false, TLG_HOLD = null;
+// the map's last frame, taken as it is left (its canvas is torn down by the screen swap); null for any other screen
+function tlgLeavingMap() { const o = typeof app !== "undefined" && app.firstElementChild; return o && o.classList.contains("hm") ? tlgSnapshot() : null; }
+function tlgStash(old, top, hash, el, mapImg) {
+  if (TLG_KEEP_PREV) return;
+  if (!el || !el.classList.contains("gl-page")) { TLG_PREV = null; return; }
+  if (old && old.classList.contains("hm")) { TLG_PREV = { map: true, img: mapImg || null }; return; }   // the color map: its last drawn frame is the backdrop (tlgBackdrop)
+  if (!old || old === el || (old.classList.contains("fixed") && !old.classList.contains("pmx"))) { TLG_PREV = null; return; }   // (the painting map is fixed too, but its canvas keeps its last frame)
+  if (old.classList.contains("gl-page") && hash === ROUTE_NOW) return;   // the same painting redrawn: what was under it is still under it
+  TLG_PREV = { el: old, y: top || 0 };
+}
+// mounts the held screen as a fixed layer behind #app (z-index:1), scrolled to where it was left, dimmed a little until the page leaves
+// what sits under a dragged page: for a painting page the map's frame, or the screen it replaced (the layer); else the old floor
+function tlgBackdrop(el, dest) {
+  const p = el.classList.contains("gl-page") ? TLG_PREV : null;
+  if (p && p.map) return tlgFloor(true, p.img);
+  if (p && p.el && (!dest.toMap || !tlgSnapshot())) { const l = tlgPrevLayer(); if (l) return l; }
+  return tlgFloor(dest.toMap);
+}
+function tlgPrevLayer() {
+  const p = TLG_PREV; if (!p || !p.el) return null;
+  const d = document.createElement("div"), dim = document.createElement("i");
+  d.className = "tlg-back"; dim.className = "tlg-dim";
+  p.el.style.animation = "none";
+  d.appendChild(p.el); d.appendChild(dim); d._dim = dim;
+  document.body.insertBefore(d, document.getElementById("app"));
+  d.scrollTop = p.y;
+  return d;
+}
+function tlgDropLayer(layer, soft) {
+  if (TLG_HOLD === layer) TLG_HOLD = null;
+  if (!layer || !layer.isConnected) return;
+  if (!soft || reduceMotion) return layer.remove();
+  try { layer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 140, easing: "ease-out" }).onfinish = () => layer.remove(); } catch (e) { layer.remove(); }
+  setTimeout(() => layer.remove(), 400);
+}
+// after a commit the real page is drawn under the layer (its scroll comes back a frame or two later): let the layer go once it has
+function tlgLetGo(layer, el) {
+  let n = 0;
+  const tick = () => { if (++n < 4 || (el.isConnected && n < 60)) return requestAnimationFrame(tick); tlgDropLayer(layer, true); };
+  requestAnimationFrame(tick);
+}
 function tlgCommit(dest) {
   TLG_SKIP = true;
   try { dest.go(); } finally { TLG_SKIP = false; }
 }
-function tlgFloor(toMap) {
+function tlgFloor(toMap, snap) {
   const d = document.createElement("div");
   d.className = "tlg-floor";
-  const img = toMap && tlgSnapshot();
+  const img = snap || (toMap && tlgSnapshot());
   if (img) { d.style.backgroundImage = `url(${img})`; d.classList.add("tlg-floor-img"); }
   document.body.appendChild(d);
   return d;
@@ -280,10 +326,19 @@ function tlgWire(el) {
   const onScroll = () => { lastScroll = performance.now(); if (!el.isConnected) removeEventListener("scroll", onScroll); };
   addEventListener("scroll", onScroll, { passive: true, capture: true });
   let a = null;   // the live gesture: { id, axis, x0, y0, dest, floor, anim }
+  const isLayer = f => !!(f && f.classList.contains("tlg-back"));
+  const dropFloor = f => { if (isLayer(f)) tlgDropLayer(f); else f.remove(); };
+  // the floor under a dragged page: for a painting page the real screen it was opened from (kept by tlgStash), unless that is the map (its
+  // last frame is the better, cheaper picture) or nothing was kept; otherwise the map's frame / a calm ground
+  const prep = () => {
+    if (a.floor) return;
+    a.dest = tlgDest(el, a.axis || "y");
+    a.floor = tlgBackdrop(el, a.dest);
+  };
   const clean = () => {
-    if (a && a.floor) a.floor.remove();
+    if (a && a.floor) dropFloor(a.floor);
     if (a && a.anim) { try { a.anim.cancel(); } catch (e) {} if (TLG_ANIM === a.anim) TLG_ANIM = null; }
-    el.style.transition = ""; el.style.transform = ""; el.style.willChange = ""; el.style.borderRadius = ""; el.style.overflow = ""; el.style.transformOrigin = "";
+    el.style.transition = ""; el.style.transform = ""; el.style.willChange = ""; el.style.borderRadius = ""; el.style.background = ""; el.style.overflow = ""; el.style.transformOrigin = "";
     a = null;
   };
   el.addEventListener("pointerdown", e => {
@@ -296,11 +351,13 @@ function tlgWire(el) {
     if (!a || e.pointerId !== a.id) return;
     const dx = e.clientX - a.x0, dy = e.clientY - a.y0;
     if (!a.axis) {
+      // the backdrop is mounted a few pixels before the lock, so the very first frame of the drag already has the page underneath
+      if (a.vertOK && !a.floor && dy > 3 && dy > Math.abs(dx) && el.classList.contains("gl-page")) prep();
       if (a.horizOK && dx > TLG_SLOP && dx > Math.abs(dy) * 1.6) a.axis = "x";
       else if (a.vertOK && dy > TLG_SLOP && dy > Math.abs(dx) * 1.6 && pageScrollTop() <= 0) a.axis = "y";
-      else { if (Math.abs(dx) > 10 || Math.abs(dy) > 10) a = null; return; }
+      else { if (Math.abs(dx) > 10 || Math.abs(dy) > 10) clean(); return; }
       a.dest = tlgDest(el, a.axis);
-      a.floor = tlgFloor(a.dest.toMap);
+      if (!a.floor) a.floor = a.axis === "y" ? tlgBackdrop(el, a.dest) : tlgFloor(a.dest.toMap);
       el.style.willChange = "transform";
       try { el.setPointerCapture(a.id); } catch (er) {}
     }
@@ -310,8 +367,9 @@ function tlgWire(el) {
     el.style.transition = "none";
     if (a.axis === "y" && el.classList.contains("gl-page")) {   // the whole page follows the finger and shrinks a little, its corners rounding
       const f = Math.min(1, d / 320);
-      el.style.transformOrigin = "50% 0"; el.style.borderRadius = Math.round(28 * Math.min(1, d / 90)) + "px"; el.style.overflow = "hidden";
+      el.style.transformOrigin = "50% 0"; el.style.borderRadius = Math.round(28 * Math.min(1, d / 90)) + "px"; el.style.overflow = "hidden"; el.style.background = "var(--ground)";
       el.style.transform = `translateY(${Math.max(0, d * .9)}px) scale(${(1 - .06 * f).toFixed(4)})`;
+      if (a.floor && a.floor._dim) a.floor._dim.style.opacity = (.14 * (1 - Math.min(1, d / 260))).toFixed(3);   // the page underneath brightens as this one leaves
     } else
     el.style.transform = a.axis === "x" ? `translateX(${resisted}px)` : `translateY(${resisted}px)`;
     const v = ((a.axis === "x" ? e.clientX - a.lastX : e.clientY - a.lastY)) / dt;
@@ -320,7 +378,7 @@ function tlgWire(el) {
   }, { passive: false });
   const release = e => {
     if (!a || e.pointerId !== a.id) return;
-    if (!a.axis) { a = null; return; }
+    if (!a.axis) { if (a.floor) dropFloor(a.floor); a = null; return; }
     const gl = a.axis === "y" && el.classList.contains("gl-page"), v = a.axis === "x" ? a.vx : a.vy, past = (a.d || 0) > (gl ? 120 : TLG_PULL) || v > TLG_FLING, dest = a.dest, floor = a.floor;
     const final = a.axis === "x" ? `translateX(${innerWidth + 60}px)` : gl ? `translateY(${innerHeight * .8}px) scale(.9)` : `translateY(${innerHeight * .7 + 60}px)`;
     if (past) {
@@ -334,11 +392,15 @@ function tlgWire(el) {
       // the document, that already happened. Committing anyway would both double the back (xBack()/tlToOrigin()
       // again, on top of the one that already ran) and, since show() cleans up .tlg-floor/TLG_ANIM on every
       // render now, there is nothing left here worth finishing against.
-      a.anim.onfinish = () => { TLG_ANIM = null; floor.remove(); if (el.isConnected) tlgCommit(dest); };
+      a.anim.onfinish = () => {
+        TLG_ANIM = null;
+        if (isLayer(floor)) { if (el.isConnected) { TLG_HOLD = floor; tlgCommit(dest); tlgLetGo(floor, el); } else tlgDropLayer(floor); return; }
+        floor.remove(); if (el.isConnected) tlgCommit(dest);
+      };
     } else {
       el.style.transition = `transform ${TLG_SPRING}ms var(--spring)`;
       el.style.transform = "translate(0,0)";
-      setTimeout(() => { if (floor) floor.remove(); el.style.transition = ""; el.style.transform = ""; el.style.willChange = ""; el.style.borderRadius = ""; el.style.overflow = ""; el.style.transformOrigin = ""; }, TLG_SPRING + 20);
+      setTimeout(() => { if (floor) dropFloor(floor); el.style.transition = ""; el.style.transform = ""; el.style.willChange = ""; el.style.borderRadius = ""; el.style.background = ""; el.style.overflow = ""; el.style.transformOrigin = ""; }, TLG_SPRING + 20);
     }
     a = null;
   };

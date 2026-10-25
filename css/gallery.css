@@ -683,11 +683,7 @@ html:not(.pal-area) .mini-pal>i,html:not(.pal-area) .xb-t-pal>i{flex:1 1 0 !impo
 @media (prefers-reduced-motion:reduce){.fd-more i{animation:none;opacity:.4}}
 
 /* swipe the painting page (js/gallery.js glSwipeWire): the neighbor painting rides in beside the page */
-.gl-ghost{position:fixed;left:0;top:0;width:100%;height:100dvh;z-index:2;background:var(--ground);pointer-events:none;will-change:transform;padding:calc(var(--top) + 70px) var(--g) 0;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;overflow:hidden;box-shadow:0 0 40px rgba(0,0,0,.45)}
-.gl-ghost-pic{display:flex;justify-content:center;width:100%}
-.gl-ghost-pic img{max-width:100%;max-height:min(62dvh,100%);width:auto;height:auto;object-fit:contain;background:var(--s2,var(--surface-2))}
-.gl-ghost-t{font:400 28px/1.1 var(--serif);color:var(--ink);align-self:flex-start;margin:18px 0 4px}
-.gl-ghost-a{font:400 17px/1.3 var(--sans);color:var(--soft);align-self:flex-start;margin:0}
+.gl-ghost{position:fixed;left:0;top:0;width:100%;height:100dvh;z-index:2;background:var(--ground);pointer-events:none;will-change:transform;padding:calc(var(--top) + 52px) var(--g) 0;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;overflow:hidden;box-shadow:0 0 40px rgba(0,0,0,.45)}
 html.desk .gl-ghost{display:none}
 
 /* the quick row under the chips: the ways to match Color (js/feed.js quickOpen). An opaque overlay hung from the pinned chip row: it never moves the pictures. */
@@ -701,3 +697,13 @@ html.desk .gl-ghost{display:none}
 .fd-ml:empty::after{content:"\25BE";font-size:15px}
 @media (prefers-reduced-motion:reduce){.fd-bar .fd-quick,.fd-bar .fd-quick.on{transition:none}}
 html.desk .fd-bar .fd-quick{padding-left:var(--dk-L,var(--g));padding-right:var(--dkg,var(--g))}
+
+/* the neighbor: its palette as a soft color field at the right shape from the first pixel, its small picture blurred over it, then the sharp one */
+.gl-ghost-pic{position:relative;overflow:hidden;max-width:100%;background:var(--s2,var(--surface-2));border-radius:2px;flex:none}
+.gl-ghost-ph{position:absolute;inset:-12%;filter:blur(22px)}
+.gl-ghost-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .22s ease-out}
+.gl-ghost-pic img.gl-ghost-lo{filter:blur(12px);transform:scale(1.06)}
+.gl-ghost-pic img.on{opacity:1}
+.gl-ghost-band{display:flex;justify-content:center;width:calc(100% + 2 * var(--g));margin:0 calc(-1 * var(--g));background:var(--c);flex:none}
+.gl-ghost-t{font:400 clamp(30px,8.8vw,40px)/1.04 var(--serif);color:var(--ink);align-self:flex-start;margin:22px 0 8px;min-height:1.04em}
+.gl-ghost-a{font:400 17px/1.3 var(--sans);color:var(--soft);align-self:flex-start;margin:0}
