@@ -4903,6 +4903,44 @@ scenario("paintings", "painting page: tapping another chip pins the chip row at 
   await t.click(".fd-chip.on", { wait: 700 });
   t.expect(!t.$(".sheet.fs-half"), "tapping the active chip again didn't close Settings");
 });
+scenario("paintings", "chip row: Overview keeps the scroll and Color opens a quick row then Settings and the top bar swaps smoothly", async t => {
+  await t.open("#/gallery/12", { settle: 800, size: [375, 812] });
+  await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre) .fd-chip[data-fc=color]") ? true : null, 25000, "the real chip row");
+  // Color: first tap = quick row, second tap = Settings (and the row leaves)
+  await t.click(".fd-chip[data-fc=color]", { wait: 1200 });
+  await t.waitFor(".fd-quick.on", 4000, "the quick row after the first Color tap");
+  t.ev(`document.querySelector(".fd-quick").style.width="200px"`); t.ev(`document.querySelector(".fd-quick").style.right="auto"`);
+  // a sideways drag inside the row scrolls it and keeps it open
+  t.ev(`(() => { const q = document.querySelector(".fd-quick"); q.scrollLeft = 0; q.scrollLeft = 60; q.dispatchEvent(new Event("scroll")); window.__ql = q.scrollLeft; })()`);
+  await t.sleep(500);
+  t.expect(t.ev(`window.__ql`) > 0 && t.$(".fd-quick.on"), "the quick row did not scroll sideways, or closed while it did");
+  t.ev(`(() => { const q = document.querySelector(".fd-quick"); q.style.width=""; q.style.right=""; })()`);
+  t.expect(t.ev(`getComputedStyle(document.querySelector(".fd-quick")).touchAction`) === "pan-x" && t.ev(`getComputedStyle(document.querySelector(".fd-quick")).overflowX`) === "auto", "the quick row is not a horizontal scroller");
+  await t.click(".fd-chip[data-fc=color]", { wait: 900 });
+  await t.waitFor(".fs-sheet", 5000, "Settings after the second Color tap");
+  t.expect(!t.$(".fd-quick.on"), "the quick row stayed open next to Settings");
+  await t.click(".fd-chip[data-fc=color]", { wait: 700 });   // Settings closes
+  t.ev("document.querySelectorAll('.scrim').forEach(s => s.click())"); await t.sleep(400);
+  // Overview keeps the scroll offset
+  t.ev("scrollTo(0, 1500)"); await t.sleep(500);
+  const y0 = t.ev("scrollY");
+  await t.click(".fd-chip[data-fc=about]", { wait: 900 });
+  const y1 = t.ev("scrollY"), mx = t.ev("document.documentElement.scrollHeight - innerHeight");
+  t.expect(Math.abs(y1 - Math.min(y0, mx)) < 3 || y1 <= mx, `Overview moved the page (${y0} -> ${y1})`);
+  t.expect(y1 > 400, `Overview threw the page to the top (${y1})`);
+  // the top bar swap is one continuous move: --fd-p rises with the scroll, no step bigger than 0.5 per 20px
+  await t.sleep(800); t.ev("scrollTo(0, 0)"); await t.sleep(300);
+  const pin = t.ev(`fdPinYOf(document.querySelector("[data-glfeed] .fd-bar"))`);
+  // every 20px the bar's swap value must equal (scroll - pin) / 60 clamped: a smooth ramp, no step
+  const bad = [];
+  for (let y = Math.max(0, pin - 100); y <= pin + 160; y += 20) {
+    t.ev(`scrollTo(0, ${y})`);
+    const want = Math.max(0, Math.min(1, (y - pin) / 60));
+    const ok = await t.waitFor(() => Math.abs((parseFloat(t.ev(`document.documentElement.style.getPropertyValue("--fd-p") || "0"`)) || 0) - want) < 0.03 && Math.abs(t.ev("scrollY") - y) < 2 ? true : null, 3000, "the swap value at " + y).catch(() => null);
+    if (!ok) bad.push(y + ":" + want.toFixed(2) + "/" + t.ev(`document.documentElement.style.getPropertyValue("--fd-p")`));
+  }
+  t.expect(!bad.length, `the top bar swap does not follow the scroll: ${bad.join(" ")}`);
+});
 scenario("pages", "color page: the cover is a compact band with Map in its corner then in the top bar and the Paintings list never ends", async t => {
   await t.open("#/color/teal", { settle: 900, size: [375, 812] });
   await t.waitFor("[data-rpfeed] .fd-chips", 15000, "the chip row");

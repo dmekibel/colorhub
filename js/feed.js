@@ -283,12 +283,23 @@ function fdTopBar(scr, name) {
   hd.insertAdjacentHTML("beforeend", fdMapBtnHTML("in-top"));
 }
 // bar.fd-stuck (and .screen.fd-stuck): the chip row has reached its pinned place (so the hero is gone and the in-bar Map shows)
+// where the chip row would sit in the flow (a zero-size absolutely placed sentinel takes the row's own static position, so it is right on a painter
+// page too, where the row's parent is the whole screen): the scroll at which the row is pinned
+function fdPinYOf(bar) {
+  let s = bar.previousElementSibling;
+  if (!s || !s.classList.contains("fd-sent")) { s = document.createElement("i"); s.className = "fd-sent"; s.setAttribute("aria-hidden", "true"); s.style.cssText = "position:absolute;width:0;height:0;overflow:hidden;visibility:hidden;pointer-events:none"; bar.parentElement && bar.parentElement.insertBefore(s, bar); }
+  return s.isConnected ? s.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(bar).top) || 0) : 0;
+}
+// --fd-p (0..1) on <html>: how far the top bar has swapped from "back" to the painting's name, tied to the scroll over the first 60px past the pin
+// (one continuous move; the hide-on-scroll only starts well after it is done)
+const FD_SWAP_PX = 60;
 function fdStickWire(bar) {
-  let raf = 0;
-  const run = () => { raf = 0; if (!bar.isConnected) return; const t = parseFloat(getComputedStyle(bar).top) || 0, on = scrollY > 4 && bar.getBoundingClientRect().top <= t + 1.5; if (bar.classList.contains("fd-stuck") !== on) { bar.classList.toggle("fd-stuck", on); const sc = bar.closest(".screen"); if (sc) sc.classList.toggle("fd-stuck", on); } };
-  const h = () => { if (!raf) raf = requestAnimationFrame(run); };
+  let raf = 0, lastP = -1;
+  const swap = () => { if (!bar.isConnected) return; const pv = Math.max(0, Math.min(1, (scrollY - fdPinYOf(bar)) / FD_SWAP_PX)), pr = Math.round(pv * 100) / 100; if (pr !== lastP) { lastP = pr; document.documentElement.style.setProperty("--fd-p", String(pr)); } };   // right in the scroll event: the swap follows the finger frame for frame
+  const run = () => { raf = 0; if (!bar.isConnected) return; swap(); const t = parseFloat(getComputedStyle(bar).top) || 0, on = scrollY > 4 && bar.getBoundingClientRect().top <= t + 1.5; if (bar.classList.contains("fd-stuck") !== on) { bar.classList.toggle("fd-stuck", on); const sc = bar.closest(".screen"); if (sc) sc.classList.toggle("fd-stuck", on); } };
+  const h = () => { swap(); if (!raf) raf = requestAnimationFrame(run); };
   addEventListener("scroll", h, { passive: true }); addEventListener("resize", h);
-  cleanup.push(() => { removeEventListener("scroll", h); removeEventListener("resize", h); });
+  cleanup.push(() => { removeEventListener("scroll", h); removeEventListener("resize", h); document.documentElement.style.removeProperty("--fd-p"); });
   setTimeout(run, 60);
   fdHideWire(bar);
 }
@@ -321,10 +332,7 @@ function fdHideWire(bar0) {
     }
     hid = on; root.classList.toggle("fd-hid", on);
   };
-  // where the chip row would sit in the flow (a zero-size absolutely placed sentinel takes the row's own static position, so it is right on a painter
-  // page too, where the row's parent is the whole screen); the bar hides only once the row is really pinned there
-  const sentinel = () => { let s = bar.previousElementSibling; if (!s || !s.classList.contains("fd-sent")) { s = document.createElement("i"); s.className = "fd-sent"; s.setAttribute("aria-hidden", "true"); s.style.cssText = "position:absolute;width:0;height:0;overflow:hidden;visibility:hidden;pointer-events:none"; bar.parentElement && bar.parentElement.insertBefore(s, bar); } return s; };
-  const pinY = () => { const s = sentinel(); return s.isConnected ? s.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(bar).top) || 0) : 0; };
+  const pinY = () => fdPinYOf(bar);
   const run = () => {
     raf = 0; if (!bar.isConnected) bar = document.querySelector(".fd-bar:not(.fd-pre)"); if (!bar) return;
     if (root.classList.contains("desk")) { set(false); return; }
@@ -333,8 +341,8 @@ function fdHideWire(bar0) {
     if (dy > 0) { down += dy; up = 0; } else if (dy < 0) { up -= dy; down = 0; }
     const py = pinY(), about = !!bar.querySelector(".fd-chip.on[data-fc='about'],.fd-chip.on[data-awtab='about'],.fd-chip.on[data-awtab='overview']");
     const long = root.scrollHeight > innerHeight * 1.4, sheetOpen = !!document.querySelector(".sheet");
-    if (sheetOpen || !long || y <= py + 24 || (about && y < py + 240)) { set(false); return; }
-    if (!hid && down > 12) set(true); else if (hid && up >= 8) set(false);
+    if (sheetOpen || !long || y <= py + FD_SWAP_PX || (about && y < py + 240)) { set(false); return; }
+    if (!hid && down > 140) set(true); else if (hid && up >= 8) set(false);
   };
   FD_HIDE_SHOW = () => { down = up = 0; set(false); };
   const h = run;   // scroll events already arrive once per frame; no extra rAF hop
@@ -343,6 +351,17 @@ function fdHideWire(bar0) {
   const off = FD_HIDE_OFF; cleanup.push(off);
 }
 
+// A chip tap never throws the reader around (David, 2026-10-25): a tab that is not Overview brings the chip row up to its pinned place only from a state where the
+// row is still in flow (hero showing); from a row already pinned the scroll stays. `pin` is the screen's pinY().
+function fdPinOrKeep(pin, smooth) {
+  const py = pin(); if (scrollY >= py - 4) return false;
+  scrollTo({ top: py, behavior: smooth && !reduceMotion ? "smooth" : "auto" }); return true;
+}
+// Overview in place: the same scroll offset, clamped only when the Overview is shorter than that offset, and then to the pinned row (never to the bottom or the top)
+function fdKeepScroll(y, pin) {
+  const go = () => { const mx = Math.max(0, document.documentElement.scrollHeight - innerHeight); const t = y <= mx ? y : Math.min(mx, pin()); if (Math.abs(scrollY - t) > 1) scrollTo(0, t); };
+  go(); requestAnimationFrame(go); setTimeout(go, 120);
+}
 // ---------- the feed ----------
 function fdMount(host, o) {
   if (!host || !GAL) return;
@@ -366,7 +385,7 @@ function fdMount(host, o) {
   const abOf = it => it.sk || it.card || it.head ? it.ab : Math.min(2.3, Math.max(.4, G.ar[it.j]));
   const aboutEl = o.about || null; if (aboutEl) aboutEl.remove();   // the article tab survives the feed being drawn around it
   host.innerHTML = `<div class="sec-head"><b>Keep exploring</b><span>closest first</span></div>
-    <div class="fd-bar"><div class="fd-chips" role="tablist" aria-label="What counts as related"></div><div class="fd-quick" role="radiogroup" aria-label="Match color by" aria-hidden="true"></div></div>
+    <div class="fd-bar"><div class="fd-chips" role="tablist" aria-label="What counts as related"></div><div class="fd-quick" role="radiogroup" aria-label="Match color by" aria-hidden="true"></div><i class="fd-qfade" aria-hidden="true"></i></div>
     <p class="fd-lead" aria-live="polite"></p>
     <div class="fd-grid" role="group" aria-label="${isColor ? "Paintings and more that hold this color" : "Related paintings, closest first"}"></div>
     <div class="fd-state"></div>`;
@@ -387,9 +406,9 @@ function fdMount(host, o) {
   const tabTop = force => { fdShowBar(); const y = pinY(); if (force || scrollY > y + 4) scrollTo(0, y); };
   const pinTabs = () => {
     fdShowBar();
-    scrollTo({ top: pinY(), behavior: reduceMotion ? "auto" : "smooth" });
+    if (!fdPinOrKeep(pinY, true)) return;   // the row is already pinned: the scroll stays where it is
     let moved = false; const q = () => { moved = true; }; addEventListener("touchstart", q, { once: true, passive: true }); addEventListener("wheel", q, { once: true, passive: true });
-    setTimeout(() => { removeEventListener("touchstart", q); removeEventListener("wheel", q); if (!gone && !moved && Math.abs(scrollY - pinY()) > 3) scrollTo(0, pinY()); }, 560);
+    setTimeout(() => { removeEventListener("touchstart", q); removeEventListener("wheel", q); if (!gone && !moved && scrollY < pinY() - 3) scrollTo(0, pinY()); }, 560);
   };
   // a door from the page (js/richcolor.js): open a feed tab, on a chosen decade (Era: 188 = the 1880s) or country (Place: its 1-based index)
   host.fdOpen = (k, pick) => {
@@ -426,33 +445,44 @@ function fdMount(host, o) {
   // slides away. It is an overlay (it never moves the pictures), and it also goes away on a scroll or touch, a tap elsewhere, a tab change and Escape.
   const quick = bar.querySelector(".fd-quick"); let quickOn = false, quickAt = 0;
   const FD_QLAB = { overall: "Overall palette", dominant: "Big colors", accents: "Accents", mood: "Mood", light: "Light", color: "One color", layout: "Layout" };
-  const quickClose = () => { if (!quickOn) return; quickOn = false; quick.classList.remove("on"); quick.setAttribute("aria-hidden", "true"); quick.querySelectorAll("button").forEach(x => x.tabIndex = -1); };
+  const fade = bar.querySelector(".fd-qfade");
+  const quickFade = () => fade.classList.toggle("more", quick.scrollLeft + quick.clientWidth < quick.scrollWidth - 4);   // a soft edge at the right while more choices wait that way
+  quick.addEventListener("scroll", quickFade, { passive: true });
+  const quickClose = () => { if (!quickOn) return; quickOn = false; quick.classList.remove("on"); fade.classList.remove("on"); quick.setAttribute("aria-hidden", "true"); quick.querySelectorAll("button").forEach(x => x.tabIndex = -1); };
   const quickOpen = () => {
     if (isColor || eff !== "color") return;
     const q = ctx.q(), canLayout = !!(o.img && o.img() && twReadable(o.img()));
     quick.innerHTML = TW_METRICS.filter(([k]) => k !== "layout" || canLayout).map(([k]) => { const nope = k === "accents" && !q.accents.length;
       return `<button class="fd-qo${k === st.metric ? " on" : ""}" data-qm="${k}" role="radio" aria-checked="${k === st.metric}"${nope ? " disabled" : ""}>${FD_QLAB[k]}</button>`; }).join("");
     quickOn = true; quickAt = Date.now(); quick.setAttribute("aria-hidden", "false");
-    requestAnimationFrame(() => quick.classList.add("on"));
-    const on = quick.querySelector(".on"); if (on) quick.scrollLeft = Math.max(0, on.offsetLeft - 40);
+    requestAnimationFrame(() => { quick.classList.add("on"); fade.classList.add("on"); const on = quick.querySelector(".on"); if (on) quick.scrollLeft = Math.max(0, on.offsetLeft - 40); fade.style.setProperty("--fq-h", quick.offsetHeight + "px"); quickFade(); });
   };
   quick.addEventListener("click", e => {
     const b = e.target.closest("[data-qm]"); if (!b || b.disabled) return;
     buzz(4); st.metric = b.dataset.qm; if (st.metric === "color") st.color = 0; st.chip = "color"; save(); quickClose(); chipsDraw(); rerank(false);
   });
-  const quickAway = e => { if (quickOn && !e.target.closest(".fd-quick,[data-fml]")) quickClose(); };
-  const quickMove = () => { if (quickOn && Date.now() - quickAt > 350) quickClose(); };
+  const quickAway = e => { if (quickOn && !e.target.closest(".fd-quick") && !e.target.closest(".fd-chip[data-fc=color]")) quickClose(); };
+  // only a vertical page scroll (or a drag that starts outside the row) closes it: a finger dragging the row sideways must never
+  let qT = null;
+  const quickStart = e => { const t = e.touches[0]; qT = t ? { x: t.clientX, y: t.clientY, in: !!e.target.closest(".fd-quick") } : null; };
+  const quickMove = e => {
+    if (!quickOn || Date.now() - quickAt < 350) return;
+    if (e.type === "wheel") { if (e.target.closest && e.target.closest(".fd-quick") && Math.abs(e.deltaX) >= Math.abs(e.deltaY)) return; return quickClose(); }
+    if (!qT || qT.in) return;
+    const t = e.touches[0]; if (t && Math.abs(t.clientY - qT.y) > 6) quickClose();
+  };
   const quickKey = e => { if (e.key === "Escape") quickClose(); };
-  document.addEventListener("pointerdown", quickAway, true); addEventListener("touchmove", quickMove, { passive: true }); addEventListener("wheel", quickMove, { passive: true }); addEventListener("keydown", quickKey);
-  cleanup.push(() => { document.removeEventListener("pointerdown", quickAway, true); removeEventListener("touchmove", quickMove); removeEventListener("wheel", quickMove); removeEventListener("keydown", quickKey); });
+  document.addEventListener("pointerdown", quickAway, true); addEventListener("touchstart", quickStart, { passive: true }); addEventListener("touchmove", quickMove, { passive: true }); addEventListener("wheel", quickMove, { passive: true }); addEventListener("keydown", quickKey);
+  cleanup.push(() => { document.removeEventListener("pointerdown", quickAway, true); removeEventListener("touchstart", quickStart); removeEventListener("touchmove", quickMove); removeEventListener("wheel", quickMove); removeEventListener("keydown", quickKey); });
   chipsEl.onclick = e => {
     const b = e.target.closest("[data-fc]"); if (!b) return;
     const k = b.dataset.fc, why = off(k);
     if (why) { buzz(4); leadDraw(why); return; }
-    if (k === eff && k === "color" && !isColor && e.target.closest("[data-fml]")) { buzz(4); if (quickOn) quickClose(); else quickOpen(); return; }
-    if (k === eff) { if (k === "about") { pinTabs(); return; } return toggleSettings(); }
+    // Color on a painting page: the first tap opens its quick row, the second (row open) opens the full Settings; the row leaves on a choice or a page scroll
+    if (k === eff && k === "color" && !isColor) { buzz(4); if (quickOn) { quickClose(); return toggleSettings(); } if (document.querySelector(".sheet.fs-half")) return closeSettings(); quickOpen(); return; }
+    if (k === eff) { if (k === "about") return; return toggleSettings(); }
     quickClose(); closeSettings();
-    if (aboutEl && k === "about") { st.chip = "about"; save(); buzz(4); chipsDraw(); showAbout(true); pinTabs(); return; }
+    if (aboutEl && k === "about") { const y = scrollY; st.chip = "about"; save(); buzz(4); chipsDraw(); showAbout(true); fdKeepScroll(y, pinY); return; }   // Overview stays where you are
     if (aboutEl && eff === "about") showAbout(false);
     st.chip = k; if (isColor) st.color = 0; save(); buzz(4); rerank(false); pinTabs();
     if (k === "color" && !isColor) quickOpen();
