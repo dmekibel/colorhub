@@ -32,6 +32,7 @@ python3 tools/vibe_knn.py 2>&1 | tail -2 | cut -c1-160 || true
 for s in analyze metrics_build facets artwiki_build; do step "$s"; python3 tools/$s.py | tail -1 | cut -c1-160; done
 step "painter counts, movements, portraits and most-famous rails (all store gallery positions)"
 python3 tools/wikidata_artists.py | tail -1 | cut -c1-160
+python3 tools/painters_lite.py | tail -1 | cut -c1-160   # gallery indices: lite painters go stale otherwise (Abel Faivre showed a Monet, 2026-10-25)
 python3 tools/artwiki_portraits.py | tail -2 | cut -c1-160
 step "painting-map thumbnails list"
 python3 tools/paintmap_thumbs.py | tail -1
