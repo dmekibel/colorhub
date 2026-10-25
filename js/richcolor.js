@@ -339,6 +339,57 @@ function rcNextToHTML(name, hex) {
   return `<div id="${id}"></div>`;
 }
 
+// ======================================================================
+// Elsewhere (David, 2026-10-25): where else the color lives, in ONE strip with chips (Nature, Gems, Design, Objects, Fashion, Films, Books,
+// Poems, Looks) instead of eight stacked sections. It reads the same lists as the feed's Other worlds tab (js/feed.js fdcWorldLists), so the
+// page and the feed cannot drift apart. A chip with nothing is not drawn; a color with almost nothing shows no strip at all.
+// ======================================================================
+const EL_KINDS = [["In nature", "Nature"], ["In gems", "Gems"], ["In design", "Design"], ["In design objects", "Objects"], ["In fashion", "Fashion"], ["In films", "Films"], ["In books", "Books"], ["In poems", "Poems"], ["In looks", "Looks"]];
+function rcElsewhereHTML(name, hex) {
+  const id = "rc-el-" + Math.random().toString(36).slice(2, 8);
+  const draw = async () => {
+    const box = document.getElementById(id); if (!box) return;
+    let lists = [];
+    try { lists = typeof fdcWorldLists === "function" ? await fdcWorldLists({ sub: { hex, name } }) : []; } catch (e) {}
+    const by = new Map();
+    lists.forEach(l => l.forEach(c => { if (!by.has(c.cap)) by.set(c.cap, []); by.get(c.cap).push(c); }));
+    try {   // "In looks": the looks whose palettes hold a close color (js/looks.js), as cards of the same shape
+      if (typeof lkAll === "function" && typeof lkOpen === "function") {
+        const hits = [];
+        lkAll().forEach(look => { let best = null; look.pals.forEach((p, pi) => p.c.forEach(x => { const d = de2000(hex, x[0]); if (!best || d < best.d) best = { d, pi, x }; })); if (best && best.d < 7) hits.push({ look, ...best }); });
+        hits.sort((a, b) => a.d - b.d);
+        if (hits.length) by.set("In looks", hits.slice(0, 10).map(h => ({ title: h.look.name, h: h.x[0], sub: h.look.pals[h.pi].n ? `${h.look.pals[h.pi].n}` : "A look", cap: "In looks", open: () => lkOpen(h.look.id, { pi: h.pi }) })));
+      }
+    } catch (e) {}
+    const kinds = EL_KINDS.filter(([k]) => (by.get(k) || []).length >= 1);
+    const total = kinds.reduce((a, [k]) => a + by.get(k).length, 0);
+    if (!kinds.length || total < 3) { box.remove(); return; }   // never padded
+    let cur = (kinds.find(([k]) => by.get(k).length >= 3) || kinds[0])[0];
+    const word = t => { const m = /^(\d+(?:\.\d+)?)% match$/.exec(String(t || "")); if (!m) return t || ""; const de = 100 - +m[1]; return de < 2 ? "Nearly identical" : de < 5 ? "Very close" : de < 10 ? "Close" : "Related"; };   // a number nobody can feel, as a word
+    const card = (c, i) => c.ab >= 1.25 && !c.img
+      ? `<button type="button" class="el-card el-q" data-el="${i}"><span class="el-qt">${esc(c.title)}</span><small>${esc(c.sub || "")}</small></button>`
+      : `<button type="button" class="el-card" data-el="${i}"><span class="el-sw" style="--c:${c.h}">${c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : ""}</span><b>${esc(c.title)}</b><small>${esc(word(c.sub))}</small></button>`;
+    box.innerHTML = `<section class="rc-sec rc-else" style="--c:${hex}" data-ink="${ink(hex)}">
+      <h3>Elsewhere</h3>
+      <div class="rs-bar el-chips" role="tablist" aria-label="Where else this color lives">${kinds.map(([k, t]) => `<button type="button" role="tab" class="el-chip" data-elk="${esc(k)}">${t}<span>${by.get(k).length}</span></button>`).join("")}</div>
+      <div class="gl-rail el-rail" data-el-rail></div>
+      <button type="button" class="rc-door rc-door-all" data-rc-feed="worlds">More in Other worlds</button>
+      <p class="fine">Matched by color, as photographed or as catalogued. A close match is not a claim of influence.</p></section>`;
+    const rail = box.querySelector("[data-el-rail]");
+    const paint = () => {
+      box.querySelectorAll("[data-elk]").forEach(b => { const on = b.dataset.elk === cur; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
+      rail.innerHTML = by.get(cur).slice(0, 10).map(card).join(""); rail.scrollLeft = 0;
+    };
+    paint();
+    box.addEventListener("click", e => {
+      const k = e.target.closest("[data-elk]"); if (k) { if (k.dataset.elk !== cur) { cur = k.dataset.elk; buzz(5); paint(); } return; }
+      const c = e.target.closest("[data-el]"); if (c) { const it = by.get(cur)[+c.dataset.el]; if (it && it.open) { buzz(6); it.open(); } }
+    });
+  };
+  setTimeout(() => { if (document.getElementById(id)) draw().catch(() => { const b = document.getElementById(id); if (b) b.remove(); }); }, 1100);
+  return `<div id="${id}"></div>`;
+}
+
 // ---------- Role paintings (design/audit-graph/CHECKPOINT.md #6): for 1,434 colors, data/graph/fieldnotes'
 // ar.rp_ names one real painting where the color plays each part -- shadow, mid-tone, light, accent, hidden
 // note -- picked once by L6, not recomputed live the way rcRoleSection's bar above is. "Never one palette,

@@ -2581,16 +2581,17 @@ scenario("pages", "a color's lead picture never prefers a far painting with more
   }
 });
 
-scenario("pages", "a world twin (In gems) opens its page in one tap, Back returns to the color", async t => {
+scenario("pages", "a world twin (In gems) opens its page in one tap and Back returns to the color", async t => {
   await H.openPage(t, "#/name/fiery-rose", "Fiery Rose");
-  // David, 2026-10-09: "Found in the world" (gems/botany/brands/fashion twins) tucks into the Paintings section now
-  const d = await t.waitFor(() => t.$(".rp-paint .rp-elsewhere"), 8000, "the Paintings section's elsewhere block");
-  await t.waitFor(() => t.$$("[data-to]", d).length > 0, 10000, "a twin row (gem, flower, fashion or film) near Paintings");
-  const row = t.$$("[data-to]", d).find(e => /^gm:/.test(e.dataset.to)) || t.$$("[data-to]", d)[0];
-  t.expect(row, "no twin row to tap");
-  const id = row.dataset.to;
+  // David, 2026-10-25: gems, nature, design, objects, fashion, films, books, poems and looks are ONE Elsewhere strip with chips
+  const d = await t.waitFor(() => t.$(".rc-else"), 25000, "the Elsewhere strip");
+  const chip = t.$$(".el-chip", d).find(b => /^Gems/.test(t.text(b))) || t.$(".el-chip", d);
+  t.expect(chip, "Elsewhere has no chips");
+  await t.click(chip, { wait: 300 });
+  const row = await t.waitFor(() => t.$(".el-card", d), 5000, "a card in the Elsewhere strip");
+  const id = t.text(chip);
   await t.click(row, { wait: 700 });
-  await t.waitFor(() => !t.$(".cp-page .cp-hero-foot h1") || H.title(t) !== "Fiery Rose", 8000, `the twin page for ${id} to open`);
+  await t.waitFor(() => !t.$(".cp-page .cp-hero-foot h1") || H.title(t) !== "Fiery Rose", 8000, `the ${id} page to open`);
   t.expect(t.$("#app").innerText.length > 100, `the page for ${id} is empty`);
   t.notes.push(`Fiery Rose > ${id}`);
   await t.click("[data-back]", { wait: 600 });
@@ -7790,10 +7791,10 @@ scenario("design", "a maker page lists their objects", async t => {
   await t.waitFor(() => t.text(".p-title") !== before, 10000, "the maker page to open");
   await t.waitFor(".masonry .pin", 8000, "the maker's objects grid");
 });
-scenario("design", "\"In design objects\" renders on a color page with design-object coverage", async t => {
+scenario("design", "Design objects show as a chip in a color page's Elsewhere strip when the color has design-object coverage", async t => {
   await t.open("#/color/ivory", { settle: 800 });
   await t.waitFor(".p-title, .cp-page", 12000, "a color page");
-  await t.waitFor(() => /In design objects/.test(t.d.body.innerText), 10000, '"In design objects" section');
+  await t.waitFor(() => t.$$(".rc-else .el-chip").some(b => /^Objects/.test(t.text(b))) ? true : null, 25000, 'the Objects chip in the Elsewhere strip');
 });
 // David, 2026-10-10: "I got to Design objects but the screen gets stuck and won't let me go back to anything
 // else." The repro that matters is the one a real phone hits that this suite's own host-blocked network can't

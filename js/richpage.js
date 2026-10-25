@@ -801,15 +801,8 @@ function rpPaintSectionHTML(name, hex, entry, famC) {
     ${call(rcPairedSection, name, hex)}
     ${call(rcYouHTML, name, hex)}
     <div class="rp-elsewhere">
-      <div class="c-poems"></div>
-      ${call(archiveRows, entry, "books", famC)}
       ${call(rcWernerLine, name, hex)}
-      ${call(btRow, entry, famC)}
-      ${call(gmRow, entry, famC)}
-      ${call(bdRow, entry, famC)}
-      ${call(doRow, entry, famC)}
-      <section class="fx-in" data-world-in></section>
-      ${call(archiveRows, entry, "films", famC)}
+      ${call(rcElsewhereHTML, name, hex)}
     </div>
     <details class="rc-more rp-bynumbers"><summary>By the numbers</summary>
       ${call(rcReachSection, name, hex)}
@@ -841,8 +834,6 @@ function rpPaintFill(el, name, hex, entry, famC) {
     box.innerHTML = `<p class="rp-findings-h">In the archive</p><ul class="rp-findings">${cards.map(c => `<li><button type="button" data-rp-door="${c.door}"><b>${esc(c.fig)}</b> ${esc(c.text)}</button></li>`).join("")}</ul>`;
     box.addEventListener("click", e => { const b = e.target.closest("[data-rp-door]"); if (b && b.dataset.rpDoor === "paint" && typeof paintingsDoor === "function") paintingsDoor([hex], { back: true }); });
   });
-  colorPoems(sec.querySelector(".c-poems"), entry);
-  if (typeof worldColorRow === "function") worldColorRow(sec, { kind: "color", h: hex, title: name }, famC);
   // quiet: the two extra blocks collapse to nothing if they turn out empty, and so does "By the numbers" itself
   // if every one of its three readings came back empty (a color with no reach/role/findings data at all)
   setTimeout(() => {
