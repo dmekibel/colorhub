@@ -702,6 +702,8 @@ async function fdcRankPlace(ctx, st) {
 }
 
 // ---------- Other worlds: one card per thing, a few from each world in turn ----------
+// a closeness you can feel instead of a percent (the same four words as the color page's figure cards)
+const fdCloseWord = de => de < 2 ? "Nearly identical" : de < 5 ? "Very close" : de < 10 ? "Close" : "Related";
 const fdcNode = id => { const g = graph(); return g.nodes.get(id) || (/^gm:/.test(id) && typeof gmNode === "function" ? gmNode(id) : null) || (/^bt:/.test(id) && typeof btNode === "function" ? btNode(id) : null); };
 const fdcOpenNode = id => () => { const n = fdcNode(id); if (n) openNode(n); };
 const fdcPlain = html => { const t = document.createElement("div"); t.innerHTML = html; return (t.textContent || "").trim(); };
@@ -709,17 +711,20 @@ async function fdcWorldLists(ctx) {
   const { hex, name } = ctx.sub, c = { n: name, h: hex }, W = [], add = (kind, arr) => { if (arr.length) W.push(arr.slice(0, 10).map(x => ({ card: 1, ab: 1.05, cap: kind, ...x }))); };
   const when = f => new Promise(res => { if (typeof f !== "function") return res(); let done = false; const fin = () => { if (!done) { done = true; res(); } }; try { f(fin); } catch (e) { fin(); } setTimeout(fin, 4000); });
   await Promise.all([when(typeof gmWhen === "function" ? gmWhen : null), when(typeof btWhen === "function" ? btWhen : null), when(typeof bdWhen === "function" ? bdWhen : null), when(typeof doWhen === "function" ? doWhen : null), when(typeof archWhen === "function" ? archWhen : null)]);
-  try { if (typeof gmRowHits === "function") add("In gems", gmRowHits(c).map(h => ({ title: h.title, h: h.h, sub: h.named ? "Named after this color" : "Close to one of its shades", open: fdcOpenNode(h.id) }))); } catch (e) {}
+  // the thing's own picture when the archive has one (David, 2026-10-25: "these are lacking their pictures"): gem and plant photos live in
+  // WIKI_IMAGES under the node id, a design object carries its own img; a card without one stays a block of its color
+  const pic = id => { const im = ((window.WIKI_IMAGES || {})[id] || [])[0] || ((window.GEM_IMAGES || {})[id] || [])[0] || ((window.BOTANY_IMAGES || {})[id] || [])[0]; return im && im.src ? im.src : null; };
+  try { if (typeof gmRowHits === "function") add("In gems", gmRowHits(c).map(h => ({ title: h.title, h: h.h, img: pic(h.id), sub: h.named ? "Named after this color" : "Close to one of its shades", open: fdcOpenNode(h.id) }))); } catch (e) {}
   try {
     const ents = ((window.BOTANY || {}).byColor || {})[name] || [], pid = typeof btPlantByColor !== "undefined" ? btPlantByColor.get(name) : null;
     add("In nature", ents.map(e => {
-      if (e.link === "named" && pid) { const n = btNode(pid), sw = n && n.swatches[0]; return { title: e.plant, h: sw ? sw.h : hex, sub: e.detail, open: fdcOpenNode(pid) }; }
-      if (e.link === "dye" && typeof btDyeForPlant === "function") { const dd = btDyeForPlant(e.plant); if (dd) return { title: e.plant, h: hex, sub: e.detail, open: fdcOpenNode("bt:dye:" + dd.id) }; }
+      if (e.link === "named" && pid) { const n = btNode(pid), sw = n && n.swatches[0]; return { title: e.plant, h: sw ? sw.h : hex, img: pic(pid), sub: e.detail, open: fdcOpenNode(pid) }; }
+      if (e.link === "dye" && typeof btDyeForPlant === "function") { const dd = btDyeForPlant(e.plant); if (dd) return { title: e.plant, h: hex, img: pic("bt:dye:" + dd.id), sub: e.detail, open: fdcOpenNode("bt:dye:" + dd.id) }; }
       return null;
     }).filter(Boolean));
   } catch (e) {}
-  try { if (typeof bdBrandsNear === "function") add("In design", bdBrandsNear(hex, 15, 10).map(h => ({ title: h.b.name, h: h.h, sub: pctMatch(h.d), open: () => bdPage(h.b.id) }))); } catch (e) {}
-  try { if (typeof doNearest === "function") add("In design objects", doNearest(hex, 10, 10).map(({ n, d }) => ({ title: n.title, h: n.palette[0].h, sub: pctMatch(d * 4), open: () => doOpenObject(n.id) }))); } catch (e) {}
+  try { if (typeof bdBrandsNear === "function") add("In design", bdBrandsNear(hex, 15, 10).map(h => ({ title: h.b.name, h: h.h, sub: fdCloseWord(h.d), open: () => bdPage(h.b.id) }))); } catch (e) {}
+  try { if (typeof doNearest === "function") add("In design objects", doNearest(hex, 10, 10).map(({ n, d }) => ({ title: n.title, h: n.palette[0].h, img: n.img || null, sub: fdCloseWord(d), open: () => doOpenObject(n.id) }))); } catch (e) {}
   try { if (window.FASHION && typeof worldFashionHits === "function") add("In fashion", worldFashionHits(hex, name).map(x => ({ title: x.title, h: x.h, sub: x.sub, open: () => fashionPage(x.slug) }))); } catch (e) {}
   try {
     if (typeof fxLoad === "function") { const d = await fxLoad(); if (d) add("In fashion", fxByColor(hex, d.rows, .3).slice(0, 10).map(([r, s]) => ({ title: r.t, h: r.p[0][0], img: fxThumb(r), ab: 1.2, sub: `${Math.round(Math.min(1, s) * 100)}% of the cloth · ${r.d}`, open: () => fashionPage("garment-" + r.id) }))); }
