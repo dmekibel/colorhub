@@ -335,3 +335,5 @@
 .aw-fs-csw i{width:22px;height:22px;border-radius:50%;background:var(--c);flex:none;box-shadow:inset 0 0 0 1px rgba(236,232,223,.18)}
 .aw-fs-clr{min-height:0!important;margin-left:auto}
 .fs-multi button .aw-chipn{color:inherit;opacity:.7}
+/* Their work: every tile is by this painter, so the "Painter · year" caption line is dropped (the year is on the picture); js/gallery.js still reserves its line of room */
+.aw-wk-mount .gl-pin small{display:none}
