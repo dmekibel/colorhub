@@ -139,6 +139,7 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["awPainter", slug => slug ? routed(awTitle("painter", slug), "painter/" + slug) : null],   // js/artwiki.js: the art wiki
   ["awGroup", (kind, key) => kind && key != null ? routed(awTitle(kind, key), kind + "/" + (kind === "decade" ? key : routeSlug(key))) : null],
   ["awIndex", () => routed("Art history by color", "arthistory")],
+  ["sbiList", () => routed("Subjects", "museum/art/subjects")], ["sbiPage", slug => slug ? routed((typeof sbiOf === "function" && sbiOf(slug) || {}).name || "Subject", "museum/art/subject/" + slug) : null],   // js/subjectisl.js: the painting map's vibe islands as a list
   ["awPainters", () => routed("Painters", "painter-index")],   // js/artwiki.js: the Painters collection (design/SIMPLIFY/PLAN.md §9)
   ["awVs", (a, b) => routed("Painter against painter", "painters" + (a ? "/" + a + (b ? "/" + b : "") : ""))],
   ["gmListPage", kind => typeof gmListTitle === "function" ? routed(gmListTitle(kind), "gem/" + kind) : null],   // js/gems.js (gem/essay detail pages route via wikiPage above)
@@ -279,6 +280,11 @@ function openRoute(hash, initial = false) {
   }
   if (kind === "train" && id === "drills" && typeof r2DrillsPage === "function") { base(); XSTACK = []; r2DrillsPage(); return true; }   // js/rooms2.js
   if (kind === "train" && id === "eye" && typeof r2EyePage === "function") { base(); XSTACK = []; r2EyePage(); return true; }
+  if ((kind === "museum" || kind === "explore") && id === "art" && (more === "subjects" || more === "subject") && typeof sbiList === "function") {   // js/subjectisl.js
+    base(); XSTACK = [];
+    if (more === "subject" && parts[3]) sbiPage(parts[3]); else sbiList();
+    return true;
+  }
   if (tabs[kind]) {
     if (kind === "explore" || kind === "museum") S.lens = LENS_LEGACY[id] || Object.keys(LENS_ROUTE).find(k => LENS_ROUTE[k] === id) || "all";
     go(tabs[kind]);

@@ -9042,3 +9042,30 @@ scenario("search", "the map opened from Faded purple's page keeps that color and
   await t.waitFor(() => /faded purple/i.test(t.d.body.innerText), 15000, "the map to call the color Faded purple");
   t.expect(!/dusty violet/i.test(t.d.body.innerText), "the map still names it Dusty violet");
 });
+
+// ---- Museum > Art > Subjects: the painting map's vibe islands as a list (js/subjectisl.js) ----
+scenario("pages", "Subjects: the list draws a card per island with cover photos, a card opens its paintings, Back returns", async t => {
+  await t.open("#/museum/art/subjects", { settle: 600 });
+  await t.waitFor(() => t.$$(".sbi-card[data-sbi-card]").length >= 30, 15000, "the Subjects cards");
+  t.expect(/\/museum\/art\/subjects$/.test(t.w.location.hash), `the list's own address, got ${t.w.location.hash}`);
+  const cards = t.$$(".sbi-card[data-sbi-card]");
+  t.expect(cards.every(c => c.querySelector(".sbi-txt b") && /paintings$/.test(t.text(c.querySelector(".sbi-n")))), "a card is missing its name or count");
+  t.expect(new Set(cards.map(c => t.text(c.querySelector(".sbi-txt b")))).size === cards.length, "two cards share a name");
+  t.expect(cards.every(c => c.querySelectorAll(".sbi-colors button").length >= 4), "a card is missing its palette strip");
+  t.expect(cards.every(c => c.querySelectorAll(".sbi-ph").length >= 2), "a card has no cover frames");   // a photo that fails to load is dropped and its color stays
+  const first = cards[0], name = t.text(first.querySelector(".sbi-txt b"));
+  await t.click(first.querySelector("[data-sbi]"), { wait: 500 });
+  await t.waitFor(() => t.$(".sbi-one") && t.$$(".sbi-grid .gl-pin").length >= 6, 15000, "the island's paintings");
+  t.expect(t.text(".sbi-one h1") === name, `the page shows "${t.text(".sbi-one h1")}", expected "${name}"`);
+  t.expect(/\/museum\/art\/subject\//.test(t.w.location.hash), `the island's address, got ${t.w.location.hash}`);
+  t.expect(t.$(".sbi-one [data-pmap]"), "no Map button");
+  t.expect(/arr=look/.test(t.$(".sbi-one [data-pmap]").dataset.pmap), "the Map button does not open By vibe");
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => t.$$(".sbi-card[data-sbi-card]").length >= 30 && !t.$(".sbi-one"), 8000, "Back to the Subjects list");
+});
+scenario("pages", "Subjects: the door on Art's first screen opens the list", async t => {
+  await t.open("#/museum/art", { settle: 600 });
+  const door = await t.waitFor(() => { const d = t.$("[data-sbidoor]"); return d && !d.hidden && d; }, 15000, "the Subjects door");
+  await t.click(door, { wait: 500 });
+  await t.waitFor(() => t.$$(".sbi-card[data-sbi-card]").length >= 30, 12000, "the Subjects list after the door");
+});

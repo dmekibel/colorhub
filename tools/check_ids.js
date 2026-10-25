@@ -43,6 +43,13 @@ function checkIds() {
     const b = fs.readFileSync(path.join(ROOT, "data/gallery/look.bin")), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
     if (b.length < 24 || b.readUInt32LE(8) !== gIds.length || b.readUInt32LE(20) !== parseInt(h, 16) || b.length !== 24 + 4 * gIds.length) warn("data/gallery/look.bin is out of step with ids.txt (By look is hidden until it is rebuilt): python3 tools/look_layout.py");
   }
+  if (fs.existsSync(path.join(ROOT, "data/gallery/island-names.json"))) {   // the Subjects list (tools/island_names.py): same ids hash as look.bin, same bytes of look-islands.bin, covers still the right paintings
+    const nm = rj("data/gallery/island-names.json"), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
+    const ib = fs.existsSync(path.join(ROOT, "data/gallery/look-islands.bin")) ? require("crypto").createHash("sha1").update(fs.readFileSync(path.join(ROOT, "data/gallery/look-islands.bin"))).digest("hex").slice(0, 8) : "";
+    const lj = has("data/gallery/look.json") ? rj("data/gallery/look.json") : null;
+    if (nm.n !== gIds.length || nm.hash !== h || nm.isl !== ib || (lj && lj.islands.length !== nm.islands.length)) warn("data/gallery/island-names.json is out of step with ids.txt / look-islands.bin (the Subjects list is hidden until it is rebuilt): python3 tools/island_names.py");
+    else if (nm.islands.some(o => o.cov.some(c => gIds[c[0]] !== c[1]))) warn("data/gallery/island-names.json has a cover that is not at its gallery position: python3 tools/island_names.py");
+  }
   if (fs.existsSync(path.join(ROOT, "data/gallery/vibe/index.json"))) {   // By vibe neighbors (feed): header must name THIS ids.txt
     const v = rj("data/gallery/vibe/index.json"), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
     if (v.n !== gIds.length || v.ids_hash !== h) warn("data/gallery/vibe/ is out of step with ids.txt (the feed's Vibe ranking is empty until it is rebuilt): python3 tools/vibe_knn.py");

@@ -40,6 +40,8 @@ step "subject tags (Wikidata genre/depicts for new paintings, polite and resumab
 python3 tools/subjects.py | tail -1
 step "model-detected subject tags (CLIP on cached images; skips quietly if research/_raw/clipenv is missing; new paintings only)"
 python3 tools/subjects_clip.py | tail -2
+step "Subjects list (names, covers, palettes for the vibe islands -> data/gallery/island-names.json; needs the tags and look-islands.bin above)"
+python3 tools/island_names.py | head -1
 if [ "$ATLAS" != 0 ]; then
   step "painting-map atlas ($([ "$ATLAS" = 2 ] && echo "full rebuild: hours" || echo "incremental: only changed groups"))"
   [ "$ATLAS" = 2 ] && python3 tools/paintmap_atlas.py clean

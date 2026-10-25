@@ -382,8 +382,9 @@ function xbRooms(host, F) {
   const f = XB.f;
   if (XB.special || xbChips(F, f).length) { host.innerHTML = ""; return; }
   const list = [...xbUser().rooms.map(r => ({ ...r, mine: true })), ...XB_ROOMS.filter(r => !r.dyn || r.dyn())];
-  host.innerHTML = `<div class="sec-head xb-h"><b>Rooms</b><span>ways in</span></div>
+  host.innerHTML = (typeof sbiDoorHTML === "function" ? sbiDoorHTML() : "") + `<div class="sec-head xb-h"><b>Rooms</b><span>ways in</span></div>
     <div class="xb-roomrail">${list.map(r => `<button class="xb-room" data-xbroom="${esc(r.id)}"><span class="xb-room-im" data-xbroomim="${esc(r.id)}"></span><span class="xb-room-band" data-xbroomband="${esc(r.id)}"></span><b>${esc(r.name)}</b><small>${r.mine ? "Your room" : r.recipe ? "Our recipe: " + esc(r.note.toLowerCase()) : esc(r.note)}</small><em class="mono" data-xbroomn="${esc(r.id)}"></em></button>`).join("")}</div>`;
+  if (typeof sbiDoorFill === "function") sbiDoorFill(host);   // js/subjectisl.js: the Subjects door
   // counts, color bands and a cover painting arrive just after the first paint
   later(() => {
     if (!host.isConnected) return;
