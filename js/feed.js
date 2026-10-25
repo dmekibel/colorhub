@@ -212,8 +212,8 @@ function fdMount(host, o) {
   const off = k => isColor ? (FDC_OFF.get(SKEY) || {})[k] || "" : (FD_OFF[k] ? FD_OFF[k](ctx) : "");
   const abOf = it => it.sk || it.card || it.head ? it.ab : Math.min(2.3, Math.max(.4, G.ar[it.j]));
   const aboutEl = isColor && o.about ? o.about : null; if (aboutEl) aboutEl.remove();   // the article tab survives the feed being drawn around it
-  host.innerHTML = `<div class="sec-head"><b>Keep exploring</b><span>closest first</span><span class="fd-tools"><span class="fd-lens" role="group" aria-label="How to look at these"><button type="button" aria-pressed="true" data-fdfeed>Feed</button><button type="button" aria-pressed="false" data-fdmap>Map</button></span><button type="button" class="fd-set" data-fdset aria-haspopup="dialog">Settings<i data-fdsetdot hidden></i></button></span></div>
-    <div class="fd-bar"><div class="fd-chips" role="tablist" aria-label="What counts as related"></div></div>
+  host.innerHTML = `<div class="sec-head"><b>Keep exploring</b><span>closest first</span></div>
+    <div class="fd-bar"><div class="fd-chips" role="tablist" aria-label="What counts as related"></div><span class="fd-tools"><button type="button" class="fd-ic fd-set" data-fdset aria-label="Settings for this list" aria-haspopup="dialog"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg><i data-fdsetdot hidden></i></button><button type="button" class="fd-ic fd-mapbtn" data-fdmap aria-label="See these on the map"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/></svg></button></span></div>
     <p class="fd-lead" aria-live="polite"></p>
     <div class="fd-grid" role="group" aria-label="${isColor ? "Paintings and more that hold this color" : "Related paintings, closest first"}"></div>
     <div class="fd-state"></div>`;
@@ -225,7 +225,7 @@ function fdMount(host, o) {
 
   // ----- the About tab (a color page): the article is the first chip; the feed's own parts hide while it shows -----
   const secHead = host.querySelector(".sec-head");
-  if (aboutEl && secHead) bar.insertAdjacentElement("afterend", secHead);   // under the chips: just the density button, and only on the feed tabs
+  if (aboutEl && secHead) secHead.remove();   // its heading words are hidden on a color page, and the tools now ride in the bar
   const showAbout = on => { if (!aboutEl) return; aboutEl.hidden = !on; lead.hidden = on; grid.hidden = on; state.hidden = on; if (secHead) secHead.hidden = on; host.dataset.fdTab = on ? "about" : eff; };
   // a tab change keeps the chips where they are: if you had scrolled below the top of this section, it lands on its top
   const tabTop = force => { const a = artTop(), ah = a ? a.getBoundingClientRect().height : 0, y = host.getBoundingClientRect().top + scrollY - ah; if (force || scrollY > y + 4) scrollTo(0, Math.max(0, y)); };
@@ -541,7 +541,7 @@ function fdMount(host, o) {
   const REACHW = ["Just this country", "Its neighbors", "Its region", "Its continent", "The whole world"];
   const SUBDOT = () => { const d = host.querySelector("[data-fdsetdot]"); if (d) d.hidden = !(isColor && fdsChanged(eff)); };
   const mapOk = () => !(eff === "about" || (isColor && (eff === "painters" || eff === "worlds" || eff === "close")) || (!isColor && eff === "painter"));
-  const lensDraw = () => { const m = host.querySelector("[data-fdmap]"); if (m) m.hidden = !mapOk(); const l = host.querySelector(".fd-lens"); if (l) l.hidden = !mapOk(); SUBDOT(); };
+  const lensDraw = () => { const m = host.querySelector("[data-fdmap]"); if (m) m.hidden = !mapOk(); SUBDOT(); };
   // Map: the same list as the painting map, the painting nearest the top of the screen in the middle, the same choices as filters
   const topPainting = () => {
     const bh = bar.getBoundingClientRect().bottom; let ak = -1;

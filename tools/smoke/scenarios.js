@@ -4675,7 +4675,7 @@ scenario("pages", "Keep exploring on a color page: the feed is the body under th
   t.notes.push(`color feed first ranking ${t.ev("FD_LAST.ms")} ms`);
 });
 // David, 2026-10-25: the "2 across" button is gone. A Settings button opens a sheet made for the tab (closeness, coverage, role, years, shape, order,
-// size on Paintings) with a live count, and a Feed / Map switch opens the same list as the painting map, the painting nearest the top in the middle.
+// size on Paintings) with a live count, and a Map button opens the same list as the painting map, the painting nearest the top in the middle.
 scenario("pages", "Keep exploring on a color page: Settings changes the list with a live count and the Map lens opens the same list", async t => {
   await cfeedOpen(t, "#/color/teal");
   t.expect(!t.$("[data-fdsize]"), "the old '2 across' button is still on the page");
@@ -4692,6 +4692,14 @@ scenario("pages", "Keep exploring on a color page: Settings changes the list wit
   t.ev("document.querySelectorAll('.scrim').forEach(s => s.click())"); await t.sleep(500);
   await t.click("[data-fdmap]", { wait: 900 });
   await TRL.atHash(t, /^#\/paintings\/map\?arr=spiral&seed=\d+&c=/, "the painting map, seeded on a painting with the color as its filter");
+  // the map's ⋯ sheet leads with one button back to the feed it came from, and the feed is where it was
+  await t.waitFor(".pmx-do", 15000, "the map's ⋯ button");
+  await t.click(".pmx-do", { wait: 600 });
+  const back = await t.waitFor("[data-pmtofeed]", 5000, "Back to the feed in the map's ⋯ sheet");
+  t.expect(/Back to the feed/.test(t.text(back)), "the button should say Back to the feed");
+  await t.click(back, { wait: 900 });
+  await TRL.atHash(t, /^#\/(color|name)\//, "the color page again");
+  await t.waitFor(() => t.text(".fd-chip.on") === "Paintings" ? true : null, 20000, "the Paintings feed, as it was left");
 });
 // David, 2026-10-25: every number is a door. A decade bar and a country on "When and where" open the Era and Place feeds on that decade or
 // country; "All the painters" opens Painters. The page's own chip row (not a scroll to the bottom) is what takes you there.

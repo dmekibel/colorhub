@@ -685,3 +685,4 @@
 .cf-surr{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 104px);display:flex;gap:4px;padding:4px;border-radius:999px;background:rgba(20,19,17,.72);z-index:2}
 .cf-surr button{min-height:44px;padding:0 13px;border:0;border-radius:999px;background:transparent;color:#ECE8DF;font:500 15px/1 var(--sans);white-space:nowrap}
 .cf-surr button.on{background:#ECE8DF;color:#141311}
+.rp-tabs .fd-lead:not(.why){display:none}   /* the order is in Settings; on a phone every line above the pictures costs them room (David, 2026-10-25) */

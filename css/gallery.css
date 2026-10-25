@@ -542,13 +542,15 @@ html.desk .fd-bar{top:calc(var(--dkn,60px) - 1px)}
 .gl-grid{-webkit-touch-callout:none}
 
 /* the Feed / Map lens and the Settings button (js/feed.js), in the row that held "2 across" */
-.fd-tools{margin-left:auto;display:flex;gap:8px;align-items:center}
-.fd-lens{display:inline-flex;border:1px solid var(--rule-strong,rgba(236,232,223,.28));border-radius:99px;padding:3px;gap:2px}
-.fd-lens[hidden],.fd-lens button[hidden]{display:none}
-.fd-lens button{min-height:40px;padding:0 15px;border:0;border-radius:99px;background:transparent;color:var(--soft);font:400 17px/1 var(--serif)}
-.fd-lens button[aria-pressed="true"]{background:var(--paper);color:var(--paper-ink)}
-.fd-set{position:relative;min-height:44px;padding:0 16px;border-radius:99px;border:1px solid var(--rule-strong,rgba(236,232,223,.28));background:transparent;color:var(--ink);font:400 17px/1 var(--serif)}
-.fd-set i{position:absolute;top:8px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--paper)}
+.fd-bar{display:flex;align-items:center;gap:0}
+.fd-bar .fd-chips{flex:1;min-width:0}
+.fd-bar:has(.fd-tools) .fd-chips{margin-right:0;padding-right:10px}
+.fd-tools{flex:none;display:flex;gap:6px;padding-left:6px;position:relative}
+.fd-tools::before{content:"";position:absolute;left:-14px;top:0;bottom:0;width:14px;background:linear-gradient(90deg,transparent,var(--ground))}
+.fd-ic{position:relative;width:44px;height:44px;border-radius:50%;border:1px solid var(--rule-strong,rgba(236,232,223,.28));background:var(--s2,#1F1D18);color:var(--ink);display:grid;place-items:center;padding:0}
+.fd-ic[hidden]{display:none}
+.fd-ic:active{transform:scale(.95)}
+.fd-ic i{position:absolute;top:7px;right:7px;width:9px;height:9px;border-radius:50%;background:var(--paper);box-shadow:0 0 0 2px var(--s2,#1F1D18)}
 /* the settings sheet */
 .fs-sheet{display:flex;flex-direction:column;gap:8px;max-height:min(78vh,720px)}
 .fs-head{display:flex;align-items:baseline;gap:10px}
@@ -598,3 +600,7 @@ html.desk .fd-bar{top:calc(var(--dkn,60px) - 1px)}
 .fs-prev i:nth-child(3n){background:linear-gradient(170deg,#5d6b72,#24282b)}
 .fs-note{font-size:16px;color:var(--soft)}
 @media (prefers-reduced-motion:reduce){.fs-switch,.fs-switch i{transition:none}}
+
+/* the map's ⋯ sheet: one button back to the feed it came from */
+.pmx-tofeed{display:flex;align-items:center;gap:10px;width:calc(100% - 32px);margin:2px 16px 8px;min-height:48px;padding:0 16px;border-radius:12px;border:1px solid var(--rule-strong,rgba(236,232,223,.28));background:var(--s2,#26231F);color:var(--ink);font:400 18px/1 var(--serif);text-align:left}
+.pmx-tofeed svg{width:18px;height:18px}
