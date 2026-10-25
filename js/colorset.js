@@ -201,7 +201,7 @@ function csActions(set, o = {}) {
       else if (typeof openPaletteHive === "function") {
         const pr = s.kind === "painting" && s.painter && typeof pcOpen === "function" && (typeof AW === "undefined" || !AW.ready || awHasPainter(s.painter.slug)) ? s.painter : null;
         openPaletteHive({ title: s.kind === "painting" ? "This painting's colors" : s.title, subtitle: s.src && s.kind === "painting" ? "as photographed" : "", colors: s.colors, source: s.kind, poolFn: s.pick, max: s.max,
-          ...(s.kind === "painting" && s.title ? { sub: () => `${s.title}. Sized by how much of the canvas each covers.` } : {}),
+          ...(s.kind === "painting" && s.title ? { sub: arr => arr !== "share" ? "" : `${s.title}. The color that covers the most canvas is in the middle.` } : {}),
           ...(pr ? { cta: { label: `All of ${pr.name}'s colors`, run: () => pcOpen(pr.slug) } } : {}) });
       }
       else if (s.kind !== "painting" && typeof mapSelect === "function") mapSelect({ title: s.title, colors: s.colors, source: s.kind, id: s.id, src: s.src });

@@ -3522,7 +3522,7 @@ scenario("favs", "shelf: top five, a plate opens its page, Back returns, a row h
   await t.click("[data-close]", { wait: 500 });
   await t.waitFor(".fv-shelf", 6000, "the shelf after closing the ranking");
   await t.click("[data-cs=map]", { wait: 900 });
-  await t.waitFor(".ph-sheet", 15000, "your colors' own honeycomb");
+  await t.waitFor(".phx", 15000, "your colors' own color map");
   t.expect(t.ev("window.PH_DEBUG && PH_DEBUG.count()") > 0, "the honeycomb drew no cells");
 });
 
@@ -3686,8 +3686,13 @@ scenario("map", "From a painting: See its colors opens its own honeycomb (not th
     t.expect(row, "no \"On the map\" row in the painting's ⋯ sheet, and no [data-cs=map] button on the surface either");
     await t.click(row, { wait: 500 });
   }
-  await t.waitFor(".ph-sheet", 12000, "the palette honeycomb sheet");
+  await t.waitFor(".phx", 12000, "the palette color map");
   await t.waitFor(() => t.ev("window.PH_DEBUG && PH_DEBUG.count()") > 0, 8000, "the honeycomb to lay out its cells");
+  // the options live in the standard map ⋯ sheet (no floating menu above the map)
+  t.expect(!t.$(".ph-arr, .ph-count"), "a floating menu is still above the map");
+  await t.click("[data-phdo]", { wait: 500 });
+  await t.waitFor("[data-ph-n]", 6000, "the ⋯ sheet's How many slider");
+  t.expect(t.$$("[data-phlook]").length === 2, "the ⋯ sheet has no Look: Circles | Honeycomb");
   let shown = +t.text("[data-ph-n]"), cells = t.ev("PH_DEBUG.count()");
   t.expect(shown > 0 && shown === cells, `the slider says ${shown} but the honeycomb drew ${cells} cells`);
   // slide the count: the honeycomb must recompute to match, never just truncate what it already had. Go down
@@ -3701,12 +3706,13 @@ scenario("map", "From a painting: See its colors opens its own honeycomb (not th
   await t.waitFor(() => t.ev("PH_DEBUG.count()") === shown, 6000, "the honeycomb to redraw at the new count");
   cells = t.ev("PH_DEBUG.count()");
   t.expect(shown === cells, `after sliding, the slider says ${shown} but the honeycomb drew ${cells} cells`);
+  await t.click("[data-sheet-close]", { wait: 500 });
   // tap the first cell -> its color page, in one tap, no sheet in between
   const hex = t.ev("PH_DEBUG.hexAt(0)"), at = t.ev(`PH_DEBUG.screenOf(${JSON.stringify(hex)})`);
   t.expect(at, "couldn't find the first cell's screen position");
-  await t.tapAt(t.$(".ph-cv"), at.x, at.y, { wait: 500 });
+  await t.tapAt(t.$(".pmx-cv"), at.x, at.y, { wait: 500 });
   await t.waitFor(".cp-page", 8000, "a color page after tapping a cell");
-  t.expect(!t.$(".ph-sheet"), "the honeycomb sheet is still open after tapping a cell");
+  t.expect(!t.$(".phx"), "the color map is still open after tapping a cell");
   // Back returns to the painting, not to the honeycomb
   await H.back(t);
   await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 8000, "Back to return to the painting page");
@@ -8774,32 +8780,49 @@ scenario("paintmap", "the card is one row of chips; tapping the card opens the p
 // on how much they use that color... and maybe other ways to organize." The painter page's Their colors opens the
 // painter's own color map (js/paintercolors.js on js/palettehive.js): their colors only, area = how many of their
 // paintings hold the color, five arrangements, one tap on a node = that color's page with the painter's use.
-scenario("painters", "painter's color map: opens from the painter page, size follows use, every arrangement lays out, a node opens its color", async t => {
+scenario("painters", "painter's color map: the standard map (circles, same size, most used in the middle), options in the ⋯ sheet, every arrangement lays out, a node opens its color", async t => {
   await t.open("#/painter/vincent-van-gogh", { settle: 600 });
   await t.waitFor(".aw-page", 15000, "the painter page");
   await t.click('[data-awtab="colors"]', { wait: 400 });
   const btn = await t.waitFor(".aw-pcolors", 8000, "the Their colors tab's color map button");
   await t.click(btn, { wait: 500 });
-  await t.waitFor(".ph-sheet", 12000, "the color map sheet");
+  await t.waitFor(".phx", 12000, "the color map");
   await t.waitFor(() => t.ev("window.PH_DEBUG && PH_DEBUG.count()") > 0, 60000, "the painter's colors to lay out (vivid reading)");
   t.expect(t.ev("PH_DEBUG.mode()") === "vivid", "the default isn't the Vivid colors reading");
-  t.expect(t.$$("[data-ph-mode]").length === 2, "no Vivid | All colors toggle");
-  // vivid: his character, not the dark ground -- the biggest nodes are never near-black
-  const top = t.ev("PH_DEBUG.nodes()").sort((a, b) => b.r - a.r).slice(0, 5).map(n => t.ev(`lch(${JSON.stringify(n.h)})[0]`));
-  t.expect(top.every(L => L > 22), `a near-black color is among the biggest vivid nodes (${top.map(x => Math.round(x))})`);
-  t.expect(/van Gogh/i.test(t.text(".ph-title")), `the sheet isn't titled for the painter: ${t.text(".ph-title")}`);
+  t.expect(t.ev("PH_DEBUG.look()") === "circles" && t.ev("PH_DEBUG.size()") === false, "the default isn't same-size Circles");
+  t.expect(/van Gogh/i.test(t.text(".pmx-title b")), `the map isn't titled for the painter: ${t.text(".pmx-title b")}`);
   t.expect(t.w.location.hash === "#/painter/vincent-van-gogh/colors", `the address while open is ${t.w.location.hash}`);
-  const chips = t.$$("[data-ph-arr]").map(b => b.dataset.phArr);
+  t.expect(!t.$(".ph-arr, .ph-count, .ph-mode"), "a floating menu is still above the map");
+  // the options live in the standard ⋯ sheet: Look, Arrange, Which colors, the size switch
+  await t.click("[data-phdo]", { wait: 500 });
+  await t.waitFor("[data-phlook]", 6000, "the ⋯ sheet");
+  t.expect(t.$$("[data-phmode]").length === 2, "no Vivid | All colors choice in the ⋯ sheet");
+  const chips = t.$$("[data-pharr]").map(b => b.dataset.pharr);
   t.expect(["share", "hue", "light", "decade"].every(k => chips.includes(k)), `missing arrangements: ${chips}`);
-  // size follows use: a bigger share never gets a smaller circle (equal only where the min/max clamps meet)
+  t.expect(t.$("[data-phsize]"), "no size switch for Circles");
+  await t.click("[data-sheet-close]", { wait: 400 });
+  // Circles default: every circle the SAME size, the most used color in the middle; vivid = never a near-black among the most used
   const raw = t.ev("PH_DEBUG.nodes()"), maxShare = Math.max(...raw.map(n => n.share));
+  t.expect(raw.length >= 20, `only ${raw.length} colors for Van Gogh`);
+  t.expect(raw.every(n => Math.abs(n.r - raw[0].r) < .01), "the circles aren't all one size by default");
   const centre = raw.slice().sort((a, b) => Math.hypot(a.x, a.y) - Math.hypot(b.x, b.y))[0];
-  t.expect(centre.share === maxShare, `By use: the node nearest the center (share ${centre.share}) isn't the most used (${maxShare})`);
-  const ns = raw.slice().sort((a, b) => b.share - a.share);
-  t.expect(ns.length >= 20, `only ${ns.length} colors for Van Gogh`);
+  t.expect(centre.share === maxShare, `By use: the node at the center (share ${centre.share}) isn't the most used (${maxShare})`);
+  const top = raw.slice().sort((a, b) => b.share - a.share).slice(0, 5).map(n => t.ev(`lch(${JSON.stringify(n.h)})[0]`));
+  t.expect(top.every(L => L > 22), `a near-black color is among the most used vivid nodes (${top.map(x => Math.round(x))})`);
+  // Size circles by how much they use it: opt-in, sizes follow use
+  t.ev("PH_DEBUG.setSize(true)"); await t.sleep(600);
+  const ns = t.ev("PH_DEBUG.nodes()").sort((a, b) => b.share - a.share);
   for (let i = 1; i < ns.length; i++) t.expect(ns[i].r <= ns[i - 1].r + 0.01, `circle ${i} is bigger than a more-used one (${ns[i].r} > ${ns[i - 1].r})`);
-  t.expect(ns[0].r > ns[ns.length - 1].r * 1.5, "the most used color isn't clearly bigger than the least");
-  // every arrangement lays out: finite positions, something drawn, the right shape of layout
+  t.expect(ns[0].r > ns[ns.length - 1].r * 1.2, `the most used color (${ns[0].r}) isn't clearly bigger than the least (${ns[ns.length - 1].r}) with the size switch on`);
+  // Honeycomb: same arrangement as cells, never scaled, and no size switch
+  t.ev(`PH_DEBUG.setLook("honey")`); await t.sleep(600);
+  const hn = t.ev("PH_DEBUG.nodes()");
+  t.expect(hn.every(n => Math.abs(n.r - hn[0].r) < .01), "honeycomb cells aren't all one size");
+  await t.click("[data-phdo]", { wait: 500 });
+  t.expect(!t.$("[data-phsize]"), "the size switch shows for the honeycomb");
+  await t.click("[data-sheet-close]", { wait: 400 });
+  t.ev(`PH_DEBUG.setLook("circles"); PH_DEBUG.setSize(false)`); await t.sleep(500);
+  // every arrangement lays out: finite positions, something drawn
   for (const arr of ["hue", "light", "decade", "peers"]) {
     if (!chips.includes(arr)) continue;
     t.ev(`PH_DEBUG.setArr(${JSON.stringify(arr)})`);
@@ -8808,9 +8831,9 @@ scenario("painters", "painter's color map: opens from the painter page, size fol
     const nn = t.ev("PH_DEBUG.nodes()");
     t.expect(nn.length > 0 && nn.every(n => isFinite(n.x) && isFinite(n.y) && n.r > 0), `${arr}: a node has no finite place`);
     if (arr === "decade") t.expect(new Set(nn.map(n => Math.round(n.y / 40))).size >= 2, "By decade shows only one row");
-    if (arr === "peers") t.expect(nn.some(n => n.hollow), "Against peers shows no hollow (avoided) colors for Van Gogh");
+    if (arr === "peers") t.expect(nn.some(n => n.hollow), "Against peers has no 'less than peers' colors for Van Gogh");
   }
-  // All colors (incl. the dark grounds) is one tap away
+  // All colors (incl. the dark grounds) is one choice away
   t.ev(`PH_DEBUG.setMode("all")`);
   await t.waitFor(() => t.ev("PH_DEBUG.mode()") === "all" && t.ev("PH_DEBUG.count()") > 0, 6000, "All colors");
   t.ev(`PH_DEBUG.setMode("vivid")`);
@@ -8821,9 +8844,9 @@ scenario("painters", "painter's color map: opens from the painter page, size fol
   await t.sleep(600);
   const hex = t.ev("PH_DEBUG.hexAt(0)"), at = t.ev(`PH_DEBUG.screenOf(${JSON.stringify(hex)})`);
   t.expect(at, "couldn't find the biggest node's screen position");
-  await t.tapAt(t.$(".ph-cv"), at.x, at.y, { wait: 500 });
+  await t.tapAt(t.$(".pmx-cv"), at.x, at.y, { wait: 500 });
   await t.waitFor(() => /^#\/(c|name)\//.test(t.w.location.hash), 8000, "a color page after tapping a node");
-  t.expect(!t.$(".ph-sheet"), "the color map is still open after tapping a node");
+  t.expect(!t.$(".phx"), "the color map is still open after tapping a node");
   // a color page opened from a map starts on its Paintings tab (js/richpage.js rpStartChip); the line sits in the article's "In paintings" section,
   // which loads when it scrolls near, so open Overview and bring that section up (as the trail scenario does)
   const aboutChip = t.$(".fd-chip[data-fc=about]"); if (aboutChip && !aboutChip.classList.contains("on")) await t.click(aboutChip, { wait: 400 });
