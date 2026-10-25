@@ -677,3 +677,11 @@
 .rc-pc-rail .rc-combo-2 .rc-cb i{height:84px}
 .rc-pc-rail .rc-pc-meta{font-size:15px}
 .rc-pc-rail .rc-pc-go{font-size:15px;min-height:44px;display:inline-flex;align-items:center}
+
+/* the lens in the full-screen color (js/richpage.js colorFocus): alone, or a patch on white, grey or black */
+.cf-patch{display:none}
+.rp-focus.cf-on-surround{background:var(--surr)}
+.rp-focus.cf-on-surround .cf-patch{display:block;position:absolute;left:50%;top:44%;width:min(56vw,56vh);height:min(56vw,56vh);transform:translate(-50%,-50%);background:var(--c);border-radius:4px}
+.cf-surr{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 104px);display:flex;gap:4px;padding:4px;border-radius:999px;background:rgba(20,19,17,.72);z-index:2}
+.cf-surr button{min-height:44px;padding:0 13px;border:0;border-radius:999px;background:transparent;color:#ECE8DF;font:500 15px/1 var(--sans);white-space:nowrap}
+.cf-surr button.on{background:#ECE8DF;color:#141311}

@@ -92,6 +92,35 @@ function rpLearnLabel(name, hex) {
   let st = "none"; try { st = knowState({ n: name, h: hex }); } catch (e) {}
   return st === "yours" ? { t: "Known", known: true } : (st === "learning" || st === "met") ? { t: "Review", known: false } : { t: "Learn it", known: false };
 }
+// David, 2026-10-25: once a color is yours, the next step is telling it from the color you'd mix it up with. Your own mix-ups (the
+// Learner Model's confusions) come first; otherwise the nearest everyday name. One tap opens the Learn sheet on that pair plus one more
+// neighbor, the same way You's Untangle does.
+function rpPairPill(el, name, hex) {
+  const b = el.querySelector("[data-learnpair]"); if (!b) return;
+  const pick = () => {
+    let other = null;
+    try { const ps = typeof confusions === "function" ? confusions({ n: name, h: hex }, 3) : []; const p = (ps || []).find(x => x && x.b && String(x.b).toLowerCase() !== name.toLowerCase()); if (p) other = { n: p.b, h: p.hb || (BYNAME.get(String(p.b).toLowerCase()) || {}).h }; } catch (e) {}
+    if (!other || !other.h) {
+      const use = x => x.useRank == null ? 999 : x.useRank;
+      const near = (CORE_NAMES || []).filter(x => x.n.toLowerCase() !== name.toLowerCase()).map(x => ({ x, d: de2000(hex, x.h) })).filter(o => o.d >= 1.2 && o.d < 14).sort((a, c) => (a.d + use(a.x) / 180) - (c.d + use(c.x) / 180))[0];
+      if (near) other = { n: near.x.n, h: near.x.h };
+    }
+    if (!other || !b.isConnected) return;
+    b.querySelector("span").textContent = `Tell it from ${other.n}`;
+    b.setAttribute("aria-label", `Known. Practice telling ${name} from ${other.n}`);
+    b.onclick = () => {
+      if (typeof prQuick !== "function") return;
+      buzz(6);
+      const a = typeof prSeed === "function" ? prSeed({ n: name, h: hex }) : null, o = typeof prSeed === "function" ? prSeed(other) : null, items = [a, o].filter(Boolean);
+      if (items.length === 2 && typeof prCore === "function") {
+        const third = prCore().filter(c => c.key !== a.key && c.key !== o.key && c.h !== a.h && c.h !== o.h).map(c => ({ c, d: Math.min(de2000(a.h, c.h), de2000(o.h, c.h)) })).sort((m, n) => m.d - n.d)[0];
+        if (third) items.push(third.c);
+      }
+      prQuick({ items: items.length ? items : [hex, other.h], seed: a || undefined, source: "these", label: `${name} and ${other.n.toLowerCase()}`, src: "page" });
+    };
+  };
+  (typeof loadCoreNames === "function" ? loadCoreNames() : Promise.resolve()).then(pick).catch(() => {});
+}
 function rpRelation(name, tapped, hex) {
   if (tapped) return "Your color";   // the match % is said once, on the hex line below
   const t = BYNAME.get(String(name).toLowerCase()), st = t && t.id && S.cards[t.id];
@@ -182,7 +211,7 @@ function rpActionRowHTML(name, hex, tapped) {
   const learnHex = tapped || hex, label = rpLearnLabel(name, learnHex);
   const liked = typeof fvHas === "function" && fvHas(learnHex);
   return `<div class="rp-actrow">
-    <button type="button" class="rp-learnpill${label.known ? " rp-learnpill-known" : ""}" data-learnit>${label.known ? ICON.check || "" : ""}<span>${esc(label.t)}</span>${!label.known ? `<em>2 min</em>` : ""}</button>
+    ${label.known ? `<button type="button" class="rp-learnpill rp-learnpill-known" data-learnpair>${ICON.check || ""}<span>${esc(label.t)}</span></button>` : `<button type="button" class="rp-learnpill" data-learnit><span>${esc(label.t)}</span><em>2 min</em></button>`}
     ${typeof sxPairBtnHTML === "function" ? sxPairBtnHTML(learnHex, name) : ""}
     <button type="button" class="icon-btn rp-heart${liked ? " saved" : ""}" data-fvh data-rp-heart aria-label="${liked ? "Remove from your colors" : "Add to your colors"}" aria-pressed="${liked}">${liked ? ICON.heartOn : ICON.heart}</button>
   </div>`;
@@ -289,7 +318,10 @@ function colorFocus(colors, opts = {}) {
     // David, 2026-10-09: "the color's name is in a small, ugly font -- not as pretty as before going full screen"
     // -- the app's own display type (the serif display face at a generous size), the hex quietly beneath it in
     // the sans, same contrast-aware ink (data-ink, already set above) either way.
-    ov.innerHTML = `<div class="rp-focus-tag"><p class="rp-focus-tag-name">${esc(name)}</p><p class="rp-focus-tag-hex">${esc(String(hex).toUpperCase())}</p></div>`;
+    // the lens (David, 2026-10-25): the same color alone, then on white, grey and black. Its surroundings change how it looks, and seeing that
+    // happen is the lesson. The color becomes a patch in the middle; the name's ink follows the surround.
+    ov.innerHTML = `<div class="cf-patch" aria-hidden="true"></div><div class="rp-focus-tag"><p class="rp-focus-tag-name">${esc(name)}</p><p class="rp-focus-tag-hex">${esc(String(hex).toUpperCase())}</p></div>
+      <div class="cf-surr" role="group" aria-label="Show it on a surround">${[["", "Alone"], ["#FFFFFF", "On white"], ["#808080", "On grey"], ["#000000", "On black"]].map(([bg, t], i) => `<button type="button" data-surr="${bg}" aria-pressed="${i === 0}"${i === 0 ? ` class="on"` : ""}>${t}</button>`).join("")}</div>`;
   } else {
     // 2+ colors: full-height (or, stacked, full-width) bands, each with its own name + hex in its own corner,
     // by its own contrast -- no single big name makes sense once there's more than one color to look at alone
@@ -334,6 +366,15 @@ function colorFocus(colors, opts = {}) {
   ov.addEventListener("pointerdown", e => { dragging = true; y0 = e.clientY; });
   ov.addEventListener("pointerup", e => {
     if (!dragging) return; dragging = false;
+    const sb = e.target.closest(".cf-surr button");
+    if (sb) {   // the lens: pick a surround, never close
+      const bg = sb.dataset.surr;
+      ov.querySelectorAll(".cf-surr button").forEach(x => { const on = x === sb; x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); });
+      ov.classList.toggle("cf-on-surround", !!bg);
+      if (bg) { ov.style.setProperty("--surr", bg); ov.setAttribute("data-ink", ink(bg)); } else ov.setAttribute("data-ink", ink(colors[0].hex));
+      buzz(4); return;
+    }
+    if (e.target.closest(".cf-surr")) return;
     if (!multi || e.clientY - y0 > 60) return close();
     if (e.target.closest(".cf-close")) return close();
     const band = e.target.closest(".cf-band");
@@ -978,6 +1019,7 @@ function colorDossier(entry, o = {}) {
   rpStoryFill(el, name, hex, o);
   rpCoverFill(el, name, hex, heroHex, entry);
   rpCoverLike(el, name, hex);
+  rpPairPill(el, name, tapped || hex);
   // a direct tap on the heart itself, the same liking moment as the cover's double-tap (js/favs.js fvWireHeart
   // only swaps the icon; this adds the fill + toast). Guarded: namePage() also calls fvWireHeart on this page,
   // so the plain swap stays a harmless no-op fallback if this one is ever skipped.
