@@ -6985,8 +6985,8 @@ scenario("paintmap", "the map lays out, a tap glides a painting to the middle, t
 scenario("paintmap", "a cold open (no address) lands on the color map as a spiral honeycomb with the most vivid colors in the middle", async t => {
   await t.open("", { settle: 800 });
   await t.waitFor(".screen.hm", 15000, "the color map to open");
-  const hm = t.ev("({ mode: S.hm.mode, arr: S.hm.arr, ord: S.hm.ord && S.hm.ord.sunflower, style: S.hm.style })");
-  t.expect(hm.mode === "colors" && hm.arr === "sunflower" && hm.ord === "vivid" && hm.style === "honeycomb", `a cold open should be Sunflower/vivid as a Honeycomb on the color map, got ${JSON.stringify(hm)}`);
+  const hm = t.ev("({ mode: S.hm.mode, arr: S.hm.arr, ord: S.hm.ord && S.hm.ord.sunflower, style: S.hm.style, src: S.hm.src, fam: S.hm.fam, filter: S.hm.filter })");
+  t.expect(hm.mode === "colors" && hm.arr === "sunflower" && hm.ord === "vivid" && hm.style === "honeycomb" && hm.src === "every-name" && !hm.fam && hm.filter === "all", `a cold open should be Every name, Sunflower/vivid as a Honeycomb on the color map, got ${JSON.stringify(hm)}`);
   t.expect(!/#\/paintings\/map/.test(t.w.location.hash), "a cold open is the color map, not the painting map");
 });
 // David, 2026-10-25: "this loads too slowly sometimes; even a super pixelated, blurry, tiny version of the painting is better than a color" and

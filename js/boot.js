@@ -24,7 +24,7 @@ function bootStart() {
 function coldMap() {
   // David, 2026-10-25: the app opens on the color map as a honeycomb, golden spiral from the middle out, the most vivid colors in the centre.
   // (The random painting-map cluster open, pmOpen("arr=color&rnd=1"), is kept in js/paintmap.js and can be wired back here.)
-  S.hm = S.hm || {}; S.hm.mode = "colors"; S.hm.arr = "sunflower"; S.hm.ord = { ...(S.hm.ord || {}), sunflower: "vivid" }; S.hm.style = "honeycomb";
+  S.hm = S.hm || {}; S.hm.mode = "colors"; S.hm.arr = "sunflower"; S.hm.ord = { ...(S.hm.ord || {}), sunflower: "vivid" }; S.hm.style = "honeycomb"; S.hm.src = "every-name"; S.hm.fam = ""; S.hm.tone = ""; S.hm.filter = "all"; S.hm.near = null;   // every name: all of them, no family, tone or learned filter narrowing it
   return false;   // false = the caller opens hmHome() with those settings
 }
 if (document.readyState === "loading") addEventListener("DOMContentLoaded", bootStart, { once: true });
