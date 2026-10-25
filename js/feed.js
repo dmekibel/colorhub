@@ -290,6 +290,49 @@ function fdStickWire(bar) {
   addEventListener("scroll", h, { passive: true }); addEventListener("resize", h);
   cleanup.push(() => { removeEventListener("scroll", h); removeEventListener("resize", h); });
   setTimeout(run, 60);
+  fdHideWire(bar);
+}
+// Hide the pinned stack (top bar + chip row) on scroll down, show it on scroll up (David, 2026-10-25). Phone only; transform only via
+// html.fd-hid (css/gallery.css), the safe-area band stays painted (html::before). Never hides on Overview near the top, with a sheet open,
+// or when the page is barely longer than the screen.
+// where the pinned chip row's bottom edge really is: while the stack is slid away (html.fd-hid) its rect is above the screen, so measure where it will be
+function fdBarBottom(bar) {
+  const r = bar.getBoundingClientRect();
+  if (!document.documentElement.classList.contains("fd-hid")) return r.bottom;
+  return (parseFloat(getComputedStyle(bar).top) || 0) + bar.offsetHeight;
+}
+let FD_HIDE_OFF = null;   // the one live hide-on-scroll wire (a remount replaces it)
+function fdHideWire(bar0) {
+  if (FD_HIDE_OFF) FD_HIDE_OFF();
+  let bar = bar0;
+  const root = document.documentElement;
+  let last = scrollY, up = 0, down = 0, hid = false, raf = 0;
+  const topBar = () => document.querySelector(".gl-page > .art-top, .aw-page > .art-top, .rp-bar.on");
+  const set = on => {
+    if (on === hid) return;
+    if (on) {
+      const a = topBar(); if (!a) return;
+      const ah = Math.round(a.getBoundingClientRect().height), bh = Math.round(bar.getBoundingClientRect().height);
+      root.style.setProperty("--fd-ah", (a.classList.contains("rp-bar") ? 0 : Math.max(0, ah - 1)) + "px"); root.style.setProperty("--fd-bh", (a.classList.contains("rp-bar") ? ah + bh : bh + 1) + "px");
+      root.style.setProperty("--fd-band", a.classList.contains("rp-bar") ? getComputedStyle(a).backgroundColor : "");
+    }
+    hid = on; root.classList.toggle("fd-hid", on);
+  };
+  const pinY = () => { const p = bar.parentElement; return p ? p.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(bar).top) || 0) : 0; };
+  const run = () => {
+    raf = 0; if (!bar.isConnected) bar = document.querySelector(".fd-bar:not(.fd-pre)"); if (!bar) return;
+    if (root.classList.contains("desk")) { set(false); return; }
+    const y = scrollY, dy = y - last; last = y;
+    if (dy > 0) { down += dy; up = 0; } else if (dy < 0) { up -= dy; down = 0; }
+    const py = pinY(), about = !!bar.querySelector(".fd-chip.on[data-fc='about'],.fd-chip.on[data-awtab='about'],.fd-chip.on[data-awtab='overview']");
+    const long = root.scrollHeight > innerHeight * 1.4, sheetOpen = !!document.querySelector(".sheet");
+    if (sheetOpen || !long || y <= py + 24 || (about && y < py + 240)) { set(false); return; }
+    if (!hid && down > 12) set(true); else if (hid && up >= 8) set(false);
+  };
+  const h = run;   // scroll events already arrive once per frame; no extra rAF hop
+  addEventListener("scroll", h, { passive: true });
+  FD_HIDE_OFF = () => { removeEventListener("scroll", h); hid = false; root.classList.remove("fd-hid"); if (FD_HIDE_OFF === off) FD_HIDE_OFF = null; };
+  const off = FD_HIDE_OFF; cleanup.push(off);
 }
 
 // ---------- the feed ----------
@@ -648,7 +691,10 @@ function fdMount(host, o) {
   grid.onclick = e => {
     if (Date.now() - peeked < 700) { e.preventDefault(); return; }   // the tap that ended a long-press is not an open
     const t = e.target.closest(".fd-tile[data-fk]"); if (!t) return;
-    const it = items[+t.dataset.fk]; buzz(6); leave(); if (it.card) it.open(); else galleryPage(it.j, true, isColor ? sub.hex : null);
+    const it = items[+t.dataset.fk]; buzz(6); leave();
+    if (it.card) return it.open();
+    { const list = [], fks = []; items.forEach((x, n) => { if (!x.card && !x.head && !x.sk && x.j != null) { list.push(x.j); fks.push(n); } }); glCtxSet(list, fks, fks.indexOf(+t.dataset.fk), SKEY); }   // swiping the opened painting walks this list
+    galleryPage(it.j, true, isColor ? sub.hex : null);
   };
   grid.addEventListener("focusin", e => { const t = e.target.closest(".fd-tile[data-fk]"); if (t) fk = +t.dataset.fk; });
   function focusK(n) {
@@ -672,7 +718,7 @@ function fdMount(host, o) {
   });
   // leaving for a tile: remember how far the feed was opened and which tile was at the top of the screen, so Back can put it back exactly
   function leave() {
-    const bh = bar.getBoundingClientRect().bottom; let ak = -1, ay = 0;
+    const bh = fdBarBottom(bar); let ak = -1, ay = 0;
     live.forEach((el, k) => { const r = el.getBoundingClientRect(); if (r.bottom > bh && (ak < 0 || k < ak)) { ak = k; ay = r.top; } });
     FD_MEMO.set(SKEY, { shown, ak, ay, chip: st.chip, metric: st.metric, color: st.color });
   }
@@ -700,7 +746,7 @@ function fdMount(host, o) {
   const SUBDOT = () => { const d = chipsEl.querySelector(".fd-dot"); if (d) d.hidden = !fdChanged(); };   // the active chip's mark that its Settings are not the defaults
   // Map: the same list as the painting map, the painting nearest the top of the screen in the middle, the same choices as filters
   const topPainting = () => {
-    const bh = bar.getBoundingClientRect().bottom; let ak = -1;
+    const bh = fdBarBottom(bar); let ak = -1;
     live.forEach((el, k) => { const r = el.getBoundingClientRect(); if (!items[k].head && !items[k].card && r.bottom > bh && (ak < 0 || k < ak)) ak = k; });
     if (ak < 0) ak = items.findIndex(x => !x.head && !x.card);
     return ak >= 0 ? items[ak].j : -1;

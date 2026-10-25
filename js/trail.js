@@ -247,6 +247,9 @@ function tlgSnapshot() {
 // xBack() on it pops that single entry and lands on the origin anyway -- reachesOrigin covers that case too,
 // not just the no-trail one.
 function tlgDest(el, axis) {
+  // a painting page (David, 2026-10-25, Pinterest): the pull-down closes ONE step, back to the page it was opened from (the list, same tab and
+  // tile via FD_MEMO); the jump to the origin lives on in a long-press on ‹ and the trail sheet
+  if (axis === "y" && el.classList.contains("gl-page")) axis = "x";
   if (axis === "y") {
     // David, 2026-10-20: a painting opened from the PAINTING map pulls down back to that painting map, where you left
     // it (its pan is kept in PM_PAN), not all the way out to the color map; any other trail closes to its origin as before
@@ -280,7 +283,7 @@ function tlgWire(el) {
   const clean = () => {
     if (a && a.floor) a.floor.remove();
     if (a && a.anim) { try { a.anim.cancel(); } catch (e) {} if (TLG_ANIM === a.anim) TLG_ANIM = null; }
-    el.style.transition = ""; el.style.transform = ""; el.style.willChange = "";
+    el.style.transition = ""; el.style.transform = ""; el.style.willChange = ""; el.style.borderRadius = ""; el.style.overflow = ""; el.style.transformOrigin = "";
     a = null;
   };
   el.addEventListener("pointerdown", e => {
@@ -305,6 +308,11 @@ function tlgWire(el) {
     const now = performance.now(), dt = Math.max(1, now - a.lastT);
     const d = a.axis === "x" ? dx : dy, resisted = Math.max(0, d < 80 ? d * .55 : 44 + (d - 80) * .35);
     el.style.transition = "none";
+    if (a.axis === "y" && el.classList.contains("gl-page")) {   // the whole page follows the finger and shrinks a little, its corners rounding
+      const f = Math.min(1, d / 320);
+      el.style.transformOrigin = "50% 0"; el.style.borderRadius = Math.round(28 * Math.min(1, d / 90)) + "px"; el.style.overflow = "hidden";
+      el.style.transform = `translateY(${Math.max(0, d * .9)}px) scale(${(1 - .06 * f).toFixed(4)})`;
+    } else
     el.style.transform = a.axis === "x" ? `translateX(${resisted}px)` : `translateY(${resisted}px)`;
     const v = ((a.axis === "x" ? e.clientX - a.lastX : e.clientY - a.lastY)) / dt;
     if (a.axis === "x") a.vx = v; else a.vy = v;
@@ -313,8 +321,8 @@ function tlgWire(el) {
   const release = e => {
     if (!a || e.pointerId !== a.id) return;
     if (!a.axis) { a = null; return; }
-    const v = a.axis === "x" ? a.vx : a.vy, past = (a.d || 0) > TLG_PULL || v > TLG_FLING, dest = a.dest, floor = a.floor;
-    const final = a.axis === "x" ? `translateX(${innerWidth + 60}px)` : `translateY(${innerHeight * .7 + 60}px)`;
+    const gl = a.axis === "y" && el.classList.contains("gl-page"), v = a.axis === "x" ? a.vx : a.vy, past = (a.d || 0) > (gl ? 120 : TLG_PULL) || v > TLG_FLING, dest = a.dest, floor = a.floor;
+    const final = a.axis === "x" ? `translateX(${innerWidth + 60}px)` : gl ? `translateY(${innerHeight * .8}px) scale(.9)` : `translateY(${innerHeight * .7 + 60}px)`;
     if (past) {
       const remaining = (a.axis === "x" ? innerWidth - a.resisted : innerHeight * .7 - a.resisted);
       const dur = Math.min(TLG_CAP, Math.max(120, remaining / Math.max(v, .35)));
@@ -330,7 +338,7 @@ function tlgWire(el) {
     } else {
       el.style.transition = `transform ${TLG_SPRING}ms var(--spring)`;
       el.style.transform = "translate(0,0)";
-      setTimeout(() => { if (floor) floor.remove(); el.style.transition = ""; el.style.transform = ""; el.style.willChange = ""; }, TLG_SPRING + 20);
+      setTimeout(() => { if (floor) floor.remove(); el.style.transition = ""; el.style.transform = ""; el.style.willChange = ""; el.style.borderRadius = ""; el.style.overflow = ""; el.style.transformOrigin = ""; }, TLG_SPRING + 20);
     }
     a = null;
   };

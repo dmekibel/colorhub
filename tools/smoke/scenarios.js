@@ -2326,6 +2326,7 @@ scenario("pages", "a fast scripted scroll never leaves the pinned header's trans
   const INSET = 59;
   await H.openPage(t, "#/color/scarlet", "Scarlet");
   const bar = await t.waitFor(() => t.$("body > .rp-bar"), 8000, "the pinned header");
+  t.ev("typeof FD_HIDE_OFF === 'function' && FD_HIDE_OFF && FD_HIDE_OFF(); 1");   // this scenario is about the bar's own "on" transition; hide-on-scroll has its own scenario
   { const st = t.w.document.createElement("style"); st.textContent = `:root{--top:${INSET}px !important}`; t.w.document.head.appendChild(st); }
   const settled = () => { const r = bar.getBoundingClientRect(); return Math.abs(r.top) < 1; };   // .on's resting transform: translate(-50%,0)
   for (let rep = 0; rep < 6; rep++) {
@@ -4395,7 +4396,7 @@ scenario("paintings", "a color page says where you met it, and the link reopens 
 scenario("paintings", "swiping the picture moves to the next/previous painting by the same painter", async t => {
   await t.open("#/gallery/12", { settle: 800 });
   await t.waitFor("[data-glmorepainter] .gl-rail .gl-pin", 15000, "More by this painter (painterOrder ready)");
-  const title0 = t.text(".p-title"), hash0 = TRL.hash(t);
+  const title0 = t.text(".p-title"), hash0 = TRL.hash(t), depth0 = t.ev("XSTACK.length");
   const span = t.$(".gl-hero > span"), r = span.getBoundingClientRect(), w = t.w;
   const swipe = (x1, x2) => {
     const o = { bubbles: true, cancelable: true, clientY: r.top + r.height / 2, pointerId: 1, pointerType: "touch", isPrimary: true, view: w };
@@ -4407,8 +4408,66 @@ scenario("paintings", "swiping the picture moves to the next/previous painting b
   if (t.text(".p-title") === title0) { swipe(r.left + r.width * .15, r.left + r.width * .85); await t.sleep(500); }   // the edge of the timeline: try the other way
   t.expect(t.text(".p-title") !== title0, "a swipe never moved to another painting");
   t.expect(/^#\/gallery\/\d+/.test(TRL.hash(t)) && TRL.hash(t) !== hash0, "the swipe didn't navigate to a gallery address");
-  await t.click(TRL.screenBack(t), { wait: 500 });
-  t.expect(t.text(".p-title") === title0, "Back after a swipe didn't return to the first painting");
+  // the swipe REPLACES this painting (no new trail step): Back leaves for the page before, not for the first painting (David, 2026-10-25)
+  t.expect(t.ev("XSTACK.length") === depth0, `the swipe changed the trail depth from ${depth0} to ${t.ev("XSTACK.length")}`);
+});
+
+// Pinterest-style gestures (David, 2026-10-25): swipe the page to the next / previous painting of the list it was opened from; pull down to close one step
+async function glDrag(t, target, pts, id = 7) {
+  const w = t.w, o = { bubbles: true, cancelable: true, pointerId: id, pointerType: "touch", isPrimary: true, view: w };
+  target.dispatchEvent(new w.PointerEvent("pointerdown", { ...o, clientX: pts[0][0], clientY: pts[0][1] }));
+  for (const [x, y] of pts.slice(1, -1)) { target.dispatchEvent(new w.PointerEvent("pointermove", { ...o, clientX: x, clientY: y })); await t.sleep(16); }
+  return () => target.dispatchEvent(new w.PointerEvent("pointerup", { ...o, clientX: pts[pts.length - 1][0], clientY: pts[pts.length - 1][1] }));
+}
+scenario("paintings", "swiping a painting opened from the feed walks that feed's list without a new trail step", async t => {
+  await feedOpen(t, 12);
+  const tiles = t.$$(".fd-tile[data-fk]");
+  await t.click(tiles[2], { wait: 900 });
+  await t.waitFor(() => /^#\/gallery\/\d+/.test(TRL.hash(t)) ? true : null, 8000, "the tile's painting");
+  const hash0 = TRL.hash(t), title0 = t.text(".p-title"), depth0 = t.ev("XSTACK.length"), ctx = t.ev("JSON.stringify(GL_CTXS.get(+location.hash.split('/').pop()) || null)");
+  t.expect(ctx && ctx !== "null", "opening a feed tile left no list context for swiping");
+  const c = JSON.parse(ctx), nextIdx = c.list[c.pos + 1];
+  await t.sleep(900);
+  const page = t.$(".screen.gl-page"), W = t.ev("innerWidth");
+  t.w.scrollTo(0, 0); await t.sleep(100);
+  // mid-drag: the page follows the finger
+  let up = await glDrag(t, page, [[W * .8, 400], [W * .6, 402], [W * .5, 404], [W * .35, 404]]);
+  t.expect(/translate3d\(-/.test(page.style.transform), `mid-drag the page doesn't follow the finger (${page.style.transform})`);
+  up();
+  await t.waitFor(() => TRL.hash(t) !== hash0 ? true : null, 4000, "the next painting");
+  t.expect(TRL.hash(t).endsWith("/" + nextIdx), `swiped to ${TRL.hash(t)}, the list's next is ${nextIdx}`);
+  t.expect(t.ev("XSTACK.length") === depth0, `the swipe pushed a trail step (${depth0} -> ${t.ev("XSTACK.length")})`);
+  t.expect(t.text(".p-title") !== title0, "the title didn't change");
+  // ignored: a drag that starts at the left edge (the iOS back swipe)
+  await t.sleep(900);
+  const hash1 = TRL.hash(t);
+  up = await glDrag(t, t.$(".screen.gl-page"), [[10, 400], [60, 402], [160, 404], [300, 404]]); up(); await t.sleep(500);
+  t.expect(TRL.hash(t) === hash1, "a drag from the left edge swiped the painting");
+  // previous: back to where it came from
+  up = await glDrag(t, t.$(".screen.gl-page"), [[W * .3, 400], [W * .4, 402], [W * .6, 404], [W * .85, 404]]); up();
+  await t.waitFor(() => TRL.hash(t) === hash0 ? true : null, 4000, "the previous painting");
+  // Back leaves for the page before the list
+  await t.click(TRL.screenBack(t), { wait: 700 });
+  t.expect(t.ev("XSTACK.length") === depth0 - 1, `Back after swiping left the trail at ${t.ev("XSTACK.length")}, expected ${depth0 - 1}`);
+});
+scenario("paintings", "pulling a painting page down at the top closes one step back to the page it came from", async t => {
+  await feedOpen(t, 12);
+  await t.click(t.$$(".fd-tile[data-fk]")[1], { wait: 900 });
+  await t.waitFor(() => t.$(".screen.gl-page [data-glfeed]") ? true : null, 8000, "the painting");
+  await t.sleep(1200);
+  const page = t.$(".screen.gl-page"), depth0 = t.ev("XSTACK.length"), W = t.ev("innerWidth");
+  t.w.scrollTo(0, 0); await t.sleep(900);
+  let up = await glDrag(t, page, [[W / 2, 200], [W / 2, 215], [W / 2, 240], [W / 2, 330]], 9);
+  t.expect(/translateY\(/.test(page.style.transform) && /scale\(0\.\d+\)/.test(page.style.transform), `mid-pull the page isn't following (${page.style.transform})`);
+  up();
+  await t.waitFor(() => t.ev("XSTACK.length") === depth0 - 1 ? true : null, 4000, "the page to close one step");
+  // a short pull springs back
+  await feedOpen(t, 12);
+  await t.click(t.$$(".fd-tile[data-fk]")[1], { wait: 900 });
+  await t.waitFor(() => t.$(".screen.gl-page [data-glfeed]") ? true : null, 8000, "the painting again");
+  await t.sleep(1200); t.w.scrollTo(0, 0); await t.sleep(900);
+  const d1 = t.ev("XSTACK.length"); up = await glDrag(t, t.$(".screen.gl-page"), [[W / 2, 200], [W / 2, 215], [W / 2, 240]], 10); up(); await t.sleep(700);
+  t.expect(t.ev("XSTACK.length") === d1 && t.$(".screen.gl-page"), "a short pull closed the page");
 });
 // ---------- Keep exploring (js/feed.js): the Pinterest-style feed at the foot of every painting page (David, 2026-10-24) ----------
 // a painting reached by browsing (from a color page, the map...) starts on its Color feed: tap Overview to get at the page's own sections (palette, findings...)
@@ -4438,6 +4497,32 @@ async function feedScroll(t) {
 }
 const feedCaps = t => t.$$(".fd-tile[data-fk] .fd-cap").map(e => t.text(e));
 const feedTop = t => { const r = t.$(".fd-grid").getBoundingClientRect(); return r.top + t.w.scrollY; };
+// The pinned stack (top bar + chip row): sits right under the safe area, hides on scroll down, returns on scroll up (David, 2026-10-25)
+scenario("paintings", "the pinned bar sits under the safe area and hides on scroll down then returns on scroll up", async t => {
+  const INSET = 62;
+  await t.open("#/gallery/12", { settle: 600 });
+  { const st = t.w.document.createElement("style"); st.textContent = `:root{--top:${INSET}px !important}`; t.w.document.head.appendChild(st); }
+  t.w.location.hash = "#/home"; await t.sleep(300); t.w.location.hash = "#/gallery/12"; await t.sleep(300);
+  await t.waitFor("[data-glfeed]", 15000, "the feed's host");
+  await feedPick(t, "color");
+  const bar = () => t.$(".gl-page > .art-top"), chips = () => t.$("[data-glfeed] .fd-bar"), ty = el => new t.w.DOMMatrix(t.w.getComputedStyle(el).transform).m42;
+  const sc = async y => { t.w.scrollTo(0, y); t.w.dispatchEvent(new t.w.Event("scroll")); await t.sleep(120); };
+  const yEnd = 2400;
+  await sc(0); for (let y = 600; y <= yEnd; y += 300) await sc(y); await t.sleep(500);
+  t.expect(ty(bar()) < -20 && ty(chips()) < -60 && t.w.document.documentElement.classList.contains("fd-hid"), `after scrolling down to the feed the bar is at ${ty(bar())} / chips at ${ty(chips())}, expected hidden (y ${t.w.scrollY}, H ${t.w.document.documentElement.scrollHeight}, ${t.w.document.documentElement.className}, tiles ${t.$$(".fd-tile").length}, pin ${t.ev("(()=>{const b=document.querySelector(\"[data-glfeed] .fd-bar\");const p=b.parentElement;return Math.round(p.getBoundingClientRect().top+scrollY)+\"/\"+getComputedStyle(b).top+\"/\"+typeof fdHideWire+\"/\"+b.className})()")})`);
+  await sc(t.w.scrollY - 40); await sc(t.w.scrollY - 60); await t.sleep(500);
+  t.expect(!t.w.document.documentElement.classList.contains("fd-hid"), `a small scroll up left the bar at ${ty(bar())} / chips at ${ty(chips())}, expected back (y ${t.w.scrollY}, sheet ${!!t.$(".sheet")}, ${t.w.document.documentElement.className})`);
+  await t.waitFor(() => ty(bar()) === 0 && ty(chips()) === 0 ? true : null, 4000, "the bar to finish sliding back");
+  const top0 = bar().getBoundingClientRect().top;
+  t.expect(Math.abs(top0) <= 1, `the bar's top is ${top0}px, expected 0 (sticky under the band)`);
+  const btn = t.$(".gl-page > .art-top [data-back]").getBoundingClientRect();
+  t.expect(btn.top >= INSET + 3 && btn.top <= INSET + 6.5, `the buttons start ${btn.top - INSET}px under the safe area, expected 4px`);
+  const chipTop = chips().getBoundingClientRect().top, barBottom = bar().getBoundingClientRect().bottom;
+  t.expect(Math.abs(chipTop - barBottom) <= 2, `the chip row starts ${chipTop - barBottom}px from the bar`);
+  t.expect(barBottom - INSET <= 54, `the bar is ${barBottom - INSET}px tall under the inset, expected ~52`);
+  t.ev("scrollTo(0,0)"); await t.sleep(300);
+  t.expect(!t.w.document.documentElement.classList.contains("fd-hid"), "at the top the bar is not shown");
+});
 scenario("paintings", "Keep exploring: a feed at the bottom of a painting page, four chips, closest palette first, 24 at a time, a bounded number of live pictures", async t => {
   await feedOpen(t, 12);
   t.expect(t.$$(".fd-chip").map(b => t.text(b).replace(/ ·.*/, "")).join() === "Overview,Color,Vibe,Painter,Era,Place", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}", not Overview, Color, Vibe, Painter, Era, Place`);
@@ -7543,7 +7628,7 @@ for (const hash of ["#/color/cobalt", "#/name/ecru", "#/read/mauve", "#/hub/sour
     for (const sel of ["[data-back]", "[data-tl-exit]"]) {
       const node = t.$("#app .screen " + sel); if (!node) continue;
       const r = node.getBoundingClientRect();
-      if (r.top < INSET + 6) bad.push(`${sel} at ${Math.round(r.top)}px`);
+      if (r.top < INSET + 3) bad.push(`${sel} at ${Math.round(r.top)}px`);
     }
     t.expect(!bad.length, `on the status bar: ${bad.join(", ")}`);
   });
