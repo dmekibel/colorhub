@@ -301,6 +301,9 @@ function fdBarBottom(bar) {
   if (!document.documentElement.classList.contains("fd-hid")) return r.bottom;
   return (parseFloat(getComputedStyle(bar).top) || 0) + bar.offsetHeight;
 }
+let FD_HIDE_SHOW = null;
+const fdShowBar = () => { FD_HIDE_HOLD = Date.now() + 900; if (FD_HIDE_SHOW) FD_HIDE_SHOW(); };
+let FD_HIDE_HOLD = 0;   // until this time the pinned stack stays shown: a chip tap scrolls the page itself, and that scroll must not count as the reader scrolling down
 let FD_HIDE_OFF = null;   // the one live hide-on-scroll wire (a remount replaces it)
 function fdHideWire(bar0) {
   if (FD_HIDE_OFF) FD_HIDE_OFF();
@@ -323,12 +326,14 @@ function fdHideWire(bar0) {
     raf = 0; if (!bar.isConnected) bar = document.querySelector(".fd-bar:not(.fd-pre)"); if (!bar) return;
     if (root.classList.contains("desk")) { set(false); return; }
     const y = scrollY, dy = y - last; last = y;
+    if (Date.now() < FD_HIDE_HOLD) { down = up = 0; set(false); return; }
     if (dy > 0) { down += dy; up = 0; } else if (dy < 0) { up -= dy; down = 0; }
     const py = pinY(), about = !!bar.querySelector(".fd-chip.on[data-fc='about'],.fd-chip.on[data-awtab='about'],.fd-chip.on[data-awtab='overview']");
     const long = root.scrollHeight > innerHeight * 1.4, sheetOpen = !!document.querySelector(".sheet");
     if (sheetOpen || !long || y <= py + 24 || (about && y < py + 240)) { set(false); return; }
     if (!hid && down > 12) set(true); else if (hid && up >= 8) set(false);
   };
+  FD_HIDE_SHOW = () => { down = up = 0; set(false); };
   const h = run;   // scroll events already arrive once per frame; no extra rAF hop
   addEventListener("scroll", h, { passive: true });
   FD_HIDE_OFF = () => { removeEventListener("scroll", h); hid = false; root.classList.remove("fd-hid"); if (FD_HIDE_OFF === off) FD_HIDE_OFF = null; };
@@ -358,7 +363,7 @@ function fdMount(host, o) {
   const abOf = it => it.sk || it.card || it.head ? it.ab : Math.min(2.3, Math.max(.4, G.ar[it.j]));
   const aboutEl = o.about || null; if (aboutEl) aboutEl.remove();   // the article tab survives the feed being drawn around it
   host.innerHTML = `<div class="sec-head"><b>Keep exploring</b><span>closest first</span></div>
-    <div class="fd-bar"><div class="fd-chips" role="tablist" aria-label="What counts as related"></div></div>
+    <div class="fd-bar"><div class="fd-chips" role="tablist" aria-label="What counts as related"></div><div class="fd-quick" role="radiogroup" aria-label="Match color by" aria-hidden="true"></div></div>
     <p class="fd-lead" aria-live="polite"></p>
     <div class="fd-grid" role="group" aria-label="${isColor ? "Paintings and more that hold this color" : "Related paintings, closest first"}"></div>
     <div class="fd-state"></div>`;
@@ -376,8 +381,9 @@ function fdMount(host, o) {
   const showAbout = on => { if (!aboutEl) return; aboutEl.hidden = !on; lead.hidden = on; grid.hidden = on; state.hidden = on; if (secHead) secHead.hidden = on; host.dataset.fdTab = on ? "about" : eff; };
   // a tab change keeps the chips where they are: if you had scrolled below the top of this section, it lands on its top
   const pinY = () => { const a = artTop(), ah = glDesk() || !a ? 0 : a.getBoundingClientRect().height; return Math.max(0, Math.round(host.getBoundingClientRect().top + scrollY - ah)); };   // the scroll at which the chip row sits pinned at the top
-  const tabTop = force => { const y = pinY(); if (force || scrollY > y + 4) scrollTo(0, y); };
+  const tabTop = force => { fdShowBar(); const y = pinY(); if (force || scrollY > y + 4) scrollTo(0, y); };
   const pinTabs = () => {
+    fdShowBar();
     scrollTo({ top: pinY(), behavior: reduceMotion ? "auto" : "smooth" });
     let moved = false; const q = () => { moved = true; }; addEventListener("touchstart", q, { once: true, passive: true }); addEventListener("wheel", q, { once: true, passive: true });
     setTimeout(() => { removeEventListener("touchstart", q); removeEventListener("wheel", q); if (!gone && !moved && Math.abs(scrollY - pinY()) > 3) scrollTo(0, pinY()); }, 560);
@@ -398,7 +404,7 @@ function fdMount(host, o) {
     eff = effective();
     const sheetOn = !!document.querySelector(".fs-sheet");
     chipsEl.innerHTML = CHIPS.map(([k, t]) => {
-      const dis = !!off(k), on = k === eff, tune = on && k !== "about", lab = !isColor && k === "color" && on && st.metric !== "overall" ? `Color · ${FD_SHORT[st.metric]}` : t;   // the by… switch: Overall is the default, so it needs no word
+      const dis = !!off(k), on = k === eff, tune = on && k !== "about", lab = !isColor && k === "color" && on ? `${t}<span class="fd-ml" data-fml aria-hidden="true">${st.metric !== "overall" ? " · " + FD_SHORT[st.metric] : ""}</span>` : t;   // the by… switch: the chosen way rides on the chip; its label (or a caret on Overall) opens the quick row (below)
       return `<button class="fd-chip${on ? " on" : ""}${tune && sheetOn ? " fd-open" : ""}${dis ? " dis" : ""}" role="tab" data-fc="${k}" aria-selected="${on}"${dis ? ` aria-disabled="true"` : ""}${tune ? ` aria-haspopup="dialog" aria-label="${esc(t)}, settings"` : ""}>${lab}${tune ? `<span class="fd-tune" aria-hidden="true">${FD_ICON_TUNE}</span><i class="fd-dot" hidden></i>` : ""}</button>`;
     }).join("");
     SUBDOT();
@@ -412,15 +418,41 @@ function fdMount(host, o) {
   // so the feed fills it (Overview: the top of the article, just under the chips)
   const closeSettings = () => { const x = document.querySelector(".sheet.fs-half .fs-x"); if (x) x.click(); };
   const toggleSettings = () => { if (document.querySelector(".sheet.fs-half")) { buzz(4); closeSettings(); } else { buzz(4); openSettings(); } };
+  // ----- the quick row: the ways to match Color, a slim second row under the chips (David, 2026-10-25) -----
+  // It opens when you tap into Color from another tab, or tap the chip's own label ("· Dominant" / the caret); one tap on a choice applies it and the row
+  // slides away. It is an overlay (it never moves the pictures), and it also goes away on a scroll or touch, a tap elsewhere, a tab change and Escape.
+  const quick = bar.querySelector(".fd-quick"); let quickOn = false, quickAt = 0;
+  const FD_QLAB = { overall: "Overall palette", dominant: "Big colors", accents: "Accents", mood: "Mood", light: "Light", color: "One color", layout: "Layout" };
+  const quickClose = () => { if (!quickOn) return; quickOn = false; quick.classList.remove("on"); quick.setAttribute("aria-hidden", "true"); quick.querySelectorAll("button").forEach(x => x.tabIndex = -1); };
+  const quickOpen = () => {
+    if (isColor || eff !== "color") return;
+    const q = ctx.q(), canLayout = !!(o.img && o.img() && twReadable(o.img()));
+    quick.innerHTML = TW_METRICS.filter(([k]) => k !== "layout" || canLayout).map(([k]) => { const nope = k === "accents" && !q.accents.length;
+      return `<button class="fd-qo${k === st.metric ? " on" : ""}" data-qm="${k}" role="radio" aria-checked="${k === st.metric}"${nope ? " disabled" : ""}>${FD_QLAB[k]}</button>`; }).join("");
+    quickOn = true; quickAt = Date.now(); quick.setAttribute("aria-hidden", "false");
+    requestAnimationFrame(() => quick.classList.add("on"));
+    const on = quick.querySelector(".on"); if (on) quick.scrollLeft = Math.max(0, on.offsetLeft - 40);
+  };
+  quick.addEventListener("click", e => {
+    const b = e.target.closest("[data-qm]"); if (!b || b.disabled) return;
+    buzz(4); st.metric = b.dataset.qm; if (st.metric === "color") st.color = 0; st.chip = "color"; save(); quickClose(); chipsDraw(); rerank(false);
+  });
+  const quickAway = e => { if (quickOn && !e.target.closest(".fd-quick,[data-fml]")) quickClose(); };
+  const quickMove = () => { if (quickOn && Date.now() - quickAt > 350) quickClose(); };
+  const quickKey = e => { if (e.key === "Escape") quickClose(); };
+  document.addEventListener("pointerdown", quickAway, true); addEventListener("touchmove", quickMove, { passive: true }); addEventListener("wheel", quickMove, { passive: true }); addEventListener("keydown", quickKey);
+  cleanup.push(() => { document.removeEventListener("pointerdown", quickAway, true); removeEventListener("touchmove", quickMove); removeEventListener("wheel", quickMove); removeEventListener("keydown", quickKey); });
   chipsEl.onclick = e => {
     const b = e.target.closest("[data-fc]"); if (!b) return;
     const k = b.dataset.fc, why = off(k);
     if (why) { buzz(4); leadDraw(why); return; }
+    if (k === eff && k === "color" && !isColor && e.target.closest("[data-fml]")) { buzz(4); if (quickOn) quickClose(); else quickOpen(); return; }
     if (k === eff) { if (k === "about") { pinTabs(); return; } return toggleSettings(); }
-    closeSettings();
+    quickClose(); closeSettings();
     if (aboutEl && k === "about") { st.chip = "about"; save(); buzz(4); chipsDraw(); showAbout(true); pinTabs(); return; }
     if (aboutEl && eff === "about") showAbout(false);
     st.chip = k; if (isColor) st.color = 0; save(); buzz(4); rerank(false); pinTabs();
+    if (k === "color" && !isColor) quickOpen();
   };
 
   // ----- Color's metric switch (js/twins.js): a block inside that tab's Settings -----
@@ -570,7 +602,7 @@ function fdMount(host, o) {
   function relayoutAll() { const keep = shown; live.forEach(el => el.remove()); live.clear(); relayout(); shown = keep; draw(); }
   // the next page of the ranking (res.next, above): appended to the same list, so the feed only ever ends when nothing is left to rank
   function fetchMore() {
-    const res = curRes; if (!res || !res.next || res.moreDone || moreBusy || gone) return;
+    const res = curRes; if (!res || !res.next || res.moreDone || moreBusy || gone || res.items !== items || (items[0] && items[0].sk)) return;   // never page a list that is not the one on screen (a tapped tab's skeleton used to keep draining the old list's whole tail in one go: 3 s frozen)
     moreBusy = true; const mine = tok;
     Promise.resolve().then(() => res.next()).catch(() => { res.moreDone = true; }).then(() => {
       moreBusy = false; if (gone || mine !== tok || res !== curRes) return;
@@ -618,10 +650,11 @@ function fdMount(host, o) {
   function rerank(scrollUp) {
     const mine = ++tok, was = scrollUp && built && gridTop() < scrollY + 80;   // you were down in the old list: land at the new first tile, just under the chips
     chipsDraw(); leadDraw("");
-    if (aboutEl && eff === "about") { tok++; showAbout(true); return; }
+    if (aboutEl && eff === "about") { tok++; showAbout(true); setTimeout(() => { if (!gone) warmStart(); }, 1200); return; }
     showAbout(false);
     const k = key(), hit = FD_CACHE.get(k), t0 = performance.now();
     const done = res => {
+      if (mine === tok) rankBusy = false;
       if (mine !== tok || gone) return;
       // a Back to a list that was opened far down: ask for pages until it is as long as it was, so the tile you left is there to land on
       if (memo && !memoFilled && res.next && !res.moreDone && res.items && res.items.length < memo.shown) {
@@ -637,8 +670,9 @@ function fdMount(host, o) {
       afterBuild();
     };
     if (hit) return done(hit);
-    skeleton(); state.innerHTML = "";
+    rankBusy = true; curRes = null; skeleton(); state.innerHTML = "";
     const run = () => Promise.resolve().then(() => RANK[eff](ctx, { metric: st.metric, color: st.color })).then(done, e => {
+      if (mine === tok) rankBusy = false;
       if (mine !== tok || gone) return;
       items = []; shown = 0; live.forEach(el => el.remove()); live.clear(); grid.style.height = "0px";
       state.innerHTML = `<p class="fd-empty">That didn't load. Check your connection and try again.</p><button class="fd-up" data-fdretry>Try again</button>`;
@@ -647,7 +681,38 @@ function fdMount(host, o) {
   }
   // once the feed is up: the facets, loaded quietly, decide whether Painter and Place apply to this painting
   let facetsAsked = false, vibeAsked = false;
+  // Warm-up (David, 2026-10-25: "everything is slow"): once the visible tab has painted, the other tabs' first pages (Vibe first, then Painter, Era, Place)
+  // and the other Color metrics are ranked quietly, one at a time in idle time, and stored in FD_CACHE under the exact key the tab uses, with their first
+  // 12 pictures fetched at low priority. A chip tap or a metric switch then finds its list ready. Never while you scroll or touch, never while a tab is
+  // loading on screen, and it stops when the page goes.
+  let warmOn = false, lastInput = Date.now(), rankBusy = false;
+  const inputSeen = () => { lastInput = Date.now(); };
+  ["touchstart", "touchmove", "wheel", "scroll", "pointerdown", "keydown"].forEach(ev => { addEventListener(ev, inputSeen, { passive: true }); cleanup.push(() => removeEventListener(ev, inputSeen)); });
+  const warmPics = res => {
+    const js = (res.items || []).filter(x => x.j != null && !x.head && !x.card).slice(0, 12).map(x => x.j), shs = [...new Set(js.map(j => Math.floor(j / G.shard)))];
+    Promise.all(shs.map(sh => glShard(sh).catch(() => {}))).then(() => js.forEach(j => { if (gone) return; const dd = glDetailNow(j); if (!dd) return; const im = new Image(); im.fetchPriority = "low"; im.decoding = "async"; im.src = fdSrc(dd, colW || 120); })).catch(() => {});
+  };
+  function warmStart() {
+    if (warmOn || isColor || gone) return; warmOn = true;
+    const jobs = [["color", st.metric], ["vibe", st.metric], ["painter", st.metric], ["era", st.metric], ["place", st.metric]];
+    if (st.metric === "overall" || st.chip !== "color") ["dominant", "mood", "accents", "light"].forEach(m => jobs.push(["color", m]));
+    const idle = cb => (window.requestIdleCallback ? requestIdleCallback(cb, { timeout: 2500 }) : setTimeout(cb, 120));
+    const next = () => {
+      if (gone) return;
+      const job = jobs.shift(); if (!job) return;
+      const [chip, metric] = job, k = `${SKEY}|${chip}|${metric}|${st.color}`;
+      if (FD_CACHE.has(k) || (chip !== "color" && (off(chip) || (chip === "vibe" && ctx.vibeOff))) || (chip === "color" && metric === "accents" && !ctx.q().accents.length)) return idle(next);
+      if (rankBusy || Date.now() - lastInput < 1200 || document.querySelector(".sheet")) { jobs.unshift(job); return setTimeout(() => idle(next), 500); }
+      Promise.resolve().then(() => RANK[chip](ctx, { metric, color: st.color })).then(res => {
+        if (gone) return;
+        if (res && res.items && res.items.length) { FD_CACHE.set(k, res); if (FD_CACHE.size > 40) FD_CACHE.delete(FD_CACHE.keys().next().value); if (chip !== "color") warmPics(res); }
+        else if (chip === "vibe" && res && res.empty) { ctx.vibeOff = true; chipsDraw(); }
+      }).catch(() => {}).then(() => setTimeout(() => idle(next), 150));
+    };
+    setTimeout(() => idle(next), 900);
+  }
   function afterBuild() {
+    if (!isColor) warmStart();
     if (isColor) { if (!facetsAsked) { facetsAsked = true; setTimeout(() => fdcProbe(ctx).then(() => { if (!gone) { const was = eff; chipsDraw(); if (was !== eff) rerank(false); } }), 600); } return; }
     if (!vibeAsked && typeof vibeNeighbors === "function") { vibeAsked = true; setTimeout(() => vibeNeighbors(i, 1).then(r => { if (gone || r.length) return; ctx.vibeOff = true; const was = eff; chipsDraw(); if (was !== eff) rerank(false); }), 500); }
     if (facetsAsked || ctx.F) return; facetsAsked = true;
