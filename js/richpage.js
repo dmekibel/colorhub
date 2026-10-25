@@ -845,14 +845,14 @@ function rpPaintFill(el, name, hex, entry, famC) {
 
 // ---------- the ID card (David, 2026-10-09): facts, codes and sources merged into one specimen card ----------
 function rpIdCardHTML() {
+  // David, 2026-10-25: "the ID card looks empty and useless". The big swatch block is gone (the cover already is the color); the facts
+  // read first, the systems that named it become a small timeline, and the codes are a tap-to-copy grid instead of six stacked rows.
   return `<section class="rp-idcard" id="rp-s-id">
-    <h2>ID card</h2>
-    <div class="rp-id-swatch" data-rp-id-swatch></div>
+    <h2>Facts</h2>
     <dl class="ar-facts rp-id-facts" data-rp-id-facts></dl>
-    <p class="rp-n-h">Codes</p>
-    <div class="cp-codes" data-rp-id-codes></div>
-    <p class="fine cp-codes-fine">CMYK here is a rough formula, not a print profile: real values depend on the paper and press.</p>
-    <div class="rc-passport" data-rp-id-stamps hidden></div>
+    <div class="rp-tl" data-rp-id-stamps hidden></div>
+    <div class="cp-codes cp-code-grid" data-rp-id-codes></div>
+    <p class="fine cp-codes-fine">Tap a value to copy it. CMYK here is a rough formula, not a print profile: real values depend on the paper and press.</p>
   </section>`;
 }
 function rpSourceValueHTML(text) {
@@ -867,9 +867,8 @@ function rpSourceValueHTML(text) {
 }
 function rpIdCardFill(el, entry, name, hex, codes) {
   const sec = el.querySelector(".rp-idcard"); if (!sec) return;
-  const sw = sec.querySelector("[data-rp-id-swatch]"); if (sw) { sw.style.setProperty("--c", hex); sw.setAttribute("data-ink", ink(hex)); }
   const codesBox = sec.querySelector("[data-rp-id-codes]");
-  if (codesBox) codesBox.innerHTML = codes.map(([k, v]) => `<button class="cp-code-row" data-copy="${esc(v)}"><span>${esc(k)}</span><b class="mono">${esc(v)}</b></button>`).join("");
+  if (codesBox) codesBox.innerHTML = codes.map(([k, v]) => `<button type="button" class="cp-code-cell" data-copy="${esc(v)}"><span>${esc(k)}</span><b>${esc(v)}</b></button>`).join("");
   const famC = typeof rcFamC === "function" ? rcFamC(hex) : null;
   (el.__artPromise || Promise.resolve(null)).then(r => {
     const art = r && r.art, o = (art && art.aside && art.aside.origin) || {};
@@ -881,8 +880,9 @@ function rpIdCardFill(el, entry, name, hex, codes) {
     if (factsBox) { factsBox.innerHTML = rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join(""); const fo = factsBox.querySelector("[data-ar-open-fam]"); if (fo) fo.onclick = () => openCoreName(fo.dataset.h, fo.textContent); }
     const stampsBox = sec.querySelector("[data-rp-id-stamps]");
     if (stampsBox && typeof RC_STAMPS !== "undefined") {
-      const stamps = RC_STAMPS.filter(([k]) => (entry.src || []).includes(k));
-      if (stamps.length) { stampsBox.hidden = false; stampsBox.innerHTML = stamps.map(([k, label, date]) => `<button type="button" class="rc-stamp" data-src-open="${esc(k)}"><b>${esc(label)}</b>${date ? `<em>${esc(date)}</em>` : ""}</button>`).join(""); }
+      // the systems that named it, in date order: Werner 1821 -> Ridgway 1912 -> ISCC-NBS 1955. Tap one to read about that system.
+      const stamps = RC_STAMPS.filter(([k]) => (entry.src || []).includes(k)).sort((a, b) => (parseInt(a[2], 10) || 9999) - (parseInt(b[2], 10) || 9999));
+      if (stamps.length) { stampsBox.hidden = false; stampsBox.innerHTML = `<p class="rp-tl-h">Named by</p><ol class="rp-tl-l">${stamps.map(([k, label, date]) => `<li><button type="button" class="rp-tl-i" data-src-open="${esc(k)}"><em>${esc(date || "")}</em><b>${esc(label)}</b></button></li>`).join("")}</ol>`; }
     }
   });
 }

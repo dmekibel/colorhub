@@ -2133,7 +2133,7 @@ scenario("pages", "colorPage x3: renders, swatch opens another, Back works", asy
 // stamps) opens its own page at #/source/<id>; Back returns exactly.
 scenario("pages", "a source name on the cover opens its source page and Back returns", async t => {
   await H.openPage(t, "#/name/dawn-grey", "Dawn Grey");   // a library name, not one of the taught app colors: #/name/, not #/color/
-  const link = await t.waitFor(() => t.$(".rp-tier [data-src-open], .rc-stamp[data-src-open]"), 10000, "a tappable source name");
+  const link = await t.waitFor(() => t.$(".rp-tier [data-src-open], .rp-tl-i[data-src-open]"), 10000, "a tappable source name");
   const id = link.dataset.srcOpen;
   await t.click(link, { wait: 500 });
   await t.waitFor(() => /^#\/source\//.test(t.w.location.hash), 6000, "the source page's own address");

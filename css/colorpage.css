@@ -650,3 +650,23 @@
 .el-q{width:236px;padding:14px;border-radius:12px;background:var(--cp-surface-2);justify-content:space-between;gap:10px}
 .el-qt{font:400 20px/1.3 var(--serif);text-wrap:pretty}
 .rc-door-all{margin-top:8px}
+
+/* Facts (js/richpage.js rpIdCardHTML): reading first, the systems that named it as a timeline, the codes as a tap-to-copy grid */
+.rp-idcard .ar-facts dd{font-size:17px;line-height:1.4}
+.rp-tl{margin:18px 0 6px}
+.rp-tl-h{font:400 17px/1.2 var(--sans);color:var(--soft);margin:0 0 10px}
+.rp-tl-l{list-style:none;margin:0;padding:0;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.rp-tl-l::-webkit-scrollbar{display:none}
+.rp-tl-l li{flex:1 0 auto;min-width:96px;position:relative;padding-top:16px}
+.rp-tl-l li::before{content:"";position:absolute;left:0;right:0;top:5px;height:2px;background:var(--cp-rule,rgba(236,232,223,.18))}
+.rp-tl-l li::after{content:"";position:absolute;left:0;top:0;width:12px;height:12px;border-radius:50%;background:var(--c,var(--ink));box-shadow:0 0 0 3px var(--ground)}
+.rp-tl-i{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:44px;padding:4px 14px 4px 0;text-align:left;background:none;border:0;color:var(--ink)}
+.rp-tl-i em{font:400 22px/1 var(--serif);font-style:normal;font-variant-numeric:tabular-nums}
+.rp-tl-i b{font:400 16px/1.2 var(--sans);color:var(--soft)}
+.cp-code-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
+.cp-code-cell{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-height:60px;padding:10px 12px;border-radius:12px;background:var(--cp-surface-2);border:0;text-align:left;color:var(--ink)}
+.cp-code-cell span{font:400 16px/1.1 var(--sans);color:var(--soft)}
+.cp-code-cell b{font:500 16px/1.2 var(--mono);letter-spacing:.02em;overflow-wrap:anywhere}
+.cp-code-cell:active{transform:scale(.98)}
+@media (max-width:340px){.cp-code-grid{grid-template-columns:1fr}}
+.cp-page .conns.lh-empty{display:none}   /* an empty "What links here" is not shown (David, 2026-10-25): no empty sections */
