@@ -4288,7 +4288,9 @@ scenario("paintings", "a painting's identity (title, painter, museum) sits above
   t.expect(stripTop > idTop, "the palette strip isn't below the identity block (title/painter/date/museum)");
   // the smoke iframe is 375x812 (tools/smoke/harness.js); the palette strip should still be reachable without
   // scrolling the page at that height (440x956 is checked separately with a real screenshot -- see colorhub-verify)
-  t.expect(stripTop < 812, `the palette strip sits at y=${Math.round(stripTop)}, below the 812px fold`);
+  // 2026-10-25: the chip row (Overview . Color . ...) now sits between the identity block and the strip, so it is the chip row that must be on the first screen
+  const chipsB = t.$("[data-glfeed] .fd-chips").getBoundingClientRect().bottom;
+  t.expect(chipsB <= 812 && stripTop >= chipsB - 2, `the chip row (bottom y=${Math.round(chipsB)}) should be on the 812px first screen, with the strip (y=${Math.round(stripTop)}) right under it`);
 });
 // David, relayed 2026-10-09 ("usually tapping a color should open the color, not the segmentation of it"):
 // a strip tile opens its color's page in one tap, the app-wide [data-swatch] rule (CLAUDE.md).
@@ -4409,12 +4411,22 @@ scenario("paintings", "swiping the picture moves to the next/previous painting b
   t.expect(t.text(".p-title") === title0, "Back after a swipe didn't return to the first painting");
 });
 // ---------- Keep exploring (js/feed.js): the Pinterest-style feed at the foot of every painting page (David, 2026-10-24) ----------
-// open a painting, reset the remembered chip (sessionStorage survives the reloads between scenarios), scroll until the feed is built
+// a painting reached by browsing (from a color page, the map...) starts on its Color feed: tap Overview to get at the page's own sections (palette, findings...)
+async function glOverview(t) {
+  await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre) .fd-chip[data-fc=about]") ? true : null, 25000, "the painting's real chip row");
+  if (t.$("[data-gl-about]").hidden) await t.click("[data-glfeed] .fd-chip[data-fc=about]", { wait: 300 });
+}
+// open a painting (a cold open starts on Overview), turn the wanted chip on (the chip row sits right under the title), scroll until the feed is built
+async function feedPick(t, chip) {
+  await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre) .fd-chip[data-fc=" + chip + "]") ? true : null, 25000, "the real chip row");
+  t.ev(`Object.assign(FD_ST, { metric: "overall", color: 0 })`);
+  await t.click(`[data-glfeed] .fd-chip[data-fc=${chip}]`, { wait: 300 });
+  await feedScroll(t);
+}
 async function feedOpen(t, i, chip) {
   await t.open("#/gallery/" + i, { settle: 600 });
-  await t.waitFor("[data-glfeed]", 15000, "the feed's host at the foot of the painting page");
-  t.ev(`Object.assign(FD_ST, { chip: ${JSON.stringify(chip || "color")}, metric: "overall", color: 0 })`);
-  await feedScroll(t);
+  await t.waitFor("[data-glfeed]", 15000, "the feed's host under the painting's title");
+  await feedPick(t, chip || "color");
 }
 async function feedScroll(t) {
   await t.waitFor(() => { t.w.scrollTo(0, 1e7); return t.$$(".fd-tile[data-fk]").length >= 6 ? true : null; }, 20000, "the feed's first tiles");
@@ -4424,11 +4436,10 @@ const feedCaps = t => t.$$(".fd-tile[data-fk] .fd-cap").map(e => t.text(e));
 const feedTop = t => { const r = t.$(".fd-grid").getBoundingClientRect(); return r.top + t.w.scrollY; };
 scenario("paintings", "Keep exploring: a feed at the bottom of a painting page, four chips, closest palette first, 24 at a time, a bounded number of live pictures", async t => {
   await feedOpen(t, 12);
-  t.expect(t.$(".gl-feed .sec-head") && /Keep exploring/.test(t.text(".gl-feed .sec-head")), "the Keep exploring heading is missing");
-  t.expect(t.$$(".fd-chip").map(b => t.text(b).replace(/ ·.*/, "")).join() === "Color,Vibe,Painter,Era,Place", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}", not Color, Vibe, Painter, Era, Place`);
+  t.expect(t.$$(".fd-chip").map(b => t.text(b).replace(/ ·.*/, "")).join() === "Overview,Color,Vibe,Painter,Era,Place", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}", not Overview, Color, Vibe, Painter, Era, Place`);
   t.expect(/^Color/.test(t.text(".fd-chip.on")) && !/·/.test(t.text(".fd-chip.on")), `Color is not on by default: "${t.text(".fd-chip.on")}"`);
   const caps = feedCaps(t), pct = caps.map(c => +((c.match(/(\d+)%/) || [])[1] || NaN));
-  t.expect(caps.length >= 6 && caps.every(c => /^Close palette · \d+%$/.test(c)), `captions don't say why in plain words: ${caps.slice(0, 4)}`);
+  t.expect(caps.length >= 6 && caps.every(c => /^\d+% alike$/.test(c)), `captions don't say why in plain words: ${caps.slice(0, 4)}`);
   t.expect(pct.every((p, k) => k === 0 || p <= pct[k - 1]), `not closest first: ${pct}`);
   // the first tile is exactly what the page's own "More like this" would rank first
   const want = t.ev(`glSimilarPal(twPal(twQuery(glTwCols(glPoolDecode(glDetailNow(12).pl), glPal(12)), { self: 12 })), 1, { exclude: 12, pairs: false, noEra: true }).list[0].i`);
@@ -4475,8 +4486,8 @@ scenario("paintings", "Keep exploring: each chip re-ranks, the first tile is the
   const idx = t.ev(`(() => { for (let j = 300; j < GAL.n; j++) if (GAL.year[j] === GL_UNDATED) return j; return -1; })()`);
   t.expect(idx > 0, "found no undated painting");
   await t.open("#/gallery/" + idx, { settle: 600 });
-  t.ev(`Object.assign(FD_ST, { chip: "era", metric: "overall", color: 0 })`);
-  await feedScroll(t);
+  await feedPick(t, "color");
+  await t.click(".fd-chip[data-fc=era]", { wait: 300 });
   const era = t.$(".fd-chip[data-fc=era]");
   t.expect(era.getAttribute("aria-disabled") === "true", "Era isn't disabled on a painting with no year");
   t.expect(/^Color/.test(t.text(".fd-chip.on")) && /no year/i.test(t.text(".fd-lead")), `no plain reason or fallback: on "${t.text(".fd-chip.on")}", lead "${t.text(".fd-lead")}"`);
@@ -4494,8 +4505,10 @@ scenario("paintings", "Keep exploring: a tile opens its painting with the chip s
   await TRL.atHash(t, /^#\/gallery\/\d+$/, "the tapped painting's page");
   t.expect(TRL.hash(t) !== hash0, "the tap didn't open another painting");
   t.expect(t.w.scrollY < 40, `the new page isn't at the top (scrollY ${t.w.scrollY})`);
+  await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre)") ? true : null, 25000, "the real chip row");
   await feedScroll(t);
-  t.expect(t.text(".fd-chip.on") === "Era", `the chip didn't stay on Era: "${t.text(".fd-chip.on")}"`);
+  t.expect(/^Color/.test(t.text(".fd-chip.on")), `a painting opened from a feed tile should start on Color (its closest palettes), not "${t.text(".fd-chip.on")}"`);
+  await t.click(".fd-chip[data-fc=era]", { wait: 300 });   // so Back has a different tab to restore
   // Back: the same painting, the same tile, at the same height on the screen
   await t.click(TRL.screenBack(t), { wait: 600 });
   await TRL.atHash(t, new RegExp("^" + hash0.replace(/[#/]/g, "\\$&") + "$"), "the previous painting");
@@ -4504,37 +4517,68 @@ scenario("paintings", "Keep exploring: a tile opens its painting with the chip s
   const y1 = t.$(`.fd-tile[data-fk='${k}']`).getBoundingClientRect().top;
   t.expect(Math.abs(y1 - y0) <= 4, `Back put the tile at ${Math.round(y1)}px, it was at ${Math.round(y0)}px (scroll ${Math.round(sc0)} -> ${Math.round(t.w.scrollY)})`);
   t.expect(t.text(".fd-chip.on") === "Era", "Back lost the chip");
+  t.expect(t.$("[data-gl-about]").hidden, "Back should land on the Era tab, with the Overview hidden");
+});
+// painting A -> a tile on its Vibe tab (B) -> a tile on B's Color tab (C), then Back three times: each landing is the same page, the same tab, the same tile
+scenario("paintings", "trail: painting then a Vibe tile then a Color tile then Back to each page with its tab and exact tile", async t => {
+  await feedOpen(t, 12, "vibe");
+  await t.waitFor(() => t.text(".fd-chip.on") === "Vibe" && !t.$(".fd-tile.sk") && t.$(".fd-tile[data-fk]") ? true : null, 15000, "the Vibe feed");
+  const hashA = TRL.hash(t);
+  const pickTile = async () => {
+    await t.sleep(1500);
+    t.w.scrollTo(0, feedTop(t) - 150); t.w.dispatchEvent(new t.w.Event("scroll")); await t.tick(); await t.sleep(900); await t.tick();
+    const tile = t.$$(".fd-tile[data-fk]").find(e => +e.dataset.fk >= 1 && e.getBoundingClientRect().top > 160 && e.getBoundingClientRect().bottom < t.w.innerHeight - 60);
+    t.expect(tile, "no tile to tap on " + TRL.hash(t) + ": " + t.text(".fd-chip.on") + " " + t.$$(".fd-tile[data-fk]").length + " tiles " + t.$$(".fd-tile[data-fk]").map(e => e.dataset.fk + "@" + Math.round(e.getBoundingClientRect().top)) + ", scroll " + t.w.scrollY + ", grid " + t.$(".fd-grid").style.height);
+    tile.scrollIntoView({ block: "center" }); await t.sleep(400);
+    return { k: tile.dataset.fk, y: tile.getBoundingClientRect().top, tile };
+  };
+  const a = await pickTile();
+  await t.click(`.fd-tile[data-fk="${a.k}"]`, { wait: 900 });
+  await TRL.atHash(t, /^#\/gallery\/\d+$/, "painting B");
+  const hashB = TRL.hash(t); t.expect(hashB !== hashA, "the tap didn't open another painting");
+  await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre)") ? true : null, 25000, "B's chip row");
+  t.expect(/^Color/.test(t.text(".fd-chip.on")), "B should start on Color");
+  await feedScroll(t);
+  const b = await pickTile();
+  await t.click(`.fd-tile[data-fk="${b.k}"]`, { wait: 900 });
+  await TRL.atHash(t, /^#\/gallery\/\d+$/, "painting C");
+  t.expect(TRL.hash(t) !== hashB && TRL.hash(t) !== hashA, "C is not a new painting");
+  await t.click(TRL.screenBack(t), { wait: 700 });
+  await TRL.atHash(t, new RegExp("^" + hashB.replace(/[#/]/g, "\\$&") + "$"), "back on B");
+  await t.waitFor(() => t.$(`.fd-tile[data-fk='${b.k}']`), 15000, "B's tile");
+  await t.sleep(2000);
+  t.expect(/^Color/.test(t.text(".fd-chip.on")), "Back to B lost its tab");
+  t.expect(Math.abs(t.$(`.fd-tile[data-fk='${b.k}']`).getBoundingClientRect().top - b.y) <= 6, "Back to B: the tile moved");
+  await t.click(TRL.screenBack(t), { wait: 700 });
+  await TRL.atHash(t, new RegExp("^" + hashA.replace(/[#/]/g, "\\$&") + "$"), "back on A");
+  await t.waitFor(() => t.$(`.fd-tile[data-fk='${a.k}']`), 15000, "A's tile");
+  await t.sleep(2000);
+  t.expect(t.text(".fd-chip.on") === "Vibe", `Back to A lost its tab: "${t.text(".fd-chip.on")}"`);
+  t.expect(Math.abs(t.$(`.fd-tile[data-fk='${a.k}']`).getBoundingClientRect().top - a.y) <= 6, "Back to A: the tile moved");
 });
 scenario("paintings", "Keep exploring: the end of the feed says so, and a picture that fails to load is a designed state, not a hole", async t => {
   await feedOpen(t, 12, "era");
   await t.waitFor(() => t.text(".fd-chip.on") === "Era" && !t.$(".fd-tile.sk") ? true : null, 10000, "Era");
-  // a picture that won't load: the tile keeps its box, says so, and still opens
+  // a picture that won't load is taken out of the list (never a hole, never the words "Picture unavailable")
   const img = t.$(".fd-tile[data-fk='0'] img");
-  if (img) { img.dataset.retry = "1"; img.src = "/__no_such_picture__.jpg"; await t.waitFor(() => t.$(".fd-tile[data-fk='0'] .fd-err") ? true : null, 8000, "the picture-unavailable state"); }
-  t.expect(t.$(".fd-tile[data-fk='0']") && t.$(".fd-tile[data-fk='0'] .fd-cap"), "a failed picture removed the tile");
+  if (img) { img.dataset.retry = "1"; img.src = "/__no_such_picture__.jpg"; await t.sleep(1500); await t.tick(); t.expect(!/Picture unavailable/.test(t.d.body.textContent), "the words Picture unavailable are on screen"); }
   // page to the end (300 items = 13 pages)
   const end = await t.waitFor(() => { t.w.scrollTo(0, 1e7); return t.$(".fd-end"); }, 60000, "the end-of-feed line", 30000);
-  t.expect(end && /That is everything close to this one\./.test(t.text(end)), "the end-of-feed line never appeared");
+  t.expect(end && /every painting from around this time/.test(t.text(end)), "the end-of-feed line never appeared");
   t.expect(t.$("[data-fdup]"), "the end of the feed has no way back up");
 });
-// David, 2026-10-24: "Keep exploring is so far down below it takes forever to get there" -- one tap from the top.
-scenario("paintings", "a painting page has a Keep exploring jump near the top; one tap brings the feed into view", async t => {
+// David, 2026-10-25: the painting page is the picture, the title, then the chip row (Overview . Color . Vibe . Painter . Era . Place); the old Explore pill is gone
+scenario("paintings", "a painting page: picture, title, then the chip row right under them; a cold open shows Overview, with every section of the page in it and no Explore pill", async t => {
   await t.open("#/gallery/12", { settle: 800 });
-  await t.waitFor("[data-glfeedjump]", 15000, "the Keep exploring jump on the painting page");
-  const before = t.ev("document.querySelector('[data-glfeed]').getBoundingClientRect().top"), vh = t.ev("innerHeight");
-  t.expect(before > vh, `the feed is already on screen before the tap (top ${before}, window ${vh})`);
-  // headless Chrome does not run smooth scrolls to the end, so watch what the tap asks for, then check an instant jump lands
-  // the Explore pill is on the picture, on the first screen, with no scrolling
-  const pill = t.ev("(() => { const b = [...document.querySelectorAll('[data-glfeedjump]')].find(x => x.offsetWidth); if (!b) return null; const q = b.getBoundingClientRect(); return { t: q.top, b: q.bottom, txt: b.textContent.trim(), svg: !!b.querySelector('svg') }; })()");
-  t.expect(pill && pill.t >= 0 && pill.b <= vh && pill.txt === "Explore" && pill.svg, `no Explore pill on the first screen (${JSON.stringify(pill)})`);
-  t.ev("window.__st = null; const o = window.scrollTo; window.scrollTo = function (a, b) { if (typeof a === 'object') { window.__st = a; return o.call(window, Object.assign({}, a, { behavior: 'auto' })); } return o.call(window, a, b); };");
-  await t.click("[data-glfeedjump]", { wait: 900 });
-  const st = t.ev("window.__st");
-  t.expect(st && st.top > 300, `the Explore pill did not ask to scroll to the feed (${JSON.stringify(st)})`);
-  // after the feed has built, the feed's heading sits just under the top bar and its tiles fill the screen
-  await t.sleep(1500);
-  const after = t.ev("document.querySelector('[data-glfeed]').getBoundingClientRect().top");
-  t.expect(after < 130 && after > -20, `the feed did not land under the top bar (top ${after}, window ${vh}, ${JSON.stringify(st)} ${JSON.stringify(t.ev("({ sy: scrollY, dh: document.documentElement.scrollHeight, mh: document.querySelector('[data-glfeed]').style.minHeight, h: document.querySelector('[data-glfeed]').offsetHeight, kids: document.querySelector('[data-glfeed]').children.length, cs: (c => [c.minHeight, c.height, c.maxHeight, c.contain, c.contentVisibility, c.position, c.transitionProperty, c.transitionDuration, document.querySelector('[data-glfeed]').getAnimations().length].join('|'))(getComputedStyle(document.querySelector('[data-glfeed]'))), cls: document.querySelector('[data-glfeed]').className, same: document.querySelectorAll('[data-glfeed]').length, disp: getComputedStyle(document.querySelector('[data-glfeed]')).display, par: document.querySelector('[data-glfeed]').parentElement.className })"))})`);
+  await t.waitFor("[data-glfeed] .fd-chips", 15000, "the chip row under the title");
+  t.expect(!t.$("[data-glfeedjump]"), "the painting page still has the old Explore pill");
+  const r = t.ev("(() => { const q = document.querySelector('[data-glfeed] .fd-chips').getBoundingClientRect(), h = document.querySelector('.p-title').getBoundingClientRect(); return { t: q.top, b: q.bottom, h: innerHeight, tb: h.bottom }; })()");
+  t.expect(r.t >= r.tb && r.b < r.h, `the chip row is not on the first screen under the title (${JSON.stringify(r)})`);
+  t.expect(t.text(".fd-chip.on") === "Overview" && !t.$("[data-gl-about]").hidden, "a cold open should start on Overview with the page's sections showing");
+  for (const sel of ["[data-glswatches]", "[data-glroles]", "[data-glsim]", "[data-glquiz]", ".srcs"]) t.expect(t.$("[data-gl-about] " + sel), "Overview lost " + sel);
+  await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre)") ? true : null, 25000, "the real chip row");
+  t.expect(t.$$(".fd-chip").map(b => t.text(b)).join() === "Overview,Color,Vibe,Painter,Era,Place", "the chips are not Overview, Color, Vibe, Painter, Era, Place");
+  t.expect(!t.$("[data-glfeed] .fd-tile"), "the feed's tiles show while Overview is on");
 });
 scenario("pages", "a color page puts the chip row (About, Paintings, ...) right under the cover on first paint, with no Explore pill, and About shows the article", async t => {
   await t.open("#/color/teal", { settle: 900 });
@@ -4559,13 +4603,14 @@ scenario("pages", "an in-between color's page also has the chip row on first pai
   t.expect(t.$("[data-rpfeed] [data-ar-body]") && t.$("[data-rpfeed] .rp-paint"), "the article's sections should sit inside the feed's About tab, after the chip row");
 });
 
-scenario("paintings", "desktop 1440x900: Keep exploring shows tiles on a painting page (at the bottom) and a color page (Paintings tab)", async t => {
+scenario("paintings", "desktop 1440x900: Keep exploring shows tiles on a painting page (under the title) and a color page (Paintings tab)", async t => {
   const probe = async (hash, host) => {
     await t.open(hash, { settle: 900, size: [1440, 900] });
     await t.waitFor(host, 15000, "the feed host on " + hash);
-    if (host === "[data-rpfeed]") {   // a color page opens on About: tap Paintings once the real chip row is up
-      await t.waitFor(() => t.$("[data-rpfeed] .fd-bar:not(.fd-pre) .fd-chip[data-fc=paintings]") ? true : null, 25000, "the real chip row");
-      await t.click(".fd-chip[data-fc=paintings]", { wait: 400 });
+    {   // both pages open on Overview (a cold open): tap the first feed chip once the real chip row is up
+      const first = host === "[data-rpfeed]" ? "paintings" : "color";
+      await t.waitFor(() => t.$(host + " .fd-bar:not(.fd-pre) .fd-chip[data-fc=" + first + "]") ? true : null, 25000, "the real chip row");
+      await t.click(".fd-chip[data-fc=" + first + "]", { wait: 400 });
     }
     t.w.scrollTo(0, 1e7); await t.sleep(900); t.w.scrollTo(0, 1e7); await t.sleep(600);
     const info = t.ev(`(() => { const h = document.querySelector(${JSON.stringify(host)}); if (!h) return 'no host'; const r = h.getBoundingClientRect(); return JSON.stringify({ top: Math.round(r.top), w: Math.round(r.width), h: Math.round(r.height), tiles: h.querySelectorAll('.fd-tile[data-fk]').length, chips: h.querySelectorAll('.fd-chip').length, gh: h.querySelector('.fd-grid') && h.querySelector('.fd-grid').style.height, gw: h.querySelector('.fd-grid') && h.querySelector('.fd-grid').clientWidth, st: (h.querySelector('.fd-state')||{}).innerHTML, lead: (h.querySelector('.fd-lead')||{}).textContent, kids: h.querySelector('.fd-grid') && h.querySelector('.fd-grid').children.length, sy: scrollY, dh: document.documentElement.scrollHeight }); })()`);
@@ -4589,7 +4634,7 @@ async function pinchRun(t, sel, d0, d1, steps) {
 scenario("paintings", "Keep exploring: a Vibe chip re-ranks by the picture model and says plainly when there is none", async t => {
   await feedOpen(t, 12, "color");
   const chips = t.$$(".fd-chip").map(e => t.text(e));
-  t.expect(chips.join("|") === "Color|Vibe|Painter|Era|Place", "chips are not Color, Vibe, Painter, Era, Place: " + chips.join("|"));
+  t.expect(chips.map(c => c.replace(/ ·.*/, "")).join("|") === "Overview|Color|Vibe|Painter|Era|Place", "chips are not Overview, Color, Vibe, Painter, Era, Place: " + chips.join("|"));
   t.ev(`try { localStorage.removeItem("colorhub-vibe-explained"); } catch (e) {} 1`);
   await t.click(".fd-chip[data-fc='vibe']", { wait: 300 });
   await t.waitFor(() => t.text(".fd-chip.on") === "Vibe" && !t.$(".fd-tile.sk") && t.$(".fd-tile[data-fk]") ? true : null, 10000, "the Vibe feed");
@@ -4599,12 +4644,11 @@ scenario("paintings", "Keep exploring: a Vibe chip re-ranks by the picture model
   t.expect(want >= 0 && first, "no first vibe tile");
   const title = await t.waitFor(() => t.ev(`(() => { const d = glDetailNow(${want}); return d ? d.t : null; })()`), 6000, "the first neighbor's details");
   t.expect(first.indexOf(title) === 0, `the first Vibe tile is not the model's nearest (${first} vs ${title})`);
-  t.expect(/vibe/i.test(first), "the first tile has no vibe caption: " + first);
   // the reader finds nothing: the chip goes dim with a plain reason
   await t.open("#/gallery/40", { settle: 300 });
   await t.waitFor("[data-glfeed]", 15000, "feed host");
   t.ev("window.vibeNeighbors = () => Promise.resolve([]); 1");
-  t.ev(`Object.assign(FD_ST, { chip: "color" }); 1`); await feedScroll(t);
+  await feedPick(t, "color");
   await t.waitFor(() => t.$(".fd-chip[data-fc='vibe'].dis") ? true : null, 8000, "the Vibe chip dimmed when the reader returns nothing");
   t.ev(`document.querySelector(".fd-chip[data-fc='vibe']").click(); 1`); await t.sleep(300);
   t.expect(/picture model/.test(t.text(".fd-lead")) && t.$(".fd-lead.why"), "a dim Vibe chip gives no reason");
@@ -4626,12 +4670,13 @@ scenario("paintings", "Keep exploring: a pinch zooms the feed live and settles o
   t.expect(t.ev("new Set([...document.querySelectorAll('.fd-grid .fd-tile')].map(e => e.style.left)).size") === c1 - 1, "the + key did not give one column fewer");
   const n = t.$$(".fd-tile img").length; t.expect(n <= 120, "too many live pictures: " + n);
 });
-scenario("paintings", "the Explore pill is on the first screen of a painting page at 440x956 and 320x640", async t => {
+scenario("paintings", "the chip row is on the first screen of a painting page at 440x956 (and under the picture at 320x640), with no Explore pill", async t => {
   for (const size of [[440, 956], [320, 640]]) {
     await t.open("#/gallery/12", { settle: 800, size });
-    await t.waitFor("[data-glfeedjump]", 15000, "the Explore pill");
-    const pill = t.ev("(() => { const b = [...document.querySelectorAll('[data-glfeedjump]')].find(x => x.offsetWidth); if (!b) return null; const q = b.getBoundingClientRect(); return { t: q.top, b: q.bottom, l: q.left, r: q.right, w: innerWidth, h: innerHeight, svg: !!b.querySelector('svg') }; })()");
-    t.expect(pill && pill.t >= 0 && pill.b <= pill.h && pill.l >= 0 && pill.r <= pill.w && pill.svg, "the Explore pill is not fully on the first screen at " + size + ": " + JSON.stringify(pill));
+    await t.waitFor("[data-glfeed] .fd-chips", 15000, "the chip row");
+    t.expect(!t.$("[data-glfeedjump]"), "the Explore pill is back");
+    const r = t.ev("(() => { const q = document.querySelector('[data-glfeed] .fd-chips').getBoundingClientRect(); return { t: q.top, b: q.bottom, l: q.left, w: innerWidth, h: innerHeight }; })()");
+    t.expect(r.l >= 0 && (size[0] !== 440 || r.b <= r.h), "the chip row is not on the first screen at " + size + ": " + JSON.stringify(r));
   }
 });
 // ---------- Keep exploring on a COLOR page (js/feed.js fdMount with sub = a color, mounted by js/richpage.js) ----------
@@ -4712,7 +4757,7 @@ scenario("pages", "When and where: a decade bar opens the Era feed and a country
   const bar = bars[Math.floor(bars.length / 3)], dec = Math.floor(+bar.dataset.rcEra / 10) * 10;
   t.expect(dec > 0, `the bar has no decade (${bar.outerHTML.slice(0, 80)})`);
   await t.click(bar, { wait: 600 });
-  await t.waitFor(() => t.text(".fd-chip.on") === "Era" && t.$$(".fd-tile[data-fk]").length >= 4 ? true : null, 25000, "the Era feed after the bar tap");
+  await t.waitFor(() => t.text(".fd-chip.on") === "Era" && t.$$(".fd-tile[data-fk]").length >= 4 ? true : null, 25000, "the Era feed after the bar tap " + JSON.stringify(t.ev("(() => { const g = document.querySelector(\".fd-grid\"); return g ? { h: g.style.height, w: g.clientWidth, n: g.children.length, cls: g.className, top: Math.round(g.getBoundingClientRect().top), sy: scrollY, chip: (document.querySelector(\".fd-chip.on\")||{}).textContent } : null; })()")));
   t.expect(new RegExp("Nearest the " + dec + "s").test(t.text(".fd-lead")), `the Era lead is "${t.text(".fd-lead")}", not the ${dec}s`);
   await t.click(".fd-chip[data-fc=about]", { wait: 400 });
   const door = await t.waitFor(() => t.$(".rc-door[data-rc-place]"), 5000, "a country door");
@@ -4763,6 +4808,8 @@ scenario("pages", "Keep exploring on a color page: a tile opens its painting, an
   await t.click(tile, { wait: 900 });
   await TRL.atHash(t, /^#\/gallery\/\d+/, "the tapped painting's page");
   t.expect(t.w.scrollY < 40, `the painting page isn't at the top (scrollY ${t.w.scrollY})`);
+  await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre)") ? true : null, 25000, "the painting's real chip row");
+  t.expect(/^Color/.test(t.text(".fd-chip.on")) && t.$("[data-gl-about]").hidden, `a painting opened from a color page's tile should start on Color, not "${t.text(".fd-chip.on")}"`);
   await t.click(TRL.screenBack(t), { wait: 600 });
   await TRL.atHash(t, new RegExp("^" + hash0.replace(/[#/?=]/g, "\\$&") + "$"), "the color page");
   await t.waitFor(() => t.$(`.fd-tile[data-fk='${k}']`), 15000, "the tile you left from");
@@ -5814,6 +5861,7 @@ const TRL = {
     await TRL.atHash(t, /^#\/gallery\/\d+/, "the second painting");
     note();
     // 5 + 6. a color in it whose page has a gem: try the palette's colors until one does
+    await glOverview(t);
     const nSw = (await t.waitFor(() => t.$$("[data-glrows] [data-swatch]").length && t.$$("[data-glrows] [data-swatch]"), 15000, "the painting's palette")).length;
     let gem = null;
     for (let i = 0; i < nSw && !gem; i++) {
@@ -6333,9 +6381,10 @@ scenario("paintings", "lane A: a painting page leads with what stands out; Name 
   // David, 2026-10-08: the palette is right under the identity block, and both fit one screen so you can change types and sizes.
   // David, 2026-10-09: the identity block (title, painter, date, museum, why it matters) now sits between the pinned
   // image and the palette, so the strip follows the identity block, not the image, directly.
-  const idB = t.$(".gl-id").getBoundingClientRect().bottom, stripB = t.$("[data-glswatches]").getBoundingClientRect().bottom;
-  t.expect(stripB <= t.ev("innerHeight"), `the palette strip sits below the first screen (${Math.round(stripB)})`);
-  t.expect(t.$("[data-glswatches]").getBoundingClientRect().top - idB < 24, "the palette strip isn't right under the identity block");
+  // 2026-10-25: the chip row sits between the identity block and the strip: the row is on the first screen, the strip right under it
+  const chipsB = t.$("[data-glfeed] .fd-chips").getBoundingClientRect().bottom, stripB = t.$("[data-glswatches]").getBoundingClientRect().bottom;
+  t.expect(chipsB <= t.ev("innerHeight"), `the chip row sits below the first screen (${Math.round(chipsB)})`);
+  t.expect(t.$("[data-glswatches]").getBoundingClientRect().top - t.$("[data-glfeed] .fd-bar").getBoundingClientRect().bottom < 60, "the palette strip isn't right under the chip row");
   t.expect(t.$("[data-glorder]").getBoundingClientRect().top - stripB < 24, "the palette types aren't right under the strip");
   const nTypes = t.$$("[data-glorder] [data-glo]").length;
   t.expect(nTypes >= 4, `only ${nTypes} palette types`);
@@ -7326,6 +7375,7 @@ scenario("trail", "Close from color > painting > color: the map as it was, the t
   await t.click(pin, { wait: 600 });
   await TRL.atHash(t, /^#\/gallery\/\d+/, "the painting page");
   t.expect(t.$("#app .screen [data-tl-exit]"), "the painting page has no place pill");
+  await glOverview(t);
   await t.waitFor(() => t.$$("[data-glrows] [data-swatch]").length, 15000, "the painting's palette");
   await t.click(t.$$("[data-glrows] [data-swatch]")[0], { wait: 600 });
   await TRL.atHash(t, /^#\/(color|name)\//, "a color from the painting");
