@@ -233,6 +233,42 @@ function fdMeanScores(tl, ta, tb) {
   return sc;
 }
 
+// ---------- the micro layer under every tile (David, 2026-10-25: a tile should never be a flat color) ----------
+// data/paintmap/micro-*.webp holds every painting as a 5 x 5 picture (~1.8 MB in all, the same files the map's first frame uses, so the
+// browser cache has them). A tile paints its own 5 px picture as a stretched background the moment it exists, before its details or the
+// museum photo have arrived; the photo then fades in on top. Feeds keep their own decoded copy and close it a few seconds after the last one goes.
+let FDM = null, FDM_P = null, FDM_USERS = 0, FDM_REL = 0, FDM_CV = null;
+const FDM_SUBS = new Set();
+function fdMicroUse() {
+  FDM_USERS++; clearTimeout(FDM_REL);
+  if (FDM_P || typeof pmFetchTimed !== "function" || typeof pmDecodeSheet !== "function") return;
+  const base = "data/paintmap/", v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
+  FDM_P = pmFetchTimed(base + "micro.json" + v, 15000, "json").then(meta => {
+    if (!meta || !meta.sheets || !meta.n) throw new Error("micro.json");
+    const m = { meta, bms: new Array(meta.sheets.length), missing: meta.missing && meta.missing.length ? new Set(meta.missing) : null, closed: false };
+    FDM = m;
+    meta.sheets.forEach((name, k) => pmDecodeSheet(base + name + v, 45000).then(bm => { if (m.closed) { bm.close && bm.close(); return; } m.bms[k] = bm; FDM_SUBS.forEach(f => f()); }, () => {}));
+  }).catch(() => { FDM_P = null; });
+}
+function fdMicroFree() {
+  if (--FDM_USERS > 0) return;
+  clearTimeout(FDM_REL);
+  FDM_REL = setTimeout(() => { if (FDM_USERS > 0) return; if (FDM) { FDM.closed = true; FDM.bms.forEach(b => b && b.close && b.close()); } FDM = null; FDM_P = null; }, 4000);
+}
+// paints painting j's 5 px picture onto its tile's picture box; false while its sheet is not in yet (the caller tries again when one lands)
+function fdMicroPaint(im, j) {
+  const m = FDM; if (!m || !(j >= 0) || j >= m.meta.n || (m.missing && m.missing.has(j))) return false;
+  const bm = m.bms[Math.floor(j / m.meta.perSheet)]; if (!bm) return false;
+  const c = j % m.meta.perSheet, t = m.meta.tile;
+  try {
+    if (!FDM_CV) FDM_CV = document.createElement("canvas");
+    FDM_CV.width = FDM_CV.height = t;
+    FDM_CV.getContext("2d").drawImage(bm, (c % m.meta.cols) * t, Math.floor(c / m.meta.cols) * t, t, t, 0, 0, t, t);
+    im.style.backgroundImage = `url(${FDM_CV.toDataURL()})`; im.style.backgroundSize = "100% 100%"; im.dataset.mc = 1;
+    return true;
+  } catch (e) { return false; }
+}
+
 // ---------- images: the smallest sufficient copy ----------
 // px = the width the tile needs on this screen. Hosts that serve any width get exactly it (rounded up to 100); Commons only serves its
 // standard steps; the Art Institute only 400 / 600 / 843. Anything unknown gets the page's own "mid" copy. If a small copy fails the
@@ -615,7 +651,7 @@ function fdMount(host, o) {
     if (add.length) {
       const tmp = document.createElement("div"); tmp.innerHTML = add.map(tileHTML).join("");
       const waiting = [];
-      [...tmp.children].forEach((el, n) => { const k = add[n]; live.set(k, el); grid.appendChild(el); if (items[k].head) {} else if (items[k].card) fillCard(el, k); else if (!items[k].sk) { if (glDetailNow(items[k].j)) fill(el, k); else waiting.push(k); } });
+      [...tmp.children].forEach((el, n) => { const k = add[n]; live.set(k, el); grid.appendChild(el); if (items[k].head) {} else if (items[k].card) fillCard(el, k); else if (!items[k].sk) { fdMicroPaint(el.querySelector(".fd-im"), items[k].j); if (glDetailNow(items[k].j)) fill(el, k); else waiting.push(k); } });
       if (waiting.length) shards(waiting);
     }
     // the roving tab stop: the tile that last had focus, else the first one on screen
@@ -983,7 +1019,9 @@ function fdMount(host, o) {
   }
   // built once the bottom is near (within ~1.6 screens): a scroll listener, not an IntersectionObserver, which a hidden tab may never run
   const near = () => { if (!built && host.getBoundingClientRect().top < innerHeight * 2.6) { removeEventListener("scroll", near); start(); } };
-  const destroy = () => { gone = true; tok++; peekOff(); if (zoom) zoom.destroy(); removeEventListener("scroll", near); removeEventListener("scroll", onScroll); removeEventListener("resize", onResize); live.clear(); };
+  const microAll = () => live.forEach((el, k) => { const it = items[k]; if (!it || it.head || it.card || it.sk) return; const im = el.querySelector(".fd-im"); if (im && !im.dataset.mc) fdMicroPaint(im, it.j); });
+  fdMicroUse(); FDM_SUBS.add(microAll);
+  const destroy = () => { gone = true; FDM_SUBS.delete(microAll); fdMicroFree(); tok++; peekOff(); if (zoom) zoom.destroy(); removeEventListener("scroll", near); removeEventListener("scroll", onScroll); removeEventListener("resize", onResize); live.clear(); };
   cleanup.push(destroy);
   if (!host.style.minHeight) host.style.minHeight = "1px";   // never undo fdJump's taller one
   // the page may settle AFTER this is mounted (a wide window's two columns, late images, fonts) and bring the feed up to the screen with no scroll
