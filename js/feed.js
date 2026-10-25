@@ -59,7 +59,7 @@ const fdCap1 = s => s.charAt(0).toUpperCase() + s.slice(1);
 // ---------- the rankers: each returns { items: [{ j, cap }] } or { empty: reason }, now or as a Promise ----------
 function fdCapColor(m, ctx, d, hex) {
   switch (m) {
-    case "overall": return `Close palette · ${fdPct(d)}%`;
+    case "overall": return `${fdPct(d)}% alike`;
     case "dominant": return `Big colors · ${fdPct(d)}%`;
     case "accents": return `Close accents · ${fdPct(d)}%`;
     case "mood": return d < .6 ? "Very close mood" : d < 1.2 ? "Close mood" : "Loose mood";
@@ -97,7 +97,7 @@ function fdRankEra(ctx) {
     const dy = Math.floor(sc[j]), est = est0 || glYearEst(j), r = fdRel(dy, G.year[j] > y0);
     return { j, cap: fdCap1(est && dy ? "about " + r : r) };
   });
-  return { items };
+  return { items, end: "That is every painting from around this time that has a picture." };
 }
 // painter, country and movement come from the facets (js/browse.js xbLoad): loaded on first use
 async function fdFacets() { const F = await xbLoad(); if (!F || F.G !== GAL) throw new Error("facets out of step"); return F; }
@@ -121,7 +121,7 @@ async function fdRankPlace(ctx) {
     const y = G.year[j], place = F.meta.countries[F.country[j] - 1];
     return { j, cap: dated0 && y !== GL_UNDATED ? `${place} · ${fdRel(Math.abs(y - y0), y > y0)}` : place };
   });
-  return { items };
+  return { items, end: "That is every painting from this country and its neighbors." };
 }
 async function fdRankPainter(ctx) {
   const F = await fdFacets(), G = GAL, i = ctx.i, a0 = F.artist[i], co0 = F.country[i], mv0 = F.mv[i], y0 = G.year[i], dated0 = y0 !== GL_UNDATED;
@@ -148,7 +148,7 @@ async function fdRankPainter(ctx) {
 const FD_VIBE_KEY = "colorhub-vibe-explained";
 const fdVibeSeen = () => { try { return localStorage.getItem(FD_VIBE_KEY) === "1"; } catch (e) { return true; } };
 const fdVibeMark = () => { try { localStorage.setItem(FD_VIBE_KEY, "1"); } catch (e) {} };
-const fdVibeCap = sim => sim >= .72 ? "Very similar vibe" : sim >= .6 ? "Similar vibe" : "Related vibe";
+const fdVibeCap = sim => "";   // the tab already says it: a caption that repeats the tab's meaning is dropped (David, 2026-10-25)
 const FD_VIBE_NONE = "The picture model hasn't looked at this painting yet, so Vibe has nothing to compare.";
 async function fdRankVibe(ctx) {
   const nb = typeof vibeNeighbors === "function" ? await vibeNeighbors(ctx.i, 60) : [];
@@ -207,7 +207,7 @@ function fdMount(host, o) {
   let lastN = 0, onCount = null, curEnd = "", curMap = "", curLead = "", eff = st.chip, items = [], shown = 0, tok = 0, built = false, gone = false, fk = 0;
   let W = 0, cols = 2, colW = 0, gap = 12, vgap = 18, txt = 52, top = null, col = null, hh = null, ends = [], pinSkew = null, dense = false, capPct = false, zoom = null;
   const VKEY = isColor ? "colorhub-feed-view-color" : "colorhub-feed-view";
-  const viewLoad = () => { try { const v = JSON.parse(localStorage.getItem(VKEY) || "null") || {}; return { cols: v.cols | 0, dcols: v.dcols | 0 }; } catch (e) { return { cols: 0, dcols: 0 }; } };
+  const viewLoad = () => { try { const v = JSON.parse(localStorage.getItem(VKEY) || "null") || {}; return { cols: v.cols | 0, dcols: v.dcols | 0, caps: !!v.caps }; } catch (e) { return { cols: 0, dcols: 0, caps: false }; } };
   const view = viewLoad();
   const viewSave = () => { try { localStorage.setItem(VKEY, JSON.stringify(view)); } catch (e) {} };
   const wide = () => typeof glDesk === "function" && glDesk();
@@ -297,23 +297,27 @@ function fdMount(host, o) {
   }
 
   // ----- layout (a masonry whose boxes are known from the index before anything loads) -----
-  const colsFor = w => { const want = wide() ? view.dcols : view.cols; return want >= 1 ? Math.min(fdMaxCols(), want) : w < 560 ? 2 : w < 860 ? 3 : Math.max(3, Math.min(5, Math.floor((w + 14) / 254))); };
+  const colsFor = w => { const want = wide() ? view.dcols : view.cols; return want >= 1 ? Math.min(fdMaxCols(), want) : w < 560 ? 3 : w < 860 ? 3 : Math.max(3, Math.min(5, Math.floor((w + 14) / 254))); };
   const sizeDraw = () => { const b = host.querySelector("[data-fdsize]"); if (!b) return; b.textContent = `${cols} across`; b.setAttribute("aria-label", `Size: ${cols} across. Tap for another size, or pinch.`); };
+  const bare = () => !view.caps;
   const relayout = () => {
+    grid.classList.toggle("bare", bare());
     W = grid.clientWidth || Math.min(innerWidth, 540) - 40;
     cols = colsFor(W); [gap, vgap] = fdGapsFor(cols, W);
     colW = (W - gap * (cols - 1)) / cols;
+    if (bare()) { gap = 2; vgap = 2; colW = (W - gap * (cols - 1)) / cols; }
     dense = (cols >= 5 && colW < 150) || colW < FD_DENSE_W;   // 5+ across on a phone; a wide window's 5 across still has room for words
-    txt = dense ? (capPct ? 28 : 0) : colW < 146 ? 72 : 50; grid.classList.toggle("narrow", !dense && colW < 146);   // a 320 px screen: the caption may take two lines, so the number is never cut off
-    grid.classList.toggle("dense", dense); grid.classList.toggle("nocap", dense && !capPct); sizeDraw();
+    txt = bare() ? 0 : dense ? (capPct ? 28 : 0) : colW < 146 ? 72 : 50; grid.classList.toggle("narrow", !dense && !bare() && colW < 146);   // a 320 px screen: the caption may take two lines, so the number is never cut off
+    grid.classList.toggle("dense", dense); grid.classList.toggle("nocap", bare() || (dense && !capPct)); sizeDraw();
     top = new Float32Array(items.length); col = new Uint8Array(items.length); hh = new Float32Array(items.length);
     ends = new Array(cols).fill(0);
     place(0);
   };
+  const txOf = it => !txt || dense || it.cap || it.card || it.sk ? txt : 20;   // a tile with no caption line (Vibe, "Also ...") keeps just its byline
   const place = k0 => {
     for (let k = k0; k < shown; k++) {
       if (items[k].head) { const t = Math.max(...ends), h = items[k].sub ? 44 : 60; top[k] = t; col[k] = 0; hh[k] = h; ends.fill(t + h + vgap); continue; }   // a divider or a group's name: the full width, below everything above it
-      const h = Math.round(colW * abOf(items[k])) + txt; hh[k] = h;
+      const h = Math.round(colW * abOf(items[k])) + txOf(items[k]); hh[k] = h;
       let c = 0; for (let j = 1; j < cols; j++) if (ends[j] < ends[c]) c = j;
       top[k] = ends[c]; col[k] = c; ends[c] += h + vgap;
     }
@@ -327,15 +331,25 @@ function fdMount(host, o) {
   function tileHTML(k) {
     const it = items[k], pos = `left:${col[k] * (colW + gap)}px;top:${top[k]}px;width:${colW}px;height:${hh[k]}px`;
     if (it.head) return `<div class="fd-head${it.sub ? " sub" : ""}" style="top:${top[k]}px;height:${hh[k]}px"${it.sub ? ` role="heading" aria-level="3"` : ` role="separator" aria-label="${esc(it.text)}"`}>${it.sub ? `<i style="--c:${it.h}"></i>` : ""}<span>${esc(it.text)}</span></div>`;
-    if (it.card) return `<button class="fd-tile fd-card" data-fk="${k}" tabindex="${k === fk ? 0 : -1}" style="${pos}" aria-label="${esc(it.title + ". " + it.cap + (it.sub ? ", " + it.sub : ""))}"><span class="fd-im" data-ink="${ink(it.h)}" style="--c:${it.h};height:${hh[k] - txt}px"><span class="fd-ct" style="color:${ink(it.h) === "dark" ? "#141311" : "#fff"}">${esc(it.title)}</span></span><span class="fd-cap">${esc(capOf(it))}</span><span class="fd-by"><span>${esc(it.sub || "")}</span></span></button>`;
-    if (it.sk) return `<div class="fd-tile sk" style="${pos}" aria-hidden="true"><span class="fd-im" style="height:${hh[k] - txt}px"></span><span class="fd-cap"></span><span class="fd-by"></span></div>`;
-    return `<button class="fd-tile wait" data-fk="${k}" tabindex="${k === fk ? 0 : -1}" style="${pos}"><span class="fd-im" style="--c:${domOf(it.j)};height:${hh[k] - txt}px"><span class="fd-ov"></span></span><span class="fd-cap">${esc(capOf(it))}</span><span class="fd-by"></span></button>`;
+    if (it.card) return `<button class="fd-tile fd-card" data-fk="${k}" tabindex="${k === fk ? 0 : -1}" style="${pos}" aria-label="${esc(it.title + ". " + it.cap + (it.sub ? ", " + it.sub : ""))}"><span class="fd-im" data-ink="${ink(it.h)}" style="--c:${it.h};height:${hh[k] - txOf(it)}px"><span class="fd-ct" style="color:${ink(it.h) === "dark" ? "#141311" : "#fff"}">${esc(it.title)}</span></span><span class="fd-cap">${esc(capOf(it))}</span><span class="fd-by"><span>${esc(it.sub || "")}</span></span></button>`;
+    if (it.sk) return `<div class="fd-tile sk" style="${pos}" aria-hidden="true"><span class="fd-im" style="height:${hh[k] - txOf(it)}px"></span><span class="fd-cap"></span><span class="fd-by"></span></div>`;
+    return `<button class="fd-tile wait" data-fk="${k}" tabindex="${k === fk ? 0 : -1}" style="${pos}"><span class="fd-im" style="--c:${domOf(it.j)};height:${hh[k] - txOf(it)}px"><span class="fd-ov"></span></span><span class="fd-cap">${esc(capOf(it))}</span><span class="fd-by"></span></button>`;
   }
   function fillCard(el, k) {   // a thing that isn't a painting (a gem, a film, a color): its own color is the tile; a photo covers it when there is one
     const it = items[k]; if (!it.img || el.querySelector("img")) return;
     const im = el.querySelector(".fd-im"), img = document.createElement("img"); img.alt = ""; img.decoding = "async"; img.draggable = false; img.referrerPolicy = "no-referrer";
     img.onload = () => { img.classList.add("ld"); im.classList.add("has-img"); }; img.onerror = () => img.remove();
     img.src = it.img; im.insertBefore(img, im.firstChild);
+  }
+  let badT = 0, okImgs = 0, droppedN = 0; const failed = new Set();
+  function dropBad(k) {
+    const it = items[k]; if (!it || it.bad || droppedN >= 60) return; it.bad = 1; droppedN++;
+    clearTimeout(badT); badT = setTimeout(() => {
+      if (gone) return;
+      for (let q = items.length - 1; q >= 0; q--) if (items[q].bad) { items.splice(q, 1); if (q < shown) shown--; }
+      lastN = items.filter(x => !x.head).length; if (onCount) onCount(lastN);
+      fk = Math.min(fk, Math.max(0, items.length - 1)); relayoutAll(); stateDraw(); if (!items.some(x => !x.head)) state.innerHTML = `<p class="fd-end">None of these pictures could be loaded just now.</p>`;
+    }, 400);
   }
   function fill(el, k) {   // title, byline and picture, once this painting's shard is in
     const it = items[k], dd = glDetailNow(it.j); if (!dd || !el.isConnected || !el.classList.contains("wait")) return;
@@ -349,10 +363,11 @@ function fdMount(host, o) {
     img.alt = ""; img.decoding = "async"; img.draggable = false;
     const crop = glCropStyle(it.j, dd, abOf(it)), mm = /style="([^"]*)"/.exec(crop); if (mm) img.style.cssText = mm[1];
     if (k < 8) img.fetchPriority = "high";
-    img.onload = () => img.classList.add("ld");
+    img.onload = () => { img.classList.add("ld"); okImgs++; if (okImgs >= 8 && failed.size) { failed.forEach(dropBad); failed.clear(); } };
     img.onerror = () => {
       if (img.src !== mid && !img.dataset.retry) { img.dataset.retry = 1; img.src = mid; return; }
-      img.remove(); im.classList.add("err"); if (!im.querySelector(".fd-err")) im.insertAdjacentHTML("beforeend", `<span class="fd-err">Picture unavailable</span>`);
+      img.remove(); im.classList.add("err");   // a picture that never comes: its tile is taken out of the list once any other picture has loaded (so it is a broken link, not a lost connection), never shown as words
+      failed.add(k); if (okImgs >= 8) dropBad(k);
     };
     img.src = fdSrc(dd, colW);
     im.insertBefore(img, im.firstChild);
@@ -550,7 +565,7 @@ function fdMount(host, o) {
   const TOLW = ["", "Exact", "Exact", "Nearly exact", "Very close", "Very close", "Close", "Close", "Close", "Close", "Fairly close", "Fairly close", "Loose", "Loose", "Loose", "Loose", "Very loose", "Very loose", "Very loose", "Its whole family", "Its whole family"];
   const REACHW = ["Just this country", "Its neighbors", "Its region", "Its continent", "The whole world"];
   const SUBDOT = () => { const d = $t("[data-fdsetdot]"); if (d) d.hidden = !(isColor && fdsChanged(eff)); };
-  const mapOk = () => !(eff === "about" || (isColor && (eff === "painters" || eff === "worlds" || eff === "close")) || (!isColor && eff === "painter"));
+  const mapOk = () => !(eff === "about" || (isColor && (eff === "painters" || eff === "worlds" || eff === "close")));
   const lensDraw = () => { const m = $t("[data-fdmap]"); if (m) m.hidden = !mapOk(); SUBDOT(); };
   // Map: the same list as the painting map, the painting nearest the top of the screen in the middle, the same choices as filters
   const topPainting = () => {
@@ -562,6 +577,14 @@ function fdMount(host, o) {
   async function openMap() {
     const seed = topPainting(); if (seed < 0 || typeof pmGo !== "function") return;
     let spec = `arr=spiral&seed=${seed}`;
+    if (!isColor) {   // the arrangement follows the tab: Vibe -> By look, centered on this painting; Painter -> this painter's paintings; Era -> its years; Place -> its country
+      const y = G.year[i];
+      if (eff === "vibe" && curMap) spec = curMap;
+      else if (eff === "painter" && d && d.a) spec = `arr=spiral&seed=${i}&p=${routeSlug(d.a)}`;
+      else if (eff === "era" && y !== GL_UNDATED) spec = `arr=spiral&seed=${i}&y0=${y - 25}&y1=${y + 25}`;
+      else if (eff === "place") { const F = await fdFacets().catch(() => null); const c = F && F.country[i]; if (c) spec = `arr=spiral&seed=${i}&co=${encodeURIComponent(F.meta.countries[c - 1])}`; }
+      else spec = `arr=spiral&seed=${i}`;
+    }
     if (isColor) {
       const S = FDS.paintings, win = FDS.era.win, y = G.year[seed];
       spec += `&c=${sub.hex.slice(1).toLowerCase()}&cm=all&t=${eff === "paintings" ? Math.max(2, S.tol) : 8}&m=0&nm=${encodeURIComponent(sub.name)}`;
@@ -589,7 +612,8 @@ function fdMount(host, o) {
     else if (kind === "era") body = rng("win", "How wide a window", 10, 200, 10, ["Just the decade", "Two centuries"]) + seg("where", "Where", [["any", "Anywhere"], ["country", "Same country"], ["region", "Same region"]]);
     else if (kind === "place") body = rng("reach", "How far out", 0, 4, 1, ["Just the country", "The whole world"]) + sw("near", "Stay close in time") + `<div data-fsbox="win"${S.near ? "" : " hidden"}>${rng("win", "Within", 10, 200, 10)}</div>`;
     else body = `<p class="fs-note">Tabs and filters for this list are on the chips above.</p>`;
-    const size = `<div class="fs-c"><div class="fs-row"><p>Size</p><b data-fs-out="size"></b></div><input type="range" min="1" max="${mx}" step="1" value="${cols}" data-fssize aria-label="Size"><div class="fs-prev" data-fs-prev></div></div>`;
+    const capsSw = `<div class="fs-c fs-tg"><p>Show captions</p><button type="button" class="fs-switch" role="switch" aria-checked="${!!view.caps}" data-fscaps><i></i></button></div>`;
+    const size = capsSw + `<div class="fs-c"><div class="fs-row"><p>Size</p><b data-fs-out="size"></b></div><input type="range" min="1" max="${mx}" step="1" value="${cols}" data-fssize aria-label="Size"><div class="fs-prev" data-fs-prev></div></div>`;
     const title = ({ paintings: "Paintings", era: "Era", place: "Place" })[kind] || "Keep exploring";
     const { sh, close } = sheet(`<div class="fs-sheet"><div class="fs-head"><h3>${title}</h3><span class="fs-count" data-fs-count aria-live="polite"></span><button type="button" class="fs-reset" data-fs-reset${kind === "none" ? " hidden" : ""}>Reset</button></div><div class="fs-scroll">${body}${size}</div></div>`);
     const q = s2 => sh.querySelector(s2), out = (k, t) => { const o = q(`[data-fs-out="${k}"]`); if (o) o.textContent = t; };
@@ -620,6 +644,8 @@ function fdMount(host, o) {
     });
     sh.addEventListener("change", e => { const o = e.target.closest("[data-fssel]"); if (o) { S[o.dataset.fssel] = o.value; buzz(4); later2(); } });
     sh.addEventListener("click", e => {
+      const cp = e.target.closest("[data-fscaps]");
+      if (cp) { view.caps = !view.caps; viewSave(); cp.setAttribute("aria-checked", view.caps); buzz(4); relayoutAll(); return; }
       const m = e.target.closest("[data-fsmulti] button"), g = e.target.closest("[data-fsseg] button"), w = e.target.closest("[data-fssw]"), rs = e.target.closest("[data-fs-reset]");
       if (m) { const k = m.parentNode.dataset.fsmulti, v = m.dataset.v, i = S[k].indexOf(v); i < 0 ? S[k].push(v) : S[k].splice(i, 1); m.setAttribute("aria-pressed", i < 0); buzz(4); paint(); later2(); }
       else if (g) { const k = g.parentNode.dataset.fsseg; S[k] = g.dataset.v; g.parentNode.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === g)); buzz(4); later2(); }

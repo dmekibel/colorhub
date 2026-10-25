@@ -4439,7 +4439,7 @@ scenario("paintings", "Keep exploring: a feed at the bottom of a painting page, 
   t.expect(t.$$(".fd-chip").map(b => t.text(b).replace(/ ·.*/, "")).join() === "Overview,Color,Vibe,Painter,Era,Place", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}", not Overview, Color, Vibe, Painter, Era, Place`);
   t.expect(/^Color/.test(t.text(".fd-chip.on")) && !/·/.test(t.text(".fd-chip.on")), `Color is not on by default: "${t.text(".fd-chip.on")}"`);
   const caps = feedCaps(t), pct = caps.map(c => +((c.match(/(\d+)%/) || [])[1] || NaN));
-  t.expect(caps.length >= 6 && caps.every(c => /^Close palette · \d+%$/.test(c)), `captions don't say why in plain words: ${caps.slice(0, 4)}`);
+  t.expect(caps.length >= 6 && caps.every(c => /^\d+% alike$/.test(c)), `captions don't say why in plain words: ${caps.slice(0, 4)}`);
   t.expect(pct.every((p, k) => k === 0 || p <= pct[k - 1]), `not closest first: ${pct}`);
   // the first tile is exactly what the page's own "More like this" would rank first
   const want = t.ev(`glSimilarPal(twPal(twQuery(glTwCols(glPoolDecode(glDetailNow(12).pl), glPal(12)), { self: 12 })), 1, { exclude: 12, pairs: false, noEra: true }).list[0].i`);
@@ -4519,16 +4519,52 @@ scenario("paintings", "Keep exploring: a tile opens its painting with the chip s
   t.expect(t.text(".fd-chip.on") === "Era", "Back lost the chip");
   t.expect(t.$("[data-gl-about]").hidden, "Back should land on the Era tab, with the Overview hidden");
 });
+// painting A -> a tile on its Vibe tab (B) -> a tile on B's Color tab (C), then Back three times: each landing is the same page, the same tab, the same tile
+scenario("paintings", "trail: painting then a Vibe tile then a Color tile then Back to each page with its tab and exact tile", async t => {
+  await feedOpen(t, 12, "vibe");
+  await t.waitFor(() => t.text(".fd-chip.on") === "Vibe" && !t.$(".fd-tile.sk") && t.$(".fd-tile[data-fk]") ? true : null, 15000, "the Vibe feed");
+  const hashA = TRL.hash(t);
+  const pickTile = async () => {
+    await t.sleep(1500);
+    t.w.scrollTo(0, feedTop(t) - 150); t.w.dispatchEvent(new t.w.Event("scroll")); await t.tick(); await t.sleep(900); await t.tick();
+    const tile = t.$$(".fd-tile[data-fk]").find(e => +e.dataset.fk >= 1 && e.getBoundingClientRect().top > 160 && e.getBoundingClientRect().bottom < t.w.innerHeight - 60);
+    t.expect(tile, "no tile to tap on " + TRL.hash(t) + ": " + t.text(".fd-chip.on") + " " + t.$$(".fd-tile[data-fk]").length + " tiles " + t.$$(".fd-tile[data-fk]").map(e => e.dataset.fk + "@" + Math.round(e.getBoundingClientRect().top)) + ", scroll " + t.w.scrollY + ", grid " + t.$(".fd-grid").style.height);
+    tile.scrollIntoView({ block: "center" }); await t.sleep(400);
+    return { k: tile.dataset.fk, y: tile.getBoundingClientRect().top, tile };
+  };
+  const a = await pickTile();
+  await t.click(`.fd-tile[data-fk="${a.k}"]`, { wait: 900 });
+  await TRL.atHash(t, /^#\/gallery\/\d+$/, "painting B");
+  const hashB = TRL.hash(t); t.expect(hashB !== hashA, "the tap didn't open another painting");
+  await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre)") ? true : null, 25000, "B's chip row");
+  t.expect(/^Color/.test(t.text(".fd-chip.on")), "B should start on Color");
+  await feedScroll(t);
+  const b = await pickTile();
+  await t.click(`.fd-tile[data-fk="${b.k}"]`, { wait: 900 });
+  await TRL.atHash(t, /^#\/gallery\/\d+$/, "painting C");
+  t.expect(TRL.hash(t) !== hashB && TRL.hash(t) !== hashA, "C is not a new painting");
+  await t.click(TRL.screenBack(t), { wait: 700 });
+  await TRL.atHash(t, new RegExp("^" + hashB.replace(/[#/]/g, "\\$&") + "$"), "back on B");
+  await t.waitFor(() => t.$(`.fd-tile[data-fk='${b.k}']`), 15000, "B's tile");
+  await t.sleep(2000);
+  t.expect(/^Color/.test(t.text(".fd-chip.on")), "Back to B lost its tab");
+  t.expect(Math.abs(t.$(`.fd-tile[data-fk='${b.k}']`).getBoundingClientRect().top - b.y) <= 6, "Back to B: the tile moved");
+  await t.click(TRL.screenBack(t), { wait: 700 });
+  await TRL.atHash(t, new RegExp("^" + hashA.replace(/[#/]/g, "\\$&") + "$"), "back on A");
+  await t.waitFor(() => t.$(`.fd-tile[data-fk='${a.k}']`), 15000, "A's tile");
+  await t.sleep(2000);
+  t.expect(t.text(".fd-chip.on") === "Vibe", `Back to A lost its tab: "${t.text(".fd-chip.on")}"`);
+  t.expect(Math.abs(t.$(`.fd-tile[data-fk='${a.k}']`).getBoundingClientRect().top - a.y) <= 6, "Back to A: the tile moved");
+});
 scenario("paintings", "Keep exploring: the end of the feed says so, and a picture that fails to load is a designed state, not a hole", async t => {
   await feedOpen(t, 12, "era");
   await t.waitFor(() => t.text(".fd-chip.on") === "Era" && !t.$(".fd-tile.sk") ? true : null, 10000, "Era");
-  // a picture that won't load: the tile keeps its box, says so, and still opens
+  // a picture that won't load is taken out of the list (never a hole, never the words "Picture unavailable")
   const img = t.$(".fd-tile[data-fk='0'] img");
-  if (img) { img.dataset.retry = "1"; img.src = "/__no_such_picture__.jpg"; await t.waitFor(() => t.$(".fd-tile[data-fk='0'] .fd-err") ? true : null, 8000, "the picture-unavailable state"); }
-  t.expect(t.$(".fd-tile[data-fk='0']") && t.$(".fd-tile[data-fk='0'] .fd-cap"), "a failed picture removed the tile");
+  if (img) { img.dataset.retry = "1"; img.src = "/__no_such_picture__.jpg"; await t.sleep(1500); await t.tick(); t.expect(!/Picture unavailable/.test(t.d.body.textContent), "the words Picture unavailable are on screen"); }
   // page to the end (300 items = 13 pages)
   const end = await t.waitFor(() => { t.w.scrollTo(0, 1e7); return t.$(".fd-end"); }, 60000, "the end-of-feed line", 30000);
-  t.expect(end && /That is everything close to this one\./.test(t.text(end)), "the end-of-feed line never appeared");
+  t.expect(end && /every painting from around this time/.test(t.text(end)), "the end-of-feed line never appeared");
   t.expect(t.$("[data-fdup]"), "the end of the feed has no way back up");
 });
 // David, 2026-10-25: the painting page is the picture, the title, then the chip row (Overview . Color . Vibe . Painter . Era . Place); the old Explore pill is gone
@@ -4608,7 +4644,6 @@ scenario("paintings", "Keep exploring: a Vibe chip re-ranks by the picture model
   t.expect(want >= 0 && first, "no first vibe tile");
   const title = await t.waitFor(() => t.ev(`(() => { const d = glDetailNow(${want}); return d ? d.t : null; })()`), 6000, "the first neighbor's details");
   t.expect(first.indexOf(title) === 0, `the first Vibe tile is not the model's nearest (${first} vs ${title})`);
-  t.expect(/vibe/i.test(first), "the first tile has no vibe caption: " + first);
   // the reader finds nothing: the chip goes dim with a plain reason
   await t.open("#/gallery/40", { settle: 300 });
   await t.waitFor("[data-glfeed]", 15000, "feed host");
@@ -4722,7 +4757,7 @@ scenario("pages", "When and where: a decade bar opens the Era feed and a country
   const bar = bars[Math.floor(bars.length / 3)], dec = Math.floor(+bar.dataset.rcEra / 10) * 10;
   t.expect(dec > 0, `the bar has no decade (${bar.outerHTML.slice(0, 80)})`);
   await t.click(bar, { wait: 600 });
-  await t.waitFor(() => t.text(".fd-chip.on") === "Era" && t.$$(".fd-tile[data-fk]").length >= 4 ? true : null, 25000, "the Era feed after the bar tap");
+  await t.waitFor(() => t.text(".fd-chip.on") === "Era" && t.$$(".fd-tile[data-fk]").length >= 4 ? true : null, 25000, "the Era feed after the bar tap " + JSON.stringify(t.ev("(() => { const g = document.querySelector(\".fd-grid\"); return g ? { h: g.style.height, w: g.clientWidth, n: g.children.length, cls: g.className, top: Math.round(g.getBoundingClientRect().top), sy: scrollY, chip: (document.querySelector(\".fd-chip.on\")||{}).textContent } : null; })()")));
   t.expect(new RegExp("Nearest the " + dec + "s").test(t.text(".fd-lead")), `the Era lead is "${t.text(".fd-lead")}", not the ${dec}s`);
   await t.click(".fd-chip[data-fc=about]", { wait: 400 });
   const door = await t.waitFor(() => t.$(".rc-door[data-rc-place]"), 5000, "a country door");

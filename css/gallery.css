@@ -600,14 +600,14 @@ html.desk .fd-bar{top:calc(var(--dkn,60px) - 1px)}
 .pmx-tofeed svg{width:18px;height:18px}
 
 /* Settings and Map float at the bottom while a feed's pictures are on screen (js/feed.js): no row above the pictures, under the thumb */
-.fd-float{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);transform:translate(-50%,0);z-index:40;display:flex;gap:2px;padding:4px;border-radius:999px;background:#1F1D18;border:1px solid rgba(236,232,223,.18);box-shadow:0 10px 28px rgba(0,0,0,.55);transition:transform .25s var(--ease,ease),opacity .2s}
-.fd-float.away{transform:translate(-50%,160%);opacity:0;pointer-events:none}
-.fd-fb{position:relative;min-height:46px;padding:0 18px 0 14px;border:0;border-radius:999px;background:transparent;color:#ECE8DF;display:inline-flex;align-items:center;gap:8px;font:400 18px/1 var(--serif)}
+.fd-float{position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:40;display:flex;justify-content:space-between;align-items:flex-end;padding:0 max(14px,env(safe-area-inset-right,0px)) 0 max(14px,env(safe-area-inset-left,0px));pointer-events:none;transition:transform .25s var(--ease,ease),opacity .2s}   /* two small separate buttons in the corners, nothing across the middle */
+.fd-float.away{transform:translate(0,160%);opacity:0}
+.fd-fb{position:relative;min-height:44px;padding:0 15px 0 12px;border:1px solid rgba(236,232,223,.18);border-radius:999px;background:#1F1D18;box-shadow:0 8px 22px rgba(0,0,0,.5);pointer-events:auto;color:#ECE8DF;display:inline-flex;align-items:center;gap:7px;font:400 16px/1 var(--serif)}
+.fd-float.away .fd-fb{pointer-events:none}
 .fd-fb[hidden]{display:none}
-.fd-fb+.fd-fb:not([hidden]){box-shadow:-1px 0 0 rgba(236,232,223,.18)}
-.fd-fb:active{background:rgba(236,232,223,.08)}
-.fd-fb svg{width:20px;height:20px}
-.fd-fb i{position:absolute;top:9px;left:28px;width:9px;height:9px;border-radius:50%;background:#ECE8DF;box-shadow:0 0 0 2px #1F1D18}
+.fd-fb:active{background:#2B2823}
+.fd-fb svg{width:19px;height:19px}
+.fd-fb i{position:absolute;top:8px;left:26px;width:9px;height:9px;border-radius:50%;background:#ECE8DF;box-shadow:0 0 0 2px #1F1D18}
 @media (prefers-reduced-motion:reduce){.fd-float{transition:none}}
 
 /* the painting page's chip row (David, 2026-10-25): picture, title, then Overview . Color . Vibe . Painter . Era . Place right under them.
@@ -619,3 +619,11 @@ html.desk .fd-bar{top:calc(var(--dkn,60px) - 1px)}
 .gl-tabs .sec-head[hidden]{display:none}
 .gl-tabs .fd-lead:not(.why){display:none}   /* the order is in Settings; every line above the pictures costs them room */
 html.desk .gl-tabs{margin-top:28px}
+
+/* Apple-Photos grids (David, 2026-10-25): pictures only, edge to edge, 2px gutters, square corners; captions are a Settings switch (js/feed.js view.caps) */
+.fd-grid.bare{margin-left:calc(-1 * var(--g));margin-right:calc(-1 * var(--g))}
+.fd-grid.bare .fd-im{border-radius:0}
+.fd-grid.nocap .fd-by{display:none}
+.fd-grid.bare .fd-err{display:none}
+.gl-tabs .fd-state,.rp-tabs .fd-state{padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
+.fd-cap:empty{display:none}
