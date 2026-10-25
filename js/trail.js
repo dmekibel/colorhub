@@ -151,7 +151,7 @@ function tlOriginName() { const room = xFallbackTab(); return room ? tlRoomLabel
 const TL_TRUNC = s => { s = String(s || "").replace(/\s+/g, " ").trim(); return s.length > 14 ? s.slice(0, 13).trimEnd() + "…" : s; };
 // the previous page's title, for ‹'s own label (PLAN §3.5: "‹ Periwinkle")
 function tlBackLabel() {
-  if (XSTACK.length >= 2) { const m = tlMetaFor(XSTACK[XSTACK.length - 2]); if (m && m.title) return TL_TRUNC(m.title); }
+  if (XSTACK.length >= 2) { const m = tlMetaFor(XSTACK[XSTACK.length - 2]); if (m && m.title) return /^untitled\b/i.test(m.title.trim()) ? "" : TL_TRUNC(m.title); }   // a page with no real title: just the chevron
   return TL_TRUNC(tlOriginName());
 }
 // the icon for the place ‹ ultimately leads to, and the place pill names (core.js ICON keys)
@@ -186,8 +186,8 @@ function tlDecorate(el) {
   // without any of those headers' own files changing. A crowded ad-hoc header, a float over a full-bleed hero
   // or the pinned color bar keep the icon alone; its aria-label still names the destination either way.
   const roomy = (nav && nav.querySelector(".nav-r")) || (!nav && !bar && !back.classList.contains("cp-close") && !crowded);
-  if (roomy && !back.querySelector(".tl-back-label")) back.insertAdjacentHTML("beforeend", `<span class="tl-back-label">${esc(tlBackLabel())}</span>`);
-  back.setAttribute("aria-label", `Back to ${esc(tlBackLabel())}`);
+  if (roomy && tlBackLabel() && !back.querySelector(".tl-back-label")) back.insertAdjacentHTML("beforeend", `<span class="tl-back-label">${esc(tlBackLabel())}</span>`);
+  back.setAttribute("aria-label", tlBackLabel() ? `Back to ${esc(tlBackLabel())}` : "Back");
   // a painting page (David, 2026-10-20): the top-right pill opens the painting map arranged around THIS painting
   // ("Similar") instead of closing back to the color map; Back, the pull-down and the trail sheet still go home
   const simGi = el.querySelector("[data-similar-gi]") ? el.querySelector("[data-similar-gi]").dataset.similarGi : null;

@@ -335,7 +335,6 @@ html.desk :is(.cp-page,.gl-page,.aw-page) .fd-state{padding-bottom:120px}
 html.desk .aw-page .aw-pane:not([hidden]):has(.aw-wk-mount){padding:0}
 html.desk .aw-page .aw-pane:has(.aw-wk-mount)>.sec-head{padding:0 var(--dkg);margin:18px 0 10px}
 html.desk .aw-page .aw-wk-mount{margin:0;padding:0}
-html.desk .fd-float{padding:0 28px;bottom:28px}
 /* Settings: a right-hand panel (about 420px, no dimming) with the feed live beside it, not a dialog over it */
 html.desk{--dk-panel:0px}
 html.desk:has(.sheet.fs-half){--dk-panel:420px}
@@ -345,7 +344,6 @@ html.desk .sheet.sheet.fs-half{inset:0 0 0 auto;margin:0;width:420px;height:auto
 html.desk .sheet.fs-half .grab{display:none}
 html.desk:has(.sheet.fs-half) #app{margin-right:var(--dk-panel)}
 html.desk:has(.sheet.fs-half) #dk-nav{right:var(--dk-panel)}
-html.desk:has(.sheet.fs-half) .fd-float{right:var(--dk-panel)}
 html.desk:has(.sheet.fs-half) .fd-bar{right:0}
 html.desk .rp-bar{display:none}   /* the color page's phone name bar: the page's own chip row is the bar here */
 html.desk .cp-page .cp-hero-foot :is(.rp-def,.cp-def,.c-def,p){max-width:600px}
@@ -353,3 +351,8 @@ html.desk .cp-page .cp-hero-foot :is(.rp-def,.cp-def,.c-def,p){max-width:600px}
 @media (max-width:1399px){html.desk .dk-pb-r .dk-search{width:44px;padding:0;justify-content:center;gap:0}html.desk .dk-pb-r .dk-search :is(span,kbd){display:none}}
 html.desk:has(.sheet.fs-half) .dk-pb-r .dk-search{width:44px;padding:0;justify-content:center;gap:0}
 html.desk:has(.sheet.fs-half) .dk-pb-r .dk-search :is(span,kbd){display:none}
+
+/* Map on a wide window: the hero's corner button, and the one bar's right end (before search) once the chip row is the bar */
+html.desk .fd-bar.fd-stuck .fd-mapw{display:flex}
+html.desk .fd-mapb.in-top,html.desk .art-top-name{display:none!important}
+html.desk .fd-mapb-hero{top:18px;right:var(--dkg)}

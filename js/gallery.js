@@ -1554,13 +1554,13 @@ function glPage(i, d, fromHex, tol) {
     <header class="art-top" data-similar-gi="${i}"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${typeof fvArtHeart === "function" && d.id ? fvArtHeart(d.id) : ""}</header>
     <div class="gl-cols">
     <div class="gl-pal-wrap">
-    <div class="gl-hero gl-full-w" style="--c:${avg}"><span style="width:min(100%, calc(var(--hero-vh, 62dvh) / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${glHiSrc(d) ? ` data-hi="${esc(glHiSrc(d))}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas><div class="gl-hero-dots" data-glherodots aria-hidden="true"></div>
+    <div class="gl-hero gl-full-w" style="--c:${avg}">${fdMapBtnHTML("fd-mapb-hero")}<span style="width:min(100%, calc(var(--hero-vh, 62dvh) / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${glHiSrc(d) ? ` data-hi="${esc(glHiSrc(d))}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas><div class="gl-hero-dots" data-glherodots aria-hidden="true"></div>
     <button class="gl-closer" data-glcloser aria-label="Look closer">${ICON.search}<span>Look closer</span></button>
     <button class="gl-closer gl-pick-btn" data-glpickbtn hidden aria-pressed="false" aria-label="Pick a color">${icon("pipette", 17)}<span>Pick a color</span></button></span></div>
     <div class="gl-id">
     <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
     <h1 class="p-title">${esc(d.t)}</h1>
-    <p class="p-dek">${d.a ? `<button class="aw-link" data-awpainter="${esc(routeSlug(d.a))}">${esc(d.a)}</button>` : "Artist unknown"}${[d.co, d.mv].filter(Boolean).map(x => ` · ${esc(x)}`).join("")}</p>
+    <p class="p-dek">${d.a ? `<button class="aw-link" data-awpainter="${esc(routeSlug(d.a))}">${esc(d.a)}</button>` : "Artist unknown"}${glDesk() ? [d.co, d.mv].filter(Boolean).map(x => ` · ${esc(x)}`).join("") : yr ? ` · ${esc(yr)}` : ""}</p>
     <p class="gl-id-src">${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? `<span class="gl-dk-credit"> · ${esc(src.credit)}</span>` : ""}</p>
     ${glEstNote(i) ? `<p class="gl-est-note">${esc(glEstNote(i))}</p>` : ""}
     <div class="gl-dk-acts"><button class="gl-dk-btn" data-dkpick hidden aria-pressed="false">${icon("pipette", 18)}<span>Pick a color</span></button><button class="gl-dk-btn" data-dkcloser>${ICON.search}<span>Look closer</span></button></div>
@@ -1614,6 +1614,27 @@ function glPage(i, d, fromHex, tol) {
     </div></section></div></div>
   `, "article gl-page");
   const route = "#/gallery/" + i, heroSpan = el.querySelector(".gl-hero > span");
+  // David, 2026-10-25: the picture, its title and "painter · year" are all that sits between the picture and the chip row. Everything else about
+  // the painting (where it hangs, country, movement, how it compares) opens the Overview, and the picture is sized from the screen so the
+  // chip row is always on the first screen (a tall painting shrinks, undistorted, instead of pushing the chips down).
+  if (!glDesk()) {
+    const f = document.createElement("div"); f.className = "gl-facts";
+    const line = [d.co, d.mv].filter(Boolean).join(" · ");
+    if (line) f.insertAdjacentHTML("beforeend", `<p class="gl-facts-l">${esc(line)}</p>`);
+    [".gl-id-src", ".gl-est-note", "[data-glwhy]"].forEach(sel => { const n = el.querySelector(".gl-id " + sel); if (n) f.appendChild(n); });
+    const ab = el.querySelector("[data-gl-about]"); if (ab && f.children.length) ab.insertBefore(f, ab.firstChild);
+  }
+  fdTopBar(el, d.t);
+  const fitBox = el.querySelector(".gl-pal-wrap"), fitId = el.querySelector(".gl-id"), fitTop = el.querySelector(".gl-page > .art-top, .art-top");
+  const fitHero = () => {
+    const fitBar = el.querySelector("[data-glfeed] .fd-bar");
+    if (!fitBox || !fitId || !fitBar || !heroSpan.isConnected || !heroSpan.parentNode.matches(".gl-hero") || glDesk()) return;
+    const vh = innerHeight, tabs = fitBar.closest("[data-glfeed]"), gap = tabs ? parseFloat(getComputedStyle(tabs).marginTop) || 0 : 0;
+    const over = (fitTop ? fitTop.offsetHeight : 0) + (fitId.getBoundingClientRect().bottom - heroSpan.getBoundingClientRect().bottom) + gap + fitBar.offsetHeight + 4;
+    fitBox.style.setProperty("--hero-vh", Math.round(Math.max(vh * .3, Math.min(vh * .62, vh - over))) + "px");
+  };
+  fitHero(); setTimeout(fitHero, 250); setTimeout(fitHero, 900);
+  { const onFit = () => fitHero(); addEventListener("resize", onFit); cleanup.push(() => removeEventListener("resize", onFit)); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitHero); }
   // stable references into the hero's own innards (not re-queried through `el` later): split mode moves the
   // whole .gl-hero node out to a body-level overlay and back (buildSplitEl/exitSplitMode, below), so anything
   // that looked it up via el.querySelector() after that move would just come back null.

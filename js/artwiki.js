@@ -243,7 +243,10 @@ function awSearchHTML(s, again) {
 function awPainterHexes(A, P) {
   return [...new Set([...(A.clusters || []).flatMap(c => c.colors.slice(0, 3)), ...(P.sig || []).map(r => awCol(r[0])[0])])].map(awHex).filter(h => h !== "#808080");
 }
-function awPortraitHero(slug, A, P, hlChips) {
+function awPortraitHero(slug, A, P, hlChips) {   // the portrait band, with Map pinned at its top right
+  return awPortraitHero0(slug, A, P, hlChips).replace(/^(\s*<figure[^>]*>)/, (m) => m + fdMapBtnHTML("fd-mapb-hero"));
+}
+function awPortraitHero0(slug, A, P, hlChips) {
   const rec = (AW.port && AW.port[slug]) || {}, pt = rec.portrait || { src: "none" };
   const field = (hlChips[0] && hlChips[0].h) || awHex((A.clusters && A.clusters[0] && A.clusters[0].colors[0]) || "");
   if ((pt.src === "self" || pt.src === "other") && pt.gi != null) {
@@ -344,7 +347,7 @@ function awColorNear(gi, hex) {
   return best;
 }
 // the Their work tab: the life's-work grid, and nothing above it. Sort, view, size and the filters live in one Settings sheet and the
-// map is one tap, both in the small floating pill at the bottom (the same pill and sheet the feeds use, .fd-float / .fs-*, js/feed.js),
+// map is one tap, both in the Their work chip (tapped again) and in the Map button (hero corner, sticky bar), the same sheet the feeds use (.fs-*, js/feed.js),
 // shown only while this grid's pictures are on screen. (David, 2026-10-25: a row of chips above the pictures costs them room.)
 function awWorksSection(slug, m, A, P) {
   const rows = awWorksRows(P, A);
@@ -400,8 +403,7 @@ function awWorksWire(el, slug, m, A, P, setTabMemo) {
     const count = el.querySelector("[data-wkcount]");
     if (count) count.textContent = list.length === rows.length ? awPlural(rows.length, "painting") : `${list.length} of ${awPlural(rows.length, "painting")}`;
     if (onList) onList(list.length);
-    const dot = tools.querySelector("[data-fdsetdot]"); if (dot) dot.hidden = !changed();
-    setTimeout(floatSync, 30);
+    document.querySelectorAll("[data-awtab=work] .fd-dot").forEach(dot => { dot.hidden = !changed(); });
     if (!list.length) { mount.style.height = ""; mount.innerHTML = `<p class="fine">Nothing matches every filter at once. Open Settings to loosen one.</p>`; return; }
     if (st.view === "timeline") {
       mount.style.height = "";
@@ -428,19 +430,6 @@ function awWorksWire(el, slug, m, A, P, setTabMemo) {
     }
   };
 
-  // ----- the floating pill: Settings and Map (built like js/feed.js: on <body>, because the screen's entrance transform would pin a fixed child to the page) -----
-  const tools = document.createElement("div"); tools.className = "fd-float away"; tools.setAttribute("role", "group"); tools.setAttribute("aria-label", "Their work");
-  tools.innerHTML = `<button type="button" class="fd-fb fd-set" data-fdset aria-haspopup="dialog">${AW_ICON_SET}<span>Settings</span><i data-fdsetdot hidden></i></button><button type="button" class="fd-fb fd-mapbtn" data-fdmap>${AW_ICON_GRID}<span>Map</span></button>`;
-  document.body.appendChild(tools);
-  const floatSync = () => {
-    if (!el.isConnected || !active) return tools.classList.add("away");
-    const r = mount.getBoundingClientRect(), bar = el.querySelector(".aw-tabs"), bh = bar ? bar.getBoundingClientRect().bottom : 0;
-    tools.classList.toggle("away", !(r.top < innerHeight - 120 && r.bottom > Math.max(160, bh + 60) && !document.querySelector(".sheet")));
-  };
-  const onScroll = (() => { let raf = 0; return () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; floatSync(); }); }; })();
-  addEventListener("scroll", onScroll, { passive: true }); addEventListener("resize", onScroll);
-  cleanup.push(() => { tools.remove(); removeEventListener("scroll", onScroll); removeEventListener("resize", onScroll); });
-
   // the painting nearest the top of the screen, below the chip row: the map opens centered on it
   const topPainting = () => {
     const bar = el.querySelector(".aw-tabs"), bh = bar ? bar.getBoundingClientRect().bottom : 0; let best = null;
@@ -451,18 +440,18 @@ function awWorksWire(el, slug, m, A, P, setTabMemo) {
     });
     return best ? best.gi : rows[0].gi;
   };
-  tools.querySelector("[data-fdmap]").onclick = () => {
+  const openMap = () => {
     if (typeof pmGo !== "function") return;
     let spec = `arr=spiral&seed=${topPainting()}&p=${encodeURIComponent(slug)}`;
     if (decades.length > 1 && (st.d0 !== dLo || st.d1 !== dHi)) spec += `&y0=${st.d0}&y1=${st.d1}`;
     if (setTabMemo) setTabMemo();
-    tools.classList.add("away"); buzz(6); pmGo(spec);
+    buzz(6); pmGo(spec);
   };
 
   // ----- the Settings sheet (same sheet and styles as the feeds', css/gallery.css .fs-*) -----
   function openSettings() {
     if (document.querySelector(".fs-sheet")) return;
-    tools.classList.add("away");
+    document.querySelectorAll("[data-awtab=work]").forEach(c => c.classList.add("fd-open"));
     const mx = typeof glMaxCols === "function" ? glMaxCols() : 5, sizeWord = n => `${n} across`;
     const seg = (k, label, opts, cur) => `<div class="fs-c"><div class="fs-row"><p>${label}</p></div><div class="fs-seg" data-wkseg="${k}">${opts.map(([v, t]) => `<button type="button" data-v="${v}" aria-pressed="${cur === v}">${t}</button>`).join("")}</div></div>`;
     const sortOpts = AW_WORKS_SORT.filter(([k]) => sortKeys.includes(k)).map(([k]) => (AW_SORT_DIR[k][1] ? [0, 1] : [0]).map(f => `<option value="${k}:${f}"${st.sort === k && !!st.rev[k] === !!f ? " selected" : ""}>${AW_SORT_DIR[k][f]}</option>`).join("")).join("");
@@ -541,15 +530,14 @@ function awWorksWire(el, slug, m, A, P, setTabMemo) {
         awViewSave(st); buzz(5); draw(); onList = null; close(); setTimeout(openSettings, 120);
       }
     });
-    const obs = new MutationObserver(() => { if (!sh.isConnected) { onList = null; obs.disconnect(); setTimeout(floatSync, 120); } }); obs.observe(document.body, { childList: true, subtree: true });
+    const obs = new MutationObserver(() => { if (!sh.isConnected) { onList = null; obs.disconnect(); document.querySelectorAll("[data-awtab=work]").forEach(c => c.classList.remove("fd-open")); } }); obs.observe(document.body, { childList: true, subtree: true });
   }
-  tools.querySelector("[data-fdset]").onclick = openSettings;
   return {
-    openSettings,
+    openSettings, openMap, changed,
+    toggleSettings() { if (document.querySelector(".sheet.fs-half")) { const x = document.querySelector(".sheet.fs-half .fs-x"); if (x) x.click(); } else openSettings(); },
     show(on) {
       active = on;
       if (on) { if (!drawn || Math.abs(mount.clientWidth - lastW) > 1) { drawn = true; draw(); } else if (gridCtl) gridCtl.draw(); }
-      setTimeout(floatSync, 30); floatSync();
     },
   };
 }
@@ -632,6 +620,7 @@ function awPainter(slug, push = true) {
   // and Map in a floating pill (js/artwiki.js awWorksWire); Their colors is the painter's color map and their signature colors.
   const hasWork = awWorksRows(P, A).length >= 2, hasColors = n >= 2 && (typeof pcOpen === "function" || !!colors);
   const TABS = [["about", "Overview"], ...(hasWork ? [["work", "Their work"]] : []), ...(hasColors ? [["colors", "Their colors"]] : [])];
+  const TUNE = { work: 1 };   // the tabs whose Settings are the active chip tapped again
   const prevTok = typeof XSTACK !== "undefined" && XSTACK.length > 1 ? String(XSTACK[XSTACK.length - 2]) : "";
   const memoTab = backNav ? AW_TAB.get(slug) : null;
   const startTab0 = memoTab || (/\/colors$/.test(location.hash) ? "colors" : /^(g:|pt:|sv:|pal:|ph:)/.test(prevTok) || /^r:.*(\/paintings\/map|\/gallery\/|\/painting\/)/.test(prevTok) ? "work" : "about");
@@ -642,7 +631,7 @@ function awPainter(slug, push = true) {
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
     <div class="aw-head"><div><p class="eyebrow p-type">Painter</p><h1 class="p-title">${esc(A.name)}</h1><p class="p-dek">${dek}</p></div></div>
     ${awPortraitHero(slug, A, P, small ? [] : awSigChips(P.sig, P.ix))}
-    ${TABS.length > 1 ? `<div class="fd-bar aw-tabs"><div class="fd-chips" role="tablist" aria-label="About ${esc(A.name)}, their work, their colors">${TABS.map(([k, t]) => `<button class="fd-chip${k === startTab ? " on" : ""}" role="tab" data-awtab="${k}" aria-selected="${k === startTab}">${t}</button>`).join("")}</div></div>` : ""}
+    ${TABS.length > 1 ? `<div class="fd-bar aw-tabs"><div class="fd-chips" role="tablist" aria-label="About ${esc(A.name)}, their work, their colors">${TABS.map(([k, t]) => `<button class="fd-chip${k === startTab ? " on" : ""}" role="tab" data-awtab="${k}" aria-selected="${k === startTab}"${TUNE[k] ? ` aria-haspopup="dialog"` : ""}>${t}${TUNE[k] ? `<span class="fd-tune" aria-hidden="true">${FD_ICON_TUNE}</span><i class="fd-dot" hidden></i>` : ""}</button>`).join("")}</div></div>` : ""}
     <div class="aw-pane" data-awpane="about"${startTab === "about" ? "" : " hidden"}>
       ${awFamousRail(slug, n)}
       <div data-awbio></div>
@@ -661,6 +650,7 @@ function awPainter(slug, push = true) {
     ${hasWork ? `<div class="aw-pane" data-awpane="work"${startTab === "work" ? "" : " hidden"}>${awWorksSection(slug, m, A, P)}</div>` : ""}
     ${hasColors ? `<div class="aw-pane" data-awpane="colors"${startTab === "colors" ? "" : " hidden"}>${colorsPane}</div>` : ""}`, "article aw-page");
   awWire(el);
+  fdTopBar(el, A.name);
   if (typeof wireLinks === "function") wireLinks(el);
   awFillHighlight(el);
   awFillPortrait(el);
@@ -672,15 +662,35 @@ function awPainter(slug, push = true) {
   const setTab = (k, quiet) => {
     if (!TABS.some(t => t[0] === k)) return;
     // a tab change keeps the chips where they are: if you had scrolled below the top of the page's chip row, the new pane starts at its top
-    const deep = bar && !quiet ? scrollY > bar.getBoundingClientRect().top + scrollY - (artTop ? artTop.getBoundingClientRect().height : 0) + 4 : false;
+    const deep = false;
     tab = k; AW_TAB.set(slug, k);
     el.querySelectorAll("[data-awtab]").forEach(b => { const on = b.dataset.awtab === k; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
     el.querySelectorAll("[data-awpane]").forEach(pn => { pn.hidden = pn.dataset.awpane !== k; });
     if (worksCtl) worksCtl.show(k === "work");
-    if (deep) { const y = bar.getBoundingClientRect().top + scrollY - (artTop ? artTop.getBoundingClientRect().height : 0); scrollTo(0, Math.max(0, y)); }
-    if (!quiet) buzz(4);
+    if (!quiet) { buzz(4); pinTabs(); }
   };
-  if (bar) bar.onclick = e => { const b = e.target.closest("[data-awtab]"); if (b && b.dataset.awtab !== tab) setTab(b.dataset.awtab); };
+  // a tab change brings the chip row to the top of the screen (the pane fills it); the active "Their work" chip tapped again is its Settings
+  const pinY = () => { const desk = typeof glDesk === "function" && glDesk(); return Math.max(0, Math.round(bar.getBoundingClientRect().top + scrollY - (desk || !artTop ? 0 : artTop.getBoundingClientRect().height))); };
+  const pinTabs = () => {
+    if (!bar) return;
+    scrollTo({ top: pinY(), behavior: reduceMotion ? "auto" : "smooth" });
+    setTimeout(() => { if (bar.isConnected && Math.abs(scrollY - pinY()) > 3) scrollTo(0, pinY()); }, 560);
+  };
+  if (bar) bar.onclick = e => {
+    const b = e.target.closest("[data-awtab]"); if (!b) return;
+    if (b.dataset.awtab === tab) { if (tab === "work" && worksCtl) { buzz(4); worksCtl.toggleSettings(); } else pinTabs(); return; }
+    { const x = document.querySelector(".sheet.fs-half .fs-x"); if (x) x.click(); }
+    setTab(b.dataset.awtab);
+  };
+  // Map (hero, top right, and the sticky row's right end): their work on the map, around the painting nearest the top of the Their work grid
+  const mapGo = () => {
+    if (worksCtl) return worksCtl.openMap();
+    if (typeof pmGo !== "function") return;
+    const gi = P.typical != null && P.typical >= 0 ? P.typical : (awWorksRows(P, A)[0] || {}).gi;
+    pmGo(`arr=spiral&seed=${gi >= 0 ? gi : 0}&p=${encodeURIComponent(slug)}`);
+  };
+  fdBarTools(bar); if (bar) fdStickWire(bar);
+  el.querySelectorAll("[data-fdmap]").forEach(b => { b.onclick = mapGo; });
   setBarTop(); setTimeout(setBarTop, 120);
   const onRS = () => setBarTop(); addEventListener("resize", onRS); cleanup.push(() => removeEventListener("resize", onRS));
   AW_TAB.set(slug, tab);

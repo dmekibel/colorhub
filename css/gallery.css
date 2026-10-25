@@ -608,16 +608,38 @@ html.desk .fd-bar{top:calc(var(--dkn,60px) - 1px)}
 .pmx-tofeed{display:flex;align-items:center;gap:10px;width:calc(100% - 32px);margin:2px 16px 8px;min-height:48px;padding:0 16px;border-radius:12px;border:1px solid var(--rule-strong,rgba(236,232,223,.28));background:var(--s2,#26231F);color:var(--ink);font:400 18px/1 var(--serif);text-align:left}
 .pmx-tofeed svg{width:18px;height:18px}
 
-/* Settings and Map float at the bottom while a feed's pictures are on screen (js/feed.js): no row above the pictures, under the thumb */
-.fd-float{position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:40;display:flex;justify-content:space-between;align-items:flex-end;padding:0 max(14px,env(safe-area-inset-right,0px)) 0 max(14px,env(safe-area-inset-left,0px));pointer-events:none;transition:transform .25s var(--ease,ease),opacity .2s}   /* two small separate buttons in the corners, nothing across the middle */
-.fd-float.away{transform:translate(0,160%);opacity:0}
-.fd-fb{position:relative;min-height:44px;padding:0 15px 0 12px;border:1px solid rgba(236,232,223,.18);border-radius:999px;background:#1F1D18;box-shadow:0 8px 22px rgba(0,0,0,.5);pointer-events:auto;color:#ECE8DF;display:inline-flex;align-items:center;gap:7px;font:400 16px/1 var(--serif)}
-.fd-float.away .fd-fb{pointer-events:none}
-.fd-fb[hidden]{display:none}
-.fd-fb:active{background:#2B2823}
-.fd-fb svg{width:19px;height:19px}
-.fd-fb i{position:absolute;top:8px;left:26px;width:9px;height:9px;border-radius:50%;background:#ECE8DF;box-shadow:0 0 0 2px #1F1D18}
-@media (prefers-reduced-motion:reduce){.fd-float{transition:none}}
+/* Settings = the active chip tapped again (a slider glyph on it says so, a dot when the settings aren't the defaults).
+   Map = a small opaque button at the top right of the hero, and in the one opaque top bar once the hero has scrolled away (js/feed.js). */
+.fd-tune{display:inline-flex;margin-left:3px;opacity:.7}
+.fd-chip.fd-open .fd-tune,.fd-chip.on:active .fd-tune{opacity:1}
+.fd-chip .fd-dot{width:7px;height:7px;border-radius:50%;background:currentColor;margin-left:-2px;align-self:flex-start;margin-top:11px}
+.fd-chip .fd-dot[hidden]{display:none}
+.fd-mapb{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 14px 0 11px;border:1px solid rgba(236,232,223,.2);border-radius:999px;background:#1F1D18;color:#ECE8DF;font:400 16px/1 var(--serif);cursor:pointer}
+.fd-mapb:active{background:#2B2823}
+.fd-mapb svg{width:18px;height:18px}
+.fd-mapb-hero{position:absolute;top:10px;right:max(14px,env(safe-area-inset-right,0px));z-index:3;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.gl-hero,.aw-pt-hero{position:relative}
+.gl-split .fd-mapb-hero{display:none}
+.fd-mapb.in-top{display:none;margin-left:auto}
+.fd-stuck .art-top .fd-mapb.in-top{display:inline-flex}
+.rp-bar .fd-mapb.in-top{display:inline-flex;min-height:34px;padding:0 12px 0 9px;font-size:15px;margin-left:auto;pointer-events:auto}
+.rp-bar .fd-mapb.in-top svg{width:16px;height:16px}
+.fd-mapw{display:none;flex:none;position:relative;padding-left:10px}
+.fd-mapb.in-bar{min-height:40px}
+/* the one opaque top bar of a painting or painter page: solid page ground, safe area included, the name once the hero has gone */
+.gl-page .art-top,.aw-page .art-top{background:var(--ground);-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom:0;z-index:6}
+.aw-page .art-top{border-bottom:1px solid var(--rule)}
+.art-top-name{flex:1;min-width:0;padding:0 10px;font:400 20px/1.1 var(--serif);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity .2s}
+.fd-stuck .art-top-name{opacity:1}
+.fd-stuck .art-top .tl-back-label{display:none}
+.gl-page .art-top,.aw-page .art-top{gap:6px}
+@media (prefers-reduced-motion:reduce){.art-top-name{transition:none}}
+/* phone: the painting's title block is title and "painter · year" only; its other lines live at the top of Overview */
+html:not(.desk) .gl-id .p-type{display:none}
+html:not(.desk) .gl-id .p-title{font-size:clamp(30px,8.8vw,40px);line-height:1.04;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.gl-facts{margin:0 0 20px}
+.gl-facts-l{font:400 17px/1.35 var(--sans);color:var(--soft)}
+.gl-facts .gl-id-src{margin-top:8px}
 
 /* the painting page's chip row (David, 2026-10-25): picture, title, then Overview . Color . Vibe . Painter . Era . Place right under them.
    Overview is this page's sections (.gl-about); the other chips are the feed (js/feed.js). Same shape as the color page's (.rp-tabs). */
@@ -636,3 +658,4 @@ html.desk .gl-tabs{margin-top:28px}
 .fd-grid.bare .fd-err{display:none}
 .gl-tabs .fd-state,.rp-tabs .fd-state{padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
 .fd-cap:empty,.fd-grid.narrow .fd-cap:empty{display:none}
+.fd-chip:not(.on) .fd-tune,.fd-chip:not(.on) .fd-dot{display:none}

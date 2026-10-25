@@ -736,7 +736,7 @@ function rpBarHTML(name, hex) {
   const hair = typeof rcContrast === "function" && rcContrast(hex, "#0E0D0B") < 1.6 ? " rp-bar-hair" : "";
   return `<div class="rp-bar${hair}" style="--c:${hex}" data-ink="${ink(hex)}" aria-hidden="true">
     <button class="rp-bar-back" data-rp-back aria-label="Back">${ICON.back}</button><button class="rp-bar-name" data-rp-top>${esc(name)}</button>
-    <nav class="rp-bar-chips">${[["story", "Story"], ["paint", "Paintings"], ["family", "Family"], ["id", "ID"]].map(([k, t]) => `<button data-rp-jump="${k}" hidden>${t}</button>`).join("")}</nav>
+    <nav class="rp-bar-chips">${[["story", "Story"], ["paint", "Paintings"], ["family", "Family"], ["id", "ID"]].map(([k, t]) => `<button data-rp-jump="${k}" hidden>${t}</button>`).join("")}</nav>${typeof fdMapBtnHTML === "function" ? fdMapBtnHTML("in-top") : ""}
     <button class="rp-bar-explore" data-rp-jump="explore" hidden aria-label="Explore: keep exploring this color"><span>Explore</span>${ICON.down}</button></div>`;
 }
 function rpBarSync(el) {
@@ -982,6 +982,7 @@ function colorDossier(entry, o = {}) {
   const el = show(`
     <div class="c-hero cp-hero cp-hero-full${tapped ? " rp-split" : ""}" style="--c:${heroHex};--c2:${hex}" data-ink="${ink(heroHex)}">
       <button class="cp-close" data-back aria-label="Back">${ICON.back}</button>
+      ${typeof fdMapBtnHTML === "function" ? fdMapBtnHTML("fd-mapb-hero") : ""}
       <div class="cp-hero-foot">
         ${tapped ? `<div class="rp-split-band"><div class="rp-split-half rp-split-half-a" data-ink="${ink(heroHex)}"><b>${esc(rpYoursName(name, hex, heroHex))}</b><span class="mono">${heroHex}</span></div><div class="rp-split-half rp-split-half-b" data-ink="${ink(hex)}"><b>${esc(name)}</b><span class="mono">${hex}</span></div></div>` : ""}
         ${cover.html}

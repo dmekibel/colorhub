@@ -84,7 +84,12 @@ async function fdRankColor(ctx, st) {
   else if (m === "dominant") ranked = twScoreDominant(q).ranked;
   else if (m === "accents") { ranked = twScoreAccents(q).ranked; if (!ranked.length) return { empty: "This painting has no small vivid colors to match. Try Overall palette.", alt: true }; }
   else ranked = glSimilarPal(twPal(q), 300, { exclude: ctx.i, pairs: false, noEra: true, cands: 300 }).list.map(x => [x.i, x.d]);
-  return { items: ranked.map(([j, d]) => ({ j, cap: fdCapColor(m, ctx, d, hex) })) };
+  const res = { items: ranked.map(([j, d]) => ({ j, cap: fdCapColor(m, ctx, d, hex) })) };
+  if (GAL.mean) {   // past the closest palettes: everything else, by how near its average color is (a quiet tail, no percent)
+    const t = m === "color" && hex ? lab(hex) : [GAL.mean[ctx.i * 3], GAL.mean[ctx.i * 3 + 1], GAL.mean[ctx.i * 3 + 2]], used = new Set(ranked.map(r => r[0])); used.add(ctx.i);
+    fdPaged(res, fdCursor(fdMeanScores(t[0], t[1], t[2]), used), (s, j) => ({ j, cap: "" }));
+  }
+  return res;
 }
 // the squared distance between two paintings' average colors: a cheap tie-break so the nearest in time are also the nearest in color
 const fdMeanD = (G, i, j) => { const m = G.mean, a = m[j * 3] - m[i * 3], b = m[j * 3 + 1] - m[i * 3 + 1], c = m[j * 3 + 2] - m[i * 3 + 2]; return Math.min(99, Math.sqrt(a * a + b * b + c * c)) / 1000; };
@@ -92,12 +97,13 @@ function fdRankEra(ctx) {
   const G = GAL, i = ctx.i, y0 = G.year[i];
   if (y0 === GL_UNDATED) return { empty: "This painting has no year, so there is no time to be near." };
   const sc = new Float32Array(G.n), est0 = glYearEst(i);
-  for (let j = 0; j < G.n; j++) { const y = G.year[j]; sc[j] = j === i || y === GL_UNDATED ? Infinity : Math.abs(y - y0) + fdMeanD(G, i, j); }
+  for (let j = 0; j < G.n; j++) { const y = G.year[j]; sc[j] = j === i ? Infinity : y === GL_UNDATED ? 1e4 + fdMeanD(G, i, j) : Math.abs(y - y0) + fdMeanD(G, i, j); }
   const items = Array.from(twTopK(sc, FD_KEEP), j => {
     const dy = Math.floor(sc[j]), est = est0 || glYearEst(j), r = fdRel(dy, G.year[j] > y0);
     return { j, cap: fdCap1(est && dy ? "about " + r : r) };
   });
-  return { items, end: "That is every painting from around this time that has a picture." };
+  const res = { items, end: "That is every painting from around this time that has a picture." }, used = new Set(items.map(x => x.j)); used.add(i);
+  return fdPaged(res, fdCursor(sc, used), (s, j) => { const y = G.year[j]; if (y === GL_UNDATED) return { j, cap: "No year" }; const dy = Math.floor(s), est = est0 || glYearEst(j), r = fdRel(dy, y > y0); return { j, cap: fdCap1(est && dy ? "about " + r : r) }; });
 }
 // painter, country and movement come from the facets (js/browse.js xbLoad): loaded on first use
 async function fdFacets() { const F = await xbLoad(); if (!F || F.G !== GAL) throw new Error("facets out of step"); return F; }
@@ -111,9 +117,9 @@ async function fdRankPlace(ctx) {
   if (!co) return { empty: "There is no country on record for this painting." };
   const tiers = fdRegions(F, co), sc = new Float32Array(G.n);   // tier 0 = the same country, 1 = the tightest region, 2 = the widest
   for (let j = 0; j < G.n; j++) {
-    const c = F.country[j]; if (j === i || !c) { sc[j] = Infinity; continue; }
+    const c = F.country[j]; if (j === i) { sc[j] = Infinity; continue; } if (!c) { sc[j] = 5000 + fdMeanD(G, i, j); continue; }
     let tier = 0;
-    if (c !== co) { tier = -1; for (let k = 0; k < tiers.length; k++) if (tiers[k].has(c)) { tier = k + 1; break; } if (tier < 0) { sc[j] = Infinity; continue; } }
+    if (c !== co) { tier = -1; for (let k = 0; k < tiers.length; k++) if (tiers[k].has(c)) { tier = k + 1; break; } if (tier < 0) tier = 4; }   // 4: the rest of the world
     const y = G.year[j], dy = !dated0 ? 0 : y === GL_UNDATED ? 400 : Math.abs(y - y0);
     sc[j] = tier * 1000 + Math.min(dy, 900) + fdMeanD(G, i, j);
   }
@@ -121,7 +127,9 @@ async function fdRankPlace(ctx) {
     const y = G.year[j], place = F.meta.countries[F.country[j] - 1];
     return { j, cap: dated0 && y !== GL_UNDATED ? `${place} · ${fdRel(Math.abs(y - y0), y > y0)}` : place };
   });
-  return { items, end: "That is every painting from this country and its neighbors." };
+  const res = { items, end: "That is every painting in the archive." }, used = new Set(items.map(x => x.j)); used.add(i);
+  return fdPaged(res, fdCursor(sc, used), (s, j) => { const y = G.year[j], c = F.country[j], place = c ? F.meta.countries[c - 1] : "";
+    return { j, cap: place && dated0 && y !== GL_UNDATED ? `${place} · ${fdRel(Math.abs(y - y0), y > y0)}` : place }; });
 }
 async function fdRankPainter(ctx) {
   const F = await fdFacets(), G = GAL, i = ctx.i, a0 = F.artist[i], co0 = F.country[i], mv0 = F.mv[i], y0 = G.year[i], dated0 = y0 !== GL_UNDATED;
@@ -141,7 +149,11 @@ async function fdRankPainter(ctx) {
     const y = G.year[j], cm = mv0 && F.mv[j] === mv0, cc = co0 && F.country[j] === co0, place = F.meta.countries[F.country[j] - 1] || "";
     kin.push({ j, cap: cm ? (cc ? "Same movement · " + place : F.meta.movements[mv0 - 1]) : `${place}${y !== GL_UNDATED ? " · " + Math.floor(y / 10) * 10 + "s" : ""}` });
   }
-  return { items: own.concat(kin).slice(0, 400) };
+  const items = own.concat(kin).slice(0, 400), used = new Set(items.map(x => x.j)); used.add(i);
+  const sa = new Float32Array(G.n);   // after them: their other works and kindred hands that were left out, then everyone else, nearest in time first
+  for (let j = 0; j < G.n; j++) { if (j === i) { sa[j] = Infinity; continue; } const y = G.year[j], dy = dated0 && y !== GL_UNDATED ? Math.abs(y - y0) : 300; sa[j] = so[j] !== Infinity ? so[j] : sk[j] !== Infinity ? 400 + sk[j] : 2000 + Math.min(dy, 900) + fdMeanD(G, i, j); }
+  return fdPaged({ items }, fdCursor(sa, used), (s, j) => { const a = F.artist[j], nm = a ? F.meta.artists[a - 1][0] : "";
+    return { j, cap: s < 400 ? "Also " + short : nm ? fdShortName(nm) : "", byTitle: s < 400 ? 1 : 0 }; });
 }
 // Vibe (js/vibe.js: the picture model's fingerprints, behind the map's By vibe): the painting's 60 nearest, closest first. The model gives a
 // similarity, never a percentage worth showing, so a tile says only how close the band is. Nothing here is ranked by us.
@@ -151,10 +163,12 @@ const fdVibeMark = () => { try { localStorage.setItem(FD_VIBE_KEY, "1"); } catch
 const fdVibeCap = sim => "";   // the tab already says it: a caption that repeats the tab's meaning is dropped (David, 2026-10-25)
 const FD_VIBE_NONE = "The picture model hasn't looked at this painting yet, so Vibe has nothing to compare.";
 async function fdRankVibe(ctx) {
-  const nb = typeof vibeNeighbors === "function" ? await vibeNeighbors(ctx.i, 60) : [];
-  const items = nb.filter(n => n.i !== ctx.i && n.i >= 0 && n.i < GAL.n && n.sim > 0).map(n => ({ j: n.i, cap: fdVibeCap(n.sim), sim: n.sim }));
+  const pg = typeof vibeNeighbors === "function" ? fdVibePager(ctx.i) : null, first = pg ? await pg(60) : [];
+  const items = first.map(n => ({ j: n.j, cap: fdVibeCap(n.sim), sim: n.sim }));
   if (!items.length) { ctx.vibeOff = true; return { empty: FD_VIBE_NONE }; }
-  return { items, end: "That is everything the model finds close to this one", map: `arr=look&on=${ctx.i}` };
+  const res = { items, end: "That is everything the model can reach from this one", map: `arr=look&on=${ctx.i}`, moreDone: false };
+  res.next = async () => { const page = await pg(FD_TAIL); if (!page.length) { res.moreDone = true; return; } page.forEach(n => res.items.push({ j: n.j, cap: "" })); };
+  return res;
 }
 const FD_RANK = { color: fdRankColor, vibe: fdRankVibe, painter: fdRankPainter, era: fdRankEra, place: fdRankPlace };
 // can this chip work for this painting? [reason when it can't]. Year is in the index; country and painter are known from the detail row
@@ -165,6 +179,56 @@ const FD_OFF = {
   place: ctx => ctx.F && !ctx.F.country[ctx.i] || (!ctx.F && !ctx.d.co) ? "No country is known for this painting, so Place has nothing to measure from." : "",
   painter: ctx => ctx.F && !ctx.F.artist[ctx.i] || (!ctx.F && !ctx.d.a) ? "No painter is known for this painting." : "",
 };
+
+// ---------- never-ending lists (David, 2026-10-25): every feed is the whole archive ranked by closeness, in pages ----------
+// A ranker returns its first page ({ items }) and may add res.next: an async function that pushes the next page of less and less close
+// paintings onto res.items (and sets res.moreDone when nothing is left). The feed asks for it as you near the end, so a list never stops;
+// the end line shows only when a Settings filter leaves nothing more. The state lives on res, so FD_CACHE and a Back restore keep it.
+// fdCursor: the rest of a score array (Infinity = never), closest first, n at a time. One linear scan per page (about a millisecond for 200,000),
+// no sort of the whole archive. used = indexes already listed; ok(j) is a hard filter; take(j) hears each pick.
+function fdCursor(sc, used, ok, take) {
+  const N = sc.length; let lastS = -Infinity;
+  return n => {
+    const best = []; let worst = Infinity;
+    for (let j = 0; j < N; j++) {
+      const s = sc[j]; if (s === Infinity || s < lastS || (best.length >= n && s >= worst) || used.has(j) || (ok && !ok(j))) continue;
+      let p = best.length; while (p > 0 && best[p - 1][0] > s) p--;
+      best.splice(p, 0, [s, j]); if (best.length > n) best.pop();
+      if (best.length >= n) worst = best[best.length - 1][0];
+    }
+    if (best.length) lastS = best[0][0];
+    best.forEach(([s, j]) => { used.add(j); if (take) take(j); });
+    return best;
+  };
+}
+const FD_TAIL = FD_PAGE * 3;
+// res.next from a cursor: mk(score, j) makes the tile
+function fdPaged(res, cursor, mk) {
+  res.moreDone = false;
+  res.next = async () => { const page = cursor(FD_TAIL); if (!page.length) { res.moreDone = true; return; } page.forEach(([s, j]) => res.items.push(mk(s, j))); };
+  return res;
+}
+// Vibe past the model's 60 nearest: best-first through the neighbors' own neighbors, so a path of close looks is followed outward
+function fdVibePager(i) {
+  const heap = [[1, i]], seen = new Set([i]), out = [];
+  const pop = () => { let b = 0; for (let k = 1; k < heap.length; k++) if (heap[k][0] > heap[b][0]) b = k; const t = heap[b]; heap[b] = heap[heap.length - 1]; heap.pop(); return t; };
+  return async n => {
+    const got = [];
+    while (got.length < n && heap.length) {
+      const [p, j] = pop();
+      if (j !== i) got.push({ j, sim: p });
+      const nb = await vibeNeighbors(j, j === i ? VIBE_K : 24);
+      nb.forEach(x => { if (x.i >= 0 && x.i < GAL.n && x.sim > 0 && !seen.has(x.i)) { seen.add(x.i); heap.push([p * x.sim, x.i]); } });
+    }
+    return got;
+  };
+}
+// squared-free Lab distance of every painting's average color from one color: the quiet tail of a color list
+function fdMeanScores(tl, ta, tb) {
+  const G = GAL, m = G.mean, sc = new Float32Array(G.n);
+  for (let j = 0; j < G.n; j++) { const a = m[j * 3] - tl, b = m[j * 3 + 1] - ta, c = m[j * 3 + 2] - tb; sc[j] = Math.sqrt(a * a + b * b + c * c); }
+  return sc;
+}
 
 // ---------- images: the smallest sufficient copy ----------
 // px = the width the tile needs on this screen. Hosts that serve any width get exactly it (rounded up to 100); Commons only serves its
@@ -193,6 +257,38 @@ function fdTrim(keep) {
   }
 }
 
+// ---------- Map and the Settings glyph (David, 2026-10-25) ----------
+// Settings = the active chip tapped again (a small slider glyph says so). Map = a small opaque button at the top right of the page's hero
+// (.fd-mapb-hero, made by each page) and, once the hero has scrolled away, at the right end of the sticky chip row (.fd-mapw).
+const FD_ICON_TUNE = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg>`;
+const FD_ICON_MAP = `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/></svg>`;
+const fdMapBtnHTML = cls => `<button type="button" class="fd-mapb ${cls}" data-fdmap aria-label="Map: see this list on the map">${FD_ICON_MAP}<span>Map</span></button>`;
+function fdBarTools(bar) {
+  if (!bar || bar.querySelector(".fd-mapw")) return;
+  const w = document.createElement("div"); w.className = "fd-mapw"; w.innerHTML = fdMapBtnHTML("in-bar");
+  const r = bar.querySelector(":scope>.dk-pb-r"); if (r) bar.insertBefore(w, r); else bar.appendChild(w);
+}
+// The page's top bar on a phone is ONE opaque bar: back, the page's name (once the hero has scrolled away), ⋯, and Map at the right. The place pill
+// that named the map ("Map", "Similar") is the same door as Map, so it goes; the long-press trail and the pull-down still lead home.
+function fdTopBar(scr, name) {
+  const hd = scr && scr.querySelector(":scope > .art-top"); if (!hd || hd.querySelector(".art-top-name")) return;
+  hd.querySelectorAll("[data-glsimilar]").forEach(b => b.remove());
+  if (typeof tlOriginName === "function" && typeof NAV_MAP !== "undefined") hd.querySelectorAll("[data-tl-exit]").forEach(b => { if (tlOriginName() === NAV_MAP) b.remove(); });
+  const nm = document.createElement("span"); nm.className = "art-top-name"; nm.textContent = name || "";
+  const anchor = hd.querySelector(":scope > [data-fva]") || hd.querySelector(":scope > [data-back]");
+  if (anchor) anchor.insertAdjacentElement("afterend", nm); else hd.insertBefore(nm, hd.firstChild);
+  hd.insertAdjacentHTML("beforeend", fdMapBtnHTML("in-top"));
+}
+// bar.fd-stuck (and .screen.fd-stuck): the chip row has reached its pinned place (so the hero is gone and the in-bar Map shows)
+function fdStickWire(bar) {
+  let raf = 0;
+  const run = () => { raf = 0; if (!bar.isConnected) return; const t = parseFloat(getComputedStyle(bar).top) || 0, on = scrollY > 4 && bar.getBoundingClientRect().top <= t + 1.5; if (bar.classList.contains("fd-stuck") !== on) { bar.classList.toggle("fd-stuck", on); const sc = bar.closest(".screen"); if (sc) sc.classList.toggle("fd-stuck", on); } };
+  const h = () => { if (!raf) raf = requestAnimationFrame(run); };
+  addEventListener("scroll", h, { passive: true }); addEventListener("resize", h);
+  cleanup.push(() => { removeEventListener("scroll", h); removeEventListener("resize", h); });
+  setTimeout(run, 60);
+}
+
 // ---------- the feed ----------
 function fdMount(host, o) {
   if (!host || !GAL) return;
@@ -204,7 +300,7 @@ function fdMount(host, o) {
   const remember = () => { if (o.about && !isColor) FD_MEMO.set(SKEY, { shown: FD_PAGE, ak: -1, ay: 0, chip: st.chip, metric: st.metric, color: st.color }); };
   const save = () => { Object.assign(STORE, st); fdSaveState(); remember(); };
   const ctx = { i, d, o, sub, kind: isColor ? "color" : "painting", key: SKEY, F: typeof XBF !== "undefined" && XBF && XBF.G === GAL ? XBF : null, _q: null, q() { return this._q || (this._q = twQuery(o.cols, { self: i })); } };
-  let lastN = 0, onCount = null, curEnd = "", curMap = "", curLead = "", eff = st.chip, items = [], shown = 0, tok = 0, built = false, gone = false, fk = 0;
+  let curRes = null, moreBusy = false, memoFilled = false, lastN = 0, onCount = null, curEnd = "", curMap = "", curLead = "", eff = st.chip, items = [], shown = 0, tok = 0, built = false, gone = false, fk = 0;
   let W = 0, cols = 2, colW = 0, gap = 12, vgap = 18, txt = 52, top = null, col = null, hh = null, ends = [], pinSkew = null, dense = false, capPct = false, zoom = null;
   const VKEY = isColor ? "colorhub-feed-view-color" : "colorhub-feed-view";
   const viewLoad = () => { try { const v = JSON.parse(localStorage.getItem(VKEY) || "null") || {}; return { cols: v.cols | 0, dcols: v.dcols | 0, caps: v.caps === undefined ? true : !!v.caps }; } catch (e) { return { cols: 0, dcols: 0, caps: true }; } };
@@ -220,15 +316,10 @@ function fdMount(host, o) {
     <p class="fd-lead" aria-live="polite"></p>
     <div class="fd-grid" role="group" aria-label="${isColor ? "Paintings and more that hold this color" : "Related paintings, closest first"}"></div>
     <div class="fd-state"></div>`;
-  // Settings and Map (David, 2026-10-25: a new row above the pictures costs them room, and squeezing the chips cuts their words): a small
-  // floating pill at the bottom of the screen, only while this feed's pictures are on screen. It lives on <body> (the screen's entrance
-  // transform would pin a fixed child to the page) and goes with the screen.
-  const tools = document.createElement("div"); tools.className = "fd-float away"; tools.setAttribute("role", "group"); tools.setAttribute("aria-label", "This list");
-  tools.innerHTML = `<button type="button" class="fd-fb fd-set" data-fdset aria-haspopup="dialog"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg><span>Settings</span><i data-fdsetdot hidden></i></button><button type="button" class="fd-fb fd-mapbtn" data-fdmap ><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/></svg><span>Map</span></button>`;
-  document.body.appendChild(tools); cleanup.push(() => tools.remove());
-  const $t = sel => tools.querySelector(sel);
   const bar = host.querySelector(".fd-bar"), chipsEl = host.querySelector(".fd-chips"), lead = host.querySelector(".fd-lead"), grid = host.querySelector(".fd-grid"), state = host.querySelector(".fd-state");
   if (aboutEl) bar.insertAdjacentElement("afterend", aboutEl);
+  if (isColor && typeof tlOriginName === "function" && typeof NAV_MAP !== "undefined" && tlOriginName() === NAV_MAP) document.querySelectorAll("body > .rp-bar [data-tl-exit], .cp-page .cp-hero [data-tl-exit]").forEach(b => b.remove());   // the "Map" place pill is the same door as the Map button
+  fdBarTools(bar); fdStickWire(bar);   // Map rides at the right end of the bar once the page's hero has scrolled away
   const artTop = () => document.querySelector(isColor ? ".rp-bar" : ".gl-page > .art-top");   // the bar the chips sit under: a painting's back bar, or a color page's pinned name bar
   const setBarTop = () => { if (glDesk()) { bar.style.top = ""; return; }   // on a wide window the fixed top bar is the one to sit under (css)
     const a = artTop(); bar.style.top = (a ? Math.round(a.getBoundingClientRect().height) - 1 : 0) + "px"; };
@@ -236,9 +327,15 @@ function fdMount(host, o) {
   // ----- the About tab (a color page): the article is the first chip; the feed's own parts hide while it shows -----
   const secHead = host.querySelector(".sec-head");
   if (aboutEl && secHead) secHead.remove();   // its heading words are hidden on a color page, and the tools now ride in the bar
-  const showAbout = on => { if (!aboutEl) return; aboutEl.hidden = !on; lead.hidden = on; grid.hidden = on; state.hidden = on; if (secHead) secHead.hidden = on; host.dataset.fdTab = on ? "about" : eff; setTimeout(() => floatSync(), 30); };
+  const showAbout = on => { if (!aboutEl) return; aboutEl.hidden = !on; lead.hidden = on; grid.hidden = on; state.hidden = on; if (secHead) secHead.hidden = on; host.dataset.fdTab = on ? "about" : eff; };
   // a tab change keeps the chips where they are: if you had scrolled below the top of this section, it lands on its top
-  const tabTop = force => { const a = artTop(), ah = a ? a.getBoundingClientRect().height : 0, y = host.getBoundingClientRect().top + scrollY - ah; if (force || scrollY > y + 4) scrollTo(0, Math.max(0, y)); };
+  const pinY = () => { const a = artTop(), ah = glDesk() || !a ? 0 : a.getBoundingClientRect().height; return Math.max(0, Math.round(host.getBoundingClientRect().top + scrollY - ah)); };   // the scroll at which the chip row sits pinned at the top
+  const tabTop = force => { const y = pinY(); if (force || scrollY > y + 4) scrollTo(0, y); };
+  const pinTabs = () => {
+    scrollTo({ top: pinY(), behavior: reduceMotion ? "auto" : "smooth" });
+    let moved = false; const q = () => { moved = true; }; addEventListener("touchstart", q, { once: true, passive: true }); addEventListener("wheel", q, { once: true, passive: true });
+    setTimeout(() => { removeEventListener("touchstart", q); removeEventListener("wheel", q); if (!gone && !moved && Math.abs(scrollY - pinY()) > 3) scrollTo(0, pinY()); }, 560);
+  };
   // a door from the page (js/richcolor.js): open a feed tab, on a chosen decade (Era: 188 = the 1880s) or country (Place: its 1-based index)
   host.fdOpen = (k, pick) => {
     if (off(k)) { toast(off(k)); return; }
@@ -253,48 +350,50 @@ function fdMount(host, o) {
   const effective = () => { const k = st.chip; return !off(k) ? k : FALL; };
   const chipsDraw = () => {
     eff = effective();
+    const sheetOn = !!document.querySelector(".fs-sheet");
     chipsEl.innerHTML = CHIPS.map(([k, t]) => {
-      const dis = !!off(k), on = k === eff, lab = !isColor && k === "color" && on ? `Color${st.metric === "overall" ? "" : " · " + FD_SHORT[st.metric]}<span class="fd-car">${ICON.chev}</span>` : t;   // the by… switch: Overall is the default, so it needs no word
-      return `<button class="fd-chip${on ? " on" : ""}${dis ? " dis" : ""}" role="tab" data-fc="${k}" aria-selected="${on}"${dis ? ` aria-disabled="true"` : ""}${!isColor && k === "color" && on ? ` aria-haspopup="dialog"` : ""}>${lab}</button>`;
+      const dis = !!off(k), on = k === eff, tune = on && k !== "about", lab = !isColor && k === "color" && on && st.metric !== "overall" ? `Color · ${FD_SHORT[st.metric]}` : t;   // the by… switch: Overall is the default, so it needs no word
+      return `<button class="fd-chip${on ? " on" : ""}${tune && sheetOn ? " fd-open" : ""}${dis ? " dis" : ""}" role="tab" data-fc="${k}" aria-selected="${on}"${dis ? ` aria-disabled="true"` : ""}${tune ? ` aria-haspopup="dialog" aria-label="${esc(t)}, settings"` : ""}>${lab}${tune ? `<span class="fd-tune" aria-hidden="true">${FD_ICON_TUNE}</span><i class="fd-dot" hidden></i>` : ""}</button>`;
     }).join("");
-    lensDraw(); setTimeout(floatSync, 60);
+    SUBDOT();
   };
   const leadDraw = (reason) => {
     const miss = st.chip !== eff ? off(st.chip) : "";   // the chip you chose can't work for this painting: say why, and what you are seeing instead
     const t = reason || (miss ? miss + (isColor ? " Showing paintings instead." : " Showing color instead.") : curLead || (LEADS[eff] ? LEADS[eff](st.metric) : ""));
     lead.textContent = t; lead.classList.toggle("why", !!(reason || miss));
   };
+  // Settings are the active chip tapped again (David, 2026-10-25); any other chip switches tab and brings the chip row to the top of the screen,
+  // so the feed fills it (Overview: the top of the article, just under the chips)
+  const closeSettings = () => { const x = document.querySelector(".sheet.fs-half .fs-x"); if (x) x.click(); };
+  const toggleSettings = () => { if (document.querySelector(".sheet.fs-half")) { buzz(4); closeSettings(); } else { buzz(4); openSettings(); } };
   chipsEl.onclick = e => {
     const b = e.target.closest("[data-fc]"); if (!b) return;
     const k = b.dataset.fc, why = off(k);
     if (why) { buzz(4); leadDraw(why); return; }
-    const deep = aboutEl ? scrollY > host.getBoundingClientRect().top + scrollY - (artTop() ? artTop().getBoundingClientRect().height : 0) + 4 : false;
-    if (aboutEl && k === "about") { if (eff === "about") return; st.chip = "about"; save(); buzz(4); chipsDraw(); showAbout(true); if (deep) tabTop(true); return; }
-    if (aboutEl && eff === "about") { showAbout(false); st.chip = k; if (isColor) st.color = 0; save(); buzz(4); rerank(false); if (deep) { tabTop(true); setTimeout(() => tabTop(true), 60); setTimeout(() => tabTop(true), 400); } return; }   // About -> a feed tab: the chips stay where they are
-    if (!isColor && k === "color" && eff === "color") return bySheet();
-    if (k === st.chip && k === eff) return;
-    st.chip = k; if (isColor) st.color = 0; save(); buzz(4); rerank(true);
+    if (k === eff) { if (k === "about") { pinTabs(); return; } return toggleSettings(); }
+    closeSettings();
+    if (aboutEl && k === "about") { st.chip = "about"; save(); buzz(4); chipsDraw(); showAbout(true); pinTabs(); return; }
+    if (aboutEl && eff === "about") showAbout(false);
+    st.chip = k; if (isColor) st.color = 0; save(); buzz(4); rerank(false); pinTabs();
   };
 
-  // ----- the "by…" sheet (Color's metric switch, js/twins.js) -----
-  function bySheet() {
-    if (document.querySelector(".fd-sheet")) return;
+  // ----- Color's metric switch (js/twins.js): a block inside that tab's Settings -----
+  const metricHTML = () => {
     const q = ctx.q(), canLayout = !!(o.img && o.img() && twReadable(o.img()));
     const rows = TW_METRICS.filter(([k]) => k !== "layout" || canLayout).map(([k, t]) => {
       const nope = k === "accents" && !q.accents.length;
       return `<button class="fd-opt${k === st.metric ? " on" : ""}" data-m="${k}"${nope ? " disabled" : ""} role="radio" aria-checked="${k === st.metric}"><b>${t}</b><span>${nope ? "This painting has no small vivid colors" : FD_METRIC_HELP[k]}</span></button>`;
     }).join("");
-    const { sh, close } = sheet(`<div class="fd-sh"><b class="fd-sh-t">Match color by…</b><div class="fd-opts" role="radiogroup" aria-label="How colors are matched">${rows}</div>
-      <div class="fd-pick" ${st.metric === "color" ? "" : "hidden"}><span>Which color?</span>${q.pool.slice(0, 6).map((p, k) => `<button data-pick="${k}" class="${k === st.color ? "on" : ""}" style="--c:${p.h}" aria-label="${esc(nameOf(p.h).n)}" aria-pressed="${k === st.color}"></button>`).join("")}</div></div>`);
-    sh.classList.add("fd-sheet"); sh.setAttribute("aria-label", "Match color by");
-    sh.onclick = e => {
-      const p = e.target.closest("[data-pick]"), b = e.target.closest("[data-m]");
-      if (p) { st.metric = "color"; st.color = +p.dataset.pick; }
-      else if (b && !b.disabled) { st.metric = b.dataset.m; if (b.dataset.m === "color") { sh.querySelector(".fd-pick").hidden = false; sh.querySelectorAll("[data-m]").forEach(x => { x.classList.toggle("on", x === b); x.setAttribute("aria-checked", x === b); }); st.chip = "color"; save(); chipsDraw(); rerank(true); return; } }
-      else return;
-      st.chip = "color"; save(); buzz(4); close(); chipsDraw(); rerank(true);
-    };
-  }
+    return `<div class="fs-c"><div class="fs-row"><p>Match color by</p></div><div class="fd-opts" role="radiogroup" aria-label="How colors are matched">${rows}</div>
+      <div class="fd-pick" ${st.metric === "color" ? "" : "hidden"}><span>Which color?</span>${q.pool.slice(0, 6).map((p, k) => `<button data-pick="${k}" class="${k === st.color ? "on" : ""}" style="--c:${p.h}" aria-label="${esc(nameOf(p.h).n)}" aria-pressed="${k === st.color}"></button>`).join("")}</div></div>`;
+  };
+  const metricClick = (e, sh) => {
+    const p = e.target.closest("[data-pick]"), b = e.target.closest("[data-m]");
+    if (p) { st.metric = "color"; st.color = +p.dataset.pick; sh.querySelectorAll("[data-pick]").forEach(x => { x.classList.toggle("on", x === p); x.setAttribute("aria-pressed", x === p); }); }
+    else if (b && !b.disabled) { st.metric = b.dataset.m; sh.querySelectorAll("[data-m]").forEach(x => { x.classList.toggle("on", x === b); x.setAttribute("aria-checked", x === b); }); sh.querySelector(".fd-pick").hidden = st.metric !== "color"; }
+    else return false;
+    st.chip = "color"; save(); buzz(4); chipsDraw(); rerank(false); return true;
+  };
 
   // ----- layout (a masonry whose boxes are known from the index before anything loads) -----
   const colsFor = w => { const want = wide() ? view.dcols : view.cols; return want >= 1 ? Math.min(fdMaxCols(), want) : w < 560 ? 3 : w < 860 ? 3 : wide() && w >= 900 ? Math.max(5, Math.min(8, Math.floor(w / 230))) : Math.max(3, Math.min(5, Math.floor((w + 14) / 254))); };   // a wide window: edge to edge, 5 to 8 across by its width (1440 -> 6, 1920 -> 8)
@@ -412,14 +511,26 @@ function fdMount(host, o) {
     if (nx.length) { nx.forEach(k => { const s = Math.floor(items[k].j / G.shard); if (!FD_SHARDS.includes(s)) FD_SHARDS.push(s); glShard(s).catch(() => {}); }); }
     fdTrim(liveShards());
     // near the end of what is shown: 24 more (the boxes are known from the index, so nothing moves)
-    if (shown < items.length && r.bottom - innerHeight < innerHeight * (dn ? 1.1 : 1.6)) grow();
+    const nearEnd = r.bottom - innerHeight < innerHeight * (dn ? 1.1 : 1.6);
+    if (nearEnd && shown < items.length) grow();
+    if (nearEnd && items.length - shown < FD_PAGE * 2) fetchMore();   // the list never ends: the next page of less close paintings is asked for before it is needed
   }
   function more() { const k0 = shown; shown = Math.min(items.length, shown + FD_PAGE * Math.max(1, Math.ceil(cols / 2))); place(k0); stateDraw(); }   // a page is 24 tiles at 2 across, more as they shrink, so one page always fills a screen   // 24 more tiles: only their boxes, appended below
   function grow() { more(); requestAnimationFrame(draw); }
   function relayoutAll() { const keep = shown; live.forEach(el => el.remove()); live.clear(); relayout(); shown = keep; draw(); }
+  // the next page of the ranking (res.next, above): appended to the same list, so the feed only ever ends when nothing is left to rank
+  function fetchMore() {
+    const res = curRes; if (!res || !res.next || res.moreDone || moreBusy || gone) return;
+    moreBusy = true; const mine = tok;
+    Promise.resolve().then(() => res.next()).catch(() => { res.moreDone = true; }).then(() => {
+      moreBusy = false; if (gone || mine !== tok || res !== curRes) return;
+      lastN = Math.max(lastN, items.filter(x => !x.head).length); stateDraw(); draw();
+    });
+  }
   function stateDraw() {
     if (!items.length || items[0].sk) { state.innerHTML = ""; return; }
-    state.innerHTML = shown >= items.length ? (isColor ? `<p class="fd-end">${esc(curEnd || "That is everything close to this color.")}</p><button class="fd-up" data-fdup>Back to the top of this color</button>` : `<p class="fd-end">${esc(curEnd || "That is everything close to this one.")}</p>${curMap ? `<button class="fd-up" data-pmap="${esc(curMap)}">See them on the map</button> ` : ""}<button class="fd-up" data-fdup>Back to this painting</button>`) : "";
+    const moreComing = !!(curRes && curRes.next && !curRes.moreDone);
+    state.innerHTML = shown >= items.length && !moreComing ? (isColor ? `<p class="fd-end">${esc(curEnd || "That is everything close to this color.")}</p>${fdChanged() ? `<button class="fd-up" data-fdreset>Reset the settings</button>` : ""}<button class="fd-up" data-fdup>Back to the top of this color</button>` : `<p class="fd-end">${esc(curEnd || "That is everything close to this one.")}</p>${curMap ? `<button class="fd-up" data-pmap="${esc(curMap)}">See them on the map</button> ` : ""}<button class="fd-up" data-fdup>Back to this painting</button>`) : "";
   }
   state.onclick = e => {
     if (e.target.closest("[data-fdup]")) { buzz(4); scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }); return; }
@@ -439,12 +550,12 @@ function fdMount(host, o) {
       state.innerHTML = `<p class="fd-empty">${esc(res.empty)}</p>${res.alt ? `<button class="fd-up" data-fdalt>Match by overall palette</button>` : ""}${res.reset ? `<button class="fd-up" data-fdreset>Reset the settings</button>` : ""}`;
       leadDraw(""); return;
     }
-    curLead = res.lead || ""; curEnd = res.end || ""; curMap = res.map || ""; items = res.items; if (!items.length) { apply({ empty: "Nothing else in the archive is close to this one in that way." }); return; }
+    curRes = res; curLead = res.lead || ""; curEnd = res.end || ""; curMap = res.map || ""; items = res.items; if (!items.length) { apply({ empty: "Nothing else in the archive is close to this one in that way." }); return; }
     live.forEach(el => el.remove()); live.clear(); lastN = res.n != null ? res.n : items.filter(x => !x.head).length; if (onCount) onCount(lastN);
     capPct = false;   // David, 2026-10-24: zoomed out, the percent under each tile "looks ugly": dense tiles are bare pictures (a long-press still shows everything)
     const want0 = memo ? memo.shown : FD_PAGE;
     shown = Math.min(items.length, Math.max(FD_PAGE, want0)); fk = Math.max(0, items.findIndex(x => !x.head));
-    relayout(); stateDraw(); leadDraw(""); draw(); setTimeout(floatSync, 60);
+    relayout(); stateDraw(); leadDraw(""); draw();
     if (eff === "vibe" && !isColor) fdVibeMark();   // the one-line explainer is shown once, the first time Vibe is on screen
     FD_LAST = { chip: eff, metric: st.metric, ms: Math.round(ms), n: items.length };
   }
@@ -456,6 +567,12 @@ function fdMount(host, o) {
     const k = key(), hit = FD_CACHE.get(k), t0 = performance.now();
     const done = res => {
       if (mine !== tok || gone) return;
+      // a Back to a list that was opened far down: ask for pages until it is as long as it was, so the tile you left is there to land on
+      if (memo && !memoFilled && res.next && !res.moreDone && res.items && res.items.length < memo.shown) {
+        memoFilled = true;
+        (async () => { while (res.items.length < Math.min(memo.shown, 6000) && !res.moreDone) { try { await res.next(); } catch (e) { res.moreDone = true; } if (mine !== tok || gone) return; } done(res); })();
+        return;
+      }
       if (res.items) { FD_CACHE.set(k, res); if (FD_CACHE.size > 24) FD_CACHE.delete(FD_CACHE.keys().next().value); }
       if (!isColor && res.empty && eff === "vibe" && ctx.vibeOff) { chipsDraw(); return rerank(false); }   // no vibe for this painting: the chip goes dim with the reason, and Color shows instead
       if (isColor && res.empty && eff !== FALL && !res.alt && !res.reset) { fdcOff(SKEY, eff, res.empty); chipsDraw(); return rerank(false); }   // this chip has nothing for this color: it is disabled from now on, with the reason, and Paintings shows instead
@@ -566,9 +683,8 @@ function fdMount(host, o) {
   const sizeWord = n => n === 1 ? "1 across, big" : `${n} across`;
   const TOLW = ["", "Exact", "Exact", "Nearly exact", "Very close", "Very close", "Close", "Close", "Close", "Close", "Fairly close", "Fairly close", "Loose", "Loose", "Loose", "Loose", "Very loose", "Very loose", "Very loose", "Its whole family", "Its whole family"];
   const REACHW = ["Just this country", "Its neighbors", "Its region", "Its continent", "The whole world"];
-  const SUBDOT = () => { const d = $t("[data-fdsetdot]"); if (d) d.hidden = !(isColor && fdsChanged(eff)); };
-  const mapOk = () => !(eff === "about" || (isColor && (eff === "painters" || eff === "worlds" || eff === "close")));
-  const lensDraw = () => { const m = $t("[data-fdmap]"); if (m) m.hidden = !mapOk(); SUBDOT(); };
+  const fdChanged = () => isColor ? fdsChanged(eff) : eff === "color" && st.metric !== "overall";
+  const SUBDOT = () => { const d = chipsEl.querySelector(".fd-dot"); if (d) d.hidden = !fdChanged(); };   // the active chip's mark that its Settings are not the defaults
   // Map: the same list as the painting map, the painting nearest the top of the screen in the middle, the same choices as filters
   const topPainting = () => {
     const bh = bar.getBoundingClientRect().bottom; let ak = -1;
@@ -577,7 +693,11 @@ function fdMount(host, o) {
     return ak >= 0 ? items[ak].j : -1;
   };
   async function openMap() {
-    const seed = topPainting(); if (seed < 0 || typeof pmGo !== "function") return;
+    if (typeof pmGo !== "function") return;
+    let seed = topPainting();
+    if (seed < 0 && isColor) { const b0 = await fdcBase(sub).catch(() => null); if (b0 && b0.rows.length) seed = b0.rows[0].i; }   // Overview (no list on screen): this color's own paintings
+    if (seed < 0 && !isColor) seed = i;
+    if (seed < 0) return;
     let spec = `arr=spiral&seed=${seed}`;
     if (!isColor) {   // the arrangement follows the tab: Vibe -> By look, centered on this painting; Painter -> this painter's paintings; Era -> its years; Place -> its country
       const y = G.year[i];
@@ -588,6 +708,11 @@ function fdMount(host, o) {
       else spec = `arr=spiral&seed=${i}`;
     }
     if (isColor) {
+      if (eff === "painters") {   // the painters on the list: the map filtered to them
+        const F0 = await fdFacets().catch(() => null), slugs = [];
+        if (F0) items.forEach(it => { if (it.j == null || it.head || it.card) return; const a = F0.artist[it.j]; if (a && F0.meta.artists[a - 1]) { const sl = routeSlug(F0.meta.artists[a - 1][0]); if (!slugs.includes(sl)) slugs.push(sl); } });
+        if (slugs.length) spec += `&p=${slugs.slice(0, 24).join(",")}`;
+      }
       const S = FDS.paintings, win = FDS.era.win, y = G.year[seed];
       spec += `&c=${sub.hex.slice(1).toLowerCase()}&cm=all&t=${eff === "paintings" ? Math.max(2, S.tol) : 8}&m=0&nm=${encodeURIComponent(sub.name)}`;
       if (eff === "paintings" && (S.y0 > 1300 || S.y1 < 2000)) spec += `&y0=${S.y0}&y1=${S.y1}`;
@@ -596,7 +721,7 @@ function fdMount(host, o) {
     }
     leave(); buzz(6); pmGo(spec);
   }
-  $t("[data-fdmap]").onclick = openMap;
+  [...(host.closest(".screen") || host).querySelectorAll("[data-fdmap]"), ...(isColor ? document.querySelectorAll("body > .rp-bar [data-fdmap]") : [])].forEach(b => { b.onclick = openMap; });
   // the Settings sheet is a half-height panel with no dimming (same shape as the painting map's View sheet): the feed above stays visible and scrolls, so each change shows live
   function fsHalf(sh) {
     sh.classList.add("fs-half");
@@ -607,8 +732,8 @@ function fdMount(host, o) {
   }
   function openSettings() {
     if (document.querySelector(".fs-sheet")) return;
-    tools.classList.add("away");
     const kind = isColor ? fdsKind(eff) : "none", S = FDS[kind] || {}, mx = fdMaxCols();
+    chipsEl.querySelectorAll(".fd-chip.on").forEach(c => c.classList.add("fd-open"));
     const rng = (k, label, min, max, step, ends) => `<div class="fs-c"><div class="fs-row"><p>${label}</p><b data-fs-out="${k}"></b></div><input type="range" min="${min}" max="${max}" step="${step || 1}" value="${S[k]}" data-fs="${k}" aria-label="${label}">${ends ? `<div class="fs-ends"><span>${ends[0]}</span><span>${ends[1]}</span></div>` : ""}</div>`;
     const seg = (k, label, opts) => `<div class="fs-c"><div class="fs-row"><p>${label}</p></div><div class="fs-seg" data-fsseg="${k}">${opts.map(([v, t]) => `<button type="button" data-v="${v}" aria-pressed="${S[k] === v}">${t}</button>`).join("")}</div></div>`;
     const sw = (k, label) => `<div class="fs-c fs-tg"><p>${label}</p><button type="button" class="fs-switch" role="switch" aria-checked="${!!S[k]}" data-fssw="${k}"><i></i></button></div>`;
@@ -623,12 +748,13 @@ function fdMount(host, o) {
       + sw("onePer", "One painting per painter");
     else if (kind === "era") body = rng("win", "How wide a window", 10, 200, 10, ["Just the decade", "Two centuries"]) + seg("where", "Where", [["any", "Anywhere"], ["country", "Same country"], ["region", "Same region"]]);
     else if (kind === "place") body = rng("reach", "How far out", 0, 4, 1, ["Just the country", "The whole world"]) + sw("near", "Stay close in time") + `<div data-fsbox="win"${S.near ? "" : " hidden"}>${rng("win", "Within", 10, 200, 10)}</div>`;
-    else body = `<p class="fs-note">Tabs and filters for this list are on the chips above.</p>`;
+    else if (!isColor && eff === "color") body = metricHTML();
+    else body = `<p class="fs-note">This list has no filters. Size and captions are below.</p>`;
     const capsSw = `<div class="fs-c fs-tg"><p>Show painter and year</p><button type="button" class="fs-switch" role="switch" aria-checked="${!!view.caps}" data-fscaps><i></i></button></div>`;
     const size = capsSw + `<div class="fs-c"><div class="fs-row"><p>Size</p><b data-fs-out="size"></b></div><input type="range" min="1" max="${mx}" step="1" value="${cols}" data-fssize aria-label="Size"><div class="fs-prev" data-fs-prev></div></div>`;
-    const title = ({ paintings: "Paintings", era: "Era", place: "Place" })[kind] || "Keep exploring";
+    const title = ((CHIPS.find(c => c[0] === eff) || [])[1]) || "Keep exploring";
     const { sh, close } = sheet(`<div class="fs-sheet"><div class="fs-head"><h3>${title}</h3><span class="fs-count" data-fs-count aria-live="polite"></span><button type="button" class="fs-reset" data-fs-reset${kind === "none" ? " hidden" : ""}>Reset</button></div><div class="fs-scroll">${body}${size}</div></div>`, { lock: false });
-    fsHalf(sh); floatSync();
+    fsHalf(sh);
     const q = s2 => sh.querySelector(s2), out = (k, t) => { const o = q(`[data-fs-out="${k}"]`); if (o) o.textContent = t; };
     const fill = r => { const lo = +r.min, hi = +r.max; r.style.setProperty("--p", ((r.value - lo) / (hi - lo) * 100) + "%"); };
     const countEl = q("[data-fs-count]"), showCount = n => { if (countEl) countEl.textContent = (eff === "paintings" || eff === "era" || eff === "place" || !isColor) && n ? `${n.toLocaleString("en-US")} paintings` : ""; };
@@ -657,6 +783,7 @@ function fdMount(host, o) {
     });
     sh.addEventListener("change", e => { const o = e.target.closest("[data-fssel]"); if (o) { S[o.dataset.fssel] = o.value; buzz(4); later2(); } });
     sh.addEventListener("click", e => {
+      if (!isColor && eff === "color" && metricClick(e, sh)) return;
       const cp = e.target.closest("[data-fscaps]");
       if (cp) { view.caps = !view.caps; viewSave(); cp.setAttribute("aria-checked", view.caps); buzz(4); relayoutAll(); return; }
       const m = e.target.closest("[data-fsmulti] button"), g = e.target.closest("[data-fsseg] button"), w = e.target.closest("[data-fssw]"), rs = e.target.closest("[data-fs-reset]");
@@ -672,18 +799,12 @@ function fdMount(host, o) {
     }
     roleSay(); paint();
     const prevClose = close; sh.addEventListener("close", () => { onCount = null; });
-    const obs = new MutationObserver(() => { if (!sh.isConnected) { onCount = null; obs.disconnect(); setTimeout(floatSync, 120); } }); obs.observe(document.body, { childList: true, subtree: true });
+    const obs = new MutationObserver(() => { if (!sh.isConnected) { onCount = null; obs.disconnect(); chipsEl.querySelectorAll(".fd-chip.fd-open").forEach(c => c.classList.remove("fd-open")); } }); obs.observe(document.body, { childList: true, subtree: true });
   }
-  $t("[data-fdset]").onclick = openSettings;
   host.addEventListener("click", e => { if (e.target.closest("[data-fdreset]")) { const kd = fdsKind(eff); FDS[kd] = JSON.parse(JSON.stringify(FDS_DEF[kd])); fdsSave(); SUBDOT(); rerank(false); } });
 
   // ----- go -----
-  const floatSync = () => {
-    if (!host.isConnected || gone) return tools.classList.add("away");
-    const r = grid.getBoundingClientRect(), on = eff !== "about" && !grid.hidden && shown > 0 && r.top < innerHeight - 120 && r.bottom > 160 && !document.querySelector(".sheet");
-    tools.classList.toggle("away", !on);
-  };
-  const onScroll = (() => { let raf = 0; return () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; draw(); floatSync(); }); }; })();
+  const onScroll = (() => { let raf = 0; return () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; draw(); }); }; })();
   const onResize = () => { setBarTop(); if (Math.abs((grid.clientWidth || W) - W) > 1) relayoutAll(); };
   function start() {
     if (built || gone) return; built = true;
@@ -791,6 +912,49 @@ function fdcApply(rows, S, hex, F) {
   if (S.onePer && F) { const seen = new Set(); out = out.filter(r => { const a = F.artist[r.i]; if (!a) return true; if (seen.has(a)) return false; seen.add(a); return true; }); }
   return out;
 }
+// fdcFar: for EVERY painting, the distance (ΔE2000) from this color to its nearest palette color. Computed in slices of about 10 ms so the page
+// never stalls (200,000 paintings), cached for the last few colors. The tail of every color list is a cursor over it.
+const FDC_FAR = new Map();
+function fdcFar(hex) {
+  hex = hex.toUpperCase(); if (FDC_FAR.has(hex)) return FDC_FAR.get(hex);
+  const p = (async () => {
+    await loadGallery();
+    const G = GAL, N = G.n, [tL, ta, tb] = lab(hex), Lb = G.lab, sh = G.sh, out = new Float32Array(N);
+    for (let i = 0; i < N;) {
+      const t0 = performance.now();
+      for (; i < N; i++) {
+        if (!(i & 127) && performance.now() - t0 > 10) break;
+        let best = 99;
+        for (let j = 0; j < 6; j++) {
+          const k = i * 6 + j, o = k * 3; if (sh[k] <= 0) continue;
+          const dL = Lb[o] - tL; if (Math.abs(dL) / 1.75 >= best) continue;   // ΔE00 is at least |ΔL| / 1.75
+          const d = glDE(tL, ta, tb, Lb[o], Lb[o + 1], Lb[o + 2]); if (d < best) best = d;
+        }
+        out[i] = best;
+      }
+      await new Promise(r => setTimeout(r, 0));
+    }
+    return out;
+  })();
+  FDC_FAR.set(hex, p); if (FDC_FAR.size > 3) FDC_FAR.delete(FDC_FAR.keys().next().value);
+  p.catch(() => FDC_FAR.delete(hex));
+  return p;
+}
+// the hard filters of Settings as a test on one painting (years, shape, the part it plays, one per painter): the tail of a list obeys them too
+function fdcFilter(S, hex, F, used) {
+  const G = GAL, narrowed = S.y0 > 1300 || S.y1 < 2000, R = S.roles && S.roles.length && typeof rsRoleStats === "function" ? rsRoleStats(hex) : null;
+  let rolesOk = null; if (R) { rolesOk = new Set(); S.roles.forEach(k => (R.roles[k] || []).forEach(x => rolesOk.add(x[0]))); }
+  const artists = new Set(); if (S.onePer && F) used.forEach(j => { const a = F.artist[j]; if (a) artists.add(a); });
+  const ok = j => {
+    if (narrowed) { const y = G.year[j]; if (y === GL_UNDATED || y < S.y0 || y > S.y1) return false; }
+    if (S.shape) { const a = G.ar[j]; if (!(S.shape === "tall" ? a > 1.2 : S.shape === "wide" ? a < .85 : a >= .85 && a <= 1.2)) return false; }
+    if (rolesOk && !rolesOk.has(j)) return false;
+    if (S.onePer && F) { const a = F.artist[j]; if (a && artists.has(a)) return false; }
+    return true;
+  };
+  const take = j => { if (S.onePer && F) { const a = F.artist[j]; if (a) artists.add(a); } };
+  return { ok, take };
+}
 function fdcBase(sub, o) {
   const hex = sub.hex.toUpperCase(), tol = o && o.tol ? o.tol : FDC_TOL, minShare = o && o.min != null ? o.min : FDC_MIN_SHARE, bkey = tol === FDC_TOL && minShare === FDC_MIN_SHARE ? hex : `${hex}|${tol}|${minShare}`;
   if (FDC_BASE.has(bkey)) return FDC_BASE.get(bkey);
@@ -839,7 +1003,20 @@ async function fdcRankPaintings(ctx) {
       g = plain ? r.g : -2;
       items.push({ j: r.i, cap: plain && r.g >= 0 ? b.groups[r.g].n : "" });
     }
-    return b.groups.length && plain ? { items, n: rows.length, lead: "Closest to this color first, then the paintings of its neighbors", end: "That is everything close to this color and its neighbors." } : { items, n: rows.length };
+    const res = b.groups.length && plain ? { items, n: rows.length, lead: "Closest to this color first, then the paintings of its neighbors", end: "That is everything close to this color and its neighbors." } : { items, n: rows.length };
+    // after the matches: the rest of the archive, nearest color first (how close the top is is the setting; nothing cuts the list off). Only an
+    // order that is not by closeness, or a minimum share of the canvas, makes the list exactly what matches.
+    if (S.order === "close" && S.cov <= FDC_MIN_SHARE) {
+      const used = new Set(items.filter(x => x.j != null).map(x => x.j)), fl = fdcFilter(S, ctx.sub.hex, F, used);
+      res.end = fdsChanged("paintings") ? "That is everything that matches your settings." : "That is every painting in the archive.";
+      fdPaged(res, null, null);
+      res.next = async () => {
+        const far = await fdcFar(ctx.sub.hex); res._cur = res._cur || fdCursor(far, used, fl.ok, fl.take);
+        const page = res._cur(FD_TAIL); if (!page.length) { res.moreDone = true; return; }
+        page.forEach(([, j]) => res.items.push({ j, cap: "" }));
+      };
+    } else res.end = fdsChanged("paintings") ? "That is everything that matches your settings." : res.end;
+    return res;
   });
 }
 async function fdcRankPainters(ctx) {
@@ -856,11 +1033,23 @@ async function fdcRankPainters(ctx) {
     if (j == null || (a && seen.has(a))) continue; if (a) seen.add(a);
     items.push({ j, cap: "Used most by " + fdShortName(r.a), byTitle: 1 });
   }
-  [...cnt.entries()].filter(([a, n]) => !seen.has(a) && n >= 2).sort((x, y) => y[1] - x[1]).slice(0, 80).forEach(([a]) => items.push({ j: best.get(a).i, cap: "Also used by " + fdShortName(F.meta.artists[a - 1][0]), byTitle: 1 }));
-  return items.length ? { items } : { empty: "No painter in the archive stands out for this color yet." };
+  [...cnt.entries()].filter(([a, n]) => !seen.has(a) && n >= 2).sort((x, y) => y[1] - x[1]).slice(0, 80).forEach(([a]) => { seen.add(a); items.push({ j: best.get(a).i, cap: "Also used by " + fdShortName(F.meta.artists[a - 1][0]), byTitle: 1 }); });
+  if (!items.length) return { empty: "No painter in the archive stands out for this color yet." };
+  const res = { items, end: "That is every painter in the archive.", moreDone: false };
+  res.next = async () => {   // then every other painter, by the picture of theirs nearest this color
+    if (!res._cur) {
+      const far = await fdcFar(hex), A = F.meta.artists.length + 1, bd = new Float32Array(A).fill(Infinity), bj = new Int32Array(A).fill(-1);
+      for (let j = 0; j < far.length; j++) { const a = F.artist[j]; if (a && far[j] < bd[a]) { bd[a] = far[j]; bj[a] = j; } }
+      seen.forEach(a => { bd[a] = Infinity; }); bd[0] = Infinity;
+      res._bj = bj; res._cur = fdCursor(bd, new Set());
+    }
+    const page = res._cur(FD_TAIL); if (!page.length) { res.moreDone = true; return; }
+    page.forEach(([, a]) => res.items.push({ j: res._bj[a], cap: "Nearest in " + fdShortName(F.meta.artists[a - 1][0]), byTitle: 1 }));
+  };
+  return res;
 }
 async function fdcRankEra(ctx, st) {
-  const b = await fdcBase(ctx.sub), G = GAL, S = FDS.era, F = S.where !== "any" ? await fdFacets().catch(() => null) : null;
+  const hex = ctx.sub.hex, b = await fdcBase(ctx.sub), G = GAL, S = FDS.era, F = S.where !== "any" ? await fdFacets().catch(() => null) : null;
   let pool = b.rows.filter(r => G.year[r.i] !== GL_UNDATED);
   if (F) {   // "where": only the country (or region) that holds the most of this color in its biggest decade
     const cn = new Map(); pool.slice(0, 300).forEach(r => { const c = F.country[r.i]; if (c) cn.set(c, (cn.get(c) || 0) + 1); });
@@ -872,7 +1061,16 @@ async function fdcRankEra(ctx, st) {
   const picked = !!(st && st.color > 0), top = picked ? st.color : [...dec.entries()].sort((a, b2) => b2[1] - a[1] || a[0] - b2[0])[0][0], y0 = top * 10 + 5;
   const sc = pool.filter(r => Math.abs(G.year[r.i] - y0) <= S.win).map(r => [r, Math.abs(G.year[r.i] - y0) + r.de * 2]).sort((a, b2) => a[1] - b2[1]).slice(0, FD_KEEP);
   if (!sc.length) return { empty: "Nothing from that window holds this color. Widen the window, or reset the settings.", reset: 1 };
-  return { lead: picked ? `Nearest the ${top * 10}s, closest to this color first` : `Nearest the ${top * 10}s, the decade with the most of this color`, n: sc.length, items: sc.map(([r]) => ({ j: r.i, cap: `${Math.floor(G.year[r.i] / 10) * 10}s` })), end: b.groups.length ? "That is everything close to this color and its neighbors." : "" };
+  const res = { lead: picked ? `Nearest the ${top * 10}s, closest to this color first` : `Nearest the ${top * 10}s, the decade with the most of this color`, n: sc.length, items: sc.map(([r]) => ({ j: r.i, cap: `${Math.floor(G.year[r.i] / 10) * 10}s` })), end: S.where === "any" ? "That is every painting in the archive." : "That is everything that matches your settings.", moreDone: S.where !== "any" };
+  if (S.where === "any") {   // then every other painting, by how far its year is from this window and how far its color is: years outward
+    const used = new Set(res.items.map(x => x.j));
+    res.next = async () => {
+      if (!res._cur) { const far = await fdcFar(hex), sa = new Float32Array(G.n); for (let j = 0; j < G.n; j++) { const y = G.year[j]; sa[j] = (y === GL_UNDATED ? 1e4 : Math.abs(y - y0)) + 2 * far[j]; } res._cur = fdCursor(sa, used); }
+      const page = res._cur(FD_TAIL); if (!page.length) { res.moreDone = true; return; }
+      page.forEach(([, j]) => res.items.push({ j, cap: G.year[j] === GL_UNDATED ? "No year" : `${Math.floor(G.year[j] / 10) * 10}s` }));
+    };
+  }
+  return res;
 }
 async function fdcRankPlace(ctx, st) {
   const [b, F] = await Promise.all([fdcBase(ctx.sub), fdFacets()]), pool = b.rows.filter(r => F.country[r.i]);
@@ -889,7 +1087,19 @@ async function fdcRankPlace(ctx, st) {
   }
   if (!items.length) return { empty: "Nothing there holds this color within those settings. Widen them, or reset.", reset: 1 };
   items.sort((a, b2) => a[1] - b2[1]);
-  return { n: items.length, lead: picked ? `${F.meta.countries[co - 1]} first, then its region, closest to this color first` : `${F.meta.countries[co - 1]} first, the country with the most of this color, then its region`, items: items.slice(0, FD_KEEP).map(([r]) => ({ j: r.i, cap: F.meta.countries[F.country[r.i] - 1] })), end: b.groups.length ? "That is everything close to this color and its neighbors." : "" };
+  const res = { n: items.length, lead: picked ? `${F.meta.countries[co - 1]} first, then its region, closest to this color first` : `${F.meta.countries[co - 1]} first, the country with the most of this color, then its region`, items: items.slice(0, FD_KEEP).map(([r]) => ({ j: r.i, cap: F.meta.countries[F.country[r.i] - 1] })), end: "That is every painting in the archive.", moreDone: false };
+  const used = new Set(res.items.map(x => x.j));
+  res.next = async () => {   // then the rest of the world: its country, its neighbors, its region, everywhere else, each nearest this color first
+    if (!res._cur) {
+      const far = await fdcFar(ctx.sub.hex), sa = new Float32Array(G.n);
+      const tierOf = new Map(); const tr = c => { if (c === co) return 0; if (tierOf.has(c)) return tierOf.get(c); let t = 50; for (let k = 0; k < tiers.length; k++) if (tiers[k].has(c)) { t = k + 1; break; } tierOf.set(c, t); return t; };
+      for (let j = 0; j < G.n; j++) { const c = F.country[j]; sa[j] = (c ? tr(c) * 100 : 6000) + far[j]; }
+      res._cur = fdCursor(sa, used);
+    }
+    const page = res._cur(FD_TAIL); if (!page.length) { res.moreDone = true; return; }
+    page.forEach(([, j]) => res.items.push({ j, cap: F.country[j] ? F.meta.countries[F.country[j] - 1] : "" }));
+  };
+  return res;
 }
 
 // ---------- Other worlds: one card per thing, a few from each world in turn ----------

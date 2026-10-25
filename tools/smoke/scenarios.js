@@ -2607,7 +2607,7 @@ scenario("pages", "role paintings and Werner's 1821 example show on the color pa
   // "How painters use it" is no longer an Overview section: it is the Paintings Settings sheet's "part it plays" chips (percent under each)
   t.expect(!t.$(".rs-roles"), "the How painters use it section is still on the Overview");
   await cfeedOpen(t, "#/name/auburn");
-  await t.click("[data-fdset]", { wait: 500 });
+  await openSettingsChip(t, 500);
   const sheet = await t.waitFor(".fs-sheet", 8000, "the Paintings Settings sheet");
   const chips = t.$$("[data-fsmulti=roles] button", sheet);
   t.expect(chips.length === 5 && chips.every(x => /^(Main|Shadow|Mid-tone|Light|Accent)\d+%$/.test(t.text(x).replace(/\s+/g, ""))), `part-it-plays chips read ${chips.map(x => t.text(x))}`);
@@ -4411,6 +4411,10 @@ async function glOverview(t) {
   if (t.$("[data-gl-about]").hidden) await t.click("[data-glfeed] .fd-chip[data-fc=about]", { wait: 300 });
 }
 // open a painting (a cold open starts on Overview), turn the wanted chip on (the chip row sits right under the title), scroll until the feed is built
+// Settings are the active chip tapped again; Map is a small button at the top right of the hero and in the sticky bar (David, 2026-10-25)
+const activeChip = t => t.$(".fd-bar:not(.fd-pre) .fd-chip.on") || t.$(".fd-chip.on");
+const openSettingsChip = async (t, wait) => { await t.click(activeChip(t), { wait: wait || 600 }); };
+const mapBtn = t => t.$$("[data-fdmap]").find(b => { const r = b.getBoundingClientRect(); return r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < t.ev("innerHeight") && getComputedStyle(b).visibility !== "hidden"; }) || t.$("[data-fdmap]");
 async function feedPick(t, chip) {
   await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre) .fd-chip[data-fc=" + chip + "]") ? true : null, 25000, "the real chip row");
   t.ev(`Object.assign(FD_ST, { metric: "overall", color: 0 })`);
@@ -4469,9 +4473,9 @@ scenario("paintings", "Keep exploring: each chip re-ranks, the first tile is the
   // Color's "by…" sheet: Mood re-ranks (the caption speaks of mood), and the chip says which
   await t.click(".fd-chip[data-fc=color]", { wait: 300 });
   t.expect(/^Color/.test(t.text(".fd-chip.on")), "Color didn't come back on");
-  await t.click(".fd-chip.on", { wait: 500 });
-  const sheet = await t.waitFor(".fd-sheet", 5000, "the by… sheet");
-  t.expect(/Overall palette/.test(t.text(sheet)) && /Mood/.test(t.text(sheet)) && /One color/.test(t.text(sheet)), "the by… sheet doesn't list the metrics");
+  await openSettingsChip(t, 500);   // the active chip tapped again: its Settings, with the match-by choices in them
+  const sheet = await t.waitFor(".fs-sheet", 5000, "the Color Settings sheet");
+  t.expect(/Overall palette/.test(t.text(sheet)) && /Mood/.test(t.text(sheet)) && /One color/.test(t.text(sheet)), "the Color Settings don't list the metrics");
   await t.click(sheet.querySelector("[data-m=mood]"), { wait: 400 });
   await t.waitFor(() => t.ev(`FD_LAST.metric`) === "mood" && t.$(".fd-tile[data-fk='0']") && !t.$(".fd-tile.sk") ? true : null, 20000, "the Mood ranking");
   t.expect(/^Color · Mood/.test(t.text(".fd-chip.on")), `the chip doesn't name Mood: "${t.text(".fd-chip.on")}"`);
@@ -4554,16 +4558,21 @@ scenario("paintings", "trail: painting then a Vibe tile then a Color tile then B
   t.expect(t.text(".fd-chip.on") === "Vibe", `Back to A lost its tab: "${t.text(".fd-chip.on")}"`);
   t.expect(Math.abs(t.$(`.fd-tile[data-fk='${a.k}']`).getBoundingClientRect().top - a.y) <= 6, "Back to A: the tile moved");
 });
-scenario("paintings", "Keep exploring: the end of the feed says so, and a picture that fails to load is a designed state, not a hole", async t => {
+scenario("paintings", "Keep exploring: the feed never ends and a picture that fails to load is a designed state not a hole", async t => {
   await feedOpen(t, 12, "era");
   await t.waitFor(() => t.text(".fd-chip.on") === "Era" && !t.$(".fd-tile.sk") ? true : null, 10000, "Era");
   // a picture that won't load is taken out of the list (never a hole, never the words "Picture unavailable")
   const img = t.$(".fd-tile[data-fk='0'] img");
   if (img) { img.dataset.retry = "1"; img.src = "/__no_such_picture__.jpg"; await t.sleep(1500); await t.tick(); t.expect(!/Picture unavailable/.test(t.d.body.textContent), "the words Picture unavailable are on screen"); }
-  // page to the end (300 items = 13 pages)
-  const end = await t.waitFor(() => { t.w.scrollTo(0, 1e7); return t.$(".fd-end"); }, 60000, "the end-of-feed line", 30000);
-  t.expect(end && /every painting from around this time/.test(t.text(end)), "the end-of-feed line never appeared");
-  t.expect(t.$("[data-fdup]"), "the end of the feed has no way back up");
+  // the list never ends (David, 2026-10-25): the bottom keeps adding tiles well past the first 300, and the top of it is still the closest
+  const eraList = `(FD_CACHE.get([...FD_CACHE.keys()].find(k => k.startsWith("12|era|"))) || { items: [] })`, len = () => t.ev(eraList + `.items.length`);
+  await t.waitFor(() => len() > 100 ? true : null, 20000, "the Era list in the cache");
+  const n0 = len();
+  await t.waitFor(() => { t.w.scrollTo(0, 1e7); return len() > n0 + 60 ? true : null; }, 60000, "more tiles after the bottom was reached", 30000);
+  t.expect(len() > 300, `the list stopped at ${len()}`);
+  t.expect(!t.$(".fd-end"), "an end line appeared while the archive still has paintings");
+  const gaps = t.ev(eraList + `.items.slice(0, 40).map(x => Math.abs(GAL.year[x.j] - GAL.year[12]))`);
+  t.expect(gaps.slice(0, 20).every((g, k, a) => k === 0 || g >= a[k - 1] - 1), `the top of the Era list is not closest-first: ${gaps.slice(0, 20)}`);
 });
 // David, 2026-10-25: the painting page is the picture, the title, then the chip row (Overview . Color . Vibe . Painter . Era . Place); the old Explore pill is gone
 scenario("paintings", "a painting page: picture, title, then the chip row right under them; a cold open shows Overview, with every section of the page in it and no Explore pill", async t => {
@@ -4669,13 +4678,55 @@ scenario("paintings", "Keep exploring: a pinch zooms the feed live and settles o
   const n = t.$$(".fd-tile img").length; t.expect(n <= 120, "too many live pictures: " + n);
 });
 scenario("paintings", "the chip row is on the first screen of a painting page at 440x956 (and under the picture at 320x640), with no Explore pill", async t => {
-  for (const size of [[440, 956], [320, 640]]) {
+  for (const size of [[440, 956], [375, 812], [320, 640]]) {
     await t.open("#/gallery/12", { settle: 800, size });
     await t.waitFor("[data-glfeed] .fd-chips", 15000, "the chip row");
     t.expect(!t.$("[data-glfeedjump]"), "the Explore pill is back");
     const r = t.ev("(() => { const q = document.querySelector('[data-glfeed] .fd-chips').getBoundingClientRect(); return { t: q.top, b: q.bottom, l: q.left, w: innerWidth, h: innerHeight }; })()");
-    t.expect(r.l >= 0 && (size[0] !== 440 || r.b <= r.h), "the chip row is not on the first screen at " + size + ": " + JSON.stringify(r));
+    t.expect(r.l >= 0 && (size[0] === 320 || r.b <= r.h), "the chip row is not on the first screen at " + size + ": " + JSON.stringify(r));
   }
+});
+// David, 2026-10-25: Settings = the active chip tapped again; Map (hero corner / top bar) follows the tab; a chip tap brings the chip row to the top
+scenario("paintings", "painting page: tapping another chip pins the chip row at the top, tapping the active one opens its Settings, and Map follows the tab", async t => {
+  await t.open("#/gallery/12", { settle: 800, size: [375, 812] });
+  await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre) .fd-chip[data-fc=color]") ? true : null, 25000, "the real chip row");
+  t.expect(!t.$(".fd-float") && !t.$("[data-fdset]"), "the old floating Settings / Map buttons are still there");
+  t.w.__specs = []; t.w.pmGo = s => { t.w.__specs.push(s); };
+  await t.click(mapBtn(t), { force: true, wait: 600 });   // on Overview: the map around this painting
+  await t.click(".fd-chip[data-fc=color]", { wait: 1200 });
+  const barTop = t.ev(`document.querySelector("[data-glfeed] .fd-bar").getBoundingClientRect().top`), topH = t.ev(`document.querySelector(".gl-page > .art-top").getBoundingClientRect().height`);
+  t.expect(Math.abs(barTop - (topH - 1)) < 6, `the chip row didn't come to the top after the tap (at ${barTop}, bar ${topH})`);
+  t.expect(t.$(".fd-chip.on .fd-tune"), "the active chip shows no Settings glyph");
+  t.expect(!t.$(".art-top .fd-mapb.in-top").hidden && getComputedStyle(t.$(".art-top .fd-mapb.in-top")).display !== "none", "the top bar has no Map once the hero has gone");
+  await t.click(mapBtn(t), { force: true, wait: 600 });
+  await t.click(".fd-chip[data-fc=era]", { wait: 600 });
+  await t.waitFor(() => t.text(".fd-chip.on") === "Era" && !t.$(".fd-tile.sk") ? true : null, 15000, "Era");
+  await t.click(mapBtn(t), { force: true, wait: 600 });
+  const sp = t.w.__specs;
+  t.expect(sp.length === 3 && sp[1] !== sp[2] && /y0=\d+&y1=\d+/.test(sp[2]) && !/y0=/.test(sp[1]), `Map doesn't follow the tab: ${JSON.stringify(sp)}`);
+  await t.click(".fd-chip.on", { wait: 700 });
+  await t.waitFor(".fs-sheet", 5000, "Settings after tapping the active chip");
+  await t.click(".fd-chip.on", { wait: 700 });
+  t.expect(!t.$(".sheet.fs-half"), "tapping the active chip again didn't close Settings");
+});
+scenario("pages", "color page: the cover is a compact band with Map in its corner then in the top bar and the Paintings list never ends", async t => {
+  await t.open("#/color/teal", { settle: 900, size: [375, 812] });
+  await t.waitFor("[data-rpfeed] .fd-chips", 15000, "the chip row");
+  const h = t.ev(`document.querySelector(".cp-hero").getBoundingClientRect().height`);
+  t.expect(h <= 812 * .36, `the color band takes ${Math.round(h / 8.12)}% of the screen`);
+  t.expect(t.$(".cp-hero .fd-mapb-hero"), "no Map button on the cover");
+  t.w.__specs = []; t.w.pmGo = s => { t.w.__specs.push(s); };
+  await t.waitFor(() => t.$("[data-rpfeed] .fd-bar:not(.fd-pre) .fd-chip[data-fc=paintings]") ? true : null, 25000, "the real chip row");
+  await t.click(".fd-chip[data-fc=paintings]", { wait: 1500 });
+  await t.waitFor(() => t.$$(".fd-tile[data-fk]").length >= 4 ? true : null, 20000, "tiles");
+  await t.click(mapBtn(t), { force: true, wait: 700 });
+  t.expect(t.w.__specs.length === 1 && /&c=/.test(t.w.__specs[0]), `Map on Paintings: ${JSON.stringify(t.w.__specs)}`);
+  // the list never ends: past the paintings that hold the color, the rest of the archive follows, nearest color first
+  t.w.__r = null; t.ev("fdcRankPaintings({ sub: { hex: '#00FF00', name: 'Green', tapped: null } }).then(r => { window.__r = r; })");
+  const res = await t.waitFor(() => t.w.__r, 30000, "a ranking of paintings for a rare color");
+  const n0 = res.items.length; t.expect(typeof res.next === "function" && !res.moreDone, "the Paintings ranking has no next page");
+  for (let k = 0; k < 4; k++) await res.next();
+  t.expect(res.items.length > n0 + 100 && !res.moreDone, `the list did not keep going (${n0} -> ${res.items.length})`);
 });
 // ---------- Keep exploring on a COLOR page (js/feed.js fdMount with sub = a color, mounted by js/richpage.js) ----------
 async function cfeedOpen(t, hash, chip) {
@@ -4723,17 +4774,17 @@ scenario("pages", "Keep exploring on a color page: Settings changes the list wit
   await cfeedOpen(t, "#/color/teal");
   t.expect(!t.$("[data-fdsize]"), "the old '2 across' button is still on the page");
   const before = t.$$(".fd-tile[data-fk]").length;
-  await t.click("[data-fdset]", { wait: 600 });
+  await openSettingsChip(t, 600);
   const sh = await t.waitFor(".fs-sheet", 5000, "the Settings sheet");
   t.expect(t.$$(".fs-c", sh).length >= 5, "the Paintings sheet has too few controls");
   const n0 = t.text(".fs-count");
   t.expect(/paintings/.test(n0), `no live count in the sheet: "${n0}"`);
   const tol = t.$("[data-fs=tol]", sh); tol.value = 3; tol.dispatchEvent(new t.w.Event("input", { bubbles: true }));
   await t.waitFor(() => t.text(".fs-count") !== n0 ? true : null, 20000, "the count to change after tightening the match");
-  t.expect(!t.$("[data-fdsetdot]").hidden, "the Settings button shows no mark that something changed");
+  t.expect(!t.$(".fd-chip.on .fd-dot").hidden, "the active chip shows no mark that something changed");
   await t.click(".fs-reset", { wait: 800 });
   t.ev("document.querySelectorAll('.scrim').forEach(s => s.click())"); await t.sleep(500);
-  await t.click("[data-fdmap]", { wait: 900 });
+  await t.click(mapBtn(t), { force: true, wait: 900 });
   await TRL.atHash(t, /^#\/paintings\/map\?arr=spiral&seed=\d+&c=/, "the painting map, seeded on a painting with the color as its filter");
   // the map's ⋯ sheet leads with one button back to the feed it came from, and the feed is where it was
   await t.waitFor(".pmx-do", 15000, "the map's ⋯ button");
@@ -5815,25 +5866,25 @@ async function awWorkTab(t, slug) {
 scenario("pages", "painter page: Settings sorts the life's work grid, and the pill shows only while the pictures are on screen", async t => {
   const firstGi = await awWorkTab(t, "john-singer-sargent");
   const before = firstGi();
-  t.expect(!t.$(".fd-float").classList.contains("away"), "the Settings / Map pill isn't showing over the grid");
-  await t.click("[data-fdset]", { wait: 600 });
+  t.expect(!t.$(".fd-float"), "the old floating Settings / Map pill is still on the page");
+  await openSettingsChip(t, 600);
   const sh = await t.waitFor(".fs-sheet", 5000, "the Settings sheet");
   t.expect(/paintings/.test(t.text(".fs-count")), `no live count in the sheet: "${t.text(".fs-count")}"`);
   const sel = t.$("[data-wksel]", sh);
   t.expect([...sel.options].some(o => /Most vivid first/.test(o.textContent)), "no Most vivid first order");
   sel.value = "C:0"; sel.dispatchEvent(new t.w.Event("change", { bubbles: true }));
   await t.waitFor(() => firstGi() && firstGi() !== before, 6000, "the grid order to change after switching sort");
-  t.expect(!t.$("[data-fdsetdot]").hidden, "the Settings button shows no mark that something changed");
+  t.expect(!t.$(".aw-tabs .fd-chip.on .fd-dot").hidden, "the Their work chip shows no mark that something changed");
   await t.click(".fs-reset", { wait: 800 });
   t.ev("document.querySelectorAll('.scrim').forEach(s => s.click())"); await t.sleep(500);
   await t.waitFor(() => firstGi() === before, 6000, "Reset to put the order back");
-  // on Overview the pill goes away
+  // on Overview there is no Settings glyph on the chip
   await t.click('[data-awtab="about"]', { wait: 500 });
-  await t.waitFor(() => t.$(".fd-float").classList.contains("away"), 3000, "the pill to leave on the Overview tab");
+  t.expect(!t.$(".aw-tabs .fd-chip.on .fd-tune"), "the Overview chip shows a Settings glyph");
 });
 scenario("pages", "painter page: a museum filter narrows the life's work grid -- honestly", async t => {
   await awWorkTab(t, "rembrandt-van-rijn");
-  await t.click("[data-fdset]", { wait: 600 });
+  await openSettingsChip(t, 600);
   const sh = await t.waitFor(".fs-sheet", 5000, "the Settings sheet");
   const mus = t.$$("[data-wkmus]", sh)[0];
   t.expect(mus, "no museum filter chip (expected more than one museum here)");
@@ -5847,7 +5898,7 @@ scenario("pages", "painter page: Map opens the painter's work seeded on a painti
   const firstGi = await awWorkTab(t, "claude-monet");
   const y0 = 900; t.w.scrollTo(0, y0); t.w.dispatchEvent(new t.w.Event("scroll")); await t.sleep(500);
   const yBefore = t.w.scrollY;
-  await t.click("[data-fdmap]", { wait: 900 });
+  await t.click(mapBtn(t), { force: true, wait: 900 });
   await TRL.atHash(t, /^#\/paintings\/map\?arr=spiral&seed=\d+&p=claude-monet/, "the painting map, seeded on a painting, filtered to the painter");
   await t.waitFor(".pmx-do", 15000, "the map's ⋯ button");
   await t.click(".pmx-do", { wait: 600 });
@@ -6421,7 +6472,7 @@ scenario("paintings", "lane A: a painting page leads with what stands out; Name 
   // 2026-10-25: the chip row sits between the identity block and the strip: the row is on the first screen, the strip right under it
   const chipsB = t.$("[data-glfeed] .fd-chips").getBoundingClientRect().bottom, stripB = t.$("[data-glswatches]").getBoundingClientRect().bottom;
   t.expect(chipsB <= t.ev("innerHeight"), `the chip row sits below the first screen (${Math.round(chipsB)})`);
-  t.expect(t.$("[data-glswatches]").getBoundingClientRect().top - t.$("[data-glfeed] .fd-bar").getBoundingClientRect().bottom < 60, "the palette strip isn't right under the chip row");
+  t.expect(t.$("[data-glswatches]").getBoundingClientRect().top - t.$("[data-glfeed] .fd-bar").getBoundingClientRect().bottom < 260, "the palette strip isn't near the chip row");
   t.expect(t.$("[data-glorder]").getBoundingClientRect().top - stripB < 24, "the palette types aren't right under the strip");
   const nTypes = t.$$("[data-glorder] [data-glo]").length;
   t.expect(nTypes >= 4, `only ${nTypes} palette types`);
