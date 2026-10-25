@@ -32,7 +32,8 @@ const XB_PRESETS = [["exact", "Exact", { tol: 2, cover: 0, coverMax: 100 }], ["c
 // ---------- loading ----------
 function xbLoad() {
   if (XBF) return Promise.resolve(XBF);
-  const get = (f, kind) => fetch(XB_DIR + f).then(r => { if (!r.ok) throw new Error(f + " " + r.status); return r[kind](); });
+  const get = (f, kind) => { const own = () => fetch(XB_DIR + f), pre = window.__EARLY && window.__EARLY.take(XB_DIR + f);   // js/early.js starts these on a cold open
+    return (pre ? pre.then(r => r.ok ? r : own(), own) : own()).then(r => { if (!r.ok) throw new Error(f + " " + r.status); return r[kind](); }); };
   return XBF_LOADING || (XBF_LOADING = Promise.all([loadGallery(), get("facets.json", "json"), get("facets.bin", "arrayBuffer")])
     .then(([G, meta, buf]) => (XBF = xbBuild(G, meta, new Uint8Array(buf))))
     .catch(e => { XBF_LOADING = null; throw e; }));

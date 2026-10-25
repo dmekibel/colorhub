@@ -43,6 +43,18 @@ function checkIds() {
     const b = fs.readFileSync(path.join(ROOT, "data/gallery/look.bin")), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
     if (b.length < 24 || b.readUInt32LE(8) !== gIds.length || b.readUInt32LE(20) !== parseInt(h, 16) || b.length !== 24 + 4 * gIds.length) warn("data/gallery/look.bin is out of step with ids.txt (By look is hidden until it is rebuilt): python3 tools/look_layout.py");
   }
+  // the painting map's micro layer and cluster packs (tools/paintmap_micro.py, tools/paintmap_cluster.py): both are cut from the atlas sheets in gallery order.
+  // micro.json's `hash` is the whole ids.txt (rebuilt with every atlas build); cluster.json's is the FIRST n ids (append-only: a longer ids.txt is fine, the
+  // paintings past n just use the tier-1 sheets). Both ignore themselves in the app when stale; this says so and names the fix.
+  if (fs.existsSync(path.join(ROOT, "data/paintmap/manifest.json"))) {
+    const h8 = s => require("crypto").createHash("sha1").update(s).digest("hex").slice(0, 8), man = rj("data/paintmap/manifest.json");
+    for (const [f, fix] of [["micro", "python3 tools/paintmap_micro.py"], ["cluster", "python3 tools/paintmap_cluster.py"]]) {
+      if (!fs.existsSync(path.join(ROOT, `data/paintmap/${f}.json`))) { warn(`data/paintmap/${f}.json is missing (the map starts without it): ${fix}`); continue; }
+      const m = rj(`data/paintmap/${f}.json`), ok = m.n <= gIds.length && m.hash === h8(gIds.slice(0, m.n).join("\n") + "\n");
+      if (!ok) warn(`data/paintmap/${f}.json is out of step with ids.txt (the map ignores it until it is rebuilt): ${fix}`);
+      else if (m.n !== man.n) warn(`data/paintmap/${f}.json covers ${m.n} paintings, the atlas ${man.n}: ${fix}`);
+    }
+  }
   if (fs.existsSync(path.join(ROOT, "data/gallery/island-names.json"))) {   // the Subjects list (tools/island_names.py): same ids hash as look.bin, same bytes of look-islands.bin, covers still the right paintings
     const nm = rj("data/gallery/island-names.json"), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
     const ib = fs.existsSync(path.join(ROOT, "data/gallery/look-islands.bin")) ? require("crypto").createHash("sha1").update(fs.readFileSync(path.join(ROOT, "data/gallery/look-islands.bin"))).digest("hex").slice(0, 8) : "";

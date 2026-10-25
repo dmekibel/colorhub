@@ -1513,23 +1513,32 @@ function pmDecodeImgFallback(blob) {
     img.src = url;
   });
 }
-function pmDecodeSheet(url) {
-  return fetch(url).then(r => { if (!r.ok) throw new Error("sheet " + r.status + " " + url); return r.blob(); })
-    .then(blob => (typeof createImageBitmap === "function" ? createImageBitmap(blob).catch(() => pmDecodeImgFallback(blob)) : pmDecodeImgFallback(blob)));
+// PM_PRE (js/early.js, 2026-10-25): a cold open starts fetching the micro layer, the manifest and the tier-0 sheets from <head>,
+// before this file has even run; the first reader of a name takes the (single-use) promise, anything else fetches itself.
+const PM_PRE_RE = /^data\/paintmap\/([^/?]+)(\?|$)/;
+function pmPre(url) {
+  const m = PM_PRE_RE.exec(url), P = window.__PM_PRE; if (!m || !P || !P[m[1]]) return null;
+  const p = P[m[1]]; delete P[m[1]]; return p;
 }
+// one fetch with a deadline (a stalled connection used to hold a sheet slot forever, so the view never sharpened), the early
+// copy first when there is one. kind: "blob" | "json" | "buf"
+function pmFetchTimed(url, ms, kind) {
+  const fresh = () => {
+    const ac = typeof AbortController === "function" ? new AbortController() : null, to = ac ? setTimeout(() => ac.abort(), ms) : 0;
+    return fetch(url, ac ? { signal: ac.signal } : undefined).then(r => { if (!r.ok) throw new Error("fetch " + r.status + " " + url); return kind === "json" ? r.json() : kind === "buf" ? r.arrayBuffer() : r.blob(); })
+      .then(v => { clearTimeout(to); return v; }, e => { clearTimeout(to); throw e; });
+  };
+  const pre = pmPre(url);
+  return pre ? pre.catch(fresh) : fresh();
+}
+function pmBlobToBitmap(blob) { return typeof createImageBitmap === "function" ? createImageBitmap(blob).catch(() => pmDecodeImgFallback(blob)) : pmDecodeImgFallback(blob); }
+function pmDecodeSheet(url, ms) { return pmFetchTimed(url, ms || 45000, "blob").then(pmBlobToBitmap); }
 // atlas0 is the ONE thing every cell's base picture depends on -- a transient decode failure (the exact failure
 // mode above) must retry rather than leave the whole map on flat colors forever. A handful of backed-off
 // attempts, not infinite: a real 404/missing-build-output still surfaces the "didn't load" retry button
 // (js/paintmap.js's pmOpen .catch) instead of looping silently.
 const PM_ATLAS_RETRIES = 3;
-// decode the sheets a few at a time (not all at once: fetched blobs + decoded bitmaps both live during the peak)
-function pmDecodeAll(urls, conc) {
-  const out = new Array(urls.length); let next = 0, failed = null;
-  const worker = () => { if (failed || next >= urls.length) return Promise.resolve(); const k = next++;
-    return pmDecodeSheet(urls[k]).then(bm => { out[k] = bm; return worker(); }); };
-  return Promise.all(Array.from({ length: Math.min(conc, urls.length) }, worker)).then(() => out)
-    .catch(e => { failed = e; out.forEach(bm => bm && bm.close && bm.close()); throw e; });
-}
+const pmSleep = ms => new Promise(res => setTimeout(res, ms));
 // users of a collection's decoded tier 0; the last one leaving schedules the release (a quick return, e.g. Back from a
 // painting, cancels it), so a closed map never keeps ~100 MB of bitmaps alive behind the rest of the app
 const PM_ATLAS_USERS = new Map(), PM_ATLAS_REL = new Map();
@@ -1542,24 +1551,63 @@ function pmAtlasRelease(col, delay) {
 }
 function pmAtlasDrop(col) {
   if (PM_ATLAS_USERS.get(col) > 0) return;
-  const a = PM_ATLAS_CACHE.get(col); if (a && a.bm0s) a.bm0s.forEach(bm => bm && bm.close && bm.close());
+  const a = PM_ATLAS_CACHE.get(col); if (a) { a.dropped = true; if (a.bm0s) a.bm0s.forEach(bm => bm && bm.close && bm.close()); }
   PM_ATLAS_CACHE.delete(col); PM_ATLAS_P.delete(col); PM_ATLAS_REL.delete(col);
+}
+// The atlas is PROGRESSIVE (David, 2026-10-25: tier 1 could not start until all 13 MB of tier 0 had landed): pmAtlasLoad resolves as soon as the
+// small manifest is in -- tier 1 (which only needs the manifest) starts at once -- and the tier-0 sheets decode one by one behind it, each
+// one calling atlas.subs (the map redraws). atlas.bm0s[k] is undefined until sheet k lands; atlas.complete says all of them are in.
+// A sheet that fails is retried with backoff (it never fails the whole atlas); the micro layer (pmMicroLoad) shows through meanwhile.
+// Tier 0 is the LAST thing to load (13 MB): the first view is covered by the micro layer and then sharpened by tier 1, so a tier-0 sheet only
+// starts when no tier-1 sheet is on its way (PM_T1_BUSY, set by the open map) or ~12 s after the manifest, whichever comes first.
+let PM_T1_BUSY = () => false;
+function pmLoadTier0(atlas, base, v, conc) {
+  const man = atlas.man, urls = man.tier0.sheets.map(name => base + name + v), t00 = performance.now();
+  let next = 0, left = urls.length;
+  const hold = () => (atlas.dropped || !PM_T1_BUSY() || performance.now() - t00 > 12000) ? Promise.resolve() : pmSleep(300).then(hold);
+  const one = k => {
+    const go = n => atlas.dropped ? Promise.resolve() : hold().then(() => pmDecodeSheet(urls[k], 90000).then(bm => {
+      if (atlas.dropped) { bm.close && bm.close(); return; }
+      atlas.bm0s[k] = bm; atlas.subs.forEach(f => f());
+    }, () => (n < 8 ? pmSleep(Math.min(15000, 700 * Math.pow(2, n))).then(() => go(n + 1)) : null)));
+    return go(0).then(() => { if (--left === 0 && !atlas.dropped) { atlas.complete = true;
+      try { console.info("[paintmap] tier 0 decoded", JSON.stringify(pmMemReport(atlas, null))); } catch (e) {} atlas.subs.forEach(f => f()); } });
+  };
+  const worker = () => next >= urls.length ? Promise.resolve() : one(next++).then(worker);
+  return Promise.all(Array.from({ length: Math.min(conc, urls.length) }, worker));
 }
 function pmAtlasLoad(col) {
   col = col || "paintings";
   if (PM_ATLAS_CACHE.has(col)) return Promise.resolve(PM_ATLAS_CACHE.get(col));
   if (PM_ATLAS_P.has(col)) return PM_ATLAS_P.get(col);
   const base = pmAtlasBase(col), v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
-  const attempt = n => fetch(base + "manifest.json" + v).then(r => { if (!r.ok) throw new Error("manifest " + r.status); return r.json(); })
-    .then(man => pmDecodeAll(man.tier0.sheets.map(name => base + name + v), PM_LOWMEM ? 2 : 4)
-      .then(bm0s => { const atlas = { man, bm0s, missing: man.missing && man.missing.length ? new Set(man.missing) : null }; PM_ATLAS_CACHE.set(col, atlas);
-        try { console.info("[paintmap] tier 0 decoded", JSON.stringify(pmMemReport(atlas, null))); } catch (e) {} return atlas; }))
+  const attempt = n => pmFetchTimed(base + "manifest.json" + v, 20000, "json")
+    .then(man => { const atlas = { man, bm0s: new Array(man.tier0.sheets.length), missing: man.missing && man.missing.length ? new Set(man.missing) : null, complete: false, dropped: false, subs: new Set() };
+      PM_ATLAS_CACHE.set(col, atlas); pmLoadTier0(atlas, base, v, PM_LOWMEM ? 2 : 3); return atlas; })
     .catch(e => {
-      if (n < PM_ATLAS_RETRIES) return new Promise(res => setTimeout(res, 600 * Math.pow(2, n))).then(() => attempt(n + 1));
+      if (n < PM_ATLAS_RETRIES) return pmSleep(600 * Math.pow(2, n)).then(() => attempt(n + 1));
       PM_ATLAS_P.delete(col); throw e;
     });
   const p = attempt(0); PM_ATLAS_P.set(col, p); return p;
 }
+// The micro layer (tools/paintmap_micro.py; David, 2026-10-25: "even a super pixelated, blurry, tiny version of the painting is better than a
+// color"): every painting as a 5x5 picture in two ~0.9 MB sheets, fetched first of all (js/early.js) and drawn, smoothly upscaled, under
+// everything else, so the first frame of the map already has a blurred painting in every cell. Paintings only; closed once tier 0 is complete.
+let PM_MICRO = null, PM_MICRO_P = null;
+function pmMicroLoad() {
+  if (PM_MICRO) return Promise.resolve(PM_MICRO);
+  if (PM_MICRO_P) return PM_MICRO_P;
+  const base = "data/paintmap/", v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
+  const attempt = n => pmFetchTimed(base + "micro.json" + v, 15000, "json").then(meta => {
+    if (!meta || !meta.sheets || !meta.n) throw new Error("micro.json");
+    const m = { meta, bms: new Array(meta.sheets.length), missing: meta.missing && meta.missing.length ? new Set(meta.missing) : null, dropped: false, subs: new Set() };
+    PM_MICRO = m;
+    meta.sheets.forEach((name, k) => { const go = j => m.dropped ? null : pmDecodeSheet(base + name + v, 45000).then(bm => { if (m.dropped) { bm.close && bm.close(); return; } m.bms[k] = bm; m.subs.forEach(f => f()); }, () => (j < 6 ? pmSleep(Math.min(8000, 600 * Math.pow(2, j))).then(() => go(j + 1)) : null)); go(0); });
+    return m;
+  }).catch(e => { if (n < 3) return pmSleep(500 * Math.pow(2, n)).then(() => attempt(n + 1)); PM_MICRO_P = null; return null; });
+  return (PM_MICRO_P = attempt(0));
+}
+function pmMicroDrop() { const m = PM_MICRO; if (!m) return; m.dropped = true; m.bms.forEach(bm => bm && bm.close && bm.close()); PM_MICRO = null; PM_MICRO_P = null; }
 // tier 0: a painting's own cell -- which sheet (now several, each kept <= 2048px square for iOS/WebKit's safe
 // decode ceiling -- see tools/paintmap_atlas.py) plus the cell inside it, pure arithmetic, no lookup
 function pmT0Rect(man, i) {
@@ -1591,33 +1639,88 @@ function pmCutCell(src, x, y, s) {
   return Promise.resolve(pmCutCanvas(src, x, y, s));
 }
 function pmCutCanvas(src, x, y, s) { const cv = document.createElement("canvas"); cv.width = cv.height = s; cv.getContext("2d").drawImage(src, x, y, s, s, 0, 0, s, s); return cv; }
+// Two stages (David, 2026-10-25: ~100 sheets for a first view, some views flat for 20 s): FETCH up to PM_T1_FETCH sheets at once (the network is
+// what is slow; an HTTP/2 connection happily runs a dozen), DECODE only PM_T1_CONC at a time (each is ~16 MB for a moment, so that stays
+// capped for iOS). A fetch has a deadline and a failed group retries with backoff (it is never given up for the session: the old
+// "two failures and it is forgotten" left tiles blurry until a reload). `pending()` says whether anything wanted is still on its way, which is
+// what the map's watchdog checks.
+const PM_T1_FETCH = PM_LOWMEM ? 8 : 10;
+// A dozen sheets in flight is right on HTTP/2 or 3 (GitHub Pages, R2): one connection carries them all. On HTTP/1.1 (a local dev server, an old proxy) a
+// browser has ~6 connections per host, and a dozen 0.5 MB sheets would keep a small, urgent request (a painting's title) waiting behind them, so there it
+// stays at the old pace. The protocol is read from the page's own resource timings, once.
+let PM_H2 = null;
+function pmH2() {
+  if (PM_H2 != null) return PM_H2;
+  try { for (const e of performance.getEntriesByType("resource")) if (e.nextHopProtocol) return (PM_H2 = /^h[23]/.test(e.nextHopProtocol)); } catch (e) {}
+  return false;
+}
+// The cluster packs (tools/paintmap_cluster.py; David, 2026-10-25): a first view of the Color map needed ~100 tier-1 sheets (0.6 MB each) because
+// neighbors on that map are scattered through the gallery order. A pack is a 48 x 48 block of the Color layout at 40 px a painting, so a screen touches
+// ~2-4 of them. cluster.bin says where each painting is (pack, slot); a painting past cluster.json's n, or a pack that will not load, falls back to
+// the 80 px tier-1 sheets (group numbers 0.., a pack's group number is 1000 + its id). The few biggest cells are then upgraded from their 80 px sheet.
+let PM_CL = null, PM_CL_P = null;
+function pmClusterLoad() {
+  if (PM_CL) return Promise.resolve(PM_CL);
+  if (PM_CL_P) return PM_CL_P;
+  const base = "data/paintmap/", v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
+  return (PM_CL_P = pmFetchTimed(base + "cluster.json" + v, 15000, "json").then(meta => pmFetchTimed(base + "cluster.bin" + v, 30000, "buf").then(buf => {
+    const n = meta.n; if (!meta.numPacks || buf.byteLength !== n * 3) throw new Error("cluster.bin");
+    PM_CL = { meta, pack: new Uint8Array(buf, 0, n), slot: new Uint16Array(buf.slice(n, n * 3)) }; return PM_CL;
+  })).catch(() => { PM_CL_P = null; return null; }));
+}
+const PM_CL_BASE = 1000, PM_T1_UP = 12;   // pack group numbers start here; at most this many of the biggest cells are upgraded to the 80 px sheet at a time
 function pmAtlasTier1(onReady, col) {
   col = col || "paintings";
   const base = pmAtlasBase(col);
-  const cells = new Map();   // painting index -> { bm, used } (ready tiles only)
+  const cells = new Map();   // painting index -> { bm, used, lv } (ready tiles only; lv 1 = a cluster pack's 40 px tile, 2 = the 80 px tier-1 sheet's)
   const need = new Map();    // group -> Set of painting indices wanted and not yet cut
-  const failed = new Set();  // groups whose sheet failed (retried at most twice, a few seconds apart)
+  const retryAt = new Map(), tries = new Map();   // group -> earliest time to ask again / failures so far
   const born = performance.now();
-  const tries = new Map(), inflight = new Set(), rank = new Map();   // rank: group -> the best (lowest) place any of its wanted paintings has in the priority list
-  let frame = 0, dead = false, running = 0, wantedNow = 1;
+  const inflight = new Set(), rank = new Map();   // rank: group -> the best (lowest) place any of its wanted paintings has in the priority list
+  const ready = [];   // fetched sheets waiting for a decode slot: { g, blob, set }
+  let frame = 0, dead = false, fetching = 0, decoding = 0, wantedNow = 1, retryTimer = 0, clBad = false;
+  const v = () => typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
+  function fail(g) {
+    const n = (tries.get(g) || 0) + 1; tries.set(g, n);
+    if (g >= PM_CL_BASE && n >= 3) clBad = true;   // a pack that will not come: from now on this map asks the tier-1 sheets instead
+    const wait = Math.min(20000, 700 * Math.pow(2, n - 1)); retryAt.set(g, performance.now() + wait);
+    clearTimeout(retryTimer); retryTimer = setTimeout(() => { if (!dead) onReady(); }, wait + 30);   // wakes the map: its next draw asks again
+  }
+  function decodePump() {
+    while (!dead && decoding < PM_T1_CONC && ready.length) {
+      // the sheet holding the wanted paintings nearest the middle goes first
+      let bi = 0; for (let q = 1; q < ready.length; q++) if ((rank.get(ready[q].g) ?? 1e12) < (rank.get(ready[bi].g) ?? 1e12)) bi = q;
+      const job = ready.splice(bi, 1)[0], g = job.g, atlas = PM_ATLAS_CACHE.get(col), cl = PM_CL; if (!atlas) { inflight.delete(g); continue; }
+      let T, at, lvl;   // at(i) -> the tile's top-left in the sheet
+      if (g >= PM_CL_BASE) { if (!cl) { inflight.delete(g); fail(g); continue; } T = cl.meta.tile; lvl = 1; const cc = cl.meta.cols; at = i => { const s = cl.slot[i]; return [(s % cc) * T, Math.floor(s / cc) * T]; }; }
+      else { const man = atlas.man, lo = g * man.tier1.groupSize, hi = Math.min(man.n, lo + man.tier1.groupSize), gc = Math.max(1, Math.ceil(Math.sqrt(hi - lo))); T = man.tier1.tile; lvl = 2; at = i => [((i - lo) % gc) * T, Math.floor((i - lo) / gc) * T]; }
+      decoding++;
+      pmBlobToBitmap(job.blob).then(sheet => {
+        const idx = [...job.set].filter(i => { const c = cells.get(i); return !c || c.lv < lvl; });
+        return Promise.all(idx.map(i => { const [sx, sy] = at(i); return pmCutCell(sheet, sx, sy, T).then(bm => {
+          if (dead) { bm.close && bm.close(); return; }
+          const old = cells.get(i); if (old && old.bm.close) old.bm.close();
+          cells.set(i, { bm, used: frame, lv: lvl }); }); }))
+          .then(() => { if (sheet.close) sheet.close(); tries.delete(g); });
+      }).catch(() => fail(g))
+        .then(() => { decoding--; inflight.delete(g); if (!dead) { trim(); onReady(); decodePump(); pump(); } });
+    }
+  }
   function pump() {
-    // the opening seconds of a map may run more sheets at once on a roomy device (every visible tile sharpens sooner); phones keep their own cap
-    const conc = !PM_LOWMEM && performance.now() - born < 12000 ? PM_T1_CONC + 2 : PM_T1_CONC;
-    while (!dead && running < conc) {
+    // the opening seconds of a map fetch a few more at once (every visible tile sharpens sooner)
+    const now = performance.now(), conc = !pmH2() ? PM_T1_CONC + 1 : now - born < 15000 ? PM_T1_FETCH + 2 : PM_T1_FETCH;
+    while (!dead && fetching + ready.length < conc) {
       const atlas = PM_ATLAS_CACHE.get(col); if (!atlas) return;
       let best = -1, bestR = 1e12;
-      need.forEach((set, g) => { const r = rank.get(g); if (r < bestR) { best = g; bestR = r; } });   // the group holding the painting nearest the middle goes first (center -> visible -> the ring around it)
+      need.forEach((set, g) => { if ((retryAt.get(g) || 0) > now) return; const r = rank.get(g); if (r < bestR) { best = g; bestR = r; } });   // the group holding the painting nearest the middle goes first (center -> visible -> the ring around it)
       if (best < 0) return;
-      running++; inflight.add(best);
+      fetching++; inflight.add(best);
       const man = atlas.man, set = need.get(best); need.delete(best);
-      const v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
-      const lo = best * man.tier1.groupSize, hi = Math.min(man.n, lo + man.tier1.groupSize), cols = Math.max(1, Math.ceil(Math.sqrt(hi - lo))), T = man.tier1.tile;
-      pmDecodeSheet(base + man.tier1.file.replace("{g}", best) + v).then(sheet => {
-        const idx = [...set].filter(i => !cells.has(i));
-        return Promise.all(idx.map(i => pmCutCell(sheet, ((i - lo) % cols) * T, Math.floor((i - lo) / cols) * T, T).then(bm => { if (dead) { bm.close && bm.close(); return; } cells.set(i, { bm, used: frame }); })))
-          .then(() => { if (sheet.close) sheet.close(); });
-      }).catch(() => { const n = (tries.get(best) || 0) + 1; tries.set(best, n); if (n >= 2) failed.add(best); })
-        .then(() => { running--; inflight.delete(best); if (!dead) { trim(); onReady(); pump(); } });
+      const url = best >= PM_CL_BASE ? (PM_CL ? base + PM_CL.meta.file.replace("{p}", best - PM_CL_BASE) : "") : base + man.tier1.file.replace("{g}", best);
+      pmFetchTimed(url + v(), 30000, "blob").then(blob => {
+        fetching--; if (dead) { inflight.delete(best); return; }
+        ready.push({ g: best, blob, set }); decodePump(); pump();
+      }, () => { fetching--; inflight.delete(best); fail(best); if (!dead) { onReady(); pump(); } });
     }
   }
   function trim() {
@@ -1626,28 +1729,38 @@ function pmAtlasTier1(onReady, col) {
     const old = [...cells.entries()].filter(([, e]) => e.used !== frame).sort((a, b) => a[1].used - b[1].used);
     for (let k = 0; k < cells.size - cap && k < old.length; k++) { const e = old[k][1]; if (e.bm.close) e.bm.close(); cells.delete(old[k][0]); }
   }
-  // list: painting indices that want a tier-1 picture this frame
-  // list: painting indices, nearest the middle FIRST; ring: the paintings just around the screen (after the visible ones, so
-  // they never delay the first picture), nearest first too
-  function want(list, ring) {
-    if (ring && ring.length) list = list.concat(ring);
+  // list: painting indices that want a tier-1 picture this frame, nearest the middle FIRST; ring: the paintings just around the screen (after the
+  // visible ones, so they never delay the first picture), nearest first too; big: the (few) cells large enough to show an 80 px tile's worth, which
+  // are upgraded from a pack's 40 px tile once everything visible has its first picture. useCl: this map is the unfiltered Color layout, where packs pay.
+  // The ring only counts once every visible tile is cut or on its way: each sheet is ~0.5 MB, so warming a screenful of neighbors is real data on a phone.
+  function want(list, ring, big, useCl) {
     frame++; wantedNow = list.length;
     const atlas = PM_ATLAS_CACHE.get(col); if (!atlas) return;
-    const man = atlas.man;
-    // groups no longer on screen drop out of the queue (they were queued by an earlier view)
+    const man = atlas.man, cl = useCl && !clBad && PM_CL && col === "paintings" ? PM_CL : null, bigSet = big && big.length ? new Set(big.slice(0, PM_T1_UP)) : null;
     const fresh = new Map(); rank.clear();
-    for (let r = 0; r < list.length; r++) {
-      const i = list[r], c = cells.get(i); if (c) { c.used = frame; continue; }
-      const g = pmT1Group(man, i); if (g < 0 || g >= man.tier1.numGroups || failed.has(g) || inflight.has(g)) continue;
-      let s = fresh.get(g); if (!s) { fresh.set(g, s = new Set()); rank.set(g, r); } s.add(i);
-    }
+    let r = 0, visibleLeft = false;
+    const put = (g, i, rr) => { let s = fresh.get(g); if (!s) { fresh.set(g, s = new Set()); rank.set(g, rr); } else if (rr < rank.get(g)) rank.set(g, rr); s.add(i); };
+    const add = (arr, isRing) => { for (let q = 0; q < arr.length; q++, r++) {
+      const i = arr[q], c = cells.get(i);
+      if (c) { c.used = frame; if (c.lv >= 2 || !bigSet || !bigSet.has(i)) continue; const g = pmT1Group(man, i); if (g >= 0 && g < man.tier1.numGroups) put(g, i, 1e6 + r); continue; }   // has the 40 px tile: only a big one wants the 80 px upgrade, and it ranks after every first picture
+      const p = cl && i < cl.meta.n ? cl.pack[i] : 255, g = p !== 255 && p < cl.meta.numPacks ? PM_CL_BASE + p : pmT1Group(man, i);
+      if (g < 0 || (g < PM_CL_BASE && g >= man.tier1.numGroups)) continue;
+      if (!isRing) visibleLeft = true;
+      put(g, i, r);
+    } };
+    add(list, false);
+    // groups already fetching or waiting to decode are not asked for twice (they carry their own wanted set); once they land the next frame asks again for what they missed
+    inflight.forEach(g => { fresh.delete(g); });
+    if (ring && ring.length && !visibleLeft && !inflight.size) add(ring.slice(0, 60), true);
     need.clear(); fresh.forEach((s, g) => need.set(g, s));
     trim(); pump();
   }
   return { cell: i => { const c = cells.get(i); return c ? c.bm : null; }, want,
+    pending: () => need.size > 0 || inflight.size > 0,
+    kick: () => { retryAt.clear(); pump(); decodePump(); },
     bytes: () => { let b = 0; cells.forEach(e => { b += pmBmBytes(e.bm); }); return b; }, size: () => cells.size,
     drop: () => { cells.forEach(e => e.bm.close && e.bm.close()); cells.clear(); need.clear(); },
-    destroy: () => { dead = true; cells.forEach(e => e.bm.close && e.bm.close()); cells.clear(); need.clear(); } };
+    destroy: () => { dead = true; clearTimeout(retryTimer); ready.length = 0; cells.forEach(e => e.bm.close && e.bm.close()); cells.clear(); need.clear(); } };
 }
 
 // ---------- the dataset abstraction (David, 2026-10-10: "a more convenient way to view [the other archives],
@@ -1850,6 +1963,7 @@ function pmMount(el, s, F) {
   const imgs = pmImages(() => kick(), F, () => pmBigMaxFor(W, H));
   let atlas = null;   // this mount's own resolved {man,bm0s} once pmAtlasLoad(F.col) lands (see draw()'s tier 0/1 passes below)
   const t1 = pmAtlasTier1(() => kick(), F.col);
+  PM_T1_BUSY = () => t1.pending();   // tier 0 waits its turn behind the visible tier-1 sheets (pmLoadTier0)
   const tierH = new Map();   // i -> { t1On, f0, f1 } (pmTState) -- tier 0/1 crossfade + hysteresis memory
   // The ring (David, 2026-10-25: "and ideally the stuff around it"): the paintings in about one extra screen on every side of
   // what is showing, nearest first, so a small pan finds them sharp already. Bounded by the tile cache (a fraction of
@@ -1879,15 +1993,32 @@ function pmMount(el, s, F) {
   }
   pmAtlasAcquire(F.col);
   const coldOpen = !!s.rnd;   // a cold start (js/boot.js): if the pictures cannot load at all, the old home is the better first screen
-  const loadAtlas = () => pmAtlasLoad(F.col).then(a => { atlas = a; if (!dead) kick(); }).catch(() => { if (coldOpen && !dead && !atlas && typeof hmHome === "function") hmHome(); });
+  // micro layer (paintings only): a blurred tiny picture in every cell from the first frame; closed again once tier 0 is complete
+  let micro = null, atlasSub = null;
+  const microOn = !F.col || F.col === "paintings";
+  const loadMicro = () => {
+    if (!microOn) return;
+    const a = PM_ATLAS_CACHE.get("paintings"); if (a && a.complete) return;   // tier 0 is all in already: nothing under it is needed
+    pmMicroLoad().then(m => { if (!m || dead) return; micro = m; m.subs.add(kick); kick(); });
+  };
+  const dropMicroSoon = a => setTimeout(() => { if (micro && a.complete) { micro.subs.delete(kick); pmMicroDrop(); micro = null; kick(); } }, 700);
+  let clState = microOn ? 0 : 2;   // the cluster-pack index: 0 loading, 1 here, 2 not available (the first tier-1 requests of a Color map wait for it, so they go to packs, not to ~100 sheets)
+  const loadAtlas = () => { loadMicro(); if (microOn) pmClusterLoad().then(c => { clState = c ? 1 : 2; if (!dead) kick(); }); return pmAtlasLoad(F.col).then(a => {
+    atlas = a; if (dead) return;
+    if (atlasSub) atlasSub.set.delete(atlasSub.fn);
+    atlasSub = { set: a.subs, fn: () => { if (dead) return; kick(); if (a.complete && micro) dropMicroSoon(a); } }; a.subs.add(atlasSub.fn);
+    if (a.complete && micro) dropMicroSoon(a);
+    kick();
+  }).catch(() => { if (coldOpen && !dead && !atlas && typeof hmHome === "function") hmHome(); }); };
   loadAtlas();
   // a hidden tab (Instagram's browser, the Home Screen app in the background) frees its decoded sheets after 20 s and
   // re-decodes them from the HTTP cache on return; iOS kills the biggest backgrounded WebContent first
   let hideTimer = 0, released = false;
   const onVis = () => {
     clearTimeout(hideTimer);
-    if (document.hidden) hideTimer = setTimeout(() => { if (dead || !document.hidden) return; t1.drop(); atlas = null; released = true; pmAtlasRelease(F.col, 0); }, 20000);
+    if (document.hidden) hideTimer = setTimeout(() => { if (dead || !document.hidden) return; t1.drop(); atlas = null; released = true; pmAtlasRelease(F.col, 0); if (micro) { pmMicroDrop(); micro = null; } }, 20000);
     else if (!dead && released) { released = false; pmAtlasAcquire(F.col); loadAtlas(); }
+    else if (!dead) { t1.kick(); kick(); }   // back from the background: whatever stalled while the page was away gets asked for again
   };
   document.addEventListener("visibilitychange", onVis);   // tier 0: one shared sheet, loaded once per session (idempotent -- a second mount just resolves immediately)
   if (!PM_LANDMARKS.size && typeof rcLoadPortraits === "function") {
@@ -2190,12 +2321,13 @@ function pmMount(el, s, F) {
     if (on) toast("In your favorites", { action: "See them", onAction: () => { if (!F.col || F.col === "paintings") { S.fvCat = "paintings"; save(); } XSTACK.push("favs"); favShelf(); }, low: true, ms: 3000 });
   }
   // ---- drawing
-  function kick() { if (!raf && !dead) raf = requestAnimationFrame(frame); }
+  let lastFrameAt = performance.now(), rafAt = 0;
+  function kick() { if (!raf && !dead) { raf = requestAnimationFrame(frame); rafAt = performance.now(); } }
   let touched = false, clock = 0, lastNow = 0, frameDt = 16;
   // the map's own clock: every frame moves it at least 8 ms (and at most 40), so a glide, a flick or a fade always
   // ends after a bounded number of frames, even where the wall clock stalls (a background tab, a headless test run)
   function frame() {
-    const now = performance.now(); frameDt = lastNow ? clamp(now - lastNow, 8, 40) : 16; lastNow = now; clock += frameDt;
+    const now = performance.now(); frameDt = lastNow ? clamp(now - lastNow, 8, 40) : 16; lastNow = now; clock += frameDt; lastFrameAt = now;
     const t = clock;
     raf = 0; if (dead || !lay || !W) return;
     let moving = false;
@@ -2236,6 +2368,43 @@ function pmMount(el, s, F) {
     for (let k = 0; k < n; k++) { const h = pmHex(lay.items[k], F), v = parseInt(h.slice(1, 7), 16) || 0; c[k] = (0xFF000000 | (v & 255) << 16 | (v >> 8 & 255) << 8 | v >> 16) >>> 0; }
     rbLay = lay; rbCol = c; return c;
   }
+  // The overview pyramid (David, 2026-10-25: "zoomed out far enough the map is salt-and-pepper static with rings"). Where a cell is smaller than a
+  // few screen pixels, reading ONE cell's color per screen pixel (as the raster zone did) aliases: neighbors in a layout differ a lot, so it turns
+  // into noise with moire rings from the lens. Instead the layout's cell colors are AREA-AVERAGED into a mip chain (one texel per cell, or per
+  // 2x2/4x4 cells for a huge layout; each level halves the last; coverage is kept so the empty space between islands stays dark), built once per
+  // layout (so a filter, which makes a new layout, rebuilds it), and the far pixels read it bilinearly at the level whose texels are ~3 px wide:
+  // a soft painted landscape that sharpens level by level as you zoom in, then hands over to the crisp per-cell raster (cells >= 3.5 px) and the
+  // tiles. Premultiplied RGBA bytes: the sample over the dark background is just sum + BG * (1 - coverage).
+  let mip = null, mipLay = null;
+  function rasterMips() {
+    if (mip && mipLay === lay) return mip;
+    const col = rasterColors(), GW = lay.GW, GH = lay.GH, grid = lay.grid;
+    let st = 1; while ((GW / st) * (GH / st) > 1200000) st *= 2;
+    const bw = Math.ceil(GW / st), bh = Math.ceil(GH / st), sr = new Uint32Array(bw * bh * 4);
+    for (let gy = 0; gy < GH; gy++) {
+      const row = gy * GW, orow = ((gy / st) | 0) * bw;
+      for (let gx = 0; gx < GW; gx++) {
+        const k = grid[row + gx]; if (k < 0) continue;
+        const c = col[k], q = (orow + ((gx / st) | 0)) * 4;
+        sr[q] += c & 255; sr[q + 1] += (c >> 8) & 255; sr[q + 2] += (c >> 16) & 255; sr[q + 3] += 255;
+      }
+    }
+    const norm = 1 / (st * st), d0 = new Uint8Array(bw * bh * 4);
+    for (let q = 0; q < d0.length; q++) d0[q] = Math.min(255, Math.round(sr[q] * norm));
+    const lv = [{ w: bw, h: bh, d: d0 }];
+    while (lv.length < 14) {
+      const a = lv[lv.length - 1]; if (a.w <= 1 && a.h <= 1) break;
+      const w = Math.ceil(a.w / 2), h = Math.ceil(a.h / 2), d = new Uint8Array(w * h * 4);
+      for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) for (let ch = 0; ch < 4; ch++) {
+        let sum = 0; for (let dy = 0; dy < 2; dy++) for (let dx = 0; dx < 2; dx++) { const xx = x * 2 + dx, yy = y * 2 + dy; if (xx < a.w && yy < a.h) sum += a.d[(yy * a.w + xx) * 4 + ch]; }
+        d[(y * w + x) * 4 + ch] = Math.round(sum / 4);
+      }
+      lv.push({ w, h, d });
+    }
+    mipLay = lay; mip = { st, lv, inv: lv.map((_, i) => 1 / (st * (1 << i))) };
+    return mip;
+  }
+  const MIP_CS = 3.5;   // a cell smaller than this many screen px is read from the pyramid; at or above it, from the crisp raster / tiles
   const rasterThr = () => clamp(Math.sqrt(W * H / 30000), 5, 12);
   // the plane distance zS beyond which a cell is smaller than the threshold (Infinity = no raster zone at this zoom)
   function rasterEdge(R) {
@@ -2256,13 +2425,16 @@ function pmMount(el, s, F) {
       const id = c.getContext("2d").createImageData(rw, rh); rb = { c, w: rw, h: rh, id, u32: new Uint32Array(id.data.buffer), zt: new Float32Array(0), gt: new Float32Array(0) };
     }
     if (rb.zt.length < nT + 2) { rb.zt = new Float32Array(nT + 64); rb.gt = new Float32Array(nT + 64); }
-    const zt = rb.zt, gt = rb.gt;
+    const zt = rb.zt, gt = rb.gt, mp = rasterMips();
+    if (!rb.lt || rb.lt.length < nT + 66) rb.lt = new Int8Array(nT + 64);
+    const lt = rb.lt;
     for (let j = 0, zlo = zS; j < nT + 2; j++) {   // radius r_j = rS + j*TS -> plane distance (monotone, so each bisection starts at the last answer)
       const r = rS + j * TS; let lo = zlo, hi = Math.max(R + 2, zlo + 1);
       for (let it = 0; it < 22; it++) { const m = (lo + hi) / 2; if (Fz(m) > r) hi = m; else lo = m; }
       const z = (lo + hi) / 2; zt[j] = z; zlo = lo;
       const cs = kk * Math.min(magR(z), tanR(z)), sm = smoothSeam(cs);
       gt[j] = Math.min(6, cs * .15, 1 + cs * .05) * sm / Math.max(cs, 1e-3) * .5;   // half the seam, as a fraction of a cell
+      lt[j] = cs >= MIP_CS ? -1 : Math.min(mp.lv.length - 1, Math.max(0, Math.ceil(Math.log2(3.2 / Math.max(cs * mp.st, 1e-4)))));   // -1: the crisp per-cell path; else the pyramid level whose texels are ~3 px
     }
     const u32 = rb.u32, GW = lay.GW, GH = lay.GH, grid = lay.grid, inv = 1 / sc, BG = 0xFF0B0D0E | 0;   // BG: #0E0D0B as ABGR
     const ox = P[0] - lay.gx0 + .5, oy = P[1] - lay.gy0 + .5, iTS = 1 / TS;   // plane coords shifted so a floor is a plain |0 (the grid index) while the point is inside the grid
@@ -2275,6 +2447,19 @@ function pmMount(el, s, F) {
         const ti = (r - rS) * iTS, j = ti | 0, z = zt[j] + (zt[j + 1] - zt[j]) * (ti - j);
         if (z > R) { u32[o] = BG; continue; }
         const q = r < 1e-6 ? 0 : z / r, fx = ox + dx * q, fy = oy + dy * q;
+        const L = lt[j];
+        if (L >= 0) {   // far pixels: a bilinear read of the area-averaged pyramid (no per-cell aliasing)
+          const lm = mp.lv[L], iT = mp.inv[L], uu = fx * iT - .5, vv = fy * iT - .5, x0 = Math.floor(uu), y0 = Math.floor(vv), ax = uu - x0, ay = vv - y0;
+          const lw = lm.w, lh = lm.h, ld = lm.d; let pr = 0, pg = 0, pb = 0, pa = 0;
+          for (let t4 = 0; t4 < 4; t4++) {
+            const xx = x0 + (t4 & 1), yy = y0 + (t4 >> 1); if (xx < 0 || yy < 0 || xx >= lw || yy >= lh) continue;
+            const wt = ((t4 & 1) ? ax : 1 - ax) * ((t4 >> 1) ? ay : 1 - ay), qq = (yy * lw + xx) * 4;
+            pr += ld[qq] * wt; pg += ld[qq + 1] * wt; pb += ld[qq + 2] * wt; pa += ld[qq + 3] * wt;
+          }
+          const bgw = 1 - pa / 255;
+          u32[o] = (0xFF000000 | (Math.min(255, pb + 11 * bgw + .5) << 16) | (Math.min(255, pg + 13 * bgw + .5) << 8) | Math.min(255, pr + 14 * bgw + .5)) | 0;
+          continue;
+        }
         if (fx < 0 || fy < 0) { u32[o] = BG; continue; }
         const gx = fx | 0, gy = fy | 0;
         if (gx >= GW || gy >= GH) { u32[o] = BG; continue; }
@@ -2336,7 +2521,7 @@ function pmMount(el, s, F) {
     // {i,...} records already carry the gallery index), not a per-cell favorites lookup.
     const favSet = new Set(pmFavList(F).map(r => r.i));
     if (zS < Infinity) rasterDraw(zS, R); else rz.zS = Infinity;
-    drawn = []; const wantImg = [], wantT1 = [];
+    drawn = []; const wantImg = [], wantT1 = [], bigIx = new Map();
     for (let y = Math.max(y0, lay.gy0); y <= Math.min(y1, lay.gy0 + lay.GH - 1); y++) {
       const row = (y - lay.gy0) * lay.GW;
       for (let x = Math.max(x0, lay.gx0); x <= Math.min(x1, lay.gx0 + lay.GW - 1); x++) {
@@ -2432,10 +2617,19 @@ function pmMount(el, s, F) {
       // than drawing a blank or stale cell) -- treated exactly like "too new for this atlas" (i >= man.n) below:
       // fall through to the flat color swatch and tier 2's own per-painting loader, never a wrong/blank sprite.
       const inAtlas = atlas && atlas.man && i < atlas.man.n && !(atlas.missing && atlas.missing.has(i));
+      // the micro layer (5x5 a painting, smoothly upscaled) is the floor under tier 0: a blurred painting in every cell from the first
+      // frame, so a cell whose tier-0 sheet has not landed yet is never a flat swatch. It stops being drawn once the cell's tier 0 is fully in.
+      if (micro && i < micro.meta.n && !(micro.missing && micro.missing.has(i))) {
+        const tsm = pmTState(tierH, i), mb = micro.bms[Math.floor(i / micro.meta.perSheet)];
+        if (mb && !tsm.f0done) {
+          const am = pmFadeAlpha(tsm, "fm", t, 220, RM); if (am < 1) fading = true;
+          const mc = i % micro.meta.perSheet, mT = micro.meta.tile;
+          ctx.globalAlpha = am; ctx.drawImage(mb, (mc % micro.meta.cols) * mT, Math.floor(mc / micro.meta.cols) * mT, mT, mT, X, Y, w, h); ctx.globalAlpha = 1;
+        }
+      }
       if (inAtlas && atlas.bm0s) {
         const ts0 = pmTState(tierH, i), r0 = pmT0Rect(atlas.man, i), bm0 = atlas.bm0s[r0.sheet];
-        const a0 = pmFadeAlpha(ts0, "f0", t, 220, RM); if (a0 < 1) fading = true;
-        if (bm0) { ctx.globalAlpha = a0; ctx.drawImage(bm0, r0.x, r0.y, r0.s, r0.s, X, Y, w, h); ctx.globalAlpha = 1; }
+        if (bm0) { const a0 = pmFadeAlpha(ts0, "f0", t, 220, RM); if (a0 < 1) fading = true; else ts0.f0done = true; ctx.globalAlpha = a0; ctx.drawImage(bm0, r0.x, r0.y, r0.s, r0.s, X, Y, w, h); ctx.globalAlpha = 1; }
       }
       // tier 1: a mid-size tile from its group's sheet (manifest.tier1.groupSize paintings share one sheet, one
       // request each, cached) once the cell reads as more than a speck -- replaces tier 0 by drawing over it.
@@ -2444,12 +2638,12 @@ function pmMount(el, s, F) {
       if (inAtlas) {
         const ts1 = pmTState(tierH, i);
         if (hysteresis(ts1, "t1On", b.d / PM_T1_MIN, .75)) {
-          wantT1.push(i);
+          wantT1.push(i); bigIx.set(i, b.d);
           const te = t1.cell(i);
           if (te) {
             const a1 = pmFadeAlpha(ts1, "f1", t, 220, RM); if (a1 < 1) fading = true;
             ctx.globalAlpha = a1;
-            const q = atlas.man.tier1.tile, sw = w0 >= h0 ? q : q * w0 / h0, sh = h0 >= w0 ? q : q * h0 / w0;   // the shape from the unsnapped size: a 1px snap step must not rescale the crop
+            const q = te.width || atlas.man.tier1.tile, sw = w0 >= h0 ? q : q * w0 / h0, sh = h0 >= w0 ? q : q * h0 / w0;   // the shape from the unsnapped size: a 1px snap step must not rescale the crop
             ctx.drawImage(te, (q - sw) / 2, (q - sh) / 2, sw, sh, X, Y, w, h);
             ctx.globalAlpha = 1;
           }
@@ -2592,7 +2786,13 @@ function pmMount(el, s, F) {
     // at the 14px threshold above (zMin() also caps how far you can zoom out), so every on-screen eligible cell
     // now gets a turn in the queue, nearest the middle first, same as before.
     imgs.want(wantImg.reverse().slice(0, 2000));
-    if (atlas) { wantT1.reverse(); t1.want(wantT1, wantT1.length && ++ringFrames > 2 ? ringCells() : null); }   // nearest the middle first; the ring around the screen joins from the third frame on, so it never delays the first picture. // the cells that want a tier-1 picture; each sheet is decoded once, transiently, and cut into per-cell bitmaps
+    if (atlas) {
+      wantT1.reverse();
+      // the biggest cells (nearest the middle first) are the ones a 40 px pack tile is too soft for: they upgrade to the 80 px sheet
+      const bigT1 = []; for (let q = 0; q < wantT1.length && bigT1.length < PM_T1_UP; q++) { const bi = bigIx.get(wantT1[q]); if (bi >= 72) bigT1.push(wantT1[q]); }
+      const useCl = microOn && (!lay.arr || lay.arr === "color") && lay.n > 100000;
+      if (!(useCl && clState === 0)) t1.want(wantT1, wantT1.length && ++ringFrames > 2 ? ringCells() : null, bigT1, useCl);
+    }   // nearest the middle first; the ring around the screen joins from the third frame on, so it never delays the first picture. // the cells that want a tier-1 picture; each sheet is decoded once, transiently, and cut into per-cell bitmaps
 
     const c = nearestK(P[0], P[1]); setCenter(c);
   }
@@ -3488,7 +3688,19 @@ function pmMount(el, s, F) {
   // David, 2026-10-10: "Back should take me to that exact spot instead of reloading the position" -- this used
   // to save the SNAPPED cell position (lay.x[centerK], lay.y[centerK]) on the way out, rounding away whatever
   // precise mid-pan spot P was actually sitting at the moment you tapped a painting open. Save the real P/Z.
-  cleanup.push(() => { dead = true; hideTip(); clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); t1.destroy(); clearTimeout(hideTimer); document.removeEventListener("visibilitychange", onVis); if (!released) pmAtlasRelease(F.col); if (lay) PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z, cardOpen }); });
+  // Self-healing load (David, 2026-10-25: "sometimes it doesn't load until I zoom in a bit and then zoom out"). Every async completion kicks a
+  // redraw already; this is the net under that: while anything the view wants is still missing (a sheet in flight or backing off, tier 0 or the
+  // micro layer not all in) the map re-asks every ~1.5 s, a frame request that never fired (a throttled or just-resumed page) is re-issued,
+  // and a resize, rotation, return from the background or coming back online re-asks at once. An idle, complete map costs nothing.
+  const wake = () => { if (dead) return; t1.kick(); if (raf && performance.now() - rafAt > 800) { cancelAnimationFrame(raf); raf = 0; } kick(); };
+  const watchdog = setInterval(() => {
+    if (dead || document.hidden) return;
+    if (raf && performance.now() - rafAt > 1500) { cancelAnimationFrame(raf); raf = 0; }   // a frame request that never ran
+    const incomplete = !atlas || !atlas.complete || t1.pending() || (microOn && !micro && !(atlas && atlas.complete));
+    if (incomplete) { if (t1.pending()) t1.kick(); kick(); }
+  }, 1000000000);
+  addEventListener("resize", wake); addEventListener("orientationchange", wake); addEventListener("pageshow", wake); addEventListener("online", wake);
+  cleanup.push(() => { dead = true; hideTip(); clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); t1.destroy(); clearTimeout(hideTimer); clearInterval(watchdog); removeEventListener("resize", wake); removeEventListener("orientationchange", wake); removeEventListener("pageshow", wake); removeEventListener("online", wake); if (atlasSub) atlasSub.set.delete(atlasSub.fn); if (micro) { micro.subs.delete(kick); micro = null; } document.removeEventListener("visibilitychange", onVis); if (!released) pmAtlasRelease(F.col); if (lay) PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z, cardOpen }); });
   const firstBuild = () => { if (pmMatchReady(F, s.f)) build(false); else palWait(() => build(false)); };
   size();
   if ((s.col || "paintings") === "paintings") pmLookProbe(F);   // the tiny look.json: decides whether the Arrange sheet offers By look
@@ -3513,7 +3725,7 @@ function pmMount(el, s, F) {
     // own real tile the instant this is true -- see the draw loop's unconditional tier-0 pass), and how many of
     // the tier-1 groups the current view touched have loaded their sheet.
     _qaMem: () => pmMemReport(atlas, t1),
-    _qaAtlasReady: () => !!(atlas && atlas.bm0s && atlas.bm0s.length),
+    _qaAtlasReady: () => !!(atlas && atlas.complete),
     // QA: the zoom-out floor for the CURRENT layout -- PM_CTRL.zoom(_qaZMin()) should show the whole thing
     // (drawn === count), confirming zMin() isn't capped below what the layout actually needs (David, 2026-10-10)
     _qaZMin: () => zMin(),
@@ -3543,6 +3755,7 @@ function pmMount(el, s, F) {
       }
       return { fits: maxX <= cx + 2 && maxY <= cy + 2, maxX, maxY, halfW: cx, halfH: cy };
     },
+    _qaPictureStats: () => { let n = 0, flat = 0, sharp = 0; for (const b of drawn) { if (b.d < 6) continue; n++; const i = b.i, r0 = atlas && atlas.man && i < atlas.man.n ? pmT0Rect(atlas.man, i) : null; const has = (micro && micro.bms[Math.floor(i / micro.meta.perSheet)]) || (r0 && atlas.bm0s[r0.sheet]) || t1.cell(i); if (!has) flat++; if (t1.cell(i)) sharp++; } return { n, flat, sharp, micro: !!micro, tier0: atlas ? atlas.bm0s.filter(Boolean).length : 0, pending: t1.pending() }; },
     _qaTier1Stats: () => { let have = 0, want = 0; const man = atlas && atlas.man; if (man) for (const b of drawn) { want++; if (t1.cell(b.i)) have++; } return { want, have }; } };
 }
 

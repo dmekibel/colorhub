@@ -39,7 +39,9 @@ const GL_ICON_DICE = sv('<rect x="4" y="4" width="16" height="16" rx="3.5"/><cir
 function galVer() { return typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : ""; }
 function loadGallery() {
   if (GAL) return Promise.resolve(GAL);
-  const get = (f, kind) => fetch(GAL_DIR + f + galVer()).then(r => { if (!r.ok) throw new Error(f + " " + r.status); return r[kind](); });
+  // js/early.js starts these on a cold open before this file runs; take its copy once, else (or if it failed) fetch
+  const get = (f, kind) => { const own = () => fetch(GAL_DIR + f + galVer()), pre = window.__EARLY && window.__EARLY.take(GAL_DIR + f);
+    return (pre ? pre.then(r => r.ok ? r : own(), own) : own()).then(r => { if (!r.ok) throw new Error(f + " " + r.status); return r[kind](); }); };
   // est.json (tools/gallery.py): which years / countries are estimates. Optional: without it everything reads as measured, as before.
   // hidden.json (tools/hide_nonart.py): items that are not artworks. Optional; GAL.hid[i] = 1 and every list / ranking skips them (a direct address still opens one).
   return GAL_LOADING || (GAL_LOADING = Promise.all([get("index.json", "json"), get("index.bin", "arrayBuffer"), get("est.json", "json").catch(() => null), get("hidden.json", "json").catch(() => null)])
