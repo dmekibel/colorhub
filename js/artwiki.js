@@ -663,23 +663,23 @@ function awPainter(slug, push = true) {
   const setTab = (k, quiet) => {
     if (!TABS.some(t => t[0] === k)) return;
     // a tab change keeps the chips where they are: if you had scrolled below the top of the page's chip row, the new pane starts at its top
-    const deep = false;
+    const y0 = scrollY;
     tab = k; AW_TAB.set(slug, k);
     el.querySelectorAll("[data-awtab]").forEach(b => { const on = b.dataset.awtab === k; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
     el.querySelectorAll("[data-awpane]").forEach(pn => { pn.hidden = pn.dataset.awpane !== k; });
     if (worksCtl) worksCtl.show(k === "work");
-    if (!quiet) { buzz(4); pinTabs(); }
+    if (!quiet) { buzz(4); if (k === "about") fdKeepScroll(y0, pinY); else pinTabs(); }
   };
   // a tab change brings the chip row to the top of the screen (the pane fills it); the active "Their work" chip tapped again is its Settings
   const pinY = () => { const desk = typeof glDesk === "function" && glDesk(); return Math.max(0, Math.round(bar.getBoundingClientRect().top + scrollY - (desk || !artTop ? 0 : artTop.getBoundingClientRect().height))); };
   const pinTabs = () => {
     if (!bar) return;
-    scrollTo({ top: pinY(), behavior: reduceMotion ? "auto" : "smooth" });
-    setTimeout(() => { if (bar.isConnected && Math.abs(scrollY - pinY()) > 3) scrollTo(0, pinY()); }, 560);
+    if (!fdPinOrKeep(pinY, true)) return;   // already pinned: the scroll stays
+    setTimeout(() => { if (bar.isConnected && scrollY < pinY() - 3) scrollTo(0, pinY()); }, 560);
   };
   if (bar) bar.onclick = e => {
     const b = e.target.closest("[data-awtab]"); if (!b) return;
-    if (b.dataset.awtab === tab) { if (tab === "work" && worksCtl) { buzz(4); worksCtl.toggleSettings(); } else pinTabs(); return; }
+    if (b.dataset.awtab === tab) { if (tab === "work" && worksCtl) { buzz(4); worksCtl.toggleSettings(); } else if (tab !== "about") pinTabs(); return; }
     { const x = document.querySelector(".sheet.fs-half .fs-x"); if (x) x.click(); }
     setTab(b.dataset.awtab);
   };
