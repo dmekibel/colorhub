@@ -659,3 +659,6 @@ html.desk .gl-tabs{margin-top:28px}
 .gl-tabs .fd-state,.rp-tabs .fd-state{padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
 .fd-cap:empty,.fd-grid.narrow .fd-cap:empty{display:none}
 .fd-chip:not(.on) .fd-tune,.fd-chip:not(.on) .fd-dot{display:none}
+
+/* palette strips: equal widths unless the viewer sizes them by area (Settings) */
+html:not(.pal-area) .mini-pal>i,html:not(.pal-area) .xb-t-pal>i{flex:1 1 0 !important}

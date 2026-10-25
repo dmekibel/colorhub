@@ -54,6 +54,9 @@ function fdShortName(n) {
   return t.slice(k).join(" ");
 }
 const fdRel = (dy, later) => dy === 0 ? "same year" : `${dy} yr${dy === 1 ? "" : "s"} ${later ? "later" : "earlier"}`;
+// a painting's palette strip under a tile: every color the same width by default, sized by area only when asked (David, 2026-10-25)
+const fdPalArea = () => { try { return localStorage.getItem("colorhub-pal-area") === "1"; } catch (x) { return false; } };
+if (fdPalArea()) document.documentElement.classList.add("pal-area");
 const fdCap1 = s => s.charAt(0).toUpperCase() + s.slice(1);
 
 // ---------- the rankers: each returns { items: [{ j, cap }] } or { empty: reason }, now or as a Promise ----------
@@ -755,7 +758,8 @@ function fdMount(host, o) {
     else if (!isColor && eff === "color") body = metricHTML();
     else body = `<p class="fs-note">This list has no filters. Size and captions are below.</p>`;
     const capsSw = `<div class="fs-c fs-tg"><p>Show painter and year</p><button type="button" class="fs-switch" role="switch" aria-checked="${!!view.caps}" data-fscaps><i></i></button></div>`;
-    const size = capsSw + `<div class="fs-c"><div class="fs-row"><p>Size</p><b data-fs-out="size"></b></div><input type="range" min="1" max="${mx}" step="1" value="${cols}" data-fssize aria-label="Size"><div class="fs-prev" data-fs-prev></div></div>`;
+    const palSw = `<div class="fs-c fs-tg"><p>Size palette strips by area</p><button type="button" class="fs-switch" role="switch" aria-checked="${fdPalArea()}" data-fspalarea><i></i></button></div>`;
+    const size = capsSw + palSw + `<div class="fs-c"><div class="fs-row"><p>Size</p><b data-fs-out="size"></b></div><input type="range" min="1" max="${mx}" step="1" value="${cols}" data-fssize aria-label="Size"><div class="fs-prev" data-fs-prev></div></div>`;
     const title = ((CHIPS.find(c => c[0] === eff) || [])[1]) || "Keep exploring";
     const { sh, close } = sheet(`<div class="fs-sheet"><div class="fs-head"><h3>${title}</h3><span class="fs-count" data-fs-count aria-live="polite"></span><button type="button" class="fs-reset" data-fs-reset${kind === "none" ? " hidden" : ""}>Reset</button></div><div class="fs-scroll">${body}${size}</div></div>`, { lock: false });
     fsHalf(sh);
@@ -788,6 +792,8 @@ function fdMount(host, o) {
     sh.addEventListener("change", e => { const o = e.target.closest("[data-fssel]"); if (o) { S[o.dataset.fssel] = o.value; buzz(4); later2(); } });
     sh.addEventListener("click", e => {
       if (!isColor && eff === "color" && metricClick(e, sh)) return;
+      const pa = e.target.closest("[data-fspalarea]");
+      if (pa) { const on = !fdPalArea(); try { localStorage.setItem("colorhub-pal-area", on ? "1" : "0"); } catch (x) {} document.documentElement.classList.toggle("pal-area", on); pa.setAttribute("aria-checked", on); buzz(4); return; }
       const cp = e.target.closest("[data-fscaps]");
       if (cp) { view.caps = !view.caps; viewSave(); cp.setAttribute("aria-checked", view.caps); buzz(4); relayoutAll(); return; }
       const m = e.target.closest("[data-fsmulti] button"), g = e.target.closest("[data-fsseg] button"), w = e.target.closest("[data-fssw]"), rs = e.target.closest("[data-fs-reset]");
