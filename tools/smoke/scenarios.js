@@ -4472,10 +4472,14 @@ scenario("paintings", "pulling a painting page down at the top closes one step b
   await t.sleep(1200);
   const page = t.$(".screen.gl-page"), depth0 = t.ev("XSTACK.length"), W = t.ev("innerWidth");
   t.w.scrollTo(0, 0); await t.sleep(900);
-  let up = await glDrag(t, page, [[W / 2, 200], [W / 2, 215], [W / 2, 240], [W / 2, 330]], 9);
-  await t.waitFor(() => /translate\([-\d.]+px, ?(\d+)/.test(page.style.transform) && +/translate\([-\d.]+px, ?([\d.]+)/.exec(page.style.transform)[1] > 10 ? true : null, 2000, "the page to follow the finger (one rAF per frame)");
-  const mm = /translate\(([-\d.]+)px, ?([-\d.]+)px\) scale\(([\d.]+)\)/.exec(page.style.transform);
-  t.expect(mm && +mm[2] > 10 && +mm[2] <= 140 && +mm[3] < 1 && +mm[3] >= .8, `mid-pull the page isn't following the finger and shrinking a little (${page.style.transform})`);
+  // David, 2026-10-25 (third pass): ONLY the picture follows the finger; the whole page fades (one opacity on the page, a see-through ground)
+  let up = await glDrag(t, page, [[W / 2, 200], [W / 2, 215], [W / 2, 240], [W / 2, 290], [W / 2, 330]], 9);
+  await t.waitFor(() => { const p = t.$(".tlg-pic"); return p && /translate\([-\d.]+px, ?([\d.]+)/.test(p.style.transform) && +/translate\([-\d.]+px, ?([\d.]+)/.exec(p.style.transform)[1] > 60 ? true : null; }, 2000, "the picture to follow the finger (one rAF per frame)");
+  const mm = /translate\(([-\d.]+)px, ?([-\d.]+)px\) scale\(([\d.]+)\)/.exec(t.$(".tlg-pic").style.transform);
+  t.expect(mm && +mm[2] > 60 && +mm[2] <= 140 && +mm[3] < 1 && +mm[3] >= .8, `mid-pull the picture isn't following the finger and shrinking a little (${t.$(".tlg-pic").style.transform})`);
+  t.expect(+page.style.opacity < .5, `at 90px the rest of the page is still at opacity ${page.style.opacity}, expected it faded away`);
+  t.expect(t.w.getComputedStyle(page).backgroundColor === "rgba(0, 0, 0, 0)", "the dragged page keeps an opaque ground (the page underneath can't show through)");
+  t.expect(!page.style.transform, "the whole page is being moved; only the picture should follow the finger");
   up();
   await t.waitFor(() => t.ev("TLG_ANIM") ? true : null, 3000, "the fly-back into the tile to start");
   t.ev("TLG_ANIM.finish()");
@@ -4506,7 +4510,7 @@ scenario("paintings", "pulling a painting down shows the page it came from under
   const bg = t.w.getComputedStyle(L).backgroundColor, dim = +t.w.getComputedStyle(L.querySelector(".tlg-dim")).opacity;
   t.expect(bg !== "rgb(0, 0, 0)" && bg !== "rgba(0, 0, 0, 0)", `the backdrop is black (${bg})`);
   t.expect(dim > 0 && dim < .2, `the backdrop dim is ${dim}, expected a slight one that lifts as the page leaves`);
-  t.expect(t.w.getComputedStyle(page).backgroundColor !== "rgba(0, 0, 0, 0)", "the dragged page is see-through (the backdrop would show through its text)");
+  t.expect(t.w.getComputedStyle(page).backgroundColor === "rgba(0, 0, 0, 0)", "the dragged page has an opaque ground (the page it came from should show through as the page fades)");
   t.expect(t.ev("document.getElementById('app').compareDocumentPosition(document.querySelector('.tlg-back')) & Node.DOCUMENT_POSITION_PRECEDING"), "the backdrop is not behind the page");
   up();
   await t.waitFor(() => t.ev("TLG_ANIM") ? true : null, 3000, "the fly-back to start");
@@ -4520,7 +4524,10 @@ scenario("paintings", "pulling a painting down shows the page it came from under
   await t.sleep(1200); t.w.scrollTo(0, 0); await t.sleep(900);
   up = await glDrag(t, t.$(".screen.gl-page"), [[W / 2, 200], [W / 2, 203], [W / 2, 206], [W / 2, 209], [W / 2, 212], [W / 2, 215], [W / 2, 216], [W / 2, 218]], 32, 40);
   t.expect(t.$(".tlg-back"), "no backdrop on the second pull");
+  await t.sleep(100);
+  t.expect(t.$(".tlg-pic") && +t.$(".screen.gl-page").style.opacity < 1, "a slow short pull didn't lift the picture off the page while the page fades");
   up(); await t.sleep(900);
+  t.expect(!t.$(".tlg-pic") && t.$(".screen.gl-page").style.opacity === "", `after springing back the picture copy is left behind or the page is still faded (${t.$$(".tlg-pic").length} ${t.$(".screen.gl-page").style.opacity})`);
   t.expect(!t.$(".tlg-back") && t.$(".screen.gl-page"), "a short pull left the backdrop layer behind or closed the page");
 });
 scenario("paintings", "a swipe has its neighbor beside the page from the first move even before its picture loads", async t => {
