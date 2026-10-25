@@ -1777,11 +1777,13 @@ function honeycomb(host, opts = {}) {
     if (!Number.isFinite(P[0]) || !Number.isFinite(P[1]) || !Number.isFinite(Z) || Z <= 0) {
       P = lastGoodP.slice(); Z = lastGoodZ; resetPointers();
     }
+    const pf0 = window.__perf ? performance.now() : 0;   // ?perf=1 (js/perfprobe.js)
     const l = lens(t);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, Hh); ctx.globalAlpha = l.a;
     if (lay.globe) buildGlobeDrawn(l, t); else { buildFlatDrawn(l, t); if (morph) l18MorphApply(t); }
     finishFrame(l, t);
     lastGoodP = P.slice(); lastGoodZ = Z;
+    if (pf0) window.__perf.frame(performance.now() - pf0, drawn.length, cv.width, cv.height, dpr);
   }
   function caption() {
     const it = center; if (!it) return;
