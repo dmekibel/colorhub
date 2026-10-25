@@ -1545,13 +1545,17 @@ function glPage(i, d, fromHex, tol) {
   // the surround behind the picture (when it doesn't fill the full width) tints with the painting's own average
   // color, not black (David's rebuild brief, 2026-10-09) — G.mean is the true pixel-weighted mean, in Lab
   const avg = (typeof G.mean !== "undefined" && G.mean) ? labHex(G.mean[i * 3], G.mean[i * 3 + 1], G.mean[i * 3 + 2]) : dom;
+  // David, 2026-10-25: the picture, its title, then the chip row (Overview . Color . Vibe . Painter . Era . Place); the page's own sections are the
+  // Overview tab. Browsing (arriving from a painting, a color page's tile, the map or a painter) starts on Color; a cold open on Overview;
+  // a Back puts back the tab and tile that were left.
+  const memo0 = backNav && typeof FD_MEMO !== "undefined" ? FD_MEMO.get(i) : null;
+  const startChip = memo0 && memo0.chip ? memo0.chip : glStartChip();
   const el = show(`
     <header class="art-top" data-similar-gi="${i}"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${typeof fvArtHeart === "function" && d.id ? fvArtHeart(d.id) : ""}</header>
     <div class="gl-cols">
     <div class="gl-pal-wrap">
     <div class="gl-hero gl-full-w" style="--c:${avg}"><span style="width:min(100%, calc(var(--hero-vh, 62dvh) / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${glHiSrc(d) ? ` data-hi="${esc(glHiSrc(d))}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas><div class="gl-hero-dots" data-glherodots aria-hidden="true"></div>
     <button class="gl-closer" data-glcloser aria-label="Look closer">${ICON.search}<span>Look closer</span></button>
-    <button type="button" class="gl-closer gl-explore-ov" data-glfeedjump aria-label="Explore: keep exploring paintings like this"><span>Explore</span>${ICON.down}</button>
     <button class="gl-closer gl-pick-btn" data-glpickbtn hidden aria-pressed="false" aria-label="Pick a color">${icon("pipette", 17)}<span>Pick a color</span></button></span></div>
     <div class="gl-id">
     <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
@@ -1559,7 +1563,6 @@ function glPage(i, d, fromHex, tol) {
     <p class="p-dek">${d.a ? `<button class="aw-link" data-awpainter="${esc(routeSlug(d.a))}">${esc(d.a)}</button>` : "Artist unknown"}${[d.co, d.mv].filter(Boolean).map(x => ` · ${esc(x)}`).join("")}</p>
     <p class="gl-id-src">${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? `<span class="gl-dk-credit"> · ${esc(src.credit)}</span>` : ""}</p>
     ${glEstNote(i) ? `<p class="gl-est-note">${esc(glEstNote(i))}</p>` : ""}
-    <button type="button" class="rp-explore gl-explore" data-glfeedjump aria-label="Explore: keep exploring paintings like this"><span>Explore</span>${ICON.down}</button>
     <div class="gl-dk-acts"><button class="gl-dk-btn" data-dkpick hidden aria-pressed="false">${icon("pipette", 18)}<span>Pick a color</span></button><button class="gl-dk-btn" data-dkcloser>${ICON.search}<span>Look closer</span></button></div>
     ${(() => { /* desktop: the map's card chips live here now (a click on the map opens this page directly) */
       // the same three presets the map's card offers (js/paintmap.js pmPresetsOf), each opening the map on THIS painting (on=)
@@ -1569,6 +1572,9 @@ function glPage(i, d, fromHex, tol) {
     })()}
     <div class="gl-why" data-glwhy hidden></div>
     </div>
+    <section class="gl-feed gl-tabs" data-glfeed aria-label="About this painting, and keep exploring">
+    <div class="fd-bar fd-pre"><div class="fd-chips" role="tablist" aria-label="About this painting, or keep exploring">${[["about", "Overview"], ...FD_CHIPS].map(([k, t]) => `<button class="fd-chip${k === startChip ? " on" : ""}${k === "about" || k === startChip ? "" : " dis"}" role="tab" data-fc="${k}" aria-selected="${k === startChip}">${t}</button>`).join("")}</div></div>
+    <div class="rp-about gl-about" data-rp-about data-gl-about${startChip === "about" ? "" : " hidden"}>
     <div class="gl-pal-ui">
     <div class="palette gl-strip" data-glswatches></div>
     <div class="gl-modes-f" data-glfade><div class="gl-modes" data-glorder role="group" aria-label="Palette type"></div></div>
@@ -1591,7 +1597,7 @@ function glPage(i, d, fromHex, tol) {
     ${!S.pmMapHintSeen ? `<p class="gl-pmap-hint" data-glpmhint><i aria-hidden="true"></i><span>New: browse paintings by how alike their colors are</span></p>` : ""}
     <button class="gl-pmap gl-pmap-top" data-pmap="arr=spiral&seed=${i}">${GL_ICON_MAP}<span>Similar paintings on the map</span>${ICON.chev}</button>
     <button class="gl-pmap gl-pmap-pal" data-pmap="${glPalSpec(i)}">${GL_ICON_MAP}<span>Find paintings with this palette</span>${ICON.chev}</button>
-    </div></div>
+    </div>
     <div class="gl-under">${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}</div>
     <p class="gl-subj" data-glsubj-line hidden></p>
     <div class="gl-finds"><div class="sec-head"><b>Findings</b><span>as photographed</span></div>
@@ -1599,14 +1605,13 @@ function glPage(i, d, fromHex, tol) {
     <div class="aw-cx" data-glctx></div>
     <p class="fine">Computed by Chromatlas, not by the museum, from its photograph. Names are the nearest of about 1,000. Old varnish and the photograph shift color, and screens differ.</p>
     <details class="gl-finds-more"><summary>More</summary><div data-awan></div></details></div>
-    </div>
     <div class="gl-morepainter" data-glmorepainter></div>
     ${typeof twSection === "function" ? `<div data-glsim></div>` : `<div class="sec-head gl-sim-h"><b>Similar palettes</b><span>by color, not subject</span></div>
     <div class="gl-rail" data-glsim></div>`}
     <button class="gl-pmap" data-pmap="arr=spiral&seed=${i}">${GL_ICON_MAP}<span>Similar paintings, on the map</span>${ICON.chev}</button>
     <section class="srcs"><h3>Image and data</h3><ul><li>${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? ` · ${esc(src.credit)}` : ""}</li><li>Palette and color names computed by Chromatlas from the museum's image</li></ul></section>
     <details class="gl-quiz-fold"><summary>Test yourself</summary><div class="gl-quiz" data-glquiz></div></details>
-    <section class="gl-feed" data-glfeed aria-label="Keep exploring"></section>
+    </div></section></div></div>
   `, "article gl-page");
   const route = "#/gallery/" + i, heroSpan = el.querySelector(".gl-hero > span");
   // stable references into the hero's own innards (not re-queried through `el` later): split mode moves the
@@ -2433,12 +2438,15 @@ function glPage(i, d, fromHex, tol) {
     }
     rail.innerHTML = glSimilar(i, 5).map(j => glPinHTML(j)).join(""); glFill(rail);
   }, 40);
-  // "Keep exploring" (js/feed.js): the Pinterest-style feed at the very bottom. Coming Back to this page it is built at once,
-  // so the page is as tall as it was and the scroll lands on the same tile; otherwise it waits until the bottom is near.
+  // the chip row (js/feed.js): the feed tabs sit right under the picture, with this page's sections as the Overview tab. Coming Back to this
+  // page it is built at once, so the scroll lands on the same tile.
   const feedOpts = { i, d, cols: glTwCols(pool, pal6), img: () => canSample ? sampleImg : null, backNav };
-  // the Keep exploring feed is the bottom of a long page: one tap from the top gets there (David, 2026-10-24: "it takes forever")
-  el.querySelectorAll("[data-glfeedjump]").forEach(jumpBtn => jumpBtn.onclick = e => { e.stopPropagation(); const t = el.querySelector("[data-glfeed]"); if (t) { buzz(5); fdJump(t); } });
-  if (typeof fdMount === "function") { if (backNav && fdHasMemo(i)) fdMount(el.querySelector("[data-glfeed]"), feedOpts); else later(() => fdMount(el.querySelector("[data-glfeed]"), feedOpts), 60); }
+  if (typeof fdMount === "function") fdMount(el.querySelector("[data-glfeed]"), { ...feedOpts, about: el.querySelector("[data-gl-about]"), startChip });
+}
+// where a painting page opens: browsing from another painting, a color page's feed tile (p:/n:), the painting map or a painter -> Color; otherwise Overview
+function glStartChip() {
+  const prev = typeof XSTACK !== "undefined" && XSTACK.length > 1 ? String(XSTACK[XSTACK.length - 2]) : "";
+  return /^(g:|p:|n:|aw:)/.test(prev) || /^r:.*paintings\/map/.test(prev) ? "color" : "about";
 }
 // the colors a painting is matched on in "More like this" and "Keep exploring": its palette without the near-blacks (L* < 20),
 // which every old varnished painting shares (IMPROVE-2026-10-08 A15), unless too few are left

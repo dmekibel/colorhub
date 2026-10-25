@@ -36,7 +36,7 @@ const FD_METRIC_HELP = { overall: "The whole palette, matched by area", dominant
 const FD_LEAD = { color: m => ({ overall: "Closest palette first", dominant: "Closest big colors first", accents: "Closest accents first", mood: "Closest mood first", light: "Closest light first", color: "Most of that color first", layout: "Closest layout first" })[m],
   vibe: () => fdVibeSeen() ? "Closest vibe first" : "Vibe: how alike the picture model finds them (subject, style, mood, color)",
   painter: () => "Same painter first, then painters kindred in place and era", era: () => "Nearest in year first", place: () => "Same country first, then the region, nearest in time" };
-let FD_ST = (() => { try { const s = JSON.parse(sessionStorage.getItem("colorhub-feed") || "null"); if (s && s.chip) return { chip: s.chip, metric: s.metric || "overall", color: s.color | 0 }; } catch (e) {} return { chip: "color", metric: "overall", color: 0 }; })();
+let FD_ST = (() => { try { const s = JSON.parse(sessionStorage.getItem("colorhub-feed") || "null"); if (s && s.chip && s.chip !== "about") return { chip: s.chip, metric: s.metric || "overall", color: s.color | 0 }; } catch (e) {} return { chip: "color", metric: "overall", color: 0 }; })();
 const fdSaveState = () => { try { sessionStorage.setItem("colorhub-feed", JSON.stringify(FD_ST)); sessionStorage.setItem("colorhub-feed-color", JSON.stringify(FDC_ST)); } catch (e) {} };   // the painting feed's chip and the color feed's chip are remembered separately
 const FD_CACHE = new Map();      // "subject|chip|metric|color" -> { items } (oldest dropped past 24)
 const FD_MEMO = new Map();       // painting (or "c:#HEX" for a color page) -> { shown, ak, ay }: how far the feed was opened, and the tile at the top of the screen when you left
@@ -197,9 +197,12 @@ function fdTrim(keep) {
 function fdMount(host, o) {
   if (!host || !GAL) return;
   const sub = o.sub || null, isColor = !!sub, i = isColor ? -1 : o.i, d = o.d, G = GAL, SKEY = isColor ? "c:" + sub.hex : i, memo = o.backNav ? FD_MEMO.get(SKEY) : null;
-  const CHIPS = isColor ? (o.about ? [["about", "Overview"], ...FDC_CHIPS] : FDC_CHIPS) : FD_CHIPS, RANK = isColor ? FDC_RANK : FD_RANK, LEADS = isColor ? FDC_LEAD : FD_LEAD, STORE = isColor ? FDC_ST : FD_ST, FALL = isColor ? "paintings" : "color";
+  const CHIPS = o.about ? [["about", "Overview"], ...(isColor ? FDC_CHIPS : FD_CHIPS)] : isColor ? FDC_CHIPS : FD_CHIPS, RANK = isColor ? FDC_RANK : FD_RANK, LEADS = isColor ? FDC_LEAD : FD_LEAD, STORE = isColor ? FDC_ST : FD_ST, FALL = isColor ? "paintings" : "color";
   const st = { ...(memo && memo.chip ? { chip: memo.chip, metric: memo.metric, color: memo.color | 0 } : STORE) };   // re-read from FD_ST when the feed is built (start)   // this page's chip; a Back brings back the chip the feed was left on
-  const save = () => { Object.assign(STORE, st); fdSaveState(); };
+  // a painting page with a chip row: whichever tab is on is remembered at once (not only when a tile is tapped), so a Back from a palette color or
+  // the painter lands on the same tab (a tile tap overwrites this with the exact position, leave() below)
+  const remember = () => { if (o.about && !isColor) FD_MEMO.set(SKEY, { shown: FD_PAGE, ak: -1, ay: 0, chip: st.chip, metric: st.metric, color: st.color }); };
+  const save = () => { Object.assign(STORE, st); fdSaveState(); remember(); };
   const ctx = { i, d, o, sub, kind: isColor ? "color" : "painting", key: SKEY, F: typeof XBF !== "undefined" && XBF && XBF.G === GAL ? XBF : null, _q: null, q() { return this._q || (this._q = twQuery(o.cols, { self: i })); } };
   let lastN = 0, onCount = null, curEnd = "", curMap = "", curLead = "", eff = st.chip, items = [], shown = 0, tok = 0, built = false, gone = false, fk = 0;
   let W = 0, cols = 2, colW = 0, gap = 12, vgap = 18, txt = 52, top = null, col = null, hh = null, ends = [], pinSkew = null, dense = false, capPct = false, zoom = null;
@@ -211,7 +214,7 @@ function fdMount(host, o) {
   const live = new Map(), wantShard = new Map();
   const off = k => isColor ? (FDC_OFF.get(SKEY) || {})[k] || "" : (FD_OFF[k] ? FD_OFF[k](ctx) : "");
   const abOf = it => it.sk || it.card || it.head ? it.ab : Math.min(2.3, Math.max(.4, G.ar[it.j]));
-  const aboutEl = isColor && o.about ? o.about : null; if (aboutEl) aboutEl.remove();   // the article tab survives the feed being drawn around it
+  const aboutEl = o.about || null; if (aboutEl) aboutEl.remove();   // the article tab survives the feed being drawn around it
   host.innerHTML = `<div class="sec-head"><b>Keep exploring</b><span>closest first</span></div>
     <div class="fd-bar"><div class="fd-chips" role="tablist" aria-label="What counts as related"></div></div>
     <p class="fd-lead" aria-live="polite"></p>
@@ -641,8 +644,8 @@ function fdMount(host, o) {
   function start() {
     if (built || gone) return; built = true;
     zoom = gzAttach(grid, { cols: () => cols, min: () => 1, max: fdMaxCols, colW: () => colW, setCols });
-    if (!memo) { Object.assign(st, STORE); if (aboutEl && o.startChip) st.chip = o.startChip === "paintings" && STORE.chip !== "about" && FDC_CHIPS.some(c => c[0] === STORE.chip) ? STORE.chip : o.startChip; }
-    setBarTop(); chipsDraw();
+    if (!memo) { Object.assign(st, STORE); if (aboutEl && o.startChip) st.chip = !isColor ? o.startChip : o.startChip === "paintings" && STORE.chip !== "about" && FDC_CHIPS.some(c => c[0] === STORE.chip) ? STORE.chip : o.startChip; }
+    setBarTop(); chipsDraw(); if (!memo) remember();
     addEventListener("scroll", onScroll, { passive: true }); addEventListener("resize", onResize);
     rerank(false);
     if (memo) pin();
