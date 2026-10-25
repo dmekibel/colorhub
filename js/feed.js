@@ -1017,13 +1017,22 @@ async function fdcRankPaintings(ctx) {
     const res = b.groups.length && plain ? { items, n: rows.length, lead: "Closest to this color first, then the paintings of its neighbors", end: "That is everything close to this color and its neighbors." } : { items, n: rows.length };
     // after the matches: the rest of the archive, nearest color first (how close the top is is the setting; nothing cuts the list off). Only an
     // order that is not by closeness, or a minimum share of the canvas, makes the list exactly what matches.
-    if (S.order === "close" && S.cov <= FDC_MIN_SHARE) {
+    if (S.order === "close") {
       const used = new Set(items.filter(x => x.j != null).map(x => x.j)), fl = fdcFilter(S, ctx.sub.hex, F, used);
-      res.end = fdsChanged("paintings") ? "That is everything that matches your settings." : "That is every painting in the archive.";
+      res.end = "That is every painting in the archive.";
       fdPaged(res, null, null);
+      // never a dead end (David, 2026-10-25): the settings pick what comes first; when nothing else matches them the list goes on, nearest color first,
+      // under one calm divider, and only then does it end
       res.next = async () => {
-        const far = await fdcFar(ctx.sub.hex); res._cur = res._cur || fdCursor(far, used, fl.ok, fl.take);
-        const page = res._cur(FD_TAIL); if (!page.length) { res.moreDone = true; return; }
+        const far = await fdcFar(ctx.sub.hex);
+        if (!res._soft) {
+          res._cur = res._cur || fdCursor(far, used, fl.ok, fl.take);
+          const page = res._cur(FD_TAIL); if (page.length) { page.forEach(([, j]) => res.items.push({ j, cap: "" })); return; }
+          if (!fdsChanged("paintings")) { res.moreDone = true; return; }
+          res._soft = fdCursor(far, used, () => true, () => {});
+          res.items.push({ head: 1, text: "Beyond your settings" });
+        }
+        const page = res._soft(FD_TAIL); if (!page.length) { res.moreDone = true; return; }
         page.forEach(([, j]) => res.items.push({ j, cap: "" }));
       };
     } else res.end = fdsChanged("paintings") ? "That is everything that matches your settings." : res.end;
