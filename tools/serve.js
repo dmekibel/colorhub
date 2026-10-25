@@ -1,7 +1,7 @@
 // Tiny static server for local preview: node tools/serve.js [port]
 const http = require("http"), fs = require("fs"), path = require("path");
 const root = path.join(__dirname, ".."), port = +process.argv[2] || +process.env.PORT || 8791;
-const TYPES = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".svg": "image/svg+xml", ".png": "image/png", ".webmanifest": "application/manifest+json", ".json": "application/json" };
+const TYPES = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".svg": "image/svg+xml", ".png": "image/png", ".webmanifest": "application/manifest+json", ".json": "application/json", ".woff2": "font/woff2", ".webp": "image/webp" };
 http.createServer((req, res) => {
   let p = decodeURIComponent(req.url.split("?")[0]);
   if (p.endsWith("/")) p += "index.html";
