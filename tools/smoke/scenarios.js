@@ -6904,6 +6904,36 @@ scenario("paintmap", "a cold open (no address) lands on the painting map at a ra
   await t.click("[data-back]", { wait: 900 });
   await t.waitFor(() => t.w.PM_CTRL && t.$(".pmx-cv") && t.w.PM_CTRL.center === c1, 15000, "Back to the same cold-open cluster");
 });
+// David, 2026-10-25: "this loads too slowly sometimes; even a super pixelated, blurry, tiny version of the painting is better than a color" and
+// "sometimes it doesn't load until I zoom in a bit and then zoom out". Every visible cell must show a picture (the micro layer under tier 0/1, never a
+// flat swatch), and a sheet that fails must be asked for again by itself: no pan or zoom between the failure and the sharp tile.
+scenario("paintmap", "every visible cell shows a picture (the micro layer), never a flat swatch", async t => {
+  await t.open("", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.$(".pmx-cv") && t.w.PM_CTRL.count > 150000 && t.w.PM_CTRL.drawn > 20, 30000, "the cold open to lay out the painting map");
+  await t.waitFor(() => { const q = t.w.PM_CTRL._qaPictureStats(); return q.n > 8 && q.flat === 0; }, 40000, "every visible cell to show a picture (no flat swatch)");
+});
+scenario("paintmap", "a failed sheet is asked for again by itself: the view sharpens with no pan or zoom", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 150000 && t.w.PM_CTRL.drawn > 20, 30000, "the map to lay out");
+  await t.waitFor(() => { const q = t.w.PM_CTRL._qaTier1Stats(); return q.want > 8 && q.have >= q.want * .9; }, 40000, "the first view to sharpen");
+  // from now on the next 6 requests for a sheet or a pack fail (a flaky connection), then work again
+  t.ev("(() => { const f = window.fetch; window.__failN = 0; window.fetch = (u, o) => (typeof u === 'string' && /data\\/paintmap\\/(c|g)\\d+\\.webp/.test(u) && window.__failN < 6 && ++window.__failN) ? Promise.reject(new Error('flaky')) : f(u, o); })()");
+  t.ev("(() => { const l = PM_CTRL.lay(); PM_CTRL._qaSetPZ(l.gx0 + l.GW * .8, l.gy0 + l.GH * .75, 1); PM_CTRL._qaForceDraw(); })()");
+  await t.waitFor(() => t.w.__failN >= 1, 20000, "the view to ask for new sheets (and be refused)");
+  await t.waitFor(() => { const q = t.w.PM_CTRL._qaTier1Stats(); return q.want > 8 && q.have >= q.want * .9; }, 60000, "the failed sheets to be asked for again and the view to sharpen with no pan or zoom");
+  t.expect(t.w.__failN >= 1, "the failure was never exercised");
+  t.ev("(() => { const l = PM_CTRL.lay(); PM_CTRL._qaSetPZ(l.start[0], l.start[1], 1); PM_CTRL._qaForceDraw(); })()");   // leave the remembered pan/zoom at the ordinary view for later scenarios
+});
+scenario("paintmap", "zoomed far out the mosaic is a soft overview, not salt-and-pepper static", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 150000 && t.w.PM_CTRL.drawn > 20, 30000, "the map to lay out");
+  t.ev("(() => { const l = PM_CTRL.lay(); PM_CTRL._qaSetPZ(l.gx0 + l.GW / 2, l.gy0 + l.GH / 2, PM_CTRL.zFit()); PM_CTRL._qaForceDraw(); })()");
+  // mean difference between neighboring pixels in a patch of the overview: ~20 when every cell is point-sampled (noise), under 8 area-averaged
+  const noise = t.ev("(() => { const cv = document.querySelector('.pmx-cv'), c = cv.getContext('2d'), w = cv.width, h = cv.height, d = c.getImageData((w * .3) | 0, (h * .4) | 0, 120, 120).data; let s = 0, n = 0; for (let y = 0; y < 120; y++) for (let x = 0; x < 119; x++) { const o = (y * 120 + x) * 4; s += Math.abs(d[o] - d[o + 4]) + Math.abs(d[o + 1] - d[o + 5]) + Math.abs(d[o + 2] - d[o + 6]); n += 3; } return s / n; })()");
+  t.expect(noise < 8, `the zoomed-out overview is still noisy: ${noise.toFixed(1)} mean pixel-to-pixel difference (wanted < 8)`);
+  t.notes.push(`zoomed-out noise ${noise.toFixed(2)}`);
+  t.ev("(() => { const l = PM_CTRL.lay(); PM_CTRL._qaSetPZ(l.start[0], l.start[1], 1); PM_CTRL._qaForceDraw(); })()");
+});
 scenario("paintmap", "Back from a painting restores the exact prior pan/zoom, not a re-fit", async t => {
   await t.open("#/paintings/map?arr=color", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
@@ -8793,6 +8823,8 @@ async function pmCardOpen(t, hash = "#/paintings/map?arr=color") {
   await t.waitFor(".pmx-facets [data-pmpre]", 6000, "the card's preset chips");
   t.ev("PM_CTRL._qaSkipGlide()"); await t.sleep(150);   // the harness can leave the tap's glide mid-ease: land it
   await t.waitFor(".pmx-facets [data-pmpre]", 6000, "the card's preset chips after landing");
+  // the chip rows follow the card's measured height (--cap-x, set a frame after the card's text lands): wait for them to clear it
+  await t.waitFor(() => t.$("[data-pmmore2]").getBoundingClientRect().bottom <= t.$(".pmx-cap").getBoundingClientRect().top + 1, 6000, "the chip rows to clear the card");
   return t.w.PM_CTRL.center;
 }
 scenario("paintmap", "presets: each of the three chips narrows the map, keeps your painting in the middle, shows a count, and a second tap removes it", async t => {

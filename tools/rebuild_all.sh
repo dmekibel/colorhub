@@ -47,6 +47,12 @@ if [ "$ATLAS" != 0 ]; then
   [ "$ATLAS" = 2 ] && python3 tools/paintmap_atlas.py clean
   python3 tools/paintmap_atlas.py build | tail -3 | cut -c1-160
 fi
+if [ "$ATLAS" != 0 ] || [ ! -f data/paintmap/micro.json ] || [ ! -f data/paintmap/cluster.json ]; then
+  step "painting-map micro layer (every painting as 5x5 px, from the tier-0 sheets: the map's first frame; ~6 s)"
+  python3 tools/paintmap_micro.py | tail -1 | cut -c1-160
+  step "painting-map cluster packs (Color-layout blocks at 40 px, from the tier-1 sheets: a first view is a few packs, not ~100 sheets; ~2 min, ~1 GB RAM)"
+  python3 tools/paintmap_cluster.py | tail -1 | cut -c1-160
+fi
 step "crawlable pages"
 python3 tools/pages.py | tail -1 | cut -c1-160
 

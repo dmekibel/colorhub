@@ -28,7 +28,7 @@ function coldMap() {
   if (typeof pmLoad !== "function") return false;
   S.hm = S.hm || {}; S.hm.mode = "paintings";
   pmLoad().then(() => {
-    if (typeof pmAtlasLoad === "function") pmAtlasLoad("paintings").catch(() => {});
+    // (the atlas is NOT started here any more: its 13 MB of tier-0 sheets competed with the layout data, js/paintmap.js starts it once the layout is up)
     X_ROOT = "pmap";   // Back from a page opened here runs out onto this map, where you left it (js/explore.js xToOrigin)
     ROUTE_REPLACE = true;
     pmOpen("arr=color&rnd=1", { fresh: true });
