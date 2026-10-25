@@ -681,6 +681,8 @@ const xFallbackTab = () => ["learn", "gym", "explore", "studio", "feed"].include
 function xToOrigin() {
   const r = xFallbackTab();
   if (r) return go(r);
+  // the cold-start painting map is the app's origin (js/boot.js coldMap): back out onto it, where you left it (its pan is kept)
+  if (X_ROOT === "pmap" && typeof pmGo === "function") { if (document.querySelector(".screen.pmx,.pmx")) return; return pmGo("arr=color"); }
   X_ROOT = null;
   return typeof hmHome === "function" ? hmHome() : go("learn");
 }

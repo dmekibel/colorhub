@@ -6697,6 +6697,30 @@ scenario("paintmap", "the map lays out, a tap glides a painting to the middle, t
 // instead of reloading the position." PM_PAN already tracks pan-on-every-center-change and build() restores it,
 // but nothing had checked an ARBITRARY (non-grid-snapped) pan/zoom survives a real Back round trip, card state
 // included -- _qaSetPZ plants one precisely (a real drag would be slow and imprecise to land exactly).
+// David, 2026-10-25: "When you open the app it should open to a random cluster of paintings in the big map of 200k paintings ...
+// all the visible paintings in that cluster should be loaded." A cold start (no address) opens the painting map on a random
+// painting at the ordinary opening zoom; every visible tile is drawn from its sharper tier (none left as a flat swatch)
+// and the ring around the screen follows. Two cold opens land on different clusters. Back from a painting returns to the map.
+scenario("paintmap", "a cold open (no address) lands on the painting map at a random cluster with every visible tile loaded", async t => {
+  const centers = [];
+  for (let n = 0; n < 2; n++) {
+    await t.open("", { settle: 800 });
+    await t.waitFor(() => t.w.PM_CTRL && t.$(".pmx-cv") && t.w.PM_CTRL.count > 150000 && t.w.PM_CTRL.drawn > 20, 30000, "the cold open to lay out the painting map");
+    t.expect(/^#\/paintings\/map/.test(t.w.location.hash), `a cold open should be the painting map, got "${t.w.location.hash}"`);
+    await t.waitFor(() => { const q = t.w.PM_CTRL._qaTier1Stats(); return q.want > 8 && q.have >= q.want * .95; }, 40000, "every visible tile to be loaded (no flat placeholders)");
+    const z = t.w.PM_CTRL._qaPZ().Z;
+    t.expect(z >= .9 && z <= 1.3, `the cold open should use the map's ordinary opening zoom, Z=${z}`);
+    centers.push(t.w.PM_CTRL.center);
+  }
+  t.expect(centers[0] !== centers[1], `two cold opens landed on the same painting (${centers[0]})`);
+  // Back from a painting opened here lands on this same cluster (the cold map is the app's origin map)
+  const cv = t.$(".pmx-cv"), r = cv.getBoundingClientRect(), c1 = t.w.PM_CTRL.center;
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2, { wait: 900 });
+  await t.waitFor(() => /#\/gallery\//.test(t.w.location.hash), 10000, "the middle painting to open");
+  await t.waitFor("[data-back]", 8000, "Back on the painting page");
+  await t.click("[data-back]", { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL && t.$(".pmx-cv") && t.w.PM_CTRL.center === c1, 15000, "Back to the same cold-open cluster");
+});
 scenario("paintmap", "Back from a painting restores the exact prior pan/zoom, not a re-fit", async t => {
   await t.open("#/paintings/map?arr=color", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
