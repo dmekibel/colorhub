@@ -477,7 +477,7 @@ function pmParse(q, F) {
   const lsp = num("lsp"); if (lsp != null) s.lks = clamp(lsp, 0, 1);
   if (/^(0|30|60)$/.test(p.get("lc") || "")) s.lkc = +p.get("lc");
   if (p.get("lb") === "0" || p.get("lb") === "1") s.lkb = +p.get("lb");
-  if (p.get("c")) { f.hexes = p.get("c").split(",").filter(h => /^[0-9a-f]{6}$/i.test(h)).map(h => "#" + h.toUpperCase()); f.name = f.hexes.length === 1 ? nameOf(f.hexes[0]).text : ""; f.tol = num("t") || 8; f.cover = num("m") != null ? num("m") : 2; }
+  if (p.get("c")) { f.hexes = p.get("c").split(",").filter(h => /^[0-9a-f]{6}$/i.test(h)).map(h => "#" + h.toUpperCase()); f.name = f.hexes.length === 1 ? (p.get("nm") ? p.get("nm").slice(0, 60) : nameOf(f.hexes[0]).text) : ""; f.tol = num("t") || 8; f.cover = num("m") != null ? num("m") : 2; }
   if (p.get("cm") === "all") f.colorMode = "all";
   if (p.get("cm") === "overall" && f.hexes.length) {
     f.colorMode = "overall"; f.tol = Math.min(f.tol, PM_PAL_MAX); if (p.get("at") === "1") f.auto = 1; if (p.get("nm")) f.name = p.get("nm").slice(0, 60);
@@ -509,7 +509,7 @@ function pmQS(s, F) {
   const col = s.col || (F && F.col) || "paintings"; if (col !== "paintings") out.push(["col", col]);
   if (s.place && s.place !== "avg") out.push(["pl", s.place]);
   if (s.arr === "look") { const o = pmLk(s); out.push(["lk", o.lay], ["lsp", +o.sp.toFixed(2)], ["lc", o.col], ["lb", o.lab]); }
-  if (f.hexes.length) { out.push(["c", f.hexes.map(h => h.slice(1).toLowerCase()).join(",")], ["t", f.tol], ["m", f.cover]); if (f.hexes.length > 1 && f.colorMode === "all") out.push(["cm", "all"]); if (f.colorMode === "overall") { out.push(["cm", "overall"], ["sh", (f.shares || []).join(",")]); if (f.name) out.push(["nm", f.name]); } }
+  if (f.hexes.length) { out.push(["c", f.hexes.map(h => h.slice(1).toLowerCase()).join(",")], ["t", f.tol], ["m", f.cover]); if (f.hexes.length > 1 && f.colorMode === "all") out.push(["cm", "all"]); if (f.colorMode === "overall") { out.push(["cm", "overall"], ["sh", (f.shares || []).join(",")]); if (f.name) out.push(["nm", f.name]); } else if (f.hexes.length === 1 && f.name && f.name !== nameOf(f.hexes[0]).text) out.push(["nm", f.name]); }   // a color keeps the name it was opened with (an archive name, "Your color") across reloads and shares
   if (f.y0 != null) out.push(["y0", f.y0]); if (f.y1 != null) out.push(["y1", f.y1]);
   if (f.hueBand != null) out.push(["hb", f.hueBand]);
   if (f.l0 != null) out.push(["l0", f.l0]); if (f.l1 != null) out.push(["l1", f.l1]);
@@ -574,7 +574,7 @@ function pmActiveChips(s, F) {
   }
   if (f.hexes.length) {
     const names = f.hexes.map(h => nameOf(h).text);
-    c.push({ dim: "color", text: names.length === 1 ? names[0] : f.name ? f.name : f.colorMode === "overall" ? `Palette of ${names.length} colors` : f.colorMode === "all" ? `Holds all ${names.length} colors` : `Any of ${names.length} colors` });
+    c.push({ dim: "color", text: names.length === 1 ? (f.name || names[0]) : f.name ? f.name : f.colorMode === "overall" ? `Palette of ${names.length} colors` : f.colorMode === "all" ? `Holds all ${names.length} colors` : `Any of ${names.length} colors` });
   }
   if (f.hueBand != null) c.push({ dim: "hueBand", text: XB_HUE_WORDS[f.hueBand] });
   if (f.l0 != null || f.l1 != null) c.push({ dim: "l", text: f.l0 != null && f.l1 != null ? `Lightness ${f.l0}–${f.l1}` : f.l0 != null ? `Lighter than ${f.l0}` : `Darker than ${f.l1}` });
@@ -2969,8 +2969,10 @@ function pmMount(el, s, F) {
   function findPainters(q) {
     if (!artN) { artN = new Int32Array(F.meta.artists.length + 1); for (let i = 0; i < F.N; i++) artN[F.artist[i]]++; }
     const ql = q.toLowerCase();
-    return F.meta.artists.map((a, j) => ({ v: j + 1, name: a[0], n: artN[j + 1] })).filter(x => x.n && (" " + x.name.toLowerCase().replace(/[-'’.]/g, " ")).includes(" " + ql))   // word starts only: "monet" must not find "Simonet"
+    const strict = F.meta.artists.map((a, j) => ({ v: j + 1, name: a[0], n: artN[j + 1] })).filter(x => x.n && (" " + x.name.toLowerCase().replace(/[-'’.]/g, " ")).includes(" " + ql))   // word starts only: "monet" must not find "Simonet"
       .sort((a, b) => (b.name.toLowerCase().startsWith(ql) - a.name.toLowerCase().startsWith(ql)) || b.n - a.n).slice(0, 6);
+    if (strict.length || typeof sqFuzzyRank !== "function") return strict;
+    return sqFuzzyRank(F.meta.artists.map((a, j) => ({ v: j + 1, name: a[0], n: artN[j + 1] })).filter(x => x.n), q, x => x.name, 6).hits;   // typos: "van goh", "sargnet"
   }
   function findWorks(q) {
     if (!lay) return [];

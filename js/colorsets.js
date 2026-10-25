@@ -145,13 +145,26 @@ function csMatch(x, q) {
   // merge_iscc_nbs()): searchable by any of them, same as the primary name
   return !!(lib.altn && lib.altn.some(a => a.n.toLowerCase().includes(q)));
 }
+// the typo pass (js/sq.js): runs only when the strict pass found nothing ("celedon", "dustyviolet", "purple faded")
+const CS_SQ = new WeakMap();
+function csMatchFuzzy(x, Q) {
+  let r = CS_SQ.get(x); if (!r) { const lib = x.lib; r = [sqRec(x.n), ...((lib && lib.altn) || []).map(a => sqRec(a.n))]; CS_SQ.set(x, r); }
+  return r.some(rec => sqScore(Q, rec, true) > 0);
+}
 function filterColors(items, f = {}) {
+  const out = filterColorsStrict(items, f);
+  if (out.length || !f.q || typeof sqScore !== "function") return out;
+  const Q = sqRec(String(f.q));
+  if (!Q.k || /^#?[0-9a-f]{3,6}$/i.test(Q.k)) return out;
+  return filterColorsStrict(items, { ...f, q: "", _fz: Q });
+}
+function filterColorsStrict(items, f = {}) {
   const hue = hueFull(f.hue) ? null : f.hue, [l0, l1] = f.L || [0, 100], [c0, c1x] = f.C || [0, CS_CMAX], c1 = c1x >= CS_CMAX ? Infinity : c1x;
   const src = f.sources && f.sources.length ? f.sources : null, q = f.q ? String(f.q).trim().toLowerCase() : "";
   let out = items.filter(it => {
     const x = csInfo(it);
     return (!f.fam || csFamilyHas(x, f.fam)) && x.L >= l0 && x.L <= l1 && x.C >= c0 && x.C <= c1 && (!hue || (x.C >= 6 && hueIn(x.H, hue)))
-      && (!src || src.some(s => x.src.includes(s))) && (!q || csMatch(x, q));
+      && (!src || src.some(s => x.src.includes(s))) && (!q || csMatch(x, q)) && (!f._fz || csMatchFuzzy(x, f._fz));
   });
   if (f.n && f.n < out.length) out = out.slice().sort((a, b) => csInfo(a).rank - csInfo(b).rank).slice(0, f.n);
   return out;

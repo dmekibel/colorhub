@@ -721,7 +721,7 @@ function fdMount(host, o) {
         if (slugs.length) spec += `&p=${slugs.slice(0, 24).join(",")}`;
       }
       const S = FDS.paintings, win = FDS.era.win, y = G.year[seed];
-      spec += `&c=${sub.hex.slice(1).toLowerCase()}&cm=all&t=${eff === "paintings" ? Math.max(2, S.tol) : 8}&m=0&nm=${encodeURIComponent(sub.name)}`;
+      spec += `&c=${sub.hex.slice(1).toLowerCase()}&cm=all&t=${eff === "paintings" ? Math.max(2, S.tol) : 8}&m=0&nm=${encodeURIComponent(sub.tapped && typeof rpYoursName === "function" ? rpYoursName(sub.name, sub.hex, sub.tapped) : sub.name)}`;
       if (eff === "paintings" && (S.y0 > 1300 || S.y1 < 2000)) spec += `&y0=${S.y0}&y1=${S.y1}`;
       if (eff === "era" && y !== GL_UNDATED) spec += `&y0=${Math.floor(y / 10) * 10 - win}&y1=${Math.floor(y / 10) * 10 + win}`;
       if (eff === "place") { const F = await fdFacets().catch(() => null); const c = F && F.country[seed]; if (c) spec += `&co=${encodeURIComponent(F.meta.countries[c - 1])}`; }
