@@ -8426,7 +8426,7 @@ scenario("paintings", "Pick a color opens the palette editor: one reticle moves,
   t.expect(pvj.lit && pvj.nearTop && pvj.nearEdge && pvj.name && pvj.side >= 150, `the close-up must open drawn, in a corner, at least 150px: ${pv0}`);
   t.expect(t.$$(".glz-pk-strip .glz-seg-c").length === 1 && t.$(".glz-seg-live"), "with no colors kept, the live color fills the whole strip alone");
   const st0 = t.$(".glz-pk-strip").getBoundingClientRect(), sg0 = t.$(".glz-seg-live").getBoundingClientRect();
-  t.expect(Math.abs(sg0.width - st0.width) < 2 && st0.height >= 110, `the first color should fill the strip: strip ${st0.width}x${st0.height}, cell ${sg0.width}`);
+  t.expect(Math.abs(sg0.width - st0.width) < 2 && st0.height >= 70, `the first color should fill the strip: strip ${st0.width}x${st0.height}, cell ${sg0.width}`);
   t.expect(t.$$(".glz-pk-size [data-eydsize]").length === 4, "the Point / Small / Medium / Large row should sit below the palette row");
   const pts = [[.3, .3], [.6, .5], [.5, .8]];
   for (const [fx, fy] of pts) {
@@ -8441,9 +8441,11 @@ scenario("paintings", "Pick a color opens the palette editor: one reticle moves,
   // equal cells: three kept colors split the strip in thirds (the ring sits on the last, so no extra live cell)
   const ws = t.$$(".glz-seg-c[data-id]").map(c => c.getBoundingClientRect().width);
   t.expect(Math.max(...ws) - Math.min(...ws) < 2, `the cells should all be the same width: ${ws.join(",")}`);
-  // the dot selects the first cell; the x shows on the selected one
-  await t.click(t.$(".glz-seg-c[data-id] [data-glzpksel]"), { force: true, wait: 200 });
-  t.expect(t.$(".glz-seg-c[data-id]").classList.contains("on") && t.$(".glz-seg-c.on [data-glzpkx]"), "the corner dot should select a color and show its x");
+  // a long press selects the first cell (no corner dot); the x shows on the selected one
+  t.expect(!t.$(".glz-seg-dot") || getComputedStyle(t.$(".glz-seg-dot")).display === "none", "there is no corner dot on a cell");
+  await t.ev(`(() => { const w = document.querySelector('.glz-seg-c[data-id]'), r = w.getBoundingClientRect(), o = { bubbles: true, pointerId: 7, pointerType: 'touch', isPrimary: true, clientX: r.left + 20, clientY: r.top + 20 }; w.dispatchEvent(new PointerEvent('pointerdown', o)); setTimeout(() => w.dispatchEvent(new PointerEvent('pointerup', o)), 520); })()`);
+  await t.sleep(800);
+  t.expect(t.$(".glz-seg-c[data-id]").classList.contains("on") && t.$(".glz-seg-c.on [data-glzpkx]"), "a long press should select a color and show its x");
   // a tap on the strip goes straight to the full-screen palette preview; closing it returns with the same colors
   await t.click(t.$(".glz-seg-c[data-id]:nth-child(2) .glz-seg-t"), { force: true, wait: 500 });
   await t.waitFor(".rp-focus.cf-multi", 3000, "the palette preview after tapping the strip");

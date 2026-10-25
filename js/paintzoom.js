@@ -529,12 +529,15 @@ function glZoomOpen(opts) {
     items.forEach((it, j) => { if (j === L.from) return; const sh = L.from < to && j > L.from && j <= to ? -L.step : L.from > to && j < L.from && j >= to ? L.step : 0; it.style.transform = sh ? `translateX(${sh}px)` : ""; });
   };
   pkStrip.addEventListener("pointerdown", e => {
-    const w = e.target.closest(".glz-seg-c[data-id]"); if (!w || e.target.closest("[data-glzpkx],[data-glzpksel]") || pkLift || pkStrip.dataset.rows !== "1") return;
-    const items = pkSegs(), from = items.indexOf(w); if (items.length < 2) return;
-    const L = { el: w, from, to: from, items, step: items[1].offsetLeft - items[0].offsetLeft, x0: e.clientX, y0: e.clientY, cx: e.clientX, pid: e.pointerId, lifted: false, timer: 0 };
+    const w = e.target.closest(".glz-seg-c[data-id]"); if (!w || e.target.closest("[data-glzpkx],[data-glzpksel]") || pkLift) return;
+    const items = pkSegs(), from = items.indexOf(w), canMove = items.length >= 2 && pkStrip.dataset.rows === "1";
+    const L = { el: w, from, to: from, items, step: items.length > 1 ? items[1].offsetLeft - items[0].offsetLeft : 0, x0: e.clientX, y0: e.clientY, cx: e.clientX, pid: e.pointerId, lifted: false, timer: 0 };
     L.timer = setTimeout(() => {
-      L.lifted = true; pkLift = L; L.x0 = L.cx;
       if (typeof buzz === "function") buzz(8);
+      pkSwallowClick = performance.now();
+      pkSelect(w.dataset.id, { reveal: true, force: true });   // a long press selects this color (the ring jumps to where it was taken, its ✕ shows); no corner dot
+      if (!canMove) { pkStrip._arm = null; return; }
+      L.lifted = true; pkLift = L; L.x0 = L.cx;
       w.classList.add("lift"); pkStrip.classList.add("lifting");
       try { pkStrip.setPointerCapture(L.pid); } catch (err) {}
     }, 360);
