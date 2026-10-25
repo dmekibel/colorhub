@@ -53,7 +53,7 @@ function sqScore(Q, r, fuzzy) {
   if (Q.w.length >= 1 && w.length >= 1) {
     const used = new Set(); let cost = 0;
     for (const q of Q.w) {
-      const tq = sqTol(q.length); let best = -1, bd = 9;
+      const tq = sqTol(q.length) || (Q.w.length > 1 && q.length === 3 ? 1 : 0); let best = -1, bd = 9;
       for (let i = 0; i < w.length; i++) {
         if (used.has(i)) continue;
         const x = w[i]; let d = x.startsWith(q) ? 0 : tq && x.charCodeAt(0) === q.charCodeAt(0) && Math.abs(x.length - q.length) <= tq ? sqDL(q, x, tq) : (x === q ? 0 : 9);
@@ -75,7 +75,7 @@ function sqFuzzyRank(items, q, textOf, limit = 20) {
   let out = run(false), fuzzy = false;
   if (out.length < 3) { out = run(true); fuzzy = out.length > 0 && !out.some(x => x[0] >= 48); }
   out.sort((a, b) => b[0] - a[0] || recs[a[1]].k.length - recs[b[1]].k.length);
-  return { hits: out.slice(0, limit).map(x => items[x[1]]), fuzzy };
+  return { hits: out.slice(0, limit).map(x => items[x[1]]), fuzzy, top: out.length ? out[0][0] : 0 };
 }
 
 // ---------- the color-name index ----------
@@ -123,7 +123,18 @@ function sqColorSearch(q, limit = 10) {
   }
   const seen = new Set(), hits = [];
   for (const [, e] of out) { const key = e.to + (e.alt ? "|" + e.k : ""); if (seen.has(key)) continue; seen.add(key); hits.push(e); if (hits.length >= limit) break; }
-  return { hits, fuzzy, didYouMean: fuzzy && hits[0] ? hits[0].n : "" };
+  return { hits, fuzzy, didYouMean: fuzzy && hits[0] ? hits[0].n : "", top: out.length ? out[0][0] : 0 };
 }
 // open one result's color page: always by its own name's address (never the nearest core name's)
 function sqOpenColor(e) { location.hash = "#/color/" + (typeof routeSlug === "function" ? routeSlug(e.alt ? e.n : e.to) : e.to); }
+
+// an exact name (or its run-together spelling) -> its entry, preferring a real name over somebody's alternate
+let SQ_EXACT = null, SQ_EXACT_FOR = null;
+function sqColorExact(text) {
+  const list = sqNames();
+  if (SQ_EXACT_FOR !== list) {
+    SQ_EXACT = new Map(); SQ_EXACT_FOR = list;
+    list.forEach(e => { if (!SQ_EXACT.has(e.k) || (SQ_EXACT.get(e.k).alt && !e.alt)) SQ_EXACT.set(e.k, e); });
+  }
+  const r = sqRec(text); return SQ_EXACT.get(r.k) || null;
+}

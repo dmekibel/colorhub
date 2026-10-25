@@ -439,7 +439,7 @@ function explorePager() {
     const b = e.target.closest("[data-go]"), s = e.target.closest("[data-part]"), part = b ? b.dataset.go : s && s.dataset.part; if (!part) return;
     buzz(6); part === "all" ? exploreForYou() : openPart(part);
   });
-  el.querySelector("[data-search]").onclick = () => exploreSearchSheet();
+  el.querySelector("[data-search]").onclick = () => (typeof searchOpen === "function" ? searchOpen({ from: "museum" }) : exploreSearchSheet());
   // today's painting isn't a graph node (most of the daily set isn't): draw it onto the Art cover when it lands
   if (!art && tp && typeof dpLoad === "function") dpLoad().then(e => {
     const cv = e && el.isConnected && el.querySelector('.xp-cover[data-part="art"]'); if (!cv) return;
@@ -563,7 +563,7 @@ function artHome() {
     <div class="art-feed" id="artFeed"><p class="fine">Loading the gallery…</p></div>
   `, "article");
   wirePartBack(el);
-  el.querySelector("[data-search]").onclick = () => exploreSearchSheet();
+  el.querySelector("[data-search]").onclick = () => (typeof searchOpen === "function" ? searchOpen({ from: "museum" }) : exploreSearchSheet());
   el.querySelectorAll("[data-hex]").forEach(b => b.onclick = () => {
     const same = ART_UI.name === b.dataset.name;
     ART_UI = same ? { hex: null, name: "" } : { hex: b.dataset.hex, name: b.dataset.name };
