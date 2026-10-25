@@ -402,6 +402,8 @@ def run_pools(corpus, raw, workers=8):
         # ordering -- the actual cached image always lives under the real adapter's research/_raw/<real>/img/.
         real = x["src"][:-1] if x["src"].endswith("2") and x["src"][:-1] in REAL_SRCS else x["src"]
         p = img_cache_path(raw, real, x["id"])
+        if not p.exists() and crop:   # a staged-measure row (saam ...) that got a crop: sample inside it too
+            p = raw / "measure-img" / f"{x['id']}.jpg"
         if p.exists():
             jobs.append((x["id"], str(p), crop))
         else:

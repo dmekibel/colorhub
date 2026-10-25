@@ -194,7 +194,7 @@ function fdCursor(sc, used, ok, take) {
   return n => {
     const best = []; let worst = Infinity;
     for (let j = 0; j < N; j++) {
-      const s = sc[j]; if (s === Infinity || s < lastS || (best.length >= n && s >= worst) || used.has(j) || (ok && !ok(j))) continue;
+      const s = sc[j]; if (s === Infinity || s < lastS || (best.length >= n && s >= worst) || used.has(j) || (ok && !ok(j)) || (GAL && GAL.hid && GAL.hid[j])) continue;
       let p = best.length; while (p > 0 && best[p - 1][0] > s) p--;
       best.splice(p, 0, [s, j]); if (best.length > n) best.pop();
       if (best.length >= n) worst = best[best.length - 1][0];
@@ -934,6 +934,7 @@ async function fdcNearNames(sub, n, maxDe) {
 function fdcScan(hex, tol, minShare) {
   const G = GAL, N = G.n, [tL, ta, tb] = lab(hex), Lb = G.lab, sh = G.sh, out = [], lim = tol * 1.75 + .5;
   for (let i = 0; i < N; i++) {
+    if (G.hid && G.hid[i]) continue;
     let cover = 0, best = 99;
     for (let j = 0; j < 6; j++) {
       const k = i * 6 + j, o = k * 3, dL = Lb[o] - tL;
@@ -993,7 +994,7 @@ function fdcFar(hex) {
           const dL = Lb[o] - tL; if (Math.abs(dL) / 1.75 >= best) continue;   // ΔE00 is at least |ΔL| / 1.75
           const d = glDE(tL, ta, tb, Lb[o], Lb[o + 1], Lb[o + 2]); if (d < best) best = d;
         }
-        out[i] = best;
+        out[i] = G.hid && G.hid[i] ? Infinity : best;
       }
       await new Promise(r => setTimeout(r, 0));
     }

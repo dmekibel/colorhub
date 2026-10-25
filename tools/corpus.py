@@ -612,6 +612,18 @@ def wanted_crops():
         rc = CP.row_crop(res)
         if rc:
             out[k] = rc
+    # deep flat margins (a small picture on a big white page): data/crop-margins.json from tools/crop_margins.py. Where the frame
+    # detector also found something, the crop is the overlap of the two (both were measured on the same photo).
+    mg = ROOT / "data" / "crop-margins.json"
+    if mg.exists() and not os.environ.get("COLORHUB_NOMARGINS"):
+        for k, b in json.loads(mg.read_text()).items():
+            if k in out:
+                (l, t, r, bt), cf = out[k]
+                n = [max(l, b[0]), max(t, b[1]), min(r, b[2]), min(bt, b[3])]
+                if n[2] - n[0] >= 20 and n[3] - n[1] >= 20:
+                    out[k] = (n, cf)
+            else:
+                out[k] = (b, None)
     # hand fixes always win (2026-10-20, "no wrong crops"): data/crop-overrides.json {id: "none" | [l, t, r, b] permille}
     ov = ROOT / "data" / "crop-overrides.json"
     if ov.exists():

@@ -165,6 +165,7 @@ function ciCoverage(src, hex, tol, soft = false) {
         for (let k = lf.start[c]; k < lf.start[c + 1]; k++) { const id = lf.ids[k]; cov[id] += lf.cov[k] * w; if (d < de[id]) de[id] = d; }
       }
     }
+    if (typeof GAL !== "undefined" && GAL && GAL.hidIdx && src.n === GAL.n) for (const i of GAL.hidIdx) { cov[i] = 0; de[i] = Infinity; }   // hidden: not artworks (tools/hide_nonart.py)
     return { cov, de };
   });
   CI_COV.set(key, p);

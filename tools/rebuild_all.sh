@@ -21,8 +21,14 @@ step() { echo; echo "== $*"; }
 step "audit the new art (dates, same-painting duplicates, non-paintings) -- read it before shipping"
 python3 tools/audit_artists.py | grep -E "^[A-Z].*rows|DATE" || true
 
+step "crops: deep white margins (data/crop-margins.json, 30 s), then every palette measured inside its crop (frame crops come from tools/crop_paintings.py run, a separate step)"
+python3 tools/crop_margins.py | tail -1 | cut -c1-200
+python3 tools/crop_paintings.py apply | tail -1 | cut -c1-160
+
 step "gallery (deletes metrics.bin and thumbs.txt; the steps below put them back)"
 [ "$SKIPGAL" = 1 ] || python3 tools/gallery.py --raw research/_raw | tail -1 | cut -c1-160
+step "hidden non-artworks (data/gallery/hidden.json: blank scans, journal covers, data/hide-overrides.json; a filter, never a deletion)"
+python3 tools/hide_nonart.py | tail -1 | cut -c1-160
 step "finer color index (data/colorindex/: color cell -> paintings, keyed to gallery positions; skips quietly without research/_raw's image caches)"
 if [ -d research/_raw/commons/img ]; then python3 tools/color_index.py --raw research/_raw --workers 8 | tail -2 | cut -c1-160; else echo "no research/_raw image caches: skipped (check_ids.js will fail until it is rebuilt)"; fi
 step "By look layout (CLIP embeddings -> UMAP -> even grid; fills missing embeddings first; skips quietly without research/_raw/clipenv; a rebuild may move every painting)"

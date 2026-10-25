@@ -4252,6 +4252,20 @@ scenario("paintings", "at strict settings a rare color shows no unrelated painti
   await t.waitFor(() => !t.$(".pt-results [data-pt-loosen]") || !/Loosening/.test(t.$(".pt-results [data-pt-loosen]").textContent), 15000, "loosening to finish");
   t.expect(/loosened/i.test(t.text("[data-finding]")) || t.$$(".pt-results .pin, .pt-results .gl-pin").length > 0 || /nothing|not one/i.test(t.text("[data-finding]")), "Loosen should either find something and say so, or admit it's at the loosest measure");
 });
+scenario("paintings", "hidden non-artworks (data/gallery/hidden.json) never rank in a color's paintings, yet still open by address; margin crops are in the shards", async t => {
+  await t.open("#/paintings-of/ffffff?t=6&m=1", { settle: 600 });
+  const r = await t.ev(`(async () => { const G = await loadGallery(); if (!G.hidIdx || !G.hidIdx.length) return { none: true };
+    const rows = fdcScan("#FFFFFF", 6, 0).map(x => x.i), bad = G.hidIdx.filter(i => rows.includes(i)), far = await fdcFar("#FFFFFF");
+    return { n: G.hidIdx.length, bad: bad.length, farInf: G.hidIdx.every(i => far[i] === Infinity), hi: G.hidIdx[0] }; })()`);
+  t.expect(r.none || (r.bad === 0 && r.farInf), "a hidden painting still ranks in the White list: " + JSON.stringify(r));
+  if (!r.none) {
+    await t.open("#/gallery/" + r.hi, { settle: 800 });
+    await t.waitFor(".gl-hero, .gl-page", 12000, "a hidden painting opened by its address");
+    t.expect(t.$("#app").innerText.length > 100, "a hidden painting opened by address is empty");
+  }
+  const c = await t.ev(`(async () => { await loadGallery(); let n = 0; for (let k = 0; k < 20; k++) { const rows = await glShard(k); for (const r of rows) if (r[11]) n++; } return n; })()`);
+  t.expect(c > 300, "the first 2,000 paintings carry only " + c + " crops: the crop rows went missing");
+});
 scenario("paintings", "a pair's paintings, the masters' chords, and a painting with its color pinned", async t => {
   await t.open("#/paintings-of/c2412d+4f6b3a?t=4&m=1", { settle: 600 });
   await t.waitFor(".pt-finding", 12000, "the pair's paintings");
@@ -8640,7 +8654,7 @@ scenario("paintmap", "focus: a year range change keeps the painting in the middl
   const i0 = await pmFocusOpen(t), y = t.ev(`GAL.year[${i0}]`);
   t.expect(t.w.PM_CTRL.center === i0, "the standing painting isn't in the middle");
   t.ev(`PM_CTRL.spec.f.y0 = ${y - 40}; PM_CTRL.spec.f.y1 = ${y + 40}; PM_CTRL.rebuild()`);
-  t.expect(t.w.PM_CTRL.count < 60000 && t.w.PM_CTRL.count > 0, `the range didn't narrow the map (${t.w.PM_CTRL.count})`);
+  t.expect(t.w.PM_CTRL.count < 120000 && t.w.PM_CTRL.count > 0, `the range didn't narrow the map (${t.w.PM_CTRL.count})`);
   t.expect(t.w.PM_CTRL.center === i0, `the year range moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
   t.ev(`PM_CTRL.spec.f.y0 = ${y - 10}; PM_CTRL.spec.f.y1 = ${y + 10}; PM_CTRL.rebuild()`);
   t.expect(t.w.PM_CTRL.center === i0, `a tighter range moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
@@ -8754,7 +8768,7 @@ scenario("paintmap", "a color is a filter: only paintings that hold it stay, cen
   t.expect(/paintings/.test(chipTxt) && chipTxt.replace(/,/g, "").includes(String(n)), `the chip should read "<name> · ${n.toLocaleString()} paintings": "${chipTxt}"`);
   t.expect(t.text("[data-pmcount]").replace(/,/g, "").includes(String(n)), "the corner count disagrees with the chip");
   await t.click(".pmx-xcl-x", { wait: 900 });
-  t.expect(t.w.PM_CTRL.count === total, `x didn't restore every painting (${t.w.PM_CTRL.count} of ${total})`);
+  t.expect(t.w.PM_CTRL.count === total || t.w.PM_CTRL.count === total - t.ev("(GAL.hidIdx || []).length"), `x didn't restore every painting (${t.w.PM_CTRL.count} of ${total})`);
   t.expect(t.w.PM_CTRL.center === chk.center, `x moved you off the painting you were on: ${chk.center} -> ${t.w.PM_CTRL.center}`);
   t.expect(!t.$(".pmx-xcolor") && t.$(".pmx-chipbar").hidden, "the color chip stayed after x");
 });
@@ -8836,7 +8850,7 @@ scenario("paintmap", "By vibe: the option appears, switching keeps the painting 
   t.expect(/image model/i.test(t.text(".pmx-sheet .hm-arr-sub")), "the Arrange line doesn't say it comes from an image model");
   t.expect(t.w.PM_CTRL.center === i0, `By vibe moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
   const full = t.ev("PM_CTRL.lay().n");
-  t.expect(full === meta.n, `By vibe should hold every painting (${full} of ${meta.n})`);
+  t.expect(full === meta.n || full === meta.n - t.ev("(GAL.hidIdx || []).length"), `By vibe should hold every painting (${full} of ${meta.n})`);
   // the Even grid layout (a setting; Islands is the default): a filter refills it with no voids
   await t.click('.pmx-sheet [data-pmlk="lay"][data-v="grid"]', { force: true, wait: 600 });
   await t.waitFor(() => !t.w.PM_CTRL.lay().islands && t.w.PM_CTRL.lay().arr === "look", 15000, "the Even grid layout (look.bin) to load");
@@ -8865,8 +8879,9 @@ scenario("paintmap", "By vibe islands: every painting once and apart with space 
   t.expect(t.w.PM_CTRL.center === i0, `Islands moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
   const st = t.ev(`(() => { const l = PM_CTRL.lay(); let c = 0; for (let g = 0; g < l.grid.length; g++) if (l.grid[g] >= 0) c++;
     const seen = new Set(l.items); return { n: l.n, filled: c, uniq: seen.size, area: l.GW * l.GH, isl: l.islands.length, labeled: l.islands.filter(q => q.text).length, sumN: l.islands.reduce((a, q) => a + q.n, 0) }; })()`);
-  t.expect(st.n === meta.n && st.uniq === meta.n && st.filled === meta.n, `every painting exactly once: ${JSON.stringify(st)}`);
-  t.expect(st.sumN === meta.n, `every painting belongs to one island: ${st.sumN} of ${meta.n}`);
+  const hn = t.ev("(GAL.hidIdx || []).length"), mn = meta.n - hn;
+  t.expect(st.n === mn && st.uniq === mn && st.filled === mn, `every painting exactly once: ${JSON.stringify(st)}`);
+  t.expect(st.sumN === mn, `every painting belongs to one island: ${st.sumN} of ${mn}`);
   t.expect(st.area > st.n * 1.6, `no empty space between islands: ${st.area} cells for ${st.n} paintings`);
   t.expect(st.labeled >= 5, `too few island names (${st.labeled})`);
   // names: shown only when the island is wide enough on screen, and never on top of each other

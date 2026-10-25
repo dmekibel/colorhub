@@ -43,6 +43,10 @@ function checkIds() {
     const b = fs.readFileSync(path.join(ROOT, "data/gallery/look.bin")), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
     if (b.length < 24 || b.readUInt32LE(8) !== gIds.length || b.readUInt32LE(20) !== parseInt(h, 16) || b.length !== 24 + 4 * gIds.length) warn("data/gallery/look.bin is out of step with ids.txt (By look is hidden until it is rebuilt): python3 tools/look_layout.py");
   }
+  if (fs.existsSync(path.join(ROOT, "data/gallery/hidden.json"))) {   // hidden non-artworks: header must name THIS ids.txt (a stale one would hide the wrong paintings)
+    const hj = rj("data/gallery/hidden.json"), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
+    if (hj.n !== gIds.length || hj.hash !== h) err("data/gallery/hidden.json was built for a different ids.txt (it would hide the wrong paintings): python3 tools/hide_nonart.py");
+  }
   if (fs.existsSync(path.join(ROOT, "data/gallery/vibe/index.json"))) {   // By vibe neighbors (feed): header must name THIS ids.txt
     const v = rj("data/gallery/vibe/index.json"), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
     if (v.n !== gIds.length || v.ids_hash !== h) warn("data/gallery/vibe/ is out of step with ids.txt (the feed's Vibe ranking is empty until it is rebuilt): python3 tools/vibe_knn.py");

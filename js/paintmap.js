@@ -386,6 +386,7 @@ function pmRun(s, F) {
   const counts = { when: new Int32Array(XB_NDEC + 1), painter: new Int32Array(F.meta.artists.length + 1), mv: new Int32Array(F.meta.movements.length + 1), co: new Int32Array(F.meta.countries.length + 1),
     mus: new Int32Array(G.src.length), ty: new Int32Array(((F.meta.types || []).length) + 1), hueBand: new Int32Array(9), color: 0, lightness: 0, subj: subjOn ? new Int32Array(SUBJ.tags.length) : null };
   const out = new Int32Array(N); let n = 0;
+  const hid = (F.col || "paintings") === "paintings" && G.hid && G.hid.length === N ? G.hid : null;
   for (let i = 0; i < N; i++) {
     let fail = 0;
     if (hasHex) {
@@ -404,6 +405,7 @@ function pmRun(s, F) {
     if (hasL) { const L = G.mean[i * 3]; if (L < l0 || L > l1) fail |= 128; }
     if (subjFlag && !subjHas(i, subjFlag)) fail |= 256;
     if (tySet && !tySet.has(F.ty[i])) fail |= 512;
+    if (hid && hid[i]) fail |= 1024;   // not an artwork (tools/hide_nonart.py): off every list and count
     if (fail === 0) out[n++] = i;
     else if (fail & (fail - 1)) continue;
     if (!(fail & ~1)) counts.color++;
@@ -815,6 +817,7 @@ function pmqApply(f, p) {
 }
 
 // ---------- the list: the filters, then your favorites ----------
+const pmHidN = F => GAL && GAL.hidIdx && (!F || (F.col || "paintings") === "paintings") ? GAL.hidIdx.length : 0;   // hidden non-artworks (hidden.json) never reach a list
 function pmList(s, F) {
   let list = pmRun(s, F).list;
   if (s.fav) {
@@ -1135,7 +1138,7 @@ function pmEvenGrid(px, py, W) {
 function pmLayLookGrid(list, L, F) {
   const n = list.length, items = Int32Array.from(list);
   let X, Y, W, H;
-  if (n === L.n) {   // the whole museum: the stored cells as they are
+  if (n === L.n - pmHidN()) {   // the whole museum (minus the few hidden non-artworks): the stored cells as they are
     W = L.W; H = L.H; X = new Int32Array(n); Y = new Int32Array(n);
     for (let k = 0; k < n; k++) { X[k] = L.x[list[k]]; Y[k] = L.y[list[k]]; }
   } else {   // any filter: the same neighborhoods, refilled into a compact grid shaped like the other arrangements'
@@ -1200,7 +1203,7 @@ function pmIslRelax(px, py, r, par, gap, gapSib) {
 function pmLayLookIsl(list, D, o, withLabels, asp) {
   const m = D.meta, I = m.islands, K = I.length, d = D.isl, n = list.length, f = 1 + o.sp * 1.6, GAP = m.gap || 7, GAPS = m.gapSib || 3;
   const items = Int32Array.from(list), X = new Int32Array(n), Y = new Int32Array(n), cnt = new Int32Array(K);
-  const whole = n === m.n;
+  const whole = n === m.n - pmHidN();
   for (let t = 0; t < n; t++) cnt[d.id[list[t]]]++;
   const cx = new Float64Array(K), cy = new Float64Array(K), r = new Float64Array(K), par = I.map(q => q.par);
   let cellX = null, cellY = null, slot = null;
@@ -2055,7 +2058,7 @@ function pmMount(el, s, F) {
   function lookSettingsHTML() {
     const o = pmLk(s), isl = pmLookKind(s) === "isl" || (o.lay === "isl" && pmLookHasIsl());
     const seg = (k, opts, cur, label) => `<div class="hm-seg" role="radiogroup" aria-label="${label}">${opts.map(([v, t]) => `<button class="${String(cur) === String(v) ? "on" : ""}" data-pmlk="${k}" data-v="${v}" role="radio" aria-checked="${String(cur) === String(v)}">${t}</button>`).join("")}</div>`;
-    const filtered = pmList(s, F).length !== F.N;
+    const filtered = pmList(s, F).length !== F.N - pmHidN(F);
     return `${pmLookHasIsl() ? `<div class="cx-sec"><b>Layout</b></div>${seg("lay", [["isl", "Islands"], ["grid", "Even grid"]], o.lay, "Layout")}
         <p class="hm-arr-sub">${o.lay === "isl" ? "The clusters the image model found, each its own island." : "One even block, every painting the same distance apart."}</p>` : ""}
         ${isl ? `<div class="hm-feel"><label class="hm-feel-row"><span class="hm-feel-l">Spread</span><span class="hm-feel-r"><i>Tight</i><input type="range" min="0" max="1" step="0.01" value="${o.sp}" data-pmlksp aria-label="Island spread, tight to wide"><i>Wide</i></span></label></div>` : ""}
@@ -2787,7 +2790,7 @@ function pmMount(el, s, F) {
   let cntShown = -1, cntRaf = 0;
   function paintCount() {
     const b = el.querySelector("[data-pmcount]"); if (!b) return;
-    const nounP = pmColLabel(F, "nounP"), nounS = pmColLabel(F, "noun"), total = F.N | 0;
+    const nounP = pmColLabel(F, "nounP"), nounS = pmColLabel(F, "noun"), total = (F.N | 0) - pmHidN(F);
     b.hidden = pmSolo(s) || !lay || !total || !lay.n && !pmActiveChips(s, F).length;
     el.classList.toggle("pmx-hascount", !b.hidden);
     if (b.hidden) { cntShown = -1; return; }
@@ -3408,7 +3411,7 @@ function pmMount(el, s, F) {
           <label class="search pmx-find"><span>${ICON.search}</span><input data-pmq type="search" placeholder="Find a ${esc(painterLab.toLowerCase())}" value="${esc(fq)}" autocomplete="off"></label>
           <div class="pmx-chips">${pList.map(x => chip("data-pmp", x.v, x.name, x.n, paSelSet.has(x.v))).join("")}</div></div>`;
       else q$("[data-pmbody]").innerHTML = `
-        <div class="pmx-sh-top"><b>Filter</b><span>${n === F.N ? n.toLocaleString() : n.toLocaleString() + " of " + F.N.toLocaleString()} ${F.N === 1 || (n === F.N && n === 1) ? pmColLabel(F, "noun") : nounP}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
+        <div class="pmx-sh-top"><b>Filter</b><span>${n === F.N - pmHidN(F) ? n.toLocaleString() : n.toLocaleString() + " of " + (F.N - pmHidN(F)).toLocaleString()} ${F.N === 1 || (n === F.N && n === 1) ? pmColLabel(F, "noun") : nounP}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
         ${favIds.length ? `<div class="pmx-row"><span class="pmx-lab">Yours</span><div class="pmx-chips">${chip("data-pmfav", 1, "Your favorites", favN, !!s.fav)}</div></div>` : ""}
         <div class="pmx-row"><span class="pmx-lab">Color</span><div class="pmx-sw">${colsSorted.map(c => `<button data-pmhex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" class="${f.hexes.includes(c.h.toUpperCase()) ? "on" : ""}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
           ${f.hexes.length ? `<p class="pmx-cap2">${f.hexes.map(h => `<i style="--c:${h}"></i>`).join("")}${esc(f.hexes.length === 1 ? (f.name || nameOf(f.hexes[0]).text) : f.hexes.length + " colors")} <span>· within ${f.tol}%</span></p>

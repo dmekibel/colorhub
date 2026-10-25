@@ -56,14 +56,14 @@ function awLoad() {
 }
 function awPainterLoad(slug) {
   if (AW.P.has(slug)) return Promise.resolve(AW.P.get(slug));
-  return Promise.all([awGet(AW_AN + "artists/" + slug + ".json"), awGet(AW_DIR + "p/" + slug + ".json")]).then(([A, P]) => { AW.P.set(slug, { A, P }); return AW.P.get(slug); });
+  return Promise.all([awGet(AW_AN + "artists/" + slug + ".json"), awGet(AW_DIR + "p/" + slug + ".json"), loadGallery().catch(() => null)]).then(([A, P]) => { if (GAL && GAL.hid && P && P.ix) P.ix = P.ix.filter(i => !GAL.hid[i]); AW.P.set(slug, { A, P }); return AW.P.get(slug); });   // hidden: not artworks
 }
 // data/artists/lite.json (tools/painters_lite.py): every named painter who ISN'T one of the ~840 full profiles,
 // built straight from the gallery corpus -- {slug: {n, ix:[gallery index...], co?, y0?, y1?}}. One small file
 // (a few hundred KB), loaded once, the first time any painter turns out not to have a full profile.
 function awLiteLoad() {
   if (AW.lite) return Promise.resolve(AW.lite);
-  return AW.liteLoading || (AW.liteLoading = awGet(AW_DIR + "lite.json").then(doc => { AW.lite = doc.a || {}; AW.liteLoading = null; return AW.lite; }).catch(e => { AW.liteLoading = null; throw e; }));
+  return AW.liteLoading || (AW.liteLoading = Promise.all([awGet(AW_DIR + "lite.json"), loadGallery().catch(() => null)]).then(([doc]) => { AW.lite = doc.a || {}; if (GAL && GAL.hid) for (const k in AW.lite) if (AW.lite[k].ix) AW.lite[k].ix = AW.lite[k].ix.filter(i => !GAL.hid[i]); AW.liteLoading = null; return AW.lite; }).catch(e => { AW.liteLoading = null; throw e; }));
 }
 const awHasLitePainter = slug => !!(AW.lite && AW.lite[slug]);
 function awShard(i) {

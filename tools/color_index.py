@@ -91,10 +91,17 @@ def varint(n):
 
 
 # ---------- reading one picture ----------
-def image_cells(path):
+def image_cells(path, crop=None):
+    """crop: [l, t, r, b] in thousandths (a corpus row's `crop`, tools/crop_paintings.py + tools/crop_margins.py): the painting
+    inside its frame / white page. Counted inside it, like the six colors and the pool, so a page margin never reads as white."""
     from PIL import Image
     import library as LIB
     img = Image.open(path).convert("RGB")
+    if crop:
+        W, H = img.size
+        box = (round(crop[0] * W / 1000), round(crop[1] * H / 1000), round(crop[2] * W / 1000), round(crop[3] * H / 1000))
+        if box[2] - box[0] >= 20 and box[3] - box[1] >= 8:
+            img = img.crop(box)
     if img.width > 220:                       # the 400 px thumbs (measure-img) are brought down to the 200 px the index was tuned on
         img = img.resize((200, max(1, round(img.height * 200 / img.width))), Image.BILINEAR)
     im = np.asarray(img)
@@ -118,9 +125,9 @@ def colors_cells(colors):
 
 
 def _job(a):
-    i, path = a
+    i, path = a[0], a[1]
     try:
-        u, c, n = image_cells(path)
+        u, c, n = image_cells(path, a[2] if len(a) > 2 else None)
         m = c >= FLOOR
         return i, u[m], c[m], None
     except Exception as e:
@@ -261,7 +268,7 @@ def build_paintings(args):
     for i, x in enumerate(rows):
         p = find_image(raw, x, dcache)
         if p:
-            jobs.append((i, str(p)))
+            jobs.append((i, str(p), x.get("crop") or None))
         else:
             fallback.append(i)
     print(f"{n} paintings: {len(jobs)} with a cached photo, {len(fallback)} coarse", flush=True)
