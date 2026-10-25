@@ -1,5 +1,5 @@
 /* js/paintzoom.js: the full-screen "Look closer" view for a painting page. */
-.glz-scrim{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;background:rgba(6,6,5,.97);opacity:0;transition:opacity .22s var(--ease)}
+.glz-scrim{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;background:#060605;opacity:0;transition:opacity .22s var(--ease)}
 .glz-scrim.in{opacity:1}
 .glz-top{display:flex;align-items:center;gap:12px;padding:calc(var(--top) + 10px) var(--g) 6px;flex:none}
 .glz-title{flex:1;min-width:0;font:400 15px/1.3 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -110,36 +110,54 @@
    preview is pinned to the stage's top corner (js/paintzoom.js flips it right when the ring is under it). */
 .glz-pk-layer .eyd-ret{transform:scale(var(--iz,1));will-change:transform}
 .glz-stage .eyd-prev{z-index:5}
+.glz-ph{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:blur(8px);transform:scale(1.02);pointer-events:none}
 .glz-pk-size{width:100%;padding:2px 2px 0}
 .glz-pk-layer{position:absolute;inset:0;pointer-events:none}
 .glz-pk-layer[hidden]{display:none}
-.glz-pk{width:100%;max-width:560px;display:flex;flex-direction:column;gap:6px}
+.glz-pk{width:100%;max-width:none;display:flex;flex-direction:column;gap:6px}
 .glz-pk[hidden]{display:none}
-.glz-pk-info{min-height:50px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.glz-pk-info{min-height:46px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
 .glz-pk-hint{margin:0;font:400 16px/1.35 var(--sans);color:var(--soft)}
 .glz-pk-name{display:inline-flex;align-items:center;gap:8px;max-width:100%;min-height:30px;padding:0 4px;color:var(--ink);font:400 21px/1.2 var(--serif)}
 .glz-pk-name span{min-width:0;overflow-wrap:anywhere}
 .glz-pk-name svg{flex:none;width:16px;height:16px;opacity:.8}
 .glz-pk-sub{margin:0;font:400 15px/1.3 var(--sans);color:var(--soft);font-variant-numeric:tabular-nums}
 .glz-pk-hex{letter-spacing:.02em}
-.glz-pk-strip{display:flex;gap:10px;align-items:center;overflow-x:auto;overflow-y:hidden;padding:12px 6px 10px;touch-action:pan-x;scrollbar-width:none;-webkit-overflow-scrolling:touch;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
-.glz-pk-strip::-webkit-scrollbar{display:none}
-.glz-pk-strip>:first-child{margin-left:auto}.glz-pk-strip>:last-child{margin-right:auto}   /* centered while it fits, scrolls from the left once it doesn't */
-.glz-pk-strip.lifting{touch-action:none;overflow-x:hidden}
-.glz-sw-w{position:relative;flex:none;width:44px;height:44px;transition:transform .18s var(--ease)}
-.glz-sw{flex:none;width:44px;height:44px;border-radius:10px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(128,128,128,.55);-webkit-tap-highlight-color:transparent}
-.glz-sw.on{outline:2px solid var(--ink);outline-offset:3px}
-.glz-sw-w.lift{z-index:4;transition:none;filter:drop-shadow(0 6px 10px rgba(0,0,0,.55))}
-.glz-sw-add{display:flex;align-items:center;justify-content:center;background:transparent;box-shadow:none;border:1.5px dashed rgba(236,232,223,.45);color:var(--ink);font:300 26px/1 var(--sans)}
-.glz-sw-add:active{background:rgba(236,232,223,.1)}
-.glz-sw-x{position:absolute;top:-9px;right:-9px;width:22px;height:22px;border-radius:50%;background:var(--ink);color:#141311;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px rgba(6,6,5,.9);z-index:2}
-.glz-sw-x::after{content:"";position:absolute;inset:-11px}
-.glz-pk-act{display:flex;align-items:center;justify-content:center;gap:14px;min-height:46px}
+/* the palette strip: one full-width, tall strip; the first color fills it, every added color splits it equally (js/paintzoom.js pkRenderStrip) */
+.glz-pk-strip{--cols:1;--rows:1;display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));grid-template-rows:repeat(var(--rows),minmax(0,1fr));gap:2px;
+  width:calc(100% + var(--g) * 2);margin:0 calc(var(--g) * -1);height:clamp(120px,18vh,200px);height:clamp(120px,18svh,200px);background:var(--s1,#171512);overflow:hidden;cursor:pointer;
+  touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+.glz-pk-strip:empty{cursor:default}
+.glz-seg-c{position:relative;min-width:0;min-height:0;background:var(--c);color:#141311;display:flex;align-items:flex-end;padding:10px 12px;overflow:hidden;transition:transform .18s var(--ease)}
+.glz-seg-c[data-ink="light"]{color:#fff}
+.glz-seg-c.on{box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 5px rgba(0,0,0,.75)}
+.glz-seg-live{outline:2px dashed currentColor;outline-offset:-7px}
+.glz-seg-c.lift{z-index:4;transition:none;box-shadow:0 10px 22px rgba(0,0,0,.55)}
+.glz-seg-t{display:flex;flex-direction:column;gap:2px;min-width:0;max-width:100%;pointer-events:none}
+.glz-seg-t b{font:400 15px/1.15 var(--serif);overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.glz-seg-t i{font:400 13px/1.2 var(--sans);font-style:normal;font-variant-numeric:tabular-nums;letter-spacing:.02em;opacity:.88}
+.glz-pk-strip[data-cols="1"] .glz-seg-t b{font-size:clamp(24px,7.5vw,34px)}
+.glz-pk-strip[data-cols="1"] .glz-seg-t i{font-size:16px}
+.glz-pk-strip[data-cols="2"] .glz-seg-t b{font-size:clamp(19px,5.2vw,24px)}
+.glz-pk-strip[data-cols="3"] .glz-seg-t b{font-size:17px}
+.glz-pk-strip[data-den="hex"] .glz-seg-t b{display:none}
+.glz-pk-strip[data-den="hex"] .glz-seg-c{padding:8px 6px}
+.glz-pk-strip[data-den="hex"] .glz-seg-t i{font-size:12px;letter-spacing:0}
+.glz-pk-strip[data-den="none"] .glz-seg-t{display:none}
+.glz-seg-dot{position:absolute;top:9px;left:9px;width:20px;height:20px;border-radius:50%;border:2px solid currentColor;opacity:.75;background:transparent}
+.glz-seg-dot::after{content:"";position:absolute;inset:-12px}
+.glz-seg-c.on .glz-seg-dot{background:currentColor;opacity:1}
+.glz-pk-strip[data-den="none"] .glz-seg-dot{width:14px;height:14px;top:5px;left:5px;border-width:1.5px}
+.glz-seg-x{position:absolute;top:6px;right:6px;width:30px;height:30px;border-radius:50%;background:#141311;color:#ECE8DF;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 1.5px rgba(236,232,223,.7)}
+.glz-seg-x::after{content:"";position:absolute;inset:-8px}
+.glz-pk-act{display:flex;align-items:center;justify-content:center;gap:12px;min-height:46px}
 .glz-pk-save{height:46px;padding:0 26px;border-radius:var(--r-pill,999px);background:var(--paper,#ECE8DF);color:var(--paper-ink,#141311);font:400 18px/1 var(--serif)}
 .glz-pk-save:disabled{opacity:.4}
-.glz-pk-note{font:400 15px/1.3 var(--sans);color:var(--soft)}
-@media (prefers-reduced-motion:reduce){.glz-sw-w{transition:none}}
-@media (orientation:landscape){.glz-pk-act{justify-content:flex-start}.glz-pk-info{align-items:flex-start;text-align:left}}
+.glz-pk-addb{height:46px;padding:0 20px;border-radius:var(--r-pill,999px);display:inline-flex;align-items:center;gap:8px;color:var(--ink);box-shadow:inset 0 0 0 1.5px rgba(236,232,223,.5);font:400 18px/1 var(--serif)}
+.glz-pk-addb:active{background:rgba(236,232,223,.1)}
+.glz-pk-addb:disabled{opacity:.4}
+@media (prefers-reduced-motion:reduce){.glz-seg-c{transition:none}}
+@media (orientation:landscape){.glz-pk-strip{width:100%;margin:0;height:clamp(120px,34vh,220px)}.glz-pk-act{justify-content:flex-start;flex-wrap:wrap}.glz-pk-info{align-items:flex-start;text-align:left}}
 @media (max-width:359px){.glz-seg button[data-glzv]{padding:0 10px}.glz-seg button[data-glzv="pick"]{padding:0 10px 0 9px}}
 
 /* ---- opened from a map card (js/paintzoom.js: the Details button, and on a desktop the Fit/100% buttons and the loupe hint) ---- */

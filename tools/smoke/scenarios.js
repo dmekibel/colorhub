@@ -8419,6 +8419,14 @@ scenario("paintings", "Pick a color opens the palette editor: one reticle moves,
   await t.waitFor(() => t.$(".glz-pk-name"), 6000, "the live color name under the picture");
   t.expect(t.$$(".glz-scrim .eyd-ret").length === 1, "there should be exactly one reticle");
   t.expect(t.$(".glz-scrim .eyd-prev") && !t.$(".glz-scrim .eyd-prev").hidden, "the corner preview is missing");
+  // no black sausage (David, 2026-10-25): the first time the close-up shows it is already drawn from real pixels, in the corner
+  const pv0 = t.ev(`(() => { const p = document.querySelector(".glz-scrim .eyd-prev"), cv = p.querySelector("canvas"), d = cv.getContext("2d").getImageData(cv.width >> 1, cv.height >> 1, 1, 1).data, r = p.getBoundingClientRect(), s = document.querySelector(".glz-stage").getBoundingClientRect();
+    return JSON.stringify({ lit: d[0] + d[1] + d[2] > 24, side: Math.round(r.width), nearTop: r.top - s.top < 24, nearEdge: r.left - s.left < 24 || s.right - r.right < 24, name: p.querySelector(".eyd-prev-name").textContent.length > 0 }); })()`);
+  const pvj = JSON.parse(pv0);
+  t.expect(pvj.lit && pvj.nearTop && pvj.nearEdge && pvj.name && pvj.side >= 150, `the close-up must open drawn, in a corner, at least 150px: ${pv0}`);
+  t.expect(t.$$(".glz-pk-strip .glz-seg-c").length === 1 && t.$(".glz-seg-live"), "with no colors kept, the live color fills the whole strip alone");
+  const st0 = t.$(".glz-pk-strip").getBoundingClientRect(), sg0 = t.$(".glz-seg-live").getBoundingClientRect();
+  t.expect(Math.abs(sg0.width - st0.width) < 2 && st0.height >= 110, `the first color should fill the strip: strip ${st0.width}x${st0.height}, cell ${sg0.width}`);
   t.expect(t.$$(".glz-pk-size [data-eydsize]").length === 4, "the Point / Small / Medium / Large row should sit below the palette row");
   const pts = [[.3, .3], [.6, .5], [.5, .8]];
   for (const [fx, fy] of pts) {
@@ -8427,15 +8435,25 @@ scenario("paintings", "Pick a color opens the palette editor: one reticle moves,
     await t.sleep(80);
     await t.click(t.$("[data-glzpkadd]"), { force: true, wait: 120 });
   }
-  t.expect(t.$$(".glz-sw-w").length === 3, `expected 3 swatches, got ${t.$$(".glz-sw-w").length}`);
+  t.expect(t.$$(".glz-seg-c[data-id]").length === 3, `expected 3 kept cells, got ${t.$$(".glz-seg-c[data-id]").length}`);
   t.expect(t.$$(".glz-scrim .eyd-ret").length === 1, "adding a color must not drop another reticle");
-  t.expect(t.$(".glz-sw.on"), "the last added swatch should be selected");
-  const first = t.$(".glz-sw-w .glz-sw");
-  await t.click(first, { force: true, wait: 200 });
-  t.expect(t.$(".glz-sw-w .glz-sw").classList.contains("on"), "tapping a swatch should select it");
+  t.expect(t.$(".glz-seg-c.on"), "the last added color should be selected");
+  // equal cells: three kept colors split the strip in thirds (the ring sits on the last, so no extra live cell)
+  const ws = t.$$(".glz-seg-c[data-id]").map(c => c.getBoundingClientRect().width);
+  t.expect(Math.max(...ws) - Math.min(...ws) < 2, `the cells should all be the same width: ${ws.join(",")}`);
+  // the dot selects the first cell; the x shows on the selected one
+  await t.click(t.$(".glz-seg-c[data-id] [data-glzpksel]"), { force: true, wait: 200 });
+  t.expect(t.$(".glz-seg-c[data-id]").classList.contains("on") && t.$(".glz-seg-c.on [data-glzpkx]"), "the corner dot should select a color and show its x");
+  // a tap on the strip goes straight to the full-screen palette preview; closing it returns with the same colors
+  await t.click(t.$(".glz-seg-c[data-id]:nth-child(2) .glz-seg-t"), { force: true, wait: 500 });
+  await t.waitFor(".rp-focus.cf-multi", 3000, "the palette preview after tapping the strip");
+  t.expect(t.$$(".rp-focus .cf-band").length === 3, "the preview should show the 3 kept colors");
+  await t.click(t.$(".cf-close"), { force: true, pointer: true, wait: 500 });   // the preview closes on pointerup
+  await t.waitFor(() => !t.$(".rp-focus"), 3000, "the palette preview to close");
+  t.expect(t.$(".glz-scrim") && t.$$(".glz-seg-c[data-id]").length === 3, "closing the preview should return to the picker with the same colors");
   await t.click(t.$("[data-glzclose]"), { force: true, wait: 500 });
   await t.click(await t.waitFor("[data-glpickbtn]:not([hidden])", 8000, "the Pick a color button again"), { force: true, wait: 900 });
-  t.expect(t.$$(".glz-sw-w").length === 3, "the palette should still be there after closing and reopening");
+  t.expect(t.$$(".glz-seg-c[data-id]").length === 3, "the palette should still be there after closing and reopening");
   const kept0 = t.ev(`(S.palettes || []).length`);
   await t.click(t.$("[data-glzpksave]"), { force: true, wait: 400 });
   t.expect(t.ev(`(S.palettes || []).length`) === kept0 + 1, "Save palette should add one kept palette");

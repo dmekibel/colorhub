@@ -100,14 +100,14 @@ function eydNameOf(hex) {
 
 // ---------- the preview square (shared with Look closer) ----------
 const EYD_ZOOM = 3.5;   // the close-up magnifies what's on screen by about this much
-const eydPreviewHTML = () => `<div class="eyd-prev" aria-hidden="true"><div class="eyd-prev-sq"><canvas width="280" height="280"></canvas><i class="eyd-prev-area"></i><i class="eyd-prev-x"></i></div><div class="eyd-prev-info"><i class="eyd-prev-sw"></i><span class="eyd-prev-name"></span></div></div>`;
+const eydPreviewHTML = (hidden) => `<div class="eyd-prev"${hidden ? " hidden" : ""} aria-hidden="true"><div class="eyd-prev-sq"><canvas width="440" height="440"></canvas><i class="eyd-prev-area"></i><i class="eyd-prev-x"></i></div><div class="eyd-prev-info"><i class="eyd-prev-sw"></i><span class="eyd-prev-name"></span></div></div>`;
 // the ring's on-screen diameter: 44px, growing when the averaged square is bigger than that
 const eydRingPx = (nSrc, screenPerSrc) => clamp(Math.round(nSrc * screenPerSrc), 44, 150);
 // draw the close-up centered on (fx, fy). screenPerSrc = screen pixels per source pixel right now, so the close-up
 // is ~3.5x of what's visible whatever the zoom. Smooth (not pixel art); past the picture's edge it stays dark.
 function eydPreviewDraw(root, s, fx, fy, nSrc, screenPerSrc, hex) {
   const sq = root.querySelector(".eyd-prev-sq"), cv = root.querySelector("canvas"), cx = cv.getContext("2d");
-  const pv = sq.offsetWidth || 120;
+  const pv = sq.offsetWidth || 180;
   const side = clamp(pv / (EYD_ZOOM * Math.max(screenPerSrc, 1e-3)), 14, Math.min(s.w, s.h));
   const x0 = fx * s.w - side / 2, y0 = fy * s.h - side / 2;
   cx.imageSmoothingEnabled = true; cx.imageSmoothingQuality = "high";
@@ -158,7 +158,7 @@ function eyedropAttach(el, o = {}) {
     const x = f.left + ret.fx * f.dw, y = f.top + ret.fy * f.dh, per = f.dw / src.w, d = eydRingPx(eydN(src, getSampleSize()), per);
     const inView = x >= vis.l - 1 && x <= vis.r + 1 && y >= vis.t - 1 && y <= vis.b + 1;
     ringEl.style.cssText = `--d:${d}px;left:${x}px;top:${y}px;${inView ? "" : "display:none"}`;
-    const pv = prevEl.offsetWidth || 120, pad = 8, ph = prevEl.offsetHeight || pv + 40;
+    const pv = prevEl.offsetWidth || 180, pad = 8, ph = prevEl.offsetHeight || pv + 40;
     const leftBox = { l: vis.l + pad, t: vis.t + pad }, rightBox = { l: vis.r - pad - pv, t: vis.t + pad };
     const hit = b => x > b.l - d / 2 - 4 && x < b.l + pv + d / 2 + 4 && y > b.t - d / 2 - 4 && y < b.t + ph + d / 2 + 4;
     const useRight = hit(leftBox) && !hit(rightBox);
