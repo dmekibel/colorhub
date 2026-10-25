@@ -295,6 +295,12 @@ function fdStickWire(bar) {
 // Hide the pinned stack (top bar + chip row) on scroll down, show it on scroll up (David, 2026-10-25). Phone only; transform only via
 // html.fd-hid (css/gallery.css), the safe-area band stays painted (html::before). Never hides on Overview near the top, with a sheet open,
 // or when the page is barely longer than the screen.
+// where the pinned chip row's bottom edge really is: while the stack is slid away (html.fd-hid) its rect is above the screen, so measure where it will be
+function fdBarBottom(bar) {
+  const r = bar.getBoundingClientRect();
+  if (!document.documentElement.classList.contains("fd-hid")) return r.bottom;
+  return (parseFloat(getComputedStyle(bar).top) || 0) + bar.offsetHeight;
+}
 let FD_HIDE_OFF = null;   // the one live hide-on-scroll wire (a remount replaces it)
 function fdHideWire(bar0) {
   if (FD_HIDE_OFF) FD_HIDE_OFF();
@@ -680,7 +686,9 @@ function fdMount(host, o) {
     if (Date.now() - peeked < 700) { e.preventDefault(); return; }   // the tap that ended a long-press is not an open
     const t = e.target.closest(".fd-tile[data-fk]"); if (!t) return;
     const it = items[+t.dataset.fk]; buzz(6); leave();
-    if (it.card) it.open(); else galleryPage(it.j, true, isColor ? sub.hex : null);
+    if (it.card) return it.open();
+    { const list = [], fks = []; items.forEach((x, n) => { if (!x.card && !x.head && !x.sk && x.j != null) { list.push(x.j); fks.push(n); } }); glCtxSet(list, fks, fks.indexOf(+t.dataset.fk), SKEY); }   // swiping the opened painting walks this list
+    galleryPage(it.j, true, isColor ? sub.hex : null);
   };
   grid.addEventListener("focusin", e => { const t = e.target.closest(".fd-tile[data-fk]"); if (t) fk = +t.dataset.fk; });
   function focusK(n) {
@@ -704,7 +712,7 @@ function fdMount(host, o) {
   });
   // leaving for a tile: remember how far the feed was opened and which tile was at the top of the screen, so Back can put it back exactly
   function leave() {
-    const bh = bar.getBoundingClientRect().bottom; let ak = -1, ay = 0;
+    const bh = fdBarBottom(bar); let ak = -1, ay = 0;
     live.forEach((el, k) => { const r = el.getBoundingClientRect(); if (r.bottom > bh && (ak < 0 || k < ak)) { ak = k; ay = r.top; } });
     FD_MEMO.set(SKEY, { shown, ak, ay, chip: st.chip, metric: st.metric, color: st.color });
   }
@@ -732,7 +740,7 @@ function fdMount(host, o) {
   const SUBDOT = () => { const d = chipsEl.querySelector(".fd-dot"); if (d) d.hidden = !fdChanged(); };   // the active chip's mark that its Settings are not the defaults
   // Map: the same list as the painting map, the painting nearest the top of the screen in the middle, the same choices as filters
   const topPainting = () => {
-    const bh = bar.getBoundingClientRect().bottom; let ak = -1;
+    const bh = fdBarBottom(bar); let ak = -1;
     live.forEach((el, k) => { const r = el.getBoundingClientRect(); if (!items[k].head && !items[k].card && r.bottom > bh && (ak < 0 || k < ak)) ak = k; });
     if (ak < 0) ak = items.findIndex(x => !x.head && !x.card);
     return ak >= 0 ? items[ak].j : -1;
