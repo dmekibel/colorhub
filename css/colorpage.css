@@ -622,3 +622,14 @@
 .nt-cmp{margin-top:26px}
 .rc-nt .ar-h3{margin-top:30px}
 .nt-cmp .fam-cmp-b{justify-content:flex-end;text-align:right}
+
+/* People, time and place as doors (js/richcolor.js): a decade bar, a country and "all the painters" each open the matching feed tab */
+.rc-spark{gap:2px;align-items:stretch;height:76px}
+.rc-spark-c{flex:1;min-width:0;display:flex;align-items:flex-end;padding:0;background:none;border:0;position:relative}
+.rc-spark-c i{flex:1}
+.rc-spark-c:active i{opacity:1}
+.rc-doors{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 6px}
+.rc-door{min-height:44px;padding:0 16px;border-radius:99px;border:1px solid var(--rule-strong,rgba(236,232,223,.28));background:var(--cp-surface-2);color:var(--ink);font:400 17px/1 var(--serif)}
+.rc-door:active{transform:scale(.97)}
+.rc-door-all{margin-top:12px}
+.rc-spark{margin-bottom:34px}

@@ -663,6 +663,7 @@ function rcPaintersHTML(name, port) {
   return `<section class="rc-sec rc-painters"><h3>Painters who use it</h3>
     ${rows.slice(0, 5).map(r => { const slug = r.s || routeSlug(r.a);
       return `<button type="button" class="kin rc-plain rc-painter" data-awpainter="${esc(slug)}">${rcPainterPortHTML(slug, port)}<b>${esc(r.a)}</b><span>${r.l.toFixed(1)}× more than their peers, from ${r.n} painting${r.n === 1 ? "" : "s"} here</span></button>`; }).join("")}
+    <button type="button" class="rc-door rc-door-all" data-rc-feed="painters">All the painters who use it</button>
     <p class="fine">Lift vs. the same decade and country (or country, or the whole archive, when that group is too small), as photographed, from the gallery's 23,781 paintings (n per painter above).</p>
   </section>`;
 }
@@ -735,7 +736,11 @@ function rcGroupHits(groups, kind, name) {
 function rcSparkline(hits, peakKey) {
   const keys = hits.map(h => h.key).sort((a, b) => (+a) - (+b));
   const max = Math.max(...hits.map(h => h.share)) || 1;
-  return `<div class="rc-spark">${keys.map(k => { const h = hits.find(x => x.key === k); const pct = Math.max(6, Math.round(h.share / max * 100)); return `<i style="height:${pct}%" class="${k === peakKey ? "on" : ""}"><em>${esc(String(k).slice(2))}</em></i>`; }).join("")}</div>`;
+  // every bar is a door (David, 2026-10-25: "every number is a door"): it opens the Era tab on that decade
+  // a label under about six bars and the peak, never every one: thirty-seven two-digit labels ran into each other
+  const step = Math.max(1, Math.ceil(keys.length / 6)), pk = keys.indexOf(String(peakKey));
+  const labelled = i => i === pk || (i % step === 0 && (pk < 0 || Math.abs(i - pk) >= Math.max(2, step / 1.5)));
+  return `<div class="rc-spark">${keys.map((k, i) => { const h = hits.find(x => x.key === k); const pct = Math.max(6, Math.round(h.share / max * 100)); return `<button type="button" class="rc-spark-c" data-rc-era="${esc(String(k))}" aria-label="Paintings near the ${esc(String(k))}s"><i style="height:${pct}%" class="${k === peakKey ? "on" : ""}">${labelled(i) ? `<em>${esc(String(k))}</em>` : ""}</i></button>`; }).join("")}</div>`;
 }
 function rcWhenWhereHTML(name) {
   if (!RC_GROUPS) return "";
@@ -753,9 +758,26 @@ function rcWhenWhereHTML(name) {
   return `<section class="rc-sec rc-whenwhere"><h3>When and where</h3>
     ${decades.length > 1 ? rcSparkline(decades, peakDecade.key) : ""}
     <p>${sentences.join(" ")}</p>
-    <p class="fine">From the gallery's 23,781 paintings, as photographed; country is often the painter's nationality, and movement data covers only part of the corpus.</p>
+    ${countries.length ? `<div class="rc-doors" role="group" aria-label="Countries where it shows up most">${countries.slice().sort((p, q) => q.share - p.share).slice(0, 4).map(c => `<button type="button" class="rc-door" data-rc-place="${esc(c.key)}">${esc(c.key)}</button>`).join("")}</div>` : ""}
+    <p class="fine">From the gallery's 23,781 paintings, as photographed; country is often the painter's nationality, and movement data covers only part of the corpus. Tap a decade or a country to see those paintings.</p>
   </section>`;
 }
+// the page's doors into the feed (David, 2026-10-25): a decade bar, a country, "all the painters". The feed may still be waiting on the
+// gallery index, so a tap retries for a few seconds rather than doing nothing.
+function rcFeedGo(kind, pick, tries = 0) {
+  const host = document.querySelector("[data-rpfeed]"); if (!host) return;
+  if (host.fdOpen) return host.fdOpen(kind, pick);
+  if (tries < 10) setTimeout(() => rcFeedGo(kind, pick, tries + 1), 600); else toast("The paintings are still loading");
+}
+document.addEventListener("click", e => {
+  const era = e.target.closest("[data-rc-era]"), place = e.target.closest("[data-rc-place]"), feed = e.target.closest("[data-rc-feed]");
+  if (!era && !place && !feed) return;
+  e.preventDefault(); buzz(5);
+  if (era) return rcFeedGo("era", Math.floor(+era.dataset.rcEra / 10));
+  if (feed) return rcFeedGo(feed.dataset.rcFeed);
+  if (typeof fdFacets !== "function") return;
+  loadGallery().then(() => fdFacets()).then(F => { const k = F.meta.countries.indexOf(place.dataset.rcPlace); rcFeedGo("place", k >= 0 ? k + 1 : 0); }).catch(() => rcFeedGo("place", 0));
+});
 function rcWhenWhereSection(name, hex) {
   const id = "rc-ww-" + Math.random().toString(36).slice(2, 8);
   rcLoadGroups().then(() => {

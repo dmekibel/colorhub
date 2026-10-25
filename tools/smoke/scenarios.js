@@ -4673,6 +4673,26 @@ scenario("pages", "Keep exploring on a color page: the feed is the body under th
   t.expect(t.$("[data-rp-about]").hidden && !t.$(".fd-grid").hidden, "Paintings didn't swap the feed back");
   t.notes.push(`color feed first ranking ${t.ev("FD_LAST.ms")} ms`);
 });
+// David, 2026-10-25: every number is a door. A decade bar and a country on "When and where" open the Era and Place feeds on that decade or
+// country; "All the painters" opens Painters. The page's own chip row (not a scroll to the bottom) is what takes you there.
+scenario("pages", "When and where: a decade bar opens the Era feed and a country opens Place", async t => {
+  await H.openPage(t, "#/color/camel", "Camel");
+  const ww = await t.waitFor(".rc-whenwhere", 20000, "the When and where section");
+  await t.waitFor(() => t.$("[data-rpfeed] .fd-bar:not(.fd-pre)") ? true : null, 25000, "the real chip row");
+  const bars = t.$$(".rc-spark-c", ww);
+  t.expect(bars.length >= 5, `the decade bars are missing (${bars.length})`);
+  const bar = bars[Math.floor(bars.length / 3)], dec = Math.floor(+bar.dataset.rcEra / 10) * 10;
+  t.expect(dec > 0, `the bar has no decade (${bar.outerHTML.slice(0, 80)})`);
+  await t.click(bar, { wait: 600 });
+  await t.waitFor(() => t.text(".fd-chip.on") === "Era" && t.$$(".fd-tile[data-fk]").length >= 4 ? true : null, 25000, "the Era feed after the bar tap");
+  t.expect(new RegExp("Nearest the " + dec + "s").test(t.text(".fd-lead")), `the Era lead is "${t.text(".fd-lead")}", not the ${dec}s`);
+  await t.click(".fd-chip[data-fc=about]", { wait: 400 });
+  const door = await t.waitFor(() => t.$(".rc-door[data-rc-place]"), 5000, "a country door");
+  const country = door.dataset.rcPlace;
+  await t.click(door, { wait: 600 });
+  await t.waitFor(() => t.text(".fd-chip.on") === "Place" && t.$$(".fd-tile[data-fk]").length >= 4 ? true : null, 25000, "the Place feed after the country tap");
+  t.expect(t.text(".fd-lead").startsWith(country), `the Place lead is "${t.text(".fd-lead")}", not ${country} first`);
+});
 scenario("pages", "Keep exploring on a color page: each chip re-ranks with its own plain captions", async t => {
   await cfeedOpen(t, "#/color/teal");
   await cfeedChip(t, "painters");

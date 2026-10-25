@@ -229,6 +229,14 @@ function fdMount(host, o) {
   const showAbout = on => { if (!aboutEl) return; aboutEl.hidden = !on; lead.hidden = on; grid.hidden = on; state.hidden = on; if (secHead) secHead.hidden = on; host.dataset.fdTab = on ? "about" : eff; };
   // a tab change keeps the chips where they are: if you had scrolled below the top of this section, it lands on its top
   const tabTop = force => { const a = artTop(), ah = a ? a.getBoundingClientRect().height : 0, y = host.getBoundingClientRect().top + scrollY - ah; if (force || scrollY > y + 4) scrollTo(0, Math.max(0, y)); };
+  // a door from the page (js/richcolor.js): open a feed tab, on a chosen decade (Era: 188 = the 1880s) or country (Place: its 1-based index)
+  host.fdOpen = (k, pick) => {
+    if (off(k)) { toast(off(k)); return; }
+    const was = eff;
+    st.chip = k; st.color = pick | 0; save(); buzz(4);
+    if (was === "about") showAbout(false);
+    rerank(false); tabTop(true); setTimeout(() => tabTop(true), 60); setTimeout(() => tabTop(true), 400);
+  };
   host.fdChip = k => { const b = chipsEl.querySelector(`[data-fc="${k}"]`); if (b) b.click(); };
 
   // ----- chips -----
@@ -251,10 +259,10 @@ function fdMount(host, o) {
     if (why) { buzz(4); leadDraw(why); return; }
     const deep = aboutEl ? scrollY > host.getBoundingClientRect().top + scrollY - (artTop() ? artTop().getBoundingClientRect().height : 0) + 4 : false;
     if (aboutEl && k === "about") { if (eff === "about") return; st.chip = "about"; save(); buzz(4); chipsDraw(); showAbout(true); if (deep) tabTop(true); return; }
-    if (aboutEl && eff === "about") { showAbout(false); st.chip = k; save(); buzz(4); rerank(false); if (deep) { tabTop(true); setTimeout(() => tabTop(true), 60); setTimeout(() => tabTop(true), 400); } return; }   // About -> a feed tab: the chips stay where they are
+    if (aboutEl && eff === "about") { showAbout(false); st.chip = k; if (isColor) st.color = 0; save(); buzz(4); rerank(false); if (deep) { tabTop(true); setTimeout(() => tabTop(true), 60); setTimeout(() => tabTop(true), 400); } return; }   // About -> a feed tab: the chips stay where they are
     if (!isColor && k === "color" && eff === "color") return bySheet();
     if (k === st.chip && k === eff) return;
-    st.chip = k; save(); buzz(4); rerank(true);
+    st.chip = k; if (isColor) st.color = 0; save(); buzz(4); rerank(true);
   };
 
   // ----- the "by…" sheet (Color's metric switch, js/twins.js) -----
@@ -671,26 +679,26 @@ async function fdcRankPainters(ctx) {
   [...cnt.entries()].filter(([a, n]) => !seen.has(a) && n >= 2).sort((x, y) => y[1] - x[1]).slice(0, 80).forEach(([a]) => items.push({ j: best.get(a).i, cap: "Also used by " + fdShortName(F.meta.artists[a - 1][0]), byTitle: 1 }));
   return items.length ? { items } : { empty: "No painter in the archive stands out for this color yet." };
 }
-async function fdcRankEra(ctx) {
+async function fdcRankEra(ctx, st) {
   const b = await fdcBase(ctx.sub), G = GAL, pool = b.rows.filter(r => G.year[r.i] !== GL_UNDATED);
   if (pool.length < 30) return { empty: "Too few paintings that hold this color or its neighbors have a year, so there is no era to read." };
   const dec = new Map(); pool.slice(0, 300).forEach(r => { const d = Math.floor(G.year[r.i] / 10); dec.set(d, (dec.get(d) || 0) + 1); });
-  const top = [...dec.entries()].sort((a, b2) => b2[1] - a[1] || a[0] - b2[0])[0][0], y0 = top * 10 + 5;
+  const picked = !!(st && st.color > 0), top = picked ? st.color : [...dec.entries()].sort((a, b2) => b2[1] - a[1] || a[0] - b2[0])[0][0], y0 = top * 10 + 5;
   const sc = pool.map(r => [r, Math.abs(G.year[r.i] - y0) + r.de * 2]).sort((a, b2) => a[1] - b2[1]).slice(0, FD_KEEP);
-  return { lead: `Nearest the ${top * 10}s, the decade with the most of this color`, items: sc.map(([r]) => ({ j: r.i, cap: `${Math.floor(G.year[r.i] / 10) * 10}s` })), end: b.groups.length ? "That is everything close to this color and its neighbors." : "" };
+  return { lead: picked ? `Nearest the ${top * 10}s, closest to this color first` : `Nearest the ${top * 10}s, the decade with the most of this color`, items: sc.map(([r]) => ({ j: r.i, cap: `${Math.floor(G.year[r.i] / 10) * 10}s` })), end: b.groups.length ? "That is everything close to this color and its neighbors." : "" };
 }
-async function fdcRankPlace(ctx) {
+async function fdcRankPlace(ctx, st) {
   const [b, F] = await Promise.all([fdcBase(ctx.sub), fdFacets()]), pool = b.rows.filter(r => F.country[r.i]);
   if (pool.length < 30) return { empty: "Too few paintings that hold this color or its neighbors have a country on record, so there is no place to read." };
   const cn = new Map(); pool.slice(0, 300).forEach(r => cn.set(F.country[r.i], (cn.get(F.country[r.i]) || 0) + 1));
-  const co = [...cn.entries()].sort((a, b2) => b2[1] - a[1] || a[0] - b2[0])[0][0], tiers = fdRegions(F, co), items = [];
+  const picked = !!(st && st.color > 0 && F.meta.countries[st.color - 1]), co = picked ? st.color : [...cn.entries()].sort((a, b2) => b2[1] - a[1] || a[0] - b2[0])[0][0], tiers = fdRegions(F, co), items = [];
   for (const r of pool) {
     const c = F.country[r.i]; let tier = 0;
     if (c !== co) { tier = -1; for (let k = 0; k < tiers.length; k++) if (tiers[k].has(c)) { tier = k + 1; break; } if (tier < 0) continue; }
     items.push([r, tier * 100 + r.de]);
   }
   items.sort((a, b2) => a[1] - b2[1]);
-  return { lead: `${F.meta.countries[co - 1]} first, the country with the most of this color, then its region`, items: items.slice(0, FD_KEEP).map(([r]) => ({ j: r.i, cap: F.meta.countries[F.country[r.i] - 1] })), end: b.groups.length ? "That is everything close to this color and its neighbors." : "" };
+  return { lead: picked ? `${F.meta.countries[co - 1]} first, then its region, closest to this color first` : `${F.meta.countries[co - 1]} first, the country with the most of this color, then its region`, items: items.slice(0, FD_KEEP).map(([r]) => ({ j: r.i, cap: F.meta.countries[F.country[r.i] - 1] })), end: b.groups.length ? "That is everything close to this color and its neighbors." : "" };
 }
 
 // ---------- Other worlds: one card per thing, a few from each world in turn ----------
