@@ -169,7 +169,7 @@ async function fdRankVibe(ctx) {
   const pg = typeof vibeNeighbors === "function" ? fdVibePager(ctx.i) : null, first = pg ? await pg(60) : [];
   const items = first.map(n => ({ j: n.j, cap: fdVibeCap(n.sim), sim: n.sim }));
   if (!items.length) { ctx.vibeOff = true; return { empty: FD_VIBE_NONE }; }
-  const res = { items, end: "That is everything the model can reach from this one", map: `arr=look&on=${ctx.i}`, moreDone: false };
+  const res = { items, end: "That is everything the model can reach from this one", map: `arr=look&lk=grid&on=${ctx.i}&hit=1`, moreDone: false };
   res.next = async () => { const page = await pg(FD_TAIL); if (!page.length) { res.moreDone = true; return; } page.forEach(n => res.items.push({ j: n.j, cap: "" })); };
   return res;
 }
