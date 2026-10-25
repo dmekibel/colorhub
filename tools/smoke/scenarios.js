@@ -4438,6 +4438,31 @@ async function feedScroll(t) {
 }
 const feedCaps = t => t.$$(".fd-tile[data-fk] .fd-cap").map(e => t.text(e));
 const feedTop = t => { const r = t.$(".fd-grid").getBoundingClientRect(); return r.top + t.w.scrollY; };
+// The pinned stack (top bar + chip row): sits right under the safe area, hides on scroll down, returns on scroll up (David, 2026-10-25)
+scenario("paintings", "the pinned bar sits under the safe area and hides on scroll down then returns on scroll up", async t => {
+  const INSET = 62;
+  await t.open("#/gallery/12", { settle: 600 });
+  { const st = t.w.document.createElement("style"); st.textContent = `:root{--top:${INSET}px !important}`; t.w.document.head.appendChild(st); }
+  t.w.location.hash = "#/home"; await t.sleep(300); t.w.location.hash = "#/gallery/12"; await t.sleep(300);
+  await t.waitFor("[data-glfeed]", 15000, "the feed's host");
+  await feedPick(t, "color");
+  const bar = () => t.$(".gl-page > .art-top"), chips = () => t.$("[data-glfeed] .fd-bar"), ty = el => new t.w.DOMMatrix(t.w.getComputedStyle(el).transform).m42;
+  const sc = async y => { t.w.scrollTo(0, y); t.w.dispatchEvent(new t.w.Event("scroll")); await t.sleep(120); };
+  const yEnd = 2400;
+  await sc(0); for (let y = 600; y <= yEnd; y += 300) await sc(y); await t.sleep(500);
+  t.expect(ty(bar()) < -20 && ty(chips()) < -60 && t.w.document.documentElement.classList.contains("fd-hid"), `after scrolling down to the feed the bar is at ${ty(bar())} / chips at ${ty(chips())}, expected hidden (y ${t.w.scrollY}, H ${t.w.document.documentElement.scrollHeight}, ${t.w.document.documentElement.className}, tiles ${t.$$(".fd-tile").length}, pin ${t.ev("(()=>{const b=document.querySelector(\"[data-glfeed] .fd-bar\");const p=b.parentElement;return Math.round(p.getBoundingClientRect().top+scrollY)+\"/\"+getComputedStyle(b).top+\"/\"+typeof fdHideWire+\"/\"+b.className})()")})`);
+  await sc(t.w.scrollY - 40); await sc(t.w.scrollY - 60); await t.sleep(500);
+  t.expect(ty(bar()) === 0 && ty(chips()) === 0, `a small scroll up left the bar at ${ty(bar())} / chips at ${ty(chips())}, expected back (y ${t.w.scrollY}, sheet ${!!t.$(".sheet")}, ${t.w.document.documentElement.className})`);
+  const top0 = bar().getBoundingClientRect().top;
+  t.expect(Math.abs(top0) <= 1, `the bar's top is ${top0}px, expected 0 (sticky under the band)`);
+  const btn = t.$(".gl-page > .art-top [data-back]").getBoundingClientRect();
+  t.expect(btn.top >= INSET + 3 && btn.top <= INSET + 6.5, `the buttons start ${btn.top - INSET}px under the safe area, expected 4px`);
+  const chipTop = chips().getBoundingClientRect().top, barBottom = bar().getBoundingClientRect().bottom;
+  t.expect(Math.abs(chipTop - barBottom) <= 2, `the chip row starts ${chipTop - barBottom}px from the bar`);
+  t.expect(barBottom - INSET <= 54, `the bar is ${barBottom - INSET}px tall under the inset, expected ~52`);
+  t.ev("scrollTo(0,0)"); await t.sleep(300);
+  t.expect(ty(bar()) === 0 && !t.w.document.documentElement.classList.contains("fd-hid"), "at the top the bar is not shown");
+});
 scenario("paintings", "Keep exploring: a feed at the bottom of a painting page, four chips, closest palette first, 24 at a time, a bounded number of live pictures", async t => {
   await feedOpen(t, 12);
   t.expect(t.$$(".fd-chip").map(b => t.text(b).replace(/ ·.*/, "")).join() === "Overview,Color,Vibe,Painter,Era,Place", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}", not Overview, Color, Vibe, Painter, Era, Place`);

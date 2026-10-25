@@ -290,6 +290,40 @@ function fdStickWire(bar) {
   addEventListener("scroll", h, { passive: true }); addEventListener("resize", h);
   cleanup.push(() => { removeEventListener("scroll", h); removeEventListener("resize", h); });
   setTimeout(run, 60);
+  fdHideWire(bar);
+}
+// Hide the pinned stack (top bar + chip row) on scroll down, show it on scroll up (David, 2026-10-25). Phone only; transform only via
+// html.fd-hid (css/gallery.css), the safe-area band stays painted (html::before). Never hides on Overview near the top, with a sheet open,
+// or when the page is barely longer than the screen.
+function fdHideWire(bar0) {
+  let bar = bar0;
+  const root = document.documentElement;
+  let last = scrollY, up = 0, down = 0, hid = false, raf = 0;
+  const topBar = () => document.querySelector(".gl-page > .art-top, .aw-page > .art-top, .rp-bar.on");
+  const set = on => {
+    if (on === hid) return;
+    if (on) {
+      const a = topBar(); if (!a) return;
+      const ah = Math.round(a.getBoundingClientRect().height), bh = Math.round(bar.getBoundingClientRect().height);
+      root.style.setProperty("--fd-ah", (a.classList.contains("rp-bar") ? 0 : Math.max(0, ah - 1)) + "px"); root.style.setProperty("--fd-bh", (a.classList.contains("rp-bar") ? ah + bh : bh + 1) + "px");
+      root.style.setProperty("--fd-band", a.classList.contains("rp-bar") ? getComputedStyle(a).backgroundColor : "");
+    }
+    hid = on; root.classList.toggle("fd-hid", on);
+  };
+  const pinY = () => { const p = bar.parentElement; return p ? p.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(bar).top) || 0) : 0; };
+  const run = () => {
+    raf = 0; if (!bar.isConnected) bar = document.querySelector(".fd-bar:not(.fd-pre)"); if (!bar) return;
+    if (root.classList.contains("desk")) { set(false); return; }
+    const y = scrollY, dy = y - last; last = y;
+    if (dy > 0) { down += dy; up = 0; } else if (dy < 0) { up -= dy; down = 0; }
+    const py = pinY(), about = !!bar.querySelector(".fd-chip.on[data-fc='about'],.fd-chip.on[data-awtab='about'],.fd-chip.on[data-awtab='overview']");
+    const long = root.scrollHeight > innerHeight * 1.4, sheetOpen = !!document.querySelector(".sheet");
+    if (sheetOpen || !long || y <= py + 24 || (about && y < py + 240)) { set(false); return; }
+    if (!hid && down > 12) set(true); else if (hid && up >= 8) set(false);
+  };
+  const h = () => { if (!raf) raf = requestAnimationFrame(run); };
+  addEventListener("scroll", h, { passive: true });
+  cleanup.push(() => { removeEventListener("scroll", h); hid = false; root.classList.remove("fd-hid"); });
 }
 
 // ---------- the feed ----------
