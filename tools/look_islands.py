@@ -29,6 +29,7 @@ GAP = 6            # clear cells between any two islands at spread 1
 MIN_N = 150        # smaller clusters merge into their nearest neighbor
 BIG_N = 9000       # a cluster above this is cut into sub-islands of ~SUB_N
 SUB_N = 4500
+RESTARTS = 40      # jittered restarts of the island placement (lowest stress wins)
 SUB_GAP = 3        # clear cells between sub-islands of one parent (they sit closer than top-level islands)
 TAG_OK = 94        # tags 0..93 are the genres and things (before the named saints and myths): the only ones used for labels
 EXTRA_TAGS = ("saint", "angel", "crucifixion", "dance", "flag")
@@ -56,7 +57,11 @@ def plural(n):
     return n.capitalize() + "s"
 
 
-def clusters(Y, seed=11):
+CARVE_MIN = 150     # a sub-cluster at least this big that does not look like its island is carved out as an island of its own
+CARVE_COS = 0.76    #... when its CLIP centroid is this far from the island's CLIP centroid (cosine below it)
+
+
+def clusters(Y, seed=11, E=None):
     """HDBSCAN on a sample, then everything else by nearest sampled neighbors. Returns (labels, parent per label)."""
     from sklearn.cluster import HDBSCAN, KMeans
     from sklearn.neighbors import NearestNeighbors
@@ -80,6 +85,7 @@ def clusters(Y, seed=11):
     for j in range(nb.shape[1]): cnt[np.arange(n), nb[:, j]] += 1
     L = cnt.argmax(1).astype(np.int32)
     L = merge_small(L, Z)
+    if E is not None: L = carve_outliers(L, Z, E)
     return split_big(L, Z)
 
 
@@ -93,6 +99,28 @@ def merge_small(L, Z):
         others = [i for i in ids if i != s]
         t = min(others, key=lambda i: ((cen[i] - cen[s]) ** 2).sum())
         L[L == s] = t
+
+
+def carve_outliers(L, Z, E):
+    """HDBSCAN found one big island, but inside it a tight bump of paintings that look nothing like the rest (E = unit CLIP vectors, zero
+    rows = no vector): e.g. 184 Native American group drawings absorbed into 'Flowers and still lifes'. Each such sub-cluster (>= CARVE_MIN
+    paintings, CLIP centroid cosine to its island's centroid < CARVE_COS) becomes its own island, so the semantic placement can put it
+    beside other figure paintings."""
+    from sklearn.cluster import HDBSCAN
+    L = L.copy(); nxt = L.max() + 1
+    have = np.abs(E).sum(1) > 0
+    for i in np.unique(L):
+        m = np.where(L == i)[0]
+        if len(m) < 2 * CARVE_MIN: continue
+        ce = E[m[have[m]]].mean(0); ce /= np.linalg.norm(ce) + 1e-9
+        lab = HDBSCAN(min_cluster_size=CARVE_MIN, min_samples=15, cluster_selection_method="leaf", copy=True).fit(Z[m]).labels_
+        for c in range(lab.max() + 1):
+            s = m[lab == c]; sh = s[have[s]]
+            if len(s) < CARVE_MIN or len(sh) < 100: continue
+            v = E[sh].mean(0); v /= np.linalg.norm(v) + 1e-9
+            if float(ce @ v) < CARVE_COS:
+                L[s] = nxt; print(f"  carved {len(s)} paintings out of island {i} (CLIP cosine {float(ce @ v):.2f}) as island {nxt}", flush=True); nxt += 1
+    return L
 
 
 def split_big(L, Z):
@@ -152,10 +180,10 @@ def assign(P, cx, cy):
     return out
 
 
-def place(cen, r, par):
+def place(cen, r, par, spread=1.0, pull=0.004):
     """Centers (cells) for the islands: UMAP centroids scaled, then relaxed until every pair is clear by GAP (SUB_GAP for siblings)."""
     K = len(r)
-    sc = np.sqrt((r ** 2).sum() / max(1e-9, ((cen - cen.mean(0)) ** 2).sum())) * 0.8
+    sc = np.sqrt((r ** 2).sum() / max(1e-9, ((cen - cen.mean(0)) ** 2).sum())) * 0.8 * spread
     base = (cen - cen.mean(0)) * sc
     p = base.copy()
     for it in range(1500):
@@ -169,7 +197,7 @@ def place(cen, r, par):
             push = (np.where(ov > 0, ov, 0) / dist)[:, None] * d * 0.5
             p[i] += push.sum(0) * 0.5
             moved += np.abs(push).sum()
-        p += (base - p) * 0.004   # a faint pull back to where UMAP put it
+        p += (base - p) * pull   # a faint pull back to where UMAP put it
         if moved < 1e-3 and it > 50: break
     # final hard pass: separate whatever the spring left touching
     for _ in range(300):
@@ -183,6 +211,76 @@ def place(cen, r, par):
                     sh = d / dist * (need - dist) / 2 + 1e-3; p[j] += sh; p[i] -= sh; bad = True
         if not bad: break
     return p
+
+
+def place_semantic(S, D, r, par, iters=800):
+    """Island centers from the semantic layout S (MDS of centroid distances D). Plain 'scale S up, then push overlaps apart' wrecks the
+    neighbors (the islands are big discs, packed ~65% dense), so this is stress majorization with a lower bound: every pair has a
+    target distance max(r_i + r_j + gap, sigma * D_ij). Close-in-meaning pairs are asked to just touch (a clear gap apart), far pairs
+    keep their semantic distance. Guttman iterations (weights 1/target^2: local pairs matter most), then a hard overlap pass."""
+    K = len(r); pa = np.array(par)
+    gap = np.where(pa[:, None] == pa[None, :], SUB_GAP, GAP).astype(np.float64)
+    need = r[:, None] + r[None, :] + gap
+    near = np.argsort(D + np.eye(K) * 9, axis=1)[:, :3]
+    sig = float(np.median([need[k, j] / max(D[k, j], 1e-6) for k in range(K) for j in near[k]]))
+    T = np.maximum(need, sig * D); np.fill_diagonal(T, 0)
+    W = 1 / np.maximum(T, 1) ** 2; np.fill_diagonal(W, 0)
+    def run(p):
+        for it in range(iters):
+            d = p[:, None, :] - p[None, :, :]
+            dist = np.sqrt((d ** 2).sum(-1)) + 1e-9
+            tgt = p[None, :, :] + (T / dist)[:, :, None] * d
+            new = (W[:, :, None] * tgt).sum(1) / W.sum(1, keepdims=True)
+            mv = np.abs(new - p).max(); p = new
+            if mv < 1e-3: break
+        dist = np.hypot(p[:, None, 0] - p[None, :, 0], p[:, None, 1] - p[None, :, 1])
+        return p, float((W * (dist - T) ** 2).sum())
+    # stress majorization finds a local minimum: start from the MDS layout and from RESTARTS jittered copies of it (fixed seeds), keep the lowest stress
+    base = (S - S.mean(0)) * sig
+    best = None
+    for r_ in range(RESTARTS + 1):
+        p0 = base if r_ == 0 else base + np.random.RandomState(r_).randn(K, 2) * base.std() * 0.35
+        p, st = run(p0.copy())
+        if best is None or st < best[1]: best = (p, st)
+    p = best[0]
+    for _ in range(400):   # final hard pass: no overlaps at all
+        bad = False
+        for i in range(K):
+            for j in range(i + 1, K):
+                dd = p[j] - p[i]; dist = np.hypot(*dd) + 1e-9
+                if dist < need[i, j] - 0.01:
+                    sh = dd / dist * (need[i, j] - dist) / 2 + 1e-3; p[j] += sh; p[i] -= sh; bad = True
+        if not bad: break
+    return p - p.mean(0)
+
+
+def island_centroids(E, L, K):
+    """Unit CLIP centroids per island after removing the archive's mean picture (so cosines tell islands apart instead of all being ~0.8)."""
+    have = np.abs(E).sum(1) > 0
+    mu = E[have].mean(0)
+    C = np.zeros((K, E.shape[1]), np.float64)
+    for k in range(K):
+        m = np.where((L == k) & have)[0]
+        C[k] = (E[m] - mu).mean(0)
+    return C / (np.linalg.norm(C, axis=1, keepdims=True) + 1e-9)
+
+
+def semantic_layout(C, par, Zcen):
+    """2-D positions for the islands by MEANING, not by where UMAP happened to drop each cluster. UMAP keeps neighborhoods inside a
+    cluster, but the arrangement of clusters relative to each other is arbitrary (its graph has almost no edges between them).
+    Metric MDS (SMACOF, fixed seed) on the cosine distance between island centroids puts portraits near portraits, landscapes near
+    landscapes and heraldry / diagrams at the rim. Islands of one family (shared `par`) are pulled a little closer. The result is
+    rotated/reflected (orthogonal Procrustes) onto the old UMAP centroid layout so the map keeps its familiar orientation."""
+    from sklearn.manifold import MDS
+    K = len(C)
+    D = np.clip(1 - C @ C.T, 0, None); np.fill_diagonal(D, 0)
+    pa = np.array(par)
+    D = np.where(pa[:, None] == pa[None, :], D * 0.75, D); np.fill_diagonal(D, 0)
+    S = MDS(n_components=2, dissimilarity="precomputed", metric=True, n_init=12, max_iter=2000, random_state=0, normalized_stress="auto").fit_transform(D)
+    S -= S.mean(0); Zc = Zcen - Zcen.mean(0)
+    u, _, vt = np.linalg.svd(S.T @ Zc)
+    S = S @ (u @ vt)
+    return S, D
 
 
 def labels_for(L, K, ids, root, tags_path, nj):
@@ -244,10 +342,10 @@ def labels_for(L, K, ids, root, tags_path, nj):
     return out
 
 
-def build(Y, ids, hsh, out_dir, root, sfx, tags_path):
+def build(Y, ids, hsh, out_dir, root, sfx, tags_path, E=None, cache_dir=None):
     n = len(Y)
     t0 = time.time()
-    L, parent = clusters(Y)
+    L, parent = clusters(Y, E=E)
     K = int(L.max()) + 1
     print(f"islands: {K} ({time.time() - t0:.0f}s); sizes {np.bincount(L).min()}..{np.bincount(L).max()}", flush=True)
     Z = (Y - Y.mean(0)) / Y.std(0).mean()
@@ -269,13 +367,27 @@ def build(Y, ids, hsh, out_dir, root, sfx, tags_path):
         mid[k] = (cx.mean(), cy.mean())
         rad[k] = np.sqrt(((cx - mid[k, 0]) ** 2 + (cy - mid[k, 1]) ** 2).max())
     # place by the *blob's* middle of mass; local box origin offset = box centre (w/2,h/2) vs mass centre, kept in the table
-    pos = place(cen, rad + 0.5, parent)
+    S = None
+    if E is not None:
+        C = island_centroids(E, L, K)
+        S, D = semantic_layout(C, parent, cen)
+        pos = place_semantic(S, D, rad + 0.5, parent)
+        print("  islands placed by CLIP-centroid MDS + stress with a no-overlap lower bound", flush=True)
+    else: pos = place(cen, rad + 0.5, parent)
     lab = labels_for(L, K, ids, root, tags_path, None)
+    zs = None
+    if E is not None and cache_dir is not None:
+        import look_vocab
+        zs = look_vocab.zero_shot(E, L, K, cache_dir, top=2)   # [(label, kind, z, vote share)] best two phrases read from the pictures
     isl = []
     for k in range(K):
         isl.append({"n": int((L == k).sum()), "w": int(w[k]), "h": int(h[k]), "mx": round(float(mid[k, 0]), 1), "my": round(float(mid[k, 1]), 1),
                     "cx": round(float(pos[k, 0]), 1), "cy": round(float(pos[k, 1]), 1), "r": round(float(rad[k]) + 0.5, 1), "par": int(parent[k]), "as": round(aspects[k], 2), "an": round(angs[k], 3), "lab": lab[k]})
+        if zs:
+            isl[-1]["zs"] = [list(z) for z in zs[k]]
+            z0 = zs[k][0]   # a first-pass label for files nothing else renames (tools/island_names.py overwrites the default file's labels with its richer names)
+            if (isl[-1]["n"] < 1000 and z0[2] >= 2.5) or (lab[k] in ("", "Mixed") and z0[2] >= 2.0): isl[-1]["lab"] = z0[0]
     buf = bytearray(b"LISL" + struct.pack("<IIII", 1, n, K, int(hsh, 16))) + lid.tobytes() + lx.tobytes() + ly.tobytes()
     (out_dir / f"look-islands{sfx}.bin").write_bytes(buf)
     print(f"wrote look-islands{sfx}.bin ({len(buf)} bytes), {sum(1 for x in lab if x)} labeled, {time.time() - t0:.0f}s total")
-    return isl, L, lx, ly
+    return isl, L, lx, ly, dict(pos=pos, cen=cen, rad=rad, parent=parent, S=S)
