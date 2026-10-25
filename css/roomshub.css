@@ -1,0 +1,54 @@
+/* Rooms as one system (js/roomshub.js): the expandable rail, the hub page, a room's page, Walk this room. Opaque surfaces, text never under body size. */
+.rh-head{align-items:center}
+.rh-ctl{display:flex;gap:2px;align-items:center}
+.rh-b{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border:0;background:none;color:var(--soft);font:italic 400 17px/1 var(--serif);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.rh-b:active{color:var(--ink)}
+.rh-b svg{transition:transform .26s var(--ease-grow)}
+.rh-b[aria-expanded="true"] svg{transform:rotate(180deg)}
+.rh-b:focus-visible{outline:2px solid var(--ink);outline-offset:-2px;border-radius:var(--r-1)}
+/* the rail, expanded in place: a 2-column grid of bigger cards */
+.xb-railwrap{position:relative}
+.xb-roomrail.open{display:grid;grid-template-columns:1fr 1fr;gap:18px 14px;overflow:visible;margin:14px 0 0;padding:0;scroll-snap-type:none}
+.xb-roomrail.open .xb-room{width:auto;min-width:0}
+.xb-roomrail.open .xb-room-im{height:auto;aspect-ratio:4/3}
+.xb-roomrail.open .xb-room b{font-size:20px}
+@media (min-width:700px){.xb-roomrail.open{grid-template-columns:repeat(3,1fr)}}
+/* hub page */
+.rh-search{margin:16px 0 4px}
+.rh-sec{margin-top:36px}
+.rh-save{margin:14px 0 4px;padding:14px 16px;border:1px dashed var(--rule-strong);border-radius:var(--r-2);display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.rh-save p{margin:0;font:400 16px/1.4 var(--sans);color:var(--soft)}
+.rh-more-row{display:block;width:100%;margin-top:14px;min-height:48px;border:1px solid var(--rule-strong);border-radius:var(--r-pill);background:var(--surface-2);color:var(--ink);font:500 16px/1 var(--sans);cursor:pointer}
+.rh-none{margin-top:24px}
+.rh-card{position:relative}
+.rh-more{position:absolute;top:8px;right:8px;width:44px;height:44px;border:0;border-radius:50%;background:var(--ground);color:var(--ink);font:400 24px/1 var(--sans);cursor:pointer}
+.rh-flag{display:inline-block;width:30px;height:20px;margin-right:10px;vertical-align:-2px;border-radius:3px;overflow:hidden}
+.rh-flag svg{width:30px;height:20px;display:block}
+.rh-empty .sbi-mos{opacity:.5}
+.rh-band:empty{background:var(--surface-2)}
+/* a room's page */
+.rh-hero{aspect-ratio:3/2}
+.rh-walkrow{margin-top:16px}
+.rh-walkrow .btn{width:100%}
+.rh-walkrow .btn:disabled{opacity:.5}
+.sbi-facts em{font:italic 400 17px/1 var(--serif);color:var(--soft);margin-left:6px}
+/* Walk this room: a full-screen pager, swipe (scroll-snap) or arrows */
+.rh-lock,.rh-lock body{overflow:hidden}
+.rh-walk{position:fixed;inset:0;z-index:900;display:flex;flex-direction:column;background:var(--ground);color:var(--ink);padding-top:var(--top)}
+.rh-w-top{display:flex;align-items:center;justify-content:space-between;padding:10px var(--g)}
+.rh-w-count{font:italic 400 17px/1 var(--serif);color:var(--soft)}
+.rh-w-track{flex:1;min-height:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
+.rh-w-track::-webkit-scrollbar{display:none}
+.rh-w-slide{flex:0 0 100%;scroll-snap-align:center;scroll-snap-stop:always;display:flex;flex-direction:column;min-height:0;padding:0 var(--g)}
+.rh-w-im{position:relative;flex:1 1 auto;min-height:180px;border-radius:var(--r-2);overflow:hidden;background:var(--surface-2);cursor:pointer}
+.rh-w-im img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .45s var(--ease)}
+.rh-w-im img.ld{opacity:1}
+.rh-w-t{flex:none;padding:16px 0 8px;display:flex;flex-direction:column;gap:6px}
+.rh-w-t b{font:400 26px/1.1 var(--serif);letter-spacing:-.015em;text-wrap:balance}
+.rh-w-t span{font:400 16px/1.3 var(--sans);color:var(--soft)}
+.rh-w-t p{margin:6px 0 10px;font:500 17px/1.4 var(--sans);color:var(--ink);text-wrap:pretty}
+.rh-w-t .btn{align-self:flex-start}
+.rh-w-dots{display:flex;gap:8px;justify-content:center;padding:6px 0 calc(var(--bottom) + 16px)}
+.rh-w-dots i{width:8px;height:8px;border-radius:50%;background:var(--rule-strong);opacity:.4;transition:opacity .2s,transform .2s}
+.rh-w-dots i.on{opacity:1;transform:scale(1.25);background:var(--ink)}
+@media (prefers-reduced-motion:reduce){.rh-b svg,.rh-w-im img,.rh-w-dots i{transition:none}}

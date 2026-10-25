@@ -53,6 +53,8 @@ function sbiCardHTML(o) {
   </article>`;
 }
 function sbiSkeleton() { return `<div class="sbi-list" aria-hidden="true">${Array.from({ length: 4 }, () => `<div class="sbi-card sbi-sk"><span class="sbi-mos m3"><span class="sbi-ph"></span><span class="sbi-ph"></span><span class="sbi-ph"></span></span><span class="sbi-txt"><b>&nbsp;</b></span></div>`).join("")}</div>`; }
+// these pages carry their own Map button (centered on what you are looking at): the trail's generic map glyph would be a second "Map" beside it
+const sbiOwnMap = el => { const rm = () => el.querySelectorAll("[data-tl-exit]").forEach(b => b.remove()); rm(); setTimeout(rm, 60); setTimeout(rm, 400); };
 function sbiList() {
   if (!SBI.d) return sbiWait(sbiList, []);
   const d = SBI.d, fams = sbiFamilies(d), total = d.islands.reduce((s, o) => s + o.n, 0);
@@ -65,7 +67,7 @@ function sbiList() {
     ${body}`, "article sbi-page");
   el.querySelector("[data-back]").onclick = () => (typeof xBack === "function" && XSTACK.length ? xBack() : xToOrigin());
   onKey = e => { if (e.key === "Escape" && !document.querySelector(".sheet")) el.querySelector("[data-back]").click(); };
-  sbiFade(el);
+  sbiFade(el); sbiOwnMap(el);
   el.addEventListener("click", e => {
     if (e.target.closest("[data-swatch]")) return;   // js/swatch.js opens the color page
     const b = e.target.closest("[data-sbi]"); if (b) { buzz(6); sbiPage(b.dataset.sbi); }
@@ -107,16 +109,18 @@ function sbiPage(slug) {
     <p class="eyebrow p-type">Subject</p><h1 class="p-title">${esc(o.name)}</h1>
     <p class="p-dek">${sbiNum(o.n)} paintings${o.sub ? " · " + esc(o.sub) : ""}</p>
     ${sbiPalBar(o.pal, "big")}
+    <div class="rh-walkrow"><button class="btn solid" data-sbiwalk disabled>Walk this room ${ICON.arrow}</button></div>
     <div class="sbi-chips" role="tablist" aria-label="View"><button class="sbi-chip on" role="tab" aria-selected="true" data-sbitab="paintings">Paintings</button><button class="sbi-chip" role="tab" aria-selected="false" data-sbitab="overview">Overview</button></div>
     <div class="sbi-pane" data-sbipane="paintings"><div class="sbi-grid gl-grid" data-sbigrid>${sbiTileSkeleton()}</div><p class="fine">Closest to the middle of this island on the painting map first. Colors are as photographed.</p></div>
     <div class="sbi-pane" data-sbipane="overview" hidden>${sbiOverview(o, fam)}</div>`, "article sbi-page sbi-one");
   el.querySelector("[data-back]").onclick = () => (typeof xBack === "function" && XSTACK.length ? xBack() : xToOrigin());
   onKey = e => { if (e.key === "Escape" && !document.querySelector(".sheet")) el.querySelector("[data-back]").click(); };
-  sbiFade(el);
+  sbiFade(el); sbiOwnMap(el);
   const grid = el.querySelector("[data-sbigrid]");
   sbiMembers(o).then(list => {
     if (!grid.isConnected) return;
     glGrid(grid, { list, cols: matchMedia("(min-width:700px)").matches ? 4 : 3, plain: true, exact: true, pinch: true });
+    const w = el.querySelector("[data-sbiwalk]"); if (w && typeof rhWalk === "function" && typeof xbLoad === "function") xbLoad().then(() => { w.disabled = false; w.onclick = () => rhWalk(list, o.name); }).catch(() => w.remove()); else if (w) w.remove();
     grid.classList.add("live");
   }).catch(() => { if (grid.isConnected) grid.innerHTML = `<p class="fine">The paintings didn't load. <button class="wl" data-sbiretry>Try again</button></p>`; });
   el.addEventListener("click", e => {
