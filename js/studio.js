@@ -428,7 +428,7 @@ function palPhotoView(p) {
     </div>
     <p class="pv-tapnote" data-pvtapnote>Tap the photo to read a color. Drag a circle to move it.</p>
     <div class="pv-yours" data-pvyours hidden></div>
-    <div class="pv-read" role="group" aria-label="How each circle reads: the exact pixel or an average at its center"><span>Read</span>${[1, 2, 5, 11].map(n => `<button data-pvread="${n}">${EYD_LABEL[n]}</button>`).join("")}</div>
+    <div class="pv-read" role="group" aria-label="How each circle reads: the exact pixel or an average at its center"><span>Read</span>${EYD_SIZES.map(n => `<button data-pvread="${n}">${EYD_LABEL[n]}</button>`).join("")}</div>
     <div class="pv-tools"><div class="seg pv-lens" role="group" aria-label="How to look at the photo">${[["", "Original"], ["value", "Value"], ["squint", "Squint"]].map(([k, t]) => `<button data-pvlens="${k}" class="${k ? "" : "on"}" aria-pressed="${!k}">${t}</button>`).join("")}</div><button class="pv-pill pv-segbtn" data-pvsegt aria-pressed="false">Select a part</button></div>
     <div class="pv-panel" data-pvpanel hidden></div>
     <div class="gl-pal-ui">
@@ -1163,7 +1163,7 @@ function paletteView(p) {
   el.querySelector("[data-export]").onclick = () => exOpenSheet({ cols: colsNow(), title: curTitle || p.from || "Palette" });
   // a tap on the photo picks a color (the shared eyedropper, js/eyedrop.js), never the guess-the-name quiz
   const pvImg = el.querySelector(".pv-img img");
-  if (pvImg && typeof eyedropAttach === "function") { const d = eyedropAttach(pvImg, {}); cleanup.push(() => d.detach()); pvImg.style.touchAction = "none"; }
+  if (pvImg && typeof eyedropAttach === "function") { const d = eyedropAttach(pvImg, { sizes: false }); cleanup.push(() => d.detach()); pvImg.style.touchAction = "none"; }
   el.querySelector("[data-keep]").onclick = e => { if (p.savedId != null) return; keepPalette(hexes(), p.from || "Palette"); e.currentTarget.textContent = "Kept"; };
   el.querySelector("[data-share]").onclick = () => sharePalette(colsNow(), curTitle || p.from, named);
   const del = el.querySelector("[data-del]");
