@@ -376,14 +376,18 @@ function xbOpenRoom(id) {
   if (r.special === "web") { buzz(6); return typeof agOpenRoute === "function" ? agOpenRoute() : (location.hash = "#/web"); }
   if (r.special) return xbSet(xbFresh(), { special: r.special, room: r.id });
   const f = xbRoomF(r); if (!f) return toast("Nothing here yet");
+  if (typeof rhOpenRoom === "function" && !r.dyn) { buzz(6); return rhOpenRoom(r.id); }   // js/roomshub.js: a room opens as its own page (paintings, overview, map, walk)
   xbSet({ ...xbFresh(), ...f }, { room: r.id, view: r.view || "grid", sort: r.sort || "", noRecent: true });
 }
 function xbRooms(host, F) {
   const f = XB.f;
   if (XB.special || xbChips(F, f).length) { host.innerHTML = ""; return; }
   const list = [...xbUser().rooms.map(r => ({ ...r, mine: true })), ...XB_ROOMS.filter(r => !r.dyn || r.dyn())];
-  host.innerHTML = `<div class="sec-head xb-h"><b>Rooms</b><span>ways in</span></div>
-    <div class="xb-roomrail">${list.map(r => `<button class="xb-room" data-xbroom="${esc(r.id)}"><span class="xb-room-im" data-xbroomim="${esc(r.id)}"></span><span class="xb-room-band" data-xbroomband="${esc(r.id)}"></span><b>${esc(r.name)}</b><small>${r.mine ? "Your room" : r.recipe ? "Our recipe: " + esc(r.note.toLowerCase()) : esc(r.note)}</small><em class="mono" data-xbroomn="${esc(r.id)}"></em></button>`).join("")}</div>`;
+  const open = typeof rhOpenNow === "function" && rhOpenNow();   // js/roomshub.js: the rail expands in place into a grid (remembered)
+  host.innerHTML = (typeof sbiDoorHTML === "function" ? sbiDoorHTML() : "") + (typeof rhHeadHTML === "function" ? rhHeadHTML() : `<div class="sec-head xb-h"><b>Rooms</b><span>ways in</span></div>`) + `<div class="xb-railwrap">
+    <div class="xb-roomrail${open ? " open" : ""}">${list.map(r => `<button class="xb-room" data-xbroom="${esc(r.id)}"><span class="xb-room-im" data-xbroomim="${esc(r.id)}"></span><span class="xb-room-band" data-xbroomband="${esc(r.id)}"></span><b>${esc(r.name)}</b><small>${r.mine ? "Your room" : r.recipe ? "Our recipe: " + esc(r.note.toLowerCase()) : esc(r.note)}</small><em class="mono" data-xbroomn="${esc(r.id)}"></em></button>`).join("")}</div></div>`;
+  if (typeof rhRailWire === "function") rhRailWire(host);
+  if (typeof sbiDoorFill === "function") sbiDoorFill(host);   // js/subjectisl.js: the Subjects door
   // counts, color bands and a cover painting arrive just after the first paint
   later(() => {
     if (!host.isConnected) return;

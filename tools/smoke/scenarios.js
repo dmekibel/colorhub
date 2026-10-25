@@ -9144,3 +9144,67 @@ scenario("search", "the map opened from Faded purple's page keeps that color and
   await t.waitFor(() => /faded purple/i.test(t.d.body.innerText), 15000, "the map to call the color Faded purple");
   t.expect(!/dusty violet/i.test(t.d.body.innerText), "the map still names it Dusty violet");
 });
+
+// ---- Museum > Art > Subjects: the painting map's vibe islands as a list (js/subjectisl.js) ----
+scenario("pages", "Subjects: the list draws a card per island with cover photos, a card opens its paintings, Back returns", async t => {
+  await t.open("#/museum/art/subjects", { settle: 600 });
+  await t.waitFor(() => t.$$(".sbi-card[data-sbi-card]").length >= 30, 15000, "the Subjects cards");
+  t.expect(/\/museum\/art\/subjects$/.test(t.w.location.hash), `the list's own address, got ${t.w.location.hash}`);
+  const cards = t.$$(".sbi-card[data-sbi-card]");
+  t.expect(cards.every(c => c.querySelector(".sbi-txt b") && /paintings$/.test(t.text(c.querySelector(".sbi-n")))), "a card is missing its name or count");
+  t.expect(new Set(cards.map(c => t.text(c.querySelector(".sbi-txt b")))).size === cards.length, "two cards share a name");
+  t.expect(cards.every(c => c.querySelectorAll(".sbi-colors button").length >= 4), "a card is missing its palette strip");
+  t.expect(cards.every(c => c.querySelectorAll(".sbi-ph").length >= 2), "a card has no cover frames");   // a photo that fails to load is dropped and its color stays
+  const first = cards[0], name = t.text(first.querySelector(".sbi-txt b"));
+  await t.click(first.querySelector("[data-sbi]"), { wait: 500 });
+  await t.waitFor(() => t.$(".sbi-one") && t.$$(".sbi-grid .gl-pin").length >= 6, 15000, "the island's paintings");
+  t.expect(t.text(".sbi-one h1") === name, `the page shows "${t.text(".sbi-one h1")}", expected "${name}"`);
+  t.expect(/\/museum\/art\/subject\//.test(t.w.location.hash), `the island's address, got ${t.w.location.hash}`);
+  t.expect(t.$(".sbi-one [data-pmap]"), "no Map button");
+  t.expect(/arr=look/.test(t.$(".sbi-one [data-pmap]").dataset.pmap), "the Map button does not open By vibe");
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => t.$$(".sbi-card[data-sbi-card]").length >= 30 && !t.$(".sbi-one"), 8000, "Back to the Subjects list");
+});
+scenario("pages", "Subjects: the door on Art's first screen opens the list", async t => {
+  await t.open("#/museum/art", { settle: 600 });
+  const door = await t.waitFor(() => { const d = t.$("[data-sbidoor]"); return d && !d.hidden && d; }, 15000, "the Subjects door");
+  await t.click(door, { wait: 500 });
+  await t.waitFor(() => t.$$(".sbi-card[data-sbi-card]").length >= 30, 12000, "the Subjects list after the door");
+});
+
+// ---- Rooms as one system (js/roomshub.js): the rail expands in place, the hub page, a room's page, Walk this room ----
+scenario("pages", "Rooms: See all expands Art's rail into a grid in place, remembers it, and Fewer collapses it", async t => {
+  await t.open("#/museum/art", { settle: 600 });
+  const btn = await t.waitFor(() => t.$("[data-rhexp]"), 15000, "the Rooms expand control");
+  const rail = t.$(".xb-roomrail");
+  t.expect(!rail.classList.contains("open") && btn.getAttribute("aria-expanded") === "false", "the rail starts collapsed");
+  await t.click(btn, { wait: 700 });
+  t.expect(t.$(".xb-roomrail").classList.contains("open") && t.$("[data-rhexp]").getAttribute("aria-expanded") === "true", "See all did not expand the rail");
+  t.expect(t.w.getComputedStyle(t.$(".xb-roomrail")).display === "grid", "the expanded rail is not a grid");
+  t.expect(t.w.localStorage.getItem("colorhub-rooms-open") === "1", "the open state is not remembered");
+  await t.click(t.$("[data-rhexp]"), { wait: 700 });
+  t.expect(!t.$(".xb-roomrail").classList.contains("open") && t.w.localStorage.getItem("colorhub-rooms-open") === "0", "Fewer did not collapse the rail");
+});
+scenario("pages", "Rooms: the hub lists its sections, a room opens as a paintings page, Walk shows eight slides, Back returns", async t => {
+  await t.open("#/museum/art/rooms", { settle: 600 });
+  await t.waitFor(() => t.$$(".rh-card, .sbi-card").length >= 20, 20000, "the room cards");
+  const heads = t.$$(".rh-sec b").map(b => t.text(b));
+  ["Yours", "Today's room", "By subject", "By color", "By time", "By place", "Curated"].forEach(h => t.expect(heads.includes(h), `the hub has no "${h}" section (${heads.join(", ")})`));
+  t.expect(/\/museum\/art\/rooms$/.test(t.w.location.hash), `the hub's own address, got ${t.w.location.hash}`);
+  const q = t.$("[data-rhq]"); q.value = "blue"; q.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+  await t.waitFor(() => t.$$(".rh-card, .sbi-card").some(c => /blue/i.test(t.text(c.querySelector(".sbi-txt b")))), 8000, "search to find a Blue room");
+  q.value = ""; q.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+  await t.waitFor(() => t.$("[data-rh='c-blues']"), 8000, "the full list back");
+  await t.click(t.$("[data-rh='c-blues']"), { wait: 600 });
+  await t.waitFor(() => t.$(".rh-room h1") && t.$$(".sbi-grid .gl-pin").length >= 6 && !t.$("[data-rhwalk]").disabled, 20000, "the Blues room's paintings");
+  t.expect(t.text(".rh-room h1") === "Blues", "the room page has the wrong title");
+  t.expect(/\/museum\/art\/room\/c-blues$/.test(t.w.location.hash), `the room's address, got ${t.w.location.hash}`);
+  t.expect(t.$("[data-rhmap]"), "no Map button");
+  await t.click(t.$("[data-rhwalk]"), { wait: 500 });
+  await t.waitFor(() => t.$$(".rh-w-slide").length === 8, 8000, "eight Walk slides");
+  t.expect(t.$$(".rh-w-slide p").every(p => t.text(p).length > 20), "a Walk slide has no measured fact");
+  await t.click("[data-rhwx]", { wait: 300 });
+  t.expect(!t.$(".rh-walk"), "the Walk did not close");
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => t.$(".rh-page") && !t.$(".rh-room"), 8000, "Back to the Rooms page");
+});
