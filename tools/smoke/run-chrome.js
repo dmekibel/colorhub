@@ -12,7 +12,7 @@ const CHROME = process.env.SMOKE_CHROME || "/Applications/Google Chrome.app/Cont
 // Raised both ceilings with real margin for the largest group to keep growing a while longer; a normal run still
 // finishes in its own real time either way (CLAUDE.md's "about 10 seconds" is unaffected by a higher ceiling that
 // never gets hit on a healthy run -- only a run that was silently truncated before gets to actually finish now).
-function runChrome(url, { budget = 480000, alarm = 150, tag = "run" } = {}) {
+function runChrome(url, { budget = 480000, alarm = 400, tag = "run" } = {}) {
   return new Promise(resolve => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), `colorhub-smoke-${tag}-`));
     const args = ["-e", `alarm ${alarm}; exec @ARGV`, CHROME, "--headless", "--disable-gpu", "--no-first-run", "--no-default-browser-check",
