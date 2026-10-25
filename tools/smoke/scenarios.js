@@ -4413,10 +4413,10 @@ scenario("paintings", "swiping the picture moves to the next/previous painting b
 });
 
 // Pinterest-style gestures (David, 2026-10-25): swipe the page to the next / previous painting of the list it was opened from; pull down to close one step
-async function glDrag(t, target, pts, id = 7) {
+async function glDrag(t, target, pts, id = 7, ms = 16) {
   const w = t.w, o = { bubbles: true, cancelable: true, pointerId: id, pointerType: "touch", isPrimary: true, view: w };
   target.dispatchEvent(new w.PointerEvent("pointerdown", { ...o, clientX: pts[0][0], clientY: pts[0][1] }));
-  for (const [x, y] of pts.slice(1, -1)) { target.dispatchEvent(new w.PointerEvent("pointermove", { ...o, clientX: x, clientY: y })); await t.sleep(16); }
+  for (const [x, y] of pts.slice(1, -1)) { target.dispatchEvent(new w.PointerEvent("pointermove", { ...o, clientX: x, clientY: y })); await t.sleep(ms); }
   return () => target.dispatchEvent(new w.PointerEvent("pointerup", { ...o, clientX: pts[pts.length - 1][0], clientY: pts[pts.length - 1][1] }));
 }
 scenario("paintings", "swiping a painting opened from the feed walks that feed's list without a new trail step", async t => {
@@ -4447,6 +4447,7 @@ scenario("paintings", "swiping a painting opened from the feed walks that feed's
   up = await glDrag(t, t.$(".screen.gl-page"), [[W * .3, 400], [W * .4, 402], [W * .6, 404], [W * .85, 404]]); up();
   await t.waitFor(() => TRL.hash(t) === hash0 ? true : null, 4000, "the previous painting");
   // Back leaves for the page before the list
+  await t.sleep(700);   // the click that follows a swipe is swallowed for a moment, and the hand-over ghost is still fading
   await t.click(TRL.screenBack(t), { wait: 700 });
   t.expect(t.ev("XSTACK.length") === depth0 - 1, `Back after swiping left the trail at ${t.ev("XSTACK.length")}, expected ${depth0 - 1}`);
 });
@@ -4468,6 +4469,87 @@ scenario("paintings", "pulling a painting page down at the top closes one step b
   await t.sleep(1200); t.w.scrollTo(0, 0); await t.sleep(900);
   const d1 = t.ev("XSTACK.length"); up = await glDrag(t, t.$(".screen.gl-page"), [[W / 2, 200], [W / 2, 215], [W / 2, 240]], 10); up(); await t.sleep(700);
   t.expect(t.ev("XSTACK.length") === d1 && t.$(".screen.gl-page"), "a short pull closed the page");
+});
+// David, 2026-10-25 (second pass): the page underneath shows while a painting is pulled down, and the swipe has its neighbor beside it from the first move
+scenario("paintings", "pulling a painting down shows the page it came from underneath and hands over without a flash", async t => {
+  await feedOpen(t, 12);
+  const tiles0 = t.$$(".fd-tile[data-fk]").length;
+  await t.click(t.$$(".fd-tile[data-fk]")[1], { wait: 900 });
+  await t.waitFor(() => t.$(".screen.gl-page [data-glfeed]") ? true : null, 8000, "the painting");
+  await t.sleep(1200); t.w.scrollTo(0, 0); await t.sleep(900);
+  const page = t.$(".screen.gl-page"), W = t.ev("innerWidth"), depth0 = t.ev("XSTACK.length");
+  t.expect(t.ev("!!(TLG_PREV && TLG_PREV.el)"), "opening a painting from the feed kept no previous screen");
+  // the very first moves of the drag already mount it
+  let up = await glDrag(t, page, [[W / 2, 200], [W / 2, 215], [W / 2, 240], [W / 2, 330], [W / 2, 330]], 31);
+  const L = t.$(".tlg-back");
+  t.expect(L, "no backdrop layer while the painting is pulled down");
+  t.expect(L.querySelectorAll(".fd-tile").length >= Math.min(6, tiles0), `the backdrop holds ${L.querySelectorAll(".fd-tile").length} feed tiles, the page it came from had ${tiles0}`);
+  const bg = t.w.getComputedStyle(L).backgroundColor, dim = +t.w.getComputedStyle(L.querySelector(".tlg-dim")).opacity;
+  t.expect(bg !== "rgb(0, 0, 0)" && bg !== "rgba(0, 0, 0, 0)", `the backdrop is black (${bg})`);
+  t.expect(dim > 0 && dim < .2, `the backdrop dim is ${dim}, expected a slight one that lifts as the page leaves`);
+  t.expect(t.w.getComputedStyle(page).backgroundColor !== "rgba(0, 0, 0, 0)", "the dragged page is see-through (the backdrop would show through its text)");
+  t.expect(t.ev("document.getElementById('app').compareDocumentPosition(document.querySelector('.tlg-back')) & Node.DOCUMENT_POSITION_PRECEDING"), "the backdrop is not behind the page");
+  up();
+  await t.waitFor(() => t.ev("XSTACK.length") === depth0 - 1 ? true : null, 4000, "the page to close one step");
+  await t.waitFor(() => !t.$(".tlg-back") ? true : null, 3000, "the backdrop layer to go once the real page is drawn");
+  t.expect(t.$$(".fd-tile[data-fk]").length > 0, "the page it came from is not drawn after the close");
+  // a short pull gives the layer up again
+  await t.click(t.$$(".fd-tile[data-fk]")[1], { wait: 900 });
+  await t.waitFor(() => t.$(".screen.gl-page [data-glfeed]") ? true : null, 8000, "the painting again");
+  await t.sleep(1200); t.w.scrollTo(0, 0); await t.sleep(900);
+  up = await glDrag(t, t.$(".screen.gl-page"), [[W / 2, 200], [W / 2, 203], [W / 2, 206], [W / 2, 209], [W / 2, 212], [W / 2, 215], [W / 2, 216], [W / 2, 218]], 32, 40);
+  t.expect(t.$(".tlg-back"), "no backdrop on the second pull");
+  up(); await t.sleep(900);
+  t.expect(!t.$(".tlg-back") && t.$(".screen.gl-page"), "a short pull left the backdrop layer behind or closed the page");
+});
+scenario("paintings", "a swipe has its neighbor beside the page from the first move even before its picture loads", async t => {
+  await feedOpen(t, 12);
+  await t.click(t.$$(".fd-tile[data-fk]")[2], { wait: 900 });
+  await t.waitFor(() => /^#\/gallery\/\d+/.test(TRL.hash(t)) ? true : null, 8000, "the tile's painting");
+  await t.sleep(1000);
+  const page = t.$(".screen.gl-page"), W = t.ev("innerWidth"), hash0 = TRL.hash(t), depth0 = t.ev("XSTACK.length");
+  t.w.scrollTo(0, 0); await t.sleep(100);
+  t.expect(t.ev("getComputedStyle(document.querySelector('.screen.gl-page')).touchAction") === "pan-y pinch-zoom", "the page doesn't hand horizontal drags to the app (touch-action)");
+  const ghosts = () => t.$$(".gl-ghost");
+  t.expect(ghosts().length === 2, `${ghosts().length} neighbor ghosts built when the page opened, expected 2`);
+  // stub a neighbor whose picture and data haven't arrived: only the palette field and the shape remain, and no "undefined" anywhere
+  ghosts().forEach(g => { g.querySelectorAll(".gl-ghost-lo,.gl-ghost-hi").forEach(n => n.remove()); g.querySelector(".gl-ghost-t").textContent = ""; });
+  const ph = ghosts()[0].querySelector(".gl-ghost-ph");
+  t.expect(ph && /gradient/.test(ph.style.background || ph.style.backgroundImage), "a neighbor without its picture has no color field");
+  t.expect(ghosts().every(g => !/undefined/.test(g.textContent)), "a neighbor ghost says undefined");
+  // two moves (a 6px lock, then a few more): the neighbor is already beside the page, and both track the finger 1:1
+  await glDrag(t, page, [[W * .8, 400], [W * .8 - 4, 401], [W * .8 - 9, 402], [W * .8 - 30, 403], [W * .8 - 80, 404], [W * .8 - 80, 404]], 33);
+  const tx = el => +((/translate3d\((-?[\d.]+)px/.exec(el.style.transform) || [0, 0])[1]);
+  const on = ghosts().find(g => +g.style.opacity === 1);
+  t.expect(on, "no neighbor ghost shown after the first moves of the drag");
+  t.expect(Math.abs(tx(page) + 80) < 1.5, `the page is at ${tx(page)}px after an 80px drag, expected -80`);
+  t.expect(Math.abs(tx(on) - (W - 80)) < 1.5, `the neighbor is at ${tx(on)}px, expected ${W - 80} (one page-width to the right of the page)`);
+  t.expect(on.getBoundingClientRect().height > 100 && on.querySelector(".gl-ghost-pic").getBoundingClientRect().height > 50, "the neighbor's picture box has no size");
+  // a drag past 30% lands the neighbor in one piece (the swipe waits for its data), with no new trail step
+  const more = async () => { for (const x of [W * .8 - 130, W * .8 - 200, W * .8 - 260]) { page.dispatchEvent(new t.w.PointerEvent("pointermove", { bubbles: true, cancelable: true, pointerId: 33, pointerType: "touch", isPrimary: true, view: t.w, clientX: x, clientY: 404 })); await t.sleep(16); } page.dispatchEvent(new t.w.PointerEvent("pointerup", { bubbles: true, cancelable: true, pointerId: 33, pointerType: "touch", isPrimary: true, view: t.w, clientX: W * .8 - 260, clientY: 404 })); };
+  await more();
+  await t.waitFor(() => TRL.hash(t) !== hash0 ? true : null, 4000, "the neighbor painting to land");
+  t.expect(t.ev("XSTACK.length") === depth0, `the swipe pushed a trail step (${depth0} -> ${t.ev("XSTACK.length")})`);
+  await t.waitFor(() => t.$$(".gl-ghost").every(g => +g.style.opacity === 0 || !g.isConnected) ? true : null, 3000, "the hand-over ghost to fade");
+  // what is under the painting is still the list it came from, so pulling the swiped painting down still shows it
+  t.expect(t.ev("!!(TLG_PREV && TLG_PREV.el && TLG_PREV.el.querySelector('.fd-tile'))"), "after a swipe the page underneath is no longer the list it came from");
+});
+scenario("paintings", "a swipe at the end of the list rubber-bands and a short drag springs back", async t => {
+  await feedOpen(t, 12);
+  await t.click(t.$$(".fd-tile[data-fk]")[0], { wait: 900 });
+  await t.waitFor(() => /^#\/gallery\/\d+/.test(TRL.hash(t)) ? true : null, 8000, "the first tile's painting");
+  await t.sleep(1000);
+  const page = t.$(".screen.gl-page"), W = t.ev("innerWidth"), hash0 = TRL.hash(t);
+  t.w.scrollTo(0, 0); await t.sleep(100);
+  const tx = el => +((/translate3d\((-?[\d.]+)px/.exec(el.style.transform) || [0, 0])[1]);
+  // the first one has no previous painting: dragging right resists and springs back, whatever the distance
+  let up = await glDrag(t, page, [[W * .3, 400], [W * .35, 401], [W * .5, 402], [W * .8, 403], [W * .8, 403]], 34);
+  t.expect(tx(page) > 0 && tx(page) < W * .5 * .45, `at the list's start the page is at ${tx(page)}px for a ${W * .5}px drag, expected a rubber band`);
+  up(); await t.sleep(900);
+  t.expect(TRL.hash(t) === hash0 && Math.abs(tx(page)) < 1, "the page did not spring back at the start of the list");
+  // a short drag toward the next one springs back too
+  up = await glDrag(t, page, [[W * .8, 400], [W * .77, 401], [W * .77, 401]], 35); up(); await t.sleep(900);
+  t.expect(TRL.hash(t) === hash0 && Math.abs(tx(page)) < 1 && t.$$(".gl-ghost").length >= 1 && t.$$(".gl-ghost").every(g => +g.style.opacity === 0), `a short drag did not spring back cleanly (${TRL.hash(t) === hash0 ? "same" : "moved"} painting, page at ${tx(page)}px, ${t.$$(".gl-ghost").length} ghosts, opacities ${t.$$(".gl-ghost").map(g => g.style.opacity)})`);
 });
 // ---------- Keep exploring (js/feed.js): the Pinterest-style feed at the foot of every painting page (David, 2026-10-24) ----------
 // a painting reached by browsing (from a color page, the map...) starts on its Color feed: tap Overview to get at the page's own sections (palette, findings...)

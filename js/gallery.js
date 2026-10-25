@@ -1558,7 +1558,7 @@ function glPage(i, d, fromHex, tol) {
     <header class="art-top" data-similar-gi="${i}"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${typeof fvArtHeart === "function" && d.id ? fvArtHeart(d.id) : ""}</header>
     <div class="gl-cols">
     <div class="gl-pal-wrap">
-    <div class="gl-hero gl-full-w" style="--c:${avg}">${fdMapBtnHTML("fd-mapb-hero")}<span style="width:min(100%, calc(var(--hero-vh, 62dvh) / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${glHiSrc(d) ? ` data-hi="${esc(glHiSrc(d))}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas><div class="gl-hero-dots" data-glherodots aria-hidden="true"></div>
+    <div class="gl-hero gl-full-w" style="--c:${avg}">${fdMapBtnHTML("fd-mapb-hero")}<span style="width:min(calc(100% - 2 * var(--g)), calc(var(--hero-vh, 62dvh) / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${glHiSrc(d) ? ` data-hi="${esc(glHiSrc(d))}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas><div class="gl-hero-dots" data-glherodots aria-hidden="true"></div>
     <button class="gl-closer" data-glcloser aria-label="Look closer">${ICON.search}<span>Look closer</span></button>
     <button class="gl-closer gl-pick-btn" data-glpickbtn hidden aria-pressed="false" aria-label="Pick a color">${icon("pipette", 17)}<span>Pick a color</span></button></span></div>
     <div class="gl-id">
@@ -2428,94 +2428,138 @@ function glPage(i, d, fromHex, tol) {
   });
   heroSpan.addEventListener("pointercancel", () => { swipeStart = null; if (pressT) { clearTimeout(pressT); pressT = 0; } });
   // ---------- swipe the page: next / previous painting in the list you came from, else by the same painter (David, 2026-10-25) ----------
-  // The page follows the finger with the neighbor painting coming in beside it; past 30% of the width (or a flick) it replaces this painting
+  // The page follows the finger 1:1 with the neighbor painting coming in beside it; past 30% of the width (or a flick) it replaces this painting
   // WITHOUT a new trail step, so Back still returns to the list, on the tile you ended on. Starts only off the left edge (the iOS back swipe),
-  // never on a canvas, a horizontal scroller, a sheet, the armed picker or a second finger; vertical drags stay the page's (axis lock at 10px).
+  // never on a canvas, a horizontal scroller, a sheet, the armed picker or a second finger; vertical drags stay the page's (axis lock by the
+  // dominant direction after 6px). Both neighbors are built when the page opens (their palette as a soft color field at the right shape, at
+  // once; then their blurred small picture, then the sharp one fading in), so the neighbor is beside the page from the first pixel of the drag,
+  // and a commit waits for the neighbor's data so it always lands in one piece. touch-action keeps the browser from claiming the drag.
   (function glSwipeWire() {
     if (document.documentElement.classList.contains("desk")) return;
     const ctx = GL_CTXS.get(i);
     const nbr = dir => { if (ctx && ctx.list[ctx.pos] === i) { const n = ctx.pos + dir; return n >= 0 && n < ctx.list.length ? ctx.list[n] : -1; }
       if (!painterOrder || painterRank < 0) return -1; const n = painterRank + dir; return n >= 0 && n < painterOrder.length ? painterOrder[n] : -1; };
-    const warm = () => [-1, 1].forEach(dir => { const j = nbr(dir); if (j < 0) return; glDetail(j).then(dd => { const im = new Image(); im.src = glBig(dd.img); }).catch(() => {}); });
-    setTimeout(() => { if (el.isConnected) warm(); }, 900);
     const hscroller = n => { for (; n && n !== el; n = n.parentElement) { if (n.scrollWidth > n.clientWidth + 2) { const ox = getComputedStyle(n).overflowX; if (ox === "auto" || ox === "scroll") return true; } } return false; };
-    let g = null, ghost = null, ghostDir = 0, busy = false, swallow = -1e9;
-    const W = () => innerWidth;
-    const makeGhost = dir => {
+    const W = () => innerWidth, off = dir => `translate3d(${dir * W()}px,0,0)`;
+    el.style.touchAction = "pan-y pinch-zoom";   // horizontal drags are ours from the first pixel (the browser neither waits on them nor cancels them); vertical scroll and pinch stay its own
+    const ghosts = { "-1": null, "1": null };
+    const buildGhost = dir => {
       const j = nbr(dir); if (j < 0) return null;
-      const dd = glDetailNow(j); if (!dd) { glDetail(j).catch(() => {}); return null; }
-      const ar = GAL.ar[j] || 1, gh = document.createElement("div"); gh.className = "gl-ghost";
-      gh.innerHTML = `<div class="gl-ghost-pic"><img src="${esc(glBig(dd.img))}" alt="" style="aspect-ratio:${(1 / ar).toFixed(4)}"></div><p class="gl-ghost-t">${esc(dd.t || "")}</p><p class="gl-ghost-a">${esc(dd.a || "")}</p>`;
+      const ar = GAL.ar[j] || 1, pal = glPal(j).filter(p => p.share > 0).sort((a, b) => b.share - a.share), tot = pal.reduce((s, p) => s + p.share, 0) || 1;
+      let acc = 0; const stops = pal.map(p => { const a = acc / tot * 100; acc += p.share; return `${p.h} ${a.toFixed(1)}% ${(acc / tot * 100).toFixed(1)}%`; }).join(",");
+      const gh = document.createElement("div"); gh.className = "gl-ghost"; gh._j = j;
+      const avg = labHex(GAL.mean[j * 3], GAL.mean[j * 3 + 1], GAL.mean[j * 3 + 2]);   // the band behind the picture, like the page's own hero
+      gh.innerHTML = `<div class="gl-ghost-band" style="--c:${avg}"><div class="gl-ghost-pic" style="width:min(calc(100% - 2 * var(--g)), calc(var(--hero-vh, 62dvh) / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><i class="gl-ghost-ph" style="background:linear-gradient(160deg,${stops || "var(--s2)"})"></i></div></div><p class="gl-ghost-t"></p><p class="gl-ghost-a"></p>`;
+      gh.style.opacity = "0"; gh.style.transform = off(dir);
       document.body.appendChild(gh); return gh;
     };
-    const place = dx => { el.style.transform = `translate3d(${dx}px,0,0)`; if (ghost) ghost.style.transform = `translate3d(${dx + ghostDir * W()}px,0,0)`; };
+    // fill a neighbor from its shard: title and painter, the small picture blurred, then the sharp one faded in once it has decoded
+    const fillGhost = (dir, dd) => {
+      const gh = ghosts[dir]; if (!gh || gh._filled || !dd || !gh.isConnected) return; gh._filled = true;
+      const j = gh._j, ar = GAL.ar[j] || 1, pic = gh.querySelector(".gl-ghost-pic"), crop = glCropStyle(j, dd, 1 / ar);
+      gh.querySelector(".gl-ghost-t").textContent = dd.t || ""; gh.querySelector(".gl-ghost-a").textContent = dd.a || "";
+      pic.insertAdjacentHTML("beforeend", `<img class="gl-ghost-lo" src="${esc(dd.img)}" alt="" decoding="async"${crop}>`);
+      const lo = pic.lastElementChild; lo.onload = () => lo.classList.add("on");
+      const hi = new Image(); hi.className = "gl-ghost-hi"; hi.alt = ""; hi.setAttribute("fetchpriority", "low"); hi.src = glBig(dd.img);
+      if (crop) hi.setAttribute("style", crop.slice(8, -1));
+      const done = () => { if (!gh.isConnected) return; pic.appendChild(hi); requestAnimationFrame(() => { hi.classList.add("on"); setTimeout(() => lo.remove(), 260); }); };
+      if (hi.decode) hi.decode().then(done, () => {}); else hi.onload = done;
+    };
+    const warm = () => [-1, 1].forEach(dir => { const j = nbr(dir); if (j >= 0 && ghosts[dir]) { const dd = glDetailNow(j); if (dd) fillGhost(dir, dd); else glDetail(j).then(x => fillGhost(dir, x)).catch(() => {}); } });
+    [-1, 1].forEach(dir => { ghosts[dir] = buildGhost(dir); });
+    cleanup.push(() => { [-1, 1].forEach(dir => { if (ghosts[dir]) { ghosts[dir].remove(); ghosts[dir] = null; } }); });
+    setTimeout(() => { if (el.isConnected) warm(); }, 250);
+    let g = null, busy = false, swallow = -1e9, cur = 0;
+    const showDir = dir => { [-1, 1].forEach(k => { if (ghosts[k]) ghosts[k].style.opacity = k === dir ? "1" : "0"; }); cur = dir; };
+    const place = dx => { el.style.transform = `translate3d(${dx}px,0,0)`; const gh = cur && ghosts[cur]; if (gh) gh.style.transform = `translate3d(${dx + cur * W()}px,0,0)`; };
     const settle = (dx, ms, done) => {
-      const t = `transform ${ms}ms cubic-bezier(.2,.7,.2,1)`;
+      const t = `transform ${ms}ms cubic-bezier(.2,.7,.2,1)`, gh = cur && ghosts[cur];
       if (reduceMotion || !ms) { place(dx); return done && done(); }
-      el.style.transition = t; if (ghost) ghost.style.transition = t; place(dx);
+      el.style.transition = t; if (gh) gh.style.transition = t; place(dx);
       setTimeout(() => { done && done(); }, ms + 20);
     };
-    const reset = () => { el.style.transition = el.style.transform = el.style.willChange = ""; if (ghost) { ghost.remove(); ghost = null; } g = null; busy = false; };
-    const commit = (dir, instant) => {
+    const reset = () => {
+      el.style.transition = el.style.transform = el.style.willChange = "";
+      [-1, 1].forEach(k => { const gh = ghosts[k]; if (gh) { gh.style.transition = ""; gh.style.opacity = "0"; gh.style.transform = off(k); } });
+      cur = 0; g = null; busy = false;
+    };
+    // the new page is drawn: the ghost it replaces stays until the new hero picture is up, then fades
+    const handOver = gh => {
+      if (!gh) return; const t0 = performance.now();
+      const tick = () => {
+        const pg = document.querySelector(".screen.gl-page"), im = pg && pg !== el && pg.querySelector(".gl-hero img");
+        if (!gh.isConnected) return;
+        if ((im && im.complete && im.naturalWidth) || performance.now() - t0 > 900) { gh.style.transition = "opacity .14s ease-out"; gh.style.opacity = "0"; return void setTimeout(() => gh.remove(), 180); }
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick); setTimeout(() => { if (gh.isConnected) gh.remove(); }, 2500);
+    };
+    const go = (dir, j) => {
+      const c = ctx && ctx.list[ctx.pos] === i ? { ...ctx, pos: ctx.pos + dir } : null;
+      if (c) { GL_CTXS.set(j, c); const m = c.key != null && typeof FD_MEMO !== "undefined" ? FD_MEMO.get(c.key) : null; if (m && c.fks) { const fk = c.fks[c.pos]; FD_MEMO.set(c.key, { ...m, shown: Math.max(m.shown || 0, fk + 1), ak: fk, ay: 150 }); } }
+      if (XSTACK.length && String(XSTACK[XSTACK.length - 1]).startsWith("g:")) XSTACK[XSTACK.length - 1] = "g:" + j;
+      else XSTACK.push("g:" + j);
+      const gh = cur === dir ? ghosts[dir] : null; if (gh) ghosts[dir] = null;   // not the page's to remove any more: handOver does it
+      TLG_SKIP = true; TLG_KEEP_PREV = true;   // the exit already played; what is under the painting stays the list it came from
+      try { galleryPage(j, false); } finally { TLG_SKIP = false; TLG_KEEP_PREV = false; }
+      handOver(gh);
+    };
+    // dx = where the page is now (px), v = the release velocity; waits for the neighbor's data so the landing is one piece
+    const commit = (dir, dx, v, instant) => {
       const j = nbr(dir); if (j < 0) return reset();
       busy = true; swallow = performance.now(); buzz(6);
-      const go = () => {
-        const c = ctx && ctx.list[ctx.pos] === i ? { ...ctx, pos: ctx.pos + dir } : null;
-        if (c) { GL_CTXS.set(j, c); const m = c.key != null && typeof FD_MEMO !== "undefined" ? FD_MEMO.get(c.key) : null; if (m && c.fks) { const fk = c.fks[c.pos]; FD_MEMO.set(c.key, { ...m, shown: Math.max(m.shown || 0, fk + 1), ak: fk, ay: 150 }); } }
-        if (XSTACK.length && String(XSTACK[XSTACK.length - 1]).startsWith("g:")) XSTACK[XSTACK.length - 1] = "g:" + j;
-        else XSTACK.push("g:" + j);
-        if (typeof TLG_SKIP !== "undefined") TLG_SKIP = true;
-        try { galleryPage(j, false); } finally { if (typeof TLG_SKIP !== "undefined") TLG_SKIP = false; }
-        setTimeout(() => { document.querySelectorAll(".gl-ghost").forEach(x => x.remove()); }, 60);
-      };
-      if (instant && !ghost) return go();
-      settle(-dir * W(), 230, go);
+      const land = () => { const dd = glDetailNow(j); if (dd) return go(dir, j); glDetail(j).then(() => go(dir, j), () => settle(0, 220, reset)); };
+      if (instant && !cur) return land();
+      const ms = Math.round(clamp((W() - Math.abs(dx)) / Math.max(Math.abs(v), .7), 150, 280));
+      settle(-dir * W(), ms, land);
     };
     el.addEventListener("click", e => { if (performance.now() - swallow < 400) { e.stopPropagation(); e.preventDefault(); } }, true);
     el.addEventListener("pointerdown", e => {
-      if (g) { reset(); return; }   // a second finger ends it
+      if (g) { settle(0, 180, reset); return; }   // a second finger ends it
       if (!e.isPrimary || busy || e.clientX < 28 || e.clientX > W() - 6 || document.querySelector(".sheet,.gl-zoom,.glz-top") || pickArmed || mode === "pick") return;
       if (e.target.closest && (e.target.closest("canvas,input,textarea,select,[data-nopull],[data-glpicker]") || hscroller(e.target))) return;
       if (nbr(-1) < 0 && nbr(1) < 0) return;
-      g = { id: e.pointerId, x0: e.clientX, y0: e.clientY, lx: e.clientX, lt: performance.now(), v: 0, axis: null, dx: 0 };
+      g = { id: e.pointerId, x0: e.clientX, y0: e.clientY, lx: e.clientX, lt: performance.now(), v: 0, axis: null };
+      warm();   // the neighbors' data and pictures are wanted right now
     }, { passive: true });
     el.addEventListener("pointermove", e => {
       if (!g || e.pointerId !== g.id) return;
       const dx = e.clientX - g.x0, dy = e.clientY - g.y0;
       if (!g.axis) {
-        if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return;
-        if (Math.abs(dx) > Math.abs(dy) * 1.3) { g.axis = "x"; el.style.willChange = "transform"; try { el.setPointerCapture(g.id); } catch (er) {} if (pressT) { clearTimeout(pressT); pressT = 0; } }
-        else { g = null; return; }
+        const ax = Math.abs(dx), ay = Math.abs(dy);
+        if (ax < 6 && ay < 6) return;
+        if (ax >= ay * 1.1) { g.axis = "x"; el.style.willChange = "transform"; el.style.transition = "none"; try { el.setPointerCapture(g.id); } catch (er) {} if (pressT) { clearTimeout(pressT); pressT = 0; } }
+        else { g = null; return; }   // vertical: the page's scroll or the pull-down
       }
       e.preventDefault();
       const dir = dx < 0 ? 1 : -1;   // swiping left = the next one
-      if (dir !== ghostDir) { if (ghost) { ghost.remove(); ghost = null; } ghostDir = dir; ghost = makeGhost(dir); }
-      const has = nbr(dir) >= 0, shown = has ? dx : dx * .28;
-      el.style.transition = "none"; if (ghost) ghost.style.transition = "none";
-      const now = performance.now(); g.v = (e.clientX - g.lx) / Math.max(1, now - g.lt); g.lx = e.clientX; g.lt = now; g.dx = dx;
+      if (dir !== cur) { [-1, 1].forEach(k => { if (ghosts[k]) ghosts[k].style.transition = "none"; }); showDir(dir); }
+      const has = nbr(dir) >= 0, ax = Math.abs(dx), shown = has ? dx : Math.sign(dx) * (ax < 80 ? ax * .4 : 32 + (ax - 80) * .12);   // a rubber band at the ends of the list
+      const now = performance.now(), dt = now - g.lt;
+      if (dt >= 1) { g.v = g.v * .5 + ((e.clientX - g.lx) / dt) * .5; g.lx = e.clientX; g.lt = now; }
       place(shown);
     }, { passive: false });
     const up = e => {
       if (!g || e.pointerId !== g.id) return;
-      const dx = e.clientX - g.x0, dy = e.clientY - g.y0, v = g.v, axis = g.axis; g = axis ? g : null;
+      const dx = e.clientX - g.x0, dy = e.clientY - g.y0, v = g.v, axis = g.axis; if (!axis) g = null;
       if (!axis) {   // a bare press-and-release with no moves in between (a scripted flick): treat a long clean horizontal run as the swipe
-        g = null; if (Math.abs(dx) >= 60 && Math.abs(dx) > Math.abs(dy) * 1.6 && nbr(dx < 0 ? 1 : -1) >= 0) commit(dx < 0 ? 1 : -1, true);
+        if (Math.abs(dx) >= 60 && Math.abs(dx) > Math.abs(dy) * 1.6 && nbr(dx < 0 ? 1 : -1) >= 0) commit(dx < 0 ? 1 : -1, 0, 1, true);
         return;
       }
-      const dir = dx < 0 ? 1 : -1, ok = nbr(dir) >= 0 && (Math.abs(dx) > W() * .3 || (Math.abs(v) > .5 && v * dx > 0));
-      if (ok) { g = null; commit(dir, false); } else { settle(0, 240, reset); }
+      swallow = performance.now();
+      const dir = dx < 0 ? 1 : -1, ok = nbr(dir) >= 0 && (Math.abs(dx) > W() * .3 || (Math.abs(v) > .45 && v * dx > 0 && Math.abs(dx) > 24));
+      if (ok) { g = null; commit(dir, dx, v); } else { g = null; busy = true; settle(0, 240, reset); }
     };
     el.addEventListener("pointerup", up);
-    el.addEventListener("pointercancel", () => { if (g) settle(0, 200, reset); });
+    el.addEventListener("pointercancel", () => { if (g && g.axis) { g = null; busy = true; settle(0, 200, reset); } else g = null; });
     // the first time: a small nudge toward the next painting says the page moves (once ever, never on reduced motion)
     try {
       if (!reduceMotion && nbr(1) >= 0 && !localStorage.getItem("colorhub-swipehint")) setTimeout(() => {
-        if (!el.isConnected || g || busy) return; localStorage.setItem("colorhub-swipehint", "1");
+        const gh = ghosts[1]; if (!gh || !el.isConnected || g || busy || cur) return; localStorage.setItem("colorhub-swipehint", "1");
         // the next painting's edge peeks in 6px at the right for a moment (the page itself never moves, so nothing under a finger shifts)
-        const gh = makeGhost(1); if (!gh) return; ghost = null;
-        gh.style.transition = "transform .3s ease-out, opacity .4s"; gh.style.transform = `translate3d(${W()}px,0,0)`;
-        requestAnimationFrame(() => requestAnimationFrame(() => { gh.style.transform = `translate3d(${W() - 7}px,0,0)`; }));
-        setTimeout(() => { gh.style.opacity = "0"; setTimeout(() => gh.remove(), 450); }, 1900);
+        gh.style.opacity = "1"; gh.style.transition = "transform .3s ease-out, opacity .4s";
+        requestAnimationFrame(() => requestAnimationFrame(() => { if (!g && !cur) gh.style.transform = `translate3d(${W() - 7}px,0,0)`; }));
+        setTimeout(() => { if (!g && !busy && !cur && gh.isConnected) { gh.style.opacity = "0"; setTimeout(() => { if (!g && !cur) { gh.style.transition = ""; gh.style.transform = off(1); } }, 450); } }, 1900);
       }, 1500);
     } catch (er) {}
   })();
