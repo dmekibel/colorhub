@@ -347,6 +347,13 @@ function tlgWire(el) {
     if (!vertOK && !horizOK) return;
     a = { id: e.pointerId, x0: e.clientX, y0: e.clientY, axis: null, vertOK, horizOK, lastX: e.clientX, lastY: e.clientY, lastT: performance.now(), vx: 0, vy: 0, floor: null, anim: null };
   }, { passive: true });
+  // iOS Safari takes a downward drag at the top of the page for its own scroll/rubber band and then cancels the pointer events, so the page
+  // never followed the finger. Cancelling the first touchmoves of a clearly downward drag (nothing to scroll there anyway) keeps the gesture ours.
+  el.addEventListener("touchmove", e => {
+    if (!a || !a.vertOK || e.touches.length !== 1 || !e.cancelable) return;
+    const t = e.touches[0], dx = t.clientX - a.x0, dy = t.clientY - a.y0;
+    if (a.axis === "y" || (dy > 3 && dy > Math.abs(dx) * 1.2 && pageScrollTop() <= 0)) e.preventDefault();
+  }, { passive: false });
   el.addEventListener("pointermove", e => {
     if (!a || e.pointerId !== a.id) return;
     const dx = e.clientX - a.x0, dy = e.clientY - a.y0;
