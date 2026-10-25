@@ -32,22 +32,8 @@
 /* most-famous rail: reuses js/gallery.js's gl-rail/gl-pin, no new markup needed */
 
 /* the life's work: view switch, sort chips, filter drawer, grid/timeline mount */
-.aw-wk-views{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:22px 0 14px}
-.aw-wk-map{display:inline-flex;align-items:center;gap:7px;font:500 13px/1 var(--mono);letter-spacing:.04em;color:var(--soft);padding:0;background:none;border:0}
-.aw-wk-map svg{width:16px;height:16px}
-.aw-wk-sort{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
 .aw-chipbtn{min-height:34px;padding:0 14px;border-radius:var(--r-pill);border:1px solid var(--rule);background:none;color:var(--soft);font:500 13px/1 var(--mono);letter-spacing:.04em}
 .aw-chipbtn.on{background:var(--sel-fill);color:var(--sel-ink);box-shadow:var(--sel-ring);border-color:transparent}
-.aw-wk-filt{margin:4px 0 18px}
-.aw-wk-filt label{display:block;font:500 13px/1.3 var(--mono);letter-spacing:.02em;color:var(--soft);margin:0 0 8px}
-.aw-wk-filt label b{color:var(--ink);font-style:normal}
-.aw-wk-range{display:flex;flex-direction:column;gap:2px}
-.aw-wk-range input{width:100%}
-.aw-wk-csw{display:inline-flex;align-items:center;gap:7px;min-height:34px;padding:0 12px 0 6px;border-radius:var(--r-pill);background:none;border:1px solid var(--rule);text-align:left}
-.aw-wk-csw i{width:22px;height:22px;border-radius:50%;background:var(--c);flex:none;box-shadow:inset 0 0 0 1px rgba(236,232,223,.14)}
-.aw-wk-csw span{font:500 13px/1 var(--mono);color:var(--soft);letter-spacing:.04em}
-.aw-wk-csw.on{background:var(--sel-fill);box-shadow:var(--sel-ring);border-color:transparent}
-.aw-wk-csw.on span{color:var(--sel-ink)}
 .aw-wk-mount{margin-top:4px}
 .aw-wk-rail .gl-badge{position:absolute}
 .aw-tl-div{flex:none;align-self:stretch;display:flex;align-items:center;justify-content:center;width:34px;writing-mode:vertical-rl;text-orientation:mixed;font:500 13px/1 var(--mono);letter-spacing:.04em;color:var(--faint);border-left:1px solid var(--rule)}
@@ -318,24 +304,11 @@
 .aw-pmap-top{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:52px;margin:16px 0 0;padding:0 22px;border:0;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);font:400 21px/1 var(--serif);letter-spacing:-.01em;transition:opacity .2s}
 .aw-pmap-top:active{opacity:.7}
 /* the painter page's two map doors: the painting map (the one paper button) and the painter's own color map */
-.aw-map-row{display:flex;gap:10px;margin:16px 0 0}
-.aw-map-row .aw-pmap-top{flex:1.25;width:auto;margin:0;padding:0 14px;min-width:0;font-size:19px}
-.aw-pcolors{flex:1;min-width:0;height:52px;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 12px;border-radius:var(--r-pill);background:rgba(236,232,223,.09);color:var(--ink);font:400 19px/1 var(--serif);letter-spacing:-.01em;border:0}
-.aw-pcolors svg{width:20px;height:20px;flex:none}
-.aw-pcolors:active{opacity:.7}
 .aw-pmap-top svg{width:20px;height:20px;flex:none;color:var(--paper-ink)}
 .aw-chipbtn{display:inline-flex;align-items:center;gap:6px}
 .aw-chipbtn:active{opacity:.7}
-.aw-dirarr{display:inline-flex}
-.aw-dirarr svg{width:15px;height:15px}
-.aw-wk-look[hidden]{display:none}
 
 /* one calm row: sort picker, Palettes, Size (coordinator review, 2026-10-20) */
-.aw-wk-look{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}
-.aw-look2{display:contents}
-.aw-look2[hidden]{display:none}
-.aw-wk-look .aw-chipbtn{padding:0 10px;letter-spacing:0;white-space:nowrap}
-.aw-sortsel{appearance:none;-webkit-appearance:none;padding-right:26px!important;color:var(--ink);cursor:pointer;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23b9b4aa' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9l7 7 7-7'/%3E%3C/svg%3E") no-repeat right 9px center}
 /* Life's work sorted by subject: one small labeled section per genre (js/artwiki.js awWorksWire) */
 .aw-subj-sec + .aw-subj-sec{margin-top:26px}
 .aw-subj-h{display:flex;align-items:baseline;gap:10px;margin:0 0 12px;font:400 15px/1.2 var(--sans);color:var(--ink)}
@@ -343,3 +316,24 @@
 .aw-subj-h span{font:400 13px/1 var(--mono);color:var(--faint)}
 .aw-chipn{font-style:normal;font:500 12px/1 var(--mono);color:var(--faint)}
 .aw-chipbtn.on .aw-chipn{color:inherit;opacity:.8}
+
+
+/* the painter page is the shared shape: portrait band, one sticky chip row (.fd-bar, css/gallery.css), one pane at a time (David, 2026-10-25) */
+.aw-tabs{margin-top:18px}
+.aw-pane[hidden]{display:none}
+.aw-pane>:first-child{margin-top:26px}
+.aw-pane>.sec-head:first-child{margin-top:22px}
+/* Their colors: the strip of their colors and the one paper button that opens the painter's color map (js/paintercolors.js) */
+.aw-cmap{margin:0 0 6px}
+.aw-cmap .aw-strip{display:flex;border-radius:var(--r-2,10px);overflow:hidden}
+.aw-cmap .aw-sub{margin:12px 0 0}
+.aw-pcolors{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:52px;margin:16px 0 0;padding:0 22px;border:0;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);font:400 21px/1 var(--serif);letter-spacing:-.01em}
+.aw-pcolors svg{width:20px;height:20px;flex:none}
+.aw-pcolors:active{opacity:.7}
+/* Settings sheet rows that are not in the feeds' sheet: a swatch in a color chip, and the small Clear next to a heading */
+.aw-fs-csw{display:inline-flex;align-items:center;gap:8px;padding-left:8px!important}
+.aw-fs-csw i{width:22px;height:22px;border-radius:50%;background:var(--c);flex:none;box-shadow:inset 0 0 0 1px rgba(236,232,223,.18)}
+.aw-fs-clr{min-height:0!important;margin-left:auto}
+.fs-multi button .aw-chipn{color:inherit;opacity:.7}
+/* Their work: every tile is by this painter, so the "Painter · year" caption line is dropped (the year is on the picture); js/gallery.js still reserves its line of room */
+.aw-wk-mount .gl-pin small{display:none}

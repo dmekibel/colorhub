@@ -3178,7 +3178,7 @@ function pmMount(el, s, F) {
     // David, 2026-10-25: the map is a lens on a feed. When the page before it has one (a color or a painting), the ⋯ sheet leads with one
     // button back to it, to the same tile; Feed is never a word you tap on the way in.
     const prevTok = typeof XSTACK !== "undefined" && XSTACK.length >= 2 ? String(XSTACK[XSTACK.length - 2]) : "";
-    const toFeed = /^(p:|n:|g:|z:)/.test(prevTok) ? `<button type="button" class="pmx-tofeed" data-pmtofeed>${ICON.back}<span>Back to the feed</span></button>` : "";
+    const toFeed = /^(p:|n:|g:|z:|aw:painter:)/.test(prevTok) ? `<button type="button" class="pmx-tofeed" data-pmtofeed>${ICON.back}<span>Back to the feed</span></button>` : "";
     const { sh, close } = sheet(`<div class="hm-chooser pmx-chooser" data-tab="${tab}">${head}${toFeed}
         <div class="hm-ch-scroll" data-pane="arrange" data-sheet-scroll></div>
         <div class="hm-ch-scroll" data-pane="filter" data-sheet-scroll><div data-pmbody></div></div>

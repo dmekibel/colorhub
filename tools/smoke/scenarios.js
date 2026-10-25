@@ -5800,32 +5800,71 @@ scenario("pages", "painter page: the portrait hero renders (an image or the sign
   const open = t.$(".aw-pt-open", stand);
   t.expect(open && open.dataset.gi === stand.dataset.pthero, "the hero doesn't link to the painting it shows");
 });
-scenario("pages", "painter page: a sort chip reorders the life's work grid", async t => {
-  await t.open("#/painter/john-singer-sargent", { settle: 600 });
+// David, 2026-10-25: the painter page is the shared shape: portrait band, ONE sticky chip row (Overview, Their work, Their colors), one pane at a time.
+// The sort / view / filter chips that sat above the grid are in a Settings sheet now, opened from the small floating pill (same sheet and pill as the feeds).
+async function awWorkTab(t, slug) {
+  await t.open("#/painter/" + slug, { settle: 600 });
   await t.waitFor(".aw-page", 15000, "the painter page");
+  const tabs = t.$$(".aw-tabs [data-awtab]").map(b => b.textContent.trim());
+  t.expect(tabs.join("|") === "Overview|Their work|Their colors", `the chip row reads "${tabs.join(" | ")}"`);
+  t.expect(t.$$(".aw-tabs").length === 1 && !t.$(".aw-map-row"), "the painter page has a second row of buttons or chips above the chip row");
+  await t.click('[data-awtab="work"]', { wait: 500 });
   await t.waitFor("#aw-works", 8000, "the Life's work section");
-  const firstGi = () => { const p = t.$(".aw-wk-mount .gl-pin, .aw-wk-mount .gl-pin.wait"); return p && p.dataset.gi; };
-  await t.waitFor(() => firstGi(), 8000, "the grid's first pin");
+  const first = () => { const p = t.$(".aw-wk-mount .gl-pin"); return p && p.dataset.gi; };
+  await t.waitFor(() => first(), 8000, "the grid's first pin");
+  return first;
+}
+scenario("pages", "painter page: Settings sorts the life's work grid, and the pill shows only while the pictures are on screen", async t => {
+  const firstGi = await awWorkTab(t, "john-singer-sargent");
   const before = firstGi();
-  const vivid = t.$$('[data-wksort="C"]').find(b => /Vivid/.test(b.textContent));
-  t.expect(vivid, "no Vivid sort chip");
-  await t.click(vivid, { wait: 500 });
-  t.expect(vivid.classList.contains("on"), "the Vivid chip didn't turn on");
+  t.expect(!t.$(".fd-float").classList.contains("away"), "the Settings / Map pill isn't showing over the grid");
+  await t.click("[data-fdset]", { wait: 600 });
+  const sh = await t.waitFor(".fs-sheet", 5000, "the Settings sheet");
+  t.expect(/paintings/.test(t.text(".fs-count")), `no live count in the sheet: "${t.text(".fs-count")}"`);
+  const sel = t.$("[data-wksel]", sh);
+  t.expect([...sel.options].some(o => /Most vivid first/.test(o.textContent)), "no Most vivid first order");
+  sel.value = "C:0"; sel.dispatchEvent(new t.w.Event("change", { bubbles: true }));
   await t.waitFor(() => firstGi() && firstGi() !== before, 6000, "the grid order to change after switching sort");
+  t.expect(!t.$("[data-fdsetdot]").hidden, "the Settings button shows no mark that something changed");
+  await t.click(".fs-reset", { wait: 800 });
+  t.ev("document.querySelectorAll('.scrim').forEach(s => s.click())"); await t.sleep(500);
+  await t.waitFor(() => firstGi() === before, 6000, "Reset to put the order back");
+  // on Overview the pill goes away
+  await t.click('[data-awtab="about"]', { wait: 500 });
+  await t.waitFor(() => t.$(".fd-float").classList.contains("away"), 3000, "the pill to leave on the Overview tab");
 });
 scenario("pages", "painter page: a museum filter narrows the life's work grid -- honestly", async t => {
-  await t.open("#/painter/rembrandt-van-rijn", { settle: 600 });
-  await t.waitFor(".aw-page", 15000, "the painter page");
-  await t.waitFor("#aw-works", 8000, "the Life's work section");
-  const fold = await t.waitFor('[data-wkfilter] summary', 8000, "the Filter drawer");
-  await t.click(fold, { wait: 300 });
-  const mus = t.$$("[data-wkmus]")[0];
+  await awWorkTab(t, "rembrandt-van-rijn");
+  await t.click("[data-fdset]", { wait: 600 });
+  const sh = await t.waitFor(".fs-sheet", 5000, "the Settings sheet");
+  const mus = t.$$("[data-wkmus]", sh)[0];
   t.expect(mus, "no museum filter chip (expected more than one museum here)");
   const before = t.text("[data-wkcount]");
   await t.click(mus, { wait: 500 });
-  t.expect(mus.classList.contains("on"), "the museum chip didn't turn on");
+  t.expect(mus.getAttribute("aria-pressed") === "true", "the museum chip didn't turn on");
   await t.waitFor(() => t.text("[data-wkcount]") !== before, 6000, "the count readout to change after a museum filter");
   t.expect(/ of /.test(t.text("[data-wkcount]")), `the count doesn't read "N of M" once filtered (got "${t.text("[data-wkcount]")}")`);
+});
+scenario("pages", "painter page: Map opens the painter's work seeded on a painting and Back to the feed returns to the same place", async t => {
+  const firstGi = await awWorkTab(t, "claude-monet");
+  const y0 = 900; t.w.scrollTo(0, y0); t.w.dispatchEvent(new t.w.Event("scroll")); await t.sleep(500);
+  const yBefore = t.w.scrollY;
+  await t.click("[data-fdmap]", { wait: 900 });
+  await TRL.atHash(t, /^#\/paintings\/map\?arr=spiral&seed=\d+&p=claude-monet/, "the painting map, seeded on a painting, filtered to the painter");
+  await t.waitFor(".pmx-do", 15000, "the map's ⋯ button");
+  await t.click(".pmx-do", { wait: 600 });
+  const back = await t.waitFor("[data-pmtofeed]", 5000, "Back to the feed in the map's ⋯ sheet");
+  await t.click(back, { wait: 900 });
+  await TRL.atHash(t, /^#\/painter\/claude-monet/, "the painter page again");
+  await t.waitFor(() => t.$(".aw-tabs .fd-chip.on") && /Their work/.test(t.$(".aw-tabs .fd-chip.on").textContent), 6000, "the Their work tab to be the one reopened");
+  await t.waitFor(() => Math.abs(t.w.scrollY - yBefore) < 40, 6000, `the scroll to come back (was ${yBefore}, is ${t.w.scrollY})`);
+});
+scenario("pages", "painter page: a painter with few paintings still has the chip row, and Their colors says so honestly", async t => {
+  await t.open("#/painter/adam-pijnacker", { settle: 600 });
+  await t.waitFor(".aw-page", 15000, "the painter page");
+  t.expect(t.$$(".aw-tabs").length <= 1, "more than one chip row");
+  const chips = t.$$(".aw-tabs [data-awtab]");
+  if (chips.length > 1) { await t.click(chips[chips.length - 1], { wait: 500 }); t.expect(t.$(".aw-pane:not([hidden])"), "no pane shows after a tab tap"); }
 });
 
 // ================================================================== THE TRAIL (js/trail.js: one Back for everything, the map glyph)
@@ -8689,7 +8728,8 @@ scenario("paintmap", "the card is one row of chips; tapping the card opens the p
 scenario("pages", "painter's color map: opens from the painter page, size follows use, every arrangement lays out, a node opens its color", async t => {
   await t.open("#/painter/vincent-van-gogh", { settle: 600 });
   await t.waitFor(".aw-page", 15000, "the painter page");
-  const btn = await t.waitFor(".aw-pcolors", 8000, "the painter page's Their colors button");
+  await t.click('[data-awtab="colors"]', { wait: 400 });
+  const btn = await t.waitFor(".aw-pcolors", 8000, "the Their colors tab's color map button");
   await t.click(btn, { wait: 500 });
   await t.waitFor(".ph-sheet", 12000, "the color map sheet");
   await t.waitFor(() => t.ev("window.PH_DEBUG && PH_DEBUG.count()") > 0, 60000, "the painter's colors to lay out (vivid reading)");
@@ -8735,6 +8775,11 @@ scenario("pages", "painter's color map: opens from the painter page, size follow
   await t.tapAt(t.$(".ph-cv"), at.x, at.y, { wait: 500 });
   await t.waitFor(() => /^#\/(c|name)\//.test(t.w.location.hash), 8000, "a color page after tapping a node");
   t.expect(!t.$(".ph-sheet"), "the color map is still open after tapping a node");
-  await t.waitFor(".pc-use", 12000, "the painter's use line on the color page");
+  // a color page opened from a map starts on its Paintings tab (js/richpage.js rpStartChip); the line sits in the article's "In paintings" section,
+  // which loads when it scrolls near, so open Overview and bring that section up (as the trail scenario does)
+  const aboutChip = t.$(".fd-chip[data-fc=about]"); if (aboutChip && !aboutChip.classList.contains("on")) await t.click(aboutChip, { wait: 400 });
+  await t.waitFor(() => { const g = t.$("[data-glin]"); if (g) { g.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); } return t.$(".pc-use"); }, 20000, "the painter's use line on the color page");
   t.expect(/van Gogh holds this in \d[\d,]* of \d[\d,]* paintings/.test(t.text(".pc-use")), `the use line reads: ${t.text(".pc-use")}`);
 });
+
+
