@@ -3106,8 +3106,8 @@ scenario("studio", "camera: a refused permission gets its own fix-it message, an
   t.expect(left !== right, `dragging the circle should change what it names (both read "${left}")`);
   // how much the circle reads is a setting in ⋯ (2x2 by default), never a pinch on the picture
   await t.click("#more", { wait: 300 });
-  t.expect(t.$$(".eye-sheet [data-eydsize]").length === 5, "the ⋯ sheet should offer five read sizes");
-  t.expect(t.$(".eye-sheet [data-eydsize].on") && t.$(".eye-sheet [data-eydsize].on").dataset.eydsize === "2", "the default read should be a 2x2 average");
+  t.expect(t.$$(".eye-sheet [data-eydsize]").length === 4, "the ⋯ sheet should offer four read sizes (Point, Small, Medium, Large)");
+  t.expect(t.$(".eye-sheet [data-eydsize].on") && t.$(".eye-sheet [data-eydsize].on").dataset.eydsize === "5", "the default read should be Small");
   t.ev("(() => { const s = [...document.querySelectorAll('.scrim')].pop(); if (s) s.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, cancelable: true })); })()");
   await t.sleep(500);
   // hold still to lock; the name line says Held; a tap goes live again
@@ -3241,7 +3241,7 @@ scenario("studio", "photo page: a camera photo opens with a color circle where t
   ev("pointermove", r.left + r.width * .7, r.top + r.height * .5); ev("pointerup", r.left + r.width * .7, r.top + r.height * .5);
   await t.sleep(200);
   t.expect(t.$$(".pv-yname em")[0].textContent !== first, "dragging a circle should change its color");
-  t.expect(t.$('[data-pvread="2"].on'), "circles should read a 2x2 average by default");
+  t.expect(t.$('[data-pvread="5"].on'), "circles should read a Small average by default");
   await t.click('[data-pvread="1"]', { wait: 200 });
   t.expect(t.$('[data-pvread="1"].on'), "Exact should turn on below the photo");
   await t.click('[data-pvlens="value"]', { wait: 200 });
@@ -4961,9 +4961,10 @@ scenario("eyedrop", "the shared eyedropper: drag reads each side, and sample siz
     cx.fillStyle = "#FF0000"; cx.fillRect(0, 0, 50, 40);
     cx.fillStyle = "#0000FF"; cx.fillRect(50, 0, 50, 40);
     const img = new Image();
-    img.onload = () => {
+    img.onload = async () => {
       img.style.cssText = "position:fixed;left:0;top:0;width:200px;height:80px;z-index:999";
       document.body.appendChild(img);
+      const raf = () => new Promise(r => requestAnimationFrame(() => r()));
       const r = img.getBoundingClientRect();
       const fire = (el, type, x) => el.dispatchEvent(new PointerEvent(type, { bubbles: true, clientX: r.left + x, clientY: r.top + r.height / 2, isPrimary: true, pointerId: 1 }));
       setSampleSize(1);
@@ -4971,13 +4972,13 @@ scenario("eyedrop", "the shared eyedropper: drag reads each side, and sample siz
       const a1 = eyedropAttach(img, { onMove: (hex) => moves1.push(hex) });
       fire(img, "pointerdown", 10);
       const redHex = moves1[moves1.length - 1];
-      fire(img, "pointermove", 190);
+      fire(img, "pointermove", 190); await raf();
       const blueHex = moves1[moves1.length - 1];
-      fire(img, "pointermove", 100);
+      fire(img, "pointermove", 100); await raf();
       const pointBoundary = moves1[moves1.length - 1];
       fire(img, "pointerup", 100);
       a1.detach();
-      setSampleSize(31);
+      setSampleSize(21);
       const moves2 = [];
       const a2 = eyedropAttach(img, { onMove: (hex) => moves2.push(hex) });
       fire(img, "pointerdown", 100);
@@ -4994,26 +4995,41 @@ scenario("eyedrop", "the shared eyedropper: drag reads each side, and sample siz
   t.expect(r.redHex === "#FF0000", `the red side read ${r.redHex}, not pure red`);
   t.expect(r.blueHex === "#0000FF", `the blue side read ${r.blueHex}, not pure blue`);
   t.expect(r.pointBoundary === "#FF0000" || r.pointBoundary === "#0000FF", `Point at the boundary should land on one exact side, got ${r.pointBoundary}`);
-  t.expect(r.avgBoundary !== "#FF0000" && r.avgBoundary !== "#0000FF" && /^#[0-9A-F]{6}$/.test(r.avgBoundary), `31×31 at the boundary should blend the two sides, got ${r.avgBoundary}`);
-  // the loupe follows the drag and shows a live readout
-  const loupeInfo = await t.ev(`(() => new Promise(resolve => {
+  t.expect(r.avgBoundary !== "#FF0000" && r.avgBoundary !== "#0000FF" && /^#[0-9A-F]{6}$/.test(r.avgBoundary), `Large at the boundary should blend the two sides, got ${r.avgBoundary}`);
+  // Adobe Capture style (2026-10-25): a persistent reticle and a corner preview, no floating loupe; the size row sits below
+  const info = await t.ev(`(() => new Promise(resolve => {
     const img = document.createElement("img");
-    img.style.cssText = "position:fixed;left:0;top:0;width:200px;height:80px;z-index:999";
-    img.onload = () => {
+    img.style.cssText = "position:fixed;left:0;top:60px;width:300px;height:200px;z-index:999";
+    img.onload = async () => {
       document.body.appendChild(img);
-      const r = img.getBoundingClientRect();
-      eyedropAttach(img, {});
-      img.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, clientX: r.left + 10, clientY: r.top + r.height / 2, isPrimary: true, pointerId: 1 }));
-      const loupe = document.querySelector(".eyd-loupe");
-      resolve(JSON.stringify({ shown: !!loupe, hex: loupe && loupe.querySelector(".eyd-loupe-hex").textContent }));
+      const r = img.getBoundingClientRect(), raf = () => new Promise(q => requestAnimationFrame(() => q()));
+      const d = eyedropAttach(img, {});
+      await raf();
+      const ring0 = document.querySelector(".eyd-ret"), pv0 = document.querySelector(".eyd-prev");
+      const idle = { ring: !!ring0, prev: !!pv0, left: pv0 && parseFloat(pv0.style.left), sizes: document.querySelectorAll(".eyd-sizebar [data-eydsize]").length, loupe: !!document.querySelector(".eyd-loupe") };
+      // a mouse press jumps the ring to the top-left of the picture: the preview must flip to the right
+      img.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, clientX: r.left + 20, clientY: r.top + 20, isPrimary: true, pointerId: 1, pointerType: "mouse" }));
+      await raf();
+      const pv = document.querySelector(".eyd-prev");
+      const flipped = { right: pv.classList.contains("eyd-prev-r"), name: pv.querySelector(".eyd-prev-name").textContent };
+      img.dispatchEvent(new PointerEvent("pointerup", { bubbles: true, clientX: r.left + 20, clientY: r.top + 20, isPrimary: true, pointerId: 1, pointerType: "mouse" }));
+      d.detach();
+      const gone = !document.querySelector(".eyd-layer") && !document.querySelector(".eyd-sizebar");
+      document.body.removeChild(img);
+      resolve(JSON.stringify({ idle, flipped, gone }));
     };
-    const c = document.createElement("canvas"); c.width = 100; c.height = 40;
-    c.getContext("2d").fillRect(0, 0, 100, 40);
+    const c = document.createElement("canvas"); c.width = 300; c.height = 200;
+    c.getContext("2d").fillRect(0, 0, 300, 200);
     img.src = c.toDataURL();
   }))()`);
-  const lr = JSON.parse(loupeInfo);
-  t.expect(lr.shown, "the loupe never appeared on pointerdown");
-  t.expect(/^#[0-9A-F]{6}$/.test(lr.hex), `the loupe's hex readout is missing or wrong: ${lr.hex}`);
+  const lr = JSON.parse(info);
+  t.expect(lr.idle.ring && lr.idle.prev, "the persistent reticle and the corner preview weren't there before any touch");
+  t.expect(lr.idle.left < 40, `the preview should start in the top-left corner, left=${lr.idle.left}`);
+  t.expect(lr.idle.sizes === 4, `the size row below the picture should hold four buttons, got ${lr.idle.sizes}`);
+  t.expect(!lr.idle.loupe, "the old floating loupe is still around");
+  t.expect(lr.flipped.right, "the preview did not flip to the right when the reticle went under its corner");
+  t.expect(lr.flipped.name.length > 0, "the preview shows no color name");
+  t.expect(lr.gone, "detach() left the reticle layer or the size row behind");
 });
 // js/picked.js: picking = saving (David, 2026-10-10). Two real picks through the real eyedropAttach path
 // (Pair with… → From a photo, the same door tested above) land in Picked colors automatically; Select mode's
@@ -8310,17 +8326,25 @@ scenario("pv", "Palette view: categories render equal-swatch rows, the count sli
 });
 // Look closer's Pick mode is the palette editor (David, 2026-10-20): "Pick a color" opens it, a tap drops a loupe + a
 // swatch, the palette survives closing and reopening, and Save puts it in Kept.
-scenario("paintings", "Pick a color opens the palette editor: taps add loupes and swatches that persist and Save keeps them", async t => {
+scenario("paintings", "Pick a color opens the palette editor: one reticle moves, + keeps its colors as swatches that persist and Save keeps them", async t => {
   await t.open("#/gallery/5", { settle: 800 });
   const btn = await t.waitFor("[data-glpickbtn]:not([hidden])", 15000, "the Pick a color button");
   await t.click(btn, { force: true, wait: 900 });
   await t.waitFor(".glz-scrim [data-glzpk]:not([hidden])", 8000, "the palette editor panel");
-  t.expect(/tap the painting/i.test(t.text(".glz-pk-info")), "the first-time hint is missing");
+  await t.waitFor(() => t.$(".glz-pk-name"), 6000, "the live color name under the picture");
+  t.expect(t.$$(".glz-scrim .eyd-ret").length === 1, "there should be exactly one reticle");
+  t.expect(t.$(".glz-scrim .eyd-prev") && !t.$(".glz-scrim .eyd-prev").hidden, "the corner preview is missing");
+  t.expect(t.$$(".glz-pk-size [data-eydsize]").length === 4, "the Point / Small / Medium / Large row should sit below the palette row");
   const pts = [[.3, .3], [.6, .5], [.5, .8]];
-  t.ev(`(() => { const s = document.querySelector(".glz-scrim"), im = s.querySelector(".glz-img"), r = im.getBoundingClientRect();
-    ${JSON.stringify(pts)}.forEach(([fx, fy]) => s._glzQA.pkTap(r.left + fx * r.width, r.top + fy * r.height)); })()`);
-  t.expect(t.$$(".glz-lp").length === 3 && t.$$(".glz-sw-w").length === 3, `expected 3 loupes and 3 swatches, got ${t.$$(".glz-lp").length}/${t.$$(".glz-sw-w").length}`);
-  t.expect(t.$(".glz-sw.on") && t.$(".glz-lp.on"), "the last pick should be the active swatch and loupe");
+  for (const [fx, fy] of pts) {
+    t.ev(`(() => { const s = document.querySelector(".glz-scrim"), im = s.querySelector(".glz-img"), r = im.getBoundingClientRect();
+      s._glzQA.pkTap(r.left + ${fx} * r.width, r.top + ${fy} * r.height); })()`);
+    await t.sleep(80);
+    await t.click(t.$("[data-glzpkadd]"), { force: true, wait: 120 });
+  }
+  t.expect(t.$$(".glz-sw-w").length === 3, `expected 3 swatches, got ${t.$$(".glz-sw-w").length}`);
+  t.expect(t.$$(".glz-scrim .eyd-ret").length === 1, "adding a color must not drop another reticle");
+  t.expect(t.$(".glz-sw.on"), "the last added swatch should be selected");
   const first = t.$(".glz-sw-w .glz-sw");
   await t.click(first, { force: true, wait: 200 });
   t.expect(t.$(".glz-sw-w .glz-sw").classList.contains("on"), "tapping a swatch should select it");

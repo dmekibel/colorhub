@@ -2283,6 +2283,7 @@ function glPage(i, d, fromHex, tol) {
     if (eyd) { eyd.detach(); eyd = null; }
     if (pickArmed && canSample && typeof eyedropAttach === "function") {
       eyd = eyedropAttach(sampleImg, {
+        sizes: false,   // the painting page has no room under the hero; Look closer has the size row
         onMove: () => { swipeStart = null; },   // a color-sampling drag is never a swipe-to-next-painting
         onPick: (hex, pt) => {
           buzz(6);
