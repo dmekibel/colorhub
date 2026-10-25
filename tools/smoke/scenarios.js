@@ -2689,7 +2689,7 @@ scenario("pages", "a painter row in Painters who use it opens their page, and al
 // "Black brown" still has 5 painters here, none with a Wikidata portrait (all five exercise the famous/typical
 // fallback this scenario exists to check), so it keeps the original intent without hardcoding a count that
 // drifts with the corpus.
-scenario("pages", "every painter avatar (portrait or famous/typical-painting fallback) resolves to a real image, same size", async t => {
+scenario("painters", "every painter avatar (portrait or famous/typical-painting fallback) resolves to a real image, same size", async t => {
   await H.openPage(t, "#/name/black-brown", "Black brown");
   const paint = await t.waitFor(() => t.$(".rp-paint"), 8000, "the Paintings section");
   const rows = await t.waitFor(() => { const r = t.$$(".rc-painter[data-awpainter]", paint); return r.length >= 4 ? r : null; }, 20000, "several painter rows");
@@ -4744,7 +4744,7 @@ async function cfeedChip(t, chip) {
   await t.waitFor(() => t.$(`.fd-chip.on[data-fc=${chip}]`) && !t.$(".fd-tile.sk") && t.$(".fd-tile[data-fk='0'] .fd-cap") ? true : null, 25000, "the " + chip + " ranking");
   await t.sleep(300);
 }
-scenario("pages", "Keep exploring on a color page: the feed is the body under the cover (About first), closest painting first, and the cover and the fine print are untouched", async t => {
+scenario("cfeed", "Keep exploring on a color page: the feed is the body under the cover (About first), closest painting first, and the cover and the fine print are untouched", async t => {
   await cfeedOpen(t, "#/color/teal");
   const feed = t.$("[data-rpfeed]");
   t.expect(feed, "the feed host is missing on the color page");
@@ -4770,7 +4770,7 @@ scenario("pages", "Keep exploring on a color page: the feed is the body under th
 });
 // David, 2026-10-25: the "2 across" button is gone. A Settings button opens a sheet made for the tab (closeness, coverage, role, years, shape, order,
 // size on Paintings) with a live count, and a Map button opens the same list as the painting map, the painting nearest the top in the middle.
-scenario("pages", "Keep exploring on a color page: Settings changes the list with a live count and the Map lens opens the same list", async t => {
+scenario("cfeed", "Keep exploring on a color page: Settings changes the list with a live count and the Map lens opens the same list", async t => {
   await cfeedOpen(t, "#/color/teal");
   t.expect(!t.$("[data-fdsize]"), "the old '2 across' button is still on the page");
   const before = t.$$(".fd-tile[data-fk]").length;
@@ -4815,7 +4815,7 @@ scenario("pages", "When and where: a decade bar opens the Era feed and a country
   await t.waitFor(() => t.text(".fd-chip.on") === "Place" && t.$$(".fd-tile[data-fk]").length >= 4 ? true : null, 25000, "the Place feed after the country tap");
   t.expect(t.text(".fd-lead").startsWith(country), `the Place lead is "${t.text(".fd-lead")}", not ${country} first`);
 });
-scenario("pages", "Keep exploring on a color page: each chip re-ranks with its own plain captions", async t => {
+scenario("cfeed", "Keep exploring on a color page: each chip re-ranks with its own plain captions", async t => {
   await cfeedOpen(t, "#/color/teal");
   await cfeedChip(t, "painters");
   t.expect(/^(Used most|Also used) by \S/.test(t.text(".fd-tile[data-fk='0'] .fd-cap")), `Painters caption: "${t.text(".fd-tile[data-fk='0'] .fd-cap")}"`);
@@ -4834,7 +4834,7 @@ scenario("pages", "Keep exploring on a color page: each chip re-ranks with its o
   t.expect(t.$(".fd-tile[data-fk='0']"), "Paintings didn't come back");
   t.expect(t.ev(`JSON.parse(sessionStorage.getItem("colorhub-feed-color")).chip`) === "paintings", "the chip choice isn't remembered for the session");
 });
-scenario("pages", "Keep exploring on a color page: a chip with nothing for this color is disabled with a plain reason", async t => {
+scenario("cfeed", "Keep exploring on a color page: a chip with nothing for this color is disabled with a plain reason", async t => {
   await t.open("#/color/teal", { settle: 600 });
   t.ev(`fdcOff("c:#008080", "era", "Too few paintings that hold this color have a year, so there is no era to read.")`);
   await cfeedOpen(t, "#/color/teal");
@@ -4847,7 +4847,7 @@ scenario("pages", "Keep exploring on a color page: a chip with nothing for this 
   t.expect(/no era to read/.test(t.text(".fd-lead")) && t.text(".fd-chip.on") === "Paintings", `no plain reason on tap: lead "${t.text(".fd-lead")}"`);
   t.ev(`FDC_OFF.delete("c:#008080")`);
 });
-scenario("pages", "Keep exploring on a color page: a tile opens its painting, and Back returns to the exact feed position", async t => {
+scenario("cfeed", "Keep exploring on a color page: a tile opens its painting, and Back returns to the exact feed position", async t => {
   await cfeedOpen(t, "#/color/teal");
   for (let n = 0; n < 6; n++) { t.w.scrollBy(0, 700); await t.sleep(250); }
   const tile = t.$$(".fd-tile[data-fk]").find(e => +e.dataset.fk >= 8);
@@ -4866,7 +4866,7 @@ scenario("pages", "Keep exploring on a color page: a tile opens its painting, an
   const y1 = t.$(`.fd-tile[data-fk='${k}']`).getBoundingClientRect().top;
   t.expect(Math.abs(y1 - y0) <= 4, `Back put the tile at ${Math.round(y1)}px, it was at ${Math.round(y0)}px`);
 });
-scenario("pages", "Keep exploring on an in-between color: the feed measures the tapped color, and a close name opens with the exact color", async t => {
+scenario("cfeed", "Keep exploring on an in-between color: the feed measures the tapped color, and a close name opens with the exact color", async t => {
   await cfeedOpen(t, "#/color/teal?c=2f8f8a");
   const caps = feedCaps(t);
   t.expect(caps.length >= 4 && !caps.some(c => /% match/.test(c)), `captions: ${caps.slice(0, 4)}`);
@@ -5777,7 +5777,7 @@ scenario("sets", "a trio with no close match says so plainly, with no unrelated 
 // painting page. The rule now: every painter name is tappable (js/artwiki.js awPainter() falls back to
 // awPainterLite(), built from tools/painters_lite.py's data/artists/lite.json, every OTHER named painter in the
 // corpus). A random daily-seeded sample of paintings, including deliberately minor ones, checks this holds.
-scenario("pages", "every painter name on a random sample of paintings is tappable, including minor painters without a full profile", async t => {
+scenario("painters", "every painter name on a random sample of paintings is tappable, including minor painters without a full profile", async t => {
   await t.open("#/home", { settle: 300 });
   // 23778: the corpus size tools/check.js's own "ids gate" reports (checked at the top of this file's other
   // gallery-index scenarios, e.g. "a random archive painting has..."); galleryPage() itself loads the gallery
@@ -5830,7 +5830,7 @@ scenario("pages", "a fresh load of #/painter/<slug> opens that painter, not Home
 // Bazille's self-portrait is one of the few whose museum (AIC) serves its image same-origin (img/gallery/...),
 // so it loads under the smoke harness's host-resolver-rules (every other host, Wikimedia included, is
 // deliberately unreachable there -- most painter portraits are Commons-hosted and can't be asserted on here).
-scenario("pages", "painter page: the portrait hero renders (an image or the signature-color field -- never empty)", async t => {
+scenario("painters", "painter page: the portrait hero renders (an image or the signature-color field -- never empty)", async t => {
   await t.open("#/painter/frederic-bazille", { settle: 600 });
   await t.waitFor(".aw-page", 15000, "the painter page");
   const hero = await t.waitFor(".aw-pt-hero", 8000, "the portrait hero");
@@ -5863,7 +5863,7 @@ async function awWorkTab(t, slug) {
   await t.waitFor(() => first(), 8000, "the grid's first pin");
   return first;
 }
-scenario("pages", "painter page: Settings sorts the life's work grid, and the pill shows only while the pictures are on screen", async t => {
+scenario("painters", "painter page: Settings sorts the life's work grid, and the pill shows only while the pictures are on screen", async t => {
   const firstGi = await awWorkTab(t, "john-singer-sargent");
   const before = firstGi();
   t.expect(!t.$(".fd-float"), "the old floating Settings / Map pill is still on the page");
@@ -5882,7 +5882,7 @@ scenario("pages", "painter page: Settings sorts the life's work grid, and the pi
   await t.click('[data-awtab="about"]', { wait: 500 });
   t.expect(!t.$(".aw-tabs .fd-chip.on .fd-tune"), "the Overview chip shows a Settings glyph");
 });
-scenario("pages", "painter page: a museum filter narrows the life's work grid -- honestly", async t => {
+scenario("painters", "painter page: a museum filter narrows the life's work grid -- honestly", async t => {
   await awWorkTab(t, "rembrandt-van-rijn");
   await openSettingsChip(t, 600);
   const sh = await t.waitFor(".fs-sheet", 5000, "the Settings sheet");
@@ -5894,7 +5894,7 @@ scenario("pages", "painter page: a museum filter narrows the life's work grid --
   await t.waitFor(() => t.text("[data-wkcount]") !== before, 6000, "the count readout to change after a museum filter");
   t.expect(/ of /.test(t.text("[data-wkcount]")), `the count doesn't read "N of M" once filtered (got "${t.text("[data-wkcount]")}")`);
 });
-scenario("pages", "painter page: Map opens the painter's work seeded on a painting and Back to the feed returns to the same place", async t => {
+scenario("painters", "painter page: Map opens the painter's work seeded on a painting and Back to the feed returns to the same place", async t => {
   const firstGi = await awWorkTab(t, "claude-monet");
   const y0 = 900; t.w.scrollTo(0, y0); t.w.dispatchEvent(new t.w.Event("scroll")); await t.sleep(500);
   const yBefore = t.w.scrollY;
@@ -5908,7 +5908,7 @@ scenario("pages", "painter page: Map opens the painter's work seeded on a painti
   await t.waitFor(() => t.$(".aw-tabs .fd-chip.on") && /Their work/.test(t.$(".aw-tabs .fd-chip.on").textContent), 6000, "the Their work tab to be the one reopened");
   await t.waitFor(() => Math.abs(t.w.scrollY - yBefore) < 40, 6000, `the scroll to come back (was ${yBefore}, is ${t.w.scrollY})`);
 });
-scenario("pages", "painter page: a painter with few paintings still has the chip row, and Their colors says so honestly", async t => {
+scenario("painters", "painter page: a painter with few paintings still has the chip row, and Their colors says so honestly", async t => {
   await t.open("#/painter/adam-pijnacker", { settle: 600 });
   await t.waitFor(".aw-page", 15000, "the painter page");
   t.expect(t.$$(".aw-tabs").length <= 1, "more than one chip row");
@@ -8774,7 +8774,7 @@ scenario("paintmap", "the card is one row of chips; tapping the card opens the p
 // on how much they use that color... and maybe other ways to organize." The painter page's Their colors opens the
 // painter's own color map (js/paintercolors.js on js/palettehive.js): their colors only, area = how many of their
 // paintings hold the color, five arrangements, one tap on a node = that color's page with the painter's use.
-scenario("pages", "painter's color map: opens from the painter page, size follows use, every arrangement lays out, a node opens its color", async t => {
+scenario("painters", "painter's color map: opens from the painter page, size follows use, every arrangement lays out, a node opens its color", async t => {
   await t.open("#/painter/vincent-van-gogh", { settle: 600 });
   await t.waitFor(".aw-page", 15000, "the painter page");
   await t.click('[data-awtab="colors"]', { wait: 400 });

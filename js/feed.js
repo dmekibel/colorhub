@@ -416,6 +416,10 @@ function fdMount(host, o) {
   const keepCap = it => it.card || /^(Used most|Also used) by|^\d{3}0s$/.test(it.cap || "") || (isColor && !!it.cap && !/%/.test(it.cap));   // a color page's plain-words captions (a country, a painter, a decade) stay
   const txOf = it => !txt || dense ? txt : keepCap(it) ? (colW < 146 ? 72 : 50) : txt;   // a tile with no caption line (Vibe, "Also ...") keeps just its byline
   const place = k0 => {
+    if (top && top.length < items.length) {   // the list grew (a next page was appended): the position arrays must too, or the new tiles get no place
+      const cap = Math.ceil(items.length * 1.5), grow2 = (A, T) => { const B = new T(cap); B.set(A); return B; };
+      top = grow2(top, Float32Array); col = grow2(col, Uint8Array); hh = grow2(hh, Float32Array);
+    }
     for (let k = k0; k < shown; k++) {
       if (items[k].head) { const t = Math.max(...ends), h = items[k].sub ? 44 : 60; top[k] = t; col[k] = 0; hh[k] = h; ends.fill(t + h + vgap); continue; }   // a divider or a group's name: the full width, below everything above it
       const h = Math.round(colW * abOf(items[k])) + txOf(items[k]); hh[k] = h;
@@ -804,7 +808,8 @@ function fdMount(host, o) {
   host.addEventListener("click", e => { if (e.target.closest("[data-fdreset]")) { const kd = fdsKind(eff); FDS[kd] = JSON.parse(JSON.stringify(FDS_DEF[kd])); fdsSave(); SUBDOT(); rerank(false); } });
 
   // ----- go -----
-  const onScroll = (() => { let raf = 0; return () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; draw(); }); }; })();
+  // the next frame, or 60 ms later if no frame comes (a background or throttled page never runs its animation frames: the window would stay as it was and the screen would show no tiles)
+  const onScroll = (() => { let pending = false; const run = () => { if (!pending) return; pending = false; draw(); }; return () => { if (pending) return; pending = true; requestAnimationFrame(run); setTimeout(run, 60); }; })();
   const onResize = () => { setBarTop(); if (Math.abs((grid.clientWidth || W) - W) > 1) relayoutAll(); };
   function start() {
     if (built || gone) return; built = true;
