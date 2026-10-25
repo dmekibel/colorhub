@@ -4542,7 +4542,7 @@ scenario("pages", "a color page puts the chip row (About, Paintings, ...) right 
   t.expect(!t.$("[data-rp-explore]"), "the cover still has the old Explore pill");
   const r = t.ev("(() => { const q = document.querySelector('[data-rpfeed] .fd-chips').getBoundingClientRect(); return { t: q.top, b: q.bottom, h: innerHeight }; })()");
   t.expect(r.t > 100 && r.b < r.h - 40, `the chip row is not on the first screen under the cover (${JSON.stringify(r)})`);
-  t.expect(t.text(".fd-chip.on") === "About" && !t.$("[data-rp-about]").hidden, "a cold open should start on About with the article showing");
+  t.expect(t.text(".fd-chip.on") === "Overview" && !t.$("[data-rp-about]").hidden, "a cold open should start on About with the article showing");
   const pinned = t.ev("(() => { const b = document.querySelector('body > .rp-bar'); return b ? [...b.querySelectorAll('[data-rp-jump]')].every(x => x.hidden) : true; })()");
   t.expect(pinned, "the pinned header still shows its own jump chips and Explore above the page's chip row");
 });
@@ -4654,7 +4654,7 @@ scenario("pages", "Keep exploring on a color page: the feed is the body under th
   await cfeedOpen(t, "#/color/teal");
   const feed = t.$("[data-rpfeed]");
   t.expect(feed, "the feed host is missing on the color page");
-  t.expect(t.$$(".fd-chip").map(b => t.text(b)).join() === "About,Paintings,Painters,Era,Place,Other worlds,Close colors", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}"`);
+  t.expect(t.$$(".fd-chip").map(b => t.text(b)).join() === "Overview,Paintings,Painters,Era,Place,Other worlds,Close colors", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}"`);
   t.expect(t.text(".fd-chip.on") === "Paintings", "Paintings did not turn on when tapped");
   t.expect(t.$("[data-rp-about]").hidden, "the article should hide while Paintings shows");
   // the cover comes first, then the feed (its About pane holds the ID card), then the last fine-print line

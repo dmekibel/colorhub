@@ -1005,7 +1005,7 @@ function colorDossier(entry, o = {}) {
     ${rpAlsoHTML(name, hex, tapped)}
     ${entry.shade ? `<p class="fine np-shade">A described shade: ${esc(entry.shade.base)} made ${esc(entry.shade.mod)}${o.shadeBase ? `. <button class="link" data-shade-base>See ${esc(entry.shade.base)}</button>` : "."}</p>` : ""}
     ${typeof fdMountColor === "function" ? `<section class="gl-feed rp-feed rp-tabs" data-rpfeed aria-label="About this color, and keep exploring">
-      <div class="fd-bar fd-pre"><div class="fd-chips" role="tablist" aria-label="About this color, or keep exploring">${[["about", "About"], ...FDC_CHIPS].map(([k, t]) => `<button class="fd-chip${k === startChip ? " on" : ""}${k === "about" || k === startChip ? "" : " dis"}" role="tab" data-fc="${k}" aria-selected="${k === startChip}">${t}</button>`).join("")}</div></div>
+      <div class="fd-bar fd-pre"><div class="fd-chips" role="tablist" aria-label="About this color, or keep exploring">${[["about", "Overview"], ...FDC_CHIPS].map(([k, t]) => `<button class="fd-chip${k === startChip ? " on" : ""}${k === "about" || k === startChip ? "" : " dis"}" role="tab" data-fc="${k}" aria-selected="${k === startChip}">${t}</button>`).join("")}</div></div>
       <div class="rp-about" data-rp-about${startChip === "about" ? "" : " hidden"}>${secHTML}</div></section>` : secHTML}
     <p class="fine rp-last">Screen colors are approximate. Painting figures are measured from museum photographs of aged, varnished paintings.</p>
   `, "article cp-page" + (o.cls ? " " + o.cls : ""));

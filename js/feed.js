@@ -197,7 +197,7 @@ function fdTrim(keep) {
 function fdMount(host, o) {
   if (!host || !GAL) return;
   const sub = o.sub || null, isColor = !!sub, i = isColor ? -1 : o.i, d = o.d, G = GAL, SKEY = isColor ? "c:" + sub.hex : i, memo = o.backNav ? FD_MEMO.get(SKEY) : null;
-  const CHIPS = isColor ? (o.about ? [["about", "About"], ...FDC_CHIPS] : FDC_CHIPS) : FD_CHIPS, RANK = isColor ? FDC_RANK : FD_RANK, LEADS = isColor ? FDC_LEAD : FD_LEAD, STORE = isColor ? FDC_ST : FD_ST, FALL = isColor ? "paintings" : "color";
+  const CHIPS = isColor ? (o.about ? [["about", "Overview"], ...FDC_CHIPS] : FDC_CHIPS) : FD_CHIPS, RANK = isColor ? FDC_RANK : FD_RANK, LEADS = isColor ? FDC_LEAD : FD_LEAD, STORE = isColor ? FDC_ST : FD_ST, FALL = isColor ? "paintings" : "color";
   const st = { ...(memo && memo.chip ? { chip: memo.chip, metric: memo.metric, color: memo.color | 0 } : STORE) };   // re-read from FD_ST when the feed is built (start)   // this page's chip; a Back brings back the chip the feed was left on
   const save = () => { Object.assign(STORE, st); fdSaveState(); };
   const ctx = { i, d, o, sub, kind: isColor ? "color" : "painting", key: SKEY, F: typeof XBF !== "undefined" && XBF && XBF.G === GAL ? XBF : null, _q: null, q() { return this._q || (this._q = twQuery(o.cols, { self: i })); } };
