@@ -55,7 +55,9 @@ function arfBest(hex, pal) {
   (pal || []).forEach((h, i) => { if (!/^#[0-9a-f]{6}$/i.test(h || "")) return; const d = arfDE(hex, h); if (!best || d < best.de) best = { h, i, de: d }; });
   return best;
 }
-const arfPctText = de => typeof pctMatch === "function" ? pctMatch(de) : `${Math.max(0, Math.round(100 - de))}% match`;
+// David, 2026-10-25: a number nobody can feel -> one plain word, always read as "<word> to <color>". The two-circle glyph beside it
+// shows the pair; the exact figure still lives in the color-compare pages.
+const arfPctText = de => de < 2 ? "Nearly identical" : de < 5 ? "Very close" : de < 10 ? "Close" : "Related";
 const arfLimit = kind => ARF_LIMIT[kind] || ARF_DE;
 // a loaded thing (palette, optional cover) against the article's color. "ok" (close enough to show at all) is
 // closeness only -- coverage never gates it, only informs the caption and (for paintings) the tiebreak within

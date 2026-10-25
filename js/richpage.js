@@ -365,8 +365,10 @@ function rpCoverFill(el, name, hex, heroHex, entry) {
 // the cover's near-neighbor line opens Family in Compare, pinned on it (js/family.js famOpenCompare); waits for
 // the article/Family host to have loaded if the tap lands before it has.
 function rpOpenFamilyCompare(el, slug, hex) {
-  const go = () => { if (el.__artData && el.__famHost && typeof famOpenCompare === "function") famOpenCompare(el.__famHost, el.__artData.self, (el.__artData.art && el.__artData.art.aside) || {}, slug, hex); else toast("Loading its family…"); };
-  if (el.__artPromise) el.__artPromise.then(go); else go();
+  const feed = el.querySelector("[data-rpfeed]");
+  const goNt = () => { const t = el.querySelector("[data-nt-cmp]") || el.querySelector(".rc-nt"); if (t) t.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" }); else toast("Loading the neighbors…"); };
+  if (feed && feed.fdChip && feed.dataset.fdTab && feed.dataset.fdTab !== "about") { feed.fdChip("about"); return setTimeout(goNt, 120); }
+  return goNt();
 }
 
 // ---------- the glance strip (a peek of it sits under the cover) ----------
@@ -684,18 +686,19 @@ function rpStoryFill(el, name, hex, o) {
 // on every long article's color page (David, 2026-10-09, caught on Olive while craft-reviewing a color with
 // children: Scarlet, Olive and ~260 of the richest articles are all door-length).
 function rpFamilyFill(el) {
-  const host = el.querySelector("[data-ar-fam-host]"); if (!host || !el.__artPromise) return;
+  // David, 2026-10-25: the Family tab (Tree, Spectrum, Compare, Map) is replaced by Next to it (js/richcolor.js). What stays is the
+  // editorial "Not to be confused with" list from the story, which joins that section once both the story and the ladders are in.
+  if (!el.__artPromise) return;
   el.__artPromise.then(r => {
-    if (!r || !r.has || !host.isConnected || typeof arFamilyHTML !== "function") return;
-    const html = arFamilyHTML(r.art, r.self);
-    if (!html) return;   // no parent/siblings/children/disambiguation: nothing to show, same as any other empty section
-    host.innerHTML = html; host.hidden = false; el.__famHost = host;
-    if (typeof famWire === "function") famWire(host, r.self, r.art.aside || {});
-    // Family's own slot (outside head/body) never got the [data-ar-open]/[data-ar-which] click delegation that
-    // arWire/arWireClicks normally give an article root -- a swatch in the tree/compare/spectrum views looked
-    // tappable but did nothing (caught by tools/smoke.sh: "timed out waiting for .ar-hex[data-ar-open]...").
-    if (typeof arWireClicks === "function") arWireClicks(host, r.art, r.self);
-    rpBarSync(el);
+    if (!r || !r.has || typeof arDisambHTML !== "function") return;
+    const put = () => {
+      const slot = el.querySelector("[data-nt-disamb]"); if (!slot || slot.dataset.done) return !!slot;
+      slot.dataset.done = "1";
+      const html = arDisambHTML(r.self, r.art.aside || {});
+      if (html) { slot.innerHTML = html; if (typeof arWireClicks === "function") arWireClicks(slot, r.art, r.self); }
+      return true;
+    };
+    if (!put()) { const h = () => { if (put()) el.removeEventListener("nt-ready", h); }; el.addEventListener("nt-ready", h); }
   });
 }
 
@@ -949,10 +952,11 @@ function colorDossier(entry, o = {}) {
   // browsing, so Paintings; from anywhere else (Learn, search, a new color) the article first. A Back restores the tab you left.
   const memo0 = backNav && typeof FD_MEMO !== "undefined" ? FD_MEMO.get("c:" + heroHex.toUpperCase()) : null;
   const startChip = memo0 && memo0.chip ? memo0.chip : rpStartChip();
+  const call = (f, ...a) => typeof f === "function" ? f(...a) : "";
   const secHTML = `<div class="ar-head" data-ar-head hidden></div>
     <div class="ar-body" data-ar-body hidden></div>
     ${rpPaintSectionHTML(name, heroHex, entry, famC)}
-    <div class="ar-fam-host" data-ar-fam-host hidden></div>
+    ${call(rcNextToHTML, name, heroHex)}
     ${rpIdCardHTML()}
     ${rpNextHTML()}
     ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "c:" + name, title: name }) : ""}`;

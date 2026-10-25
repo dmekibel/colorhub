@@ -2258,16 +2258,22 @@ scenario("pages", "a #/color/<slug>/s-<id> deep link opens straight on that chap
   // setTimeout after the open animation, so the automated half of this scenario stops at "opened".
 });
 
-// David, 2026-10-09: caught while craft-reviewing Olive (a color with children) -- Family needs to show on the
-// color page no matter how long the article above it is (it has its own always-present slot, independent of
-// the article's own rendering).
-scenario("pages", "Family still shows on a long article's color page (Olive -- it has children)", async t => {
-  await H.openPage(t, "#/name/olive", "Olive");
-  await t.waitFor("[data-ar-head]:not([hidden]) .ar-lede", 10000, "Olive's article, inline on the color page");
-  const fam = await t.waitFor(".ar-fam", 8000, "the Family section, alongside a long inline article");
-  t.expect(t.$$(".fam-trow-l", fam).some(p => p.textContent === "Variations"), "Olive's children ('Variations') don't show in the family tree");
-  await t.click([...t.$$(".fam-seg-b", fam)].find(b => b.textContent === "Compare"), { wait: 300 });
-  t.expect(t.$(".fam-cmp-line", fam), "Compare has no split/diff line for a long article's color page");
+// David, 2026-10-25: the Family tab (Tree, Spectrum, Compare, Map) is replaced by Next to it: three ladders of named neighbors (lighter or
+// darker, cooler or warmer, duller or brighter) with this color in the middle, a draggable split against the nearest name, and one plain line.
+// It is built from the ~1,000 names, so it shows on a color with a long inline article (Olive) and on one with no article at all.
+scenario("pages", "Next to it shows on a long article's color page (Olive) and on a described shade with no article", async t => {
+  for (const [hash, title] of [["#/name/olive", "Olive"], ["#/name/clear-cadet-blue", "Clear Cadet Blue"]]) {
+    await H.openPage(t, hash, title);
+    const nt = await t.waitFor(".rc-nt", 15000, "the Next to it section on " + title);
+    const ladders = t.$$(".nt-ladder", nt);
+    t.expect(ladders.length >= 1, `${title}: no ladder`);
+    t.expect(ladders.every(l => t.$(".nt-self", l) && t.$$(".nt-tile[data-swatch]", l).length >= 1), `${title}: a ladder has no neighbors or lost its own color`);
+    t.expect(/ is (almost the same as|[a-z ]+ than) /.test(t.text(t.$(".fam-cmp-line", nt))), `${title}: the compare line reads "${t.text(t.$(".fam-cmp-line", nt))}"`);
+    t.expect(!t.$(".ar-fam"), `${title}: the old Family tab is still on the page`);
+  }
+  // a ladder tile opens that color's page in one tap
+  const tile = t.$(".rc-nt .nt-tile[data-swatch]"); await t.click(tile, { wait: 500 });
+  await t.waitFor(() => H.title(t) !== "Clear Cadet Blue", 8000, "a ladder tile to open its color");
 });
 
 // David, 2026-10-09: "header feels too big -- harder to read the article". Scrolling down slims the pinned bar
@@ -2406,7 +2412,7 @@ scenario("pages", "article figure cards: Mauve draws them inline; a card opens i
   const all = t.$$(".cp-page .ar-fig"), figs = all.filter(f => !f.hasAttribute("data-ar-gap")), gapFigs = all.filter(f => f.hasAttribute("data-ar-gap"));
   t.expect(figs.length <= 5, `${figs.length} auto-figures, the limit is 5`);
   t.expect(gapFigs.length <= 10, `${gapFigs.length} pictures between paragraphs, the limit is 10`);
-  t.expect(all.every(f => /\d+% match to Mauve/.test(t.text(f.querySelector(".ar-fig-m")))), "a card is missing its '% match to Mauve' line");
+  t.expect(all.every(f => /(Nearly identical|Very close|Close|Related) to Mauve/.test(t.text(f.querySelector(".ar-fig-m")))), "a card is missing its '% match to Mauve' line");
   // a compact card's picture is a fixed 112 (88 under 360 px) square; a wide one fills the measure at a fixed 4:3 or 3:2
   t.expect(all.every(f => { const r = f.querySelector(".ar-fig-im").getBoundingClientRect(); return f.classList.contains("ar-wide") ? r.width > 200 && [3 / 4, 2 / 3].some(k => Math.abs(r.height - r.width * k) < 2) : [112, 88].includes(r.width); }), "a card's picture box lost its fixed proportions");
   const secs = figs.map(f => (f.closest("[data-ar-sec]") || {}).id || "seen").filter(x => x !== "seen");

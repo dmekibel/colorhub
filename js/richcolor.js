@@ -251,6 +251,94 @@ function rcRoleShelfHTML(name, hex) {
   return `<div id="${id}"></div>`;
 }
 
+// ======================================================================
+// Next to it (David, 2026-10-25: "the whole family tab looks dumb, the tree is dumb"). Three ladders of real, named colors with this one in
+// the middle: lighter to darker, cooler to warmer, duller to brighter. Each side is the cleanest steps along that one axis only (the other
+// two held as still as the names allow), so a ladder shows exactly what one change looks like. Below, the nearest name held against it in a
+// draggable split, with the one line that tells them apart. Built from the ~1,000 learnable names, so every color gets one, article or not.
+// ======================================================================
+const NT_AXES = [
+  { k: "light", lo: "Lighter", hi: "Darker", step: 4, min: 3, max: 32 },
+  { k: "warm", lo: "Cooler", hi: "Warmer", step: 10, min: 6, max: 70 },
+  { k: "vivid", lo: "Duller", hi: "Brighter", step: 6, min: 4, max: 34 }];
+function ntLadders(hex) {
+  const list = (typeof CORE_NAMES !== "undefined" && CORE_NAMES) || [];
+  const [L0, a0, b0] = lab(hex), C0 = Math.hypot(a0, b0), h0 = Math.atan2(b0, a0) * 180 / Math.PI, rad = Math.PI / 180;
+  const wrap = d => d > 180 ? d - 360 : d < -180 ? d + 360 : d, warmSign = wrap(50 - h0) >= 0 ? 1 : -1, upper = hex.toUpperCase();
+  const cands = [];
+  for (const x of list) {
+    if (x.h.toUpperCase() === upper) continue;
+    const l = x.lab || (x.lab = lab(x.h));
+    if (Math.abs(l[0] - L0) > 38 || glDE(L0, a0, b0, l[0], l[1], l[2]) < 1.2) continue;
+    const C = Math.hypot(l[1], l[2]), dh = wrap(Math.atan2(l[2], l[1]) / rad - h0);
+    cands.push({ n: x.n, h: x.h, dL: l[0] - L0, dC: C - C0, dh, da: l[1] - a0, db: l[2] - b0, C, use: x.useRank == null ? 999 : x.useRank });
+  }
+  return NT_AXES.map(ax => {
+    if (ax.k === "warm" && C0 < 9) return { ax, left: [], right: [] };   // a grey has no hue to warm or cool
+    const rows = cands.map(c => {
+      let along, off;
+      if (ax.k === "light") { along = c.dL; off = Math.hypot(c.da, c.db); }
+      else if (ax.k === "warm") { if (c.C < 9) return null; along = -warmSign * c.dh; off = Math.hypot(c.dL, c.dC); }
+      else { along = -c.dC; off = Math.hypot(c.dL, C0 * c.dh * rad); }
+      const a = Math.abs(along);
+      if (a < ax.min || a > ax.max || off > Math.max(5, a * .85)) return null;
+      return { ...c, along, score: off / a + c.use / 1100 };   // clean steps first, and among near-equals the everyday names (useRank 0 = most used)
+    }).filter(Boolean);
+    const side = sign => {
+      const pool = rows.filter(r => r.along * sign > 0).sort((p, q) => p.score - q.score), pick = [];
+      for (const r of pool) { if (pick.length < 3 && pick.every(p => Math.abs(p.along - r.along) >= ax.step)) pick.push(r); }
+      return pick;
+    };
+    const left = side(1).sort((p, q) => q.along - p.along), right = side(-1).sort((p, q) => q.along - p.along);   // far..near | near..far
+    return { ax, left, right };
+  });
+}
+function rcNextToHTML(name, hex) {
+  const id = "rc-nt-" + Math.random().toString(36).slice(2, 8);
+  const draw = () => {
+    const box = document.getElementById(id); if (!box) return;
+    const lad = ntLadders(hex).filter(l => l.left.length + l.right.length);
+    if (!lad.length) { box.remove(); return; }
+    const tile = c => `<button type="button" class="nt-tile" data-swatch="${c.h}" aria-label="${esc(c.n)}"><i style="--c:${c.h}"></i><b>${esc(c.n)}</b></button>`;
+    const self = `<span class="nt-tile nt-self" style="--c:${hex}"><i></i><b>This one</b></span>`;
+    const near = (typeof CORE_NAMES !== "undefined" && CORE_NAMES || []).filter(x => x.n.toLowerCase() !== name.toLowerCase() && x.h.toUpperCase() !== hex.toUpperCase())
+      .map(x => ({ x, d: de2000(hex, x.h) })).filter(o => o.d >= 1.2 && o.d < 14).sort((a, b) => (a.d + (a.x.useRank == null ? 999 : a.x.useRank) / 180) - (b.d + (b.x.useRank == null ? 999 : b.x.useRank) / 180))[0];
+    let cmp = "";
+    if (near) {
+      const diff = typeof lookDiff === "function" ? lookDiff({ h: hex, n: name }, near.x) : "";
+      cmp = `<div class="nt-cmp" data-nt-cmp><div class="fam-cmp-split" data-nt-split>
+          <div class="fam-cmp-half fam-cmp-a" style="--c:${hex}" data-ink="${ink(hex)}"><b>${esc(name)}</b></div>
+          <div class="fam-cmp-half fam-cmp-b" style="--c:${near.x.h}" data-ink="${ink(near.x.h)}"><b>${esc(near.x.n)}</b></div>
+          <button type="button" class="fam-cmp-handle" aria-label="Drag to compare ${esc(name)} with ${esc(near.x.n)}" style="left:50%"><i></i></button></div>
+        <p class="fam-cmp-line">${diff && diff !== "almost the same" ? `${esc(near.x.n)} is ${esc(diff)} than ${esc(name.toLowerCase())}.` : `${esc(near.x.n)} is almost the same as ${esc(name.toLowerCase())}.`}</p>
+        <button type="button" class="fam-cmp-open" data-swatch="${near.x.h}">See ${esc(near.x.n)}${typeof ICON !== "undefined" ? ICON.arrow : ""}</button></div>`;
+    }
+    box.innerHTML = `<section class="rc-sec rc-nt" id="rp-s-next" style="--c:${hex}">
+      <h3>Next to it</h3>
+      ${lad.map(({ ax, left, right }) => `<div class="nt-ladder" data-nt="${ax.k}"><p class="nt-ax"><span>${ax.lo}</span><span>${ax.hi}</span></p>
+        <div class="gl-rail nt-row">${left.map(tile).join("")}${self}${right.map(tile).join("")}</div></div>`).join("")}
+      ${cmp}
+      <div data-nt-disamb></div>
+      <p class="fine">The closest named colors along one change at a time, from about 1,000 names. Screen colors are approximate.</p></section>`;
+    box.querySelectorAll(".nt-row").forEach(r => { const me = r.querySelector(".nt-self"); if (me) r.scrollLeft = Math.max(0, me.offsetLeft - (r.clientWidth - me.offsetWidth) / 2); });
+    const split = box.querySelector("[data-nt-split]");
+    if (split) {
+      const handle = split.querySelector(".fam-cmp-handle"), b = split.querySelector(".fam-cmp-b");
+      const set = pct => { pct = Math.max(2, Math.min(98, pct)); handle.style.left = pct + "%"; b.style.clipPath = `inset(0 0 0 ${pct}%)`; };
+      const move = x => { const r = split.getBoundingClientRect(); set((x - r.left) / r.width * 100); };
+      let dragging = false;
+      handle.addEventListener("pointerdown", e => { dragging = true; try { handle.setPointerCapture(e.pointerId); } catch (er) {} });
+      handle.addEventListener("pointermove", e => { if (dragging) move(e.clientX); });
+      ["pointerup", "pointercancel"].forEach(ev => handle.addEventListener(ev, () => { dragging = false; }));
+      split.addEventListener("click", e => { if (!handle.contains(e.target)) move(e.clientX); });
+    }
+    box.dispatchEvent(new CustomEvent("nt-ready", { bubbles: true }));
+  };
+  // the ~1,000 names, then the draw; the sections below are not waiting on this
+  setTimeout(() => { if (document.getElementById(id)) (typeof loadCoreNames === "function" ? loadCoreNames() : Promise.resolve()).then(draw).catch(() => {}); }, 300);
+  return `<div id="${id}"></div>`;
+}
+
 // ---------- Role paintings (design/audit-graph/CHECKPOINT.md #6): for 1,434 colors, data/graph/fieldnotes'
 // ar.rp_ names one real painting where the color plays each part -- shadow, mid-tone, light, accent, hidden
 // note -- picked once by L6, not recomputed live the way rcRoleSection's bar above is. "Never one palette,
