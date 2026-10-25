@@ -201,7 +201,7 @@ function fdMount(host, o) {
   const st = { ...(memo && memo.chip ? { chip: memo.chip, metric: memo.metric, color: memo.color | 0 } : STORE) };   // re-read from FD_ST when the feed is built (start)   // this page's chip; a Back brings back the chip the feed was left on
   const save = () => { Object.assign(STORE, st); fdSaveState(); };
   const ctx = { i, d, o, sub, kind: isColor ? "color" : "painting", key: SKEY, F: typeof XBF !== "undefined" && XBF && XBF.G === GAL ? XBF : null, _q: null, q() { return this._q || (this._q = twQuery(o.cols, { self: i })); } };
-  let curEnd = "", curMap = "", curLead = "", eff = st.chip, items = [], shown = 0, tok = 0, built = false, gone = false, fk = 0;
+  let lastN = 0, onCount = null, curEnd = "", curMap = "", curLead = "", eff = st.chip, items = [], shown = 0, tok = 0, built = false, gone = false, fk = 0;
   let W = 0, cols = 2, colW = 0, gap = 12, vgap = 18, txt = 52, top = null, col = null, hh = null, ends = [], pinSkew = null, dense = false, capPct = false, zoom = null;
   const VKEY = isColor ? "colorhub-feed-view-color" : "colorhub-feed-view";
   const viewLoad = () => { try { const v = JSON.parse(localStorage.getItem(VKEY) || "null") || {}; return { cols: v.cols | 0, dcols: v.dcols | 0 }; } catch (e) { return { cols: 0, dcols: 0 }; } };
@@ -212,7 +212,7 @@ function fdMount(host, o) {
   const off = k => isColor ? (FDC_OFF.get(SKEY) || {})[k] || "" : (FD_OFF[k] ? FD_OFF[k](ctx) : "");
   const abOf = it => it.sk || it.card || it.head ? it.ab : Math.min(2.3, Math.max(.4, G.ar[it.j]));
   const aboutEl = isColor && o.about ? o.about : null; if (aboutEl) aboutEl.remove();   // the article tab survives the feed being drawn around it
-  host.innerHTML = `<div class="sec-head"><b>Keep exploring</b><span>closest first</span><button type="button" class="fd-size" data-fdsize></button></div>
+  host.innerHTML = `<div class="sec-head"><b>Keep exploring</b><span>closest first</span><span class="fd-tools"><span class="fd-lens" role="group" aria-label="How to look at these"><button type="button" aria-pressed="true" data-fdfeed>Feed</button><button type="button" aria-pressed="false" data-fdmap>Map</button></span><button type="button" class="fd-set" data-fdset aria-haspopup="dialog">Settings<i data-fdsetdot hidden></i></button></span></div>
     <div class="fd-bar"><div class="fd-chips" role="tablist" aria-label="What counts as related"></div></div>
     <p class="fd-lead" aria-live="polite"></p>
     <div class="fd-grid" role="group" aria-label="${isColor ? "Paintings and more that hold this color" : "Related paintings, closest first"}"></div>
@@ -247,6 +247,7 @@ function fdMount(host, o) {
       const dis = !!off(k), on = k === eff, lab = !isColor && k === "color" && on ? `Color${st.metric === "overall" ? "" : " · " + FD_SHORT[st.metric]}<span class="fd-car">${ICON.chev}</span>` : t;   // the by… switch: Overall is the default, so it needs no word
       return `<button class="fd-chip${on ? " on" : ""}${dis ? " dis" : ""}" role="tab" data-fc="${k}" aria-selected="${on}"${dis ? ` aria-disabled="true"` : ""}${!isColor && k === "color" && on ? ` aria-haspopup="dialog"` : ""}>${lab}</button>`;
     }).join("");
+    lensDraw();
   };
   const leadDraw = (reason) => {
     const miss = st.chip !== eff ? off(st.chip) : "";   // the chip you chose can't work for this painting: say why, and what you are seeing instead
@@ -404,15 +405,15 @@ function fdMount(host, o) {
   function skeleton() {
     items = SK.map(ab => ({ sk: 1, ab })); shown = items.length; fk = 0; live.forEach(el => el.remove()); live.clear(); relayout(); state.innerHTML = ""; draw();
   }
-  const key = () => `${SKEY}|${eff}|${st.metric}|${st.color}`;
+  const key = () => `${SKEY}|${eff}|${st.metric}|${st.color}${isColor ? "|" + fdsSig(eff) : ""}`;
   function apply(res, ms) {
     if (res.empty) {
       curLead = ""; items = []; shown = 0; live.forEach(el => el.remove()); live.clear(); grid.style.height = "0px";
-      state.innerHTML = `<p class="fd-empty">${esc(res.empty)}</p>${res.alt ? `<button class="fd-up" data-fdalt>Match by overall palette</button>` : ""}`;
+      state.innerHTML = `<p class="fd-empty">${esc(res.empty)}</p>${res.alt ? `<button class="fd-up" data-fdalt>Match by overall palette</button>` : ""}${res.reset ? `<button class="fd-up" data-fdreset>Reset the settings</button>` : ""}`;
       leadDraw(""); return;
     }
     curLead = res.lead || ""; curEnd = res.end || ""; curMap = res.map || ""; items = res.items; if (!items.length) { apply({ empty: "Nothing else in the archive is close to this one in that way." }); return; }
-    live.forEach(el => el.remove()); live.clear();
+    live.forEach(el => el.remove()); live.clear(); lastN = res.n != null ? res.n : items.filter(x => !x.head).length; if (onCount) onCount(lastN);
     capPct = false;   // David, 2026-10-24: zoomed out, the percent under each tile "looks ugly": dense tiles are bare pictures (a long-press still shows everything)
     const want0 = memo ? memo.shown : FD_PAGE;
     shown = Math.min(items.length, Math.max(FD_PAGE, want0)); fk = Math.max(0, items.findIndex(x => !x.head));
@@ -430,7 +431,7 @@ function fdMount(host, o) {
       if (mine !== tok || gone) return;
       if (res.items) { FD_CACHE.set(k, res); if (FD_CACHE.size > 24) FD_CACHE.delete(FD_CACHE.keys().next().value); }
       if (!isColor && res.empty && eff === "vibe" && ctx.vibeOff) { chipsDraw(); return rerank(false); }   // no vibe for this painting: the chip goes dim with the reason, and Color shows instead
-      if (isColor && res.empty && eff !== FALL && !res.alt) { fdcOff(SKEY, eff, res.empty); chipsDraw(); return rerank(false); }   // this chip has nothing for this color: it is disabled from now on, with the reason, and Paintings shows instead
+      if (isColor && res.empty && eff !== FALL && !res.alt && !res.reset) { fdcOff(SKEY, eff, res.empty); chipsDraw(); return rerank(false); }   // this chip has nothing for this color: it is disabled from now on, with the reason, and Paintings shows instead
       apply(res, performance.now() - t0);
       if (was) scrollTo(0, Math.max(0, gridTop() - bar.getBoundingClientRect().height - (artTop() ? artTop().getBoundingClientRect().height : 0) - 8));
       afterBuild();
@@ -466,7 +467,6 @@ function fdMount(host, o) {
     const r2 = grid.getBoundingClientRect(); scrollBy(0, r2.top + top[a] + frac * hh[a] - (toY == null ? vy : toY));
     draw(); return true;
   };
-  host.querySelector("[data-fdsize]").onclick = () => { if (zoom) { const mx = fdMaxCols(); zoom.step((cols >= mx ? 1 : cols + 1) - cols); } };
   // a tile too small to say anything: a long press shows its title, painter, year and the whole caption
   let peekEl = null, peekT = 0, peekXY = null, peeked = 0;
   const peekOff = () => { clearTimeout(peekT); if (peekEl) { peekEl.remove(); peekEl = null; } };
@@ -534,6 +534,93 @@ function fdMount(host, o) {
     try { ro = new ResizeObserver(set); ro.observe(document.documentElement); } catch (e) {}
     tick();
   }
+
+  // ----- Settings and the Feed / Map lens -----
+  const sizeWord = n => n === 1 ? "1 across, big" : `${n} across`;
+  const TOLW = ["", "Exact", "Exact", "Nearly exact", "Very close", "Very close", "Close", "Close", "Close", "Close", "Fairly close", "Fairly close", "Loose", "Loose", "Loose", "Loose", "Very loose", "Very loose", "Very loose", "Its whole family", "Its whole family"];
+  const REACHW = ["Just this country", "Its neighbors", "Its region", "Its continent", "The whole world"];
+  const SUBDOT = () => { const d = host.querySelector("[data-fdsetdot]"); if (d) d.hidden = !(isColor && fdsChanged(eff)); };
+  const mapOk = () => !(eff === "about" || (isColor && (eff === "painters" || eff === "worlds" || eff === "close")) || (!isColor && eff === "painter"));
+  const lensDraw = () => { const m = host.querySelector("[data-fdmap]"); if (m) m.hidden = !mapOk(); const l = host.querySelector(".fd-lens"); if (l) l.hidden = !mapOk(); SUBDOT(); };
+  // Map: the same list as the painting map, the painting nearest the top of the screen in the middle, the same choices as filters
+  const topPainting = () => {
+    const bh = bar.getBoundingClientRect().bottom; let ak = -1;
+    live.forEach((el, k) => { const r = el.getBoundingClientRect(); if (!items[k].head && !items[k].card && r.bottom > bh && (ak < 0 || k < ak)) ak = k; });
+    if (ak < 0) ak = items.findIndex(x => !x.head && !x.card);
+    return ak >= 0 ? items[ak].j : -1;
+  };
+  async function openMap() {
+    const seed = topPainting(); if (seed < 0 || typeof pmGo !== "function") return;
+    let spec = `arr=spiral&seed=${seed}`;
+    if (isColor) {
+      const S = FDS.paintings, win = FDS.era.win, y = G.year[seed];
+      spec += `&c=${sub.hex.slice(1).toLowerCase()}&cm=all&t=${eff === "paintings" ? Math.max(2, S.tol) : 8}&m=0&nm=${encodeURIComponent(sub.name)}`;
+      if (eff === "paintings" && (S.y0 > 1300 || S.y1 < 2000)) spec += `&y0=${S.y0}&y1=${S.y1}`;
+      if (eff === "era" && y !== GL_UNDATED) spec += `&y0=${Math.floor(y / 10) * 10 - win}&y1=${Math.floor(y / 10) * 10 + win}`;
+      if (eff === "place") { const F = await fdFacets().catch(() => null); const c = F && F.country[seed]; if (c) spec += `&co=${encodeURIComponent(F.meta.countries[c - 1])}`; }
+    }
+    leave(); buzz(6); pmGo(spec);
+  }
+  host.querySelector("[data-fdmap]").onclick = openMap;
+  function openSettings() {
+    if (document.querySelector(".fs-sheet")) return;
+    const kind = isColor ? fdsKind(eff) : "none", S = FDS[kind] || {}, mx = fdMaxCols();
+    const rng = (k, label, min, max, step, ends) => `<div class="fs-c"><div class="fs-row"><p>${label}</p><b data-fs-out="${k}"></b></div><input type="range" min="${min}" max="${max}" step="${step || 1}" value="${S[k]}" data-fs="${k}" aria-label="${label}">${ends ? `<div class="fs-ends"><span>${ends[0]}</span><span>${ends[1]}</span></div>` : ""}</div>`;
+    const seg = (k, label, opts) => `<div class="fs-c"><div class="fs-row"><p>${label}</p></div><div class="fs-seg" data-fsseg="${k}">${opts.map(([v, t]) => `<button type="button" data-v="${v}" aria-pressed="${S[k] === v}">${t}</button>`).join("")}</div></div>`;
+    const sw = (k, label) => `<div class="fs-c fs-tg"><p>${label}</p><button type="button" class="fs-switch" role="switch" aria-checked="${!!S[k]}" data-fssw="${k}"><i></i></button></div>`;
+    let body = "";
+    if (kind === "paintings") body = rng("tol", "How close a match", 1, 20, 1, ["Exact", "Loose"]) + rng("cov", "Covers at least", 0, 40, 1, ["Any speck", "Most of it"])
+      + `<div class="fs-c"><div class="fs-row"><p>The part it plays</p><b data-fs-out="roles"></b></div><div class="fs-multi" data-fsmulti="roles">${[["main", "Main"], ["shadow", "Shadow"], ["mid", "Mid-tone"], ["light", "Light"], ["accent", "Accent"]].map(([v, t]) => `<button type="button" data-v="${v}" aria-pressed="${S.roles.includes(v)}">${t}</button>`).join("")}</div></div>`
+      + `<div class="fs-c"><div class="fs-row"><p>Painted between</p><b data-fs-out="yrs"></b></div><div class="fs-dual"><div class="fs-track"><i data-fs-fill></i></div><input type="range" min="1300" max="2000" step="10" value="${S.y0}" data-fs="y0" aria-label="From year"><input type="range" min="1300" max="2000" step="10" value="${S.y1}" data-fs="y1" aria-label="To year"></div></div>`
+      + seg("shape", "Shape", [["", "Any"], ["tall", "Tall"], ["wide", "Wide"], ["square", "Square"]])
+      + `<div class="fs-c"><div class="fs-row"><p>Order</p></div><label class="fs-select"><select data-fssel="order" aria-label="Order">${[["close", "Closest color first"], ["cover", "Most of the color first"], ["old", "Oldest first"], ["new", "Newest first"]].map(([v, t]) => `<option value="${v}"${S.order === v ? " selected" : ""}>${t}</option>`).join("")}</select></label></div>`
+      + sw("onePer", "One painting per painter");
+    else if (kind === "era") body = rng("win", "How wide a window", 10, 200, 10, ["Just the decade", "Two centuries"]) + seg("where", "Where", [["any", "Anywhere"], ["country", "Same country"], ["region", "Same region"]]);
+    else if (kind === "place") body = rng("reach", "How far out", 0, 4, 1, ["Just the country", "The whole world"]) + sw("near", "Stay close in time") + `<div data-fsbox="win"${S.near ? "" : " hidden"}>${rng("win", "Within", 10, 200, 10)}</div>`;
+    else body = `<p class="fs-note">Tabs and filters for this list are on the chips above.</p>`;
+    const size = `<div class="fs-c"><div class="fs-row"><p>Size</p><b data-fs-out="size"></b></div><input type="range" min="1" max="${mx}" step="1" value="${cols}" data-fssize aria-label="Size"><div class="fs-prev" data-fs-prev></div></div>`;
+    const title = ({ paintings: "Paintings", era: "Era", place: "Place" })[kind] || "Keep exploring";
+    const { sh, close } = sheet(`<div class="fs-sheet"><div class="fs-head"><h3>${title}</h3><span class="fs-count" data-fs-count aria-live="polite"></span><button type="button" class="fs-reset" data-fs-reset${kind === "none" ? " hidden" : ""}>Reset</button></div><div class="fs-scroll">${body}${size}</div></div>`);
+    const q = s2 => sh.querySelector(s2), out = (k, t) => { const o = q(`[data-fs-out="${k}"]`); if (o) o.textContent = t; };
+    const fill = r => { const lo = +r.min, hi = +r.max; r.style.setProperty("--p", ((r.value - lo) / (hi - lo) * 100) + "%"); };
+    const countEl = q("[data-fs-count]"), showCount = n => { if (countEl) countEl.textContent = (eff === "paintings" || eff === "era" || eff === "place" || !isColor) && n ? `${n.toLocaleString("en-US")} paintings` : ""; };
+    onCount = showCount; showCount(lastN);
+    let rt = 0; const later2 = () => { clearTimeout(rt); rt = setTimeout(() => { fdsSave(); SUBDOT(); rerank(false); }, 180); };
+    const paint = () => {
+      sh.querySelectorAll("input[type=range]").forEach(fill);
+      if (kind === "paintings") {
+        out("tol", TOLW[S.tol]); out("cov", S.cov === 0 ? "Any speck" : `${S.cov}% of the canvas`);
+        out("roles", S.roles.length ? (S.roles.length > 2 ? `${S.roles.length} picked` : S.roles.map(r => ({ main: "Main", shadow: "Shadow", mid: "Mid-tone", light: "Light", accent: "Accent" })[r]).join(", ")) : "Any");
+        out("yrs", `${S.y0} to ${S.y1}`);
+        const f = q("[data-fs-fill]"); if (f) { f.style.left = (S.y0 - 1300) / 7 + "%"; f.style.right = (2000 - S.y1) / 7 + "%"; }
+      } else if (kind === "era") out("win", `${S.win} years either side`);
+      else if (kind === "place") { out("reach", REACHW[S.reach]); out("win", `${S.win} years either side`); }
+      out("size", sizeWord(cols));
+      const pv = q("[data-fs-prev]"); if (pv) { pv.style.gridTemplateColumns = `repeat(${cols},1fr)`; pv.innerHTML = Array.from({ length: Math.min(cols * 2, 12) }, (_, k) => `<i style="--k:${k % 3}"></i>`).join(""); }
+    };
+    sh.addEventListener("input", e => {
+      const r = e.target.closest("[data-fs]"), z = e.target.closest("[data-fssize]");
+      if (z) { if (zoom) zoom.step(+z.value - cols); paint(); return; }
+      if (!r) return;
+      const k = r.dataset.fs; S[k] = +r.value;
+      if (k === "y0" && S.y0 > S.y1 - 20) { S.y0 = S.y1 - 20; r.value = S.y0; }
+      if (k === "y1" && S.y1 < S.y0 + 20) { S.y1 = S.y0 + 20; r.value = S.y1; }
+      paint(); later2();
+    });
+    sh.addEventListener("change", e => { const o = e.target.closest("[data-fssel]"); if (o) { S[o.dataset.fssel] = o.value; buzz(4); later2(); } });
+    sh.addEventListener("click", e => {
+      const m = e.target.closest("[data-fsmulti] button"), g = e.target.closest("[data-fsseg] button"), w = e.target.closest("[data-fssw]"), rs = e.target.closest("[data-fs-reset]");
+      if (m) { const k = m.parentNode.dataset.fsmulti, v = m.dataset.v, i = S[k].indexOf(v); i < 0 ? S[k].push(v) : S[k].splice(i, 1); m.setAttribute("aria-pressed", i < 0); buzz(4); paint(); later2(); }
+      else if (g) { const k = g.parentNode.dataset.fsseg; S[k] = g.dataset.v; g.parentNode.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === g)); buzz(4); later2(); }
+      else if (w) { const k = w.dataset.fssw; S[k] = !S[k]; w.setAttribute("aria-checked", S[k]); const bx = q('[data-fsbox="win"]'); if (bx && k === "near") bx.hidden = !S[k]; buzz(4); later2(); }
+      else if (rs) { FDS[kind] = JSON.parse(JSON.stringify(FDS_DEF[kind])); fdsSave(); SUBDOT(); buzz(5); close(); rerank(false); setTimeout(openSettings, 120); }
+    });
+    paint();
+    const prevClose = close; sh.addEventListener("close", () => { onCount = null; });
+    const obs = new MutationObserver(() => { if (!sh.isConnected) { onCount = null; obs.disconnect(); } }); obs.observe(document.body, { childList: true, subtree: true });
+  }
+  host.querySelector("[data-fdset]").onclick = openSettings;
+  host.addEventListener("click", e => { if (e.target.closest("[data-fdreset]")) { const kd = fdsKind(eff); FDS[kd] = JSON.parse(JSON.stringify(FDS_DEF[kd])); fdsSave(); SUBDOT(); rerank(false); } });
 
   // ----- go -----
   const onScroll = (() => { let raf = 0; return () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; draw(); }); }; })();
@@ -616,21 +703,50 @@ function fdcScan(hex, tol, minShare) {
   }
   return out;
 }
-function fdcBase(sub) {
-  const hex = sub.hex.toUpperCase();
-  if (FDC_BASE.has(hex)) return FDC_BASE.get(hex);
-  const q = async (h, min) => ({ rows: fdcScan(h, FDC_TOL, min) });
+// ---------- Settings (David, 2026-10-25: "a settings button for what dictates which list is shown"): one persisted set of choices per kind of
+// list. Paintings: how close, how much of the canvas, the part it plays, years, shape, order, one per painter. Era: how wide a window,
+// and where. Place: how far out, and how close in time. A change re-ranks at once; the cache is keyed by the choices, so going back is instant.
+const FDS_KEY = "colorhub-feed-set";
+const FDS_DEF = { paintings: { tol: 6, cov: 2, roles: [], y0: 1300, y1: 2000, shape: "", order: "close", onePer: false }, era: { win: 50, where: "any" }, place: { reach: 2, near: true, win: 50 } };
+let FDS = (() => { try { const v = JSON.parse(localStorage.getItem(FDS_KEY) || "null") || {}; return { paintings: { ...FDS_DEF.paintings, ...v.paintings }, era: { ...FDS_DEF.era, ...v.era }, place: { ...FDS_DEF.place, ...v.place } }; } catch (e) { return JSON.parse(JSON.stringify(FDS_DEF)); } })();
+const fdsSave = () => { try { localStorage.setItem(FDS_KEY, JSON.stringify(FDS)); } catch (e) {} };
+const fdsKind = chip => chip === "era" ? "era" : chip === "place" ? "place" : "paintings";
+const fdsSig = chip => chip === "paintings" || chip === "era" || chip === "place" ? JSON.stringify(FDS[fdsKind(chip)]) : "";
+const fdsChanged = chip => chip === "paintings" || chip === "era" || chip === "place" ? JSON.stringify(FDS[fdsKind(chip)]) !== JSON.stringify(FDS_DEF[fdsKind(chip)]) : false;
+// the filters on a ranked list of { i, de, cover }: years, shape, the part it plays, order, one per painter
+function fdcApply(rows, S, hex, F) {
+  const G = GAL; let out = rows;
+  const narrowed = S.y0 > 1300 || S.y1 < 2000;
+  if (narrowed) out = out.filter(r => { const y = G.year[r.i]; return y !== GL_UNDATED && y >= S.y0 && y <= S.y1; });
+  if (S.shape) out = out.filter(r => { const a = G.ar[r.i]; return S.shape === "tall" ? a > 1.2 : S.shape === "wide" ? a < .85 : a >= .85 && a <= 1.2; });
+  if (S.roles && S.roles.length && typeof rsRoleStats === "function") {
+    const R = rsRoleStats(hex), ok = new Set();
+    if (R) { S.roles.forEach(k => (R.roles[k] || []).forEach(x => ok.add(x[0]))); out = out.filter(r => ok.has(r.i)); }
+  }
+  if (S.order === "cover") out = out.slice().sort((a, b) => b.cover - a.cover);
+  else if (S.order === "old" || S.order === "new") {
+    const dir = S.order === "old" ? 1 : -1, yr = r => { const y = G.year[r.i]; return y === GL_UNDATED ? null : y; };
+    out = out.slice().sort((a, b) => { const x = yr(a), y = yr(b); if (x == null && y == null) return 0; if (x == null) return 1; if (y == null) return -1; return (x - y) * dir; });
+  }
+  if (S.onePer && F) { const seen = new Set(); out = out.filter(r => { const a = F.artist[r.i]; if (!a) return true; if (seen.has(a)) return false; seen.add(a); return true; }); }
+  return out;
+}
+function fdcBase(sub, o) {
+  const hex = sub.hex.toUpperCase(), tol = o && o.tol ? o.tol : FDC_TOL, minShare = o && o.min != null ? o.min : FDC_MIN_SHARE, bkey = tol === FDC_TOL && minShare === FDC_MIN_SHARE ? hex : `${hex}|${tol}|${minShare}`;
+  if (FDC_BASE.has(bkey)) return FDC_BASE.get(bkey);
+  const q = async (h, min) => ({ rows: fdcScan(h, tol, min) });
   // closeness dominates; presence (sqrt of the share, capped) breaks ties and demotes anything barely there
   const sc = r => r.de - FDC_BONUS * Math.min(Math.sqrt(Math.max(0, r.cover)), 3);
   const keep = (rs, seen) => rs.filter(r => !seen.has(r.i)).map(r => ({ i: r.i, de: r.de, cover: r.cover })).sort((a, b) => sc(a) - sc(b));
   const p = (async () => {
     await loadGallery();
     // presence is measured at the match tolerance (ΔE 6), never wider: a wider reach would count greys and browns as "the color"
-    let res = await q(hex, FDC_MIN_SHARE), seen = new Set(), rows = keep(res.rows, seen).slice(0, 3000).map(r => ({ ...r, g: -1 })), near = false;
+    let res = await q(hex, minShare), seen = new Set(), rows = keep(res.rows, seen).slice(0, 3000).map(r => ({ ...r, g: -1 })), near = false;
     rows.forEach(r => seen.add(r.i));
     const groups = [];
     // too few to be a feed: carry on with the next-nearest named colors, one at a time, each held to the same rule against ITS OWN color
-    if (rows.length < FDC_THIN) {
+    const custom = bkey !== hex;   // your own closeness or presence: the list is exactly what matches, never padded with neighbors
+    if (rows.length < FDC_THIN && !custom) {
       for (const x of await fdcNearNames(sub, 14, 12)) {
         if (rows.length >= 150) break;
         if (de2000(x.h, hex) < 1) continue;
@@ -639,27 +755,31 @@ function fdcBase(sub) {
         rows = rows.concat(rs.map(r => ({ ...r, g: groups.length - 1 })));
       }
     }
-    if (!rows.length) { rows = fdcScan(hex, 99, 0).sort((a, b) => a.de - b.de).slice(0, 300).map(r => ({ ...r, g: -1 })); near = true; }   // nothing holds it visibly: the nearest patches, named for what they are
+    if (!rows.length && !custom) { rows = fdcScan(hex, 99, 0).sort((a, b) => a.de - b.de).slice(0, 300).map(r => ({ ...r, g: -1 })); near = true; }   // nothing holds it visibly: the nearest patches, named for what they are
     return { rows, near, groups };
   })();
-  FDC_BASE.set(hex, p); if (FDC_BASE.size > 4) FDC_BASE.delete(FDC_BASE.keys().next().value);
-  p.catch(() => FDC_BASE.delete(hex));
+  FDC_BASE.set(bkey, p); if (FDC_BASE.size > 6) FDC_BASE.delete(FDC_BASE.keys().next().value);
+  p.catch(() => FDC_BASE.delete(bkey));
   return p;
 }
 
-function fdcRankPaintings(ctx) {
-  return fdcBase(ctx.sub).then(b => {
+async function fdcRankPaintings(ctx) {
+  const S = FDS.paintings, F = S.onePer ? await fdFacets().catch(() => null) : null;
+  return fdcBase(ctx.sub, { tol: S.tol, min: S.cov }).then(b => {
     if (!b.rows.length) return { empty: "No painting in the archive holds this color yet." };
+    const plain = S.order === "close" && !S.roles.length && !S.shape && S.y0 <= 1300 && S.y1 >= 2000 && !S.onePer;
+    const rows = fdcApply(b.rows, S, ctx.sub.hex, F);
+    if (!rows.length) return { empty: "Nothing matches these settings. Loosen one, or reset them." , reset: 1 };
     const items = []; let g = -1;
-    for (const r of b.rows.slice(0, FD_KEEP)) {
-      if (r.g !== g && r.g >= 0) {   // a new neighbor: its name, once, calmly (the first also gets the divider)
+    for (const r of rows.slice(0, FD_KEEP)) {
+      if (plain && r.g !== g && r.g >= 0) {   // a new neighbor: its name, once, calmly (the first also gets the divider)
         if (g === -1) items.push({ head: 1, text: "Close colors" });
         items.push({ head: 1, sub: 1, text: b.groups[r.g].n, h: b.groups[r.g].h });
       }
-      g = r.g;
-      items.push({ j: r.i, cap: r.g >= 0 ? b.groups[r.g].n : "" });   // no percent (David, 2026-10-25): the order already says closest first
+      g = plain ? r.g : -2;
+      items.push({ j: r.i, cap: plain && r.g >= 0 ? b.groups[r.g].n : "" });
     }
-    return b.groups.length ? { items, lead: "Closest to this color first, then the paintings of its neighbors", end: "That is everything close to this color and its neighbors." } : { items };
+    return b.groups.length && plain ? { items, n: rows.length, lead: "Closest to this color first, then the paintings of its neighbors", end: "That is everything close to this color and its neighbors." } : { items, n: rows.length };
   });
 }
 async function fdcRankPainters(ctx) {
@@ -680,25 +800,36 @@ async function fdcRankPainters(ctx) {
   return items.length ? { items } : { empty: "No painter in the archive stands out for this color yet." };
 }
 async function fdcRankEra(ctx, st) {
-  const b = await fdcBase(ctx.sub), G = GAL, pool = b.rows.filter(r => G.year[r.i] !== GL_UNDATED);
+  const b = await fdcBase(ctx.sub), G = GAL, S = FDS.era, F = S.where !== "any" ? await fdFacets().catch(() => null) : null;
+  let pool = b.rows.filter(r => G.year[r.i] !== GL_UNDATED);
+  if (F) {   // "where": only the country (or region) that holds the most of this color in its biggest decade
+    const cn = new Map(); pool.slice(0, 300).forEach(r => { const c = F.country[r.i]; if (c) cn.set(c, (cn.get(c) || 0) + 1); });
+    const co = [...cn.entries()].sort((x, y) => y[1] - x[1])[0];
+    if (co) { const ok = S.where === "country" ? new Set([co[0]]) : (() => { const t = fdRegions(F, co[0]); return t.length ? new Set([co[0], ...t[t.length - 1]]) : new Set([co[0]]); })(); pool = pool.filter(r => ok.has(F.country[r.i])); }
+  }
   if (pool.length < 30) return { empty: "Too few paintings that hold this color or its neighbors have a year, so there is no era to read." };
   const dec = new Map(); pool.slice(0, 300).forEach(r => { const d = Math.floor(G.year[r.i] / 10); dec.set(d, (dec.get(d) || 0) + 1); });
   const picked = !!(st && st.color > 0), top = picked ? st.color : [...dec.entries()].sort((a, b2) => b2[1] - a[1] || a[0] - b2[0])[0][0], y0 = top * 10 + 5;
-  const sc = pool.map(r => [r, Math.abs(G.year[r.i] - y0) + r.de * 2]).sort((a, b2) => a[1] - b2[1]).slice(0, FD_KEEP);
-  return { lead: picked ? `Nearest the ${top * 10}s, closest to this color first` : `Nearest the ${top * 10}s, the decade with the most of this color`, items: sc.map(([r]) => ({ j: r.i, cap: `${Math.floor(G.year[r.i] / 10) * 10}s` })), end: b.groups.length ? "That is everything close to this color and its neighbors." : "" };
+  const sc = pool.filter(r => Math.abs(G.year[r.i] - y0) <= S.win).map(r => [r, Math.abs(G.year[r.i] - y0) + r.de * 2]).sort((a, b2) => a[1] - b2[1]).slice(0, FD_KEEP);
+  if (!sc.length) return { empty: "Nothing from that window holds this color. Widen the window, or reset the settings.", reset: 1 };
+  return { lead: picked ? `Nearest the ${top * 10}s, closest to this color first` : `Nearest the ${top * 10}s, the decade with the most of this color`, n: sc.length, items: sc.map(([r]) => ({ j: r.i, cap: `${Math.floor(G.year[r.i] / 10) * 10}s` })), end: b.groups.length ? "That is everything close to this color and its neighbors." : "" };
 }
 async function fdcRankPlace(ctx, st) {
   const [b, F] = await Promise.all([fdcBase(ctx.sub), fdFacets()]), pool = b.rows.filter(r => F.country[r.i]);
   if (pool.length < 30) return { empty: "Too few paintings that hold this color or its neighbors have a country on record, so there is no place to read." };
   const cn = new Map(); pool.slice(0, 300).forEach(r => cn.set(F.country[r.i], (cn.get(F.country[r.i]) || 0) + 1));
-  const picked = !!(st && st.color > 0 && F.meta.countries[st.color - 1]), co = picked ? st.color : [...cn.entries()].sort((a, b2) => b2[1] - a[1] || a[0] - b2[0])[0][0], tiers = fdRegions(F, co), items = [];
+  const G = GAL, S = FDS.place, picked = !!(st && st.color > 0 && F.meta.countries[st.color - 1]), co = picked ? st.color : [...cn.entries()].sort((a, b2) => b2[1] - a[1] || a[0] - b2[0])[0][0], tiers = fdRegions(F, co), items = [];
+  const maxTier = S.reach >= 4 ? 99 : S.reach <= 0 ? 0 : S.reach === 1 ? 1 : tiers.length;   // 0 the country, 1 its neighbors, 2-3 its region, 4 the world
+  const cy = (() => { const r0 = pool.find(r => F.country[r.i] === co && G.year[r.i] !== GL_UNDATED); return r0 ? G.year[r0.i] : null; })();
   for (const r of pool) {
     const c = F.country[r.i]; let tier = 0;
-    if (c !== co) { tier = -1; for (let k = 0; k < tiers.length; k++) if (tiers[k].has(c)) { tier = k + 1; break; } if (tier < 0) continue; }
+    if (c !== co) { tier = -1; for (let k = 0; k < tiers.length; k++) if (tiers[k].has(c)) { tier = k + 1; break; } if (tier < 0) { if (maxTier < 99) continue; tier = 50; } if (tier > maxTier) continue; }
+    if (S.near && cy != null) { const y = G.year[r.i]; if (y === GL_UNDATED || Math.abs(y - cy) > S.win) continue; }
     items.push([r, tier * 100 + r.de]);
   }
+  if (!items.length) return { empty: "Nothing there holds this color within those settings. Widen them, or reset.", reset: 1 };
   items.sort((a, b2) => a[1] - b2[1]);
-  return { lead: picked ? `${F.meta.countries[co - 1]} first, then its region, closest to this color first` : `${F.meta.countries[co - 1]} first, the country with the most of this color, then its region`, items: items.slice(0, FD_KEEP).map(([r]) => ({ j: r.i, cap: F.meta.countries[F.country[r.i] - 1] })), end: b.groups.length ? "That is everything close to this color and its neighbors." : "" };
+  return { n: items.length, lead: picked ? `${F.meta.countries[co - 1]} first, then its region, closest to this color first` : `${F.meta.countries[co - 1]} first, the country with the most of this color, then its region`, items: items.slice(0, FD_KEEP).map(([r]) => ({ j: r.i, cap: F.meta.countries[F.country[r.i] - 1] })), end: b.groups.length ? "That is everything close to this color and its neighbors." : "" };
 }
 
 // ---------- Other worlds: one card per thing, a few from each world in turn ----------
@@ -762,7 +893,7 @@ async function fdcProbe(ctx) {
   const key = ctx.key;
   for (const k of ["painters", "era", "place", "close"]) {
     if ((FDC_OFF.get(key) || {})[k] || FD_CACHE.has(`${key}|${k}|overall|0`)) continue;
-    try { const r = await FDC_RANK[k](ctx, {}); if (r.empty) fdcOff(key, k, r.empty); else FD_CACHE.set(`${key}|${k}|overall|0`, r); } catch (e) {}
+    try { const r = await FDC_RANK[k](ctx, {}); if (r.empty && !r.reset) fdcOff(key, k, r.empty); else FD_CACHE.set(`${key}|${k}|overall|0`, r); } catch (e) {}
     await new Promise(res => setTimeout(res, 30));
   }
   while (FD_CACHE.size > 24) FD_CACHE.delete(FD_CACHE.keys().next().value);

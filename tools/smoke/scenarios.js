@@ -4612,18 +4612,18 @@ scenario("paintings", "Keep exploring: a Vibe chip re-ranks by the picture model
 scenario("paintings", "Keep exploring: a pinch zooms the feed live and settles on a column count and remembers it", async t => {
   await feedOpen(t, 12, "color");
   t.ev(`try { localStorage.removeItem("colorhub-feed-view"); } catch (e) {} 1`);
-  const c0 = +t.text("[data-fdsize]").split(" ")[0];
+  const c0 = t.ev("new Set([...document.querySelectorAll('.fd-grid .fd-tile')].map(e => e.style.left)).size");
   t.ev("GZ_DBG.scales.length = 0; 1");
   await pinchRun(t, ".fd-grid", 200, 90, 10);
   const sc = t.ev("GZ_DBG.scales");
   t.expect(sc.length >= 2 && new Set(sc).size >= 2 && sc[0] < 1, "the pinch showed no intermediate scales: " + JSON.stringify(sc));
   await t.sleep(700);
-  const c1 = +t.text("[data-fdsize]").split(" ")[0];
+  const c1 = t.ev("new Set([...document.querySelectorAll('.fd-grid .fd-tile')].map(e => e.style.left)).size");
   t.expect(c1 > c0 && c1 <= 6, `pinching in did not add columns (${c0} -> ${c1})`);
   t.expect(JSON.parse(t.ev(`localStorage.getItem("colorhub-feed-view")`) || "{}").cols === c1, "the density was not remembered");
   t.expect(t.ev("document.querySelector('.fd-grid').style.transform") === "", "the grid is left scaled after settling");
   t.ev(`window.dispatchEvent(new KeyboardEvent("keydown", { key: "+" })); 1`); await t.sleep(500);
-  t.expect(+t.text("[data-fdsize]").split(" ")[0] === c1 - 1, "the + key did not give one column fewer");
+  t.expect(t.ev("new Set([...document.querySelectorAll('.fd-grid .fd-tile')].map(e => e.style.left)).size") === c1 - 1, "the + key did not give one column fewer");
   const n = t.$$(".fd-tile img").length; t.expect(n <= 120, "too many live pictures: " + n);
 });
 scenario("paintings", "the Explore pill is on the first screen of a painting page at 440x956 and 320x640", async t => {
@@ -4664,8 +4664,8 @@ scenario("pages", "Keep exploring on a color page: the feed is the body under th
   t.expect(t.$(".cp-hero .rp-name"), "the color page's cover is gone");
   const caps = feedCaps(t);
   t.expect(caps.length >= 4 && !caps.some(c => /% match/.test(c)), `the paintings feed should show no match percent: ${caps.slice(0, 6)}`);
-  const first = t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items[0].j`);
-  t.expect(Number.isInteger(first) && t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items.length`) >= 24, "the top of the ranking isn't cached (rank once, page through)");
+  const first = t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0|" + fdsSig("paintings")).items[0].j`);
+  t.expect(Number.isInteger(first) && t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0|" + fdsSig("paintings")).items.length`) >= 24, "the top of the ranking isn't cached (rank once, page through)");
   t.expect(t.$$(".fd-tile[data-fk] .fd-cap, .fd-tile[data-fk] .fd-by").every(e => parseFloat(getComputedStyle(e).fontSize) >= 15), "caption text is smaller than body size");
   // About brings the article back in place and hides the feed's own parts; Paintings returns
   await t.click(".fd-chip[data-fc=about]", { wait: 300 });
@@ -4673,6 +4673,25 @@ scenario("pages", "Keep exploring on a color page: the feed is the body under th
   await t.click(".fd-chip[data-fc=paintings]", { wait: 300 });
   t.expect(t.$("[data-rp-about]").hidden && !t.$(".fd-grid").hidden, "Paintings didn't swap the feed back");
   t.notes.push(`color feed first ranking ${t.ev("FD_LAST.ms")} ms`);
+});
+// David, 2026-10-25: the "2 across" button is gone. A Settings button opens a sheet made for the tab (closeness, coverage, role, years, shape, order,
+// size on Paintings) with a live count, and a Feed / Map switch opens the same list as the painting map, the painting nearest the top in the middle.
+scenario("pages", "Keep exploring on a color page: Settings changes the list with a live count and the Map lens opens the same list", async t => {
+  await cfeedOpen(t, "#/color/teal");
+  t.expect(!t.$("[data-fdsize]"), "the old '2 across' button is still on the page");
+  const before = t.$$(".fd-tile[data-fk]").length;
+  await t.click("[data-fdset]", { wait: 600 });
+  const sh = await t.waitFor(".fs-sheet", 5000, "the Settings sheet");
+  t.expect(t.$$(".fs-c", sh).length >= 5, "the Paintings sheet has too few controls");
+  const n0 = t.text(".fs-count");
+  t.expect(/paintings/.test(n0), `no live count in the sheet: "${n0}"`);
+  const tol = t.$("[data-fs=tol]", sh); tol.value = 3; tol.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+  await t.waitFor(() => t.text(".fs-count") !== n0 ? true : null, 20000, "the count to change after tightening the match");
+  t.expect(!t.$("[data-fdsetdot]").hidden, "the Settings button shows no mark that something changed");
+  await t.click(".fs-reset", { wait: 800 });
+  t.ev("document.querySelectorAll('.scrim').forEach(s => s.click())"); await t.sleep(500);
+  await t.click("[data-fdmap]", { wait: 900 });
+  await TRL.atHash(t, /^#\/paintings\/map\?arr=spiral&seed=\d+&c=/, "the painting map, seeded on a painting with the color as its filter");
 });
 // David, 2026-10-25: every number is a door. A decade bar and a country on "When and where" open the Era and Place feeds on that decade or
 // country; "All the painters" opens Painters. The page's own chip row (not a scroll to the bottom) is what takes you there.
@@ -4747,7 +4766,7 @@ scenario("pages", "Keep exploring on an in-between color: the feed measures the 
   await cfeedOpen(t, "#/color/teal?c=2f8f8a");
   const caps = feedCaps(t);
   t.expect(caps.length >= 4 && !caps.some(c => /% match/.test(c)), `captions: ${caps.slice(0, 4)}`);
-  t.expect(t.ev(`!!FD_CACHE.get("c:#2F8F8A|paintings|overall|0")`), "the feed is not keyed to the tapped color");
+  t.expect(t.ev(`!!FD_CACHE.get("c:#2F8F8A|paintings|overall|0|" + fdsSig("paintings"))`), "the feed is not keyed to the tapped color");
   t.expect(/Your color/.test(t.text(".cp-chip")), "this isn't the tapped-color page");
   await cfeedChip(t, "close");
   const card = t.$(".fd-tile.fd-card[data-fk]"); t.expect(card, "no close-color card");

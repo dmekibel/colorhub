@@ -588,7 +588,7 @@
 .fd-pre .fd-chip.dis{opacity:.5;border-style:dashed;pointer-events:none}
 .rp-tabs .sec-head[hidden]{display:none}
 .rp-tabs .sec-head{justify-content:flex-end;margin-top:8px;margin-bottom:0}
-.rp-tabs .sec-head b,.rp-tabs .sec-head span{display:none}
+.rp-tabs .sec-head>b,.rp-tabs .sec-head>span:not(.fd-tools){display:none}
 
 /* How painters use it (js/richcolor.js rcRoleShelfHTML): the bar is the tabs, each role as wide as how often it plays that part;
    the chosen one fills with the color itself, the rest keep a band of it (darker for Shadow, lighter for Light) */
