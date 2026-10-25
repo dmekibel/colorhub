@@ -537,6 +537,12 @@ function fdMount(host, o) {
   function stateDraw() {
     if (!items.length || items[0].sk) { state.innerHTML = ""; return; }
     const moreComing = !!(curRes && curRes.next && !curRes.moreDone);
+    if (moreComing && shown >= items.length) {   // more is on its way: colored stand-ins (the colors of paintings already here), so a short list never reads as "that's all"
+      const pics = items.filter(x => x.j != null && !x.head && !x.card), hs = [1.25, .8, 1.05, 1.4, .9, 1.15, .85, 1.3];
+      const n = cols * 2;
+      state.innerHTML = `<div class="fd-more" role="status" aria-label="Loading more paintings" style="--cols:${cols};--gap:${gap}px">${Array.from({ length: n }, (_, k) => `<i style="--c:${pics.length ? domOf(pics[(k * 7 + 3) % pics.length].j) : "#2a2830"};--h:${hs[k % hs.length]};--d:${(k % cols) * 120}ms"></i>`).join("")}</div>`;
+      return;
+    }
     state.innerHTML = shown >= items.length && !moreComing ? (isColor ? `<p class="fd-end">${esc(curEnd || "That is everything close to this color.")}</p>${fdChanged() ? `<button class="fd-up" data-fdreset>Reset the settings</button>` : ""}<button class="fd-up" data-fdup>Back to the top of this color</button>` : `<p class="fd-end">${esc(curEnd || "That is everything close to this one.")}</p>${curMap ? `<button class="fd-up" data-pmap="${esc(curMap)}">See them on the map</button> ` : ""}<button class="fd-up" data-fdup>Back to this painting</button>`) : "";
   }
   state.onclick = e => {

@@ -662,3 +662,9 @@ html.desk .gl-tabs{margin-top:28px}
 
 /* palette strips: equal widths unless the viewer sizes them by area (Settings) */
 html:not(.pal-area) .mini-pal>i,html:not(.pal-area) .xb-t-pal>i{flex:1 1 0 !important}
+
+/* stand-in tiles while the next page of a feed is on its way: the colors of paintings already shown, breathing slowly */
+.fd-more{display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:var(--gap,2px);margin:2px calc(-1 * var(--g,0px)) 0;align-items:start}
+.fd-more i{display:block;aspect-ratio:1/var(--h);background:var(--c);opacity:.5;animation:fdMore 1.4s ease-in-out infinite;animation-delay:var(--d,0ms)}
+@keyframes fdMore{0%,100%{opacity:.28}50%{opacity:.6}}
+@media (prefers-reduced-motion:reduce){.fd-more i{animation:none;opacity:.4}}
