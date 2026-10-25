@@ -836,7 +836,6 @@ function rpPaintSectionHTML(name, hex, entry, famC) {
     <h2>Paintings</h2>
     <div class="rp-paint-lead" data-rp-lead></div>
     <div class="gl-in" data-glin></div>
-    ${call(rcRoleShelfHTML, name, hex)}
     ${call(rcPaintersSection, name, hex)}
     ${call(rcWhenWhereSection, name, hex)}
     ${call(rcPairedSection, name, hex)}

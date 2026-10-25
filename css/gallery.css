@@ -466,7 +466,7 @@
 .fd-im img.ld{opacity:1}
 .fd-cap{display:block;margin-top:8px;height:22px;font:500 16px/22px var(--sans);letter-spacing:-.005em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .fd-grid.narrow .fd-cap{height:44px;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.fd-by{display:flex;height:20px;font:400 15px/20px var(--sans);color:var(--soft);white-space:nowrap;overflow:hidden}
+.fd-by{display:flex;margin-top:4px;height:18px;font:400 14px/18px var(--sans);color:var(--soft);white-space:nowrap;overflow:hidden}
 .fd-by span{min-width:0;overflow:hidden;text-overflow:ellipsis}
 .fd-by em{flex:none;font-style:normal;white-space:pre}
 .fd-tile:active .fd-im{opacity:.82}
@@ -574,6 +574,9 @@ html.desk .fd-bar{top:calc(var(--dkn,60px) - 1px)}
 .fs-dual input::-moz-range-thumb{pointer-events:auto}
 .fs-multi{display:flex;flex-wrap:wrap;gap:8px}
 .fs-multi button{min-height:44px;padding:0 15px;border-radius:99px;border:1px solid var(--rule-strong,rgba(236,232,223,.28));background:transparent;color:var(--soft);font:400 17px/1 var(--serif)}
+.fs-multi button small{display:block;margin-top:3px;font:400 13px/1 var(--sans);opacity:.75}
+.fs-multi button:has(small){padding:8px 15px;line-height:1.1}
+.fs-say{margin:8px 0 0;font:400 15px/1.35 var(--sans);color:var(--soft)}
 .fs-multi button[aria-pressed="true"]{background:var(--paper);border-color:var(--paper);color:var(--paper-ink)}
 .fs-seg{display:flex;border:1px solid var(--rule-strong,rgba(236,232,223,.28));border-radius:12px;overflow:hidden}
 .fs-seg button{flex:1;min-height:46px;padding:0 6px;border:0;background:transparent;color:var(--soft);font:400 17px/1.1 var(--serif)}
@@ -626,4 +629,4 @@ html.desk .gl-tabs{margin-top:28px}
 .fd-grid.nocap .fd-by{display:none}
 .fd-grid.bare .fd-err{display:none}
 .gl-tabs .fd-state,.rp-tabs .fd-state{padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
-.fd-cap:empty{display:none}
+.fd-cap:empty,.fd-grid.narrow .fd-cap:empty{display:none}

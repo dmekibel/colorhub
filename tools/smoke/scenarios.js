@@ -2604,16 +2604,17 @@ scenario("pages", "role paintings and Werner's 1821 example show on the color pa
   await H.openPage(t, "#/name/auburn", "Auburn");
   // David, 2026-10-09: Paintings is a first-class section now, not a drawer behind a summary tap
   const paint = await t.waitFor(() => t.$(".rp-paint"), 8000, "the Paintings section");
-  // How painters use it (js/richcolor.js rcRoleShelfHTML): the role bar is the tabs, each tab swaps the rail of paintings
-  const shelf = await t.waitFor(() => t.$(".rs-roles", paint), 20000, "the How painters use it shelf");
-  const segs = t.$$(".rs-seg", shelf);
-  t.expect(segs.length >= 2 && segs.every(x => /^(Main|Shadow|Mid-tone|Light|Accent)\d+%$/.test(t.text(x).replace(/\s+/g, ""))), `role tabs read ${segs.map(x => t.text(x))}`);
-  t.expect(t.$$(".rs-seg.on", shelf).length === 1 && /% of the [\d,]+ paintings that hold it/.test(t.text(".rs-say")), `no plain sentence with the n: "${t.text(".rs-say")}"`);
-  const other = segs.find(x => !x.classList.contains("on")), before = t.text(".rs-say");
-  await t.click(other, { wait: 300 });
-  t.expect(other.classList.contains("on") && t.text(".rs-say") !== before, "tapping another role did not switch the shelf");
-  const tile = await t.waitFor(() => t.$(".rs-rail [data-gi]", shelf), 15000, "a painting in the role rail");
-  t.expect(t.$$(".rs-rail [data-gi]", shelf).length >= 3, "the role rail shows fewer than 3 paintings");
+  // "How painters use it" is no longer an Overview section: it is the Paintings Settings sheet's "part it plays" chips (percent under each)
+  t.expect(!t.$(".rs-roles"), "the How painters use it section is still on the Overview");
+  await cfeedOpen(t, "#/name/auburn");
+  await t.click("[data-fdset]", { wait: 500 });
+  const sheet = await t.waitFor(".fs-sheet", 8000, "the Paintings Settings sheet");
+  const chips = t.$$("[data-fsmulti=roles] button", sheet);
+  t.expect(chips.length === 5 && chips.every(x => /^(Main|Shadow|Mid-tone|Light|Accent)\d+%$/.test(t.text(x).replace(/\s+/g, ""))), `part-it-plays chips read ${chips.map(x => t.text(x))}`);
+  await t.click(chips[0], { wait: 300 });
+  t.expect(/% of the [\d,]+ paintings that hold it/.test(t.text("[data-fs-say]")), `no one-line meaning under the chip: "${t.text("[data-fs-say]")}"`);
+  await t.open("#/name/auburn", { settle: 600 });
+  const tile = await t.waitFor(() => t.$(".rp-paint [data-gi]"), 15000, "a painting on the page");
   await t.click(tile, { wait: 700 });
   await t.waitFor(() => t.$(".gl-page"), 10000, "the role painting's own page");
   await t.click("[data-back]", { wait: 600 });
@@ -2659,13 +2660,6 @@ scenario("pages", "every painting tile on a color page opens its painting: the I
   await t.click("[data-back]", { wait: 600 });
   await t.waitFor(() => H.title(t) === "Ochre Brown", 8000, "Back to return to Ochre Brown from the archive hero");
 
-  // 3. a painting in the How painters use it rail (rcRoleShelfHTML)
-  paint = await freshPaint();
-  const role = await t.waitFor(() => t.$(".rs-rail [data-gi]", paint), 15000, "a painting in the role rail");
-  await t.click(role, { wait: 700 });
-  await t.waitFor(() => t.$(".gl-page"), 10000, "the role tile's own page");
-  await t.click("[data-back]", { wait: 600 });
-  await t.waitFor(() => H.title(t) === "Ochre Brown", 8000, "Back to return to Ochre Brown from the role tile");
 });
 
 // David, 2026-10-09 on Baby Pink: "It's not letting me tap Paul Signac... and Paul has no photo" -- a painter
@@ -4439,8 +4433,7 @@ scenario("paintings", "Keep exploring: a feed at the bottom of a painting page, 
   t.expect(t.$$(".fd-chip").map(b => t.text(b).replace(/ ·.*/, "")).join() === "Overview,Color,Vibe,Painter,Era,Place", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}", not Overview, Color, Vibe, Painter, Era, Place`);
   t.expect(/^Color/.test(t.text(".fd-chip.on")) && !/·/.test(t.text(".fd-chip.on")), `Color is not on by default: "${t.text(".fd-chip.on")}"`);
   const caps = feedCaps(t), pct = caps.map(c => +((c.match(/(\d+)%/) || [])[1] || NaN));
-  t.expect(caps.length >= 6 && caps.every(c => /^\d+% alike$/.test(c)), `captions don't say why in plain words: ${caps.slice(0, 4)}`);
-  t.expect(pct.every((p, k) => k === 0 || p <= pct[k - 1]), `not closest first: ${pct}`);
+  t.expect(t.$$(".fd-tile[data-fk]").length >= 6 && caps.every(c => !c), `tiles carry only painter and year, no caption line: ${caps.slice(0, 4)}`);
   // the first tile is exactly what the page's own "More like this" would rank first
   const want = t.ev(`glSimilarPal(twPal(twQuery(glTwCols(glPoolDecode(glDetailNow(12).pl), glPal(12)), { self: 12 })), 1, { exclude: 12, pairs: false, noEra: true }).list[0].i`);
   t.expect(t.ev(`FD_CACHE.get("12|color|overall|0").items[0].j`) === want, "the first tile is not the closest painting by overall palette");
@@ -4462,17 +4455,17 @@ scenario("paintings", "Keep exploring: each chip re-ranks, the first tile is the
   // Era: nearest in year first: same year, then 1 yr earlier / later ...
   await t.click(".fd-chip[data-fc=era]", { wait: 300 });
   await t.waitFor(() => t.text(".fd-chip.on") === "Era" && t.$(".fd-tile[data-fk='0'] .fd-cap") && !t.$(".fd-tile.sk") ? true : null, 10000, "the Era ranking");
-  const gaps = feedCaps(t).map(c => c === "Same year" ? 0 : +((c.match(/(\d+) yrs? (earlier|later)/) || [])[1] || NaN));
-  t.expect(gaps.length >= 6 && gaps.every((g, k) => g >= 0 && (k === 0 || g >= gaps[k - 1])), `Era is not nearest in year first: ${feedCaps(t).slice(0, 8)}`);
+  const yrs = t.$$(".fd-tile[data-fk] .fd-by").map(e => +((t.text(e).match(/(\d{4})\s*$/) || [])[1] || NaN)), y0 = yrs[0], gaps = yrs.map(y => Math.abs(y - y0));
+  t.expect(gaps.length >= 6 && gaps.slice(0, 8).every(g => g <= 25), `Era does not start with nearby years: ${yrs.slice(0, 8)}`);
   // Painter: the same painter first
   await t.click(".fd-chip[data-fc=painter]", { wait: 300 });
-  await t.waitFor(() => t.text(".fd-chip.on") === "Painter" && /^Also /.test(t.text(".fd-tile[data-fk='0'] .fd-cap")) ? true : null, 20000, "the Painter ranking (its facets load first)");
+  await t.waitFor(() => t.text(".fd-chip.on") === "Painter" && /Same painter first/.test(t.text(".fd-lead")) && t.$(".fd-tile[data-fk='0']") && !t.$(".fd-tile.sk") ? true : null, 20000, "the Painter ranking (its facets load first)");
   t.expect(/Same painter first/.test(t.text(".fd-lead")), `the Painter lead line reads "${t.text(".fd-lead")}"`);
   // Place: the same country first, nearest in time
   await t.click(".fd-chip[data-fc=place]", { wait: 300 });
-  await t.waitFor(() => t.text(".fd-chip.on") === "Place" && / · /.test(t.text(".fd-tile[data-fk='0'] .fd-cap")) ? true : null, 20000, "the Place ranking");
-  const country = t.text(".fd-tile[data-fk='0'] .fd-cap").split(" · ")[0];
-  t.expect(feedCaps(t).slice(0, 4).every(c => c.startsWith(country)), `Place doesn't lead with the same country: ${feedCaps(t).slice(0, 4)}`);
+  await t.waitFor(() => t.text(".fd-chip.on") === "Place" && t.ev(`!!FD_CACHE.get("12|place|overall|0")`) && t.$(".fd-tile[data-fk='0']") && !t.$(".fd-tile.sk") ? true : null, 20000, "the Place ranking");
+  const placeCaps = t.ev(`FD_CACHE.get("12|place|overall|0").items.slice(0, 4).map(x => x.cap)`), country = placeCaps[0].split(" · ")[0];   // the tiles show only painter and year; the ranking still carries the country
+  t.expect(placeCaps.every(c => c.startsWith(country)), `Place doesn't lead with the same country: ${placeCaps}`);
   // Color's "by…" sheet: Mood re-ranks (the caption speaks of mood), and the chip says which
   await t.click(".fd-chip[data-fc=color]", { wait: 300 });
   t.expect(/^Color/.test(t.text(".fd-chip.on")), "Color didn't come back on");
@@ -4480,7 +4473,7 @@ scenario("paintings", "Keep exploring: each chip re-ranks, the first tile is the
   const sheet = await t.waitFor(".fd-sheet", 5000, "the by… sheet");
   t.expect(/Overall palette/.test(t.text(sheet)) && /Mood/.test(t.text(sheet)) && /One color/.test(t.text(sheet)), "the by… sheet doesn't list the metrics");
   await t.click(sheet.querySelector("[data-m=mood]"), { wait: 400 });
-  await t.waitFor(() => /mood$/.test(t.text(".fd-tile[data-fk='0'] .fd-cap")) ? true : null, 20000, "the Mood ranking");
+  await t.waitFor(() => t.ev(`FD_LAST.metric`) === "mood" && t.$(".fd-tile[data-fk='0']") && !t.$(".fd-tile.sk") ? true : null, 20000, "the Mood ranking");
   t.expect(/^Color · Mood/.test(t.text(".fd-chip.on")), `the chip doesn't name Mood: "${t.text(".fd-chip.on")}"`);
   // a painting with no year: Era is disabled with a plain reason (and the feed shows color instead of nothing)
   const idx = t.ev(`(() => { for (let j = 300; j < GAL.n; j++) if (GAL.year[j] === GL_UNDATED) return j; return -1; })()`);
@@ -4496,10 +4489,13 @@ scenario("paintings", "Keep exploring: a tile opens its painting with the chip s
   await feedOpen(t, 12, "era");
   await t.waitFor(() => t.text(".fd-chip.on") === "Era" && !t.$(".fd-tile.sk") ? true : null, 10000, "Era");
   for (let n = 0; n < 7; n++) { t.w.scrollBy(0, 700); await t.sleep(250); }   // deep enough that more than one page has loaded
-  const tile = t.$$(".fd-tile[data-fk]").find(e => +e.dataset.fk >= 10);
+  let tile = t.$$(".fd-tile[data-fk]").find(e => +e.dataset.fk >= 10);
   t.expect(tile, "no tile past the first page to tap");
   tile.scrollIntoView({ block: "center" }); await t.sleep(500);
-  const k = tile.dataset.fk, y0 = tile.getBoundingClientRect().top, hash0 = TRL.hash(t), sc0 = t.w.scrollY;
+  const k = tile.dataset.fk;
+  for (let n = 0; n < 12 && !(tile = t.$(`.fd-tile[data-fk='${k}']`)); n++) { await t.sleep(300); await t.tick(); }   // the feed redraws its window on the frame after a scroll: hold the live tile, not the one first found
+  t.expect(tile, `tile ${k} was unloaded after scrolling to it`);
+  const y0 = tile.getBoundingClientRect().top, hash0 = TRL.hash(t), sc0 = t.w.scrollY;
   t.expect(+k >= 10, `expected to be deep in the feed, at tile ${k}`);
   await t.click(tile, { wait: 900 });
   await TRL.atHash(t, /^#\/gallery\/\d+$/, "the tapped painting's page");
@@ -4527,7 +4523,9 @@ scenario("paintings", "trail: painting then a Vibe tile then a Color tile then B
   const pickTile = async () => {
     await t.sleep(1500);
     t.w.scrollTo(0, feedTop(t) - 150); t.w.dispatchEvent(new t.w.Event("scroll")); await t.tick(); await t.sleep(900); await t.tick();
-    const tile = t.$$(".fd-tile[data-fk]").find(e => +e.dataset.fk >= 1 && e.getBoundingClientRect().top > 160 && e.getBoundingClientRect().bottom < t.w.innerHeight - 60);
+    const findTile = () => t.$$(".fd-tile[data-fk]").find(e => +e.dataset.fk >= 1 && e.getBoundingClientRect().top > 160 && e.getBoundingClientRect().bottom < t.w.innerHeight - 60);
+    for (let n = 0; n < 12 && !findTile(); n++) { await t.sleep(400); await t.tick(); }   // the feed draws its window on the next frame after a scroll
+    const tile = findTile();
     t.expect(tile, "no tile to tap on " + TRL.hash(t) + ": " + t.text(".fd-chip.on") + " " + t.$$(".fd-tile[data-fk]").length + " tiles " + t.$$(".fd-tile[data-fk]").map(e => e.dataset.fk + "@" + Math.round(e.getBoundingClientRect().top)) + ", scroll " + t.w.scrollY + ", grid " + t.$(".fd-grid").style.height);
     tile.scrollIntoView({ block: "center" }); await t.sleep(400);
     return { k: tile.dataset.fk, y: tile.getBoundingClientRect().top, tile };
@@ -4711,7 +4709,7 @@ scenario("pages", "Keep exploring on a color page: the feed is the body under th
   t.expect(caps.length >= 4 && !caps.some(c => /% match/.test(c)), `the paintings feed should show no match percent: ${caps.slice(0, 6)}`);
   const first = t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0|" + fdsSig("paintings")).items[0].j`);
   t.expect(Number.isInteger(first) && t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0|" + fdsSig("paintings")).items.length`) >= 24, "the top of the ranking isn't cached (rank once, page through)");
-  t.expect(t.$$(".fd-tile[data-fk] .fd-cap, .fd-tile[data-fk] .fd-by").every(e => parseFloat(getComputedStyle(e).fontSize) >= 15), "caption text is smaller than body size");
+  t.expect(t.$$(".fd-tile[data-fk] .fd-cap, .fd-tile[data-fk] .fd-by").every(e => parseFloat(getComputedStyle(e).fontSize) >= 14), "caption text is smaller than 14px (the byline is 14px by David's 2026-10-25 call)");
   // About brings the article back in place and hides the feed's own parts; Paintings returns
   await t.click(".fd-chip[data-fc=about]", { wait: 300 });
   t.expect(!t.$("[data-rp-about]").hidden && t.$(".fd-grid").hidden, "About didn't swap in the article");

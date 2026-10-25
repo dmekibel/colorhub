@@ -207,7 +207,7 @@ function fdMount(host, o) {
   let lastN = 0, onCount = null, curEnd = "", curMap = "", curLead = "", eff = st.chip, items = [], shown = 0, tok = 0, built = false, gone = false, fk = 0;
   let W = 0, cols = 2, colW = 0, gap = 12, vgap = 18, txt = 52, top = null, col = null, hh = null, ends = [], pinSkew = null, dense = false, capPct = false, zoom = null;
   const VKEY = isColor ? "colorhub-feed-view-color" : "colorhub-feed-view";
-  const viewLoad = () => { try { const v = JSON.parse(localStorage.getItem(VKEY) || "null") || {}; return { cols: v.cols | 0, dcols: v.dcols | 0, caps: !!v.caps }; } catch (e) { return { cols: 0, dcols: 0, caps: false }; } };
+  const viewLoad = () => { try { const v = JSON.parse(localStorage.getItem(VKEY) || "null") || {}; return { cols: v.cols | 0, dcols: v.dcols | 0, caps: v.caps === undefined ? true : !!v.caps }; } catch (e) { return { cols: 0, dcols: 0, caps: true }; } };
   const view = viewLoad();
   const viewSave = () => { try { localStorage.setItem(VKEY, JSON.stringify(view)); } catch (e) {} };
   const wide = () => typeof glDesk === "function" && glDesk();
@@ -300,20 +300,22 @@ function fdMount(host, o) {
   const colsFor = w => { const want = wide() ? view.dcols : view.cols; return want >= 1 ? Math.min(fdMaxCols(), want) : w < 560 ? 3 : w < 860 ? 3 : Math.max(3, Math.min(5, Math.floor((w + 14) / 254))); };
   const sizeDraw = () => { const b = host.querySelector("[data-fdsize]"); if (!b) return; b.textContent = `${cols} across`; b.setAttribute("aria-label", `Size: ${cols} across. Tap for another size, or pinch.`); };
   const bare = () => !view.caps;
+  const dense0 = () => false;   // every grid is edge to edge, pictures first (David, 2026-10-25); the byline only adds a line under each
   const relayout = () => {
-    grid.classList.toggle("bare", bare());
+    grid.classList.add("bare");
     W = grid.clientWidth || Math.min(innerWidth, 540) - 40;
     cols = colsFor(W); [gap, vgap] = fdGapsFor(cols, W);
     colW = (W - gap * (cols - 1)) / cols;
-    if (bare()) { gap = 2; vgap = 2; colW = (W - gap * (cols - 1)) / cols; }
+    if (!dense0()) { gap = 2; vgap = bare() ? 2 : 6; colW = (W - gap * (cols - 1)) / cols; }
     dense = (cols >= 5 && colW < 150) || colW < FD_DENSE_W;   // 5+ across on a phone; a wide window's 5 across still has room for words
-    txt = bare() ? 0 : dense ? (capPct ? 28 : 0) : colW < 146 ? 72 : 50; grid.classList.toggle("narrow", !dense && !bare() && colW < 146);   // a 320 px screen: the caption may take two lines, so the number is never cut off
+    txt = bare() ? 0 : dense ? (capPct ? 28 : 0) : 22; grid.classList.toggle("narrow", !dense && !bare() && colW < 146);   // a 320 px screen: the caption may take two lines, so the number is never cut off
     grid.classList.toggle("dense", dense); grid.classList.toggle("nocap", bare() || (dense && !capPct)); sizeDraw();
     top = new Float32Array(items.length); col = new Uint8Array(items.length); hh = new Float32Array(items.length);
     ends = new Array(cols).fill(0);
     place(0);
   };
-  const txOf = it => !txt || dense || it.cap || it.card || it.sk ? txt : 20;   // a tile with no caption line (Vibe, "Also ...") keeps just its byline
+  const keepCap = it => it.card || /^(Used most|Also used) by|^\d{3}0s$/.test(it.cap || "") || (isColor && !!it.cap && !/%/.test(it.cap));   // a color page's plain-words captions (a country, a painter, a decade) stay
+  const txOf = it => !txt || dense ? txt : keepCap(it) ? (colW < 146 ? 72 : 50) : txt;   // a tile with no caption line (Vibe, "Also ...") keeps just its byline
   const place = k0 => {
     for (let k = k0; k < shown; k++) {
       if (items[k].head) { const t = Math.max(...ends), h = items[k].sub ? 44 : 60; top[k] = t; col[k] = 0; hh[k] = h; ends.fill(t + h + vgap); continue; }   // a divider or a group's name: the full width, below everything above it
@@ -327,7 +329,7 @@ function fdMount(host, o) {
 
   // ----- tiles -----
   const domOf = j => { let b = 0; for (let y = 1; y < 6; y++) if (G.sh[j * 6 + y] > G.sh[j * 6 + b]) b = y; return glHex(j, b); };
-  const capOf = it => dense ? fdPctOnly(it.cap) : it.cap;
+  const capOf = it => dense ? fdPctOnly(it.cap) : keepCap(it) ? it.cap : "";   // no percents or tab words under a tile: just painter and year (David, 2026-10-25)
   function tileHTML(k) {
     const it = items[k], pos = `left:${col[k] * (colW + gap)}px;top:${top[k]}px;width:${colW}px;height:${hh[k]}px`;
     if (it.head) return `<div class="fd-head${it.sub ? " sub" : ""}" style="top:${top[k]}px;height:${hh[k]}px"${it.sub ? ` role="heading" aria-level="3"` : ` role="separator" aria-label="${esc(it.text)}"`}>${it.sub ? `<i style="--c:${it.h}"></i>` : ""}<span>${esc(it.text)}</span></div>`;
@@ -603,8 +605,10 @@ function fdMount(host, o) {
     const seg = (k, label, opts) => `<div class="fs-c"><div class="fs-row"><p>${label}</p></div><div class="fs-seg" data-fsseg="${k}">${opts.map(([v, t]) => `<button type="button" data-v="${v}" aria-pressed="${S[k] === v}">${t}</button>`).join("")}</div></div>`;
     const sw = (k, label) => `<div class="fs-c fs-tg"><p>${label}</p><button type="button" class="fs-switch" role="switch" aria-checked="${!!S[k]}" data-fssw="${k}"><i></i></button></div>`;
     let body = "";
+    const RSTAT = kind === "paintings" && typeof rsRoleStats === "function" ? rsRoleStats(sub.hex) : null;   // how painters use this color: each part it plays, as a share of the paintings that hold it
+    const roleDo = v => `${Math.max(1, Math.round(RSTAT.roles[v].length / RSTAT.n * 100))}%`;
     if (kind === "paintings") body = rng("tol", "How close a match", 1, 20, 1, ["Exact", "Loose"]) + rng("cov", "Covers at least", 0, 40, 1, ["Any speck", "Most of it"])
-      + `<div class="fs-c"><div class="fs-row"><p>The part it plays</p><b data-fs-out="roles"></b></div><div class="fs-multi" data-fsmulti="roles">${[["main", "Main"], ["shadow", "Shadow"], ["mid", "Mid-tone"], ["light", "Light"], ["accent", "Accent"]].map(([v, t]) => `<button type="button" data-v="${v}" aria-pressed="${S.roles.includes(v)}">${t}</button>`).join("")}</div></div>`
+      + `<div class="fs-c"><div class="fs-row"><p>The part it plays</p><b data-fs-out="roles"></b></div><div class="fs-multi" data-fsmulti="roles">${[["main", "Main"], ["shadow", "Shadow"], ["mid", "Mid-tone"], ["light", "Light"], ["accent", "Accent"]].map(([v, t]) => `<button type="button" data-v="${v}" aria-pressed="${S.roles.includes(v)}">${t}${RSTAT ? `<small>${roleDo(v)}</small>` : ""}</button>`).join("")}</div><p class="fs-say" data-fs-say aria-live="polite"></p></div>`
       + `<div class="fs-c"><div class="fs-row"><p>Painted between</p><b data-fs-out="yrs"></b></div><div class="fs-dual"><div class="fs-track"><i data-fs-fill></i></div><input type="range" min="1300" max="2000" step="10" value="${S.y0}" data-fs="y0" aria-label="From year"><input type="range" min="1300" max="2000" step="10" value="${S.y1}" data-fs="y1" aria-label="To year"></div></div>`
       + seg("shape", "Shape", [["", "Any"], ["tall", "Tall"], ["wide", "Wide"], ["square", "Square"]])
       + `<div class="fs-c"><div class="fs-row"><p>Order</p></div><label class="fs-select"><select data-fssel="order" aria-label="Order">${[["close", "Closest color first"], ["cover", "Most of the color first"], ["old", "Oldest first"], ["new", "Newest first"]].map(([v, t]) => `<option value="${v}"${S.order === v ? " selected" : ""}>${t}</option>`).join("")}</select></label></div>`
@@ -612,7 +616,7 @@ function fdMount(host, o) {
     else if (kind === "era") body = rng("win", "How wide a window", 10, 200, 10, ["Just the decade", "Two centuries"]) + seg("where", "Where", [["any", "Anywhere"], ["country", "Same country"], ["region", "Same region"]]);
     else if (kind === "place") body = rng("reach", "How far out", 0, 4, 1, ["Just the country", "The whole world"]) + sw("near", "Stay close in time") + `<div data-fsbox="win"${S.near ? "" : " hidden"}>${rng("win", "Within", 10, 200, 10)}</div>`;
     else body = `<p class="fs-note">Tabs and filters for this list are on the chips above.</p>`;
-    const capsSw = `<div class="fs-c fs-tg"><p>Show captions</p><button type="button" class="fs-switch" role="switch" aria-checked="${!!view.caps}" data-fscaps><i></i></button></div>`;
+    const capsSw = `<div class="fs-c fs-tg"><p>Show painter and year</p><button type="button" class="fs-switch" role="switch" aria-checked="${!!view.caps}" data-fscaps><i></i></button></div>`;
     const size = capsSw + `<div class="fs-c"><div class="fs-row"><p>Size</p><b data-fs-out="size"></b></div><input type="range" min="1" max="${mx}" step="1" value="${cols}" data-fssize aria-label="Size"><div class="fs-prev" data-fs-prev></div></div>`;
     const title = ({ paintings: "Paintings", era: "Era", place: "Place" })[kind] || "Keep exploring";
     const { sh, close } = sheet(`<div class="fs-sheet"><div class="fs-head"><h3>${title}</h3><span class="fs-count" data-fs-count aria-live="polite"></span><button type="button" class="fs-reset" data-fs-reset${kind === "none" ? " hidden" : ""}>Reset</button></div><div class="fs-scroll">${body}${size}</div></div>`);
@@ -647,12 +651,17 @@ function fdMount(host, o) {
       const cp = e.target.closest("[data-fscaps]");
       if (cp) { view.caps = !view.caps; viewSave(); cp.setAttribute("aria-checked", view.caps); buzz(4); relayoutAll(); return; }
       const m = e.target.closest("[data-fsmulti] button"), g = e.target.closest("[data-fsseg] button"), w = e.target.closest("[data-fssw]"), rs = e.target.closest("[data-fs-reset]");
-      if (m) { const k = m.parentNode.dataset.fsmulti, v = m.dataset.v, i = S[k].indexOf(v); i < 0 ? S[k].push(v) : S[k].splice(i, 1); m.setAttribute("aria-pressed", i < 0); buzz(4); paint(); later2(); }
+      if (m) { const k = m.parentNode.dataset.fsmulti, v = m.dataset.v, i = S[k].indexOf(v); i < 0 ? S[k].push(v) : S[k].splice(i, 1); m.setAttribute("aria-pressed", i < 0); buzz(4); roleSay(); paint(); later2(); }
       else if (g) { const k = g.parentNode.dataset.fsseg; S[k] = g.dataset.v; g.parentNode.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === g)); buzz(4); later2(); }
       else if (w) { const k = w.dataset.fssw; S[k] = !S[k]; w.setAttribute("aria-checked", S[k]); const bx = q('[data-fsbox="win"]'); if (bx && k === "near") bx.hidden = !S[k]; buzz(4); later2(); }
       else if (rs) { FDS[kind] = JSON.parse(JSON.stringify(FDS_DEF[kind])); fdsSave(); SUBDOT(); buzz(5); close(); rerank(false); setTimeout(openSettings, 120); }
     });
-    paint();
+    function roleSay() {   // the one-line meaning of the part picked last
+      const el = q("[data-fs-say]"); if (!el) return;
+      const v = S.roles && S.roles[S.roles.length - 1], r = v && RS_ROLES.find(x => x[0] === v);
+      el.textContent = r ? `${r[2].charAt(0).toUpperCase() + r[2].slice(1)}${RSTAT ? `: in ${roleDo(v)} of the ${RSTAT.n.toLocaleString("en-US")} paintings that hold it` : ""}.` : "";
+    }
+    roleSay(); paint();
     const prevClose = close; sh.addEventListener("close", () => { onCount = null; });
     const obs = new MutationObserver(() => { if (!sh.isConnected) { onCount = null; obs.disconnect(); setTimeout(floatSync, 120); } }); obs.observe(document.body, { childList: true, subtree: true });
   }
