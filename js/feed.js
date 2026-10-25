@@ -321,7 +321,10 @@ function fdHideWire(bar0) {
     }
     hid = on; root.classList.toggle("fd-hid", on);
   };
-  const pinY = () => { const p = bar.parentElement; return p ? p.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(bar).top) || 0) : 0; };
+  // where the chip row would sit in the flow (a zero-size absolutely placed sentinel takes the row's own static position, so it is right on a painter
+  // page too, where the row's parent is the whole screen); the bar hides only once the row is really pinned there
+  const sentinel = () => { let s = bar.previousElementSibling; if (!s || !s.classList.contains("fd-sent")) { s = document.createElement("i"); s.className = "fd-sent"; s.setAttribute("aria-hidden", "true"); s.style.cssText = "position:absolute;width:0;height:0;overflow:hidden;visibility:hidden;pointer-events:none"; bar.parentElement && bar.parentElement.insertBefore(s, bar); } return s; };
+  const pinY = () => { const s = sentinel(); return s.isConnected ? s.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(bar).top) || 0) : 0; };
   const run = () => {
     raf = 0; if (!bar.isConnected) bar = document.querySelector(".fd-bar:not(.fd-pre)"); if (!bar) return;
     if (root.classList.contains("desk")) { set(false); return; }
