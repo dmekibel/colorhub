@@ -22,9 +22,15 @@ Pipeline (all deterministic: fixed seeds, rank-based tie-breaks)
      subjects/look-atlas-embeds.* (coarser, but the same model). Anything still without a vector (no image at all) takes its
      painter's mean vector, else the global mean, so it lands next to that painter's work.
   2. PCA(50) -> UMAP(2-D, cosine-ish on the normalized vectors, n_neighbors 15, min_dist 0.05). UMAP keeps neighborhoods.
-  3. EVEN GRID: recursive median split. The W x H cell rectangle is cut along its longer side, the point cloud is cut at the
-     same proportion along the matching axis, down to single cells. Every painting gets one distinct integer cell, no clumps,
-     no overlaps, and points that were close in the cloud stay close (they only separate across a cut line).
+  3. ISLANDS (tools/look_islands.py) come first now: HDBSCAN clusters of that UMAP cloud, plus look-alike-less bumps carved out of big
+     islands (CLIP cosine to the island's centroid < 0.76, e.g. the Native American group drawings that sat inside 'Flowers and still
+     lifes'); islands are PLACED by MDS of their CLIP centroids with a no-overlap lower bound (not at UMAP's arbitrary cluster spots);
+     labels = island_names.py names (tags + CLIP zero-shot phrases, tools/look_vocab.py).
+  3b. EVEN GRID: UMAP is re-run (100 epochs) from a start layout that puts each island's blob at its semantic position, so the grid's
+     global arrangement follows meaning; then the recursive median split (the W x H cell rectangle is cut along its longer side, the
+     point cloud at the same proportion, down to single cells); then tools/look_grid.py swaps paintings between cells to lower the
+     CLIP distance between 4-neighbors (the median split's straight cuts leave seams: measured 0.343 -> 0.259 mean cosine distance,
+     10% -> 1.8% seams). Every painting still has exactly one distinct integer cell.
   4. data/gallery/look.bin: "LOOK", u32 version, u32 n, u32 W, u32 H, u32 ids-hash, then n x (u16 x, u16 y) in ids.txt order.
      data/gallery/look.json: grid size, method, model, built date, ids hash.
 A rebuild with new paintings may move everything (UMAP and the splits are global); that is accepted.
@@ -180,7 +186,7 @@ def prepare(E, ids):
     return X
 
 
-def embed2d(X, cache=None):
+def embed2d(X, cache=None, init=None, n_epochs=None):
     import numpy as np, umap
     if cache is not None and cache.exists():
         Y = np.load(cache)
@@ -194,10 +200,28 @@ def embed2d(X, cache=None):
     _, _, vt = svd(sub - mu, full_matrices=False)
     Z = (X - mu) @ vt[:50].T
     t0 = time.time()
-    Y = umap.UMAP(n_components=2, n_neighbors=15, min_dist=0.05, metric="euclidean", random_state=7, low_memory=True, verbose=False).fit_transform(Z)
+    kw = {} if init is None else dict(init=init, n_epochs=n_epochs)
+    Y = umap.UMAP(n_components=2, n_neighbors=15, min_dist=0.05, metric="euclidean", random_state=7, low_memory=True, verbose=False, **kw).fit_transform(Z)
     print(f"UMAP {len(X)} points in {(time.time() - t0) / 60:.1f} min", flush=True)
     if cache is not None: np.save(cache, Y.astype(np.float32))
     return Y.astype(np.float64)
+
+
+def seeded_init(Y0, L, xtra):
+    """UMAP start positions that carry the SEMANTIC arrangement of the islands (tools/look_islands.py: MDS of CLIP centroids, packed with gaps):
+    every painting keeps its place inside its island's UMAP blob (shrunk to fit the island's disc) and each blob sits at its island's
+    semantic position. UMAP then runs a short optimization from there: it melts the borders between neighboring islands (their graph
+    edges pull the two sides together) but keeps the global arrangement, which UMAP's own spectral start leaves arbitrary."""
+    import numpy as np
+    pos, cen, rad = xtra["pos"], xtra["cen"], xtra["rad"]
+    Z0 = (Y0 - Y0.mean(0)) / Y0.std(0).mean()
+    init = np.zeros_like(Z0)
+    for k in range(len(pos)):
+        m = L == k
+        d = np.hypot(*(Z0[m] - cen[k]).T)
+        init[m] = pos[k] + (Z0[m] - cen[k]) * (0.9 * rad[k] / np.percentile(d, 97))
+    init = init - init.min(0)
+    return (10 * init / init.max()).astype(np.float32)
 
 
 def cells_in(x0, x1, y0, y1, W, N):
@@ -252,32 +276,51 @@ def main():
     X = prepare(E, ids)
     Y = embed2d(X, CACHE / f"look-umap-{tag}.npy")
     W = int(round((n / 1.55) ** 0.5))   # the same shape pmLayColor uses
-    gx, gy, H = even_grid(Y, W)
-    assert len(set(zip(gx.tolist(), gy.tolist()))) == n
     h = ids_hash(ids)
     out = ROOT / "data" / "gallery"
-    buf = bytearray(b"LOOK" + struct.pack("<IIIII", 1, n, W, H, int(h, 16)))
-    buf += np.stack([gx, gy], 1).astype("<u2").tobytes()
-    old = out / f"look{sfx}.bin"
-    if old.exists() and tag == "default":
-        print("even grid identical to the shipped look.bin:", old.read_bytes() == bytes(buf), flush=True)
-    if not islands_only: old.write_bytes(buf)
     meta_p = out / f"look{sfx}.json"
-    meta = json.load(open(meta_p)) if islands_only and meta_p.exists() else {"v": 1, "n": n, "w": W, "h": H, "hash": h, "built": time.strftime("%Y-%m-%d"), "model": MODEL,
-            "method": "PCA(50) -> UMAP(2-D, 15 neighbors) -> recursive median split onto an even grid",
+    meta = json.load(open(meta_p)) if islands_only and meta_p.exists() else {"v": 1, "n": n, "w": W, "h": -(-n // W), "hash": h, "built": time.strftime("%Y-%m-%d"), "model": MODEL,
+            "method": "PCA(50) -> UMAP(2-D, 15 neighbors) -> islands placed by CLIP-centroid MDS -> UMAP re-run from that arrangement -> recursive median split onto an even grid -> neighbor-swap smoothing",
             "mitigation": {k: v for k, v in MITIGATE.items() if v}, "sources": {"image": int((src == 2).sum()), "tile": int((src == 1).sum()), "imputed": int((src == 0).sum())}}
+    xtra = None
     if "--no-islands" not in sys.argv:
         import look_islands
-        isl, L, lx, ly = look_islands.build(Y, ids, h, out, ROOT, sfx, out / "subjects.json")
+        isl, L, lx, ly, xtra = look_islands.build(Y, ids, h, out, ROOT, sfx, out / "subjects.json", E=E, cache_dir=CACHE)
         if tag != "default": meta["grid"] = False; meta["color"] = COLOR_W   # no even-grid file for this variant (the page uses look.bin)
         meta["islands"] = isl; meta["gap"] = look_islands.GAP; meta["gapSib"] = look_islands.SUB_GAP
-        meta["islandsMethod"] = "HDBSCAN clusters of the same UMAP cloud; each island an even blob; labels from over-represented subject tags, century and country"
+        meta["islandsMethod"] = "HDBSCAN clusters of the same UMAP cloud (+ carved-out look-alike-less bumps); each island an even blob; islands placed by MDS of their CLIP centroids; labels from the island-names tags + CLIP zero-shot phrases"
         np.save(CACHE / f"look-islands-labels{sfx}.npy", L)
+    gx = gy = None
+    if not islands_only:
+        import look_grid
+        if xtra is not None:
+            # global arrangement of the even grid from the semantic island layout: UMAP re-run from it (cached per islands file)
+            init = seeded_init(Y, L, xtra)
+            sig = hashlib.sha1(init.tobytes()).hexdigest()[:8]   # the cache key is the start layout itself
+            Y1 = embed2d(X, CACHE / f"look-umap-sem-{sig}.npy", init=init, n_epochs=100)
+        else: Y1 = Y
+        gx, gy, H = even_grid(Y1, W)
+        F = look_grid.features(X)
+        thr = look_grid.smoothness(E, gx, gy, W)
+        print(f"even grid, median split only: mean neighbor cosine distance {thr[0]:.4f}, seams (> p90) {thr[1]:.3f}", flush=True)
+        gx, gy = look_grid.refine(F, gx, gy, W)
+        sm = look_grid.smoothness(E, gx, gy, W, thr[2])
+        print(f"even grid, after neighbor-swap smoothing: mean neighbor cosine distance {sm[0]:.4f}, seams (> p90 of the median-split grid) {sm[1]:.3f}", flush=True)
+        meta["smooth"] = {"cos_median_split": round(thr[0], 4), "cos": round(sm[0], 4), "seams_median_split": round(thr[1], 3), "seams": round(sm[1], 3)}
+        assert len(set(zip(gx.tolist(), gy.tolist()))) == n
+        buf = bytearray(b"LOOK" + struct.pack("<IIIII", 1, n, W, H, int(h, 16)))
+        buf += np.stack([gx, gy], 1).astype("<u2").tobytes()
+        (out / f"look{sfx}.bin").write_bytes(buf)
+        meta["h"] = H
     meta_p.write_text(json.dumps(meta, indent=1) + "\n")
     if not reduced and not islands_only: np.save(CACHE / "look-xy.npy", np.stack([gx, gy], 1).astype(np.int32))
-    print(f"wrote look{sfx}.json; even grid {W}x{H}")
+    print(f"wrote look{sfx}.json; even grid {W}x{meta['h']}")
+    if tag in ("default", "c30", "c60") and "--no-islands" not in sys.argv and "--no-names" not in sys.argv:
+        import island_names   # names (+ covers + palettes for the default file's Subjects list); also writes the map labels (islands[].lab) into look<sfx>.json
+        island_names.main(sfx)
     if "--sheets" in sys.argv:
-        sheets(ids, gx, gy, X, src)
+        if gx is None: print("--sheets needs the grid (not --islands-only)")
+        else: sheets(ids, gx, gy, X, src)
 
 
 def sheets(ids, gx, gy, X, src):

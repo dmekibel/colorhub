@@ -51,6 +51,8 @@ for g in (("seascape", "sea", "harbor", "beach", "ship", "boat", "lake", "river"
           ("landscape", "field", "tree", "forest", "mountain", "sky"), ("portrait", "self-portrait", "group portrait"),
           ("architecture", "cityscape", "church", "castle", "house", "village", "city", "street", "ruins", "bridge"), ("religious", "cross")):
     for t in g: SAME[t] = g[0]
+ZS_MIN_Z = 2.5     # a picture-model phrase must score at least this (z over all islands) to rename an island
+ZS_SMALL = 1000    # islands this small (the carved-out bumps) have too few tags to name them from: the picture-model phrase is used when it is clear
 ADJ = {"Italy": "Italian", "France": "French", "Netherlands": "Dutch", "United States": "American", "Russia": "Russian", "Japan": "Japanese", "China": "Chinese",
        "India": "Indian", "Spain": "Spanish", "United Kingdom": "British", "Germany": "German", "Belgium": "Flemish", "Austria": "Austrian", "Sweden": "Swedish",
        "Denmark": "Danish", "Norway": "Norwegian", "Poland": "Polish", "Switzerland": "Swiss", "Brazil": "Brazilian", "Mexico": "Mexican", "Greece": "Greek",
@@ -76,10 +78,10 @@ def srgb2lab(rgb):
     return np.stack([116 * fy - 16, 500 * (fx - fy), 200 * (fy - fz)], 1)
 
 
-def load():
-    lk = json.loads((GAL / "look.json").read_text())
+def load(sfx=""):
+    lk = json.loads((GAL / f"look{sfx}.json").read_text())
     n = lk["n"]
-    raw = (GAL / "look-islands.bin").read_bytes()
+    raw = (GAL / f"look-islands{sfx}.bin").read_bytes()
     hs = ids_hash()
     assert lk["hash"] == hs, f"look.json is for ids hash {lk['hash']}, ids.txt is {hs}: python3 tools/look_layout.py"
     assert raw[:4] == b"LISL" and np.frombuffer(raw, "<u4", 5)[2] == n and int(hs, 16) == np.frombuffer(raw, "<u4", 5)[4], "look-islands.bin does not match ids.txt: python3 tools/look_layout.py"
@@ -128,17 +130,17 @@ def topic_of(cnt_row, size, glob, n, tags, strict=True):
         if any(SAME.get(nm, nm) == SAME.get(p, p) for p in picked): continue
         picked.append(nm)
         if len(picked) == 2: break
-    if not picked: return "", None
+    if not picked: return "", None, []
     gen = [p for p in picked if p in GENRES]; ppl = [p for p in picked if p in PEOPLE]; oth = [p for p in picked if p not in GENRES and p not in PEOPLE]
     if len(picked) == 1:
         p = picked[0]; ph = PEOPLE.get(p) or plural(p)
-        return ph[0].upper() + ph[1:], p if p in GENRES else None
+        return ph[0].upper() + ph[1:], p if p in GENRES else None, picked
     if gen and ppl:
         g1, p1 = gen[0], ppl[0]
-        return f"{plural(g1)[0].upper() + plural(g1)[1:]} {'of' if g1 in OF else 'with'} {PEOPLE[p1]}", g1
+        return f"{plural(g1)[0].upper() + plural(g1)[1:]} {'of' if g1 in OF else 'with'} {PEOPLE[p1]}", g1, picked
     a, b = picked
     pa = PEOPLE.get(a) or plural(a); pb = PEOPLE.get(b) or plural(b)
-    return f"{pa[0].upper() + pa[1:]} and {pb}", (a if a in GENRES else b if b in GENRES else None)
+    return f"{pa[0].upper() + pa[1:]} and {pb}", (a if a in GENRES else b if b in GENRES else None), picked
 
 
 def era_of(years):
@@ -235,8 +237,9 @@ def load_embeds(rows, n):
     return None
 
 
-def main():
-    lk, n, K, isl, lx, ly, rows, sj, head, rec, ihash, hs = load()
+def main(sfx=""):
+    """sfx "" = the default islands: writes island-names.json and the map labels. sfx "-c30" / "-c60" (Color influence variants): only the map labels in look<sfx>.json."""
+    lk, n, K, isl, lx, ly, rows, sj, head, rec, ihash, hs = load(sfx)
     tags = sj["tags"]; I = lk["islands"]
     cnt, glob = tag_stats(isl, K, sj, n)
     idx0 = rec[:, 0].astype(np.int64) | rec[:, 1].astype(np.int64) << 8
@@ -249,8 +252,13 @@ def main():
     info = []
     for k in range(K):
         m = np.where(isl == k)[0]
-        topic, gen = topic_of(cnt[k], size[k], glob, n, tags)
-        if not topic: topic, gen = topic_of(cnt[k], size[k], glob, n, tags, strict=False)
+        topic, gen, picked = topic_of(cnt[k], size[k], glob, n, tags)
+        if not topic: topic, gen, picked = topic_of(cnt[k], size[k], glob, n, tags, strict=False)
+        zs = I[k].get("zs")   # the picture model's best phrases for this island (tools/look_vocab.py), when look_layout wrote them
+        if zs:
+            lab, kind, z = zs[0][0], zs[0][1], zs[0][2]
+            if z >= ZS_MIN_Z and (not topic or size[k] < ZS_SMALL):
+                topic, gen = lab, None   # the tags are silent, or the island is too small for tag counts to mean much: name it by what the pictures show
         ad, places, ad2 = place_of([rows[i][3] for i in m], gshare)
         pa = [(nm, c) for nm, c in Counter(rows[i][2] for i in m if rows[i][2] and not junk(rows[i][2])).most_common(40) if c >= 40 and c >= .3 * pcount[nm]][:6]   # painters who are really HERE: at least 30% of their work
         mv = Counter(rows[i][4] for i in m if rows[i][4]).most_common(1)
@@ -300,6 +308,12 @@ def main():
         if nm in seen: names[d["k"]] = nm + " II"
         seen[nm] = d["k"]
 
+    if sfx:   # a variant has no Subjects list of its own: the map labels are all it needs
+        for k in range(K): I[k]["lab"] = names[k]
+        (GAL / f"look{sfx}.json").write_text(json.dumps(lk, indent=1) + "\n", encoding="utf-8")
+        print(f"look{sfx}.json: {K} island labels")
+        return
+
     # families on the map (islands sharing a parent): a name from the union of their paintings
     fam_members = {}
     for k in range(K): fam_members.setdefault(I[k]["par"], []).append(k)
@@ -307,7 +321,7 @@ def main():
     for p, ks in fam_members.items():
         if len(ks) < 2: continue
         m = np.isin(isl, ks); c = np.zeros(len(tags), np.int64); c[:] = cnt[ks].sum(0)
-        t, _ = topic_of(c, int(m.sum()), glob, n, tags)
+        t, _, _ = topic_of(c, int(m.sum()), glob, n, tags)
         t = t or "Paintings"
         if t in fam.values() or t in names.values(): t = names[p]   # a family never shares a name with another family or an island: the parent island's own name
         fam[str(p)] = t
@@ -364,9 +378,12 @@ def main():
     data = dict(v=1, n=n, hash=hs, isl=ihash, method="Tools/island_names.py: names from subject-tag lift, dominant century and nationality, then the facet that tells look-alike islands apart; covers nearest each island's middle; palettes pooled from the paintings' six measured colors.",
                 islands=out, fam=fam)
     OUT.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+    # the map's island labels (look.json islands[].lab) are these same names, so the map and the Subjects list agree
+    for o in out: I[o["k"]]["lab"] = o["name"]
+    (GAL / "look.json").write_text(json.dumps(lk, indent=1) + "\n", encoding="utf-8")
     print(f"island-names.json: {len(out)} islands, {len(fam)} families, {OUT.stat().st_size / 1e3:.0f} KB")
     for o in out: print(f"  {o['k']:2d} {o['n']:5d} par {o['par']:2d}  {o['name']}   [{o['sub']}]")
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1] if len(sys.argv) > 1 else "")
