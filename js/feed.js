@@ -598,7 +598,10 @@ function fdMount(host, o) {
     // near the end of what is shown: 24 more (the boxes are known from the index, so nothing moves)
     const nearEnd = r.bottom - innerHeight < innerHeight * (dn ? 1.1 : 1.6);
     if (nearEnd && shown < items.length) grow();
-    if (nearEnd && items.length - shown < FD_PAGE * 2) fetchMore();   // the list never ends: the next page of less close paintings is asked for before it is needed
+    // the list never ends: the next page of less close paintings is asked for well before it is needed (about three screens out, and while a
+    // whole grow step of tiles is still unshown: a wide window shows 96 at a time, so "fewer than 48 left" was already the last page's worth)
+    // so a slow page (Vibe asks the network) is back before the scrollbar reaches the end
+    if (r.bottom - innerHeight < innerHeight * 3 && items.length - shown < FD_PAGE * Math.max(2, Math.ceil(cols / 2) * 2)) fetchMore();
   }
   function more() { const k0 = shown; shown = Math.min(items.length, shown + FD_PAGE * Math.max(1, Math.ceil(cols / 2))); place(k0); stateDraw(); }   // a page is 24 tiles at 2 across, more as they shrink, so one page always fills a screen   // 24 more tiles: only their boxes, appended below
   function grow() { more(); requestAnimationFrame(draw); }
@@ -607,7 +610,9 @@ function fdMount(host, o) {
   function fetchMore() {
     const res = curRes; if (!res || !res.next || res.moreDone || moreBusy || gone || res.items !== items || (items[0] && items[0].sk)) return;   // never page a list that is not the one on screen (a tapped tab's skeleton used to keep draining the old list's whole tail in one go: 3 s frozen)
     moreBusy = true; const mine = tok;
-    Promise.resolve().then(() => res.next()).catch(() => { res.moreDone = true; }).then(() => {
+    // a wide window needs more than one page to stay ahead (a page is 72 tiles; 7 across is ten rows): the next page is asked for at once, when the first came back cheap
+    const want = FD_PAGE * Math.ceil(cols / 2) * 2, n0 = items.length;
+    Promise.resolve().then(async () => { await res.next(); if (cols >= 5 && !res.moreDone && items.length - n0 < want && res === curRes && !gone) await res.next(); }).catch(() => { res.moreDone = true; }).then(() => {
       moreBusy = false; if (gone || mine !== tok || res !== curRes) return;
       lastN = Math.max(lastN, items.filter(x => !x.head).length); stateDraw(); draw();
     });
