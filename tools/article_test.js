@@ -11,6 +11,7 @@
 //     keeps auto-figures within its limits (<= 5, one per kind, one per section, <= 3 in the closing strip), figures have fixed proportions.
 const fs = require("fs"), path = require("path"), vm = require("vm");
 const root = path.join(__dirname, "..");
+const only = new Set(process.argv.slice(2));   // node tools/article_test.js madder mauve: just those articles (the unit checks always run)
 let fails = 0;
 const ok = (c, m) => { if (!c) { fails++; console.log("FAIL  " + m); } };
 const norm = s => String(s).normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -50,9 +51,10 @@ sandbox.globalThis = sandbox; sandbox.window = sandbox;
 vm.createContext(sandbox);
 vm.runInContext(fs.readFileSync(path.join(root, "js/article.js"), "utf8"), sandbox, { filename: "js/article.js" });
 vm.runInContext(fs.readFileSync(path.join(root, "js/article-refs.js"), "utf8"), sandbox, { filename: "js/article-refs.js" });
+vm.runInContext(fs.readFileSync(path.join(root, "js/family.js"), "utf8"), sandbox, { filename: "js/family.js" });   // famHTML (article.js arFamilyHTML)
 ["data/gems.js", "data/gem-images.js", "data/botany.js", "data/botany-images.js", "data/looks.js", "data/films.js"].forEach(f => vm.runInContext(fs.readFileSync(path.join(root, f), "utf8"), sandbox, { filename: f }));
 const ar = vm.runInContext(`({ arLoadNames, arColor, arLinkHTML, arInline, arBlocks, arNorm, arList, arRefs, arBuildHTML, arMinutes, articleRender, arHubEntry, arWhichEntry, AR_CACHE,
-  arRefList, arRefKind, arBlockHTML, arSplit, arSentences, arQuoteOf, arDatesOf, arAccent, arContrast, arfGaps, arfBest, arfScore, arfPlan, arfFor, arfAutoKeys, arfFigHTML, arfPicHTML, arfCreditHTML, ARF_DE, ARF_LIMIT, ARF_MAX_AUTO, ARF_MAX_END, ARF_MAX_PER_P, ARF_MIN_COVER, ARF_ORDER, ARF_CACHE })`, sandbox);
+  arRefList, arRefKind, arBlockHTML, arSplit, arSentences, arQuoteOf, arDatesOf, arAccent, arContrast, arfGaps, arfBest, arfScore, arfPlan, arfFor, arfAutoKeys, arfFigHTML, arfPicHTML, arfCreditHTML, AR_SHORT_MIN, ARF_DE, ARF_LIMIT, ARF_MAX_AUTO, ARF_MAX_END, ARF_MAX_PER_P, ARF_MIN_COVER, ARF_ORDER, ARF_CACHE })`, sandbox);
 
 // ---- alias-aware reader (the resolvers load the same files the app does) ----
 const namesLoaded = (async () => {
@@ -94,6 +96,7 @@ function articleFiles() {
 }
 articleFiles().forEach(([file, tag]) => {
   const slug = path.basename(file, ".json"), label = `${tag}/${slug}`;
+  if (only.size && !only.has(slug)) return;
   let raw; try { raw = JSON.parse(fs.readFileSync(file, "utf8")); } catch (e) { ok(false, label + " is not valid JSON"); return; }
   if (!raw || !Array.isArray(raw.sections)) return;   // SCHEMA.md, indexes and the like
   count++;
@@ -115,17 +118,17 @@ articleFiles().forEach(([file, tag]) => {
   const self = { slug, n: art.name, h: art.hex || "#808080" };
   const html = ar.arBuildHTML(art, self);
   ok(html.includes('class="ar-lede"'), label + " html: lede");
-  ok(art.sections.filter(s => s.title).length < 2 || html.includes("data-ar-bar"), label + " html: contents bar");
+  ok(art.sections.filter(s => s.title).length < 2 || ar.arMinutes(art) <= ar.AR_SHORT_MIN || html.includes("data-ar-bar"), label + " html: contents bar");   // short articles skip it (arBodyHTML)
   ok((html.match(/data-fn=/g) || []).length >= refs.fns.length, label + " html: footnote buttons");
   if (art.notes.size) ok(html.includes("ar-notes"), label + " html: notes list");
   if (art.questions.length) ok(html.includes("ar-qs"), label + " html: questions");
   if (art.sections.some(s => s.blocks.some(b => b.t === "myth"))) ok(html.includes("ar-myth") && html.includes("The record shows"), label + " html: myth callout");
   if (art.sections.some(s => s.blocks.some(b => b.t === "books"))) ok(html.includes("ar-books") && html.includes("Books disagree"), label + " html: books callout");
-  if (ar.arList(as.siblings).length || ar.arList(as.parent).length) ok(html.includes("ar-hex"), label + " html: family tree");
+  if (ar.arList(as.siblings).length || ar.arList(as.parent).length) ok(html.includes('class="ar-fam"') && html.includes("data-fam-panel"), label + " html: family section");   // js/family.js famHTML; famWire draws the hexes in the DOM
   ok(!/<script|onerror=|javascript:/i.test(html), label + " html: no script injection");
   ok(ar.arMinutes(art) >= 1, label + " reading time");
 });
-ok(count >= 2, "at least 2 articles tested (found " + count + ")");
+ok(count >= (only.size ? 1 : 2), "at least " + (only.size ? 1 : 2) + " articles tested (found " + count + ")");
 });
 
 

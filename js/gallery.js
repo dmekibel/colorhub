@@ -41,10 +41,16 @@ function loadGallery() {
   if (GAL) return Promise.resolve(GAL);
   const get = (f, kind) => fetch(GAL_DIR + f + galVer()).then(r => { if (!r.ok) throw new Error(f + " " + r.status); return r[kind](); });
   // est.json (tools/gallery.py): which years / countries are estimates. Optional: without it everything reads as measured, as before.
-  return GAL_LOADING || (GAL_LOADING = Promise.all([get("index.json", "json"), get("index.bin", "arrayBuffer"), get("est.json", "json").catch(() => null)])
-    .then(([head, buf, est]) => (GAL = glEst(glBuild(head, new Uint8Array(buf)), est)))
+  // hidden.json (tools/hide_nonart.py): items that are not artworks. Optional; GAL.hid[i] = 1 and every list / ranking skips them (a direct address still opens one).
+  return GAL_LOADING || (GAL_LOADING = Promise.all([get("index.json", "json"), get("index.bin", "arrayBuffer"), get("est.json", "json").catch(() => null), get("hidden.json", "json").catch(() => null)])
+    .then(([head, buf, est, hid]) => (GAL = glHide(glEst(glBuild(head, new Uint8Array(buf)), est), hid)))
     .catch(e => { GAL_LOADING = null; throw e; }));
 }
+function glHide(G, h) {
+  if (h && h.n === G.n && Array.isArray(h.idx) && h.idx.length) { G.hid = new Uint8Array(G.n); h.idx.forEach(i => { if (i >= 0 && i < G.n) G.hid[i] = 1; }); G.hidIdx = h.idx; }
+  return G;
+}
+const glHidden = i => !!(GAL && GAL.hid && GAL.hid[i]);
 // ---------- subjects (data/gallery/subjects.json, built by tools/subjects.py + tools/subjects_clip.py) ----------
 // What a painting shows: genre ("g"), things ("t"), iconography ("i"). Three sources per painting, in rank order:
 // ia = authority (museum / Wikidata), it = words in the title, im = detected by a model from the picture (kept only at
@@ -458,7 +464,7 @@ function glNear(hex) {
       const d = glDE(tL, ta, tb, Lb[o], Lb[o + 1], Lb[o + 2]);
       if (d < GL_R) { const q = d / GL_R; w += sh[k] * (1 - q * q); }
     }
-    s[i] = w;
+    s[i] = G.hid && G.hid[i] ? 0 : w;
   }
   return s;
 }
@@ -476,7 +482,7 @@ function glNearRanked(hex) {
   for (let i = 0; i < N; i++) {
     let bd = 1e9;
     for (let j = 0; j < 6; j++) { const o = (i * 6 + j) * 3, d = glDE(tL, ta, tb, Lb[o], Lb[o + 1], Lb[o + 2]); if (d < bd) bd = d; }
-    out[i] = s[i] > 0 ? 1 + s[i] : 1 / (2 + bd);   // holders first, then nearest patch
+    out[i] = G.hid && G.hid[i] ? 0 : s[i] > 0 ? 1 + s[i] : 1 / (2 + bd);   // holders first, then nearest patch (hidden last)
   }
   GL_NEAR_RANK.set(k, { key: out, min: 0, ranked: true, floor: have });
   if (GL_NEAR_RANK.size > 8) GL_NEAR_RANK.delete(GL_NEAR_RANK.keys().next().value);
@@ -543,7 +549,7 @@ function glRun(q) {
   if (!key) key = glDaily();
   const out = new Int32Array(N); let n = 0;
   for (let i = 0; i < N; i++) {
-    if (q.mus >= 0 && G.mus[i] !== q.mus) continue;
+    if ((q.mus >= 0 && G.mus[i] !== q.mus) || (G.hid && G.hid[i])) continue;
     const L = G.L[i], C = G.C[i];
     if (L < Llo || L > Lhi || C < Clo || C > Chi) continue;
     if (eras.length) { const y = G.year[i]; if (y === GL_UNDATED || !eras.some(e => y >= e[1] && y < e[2])) continue; }
