@@ -674,7 +674,7 @@ function show(html, cls = "", tab = null) {
   // after, reading as a permanent black screen (David, 2026-10-09: "it looks like the black bar is always
   // there"). Every render is a fresh start, so this is the one place that can promise it: no screen is ever
   // drawn underneath a leftover gesture backdrop, however it was abandoned.
-  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost,.rooms-stem,.rm-scrim,.flyer,.hc-morph,.tlg-floor").forEach(n => n.remove());
+  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost,.rooms-stem,.rm-scrim,.flyer,.hc-morph,.tlg-floor,.tlg-pic").forEach(n => n.remove());
   // .tlg-back: the previous page held under a painting page being pulled down (js/trail.js tlgPrevLayer); only the one a commit is still handing over survives
   document.querySelectorAll(".tlg-back").forEach(n => { if (typeof TLG_HOLD === "undefined" || n !== TLG_HOLD) n.remove(); });
   // the gesture's own "continue off-screen" animation, if one was still in flight when something else (that

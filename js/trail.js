@@ -319,22 +319,42 @@ function tlgFloor(toMap, snap) {
   document.body.appendChild(d);
   return d;
 }
-// Painting pull-down, the whole motion (David, 2026-10-25): the page FOLLOWS the finger (its top edge under it, shrinking a little as you pull, like
-// Pinterest, corners rounded), and on release it flies back to the tile it was opened from in the page underneath, minimizing into it. Everything
-// heavy is set ONCE when the drag is armed (tlgArm: will-change, a viewport-high clip, the radius, the opaque ground); each move is one rAF that
-// writes one transform and one opacity, and the source tile's rectangle is measured once (tlgTile), never while moving.
-const TLG_FLY = 300, TLG_COMMIT_D = 90, TLG_R = 24;
-function tlgXf(d, dx) { return `translate(${(dx * .5).toFixed(1)}px,${d.toFixed(1)}px) scale(${(1 - .15 * Math.min(1, d / 250)).toFixed(4)})`; }
+// Painting pull-down, the whole motion (David, 2026-10-25, second pass: "the IMAGE of the painting follows the finger while the REST FADES AWAY"): the
+// picture alone follows the finger (a copy of it, fixed above everything: .tlg-pic, 1:1 on y, half on x, shrinking and rounding as it goes) while the
+// whole page behind it fades out in the first ~80px with ONE compositor opacity on the page element and a see-through ground, so the screen it came
+// from shows through and brightens. On release it flies into the tile it was opened from and minimizes into it; before the threshold it springs back
+// and the page fades back in. Everything heavy is set ONCE when the drag is armed (tlgArm); each move is one rAF that writes the picture's transform,
+// the page's opacity and the dim; the tile's rectangle is measured once (tlgTile), never while moving.
+const TLG_FLY = 300, TLG_COMMIT_D = 90, TLG_R = 24, TLG_FADE_D = 80;
+function tlgScale(d) { return 1 - .15 * Math.min(1, d / 250); }
+function tlgRad(d) { return 2 + (TLG_R - 2) * Math.min(1, d / 150); }
+function tlgXf(d, dx) { return `translate(${(dx * .5).toFixed(1)}px,${d.toFixed(1)}px) scale(${tlgScale(d).toFixed(4)})`; }
 function tlgArm(el) {
-  const s = el.style;
-  // only the painting "card" is left: the picture and the title block under it (what shows at the top of the page); the rest is clipped away, once
-  const hero = el.querySelector(".gl-hero"), id = el.querySelector(".gl-id"), hb = hero ? hero.getBoundingClientRect().bottom : 0, ib = id ? id.getBoundingClientRect().bottom : 0;
-  const ch = Math.round(Math.min(innerHeight, Math.max(hb, ib) + 14)); el._tlgH = ch > 120 ? ch : innerHeight;
-  s.willChange = "transform"; s.transformOrigin = "50% 0"; s.height = s.minHeight = s.maxHeight = el._tlgH + "px"; s.overflow = "hidden"; s.borderRadius = TLG_R + "px"; s.background = "var(--ground)"; s.transition = "none";
+  const s = el.style, sp = el.querySelector(".gl-hero > span"), im = sp && sp.querySelector("img");
+  // the page is clipped to one screen (it is at the top: only the first screen can show), so the opacity layer stays small; its ground is see-through
+  s.willChange = "opacity"; s.height = s.minHeight = s.maxHeight = innerHeight + "px"; s.overflow = "hidden"; s.background = "transparent"; s.transition = "none";
+  el.classList.add("tlg-armed");   // css: the real picture is hidden (the copy replaces it), its frame goes clear
+  if (!sp) return;
+  const r = sp.getBoundingClientRect(), pic = document.createElement("div");
+  pic.className = "tlg-pic";
+  pic.style.cssText = `left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;background:${getComputedStyle(sp).backgroundColor};border-radius:2px`;
+  if (im) { const c = im.cloneNode(false); if (im.currentSrc) c.src = im.currentSrc; pic.appendChild(c); }
+  document.body.appendChild(pic);
+  el._tlgPic = pic; el._tlgR = { x: r.left, y: r.top, w: r.width, h: r.height };
 }
 function tlgDisarm(el) {
   const s = el.style;
-  s.transition = ""; s.transform = ""; s.willChange = ""; s.borderRadius = ""; s.background = ""; s.overflow = ""; s.height = s.minHeight = s.maxHeight = ""; s.transformOrigin = "";
+  if (el._tlgPic) { el._tlgPic.remove(); el._tlgPic = null; }
+  el.classList.remove("tlg-armed");
+  s.transition = ""; s.transform = ""; s.willChange = ""; s.borderRadius = ""; s.background = ""; s.overflow = ""; s.opacity = ""; s.height = s.minHeight = s.maxHeight = ""; s.transformOrigin = "";
+}
+// one frame of a painting pull: the copy of the picture under the finger, the page fading, the page underneath lifting its dim
+function tlgPaintGl(el, a) {
+  a.raf = 0;
+  const pic = el._tlgPic, d = Math.max(0, a.d || 0);
+  if (pic) { pic.style.transform = tlgXf(d, a.dx || 0); pic.style.borderRadius = tlgRad(d).toFixed(1) + "px"; }
+  el.style.opacity = Math.max(0, 1 - d / TLG_FADE_D).toFixed(3);
+  if (a.floor && a.floor._dim) a.floor._dim.style.opacity = (.14 * (1 - Math.min(1, d / 120))).toFixed(3);
 }
 // the rectangle of the painting's tile in the kept page underneath (one layout read, at arm time); null when it is not on screen there
 function tlgTile(layer) {
@@ -345,14 +365,15 @@ function tlgTile(layer) {
   const im = t.querySelector("img"), src = im && im.complete && im.naturalWidth ? (im.currentSrc || im.src) : "";
   return { x: r.left, y: r.top, w: r.width, h: r.height, src, rad: parseFloat(getComputedStyle(t).borderTopLeftRadius) || 6 };
 }
-// the flight: the page's own transform runs on to the tile's centre at the tile's width while it fades; the tile's thumbnail (an overlay at the tile's
-// rectangle) fades in over it, so the page seems to shrink into the tile. No tile on screen: it shrinks toward the top-centre and fades.
-function tlgFly(el, from, tile) {
-  const W = innerWidth, H = innerHeight;
-  let sc, cx, cy, ov = null;
-  if (tile) { sc = Math.max(.12, Math.min(.5, tile.w / W)); cx = tile.x + tile.w / 2; cy = tile.y + tile.h / 2; }
-  else { sc = .3; cx = W / 2; cy = H * .28; }
-  const to = `translate(${(cx - W / 2).toFixed(1)}px,${(cy - (el._tlgH || H) * sc / 2).toFixed(1)}px) scale(${sc.toFixed(4)})`;
+// the flight: the picture runs on from where the finger let go to the tile's centre at the tile's width and rounds to its corners while it fades; the
+// tile's thumbnail (an overlay at the tile's rectangle) fades in over it, so the picture seems to shrink into the tile. No tile on screen: it shrinks
+// toward the top-centre and fades. The page itself (already nearly gone) finishes fading.
+function tlgFly(el, a, tile) {
+  const W = innerWidth, pic = el._tlgPic, r = el._tlgR || { x: 0, y: 0, w: W, h: W }, d = Math.max(0, a.d || 0);
+  let sc, cx, cy, ov = null, rad = 8;
+  if (tile) { sc = Math.max(.1, Math.min(.6, tile.w / r.w)); cx = tile.x + tile.w / 2; cy = tile.y + tile.h / 2; rad = tile.rad / sc; }
+  else { sc = .3; cx = W / 2; cy = innerHeight * .28; }
+  const to = `translate(${(cx - (r.x + r.w / 2)).toFixed(1)}px,${(cy - (r.y + r.h / 2)).toFixed(1)}px) scale(${sc.toFixed(4)})`;
   if (tile && tile.src) {
     ov = document.createElement("div");
     ov.style.cssText = `position:fixed;left:${tile.x}px;top:${tile.y}px;width:${tile.w}px;height:${tile.h}px;border-radius:${tile.rad}px;background:#222 center/cover url("${tile.src.replace(/"/g, "%22")}");z-index:100000;pointer-events:none;opacity:0;will-change:opacity`;
@@ -360,7 +381,11 @@ function tlgFly(el, from, tile) {
     try { ov.animate([{ opacity: 0 }, { opacity: 0, offset: .45 }, { opacity: 1 }], { duration: TLG_FLY, easing: "linear", fill: "forwards" }); } catch (e) { ov.style.opacity = 1; }
   }
   el.style.transition = "none";
-  const anim = el.animate([{ transform: from, opacity: 1 }, { opacity: 1, offset: .5 }, { transform: to, opacity: 0 }], { duration: TLG_FLY, easing: "cubic-bezier(.2,.8,.25,1)", fill: "forwards" });
+  try { el.animate([{ opacity: +el.style.opacity || 0 }, { opacity: 0 }], { duration: 120, easing: "ease-out", fill: "forwards" }); } catch (e) { el.style.opacity = 0; }
+  const from = tlgXf(d, a.dx || 0);
+  const anim = pic
+    ? pic.animate([{ transform: from, borderRadius: tlgRad(d) + "px", opacity: 1 }, { opacity: 1, offset: .55 }, { transform: to, borderRadius: rad + "px", opacity: ov ? 0 : 0 }], { duration: TLG_FLY, easing: "cubic-bezier(.2,.8,.25,1)", fill: "forwards" })
+    : el.animate([{ opacity: 0 }, { opacity: 0 }], { duration: TLG_FLY, fill: "forwards" });
   return { anim, ov };
 }
 function tlgWire(el) {
@@ -369,16 +394,17 @@ function tlgWire(el) {
   let lastScroll = 0;
   const onScroll = () => { lastScroll = performance.now(); if (!el.isConnected) removeEventListener("scroll", onScroll); };
   addEventListener("scroll", onScroll, { passive: true, capture: true });
-  let a = null;   // the live gesture: { id, axis, x0, y0, dest, floor, anim }
+  let a = null;   // the live gesture: { id, axis, x0, y0, dest, floor, anim, touch }
   const isLayer = f => !!(f && f.classList.contains("tlg-back"));
   const dropFloor = f => { if (isLayer(f)) tlgDropLayer(f); else f.remove(); };
+  const isGl = el.classList.contains("gl-page");
   // the floor under a dragged page: for a painting page the real screen it was opened from (kept by tlgStash), unless that is the map (its
   // last frame is the better, cheaper picture) or nothing was kept; otherwise the map's frame / a calm ground
   const prep = () => {
     if (a.floor) return;
     a.dest = tlgDest(el, a.axis || "y");
     a.floor = tlgBackdrop(el, a.dest);
-    if (el.classList.contains("gl-page") && a.vertOK) { tlgArm(el); a.tile = isLayer(a.floor) ? tlgTile(a.floor) : null; a.paint = () => { a.raf = 0; el.style.transform = tlgXf(a.d, a.dx); if (a.floor && a.floor._dim) a.floor._dim.style.opacity = (.14 * (1 - Math.min(1, a.d / 120))).toFixed(3); }; }
+    if (isGl && a.vertOK) { tlgArm(el); a.tile = isLayer(a.floor) ? tlgTile(a.floor) : null; a.paint = () => tlgPaintGl(el, a); }
   };
   const clean = () => {
     if (a && a.floor) dropFloor(a.floor);
@@ -388,75 +414,73 @@ function tlgWire(el) {
     tlgDisarm(el);
     a = null;
   };
-  el.addEventListener("pointerdown", e => {
-    if (!e.isPrimary || a || document.querySelector(".sheet") || performance.now() - born < TLG_BORN || blocked(e)) return;
-    const vertOK = pageScrollTop() <= 0 && performance.now() - lastScroll >= TLG_REST, horizOK = e.clientX < TLG_EDGE;
-    if (!vertOK && !horizOK) return;
-    a = { id: e.pointerId, x0: e.clientX, y0: e.clientY, axis: null, vertOK, horizOK, lastX: e.clientX, lastY: e.clientY, lastT: performance.now(), vx: 0, vy: 0, floor: null, anim: null };
-  }, { passive: true });
-  // iOS Safari takes a downward drag at the top of the page for its own scroll/rubber band and then cancels the pointer events, so the page
-  // never followed the finger. Cancelling the first touchmoves of a clearly downward drag (nothing to scroll there anyway) keeps the gesture ours.
-  el.addEventListener("touchmove", e => {
-    if (!a || !a.vertOK || e.touches.length !== 1 || !e.cancelable) return;
-    const t = e.touches[0], dx = t.clientX - a.x0, dy = t.clientY - a.y0;
-    if (a.axis === "y" || (dy > 3 && dy > Math.abs(dx) * 1.2 && pageScrollTop() <= 0)) e.preventDefault();
-  }, { passive: false });
-  el.addEventListener("pointermove", e => {
-    if (!a || e.pointerId !== a.id) return;
-    const dx = e.clientX - a.x0, dy = e.clientY - a.y0;
+  // ---- the gesture proper, fed by pointer events (mouse, pen, scripted) or by touch events (a real finger; see below) ----
+  const down = (id, x, y, target, isPrimary) => {
+    if (!isPrimary || a || document.querySelector(".sheet") || performance.now() - born < TLG_BORN || blocked({ target })) return false;
+    const vertOK = pageScrollTop() <= 0 && performance.now() - lastScroll >= TLG_REST, horizOK = x < TLG_EDGE;
+    if (!vertOK && !horizOK) return false;
+    a = { id, x0: x, y0: y, axis: null, vertOK, horizOK, lastX: x, lastY: y, lastT: performance.now(), vx: 0, vy: 0, floor: null, anim: null, touch: false };
+    return true;
+  };
+  const move = (x, y, e) => {
+    const dx = x - a.x0, dy = y - a.y0;
     if (!a.axis) {
       // the backdrop is mounted a few pixels before the lock, so the very first frame of the drag already has the page underneath
-      if (a.vertOK && !a.floor && dy > 3 && dy > Math.abs(dx) && el.classList.contains("gl-page")) prep();
+      if (a.vertOK && !a.floor && dy > 3 && dy > Math.abs(dx) && isGl) prep();
       if (a.horizOK && dx > TLG_SLOP && dx > Math.abs(dy) * 1.6) a.axis = "x";
       else if (a.vertOK && dy > TLG_SLOP && dy > Math.abs(dx) * 1.6 && pageScrollTop() <= 0) a.axis = "y";
       else { if (Math.abs(dx) > 10 || Math.abs(dy) > 10) clean(); return; }
       a.dest = tlgDest(el, a.axis);
       if (!a.floor) a.floor = a.axis === "y" ? tlgBackdrop(el, a.dest) : tlgFloor(a.dest.toMap);
       if (!a.paint) el.style.willChange = "transform";
-      try { el.setPointerCapture(a.id); } catch (er) {}
+      if (!a.touch) { try { el.setPointerCapture(a.id); } catch (er) {} }
     }
-    e.preventDefault();
+    if (e && e.cancelable) e.preventDefault();
     const now = performance.now(), dt = Math.max(1, now - a.lastT);
     const d = a.axis === "x" ? dx : dy, resisted = Math.max(0, d < 80 ? d * .55 : 44 + (d - 80) * .35);
-    if (a.axis === "y" && a.paint) {   // one rAF per frame writes the transform; nothing else here touches the page
+    if (a.axis === "y" && a.paint) {   // one rAF per frame writes the picture, the fade and the dim; nothing else here touches the page
       a.d = d; a.dx = dx; if (!a.raf) a.raf = requestAnimationFrame(a.paint);
     } else {
       el.style.transition = "none";
       el.style.transform = a.axis === "x" ? `translateX(${resisted}px)` : `translateY(${resisted}px)`;
     }
-    const v = ((a.axis === "x" ? e.clientX - a.lastX : e.clientY - a.lastY)) / dt;
+    const v = ((a.axis === "x" ? x - a.lastX : y - a.lastY)) / dt;
     if (a.axis === "x") a.vx = v; else a.vy = v;
-    a.lastX = e.clientX; a.lastY = e.clientY; a.lastT = now; a.d = d; a.dx = dx; a.resisted = resisted;
-  }, { passive: false });
-  const release = e => {
-    if (!a || e.pointerId !== a.id) return;
+    a.lastX = x; a.lastY = y; a.lastT = now; a.d = d; a.dx = dx; a.resisted = resisted;
+  };
+  const release = (cancelled) => {
+    if (!a) return;
     if (!a.axis) { if (a.floor) dropFloor(a.floor); if (a.raf) cancelAnimationFrame(a.raf); tlgDisarm(el); a = null; return; }
-    const gl = !!a.paint, v = a.axis === "x" ? a.vx : a.vy, past = (a.d || 0) > (gl ? TLG_COMMIT_D : TLG_PULL) || v > TLG_FLING, dest = a.dest, floor = a.floor;
+    const gl = !!a.paint, v = a.axis === "x" ? a.vx : a.vy, past = !cancelled && ((a.d || 0) > (gl ? TLG_COMMIT_D : TLG_PULL) || v > TLG_FLING), dest = a.dest, floor = a.floor;
     if (a.raf) { cancelAnimationFrame(a.raf); a.raf = 0; }
-    if (gl) el.style.transform = tlgXf(a.d || 0, a.dx || 0);
+    if (gl) tlgPaintGl(el, a);
     const final = a.axis === "x" ? `translateX(${innerWidth + 60}px)` : `translateY(${innerHeight * .7 + 60}px)`;
     if (past) {
       el.style.transition = "none";
       let fly = null;
-      if (gl) { fly = tlgFly(el, el.style.transform, a.tile); a.anim = TLG_ANIM = fly.anim; }
+      if (gl) { fly = tlgFly(el, a, a.tile); a.anim = TLG_ANIM = fly.anim; }
       else {
         const remaining = (a.axis === "x" ? innerWidth - a.resisted : innerHeight * .7 - a.resisted);
         const dur = Math.min(TLG_CAP, Math.max(120, remaining / Math.max(v, .35)));
         a.anim = TLG_ANIM = el.animate([{ transform: el.style.transform || "none" }, { transform: final }], { duration: dur, easing: "linear", fill: "forwards" });
       }
-      const ov = fly && fly.ov;
-      // something else (a native back winning a race against our own pointer tracking -- iOS doesn't reliably
-      // send a pointerup/pointercancel once it's claimed the touch) may already have navigated and redrawn the
-      // screen while this animation was still running: el is this gesture's own page, so if it's no longer in
-      // the document, that already happened. Committing anyway would both double the back (xBack()/tlToOrigin()
-      // again, on top of the one that already ran) and, since show() cleans up .tlg-floor/TLG_ANIM on every
-      // render now, there is nothing left here worth finishing against.
-      const gone = () => { if (ov) { try { ov.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, easing: "ease-out" }).onfinish = () => ov.remove(); } catch (er) {} setTimeout(() => ov.remove(), 600); } };
+      const ov = fly && fly.ov, pic = el._tlgPic;
+      // something else (a native back winning a race against our own tracking -- iOS doesn't reliably send a pointerup/pointercancel once it's
+      // claimed the touch) may already have navigated and redrawn the screen while this animation was still running: el is this gesture's own
+      // page, so if it's no longer in the document, that already happened. Committing anyway would double the back, so there is nothing to finish.
+      const gone = () => { if (pic) pic.remove(); if (ov) { try { ov.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, easing: "ease-out" }).onfinish = () => ov.remove(); } catch (er) {} setTimeout(() => ov.remove(), 600); } };
       a.anim.onfinish = () => {
         TLG_ANIM = null;
         if (isLayer(floor)) { if (el.isConnected) { TLG_HOLD = floor; tlgCommit(dest); tlgLetGo(floor, el); } else tlgDropLayer(floor); gone(); return; }
         floor.remove(); if (el.isConnected) tlgCommit(dest); gone();
       };
+    } else if (gl) {
+      // back to its place: the picture springs home, the page fades back in
+      const pic = el._tlgPic, t = `${TLG_SPRING}ms var(--spring)`;
+      if (pic) { pic.style.transition = `transform ${t}, border-radius ${t}`; pic.style.transform = "translate(0,0) scale(1)"; pic.style.borderRadius = "2px"; }
+      el.style.transition = `opacity ${Math.min(TLG_SPRING, 200)}ms ease-out`; el.style.opacity = "1";
+      if (floor && floor._dim) { floor._dim.style.transition = `opacity ${TLG_SPRING}ms ease-out`; floor._dim.style.opacity = ".14"; }
+      setTimeout(() => { if (floor) dropFloor(floor); tlgDisarm(el); }, TLG_SPRING + 20);
     } else {
       el.style.transition = `transform ${TLG_SPRING}ms var(--spring)`;
       el.style.transform = "translate(0,0)";
@@ -465,9 +489,36 @@ function tlgWire(el) {
     }
     a = null;
   };
-  el.addEventListener("pointerup", release);
-  el.addEventListener("pointercancel", () => { clean(); });
-  el.addEventListener("lostpointercapture", e => { if (a && a.id === e.pointerId && a.axis) release(e); });
+  el.addEventListener("pointerdown", e => { down(e.pointerId, e.clientX, e.clientY, e.target, e.isPrimary); }, { passive: true });
+  el.addEventListener("pointermove", e => { if (a && !a.touch && e.pointerId === a.id) move(e.clientX, e.clientY, e); }, { passive: false });
+  el.addEventListener("pointerup", e => { if (a && !a.touch && e.pointerId === a.id) release(false); });
+  // pointercancel: with a finger the browser sends it as it takes the drag for its own scroll; the touch events below keep driving the gesture
+  el.addEventListener("pointercancel", () => { if (a && !a.touch) clean(); });
+  el.addEventListener("lostpointercapture", e => { if (a && !a.touch && a.id === e.pointerId && a.axis) release(false); });
+  // A real finger (iOS Safari above all) takes a downward drag at the top of the page for its own scroll / rubber band and then CANCELS the pointer
+  // events, so the pointer path alone never followed the finger. Touch events are not cancelled that way, and calling preventDefault on the first
+  // downward touchmoves (nothing to scroll there anyway) keeps the drag ours. Once a touch has started, it alone drives the gesture; scripted /
+  // mouse pointers (no touch events) keep the pointer path above.
+  let tid = null;
+  el.addEventListener("touchstart", e => {
+    if (e.touches.length > 1) { if (a && a.touch) clean(); tid = null; return; }
+    if (!a || a.touch) return;
+    const t = e.touches[0]; tid = t.identifier; a.touch = true; a.x0 = t.clientX; a.y0 = t.clientY; a.lastX = t.clientX; a.lastY = t.clientY;
+  }, { passive: true });
+  el.addEventListener("touchmove", e => {
+    if (!a || !a.touch || e.touches.length !== 1) return;
+    const t = e.touches[0]; if (t.identifier !== tid) return;
+    const dx = t.clientX - a.x0, dy = t.clientY - a.y0;
+    // claim a downward (or edge) drag from its first pixels, before the browser commits to scrolling; an upward or sideways one is left alone
+    if (!a.axis && !(a.vertOK && dy > 2 && dy > Math.abs(dx) && pageScrollTop() <= 0) && !(a.horizOK && dx > 2 && dx > Math.abs(dy))) {
+      if (Math.abs(dx) > 10 || Math.abs(dy) > 10) clean();
+      return;
+    }
+    move(t.clientX, t.clientY, e);
+  }, { passive: false });
+  const tend = cancelled => () => { if (a && a.touch) { tid = null; release(cancelled); } };
+  el.addEventListener("touchend", tend(false));
+  el.addEventListener("touchcancel", tend(true));
 }
 
 // ---------- going back, jumping, exiting ----------
