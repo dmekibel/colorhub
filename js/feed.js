@@ -295,7 +295,9 @@ function fdStickWire(bar) {
 // Hide the pinned stack (top bar + chip row) on scroll down, show it on scroll up (David, 2026-10-25). Phone only; transform only via
 // html.fd-hid (css/gallery.css), the safe-area band stays painted (html::before). Never hides on Overview near the top, with a sheet open,
 // or when the page is barely longer than the screen.
+let FD_HIDE_OFF = null;   // the one live hide-on-scroll wire (a remount replaces it)
 function fdHideWire(bar0) {
+  if (FD_HIDE_OFF) FD_HIDE_OFF();
   let bar = bar0;
   const root = document.documentElement;
   let last = scrollY, up = 0, down = 0, hid = false, raf = 0;
@@ -321,9 +323,10 @@ function fdHideWire(bar0) {
     if (sheetOpen || !long || y <= py + 24 || (about && y < py + 240)) { set(false); return; }
     if (!hid && down > 12) set(true); else if (hid && up >= 8) set(false);
   };
-  const h = () => { if (!raf) raf = requestAnimationFrame(run); };
+  const h = run;   // scroll events already arrive once per frame; no extra rAF hop
   addEventListener("scroll", h, { passive: true });
-  cleanup.push(() => { removeEventListener("scroll", h); hid = false; root.classList.remove("fd-hid"); });
+  FD_HIDE_OFF = () => { removeEventListener("scroll", h); hid = false; root.classList.remove("fd-hid"); if (FD_HIDE_OFF === off) FD_HIDE_OFF = null; };
+  const off = FD_HIDE_OFF; cleanup.push(off);
 }
 
 // ---------- the feed ----------
@@ -676,7 +679,8 @@ function fdMount(host, o) {
   grid.onclick = e => {
     if (Date.now() - peeked < 700) { e.preventDefault(); return; }   // the tap that ended a long-press is not an open
     const t = e.target.closest(".fd-tile[data-fk]"); if (!t) return;
-    const it = items[+t.dataset.fk]; buzz(6); leave(); if (it.card) it.open(); else galleryPage(it.j, true, isColor ? sub.hex : null);
+    const it = items[+t.dataset.fk]; buzz(6); leave();
+    if (it.card) it.open(); else galleryPage(it.j, true, isColor ? sub.hex : null);
   };
   grid.addEventListener("focusin", e => { const t = e.target.closest(".fd-tile[data-fk]"); if (t) fk = +t.dataset.fk; });
   function focusK(n) {

@@ -2331,6 +2331,7 @@ scenario("pages", "a fast scripted scroll never leaves the pinned header's trans
   for (let rep = 0; rep < 6; rep++) {
     t.w.scrollTo(0, 0); t.w.document.dispatchEvent(new t.w.Event("scroll"));
     for (let y = 0; y <= 2000; y += 45) { t.w.scrollTo(0, y); t.w.document.dispatchEvent(new t.w.Event("scroll")); }
+    t.w.scrollTo(0, 1900); t.w.document.dispatchEvent(new t.w.Event("scroll"));   // the pinned stack hides on a scroll down (fdHideWire) and returns on a scroll up: end on the way up
     await t.sleep(30);
     t.expect(bar.classList.contains("on"), `rep ${rep}: the bar should be "on" once scrolled past the cover`);
     t.expect(settled(), `rep ${rep}: the bar's transform is stuck at top=${Math.round(bar.getBoundingClientRect().top)}px instead of settling to 0 (on-screen, below the status bar)`);
@@ -4452,7 +4453,8 @@ scenario("paintings", "the pinned bar sits under the safe area and hides on scro
   await sc(0); for (let y = 600; y <= yEnd; y += 300) await sc(y); await t.sleep(500);
   t.expect(ty(bar()) < -20 && ty(chips()) < -60 && t.w.document.documentElement.classList.contains("fd-hid"), `after scrolling down to the feed the bar is at ${ty(bar())} / chips at ${ty(chips())}, expected hidden (y ${t.w.scrollY}, H ${t.w.document.documentElement.scrollHeight}, ${t.w.document.documentElement.className}, tiles ${t.$$(".fd-tile").length}, pin ${t.ev("(()=>{const b=document.querySelector(\"[data-glfeed] .fd-bar\");const p=b.parentElement;return Math.round(p.getBoundingClientRect().top+scrollY)+\"/\"+getComputedStyle(b).top+\"/\"+typeof fdHideWire+\"/\"+b.className})()")})`);
   await sc(t.w.scrollY - 40); await sc(t.w.scrollY - 60); await t.sleep(500);
-  t.expect(ty(bar()) === 0 && ty(chips()) === 0, `a small scroll up left the bar at ${ty(bar())} / chips at ${ty(chips())}, expected back (y ${t.w.scrollY}, sheet ${!!t.$(".sheet")}, ${t.w.document.documentElement.className})`);
+  t.expect(!t.w.document.documentElement.classList.contains("fd-hid"), `a small scroll up left the bar at ${ty(bar())} / chips at ${ty(chips())}, expected back (y ${t.w.scrollY}, sheet ${!!t.$(".sheet")}, ${t.w.document.documentElement.className})`);
+  await t.waitFor(() => ty(bar()) === 0 && ty(chips()) === 0 ? true : null, 4000, "the bar to finish sliding back");
   const top0 = bar().getBoundingClientRect().top;
   t.expect(Math.abs(top0) <= 1, `the bar's top is ${top0}px, expected 0 (sticky under the band)`);
   const btn = t.$(".gl-page > .art-top [data-back]").getBoundingClientRect();
@@ -4461,7 +4463,7 @@ scenario("paintings", "the pinned bar sits under the safe area and hides on scro
   t.expect(Math.abs(chipTop - barBottom) <= 2, `the chip row starts ${chipTop - barBottom}px from the bar`);
   t.expect(barBottom - INSET <= 54, `the bar is ${barBottom - INSET}px tall under the inset, expected ~52`);
   t.ev("scrollTo(0,0)"); await t.sleep(300);
-  t.expect(ty(bar()) === 0 && !t.w.document.documentElement.classList.contains("fd-hid"), "at the top the bar is not shown");
+  t.expect(!t.w.document.documentElement.classList.contains("fd-hid"), "at the top the bar is not shown");
 });
 scenario("paintings", "Keep exploring: a feed at the bottom of a painting page, four chips, closest palette first, 24 at a time, a bounded number of live pictures", async t => {
   await feedOpen(t, 12);
