@@ -54,15 +54,6 @@ html.desk .dk-foot-links a:hover{color:var(--ink)}
 
 /* ---------- the color page: the color on the left, everything about it on the right (the phone's landscape lane, widened) ---------- */
 html.desk{--cp-cover-w:clamp(380px,36vw,560px)}
-html.desk .screen.cp-page{max-width:none;padding-left:calc(var(--cp-cover-w) + var(--dkg));padding-right:var(--dkg)}
-html.desk .cp-page .cp-hero.cp-hero-full{top:var(--dkn);height:calc(100dvh - var(--dkn));padding:20px 32px 32px 32px}
-html.desk .cp-page .cp-close{top:20px}
-html.desk .cp-page .cp-hero h1.rp-name{font-size:clamp(64px,9vw,120px)}
-html.desk .screen.cp-page>:not(.cp-hero){max-width:880px}
-html.desk .cp-page .dk-foot{margin-left:0;margin-right:calc(-1 * var(--dkg));max-width:none}
-html.desk .cp-page .dk-foot-in{grid-template-columns:1fr;gap:18px}
-html.desk .screen.cp-page{padding-top:calc(var(--dkn) + 28px)}
-html.desk .cp-page .tl-more-float{top:20px;left:72px;right:auto}
 
 /* ---------- the painting page: the painting on the left, its palette and notes on the right ---------- */
 html.desk .screen.article:has(>.ptg){max-width:1320px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);column-gap:clamp(36px,4.5vw,72px);align-items:start;padding-top:12px}
@@ -74,13 +65,6 @@ html.desk .screen:has(>.ptg) .p-title{font-size:clamp(44px,4.4vw,64px);line-heig
 html.desk .screen:has(>.ptg) .p-body{font-size:18px;line-height:1.65}
 
 /* ---------- the painter page: a wide page, the works in a many-across grid ---------- */
-html.desk .screen.aw-page{max-width:1240px}
-html.desk .aw-page .aw-head,html.desk .aw-page .aw-sub,html.desk .aw-page .aw-find{max-width:760px}
-html.desk .aw-page .aw-pt-hero{margin:24px 0 0}
-html.desk .aw-page .aw-pt-open,html.desk .aw-page .aw-pt-hero>img{border-radius:var(--r-2);max-height:min(56vh,560px)}
-html.desk .aw-page .gl-rail{margin:0;padding-left:0;padding-right:0}
-html.desk .aw-page [data-wkpal]{display:none}   /* four or more across is pictures only, so there is no palettes switch to offer */
-html.desk .aw-page .aw-head .p-title,html.desk .aw-page .aw-head h1{font-size:clamp(48px,5vw,72px)}
 
 /* ---------- the rooms: Museum is a wide shelf of covers; Learn, Train and Studio are narrower working pages ---------- */
 html.desk .room-sheet>.screen.lh-room,html.desk .room-sheet>.screen.r2{padding-left:max(var(--dkg),calc((100% - 940px) / 2));padding-right:max(var(--dkg),calc((100% - 940px) / 2))}
@@ -110,12 +94,6 @@ html.desk .art-top>[data-back]:has(>svg:only-child)::after{content:"Back";font:5
 html.desk .orient-tip{left:auto;right:100px;bottom:34px;width:max-content;max-width:420px}
 
 /* painter page, top: who they are on the left, a portrait of their work on the right */
-html.desk .screen.aw-page{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(32px,4vw,64px);align-items:start}
-html.desk .screen.aw-page>*{grid-column:1/-1;min-width:0}
-html.desk .screen.aw-page>.aw-head,html.desk .screen.aw-page>.aw-pmap-top{grid-column:1}
-html.desk .screen.aw-page>.aw-pt-hero{grid-column:2;grid-row:2/span 2;margin:0}
-html.desk .aw-page .aw-pmap-top{max-width:360px;align-self:start}
-html.desk .aw-page .aw-pt-open,html.desk .aw-page .aw-pt-hero>img{max-height:420px}
 
 /* the Back / More row is part of the page here (the bar above already stays put), so text never slides under it */
 html.desk .screen:has(>.ptg)>.art-top,html.desk .aw-page>.art-top{position:static}
@@ -130,7 +108,6 @@ html.desk .dk-crumbs button{background:none;border:0;padding:4px 2px;font:inheri
 html.desk .dk-crumbs button:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 html.desk .dk-crumbs span{color:var(--ink);max-width:40ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 html.desk .dk-crumbs i{font-style:normal;color:var(--faint)}
-html.desk .screen.cp-page>.dk-crumbs{max-width:880px}
 
 /* ---------- slice 2: Learn is two columns (today's study on the left, your color wheel on the right) ---------- */
 html.desk .room-sheet>.screen.lh-room{max-width:none;padding-left:max(var(--dkg),calc((100% - 1120px) / 2));padding-right:max(var(--dkg),calc((100% - 1120px) / 2));
@@ -155,21 +132,6 @@ html.desk .pmx .pmx-walk{left:28px;bottom:calc(var(--dk-row) + 44px + var(--cap-
 
 /* ---------- the museum painting page (#/gallery/<n>): the painting large and sticky on the left, everything about it on the right;
    the painter's other works and similar palettes run the full width below ---------- */
-html.desk .screen.article.gl-page:has(>.gl-cols){max-width:1400px;padding-left:var(--dkg);padding-right:var(--dkg);padding-top:12px}
-html.desk .gl-page>.art-top{position:static}
-html.desk .gl-page>*{min-width:0}
-html.desk .gl-cols{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);column-gap:clamp(36px,4.5vw,72px);row-gap:0;align-items:start;margin-top:8px}
-html.desk .gl-cols>.gl-pal-wrap{display:contents}
-html.desk .gl-cols>*,html.desk .gl-pal-wrap>*{min-width:0}
-html.desk .gl-cols .gl-hero{grid-column:1;grid-row:1/span 12;position:sticky;top:calc(var(--dkn) + 16px);margin:0;padding:0;--hero-vh:calc(100dvh - var(--dkn) - 100px);
-  border-radius:var(--r-2);overflow:hidden;min-height:0}
-html.desk .gl-cols .gl-hero>span{max-width:100%}
-html.desk .gl-cols .gl-closer{display:none}   /* the two actions are real buttons beside the title here, not pills on the picture */
-html.desk .gl-cols>:not(.gl-pal-wrap):not(.gl-hero),html.desk .gl-pal-wrap>:not(.gl-hero){grid-column:2}
-html.desk .gl-cols .gl-id{margin-top:0}
-html.desk .gl-cols .gl-id .p-title{font-size:clamp(40px,3.8vw,60px);line-height:1.02;overflow-wrap:anywhere}
-html.desk .gl-cols .gl-id .p-dek{font-size:18px}
-html.desk .gl-cols .gl-id-src{font-size:14px;margin-top:8px}
 html.desk .gl-dk-credit{display:inline}
 html.desk .gl-dk-acts{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 22px}
 html.desk .gl-dk-btn{display:inline-flex;align-items:center;gap:9px;height:46px;padding:0 20px 0 16px;border-radius:var(--r-pill);background:var(--surface-2);color:var(--ink);
@@ -179,7 +141,6 @@ html.desk .gl-dk-btn:hover{background:var(--surface-3);box-shadow:inset 0 0 0 1p
 html.desk .gl-dk-btn[aria-pressed="true"]{background:rgba(236,232,223,.92);color:#0E0D0B}
 html.desk .gl-dk-btn svg{width:18px;height:18px}
 html.desk .gl-page .gl-pal-ui .palette.gl-strip{height:64px}
-@media (min-width:1280px){html.desk .gl-cols .gl-modes.gl-tiles{grid-template-columns:repeat(3,minmax(0,1fr))}}
 /* below the two columns: full width */
 html.desk .gl-page>.gl-morepainter{margin-top:56px}
 html.desk .gl-page .gl-rail{margin-left:0;margin-right:0;padding-left:0;padding-right:0}
@@ -284,3 +245,111 @@ html.desk .pmx-cv.hov{cursor:pointer}
 .pmx-tip{position:fixed;z-index:30;pointer-events:none;max-width:320px;padding:9px 13px;border-radius:12px;background:rgba(14,13,11,.92);box-shadow:inset 0 0 0 1px rgba(236,232,223,.16);color:var(--ink);font:500 14px/1.3 var(--sans);display:flex;flex-direction:column;gap:2px;animation:glzHint .15s var(--ease) both}
 .pmx-tip b{font:500 14.5px/1.3 var(--serif)}
 .pmx-tip span{font:400 13px/1.3 var(--sans);color:var(--soft)}
+
+/* ======================================================================================================================
+   The three shared pages on a desktop window (color #/color/<slug>, painting #/gallery/<n>, painter #/painter/<slug>), 2026-10-25.
+   David: "Wikipedia vibes when it's article time, but when it's painting Pinterest time it should be full screen like Pinterest
+   desktop; the big color only at the top; one header bar."
+   - Overview (reading): the hero is a full-width band at the top that scrolls away; under it ONE reading column (--dk-col) with a slim
+     sticky right rail (--dk-rail: a swatch or thumbnail, the name, links to the sections). Nothing is pinned on the left.
+   - Feed tabs (Paintings, Vibe, Their work ...): full viewport width, edge to edge, 2px gutters (js/feed.js lays the columns out).
+   - One bar: the page's chip row sits under the hero; once it reaches the top it becomes THE bar (js/desktop.js adds the mark and the
+     page's swatch + name at the left and search at the right, and hides the top nav behind it). Never two bars stacked.
+   Phones never match html.desk, so none of this touches them. ====================================================================================================================== */
+html.desk{--dk-col:720px;--dk-rail:220px;--dk-gap:56px;--dk-total:calc(var(--dk-col) + var(--dk-gap) + var(--dk-rail));
+  --dk-L:max(var(--dkg),calc((100% - var(--dk-total)) / 2))}   /* left edge of the reading block, as a margin/padding on a full-width element */
+@media (max-width:1139px){html.desk{--dk-total:var(--dk-col);--dk-gap:0px}html.desk .dk-rail{display:none}}
+
+/* the page is a grid: full-width things span all three columns, the reading things sit in the middle one */
+html.desk .screen.article.cp-page,html.desk .screen.article.gl-page,html.desk .screen.article.aw-page{display:grid;max-width:none;margin:0;padding:var(--dkn) 0 0;
+  grid-template-columns:minmax(var(--dkg),1fr) minmax(0,var(--dk-total)) minmax(var(--dkg),1fr);align-items:start;align-content:start}
+html.desk .cp-page>*,html.desk .gl-page>*,html.desk .aw-page>*,html.desk .gl-pal-wrap>*{grid-column:1/-1;min-width:0}
+html.desk .gl-page>.gl-cols,html.desk .gl-page>.gl-cols>.gl-pal-wrap{display:contents}
+html.desk .cp-page>.dk-crumbs,html.desk .cp-page>.art-top,html.desk .gl-page>.art-top,html.desk .aw-page>.art-top{order:-4;position:static;margin:0;padding:12px var(--dkg) 12px var(--dk-L);flex-wrap:nowrap}
+html.desk .gl-page>.art-top,html.desk .aw-page>.art-top{padding-top:14px}
+html.desk .cp-page>.dk-crumbs{margin:0;max-width:none}
+/* the hero band: the big color / the painting / the painter's work, once, at the top */
+html.desk .cp-page .cp-hero.cp-hero-full{order:-3;position:relative;inset:auto;width:auto;height:auto;min-height:clamp(340px,46vh,480px);margin:0;border-radius:0;z-index:auto;
+  padding:76px var(--dkg) 44px var(--dk-L)}
+html.desk .cp-page .cp-hero.cp-hero-full .cp-hero-foot{max-width:var(--dk-col);max-height:none;overflow:visible}
+html.desk .cp-page .cp-close{top:20px;left:var(--dkg)}
+html.desk .cp-page .tl-more-float{top:20px;left:calc(var(--dkg) + 56px);right:auto}
+html.desk .cp-page .cp-hero h1.rp-name{font-size:clamp(72px,9vw,132px)}
+html.desk .gl-page .gl-hero.gl-hero{order:-3;margin:0;padding:24px var(--dkg) 28px;background:color-mix(in srgb,var(--ground) 72%,#000);--hero-vh:min(64vh,680px)}
+html.desk .gl-page .gl-hero>span{max-width:100%}
+html.desk .gl-page .gl-closer{display:none}
+html.desk .aw-page>.aw-pt-hero{order:-3;margin:0}
+html.desk .aw-page .aw-pt-open{display:block;width:100%;height:clamp(260px,38vh,400px);max-height:none;border-radius:0;overflow:hidden;background:color-mix(in srgb,var(--ground) 72%,#000)}
+html.desk .aw-page .aw-pt-hero>img,html.desk .aw-page .aw-pt-open img{width:100%;height:100%;max-height:none;object-fit:contain;object-position:50% 50%;border-radius:0}
+html.desk .aw-page .aw-pt-hero figcaption{padding:10px var(--dkg) 0 var(--dk-L)}
+/* the title block, in the reading column */
+html.desk .gl-pal-wrap>.gl-id,html.desk .aw-page>.aw-head,html.desk .aw-page>.aw-pmap-top,html.desk .cp-page>.rp-also,html.desk .cp-page>.np-shade,html.desk .cp-page>.rp-last{grid-column:2;max-width:var(--dk-col)}
+html.desk .gl-pal-wrap>.gl-id,html.desk .aw-page>.aw-head{order:-2;margin-top:28px}
+html.desk .aw-page>.aw-pmap-top{order:-2}
+html.desk .gl-id .p-title{font-size:clamp(40px,3.8vw,60px);line-height:1.02;overflow-wrap:anywhere}
+html.desk .gl-id .p-dek{font-size:18px}
+html.desk .gl-id-src{font-size:14px;margin-top:8px}
+html.desk .aw-page .aw-head .p-title,html.desk .aw-page .aw-head h1{font-size:clamp(48px,5vw,72px)}
+html.desk .cp-page>.rp-also{margin-top:28px}
+html.desk .cp-page>.rp-last{margin:40px 0 0;text-align:left}
+html.desk .cp-page>.dk-foot,html.desk .gl-page>.dk-foot,html.desk .aw-page>.dk-foot{margin:56px 0 0}
+html.desk .cp-page .dk-foot-in,html.desk .gl-page .dk-foot-in,html.desk .aw-page .dk-foot-in{grid-template-columns:minmax(0,1fr) auto;max-width:var(--dk-total);padding:0}
+
+/* the chip row: in the flow under the hero, then THE bar */
+html.desk :is(.cp-page,.gl-page,.aw-page) .fd-bar{position:sticky;top:0;z-index:51;box-sizing:border-box;height:60px;margin:0;padding:0 var(--dkg) 0 var(--dk-L);display:flex;align-items:center;gap:14px;
+  background:var(--ground);border-bottom:1px solid var(--rule)}
+html.desk :is(.cp-page,.gl-page,.aw-page) .fd-chips{margin:0;padding:0;flex:1;min-width:0}
+html.desk :is(.cp-page,.gl-page,.aw-page) .fd-chip{min-height:38px;padding:0 16px;font-size:16px}
+html.desk :is(.rp-tabs,.gl-tabs){margin:0;padding:0}
+html.desk .dk-pb-l,html.desk .dk-pb-r{display:none;align-items:center;flex:none;gap:14px}
+html.desk.dk-stuck #dk-nav{visibility:hidden}
+html.desk.dk-stuck .fd-bar{padding-left:var(--dkg)}
+html.desk.dk-stuck .dk-pb-l,html.desk.dk-stuck .dk-pb-r{display:flex}
+html.desk .dk-pb-l .dk-brand{gap:0}
+html.desk .dk-pb-id{display:flex;align-items:center;gap:10px;max-width:260px;height:40px;padding:0 6px;border:0;background:none;color:var(--ink);font:400 19px/1 var(--serif);cursor:pointer;border-radius:var(--r-pill)}
+html.desk .dk-pb-id:hover{background:rgba(236,232,223,.07)}
+html.desk .dk-pb-id i{flex:none;width:28px;height:28px;border-radius:50%;background:var(--c,#444) center/cover;box-shadow:inset 0 0 0 1px rgba(236,232,223,.22)}
+html.desk .dk-pb-id b{font-weight:400;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+html.desk .dk-pb-r .dk-search{width:min(300px,22vw)}
+
+/* Overview = the reading column and the slim right rail */
+html.desk :is(.rp-about,.gl-about):not([hidden]),html.desk .aw-pane:not([hidden]):not(:has(.aw-wk-mount)){display:grid;align-items:start;--g:0px;
+  grid-template-columns:minmax(0,var(--dk-col)) minmax(0,var(--dk-rail));column-gap:var(--dk-gap);justify-content:center;padding:0 var(--dkg) 96px}
+@media (max-width:1139px){html.desk :is(.rp-about,.gl-about):not([hidden]),html.desk .aw-pane:not([hidden]):not(:has(.aw-wk-mount)){grid-template-columns:minmax(0,var(--dk-col))}}
+html.desk :is(.rp-about,.gl-about,.aw-pane)>*{grid-column:1;min-width:0}
+html.desk :is(.rp-about,.gl-about,.aw-pane)>.dk-rail{grid-column:2;grid-row:1/span 400}
+html.desk :is(.rp-about,.gl-about,.aw-pane)>:first-child:not(.dk-rail){margin-top:36px}
+html.desk .dk-rail{position:sticky;top:84px;align-self:start;margin-top:36px;display:flex;flex-direction:column;gap:6px;padding:0 0 0 18px;border-left:1px solid var(--rule)}
+html.desk .dk-rail-sw{display:block;width:56px;height:56px;border-radius:var(--r-2,10px);background:var(--c,#444) center/cover;box-shadow:inset 0 0 0 1px rgba(236,232,223,.2);margin-bottom:8px}
+html.desk .dk-rail-n{font:400 21px/1.15 var(--serif);color:var(--ink);overflow-wrap:anywhere}
+html.desk .dk-rail-m{font:400 15px/1.4 var(--sans);color:var(--soft);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+html.desk .dk-rail-h{margin:18px 0 2px;font:500 14px/1 var(--sans);color:var(--faint)}
+html.desk .dk-rail nav{display:flex;flex-direction:column;gap:2px;max-height:calc(100dvh - 300px);overflow-y:auto;scrollbar-width:thin}
+html.desk .dk-rail nav a{display:block;padding:6px 0;font:400 16px/1.3 var(--sans);color:var(--soft);text-decoration:none;cursor:pointer}
+html.desk .dk-rail nav a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+html.desk :is(.rp-about,.gl-about,.aw-pane) :is(h2,.sec-head,summary,section,details){scroll-margin-top:84px}
+
+/* feed tabs = Pinterest: the grid is the whole window, edge to edge */
+html.desk :is(.cp-page,.gl-page,.aw-page) .fd-grid.bare{margin-left:0;margin-right:0}
+html.desk :is(.cp-page,.gl-page,.aw-page) .fd-state{padding-bottom:120px}
+html.desk .aw-page .aw-pane:not([hidden]):has(.aw-wk-mount){padding:0}
+html.desk .aw-page .aw-pane:has(.aw-wk-mount)>.sec-head{padding:0 var(--dkg);margin:18px 0 10px}
+html.desk .aw-page .aw-wk-mount{margin:0;padding:0}
+html.desk .fd-float{padding:0 28px;bottom:28px}
+/* Settings: a right-hand panel (about 420px, no dimming) with the feed live beside it, not a dialog over it */
+html.desk{--dk-panel:0px}
+html.desk:has(.sheet.fs-half){--dk-panel:420px}
+html.desk .scrim:has(+.sheet.fs-half),html.desk:has(.sheet.fs-half) .scrim{display:none}
+html.desk .sheet.sheet.fs-half{inset:0 0 0 auto;margin:0;width:420px;height:auto;max-height:none;border-radius:0;border:0;border-left:1px solid var(--rule);padding:22px 24px 0;
+  box-shadow:-18px 0 44px rgba(0,0,0,.32);animation:dkDockIn .26s var(--ease) both;z-index:70}
+html.desk .sheet.fs-half .grab{display:none}
+html.desk:has(.sheet.fs-half) #app{margin-right:var(--dk-panel)}
+html.desk:has(.sheet.fs-half) #dk-nav{right:var(--dk-panel)}
+html.desk:has(.sheet.fs-half) .fd-float{right:var(--dk-panel)}
+html.desk:has(.sheet.fs-half) .fd-bar{right:0}
+html.desk .rp-bar{display:none}   /* the color page's phone name bar: the page's own chip row is the bar here */
+html.desk .cp-page .cp-hero-foot :is(.rp-def,.cp-def,.c-def,p){max-width:600px}
+/* the bar's search shrinks to its icon when the window (or the window beside the Settings panel) is narrow */
+@media (max-width:1399px){html.desk .dk-pb-r .dk-search{width:44px;padding:0;justify-content:center;gap:0}html.desk .dk-pb-r .dk-search :is(span,kbd){display:none}}
+html.desk:has(.sheet.fs-half) .dk-pb-r .dk-search{width:44px;padding:0;justify-content:center;gap:0}
+html.desk:has(.sheet.fs-half) .dk-pb-r .dk-search :is(span,kbd){display:none}

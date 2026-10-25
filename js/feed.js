@@ -297,7 +297,7 @@ function fdMount(host, o) {
   }
 
   // ----- layout (a masonry whose boxes are known from the index before anything loads) -----
-  const colsFor = w => { const want = wide() ? view.dcols : view.cols; return want >= 1 ? Math.min(fdMaxCols(), want) : w < 560 ? 3 : w < 860 ? 3 : Math.max(3, Math.min(5, Math.floor((w + 14) / 254))); };
+  const colsFor = w => { const want = wide() ? view.dcols : view.cols; return want >= 1 ? Math.min(fdMaxCols(), want) : w < 560 ? 3 : w < 860 ? 3 : wide() && w >= 900 ? Math.max(5, Math.min(8, Math.floor(w / 230))) : Math.max(3, Math.min(5, Math.floor((w + 14) / 254))); };   // a wide window: edge to edge, 5 to 8 across by its width (1440 -> 6, 1920 -> 8)
   const sizeDraw = () => { const b = host.querySelector("[data-fdsize]"); if (!b) return; b.textContent = `${cols} across`; b.setAttribute("aria-label", `Size: ${cols} across. Tap for another size, or pinch.`); };
   const bare = () => !view.caps;
   const dense0 = () => false;   // every grid is edge to edge, pictures first (David, 2026-10-25); the byline only adds a line under each
