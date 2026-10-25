@@ -1,10 +1,10 @@
 "use strict";
 // The desktop website layer (David, 2026-10-21: "the app should fully make sense as a website"). Only on a wide screen
-// with a mouse or trackpad -- (min-width:900px) and (hover:hover) and (pointer:fine) -- never on a phone or tablet.
+// with a mouse or trackpad -- (min-width:900px) and (hover:hover) and (pointer:fine) -- never on a phone (an iPad gets it too, since 2026-10-25).
 // It adds: html.desk (css/desktop.css lays everything out from it), a top navigation bar (wordmark, the places as
 // text links with the active one marked, search), and a quiet footer on every page that reads like a web page.
 // Nothing here changes a screen's own code: the bar lives outside #app, and the footer is appended to the finished screen.
-const DESK_Q = "(min-width:900px) and (hover:hover) and (pointer:fine)";
+const DESK_Q = "(min-width:900px) and (hover:hover) and (pointer:fine), (min-width:700px) and (min-height:640px) and (pointer:coarse)";   // second clause: an iPad, portrait or landscape (a phone turned sideways is under 640 tall)
 const DESK_MQ = typeof matchMedia === "function" ? matchMedia(DESK_Q) : null;
 const DESK_LINKS = [["home", "Explore", "#/home"], ["museum", "Museum", "#/museum"], ["learn", "Learn", "#/today"], ["train", "Train", "#/train"], ["studio", "Studio", "#/studio"], ["daily", "Today", "#/feed"]];
 // which nav link a route belongs to (by its first address segment)

@@ -1,5 +1,5 @@
 /* The desktop website layer (js/desktop.js, 2026-10-21). Everything here sits behind html.desk, which js/desktop.js sets only for
-   (min-width:900px) and (hover:hover) and (pointer:fine) -- a phone or tablet never matches, so the phone app is untouched.
+   (min-width:900px) and (hover:hover) and (pointer:fine), or an iPad (min-width:700px, min-height:640px, coarse pointer) -- a phone never matches, so the phone app is untouched.
    Loaded last on purpose: it overrides the phone rules with the same specificity or one class more. */
 html.desk{--dkn:60px;--dkw:1180px;--dkg:clamp(32px,5vw,64px);--top:var(--dkn)}   /* --top is the phone's status-bar inset; here it is the bar, so every top-anchored thing clears it */
 
@@ -356,3 +356,20 @@ html.desk:has(.sheet.fs-half) .dk-pb-r .dk-search :is(span,kbd){display:none}
 html.desk .fd-bar.fd-stuck .fd-mapw{display:flex}
 html.desk .fd-mapb.in-top,html.desk .art-top-name{display:none!important}
 html.desk .fd-mapb-hero{top:18px;right:var(--dkg)}
+
+/* an iPad in portrait (700-1000 wide): the bar's wordmark, links and search have to fit one row */
+@media (max-width:1000px){
+  html.desk #dk-nav{gap:14px}
+  html.desk .dk-brand{font-size:21px}
+  html.desk .dk-brand span,html.desk .dk-brand b{display:none}
+  html.desk .dk-links a{padding:0 10px}
+  html.desk .dk-search{width:auto;flex:none;padding:0 12px}
+  html.desk .dk-search span,html.desk .dk-search kbd{display:none}
+}
+
+/* under 1140 wide the side rail is gone and the reading column takes the whole width (the rule at the top of this file was beaten by the later .dk-rail display) */
+@media (max-width:1139px){
+  html.desk .dk-rail{display:none}
+  html.desk :is(.rp-about,.gl-about,.aw-pane){grid-template-columns:minmax(0,1fr);column-gap:0}
+  html.desk :is(.rp-about,.gl-about,.aw-pane)>:first-child:not(.dk-rail){margin-top:24px}
+}
