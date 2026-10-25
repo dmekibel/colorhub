@@ -792,7 +792,7 @@ function rpPaintSectionHTML(name, hex, entry, famC) {
     <h2>Paintings</h2>
     <div class="rp-paint-lead" data-rp-lead></div>
     <div class="gl-in" data-glin></div>
-    ${call(rcRolePaintingsHTML, name, hex)}
+    ${call(rcRoleShelfHTML, name, hex)}
     ${call(rcPaintersSection, name, hex)}
     ${call(rcWhenWhereSection, name, hex)}
     ${call(rcPairedSection, name, hex)}
@@ -809,7 +809,6 @@ function rpPaintSectionHTML(name, hex, entry, famC) {
       ${call(archiveRows, entry, "films", famC)}
     </div>
     <details class="rc-more rp-bynumbers"><summary>By the numbers</summary>
-      ${call(rcRoleSection, name, hex)}
       ${call(rcReachSection, name, hex)}
       <div class="rp-findings-box" data-rp-findings></div>
     </details>

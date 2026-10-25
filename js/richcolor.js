@@ -178,6 +178,79 @@ function rcRoleSection(name, hex) {
   return `<div id="${id}"></div>`;
 }
 
+// ======================================================================
+// How painters use it (David, 2026-10-25: "its role in painting could be more nuanced with more picture examples"). One bar
+// that is also the tabs: Main color, Shadow, Mid-tone, Light, Accent, each as wide as how often the color plays that part. One
+// plain sentence with the n, then a rail of up to 12 real paintings where it plays the chosen part most clearly, each opening
+// with the color marked. Replaces "Its roles, one painting each" and the role bar under By the numbers. Measured live from the
+// gallery index (six measured colors a painting), as photographed: lightness against the painting's own average, so it
+// survives varnish and camera. Closeness counts twice (squared) in the order: an exact match beats a big off-color area.
+// ======================================================================
+const RS_ROLES = [["main", "Main", "the main color, covering a third or more of the canvas"], ["shadow", "Shadow", "a shadow, darker than the painting around it"], ["mid", "Mid-tone", "a mid-tone, about as light as the painting around it"], ["light", "Light", "a light, brighter than the painting around it"], ["accent", "Accent", "an accent, a small strong touch"]];
+const RS_CACHE = new Map();
+function rsRoleStats(hex) {
+  if (RS_CACHE.has(hex)) return RS_CACHE.get(hex);
+  const G = GAL, N = G.n, [tL, ta, tb] = lab(hex);
+  let out = null;
+  for (const R of [12, 18]) {
+    const roles = { main: [], shadow: [], mid: [], light: [], accent: [] }, far = (R * 3) ** 2;   // a cheap Lab-distance cut first: CIEDE2000 under R never sits this far away
+    let n = 0;
+    for (let i = 0; i < N; i++) {
+      let best = -1, bd = R;
+      for (let j = 0; j < 6; j++) {
+        const k = i * 6 + j, o = k * 3, dL = G.lab[o] - tL;
+        if (dL > 30 || dL < -30) continue;
+        const da = G.lab[o + 1] - ta, db = G.lab[o + 2] - tb;
+        if (dL * dL + da * da + db * db > far) continue;
+        const d = glDE(tL, ta, tb, G.lab[o], G.lab[o + 1], G.lab[o + 2]);
+        if (d < bd) { bd = d; best = k; }
+      }
+      if (best < 0) continue;
+      const share = G.sh[best], o = best * 3, dm = G.lab[o] - G.mean[i * 3], near = (1 - bd / R) ** 2;
+      let role = share >= .33 ? "main" : dm < -8 ? "shadow" : dm > 8 ? "light" : "mid";
+      if (share < .1 && G.ch[best] > 18 && glDE(G.lab[o], G.lab[o + 1], G.lab[o + 2], G.mean[i * 3], G.mean[i * 3 + 1], G.mean[i * 3 + 2]) > 22) role = "accent";
+      roles[role].push([i, role === "accent" ? near * G.ch[best] * (1 - share) : near * (.3 + share)]);
+      n++;
+    }
+    if (n >= 5 || R === 18) { out = { roles, n, R }; break; }
+  }
+  for (const k in out.roles) out.roles[k].sort((a, b) => b[1] - a[1]);
+  RS_CACHE.set(hex, out); if (RS_CACHE.size > 8) RS_CACHE.delete(RS_CACHE.keys().next().value);
+  return out;
+}
+function rcRoleShelfHTML(name, hex) {
+  const id = "rc-rs-" + Math.random().toString(36).slice(2, 8);
+  const draw = () => {
+    const box = document.getElementById(id); if (!box) return;
+    const r = rsRoleStats(hex), have = r ? RS_ROLES.filter(([k]) => r.roles[k].length >= 3) : [];
+    if (!r || r.n < 5 || !have.length) { box.remove(); return; }   // never padded: a color too rare to say anything about shows nothing here
+    const pct = k => Math.max(1, Math.round(r.roles[k].length / r.n * 100));
+    let cur = have.reduce((a, b) => r.roles[b[0]].length > r.roles[a[0]].length ? b : a)[0];   // opens on the part it plays most
+    const hair = typeof rcContrast === "function" && rcContrast(hex, "#0E0D0B") < 1.6 ? " rs-hair" : "";   // a near-black color: the chosen role needs a ring to stand off the page
+    box.innerHTML = `<section class="rc-sec rs-roles${hair}" style="--c:${hex}" data-ink="${ink(hex)}">
+      <h3>How painters use it</h3>
+      <div class="rs-bar" role="tablist" aria-label="Its roles in paintings">${have.map(([k, label]) => `<button type="button" role="tab" class="rs-seg" data-rs="${k}" style="flex:${Math.sqrt(r.roles[k].length).toFixed(2)}"><b>${label}</b><span>${pct(k)}%</span></button>`).join("")}</div>
+      <p class="rs-say" data-rs-say aria-live="polite"></p>
+      <div class="gl-rail rs-rail" data-rs-rail></div>
+      <p class="fine">As photographed: its lightness against the painting's own average. Tap a role to see where it plays that part.</p></section>`;
+    const say = box.querySelector("[data-rs-say]"), rail = box.querySelector("[data-rs-rail]");
+    const paint = () => {
+      const [k, , what] = RS_ROLES.find(x => x[0] === cur);
+      box.querySelectorAll("[data-rs]").forEach(b => { const on = b.dataset.rs === k; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
+      say.textContent = `${what.charAt(0).toUpperCase() + what.slice(1)}: in ${pct(k)}% of the ${r.n.toLocaleString("en-US")} paintings that hold it.`;
+      rail.innerHTML = r.roles[k].slice(0, 12).map(([i]) => glPinHTML(i)).join("");
+      rail.scrollLeft = 0; glFill(rail);
+    };
+    paint();
+    box.addEventListener("click", e => {
+      const s = e.target.closest("[data-rs]"); if (s) { if (s.dataset.rs !== cur) { cur = s.dataset.rs; buzz(5); paint(); } return; }
+      const p = e.target.closest("[data-gi]"); if (p) { buzz(6); galleryPage(+p.dataset.gi, true, hex); }
+    });
+  };
+  rcLazyGallery(id, draw);   // the gallery index is large: only loaded once the first screen has settled
+  return `<div id="${id}"></div>`;
+}
+
 // ---------- Role paintings (design/audit-graph/CHECKPOINT.md #6): for 1,434 colors, data/graph/fieldnotes'
 // ar.rp_ names one real painting where the color plays each part -- shadow, mid-tone, light, accent, hidden
 // note -- picked once by L6, not recomputed live the way rcRoleSection's bar above is. "Never one palette,

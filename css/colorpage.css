@@ -589,3 +589,21 @@
 .rp-tabs .sec-head[hidden]{display:none}
 .rp-tabs .sec-head{justify-content:flex-end;margin-top:8px;margin-bottom:0}
 .rp-tabs .sec-head b,.rp-tabs .sec-head span{display:none}
+
+/* How painters use it (js/richcolor.js rcRoleShelfHTML): the bar is the tabs, each role as wide as how often it plays that part;
+   the chosen one fills with the color itself, the rest keep a band of it (darker for Shadow, lighter for Light) */
+.rs-bar{display:flex;gap:3px;margin:0 calc(-1 * var(--g)) 12px;padding:0 var(--g);overflow-x:auto;scrollbar-width:none}
+.rs-bar::-webkit-scrollbar{display:none}
+.rs-seg{flex-basis:0;min-width:max-content;min-height:64px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:4px;padding:10px 10px 9px;border-radius:8px;background:var(--cp-surface-2);border:0;border-top:5px solid var(--c);color:var(--soft);text-align:left;overflow:hidden;transition:background .15s var(--ease,ease),color .15s var(--ease,ease)}
+.rs-seg[data-rs="shadow"]{border-top-color:color-mix(in srgb,var(--c) 60%,#000)}
+.rs-seg[data-rs="light"]{border-top-color:color-mix(in srgb,var(--c) 60%,#fff)}
+.rs-seg b{font:400 17px/1.05 var(--serif);color:var(--ink);white-space:nowrap}
+.rs-seg span{font:500 15px/1 var(--sans);font-variant-numeric:tabular-nums}
+.rs-seg:active{transform:scale(.98)}
+.rs-seg.on{background:var(--c);border-top-color:var(--c)}
+.rs-roles[data-ink="dark"] .rs-seg.on,.rs-roles[data-ink="dark"] .rs-seg.on b{color:#141311}
+.rs-roles[data-ink="light"] .rs-seg.on,.rs-roles[data-ink="light"] .rs-seg.on b{color:#fff}
+.rs-say{font-size:17px;line-height:1.4;margin:0 0 12px;color:var(--ink)}
+.rs-rail{min-height:200px}
+@media (prefers-reduced-motion:reduce){.rs-seg{transition:none}}
+.rs-hair .rs-seg.on{box-shadow:inset 0 0 0 1.5px rgba(236,232,223,.6)}

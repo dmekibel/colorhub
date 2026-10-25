@@ -2597,10 +2597,16 @@ scenario("pages", "role paintings and Werner's 1821 example show on the color pa
   await H.openPage(t, "#/name/auburn", "Auburn");
   // David, 2026-10-09: Paintings is a first-class section now, not a drawer behind a summary tap
   const paint = await t.waitFor(() => t.$(".rp-paint"), 8000, "the Paintings section");
-  await t.waitFor(() => t.$$(".rc-ri", paint).length >= 2, 15000, "a role-paintings row (shadow/mid/light/accent/hidden)");
-  const tiles = t.$$(".rc-ri", paint);
-  t.expect(tiles.every(x => /Shadow|Mid|Light|Accent|Hidden/.test(x.textContent)), "a role tile is missing its label");
-  const tile = await t.waitFor(() => tiles.find(x => x.dataset.rcGi), 15000, "a role painting resolved to a gallery index");
+  // How painters use it (js/richcolor.js rcRoleShelfHTML): the role bar is the tabs, each tab swaps the rail of paintings
+  const shelf = await t.waitFor(() => t.$(".rs-roles", paint), 20000, "the How painters use it shelf");
+  const segs = t.$$(".rs-seg", shelf);
+  t.expect(segs.length >= 2 && segs.every(x => /^(Main|Shadow|Mid-tone|Light|Accent)\d+%$/.test(t.text(x).replace(/\s+/g, ""))), `role tabs read ${segs.map(x => t.text(x))}`);
+  t.expect(t.$$(".rs-seg.on", shelf).length === 1 && /% of the [\d,]+ paintings that hold it/.test(t.text(".rs-say")), `no plain sentence with the n: "${t.text(".rs-say")}"`);
+  const other = segs.find(x => !x.classList.contains("on")), before = t.text(".rs-say");
+  await t.click(other, { wait: 300 });
+  t.expect(other.classList.contains("on") && t.text(".rs-say") !== before, "tapping another role did not switch the shelf");
+  const tile = await t.waitFor(() => t.$(".rs-rail [data-gi]", shelf), 15000, "a painting in the role rail");
+  t.expect(t.$$(".rs-rail [data-gi]", shelf).length >= 3, "the role rail shows fewer than 3 paintings");
   await t.click(tile, { wait: 700 });
   await t.waitFor(() => t.$(".gl-page"), 10000, "the role painting's own page");
   await t.click("[data-back]", { wait: 600 });
@@ -2646,9 +2652,9 @@ scenario("pages", "every painting tile on a color page opens its painting: the I
   await t.click("[data-back]", { wait: 600 });
   await t.waitFor(() => H.title(t) === "Ochre Brown", 8000, "Back to return to Ochre Brown from the archive hero");
 
-  // 3. a role-paintings tile (rcRolePaintingsHTML) -- resolves async per role; any one that lands counts
+  // 3. a painting in the How painters use it rail (rcRoleShelfHTML)
   paint = await freshPaint();
-  const role = await t.waitFor(() => t.$$(".rc-ri[data-rc-gi]", paint)[0], 15000, "a resolved role-paintings tile");
+  const role = await t.waitFor(() => t.$(".rs-rail [data-gi]", paint), 15000, "a painting in the role rail");
   await t.click(role, { wait: 700 });
   await t.waitFor(() => t.$(".gl-page"), 10000, "the role tile's own page");
   await t.click("[data-back]", { wait: 600 });
