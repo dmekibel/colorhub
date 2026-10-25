@@ -477,7 +477,7 @@ function pmParse(q, F) {
   const lsp = num("lsp"); if (lsp != null) s.lks = clamp(lsp, 0, 1);
   if (/^(0|30|60)$/.test(p.get("lc") || "")) s.lkc = +p.get("lc");
   if (p.get("lb") === "0" || p.get("lb") === "1") s.lkb = +p.get("lb");
-  if (p.get("c")) { f.hexes = p.get("c").split(",").filter(h => /^[0-9a-f]{6}$/i.test(h)).map(h => "#" + h.toUpperCase()); f.name = f.hexes.length === 1 ? nameOf(f.hexes[0]).text : ""; f.tol = num("t") || 8; f.cover = num("m") != null ? num("m") : 2; }
+  if (p.get("c")) { f.hexes = p.get("c").split(",").filter(h => /^[0-9a-f]{6}$/i.test(h)).map(h => "#" + h.toUpperCase()); f.name = f.hexes.length === 1 ? (p.get("nm") ? p.get("nm").slice(0, 60) : nameOf(f.hexes[0]).text) : ""; f.tol = num("t") || 8; f.cover = num("m") != null ? num("m") : 2; }
   if (p.get("cm") === "all") f.colorMode = "all";
   if (p.get("cm") === "overall" && f.hexes.length) {
     f.colorMode = "overall"; f.tol = Math.min(f.tol, PM_PAL_MAX); if (p.get("at") === "1") f.auto = 1; if (p.get("nm")) f.name = p.get("nm").slice(0, 60);
@@ -497,6 +497,7 @@ function pmParse(q, F) {
   if (p.get("mus")) f.musSet = p.get("mus").split(",").map(k => F.G.src.findIndex(x => x.k === k)).filter(v => v >= 0);
   if (p.get("type") && F.meta.types) f.tySet = p.get("type").split(",").map(v => F.meta.types.findIndex(t => routeSlug(t) === v) + 1).filter(v => v > 0);
   if (p.get("subj") && SUBJ) f.subjSet = p.get("subj").split(",").map(k => SUBJ.tags.findIndex(n => routeSlug(n) === k)).filter(v => v >= 0);
+  if (p.get("rnd") === "1") s.rnd = 1;   // a cold start: js/boot.js asks for a random cluster of the big map (never written back to the address)
   const sd = num("seed"); if (sd != null && sd >= 0 && sd < F.N) s.seed = sd;
   if (p.get("walk") === "1" && s.seed >= 0) s.walkStart = 1;   // the painting page's "Walk from here": take the first step on arrival
   if (p.get("fav") === "1") s.fav = 1;
@@ -509,7 +510,7 @@ function pmQS(s, F) {
   const col = s.col || (F && F.col) || "paintings"; if (col !== "paintings") out.push(["col", col]);
   if (s.place && s.place !== "avg") out.push(["pl", s.place]);
   if (s.arr === "look") { const o = pmLk(s); out.push(["lk", o.lay], ["lsp", +o.sp.toFixed(2)], ["lc", o.col], ["lb", o.lab]); }
-  if (f.hexes.length) { out.push(["c", f.hexes.map(h => h.slice(1).toLowerCase()).join(",")], ["t", f.tol], ["m", f.cover]); if (f.hexes.length > 1 && f.colorMode === "all") out.push(["cm", "all"]); if (f.colorMode === "overall") { out.push(["cm", "overall"], ["sh", (f.shares || []).join(",")]); if (f.name) out.push(["nm", f.name]); } }
+  if (f.hexes.length) { out.push(["c", f.hexes.map(h => h.slice(1).toLowerCase()).join(",")], ["t", f.tol], ["m", f.cover]); if (f.hexes.length > 1 && f.colorMode === "all") out.push(["cm", "all"]); if (f.colorMode === "overall") { out.push(["cm", "overall"], ["sh", (f.shares || []).join(",")]); if (f.name) out.push(["nm", f.name]); } else if (f.hexes.length === 1 && f.name && f.name !== nameOf(f.hexes[0]).text) out.push(["nm", f.name]); }   // a color keeps the name it was opened with (an archive name, "Your color") across reloads and shares
   if (f.y0 != null) out.push(["y0", f.y0]); if (f.y1 != null) out.push(["y1", f.y1]);
   if (f.hueBand != null) out.push(["hb", f.hueBand]);
   if (f.l0 != null) out.push(["l0", f.l0]); if (f.l1 != null) out.push(["l1", f.l1]);
@@ -535,7 +536,7 @@ function pmQS(s, F) {
 function pmRouteOf(spec, F) {
   const col = (typeof spec === "string" ? new URLSearchParams(spec.replace(/^\?/, "")).get("col") : spec && spec.col) || (F && F.col) || "paintings";
   if (!F) F = col === "paintings" ? XBF : PM_COL_F_READY.get(col);
-  const q = typeof spec === "string" ? spec.replace(/^\?/, "") : F ? pmQS(spec, F) : (col !== "paintings" ? "col=" + encodeURIComponent(col) : "");
+  const q = typeof spec === "string" ? spec.replace(/^\?/, "").replace(/(^|&)rnd=1(?=&|$)/, "").replace(/^&/, "") : F ? pmQS(spec, F) : (col !== "paintings" ? "col=" + encodeURIComponent(col) : "");
   const title = (PM_COLLECTIONS.find(c => c[0] === col) || PM_COLLECTIONS[0])[1];
   return { path: "paintings/map" + (q ? "?" + q : ""), title: col === "paintings" ? "Painting map" : title + " map" };
 }
@@ -574,7 +575,7 @@ function pmActiveChips(s, F) {
   }
   if (f.hexes.length) {
     const names = f.hexes.map(h => nameOf(h).text);
-    c.push({ dim: "color", text: names.length === 1 ? names[0] : f.name ? f.name : f.colorMode === "overall" ? `Palette of ${names.length} colors` : f.colorMode === "all" ? `Holds all ${names.length} colors` : `Any of ${names.length} colors` });
+    c.push({ dim: "color", text: names.length === 1 ? (f.name || names[0]) : f.name ? f.name : f.colorMode === "overall" ? `Palette of ${names.length} colors` : f.colorMode === "all" ? `Holds all ${names.length} colors` : `Any of ${names.length} colors` });
   }
   if (f.hueBand != null) c.push({ dim: "hueBand", text: XB_HUE_WORDS[f.hueBand] });
   if (f.l0 != null || f.l1 != null) c.push({ dim: "l", text: f.l0 != null && f.l1 != null ? `Lightness ${f.l0}–${f.l1}` : f.l0 != null ? `Lighter than ${f.l0}` : `Darker than ${f.l1}` });
@@ -1089,6 +1090,18 @@ function pmLookEnsure(F, s) {   // resolves true when By look can be drawn with 
   });
 }
 // Quickselect by rank so the median split below is linear per level: idx[lo..hi) is reordered so idx[k] holds the k-th smallest by c (all distinct).
+// a random painting with a real neighborhood: well away from the edge of the layout, and with most of the cells around it filled
+function pmRandomCluster(lay) {
+  let best = -1, bestN = -1;
+  for (let t = 0; t < 30; t++) {
+    const k = Math.floor(Math.random() * lay.n), x = Math.round(lay.x[k]), y = Math.round(lay.y[k]);
+    if (x - lay.gx0 < 14 || lay.gx0 + lay.GW - 1 - x < 14 || y - lay.gy0 < 14 || lay.gy0 + lay.GH - 1 - y < 14) continue;
+    let n = 0; for (let dy = -5; dy <= 5; dy++) for (let dx = -5; dx <= 5; dx++) if (pmAt(lay, x + dx, y + dy) >= 0) n++;
+    if (n > bestN) { best = k; bestN = n; }
+    if (n >= 100) break;
+  }
+  return best >= 0 ? best : Math.floor(Math.random() * lay.n);
+}
 function pmSelect(idx, lo, hi, k, c) {
   let l = lo, r = hi - 1;
   while (l < r) {
@@ -1581,13 +1594,16 @@ function pmAtlasTier1(onReady, col) {
   const cells = new Map();   // painting index -> { bm, used } (ready tiles only)
   const need = new Map();    // group -> Set of painting indices wanted and not yet cut
   const failed = new Set();  // groups whose sheet failed (retried at most twice, a few seconds apart)
-  const tries = new Map(), inflight = new Set();
+  const born = performance.now();
+  const tries = new Map(), inflight = new Set(), rank = new Map();   // rank: group -> the best (lowest) place any of its wanted paintings has in the priority list
   let frame = 0, dead = false, running = 0, wantedNow = 1;
   function pump() {
-    while (!dead && running < PM_T1_CONC) {
+    // the opening seconds of a map may run more sheets at once on a roomy device (every visible tile sharpens sooner); phones keep their own cap
+    const conc = !PM_LOWMEM && performance.now() - born < 12000 ? PM_T1_CONC + 2 : PM_T1_CONC;
+    while (!dead && running < conc) {
       const atlas = PM_ATLAS_CACHE.get(col); if (!atlas) return;
-      let best = -1, bestN = 0;
-      need.forEach((set, g) => { if (set.size > bestN) { best = g; bestN = set.size; } });
+      let best = -1, bestR = 1e12;
+      need.forEach((set, g) => { const r = rank.get(g); if (r < bestR) { best = g; bestR = r; } });   // the group holding the painting nearest the middle goes first (center -> visible -> the ring around it)
       if (best < 0) return;
       running++; inflight.add(best);
       const man = atlas.man, set = need.get(best); need.delete(best);
@@ -1608,16 +1624,19 @@ function pmAtlasTier1(onReady, col) {
     for (let k = 0; k < cells.size - cap && k < old.length; k++) { const e = old[k][1]; if (e.bm.close) e.bm.close(); cells.delete(old[k][0]); }
   }
   // list: painting indices that want a tier-1 picture this frame
-  function want(list) {
+  // list: painting indices, nearest the middle FIRST; ring: the paintings just around the screen (after the visible ones, so
+  // they never delay the first picture), nearest first too
+  function want(list, ring) {
+    if (ring && ring.length) list = list.concat(ring);
     frame++; wantedNow = list.length;
     const atlas = PM_ATLAS_CACHE.get(col); if (!atlas) return;
     const man = atlas.man;
     // groups no longer on screen drop out of the queue (they were queued by an earlier view)
-    const fresh = new Map();
-    for (const i of list) {
-      const c = cells.get(i); if (c) { c.used = frame; continue; }
+    const fresh = new Map(); rank.clear();
+    for (let r = 0; r < list.length; r++) {
+      const i = list[r], c = cells.get(i); if (c) { c.used = frame; continue; }
       const g = pmT1Group(man, i); if (g < 0 || g >= man.tier1.numGroups || failed.has(g) || inflight.has(g)) continue;
-      let s = fresh.get(g); if (!s) fresh.set(g, s = new Set()); s.add(i);
+      let s = fresh.get(g); if (!s) { fresh.set(g, s = new Set()); rank.set(g, r); } s.add(i);
     }
     need.clear(); fresh.forEach((s, g) => need.set(g, s));
     trim(); pump();
@@ -1799,6 +1818,7 @@ function pmOpen(spec, o = {}) {
   }).catch(err => {
     if (!el.isConnected) return;
     console.warn(err);
+    if (/(^|[&?])rnd=1/.test(from) && typeof hmHome === "function") return hmHome();   // a cold start that cannot load the map opens the old home instead
     el.querySelector(".pmx-wait").innerHTML = `The ${esc(colTitle.toLowerCase())} didn't load. <button class="wl" data-pmretry>Try again</button>`;
     el.querySelector("[data-pmretry]").onclick = () => pmOpen(spec, o);
   });
@@ -1828,8 +1848,35 @@ function pmMount(el, s, F) {
   let atlas = null;   // this mount's own resolved {man,bm0s} once pmAtlasLoad(F.col) lands (see draw()'s tier 0/1 passes below)
   const t1 = pmAtlasTier1(() => kick(), F.col);
   const tierH = new Map();   // i -> { t1On, f0, f1 } (pmTState) -- tier 0/1 crossfade + hysteresis memory
+  // The ring (David, 2026-10-25: "and ideally the stuff around it"): the paintings in about one extra screen on every side of
+  // what is showing, nearest first, so a small pan finds them sharp already. Bounded by the tile cache (a fraction of
+  // PM_T1_CELLS), recomputed only when the view has really moved, and handed to t1.want after the visible ones.
+  let ringFrames = 0, ringKey = "", ringList = [];
+  function ringCells() {
+    if (!lay || !lay.n || !atlas || lay.islands) return null;
+    const key = lay.key + "|" + Math.round(P[0] / 2) + "," + Math.round(P[1] / 2) + "|" + Z.toFixed(2) + "|" + Math.round(W) + "x" + Math.round(H) + "|" + drawn.length;
+    if (key === ringKey) return ringList;
+    ringKey = key; ringList = [];
+    let hw = 0, hh = 0; const seen = new Set();
+    for (const b of drawn) { seen.add(b.k); hw = Math.max(hw, Math.abs(lay.x[b.k] - P[0])); hh = Math.max(hh, Math.abs(lay.y[b.k] - P[1])); }
+    if (!seen.size || seen.size > 700) return ringList;   // zoomed far out: no tier-1 tiles to warm
+    hw = hw * 3 + 1; hh = hh * 3 + 1;
+    const cx = Math.round(P[0]), cy = Math.round(P[1]), out = [], man = atlas.man;
+    for (let y = Math.max(Math.floor(cy - hh), lay.gy0); y <= Math.min(Math.ceil(cy + hh), lay.gy0 + lay.GH - 1); y++) {
+      for (let x = Math.max(Math.floor(cx - hw), lay.gx0); x <= Math.min(Math.ceil(cx + hw), lay.gx0 + lay.GW - 1); x++) {
+        const k = lay.grid[(y - lay.gy0) * lay.GW + x - lay.gx0]; if (k < 0 || seen.has(k)) continue;
+        const i = lay.items[k]; if (i >= man.n || (atlas.missing && atlas.missing.has(i))) continue;
+        out.push([(x - P[0]) ** 2 + (y - P[1]) ** 2, i]);
+      }
+    }
+    out.sort((a, b) => a[0] - b[0]);
+    const room = Math.max(0, Math.floor(PM_T1_CELLS * .75) - seen.size);
+    ringList = out.slice(0, room).map(q => q[1]);
+    return ringList;
+  }
   pmAtlasAcquire(F.col);
-  const loadAtlas = () => pmAtlasLoad(F.col).then(a => { atlas = a; if (!dead) kick(); }).catch(() => {});
+  const coldOpen = !!s.rnd;   // a cold start (js/boot.js): if the pictures cannot load at all, the old home is the better first screen
+  const loadAtlas = () => pmAtlasLoad(F.col).then(a => { atlas = a; if (!dead) kick(); }).catch(() => { if (coldOpen && !dead && !atlas && typeof hmHome === "function") hmHome(); });
   loadAtlas();
   // a hidden tab (Instagram's browser, the Home Screen app in the background) frees its decoded sheets after 20 s and
   // re-decodes them from the HTTP cache on return; iOS kills the biggest backgrounded WebContent first
@@ -2542,7 +2589,7 @@ function pmMount(el, s, F) {
     // at the 14px threshold above (zMin() also caps how far you can zoom out), so every on-screen eligible cell
     // now gets a turn in the queue, nearest the middle first, same as before.
     imgs.want(wantImg.reverse().slice(0, 2000));
-    if (atlas) t1.want(wantT1);   // the cells that want a tier-1 picture; each sheet is decoded once, transiently, and cut into per-cell bitmaps
+    if (atlas) { wantT1.reverse(); t1.want(wantT1, wantT1.length && ++ringFrames > 2 ? ringCells() : null); }   // nearest the middle first; the ring around the screen joins from the third frame on, so it never delays the first picture. // the cells that want a tier-1 picture; each sheet is decoded once, transiently, and cut into per-cell bitmaps
 
     const c = nearestK(P[0], P[1]); setCenter(c);
   }
@@ -2843,6 +2890,9 @@ function pmMount(el, s, F) {
       if (s.on != null && s.on >= 0) { fo = { i: s.on, z: .8, open: false }; s.on = -1; }
       else { const bk = pmBestMatch(lay, s.f, F); if (bk >= 0) fo = { i: lay.items[bk], z: .8, open: false }; }
     }
+    // A cold start (js/boot.js): land on a random cluster of the whole map, at the ordinary opening zoom (z 0 = fitZoomFor, the
+    // same distance a plain open uses), with no card and no ring around the painting
+    if (s.rnd) { s.rnd = 0; if (lay.n > 300 && !lay.islands && !fo && !keepPan) fo = { i: lay.items[pmRandomCluster(lay)], z: 0, open: false, quiet: true }; }
     if (s.on != null && s.on >= 0 && lay.n && !fo) { fo = { i: s.on, z: 0, open: true }; s.on = -1; }   // z 0: fit the whole filtered set (a one-painter map opens whole)
     if (fo && lay.n && !pinned && !keepPan) {
       let fk = -1; for (let q = 0; q < lay.n; q++) if (lay.items[q] === fo.i) { fk = q; break; }
@@ -2867,7 +2917,7 @@ function pmMount(el, s, F) {
     centerK = -1; drawn = []; setCenter(lay.n ? nearestK(P[0], P[1]) : -1); chrome(); kick();
     const why = foc && foc.out ? pmOutsideWhy(s, F, fo.i) : null;
     paintNote(why ? { i: fo.i, ...why } : null);
-    if (foc) { pulseI = lay.items[foc.k]; pulseT0 = clock; }
+    if (foc && !fo.quiet) { pulseI = lay.items[foc.k]; pulseT0 = clock; }
     if (foc) lastFocus = { i: lay.items[foc.k], z: Z, open: cardOpen };
     // a brief highlight on the painting an entry point promised, so it reads as "you're here", not just a jump cut
     if (pinned && !keepPan && centerK >= 0) { pulseI = lay.items[centerK]; pulseT0 = clock; }
@@ -2969,8 +3019,10 @@ function pmMount(el, s, F) {
   function findPainters(q) {
     if (!artN) { artN = new Int32Array(F.meta.artists.length + 1); for (let i = 0; i < F.N; i++) artN[F.artist[i]]++; }
     const ql = q.toLowerCase();
-    return F.meta.artists.map((a, j) => ({ v: j + 1, name: a[0], n: artN[j + 1] })).filter(x => x.n && (" " + x.name.toLowerCase().replace(/[-'’.]/g, " ")).includes(" " + ql))   // word starts only: "monet" must not find "Simonet"
+    const strict = F.meta.artists.map((a, j) => ({ v: j + 1, name: a[0], n: artN[j + 1] })).filter(x => x.n && (" " + x.name.toLowerCase().replace(/[-'’.]/g, " ")).includes(" " + ql))   // word starts only: "monet" must not find "Simonet"
       .sort((a, b) => (b.name.toLowerCase().startsWith(ql) - a.name.toLowerCase().startsWith(ql)) || b.n - a.n).slice(0, 6);
+    if (strict.length || typeof sqFuzzyRank !== "function") return strict;
+    return sqFuzzyRank(F.meta.artists.map((a, j) => ({ v: j + 1, name: a[0], n: artN[j + 1] })).filter(x => x.n), q, x => x.name, 6).hits;   // typos: "van goh", "sargnet"
   }
   function findWorks(q) {
     if (!lay) return [];
@@ -3210,6 +3262,7 @@ function pmMount(el, s, F) {
       const mid = centerK >= 0 ? lay.items[centerK] : -1, md = mid >= 0 ? pmDetailNow(mid, F) : null;
       const list = pmList(s, F);
       paneArr.innerHTML = `
+        ${!pmSolo(s) && s.arr === "color" && (s.col || "paintings") === "paintings" ? `<button type="button" class="pmx-tofeed" data-pmshuffle><span>Shuffle to another cluster</span></button>` : ""}
         ${pmSolo(s) ? "" : `<div class="cx-sec"><b>Collection</b></div>
         <div class="hm-seg pmx-col-seg" role="radiogroup" aria-label="Collection">${PM_COLLECTIONS.map(([k, t]) => `<button class="${(s.col || "paintings") === k ? "on" : ""}" data-pmcol="${k}">${esc(t)}</button>`).join("")}</div>`}
         <div class="cx-sec"><b>Shape</b></div>
@@ -3230,6 +3283,7 @@ function pmMount(el, s, F) {
         <div class="pmx-scrub"><input type="range" min="${yrRange()[0]}" max="${yrRange()[1]}" step="${pmSolo(s) ? 1 : 5}" value="${s.upToYear == null ? yrRange()[1] : s.upToYear}" data-pmscrub aria-label="Reveal paintings up to this year"${pmSolo(s) ? ' data-solo' : ""}>
           <button class="pmx-scrub-play${scrubTimer ? " on" : ""}" data-pmscrubplay aria-label="${scrubTimer ? "Pause" : "Play"}">${scrubTimer ? PM_ICON.pause : ICON.play}</button></div>
         <p class="hm-arr-sub" data-pmscrublabel>${s.upToYear == null ? "Showing every year" : `Up to ${s.upToYear}${s.upToYear >= yrRange()[1] ? "" : " (undated paintings join at the end)"}`}</p>`;
+      const shf = q$("[data-pmshuffle]"); if (shf) shf.onclick = () => { buzz(6); close(); s.rnd = 1; s.f = scopedFresh(); s.fav = 0; s.upToYear = null; if (scrubTimer) { clearInterval(scrubTimer); scrubTimer = 0; } rebuild({ nofocus: true }); };   // another random cluster of the whole map, at the ordinary opening distance
       qa$("[data-pmcol]").forEach(b => b.onclick = () => {
         const col = b.dataset.pmcol; if (col === (s.col || "paintings")) return;
         buzz(6); close();

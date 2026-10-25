@@ -1191,7 +1191,7 @@ scenario("home", "View sheet filters · Surprise me · Search", async t => {
   const q = t.$(".sr-input"); t.expect(q === t.d.activeElement, "the search field did not focus");
   q.value = "teal"; q.dispatchEvent(new t.w.Event("input", { bubbles: true }));
   await t.tick(); await t.sleep(300);
-  t.expect(t.$(".sr-colors .sr-color"), "searching \"teal\" found no color results");
+  t.expect(t.$(".sq-row .sq-sw"), "searching \"teal\" found no color results");
   t.d.querySelector(".scrim").dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
   await t.sleep(400);
   t.expect(cv.isConnected, "the honeycomb was replaced while searching");
@@ -6722,6 +6722,30 @@ scenario("paintmap", "the map lays out, a tap glides a painting to the middle, t
 // instead of reloading the position." PM_PAN already tracks pan-on-every-center-change and build() restores it,
 // but nothing had checked an ARBITRARY (non-grid-snapped) pan/zoom survives a real Back round trip, card state
 // included -- _qaSetPZ plants one precisely (a real drag would be slow and imprecise to land exactly).
+// David, 2026-10-25: "When you open the app it should open to a random cluster of paintings in the big map of 200k paintings ...
+// all the visible paintings in that cluster should be loaded." A cold start (no address) opens the painting map on a random
+// painting at the ordinary opening zoom; every visible tile is drawn from its sharper tier (none left as a flat swatch)
+// and the ring around the screen follows. Two cold opens land on different clusters. Back from a painting returns to the map.
+scenario("paintmap", "a cold open (no address) lands on the painting map at a random cluster with every visible tile loaded", async t => {
+  const centers = [];
+  for (let n = 0; n < 2; n++) {
+    await t.open("", { settle: 800 });
+    await t.waitFor(() => t.w.PM_CTRL && t.$(".pmx-cv") && t.w.PM_CTRL.count > 150000 && t.w.PM_CTRL.drawn > 20, 30000, "the cold open to lay out the painting map");
+    t.expect(/^#\/paintings\/map/.test(t.w.location.hash), `a cold open should be the painting map, got "${t.w.location.hash}"`);
+    await t.waitFor(() => { const q = t.w.PM_CTRL._qaTier1Stats(); return q.want > 8 && q.have >= q.want * .95; }, 40000, "every visible tile to be loaded (no flat placeholders)");
+    const z = t.w.PM_CTRL._qaPZ().Z;
+    t.expect(z >= .9 && z <= 1.3, `the cold open should use the map's ordinary opening zoom, Z=${z}`);
+    centers.push(t.w.PM_CTRL.center);
+  }
+  t.expect(centers[0] !== centers[1], `two cold opens landed on the same painting (${centers[0]})`);
+  // Back from a painting opened here lands on this same cluster (the cold map is the app's origin map)
+  const cv = t.$(".pmx-cv"), r = cv.getBoundingClientRect(), c1 = t.w.PM_CTRL.center;
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2, { wait: 900 });
+  await t.waitFor(() => /#\/gallery\//.test(t.w.location.hash), 10000, "the middle painting to open");
+  await t.waitFor("[data-back]", 8000, "Back on the painting page");
+  await t.click("[data-back]", { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL && t.$(".pmx-cv") && t.w.PM_CTRL.center === c1, 15000, "Back to the same cold-open cluster");
+});
 scenario("paintmap", "Back from a painting restores the exact prior pan/zoom, not a re-fit", async t => {
   await t.open("#/paintings/map?arr=color", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
@@ -8880,3 +8904,57 @@ scenario("painters", "painter's color map: the standard map (circles, same size,
 });
 
 
+
+
+// ---- search (2026-10-25): one engine (js/sq*.js) behind the app search; typos, years, painters and combinations ----
+async function sqType(t, text, ready) {
+  if (!t.$(".sr-sheet")) { t.ev("searchOpen()"); await t.waitFor(".sr-input", 4000, "the search sheet"); }
+  const q = t.$(".sr-input"); q.value = text; q.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+  await t.waitFor(() => t.ev("sqWarmed()") && !t.$(".sq-loading") && ready.test((t.$(".sq-row") || {}).textContent || ""), 25000, `a suggestion for "${text}" (rows: ${t.$$(".sq-row").map(r => r.textContent).join(" | ").slice(0, 200)})`);
+  await t.sleep(250);   // the rows are final (the warm-up redraw has happened)
+}
+for (const [typed, want, slug] of [["vermillion", /Vermilion/, /#\/(color|name)\/vermilion$/], ["celedon", /Celadon/, /#\/(color|name)\/celadon$/], ["perwinkle", /Periwinkle/, /#\/(color|name)\/periwinkle$/], ["faded purple", /Faded Purple/, /#\/(color|name)\/faded-purple$/]]) {
+  scenario("search", `typing "${typed}" finds its color page in one tap`, async t => {
+    await t.open("#/today", { settle: 800 });
+    await sqType(t, typed, want);
+    await t.click(t.$(".sq-row"), { wait: 1200 });
+    await t.waitFor(() => slug.test(t.w.location.hash), 12000, `the page for "${typed}" (at ${t.w.location.hash})`);
+  });
+}
+scenario("search", "typing 'van goh' finds Van Gogh's page in one tap", async t => {
+  await t.open("#/today", { settle: 800 });
+  await sqType(t, "van goh", /Vincent van Gogh/);
+  await t.click(t.$(".sq-row"), { wait: 1200 });
+  await t.waitFor(() => /#\/painter\/vincent-van-gogh/.test(t.w.location.hash), 12000, `Van Gogh's page (at ${t.w.location.hash})`);
+});
+for (const [typed, y0, y1] of [["1870s to 80s", 1870, 1889], ["1870-1880", 1870, 1880]]) {
+  scenario("search", `typing "${typed}" offers that span and one tap opens the map filtered to it`, async t => {
+    await t.open("#/today", { settle: 800 });
+    await sqType(t, typed, new RegExp(`${y0}.${y1}`));
+    await t.waitFor(() => /\d[\d,]* paintings/.test((t.$(".sq-row") || {}).textContent || ""), 25000, "its count");
+    await t.click(t.$(".sq-row"), { wait: 1500 });
+    await t.waitFor(() => /paintings\/map/.test(t.w.location.hash) && t.w.location.hash.includes("y0=" + y0) && t.w.location.hash.includes("y1=" + y1), 20000, `the map for ${y0}-${y1} (at ${t.w.location.hash})`);
+  });
+}
+for (const [typed, want, hashHas] of [["dutch portraits", /Show [\d,]+ paintings/, ["co=Netherlands", "subj="]], ["blue 1870s", /Show [\d,]+ paintings/, ["c=", "y0=1870"]]]) {
+  scenario("search", `typing "${typed}" offers "Show N paintings" and one tap opens the filtered map`, async t => {
+    await t.open("#/today", { settle: 800 });
+    await sqType(t, typed, want);
+    await t.click(t.$(".sq-row"), { wait: 1500 });
+    await t.waitFor(() => /paintings\/map/.test(t.w.location.hash) && hashHas.every(x => t.w.location.hash.includes(x)), 20000, `the filtered map (at ${t.w.location.hash})`);
+  });
+}
+scenario("search", "the map opened from Faded purple's page keeps that color and its name (not Dusty violet)", async t => {
+  await t.open("#/color/faded-purple", { settle: 1500 });
+  await t.waitFor(".cp-page", 12000, "the Faded purple page");
+  const hex = t.ev(`document.querySelector(".cp-page").style.getPropertyValue("--c")`).trim().toLowerCase().replace("#", "");
+  await t.waitFor("[data-fdmap]", 12000, "the page's Map button");
+  const mb = t.$$("[data-fdmap]").filter(b => { const r = b.getBoundingClientRect(); return r.width > 0 && r.top >= 0 && r.bottom <= 812; })[0];
+  t.expect(mb, "no visible Map button on the page");
+  await t.click(mb, { wait: 1500 });
+  await t.waitFor(() => /paintings\/map/.test(t.w.location.hash), 20000, "the painting map");
+  const h = decodeURIComponent(t.w.location.hash);
+  t.expect(h.includes("c=" + hex), `the map is not on the page's color ${hex}: ${h}`);
+  await t.waitFor(() => /faded purple/i.test(t.d.body.innerText), 15000, "the map to call the color Faded purple");
+  t.expect(!/dusty violet/i.test(t.d.body.innerText), "the map still names it Dusty violet");
+});

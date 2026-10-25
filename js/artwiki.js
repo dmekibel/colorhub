@@ -228,7 +228,8 @@ function awSearchHTML(s, again) {
   if (!AW.ready) { awLoad().then(() => again && again()).catch(() => {}); return ""; }
   const norm = t => routeSlug(t).replace(/-/g, ""), q = norm(s);
   if (q.length < 2) return "";
-  const hits = AW.list.filter(m => norm(m.n).includes(q)).slice(0, 6);
+  let hits = AW.list.filter(m => norm(m.n).includes(q)).slice(0, 6);
+  if (!hits.length && typeof sqFuzzyRank === "function") hits = sqFuzzyRank(AW.list, s, m => m.n, 6).hits;   // "van goh", "monnet"
   return hits.length ? `<div class="sec-head"><b>Painters</b><span>${hits.length}${hits.length === 6 ? "+" : ""}</span></div>${hits.map(m => `<button class="aw-res" data-awpainter="${m.slug}"><b>${esc(m.n)}</b><span>${[m.b != null ? awY(m.b) + "–" + (m.d != null ? awY(m.d) : "") : m.y0 ? m.y0 + "–" + m.y1 : "", m.co].filter(Boolean).join(" · ")}</span><em>${m.k}</em></button>`).join("")}` : "";
 }
 
@@ -1174,7 +1175,8 @@ function awFinder(host, pick, opts = {}) {
   const inp = host.querySelector("input"), res = host.querySelector(".aw-results");
   const norm = s => routeSlug(s).replace(/-/g, "");
   const draw = () => {
-    const q = norm(inp.value), list = q ? AW.list.filter(m => norm(m.n).includes(q)).slice(0, 24) : AW.list.slice(0, opts.n || 10);
+    const q = norm(inp.value); let list = q ? AW.list.filter(m => norm(m.n).includes(q)).slice(0, 24) : AW.list.slice(0, opts.n || 10);
+    if (q && !list.length && typeof sqFuzzyRank === "function") list = sqFuzzyRank(AW.list, inp.value, m => m.n, 24).hits;
     res.innerHTML = list.map(m => `<button class="aw-res" data-pick="${m.slug}"><b>${esc(m.n)}</b><span>${[m.b != null ? awY(m.b) + "–" + (m.d != null ? awY(m.d) : "") : m.y0 ? m.y0 + "–" + m.y1 : "", m.co].filter(Boolean).join(" · ")}</span><em>${m.k}</em></button>`).join("") || `<p class="fine">No painter by that name.</p>`;
   };
   inp.oninput = draw; draw();

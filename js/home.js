@@ -1275,7 +1275,12 @@ async function l18Resolve(q) {
   L18_PAINTERS = L18_PAINTERS || await l18Get("data/artists/meta.json").then(d => d && d.a ? Object.entries(d.a).map(([slug, a]) => ({ slug, n: a.n, k: a.k || 0, w: a.n.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").split(/[\s.-]+/) })) : []);
   const qw = ql.normalize("NFD").replace(/[̀-ͯ]/g, "").split(" ");
   const p = L18_PAINTERS.filter(a => qw.every(x => a.w.some(w => w.startsWith(x)))).sort((a, b) => b.k - a.k)[0];
-  if (!p) return null;
+  if (!p) {   // a typo or another spelling of a color name ("celedon", "perwinkle", "dustyviolet"): fly to the best name, saying so
+    if (typeof sqColorSearch !== "function") return null;
+    await sqLoad();
+    const c = sqColorSearch(ql, 1).hits[0]; if (!c) return null;
+    return { h: c.h, hint: `${l18Sw([c.h])}<span>Did you mean <b>${esc(c.n)}</b>?</span>`, say: o => `${c.n} · nearest here: ${o.n}` };
+  }
   const A = await l18Get(`data/analysis/artists/${p.slug}.json`); if (!A) return null;
   const names = (A.signature || []).map(x => x.name).concat(...(A.clusters || []).map(c => c.colors || []));
   const hs = l18Hexes(names); if (!hs.length) return null;

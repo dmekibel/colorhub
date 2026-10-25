@@ -340,7 +340,7 @@ function fdMount(host, o) {
   let curRes = null, moreBusy = false, memoFilled = false, lastN = 0, onCount = null, curEnd = "", curMap = "", curLead = "", eff = st.chip, items = [], shown = 0, tok = 0, built = false, gone = false, fk = 0;
   let W = 0, cols = 2, colW = 0, gap = 12, vgap = 18, txt = 52, top = null, col = null, hh = null, ends = [], pinSkew = null, dense = false, capPct = false, zoom = null;
   const VKEY = isColor ? "colorhub-feed-view-color" : "colorhub-feed-view";
-  const viewLoad = () => { try { const v = JSON.parse(localStorage.getItem(VKEY) || "null") || {}; return { cols: v.cols | 0, dcols: v.dcols | 0, caps: v.caps === undefined ? true : !!v.caps }; } catch (e) { return { cols: 0, dcols: 0, caps: true }; } };
+  const viewLoad = () => { try { const v = JSON.parse(localStorage.getItem(VKEY) || "null") || {}; return { cols: v.cols | 0, dcols: v.dcols | 0, caps: !!v.caps }; } catch (e) { return { cols: 0, dcols: 0, caps: false }; } };
   const view = viewLoad();
   const viewSave = () => { try { localStorage.setItem(VKEY, JSON.stringify(view)); } catch (e) {} };
   const wide = () => typeof glDesk === "function" && glDesk();
@@ -755,7 +755,7 @@ function fdMount(host, o) {
         if (slugs.length) spec += `&p=${slugs.slice(0, 24).join(",")}`;
       }
       const S = FDS.paintings, win = FDS.era.win, y = G.year[seed];
-      spec += `&c=${sub.hex.slice(1).toLowerCase()}&cm=all&t=${eff === "paintings" ? Math.max(2, S.tol) : 8}&m=0&nm=${encodeURIComponent(sub.name)}`;
+      spec += `&c=${sub.hex.slice(1).toLowerCase()}&cm=all&t=${eff === "paintings" ? Math.max(2, S.tol) : 8}&m=0&nm=${encodeURIComponent(sub.tapped && typeof rpYoursName === "function" ? rpYoursName(sub.name, sub.hex, sub.tapped) : sub.name)}`;
       if (eff === "paintings" && (S.y0 > 1300 || S.y1 < 2000)) spec += `&y0=${S.y0}&y1=${S.y1}`;
       if (eff === "era" && y !== GL_UNDATED) spec += `&y0=${Math.floor(y / 10) * 10 - win}&y1=${Math.floor(y / 10) * 10 + win}`;
       if (eff === "place") { const F = await fdFacets().catch(() => null); const c = F && F.country[seed]; if (c) spec += `&co=${encodeURIComponent(F.meta.countries[c - 1])}`; }

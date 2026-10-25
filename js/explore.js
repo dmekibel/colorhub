@@ -439,7 +439,7 @@ function explorePager() {
     const b = e.target.closest("[data-go]"), s = e.target.closest("[data-part]"), part = b ? b.dataset.go : s && s.dataset.part; if (!part) return;
     buzz(6); part === "all" ? exploreForYou() : openPart(part);
   });
-  el.querySelector("[data-search]").onclick = () => exploreSearchSheet();
+  el.querySelector("[data-search]").onclick = () => (typeof searchOpen === "function" ? searchOpen({ from: "museum" }) : exploreSearchSheet());
   // today's painting isn't a graph node (most of the daily set isn't): draw it onto the Art cover when it lands
   if (!art && tp && typeof dpLoad === "function") dpLoad().then(e => {
     const cv = e && el.isConnected && el.querySelector('.xp-cover[data-part="art"]'); if (!cv) return;
@@ -563,7 +563,7 @@ function artHome() {
     <div class="art-feed" id="artFeed"><p class="fine">Loading the gallery…</p></div>
   `, "article");
   wirePartBack(el);
-  el.querySelector("[data-search]").onclick = () => exploreSearchSheet();
+  el.querySelector("[data-search]").onclick = () => (typeof searchOpen === "function" ? searchOpen({ from: "museum" }) : exploreSearchSheet());
   el.querySelectorAll("[data-hex]").forEach(b => b.onclick = () => {
     const same = ART_UI.name === b.dataset.name;
     ART_UI = same ? { hex: null, name: "" } : { hex: b.dataset.hex, name: b.dataset.name };
@@ -594,11 +594,16 @@ function exploreSearchSheet() {
   q.addEventListener("input", () => {
     const s = q.value.trim().toLowerCase();
     if (!s) { results.innerHTML = saved.length ? `<div class="sec-head"><b>Saved</b><span>${saved.length}</span></div>${masonry(saved.map(n => pin(n)))}` : `<p class="fine">Tap ${ICON_HEART} on anything to keep it here, or start typing to search.</p>`; return; }
-    const hits = [...graph().nodes.values()].filter(n => (n.title || "").toLowerCase().includes(s)).slice(0, 40);
+    const all = [...graph().nodes.values()];
+    let hits = all.filter(n => (n.title || "").toLowerCase().includes(s)).slice(0, 40);
+    if (!hits.length && typeof sqFuzzyRank === "function") hits = sqFuzzyRank(all.filter(n => n.title), s, n => n.title, 40).hits;   // typos: "monnet", "perwinkle"
     const painters = typeof awSearchHTML === "function" ? awSearchHTML(s, () => q.dispatchEvent(new Event("input"))) : "";   // painters, from the art wiki (js/artwiki.js)
-    results.innerHTML = painters + (hits.length ? masonry(hits.map(n => pin(n))) : painters ? "" : `<p class="fine">Nothing called that yet.</p>`);
+    const cm = typeof sqColorSearch === "function" ? sqColorSearch(s, 8) : { hits: [] };   // every archive and alternate color name, one tap to its page
+    const cols = cm.hits.length ? `<div class="sec-head"><b>Colors</b><span>${cm.didYouMean ? "Did you mean " + esc(cm.didYouMean) + "?" : ""}</span></div><div class="sr-colors">${cm.hits.map(c => `<button class="sr-color" data-sr-slug="${esc(c.alt ? c.n : c.to)}"><i style="background:${c.h}"></i><b>${esc(c.n)}</b></button>`).join("")}</div>` : "";
+    results.innerHTML = cols + painters + (hits.length ? masonry(hits.map(n => pin(n))) : painters ? "" : `<p class="fine">Nothing called that yet.</p>`);
   });
-  results.addEventListener("click", e => { const p = e.target.closest("[data-pin]"); if (p) { close(); closeup(graph().nodes.get(p.dataset.pin)); } });
+  if (typeof sqLoad === "function") sqLoad().then(() => { if (q.isConnected && q.value.trim()) q.dispatchEvent(new Event("input")); });
+  results.addEventListener("click", e => { const sl = e.target.closest("[data-sr-slug]"); if (sl) { close(); location.hash = "#/color/" + routeSlug(sl.dataset.srSlug); return; } const p = e.target.closest("[data-pin]"); if (p) { close(); closeup(graph().nodes.get(p.dataset.pin)); } });
   setTimeout(() => q.focus(), 260);
 }
 
@@ -681,6 +686,8 @@ const xFallbackTab = () => ["learn", "gym", "explore", "studio", "feed"].include
 function xToOrigin() {
   const r = xFallbackTab();
   if (r) return go(r);
+  // the cold-start painting map is the app's origin (js/boot.js coldMap): back out onto it, where you left it (its pan is kept)
+  if (X_ROOT === "pmap" && typeof pmGo === "function") { if (document.querySelector(".screen.pmx,.pmx")) return; return pmGo("arr=color"); }
   X_ROOT = null;
   return typeof hmHome === "function" ? hmHome() : go("learn");
 }

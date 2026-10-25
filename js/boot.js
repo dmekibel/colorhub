@@ -16,8 +16,24 @@ function bootStart() {
   // places the learner at the beginning of the path (the same result as the test's "start at the beginning"), so no
   // screen anywhere sends them to welcome(); the placement test stays reachable from Learn (#/welcome).
   if (!S.placed) { S.placed = { tier: 2, at: today(), auto: true }; S.start = 0; save(); }
-  if (!openRoute(location.hash, true)) hmHome();
+  if (!openRoute(location.hash, true)) { if (!/^#?\/?$/.test(location.hash) || !coldMap()) hmHome(); }
   prefetchWiki();
+}
+// A cold start (no address, not screenshot mode, not a deep link) opens the painting map on a RANDOM cluster of the whole
+// ~206k-painting map, at the map's ordinary opening zoom (David, 2026-10-25). No intro or placement stands in front of it
+// (S.placed is set above; the placement test stays in Learn). Every cold open is a new cluster, new and returning users alike.
+// The atlas starts loading at once, beside the map's own data, and the map draws every tile blurred first (tier 0), then
+// sharpens from the middle outward (js/paintmap.js). If the map cannot load, the old home opens instead (hmHome).
+function coldMap() {
+  if (typeof pmLoad !== "function") return false;
+  S.hm = S.hm || {}; S.hm.mode = "paintings";
+  pmLoad().then(() => {
+    if (typeof pmAtlasLoad === "function") pmAtlasLoad("paintings").catch(() => {});
+    X_ROOT = "pmap";   // Back from a page opened here runs out onto this map, where you left it (js/explore.js xToOrigin)
+    ROUTE_REPLACE = true;
+    pmOpen("arr=color&rnd=1", { fresh: true });
+  }).catch(e => { console.warn(e); hmHome(); });
+  return true;
 }
 if (document.readyState === "loading") addEventListener("DOMContentLoaded", bootStart, { once: true });
 else bootStart();
