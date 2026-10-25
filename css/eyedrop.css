@@ -11,7 +11,8 @@
 
 /* the preview: an opaque card, rounded 10px; a medium close-up in a square with the area outlined and a crosshair,
    the live swatch and name under it. ~120px, 104-140px with the screen. */
-.eyd-prev{--pv:clamp(104px,28vw,140px);position:absolute;width:var(--pv);padding:0;border-radius:10px;overflow:hidden;background:var(--surface-3,#1d1b18);
+.eyd-prev[hidden]{display:none}
+.eyd-prev{--pv:clamp(150px,43vw,210px);position:absolute;left:10px;top:10px;width:var(--pv);padding:0;border-radius:10px;overflow:hidden;background:var(--surface-3,#1d1b18);
   box-shadow:0 0 0 1.5px rgba(236,232,223,.85),0 0 0 3px rgba(0,0,0,.55),0 8px 22px rgba(0,0,0,.5)}
 .eyd-prev-sq{position:relative;width:var(--pv);height:var(--pv);background:#0b0a09}
 .eyd-prev-sq canvas{display:block;width:100%;height:100%}
@@ -20,9 +21,9 @@
 .eyd-prev-x::before,.eyd-prev-x::after{content:"";position:absolute;background:rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(0,0,0,.6)}
 .eyd-prev-x::before{left:-9px;top:-.5px;width:18px;height:1px}
 .eyd-prev-x::after{top:-9px;left:-.5px;height:18px;width:1px}
-.eyd-prev-info{display:flex;align-items:center;gap:7px;padding:7px 8px;min-height:36px}
+.eyd-prev-info{display:flex;align-items:center;gap:7px;padding:9px 10px;min-height:44px}
 .eyd-prev-sw{flex:none;width:18px;height:18px;border-radius:5px;background:var(--c,#888);box-shadow:inset 0 0 0 1px rgba(236,232,223,.3)}
-.eyd-prev-name{min-width:0;font:400 14px/1.15 var(--serif);color:var(--ink,#ECE8DF);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.eyd-prev-name{min-width:0;font:400 16px/1.2 var(--serif);color:var(--ink,#ECE8DF);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
 
 /* the sample-size row, below the picture */
 .eyd-sizebar{margin:10px auto 0;max-width:420px;width:100%;padding:0 12px;box-sizing:border-box}

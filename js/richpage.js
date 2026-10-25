@@ -366,6 +366,7 @@ function colorFocus(colors, opts = {}) {
     if (!multi || e.clientY - y0 > 60) return close();
     if (e.target.closest(".cf-close")) return close();
     const band = e.target.closest(".cf-band");
+    if (band && opts.noOpen) return close();   // a caller on a working screen (Look closer's Pick) keeps the person there
     if (band && typeof openTappedColor === "function") { const hex = band.style.getPropertyValue("--c").trim(); close(); openTappedColor(hex); }
   });
   ov.addEventListener("pointercancel", () => { dragging = false; });
