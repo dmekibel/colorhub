@@ -597,6 +597,14 @@ function fdMount(host, o) {
     leave(); buzz(6); pmGo(spec);
   }
   $t("[data-fdmap]").onclick = openMap;
+  // the Settings sheet is a half-height panel with no dimming (same shape as the painting map's View sheet): the feed above stays visible and scrolls, so each change shows live
+  function fsHalf(sh) {
+    sh.classList.add("fs-half");
+    const sc = sh.previousElementSibling; if (sc && sc.classList.contains("scrim")) sc.classList.add("hm-scrim-clear");
+    const x = document.createElement("button"); x.type = "button"; x.className = "iconq fs-x"; x.setAttribute("aria-label", "Close"); x.innerHTML = ICON.x;
+    x.onclick = () => { buzz(4); const c = document.querySelector(".scrim.hm-scrim-clear"); if (c) c.dispatchEvent(new PointerEvent("pointerdown")); };
+    sh.querySelector(".fs-head").appendChild(x);
+  }
   function openSettings() {
     if (document.querySelector(".fs-sheet")) return;
     tools.classList.add("away");
@@ -619,7 +627,8 @@ function fdMount(host, o) {
     const capsSw = `<div class="fs-c fs-tg"><p>Show painter and year</p><button type="button" class="fs-switch" role="switch" aria-checked="${!!view.caps}" data-fscaps><i></i></button></div>`;
     const size = capsSw + `<div class="fs-c"><div class="fs-row"><p>Size</p><b data-fs-out="size"></b></div><input type="range" min="1" max="${mx}" step="1" value="${cols}" data-fssize aria-label="Size"><div class="fs-prev" data-fs-prev></div></div>`;
     const title = ({ paintings: "Paintings", era: "Era", place: "Place" })[kind] || "Keep exploring";
-    const { sh, close } = sheet(`<div class="fs-sheet"><div class="fs-head"><h3>${title}</h3><span class="fs-count" data-fs-count aria-live="polite"></span><button type="button" class="fs-reset" data-fs-reset${kind === "none" ? " hidden" : ""}>Reset</button></div><div class="fs-scroll">${body}${size}</div></div>`);
+    const { sh, close } = sheet(`<div class="fs-sheet"><div class="fs-head"><h3>${title}</h3><span class="fs-count" data-fs-count aria-live="polite"></span><button type="button" class="fs-reset" data-fs-reset${kind === "none" ? " hidden" : ""}>Reset</button></div><div class="fs-scroll">${body}${size}</div></div>`, { lock: false });
+    fsHalf(sh); floatSync();
     const q = s2 => sh.querySelector(s2), out = (k, t) => { const o = q(`[data-fs-out="${k}"]`); if (o) o.textContent = t; };
     const fill = r => { const lo = +r.min, hi = +r.max; r.style.setProperty("--p", ((r.value - lo) / (hi - lo) * 100) + "%"); };
     const countEl = q("[data-fs-count]"), showCount = n => { if (countEl) countEl.textContent = (eff === "paintings" || eff === "era" || eff === "place" || !isColor) && n ? `${n.toLocaleString("en-US")} paintings` : ""; };

@@ -546,7 +546,13 @@ html.desk .fd-bar{top:calc(var(--dkn,60px) - 1px)}
 .fd-ic:active{transform:scale(.95)}
 .fd-ic i{position:absolute;top:7px;right:7px;width:9px;height:9px;border-radius:50%;background:var(--paper);box-shadow:0 0 0 2px var(--s2,#1F1D18)}
 /* the settings sheet */
-.fs-sheet{display:flex;flex-direction:column;gap:8px;max-height:min(78vh,720px)}
+.fs-sheet{display:flex;flex-direction:column;gap:8px;min-height:0;flex:1}
+/* half-height, no dimming: the feed above stays visible and scrollable (the scrim is click-through, css/home.css .hm-scrim-clear) */
+.sheet.fs-half{display:flex;flex-direction:column;height:min(45dvh,460px);max-height:min(45dvh,460px);overflow:hidden;padding-bottom:0;z-index:70}
+.fs-half>.grab{flex:none}
+.fs-half .fs-scroll{flex:1;min-height:0;padding-bottom:calc(var(--bottom,0px) + 16px);overscroll-behavior:contain}
+.fs-x{flex:none;width:44px;height:44px;background:var(--surface-2)}
+.fs-head .fs-reset{margin-right:0}
 .fs-head{display:flex;align-items:baseline;gap:10px}
 .fs-head h3{font:400 26px/1.1 var(--serif);margin:0}
 .fs-count{font:500 15px/1 var(--sans);color:var(--soft);font-variant-numeric:tabular-nums}

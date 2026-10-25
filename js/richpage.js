@@ -318,10 +318,7 @@ function colorFocus(colors, opts = {}) {
     // David, 2026-10-09: "the color's name is in a small, ugly font -- not as pretty as before going full screen"
     // -- the app's own display type (the serif display face at a generous size), the hex quietly beneath it in
     // the sans, same contrast-aware ink (data-ink, already set above) either way.
-    // the lens (David, 2026-10-25): the same color alone, then on white, grey and black. Its surroundings change how it looks, and seeing that
-    // happen is the lesson. The color becomes a patch in the middle; the name's ink follows the surround.
-    ov.innerHTML = `<div class="cf-patch" aria-hidden="true"></div><div class="rp-focus-tag"><p class="rp-focus-tag-name">${esc(name)}</p><p class="rp-focus-tag-hex">${esc(String(hex).toUpperCase())}</p></div>
-      <div class="cf-surr" role="group" aria-label="Show it on a surround">${[["", "Alone"], ["#FFFFFF", "On white"], ["#808080", "On grey"], ["#000000", "On black"]].map(([bg, t], i) => `<button type="button" data-surr="${bg}" aria-pressed="${i === 0}"${i === 0 ? ` class="on"` : ""}>${t}</button>`).join("")}</div>`;
+    ov.innerHTML = `<div class="rp-focus-tag"><p class="rp-focus-tag-name">${esc(name)}</p><p class="rp-focus-tag-hex">${esc(String(hex).toUpperCase())}</p></div>`;
   } else {
     // 2+ colors: full-height (or, stacked, full-width) bands, each with its own name + hex in its own corner,
     // by its own contrast -- no single big name makes sense once there's more than one color to look at alone
@@ -366,15 +363,6 @@ function colorFocus(colors, opts = {}) {
   ov.addEventListener("pointerdown", e => { dragging = true; y0 = e.clientY; });
   ov.addEventListener("pointerup", e => {
     if (!dragging) return; dragging = false;
-    const sb = e.target.closest(".cf-surr button");
-    if (sb) {   // the lens: pick a surround, never close
-      const bg = sb.dataset.surr;
-      ov.querySelectorAll(".cf-surr button").forEach(x => { const on = x === sb; x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); });
-      ov.classList.toggle("cf-on-surround", !!bg);
-      if (bg) { ov.style.setProperty("--surr", bg); ov.setAttribute("data-ink", ink(bg)); } else ov.setAttribute("data-ink", ink(colors[0].hex));
-      buzz(4); return;
-    }
-    if (e.target.closest(".cf-surr")) return;
     if (!multi || e.clientY - y0 > 60) return close();
     if (e.target.closest(".cf-close")) return close();
     const band = e.target.closest(".cf-band");

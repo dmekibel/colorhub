@@ -474,7 +474,10 @@ function awWorksWire(el, slug, m, A, P, setTabMemo) {
       + `<div class="fs-c" data-wksubjrow hidden><div class="fs-row"><p>Subject</p></div><div class="fs-multi" data-wksubjchips></div></div>`
       + `<div class="fs-c"><div class="fs-row"><p>Size</p><b data-fs-out="size"></b></div><input type="range" min="2" max="${mx}" step="1" value="${nCols()}" data-wksize aria-label="Size"><div class="fs-prev" data-fs-prev></div></div>`
       + (desk() ? "" : `<div class="fs-c fs-tg"><p>Palettes under the pictures</p><button type="button" class="fs-switch" role="switch" aria-checked="true" data-wkpal><i></i></button></div>`);
-    const { sh, close } = sheet(`<div class="fs-sheet"><div class="fs-head"><h3>Their work</h3><span class="fs-count" data-fs-count aria-live="polite"></span><button type="button" class="fs-reset" data-fs-reset>Reset</button></div><div class="fs-scroll">${body}</div></div>`);
+    const { sh, close } = sheet(`<div class="fs-sheet"><div class="fs-head"><h3>Their work</h3><span class="fs-count" data-fs-count aria-live="polite"></span><button type="button" class="fs-reset" data-fs-reset>Reset</button></div><div class="fs-scroll">${body}</div></div>`, { lock: false });
+    sh.classList.add("fs-half");
+    { const sc = sh.previousElementSibling; if (sc && sc.classList.contains("scrim")) sc.classList.add("hm-scrim-clear"); }
+    { const x = document.createElement("button"); x.type = "button"; x.className = "iconq fs-x"; x.setAttribute("aria-label", "Close"); x.innerHTML = ICON.x; x.onclick = () => { buzz(4); close(); }; sh.querySelector(".fs-head").appendChild(x); }
     const q = s2 => sh.querySelector(s2), out = (k, t) => { const o = q(`[data-fs-out="${k}"]`); if (o) o.textContent = t; };
     const fill = r => { const lo = +r.min, hi = +r.max; r.style.setProperty("--p", ((r.value - lo) / (hi - lo) * 100) + "%"); };
     const countEl = q("[data-fs-count]");
