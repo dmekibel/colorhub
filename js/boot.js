@@ -19,21 +19,13 @@ function bootStart() {
   if (!openRoute(location.hash, true)) { if (!/^#?\/?$/.test(location.hash) || !coldMap()) hmHome(); }
   prefetchWiki();
 }
-// A cold start (no address, not screenshot mode, not a deep link) opens the painting map on a RANDOM cluster of the whole
-// ~206k-painting map, at the map's ordinary opening zoom (David, 2026-10-25). No intro or placement stands in front of it
-// (S.placed is set above; the placement test stays in Learn). Every cold open is a new cluster, new and returning users alike.
-// The atlas starts loading at once, beside the map's own data, and the map draws every tile blurred first (tier 0), then
-// sharpens from the middle outward (js/paintmap.js). If the map cannot load, the old home opens instead (hmHome).
+// A cold start (no address, not screenshot mode, not a deep link) opens the color map as a honeycomb, golden spiral, most vivid in the middle
+// (David, 2026-10-25). No intro or placement stands in front of it (S.placed is set above; the placement test stays in Learn).
 function coldMap() {
-  if (typeof pmLoad !== "function") return false;
-  S.hm = S.hm || {}; S.hm.mode = "paintings";
-  pmLoad().then(() => {
-    if (typeof pmAtlasLoad === "function") pmAtlasLoad("paintings").catch(() => {});
-    X_ROOT = "pmap";   // Back from a page opened here runs out onto this map, where you left it (js/explore.js xToOrigin)
-    ROUTE_REPLACE = true;
-    pmOpen("arr=color&rnd=1", { fresh: true });
-  }).catch(e => { console.warn(e); hmHome(); });
-  return true;
+  // David, 2026-10-25: the app opens on the color map as a honeycomb, golden spiral from the middle out, the most vivid colors in the centre.
+  // (The random painting-map cluster open, pmOpen("arr=color&rnd=1"), is kept in js/paintmap.js and can be wired back here.)
+  S.hm = S.hm || {}; S.hm.mode = "colors"; S.hm.arr = "sunflower"; S.hm.ord = { ...(S.hm.ord || {}), sunflower: "vivid" }; S.hm.style = "honeycomb";
+  return false;   // false = the caller opens hmHome() with those settings
 }
 if (document.readyState === "loading") addEventListener("DOMContentLoaded", bootStart, { once: true });
 else bootStart();
