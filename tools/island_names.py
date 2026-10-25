@@ -369,6 +369,13 @@ def main(sfx=""):
                 if best is not None: break
             if best is None: continue
             picked.append((int(best),)); used_artists.add(rows[best][2])
+        if len(picked) < 3:   # small or anonymous islands (manuscript pages have no painter): relax the painter/year/aspect rules, keep the photo rule
+            for i in near:
+                if len(picked) >= 3: break
+                r = rows[i]
+                if i in [p[0] for p in picked] or (len(r) > 11 and r[11]) or not (r[9] or not str(r[5]).startswith("img/gallery/")): continue
+                if any(np.hypot(lx[i] - lx[p[0]], ly[i] - ly[p[0]]) < 6 for p in picked): continue
+                picked.append((int(i),))
         cov = []
         for (i,) in picked:
             r = rows[i]; cov.append([i, r[0], r[9] or r[5], round(float(np.exp(rec[i, 3] / 255 * 3.2 - 1.6)), 3), r[1][:80]])
