@@ -450,7 +450,8 @@ async function arfEnhance(root, art, self) {
     });
     endList = endList.filter(t => !shown.has(t.key));
   }
-  if (endList.length) {
+  // on a color page the Paintings and Elsewhere shelves already show these twins (David, 2026-10-25), so the closing strip would repeat them
+  if (endList.length && !(root.closest && root.closest(".cp-page"))) {
     const host = document.createElement("section"); host.className = "ar-seen"; host.setAttribute("aria-label", "Seen in");
     host.innerHTML = `<h3 class="ar-seen-h">Seen in</h3>`;
     const before = root.querySelector(".ar-fam, .ar-you, .ar-qs, .ar-notes");

@@ -670,3 +670,10 @@
 .cp-code-cell:active{transform:scale(.98)}
 @media (max-width:340px){.cp-code-grid{grid-template-columns:1fr}}
 .cp-page .conns.lh-empty{display:none}   /* an empty "What links here" is not shown (David, 2026-10-25): no empty sections */
+
+/* Often paired with as a rail: each pair is one card, six across, instead of a 650 px stack */
+.rc-pc-rail{gap:12px;align-items:flex-start}
+.rc-pc-rail .rc-pc{flex:none;width:248px;margin-bottom:0;scroll-snap-align:start}
+.rc-pc-rail .rc-combo-2 .rc-cb i{height:84px}
+.rc-pc-rail .rc-pc-meta{font-size:15px}
+.rc-pc-rail .rc-pc-go{font-size:15px;min-height:44px;display:inline-flex;align-items:center}

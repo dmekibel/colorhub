@@ -867,8 +867,8 @@ function rcPairedHTML(name, baseHex, baseName) {
       <p class="rc-pc-meta">${r.l.toFixed(1)}× more than chance · in ${r.n.toLocaleString()} paintings <button class="rc-pc-go" data-rc-pair="${mh.replace("#", "")}+${e.h.replace("#", "")}" data-rc-names="${esc(mn)}|${esc(e.n)}">See them</button></p></div>`;
   }).filter(Boolean);
   if (!cards.length) return "";
-  const more = cards.length > 3 ? `<details class="rc-more"><summary>${cards.length - 3} more pairings</summary>${cards.slice(3).join("")}</details>` : "";
-  return `<section class="rc-sec rc-paired"><h3>Often paired with</h3>${cards.slice(0, 3).join("")}${more}<p class="fine">How much more often two colors share a painting's palette than chance would predict, as photographed, from the gallery's 23,781 paintings.</p></section>`;
+  // a swipeable rail (David, 2026-10-25): six pairs side by side instead of three stacked and a fold of three more
+  return `<section class="rc-sec rc-paired"><h3>Often paired with</h3><div class="gl-rail rc-pc-rail">${cards.join("")}</div><p class="fine">How much more often two colors share a painting's palette than chance would predict, as photographed, from the gallery's 23,781 paintings.</p></section>`;
 }
 function rcPairedSection(name, hex) {
   const id = "rc-pair-" + Math.random().toString(36).slice(2, 8);
