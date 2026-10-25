@@ -1191,7 +1191,7 @@ scenario("home", "View sheet filters · Surprise me · Search", async t => {
   const q = t.$(".sr-input"); t.expect(q === t.d.activeElement, "the search field did not focus");
   q.value = "teal"; q.dispatchEvent(new t.w.Event("input", { bubbles: true }));
   await t.tick(); await t.sleep(300);
-  t.expect(t.$(".sr-colors .sr-color"), "searching \"teal\" found no color results");
+  t.expect(t.$(".sq-row .sq-sw"), "searching \"teal\" found no color results");
   t.d.querySelector(".scrim").dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
   await t.sleep(400);
   t.expect(cv.isConnected, "the honeycomb was replaced while searching");
@@ -8879,3 +8879,57 @@ scenario("painters", "painter's color map: the standard map (circles, same size,
 });
 
 
+
+
+// ---- search (2026-10-25): one engine (js/sq*.js) behind the app search; typos, years, painters and combinations ----
+async function sqType(t, text, ready) {
+  if (!t.$(".sr-sheet")) { t.ev("searchOpen()"); await t.waitFor(".sr-input", 4000, "the search sheet"); }
+  const q = t.$(".sr-input"); q.value = text; q.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+  await t.waitFor(() => t.ev("sqWarmed()") && !t.$(".sq-loading") && ready.test((t.$(".sq-row") || {}).textContent || ""), 25000, `a suggestion for "${text}" (rows: ${t.$$(".sq-row").map(r => r.textContent).join(" | ").slice(0, 200)})`);
+  await t.sleep(250);   // the rows are final (the warm-up redraw has happened)
+}
+for (const [typed, want, slug] of [["vermillion", /Vermilion/, /#\/(color|name)\/vermilion$/], ["celedon", /Celadon/, /#\/(color|name)\/celadon$/], ["perwinkle", /Periwinkle/, /#\/(color|name)\/periwinkle$/], ["faded purple", /Faded Purple/, /#\/(color|name)\/faded-purple$/]]) {
+  scenario("search", `typing "${typed}" finds its color page in one tap`, async t => {
+    await t.open("#/today", { settle: 800 });
+    await sqType(t, typed, want);
+    await t.click(t.$(".sq-row"), { wait: 1200 });
+    await t.waitFor(() => slug.test(t.w.location.hash), 12000, `the page for "${typed}" (at ${t.w.location.hash})`);
+  });
+}
+scenario("search", "typing 'van goh' finds Van Gogh's page in one tap", async t => {
+  await t.open("#/today", { settle: 800 });
+  await sqType(t, "van goh", /Vincent van Gogh/);
+  await t.click(t.$(".sq-row"), { wait: 1200 });
+  await t.waitFor(() => /#\/painter\/vincent-van-gogh/.test(t.w.location.hash), 12000, `Van Gogh's page (at ${t.w.location.hash})`);
+});
+for (const [typed, y0, y1] of [["1870s to 80s", 1870, 1889], ["1870-1880", 1870, 1880]]) {
+  scenario("search", `typing "${typed}" offers that span and one tap opens the map filtered to it`, async t => {
+    await t.open("#/today", { settle: 800 });
+    await sqType(t, typed, new RegExp(`${y0}.${y1}`));
+    await t.waitFor(() => /\d[\d,]* paintings/.test((t.$(".sq-row") || {}).textContent || ""), 25000, "its count");
+    await t.click(t.$(".sq-row"), { wait: 1500 });
+    await t.waitFor(() => /paintings\/map/.test(t.w.location.hash) && t.w.location.hash.includes("y0=" + y0) && t.w.location.hash.includes("y1=" + y1), 20000, `the map for ${y0}-${y1} (at ${t.w.location.hash})`);
+  });
+}
+for (const [typed, want, hashHas] of [["dutch portraits", /Show [\d,]+ paintings/, ["co=Netherlands", "subj="]], ["blue 1870s", /Show [\d,]+ paintings/, ["c=", "y0=1870"]]]) {
+  scenario("search", `typing "${typed}" offers "Show N paintings" and one tap opens the filtered map`, async t => {
+    await t.open("#/today", { settle: 800 });
+    await sqType(t, typed, want);
+    await t.click(t.$(".sq-row"), { wait: 1500 });
+    await t.waitFor(() => /paintings\/map/.test(t.w.location.hash) && hashHas.every(x => t.w.location.hash.includes(x)), 20000, `the filtered map (at ${t.w.location.hash})`);
+  });
+}
+scenario("search", "the map opened from Faded purple's page keeps that color and its name (not Dusty violet)", async t => {
+  await t.open("#/color/faded-purple", { settle: 1500 });
+  await t.waitFor(".cp-page", 12000, "the Faded purple page");
+  const hex = t.ev(`document.querySelector(".cp-page").style.getPropertyValue("--c")`).trim().toLowerCase().replace("#", "");
+  await t.waitFor("[data-fdmap]", 12000, "the page's Map button");
+  const mb = t.$$("[data-fdmap]").filter(b => { const r = b.getBoundingClientRect(); return r.width > 0 && r.top >= 0 && r.bottom <= 812; })[0];
+  t.expect(mb, "no visible Map button on the page");
+  await t.click(mb, { wait: 1500 });
+  await t.waitFor(() => /paintings\/map/.test(t.w.location.hash), 20000, "the painting map");
+  const h = decodeURIComponent(t.w.location.hash);
+  t.expect(h.includes("c=" + hex), `the map is not on the page's color ${hex}: ${h}`);
+  await t.waitFor(() => /faded purple/i.test(t.d.body.innerText), 15000, "the map to call the color Faded purple");
+  t.expect(!/dusty violet/i.test(t.d.body.innerText), "the map still names it Dusty violet");
+});

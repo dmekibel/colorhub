@@ -79,7 +79,7 @@ function xbHome() {
   `, "article xb-screen");
   el.querySelector("[data-back]").onclick = xbBack;
   onKey = e => { if (e.key === "Escape" && !document.querySelector(".sheet")) xbBack(); };
-  el.querySelector("[data-search]").onclick = () => exploreSearchSheet();
+  el.querySelector("[data-search]").onclick = () => (typeof searchOpen === "function" ? searchOpen({ from: "museum" }) : exploreSearchSheet());
   el.addEventListener("click", xbClick);
   xbLoad().then(() => { if (el.isConnected) xbRender(false); })
     .catch(() => { const b = el.querySelector("[data-xbbody]"); if (b) b.innerHTML = `<div class="xb-empty"><b>The paintings didn't load.</b><p>Check the connection, then try again.</p><button class="btn ghost" data-xbretry>Try again</button></div>`; });
