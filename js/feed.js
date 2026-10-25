@@ -213,10 +213,17 @@ function fdMount(host, o) {
   const abOf = it => it.sk || it.card || it.head ? it.ab : Math.min(2.3, Math.max(.4, G.ar[it.j]));
   const aboutEl = isColor && o.about ? o.about : null; if (aboutEl) aboutEl.remove();   // the article tab survives the feed being drawn around it
   host.innerHTML = `<div class="sec-head"><b>Keep exploring</b><span>closest first</span></div>
-    <div class="fd-bar"><div class="fd-chips" role="tablist" aria-label="What counts as related"></div><span class="fd-tools"><button type="button" class="fd-ic fd-set" data-fdset aria-label="Settings for this list" aria-haspopup="dialog"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg><i data-fdsetdot hidden></i></button><button type="button" class="fd-ic fd-mapbtn" data-fdmap aria-label="See these on the map"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/></svg></button></span></div>
+    <div class="fd-bar"><div class="fd-chips" role="tablist" aria-label="What counts as related"></div></div>
     <p class="fd-lead" aria-live="polite"></p>
     <div class="fd-grid" role="group" aria-label="${isColor ? "Paintings and more that hold this color" : "Related paintings, closest first"}"></div>
     <div class="fd-state"></div>`;
+  // Settings and Map (David, 2026-10-25: a new row above the pictures costs them room, and squeezing the chips cuts their words): a small
+  // floating pill at the bottom of the screen, only while this feed's pictures are on screen. It lives on <body> (the screen's entrance
+  // transform would pin a fixed child to the page) and goes with the screen.
+  const tools = document.createElement("div"); tools.className = "fd-float away"; tools.setAttribute("role", "group"); tools.setAttribute("aria-label", "This list");
+  tools.innerHTML = `<button type="button" class="fd-fb fd-set" data-fdset aria-haspopup="dialog"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg><span>Settings</span><i data-fdsetdot hidden></i></button><button type="button" class="fd-fb fd-mapbtn" data-fdmap ><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/></svg><span>Map</span></button>`;
+  document.body.appendChild(tools); cleanup.push(() => tools.remove());
+  const $t = sel => tools.querySelector(sel);
   const bar = host.querySelector(".fd-bar"), chipsEl = host.querySelector(".fd-chips"), lead = host.querySelector(".fd-lead"), grid = host.querySelector(".fd-grid"), state = host.querySelector(".fd-state");
   if (aboutEl) bar.insertAdjacentElement("afterend", aboutEl);
   const artTop = () => document.querySelector(isColor ? ".rp-bar" : ".gl-page > .art-top");   // the bar the chips sit under: a painting's back bar, or a color page's pinned name bar
@@ -226,7 +233,7 @@ function fdMount(host, o) {
   // ----- the About tab (a color page): the article is the first chip; the feed's own parts hide while it shows -----
   const secHead = host.querySelector(".sec-head");
   if (aboutEl && secHead) secHead.remove();   // its heading words are hidden on a color page, and the tools now ride in the bar
-  const showAbout = on => { if (!aboutEl) return; aboutEl.hidden = !on; lead.hidden = on; grid.hidden = on; state.hidden = on; if (secHead) secHead.hidden = on; host.dataset.fdTab = on ? "about" : eff; };
+  const showAbout = on => { if (!aboutEl) return; aboutEl.hidden = !on; lead.hidden = on; grid.hidden = on; state.hidden = on; if (secHead) secHead.hidden = on; host.dataset.fdTab = on ? "about" : eff; setTimeout(() => floatSync(), 30); };
   // a tab change keeps the chips where they are: if you had scrolled below the top of this section, it lands on its top
   const tabTop = force => { const a = artTop(), ah = a ? a.getBoundingClientRect().height : 0, y = host.getBoundingClientRect().top + scrollY - ah; if (force || scrollY > y + 4) scrollTo(0, Math.max(0, y)); };
   // a door from the page (js/richcolor.js): open a feed tab, on a chosen decade (Era: 188 = the 1880s) or country (Place: its 1-based index)
@@ -247,7 +254,7 @@ function fdMount(host, o) {
       const dis = !!off(k), on = k === eff, lab = !isColor && k === "color" && on ? `Color${st.metric === "overall" ? "" : " · " + FD_SHORT[st.metric]}<span class="fd-car">${ICON.chev}</span>` : t;   // the by… switch: Overall is the default, so it needs no word
       return `<button class="fd-chip${on ? " on" : ""}${dis ? " dis" : ""}" role="tab" data-fc="${k}" aria-selected="${on}"${dis ? ` aria-disabled="true"` : ""}${!isColor && k === "color" && on ? ` aria-haspopup="dialog"` : ""}>${lab}</button>`;
     }).join("");
-    lensDraw();
+    lensDraw(); setTimeout(floatSync, 60);
   };
   const leadDraw = (reason) => {
     const miss = st.chip !== eff ? off(st.chip) : "";   // the chip you chose can't work for this painting: say why, and what you are seeing instead
@@ -417,7 +424,7 @@ function fdMount(host, o) {
     capPct = false;   // David, 2026-10-24: zoomed out, the percent under each tile "looks ugly": dense tiles are bare pictures (a long-press still shows everything)
     const want0 = memo ? memo.shown : FD_PAGE;
     shown = Math.min(items.length, Math.max(FD_PAGE, want0)); fk = Math.max(0, items.findIndex(x => !x.head));
-    relayout(); stateDraw(); leadDraw(""); draw();
+    relayout(); stateDraw(); leadDraw(""); draw(); setTimeout(floatSync, 60);
     if (eff === "vibe" && !isColor) fdVibeMark();   // the one-line explainer is shown once, the first time Vibe is on screen
     FD_LAST = { chip: eff, metric: st.metric, ms: Math.round(ms), n: items.length };
   }
@@ -539,9 +546,9 @@ function fdMount(host, o) {
   const sizeWord = n => n === 1 ? "1 across, big" : `${n} across`;
   const TOLW = ["", "Exact", "Exact", "Nearly exact", "Very close", "Very close", "Close", "Close", "Close", "Close", "Fairly close", "Fairly close", "Loose", "Loose", "Loose", "Loose", "Very loose", "Very loose", "Very loose", "Its whole family", "Its whole family"];
   const REACHW = ["Just this country", "Its neighbors", "Its region", "Its continent", "The whole world"];
-  const SUBDOT = () => { const d = host.querySelector("[data-fdsetdot]"); if (d) d.hidden = !(isColor && fdsChanged(eff)); };
+  const SUBDOT = () => { const d = $t("[data-fdsetdot]"); if (d) d.hidden = !(isColor && fdsChanged(eff)); };
   const mapOk = () => !(eff === "about" || (isColor && (eff === "painters" || eff === "worlds" || eff === "close")) || (!isColor && eff === "painter"));
-  const lensDraw = () => { const m = host.querySelector("[data-fdmap]"); if (m) m.hidden = !mapOk(); SUBDOT(); };
+  const lensDraw = () => { const m = $t("[data-fdmap]"); if (m) m.hidden = !mapOk(); SUBDOT(); };
   // Map: the same list as the painting map, the painting nearest the top of the screen in the middle, the same choices as filters
   const topPainting = () => {
     const bh = bar.getBoundingClientRect().bottom; let ak = -1;
@@ -561,9 +568,10 @@ function fdMount(host, o) {
     }
     leave(); buzz(6); pmGo(spec);
   }
-  host.querySelector("[data-fdmap]").onclick = openMap;
+  $t("[data-fdmap]").onclick = openMap;
   function openSettings() {
     if (document.querySelector(".fs-sheet")) return;
+    tools.classList.add("away");
     const kind = isColor ? fdsKind(eff) : "none", S = FDS[kind] || {}, mx = fdMaxCols();
     const rng = (k, label, min, max, step, ends) => `<div class="fs-c"><div class="fs-row"><p>${label}</p><b data-fs-out="${k}"></b></div><input type="range" min="${min}" max="${max}" step="${step || 1}" value="${S[k]}" data-fs="${k}" aria-label="${label}">${ends ? `<div class="fs-ends"><span>${ends[0]}</span><span>${ends[1]}</span></div>` : ""}</div>`;
     const seg = (k, label, opts) => `<div class="fs-c"><div class="fs-row"><p>${label}</p></div><div class="fs-seg" data-fsseg="${k}">${opts.map(([v, t]) => `<button type="button" data-v="${v}" aria-pressed="${S[k] === v}">${t}</button>`).join("")}</div></div>`;
@@ -617,13 +625,18 @@ function fdMount(host, o) {
     });
     paint();
     const prevClose = close; sh.addEventListener("close", () => { onCount = null; });
-    const obs = new MutationObserver(() => { if (!sh.isConnected) { onCount = null; obs.disconnect(); } }); obs.observe(document.body, { childList: true, subtree: true });
+    const obs = new MutationObserver(() => { if (!sh.isConnected) { onCount = null; obs.disconnect(); setTimeout(floatSync, 120); } }); obs.observe(document.body, { childList: true, subtree: true });
   }
-  host.querySelector("[data-fdset]").onclick = openSettings;
+  $t("[data-fdset]").onclick = openSettings;
   host.addEventListener("click", e => { if (e.target.closest("[data-fdreset]")) { const kd = fdsKind(eff); FDS[kd] = JSON.parse(JSON.stringify(FDS_DEF[kd])); fdsSave(); SUBDOT(); rerank(false); } });
 
   // ----- go -----
-  const onScroll = (() => { let raf = 0; return () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; draw(); }); }; })();
+  const floatSync = () => {
+    if (!host.isConnected || gone) return tools.classList.add("away");
+    const r = grid.getBoundingClientRect(), on = eff !== "about" && !grid.hidden && shown > 0 && r.top < innerHeight - 120 && r.bottom > 160 && !document.querySelector(".sheet");
+    tools.classList.toggle("away", !on);
+  };
+  const onScroll = (() => { let raf = 0; return () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; draw(); floatSync(); }); }; })();
   const onResize = () => { setBarTop(); if (Math.abs((grid.clientWidth || W) - W) > 1) relayoutAll(); };
   function start() {
     if (built || gone) return; built = true;
