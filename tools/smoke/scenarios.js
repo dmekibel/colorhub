@@ -4473,9 +4473,14 @@ scenario("paintings", "pulling a painting page down at the top closes one step b
   const page = t.$(".screen.gl-page"), depth0 = t.ev("XSTACK.length"), W = t.ev("innerWidth");
   t.w.scrollTo(0, 0); await t.sleep(900);
   let up = await glDrag(t, page, [[W / 2, 200], [W / 2, 215], [W / 2, 240], [W / 2, 330]], 9);
-  t.expect(/translateY\(/.test(page.style.transform) && /scale\(0\.\d+\)/.test(page.style.transform), `mid-pull the page isn't following (${page.style.transform})`);
+  await t.waitFor(() => /translate\([-\d.]+px, ?(\d+)/.test(page.style.transform) && +/translate\([-\d.]+px, ?([\d.]+)/.exec(page.style.transform)[1] > 10 ? true : null, 2000, "the page to follow the finger (one rAF per frame)");
+  const mm = /translate\(([-\d.]+)px, ?([-\d.]+)px\) scale\(([\d.]+)\)/.exec(page.style.transform);
+  t.expect(mm && +mm[2] > 10 && +mm[2] <= 140 && +mm[3] < 1 && +mm[3] >= .8, `mid-pull the page isn't following the finger and shrinking a little (${page.style.transform})`);
   up();
+  await t.waitFor(() => t.ev("TLG_ANIM") ? true : null, 3000, "the fly-back into the tile to start");
+  t.ev("TLG_ANIM.finish()");
   await t.waitFor(() => t.ev("XSTACK.length") === depth0 - 1 ? true : null, 4000, "the page to close one step");
+  t.expect(t.$$(".fd-tile[data-fk]").length > 0, "the previous screen is not shown after the page flew into its tile");
   // a short pull springs back
   await feedOpen(t, 12);
   await t.click(t.$$(".fd-tile[data-fk]")[1], { wait: 900 });
@@ -4504,6 +4509,8 @@ scenario("paintings", "pulling a painting down shows the page it came from under
   t.expect(t.w.getComputedStyle(page).backgroundColor !== "rgba(0, 0, 0, 0)", "the dragged page is see-through (the backdrop would show through its text)");
   t.expect(t.ev("document.getElementById('app').compareDocumentPosition(document.querySelector('.tlg-back')) & Node.DOCUMENT_POSITION_PRECEDING"), "the backdrop is not behind the page");
   up();
+  await t.waitFor(() => t.ev("TLG_ANIM") ? true : null, 3000, "the fly-back to start");
+  t.ev("TLG_ANIM.finish()");
   await t.waitFor(() => t.ev("XSTACK.length") === depth0 - 1 ? true : null, 4000, "the page to close one step");
   await t.waitFor(() => !t.$(".tlg-back") ? true : null, 3000, "the backdrop layer to go once the real page is drawn");
   t.expect(t.$$(".fd-tile[data-fk]").length > 0, "the page it came from is not drawn after the close");

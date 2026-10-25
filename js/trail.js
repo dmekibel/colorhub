@@ -319,6 +319,50 @@ function tlgFloor(toMap, snap) {
   document.body.appendChild(d);
   return d;
 }
+// Painting pull-down, the whole motion (David, 2026-10-25): the page FOLLOWS the finger (its top edge under it, shrinking a little as you pull, like
+// Pinterest, corners rounded), and on release it flies back to the tile it was opened from in the page underneath, minimizing into it. Everything
+// heavy is set ONCE when the drag is armed (tlgArm: will-change, a viewport-high clip, the radius, the opaque ground); each move is one rAF that
+// writes one transform and one opacity, and the source tile's rectangle is measured once (tlgTile), never while moving.
+const TLG_FLY = 300, TLG_COMMIT_D = 90, TLG_R = 24;
+function tlgXf(d, dx) { return `translate(${(dx * .5).toFixed(1)}px,${d.toFixed(1)}px) scale(${(1 - .15 * Math.min(1, d / 250)).toFixed(4)})`; }
+function tlgArm(el) {
+  const s = el.style;
+  // only the painting "card" is left: the picture and the title block under it (what shows at the top of the page); the rest is clipped away, once
+  const hero = el.querySelector(".gl-hero"), id = el.querySelector(".gl-id"), hb = hero ? hero.getBoundingClientRect().bottom : 0, ib = id ? id.getBoundingClientRect().bottom : 0;
+  const ch = Math.round(Math.min(innerHeight, Math.max(hb, ib) + 14)); el._tlgH = ch > 120 ? ch : innerHeight;
+  s.willChange = "transform"; s.transformOrigin = "50% 0"; s.height = s.minHeight = s.maxHeight = el._tlgH + "px"; s.overflow = "hidden"; s.borderRadius = TLG_R + "px"; s.background = "var(--ground)"; s.transition = "none";
+}
+function tlgDisarm(el) {
+  const s = el.style;
+  s.transition = ""; s.transform = ""; s.willChange = ""; s.borderRadius = ""; s.background = ""; s.overflow = ""; s.height = s.minHeight = s.maxHeight = ""; s.transformOrigin = "";
+}
+// the rectangle of the painting's tile in the kept page underneath (one layout read, at arm time); null when it is not on screen there
+function tlgTile(layer) {
+  const m = /\/gallery\/(\d+)/.exec(location.hash || ""); if (!m || !layer || !layer.querySelector) return null;
+  const t = layer.querySelector(`[data-gi="${m[1]}"]`); if (!t) return null;
+  const r = t.getBoundingClientRect(), H = innerHeight;
+  if (r.width < 8 || r.height < 8 || r.bottom < 24 || r.top > H - 24 || r.right < 0 || r.left > innerWidth) return null;
+  const im = t.querySelector("img"), src = im && im.complete && im.naturalWidth ? (im.currentSrc || im.src) : "";
+  return { x: r.left, y: r.top, w: r.width, h: r.height, src, rad: parseFloat(getComputedStyle(t).borderTopLeftRadius) || 6 };
+}
+// the flight: the page's own transform runs on to the tile's centre at the tile's width while it fades; the tile's thumbnail (an overlay at the tile's
+// rectangle) fades in over it, so the page seems to shrink into the tile. No tile on screen: it shrinks toward the top-centre and fades.
+function tlgFly(el, from, tile) {
+  const W = innerWidth, H = innerHeight;
+  let sc, cx, cy, ov = null;
+  if (tile) { sc = Math.max(.12, Math.min(.5, tile.w / W)); cx = tile.x + tile.w / 2; cy = tile.y + tile.h / 2; }
+  else { sc = .3; cx = W / 2; cy = H * .28; }
+  const to = `translate(${(cx - W / 2).toFixed(1)}px,${(cy - (el._tlgH || H) * sc / 2).toFixed(1)}px) scale(${sc.toFixed(4)})`;
+  if (tile && tile.src) {
+    ov = document.createElement("div");
+    ov.style.cssText = `position:fixed;left:${tile.x}px;top:${tile.y}px;width:${tile.w}px;height:${tile.h}px;border-radius:${tile.rad}px;background:#222 center/cover url("${tile.src.replace(/"/g, "%22")}");z-index:100000;pointer-events:none;opacity:0;will-change:opacity`;
+    document.body.appendChild(ov);
+    try { ov.animate([{ opacity: 0 }, { opacity: 0, offset: .45 }, { opacity: 1 }], { duration: TLG_FLY, easing: "linear", fill: "forwards" }); } catch (e) { ov.style.opacity = 1; }
+  }
+  el.style.transition = "none";
+  const anim = el.animate([{ transform: from, opacity: 1 }, { opacity: 1, offset: .5 }, { transform: to, opacity: 0 }], { duration: TLG_FLY, easing: "cubic-bezier(.2,.8,.25,1)", fill: "forwards" });
+  return { anim, ov };
+}
 function tlgWire(el) {
   if (!el || reduceMotion) return;
   const born = performance.now(), blocked = e => e.target.closest && e.target.closest("canvas,input,textarea,select,[data-nopull]");
@@ -334,11 +378,14 @@ function tlgWire(el) {
     if (a.floor) return;
     a.dest = tlgDest(el, a.axis || "y");
     a.floor = tlgBackdrop(el, a.dest);
+    if (el.classList.contains("gl-page") && a.vertOK) { tlgArm(el); a.tile = isLayer(a.floor) ? tlgTile(a.floor) : null; a.paint = () => { a.raf = 0; el.style.transform = tlgXf(a.d, a.dx); if (a.floor && a.floor._dim) a.floor._dim.style.opacity = (.14 * (1 - Math.min(1, a.d / 120))).toFixed(3); }; }
   };
   const clean = () => {
     if (a && a.floor) dropFloor(a.floor);
     if (a && a.anim) { try { a.anim.cancel(); } catch (e) {} if (TLG_ANIM === a.anim) TLG_ANIM = null; }
-    el.style.transition = ""; el.style.transform = ""; el.style.willChange = ""; el.style.borderRadius = ""; el.style.background = ""; el.style.overflow = ""; el.style.transformOrigin = "";
+    if (a && a.raf) cancelAnimationFrame(a.raf);
+    if (a && a.ov) a.ov.remove();
+    tlgDisarm(el);
     a = null;
   };
   el.addEventListener("pointerdown", e => {
@@ -365,49 +412,56 @@ function tlgWire(el) {
       else { if (Math.abs(dx) > 10 || Math.abs(dy) > 10) clean(); return; }
       a.dest = tlgDest(el, a.axis);
       if (!a.floor) a.floor = a.axis === "y" ? tlgBackdrop(el, a.dest) : tlgFloor(a.dest.toMap);
-      el.style.willChange = "transform";
+      if (!a.paint) el.style.willChange = "transform";
       try { el.setPointerCapture(a.id); } catch (er) {}
     }
     e.preventDefault();
     const now = performance.now(), dt = Math.max(1, now - a.lastT);
     const d = a.axis === "x" ? dx : dy, resisted = Math.max(0, d < 80 ? d * .55 : 44 + (d - 80) * .35);
-    el.style.transition = "none";
-    if (a.axis === "y" && el.classList.contains("gl-page")) {   // the whole page follows the finger and shrinks a little, its corners rounding
-      const f = Math.min(1, d / 320);
-      el.style.transformOrigin = "50% 0"; el.style.borderRadius = Math.round(28 * Math.min(1, d / 90)) + "px"; el.style.overflow = "hidden"; el.style.background = "var(--ground)";
-      el.style.transform = `translateY(${Math.max(0, d * .9)}px) scale(${(1 - .06 * f).toFixed(4)})`;
-      if (a.floor && a.floor._dim) a.floor._dim.style.opacity = (.14 * (1 - Math.min(1, d / 260))).toFixed(3);   // the page underneath brightens as this one leaves
-    } else
-    el.style.transform = a.axis === "x" ? `translateX(${resisted}px)` : `translateY(${resisted}px)`;
+    if (a.axis === "y" && a.paint) {   // one rAF per frame writes the transform; nothing else here touches the page
+      a.d = d; a.dx = dx; if (!a.raf) a.raf = requestAnimationFrame(a.paint);
+    } else {
+      el.style.transition = "none";
+      el.style.transform = a.axis === "x" ? `translateX(${resisted}px)` : `translateY(${resisted}px)`;
+    }
     const v = ((a.axis === "x" ? e.clientX - a.lastX : e.clientY - a.lastY)) / dt;
     if (a.axis === "x") a.vx = v; else a.vy = v;
-    a.lastX = e.clientX; a.lastY = e.clientY; a.lastT = now; a.d = d; a.resisted = resisted;
+    a.lastX = e.clientX; a.lastY = e.clientY; a.lastT = now; a.d = d; a.dx = dx; a.resisted = resisted;
   }, { passive: false });
   const release = e => {
     if (!a || e.pointerId !== a.id) return;
-    if (!a.axis) { if (a.floor) dropFloor(a.floor); a = null; return; }
-    const gl = a.axis === "y" && el.classList.contains("gl-page"), v = a.axis === "x" ? a.vx : a.vy, past = (a.d || 0) > (gl ? 120 : TLG_PULL) || v > TLG_FLING, dest = a.dest, floor = a.floor;
-    const final = a.axis === "x" ? `translateX(${innerWidth + 60}px)` : gl ? `translateY(${innerHeight * .8}px) scale(.9)` : `translateY(${innerHeight * .7 + 60}px)`;
+    if (!a.axis) { if (a.floor) dropFloor(a.floor); if (a.raf) cancelAnimationFrame(a.raf); tlgDisarm(el); a = null; return; }
+    const gl = !!a.paint, v = a.axis === "x" ? a.vx : a.vy, past = (a.d || 0) > (gl ? TLG_COMMIT_D : TLG_PULL) || v > TLG_FLING, dest = a.dest, floor = a.floor;
+    if (a.raf) { cancelAnimationFrame(a.raf); a.raf = 0; }
+    if (gl) el.style.transform = tlgXf(a.d || 0, a.dx || 0);
+    const final = a.axis === "x" ? `translateX(${innerWidth + 60}px)` : `translateY(${innerHeight * .7 + 60}px)`;
     if (past) {
-      const remaining = (a.axis === "x" ? innerWidth - a.resisted : innerHeight * .7 - a.resisted);
-      const dur = Math.min(TLG_CAP, Math.max(120, remaining / Math.max(v, .35)));
       el.style.transition = "none";
-      a.anim = TLG_ANIM = el.animate([{ transform: el.style.transform || "none" }, { transform: final }], { duration: dur, easing: "linear", fill: "forwards" });
+      let fly = null;
+      if (gl) { fly = tlgFly(el, el.style.transform, a.tile); a.anim = TLG_ANIM = fly.anim; }
+      else {
+        const remaining = (a.axis === "x" ? innerWidth - a.resisted : innerHeight * .7 - a.resisted);
+        const dur = Math.min(TLG_CAP, Math.max(120, remaining / Math.max(v, .35)));
+        a.anim = TLG_ANIM = el.animate([{ transform: el.style.transform || "none" }, { transform: final }], { duration: dur, easing: "linear", fill: "forwards" });
+      }
+      const ov = fly && fly.ov;
       // something else (a native back winning a race against our own pointer tracking -- iOS doesn't reliably
       // send a pointerup/pointercancel once it's claimed the touch) may already have navigated and redrawn the
       // screen while this animation was still running: el is this gesture's own page, so if it's no longer in
       // the document, that already happened. Committing anyway would both double the back (xBack()/tlToOrigin()
       // again, on top of the one that already ran) and, since show() cleans up .tlg-floor/TLG_ANIM on every
       // render now, there is nothing left here worth finishing against.
+      const gone = () => { if (ov) { try { ov.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, easing: "ease-out" }).onfinish = () => ov.remove(); } catch (er) {} setTimeout(() => ov.remove(), 600); } };
       a.anim.onfinish = () => {
         TLG_ANIM = null;
-        if (isLayer(floor)) { if (el.isConnected) { TLG_HOLD = floor; tlgCommit(dest); tlgLetGo(floor, el); } else tlgDropLayer(floor); return; }
-        floor.remove(); if (el.isConnected) tlgCommit(dest);
+        if (isLayer(floor)) { if (el.isConnected) { TLG_HOLD = floor; tlgCommit(dest); tlgLetGo(floor, el); } else tlgDropLayer(floor); gone(); return; }
+        floor.remove(); if (el.isConnected) tlgCommit(dest); gone();
       };
     } else {
       el.style.transition = `transform ${TLG_SPRING}ms var(--spring)`;
       el.style.transform = "translate(0,0)";
-      setTimeout(() => { if (floor) dropFloor(floor); el.style.transition = ""; el.style.transform = ""; el.style.willChange = ""; el.style.borderRadius = ""; el.style.background = ""; el.style.overflow = ""; el.style.transformOrigin = ""; }, TLG_SPRING + 20);
+      if (floor && floor._dim) floor._dim.style.opacity = ".14";
+      setTimeout(() => { if (floor) dropFloor(floor); tlgDisarm(el); }, TLG_SPRING + 20);
     }
     a = null;
   };
