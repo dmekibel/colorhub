@@ -33,6 +33,22 @@ SETTING = [
     "a photo of an altarpiece in a church with candles",
     "a tourist snapshot of a museum display",
 ]
+# a second and third question, asked of the rows the first one flags (David, 2026-10-26: "keep frescoes if the photo is a good angle
+# and has minimal people"): is it shot straight on, and are there people in it?
+FRONTAL = ["a straight-on photograph of a fresco or painting filling the whole frame",
+           "a flat, frontal, evenly lit photo of a wall painting"]
+ANGLED = ["a photograph taken at a steep angle from below showing a vaulted ceiling and architecture",
+          "a wide photo of a church interior with columns, arches and a ceiling",
+          "a photograph of a wall painting seen from the side at a sharp angle",
+          "a photo of a painting in a gold frame hanging on a wall with the room around it"]
+PEOPLE = ["a photo of real people in modern clothes standing in a gallery", "tourists and visitors looking at paintings in a museum",
+          "a press photo of men and women in suits standing next to a painting", "a snapshot of a visitor posing in front of an artwork"]
+NOPEOPLE = ["a painting full of painted figures", "a fresco with painted saints and angels", "a photograph of an artwork with no visitors in front of it",
+            "a close-up of a painted face"]
+CEILING = ["a ceiling or dome seen from below", "a vaulted ceiling with frescoes photographed upwards", "a dome with a skylight seen from underneath",
+           "an upward photograph of a church vault"]
+WALL = ["a painting on a wall seen straight on", "a framed painting photographed straight on", "an altarpiece photographed straight on",
+        "a fresco on a wall photographed straight on and evenly lit"]
 ITSELF = [
     "a painting",
     "an oil painting on canvas",
@@ -67,6 +83,12 @@ def main():
     L -= L.max(axis=1, keepdims=True)
     P = np.exp(L); P /= P.sum(axis=1, keepdims=True)
     score = P[:, :len(SETTING)].sum(axis=1); score[~ok] = 0
+    def pair(a, b):
+        with torch.no_grad():
+            X = model.encode_text(tok(a + b).to(dev)); X = (X / X.norm(dim=-1, keepdim=True)).float().cpu().numpy()
+        Z = 100.0 * E @ X.T; Z -= Z.max(axis=1, keepdims=True); Q = np.exp(Z); Q /= Q.sum(axis=1, keepdims=True)
+        return Q[:, :len(a)].sum(axis=1)
+    frontal = pair(FRONTAL, ANGLED); people = pair(PEOPLE, NOPEOPLE); ceiling = pair(CEILING, WALL)
     names = {}
     import glob
     for f in glob.glob(str(ROOT / "data/corpus/*.json")):
@@ -83,10 +105,18 @@ def main():
     out = [{"id": ids[i], "artist": names.get(ids[i], ("", ""))[0], "title": names.get(ids[i], ("", ""))[1], "score": round(float(score[i]), 3)} for i in o]
     if "--out" in sys.argv:
         p = ROOT / sys.argv[sys.argv.index("--out") + 1]; p.write_text(json.dumps(out, ensure_ascii=False, indent=1)); print("wrote", p, len(out))
+    if "--detail" in sys.argv:   # per-row scores for review sheets
+        D = {ids[i]: [round(float(score[i]), 3), round(float(frontal[i]), 3), round(float(people[i]), 3), round(float(ceiling[i]), 3)] for i in np.where(score >= 0.5)[0]}
+        (ROOT / "research/photos-detail.json").write_text(json.dumps(D)); print("wrote research/photos-detail.json", len(D))
     if "--hide" in sys.argv:
         import datetime
         cut = float(sys.argv[sys.argv.index("--min") + 1]) if "--min" in sys.argv else 0.8
-        keep = [ids[i] for i in np.argsort(-score) if score[i] >= cut and ids[i].startswith("commons-F")]
+        # David, 2026-10-26: "keep frescoes if the photo is a good angle and minimal people": a flagged row stays visible when it is shot
+        # straight on (frontal >= .7), not up at a ceiling or dome (ceiling <= .25) and has no real people in it (people <= .25).
+        # Checked on contact sheets: the ceilings, domes, gallery rooms with visitors and printed pages all fall on the hide side.
+        good = (frontal >= 0.7) & (ceiling <= 0.25) & (people <= 0.25)
+        keep = [ids[i] for i in np.argsort(-score) if score[i] >= cut and ids[i].startswith("commons-F") and not good[i]]
+        print(f"flagged {sum(1 for i in np.where(score >= cut)[0] if ids[i].startswith('commons-F'))}, kept visible as good straight-on photos {sum(1 for i in np.where(score >= cut)[0] if ids[i].startswith('commons-F') and good[i])}")
         (ROOT / "data/hide-photos.json").write_text(json.dumps({"v": 1, "min": cut, "built": datetime.date.today().isoformat(), "ids": sorted(keep)}, separators=(",", ":")) + "\n")
         print(f"wrote data/hide-photos.json: {len(keep)} Commons file uploads at >= {cut}")
     for r in out[:40]: print(r["score"], r["id"], "|", r["artist"], "|", str(r["title"])[:80])
