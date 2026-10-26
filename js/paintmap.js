@@ -2452,16 +2452,11 @@ function pmMount(el, s, F) {
         if (z > R) { u32[o] = BG; continue; }
         const q = r < 1e-6 ? 0 : z / r, fx = ox + dx * q, fy = oy + dy * q;
         const L = lt[j];
-        if (L >= 0) {   // far pixels: a bilinear read of the area-averaged pyramid (no per-cell aliasing)
-          const lm = mp.lv[L], iT = mp.inv[L], uu = fx * iT - .5, vv = fy * iT - .5, x0 = Math.floor(uu), y0 = Math.floor(vv), ax = uu - x0, ay = vv - y0;
-          const lw = lm.w, lh = lm.h, ld = lm.d; let pr = 0, pg = 0, pb = 0, pa = 0;
-          for (let t4 = 0; t4 < 4; t4++) {
-            const xx = x0 + (t4 & 1), yy = y0 + (t4 >> 1); if (xx < 0 || yy < 0 || xx >= lw || yy >= lh) continue;
-            const wt = ((t4 & 1) ? ax : 1 - ax) * ((t4 >> 1) ? ay : 1 - ay), qq = (yy * lw + xx) * 4;
-            pr += ld[qq] * wt; pg += ld[qq + 1] * wt; pb += ld[qq + 2] * wt; pa += ld[qq + 3] * wt;
-          }
-          const bgw = 1 - pa / 255;
-          u32[o] = (0xFF000000 | (Math.min(255, pb + 11 * bgw + .5) << 16) | (Math.min(255, pg + 13 * bgw + .5) << 8) | Math.min(255, pr + 14 * bgw + .5)) | 0;
+        if (L >= 0) {   // far pixels: the area-averaged pyramid, read crisp (nearest texel, no smoothing: David, 2026-10-26: "I don't want the blurry effect")
+          const lm = mp.lv[L], iT = mp.inv[L], xx = Math.floor(fx * iT), yy = Math.floor(fy * iT), lw = lm.w, lh = lm.h;
+          if (xx < 0 || yy < 0 || xx >= lw || yy >= lh) { u32[o] = BG; continue; }
+          const ld = lm.d, qq = (yy * lw + xx) * 4, pa = ld[qq + 3], bgw = 1 - pa / 255;
+          u32[o] = (0xFF000000 | (Math.min(255, ld[qq + 2] + 11 * bgw + .5) << 16) | (Math.min(255, ld[qq + 1] + 13 * bgw + .5) << 8) | Math.min(255, ld[qq] + 14 * bgw + .5)) | 0;
           continue;
         }
         if (fx < 0 || fy < 0) { u32[o] = BG; continue; }
