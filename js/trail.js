@@ -363,7 +363,7 @@ function tlgTile(layer) {
   const r = t.getBoundingClientRect(), H = innerHeight;
   if (r.width < 8 || r.height < 8 || r.bottom < 24 || r.top > H - 24 || r.right < 0 || r.left > innerWidth) return null;
   const im = t.querySelector("img"), src = im && im.complete && im.naturalWidth ? (im.currentSrc || im.src) : "";
-  return { x: r.left, y: r.top, w: r.width, h: r.height, src, rad: parseFloat(getComputedStyle(t).borderTopLeftRadius) || 6 };
+  return { x: r.left, y: r.top, w: r.width, h: r.height, src, rad: parseFloat(getComputedStyle(t).borderTopLeftRadius) || 6, node: t };
 }
 // the flight: the picture runs on from where the finger let go to the tile's centre at the tile's width and rounds to its corners while it fades; the
 // tile's thumbnail (an overlay at the tile's rectangle) fades in over it, so the picture seems to shrink into the tile. No tile on screen: it shrinks
@@ -404,7 +404,9 @@ function tlgWire(el) {
     if (a.floor) return;
     a.dest = tlgDest(el, a.axis || "y");
     a.floor = tlgBackdrop(el, a.dest);
-    if (isGl && a.vertOK) { tlgArm(el); a.tile = isLayer(a.floor) ? tlgTile(a.floor) : null; a.paint = () => tlgPaintGl(el, a); }
+    if (isGl && a.vertOK) { tlgArm(el); a.tile = isLayer(a.floor) ? tlgTile(a.floor) : null;
+      if (a.tile && a.tile.node) a.tile.node.style.visibility = "hidden";   // the spot is empty (just the ground) until the picture flies into it: no second copy of it in the list
+      a.paint = () => tlgPaintGl(el, a); }
   };
   const clean = () => {
     if (a && a.floor) dropFloor(a.floor);
