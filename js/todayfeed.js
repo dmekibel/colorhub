@@ -139,6 +139,7 @@ function tfCard(it) {
   return "";
 }
 // a painting card waits for its shard (title, artist, picture); the box and the colors are already there, so nothing moves
+const tfBust = (u, t) => u + (u.includes("?") ? "&" : "?") + "r=" + t;
 function tfFill(root) {
   if (typeof GAL === "undefined" || !GAL) return;
   const want = new Map();
@@ -154,8 +155,10 @@ function tfFill(root) {
       img.alt = ""; img.decoding = "async"; img.loading = "lazy";
       if (el.dataset.first) { img.loading = "eager"; img.fetchPriority = "high"; }
       const cs = glCropStyle(i, d, glAR(i)); if (cs) img.setAttribute("style", (cs.match(/style="([^"]*)"/) || [])[1] || "");
+      // a failed or stalled picture is asked for again (a slow or rate-limited museum host used to leave a blurry tile that never sharpened)
       img.onload = () => img.classList.add("on");
-      img.onerror = () => img.remove();
+      img.onerror = () => { const t = img._try = (img._try || 0) + 1; if (t > 3) return img.remove(); setTimeout(() => { if (img.isConnected) img.src = tfBust(d.img, t); }, 700 * t); };
+      img._t0 = performance.now(); img.dataset.src = d.img;
       img.src = d.img; im.appendChild(img);
       b.textContent = d.t; sm.innerHTML = glByline(i, d);
       const hb = el.querySelector("[data-tf-heart]"); if (hb && typeof fvArtHas === "function") { const on = fvArtHas(d.id); hb.classList.toggle("on", on); hb.setAttribute("aria-pressed", on); hb.innerHTML = on ? TF_HEART_ON : TF_HEART; }
@@ -537,6 +540,24 @@ function tfPaint(scr, host, st, f, restore, stop, ov) {
   host.innerHTML = `${cotd ? tfCard(cotd) : ""}<div class="tf-cols"></div><div class="tf-more" aria-hidden="true"></div><p class="tf-end" hidden>${ov ? esc(ov.end || "") : "That is today's set. A new one arrives tomorrow."}</p>`;
   const wrap = host.querySelector(".tf-cols"), more = host.querySelector(".tf-more"), end = host.querySelector(".tf-end");
   let n = 0, count = 0, loading = false;
+  // what is on screen jumps the queue: its picture is made eager and high priority, and a picture still missing after 4 s on screen is asked for again
+  if (typeof IntersectionObserver === "function") {
+    const vis = new Set();
+    const io2 = new IntersectionObserver(es => es.forEach(x => {
+      const card = x.target, im = card.querySelector(".tf-im img");
+      if (x.isIntersecting) { vis.add(card); if (im && !im.classList.contains("on")) { im.loading = "eager"; im.fetchPriority = "high"; } } else vis.delete(card);
+    }), { rootMargin: "120px 0px" });
+    wrap._io2 = io2; live.push(() => { io2.disconnect(); clearInterval(wd); });
+    const wd = setInterval(() => {
+      if (!host.isConnected) return clearInterval(wd);
+      vis.forEach(card => {
+        const im = card.querySelector(".tf-im img"); if (!im || im.classList.contains("on") || !im.dataset.src) return;
+        if (performance.now() - (im._t0 || 0) < 4000) return;
+        im._t0 = performance.now(); im._try = (im._try || 0) + 1; if (im._try > 4) return;
+        im.loading = "eager"; im.fetchPriority = "high"; im.src = tfBust(im.dataset.src, im._try);
+      });
+    }, 1500);
+  }
   // every painting tile shows its own tiny blurred picture at once (js/feed.js fdMicroPaint), before its details or the museum photo arrive
   if (typeof fdMicroUse === "function") {
     fdMicroUse();
@@ -556,7 +577,7 @@ function tfPaint(scr, host, st, f, restore, stop, ov) {
       const s = cols[bi];
       if (n < 10) { node.dataset.first = "1"; node.querySelectorAll("img").forEach(im => { im.loading = "eager"; im.fetchPriority = "high"; }); }
       node.dataset.ix = n;
-      s.appendChild(node);
+      s.appendChild(node); if (wrap._io2) wrap._io2.observe(node);
       { const e = cw ? est(list[n]) : null; hs[bi] += e != null ? e : node.offsetHeight; }
       if (list[n].t === "paint" && typeof fdMicroPaint === "function") fdMicroPaint(node.querySelector(".tf-im"), list[n].gi);
       if (ov && ov.seen && list[n].gi != null) hfMarkSeen(list[n].gi);
