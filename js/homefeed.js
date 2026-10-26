@@ -174,25 +174,31 @@ async function hfAfterSeed(hk, used) {
 // A board is a lens (a definition, never a stored list): "mo:serene" (data/gallery/mood.bin, tools/audit_mood.py: how much of a picture's reading is each of twelve moods,
 // ranked across the archive 0..255), "e:1850-1900" (a span of years), "m:<movement>", "p:<painter>", "c:#hex" (near a color). Each opens as the same endless, gradual feed.
 let HF_MOOD = null, HF_MOODP = null;
+// mood.bin: 6 bytes a painting, its three strongest moods as (mood id, strength 0..255) pairs; 255 as the id = no reading. Indexed per mood once, on load.
 const hfMoodReady = () => HF_MOODP || (HF_MOODP = loadGallery().then(async () => {
   try {
     const m = await (await fetch("data/gallery/mood.json")).json(), r = await fetch("data/gallery/mood.bin");
-    if (m && r.ok) { const b = new Uint8Array(await r.arrayBuffer()); if (b.length === GAL.n * m.moods.length) HF_MOOD = { b, k: m.moods.length, moods: m.moods }; }
+    if (!m || !r.ok || m.format !== "top3") return;
+    const b = new Uint8Array(await r.arrayBuffer()), K = m.moods.length, n = GAL.n; if (b.length !== n * 6) return;
+    const cnt = new Int32Array(K); for (let i = 0; i < n; i++) for (let j = 0; j < 3; j++) { const id = b[i * 6 + j * 2]; if (id < K) cnt[id]++; }
+    const by = Array.from({ length: K }, (_, k) => ({ idx: new Int32Array(cnt[k]), s: new Uint8Array(cnt[k]), n: 0 }));
+    for (let i = 0; i < n; i++) for (let j = 0; j < 3; j++) { const id = b[i * 6 + j * 2]; if (id < K) { const t = by[id]; t.idx[t.n] = i; t.s[t.n++] = b[i * 6 + j * 2 + 1]; } }
+    HF_MOOD = { b, k: K, moods: m.moods, by };
   } catch (e) {}
 }).catch(() => {}));
 const hfMoodName = id => { const m = HF_MOOD && HF_MOOD.moods.find(x => x[0] === id); return m ? m[1] : id; };
 const hfEraSpan = v => { const [a, b] = String(v).split("-").map(Number); return [a || 0, b || 3000]; };
-const hfEraName = v => { const [a, b] = hfEraSpan(v); return b - a === 100 ? a + "s" : a + "–" + b; };
-// how strongly painting i reads as a mood (0..1), and a board's candidate list: the strongest readings that are also beautiful
-const hfMoodAt = (i, k) => (HF_MOOD ? HF_MOOD.b[i * HF_MOOD.k + k] / 255 : 0);
+const hfEraName = v => { const [a, b] = hfEraSpan(v); return b - a === 100 ? a + "s" : a + "\u2013" + b; };
+// a board's candidate list: the paintings that have this mood among their strongest three and read strongly, that are also beautiful
 function hfMoodCands(id, min) {
   const k = HF_MOOD ? HF_MOOD.moods.findIndex(x => x[0] === id) : -1; if (k < 0) return [];
-  const out = []; for (let i = 0; i < GAL.n; i++) { if (hfHid(i)) continue; const mv = hfMoodAt(i, k); if (mv >= min && hfBeauty(i) >= hfCut(.45)) out.push(i); }
+  const t = HF_MOOD.by[k], out = [], bar = hfCut(.45), floor = min * 255;
+  for (let q = 0; q < t.n; q++) { const i = t.idx[q]; if (t.s[q] >= floor && !hfHid(i) && hfBeauty(i) >= bar) out.push(i); }
   return out;
 }
 async function hfMoodList(id, k, roll) {
   await hfMoodReady(); await hfFacets();
-  const cand = hfMoodCands(id, .88), rr = hfSeedOf(k + "|" + id + "|" + roll, "mood"), picked = hfPick(cand, rr, HF_KEEP);
+  const cand = hfMoodCands(id, .85), rr = hfSeedOf(k + "|" + id + "|" + roll, "mood"), picked = hfPick(cand, rr, HF_KEEP);
   return { ids: hfRiverOn() ? hfChainList(picked, rr) : picked, total: cand.length };
 }
 async function hfEraList(v, k, roll) {
@@ -204,7 +210,7 @@ async function hfEraList(v, k, roll) {
 async function hfBoards() {
   const F = await hfFacets(), C = hfCounts(F); await hfBeautyReady(); await hfMoodReady();
   const secs = [];
-  if (HF_MOOD) secs.push({ title: "Moods", boards: HF_MOOD.moods.map(([id, name]) => ({ id: "mo:" + id, label: name, sub: "Mood" })) });
+  if (HF_MOOD) { const fam = new Map(); HF_MOOD.moods.forEach(([id, name, f]) => { if (!fam.has(f)) fam.set(f, []); fam.get(f).push({ id: "mo:" + id, label: name, sub: "Mood" }); }); fam.forEach((boards, f) => secs.push({ title: "Moods: " + f.toLowerCase(), boards })); }
   secs.push({ title: "Periods", boards: [[1400, 1500], [1500, 1600], [1600, 1700], [1700, 1800], [1800, 1850], [1850, 1900], [1900, 1925], [1925, 1960]].map(([a, b]) => ({ id: "e:" + a + "-" + b, label: hfEraName(a + "-" + b), sub: "Period" })) });
   const mvs = []; F.meta.movements.forEach((n, j) => { if (n && C.mv[j + 1] >= 500 && HF_KNOWN.test(n)) mvs.push({ n, c: C.mv[j + 1] }); });
   mvs.sort((x, y) => y.c - x.c); secs.push({ title: "Movements", boards: mvs.slice(0, 24).map(x => ({ id: "m:" + x.n, label: x.n, sub: x.c.toLocaleString("en-US") + " paintings" })) });
@@ -219,7 +225,7 @@ async function hfBoards() {
 async function hfCoverIds(id) {
   const F = await hfFacets(); await hfBeautyReady(); await hfMoodReady();
   const t = id.slice(0, 2), v = id.slice(2); let cand = [];
-  if (t === "mo") cand = hfMoodCands(id.slice(3), .93);
+  if (t === "mo") cand = hfMoodCands(id.slice(3), .95);
   else if (t === "e:") { const [a, b] = hfEraSpan(v); for (let i = 0; i < GAL.n; i++) { const y = GAL.year[i]; if (y !== GL_UNDATED && y >= a && y < b && !hfHid(i)) cand.push(i); } }
   else if (t === "m:" || t === "p:") { const pos = (t === "p:" ? F.meta.artists.findIndex(a => a[0] === v) : F.meta.movements.indexOf(v)) + 1; cand = pos ? hfIndexBy(F, t === "p:" ? F.artist : F.mv, pos).filter(i => !hfHid(i)) : []; }
   else if (t === "c:") cand = (await hfNearColor(v)).ids.slice(0, 80);
