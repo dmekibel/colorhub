@@ -230,7 +230,7 @@ function hfRiverBatch(hk, pool, rnd) {
 const HF_SESSION = Math.random().toString(36).slice(2, 8);   // new on every open and reload (a Back inside a visit keeps the same list)
 const HF_VR = new Map();
 const hfHueGap = (a, b) => { const d = Math.abs(a - b) % 360; return d > 180 ? 360 - d : d; };
-async function hfVibeRiver(hk, rnd, skip) {
+async function hfVibeRiver(hk, rnd, skip, taste) {
   const ac = hfAlikeC(), av = hfAlikeV(), at = hfAlikeT(), ap = hfAlikeP(), cof = i => (HF_F && HF_F.country ? HF_F.country[i] : 0);
   const size = Math.round(3 + 15 * Math.pow(av, 1.2)), jump = Math.pow(1 - av, 2) * .55, simW = .5 + av;
   // COLOR: at the far right the river stays inside a narrow band of hues for a very long stretch and drifts only a few degrees between patches
@@ -246,7 +246,10 @@ async function hfVibeRiver(hk, rnd, skip) {
   const fresh = st0 => {
     const an = hfPick(null, rnd, 160, skip, hfCut(.93)); if (!an.length) return null;
     let pool = an; if (st0) for (const r of [0, 1, 2, 3]) { const f = an.filter(i => fits(i, st0, r)); if (f.length) { pool = f; break; } }
-    const A = pool[Math.floor(rnd() * Math.min(pool.length, 40))], d = hfDom(A);
+    let A = pool[Math.floor(rnd() * Math.min(pool.length, 40))];
+    // what you kept and follow: most starts are one of those paintings (or its neighbors), so the river is yours, not anyone's
+    if (taste && taste.length && rnd() < .6) { const c = taste.filter(i => !skip.has(i) && !hfHid(i)); if (c.length) A = c[Math.floor(rnd() * c.length)]; }
+    const d = hfDom(A);
     return { A, hue: d ? d[0] : rnd() * 360, year: yr(A), co: cof(A), left: patchSteps - 1 };
   };
   let st = HF_VR.get(hk);
@@ -257,7 +260,7 @@ async function hfVibeRiver(hk, rnd, skip) {
   const out = [], bar = hfCut(.72), t0 = Date.now(), room = i => !st.used.has(i) && !skip.has(i) && !hfHid(i) && hfBeauty(i) >= bar;
   for (let it = 0; it < 60 && out.length < 84; it++) {
     if (out.length >= 24 && Date.now() - t0 > 2200) break;   // never stuck: what is ready is shown, the next batch carries on from here
-    const nb = await hfBudget(vibeNeighbors(st.A, 60), it ? 1500 : 2500, []);
+    const nb = await hfBudget(vibeNeighbors(st.A, 60), it ? 2500 : 7000, []);
     if (!nb.length) { if (!it && !st.used.size) { HF_VR.delete(hk); return []; } break; }
     const sim = new Map(nb.map(x => [x.i, x.sim]));
     let cand = [st.A, ...nb.map(x => x.i)].filter(i => room(i) && fits(i, st, 0));
@@ -348,8 +351,18 @@ async function hfForYou(k, salt) {
   kept.forEach(x => skip.add(x.i));
   const fp = new Set(Object.keys(hfStore("favPainter"))), fm = new Set(Object.keys(hfStore("favMove")));
   const river = hfRiverOn(), wild = hfPick(null, rnd, river ? 360 : 240, skip, hfCut(.86)), spread = l => hfSpread(l, F, river);
+  // the river first, whenever it is on: with likes it starts from them (David, 2026-10-26: all sliders to the right must look near-identical, not a mix)
+  if (river) {
+    const taste = kept.slice(0, 24).map(x => x.i);
+    if (F && (fp.size || fm.size)) {
+      const ai = new Set(), mi = new Set(); F.meta.artists.forEach((a, j) => { if (fp.has(a[0])) ai.add(j + 1); }); F.meta.movements.forEach((m, j) => { if (fm.has(m)) mi.add(j + 1); });
+      const cand = []; for (let i = 0; i < F.N; i++) if (ai.has(F.artist[i]) || mi.has(F.mv[i])) cand.push(i);
+      hfPick(cand, rnd, 60, skip).forEach(i => taste.push(i));
+    }
+    const v = await hfVibeRiver(k, rnd, skip, taste);
+    if (v.length >= 24) return { ids: hfSpread(v, hfAlikeV() > .6 ? null : F, true), more: true };
+  }
   if (!kept.length && !fp.size && !fm.size) {
-    if (river) { const v = await hfVibeRiver(k, rnd, skip); if (v.length >= 24) return { ids: hfSpread(v, F, true), more: true }; }
     return { ids: river ? spread(hfRiverBatch(k, wild, rnd)) : spread(wild), more: true };
   }
   // close: vibe neighbors of what you kept (several of your paintings agreeing counts more), then your painters' and movements' work.

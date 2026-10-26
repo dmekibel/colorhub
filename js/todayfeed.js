@@ -241,7 +241,7 @@ function todayFeed() {
     if (HF_CACHE.has(ck)) return go(HF_CACHE.get(ck).res);
     host.innerHTML = tfSkeleton(k);
     // never stuck: a list that has not arrived in 12 s becomes a message with a retry, and the beauty list stands in for For you at 5 s
-    const slow = fy ? setTimeout(() => { if (my === tok && host.isConnected && host.querySelector(".tf-sk")) hfLens("foryou", hk, 0, true).then(r => { if (my === tok && !HF_CACHE.has(ck)) go(r); }).catch(() => {}); }, 5000) : 0;
+    const slow = fy ? setTimeout(() => { if (my === tok && host.isConnected && host.querySelector(".tf-sk")) hfLens("foryou", hk, 0, true).then(r => { if (my === tok && !HF_CACHE.has(ck)) go(r); }).catch(() => {}); }, 10000) : 0;
     hfBudget(hfLens(id, hk, 0), 12000, "timeout").then(res => {
       clearTimeout(slow);
       if (res === "timeout") { if (my === tok && host.isConnected && !HF_CACHE.has(ck)) empty("That is taking too long. Check your connection.", true); return; }
