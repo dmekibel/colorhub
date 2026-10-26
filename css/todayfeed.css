@@ -265,3 +265,15 @@ html.desk .tf-tune{right:28px;bottom:28px}
 .tf-note{display:flex;flex-direction:column;justify-content:center;gap:6px;padding:18px 16px;min-height:110px;border:1px solid var(--rule);background:var(--surface-2);color:var(--ink);text-align:left}
 .tf-note b{font-size:16px;line-height:1.25;font-weight:600}
 .tf-note small{font-size:14px;line-height:1.35;color:var(--soft)}
+.tf-fsub{position:static;display:flex;gap:6px;padding:4px 0 10px;margin:0;background:none;border:0}
+.tf-fvwrap .fv-swgrid,.tf-fvwrap .fv-pals{margin-top:2px}
+.tf-fnone{padding:36px 8px;color:var(--soft);font-size:15px;text-align:center}
+.tf-seg{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tf-seg button{height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--rule);background:var(--surface-2);color:var(--ink);font-size:15px}
+.tf-seg button[aria-checked="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.tf-fsmall{display:block;margin-top:10px;font-size:13px;color:var(--soft)}
+.tf-links{display:flex;flex-direction:column;gap:2px;margin:4px 0 24px}
+.tf-link{display:flex;align-items:center;justify-content:space-between;padding:16px 4px;border-bottom:1px solid var(--rule);color:var(--ink);font-size:16px;text-align:left}
+.tf-link b{font-weight:500}
+.tf-link svg{width:18px;height:18px;color:var(--soft)}
+.tf-note .tf-follow{align-self:flex-start;margin-top:8px}

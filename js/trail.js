@@ -145,7 +145,7 @@ function tlNote(el, tab, backNav) {
 // ---------- the one top bar (PLAN §3.5, §9): "‹ <previous page>" · ⋯ · the place pill ----------
 // the route's first path segment, for moreRegister/moreOpen keys (places.js) -- "color", "painting", "gallery"...
 function tlRouteKind() { return (ROUTE_NOW || "").replace(/^#\//, "").split(/[/?]/)[0] || "page"; }
-const tlRoomLabel = room => (ROOMS_LIST.find(r => r[0] === room) || [, NAV.learn])[1];
+const tlRoomLabel = room => room === "feed" ? (typeof TF_FROM_BOARD !== "undefined" && TF_FROM_BOARD ? "Boards" : "Explore") : (ROOMS_LIST.find(r => r[0] === room) || [, NAV.learn])[1];   // the feed is Explore; from a board, ‹ says Boards (David, 2026-10-26)
 // where ‹ ultimately lands when the trail runs out, named -- the same destination the place pill closes to
 function tlOriginName() { const room = xFallbackTab(); return room ? tlRoomLabel(room) : NAV_MAP; }
 const TL_TRUNC = s => { s = String(s || "").replace(/\s+/g, " ").trim(); return s.length > 14 ? s.slice(0, 13).trimEnd() + "…" : s; };
@@ -155,7 +155,7 @@ function tlBackLabel() {
   return TL_TRUNC(tlOriginName());
 }
 // the icon for the place ‹ ultimately leads to, and the place pill names (core.js ICON keys)
-const TL_ROOM_ICON = { learn: "learn", gym: "train", explore: "museum", studio: "palette" };
+const TL_ROOM_ICON = { learn: "learn", gym: "train", explore: "museum", studio: "palette", feed: "museum" };
 function tlOriginIcon() { const room = xFallbackTab(); return ICON[TL_ROOM_ICON[room] || "map"] || ICON.map; }
 // "The bar never shows two buttons that do the same thing" (PLAN §3.5/rule 8): when the current page is the
 // first (or only) step on the trail, ‹ already lands on the same place the pill would close to, so it hides.
@@ -733,7 +733,7 @@ function tlSheet() {
     rows.push(tlRow(i, m, here ? `${tlKind(m.hash)} · You're here` : tlKind(m.hash), here));
   }
   // the foot: where this trail started, then the map itself if that wasn't it
-  const room = xFallbackTab(), fromMap = !room, roomName = (ROOMS_LIST.find(r => r[0] === room) || [, "Learn"])[1];
+  const room = xFallbackTab(), fromMap = !room, roomName = tlRoomLabel(room);
   const mapRow = `<li><button class="tl-row tl-foot" data-tl-go="map"><span class="tl-th tl-th-map">${HOME_GLYPH}</span><span class="tl-txt"><b>${esc(NAV_MAP)}</b><em>${fromMap ? "Where you started · " : ""}${esc(NAV_MAP_NOTE)}</em></span>${ICON.chev}</button></li>`;
   const roomRow = fromMap ? "" : `<li><button class="tl-row tl-foot" data-tl-go="origin"><span class="tl-th tl-th-room">${typeof roomsBubbleArt === "function" ? roomsBubbleArt(room) : ""}</span><span class="tl-txt"><b>${esc(roomName)}</b><em>Where you started</em></span>${ICON.chev}</button></li>`;
   // David, 2026-10-09: a trail an explicit Close just stashed (TL_RECENT) stays offered here too -- its own,

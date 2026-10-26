@@ -23,7 +23,7 @@ let TF = null;          // today's pool: { k, items:{paint,pal,color,art,cotd}, 
 let TF_LITE = null;     // the articles index, once
 
 const tfInk = hex => lab(hex)[0] > 60 ? "#141311" : "#F6F2EA";
-let TF_KIND = "paint", TF_LENS = "foryou", TF_EXTRA = [], TF_FROM_BOARD = false, TF_BTAB = "all";   // each launch opens on Paintings and For you; where you went afterwards is kept only for this visit (a Back returns to it)
+let TF_KIND = "paint", TF_LENS = "foryou", TF_EXTRA = [], TF_FROM_BOARD = false, TF_SIBS = [], TF_BTAB = "all", TF_FTAB = "paint";   // each launch opens on Paintings and For you; where you went afterwards is kept only for this visit (a Back returns to it)
 const tfFilter = () => (TF_TYPES.some(t => t[0] === TF_KIND) ? TF_KIND : "paint");
 // plain text out of an article's lede (no markup)
 const tfPlain = s => String(s || "").replace(/\[\[(?:[^\]|]*\|)?([^\]]*)\]\]/g, "$1").replace(/\[\d+\]/g, "").replace(/[*`]/g, "").replace(/\s+/g, " ").trim();
@@ -114,7 +114,7 @@ function tfCard(it) {
     case "sp":   // a seed painting (js/homefeed.js hfSeedRiver): drawn from its own record, before the archive has loaded
       return `<button type="button" class="tf-card tf-paint" data-tf="paint" data-gi="${it.gi}"><span class="tf-im" style="--c:${it.c};aspect-ratio:${(1 / it.ar).toFixed(3)}"><img class="on" src="${esc(it.img)}" alt="" decoding="async" loading="lazy"></span><span class="tf-heart" role="button" tabindex="0" data-tf-heart aria-pressed="false" aria-label="Keep this painting">${TF_HEART}</span><span class="tf-tx"><b>${esc(it.ti)}</b><small>${esc(it.p)}${it.p && it.y ? " · " : ""}${it.y || ""}</small></span></button>`;
     case "note":   // the end of a painter's own work (the feed goes on with painters like them)
-      return `<div class="tf-card tf-note"><b>That is all ${it.n === 1 ? "one painting" : it.n.toLocaleString("en-US") + " paintings"} by ${esc(it.a)}.</b><small>Keep scrolling: painters from the same years with a similar look.</small></div>`;
+      return `<div class="tf-card tf-note"><b>That is all ${it.n === 1 ? "one painting" : it.n.toLocaleString("en-US") + " paintings"} by ${esc(it.a)}.</b><small>Keep scrolling: painters from the same years with a similar look.</small>${it.nm ? `<button type="button" class="tf-follow${hfHas("p", it.nm) ? " on" : ""}" data-tf-follow="p:${esc(it.nm)}" aria-pressed="${hfHas("p", it.nm)}">${hfHas("p", it.nm) ? TF_HEART_ON : TF_HEART}<span>${hfHas("p", it.nm) ? "Following" : "Follow"} ${esc(it.a)}</span></button>` : ""}</div>`;
     case "pal":
       return `<button type="button" class="tf-card tf-palette wait" data-tf="pal" data-gi="${it.gi}"><span class="tf-stripes" aria-hidden="true" style="aspect-ratio:${(1 / it.r).toFixed(3)}">${tfEqual(it.gi)}</span><span class="tf-tx"><b></b><small>6 colors</small></span></button>`;
     case "color":
@@ -200,12 +200,12 @@ function todayFeed() {
   const stop = [];
   cleanup.push(() => { tune.remove(); stop.concat(stop.live || []).forEach(f => { try { f(); } catch (e) {} }); });
   const lensId = () => TF_LENS;
-  const setKinds = () => kindsRow.querySelectorAll(".tf-chip").forEach(b => { const on = b.dataset.tfF === tfFilter(); b.classList.toggle("on", on); b.setAttribute("aria-checked", on); });
-  const tfChipList = () => { const base = hfChips(pre, TF_EXTRA.some(c => c.id === lensId()) ? null : lensId()), seen = new Set(base.map(c => c.id)); return base.concat(TF_EXTRA.filter(c => !seen.has(c.id))); };
+  const setKinds = () => kindsRow.querySelectorAll(".tf-chip").forEach(b => { const on = b.dataset.tfF === (TF_FROM_BOARD && tfFilter() === "paint" ? "board" : tfFilter()); b.classList.toggle("on", on); b.setAttribute("aria-checked", on); });
+  const tfChipList = () => { if (TF_FROM_BOARD && TF_SIBS.length) return TF_SIBS.some(c => c.id === lensId()) ? TF_SIBS : [{ id: lensId(), label: hfLabelOf(lensId(), pre) }].concat(TF_SIBS); const base = hfChips(pre, TF_EXTRA.some(c => c.id === lensId()) ? null : lensId()), seen = new Set(base.map(c => c.id)); return base.concat(TF_EXTRA.filter(c => !seen.has(c.id))); };
   let extraBusy = false;
   // always more to the right: when the row's end is near, new movements, painters and colors are added
   const moreLenses = async () => {
-    if (extraBusy) return; extraBusy = true;
+    if (extraBusy || (TF_FROM_BOARD && TF_SIBS.length)) return; extraBusy = true;
     try { const have = new Set(tfChipList().map(c => c.id)), add = await hfMoreLenses(have, 8); if (add.length) { TF_EXTRA.push(...add); const sx = lensRow.scrollLeft; drawLenses(); lensRow.scrollLeft = sx; } } catch (e) {}
     extraBusy = false;
   };
@@ -223,23 +223,24 @@ function todayFeed() {
     const h = res.head || { kind: "f" }, fol = (kind, name) => `<button type="button" class="tf-follow${hfHas(kind, name) ? " on" : ""}" data-tf-follow="${kind}:${esc(name)}" aria-pressed="${hfHas(kind, name)}">${hfHas(kind, name) ? TF_HEART_ON : TF_HEART}<span>${hfHas(kind, name) ? "Following" : "Follow"}</span></button>`;
     let html = "";
     if (h.kind === "f") html = "";
-    else if (h.kind === "m" || h.kind === "p") html = `<h2 class="tf-lh-t">${esc(h.name)}</h2><span class="tf-lh-n">${res.total ? res.total.toLocaleString("en-US") + " paintings" : ""}</span>${fol(h.kind, h.name)}${h.kind === "p" ? `<button type="button" class="tf-mini" data-tf-order>${hfS().pOrder === "old" ? "Oldest first" : "Shuffled"}</button>` : ""}`;
+    else if (h.kind === "m" || h.kind === "p") html = `<span class="tf-lh-n">${res.total ? res.total.toLocaleString("en-US") + " paintings" : ""}</span>${fol(h.kind, h.name)}`;   // the name is on the chip above: not said twice
     else if (h.kind === "l") html = `<span class="tf-seed" data-tf-seed></span><div class="tf-lh-x"><h2 class="tf-lh-t" data-tf-seedt>Like this one</h2><span class="tf-lh-n" data-tf-seedn></span></div><div class="tf-seg" role="group" aria-label="Match by"><button type="button" class="${h.by === "vibe" ? "on" : ""}" data-tf-by="vibe">By look</button><button type="button" class="${h.by === "color" ? "on" : ""}" data-tf-by="color">By color</button></div><button type="button" class="tf-mini" data-tf-another="like">Another</button>`;
     else if (h.kind === "c") { const row = TODAY_TABLE.find(x => x[2] === h.hex); let nm = row ? row[1] : h.hex; if (!row) { try { nm = nameOf(h.hex).n; } catch (e) {} } html = `<span class="tf-sw" style="--c:${esc(h.hex)}"></span><h2 class="tf-lh-t">Near ${esc(nm.toLowerCase())}</h2><button type="button" class="tf-mini" data-tf-another="color">Another</button>`; }
-    if ((h.kind === "mo" || h.kind === "e" || h.kind === "g" || h.kind === "x") && !html) html = `<h2 class="tf-lh-t">${esc(h.name)}</h2><span class="tf-lh-n">${res.total ? res.total.toLocaleString("en-US") + " paintings" : ""}</span>`;
-    if (html && TF_FROM_BOARD && h.kind !== "f") html = `<button type="button" class="tf-mini tf-back" data-tf-boards>\u2039 Boards</button>` + html;
+    if ((h.kind === "mo" || h.kind === "e" || h.kind === "g" || h.kind === "x") && !html) html = `<span class="tf-lh-n">${res.total ? res.total.toLocaleString("en-US") + " paintings" : ""}</span>`;
     lh.innerHTML = html; lh.hidden = !html; lh.dataset.kind = h.kind;
     if (h.kind === "l") glShard(Math.floor(h.seed / GAL.shard)).then(() => { const d = glDetailNow(h.seed); if (!d || !lh.isConnected) return; const t = lh.querySelector("[data-tf-seedt]"), n = lh.querySelector("[data-tf-seedn]"), sd = lh.querySelector("[data-tf-seed]"); if (t) t.textContent = "Like " + d.t; if (n) n.textContent = [d.a, glYear(h.seed)].filter(Boolean).join(" · "); if (sd && d.img) { const im = new Image(); im.alt = ""; im.onload = () => sd.appendChild(im); im.src = d.img; } if (pre && pre.li === h.seed && !pre.likeTitle) { pre.likeTitle = hfShortTitle(d.t); drawLenses(); } }).catch(() => {});
   };
-  const lensKeys = id => { const hk = k + "|" + HF_SESSION + "|" + hfRoll("foryou"); return { hk, ck: [id, hk, hfRoll(id), hfS().pOrder, hfS().likeBy].join("|"), fy: id === "foryou" }; };
+  const lensKeys = id => { const hk = k + "|" + HF_SESSION + "|" + hfRoll("foryou"); return { hk, ck: [id, hk, hfRoll(id), hfS().pOrder, hfS().likeBy, JSON.stringify(hfBF(id))].join("|"), fy: id === "foryou" }; };
   const mkItems = list => list.map(gi => ({ t: "paint", key: "g:" + gi, gi }));
+  // this board's own filters (years, color family, order) applied to the list
+  const fres = (id, res) => { if (!res || !res.ids || id === "foryou") return res; const ids = hfApplyBF(id, res.ids); if (ids === res.ids) return res; return { ...res, ids, total: ids.length, own: res.own != null ? ids.length : res.own, empty: "Nothing here matches these filters. Open Settings to change them." }; };
   // one list per lens and visit (also what a sideways swipe shows next door before you let go)
   const lensOv = (id, res, items) => {
     const { hk, ck, fy } = lensKeys(id);
     let more = fy ? () => hfLens("foryou", hk, ++salt).then(r => mkItems(r.ids)) : null;
     if (res.own && id.startsWith("p:")) {   // a painter: all their work, a line saying so, then painters like them without end
       const st = {}, nm = id.slice(2), own = res.ids.slice(0, res.own); let said = false;
-      more = () => hfPainterMore(own, hk, st).then(ids => { const it = mkItems(ids); if (!said) { said = true; it.unshift({ t: "note", key: "end:" + id, a: fdShortName(nm), n: res.own }); } return it; });
+      more = () => hfPainterMore(own, hk, st).then(ids => { const it = mkItems(ids); if (!said) { said = true; it.unshift({ t: "note", key: "end:" + id, a: fdShortName(nm), nm, n: res.own }); } return it; });
     }
     const ov = HF_CACHE.get(ck) || { key: "paint:" + ck, list: items || mkItems(res.ids), seen: fy, end: "That is every painting here.", res, more };
     HF_CACHE.set(ck, ov); return ov;
@@ -248,6 +249,7 @@ function todayFeed() {
     const my = ++tok, id = lensId(), { hk, ck, fy } = lensKeys(id);
     const go = (res, items) => {
       if (my !== tok || !host.isConnected) return;
+      if (!items) res = fres(id, res);
       drawHead(res);
       if (!res.ids.length) return empty(res.empty || "Try another one.", false);
       const ov = lensOv(id, res, items);
@@ -310,9 +312,20 @@ function todayFeed() {
       const wideB = () => document.documentElement.classList.contains("desk") || innerWidth >= 700, maxB = () => (wideB() ? 10 : 6);
       const colsB = () => { const z = hfS().zb && hfS().zb[wideB() ? "w" : "p"]; return z ? Math.max(1, Math.min(maxB(), z)) : wideB() ? Math.max(3, Math.min(8, Math.round((host.clientWidth || innerWidth) / 230))) : 2; };
       let bcols = colsB();
+      const favSub = () => {   // Favorites holds paintings, colors and palettes; paintings fall into folders you did not have to make
+        const nc = typeof fvCount === "function" ? fvCount() : 0, np = (S.palettes || []).length, nk = secs.filter(sc => sc.tab === "yours" && sc.title === "Paintings").reduce((a, sc) => a + sc.boards.length, 0);
+        return `<div class="tf-chips tf-fsub" role="tablist" aria-label="Favorites">${[["paint", "Paintings"], ["color", "Colors" + (nc ? " " + nc : "")], ["pal", "Palettes" + (np ? " " + np : "")]].map(([id, l]) => `<button type="button" role="tab" class="tf-chip${id === TF_FTAB ? " on" : ""}" data-tf-ftab="${id}" aria-selected="${id === TF_FTAB}">${l}</button>`).join("")}</div>`;
+      };
       const wrapHTML = (tab, bc) => {
         const cats = tab === "all" ? TABS.filter(t => t[0] !== "all") : [];
-        return `<div class="tf-bwrap" style="--bcols:${bc}">` + (cats.length ? `<h2 class="tf-bh">Browse by</h2><div class="tf-bgrid">${cats.map(([id, label]) => `<button type="button" class="tf-board tf-cat" data-tf-cat="${id}"><span class="tf-bcov"><i></i><i></i><i></i></span><b>${label}</b><small>${catCount(id)} boards</small></button>`).join("")}</div>` : "") + secs.filter(sc => sc.tab === tab).map(sc => `<h2 class="tf-bh">${esc(sc.title)}</h2><div class="tf-bgrid">${sc.boards.map(b => `<button type="button" class="tf-board" data-tf-board="${esc(b.id)}"><span class="tf-bcov" ${b.hex ? `style="--c:${esc(b.hex)}"` : ""}><i></i><i></i><i></i></span><b>${esc(b.label)}</b><small>${esc(b.sub)}</small></button>`).join("")}</div>`).join("") + `</div>`;
+        if (tab === "yours" && TF_FTAB !== "paint") {
+          const body = TF_FTAB === "color" ? (typeof fvCount === "function" && fvCount() ? fvPartColors(0) : `<p class="tf-fnone">Heart a color and it lands here.</p>`) : ((S.palettes || []).length ? fvPartPalettes(0) : `<p class="tf-fnone">Palettes you save land here.</p>`);
+          return `<div class="tf-bwrap tf-fvwrap" style="--bcols:${bc}">${favSub()}${body}</div>`;
+        }
+        const secHTML = secs.filter(sc => sc.tab === tab).map(sc => `<h2 class="tf-bh">${esc(sc.title)}</h2><div class="tf-bgrid">${sc.boards.map(b => `<button type="button" class="tf-board" data-tf-board="${esc(b.id)}"><span class="tf-bcov" ${b.hex ? `style="--c:${esc(b.hex)}"` : ""}><i></i><i></i><i></i></span><b>${esc(b.label)}</b><small>${esc(b.sub)}</small></button>`).join("")}</div>`).join("");
+        const catHTML = cats.length ? `<h2 class="tf-bh">Browse by</h2><div class="tf-bgrid">${cats.map(([id, label]) => `<button type="button" class="tf-board tf-cat" data-tf-cat="${id}"><span class="tf-bcov"><i></i><i></i><i></i></span><b>${label}</b><small>${catCount(id)} boards</small></button>`).join("")}</div>` : "";
+        const more = tab === "all" ? `<h2 class="tf-bh">More in the Museum</h2><div class="tf-links">${[["#/museum/art", "Paintings by subject and room"], ["#/museum/ideas", "Ideas"], ["#/museum/world", "The world in color"], ["#/museum/saved", "Saved"]].map(([h, l]) => `<button type="button" class="tf-link" data-tf-go="${h}"><b>${l}</b>${ICON.chev}</button>`).join("")}</div>` : "";
+        return `<div class="tf-bwrap" style="--bcols:${bc}">` + (tab === "yours" ? favSub() : "") + (tab === "all" ? secHTML + catHTML + more : catHTML + secHTML) + `</div>`;
       };
       const draw = () => {
         if (io) { io.disconnect(); io = null; }
@@ -332,7 +345,7 @@ function todayFeed() {
         if (typeof IntersectionObserver === "function") { io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { (x.target.dataset.tfCat ? fillCat : fill)(x.target); io.unobserve(x.target); } }), { rootMargin: "600px 0px" }); cards.forEach(c => io.observe(c)); }
         else cards.slice(0, 24).forEach(c => (c.dataset.tfCat ? fillCat : fill)(c));
       };
-      host.onclick = e => { const cat = e.target.closest("[data-tf-cat]"); if (cat) { TF_BTAB = cat.dataset.tfCat; buzz(4); draw(); tfScrollTo(el, 0); return; } const tb = e.target.closest("[data-tf-btab]"); if (tb) { TF_BTAB = tb.dataset.tfBtab; buzz(3); draw(); tfScrollTo(el, 0); return; } const b = e.target.closest("[data-tf-board]"); if (!b) return; buzz(5); TF_KIND = "paint"; TF_LENS = b.dataset.tfBoard; TF_FROM_BOARD = true; setKinds(); drawLenses(); const on = lensRow.querySelector(".tf-lens.on"); if (on) tfChipInView(lensRow, on); showBars(); tfScrollTo(el, 0); salt = 0; paintings(false); };
+      host.onclick = e => { const gl = e.target.closest("[data-tf-go]"); if (gl) { buzz(4); location.hash = gl.dataset.tfGo; return; } const ft = e.target.closest("[data-tf-ftab]"); if (ft) { TF_FTAB = ft.dataset.tfFtab; buzz(3); draw(); tfScrollTo(el, 0); return; } const fp = e.target.closest("[data-fvpal]"); if (fp) { buzz(6); openSavedPalette(fp.dataset.fvpal); return; } const cat = e.target.closest("[data-tf-cat]"); if (cat) { TF_BTAB = cat.dataset.tfCat; buzz(4); draw(); tfScrollTo(el, 0); return; } const tb = e.target.closest("[data-tf-btab]"); if (tb) { TF_BTAB = tb.dataset.tfBtab; buzz(3); draw(); tfScrollTo(el, 0); return; } const b = e.target.closest("[data-tf-board]"); if (!b) return; buzz(5); TF_KIND = "paint"; TF_LENS = b.dataset.tfBoard; TF_FROM_BOARD = true; TF_SIBS = secs.filter(sc => sc.tab === TF_BTAB).flatMap(sc => sc.boards).filter(x => x.id).map(x => ({ id: x.id, label: x.label })); setKinds(); drawLenses(); const on = lensRow.querySelector(".tf-lens.on"); if (on) tfChipInView(lensRow, on); showBars(); tfScrollTo(el, 0); salt = 0; paintings(false); };
       // swipe sideways to the next / previous tab, as on the paintings: the neighbor's folders wait beside this page and follow your finger
       let bs = null; const BGAP = 8, calm = !matchMedia("(prefers-reduced-motion:reduce)").matches;
       const bslide = (x, ms) => host.querySelectorAll(".tf-bwrap").forEach(n => { n.style.transition = ms ? `transform ${ms}ms cubic-bezier(.2,.8,.2,1)` : "none"; n.style.transform = x ? `translate3d(${x}px,0,0)` : ""; });
@@ -402,7 +415,7 @@ function todayFeed() {
   let sw = null;
   const still = !matchMedia("(prefers-reduced-motion:reduce)").matches, GAP = 8;
   const glide = (x, ms) => { host.style.transition = ms ? `transform ${ms}ms cubic-bezier(.2,.8,.2,1)` : "none"; host.style.transform = x ? `translate3d(${x}px,0,0)` : ""; };
-  const peekLoad = id => { const { ck, hk } = lensKeys(id); if (HF_CACHE.has(ck)) return Promise.resolve(HF_CACHE.get(ck)); return hfBudget(hfLens(id, hk, 0), 8000, "timeout").then(r => (r === "timeout" || !r || !r.ids || !r.ids.length ? null : lensOv(id, r))).catch(() => null); };
+  const peekLoad = id => { const { ck, hk } = lensKeys(id); if (HF_CACHE.has(ck)) return Promise.resolve(HF_CACHE.get(ck)); return hfBudget(hfLens(id, hk, 0), 8000, "timeout").then(r => (r === "timeout" || !r || !r.ids || !r.ids.length ? null : lensOv(id, fres(id, r)))).catch(() => null); };
   // the lenses beside this one, ready before you swipe: their lists, their details and their first pictures (so the page that slides in is sharp, not a blur)
   const warmNeighbors = () => {
     if (!host.isConnected || tfFilter() !== "paint") return;
@@ -472,6 +485,7 @@ function todayFeed() {
   tune.addEventListener("click", () => tfSettings(key => {
     if (key === "caps") host.classList.toggle("nocaps", !hfS().caps);
     else if ((key === "alike") && lensId() === "foryou" && tfFilter() === "paint" && host.querySelector(".tf-paint[data-gi]")) reanchor();
+    else if (key === "order") { tfScrollTo(el, 0); paintings(false); }
     else if (key === "river" || key === "alike") { HF_CACHE.clear(); HF_ENDS.clear(); HF_VR.clear(); salt = 0; tfScrollTo(el, 0); paintings(false); }
   }));
   // a settings change keeps the painting you are on and the few around it, and lets the rest follow the new settings from there (no jump to a new spot)
@@ -506,10 +520,9 @@ function todayFeed() {
     const s2 = hfS(); s2.roll = { ...(s2.roll || {}), [id]: hfRoll(id) + 1 }; salt = 0; save(); buzz(8); tfScrollTo(el, 0); showBars(); paintings(false);
   };
   lh.addEventListener("click", e => {
-    const fo = e.target.closest("[data-tf-follow]"), or = e.target.closest("[data-tf-order]"), by = e.target.closest("[data-tf-by]"), an = e.target.closest("[data-tf-another]"), rs = e.target.closest("[data-tf-reshuffle]");
+    const fo = e.target.closest("[data-tf-follow]"), by = e.target.closest("[data-tf-by]"), an = e.target.closest("[data-tf-another]"), rs = e.target.closest("[data-tf-reshuffle]");
     if (e.target.closest("[data-tf-boards]")) { buzz(4); TF_KIND = "board"; TF_FROM_BOARD = false; setKinds(); drawLenses(); showBars(); tfScrollTo(el, 0); render(false); return; }
     if (fo) { const [kind, ...r] = fo.dataset.tfFollow.split(":"), name = r.join(":"), on = !hfHas(kind, name); buzz(on ? 10 : 4); hfSetFollow(kind, name, on); fo.classList.toggle("on", on); fo.setAttribute("aria-pressed", on); fo.innerHTML = `${on ? TF_HEART_ON : TF_HEART}<span>${on ? "Following" : "Follow"}</span>`; drawLenses(); toast(on ? "Following " + name : "Unfollowed " + name, { low: true, ms: 2200 }); }
-    if (or) { hfS().pOrder = hfS().pOrder === "old" ? "shuffle" : "old"; save(); buzz(4); tfScrollTo(el, 0); paintings(false); }
     if (by) { hfS().likeBy = by.dataset.tfBy; save(); buzz(4); tfScrollTo(el, 0); paintings(false); }
     if (an) another(an.dataset.tfAnother);
   });
@@ -520,9 +533,14 @@ function todayFeed() {
   tfPullWire(el, host, () => refresh(), stop);
   const load = () => {
     host.innerHTML = tfSkeleton(k);
-    tfBuild(k).then(s => { TF = st = s; if (host.isConnected && tfFilter() !== "paint") others(back); }).catch(() => { if (host.isConnected && tfFilter() !== "paint") empty("You may be offline. Nothing is lost.", true); });
+    tfBuild(k).then(s => { TF = st = s; if (host.isConnected && tfFilter() === "board") boardsView(); else if (host.isConnected && tfFilter() !== "paint") others(back); }).catch(() => { if (host.isConnected && tfFilter() === "board") boardsView(); else if (host.isConnected && tfFilter() !== "paint") empty("You may be offline. Nothing is lost.", true); });
     loadGallery().then(() => hfPresets(k)).then(p => { pre = TF_PRE = p; if (host.isConnected) drawLenses(); }).catch(() => {});
   };
+  host.addEventListener("click", e => {   // the follow button on a painter's "that is all" card
+    const fo = e.target.closest(".tf-note [data-tf-follow]"); if (!fo) return;
+    const name = fo.dataset.tfFollow.slice(2), on = !hfHas("p", name); buzz(on ? 10 : 4); hfSetFollow("p", name, on); fo.classList.toggle("on", on); fo.setAttribute("aria-pressed", on);
+    fo.innerHTML = `${on ? TF_HEART_ON : TF_HEART}<span>${on ? "Following" : "Follow"} ${esc(fdShortName(name))}</span>`; drawLenses(); toast(on ? "Following " + name : "Unfollowed " + name, { low: true, ms: 2200 });
+  });
   host.addEventListener("click", e => { if (e.target.closest("[data-tf-retry]")) { buzz(6); HF_CACHE.clear(); st = null; load(); render(false); } });
   if (st) { if (!pre) loadGallery().then(() => hfPresets(k)).then(p => { pre = TF_PRE = p; if (host.isConnected) drawLenses(); }).catch(() => {}); render(back); } else { load(); if (tfFilter() === "paint") paintings(back); }
   return el;
@@ -563,6 +581,12 @@ function tfHalf(sh) {
   const away = e => { if (!sh.isConnected) { removeEventListener("pointerdown", away, true); return; } if (sh.contains(e.target) || e.target.closest("[data-tf-tune]")) return; removeEventListener("pointerdown", away, true); close(); };
   setTimeout(() => addEventListener("pointerdown", away, true), 60);
 }
+// the filters of the board you are on (its own years, color family and order)
+function tfBoardPart() {
+  const id = TF_LENS; if (TF_KIND !== "paint" || id === "foryou" || /^(l|c):/.test(id)) return "";
+  const f = hfBF(id), chips = (k, list, cur) => `<div class="tf-seg" role="radiogroup">${list.map(([v, l]) => `<button type="button" role="radio" aria-checked="${(cur || list[0][0]) === v}" data-tfbf="${k}:${esc(v)}">${esc(l)}</button>`).join("")}</div>`;
+  return `<div class="fs-c" data-tfbfbox><p>This board</p><small class="tf-fsmall">Time</small>${chips("era", HF_BF_ERAS, f.era)}<small class="tf-fsmall">Color</small>${chips("hue", [["", "Any"], ...HF_HUES.map(h => [h[0], h[0]]), ["Greys and neutrals", "Greys"]], f.hue)}<small class="tf-fsmall">Order</small>${chips("sort", HF_BF_ORDERS, f.sort)}</div>`;
+}
 function tfSettings(onChange) {
   const sw = (k, label, on) => `<div class="fs-c fs-tg"><p>${label}</p><button type="button" class="fs-switch" role="switch" aria-checked="${on}" data-tfs="${k}"><i></i></button></div>`;
   const word = v => (v > 80 ? "Almost the same" : v > 55 ? "Steady" : v > 30 ? "Varied" : "Exploring");
@@ -572,6 +596,8 @@ function tfSettings(onChange) {
   const rng = (k, label, v) => `<div class="fs-c"><div class="fs-row"><p>${label}</p><b data-tfout="${k}">${wordOf(k)(v)}</b></div><input type="range" min="0" max="100" step="1" value="${v}" style="--p:${v}%" data-tfal="${k}" aria-label="${label}"></div>`;
   const c = Math.round(hfAlikeC() * 100), v = Math.round(hfAlikeV() * 100), t = Math.round(hfAlikeT() * 100), pl = Math.round(hfAlikeP() * 100);
   const { sh } = sheet(`<div class="fs-sheet"><div class="fs-head"><h3>Settings</h3></div><div class="fs-scroll">${sw("caps", "Show painter and year", !!hfS().caps)}${sw("river", "Flow by color", hfRiverOn())}
+    <div class="fs-c"><p>Order of a painter's work</p><div class="tf-seg" role="radiogroup" aria-label="Order of a painter's work">${[["best", "Best first"], ["flow", "Flowing"], ["old", "Oldest"], ["shuffle", "Shuffled"]].map(([id, l]) => `<button type="button" role="radio" aria-checked="${(hfS().pOrder || "best") === id}" data-tfpo="${id}">${l}</button>`).join("")}</div></div>
+    ${tfBoardPart()}
     <div data-tfalikebox${hfRiverOn() ? "" : " hidden"}>${rng("alikeC", "Color", c)}${rng("alikeV", "Look", v)}${rng("alikeT", "Time", t)}${rng("alikeP", "Place", pl)}</div></div></div>`, { lock: false });
   tfHalf(sh);
   const paint = (k, n) => { const r = sh.querySelector(`[data-tfal="${k}"]`); if (!r) return; r.value = n; r.style.setProperty("--p", n + "%"); const o = sh.querySelector(`[data-tfout="${k}"]`); if (o) o.textContent = wordOf(k)(n); };
@@ -584,6 +610,15 @@ function tfSettings(onChange) {
     save(); buzz(4); onChange("alike");
   });
   sh.addEventListener("click", e => {
+    const bf = e.target.closest("[data-tfbf]");
+    if (bf) {
+      const [k, ...r] = bf.dataset.tfbf.split(":"), v = r.join(":"), st = hfS(); st.bf = st.bf || {}; const cur = st.bf[TF_LENS] = st.bf[TF_LENS] || {};
+      if (!v || v === "any" || (k === "sort" && v === "flow")) delete cur[k]; else cur[k] = v;
+      if (!Object.keys(cur).length) delete st.bf[TF_LENS];
+      save(); buzz(4); bf.parentNode.querySelectorAll("button").forEach(x => x.setAttribute("aria-checked", x === bf)); onChange("order"); return;
+    }
+    const po = e.target.closest("[data-tfpo]");
+    if (po) { hfS().pOrder = po.dataset.tfpo; save(); buzz(4); sh.querySelectorAll("[data-tfpo]").forEach(x => x.setAttribute("aria-checked", x === po)); onChange("order"); return; }
     const b = e.target.closest("[data-tfs]"); if (!b) return;
     const k = b.dataset.tfs, st = hfS(); st[k === "river" ? "river" : "caps"] = k === "river" ? !hfRiverOn() : !st.caps; save();
     b.setAttribute("aria-checked", k === "river" ? hfRiverOn() : !!st.caps); buzz(4);

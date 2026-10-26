@@ -267,31 +267,46 @@ const HF_CPS = [   // composition: how abstract (tools/audit_scene.py), how clos
   ["panorama", "Panoramas", i => GAL.ar[i] < .55],
 ];
 let HF_KEPT_LABEL = "Kept"; const HF_CUSTOM_LABELS = new Map();   // lens id -> its name (filled by hfBoards and hfCustomLabel)
+const hfKeptIds = () => (typeof fvArtStore === "function" ? Object.values(fvArtStore()) : []).filter(x => x && x.i >= 0 && !hfHid(x.i)).sort((a, b) => String(b.at || "").localeCompare(String(a.at || ""))).map(x => x.i);
+const hfKeptEra = i => (GAL.year[i] === GL_UNDATED ? -1 : Math.floor(GAL.year[i] / 50) * 50);
+const HF_HUES = [["Reds and pinks", 345, 15], ["Oranges", 15, 70], ["Golds and yellows", 70, 110], ["Greens", 110, 170], ["Teals", 170, 240], ["Blues", 240, 290], ["Purples", 290, 345]];
+const hfHueFam = i => { if (GAL.C[i] < 10) return "Greys and neutrals"; const h = hfHueOfLab(i); for (const [n, a, b] of HF_HUES) if (a < b ? h >= a && h < b : h >= a || h < b) return n; return "Greys and neutrals"; };
 async function hfCandsOf(id) {
   await loadGallery(); await hfBeautyReady();
   const t = id.slice(0, 2), v = id.slice(3), out = [];
   const scan = test => { for (let i = 0; i < GAL.n; i++) if (!hfHid(i) && test(i)) out.push(i); return out; };
+  if (t === "al") return scan(() => true);   // every painting, for the endless Photos-style list
   if (t === "pc") { const d = HF_PCS.find(x => x[0] === v); return d ? scan(d[2]) : out; }
   if (t === "cp") { const d = HF_CPS.find(x => x[0] === v); return d ? scan(d[2]) : out; }
-  if (t === "mu") return scan(i => GAL.mus[i] === +v);
+  if (t === "mu") { const nm = GAL.src[+v] && GAL.src[+v].name; return scan(i => GAL.mus[i] === +v || (nm && GAL.src[GAL.mus[i]].name === nm)); }   // sources that share a name are one collection
   if (t === "co") { const F = await hfFacets(), pos = F.meta.countries.indexOf(v) + 1; return pos ? scan(i => F.country[i] === pos) : out; }
   if (t === "su") { const S = await loadSubjects(), k = S.idx.get(v); if (k == null) return out; return scan(i => { for (let q = S.off[i]; q < S.off[i + 1]; q++) if (S.tg[q] === k) return true; return false; }); }
-  if (t === "yo") { const st = typeof fvArtStore === "function" ? Object.values(fvArtStore()) : []; return st.filter(x => x && x.i >= 0 && !hfHid(x.i)).sort((a, b) => (b.at || 0) - (a.at || 0)).map(x => x.i); }
+  if (t === "yo") {   // what you hearted, newest first; "kept" is all of it, "co:", "mv:", "ed:", "hu:" are the groups of Favorites
+    let ids = hfKeptIds(); if (v === "kept") return ids;
+    const F = await hfFacets(), [g, ...r] = v.split(":"), val = r.join(":");
+    if (g === "co") { const pos = F.meta.countries.indexOf(val) + 1; ids = ids.filter(i => F.country[i] === pos); }
+    else if (g === "mv") { const pos = F.meta.movements.indexOf(val) + 1; ids = ids.filter(i => F.mv[i] === pos); }
+    else if (g === "ed") ids = ids.filter(i => hfKeptEra(i) === +val);
+    else if (g === "hu") ids = ids.filter(i => hfHueFam(i) === val);
+    return ids;
+  }
   return out;
 }
-const hfCustomKind = t => t === "su" || t === "co" || t === "mu" || t === "pc" || t === "cp" || t === "yo";
+const hfCustomKind = t => t === "al" || t === "su" || t === "co" || t === "mu" || t === "pc" || t === "cp" || t === "yo";
 async function hfCustomLabel(id) {
   const t = id.slice(0, 2), v = id.slice(3);
+  if (t === "al") return "Every painting";
   if (t === "pc") return (HF_PCS.find(x => x[0] === v) || [0, v])[1];
   if (t === "cp") return (HF_CPS.find(x => x[0] === v) || [0, v])[1];
   if (t === "mu") { await loadGallery(); const s0 = GAL.src[+v]; return s0 ? s0.name : "Collection"; }
   if (t === "co") return v;
-  if (t === "yo") return HF_KEPT_LABEL;
+  if (t === "yo") return HF_CUSTOM_LABELS.get(id) || HF_KEPT_LABEL;
   if (t === "su") return typeof subjPlural === "function" ? subjPlural(v) : v;
   return v;
 }
 async function hfCustomList(id, k, roll) {
   const cand = await hfCandsOf(id);
+  if (id.startsWith("al:")) return { ids: cand.sort((a, b) => hfBeauty(b) - hfBeauty(a)), total: cand.length };   // all of it, the best first; the board's own filters narrow it
   if (id.startsWith("yo:")) return { ids: cand, total: cand.length };
   const rr = hfSeedOf(k + "|" + id + "|" + roll, "custom"), picked = hfPick(cand, rr, HF_KEEP, null, hfCut(.45));
   return { ids: hfRiverOn() ? hfChainList(picked, rr) : picked, total: cand.length };
@@ -324,17 +339,29 @@ async function hfBoards() {
   for (let i = 0; i < GAL.n; i++) if (!hfHid(i)) { cc[F.country[i]]++; mc[GAL.mus[i]]++; }
   const places = []; F.meta.countries.forEach((nm, j) => { if (cc[j + 1] >= 300) places.push({ nm, n: cc[j + 1] }); });
   places.sort((a, b) => b.n - a.n); secs.push({ tab: "places", title: "Places", boards: places.slice(0, 70).map(x => { HF_CUSTOM_LABELS.set("co:" + x.nm, x.nm); return { id: "co:" + x.nm, label: x.nm, sub: x.n.toLocaleString("en-US") + " paintings" }; }) });
-  const mus = []; GAL.src.forEach((s0, k) => { if (mc[k] >= 1500) mus.push({ k, n: mc[k], name: s0.name }); });
+  const musBy = new Map(); GAL.src.forEach((s0, k) => { if (!mc[k]) return; const m = musBy.get(s0.name); if (m) m.n += mc[k]; else musBy.set(s0.name, { k, n: mc[k], name: s0.name }); });
+  const mus = [...musBy.values()].filter(x => x.n >= 1500);
   mus.sort((a, b) => b.n - a.n); secs.push({ tab: "collections", title: "Collections", boards: mus.slice(0, 40).map(x => { HF_CUSTOM_LABELS.set("mu:" + x.k, x.name); return { id: "mu:" + x.k, label: x.name, sub: x.n.toLocaleString("en-US") + " paintings" }; }) });
   const pcb = test => HF_PCS.filter(d => test(d[0])).map(([id, label, t]) => { HF_CUSTOM_LABELS.set("pc:" + id, label); return { id: "pc:" + id, label, sub: cnt(t).toLocaleString("en-US") + " paintings" }; });
   secs.push({ tab: "palettes", title: "Palette character", boards: pcb(id => !HF_WORLDS.test(id) && !HF_LIGHT.test(id)) });
   secs.push({ tab: "palettes", title: "Color worlds", boards: pcb(id => HF_WORLDS.test(id)) });
   secs.push({ tab: "palettes", title: "Light", boards: pcb(id => HF_LIGHT.test(id)) });
   secs.push({ tab: "composition", title: "Composition", boards: HF_CPS.filter(d => HF_SCENE || !/^(close|figures|groups|wide|abstract|leaning)$/.test(d[0])).map(([id, label, test]) => { HF_CUSTOM_LABELS.set("cp:" + id, label); return { id: "cp:" + id, label, sub: cnt(test).toLocaleString("en-US") + " paintings" }; }) });
-  { const yb = [], kept = typeof fvArtStore === "function" ? Object.values(fvArtStore()).filter(x => x && x.i >= 0).length : 0;
-    if (kept) yb.push({ id: "yo:kept", label: HF_KEPT_LABEL, sub: kept.toLocaleString("en-US") + " paintings" });
+  { const yb = [], ids = hfKeptIds(), kept = ids.length, haveCol = typeof fvCount === "function" && fvCount() > 0, havePal = (S.palettes || []).length > 0;
+    if (kept) { HF_CUSTOM_LABELS.set("yo:kept", "All favorites"); yb.push({ id: "yo:kept", label: "All favorites", sub: kept.toLocaleString("en-US") + " paintings" }); }
     hfFollows().forEach(f => yb.push({ id: hfFollowId(f), label: f.kind === "p" ? fdShortName(f.name) : f.name, sub: f.kind === "p" ? "Painter you follow" : "Movement you follow" }));
-    if (yb.length) secs.unshift({ tab: "yours", title: "Favorites", boards: yb }); }
+    const grp = (title, key, labelOf) => {   // the groups your favorites fall into: one folder per place, movement, stretch of years, color family
+      const m = new Map(); ids.forEach(i => { const k = key(i); if (k == null || k === "") return; m.set(k, (m.get(k) || 0) + 1); });
+      if (m.size < 2) return;
+      secs.unshift({ tab: "yours", fav: "paint", title, boards: [...m.entries()].sort((x, y) => y[1] - x[1]).map(([k, n]) => { const id = "yo:" + labelOf.pre + ":" + k, lb = labelOf.name(k); HF_CUSTOM_LABELS.set(id, lb); return { id, label: lb, sub: n.toLocaleString("en-US") + (n === 1 ? " painting" : " paintings") }; }) });
+    };
+    // unshift in reverse so they read: Paintings, place, movement, time, color
+    grp("By color", i => hfHueFam(i), { pre: "hu", name: k => k });
+    grp("By time", i => { const e = hfKeptEra(i); return e < 0 ? null : e; }, { pre: "ed", name: k => hfEraName(k + "-" + (k + 50)) });
+    grp("By movement", i => { const j = F.mv[i]; return j ? F.meta.movements[j - 1] : null; }, { pre: "mv", name: k => k });
+    grp("By place", i => { const j = F.country[i]; return j ? F.meta.countries[j - 1] : null; }, { pre: "co", name: k => k });
+    if (yb.length || haveCol || havePal) secs.unshift({ tab: "yours", fav: "paint", title: "Paintings", boards: yb }); }
+  { let n = 0; for (let i = 0; i < GAL.n; i++) if (!hfHid(i)) n++; HF_CUSTOM_LABELS.set("al:all", "Every painting"); secs.unshift({ tab: "all", title: "Everything", boards: [{ id: "al:all", label: "Every painting", sub: n.toLocaleString("en-US") + " paintings, filter any way" }] }); }
   const ars = []; F.meta.artists.forEach((a, j) => { if (C.art[j + 1] >= 90) ars.push({ n: a[0], c: C.art[j + 1] }); });
   ars.sort((x, y) => y.c - x.c); secs.push({ tab: "painters", title: "Painters", boards: ars.slice(0, 90).map(x => ({ id: "p:" + x.n, label: fdShortName(x.n), sub: x.c.toLocaleString("en-US") + " paintings" })) });
   return secs;
@@ -663,17 +690,31 @@ async function hfByFacet(kind, name, k, roll) {
   const F = await hfFacets(), pos = (kind === "p" ? F.meta.artists.findIndex(a => a[0] === name) : F.meta.movements.indexOf(name)) + 1;
   if (!pos) return { ids: [], empty: "That isn't in the archive." };
   const cand = hfIndexBy(F, kind === "p" ? F.artist : F.mv, pos).filter(i => !hfHid(i));
-  if (kind === "p" && hfS().pOrder === "old") {
+  const ord = hfS().pOrder || "best";   // best (beautiful and well known first, the default), flow (gradual in color and years), old (oldest first), shuffle
+  if (kind === "p" && ord === "old") {
     cand.sort((a, b) => { const ya = GAL.year[a], yb = GAL.year[b]; return (ya === GL_UNDATED ? 1e6 : ya) - (yb === GL_UNDATED ? 1e6 : yb); });
-    return { ids: cand, total: cand.length };
+    return { ids: cand, total: cand.length, own: cand.length };
   }
   const rr = hfSeedOf(k + "|" + name + "|" + roll, kind);
   if (kind === "p") {   // every work of the painter (David, 2026-10-26); the feed then goes on with painters like them (hfPainterMore)
-    const byB = cand.slice().sort((a, b) => hfBeauty(b) - hfBeauty(a)), head = byB.slice(0, 500), rest = byB.slice(500).sort((a, b) => GAL.year[a] - GAL.year[b]);
+    const byB = cand.slice().sort((a, b) => hfBeauty(b) - hfBeauty(a));
+    if (ord === "best") {
+      const fam = await hfFamousOf(F.meta.artists[pos - 1][1]), have = new Set(cand), first = fam.filter(i => have.has(i)), seen = new Set(first);
+      return { ids: first.concat(byB.filter(i => !seen.has(i))), total: cand.length, own: cand.length };
+    }
+    if (ord === "shuffle") return { ids: hfPick(cand, rr, cand.length), total: cand.length, own: cand.length };
+    const head = byB.slice(0, 500), rest = byB.slice(500).sort((a, b) => GAL.year[a] - GAL.year[b]);
     return { ids: (hfRiverOn() ? hfChainList(head, rr) : head).concat(rest), total: cand.length, own: cand.length };
   }
   const picked = hfPick(cand, rr, HF_KEEP);
   return { ids: hfRiverOn() ? hfChainList(picked, rr) : picked, total: cand.length };
+}
+// a painter's best-known works first (data/artists/portraits.json `famous`: Wikidata reach), by gallery index
+let HF_FAM = null;
+async function hfFamousOf(slug) {
+  if (!HF_FAM) HF_FAM = (typeof rcLoadPortraits === "function" ? rcLoadPortraits() : Promise.resolve({})).catch(() => ({}));
+  const m = await HF_FAM, r = m && m[slug];
+  return r && r.famous ? r.famous.filter(i => i != null && i >= 0 && !hfHid(i)) : [];
 }
 // after a painter's own work: paintings of other painters from about the same years with a similar look (the look river from their best work, their own skipped); each call
 // gives the next batch, and it never ends
@@ -729,6 +770,19 @@ async function hfNearColor(hex) {
   const r = await paintingsFor(hex, { sort: "cover" }), out = [], have = new Set();
   (r.items || r.rows || []).forEach(x => { if (x.src === "paintings" && x.i >= 0 && !have.has(x.i) && !hfHid(x.i)) { have.add(x.i); out.push(x.i); } });
   return { ids: out.slice(0, HF_KEEP) };
+}
+// each board has its own filters (David, 2026-10-26: "nuanced filter settings for every board"): years, color family and order, kept per board in S.tf.bf[lens id]
+const HF_BF_ERAS = [["any", "Any time"], ["b1700", "Before 1700"], ["1700", "1700\u20131850"], ["1850", "1850\u20131925"], ["a1925", "After 1925"]], HF_BF_ERA_SPAN = { b1700: [-1e5, 1700], "1700": [1700, 1850], "1850": [1850, 1925], a1925: [1925, 1e5] };
+const HF_BF_ORDERS = [["flow", "As it flows"], ["best", "Best first"], ["old", "Oldest"], ["new", "Newest"]];
+const hfBF = id => (hfS().bf || {})[id] || {};
+function hfApplyBF(id, ids) {
+  const f = hfBF(id); if (!f.era && !f.hue && !f.sort) return ids;
+  let out = ids;
+  if (f.era && HF_BF_ERA_SPAN[f.era]) { const r = HF_BF_ERA_SPAN[f.era]; out = out.filter(i => { const y = GAL.year[i]; return y !== GL_UNDATED && y >= r[0] && y < r[1]; }); }
+  if (f.hue) out = out.filter(i => hfHueFam(i) === f.hue);
+  if (f.sort === "best") out = out.slice().sort((a, b) => hfBeauty(b) - hfBeauty(a));
+  else if (f.sort === "old" || f.sort === "new") { const up = f.sort === "old", y = i => (GAL.year[i] === GL_UNDATED ? (up ? 1e6 : -1e6) : GAL.year[i]); out = out.slice().sort((a, b) => (up ? y(a) - y(b) : y(b) - y(a))); }
+  return out;
 }
 // a lens id -> { ids, more, head, empty }
 async function hfLens(id, k, salt, fast) {

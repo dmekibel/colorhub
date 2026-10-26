@@ -268,6 +268,8 @@ function openRoute(hash, initial = false) {
   if (kind === "web" && typeof agOpenRoute === "function") { base(); XSTACK = []; agOpenRoute(id, more); return true; }
   // the Today feed (js/todayfeed.js): a room-style screen of its own, #/feed (#/today stays Learn)
   if (kind === "feed" && typeof todayFeed === "function") { base(); XSTACK = []; todayFeed(); return true; }
+  // Boards is the Museum's front door on a wide screen (David, 2026-10-26): the same screen as Explore, opened on its Boards kind; the address keeps saying so
+  if (kind === "boards" && typeof todayFeed === "function") { base(); XSTACK = []; TF_KIND = "board"; TF_FROM_BOARD = false; todayFeed(); try { history.replaceState(history.state, "", "#/boards"); document.title = "Museum \u00b7 Chromatlas"; if (typeof deskMarkActive === "function") deskMarkActive(); } catch (e) {} return true; }
   // the floor (the honeycomb, js/home.js): not a tab, so it's its own address
   if (kind === "home" && typeof hmHome === "function") { base(); XSTACK = []; hmHome(); return true; }
   if (kind === "map" && id && more != null && typeof hmMapRoute === "function") { base(); XSTACK = []; hmMapRoute(id, more); return true; }   // js/home.js: #/map/gallery/<i>, #/map/painting/<slug>

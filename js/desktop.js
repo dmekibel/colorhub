@@ -7,11 +7,11 @@
 const DESK_Q = "(min-width:900px) and (hover:hover) and (pointer:fine), (min-width:700px) and (min-height:640px) and (pointer:coarse)";   // second clause: an iPad, portrait or landscape (a phone turned sideways is under 640 tall)
 const DESK_MQ = typeof matchMedia === "function" ? matchMedia(DESK_Q) : null;
 // David, 2026-10-26: the feed is "Explore" (first), the map is "Map" (second); "Today" is no longer a name
-const DESK_LINKS = [["daily", "Explore", "#/feed"], ["home", "Map", "#/home"], ["museum", "Museum", "#/museum"], ["learn", "Learn", "#/today"], ["train", "Train", "#/train"], ["studio", "Studio", "#/studio"]];
+const DESK_LINKS = [["daily", "Explore", "#/feed"], ["home", "Map", "#/home"], ["museum", "Museum", "#/boards"], ["learn", "Learn", "#/today"], ["train", "Train", "#/train"], ["studio", "Studio", "#/studio"]];
 // which nav link a route belongs to (by its first address segment)
 const DESK_SECTION = {
   home: "home", map: "home", paintings: "home", color: "home", name: "home", pair: "home", set: "home", hue: "home",
-  museum: "museum", explore: "museum", painting: "museum", painter: "museum", gallery: "museum", page: "museum", story: "museum", poem: "museum", poems: "museum",
+  museum: "museum", boards: "museum", explore: "museum", painting: "museum", painter: "museum", gallery: "museum", page: "museum", story: "museum", poem: "museum", poems: "museum",
   film: "museum", passage: "museum", gem: "museum", gems: "museum", botany: "museum", botanical: "museum", photographer: "museum", photography: "museum", pulp: "museum",
   look: "museum", decade: "museum", ukiyoe: "museum", subject: "museum", "paintings-of": "museum", brand: "museum", brands: "museum", design: "museum", source: "museum", fashion: "museum", hub: "museum",
   today: "learn", learnit: "learn", practice: "learn", welcome: "learn", learn: "learn", read: "learn",
