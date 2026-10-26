@@ -23,7 +23,7 @@
 
 const routeSlug = s => String(s).normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 const APP_BASE = () => location.origin + location.pathname.replace(/[^/]*$/, "");
-const TAB_ROUTE = { feed: ["feed", "Today"], learn: ["today", "Learn"], gym: ["train", "Train"], explore: ["museum", NAV_MUSEUM], studio: ["studio", "Studio"], you: ["you", "You"] };   // you: js/you.js
+const TAB_ROUTE = { feed: ["feed", "Explore"], learn: ["today", "Learn"], gym: ["train", "Train"], explore: ["museum", NAV_MUSEUM], studio: ["studio", "Studio"], you: ["you", "You"] };   // you: js/you.js
 const LENS_ROUTE = { art: "art", ideas: "ideas", world: "world", saved: "saved" };   // "For you" (the pager) is plain #/explore
 const LENS_TITLE = { art: "Art", ideas: "Ideas", world: "World", saved: "Saved" };
 // legacy lens tokens, from before Paintings/Poems merged into Art and Colors was dropped (links, bookmarks, S.lens left over from an old save)

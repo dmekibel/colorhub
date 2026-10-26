@@ -13,7 +13,7 @@
 // ---------- the Places stem ----------
 // Every place, in order (PLAN §3.1): the floor plus the four rooms that rise from it. Each row shows its own
 // live art and note (js/core.js roomsBubbleArt/roomsNote, unchanged -- the same pictures the old stem used).
-const PLACES_LIST = [["home", NAV_MAP], ["feed", "Today"], ...ROOMS_LIST];   // Today: the feed (js/todayfeed.js)
+const PLACES_LIST = [["feed", "Explore"], ["home", NAV_MAP], ...ROOMS_LIST];   // Explore: the feed (js/todayfeed.js), then the Map (David, 2026-10-26)
 // Today's stripes read like Learn's (David, 2026-10-24). Same 48 px disc as the other rows, real colors, a different subject:
 // a masonry of four differently sized rounded tiles, like the Today feed itself (never parallel bars). The colors are the same
 // pigment set Today's old strip used (roomsBubbleArt "feed"). Studio keeps its own rainbow disc with a camera on it.

@@ -6,7 +6,8 @@
 // Nothing here changes a screen's own code: the bar lives outside #app, and the footer is appended to the finished screen.
 const DESK_Q = "(min-width:900px) and (hover:hover) and (pointer:fine), (min-width:700px) and (min-height:640px) and (pointer:coarse)";   // second clause: an iPad, portrait or landscape (a phone turned sideways is under 640 tall)
 const DESK_MQ = typeof matchMedia === "function" ? matchMedia(DESK_Q) : null;
-const DESK_LINKS = [["home", "Explore", "#/home"], ["museum", "Museum", "#/museum"], ["learn", "Learn", "#/today"], ["train", "Train", "#/train"], ["studio", "Studio", "#/studio"], ["daily", "Today", "#/feed"]];
+// David, 2026-10-26: the feed is "Explore" (first), the map is "Map" (second); "Today" is no longer a name
+const DESK_LINKS = [["daily", "Explore", "#/feed"], ["home", "Map", "#/home"], ["museum", "Museum", "#/museum"], ["learn", "Learn", "#/today"], ["train", "Train", "#/train"], ["studio", "Studio", "#/studio"]];
 // which nav link a route belongs to (by its first address segment)
 const DESK_SECTION = {
   home: "home", map: "home", paintings: "home", color: "home", name: "home", pair: "home", set: "home", hue: "home",
