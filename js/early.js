@@ -16,7 +16,8 @@
 (function () {
   try {
     var h = location.hash;
-    if (!/^#\/paintings\/map/.test(h) || typeof fetch !== "function") return;   // the app now opens on the color map: only an address on the painting map needs these
+    var mapOpen = /^#\/paintings\/map/.test(h), todayOpen = /^#?\/?$/.test(h) || /^#\/feed/.test(h);   // (David, 2026-10-26: the app opens on Today: its gallery, facets and beauty files start at once too)
+    if ((!mapOpen && !todayOpen) || typeof fetch !== "function") return;
     var m = (document.currentScript && document.currentScript.src || "").match(/[?&]v=([^&]+)/), v = m ? m[1] : "";
     var base = /(^|\.)chromatlas\.app$|github\.io$/.test(location.hostname) ? "https://data.chromatlas.app/" : "";
     var P = window.__PM_PRE = {}, R = {};   // P: parsed values by file name under data/paintmap/; R: Response promises by data path
@@ -26,13 +27,14 @@
     };
     var val = function (name, pri, kind) { return raw("data/paintmap/" + name, pri).then(function (r) { if (!r.ok) throw new Error(name); return kind === "json" ? r.json() : kind === "buf" ? r.arrayBuffer() : r.blob(); }); };
     window.__EARLY = { take: function (path) { var p = R[path]; delete R[path]; return p || null; } };
-    ["data/gallery/index.json", "data/gallery/index.bin", "data/gallery/est.json", "data/facets/facets.json", "data/facets/facets.bin"].forEach(function (p) { var q = R[p] = raw(p, "low"); q.catch(function () {}); });
+    ["data/gallery/index.json", "data/gallery/index.bin", "data/gallery/est.json", "data/facets/facets.json", "data/facets/facets.bin"].concat(todayOpen ? ["data/gallery/aesthetic.json", "data/gallery/aesthetic.bin"] : []).forEach(function (p) { var q = R[p] = raw(p, "low"); q.catch(function () {}); });
     var micro = P["micro.json"] = val("micro.json", "auto", "json");
     micro.then(function (meta) {
       var all = meta.sheets.map(function (n) { return (P[n] = val(n, "auto", "blob")); });
       all.forEach(function (p) { p.catch(function () {}); });
     }, function () {});
     micro.catch(function () {});
+    if (!mapOpen) return;   // Today does not need the map's layout files
     P["cluster.json"] = val("cluster.json", "auto", "json"); P["cluster.json"].catch(function () {}); P["cluster.bin"] = val("cluster.bin", "auto", "buf"); P["cluster.bin"].catch(function () {});
     var man = P["manifest.json"] = val("manifest.json", "auto", "json"); man.catch(function () {});
   } catch (e) {}
