@@ -231,3 +231,18 @@ html .room-sheet>.screen.tf-screen.tf-screen{padding-left:var(--tfp);padding-rig
 .tf-color b{font-size:clamp(11px,15cqw,26px);line-height:1.05;-webkit-line-clamp:4;overflow-wrap:anywhere;hyphens:auto}
 .tf-cotd{border-radius:0}
 .tf-peek .tf-cols{margin-left:calc(-1 * var(--tfp));margin-right:calc(-1 * var(--tfp))}
+
+/* Boards: a page of smart folders (a mood, a period, a movement, a color, a painter); square covers of four paintings, the name, one quiet line */
+.tf-bh{font:400 28px/1.1 var(--serif);margin:26px 0 12px;padding:0}
+.tf-bh:first-child{margin-top:8px}
+.tf-bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px}
+@media (min-width:700px){.tf-bgrid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:26px 16px}}
+.tf-board{display:flex;flex-direction:column;gap:7px;text-align:left;color:var(--ink);padding:0}
+.tf-bcov{display:grid;grid-template-columns:1fr 1fr;gap:2px;aspect-ratio:1/1;background:#0b0a09;overflow:hidden}
+.tf-bcov i{position:relative;display:block;background:var(--c,#1b1916);overflow:hidden}
+.tf-bcov i img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s}
+.tf-bcov i img.on{opacity:1}
+.tf-board b{font:400 19px/1.15 var(--serif)}
+.tf-board small{font:400 14px/1.2 var(--sans);color:var(--soft)}
+.tf-board:active .tf-bcov{opacity:.85}
+.tf-back{margin-right:4px}

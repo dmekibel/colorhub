@@ -15,7 +15,7 @@
 // Back returns to the same screen: todayFeed() re-renders what was shown (TF.shown) and core.js restores the scroll.
 // Everything here is prefixed tf / TF_.
 
-const TF_TYPES = [["paint", "Paintings"], ["color", "Colors"], ["pal", "Palettes"], ["art", "Stories"]];   // row one of the home (David, 2026-10-26): Paintings is the start and holds nothing else
+const TF_TYPES = [["paint", "Paintings"], ["board", "Boards"], ["color", "Colors"], ["pal", "Palettes"], ["art", "Stories"]];   // row one of the home (David, 2026-10-26): Paintings is the start and holds nothing else
 const TF_BATCH = 24, TF_SHARDS = 48;
 // articles still being written (status pilot/draft in data/articles): never in the feed
 const TF_SKIP = new Set(["b-dazzled-blue", "carolina-blue", "columbia-blue", "cyber-grape", "dark-slate-grey", "deep-rose-red", "delft-blue", "dresden-brown", "dull-indian-purple", "english-violet", "helvetia-blue", "india-spice", "indian-pink", "indigo", "irish-green", "isabelline", "japanese-blue", "link-map", "madder", "mauve", "pale-green-blue-grey", "pale-greyish-vinaceous", "pale-gull-grey", "pale-hortense-violet", "pale-oak", "pale-purple-drab", "pale-purplish-vinaceous", "pale-sea-grey", "pale-turtle-green", "pale-violet-plumbeous", "pale-wistaria-blue", "papyrus-white", "parula-blue", "pastel-parchment", "patina-green", "pauncy-green", "pea-soup-green", "peach-blush", "peachbeige", "pearl-beige", "pearl-blackberry", "pearl-gentian", "pearl-green", "pearly-purple", "perilla-purple", "phlox", "phlox-pink", "pig-pink", "pigeon-blue", "pinard-yellow", "plumbago-grey", "plumbago-slate", "pois-green", "pomegranate-purple", "poppy-purple", "porcelain-green", "prussian-blue", "purple-pizzazz", "red-plum", "reed-green", "reed-yellow", "robin-s-egg", "robin-s-egg-blue", "rose-castor", "rose-dawn", "rose-dust", "spanish-bistre", "steel-pink"]);
@@ -23,7 +23,7 @@ let TF = null;          // today's pool: { k, items:{paint,pal,color,art,cotd}, 
 let TF_LITE = null;     // the articles index, once
 
 const tfInk = hex => lab(hex)[0] > 60 ? "#141311" : "#F6F2EA";
-let TF_KIND = "paint", TF_LENS = "foryou", TF_EXTRA = [];   // each launch opens on Paintings and For you; where you went afterwards is kept only for this visit (a Back returns to it)
+let TF_KIND = "paint", TF_LENS = "foryou", TF_EXTRA = [], TF_FROM_BOARD = false;   // each launch opens on Paintings and For you; where you went afterwards is kept only for this visit (a Back returns to it)
 const tfFilter = () => (TF_TYPES.some(t => t[0] === TF_KIND) ? TF_KIND : "paint");
 // plain text out of an article's lede (no markup)
 const tfPlain = s => String(s || "").replace(/\[\[(?:[^\]|]*\|)?([^\]]*)\]\]/g, "$1").replace(/\[\d+\]/g, "").replace(/[*`]/g, "").replace(/\s+/g, " ").trim();
@@ -219,6 +219,8 @@ function todayFeed() {
     else if (h.kind === "m" || h.kind === "p") html = `<h2 class="tf-lh-t">${esc(h.name)}</h2><span class="tf-lh-n">${res.total ? res.total.toLocaleString("en-US") + " paintings" : ""}</span>${fol(h.kind, h.name)}${h.kind === "p" ? `<button type="button" class="tf-mini" data-tf-order>${hfS().pOrder === "old" ? "Oldest first" : "Shuffled"}</button>` : ""}`;
     else if (h.kind === "l") html = `<span class="tf-seed" data-tf-seed></span><div class="tf-lh-x"><h2 class="tf-lh-t" data-tf-seedt>Like this one</h2><span class="tf-lh-n" data-tf-seedn></span></div><div class="tf-seg" role="group" aria-label="Match by"><button type="button" class="${h.by === "vibe" ? "on" : ""}" data-tf-by="vibe">By look</button><button type="button" class="${h.by === "color" ? "on" : ""}" data-tf-by="color">By color</button></div><button type="button" class="tf-mini" data-tf-another="like">Another</button>`;
     else if (h.kind === "c") { const row = TODAY_TABLE.find(x => x[2] === h.hex); let nm = row ? row[1] : h.hex; if (!row) { try { nm = nameOf(h.hex).n; } catch (e) {} } html = `<span class="tf-sw" style="--c:${esc(h.hex)}"></span><h2 class="tf-lh-t">Near ${esc(nm.toLowerCase())}</h2><button type="button" class="tf-mini" data-tf-another="color">Another</button>`; }
+    if ((h.kind === "mo" || h.kind === "e") && !html) html = `<h2 class="tf-lh-t">${esc(h.name)}</h2><span class="tf-lh-n">${res.total ? res.total.toLocaleString("en-US") + " paintings" : ""}</span>`;
+    if (html && TF_FROM_BOARD && h.kind !== "f") html = `<button type="button" class="tf-mini tf-back" data-tf-boards>\u2039 Boards</button>` + html;
     lh.innerHTML = html; lh.hidden = !html; lh.dataset.kind = h.kind;
     if (h.kind === "l") glShard(Math.floor(h.seed / GAL.shard)).then(() => { const d = glDetailNow(h.seed); if (!d || !lh.isConnected) return; const t = lh.querySelector("[data-tf-seedt]"), n = lh.querySelector("[data-tf-seedn]"), sd = lh.querySelector("[data-tf-seed]"); if (t) t.textContent = "Like " + d.t; if (n) n.textContent = [d.a, glYear(h.seed)].filter(Boolean).join(" · "); if (sd && d.img) { const im = new Image(); im.alt = ""; im.onload = () => sd.appendChild(im); im.src = d.img; } if (pre && pre.li === h.seed && !pre.likeTitle) { pre.likeTitle = hfShortTitle(d.t); drawLenses(); } }).catch(() => {});
   };
@@ -266,10 +268,31 @@ function todayFeed() {
     if (!st) { host.innerHTML = tfSkeleton(k); return; }
     tok++; tfPaint(el, host, st, f, restore, stop);
   };
-  const render = restore => { if (tfFilter() === "paint") paintings(restore); else others(restore); };
+  // Boards (David, 2026-10-26: "smart folders you scroll and pick one to expand"): a page of folder covers; a folder opens as the same endless feed with that lens
+  const boardsView = () => {
+    tok++; lh.hidden = true; host.innerHTML = `<div class="tf-state"><p class="small">Folders are loading…</p></div>`;
+    const my = tok;
+    hfBoards().then(secs => {
+      if (my !== tok || !host.isConnected || tfFilter() !== "board") return;
+      host.innerHTML = secs.map(sc => `<h2 class="tf-bh">${esc(sc.title)}</h2><div class="tf-bgrid">${sc.boards.map(b => `<button type="button" class="tf-board" data-tf-board="${esc(b.id)}"><span class="tf-bcov" ${b.hex ? `style="--c:${esc(b.hex)}"` : ""}><i></i><i></i><i></i><i></i></span><b>${esc(b.label)}</b><small>${esc(b.sub)}</small></button>`).join("")}</div>`).join("");
+      host.onclick = e => { const b = e.target.closest("[data-tf-board]"); if (!b) return; buzz(5); TF_KIND = "paint"; TF_LENS = b.dataset.tfBoard; TF_FROM_BOARD = true; setKinds(); drawLenses(); const on = lensRow.querySelector(".tf-lens.on"); if (on) tfChipInView(lensRow, on); showBars(); tfScrollTo(el, 0); salt = 0; paintings(false); };
+      // covers fill as they come on screen: four paintings each
+      const fill = card => {
+        const id = card.dataset.tfBoard; if (card.dataset.cv) return; card.dataset.cv = "1";
+        hfCoverIds(id).then(gis => Promise.all(gis.map(g => glShard(Math.floor(g / GAL.shard)).then(() => [g, glDetailNow(g)])))).then(rows => {
+          const ims = card.querySelectorAll(".tf-bcov i");
+          rows.forEach(([g, d], n) => { if (d && d.img && ims[n]) { const im = new Image(); im.alt = ""; im.decoding = "async"; const sty = glCropStyle(g, d, glAR(g)); if (sty) im.setAttribute("style", (sty.match(/style="([^"]*)"/) || [])[1] || ""); im.onload = () => im.classList.add("on"); im.src = d.img; ims[n].appendChild(im); } });
+        }).catch(() => {});
+      };
+      const cards = [...host.querySelectorAll("[data-tf-board]")];
+      if (typeof IntersectionObserver === "function") { const io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { fill(x.target); io.unobserve(x.target); } }), { rootMargin: "600px 0px" }); cards.forEach(c => io.observe(c)); stop.push(() => io.disconnect()); }
+      else cards.slice(0, 24).forEach(fill);
+    }).catch(() => { if (my === tok) host.innerHTML = `<div class="tf-state"><p class="small">The folders didn't load.</p></div>`; });
+  };
+  const render = restore => { const f = tfFilter(); if (f === "paint") paintings(restore); else if (f === "board") boardsView(); else others(restore); };
   kindsRow.addEventListener("click", e => {
     const b = e.target.closest("[data-tf-f]"); if (!b || b.dataset.tfF === tfFilter()) return;
-    buzz(4); TF_KIND = b.dataset.tfF; setKinds(); drawLenses(); tfChipInView(kindsRow, b); showBars();
+    buzz(4); TF_KIND = b.dataset.tfF; TF_FROM_BOARD = false; setKinds(); drawLenses(); tfChipInView(kindsRow, b); showBars();
     if (st) st.shown[b.dataset.tfF] = 0; tfScrollTo(el, 0); render(false);
   });
   // a tap on a chip starts at the top with the rows showing; a SWIPE (want = where the next page's first row was on screen) lands exactly there: no scroll to the top, the rows stay as they were
@@ -401,6 +424,7 @@ function todayFeed() {
   };
   lh.addEventListener("click", e => {
     const fo = e.target.closest("[data-tf-follow]"), or = e.target.closest("[data-tf-order]"), by = e.target.closest("[data-tf-by]"), an = e.target.closest("[data-tf-another]"), rs = e.target.closest("[data-tf-reshuffle]");
+    if (e.target.closest("[data-tf-boards]")) { buzz(4); TF_KIND = "board"; TF_FROM_BOARD = false; setKinds(); drawLenses(); showBars(); tfScrollTo(el, 0); render(false); return; }
     if (fo) { const [kind, ...r] = fo.dataset.tfFollow.split(":"), name = r.join(":"), on = !hfHas(kind, name); buzz(on ? 10 : 4); hfSetFollow(kind, name, on); fo.classList.toggle("on", on); fo.setAttribute("aria-pressed", on); fo.innerHTML = `${on ? TF_HEART_ON : TF_HEART}<span>${on ? "Following" : "Follow"}</span>`; drawLenses(); toast(on ? "Following " + name : "Unfollowed " + name, { low: true, ms: 2200 }); }
     if (or) { hfS().pOrder = hfS().pOrder === "old" ? "shuffle" : "old"; save(); buzz(4); tfScrollTo(el, 0); paintings(false); }
     if (by) { hfS().likeBy = by.dataset.tfBy; save(); buzz(4); tfScrollTo(el, 0); paintings(false); }

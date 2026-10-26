@@ -170,6 +170,64 @@ async function hfAfterSeed(hk, used) {
   const skip = new Set(hfSeen()); used.forEach(i => skip.add(i));
   return hfBudget(hfVibeRiver(hk, hfSeedOf(hk, "afterseed"), skip, null, used[used.length - 1]), 9000, []);
 }
+// ---------- moods, periods and the Boards (David, 2026-10-26: "smart folders: a mood, a look, a color, a painting, each with its own infinite scroll") ----------
+// A board is a lens (a definition, never a stored list): "mo:serene" (data/gallery/mood.bin, tools/audit_mood.py: how much of a picture's reading is each of twelve moods,
+// ranked across the archive 0..255), "e:1850-1900" (a span of years), "m:<movement>", "p:<painter>", "c:#hex" (near a color). Each opens as the same endless, gradual feed.
+let HF_MOOD = null, HF_MOODP = null;
+const hfMoodReady = () => HF_MOODP || (HF_MOODP = loadGallery().then(async () => {
+  try {
+    const m = await (await fetch("data/gallery/mood.json")).json(), r = await fetch("data/gallery/mood.bin");
+    if (m && r.ok) { const b = new Uint8Array(await r.arrayBuffer()); if (b.length === GAL.n * m.moods.length) HF_MOOD = { b, k: m.moods.length, moods: m.moods }; }
+  } catch (e) {}
+}).catch(() => {}));
+const hfMoodName = id => { const m = HF_MOOD && HF_MOOD.moods.find(x => x[0] === id); return m ? m[1] : id; };
+const hfEraSpan = v => { const [a, b] = String(v).split("-").map(Number); return [a || 0, b || 3000]; };
+const hfEraName = v => { const [a, b] = hfEraSpan(v); return b - a === 100 ? a + "s" : a + "–" + b; };
+// how strongly painting i reads as a mood (0..1), and a board's candidate list: the strongest readings that are also beautiful
+const hfMoodAt = (i, k) => (HF_MOOD ? HF_MOOD.b[i * HF_MOOD.k + k] / 255 : 0);
+function hfMoodCands(id, min) {
+  const k = HF_MOOD ? HF_MOOD.moods.findIndex(x => x[0] === id) : -1; if (k < 0) return [];
+  const out = []; for (let i = 0; i < GAL.n; i++) { if (hfHid(i)) continue; const mv = hfMoodAt(i, k); if (mv >= min && hfBeauty(i) >= hfCut(.45)) out.push(i); }
+  return out;
+}
+async function hfMoodList(id, k, roll) {
+  await hfMoodReady(); await hfFacets();
+  const cand = hfMoodCands(id, .88), rr = hfSeedOf(k + "|" + id + "|" + roll, "mood"), picked = hfPick(cand, rr, HF_KEEP);
+  return { ids: hfRiverOn() ? hfChainList(picked, rr) : picked, total: cand.length };
+}
+async function hfEraList(v, k, roll) {
+  const [a, b] = hfEraSpan(v), cand = []; for (let i = 0; i < GAL.n; i++) { const y = GAL.year[i]; if (y !== GL_UNDATED && y >= a && y < b && !hfHid(i)) cand.push(i); }
+  const rr = hfSeedOf(k + "|e" + v + "|" + roll, "era"), picked = hfPick(cand, rr, HF_KEEP, null, hfCut(.5));
+  return { ids: hfRiverOn() ? hfChainList(picked, rr) : picked, total: cand.length };
+}
+// the folders: sections of boards for the Boards page
+async function hfBoards() {
+  const F = await hfFacets(), C = hfCounts(F); await hfBeautyReady(); await hfMoodReady();
+  const secs = [];
+  if (HF_MOOD) secs.push({ title: "Moods", boards: HF_MOOD.moods.map(([id, name]) => ({ id: "mo:" + id, label: name, sub: "Mood" })) });
+  secs.push({ title: "Periods", boards: [[1400, 1500], [1500, 1600], [1600, 1700], [1700, 1800], [1800, 1850], [1850, 1900], [1900, 1925], [1925, 1960]].map(([a, b]) => ({ id: "e:" + a + "-" + b, label: hfEraName(a + "-" + b), sub: "Period" })) });
+  const mvs = []; F.meta.movements.forEach((n, j) => { if (n && C.mv[j + 1] >= 500 && HF_KNOWN.test(n)) mvs.push({ n, c: C.mv[j + 1] }); });
+  mvs.sort((x, y) => y.c - x.c); secs.push({ title: "Movements", boards: mvs.slice(0, 24).map(x => ({ id: "m:" + x.n, label: x.n, sub: x.c.toLocaleString("en-US") + " paintings" })) });
+  const nice = TODAY_TABLE.filter(r => { const c = lch(r[2]); return c[1] >= 12 && hfLiking(c[2], c[0], c[1]) >= .66; }), by = new Map();
+  nice.forEach(r => { const h = Math.floor(lch(r[2])[2] / 30); if (!by.has(h)) by.set(h, r); });
+  secs.push({ title: "Colors", boards: [...by.values()].map(r => ({ id: "c:" + r[2], label: r[1], sub: "Color", hex: r[2] })) });
+  const ars = []; F.meta.artists.forEach((a, j) => { if (C.art[j + 1] >= 150) ars.push({ n: a[0], c: C.art[j + 1] }); });
+  ars.sort((x, y) => y.c - x.c); secs.push({ title: "Painters", boards: ars.slice(0, 36).map(x => ({ id: "p:" + x.n, label: fdShortName(x.n), sub: x.c.toLocaleString("en-US") + " paintings" })) });
+  return secs;
+}
+// four paintings for a folder's cover: among the most beautiful of that board, never two by one painter
+async function hfCoverIds(id) {
+  const F = await hfFacets(); await hfBeautyReady(); await hfMoodReady();
+  const t = id.slice(0, 2), v = id.slice(2); let cand = [];
+  if (t === "mo") cand = hfMoodCands(id.slice(3), .93);
+  else if (t === "e:") { const [a, b] = hfEraSpan(v); for (let i = 0; i < GAL.n; i++) { const y = GAL.year[i]; if (y !== GL_UNDATED && y >= a && y < b && !hfHid(i)) cand.push(i); } }
+  else if (t === "m:" || t === "p:") { const pos = (t === "p:" ? F.meta.artists.findIndex(a => a[0] === v) : F.meta.movements.indexOf(v)) + 1; cand = pos ? hfIndexBy(F, t === "p:" ? F.artist : F.mv, pos).filter(i => !hfHid(i)) : []; }
+  else if (t === "c:") cand = (await hfNearColor(v)).ids.slice(0, 80);
+  cand = cand.filter(i => GAL.ar[i] > .6 && GAL.ar[i] < 1.7).sort((x, y) => hfBeauty(y) - hfBeauty(x)).slice(0, 40);
+  const rnd = hfSeedOf(HF_SESSION + id, "cover"), out = [], ars = new Set();
+  while (out.length < 4 && cand.length) { const j = Math.floor(rnd() * Math.min(cand.length, 14)), i = cand.splice(j, 1)[0], a = F.artist[i]; if (a && ars.has(a) && cand.length > 6) continue; if (a) ars.add(a); out.push(i); }
+  return out;
+}
 // an endless row of lenses (David, 2026-10-26: "make that sideways list of tabs infinite, so there is always a new painting tab"): a handful of new
 // movements, painters and colors the row does not have yet, in a random order for this visit
 async function hfMoreLenses(have, n) {
@@ -205,6 +263,7 @@ function hfChips(pre, activeId) {
 }
 function hfLabelOf(id, pre) {
   const t = id.slice(0, 2), v = id.slice(2);
+  if (t === "mo") return hfMoodName(id.slice(3)); if (t === "e:") return hfEraName(v);
   if (t === "m:") return v; if (t === "p:") return fdShortName(v);
   if (t === "l:") return pre && pre.likeTitle && "l:" + pre.li === id ? "Like " + pre.likeTitle : "Like this one"; if (t === "c:") { const r = TODAY_TABLE.find(x => x[2] === v); return "Near " + (r ? r[1].toLowerCase() : v); }
   return "For you";
@@ -526,6 +585,8 @@ async function hfLens(id, k, salt, fast) {
   if (fast) { const rnd = hfSeedOf(k, "fast"); return { ids: hfSpread(hfPick(null, rnd, 240, hfSeen(), hfCut(.86))), more: true, head: { kind: "f" } }; }
   const t = id.slice(0, 2), v = id.slice(2);
   if (t === "m:" || t === "p:") return { ...(await hfByFacet(t[0], v, k, hfRoll(id))), head: { kind: t[0], name: v } };
+  if (t === "mo") return { ...(await hfMoodList(id.slice(3), k, hfRoll(id))), head: { kind: "mo", name: hfMoodName(id.slice(3)) } };
+  if (t === "e:") return { ...(await hfEraList(v, k, hfRoll(id))), head: { kind: "e", name: hfEraName(v) } };
   if (t === "l:") { const seed = +v, by = hfS().likeBy === "color" ? "color" : "vibe"; return { ...(await hfLike(seed, by)), head: { kind: "l", seed, by } }; }
   if (t === "c:") return { ...(await hfNearColor(v)), head: { kind: "c", hex: v } };
   return { ...(await hfForYou(k, salt | 0)), head: { kind: "f" } };
