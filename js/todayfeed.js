@@ -521,13 +521,19 @@ function tfPaint(scr, host, st, f, restore, stop, ov) {
   }
   const add = upTo => {
     const tpl = document.createElement("template");
+    // column heights are kept as numbers (read once per batch, then estimated from each card's known shape), not re-read from the page after every card:
+    // that read forced a full layout per card, which on a phone is what made a batch of cards a visible stall
+    const cw = cols[0] ? cols[0].offsetWidth : 0, hs = cols.map(c => c.offsetHeight), capH = host.classList.contains("nocaps") ? 0 : 50;
+    const est = it => it.t === "sp" ? cw / it.ar + capH : it.t === "paint" ? cw / glAR(it.gi) + capH : it.t === "pal" ? cw / it.r : it.t === "color" ? cw * it.r : null;
     for (; n < Math.min(upTo, list.length); n++) {
       tpl.innerHTML = tfCard(list[n]);
       const node = tpl.content.firstElementChild; if (!node) continue;
-      let s = cols[0]; for (const c of cols) if (c.offsetHeight < s.offsetHeight) s = c;
+      let bi = 0; for (let q = 1; q < cols.length; q++) if (hs[q] < hs[bi]) bi = q;
+      const s = cols[bi];
       if (n < 10) { node.dataset.first = "1"; node.querySelectorAll("img").forEach(im => { im.loading = "eager"; im.fetchPriority = "high"; }); }
       node.dataset.ix = n;
       s.appendChild(node);
+      { const e = cw ? est(list[n]) : null; hs[bi] += e != null ? e : node.offsetHeight; }
       if (list[n].t === "paint" && typeof fdMicroPaint === "function") fdMicroPaint(node.querySelector(".tf-im"), list[n].gi);
       if (ov && ov.seen && list[n].gi != null) hfMarkSeen(list[n].gi);
     }
