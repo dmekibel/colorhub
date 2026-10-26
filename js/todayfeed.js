@@ -328,8 +328,27 @@ function todayFeed() {
   }, { passive: true });
   el.querySelector("[data-tf-tune]").addEventListener("click", () => tfSettings(key => {
     if (key === "caps") host.classList.toggle("nocaps", !hfS().caps);
+    else if ((key === "alike") && lensId() === "foryou" && tfFilter() === "paint" && host.querySelector(".tf-paint[data-gi]")) reanchor();
     else if (key === "river" || key === "alike") { HF_CACHE.clear(); HF_ENDS.clear(); HF_VR.clear(); salt = 0; tfScrollTo(el, 0); paintings(false); }
   }));
+  // a settings change keeps the painting you are on and the few around it, and lets the rest follow the new settings from there (no jump to a new spot)
+  const reanchor = async () => {
+    const top0 = bars.getBoundingClientRect().bottom, vis = [...host.querySelectorAll(".tf-paint[data-gi][data-ix]")].map(c => ({ c, r: c.getBoundingClientRect() })).filter(x => x.r.bottom > top0 + 20 && x.r.top < innerHeight - 20).sort((a, b) => a.c.dataset.ix - b.c.dataset.ix);
+    if (!vis.length) { HF_CACHE.clear(); HF_ENDS.clear(); HF_VR.clear(); salt = 0; paintings(false); return; }
+    const mid = innerHeight / 2, mine = vis.reduce((b, x) => (Math.abs(x.r.top + x.r.height / 2 - mid) < Math.abs(b.r.top + b.r.height / 2 - mid) ? x : b), vis[0]);
+    const keep = vis.slice(0, 8).map(x => +x.c.dataset.gi), anchor = +mine.c.dataset.gi, y0 = mine.r.top, my = ++tok, { hk, ck } = lensKeys("foryou");
+    HF_ENDS.clear(); HF_VR.clear();
+    const res = await hfAround(hk, keep).catch(() => null);
+    if (my !== tok || !host.isConnected || !res || !res.after.length) { if (my === tok) { HF_CACHE.clear(); salt = 0; paintings(false); } return; }
+    const ids = [...res.before, ...keep, ...res.after];
+    HF_CACHE.delete(ck);
+    const ov = lensOv("foryou", { ids, more: true, head: { kind: "f" } }, mkItems(ids));
+    ov.res = { ids, more: true, head: { kind: "f" } };
+    HF_STATE.shown[ov.key] = Math.max(TF_BATCH, ids.indexOf(anchor) + 16); delete HF_STATE.y[ov.key];   // enough cards drawn to reach the painting you were on
+    tfPaint(el, host, HF_STATE, "paint", true, stop, ov);
+    const card = host.querySelector(`.tf-paint[data-gi="${anchor}"]`);
+    if (card) tfScrollTo(el, tfY(el) + card.getBoundingClientRect().top - y0);
+  };
   // a new seed for "Like this one" or "Near a color"
   const another = w => {
     const s2 = hfS(); s2.roll = { ...(s2.roll || {}), [w]: hfRoll(w) + 1 }; save(); buzz(6);

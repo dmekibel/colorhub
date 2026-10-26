@@ -235,7 +235,7 @@ function hfRiverBatch(hk, pool, rnd) {
 const HF_SESSION = Math.random().toString(36).slice(2, 8);   // new on every open and reload (a Back inside a visit keeps the same list)
 const HF_VR = new Map();
 const hfHueGap = (a, b) => { const d = Math.abs(a - b) % 360; return d > 180 ? 360 - d : d; };
-async function hfVibeRiver(hk, rnd, skip, taste) {
+async function hfVibeRiver(hk, rnd, skip, taste, start) {
   const ac = hfAlikeC(), av = hfAlikeV(), at = hfAlikeT(), ap = hfAlikeP(), cof = i => (HF_F && HF_F.country ? HF_F.country[i] : 0);
   const size = Math.round(3 + 15 * Math.pow(av, 1.2)), jump = Math.pow(1 - av, 2) * .55, simW = .5 + av;
   // COLOR: the river keeps a reference color (the mean color of the patch's first painting); a painting joins only when its WHOLE mean color is within `tolE` of it
@@ -272,6 +272,9 @@ async function hfVibeRiver(hk, rnd, skip, taste) {
     return { A, ref: meanOf(A), rx: hfAx(A), year: yr(A), co: cof(A), left: patchSteps - 1 };
   };
   let st = HF_VR.get(hk);
+  if (!st && start != null) {   // a river that begins AT a given painting (the settings changed while you were on it): everything unfolds from there
+    st = { A: start, ref: meanOf(start), rx: hfAx(start), year: yr(start), co: cof(start), left: patchSteps - 1, dir: rnd() < .5 ? 1 : -1, step: stepBase * (.7 + rnd() * .6), used: new Set([start]) }; HF_VR.set(hk, st);
+  }
   if (!st) {
     const f = fresh(null); if (!f) return [];
     st = { ...f, dir: rnd() < .5 ? 1 : -1, step: stepBase * (.7 + rnd() * .6), used: new Set() }; HF_VR.set(hk, st);
@@ -376,6 +379,18 @@ function hfSpread(list, F, noHue) {
 // For you. No likes yet: the day's most beautiful paintings. With likes: about 60% close to what you like (the vibe neighbors of what you kept,
 // plus the work of painters and movements you follow), 25% one step away (neighbors of the closest), 15% surprises from the beautiful pool;
 // never anything shown to you recently, never a hidden painting. `salt` asks for the next batch.
+// the settings changed while you were on a painting (David, 2026-10-26: "keep the painting I am on, those couple around it, and let everything else adjust from there"):
+// the paintings on screen stay, a river under the NEW settings grows forward from the last of them (and goes on as the page asks for more, under key k),
+// and another grows backward from the first, to sit above
+async function hfAround(k, keep) {
+  await hfBeautyReady(); await hfFacets();
+  const skip = new Set(hfSeen()); keep.forEach(i => skip.add(i));
+  const rnd = hfSeedOf(k, "around" + Date.now() % 1000);
+  const fwd = await hfBudget(hfVibeRiver(k, rnd, skip, null, keep[keep.length - 1]), 6000, []);
+  fwd.forEach(i => skip.add(i));
+  const bwd = await hfBudget(hfVibeRiver(k + "|back", rnd, skip, null, keep[0]), 4000, []);
+  return { before: bwd.slice(0, 36).reverse(), after: fwd };
+}
 async function hfForYou(k, salt) {
   // the facets give painter spacing and a better beauty weight; give them 1.5 s, never more
   const F = await hfBudget(hfFacets().then(f => { hfCounts(f); return f; }).catch(() => null), 1500);
