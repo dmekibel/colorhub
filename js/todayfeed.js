@@ -15,17 +15,16 @@
 // Back returns to the same screen: todayFeed() re-renders what was shown (TF.shown) and core.js restores the scroll.
 // Everything here is prefixed tf / TF_.
 
-const TF_TYPES = [["all", "All"], ["color", "Colors"], ["paint", "Paintings"], ["pal", "Palettes"], ["art", "Articles"]];
+const TF_TYPES = [["paint", "Paintings"], ["color", "Colors"], ["pal", "Palettes"], ["art", "Stories"]];   // row one of the home (David, 2026-10-26): Paintings is the start and holds nothing else
 const TF_BATCH = 24, TF_SHARDS = 48;
-// the rhythm of "All": 5 paintings, 3 colors, 2 palettes, 2 articles in every 12
-const TF_PATTERN = ["paint", "color", "paint", "pal", "art", "paint", "color", "pal", "paint", "art", "color", "paint"];
 // articles still being written (status pilot/draft in data/articles): never in the feed
 const TF_SKIP = new Set(["b-dazzled-blue", "carolina-blue", "columbia-blue", "cyber-grape", "dark-slate-grey", "deep-rose-red", "delft-blue", "dresden-brown", "dull-indian-purple", "english-violet", "helvetia-blue", "india-spice", "indian-pink", "indigo", "irish-green", "isabelline", "japanese-blue", "link-map", "madder", "mauve", "pale-green-blue-grey", "pale-greyish-vinaceous", "pale-gull-grey", "pale-hortense-violet", "pale-oak", "pale-purple-drab", "pale-purplish-vinaceous", "pale-sea-grey", "pale-turtle-green", "pale-violet-plumbeous", "pale-wistaria-blue", "papyrus-white", "parula-blue", "pastel-parchment", "patina-green", "pauncy-green", "pea-soup-green", "peach-blush", "peachbeige", "pearl-beige", "pearl-blackberry", "pearl-gentian", "pearl-green", "pearly-purple", "perilla-purple", "phlox", "phlox-pink", "pig-pink", "pigeon-blue", "pinard-yellow", "plumbago-grey", "plumbago-slate", "pois-green", "pomegranate-purple", "poppy-purple", "porcelain-green", "prussian-blue", "purple-pizzazz", "red-plum", "reed-green", "reed-yellow", "robin-s-egg", "robin-s-egg-blue", "rose-castor", "rose-dawn", "rose-dust", "spanish-bistre", "steel-pink"]);
 let TF = null;          // today's pool: { k, items:{paint,pal,color,art,cotd}, shown:{filter:n}, ready }
 let TF_LITE = null;     // the articles index, once
 
 const tfInk = hex => lab(hex)[0] > 60 ? "#141311" : "#F6F2EA";
-const tfFilter = () => { const f = S.tf && S.tf.filter; return TF_TYPES.some(t => t[0] === f) ? f : "all"; };
+let TF_KIND = "paint", TF_LENS = "foryou";   // each launch opens on Paintings and For you; where you went afterwards is kept only for this visit (a Back returns to it)
+const tfFilter = () => (TF_TYPES.some(t => t[0] === TF_KIND) ? TF_KIND : "paint");
 // plain text out of an article's lede (no markup)
 const tfPlain = s => String(s || "").replace(/\[\[(?:[^\]|]*\|)?([^\]]*)\]\]/g, "$1").replace(/\[\d+\]/g, "").replace(/[*`]/g, "").replace(/\s+/g, " ").trim();
 // the first sentence whole; if it is longer than max, its first clause (up to a comma or dash) as a sentence of its own; a word cut only as the last resort
@@ -94,20 +93,12 @@ function tfBuild(k) {
 function tfList(st, f) {
   const it = st.items, seen = new Set(), out = [];
   const push = x => { if (x && !seen.has(x.key)) { seen.add(x.key); out.push(x); } };
-  if (f === "all") {
-    const q = { paint: it.paint.slice(), pal: it.pal.slice(), color: it.color.slice(), art: it.art.slice() };
-    for (;;) {
-      let any = false;
-      TF_PATTERN.forEach(t => { const x = q[t].shift(); if (x) { push(x); any = true; } });
-      if (!any) break;
-    }
-    // the card that is yours (live learner state, not part of the day's pool) and the one game card, never first
+  (it[f] || []).forEach(push);
+  if (f === "color") {   // the two learning cards ride along with the colors: yours (Continue learning) and the one game
     const g = Math.min(8, out.length), at = Math.min(3, out.length);
     out.splice(g, 0, { t: "game", key: "game" });
     out.splice(at, 0, { t: "cont", key: "cont" });
-    return out;
   }
-  (it[f] || []).forEach(push);
   return out;
 }
 
@@ -118,7 +109,7 @@ function tfCard(it) {
   switch (it.t) {
     case "paint": {
       const i = it.gi, dom = glPal(i).reduce((a, b) => b.share > a.share ? b : a);
-      return `<button type="button" class="tf-card tf-paint wait" data-tf="paint" data-gi="${i}"><span class="tf-im" style="--c:${dom.h};aspect-ratio:${(1 / glAR(i)).toFixed(3)}"></span><span class="tf-pal" aria-hidden="true">${tfStripes(i)}</span><span class="tf-tx"><b></b><small></small></span></button>`;
+      return `<button type="button" class="tf-card tf-paint wait" data-tf="paint" data-gi="${i}"><span class="tf-im" style="--c:${dom.h};aspect-ratio:${(1 / glAR(i)).toFixed(3)}"></span><span class="tf-pal" aria-hidden="true">${tfStripes(i)}</span><span class="tf-heart" role="button" tabindex="0" data-tf-heart aria-pressed="false" aria-label="Keep this painting">${TF_HEART}</span><span class="tf-tx"><b></b><small></small></span></button>`;
     }
     case "pal":
       return `<button type="button" class="tf-card tf-palette wait" data-tf="pal" data-gi="${it.gi}"><span class="tf-stripes" aria-hidden="true" style="aspect-ratio:${(1 / it.r).toFixed(3)}">${tfEqual(it.gi)}</span><span class="tf-tx"><b></b><small>6 colors</small></span></button>`;
@@ -159,11 +150,13 @@ function tfFill(root) {
     if (el.classList.contains("tf-paint")) {
       const im = el.querySelector(".tf-im"), img = new Image();
       img.alt = ""; img.decoding = "async"; img.loading = "lazy";
+      if (el.dataset.first) { img.loading = "eager"; img.fetchPriority = "high"; }
       const cs = glCropStyle(i, d, glAR(i)); if (cs) img.setAttribute("style", (cs.match(/style="([^"]*)"/) || [])[1] || "");
       img.onload = () => img.classList.add("on");
       img.onerror = () => img.remove();
       img.src = d.img; im.appendChild(img);
       b.textContent = d.t; sm.innerHTML = glByline(i, d);
+      const hb = el.querySelector("[data-tf-heart]"); if (hb && typeof fvArtHas === "function") { const on = fvArtHas(d.id); hb.classList.toggle("on", on); hb.setAttribute("aria-pressed", on); hb.innerHTML = on ? TF_HEART_ON : TF_HEART; }
     } else {
       b.textContent = "From " + d.t; sm.textContent = "6 colors" + (d.a ? " · " + d.a : "");
     }
@@ -181,66 +174,234 @@ function tfSkeleton(k) {
 function tfChipInView(row, b) { const l = b.offsetLeft - 20, r = b.offsetLeft + b.offsetWidth + 20; if (l < row.scrollLeft) row.scrollTo({ left: Math.max(0, l), behavior: "smooth" }); else if (r > row.scrollLeft + row.clientWidth) row.scrollTo({ left: r - row.clientWidth, behavior: "smooth" }); }
 const tfColCount =w => document.documentElement.classList.contains("desk") ? (w >= 1240 ? 5 : w >= 900 ? 4 : 3) : w >= 700 ? 3 : 2;
 
+let TF_PRE = null;   // the day's presets (movement, painter, a painting to be "like", a color): js/homefeed.js hfPresets
+const TF_HEART = icon("heart", 18), TF_HEART_ON = icon("heartOn", 18);
 function todayFeed() {
   const back = typeof BACK_RENDER !== "undefined" && BACK_RENDER, k = today();
   if (S.tab !== "feed") { S.tab = "feed"; save(); }   // the place you were last: every "go(S.tab)" Close or Back (the daily game's ✕) comes back here
-  const streak = typeof chStreak === "function" ? chStreak() : 0;
-  const el = show(`<header class="room-head tf-head"><h1 class="title-1">Today</h1><span class="note">${esc(tfDate(k))}${streak > 0 ? ` · ${streak}-day streak` : ""}</span></header>
-    <i class="tf-sent" aria-hidden="true"></i>
-    <div class="tf-chips" role="radiogroup" aria-label="Show">${TF_TYPES.map(([id, label]) => `<button type="button" role="radio" class="tf-chip" data-tf-f="${id}" aria-checked="false">${label}</button>`).join("")}</div>
-    <div class="tf-feed" data-tf-feed>${tfSkeleton(k)}</div>`, "tf-screen", "feed");
-  const host = el.querySelector("[data-tf-feed]"), chips = el.querySelector(".tf-chips");
-  const setChips = () => chips.querySelectorAll(".tf-chip").forEach(b => { const on = b.dataset.tfF === tfFilter(); b.classList.toggle("on", on); b.setAttribute("aria-checked", on); });
-  setChips();
-  let st = TF && TF.k === k && TF.ready ? TF : null;
+  const el = show(`<i class="tf-sent" aria-hidden="true"></i>
+    <div class="tf-bars"><div class="tf-chips tf-kinds" role="radiogroup" aria-label="Show">${TF_TYPES.map(([id, label]) => `<button type="button" role="radio" class="tf-chip" data-tf-f="${id}" aria-checked="false">${label}</button>`).join("")}</div><button type="button" class="tf-tune" data-tf-tune aria-label="Home settings">${typeof FD_ICON_TUNE !== "undefined" ? FD_ICON_TUNE : ""}</button><div class="tf-chips tf-lenses" role="radiogroup" aria-label="Paintings"></div></div>
+    <div class="tf-lens-head" data-tf-lh hidden></div>
+    <div class="tf-feed${hfS().caps ? "" : " nocaps"}" data-tf-feed>${tfSkeleton(k)}</div>`, "tf-screen", "feed");
+  const host = el.querySelector("[data-tf-feed]"), bars = el.querySelector(".tf-bars"), kindsRow = el.querySelector(".tf-kinds"), lensRow = el.querySelector(".tf-lenses"), lh = el.querySelector("[data-tf-lh]");
+  let st = TF && TF.k === k && TF.ready ? TF : null, pre = TF_PRE && TF_PRE.k === k ? TF_PRE : null, tok = 0, salt = 0;
   const stop = [];
   cleanup.push(() => { stop.concat(stop.live || []).forEach(f => { try { f(); } catch (e) {} }); });
-  const paint = restore => tfPaint(el, host, st, tfFilter(), restore, stop);
-  chips.addEventListener("click", e => {
-    const b = e.target.closest("[data-tf-f]"); if (!b || b.dataset.tfF === tfFilter() || !st) return;
-    buzz(4); S.tf = { ...(S.tf || {}), filter: b.dataset.tfF }; save(); setChips(); tfChipInView(chips, b);
-    st.shown[b.dataset.tfF] = 0; tfScrollTo(el, 0); paint(false);
+  const lensId = () => TF_LENS;
+  const setKinds = () => kindsRow.querySelectorAll(".tf-chip").forEach(b => { const on = b.dataset.tfF === tfFilter(); b.classList.toggle("on", on); b.setAttribute("aria-checked", on); });
+  const drawLenses = () => {
+    const on = tfFilter() === "paint"; lensRow.hidden = !on; lh.hidden = !on || !lh.innerHTML;
+    if (!on) return;
+    lensRow.innerHTML = hfChips(pre, lensId()).map(c => `<button type="button" role="radio" class="tf-chip tf-lens${c.id === lensId() ? " on" : ""}" data-tf-l="${esc(c.id)}" aria-checked="${c.id === lensId()}">${esc(c.label)}</button>`).join("");
+  };
+  setKinds(); drawLenses();
+  const showBars = () => { bars.classList.remove("hid"); document.documentElement.classList.remove("tf-hid"); };
+  // ---- Paintings: the lens list ----
+  const empty = (msg, retry) => { host.innerHTML = `<div class="tf-state"><p class="title-3">Nothing here yet.</p><p class="small">${esc(msg)}</p>${retry ? `<button type="button" class="btn ghost" data-tf-retry>Try again</button>` : ""}</div>`; };
+  const drawHead = res => {
+    const h = res.head || { kind: "f" }, fol = (kind, name) => `<button type="button" class="tf-follow${hfHas(kind, name) ? " on" : ""}" data-tf-follow="${kind}:${esc(name)}" aria-pressed="${hfHas(kind, name)}">${hfHas(kind, name) ? TF_HEART_ON : TF_HEART}<span>${hfHas(kind, name) ? "Following" : "Follow"}</span></button>`;
+    let html = "";
+    if (h.kind === "f") html = "";
+    else if (h.kind === "m" || h.kind === "p") html = `<h2 class="tf-lh-t">${esc(h.name)}</h2><span class="tf-lh-n">${res.total ? res.total.toLocaleString("en-US") + " paintings" : ""}</span>${fol(h.kind, h.name)}${h.kind === "p" ? `<button type="button" class="tf-mini" data-tf-order>${hfS().pOrder === "old" ? "Oldest first" : "Shuffled"}</button>` : ""}`;
+    else if (h.kind === "l") html = `<span class="tf-seed" data-tf-seed></span><div class="tf-lh-x"><h2 class="tf-lh-t" data-tf-seedt>Like this one</h2><span class="tf-lh-n" data-tf-seedn></span></div><div class="tf-seg" role="group" aria-label="Match by"><button type="button" class="${h.by === "vibe" ? "on" : ""}" data-tf-by="vibe">By subject</button><button type="button" class="${h.by === "color" ? "on" : ""}" data-tf-by="color">By color</button></div><button type="button" class="tf-mini" data-tf-another="like">Another</button>`;
+    else if (h.kind === "c") { const row = TODAY_TABLE.find(x => x[2] === h.hex); let nm = row ? row[1] : h.hex; if (!row) { try { nm = nameOf(h.hex).n; } catch (e) {} } html = `<span class="tf-sw" style="--c:${esc(h.hex)}"></span><h2 class="tf-lh-t">Near ${esc(nm.toLowerCase())}</h2><button type="button" class="tf-mini" data-tf-another="color">Another</button>`; }
+    lh.innerHTML = html; lh.hidden = !html; lh.dataset.kind = h.kind;
+    if (h.kind === "l") glShard(Math.floor(h.seed / GAL.shard)).then(() => { const d = glDetailNow(h.seed); if (!d || !lh.isConnected) return; const t = lh.querySelector("[data-tf-seedt]"), n = lh.querySelector("[data-tf-seedn]"), sd = lh.querySelector("[data-tf-seed]"); if (t) t.textContent = "Like " + d.t; if (n) n.textContent = [d.a, glYear(h.seed)].filter(Boolean).join(" · "); if (sd && d.img) { const im = new Image(); im.alt = ""; im.onload = () => sd.appendChild(im); im.src = d.img; } if (pre && pre.li === h.seed && !pre.likeTitle) { pre.likeTitle = hfShortTitle(d.t); drawLenses(); } }).catch(() => {});
+  };
+  const paintings = restore => {
+    const my = ++tok, id = lensId(), hk = k + "|" + HF_SESSION + "|" + hfRoll("foryou"), mk = list => list.map(gi => ({ t: "paint", key: "g:" + gi, gi }));
+    const ck = [id, hk, hfRoll(id), hfS().pOrder, hfS().likeBy].join("|"), fy = id === "foryou";
+    const go = (res, items) => {
+      if (my !== tok || !host.isConnected) return;
+      drawHead(res);
+      if (!res.ids.length) return empty(res.empty || "Try another one.", false);
+      const ov = HF_CACHE.get(ck) || { key: "paint:" + ck, list: items || mk(res.ids), seen: fy, end: "That is every painting here.", res, more: fy ? () => hfLens("foryou", hk, ++salt).then(r => mk(r.ids)) : null };
+      HF_CACHE.set(ck, ov);
+      tfPaint(el, host, HF_STATE, "paint", restore, stop, ov);
+    };
+    // the same list comes back when you return to a lens (a Back, a tab switch), so what you had on screen is still there
+    if (HF_CACHE.has(ck)) return go(HF_CACHE.get(ck).res);
+    host.innerHTML = tfSkeleton(k);
+    // never stuck: a list that has not arrived in 12 s becomes a message with a retry, and the beauty list stands in for For you at 5 s
+    const slow = fy ? setTimeout(() => { if (my === tok && host.isConnected && host.querySelector(".tf-sk")) hfLens("foryou", hk, 0, true).then(r => { if (my === tok && !HF_CACHE.has(ck)) go(r); }).catch(() => {}); }, 5000) : 0;
+    hfBudget(hfLens(id, hk, 0), 12000, "timeout").then(res => {
+      clearTimeout(slow);
+      if (res === "timeout") { if (my === tok && host.isConnected && !HF_CACHE.has(ck)) empty("That is taking too long. Check your connection.", true); return; }
+      if (!HF_CACHE.has(ck)) go(res);
+    }).catch(() => { clearTimeout(slow); if (my === tok && host.isConnected && !HF_CACHE.has(ck)) empty("The paintings didn't load. You may be offline.", true); });
+  };
+  // ---- the other kinds: Colors, Palettes, Stories ----
+  const others = restore => {
+    const f = tfFilter(); lh.hidden = true;
+    if (!st) { host.innerHTML = tfSkeleton(k); return; }
+    tok++; tfPaint(el, host, st, f, restore, stop);
+  };
+  const render = restore => { if (tfFilter() === "paint") paintings(restore); else others(restore); };
+  kindsRow.addEventListener("click", e => {
+    const b = e.target.closest("[data-tf-f]"); if (!b || b.dataset.tfF === tfFilter()) return;
+    buzz(4); TF_KIND = b.dataset.tfF; setKinds(); drawLenses(); tfChipInView(kindsRow, b); showBars();
+    if (st) st.shown[b.dataset.tfF] = 0; tfScrollTo(el, 0); render(false);
   });
-  // the chips stick under the top; once they do, a strip of ground color covers the status-bar zone above them (no layout change)
+  lensRow.addEventListener("click", e => {
+    const b = e.target.closest("[data-tf-l]"); if (!b) return;
+    if (b.dataset.tfL === lensId()) { if (lensId() === "foryou") refresh(); return; }
+    buzz(4); TF_LENS = b.dataset.tfL; drawLenses(); tfChipInView(lensRow, lensRow.querySelector(".tf-lens.on") || b); showBars(); tfScrollTo(el, 0); salt = 0; paintings(false);
+  });
+  el.querySelector("[data-tf-tune]").addEventListener("click", () => tfSettings(key => {
+    if (key === "caps") host.classList.toggle("nocaps", !hfS().caps);
+    else if (key === "river" || key === "alike") { HF_CACHE.clear(); HF_ENDS.clear(); HF_VR.clear(); salt = 0; tfScrollTo(el, 0); paintings(false); }
+  }));
+  // a new seed for "Like this one" or "Near a color"
+  const another = w => {
+    const s2 = hfS(); s2.roll = { ...(s2.roll || {}), [w]: hfRoll(w) + 1 }; save(); buzz(6);
+    hfPresets(k).then(p => { pre = TF_PRE = p; const nid = w === "like" ? (p.li >= 0 ? "l:" + p.li : "foryou") : (p.color ? "c:" + p.color.h : "foryou"); TF_LENS = nid; drawLenses(); tfScrollTo(el, 0); paintings(false); });
+  };
+  // pull down at the very top (or re-tap For you): a new river for For you, a new shuffle for a movement or painter, a new seed for the other two
+  const refresh = () => {
+    if (tfFilter() !== "paint") return;
+    const id = lensId();
+    if (id.startsWith("l:")) return another("like");
+    if (id.startsWith("c:")) return another("color");
+    const s2 = hfS(); s2.roll = { ...(s2.roll || {}), [id]: hfRoll(id) + 1 }; salt = 0; save(); buzz(8); tfScrollTo(el, 0); showBars(); paintings(false);
+  };
+  lh.addEventListener("click", e => {
+    const fo = e.target.closest("[data-tf-follow]"), or = e.target.closest("[data-tf-order]"), by = e.target.closest("[data-tf-by]"), an = e.target.closest("[data-tf-another]"), rs = e.target.closest("[data-tf-reshuffle]");
+    if (fo) { const [kind, ...r] = fo.dataset.tfFollow.split(":"), name = r.join(":"), on = !hfHas(kind, name); buzz(on ? 10 : 4); hfSetFollow(kind, name, on); fo.classList.toggle("on", on); fo.setAttribute("aria-pressed", on); fo.innerHTML = `${on ? TF_HEART_ON : TF_HEART}<span>${on ? "Following" : "Follow"}</span>`; drawLenses(); toast(on ? "Following " + name : "Unfollowed " + name, { low: true, ms: 2200 }); }
+    if (or) { hfS().pOrder = hfS().pOrder === "old" ? "shuffle" : "old"; save(); buzz(4); tfScrollTo(el, 0); paintings(false); }
+    if (by) { hfS().likeBy = by.dataset.tfBy; save(); buzz(4); tfScrollTo(el, 0); paintings(false); }
+    if (an) another(an.dataset.tfAnother);
+  });
+  // the bars stick under the top; once they do, a strip of ground color covers the status-bar zone above them (no layout change)
   const sent = el.querySelector(".tf-sent");
-  if (sent && typeof IntersectionObserver === "function") { const so = new IntersectionObserver(es => chips.classList.toggle("stuck", !es[0].isIntersecting)); so.observe(sent); stop.push(() => so.disconnect()); }
+  if (sent && typeof IntersectionObserver === "function") { const so = new IntersectionObserver(es => bars.classList.toggle("stuck", !es[0].isIntersecting)); so.observe(sent); stop.push(() => so.disconnect()); }
+  tfBarWire(el, bars, stop);
+  tfPullWire(el, host, () => refresh(), stop);
   const load = () => {
     host.innerHTML = tfSkeleton(k);
-    tfBuild(k).then(s => { TF = st = s; if (host.isConnected) paint(false); })
-      .catch(() => { if (host.isConnected) host.innerHTML = `<div class="tf-state"><p class="title-3">Today didn't arrive.</p><p class="small">You may be offline. Nothing is lost.</p><button type="button" class="btn ghost" data-tf-retry>Try again</button></div>`; });
+    tfBuild(k).then(s => { TF = st = s; if (host.isConnected && tfFilter() !== "paint") others(back); }).catch(() => { if (host.isConnected && tfFilter() !== "paint") empty("You may be offline. Nothing is lost.", true); });
+    loadGallery().then(() => hfPresets(k)).then(p => { pre = TF_PRE = p; if (host.isConnected) drawLenses(); }).catch(() => {});
   };
-  host.addEventListener("click", e => { if (e.target.closest("[data-tf-retry]")) { buzz(6); load(); } });
-  if (st) paint(back); else load();
+  host.addEventListener("click", e => { if (e.target.closest("[data-tf-retry]")) { buzz(6); HF_CACHE.clear(); st = null; load(); render(false); } });
+  if (st) { if (!pre) loadGallery().then(() => hfPresets(k)).then(p => { pre = TF_PRE = p; if (host.isConnected) drawLenses(); }).catch(() => {}); render(back); } else { load(); if (tfFilter() === "paint") paintings(back); }
   return el;
 }
 // the room's scroller is the screen itself (a room sheet), or the window on a wide page: read and set whichever one scrolls
 const tfScrolls = scr => scr.scrollHeight > scr.clientHeight + 2;
 const tfY = scr => tfScrolls(scr) ? scr.scrollTop : scrollY;
 function tfScrollTo(scr, y) { if (tfScrolls(scr)) scr.scrollTop = y; else scrollTo(0, y); }
-function tfPaint(scr, host, st, f, restore, stop) {
+// pull down at the very top to refresh, the way a phone browser does: a circle grows as you pull, a new list on release (touch only)
+function tfPullWire(scr, host, onRefresh, stop) {
+  const ind = document.createElement("div"); ind.className = "tf-pull"; ind.setAttribute("aria-hidden", "true");
+  ind.innerHTML = `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>`;
+  host.parentNode.insertBefore(ind, host);
+  let y0 = 0, pull = 0, on = false, spin = 0;
+  const set = (h, anim) => { ind.style.transition = anim ? "height .22s var(--ease)" : "none"; ind.style.height = h + "px"; const p = Math.min(1, h / 64); ind.firstChild.style.opacity = p; ind.firstChild.style.transform = `rotate(${h * 4}deg) scale(${.6 + .4 * p})`; ind.classList.toggle("ready", h >= 64); };
+  const down = e => { if (e.touches.length !== 1 || tfY(scr) > 0 || tfFilter() !== "paint") { on = false; return; } y0 = e.touches[0].clientY; pull = 0; on = true; };
+  const move = e => {
+    if (!on) return;
+    const dy = e.touches[0].clientY - y0;
+    if (dy <= 0 || tfY(scr) > 0) { if (pull) set(0, true); pull = 0; if (dy <= 0) on = dy < -2 ? false : on; return; }
+    pull = Math.min(dy * .5, 96); if (pull > 4 && e.cancelable) e.preventDefault(); set(pull, false);
+  };
+  const up = () => { if (!on) return; on = false; const go = pull >= 64; set(go ? 40 : 0, true); if (go) { buzz(8); ind.classList.add("busy"); setTimeout(() => { ind.classList.remove("busy"); set(0, true); }, 700); onRefresh(); } pull = 0; };
+  scr.addEventListener("touchstart", down, { passive: true }); scr.addEventListener("touchmove", move, { passive: false }); scr.addEventListener("touchend", up); scr.addEventListener("touchcancel", up);
+  stop.push(() => { scr.removeEventListener("touchstart", down); scr.removeEventListener("touchmove", move); scr.removeEventListener("touchend", up); scr.removeEventListener("touchcancel", up); ind.remove(); });
+}
+// the Home settings (David, 2026-10-26): painter and year are off by default so the paintings take the screen; the river can be turned off for a plain shuffle
+// the half-height panel (the same look as the Explorer's settings): the page stays visible above it, so you see what a slider does as you move it
+function tfHalf(sh) {
+  sh.classList.add(document.documentElement.classList.contains("desk") ? "tf-pop" : "fs-half");
+  const sc = sh.previousElementSibling; if (sc && sc.classList.contains("scrim")) sc.classList.add("hm-scrim-clear");
+  const x = document.createElement("button"); x.type = "button"; x.className = "iconq fs-x"; x.setAttribute("aria-label", "Close"); x.innerHTML = ICON.x;
+  x.onclick = () => { buzz(4); const c = document.querySelector(".scrim.hm-scrim-clear"); if (c) c.dispatchEvent(new PointerEvent("pointerdown")); };
+  sh.querySelector(".fs-head").appendChild(x);
+}
+function tfSettings(onChange) {
+  const sw = (k, label, on) => `<div class="fs-c fs-tg"><p>${label}</p><button type="button" class="fs-switch" role="switch" aria-checked="${on}" data-tfs="${k}"><i></i></button></div>`;
+  const word = v => (v > 80 ? "Almost the same" : v > 55 ? "Steady" : v > 30 ? "Varied" : "Exploring");
+  const tword = v => (v > 80 ? "The same few years" : v > 55 ? "The same era" : v > 30 ? "A few eras" : "Any time");
+  const rng = (k, label, v, ends) => `<div class="fs-c"><div class="fs-row"><p>${label}</p><b data-tfout="${k}">${(k === "alikeT" ? tword : word)(v)}</b></div><input type="range" min="0" max="100" step="1" value="${v}" style="--p:${v}%" data-tfal="${k}" aria-label="${label}"></div>`;
+  const c = Math.round(hfAlikeC() * 100), v = Math.round(hfAlikeV() * 100), split = c !== v;
+  const { sh } = sheet(`<div class="fs-sheet"><div class="fs-head"><h3>Home</h3></div><div class="fs-scroll">${sw("caps", "Show painter and year", !!hfS().caps)}${sw("river", "Flow by color", hfRiverOn())}
+    <div data-tfalikebox${hfRiverOn() ? "" : " hidden"}><div data-tfone${split ? " hidden" : ""}>${rng("both", "How alike the river stays", c)}</div><div data-tftwo${split ? "" : " hidden"}>${rng("alikeC", "Color", c)}${rng("alikeV", "Subject", v)}${rng("alikeT", "Time", Math.round(hfAlikeT() * 100))}</div>
+    <button type="button" class="tf-mini tf-split" data-tfsplit>${split ? "One slider for both" : "Color and subject separately"}</button></div></div></div>`, { lock: false });
+  tfHalf(sh);
+  sh.addEventListener("input", e => { const r = e.target.closest("[data-tfal]"); if (!r) return; r.style.setProperty("--p", r.value + "%"); const o = sh.querySelector(`[data-tfout="${r.dataset.tfal}"]`); if (o) o.textContent = (r.dataset.tfal === "alikeT" ? tword : word)(+r.value); });
+  sh.addEventListener("change", e => {
+    const r = e.target.closest("[data-tfal]"); if (!r) return; const st = hfS(), n = +r.value;
+    if (r.dataset.tfal === "both") { st.alikeC = n; st.alikeV = n; } else st[r.dataset.tfal] = n;
+    save(); buzz(4); onChange("alike");
+  });
+  sh.addEventListener("click", e => {
+    if (e.target.closest("[data-tfsplit]")) {
+      const b = e.target.closest("[data-tfsplit]"), one = sh.querySelector("[data-tfone]"), two = sh.querySelector("[data-tftwo]"), toTwo = one && !one.hidden;
+      if (toTwo) { one.hidden = true; two.hidden = false; b.textContent = "One slider for both"; }
+      else { const st = hfS(), a = Math.round((hfAlikeC() + hfAlikeV()) * 50); st.alikeC = a; st.alikeV = a; save(); one.hidden = false; two.hidden = true; b.textContent = "Color and subject separately"; const r = one.querySelector("[data-tfal]"); r.value = a; r.style.setProperty("--p", a + "%"); one.querySelector("[data-tfout]").textContent = word(a); onChange("alike"); }
+      buzz(4); return;
+    }
+    const b = e.target.closest("[data-tfs]"); if (!b) return;
+    const k = b.dataset.tfs, st = hfS(); st[k === "river" ? "river" : "caps"] = k === "river" ? !hfRiverOn() : !st.caps; save();
+    b.setAttribute("aria-checked", k === "river" ? hfRiverOn() : !!st.caps); buzz(4);
+    if (k === "river") sh.querySelector("[data-tfalikebox]").hidden = !hfRiverOn();
+    onChange(k);
+  });
+}
+// the two rows slide away as you scroll down and come back as soon as you scroll up (Pinterest and Safari do the same); near the top they stay
+function tfBarWire(scr, bars, stop) {
+  const root = document.documentElement; let last = tfY(scr), acc = 0, hid = false;
+  const set = h => { if (h === hid) return; hid = h; bars.classList.toggle("hid", h); root.classList.toggle("tf-hid", h); };
+  const on = () => {
+    const y = tfY(scr), d = y - last; last = y;
+    if (y < 90) { acc = 0; return set(false); }
+    if (d && Math.sign(d) !== Math.sign(acc)) acc = 0;
+    acc += d; if (acc > 16) set(true); else if (acc < -10) set(false);
+  };
+  addEventListener("scroll", on, { passive: true }); scr.addEventListener("scroll", on, { passive: true });
+  stop.push(() => { removeEventListener("scroll", on); scr.removeEventListener("scroll", on); root.classList.remove("tf-hid"); });
+}
+const HF_STATE = { shown: {}, y: {} }, HF_CACHE = new Map();   // HF_CACHE: a lens list per day, kept for the session   // where each painting list was, for Back
+// ov: a painting list from js/homefeed.js { key, list, seen, more, end } -- used instead of one of the Colors / Palettes / Stories pools
+function tfPaint(scr, host, st, f, restore, stop, ov) {
   const live = stop.live || (stop.live = []); live.forEach(fn => { try { fn(); } catch (e) {} }); live.length = 0;
-  const list = tfList(st, f), real = list.filter(x => x.t !== "cont" && x.t !== "game"), cotd = (f === "all" || f === "color") && st.items.cotd;
+  const list = ov ? ov.list : tfList(st, f), fk = ov ? ov.key : f, cotd = !ov && f === "color" && st.items.cotd;
+  const real = list.filter(x => x.t !== "cont" && x.t !== "game");
   if (!real.length && !cotd) {
-    const why = f === "pal" || f === "paint" ? (st.galOk ? "" : "The paintings didn't load. You may be offline.") : f === "art" || f === "color" ? (st.artOk ? "" : "The articles didn't load. You may be offline.") : "";
-    host.innerHTML = `<div class="tf-state"><p class="title-3">Nothing here yet.</p><p class="small">${esc(why || "Try another filter.")}</p><button type="button" class="btn ghost" data-tf-retry>Try again</button></div>`;
+    const why = f === "pal" ? (st.galOk ? "" : "The paintings didn't load. You may be offline.") : f === "art" || f === "color" ? (st.artOk ? "" : "The articles didn't load. You may be offline.") : "";
+    host.innerHTML = `<div class="tf-state"><p class="title-3">Nothing here yet.</p><p class="small">${esc(why || "Try another one.")}</p><button type="button" class="btn ghost" data-tf-retry>Try again</button></div>`;
     return;
   }
-  const shown = Math.min(list.length, restore && st.shown[f] ? st.shown[f] : TF_BATCH);
+  const shown = Math.min(list.length, restore && st.shown[fk] ? st.shown[fk] : TF_BATCH);
   let cols = [];
-  host.innerHTML = `${cotd ? tfCard(cotd) : ""}<div class="tf-cols"></div><div class="tf-more" aria-hidden="true"></div><p class="tf-end" hidden>That is today's set. A new one arrives tomorrow.</p>`;
+  host.innerHTML = `${cotd ? tfCard(cotd) : ""}<div class="tf-cols"></div><div class="tf-more" aria-hidden="true"></div><p class="tf-end" hidden>${ov ? esc(ov.end || "") : "That is today's set. A new one arrives tomorrow."}</p>`;
   const wrap = host.querySelector(".tf-cols"), more = host.querySelector(".tf-more"), end = host.querySelector(".tf-end");
-  let n = 0, count = 0;
+  let n = 0, count = 0, loading = false;
+  // every painting tile shows its own tiny blurred picture at once (js/feed.js fdMicroPaint), before its details or the museum photo arrive
+  if (typeof fdMicroUse === "function") {
+    fdMicroUse();
+    const mc = () => wrap.querySelectorAll(".tf-paint .tf-im:not([data-mc])").forEach(im => fdMicroPaint(im, +im.closest(".tf-card").dataset.gi));
+    FDM_SUBS.add(mc); live.push(() => { FDM_SUBS.delete(mc); fdMicroFree(); });
+  }
   const add = upTo => {
     const tpl = document.createElement("template");
     for (; n < Math.min(upTo, list.length); n++) {
       tpl.innerHTML = tfCard(list[n]);
       const node = tpl.content.firstElementChild; if (!node) continue;
       let s = cols[0]; for (const c of cols) if (c.offsetHeight < s.offsetHeight) s = c;
+      if (n < 10) node.dataset.first = "1";
       s.appendChild(node);
+      if (list[n].t === "paint" && typeof fdMicroPaint === "function") fdMicroPaint(node.querySelector(".tf-im"), list[n].gi);
+      if (ov && ov.seen && list[n].gi != null) hfMarkSeen(list[n].gi);
     }
+    if (ov && ov.seen) save();
     tfFill(wrap);
-    st.shown[f] = Math.max(st.shown[f] || 0, n);
-    end.hidden = n < list.length;
+    st.shown[fk] = Math.max(st.shown[fk] || 0, n);
+    end.hidden = n < list.length || !!(ov && ov.more);
+  };
+  // the list ran out: For you asks for the next batch; a finished list says so
+  const grow = () => {
+    if (loading || !ov || !ov.more) return;
+    loading = true;
+    ov.more().then(items => { loading = false; if (!host.isConnected) return; const have = new Set(list.map(x => x.key)); items.forEach(x => { if (!have.has(x.key)) list.push(x); }); if (n < list.length) add(n + TF_BATCH); }).catch(() => { loading = false; end.hidden = false; });
   };
   const layout = upTo => {
     count = tfColCount(host.clientWidth || innerWidth); wrap.innerHTML = ""; cols = [];
@@ -249,9 +410,9 @@ function tfPaint(scr, host, st, f, restore, stop) {
   };
   layout(shown);
   // coming Back: the cards that were on screen are drawn again (heights are known up front), then the scroll goes where it was
-  if (restore && st.y && st.y[f]) { const y = st.y[f]; tfScrollTo(scr, y); requestAnimationFrame(() => tfScrollTo(scr, y)); }
+  if (restore && st.y && st.y[fk]) { const y = st.y[fk]; tfScrollTo(scr, y); requestAnimationFrame(() => tfScrollTo(scr, y)); }
   if (typeof IntersectionObserver === "function") {
-    const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)) { if (n < list.length) add(n + TF_BATCH); io.unobserve(more); if (n < list.length) io.observe(more); } }, { root: /(auto|scroll)/.test(getComputedStyle(scr).overflowY) ? scr : null, rootMargin: "1400px 0px" });
+    const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)) { if (n < list.length) add(n + TF_BATCH); else grow(); io.unobserve(more); io.observe(more); } }, { root: /(auto|scroll)/.test(getComputedStyle(scr).overflowY) ? scr : null, rootMargin: "0px 0px 1600px 0px" });
     io.observe(more); live.push(() => io.disconnect());
   } else add(list.length);
   let rt = 0;
@@ -260,15 +421,23 @@ function tfPaint(scr, host, st, f, restore, stop) {
   const onOnline = () => tfFill(wrap); addEventListener("online", onOnline); live.push(() => removeEventListener("online", onOnline));
   host.onclick = e => {
     if (e.target.closest("[data-tf-retry]")) return;
+    const hb = e.target.closest("[data-tf-heart]");
+    if (hb) { e.stopPropagation(); e.preventDefault(); const c0 = hb.closest(".tf-card"), i0 = +c0.dataset.gi, d0 = glDetailNow(i0); if (d0 && typeof fvArtSet === "function") { const on = !fvArtHas(d0.id); fvArtSet(i0, d0, on); hb.classList.toggle("on", on); hb.setAttribute("aria-pressed", on); hb.innerHTML = on ? TF_HEART_ON : TF_HEART; buzz(on ? 10 : 4); } return; }
     const c = e.target.closest(".tf-card[data-tf]"); if (!c) return;
-    buzz(6);
-    (st.y = st.y || {})[f] = tfY(scr);
     const kind = c.dataset.tf;
-    if (kind === "paint") return galleryPage(+c.dataset.gi, true);
-    if (kind === "pal") return plvOpen("painting", +c.dataset.gi);
-    if (kind === "game") return daily();
-    if (kind === "cont") return go("learn");
-    if (kind === "name") return tfOpenName(c.dataset.n, c.dataset.h);
+    const open = () => {
+      buzz(6);
+      (st.y = st.y || {})[fk] = tfY(scr);
+      if (kind === "paint") return galleryPage(+c.dataset.gi, true);
+      if (kind === "pal") return plvOpen("painting", +c.dataset.gi);
+      if (kind === "game") return daily();
+      if (kind === "cont") return go("learn");
+      if (kind === "name") return tfOpenName(c.dataset.n, c.dataset.h);
+    };
+    // a double-tap likes a painting or a color (a tap opens it after a beat; the second tap in that beat keeps it instead)
+    if (kind === "paint" || kind === "pal") return hfTap("tf" + c.dataset.gi, open, (x, y) => hfLikeTile(c, +c.dataset.gi, x, y), e.clientX, e.clientY);
+    if (kind === "name" && c.classList.contains("tf-color")) return hfTap("tfc" + c.dataset.h, open, (x, y) => hfLikeColor(c, c.dataset.h, c.dataset.n, x, y), e.clientX, e.clientY);
+    open();
   };
 }
 // a color or article by its name: the same door the router uses for #/color/<slug>, so core colors and library names both open, and Back returns here

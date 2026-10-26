@@ -830,10 +830,16 @@ function fdMount(host, o) {
   grid.onclick = e => {
     if (Date.now() - peeked < 700) { e.preventDefault(); return; }   // the tap that ended a long-press is not an open
     const t = e.target.closest(".fd-tile[data-fk]"); if (!t) return;
-    const it = items[+t.dataset.fk]; buzz(6); leave();
-    if (it.card) return it.open();
-    { const list = [], fks = []; items.forEach((x, n) => { if (!x.card && !x.head && !x.sk && x.j != null) { list.push(x.j); fks.push(n); } }); glCtxSet(list, fks, fks.indexOf(+t.dataset.fk), SKEY); }   // swiping the opened painting walks this list
-    galleryPage(it.j, true, isColor ? sub.hex : null);
+    const it = items[+t.dataset.fk];
+    const open = () => {
+      buzz(6); leave();
+      if (it.card) return it.open();
+      { const list = [], fks = []; items.forEach((x, n) => { if (!x.card && !x.head && !x.sk && x.j != null) { list.push(x.j); fks.push(n); } }); glCtxSet(list, fks, fks.indexOf(+t.dataset.fk), SKEY); }   // swiping the opened painting walks this list
+      galleryPage(it.j, true, isColor ? sub.hex : null);
+    };
+    // a double-tap likes the painting (David, 2026-10-26); a tap opens it after a beat
+    if (!it.card && it.j != null && typeof hfTap === "function") return hfTap("fd" + it.j, open, (x, y) => hfLikeTile(t, it.j, x, y), e.clientX, e.clientY);
+    open();
   };
   grid.addEventListener("focusin", e => { const t = e.target.closest(".fd-tile[data-fk]"); if (t) fk = +t.dataset.fk; });
   function focusK(n) {

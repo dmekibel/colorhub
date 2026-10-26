@@ -115,3 +115,91 @@ html.desk .tf-cotd{aspect-ratio:auto;min-height:300px;flex-direction:row;align-i
 html.desk .tf-cotd-t{flex:1 1 55%}
 html.desk .tf-cotd b{font-size:clamp(80px,9vw,132px)}
 html.desk .tf-cotd-s{flex:1 1 38%;max-width:480px;font-size:19px}
+
+/* ---------- the home (David, 2026-10-26: "a Pinterest for paintings") ----------
+   Row one = the kind of thing (Paintings, Colors, Palettes, Stories); row two = the lenses inside Paintings (For you, what you follow, the day's presets).
+   One sticky stack that slides away as you scroll down and comes back the moment you scroll up (js/todayfeed.js tfBarWire). */
+.tf-bars{position:sticky;top:-18px;z-index:5;margin:0 calc(-1 * var(--g));background:var(--ground);transition:transform .26s var(--ease)}
+.tf-bars .tf-chips{position:static;margin:0;padding:8px var(--g) 4px;background:none;border:0}
+.tf-bars .tf-chips[hidden]{display:none}
+.tf-bars .tf-lenses{padding-top:2px;padding-bottom:10px}
+.tf-lenses .tf-chip{height:34px;padding:0 14px;font-size:15px}
+.tf-bars.stuck::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:var(--top);background:var(--ground)}
+.tf-bars.stuck{border-bottom:1px solid var(--rule)}
+.tf-bars.hid{transform:translateY(calc(-100% - var(--top) - 28px))}
+html.tf-hid::after{content:"";position:fixed;left:0;right:0;top:0;height:var(--top);background:var(--ground);z-index:4;pointer-events:none}
+html.desk .tf-bars{top:var(--dkn);margin:0}
+html.desk .tf-bars .tf-chips{padding-left:0;padding-right:0}
+html.desk .tf-bars.stuck::before{display:none}
+html.desk .tf-bars.hid{transform:translateY(calc(-100% - var(--dkn) - 28px))}
+html.desk.tf-hid::after{display:none}
+@media (min-width:700px){.tf-bars{margin:0 -32px}.tf-bars .tf-chips{padding-left:32px;padding-right:32px}html.desk .tf-bars{margin:0}html.desk .tf-bars .tf-chips{padding-left:0;padding-right:0}}
+/* the header of a lens: its name, Follow, and its own switches */
+.tf-lens-head{display:flex;align-items:center;flex-wrap:wrap;gap:10px 12px;padding:6px 0 14px}
+.tf-lens-head[hidden]{display:none}
+.tf-because{flex:1 1 220px;margin:0;font:400 16px/1.35 var(--sans);color:var(--soft)}
+.tf-lh-t{font:400 28px/1.05 var(--serif);margin:0;letter-spacing:-.01em;min-width:0}
+.tf-lh-n{font:400 15px/1.2 var(--sans);color:var(--soft);margin-right:auto}
+.tf-lh-x{display:flex;flex-direction:column;gap:4px;min-width:0;margin-right:auto;flex:1 1 160px}
+.tf-follow,.tf-mini{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 14px;border-radius:var(--r-pill);background:var(--surface-2);border:1px solid var(--rule);color:var(--ink);font:500 15px/1 var(--sans)}
+.tf-follow svg{width:18px;height:18px}
+.tf-follow.on{background:var(--paper);color:var(--paper-ink);border-color:var(--paper)}
+.tf-seg{display:inline-flex;background:var(--surface-2);border-radius:var(--r-pill);padding:3px;gap:2px}
+.tf-seg button{height:32px;padding:0 13px;border-radius:var(--r-pill);font:500 15px/1 var(--sans);color:var(--soft)}
+.tf-seg button.on{background:var(--paper);color:var(--paper-ink)}
+.tf-seed{width:56px;height:56px;border-radius:12px;overflow:hidden;flex:none;background:var(--surface-2)}
+.tf-seed img{width:100%;height:100%;object-fit:cover;display:block}
+.tf-sw{width:36px;height:36px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.2);flex:none}
+/* a painting tile: the picture, then painter and year in small type (no card); a heart keeps it */
+.tf-card.tf-paint{background:none;border-radius:0;overflow:visible}
+.tf-paint .tf-im{border-radius:var(--r-2)}
+.tf-paint .tf-pal{display:none}
+.tf-paint .tf-tx{padding:7px 2px 2px;height:auto}
+.tf-paint b{font:400 17px/1.2 var(--serif);-webkit-line-clamp:1}
+.tf-paint small{font-size:14px;margin-top:2px}
+.tf-paint.wait .tf-tx::before{margin:2px 0 12px}
+.tf-heart{position:absolute;top:8px;right:8px;width:38px;height:38px;border-radius:50%;background:rgba(14,13,11,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:grid;place-items:center;color:#ECE8DF;opacity:0;transition:opacity .2s,transform .14s var(--ease)}
+.tf-heart svg{width:20px;height:20px}
+.tf-heart.on{background:var(--vermilion,#E34234);color:#fff}
+.tf-heart:active{transform:scale(.9)}
+.tf-paint:not(.wait) .tf-heart{opacity:1}
+
+/* ---------- compact top (David, 2026-10-26: no "Today", no intro line; the two rows at the very top; paintings take the screen) ---------- */
+.room-sheet>.screen.tf-screen{padding-top:calc(var(--top) + 6px)}
+.tf-screen{--tf-gap:8px}
+.tf-bars{top:var(--top)}
+.tf-bars .tf-kinds{padding-right:calc(var(--g) + 44px)}
+.tf-bars .tf-chip{height:36px;padding:0 15px;font-size:15px}
+.tf-bars .tf-lenses .tf-chip{height:32px;padding:0 13px;font-size:14.5px}
+.tf-tune{position:absolute;right:var(--g);top:8px;z-index:2;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);border:1px solid var(--rule);color:var(--soft)}
+.tf-tune svg{width:18px;height:18px}
+.tf-feed.nocaps .tf-paint .tf-tx{display:none}
+.tf-feed.nocaps .tf-paint .tf-im{border-radius:var(--r-2)}
+html.desk .room-sheet>.screen.tf-screen{padding-top:calc(var(--dkn) + 12px)}
+html.desk .tf-screen{--tf-gap:12px}
+html.desk .tf-bars{top:var(--dkn)}
+html.desk .tf-tune{right:0}
+html.desk .tf-bars .tf-kinds{padding-right:48px}
+@media (min-width:700px){.tf-tune{right:32px}html.desk .tf-tune{right:0}}
+.tf-bars .tf-kinds{gap:6px;padding-right:calc(var(--g) + 42px)}
+.tf-bars .tf-kinds .tf-chip{padding:0 12px;font-size:14.5px}
+.tf-bars .tf-lenses{gap:6px}
+/* pull to refresh */
+.tf-pull{display:flex;align-items:center;justify-content:center;height:0;overflow:hidden;color:var(--soft)}
+.tf-pull svg{opacity:0}
+.tf-pull.ready{color:var(--ink)}
+.tf-pull.busy svg{animation:tfSpin .7s linear infinite}
+@keyframes tfSpin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.tf-pull.busy svg{animation:none}}
+html:has(.tf-screen){overscroll-behavior-y:contain}
+/* sticky offsets here count from below the screen's padding (as the old chip row's -18px did): padding is --top + 6px on a phone, --dkn + 12px on the wide layout */
+.tf-bars{top:-6px}
+html.desk .tf-bars{top:-12px}
+[data-tftwo] .fs-c,[data-tfone] .fs-c{margin-bottom:18px}
+.tf-split{margin:2px 0 14px}
+/* the Home settings on the wide layout: a small card by the button, nothing shifts; on a phone it is the short half-sheet */
+html.desk .sheet.sheet.tf-pop{inset:auto 24px auto auto;top:104px;bottom:auto;left:auto;width:320px;max-width:320px;margin:0;height:auto;max-height:calc(100dvh - 140px);border-radius:16px;border:1px solid var(--rule);padding:14px 18px 8px;animation:none;box-shadow:0 18px 50px -12px rgba(0,0,0,.7)}
+html.desk .sheet.sheet.tf-pop .grab{display:none}
+.sheet.fs-half:has([data-tfalikebox]),.sheet.tf-pop{--tf-compact:1}
+.sheet [data-tfalikebox] .fs-c,.sheet [data-tfone] .fs-c,.sheet [data-tftwo] .fs-c{margin-bottom:10px}
+.sheet .tf-split{margin:0 0 8px}

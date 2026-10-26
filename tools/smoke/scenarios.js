@@ -8789,27 +8789,48 @@ scenario("paintings", "five cold addresses open their own page at 375x812 and 14
   }
 });
 
-// David, 2026-10-21: Today is a feed (js/todayfeed.js, #/feed). It opens with cards, a chip filters, a card tap opens its
-// page and Back returns to the feed (scroll kept), and the old daily game still opens from its card.
-scenario("home", "Today feed: cards, a chip filter, a card opens and Back returns, the daily game opens from its card", async t => {
+// David, 2026-10-26: Today is a Pinterest for paintings (js/todayfeed.js, js/homefeed.js, #/feed). It opens on Paintings and nothing else, with two slim rows
+// on top (kinds, then lenses) and no header or intro line; a single tap opens a painting after a beat and Back returns with the scroll kept; a double-tap
+// keeps it instead; Colors holds the color of the day, the daily game and Continue learning.
+scenario("home", "Today: paintings only on open, two rows, a double-tap likes, a tap opens and Back keeps the scroll, Colors holds the game", async t => {
   await t.open("#/feed", { settle: 600 });
-  await t.waitFor(() => t.$$(".tf-col .tf-card:not(.sk)").length >= 12, 20000, "the feed to show cards");
-  const first = t.$$(".tf-col .tf-card")[0];
-  t.expect(!first.classList.contains("tf-game"), "the game card is the first card");
-  t.expect(t.$(".tf-cotd") && t.$(".tf-game") && t.$(".tf-cont"), "the color of the day, the game card and Continue learning should all be in All");
-  await t.click(t.$("[data-tf-f=paint]"), { wait: 500 });
-  await t.waitFor(() => t.$$(".tf-col .tf-card").length >= 12 && t.$$(".tf-col .tf-card").every(c => c.classList.contains("tf-paint")), 8000, "the Paintings chip to show only paintings");
-  await t.click(t.$("[data-tf-f=all]"), { wait: 500 });
+  await t.waitFor(() => t.$$(".tf-col .tf-paint:not(.sk)").length >= 12, 20000, "the feed to show paintings");
+  t.expect(t.$$(".tf-col .tf-card").every(c => c.classList.contains("tf-paint")), "the first screen holds something that is not a painting");
+  t.expect(!t.$(".tf-head") && !t.$(".tf-because"), "Today still has a header or an intro line");
+  t.expect(t.$(".tf-kinds") && t.$(".tf-lenses") && t.$$(".tf-lenses .tf-chip").length >= 2, "the two rows (kinds and lenses) are not both there");
+  t.expect(t.$$("[data-tf-heart]").length >= 8, "the paintings have no hearts");
+  t.expect(t.$(".tf-feed").classList.contains("nocaps"), "painter and year should be off by default");
+  // a double-tap keeps a painting and stays on the page
+  const dt = t.$$(".tf-col .tf-paint")[1], k0 = Object.keys(t.w.fvArtStore()).length, ev = () => new t.w.MouseEvent("click", { bubbles: true, clientX: 30, clientY: 30 });
+  dt.dispatchEvent(ev()); await t.sleep(60); dt.dispatchEvent(ev()); await t.sleep(900);
+  t.expect(t.w.location.hash === "#/feed", "a double-tap opened the painting");
+  t.expect(Object.keys(t.w.fvArtStore()).length === k0 + 1, "a double-tap did not keep the painting");
+  t.expect(dt.querySelector(".tf-heart.on"), "the tile's heart did not light");
+  // a lens chip changes the list
+  const ids0 = t.$$(".tf-col .tf-paint").slice(0, 6).map(c => c.dataset.gi).join(",");
+  const lens = t.$$(".tf-lenses .tf-chip")[1];
+  await t.click(lens, { wait: 1200 });
+  await t.waitFor(() => t.$(".tf-lenses .tf-chip.on") && t.$(".tf-lenses .tf-chip.on") !== t.$$(".tf-lenses .tf-chip")[0] && t.$$(".tf-col .tf-paint").length >= 8, 12000, "a lens to load");
+  t.expect(t.$$(".tf-col .tf-paint").slice(0, 6).map(c => c.dataset.gi).join(",") !== ids0, "a lens showed the same paintings");
+  await t.click(t.$$(".tf-lenses .tf-chip")[0], { wait: 800 });
+  // Colors: the color of the day, the game, Continue learning
+  await t.click(t.$("[data-tf-f=color]"), { wait: 700 });
+  await t.waitFor(() => t.$(".tf-cotd") && t.$(".tf-game") && t.$(".tf-cont"), 8000, "the color of the day, the game card and Continue learning should all be in Colors");
+  await t.click(t.$("[data-tf-f=paint]"), { wait: 800 });
+  await t.waitFor(() => t.$$(".tf-col .tf-paint").length >= 12, 12000, "Paintings to come back");
+  // open, Back, scroll kept
   const sc = t.$(".tf-screen"); sc.scrollTop = 500; await t.sleep(300);
-  const card = t.$$(".tf-col .tf-card").find(c => (c.dataset.tf === "name" || c.dataset.tf === "paint") && c.getBoundingClientRect().top > 150);
-  await t.click(card, { wait: 800 });
-  const y = t.ev("TF.y.all");
+  const card = t.$$(".tf-col .tf-paint").find(c => c.getBoundingClientRect().top > 150);
+  await t.click(card, { wait: 900 });
+  const y = t.ev("Object.values(HF_STATE.y).pop()");
   t.expect(y > 200, `the feed did not remember its scroll (${y})`);
-  await t.waitFor(() => !t.$(".tf-screen") && t.w.location.hash !== "#/feed", 12000, "a card to open its page");
+  await t.waitFor(() => !t.$(".tf-screen") && t.w.location.hash !== "#/feed", 12000, "a painting to open its page");
   t.w.history.back();
   await t.waitFor(() => t.$(".tf-screen") && t.w.location.hash === "#/feed", 12000, "Back to return to the feed");
-  await t.sleep(500);
+  await t.sleep(600);
   t.expect(Math.abs(t.$(".tf-screen").scrollTop - y) < 40, `Back lost the scroll (${y} -> ${t.$(".tf-screen").scrollTop})`);
+  await t.click(t.$("[data-tf-f=color]"), { wait: 700 });
+  await t.waitFor(() => t.$(".tf-game"), 8000, "the game card");
   await t.click(t.$(".tf-game"), { wait: 800 });
   await t.waitFor(() => t.w.location.hash === "#/daily", 12000, "the daily game to open from its card");
 });
