@@ -277,7 +277,8 @@ function todayFeed() {
     const W = host.clientWidth || innerWidth, count = tfColCount(W), cols = Array.from({ length: count }, () => ({ h: 0, html: "" }));
     ov.list.slice(0, 26).forEach(it => { if (it.t !== "paint") return; let c = cols[0]; for (const x of cols) if (x.h < c.h) c = x; c.h += 1 / glAR(it.gi); c.html += tfCard(it); });
     const d = document.createElement("div"); d.className = "tf-peek"; d.setAttribute("aria-hidden", "true");
-    d.style.cssText = `position:absolute;top:0;left:${side * (innerWidth + GAP)}px;width:${W}px;pointer-events:none`;
+    const topPx = Math.max(0, Math.round(bars.getBoundingClientRect().bottom - host.getBoundingClientRect().top));   // level with what is on screen now, wherever the page is scrolled to
+    d.style.cssText = `position:absolute;top:${topPx}px;left:${side * (innerWidth + GAP)}px;width:${W}px;pointer-events:none`;
     d.innerHTML = `<div class="tf-cols">${cols.map(c => `<div class="tf-col">${c.html}</div>`).join("")}</div>`;
     host.appendChild(d);
     if (typeof fdMicroPaint === "function") d.querySelectorAll(".tf-paint .tf-im").forEach(im => fdMicroPaint(im, +im.closest(".tf-card").dataset.gi));

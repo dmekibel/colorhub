@@ -22,231 +22,231 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Chromatlas">
 <link rel="manifest" href="manifest.webmanifest">
-<style>/* the loading page (David, 2026-10-26: "make a loading page with art, less boring"): six paintings, tiny and blurred, with the name over them, until the app draws its first screen */
-#boot{position:fixed;inset:0;z-index:2;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);gap:2px;background:#0b0a09;overflow:hidden;transition:opacity .7s ease,visibility .7s}
-#boot i{background:#1a1815 center/cover no-repeat;filter:blur(4px) saturate(1.15);transform:scale(1.12);animation:bootp 2.4s ease-in-out infinite alternate}
-#boot i:nth-child(2n){animation-delay:-.8s}#boot i:nth-child(3n){animation-delay:-1.5s}
-#boot b{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:400 44px/1 "Instrument Serif",Georgia,serif;letter-spacing:-.01em;color:#f2eee6;text-shadow:0 2px 24px rgba(0,0,0,.7)}
-#boot::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(11,10,9,.42),rgba(11,10,9,.05) 70%)}
-@keyframes bootp{from{opacity:.62}to{opacity:1}}
+<style>/* the loading page: the mark, the name and one slim line of the four brand colors drawing across, on the app's own ground; it fades out as the app draws its first screen */
+#boot{position:fixed;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:#0e0d0b;transition:opacity .6s ease,visibility .6s}
+#boot svg{width:64px;height:64px;border-radius:15px;box-shadow:0 0 0 1px rgba(236,232,223,.08),0 18px 48px -12px rgba(0,0,0,.8);animation:bootmark 2.2s cubic-bezier(.3,.7,.2,1) both}
+#boot b{font:400 40px/1 "Instrument Serif",Georgia,serif;letter-spacing:-.01em;color:#f2eee6;animation:bootmark 2.2s .12s cubic-bezier(.3,.7,.2,1) both}
+#boot u{display:block;width:132px;height:2px;border-radius:2px;background:linear-gradient(90deg,#E34234,#FFBF00,#50C878,#007FFF);background-size:100% 100%;transform-origin:left;animation:bootline 1.7s .2s cubic-bezier(.5,0,.2,1) infinite}
+@keyframes bootmark{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes bootline{0%{transform:scaleX(0);opacity:1}70%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
 #app:not(:empty)~#boot{opacity:0;visibility:hidden;pointer-events:none}</style>
 
-<script async src="js/early.js?v=2026102593"></script>
+<script async src="js/early.js?v=2026102595"></script>
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="preload" href="fonts/instrument-serif-latin.woff2?v=1" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/geist-latin.woff2?v=1" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/geist-mono-latin.woff2?v=1" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="fonts/fonts.css?v=2026102593">
-<link rel="stylesheet" href="app.css?v=2026102593">
-<link rel="stylesheet" href="css/gym.css?v=2026102593">
-<link rel="stylesheet" href="css/todayfeed.css?v=2026102593">
-<link rel="stylesheet" href="css/taste.css?v=2026102593">
-<link rel="stylesheet" href="css/honey.css?v=2026102593">
-<link rel="stylesheet" href="css/gallery.css?v=2026102593">
-<link rel="stylesheet" href="css/paintzoom.css?v=2026102593">
-<link rel="stylesheet" href="css/produce.css?v=2026102593">
-<link rel="stylesheet" href="css/pickit.css?v=2026102593">
-<link rel="stylesheet" href="css/match.css?v=2026102593">
-<link rel="stylesheet" href="css/booth.css?v=2026102593">
-<link rel="stylesheet" href="css/shell.css?v=2026102593">
-<link rel="stylesheet" href="css/poems.css?v=2026102593">
-<link rel="stylesheet" href="css/explore-covers.css?v=2026102593">
-<link rel="stylesheet" href="css/archive.css?v=2026102593">
-<link rel="stylesheet" href="css/world.css?v=2026102593">
-<link rel="stylesheet" href="css/botany.css?v=2026102593">
-<link rel="stylesheet" href="css/gems.css?v=2026102593">
-<link rel="stylesheet" href="css/names.css?v=2026102593">
-<link rel="stylesheet" href="css/home.css?v=2026102593">
-<link rel="stylesheet" href="css/subjectview.css?v=2026102593">
-<link rel="stylesheet" href="css/palettehive.css?v=2026102593">
-<link rel="stylesheet" href="css/learnit.css?v=2026102593">
-<link rel="stylesheet" href="css/learnmore.css?v=2026102593">
-<link rel="stylesheet" href="css/colorpage.css?v=2026102593">
-<link rel="stylesheet" href="css/sources.css?v=2026102593">
-<link rel="stylesheet" href="css/favs.css?v=2026102593">
-<link rel="stylesheet" href="css/learner.css?v=2026102593">
-<link rel="stylesheet" href="css/artwiki.css?v=2026102593">
-<link rel="stylesheet" href="css/subjectisl.css?v=2026102593">
-<link rel="stylesheet" href="css/roomshub.css?v=2026102593">
-<link rel="stylesheet" href="css/article.css?v=2026102593">
-<link rel="stylesheet" href="css/polish.css?v=2026102593">
-<link rel="stylesheet" href="css/looks.css?v=2026102593">
-<link rel="stylesheet" href="css/aesthetics-graph.css?v=2026102593">
-<link rel="stylesheet" href="css/wikiimg.css?v=2026102593">
-<link rel="stylesheet" href="css/fashion.css?v=2026102593">
-<link rel="stylesheet" href="css/isolate.css?v=2026102593">
-<link rel="stylesheet" href="css/eyedrop.css?v=2026102593">
-<link rel="stylesheet" href="css/picked.css?v=2026102593">
-<link rel="stylesheet" href="css/studio-tools.css?v=2026102593">
-<link rel="stylesheet" href="css/practice.css?v=2026102593">
-<link rel="stylesheet" href="css/misscompare.css?v=2026102593">
-<link rel="stylesheet" href="css/learnset.css?v=2026102593">
-<link rel="stylesheet" href="css/learnhub.css?v=2026102593">
-<link rel="stylesheet" href="css/games.css?v=2026102593">
-<link rel="stylesheet" href="css/games-hue.css?v=2026102593">
-<link rel="stylesheet" href="css/games-brands.css?v=2026102593">
-<link rel="stylesheet" href="css/paintingsof.css?v=2026102593">
-<link rel="stylesheet" href="css/sets.css?v=2026102593">
-<link rel="stylesheet" href="css/slideshow.css?v=2026102593">
-<link rel="stylesheet" href="css/paintmap.css?v=2026102593">
-<link rel="stylesheet" href="css/mapstudy.css?v=2026102593">
-<link rel="stylesheet" href="css/daily.css?v=2026102593">
-<link rel="stylesheet" href="css/browse.css?v=2026102593">
-<link rel="stylesheet" href="css/menus2.css?v=2026102593">
-<link rel="stylesheet" href="css/coverage.css?v=2026102593">
-<link rel="stylesheet" href="css/thingquiz.css?v=2026102593">
-<link rel="stylesheet" href="css/rooms2.css?v=2026102593">
-<link rel="stylesheet" href="css/sound.css?v=2026102593">
-<link rel="stylesheet" href="css/trail.css?v=2026102593">
-<link rel="stylesheet" href="css/places.css?v=2026102593">
-<link rel="stylesheet" href="css/ng.css?v=2026102593">
-<link rel="stylesheet" href="css/paletteview.css?v=2026102593">
-<link rel="stylesheet" href="css/desktop.css?v=2026102593">
+<link rel="stylesheet" href="fonts/fonts.css?v=2026102595">
+<link rel="stylesheet" href="app.css?v=2026102595">
+<link rel="stylesheet" href="css/gym.css?v=2026102595">
+<link rel="stylesheet" href="css/todayfeed.css?v=2026102595">
+<link rel="stylesheet" href="css/taste.css?v=2026102595">
+<link rel="stylesheet" href="css/honey.css?v=2026102595">
+<link rel="stylesheet" href="css/gallery.css?v=2026102595">
+<link rel="stylesheet" href="css/paintzoom.css?v=2026102595">
+<link rel="stylesheet" href="css/produce.css?v=2026102595">
+<link rel="stylesheet" href="css/pickit.css?v=2026102595">
+<link rel="stylesheet" href="css/match.css?v=2026102595">
+<link rel="stylesheet" href="css/booth.css?v=2026102595">
+<link rel="stylesheet" href="css/shell.css?v=2026102595">
+<link rel="stylesheet" href="css/poems.css?v=2026102595">
+<link rel="stylesheet" href="css/explore-covers.css?v=2026102595">
+<link rel="stylesheet" href="css/archive.css?v=2026102595">
+<link rel="stylesheet" href="css/world.css?v=2026102595">
+<link rel="stylesheet" href="css/botany.css?v=2026102595">
+<link rel="stylesheet" href="css/gems.css?v=2026102595">
+<link rel="stylesheet" href="css/names.css?v=2026102595">
+<link rel="stylesheet" href="css/home.css?v=2026102595">
+<link rel="stylesheet" href="css/subjectview.css?v=2026102595">
+<link rel="stylesheet" href="css/palettehive.css?v=2026102595">
+<link rel="stylesheet" href="css/learnit.css?v=2026102595">
+<link rel="stylesheet" href="css/learnmore.css?v=2026102595">
+<link rel="stylesheet" href="css/colorpage.css?v=2026102595">
+<link rel="stylesheet" href="css/sources.css?v=2026102595">
+<link rel="stylesheet" href="css/favs.css?v=2026102595">
+<link rel="stylesheet" href="css/learner.css?v=2026102595">
+<link rel="stylesheet" href="css/artwiki.css?v=2026102595">
+<link rel="stylesheet" href="css/subjectisl.css?v=2026102595">
+<link rel="stylesheet" href="css/roomshub.css?v=2026102595">
+<link rel="stylesheet" href="css/article.css?v=2026102595">
+<link rel="stylesheet" href="css/polish.css?v=2026102595">
+<link rel="stylesheet" href="css/looks.css?v=2026102595">
+<link rel="stylesheet" href="css/aesthetics-graph.css?v=2026102595">
+<link rel="stylesheet" href="css/wikiimg.css?v=2026102595">
+<link rel="stylesheet" href="css/fashion.css?v=2026102595">
+<link rel="stylesheet" href="css/isolate.css?v=2026102595">
+<link rel="stylesheet" href="css/eyedrop.css?v=2026102595">
+<link rel="stylesheet" href="css/picked.css?v=2026102595">
+<link rel="stylesheet" href="css/studio-tools.css?v=2026102595">
+<link rel="stylesheet" href="css/practice.css?v=2026102595">
+<link rel="stylesheet" href="css/misscompare.css?v=2026102595">
+<link rel="stylesheet" href="css/learnset.css?v=2026102595">
+<link rel="stylesheet" href="css/learnhub.css?v=2026102595">
+<link rel="stylesheet" href="css/games.css?v=2026102595">
+<link rel="stylesheet" href="css/games-hue.css?v=2026102595">
+<link rel="stylesheet" href="css/games-brands.css?v=2026102595">
+<link rel="stylesheet" href="css/paintingsof.css?v=2026102595">
+<link rel="stylesheet" href="css/sets.css?v=2026102595">
+<link rel="stylesheet" href="css/slideshow.css?v=2026102595">
+<link rel="stylesheet" href="css/paintmap.css?v=2026102595">
+<link rel="stylesheet" href="css/mapstudy.css?v=2026102595">
+<link rel="stylesheet" href="css/daily.css?v=2026102595">
+<link rel="stylesheet" href="css/browse.css?v=2026102595">
+<link rel="stylesheet" href="css/menus2.css?v=2026102595">
+<link rel="stylesheet" href="css/coverage.css?v=2026102595">
+<link rel="stylesheet" href="css/thingquiz.css?v=2026102595">
+<link rel="stylesheet" href="css/rooms2.css?v=2026102595">
+<link rel="stylesheet" href="css/sound.css?v=2026102595">
+<link rel="stylesheet" href="css/trail.css?v=2026102595">
+<link rel="stylesheet" href="css/places.css?v=2026102595">
+<link rel="stylesheet" href="css/ng.css?v=2026102595">
+<link rel="stylesheet" href="css/paletteview.css?v=2026102595">
+<link rel="stylesheet" href="css/desktop.css?v=2026102595">
 </head>
 <body>
 <main id="app"></main>
-<div id="boot" aria-hidden="true"><i style="background-image:url(data:image/webp;base64,UklGRkwBAABXRUJQVlA4IEABAAAQCACdASosAB8APt1cqU+opKOiMBVYARAbiUAVT6Z9dB7c7eC17GTSfKnziJVb+qOIFCqCx/SdCFA39kpPO0rvpaumm9PDwNNgAP7j+QT2U1ZLbfDUzjM7LedgN5A5gu3l3Hw7icQ0BKHaZV2on9T1wKizbmzeet6e5mWwh3csaEz8QADBWmdneUxD+478yZhJJeKobsALRMdfJIsidUKJv6dI4zy+HQ6zWyHpSCnYcGvfUdl8cI0xyBYGPvUSVo/AreRIyCLKL+JtHLa3ijpYj5V+MxzTsYSrcRII0Je5dGKSIIQs446Q0j1G1ITlowXdoMhc545C17Qw304yq7TeHSOgVv/5XpnvyNolHv/vr0gj3cwjb+m8cGBIJzz6OZKp+74yJNdVyLMcRfAGz/gp6WBilcLPeKbYufiM3SgAAA==)"></i><i style="background-image:url(data:image/webp;base64,UklGRuoBAABXRUJQVlA4IN4BAAAwCgCdASofACsAPtVSoUyoJKMiNVv4AQAaiWwAtRsEwXkgBTfjH4E1czXY4GWPpGmezmFM2K3o+WH6KRV99ia376O+PcLDn1B0wOHFjwfAkhalYu/kycD0AAAA/u2PMaVPKoZHxtJcJxbLULUW563Mk2h6OcfwH5wiRUBn+SdNnyU4Jm/pKBYoPvTvG8nDsrOqWm3GNZV058ycAk0iBMfnYPvQ9E92i760ZJ4NAxdB4gxFm72Gx8lY3acfQI6MZQZhi4ca+mVemz1cUqb2JeAdvzPXySSQdQ+U3dBqQU+ete2nGCK7MMPbWZcSSFZMhbCAX+Jz0p5T8w0a6KuvwvEZ33jSULxBIvKLPhVX/Ai9JswNSDXIGG/aKPSky7x38XnH0R/+/1NCbQ1P3Nsbwza9hZoNg83UeC2e7zip7ICQCNewxNd8qN8la3vpJDuogTLPaaKHzJJUvFRKAxOtDyW1V8eRWuWD1+FkvJhjO0WC7M02IrKKlZRmytgOStO9QOA3MMCBZww1Mo+iN+SibFpwU8cu4zgIkVnMSOJ9NHivWNEpoMwp2evWcw8rpRRhr/345XeD0js/tvAyNPEjoB8Xs2nQuplEdE2uWxhW4Qnc/6GFM1FMWw/EqQ2FbogA)"></i><i style="background-image:url(data:image/webp;base64,UklGRmgBAABXRUJQVlA4IFwBAACQBwCdASosAB8APt1mq1CopSOipWsxEBuJaACpJ093qCctqDRKT7jcrDb38J5NXBpRNp0Umqn2HPpP2Qm//BahoboeuoAA/ufl75vMR9qz/KdbKFRfo67378fHfr4f8UM0hY02jzs5cnS5xAnyOKqpYpv+/qkgkS35kpxrScIq+8sqMFtFahCHSn/lacIJPu9jUbVICyLvvRGkz/TfV7DBG9vijfEu3TM+WqUqWRWCVgfT3OTnX2O8khbi7+gBHUyHYmj7MYl7b/0DnEPXt38e2g4RfxPpve3HLMiyhMM3dOIAlS9NSY2a5EimFPUO0+Hoq5QsKFz1slbtTEIDUsj8KOL4RG7ZIt+Bn602b4CUW0boZzV7OJw5C2LoH+XSVRL9cVZ/GW4xjT+YFMobGfa9NM3IAPgzpf+QO02wpst1f6WReXO7jmZb3+3LGY1623EzylUJ3x/Tm4AAAAA=)"></i><i style="background-image:url(data:image/webp;base64,UklGRrACAABXRUJQVlA4IKQCAADwDACdASosACoAPtlUo0yoJCMiMdzKAQAbCWwAnTKEjDFhBRQY7dJmMbUDTOToYQ22pkasfvIfHCJXzKDF9KARENw3tuLoCN+1A3HiLaCwTC7HSJgfeC/Oa+aDnlZr2hY8VMfO4AS7ijBjsjZEJ8AAAPZtpQrEcgJ0hDXTsd/NGF0wMHQqA1ckoGHuuIGdO/gs62EjCAwSHDZ54FBgrfpXYQQlj1ac+eUHt82I98mjNWCSbk9HfE/F5q6qiWTd8c5VQDah7sFtIHMdMkZLm3VXnQUDAnw97Cz790q4nwYTcMQECNa2YVUTIW330zTqScJsF8rKcXtJx/rhERWImKDOPAGHf/GGfCeT0xa73ndG1qhW+/h+i9OnffLmWVMZJg/6eO+qEqRWuA75UqllilbZcUKJP0esA7/2havJdXOKZuCyUqVkXAruAFFUX8eYzjiOd8dVYdedgPGiuDd9tsDmu1LOjg7hGud6Z7S1rb9cU0fWifVSKB8adlSE4z1HVi3vIpZQO8JhhCnRoQCJ5HHb9kvi74lS01zCfvNUGyHhtaicyu3HxMCFS3fdpXs19ZJ+BhAndOCecvRRzWkvRcKxfPmjvvXAIPIhWAq1s+vkEPUQLp5rUxxcJdCowwwP0bEhqCOYnKAkCNc5xPo7fCnqHgYPLgsR8HYY3dOALH4tjuYi5l0LkwWfYT/m7fORxrB47ZbFrSRpUpcybd3QMfV2Gzh9pMfluFjgBly76s89dHyRW3CUkb8qhalOyBLQ3j7DEOzd9l2bk5dHC3Upsys3vGmHI2ZhrgP+Fd0gPiQ5htq7lgNgxYTmH+5S2lfkihRrW0jT2Aq9BSgsKzxIm3yVa6diTTSerGv3ft2zyRGnz2HKgwqejCGghQDUgh6TkcJyx1QA)"></i><i style="background-image:url(data:image/webp;base64,UklGRpwCAABXRUJQVlA4IJACAADwDACdASojACwAPtlYoEyoJSMiMdzKAQAbCWwArDK9g+SIrP1twvX5hIQ23nPoqYkVEONnKasVuoM9gO4TxHRvEc+QJnFa2Z/NKOpA0g6EuxBN/lOLWPLSHJ2lJyPJ5m6bV3xpU67fDp4Zrnw8f+AAAP4nvRk/8Yv7gSPst/qTAt5jQKOS/pUMHhJfM9btCiVCAPFrsNdGtXBRPvdncvMUdyrDxKoDJHEzKpu+ID2APnKD8+eUpvrkkBxS9hfQcgnQKl56jtHcULXQfhK8WBUGHhLGluudBGU83CvMFQCF/I/CevHlKK59jqVzQvBzAvz1Id47r6WYjzgUAE2QChbXfau7m/d/ZWtLOWSGgGJRsh1eHUX1fUy9OP7NcPZddqfgL7yJQpt2cmD7/3e7B0NZVjcL0eIWExwaycW+93lRYZfmBlTJxCXUUlyN9eOusFSe/M7MSwV7zwMC1Yq6sKJ/0xGWNk6nblJFPmCZ2Lot+yYzIKSTEBUf8LAOPyerJ/buiJi7mzB5wgZk82lXNttmO+Zou4WCVcpcRgX4HDxrsqJt8dklV+3t+CtamHREf5/ffj01zUGyijutzS3IqGiT0TiFg4Jo4YTuC6qtFN36BCIiNfuDTLGQ4NkTHy63nYzavhZZ1b9UVmQtcM5Yw6iPEGKtuab6tAY1xTwxz2777s5izgjEolCPcc7vwZhBG7VUIsFMfRYd9M+NDDJ/BKg1oQottkjcaBS3kTp2k2jV40t8JdQd8eJQsuyAGcecm2o9+ib1343p1mNoZRvjFi0DZtgGrbkq2dCCWhoSVu6md24tR6kUzhNtT6JGuA9QOgEyjMbFVldigOqB4ijxxvMQBB6O6HWJM+HH6NLPYxjAAA==)"></i><i style="background-image:url(data:image/webp;base64,UklGRkwBAABXRUJQVlA4IEABAAAQCACdASosAB8APt1cqU+opKOiMBVYARAbiUAVT6Z9dB7c7eC17GTSfKnziJVb+qOIFCqCx/SdCFA39kpPO0rvpaumm9PDwNNgAP7j+QT2U1ZLbfDUzjM7LedgN5A5gu3l3Hw7icQ0BKHaZV2on9T1wKizbmzeet6e5mWwh3csaEz8QADBWmdneUxD+478yZhJJeKobsALRMdfJIsidUKJv6dI4zy+HQ6zWyHpSCnYcGvfUdl8cI0xyBYGPvUSVo/AreRIyCLKL+JtHLa3ijpYj5V+MxzTsYSrcRII0Je5dGKSIIQs446Q0j1G1ITlowXdoMhc545C17Qw304yq7TeHSOgVv/5XpnvyNolHv/vr0gj3cwjb+m8cGBIJzz6OZKp+74yJNdVyLMcRfAGz/gp6WBilcLPeKbYufiM3SgAAA==)"></i><b>Chromatlas</b></div>
-<script src="data/colors.js?v=2026102593"></script>
-<script src="data/wiki-seed.js?v=2026102593"></script>
-<script src="data/paintings.js?v=2026102593"></script>
-<script src="data/fashion.js?v=2026102593"></script>
-<script src="js/core.js?v=2026102593"></script>
-<script src="js/loader.js?v=2026102593"></script>
-<script src="js/learn.js?v=2026102593"></script>
-<script src="js/produce.js?v=2026102593"></script>
-<script src="js/pickit.js?v=2026102593"></script>
-<script src="js/learner.js?v=2026102593"></script>
-<script src="js/peek.js?v=2026102593"></script>
-<script src="js/lookalikes.js?v=2026102593"></script>
-<script src="js/swatch.js?v=2026102593"></script>
-<script src="data/squint.js?v=2026102593"></script>
-<script src="js/gym-engine.js?v=2026102593"></script>
-<script src="js/gym.js?v=2026102593"></script>
-<script src="js/accuracy.js?v=2026102593"></script>
-<script src="js/graph.js?v=2026102593"></script>
-<script src="js/naming.js?v=2026102593"></script>
-<script src="js/honey.js?v=2026102593"></script>
-<script src="js/colorsets.js?v=2026102593"></script>
-<script src="js/colorset.js?v=2026102593"></script>
-<script src="js/palettehive.js?v=2026102593"></script>
-<script src="js/subjectview.js?v=2026102593"></script>
-<script src="js/paintercolors.js?v=2026102593"></script>
-<script src="js/explore.js?v=2026102593"></script>
-<script src="js/linkshere.js?v=2026102593"></script>
-<script src="js/home.js?v=2026102593"></script>
-<script src="js/mapxfer.js?v=2026102593"></script>
-<script src="js/learnit.js?v=2026102593"></script>
-<script src="js/learnmore.js?v=2026102593"></script>
-<script src="js/gallery.js?v=2026102593"></script>
-<script src="js/segment.js?v=2026102593"></script>
-<script src="js/paintzoom.js?v=2026102593"></script>
-<script src="js/poems.js?v=2026102593"></script>
-<script src="js/passages.js?v=2026102593"></script>
-<script src="js/films.js?v=2026102593"></script>
-<script src="js/labs.js?v=2026102593"></script>
-<script src="js/picker.js?v=2026102593"></script>
-<script src="js/tastemodel.js?v=2026102593"></script>
-<script src="js/taste.js?v=2026102593"></script>
-<script src="js/tasteladder.js?v=2026102593"></script>
-<script src="js/prefmodel.js?v=2026102593"></script>
-<script src="js/favs.js?v=2026102593"></script>
-<script src="js/favrank.js?v=2026102593"></script>
-<script src="js/favprofile.js?v=2026102593"></script>
-<script src="js/camera.js?v=2026102593"></script>
-<script src="js/studio.js?v=2026102593"></script>
-<script src="js/photos.js?v=2026102593"></script>
-<script src="js/challenge.js?v=2026102593"></script>
-<script src="js/today.js?v=2026102593"></script>
-<script src="js/homefeed.js?v=2026102593"></script>
-<script src="js/todayfeed.js?v=2026102593"></script>
-<script src="js/match-model.js?v=2026102593"></script>
-<script src="js/match.js?v=2026102593"></script>
-<script src="js/world.js?v=2026102593"></script>
-<script src="js/pulp.js?v=2026102593"></script>
-<script src="js/photography.js?v=2026102593"></script>
-<script src="js/designobjects.js?v=2026102593"></script>
-<script src="js/ukiyoe.js?v=2026102593"></script>
-<script src="data/botany-images.js?v=2026102593"></script>
-<script src="js/botany.js?v=2026102593"></script>
-<script src="js/botanicalplates.js?v=2026102593"></script>
-<script src="data/gem-images.js?v=2026102593"></script>
-<script src="js/gems.js?v=2026102593"></script>
-<script src="js/brands.js?v=2026102593"></script>
-<script src="js/names.js?v=2026102593"></script>
-<script src="js/practice.js?v=2026102593"></script>
-<script src="js/learnset.js?v=2026102593"></script>
-<script src="js/studyformats.js?v=2026102593"></script>
-<script src="js/learnhub.js?v=2026102593"></script>
-<script src="js/eye-names.js?v=2026102593"></script>
-<script src="js/misscompare.js?v=2026102593"></script>
-<script src="js/games/oo-engine.js?v=2026102593"></script>
-<script src="js/games/oo-ui.js?v=2026102593"></script>
-<script src="js/games/oo-with.js?v=2026102593"></script>
-<script src="js/games/oo-mix.js?v=2026102593"></script>
-<script src="js/games/line.js?v=2026102593"></script>
-<script src="js/games/pairs.js?v=2026102593"></script>
-<script src="js/games/whichway.js?v=2026102593"></script>
-<script src="js/games/steps.js?v=2026102593"></script>
-<script src="js/games/hue-engine.js?v=2026102593"></script>
-<script src="js/games/hue-ui.js?v=2026102593"></script>
-<script src="js/games/hue-shot.js?v=2026102593"></script>
-<script src="js/games/oo-shot.js?v=2026102593"></script>
-<script src="js/games/brands-game.js?v=2026102593"></script>
-<script src="js/colorindex.js?v=2026102593"></script>
-<script src="js/paintingsof.js?v=2026102593"></script>
-<script src="js/chords.js?v=2026102593"></script>
-<script src="js/settray.js?v=2026102593"></script>
-<script src="js/setpage.js?v=2026102593"></script>
-<script src="js/mapstudy.js?v=2026102593"></script>
-<script src="js/sharecard.js?v=2026102593"></script>
-<script src="js/colordle.js?v=2026102593"></script>
-<script src="js/browse.js?v=2026102593"></script>
-<script src="js/browse-ui.js?v=2026102593"></script>
-<script src="js/subjectisl.js?v=2026102593"></script>
-<script src="js/roomshub.js?v=2026102593"></script>
-<script src="js/article-refs.js?v=2026102593"></script>
-<script src="js/coverage.js?v=2026102593"></script>
-<script src="js/thingquiz.js?v=2026102593"></script>
-<script src="js/you.js?v=2026102593"></script>
-<script src="js/richcolor.js?v=2026102593"></script>
-<script src="js/sources.js?v=2026102593"></script>
-<script src="js/family.js?v=2026102593"></script>
-<script src="js/richpage.js?v=2026102593"></script>
-<script src="js/rooms2.js?v=2026102593"></script>
-<script src="js/sound.js?v=2026102593"></script>
-<script src="js/trail.js?v=2026102593"></script>
-<script src="js/collections.js?v=2026102593"></script>
-<script src="js/musecolls.js?v=2026102593"></script>
-<script src="js/sq.js?v=2026102593"></script>
-<script src="js/sqflags.js?v=2026102593"></script>
-<script src="js/sqsuggest.js?v=2026102593"></script>
-<script src="js/search.js?v=2026102593"></script>
-<script src="js/places.js?v=2026102593"></script>
-<script src="js/pagekit.js?v=2026102593"></script>
-<script src="js/orient.js?v=2026102593"></script>
-<script src="js/studypace.js?v=2026102593"></script>
-<script src="js/paintmap.js?v=2026102593"></script>
-<script src="js/vibe.js?v=2026102593"></script>
-<script src="js/gridzoom.js?v=2026102593"></script>
-<script src="js/paletteview.js?v=2026102593"></script>
-<script src="js/router.js?v=2026102593"></script>
-<script src="js/artwiki.js?v=2026102593"></script>
-<script src="js/article.js?v=2026102593"></script>
-<script src="js/slideshow.js?v=2026102593"></script>
-<script src="js/polish.js?v=2026102593"></script>
-<script src="js/looks.js?v=2026102593"></script>
-<script src="js/aesthetics-graph.js?v=2026102593"></script>
-<script src="js/gallery-strip.js?v=2026102593"></script>
-<script src="js/fashion.js?v=2026102593"></script>
-<script src="js/export.js?v=2026102593"></script>
-<script src="js/isolate.js?v=2026102593"></script>
-<script src="js/eyedrop.js?v=2026102593"></script>
-<script src="js/picked.js?v=2026102593"></script>
-<script src="js/namer.js?v=2026102593"></script>
-<script src="js/twins.js?v=2026102593"></script>
-<script src="js/feed.js?v=2026102593"></script>
-<script src="js/desktop.js?v=2026102593"></script>
-<script src="js/perfprobe.js?v=2026102593"></script>
-<script src="js/boot.js?v=2026102593"></script></body>
+<div id="boot" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#121212"/><g stroke="#121212" stroke-width="1.6"><rect x="12" y="4" width="8" height="21" rx="2" fill="#E34234" transform="rotate(-34 16 25)"/><rect x="12" y="4" width="8" height="21" rx="2" fill="#FFBF00" transform="rotate(-11 16 25)"/><rect x="12" y="4" width="8" height="21" rx="2" fill="#50C878" transform="rotate(12 16 25)"/><rect x="12" y="4" width="8" height="21" rx="2" fill="#007FFF" transform="rotate(35 16 25)"/></g></svg><b>Chromatlas</b><u></u></div>
+<script src="data/colors.js?v=2026102595"></script>
+<script src="data/wiki-seed.js?v=2026102595"></script>
+<script src="data/paintings.js?v=2026102595"></script>
+<script src="data/fashion.js?v=2026102595"></script>
+<script src="js/core.js?v=2026102595"></script>
+<script src="js/loader.js?v=2026102595"></script>
+<script src="js/learn.js?v=2026102595"></script>
+<script src="js/produce.js?v=2026102595"></script>
+<script src="js/pickit.js?v=2026102595"></script>
+<script src="js/learner.js?v=2026102595"></script>
+<script src="js/peek.js?v=2026102595"></script>
+<script src="js/lookalikes.js?v=2026102595"></script>
+<script src="js/swatch.js?v=2026102595"></script>
+<script src="data/squint.js?v=2026102595"></script>
+<script src="js/gym-engine.js?v=2026102595"></script>
+<script src="js/gym.js?v=2026102595"></script>
+<script src="js/accuracy.js?v=2026102595"></script>
+<script src="js/graph.js?v=2026102595"></script>
+<script src="js/naming.js?v=2026102595"></script>
+<script src="js/honey.js?v=2026102595"></script>
+<script src="js/colorsets.js?v=2026102595"></script>
+<script src="js/colorset.js?v=2026102595"></script>
+<script src="js/palettehive.js?v=2026102595"></script>
+<script src="js/subjectview.js?v=2026102595"></script>
+<script src="js/paintercolors.js?v=2026102595"></script>
+<script src="js/explore.js?v=2026102595"></script>
+<script src="js/linkshere.js?v=2026102595"></script>
+<script src="js/home.js?v=2026102595"></script>
+<script src="js/mapxfer.js?v=2026102595"></script>
+<script src="js/learnit.js?v=2026102595"></script>
+<script src="js/learnmore.js?v=2026102595"></script>
+<script src="js/gallery.js?v=2026102595"></script>
+<script src="js/segment.js?v=2026102595"></script>
+<script src="js/paintzoom.js?v=2026102595"></script>
+<script src="js/poems.js?v=2026102595"></script>
+<script src="js/passages.js?v=2026102595"></script>
+<script src="js/films.js?v=2026102595"></script>
+<script src="js/labs.js?v=2026102595"></script>
+<script src="js/picker.js?v=2026102595"></script>
+<script src="js/tastemodel.js?v=2026102595"></script>
+<script src="js/taste.js?v=2026102595"></script>
+<script src="js/tasteladder.js?v=2026102595"></script>
+<script src="js/prefmodel.js?v=2026102595"></script>
+<script src="js/favs.js?v=2026102595"></script>
+<script src="js/favrank.js?v=2026102595"></script>
+<script src="js/favprofile.js?v=2026102595"></script>
+<script src="js/camera.js?v=2026102595"></script>
+<script src="js/studio.js?v=2026102595"></script>
+<script src="js/photos.js?v=2026102595"></script>
+<script src="js/challenge.js?v=2026102595"></script>
+<script src="js/today.js?v=2026102595"></script>
+<script src="js/homefeed.js?v=2026102595"></script>
+<script src="js/todayfeed.js?v=2026102595"></script>
+<script src="js/match-model.js?v=2026102595"></script>
+<script src="js/match.js?v=2026102595"></script>
+<script src="js/world.js?v=2026102595"></script>
+<script src="js/pulp.js?v=2026102595"></script>
+<script src="js/photography.js?v=2026102595"></script>
+<script src="js/designobjects.js?v=2026102595"></script>
+<script src="js/ukiyoe.js?v=2026102595"></script>
+<script src="data/botany-images.js?v=2026102595"></script>
+<script src="js/botany.js?v=2026102595"></script>
+<script src="js/botanicalplates.js?v=2026102595"></script>
+<script src="data/gem-images.js?v=2026102595"></script>
+<script src="js/gems.js?v=2026102595"></script>
+<script src="js/brands.js?v=2026102595"></script>
+<script src="js/names.js?v=2026102595"></script>
+<script src="js/practice.js?v=2026102595"></script>
+<script src="js/learnset.js?v=2026102595"></script>
+<script src="js/studyformats.js?v=2026102595"></script>
+<script src="js/learnhub.js?v=2026102595"></script>
+<script src="js/eye-names.js?v=2026102595"></script>
+<script src="js/misscompare.js?v=2026102595"></script>
+<script src="js/games/oo-engine.js?v=2026102595"></script>
+<script src="js/games/oo-ui.js?v=2026102595"></script>
+<script src="js/games/oo-with.js?v=2026102595"></script>
+<script src="js/games/oo-mix.js?v=2026102595"></script>
+<script src="js/games/line.js?v=2026102595"></script>
+<script src="js/games/pairs.js?v=2026102595"></script>
+<script src="js/games/whichway.js?v=2026102595"></script>
+<script src="js/games/steps.js?v=2026102595"></script>
+<script src="js/games/hue-engine.js?v=2026102595"></script>
+<script src="js/games/hue-ui.js?v=2026102595"></script>
+<script src="js/games/hue-shot.js?v=2026102595"></script>
+<script src="js/games/oo-shot.js?v=2026102595"></script>
+<script src="js/games/brands-game.js?v=2026102595"></script>
+<script src="js/colorindex.js?v=2026102595"></script>
+<script src="js/paintingsof.js?v=2026102595"></script>
+<script src="js/chords.js?v=2026102595"></script>
+<script src="js/settray.js?v=2026102595"></script>
+<script src="js/setpage.js?v=2026102595"></script>
+<script src="js/mapstudy.js?v=2026102595"></script>
+<script src="js/sharecard.js?v=2026102595"></script>
+<script src="js/colordle.js?v=2026102595"></script>
+<script src="js/browse.js?v=2026102595"></script>
+<script src="js/browse-ui.js?v=2026102595"></script>
+<script src="js/subjectisl.js?v=2026102595"></script>
+<script src="js/roomshub.js?v=2026102595"></script>
+<script src="js/article-refs.js?v=2026102595"></script>
+<script src="js/coverage.js?v=2026102595"></script>
+<script src="js/thingquiz.js?v=2026102595"></script>
+<script src="js/you.js?v=2026102595"></script>
+<script src="js/richcolor.js?v=2026102595"></script>
+<script src="js/sources.js?v=2026102595"></script>
+<script src="js/family.js?v=2026102595"></script>
+<script src="js/richpage.js?v=2026102595"></script>
+<script src="js/rooms2.js?v=2026102595"></script>
+<script src="js/sound.js?v=2026102595"></script>
+<script src="js/trail.js?v=2026102595"></script>
+<script src="js/collections.js?v=2026102595"></script>
+<script src="js/musecolls.js?v=2026102595"></script>
+<script src="js/sq.js?v=2026102595"></script>
+<script src="js/sqflags.js?v=2026102595"></script>
+<script src="js/sqsuggest.js?v=2026102595"></script>
+<script src="js/search.js?v=2026102595"></script>
+<script src="js/places.js?v=2026102595"></script>
+<script src="js/pagekit.js?v=2026102595"></script>
+<script src="js/orient.js?v=2026102595"></script>
+<script src="js/studypace.js?v=2026102595"></script>
+<script src="js/paintmap.js?v=2026102595"></script>
+<script src="js/vibe.js?v=2026102595"></script>
+<script src="js/gridzoom.js?v=2026102595"></script>
+<script src="js/paletteview.js?v=2026102595"></script>
+<script src="js/router.js?v=2026102595"></script>
+<script src="js/artwiki.js?v=2026102595"></script>
+<script src="js/article.js?v=2026102595"></script>
+<script src="js/slideshow.js?v=2026102595"></script>
+<script src="js/polish.js?v=2026102595"></script>
+<script src="js/looks.js?v=2026102595"></script>
+<script src="js/aesthetics-graph.js?v=2026102595"></script>
+<script src="js/gallery-strip.js?v=2026102595"></script>
+<script src="js/fashion.js?v=2026102595"></script>
+<script src="js/export.js?v=2026102595"></script>
+<script src="js/isolate.js?v=2026102595"></script>
+<script src="js/eyedrop.js?v=2026102595"></script>
+<script src="js/picked.js?v=2026102595"></script>
+<script src="js/namer.js?v=2026102595"></script>
+<script src="js/twins.js?v=2026102595"></script>
+<script src="js/feed.js?v=2026102595"></script>
+<script src="js/desktop.js?v=2026102595"></script>
+<script src="js/perfprobe.js?v=2026102595"></script>
+<script src="js/boot.js?v=2026102595"></script></body>
 </html>

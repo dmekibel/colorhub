@@ -271,39 +271,41 @@ async function hfVibeRiver(hk, rnd, skip, taste) {
     st = { ...f, dir: rnd() < .5 ? 1 : -1, step: stepBase * (.7 + rnd() * .6), used: new Set() }; HF_VR.set(hk, st);
   }
   const out = [], bar = hfCut(.72), t0 = Date.now(), room = i => !st.used.has(i) && !skip.has(i) && !hfHid(i) && hfBeauty(i) >= bar;
+  // One continuous walk (David, 2026-10-26: "a very gradual change from one subject matter to the next, and the same with colors"): every step takes a few paintings
+  // around the anchor, ordered so each is as close in color to the one before as possible, then the anchor moves to the neighbor that is most alike in LOOK and closest to the
+  // reference color; the reference color follows the anchor a quarter of the way each step and drifts round the wheel a hair. No patch ever ends in a jump unless nothing is left.
+  const dEi = (a, b) => Math.hypot((M[a * 3] - M[b * 3]) * .7, M[a * 3 + 1] - M[b * 3 + 1], M[a * 3 + 2] - M[b * 3 + 2]);
+  const chain = (list, prev) => {   // nearest-first order starting from the last painting shown
+    const left = list.slice(), res = []; let cur = prev;
+    while (left.length) { let bi = 0, bd = 1e9; for (let k = 0; k < left.length; k++) { const d = cur == null ? -hfBeauty(left[k]) : dEi(cur, left[k]) + yGap(left[k], yr(cur)) / 40; if (d < bd) { bd = d; bi = k; } } cur = left.splice(bi, 1)[0]; res.push(cur); }
+    return res;
+  };
   for (let it = 0; it < 60 && out.length < 84; it++) {
     if (out.length >= 24 && Date.now() - t0 > 2200) break;   // never stuck: what is ready is shown, the next batch carries on from here
     const nb = await hfBudget(vibeNeighbors(st.A, 60), it ? 2500 : 7000, []);
     if (!nb.length) { if (!it && !st.used.size) { HF_VR.delete(hk); return []; } break; }
     const sim = new Map(nb.map(x => [x.i, x.sim])), pool = [st.A, ...nb.map(x => x.i)].filter(room);
-    const cand = st.used.size ? pool.filter(i => fits(i, st, 0)) : ladder(pool, st, 1);   // once under way nothing is let in that breaks the limits: the river starts a new stretch instead
+    const cand = st.used.size ? pool.filter(i => fits(i, st, 0)) : ladder(pool, st, 1);   // once under way nothing is let in that breaks the limits
     const score = i => hfBeauty(i) + (sim.get(i) || 1) * simW - dE(i, st.ref) / (30 + 100 * (1 - ac)) - yGap(i, st.year) / (win * 2 + 60) + (st.co && cof(i) === st.co ? ap * .5 : 0);
-    cand.sort((x, y) => score(y) - score(x)).slice(0, size).forEach(i => { st.used.add(i); out.push(i); });
+    const take = cand.sort((x, y) => score(y) - score(x)).slice(0, size);
+    chain(take, out.length ? out[out.length - 1] : null).forEach(i => { st.used.add(i); out.push(i); });
     (st.trail = st.trail || []).push(st.A); if (st.trail.length > 12) st.trail.shift();
     if (!st.co) { const c1 = out.slice(-size).find(i => cof(i)); if (c1 != null) st.co = cof(c1); }   // an anchor with no known country takes the first known one, so the place limit can hold
-    if (st.left > 0) {
-      // the same patch goes on: the next anchor is the closest unused neighbor that still fits (no step round the color wheel yet)
-      const nx = nb.map(x => x.i).filter(room).filter(i => fits(i, st, 0)).sort((x, y) => (sim.get(y) || 0) - (sim.get(x) || 0))[0];
-      if (nx != null) { st.left--; st.A = nx; st.year = yr(nx) ?? st.year; continue; }
+    // a rare jump, only when Look is low
+    if (av < .3 && rnd() < jump) { const f = fresh(st); if (f) { Object.assign(st, f); continue; } }
+    // the next anchor: the unused neighbor most alike in look, nearest the reference color (the bridge: the neighbors of the last few anchors when these are used up)
+    const pick = (ids, simOf) => ids.filter(i => room(i) && fits(i, st, 0)).sort((x, y) => (simOf(y) * 3 + hfBeauty(y) - dE(y, st.ref) / 25) - (simOf(x) * 3 + hfBeauty(x) - dE(x, st.ref) / 25))[0];
+    let nx = pick(nb.map(x => x.i), i => sim.get(i) || 0);
+    if (nx == null) {
+      const recent = (st.trail || []).slice(-4), lists = await hfBudget(Promise.all(recent.map(a => vibeNeighbors(a, 60))), 2500, []), cnt = new Map();
+      lists.forEach(l => l.forEach(x => cnt.set(x.i, (cnt.get(x.i) || 0) + x.sim + .2)));
+      nx = pick([...cnt.keys()], i => cnt.get(i) || 0);
     }
-    // the patch is done: a jump to somewhere new (the more exploring, the more often), else a small step round the color wheel
-    st.left = patchSteps - 1;
-    if (rnd() < jump) { const f = fresh(st); if (f) { Object.assign(st, f); continue; } }
-    const ang = st.dir * st.step * (.6 + rnd() * .8) * Math.PI / 180, ca = Math.cos(ang), sa = Math.sin(ang);
-    st.ref = [st.ref[0], st.ref[1] * ca - st.ref[2] * sa, st.ref[1] * sa + st.ref[2] * ca];
-    const next = nb.map(x => x.i).filter(room).filter(i => fits(i, st, 0));
-    next.sort((x, y) => (dE(x, st.ref) - hfBeauty(x) * 30) - (dE(y, st.ref) - hfBeauty(y) * 30));
-    if (!next.length) {
-      // a bridge before a jump (David, 2026-10-26: "the transition could be more gradual"): the neighbors of the last few anchors, whichever fit and turn up most often,
-      // so the next stretch grows out of this one instead of landing somewhere unrelated
-      const recent = (st.trail = st.trail || []).slice(-4);
-      const lists = await hfBudget(Promise.all(recent.map(a => vibeNeighbors(a, 60))), 2500, []), cnt = new Map();
-      lists.forEach(l => l.forEach(x => { if (room(x.i) && fits(x.i, st, 0)) cnt.set(x.i, (cnt.get(x.i) || 0) + x.sim + .2); }));
-      const bridge = [...cnt.entries()].sort((a, b) => (b[1] + hfBeauty(b[0])) - (a[1] + hfBeauty(a[0])))[0];
-      if (bridge) { st.A = bridge[0]; st.year = yr(bridge[0]) ?? st.year; if (ap > .35) st.co = cof(bridge[0]) || st.co; st.trail.push(bridge[0]); continue; }
-      const f = fresh(st); if (!f) break; Object.assign(st, f); continue;
-    }
-    st.A = next[0]; st.year = yr(next[0]) ?? st.year; if (ap > .35) st.co = cof(next[0]) || st.co;
+    if (nx == null) { const f = fresh(st); if (!f) break; Object.assign(st, f); continue; }
+    const ang = st.dir * (st.step / patchSteps) * (.6 + rnd() * .8) * Math.PI / 180, ca = Math.cos(ang), sa = Math.sin(ang), m1 = meanOf(nx);
+    const rr = [st.ref[0], st.ref[1] * ca - st.ref[2] * sa, st.ref[1] * sa + st.ref[2] * ca];
+    st.ref = [rr[0] * .75 + m1[0] * .25, rr[1] * .75 + m1[1] * .25, rr[2] * .75 + m1[2] * .25];
+    st.A = nx; st.year = yr(nx) ?? st.year; if (ap > .35) st.co = cof(nx) || st.co;
   }
   return out;
 }
@@ -435,7 +437,22 @@ async function hfByFacet(kind, name, k, roll) {
     return { ids: cand, total: cand.length };
   }
   const rr = hfSeedOf(k + "|" + name + "|" + roll, kind), picked = hfPick(cand, rr, HF_KEEP);
-  return { ids: hfRiverOn() ? hfRiverOrder(picked, Math.floor(rr() * HF_BINS), 0).ids : picked, total: cand.length };
+  return { ids: hfRiverOn() ? hfChainList(picked, rr) : picked, total: cand.length };
+}
+// a lens list (a movement, a painter) in a gradual order: start from a beautiful one, then always a close one in color and years (Look and Color sliders set how strictly)
+function hfChainList(ids, rnd) {
+  const M = GAL.mean, ac = hfAlikeC(), at = hfAlikeT(), kk = 1 + Math.round((1 - ac) * 6), left = ids.slice(), out = [];
+  const yv = i => (GAL.year[i] === GL_UNDATED ? null : GAL.year[i]);
+  let cur = left.reduce((b, i) => (b == null || hfBeauty(i) > hfBeauty(b) ? i : b), null);
+  while (left.length) {
+    if (cur != null && out.length) { /* cur is the last one placed */ }
+    const k0 = left.indexOf(cur); if (k0 >= 0) left.splice(k0, 1);
+    out.push(cur);
+    if (!left.length) break;
+    const ds = left.map((j, n) => { const y1 = yv(cur), y2 = yv(j), yd = y1 == null || y2 == null ? 40 : Math.abs(y1 - y2); return [n, Math.hypot((M[cur * 3] - M[j * 3]) * .7, M[cur * 3 + 1] - M[j * 3 + 1], M[cur * 3 + 2] - M[j * 3 + 2]) + yd * (.1 + .4 * at) - hfBeauty(j) * 6]; }).sort((a, b) => a[1] - b[1]);
+    cur = left[ds[Math.floor(rnd() * Math.min(kk, ds.length))][0]];
+  }
+  return out;
 }
 // like this one: by vibe (the model's nearest neighbors, then their neighbors) or by color (the nearest palettes)
 async function hfLike(seed, by) {

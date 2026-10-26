@@ -386,3 +386,11 @@ html.desk .fd-mapb-hero{top:18px;right:var(--dkg)}
   html.desk .glz-cap{bottom:20px}
   html.desk .glz-seg button[data-glzv]{opacity:.72;transition:opacity .2s}
   html.desk .glz-seg button[data-glzv]:hover,html.desk .glz-seg button[data-glzv].on{opacity:1}
+
+/* an iPad (touch): the top menu stays put at the very top, full width, all the time; the page's chip row sits under it instead of replacing it (David, 2026-10-26) */
+@media (pointer:coarse){
+  html.desk.dk-stuck #dk-nav{visibility:visible}
+  html.desk.dk-stuck .dk-pb-l,html.desk.dk-stuck .dk-pb-r{display:none}
+  html.desk :is(.cp-page,.gl-page,.aw-page) .fd-bar{top:var(--dkn)}
+  html.desk.dk-stuck .fd-bar{padding-left:var(--dk-L)}
+}
