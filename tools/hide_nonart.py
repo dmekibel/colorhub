@@ -13,13 +13,17 @@ that are not artworks at all, and it is deliberately conservative (2026-10-25, m
     book covers with icons and frame backs, all real collection objects. So it is not used to hide anything.
   * rule 1, blank: a cached photo whose pixels differ from its page by under 0.4% (nothing on it) on a light page.
   * rule 2, title: the title says it is not a picture ("journal cover", "magazine cover", "screenshot", "table of contents").
-  * data/hide-overrides.json {"hide": [ids], "show": [ids]}: David's hand list; "show" wins over both rules.
+  * rule 3, photo (2026-10-26, David: "the Manet is a photograph of a painting instead of the painting itself"): Commons file uploads
+    (commons-F...) that CLIP scores as a PHOTO OF A SETTING (a gallery wall with visitors, a frame on a wall, a church ceiling or altar)
+    rather than the artwork itself. tools/audit_photos.py scores them (needs the clipenv) and writes data/hide-photos.json; this tool
+    only reads that list. Checked on contact sheets of random rows per score band: nearly all >= 0.8 are such photos; Commons uploads only.
+  * data/hide-overrides.json {"hide": [ids], "show": [ids]}: David's hand list; "show" wins over every rule.
 Genuine drawings, sketches, prints, miniatures and watercolors are in scope and are never hidden.
 
 Measuring (cached in research/_raw/subjects/nonart-feat.npy, about 90 s the first time): per item, from the cached 200 px photo
 (research/_raw/<src>/img/<id>.jpg or measure-img/<id>.jpg), the share of pixels that differ from the border-ring color.
 
-hidden.json: {"v":1,"n":N,"hash":sha1(ids.txt)[:8],"built":date,"idx":[sorted gallery indices],"why":{"<idx>":"blank|title|hand"}}.
+hidden.json: {"v":1,"n":N,"hash":sha1(ids.txt)[:8],"built":date,"idx":[sorted gallery indices],"why":{"<idx>":"blank|title|photo|hand"}}.
 Items stay in the gallery (order is append-only, everything stores gallery positions). js/gallery.js loads the file with the
 index (GAL.hid) and every ranking / list skips them; an address like #/gallery/<n> still opens a hidden painting.
 """
@@ -95,6 +99,11 @@ def main():
         for x in (d if isinstance(d, list) else d.get("rows", [])):
             if x["id"] in pos and TITLE.search(x.get("t") or ""):
                 why.setdefault(pos[x["id"]], "title")
+    hp = ROOT / "data" / "hide-photos.json"
+    if hp.exists():
+        for k in json.load(open(hp)).get("ids", []):
+            if k in pos:
+                why.setdefault(pos[k], "photo")
     ov = ROOT / "data" / "hide-overrides.json"
     if ov.exists():
         o = json.load(open(ov))

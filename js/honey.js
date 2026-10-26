@@ -677,7 +677,7 @@ const HONEY_WRAP = new Map();
 // never reach the floor -- the expensive part (ctx.measureText, picking the wrap) runs once per unique name,
 // ever, not once per cell per frame.
 const HONEY_LABEL_FS_MIN = 7;
-const HONEY_LABEL_FS_HOME = 11;   // the Home map hides a name smaller than this instead of drawing a smudge (David, 2026-10-21); other honeycombs (palette views) keep 7
+const HONEY_LABEL_FS_HOME = 5;   // the Home map hides a name smaller than this (David, 2026-10-26: "every tile should have a text name, even tiny"; it was 11, which left only the middle cells named on a phone: 16 of 269); other honeycombs (palette views) keep 7
 function honeyWrap(ctx, name) {
   let w = HONEY_WRAP.get(name); if (w) return w;
   const maxW = 76, words = name.split(" ");

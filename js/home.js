@@ -437,7 +437,7 @@ const HM_GEAR_SVG = `<svg viewBox="0 0 24 24" width="22" height="22" fill="none"
 // Once the user zooms, S.hm.zoom is theirs (onZoom saves it) and this never overrides it.
 function hmStartZoom() {
   const a = (innerWidth || 440) * Math.max(300, (innerHeight || 956) - 60);
-  return Math.round(Math.min(2.5, Math.max(1, Math.sqrt(a / (440 * 956))) * 1.15) * 100) / 100;   // x1.15: every name at the start is big enough to carry its label (the label floor is 11 px)
+  return Math.round(Math.min(2.5, Math.max(1, Math.sqrt(a / (440 * 956))) * 1.15) * 100) / 100;   // x1.15 (the label floor is 5 px since 2026-10-26, so every cell at the start carries its name)
 }
 
 function hmHome() {
