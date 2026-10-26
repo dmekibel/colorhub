@@ -2621,7 +2621,9 @@ function glPage(i, d, fromHex, tol) {
   if (typeof fdMount === "function") fdMount(el.querySelector("[data-glfeed]"), { ...feedOpts, about: el.querySelector("[data-gl-about]"), startChip });
 }
 // where a painting page opens: browsing from another painting, a color page's feed tile (p:/n:), the painting map or a painter -> Color; otherwise Overview
+let GL_FROM_TODAY = false;
 function glStartChip() {
+  if (typeof GL_FROM_TODAY !== "undefined" && GL_FROM_TODAY) { GL_FROM_TODAY = false; return "color"; }   // David, 2026-10-26: a painting opened from the Today feed starts on Color, so the scroll goes on
   const prev = typeof XSTACK !== "undefined" && XSTACK.length > 1 ? String(XSTACK[XSTACK.length - 2]) : "";
   return /^(g:|p:|n:|aw:)/.test(prev) || /^r:.*paintings\/map/.test(prev) ? "color" : "about";
 }

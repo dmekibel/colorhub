@@ -117,13 +117,13 @@ const hfSeedOf = (k, extra) => seededRnd(hash("hf" + k + extra));
 // ---------- the daily presets ----------
 // Row two before you have followed anything: a movement, a painter, a painting to be "like", a color, picked by date from good pools.
 const hfRoll = id => (hfS().roll && hfS().roll[id]) | 0;
+const HF_KNOWN = /impression|baroque|rococo|romantic|realism|renaissance|neoclass|symbol|expression|cubis|surreal|nouveau|raphael|golden age|ukiyo|manner|fauv|point|luminis|hudson|orientalis|primitiv|futur|modern/i;   // movements people know
 async function hfPresets(k) {
   const F = await hfFacets(), C = hfCounts(F); await hfBeautyReady();
   const pick = (arr, r) => arr[Math.floor(r() * arr.length)];
   const mvs = [], ars = [];
   // movements people know (the rest of the 400-painting movements only if none of those exist); painters with the biggest bodies of work
-  const KNOWN = /impression|baroque|rococo|romantic|realism|renaissance|neoclass|symbol|expression|cubis|surreal|nouveau|raphael|golden age|ukiyo|manner|fauv|point|luminis|hudson|orientalis|primitiv|futur|modern/i;
-  F.meta.movements.forEach((n, j) => { if (n && C.mv[j + 1] >= 150 && KNOWN.test(n)) mvs.push(n); });
+  F.meta.movements.forEach((n, j) => { if (n && C.mv[j + 1] >= 150 && HF_KNOWN.test(n)) mvs.push(n); });
   if (!mvs.length) F.meta.movements.forEach((n, j) => { if (n && C.mv[j + 1] >= 400 && !/^none$/i.test(n)) mvs.push(n); });
   F.meta.artists.forEach((a, j) => { if (C.art[j + 1] >= 80) ars.push({ n: a[0], c: C.art[j + 1] }); });
   ars.sort((a, b) => b.c - a.c); const topArs = ars.slice(0, 90);
@@ -141,6 +141,22 @@ async function hfPresets(k) {
   const nice = TODAY_TABLE.filter(r => { const c = lch(r[2]); return c[1] >= 12 && hfLiking(c[2], c[0], c[1]) >= .66; });
   const row = nice.length ? pick(nice, rc) : TODAY_TABLE.length ? pick(TODAY_TABLE, rc) : null;
   return { k, mv, pa, li, color: row ? { n: row[1], h: row[2] } : null };
+}
+// an endless row of lenses (David, 2026-10-26: "make that sideways list of tabs infinite, so there is always a new painting tab"): a handful of new
+// movements, painters and colors the row does not have yet, in a random order for this visit
+async function hfMoreLenses(have, n) {
+  const F = await hfFacets(), C = hfCounts(F), rnd = hfSeedOf(HF_SESSION + "|more|" + have.size, "x"), out = [];
+  const mvs = [], ars = [];
+  F.meta.movements.forEach((nm, j) => { if (nm && C.mv[j + 1] >= 100 && (HF_KNOWN.test(nm) || C.mv[j + 1] >= 400) && !/^none$/i.test(nm)) mvs.push({ id: "m:" + nm, label: nm }); });
+  F.meta.artists.forEach((a, j) => { if (C.art[j + 1] >= 60) ars.push({ id: "p:" + a[0], label: fdShortName(a[0]) }); });
+  const cols = TODAY_TABLE.filter(r => { const c = lch(r[2]); return c[1] >= 12 && hfLiking(c[2], c[0], c[1]) >= .66; }).map(r => ({ id: "c:" + r[2], label: "Near " + r[1].toLowerCase() }));
+  const pools = [mvs, ars, ars, cols];
+  for (let t = 0; t < 200 && out.length < n; t++) {
+    const pool = pools[Math.floor(rnd() * pools.length)]; if (!pool.length) continue;
+    const c = pool[Math.floor(rnd() * pool.length)];
+    if (!have.has(c.id) && !out.some(o => o.id === c.id)) out.push(c);
+  }
+  return out;
 }
 const hfFollowId = f => f.kind + ":" + f.name;
 // a painting's title short enough for a chip
@@ -215,35 +231,51 @@ const HF_SESSION = Math.random().toString(36).slice(2, 8);   // new on every ope
 const HF_VR = new Map();
 const hfHueGap = (a, b) => { const d = Math.abs(a - b) % 360; return d > 180 ? 360 - d : d; };
 async function hfVibeRiver(hk, rnd, skip) {
-  const ac = hfAlikeC(), av = hfAlikeV(), at = hfAlikeT(), ap = hfAlikeP(), cof = i => (HF_F && HF_F.country ? HF_F.country[i] : 0), size = Math.round(3 + 15 * Math.pow(av, 1.2)), stepBase = 60 - 52 * ac, jump = Math.pow(1 - av, 2) * .55, den = 150 - 110 * ac, simW = .5 + av;
+  const ac = hfAlikeC(), av = hfAlikeV(), at = hfAlikeT(), ap = hfAlikeP(), cof = i => (HF_F && HF_F.country ? HF_F.country[i] : 0);
+  const size = Math.round(3 + 15 * Math.pow(av, 1.2)), jump = Math.pow(1 - av, 2) * .55, simW = .5 + av;
+  // COLOR: at the far right the river stays inside a narrow band of hues for a very long stretch and drifts only a few degrees between patches
+  const stepBase = 60 - 56 * ac, den = 150 - 110 * ac, hueTol = 180 - 160 * Math.pow(ac, .7);
+  // LOOK: how many neighbor-steps one patch holds (each takes about `size` paintings, then moves to the closest new neighbor, with no color step)
+  const patchSteps = 1 + Math.round(11 * Math.pow(av, 2.2));
   // TIME: how far (in years) the river may wander from where it is: a few years at one end, any time at the other (a hard limit only when it is tight)
   const win = 6 + 400 * Math.pow(1 - at, 2), yr = i => (GAL.year[i] === GL_UNDATED ? null : GAL.year[i]);
   const yGap = (i, y0) => { const y = yr(i); return y == null || y0 == null ? (at > .5 ? 400 : 0) : Math.abs(y - y0); };
-  const fresh = y0 => {
-    const an = hfPick(null, rnd, 120, skip, hfCut(.93)); if (!an.length) return null;
-    const ok = at > .35 && y0 != null ? an.filter(i => yGap(i, y0) <= win) : an, pool = ok.length ? ok : an, A = pool[Math.floor(rnd() * Math.min(pool.length, 40))], d = hfDom(A);
-    return { A, hue: d ? d[0] : rnd() * 360, year: yr(A), co: cof(A) };
+  const hGap = (i, h) => { const d = hfDom(i); return d ? hfHueGap(d[0], h) : 90; };
+  // a painting may join the stretch when it is close enough in time, place and hue to where the river is
+  const fits = (i, st, relax) => (relax || at <= .35 || yGap(i, st.year) <= win) && (relax > 1 || ap <= .35 || !st.co || cof(i) === st.co) && (relax > 2 || ac <= .35 || hGap(i, st.hue) <= hueTol);
+  const fresh = st0 => {
+    const an = hfPick(null, rnd, 160, skip, hfCut(.93)); if (!an.length) return null;
+    let pool = an; if (st0) for (const r of [0, 1, 2, 3]) { const f = an.filter(i => fits(i, st0, r)); if (f.length) { pool = f; break; } }
+    const A = pool[Math.floor(rnd() * Math.min(pool.length, 40))], d = hfDom(A);
+    return { A, hue: d ? d[0] : rnd() * 360, year: yr(A), co: cof(A), left: patchSteps - 1 };
   };
   let st = HF_VR.get(hk);
   if (!st) {
     const f = fresh(null); if (!f) return [];
     st = { ...f, dir: rnd() < .5 ? 1 : -1, step: stepBase * (.7 + rnd() * .6), used: new Set() }; HF_VR.set(hk, st);
   }
-  const out = [], bar = hfCut(.72), t0 = Date.now();
-  for (let patch = 0; patch < 40 && out.length < 84; patch++) {
+  const out = [], bar = hfCut(.72), t0 = Date.now(), room = i => !st.used.has(i) && !skip.has(i) && !hfHid(i) && hfBeauty(i) >= bar;
+  for (let it = 0; it < 60 && out.length < 84; it++) {
     if (out.length >= 24 && Date.now() - t0 > 2200) break;   // never stuck: what is ready is shown, the next batch carries on from here
-    const nb = await hfBudget(vibeNeighbors(st.A, 60), patch ? 1500 : 2500, []);
-    if (!nb.length) { if (!patch && !st.used.size) { HF_VR.delete(hk); return []; } break; }
-    const sim = new Map(nb.map(x => [x.i, x.sim])), near = i => (at <= .35 || yGap(i, st.year) <= win) && (ap <= .35 || !st.co || cof(i) === st.co);
-    const cand = [st.A, ...nb.map(x => x.i)].filter(i => !st.used.has(i) && !skip.has(i) && !hfHid(i) && hfBeauty(i) >= bar && near(i));
-    const score = i => { const d = hfDom(i), g = d ? hfHueGap(d[0], st.hue) : 40; return hfBeauty(i) + (sim.get(i) || 1) * simW - g / den - yGap(i, st.year) / (win * 2 + 60) + (st.co && cof(i) === st.co ? ap * .5 : 0); };
+    const nb = await hfBudget(vibeNeighbors(st.A, 60), it ? 1500 : 2500, []);
+    if (!nb.length) { if (!it && !st.used.size) { HF_VR.delete(hk); return []; } break; }
+    const sim = new Map(nb.map(x => [x.i, x.sim]));
+    let cand = [st.A, ...nb.map(x => x.i)].filter(i => room(i) && fits(i, st, 0));
+    if (cand.length < 3) cand = [st.A, ...nb.map(x => x.i)].filter(i => room(i) && fits(i, st, 1));
+    const score = i => hfBeauty(i) + (sim.get(i) || 1) * simW - hGap(i, st.hue) / den - yGap(i, st.year) / (win * 2 + 60) + (st.co && cof(i) === st.co ? ap * .5 : 0);
     cand.sort((x, y) => score(y) - score(x)).slice(0, size).forEach(i => { st.used.add(i); out.push(i); });
-    // a jump to somewhere new (the more exploring, the more often), else the next anchor near where the hue is heading
-    if (rnd() < jump) { const f = fresh(st.year); if (f) { Object.assign(st, f); continue; } }
+    if (st.left > 0) {
+      // the same patch goes on: the next anchor is the closest unused neighbor that still fits (no step round the color wheel yet)
+      const nx = nb.map(x => x.i).filter(i => room(i) && fits(i, st, 0)).sort((x, y) => (sim.get(y) || 0) - (sim.get(x) || 0))[0];
+      if (nx != null) { st.left--; st.A = nx; st.year = yr(nx) ?? st.year; continue; }
+    }
+    // the patch is done: a jump to somewhere new (the more exploring, the more often), else a small step round the color wheel
+    st.left = patchSteps - 1;
+    if (rnd() < jump) { const f = fresh(st); if (f) { Object.assign(st, f); continue; } }
     st.hue = (st.hue + st.dir * st.step * (.6 + rnd() * .8) + 360) % 360;
-    const next = nb.map(x => x.i).filter(i => !st.used.has(i) && !skip.has(i) && !hfHid(i) && hfBeauty(i) >= bar && near(i));
-    next.sort((x, y) => { const dx = hfDom(x), dy = hfDom(y), gx = dx ? hfHueGap(dx[0], st.hue) : 70, gy = dy ? hfHueGap(dy[0], st.hue) : 70; return (gx - hfBeauty(x) * 40) - (gy - hfBeauty(y) * 40); });
-    if (!next.length) { const f = fresh(st.year); if (!f) break; Object.assign(st, f); continue; }
+    const next = nb.map(x => x.i).filter(i => room(i) && fits(i, st, 0));
+    next.sort((x, y) => (hGap(x, st.hue) - hfBeauty(x) * 40) - (hGap(y, st.hue) - hfBeauty(y) * 40));
+    if (!next.length) { const f = fresh(st); if (!f) break; Object.assign(st, f); continue; }
     st.A = next[0]; st.year = yr(next[0]) ?? st.year; if (ap > .35) st.co = cof(next[0]) || st.co;
   }
   return out;

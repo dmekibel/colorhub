@@ -23,7 +23,7 @@ let TF = null;          // today's pool: { k, items:{paint,pal,color,art,cotd}, 
 let TF_LITE = null;     // the articles index, once
 
 const tfInk = hex => lab(hex)[0] > 60 ? "#141311" : "#F6F2EA";
-let TF_KIND = "paint", TF_LENS = "foryou";   // each launch opens on Paintings and For you; where you went afterwards is kept only for this visit (a Back returns to it)
+let TF_KIND = "paint", TF_LENS = "foryou", TF_EXTRA = [];   // each launch opens on Paintings and For you; where you went afterwards is kept only for this visit (a Back returns to it)
 const tfFilter = () => (TF_TYPES.some(t => t[0] === TF_KIND) ? TF_KIND : "paint");
 // plain text out of an article's lede (no markup)
 const tfPlain = s => String(s || "").replace(/\[\[(?:[^\]|]*\|)?([^\]]*)\]\]/g, "$1").replace(/\[\d+\]/g, "").replace(/[*`]/g, "").replace(/\s+/g, " ").trim();
@@ -192,10 +192,19 @@ function todayFeed() {
   cleanup.push(() => { stop.concat(stop.live || []).forEach(f => { try { f(); } catch (e) {} }); });
   const lensId = () => TF_LENS;
   const setKinds = () => kindsRow.querySelectorAll(".tf-chip").forEach(b => { const on = b.dataset.tfF === tfFilter(); b.classList.toggle("on", on); b.setAttribute("aria-checked", on); });
+  const tfChipList = () => { const base = hfChips(pre, TF_EXTRA.some(c => c.id === lensId()) ? null : lensId()), seen = new Set(base.map(c => c.id)); return base.concat(TF_EXTRA.filter(c => !seen.has(c.id))); };
+  let extraBusy = false;
+  // always more to the right: when the row's end is near, new movements, painters and colors are added
+  const moreLenses = async () => {
+    if (extraBusy) return; extraBusy = true;
+    try { const have = new Set(tfChipList().map(c => c.id)), add = await hfMoreLenses(have, 8); if (add.length) { TF_EXTRA.push(...add); const sx = lensRow.scrollLeft; drawLenses(); lensRow.scrollLeft = sx; } } catch (e) {}
+    extraBusy = false;
+  };
+  lensRow.addEventListener("scroll", () => { if (lensRow.scrollLeft + lensRow.clientWidth > lensRow.scrollWidth - 240) moreLenses(); }, { passive: true });
   const drawLenses = () => {
     const on = tfFilter() === "paint"; lensRow.hidden = !on; lh.hidden = !on || !lh.innerHTML;
     if (!on) return;
-    lensRow.innerHTML = hfChips(pre, lensId()).map(c => `<button type="button" role="radio" class="tf-chip tf-lens${c.id === lensId() ? " on" : ""}" data-tf-l="${esc(c.id)}" aria-checked="${c.id === lensId()}">${esc(c.label)}</button>`).join("");
+    lensRow.innerHTML = tfChipList().map(c => `<button type="button" role="radio" class="tf-chip tf-lens${c.id === lensId() ? " on" : ""}" data-tf-l="${esc(c.id)}" aria-checked="${c.id === lensId()}">${esc(c.label)}</button>`).join("");
   };
   setKinds(); drawLenses();
   const showBars = () => { bars.classList.remove("hid"); document.documentElement.classList.remove("tf-hid"); };
@@ -245,11 +254,25 @@ function todayFeed() {
     buzz(4); TF_KIND = b.dataset.tfF; setKinds(); drawLenses(); tfChipInView(kindsRow, b); showBars();
     if (st) st.shown[b.dataset.tfF] = 0; tfScrollTo(el, 0); render(false);
   });
+  const pickLens = id => { buzz(4); TF_LENS = id; drawLenses(); const on = lensRow.querySelector(".tf-lens.on"); if (on) tfChipInView(lensRow, on); showBars(); tfScrollTo(el, 0); salt = 0; paintings(false); if (on && on === lensRow.lastElementChild) moreLenses(); };
   lensRow.addEventListener("click", e => {
     const b = e.target.closest("[data-tf-l]"); if (!b) return;
     if (b.dataset.tfL === lensId()) { if (lensId() === "foryou") refresh(); return; }
-    buzz(4); TF_LENS = b.dataset.tfL; drawLenses(); tfChipInView(lensRow, lensRow.querySelector(".tf-lens.on") || b); showBars(); tfScrollTo(el, 0); salt = 0; paintings(false);
+    pickLens(b.dataset.tfL);
   });
+  // swipe sideways on the paintings to go to the next / previous lens (Pinterest does the same); the row grows as you reach its end
+  let sw = null;
+  el.addEventListener("touchstart", e => { sw = e.touches.length === 1 && e.touches[0].clientX > 24 && e.touches[0].clientX < innerWidth - 24 && tfFilter() === "paint" && !e.target.closest(".tf-bars,.sheet,input,[data-nopull-x]") ? { x: e.touches[0].clientX, y: e.touches[0].clientY, t: Date.now() } : null; }, { passive: true });
+  el.addEventListener("touchmove", e => { if (sw && e.touches.length > 1) sw = null; }, { passive: true });
+  el.addEventListener("touchend", async e => {
+    const s0 = sw; sw = null; if (!s0 || !e.changedTouches.length) return;
+    const dx = e.changedTouches[0].clientX - s0.x, dy = e.changedTouches[0].clientY - s0.y;
+    if (Math.abs(dx) < 70 || Math.abs(dy) > Math.abs(dx) * .55 || Date.now() - s0.t > 700 || document.querySelector(".sheet")) return;
+    let list = tfChipList(), i = list.findIndex(c => c.id === lensId()), j = dx < 0 ? i + 1 : i - 1;
+    if (j < 0) return;
+    if (j >= list.length) { await moreLenses(); list = tfChipList(); if (j >= list.length) return; }
+    pickLens(list[j].id);
+  }, { passive: true });
   el.querySelector("[data-tf-tune]").addEventListener("click", () => tfSettings(key => {
     if (key === "caps") host.classList.toggle("nocaps", !hfS().caps);
     else if (key === "river" || key === "alike") { HF_CACHE.clear(); HF_ENDS.clear(); HF_VR.clear(); salt = 0; tfScrollTo(el, 0); paintings(false); }
@@ -331,18 +354,17 @@ function tfSettings(onChange) {
   const pword = v => (v > 80 ? "The same country" : v > 55 ? "Mostly the same" : v > 30 ? "A few countries" : "Anywhere");
   const wordOf = k => (k === "alikeT" ? tword : k === "alikeP" ? pword : word);
   const rng = (k, label, v) => `<div class="fs-c"><div class="fs-row"><p>${label}</p><b data-tfout="${k}">${wordOf(k)(v)}</b></div><input type="range" min="0" max="100" step="1" value="${v}" style="--p:${v}%" data-tfal="${k}" aria-label="${label}"></div>`;
-  const c = Math.round(hfAlikeC() * 100), v = Math.round(hfAlikeV() * 100), t = Math.round(hfAlikeT() * 100), pl = Math.round(hfAlikeP() * 100), all = Math.round((c + v + pl) / 3);
+  const c = Math.round(hfAlikeC() * 100), v = Math.round(hfAlikeV() * 100), t = Math.round(hfAlikeT() * 100), pl = Math.round(hfAlikeP() * 100);
   const { sh } = sheet(`<div class="fs-sheet"><div class="fs-head"><h3>Settings</h3></div><div class="fs-scroll">${sw("caps", "Show painter and year", !!hfS().caps)}${sw("river", "Flow by color", hfRiverOn())}
-    <div data-tfalikebox${hfRiverOn() ? "" : " hidden"}>${rng("both", "How alike overall", all)}${rng("alikeC", "Color", c)}${rng("alikeV", "Look", v)}${rng("alikeT", "Time", t)}${rng("alikeP", "Place", pl)}</div></div></div>`, { lock: false });
+    <div data-tfalikebox${hfRiverOn() ? "" : " hidden"}>${rng("alikeC", "Color", c)}${rng("alikeV", "Look", v)}${rng("alikeT", "Time", t)}${rng("alikeP", "Place", pl)}</div></div></div>`, { lock: false });
   tfHalf(sh);
   const paint = (k, n) => { const r = sh.querySelector(`[data-tfal="${k}"]`); if (!r) return; r.value = n; r.style.setProperty("--p", n + "%"); const o = sh.querySelector(`[data-tfout="${k}"]`); if (o) o.textContent = wordOf(k)(n); };
   sh.addEventListener("input", e => {
     const r = e.target.closest("[data-tfal]"); if (!r) return; const k = r.dataset.tfal, n = +r.value; paint(k, n);
-    if (k === "both") ["alikeC", "alikeV", "alikeP"].forEach(z => paint(z, n));
   });
   sh.addEventListener("change", e => {
     const r = e.target.closest("[data-tfal]"); if (!r) return; const st = hfS(), n = +r.value;
-    if (r.dataset.tfal === "both") { st.alikeC = n; st.alikeV = n; st.alikeP = n; } else st[r.dataset.tfal] = n;
+    st[r.dataset.tfal] = n;
     save(); buzz(4); onChange("alike");
   });
   sh.addEventListener("click", e => {
@@ -411,10 +433,14 @@ function tfPaint(scr, host, st, f, restore, stop, ov) {
     loading = true;
     ov.more().then(items => { loading = false; if (!host.isConnected) return; const have = new Set(list.map(x => x.key)); items.forEach(x => { if (!have.has(x.key)) list.push(x); }); if (n < list.length) add(n + TF_BATCH); }).catch(() => { loading = false; end.hidden = false; });
   };
-  const layout = upTo => {
+  const layout = (upTo, reuse) => {
+    // reuse: the cards on the page are moved into the new columns as they are (their pictures stay loaded), then the list goes on from there
+    const keep = reuse ? [...wrap.querySelectorAll(".tf-card[data-ix]")].sort((a, b) => a.dataset.ix - b.dataset.ix) : [];
     count = tfColCount(host.clientWidth || innerWidth); wrap.innerHTML = ""; cols = [];
     for (let c = 0; c < count; c++) { const d = document.createElement("div"); d.className = "tf-col"; wrap.appendChild(d); cols.push(d); }
-    n = 0; add(upTo);
+    n = 0;
+    for (const node of keep) { let s = cols[0]; for (const c of cols) if (c.offsetHeight < s.offsetHeight) s = c; s.appendChild(node); n++; }
+    add(upTo);
   };
   layout(shown);
   // pinch (two fingers, a trackpad pinch, ctrl+wheel, + / -) changes how many across, the same module as the painting page (js/gridzoom.js)
@@ -424,7 +450,10 @@ function tfPaint(scr, host, st, f, restore, stop, ov) {
       const vy = fy == null ? innerHeight / 2 : fy, el = document.elementFromPoint(fx == null ? innerWidth / 2 : fx, vy), card = el && el.closest(".tf-card[data-ix]"), ix = card ? card.dataset.ix : null;
       const y0 = card ? card.getBoundingClientRect().top : 0;
       const sv = hfS(); sv.zc = sv.zc || {}; sv.zc[tfWide() ? "w" : "p"] = c; save();
-      const keep = n; layout(keep);
+      // like Photos: the picture under your fingers stays put, every card keeps its picture and shape, and the ones that were off screen fade in
+      const seen = new Set([...wrap.querySelectorAll(".tf-card[data-ix]")].filter(k => { const r = k.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; }).map(k => k.dataset.ix));
+      layout(n, true);
+      wrap.querySelectorAll(".tf-card[data-ix]").forEach(k => { const r = k.getBoundingClientRect(); if (r.bottom > 0 && r.top < innerHeight && !seen.has(k.dataset.ix)) { k.classList.add("tf-fadein"); setTimeout(() => k.classList.remove("tf-fadein"), 600); } });
       const k2 = ix != null ? wrap.querySelector(`.tf-card[data-ix="${ix}"]`) : null;
       if (k2) tfScrollTo(scr, tfY(scr) + k2.getBoundingClientRect().top - (toY == null ? y0 : y0 + (toY - vy)));
       return true;
@@ -451,7 +480,7 @@ function tfPaint(scr, host, st, f, restore, stop, ov) {
     const open = () => {
       buzz(6);
       (st.y = st.y || {})[fk] = tfY(scr);
-      if (kind === "paint") return galleryPage(+c.dataset.gi, true);
+      if (kind === "paint") { GL_FROM_TODAY = true; return galleryPage(+c.dataset.gi, true); }
       if (kind === "pal") return plvOpen("painting", +c.dataset.gi);
       if (kind === "game") return daily();
       if (kind === "cont") return go("learn");

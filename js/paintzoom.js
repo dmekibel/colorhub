@@ -295,6 +295,13 @@ function glZoomOpen(opts) {
     }
     zoomAt(e.clientX, e.clientY, Z * Math.exp(-e.deltaY * .0015), false);
   }, { passive: false });
+  // Safari on a Mac pinches with gesture events (David, 2026-10-26: the trackpad zooms the full-screen painting)
+  if (matchMedia("(pointer:fine)").matches && "ongesturestart" in window) {
+    let zg = 1;
+    stage.addEventListener("gesturestart", e => { if (active === "select") return; e.preventDefault(); stopMomentum(); frame.style.transition = ""; loupeOn = false; zg = Z; });
+    stage.addEventListener("gesturechange", e => { if (active === "select") return; e.preventDefault(); zoomAt(e.clientX, e.clientY, zg * e.scale, false); });
+    stage.addEventListener("gestureend", e => e.preventDefault());
+  }
   // ---- the loupe's own pieces ----
   const ZEASE = "cubic-bezier(.2,.7,.2,1)";
   const animTo = fn => { frame.style.transition = `transform 260ms ${ZEASE}`; fn(); lpT = performance.now() + 300; setTimeout(() => { if (!closed && performance.now() >= lpT - 5) frame.style.transition = ""; }, 310); };

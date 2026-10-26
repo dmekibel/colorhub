@@ -221,3 +221,7 @@ html .room-sheet>.screen.tf-screen.tf-screen{padding-left:var(--tfp);padding-rig
 .sheet .fs-head:has(.tf-x){align-items:center;justify-content:space-between}
 .tf-x{flex:none;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:var(--surface-2);color:var(--soft);border:0;margin-left:auto}
 .tf-x svg{width:16px;height:16px}
+/* a zoom (pinch, + / -) brings the cards that were off screen in with a fade, so the page never blinks */
+@keyframes tfFadeIn{from{opacity:0}to{opacity:1}}
+.tf-card.tf-fadein{animation:tfFadeIn .45s var(--ease,ease) both}
+@media (prefers-reduced-motion:reduce){.tf-card.tf-fadein{animation:none}}

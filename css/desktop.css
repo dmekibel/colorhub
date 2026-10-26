@@ -374,9 +374,8 @@ html.desk .fd-mapb-hero{top:18px;right:var(--dkg)}
   html.desk :is(.rp-about,.gl-about,.aw-pane)>:first-child:not(.dk-rail){margin-top:24px}
 }
 
-/* the full-screen painting on an iPad (touch): no panel over the picture. Value / Squint / Where / Pick are small see-through
+/* the full-screen painting on an iPad and on a desktop (David, 2026-10-26: no panel over the picture. Value / Squint / Where / Pick are small see-through
    buttons stacked in the bottom-right corner; whatever a mode needs (palette, pick strip, selection) opens just above them. */
-@media (pointer:coarse){
   html.desk .glz-tools{top:auto;bottom:0;width:auto;max-width:min(340px,44vw);padding:0 18px 20px 0;gap:10px;justify-content:flex-end;align-items:flex-end;flex-direction:column-reverse}
   html.desk .glz-seg{display:flex;flex-direction:column;gap:6px;padding:0;background:none;box-shadow:none;border-radius:0}
   html.desk .glz-seg button[data-glzv]{min-height:38px;padding:0 14px;border-radius:var(--r-pill);font:500 14px/1 var(--sans);color:var(--ink);
@@ -385,4 +384,5 @@ html.desk .fd-mapb-hero{top:18px;right:var(--dkg)}
   html.desk .glz-pal,html.desk .glz-pk,html.desk .glz-sel{padding:10px;border-radius:var(--r-2,12px);background:rgba(14,13,11,.62);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
   html.desk .glz-pal[hidden],html.desk .glz-pk[hidden],html.desk .glz-sel[hidden]{display:none}
   html.desk .glz-cap{bottom:20px}
-}
+  html.desk .glz-seg button[data-glzv]{opacity:.72;transition:opacity .2s}
+  html.desk .glz-seg button[data-glzv]:hover,html.desk .glz-seg button[data-glzv].on{opacity:1}

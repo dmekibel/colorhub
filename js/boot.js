@@ -16,6 +16,8 @@ function bootStart() {
   // places the learner at the beginning of the path (the same result as the test's "start at the beginning"), so no
   // screen anywhere sends them to welcome(); the placement test stays reachable from Learn (#/welcome).
   if (!S.placed) { S.placed = { tier: 2, at: today(), auto: true }; S.start = 0; save(); }
+  // David, 2026-10-26: "make sure the app opens to Today": an open with no address lands on the Today feed (#/feed); the color map stays one tap away in Explore.
+  if (/^#?\/?$/.test(location.hash) && typeof todayFeed === "function" && !/[?&]home=1\b/.test(location.search) && openRoute("#/feed", true)) { prefetchWiki(); return; }
   if (!openRoute(location.hash, true)) { if (!/^#?\/?$/.test(location.hash) || !coldMap()) hmHome(); }
   prefetchWiki();
 }

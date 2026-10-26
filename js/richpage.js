@@ -973,11 +973,13 @@ function colorDossier(entry, o = {}) {
   const memo0 = backNav && typeof FD_MEMO !== "undefined" ? FD_MEMO.get("c:" + heroHex.toUpperCase()) : null;
   const startChip = memo0 && memo0.chip ? memo0.chip : rpStartChip();
   const call = (f, ...a) => typeof f === "function" ? f(...a) : "";
+  // David, 2026-10-26: "it could also be called" lives in Overview (rpAlsoHTML below), not above the paintings
   const secHTML = `${typeof sxPairBtnHTML === "function" ? `<div class="rp-pair-row">${sxPairBtnHTML(heroHex, name)}</div>` : ""}<div class="ar-head" data-ar-head hidden></div>
     <div class="ar-body" data-ar-body hidden></div>
     ${rpPaintSectionHTML(name, heroHex, entry, famC)}
     ${call(rcNextToHTML, name, heroHex)}
     ${rpIdCardHTML()}
+    ${rpAlsoHTML(name, hex, tapped)}
     ${rpNextHTML()}
     ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "c:" + name, title: name }) : ""}`;
   const el = show(`
@@ -991,7 +993,6 @@ function colorDossier(entry, o = {}) {
       </div>
     </div>
     ${rpBarHTML(name, heroHex)}
-    ${rpAlsoHTML(name, hex, tapped)}
     ${entry.shade ? `<p class="fine np-shade">A described shade: ${esc(entry.shade.base)} made ${esc(entry.shade.mod)}${o.shadeBase ? `. <button class="link" data-shade-base>See ${esc(entry.shade.base)}</button>` : "."}</p>` : ""}
     ${typeof fdMountColor === "function" ? `<section class="gl-feed rp-feed rp-tabs" data-rpfeed aria-label="About this color, and keep exploring">
       <div class="fd-bar fd-pre"><div class="fd-chips" role="tablist" aria-label="About this color, or keep exploring">${[["about", "Overview"], ...FDC_CHIPS].map(([k, t]) => `<button class="fd-chip${k === startChip ? " on" : ""}${k === "about" || k === startChip ? "" : " dis"}" role="tab" data-fc="${k}" aria-selected="${k === startChip}">${t}</button>`).join("")}</div></div>
@@ -1025,15 +1026,14 @@ function colorDossier(entry, o = {}) {
   rpHoldWalk(el, name, heroHex);
   rpBarWire(el);
   // David, 2026-10-26: the hero's own buttons scroll away with it; they fade out before they reach the status bar instead of running under the clock and battery
-  if (!document.documentElement.classList.contains("desk")) {
-    const probe = document.createElement("i"); probe.style.cssText = "position:fixed;top:0;height:var(--top);width:0;visibility:hidden"; document.body.appendChild(probe);
-    const ctl = [...el.querySelectorAll(".cp-hero > .cp-close, .cp-hero > .fd-mapb-hero, .cp-hero > .tl-more-float, .cp-hero > .tl-exit-float")]; let raf = 0;
+  if (!document.documentElement.classList.contains("desk") && matchMedia("(hover:none)").matches) {   // a phone: the status bar is there
+    const ctl = [...el.querySelectorAll(".cp-hero > .cp-close, .cp-hero > .fd-mapb-hero, .cp-hero > .tl-more-float, .cp-hero > .tl-exit-float")], back0 = ctl[0]; let raf = 0;
     const fade = () => {
-      raf = 0; if (!el.isConnected) { removeEventListener("scroll", on, true); probe.remove(); return; }
-      const t = probe.offsetHeight;
+      raf = 0; if (!el.isConnected) { removeEventListener("scroll", on, true); return; }
+      const t = Math.max(0, (parseFloat(getComputedStyle(back0).top) || 0) - 14);   // the safe-area inset: the controls sit at --top + 14px
       ctl.forEach(c => { const y = c.getBoundingClientRect().top, o = Math.max(0, Math.min(1, (y - (t - 6)) / 22)); c.style.opacity = o < 1 ? o.toFixed(2) : ""; c.style.pointerEvents = o < .4 ? "none" : ""; });
     };
-    const on = () => { if (!raf) raf = requestAnimationFrame(fade); };
+    const on = () => { if (back0) fade(); };
     addEventListener("scroll", on, true);
   }
   // Keep exploring (js/feed.js): the endless feed of paintings and more at the very bottom, with chips for what counts as related.

@@ -113,6 +113,13 @@ function gzAttach(host, o) {
   if (!SAFARI) arm(true);
   else { addEventListener("keydown", onKey); addEventListener("keyup", onKey); addEventListener("blur", onBlur); }
 
+  // Safari on a Mac pinches with gesture events (scale since the start), not wheel events (David, 2026-10-26: two-finger zoom on the desktop)
+  const FINE = matchMedia("(pointer:fine)").matches;
+  const onGS = e => { e.preventDefault(); if (st.on) return; begin(e.clientX, e.clientY); st.wheel = true; st.touch = false; };
+  const onGC = e => { e.preventDefault(); if (!st.on || st.touch) return; st.raw = Math.max(.05, Math.min(20, e.scale)); if (!reduceMotion && !st.raf) st.raf = requestAnimationFrame(write); };
+  const onGE = e => { e.preventDefault(); if (st.on && !st.touch) { st.wheel = false; end(); } };
+  if (FINE && "ongesturestart" in window) { host.addEventListener("gesturestart", onGS); host.addEventListener("gesturechange", onGC); host.addEventListener("gestureend", onGE); }
+
   // ----- keys: + / = bigger tiles (fewer across), - / _ smaller -----
   function step(delta, fx, fy) {   // delta -1 = one column fewer (bigger tiles), +1 = one more
     if (st.on) return false;
@@ -124,7 +131,7 @@ function gzAttach(host, o) {
     settle(c, 1);   // the picture starts as the OLD layout (scale 1/sF in the new one) and eases to the new
     return true;
   }
-  const api = { destroy() { clearStyle(); cancelAnimationFrame(st.raf); clearTimeout(st.idle); GZ_SET.delete(api); host.removeEventListener("touchstart", onTS); host.removeEventListener("touchmove", onTM); host.removeEventListener("touchend", onTE); host.removeEventListener("touchcancel", onTE); arm(false); removeEventListener("keydown", onKey); removeEventListener("keyup", onKey); removeEventListener("blur", onBlur); }, step, host, get busy() { return st.on; } };
+  const api = { destroy() { clearStyle(); cancelAnimationFrame(st.raf); clearTimeout(st.idle); GZ_SET.delete(api); host.removeEventListener("touchstart", onTS); host.removeEventListener("touchmove", onTM); host.removeEventListener("touchend", onTE); host.removeEventListener("touchcancel", onTE); arm(false); host.removeEventListener("gesturestart", onGS); host.removeEventListener("gesturechange", onGC); host.removeEventListener("gestureend", onGE); removeEventListener("keydown", onKey); removeEventListener("keyup", onKey); removeEventListener("blur", onBlur); }, step, host, get busy() { return st.on; } };
   GZ_SET.add(api);
   return api;
 }

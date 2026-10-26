@@ -213,16 +213,17 @@ function fdPaged(res, cursor, mk) {
 }
 // Vibe past the model's 60 nearest: best-first through the neighbors' own neighbors, so a path of close looks is followed outward
 function fdVibePager(i) {
-  const heap = [[1, i]], seen = new Set([i]), out = [];
+  // the first page is the painting's own 60 nearest, straight from its one shard (no more fetches, so the tab opens at once); later pages grow outward through
+  // the neighbors' own neighbors, their shards fetched together
+  const heap = [], seen = new Set([i]), pend = [];
   const pop = () => { let b = 0; for (let k = 1; k < heap.length; k++) if (heap[k][0] > heap[b][0]) b = k; const t = heap[b]; heap[b] = heap[heap.length - 1]; heap.pop(); return t; };
+  const push = (p, nb) => nb.forEach(x => { if (x.i >= 0 && x.i < GAL.n && x.sim > 0 && !seen.has(x.i)) { seen.add(x.i); heap.push([p * x.sim, x.i]); } });
+  let first = true;
   return async n => {
     const got = [];
-    while (got.length < n && heap.length) {
-      const [p, j] = pop();
-      if (j !== i) got.push({ j, sim: p });
-      const nb = await vibeNeighbors(j, j === i ? VIBE_K : 24);
-      nb.forEach(x => { if (x.i >= 0 && x.i < GAL.n && x.sim > 0 && !seen.has(x.i)) { seen.add(x.i); heap.push([p * x.sim, x.i]); } });
-    }
+    if (first) { first = false; push(1, await vibeNeighbors(i, VIBE_K)); }
+    else { const todo = pend.splice(0, 16); const lists = await Promise.all(todo.map(([p, j]) => vibeNeighbors(j, 24))); todo.forEach(([p], k) => push(p, lists[k])); }
+    while (got.length < n && heap.length) { const [p, j] = pop(); got.push({ j, sim: p }); pend.push([p, j]); }
     return got;
   };
 }
@@ -701,7 +702,7 @@ function fdMount(host, o) {
   };
 
   // ----- ranking -----
-  const SK = [1.3, .78, 1.0, 1.45, .9, 1.2, .85, 1.1];
+  const SK = Array.from({ length: 16 }, (_, n) => [1.3, .78, 1.0, 1.45, .9, 1.2, .85, 1.1][(n * 3 + (n >> 3)) % 8]);   // enough stand-ins to fill a screen (David, 2026-10-26: eight looked like a list of eight)
   function skeleton() {
     items = SK.map(ab => ({ sk: 1, ab })); shown = items.length; fk = 0; live.forEach(el => el.remove()); live.clear(); relayout(); state.innerHTML = ""; draw();
   }

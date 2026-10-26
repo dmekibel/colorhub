@@ -2481,7 +2481,7 @@ scenario("pages", "a tapped in-between hex opens its nearest name with 'Your col
 
 // David, 2026-10-24: an in-between color's page lists the next-nearest names right under the cover ("It could also be
 // called"), the winner restated, each row an equal-swatch pair that opens that name's page with the exact color kept.
-scenario("pages", "an in-between color lists its runner-up names under the cover and a row opens that name with your color", async t => {
+scenario("pages", "an in-between color lists its runner-up names in Overview and a row opens that name with your color", async t => {
   await t.open("#/color/teal", { settle: 300 });
   const hex = "#C37FAC";
   const sw = t.d.createElement("button"); sw.dataset.swatch = hex; sw.style.cssText = "position:fixed;left:150px;top:300px;width:60px;height:60px;z-index:9999";
@@ -2494,8 +2494,7 @@ scenario("pages", "an in-between color lists its runner-up names under the cover
   const rows = t.$$(".rp-also-row", sec);
   t.expect(rows.length >= 1 && rows.length <= 6, `${rows.length} rows, expected 1-6`);
   rows.forEach(r => { const sws = r.querySelectorAll(".rp-also-sw i"); t.expect(sws.length === 2 && Math.abs(sws[0].getBoundingClientRect().width - sws[1].getBoundingClientRect().width) < 1, "the pair's swatches are not equal"); });
-  const heroTop = t.$(".cp-hero-full").getBoundingClientRect().bottom, secTop = sec.getBoundingClientRect().top;
-  t.expect(secTop - heroTop < 200, `the section sits ${Math.round(secTop - heroTop)}px under the cover, not right under it`);
+  t.expect(sec.closest("[data-rp-about]"), "the section is not inside Overview (David, 2026-10-26: it is not forced above the paintings)");
   await t.waitFor(() => typeof t.w.loadLongNames !== "function" || t.ev("LONG_NAMES && LONG_NAMES.length > 0"), 8000, "the archive names to load (the section widens to them)");
   await new Promise(r => setTimeout(r, 300));
   const row0 = t.$(".rp-also-row"), first = row0.dataset.rpAlsoN;   // re-read: the section is redrawn once the archive lands
@@ -7597,6 +7596,7 @@ scenario("paintmap", "a maker page's Design map button opens the design map scop
 scenario("favs", "a painting's heart (now in the top bar) and a double-tap on the picture both keep it; the shelf sorts favorites into kinds with counts, remembered", async t => {
   await t.open("#/gallery/8136", { settle: 800 });
   await t.waitFor("[data-fva]", 14000, "the heart under the painting");
+  const HSEL = t.$(".gl-corner-heart") ? ".gl-corner-heart" : "[data-fva]";   // a phone shows the heart at the picture's top-left
   t.expect(!!t.$(".art-top [data-fva]"), "the heart isn't in the top bar beside the museum link, where it's visible without scrolling");
   // double-tap to like (Instagram-style): a quick second tap on the picture favorites it, with a heart burst,
   // before its single-tap action (name a spot) gets to fire
@@ -7605,14 +7605,14 @@ scenario("favs", "a painting's heart (now in the top bar) and a double-tap on th
   await t.click(hero, { wait: 500 });
   t.expect(t.ev("Object.keys(S.favArt || {}).length") === 1, "a double-tap on the painting didn't favorite it");
   t.expect(t.$("[data-fva]").getAttribute("aria-pressed") === "true", "the heart didn't fill after the double-tap");
-  await t.click("[data-fva]", { wait: 400 });
+  await t.click(HSEL, { wait: 400 });
   t.expect(t.ev("Object.keys(S.favArt || {}).length") === 0, "the heart button didn't un-favorite it again");
-  await t.click("[data-fva]", { wait: 400 });
+  await t.click(HSEL, { wait: 400 });
   t.expect(t.$("[data-fva]").getAttribute("aria-pressed") === "true", "the heart didn't fill");
   t.expect(t.ev("Object.keys(S.favArt || {}).length") === 1, "the painting isn't in favorites");
   // David, 2026-10-09: a toast used to land right over the heart it was confirming. Now it's low, and the heart
   // (still animating/settled) stays the top hit at its own center the whole time.
-  const atHeart = t.ev(`(() => { const r = document.querySelector("[data-fva]").getBoundingClientRect(); const el = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return el && el.closest("[data-fva]") === document.querySelector("[data-fva]"); })()`);
+  const atHeart = t.ev(`(() => { const r = document.querySelector(${JSON.stringify(HSEL)}).getBoundingClientRect(); const el = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return el && el.closest(".gl-corner-heart, [data-fva]") === document.querySelector(${JSON.stringify(HSEL)}); })()`);
   t.expect(atHeart, "the heart is no longer the top element at its own center — something is covering it");
   const toastEl = t.$(".toast");
   t.expect(toastEl && toastEl.classList.contains("toast-low"), "the favorites toast isn't the low (bottom) variant");
@@ -9346,4 +9346,11 @@ scenario("pages", "Rooms: the hub lists its sections, a room opens as a painting
   t.expect(!t.$(".rh-walk"), "the Walk did not close");
   await t.click("[data-back]", { wait: 600 });
   await t.waitFor(() => t.$(".rh-page") && !t.$(".rh-room"), 8000, "Back to the Rooms page");
+});
+
+scenario("home", "a cold open (no address) lands on the Today feed, paintings first", async t => {
+  await t.open("", { cold: true, settle: 1500 });
+  await t.waitFor(() => t.$(".tf-screen .tf-kinds") ? true : null, 12000, "the Today feed on a cold open");
+  t.expect(/#\/feed/.test(t.w.location.hash), `the address is ${t.w.location.hash}, not #/feed`);
+  t.expect(t.text(".tf-kinds .tf-chip[aria-checked='true'], .tf-kinds .tf-chip.on") === "Paintings", "Paintings is not the selected kind");
 });
