@@ -7231,6 +7231,8 @@ scenario("paintmap", "the Filter sheet: a region chip bulk-selects countries, co
   await t.click(".pmx-do", { wait: 400 });
   await t.waitFor(".pmx-sheet [data-tab='filter']", 4000, "the sheet tabs");
   await t.click(".pmx-sheet [data-tab='filter']", { wait: 400 });
+  await t.waitFor("[data-pmsec='place']", 4000, "the Place section");
+  await t.click("[data-pmsec='place']", { wait: 300 });   // the Filter sheet is sections, one open at a time
   await t.waitFor("[data-pmregion]", 4000, "the region chips");
   await t.click("[data-pmregion='europe']", { wait: 300 });
   t.expect(t.w.PM_CTRL.spec.f.coSet.length > 5, `Europe didn't bulk-add countries: ${JSON.stringify(t.w.PM_CTRL.spec.f.coSet)}`);
@@ -7249,6 +7251,7 @@ scenario("paintmap", "the Filter sheet: a region chip bulk-selects countries, co
   // painter: tap two different ones, both should stay selected (multi-select) -- re-queried between taps since
   // each tap's rebuild() + renderFilter() re-sorts/re-renders the chip row (a stale element reference from
   // before the re-render can end up detached or zero-size)
+  await t.click("[data-pmsec='painter']", { wait: 300 });
   t.expect(t.$$("[data-pmp]").length >= 2, "not enough painter chips to test multi-select");
   await t.click(t.$$("[data-pmp]")[0], { wait: 300 });
   const secondId = t.w.PM_CTRL.spec.f.painterSet[0];

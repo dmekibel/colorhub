@@ -128,3 +128,10 @@
 .pl-ctile.has-cover b,.pl-ctile.has-cover small{z-index:2;text-shadow:0 1px 4px rgba(0,0,0,.7)}
 .pl-ctile.has-cover b{color:#fff}
 .pl-ctile.has-cover small{font-size:13px;color:rgba(255,255,255,.92)}
+
+/* the Museum home (David, 2026-10-26): tabs like Boards, a wide grid of larger covers */
+.mu-tabs{position:static;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:12px 0 14px;margin:0 calc(-1 * var(--g,16px));padding-left:var(--g,16px);padding-right:var(--g,16px)}
+.mu-tabs::-webkit-scrollbar{display:none}
+.mu-tabs .tf-chip{flex:none;height:36px;padding:0 15px;font-size:15px}
+.mu-colls.pl-colls.mu-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.mu-grid .pl-ctile{aspect-ratio:4/5;min-height:0}

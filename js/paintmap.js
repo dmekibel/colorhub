@@ -3447,7 +3447,7 @@ function pmMount(el, s, F) {
     if (document.querySelector(".sheet")) return;
     if (typeof stemJustClosed === "function" && stemJustClosed()) return;   // a ghost click right after closing must not reopen it (js/core.js)
     let tab = startTab === "filter" ? "filter" : "arrange";
-    let fopen = { co: false, painter: false, mv: false, mus: false, subj: false }, fq = "", coq = "", curPresets = PM_TIME_PRESETS;
+    let fsec = "", fopen = { co: false, painter: false, mv: false, mus: false, subj: false }, fq = "", coq = "", curPresets = PM_TIME_PRESETS;
     const tabsHTML = `<div class="hm-ch-tabs pmx-tabs" role="tablist" aria-label="Arrange or filter the painting map">
         <button class="hm-ch-tab" data-tab="arrange" role="tab">Arrange</button>
         <button class="hm-ch-tab" data-tab="filter" role="tab">Filter</button>
@@ -3623,9 +3623,13 @@ function pmMount(el, s, F) {
       const sjAll = C.subj ? SUBJ.tags.map((nm, t) => ({ t, nm, n: C.subj[t] })).filter(x => !SUBJ.hide[x.t] && (x.n || sjSel.has(x.t))).sort((p, q) => (sjSel.has(q.t) - sjSel.has(p.t)) || q.n - p.n) : [];
       const sjShow = fopen.subj ? sjAll.slice(0, 80) : sjAll.filter((x, k) => k < 10 || sjSel.has(x.t));
       const subjHTML = sjAll.length ? `<div class="pmx-row"><span class="pmx-lab">Subject</span><div class="pmx-chips">${sjShow.map(x => chip("data-pmsubj", x.t, subjCap(x.nm), x.n, sjSel.has(x.t))).join("")}${!fopen.subj && sjAll.length > sjShow.length ? `<button class="pmx-more" data-pmmore="subj">More subjects</button>` : ""}</div></div>` : "";
+      const subjInner = sjAll.length ? `<div class="pmx-chips">${sjShow.map(x => chip("data-pmsubj", x.t, subjCap(x.nm), x.n, sjSel.has(x.t))).join("")}${!fopen.subj && sjAll.length > sjShow.length ? `<button class="pmx-more" data-pmmore="subj">More subjects</button>` : ""}</div>` : "";
       // Boards: the same moods, palette characters, color worlds, light and composition as the Boards page (paintings only)
       const bdSel = new Set(f.bdSet || []);
-      const bdHTML = () => !PM_BDS || !PM_BDS.length || (F.col || "paintings") !== "paintings" ? "" : PM_BDS.map(g => { const open = fopen["bd" + g.title], show = open ? g.boards : g.boards.filter((b, k) => k < 8 || bdSel.has(b.id)); return `<div class="pmx-row"><span class="pmx-lab">${esc(g.title)}</span><div class="pmx-chips">${show.map(b => chip("data-pmbd", b.id, b.label, null, bdSel.has(b.id))).join("")}${!open && g.boards.length > show.length ? `<button class="pmx-more" data-pmmore="bd${esc(g.title)}">All ${g.boards.length}</button>` : ""}</div></div>`; }).join("");
+      // the Filter sheet is a list of sections, each one line with what it is set to; one opens at a time (David, 2026-10-26: "maybe the filters menu needs a redesign")
+      const secH = (key, label, summary, inner) => `<section class="pmx-sec${fsec === key ? " open" : ""}"><button type="button" class="pmx-sech" data-pmsec="${esc(key)}" aria-expanded="${fsec === key}"><b>${esc(label)}</b><span class="${summary ? "on" : ""}">${esc(summary || "Any")}</span>${ICON.chev}</button>${fsec === key ? `<div class="pmx-secb">${inner}</div>` : ""}</section>`;
+      const sumOf = (set, list, key) => list.filter(x => set.has(x[key || "v"])).map(x => x.name || x.label).slice(0, 3).join(", ") + (set.size > 3 ? " +" + (set.size - 3) : "");
+      const bdHTML = () => !PM_BDS || !PM_BDS.length || (F.col || "paintings") !== "paintings" ? "" : PM_BDS.map(g => { const open = fopen["bd" + g.title], show = open ? g.boards : g.boards.filter((b, k) => k < 12 || bdSel.has(b.id)); return secH("bd" + g.title, g.title, sumOf(bdSel, g.boards, "id"), `<div class="pmx-chips">${show.map(b => chip("data-pmbd", b.id, b.label, null, bdSel.has(b.id))).join("")}${!open && g.boards.length > show.length ? `<button class="pmx-more" data-pmmore="bd${esc(g.title)}">All ${g.boards.length}</button>` : ""}</div>`); }).join("");
       const favRow = favIds.length ? `<div class="pmx-row"><span class="pmx-lab">Yours</span><div class="pmx-chips">${chip("data-pmfav", 1, "Your favorites", favN, !!s.fav)}</div></div>` : "";
       if (solo) q$("[data-pmbody]").innerHTML = `
         <div class="pmx-sh-top"><b>Filter</b><span>${n === sy.total ? n.toLocaleString() : n.toLocaleString() + " of " + sy.total.toLocaleString()} ${sy.total === 1 ? pmColLabel(F, "noun") : nounP}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
@@ -3644,8 +3648,8 @@ function pmMount(el, s, F) {
         <div class="pmx-sh-top"><b>Filter</b><span>${n === F.N - pmHidN(F) ? n.toLocaleString() : n.toLocaleString() + " of " + (F.N - pmHidN(F)).toLocaleString()} ${F.N === 1 || (n === F.N && n === 1) ? pmColLabel(F, "noun") : nounP}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
         ${favIds.length ? `<div class="pmx-row"><span class="pmx-lab">Yours</span><div class="pmx-chips">${chip("data-pmfav", 1, "Your favorites", favN, !!s.fav)}</div></div>` : ""}
         ${bdHTML()}
-        <div class="pmx-row"><span class="pmx-lab">Color</span><div class="pmx-sw">${colsSorted.map(c => `<button data-pmhex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" class="${f.hexes.includes(c.h.toUpperCase()) ? "on" : ""}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
-          ${f.hexes.length ? `<p class="pmx-cap2">${f.hexes.map(h => `<i style="--c:${h}"></i>`).join("")}${esc(f.hexes.length === 1 ? (f.name || nameOf(f.hexes[0]).text) : f.hexes.length + " colors")} <span>· within ${f.tol}%</span></p>
+        ${secH("color", "Color", [f.hexes.length ? (f.hexes.length === 1 ? (f.name || nameOf(f.hexes[0]).text) : f.hexes.length + " colors") : "", f.hueBand != null ? XB_HUE_WORDS[f.hueBand] : "", f.l0 != null || f.l1 != null ? "Lightness " + (f.l0 == null ? 0 : f.l0) + "\u2013" + (f.l1 == null ? 100 : f.l1) : ""].filter(Boolean).join(" \u00b7 "), `<div class="pmx-sw">${colsSorted.map(c => `<button data-pmhex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" class="${f.hexes.includes(c.h.toUpperCase()) ? "on" : ""}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
+          ${f.hexes.length ? `<p class="pmx-cap2">${f.hexes.map(h => `<i style="--c:${h}"></i>`).join("")}${esc(f.hexes.length === 1 ? (f.name || nameOf(f.hexes[0]).text) : f.hexes.length + " colors")} <span>\u00b7 within ${f.tol}%</span></p>
           <div class="pmx-scrub"><span class="pmx-lab2">Closeness</span><input type="range" min="1" max="30" step="1" value="${f.tol}" data-pmtol aria-label="Color closeness"></div>
           ${f.hexes.length > 1 ? `<div class="hm-seg pmx-colmode" role="radiogroup" aria-label="Match any or all colors"><button class="${(f.colorMode || "any") === "any" ? "on" : ""}" data-pmcolmode="any">Any</button><button class="${f.colorMode === "all" ? "on" : ""}" data-pmcolmode="all">All</button></div>` : ""}` : ""}
           <p class="pmx-lab2">Hue family</p>
@@ -3654,27 +3658,25 @@ function pmMount(el, s, F) {
           <div class="pmx-range2" style="--lo:${f.l0 == null ? 0 : f.l0}%;--hi:${f.l1 == null ? 100 : f.l1}%">
             <input type="range" min="0" max="100" value="${f.l0 == null ? 0 : f.l0}" data-pml0 aria-label="Darker than">
             <input type="range" min="0" max="100" value="${f.l1 == null ? 100 : f.l1}" data-pml1 aria-label="Lighter than"></div>
-          <p class="pmx-cap3"><span>Dark</span><span>Light</span></p></div>
-        <div class="pmx-row"><span class="pmx-lab">When</span>
-          <div class="pmx-chips">${PM_TIME_PRESETS.map(([k, t, p0, p1]) => chip("data-pmpreset", k, t, null, activePreset && activePreset[0] === k)).join("")}</div>
+          <p class="pmx-cap3"><span>Dark</span><span>Light</span></p>`)}
+        ${secH("when", "When", f.y0 != null || f.y1 != null ? y0 + "\u2013" + y1 : "", `<div class="pmx-chips">${PM_TIME_PRESETS.map(([k, t, p0, p1]) => chip("data-pmpreset", k, t, null, activePreset && activePreset[0] === k)).join("")}</div>
           <div class="pmx-hist" aria-hidden="true">${decadeBars.map(n2 => `<i style="--h:${Math.max(.04, n2 / maxDecade)}"></i>`).join("")}</div>
           <div class="pmx-range2" style="--lo:${pct(y0)}%;--hi:${pct(y1)}%">
             <input type="range" min="${yrLo}" max="${yrHi}" step="1" value="${y0}" data-pmy0 aria-label="From year">
             <input type="range" min="${yrLo}" max="${yrHi}" step="1" value="${y1}" data-pmy1 aria-label="To year"></div>
-          <p class="pmx-cap3"><span>${y0}</span><span>${y1}</span></p></div>
-        ${subjHTML}
-        <div class="pmx-row"><span class="pmx-lab">${esc(coLab)}</span>
-          ${isPaintings ? `<p class="pmx-lab2">Regions</p>
+          <p class="pmx-cap3"><span>${y0}</span><span>${y1}</span></p>`)}
+        ${subjHTML ? secH("subj", "Subject", sjSel.size ? SUBJ.tags.filter((nm, t) => sjSel.has(t)).slice(0, 3).map(subjCap).join(", ") + (sjSel.size > 3 ? " +" + (sjSel.size - 3) : "") : "", subjInner) : ""}
+        ${secH("place", coLab, f.region ? "Region" : sumOf(coSelSet, cos), `${isPaintings ? `<p class="pmx-lab2">Regions</p>
           <div class="pmx-chips">${regionRow}</div>` : ""}
           <p class="pmx-lab2">${isPaintings ? "Countries" : coLab}</p>
           <label class="search pmx-find"><span>${ICON.search}</span><input data-pmcoq type="search" placeholder="Find a ${esc(coLab.toLowerCase())}" value="${esc(coq)}" autocomplete="off"></label>
-          <div class="pmx-chips">${coList.map(x => chip("data-pmco", x.v, x.name, x.n, coSelSet.has(x.v))).join("")}${!coq && !fopen.co && cos.length > 10 ? `<button class="pmx-more" data-pmmore="co">All ${cos.length}</button>` : ""}</div></div>
-        ${tys.length ? `<div class="pmx-row"><span class="pmx-lab">Object type</span><div class="pmx-chips">${tys.map(x => chip("data-pmty", x.v, x.name, x.n, tySelSet.has(x.v))).join("")}</div></div>` : ""}
-        ${mvs.length ? `<div class="pmx-row"><span class="pmx-lab">${esc(mvLab)}</span><div class="pmx-chips">${mvs.map(x => chip("data-pmmv", x.v, x.name, x.n, mvSelSet.has(x.v))).join("")}</div></div>` : ""}
-        <div class="pmx-row"><span class="pmx-lab">${esc(musLab)}</span><div class="pmx-chips">${musAll.map(x => chip("data-pmmus", x.v, x.name, x.n, musSelSet.has(x.v))).join("")}</div></div>
-        <div class="pmx-row"><span class="pmx-lab">${esc(painterLab)}</span>
-          <label class="search pmx-find"><span>${ICON.search}</span><input data-pmq type="search" placeholder="Find a ${esc(painterLab.toLowerCase())}" value="${esc(fq)}" autocomplete="off"></label>
-          <div class="pmx-chips">${pList.map(x => chip("data-pmp", x.v, x.name, x.n, paSelSet.has(x.v))).join("")}${!fq && !fopen.painter && pas.length > 10 ? `<button class="pmx-more" data-pmmore="painter">More ${esc(nounP)}</button>` : ""}</div></div>`;
+          <div class="pmx-chips">${coList.map(x => chip("data-pmco", x.v, x.name, x.n, coSelSet.has(x.v))).join("")}${!coq && !fopen.co && cos.length > 10 ? `<button class="pmx-more" data-pmmore="co">All ${cos.length}</button>` : ""}</div>`)}
+        ${tys.length ? secH("ty", "Object type", sumOf(tySelSet, tys), `<div class="pmx-chips">${tys.map(x => chip("data-pmty", x.v, x.name, x.n, tySelSet.has(x.v))).join("")}</div>`) : ""}
+        ${mvs.length ? secH("mv", mvLab, sumOf(mvSelSet, mvs), `<div class="pmx-chips">${mvs.map(x => chip("data-pmmv", x.v, x.name, x.n, mvSelSet.has(x.v))).join("")}</div>`) : ""}
+        ${secH("mus", musLab, sumOf(musSelSet, musAll), `<div class="pmx-chips">${musAll.map(x => chip("data-pmmus", x.v, x.name, x.n, musSelSet.has(x.v))).join("")}</div>`)}
+        ${secH("painter", painterLab, sumOf(paSelSet, pas), `<label class="search pmx-find"><span>${ICON.search}</span><input data-pmq type="search" placeholder="Find a ${esc(painterLab.toLowerCase())}" value="${esc(fq)}" autocomplete="off"></label>
+          <div class="pmx-chips">${pList.map(x => chip("data-pmp", x.v, x.name, x.n, paSelSet.has(x.v))).join("")}${!fq && !fopen.painter && pas.length > 10 ? `<button class="pmx-more" data-pmmore="painter">More ${esc(nounP)}</button>` : ""}</div>`)}
+        <div class="pmx-foot"><button type="button" class="btn pmx-show" data-sheet-close>Show ${n.toLocaleString()} ${n === 1 ? pmColLabel(F, "noun") : nounP}</button></div>`;
       const inp = q$("[data-pmq]");
       if (inp) inp.oninput = () => { fq = inp.value.trim(); const pos = inp.selectionStart; renderFilter(); const ni = q$("[data-pmq]"); ni.focus(); try { ni.setSelectionRange(pos, pos); } catch (e) {} };
       const coInp = q$("[data-pmcoq]");
@@ -3684,13 +3686,15 @@ function pmMount(el, s, F) {
       const tolInp = q$("[data-pmtol]"); if (tolInp) tolInp.oninput = e => { f.tol = +e.target.value; buzz(2); rebuild(); renderFilter(); };
       const yIn = q$("[data-pmy0]"); if (yIn) yIn.oninput = e => { f.y0 = Math.min(+e.target.value, f.y1 == null ? yrHi : f.y1); buzz(2); rebuild(); renderFilter(); };
       if (yIn) q$("[data-pmy1]").oninput = e => { f.y1 = Math.max(+e.target.value, f.y0 == null ? yrLo : f.y0); buzz(2); rebuild(); renderFilter(); };
-      q$("[data-pml0]").oninput = e => { f.l0 = Math.min(+e.target.value, f.l1 == null ? 100 : f.l1); buzz(2); rebuild(); renderFilter(); };
-      q$("[data-pml1]").oninput = e => { f.l1 = Math.max(+e.target.value, f.l0 == null ? 0 : f.l0); buzz(2); rebuild(); renderFilter(); };
+      const l0In = q$("[data-pml0]"), l1In = q$("[data-pml1]");   // inside the Color section: only there while it is open
+      if (l0In) l0In.oninput = e => { f.l0 = Math.min(+e.target.value, f.l1 == null ? 100 : f.l1); buzz(2); rebuild(); renderFilter(); };
+      if (l1In) l1In.oninput = e => { f.l1 = Math.max(+e.target.value, f.l0 == null ? 0 : f.l0); buzz(2); rebuild(); renderFilter(); };
     }
     paneFilt.addEventListener("click", e => {
       const b = e.target.closest("button"); if (!b || b.disabled) return;
       const f = s.f, d = b.dataset;
       if (d.pmreset != null) { s.f = scopedFresh(); s.fav = 0; if (pmSolo(s)) s.upToYear = null; fq = ""; coq = ""; buzz(6); rebuild(); return renderFilter(); }
+      if (d.pmsec != null) { fsec = fsec === d.pmsec ? "" : d.pmsec; buzz(3); return renderFilter(); }
       if (d.pmmore) { fopen[d.pmmore] = true; return renderFilter(); }
       if (d.pmfav != null) s.fav = s.fav ? 0 : 1;
       else if (d.pmhex) {

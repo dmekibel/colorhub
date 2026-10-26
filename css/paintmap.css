@@ -283,3 +283,15 @@ html.desk .pmx .pmx-walk{bottom:calc(var(--dk-row) + 44px + var(--cap-x,0px))}
 
 .pmx-frow{gap:5px}
 .pmx-fpre,.pmx-fchip{padding:0 11px}
+
+/* the Filter sheet as sections: one line each with what it is set to, one open at a time, a Show button always in reach (David, 2026-10-26) */
+.pmx-sec{border-top:1px solid var(--rule)}
+.pmx-sech{display:flex;align-items:center;gap:10px;width:100%;min-height:52px;padding:8px 0;text-align:left;color:var(--ink)}
+.pmx-sech b{flex:none;font:400 18px/1.1 var(--serif)}
+.pmx-sech span{flex:1;min-width:0;text-align:right;font:400 15px/1.2 var(--sans);color:var(--soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pmx-sech span.on{color:var(--ink);font-weight:500}
+.pmx-sech svg{flex:none;width:16px;height:16px;color:var(--soft);transition:transform .2s}
+.pmx-sec.open .pmx-sech svg{transform:rotate(90deg)}
+.pmx-secb{padding:2px 0 16px}
+.pmx-foot{position:sticky;bottom:0;margin:10px 0 0;padding:12px 0 calc(8px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,var(--surface,#1a1815) 70%,transparent)}
+.pmx-show{width:100%;height:48px;border-radius:24px;font-size:16px;font-weight:600}

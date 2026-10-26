@@ -353,28 +353,42 @@ function museumFillToday(el) {
     nw.onclick = () => { const a = coverData().art; if (a) openNode(a); else challenge(); };
   }).catch(() => {});
 }
+let MU_TAB = "all";
 function museumHome() {
   XSTACK = [];
   museumRegisterMore();
   const { art } = coverData();
   const recentIds = Array.isArray(S.recentColl) ? S.recentColl.slice(0, 3) : [];
   const recent = recentIds.map(id => COLLECTIONS.find(c => c.id === id)).filter(Boolean);
-  const groups = MUSEUM_GROUPS.map(g => [g, COLLECTIONS.filter(c => c.group === g)]).filter(([, l]) => l.length);
+  // the painting Boards (smart folders) lead the Art group; the cover is the Paintings collection's own
+  const boardsTile = { id: "__boards", t: "Painting boards", count: "Smart folders", group: "Art", pic: "#2A2A38", swatches: ["#E8787A", "#F2C94C", "#6FAF8C", "#7FB8D4", "#9B7FD1", "#E8A15A", "#C9D6DF", "#8C5A3C", "#3E5C76"] };
+  const all = [boardsTile, ...COLLECTIONS];
+  const groups = MUSEUM_GROUPS.map(g => [g, all.filter(c => c.group === g)]).filter(([, l]) => l.length);
+  if (MU_TAB !== "all" && !groups.some(([g]) => g === MU_TAB)) MU_TAB = "all";
+  const grid = list => `<div class="pl-colls mu-colls mu-grid">${list.map(placesCollTile).join("")}</div>`;
+  const body = () => MU_TAB === "all"
+    ? `${museumTodayHTML(coverData().art)}${recent.length ? `<div class="sec-head"><b>Recent</b></div>${grid(recent)}` : ""}${groups.map(([g, list]) => `<div class="sec-head"><b>${esc(g)}</b></div>${grid(list)}`).join("")}`
+    : grid((groups.find(([g]) => g === MU_TAB) || [0, []])[1]);
+  const tabs = () => `<div class="mu-tabs tf-chips" role="tablist" aria-label="Museum">${[["all", "All"], ...groups.map(([g]) => [g, g])].map(([id, l]) => `<button type="button" role="tab" class="tf-chip${id === MU_TAB ? " on" : ""}" data-mu-tab="${esc(id)}" aria-selected="${id === MU_TAB}">${esc(l)}</button>`).join("")}</div>`;
   const el = show(`
     <header class="mu-head"><h1 class="title-1">${esc(NAV_MUSEUM)}</h1><div class="mu-head-acts">
       <button class="icon-btn" data-search aria-label="Search">${ICON.search}</button>
       <button class="icon-btn" data-menu aria-label="More">${ICON.dots}</button></div></header>
-    <p class="note mu-sub">Every painting, painter, movement, flower, gem, poem, film and look, in one place.</p>
-    ${museumTodayHTML(art)}
-    ${recent.length ? `<div class="sec-head"><b>Recent</b></div><div class="pl-colls mu-colls">${recent.map(placesCollTile).join("")}</div>` : ""}
-    ${groups.map(([g, list]) => `<div class="sec-head"><b>${esc(g)}</b></div><div class="pl-colls mu-colls">${list.map(placesCollTile).join("")}</div>`).join("")}
+    ${tabs()}
+    <div class="mu-body">${body()}</div>
   `, "explore mu-home", "explore");
+  const redraw = () => { el.querySelector(".mu-tabs").outerHTML = tabs(); el.querySelector(".mu-body").innerHTML = body(); const td2 = el.querySelector("[data-mu-today]"); if (td2) td2.onclick = () => { const a = coverData().art; if (a) openNode(a); }; if (!coverData().art && MU_TAB === "all") museumFillToday(el); };
   el.querySelector("[data-menu]").onclick = () => moreOpen("explore");
   el.querySelector("[data-search]").onclick = () => (typeof searchOpen === "function" ? searchOpen({ from: "museum" }) : exploreSearchSheet());
   const td = el.querySelector("[data-mu-today]");
   if (td) td.onclick = () => { const a = coverData().art; if (a) openNode(a); };
   if (!art) museumFillToday(el);
-  el.addEventListener("click", e => { const c = e.target.closest("[data-pl-coll]"); if (c) { buzz(8); if (typeof collOpen === "function") collOpen(c.dataset.plColl); } });
+  el.addEventListener("click", e => {
+    const tb = e.target.closest("[data-mu-tab]"); if (tb) { MU_TAB = tb.dataset.muTab; buzz(3); redraw(); return; }
+    const c = e.target.closest("[data-pl-coll]"); if (!c) return; buzz(8);
+    if (c.dataset.plColl === "__boards") { location.hash = "#/boards"; return; }
+    if (typeof collOpen === "function") collOpen(c.dataset.plColl);
+  });
 }
 const MUSEUM_GROUPS = ["Art", "Design", "Nature", "Writing & film", "Looks & ideas"];
 const museumShuffle = () => { if (typeof loadGallery === "function") loadGallery().then(() => { if (typeof GAL !== "undefined" && GAL && typeof galleryPage === "function") galleryPage(Math.floor(Math.random() * GAL.n), true); }); };

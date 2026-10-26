@@ -394,3 +394,6 @@ html.desk .fd-mapb-hero{top:18px;right:var(--dkg)}
   html.desk :is(.cp-page,.gl-page,.aw-page) .fd-bar{top:var(--dkn)}
   html.desk.dk-stuck .fd-bar{padding-left:var(--dk-L)}
 }
+
+html.desk .screen.explore.mu-home .pl-colls.mu-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))!important;gap:14px}
+html.desk .screen.explore.mu-home .mu-tabs{margin:0;padding-left:0;padding-right:0}
