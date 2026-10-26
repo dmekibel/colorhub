@@ -190,9 +190,9 @@ const hfMoodName = id => { const m = HF_MOOD && HF_MOOD.moods.find(x => x[0] ===
 const hfEraSpan = v => { const [a, b] = String(v).split("-").map(Number); return [a || 0, b || 3000]; };
 const hfEraName = v => { const [a, b] = hfEraSpan(v); return b - a === 100 ? a + "s" : a + "\u2013" + b; };
 // a board's candidate list: the paintings that have this mood among their strongest three and read strongly, that are also beautiful
-function hfMoodCands(id, min) {
+function hfMoodCands(id, min, bar0) {
   const k = HF_MOOD ? HF_MOOD.moods.findIndex(x => x[0] === id) : -1; if (k < 0) return [];
-  const t = HF_MOOD.by[k], out = [], bar = hfCut(.45), floor = min * 255;
+  const t = HF_MOOD.by[k], out = [], bar = bar0 == null ? hfCut(.45) : bar0, floor = min * 255;
   for (let q = 0; q < t.n; q++) { const i = t.idx[q]; if (t.s[q] >= floor && !hfHid(i) && hfBeauty(i) >= bar) out.push(i); }
   return out;
 }
@@ -772,6 +772,26 @@ async function hfNearColor(hex) {
   (r.items || r.rows || []).forEach(x => { if (x.src === "paintings" && x.i >= 0 && !have.has(x.i) && !hfHid(x.i)) { have.add(x.i); out.push(x.i); } });
   return { ids: out.slice(0, HF_KEEP) };
 }
+// every painting in a board, with no beauty cut (the painting map's Boards filter: what the board IS, not what the feed shows first)
+async function hfBoardIds(id) {
+  await loadGallery(); await hfBeautyReady();
+  const t = id.slice(0, 2), v = id.slice(2), out = [];
+  if (t === "mo") { await hfMoodReady(); return hfMoodCands(id.slice(3), .7, 0); }
+  if (t === "g:") { await hfIslands(); if (HF_ISL) for (let i = 0; i < GAL.n; i++) if (HF_ISL.id[i] === +v && !hfHid(i)) out.push(i); return out; }
+  if (t === "e:") { const [a, b] = hfEraSpan(v); for (let i = 0; i < GAL.n; i++) { const y = GAL.year[i]; if (y !== GL_UNDATED && y >= a && y < b && !hfHid(i)) out.push(i); } return out; }
+  if (t === "m:" || t === "p:") { const F = await hfFacets(), pos = (t === "p:" ? F.meta.artists.findIndex(a => a[0] === v) : F.meta.movements.indexOf(v)) + 1; return pos ? hfIndexBy(F, t === "p:" ? F.artist : F.mv, pos).filter(i => !hfHid(i)) : out; }
+  return hfCandsOf(id);
+}
+// the board lists the map's Filter sheet offers as chips: [{ title, boards: [{ id, label }] }]
+async function hfBoardChips() {
+  const secs = await hfBoards(), pick = (tab, title) => { const l = secs.filter(sc => sc.tab === tab && (!title || sc.title === title)).flatMap(sc => sc.boards).map(b => ({ id: b.id, label: b.label })); return l; };
+  const moods = pick("moods"), out = [];
+  if (moods.length) out.push({ title: "Mood", boards: moods });
+  const pcs = secs.filter(sc => sc.tab === "palettes"); pcs.forEach(sc => out.push({ title: sc.title, boards: sc.boards.map(b => ({ id: b.id, label: b.label })) }));
+  const cp = pick("composition"); if (cp.length) out.push({ title: "Composition", boards: cp });
+  return out;
+}
+const hfBoardLabel = id => HF_CUSTOM_LABELS.get(id) || (typeof hfLabelOf === "function" ? hfLabelOf(id, null) : id.slice(3));
 // the painting map's address for a board (David, 2026-10-26: "a map button so we can see everything on the map"), or "" when the map has no way to say it
 function hfMapSpec(id) {
   const F = HF_F; if (!F || !id) return "";

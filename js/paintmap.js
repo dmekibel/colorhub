@@ -197,7 +197,7 @@ const pmHex = (i, F) => {
 //              f.shares, see pmPalAsync)
 //   hueBand    one of XB_FAMS's 9 family indices (0=Reds..8=Greys), matched against a painting's DOMINANT swatch
 //   l0/l1      a mean-lightness range (0-100, dark<->light), independent of any hex pick
-const pmFilterFresh = () => ({ ...xbFresh(), coSet: [], region: null, painterSet: [], mvSet: [], musSet: [], tySet: [], subjSet: [], colorMode: "any", shares: null, hueBand: null, l0: null, l1: null });
+const pmFilterFresh = () => ({ ...xbFresh(), coSet: [], region: null, painterSet: [], mvSet: [], musSet: [], tySet: [], subjSet: [], bdSet: [], colorMode: "any", shares: null, hueBand: null, l0: null, l1: null });
 // Western Europe / Northern Europe / Italy & Spain are deliberately tighter than "Europe" (which is every
 // European country in the dataset) -- each is its own bulk-select, not a strict partition of the broad one.
 const PM_REGIONS = [
@@ -365,6 +365,28 @@ function pmBestMatch(lay, f, F) {
   return best;
 }
 
+// Boards as a filter (David, 2026-10-26: "the same categories and sub categories in map view"): f.bdSet holds board ids from js/homefeed.js (moods,
+// palette character, color worlds, light, composition, ...). One mask over all paintings: boards of one kind are OR'd, different kinds AND'd.
+// The mask is built asynchronously (pmBdPrepare); until it exists the filter does nothing, and whatever picks a board waits for it before re-running.
+let PM_BD = { key: "", mask: null };
+const pmBdKey = ids => (ids || []).slice().sort().join("|");
+async function pmBdPrepare(ids) {
+  ids = (ids || []).filter(Boolean);
+  if (!ids.length) { PM_BD = { key: "", mask: null }; return; }
+  const key = pmBdKey(ids); if (PM_BD.key === key && PM_BD.mask) return;
+  await loadGallery();
+  const N = GAL.n, groups = new Map();
+  for (const id of ids) { const g = id.slice(0, 2); if (!groups.has(g)) groups.set(g, []); groups.get(g).push(id); }
+  let mask = null;
+  for (const list of groups.values()) {
+    const m = new Uint8Array(N);
+    for (const id of list) { const idx = await hfBoardIds(id); for (let q = 0; q < idx.length; q++) m[idx[q]] = 1; }
+    if (!mask) mask = m; else for (let i = 0; i < N; i++) mask[i] &= m[i];
+  }
+  PM_BD = { key, mask };
+}
+let PM_BDS = null;   // the chips for the Filter sheet, loaded once
+const pmBdLists = () => PM_BDS ? Promise.resolve(PM_BDS) : hfBoardChips().then(l => (PM_BDS = l)).catch(() => (PM_BDS = []));
 // the one query pass: AND across facets, OR within one (every *Set is OR'd internally, then every facet ANDs
 // with every other) -- same bitmask-exclusion trick js/browse.js's xbRun uses for live per-value counts, just
 // extended to multi-select dims and the two new ones (hue band, lightness)
@@ -377,6 +399,7 @@ function pmRun(s, F) {
   const tySet = F.ty && f.tySet && f.tySet.length ? new Set(f.tySet) : null;   // object type (Design objects only, F.ty)
   const subjOn = !!SUBJ && (F.col || "paintings") === "paintings" && N <= SUBJ.N;
   const subjFlag = subjOn && f.subjSet && f.subjSet.length ? subjFlags(f.subjSet) : null;
+  const bdMask = (F.col || "paintings") === "paintings" && f.bdSet && f.bdSet.length && PM_BD.mask && PM_BD.key === pmBdKey(f.bdSet) && PM_BD.mask.length === N ? PM_BD.mask : null;
   const hasHex = f.hexes && f.hexes.length, mode = f.colorMode || "any";
   const overall = hasHex && mode === "overall", pd = overall ? pmPalDist(F, f) : null;   // Same overall palette: the distance table must already be computed (pmMount waits for it)
   const perHex = hasHex && !overall ? f.hexes.map(h => pmDE1(F, h)) : null;
@@ -405,6 +428,7 @@ function pmRun(s, F) {
     if (hasL) { const L = G.mean[i * 3]; if (L < l0 || L > l1) fail |= 128; }
     if (subjFlag && !subjHas(i, subjFlag)) fail |= 256;
     if (tySet && !tySet.has(F.ty[i])) fail |= 512;
+    if (bdMask && !bdMask[i]) fail |= 2048;
     if (hid && hid[i]) fail |= 1024;   // not an artwork (tools/hide_nonart.py): off every list and count
     if (fail === 0) out[n++] = i;
     else if (fail & (fail - 1)) continue;
@@ -498,6 +522,7 @@ function pmParse(q, F) {
   const rg = p.get("region"); if (rg && PM_REGIONS.some(r => r[0] === rg)) { f.region = rg; pmRegionCountries(rg, F).forEach(v => { if (!f.coSet.includes(v)) f.coSet.push(v); }); }
   if (p.get("mus")) f.musSet = p.get("mus").split(",").map(k => F.G.src.findIndex(x => x.k === k)).filter(v => v >= 0);
   if (p.get("type") && F.meta.types) f.tySet = p.get("type").split(",").map(v => F.meta.types.findIndex(t => routeSlug(t) === v) + 1).filter(v => v > 0);
+  f.bdSet = p.getAll("bd").filter(Boolean).slice(0, 12);
   if (p.get("subj") && SUBJ) f.subjSet = p.get("subj").split(",").map(k => SUBJ.tags.findIndex(n => routeSlug(n) === k)).filter(v => v >= 0);
   if (p.get("rnd") === "1") s.rnd = 1;   // a cold start: js/boot.js asks for a random cluster of the big map (never written back to the address)
   const sd = num("seed"); if (sd != null && sd >= 0 && sd < F.N) s.seed = sd;
@@ -524,6 +549,7 @@ function pmQS(s, F) {
   if (f.musSet && f.musSet.length && F) out.push(["mus", f.musSet.map(v => F.G.src[v].k).join(",")]);
   if (f.tySet && f.tySet.length && F && F.meta.types) out.push(["type", f.tySet.map(v => routeSlug(F.meta.types[v - 1])).join(",")]);
   if (f.subjSet && f.subjSet.length && SUBJ) out.push(["subj", f.subjSet.map(v => routeSlug(SUBJ.tags[v])).join(",")]);
+  (f.bdSet || []).forEach(b => out.push(["bd", b]));
   if (PM_NEEDS_SEED.has(s.arr) && s.seed >= 0) out.push(["seed", s.seed]);
   if (s.fav) out.push(["fav", 1]);
   if (s.upToYear != null) out.push(["uy", s.upToYear]);
@@ -586,6 +612,7 @@ function pmActiveChips(s, F) {
   if (f.musSet && f.musSet.length) c.push({ dim: "mus", text: f.musSet.length === 1 ? F.G.src[f.musSet[0]].short : `${f.musSet.length} museums` });
   if (f.tySet && f.tySet.length && F.meta.types) c.push({ dim: "ty", text: f.tySet.length === 1 ? F.meta.types[f.tySet[0] - 1] : `${f.tySet.length} types` });
   if (f.subjSet && f.subjSet.length && SUBJ) c.push({ dim: "subj", text: subjSetLabel(f.subjSet) });
+  if (f.bdSet && f.bdSet.length) c.push({ dim: "bd", text: f.bdSet.length === 1 ? hfBoardLabel(f.bdSet[0]) : f.bdSet.length + " boards" });
   return c;
 }
 // ---------- Phase B: presets under a painting (David, 2026-10-24) ----------
@@ -671,6 +698,7 @@ function pmChipClear(f, dim) {
   else if (dim === "mus") { f.musSet = []; f.mus = -1; }
   else if (dim === "ty") f.tySet = [];
   else if (dim === "subj") f.subjSet = [];
+  else if (dim === "bd") f.bdSet = [];
 }
 
 // ---------- Phase A: the painting you are on stays put (David, 2026-10-24) ----------
@@ -1920,7 +1948,7 @@ function pmOpen(spec, o = {}) {
     if (id === "colors") { S.hm = S.hm || {}; S.hm.mode = "colors"; save(); if (typeof hmHome === "function") hmHome(); else xBack(); }
   });
   const wantSubj = col === "paintings" && /subj/.test(typeof spec === "string" ? spec : JSON.stringify(spec || {}));   // an address or a spec that names a subject needs its data before the first layout
-  Promise.all([pmColLoad(col), pmThumbsLoad(col), wantSubj ? loadSubjects().catch(() => null) : null]).then(([F]) => {
+  Promise.all([pmColLoad(col), pmThumbsLoad(col), wantSubj ? loadSubjects().catch(() => null) : null, pmBdPrepare(typeof spec === "string" ? new URLSearchParams(spec.replace(/^\?/, "")).getAll("bd") : (spec && spec.f && spec.f.bdSet) || []).catch(() => null)]).then(([F]) => {
     if (!el.isConnected) return;
     const kept = !fresh && PM_STATE.get(from);
     // David, 2026-10-10: a spec OBJECT (not a URL string) can arrive from Explore's own single-value filter
@@ -3246,7 +3274,7 @@ function pmMount(el, s, F) {
     let rows = [];
     // the live count of one suggestion: the map's own filter pass, with this suggestion's pieces laid over the filters already on
     const countOf = ps => {
-      const key = JSON.stringify([ps.map(p => [p.kind, p.val, p.vals, p.y0, p.y1]), s.f.y0, s.f.y1, s.f.coSet, s.f.mvSet, s.f.painterSet, s.f.hexes, s.f.hueBand, s.f.l0, s.f.l1, s.f.musSet, s.f.tySet, s.f.subjSet, !!SUBJ]);
+      const key = JSON.stringify([ps.map(p => [p.kind, p.val, p.vals, p.y0, p.y1]), s.f.y0, s.f.y1, s.f.coSet, s.f.mvSet, s.f.painterSet, s.f.hexes, s.f.hueBand, s.f.l0, s.f.l1, s.f.musSet, s.f.bdSet, s.f.tySet, s.f.subjSet, !!SUBJ]);
       if (cache.has(key)) return cache.get(key);
       const f = { ...s.f }; ps.forEach(p => pmqApply(f, p));
       const n = pmRun({ f }, F).list.length; cache.set(key, n); return n;
@@ -3595,6 +3623,9 @@ function pmMount(el, s, F) {
       const sjAll = C.subj ? SUBJ.tags.map((nm, t) => ({ t, nm, n: C.subj[t] })).filter(x => !SUBJ.hide[x.t] && (x.n || sjSel.has(x.t))).sort((p, q) => (sjSel.has(q.t) - sjSel.has(p.t)) || q.n - p.n) : [];
       const sjShow = fopen.subj ? sjAll.slice(0, 80) : sjAll.filter((x, k) => k < 10 || sjSel.has(x.t));
       const subjHTML = sjAll.length ? `<div class="pmx-row"><span class="pmx-lab">Subject</span><div class="pmx-chips">${sjShow.map(x => chip("data-pmsubj", x.t, subjCap(x.nm), x.n, sjSel.has(x.t))).join("")}${!fopen.subj && sjAll.length > sjShow.length ? `<button class="pmx-more" data-pmmore="subj">More subjects</button>` : ""}</div></div>` : "";
+      // Boards: the same moods, palette characters, color worlds, light and composition as the Boards page (paintings only)
+      const bdSel = new Set(f.bdSet || []);
+      const bdHTML = () => !PM_BDS || !PM_BDS.length || (F.col || "paintings") !== "paintings" ? "" : PM_BDS.map(g => { const open = fopen["bd" + g.title], show = open ? g.boards : g.boards.filter((b, k) => k < 8 || bdSel.has(b.id)); return `<div class="pmx-row"><span class="pmx-lab">${esc(g.title)}</span><div class="pmx-chips">${show.map(b => chip("data-pmbd", b.id, b.label, null, bdSel.has(b.id))).join("")}${!open && g.boards.length > show.length ? `<button class="pmx-more" data-pmmore="bd${esc(g.title)}">All ${g.boards.length}</button>` : ""}</div></div>`; }).join("");
       const favRow = favIds.length ? `<div class="pmx-row"><span class="pmx-lab">Yours</span><div class="pmx-chips">${chip("data-pmfav", 1, "Your favorites", favN, !!s.fav)}</div></div>` : "";
       if (solo) q$("[data-pmbody]").innerHTML = `
         <div class="pmx-sh-top"><b>Filter</b><span>${n === sy.total ? n.toLocaleString() : n.toLocaleString() + " of " + sy.total.toLocaleString()} ${sy.total === 1 ? pmColLabel(F, "noun") : nounP}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
@@ -3612,6 +3643,7 @@ function pmMount(el, s, F) {
       else q$("[data-pmbody]").innerHTML = `
         <div class="pmx-sh-top"><b>Filter</b><span>${n === F.N - pmHidN(F) ? n.toLocaleString() : n.toLocaleString() + " of " + (F.N - pmHidN(F)).toLocaleString()} ${F.N === 1 || (n === F.N && n === 1) ? pmColLabel(F, "noun") : nounP}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
         ${favIds.length ? `<div class="pmx-row"><span class="pmx-lab">Yours</span><div class="pmx-chips">${chip("data-pmfav", 1, "Your favorites", favN, !!s.fav)}</div></div>` : ""}
+        ${bdHTML()}
         <div class="pmx-row"><span class="pmx-lab">Color</span><div class="pmx-sw">${colsSorted.map(c => `<button data-pmhex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" class="${f.hexes.includes(c.h.toUpperCase()) ? "on" : ""}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
           ${f.hexes.length ? `<p class="pmx-cap2">${f.hexes.map(h => `<i style="--c:${h}"></i>`).join("")}${esc(f.hexes.length === 1 ? (f.name || nameOf(f.hexes[0]).text) : f.hexes.length + " colors")} <span>· within ${f.tol}%</span></p>
           <div class="pmx-scrub"><span class="pmx-lab2">Closeness</span><input type="range" min="1" max="30" step="1" value="${f.tol}" data-pmtol aria-label="Color closeness"></div>
@@ -3675,11 +3707,13 @@ function pmMount(el, s, F) {
       else if (d.pmty) { const v = +d.pmty, set = new Set(f.tySet || []); if (set.has(v)) set.delete(v); else set.add(v); f.tySet = [...set]; }
       else if (d.pmmus) { const v = +d.pmmus, set = new Set(f.musSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.musSet = [...set]; }
       else if (d.pmsubj) { const v = +d.pmsubj, set = new Set(f.subjSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.subjSet = [...set]; }
+      else if (d.pmbd) { const set = new Set(f.bdSet || []); if (set.has(d.pmbd)) set.delete(d.pmbd); else set.add(d.pmbd); f.bdSet = [...set]; buzz(5); pmBdPrepare(f.bdSet).then(() => { rebuild(); renderFilter(); }); return; }
       else if (d.pmp) { const v = +d.pmp, set = new Set(f.painterSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.painterSet = [...set]; }
       else return;
       buzz(5); rebuild(); renderFilter();
     });
     renderArrange(); renderFilter();
+    if ((s.col || "paintings") === "paintings") pmBdLists().then(() => { if (sh.isConnected) renderFilter(); });
     if (!SUBJ && (s.col || "paintings") === "paintings") loadSubjects().then(() => { if (sh.isConnected) renderFilter(); }).catch(() => {});
   }
   // ---- life cycle
