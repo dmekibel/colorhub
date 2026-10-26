@@ -349,7 +349,7 @@ async function hfBoards() {
   secs.push({ tab: "composition", title: "Composition", boards: HF_CPS.filter(d => HF_SCENE || !/^(close|figures|groups|wide|abstract|leaning)$/.test(d[0])).map(([id, label, test]) => { HF_CUSTOM_LABELS.set("cp:" + id, label); return { id: "cp:" + id, label, sub: cnt(test).toLocaleString("en-US") + " paintings" }; }) });
   { const yb = [], ids = hfKeptIds(), kept = ids.length, haveCol = typeof fvCount === "function" && fvCount() > 0, havePal = (S.palettes || []).length > 0;
     if (kept) { HF_CUSTOM_LABELS.set("yo:kept", "All favorites"); yb.push({ id: "yo:kept", label: "All favorites", sub: kept.toLocaleString("en-US") + " paintings" }); }
-    hfFollows().forEach(f => yb.push({ id: hfFollowId(f), label: f.kind === "p" ? fdShortName(f.name) : f.name, sub: f.kind === "p" ? "Painter you follow" : "Movement you follow" }));
+    const fb = []; hfFollows().forEach(f => fb.push({ id: hfFollowId(f), label: f.kind === "p" ? fdShortName(f.name) : f.name, sub: f.kind === "p" ? "Painter you follow" : "Movement you follow" }));
     const grp = (title, key, labelOf) => {   // the groups your favorites fall into: one folder per place, movement, stretch of years, color family
       const m = new Map(); ids.forEach(i => { const k = key(i); if (k == null || k === "") return; m.set(k, (m.get(k) || 0) + 1); });
       if (m.size < 2) return;
@@ -360,6 +360,7 @@ async function hfBoards() {
     grp("By time", i => { const e = hfKeptEra(i); return e < 0 ? null : e; }, { pre: "ed", name: k => hfEraName(k + "-" + (k + 50)) });
     grp("By movement", i => { const j = F.mv[i]; return j ? F.meta.movements[j - 1] : null; }, { pre: "mv", name: k => k });
     grp("By place", i => { const j = F.country[i]; return j ? F.meta.countries[j - 1] : null; }, { pre: "co", name: k => k });
+    if (fb.length) secs.splice(secs.findIndex(sc => sc.tab === "yours") < 0 ? secs.length : secs.findIndex(sc => sc.tab === "yours"), 0, { tab: "yours", fav: "paint", title: "Following", boards: fb });
     if (yb.length || haveCol || havePal) secs.unshift({ tab: "yours", fav: "paint", title: "Paintings", boards: yb }); }
   { let n = 0; for (let i = 0; i < GAL.n; i++) if (!hfHid(i)) n++; HF_CUSTOM_LABELS.set("al:all", "Every painting"); secs.unshift({ tab: "all", title: "Everything", boards: [{ id: "al:all", label: "Every painting", sub: n.toLocaleString("en-US") + " paintings, filter any way" }] }); }
   const ars = []; F.meta.artists.forEach((a, j) => { if (C.art[j + 1] >= 90) ars.push({ n: a[0], c: C.art[j + 1] }); });
@@ -770,6 +771,27 @@ async function hfNearColor(hex) {
   const r = await paintingsFor(hex, { sort: "cover" }), out = [], have = new Set();
   (r.items || r.rows || []).forEach(x => { if (x.src === "paintings" && x.i >= 0 && !have.has(x.i) && !hfHid(x.i)) { have.add(x.i); out.push(x.i); } });
   return { ids: out.slice(0, HF_KEEP) };
+}
+// the painting map's address for a board (David, 2026-10-26: "a map button so we can see everything on the map"), or "" when the map has no way to say it
+function hfMapSpec(id) {
+  const F = HF_F; if (!F || !id) return "";
+  const t = id.slice(0, 2), v = id.slice(2), vv = id.slice(3), enc = encodeURIComponent;
+  if (t === "p:") { const a = F.meta.artists.find(x => x[0] === v); return a ? "arr=color&p=" + a[1] : ""; }
+  if (t === "m:") return "arr=color&mv=" + enc(routeSlug(v));
+  if (t === "co") return "arr=color&co=" + enc(vv);
+  if (t === "mu") { const s0 = GAL.src[+vv]; return s0 ? "arr=color&mus=" + s0.k : ""; }
+  if (t === "su") return "arr=color&subj=" + enc(routeSlug(vv));
+  if (t === "e:") { const [a, b] = v.split("-").map(Number); return a && b ? `arr=color&y0=${a}&y1=${b}` : ""; }
+  if (t === "al") return "arr=color";
+  if (t === "yo") {
+    if (vv === "kept") return "arr=color&fav=1";
+    const [g, ...r] = vv.split(":"), val = r.join(":");
+    if (g === "co") return "arr=color&fav=1&co=" + enc(val);
+    if (g === "mv") return "arr=color&fav=1&mv=" + enc(routeSlug(val));
+    if (g === "ed") return `arr=color&fav=1&y0=${+val}&y1=${+val + 50}`;
+    return "arr=color&fav=1";
+  }
+  return "";
 }
 // each board has its own filters (David, 2026-10-26: "nuanced filter settings for every board"): years, color family and order, kept per board in S.tf.bf[lens id]
 const HF_BF_ERAS = [["any", "Any time"], ["b1700", "Before 1700"], ["1700", "1700\u20131850"], ["1850", "1850\u20131925"], ["a1925", "After 1925"]], HF_BF_ERA_SPAN = { b1700: [-1e5, 1700], "1700": [1700, 1850], "1850": [1850, 1925], a1925: [1925, 1e5] };

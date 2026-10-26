@@ -23,7 +23,7 @@ let TF = null;          // today's pool: { k, items:{paint,pal,color,art,cotd}, 
 let TF_LITE = null;     // the articles index, once
 
 const tfInk = hex => lab(hex)[0] > 60 ? "#141311" : "#F6F2EA";
-let TF_KIND = "paint", TF_LENS = "foryou", TF_EXTRA = [], TF_FROM_BOARD = false, TF_SIBS = [], TF_BTAB = "all", TF_FTAB = "paint";   // each launch opens on Paintings and For you; where you went afterwards is kept only for this visit (a Back returns to it)
+let TF_KIND = "paint", TF_LENS = "foryou", TF_EXTRA = [], TF_FROM_BOARD = false, TF_SIBS = [], TF_BTAB = "all", TF_FTAB = "paint", TF_FGRP = "";   // each launch opens on Paintings and For you; where you went afterwards is kept only for this visit (a Back returns to it)
 const tfFilter = () => (TF_TYPES.some(t => t[0] === TF_KIND) ? TF_KIND : "paint");
 // plain text out of an article's lede (no markup)
 const tfPlain = s => String(s || "").replace(/\[\[(?:[^\]|]*\|)?([^\]]*)\]\]/g, "$1").replace(/\[\d+\]/g, "").replace(/[*`]/g, "").replace(/\s+/g, " ").trim();
@@ -141,6 +141,14 @@ function tfCard(it) {
   return "";
 }
 // a painting card waits for its shard (title, artist, picture); the box and the colors are already there, so nothing moves
+// self-hosted copies of the most beautiful Commons paintings (tools/thumbs_host.py): data/gallery/hosted.bin has one bit per painting that has one on R2
+// (https://data.chromatlas.app/thumb/<index>.webp); anything else, or a copy that fails, still uses the museum's own address
+let TF_HOSTED = null;
+function tfHostedLoad() {
+  if (TF_HOSTED !== null) return; TF_HOSTED = false;
+  try { fetch("data/gallery/hosted.bin").then(r => (r.ok ? r.arrayBuffer() : null)).then(b => { if (b && b.byteLength > 1000) TF_HOSTED = new Uint8Array(b); }).catch(() => {}); } catch (e) {}
+}
+const tfThumb = (gi, d) => (TF_HOSTED && (TF_HOSTED[gi >> 3] >> (gi & 7)) & 1 ? "https://data.chromatlas.app/thumb/" + gi + ".webp" : d.img);
 const tfBust = (u, t) => u + (u.includes("?") ? "&" : "?") + "r=" + t;
 function tfFill(root) {
   if (typeof GAL === "undefined" || !GAL) return;
@@ -159,9 +167,10 @@ function tfFill(root) {
       const cs = glCropStyle(i, d, glAR(i)); if (cs) img.setAttribute("style", (cs.match(/style="([^"]*)"/) || [])[1] || "");
       // a failed or stalled picture is asked for again (a slow or rate-limited museum host used to leave a blurry tile that never sharpened)
       img.onload = () => img.classList.add("on");
-      img.onerror = () => { const t = img._try = (img._try || 0) + 1; if (t > 3) return img.remove(); setTimeout(() => { if (img.isConnected) img.src = tfBust(d.img, t); }, 700 * t); };
-      img._t0 = performance.now(); img.dataset.src = d.img;
-      img.src = d.img; im.appendChild(img);
+      const src0 = tfThumb(i, d);
+      img.onerror = () => { const t = img._try = (img._try || 0) + 1; if (t > 3) return img.remove(); const u = t === 1 && src0 !== d.img ? d.img : tfBust(img.dataset.src || d.img, t); img.dataset.src = u; setTimeout(() => { if (img.isConnected) img.src = u; }, 700 * t); };   // a self-hosted copy that fails falls back to the museum address
+      img._t0 = performance.now(); img.dataset.src = src0;
+      img.src = src0; im.appendChild(img);
       b.textContent = d.t; sm.innerHTML = glByline(i, d);
       const hb = el.querySelector("[data-tf-heart]"); if (hb && typeof fvArtHas === "function") { const on = fvArtHas(d.id); hb.classList.toggle("on", on); hb.setAttribute("aria-pressed", on); hb.innerHTML = on ? TF_HEART_ON : TF_HEART; }
     } else {
@@ -194,6 +203,7 @@ function todayFeed() {
     <div class="tf-lens-head" data-tf-lh hidden></div>
     <div class="tf-feed${hfS().caps ? "" : " nocaps"}" data-tf-feed>${tfSkeleton(k)}</div>`, "tf-screen", "feed");
   const host = el.querySelector("[data-tf-feed]"), bars = el.querySelector(".tf-bars"), kindsRow = el.querySelector(".tf-kinds"), lensRow = el.querySelector(".tf-lenses"), lh = el.querySelector("[data-tf-lh]");
+  tfHostedLoad();
   const tune = document.createElement("button"); tune.type = "button"; tune.className = "tf-tune"; tune.setAttribute("data-tf-tune", ""); tune.setAttribute("aria-label", "Home settings"); tune.innerHTML = typeof FD_ICON_TUNE !== "undefined" ? FD_ICON_TUNE : "";
   document.body.appendChild(tune);   // a round button at the bottom right like the maps' Arrange / Filters: on the body so it stays put while the page scrolls
   let st = TF && TF.k === k && TF.ready ? TF : null, pre = TF_PRE && TF_PRE.k === k ? TF_PRE : null, tok = 0, salt = 0;
@@ -293,19 +303,19 @@ function todayFeed() {
       // the page of categories (a board of boards): one folder per kind of board; its cover is a painting from each of three of its boards
       const catSec = tab => secs.filter(sc => sc.tab === tab), catCount = tab => catSec(tab).reduce((a, sc) => a + sc.boards.length, 0);
       const fillCat = card => {
-        const tab = card.dataset.tfCat; if (card.dataset.cv) return; card.dataset.cv = "1";
-        const all = catSec(tab).flatMap(sc => sc.boards), rnd = seededRnd(hash(HF_SESSION + tab)), pick = [];
+        const tab = card.dataset.tfCat || card.dataset.tfFgrp; if (card.dataset.cv) return; card.dataset.cv = "1";
+        const all = (card.dataset.tfFgrp ? secs.filter(sc => sc.tab === "yours" && sc.title === tab) : catSec(tab)).flatMap(sc => sc.boards), rnd = seededRnd(hash(HF_SESSION + tab)), pick = [];
         while (pick.length < 3 && all.length) pick.push(all.splice(Math.floor(rnd() * all.length), 1)[0]);
         Promise.all(pick.map(b => hfCoverIds(b.id).then(g => g[0]))).then(gis => Promise.all(gis.filter(g => g != null).map(g => glShard(Math.floor(g / GAL.shard)).then(() => [g, glDetailNow(g)])))).then(rows => {
           const ims = card.querySelectorAll(".tf-bcov i");
-          rows.forEach(([g, d], n) => { if (d && d.img && ims[n]) { const im = new Image(); im.alt = ""; im.decoding = "async"; const sty = glCropStyle(g, d, glAR(g)); if (sty) im.setAttribute("style", (sty.match(/style="([^"]*)"/) || [])[1] || ""); im.onload = () => im.classList.add("on"); im.src = d.img; ims[n].appendChild(im); } });
+          rows.forEach(([g, d], n) => { if (d && d.img && ims[n]) { const im = new Image(); im.alt = ""; im.decoding = "async"; const sty = glCropStyle(g, d, glAR(g)); if (sty) im.setAttribute("style", (sty.match(/style="([^"]*)"/) || [])[1] || ""); im.onload = () => im.classList.add("on"); im.src = tfThumb(g, d); ims[n].appendChild(im); } });
         }).catch(() => {});
       };
       const fill = card => {
         const id = card.dataset.tfBoard; if (card.dataset.cv) return; card.dataset.cv = "1";
         hfCoverIds(id).then(gis => Promise.all(gis.map(g => glShard(Math.floor(g / GAL.shard)).then(() => [g, glDetailNow(g)])))).then(rows => {
           const ims = card.querySelectorAll(".tf-bcov i");
-          rows.forEach(([g, d], n) => { if (d && d.img && ims[n]) { const im = new Image(); im.alt = ""; im.decoding = "async"; const sty = glCropStyle(g, d, glAR(g)); if (sty) im.setAttribute("style", (sty.match(/style="([^"]*)"/) || [])[1] || ""); im.onload = () => im.classList.add("on"); im.src = d.img; ims[n].appendChild(im); } });
+          rows.forEach(([g, d], n) => { if (d && d.img && ims[n]) { const im = new Image(); im.alt = ""; im.decoding = "async"; const sty = glCropStyle(g, d, glAR(g)); if (sty) im.setAttribute("style", (sty.match(/style="([^"]*)"/) || [])[1] || ""); im.onload = () => im.classList.add("on"); im.src = tfThumb(g, d); ims[n].appendChild(im); } });
         }).catch(() => {});
       };
       let io = null, zoomB = null;
@@ -322,10 +332,20 @@ function todayFeed() {
           const body = TF_FTAB === "color" ? (typeof fvCount === "function" && fvCount() ? fvPartColors(0) : `<p class="tf-fnone">Heart a color and it lands here.</p>`) : ((S.palettes || []).length ? fvPartPalettes(0) : `<p class="tf-fnone">Palettes you save land here.</p>`);
           return `<div class="tf-bwrap tf-fvwrap" style="--bcols:${bc}">${favSub()}${body}</div>`;
         }
+        const brd = b => `<button type="button" class="tf-board" data-tf-board="${esc(b.id)}"><span class="tf-bcov" ${b.hex ? `style="--c:${esc(b.hex)}"` : ""}><i></i><i></i><i></i></span><b>${esc(b.label)}</b><small>${esc(b.sub)}</small></button>`;
+        if (tab === "yours") {   // Favorites: All favorites first, then one folder per way of sorting them; a folder opens onto its own boards
+          const ys = secs.filter(sc => sc.tab === "yours");
+          if (TF_FGRP && ys.some(sc => sc.title === TF_FGRP)) {
+            const g = ys.find(sc => sc.title === TF_FGRP);
+            return `<div class="tf-bwrap" style="--bcols:${bc}">${favSub()}<div class="tf-fback"><button type="button" class="tf-mini" data-tf-fgrp="">\u2039 Favorites</button><h2 class="tf-bh">${esc(g.title)}</h2></div><div class="tf-bgrid">${g.boards.map(brd).join("")}</div></div>`;
+          }
+          const top = ys.filter(sc => sc.title === "Paintings").flatMap(sc => sc.boards), grp = ys.filter(sc => sc.title !== "Paintings");
+          return `<div class="tf-bwrap" style="--bcols:${bc}">${favSub()}<div class="tf-bgrid">${top.map(brd).join("")}${grp.map(g => `<button type="button" class="tf-board tf-cat" data-tf-fgrp="${esc(g.title)}"><span class="tf-bcov"><i></i><i></i><i></i></span><b>${esc(g.title)}</b><small>${g.boards.length} ${g.boards.length === 1 ? "board" : "boards"}</small></button>`).join("")}</div></div>`;
+        }
         const secHTML = secs.filter(sc => sc.tab === tab).map(sc => `<h2 class="tf-bh">${esc(sc.title)}</h2><div class="tf-bgrid">${sc.boards.map(b => `<button type="button" class="tf-board" data-tf-board="${esc(b.id)}"><span class="tf-bcov" ${b.hex ? `style="--c:${esc(b.hex)}"` : ""}><i></i><i></i><i></i></span><b>${esc(b.label)}</b><small>${esc(b.sub)}</small></button>`).join("")}</div>`).join("");
         const catHTML = cats.length ? `<h2 class="tf-bh">Browse by</h2><div class="tf-bgrid">${cats.map(([id, label]) => `<button type="button" class="tf-board tf-cat" data-tf-cat="${id}"><span class="tf-bcov"><i></i><i></i><i></i></span><b>${label}</b><small>${catCount(id)} boards</small></button>`).join("")}</div>` : "";
         const more = tab === "all" ? `<h2 class="tf-bh">More in the Museum</h2><div class="tf-links">${[["#/museum/art", "Paintings by subject and room"], ["#/museum/ideas", "Ideas"], ["#/museum/world", "The world in color"], ["#/museum/saved", "Saved"]].map(([h, l]) => `<button type="button" class="tf-link" data-tf-go="${h}"><b>${l}</b>${ICON.chev}</button>`).join("")}</div>` : "";
-        return `<div class="tf-bwrap" style="--bcols:${bc}">` + (tab === "yours" ? favSub() : "") + (tab === "all" ? secHTML + catHTML + more : catHTML + secHTML) + `</div>`;
+        return `<div class="tf-bwrap" style="--bcols:${bc}">` + (tab === "all" ? secHTML + catHTML + more : catHTML + secHTML) + `</div>`;
       };
       const draw = () => {
         if (io) { io.disconnect(); io = null; }
@@ -341,11 +361,11 @@ function todayFeed() {
           const k2 = id ? [...bw.querySelectorAll("[data-tf-board]")].find(x => x.dataset.tfBoard === id) : null;
           if (k2) tfScrollTo(el, tfY(el) + k2.getBoundingClientRect().top - (toY == null ? y0 : y0 + (toY - vy)));
           return true; } });
-        const cards = [...host.querySelectorAll("[data-tf-board], [data-tf-cat]")];
-        if (typeof IntersectionObserver === "function") { io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { (x.target.dataset.tfCat ? fillCat : fill)(x.target); io.unobserve(x.target); } }), { rootMargin: "600px 0px" }); cards.forEach(c => io.observe(c)); }
-        else cards.slice(0, 24).forEach(c => (c.dataset.tfCat ? fillCat : fill)(c));
+        const cards = [...host.querySelectorAll("[data-tf-board], [data-tf-cat], [data-tf-fgrp]:not([data-tf-fgrp=''])")];
+        if (typeof IntersectionObserver === "function") { io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { (x.target.dataset.tfCat || x.target.dataset.tfFgrp ? fillCat : fill)(x.target); io.unobserve(x.target); } }), { rootMargin: "600px 0px" }); cards.forEach(c => io.observe(c)); }
+        else cards.slice(0, 24).forEach(c => (c.dataset.tfCat || c.dataset.tfFgrp ? fillCat : fill)(c));
       };
-      host.onclick = e => { const gl = e.target.closest("[data-tf-go]"); if (gl) { buzz(4); location.hash = gl.dataset.tfGo; return; } const ft = e.target.closest("[data-tf-ftab]"); if (ft) { TF_FTAB = ft.dataset.tfFtab; buzz(3); draw(); tfScrollTo(el, 0); return; } const fp = e.target.closest("[data-fvpal]"); if (fp) { buzz(6); openSavedPalette(fp.dataset.fvpal); return; } const cat = e.target.closest("[data-tf-cat]"); if (cat) { TF_BTAB = cat.dataset.tfCat; buzz(4); draw(); tfScrollTo(el, 0); return; } const tb = e.target.closest("[data-tf-btab]"); if (tb) { TF_BTAB = tb.dataset.tfBtab; buzz(3); draw(); tfScrollTo(el, 0); return; } const b = e.target.closest("[data-tf-board]"); if (!b) return; buzz(5); TF_KIND = "paint"; TF_LENS = b.dataset.tfBoard; TF_FROM_BOARD = true; TF_SIBS = secs.filter(sc => sc.tab === TF_BTAB).flatMap(sc => sc.boards).filter(x => x.id).map(x => ({ id: x.id, label: x.label })); setKinds(); drawLenses(); const on = lensRow.querySelector(".tf-lens.on"); if (on) tfChipInView(lensRow, on); showBars(); tfScrollTo(el, 0); salt = 0; paintings(false); };
+      host.onclick = e => { const fg = e.target.closest("[data-tf-fgrp]"); if (fg) { TF_FGRP = fg.dataset.tfFgrp; buzz(4); draw(); tfScrollTo(el, 0); return; } const gl = e.target.closest("[data-tf-go]"); if (gl) { buzz(4); location.hash = gl.dataset.tfGo; return; } const ft = e.target.closest("[data-tf-ftab]"); if (ft) { TF_FTAB = ft.dataset.tfFtab; TF_FGRP = ""; buzz(3); draw(); tfScrollTo(el, 0); return; } const fp = e.target.closest("[data-fvpal]"); if (fp) { buzz(6); openSavedPalette(fp.dataset.fvpal); return; } const cat = e.target.closest("[data-tf-cat]"); if (cat) { TF_BTAB = cat.dataset.tfCat; buzz(4); draw(); tfScrollTo(el, 0); return; } const tb = e.target.closest("[data-tf-btab]"); if (tb) { TF_BTAB = tb.dataset.tfBtab; TF_FGRP = ""; buzz(3); draw(); tfScrollTo(el, 0); return; } const b = e.target.closest("[data-tf-board]"); if (!b) return; buzz(5); TF_KIND = "paint"; TF_LENS = b.dataset.tfBoard; TF_FROM_BOARD = true; TF_SIBS = secs.filter(sc => sc.tab === TF_BTAB && (TF_BTAB !== "yours" || !TF_FGRP || sc.title === TF_FGRP)).flatMap(sc => sc.boards).filter(x => x.id).map(x => ({ id: x.id, label: x.label })); setKinds(); drawLenses(); const on = lensRow.querySelector(".tf-lens.on"); if (on) tfChipInView(lensRow, on); showBars(); tfScrollTo(el, 0); salt = 0; paintings(false); };
       // swipe sideways to the next / previous tab, as on the paintings: the neighbor's folders wait beside this page and follow your finger
       let bs = null; const BGAP = 8, calm = !matchMedia("(prefers-reduced-motion:reduce)").matches;
       const bslide = (x, ms) => host.querySelectorAll(".tf-bwrap").forEach(n => { n.style.transition = ms ? `transform ${ms}ms cubic-bezier(.2,.8,.2,1)` : "none"; n.style.transform = x ? `translate3d(${x}px,0,0)` : ""; });
@@ -354,7 +374,7 @@ function todayFeed() {
         const bw0 = host.querySelector(".tf-bwrap"); if (!bw0) return null;
         const d = document.createElement("div"); d.innerHTML = wrapHTML(tgt[0], bcols); const n = d.firstChild; n.classList.add("tf-bpeek"); n.setAttribute("aria-hidden", "true");
         n.style.cssText += `;position:absolute;top:${bw0.offsetTop + Math.max(0, tfY(el))}px;left:${bw0.offsetLeft + side * (bw0.offsetWidth + BGAP)}px;width:${bw0.offsetWidth}px;pointer-events:none`;
-        host.appendChild(n); n.querySelectorAll("[data-tf-board], [data-tf-cat]").forEach((c, k) => { if (k < 18) (c.dataset.tfCat ? fillCat : fill)(c); });
+        host.appendChild(n); n.querySelectorAll("[data-tf-board], [data-tf-cat], [data-tf-fgrp]:not([data-tf-fgrp=''])").forEach((c, k) => { if (k < 18) (c.dataset.tfCat || c.dataset.tfFgrp ? fillCat : fill)(c); });
         return { tab: tgt[0], n };
       };
       const bclear = () => { host.querySelectorAll(".tf-bpeek").forEach(n => n.remove()); host.style.position = ""; document.documentElement.style.overflowX = ""; };
@@ -584,8 +604,9 @@ function tfHalf(sh) {
 // the filters of the board you are on (its own years, color family and order)
 function tfBoardPart() {
   const id = TF_LENS; if (TF_KIND !== "paint" || id === "foryou" || /^(l|c):/.test(id)) return "";
+  const ms = hfMapSpec(id), map = ms ? `<div class="fs-c"><button type="button" class="tf-mapbtn" data-pmap="${esc(ms)}" data-tfmap>${typeof GL_ICON_MAP !== "undefined" ? GL_ICON_MAP : ""}<span>See these on the map</span></button><small class="tf-fsmall">Every painting here, laid out by color. Back brings you to this board.</small></div>` : "";
   const f = hfBF(id), chips = (k, list, cur) => `<div class="tf-seg" role="radiogroup">${list.map(([v, l]) => `<button type="button" role="radio" aria-checked="${(cur || list[0][0]) === v}" data-tfbf="${k}:${esc(v)}">${esc(l)}</button>`).join("")}</div>`;
-  return `<div class="fs-c" data-tfbfbox><p>This board</p><small class="tf-fsmall">Time</small>${chips("era", HF_BF_ERAS, f.era)}<small class="tf-fsmall">Color</small>${chips("hue", [["", "Any"], ...HF_HUES.map(h => [h[0], h[0]]), ["Greys and neutrals", "Greys"]], f.hue)}<small class="tf-fsmall">Order</small>${chips("sort", HF_BF_ORDERS, f.sort)}</div>`;
+  return `${map}<div class="fs-c" data-tfbfbox><p>This board</p><small class="tf-fsmall">Time</small>${chips("era", HF_BF_ERAS, f.era)}<small class="tf-fsmall">Color</small>${chips("hue", [["", "Any"], ...HF_HUES.map(h => [h[0], h[0]]), ["Greys and neutrals", "Greys"]], f.hue)}<small class="tf-fsmall">Order</small>${chips("sort", HF_BF_ORDERS, f.sort)}</div>`;
 }
 function tfSettings(onChange) {
   const sw = (k, label, on) => `<div class="fs-c fs-tg"><p>${label}</p><button type="button" class="fs-switch" role="switch" aria-checked="${on}" data-tfs="${k}"><i></i></button></div>`;
@@ -609,6 +630,8 @@ function tfSettings(onChange) {
     st[r.dataset.tfal] = n;
     save(); buzz(4); onChange("alike");
   });
+  // pointerdown comes before the page-wide [data-pmap] click opens the map: that is when the trail is set, so the map's Back returns to this board
+  sh.addEventListener("pointerdown", e => { if (e.target.closest("[data-tfmap]")) { try { XSTACK = []; X_ROOT = "feed"; } catch (er) {} } });
   sh.addEventListener("click", e => {
     const bf = e.target.closest("[data-tfbf]");
     if (bf) {
