@@ -206,32 +206,52 @@ async function hfEraList(v, k, roll) {
   const rr = hfSeedOf(k + "|e" + v + "|" + roll, "era"), picked = hfPick(cand, rr, HF_KEEP, null, hfCut(.5));
   return { ids: hfRiverOn() ? hfChainList(picked, rr) : picked, total: cand.length };
 }
+// genres: the 47 islands of the By look map (data/gallery/look.json names them, look-islands.bin says which island each painting is on)
+let HF_ISL = null, HF_ISLP = null;
+const hfIslands = () => HF_ISLP || (HF_ISLP = loadGallery().then(async () => {
+  try {
+    const m = await (await fetch("data/gallery/look.json")).json(), r = await fetch("data/gallery/look-islands.bin");
+    if (!m || !m.islands || !r.ok) return;
+    const b = await r.arrayBuffer(), dv = new DataView(b), K = m.islands.length;
+    if (b.byteLength !== 20 + GAL.n * 3 || dv.getUint32(0, true) !== 0x4C53494C || dv.getUint32(8, true) !== GAL.n || dv.getUint32(12, true) !== K) return;
+    HF_ISL = { isl: m.islands, id: new Uint8Array(b, 20, GAL.n) };
+  } catch (e) {}
+}).catch(() => {}));
+const hfGenreName = k => { const o = HF_ISL && HF_ISL.isl[+k]; return o ? o.lab || ("Group " + k) : "Genre"; };
+async function hfGenreList(k, key, roll) {
+  await hfIslands(); await hfFacets();
+  const cand = []; if (HF_ISL) for (let i = 0; i < GAL.n; i++) if (HF_ISL.id[i] === +k && !hfHid(i)) cand.push(i);
+  const rr = hfSeedOf(key + "|g" + k + "|" + roll, "genre"), picked = hfPick(cand, rr, HF_KEEP, null, hfCut(.4));
+  return { ids: hfRiverOn() ? hfChainList(picked, rr) : picked, total: cand.length };
+}
 // the folders: sections of boards for the Boards page
 async function hfBoards() {
   const F = await hfFacets(), C = hfCounts(F); await hfBeautyReady(); await hfMoodReady();
-  const secs = [];
-  if (HF_MOOD) { const fam = new Map(); HF_MOOD.moods.forEach(([id, name, f]) => { if (!fam.has(f)) fam.set(f, []); fam.get(f).push({ id: "mo:" + id, label: name, sub: "Mood" }); }); fam.forEach((boards, f) => secs.push({ title: "Moods: " + f.toLowerCase(), boards })); }
-  secs.push({ title: "Periods", boards: [[1400, 1500], [1500, 1600], [1600, 1700], [1700, 1800], [1800, 1850], [1850, 1900], [1900, 1925], [1925, 1960]].map(([a, b]) => ({ id: "e:" + a + "-" + b, label: hfEraName(a + "-" + b), sub: "Period" })) });
+  const secs = []; await hfIslands();
+  if (HF_ISL) secs.push({ tab: "genres", title: "Genres", boards: HF_ISL.isl.map((o, k) => ({ id: "g:" + k, label: o.lab || ("Group " + k), sub: (o.n || 0).toLocaleString("en-US") + " paintings", n: o.n || 0 })).sort((a, b) => b.n - a.n) });
+  if (HF_MOOD) { const fam = new Map(); HF_MOOD.moods.forEach(([id, name, f]) => { if (!fam.has(f)) fam.set(f, []); fam.get(f).push({ id: "mo:" + id, label: name, sub: "Mood" }); }); fam.forEach((boards, f) => secs.push({ tab: "moods", title: f, boards })); }
+  secs.push({ tab: "periods", title: "Periods", boards: [[1400, 1500], [1500, 1600], [1600, 1700], [1700, 1800], [1800, 1850], [1850, 1900], [1900, 1925], [1925, 1960]].map(([a, b]) => ({ id: "e:" + a + "-" + b, label: hfEraName(a + "-" + b), sub: "Period" })) });
   const mvs = []; F.meta.movements.forEach((n, j) => { if (n && C.mv[j + 1] >= 500 && HF_KNOWN.test(n)) mvs.push({ n, c: C.mv[j + 1] }); });
-  mvs.sort((x, y) => y.c - x.c); secs.push({ title: "Movements", boards: mvs.slice(0, 24).map(x => ({ id: "m:" + x.n, label: x.n, sub: x.c.toLocaleString("en-US") + " paintings" })) });
+  mvs.sort((x, y) => y.c - x.c); secs.push({ tab: "movements", title: "Movements", boards: mvs.slice(0, 24).map(x => ({ id: "m:" + x.n, label: x.n, sub: x.c.toLocaleString("en-US") + " paintings" })) });
   const nice = TODAY_TABLE.filter(r => { const c = lch(r[2]); return c[1] >= 12 && hfLiking(c[2], c[0], c[1]) >= .66; }), by = new Map();
   nice.forEach(r => { const h = Math.floor(lch(r[2])[2] / 30); if (!by.has(h)) by.set(h, r); });
-  secs.push({ title: "Colors", boards: [...by.values()].map(r => ({ id: "c:" + r[2], label: r[1], sub: "Color", hex: r[2] })) });
+  secs.push({ tab: "colors", title: "Colors", boards: [...by.values()].map(r => ({ id: "c:" + r[2], label: r[1], sub: "Color", hex: r[2] })) });
   const ars = []; F.meta.artists.forEach((a, j) => { if (C.art[j + 1] >= 150) ars.push({ n: a[0], c: C.art[j + 1] }); });
-  ars.sort((x, y) => y.c - x.c); secs.push({ title: "Painters", boards: ars.slice(0, 36).map(x => ({ id: "p:" + x.n, label: fdShortName(x.n), sub: x.c.toLocaleString("en-US") + " paintings" })) });
+  ars.sort((x, y) => y.c - x.c); secs.push({ tab: "painters", title: "Painters", boards: ars.slice(0, 36).map(x => ({ id: "p:" + x.n, label: fdShortName(x.n), sub: x.c.toLocaleString("en-US") + " paintings" })) });
   return secs;
 }
-// four paintings for a folder's cover: among the most beautiful of that board, never two by one painter
+// three paintings for a folder's cover (one large, two small): among the most beautiful of that board, never two by one painter
 async function hfCoverIds(id) {
   const F = await hfFacets(); await hfBeautyReady(); await hfMoodReady();
   const t = id.slice(0, 2), v = id.slice(2); let cand = [];
   if (t === "mo") cand = hfMoodCands(id.slice(3), .95);
+  else if (t === "g:") { await hfIslands(); if (HF_ISL) for (let i = 0; i < GAL.n; i++) if (HF_ISL.id[i] === +v && !hfHid(i)) cand.push(i); }
   else if (t === "e:") { const [a, b] = hfEraSpan(v); for (let i = 0; i < GAL.n; i++) { const y = GAL.year[i]; if (y !== GL_UNDATED && y >= a && y < b && !hfHid(i)) cand.push(i); } }
   else if (t === "m:" || t === "p:") { const pos = (t === "p:" ? F.meta.artists.findIndex(a => a[0] === v) : F.meta.movements.indexOf(v)) + 1; cand = pos ? hfIndexBy(F, t === "p:" ? F.artist : F.mv, pos).filter(i => !hfHid(i)) : []; }
   else if (t === "c:") cand = (await hfNearColor(v)).ids.slice(0, 80);
   cand = cand.filter(i => GAL.ar[i] > .6 && GAL.ar[i] < 1.7).sort((x, y) => hfBeauty(y) - hfBeauty(x)).slice(0, 40);
   const rnd = hfSeedOf(HF_SESSION + id, "cover"), out = [], ars = new Set();
-  while (out.length < 4 && cand.length) { const j = Math.floor(rnd() * Math.min(cand.length, 14)), i = cand.splice(j, 1)[0], a = F.artist[i]; if (a && ars.has(a) && cand.length > 6) continue; if (a) ars.add(a); out.push(i); }
+  while (out.length < 3 && cand.length) { const j = Math.floor(rnd() * Math.min(cand.length, 14)), i = cand.splice(j, 1)[0], a = F.artist[i]; if (a && ars.has(a) && cand.length > 6) continue; if (a) ars.add(a); out.push(i); }
   return out;
 }
 // an endless row of lenses (David, 2026-10-26: "make that sideways list of tabs infinite, so there is always a new painting tab"): a handful of new
@@ -269,7 +289,7 @@ function hfChips(pre, activeId) {
 }
 function hfLabelOf(id, pre) {
   const t = id.slice(0, 2), v = id.slice(2);
-  if (t === "mo") return hfMoodName(id.slice(3)); if (t === "e:") return hfEraName(v);
+  if (t === "mo") return hfMoodName(id.slice(3)); if (t === "e:") return hfEraName(v); if (t === "g:") return hfGenreName(v);
   if (t === "m:") return v; if (t === "p:") return fdShortName(v);
   if (t === "l:") return pre && pre.likeTitle && "l:" + pre.li === id ? "Like " + pre.likeTitle : "Like this one"; if (t === "c:") { const r = TODAY_TABLE.find(x => x[2] === v); return "Near " + (r ? r[1].toLowerCase() : v); }
   return "For you";
@@ -591,6 +611,7 @@ async function hfLens(id, k, salt, fast) {
   if (fast) { const rnd = hfSeedOf(k, "fast"); return { ids: hfSpread(hfPick(null, rnd, 240, hfSeen(), hfCut(.86))), more: true, head: { kind: "f" } }; }
   const t = id.slice(0, 2), v = id.slice(2);
   if (t === "m:" || t === "p:") return { ...(await hfByFacet(t[0], v, k, hfRoll(id))), head: { kind: t[0], name: v } };
+  if (t === "g:") return { ...(await hfGenreList(v, k, hfRoll(id))), head: { kind: "g", name: hfGenreName(v) } };
   if (t === "mo") return { ...(await hfMoodList(id.slice(3), k, hfRoll(id))), head: { kind: "mo", name: hfMoodName(id.slice(3)) } };
   if (t === "e:") return { ...(await hfEraList(v, k, hfRoll(id))), head: { kind: "e", name: hfEraName(v) } };
   if (t === "l:") { const seed = +v, by = hfS().likeBy === "color" ? "color" : "vibe"; return { ...(await hfLike(seed, by)), head: { kind: "l", seed, by } }; }

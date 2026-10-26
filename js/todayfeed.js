@@ -23,7 +23,7 @@ let TF = null;          // today's pool: { k, items:{paint,pal,color,art,cotd}, 
 let TF_LITE = null;     // the articles index, once
 
 const tfInk = hex => lab(hex)[0] > 60 ? "#141311" : "#F6F2EA";
-let TF_KIND = "paint", TF_LENS = "foryou", TF_EXTRA = [], TF_FROM_BOARD = false;   // each launch opens on Paintings and For you; where you went afterwards is kept only for this visit (a Back returns to it)
+let TF_KIND = "paint", TF_LENS = "foryou", TF_EXTRA = [], TF_FROM_BOARD = false, TF_BTAB = "genres";   // each launch opens on Paintings and For you; where you went afterwards is kept only for this visit (a Back returns to it)
 const tfFilter = () => (TF_TYPES.some(t => t[0] === TF_KIND) ? TF_KIND : "paint");
 // plain text out of an article's lede (no markup)
 const tfPlain = s => String(s || "").replace(/\[\[(?:[^\]|]*\|)?([^\]]*)\]\]/g, "$1").replace(/\[\d+\]/g, "").replace(/[*`]/g, "").replace(/\s+/g, " ").trim();
@@ -222,7 +222,7 @@ function todayFeed() {
     else if (h.kind === "m" || h.kind === "p") html = `<h2 class="tf-lh-t">${esc(h.name)}</h2><span class="tf-lh-n">${res.total ? res.total.toLocaleString("en-US") + " paintings" : ""}</span>${fol(h.kind, h.name)}${h.kind === "p" ? `<button type="button" class="tf-mini" data-tf-order>${hfS().pOrder === "old" ? "Oldest first" : "Shuffled"}</button>` : ""}`;
     else if (h.kind === "l") html = `<span class="tf-seed" data-tf-seed></span><div class="tf-lh-x"><h2 class="tf-lh-t" data-tf-seedt>Like this one</h2><span class="tf-lh-n" data-tf-seedn></span></div><div class="tf-seg" role="group" aria-label="Match by"><button type="button" class="${h.by === "vibe" ? "on" : ""}" data-tf-by="vibe">By look</button><button type="button" class="${h.by === "color" ? "on" : ""}" data-tf-by="color">By color</button></div><button type="button" class="tf-mini" data-tf-another="like">Another</button>`;
     else if (h.kind === "c") { const row = TODAY_TABLE.find(x => x[2] === h.hex); let nm = row ? row[1] : h.hex; if (!row) { try { nm = nameOf(h.hex).n; } catch (e) {} } html = `<span class="tf-sw" style="--c:${esc(h.hex)}"></span><h2 class="tf-lh-t">Near ${esc(nm.toLowerCase())}</h2><button type="button" class="tf-mini" data-tf-another="color">Another</button>`; }
-    if ((h.kind === "mo" || h.kind === "e") && !html) html = `<h2 class="tf-lh-t">${esc(h.name)}</h2><span class="tf-lh-n">${res.total ? res.total.toLocaleString("en-US") + " paintings" : ""}</span>`;
+    if ((h.kind === "mo" || h.kind === "e" || h.kind === "g") && !html) html = `<h2 class="tf-lh-t">${esc(h.name)}</h2><span class="tf-lh-n">${res.total ? res.total.toLocaleString("en-US") + " paintings" : ""}</span>`;
     if (html && TF_FROM_BOARD && h.kind !== "f") html = `<button type="button" class="tf-mini tf-back" data-tf-boards>\u2039 Boards</button>` + html;
     lh.innerHTML = html; lh.hidden = !html; lh.dataset.kind = h.kind;
     if (h.kind === "l") glShard(Math.floor(h.seed / GAL.shard)).then(() => { const d = glDetailNow(h.seed); if (!d || !lh.isConnected) return; const t = lh.querySelector("[data-tf-seedt]"), n = lh.querySelector("[data-tf-seedn]"), sd = lh.querySelector("[data-tf-seed]"); if (t) t.textContent = "Like " + d.t; if (n) n.textContent = [d.a, glYear(h.seed)].filter(Boolean).join(" · "); if (sd && d.img) { const im = new Image(); im.alt = ""; im.onload = () => sd.appendChild(im); im.src = d.img; } if (pre && pre.li === h.seed && !pre.likeTitle) { pre.likeTitle = hfShortTitle(d.t); drawLenses(); } }).catch(() => {});
@@ -277,9 +277,8 @@ function todayFeed() {
     const my = tok;
     hfBoards().then(secs => {
       if (my !== tok || !host.isConnected || tfFilter() !== "board") return;
-      host.innerHTML = secs.map(sc => `<h2 class="tf-bh">${esc(sc.title)}</h2><div class="tf-bgrid">${sc.boards.map(b => `<button type="button" class="tf-board" data-tf-board="${esc(b.id)}"><span class="tf-bcov" ${b.hex ? `style="--c:${esc(b.hex)}"` : ""}><i></i><i></i><i></i><i></i></span><b>${esc(b.label)}</b><small>${esc(b.sub)}</small></button>`).join("")}</div>`).join("");
-      host.onclick = e => { const b = e.target.closest("[data-tf-board]"); if (!b) return; buzz(5); TF_KIND = "paint"; TF_LENS = b.dataset.tfBoard; TF_FROM_BOARD = true; setKinds(); drawLenses(); const on = lensRow.querySelector(".tf-lens.on"); if (on) tfChipInView(lensRow, on); showBars(); tfScrollTo(el, 0); salt = 0; paintings(false); };
-      // covers fill as they come on screen: four paintings each
+      const TABS = [["genres", "Genres"], ["moods", "Moods"], ["painters", "Painters"], ["periods", "Periods"], ["movements", "Movements"], ["colors", "Colors"]].filter(t => secs.some(sc => sc.tab === t[0]));
+      if (!TABS.some(t => t[0] === TF_BTAB)) TF_BTAB = TABS.length ? TABS[0][0] : "";
       const fill = card => {
         const id = card.dataset.tfBoard; if (card.dataset.cv) return; card.dataset.cv = "1";
         hfCoverIds(id).then(gis => Promise.all(gis.map(g => glShard(Math.floor(g / GAL.shard)).then(() => [g, glDetailNow(g)])))).then(rows => {
@@ -287,9 +286,17 @@ function todayFeed() {
           rows.forEach(([g, d], n) => { if (d && d.img && ims[n]) { const im = new Image(); im.alt = ""; im.decoding = "async"; const sty = glCropStyle(g, d, glAR(g)); if (sty) im.setAttribute("style", (sty.match(/style="([^"]*)"/) || [])[1] || ""); im.onload = () => im.classList.add("on"); im.src = d.img; ims[n].appendChild(im); } });
         }).catch(() => {});
       };
-      const cards = [...host.querySelectorAll("[data-tf-board]")];
-      if (typeof IntersectionObserver === "function") { const io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { fill(x.target); io.unobserve(x.target); } }), { rootMargin: "600px 0px" }); cards.forEach(c => io.observe(c)); stop.push(() => io.disconnect()); }
-      else cards.slice(0, 24).forEach(fill);
+      let io = null;
+      const draw = () => {
+        if (io) { io.disconnect(); io = null; }
+        host.innerHTML = `<div class="tf-chips tf-btabs" role="tablist" aria-label="Boards">${TABS.map(([id, label]) => `<button type="button" role="tab" class="tf-chip${id === TF_BTAB ? " on" : ""}" data-tf-btab="${id}" aria-selected="${id === TF_BTAB}">${label}</button>`).join("")}</div>` +
+          secs.filter(sc => sc.tab === TF_BTAB).map(sc => `<h2 class="tf-bh">${esc(sc.title)}</h2><div class="tf-bgrid">${sc.boards.map(b => `<button type="button" class="tf-board" data-tf-board="${esc(b.id)}"><span class="tf-bcov" ${b.hex ? `style="--c:${esc(b.hex)}"` : ""}><i></i><i></i><i></i></span><b>${esc(b.label)}</b><small>${esc(b.sub)}</small></button>`).join("")}</div>`).join("");
+        const cards = [...host.querySelectorAll("[data-tf-board]")];
+        if (typeof IntersectionObserver === "function") { io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { fill(x.target); io.unobserve(x.target); } }), { rootMargin: "600px 0px" }); cards.forEach(c => io.observe(c)); }
+        else cards.slice(0, 24).forEach(fill);
+      };
+      host.onclick = e => { const tb = e.target.closest("[data-tf-btab]"); if (tb) { TF_BTAB = tb.dataset.tfBtab; buzz(3); draw(); tfScrollTo(el, 0); return; } const b = e.target.closest("[data-tf-board]"); if (!b) return; buzz(5); TF_KIND = "paint"; TF_LENS = b.dataset.tfBoard; TF_FROM_BOARD = true; setKinds(); drawLenses(); const on = lensRow.querySelector(".tf-lens.on"); if (on) tfChipInView(lensRow, on); showBars(); tfScrollTo(el, 0); salt = 0; paintings(false); };
+      draw(); stop.push(() => { if (io) io.disconnect(); });
     }).catch(() => { if (my === tok) host.innerHTML = `<div class="tf-state"><p class="small">The folders didn't load.</p></div>`; });
   };
   const render = restore => { const f = tfFilter(); if (f === "paint") paintings(restore); else if (f === "board") boardsView(); else others(restore); };
