@@ -28,6 +28,7 @@
     var val = function (name, pri, kind) { return raw("data/paintmap/" + name, pri).then(function (r) { if (!r.ok) throw new Error(name); return kind === "json" ? r.json() : kind === "buf" ? r.arrayBuffer() : r.blob(); }); };
     window.__EARLY = { take: function (path) { var p = R[path]; delete R[path]; return p || null; } };
     ["data/gallery/index.json", "data/gallery/index.bin", "data/gallery/est.json", "data/facets/facets.json", "data/facets/facets.bin"].concat(todayOpen ? ["data/gallery/aesthetic.json", "data/gallery/aesthetic.bin"] : []).forEach(function (p) { var q = R[p] = raw(p, "low"); q.catch(function () {}); });
+    if (todayOpen) { try { fetch("data/home-seed.json" + (v ? "?v=" + v : ""), { priority: "high" }).catch(function () {}); } catch (e) {} }   // the instant first screen (js/homefeed.js hfSeedLoad reads the same URL from the cache)
     var micro = P["micro.json"] = val("micro.json", "auto", "json");
     micro.then(function (meta) {
       var all = meta.sheets.map(function (n) { return (P[n] = val(n, "auto", "blob")); });

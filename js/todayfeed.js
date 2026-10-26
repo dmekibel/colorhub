@@ -111,6 +111,8 @@ function tfCard(it) {
       const i = it.gi, dom = glPal(i).reduce((a, b) => b.share > a.share ? b : a);
       return `<button type="button" class="tf-card tf-paint wait" data-tf="paint" data-gi="${i}"><span class="tf-im" style="--c:${dom.h};aspect-ratio:${(1 / glAR(i)).toFixed(3)}"></span><span class="tf-pal" aria-hidden="true">${tfStripes(i)}</span><span class="tf-heart" role="button" tabindex="0" data-tf-heart aria-pressed="false" aria-label="Keep this painting">${TF_HEART}</span><span class="tf-tx"><b></b><small></small></span></button>`;
     }
+    case "sp":   // a seed painting (js/homefeed.js hfSeedRiver): drawn from its own record, before the archive has loaded
+      return `<button type="button" class="tf-card tf-paint" data-tf="paint" data-gi="${it.gi}"><span class="tf-im" style="--c:${it.c};aspect-ratio:${(1 / it.ar).toFixed(3)}"><img class="on" src="${esc(it.img)}" alt="" decoding="async" loading="lazy"></span><span class="tf-heart" role="button" tabindex="0" data-tf-heart aria-pressed="false" aria-label="Keep this painting">${TF_HEART}</span><span class="tf-tx"><b>${esc(it.ti)}</b><small>${esc(it.p)}${it.p && it.y ? " · " : ""}${it.y || ""}</small></span></button>`;
     case "pal":
       return `<button type="button" class="tf-card tf-palette wait" data-tf="pal" data-gi="${it.gi}"><span class="tf-stripes" aria-hidden="true" style="aspect-ratio:${(1 / it.r).toFixed(3)}">${tfEqual(it.gi)}</span><span class="tf-tx"><b></b><small>6 colors</small></span></button>`;
     case "color":
@@ -240,6 +242,16 @@ function todayFeed() {
     // the same list comes back when you return to a lens (a Back, a tab switch), so what you had on screen is still there
     if (HF_CACHE.has(ck)) return go(HF_CACHE.get(ck).res);
     host.innerHTML = tfSkeleton(k);
+    // the archive's 9 MB has not arrived: the first screen comes from the small seed set at once, and the real river carries on from its last painting when more is asked for
+    if (fy && !(typeof GAL !== "undefined" && GAL && GAL.n)) hfSeedLoad().then(seed => {
+      if (!seed || my !== tok || !host.isConnected || HF_CACHE.has(ck) || (typeof GAL !== "undefined" && GAL && GAL.n && HF_CACHE.has(ck))) return;
+      const items = hfSeedRiver(seed, hfSeedOf(hk, "seed"), 60); if (!items.length) return;
+      let seeded = false; const used = items.map(x => x.gi);
+      const ov = { key: "paint:" + ck, list: items, seen: false, end: "That is every painting here.", res: { ids: used, more: true, head: { kind: "f" } },
+        more: () => { if (!seeded) { seeded = true; return hfAfterSeed(hk, used).then(ids => mkItems(ids)); } return hfLens("foryou", hk, ++salt).then(r => mkItems(r.ids)); } };
+      HF_CACHE.set(ck, ov); drawHead(ov.res);
+      tfPaint(el, host, HF_STATE, "paint", false, stop, ov);
+    });
     // never stuck: a list that has not arrived in 12 s becomes a message with a retry, and the beauty list stands in for For you at 5 s
     const slow = fy ? setTimeout(() => { if (my === tok && host.isConnected && host.querySelector(".tf-sk")) hfLens("foryou", hk, 0, true).then(r => { if (my === tok && !HF_CACHE.has(ck)) go(r); }).catch(() => {}); }, 10000) : 0;
     hfBudget(hfLens(id, hk, 0), 12000, "timeout").then(res => {
@@ -513,7 +525,7 @@ function tfPaint(scr, host, st, f, restore, stop, ov) {
       tpl.innerHTML = tfCard(list[n]);
       const node = tpl.content.firstElementChild; if (!node) continue;
       let s = cols[0]; for (const c of cols) if (c.offsetHeight < s.offsetHeight) s = c;
-      if (n < 10) node.dataset.first = "1";
+      if (n < 10) { node.dataset.first = "1"; node.querySelectorAll("img").forEach(im => { im.loading = "eager"; im.fetchPriority = "high"; }); }
       node.dataset.ix = n;
       s.appendChild(node);
       if (list[n].t === "paint" && typeof fdMicroPaint === "function") fdMicroPaint(node.querySelector(".tf-im"), list[n].gi);

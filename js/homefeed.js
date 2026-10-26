@@ -147,6 +147,29 @@ async function hfPresets(k) {
   const row = nice.length ? pick(nice, rc) : TODAY_TABLE.length ? pick(TODAY_TABLE, rc) : null;
   return { k, mv, pa, li, color: row ? { n: row[1], h: row[2] } : null };
 }
+// The first screen before the archive has arrived (David, 2026-10-26: "app still too slow"): the gallery index is 6 MB and the filters 2.7 MB, so on a phone the first
+// list waited many seconds. data/home-seed.json is a small hand-picked set of about 170 very beautiful, varied paintings (their picture, title, painter, year, shape, main color:
+// everything a tile needs); the first screen is a color-gradual walk through it, drawn at once, and when the page asks for more the real river carries on from its last painting.
+// Rebuild it with the console script in tools/home_seed.js.
+let HF_SEEDP = null;
+const hfSeedLoad = () => HF_SEEDP || (HF_SEEDP = fetch("data/home-seed.json").then(r => (r.ok ? r.json() : null)).then(o => (o && o.items && o.items.length > 40 ? o : null)).catch(() => null));
+function hfSeedRiver(seed, rnd, count) {
+  const pool = seed.items.map(x => ({ x, L: lab(x.c) })), out = [];
+  let cur = pool.splice(Math.floor(rnd() * pool.length), 1)[0];
+  out.push(cur.x);
+  while (out.length < count && pool.length) {
+    let bi = 0, bd = 1e9;
+    for (let k = 0; k < pool.length; k++) { const a = pool[k].L, b = cur.L, d = Math.hypot((a[0] - b[0]) * .7, a[1] - b[1], a[2] - b[2]) + Math.abs(pool[k].x.y - cur.x.y) / 30 + rnd() * 4; if (d < bd) { bd = d; bi = k; } }
+    cur = pool.splice(bi, 1)[0]; out.push(cur.x);
+  }
+  return out.map(x => ({ t: "sp", key: "g:" + x.g, gi: x.g, img: x.i, ar: x.a, c: x.c, ti: x.t, p: x.p, y: x.y }));
+}
+// after the seed: the real river, begun at the seed's last painting, with every painting already shown kept out
+async function hfAfterSeed(hk, used) {
+  await loadGallery(); await hfBeautyReady(); await hfFacets();
+  const skip = new Set(hfSeen()); used.forEach(i => skip.add(i));
+  return hfBudget(hfVibeRiver(hk, hfSeedOf(hk, "afterseed"), skip, null, used[used.length - 1]), 9000, []);
+}
 // an endless row of lenses (David, 2026-10-26: "make that sideways list of tabs infinite, so there is always a new painting tab"): a handful of new
 // movements, painters and colors the row does not have yet, in a random order for this visit
 async function hfMoreLenses(have, n) {
@@ -339,7 +362,7 @@ function hfBloom(el, x, y) {
 // like a painting from a tile: the heart blooms, it is kept (never un-kept by a double-tap), the tile's own heart lights
 function hfLikeTile(el, gi, x, y) {
   hfBloom(el, x, y);
-  glShard(Math.floor(gi / GAL.shard)).then(() => {
+  (typeof GAL !== "undefined" && GAL && GAL.n ? Promise.resolve() : loadGallery()).then(() => glShard(Math.floor(gi / GAL.shard))).then(() => {
     const d = glDetailNow(gi); if (!d || typeof fvArtSet !== "function") return;
     if (!fvArtHas(d.id)) { fvArtSet(gi, d, true); buzz(10); } else buzz(6);
     el.querySelectorAll("[data-tf-heart]").forEach(hb => { hb.classList.add("on"); hb.setAttribute("aria-pressed", "true"); hb.innerHTML = typeof TF_HEART_ON !== "undefined" ? TF_HEART_ON : ""; });
