@@ -235,8 +235,13 @@ html .room-sheet>.screen.tf-screen.tf-screen{padding-left:var(--tfp);padding-rig
 /* Boards: a page of smart folders (a mood, a period, a movement, a color, a painter); square covers of four paintings, the name, one quiet line */
 .tf-bh{font:400 28px/1.1 var(--serif);margin:26px 0 12px;padding:0}
 .tf-bh:first-child{margin-top:8px}
-.tf-bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px}
-@media (min-width:700px){.tf-bgrid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:26px 16px}}
+.tf-bgrid{display:grid;grid-template-columns:repeat(var(--bcols,2),minmax(0,1fr));gap:18px 12px}
+@media (min-width:700px){.tf-bgrid{gap:26px 16px}}
+.tf-board{container-type:inline-size}
+.tf-board b{font-size:clamp(10px,9.5cqw,19px)}
+.tf-board small{font-size:clamp(9px,7cqw,14px)}
+@container (max-width:90px){.tf-board small{display:none}}
+.tf-bwrap{touch-action:pan-y}
 .tf-board{display:flex;flex-direction:column;gap:7px;text-align:left;color:var(--ink);padding:0}
 /* one large picture and two small ones beside it (David, 2026-10-26, liking how Pinterest shows a board) */
 .tf-bcov{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:2px;aspect-ratio:10/9;background:#0b0a09;overflow:hidden}
