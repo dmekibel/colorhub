@@ -233,24 +233,37 @@ const hfHueGap = (a, b) => { const d = Math.abs(a - b) % 360; return d > 180 ? 3
 async function hfVibeRiver(hk, rnd, skip, taste) {
   const ac = hfAlikeC(), av = hfAlikeV(), at = hfAlikeT(), ap = hfAlikeP(), cof = i => (HF_F && HF_F.country ? HF_F.country[i] : 0);
   const size = Math.round(3 + 15 * Math.pow(av, 1.2)), jump = Math.pow(1 - av, 2) * .55, simW = .5 + av;
-  // COLOR: at the far right the river stays inside a narrow band of hues for a very long stretch and drifts only a few degrees between patches
-  const stepBase = 60 - 56 * ac, den = 150 - 110 * ac, hueTol = 180 - 160 * Math.pow(ac, .7);
+  // COLOR: the river keeps a reference color (the mean color of the patch's first painting); a painting joins only when its WHOLE mean color is within `tolE` of it
+  // (about 22 at the far right: the same color world; 57 at 30%; no limit at the left). The reference drifts round the color wheel a few degrees per patch.
+  const stepBase = 60 - 56 * ac, tolE = ac > .25 ? 78 - 56 * Math.pow(ac, .8) : 999, M = GAL.mean;
+  const meanOf = i => [M[i * 3], M[i * 3 + 1], M[i * 3 + 2]];
+  const dE = (i, r) => Math.hypot((M[i * 3] - r[0]) * .7, M[i * 3 + 1] - r[1], M[i * 3 + 2] - r[2]);
   // LOOK: how many neighbor-steps one patch holds (each takes about `size` paintings, then moves to the closest new neighbor, with no color step)
   const patchSteps = 1 + Math.round(11 * Math.pow(av, 2.2));
   // TIME: how far (in years) the river may wander from where it is: a few years at one end, any time at the other (a hard limit only when it is tight)
   const win = 6 + 400 * Math.pow(1 - at, 2), yr = i => (GAL.year[i] === GL_UNDATED ? null : GAL.year[i]);
   const yGap = (i, y0) => { const y = yr(i); return y == null || y0 == null ? (at > .5 ? 400 : 0) : Math.abs(y - y0); };
-  const hGap = (i, h) => { const d = hfDom(i); return d ? hfHueGap(d[0], h) : 90; };
-  // a painting may join the stretch when it is close enough in time, place and hue to where the river is
-  const fits = (i, st, relax) => (relax || at <= .35 || yGap(i, st.year) <= win) && (relax > 1 || ap <= .35 || !st.co || cof(i) === st.co) && (relax > 2 || ac <= .35 || hGap(i, st.hue) <= hueTol);
+  // a painting may join the stretch when it is close enough in color, time and place to where the river is; when too few are, time is let go first, then place, never color
+  const fits = (i, st, relax) => (relax > 0 || at <= .35 || yGap(i, st.year) <= win) && (relax > 1 || ap <= .35 || !st.co || cof(i) === st.co) && (relax > 2 || dE(i, st.ref) <= tolE);
+  const ladder = (list, st, want) => { for (const r of [0, 1, 2]) { const f = list.filter(i => fits(i, st, r)); if (f.length >= want) return f; } return list.filter(i => fits(i, st, 2)); };
   const fresh = st0 => {
-    const an = hfPick(null, rnd, 160, skip, hfCut(.93)); if (!an.length) return null;
-    let pool = an; if (st0) for (const r of [0, 1, 2, 3]) { const f = an.filter(i => fits(i, st0, r)); if (f.length) { pool = f; break; } }
+    let an = hfPick(null, rnd, 160, skip, hfCut(.93)); if (!an.length) return null;
+    let pool = an;
+    if (st0) {
+      // a new start that still belongs: first among a few hundred, then among a few thousand (color is let go only when nothing in them fits)
+      let found = null;
+      for (const n of [160, 1500]) { if (n > 160) an = hfPick(null, rnd, n, skip, hfCut(.85)); for (const r of [0, 1, 2]) { const f = an.filter(i => fits(i, st0, r)); if (f.length) { found = f; break; } } if (found) break; }
+      if (!found) for (const r of [3]) found = an.filter(i => fits(i, st0, r));
+      if (found && found.length) pool = found;
+    }
     let A = pool[Math.floor(rnd() * Math.min(pool.length, 40))];
     // what you kept and follow: most starts are one of those paintings (or its neighbors), so the river is yours, not anyone's
-    if (taste && taste.length && rnd() < .6) { const c = taste.filter(i => !skip.has(i) && !hfHid(i)); if (c.length) A = c[Math.floor(rnd() * c.length)]; }
-    const d = hfDom(A);
-    return { A, hue: d ? d[0] : rnd() * 360, year: yr(A), co: cof(A), left: patchSteps - 1 };
+    if (taste && taste.length && rnd() < .6) {
+      let c = taste.filter(i => !skip.has(i) && !hfHid(i));
+      if (st0) { const k2 = c.filter(i => fits(i, st0, 1)); c = k2; }   // a later start must still belong where the river is
+      if (c.length) A = c[Math.floor(rnd() * c.length)];
+    }
+    return { A, ref: meanOf(A), year: yr(A), co: cof(A), left: patchSteps - 1 };
   };
   let st = HF_VR.get(hk);
   if (!st) {
@@ -262,22 +275,23 @@ async function hfVibeRiver(hk, rnd, skip, taste) {
     if (out.length >= 24 && Date.now() - t0 > 2200) break;   // never stuck: what is ready is shown, the next batch carries on from here
     const nb = await hfBudget(vibeNeighbors(st.A, 60), it ? 2500 : 7000, []);
     if (!nb.length) { if (!it && !st.used.size) { HF_VR.delete(hk); return []; } break; }
-    const sim = new Map(nb.map(x => [x.i, x.sim]));
-    let cand = [st.A, ...nb.map(x => x.i)].filter(i => room(i) && fits(i, st, 0));
-    if (cand.length < 3) cand = [st.A, ...nb.map(x => x.i)].filter(i => room(i) && fits(i, st, 1));
-    const score = i => hfBeauty(i) + (sim.get(i) || 1) * simW - hGap(i, st.hue) / den - yGap(i, st.year) / (win * 2 + 60) + (st.co && cof(i) === st.co ? ap * .5 : 0);
+    const sim = new Map(nb.map(x => [x.i, x.sim])), pool = [st.A, ...nb.map(x => x.i)].filter(room);
+    const cand = st.used.size ? pool.filter(i => fits(i, st, 0)) : ladder(pool, st, 1);   // once under way nothing is let in that breaks the limits: the river starts a new stretch instead
+    const score = i => hfBeauty(i) + (sim.get(i) || 1) * simW - dE(i, st.ref) / (30 + 100 * (1 - ac)) - yGap(i, st.year) / (win * 2 + 60) + (st.co && cof(i) === st.co ? ap * .5 : 0);
     cand.sort((x, y) => score(y) - score(x)).slice(0, size).forEach(i => { st.used.add(i); out.push(i); });
+    if (!st.co) { const c1 = out.slice(-size).find(i => cof(i)); if (c1 != null) st.co = cof(c1); }   // an anchor with no known country takes the first known one, so the place limit can hold
     if (st.left > 0) {
       // the same patch goes on: the next anchor is the closest unused neighbor that still fits (no step round the color wheel yet)
-      const nx = nb.map(x => x.i).filter(i => room(i) && fits(i, st, 0)).sort((x, y) => (sim.get(y) || 0) - (sim.get(x) || 0))[0];
+      const nx = nb.map(x => x.i).filter(room).filter(i => fits(i, st, 0)).sort((x, y) => (sim.get(y) || 0) - (sim.get(x) || 0))[0];
       if (nx != null) { st.left--; st.A = nx; st.year = yr(nx) ?? st.year; continue; }
     }
     // the patch is done: a jump to somewhere new (the more exploring, the more often), else a small step round the color wheel
     st.left = patchSteps - 1;
     if (rnd() < jump) { const f = fresh(st); if (f) { Object.assign(st, f); continue; } }
-    st.hue = (st.hue + st.dir * st.step * (.6 + rnd() * .8) + 360) % 360;
-    const next = nb.map(x => x.i).filter(i => room(i) && fits(i, st, 0));
-    next.sort((x, y) => (hGap(x, st.hue) - hfBeauty(x) * 40) - (hGap(y, st.hue) - hfBeauty(y) * 40));
+    const ang = st.dir * st.step * (.6 + rnd() * .8) * Math.PI / 180, ca = Math.cos(ang), sa = Math.sin(ang);
+    st.ref = [st.ref[0], st.ref[1] * ca - st.ref[2] * sa, st.ref[1] * sa + st.ref[2] * ca];
+    const next = nb.map(x => x.i).filter(room).filter(i => fits(i, st, 0));
+    next.sort((x, y) => (dE(x, st.ref) - hfBeauty(x) * 30) - (dE(y, st.ref) - hfBeauty(y) * 30));
     if (!next.length) { const f = fresh(st); if (!f) break; Object.assign(st, f); continue; }
     st.A = next[0]; st.year = yr(next[0]) ?? st.year; if (ap > .35) st.co = cof(next[0]) || st.co;
   }
