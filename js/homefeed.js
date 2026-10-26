@@ -279,6 +279,7 @@ async function hfVibeRiver(hk, rnd, skip, taste) {
     const cand = st.used.size ? pool.filter(i => fits(i, st, 0)) : ladder(pool, st, 1);   // once under way nothing is let in that breaks the limits: the river starts a new stretch instead
     const score = i => hfBeauty(i) + (sim.get(i) || 1) * simW - dE(i, st.ref) / (30 + 100 * (1 - ac)) - yGap(i, st.year) / (win * 2 + 60) + (st.co && cof(i) === st.co ? ap * .5 : 0);
     cand.sort((x, y) => score(y) - score(x)).slice(0, size).forEach(i => { st.used.add(i); out.push(i); });
+    (st.trail = st.trail || []).push(st.A); if (st.trail.length > 12) st.trail.shift();
     if (!st.co) { const c1 = out.slice(-size).find(i => cof(i)); if (c1 != null) st.co = cof(c1); }   // an anchor with no known country takes the first known one, so the place limit can hold
     if (st.left > 0) {
       // the same patch goes on: the next anchor is the closest unused neighbor that still fits (no step round the color wheel yet)
@@ -292,7 +293,16 @@ async function hfVibeRiver(hk, rnd, skip, taste) {
     st.ref = [st.ref[0], st.ref[1] * ca - st.ref[2] * sa, st.ref[1] * sa + st.ref[2] * ca];
     const next = nb.map(x => x.i).filter(room).filter(i => fits(i, st, 0));
     next.sort((x, y) => (dE(x, st.ref) - hfBeauty(x) * 30) - (dE(y, st.ref) - hfBeauty(y) * 30));
-    if (!next.length) { const f = fresh(st); if (!f) break; Object.assign(st, f); continue; }
+    if (!next.length) {
+      // a bridge before a jump (David, 2026-10-26: "the transition could be more gradual"): the neighbors of the last few anchors, whichever fit and turn up most often,
+      // so the next stretch grows out of this one instead of landing somewhere unrelated
+      const recent = (st.trail = st.trail || []).slice(-4);
+      const lists = await hfBudget(Promise.all(recent.map(a => vibeNeighbors(a, 60))), 2500, []), cnt = new Map();
+      lists.forEach(l => l.forEach(x => { if (room(x.i) && fits(x.i, st, 0)) cnt.set(x.i, (cnt.get(x.i) || 0) + x.sim + .2); }));
+      const bridge = [...cnt.entries()].sort((a, b) => (b[1] + hfBeauty(b[0])) - (a[1] + hfBeauty(a[0])))[0];
+      if (bridge) { st.A = bridge[0]; st.year = yr(bridge[0]) ?? st.year; if (ap > .35) st.co = cof(bridge[0]) || st.co; st.trail.push(bridge[0]); continue; }
+      const f = fresh(st); if (!f) break; Object.assign(st, f); continue;
+    }
     st.A = next[0]; st.year = yr(next[0]) ?? st.year; if (ap > .35) st.co = cof(next[0]) || st.co;
   }
   return out;
