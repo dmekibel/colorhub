@@ -708,3 +708,17 @@ html.desk .fd-bar .fd-quick{padding-left:var(--dk-L,var(--g));padding-right:var(
 .gl-ghost-band{display:flex;justify-content:center;width:calc(100% + 2 * var(--g));margin:0 calc(-1 * var(--g));background:var(--c);flex:none}
 .gl-ghost-t{font:400 clamp(30px,8.8vw,40px)/1.04 var(--serif);color:var(--ink);align-self:flex-start;margin:22px 0 8px;min-height:1.04em}
 .gl-ghost-a{font:400 17px/1.3 var(--sans);color:var(--soft);align-self:flex-start;margin:0}
+
+/* David, 2026-10-26: the painting page on a phone: heart at the picture's top-left, the bar's dots at the far right, the title block tight (no empty band above the chips) */
+.gl-corner-heart{position:absolute;top:10px;left:10px;z-index:4;width:40px;height:40px;display:grid;place-items:center;border-radius:50%;background:rgba(14,13,11,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#ECE8DF;border:0}
+.gl-corner-heart.on{color:#E8787A}
+.gl-corner-heart svg{width:21px;height:21px}
+html:not(.desk) .gl-page .art-top>[data-fva]{display:none}
+.art-top .tl-more{margin-left:auto;order:9}
+.art-top .fd-mapb.in-top{order:8}
+.gl-why:empty{display:none}
+html:not(.desk) .gl-id{margin-top:8px}
+html:not(.desk) .gl-id .p-title{margin-top:0}
+html:not(.desk) .gl-id .p-dek{margin-top:0;line-height:1.3}
+html:not(.desk) .gl-id-src{margin-top:2px}
+html:not(.desk) .gl-why{margin-top:6px}

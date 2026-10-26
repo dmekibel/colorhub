@@ -37,7 +37,7 @@
 // Third field = where it makes sense: omitted = every map, "multi" = only when the map holds many painters (By painter and
 // Families are one block when it holds one), "solo" = only when the map is scoped to ONE painter (David, 2026-10-20: the
 // painter page's map). One list, filtered by pmArrFor(); the sheet is never forked.
-const PM_ARR = [["color", "By color"], ["time", "By time"], ["painter", "By painter", "multi"], ["families", "Families", "multi"], ["museum", "By museum", "solo"], ["subject", "By subject"], ["look", "By vibe"], ["tones", "Tones"], ["rings", "Rings"], ["spiral", "Spiral"]];
+const PM_ARR = [["color", "By color"], ["time", "By time"], ["painter", "By painter", "multi"], ["families", "Families", "multi"], ["museum", "By museum", "solo"], ["subject", "By subject"], ["look", "By look"], ["tones", "Tones"], ["rings", "Rings"], ["spiral", "Spiral"]];
 const pmSolo = s => !!(s && s.f && s.f.painterSet && s.f.painterSet.length === 1);
 const pmArrFor = s => PM_ARR.filter(a => (!a[2] || (a[2] === "solo") === pmSolo(s)) && (a[0] !== "subject" || (s.col || "paintings") === "paintings") && (a[0] !== "look" || pmLookShown(s)));
 // "By look" may still be unknown (a shared address opens it before look.json has answered): keep it until it has said no
@@ -53,7 +53,7 @@ const PM_WHY = {
   tones: "An island per mood: vivid, light, muted, dark",
   rings: "Concentric rings: the nearer the middle, the closer the colors",
   spiral: "A continuous spiral, nearest first, no seams between rings",
-  look: "By vibe, from an image model. Paintings with a similar vibe sit together. The picture model's view of vibe: subject, style, mood and color.",
+  look: "By look, from an image model. Paintings with a similar look sit together. The picture model's view of look: subject, style, mood and color.",
 };
 // David, 2026-10-09: "Place by" -- which of a painting's own colors decides WHERE it sits, for the two
 // arrangements position actually comes from a color (color, time). The default (and the only option before this)
@@ -2175,7 +2175,7 @@ function pmMount(el, s, F) {
     cap.querySelector("[data-pmct]").textContent = d ? d.t : " ";
     cap.querySelector("[data-pmcb]").textContent = by || (d && d.co) || "";
     let lt = cap.querySelector("[data-pmclook]");
-    if (s.arr === "look") { if (!lt) { lt = document.createElement("small"); lt.className = "pmx-look-tag"; lt.dataset.pmclook = ""; cap.querySelector(".pmx-cap-main").appendChild(lt); } lt.textContent = "By vibe, from an image model"; } else if (lt) lt.remove();
+    if (s.arr === "look") { if (!lt) { lt = document.createElement("small"); lt.className = "pmx-look-tag"; lt.dataset.pmclook = ""; cap.querySelector(".pmx-cap-main").appendChild(lt); } lt.textContent = "By look, from an image model"; } else if (lt) lt.remove();
     cap.style.setProperty("--c", pmHex(i, F));
     requestAnimationFrame(fitCap);
     paintHeart(i, d);
@@ -2205,12 +2205,12 @@ function pmMount(el, s, F) {
     s[{ lay: "lkl", sp: "lks", col: "lkc", lab: "lkb" }[k]] = nv;
     pmLkSave(Object.assign(pmLkSaved(), { [k]: nv }));
     const go = () => { if (dead) return; rebuild(); if (!live && redraw) redraw(); };
-    if (pmLookReady(s)) go(); else pmLookEnsure(F, s).then(ok => { if (!ok) toast("The vibe map didn't load", { low: true }); go(); });
+    if (pmLookReady(s)) go(); else pmLookEnsure(F, s).then(ok => { if (!ok) toast("The look map didn't load", { low: true }); go(); });
   }
-  // First time By vibe is chosen, one honest line about where the order comes from (never claimed as fact)
+  // First time By look is chosen, one honest line about where the order comes from (never claimed as fact)
   function lookHint() {
     let seen = 0; try { seen = localStorage.getItem("pm-look-seen"); localStorage.setItem("pm-look-seen", "1"); } catch (e) {}
-    if (!seen) toast("The picture model's view of vibe: subject, style, mood and color. Paintings it finds alike sit together; island names come from what each one holds.", { low: true, ms: 5200 });
+    if (!seen) toast("The picture model's view of look: subject, style, mood and color. Paintings it finds alike sit together; island names come from what each one holds.", { low: true, ms: 5200 });
   }
   function showCard() { if (!cardOpen) { cardOpen = true; caption(); } }
   function hideCard() { if (cardOpen) { cardOpen = false; caption(); } }
@@ -3498,7 +3498,7 @@ function pmMount(el, s, F) {
       });
       qa$("[data-pmarr]").forEach(b => b.onclick = () => {
         const id = b.dataset.pmarr; buzz(5);
-        if (id === "look" && !pmLookReady(s)) { pmLookEnsure(F, s).then(ok => { if (dead) return; if (!ok) { toast("The vibe map didn't load", { low: true }); renderArrange(); return; } s.arr = id; s.seed = -1; lookHint(); rebuild(); renderArrange(); }); return; }
+        if (id === "look" && !pmLookReady(s)) { pmLookEnsure(F, s).then(ok => { if (dead) return; if (!ok) { toast("The look map didn't load", { low: true }); renderArrange(); return; } s.arr = id; s.seed = -1; lookHint(); rebuild(); renderArrange(); }); return; }
         if (id === "look") lookHint();
         if (id === "subject" && !SUBJ) { loadSubjects().then(() => { if (dead) return; s.arr = id; s.seed = -1; rebuild(); renderArrange(); }).catch(() => toast("Subjects didn't load")); return; }
         if (PM_NEEDS_SEED.has(id)) { if (mid < 0) return; s.seed = mid; s.arr = id; }

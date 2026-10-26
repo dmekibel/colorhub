@@ -4635,7 +4635,7 @@ scenario("paintings", "the pinned bar sits under the safe area and hides on scro
 });
 scenario("paintings", "Keep exploring: a feed at the bottom of a painting page, four chips, closest palette first, 24 at a time, a bounded number of live pictures", async t => {
   await feedOpen(t, 12);
-  t.expect(t.$$(".fd-chip").map(b => t.text(b).replace(/ ·.*/, "")).join() === "Overview,Color,Vibe,Painter,Era,Place", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}", not Overview, Color, Vibe, Painter, Era, Place`);
+  t.expect(t.$$(".fd-chip").map(b => t.text(b).replace(/ ·.*/, "")).join() === "Overview,Color,Look,Painter,Era,Place", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}", not Overview, Color, Vibe, Painter, Era, Place`);
   t.expect(/^Color/.test(t.text(".fd-chip.on")) && !/·/.test(t.text(".fd-chip.on")), `Color is not on by default: "${t.text(".fd-chip.on")}"`);
   const caps = feedCaps(t), pct = caps.map(c => +((c.match(/(\d+)%/) || [])[1] || NaN));
   t.expect(t.$$(".fd-tile[data-fk]").length >= 6 && caps.every(c => !c), `tiles carry only painter and year, no caption line: ${caps.slice(0, 4)}`);
@@ -4721,9 +4721,9 @@ scenario("paintings", "Keep exploring: a tile opens its painting with the chip s
   t.expect(t.$("[data-gl-about]").hidden, "Back should land on the Era tab, with the Overview hidden");
 });
 // painting A -> a tile on its Vibe tab (B) -> a tile on B's Color tab (C), then Back three times: each landing is the same page, the same tab, the same tile
-scenario("paintings", "trail: painting then a Vibe tile then a Color tile then Back to each page with its tab and exact tile", async t => {
+scenario("paintings", "trail: painting then a Look tile then a Color tile then Back to each page with its tab and exact tile", async t => {
   await feedOpen(t, 12, "vibe");
-  await t.waitFor(() => t.text(".fd-chip.on") === "Vibe" && !t.$(".fd-tile.sk") && t.$(".fd-tile[data-fk]") ? true : null, 15000, "the Vibe feed");
+  await t.waitFor(() => t.text(".fd-chip.on") === "Look" && !t.$(".fd-tile.sk") && t.$(".fd-tile[data-fk]") ? true : null, 15000, "the Look feed");
   const hashA = TRL.hash(t);
   const pickTile = async () => {
     await t.sleep(1500);
@@ -4756,7 +4756,7 @@ scenario("paintings", "trail: painting then a Vibe tile then a Color tile then B
   await TRL.atHash(t, new RegExp("^" + hashA.replace(/[#/]/g, "\\$&") + "$"), "back on A");
   await t.waitFor(() => t.$(`.fd-tile[data-fk='${a.k}']`), 15000, "A's tile");
   await t.sleep(2000);
-  t.expect(t.text(".fd-chip.on") === "Vibe", `Back to A lost its tab: "${t.text(".fd-chip.on")}"`);
+  t.expect(t.text(".fd-chip.on") === "Look", `Back to A lost its tab: "${t.text(".fd-chip.on")}"`);
   t.expect(Math.abs(t.$(`.fd-tile[data-fk='${a.k}']`).getBoundingClientRect().top - a.y) <= 6, "Back to A: the tile moved");
 });
 scenario("paintings", "Keep exploring: the feed never ends and a picture that fails to load is a designed state not a hole", async t => {
@@ -4785,7 +4785,7 @@ scenario("paintings", "a painting page: picture, title, then the chip row right 
   t.expect(t.text(".fd-chip.on") === "Overview" && !t.$("[data-gl-about]").hidden, "a cold open should start on Overview with the page's sections showing");
   for (const sel of ["[data-glswatches]", "[data-glroles]", "[data-glsim]", "[data-glquiz]", ".srcs"]) t.expect(t.$("[data-gl-about] " + sel), "Overview lost " + sel);
   await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre)") ? true : null, 25000, "the real chip row");
-  t.expect(t.$$(".fd-chip").map(b => t.text(b)).join() === "Overview,Color,Vibe,Painter,Era,Place", "the chips are not Overview, Color, Vibe, Painter, Era, Place");
+  t.expect(t.$$(".fd-chip").map(b => t.text(b)).join() === "Overview,Color,Look,Painter,Era,Place", "the chips are not Overview, Color, Vibe, Painter, Era, Place");
   t.expect(!t.$("[data-glfeed] .fd-tile"), "the feed's tiles show while Overview is on");
 });
 scenario("pages", "a color page puts the chip row (About, Paintings, ...) right under the cover on first paint, with no Explore pill, and About shows the article", async t => {
@@ -4874,10 +4874,10 @@ async function pinchRun(t, sel, d0, d1, steps) {
 scenario("paintings", "Keep exploring: a Vibe chip re-ranks by the picture model and says plainly when there is none", async t => {
   await feedOpen(t, 12, "color");
   const chips = t.$$(".fd-chip").map(e => t.text(e));
-  t.expect(chips.map(c => c.replace(/ ·.*/, "")).join("|") === "Overview|Color|Vibe|Painter|Era|Place", "chips are not Overview, Color, Vibe, Painter, Era, Place: " + chips.join("|"));
+  t.expect(chips.map(c => c.replace(/ ·.*/, "")).join("|") === "Overview|Color|Look|Painter|Era|Place", "chips are not Overview, Color, Vibe, Painter, Era, Place: " + chips.join("|"));
   t.ev(`try { localStorage.removeItem("colorhub-vibe-explained"); } catch (e) {} 1`);
   await t.click(".fd-chip[data-fc='vibe']", { wait: 300 });
-  await t.waitFor(() => t.text(".fd-chip.on") === "Vibe" && !t.$(".fd-tile.sk") && t.$(".fd-tile[data-fk]") ? true : null, 10000, "the Vibe feed");
+  await t.waitFor(() => t.text(".fd-chip.on") === "Look" && !t.$(".fd-tile.sk") && t.$(".fd-tile[data-fk]") ? true : null, 10000, "the Look feed");
   t.expect(/picture model finds them/.test(t.text(".fd-lead")), "no one-line Vibe explainer: " + t.text(".fd-lead"));
   const want = await t.ev("vibeNeighbors(12, 1).then(r => r[0].i)");
   const first = t.ev("(() => { const el = document.querySelector('.fd-tile[data-fk=\"0\"]'); return el ? el.getAttribute('aria-label') : ''; })()");
@@ -4889,9 +4889,9 @@ scenario("paintings", "Keep exploring: a Vibe chip re-ranks by the picture model
   await t.waitFor("[data-glfeed]", 15000, "feed host");
   t.ev("window.vibeNeighbors = () => Promise.resolve([]); 1");
   await feedPick(t, "color");
-  await t.waitFor(() => t.$(".fd-chip[data-fc='vibe'].dis") ? true : null, 8000, "the Vibe chip dimmed when the reader returns nothing");
+  await t.waitFor(() => t.$(".fd-chip[data-fc='vibe'].dis") ? true : null, 8000, "the Look chip dimmed when the reader returns nothing");
   t.ev(`document.querySelector(".fd-chip[data-fc='vibe']").click(); 1`); await t.sleep(300);
-  t.expect(/picture model/.test(t.text(".fd-lead")) && t.$(".fd-lead.why"), "a dim Vibe chip gives no reason");
+  t.expect(/picture model/.test(t.text(".fd-lead")) && t.$(".fd-lead.why"), "a dim Look chip gives no reason");
 });
 scenario("paintings", "Keep exploring: a pinch zooms the feed live and settles on a column count and remembers it", async t => {
   await feedOpen(t, 12, "color");
@@ -9063,20 +9063,20 @@ scenario("paintmap", "a color nothing holds that closely says so and offers Loos
   t.expect(t.w.PM_CTRL.count > 0, "loosening the closeness never brought paintings back");
 });
 
-// ---- By vibe (David, 2026-10-24: "a map arranged by vibe"): data/gallery/look.bin from the CLIP image model -----------------------------
+// ---- By look (David, 2026-10-24: "a map arranged by vibe"): data/gallery/look.bin from the CLIP image model -----------------------------
 // Passes trivially when look.json is absent: the option is hidden then, which is the designed fallback.
-scenario("paintmap", "By vibe: the option appears, switching keeps the painting in the middle, a filter refills a compact grid with no voids", async t => {
+scenario("paintmap", "By look: the option appears, switching keeps the painting in the middle, a filter refills a compact grid with no voids", async t => {
   const i0 = await pmFocusOpen(t);
   const meta = await t.w.fetch("data/gallery/look.json").then(r => r.ok ? r.json() : null).catch(() => null);
-  if (!meta) { t.expect(true, "no look.json in this checkout: By vibe is hidden by design"); return; }
+  if (!meta) { t.expect(true, "no look.json in this checkout: By look is hidden by design"); return; }
   await t.click(".pmx-do", { wait: 400 });
-  await t.waitFor(".pmx-sheet [data-pmarr=\"look\"]", 6000, "the By vibe choice in Arrange");
+  await t.waitFor(".pmx-sheet [data-pmarr=\"look\"]", 6000, "the By look choice in Arrange");
   await t.click('.pmx-sheet [data-pmarr="look"]', { force: true, wait: 600 });
   await t.waitFor(() => t.w.PM_CTRL.spec.arr === "look" && t.w.PM_CTRL.lay().arr === "look", 15000, "the look layout (look.bin) to load and lay out");
   t.expect(/image model/i.test(t.text(".pmx-sheet .hm-arr-sub")), "the Arrange line doesn't say it comes from an image model");
-  t.expect(t.w.PM_CTRL.center === i0, `By vibe moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  t.expect(t.w.PM_CTRL.center === i0, `By look moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
   const full = t.ev("PM_CTRL.lay().n");
-  t.expect(full === meta.n || full === meta.n - t.ev("(GAL.hidIdx || []).length"), `By vibe should hold every painting (${full} of ${meta.n})`);
+  t.expect(full === meta.n || full === meta.n - t.ev("(GAL.hidIdx || []).length"), `By look should hold every painting (${full} of ${meta.n})`);
   // the Even grid layout (a setting; Islands is the default): a filter refills it with no voids
   await t.click('.pmx-sheet [data-pmlk="lay"][data-v="grid"]', { force: true, wait: 600 });
   await t.waitFor(() => !t.w.PM_CTRL.lay().islands && t.w.PM_CTRL.lay().arr === "look", 15000, "the Even grid layout (look.bin) to load");
@@ -9084,22 +9084,22 @@ scenario("paintmap", "By vibe: the option appears, switching keeps the painting 
   const y = t.ev(`GAL.year[${i0}]`);
   t.ev(`PM_CTRL.spec.f.y0 = ${y - 15}; PM_CTRL.spec.f.y1 = ${y + 15}; PM_CTRL.rebuild()`);
   const lay = t.ev("(() => { const l = PM_CTRL.lay(); return { n: l.n, GW: l.GW, GH: l.GH, arr: l.arr }; })()");
-  t.expect(lay.arr === "look" && lay.n > 50 && lay.n < full, `the filter didn't narrow By vibe (${JSON.stringify(lay)})`);
-  t.expect(lay.GW * lay.GH - lay.n < lay.GW, `a filtered By vibe map has voids: ${lay.GW}x${lay.GH} cells for ${lay.n} paintings`);
-  t.expect(t.w.PM_CTRL.center === i0, `a filter moved you off your painting in By vibe: ${i0} -> ${t.w.PM_CTRL.center}`);
+  t.expect(lay.arr === "look" && lay.n > 50 && lay.n < full, `the filter didn't narrow By look (${JSON.stringify(lay)})`);
+  t.expect(lay.GW * lay.GH - lay.n < lay.GW, `a filtered By look map has voids: ${lay.GW}x${lay.GH} cells for ${lay.n} paintings`);
+  t.expect(t.w.PM_CTRL.center === i0, `a filter moved you off your painting in By look: ${i0} -> ${t.w.PM_CTRL.center}`);
   t.ev("PM_CTRL.spec.f.y0 = null; PM_CTRL.spec.f.y1 = null; PM_CTRL.rebuild()");
   await t.click('.pmx-sheet [data-pmarr="color"]', { force: true, wait: 700 });
-  t.expect(t.w.PM_CTRL.center === i0, `leaving By vibe moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  t.expect(t.w.PM_CTRL.center === i0, `leaving By look moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
 });
 
-// By vibe Islands (David, 2026-10-24: "maybe each thing should be an island"): natural clusters laid out apart with empty space between.
-scenario("paintmap", "By vibe islands: every painting once and apart with space between; names never overlap; settings persist; focus is kept; a filter compacts", async t => {
+// By look Islands (David, 2026-10-24: "maybe each thing should be an island"): natural clusters laid out apart with empty space between.
+scenario("paintmap", "By look islands: every painting once and apart with space between; names never overlap; settings persist; focus is kept; a filter compacts", async t => {
   const i0 = await pmFocusOpen(t);
   const meta = await t.w.fetch("data/gallery/look.json").then(r => r.ok ? r.json() : null).catch(() => null);
   if (!meta || !meta.islands) { t.expect(true, "no islands table in this checkout: Islands is hidden by design"); return; }
   t.ev("try { localStorage.removeItem('pm-look-opts'); } catch (e) {}");
   await t.click(".pmx-do", { wait: 400 });
-  await t.waitFor(".pmx-sheet [data-pmarr=\"look\"]", 6000, "the By vibe choice in Arrange");
+  await t.waitFor(".pmx-sheet [data-pmarr=\"look\"]", 6000, "the By look choice in Arrange");
   await t.click('.pmx-sheet [data-pmarr="look"]', { force: true, wait: 600 });
   await t.waitFor(() => t.w.PM_CTRL.spec.arr === "look" && (t.w.PM_CTRL.lay().islands || []).length > 10, 20000, "the islands layout to load");
   t.expect(t.w.PM_CTRL.center === i0, `Islands moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
@@ -9300,7 +9300,7 @@ scenario("pages", "Subjects: the list draws a card per island with cover photos,
   t.expect(t.text(".sbi-one h1") === name, `the page shows "${t.text(".sbi-one h1")}", expected "${name}"`);
   t.expect(/\/museum\/art\/subject\//.test(t.w.location.hash), `the island's address, got ${t.w.location.hash}`);
   t.expect(t.$(".sbi-one [data-pmap]"), "no Map button");
-  t.expect(/arr=look/.test(t.$(".sbi-one [data-pmap]").dataset.pmap), "the Map button does not open By vibe");
+  t.expect(/arr=look/.test(t.$(".sbi-one [data-pmap]").dataset.pmap), "the Map button does not open By look");
   await t.click("[data-back]", { wait: 600 });
   await t.waitFor(() => t.$$(".sbi-card[data-sbi-card]").length >= 30 && !t.$(".sbi-one"), 8000, "Back to the Subjects list");
 });

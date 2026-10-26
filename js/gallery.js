@@ -1625,6 +1625,18 @@ function glPage(i, d, fromHex, tol) {
     <details class="gl-quiz-fold"><summary>Test yourself</summary><div class="gl-quiz" data-glquiz></div></details>
     </div></section></div></div>
   `, "article gl-page");
+  // David, 2026-10-26: on a phone the heart sits at the picture's top-left corner (the bar's heart stays for the code that finds it, and is hidden there);
+  // the corner heart passes its tap to the bar's and mirrors its on/off
+  if (!document.documentElement.classList.contains("desk")) {
+    const bh = el.querySelector(".art-top [data-fva]"), hs = el.querySelector(".gl-hero>span");
+    if (bh && hs) {
+      const ch = document.createElement("button"); ch.type = "button"; ch.className = "gl-corner-heart"; ch.setAttribute("data-glch", "");
+      const sync = () => { ch.innerHTML = bh.innerHTML; ch.classList.toggle("on", bh.classList.contains("on")); ch.setAttribute("aria-pressed", bh.getAttribute("aria-pressed") || "false"); ch.setAttribute("aria-label", bh.getAttribute("aria-label") || "Keep this painting"); };
+      sync(); ch.onclick = e => { e.stopPropagation(); bh.click(); };
+      new MutationObserver(sync).observe(bh, { attributes: true, childList: true, subtree: true });
+      hs.appendChild(ch);
+    }
+  }
   const route = "#/gallery/" + i, heroSpan = el.querySelector(".gl-hero > span");
   // David, 2026-10-25: the picture, its title and "painter · year" are all that sits between the picture and the chip row. Everything else about
   // the painting (where it hangs, country, movement, how it compares) opens the Overview, and the picture is sized from the screen so the

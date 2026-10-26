@@ -172,7 +172,10 @@ function tfSkeleton(k) {
 }
 // bring the chosen chip fully into the chip row (the row scrolls sideways on a narrow phone)
 function tfChipInView(row, b) { const l = b.offsetLeft - 20, r = b.offsetLeft + b.offsetWidth + 20; if (l < row.scrollLeft) row.scrollTo({ left: Math.max(0, l), behavior: "smooth" }); else if (r > row.scrollLeft + row.clientWidth) row.scrollTo({ left: r - row.clientWidth, behavior: "smooth" }); }
-const tfColCount =w => document.documentElement.classList.contains("desk") ? (w >= 1240 ? 5 : w >= 900 ? 4 : 3) : w >= 700 ? 3 : 2;
+const tfWide = () => document.documentElement.classList.contains("desk") || innerWidth >= 700;
+const tfMaxCols = () => (tfWide() ? 10 : 6);
+// how many across: the last pinch's choice (kept per device, one for a phone and one for a wide screen), else about one per 260 px (a phone: two)
+const tfColCount = w => { const z = hfS().zc && hfS().zc[tfWide() ? "w" : "p"]; if (z) return Math.max(1, Math.min(tfMaxCols(), z)); return tfWide() ? Math.max(3, Math.min(8, Math.round(w / 260))) : 2; };
 
 let TF_PRE = null;   // the day's presets (movement, painter, a painting to be "like", a color): js/homefeed.js hfPresets
 const TF_HEART = icon("heart", 18), TF_HEART_ON = icon("heartOn", 18);
@@ -203,7 +206,7 @@ function todayFeed() {
     let html = "";
     if (h.kind === "f") html = "";
     else if (h.kind === "m" || h.kind === "p") html = `<h2 class="tf-lh-t">${esc(h.name)}</h2><span class="tf-lh-n">${res.total ? res.total.toLocaleString("en-US") + " paintings" : ""}</span>${fol(h.kind, h.name)}${h.kind === "p" ? `<button type="button" class="tf-mini" data-tf-order>${hfS().pOrder === "old" ? "Oldest first" : "Shuffled"}</button>` : ""}`;
-    else if (h.kind === "l") html = `<span class="tf-seed" data-tf-seed></span><div class="tf-lh-x"><h2 class="tf-lh-t" data-tf-seedt>Like this one</h2><span class="tf-lh-n" data-tf-seedn></span></div><div class="tf-seg" role="group" aria-label="Match by"><button type="button" class="${h.by === "vibe" ? "on" : ""}" data-tf-by="vibe">By subject</button><button type="button" class="${h.by === "color" ? "on" : ""}" data-tf-by="color">By color</button></div><button type="button" class="tf-mini" data-tf-another="like">Another</button>`;
+    else if (h.kind === "l") html = `<span class="tf-seed" data-tf-seed></span><div class="tf-lh-x"><h2 class="tf-lh-t" data-tf-seedt>Like this one</h2><span class="tf-lh-n" data-tf-seedn></span></div><div class="tf-seg" role="group" aria-label="Match by"><button type="button" class="${h.by === "vibe" ? "on" : ""}" data-tf-by="vibe">By look</button><button type="button" class="${h.by === "color" ? "on" : ""}" data-tf-by="color">By color</button></div><button type="button" class="tf-mini" data-tf-another="like">Another</button>`;
     else if (h.kind === "c") { const row = TODAY_TABLE.find(x => x[2] === h.hex); let nm = row ? row[1] : h.hex; if (!row) { try { nm = nameOf(h.hex).n; } catch (e) {} } html = `<span class="tf-sw" style="--c:${esc(h.hex)}"></span><h2 class="tf-lh-t">Near ${esc(nm.toLowerCase())}</h2><button type="button" class="tf-mini" data-tf-another="color">Another</button>`; }
     lh.innerHTML = html; lh.hidden = !html; lh.dataset.kind = h.kind;
     if (h.kind === "l") glShard(Math.floor(h.seed / GAL.shard)).then(() => { const d = glDetailNow(h.seed); if (!d || !lh.isConnected) return; const t = lh.querySelector("[data-tf-seedt]"), n = lh.querySelector("[data-tf-seedn]"), sd = lh.querySelector("[data-tf-seed]"); if (t) t.textContent = "Like " + d.t; if (n) n.textContent = [d.a, glYear(h.seed)].filter(Boolean).join(" · "); if (sd && d.img) { const im = new Image(); im.alt = ""; im.onload = () => sd.appendChild(im); im.src = d.img; } if (pre && pre.li === h.seed && !pre.likeTitle) { pre.likeTitle = hfShortTitle(d.t); drawLenses(); } }).catch(() => {});
@@ -310,35 +313,39 @@ function tfPullWire(scr, host, onRefresh, stop) {
 // the Home settings (David, 2026-10-26): painter and year are off by default so the paintings take the screen; the river can be turned off for a plain shuffle
 // the half-height panel (the same look as the Explorer's settings): the page stays visible above it, so you see what a slider does as you move it
 function tfHalf(sh) {
-  sh.classList.add(document.documentElement.classList.contains("desk") ? "tf-pop" : "fs-half");
+  const desk = document.documentElement.classList.contains("desk");
+  sh.classList.add(desk ? "tf-pop" : "fs-half");
   const sc = sh.previousElementSibling; if (sc && sc.classList.contains("scrim")) sc.classList.add("hm-scrim-clear");
-  const x = document.createElement("button"); x.type = "button"; x.className = "iconq fs-x"; x.setAttribute("aria-label", "Close"); x.innerHTML = ICON.x;
-  x.onclick = () => { buzz(4); const c = document.querySelector(".scrim.hm-scrim-clear"); if (c) c.dispatchEvent(new PointerEvent("pointerdown")); };
+  const close = () => { const c = document.querySelector(".scrim.hm-scrim-clear"); if (c) c.dispatchEvent(new PointerEvent("pointerdown")); };
+  const x = document.createElement("button"); x.type = "button"; x.className = "tf-x"; x.setAttribute("aria-label", "Close"); x.innerHTML = ICON.x;
+  x.onclick = () => { buzz(4); close(); };
   sh.querySelector(".fs-head").appendChild(x);
+  // a tap anywhere outside the card closes it (the page behind stays live, so the scrim cannot do this)
+  const away = e => { if (!sh.isConnected) { removeEventListener("pointerdown", away, true); return; } if (sh.contains(e.target) || e.target.closest("[data-tf-tune]")) return; removeEventListener("pointerdown", away, true); close(); };
+  setTimeout(() => addEventListener("pointerdown", away, true), 60);
 }
 function tfSettings(onChange) {
   const sw = (k, label, on) => `<div class="fs-c fs-tg"><p>${label}</p><button type="button" class="fs-switch" role="switch" aria-checked="${on}" data-tfs="${k}"><i></i></button></div>`;
   const word = v => (v > 80 ? "Almost the same" : v > 55 ? "Steady" : v > 30 ? "Varied" : "Exploring");
   const tword = v => (v > 80 ? "The same few years" : v > 55 ? "The same era" : v > 30 ? "A few eras" : "Any time");
-  const rng = (k, label, v, ends) => `<div class="fs-c"><div class="fs-row"><p>${label}</p><b data-tfout="${k}">${(k === "alikeT" ? tword : word)(v)}</b></div><input type="range" min="0" max="100" step="1" value="${v}" style="--p:${v}%" data-tfal="${k}" aria-label="${label}"></div>`;
-  const c = Math.round(hfAlikeC() * 100), v = Math.round(hfAlikeV() * 100), split = c !== v;
-  const { sh } = sheet(`<div class="fs-sheet"><div class="fs-head"><h3>Home</h3></div><div class="fs-scroll">${sw("caps", "Show painter and year", !!hfS().caps)}${sw("river", "Flow by color", hfRiverOn())}
-    <div data-tfalikebox${hfRiverOn() ? "" : " hidden"}><div data-tfone${split ? " hidden" : ""}>${rng("both", "How alike the river stays", c)}</div><div data-tftwo${split ? "" : " hidden"}>${rng("alikeC", "Color", c)}${rng("alikeV", "Subject", v)}${rng("alikeT", "Time", Math.round(hfAlikeT() * 100))}</div>
-    <button type="button" class="tf-mini tf-split" data-tfsplit>${split ? "One slider for both" : "Color and subject separately"}</button></div></div></div>`, { lock: false });
+  const pword = v => (v > 80 ? "The same country" : v > 55 ? "Mostly the same" : v > 30 ? "A few countries" : "Anywhere");
+  const wordOf = k => (k === "alikeT" ? tword : k === "alikeP" ? pword : word);
+  const rng = (k, label, v) => `<div class="fs-c"><div class="fs-row"><p>${label}</p><b data-tfout="${k}">${wordOf(k)(v)}</b></div><input type="range" min="0" max="100" step="1" value="${v}" style="--p:${v}%" data-tfal="${k}" aria-label="${label}"></div>`;
+  const c = Math.round(hfAlikeC() * 100), v = Math.round(hfAlikeV() * 100), t = Math.round(hfAlikeT() * 100), pl = Math.round(hfAlikeP() * 100), all = Math.round((c + v + pl) / 3);
+  const { sh } = sheet(`<div class="fs-sheet"><div class="fs-head"><h3>Settings</h3></div><div class="fs-scroll">${sw("caps", "Show painter and year", !!hfS().caps)}${sw("river", "Flow by color", hfRiverOn())}
+    <div data-tfalikebox${hfRiverOn() ? "" : " hidden"}>${rng("both", "How alike overall", all)}${rng("alikeC", "Color", c)}${rng("alikeV", "Look", v)}${rng("alikeT", "Time", t)}${rng("alikeP", "Place", pl)}</div></div></div>`, { lock: false });
   tfHalf(sh);
-  sh.addEventListener("input", e => { const r = e.target.closest("[data-tfal]"); if (!r) return; r.style.setProperty("--p", r.value + "%"); const o = sh.querySelector(`[data-tfout="${r.dataset.tfal}"]`); if (o) o.textContent = (r.dataset.tfal === "alikeT" ? tword : word)(+r.value); });
+  const paint = (k, n) => { const r = sh.querySelector(`[data-tfal="${k}"]`); if (!r) return; r.value = n; r.style.setProperty("--p", n + "%"); const o = sh.querySelector(`[data-tfout="${k}"]`); if (o) o.textContent = wordOf(k)(n); };
+  sh.addEventListener("input", e => {
+    const r = e.target.closest("[data-tfal]"); if (!r) return; const k = r.dataset.tfal, n = +r.value; paint(k, n);
+    if (k === "both") ["alikeC", "alikeV", "alikeP"].forEach(z => paint(z, n));
+  });
   sh.addEventListener("change", e => {
     const r = e.target.closest("[data-tfal]"); if (!r) return; const st = hfS(), n = +r.value;
-    if (r.dataset.tfal === "both") { st.alikeC = n; st.alikeV = n; } else st[r.dataset.tfal] = n;
+    if (r.dataset.tfal === "both") { st.alikeC = n; st.alikeV = n; st.alikeP = n; } else st[r.dataset.tfal] = n;
     save(); buzz(4); onChange("alike");
   });
   sh.addEventListener("click", e => {
-    if (e.target.closest("[data-tfsplit]")) {
-      const b = e.target.closest("[data-tfsplit]"), one = sh.querySelector("[data-tfone]"), two = sh.querySelector("[data-tftwo]"), toTwo = one && !one.hidden;
-      if (toTwo) { one.hidden = true; two.hidden = false; b.textContent = "One slider for both"; }
-      else { const st = hfS(), a = Math.round((hfAlikeC() + hfAlikeV()) * 50); st.alikeC = a; st.alikeV = a; save(); one.hidden = false; two.hidden = true; b.textContent = "Color and subject separately"; const r = one.querySelector("[data-tfal]"); r.value = a; r.style.setProperty("--p", a + "%"); one.querySelector("[data-tfout]").textContent = word(a); onChange("alike"); }
-      buzz(4); return;
-    }
     const b = e.target.closest("[data-tfs]"); if (!b) return;
     const k = b.dataset.tfs, st = hfS(); st[k === "river" ? "river" : "caps"] = k === "river" ? !hfRiverOn() : !st.caps; save();
     b.setAttribute("aria-checked", k === "river" ? hfRiverOn() : !!st.caps); buzz(4);
@@ -388,6 +395,7 @@ function tfPaint(scr, host, st, f, restore, stop, ov) {
       const node = tpl.content.firstElementChild; if (!node) continue;
       let s = cols[0]; for (const c of cols) if (c.offsetHeight < s.offsetHeight) s = c;
       if (n < 10) node.dataset.first = "1";
+      node.dataset.ix = n;
       s.appendChild(node);
       if (list[n].t === "paint" && typeof fdMicroPaint === "function") fdMicroPaint(node.querySelector(".tf-im"), list[n].gi);
       if (ov && ov.seen && list[n].gi != null) hfMarkSeen(list[n].gi);
@@ -409,6 +417,21 @@ function tfPaint(scr, host, st, f, restore, stop, ov) {
     n = 0; add(upTo);
   };
   layout(shown);
+  // pinch (two fingers, a trackpad pinch, ctrl+wheel, + / -) changes how many across, the same module as the painting page (js/gridzoom.js)
+  if (typeof gzAttach === "function") {
+    const setCols = (c, fx, fy, toY) => {
+      c = Math.max(1, Math.min(tfMaxCols(), c)); if (c === count) return false;
+      const vy = fy == null ? innerHeight / 2 : fy, el = document.elementFromPoint(fx == null ? innerWidth / 2 : fx, vy), card = el && el.closest(".tf-card[data-ix]"), ix = card ? card.dataset.ix : null;
+      const y0 = card ? card.getBoundingClientRect().top : 0;
+      const sv = hfS(); sv.zc = sv.zc || {}; sv.zc[tfWide() ? "w" : "p"] = c; save();
+      const keep = n; layout(keep);
+      const k2 = ix != null ? wrap.querySelector(`.tf-card[data-ix="${ix}"]`) : null;
+      if (k2) tfScrollTo(scr, tfY(scr) + k2.getBoundingClientRect().top - (toY == null ? y0 : y0 + (toY - vy)));
+      return true;
+    };
+    const zoom = gzAttach(wrap, { cols: () => count, min: () => 1, max: tfMaxCols, colW: () => (wrap.firstChild ? wrap.firstChild.offsetWidth : 0), setCols });
+    live.push(() => zoom.destroy());
+  }
   // coming Back: the cards that were on screen are drawn again (heights are known up front), then the scroll goes where it was
   if (restore && st.y && st.y[fk]) { const y = st.y[fk]; tfScrollTo(scr, y); requestAnimationFrame(() => tfScrollTo(scr, y)); }
   if (typeof IntersectionObserver === "function") {

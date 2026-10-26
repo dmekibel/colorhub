@@ -203,3 +203,21 @@ html.desk .sheet.sheet.tf-pop .grab{display:none}
 .sheet.fs-half:has([data-tfalikebox]),.sheet.tf-pop{--tf-compact:1}
 .sheet [data-tfalikebox] .fs-c,.sheet [data-tfone] .fs-c,.sheet [data-tftwo] .fs-c{margin-bottom:10px}
 .sheet .tf-split{margin:0 0 8px}
+
+/* David, 2026-10-26: "not like Pinterest, with the rounded corner and heart; more like the painting page's Vibe grid": the grid runs edge to edge, tiles touch
+   with a hairline between them, square corners, no heart button (a double-tap likes; a liked tile keeps a small heart). The two rows above stay indented. */
+.tf-screen{--tfp:var(--g);--tf-gap:2px}
+@media (min-width:700px){.tf-screen{--tfp:32px}}
+html.desk .tf-screen{--tfp:var(--dkg,28px);--tf-gap:2px}
+html .room-sheet>.screen.tf-screen.tf-screen{padding-left:var(--tfp);padding-right:var(--tfp)}
+.tf-cols{margin-left:calc(-1 * var(--tfp));margin-right:calc(-1 * var(--tfp))}
+.tf-cols .tf-card,.tf-paint .tf-im,.tf-feed.nocaps .tf-paint .tf-im{border-radius:0}
+.tf-paint .tf-tx{padding:6px 10px 8px}
+.tf-heart{display:none}
+.tf-paint:not(.wait) .tf-heart.on{display:grid;top:auto;bottom:8px;right:8px;width:28px;height:28px;background:rgba(14,13,11,.55)}
+.tf-heart.on svg{width:15px;height:15px}
+
+/* settings card: title left, a plain close button right, centered on one line */
+.sheet .fs-head:has(.tf-x){align-items:center;justify-content:space-between}
+.tf-x{flex:none;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:var(--surface-2);color:var(--soft);border:0;margin-left:auto}
+.tf-x svg{width:16px;height:16px}

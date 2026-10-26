@@ -197,6 +197,7 @@ const hfRiverOn = () => hfS().river !== false;
 const hfAlikeOf = k => { const v = hfS()[k]; return Math.max(0, Math.min(1, (v == null ? (hfS().alike == null ? 60 : hfS().alike) : v) / 100)); };
 const hfAlikeC = () => hfAlikeOf("alikeC"), hfAlikeV = () => hfAlikeOf("alikeV");
 //   TIME:  high = the river stays within the same few years; low (the default is mostly low) = any time. It is its own slider, in the split view.
+const hfAlikeP = () => { const v = hfS().alikeP; return Math.max(0, Math.min(1, (v == null ? 15 : v) / 100)); };   // PLACE: high = the river stays in one country
 const hfAlikeT = () => { const v = hfS().alikeT; return Math.max(0, Math.min(1, (v == null ? 15 : v) / 100)); };
 // one batch of the river: `pool` is already the beautiful, weighted-shuffled candidates
 function hfRiverBatch(hk, pool, rnd) {
@@ -214,14 +215,14 @@ const HF_SESSION = Math.random().toString(36).slice(2, 8);   // new on every ope
 const HF_VR = new Map();
 const hfHueGap = (a, b) => { const d = Math.abs(a - b) % 360; return d > 180 ? 360 - d : d; };
 async function hfVibeRiver(hk, rnd, skip) {
-  const ac = hfAlikeC(), av = hfAlikeV(), at = hfAlikeT(), size = Math.round(3 + 15 * Math.pow(av, 1.2)), stepBase = 60 - 52 * ac, jump = Math.pow(1 - av, 2) * .55, den = 150 - 110 * ac, simW = .5 + av;
+  const ac = hfAlikeC(), av = hfAlikeV(), at = hfAlikeT(), ap = hfAlikeP(), cof = i => (HF_F && HF_F.country ? HF_F.country[i] : 0), size = Math.round(3 + 15 * Math.pow(av, 1.2)), stepBase = 60 - 52 * ac, jump = Math.pow(1 - av, 2) * .55, den = 150 - 110 * ac, simW = .5 + av;
   // TIME: how far (in years) the river may wander from where it is: a few years at one end, any time at the other (a hard limit only when it is tight)
   const win = 6 + 400 * Math.pow(1 - at, 2), yr = i => (GAL.year[i] === GL_UNDATED ? null : GAL.year[i]);
   const yGap = (i, y0) => { const y = yr(i); return y == null || y0 == null ? (at > .5 ? 400 : 0) : Math.abs(y - y0); };
   const fresh = y0 => {
     const an = hfPick(null, rnd, 120, skip, hfCut(.93)); if (!an.length) return null;
     const ok = at > .35 && y0 != null ? an.filter(i => yGap(i, y0) <= win) : an, pool = ok.length ? ok : an, A = pool[Math.floor(rnd() * Math.min(pool.length, 40))], d = hfDom(A);
-    return { A, hue: d ? d[0] : rnd() * 360, year: yr(A) };
+    return { A, hue: d ? d[0] : rnd() * 360, year: yr(A), co: cof(A) };
   };
   let st = HF_VR.get(hk);
   if (!st) {
@@ -233,9 +234,9 @@ async function hfVibeRiver(hk, rnd, skip) {
     if (out.length >= 24 && Date.now() - t0 > 2200) break;   // never stuck: what is ready is shown, the next batch carries on from here
     const nb = await hfBudget(vibeNeighbors(st.A, 60), patch ? 1500 : 2500, []);
     if (!nb.length) { if (!patch && !st.used.size) { HF_VR.delete(hk); return []; } break; }
-    const sim = new Map(nb.map(x => [x.i, x.sim])), near = i => at <= .35 || yGap(i, st.year) <= win;
+    const sim = new Map(nb.map(x => [x.i, x.sim])), near = i => (at <= .35 || yGap(i, st.year) <= win) && (ap <= .35 || !st.co || cof(i) === st.co);
     const cand = [st.A, ...nb.map(x => x.i)].filter(i => !st.used.has(i) && !skip.has(i) && !hfHid(i) && hfBeauty(i) >= bar && near(i));
-    const score = i => { const d = hfDom(i), g = d ? hfHueGap(d[0], st.hue) : 40; return hfBeauty(i) + (sim.get(i) || 1) * simW - g / den - yGap(i, st.year) / (win * 2 + 60); };
+    const score = i => { const d = hfDom(i), g = d ? hfHueGap(d[0], st.hue) : 40; return hfBeauty(i) + (sim.get(i) || 1) * simW - g / den - yGap(i, st.year) / (win * 2 + 60) + (st.co && cof(i) === st.co ? ap * .5 : 0); };
     cand.sort((x, y) => score(y) - score(x)).slice(0, size).forEach(i => { st.used.add(i); out.push(i); });
     // a jump to somewhere new (the more exploring, the more often), else the next anchor near where the hue is heading
     if (rnd() < jump) { const f = fresh(st.year); if (f) { Object.assign(st, f); continue; } }
@@ -243,7 +244,7 @@ async function hfVibeRiver(hk, rnd, skip) {
     const next = nb.map(x => x.i).filter(i => !st.used.has(i) && !skip.has(i) && !hfHid(i) && hfBeauty(i) >= bar && near(i));
     next.sort((x, y) => { const dx = hfDom(x), dy = hfDom(y), gx = dx ? hfHueGap(dx[0], st.hue) : 70, gy = dy ? hfHueGap(dy[0], st.hue) : 70; return (gx - hfBeauty(x) * 40) - (gy - hfBeauty(y) * 40); });
     if (!next.length) { const f = fresh(st.year); if (!f) break; Object.assign(st, f); continue; }
-    st.A = next[0]; st.year = yr(next[0]) ?? st.year;
+    st.A = next[0]; st.year = yr(next[0]) ?? st.year; if (ap > .35) st.co = cof(next[0]) || st.co;
   }
   return out;
 }

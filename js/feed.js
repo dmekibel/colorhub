@@ -29,12 +29,12 @@ const fdLiveMax = cols => cols <= 3 ? FD_LIVE_MAX : Math.min(FD_LIVE_CAP, FD_LIV
 const fdMaxCols = () => typeof glDesk === "function" && glDesk() ? 10 : 6;
 const fdGapsFor = (cols, W) => cols <= 2 ? [12, 18] : cols <= 4 ? (W >= 860 && cols <= 5 ? [16, 22] : [10, 16]) : cols <= 6 ? [6, 10] : [4, 8];
 const fdPctOnly = cap => { const m = /(\d+)%/.exec(cap || ""); return m ? m[1] + "%" : ""; };
-const FD_CHIPS = [["color", "Color"], ["vibe", "Vibe"], ["painter", "Painter"], ["era", "Era"], ["place", "Place"]];
+const FD_CHIPS = [["color", "Color"], ["vibe", "Look"], ["painter", "Painter"], ["era", "Era"], ["place", "Place"]];
 const FD_SHORT = { overall: "Overall", dominant: "Dominant", accents: "Accents", mood: "Mood", light: "Light", color: "One color", layout: "Layout" };
 const FD_METRIC_HELP = { overall: "The whole palette, matched by area", dominant: "Only the three biggest colors", accents: "The small vivid colors", mood: "Key, color, contrast and warmth together",
   light: "Where the darks and lights sit", color: "The most canvas near one of its colors", layout: "Where the colors sit in the picture" };
 const FD_LEAD = { color: m => ({ overall: "Closest palette first", dominant: "Closest big colors first", accents: "Closest accents first", mood: "Closest mood first", light: "Closest light first", color: "Most of that color first", layout: "Closest layout first" })[m],
-  vibe: () => fdVibeSeen() ? "Closest vibe first" : "Vibe: how alike the picture model finds them (subject, style, mood, color)",
+  vibe: () => fdVibeSeen() ? "Closest look first" : "Look: how alike the picture model finds them (subject, style, mood, color)",
   painter: () => "Same painter first, then painters kindred in place and era", era: () => "Nearest in year first", place: () => "Same country first, then the region, nearest in time" };
 let FD_ST = (() => { try { const s = JSON.parse(sessionStorage.getItem("colorhub-feed") || "null"); if (s && s.chip && s.chip !== "about") return { chip: s.chip, metric: s.metric || "overall", color: s.color | 0 }; } catch (e) {} return { chip: "color", metric: "overall", color: 0 }; })();
 const fdSaveState = () => { try { sessionStorage.setItem("colorhub-feed", JSON.stringify(FD_ST)); sessionStorage.setItem("colorhub-feed-color", JSON.stringify(FDC_ST)); } catch (e) {} };   // the painting feed's chip and the color feed's chip are remembered separately
@@ -158,13 +158,13 @@ async function fdRankPainter(ctx) {
   return fdPaged({ items }, fdCursor(sa, used), (s, j) => { const a = F.artist[j], nm = a ? F.meta.artists[a - 1][0] : "";
     return { j, cap: s < 400 ? "Also " + short : nm ? fdShortName(nm) : "", byTitle: s < 400 ? 1 : 0 }; });
 }
-// Vibe (js/vibe.js: the picture model's fingerprints, behind the map's By vibe): the painting's 60 nearest, closest first. The model gives a
+// Vibe (js/vibe.js: the picture model's fingerprints, behind the map's By look): the painting's 60 nearest, closest first. The model gives a
 // similarity, never a percentage worth showing, so a tile says only how close the band is. Nothing here is ranked by us.
 const FD_VIBE_KEY = "colorhub-vibe-explained";
 const fdVibeSeen = () => { try { return localStorage.getItem(FD_VIBE_KEY) === "1"; } catch (e) { return true; } };
 const fdVibeMark = () => { try { localStorage.setItem(FD_VIBE_KEY, "1"); } catch (e) {} };
 const fdVibeCap = sim => "";   // the tab already says it: a caption that repeats the tab's meaning is dropped (David, 2026-10-25)
-const FD_VIBE_NONE = "The picture model hasn't looked at this painting yet, so Vibe has nothing to compare.";
+const FD_VIBE_NONE = "The picture model hasn't looked at this painting yet, so Look has nothing to compare.";
 async function fdRankVibe(ctx) {
   const pg = typeof vibeNeighbors === "function" ? fdVibePager(ctx.i) : null, first = pg ? await pg(60) : [];
   const items = first.map(n => ({ j: n.j, cap: fdVibeCap(n.sim), sim: n.sim }));
