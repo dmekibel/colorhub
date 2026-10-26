@@ -185,7 +185,7 @@ html.desk .tf-bars .tf-kinds{padding-right:48px}
 .tf-bars .tf-kinds .tf-chip{padding:0 12px;font-size:14.5px}
 .tf-bars .tf-lenses{gap:6px}
 /* pull to refresh */
-.tf-pull{display:flex;align-items:center;justify-content:center;height:0;overflow:hidden;color:var(--soft)}
+.tf-pull{flex:none;display:flex;align-items:center;justify-content:center;height:0;overflow:hidden;color:var(--soft)}
 .tf-pull svg{opacity:0}
 .tf-pull.ready{color:var(--ink)}
 .tf-pull.busy svg{animation:tfSpin .7s linear infinite}

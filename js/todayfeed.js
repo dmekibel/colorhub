@@ -582,15 +582,28 @@ function tfPullWire(scr, host, onRefresh, stop) {
   ind.innerHTML = `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>`;
   host.parentNode.insertBefore(ind, host);
   let y0 = 0, pull = 0, on = false, spin = 0;
-  const set = (h, anim) => { ind.style.transition = anim ? "height .22s var(--ease)" : "none"; ind.style.height = h + "px"; const p = Math.min(1, h / 64); ind.firstChild.style.opacity = p; ind.firstChild.style.transform = `rotate(${h * 4}deg) scale(${.6 + .4 * p})`; ind.classList.toggle("ready", h >= 64); };
+  const set = (h, anim) => { ind.style.transition = anim ? "height .38s cubic-bezier(.2,.9,.25,1.15)" : "none"; ind.style.height = h + "px"; const p = Math.min(1, h / 64); ind.firstChild.style.opacity = p; ind.firstChild.style.transform = `rotate(${h * 4}deg) scale(${.6 + .4 * p})`; ind.classList.toggle("ready", h >= 64); };
   const down = e => { if (e.touches.length !== 1 || tfY(scr) > 0 || tfFilter() !== "paint") { on = false; return; } y0 = e.touches[0].clientY; pull = 0; on = true; };
   const move = e => {
     if (!on) return;
     const dy = e.touches[0].clientY - y0;
     if (dy <= 0 || tfY(scr) > 0) { if (pull) set(0, true); pull = 0; if (dy <= 0) on = dy < -2 ? false : on; return; }
     pull = Math.min(dy * .5, 96); if (pull > 4 && e.cancelable) e.preventDefault(); set(pull, false);
+    if (pull >= 64 && !crossed) { crossed = true; buzz(4); } else if (pull < 64) crossed = false;   // a tick when it is far enough
   };
-  const up = () => { if (!on) return; on = false; const go = pull >= 64; set(go ? 40 : 0, true); if (go) { buzz(8); ind.classList.add("busy"); setTimeout(() => { ind.classList.remove("busy"); set(0, true); }, 700); onRefresh(); } pull = 0; };
+  // let go past the line: the page stays stretched with the symbol spinning and dims a little, then the new list comes in and the page springs back up; short of the line it just springs back
+  let crossed = false, busy = false;
+  const up = () => {
+    if (!on) return; on = false; const go = pull >= 64; crossed = false;
+    if (!go) { set(0, true); pull = 0; return; }
+    if (busy) { pull = 0; return; } busy = true; pull = 0;
+    buzz(8); ind.classList.add("busy"); set(56, true);
+    host.style.transition = "opacity .25s ease"; host.style.opacity = ".35";
+    setTimeout(() => {
+      onRefresh(); host.style.opacity = "";
+      setTimeout(() => { ind.classList.remove("busy"); set(0, true); host.style.transition = ""; busy = false; }, 420);
+    }, 520);
+  };
   scr.addEventListener("touchstart", down, { passive: true }); scr.addEventListener("touchmove", move, { passive: false }); scr.addEventListener("touchend", up); scr.addEventListener("touchcancel", up);
   stop.push(() => { scr.removeEventListener("touchstart", down); scr.removeEventListener("touchmove", move); scr.removeEventListener("touchend", up); scr.removeEventListener("touchcancel", up); ind.remove(); });
 }

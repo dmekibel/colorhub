@@ -132,7 +132,7 @@ async function hfPresets(k) {
   if (!mvs.length) F.meta.movements.forEach((n, j) => { if (n && C.mv[j + 1] >= 400 && !/^none$/i.test(n)) mvs.push(n); });
   F.meta.artists.forEach((a, j) => { if (C.art[j + 1] >= 80) ars.push({ n: a[0], c: C.art[j + 1] }); });
   ars.sort((a, b) => b.c - a.c); const topArs = ars.slice(0, 90);
-  const rm = hfSeedOf(k, "m"), rp = hfSeedOf(k, "p"), rl = hfSeedOf(k + "|" + hfRoll("like"), "l"), rc = hfSeedOf(k + "|" + hfRoll("color"), "c");
+  const rm = hfSeedOf(k + "|" + HF_SESSION, "m"), rp = hfSeedOf(k + "|" + HF_SESSION, "p"), rl = hfSeedOf(k + "|" + HF_SESSION + "|" + hfRoll("like"), "l"), rc = hfSeedOf(k + "|" + HF_SESSION + "|" + hfRoll("color"), "c");   // new on every open and reload, like the river (David, 2026-10-26: the same Art Nouveau and Goya kept showing up)
   const mv = mvs.length ? pick(mvs, rm) : "", pa = topArs.length ? pick(topArs, rp).n : "";
   // like this one: the most colorful of a dozen random paintings by painters that have a body of work
   // (painters from the best-represented ninety only, dated 1450 or later: a seed people would be glad to be shown)
