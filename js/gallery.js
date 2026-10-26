@@ -2269,6 +2269,16 @@ function glPage(i, d, fromHex, tol) {
   // goes through glCommonsResolve first (its own Special:FilePath can't be read with crossorigin — see glCORS
   // above); crossOrigin is set on both the loader and the visible <img> before either gets a src, so the swap
   // lands in the readable (CORS) cache partition, not the plain one the small copy already used (David, 2026-10-09).
+  // the picture itself must always arrive (David, 2026-10-26: "I click a painting and it doesn't load in its page, but in full screen it does"): a hero that errors or is still
+  // missing after a few seconds is asked for again, up to four times, with a changed address so a stuck or failed request is not reused
+  { const hero = el.querySelector(".gl-hero img");
+    if (hero) {
+      let tries = 0; const t0 = performance.now(), base = () => hero.dataset.src0 || (hero.dataset.src0 = hero.getAttribute("src") || "");
+      const ok = () => hero.complete && hero.naturalWidth > 0;
+      const retry = () => { if (!hero.isConnected || ok() || ++tries > 4) return; const u = base(); if (!u || u.startsWith("data:")) return; hero.src = u + (u.includes("?") ? "&" : "?") + "r=" + tries; };
+      hero.addEventListener("error", () => setTimeout(retry, 500 * (tries + 1)));
+      const wd = setInterval(() => { if (!hero.isConnected || ok()) return clearInterval(wd); if (performance.now() - t0 > 4000 * (tries + 1)) retry(); }, 1000);
+    } }
   const hiImg = el.querySelector("img[data-hi]");
   if (hiImg) {
     const swap = (url, cors) => {
@@ -2280,7 +2290,8 @@ function glPage(i, d, fromHex, tol) {
       };
       // a CORS host that drops its header on this request (the Met's CDN does) still shows the sharp copy, just unreadable
       // (Pick then honestly finds nothing); if even that fails the small copy stays
-      big.onerror = () => { if (!cors) return; const plain = new Image(); plain.onload = () => { if (!hiImg.isConnected) return; hiImg.removeAttribute("crossorigin"); hiImg.src = plain.src; hiImg.classList.add("hi"); armSample(hiImg); }; plain.src = url; };
+      let bigTry = 0;
+      big.onerror = () => { if (!cors) { if (++bigTry <= 2) setTimeout(() => { big.src = url + (url.includes("?") ? "&" : "?") + "r=" + bigTry; }, 800 * bigTry); return; } const plain = new Image(); plain.onload = () => { if (!hiImg.isConnected) return; hiImg.removeAttribute("crossorigin"); hiImg.src = plain.src; hiImg.classList.add("hi"); armSample(hiImg); }; plain.src = url; };
       big.src = url;
     };
     const hiUrl = hiImg.dataset.hi, commonsFn = glCommonsFilename(hiUrl);
