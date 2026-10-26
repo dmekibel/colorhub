@@ -70,6 +70,10 @@ function checkIds() {
     const aj = rj("data/gallery/aesthetic.json"), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
     if (aj.n !== gIds.length || aj.hash !== h || sz("data/gallery/aesthetic.bin") !== gIds.length) warn("data/gallery/aesthetic.bin is out of step with ids.txt (the home falls back to palette-only beauty until it is rebuilt): python3 tools/audit_beauty.py");
   }
+  if (fs.existsSync(path.join(ROOT, "data/gallery/scene.json"))) {   // the home's abstraction and scale axes (tools/audit_scene.py); stale ones are ignored, so a warning
+    const sj = rj("data/gallery/scene.json"), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
+    if (sj.n !== gIds.length || sj.hash !== h || sz("data/gallery/scene.bin") !== gIds.length * 2) warn("data/gallery/scene.bin is out of step with ids.txt (the home changes color only): python3 tools/audit_scene.py");
+  }
   if (fs.existsSync(path.join(ROOT, "data/gallery/vibe/index.json"))) {   // By vibe neighbors (feed): header must name THIS ids.txt
     const v = rj("data/gallery/vibe/index.json"), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
     if (v.n !== gIds.length || v.ids_hash !== h) warn("data/gallery/vibe/ is out of step with ids.txt (the feed's Vibe ranking is empty until it is rebuilt): python3 tools/vibe_knn.py");

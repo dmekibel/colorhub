@@ -80,11 +80,16 @@ function hfPaletteScore(i) {
   return Math.max(0, Math.min(1, .26 * harmony + .26 * pleasure + .16 * vivid + .14 * bright + .1 * contrast + .08 - .5 * muddy));
 }
 // ready once (the aesthetic file is 200 KB; it gets 2 s, then the palette reading stands alone)
+// the two reading axes (tools/audit_scene.py): abstraction and scale (close-up .. wide), two bytes per painting; the river changes them in small steps
+let HF_SCENE = null;
+const hfAx = i => (HF_SCENE ? [HF_SCENE[i * 2], HF_SCENE[i * 2 + 1]] : null);
+const hfAxDist = (i, r) => { if (!HF_SCENE || !r) return 0; return Math.hypot(HF_SCENE[i * 2] - r[0], HF_SCENE[i * 2 + 1] - r[1]) * 100 / 255; };   // 0..~140
 function hfBeautyReady() {
   if (HF_B) return Promise.resolve();
   return HF_BP || (HF_BP = hfBudget(loadGallery().then(async () => {
     try { const r = await fetch("data/gallery/aesthetic.bin"); if (r.ok) { const b = new Uint8Array(await r.arrayBuffer()); if (b.length === GAL.n) HF_AES = b; } } catch (e) {}
-  }), 2000).then(() => {
+    try { const r = await fetch("data/gallery/scene.bin"); if (r.ok) { const b = new Uint8Array(await r.arrayBuffer()); if (b.length === GAL.n * 2) HF_SCENE = b; } } catch (e) {}
+  }), 2500).then(() => {
     const n = GAL.n, B = new Float32Array(n);
     for (let i = 0; i < n; i++) { const p = hfPaletteScore(i); B[i] = HF_AES ? .55 * p + .45 * HF_AES[i] / 255 : p; }
     HF_B = B;
@@ -244,7 +249,8 @@ async function hfVibeRiver(hk, rnd, skip, taste) {
   const win = 6 + 400 * Math.pow(1 - at, 2), yr = i => (GAL.year[i] === GL_UNDATED ? null : GAL.year[i]);
   const yGap = (i, y0) => { const y = yr(i); return y == null || y0 == null ? (at > .5 ? 400 : 0) : Math.abs(y - y0); };
   // a painting may join the stretch when it is close enough in color, time and place to where the river is; when too few are, time is let go first, then place, never color
-  const fits = (i, st, relax) => (relax > 0 || at <= .35 || yGap(i, st.year) <= win) && (relax > 1 || ap <= .35 || !st.co || cof(i) === st.co) && (relax > 2 || dE(i, st.ref) <= tolE);
+  const tolX = av > .2 ? 90 - 65 * av : 999;   // LOOK also limits how far the kind of picture may be from the reference: how abstract it is, how close or wide
+  const fits = (i, st, relax) => (relax > 0 || at <= .35 || yGap(i, st.year) <= win) && (relax > 1 || ap <= .35 || !st.co || cof(i) === st.co) && (relax > 2 || (dE(i, st.ref) <= tolE && hfAxDist(i, st.rx) <= tolX));
   const ladder = (list, st, want) => { for (const r of [0, 1, 2]) { const f = list.filter(i => fits(i, st, r)); if (f.length >= want) return f; } return list.filter(i => fits(i, st, 2)); };
   const fresh = st0 => {
     let an = hfPick(null, rnd, 160, skip, hfCut(.93)); if (!an.length) return null;
@@ -263,7 +269,7 @@ async function hfVibeRiver(hk, rnd, skip, taste) {
       if (st0) { const k2 = c.filter(i => fits(i, st0, 1)); c = k2; }   // a later start must still belong where the river is
       if (c.length) A = c[Math.floor(rnd() * c.length)];
     }
-    return { A, ref: meanOf(A), year: yr(A), co: cof(A), left: patchSteps - 1 };
+    return { A, ref: meanOf(A), rx: hfAx(A), year: yr(A), co: cof(A), left: patchSteps - 1 };
   };
   let st = HF_VR.get(hk);
   if (!st) {
@@ -277,7 +283,7 @@ async function hfVibeRiver(hk, rnd, skip, taste) {
   const dEi = (a, b) => Math.hypot((M[a * 3] - M[b * 3]) * .7, M[a * 3 + 1] - M[b * 3 + 1], M[a * 3 + 2] - M[b * 3 + 2]);
   const chain = (list, prev) => {   // nearest-first order starting from the last painting shown
     const left = list.slice(), res = []; let cur = prev;
-    while (left.length) { let bi = 0, bd = 1e9; for (let k = 0; k < left.length; k++) { const d = cur == null ? -hfBeauty(left[k]) : dEi(cur, left[k]) + yGap(left[k], yr(cur)) / 40; if (d < bd) { bd = d; bi = k; } } cur = left.splice(bi, 1)[0]; res.push(cur); }
+    while (left.length) { let bi = 0, bd = 1e9; for (let k = 0; k < left.length; k++) { const d = cur == null ? -hfBeauty(left[k]) : dEi(cur, left[k]) + yGap(left[k], yr(cur)) / 40 + hfAxDist(left[k], hfAx(cur)) * .6; if (d < bd) { bd = d; bi = k; } } cur = left.splice(bi, 1)[0]; res.push(cur); }
     return res;
   };
   for (let it = 0; it < 60 && out.length < 84; it++) {
@@ -286,7 +292,7 @@ async function hfVibeRiver(hk, rnd, skip, taste) {
     if (!nb.length) { if (!it && !st.used.size) { HF_VR.delete(hk); return []; } break; }
     const sim = new Map(nb.map(x => [x.i, x.sim])), pool = [st.A, ...nb.map(x => x.i)].filter(room);
     const cand = st.used.size ? pool.filter(i => fits(i, st, 0)) : ladder(pool, st, 1);   // once under way nothing is let in that breaks the limits
-    const score = i => hfBeauty(i) + (sim.get(i) || 1) * simW - dE(i, st.ref) / (30 + 100 * (1 - ac)) - yGap(i, st.year) / (win * 2 + 60) + (st.co && cof(i) === st.co ? ap * .5 : 0);
+    const score = i => hfBeauty(i) + (sim.get(i) || 1) * simW - dE(i, st.ref) / (30 + 100 * (1 - ac)) - hfAxDist(i, st.rx) / (40 + 80 * (1 - av)) - yGap(i, st.year) / (win * 2 + 60) + (st.co && cof(i) === st.co ? ap * .5 : 0);
     const take = cand.sort((x, y) => score(y) - score(x)).slice(0, size);
     chain(take, out.length ? out[out.length - 1] : null).forEach(i => { st.used.add(i); out.push(i); });
     (st.trail = st.trail || []).push(st.A); if (st.trail.length > 12) st.trail.shift();
@@ -294,7 +300,7 @@ async function hfVibeRiver(hk, rnd, skip, taste) {
     // a rare jump, only when Look is low
     if (av < .3 && rnd() < jump) { const f = fresh(st); if (f) { Object.assign(st, f); continue; } }
     // the next anchor: the unused neighbor most alike in look, nearest the reference color (the bridge: the neighbors of the last few anchors when these are used up)
-    const pick = (ids, simOf) => ids.filter(i => room(i) && fits(i, st, 0)).sort((x, y) => (simOf(y) * 3 + hfBeauty(y) - dE(y, st.ref) / 25) - (simOf(x) * 3 + hfBeauty(x) - dE(x, st.ref) / 25))[0];
+    const pick = (ids, simOf) => ids.filter(i => room(i) && fits(i, st, 0)).sort((x, y) => (simOf(y) * 3 + hfBeauty(y) - dE(y, st.ref) / 25 - hfAxDist(y, st.rx) / 40) - (simOf(x) * 3 + hfBeauty(x) - dE(x, st.ref) / 25 - hfAxDist(x, st.rx) / 40))[0];
     let nx = pick(nb.map(x => x.i), i => sim.get(i) || 0);
     if (nx == null) {
       const recent = (st.trail || []).slice(-4), lists = await hfBudget(Promise.all(recent.map(a => vibeNeighbors(a, 60))), 2500, []), cnt = new Map();
@@ -305,6 +311,7 @@ async function hfVibeRiver(hk, rnd, skip, taste) {
     const ang = st.dir * (st.step / patchSteps) * (.6 + rnd() * .8) * Math.PI / 180, ca = Math.cos(ang), sa = Math.sin(ang), m1 = meanOf(nx);
     const rr = [st.ref[0], st.ref[1] * ca - st.ref[2] * sa, st.ref[1] * sa + st.ref[2] * ca];
     st.ref = [rr[0] * .75 + m1[0] * .25, rr[1] * .75 + m1[1] * .25, rr[2] * .75 + m1[2] * .25];
+    const ax1 = hfAx(nx); if (ax1 && st.rx) st.rx = [st.rx[0] * .75 + ax1[0] * .25, st.rx[1] * .75 + ax1[1] * .25]; else if (ax1) st.rx = ax1;   // the reference kind of picture follows the anchor too
     st.A = nx; st.year = yr(nx) ?? st.year; if (ap > .35) st.co = cof(nx) || st.co;
   }
   return out;
@@ -449,7 +456,7 @@ function hfChainList(ids, rnd) {
     const k0 = left.indexOf(cur); if (k0 >= 0) left.splice(k0, 1);
     out.push(cur);
     if (!left.length) break;
-    const ds = left.map((j, n) => { const y1 = yv(cur), y2 = yv(j), yd = y1 == null || y2 == null ? 40 : Math.abs(y1 - y2); return [n, Math.hypot((M[cur * 3] - M[j * 3]) * .7, M[cur * 3 + 1] - M[j * 3 + 1], M[cur * 3 + 2] - M[j * 3 + 2]) + yd * (.1 + .4 * at) - hfBeauty(j) * 6]; }).sort((a, b) => a[1] - b[1]);
+    const ds = left.map((j, n) => { const y1 = yv(cur), y2 = yv(j), yd = y1 == null || y2 == null ? 40 : Math.abs(y1 - y2); return [n, Math.hypot((M[cur * 3] - M[j * 3]) * .7, M[cur * 3 + 1] - M[j * 3 + 1], M[cur * 3 + 2] - M[j * 3 + 2]) + yd * (.1 + .4 * at) + hfAxDist(j, hfAx(cur)) * .6 - hfBeauty(j) * 6]; }).sort((a, b) => a[1] - b[1]);
     cur = left[ds[Math.floor(rnd() * Math.min(kk, ds.length))][0]];
   }
   return out;
