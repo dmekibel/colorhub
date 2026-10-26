@@ -973,7 +973,7 @@ function colorDossier(entry, o = {}) {
   const memo0 = backNav && typeof FD_MEMO !== "undefined" ? FD_MEMO.get("c:" + heroHex.toUpperCase()) : null;
   const startChip = memo0 && memo0.chip ? memo0.chip : rpStartChip();
   const call = (f, ...a) => typeof f === "function" ? f(...a) : "";
-  const secHTML = `<div class="ar-head" data-ar-head hidden></div>
+  const secHTML = `${typeof sxPairBtnHTML === "function" ? `<div class="rp-pair-row">${sxPairBtnHTML(heroHex, name)}</div>` : ""}<div class="ar-head" data-ar-head hidden></div>
     <div class="ar-body" data-ar-body hidden></div>
     ${rpPaintSectionHTML(name, heroHex, entry, famC)}
     ${call(rcNextToHTML, name, heroHex)}
@@ -1024,6 +1024,18 @@ function colorDossier(entry, o = {}) {
   rpNextFill(el, name, heroHex);
   rpHoldWalk(el, name, heroHex);
   rpBarWire(el);
+  // David, 2026-10-26: the hero's own buttons scroll away with it; they fade out before they reach the status bar instead of running under the clock and battery
+  if (!document.documentElement.classList.contains("desk")) {
+    const probe = document.createElement("i"); probe.style.cssText = "position:fixed;top:0;height:var(--top);width:0;visibility:hidden"; document.body.appendChild(probe);
+    const ctl = [...el.querySelectorAll(".cp-hero > .cp-close, .cp-hero > .fd-mapb-hero, .cp-hero > .tl-more-float, .cp-hero > .tl-exit-float")]; let raf = 0;
+    const fade = () => {
+      raf = 0; if (!el.isConnected) { removeEventListener("scroll", on, true); probe.remove(); return; }
+      const t = probe.offsetHeight;
+      ctl.forEach(c => { const y = c.getBoundingClientRect().top, o = Math.max(0, Math.min(1, (y - (t - 6)) / 22)); c.style.opacity = o < 1 ? o.toFixed(2) : ""; c.style.pointerEvents = o < .4 ? "none" : ""; });
+    };
+    const on = () => { if (!raf) raf = requestAnimationFrame(fade); };
+    addEventListener("scroll", on, true);
+  }
   // Keep exploring (js/feed.js): the endless feed of paintings and more at the very bottom, with chips for what counts as related.
   // On a Back it is built at once so the page is as tall as it was and the scroll lands on the same tile.
   if (typeof fdMountColor === "function") fdMountColor(el.querySelector("[data-rpfeed]"), { sub: { hex: heroHex.toUpperCase(), name, tapped }, backNav, about: el.querySelector("[data-rp-about]"), startChip });

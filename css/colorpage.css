@@ -691,3 +691,10 @@
   html:not(.desk) .cp-hero h1.rp-name{font-size:clamp(40px,12.5vw,52px);margin-top:0}
   html:not(.desk) .cp-hero .rp-tier{margin-top:4px;font-size:15px;line-height:1.3;max-width:none;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
 }
+
+/* David, 2026-10-26: "a little too many buttons above": on a phone the hero keeps Back, the dots and Map; the Learn pill goes (Back and the dots reach it) and
+   "Pair with…" moves into Overview. */
+html:not(.desk) .cp-hero .tl-exit-float,html:not(.desk) .cp-hero .sx-pairbtn{display:none}
+.rp-pair-row{margin:0 0 14px}
+html:not(.desk) .rp-pair-row .sx-pairbtn{display:inline-flex}
+html.desk .rp-pair-row{display:none}
