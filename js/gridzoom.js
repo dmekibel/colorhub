@@ -41,14 +41,30 @@ function gzAttach(host, o) {
     document.documentElement.style.overflowX = "clip";   // a scaled grid must not grow the page sideways
   };
   // settle: the layout goes to c columns now; the picture animates from the scale the fingers left (s) to rest
+  // o.ghost (opt-in): at release, what the fingers were showing (the old layout, scaled) is copied into a fixed overlay and fades away while the new
+  // layout comes in underneath, so a change of density is a crossfade, not a cut (David, 2026-10-26: "like Apple Photos")
+  const ghostMake = () => {
+    if (!o.ghost || reduceMotion || !st.on) return null;
+    try {
+      const tf = host.style.transform, org = host.style.transformOrigin; host.style.transition = "none"; host.style.transform = "none";
+      const r0 = host.getBoundingClientRect(); host.style.transform = tf;
+      const box = document.createElement("div"); box.style.cssText = "position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:40;contain:strict";
+      const g = host.cloneNode(true); g.removeAttribute("id"); g.style.cssText = `position:absolute;left:${r0.left}px;top:${r0.top}px;width:${r0.width}px;margin:0;transition:none;transform:${tf};transform-origin:${org};will-change:opacity`;
+      g.querySelectorAll("[data-ix],[data-fk]").forEach(n => n.removeAttribute("data-ix"));
+      box.appendChild(g); document.body.appendChild(box); return box;
+    } catch (e) { return null; }
+  };
+  const ghostFade = box => { if (!box) return; box.getBoundingClientRect(); box.style.transition = `opacity ${GZ_SETTLE_MS}ms linear`; box.style.opacity = "0"; setTimeout(() => box.remove(), GZ_SETTLE_MS + 80); };
   const settle = (c, s) => {
     const c0 = o.cols(), wOld = o.colW(), toY = st.fy + st.ty;
+    const gh = c !== o.cols() ? ghostMake() : null;
     clearStyle();
     let from = s;
     if (c !== c0) {
       if (!o.setCols(c, st.fx, st.fy, toY)) { from = s; } else { const wNew = o.colW(); from = wOld > 0 && wNew > 0 ? s / (wNew / wOld) : 1; }
     }
     GZ_DBG.commits++;
+    ghostFade(gh);
     if (reduceMotion || Math.abs(from - 1) < .004) { st.on = false; return; }
     const same = c === c0, r = host.getBoundingClientRect();
     const ox = same ? st.rx : st.fx - r.left, oy = same ? st.ry : toY - r.top;   // no relayout: the live transform (translate, then scale about the pinch point) is picked up exactly

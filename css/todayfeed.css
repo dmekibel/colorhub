@@ -225,3 +225,9 @@ html .room-sheet>.screen.tf-screen.tf-screen{padding-left:var(--tfp);padding-rig
 @keyframes tfFadeIn{from{opacity:0}to{opacity:1}}
 .tf-card.tf-fadein{animation:tfFadeIn .45s var(--ease,ease) both}
 @media (prefers-reduced-motion:reduce){.tf-card.tf-fadein{animation:none}}
+
+/* color tiles: the name alone, sized to the column so it never clips, however many are across */
+.tf-col{container-type:inline-size}
+.tf-color{padding:clamp(6px,5cqw,14px)}
+.tf-color b{font-size:clamp(11px,15cqw,26px);line-height:1.05;-webkit-line-clamp:4;overflow-wrap:anywhere;hyphens:auto}
+.tf-cotd{border-radius:0}

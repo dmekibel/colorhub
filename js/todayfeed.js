@@ -114,7 +114,7 @@ function tfCard(it) {
     case "pal":
       return `<button type="button" class="tf-card tf-palette wait" data-tf="pal" data-gi="${it.gi}"><span class="tf-stripes" aria-hidden="true" style="aspect-ratio:${(1 / it.r).toFixed(3)}">${tfEqual(it.gi)}</span><span class="tf-tx"><b></b><small>6 colors</small></span></button>`;
     case "color":
-      return `<button type="button" class="tf-card tf-color" data-tf="name" data-n="${esc(it.n)}" data-h="${it.h}" style="--c:${it.h};--ink:${tfInk(it.h)};aspect-ratio:1/${it.r.toFixed(2)}"><b>${esc(it.n)}</b>${tfWhat(it.lede) ? `<span>${esc(tfWhat(it.lede))}</span>` : ""}</button>`;
+      return `<button type="button" class="tf-card tf-color" data-tf="name" data-n="${esc(it.n)}" data-h="${it.h}" style="--c:${it.h};--ink:${tfInk(it.h)};aspect-ratio:1/${it.r.toFixed(2)}"><b>${esc(it.n)}</b></button>`;   // the name only (David, 2026-10-26: "should be only the name, not the description")
     case "art":
       return `<button type="button" class="tf-card tf-art" data-tf="name" data-n="${esc(it.n)}" data-h="${it.h}"><span class="tf-hero" style="--c:${it.h};--ink:${tfInk(it.h)}"><b>${esc(it.n)}</b></span><span class="tf-tx"><span class="tf-lede">${esc(tfSentence(it.lede, 400))}</span><small>Article · ${tfRead(it.words)} min read</small></span></button>`;
     case "cotd":
@@ -261,17 +261,29 @@ function todayFeed() {
     pickLens(b.dataset.tfL);
   });
   // swipe sideways on the paintings to go to the next / previous lens (Pinterest does the same); the row grows as you reach its end
+  // the paintings follow your finger sideways, then slide off to that side and the next lens slides in from the other (not a cut)
   let sw = null;
-  el.addEventListener("touchstart", e => { sw = e.touches.length === 1 && e.touches[0].clientX > 24 && e.touches[0].clientX < innerWidth - 24 && tfFilter() === "paint" && !e.target.closest(".tf-bars,.sheet,input,[data-nopull-x]") ? { x: e.touches[0].clientX, y: e.touches[0].clientY, t: Date.now() } : null; }, { passive: true });
-  el.addEventListener("touchmove", e => { if (sw && e.touches.length > 1) sw = null; }, { passive: true });
+  const still = !matchMedia("(prefers-reduced-motion:reduce)").matches;
+  const glide = (x, o, ms) => { host.style.transition = ms ? `transform ${ms}ms cubic-bezier(.2,.8,.2,1), opacity ${ms}ms linear` : "none"; host.style.transform = x ? `translate3d(${x}px,0,0)` : ""; host.style.opacity = o == null ? "" : o; };
+  el.addEventListener("touchstart", e => { sw = e.touches.length === 1 && e.touches[0].clientX > 24 && e.touches[0].clientX < innerWidth - 24 && tfFilter() === "paint" && !e.target.closest(".tf-bars,.sheet,input,[data-nopull-x]") ? { x: e.touches[0].clientX, y: e.touches[0].clientY, t: Date.now(), lock: 0 } : null; }, { passive: true });
+  el.addEventListener("touchmove", e => {
+    if (!sw) return; if (e.touches.length > 1) { sw = null; glide(0, null, 0); return; }
+    const dx = e.touches[0].clientX - sw.x, dy = e.touches[0].clientY - sw.y;
+    if (!sw.lock && (Math.abs(dx) > 12 || Math.abs(dy) > 12)) sw.lock = Math.abs(dx) > Math.abs(dy) * 1.3 ? 1 : -1;
+    if (sw.lock === 1 && still) glide(dx * .9, Math.max(.55, 1 - Math.abs(dx) / (innerWidth * 1.4)), 0);
+  }, { passive: true });
   el.addEventListener("touchend", async e => {
     const s0 = sw; sw = null; if (!s0 || !e.changedTouches.length) return;
     const dx = e.changedTouches[0].clientX - s0.x, dy = e.changedTouches[0].clientY - s0.y;
-    if (Math.abs(dx) < 70 || Math.abs(dy) > Math.abs(dx) * .55 || Date.now() - s0.t > 700 || document.querySelector(".sheet")) return;
+    const back = () => { if (s0.lock === 1) glide(0, null, 220); };
+    if (Math.abs(dx) < 70 || Math.abs(dy) > Math.abs(dx) * .55 || Date.now() - s0.t > 700 || document.querySelector(".sheet")) return back();
     let list = tfChipList(), i = list.findIndex(c => c.id === lensId()), j = dx < 0 ? i + 1 : i - 1;
-    if (j < 0) return;
-    if (j >= list.length) { await moreLenses(); list = tfChipList(); if (j >= list.length) return; }
+    if (j < 0) return back();
+    if (j >= list.length) { await moreLenses(); list = tfChipList(); if (j >= list.length) return back(); }
+    const dir = dx < 0 ? -1 : 1;
+    if (still) { glide(dir * innerWidth, 0, 190); await new Promise(r => setTimeout(r, 190)); }
     pickLens(list[j].id);
+    if (still) { glide(-dir * innerWidth * .5, 0, 0); void host.offsetWidth; glide(0, 1, 260); setTimeout(() => glide(0, null, 0), 300); }
   }, { passive: true });
   el.querySelector("[data-tf-tune]").addEventListener("click", () => tfSettings(key => {
     if (key === "caps") host.classList.toggle("nocaps", !hfS().caps);
@@ -458,7 +470,7 @@ function tfPaint(scr, host, st, f, restore, stop, ov) {
       if (k2) tfScrollTo(scr, tfY(scr) + k2.getBoundingClientRect().top - (toY == null ? y0 : y0 + (toY - vy)));
       return true;
     };
-    const zoom = gzAttach(wrap, { cols: () => count, min: () => 1, max: tfMaxCols, colW: () => (wrap.firstChild ? wrap.firstChild.offsetWidth : 0), setCols });
+    const zoom = gzAttach(wrap, { cols: () => count, min: () => 1, max: tfMaxCols, ghost: true, colW: () => (wrap.firstChild ? wrap.firstChild.offsetWidth : 0), setCols });
     live.push(() => zoom.destroy());
   }
   // coming Back: the cards that were on screen are drawn again (heights are known up front), then the scroll goes where it was
