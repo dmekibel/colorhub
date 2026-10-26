@@ -113,6 +113,8 @@ function tfCard(it) {
     }
     case "sp":   // a seed painting (js/homefeed.js hfSeedRiver): drawn from its own record, before the archive has loaded
       return `<button type="button" class="tf-card tf-paint" data-tf="paint" data-gi="${it.gi}"><span class="tf-im" style="--c:${it.c};aspect-ratio:${(1 / it.ar).toFixed(3)}"><img class="on" src="${esc(it.img)}" alt="" decoding="async" loading="lazy"></span><span class="tf-heart" role="button" tabindex="0" data-tf-heart aria-pressed="false" aria-label="Keep this painting">${TF_HEART}</span><span class="tf-tx"><b>${esc(it.ti)}</b><small>${esc(it.p)}${it.p && it.y ? " · " : ""}${it.y || ""}</small></span></button>`;
+    case "note":   // the end of a painter's own work (the feed goes on with painters like them)
+      return `<div class="tf-card tf-note"><b>That is all ${it.n === 1 ? "one painting" : it.n.toLocaleString("en-US") + " paintings"} by ${esc(it.a)}.</b><small>Keep scrolling: painters from the same years with a similar look.</small></div>`;
     case "pal":
       return `<button type="button" class="tf-card tf-palette wait" data-tf="pal" data-gi="${it.gi}"><span class="tf-stripes" aria-hidden="true" style="aspect-ratio:${(1 / it.r).toFixed(3)}">${tfEqual(it.gi)}</span><span class="tf-tx"><b></b><small>6 colors</small></span></button>`;
     case "color":
@@ -188,13 +190,15 @@ function todayFeed() {
   const back = typeof BACK_RENDER !== "undefined" && BACK_RENDER, k = today();
   if (S.tab !== "feed") { S.tab = "feed"; save(); }   // the place you were last: every "go(S.tab)" Close or Back (the daily game's ✕) comes back here
   const el = show(`<i class="tf-sent" aria-hidden="true"></i>
-    <div class="tf-bars"><div class="tf-chips tf-kinds" role="radiogroup" aria-label="Show">${TF_TYPES.map(([id, label]) => `<button type="button" role="radio" class="tf-chip" data-tf-f="${id}" aria-checked="false">${label}</button>`).join("")}</div><button type="button" class="tf-tune" data-tf-tune aria-label="Home settings">${typeof FD_ICON_TUNE !== "undefined" ? FD_ICON_TUNE : ""}</button><div class="tf-chips tf-lenses" role="radiogroup" aria-label="Paintings"></div></div>
+    <div class="tf-bars"><div class="tf-chips tf-kinds" role="radiogroup" aria-label="Show">${TF_TYPES.map(([id, label]) => `<button type="button" role="radio" class="tf-chip" data-tf-f="${id}" aria-checked="false">${label}</button>`).join("")}</div><div class="tf-chips tf-lenses" role="radiogroup" aria-label="Paintings"></div></div>
     <div class="tf-lens-head" data-tf-lh hidden></div>
     <div class="tf-feed${hfS().caps ? "" : " nocaps"}" data-tf-feed>${tfSkeleton(k)}</div>`, "tf-screen", "feed");
   const host = el.querySelector("[data-tf-feed]"), bars = el.querySelector(".tf-bars"), kindsRow = el.querySelector(".tf-kinds"), lensRow = el.querySelector(".tf-lenses"), lh = el.querySelector("[data-tf-lh]");
+  const tune = document.createElement("button"); tune.type = "button"; tune.className = "tf-tune"; tune.setAttribute("data-tf-tune", ""); tune.setAttribute("aria-label", "Home settings"); tune.innerHTML = typeof FD_ICON_TUNE !== "undefined" ? FD_ICON_TUNE : "";
+  document.body.appendChild(tune);   // a round button at the bottom right like the maps' Arrange / Filters: on the body so it stays put while the page scrolls
   let st = TF && TF.k === k && TF.ready ? TF : null, pre = TF_PRE && TF_PRE.k === k ? TF_PRE : null, tok = 0, salt = 0;
   const stop = [];
-  cleanup.push(() => { stop.concat(stop.live || []).forEach(f => { try { f(); } catch (e) {} }); });
+  cleanup.push(() => { tune.remove(); stop.concat(stop.live || []).forEach(f => { try { f(); } catch (e) {} }); });
   const lensId = () => TF_LENS;
   const setKinds = () => kindsRow.querySelectorAll(".tf-chip").forEach(b => { const on = b.dataset.tfF === tfFilter(); b.classList.toggle("on", on); b.setAttribute("aria-checked", on); });
   const tfChipList = () => { const base = hfChips(pre, TF_EXTRA.some(c => c.id === lensId()) ? null : lensId()), seen = new Set(base.map(c => c.id)); return base.concat(TF_EXTRA.filter(c => !seen.has(c.id))); };
@@ -232,7 +236,12 @@ function todayFeed() {
   // one list per lens and visit (also what a sideways swipe shows next door before you let go)
   const lensOv = (id, res, items) => {
     const { hk, ck, fy } = lensKeys(id);
-    const ov = HF_CACHE.get(ck) || { key: "paint:" + ck, list: items || mkItems(res.ids), seen: fy, end: "That is every painting here.", res, more: fy ? () => hfLens("foryou", hk, ++salt).then(r => mkItems(r.ids)) : null };
+    let more = fy ? () => hfLens("foryou", hk, ++salt).then(r => mkItems(r.ids)) : null;
+    if (res.own && id.startsWith("p:")) {   // a painter: all their work, a line saying so, then painters like them without end
+      const st = {}, nm = id.slice(2), own = res.ids.slice(0, res.own); let said = false;
+      more = () => hfPainterMore(own, hk, st).then(ids => { const it = mkItems(ids); if (!said) { said = true; it.unshift({ t: "note", key: "end:" + id, a: fdShortName(nm), n: res.own }); } return it; });
+    }
+    const ov = HF_CACHE.get(ck) || { key: "paint:" + ck, list: items || mkItems(res.ids), seen: fy, end: "That is every painting here.", res, more };
     HF_CACHE.set(ck, ov); return ov;
   };
   const paintings = restore => {
@@ -277,7 +286,7 @@ function todayFeed() {
     const my = tok;
     hfBoards().then(secs => {
       if (my !== tok || !host.isConnected || tfFilter() !== "board") return;
-      const TABS = [["all", "All"], ["yours", "Yours"], ["genres", "Genres"], ["subjects", "Subjects"], ["moods", "Moods"], ["painters", "Painters"], ["periods", "Periods"], ["movements", "Movements"], ["palettes", "Palettes"], ["colors", "Colors"], ["places", "Places"], ["collections", "Collections"], ["composition", "Composition"], ["stories", "Stories"]].filter(t => t[0] === "all" || secs.some(sc => sc.tab === t[0]));
+      const TABS = [["all", "All"], ["yours", "Favorites"], ["genres", "Genres"], ["subjects", "Subjects"], ["moods", "Moods"], ["painters", "Painters"], ["periods", "Periods"], ["movements", "Movements"], ["palettes", "Palettes"], ["colors", "Colors"], ["places", "Places"], ["collections", "Collections"], ["composition", "Composition"], ["stories", "Stories"]].filter(t => t[0] === "all" || secs.some(sc => sc.tab === t[0]));
       if (!TABS.some(t => t[0] === TF_BTAB)) TF_BTAB = "all";
       // the page of categories (a board of boards): one folder per kind of board; its cover is a painting from each of three of its boards
       const catSec = tab => secs.filter(sc => sc.tab === tab), catCount = tab => catSec(tab).reduce((a, sc) => a + sc.boards.length, 0);
@@ -301,13 +310,15 @@ function todayFeed() {
       const wideB = () => document.documentElement.classList.contains("desk") || innerWidth >= 700, maxB = () => (wideB() ? 10 : 6);
       const colsB = () => { const z = hfS().zb && hfS().zb[wideB() ? "w" : "p"]; return z ? Math.max(1, Math.min(maxB(), z)) : wideB() ? Math.max(3, Math.min(8, Math.round((host.clientWidth || innerWidth) / 230))) : 2; };
       let bcols = colsB();
+      const wrapHTML = (tab, bc) => {
+        const cats = tab === "all" ? TABS.filter(t => t[0] !== "all") : [];
+        return `<div class="tf-bwrap" style="--bcols:${bc}">` + (cats.length ? `<h2 class="tf-bh">Browse by</h2><div class="tf-bgrid">${cats.map(([id, label]) => `<button type="button" class="tf-board tf-cat" data-tf-cat="${id}"><span class="tf-bcov"><i></i><i></i><i></i></span><b>${label}</b><small>${catCount(id)} boards</small></button>`).join("")}</div>` : "") + secs.filter(sc => sc.tab === tab).map(sc => `<h2 class="tf-bh">${esc(sc.title)}</h2><div class="tf-bgrid">${sc.boards.map(b => `<button type="button" class="tf-board" data-tf-board="${esc(b.id)}"><span class="tf-bcov" ${b.hex ? `style="--c:${esc(b.hex)}"` : ""}><i></i><i></i><i></i></span><b>${esc(b.label)}</b><small>${esc(b.sub)}</small></button>`).join("")}</div>`).join("") + `</div>`;
+      };
       const draw = () => {
         if (io) { io.disconnect(); io = null; }
         if (zoomB) { zoomB.destroy(); zoomB = null; }
         bcols = colsB();
-        const cats = TF_BTAB === "all" ? TABS.filter(t => t[0] !== "all") : [];
-        host.innerHTML = `<div class="tf-chips tf-btabs" role="tablist" aria-label="Boards">${TABS.map(([id, label]) => `<button type="button" role="tab" class="tf-chip${id === TF_BTAB ? " on" : ""}" data-tf-btab="${id}" aria-selected="${id === TF_BTAB}">${label}</button>`).join("")}</div>` +
-          `<div class="tf-bwrap" style="--bcols:${bcols}">` + (cats.length ? `<h2 class="tf-bh">Browse by</h2><div class="tf-bgrid">${cats.map(([id, label]) => `<button type="button" class="tf-board tf-cat" data-tf-cat="${id}"><span class="tf-bcov"><i></i><i></i><i></i></span><b>${label}</b><small>${catCount(id)} boards</small></button>`).join("")}</div>` : "") + secs.filter(sc => sc.tab === TF_BTAB).map(sc => `<h2 class="tf-bh">${esc(sc.title)}</h2><div class="tf-bgrid">${sc.boards.map(b => `<button type="button" class="tf-board" data-tf-board="${esc(b.id)}"><span class="tf-bcov" ${b.hex ? `style="--c:${esc(b.hex)}"` : ""}><i></i><i></i><i></i></span><b>${esc(b.label)}</b><small>${esc(b.sub)}</small></button>`).join("")}</div>`).join("") + `</div>`;
+        host.innerHTML = `<div class="tf-chips tf-btabs" role="tablist" aria-label="Boards">${TABS.map(([id, label]) => `<button type="button" role="tab" class="tf-chip${id === TF_BTAB ? " on" : ""}" data-tf-btab="${id}" aria-selected="${id === TF_BTAB}">${label}</button>`).join("")}</div>` + wrapHTML(TF_BTAB, bcols);
         const bw = host.querySelector(".tf-bwrap");
         // zoom out and in (pinch, trackpad, ctrl+wheel, + / -): how many folders across, the one under your fingers staying put
         if (bw && typeof gzAttach === "function") zoomB = gzAttach(bw, { cols: () => bcols, min: () => 1, max: maxB, ghost: true, colW: () => { const c = bw.querySelector(".tf-board"); return c ? c.offsetWidth : 0; }, setCols: (c, fx, fy, toY) => {
@@ -322,6 +333,42 @@ function todayFeed() {
         else cards.slice(0, 24).forEach(c => (c.dataset.tfCat ? fillCat : fill)(c));
       };
       host.onclick = e => { const cat = e.target.closest("[data-tf-cat]"); if (cat) { TF_BTAB = cat.dataset.tfCat; buzz(4); draw(); tfScrollTo(el, 0); return; } const tb = e.target.closest("[data-tf-btab]"); if (tb) { TF_BTAB = tb.dataset.tfBtab; buzz(3); draw(); tfScrollTo(el, 0); return; } const b = e.target.closest("[data-tf-board]"); if (!b) return; buzz(5); TF_KIND = "paint"; TF_LENS = b.dataset.tfBoard; TF_FROM_BOARD = true; setKinds(); drawLenses(); const on = lensRow.querySelector(".tf-lens.on"); if (on) tfChipInView(lensRow, on); showBars(); tfScrollTo(el, 0); salt = 0; paintings(false); };
+      // swipe sideways to the next / previous tab, as on the paintings: the neighbor's folders wait beside this page and follow your finger
+      let bs = null; const BGAP = 8, calm = !matchMedia("(prefers-reduced-motion:reduce)").matches;
+      const bslide = (x, ms) => host.querySelectorAll(".tf-bwrap").forEach(n => { n.style.transition = ms ? `transform ${ms}ms cubic-bezier(.2,.8,.2,1)` : "none"; n.style.transform = x ? `translate3d(${x}px,0,0)` : ""; });
+      const bpeek = side => {
+        const i = TABS.findIndex(t => t[0] === TF_BTAB), tgt = TABS[i + side]; if (!tgt) return null;
+        const bw0 = host.querySelector(".tf-bwrap"); if (!bw0) return null;
+        const d = document.createElement("div"); d.innerHTML = wrapHTML(tgt[0], bcols); const n = d.firstChild; n.classList.add("tf-bpeek"); n.setAttribute("aria-hidden", "true");
+        n.style.cssText += `;position:absolute;top:${bw0.offsetTop + Math.max(0, tfY(el))}px;left:${bw0.offsetLeft + side * (bw0.offsetWidth + BGAP)}px;width:${bw0.offsetWidth}px;pointer-events:none`;
+        host.appendChild(n); n.querySelectorAll("[data-tf-board], [data-tf-cat]").forEach((c, k) => { if (k < 18) (c.dataset.tfCat ? fillCat : fill)(c); });
+        return { tab: tgt[0], n };
+      };
+      const bclear = () => { host.querySelectorAll(".tf-bpeek").forEach(n => n.remove()); host.style.position = ""; document.documentElement.style.overflowX = ""; };
+      const bdown = e => { bs = e.touches.length === 1 && e.touches[0].clientX > 24 && e.touches[0].clientX < innerWidth - 24 && tfFilter() === "board" && !e.target.closest(".tf-btabs,.sheet,input") ? { x: e.touches[0].clientX, y: e.touches[0].clientY, t: Date.now(), lock: 0, pk: {} } : null; };
+      const bmove = e => {
+        if (!bs) return; if (e.touches.length > 1) { bs = null; bslide(0, 0); bclear(); return; }
+        const dx = e.touches[0].clientX - bs.x, dy = e.touches[0].clientY - bs.y;
+        if (!bs.lock && (Math.abs(dx) > 12 || Math.abs(dy) > 12)) {
+          bs.lock = Math.abs(dx) > Math.abs(dy) * 1.3 ? 1 : -1;
+          if (bs.lock === 1 && calm) { host.style.position = "relative"; document.documentElement.style.overflowX = "hidden"; bs.pk[1] = bpeek(1); bs.pk[-1] = bpeek(-1); }
+        }
+        if (bs.lock === 1 && calm) { const side = dx < 0 ? 1 : -1; bslide(bs.pk[side] ? dx : dx * .25, 0); }
+      };
+      const bup = async e => {
+        const s0 = bs; bs = null; if (!s0 || !e.changedTouches.length) return;
+        const dx = e.changedTouches[0].clientX - s0.x, dy = e.changedTouches[0].clientY - s0.y, side = dx < 0 ? 1 : -1, pk = s0.pk[side];
+        const back = () => { if (s0.lock === 1) { bslide(0, 240); setTimeout(bclear, 260); } };
+        if (Math.abs(dx) < 70 || Math.abs(dy) > Math.abs(dx) * .55 || Date.now() - s0.t > 700 || !pk) return back();
+        buzz(3);
+        if (calm) { const W = host.querySelector(".tf-bwrap").offsetWidth; bslide(-side * (W + BGAP), 230); await new Promise(r => setTimeout(r, 235)); }
+        bslide(0, 0); bclear(); TF_BTAB = pk.tab; draw(); tfScrollTo(el, 0);
+        const on = host.querySelector(".tf-btabs .tf-chip.on"); if (on) tfChipInView(host.querySelector(".tf-btabs"), on);
+      };
+      if (host._bswOff) host._bswOff();
+      host.addEventListener("touchstart", bdown, { passive: true }); host.addEventListener("touchmove", bmove, { passive: true }); host.addEventListener("touchend", bup, { passive: true });
+      host._bswOff = () => { host.removeEventListener("touchstart", bdown); host.removeEventListener("touchmove", bmove); host.removeEventListener("touchend", bup); host._bswOff = null; };
+      stop.push(() => { if (host._bswOff) host._bswOff(); });
       draw(); stop.push(() => { if (io) io.disconnect(); if (zoomB) zoomB.destroy(); });
     }).catch(() => { if (my === tok) host.innerHTML = `<div class="tf-state"><p class="small">The folders didn't load.</p></div>`; });
   };
@@ -422,7 +469,7 @@ function todayFeed() {
     glide(0, 0); peeksOff();
     pickLens(pk.id);   // the new page starts at its top, under the rows, exactly where the page beside this one showed it
   }, { passive: true });
-  el.querySelector("[data-tf-tune]").addEventListener("click", () => tfSettings(key => {
+  tune.addEventListener("click", () => tfSettings(key => {
     if (key === "caps") host.classList.toggle("nocaps", !hfS().caps);
     else if ((key === "alike") && lensId() === "foryou" && tfFilter() === "paint" && host.querySelector(".tf-paint[data-gi]")) reanchor();
     else if (key === "river" || key === "alike") { HF_CACHE.clear(); HF_ENDS.clear(); HF_VR.clear(); salt = 0; tfScrollTo(el, 0); paintings(false); }
@@ -602,7 +649,7 @@ function tfPaint(scr, host, st, f, restore, stop, ov) {
     // column heights are kept as numbers (read once per batch, then estimated from each card's known shape), not re-read from the page after every card:
     // that read forced a full layout per card, which on a phone is what made a batch of cards a visible stall
     const cw = cols[0] ? cols[0].offsetWidth : 0, hs = cols.map(c => c.offsetHeight), capH = host.classList.contains("nocaps") ? 0 : 50;
-    const est = it => it.t === "sp" ? cw / it.ar + capH : it.t === "paint" ? cw / glAR(it.gi) + capH : it.t === "pal" ? cw / it.r : it.t === "color" ? cw * it.r : null;
+    const est = it => it.t === "sp" ? cw / it.ar + capH : it.t === "paint" ? cw / glAR(it.gi) + capH : it.t === "pal" ? cw / it.r : it.t === "color" ? cw * it.r : it.t === "note" ? cw * .55 : null;
     for (; n < Math.min(upTo, list.length); n++) {
       tpl.innerHTML = tfCard(list[n]);
       const node = tpl.content.firstElementChild; if (!node) continue;

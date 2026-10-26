@@ -256,3 +256,12 @@ html .room-sheet>.screen.tf-screen.tf-screen{padding-left:var(--tfp);padding-rig
 .tf-btabs.tf-chips{position:static;margin:0 0 4px;padding:4px 0 6px;background:none;overflow-x:auto}
 html.desk .tf-btabs.tf-chips{padding-left:0;padding-right:0}
 .tf-btabs .tf-chip{height:36px;font-size:15px}
+
+/* settings: a round button at the bottom right, where the maps keep Arrange / Filters (David, 2026-10-26); it lives on the body so the page scrolls under it */
+.tf-tune,html.desk .tf-tune{position:fixed;top:auto;left:auto;right:16px;bottom:var(--corner-b,16px);width:var(--corner,56px);height:var(--corner,56px);z-index:40;box-shadow:0 4px 14px rgba(0,0,0,.38);background:var(--surface-2);border:1px solid rgba(236,232,223,.1)}
+.tf-tune svg{width:24px;height:24px}
+html.desk .tf-tune{right:28px;bottom:28px}
+.tf-bars .tf-kinds,html.desk .tf-bars .tf-kinds{padding-right:var(--g)}
+.tf-note{display:flex;flex-direction:column;justify-content:center;gap:6px;padding:18px 16px;min-height:110px;border:1px solid var(--rule);background:var(--surface-2);color:var(--ink);text-align:left}
+.tf-note b{font-size:16px;line-height:1.25;font-weight:600}
+.tf-note small{font-size:14px;line-height:1.35;color:var(--soft)}
