@@ -112,7 +112,7 @@ function tfCard(it) {
       return `<button type="button" class="tf-card tf-paint wait" data-tf="paint" data-gi="${i}"><span class="tf-im" style="--c:${dom.h};aspect-ratio:${(1 / glAR(i)).toFixed(3)}"></span><span class="tf-pal" aria-hidden="true">${tfStripes(i)}</span><span class="tf-heart" role="button" tabindex="0" data-tf-heart aria-pressed="false" aria-label="Keep this painting">${TF_HEART}</span><span class="tf-tx"><b></b><small></small></span></button>`;
     }
     case "sp":   // a seed painting (js/homefeed.js hfSeedRiver): drawn from its own record, before the archive has loaded
-      return `<button type="button" class="tf-card tf-paint" data-tf="paint" data-gi="${it.gi}"><span class="tf-im" style="--c:${it.c};aspect-ratio:${(1 / it.ar).toFixed(3)}"><img class="on" src="${esc(it.img)}" alt="" decoding="async" loading="lazy"></span><span class="tf-heart" role="button" tabindex="0" data-tf-heart aria-pressed="false" aria-label="Keep this painting">${TF_HEART}</span><span class="tf-tx"><b>${esc(it.ti)}</b><small>${esc(it.p)}${it.p && it.y ? " · " : ""}${it.y || ""}</small></span></button>`;
+      return `<button type="button" class="tf-card tf-paint" data-tf="paint" data-gi="${it.gi}"><span class="tf-im" style="--c:${it.c};aspect-ratio:${(1 / it.ar).toFixed(3)}"><img class="on" src="${esc(it.img)}" alt="" decoding="async" onload="tfBooted()" loading="lazy"></span><span class="tf-heart" role="button" tabindex="0" data-tf-heart aria-pressed="false" aria-label="Keep this painting">${TF_HEART}</span><span class="tf-tx"><b>${esc(it.ti)}</b><small>${esc(it.p)}${it.p && it.y ? " · " : ""}${it.y || ""}</small></span></button>`;
     case "note":   // the end of a painter's own work (the feed goes on with painters like them)
       return `<div class="tf-card tf-note"><b>That is all ${it.n === 1 ? "one painting" : it.n.toLocaleString("en-US") + " paintings"} by ${esc(it.a)}.</b><small>Keep scrolling: painters from the same years with a similar look.</small>${it.nm ? `<button type="button" class="tf-follow${hfHas("p", it.nm) ? " on" : ""}" data-tf-follow="p:${esc(it.nm)}" aria-pressed="${hfHas("p", it.nm)}">${hfHas("p", it.nm) ? TF_HEART_ON : TF_HEART}<span>${hfHas("p", it.nm) ? "Following" : "Follow"} ${esc(it.a)}</span></button>` : ""}</div>`;
     case "pal":
@@ -143,6 +143,13 @@ function tfCard(it) {
 // a painting card waits for its shard (title, artist, picture); the box and the colors are already there, so nothing moves
 // self-hosted copies of the most beautiful Commons paintings (tools/thumbs_host.py): data/gallery/hosted.bin has one bit per painting that has one on R2
 // (https://data.chromatlas.app/thumb/<index>.webp); anything else, or a copy that fails, still uses the museum's own address
+// the opening splash stays until the first real pictures are drawn (not just the grey skeleton, which appears at once and made the splash vanish before it was seen), for at least
+// three quarters of a second and at most four (David, 2026-10-26: "the loading screen stopped showing up")
+let TF_BOOTED = false;
+function tfBooted() {
+  if (TF_BOOTED) return; TF_BOOTED = true;
+  setTimeout(() => document.documentElement.classList.add("booted"), Math.max(0, 750 - performance.now()));
+}
 let TF_HOSTED = null;
 function tfHostedLoad() {
   if (TF_HOSTED !== null) return; TF_HOSTED = false;
@@ -166,7 +173,7 @@ function tfFill(root) {
       if (el.dataset.first) { img.loading = "eager"; img.fetchPriority = "high"; }
       const cs = glCropStyle(i, d, glAR(i)); if (cs) img.setAttribute("style", (cs.match(/style="([^"]*)"/) || [])[1] || "");
       // a failed or stalled picture is asked for again (a slow or rate-limited museum host used to leave a blurry tile that never sharpened)
-      img.onload = () => img.classList.add("on");
+      img.onload = () => { img.classList.add("on"); tfBooted(); };
       const src0 = tfThumb(i, d);
       img.onerror = () => { const t = img._try = (img._try || 0) + 1; if (t > 3) return img.remove(); const u = t === 1 && src0 !== d.img ? d.img : tfBust(img.dataset.src || d.img, t); img.dataset.src = u; setTimeout(() => { if (img.isConnected) img.src = u; }, 700 * t); };   // a self-hosted copy that fails falls back to the museum address
       img._t0 = performance.now(); img.dataset.src = src0;
@@ -203,7 +210,7 @@ function todayFeed() {
     <div class="tf-lens-head" data-tf-lh hidden></div>
     <div class="tf-feed${hfS().caps ? "" : " nocaps"}" data-tf-feed>${tfSkeleton(k)}</div>`, "tf-screen", "feed");
   const host = el.querySelector("[data-tf-feed]"), bars = el.querySelector(".tf-bars"), kindsRow = el.querySelector(".tf-kinds"), lensRow = el.querySelector(".tf-lenses"), lh = el.querySelector("[data-tf-lh]");
-  tfHostedLoad();
+  tfHostedLoad(); setTimeout(tfBooted, 4000);
   const tune = document.createElement("button"); tune.type = "button"; tune.className = "tf-tune"; tune.setAttribute("data-tf-tune", ""); tune.setAttribute("aria-label", "Home settings"); tune.innerHTML = typeof FD_ICON_TUNE !== "undefined" ? FD_ICON_TUNE : "";
   document.body.appendChild(tune);   // a round button at the bottom right like the maps' Arrange / Filters: on the body so it stays put while the page scrolls
   let st = TF && TF.k === k && TF.ready ? TF : null, pre = TF_PRE && TF_PRE.k === k ? TF_PRE : null, tok = 0, salt = 0;
@@ -402,7 +409,7 @@ function todayFeed() {
       host.addEventListener("touchstart", bdown, { passive: true }); host.addEventListener("touchmove", bmove, { passive: true }); host.addEventListener("touchend", bup, { passive: true });
       host._bswOff = () => { host.removeEventListener("touchstart", bdown); host.removeEventListener("touchmove", bmove); host.removeEventListener("touchend", bup); host._bswOff = null; };
       stop.push(() => { if (host._bswOff) host._bswOff(); });
-      draw(); stop.push(() => { if (io) io.disconnect(); if (zoomB) zoomB.destroy(); });
+      draw(); tfBooted(); stop.push(() => { if (io) io.disconnect(); if (zoomB) zoomB.destroy(); });
     }).catch(() => { if (my === tok) host.innerHTML = `<div class="tf-state"><p class="small">The folders didn't load.</p></div>`; });
   };
   const render = restore => { const f = tfFilter(); if (f === "paint") paintings(restore); else if (f === "board") boardsView(); else others(restore); };
