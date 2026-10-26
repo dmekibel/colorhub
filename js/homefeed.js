@@ -224,6 +224,61 @@ async function hfGenreList(k, key, roll) {
   const rr = hfSeedOf(key + "|g" + k + "|" + roll, "genre"), picked = hfPick(cand, rr, HF_KEEP, null, hfCut(.4));
   return { ids: hfRiverOn() ? hfChainList(picked, rr) : picked, total: cand.length };
 }
+// ---------- more kinds of board (David, 2026-10-26: "come up with more board categories"): subjects, stories, places, collections, palette character, composition, yours ----------
+// Each is a lens id with a prefix; hfCandsOf(id) lists its paintings, the same list-maker (beauty, then the gradual order) as every other board does the rest.
+const hfHueOfLab = i => { const M = GAL.mean, h = Math.atan2(M[i * 3 + 2], M[i * 3 + 1]) * 180 / Math.PI; return h < 0 ? h + 360 : h; };   // CIELAB hue: 0 red, 90 yellow, 180 green, 270 blue
+const HF_PCS = [   // palette character, from the painting's mean lightness and chroma
+  ["pastel", "Pastel", i => GAL.L[i] >= 66 && GAL.C[i] >= 9 && GAL.C[i] <= 32],
+  ["airy", "Bright and airy", i => GAL.L[i] >= 76 && GAL.C[i] < 22],
+  ["dark", "Dark and moody", i => GAL.L[i] <= 36],
+  ["vivid", "Vivid", i => GAL.C[i] >= 40],
+  ["earthy", "Earthy", i => { const L = GAL.L[i], c = GAL.C[i]; if (L < 35 || L > 70 || c < 12 || c > 42) return false; const h = hfHueOfLab(i); return h >= 35 && h <= 100; }],
+  ["cool", "Cool blues and greens", i => { if (GAL.C[i] < 14) return false; const h = hfHueOfLab(i); return h >= 150 && h <= 300; }],
+  ["warm", "Warm reds and oranges", i => { if (GAL.C[i] < 16) return false; const h = hfHueOfLab(i); return h < 65 || h > 330; }],
+  ["grey", "Soft greys", i => GAL.C[i] < 8],
+];
+const HF_CPS = [   // composition: how abstract (tools/audit_scene.py), how close or wide, and the shape of the canvas
+  ["close", "Close-ups and portraits", i => HF_SCENE && HF_SCENE[i * 2 + 1] <= 80 && HF_SCENE[i * 2] < 200],
+  ["figures", "Figures", i => HF_SCENE && HF_SCENE[i * 2 + 1] > 80 && HF_SCENE[i * 2 + 1] <= 150 && HF_SCENE[i * 2] < 200],
+  ["groups", "Groups and interiors", i => HF_SCENE && HF_SCENE[i * 2 + 1] > 150 && HF_SCENE[i * 2 + 1] <= 215 && HF_SCENE[i * 2] < 200],
+  ["wide", "Wide views", i => HF_SCENE && HF_SCENE[i * 2 + 1] > 215 && HF_SCENE[i * 2] < 200],
+  ["abstract", "Abstract", i => HF_SCENE && HF_SCENE[i * 2] >= 235],
+  ["leaning", "Leaning abstract", i => HF_SCENE && HF_SCENE[i * 2] >= 205 && HF_SCENE[i * 2] < 235],
+  ["tall", "Tall canvases", i => GAL.ar[i] > 1.3],
+  ["square", "Square", i => GAL.ar[i] >= .9 && GAL.ar[i] <= 1.1],
+  ["landscape", "Wide canvases", i => GAL.ar[i] < .8 && GAL.ar[i] >= .55],
+  ["panorama", "Panoramas", i => GAL.ar[i] < .55],
+];
+let HF_KEPT_LABEL = "Kept"; const HF_CUSTOM_LABELS = new Map();   // lens id -> its name (filled by hfBoards and hfCustomLabel)
+async function hfCandsOf(id) {
+  await loadGallery(); await hfBeautyReady();
+  const t = id.slice(0, 2), v = id.slice(3), out = [];
+  const scan = test => { for (let i = 0; i < GAL.n; i++) if (!hfHid(i) && test(i)) out.push(i); return out; };
+  if (t === "pc") { const d = HF_PCS.find(x => x[0] === v); return d ? scan(d[2]) : out; }
+  if (t === "cp") { const d = HF_CPS.find(x => x[0] === v); return d ? scan(d[2]) : out; }
+  if (t === "mu") return scan(i => GAL.mus[i] === +v);
+  if (t === "co") { const F = await hfFacets(), pos = F.meta.countries.indexOf(v) + 1; return pos ? scan(i => F.country[i] === pos) : out; }
+  if (t === "su") { const S = await loadSubjects(), k = S.idx.get(v); if (k == null) return out; return scan(i => { for (let q = S.off[i]; q < S.off[i + 1]; q++) if (S.tg[q] === k) return true; return false; }); }
+  if (t === "yo") { const st = typeof fvArtStore === "function" ? Object.values(fvArtStore()) : []; return st.filter(x => x && x.i >= 0 && !hfHid(x.i)).sort((a, b) => (b.at || 0) - (a.at || 0)).map(x => x.i); }
+  return out;
+}
+const hfCustomKind = t => t === "su" || t === "co" || t === "mu" || t === "pc" || t === "cp" || t === "yo";
+async function hfCustomLabel(id) {
+  const t = id.slice(0, 2), v = id.slice(3);
+  if (t === "pc") return (HF_PCS.find(x => x[0] === v) || [0, v])[1];
+  if (t === "cp") return (HF_CPS.find(x => x[0] === v) || [0, v])[1];
+  if (t === "mu") { await loadGallery(); const s0 = GAL.src[+v]; return s0 ? s0.name : "Collection"; }
+  if (t === "co") return v;
+  if (t === "yo") return HF_KEPT_LABEL;
+  if (t === "su") return typeof subjPlural === "function" ? subjPlural(v) : v;
+  return v;
+}
+async function hfCustomList(id, k, roll) {
+  const cand = await hfCandsOf(id);
+  if (id.startsWith("yo:")) return { ids: cand, total: cand.length };
+  const rr = hfSeedOf(k + "|" + id + "|" + roll, "custom"), picked = hfPick(cand, rr, HF_KEEP, null, hfCut(.45));
+  return { ids: hfRiverOn() ? hfChainList(picked, rr) : picked, total: cand.length };
+}
 // the folders: sections of boards for the Boards page
 async function hfBoards() {
   const F = await hfFacets(), C = hfCounts(F); await hfBeautyReady(); await hfMoodReady();
@@ -236,6 +291,27 @@ async function hfBoards() {
   const nice = TODAY_TABLE.filter(r => { const c = lch(r[2]); return c[1] >= 12 && hfLiking(c[2], c[0], c[1]) >= .66; }), by = new Map();
   nice.forEach(r => { const h = Math.floor(lch(r[2])[2] / 30); if (!by.has(h)) by.set(h, r); });
   secs.push({ tab: "colors", title: "Colors", boards: [...by.values()].map(r => ({ id: "c:" + r[2], label: r[1], sub: "Color", hex: r[2] })) });
+  // more kinds of board
+  const cnt = test => { let n = 0; for (let i = 0; i < GAL.n; i++) if (!hfHid(i) && test(i)) n++; return n; };
+  try {
+    const S = await loadSubjects(), things = [], icons = [];
+    S.tags.forEach((nm, t) => { if (S.hide[t] || S.fold[t] !== t) return; const n = S.n[t]; if (S.grp[t] === "t" && n >= 600) things.push({ nm, n }); else if (S.grp[t] === "i" && n >= 300) icons.push({ nm, n }); });
+    const mk = l => l.sort((a, b) => b.n - a.n).slice(0, 44).map(x => { const id = "su:" + x.nm, lb = subjPlural(x.nm); HF_CUSTOM_LABELS.set(id, lb); return { id, label: lb, sub: x.n.toLocaleString("en-US") + " paintings" }; });
+    if (things.length) secs.push({ tab: "subjects", title: "Subjects", boards: mk(things) });
+    if (icons.length) secs.push({ tab: "stories", title: "Stories and iconography", boards: mk(icons) });
+  } catch (e) {}
+  const cc = new Int32Array(F.meta.countries.length + 1), mc = new Int32Array(GAL.src.length);
+  for (let i = 0; i < GAL.n; i++) if (!hfHid(i)) { cc[F.country[i]]++; mc[GAL.mus[i]]++; }
+  const places = []; F.meta.countries.forEach((nm, j) => { if (cc[j + 1] >= 800) places.push({ nm, n: cc[j + 1] }); });
+  places.sort((a, b) => b.n - a.n); secs.push({ tab: "places", title: "Places", boards: places.slice(0, 40).map(x => { HF_CUSTOM_LABELS.set("co:" + x.nm, x.nm); return { id: "co:" + x.nm, label: x.nm, sub: x.n.toLocaleString("en-US") + " paintings" }; }) });
+  const mus = []; GAL.src.forEach((s0, k) => { if (mc[k] >= 1500) mus.push({ k, n: mc[k], name: s0.name }); });
+  mus.sort((a, b) => b.n - a.n); secs.push({ tab: "collections", title: "Collections", boards: mus.slice(0, 40).map(x => { HF_CUSTOM_LABELS.set("mu:" + x.k, x.name); return { id: "mu:" + x.k, label: x.name, sub: x.n.toLocaleString("en-US") + " paintings" }; }) });
+  secs.push({ tab: "palettes", title: "Palette character", boards: HF_PCS.map(([id, label, test]) => { HF_CUSTOM_LABELS.set("pc:" + id, label); return { id: "pc:" + id, label, sub: cnt(test).toLocaleString("en-US") + " paintings" }; }) });
+  secs.push({ tab: "composition", title: "Composition", boards: HF_CPS.filter(d => HF_SCENE || !/^(close|figures|groups|wide|abstract|leaning)$/.test(d[0])).map(([id, label, test]) => { HF_CUSTOM_LABELS.set("cp:" + id, label); return { id: "cp:" + id, label, sub: cnt(test).toLocaleString("en-US") + " paintings" }; }) });
+  { const yb = [], kept = typeof fvArtStore === "function" ? Object.values(fvArtStore()).filter(x => x && x.i >= 0).length : 0;
+    if (kept) yb.push({ id: "yo:kept", label: HF_KEPT_LABEL, sub: kept.toLocaleString("en-US") + " paintings" });
+    hfFollows().forEach(f => yb.push({ id: hfFollowId(f), label: f.kind === "p" ? fdShortName(f.name) : f.name, sub: f.kind === "p" ? "Painter you follow" : "Movement you follow" }));
+    if (yb.length) secs.unshift({ tab: "yours", title: "Yours", boards: yb }); }
   const ars = []; F.meta.artists.forEach((a, j) => { if (C.art[j + 1] >= 150) ars.push({ n: a[0], c: C.art[j + 1] }); });
   ars.sort((x, y) => y.c - x.c); secs.push({ tab: "painters", title: "Painters", boards: ars.slice(0, 36).map(x => ({ id: "p:" + x.n, label: fdShortName(x.n), sub: x.c.toLocaleString("en-US") + " paintings" })) });
   return secs;
@@ -249,6 +325,7 @@ async function hfCoverIds(id) {
   else if (t === "e:") { const [a, b] = hfEraSpan(v); for (let i = 0; i < GAL.n; i++) { const y = GAL.year[i]; if (y !== GL_UNDATED && y >= a && y < b && !hfHid(i)) cand.push(i); } }
   else if (t === "m:" || t === "p:") { const pos = (t === "p:" ? F.meta.artists.findIndex(a => a[0] === v) : F.meta.movements.indexOf(v)) + 1; cand = pos ? hfIndexBy(F, t === "p:" ? F.artist : F.mv, pos).filter(i => !hfHid(i)) : []; }
   else if (t === "c:") cand = (await hfNearColor(v)).ids.slice(0, 80);
+  else if (hfCustomKind(t)) { cand = await hfCandsOf(id); if (t === "yo") cand = cand.slice(0, 60); }
   cand = cand.filter(i => GAL.ar[i] > .6 && GAL.ar[i] < 1.7).sort((x, y) => hfBeauty(y) - hfBeauty(x)).slice(0, 40);
   const rnd = hfSeedOf(HF_SESSION + id, "cover"), out = [], ars = new Set();
   while (out.length < 3 && cand.length) { const j = Math.floor(rnd() * Math.min(cand.length, 14)), i = cand.splice(j, 1)[0], a = F.artist[i]; if (a && ars.has(a) && cand.length > 6) continue; if (a) ars.add(a); out.push(i); }
@@ -290,6 +367,7 @@ function hfChips(pre, activeId) {
 function hfLabelOf(id, pre) {
   const t = id.slice(0, 2), v = id.slice(2);
   if (t === "mo") return hfMoodName(id.slice(3)); if (t === "e:") return hfEraName(v); if (t === "g:") return hfGenreName(v);
+  if (hfCustomKind(t)) { const c = HF_CUSTOM_LABELS.get(id); return c || (t === "yo" ? HF_KEPT_LABEL : id.slice(3)); }
   if (t === "m:") return v; if (t === "p:") return fdShortName(v);
   if (t === "l:") return pre && pre.likeTitle && "l:" + pre.li === id ? "Like " + pre.likeTitle : "Like this one"; if (t === "c:") { const r = TODAY_TABLE.find(x => x[2] === v); return "Near " + (r ? r[1].toLowerCase() : v); }
   return "For you";
@@ -612,6 +690,7 @@ async function hfLens(id, k, salt, fast) {
   const t = id.slice(0, 2), v = id.slice(2);
   if (t === "m:" || t === "p:") return { ...(await hfByFacet(t[0], v, k, hfRoll(id))), head: { kind: t[0], name: v } };
   if (t === "g:") return { ...(await hfGenreList(v, k, hfRoll(id))), head: { kind: "g", name: hfGenreName(v) } };
+  if (hfCustomKind(t)) { const nm = await hfCustomLabel(id); HF_CUSTOM_LABELS.set(id, nm); return { ...(await hfCustomList(id, k, hfRoll(id))), head: { kind: "x", name: nm } }; }
   if (t === "mo") return { ...(await hfMoodList(id.slice(3), k, hfRoll(id))), head: { kind: "mo", name: hfMoodName(id.slice(3)) } };
   if (t === "e:") return { ...(await hfEraList(v, k, hfRoll(id))), head: { kind: "e", name: hfEraName(v) } };
   if (t === "l:") { const seed = +v, by = hfS().likeBy === "color" ? "color" : "vibe"; return { ...(await hfLike(seed, by)), head: { kind: "l", seed, by } }; }
