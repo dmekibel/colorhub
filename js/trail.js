@@ -268,13 +268,13 @@ function tlgDest(el, axis) {
 let TLG_PREV = null, TLG_KEEP_PREV = false, TLG_HOLD = null;
 // the map's last frame, taken as it is left (its canvas is torn down by the screen swap); null for any other screen
 function tlgLeavingMap() { const o = typeof app !== "undefined" && app.firstElementChild; return o && o.classList.contains("hm") ? tlgSnapshot() : null; }
-function tlgStash(old, top, hash, el, mapImg) {
+function tlgStash(old, top, hash, el, mapImg, sy) {
   if (TLG_KEEP_PREV) return;
   if (!el || !el.classList.contains("gl-page")) { TLG_PREV = null; return; }
   if (old && old.classList.contains("hm")) { TLG_PREV = { map: true, img: mapImg || null }; return; }   // the color map: its last drawn frame is the backdrop (tlgBackdrop)
   if (!old || old === el || (old.classList.contains("fixed") && !old.classList.contains("pmx"))) { TLG_PREV = null; return; }   // (the painting map is fixed too, but its canvas keeps its last frame)
   if (old.classList.contains("gl-page") && hash === ROUTE_NOW) return;   // the same painting redrawn: what was under it is still under it
-  TLG_PREV = { el: old, y: top || 0 };
+  TLG_PREV = { el: old, y: top || 0, sy: sy || 0 };
 }
 // mounts the held screen as a fixed layer behind #app (z-index:1), scrolled to where it was left, dimmed a little until the page leaves
 // what sits under a dragged page: for a painting page the map's frame, or the screen it replaced (the layer); else the old floor
@@ -292,6 +292,7 @@ function tlgPrevLayer() {
   d.appendChild(p.el); d.appendChild(dim); d._dim = dim;
   document.body.insertBefore(d, document.getElementById("app"));
   d.scrollTop = p.y;
+  const sc = p.sy ? p.el.querySelector && p.el.querySelector(".screen") : null; if (sc) sc.scrollTop = p.sy;   // the room's own screen, back where it was
   return d;
 }
 function tlgDropLayer(layer, soft) {

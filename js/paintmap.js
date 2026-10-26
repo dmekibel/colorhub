@@ -475,7 +475,7 @@ function pmParse(q, F) {
   const f = s.f, num = k => { const v = p.get(k); return v != null && v !== "" && isFinite(+v) ? +v : null; };
   const uy = num("uy"); if (uy != null) s.upToYear = uy;
   const mg = num("mag"); if (mg != null) s.mag = clamp(mg, 0, 1);
-  if (p.get("lk") === "isl" || p.get("lk") === "grid") s.lkl = p.get("lk");   // By look settings (the address wins over this phone's saved choice)
+  if (["isl", "grid", "grad"].includes(p.get("lk"))) s.lkl = p.get("lk");   // By look settings (the address wins over this phone's saved choice)
   const lsp = num("lsp"); if (lsp != null) s.lks = clamp(lsp, 0, 1);
   if (/^(0|30|60)$/.test(p.get("lc") || "")) s.lkc = +p.get("lc");
   if (p.get("lb") === "0" || p.get("lb") === "1") s.lkb = +p.get("lb");
@@ -1011,7 +1011,7 @@ function pmLaySubject(list, F) {
 // "Photo-format effect: Reduce" swaps in look-reduced*.json/.bin (same pipeline, vectors centered per museum). Everything loads lazily:
 // look.json (small, has the island table) when a painting map opens, a .bin only when its layout is first drawn.
 // A missing, short or stale file (n or hash not matching) hides the option; a shared address that names it falls back to color.
-const PM_LOOK = { st: 0, meta: null, pm: null, rp: null, V: { keep: null, c30: null, c60: null } };   // st: 0 unknown, 2 ready, 3 unavailable. V[v] = { meta, grid, isl, bad }
+const PM_LOOK = { st: 0, meta: null, pm: null, rp: null, V: { keep: null, c30: null, c60: null, grad: null } };   // st: 0 unknown, 2 ready, 3 unavailable. V[v] = { meta, grid, isl, bad }
 const PM_LK_DEF = { lay: "isl", sp: .05, col: 30, lab: 1 };
 // the window shape the island cloud is stretched to (a phone is tall, a desktop wide), in quarter steps so a resize does not relay out every frame
 const pmLookAsp = () => clamp(Math.round(innerWidth / Math.max(300, innerHeight) * 4) / 4, .4, 2);
@@ -1023,10 +1023,11 @@ function pmLkSave(o) { try { localStorage.setItem(PM_LK_KEY, JSON.stringify(o));
 function pmLk(s) {
   const sv = pmLkSaved(), pick = (a, b, d) => a != null ? a : b != null ? b : d;
   const col = +pick(s.lkc, sv.col, PM_LK_DEF.col);
-  return { lay: pick(s.lkl, sv.lay, PM_LK_DEF.lay) === "grid" ? "grid" : "isl", sp: clamp(+pick(s.lks, sv.sp, PM_LK_DEF.sp), 0, 1),
+  const lay0 = pick(s.lkl, sv.lay, PM_LK_DEF.lay);
+  return { lay: lay0 === "grid" ? "grid" : lay0 === "grad" ? "grad" : "isl", sp: clamp(+pick(s.lks, sv.sp, PM_LK_DEF.sp), 0, 1),
     col: col >= 45 ? 60 : col >= 15 ? 30 : 0, lab: +pick(s.lkb, sv.lab, PM_LK_DEF.lab) ? 1 : 0 };
 }
-const PM_LOOK_FILES = { keep: { json: "look.json", grid: "look.bin", isl: "look-islands.bin" }, c30: { json: "look-c30.json", isl: "look-islands-c30.bin" }, c60: { json: "look-c60.json", isl: "look-islands-c60.bin" } };
+const PM_LOOK_FILES = { grad: { json: "look-grad.json", grid: "look-grad.bin" }, keep: { json: "look.json", grid: "look.bin", isl: "look-islands.bin" }, c30: { json: "look-c30.json", isl: "look-islands-c30.bin" }, c60: { json: "look-c60.json", isl: "look-islands-c60.bin" } };
 const PM_LOOK_COLS = [[0, "None", "keep"], [30, "Some", "c30"], [60, "A lot", "c60"]];
 // the data variant a spec actually uses for Islands (a color variant that is missing or broken quietly falls back to None)
 function pmLookV(s) { const w = pmLk(s).col, v = w ? "c" + w : "keep", D = PM_LOOK.V[v]; return D && D.meta && !D.dead ? v : "keep"; }
@@ -1034,7 +1035,10 @@ function pmLookKind(s) {
   const D = PM_LOOK.V[pmLookV(s)];
   return pmLk(s).lay === "isl" && D && D.meta && D.meta.islands && !D.bad.isl ? "isl" : "grid";
 }
-const pmLookHave = s => { const k = pmLookKind(s), D = PM_LOOK.V[k === "isl" ? pmLookV(s) : "keep"]; return !!D && !!D[k]; };
+// Gradual (tools/look_gradient.py): an even grid laid out from CLIP + color + the abstraction/scale axes, so the map changes slowly in all of them
+const pmGradOn = () => { const D = PM_LOOK.V.grad; return !!(D && D.meta && !D.dead && !D.bad.grid); };
+const pmGridV = s => (pmLk(s).lay === "grad" && pmGradOn() ? "grad" : "keep");
+const pmLookHave = s => { const k = pmLookKind(s), D = PM_LOOK.V[k === "isl" ? pmLookV(s) : pmGridV(s)]; return !!D && !!D[k]; };
 const pmLookReady = s => PM_LOOK.st === 2 && pmLookHave(s);
 const pmLookShown = s => (s.col || "paintings") === "paintings" && !!PM_LOOK.meta && PM_LOOK.st !== 3;
 const pmLookColsOn = () => PM_LOOK_COLS.filter(c => { const D = PM_LOOK.V[c[2]]; return D && D.meta && !D.dead && !D.bad.isl; });
@@ -1047,7 +1051,7 @@ function pmLookProbeOne(F, v) {
 }
 function pmLookProbe(F) {   // the small files: is there a look map for exactly this gallery?
   if (PM_LOOK.pm) return PM_LOOK.pm;
-  PM_LOOK.rp = Promise.all(["c30", "c60"].map(v => pmLookProbeOne(F, v).catch(() => null)));   // the optional Color influence variants, in parallel
+  PM_LOOK.rp = Promise.all(["c30", "c60", "grad"].map(v => pmLookProbeOne(F, v).catch(() => null)));   // the optional Color influence variants, in parallel
   return PM_LOOK.pm = pmLookProbeOne(F, "keep").then(m => { if (m) PM_LOOK.meta = m; else PM_LOOK.st = 3; return PM_LOOK.meta; }).catch(() => { PM_LOOK.pm = null; return null; });
 }
 function pmLookBin(F, v, kind) {   // one .bin into typed arrays; false when it is missing or does not match
@@ -1077,8 +1081,8 @@ function pmLookEnsure(F, s) {   // resolves true when By look can be drawn with 
   if (PM_LOOK.st === 2 && pmLookReady(s)) return Promise.resolve(true);
   return pmLookProbe(F).then(m => {
     if (!m) { PM_LOOK.st = 3; return false; }
-    return (pmLk(s).col ? PM_LOOK.rp : Promise.resolve(null)).then(() => {
-      const kind = pmLookKind(s), v = kind === "isl" ? pmLookV(s) : "keep";
+    return (pmLk(s).col || pmLk(s).lay === "grad" ? PM_LOOK.rp : Promise.resolve(null)).then(() => {
+      const kind = pmLookKind(s), v = kind === "isl" ? pmLookV(s) : pmGridV(s);
       return pmLookBin(F, v, kind).then(ok => {
         if (!ok && v !== "keep") PM_LOOK.V[v].dead = true;
         if (!ok) return pmLookBin(F, "keep", kind === "isl" ? "isl" : "grid").then(ok2 => ok2 || pmLookBin(F, "keep", "grid"));
@@ -1261,7 +1265,7 @@ function pmLayLookIsl(list, D, o, withLabels, asp) {
 }
 function pmLayLook(list, F, s) {
   const o = pmLk(s);
-  return pmLookKind(s) === "isl" ? pmLayLookIsl(list, PM_LOOK.V[pmLookV(s)], o, !!o.lab, pmLookAsp()) : pmLayLookGrid(list, PM_LOOK.V.keep.grid, F);
+  return pmLookKind(s) === "isl" ? pmLayLookIsl(list, PM_LOOK.V[pmLookV(s)], o, !!o.lab, pmLookAsp()) : pmLayLookGrid(list, PM_LOOK.V[pmGridV(s)].grid, F);
 }
 // Tones (David, 2026-10-09): the same Vivid/Light/Muted/Dark split honey.js's own Tones shape uses
 // (honeyToneGroup), applied to whichever color "Place by" already uses for position (pmPlaceLab) -- an island
@@ -2190,8 +2194,8 @@ function pmMount(el, s, F) {
     const o = pmLk(s), isl = pmLookKind(s) === "isl" || (o.lay === "isl" && pmLookHasIsl());
     const seg = (k, opts, cur, label) => `<div class="hm-seg" role="radiogroup" aria-label="${label}">${opts.map(([v, t]) => `<button class="${String(cur) === String(v) ? "on" : ""}" data-pmlk="${k}" data-v="${v}" role="radio" aria-checked="${String(cur) === String(v)}">${t}</button>`).join("")}</div>`;
     const filtered = pmList(s, F).length !== F.N - pmHidN(F);
-    return `${pmLookHasIsl() ? `<div class="cx-sec"><b>Layout</b></div>${seg("lay", [["isl", "Islands"], ["grid", "Even grid"]], o.lay, "Layout")}
-        <p class="hm-arr-sub">${o.lay === "isl" ? "The clusters the image model found, each its own island." : "One even block, every painting the same distance apart."}</p>` : ""}
+    return `${pmLookHasIsl() || pmGradOn() ? `<div class="cx-sec"><b>Layout</b></div>${seg("lay", [...(pmLookHasIsl() ? [["isl", "Islands"]] : []), ["grid", "Even grid"], ...(pmGradOn() ? [["grad", "Gradual"]] : [])], o.lay, "Layout")}
+        <p class="hm-arr-sub">${o.lay === "isl" ? "The clusters the image model found, each its own island." : o.lay === "grad" ? "No borders: what the picture is (abstract to lifelike, close-up to wide), how it looks and its colors all change slowly from one area to the next." : "One even block, every painting the same distance apart."}</p>` : ""}
         ${isl ? `<div class="hm-feel"><label class="hm-feel-row"><span class="hm-feel-l">Spread</span><span class="hm-feel-r"><i>Tight</i><input type="range" min="0" max="1" step="0.01" value="${o.sp}" data-pmlksp aria-label="Island spread, tight to wide"><i>Wide</i></span></label></div>` : ""}
         ${isl && pmLookColsOn().length > 1 ? `<div class="cx-sec"><b>Color influence</b></div>${seg("col", pmLookColsOn().map(c => [c[0], c[1]]), o.col, "Color influence")}
         <p class="hm-arr-sub">${o.col ? "The paintings' colors also shape where they sit, so colors flow across the map." : "Placed only by what the image model sees: subject, style and mood."}</p>` : ""}

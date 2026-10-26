@@ -1631,7 +1631,10 @@ function glPage(i, d, fromHex, tol) {
     const bh = el.querySelector(".art-top [data-fva]"), hs = el.querySelector(".gl-hero>span");
     if (bh && hs) {
       const ch = document.createElement("button"); ch.type = "button"; ch.className = "gl-corner-heart"; ch.setAttribute("data-glch", "");
-      const sync = () => { ch.innerHTML = bh.innerHTML; ch.classList.toggle("on", bh.classList.contains("on")); ch.setAttribute("aria-pressed", bh.getAttribute("aria-pressed") || "false"); ch.setAttribute("aria-label", bh.getAttribute("aria-label") || "Keep this painting"); };
+      let rest = 0;
+      const quiet = () => { clearTimeout(rest); if (bh.classList.contains("on")) rest = setTimeout(() => ch.classList.add("rest"), 1400); else ch.classList.remove("rest"); };   // liked: the heart goes quiet, it does not float on the picture forever
+      hs.addEventListener("pointerdown", () => { ch.classList.remove("rest"); quiet(); });
+      const sync = () => { ch.innerHTML = bh.innerHTML; ch.classList.toggle("on", bh.classList.contains("on")); quiet(); ch.setAttribute("aria-pressed", bh.getAttribute("aria-pressed") || "false"); ch.setAttribute("aria-label", bh.getAttribute("aria-label") || "Keep this painting"); };
       sync(); ch.onclick = e => { e.stopPropagation(); bh.click(); };
       new MutationObserver(sync).observe(bh, { attributes: true, childList: true, subtree: true });
       hs.appendChild(ch);

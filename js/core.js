@@ -689,7 +689,8 @@ function show(html, cls = "", tab = null) {
   if (leavingHash) SCROLL_BY_HASH.set(leavingHash, leavingY);
   // the old screen fades out underneath the new one (and, combined with growFrom's clip-path on the new
   // content below, is also what stands in for "the honeycomb dims" during a Room's grow-in: DESIGN-SYSTEM §8)
-  const old = app.firstElementChild, oldSheet = app.querySelector(":scope > .room-sheet");   // (a room is the floor peek, then its sheet: the sheet is the page that was there)
+  const old = app.firstElementChild, oldSheet = app.querySelector(":scope > .room-sheet");
+  const oldSheetY = oldSheet && oldSheet.querySelector(".screen") ? oldSheet.querySelector(".screen").scrollTop : 0;   // a room's own screen scrolls inside the sheet (its scroll is lost the moment it is detached)   // (a room is the floor peek, then its sheet: the sheet is the page that was there)
   if (old && !reduceMotion && !skipAnim) {
     const ghost = document.createElement("div"), y = scrollY;
     ghost.className = "fade-ghost"; ghost.style.top = -y + "px";
@@ -712,7 +713,7 @@ function show(html, cls = "", tab = null) {
   else window.scrollTo(0, 0);
   document.body.classList.remove("scrolled");
   const el = app.querySelector(".screen");
-  if (typeof tlgStash === "function") tlgStash(oldSheet && old && old.classList.contains("room-floor-peek") ? oldSheet : old, leavingTop, leavingHash, el, leavingMap);   // a painting page keeps the screen it replaced, for the pull-down backdrop
+  if (typeof tlgStash === "function") tlgStash(oldSheet && old && old.classList.contains("room-floor-peek") ? oldSheet : old, leavingTop, leavingHash, el, leavingMap, oldSheetY);   // a painting page keeps the screen it replaced, for the pull-down backdrop
   if (skipAnim) el.style.animation = "none";   // no entrance either: the gesture (or the native swipe) already moved it
   // skipAnim already read whatever TLG_SKIP was for THIS screen; clear it now so a flag a gesture left set (it
   // never reached its own tlgCommit() finally, again the preempted-gesture case above) can't also apply to some

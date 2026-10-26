@@ -1,0 +1,15 @@
+{
+ "v": 1,
+ "n": 206345,
+ "w": 365,
+ "h": 566,
+ "hash": "63c818b0",
+ "built": "2026-10-26",
+ "model": "ViT-B-32 laion2b_s34b_b79k",
+ "method": "CLIP + color + abstraction/scale axes -> UMAP(2-D) -> recursive median split onto an even grid -> neighbor-swap smoothing",
+ "weights": {
+  "clip": 1.0,
+  "color": 0.6,
+  "axes": 1.0
+ }
+}

@@ -214,8 +214,7 @@ html .room-sheet>.screen.tf-screen.tf-screen{padding-left:var(--tfp);padding-rig
 .tf-cols .tf-card,.tf-paint .tf-im,.tf-feed.nocaps .tf-paint .tf-im{border-radius:0}
 .tf-paint .tf-tx{padding:6px 10px 8px}
 .tf-heart{display:none}
-.tf-paint:not(.wait) .tf-heart.on{display:grid;top:auto;bottom:8px;right:8px;width:28px;height:28px;background:rgba(14,13,11,.55)}
-.tf-heart.on svg{width:15px;height:15px}
+/* a liked tile keeps nothing on top of it: the heart blooms where you tapped, then it is gone (your likes live in Kept) */
 
 /* settings card: title left, a plain close button right, centered on one line */
 .sheet .fs-head:has(.tf-x){align-items:center;justify-content:space-between}
