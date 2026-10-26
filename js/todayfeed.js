@@ -220,15 +220,21 @@ function todayFeed() {
     lh.innerHTML = html; lh.hidden = !html; lh.dataset.kind = h.kind;
     if (h.kind === "l") glShard(Math.floor(h.seed / GAL.shard)).then(() => { const d = glDetailNow(h.seed); if (!d || !lh.isConnected) return; const t = lh.querySelector("[data-tf-seedt]"), n = lh.querySelector("[data-tf-seedn]"), sd = lh.querySelector("[data-tf-seed]"); if (t) t.textContent = "Like " + d.t; if (n) n.textContent = [d.a, glYear(h.seed)].filter(Boolean).join(" · "); if (sd && d.img) { const im = new Image(); im.alt = ""; im.onload = () => sd.appendChild(im); im.src = d.img; } if (pre && pre.li === h.seed && !pre.likeTitle) { pre.likeTitle = hfShortTitle(d.t); drawLenses(); } }).catch(() => {});
   };
+  const lensKeys = id => { const hk = k + "|" + HF_SESSION + "|" + hfRoll("foryou"); return { hk, ck: [id, hk, hfRoll(id), hfS().pOrder, hfS().likeBy].join("|"), fy: id === "foryou" }; };
+  const mkItems = list => list.map(gi => ({ t: "paint", key: "g:" + gi, gi }));
+  // one list per lens and visit (also what a sideways swipe shows next door before you let go)
+  const lensOv = (id, res, items) => {
+    const { hk, ck, fy } = lensKeys(id);
+    const ov = HF_CACHE.get(ck) || { key: "paint:" + ck, list: items || mkItems(res.ids), seen: fy, end: "That is every painting here.", res, more: fy ? () => hfLens("foryou", hk, ++salt).then(r => mkItems(r.ids)) : null };
+    HF_CACHE.set(ck, ov); return ov;
+  };
   const paintings = restore => {
-    const my = ++tok, id = lensId(), hk = k + "|" + HF_SESSION + "|" + hfRoll("foryou"), mk = list => list.map(gi => ({ t: "paint", key: "g:" + gi, gi }));
-    const ck = [id, hk, hfRoll(id), hfS().pOrder, hfS().likeBy].join("|"), fy = id === "foryou";
+    const my = ++tok, id = lensId(), { hk, ck, fy } = lensKeys(id);
     const go = (res, items) => {
       if (my !== tok || !host.isConnected) return;
       drawHead(res);
       if (!res.ids.length) return empty(res.empty || "Try another one.", false);
-      const ov = HF_CACHE.get(ck) || { key: "paint:" + ck, list: items || mk(res.ids), seen: fy, end: "That is every painting here.", res, more: fy ? () => hfLens("foryou", hk, ++salt).then(r => mk(r.ids)) : null };
-      HF_CACHE.set(ck, ov);
+      const ov = lensOv(id, res, items);
       tfPaint(el, host, HF_STATE, "paint", restore, stop, ov);
     };
     // the same list comes back when you return to a lens (a Back, a tab switch), so what you had on screen is still there
@@ -261,29 +267,63 @@ function todayFeed() {
     pickLens(b.dataset.tfL);
   });
   // swipe sideways on the paintings to go to the next / previous lens (Pinterest does the same); the row grows as you reach its end
-  // the paintings follow your finger sideways, then slide off to that side and the next lens slides in from the other (not a cut)
+  // the paintings follow your finger sideways with the next (or previous) lens already beside them, a thin gap between, like Pinterest's tabs:
+  // you see what you are swiping to. A lens whose list is not ready yet is fetched as the swipe starts.
   let sw = null;
-  const still = !matchMedia("(prefers-reduced-motion:reduce)").matches;
-  const glide = (x, o, ms) => { host.style.transition = ms ? `transform ${ms}ms cubic-bezier(.2,.8,.2,1), opacity ${ms}ms linear` : "none"; host.style.transform = x ? `translate3d(${x}px,0,0)` : ""; host.style.opacity = o == null ? "" : o; };
-  el.addEventListener("touchstart", e => { sw = e.touches.length === 1 && e.touches[0].clientX > 24 && e.touches[0].clientX < innerWidth - 24 && tfFilter() === "paint" && !e.target.closest(".tf-bars,.sheet,input,[data-nopull-x]") ? { x: e.touches[0].clientX, y: e.touches[0].clientY, t: Date.now(), lock: 0 } : null; }, { passive: true });
+  const still = !matchMedia("(prefers-reduced-motion:reduce)").matches, GAP = 8;
+  const glide = (x, ms) => { host.style.transition = ms ? `transform ${ms}ms cubic-bezier(.2,.8,.2,1)` : "none"; host.style.transform = x ? `translate3d(${x}px,0,0)` : ""; };
+  const peekLoad = id => { const { ck, hk } = lensKeys(id); if (HF_CACHE.has(ck)) return Promise.resolve(HF_CACHE.get(ck)); return hfBudget(hfLens(id, hk, 0), 8000, "timeout").then(r => (r === "timeout" || !r || !r.ids || !r.ids.length ? null : lensOv(id, r))).catch(() => null); };
+  const peekBuild = (ov, side) => {   // side: 1 = right of the page, -1 = left
+    const W = host.clientWidth || innerWidth, count = tfColCount(W), cols = Array.from({ length: count }, () => ({ h: 0, html: "" }));
+    ov.list.slice(0, 26).forEach(it => { if (it.t !== "paint") return; let c = cols[0]; for (const x of cols) if (x.h < c.h) c = x; c.h += 1 / glAR(it.gi); c.html += tfCard(it); });
+    const d = document.createElement("div"); d.className = "tf-peek"; d.setAttribute("aria-hidden", "true");
+    d.style.cssText = `position:absolute;top:0;left:${side * (innerWidth + GAP)}px;width:${W}px;pointer-events:none`;
+    d.innerHTML = `<div class="tf-cols">${cols.map(c => `<div class="tf-col">${c.html}</div>`).join("")}</div>`;
+    host.appendChild(d);
+    if (typeof fdMicroPaint === "function") d.querySelectorAll(".tf-paint .tf-im").forEach(im => fdMicroPaint(im, +im.closest(".tf-card").dataset.gi));
+    try { tfFill(d.querySelector(".tf-cols")); } catch (e) {}   // the real pictures, as for the page itself
+    return d;
+  };
+  const peeksOff = () => { host.querySelectorAll(".tf-peek").forEach(n => n.remove()); host.style.position = ""; document.documentElement.style.overflowX = ""; };
+  el.addEventListener("touchstart", e => {
+    sw = e.touches.length === 1 && e.touches[0].clientX > 24 && e.touches[0].clientX < innerWidth - 24 && tfFilter() === "paint" && !e.target.closest(".tf-bars,.sheet,input,[data-nopull-x]") ? { x: e.touches[0].clientX, y: e.touches[0].clientY, t: Date.now(), lock: 0, pk: {} } : null;
+  }, { passive: true });
+  const peekFor = (s0, side) => {   // the lens on that side, loaded (once) and drawn beside the page when it arrives
+    if (s0.pk[side]) return s0.pk[side];
+    const list = tfChipList(), i = list.findIndex(c => c.id === lensId()), j = i + (side > 0 ? 1 : -1), tgt = list[j];
+    const o = s0.pk[side] = { id: tgt ? tgt.id : null, ov: null, el: null, ready: !tgt };
+    if (tgt) peekLoad(tgt.id).then(ov => { o.ov = ov; o.ready = true; if (ov && sw === s0 && still && host.isConnected) { o.el = peekBuild(ov, side); } else if (ov && s0.ending) o.el = null; });
+    else if (side > 0) moreLenses();
+    return o;
+  };
   el.addEventListener("touchmove", e => {
-    if (!sw) return; if (e.touches.length > 1) { sw = null; glide(0, null, 0); return; }
+    if (!sw) return; if (e.touches.length > 1) { sw = null; glide(0, 0); peeksOff(); return; }
     const dx = e.touches[0].clientX - sw.x, dy = e.touches[0].clientY - sw.y;
-    if (!sw.lock && (Math.abs(dx) > 12 || Math.abs(dy) > 12)) sw.lock = Math.abs(dx) > Math.abs(dy) * 1.3 ? 1 : -1;
-    if (sw.lock === 1 && still) glide(dx * .9, Math.max(.55, 1 - Math.abs(dx) / (innerWidth * 1.4)), 0);
+    if (!sw.lock && (Math.abs(dx) > 12 || Math.abs(dy) > 12)) {
+      sw.lock = Math.abs(dx) > Math.abs(dy) * 1.3 ? 1 : -1;
+      if (sw.lock === 1 && still) { host.style.position = "relative"; document.documentElement.style.overflowX = "hidden"; peekFor(sw, 1); peekFor(sw, -1); }
+    }
+    if (sw.lock === 1 && still) {
+      const side = dx < 0 ? 1 : -1, pk = sw.pk[side], blocked = !pk || !pk.id;   // nothing beyond this end: it gives, but only a little
+      glide(blocked ? dx * .25 : dx, 0);
+    }
   }, { passive: true });
   el.addEventListener("touchend", async e => {
     const s0 = sw; sw = null; if (!s0 || !e.changedTouches.length) return;
-    const dx = e.changedTouches[0].clientX - s0.x, dy = e.changedTouches[0].clientY - s0.y;
-    const back = () => { if (s0.lock === 1) glide(0, null, 220); };
+    s0.ending = true;
+    const dx = e.changedTouches[0].clientX - s0.x, dy = e.changedTouches[0].clientY - s0.y, side = dx < 0 ? 1 : -1;
+    const back = () => { if (s0.lock === 1) { glide(0, 240); setTimeout(peeksOff, 260); } };
     if (Math.abs(dx) < 70 || Math.abs(dy) > Math.abs(dx) * .55 || Date.now() - s0.t > 700 || document.querySelector(".sheet")) return back();
-    let list = tfChipList(), i = list.findIndex(c => c.id === lensId()), j = dx < 0 ? i + 1 : i - 1;
-    if (j < 0) return back();
-    if (j >= list.length) { await moreLenses(); list = tfChipList(); if (j >= list.length) return back(); }
-    const dir = dx < 0 ? -1 : 1;
-    if (still) { glide(dir * innerWidth, 0, 190); await new Promise(r => setTimeout(r, 190)); }
-    pickLens(list[j].id);
-    if (still) { glide(-dir * innerWidth * .5, 0, 0); void host.offsetWidth; glide(0, 1, 260); setTimeout(() => glide(0, null, 0), 300); }
+    let pk = peekFor(s0, side);
+    if (!pk.id) { await moreLenses(); const list = tfChipList(), i = list.findIndex(c => c.id === lensId()), tgt = list[i + (side > 0 ? 1 : -1)]; if (!tgt) return back(); pk = s0.pk[side] = { id: tgt.id, ov: null, el: null, ready: false }; peekLoad(tgt.id).then(ov => { pk.ov = ov; pk.ready = true; }); }
+    const t0 = Date.now(); while (!pk.ready && Date.now() - t0 < 900) await new Promise(r => setTimeout(r, 40));   // the neighbor's list is on its way
+    if (!pk.ov) return back();
+    if (still) {
+      if (!pk.el) pk.el = peekBuild(pk.ov, side);
+      glide(-side * (innerWidth + GAP), 230); await new Promise(r => setTimeout(r, 235));
+    }
+    glide(0, 0); peeksOff();
+    pickLens(pk.id);
   }, { passive: true });
   el.querySelector("[data-tf-tune]").addEventListener("click", () => tfSettings(key => {
     if (key === "caps") host.classList.toggle("nocaps", !hfS().caps);

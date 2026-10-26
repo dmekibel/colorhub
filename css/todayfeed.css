@@ -231,3 +231,4 @@ html .room-sheet>.screen.tf-screen.tf-screen{padding-left:var(--tfp);padding-rig
 .tf-color{padding:clamp(6px,5cqw,14px)}
 .tf-color b{font-size:clamp(11px,15cqw,26px);line-height:1.05;-webkit-line-clamp:4;overflow-wrap:anywhere;hyphens:auto}
 .tf-cotd{border-radius:0}
+.tf-peek .tf-cols{margin-left:calc(-1 * var(--tfp));margin-right:calc(-1 * var(--tfp))}
