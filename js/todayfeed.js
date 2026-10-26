@@ -260,7 +260,19 @@ function todayFeed() {
     buzz(4); TF_KIND = b.dataset.tfF; setKinds(); drawLenses(); tfChipInView(kindsRow, b); showBars();
     if (st) st.shown[b.dataset.tfF] = 0; tfScrollTo(el, 0); render(false);
   });
-  const pickLens = id => { buzz(4); TF_LENS = id; drawLenses(); const on = lensRow.querySelector(".tf-lens.on"); if (on) tfChipInView(lensRow, on); showBars(); tfScrollTo(el, 0); salt = 0; paintings(false); if (on && on === lensRow.lastElementChild) moreLenses(); };
+  // a tap on a chip starts at the top with the rows showing; a SWIPE (want = where the next page's first row was on screen) lands exactly there: no scroll to the top, the rows stay as they were
+  const pickLens = (id, want) => {
+    buzz(4); TF_LENS = id; drawLenses(); const on = lensRow.querySelector(".tf-lens.on"); if (on) tfChipInView(lensRow, on);
+    salt = 0;
+    if (want == null) { showBars(); tfScrollTo(el, 0); paintings(false); }
+    else {
+      host.style.minHeight = host.offsetHeight + "px";   // the page keeps its height while the new list fills in, so the scroll cannot be clamped back up to the rows
+      paintings(false); const cur = host.getBoundingClientRect().top; tfScrollTo(el, tfY(el) + cur - want);
+      setTimeout(() => { host.style.minHeight = ""; }, 1800);
+    }
+    if (on && on === lensRow.lastElementChild) moreLenses();
+    warmSoon();
+  };
   lensRow.addEventListener("click", e => {
     const b = e.target.closest("[data-tf-l]"); if (!b) return;
     if (b.dataset.tfL === lensId()) { if (lensId() === "foryou") refresh(); return; }
@@ -273,15 +285,28 @@ function todayFeed() {
   const still = !matchMedia("(prefers-reduced-motion:reduce)").matches, GAP = 8;
   const glide = (x, ms) => { host.style.transition = ms ? `transform ${ms}ms cubic-bezier(.2,.8,.2,1)` : "none"; host.style.transform = x ? `translate3d(${x}px,0,0)` : ""; };
   const peekLoad = id => { const { ck, hk } = lensKeys(id); if (HF_CACHE.has(ck)) return Promise.resolve(HF_CACHE.get(ck)); return hfBudget(hfLens(id, hk, 0), 8000, "timeout").then(r => (r === "timeout" || !r || !r.ids || !r.ids.length ? null : lensOv(id, r))).catch(() => null); };
+  // the lenses beside this one, ready before you swipe: their lists, their details and their first pictures (so the page that slides in is sharp, not a blur)
+  const warmNeighbors = () => {
+    if (!host.isConnected || tfFilter() !== "paint") return;
+    const list = tfChipList(), i = list.findIndex(c => c.id === lensId());
+    [list[i + 1], list[i - 1]].forEach(c => { if (!c) return; peekLoad(c.id).then(ov => {
+      if (!ov) return; const gis = ov.list.slice(0, 18).filter(x => x.t === "paint").map(x => x.gi), by = new Map();
+      gis.forEach(g => { const k = Math.floor(g / GAL.shard); if (!by.has(k)) by.set(k, []); by.get(k).push(g); });
+      by.forEach((gs, k) => glShard(k).then(() => gs.forEach(g => { const d = glDetailNow(g); if (d && d.img) { const im = new Image(); im.decoding = "async"; im.src = d.img; } })).catch(() => {}));
+    }); });
+  };
+  let warmT = 0; const warmSoon = () => { clearTimeout(warmT); warmT = setTimeout(warmNeighbors, 1200); };
+  warmSoon();
   const peekBuild = (ov, side) => {   // side: 1 = right of the page, -1 = left
     const W = host.clientWidth || innerWidth, count = tfColCount(W), cols = Array.from({ length: count }, () => ({ h: 0, html: "" }));
     ov.list.slice(0, 26).forEach(it => { if (it.t !== "paint") return; let c = cols[0]; for (const x of cols) if (x.h < c.h) c = x; c.h += 1 / glAR(it.gi); c.html += tfCard(it); });
     const d = document.createElement("div"); d.className = "tf-peek"; d.setAttribute("aria-hidden", "true");
-    const topPx = Math.max(0, Math.round(bars.getBoundingClientRect().bottom - host.getBoundingClientRect().top));   // level with what is on screen now, wherever the page is scrolled to
+    const topPx = Math.max(0, Math.round(tfY(el)));   // the new page's first row sits where the first row sits at scroll 0 (under the rows), seen from where this page is scrolled to
     d.style.cssText = `position:absolute;top:${topPx}px;left:${side * (innerWidth + GAP)}px;width:${W}px;pointer-events:none`;
     d.innerHTML = `<div class="tf-cols">${cols.map(c => `<div class="tf-col">${c.html}</div>`).join("")}</div>`;
     host.appendChild(d);
     if (typeof fdMicroPaint === "function") d.querySelectorAll(".tf-paint .tf-im").forEach(im => fdMicroPaint(im, +im.closest(".tf-card").dataset.gi));
+    d.querySelectorAll(".tf-card").forEach((c, n) => { if (n < 18) c.dataset.first = "1"; });   // eager and high priority: off to the side, a lazy picture would never load, and you would swipe onto blur
     try { tfFill(d.querySelector(".tf-cols")); } catch (e) {}   // the real pictures, as for the page itself
     return d;
   };
@@ -302,7 +327,7 @@ function todayFeed() {
     const dx = e.touches[0].clientX - sw.x, dy = e.touches[0].clientY - sw.y;
     if (!sw.lock && (Math.abs(dx) > 12 || Math.abs(dy) > 12)) {
       sw.lock = Math.abs(dx) > Math.abs(dy) * 1.3 ? 1 : -1;
-      if (sw.lock === 1 && still) { host.style.position = "relative"; document.documentElement.style.overflowX = "hidden"; peekFor(sw, 1); peekFor(sw, -1); }
+      if (sw.lock === 1 && still) { showBars(); host.style.position = "relative"; document.documentElement.style.overflowX = "hidden"; peekFor(sw, 1); peekFor(sw, -1); }
     }
     if (sw.lock === 1 && still) {
       const side = dx < 0 ? 1 : -1, pk = sw.pk[side], blocked = !pk || !pk.id;   // nothing beyond this end: it gives, but only a little
@@ -324,7 +349,7 @@ function todayFeed() {
       glide(-side * (innerWidth + GAP), 230); await new Promise(r => setTimeout(r, 235));
     }
     glide(0, 0); peeksOff();
-    pickLens(pk.id);
+    pickLens(pk.id);   // the new page starts at its top, under the rows, exactly where the page beside this one showed it
   }, { passive: true });
   el.querySelector("[data-tf-tune]").addEventListener("click", () => tfSettings(key => {
     if (key === "caps") host.classList.toggle("nocaps", !hfS().caps);
