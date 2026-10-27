@@ -17,6 +17,7 @@ cd "$(dirname "$0")/.."
 ATLAS=0; SKIPGAL=0
 for a in "$@"; do case "$a" in --atlas) ATLAS=1;; --atlas-full) ATLAS=2;; --skip-gallery) SKIPGAL=1;; esac; done   # --skip-gallery: resume after a gallery.py that already finished
 step() { echo; echo "== $*"; }
+FAILED=()   # steps that are allowed to fail without stopping the run, listed loudly at the end (2026-10-27: a crashed look layout went unnoticed until the last line)
 
 step "audit the new art (dates, same-painting duplicates, non-paintings) -- read it before shipping"
 python3 tools/audit_artists.py | grep -E "^[A-Z].*rows|DATE" || true
@@ -34,9 +35,9 @@ step "finer color index (data/colorindex/: color cell -> paintings, keyed to gal
 if [ -d research/_raw/commons/img ]; then python3 tools/color_index.py --raw research/_raw --workers 8 | tail -2 | cut -c1-160; else echo "no research/_raw image caches: skipped (check_ids.js will fail until it is rebuilt)"; fi
 step "By look layout (CLIP embeddings -> UMAP -> even grid; fills missing embeddings first; skips quietly without research/_raw/clipenv; a rebuild may move every painting)"
 python3 tools/subjects.py | tail -1   # look_layout reads subjects.json for the new ids: it must be current first (2026-10-27: the look step crashed without it)
-{ python3 tools/subjects_clip.py --embed-only && python3 tools/look_layout.py; } 2>&1 | tail -2 | cut -c1-160 || true
+{ python3 tools/subjects_clip.py --embed-only && python3 tools/look_layout.py; } 2>&1 | tail -2 | cut -c1-160 || FAILED+=("look layout")
 step "By vibe neighbors (exact top-60 by CLIP cosine per painting -> data/gallery/vibe/*.bin; served from R2; skips quietly without the venv)"
-python3 tools/vibe_knn.py 2>&1 | tail -2 | cut -c1-160 || true
+python3 tools/vibe_knn.py 2>&1 | tail -2 | cut -c1-160 || FAILED+=("vibe neighbors")
 for s in analyze metrics_build facets artwiki_build; do step "$s"; python3 tools/$s.py | tail -1 | cut -c1-160; done
 step "painter counts, movements, portraits and most-famous rails (all store gallery positions)"
 python3 tools/wikidata_artists.py | tail -1 | cut -c1-160
@@ -70,4 +71,5 @@ node tools/check.js | tail -8
 node tools/check_wiki.js | tail -1; node tools/check_names.js | tail -1; node tools/check_solvable.js | tail -1; node tools/check_aliases.js | tail -1; node tools/check_nearest.js | tail -1
 step "upload the data to Cloudflare R2 (data.chromatlas.app) -- BEFORE the push that bumps ?v="
 if [ -n "${NO_R2:-}" ]; then echo "NO_R2 set: upload held (run python3 tools/r2_sync.py, then bump ?v= and push)"; elif [ -f ~/.chromatlas-r2 ]; then python3 tools/r2_sync.py | tail -2; else echo "no ~/.chromatlas-r2: skipped (the live site falls back to the repo's own copy)"; fi
+if [ ${#FAILED[@]} -gt 0 ]; then echo; echo "!! FAILED STEPS: ${FAILED[*]} -- the run continued without them; fix before shipping"; exit 1; fi
 echo; echo "Done. Bump the ?v= tag in index.html, run tools/smoke.sh, then commit and push."
