@@ -1,0 +1,29 @@
+{
+ "name": "example",
+ "note": "Copy this, rename it, list roots. Run: python3 tools/commons_batch.py example --status",
+ "slug": "commons",
+ "depth": 2,
+ "date": {
+  "from": 1000,
+  "to": 1925
+ },
+ "caps": {
+  "per_group": 30,
+  "total": 500,
+  "overshoot": 1.3
+ },
+ "filter": {
+  "enabled": true
+ },
+ "roots": [
+  {
+   "cat": "Category:Toros Roslin",
+   "co": "Armenia",
+   "mv": "Armenian illuminated manuscript",
+   "artist": "Toros Roslin",
+   "died": 1290,
+   "undated_ok": true,
+   "sure": "high"
+  }
+ ]
+}

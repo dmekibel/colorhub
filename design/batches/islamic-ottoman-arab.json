@@ -1,0 +1,290 @@
+{
+ "name": "islamic-ottoman-arab",
+ "note": "Ottoman, Mamluk, Arab and Maghreb manuscripts and painters. Names and sizes checked on the Commons API 2026-10-27. Not run yet; expect 600-1,000 raw files, 300-600 candidates. The Persian, Safavid, Qajar, Zand, Mughal and Indian trees are skipped (skip_cat) because the Persian shard and the Indian rows cover them. 'Arabic illuminated manuscripts', 'Maghrebi/Moroccan/Andalusian manuscripts', 'Ottoman painters' either do not exist or are empty on Commons: Maghreb is covered only by Orientalist paintings of Algeria and Paintings from Tunisia/Algeria, so this batch is thin there. Files whose country cannot be decided get co 'Middle East' (review the by-country count printed at the end).",
+ "depth": 3,
+ "date": {
+  "from": 1000,
+  "to": 1925
+ },
+ "caps": {
+  "per_group": 25,
+  "total": 1200,
+  "overshoot": 1.3
+ },
+ "skip_cat": "Qajar|Safavid|Zand|\\bIran|Persian|Mughal|India|Pakistan|Afghanistan|Bookbinding|Rugs|Carpets|Minbar|Doors",
+ "co_rules": [
+  [
+   "Ottoman|Turk|Topkap|Istanbul|Constantinople|Bursa|Edirne",
+   "Turkey"
+  ],
+  [
+   "Mamluk|Egypt|Cairo|Alexandria",
+   "Egypt"
+  ],
+  [
+   "Damascus|Aleppo|Syria",
+   "Syria"
+  ],
+  [
+   "Baghdad|Iraq|Mosul|Abbasid",
+   "Iraq"
+  ],
+  [
+   "Morocco|Maghreb|Fez|Marrakech|Andalus",
+   "Morocco"
+  ],
+  [
+   "Algeria|Algiers",
+   "Algeria"
+  ],
+  [
+   "Tunisia|Kairouan|Tunis",
+   "Tunisia"
+  ]
+ ],
+ "filter": {
+  "enabled": true,
+  "text": 0.75,
+  "blank": 0.5,
+  "sketch": 0.5,
+  "ornament": 0.6,
+  "dup": 0.975,
+  "text_prompt": "a manuscript page that is mostly lines of Arabic or Ottoman Turkish calligraphy text"
+ },
+ "roots": [
+  {
+   "cat": "Category:Ottoman miniatures",
+   "co": "Turkey",
+   "mv": "Ottoman miniature",
+   "sure": "high",
+   "note": "81 files, 13 subcategories incl. 15th-18th century sets, Suleiman I, Topkapi, Sawaqub al-Manaquib, Şehnames.",
+   "artist": "Ottoman Miniaturist",
+   "undated_ok": true,
+   "per_group": 30
+  },
+  {
+   "cat": "Category:Hünername",
+   "co": "Turkey",
+   "mv": "Ottoman miniature",
+   "sure": "high",
+   "note": "113 files; Hünername (1584-88), Topkapi. Overlap with the root above is deduped.",
+   "artist": "Nakkaş Osman",
+   "undated_ok": true,
+   "per_group": 60
+  },
+  {
+   "cat": "Category:Nakkaş Osman",
+   "co": "Turkey",
+   "mv": "Ottoman miniature",
+   "sure": "high",
+   "note": "10 files, 10 subcategories; court painter (d.1596).",
+   "artist": "Nakkaş Osman",
+   "died": 1596,
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Matrakçı Nasuh",
+   "co": "Turkey",
+   "mv": "Ottoman miniature",
+   "sure": "high",
+   "note": "6 files, 8 subcategories; d.1564, city views.",
+   "artist": "Matrakçı Nasuh",
+   "died": 1564,
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Abdulcelil Levni",
+   "co": "Turkey",
+   "mv": "Ottoman miniature",
+   "sure": "high",
+   "note": "14 files, 1 subcategory; d.1732.",
+   "artist": "Abdulcelil Levni",
+   "died": 1732,
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Zenanname",
+   "co": "Turkey",
+   "mv": "Ottoman miniature",
+   "sure": "high",
+   "note": "15 files; 18th-century Ottoman book of women.",
+   "artist": "Enderunlu Fazıl (attributed)",
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Turkish miniatures in the Topkapi Palace Museum",
+   "co": "Turkey",
+   "mv": "Ottoman miniature",
+   "sure": "medium",
+   "note": "24 files, 5 subcategories; overlaps Ottoman miniatures.",
+   "artist": "Ottoman Miniaturist",
+   "undated_ok": true,
+   "per_group": 15
+  },
+  {
+   "cat": "Category:Paintings by Osman Hamdi Bey",
+   "co": "Turkey",
+   "mv": "Ottoman Orientalism",
+   "sure": "high",
+   "note": "8 files, 3 subcategories; d.1910.",
+   "artist": "Osman Hamdi Bey",
+   "died": 1910,
+   "nofilter": true
+  },
+  {
+   "cat": "Category:Osman Hamdi Bey",
+   "co": "Turkey",
+   "mv": "Ottoman Orientalism",
+   "sure": "medium",
+   "note": "4 files, 8 subcategories; overlaps.",
+   "artist": "Osman Hamdi Bey",
+   "died": 1910,
+   "nofilter": true
+  },
+  {
+   "cat": "Category:Paintings by Fausto Zonaro",
+   "co": "Turkey",
+   "mv": "Ottoman Orientalism",
+   "sure": "high",
+   "note": "44 files, 5 subcategories; Italian court painter in Istanbul, d.1929.",
+   "artist": "Fausto Zonaro",
+   "died": 1929,
+   "nofilter": true
+  },
+  {
+   "cat": "Category:Mamluk manuscripts",
+   "co": "Egypt",
+   "mv": "Mamluk manuscript",
+   "sure": "high",
+   "note": "40 files, 10 subcategories.",
+   "artist": "Mamluk Illuminator",
+   "undated_ok": true,
+   "per_group": 15
+  },
+  {
+   "cat": "Category:Mamluk art",
+   "co": "Egypt",
+   "mv": "Mamluk manuscript",
+   "sure": "low",
+   "note": "40 files, 18 subcategories; mostly metalwork, glass, ceramics, rugs (skipped by category name); only manuscript pages should survive.",
+   "artist": "Mamluk Illuminator",
+   "undated_ok": true,
+   "max": 60
+  },
+  {
+   "cat": "Category:Maqamat of al-Hariri",
+   "co": "Iraq",
+   "mv": "Arab manuscript painting",
+   "sure": "medium",
+   "note": "5 files, 13 subcategories; Baghdad, Syrian and Egyptian copies, the co is a guess for the Baghdad school (co_rules refine by title).",
+   "artist": "Yahya ibn Mahmud al-Wasiti (school)",
+   "undated_ok": true,
+   "per_group": 15
+  },
+  {
+   "cat": "Category:Kitab al-Bulhan",
+   "co": "Iraq",
+   "mv": "Arab manuscript painting",
+   "sure": "high",
+   "note": "59 files; Baghdad, c.1390s, Munich.",
+   "artist": "Jalayirid Painter",
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Illuminated manuscripts from Iraq",
+   "co": "Iraq",
+   "mv": "Arab manuscript painting",
+   "sure": "medium",
+   "note": "32 files, 19 subcategories.",
+   "artist": "Iraqi Illuminator",
+   "undated_ok": true,
+   "per_group": 10
+  },
+  {
+   "cat": "Category:Kalila and Dimna",
+   "co": "Syria",
+   "mv": "Arab manuscript painting",
+   "sure": "medium",
+   "note": "16 files, 15 subcategories; manuscripts from Syria, Egypt, Iran, Turkey: co_rules decide, default Syria.",
+   "artist": "Kalila wa Dimna Illustrator",
+   "undated_ok": true,
+   "per_group": 10
+  },
+  {
+   "cat": "Category:Islamic miniatures",
+   "co": "Middle East",
+   "mv": "Islamic miniature",
+   "sure": "medium",
+   "note": "34 files, 8 subcategories; mixed origins, co_rules decide, otherwise Middle East.",
+   "artist": "Islamic Miniaturist",
+   "undated_ok": true,
+   "per_group": 15
+  },
+  {
+   "cat": "Category:Islamic paintings",
+   "co": "Middle East",
+   "mv": "Islamic painting",
+   "sure": "low",
+   "note": "9 files, 19 subcategories; Persian trees are skipped.",
+   "artist": "Islamic Painter",
+   "undated_ok": true,
+   "per_group": 10
+  },
+  {
+   "cat": "Category:Paintings from Syria",
+   "co": "Syria",
+   "mv": "Syrian painting",
+   "sure": "low",
+   "note": "21 files, 4 subcategories.",
+   "artist": "Syrian Painter"
+  },
+  {
+   "cat": "Category:Paintings from Egypt",
+   "co": "Egypt",
+   "mv": "Egyptian painting",
+   "sure": "low",
+   "note": "3 files, 9 subcategories.",
+   "artist": "Egyptian Painter"
+  },
+  {
+   "cat": "Category:Paintings from Iraq",
+   "co": "Iraq",
+   "mv": "Iraqi painting",
+   "sure": "low",
+   "note": "5 files, 1 subcategory.",
+   "artist": "Iraqi Painter"
+  },
+  {
+   "cat": "Category:Paintings from Tunisia",
+   "co": "Tunisia",
+   "mv": "Tunisian painting",
+   "sure": "low",
+   "note": "13 files.",
+   "artist": "Tunisian Painter"
+  },
+  {
+   "cat": "Category:Paintings from Algeria",
+   "co": "Algeria",
+   "mv": "Algerian painting",
+   "sure": "low",
+   "note": "4 files, 2 subcategories.",
+   "artist": "Algerian Painter"
+  },
+  {
+   "cat": "Category:Orientalist paintings of Algeria",
+   "co": "Algeria",
+   "mv": "Orientalism",
+   "sure": "medium",
+   "note": "10 files; European painters, so the artist comes from a 'Paintings by X' category if the file has one.",
+   "artist": "Orientalist Painter"
+  },
+  {
+   "cat": "Category:Paintings from Turkey",
+   "co": "Turkey",
+   "mv": "Turkish painting",
+   "sure": "low",
+   "note": "16 files, 8 subcategories.",
+   "artist": "Turkish Painter"
+  }
+ ]
+}

@@ -1,0 +1,340 @@
+{
+ "name": "caucasus-central-asia",
+ "note": "Armenia, Georgia, Azerbaijan, Uzbekistan, Kazakhstan, Turkmenistan, Kyrgyzstan, Tajikistan, Mongolia. Category names and sizes checked against the Commons API 2026-10-27 (categoryinfo: direct files / subcategories). 'sure' = how sure the category is the right, non-empty source. NOT run yet: no status run was done on this config. Raw size of all roots at depth 0: ~1,500 files before the date/size/dup filters; expect 500-900 candidates. Turkmenistan, Kyrgyzstan and Tajikistan have NO usable Commons painting category (Paintings from/of Turkmenistan/Kyrgyzstan missing, Tajikistan has 0 files): they come only through the Vereshchagin/Karazin Turkestan roots and co_rules. Not included on purpose: Martiros Saryan (d.1972, not public domain), Aivazovsky (Russian row set, 92 files, add if wanted), Timurid art (43 files, already in the Persian shard as Iran).",
+ "depth": 3,
+ "date": {
+  "from": 900,
+  "to": 1925
+ },
+ "caps": {
+  "per_group": 25,
+  "total": 1500,
+  "overshoot": 1.3
+ },
+ "skip_cat": "Qajar|Safavid|\\bIran|Persian|Mughal|India",
+ "co_rules": [
+  [
+   "Turkestan|Samarkand|Samarqand|Tashkent|Bukhara|Bukhar|Tamerlane|Timur|Khiva|Uzbek",
+   "Uzbekistan"
+  ],
+  [
+   "Kazakh|Orenburg|Semirechye|Kirghiz steppe",
+   "Kazakhstan"
+  ],
+  [
+   "Kyrgyz|Issyk|Tian Shan",
+   "Kyrgyzstan"
+  ],
+  [
+   "Turkmen|Merv|Ashgabat",
+   "Turkmenistan"
+  ],
+  [
+   "Tajik|Pamir|Dushanbe|Penjikent",
+   "Tajikistan"
+  ]
+ ],
+ "filter": {
+  "enabled": true,
+  "text": 0.75,
+  "blank": 0.5,
+  "sketch": 0.5,
+  "ornament": 0.6,
+  "dup": 0.975,
+  "text_prompt": "a manuscript page that is mostly lines of Armenian, Georgian, Arabic or Greek calligraphy text"
+ },
+ "roots": [
+  {
+   "cat": "Category:Armenian illuminated manuscripts",
+   "co": "Armenia",
+   "mv": "Armenian illuminated manuscript",
+   "sure": "high",
+   "note": "178 files, 28 subcategories (one per manuscript: Matenadaran MSS, Gospel of Yeghegis, Wellcome, Met, Getty Malnazar Bible, Skevra Evangeliary).",
+   "artist_periods": [
+    [
+     1200,
+     "Armenian Illuminator"
+    ],
+    [
+     1400,
+     "Cilician Armenian Illuminator"
+    ],
+    [
+     1700,
+     "Armenian Illuminator"
+    ],
+    [
+     2000,
+     "Armenian Illuminator"
+    ]
+   ],
+   "undated_ok": true,
+   "per_group": 25
+  },
+  {
+   "cat": "Category:Armenian manuscripts",
+   "co": "Armenia",
+   "mv": "Armenian illuminated manuscript",
+   "sure": "medium",
+   "note": "243 files, 17 subcategories; overlaps the root above (same file is kept once). Contains plain text pages: the CLIP filter drops them.",
+   "artist": "Armenian Illuminator",
+   "undated_ok": true,
+   "per_group": 15
+  },
+  {
+   "cat": "Category:Matenadaran",
+   "co": "Armenia",
+   "mv": "Armenian illuminated manuscript",
+   "sure": "medium",
+   "note": "122 files, 11 subcategories; may hold photos of the building, skipped by size/name rules where possible.",
+   "artist": "Armenian Illuminator",
+   "undated_ok": true,
+   "per_group": 15
+  },
+  {
+   "cat": "Category:Toros Roslin",
+   "co": "Armenia",
+   "mv": "Armenian illuminated manuscript",
+   "sure": "high",
+   "note": "15 files; the great 13th-century Cilician illuminator.",
+   "artist": "Toros Roslin",
+   "died": 1290,
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Sargis Pitsak",
+   "co": "Armenia",
+   "mv": "Armenian illuminated manuscript",
+   "sure": "high",
+   "note": "8 files; 14th-century illuminator.",
+   "artist": "Sargis Pitsak",
+   "died": 1340,
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Gevorg Bashinjaghian",
+   "co": "Armenia",
+   "mv": "Armenian painting",
+   "sure": "high",
+   "note": "38 files; landscape painter, died 1925.",
+   "artist": "Gevorg Bashinjaghian",
+   "died": 1925,
+   "nofilter": true
+  },
+  {
+   "cat": "Category:Hakob Hovnatanian",
+   "co": "Armenia",
+   "mv": "Armenian painting",
+   "sure": "high",
+   "note": "25 files; portrait painter, died 1881.",
+   "artist": "Hakob Hovnatanian",
+   "died": 1881,
+   "nofilter": true
+  },
+  {
+   "cat": "Category:Icons of Armenia",
+   "co": "Armenia",
+   "mv": "Armenian icon",
+   "sure": "low",
+   "note": "11 files.",
+   "artist": "Armenian Icon Painter",
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Paintings from Armenia",
+   "co": "Armenia",
+   "mv": "Armenian painting",
+   "sure": "low",
+   "note": "8 files, 3 subcategories; mostly modern, the date rule drops those.",
+   "artist": "Armenian Painter"
+  },
+  {
+   "cat": "Category:Icons of Georgia (country)",
+   "co": "Georgia",
+   "mv": "Georgian icon",
+   "sure": "high",
+   "note": "197 files, 12 subcategories.",
+   "artist": "Georgian Icon Painter",
+   "undated_ok": true,
+   "per_group": 40
+  },
+  {
+   "cat": "Category:Frescos in Georgia (country)",
+   "co": "Georgia",
+   "mv": "Georgian mural",
+   "sure": "medium",
+   "note": "77 files, 12 subcategories; photographs of wall paintings in situ (some are of whole church interiors).",
+   "artist": "Georgian Fresco Painter",
+   "undated_ok": true,
+   "per_group": 20
+  },
+  {
+   "cat": "Category:Murals in Georgia (country)",
+   "co": "Georgia",
+   "mv": "Georgian mural",
+   "sure": "medium",
+   "note": "105 files, 6 subcategories; as above, overlaps.",
+   "artist": "Georgian Fresco Painter",
+   "undated_ok": true,
+   "per_group": 20
+  },
+  {
+   "cat": "Category:Paintings by Niko Pirosmani",
+   "co": "Georgia",
+   "mv": "Georgian naive painting",
+   "sure": "medium",
+   "note": "275 files, 2 subcategories; may include exhibition photos (the picture check is by size/name only). Pirosmani died 1918.",
+   "artist": "Niko Pirosmani",
+   "died": 1918,
+   "nofilter": true,
+   "per_group": 400,
+   "max": 250
+  },
+  {
+   "cat": "Category:Niko Pirosmani",
+   "co": "Georgia",
+   "mv": "Georgian naive painting",
+   "sure": "medium",
+   "note": "22 files, 4 subcategories; overlaps the root above.",
+   "artist": "Niko Pirosmani",
+   "died": 1918,
+   "nofilter": true
+  },
+  {
+   "cat": "Category:Paintings by Gigo Gabashvili",
+   "co": "Georgia",
+   "mv": "Georgian painting",
+   "sure": "high",
+   "note": "42 files; died 1936.",
+   "artist": "Gigo Gabashvili",
+   "died": 1936,
+   "nofilter": true
+  },
+  {
+   "cat": "Category:Paintings from Georgia",
+   "co": "Georgia",
+   "mv": "Georgian painting",
+   "sure": "low",
+   "note": "8 files, 8 subcategories.",
+   "artist": "Georgian Painter"
+  },
+  {
+   "cat": "Category:Tabriz school of miniature",
+   "co": "Azerbaijan",
+   "mv": "Azerbaijani miniature",
+   "sure": "medium",
+   "note": "9 files, 9 subcategories; Tabriz is in Iran today, the school is claimed by both: check the Persian shard overlap before trusting the label.",
+   "artist": "Tabriz School Painter",
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Khamsa of Nizami",
+   "co": "Azerbaijan",
+   "mv": "Azerbaijani miniature",
+   "sure": "low",
+   "note": "86 files, 45 subcategories; Nizami was from Ganja, but the manuscripts are Persian, Ottoman and Timurid: label is a judgment call, the existing Persian rows are deduped by id.",
+   "artist": "Persianate Painter",
+   "undated_ok": true,
+   "per_group": 10,
+   "max": 200
+  },
+  {
+   "cat": "Category:Paintings of Azerbaijan",
+   "co": "Azerbaijan",
+   "mv": "Azerbaijani painting",
+   "sure": "low",
+   "note": "0 files, 1 subcategory.",
+   "artist": "Azerbaijani Painter"
+  },
+  {
+   "cat": "Category:Paintings from Azerbaijan",
+   "co": "Azerbaijan",
+   "mv": "Azerbaijani painting",
+   "sure": "low",
+   "note": "2 files, 2 subcategories.",
+   "artist": "Azerbaijani Painter"
+  },
+  {
+   "cat": "Category:Paintings by Vasily Vereshchagin",
+   "co": "Russia",
+   "mv": "Orientalism",
+   "sure": "high",
+   "note": "22 files, 8 subcategories incl. by-museum, 'Orientalist paintings by' and the Tamerlane tomb; died 1904. co is Uzbekistan when the title or category says Turkestan/Samarkand/Tamerlane (co_rules).",
+   "artist": "Vasily Vereshchagin",
+   "died": 1904,
+   "nofilter": true,
+   "per_group": 300
+  },
+  {
+   "cat": "Category:Vasily Vereshchagin",
+   "co": "Russia",
+   "mv": "Orientalism",
+   "sure": "medium",
+   "note": "7 files, 6 subcategories; overlaps.",
+   "artist": "Vasily Vereshchagin",
+   "died": 1904,
+   "nofilter": true
+  },
+  {
+   "cat": "Category:Paintings by Nikolay Karazin",
+   "co": "Russia",
+   "mv": "Orientalism",
+   "sure": "high",
+   "note": "41 files; Turkestan battle and life scenes; died 1905.",
+   "artist": "Nikolay Karazin",
+   "died": 1905,
+   "nofilter": true
+  },
+  {
+   "cat": "Category:Paintings of Kazakhstan",
+   "co": "Kazakhstan",
+   "mv": "Kazakh painting",
+   "sure": "low",
+   "note": "67 files, 2 subcategories; depicted-place category, mostly modern: only the dated pre-1926 files survive.",
+   "artist": "Painter of Kazakhstan"
+  },
+  {
+   "cat": "Category:Paintings of Uzbekistan",
+   "co": "Uzbekistan",
+   "mv": "Uzbek painting",
+   "sure": "low",
+   "note": "0 files, 4 subcategories.",
+   "artist": "Painter of Uzbekistan"
+  },
+  {
+   "cat": "Category:Paintings from Tajikistan",
+   "co": "Tajikistan",
+   "mv": "Tajik painting",
+   "sure": "low",
+   "note": "0 files, 1 subcategory; effectively empty.",
+   "artist": "Painter of Tajikistan"
+  },
+  {
+   "cat": "Category:Buddhist art of Mongolia",
+   "co": "Mongolia",
+   "mv": "Mongolian Buddhist painting",
+   "sure": "medium",
+   "note": "21 files, 3 subcategories; thangkas and temple paintings, mostly undated.",
+   "artist": "Mongolian Buddhist Painter",
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Zanabazar",
+   "co": "Mongolia",
+   "mv": "Mongolian Buddhist painting",
+   "sure": "medium",
+   "note": "19 files, 3 subcategories; the 17th-century master (d.1723); many files are his sculptures, filtered by name/CLIP only partly.",
+   "artist": "Zanabazar",
+   "died": 1723,
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Paintings from Mongolia",
+   "co": "Mongolia",
+   "mv": "Mongolian painting",
+   "sure": "low",
+   "note": "8 files, 1 subcategory.",
+   "artist": "Mongolian Painter"
+  }
+ ]
+}
