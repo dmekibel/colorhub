@@ -54,7 +54,8 @@ python3 tools/island_names.py | head -1
 if [ "$ATLAS" != 0 ]; then
   step "painting-map atlas ($([ "$ATLAS" = 2 ] && echo "full rebuild: hours" || echo "incremental: only changed groups"))"
   [ "$ATLAS" = 2 ] && python3 tools/paintmap_atlas.py clean
-  python3 tools/paintmap_atlas.py build | tail -3 | cut -c1-160
+  # plain build = PATCH: only tiles whose source line (picture + crop) changed are recomputed (2026-10-27: 2,581 changed crops redid 135,000 tiles, 5 h)
+  python3 tools/paintmap_atlas.py build $([ "$ATLAS" = 2 ] && echo --full) | tail -3 | cut -c1-160
 fi
 if [ "$ATLAS" != 0 ] || [ ! -f data/paintmap/micro.json ] || [ ! -f data/paintmap/cluster.json ]; then
   step "painting-map micro layer (every painting as 5x5 px, from the tier-0 sheets: the map's first frame; ~6 s)"
