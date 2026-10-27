@@ -23,7 +23,7 @@ Genuine drawings, sketches, prints, miniatures and watercolors are in scope and 
 Measuring (cached in research/_raw/subjects/nonart-feat.npy, about 90 s the first time): per item, from the cached 200 px photo
 (research/_raw/<src>/img/<id>.jpg or measure-img/<id>.jpg), the share of pixels that differ from the border-ring color.
 
-hidden.json: {"v":1,"n":N,"hash":sha1(ids.txt)[:8],"built":date,"idx":[sorted gallery indices],"why":{"<idx>":"blank|title|photo|hand"}}.
+hidden.json: {"v":1,"n":N,"hash":sha1(ids.txt)[:8],"built":date,"idx":[sorted gallery indices],"why":{"<idx>":"blank|title|photo|dup|hand"}}.
 Items stay in the gallery (order is append-only, everything stores gallery positions). js/gallery.js loads the file with the
 index (GAL.hid) and every ranking / list skips them; an address like #/gallery/<n> still opens a hidden painting.
 """
@@ -104,6 +104,11 @@ def main():
         for k in json.load(open(hp)).get("ids", []):
             if k in pos:
                 why.setdefault(pos[k], "photo")
+    hd = ROOT / "data" / "hide-dups.json"   # tools/hide_duplicates.py: the second, third... copy of one painting (CLIP)
+    if hd.exists():
+        for k in json.load(open(hd)).get("ids", []):
+            if k in pos:
+                why.setdefault(pos[k], "dup")
     ov = ROOT / "data" / "hide-overrides.json"
     if ov.exists():
         o = json.load(open(ov))

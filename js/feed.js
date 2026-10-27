@@ -1068,10 +1068,7 @@ const FDC_THIN = 60, FDC_NB_SHARE = 4;   // a neighbor must be plainly present (
 async function fdcNearNames(sub, n, maxDe) {
   const { hex, name, tapped } = sub;
   if (typeof loadLongNames === "function") await loadLongNames().catch(() => {});
-  const core = CORE_NAMES || coreFallback(), learn = new Set(core.map(e => e.n.toLowerCase()));
-  const pool = core.concat((LONG_NAMES || []).filter(e => !learn.has(e.n.toLowerCase()))); pool.forEach(e => { if (!e.lab) e.lab = lab(e.h); });
-  const seen = new Set();
-  return nearestCore(lab(hex), pool, n * 3 + 30).filter(x => { const k = x.n.toLowerCase(); if ((!tapped && k === name.toLowerCase()) || seen.has(k) || (maxDe && x.de > maxDe)) return false; seen.add(k); return true; }).slice(0, n);
+  return nameCandidatesWide(hex, n, maxDe || Infinity, tapped ? "" : name);   // naming.js owns the name pool (the naming gate in tools/check.js)
 }
 // WHY THIS READS THE GALLERY AND NOT data/colorindex: that index was built 2026-10-09 for 23,778 paintings, in the gallery order of that day, and
 // the gallery has since grown to 200,000+ and been re-ordered, so ids >= ~12,000 name the wrong painting (a dark Henner portrait "held" 5% of a

@@ -184,7 +184,7 @@ function rpAlsoHTML(name, hex, tapped) {
       <span class="rp-also-t"><b>${esc(rpYoursName(r.n, r.h, tapped))}</b>${r.src ? `<small>${esc(r.src)}</small>` : ""}</span><em>${pctMatch(r.de).replace(" match", "")}</em></button>`).join("")}</div>
   </section>`;
 }
-// once the archive (data/library.json) has loaded, redraw the section with archive names in it
+// once the archive's long name list has loaded, redraw the section with archive names in it
 function rpAlsoWiden(el, name, hex, tapped) {
   if (!tapped || typeof loadLongNames !== "function") return;
   loadLongNames().then(() => {
