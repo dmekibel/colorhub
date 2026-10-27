@@ -725,3 +725,7 @@ html:not(.desk) .gl-why{margin-top:6px}
 html:not(.desk) .gl-page .art-top>[data-fva]{display:grid;position:absolute;left:0;top:0;width:44px;height:44px;opacity:0;pointer-events:none}
 .gl-corner-heart.rest{opacity:0;transition:opacity .6s ease}
 .gl-corner-heart.rest:focus-visible{opacity:1}
+/* the share button sits at the top right of the title block (title, painter), over the dark ground; the text keeps clear of it */
+.gl-id,.p-id{position:relative}
+.gl-id>[data-pshare],.p-id>[data-pshare]{position:absolute;top:0;right:0;z-index:2}
+.gl-id:has(>[data-pshare]) :is(.p-title,.p-dek,.p-type),.p-id:has(>[data-pshare]) :is(.p-title,.p-dek,.p-type){padding-right:52px}

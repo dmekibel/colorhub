@@ -935,9 +935,10 @@ function paintingPage(n) {
   const el = show(`
     ${artTop(n)}
     ${n.img ? `<div class="ptg"><img id="pimg" src="${esc(n.img)}" alt="${esc(n.title)} by ${esc(n.artist)}"><canvas id="pmask"></canvas></div>` : ""}
+    <div class="p-id">${n.id && nodeRoute(n).startsWith("painting/") ? shareBtn : ""}
     <p class="eyebrow p-type">${esc(n.typeLabel || "Painting")}${n.year ? " · " + esc(n.year) : ""}</p>
     <h1 class="p-title">${esc(n.title)}</h1>
-    <p class="p-dek">${ptArtistLinkHTML(n)}${n.place ? ` · ${esc(n.place)}` : ""}</p>
+    <p class="p-dek">${ptArtistLinkHTML(n)}${n.place ? ` · ${esc(n.place)}` : ""}</p></div>
     ${n.facts && n.facts.length ? `<dl class="facts">${n.facts.map(f => `<div><dt>${esc(f.label)}</dt><dd>${linkText(f.value)}</dd></div>`).join("")}</dl>` : ""}
     ${pal.length ? `<div class="palette">${pal.map((p, i) => `<button class="pal" data-pi="${i}" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("")}</div>
       <div class="pal-names">${pal.map((p, i) => { const fam = typeof familyOf === "function" && familyOf(p.h); return `<button class="pal-name" data-pi="${i}" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(p.name)}</b>${fam ? `<span>${esc(fam.head.n)} family</span>` : ""}<em class="mono">${p.h}</em></button>`; }).join("")}</div>
@@ -949,6 +950,7 @@ function paintingPage(n) {
     ${n.commons ? `<section class="srcs"><h3>Image</h3><ul><li><a href="${esc(n.commons)}" target="_blank" rel="noopener">${esc(n.imgSrcLabel || "Wikimedia Commons")}</a> · ${esc(n.license || "Public domain")}</li></ul></section>` : ""}
   `, "article");
   wireArticle(el, n);
+  if (n.id) wirePaintingShare(el, n.title + (n.artist ? " by " + n.artist : ""), nodeRoute(n));
   // a photograph or design object keeps with the same heart as a painting, in the same top-bar spot (js/favs.js fvItem*: S.favItem,
   // keyed by the photograph's id, shown in Kept > Archives); this reuses the grid's delegated handler
   if (ptKeepKind(n) && typeof fvItemWireGrid === "function") fvItemWireGrid(el.querySelector(".art-top"), () => n);

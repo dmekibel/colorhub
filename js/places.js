@@ -126,6 +126,8 @@ function placesOpen() {
 // array of groups: { title, note, items: [{ t, n?, icon, run } | { chips:[...] } | { html }] }. Nothing is
 // required to register: a context with nothing registered still gets Search + Settings, so ⋯ always works.
 const MORE_REGISTRY = new Map();
+// a page that already has search and settings one tap away returns its groups through bareMore(): the sheet then holds only its own rows
+const bareMore = groups => Object.assign(groups, { bare: true });
 function moreRegister(ctx, groupsFn) { if (ctx && typeof groupsFn === "function") MORE_REGISTRY.set(ctx, groupsFn); }
 function moreGroupHTML(g, gi) {
   const rows = (g.items || []).slice(0, 6).map((it, i) => {
@@ -151,9 +153,9 @@ function moreOpen(ctx) {
   let groups = [];
   if (groupsFn) try { groups = groupsFn() || []; } catch (e) { groups = []; }
   const html = `<div class="mr-sheet">
-    <button type="button" class="mr-search" data-mr-search>${ICON.search}<span>Search</span></button>
+    ${groups.bare ? "" : `<button type="button" class="mr-search" data-mr-search>${ICON.search}<span>Search</span></button>`}
     ${groups.map(moreGroupHTML).join("")}
-    <section class="mn-group"><button type="button" class="mn-row" data-mr-settings>${ICON.chev ? "" : ""}<span class="mn-txt"><b>Settings</b></span><span class="mn-chev">${ICON.chev}</span></button></section>
+    ${groups.bare ? "" : `<section class="mn-group"><button type="button" class="mn-row" data-mr-settings>${ICON.chev ? "" : ""}<span class="mn-txt"><b>Settings</b></span><span class="mn-chev">${ICON.chev}</span></button></section>`}
   </div>`;
   const { sh, close } = sheet(html);
   sh.classList.add("mr-sheet-wrap");

@@ -1569,7 +1569,7 @@ function glPage(i, d, fromHex, tol) {
     <div class="gl-hero gl-full-w" style="--c:${avg}">${fdMapBtnHTML("fd-mapb-hero")}<span style="width:min(calc(100% - 2 * var(--g)), calc(var(--hero-vh, 62dvh) / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${glHiSrc(d) ? ` data-hi="${esc(glHiSrc(d))}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas><div class="gl-hero-dots" data-glherodots aria-hidden="true"></div>
     <button class="gl-closer" data-glcloser aria-label="Look closer">${ICON.search}<span>Look closer</span></button>
     <button class="gl-closer gl-pick-btn" data-glpickbtn hidden aria-pressed="false" aria-label="Pick a color">${icon("pipette", 17)}<span>Pick a color</span></button></span></div>
-    <div class="gl-id">
+    <div class="gl-id">${shareBtn}
     <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
     <h1 class="p-title">${esc(d.t)}</h1>
     <p class="p-dek">${d.a ? `<button class="aw-link" data-awpainter="${esc(routeSlug(d.a))}">${esc(d.a)}</button>` : "Artist unknown"}${glDesk() ? [d.co, d.mv].filter(Boolean).map(x => ` · ${esc(x)}`).join("") : yr ? ` · ${esc(yr)}` : ""}</p>
@@ -1625,6 +1625,7 @@ function glPage(i, d, fromHex, tol) {
     <details class="gl-quiz-fold"><summary>Test yourself</summary><div class="gl-quiz" data-glquiz></div></details>
     </div></section></div></div>
   `, "article gl-page");
+  wirePaintingShare(el, d.t + (d.a ? " by " + d.a : ""), "gallery/" + i);
   // David, 2026-10-26: on a phone the heart sits at the picture's top-left corner (the bar's heart stays for the code that finds it, and is hidden there);
   // the corner heart passes its tap to the bar's and mirrors its on/off
   if (!document.documentElement.classList.contains("desk")) {
@@ -2099,20 +2100,19 @@ function glPage(i, d, fromHex, tol) {
   // the 3 actions or the picture's own Pick a color / Look closer. Registered once per draw (moreRegister keys
   // by ctx, so a re-register on the same painting just replaces the closures with ones that see this draw's d/i).
   if (d.a && typeof ooWithIndex === "function") ooWithIndex();
-  if (typeof moreRegister === "function") moreRegister("gallery", () => [
+  if (typeof moreRegister === "function") moreRegister("gallery", () => bareMore([
     { title: "Look", items: [
       { t: "Where each color sits", n: "Opens Look closer", run: () => glZoomOpen({ ...glZoomOpts(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "where", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
       { t: "Value and squint", n: "See the light structure, or the big shapes", run: () => openLookCloser() },
       { t: "Select an object", n: "Tap the thing you want", run: () => glZoomOpen({ ...glZoomOpts(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "select", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
     ] },
     { title: "Go", items: [
-      ...(d.a ? [{ t: "The painter", n: d.a, run: () => { if (typeof awPainter === "function") awPainter(routeSlug(d.a)); } }] : []),
       ...(d.rec ? [{ t: "Full size at the museum", n: src.name, run: () => window.open(d.rec, "_blank", "noopener") }] : []),
       ...(typeof playSet === "function" ? [{ t: "Play with these colors", run: () => csPlay(glSet, { back: () => galleryPage(i, false) }) }] : []),
       ...(d.a && typeof ooWithItem === "function" ? ooWithItem("painter", d.a, { first: i }) : []),   // js/games/oo-with.js: this painting first, then their others
       { t: "Keep this palette", n: "Separately from the painting itself", run: () => csPalette(glSet) },
     ] },
-  ]);
+  ]));
   if (typeof featureRegister === "function") {
     featureRegister("gl-pick", { t: "Pick a color", where: "A painting · on the picture", words: ["eyedropper", "sample", "pipette"], run: () => { if (canSample) openLookCloser("pick"); else toast("This museum's photo can't be read here, so colors can't be picked from it."); } });
     featureRegister("gl-where", { t: "Where a color sits on a painting", where: "A painting · ⋯ · Look", words: ["where", "locate", "highlight"], run: () => toast("Open a painting, then ⋯ · Where each color sits") });
