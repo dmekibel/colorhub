@@ -206,7 +206,7 @@ function todayFeed() {
   const back = typeof BACK_RENDER !== "undefined" && BACK_RENDER, k = today();
   if (S.tab !== "feed") { S.tab = "feed"; save(); }   // the place you were last: every "go(S.tab)" Close or Back (the daily game's ✕) comes back here
   const el = show(`<i class="tf-sent" aria-hidden="true"></i>
-    <div class="tf-bars"><div class="tf-chips tf-kinds" role="radiogroup" aria-label="Show">${TF_TYPES.map(([id, label]) => `<button type="button" role="radio" class="tf-chip" data-tf-f="${id}" aria-checked="false">${label}</button>`).join("")}</div><div class="tf-chips tf-lenses" role="radiogroup" aria-label="Paintings"></div></div>
+    <div class="tf-bars"><div class="tf-chips tf-kinds" role="radiogroup" aria-label="Show"><button type="button" class="tf-sbtn" data-tf-search aria-label="Search Explore">${ICON.search}</button>${TF_TYPES.map(([id, label]) => `<button type="button" role="radio" class="tf-chip" data-tf-f="${id}" aria-checked="false">${label}</button>`).join("")}</div><div class="tf-chips tf-lenses" role="radiogroup" aria-label="Paintings"></div></div>
     <div class="tf-lens-head" data-tf-lh hidden></div>
     <div class="tf-feed${hfS().caps ? "" : " nocaps"}" data-tf-feed>${tfSkeleton(k)}</div>`, "tf-screen", "feed");
   const host = el.querySelector("[data-tf-feed]"), bars = el.querySelector(".tf-bars"), kindsRow = el.querySelector(".tf-kinds"), lensRow = el.querySelector(".tf-lenses"), lh = el.querySelector("[data-tf-lh]");
@@ -412,6 +412,8 @@ function todayFeed() {
       draw(); tfBooted(); stop.push(() => { if (io) io.disconnect(); if (zoomB) zoomB.destroy(); });
     }).catch(() => { if (my === tok) host.innerHTML = `<div class="tf-state"><p class="small">The folders didn't load.</p></div>`; });
   };
+  kindsRow.querySelector("[data-tf-search]").addEventListener("click", () => { buzz(4); searchOpen(); });
+  tfSearchBoardsLoad();
   const render = restore => { const f = tfFilter(); if (f === "paint") paintings(restore); else if (f === "board") boardsView(); else others(restore); };
   kindsRow.addEventListener("click", e => {
     const b = e.target.closest("[data-tf-f]"); if (!b || b.dataset.tfF === tfFilter()) return;
@@ -811,6 +813,21 @@ function tfPaint(scr, host, st, f, restore, stop, ov) {
   };
 }
 // a color or article by its name: the same door the router uses for #/color/<slug>, so core colors and library names both open, and Back returns here
+// Boards in the search (David, 2026-10-27: "a smart search in Explore, so you can search for boards"): the Boards page's folders, found by name
+// from the same search sheet the rest of the app uses (js/search.js searchExtraGroups). Loaded once, when Explore opens or the sheet does.
+let TF_SEARCH_BOARDS = null;
+function tfSearchBoardsLoad() {
+  if (TF_SEARCH_BOARDS || typeof hfBoards !== "function") return;
+  hfBoards().then(secs => {
+    const seen = new Set();
+    TF_SEARCH_BOARDS = secs.flatMap(sc => sc.boards.filter(b => b.id).map(b => ({ id: b.id, label: b.label, sub: b.sub || "", tab: sc.tab, group: sc.title }))).filter(b => !seen.has(b.id) && seen.add(b.id));
+  }).catch(() => {});
+}
+function tfOpenBoardFromSearch(b) {
+  TF_KIND = "paint"; TF_LENS = b.id; TF_FROM_BOARD = true; TF_BTAB = b.tab || TF_BTAB;
+  TF_SIBS = (TF_SEARCH_BOARDS || []).filter(x => x.group === b.group).map(x => ({ id: x.id, label: x.label }));
+  if (/^#\/?feed/.test(location.hash)) todayFeed(); else location.hash = "#/feed";
+}
 function tfOpenName(name, hex) {
   const slug = routeSlug(name), c = routeColor(slug);
   if (c) return whenWiki(() => { const nd = colorNode(c); if (nd) openNode(nd); else openCoreName(hex, name); });

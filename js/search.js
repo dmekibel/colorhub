@@ -67,6 +67,10 @@ function searchExtraGroups(q) {
       const r = sqFuzzyRank(COLLECTIONS, q, c => c.t, 4);
       G("collections", "Collections", r.top - 5, r.hits.map(c => ({ id: "co:" + c.id, icon: { t: "dot", h: c.pic }, title: c.t, sub: "Collection", act: () => { if (typeof collOpen === "function") collOpen(c.id); } })));
     }
+    if (typeof TF_SEARCH_BOARDS !== "undefined" && TF_SEARCH_BOARDS) {   // js/todayfeed.js: the Boards page's folders (genres, moods, periods, movements, painters, places ...)
+      const r = sqFuzzyRank(TF_SEARCH_BOARDS, q, b => b.label, 6);
+      G("boards", "Boards", r.top + (/^#\/?feed/.test(location.hash) ? 12 : -2), r.hits.map(b => ({ id: "b:" + b.id, icon: { t: "glyph", name: "painting" }, title: b.label, sub: "Board" + (b.sub ? " · " + b.sub : ""), act: () => tfOpenBoardFromSearch(b) })));
+    }
     const ql = sqFold(q), feats = searchFeatureMatches(q.toLowerCase());
     G("tools", "Tools & settings", ql.length >= 3 ? 30 : 10, feats.slice(0, 4).map(([id, f]) => ({ id: "f:" + id, icon: { t: "glyph", name: "pipette" }, title: f.t, sub: f.where || "", act: () => { buzz(8); f.run(); } })));
     if (typeof graph === "function" && ql.length >= 3) {
@@ -117,6 +121,7 @@ function searchQuickHTML() {
 }
 function searchOpen(o = {}) {
   if (document.querySelector(".sheet,.rooms-stem")) return;
+  if (typeof tfSearchBoardsLoad === "function") tfSearchBoardsLoad();
   const html = `<div class="sr-sheet">
     <div class="sr-field sq-field"><span>${ICON.search}</span><div class="sq-inwrap"><span class="sq-ghost" aria-hidden="true"></span><input type="search" class="sr-input" placeholder="Search colors, painters, years…" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" role="combobox" aria-expanded="true" aria-controls="sq-list" aria-label="Search" value="${esc(o.q || "")}"></div></div>
     ${searchQuickHTML()}

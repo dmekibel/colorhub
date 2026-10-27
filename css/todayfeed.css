@@ -11,6 +11,9 @@
 .tf-chips::-webkit-scrollbar{display:none}
 .tf-chip{flex:none;height:40px;padding:0 18px;border-radius:var(--r-pill);background:var(--surface-2);border:1px solid var(--rule);color:var(--soft);font:500 16px/1 var(--sans);transition:background .15s,color .15s,border-color .15s,transform .12s var(--ease)}
 .tf-chip:active{transform:scale(.97)}
+.tf-sbtn{flex:none;position:sticky;left:0;z-index:1;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);border:1px solid var(--rule);color:var(--ink);transition:transform .12s var(--ease)}
+.tf-sbtn svg{width:18px;height:18px}
+.tf-sbtn:active{transform:scale(.92)}
 .tf-chip.on{background:var(--paper);border-color:var(--paper);color:var(--paper-ink)}
 @media (hover:hover){.tf-chip:not(.on):hover{background:var(--surface-3);color:var(--ink)}}
 

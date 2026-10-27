@@ -3145,7 +3145,7 @@ function pmMount(el, s, F) {
     // because this arrangement has no single seed to open it reflexively like Rings/Spiral do).
     if (!keepPan) cardOpen = foc ? (fo.open && !foc.out) : mem ? !!mem.cardOpen : pinned;
     centerK = -1; drawn = []; setCenter(lay.n ? nearestK(P[0], P[1]) : -1); chrome(); kick();
-    const why = foc && foc.out ? pmOutsideWhy(s, F, fo.i) : null;
+    const why = foc && foc.out && fo.open ? pmOutsideWhy(s, F, fo.i) : null;   // only when that painting's card was open: a search for a country must not scold you about whatever sat in the middle of the map (David, 2026-10-27)
     paintNote(why ? { i: fo.i, ...why } : null);
     if (foc && !fo.quiet) { pulseI = lay.items[foc.k]; pulseT0 = clock; }
     if (foc) lastFocus = { i: lay.items[foc.k], z: Z, open: cardOpen };
