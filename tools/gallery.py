@@ -147,6 +147,9 @@ for _k, _n, _s, _h, _r in (("yuag", "Yale University Art Gallery", "Yale Art Gal
                            ("npg", "Smithsonian National Portrait Gallery", "NPG", "https://npg.si.edu/portraits", "https://www.si.edu/object/{num}"),
                            ("chndm", "Cooper Hewitt, Smithsonian Design Museum", "Cooper Hewitt", "https://www.cooperhewitt.org/collection/", "https://www.si.edu/object/{num}")):
     SOURCES[_k] = dict(name=_n, short=_s, credit="CC0 (Smithsonian Open Access / museum open data)" if _k != "yuag" else "CC0 (Yale open data)", home=_h, rec=_r)
+# 2026-10-29: Europeana rows (tools/europeana_pull.py); each row's own `credit` and `url` name the holding institution and licence.
+SOURCES["europeana"] = dict(name="Europeana (open licences)", short="Europeana", credit="open licence (CC0, public domain mark, CC BY or CC BY-SA), named on the item's page (the link) · CC0 data",
+                            home="https://www.europeana.eu/en/collections", rec="https://www.europeana.eu/en/item/{num}")
 CMA_IMG = re.compile(r"^https://openaccess-cdn\.clevelandart\.org/([^/]+)/\1_web\.jpg$")
 
 

@@ -7,9 +7,9 @@
   "to": 1925
  },
  "caps": {
-  "per_group": 1000,
-  "total": 100000,
-  "overshoot": 1.0
+  "per_group": 30,
+  "total": 2500,
+  "overshoot": 1.3
  },
  "skip_cat": "Calligraphy|Ceramic|Pottery|Textile|Petroglyph|Rock art|Graffiti|Mural|Murals|Postage",
  "filter": {
@@ -30,6 +30,7 @@
    "note": "87 files, 18 subcategories.",
    "artist": "Mexican Painter",
    "undated_ok": true,
+   "max": 150,
    "depth": 2
   },
   {
@@ -39,6 +40,7 @@
    "sure": "low",
    "note": "40 files, 7 subcategories (depicted place).",
    "artist": "Mexican Painter",
+   "max": 60,
    "depth": 1
   },
   {
@@ -278,7 +280,8 @@
    "note": "116 files, 27 subcategories.",
    "artist": "Aztec Tlacuilo",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 60,
+   "max": 300,
    "depth": 2
   },
   {
@@ -289,7 +292,7 @@
    "note": "223 files.",
    "artist": "Aztec Tlacuilo",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 230,
    "depth": 1
   },
   {
@@ -300,7 +303,7 @@
    "note": "163 files.",
    "artist": "Aztec Tlacuilo",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 170,
    "depth": 1
   },
   {
@@ -311,7 +314,7 @@
    "note": "70 files, 2 subcategories.",
    "artist": "Cuzco School Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 70,
    "depth": 2
   },
   {
@@ -322,7 +325,7 @@
    "note": "32 files, 11 subcategories.",
    "artist": "Cuzco School Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 60,
    "depth": 2
   },
   {
@@ -386,6 +389,7 @@
    "note": "20 files, 12 subcategories.",
    "artist": "Peruvian Painter",
    "undated_ok": true,
+   "max": 60,
    "depth": 2
   },
   {
@@ -450,6 +454,7 @@
    "note": "74 files.",
    "artist": "Bolivian Painter",
    "undated_ok": true,
+   "max": 80,
    "depth": 2
   },
   {
@@ -460,6 +465,7 @@
    "note": "83 files, 5 subcategories.",
    "artist": "Ecuadorian Painter",
    "undated_ok": true,
+   "max": 90,
    "depth": 2
   },
   {
@@ -544,6 +550,7 @@
    "note": "102 files, 5 subcategories.",
    "artist": "Argentine Painter",
    "undated_ok": true,
+   "max": 120,
    "depth": 2
   },
   {
@@ -609,6 +616,7 @@
    "note": "71 files, 6 subcategories.",
    "artist": "Chilean Painter",
    "undated_ok": true,
+   "max": 90,
    "depth": 2
   },
   {
@@ -652,6 +660,7 @@
    "note": "78 files, 6 subcategories.",
    "artist": "Uruguayan Painter",
    "undated_ok": true,
+   "max": 100,
    "depth": 2
   },
   {
@@ -684,6 +693,7 @@
    "note": "106 files, 14 subcategories.",
    "artist": "Brazilian Painter",
    "undated_ok": true,
+   "max": 140,
    "depth": 2
   },
   {
@@ -693,6 +703,7 @@
    "sure": "low",
    "note": "9 files, 11 subcategories.",
    "artist": "Brazilian Painter",
+   "max": 40,
    "depth": 1
   },
   {
@@ -748,6 +759,7 @@
    "artist": "Eliseu Visconti",
    "died": 1944,
    "nofilter": true,
+   "max": 400,
    "depth": 2
   },
   {

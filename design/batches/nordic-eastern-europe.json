@@ -7,9 +7,9 @@
   "to": 1925
  },
  "caps": {
-  "per_group": 1000,
-  "total": 100000,
-  "overshoot": 1.0
+  "per_group": 40,
+  "total": 2500,
+  "overshoot": 1.3
  },
  "skip_cat": "Calligraphy|Icon frames|Iconostasis|Church architecture|Posters|Postcards|Lubok|Banknotes",
  "filter": {
@@ -30,7 +30,7 @@
    "artist": "Jan Matejko",
    "died": 1893,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -41,7 +41,7 @@
    "artist": "Józef Chełmoński",
    "died": 1914,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -52,7 +52,7 @@
    "artist": "Jacek Malczewski",
    "died": 1929,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -63,7 +63,7 @@
    "artist": "Stanisław Wyspiański",
    "died": 1907,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -74,7 +74,7 @@
    "artist": "Józef Mehoffer",
    "died": 1946,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -85,7 +85,7 @@
    "artist": "Wojciech Kossak",
    "died": 1942,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -96,7 +96,7 @@
    "artist": "Juliusz Kossak",
    "died": 1899,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -107,7 +107,7 @@
    "artist": "Aleksander Gierymski",
    "died": 1901,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -118,7 +118,7 @@
    "artist": "Maksymilian Gierymski",
    "died": 1874,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -129,7 +129,7 @@
    "artist": "Olga Boznańska",
    "died": 1940,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -140,7 +140,7 @@
    "artist": "Władysław Podkowiński",
    "died": 1895,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -151,7 +151,7 @@
    "artist": "Leon Wyczółkowski",
    "died": 1936,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -162,7 +162,7 @@
    "artist": "Jan Stanisławski",
    "died": 1907,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -173,7 +173,7 @@
    "artist": "Henryk Siemiradzki",
    "died": 1902,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -184,7 +184,7 @@
    "artist": "Stanisław Witkiewicz",
    "died": 1915,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -195,7 +195,7 @@
    "artist": "Wojciech Gerson",
    "died": 1901,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -206,7 +206,7 @@
    "artist": "Józef Brandt",
    "died": 1915,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -217,7 +217,7 @@
    "artist": "Alfred Wierusz-Kowalski",
    "died": 1915,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -228,7 +228,7 @@
    "artist": "Marcello Bacciarelli",
    "died": 1818,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -239,7 +239,7 @@
    "artist": "Artur Grottger",
    "died": 1867,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -250,7 +250,7 @@
    "artist": "Witold Pruszkowski",
    "died": 1896,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -261,7 +261,7 @@
    "artist": "Ferdynand Ruszczyc",
    "died": 1936,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -272,7 +272,7 @@
    "artist": "Bernardo Bellotto",
    "died": 1780,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -283,6 +283,7 @@
    "note": "128 files, 15 subcategories.",
    "artist": "Polish Painter",
    "undated_ok": true,
+   "max": 120,
    "depth": 2
   },
   {
@@ -293,7 +294,7 @@
    "artist": "Alfons Mucha",
    "died": 1939,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -304,7 +305,7 @@
    "artist": "Mikoláš Aleš",
    "died": 1913,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -315,7 +316,7 @@
    "artist": "Josef Mánes",
    "died": 1871,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -326,7 +327,7 @@
    "artist": "Antonín Slavíček",
    "died": 1910,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -337,7 +338,7 @@
    "artist": "Antonín Chittussi",
    "died": 1891,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -348,7 +349,7 @@
    "artist": "Jakub Schikaneder",
    "died": 1924,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -359,7 +360,7 @@
    "artist": "Jaroslav Čermák",
    "died": 1878,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -370,7 +371,7 @@
    "artist": "Luděk Marold",
    "died": 1898,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -381,7 +382,7 @@
    "artist": "Václav Brožík",
    "died": 1901,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -392,7 +393,7 @@
    "artist": "Julius Mařák",
    "died": 1899,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -403,7 +404,7 @@
    "artist": "Joža Uprka",
    "died": 1940,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -414,7 +415,7 @@
    "artist": "Hanuš Schwaiger",
    "died": 1912,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -425,6 +426,7 @@
    "note": "39 files, 14 subcategories.",
    "artist": "Czech Painter",
    "undated_ok": true,
+   "max": 80,
    "depth": 2
   },
   {
@@ -435,7 +437,7 @@
    "artist": "Mihály Munkácsy",
    "died": 1900,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -446,7 +448,7 @@
    "artist": "Mihály Munkácsy",
    "died": 1900,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -457,7 +459,7 @@
    "artist": "Pál Szinyei Merse",
    "died": 1920,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -468,7 +470,7 @@
    "artist": "László Paál",
    "died": 1879,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -479,7 +481,7 @@
    "artist": "Tivadar Csontváry Kosztka",
    "died": 1919,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -490,7 +492,7 @@
    "artist": "József Rippl-Rónai",
    "died": 1927,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -501,7 +503,7 @@
    "artist": "Mihály Zichy",
    "died": 1906,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -512,7 +514,7 @@
    "artist": "Bertalan Székely",
    "died": 1910,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -523,7 +525,7 @@
    "artist": "Gyula Benczúr",
    "died": 1920,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -534,7 +536,7 @@
    "artist": "Károly Ferenczy",
    "died": 1917,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -545,7 +547,7 @@
    "artist": "Károly Markó",
    "died": 1860,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -556,7 +558,7 @@
    "artist": "Miklós Barabás",
    "died": 1898,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -567,6 +569,7 @@
    "note": "99 files, 13 subcategories.",
    "artist": "Hungarian Painter",
    "undated_ok": true,
+   "max": 100,
    "depth": 2
   },
   {
@@ -577,7 +580,7 @@
    "artist": "Ilya Repin",
    "died": 1930,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -588,7 +591,7 @@
    "artist": "Ivan Aivazovsky",
    "died": 1900,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -599,7 +602,7 @@
    "artist": "Ivan Shishkin",
    "died": 1898,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -610,7 +613,7 @@
    "artist": "Isaac Levitan",
    "died": 1900,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -621,7 +624,7 @@
    "artist": "Vasily Surikov",
    "died": 1916,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -632,7 +635,7 @@
    "artist": "Viktor Vasnetsov",
    "died": 1926,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -643,7 +646,7 @@
    "artist": "Karl Bryullov",
    "died": 1852,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -654,7 +657,7 @@
    "artist": "Mikhail Vrubel",
    "died": 1910,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -665,7 +668,7 @@
    "artist": "Valentin Serov",
    "died": 1911,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -676,7 +679,7 @@
    "artist": "Nicholas Roerich",
    "died": 1947,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -687,7 +690,7 @@
    "artist": "Ivan Bilibin",
    "died": 1942,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -698,7 +701,7 @@
    "artist": "Konstantin Korovin",
    "died": 1939,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -709,7 +712,7 @@
    "artist": "Boris Kustodiev",
    "died": 1927,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -720,7 +723,7 @@
    "artist": "Arkhip Kuindzhi",
    "died": 1910,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -731,7 +734,7 @@
    "artist": "Vasily Vereshchagin",
    "died": 1904,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -742,7 +745,7 @@
    "artist": "Alexei Savrasov",
    "died": 1897,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -753,7 +756,7 @@
    "artist": "Orest Kiprensky",
    "died": 1836,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -764,7 +767,7 @@
    "artist": "Ivan Pokhitonov",
    "died": 1923,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -775,7 +778,7 @@
    "artist": "Ilya Ostroukhov",
    "died": 1929,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -786,7 +789,7 @@
    "artist": "Vasily Tropinin",
    "died": 1857,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -797,7 +800,7 @@
    "artist": "Mykola Pymonenko",
    "died": 1912,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -808,7 +811,7 @@
    "artist": "Taras Shevchenko",
    "died": 1861,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -819,7 +822,8 @@
    "note": "114 files, 8 subcategories.",
    "artist": "Russian Icon Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 30,
+   "max": 150,
    "depth": 2
   },
   {
@@ -830,7 +834,8 @@
    "note": "125 files, 14 subcategories.",
    "artist": "Ukrainian Icon Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 30,
+   "max": 150,
    "depth": 2
   },
   {
@@ -851,6 +856,7 @@
    "note": "143 files, 13 subcategories.",
    "artist": "Russian Painter",
    "undated_ok": true,
+   "max": 100,
    "depth": 2
   },
   {
@@ -861,6 +867,7 @@
    "note": "20 files, 10 subcategories.",
    "artist": "Ukrainian Painter",
    "undated_ok": true,
+   "max": 60,
    "depth": 2
   },
   {
@@ -881,7 +888,7 @@
    "artist": "Akseli Gallen-Kallela",
    "died": 1931,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -892,7 +899,7 @@
    "artist": "Albert Edelfelt",
    "died": 1905,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -903,7 +910,7 @@
    "artist": "Helene Schjerfbeck",
    "died": 1946,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -914,7 +921,7 @@
    "artist": "Hugo Simberg",
    "died": 1917,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -925,7 +932,7 @@
    "artist": "Eero Järnefelt",
    "died": 1937,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -936,7 +943,7 @@
    "artist": "Pekka Halonen",
    "died": 1933,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -947,7 +954,7 @@
    "artist": "Magnus Enckell",
    "died": 1925,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -958,7 +965,7 @@
    "artist": "Fanny Churberg",
    "died": 1892,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -969,7 +976,7 @@
    "artist": "Victor Westerholm",
    "died": 1919,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -980,7 +987,7 @@
    "artist": "Elin Danielson-Gambogi",
    "died": 1919,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -991,7 +998,7 @@
    "artist": "Maria Wiik",
    "died": 1928,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1002,7 +1009,7 @@
    "artist": "Berndt Lindholm",
    "died": 1914,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1013,7 +1020,7 @@
    "artist": "Werner Holmberg",
    "died": 1860,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1024,7 +1031,7 @@
    "artist": "Ferdinand von Wright",
    "died": 1906,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1035,7 +1042,7 @@
    "artist": "Robert Wilhelm Ekman",
    "died": 1873,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1056,7 +1063,7 @@
    "artist": "Konrad Mägi",
    "died": 1925,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1067,7 +1074,7 @@
    "artist": "Nikolai Triik",
    "died": 1940,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1078,7 +1085,7 @@
    "artist": "Johann Köler",
    "died": 1899,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1100,7 +1107,7 @@
    "artist": "Peder Balke",
    "died": 1887,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1112,7 +1119,7 @@
    "artist": "Frits Thaulow",
    "died": 1906,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1124,7 +1131,7 @@
    "artist": "Erik Werenskiold",
    "died": 1938,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1136,7 +1143,7 @@
    "artist": "Gerhard Munthe",
    "died": 1929,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1148,7 +1155,7 @@
    "artist": "Harald Sohlberg",
    "died": 1935,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1160,7 +1167,7 @@
    "artist": "Theodor Kittelsen",
    "died": 1914,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1172,7 +1179,7 @@
    "artist": "Christian Krohg",
    "died": 1925,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1184,7 +1191,7 @@
    "artist": "Adolph Tidemand",
    "died": 1876,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1196,7 +1203,7 @@
    "artist": "Hans Gude",
    "died": 1903,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1208,7 +1215,7 @@
    "artist": "Nils Kreuger",
    "died": 1930,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1220,7 +1227,7 @@
    "artist": "Hilma af Klint",
    "died": 1944,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1232,7 +1239,7 @@
    "artist": "Ernst Josephson",
    "died": 1906,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1244,7 +1251,7 @@
    "artist": "Carl Fredrik Hill",
    "died": 1911,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1256,7 +1263,7 @@
    "artist": "Carl Larsson",
    "died": 1919,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1268,7 +1275,7 @@
    "artist": "Anders Zorn",
    "died": 1920,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1280,7 +1287,7 @@
    "artist": "Bruno Liljefors",
    "died": 1939,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1292,7 +1299,7 @@
    "artist": "Richard Bergh",
    "died": 1919,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1304,7 +1311,7 @@
    "artist": "Vilhelm Kyhn",
    "died": 1903,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1316,7 +1323,7 @@
    "artist": "Christen Købke",
    "died": 1848,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1328,7 +1335,7 @@
    "artist": "Wilhelm Marstrand",
    "died": 1873,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1340,7 +1347,7 @@
    "artist": "Vilhelm Hammershøi",
    "died": 1916,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1352,7 +1359,7 @@
    "artist": "P. S. Krøyer",
    "died": 1909,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1364,7 +1371,7 @@
    "artist": "Anna Ancher",
    "died": 1935,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1376,7 +1383,7 @@
    "artist": "Michael Ancher",
    "died": 1927,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1388,7 +1395,7 @@
    "artist": "Laurits Tuxen",
    "died": 1927,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1400,7 +1407,7 @@
    "artist": "Carl Bloch",
    "died": 1890,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1412,7 +1419,7 @@
    "artist": "Kristian Zahrtmann",
    "died": 1917,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1424,7 +1431,7 @@
    "artist": "Peder Mønsted",
    "died": 1941,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1436,7 +1443,7 @@
    "artist": "Jens Juel",
    "died": 1802,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 400,
    "depth": 2
   },
   {
@@ -1448,37 +1455,7 @@
    "artist": "Þórarinn B. Þorláksson",
    "died": 1924,
    "nofilter": true,
-   "per_group": 1000,
-   "depth": 2
-  },
-  {
-   "cat": "Category:Paintings from Norway",
-   "co": "Norway",
-   "mv": "Norwegian painting",
-   "sure": "medium",
-   "note": "33 files, 15 subcategories.",
-   "artist": "Norwegian Painter",
-   "undated_ok": true,
-   "depth": 2
-  },
-  {
-   "cat": "Category:Paintings from Sweden",
-   "co": "Sweden",
-   "mv": "Swedish painting",
-   "sure": "medium",
-   "note": "79 files, 14 subcategories.",
-   "artist": "Swedish Painter",
-   "undated_ok": true,
-   "depth": 2
-  },
-  {
-   "cat": "Category:Paintings from Denmark",
-   "co": "Denmark",
-   "mv": "Danish painting",
-   "sure": "medium",
-   "note": "6 files, 12 subcategories.",
-   "artist": "Danish Painter",
-   "undated_ok": true,
+   "per_group": 400,
    "depth": 2
   }
  ]

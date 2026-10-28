@@ -7,9 +7,9 @@
   "to": 1925
  },
  "caps": {
-  "per_group": 1000,
-  "total": 100000,
-  "overshoot": 1.0
+  "per_group": 30,
+  "total": 1500,
+  "overshoot": 1.3
  },
  "skip_cat": "Calligraphy|Batik|Wayang kulit|Temple relief|Relief|Statue|Murals in|Graffiti|Money|Banknote",
  "filter": {
@@ -139,7 +139,8 @@
    "note": "380 files: 1930s Pita Maha-era drawings; date window handles it (CLIP filter on).",
    "artist": "Balinese Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 380,
+   "max": 380,
    "depth": 1
   },
   {
@@ -170,7 +171,7 @@
    "note": "60 files: ceiling paintings in situ.",
    "artist": "Kamasan Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 60,
    "depth": 1
   },
   {
@@ -211,7 +212,8 @@
    "note": "19 files, 6 subcategories; illuminated Yogyakarta manuscripts (CLIP text filter on).",
    "artist": "Javanese Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 15,
+   "max": 120,
    "depth": 2
   },
   {
@@ -241,7 +243,7 @@
    "note": "100 files.",
    "artist": "Burmese Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 100,
    "depth": 1
   },
   {
@@ -252,7 +254,7 @@
    "note": "73 files.",
    "artist": "Burmese Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 75,
    "depth": 1
   },
   {
@@ -263,7 +265,7 @@
    "note": "44 files, 6 subcategories.",
    "artist": "Burmese Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 20,
    "depth": 2
   },
   {
@@ -274,7 +276,7 @@
    "note": "28 files, 2 subcategories.",
    "artist": "Burmese Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 30,
    "depth": 2
   },
   {
@@ -285,7 +287,7 @@
    "note": "27 files.",
    "artist": "Burmese Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 30,
    "depth": 1
   },
   {
@@ -326,7 +328,7 @@
    "note": "23 files.",
    "artist": "Thai Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 25,
    "depth": 1
   },
   {
@@ -337,7 +339,7 @@
    "note": "13 files, 5 subcategories.",
    "artist": "Thai Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 15,
    "depth": 2
   },
   {

@@ -436,7 +436,7 @@ def drop_duplicates(C, new, old):
         if hr:
             for o in pl:
                 ho = h_of(o)
-                if not ho or abs(o["L"] - r["L"]) >= 3 or abs(o["C"] - r["C"]) >= 3:
+                if not ho or ("L" in o and "L" in r and (abs(o["L"] - r["L"]) >= 3 or abs(o["C"] - r["C"]) >= 3)):
                     continue
                 if bin(hr ^ ho).count("1") <= C.DUP_BITS_ANY and C.center_de(o, r) < C.DUP_DE:
                     dup = o["id"]; break

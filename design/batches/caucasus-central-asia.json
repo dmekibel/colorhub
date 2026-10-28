@@ -333,6 +333,255 @@
    "sure": "low",
    "note": "8 files, 1 subcategory.",
    "artist": "Mongolian Painter"
+  },
+  {
+   "cat": "Category:Armenian manuscripts in the Walters Art Museum",
+   "co": "Armenia",
+   "sure": "high",
+   "note": "474 files, CC0 Walters",
+   "mv": "Armenian illuminated manuscript",
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Stephan Aghajanyan",
+   "co": "Armenia",
+   "sure": "high",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Stepan Aghajanyan",
+   "died": 1940
+  },
+  {
+   "cat": "Category:Charles Garabed Atamian",
+   "co": "Armenia",
+   "sure": "high",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Charles Garabed Atamian",
+   "died": 1947
+  },
+  {
+   "cat": "Category:Panos Terlemezian",
+   "co": "Armenia",
+   "sure": "high",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Panos Terlemezian",
+   "died": 1941
+  },
+  {
+   "cat": "Category:Edgar Chahine",
+   "co": "Armenia",
+   "sure": "high",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Edgar Chahine",
+   "died": 1947
+  },
+  {
+   "cat": "Category:Arshak Fetvadjian",
+   "co": "Armenia",
+   "sure": "high",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Arshak Fetvadjian",
+   "died": 1947
+  },
+  {
+   "cat": "Category:Hovnatan Hovnatanian",
+   "co": "Armenia",
+   "sure": "high",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Hovnatan Hovnatanian",
+   "died": 1801
+  },
+  {
+   "cat": "Category:Paintings by Vardges Surenyants",
+   "co": "Armenia",
+   "sure": "high",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Vardges Surenyants",
+   "died": 1921
+  },
+  {
+   "cat": "Category:Irakli Gamrekeli",
+   "co": "Georgia",
+   "sure": "high",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Irakli Gamrekeli",
+   "died": 1943
+  },
+  {
+   "cat": "Category:Natalya Danko",
+   "co": "Georgia",
+   "sure": "high",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Natalya Danko",
+   "died": 1942
+  },
+  {
+   "cat": "Category:Valerian Sidamon-Eristavi",
+   "co": "Georgia",
+   "sure": "high",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Valerian Sidamon-Eristavi",
+   "died": 1943
+  },
+  {
+   "cat": "Category:Mose Toidze",
+   "co": "Georgia",
+   "sure": "high",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Mose Toidze",
+   "died": 1953
+  },
+  {
+   "cat": "Category:Shalva Kikodze",
+   "co": "Georgia",
+   "sure": "high",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Shalva Kikodze",
+   "died": 1921
+  },
+  {
+   "cat": "Category:David Kakabadze",
+   "co": "Georgia",
+   "sure": "high",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "David Kakabadze",
+   "died": 1952
+  },
+  {
+   "cat": "Category:Alexander von Salzmann",
+   "co": "Georgia",
+   "sure": "medium",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Alexander von Salzmann",
+   "died": 1934
+  },
+  {
+   "cat": "Category:Iakob Nikoladze",
+   "co": "Georgia",
+   "sure": "medium",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Iakob Nikoladze",
+   "died": 1951
+  },
+  {
+   "cat": "Category:Damiane",
+   "co": "Georgia",
+   "sure": "medium",
+   "note": "medieval Georgian icon painter, 24 files",
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Tevdore",
+   "co": "Georgia",
+   "sure": "medium",
+   "note": "medieval Georgian icon painter, 13 files",
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Siyâvush Beg Gorji",
+   "co": "Georgia",
+   "sure": "medium",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Siyavush Beg Gorji",
+   "died": 1601
+  },
+  {
+   "cat": "Category:Anthim the Iberian",
+   "co": "Georgia",
+   "sure": "medium",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Anthim the Iberian",
+   "died": 1716
+  },
+  {
+   "cat": "Category:Paintings by Bahruz Kangarli",
+   "co": "Azerbaijan",
+   "sure": "high",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Bahruz Kangarli",
+   "died": 1922
+  },
+  {
+   "cat": "Category:Paintings by Azim Azimzade",
+   "co": "Azerbaijan",
+   "sure": "high",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Azim Azimzade",
+   "died": 1943
+  },
+  {
+   "cat": "Category:Usta Gambar Karabakhi",
+   "co": "Azerbaijan",
+   "sure": "medium",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Usta Gambar Karabakhi",
+   "died": 1946
+  },
+  {
+   "cat": "Category:Shokan Valikhanov",
+   "co": "Kazakhstan",
+   "sure": "medium",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Shokan Valikhanov",
+   "died": 1865
+  },
+  {
+   "cat": "Category:Leo Bouret",
+   "co": "Uzbekistan",
+   "sure": "medium",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Leo Bouret",
+   "died": 1943
+  },
+  {
+   "cat": "Category:Orientalist paintings by Vasily Vereshchagin",
+   "co": "Uzbekistan",
+   "sure": "medium",
+   "note": "Turkestan series; co_rules decide Uzbekistan/Kazakhstan/Kyrgyzstan/Tajikistan by title",
+   "artist": "Vasily Vereshchagin",
+   "died": 1904
+  },
+  {
+   "cat": "Category:Timur'un Mezarı by Vasily Vereshchagin",
+   "co": "Uzbekistan",
+   "sure": "medium",
+   "note": "added 2026-10-28 from the deep research pass",
+   "artist": "Vasily Vereshchagin",
+   "died": 1904
+  },
+  {
+   "cat": "Category:Timurid miniatures",
+   "co": "Uzbekistan",
+   "sure": "medium",
+   "note": "added 2026-10-28 from the deep research pass",
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Ethiopian manuscripts",
+   "co": "Ethiopia",
+   "sure": "medium",
+   "note": "110 files",
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Icons of Albania",
+   "co": "Albania",
+   "sure": "medium",
+   "note": "added 2026-10-28 from the deep research pass",
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Paintings from Albania",
+   "co": "Albania",
+   "sure": "medium",
+   "note": "added 2026-10-28 from the deep research pass",
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Paintings from Haiti",
+   "co": "Haiti",
+   "sure": "medium",
+   "note": "added 2026-10-28 from the deep research pass",
+   "undated_ok": true
   }
  ]
 }

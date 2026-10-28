@@ -7,9 +7,9 @@
   "to": 1925
  },
  "caps": {
-  "per_group": 1000,
-  "total": 100000,
-  "overshoot": 1.0
+  "per_group": 30,
+  "total": 800,
+  "overshoot": 1.3
  },
  "skip_cat": "Calligraphy|Rock art|Graffiti|Murals|Mural|Textile|Beadwork|Sculpture|Mask|Flag maps|Stamps|Coins",
  "filter": {
@@ -30,7 +30,7 @@
    "note": "71 files, 3 subcategories.",
    "artist": "Ethiopian Icon Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 70,
    "depth": 2
   },
   {
@@ -41,7 +41,7 @@
    "note": "43 files.",
    "artist": "Ethiopian Icon Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 45,
    "depth": 1
   },
   {
@@ -52,7 +52,7 @@
    "note": "44 files.",
    "artist": "Ethiopian Icon Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 45,
    "depth": 1
   },
   {
@@ -63,7 +63,7 @@
    "note": "40 files.",
    "artist": "Ethiopian Icon Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 40,
    "depth": 1
   },
   {
@@ -84,7 +84,8 @@
    "note": "110 files, 12 subcategories.",
    "artist": "Ethiopian Manuscript Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 15,
+   "max": 200,
    "depth": 2
   },
   {
@@ -95,7 +96,7 @@
    "note": "41 files, 2 subcategories.",
    "artist": "Ethiopian Manuscript Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 20,
    "depth": 2
   },
   {
@@ -106,7 +107,7 @@
    "note": "19 files.",
    "artist": "Ethiopian Manuscript Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 20,
    "depth": 1
   },
   {
@@ -117,7 +118,7 @@
    "note": "29 files.",
    "artist": "Ethiopian Manuscript Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 30,
    "depth": 1
   },
   {
@@ -128,7 +129,7 @@
    "note": "19 files, 2 subcategories.",
    "artist": "Ethiopian Manuscript Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 20,
    "depth": 2
   },
   {
@@ -139,7 +140,7 @@
    "note": "13 files, 5 subcategories.",
    "artist": "Ethiopian Scroll Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 15,
    "depth": 2
   },
   {
@@ -160,6 +161,7 @@
    "note": "18 files, 8 subcategories; mostly archaeology, CLIP filter on.",
    "artist": "Ethiopian Icon Painter",
    "undated_ok": true,
+   "max": 20,
    "depth": 1
   },
   {
@@ -190,7 +192,7 @@
    "note": "48 files, 4 subcategories.",
    "artist": "Coptic Icon Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 50,
    "depth": 2
   },
   {
@@ -222,7 +224,7 @@
    "artist": "Thomas Baines",
    "died": 1875,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 100,
    "depth": 2
   },
   {

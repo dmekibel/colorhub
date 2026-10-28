@@ -7,9 +7,9 @@
   "to": 1925
  },
  "caps": {
-  "per_group": 1000,
-  "total": 100000,
-  "overshoot": 1.0
+  "per_group": 30,
+  "total": 3000,
+  "overshoot": 1.3
  },
  "skip_cat": "Calligraphy|Sikh art by|Gurdwara|Temple|Tomb|Fort|Palace|Rangoli",
  "co_rules": [
@@ -56,7 +56,8 @@
    "note": "166 files, 23 subcategories.",
    "artist": "Mughal Court Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 20,
+   "max": 600,
    "depth": 3
   },
   {
@@ -67,7 +68,8 @@
    "note": "138 files, 21 subcategories.",
    "artist": "Mughal Court Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 20,
+   "max": 300,
    "depth": 2
   },
   {
@@ -78,7 +80,8 @@
    "note": "145 files.",
    "artist": "Mughal Court Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 20,
+   "max": 300,
    "depth": 2
   },
   {
@@ -89,7 +92,8 @@
    "note": "406 files.",
    "artist": "Mughal Court Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 20,
+   "max": 300,
    "depth": 2
   },
   {
@@ -100,7 +104,8 @@
    "note": "173 files.",
    "artist": "Mughal Court Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 20,
+   "max": 300,
    "depth": 2
   },
   {
@@ -111,7 +116,8 @@
    "note": "64 files.",
    "artist": "Mughal Court Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 20,
+   "max": 300,
    "depth": 2
   },
   {
@@ -122,7 +128,7 @@
    "artist": "Basawan",
    "died": 1600,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 100,
    "depth": 2
   },
   {
@@ -133,7 +139,7 @@
    "artist": "Bichitr",
    "died": 1660,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 100,
    "depth": 2
   },
   {
@@ -144,7 +150,7 @@
    "artist": "Govardhan",
    "died": 1650,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 100,
    "depth": 2
   },
   {
@@ -155,7 +161,7 @@
    "artist": "Manaku",
    "died": 1760,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 100,
    "depth": 2
   },
   {
@@ -166,7 +172,7 @@
    "artist": "Nainsukh",
    "died": 1778,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 100,
    "depth": 2
   },
   {
@@ -177,7 +183,7 @@
    "artist": "Mir Sayyid Ali",
    "died": 1572,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 100,
    "depth": 2
   },
   {
@@ -188,7 +194,7 @@
    "artist": "Daswanth",
    "died": 1584,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 100,
    "depth": 2
   },
   {
@@ -199,7 +205,7 @@
    "artist": "Kesu Das",
    "died": 1610,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 100,
    "depth": 2
   },
   {
@@ -210,7 +216,7 @@
    "artist": "Ustad Mansur",
    "died": 1630,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 100,
    "depth": 2
   },
   {
@@ -221,7 +227,7 @@
    "artist": "Sahibdin",
    "died": 1655,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 100,
    "depth": 2
   },
   {
@@ -232,7 +238,7 @@
    "artist": "Bulaki",
    "died": 1830,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 100,
    "depth": 2
   },
   {
@@ -243,7 +249,7 @@
    "note": "23 files.",
    "artist": "Mughal Court Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 170,
    "depth": 2
   },
   {
@@ -254,7 +260,7 @@
    "note": "21 files.",
    "artist": "Mughal Court Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 170,
    "depth": 2
   },
   {
@@ -265,7 +271,7 @@
    "note": "21 files.",
    "artist": "Mughal Court Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 170,
    "depth": 2
   },
   {
@@ -276,7 +282,7 @@
    "note": "18 files.",
    "artist": "Mughal Court Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 170,
    "depth": 2
   },
   {
@@ -287,7 +293,7 @@
    "note": "167 files.",
    "artist": "Mughal Court Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 170,
    "depth": 2
   },
   {
@@ -298,7 +304,7 @@
    "note": "39 files.",
    "artist": "Mughal Court Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 170,
    "depth": 2
   },
   {
@@ -309,7 +315,7 @@
    "note": "12 files.",
    "artist": "Mughal Court Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 170,
    "depth": 2
   },
   {
@@ -320,7 +326,7 @@
    "note": "27 files.",
    "artist": "Mughal Court Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 170,
    "depth": 2
   },
   {
@@ -331,7 +337,7 @@
    "note": "21 files.",
    "artist": "Mughal Court Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 170,
    "depth": 2
   },
   {
@@ -342,7 +348,7 @@
    "note": "4 files.",
    "artist": "Mughal Court Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 170,
    "depth": 2
   },
   {
@@ -353,7 +359,8 @@
    "note": "121 files, 17 subcategories.",
    "artist": "Rajput Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 30,
+   "max": 400,
    "depth": 3
   },
   {
@@ -364,7 +371,8 @@
    "note": "87 files.",
    "artist": "Rajput Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 60,
+   "max": 200,
    "depth": 2
   },
   {
@@ -375,7 +383,8 @@
    "note": "49 files.",
    "artist": "Rajput Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 60,
+   "max": 200,
    "depth": 2
   },
   {
@@ -386,7 +395,8 @@
    "note": "94 files.",
    "artist": "Rajput Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 60,
+   "max": 200,
    "depth": 2
   },
   {
@@ -397,7 +407,8 @@
    "note": "33 files.",
    "artist": "Rajput Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 60,
+   "max": 200,
    "depth": 2
   },
   {
@@ -408,7 +419,8 @@
    "note": "60 files.",
    "artist": "Rajput Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 60,
+   "max": 200,
    "depth": 2
   },
   {
@@ -419,7 +431,8 @@
    "note": "77 files.",
    "artist": "Rajput Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 60,
+   "max": 200,
    "depth": 2
   },
   {
@@ -430,7 +443,8 @@
    "note": "121 files.",
    "artist": "Rajput Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 60,
+   "max": 200,
    "depth": 2
   },
   {
@@ -441,7 +455,8 @@
    "note": "177 files.",
    "artist": "Rajput Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 60,
+   "max": 200,
    "depth": 2
   },
   {
@@ -452,7 +467,8 @@
    "note": "11 files.",
    "artist": "Rajput Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 60,
+   "max": 200,
    "depth": 2
   },
   {
@@ -463,7 +479,8 @@
    "note": "148 files, 13 subcategories.",
    "artist": "Pahari Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 40,
+   "max": 300,
    "depth": 3
   },
   {
@@ -474,7 +491,8 @@
    "note": "346 files, 5 subcategories.",
    "artist": "Kangra Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 60,
+   "max": 350,
    "depth": 2
   },
   {
@@ -485,7 +503,7 @@
    "note": "27 files.",
    "artist": "Garhwal Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 40,
    "depth": 2
   },
   {
@@ -496,7 +514,7 @@
    "note": "55 files, 4 subcategories.",
    "artist": "Indian Miniature Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 60,
    "depth": 2
   },
   {
@@ -507,7 +525,8 @@
    "note": "335 files, 19 subcategories.",
    "artist": "Indian Miniature Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 40,
+   "max": 250,
    "depth": 2
   },
   {
@@ -518,7 +537,8 @@
    "note": "215 files, 8 subcategories.",
    "artist": "Deccani Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 40,
+   "max": 250,
    "depth": 2
   },
   {
@@ -529,7 +549,7 @@
    "note": "46 files.",
    "artist": "Deccani Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 40,
    "depth": 2
   },
   {
@@ -540,7 +560,7 @@
    "note": "49 files.",
    "artist": "Deccani Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 40,
    "depth": 2
   },
   {
@@ -551,7 +571,8 @@
    "note": "55 files, 5 subcategories.",
    "artist": "Jain Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 40,
+   "max": 150,
    "depth": 2
   },
   {
@@ -562,7 +583,8 @@
    "note": "154 files, 9 subcategories.",
    "artist": "Company School Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 30,
+   "max": 300,
    "depth": 2
   },
   {
@@ -583,7 +605,8 @@
    "note": "269 files, 4 subcategories; 19th-century Calcutta bazaar paintings.",
    "artist": "Kalighat Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 300,
+   "max": 269,
    "depth": 2
   },
   {
@@ -622,6 +645,7 @@
    "sure": "low",
    "note": "2,164 files, 7 subcategories: mostly photographs and modern; date window only; depth 1 on purpose.",
    "artist": "Sikh Painter",
+   "max": 150,
    "depth": 1
   },
   {
@@ -632,7 +656,7 @@
    "note": "424 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
    "artist": "Indian Miniature Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 25,
    "depth": 2
   },
   {
@@ -643,7 +667,7 @@
    "note": "22 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
    "artist": "Indian Miniature Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 25,
    "depth": 2
   },
   {
@@ -654,7 +678,7 @@
    "note": "19 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
    "artist": "Indian Miniature Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 25,
    "depth": 2
   },
   {
@@ -665,7 +689,7 @@
    "note": "39 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
    "artist": "Indian Miniature Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 25,
    "depth": 2
   },
   {
@@ -676,7 +700,7 @@
    "note": "4 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
    "artist": "Indian Miniature Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 25,
    "depth": 2
   },
   {
@@ -687,7 +711,7 @@
    "note": "25 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
    "artist": "Indian Miniature Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 25,
    "depth": 2
   },
   {
@@ -698,7 +722,8 @@
    "note": "443 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
    "artist": "Indian Miniature Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 25,
+   "max": 450,
    "depth": 2
   },
   {
@@ -709,7 +734,8 @@
    "note": "719 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
    "artist": "Indian Miniature Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 25,
+   "max": 600,
    "depth": 2
   },
   {
@@ -720,7 +746,8 @@
    "note": "558 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
    "artist": "Indian Miniature Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 25,
+   "max": 600,
    "depth": 2
   },
   {
@@ -731,7 +758,7 @@
    "note": "178 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
    "artist": "Indian Miniature Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 25,
    "depth": 2
   },
   {
@@ -742,7 +769,7 @@
    "note": "122 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
    "artist": "Indian Miniature Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 25,
    "depth": 2
   },
   {
@@ -753,7 +780,7 @@
    "note": "41 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
    "artist": "Indian Miniature Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 25,
    "depth": 2
   },
   {
@@ -764,7 +791,7 @@
    "note": "38 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
    "artist": "Indian Miniature Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 25,
    "depth": 2
   },
   {
@@ -775,6 +802,7 @@
    "note": "58 files, 23 subcategories.",
    "artist": "Indian Painter",
    "undated_ok": true,
+   "max": 100,
    "depth": 2
   },
   {
@@ -784,6 +812,7 @@
    "sure": "low",
    "note": "65 files, 20 subcategories (depicted place).",
    "artist": "Indian Painter",
+   "max": 100,
    "depth": 1
   },
   {
@@ -795,7 +824,7 @@
    "artist": "Raja Ravi Varma",
    "died": 1906,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 300,
    "depth": 2
   },
   {
@@ -807,7 +836,7 @@
    "artist": "Raja Ravi Varma",
    "died": 1906,
    "nofilter": true,
-   "per_group": 1000,
+   "per_group": 300,
    "depth": 2
   },
   {
@@ -869,7 +898,8 @@
    "note": "37 files, 8 subcategories (century subtrees).",
    "artist": "Nepalese Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 40,
+   "max": 300,
    "depth": 3
   },
   {
@@ -880,7 +910,8 @@
    "note": "88 files, 11 subcategories; Himalayan, country label Nepal is a default (co_rules refine Tibet / Bhutan).",
    "artist": "Thangka Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 30,
+   "max": 200,
    "depth": 2
   },
   {
@@ -891,7 +922,8 @@
    "note": "347 files, 8 subcategories.",
    "artist": "Tibetan Thangka Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 30,
+   "max": 300,
    "depth": 2
   },
   {
@@ -902,7 +934,8 @@
    "note": "132 files, 12 subcategories.",
    "artist": "Tibetan Painter",
    "undated_ok": true,
-   "per_group": 1000,
+   "per_group": 30,
+   "max": 150,
    "depth": 2
   },
   {
@@ -912,6 +945,7 @@
    "sure": "low",
    "note": "16 files, 5 subcategories; thin and mostly modern.",
    "artist": "Pakistani Painter",
+   "max": 60,
    "depth": 2
   },
   {
