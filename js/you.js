@@ -64,7 +64,8 @@ function ymSettingsHTML() {
     { k: "ssidle", lead: icon("play", 20), label: "Idle slideshow", sub: "Starts on its own after a minute, on the map or Today", sw: S.ssIdle !== false }])
   + mnGroup("Your progress", [
     { k: "backup", lead: YM_I.down, label: "Back up your progress", value: last ? `Last ${esc(last)}` : "Never" },
-    { k: "restore", lead: YM_I.up, label: "Restore a backup" },
+    { k: "restore", lead: YM_I.up, label: "Restore a backup", sub: "Replaces what is on this device" },
+    { k: "merge", lead: YM_I.up, label: "Merge a backup", sub: "Adds a backup from another device to this one" },
     { k: "place", lead: YM_I.path, label: "Retake the placement test" }])
   + mnGroup("", [{ k: "about", lead: YM_I.book, label: "About the colors" }])
   + mnGroup("", [{ k: "reset", lead: YM_I.trash, label: "Reset all progress", danger: true }]);
@@ -87,6 +88,7 @@ function ymWireSettings(root, back, close = () => {}) {
     close();
     if (k === "profile") profileSetup(back);
     if (k === "restore") restoreProgress();
+    if (k === "merge") mergeProgressFile();
     if (k === "place") how();
     if (k === "about") about();
   });

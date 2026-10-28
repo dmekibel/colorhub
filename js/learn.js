@@ -523,6 +523,85 @@ function restoreProgress() {
   inp.click();
 }
 
+// ---------- merge: three devices, three saves (David, 2026-10-28). Adds a backup file from another device to THIS device's progress; nothing on either side is lost. ----------
+// Rules, per kind of thing: a card keeps the box the further-along side reached (a tie keeps the later due date); a finished unit keeps its earliest day;
+// favorites, palettes and pinned palettes are the union (palettes by id, newest first, 60 at most); a daily answer keeps the finished one; a best score keeps the
+// higher; a Train skill keeps the side with more practice, its best the lower (a smaller threshold is better) and its history joined by day; the Learner Model's
+// event log is the union (an event is the same event when its time, kind and color match) and its totals keep the larger count (never the sum, so a copy of this
+// same device can't count twice). Everything else: this device wins, and anything only the file has is added.
+function mergeProgress(a, b) {
+  const isObj = v => v && typeof v === "object" && !Array.isArray(v), out = JSON.parse(JSON.stringify(a)), src = JSON.parse(JSON.stringify(b));
+  const fill = (x, y) => {   // add what only y has; both objects: go in; arrays: union of equal items; a value both have stays x's
+    Object.keys(y).forEach(k => {
+      if (!(k in x) || x[k] == null) x[k] = y[k];
+      else if (isObj(x[k]) && isObj(y[k])) fill(x[k], y[k]);
+      else if (Array.isArray(x[k]) && Array.isArray(y[k])) { const seen = new Set(x[k].map(v => JSON.stringify(v))); y[k].forEach(v => { if (!seen.has(JSON.stringify(v))) x[k].push(v); }); }
+    });
+  };
+  // cards
+  out.cards = out.cards || {};
+  Object.entries(src.cards || {}).forEach(([id, st]) => {
+    const have = out.cards[id];
+    if (!have || !isObj(have)) { out.cards[id] = st; return; }
+    if ((st.b || 0) > (have.b || 0) || ((st.b || 0) === (have.b || 0) && String(st.due || "") > String(have.due || ""))) out.cards[id] = Object.assign({}, have, st);
+  });
+  // finished units: the earliest day
+  out.done = out.done || {};
+  Object.entries(src.done || {}).forEach(([id, d]) => { if (!(id in out.done) || (typeof d === "string" && typeof out.done[id] === "string" && d < out.done[id])) out.done[id] = d; });
+  // daily answers: the finished one
+  out.daily = out.daily || {};
+  Object.entries(src.daily || {}).forEach(([k, r]) => { const h = out.daily[k]; if (!h || (isObj(r) && r.done && !(isObj(h) && h.done))) out.daily[k] = r; });
+  // best scores: the higher
+  out.best = out.best || {};
+  Object.entries(src.best || {}).forEach(([k, v]) => { if (!(k in out.best)) out.best[k] = v; else if (typeof v === "number" && typeof out.best[k] === "number") out.best[k] = Math.max(out.best[k], v); });
+  // saved palettes by id, newest first
+  if (Array.isArray(out.palettes) || Array.isArray(src.palettes)) {
+    const seen = new Set(), all = (out.palettes || []).concat(src.palettes || []).filter(p => p && (p.id ? !seen.has(p.id) && seen.add(p.id) : true));
+    out.palettes = all.sort((p, q) => String(q.at || "").localeCompare(String(p.at || ""))).slice(0, 60);
+  }
+  // Train: the side with more practice, its best the lower, its history joined by day
+  out.gym = out.gym || { skills: {}, workouts: {} }; out.gym.skills = out.gym.skills || {};
+  Object.entries((src.gym && src.gym.skills) || {}).forEach(([k, s2]) => {
+    const s1 = out.gym.skills[k]; if (!s1 || !isObj(s1)) { out.gym.skills[k] = s2; return; }
+    const h1 = Array.isArray(s1.hist) ? s1.hist : [], h2 = Array.isArray(s2.hist) ? s2.hist : [], win = h2.length > h1.length ? Object.assign({}, s1, s2) : s1;
+    const seen = new Set(h1.map(v => JSON.stringify(v))), hist = h1.concat(h2.filter(v => !seen.has(JSON.stringify(v)))).sort((p, q) => String(p[0]).localeCompare(String(q[0])));
+    const bs = [s1.best, s2.best].filter(v => typeof v === "number");
+    out.gym.skills[k] = Object.assign({}, win, { hist, best: bs.length ? Math.min(...bs) : win.best });
+  });
+  // the Learner Model
+  if (isObj(src.learn)) {
+    const L = out.learn = isObj(out.learn) ? out.learn : { v: 1, ev: [], agg: { c: {}, p: {} }, sets: {}, bf: 0 }, M = src.learn, key = r => [r.t, r.e, r.c || r.h || "", r.b || r.hb || ""].join("|");
+    const seen = new Set((L.ev || []).map(key)); L.ev = (L.ev || []).concat((M.ev || []).filter(r => !seen.has(key(r)))).sort((p, q) => p.t - q.t);
+    L.agg = L.agg || { c: {}, p: {} };
+    ["c", "p"].forEach(g => Object.entries((M.agg && M.agg[g]) || {}).forEach(([k, y]) => {
+      const x = L.agg[g] && L.agg[g][k]; L.agg[g] = L.agg[g] || {};
+      if (!x) { L.agg[g][k] = y; return; }
+      Object.keys(y).forEach(f => { if (typeof y[f] === "number" && typeof x[f] === "number") x[f] = f === "t0" ? Math.min(x[f], y[f]) : Math.max(x[f], y[f]); else if (!(f in x)) x[f] = y[f]; });
+    }));
+    L.sets = Object.assign({}, M.sets || {}, L.sets || {}); L.bf = Math.max(L.bf || 0, M.bf || 0);
+    delete src.learn;
+  }
+  delete src.cards; delete src.done; delete src.daily; delete src.best; delete src.palettes; if (src.gym) delete src.gym.skills;
+  fill(out, src);
+  return out;
+}
+function mergeProgressFile() {
+  const inp = document.createElement("input"); inp.type = "file"; inp.accept = "application/json,.json";
+  inp.onchange = () => {
+    const f = inp.files[0]; if (!f) return;
+    f.text().then(t => {
+      let d; try { d = migrateState(JSON.parse(t)); if (!d || !d.cards) throw 0; } catch (e) { toast("That file isn't a Chromatlas backup"); return; }
+      const before = Object.keys(S.cards || {}).length;
+      try { localStorage.setItem(KEY + "-before-merge", JSON.stringify(S)); } catch (e) {}   // one step back: the save as it was before this merge
+      S = migrateState(mergeProgress(S, d)); pickMigrate(S); save();
+      const added = Object.keys(S.cards).length - before;
+      toast(added > 0 ? `Merged: ${added} more color${added === 1 ? "" : "s"} on this device` : "Merged: this device already had everything in that backup");
+      go("learn");
+    });
+  };
+  inp.click();
+}
+
 // "Put it on your Home Screen": shown once you've finished a unit, until it's installed; "Not now" waits 30 days.
 // On iPhone it also protects progress: Safari can clear a website's data after about a week without a visit,
 // but not a Home Screen app's. The backup reminder (core.js keepCard) rides along in the same spot.
