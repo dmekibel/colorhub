@@ -71,6 +71,17 @@ function searchExtraGroups(q) {
       const r = sqFuzzyRank(TF_SEARCH_BOARDS, q, b => b.label, 6);
       G("boards", "Boards", r.top + (/^#\/?feed/.test(location.hash) ? 12 : -2), r.hits.map(b => ({ id: "b:" + b.id, icon: { t: "glyph", name: "painting" }, title: b.label, sub: "Board" + (b.sub ? " · " + b.sub : ""), act: () => tfOpenBoardFromSearch(b) })));
     }
+    // Subjects (David, 2026-10-28: "search by keyword, the CLIP descriptions"): the words the picture model found in the paintings ("boat", "dog", "snow"),
+    // by whole word, start of a word, or the aliases the map's own search knows. A pick opens the painting map on just those paintings.
+    if (typeof SUBJ !== "undefined" && SUBJ && sqFold(q).length >= 3) {
+      const qk = sqFold(q), words = qk.split(" ").filter(Boolean), found = typeof subjFind === "function" ? subjFind(words.slice(0, 3)) : null, rows = [], seenT = new Set();
+      const openSubj = (tags, label) => () => { buzz(8); if (typeof pmLoad === "function") pmLoad().then(() => pmOpen({ col: "paintings", arr: "color", f: { subjSet: tags.slice() } }, { fresh: true })).catch(() => toast("The painting map didn't load")); };
+      if (found) { found.tags.forEach(t => seenT.add(t)); rows.push({ id: "sj:" + found.tags.join("."), icon: { t: "glyph", name: "painting" }, title: found.label, sub: "Subject · " + found.tags.reduce((n, t) => n + (SUBJ.n[t] || 0), 0).toLocaleString("en-US") + " paintings", act: openSubj(found.tags, found.label) }); }
+      const part = [];
+      SUBJ.tags.forEach((n, t) => { if (SUBJ.hide[t] || SUBJ.fold[t] !== t || seenT.has(t) || (SUBJ.n[t] || 0) < 20) return; const f = sqFold(n); if (f.split(" ").some(w => w.startsWith(qk)) || f.startsWith(qk)) part.push([t, SUBJ.n[t]]); });
+      part.sort((x, y) => y[1] - x[1]).slice(0, 5 - rows.length).forEach(([t, c]) => rows.push({ id: "sj:" + t, icon: { t: "glyph", name: "painting" }, title: subjCap(SUBJ.tags[t]), sub: "Subject · " + c.toLocaleString("en-US") + " paintings", act: openSubj([t], subjCap(SUBJ.tags[t])) }));
+      G("subjects", "In the paintings", found ? 60 : 30, rows);
+    }
     const ql = sqFold(q), feats = searchFeatureMatches(q.toLowerCase());
     G("tools", "Tools & settings", ql.length >= 3 ? 30 : 10, feats.slice(0, 4).map(([id, f]) => ({ id: "f:" + id, icon: { t: "glyph", name: "pipette" }, title: f.t, sub: f.where || "", act: () => { buzz(8); f.run(); } })));
     if (typeof graph === "function" && ql.length >= 3) {
@@ -122,6 +133,7 @@ function searchQuickHTML() {
 function searchOpen(o = {}) {
   if (document.querySelector(".sheet,.rooms-stem")) return;
   if (typeof tfSearchBoardsLoad === "function") tfSearchBoardsLoad();
+  if (typeof loadSubjects === "function" && typeof SUBJ !== "undefined" && !SUBJ) loadSubjects().catch(() => {});   // the paintings' subject words, ready by the time you type
   const html = `<div class="sr-sheet">
     <div class="sr-field sq-field"><span>${ICON.search}</span><div class="sq-inwrap"><span class="sq-ghost" aria-hidden="true"></span><input type="search" class="sr-input" placeholder="Search colors, painters, years…" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" role="combobox" aria-expanded="true" aria-controls="sq-list" aria-label="Search" value="${esc(o.q || "")}"></div></div>
     ${searchQuickHTML()}
