@@ -419,3 +419,21 @@ html.desk .pr-booth .ls-story-bars{left:0;right:0}
 html.desk .pr-booth .ls-mp.ls-mp-meet{border-radius:22px;overflow:hidden;max-height:calc(100dvh - 300px);min-height:360px}
 html.desk .pr-booth .pr-foot{width:min(760px,100%);margin:0 auto;box-sizing:border-box}
 html.desk .pr-booth .ls-primary{width:100%}
+
+/* Name any color on a wide screen (js/namer.js; David, 2026-10-28: "this screen needs redoing"): two columns. Left, the color's name on its own color,
+   the nearest names as a list and the actions; right, the tabs and the picker, as tall as the window allows. The phone's one-column stage is untouched. */
+@media (min-width:1100px){
+  html.desk .screen.namer{max-width:none;width:100%;align-items:stretch}
+  html.desk .namer .nmr-stage{width:100%;display:grid;grid-template-columns:minmax(360px,440px) minmax(0,1fr);grid-template-rows:auto auto auto 1fr;grid-template-areas:"top tabs" "near pane" "acts pane" "rest pane";
+    column-gap:64px;max-width:1240px;margin:0 auto;box-sizing:border-box;height:calc(100dvh - var(--dkn, 60px));min-height:600px;padding:20px var(--dkg) 24px}
+  html.desk .namer .nmr-top{grid-area:top;margin:0;padding:0 24px 8px;border-radius:20px;overflow:hidden}
+  html.desk .namer .nmr-top .art-top{margin:0 -24px;padding:16px 24px 0}
+  html.desk .namer .nmr-name{font-size:clamp(44px,4.2vw,60px)}
+  html.desk .namer .nmr-near{grid-area:near;flex-direction:column;overflow:visible;margin:14px 0 0;padding:0;gap:8px}
+  html.desk .namer .nmr-row{max-width:none;width:100%;height:64px}
+  html.desk .namer .nmr-acts{grid-area:acts;height:auto;flex-wrap:wrap;gap:4px 24px;margin-top:10px;overflow:visible}
+  html.desk .namer .nmr-tabs{grid-area:tabs;margin:0;padding:0;gap:28px;align-self:end}
+  html.desk .namer .nmr-tabs button{font-size:21px;padding:12px 0 14px}
+  html.desk .namer .nmr-pane{grid-area:pane;padding-top:18px}
+  html.desk .namer .nmr-below{max-width:1240px;margin:0 auto;padding:0 var(--dkg) 60px;box-sizing:border-box}
+}
