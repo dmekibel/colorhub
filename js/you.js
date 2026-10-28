@@ -101,7 +101,7 @@ function ymWireSettings(root, back, close = () => {}) {
 function ymSettingsSheet() {
   // PLAN §3.1/§9: You folds away, so this sheet opens straight on Settings -- no "You" row pointing at a page
   // the nav no longer reaches. js/places.js's moreOpen() calls this as every ⋯'s last row.
-  const { sh, close } = sheet(`<div class="mn-sheet">${mnHead("Settings", { close: true })}
+  const { sh, close } = sheet(`<div class="mn-sheet">${mnHead("Profile and settings", { close: true })}
     ${ymSettingsHTML()}</div>`);
   sh.querySelector("[data-mn-close]").onclick = () => close();
   ymWireSettings(sh, () => go(S.tab || "learn"), close);

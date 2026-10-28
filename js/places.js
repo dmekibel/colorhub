@@ -76,7 +76,7 @@ function placesOpen() {
   // definition, now two doors, same as Keep colors below.
   const rows = PLACES_LIST.map(([id, label]) => ({ id, label, cur: id === here }))
     // (Collections removed, David 2026-10-20: "Collections and Museum" are redundant -- it only opened the Museum's own grid)
-    .concat(typeof ymSettingsSheet === "function" ? [{ id: "settings", label: "Settings", settings: true }] : []);
+    .concat(typeof ymSettingsSheet === "function" ? [{ id: "settings", label: "Profile and settings", settings: true }] : []);
   const n = rows.length;
   const scrim = document.createElement("div"); scrim.className = "rm-scrim rm-scrim-l";
   scrim.addEventListener("pointerdown", e => { e.preventDefault(); e.stopPropagation(); buzz(4); closeStem(); });
@@ -92,7 +92,7 @@ function placesOpen() {
         ${placesCollArt()}<span class="rm-label"><b>Collections</b><em>Every painting, poem, gem and look</em></span></button>`
     : r.settings
     ? `<button class="rm-bubble hm-do-sm" role="menuitem" data-pl="settings" style="--i:${i}">
-        <span class="rm-art hm-do-ic">${HM_GEAR_SVG}</span><span class="rm-label"><b>Settings</b></span></button>`
+        <span class="rm-art hm-do-ic">${HM_GEAR_SVG}</span><span class="rm-label"><b>Profile and settings</b></span></button>`
     : `<button class="rm-bubble${r.cur ? " cur" : ""}" role="menuitem" data-pl="${r.id}" style="--i:${i}">
         ${placesArt(r.id)}<span class="rm-label"><b>${esc(r.label)}</b><em>${esc(r.cur ? "You're here" : roomsNote(r.id))}</em></span></button>`
   ).join("");

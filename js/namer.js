@@ -48,14 +48,18 @@ LAB.namer = (hex, push = true) => {
   // so the picker never resizes under the finger. The tray and the fine print sit below the fold.
   const el = show(`
     <div class="nmr-stage">
+      <div class="nmr-left">
       <div class="nmr-top" id="top">
         <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Studio · Name any color</span><span style="width:44px"></span></header>
         <button class="nmr-hero" id="hero" aria-label="Open this color's page"><span class="nmr-name" id="name"></span><span class="nmr-sub" id="sub"></span></button>
       </div>
       <div class="nmr-near" id="near"></div>
       <div class="nmr-acts" id="acts"></div>
+      </div>
+      <div class="nmr-right">
       <div class="nmr-tabs" role="tablist" id="tabs">${NMR_TABS.map(([k, t]) => `<button role="tab" data-tab="${k}" aria-selected="${k === tab}" class="${k === tab ? "on" : ""}">${t}</button>`).join("")}</div>
       <div class="nmr-pane" id="pane"></div>
+      </div>
     </div>
     <div class="nmr-below">
       <div class="nmr-tray" id="tray"></div>

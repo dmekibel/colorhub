@@ -229,7 +229,7 @@ function pgCornersEnsure(el) {
   const box = document.createElement("div"); box.className = "pg-corners";
   box.innerHTML = `<button class="corner l pl-corner" data-rooms-corner aria-label="Places">${ROOMS_GLYPH}<span>Places</span></button>
     <div class="pg-right"><button class="corner" data-tl-exit aria-label="${esc(tlOriginName())}: close back to where you started">${tlOriginIcon()}</button>
-    <button class="corner" data-pg-settings aria-label="Settings">${typeof HM_GEAR_SVG !== "undefined" ? HM_GEAR_SVG : ICON.more}</button></div>`;
+    <button class="corner" data-pg-settings aria-label="Profile and settings">${typeof HM_GEAR_SVG !== "undefined" ? HM_GEAR_SVG : ICON.more}</button></div>`;
   box.querySelector("[data-pg-settings]").onclick = () => { buzz(4); if (typeof ymSettingsSheet === "function") ymSettingsSheet(); };
   (el || document.body).appendChild(box);
 }
