@@ -6,14 +6,14 @@
 // Nothing here changes a screen's own code: the bar lives outside #app, and the footer is appended to the finished screen.
 const DESK_Q = "(min-width:900px) and (hover:hover) and (pointer:fine), (min-width:700px) and (min-height:640px) and (pointer:coarse)";   // second clause: an iPad, portrait or landscape (a phone turned sideways is under 640 tall)
 const DESK_MQ = typeof matchMedia === "function" ? matchMedia(DESK_Q) : null;
-// David, 2026-10-26: the feed is "Explore" (first), the map is "Map" (second); "Today" is no longer a name
-const DESK_LINKS = [["daily", "Explore", "#/feed"], ["home", "Map", "#/home"], ["museum", "Museum", "#/boards"], ["learn", "Learn", "#/today"], ["train", "Train", "#/train"], ["studio", "Studio", "#/studio"]];
+// David, 2026-10-28: the feed is "Home" (first; Explore and Museum were redundant, the Museum pages live under Home > Boards), the map is "Map" (second)
+const DESK_LINKS = [["daily", "Home", "#/feed"], ["home", "Map", "#/home"], ["learn", "Learn", "#/today"], ["train", "Train", "#/train"], ["studio", "Studio", "#/studio"]];
 // which nav link a route belongs to (by its first address segment)
 const DESK_SECTION = {
   home: "home", map: "home", paintings: "home", color: "home", name: "home", pair: "home", set: "home", hue: "home",
-  museum: "museum", boards: "museum", explore: "museum", painting: "museum", painter: "museum", gallery: "museum", page: "museum", story: "museum", poem: "museum", poems: "museum",
-  film: "museum", passage: "museum", gem: "museum", gems: "museum", botany: "museum", botanical: "museum", photographer: "museum", photography: "museum", pulp: "museum",
-  look: "museum", decade: "museum", ukiyoe: "museum", subject: "museum", "paintings-of": "museum", brand: "museum", brands: "museum", design: "museum", source: "museum", fashion: "museum", hub: "museum",
+  museum: "daily", boards: "daily", explore: "daily", painting: "daily", painter: "daily", gallery: "daily", page: "daily", story: "daily", poem: "daily", poems: "daily",
+  film: "daily", passage: "daily", gem: "daily", gems: "daily", botany: "daily", botanical: "daily", photographer: "daily", photography: "daily", pulp: "daily",
+  look: "daily", decade: "daily", ukiyoe: "daily", subject: "daily", "paintings-of": "daily", brand: "daily", brands: "daily", design: "daily", source: "daily", fashion: "daily", hub: "daily",
   today: "learn", learnit: "learn", practice: "learn", welcome: "learn", learn: "learn", read: "learn",
   train: "train", lab: "train", taste: "train", challenge: "train", odd: "train", which: "train", whichway: "train", chords: "train",
   studio: "studio", photo: "studio", you: "studio",
@@ -44,7 +44,7 @@ function deskCrumbs() {
   const scr = document.querySelector("#app .screen");
   if (!scr || scr.querySelector(".dk-crumbs") || !scr.dataset.tl || typeof XSTACK === "undefined" || !XSTACK.length || typeof tlMetaFor !== "function") return;
   const esc2 = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
-  const last = XSTACK.length - 1, parts = [`<button type="button" data-dkc="o">${esc2(typeof tlOriginName === "function" ? tlOriginName() : "Explore")}</button>`];
+  const last = XSTACK.length - 1, parts = [`<button type="button" data-dkc="o">${esc2(typeof tlOriginName === "function" ? tlOriginName() : "Home")}</button>`];
   // a long trail keeps where it started, one "…" and the last two steps; the whole trail is still a long-press on ‹ (js/trail.js tlSheet)
   const skipFrom = last > 2 ? 0 : -1, skipTo = last - 2;
   XSTACK.forEach((tok, i) => {

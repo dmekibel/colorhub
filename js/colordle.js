@@ -251,7 +251,7 @@ function daily() {
       <button class="btn ghost" data-page>Read about ${esc(t.n.toLowerCase())}</button>
       <div class="dn-acts"><button class="btn" data-share>Share your rows ${ICON.share}</button>
       ${misses.length && typeof prQuick === "function" ? `<button class="btn ghost" data-practice>Practice today's misses</button>` : ""}
-      ${chToday() ? `<button class="btn ghost" data-home>Back to ${S.tab === "gym" ? "Train" : S.tab === "feed" ? "Explore" : "Learn"}</button>` : `<button class="btn ghost" data-paint>Now today's painting</button>`}</div>
+      ${chToday() ? `<button class="btn ghost" data-home>Back to ${S.tab === "gym" ? "Train" : S.tab === "feed" ? "Home" : "Learn"}</button>` : `<button class="btn ghost" data-paint>Now today's painting</button>`}</div>
       <p class="fine">${dlStreakLine()}Screen colors are approximate. A new color tomorrow.</p>`;
     if (typeof wireLinks === "function") wireLinks($("#dnEnd"));
     $("[data-page]").onclick = () => openCoreName(t.h, t.n);

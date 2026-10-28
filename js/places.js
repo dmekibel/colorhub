@@ -13,7 +13,7 @@
 // ---------- the Places stem ----------
 // Every place, in order (PLAN §3.1): the floor plus the four rooms that rise from it. Each row shows its own
 // live art and note (js/core.js roomsBubbleArt/roomsNote, unchanged -- the same pictures the old stem used).
-const PLACES_LIST = [["feed", "Explore"], ["home", NAV_MAP], ...ROOMS_LIST];   // Explore: the feed (js/todayfeed.js), then the Map (David, 2026-10-26)
+const PLACES_LIST = [["feed", "Home"], ["home", NAV_MAP], ...ROOMS_LIST.filter(r => r[0] !== "explore")];   // David, 2026-10-28: Home is the feed; the Museum is no longer a place of its own (its pages open from Home > Boards)   // Explore: the feed (js/todayfeed.js), then the Map (David, 2026-10-26)
 // Today's stripes read like Learn's (David, 2026-10-24). Same 48 px disc as the other rows, real colors, a different subject:
 // a masonry of four differently sized rounded tiles, like the Today feed itself (never parallel bars). The colors are the same
 // pigment set Today's old strip used (roomsBubbleArt "feed"). Studio keeps its own rainbow disc with a camera on it.

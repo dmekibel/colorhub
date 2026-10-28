@@ -206,7 +206,7 @@ function todayFeed() {
   const back = typeof BACK_RENDER !== "undefined" && BACK_RENDER, k = today();
   if (S.tab !== "feed") { S.tab = "feed"; save(); }   // the place you were last: every "go(S.tab)" Close or Back (the daily game's ✕) comes back here
   const el = show(`<i class="tf-sent" aria-hidden="true"></i>
-    <div class="tf-bars"><div class="tf-chips tf-kinds" role="radiogroup" aria-label="Show"><button type="button" class="tf-sbtn" data-tf-search aria-label="Search Explore">${ICON.search}</button>${TF_TYPES.map(([id, label]) => `<button type="button" role="radio" class="tf-chip" data-tf-f="${id}" aria-checked="false">${label}</button>`).join("")}</div><div class="tf-chips tf-lenses" role="radiogroup" aria-label="Paintings"></div></div>
+    <div class="tf-bars"><div class="tf-chips tf-kinds" role="radiogroup" aria-label="Show"><button type="button" class="tf-sbtn" data-tf-search aria-label="Search">${ICON.search}</button>${TF_TYPES.map(([id, label]) => `<button type="button" role="radio" class="tf-chip" data-tf-f="${id}" aria-checked="false">${label}</button>`).join("")}</div><div class="tf-chips tf-lenses" role="radiogroup" aria-label="Paintings"></div></div>
     <div class="tf-lens-head" data-tf-lh hidden></div>
     <div class="tf-feed${hfS().caps ? "" : " nocaps"}" data-tf-feed>${tfSkeleton(k)}</div>`, "tf-screen", "feed");
   const host = el.querySelector("[data-tf-feed]"), bars = el.querySelector(".tf-bars"), kindsRow = el.querySelector(".tf-kinds"), lensRow = el.querySelector(".tf-lenses"), lh = el.querySelector("[data-tf-lh]");

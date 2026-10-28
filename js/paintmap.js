@@ -1926,7 +1926,7 @@ function pmOpen(spec, o = {}) {
     <button class="hm-top-search pmx-search" data-pmsearch aria-label="Search paintings and painters">${ICON.search}</button>
     <button class="corner l pl-corner" data-rooms-corner aria-label="Places">${ROOMS_GLYPH}<span>Places</span></button>
     <button class="corner r hm-do pmx-do" data-do-corner aria-label="More" aria-haspopup="dialog">${ICON.more}</button>
-    ${col === "paintings" ? `<button class="corner r pmx-explore" data-pmexplore aria-label="Explore: the feed, with these filters">${ICON.museum}</button>` : ""}
+    ${col === "paintings" ? `<button class="corner r pmx-explore" data-pmexplore aria-label="Home: the feed, with these filters">${ICON.museum}</button>` : ""}
     ${col === "paintings" && typeof hmLayerSwitchHTML === "function" ? hmLayerSwitchHTML("paintings") : ""}
     <button class="pmx-count" data-pmcount hidden></button>
     <div class="pmx-chipbar" data-pmchipbar hidden></div>

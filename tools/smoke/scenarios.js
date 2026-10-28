@@ -1200,13 +1200,13 @@ scenario("home", "View sheet filters · Surprise me · Search", async t => {
 // PLAN §3.1/§9, restored 2026-10-10 (David's verdict on the Simplify corners): the Places menu is the
 // expanding-pill stem again (js/places.js placesOpen), not a full-screen sheet.
 scenario("home", "Rooms corner opens the Places stem; each place navigates", async t => {
-  const rooms = [["learn", "Learn"], ["gym", "Train"], ["explore", "Museum"], ["studio", "Studio"]];
+  const rooms = [["learn", "Learn"], ["gym", "Train"], ["studio", "Studio"]];   // the Museum is no longer a place of its own (David, 2026-10-28)
   for (const [id, label] of rooms) {
     await H.homeReady(t);
     await t.click("[data-rooms-corner]");
     await t.waitFor(".rooms-stem.on", 4000, "the Places stem");
     const rows = t.$$(".rooms-stem [data-pl]").map(b => b.dataset.pl);
-    t.expect(rooms.every(([r]) => rows.includes(r)) && !rows.includes("colls"), `the Places stem shows ${rows.join(", ")}`);
+    t.expect(rooms.every(([r]) => rows.includes(r)) && !rows.includes("colls") && !rows.includes("explore") && rows.includes("feed"), `the Places stem shows ${rows.join(", ")}`);
     await t.click(`.rooms-stem [data-pl="${id}"]`, { wait: 700 });
     await t.waitFor(`.room-sheet[data-room="${id}"]`, 6000, `the ${label} room`);
     t.expect(t.$(".room-sheet").innerText.length > 80, `the ${label} room is empty`);
