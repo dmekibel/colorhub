@@ -514,9 +514,8 @@ html.desk .fd-bar{top:calc(var(--dkn,60px) - 1px)}
 .fd-card .fd-im img{border-radius:inherit}
 /* a divider ("Close colors") and a neighbor's name inside the color feed: full width, calm */
 .fd-head{position:absolute;left:0;right:0;display:flex;align-items:flex-end;gap:10px;padding-bottom:8px;color:var(--ink);pointer-events:none}
-.fd-head:not(.sub){border-bottom:1px solid var(--rule-strong);font:400 22px/1.2 var(--serif)}
-.fd-head.sub{align-items:center;font:500 17px/1.2 var(--sans);color:var(--soft)}
-.fd-head i{width:18px;height:18px;border-radius:50%;background:var(--c);border:1px solid var(--rule-strong);flex:none}
+.fd-head{align-items:center;padding-bottom:0;font:500 15px/1.2 var(--sans);color:var(--soft)}   /* a quiet line where the search widens, not a section */
+.fd-head i{width:12px;height:12px;border-radius:50%;background:var(--c);border:1px solid var(--rule-strong);flex:none}
 /* Keep exploring density (js/gridzoom.js): the size button, the dense tiles (percent only) and the long-press peek */
 [data-glfeed] .sec-head,[data-rpfeed] .sec-head{display:flex;align-items:baseline;gap:12px}
 [data-glfeed] .sec-head span,[data-rpfeed] .sec-head span{flex:1;min-width:0}

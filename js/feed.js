@@ -569,7 +569,7 @@ function fdMount(host, o) {
       top = grow2(top, Float32Array); col = grow2(col, Uint8Array); hh = grow2(hh, Float32Array);
     }
     for (let k = k0; k < shown; k++) {
-      if (items[k].head) { const t = Math.max(...ends), h = items[k].sub ? 44 : 60; top[k] = t; col[k] = 0; hh[k] = h; ends.fill(t + h + vgap); continue; }   // a divider or a group's name: the full width, below everything above it
+      if (items[k].head) { const t = Math.max(...ends), h = 34; top[k] = t; col[k] = 0; hh[k] = h; ends.fill(t + h + vgap); continue; }   // a divider or a group's name: the full width, below everything above it
       const h = Math.round(colW * abOf(items[k])) + txOf(items[k]); hh[k] = h;
       let c = 0; for (let j = 1; j < cols; j++) if (ends[j] < ends[c]) c = j;
       top[k] = ends[c]; col[k] = c; ends[c] += h + vgap;
@@ -1051,7 +1051,8 @@ function fdMount(host, o) {
 //    the rows the page builds (gems, nature, design, fashion, films, books, poems); Close colors are the look-alike names.
 //  - A chip with nothing for this color is disabled with a plain reason (FDC_OFF), found quietly after the first tiles.
 // ======================================================================
-const FDC_CHIPS = [["paintings", "Paintings"], ["painters", "Painters"], ["era", "Era"], ["place", "Place"], ["worlds", "Other worlds"], ["close", "Close colors"]];
+// David, 2026-10-28: Painters, Era and Place say nothing about a color, and Close colors is what the feed already widens to: one endless paintings feed, plus the other worlds
+const FDC_CHIPS = [["paintings", "Paintings"], ["worlds", "Other worlds"]];
 const FDC_LEAD = { paintings: () => "Closest to this color first", painters: () => "Painters who use this color most", era: () => "Nearest in time to the era with the most of it", place: () => "The country with the most of it first, then its region",
   worlds: () => "Gems, flowers, films, fashion, design and words that hold this color", close: () => "The names that sit closest to this color" };
 let FDC_ST = (() => { try { const s = JSON.parse(sessionStorage.getItem("colorhub-feed-color") || "null"); if (s && s.chip && FDC_CHIPS.some(c => c[0] === s.chip)) return { chip: s.chip, metric: "overall", color: 0 }; } catch (e) {} return { chip: "paintings", metric: "overall", color: 0 }; })();
@@ -1206,8 +1207,8 @@ async function fdcRankPaintings(ctx) {
     const items = []; let g = -1;
     for (const r of rows.slice(0, FD_KEEP)) {
       if (plain && r.g !== g && r.g >= 0) {   // a new neighbor: its name, once, calmly (the first also gets the divider)
-        if (g === -1) items.push({ head: 1, text: "Close colors" });
-        items.push({ head: 1, sub: 1, text: b.groups[r.g].n, h: b.groups[r.g].h });
+        // one quiet line where the search widens (David, 2026-10-28: "seamless, like Pinterest"): no heading, no rule
+        items.push({ head: 1, sub: 1, text: "Widening to " + b.groups[r.g].n.toLowerCase(), h: b.groups[r.g].h });
       }
       g = plain ? r.g : -2;
       items.push({ j: r.i, cap: plain && r.g >= 0 ? b.groups[r.g].n : "" });
@@ -1228,7 +1229,7 @@ async function fdcRankPaintings(ctx) {
           const page = res._cur(FD_TAIL); if (page.length) { page.forEach(([, j]) => res.items.push({ j, cap: "" })); return; }
           if (!fdsChanged("paintings")) { res.moreDone = true; return; }
           res._soft = fdCursor(far, used, () => true, () => {});
-          res.items.push({ head: 1, text: "Beyond your settings" });
+          res.items.push({ head: 1, text: "Widening past your settings, nearest color first" });
         }
         const page = res._soft(FD_TAIL); if (!page.length) { res.moreDone = true; return; }
         page.forEach(([, j]) => res.items.push({ j, cap: "" }));
@@ -1379,7 +1380,7 @@ const FDC_RANK = { paintings: fdcRankPaintings, painters: fdcRankPainters, era: 
 // Results land in FD_CACHE so a chip that works opens at once; one that doesn't is disabled with its reason.
 async function fdcProbe(ctx) {
   const key = ctx.key;
-  for (const k of ["painters", "era", "place", "close"]) {
+  for (const k of FDC_CHIPS.map(c => c[0]).filter(k => k !== "paintings" && k !== "worlds")) {   // none left now; kept for a chip that may come back
     if ((FDC_OFF.get(key) || {})[k] || FD_CACHE.has(`${key}|${k}|overall|0`)) continue;
     try { const r = await FDC_RANK[k](ctx, {}); if (r.empty && !r.reset) fdcOff(key, k, r.empty); else FD_CACHE.set(`${key}|${k}|overall|0`, r); } catch (e) {}
     await new Promise(res => setTimeout(res, 30));
