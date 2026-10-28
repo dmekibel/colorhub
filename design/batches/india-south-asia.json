@@ -1,0 +1,937 @@
+{
+ "name": "india-south-asia",
+ "note": "Mughal, Rajput, Pahari, Deccani, Jain, Company, Kalighat, Bengal school, Ravi Varma, Nepal and Tibet thangka. Names and sizes checked on the Commons API 2026-10-28. Deccani painting, Jodhpur painting, Indian miniatures and the museum-named Indian paintings do not exist as such, so the 'Paintings from India in <museum>' trees and 'Indian miniatures in <museum>' trees are used. Country: nearly all rows are India (Mughal rows get India by default; co_rules move Pakistan, Nepal, Tibet, Bhutan, Sri Lanka, Bangladesh when the title or categories say so). Sri Lanka and Bhutan have no usable painting categories on Commons (Sri Lanka has only Kandyan frescoes, wall paintings). Left out as post-1955: Madhubani is date-limited, Sher-Gil (d.1941) is in, Nandalal Bose (d.1966) date-limited.",
+ "depth": 2,
+ "date": {
+  "from": 700,
+  "to": 1925
+ },
+ "caps": {
+  "per_group": 1000,
+  "total": 100000,
+  "overshoot": 1.0
+ },
+ "skip_cat": "Calligraphy|Sikh art by|Gurdwara|Temple|Tomb|Fort|Palace|Rangoli",
+ "co_rules": [
+  [
+   "Nepal|Kathmandu|Newar|Paubha",
+   "Nepal"
+  ],
+  [
+   "Tibet|Lhasa|Tsurphu",
+   "Tibet"
+  ],
+  [
+   "Bhutan",
+   "Bhutan"
+  ],
+  [
+   "Pakistan|Sindh",
+   "Pakistan"
+  ],
+  [
+   "Bangladesh|Dhaka",
+   "Bangladesh"
+  ],
+  [
+   "Sri Lanka|Ceylon|Kandy",
+   "Sri Lanka"
+  ]
+ ],
+ "filter": {
+  "enabled": true,
+  "text": 0.75,
+  "blank": 0.5,
+  "sketch": 0.5,
+  "ornament": 0.6,
+  "dup": 0.975,
+  "text_prompt": "a manuscript page that is mostly lines of Devanagari, Persian or Sanskrit handwritten text"
+ },
+ "roots": [
+  {
+   "cat": "Category:Mughal miniatures",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "note": "166 files, 23 subcategories.",
+   "artist": "Mughal Court Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 3
+  },
+  {
+   "cat": "Category:Mughal art",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "medium",
+   "note": "138 files, 21 subcategories.",
+   "artist": "Mughal Court Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:16th-century Mughal miniatures",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "note": "145 files.",
+   "artist": "Mughal Court Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:17th-century Mughal miniatures",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "note": "406 files.",
+   "artist": "Mughal Court Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:18th-century Mughal miniatures",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "note": "173 files.",
+   "artist": "Mughal Court Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:19th-century Mughal miniatures",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "note": "64 files.",
+   "artist": "Mughal Court Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Basawan",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "artist": "Basawan",
+   "died": 1600,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Bichitr",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "artist": "Bichitr",
+   "died": 1660,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Govardhan (painter)",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "artist": "Govardhan",
+   "died": 1650,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Manaku",
+   "co": "India",
+   "mv": "Pahari painting",
+   "sure": "high",
+   "artist": "Manaku",
+   "died": 1760,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Nainsukh",
+   "co": "India",
+   "mv": "Pahari painting",
+   "sure": "high",
+   "artist": "Nainsukh",
+   "died": 1778,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Mir Sayyid Ali",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "artist": "Mir Sayyid Ali",
+   "died": 1572,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Daswanth",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "artist": "Daswanth",
+   "died": 1584,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Kesu Das",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "artist": "Kesu Das",
+   "died": 1610,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Ustad Mansur",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "artist": "Ustad Mansur",
+   "died": 1630,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Sahibdin",
+   "co": "India",
+   "mv": "Mewar painting",
+   "sure": "high",
+   "artist": "Sahibdin",
+   "died": 1655,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Bulaki",
+   "co": "India",
+   "mv": "Marwar painting",
+   "sure": "high",
+   "artist": "Bulaki",
+   "died": 1830,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Akbarnama",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "note": "23 files.",
+   "artist": "Mughal Court Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Baburnama",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "note": "21 files.",
+   "artist": "Mughal Court Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Padshahnama",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "note": "21 files.",
+   "artist": "Mughal Court Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Jahangirnama",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "note": "18 files.",
+   "artist": "Mughal Court Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Razmnama",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "note": "167 files.",
+   "artist": "Mughal Court Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Chester Beatty Akbarnama",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "note": "39 files.",
+   "artist": "Mughal Court Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Zafarnama, 1595 (Mughal India)",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "note": "12 files.",
+   "artist": "Mughal Court Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Impey Album",
+   "co": "India",
+   "mv": "Company painting",
+   "sure": "high",
+   "note": "27 files.",
+   "artist": "Mughal Court Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Gulshan Album",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "note": "21 files.",
+   "artist": "Mughal Court Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Hamzanama",
+   "co": "India",
+   "mv": "Mughal miniature",
+   "sure": "high",
+   "note": "4 files.",
+   "artist": "Mughal Court Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Rajput painting",
+   "co": "India",
+   "mv": "Rajput painting",
+   "sure": "high",
+   "note": "121 files, 17 subcategories.",
+   "artist": "Rajput Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 3
+  },
+  {
+   "cat": "Category:Mewar painting",
+   "co": "India",
+   "mv": "Mewar painting",
+   "sure": "high",
+   "note": "87 files.",
+   "artist": "Rajput Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Bundi painting",
+   "co": "India",
+   "mv": "Bundi painting",
+   "sure": "high",
+   "note": "49 files.",
+   "artist": "Rajput Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Kota painting",
+   "co": "India",
+   "mv": "Kota painting",
+   "sure": "high",
+   "note": "94 files.",
+   "artist": "Rajput Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Bikaner painting",
+   "co": "India",
+   "mv": "Bikaner painting",
+   "sure": "high",
+   "note": "33 files.",
+   "artist": "Rajput Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Kishangarh painting",
+   "co": "India",
+   "mv": "Kishangarh painting",
+   "sure": "high",
+   "note": "60 files.",
+   "artist": "Rajput Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Marwar painting",
+   "co": "India",
+   "mv": "Marwar painting",
+   "sure": "high",
+   "note": "77 files.",
+   "artist": "Rajput Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Malwa school of painting",
+   "co": "India",
+   "mv": "Malwa painting",
+   "sure": "high",
+   "note": "121 files.",
+   "artist": "Rajput Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Ragamala",
+   "co": "India",
+   "mv": "Ragamala painting",
+   "sure": "high",
+   "note": "177 files.",
+   "artist": "Rajput Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Pichhwai",
+   "co": "India",
+   "mv": "Pichhwai",
+   "sure": "high",
+   "note": "11 files.",
+   "artist": "Rajput Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Pahari painting",
+   "co": "India",
+   "mv": "Pahari painting",
+   "sure": "high",
+   "note": "148 files, 13 subcategories.",
+   "artist": "Pahari Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 3
+  },
+  {
+   "cat": "Category:Kangra painting",
+   "co": "India",
+   "mv": "Pahari painting",
+   "sure": "high",
+   "note": "346 files, 5 subcategories.",
+   "artist": "Kangra Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Garhwal painting",
+   "co": "India",
+   "mv": "Pahari painting",
+   "sure": "high",
+   "note": "27 files.",
+   "artist": "Garhwal Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Gita Govinda",
+   "co": "India",
+   "mv": "Pahari painting",
+   "sure": "high",
+   "note": "55 files, 4 subcategories.",
+   "artist": "Indian Miniature Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Bhagavata Purana",
+   "co": "India",
+   "mv": "Indian miniature",
+   "sure": "medium",
+   "note": "335 files, 19 subcategories.",
+   "artist": "Indian Miniature Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Deccan style",
+   "co": "India",
+   "mv": "Deccani painting",
+   "sure": "high",
+   "note": "215 files, 8 subcategories.",
+   "artist": "Deccani Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Golconda paintings",
+   "co": "India",
+   "mv": "Deccani painting",
+   "sure": "high",
+   "note": "46 files.",
+   "artist": "Deccani Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Bijapur school of painting",
+   "co": "India",
+   "mv": "Deccani painting",
+   "sure": "high",
+   "note": "49 files.",
+   "artist": "Deccani Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Jain paintings",
+   "co": "India",
+   "mv": "Jain painting",
+   "sure": "high",
+   "note": "55 files, 5 subcategories.",
+   "artist": "Jain Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Company style",
+   "co": "India",
+   "mv": "Company painting",
+   "sure": "high",
+   "note": "154 files, 9 subcategories.",
+   "artist": "Company School Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Patna School paintings",
+   "co": "India",
+   "mv": "Company painting",
+   "sure": "high",
+   "note": "20 files.",
+   "artist": "Patna School Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Kalighat painting",
+   "co": "India",
+   "mv": "Kalighat painting",
+   "sure": "high",
+   "note": "269 files, 4 subcategories; 19th-century Calcutta bazaar paintings.",
+   "artist": "Kalighat Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Mysore painting",
+   "co": "India",
+   "mv": "Mysore painting",
+   "sure": "medium",
+   "note": "12 files.",
+   "artist": "Mysore Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Madhubani painting",
+   "co": "India",
+   "mv": "Madhubani painting",
+   "sure": "low",
+   "note": "45 files; mostly modern, date window drops undated.",
+   "artist": "Madhubani Painter",
+   "depth": 1
+  },
+  {
+   "cat": "Category:Sikh paintings",
+   "co": "India",
+   "mv": "Sikh painting",
+   "sure": "high",
+   "note": "14 files, 2 subcategories.",
+   "artist": "Sikh Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Sikh art",
+   "co": "India",
+   "mv": "Sikh painting",
+   "sure": "low",
+   "note": "2,164 files, 7 subcategories: mostly photographs and modern; date window only; depth 1 on purpose.",
+   "artist": "Sikh Painter",
+   "depth": 1
+  },
+  {
+   "cat": "Category:Indian miniatures in the Rijksmuseum Amsterdam",
+   "co": "India",
+   "mv": "Indian miniature",
+   "sure": "high",
+   "note": "424 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
+   "artist": "Indian Miniature Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Indian miniatures in the British Library",
+   "co": "India",
+   "mv": "Indian miniature",
+   "sure": "high",
+   "note": "22 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
+   "artist": "Indian Miniature Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Indian miniatures in the Bibliothèque nationale de France",
+   "co": "India",
+   "mv": "Indian miniature",
+   "sure": "high",
+   "note": "19 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
+   "artist": "Indian Miniature Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Indian miniatures in the Yale University Art Gallery",
+   "co": "India",
+   "mv": "Indian miniature",
+   "sure": "high",
+   "note": "39 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
+   "artist": "Indian Miniature Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Indian miniatures in the Czartoryski Museum",
+   "co": "India",
+   "mv": "Indian miniature",
+   "sure": "high",
+   "note": "4 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
+   "artist": "Indian Miniature Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Mughal miniatures in the British Library",
+   "co": "India",
+   "mv": "Indian miniature",
+   "sure": "high",
+   "note": "25 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
+   "artist": "Indian Miniature Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from India in the Metropolitan Museum of Art",
+   "co": "India",
+   "mv": "Indian miniature",
+   "sure": "high",
+   "note": "443 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
+   "artist": "Indian Miniature Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from India in the Cleveland Museum of Art",
+   "co": "India",
+   "mv": "Indian miniature",
+   "sure": "high",
+   "note": "719 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
+   "artist": "Indian Miniature Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from India in the Los Angeles County Museum of Art",
+   "co": "India",
+   "mv": "Indian miniature",
+   "sure": "high",
+   "note": "558 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
+   "artist": "Indian Miniature Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from India in the Brooklyn Museum",
+   "co": "India",
+   "mv": "Indian miniature",
+   "sure": "high",
+   "note": "178 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
+   "artist": "Indian Miniature Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from India in the British Museum",
+   "co": "India",
+   "mv": "Indian miniature",
+   "sure": "high",
+   "note": "122 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
+   "artist": "Indian Miniature Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from India in the Freer Gallery of Art",
+   "co": "India",
+   "mv": "Indian miniature",
+   "sure": "high",
+   "note": "41 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
+   "artist": "Indian Miniature Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from India in the Walters Art Museum",
+   "co": "India",
+   "mv": "Indian miniature",
+   "sure": "high",
+   "note": "38 files (museum miniatures; overlap with the roots above is dropped as duplicates).",
+   "artist": "Indian Miniature Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from India",
+   "co": "India",
+   "mv": "Indian painting",
+   "sure": "low",
+   "note": "58 files, 23 subcategories.",
+   "artist": "Indian Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings of India",
+   "co": "India",
+   "mv": "Indian painting",
+   "sure": "low",
+   "note": "65 files, 20 subcategories (depicted place).",
+   "artist": "Indian Painter",
+   "depth": 1
+  },
+  {
+   "cat": "Category:Raja Ravi Varma",
+   "co": "India",
+   "mv": "Indian academic painting",
+   "sure": "high",
+   "note": "41 files, 6 subcategories; died 1906.",
+   "artist": "Raja Ravi Varma",
+   "died": 1906,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings by Raja Ravi Varma",
+   "co": "India",
+   "mv": "Indian academic painting",
+   "sure": "high",
+   "note": "2 files, 13 subcategories.",
+   "artist": "Raja Ravi Varma",
+   "died": 1906,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings by Abanindranath Tagore",
+   "co": "India",
+   "mv": "Bengal school",
+   "sure": "high",
+   "note": "30 files; died 1951.",
+   "artist": "Abanindranath Tagore",
+   "died": 1951,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Abanindranath Tagore",
+   "co": "India",
+   "mv": "Bengal school",
+   "sure": "high",
+   "note": "21 files, 6 subcategories.",
+   "artist": "Abanindranath Tagore",
+   "died": 1951,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Bengal school of art",
+   "co": "India",
+   "mv": "Bengal school",
+   "sure": "low",
+   "note": "5 files, 2 subcategories; date window only.",
+   "artist": "Bengal School Painter",
+   "depth": 2
+  },
+  {
+   "cat": "Category:Nandalal Bose",
+   "co": "India",
+   "mv": "Bengal school",
+   "sure": "low",
+   "note": "18 files; died 1966, date-limited.",
+   "artist": "Nandalal Bose",
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings by Amrita Sher-Gil",
+   "co": "India",
+   "mv": "Indian modernism",
+   "sure": "high",
+   "note": "77 files, 6 subcategories; died 1941.",
+   "artist": "Amrita Sher-Gil",
+   "died": 1941,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from Nepal",
+   "co": "Nepal",
+   "mv": "Nepalese paubha",
+   "sure": "high",
+   "note": "37 files, 8 subcategories (century subtrees).",
+   "artist": "Nepalese Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 3
+  },
+  {
+   "cat": "Category:Thangka",
+   "co": "Nepal",
+   "mv": "Thangka",
+   "sure": "medium",
+   "note": "88 files, 11 subcategories; Himalayan, country label Nepal is a default (co_rules refine Tibet / Bhutan).",
+   "artist": "Thangka Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Thangka from Tibet",
+   "co": "Tibet",
+   "mv": "Thangka",
+   "sure": "high",
+   "note": "347 files, 8 subcategories.",
+   "artist": "Tibetan Thangka Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from Tibet",
+   "co": "Tibet",
+   "mv": "Tibetan painting",
+   "sure": "high",
+   "note": "132 files, 12 subcategories.",
+   "artist": "Tibetan Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from Pakistan",
+   "co": "Pakistan",
+   "mv": "Pakistani painting",
+   "sure": "low",
+   "note": "16 files, 5 subcategories; thin and mostly modern.",
+   "artist": "Pakistani Painter",
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from Bangladesh",
+   "co": "Bangladesh",
+   "mv": "Bengali painting",
+   "sure": "low",
+   "note": "6 files.",
+   "artist": "Bengali Painter",
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from Afghanistan",
+   "co": "Afghanistan",
+   "mv": "Afghan painting",
+   "sure": "low",
+   "note": "4 files.",
+   "artist": "Afghan Painter",
+   "undated_ok": true,
+   "depth": 2
+  }
+ ]
+}

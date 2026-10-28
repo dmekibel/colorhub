@@ -1,0 +1,454 @@
+{
+ "name": "southeast-asia",
+ "note": "Philippines (Luna, Hidalgo, Amorsolo-era masters are post-1955 and excluded), Indonesia (Raden Saleh, Balinese, Kamasan, Javanese manuscripts), Burma/Myanmar (parabaik, illuminated manuscripts), Thailand (samut khoi manuscripts), Vietnam (Dong Ho, literati). Categories and sizes checked on the Commons API 2026-10-28. Expect this to be thin: Commons has few painting categories here; Laos, Cambodia, Malaysia, Singapore have almost nothing (1-5 files). Floor of 50 per country is plausible for the Philippines, Indonesia and Myanmar only. Left out as post-1955: Fernando Amorsolo (d.1972), Vietnamese Indochina School (Mai Trung Thu, To Ngoc Van, Nguyen Gia Tri all died after 1955).",
+ "depth": 2,
+ "date": {
+  "from": 700,
+  "to": 1925
+ },
+ "caps": {
+  "per_group": 1000,
+  "total": 100000,
+  "overshoot": 1.0
+ },
+ "skip_cat": "Calligraphy|Batik|Wayang kulit|Temple relief|Relief|Statue|Murals in|Graffiti|Money|Banknote",
+ "filter": {
+  "enabled": true,
+  "text": 0.75,
+  "blank": 0.5,
+  "sketch": 0.5,
+  "ornament": 0.6,
+  "dup": 0.975,
+  "text_prompt": "a manuscript page that is mostly lines of Burmese, Thai, Javanese or Vietnamese handwritten script"
+ },
+ "roots": [
+  {
+   "cat": "Category:Paintings from the Philippines",
+   "co": "Philippines",
+   "mv": "Philippine painting",
+   "sure": "medium",
+   "note": "51 files, 3 subcategories.",
+   "artist": "Filipino Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings by Juan Luna",
+   "co": "Philippines",
+   "mv": "Philippine painting",
+   "sure": "high",
+   "note": "74 files, 6 subcategories",
+   "artist": "Juan Luna",
+   "died": 1899,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Juan Luna",
+   "co": "Philippines",
+   "mv": "Philippine painting",
+   "sure": "high",
+   "note": "19 files, 7 subcategories",
+   "artist": "Juan Luna",
+   "died": 1899,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings by Félix Resurrección Hidalgo",
+   "co": "Philippines",
+   "mv": "Philippine painting",
+   "sure": "high",
+   "note": "30 files",
+   "artist": "Félix Resurrección Hidalgo",
+   "died": 1913,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Félix Resurrección Hidalgo",
+   "co": "Philippines",
+   "mv": "Philippine painting",
+   "sure": "high",
+   "note": "10 files",
+   "artist": "Félix Resurrección Hidalgo",
+   "died": 1913,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Fabian de la Rosa",
+   "co": "Philippines",
+   "mv": "Philippine painting",
+   "sure": "high",
+   "note": "19 files",
+   "artist": "Fabian de la Rosa",
+   "died": 1937,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Damián Domingo",
+   "co": "Philippines",
+   "mv": "Philippine painting",
+   "sure": "high",
+   "note": "6 files",
+   "artist": "Damián Domingo",
+   "died": 1834,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Simón Flores de la Rosa",
+   "co": "Philippines",
+   "mv": "Philippine painting",
+   "sure": "high",
+   "note": "6 files",
+   "artist": "Simón Flores",
+   "died": 1904,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings by Raden Saleh",
+   "co": "Indonesia",
+   "mv": "Indonesian romanticism",
+   "sure": "high",
+   "note": "115 files, 8 subcategories.",
+   "artist": "Raden Saleh",
+   "died": 1880,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Raden Saleh",
+   "co": "Indonesia",
+   "mv": "Indonesian romanticism",
+   "sure": "high",
+   "note": "65 files, 5 subcategories.",
+   "artist": "Raden Saleh",
+   "died": 1880,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Balinese Narrative Drawings, Leiden University Library",
+   "co": "Indonesia",
+   "mv": "Balinese painting",
+   "sure": "medium",
+   "note": "380 files: 1930s Pita Maha-era drawings; date window handles it (CLIP filter on).",
+   "artist": "Balinese Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Balinese paintings",
+   "co": "Indonesia",
+   "mv": "Balinese painting",
+   "sure": "high",
+   "note": "20 files, 3 subcategories.",
+   "artist": "Balinese Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Kamasan paintings",
+   "co": "Indonesia",
+   "mv": "Balinese painting",
+   "sure": "high",
+   "note": "32 files, 2 subcategories.",
+   "artist": "Kamasan Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings in Kerta Gosa",
+   "co": "Indonesia",
+   "mv": "Balinese painting",
+   "sure": "medium",
+   "note": "60 files: ceiling paintings in situ.",
+   "artist": "Kamasan Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Wayang beber",
+   "co": "Indonesia",
+   "mv": "Wayang beber",
+   "sure": "medium",
+   "note": "37 files.",
+   "artist": "Javanese Painter",
+   "undated_ok": true,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Indonesian paintings in the Rijksmuseum Amsterdam",
+   "co": "Indonesia",
+   "mv": "Indonesian painting",
+   "sure": "high",
+   "note": "24 files.",
+   "artist": "Indonesian Painter",
+   "undated_ok": true,
+   "depth": 1
+  },
+  {
+   "cat": "Category:19th-century paintings in Indonesia",
+   "co": "Indonesia",
+   "mv": "Indonesian painting",
+   "sure": "medium",
+   "note": "1 file, 7 subcategories.",
+   "artist": "Indonesian Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:British Library Javanese Manuscripts",
+   "co": "Indonesia",
+   "mv": "Javanese manuscript",
+   "sure": "medium",
+   "note": "19 files, 6 subcategories; illuminated Yogyakarta manuscripts (CLIP text filter on).",
+   "artist": "Javanese Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from Indonesia",
+   "co": "Indonesia",
+   "mv": "Indonesian painting",
+   "sure": "low",
+   "note": "2 files, 4 subcategories.",
+   "artist": "Indonesian Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings of Indonesia",
+   "co": "Indonesia",
+   "mv": "Indonesian painting",
+   "sure": "low",
+   "note": "6 files, 6 subcategories (depicted place).",
+   "artist": "Indonesian Painter",
+   "depth": 1
+  },
+  {
+   "cat": "Category:Bodleian Ms. Burm. Aa. 5",
+   "co": "Myanmar",
+   "mv": "Burmese parabaik",
+   "sure": "high",
+   "note": "100 files.",
+   "artist": "Burmese Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Burmese-Pali manuscript",
+   "co": "Myanmar",
+   "mv": "Burmese manuscript",
+   "sure": "medium",
+   "note": "73 files.",
+   "artist": "Burmese Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Illuminated manuscripts created in Myanmar",
+   "co": "Myanmar",
+   "mv": "Burmese manuscript",
+   "sure": "high",
+   "note": "44 files, 6 subcategories.",
+   "artist": "Burmese Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Parabaik",
+   "co": "Myanmar",
+   "mv": "Burmese parabaik",
+   "sure": "high",
+   "note": "28 files, 2 subcategories.",
+   "artist": "Burmese Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Life of the Buddha (Wellcome Asian Collection)",
+   "co": "Myanmar",
+   "mv": "Burmese parabaik",
+   "sure": "high",
+   "note": "27 files.",
+   "artist": "Burmese Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Rama Zat (BL Or. 14718)",
+   "co": "Myanmar",
+   "mv": "Burmese parabaik",
+   "sure": "high",
+   "note": "4 files.",
+   "artist": "Burmese Painter",
+   "undated_ok": true,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Paintings from Myanmar",
+   "co": "Myanmar",
+   "mv": "Burmese painting",
+   "sure": "medium",
+   "note": "16 files, 2 subcategories.",
+   "artist": "Burmese Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Buddhist paintings from Myanmar",
+   "co": "Myanmar",
+   "mv": "Burmese painting",
+   "sure": "medium",
+   "note": "2 files, 2 subcategories.",
+   "artist": "Burmese Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Thai paintings in the Walters Art Museum",
+   "co": "Thailand",
+   "mv": "Thai manuscript",
+   "sure": "high",
+   "note": "23 files.",
+   "artist": "Thai Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Thai manuscripts, Wellcome Collection",
+   "co": "Thailand",
+   "mv": "Thai manuscript",
+   "sure": "high",
+   "note": "13 files, 5 subcategories.",
+   "artist": "Thai Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Siamese manuscripts, Wellcome Collection",
+   "co": "Thailand",
+   "mv": "Thai manuscript",
+   "sure": "high",
+   "note": "7 files.",
+   "artist": "Thai Painter",
+   "undated_ok": true,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Traibhūmikathā",
+   "co": "Thailand",
+   "mv": "Thai manuscript",
+   "sure": "high",
+   "note": "8 files.",
+   "artist": "Thai Painter",
+   "undated_ok": true,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Manuscripts in Thailand",
+   "co": "Thailand",
+   "mv": "Thai manuscript",
+   "sure": "medium",
+   "note": "5 files, 2 subcategories.",
+   "artist": "Thai Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from Thailand",
+   "co": "Thailand",
+   "mv": "Thai painting",
+   "sure": "medium",
+   "note": "11 files, 6 subcategories.",
+   "artist": "Thai Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings in Thailand",
+   "co": "Thailand",
+   "mv": "Thai painting",
+   "sure": "low",
+   "note": "4 files, 9 subcategories (temple murals in situ).",
+   "artist": "Thai Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Dong Ho paintings",
+   "co": "Vietnam",
+   "mv": "Dong Ho painting",
+   "sure": "medium",
+   "note": "43 files; folk woodblock prints.",
+   "artist": "Dong Ho Folk Artist",
+   "undated_ok": true,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Vietnamese custom paintings",
+   "co": "Vietnam",
+   "mv": "Vietnamese painting",
+   "sure": "medium",
+   "note": "20 files, 3 subcategories.",
+   "artist": "Vietnamese Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Vietnamese literati paintings",
+   "co": "Vietnam",
+   "mv": "Vietnamese painting",
+   "sure": "medium",
+   "note": "12 files, 1 subcategory.",
+   "artist": "Vietnamese Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Buddhist paintings from Vietnam",
+   "co": "Vietnam",
+   "mv": "Vietnamese painting",
+   "sure": "medium",
+   "note": "7 files, 2 subcategories.",
+   "artist": "Vietnamese Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from Vietnam",
+   "co": "Vietnam",
+   "mv": "Vietnamese painting",
+   "sure": "medium",
+   "note": "46 files, 5 subcategories.",
+   "artist": "Vietnamese Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from Cambodia",
+   "co": "Cambodia",
+   "mv": "Cambodian painting",
+   "sure": "low",
+   "note": "1 file.",
+   "artist": "Cambodian Painter",
+   "undated_ok": true,
+   "depth": 1
+  }
+ ]
+}

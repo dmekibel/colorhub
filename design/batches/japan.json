@@ -1,0 +1,565 @@
+{
+ "name": "japan",
+ "note": "Ukiyo-e, Rinpa, Kano, Bunjinga, Nihonga, Yoga, folding screens (byobu), handscrolls (emaki). Categories and sizes checked on the Commons API 2026-10-28; names that do not exist (Category:Rinpa, Japanese handscrolls, Edo period paintings, Sesshu, Sharaku, Hasegawa Tohaku) were left out. Painters with a death year before 1955 are taken whatever the file date; Yokoyama Taikan (d.1958), the Nihonga tree and the ukiyo-e artists tree are date-limited to 1925 or earlier. Left out as post-1955: Kaburaki Kiyokata (d.1972), shin-hanga and modern Nihonga. Many Met/Cleveland rows may already be in the corpus (dropped as existing). Prints are included on purpose (ukiyo-e is the tradition's main pictorial record).",
+ "depth": 2,
+ "date": {
+  "from": 700,
+  "to": 1925
+ },
+ "caps": {
+  "per_group": 1000,
+  "total": 100000,
+  "overshoot": 1.0
+ },
+ "skip_cat": "Hokusai Manga|Calligraphy|Netsuke|Kimono|Sword|Lacquer|Okimono|Tsuba|Inro",
+ "co_rules": [
+  [
+   "Japan",
+   "Japan"
+  ]
+ ],
+ "filter": {
+  "enabled": true,
+  "text": 0.75,
+  "blank": 0.5,
+  "sketch": 0.5,
+  "ornament": 0.6,
+  "dup": 0.975,
+  "text_prompt": "a page that is mostly lines of Japanese handwritten calligraphy text"
+ },
+ "roots": [
+  {
+   "cat": "Katsushika Hokusai",
+   "co": "Japan",
+   "mv": "Ukiyo-e",
+   "sure": "high",
+   "artist": "Katsushika Hokusai",
+   "died": 1849,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Paintings by Katsushika Hokusai",
+   "co": "Japan",
+   "mv": "Ukiyo-e",
+   "sure": "high",
+   "artist": "Katsushika Hokusai",
+   "died": 1849,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Utagawa Hiroshige",
+   "co": "Japan",
+   "mv": "Ukiyo-e",
+   "sure": "high",
+   "artist": "Utagawa Hiroshige",
+   "died": 1858,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Paintings by Utagawa Hiroshige",
+   "co": "Japan",
+   "mv": "Ukiyo-e",
+   "sure": "high",
+   "artist": "Utagawa Hiroshige",
+   "died": 1858,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "One Hundred Famous Views of Edo",
+   "co": "Japan",
+   "mv": "Ukiyo-e",
+   "sure": "high",
+   "artist": "Utagawa Hiroshige",
+   "died": 1858,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Kitagawa Utamaro",
+   "co": "Japan",
+   "mv": "Ukiyo-e",
+   "sure": "high",
+   "artist": "Kitagawa Utamaro",
+   "died": 1806,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Paintings by Kitagawa Utamaro",
+   "co": "Japan",
+   "mv": "Ukiyo-e",
+   "sure": "high",
+   "artist": "Kitagawa Utamaro",
+   "died": 1806,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Suzuki Harunobu",
+   "co": "Japan",
+   "mv": "Ukiyo-e",
+   "sure": "high",
+   "artist": "Suzuki Harunobu",
+   "died": 1770,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Utagawa Kunisada",
+   "co": "Japan",
+   "mv": "Ukiyo-e",
+   "sure": "high",
+   "artist": "Utagawa Kunisada",
+   "died": 1865,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Utagawa Kuniyoshi",
+   "co": "Japan",
+   "mv": "Ukiyo-e",
+   "sure": "high",
+   "artist": "Utagawa Kuniyoshi",
+   "died": 1861,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Utagawa Toyokuni",
+   "co": "Japan",
+   "mv": "Ukiyo-e",
+   "sure": "high",
+   "artist": "Utagawa Toyokuni",
+   "died": 1825,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Torii Kiyonaga",
+   "co": "Japan",
+   "mv": "Ukiyo-e",
+   "sure": "high",
+   "artist": "Torii Kiyonaga",
+   "died": 1815,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Tsukioka Yoshitoshi",
+   "co": "Japan",
+   "mv": "Ukiyo-e",
+   "sure": "high",
+   "artist": "Tsukioka Yoshitoshi",
+   "died": 1892,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Kobayashi Kiyochika",
+   "co": "Japan",
+   "mv": "Ukiyo-e",
+   "sure": "high",
+   "artist": "Kobayashi Kiyochika",
+   "died": 1915,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Keisai Eisen",
+   "co": "Japan",
+   "mv": "Ukiyo-e",
+   "sure": "high",
+   "artist": "Keisai Eisen",
+   "died": 1848,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Katsushika Ōi",
+   "co": "Japan",
+   "mv": "Ukiyo-e",
+   "sure": "high",
+   "artist": "Katsushika Ōi",
+   "died": 1866,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Ukiyo-e",
+   "co": "Japan",
+   "mv": "Ukiyo-e",
+   "sure": "medium",
+   "note": "104 files, 13 subcategories; undated or post-1925 files are dropped by the date window.",
+   "artist": "Ukiyo-e artist",
+   "depth": 1
+  },
+  {
+   "cat": "Category:Ukiyo-e paintings",
+   "co": "Japan",
+   "mv": "Ukiyo-e",
+   "sure": "medium",
+   "note": "49 files, 2 subcategories (painted ukiyo-e).",
+   "artist": "Ukiyo-e artist",
+   "undated_ok": true
+  },
+  {
+   "cat": "Category:Paintings by Itō Jakuchū",
+   "co": "Japan",
+   "mv": "Edo painting",
+   "sure": "high",
+   "artist": "Itō Jakuchū",
+   "died": 1800,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings by Maruyama Ōkyo",
+   "co": "Japan",
+   "mv": "Maruyama school",
+   "sure": "high",
+   "artist": "Maruyama Ōkyo",
+   "died": 1795,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings by Tawaraya Sōtatsu",
+   "co": "Japan",
+   "mv": "Rinpa",
+   "sure": "high",
+   "artist": "Tawaraya Sōtatsu",
+   "died": 1640,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings by Shibata Zeshin",
+   "co": "Japan",
+   "mv": "Edo painting",
+   "sure": "high",
+   "artist": "Shibata Zeshin",
+   "died": 1891,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Shibata Zeshin",
+   "co": "Japan",
+   "mv": "Edo painting",
+   "sure": "high",
+   "artist": "Shibata Zeshin",
+   "died": 1891,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings by Kawanabe Kyōsai",
+   "co": "Japan",
+   "mv": "Edo painting",
+   "sure": "high",
+   "artist": "Kawanabe Kyōsai",
+   "died": 1889,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Tani Bunchō",
+   "co": "Japan",
+   "mv": "Bunjinga",
+   "sure": "high",
+   "artist": "Tani Bunchō",
+   "died": 1840,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Yosa Buson",
+   "co": "Japan",
+   "mv": "Bunjinga",
+   "sure": "high",
+   "artist": "Yosa Buson",
+   "died": 1784,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Nakamura Hōchū",
+   "co": "Japan",
+   "mv": "Rinpa",
+   "sure": "high",
+   "artist": "Nakamura Hōchū",
+   "died": 1819,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Kanō Motonobu",
+   "co": "Japan",
+   "mv": "Kanō school",
+   "sure": "high",
+   "artist": "Kanō Motonobu",
+   "died": 1559,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Kanō Sanraku",
+   "co": "Japan",
+   "mv": "Kanō school",
+   "sure": "high",
+   "artist": "Kanō Sanraku",
+   "died": 1635,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings by Tosa Mitsuoki",
+   "co": "Japan",
+   "mv": "Tosa school",
+   "sure": "high",
+   "artist": "Tosa Mitsuoki",
+   "died": 1691,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Kishi Ganku",
+   "co": "Japan",
+   "mv": "Edo painting",
+   "sure": "high",
+   "artist": "Kishi Ganku",
+   "died": 1838,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings by Tomioka Tessai",
+   "co": "Japan",
+   "mv": "Bunjinga",
+   "sure": "high",
+   "artist": "Tomioka Tessai",
+   "died": 1924,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Kamisaka Sekka",
+   "co": "Japan",
+   "mv": "Rinpa",
+   "sure": "high",
+   "artist": "Kamisaka Sekka",
+   "died": 1942,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Kuroda Seiki",
+   "co": "Japan",
+   "mv": "Yōga",
+   "sure": "high",
+   "artist": "Kuroda Seiki",
+   "died": 1924,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings by Kuroda Seiki",
+   "co": "Japan",
+   "mv": "Yōga",
+   "sure": "high",
+   "artist": "Kuroda Seiki",
+   "died": 1924,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings by Takahashi Yuichi",
+   "co": "Japan",
+   "mv": "Yōga",
+   "sure": "high",
+   "artist": "Takahashi Yuichi",
+   "died": 1894,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Yamamoto Hōsui",
+   "co": "Japan",
+   "mv": "Yōga",
+   "sure": "high",
+   "artist": "Yamamoto Hōsui",
+   "died": 1916,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Harada Naojirō",
+   "co": "Japan",
+   "mv": "Yōga",
+   "sure": "high",
+   "artist": "Harada Naojirō",
+   "died": 1899,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Hishida Shunsō",
+   "co": "Japan",
+   "mv": "Nihonga",
+   "sure": "high",
+   "artist": "Hishida Shunsō",
+   "died": 1911,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Shimomura Kanzan",
+   "co": "Japan",
+   "mv": "Nihonga",
+   "sure": "high",
+   "artist": "Shimomura Kanzan",
+   "died": 1930,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Takeuchi Seihō",
+   "co": "Japan",
+   "mv": "Nihonga",
+   "sure": "high",
+   "artist": "Takeuchi Seihō",
+   "died": 1942,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Hashimoto Gahō",
+   "co": "Japan",
+   "mv": "Nihonga",
+   "sure": "high",
+   "artist": "Hashimoto Gahō",
+   "died": 1908,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Yokoyama Taikan",
+   "co": "Japan",
+   "mv": "Nihonga",
+   "sure": "medium",
+   "note": "46 files; died 1958, so only works dated 1925 or earlier are kept.",
+   "artist": "Yokoyama Taikan",
+   "nofilter": true
+  },
+  {
+   "cat": "Category:Nihonga",
+   "co": "Japan",
+   "mv": "Nihonga",
+   "sure": "low",
+   "note": "134 files, 7 subcategories; painters of mixed death years, so date-limited (undated dropped).",
+   "artist": "Nihonga painter",
+   "depth": 2
+  },
+  {
+   "cat": "Category:Byōbu",
+   "co": "Japan",
+   "mv": "Japanese screen",
+   "sure": "high",
+   "note": "176 files, 32 subcategories (Edo folding screens).",
+   "artist": "Japanese Screen Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Japanese folding screens",
+   "co": "Japan",
+   "mv": "Japanese screen",
+   "sure": "high",
+   "note": "74 files, 4 subcategories.",
+   "artist": "Japanese Screen Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Emakimono",
+   "co": "Japan",
+   "mv": "Japanese handscroll",
+   "sure": "high",
+   "note": "45 files, 39 subcategories (emaki handscrolls, one per scroll).",
+   "artist": "Japanese Scroll Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Yamato-e",
+   "co": "Japan",
+   "mv": "Yamato-e",
+   "sure": "high",
+   "note": "6 files, 3 subcategories.",
+   "artist": "Yamato-e Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from Japan",
+   "co": "Japan",
+   "mv": "Japanese painting",
+   "sure": "medium",
+   "note": "437 files, 30 subcategories.",
+   "artist": "Japanese Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings of Japan",
+   "co": "Japan",
+   "mv": "Japanese painting",
+   "sure": "low",
+   "note": "257 files, 6 subcategories: depicted places, many are Western or modern; date window applies.",
+   "artist": "Japanese Painter",
+   "depth": 1
+  },
+  {
+   "cat": "Category:Japanese paintings in the Cleveland Museum of Art",
+   "co": "Japan",
+   "mv": "Japanese painting",
+   "sure": "high",
+   "note": "516 files, 5 subcategories.",
+   "artist": "Japanese Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  }
+ ]
+}

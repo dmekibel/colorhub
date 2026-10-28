@@ -1,0 +1,5 @@
+name = "chromatlas-share"
+main = "index.js"
+compatibility_date = "2026-10-01"
+# NOT deployed yet. To go live: route chromatlas.app/s/* to this Worker (dashboard Workers Routes or the lines below), then test one link in Telegram.
+# routes = [{ pattern = "chromatlas.app/s/*", zone_name = "chromatlas.app" }]

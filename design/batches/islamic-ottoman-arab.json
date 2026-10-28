@@ -7,9 +7,9 @@
   "to": 1925
  },
  "caps": {
-  "per_group": 25,
-  "total": 1200,
-  "overshoot": 1.3
+  "per_group": 1000,
+  "total": 100000,
+  "overshoot": 1.0
  },
  "skip_cat": "Qajar|Safavid|Zand|\\bIran|Persian|Mughal|India|Pakistan|Afghanistan|Bookbinding|Rugs|Carpets|Minbar|Doors",
  "co_rules": [
@@ -60,7 +60,7 @@
    "note": "81 files, 13 subcategories incl. 15th-18th century sets, Suleiman I, Topkapi, Sawaqub al-Manaquib, Şehnames.",
    "artist": "Ottoman Miniaturist",
    "undated_ok": true,
-   "per_group": 30
+   "per_group": 1000
   },
   {
    "cat": "Category:Hünername",
@@ -70,7 +70,7 @@
    "note": "113 files; Hünername (1584-88), Topkapi. Overlap with the root above is deduped.",
    "artist": "Nakkaş Osman",
    "undated_ok": true,
-   "per_group": 60
+   "per_group": 1000
   },
   {
    "cat": "Category:Nakkaş Osman",
@@ -119,7 +119,7 @@
    "note": "24 files, 5 subcategories; overlaps Ottoman miniatures.",
    "artist": "Ottoman Miniaturist",
    "undated_ok": true,
-   "per_group": 15
+   "per_group": 1000
   },
   {
    "cat": "Category:Paintings by Osman Hamdi Bey",
@@ -159,7 +159,7 @@
    "note": "40 files, 10 subcategories.",
    "artist": "Mamluk Illuminator",
    "undated_ok": true,
-   "per_group": 15
+   "per_group": 1000
   },
   {
    "cat": "Category:Mamluk art",
@@ -168,8 +168,7 @@
    "sure": "low",
    "note": "40 files, 18 subcategories; mostly metalwork, glass, ceramics, rugs (skipped by category name); only manuscript pages should survive.",
    "artist": "Mamluk Illuminator",
-   "undated_ok": true,
-   "max": 60
+   "undated_ok": true
   },
   {
    "cat": "Category:Maqamat of al-Hariri",
@@ -179,7 +178,7 @@
    "note": "5 files, 13 subcategories; Baghdad, Syrian and Egyptian copies, the co is a guess for the Baghdad school (co_rules refine by title).",
    "artist": "Yahya ibn Mahmud al-Wasiti (school)",
    "undated_ok": true,
-   "per_group": 15
+   "per_group": 1000
   },
   {
    "cat": "Category:Kitab al-Bulhan",
@@ -198,7 +197,7 @@
    "note": "32 files, 19 subcategories.",
    "artist": "Iraqi Illuminator",
    "undated_ok": true,
-   "per_group": 10
+   "per_group": 1000
   },
   {
    "cat": "Category:Kalila and Dimna",
@@ -208,7 +207,7 @@
    "note": "16 files, 15 subcategories; manuscripts from Syria, Egypt, Iran, Turkey: co_rules decide, default Syria.",
    "artist": "Kalila wa Dimna Illustrator",
    "undated_ok": true,
-   "per_group": 10
+   "per_group": 1000
   },
   {
    "cat": "Category:Islamic miniatures",
@@ -218,7 +217,7 @@
    "note": "34 files, 8 subcategories; mixed origins, co_rules decide, otherwise Middle East.",
    "artist": "Islamic Miniaturist",
    "undated_ok": true,
-   "per_group": 15
+   "per_group": 1000
   },
   {
    "cat": "Category:Islamic paintings",
@@ -228,7 +227,7 @@
    "note": "9 files, 19 subcategories; Persian trees are skipped.",
    "artist": "Islamic Painter",
    "undated_ok": true,
-   "per_group": 10
+   "per_group": 1000
   },
   {
    "cat": "Category:Paintings from Syria",

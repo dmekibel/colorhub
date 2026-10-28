@@ -12,7 +12,7 @@
 /* the preview: an opaque card, rounded 10px; a medium close-up in a square with the area outlined and a crosshair,
    the live swatch and name under it. ~120px, 104-140px with the screen. */
 .eyd-prev[hidden]{display:none}
-.eyd-prev{--pv:clamp(150px,43vw,210px);position:absolute;left:10px;top:10px;width:var(--pv);padding:0;border-radius:10px;overflow:hidden;background:var(--surface-3,#1d1b18);
+.eyd-prev{--pv:clamp(104px,27vw,150px);position:absolute;left:10px;top:10px;width:var(--pv);padding:0;border-radius:10px;overflow:hidden;background:var(--surface-3,#1d1b18);
   box-shadow:0 0 0 1.5px rgba(236,232,223,.85),0 0 0 3px rgba(0,0,0,.55),0 8px 22px rgba(0,0,0,.5)}
 .eyd-prev-sq{position:relative;width:var(--pv);height:var(--pv);background:#0b0a09}
 .eyd-prev-sq canvas{display:block;width:100%;height:100%}
@@ -30,3 +30,6 @@
 .eyd-sizes.seg{flex-wrap:nowrap;width:100%;gap:2px}
 .eyd-sizes.seg button{flex:1 1 0;min-width:0;min-height:44px;padding:0 4px;font:400 16px/1 var(--sans);font-variant-numeric:tabular-nums}
 .eyd-sizes-cap{margin:6px 0 0;font:italic 400 15px/1.3 var(--serif);color:var(--soft);text-align:center}
+
+/* narrow screens (David, 2026-10-28: the close-up took too much of the picture): a smaller square, and no name row, the readout below the picture already says the name */
+@media (max-width:520px){.eyd-prev-info{display:none}}

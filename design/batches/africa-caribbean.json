@@ -1,0 +1,450 @@
+{
+ "name": "africa-caribbean",
+ "note": "Ethiopian icons and Gospel manuscripts (the strongest tradition here), Coptic icons, Thomas Baines and the South African colonial landscape painters, Haiti, Puerto Rico (Oller, Campeche), Cuba, Dominican Republic, plus the small 'Paintings from <country>' categories (Nigeria, Ghana, Senegal, Rwanda, Gambia, Tunisia, Algeria, Angola, Madagascar). Categories and sizes checked on the Commons API 2026-10-28. EXPECT THIS TO BE THIN: only Ethiopia (about 350 raw files) will likely reach 50 candidates; South Africa maybe, everything else is under 30 and mostly modern (post-1955 painters were NOT added; the date window drops undated and post-1925 files). Missing on Commons: Jamaica, Trinidad (Cazabon), Kenya, Zimbabwe, Congo, Sudan, Eritrea, Mali paintings categories; Philomé Obin (d.1986) and Haitian naive masters are post-1955. Egypt (Coptic) overlaps islamic-ottoman-arab, which does not cover icons.",
+ "depth": 2,
+ "date": {
+  "from": 700,
+  "to": 1925
+ },
+ "caps": {
+  "per_group": 1000,
+  "total": 100000,
+  "overshoot": 1.0
+ },
+ "skip_cat": "Calligraphy|Rock art|Graffiti|Murals|Mural|Textile|Beadwork|Sculpture|Mask|Flag maps|Stamps|Coins",
+ "filter": {
+  "enabled": true,
+  "text": 0.75,
+  "blank": 0.5,
+  "sketch": 0.5,
+  "ornament": 0.6,
+  "dup": 0.975,
+  "text_prompt": "a page that is mostly lines of Ge'ez, Arabic or Latin handwritten text"
+ },
+ "roots": [
+  {
+   "cat": "Category:Ethiopian Orthodox icons",
+   "co": "Ethiopia",
+   "mv": "Ethiopian icon",
+   "sure": "high",
+   "note": "71 files, 3 subcategories.",
+   "artist": "Ethiopian Icon Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Icons of Virgin Mary in Ethiopia",
+   "co": "Ethiopia",
+   "mv": "Ethiopian icon",
+   "sure": "high",
+   "note": "43 files.",
+   "artist": "Ethiopian Icon Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Icono etíope colección Miguel Gallés",
+   "co": "Ethiopia",
+   "mv": "Ethiopian icon",
+   "sure": "high",
+   "note": "44 files.",
+   "artist": "Ethiopian Icon Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Paintings of Saint George and the dragon of Ethiopia",
+   "co": "Ethiopia",
+   "mv": "Ethiopian icon",
+   "sure": "high",
+   "note": "40 files.",
+   "artist": "Ethiopian Icon Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Icons of Ethiopia",
+   "co": "Ethiopia",
+   "mv": "Ethiopian icon",
+   "sure": "high",
+   "note": "1 file, 4 subcategories.",
+   "artist": "Ethiopian Icon Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Ethiopian manuscripts",
+   "co": "Ethiopia",
+   "mv": "Ethiopian manuscript",
+   "sure": "high",
+   "note": "110 files, 12 subcategories.",
+   "artist": "Ethiopian Manuscript Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Illuminated manuscripts in Ethiopia",
+   "co": "Ethiopia",
+   "mv": "Ethiopian manuscript",
+   "sure": "high",
+   "note": "41 files, 2 subcategories.",
+   "artist": "Ethiopian Manuscript Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:MS 102 (Getty museum) - Ethiopian Gospel Book",
+   "co": "Ethiopia",
+   "mv": "Ethiopian manuscript",
+   "sure": "high",
+   "note": "19 files.",
+   "artist": "Ethiopian Manuscript Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Walters MS W850 - Ethiopian Gunda Gunde Gospels",
+   "co": "Ethiopia",
+   "mv": "Ethiopian manuscript",
+   "sure": "high",
+   "note": "29 files.",
+   "artist": "Ethiopian Manuscript Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Ethiopian manuscripts in colección Miguel Gallés",
+   "co": "Ethiopia",
+   "mv": "Ethiopian manuscript",
+   "sure": "high",
+   "note": "19 files, 2 subcategories.",
+   "artist": "Ethiopian Manuscript Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Ethiopian magic scrolls",
+   "co": "Ethiopia",
+   "mv": "Ethiopian scroll",
+   "sure": "high",
+   "note": "13 files, 5 subcategories.",
+   "artist": "Ethiopian Scroll Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Gabra Manfas Qeddus",
+   "co": "Ethiopia",
+   "mv": "Ethiopian icon",
+   "sure": "high",
+   "note": "13 files.",
+   "artist": "Ethiopian Icon Painter",
+   "undated_ok": true,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Kingdom of Aksum",
+   "co": "Ethiopia",
+   "mv": "Ethiopian icon",
+   "sure": "low",
+   "note": "18 files, 8 subcategories; mostly archaeology, CLIP filter on.",
+   "artist": "Ethiopian Icon Painter",
+   "undated_ok": true,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Paintings in Ethiopia",
+   "co": "Ethiopia",
+   "mv": "Ethiopian painting",
+   "sure": "medium",
+   "note": "13 files, 4 subcategories.",
+   "artist": "Ethiopian Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from Ethiopia",
+   "co": "Ethiopia",
+   "mv": "Ethiopian painting",
+   "sure": "medium",
+   "note": "1 file, 2 subcategories.",
+   "artist": "Ethiopian Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Coptic icons",
+   "co": "Egypt",
+   "mv": "Coptic icon",
+   "sure": "high",
+   "note": "48 files, 4 subcategories.",
+   "artist": "Coptic Icon Painter",
+   "undated_ok": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Icons of Egypt",
+   "co": "Egypt",
+   "mv": "Coptic icon",
+   "sure": "high",
+   "note": "10 files, 2 subcategories.",
+   "artist": "Coptic Icon Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from Egypt",
+   "co": "Egypt",
+   "mv": "Egyptian painting",
+   "sure": "low",
+   "note": "3 files, 9 subcategories.",
+   "artist": "Egyptian Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Thomas Baines",
+   "co": "South Africa",
+   "mv": "South African painting",
+   "sure": "high",
+   "note": "94 files, 8 subcategories; died 1875.",
+   "artist": "Thomas Baines",
+   "died": 1875,
+   "nofilter": true,
+   "per_group": 1000,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Jan Ernst Abraham Volschenk",
+   "co": "South Africa",
+   "mv": "South African painting",
+   "sure": "high",
+   "note": "5 files.",
+   "artist": "Jan Volschenk",
+   "died": 1936,
+   "nofilter": true,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Frederick Timpson I'Ons",
+   "co": "South Africa",
+   "mv": "South African painting",
+   "sure": "high",
+   "note": "9 files.",
+   "artist": "Frederick Timpson I'Ons",
+   "died": 1887,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Pieter Hugo Naudé",
+   "co": "South Africa",
+   "mv": "South African painting",
+   "sure": "high",
+   "note": "5 files; died 1941.",
+   "artist": "Pieter Hugo Naudé",
+   "died": 1941,
+   "nofilter": true,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Painters from South Africa",
+   "co": "South Africa",
+   "mv": "South African painting",
+   "sure": "low",
+   "note": "8 files, 4 subcategories; date-limited.",
+   "artist": "South African Painter",
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings of South Africa",
+   "co": "South Africa",
+   "mv": "South African painting",
+   "sure": "low",
+   "note": "20 files, 7 subcategories.",
+   "artist": "South African Painter",
+   "depth": 1
+  },
+  {
+   "cat": "Category:Paintings in South Africa",
+   "co": "South Africa",
+   "mv": "South African painting",
+   "sure": "low",
+   "note": "8 files, 7 subcategories.",
+   "artist": "South African Painter",
+   "depth": 1
+  },
+  {
+   "cat": "Category:Paintings from Rwanda",
+   "co": "Rwanda",
+   "mv": "Rwandan painting",
+   "sure": "low",
+   "note": "59 files (modern; date window will drop most).",
+   "artist": "Rwandan Painter",
+   "depth": 1
+  },
+  {
+   "cat": "Category:Paintings from Gambia",
+   "co": "Gambia",
+   "mv": "Gambian painting",
+   "sure": "low",
+   "note": "25 files (modern).",
+   "artist": "Gambian Painter",
+   "depth": 1
+  },
+  {
+   "cat": "Category:Paintings from Senegal",
+   "co": "Senegal",
+   "mv": "Senegalese painting",
+   "sure": "low",
+   "note": "13 files, 3 subcategories.",
+   "artist": "Senegalese Painter",
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from Nigeria",
+   "co": "Nigeria",
+   "mv": "Nigerian painting",
+   "sure": "low",
+   "note": "6 files.",
+   "artist": "Nigerian Painter",
+   "depth": 1
+  },
+  {
+   "cat": "Category:Paintings in Nigeria",
+   "co": "Nigeria",
+   "mv": "Nigerian painting",
+   "sure": "low",
+   "note": "7 files, 2 subcategories.",
+   "artist": "Nigerian Painter",
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from Ghana",
+   "co": "Ghana",
+   "mv": "Ghanaian painting",
+   "sure": "low",
+   "note": "6 files.",
+   "artist": "Ghanaian Painter",
+   "depth": 1
+  },
+  {
+   "cat": "Category:Paintings from Tunisia",
+   "co": "Tunisia",
+   "mv": "Tunisian painting",
+   "sure": "low",
+   "note": "13 files.",
+   "artist": "Tunisian Painter",
+   "depth": 1
+  },
+  {
+   "cat": "Category:Paintings from Algeria",
+   "co": "Algeria",
+   "mv": "Algerian painting",
+   "sure": "low",
+   "note": "4 files, 2 subcategories.",
+   "artist": "Algerian Painter",
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from Angola",
+   "co": "Angola",
+   "mv": "Angolan painting",
+   "sure": "low",
+   "note": "3 files.",
+   "artist": "Angolan Painter",
+   "depth": 1
+  },
+  {
+   "cat": "Category:Paintings from Madagascar",
+   "co": "Madagascar",
+   "mv": "Malagasy painting",
+   "sure": "low",
+   "note": "3 files.",
+   "artist": "Malagasy Painter",
+   "depth": 1
+  },
+  {
+   "cat": "Category:Paintings from Haiti",
+   "co": "Haiti",
+   "mv": "Haitian painting",
+   "sure": "medium",
+   "note": "11 files, 2 subcategories.",
+   "artist": "Haitian Painter",
+   "undated_ok": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Painters from Haiti",
+   "co": "Haiti",
+   "mv": "Haitian painting",
+   "sure": "low",
+   "note": "39 files, 3 subcategories (painters' categories, mostly post-1955 so date-limited).",
+   "artist": "Haitian Painter",
+   "depth": 2
+  },
+  {
+   "cat": "Category:Hector Hyppolite",
+   "co": "Haiti",
+   "mv": "Haitian painting",
+   "sure": "high",
+   "note": "5 files; died 1948.",
+   "artist": "Hector Hyppolite",
+   "died": 1948,
+   "nofilter": true,
+   "depth": 1
+  },
+  {
+   "cat": "Category:Paintings from the Dominican Republic",
+   "co": "Dominican Republic",
+   "mv": "Dominican painting",
+   "sure": "low",
+   "note": "33 files; date window applies.",
+   "artist": "Dominican Painter",
+   "depth": 1
+  },
+  {
+   "cat": "Category:Francisco Oller",
+   "co": "Puerto Rico",
+   "mv": "Puerto Rican painting",
+   "sure": "high",
+   "note": "18 files; died 1917.",
+   "artist": "Francisco Oller",
+   "died": 1917,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:José Campeche",
+   "co": "Puerto Rico",
+   "mv": "Puerto Rican painting",
+   "sure": "high",
+   "note": "21 files, 2 subcategories.",
+   "artist": "José Campeche",
+   "died": 1809,
+   "nofilter": true,
+   "depth": 2
+  },
+  {
+   "cat": "Category:Paintings from Cuba",
+   "co": "Cuba",
+   "mv": "Cuban painting",
+   "sure": "medium",
+   "note": "9 files, 4 subcategories.",
+   "artist": "Cuban Painter",
+   "undated_ok": true,
+   "depth": 2
+  }
+ ]
+}

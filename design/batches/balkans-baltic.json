@@ -7,9 +7,9 @@
   "to": 1925
  },
  "caps": {
-  "per_group": 25,
-  "total": 1200,
-  "overshoot": 1.3
+  "per_group": 1000,
+  "total": 100000,
+  "overshoot": 1.0
  },
  "skip_cat": "Qajar|Safavid|Persian",
  "filter": {
@@ -30,7 +30,7 @@
    "note": "133 files, 1 subcategory; 13th-century frescoes photographed in situ, many are detail crops of one wall.",
    "artist": "Boyana Master",
    "undated_ok": true,
-   "per_group": 60
+   "per_group": 1000
   },
   {
    "cat": "Category:Icons of Bulgaria",
@@ -40,7 +40,7 @@
    "note": "78 files, 8 subcategories.",
    "artist": "Bulgarian Icon Painter",
    "undated_ok": true,
-   "per_group": 30
+   "per_group": 1000
   },
   {
    "cat": "Category:Frescos in Bulgaria",
@@ -50,7 +50,7 @@
    "note": "10 files, 9 subcategories.",
    "artist": "Bulgarian Fresco Painter",
    "undated_ok": true,
-   "per_group": 15
+   "per_group": 1000
   },
   {
    "cat": "Category:Paintings from Bulgaria",
@@ -76,7 +76,7 @@
    "note": "72 files, 11 subcategories.",
    "artist": "Serbian Icon Painter",
    "undated_ok": true,
-   "per_group": 30
+   "per_group": 1000
   },
   {
    "cat": "Category:Frescos in Serbia",
@@ -86,7 +86,7 @@
    "note": "69 files, 10 subcategories (Studenica, Sopoćani, Mileševa...).",
    "artist": "Serbian Fresco Painter",
    "undated_ok": true,
-   "per_group": 25
+   "per_group": 1000
   },
   {
    "cat": "Category:Uroš Predić",
@@ -179,7 +179,7 @@
    "artist": "Nicolae Grigorescu",
    "died": 1907,
    "nofilter": true,
-   "per_group": 300
+   "per_group": 1000
   },
   {
    "cat": "Category:Theodor Aman",
@@ -209,7 +209,7 @@
    "note": "23 files, 5 subcategories (Voroneț, Moldovița...).",
    "artist": "Romanian Fresco Painter",
    "undated_ok": true,
-   "per_group": 15
+   "per_group": 1000
   },
   {
    "cat": "Category:Paintings from Romania",

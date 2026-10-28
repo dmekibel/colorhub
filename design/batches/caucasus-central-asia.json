@@ -7,9 +7,9 @@
   "to": 1925
  },
  "caps": {
-  "per_group": 25,
-  "total": 1500,
-  "overshoot": 1.3
+  "per_group": 1000,
+  "total": 100000,
+  "overshoot": 1.0
  },
  "skip_cat": "Qajar|Safavid|\\bIran|Persian|Mughal|India",
  "co_rules": [
@@ -69,7 +69,7 @@
     ]
    ],
    "undated_ok": true,
-   "per_group": 25
+   "per_group": 1000
   },
   {
    "cat": "Category:Armenian manuscripts",
@@ -79,7 +79,7 @@
    "note": "243 files, 17 subcategories; overlaps the root above (same file is kept once). Contains plain text pages: the CLIP filter drops them.",
    "artist": "Armenian Illuminator",
    "undated_ok": true,
-   "per_group": 15
+   "per_group": 1000
   },
   {
    "cat": "Category:Matenadaran",
@@ -89,7 +89,7 @@
    "note": "122 files, 11 subcategories; may hold photos of the building, skipped by size/name rules where possible.",
    "artist": "Armenian Illuminator",
    "undated_ok": true,
-   "per_group": 15
+   "per_group": 1000
   },
   {
    "cat": "Category:Toros Roslin",
@@ -156,7 +156,7 @@
    "note": "197 files, 12 subcategories.",
    "artist": "Georgian Icon Painter",
    "undated_ok": true,
-   "per_group": 40
+   "per_group": 1000
   },
   {
    "cat": "Category:Frescos in Georgia (country)",
@@ -166,7 +166,7 @@
    "note": "77 files, 12 subcategories; photographs of wall paintings in situ (some are of whole church interiors).",
    "artist": "Georgian Fresco Painter",
    "undated_ok": true,
-   "per_group": 20
+   "per_group": 1000
   },
   {
    "cat": "Category:Murals in Georgia (country)",
@@ -176,7 +176,7 @@
    "note": "105 files, 6 subcategories; as above, overlaps.",
    "artist": "Georgian Fresco Painter",
    "undated_ok": true,
-   "per_group": 20
+   "per_group": 1000
   },
   {
    "cat": "Category:Paintings by Niko Pirosmani",
@@ -187,8 +187,7 @@
    "artist": "Niko Pirosmani",
    "died": 1918,
    "nofilter": true,
-   "per_group": 400,
-   "max": 250
+   "per_group": 1000
   },
   {
    "cat": "Category:Niko Pirosmani",
@@ -235,8 +234,7 @@
    "note": "86 files, 45 subcategories; Nizami was from Ganja, but the manuscripts are Persian, Ottoman and Timurid: label is a judgment call, the existing Persian rows are deduped by id.",
    "artist": "Persianate Painter",
    "undated_ok": true,
-   "per_group": 10,
-   "max": 200
+   "per_group": 1000
   },
   {
    "cat": "Category:Paintings of Azerbaijan",
@@ -263,7 +261,7 @@
    "artist": "Vasily Vereshchagin",
    "died": 1904,
    "nofilter": true,
-   "per_group": 300
+   "per_group": 1000
   },
   {
    "cat": "Category:Vasily Vereshchagin",
