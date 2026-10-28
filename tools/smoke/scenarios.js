@@ -4321,16 +4321,16 @@ scenario("paintings", "a painting's identity (title, painter, museum) sits above
 // the painting page); a second long-press clears it; a plain short tap is unaffected and still opens the
 // color page. This scenario covers everything that IS reliable under virtual time: the glyph is gone from the
 // strip, a plain tap still opens the page, and the row action (an ordinary click, no timer) does the same job.
-scenario("paintings", "a painting's strip tile opens its color page in one tap, with no Where glyph on the chip; the expanded list's row action locates it", async t => {
+scenario("paintings", "a painting's strip tile opens the whole palette in one tap (a hold opens that color), with no Where glyph on the chip; the expanded list's row action locates it", async t => {
   await t.open("#/gallery/12", { settle: 800 });
   t.expect(!t.$("[data-glwhere]"), "the old On the painting switch is still in the DOM");
   await t.waitFor("[data-glswatches] [data-glj]", 15000, "a palette swatch tile");
   const tileAt0 = () => t.$('[data-glswatches] [data-glj="0"]');
-  t.expect(tileAt0().hasAttribute("data-swatch"), "the strip chip isn't a [data-swatch] (one tap should open its page)");
+  t.expect(!tileAt0().hasAttribute("data-swatch") && tileAt0().dataset.hex, "the strip chip should carry its hex for a hold, and not be a [data-swatch] (a tap opens the whole palette, 2026-10-28)");
   t.expect(!tileAt0().querySelector("[data-locate], .pal-where"), "the strip chip still has a Where glyph on it");
   t.expect(t.$("[data-glswatches]").hasAttribute("data-no-hold"), "the strip doesn't opt out of settray.js's app-wide long-press (needed so its own long-press can locate instead)");
   await t.click(tileAt0(), { force: true, wait: 600 });
-  await t.waitFor(".cp-page", 8000, "the color page after tapping the chip body");
+  await t.waitFor(".sp-page", 8000, "the palette page after tapping the strip");
   await t.click(TRL.screenBack(t), { wait: 600 });
   // the expanded list's own row action: an ordinary click, no timing involved, so it's reliable here
   await t.waitFor("[data-glrows] [data-glj]", 10000, "the expanded palette rows");
@@ -5810,7 +5810,7 @@ scenario("sets", "a pair page: facts and paintings and Add a color makes a trio"
   await t.open("#/pair/4f6b3a+c2412d", { settle: 800, keepState: true });
   await t.waitFor(".sp-page .sp-plate", 12000, "the pair page");
   await SP.lead(t);
-  await t.waitFor(() => t.$("[data-ptg] .gl-pin") || /too few|No painting/.test(t.text("[data-ptg]")), 25000, "paintings or an honest line");
+  await t.waitFor(() => t.$(".sp-fgrid .gl-pin") || t.$("[data-ptg] .gl-pin") || /too few|No painting/.test(t.text("[data-ptg]")), 25000, "paintings or an honest line");
   t.expect(/:1 contrast/.test(t.text(".sp-facts")), "no contrast ratio");
   await t.click('[data-sp-add]', { wait: 600 });
   await t.waitFor(".sheet.sx-sheet .sx-opt", 6000, "the add-a-color picker");
@@ -5983,7 +5983,7 @@ scenario("sets", "a pair's painting rail carries the whole pair, not one color: 
   await t.open(`#/pair/${a}+${b}`, { settle: 800, keepState: true });
   await t.waitFor(".sp-page .sp-pair .sp-plate", 12000, "the pair page");
   await SP.lead(t);
-  const pin = await t.waitFor("[data-ptg] .gl-pin", 25000, "a painting holding this pair (painting 15146 itself, at least)");
+  const pin = await t.waitFor(".sp-fgrid .gl-pin", 25000, "a painting holding this pair (painting 15146 itself, at least)");
   await t.click(pin, { force: true, wait: 900 });
   await t.waitFor(".pt-arrive [data-opensp]", 14000, "the painting's arrival row");
   t.expect(/You came from/.test(t.text(".pt-arrive")), `the arrival row doesn't say "You came from": ${t.text(".pt-arrive")}`);
@@ -6036,25 +6036,17 @@ scenario("sets", "drag a row's handle to reorder a trio; the new order is still 
 // David, 2026-10-09: "sooner or later something will match" if you loosen enough, so Together in paintings never
 // shows a near-miss as if it mattered — a vivid, mostly-synthetic trio (rare in oil paint) says so plainly, and
 // Loosen until something matches is explicit about how far it went.
-scenario("sets", "a trio with no close match says so plainly, with no unrelated painting shown until you loosen it yourself", async t => {
+// David, 2026-10-28 (design/plans/2026-10-28-ux-backlog.md section 1): the palette page's paintings are an endless feed that loosens by itself; there is no
+// "Nothing this close yet" state and no sliders on the page. A trio with no close match still fills: tightest first, then one thin "Looser matches" line.
+scenario("sets", "a trio with no close match: the feed loosens by itself under one thin line, never a dead end", async t => {
   SP.placed();
   await t.open("#/set/656300-8000ff-b70088", { settle: 800, keepState: true });
   await t.waitFor(".sp-page .sp-strip", 12000, "the trio page");
   await SP.lead(t);
-  await t.waitFor("[data-ptg] .sp-match [data-mt-sliders] .pt-range", 20000, "the Closeness / Minimum share sliders");
-  await t.waitFor(() => /Nothing this close yet|Not one painting holds/.test(t.text("[data-ptg] .sp-mt-body")) || t.$("[data-ptg] .sp-mt-body .gl-pin"), 25000, "a real result or an honest empty state");
-  const emptyMsg = t.text("[data-ptg] .sp-mt-body");
-  if (/Nothing this close yet/.test(emptyMsg) || /Not one painting holds/.test(emptyMsg)) {
-    t.expect(!t.$("[data-ptg] .sp-mt-body .gl-pin"), "a near-miss painting is showing without being asked for");
-    if (/Nothing this close yet/.test(emptyMsg)) {
-      const btn = t.$("[data-mt-loosen]");
-      t.expect(btn, "no Loosen until something matches button at the default setting");
-      await t.click(btn, { force: true, wait: 1500 });
-      await t.waitFor(() => /Loosened/.test(t.text("[data-ptg] .sp-mt-body")) || /even at the loosest measure/.test(t.text("[data-ptg] .sp-mt-body")), 20000, "an honest line about how far it loosened, or a final no");
-    }
-  } else {
-    t.notes.push("this trio already had a real match at the standard measure");
-  }
+  await t.waitFor(() => t.$(".sp-fgrid .gl-pin") || /every painting in the archive|No painting in the archive/.test(t.text(".sp-feedsec")), 30000, "paintings in the feed, or an honest end");
+  t.expect(!/Nothing this close yet/.test(t.text(".sp-page")), "a dead-end 'Nothing this close yet' is back on the palette page");
+  t.expect(!t.$("[data-mt-sliders]"), "the Closeness / Minimum share sliders are back on the palette page");
+  if (t.$(".sp-loose")) t.expect(/Looser matches/.test(t.text(".sp-loose")), "the divider doesn't say Looser matches");
 });
 
 // ================================================================== DIRECT LOADS (a typed or shared address on a fresh load)

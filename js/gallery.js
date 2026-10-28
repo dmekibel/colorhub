@@ -1713,7 +1713,7 @@ function glPage(i, d, fromHex, tol) {
     // press a swatch adds it to your set", since that's the same gesture slot) and an explicit row action in
     // the expanded list (the [data-locate] glyph there, the one nested-control exemption js/swatch.js's capture
     // delegate already recognizes, same as the old strip glyph did).
-    stripH.innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}${locate && locate.j === j ? " loc" : ""}" data-glj="${j}" data-swatch="${p.h}" style="--c:${p.h};flex:${eqW ? 1 : (Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.pick || eqW ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
+    stripH.innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}${locate && locate.j === j ? " loc" : ""}" data-glj="${j}" data-hex="${p.h}" style="--c:${p.h};flex:${eqW ? 1 : (Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.pick || eqW ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
     rowsH.innerHTML = pal.map((p, j) => {
       const nm = glName(p.h), fam = !nm.sub && !p.out && typeof familyOf === "function" && familyOf(p.h);
       const sub = [p.out ? "Stands out" : nm.sub ? nm.sub.charAt(0).toUpperCase() + nm.sub.slice(1) : fam ? fam.head.n + " family" : "", p.pick ? "Picked" : eqW ? "" : glPctTxt(p.share)].filter(Boolean).join(" · ");
@@ -2147,11 +2147,11 @@ function glPage(i, d, fromHex, tol) {
   stripEl.addEventListener("pointerdown", e => {
     const b = e.target.closest("[data-glj]"); if (!b || e.button > 0) return;
     if (locPress) clearTimeout(locPress.t);
-    const p = { x: e.clientX, y: e.clientY, j: +b.dataset.glj };
+    const p = { x: e.clientX, y: e.clientY, j: +b.dataset.glj, hex: b.dataset.hex };
     p.t = setTimeout(() => {
       if (locPress !== p) return;
       locPress = null; locJustHeld = performance.now();
-      buzz(6); toggleLocate(p.j);
+      buzz(6); if (typeof openTappedColor === "function") openTappedColor(p.hex);   // David, 2026-10-28: press and hold a swatch opens that color's page
     }, LOC_HOLD);
     locPress = p;
   });
@@ -2165,6 +2165,12 @@ function glPage(i, d, fromHex, tol) {
   };
   addEventListener("click", locSwallow, true);
   cleanup.push(() => removeEventListener("click", locSwallow, true));
+  // a tap on the strip opens the whole palette's page (David, 2026-10-28: tap the strip = the palette, hold a swatch = that color)
+  stripEl.addEventListener("click", e => {
+    if (!e.target.closest("[data-glj]") || typeof spPage !== "function") return;
+    const hexes = curPal().filter(p => p && p.h).map(p => p.h); if (hexes.length < 2) { const h = e.target.closest("[data-glj]").dataset.hex; if (h && typeof openTappedColor === "function") openTappedColor(h); return; }
+    buzz(5); spPage(hexes, { push: true, painting: { i, t: d.t } });
+  });
   el.querySelector(".gl-seg-row").onclick = e => {
     const b = e.target.closest("[data-glw]"); if (!b) return;
     const eq = b.dataset.glw === "eq"; if (eq === eqW) return;
