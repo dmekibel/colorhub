@@ -24,7 +24,8 @@ const deskSection = () => { const seg = (location.hash.replace(/^#\/?/, "").spli
 function deskNavHTML() {
   return `<a class="dk-brand" href="#/home" aria-label="Chromatlas, the map">${typeof LOGO === "string" ? LOGO : ""}<span>Chromatlas</span></a>
   <nav class="dk-links" aria-label="Main">${DESK_LINKS.map(([id, label, href]) => `<a href="${href}" data-dk="${id}">${label}</a>`).join("")}</nav>
-  <button class="dk-search" type="button" data-dk-search aria-label="Search">${typeof ICON === "object" ? ICON.search : ""}<span>Search colors, paintings, painters</span><kbd>/</kbd></button>`;
+  <button class="dk-search" type="button" data-dk-search aria-label="Search">${typeof ICON === "object" ? ICON.search : ""}<span>Search colors, paintings, painters</span><kbd>/</kbd></button>
+  <button class="dk-set" type="button" data-dk-settings aria-label="Settings" title="Settings and your progress">${typeof HM_GEAR_SVG === "string" ? HM_GEAR_SVG : ""}</button>`;
 }
 function deskMarkActive() {
   const cur = deskSection();
@@ -98,7 +99,7 @@ function deskPageSync() {
     }
     if (!r) {
       r = document.createElement("div"); r.className = "dk-pb-r";
-      r.innerHTML = `<button class="dk-search" type="button" data-dk-search aria-label="Search">${typeof ICON === "object" ? ICON.search : ""}<span>Search</span><kbd>/</kbd></button>`;
+      r.innerHTML = `<button class="dk-search" type="button" data-dk-search aria-label="Search">${typeof ICON === "object" ? ICON.search : ""}<span>Search</span><kbd>/</kbd></button><button class="dk-set" type="button" data-dk-settings aria-label="Settings" title="Settings and your progress">${typeof HM_GEAR_SVG === "string" ? HM_GEAR_SVG : ""}</button>`;
       bar.appendChild(r);
     }
     const id = l.querySelector(".dk-pb-id"), sig = info.name + "|" + info.color + "|" + info.img;
@@ -169,6 +170,7 @@ function deskInstall() {
     if (typeof searchOpen === "function") searchOpen();
   };
   document.addEventListener("click", e => { if (e.target.closest && e.target.closest("[data-dk-search]")) openSearch(); });
+  document.addEventListener("click", e => { if (e.target.closest && e.target.closest("[data-dk-settings]") && typeof ymSettingsSheet === "function" && !document.querySelector(".sheet")) ymSettingsSheet(); });
   document.addEventListener("keydown", e => {
     if (!root.classList.contains("desk")) return;
     const t = e.target, typing = t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable);
