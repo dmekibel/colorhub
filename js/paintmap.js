@@ -1926,6 +1926,7 @@ function pmOpen(spec, o = {}) {
     <button class="hm-top-search pmx-search" data-pmsearch aria-label="Search paintings and painters">${ICON.search}</button>
     <button class="corner l pl-corner" data-rooms-corner aria-label="Places">${ROOMS_GLYPH}<span>Places</span></button>
     <button class="corner r hm-do pmx-do" data-do-corner aria-label="More" aria-haspopup="dialog">${ICON.more}</button>
+    ${col === "paintings" ? `<button class="corner r pmx-explore" data-pmexplore aria-label="Explore: the feed, with these filters">${ICON.museum}</button>` : ""}
     ${col === "paintings" && typeof hmLayerSwitchHTML === "function" ? hmLayerSwitchHTML("paintings") : ""}
     <button class="pmx-count" data-pmcount hidden></button>
     <div class="pmx-chipbar" data-pmchipbar hidden></div>
@@ -1972,7 +1973,33 @@ function pmOpen(spec, o = {}) {
   });
   return el;
 }
+// The map's round Explore button (David, 2026-10-28): opens the Explore feed carrying what the map is filtered to, where the feed has an
+// equivalent: one painter or one movement (its lens), else the years or a color; the years and color family also ride along as the board's own
+// filters. Everything else (country, museum, type, subject, lightness...) has no feed equivalent and is dropped, with a one-line note.
+const PM_BF_ERAS = [["b1700", -1e5, 1700], ["1700", 1700, 1850], ["1850", 1850, 1925], ["a1925", 1925, 1e5]];
+const PM_BF_HUE = { Reds: "Reds and pinks", Pinks: "Reds and pinks", Oranges: "Oranges", Browns: "Oranges", Yellows: "Golds and yellows", Greens: "Greens", Blues: "Blues", Purples: "Purples" };
+function pmToExplore(s, F) {
+  const f = s.f || {}, meta = F.meta, keep = [], dropped = [];
+  const yr = f.y0 != null && f.y1 != null && f.y0 > 1000 ? [f.y0, f.y1] : null;
+  const painter = f.painterSet && f.painterSet.length ? meta.artists[f.painterSet[0] - 1][0] : (f.painter ? meta.artists[f.painter - 1][0] : "");
+  const move = f.mvSet && f.mvSet.length ? meta.movements[f.mvSet[0] - 1] : (f.mv ? meta.movements[f.mv - 1] : "");
+  const hex = f.hexes && f.hexes[0];
+  let lens = "foryou";
+  if (painter) lens = "p:" + painter; else if (move) lens = "m:" + move; else if (yr) lens = "e:" + yr[0] + "-" + (yr[1] + 1); else if (hex) lens = "c:" + (hex[0] === "#" ? hex : "#" + hex);
+  if ((f.painterSet || []).length > 1 || (painter && move) || (move && (f.mvSet || []).length > 1)) dropped.push("some of the painters and movements");
+  if (f.coSet && f.coSet.length || f.musSet && f.musSet.length || f.tySet && f.tySet.length || f.subjSet && f.subjSet.length || f.bdSet && f.bdSet.length || f.l0 != null || f.l1 != null || f.co || f.mus >= 0) dropped.push("place, museum, type and lightness");
+  if (hex && !lens.startsWith("c:")) dropped.push("the picked color");
+  const bf = {};
+  if (yr && !lens.startsWith("e:")) { const e = PM_BF_ERAS.find(([, a, b]) => yr[0] >= a && yr[1] < b + 1); if (e) bf.era = e[0]; else dropped.push("the years"); }
+  if (f.hueBand != null && PM_BF_HUE[XB_FAMS[f.hueBand]]) bf.hue = PM_BF_HUE[XB_FAMS[f.hueBand]];
+  const st = hfS(); st.bf = st.bf || {}; if (Object.keys(bf).length) st.bf[lens] = bf; else delete st.bf[lens];
+  TF_KIND = "paint"; TF_LENS = lens; TF_FROM_BOARD = false; TF_SIBS = []; st.lens = lens;
+  XSTACK = []; X_ROOT = "pmap"; save(); buzz(6);
+  go("feed");
+  if (dropped.length) setTimeout(() => toast("Explore keeps years, color family, painter and movement; " + dropped.join(" and ") + " stay on the map."), 400);
+}
 function pmMount(el, s, F) {
+  const exBtn = el.querySelector("[data-pmexplore]"); if (exBtn) exBtn.onclick = () => pmToExplore(s, F);
   const cv = el.querySelector(".pmx-cv"), ctx = cv.getContext("2d"), wait = el.querySelector(".pmx-wait");
   const RM = reduceMotion, cap = el.querySelector("[data-pmcap]"), heart = el.querySelector("[data-pmheart]");
   const facets = el.querySelector("[data-pmfacets]"), chipbar = el.querySelector("[data-pmchipbar]"), walkBar = el.querySelector("[data-pmwalk]");

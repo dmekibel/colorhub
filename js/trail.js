@@ -193,7 +193,7 @@ function tlDecorate(el) {
   const simGi = el.querySelector("[data-similar-gi]") ? el.querySelector("[data-similar-gi]").dataset.similarGi : null;
   const pillHtml = simGi != null && typeof GL_ICON_MAP !== "undefined"
     ? `<button class="tl-exit" data-glsimilar="${simGi}" aria-label="Similar paintings on the map">${GL_ICON_MAP}<span>Similar</span></button>`
-    : tlPillHides() ? "" : tlPillHTML();
+    : "";   // the place pill moved to the bottom corners (pgCornersEnsure): the top keeps ‹ and the page's own buttons
   const bothHtml = TL_MORE_HTML + pillHtml;
   // a richpage.js page carries BOTH headers at once (the full-bleed .cp-hero and the pinned .rp-bar that slides
   // in once you scroll past it) -- not an either/or, so this stays two independent checks, same as the Close
@@ -217,7 +217,29 @@ function tlDecorate(el) {
   if (!el.classList.contains("fixed")) tlgWire(el);
   // first-run orientation, step 2 (PLAN §5, js/orient.js): the first page opened off the map
   if (typeof orientPageStep === "function") orientPageStep(el);
+  pgCornersEnsure(el);
 }
+
+// ---------- the bottom corners of every inner page (David, 2026-10-28): Places on the left, Map and Settings on the right,
+// the same round buttons the map and the Explore feed carry. They live on the body so the page scrolls under them, hide
+// on scroll down and come back on scroll up. show() clears them with the rest of the page (cleanup).
+let PG_Y = new WeakMap();
+function pgCornersEnsure(el) {
+  document.querySelectorAll(".pg-corners").forEach(n => n.remove());
+  const box = document.createElement("div"); box.className = "pg-corners";
+  box.innerHTML = `<button class="corner l pl-corner" data-rooms-corner aria-label="Places">${ROOMS_GLYPH}<span>Places</span></button>
+    <div class="pg-right"><button class="corner" data-tl-exit aria-label="${esc(tlOriginName())}: close back to where you started">${tlOriginIcon()}</button>
+    <button class="corner" data-pg-settings aria-label="Settings">${typeof HM_GEAR_SVG !== "undefined" ? HM_GEAR_SVG : ICON.more}</button></div>`;
+  box.querySelector("[data-pg-settings]").onclick = () => { buzz(4); if (typeof ymSettingsSheet === "function") ymSettingsSheet(); };
+  (el || document.body).appendChild(box);
+}
+addEventListener("scroll", e => {
+  const box = document.querySelector(".pg-corners"); if (!box) return;
+  const t = e.target === document ? document.scrollingElement : e.target; if (!t || t.nodeType !== 1) return;
+  const y = t.scrollTop, last = PG_Y.get(t); PG_Y.set(t, y);
+  if (last == null || Math.abs(y - last) < 6) return;
+  box.classList.toggle("pg-hid", y > last && y > 80);
+}, { capture: true, passive: true });
 
 // ---------- gesture-following back (David, 2026-10-09): "if I swipe down I don't need to see it shrink back
 // into its original bubble, I just need to see the page swiped away downwards; if I swipe back, the zoom-out

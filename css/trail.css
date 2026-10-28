@@ -100,3 +100,19 @@
 .tlg-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:1;transition:none}
 .tlg-armed .gl-hero>span{background:transparent}
 .tlg-armed .gl-hero img,.tlg-armed .gl-hero canvas,.tlg-armed .gl-hero-dots{visibility:hidden}
+
+/* the bottom corners of every inner page (js/trail.js pgCornersEnsure): Places left, Map + Settings right; they slide away on scroll down */
+.pg-corners{position:fixed;left:0;right:0;bottom:0;height:0;z-index:40;pointer-events:none}
+.pg-corners .corner{position:fixed;bottom:var(--corner-b,16px);pointer-events:auto;display:grid;place-items:center;color:var(--ink);transition:transform .3s var(--ease),opacity .3s var(--ease)}
+.pg-corners .corner.pl-corner{display:inline-flex;left:16px}
+.pg-right{position:fixed;right:16px;bottom:var(--corner-b,16px);display:flex;gap:10px;transition:transform .3s var(--ease),opacity .3s var(--ease)}
+.pg-right .corner{position:static}
+.pg-corners.pg-hid .corner.pl-corner,.pg-corners.pg-hid .pg-right{transform:translateY(calc(var(--corner,56px) + 40px));opacity:0;pointer-events:none}
+html.desk .pg-corners .corner.pl-corner{left:28px;bottom:28px}
+html.desk .pg-right{right:28px;bottom:28px}
+body.stem-open .pg-corners.pg-hid .corner.pl-corner{transform:none;opacity:1}
+/* wide screens already have the top nav (Explore, Map, rooms): no bottom corners there */
+html.desk .pg-corners{display:none}
+/* a soft fade under the corners so page text never runs through them */
+.pg-corners::before{content:"";position:fixed;left:0;right:0;bottom:0;height:calc(var(--corner-b,16px) + var(--corner,56px) + 28px);background:linear-gradient(rgba(14,13,11,0),rgba(14,13,11,.86) 60%,var(--ground,#0e0d0b));pointer-events:none;transition:opacity .3s var(--ease)}
+.pg-corners.pg-hid::before{opacity:0}
