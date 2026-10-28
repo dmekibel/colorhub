@@ -25,7 +25,7 @@ WM = ("wikimedia.org", "wikipedia.org")
 
 def fetch(url, tries=5):
     host = urllib.parse.urlparse(url).netloc
-    gap = 0.6 if host.endswith(WM) else 0.25
+    gap = 0.33 if host.endswith(WM) else 0.25
     for n in range(tries):
         with M.LOCK:
             wait = M.HOST_GAP.get(host, 0) + gap - time.time()
@@ -38,7 +38,9 @@ def fetch(url, tries=5):
                 return r.read()
         except urllib.error.HTTPError as e:
             if e.code in (429, 503):
-                time.sleep(15 * (n + 1))
+                with M.LOCK:   # one 429 pauses the whole host for 60 s, not just this worker
+                    M.HOST_GAP[host] = max(M.HOST_GAP.get(host, 0), time.time() + 60)
+                print(f"  429 from {host}: pausing it 60 s", flush=True)
                 continue
             if e.code in (404, 403, 410):
                 raise
@@ -86,8 +88,8 @@ def main():
     # two lanes so the slow Wikimedia pace never holds up the other hosts: one worker for Wikimedia, a.workers for everything else
     wm = [x for x in todo if urllib.parse.urlparse(x[1]).netloc.endswith(WM)]
     other = [x for x in todo if x not in set(wm)]
-    print(f"  lanes: {len(wm)} Wikimedia (1 worker, one request per {0.6}s), {len(other)} other ({a.workers} workers)", flush=True)
-    with ThreadPoolExecutor(1) as e1, ThreadPoolExecutor(a.workers) as e2:
+    print(f"  lanes: {len(wm)} Wikimedia (3 workers, one request per 0.33s), {len(other)} other ({a.workers} workers)", flush=True)
+    with ThreadPoolExecutor(3) as e1, ThreadPoolExecutor(a.workers) as e2:
         f1 = [e1.submit(one, x) for x in wm]
         f2 = [e2.submit(one, x) for x in other]
         for f in f1 + f2:

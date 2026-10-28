@@ -1,10 +1,10 @@
 {
  "v": 1,
- "n": 209476,
- "w": 368,
- "h": 570,
- "hash": "c397b07e",
- "built": "2026-10-27",
+ "n": 211888,
+ "w": 370,
+ "h": 573,
+ "hash": "a14b51d3",
+ "built": "2026-10-28",
  "model": "ViT-B-32 laion2b_s34b_b79k",
  "method": "CLIP + color + abstraction/scale axes -> UMAP(2-D) -> recursive median split onto an even grid -> neighbor-swap smoothing",
  "weights": {

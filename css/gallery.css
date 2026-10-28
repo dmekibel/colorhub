@@ -641,7 +641,7 @@ html:not(.desk) .rp-bar{padding-top:calc(var(--top) + 4px);padding-bottom:4px}
 /* hide on scroll down, back on scroll up (js/feed.js fdHideWire): transform only, so the grid never jumps; the safe-area band stays painted */
 html:not(.desk) .gl-page .art-top,html:not(.desk) .aw-page .art-top,html:not(.desk) .gl-page .fd-bar,html:not(.desk) .aw-page .fd-bar,html:not(.desk) .cp-page .fd-bar{transition:transform .24s cubic-bezier(.2,.7,.2,1)}
 html.fd-hid:not(.desk) .gl-page .art-top,html.fd-hid:not(.desk) .aw-page .art-top{transform:translateY(calc(-1 * var(--fd-ah,0px)))}
-html.fd-hid:not(.desk) .gl-page .fd-bar,html.fd-hid:not(.desk) .aw-page .fd-bar,html.fd-hid:not(.desk) .cp-page .fd-bar{transform:translateY(calc(-1 * (var(--fd-ah,0px) + var(--fd-bh,0px))))}
+html.fd-hid:not(.desk) .gl-page .fd-bar.fd-stuck,html.fd-hid:not(.desk) .aw-page .fd-bar.fd-stuck,html.fd-hid:not(.desk) .cp-page .fd-bar.fd-stuck{transform:translateY(calc(-1 * (var(--fd-ah,0px) + var(--fd-bh,0px))))}
 html.fd-hid:not(.desk) .rp-bar.on{transform:translate(-50%,-100%)}
 html:not(.desk) .rp-bar{transition:transform .24s cubic-bezier(.2,.7,.2,1)}
 html.fd-hid:not(.desk)::before{content:"";position:fixed;left:0;right:0;top:0;height:var(--top);background:var(--fd-band,var(--ground));z-index:41;pointer-events:none}
