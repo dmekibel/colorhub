@@ -104,3 +104,7 @@
 .sq-dym{margin:0 4px 8px;font:400 16px/1.3 var(--sans);color:var(--soft)}
 .sq-dym-b{font:600 16px/1.3 var(--sans);color:var(--ink);text-decoration:underline;min-height:32px}
 .sq-loading{margin-top:8px}
+
+/* the sync code box (js/learn.js pasteProgressCode / copyProgressCode) */
+.pc-box{width:100%;box-sizing:border-box;margin:10px 0;padding:12px 14px;border-radius:12px;background:var(--surface-2);color:var(--ink);border:1px solid var(--rule-strong,var(--rule));font:15px/1.4 var(--mono,ui-monospace,monospace);resize:none;word-break:break-all}
+.pc-err{color:var(--warn,#e0907a);min-height:1.4em}

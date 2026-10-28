@@ -585,21 +585,58 @@ function mergeProgress(a, b) {
   fill(out, src);
   return out;
 }
+// the one place a decoded save is folded into this device's, whether it came from a file or a pasted code
+function mergeProgressIn(d) {
+  const before = Object.keys(S.cards || {}).length;
+  try { localStorage.setItem(KEY + "-before-merge", JSON.stringify(S)); } catch (e) {}   // one step back: the save as it was before this merge
+  S = migrateState(mergeProgress(S, d)); pickMigrate(S); save();
+  const added = Object.keys(S.cards).length - before;
+  go("learn");
+  toast(added > 0 ? `Merged: ${added} more color${added === 1 ? "" : "s"} on this device` : "Merged: this device already had everything in that backup");
+}
 function mergeProgressFile() {
   const inp = document.createElement("input"); inp.type = "file"; inp.accept = "application/json,.json";
   inp.onchange = () => {
     const f = inp.files[0]; if (!f) return;
     f.text().then(t => {
       let d; try { d = migrateState(JSON.parse(t)); if (!d || !d.cards) throw 0; } catch (e) { toast("That file isn't a Chromatlas backup"); return; }
-      const before = Object.keys(S.cards || {}).length;
-      try { localStorage.setItem(KEY + "-before-merge", JSON.stringify(S)); } catch (e) {}   // one step back: the save as it was before this merge
-      S = migrateState(mergeProgress(S, d)); pickMigrate(S); save();
-      const added = Object.keys(S.cards).length - before;
-      toast(added > 0 ? `Merged: ${added} more color${added === 1 ? "" : "s"} on this device` : "Merged: this device already had everything in that backup");
-      go("learn");
+      mergeProgressIn(d);
     });
   };
   inp.click();
+}
+// ---------- a code instead of a file: copy on one device, paste on the other (David, 2026-10-28: "just paste in a code") ----------
+// "CH1z." + gzip + base64 where the browser can compress (every current phone), else "CH1." + base64 of the plain text. Paste it into Messages, Notes or anywhere.
+const b64 = u8 => { let s = ""; for (let i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000)); return btoa(s); };
+const unb64 = t => Uint8Array.from(atob(t), c => c.charCodeAt(0));
+const pipeBytes = async (u8, stream) => new Uint8Array(await new Response(new Blob([u8]).stream().pipeThrough(stream)).arrayBuffer());
+async function progressCode() {
+  const raw = new TextEncoder().encode(JSON.stringify(S));
+  try { if (typeof CompressionStream === "function") return "CH1z." + b64(await pipeBytes(raw, new CompressionStream("gzip"))); } catch (e) {}
+  return "CH1." + b64(raw);
+}
+async function progressFromCode(text) {
+  const t = String(text || "").replace(/\s+/g, ""), z = t.startsWith("CH1z."), p = z ? 5 : t.startsWith("CH1.") ? 4 : 0;
+  if (!p) throw new Error("not a code");
+  let u8 = unb64(t.slice(p)); if (z) u8 = await pipeBytes(u8, new DecompressionStream("gzip"));
+  const d = migrateState(JSON.parse(new TextDecoder().decode(u8))); if (!d || !d.cards) throw new Error("not a save"); return d;
+}
+async function copyProgressCode() {
+  const code = await progressCode();
+  try { await navigator.clipboard.writeText(code); toast("Code copied. Paste it on your other device."); return; } catch (e) {}
+  const { sh } = sheet(`<h3>Your code</h3><p class="fine">Select it all, copy it, and paste it on your other device.</p><textarea class="pc-box" readonly rows="6" aria-label="Your code">${code}</textarea>`);
+  const ta = sh.querySelector("textarea"); ta.focus(); ta.select();
+}
+function pasteProgressCode() {
+  const { sh, close } = sheet(`<h3>Paste a code</h3><p class="fine">Copy a code on your other device (Settings, Your progress), then paste it here. Nothing on this device is lost.</p>
+    <textarea class="pc-box" rows="5" placeholder="CH1z.…" aria-label="Code from your other device" data-pc></textarea>
+    <p class="fine pc-err" data-pcerr role="status"></p>
+    <button class="btn" data-pcgo>Merge ${ICON.arrow}</button>`);
+  const ta = sh.querySelector("[data-pc]"), err = sh.querySelector("[data-pcerr]");
+  const go1 = async () => { try { const d = await progressFromCode(ta.value); close(); mergeProgressIn(d); } catch (e) { err.textContent = "That isn't a Chromatlas code. Copy the whole code and try again."; } };
+  sh.querySelector("[data-pcgo]").onclick = go1;
+  ta.addEventListener("paste", () => setTimeout(() => { if (/^\s*CH1z?\./.test(ta.value)) go1(); }, 0));   // a pasted code goes straight in
+  ta.focus();
 }
 
 // "Put it on your Home Screen": shown once you've finished a unit, until it's installed; "Not now" waits 30 days.

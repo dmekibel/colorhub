@@ -65,7 +65,9 @@ function ymSettingsHTML() {
   + mnGroup("Your progress", [
     { k: "backup", lead: YM_I.down, label: "Back up your progress", value: last ? `Last ${esc(last)}` : "Never" },
     { k: "restore", lead: YM_I.up, label: "Restore a backup", sub: "Replaces what is on this device" },
-    { k: "merge", lead: YM_I.up, label: "Merge a backup", sub: "Adds a backup from another device to this one" },
+    { k: "codecopy", lead: YM_I.down, label: "Copy a code", sub: "Paste it on your other device" },
+    { k: "codepaste", lead: YM_I.up, label: "Paste a code", sub: "Adds your other device's progress to this one" },
+    { k: "merge", lead: YM_I.up, label: "Merge a backup file", sub: "The same, from a file" },
     { k: "place", lead: YM_I.path, label: "Retake the placement test" }])
   + mnGroup("", [{ k: "about", lead: YM_I.book, label: "About the colors" }])
   + mnGroup("", [{ k: "reset", lead: YM_I.trash, label: "Reset all progress", danger: true }]);
@@ -84,11 +86,13 @@ function ymWireSettings(root, back, close = () => {}) {
         .then(yes => { if (!yes) return; close(); S = fresh(); save(); welcome(); });
     }
     if (k === "you") { close(); return youPage(); }
+    if (k === "codecopy") { copyProgressCode(); return; }
     if (k === "samplesize") { if (typeof eydSizeSheet === "function") eydSizeSheet(); return; }
     close();
     if (k === "profile") profileSetup(back);
     if (k === "restore") restoreProgress();
     if (k === "merge") mergeProgressFile();
+    if (k === "codepaste") pasteProgressCode();
     if (k === "place") how();
     if (k === "about") about();
   });
