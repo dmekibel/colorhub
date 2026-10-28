@@ -45,7 +45,10 @@ function deskCrumbs() {
   if (!scr || scr.querySelector(".dk-crumbs") || !scr.dataset.tl || typeof XSTACK === "undefined" || !XSTACK.length || typeof tlMetaFor !== "function") return;
   const esc2 = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   const last = XSTACK.length - 1, parts = [`<button type="button" data-dkc="o">${esc2(typeof tlOriginName === "function" ? tlOriginName() : "Explore")}</button>`];
+  // a long trail keeps where it started, one "…" and the last two steps; the whole trail is still a long-press on ‹ (js/trail.js tlSheet)
+  const skipFrom = last > 2 ? 0 : -1, skipTo = last - 2;
   XSTACK.forEach((tok, i) => {
+    if (i >= skipFrom && i < skipTo && skipFrom >= 0) { if (i === skipFrom) parts.push(`<button type="button" data-dkc="${skipTo - 1}" aria-label="Earlier steps">…</button>`); return; }
     const t = (tlMetaFor(tok) || {}).title || "Page";
     parts.push(i === last ? `<span aria-current="page">${esc2(t)}</span>` : `<button type="button" data-dkc="${i}">${esc2(t)}</button>`);
   });

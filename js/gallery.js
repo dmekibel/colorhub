@@ -1624,7 +1624,7 @@ function glPage(i, d, fromHex, tol) {
     <section class="srcs"><h3>Image and data</h3><ul><li>${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? ` · ${esc(src.credit)}` : ""}</li><li>Palette and color names computed by Chromatlas from the museum's image</li></ul></section>
     <details class="gl-quiz-fold"><summary>Test yourself</summary><div class="gl-quiz" data-glquiz></div></details>
     </div></section></div></div>
-  `, "article gl-page");
+  `, "article gl-page" + (ar >= 0.667 ? " gl-side" : ""));
   wirePaintingShare(el, d.t + (d.a ? " by " + d.a : ""), "gallery/" + i);
   // David, 2026-10-26: on a phone the heart sits at the picture's top-left corner (the bar's heart stays for the code that finds it, and is hidden there);
   // the corner heart passes its tap to the bar's and mirrors its on/off
