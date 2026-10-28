@@ -5427,7 +5427,7 @@ scenario("paintings", "Look closer's Select tool: tap adds a point, opens the se
   // place js/segment.js checks window.__segStub runs later still, from a click, so the timing is the same either way
   await t.open("#/gallery/12", { settle: 800 });
   t.ev("window.__segStub = true");
-  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { wait: 700 });
+  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { force: true, wait: 700 });
   const selectBtn = await t.waitFor('[data-glzv="select"]:not([hidden])', 8000, "the Select tool (segProbe resolving under the stub)");
   t.expect(!selectBtn.disabled, "Select came back disabled even under the stub (segProbe should always resolve true there)");
   await t.click(selectBtn, { force: true, wait: 400 });
@@ -5480,7 +5480,7 @@ scenario("paintings", "Look closer's Select tool: tap adds a point, opens the se
 scenario("paintings", "Look closer's Select tool: an init failure surfaces an honest message + Details, never an endless spinner", async t => {
   await t.open("#/gallery/12", { settle: 800 });
   t.ev('window.__segStub = true; window.__segStubFail = "stub: simulated init failure (missing ort-wasm-simd-threaded.mjs)";');
-  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { wait: 700 });
+  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { force: true, wait: 700 });
   const selectBtn = await t.waitFor('[data-glzv="select"]:not([hidden])', 8000, "the Select tool (segProbe resolving under the stub)");
   await t.click(selectBtn, { force: true, wait: 400 });
   const hint = await t.waitFor("[data-glzselhint]:not([hidden])", 8000, "an honest hint after the forced init failure (found an endless spinner instead)");
@@ -5505,7 +5505,7 @@ scenario("paintings", "Look closer's Select tool: an init failure surfaces an ho
 // NaN/Infinity through or skipped a clamp.
 scenario("paintings", "Look closer: random gesture fuzz (pinch/pan/lost fingers) never zooms below fit or sends the image off-screen", async t => {
   await t.open("#/gallery/12", { settle: 800 });
-  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { wait: 700 });
+  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { force: true, wait: 700 });
   await t.waitFor(".glz-scrim.in", 4000, "the Look closer overlay");
   const result = t.ev(`(() => {
     const scrim = document.querySelector(".glz-scrim"), stage = document.querySelector(".glz-stage");
@@ -5588,7 +5588,7 @@ scenario("paintings", "Look closer on a painting then swiping back (popstate) ne
     await t.click("[data-pt-rail] [data-gi]", { wait: 800 });
     await t.waitFor(".gl-page", 12000, "the painting page");
     await t.waitFor("[data-glcloser]", 8000, "the Look closer button");
-    await t.click("[data-glcloser]", { wait: 500 });
+    await t.click("[data-glcloser]", { force: true, wait: 500 });
     t.expect(t.$(".glz-scrim"), "Look closer didn't open its scrim");
   };
   // the opaque scrim covers the painting page's own ‹, so a real finger has only one way back while it's up: the
@@ -6837,7 +6837,9 @@ scenario("paintings", "a plain tap on the painting opens Look closer, not the co
   t.expect(!t.$("[data-glpickbtn]").classList.contains("on"), "the eyedropper starts armed");
   const r = img.getBoundingClientRect(), w = t.w;
   img.dispatchEvent(new w.MouseEvent("click", { bubbles: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 }));
-  await t.waitFor(".glz-scrim.in", 4000, "Look closer after a plain tap on the painting");
+  await t.waitFor(".gl-tray.in", 4000, "the tools tray after a plain tap on the painting");   // 2026-10-28: a tap shows the picture's tools; the viewer is its first button
+  await t.click(await t.waitFor('[data-gltool="closer"]', 2000, "the Look closer tool"), { force: true, wait: 400 });
+  await t.waitFor(".glz-scrim.in", 4000, "Look closer from the tray");
   t.expect(!t.$(".eyd-loupe"), "the eyedrop loupe showed from a plain tap");
   t.expect(!t.$(".gcr-sheet, .sw-sheet"), "a color readout opened from a plain tap");
   t.expect(!t.$(".iso"), "the guessing game opened from a plain tap");
@@ -6867,7 +6869,7 @@ scenario("paintings", "an unreadable painting's Pick controls give an honest mes
   await t.click(btn, { force: true, wait: 300 });
   await t.waitFor(() => /can.t be read/i.test(t.text(".toast")), 3000, "an honest toast explaining why Pick can't work here");
   t.expect(!btn.classList.contains("on"), "the Pick button armed anyway, with nothing to actually sample");
-  await t.click(await t.waitFor("[data-glcloser]", 8000, "the Look closer button"), { wait: 500 });
+  await t.click(await t.waitFor("[data-glcloser]", 8000, "the Look closer button"), { force: true, wait: 500 });
   await t.waitFor(".glz-scrim.in", 4000, "Look closer");
   await t.click(await t.waitFor('[data-glzv="pick"]', 4000, "Look closer's Pick tool"), { force: true, wait: 300 });
   await t.waitFor(() => /can.t be read/i.test(t.text(".toast")), 3000, "Look closer's Pick tool also explains itself instead of a dead drag");

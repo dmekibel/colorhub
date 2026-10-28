@@ -721,10 +721,34 @@ html:not(.desk) .gl-id .p-title{margin-top:0}
 html:not(.desk) .gl-id .p-dek{margin-top:0;line-height:1.3}
 html:not(.desk) .gl-id-src{margin-top:2px}
 html:not(.desk) .gl-why{margin-top:6px}
-html:not(.desk) .gl-page .art-top>[data-fva]{display:grid;position:absolute;left:0;top:0;width:44px;height:44px;opacity:0;pointer-events:none}
+html.desk .gl-page .art-top>[data-fva],html:not(.desk) .gl-page .art-top>[data-fva]{display:grid;position:absolute;left:0;top:0;width:44px;height:44px;opacity:0;pointer-events:none}
 .gl-corner-heart.rest{opacity:0;transition:opacity .6s ease}
 .gl-corner-heart.rest:focus-visible{opacity:1}
 /* the share button sits at the top right of the title block (title, painter), over the dark ground; the text keeps clear of it */
 .gl-id,.p-id{position:relative}
 .gl-id>[data-pshare],.p-id>[data-pshare]{position:absolute;top:0;right:0;z-index:2}
 .gl-id:has(>[data-pshare]) :is(.p-title,.p-dek,.p-type),.p-id:has(>[data-pshare]) :is(.p-title,.p-dek,.p-type){padding-right:52px}
+
+/* The title row (David, 2026-10-28): heart far left at one fixed x, share far right, the title between; nothing sits on the picture. */
+.gl-id.gl-has-heart>.gl-trow-heart{position:absolute;top:0;left:0;z-index:2;width:44px;height:44px;border-radius:50%;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;color:var(--ink);opacity:1}
+.gl-id.gl-has-heart>.gl-trow-heart.on{color:#E8787A}
+.gl-id.gl-has-heart>.gl-trow-heart svg{width:24px;height:24px}
+.gl-id.gl-has-heart :is(.p-title,.p-dek,.p-type){padding-left:52px}
+html.desk .gl-page .art-top>[data-fva]{display:grid;position:absolute;left:0;top:0;width:44px;height:44px;opacity:0;pointer-events:none}
+/* the picture's tools: a tray over the bottom of the picture, shown by a tap on it; five buttons that wrap */
+.gl-tray{position:absolute;left:0;right:0;bottom:0;z-index:5;display:flex;flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;gap:8px;padding:28px 10px 12px;background:linear-gradient(rgba(14,13,11,0),rgba(14,13,11,.88) 40%);opacity:0;transform:translateY(8px);transition:opacity .2s var(--ease),transform .2s var(--ease)}
+.gl-tray.in{opacity:1;transform:none}
+.gl-tray::-webkit-scrollbar{display:none}
+.gl-tool{flex:none;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;background:rgba(14,13,11,.82);border:1px solid rgba(236,232,223,.22);color:#ECE8DF;font:500 15px/1 var(--sans);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.gl-tool svg{width:18px;height:18px;flex:none}
+.gl-toolhint{margin:8px 0 0;padding:0 16px;text-align:center;font:italic 400 15px/1.3 var(--serif);color:var(--soft)}
+/* the pills that sat on the picture on a phone are the tray now */
+html:not(.desk) .gl-hero .gl-closer{display:none}
+/* Go: where to next, under the title */
+.gl-go{display:flex;flex-direction:column;margin:14px 0 4px;border-top:1px solid var(--rule)}
+.gl-gorow{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:8px 2px;border-bottom:1px solid var(--rule);text-align:left;color:var(--ink)}
+.gl-gorow span{display:flex;flex-direction:column;gap:2px;min-width:0}
+.gl-gorow b{font:500 16px/1.2 var(--sans)}
+.gl-gorow small{font:400 14px/1.3 var(--sans);color:var(--soft)}
+.gl-gorow svg{flex:none;width:18px;height:18px;color:var(--soft)}
+.gl-gorow:active{background:var(--surface-2)}
