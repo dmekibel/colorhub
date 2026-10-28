@@ -269,12 +269,12 @@ html.desk .cp-page>.dk-crumbs,html.desk .cp-page>.art-top,html.desk .gl-page>.ar
 html.desk .gl-page>.art-top,html.desk .aw-page>.art-top{padding-top:14px}
 html.desk .cp-page>.dk-crumbs{margin:0;max-width:none}
 /* the hero band: the big color / the painting / the painter's work, once, at the top */
-html.desk .cp-page .cp-hero.cp-hero-full{order:-3;position:relative;inset:auto;width:auto;height:auto;min-height:clamp(340px,46vh,480px);margin:0;border-radius:0;z-index:auto;
-  padding:76px var(--dkg) 44px var(--dk-L)}
+html.desk .cp-page .cp-hero.cp-hero-full{order:-3;position:relative;inset:auto;width:auto;height:auto;min-height:clamp(260px,32vh,340px);margin:0;border-radius:0;z-index:auto;
+  padding:68px var(--dkg) 32px var(--dk-L)}
 html.desk .cp-page .cp-hero.cp-hero-full .cp-hero-foot{max-width:var(--dk-col);max-height:none;overflow:visible}
 html.desk .cp-page .cp-close{top:20px;left:var(--dkg)}
 html.desk .cp-page .tl-more-float{top:20px;left:calc(var(--dkg) + 56px);right:auto}
-html.desk .cp-page .cp-hero h1.rp-name{font-size:clamp(72px,9vw,132px)}
+html.desk .cp-page .cp-hero h1.rp-name{font-size:clamp(64px,7vw,104px)}
 html.desk .gl-page .gl-hero.gl-hero{order:-3;margin:0;padding:24px var(--dkg) 28px;background:color-mix(in srgb,var(--ground) 72%,#000);--hero-vh:min(64vh,680px)}
 html.desk .gl-page .gl-hero>span{max-width:100%}
 html.desk .gl-page .gl-closer{display:none}
