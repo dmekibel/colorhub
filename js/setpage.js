@@ -337,7 +337,7 @@ function spPage(hexes, o = {}) {
     ${pair ? `<div class="sp-pair" data-dbltap>${plate(hexes[0], hexes[1], 0)}${plate(hexes[1], hexes[0], 1)}${k < 8 ? `<button class="sp-pair-add" data-sp-add aria-label="Add a color">${sv('<path d="M12 5v14M5 12h14"/>', 20, 1.8)}</button>` : ""}${expandBtn}</div>`
       : `<div class="sp-views" role="group" aria-label="Preview">${views.map(([v, t]) => `<button data-view="${v}" aria-pressed="${v === view}" class="${v === view ? "on" : ""}">${v === "painting" ? `<span class="sp-vlong">On the painting</span><span class="sp-vshort">Painting</span>` : t}</button>`).join("")}</div>
          <div class="sp-vpane" data-vpane="strip"${view === "strip" ? "" : " hidden"}>
-           <div class="sp-strip" data-strip data-dbltap>${hexes.map((h, i) => `<button data-swatch="${h}" style="--c:${h};flex:1" aria-label="${esc(listNames[i].n)}"></button>`).join("")}${expandBtn}</div>
+           <div class="sp-strip" data-strip data-dbltap>${hexes.map((h, i) => `<button data-swatch="${h}" style="--c:${h};flex:1" aria-label="${esc(listNames[i].n)}"></button>`).join("")}</div>
            <p class="sp-strip-cap" data-stripcap>Equal shares. Press and drag a segment to reorder.</p>
          </div>
          <div class="sp-vpane" data-vpane="swatches"${view === "swatches" ? "" : " hidden"}>
@@ -360,6 +360,29 @@ function spPage(hexes, o = {}) {
     <p class="fine sp-fine">Paintings are measured pixel by pixel in the museums' own photographs of varnished paintings, so colors are as photographed and screen colors are approximate. A painting “holds” a color when something within 4% of it covers at least 1% of the canvas. “× chance” compares with the colors being scattered independently: a tendency in these photographs, not a rule of painting.</p>
   `, "article sp-page");
   el.querySelector("[data-back]").onclick = xBack;
+  // ---- the order of the page (David, 2026-10-28, design/plans/2026-10-28-ux-backlog.md section 1): big swatches; a row of tools under them (the magnifier is no longer
+  // on the swatches); keep / share / play; the colors; How they relate (folded); everything else folded into "More about this palette"; and last the endless paintings feed ----
+  {
+    const sw = el.querySelector(".sp-pair") || el.querySelector(".sp-views"), namesEl = el.querySelector("[data-names]"), actsEl = el.querySelector("[data-acts]"), leadEl = el.querySelector("[data-lead]");
+    const tools = document.createElement("div"); tools.className = "sp-toolrow";
+    tools.innerHTML = `<button type="button" class="sp-tool" data-sp-expand>${ICON.search}<span>View full screen</span></button>`;
+    const lastSw = pair ? sw : el.querySelector(".sp-views").parentNode.querySelector(".sp-vpane:last-of-type") || sw;
+    const anchor = pair ? sw : (namesEl || sw);
+    if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(tools, namesEl && !pair ? namesEl : anchor.nextSibling);
+    const relate = [...el.querySelectorAll("section.sp-sec")].find(x => /How they (relate|work together)/.test(x.querySelector("h3") ? x.querySelector("h3").textContent : ""));
+    const more = document.createElement("details"); more.className = "sp-more-d"; more.innerHTML = `<summary>More about this palette</summary>`;
+    const feedSec = document.createElement("section"); feedSec.className = "sp-sec sp-feedsec"; feedSec.innerHTML = `<h3>Paintings with these colors</h3><p class="fine">Closest first, then looser, without end.</p><div data-feedhost></div>`;
+    const fine = el.querySelector(".sp-fine");
+    if (actsEl && actsEl.parentNode) { /* keep / share / play sit right after the colors: move the lead line below them */ }
+    if (namesEl && actsEl) namesEl.insertAdjacentElement("afterend", actsEl);
+    if (relate) { const d = document.createElement("details"); d.className = "sp-relate-d"; const h = relate.querySelector("h3"); d.innerHTML = `<summary>${h ? h.textContent : "How they relate"}</summary>`; [...relate.children].forEach(c => { if (c !== h) d.appendChild(c); }); relate.replaceChildren(d); (actsEl || namesEl || sw).insertAdjacentElement("afterend", relate); }
+    const rest = ["[data-ptg]", "[data-pairs]", "[data-design]", "[data-looks]", "[data-complete]", "[data-improve]"].map(q => el.querySelector(q)).filter(Boolean);
+    rest.forEach(n => more.appendChild(n));
+    if (leadEl) more.insertBefore(leadEl, more.firstChild.nextSibling);
+    (relate || actsEl || namesEl || sw).insertAdjacentElement("afterend", more);
+    more.insertAdjacentElement("afterend", feedSec);
+    if (fine) feedSec.insertAdjacentElement("afterend", fine);
+  }
   const expBtn = el.querySelector("[data-sp-expand]");
   if (expBtn) expBtn.onclick = e => { e.stopPropagation(); buzz(5); if (typeof colorFocus === "function") colorFocus(hexes.map((h, i) => ({ name: names[i], hex: h }))); };
   el.addEventListener("swatch-dbltap", e => {
@@ -397,7 +420,7 @@ function spPage(hexes, o = {}) {
   // The surface action row (design/SIMPLIFY/PLAN.md §3.6: "Set / pair: Learn · ♡ Keep · Share"). "On the map"
   // moves to ⋯ (below); "Add a color" is now the "+" swatch at the end of the strip/names list, not a 4th
   // button here -- the pair's 2-column grid has no room for a "+" cell, so it stays reachable from ⋯ there.
-  const acts = typeof csActions === "function" ? csActions(set, { only: ["learn", "keep", "share"] }) : document.createElement("div");
+  const acts = typeof csActions === "function" ? csActions(set, { only: ["keep", "share", "play", "learn"] }) : document.createElement("div");
   $("[data-acts]").replaceChildren(acts);
   // ⋯ › Edit (PLAN §3.6: "The per-row drag and remove handles → ⋯ › Edit"): off by default (css/sets.css
   // .sp-page:not(.sp-editing) hides .sp-handle/.sp-drop/.sp-drop-plate), nothing else about drag-to-reorder or
@@ -409,7 +432,7 @@ function spPage(hexes, o = {}) {
       // "Add a color" lives as the "+" swatch on the surface now (the plates/strip above) -- not repeated
       // here too (PLAN §3.7 rule 7: no duplicate path on the same screen).
       ...(k >= 2 ? [{ t: spEditing ? "Done editing" : "Edit colors", n: pair ? "Remove either color" : "Reorder or remove a color", run: () => { setEditing(!spEditing); if (!pair) { const nb = $("[data-names]") || $(".sp-names"); if (nb) nb.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" }); } toast(spEditing ? "Drag a handle to reorder, or tap × to remove. ⋯ · Done editing when finished." : "Done"); } }] : []),
-      { t: "See it in paintings", run: () => { const sec = $("[data-ptg]"); if (sec) sec.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" }); } },
+      { t: "See it in paintings", run: () => { const sec = $("[data-feedhost]"); if (sec) sec.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" }); } },
       { t: "On the map", run: () => { const s = set(); if (typeof openPaletteHive === "function") openPaletteHive({ title: s.title, colors: s.colors, source: s.kind }); else if (typeof csOnMap === "function") csOnMap(s); } },
     ] },
   ]);
@@ -461,10 +484,10 @@ function spPage(hexes, o = {}) {
         $("[data-stripcap]").textContent = `At the proportions painters used: the average share of each in the ${src.length} ${n >= SP_MIN_N ? "paintings that hold all of them" : "closest paintings"}, as photographed.`;
       }
     }
-    box.innerHTML = `<h3>Together in paintings</h3>${body}<div class="sp-match" data-match></div>`;
+    box.innerHTML = `<h3>Together in paintings</h3>${body}`;
     box.querySelectorAll("[data-rail2]").forEach(glFill);
     box._res = res;
-    if (typeof spMountMatch === "function") spMountMatch($("[data-match]"), q, names, pair, () => live());
+    spMountFeed($("[data-feedhost]"), q, names, pair, () => live());
     // the top painter, for "as they would"
     const P = st && st.painters[0];
     if (P && P.hit >= 4) { if (!PT_PAINTERS) PT_PAINTERS = fetch("data/colorindex/painters.json").then(r => r.ok ? r.json() : {}).catch(() => ({})); const all = await PT_PAINTERS; const pp = all && all[P.label]; if (pp && pp.c && pp.c.length) { ctx.painter = { name: P.label, n: pp.n, cols: pp.c }; if (live()) improve(); } }
@@ -680,6 +703,51 @@ function spPage(hexes, o = {}) {
 // so this is the same control the rest of the app already uses, not a second vocabulary. Also used wherever a
 // set/palette shows its paintings — pairs and trios always need every color; a palette of 4+ gets the third slider.
 const spCloseWord = de => de < 1 ? "near-exact" : de <= 4 ? "close" : de <= 8 ? "loose" : "very loose";
+// The endless paintings feed (David, 2026-10-28): the paintings that hold every one of the colors, tightest first; when those run out the measure loosens
+// (closeness, then how much of the canvas, then holding all but one of the colors ...) with one thin "Looser matches" line where it does, and the list goes
+// on. It never shows a "nothing this close" state: it just keeps loosening until the archive is used up. Uses the same index as the old browse (paintingsWith).
+function spFeedSteps(m) {
+  const steps = [{ tol: CI_STD.tol, minCover: CI_STD.minCover, atLeast: m, say: "" }, { tol: 8, minCover: .5, atLeast: m, say: "Looser matches" }, { tol: PT_TOL[PT_TOL.length - 1], minCover: PT_MIN[0], atLeast: m, say: "Looser matches" }];
+  for (let a = m - 1; m >= 3 && a >= 2; a--) steps.push({ tol: PT_TOL[PT_TOL.length - 1], minCover: PT_MIN[0], atLeast: a, say: `Looser matches: ${a} of the ${m} colors` });
+  return steps;
+}
+function spMountFeed(host, q, names, pair, isLive) {
+  if (!host) return;
+  const m = q.length, steps = spFeedSteps(m), seen = new Set(), PAGE = 24;
+  let si = 0, queue = [], busy = false, done = false, shown = 0, io = null;
+  const live = () => (typeof isLive !== "function" || isLive()) && host.isConnected;
+  host.innerHTML = `<div class="sp-fgrid" data-fg></div><p class="fine sp-fend" data-fe role="status">Looking through the paintings…</p>`;
+  const grid = host.querySelector("[data-fg]"), end = host.querySelector("[data-fe]");
+  async function refill() {
+    while (!queue.length && si < steps.length) {
+      const s = steps[si++];
+      const res = await paintingsWith(q, { ...CI_STD, tol: s.tol, minCover: s.minCover, mode: s.atLeast < m ? "atleast" : "all", atLeast: s.atLeast, sort: "close", source: "paintings" }).catch(() => null);
+      if (!live()) return;
+      const rows = ((res && res.rows) || []).filter(r => !seen.has(r.i));
+      if (!rows.length) continue;
+      rows.forEach(r => seen.add(r.i));
+      if (shown + queue.length > 0 && s.say) queue.push({ say: s.say });
+      queue.push(...rows);
+    }
+    if (!queue.length) done = true;
+  }
+  const dots = r => m < 4 ? "" : `<span class="sp-dots">${q.map((h, j) => `<i class="sp-dot${r.covers && r.covers[j] >= CI_STD.minCover ? " on" : ""}" style="--c:${h}"></i>`).join("")}</span>`;
+  async function more() {
+    if (busy || done || !live()) return;
+    busy = true;
+    try { await refill(); } catch (e) { done = true; }
+    if (!live()) return;
+    const batch = queue.splice(0, PAGE); let html = "";
+    batch.forEach(r => { if (r.say) html += `<p class="sp-loose" role="separator">${esc(r.say)}</p>`; else { shown++; html += `<div class="sp-mtile">${glPinHTML(r.i, { badge: `${spCloseWord(r.de)} · ${ptPct(r.cover)} of the canvas` })}${dots(r)}</div>`; } });
+    if (html) { const t = document.createElement("div"); t.innerHTML = html; const kids = [...t.children]; kids.forEach(k => grid.appendChild(k)); glFill(grid); }
+    busy = false;
+    if (done && !queue.length) { end.textContent = shown ? "That is every painting in the archive that holds even a few of these colors." : "No painting in the archive holds these colors yet."; if (io) io.disconnect(); }
+    else { end.textContent = ""; if (io && !queue.length) { io.unobserve(end); io.observe(end); } }
+  }
+  if (typeof IntersectionObserver === "function") { io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)) more(); }, { rootMargin: "900px 0px" }); io.observe(end); }
+  else more();
+  more();
+}
 function spMountMatch(host, q, names, pair, isLive) {
   if (!host) return;
   const m = q.length;

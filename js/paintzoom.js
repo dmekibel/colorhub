@@ -828,6 +828,7 @@ function glZoomOpen(opts) {
   if (opts.startTool === "where" && opts.pix) setMode("where");
   else if (opts.startTool === "select" && opts.src) setMode("select");
   else if (opts.startTool === "pick" && typeof eydSource === "function") setMode("pick");
+  else if (opts.startTool === "value" || opts.startTool === "squint") setMode(opts.startTool);
   // a QA accessor for the gesture fuzz test (tools/smoke/scenarios.js), the same pattern js/honey.js exposes
   // via HM_CTRL._qaState -- the raw camera state plus the bounds it should always be within, so the test can
   // assert on the gesture machinery itself rather than reading rendered pixels back out of a transform string

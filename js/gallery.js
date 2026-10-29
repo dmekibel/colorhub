@@ -1575,6 +1575,7 @@ function glPage(i, d, fromHex, tol) {
     <p class="p-dek">${d.a ? `<button class="aw-link" data-awpainter="${esc(routeSlug(d.a))}">${esc(d.a)}</button>` : "Artist unknown"}${glDesk() ? [d.co, d.mv].filter(Boolean).map(x => ` · ${esc(x)}`).join("") : yr ? ` · ${esc(yr)}` : ""}</p>
     <p class="gl-id-src">${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? `<span class="gl-dk-credit"> · ${esc(src.credit)}</span>` : ""}</p>
     ${glEstNote(i) ? `<p class="gl-est-note">${esc(glEstNote(i))}</p>` : ""}
+    <div class="gl-go" data-glgo hidden></div>
     <div class="gl-dk-acts"><button class="gl-dk-btn" data-dkpick hidden aria-pressed="false">${icon("pipette", 18)}<span>Pick a color</span></button><button class="gl-dk-btn" data-dkcloser>${ICON.search}<span>Look closer</span></button></div>
     ${(() => { /* desktop: the map's card chips live here now (a click on the map opens this page directly) */
       // the same three presets the map's card offers (js/paintmap.js pmPresetsOf), each opening the map on THIS painting (on=)
@@ -1626,19 +1627,17 @@ function glPage(i, d, fromHex, tol) {
     </div></section></div></div>
   `, "article gl-page" + (ar >= 0.667 ? " gl-side" : ""));
   wirePaintingShare(el, d.t + (d.a ? " by " + d.a : ""), "gallery/" + i);
-  // David, 2026-10-26: on a phone the heart sits at the picture's top-left corner (the bar's heart stays for the code that finds it, and is hidden there);
-  // the corner heart passes its tap to the bar's and mirrors its on/off
-  if (!document.documentElement.classList.contains("desk")) {
-    const bh = el.querySelector(".art-top [data-fva]"), hs = el.querySelector(".gl-hero>span");
-    if (bh && hs) {
-      const ch = document.createElement("button"); ch.type = "button"; ch.className = "gl-corner-heart"; ch.setAttribute("data-glch", "");
-      let rest = 0;
-      const quiet = () => { clearTimeout(rest); if (bh.classList.contains("on")) rest = setTimeout(() => ch.classList.add("rest"), 1400); else ch.classList.remove("rest"); };   // liked: the heart goes quiet, it does not float on the picture forever
-      hs.addEventListener("pointerdown", () => { ch.classList.remove("rest"); quiet(); });
-      const sync = () => { ch.innerHTML = bh.innerHTML; ch.classList.toggle("on", bh.classList.contains("on")); quiet(); ch.setAttribute("aria-pressed", bh.getAttribute("aria-pressed") || "false"); ch.setAttribute("aria-label", bh.getAttribute("aria-label") || "Keep this painting"); };
+  // David, 2026-10-28: the heart sits far left of the title row at one fixed x (never on the picture), share far right. The bar's heart stays in the DOM, hidden,
+  // for the code that finds it (js/favs.js fvArtWire); this one passes its tap to it and mirrors its on/off.
+  {
+    const bh = el.querySelector(".art-top [data-fva]"), idBox = el.querySelector(".gl-id");
+    if (bh && idBox) {
+      const ch = document.createElement("button"); ch.type = "button"; ch.className = "gl-corner-heart gl-trow-heart"; ch.setAttribute("data-glch", "");
+      const sync = () => { ch.innerHTML = bh.innerHTML; ch.classList.toggle("on", bh.classList.contains("on")); ch.setAttribute("aria-pressed", bh.getAttribute("aria-pressed") || "false"); ch.setAttribute("aria-label", bh.getAttribute("aria-label") || "Keep this painting"); };
       sync(); ch.onclick = e => { e.stopPropagation(); bh.click(); };
       new MutationObserver(sync).observe(bh, { attributes: true, childList: true, subtree: true });
-      hs.appendChild(ch);
+      idBox.appendChild(ch);
+      idBox.classList.add("gl-has-heart");
     }
   }
   const route = "#/gallery/" + i, heroSpan = el.querySelector(".gl-hero > span");
@@ -1714,7 +1713,7 @@ function glPage(i, d, fromHex, tol) {
     // press a swatch adds it to your set", since that's the same gesture slot) and an explicit row action in
     // the expanded list (the [data-locate] glyph there, the one nested-control exemption js/swatch.js's capture
     // delegate already recognizes, same as the old strip glyph did).
-    stripH.innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}${locate && locate.j === j ? " loc" : ""}" data-glj="${j}" data-swatch="${p.h}" style="--c:${p.h};flex:${eqW ? 1 : (Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.pick || eqW ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
+    stripH.innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}${locate && locate.j === j ? " loc" : ""}" data-glj="${j}" data-hex="${p.h}" style="--c:${p.h};flex:${eqW ? 1 : (Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.pick || eqW ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
     rowsH.innerHTML = pal.map((p, j) => {
       const nm = glName(p.h), fam = !nm.sub && !p.out && typeof familyOf === "function" && familyOf(p.h);
       const sub = [p.out ? "Stands out" : nm.sub ? nm.sub.charAt(0).toUpperCase() + nm.sub.slice(1) : fam ? fam.head.n + " family" : "", p.pick ? "Picked" : eqW ? "" : glPctTxt(p.share)].filter(Boolean).join(" · ");
@@ -2100,19 +2099,24 @@ function glPage(i, d, fromHex, tol) {
   // the 3 actions or the picture's own Pick a color / Look closer. Registered once per draw (moreRegister keys
   // by ctx, so a re-register on the same painting just replaces the closures with ones that see this draw's d/i).
   if (d.a && typeof ooWithIndex === "function") ooWithIndex();
-  if (typeof moreRegister === "function") moreRegister("gallery", () => bareMore([
-    { title: "Look", items: [
-      { t: "Where each color sits", n: "Opens Look closer", run: () => glZoomOpen({ ...glZoomOpts(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "where", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
-      { t: "Value and squint", n: "See the light structure, or the big shapes", run: () => openLookCloser() },
-      { t: "Select an object", n: "Tap the thing you want", run: () => glZoomOpen({ ...glZoomOpts(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "select", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
-    ] },
-    { title: "Go", items: [
-      ...(d.rec ? [{ t: "Full size at the museum", n: src.name, run: () => window.open(d.rec, "_blank", "noopener") }] : []),
-      ...(typeof playSet === "function" ? [{ t: "Play with these colors", run: () => csPlay(glSet, { back: () => galleryPage(i, false) }) }] : []),
-      ...(d.a && typeof ooWithItem === "function" ? ooWithItem("painter", d.a, { first: i }) : []),   // js/games/oo-with.js: this painting first, then their others
-      { t: "Keep this palette", n: "Separately from the painting itself", run: () => csPalette(glSet) },
-    ] },
-  ]));
+  // David, 2026-10-28: the three-dots menu is emptied. The Look tools are the tray on the picture (tap it); "Go" is the rows under the title; Keep this palette
+  // is one of those rows too. What is left is the default: Search and Profile and settings.
+  const goRows = [
+    ...(d.rec ? [{ t: "Full size at the museum", n: src.name, run: () => window.open(d.rec, "_blank", "noopener") }] : []),
+    ...(typeof playSet === "function" ? [{ t: "Play with these colors", n: "A quick game on this palette", run: () => csPlay(glSet, { back: () => galleryPage(i, false) }) }] : []),
+    ...(d.a ? [{ t: "This painter's other works", n: d.a, painter: routeSlug(d.a) }] : []),
+    { t: "Keep this palette", n: "Separately from the painting itself", run: () => csPalette(glSet) },
+  ];
+  {
+    const box = el.querySelector("[data-glgo]");
+    if (box) {
+      box.innerHTML = goRows.map((r, k) => `<button type="button" class="gl-gorow"${r.painter ? ` data-awpainter="${esc(r.painter)}"` : ""} data-gogo="${k}"><span><b>${esc(r.t)}</b>${r.n ? `<small>${esc(r.n)}</small>` : ""}</span>${ICON.chev}</button>`).join("");
+      box.hidden = false;
+      box.addEventListener("click", e => { const b = e.target.closest("[data-gogo]"); if (!b) return; const r = goRows[+b.dataset.gogo]; if (r && r.run) { buzz(5); r.run(); } });
+      if (!glDesk()) { const un = el.querySelector("[data-gl-about] .gl-under"); if (un) un.parentNode.insertBefore(box, un); }   // phone: in the Overview right below the palette, so the palette stays beside the tabs
+    }
+  }
+  if (typeof moreRegister === "function") moreRegister("gallery", () => []);
   if (typeof featureRegister === "function") {
     featureRegister("gl-pick", { t: "Pick a color", where: "A painting · on the picture", words: ["eyedropper", "sample", "pipette"], run: () => { if (canSample) openLookCloser("pick"); else toast("This museum's photo can't be read here, so colors can't be picked from it."); } });
     featureRegister("gl-where", { t: "Where a color sits on a painting", where: "A painting · ⋯ · Look", words: ["where", "locate", "highlight"], run: () => toast("Open a painting, then ⋯ · Where each color sits") });
@@ -2143,11 +2147,11 @@ function glPage(i, d, fromHex, tol) {
   stripEl.addEventListener("pointerdown", e => {
     const b = e.target.closest("[data-glj]"); if (!b || e.button > 0) return;
     if (locPress) clearTimeout(locPress.t);
-    const p = { x: e.clientX, y: e.clientY, j: +b.dataset.glj };
+    const p = { x: e.clientX, y: e.clientY, j: +b.dataset.glj, hex: b.dataset.hex };
     p.t = setTimeout(() => {
       if (locPress !== p) return;
       locPress = null; locJustHeld = performance.now();
-      buzz(6); toggleLocate(p.j);
+      buzz(6); if (typeof openTappedColor === "function") openTappedColor(p.hex);   // David, 2026-10-28: press and hold a swatch opens that color's page
     }, LOC_HOLD);
     locPress = p;
   });
@@ -2161,6 +2165,12 @@ function glPage(i, d, fromHex, tol) {
   };
   addEventListener("click", locSwallow, true);
   cleanup.push(() => removeEventListener("click", locSwallow, true));
+  // a tap on the strip opens the whole palette's page (David, 2026-10-28: tap the strip = the palette, hold a swatch = that color)
+  stripEl.addEventListener("click", e => {
+    if (!e.target.closest("[data-glj]") || typeof spPage !== "function") return;
+    const hexes = curPal().filter(p => p && p.h).map(p => p.h); if (hexes.length < 2) { const h = e.target.closest("[data-glj]").dataset.hex; if (h && typeof openTappedColor === "function") openTappedColor(h); return; }
+    buzz(5); spPage(hexes, { push: true, painting: { i, t: d.t } });
+  });
   el.querySelector(".gl-seg-row").onclick = e => {
     const b = e.target.closest("[data-glw]"); if (!b) return;
     const eq = b.dataset.glw === "eq"; if (eq === eqW) return;
@@ -2440,8 +2450,26 @@ function glPage(i, d, fromHex, tol) {
       const r = sampleImg.getBoundingClientRect();
       return openLookCloser(null, { fromRect: { left: r.left, top: r.top, width: r.width, height: r.height } });
     }
-    openLookCloser();
+    toolTray();   // a phone: a tap shows the picture's tools (David, 2026-10-28); Look closer is the first of them
   };
+  // The picture's tools, in a tray over the bottom of the picture (David, 2026-10-28): Look closer, Pick a color, Where each color sits, Select an object, Value and squint.
+  // A tap on the picture opens it, a tap on the picture again (or anywhere else) puts it away; a one-time line under the picture says it is there.
+  function toolTray(force) {
+    let tray = heroSpan.querySelector(".gl-tray");
+    if (tray && force !== true) { tray.classList.remove("in"); setTimeout(() => tray.remove(), 220); return; }
+    if (tray) return;
+    tray = document.createElement("div"); tray.className = "gl-tray"; tray.setAttribute("role", "toolbar"); tray.setAttribute("aria-label", "Tools for this picture");
+    const tools = [["closer", ICON.search, "Look closer", () => openLookCloser()],
+      ["pick", icon("pipette", 18), "Pick a color", () => { if (!canSample) { toast("This museum's photo can't be read here, so colors can't be picked from it."); return; } openLookCloser("pick"); }],
+      ["where", icon("colors", 18), "Where each color sits", () => { if (!lit.ok) { toast("This museum's photo can't be read here, so this can't be shown."); return; } openLookCloser("where"); }],
+      ["select", icon("grid", 18), "Select an object", () => openLookCloser("select")],
+      ["value", icon("look", 18), "Value and squint", () => openLookCloser("value")]];
+    tray.innerHTML = tools.map(([k, ic, t]) => `<button type="button" class="gl-tool" data-gltool="${k}">${ic}<span>${t}</span></button>`).join("");
+    tray.addEventListener("click", e => { const b = e.target.closest("[data-gltool]"); if (!b) return; e.stopPropagation(); const t = tools.find(x => x[0] === b.dataset.gltool); tray.remove(); if (t) { buzz(5); t[3](); } });
+    heroSpan.appendChild(tray); requestAnimationFrame(() => tray.classList.add("in")); buzz(3);
+    if (!S.glToolsHint) { S.glToolsHint = 1; save(); const h = el.querySelector("[data-gltoolshint]"); if (h) h.remove(); }
+  }
+  if (!glDesk() && !S.glToolsHint) { const band = heroSpan.closest(".gl-hero"); if (band) band.insertAdjacentHTML("afterend", `<p class="gl-toolhint" data-gltoolshint>Tap the picture for its tools</p>`); }
   // swipe the picture left/right to move to the next/previous painting by the same painter (trail-aware: a
   // normal galleryPage navigation, so Back works) — David's rebuild brief, 2026-10-09, point 7
   let swipeStart = null;
