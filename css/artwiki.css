@@ -352,7 +352,7 @@
 
 /* painter page v2 (2026-10-30) */
 .aw-hstrip{margin:0 0 4px}.aw-hstrip .aw-strip{border-radius:0}
-.aw-glance{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:8px;padding:14px 16px 4px}
+.aw-glance{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;padding:14px 0 4px}
 .aw-glance>div{background:var(--card,#1a1816);border-radius:14px;padding:12px 10px}
 .aw-glance b{display:block;font:500 22px/1.1 var(--serif,Georgia,serif)}
 .aw-glance span{display:block;font-size:13px;line-height:1.35;opacity:.78;margin-top:3px}

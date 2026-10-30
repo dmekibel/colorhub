@@ -249,6 +249,16 @@ function awPainterHexes(A, P) {
   return [...new Set([...(A.clusters || []).flatMap(c => c.colors.slice(0, 3)), ...(P.sig || []).map(r => awCol(r[0])[0])])].map(awHex).filter(h => h !== "#808080");
 }
 // ---- painter page v2 (David, 2026-10-30): a color strip and three facts under the hero, a painting a decade, the numbers in one drawer ----
+// A vivid, distinct strip from the painter's most famous paintings' own palettes (David, 2026-10-30: the strip was four muddy greys)
+function awVividStrip(slug, P, fallback) {
+  const rec = (AW.port && AW.port[slug]) || {}, ids = [...(rec.famous || []), P.typical].filter(g => g != null && g >= 0).slice(0, 10), cand = [];
+  ids.forEach(i => { for (let j = 0; j < 6; j++) { const h = glHex(i, j), l = lab(h), c = Math.hypot(l[1], l[2]); if (c >= 16 && l[0] > 18 && l[0] < 92) cand.push({ h, l, w: c * (0.5 + GAL.sh[i * 6 + j]) }); } });
+  cand.sort((a, b) => b.w - a.w);
+  const out = [];
+  cand.forEach(x => { if (out.length < 8 && out.every(o => Math.hypot(o.l[0] - x.l[0], o.l[1] - x.l[1], o.l[2] - x.l[2]) > 18)) out.push(x); });
+  out.sort((a, b) => Math.atan2(a.l[2], a.l[1]) - Math.atan2(b.l[2], b.l[1]));
+  return out.length >= 4 ? out.map(x => x.h) : fallback;
+}
 function awDecadePicks(slug, P, n) {   // [[bucket, gi, count, unit]], a year per painting for a short career, else a decade
   if (n < 15 || !P.ix) return [];
   const fam = new Set(((AW.port && AW.port[slug]) || {}).famous || []), ys = [];
@@ -268,7 +278,7 @@ function awDecadeRail(picks) {
 function awGlance(n, picks, ext) {
   const cards = [[n.toLocaleString("en-US"), n === 1 ? "painting here" : "paintings here"]];
   if (picks.length) { const top = picks.slice().sort((a, b) => b[2] - a[2])[0]; cards.push([top[0] + (top[3] === 1 ? "" : "s"), "the busiest " + (top[3] === 1 ? "year" : "decade") + ", " + top[2] + " paintings"]); }
-  const mm = /(\d+)%/.exec(ext || ""); if (mm) cards.push([mm[1] + "%", ext.replace(/ of the \d+ painters here/, " of painters here")]);
+  const mm = /(\d+)%/.exec(ext || ""); if (mm) cards.push([mm[1] + "%", ext.replace(/ of the \d+ painters here/, " of painters")]);
   return cards.length < 2 ? "" : `<div class="aw-glance">${cards.map(([b, t]) => `<div><b>${esc(b)}</b><span>${esc(t)}</span></div>`).join("")}</div>`;
 }
 function awPortraitHero(slug, A, P, hlChips) {   // the portrait band, with Map pinned at its top right
@@ -276,7 +286,14 @@ function awPortraitHero(slug, A, P, hlChips) {   // the portrait band, with Map 
 }
 function awPortraitHero0(slug, A, P, hlChips) {
   const rec = (AW.port && AW.port[slug]) || {}, pt = rec.portrait || { src: "none" };
+  const famous0 = (rec.famous || []).find(gi => gi != null && gi >= 0);
   const field = (hlChips[0] && hlChips[0].h) || awHex((A.clusters && A.clusters[0] && A.clusters[0].colors[0]) || "");
+  if (famous0 != null) {   // David, 2026-10-30: the most famous painting is the hero (a low-resolution self-portrait sample sheet looked cheap)
+    return `<figure class="aw-pt-hero" data-pthero="${famous0}" style="--c:${field}">
+      <button class="aw-pt-open" data-gi="${famous0}" aria-label="Open the painting"><img alt="" data-ptimg></button>
+      <figcaption data-ptfam>Loading…</figcaption>
+    </figure>`;
+  }
   if ((pt.src === "self" || pt.src === "other") && pt.gi != null) {
     return `<figure class="aw-pt-hero" data-pthero="${pt.gi}" style="--c:${field}">
       <button class="aw-pt-open" data-gi="${pt.gi}" aria-label="Open the painting"><img alt="" data-ptimg></button>
@@ -324,6 +341,8 @@ function awFillPortrait(el) {
     if (!b.isConnected) return;
     im.src = glSmall(d) ? d.img : glBig(d.img); im.alt = d.t; glSharpen(im, d); b.setAttribute("aria-label", "Open " + d.t);
     // this hero is standing in for a missing portrait (awPortraitHero): caption it as what it actually is
+    const fam = b.querySelector("[data-ptfam]");
+    if (fam) { const yr = glYear(gi); fam.textContent = `${d.t}${yr ? ", " + yr : ""}`; }
     const cap = b.querySelector("[data-ptnoport]");
     if (cap) { const name = cap.dataset.ptnoport, yr = glYear(gi); cap.textContent = `${d.t}${yr ? ", " + yr : ""} — no portrait of ${name} in the archive`; }
   }).catch(() => {});
@@ -333,7 +352,7 @@ function awFamousRail(slug, n) {
   const hasPortrait = ((pt.src === "self" || pt.src === "other") && pt.gi != null) || (pt.src === "wikidata" && !!pt.url);
   let list = (rec.famous || []).filter(gi => gi != null && gi >= 0);
   // its first entry is already standing in for the portrait hero above (awPortraitHero) when there isn't one
-  if (!hasPortrait && list.length) list = list.slice(1);
+  if (list.length) list = list.slice(1);   // the first is the page's hero (awPortraitHero0)
   if (list.length < 2) return "";
   const note = rec.famousBy === "wikidata" ? "most widely recorded" : "closest to his signature colors";
   return `<div class="sec-head"><b>Most famous</b><span>${esc(note)}</span></div>
@@ -662,7 +681,7 @@ function awPainter(slug, push = true) {
     ${awPortraitHero(slug, A, P, small ? [] : awSigChips(P.sig, P.ix))}
     ${TABS.length > 1 ? `<div class="fd-bar aw-tabs"><div class="fd-chips" role="tablist" aria-label="About ${esc(A.name)}, their work, their colors">${TABS.map(([k, t]) => `<button class="fd-chip${k === startTab ? " on" : ""}" role="tab" data-awtab="${k}" aria-selected="${k === startTab}"${TUNE[k] ? ` aria-haspopup="dialog"` : ""}>${t}${TUNE[k] ? `<span class="fd-tune" aria-hidden="true">${FD_ICON_TUNE}</span><i class="fd-dot" hidden></i>` : ""}</button>`).join("")}</div></div>` : ""}
     <div class="aw-pane" data-awpane="about"${startTab === "about" ? "" : " hidden"}>
-      ${small ? "" : `<div class="aw-hstrip">${awStrip((cmapHexes.filter(h => !awNearBlack(h)).length >= 4 ? cmapHexes.filter(h => !awNearBlack(h)) : cmapHexes).slice(0, 8), 40)}</div>`}
+      ${small ? "" : `<div class="aw-hstrip">${awStrip(awVividStrip(slug, P, (cmapHexes.filter(h => !awNearBlack(h)).length >= 4 ? cmapHexes.filter(h => !awNearBlack(h)) : cmapHexes).slice(0, 8)), 40)}</div>`}
       ${small ? "" : awGlance(n, decPicks, hlExt)}
       <div data-awbio></div>
       ${decRail}
