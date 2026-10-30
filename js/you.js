@@ -69,6 +69,7 @@ function ymSettingsHTML() {
     { k: "codepaste", lead: YM_I.up, label: "Paste a code", sub: "Adds your other device's progress to this one" },
     { k: "merge", lead: YM_I.up, label: "Merge a backup file", sub: "The same, from a file" },
     { k: "place", lead: YM_I.path, label: "Retake the placement test" }])
+  + mnGroup("Your account", typeof syncRows === "function" ? syncRows() : [])
   + mnGroup("", [{ k: "about", lead: YM_I.book, label: "About the colors" }])
   + mnGroup("", [{ k: "reset", lead: YM_I.trash, label: "Reset all progress", danger: true }]);
 }
@@ -83,10 +84,11 @@ function ymWireSettings(root, back, close = () => {}) {
     if (k === "backup") { backupProgress(); const v = b.querySelector(".mn-val"); if (v) v.textContent = `Last ${fmtDay(S.backedUp)}`; return; }
     if (k === "reset") {
       return mnConfirm({ title: "Reset all progress?", body: "Every color you've learned, your reviews, your eye and your taste are erased from this phone. A backup file can bring them back; nothing else can.", yes: "Erase everything", no: "Keep my progress", danger: true })
-        .then(yes => { if (!yes) return; close(); S = fresh(); save(); welcome(); });
+        .then(yes => { if (!yes) return; close(); if (typeof syncSet === "function") syncSet(null); S = fresh(); save(); welcome(); });
     }
     if (k === "you") { close(); return youPage(); }
     if (k === "codecopy") { copyProgressCode(); return; }
+    if (k === "signin" || k === "syncnow" || k === "signout" || k === "syncerase") { close(); return syncClick(k); }
     if (k === "samplesize") { if (typeof eydSizeSheet === "function") eydSizeSheet(); return; }
     close();
     if (k === "profile") profileSetup(back);
