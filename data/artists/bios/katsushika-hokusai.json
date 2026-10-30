@@ -3,14 +3,56 @@
  "lead": "Japanese ukiyo-e artist (1760-1849) from Edo; known for woodblock prints in which a few flat colors, first indigo, then Prussian blue, carry the picture.",
  "paras": [
   "Katsushika Hokusai worked in Edo, now Tokyo, across more than six decades and under many names. His series of views of Mount Fuji, begun around 1830, made him known outside Japan.",
-  "The blue in those prints matters. Prussian blue, called Bero-ai in Japan, reached Japan through Dutch and Chinese trade in the 1820s, and Hokusai's Fuji series is often cited as an early major use. It sits beside older indigo and spreads from pale to deep in a single print.",
-  "Prints from woodblocks use a small set of flat inks, one block per color. Each impression of the same design can differ in how the inks were mixed and how much they have faded since.",
-  "Check the paper. In a worn impression the sky and the paper often meet at a pale cream; faded ink and toned paper change the picture.",
-  "Our archive holds 335 Hokusai works, photographs and scans of paper and silk, not pigment tests. His strongest signatures are paper tones: Beige, in 46 of 335 works at over five times the usual rate, plus {{Olive-Buff}}, {{Stone}} and {{Putty}}. He used dark olive browns and {{Smoky Black}} far less than peers, which fits color printing with light grounds."
+  "The chapters below follow the early prints, the blue Fuji series and the late work, and end with the archive's numbers."
+ ],
+ "chapters": [
+  {
+   "title": "Early prints and indigo",
+   "when": "Edo · 1770s to 1810s",
+   "text": "Hokusai began as a printmaker in Edo and changed his name many times. His early color prints use a small set of flat inks, one block per color, and the blue available was mostly {{Indigo}}, a plant dye that sat in the print as a grey-leaning blue.\n\nPrints from woodblocks differ from impression to impression in how the inks were mixed and how much they have faded since.",
+   "colors": [
+    "Indigo",
+    "Beige",
+    "Putty"
+   ]
+  },
+  {
+   "title": "Prussian blue and Fuji",
+   "when": "Edo · about 1830",
+   "text": "The blue in the Fuji series matters. Prussian blue, called Bero-ai in Japan, reached Japan through Dutch and Chinese trade in the 1820s, and Hokusai's series is often cited as an early major use. It sits beside older indigo and spreads from pale to deep in a single print.\n\nThe wave print and the clear-sky view of the mountain both rest on {{Prussian Blue}} against the cream of the paper, with {{Azure}} in the paler bands.",
+   "colors": [
+    "Prussian Blue",
+    "Indigo",
+    "Azure",
+    "Beige"
+   ],
+   "pull": "Prussian blue came to Japan in the 1820s, just before the Fuji series."
+  },
+  {
+   "title": "Late work",
+   "when": "Edo · 1830s to 1849",
+   "text": "In old age he kept drawing and painting, and signed some work as an old man mad about painting. He died in 1849. The late pictures are quieter in ink, often brush on paper, with less of the printed blue.\n\nCheck the paper. In a worn impression the sky and the paper often meet at a pale cream; faded ink and toned paper change the picture.",
+   "colors": [
+    "Stone",
+    "Olive-Buff",
+    "Smoky Black"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas · 335 works",
+   "text": "Our archive holds 335 Hokusai works, photographs and scans of paper and silk, not pigment tests. His strongest signatures are paper tones: Beige, in 46 of 335 works at over five times the usual rate, plus {{Olive-Buff}}, {{Stone}} and {{Putty}}.\n\nHe used dark olive browns and {{Smoky Black}} far less than peers, which fits color printing with light grounds.",
+   "colors": [
+    "Beige",
+    "Olive-Buff",
+    "Stone",
+    "Putty"
+   ]
+  }
  ],
  "sources": [
   "Chromatlas archive, 335 paintings"
  ],
- "words": 202,
- "status": "pilot"
+ "words": 321,
+ "status": "article"
 }

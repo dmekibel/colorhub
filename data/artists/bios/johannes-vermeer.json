@@ -3,10 +3,51 @@
  "lead": "Dutch painter (1632-1675) from Delft, with about three dozen surviving paintings; his color is calm light on yellow, blue and pearl-grey.",
  "paras": [
   "Johannes Vermeer lived and worked in Delft and left very few paintings, about three dozen. His interiors with a single window are among the best-known pictures of the Dutch Golden Age.",
-  "His blues were costly. Ball reports that natural ultramarine, made from lapis lazuli, cost 45 guilders an ounce in 1626, and Vermeer kept using it, as in The Milkmaid of about 1658. Gage points out that yellow and blue dominate his palette, a coincidence with the then-new theory that those two colors make white light.",
-  "Finlay says, with some uncertainty, that his luminous whites may include grains of alabaster and quartz. The forger Han van Meegeren was caught partly because his fake Vermeer used cobalt blue; cobalt blue was not invented until long after Vermeer.",
-  "Look at how the shadows are colored: a pale wall near a window carries yellow and blue in softer measures, not grey.",
-  "Our archive holds 43 Vermeer paintings, photographs of varnished panels and canvases, so these are approximate. The color he uses most beyond his peers is {{Smoky Black}}, in 29 of 43 paintings at about three times the usual rate, followed by Black and a dark olive brown. Smoky Black is also his darkest large area, covering at least 3% of 25 canvases."
+  "The chapters below look at the rooms, at the costly pigments in them, at the old camera question, and at what the archive measures."
+ ],
+ "chapters": [
+  {
+   "title": "The Delft interiors",
+   "when": "Delft · 1650s to 1670s",
+   "text": "Most of the surviving pictures show one or two figures in a room with a window on the left. Look at how the shadows are colored: a pale wall near a window carries yellow and blue in softer measures, not grey, the wall reading as {{Pearl}} or {{Straw}} rather than white.\n\nGage points out that yellow and blue dominate his palette, a coincidence with the then-new theory that those two colors make white light.",
+   "colors": [
+    "Straw",
+    "Pearl",
+    "Stone"
+   ]
+  },
+  {
+   "title": "Blue was expensive",
+   "when": "Delft · about 1658",
+   "text": "His blues were costly. Ball reports that natural ultramarine, made from lapis lazuli, cost 45 guilders an ounce in 1626, and Vermeer kept using it, as in The Milkmaid of about 1658. Natural {{Lapis Lazuli}} gave a depth that cheaper blues could not.\n\nHe set it next to a {{Mustard}}-toned yellow made from lead and tin, and the pair is the signature of the mature work.",
+   "colors": [
+    "Lapis Lazuli",
+    "Royal Blue",
+    "Mustard",
+    "Gold"
+   ],
+   "pull": "He kept paying for natural ultramarine."
+  },
+  {
+   "title": "Whites, a forgery and a camera",
+   "when": "Later study",
+   "text": "Finlay says, with some uncertainty, that his luminous whites may include grains of alabaster and quartz. The forger Han van Meegeren was caught partly because his fake Vermeer used cobalt blue; cobalt blue was not invented until long after Vermeer.\n\nWhether Vermeer used a camera obscura is still argued. The soft highlights have been read as lens effects, but there is no record, and this article leaves the question open.",
+   "colors": [
+    "Cobalt Blue",
+    "Ivory",
+    "Cream"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas · 43 paintings",
+   "text": "Our archive holds 43 Vermeer paintings, photographs of varnished panels and canvases, so these are approximate. The color he uses most beyond his peers is {{Smoky Black}}, in 29 of 43 paintings at about three times the usual rate, followed by Black and a dark olive brown.\n\nSmoky Black is also his darkest large area, covering at least 3% of 25 canvases. The calm light is held up by dark floors and shadows.",
+   "colors": [
+    "Smoky Black",
+    "Bistre",
+    "Dark Jungle Green"
+   ]
+  }
  ],
  "sources": [
   "Ball, Bright Earth (2001)",
@@ -14,6 +55,6 @@
   "Finlay, Color (2002)",
   "Chromatlas archive, 43 paintings"
  ],
- "words": 211,
- "status": "pilot"
+ "words": 338,
+ "status": "article"
 }

@@ -2,17 +2,60 @@
  "slug": "vincent-van-gogh",
  "lead": "Dutch painter (1853-1890) who worked in the Netherlands, Paris and Arles; his color is saturated, pushed and built on contrast.",
  "paras": [
-  "Vincent van Gogh painted for only about a decade. He started in the Netherlands in muted earth tones, moved to Paris in 1886, and made his best-known work in Arles and Saint-Rémy in 1888 to 1890.",
-  "In Paris he met Impressionist and Neo-Impressionist painting and his palette lightened. By Ball's account he wrote to his brother Theo that he was wild about cobalt, carmine, emerald green and cadmium, and he treated black and white as a pair of complementary colors.",
-  "Many of his pigments have not lasted. Chrome yellow has darkened in some sunflower pictures, and the pink eosin lake he favored has faded in places. The painting once titled White Roses was probably pink at first, according to Finlay, before its madder-based red faded.",
-  "So look at the shadows and edges. Where a yellow wall turns brownish or a rose reads green, you may be seeing the painter's original idea changed by time, not the color he chose.",
-  "Our archive holds 1,239 Van Gogh paintings, photographed under varnish, so every color is as photographed. Measured against his peers, he used very dark browns and blacks, {{Bistre}}, {{Smoky Black}} and {{Café Noir}}, about a third to two fifths as often. His darkest large areas are Smoky Black, {{Dark Jungle Green}} and Jet, and his lightest are pale greyish whites and olive-greys."
+  "Vincent van Gogh painted for only about a decade, and his color changed more in that time than most painters' does in a lifetime. He began in the Netherlands in muted earth tones, was lightened by Paris in 1886, and made his best-known work in Arles and Saint-Rémy in 1888 to 1890.",
+  "The chapters below follow that change, and end with what the archive shows when we measure his canvases."
+ ],
+ "chapters": [
+  {
+   "title": "Dark earth in the Netherlands",
+   "when": "Netherlands · 1880s",
+   "text": "Van Gogh's early pictures of peasants and weavers are painted in browns, greens and greys. {{Bistre}} and {{Café Noir}} are the kind of dark brown he reached for, and the lamp-lit interiors of the mid-1880s are meant to look like soil and work.\n\nHe was not short of color theory even then. He read about complementary pairs and tried them in a dim palette, but the grounds stayed heavy, and the contrast between this period and what followed is the clearest in his career.",
+   "colors": [
+    "Bistre",
+    "Café Noir",
+    "Smoky Black",
+    "Dark Jungle Green"
+   ]
+  },
+  {
+   "title": "Paris and the lighter palette",
+   "when": "Paris · 1886 to 1888",
+   "text": "In Paris he met Impressionist and Neo-Impressionist painting and his palette lightened. By Ball's account he wrote to his brother Theo that he was wild about cobalt, carmine, emerald green and cadmium, and he treated black and white as a pair of complementary colors.\n\nHe tested small touches of {{Cobalt Blue}} and {{Emerald Green}} against reds in portraits and still lifes, and his brushwork broke into short strokes. Paris is where he learned to place a color by its neighbor rather than by the object it described.",
+   "colors": [
+    "Cobalt Blue",
+    "Emerald Green",
+    "Carmine",
+    "Vermilion"
+   ]
+  },
+  {
+   "title": "Arles and Saint-Rémy",
+   "when": "Provence · 1888 to 1890",
+   "text": "At Arles in 1888 he pushed those contrasts as far as they would go: blue against orange, yellow against violet, a night café in clashing reds and greens. Sunflowers, wheat fields and the cypresses of Saint-Rémy, where he stayed from 1889, fall in this stretch.\n\nMany of his pigments have not lasted. Chrome yellow has darkened in some sunflower pictures, and the pink eosin lake he favored has faded in places. The painting once titled White Roses was probably pink at first, according to Finlay, before its madder-based red faded.\n\nSo look at the shadows and edges. Where a yellow wall turns brownish or a rose reads green, you may be seeing the painter's original idea changed by time, not the color he chose.",
+   "colors": [
+    "Cobalt Blue",
+    "Gold",
+    "Ochre",
+    "Jade"
+   ],
+   "pull": "Where a rose reads green, you may be seeing time, not Van Gogh."
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas · 1,239 paintings",
+   "text": "Our archive holds 1,239 Van Gogh paintings, photographed under varnish, so every color is as photographed. Measured against his peers, he used very dark browns and blacks, {{Bistre}}, {{Smoky Black}} and {{Café Noir}}, about a third to two fifths as often.\n\nHis darkest large areas are Smoky Black, {{Dark Jungle Green}} and Jet, and his lightest are pale greyish whites and olive-greys. A painter famous for blaze is, by these numbers, a painter who avoided the deepest darks.",
+   "colors": [
+    "Smoky Black",
+    "Dark Jungle Green",
+    "Bistre"
+   ]
+  }
  ],
  "sources": [
   "Ball, Bright Earth (2001)",
   "Finlay, Color (2002)",
   "Chromatlas archive, 1,239 paintings"
  ],
- "words": 221,
- "status": "pilot"
+ "words": 443,
+ "status": "article"
 }

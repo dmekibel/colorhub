@@ -3,14 +3,57 @@
  "lead": "American painter and printmaker (1844-1926) who lived in Paris and showed with the Impressionists; known for soft pastels and flat color.",
  "paras": [
   "Mary Cassatt was born near Pittsburgh, studied in Philadelphia, and settled in Paris in the 1870s. At Edgar Degas's invitation she joined the Impressionist group and showed with them in several of their exhibitions.",
-  "She worked in oil, pastel and printmaking. A large Japanese woodblock print exhibition in Paris in 1890 is widely credited with changing her approach, and her color prints that followed use flat areas and clear outlines.",
-  "Her pastels and oils are known for scenes of women and children, with pale skin and cloth set against soft green and blue grounds. Pastel keeps its color well, so the surfaces are closer to what she made than many oils of her time.",
-  "Compare a pastel with one of her color prints. The first blends colors by hand into a hazy field; the second sets a few colors down in separate flat shapes.",
-  "Our archive holds only 123 Cassatt paintings, so these findings are tentative. They are photographs of varnished or framed works, not measurements of pigment. She used very dark olive browns, {{Bistre}} and {{Café Noir}} about a third as often as her peers, and her darkest areas are {{Smoky Black}} and {{Black Blue}}. Her lightest are Tan, greyish white and {{Dawn Grey}}."
+  "The chapters below follow her training, her Impressionist years and her later color prints and pastels, and end with the archive's numbers."
+ ],
+ "chapters": [
+  {
+   "title": "Pittsburgh and Paris",
+   "when": "Pennsylvania and Paris · 1860s to 1870s",
+   "text": "Cassatt grew up near Pittsburgh and studied at the Pennsylvania Academy of the Fine Arts in Philadelphia before going to Europe. She worked in Paris and elsewhere, copying old masters, and had works accepted at the Salon.\n\nBy the middle 1870s she had settled in Paris, and her early color is still that of the Salon: warm browns and reds with {{Bistre}} shadows.",
+   "colors": [
+    "Bistre",
+    "Café Noir",
+    "Tan"
+   ]
+  },
+  {
+   "title": "The Impressionist years",
+   "when": "Paris · 1877 to 1886",
+   "text": "Degas invited her to join the group, and she showed with the Impressionists in several of their exhibitions. Her scenes of women and children, in the theater box and at tea, use pale skin and cloth set against soft green and blue grounds.\n\nHer pastels keep their color well, since pastel is nearly pure pigment, so the surfaces are closer to what she made than many oils of her time. Soft {{Powder Blue}} and {{Dusty Rose}} come up often.",
+   "colors": [
+    "Powder Blue",
+    "Dusty Rose",
+    "Sage",
+    "Pearl"
+   ]
+  },
+  {
+   "title": "Color prints and flat color",
+   "when": "Paris · 1890s",
+   "text": "A large Japanese woodblock print exhibition in Paris in 1890 is widely credited with changing her approach, and her color prints that followed use flat areas and clear outlines.\n\nCompare a pastel with one of these prints. The first blends colors by hand into a hazy field; the second sets a few colors down in separate flat shapes.",
+   "colors": [
+    "Azure",
+    "Celadon",
+    "Rose",
+    "Tan"
+   ],
+   "pull": "The pastel blends by hand; the print sets a few flat colors side by side."
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas · 123 paintings",
+   "text": "Our archive holds only 123 Cassatt paintings, so these findings are tentative. They are photographs of varnished or framed works, not measurements of pigment.\n\nShe used very dark olive browns, {{Bistre}} and {{Café Noir}} about a third as often as her peers, and her darkest areas are {{Smoky Black}} and {{Black Blue}}. Her lightest are Tan, greyish white and {{Dawn Grey}}.",
+   "colors": [
+    "Bistre",
+    "Smoky Black",
+    "Black Blue",
+    "Dawn Grey"
+   ]
+  }
  ],
  "sources": [
   "Chromatlas archive, 123 paintings"
  ],
- "words": 205,
- "status": "pilot"
+ "words": 317,
+ "status": "article"
 }
