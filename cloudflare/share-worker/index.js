@@ -8,7 +8,7 @@ const APP = "https://chromatlas.app/", SHARE = "https://s.chromatlas.app/";
 const SHARD = 100;                       // data/gallery/index.json "shard"
 const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-// CIEDE2000 over the everyday names of data/core-names.json (rank < CARD_RANK: Navy, Ochre, Prussian Blue, not Hathi Grey): a card is read in a second
+// CIEDE2000 over data/core-names.json, the names the app shows (nameOf in js/naming.js), filtered for a card (see CARD_RANK below)
 const lab = hex => {
   const f = v => (v /= 255) > .04045 ? ((v + .055) / 1.055) ** 2.4 : v / 12.92, n = parseInt(hex.slice(1), 16), r = f(n >> 16), g = f(n >> 8 & 255), b = f(n & 255);
   const t = v => v > .008856 ? Math.cbrt(v) : 7.787 * v + 16 / 116, x = t((r * .4124 + g * .3576 + b * .1805) / .95047), y = t(r * .2126 + g * .7152 + b * .0722), z = t((r * .0193 + g * .1192 + b * .9505) / 1.08883);
@@ -27,20 +27,25 @@ function de2000([L1, a1, b1], [L2, a2, b2]) {
   return Math.sqrt((dL / SL) ** 2 + (dC / SC) ** 2 + (dH / SH) ** 2 + RT * (dC / SC) * (dH / SH));
 }
 let CORE = null;
-const CARD_RANK = 350;
+// Card names (David, 2026-10-30): always an interesting name, never the obvious one. Out: the plain basics (Red, Green, Blue, Grey...) and
+// names built only from basics and modifiers (Pale Pink, Reddish Brown, Bluish Grey); out too: the rare tail (rank >= CARD_RANK, e.g. Hathi Grey).
+const CARD_RANK = 450, BASIC = new Set("red orange yellow green blue purple pink brown grey gray black white violet".split(" "));
+const MOD = new Set("pale light dark deep pastel bright medium dull vivid soft very".split(" "));
+const plain = n => n.toLowerCase().split(/[\s-]+/).every(w => BASIC.has(w) || MOD.has(w) || /ish$/.test(w));
+const titleCase = n => n.replace(/(^|[\s-])(\p{L})/gu, (m, a, b) => a + b.toUpperCase());
 async function colorNames(row) {
   const [lib, core] = await Promise.all([getJSON(`${DATA}data/gallery/names.json`, 86400), CORE || getJSON(`${APP}data/core-names.json`, 86400)]);
-  if (!lib || !core) return [];
+  if (!lib || !core) return { main: [], accent: "" };
   CORE = core; core.forEach(c => { c.L = c.L || lab(c.h); });
-  const pool = core.filter(c => c.rank < CARD_RANK);
-  const out = [];
-  (row[7] || []).map((li, k) => [li, (row[8] || [])[k] || 0]).sort((p, q) => q[1] - p[1]).forEach(([li]) => {
-    const hex = lib[li] && lib[li][1]; if (!hex) return;
-    const L = lab(hex); let best = null, bd = 1e9;
-    for (const c of pool) { const d = de2000(L, c.L); if (d < bd) { bd = d; best = c.n; } }
-    if (best && !out.includes(best)) out.push(best);
-  });
-  return out.slice(0, 4);
+  const pool = core.filter(c => c.rank < CARD_RANK && !plain(c.n));
+  const cols = (row[7] || []).map((li, k) => ({ hex: lib[li] && lib[li][1], share: (row[8] || [])[k] || 0 })).filter(c => c.hex)
+    .map(c => { const L = lab(c.hex); let best = null, bd = 1e9; for (const p of pool) { const d = de2000(L, p.L); if (d < bd) { bd = d; best = p.n; } } return { ...c, name: titleCase(best), C: Math.hypot(L[1], L[2]) }; })
+    .sort((p, q) => q.share - p.share);
+  const main = [];
+  cols.forEach(c => { if (main.length < 3 && !main.includes(c.name)) main.push(c.name); });
+  // the accent: the most vivid color left over, when it really is vivid (the pink flowers in a green garden)
+  const rest = cols.filter(c => !main.includes(c.name) && c.C > 40).sort((p, q) => q.C - p.C);
+  return { main, accent: rest.length ? rest[0].name : "" };
 }
 async function yearOf(gi) {   // data/gallery/index.bin: 30-byte records, the first two bytes are year + year0 (20000), 0 = undated
   const r = await fetch(`${DATA}data/gallery/index.bin`, { headers: { Range: `bytes=${gi * 30}-${gi * 30 + 1}` } });
@@ -67,13 +72,14 @@ export default {
       const hb = await fetch(`${DATA}data/gallery/hosted.bin`, { cf: { cacheEverything: true, cacheTtl: 3600 } });
       if (hb.ok) { const b = new Uint8Array(await hb.arrayBuffer()); hosted = !!((b[gi >> 3] >> (gi & 7)) & 1); }
     } catch (e) {}
-    let names = [], year = 0;
-    try { [names, year] = await Promise.all([row ? colorNames(row) : [], yearOf(gi)]); } catch (e) {}
+    let names = { main: [], accent: "" }, year = 0;
+    try { [names, year] = await Promise.all([row ? colorNames(row) : names, yearOf(gi)]); } catch (e) {}
     const title = row && row[1] ? row[1] : "A painting";
     const painter = row && row[2] ? row[2] : "";
     const img = (row && (row[9] || row[5])) || (hosted ? `${DATA}thumb/${gi}.webp` : `${APP}og/default.png`);   // the 1200 px picture makes the big card
     const head = `${title}${year > 0 && year < 2100 && !/\b1\d{3}\b/.test(title) ? ` (${year})` : ""}${painter ? ` by ${painter}` : ""}`;
-    const desc = names.length ? `Its colors: ${names.join(", ")}.` : "Its colors, named and measured.";   // the card's top line already says Chromatlas (og:site_name)
+    const m3 = names.main, list = m3.length > 1 ? m3.slice(0, -1).join(", ") + " and " + m3[m3.length - 1] : m3.join("");
+    const desc = m3.length ? `Its colors: ${list}${names.accent ? `, with a touch of ${names.accent}` : ""}.` : "Its colors, named and measured.";   // the card's top line already says Chromatlas (og:site_name)
     const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${esc(head)} · Chromatlas</title>
 <meta name="description" content="${esc(desc)}">
 <meta property="og:site_name" content="Chromatlas"><meta property="og:type" content="website">
