@@ -7,4 +7,5 @@ binding = "IMAGES"
 binding = "DATA"
 bucket_name = "chromatlas-data"
 # Deployed 2026-10-30 on the custom domain s.chromatlas.app (chromatlas.app itself is DNS-only to GitHub Pages, so a route would never fire).
+# Deploy without wrangler: upload index.js to R2 _deploy/chromatlas-share.js (tools/r2_sync.py put), then PUT it as the script via the Cloudflare API with bindings IMAGES + DATA.
 
