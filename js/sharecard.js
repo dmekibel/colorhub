@@ -112,11 +112,12 @@ async function cardShare(spec, text, url, fileName = "colorhub.png") {
 }
 
 // Send someone a link to a page: the phone's share sheet where there is one, else copy the link.
+// The message and the link go as ONE text (David, 2026-10-30: Telegram kept only the link when they came as separate text and url).
 async function shareLink(title, url, msg) {
-  const text = msg || `${title} · Chromatlas`;
-  try { if (navigator.share) { await navigator.share({ title: `${title} · Chromatlas`, text, url }); return "shared"; } }
+  const text = `${msg || `${title} · Chromatlas`}\n${url}`;
+  try { if (navigator.share) { await navigator.share({ text }); return "shared"; } }
   catch (e) { if (e && e.name === "AbortError") return "cancelled"; }
-  try { await navigator.clipboard.writeText(url); toast("Link copied"); return "copied"; } catch (e) {}
+  try { await navigator.clipboard.writeText(text); toast("Link copied"); return "copied"; } catch (e) {}
   toast("Couldn't share. Copy the address bar link"); return "failed";
 }
 const shareBtn = `<button class="icon-btn glass" data-pshare aria-label="Share this painting">${ICON.share}</button>`;
