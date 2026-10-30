@@ -100,6 +100,91 @@ async function stripPNG(W, H, top, hexes) {
   return new Blob([new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10]), chunk("IHDR", ihdr), chunk("PLTE", plte), chunk("IDAT", z), chunk("IEND", new Uint8Array())]);
 }
 
+// ---- the palette, read from the picture itself (David, 2026-10-30: "the lady in the white dress was more white, cream and yellow") ----
+// Cloudflare Images shrinks the painting to a small PNG; this decodes it and runs the Instagram carousel chooser on its pixels
+// (social/instagram/palette.py extract): k-means in Lab, plus the most saturated pixels clustered on their own so a moon or a red hat
+// is not averaged into mud; then start from the biggest area and add whichever color is most unlike everything chosen, favoring vivid
+// ones, never closer than 8. One addition: a big light area (a white dress, a pale sky) always gets a swatch.
+async function decodePNG(buf) {
+  const u8 = new Uint8Array(buf), dv = new DataView(u8.buffer);
+  let p = 8, W = 0, H = 0, ct = 0, idat = [];
+  while (p < u8.length) {
+    const len = dv.getUint32(p), type = String.fromCharCode(...u8.subarray(p + 4, p + 8));
+    if (type === "IHDR") { W = dv.getUint32(p + 8); H = dv.getUint32(p + 12); ct = u8[p + 17]; if (u8[p + 16] !== 8 || u8[p + 20]) throw new Error("png"); }
+    else if (type === "IDAT") idat.push(u8.subarray(p + 8, p + 8 + len));
+    else if (type === "IEND") break;
+    p += 12 + len;
+  }
+  const bpp = { 2: 3, 6: 4, 0: 1, 4: 2 }[ct]; if (!bpp) throw new Error("png type " + ct);
+  const raw = new Uint8Array(await new Response(new Blob(idat).stream().pipeThrough(new DecompressionStream("deflate"))).arrayBuffer());
+  const stride = W * bpp, px = new Uint8Array(H * stride);
+  for (let y = 0; y < H; y++) {
+    const f = raw[y * (stride + 1)], src = y * (stride + 1) + 1, o = y * stride;
+    for (let x = 0; x < stride; x++) {
+      const a = x >= bpp ? px[o + x - bpp] : 0, b = y ? px[o - stride + x] : 0, c = x >= bpp && y ? px[o - stride + x - bpp] : 0, v = raw[src + x];
+      let r = v;
+      if (f === 1) r = v + a; else if (f === 2) r = v + b; else if (f === 3) r = v + ((a + b) >> 1);
+      else if (f === 4) { const q = a + b - c, pa = Math.abs(q - a), pb = Math.abs(q - b), pc = Math.abs(q - c); r = v + (pa <= pb && pa <= pc ? a : pb <= pc ? b : c); }
+      px[o + x] = r & 255;
+    }
+  }
+  const out = [];
+  for (let i = 0; i < W * H; i++) { const o = i * bpp; out.push(bpp >= 3 ? [px[o], px[o + 1], px[o + 2]] : [px[o], px[o], px[o]]); }
+  return out;
+}
+const hexOf = rgb => "#" + rgb.map(v => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, "0")).join("").toUpperCase();
+const labToHex = ([L, a, b]) => {
+  const fy = (L + 16) / 116, fx = fy + a / 500, fz = fy - b / 200, inv = t => t ** 3 > .008856 ? t ** 3 : (t - 16 / 116) / 7.787;
+  const X = inv(fx) * .95047, Y = inv(fy), Z = inv(fz) * 1.08883;
+  const g = v => 255 * (v > .0031308 ? 1.055 * v ** (1 / 2.4) - .055 : 12.92 * v);
+  return hexOf([g(3.2406 * X - 1.5372 * Y - .4986 * Z), g(-.9689 * X + 1.8758 * Y + .0415 * Z), g(.0557 * X - .204 * Y + 1.057 * Z)]);
+};
+function kmeans(pts, k, iters = 10) {
+  const d2 = (p, q) => (p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2 + (p[2] - q[2]) ** 2;
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const cen = [pts[Math.floor(rnd() * pts.length)]];
+  while (cen.length < k) {   // k-means++
+    const w = pts.map(p => Math.min(...cen.map(c => d2(p, c)))), tot = w.reduce((s, v) => s + v, 0);
+    let r = rnd() * tot, i = 0; while (i < pts.length - 1 && (r -= w[i]) > 0) i++; cen.push(pts[i]);
+  }
+  let lbl = new Int32Array(pts.length);
+  for (let it = 0; it < iters; it++) {
+    pts.forEach((p, i) => { let b = 0, bd = Infinity; cen.forEach((c, j) => { const d = d2(p, c); if (d < bd) { bd = d; b = j; } }); lbl[i] = b; });
+    const sum = cen.map(() => [0, 0, 0, 0]);
+    pts.forEach((p, i) => { const s = sum[lbl[i]]; s[0] += p[0]; s[1] += p[1]; s[2] += p[2]; s[3]++; });
+    sum.forEach((s, j) => { if (s[3]) cen[j] = [s[0] / s[3], s[1] / s[3], s[2] / s[3]]; });
+  }
+  const share = cen.map(() => 0); lbl.forEach(l => share[l]++);
+  return cen.map((c, j) => ({ L: c, share: share[j] / pts.length }));
+}
+function extractPalette(rgbs, n = 6) {
+  const pts = rgbs.map(c => lab(hexOf(c)));
+  let cand = kmeans(pts, 14);
+  const chroma = pts.map(p => Math.hypot(p[1], p[2])), cut = chroma.slice().sort((a, b) => a - b)[Math.floor(chroma.length * .94)];
+  const viv = pts.filter((p, i) => chroma[i] >= cut);
+  if (viv.length > 50) cand = cand.concat(kmeans(viv, 4).map(c => ({ L: c.L, share: pts.filter(p => Math.hypot(p[0] - c.L[0], p[1] - c.L[1], p[2] - c.L[2]) < 12).length / pts.length })));
+  cand = cand.filter(c => c.share >= .006).map(c => ({ ...c, C: Math.hypot(c.L[1], c.L[2]) }));
+  if (!cand.length) return [];
+  const gap = (a, b) => { const d = de2000(a.L, b.L); return a.C < 16 && b.C < 16 ? d - 8 : d; };
+  const chosen = [cand.reduce((a, b) => b.share > a.share ? b : a)];
+  // a big light area always gets its swatch (Repin's white dress): the lightest cluster holding 6%+ of the canvas
+  const light = cand.filter(c => c.L[0] > 78 && c.share >= .06).sort((a, b) => b.L[0] - a.L[0])[0];
+  if (light && !chosen.includes(light)) chosen.push(light);
+  while (chosen.length < n) {
+    let best = null, bs = -1, bd = 0;
+    for (const c of cand) {
+      if (chosen.includes(c)) continue;
+      const d = Math.min(...chosen.map(q => gap(c, q))), s = d * c.share ** .15 * (1 + c.C / 60);
+      if (s > bs) { bs = s; best = c; bd = d; }
+    }
+    if (!best || bd < 8) break;
+    chosen.push(best);
+  }
+  const hue = c => (Math.atan2(c.L[2], c.L[1]) * 180 / Math.PI + 360 - 20) % 360;
+  return chosen.sort((a, b) => (a.C < 12) - (b.C < 12) || (a.C < 12 ? b.L[0] - a.L[0] : hue(a) - hue(b)))
+    .map(c => ({ hex: labToHex(c.L), L: c.L, C: c.C }));
+}
+
 async function yearOf(gi) {   // data/gallery/index.bin: 30-byte records, the first two bytes are year + year0 (20000), 0 = undated
   const r = await fetch(`${DATA}data/gallery/index.bin`, { headers: { Range: `bytes=${gi * 30}-${gi * 30 + 1}` } });
   if (r.status !== 206) return 0;
@@ -112,9 +197,25 @@ async function getJSON(url, ttl) {
   return r.ok ? r.json() : null;
 }
 
-const CARD_V = 1;   // bump to redraw every stored card (R2 card/v<CARD_V>/<n>.jpg)
+const CARD_V = 2;   // bump to redraw every stored card (R2 card/v<CARD_V>/<n>.jpg and .json)
 const shardRow = async gi => { const sh = await getJSON(`${DATA}data/gallery/d/${String(Math.floor(gi / SHARD)).padStart(3, "0")}.json`, 86400); return sh && sh[gi % SHARD]; };
 const UA = { "User-Agent": "Chromatlas/1.0 (https://chromatlas.app; dmekibel@gmail.com) share-card" };
+
+// the palette: read once from the picture (extractPalette), kept in R2 next to the card; the pool pick is only the fallback
+async function paletteOf(gi, row, env) {
+  const key = `card/v${CARD_V}/${gi}.json`, have = await env.DATA.get(key);
+  if (have) return have.json();
+  const src = row && (row[9] || row[5]);
+  let cols = [];
+  try {
+    const small = await env.IMAGES.input((await fetch(src, { headers: UA, cf: { cacheEverything: true, cacheTtl: 86400 } })).body)
+      .transform({ width: 48, height: 48, fit: "scale-down" }).output({ format: "image/png" });
+    cols = extractPalette(await decodePNG(await small.response().arrayBuffer())).map(c => ({ hex: c.hex, L: c.L }));
+  } catch (e) {}
+  if (cols.length < 3) return pickPalette(poolDecode(row && row[10])).map(c => ({ hex: c.hex, L: c.L }));
+  await env.DATA.put(key, JSON.stringify(cols), { httpMetadata: { contentType: "application/json" } });
+  return cols;
+}
 
 // the picture: stored in R2 after the first share, drawn by Cloudflare Images (no pixel work in this Worker)
 async function cardImage(gi, env) {
@@ -124,7 +225,7 @@ async function cardImage(gi, env) {
   const row = await shardRow(gi);
   const src = row && (row[9] || row[5]);
   if (!src) return Response.redirect(`${APP}og/default.png`, 302);
-  const cols = pickPalette(poolDecode(row[10]));
+  const cols = await paletteOf(gi, row, env);
   const get = () => fetch(src, { headers: UA, cf: { cacheEverything: true, cacheTtl: 86400 } });
   if (cols.length < 3) return Response.redirect(src, 302);
   try {
@@ -150,7 +251,7 @@ export default {
     const gi = +m[1], app = `${APP}#/gallery/${gi}`;
     let row = null, names = [], year = 0;
     try { row = await shardRow(gi); } catch (e) {}
-    try { [names, year] = await Promise.all([row ? namesFor(pickPalette(poolDecode(row[10]))) : [], yearOf(gi)]); } catch (e) {}
+    try { [names, year] = await Promise.all([row ? paletteOf(gi, row, env).then(namesFor) : [], yearOf(gi)]); } catch (e) {}
     const title = row && row[1] ? row[1] : "A painting";
     const painter = row && row[2] ? row[2] : "";
     const img = row && (row[9] || row[5]) ? `${SHARE}c/${gi}.jpg` : `${APP}og/default.png`;
