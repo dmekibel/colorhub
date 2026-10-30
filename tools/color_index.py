@@ -296,6 +296,11 @@ def build_paintings(args):
     art, mvs, cos = {"": 0}, {"": 0}, {"": 0}
     arts, mvl, col = [""], [""], [""]
     meta_rows = []
+    # movement and country ids are one byte each in meta.bin: past 255 labels (the 2026-10-29 batches brought many new movement names) the rarest
+    # ones fold into "" (unknown) here instead of crashing the build; the common ones keep their own id
+    from collections import Counter
+    _keep = lambda k: {v for v, _ in Counter(x.get(k) for x in rows if x.get(k)).most_common(254)}
+    keep_mv, keep_co = _keep("mv"), _keep("co")
     for x in rows:
         def idx(d, lst, v):
             v = v or ""
@@ -303,7 +308,7 @@ def build_paintings(args):
                 d[v] = len(lst)
                 lst.append(v)
             return d[v]
-        meta_rows.append((x.get("y"), idx(art, arts, x.get("a")), idx(mvs, mvl, x.get("mv")), idx(cos, col, x.get("co"))))
+        meta_rows.append((x.get("y"), idx(art, arts, x.get("a")), idx(mvs, mvl, x.get("mv") if x.get("mv") in keep_mv else ""), idx(cos, col, x.get("co") if x.get("co") in keep_co else "")))
     head, total, built = write_index(Path(args["out"]), "Paintings", "painting", n, keys, covs, coarse, meta_rows,
                                      {"artists": arts, "movements": mvl, "countries": col}, "paintings")
     print(f"index: {head['postings']:,} postings, {head['cells']:,} cells, {len(head['leaves'])} shards, {total / 1e6:.1f} MB, "

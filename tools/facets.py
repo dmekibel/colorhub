@@ -97,9 +97,17 @@ def main():
             count[r[2]] = count.get(r[2], 0) + 1
     artists = sorted(count, key=lambda s: (slug(s), s))
     a_ix = {a: i + 1 for i, a in enumerate(artists)}
-    countries = sorted({r[3] for r in rows if r[3]})
+    # country and movement ids are one byte each in the facet records: past 255 labels (the 2026-10-29 batches brought many new movement
+    # names) the rarest fold into 0 (unknown) instead of crashing the build; the 254 most common keep their own id
+    def top(k):
+        cnt = {}
+        for r in rows:
+            if r[k]:
+                cnt[r[k]] = cnt.get(r[k], 0) + 1
+        return sorted(sorted(cnt, key=lambda v: (-cnt[v], v))[:254])
+    countries = top(3)
     c_ix = {c: i + 1 for i, c in enumerate(countries)}
-    movements = sorted({r[4] for r in rows if r[4]})
+    movements = top(4)
     m_ix = {m: i + 1 for i, m in enumerate(movements)}
     KEY = {"low": 0, "mid": 1, "high": 2}
 
