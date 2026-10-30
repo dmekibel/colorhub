@@ -197,7 +197,7 @@ async function getJSON(url, ttl) {
   return r.ok ? r.json() : null;
 }
 
-const CARD_V = 2;   // bump to redraw every stored card (R2 card/v<CARD_V>/<n>.jpg and .json)
+const CARD_V = 3;   // bump to redraw every stored card (R2 card/v<CARD_V>/<n>.jpg and .json)
 const shardRow = async gi => { const sh = await getJSON(`${DATA}data/gallery/d/${String(Math.floor(gi / SHARD)).padStart(3, "0")}.json`, 86400); return sh && sh[gi % SHARD]; };
 const UA = { "User-Agent": "Chromatlas/1.0 (https://chromatlas.app; dmekibel@gmail.com) share-card" };
 
@@ -230,10 +230,14 @@ async function cardImage(gi, env) {
   if (cols.length < 3) return Response.redirect(src, 302);
   try {
     const info = await env.IMAGES.info((await get()).body);
-    const W = Math.min(1200, info.width), H = Math.round(info.height * W / info.width), S = Math.round(W * .12);
+    const W = Math.min(1200, info.width), H0 = Math.round(info.height * W / info.width), S = Math.round(W * .12);
+    // a card taller than 3:4 gets Telegram's blurred side bars, so a tall painting is trimmed to fit (David, 2026-10-30): a third of the
+    // trim off the top, two thirds off the bottom (faces sit high), never more than 15% of the painting; taller ones keep the blur
+    const over = H0 + S - Math.round(W / .75), cut = over > 0 && over <= H0 * .15 ? over : 0, f = info.width / W;
+    const H = H0 - cut, trim = cut ? { trim: { top: Math.round(cut / 3 * f), bottom: Math.round(cut * 2 / 3 * f), left: 0, right: 0 } } : {};
     const base = await stripPNG(W, H + S, H, cols.map(c => c.hex));
     const out = await env.IMAGES.input(base.stream())
-      .draw(env.IMAGES.input((await get()).body).transform({ width: W, height: H, fit: "scale-down" }), { top: 0, left: 0 })
+      .draw(env.IMAGES.input((await get()).body).transform({ ...trim, width: W, height: H, fit: "scale-down" }), { top: 0, left: 0 })
       .output({ format: "image/jpeg", quality: 85 });
     const bytes = await out.response().arrayBuffer();
     await env.DATA.put(key, bytes, { httpMetadata: { contentType: "image/jpeg" } });
