@@ -122,5 +122,5 @@ async function shareLink(title, url, msg) {
 const shareBtn = `<button class="icon-btn glass" data-pshare aria-label="Share this painting">${ICON.share}</button>`;
 function wirePaintingShare(el, title, path) {
   const b = el.querySelector("[data-pshare]"); if (!b) return;
-  b.onclick = e => { e.stopPropagation(); buzz(6); shareLink(title, shareURL(path), "Check out this painting I found on Chromatlas"); };   // the preview card under it names the painting
+  b.onclick = e => { e.stopPropagation(); buzz(6); shareLink(title, shareURL(path), "Check out this painting I found"); };   // the preview card under it names the painting, its colors and Chromatlas
 }
