@@ -1,1 +1,63 @@
-{"slug": "henri-matisse", "lead": "Henri Émile Benoît Matisse was a French visual artist, known for both his use of colour and his fluid and original draughtsmanship.", "paras": ["He was a draughtsman, printmaker, and sculptor, but is known primarily as a painter."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "henri-matisse",
+ "lead": "Henri Émile Benoît Matisse was a French visual artist, known for both his use of colour and his fluid and original draughtsmanship.",
+ "paras": [
+  "Matisse made color the subject of the picture. He put strong, flat hues next to each other, trusted their balance, and treated an interior, a figure and a window as parts of one design.",
+  "Ball groups him with Van Gogh, Gauguin and Kandinsky among painters who explored the new range that nineteenth-century chemistry had opened."
+ ],
+ "chapters": [
+  {
+   "title": "Fauvism",
+   "when": "Paris, Collioure · 1900 to 1908",
+   "text": "Matisse started to paint seriously after a long illness around 1890. In 1905 he and André Derain spent the summer at Collioure on the Mediterranean, and the pictures they showed that autumn at the Salon d'Automne gave Fauvism its name, the wild beasts. Woman with a Hat has a face striped with {{Apricot}}, {{Lilac}} and {{Rose}} against a loud background.\n\nThe color is not realistic and it is not meant to be. Pure strong paint, straight from the tube, is set next to its opposite, so that each side looks more intense.\n\nLook at the brushwork: the marks are broad and the white canvas can still be seen between them.",
+   "colors": [
+    "Apricot",
+    "Lilac",
+    "Rose",
+    "Emerald Green",
+    "Vermilion"
+   ]
+  },
+  {
+   "title": "Red studio and Nice",
+   "when": "Paris, Nice · 1908 to 1930",
+   "text": "The Red Studio of 1911 is painted largely in one deep {{Indian Red}} that covers the walls and floor, with the furniture drawn in thin pale lines and the artworks within it in other colors. It is an interior made of one color.\n\nFrom 1917 Matisse lived much of the year in Nice. The light there and the room-sized patterns of cloth and wallpaper moved his painting toward more delicate, shimmering color: {{Turquoise}}, {{Cream}}, {{Salmon}} and {{Teal}}.\n\nFlat, pattern-heavy surfaces follow, which prepare for his late cut-outs.",
+   "colors": [
+    "Indian Red",
+    "Turquoise",
+    "Cream",
+    "Salmon",
+    "Teal"
+   ]
+  },
+  {
+   "title": "Paper cut-outs",
+   "when": "Nice, Vence · 1943 to 1954",
+   "text": "After surgery in 1941 Matisse often worked from a chair or bed. He had assistants paint sheets of paper with opaque gouache, then cut shapes directly from them, and arranged the shapes on walls. The Snail and the large blue nudes are made this way.\n\nThe colors are the clearest in his career: {{Royal Blue}}, {{Cadmium Orange}}, {{Emerald Green}} and a hot pink, each on a white ground.\n\nHe also designed the chapel at Vence, completed in 1951, where the windows throw yellow, green and blue light onto a white room.",
+   "colors": [
+    "Royal Blue",
+    "Cadmium Orange",
+    "Emerald Green",
+    "Pink",
+    "Cadmium Lemon"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 591 paintings",
+   "text": "Our archive holds 591 of his works. His lightest large areas are {{French Grey}} and pale white, which is the unpainted ground and the white paper he often left showing. His darkest are {{Black}} and {{Raisin Black}}, which fits his use of black as a drawn line and sometimes as a flat color.\n\nThe list of colors that he uses more than his peers is mostly greys, which probably reflects the many ink drawings and prints in the archive and not his famous color. We have left that list out.",
+   "colors": [
+    "French Grey",
+    "Black",
+    "Raisin Black"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 591 paintings"
+ ],
+ "words": 455,
+ "status": "article"
+}

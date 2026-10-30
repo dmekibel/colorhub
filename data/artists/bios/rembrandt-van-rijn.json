@@ -1,0 +1,64 @@
+{
+ "slug": "rembrandt-van-rijn",
+ "lead": "Rembrandt Harmenszoon van Rijn, known mononymously as Rembrandt, was a Dutch Golden Age painter, printmaker, and draughtsman.",
+ "paras": [
+  "Rembrandt built nearly everything from a dozen earth and mineral pigments and a great deal of lead white. The famous glow is made less by hue than by contrast: a few warm, loaded highlights set in large fields of transparent brown.",
+  "Time has changed the surface, and the numbers below are best read with that in mind."
+ ],
+ "chapters": [
+  {
+   "title": "Leiden and the brown ground",
+   "when": "Leiden · 1620s",
+   "text": "As a young painter in Leiden Rembrandt prepared panels and canvases with a warm brown or grey ground, often a layer of brown earth over a lighter priming. Later studies of his technique, as summarized in standard accounts of the period, show that the ground is not a blank start: it shows through the thin shadows as the middle tone of the whole painting.\n\nHis early pictures are small and crowded with detail, and their colors are the Dutch Golden Age basics: lead-tin yellow, lead white, {{Vermilion}} and lakes for reds, {{Ochre}} and {{Raw Umber}} for flesh and clothing.\n\nWhat to look for in a small early panel is the thin brown of the underlayer showing through a face, doing the work of shadow without a single dark stroke.",
+   "colors": [
+    "Ochre",
+    "Raw Umber",
+    "Vermilion",
+    "Burnt Sienna",
+    "Sepia"
+   ]
+  },
+  {
+   "title": "Amsterdam and the glazes",
+   "when": "Amsterdam · 1630s to 1650s",
+   "text": "After moving to Amsterdam around 1631 he became the city's fashionable portrait painter, and his handling grew bolder. Highlights are thick lead white and yellow, built up so that they catch real light, while the shadows are thin glazes of transparent brown and red lake laid over them.\n\nThe Night Watch of 1642 stands at the center of this period. Its warm {{Venetian Red}} and {{Scarlet}} accents sit against large fields of dark, and the brightest notes are Captain Cocq's red sash and the lieutenant's pale yellow coat. Blues are small and restrained, since good blue pigments were costly.\n\nA second source of his dark palette was black: bone black or charcoal for the deepest passages, never a flat neutral but tinted by whatever lay beneath it.",
+   "colors": [
+    "Venetian Red",
+    "Scarlet",
+    "Van Dyke Brown",
+    "Umber",
+    "Carmine"
+   ]
+  },
+  {
+   "title": "The late manner",
+   "when": "Amsterdam · 1650s to 1669",
+   "text": "In his last two decades Rembrandt worked with a thicker, rougher touch. Self-portraits and double portraits such as The Jewish Bride, around 1665 to 1669, use lead white and warm {{Gold}} and {{Indian Red}} in heavy ridges that are modeled almost like sculpture, and the sleeves and faces are drawn with the brush handle as well as the brush.\n\nThe palette stayed narrow. Few colors are needed when value contrast and surface do so much of the work. Viewed in person, the reds and golds look as though they emit light, which is partly the effect of thick paint catching the gallery lights at an angle.\n\nOld natural varnish yellows and darkens, so the browns we see today are probably deeper than the ones Rembrandt put down.",
+   "colors": [
+    "Gold",
+    "Indian Red",
+    "Raw Sienna",
+    "Maroon",
+    "Amber"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 879 paintings",
+   "text": "Our archive holds 879 of his paintings. Compared with other painters in the archive, he uses {{Black}}, {{Bistre}} and deep brown more than peers, and his darkest large areas are near black in the images. That is partly the paintings and partly the varnish.\n\nThese are photographs of aged, varnished canvases, so the very dark values should be taken as tendencies, not as the exact paint.",
+   "colors": [
+    "Black",
+    "Bistre",
+    "Smoky Black"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Gurney, Color and Light (2010)",
+  "Chromatlas archive, 879 paintings"
+ ],
+ "words": 523,
+ "status": "article"
+}

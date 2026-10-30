@@ -1,1 +1,63 @@
-{"slug": "paul-gauguin", "lead": "Eugène Henri Paul Gauguin was a French painter, sculptor, printmaker, ceramist, and writer, whose work has been primarily associated with the Post-Impressionist and Symbolist movements.", "paras": ["He was also an influential practitioner of wood engraving and woodcuts as art forms."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "paul-gauguin",
+ "lead": "Eugène Henri Paul Gauguin was a French painter, sculptor, printmaker, ceramist, and writer, whose work has been primarily associated with the Post-Impressionist and Symbolist movements.",
+ "paras": [
+  "Gauguin used color to carry mood and to flatten space. He took the broken brushwork of Impressionism and replaced it with large, nearly uniform areas of strong hue, often outlined in a darker color.",
+  "Whether it was a field in Brittany or a beach in Tahiti, the color is chosen first for what it should feel like."
+ ],
+ "chapters": [
+  {
+   "title": "Breaking with Impressionism",
+   "when": "Paris, Brittany · 1880s",
+   "text": "Gauguin began painting as an amateur and exhibited with the Impressionists. Ball describes him growing tired in the 1880s of the Impressionists' habit of copying nature so literally, and drifting away from the group in both place and style.\n\nIn Brittany, at Pont-Aven, he and the younger Emile Bernard developed a flat, outlined manner. In The Vision after the Sermon of 1888 the ground is a single field of strong {{Vermilion}}, which no field ever was, and the praying women in dark dresses and white caps stand out against it.\n\nThe point of that red is not to describe a field, but to make a vision.",
+   "colors": [
+    "Vermilion",
+    "Scarlet",
+    "Royal Blue",
+    "Mustard",
+    "Forest Green"
+   ]
+  },
+  {
+   "title": "Arles, Martinique and Yellow",
+   "when": "Provence, Caribbean · 1887 to 1890",
+   "text": "He spent two months in late 1888 in Arles with Van Gogh, and the two exchanged ideas about intense color. Before that he had visited Martinique, where the light and the saturated hues of the island pushed him toward a warmer palette.\n\nThe Yellow Christ of 1889 uses a single golden {{Mustard}} for both the figure and the autumn fields. Surrounding trees and the dress of the women are {{Orange}} and {{Rust}}, and the whole picture reads in a narrow band of warm color.",
+   "colors": [
+    "Mustard",
+    "Orange",
+    "Rust",
+    "Gold",
+    "Olive"
+   ]
+  },
+  {
+   "title": "Tahiti and the Marquesas",
+   "when": "French Polynesia · 1891 to 1903",
+   "text": "In 1891 Gauguin left France for Tahiti, hoping to live on what he called calm and art. He stayed, apart from a return to France, until he moved to the Marquesas Islands in 1901 and died there in 1903. Ball says his palette stayed rich but matured into greater subtlety of tone, with less stark contrast of complementary colors.\n\nThe Tahitian paintings use {{Coral}}, {{Terracotta}}, {{Pink}} and {{Teal}} for skin, ground, flowers and water. Some are painted on coarse canvas or sacking, which absorbs paint and gives the color a matte, chalky surface.\n\nLook for the dark outline around figures, and the way a single color can cover a whole dress or hillside without any change.",
+   "colors": [
+    "Coral",
+    "Terracotta",
+    "Pink",
+    "Teal",
+    "Turquoise"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 502 paintings",
+   "text": "Our archive holds 502 of his works, including paintings, prints and drawings. His darkest large areas are {{Dark Jungle Green}} and a near black, and his lightest large areas are muted greys such as {{French Grey}} and {{Putty}}.\n\nHe uses black and earth browns less than other painters of his period, which fits flat color with an outline. Photographs of aged canvas dull the brightest passages, so the real surfaces are likely stronger.",
+   "colors": [
+    "Dark Jungle Green",
+    "French Grey",
+    "Putty"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 502 paintings"
+ ],
+ "words": 461,
+ "status": "article"
+}

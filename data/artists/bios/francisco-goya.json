@@ -1,1 +1,63 @@
-{"slug": "francisco-goya", "lead": "Francisco José de Goya y Lucientes was a Spanish romantic painter and printmaker.", "paras": ["He is considered the most important Spanish artist of the late 18th and early 19th centuries."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "francisco-goya",
+ "lead": "Francisco José de Goya y Lucientes was a Spanish romantic painter and printmaker.",
+ "paras": [
+  "Goya is the painter people remember in black. He did also paint some of the brightest, most social color of eighteenth-century Spain, and the arc between the two is the story of his palette.",
+  "His darks are not one black. In the best pictures they are a family of warm and cool near-blacks, set against a few keyed accents of red, rose and silver-gray."
+ ],
+ "chapters": [
+  {
+   "title": "The court colorist",
+   "when": "Madrid · 1775-1792",
+   "text": "Francisco de Goya was born in 1746 in Aragon and trained in Zaragoza before moving to Madrid. From 1775 he designed cartoons for the royal tapestry factory, scenes of picnics, dances and games painted in clear light. The palette is the sunny one of the late rococo: {{Sky Blue}} skies, {{Salmon}} and {{Peach}} flesh, ivory silks and sage-green landscape.\n\nHe was also a copyist of Velázquez, whose use of silver grays he took in. The cartoons are good evidence that Goya could mix a high-key color scheme and keep it harmonious. They are still the paintings to look at first, to understand how much color he later chose to remove.",
+   "colors": [
+    "Sky Blue",
+    "Salmon",
+    "Peach",
+    "Sage",
+    "Ivory"
+   ]
+  },
+  {
+   "title": "Portraits and illness",
+   "when": "Madrid · 1792-1808",
+   "text": "In 1792 a serious illness left Goya permanently deaf. The work that follows is more inward. His portraits, among them the Duchess of Alba and the family of Charles IV, are built from a very small number of colors: a dark ground, a pearly pale skin, and rich fabric accents in {{Crimson}}, {{Carmine}} and silver-blue.\n\nThe reds in this period are usually organic lakes and vermilion, set against cool gray. Prussian blue was available to a Spanish court painter at this date, and may account for some of the deep blues, though that is something only pigment analysis of a given picture can confirm. In The Family of Charles IV the royal sashes and orders carry the color, and the faces are modeled in subdued grays and golden flesh tones.\n\nWhat to look for: how little saturated color he uses, and how much of the effect comes from where it is placed.",
+   "colors": [
+    "Crimson",
+    "Carmine",
+    "Vermilion",
+    "Prussian Blue"
+   ]
+  },
+  {
+   "title": "War and the Black Paintings",
+   "when": "Madrid and Bordeaux · 1808-1828",
+   "text": "The Napoleonic occupation produced The Disasters of War, a series of prints, and the 1814 paintings of May 2 and May 3, 1808. In The Third of May the color is simple: a white shirt lit by a lantern, a patch of red blood, and a dark night. The white is the brightest thing in the canvas, and it is not a pure white but a warm one that sits beside the cold black-green of the soldiers' coats.\n\nAround 1819 to 1823 Goya painted the Black Paintings on the plaster walls of his house outside Madrid. They were later transferred to canvas, now at the Prado, and the transfer and conservation history means that their surface today may differ from what he painted. The palette was earth browns, black, a little ochre and lead white. Even so, the black is not flat: it separates into {{Smoky Black}}, {{Bistre}} and olive-black, and a few touches of pink and bone give the faces their eerie glow.",
+   "colors": [
+    "Smoky Black",
+    "Bistre",
+    "Burnt Umber",
+    "Olive"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 510 paintings",
+   "text": "Chromatlas holds 510 paintings attributed to Goya, many of them photographs of dark, aged and varnished canvases, so the darks in particular read blacker than a fresh surface would. That caveat matters most for an artist who painted so dark.\n\nHis darkest large areas are {{Smoky Black}} (the largest by a long way), then near black and black-brown. The lightest large areas are {{White}}, {{Blackish Brown}} and dark olive brown, an unusual set that reflects how many of his canvases have no large pale area at all. Compared with his peers, he uses {{Raisin Black}}, {{Black Olive}} and {{Dark Jungle Green}} much more often. The simple finding is that Goya's palette in the archive is a ladder of blacks, with very little in the middle.",
+   "colors": [
+    "Smoky Black",
+    "Raisin Black",
+    "Black Olive",
+    "Dark Jungle Green"
+   ],
+   "pull": "Eight of the colors he uses more than his peers are blacks or near-blacks."
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 510 paintings"
+ ],
+ "words": 628,
+ "status": "article"
+}

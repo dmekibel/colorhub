@@ -204,8 +204,10 @@ function bioSlot(slug) {
   return awGet(AW_DIR + "bios/" + slug + ".json").then(b => {
     if (!b) return "";
     const paras = b.paras || (b.text ? String(b.text).split(/\n\n+/) : []);
-    if (!paras.length && !b.lead) return "";
-    return `<section class="aw-bio">${b.lead ? `<p class="aw-lead">${esc(b.lead)}</p>` : ""}${paras.map(t => `<p>${awCw(esc(t))}</p>`).join("")}${(b.sources || []).length ? `<p class="fine">${b.sources.map(esc).join(" · ")}</p>` : ""}</section>`;
+    if (!paras.length && !b.lead && !(b.chapters || []).length) return "";
+    const chs = (b.chapters || []).map(c => { const cols = (c.colors || []).map(awHex).filter(h => h !== "#808080");
+      return `<div class="aw-ch" style="--c:${cols[0] || "#888"}">${c.when ? `<span class="aw-ch-w">${esc(c.when)}</span>` : ""}<h3>${esc(c.title)}</h3>${String(c.text || "").split(/\n\n+/).map(t => `<p>${awCw(esc(t))}</p>`).join("")}${cols.length ? `<span class="aw-ch-p">${cols.map(h => `<i style="--c:${h}"></i>`).join("")}</span>` : ""}${c.pull ? `<p class="aw-pull">${esc(c.pull)}</p>` : ""}</div>`; }).join("");
+    return `<section class="aw-bio">${b.lead ? `<p class="aw-lead">${esc(b.lead)}</p>` : ""}${paras.map(t => `<p>${awCw(esc(t))}</p>`).join("")}${chs}${(b.sources || []).length ? `<p class="fine">${b.sources.map(esc).join(" · ")}</p>` : ""}</section>`;
   }).catch(() => "");
 }
 

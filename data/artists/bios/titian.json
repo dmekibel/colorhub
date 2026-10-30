@@ -1,1 +1,62 @@
-{"slug": "titian", "lead": "Tiziano Vecellio, Latinized as Titianus, hence known in English as Titian, was an Italian Renaissance painter.", "paras": ["The most important artist of Renaissance Venetian painting, he was born in Pieve di Cadore, near Belluno."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "titian",
+ "lead": "Tiziano Vecellio, Latinized as Titianus, hence known in English as Titian, was an Italian Renaissance painter.",
+ "paras": [
+  "Titian worked in Venice for some sixty years, and his color changes more across that time than almost any painter's. He begins with clear, saturated blues and reds and ends in a veiled, brownish-red haze.",
+  "Venice mattered to this. It was a port through which pigments arrived, and a painter of Titian's standing could choose among the best."
+ ],
+ "chapters": [
+  {
+   "title": "A Venetian port of pigments",
+   "when": "Venice · c. 1510-1520",
+   "text": "Titian was born in Pieve di Cadore, in the Veneto mountains, and trained in Venice, in the circle of Giovanni Bellini and Giorgione. Ball makes the point that Titian, whom Henry James called the prince of colourists, had first pick of the pigments arriving at the Venetian ports, and covered his canvases with sumptuous reds, blues, pinks and violets. Michelangelo is said, in a remark passed down through Vasari, to have regretted that Venetians were not taught to draw.\n\nThe Assunta in the Frari church (about 1516 to 1518) shows the young style: a cloak of strong {{Crimson}}, a robe of deep blue, a gold light behind the Virgin, and a wall of apostles in red. The color of the main figure is saturated, while the lower register has more earth tones.\n\nAnalysis of other Titian pictures, including those in the National Gallery in London, has found natural ultramarine, made from lapis lazuli, in his best blues, and the redder passages built from vermilion and red lakes over lead white. For any single painting, check the museum's catalogue.",
+   "colors": [
+    "Crimson",
+    "Vermilion",
+    "Lapis Lazuli",
+    "Gold"
+   ]
+  },
+  {
+   "title": "The mythologies",
+   "when": "Venice and Ferrara · 1520-1550",
+   "text": "For Alfonso d'Este's study in Ferrara Titian painted Bacchus and Ariadne (finished in 1523). The sky is a deep {{Azure}} that fades toward the horizon, a performance in ultramarine that museum analysts and reference books have long cited. Pink and {{Scarlet}} drapery, pale skin and the shadowed {{Olive}} wood of the forest hold the rest of the picture.\n\nIn the next decades he painted portraits for Charles V and the Habsburgs, and the nudes known as the poesie for Philip II. The flesh grows warmer and more broken: instead of a single flat pink, he glazes thin red over a pale underpainting, so that blood seems to show through.",
+   "colors": [
+    "Azure",
+    "Scarlet",
+    "Olive",
+    "Peach"
+   ]
+  },
+  {
+   "title": "The late manner",
+   "when": "Venice · 1550-1576",
+   "text": "In his last twenty-five years, Titian's paint becomes loose and thick. A pupil, Palma il Giovane, is reported to have said that the old man finished by smearing with his fingers; the story comes from a later source, so it is best read as a description of the effect rather than a record. The colors are muted and merge: {{Maroon}} cloths, a smoky {{Umber}}, a bit of white, and a slow {{Burnt Sienna}} glow over everything.\n\nThe Flaying of Marsyas, from his final years, is dark and red-brown, with red used as an event rather than a surface. What to look for in the late work is the variation inside one color: what looks from afar like a single red robe is built from lakes, orange, brown and white.\n\nTitian died in Venice in 1576.",
+   "colors": [
+    "Maroon",
+    "Umber",
+    "Burnt Sienna",
+    "Claret"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 901 paintings",
+   "text": "Chromatlas holds 901 paintings attributed to Titian, a figure that may include workshop and follower pictures, since museum attributions vary. They are photographs of varnished oils, many of which have darkened; older varnishes tend to turn the whites toward {{Tan}}.\n\nHis darkest large areas are {{Smoky Black}} (36 percent of paintings), black-brown and near-black. His lightest large areas are {{Tan}}, {{Camel}} and {{Café Noir}}, which are mid-tones rather than whites. The archive's picture of Titian is therefore a Titian seen through varnish. The colors he uses more than his peers include {{Raisin Black}}, black and {{Bistre}}. Anyone looking for his famous blue and red in this data will not find them in the largest areas; they are small and need to be read off one painting at a time.",
+   "colors": [
+    "Tan",
+    "Camel",
+    "Smoky Black",
+    "Bistre"
+   ],
+   "pull": "Even his lightest large areas in the archive are tan and camel, not white."
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 901 paintings"
+ ],
+ "words": 625,
+ "status": "article"
+}

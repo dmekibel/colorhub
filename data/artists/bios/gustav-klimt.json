@@ -1,1 +1,62 @@
-{"slug": "gustav-klimt", "lead": "Gustav Klimt was an Austrian symbolist painter and a founding member of the Vienna Secession movement.", "paras": ["His work helped define the Art Nouveau style in Europe."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "gustav-klimt",
+ "lead": "Gustav Klimt was an Austrian symbolist painter and a founding member of the Vienna Secession movement.",
+ "paras": [
+  "Klimt is the painter of gold, and his reputation hides a second color life: a quiet palette of greens and blues in landscapes, and a pale, almost silvery one in his portraits.",
+  "The gold is real metal leaf, applied to the canvas, which is why photographs struggle with it."
+ ],
+ "chapters": [
+  {
+   "title": "Vienna and the academic years",
+   "when": "Vienna · 1880s to 1890s",
+   "text": "Klimt trained at the Vienna School of Applied Arts and worked with his brother Ernst and Franz Matsch on theater and museum decorations. His early work is academic and warm, painted in {{Sienna}}, {{Umber}} and muted {{Burgundy}}.\n\nIn 1897 he helped found the Vienna Secession and became its first president, breaking away from the official art society.",
+   "colors": [
+    "Sienna",
+    "Umber",
+    "Burgundy",
+    "Olive",
+    "Tan"
+   ]
+  },
+  {
+   "title": "The golden phase",
+   "when": "Vienna · about 1899 to 1910",
+   "text": "Around 1900 Klimt began to combine oil paint with gold and silver leaf. The Beethoven Frieze of 1902, the portrait of Adele Bloch-Bauer of 1907 and The Kiss of about 1907 to 1908 are the best known. In each, flat {{Gold}} sets off patches of ornament in {{Mustard}}, {{Terracotta}} and blue-green, while faces and hands remain delicate and almost naturalistic.\n\nThe effect depends on contrast between the real metal, which changes with the angle of light, and the matte oil. It is one of the few places in painting where the color moves as you do.\n\nWhat to look for is that the leaf is not perfectly flat. Small tool marks and edges catch the light differently.",
+   "colors": [
+    "Gold",
+    "Mustard",
+    "Terracotta",
+    "Teal",
+    "Amber"
+   ],
+   "pull": "Klimt's gold is metal leaf, so it changes with the viewer's angle in a way no photograph can record."
+  },
+  {
+   "title": "Gardens and late portraits",
+   "when": "Austria · 1910 to 1918",
+   "text": "After about 1910 Klimt put away the gold and turned to brighter, more varied color. His square landscapes of Lake Attersee and his gardens are painted in layers of {{Sap Green}}, {{Cerulean Blue}} and flecks of {{Coral}} and {{Pink}} for flowers, with almost no sky.\n\nThe late portraits place women in front of patterned backgrounds inspired by East Asian textiles, in vivid reds and blues.\n\nHe died in Vienna in 1918.",
+   "colors": [
+    "Sap Green",
+    "Cerulean Blue",
+    "Coral",
+    "Pink",
+    "Royal Blue"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 154 paintings",
+   "text": "Our archive holds 154 of his works, a small set. His darkest large areas are {{Smoky Black}} and black-brown and his lightest are Oatmeal and pale olive grey. He uses earthy browns less than other painters of his era.\n\nBecause metal leaf photographs unpredictably, the gold paintings may read as flat yellow-brown here, and a small archive is a weak basis for any ranking.",
+   "colors": [
+    "Smoky Black",
+    "French Grey"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Chromatlas archive, 154 paintings"
+ ],
+ "words": 374,
+ "status": "article"
+}

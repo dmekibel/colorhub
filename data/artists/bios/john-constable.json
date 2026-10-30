@@ -1,1 +1,56 @@
-{"slug": "john-constable", "lead": "John Constable was an English landscape painter in the Romantic tradition.", "paras": ["Born in Suffolk, he is known principally for revolutionising the genre of landscape painting with his pictures of Dedham Vale, the area on the borderland of Suffolk and north Essex surrounding his home – now known as \"Constable Country\" – which he invested with an intensity of affection."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "john-constable",
+ "lead": "John Constable was an English landscape painter in the Romantic tradition.",
+ "paras": [
+  "Constable is remembered as the painter of English green, and green is the hardest color in a landscape to get right. It tends to turn flat and bottle-like, and in his day painters were expected to tone it down with brown. He tried to keep a field looking like a field.",
+  "What makes his color worth studying is how much of it is white and gray. The famous freshness comes from small broken touches laid over a quiet ground, not from strong pigment."
+ ],
+ "chapters": [
+  {
+   "title": "A Suffolk apprenticeship",
+   "when": "Suffolk and London · 1776-1815",
+   "text": "John Constable grew up in East Bergholt, where his father ran mills on the River Stour. He later said these scenes made him a painter. He trained slowly, copying older landscapes in London, and for years he sold little. His early work shares the low, brown-green tonality the Royal Academy expected, built over dark grounds.\n\nBy Ball's account, the taste of the period favored a warm, tobacco-colored harmony: a painting, in the saying Constable himself reported, should be brown like an old violin. He answered by setting a violin on the grass to show that nature was brighter. The anecdote is told secondhand, so treat the wording as approximate.\n\nThe materials behind that brown were cheap and stable: {{Raw Umber}}, {{Bistre}}, yellow ochre and lead white. The new green pigments of the period were less reliable, so painters often made their grass by mixing a yellow with a blue, then dulling it. Look at the shadows under trees in the early canvases and you will see how little separates the darkest green from brown.",
+   "colors": [
+    "Raw Umber",
+    "Bistre"
+   ]
+  },
+  {
+   "title": "Sketching out of doors",
+   "when": "Dedham Vale and Hampstead · 1813-1822",
+   "text": "From about 1813 Constable made small oil sketches in the open air, and in 1821 and 1822 he painted dozens of cloud studies on Hampstead Heath, noting the date, hour and wind on the back. These sketches are the clearest record of how he saw. A summer cloud is not simply white: it is a warm Linen grey in its belly and a cool blue-white at its edge, and the sky between is a pale {{Cerulean}} blue that grows paler toward the horizon.\n\nThe exhibited paintings, the six-footers such as The White Horse and The Hay Wain, were built from those sketches in the studio. Over the greens he added small flecks of pure lead white on leaves, water and wheel rims, which critics mocked as snow. In the studio he also kept a deep red accent, usually a jacket or a horse collar, to hold the green in place. The red is small, and it works because the surrounding green is so abundant.\n\nWhen The Hay Wain went to Paris in 1824, Ball and other writers report that its broken, vibrating greens impressed French painters. Delacroix is the name most often attached to that story. Some of the accounts are anecdotal, so hold the details lightly.",
+   "colors": [
+    "Cerulean",
+    "Forest Green",
+    "Rust"
+   ]
+  },
+  {
+   "title": "Darker, later pictures",
+   "when": "Salisbury and Brighton · 1823-1837",
+   "text": "After his wife Maria died in 1828, the work darkens. Salisbury Cathedral from the Meadows and the late Hadleigh Castle use heavy skies and a wide range of {{Dark Jungle Green}} and near-black browns. He used a palette knife for broken, dragged touches, so that lower layers show through the upper ones.\n\nNothing in the late work is simply gloomy. The knife-laid whites and the warm {{Sienna}} of an exposed bank give a shock of light. Ball notes that to modern eyes his canvases look restrained, though many viewers of the time found them daringly bright, and a Royal Academy member is said to have called one a nasty green thing.\n\nWhat to look for in a real painting: an area of green that, at arm's length, contains yellow, blue-gray and brown; a single bright accent, usually red; and a pale, active sky that is lit from one side.",
+   "colors": [
+    "Dark Jungle Green",
+    "Sienna",
+    "Smoky Black",
+    "Olive"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 487 paintings",
+   "text": "Chromatlas holds 487 paintings attributed to Constable, photographed from museum collections. These are photographs of aged, varnished canvases, so the darks are deeper and the whites more yellow than the painter intended. Read the numbers as a guide to the pictures as they now appear, not as a measure of pigment.\n\nOn that basis his darkest large areas fall into {{Smoky Black}}, Dark olive brown and {{Dark Jungle Green}}, which fits the tree masses and shadowed banks. His lightest large areas are quiet: Linen grey, {{Greyish White}} and {{French Grey}}, the clouds. The colors that stand out against his peers are Dark olive brown and Seaweed green. The number to remember is how few bright colors there are: the Constable look is mostly low-chroma green, with its air supplied by gray.",
+   "colors": [
+    "Smoky Black"
+   ],
+   "pull": "His lightest large areas are gray: the clouds."
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 487 paintings"
+ ],
+ "words": 755,
+ "status": "article"
+}

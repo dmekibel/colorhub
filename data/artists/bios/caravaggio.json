@@ -1,1 +1,61 @@
-{"slug": "caravaggio", "lead": "Michelangelo Merisi da Caravaggio, known mononymously as Caravaggio, was an Italian painter active in Rome for a significant portion of his artistic life.", "paras": ["He began his apprenticeship in Milan in 1584, and during the final four years of his life, he moved between Naples, Malta, and Sicily."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "caravaggio",
+ "lead": "Michelangelo Merisi da Caravaggio, known mononymously as Caravaggio, was an Italian painter active in Rome for a significant portion of his artistic life.",
+ "paras": [
+  "Caravaggio's color is mostly shadow. He set a few figures against a dark ground and lit them from one side, and what remains is a small number of colors speaking loudly: red cloth, white linen, warm flesh.",
+  "The effect depends on the surrounding darkness, which is why, in a gallery, the paintings can seem to glow in a black field."
+ ],
+ "chapters": [
+  {
+   "title": "Milan and early Rome",
+   "when": "Milan and Rome · 1584-1599",
+   "text": "Michelangelo Merisi was born in 1571 and was apprenticed in Milan in 1584 before arriving in Rome in the early 1590s. His first Roman pictures, a Boy with a Basket of Fruit and the Bacchus, are brighter and clearer than what followed: flesh in warm {{Peach}} and {{Salmon}}, cool white drapery, a lush still life.\n\nEven then the gold-brown shadow under the figures does the main work. The fruit in the basket, and the glass of wine in front of Bacchus, use a limited set of reds, yellows and dull greens that were common to painters in Rome.",
+   "colors": [
+    "Peach",
+    "Salmon",
+    "Amber",
+    "Olive"
+   ]
+  },
+  {
+   "title": "Chiaroscuro and the Roman altarpieces",
+   "when": "Rome · 1599-1606",
+   "text": "With the Contarelli Chapel pictures of 1599 to 1600, including the Calling of Saint Matthew, he developed his mature manner. Ball describes how Caravaggio's figures are spotlighted in impenetrable darkness, and how, as a result, their colors are often bleached and subdued in the glare. In the Burial of Christ, he notes, pale flesh and white drapery are moderated by only a few muted tones. That is a good way to look at the pictures: the color is not in the shadows, but in the few places where the light lands.\n\nHe painted from live models, on grounds that scholars describe as dark, probably red-brown, which gave a warm foundation under the darks. The reds in the cloaks are generally taken to be vermilion or red lake, the yellows lead-tin yellow, the whites lead white. These are the standard pigments of his time rather than documented for each picture, and you can check them against the museum's own technical notes.\n\nThe darkness is part of the palette: {{Bistre}}, {{Burnt Umber}} and black do not have separate roles, they fuse into one.",
+   "colors": [
+    "Vermilion",
+    "Burnt Umber",
+    "Bistre",
+    "Crimson"
+   ]
+  },
+  {
+   "title": "Flight and the late pictures",
+   "when": "Naples, Malta and Sicily · 1606-1610",
+   "text": "In 1606 Caravaggio killed a man in Rome and fled. In Naples, Malta and Sicily he kept working. The late pictures, such as the Beheading of Saint John the Baptist in Malta and the Burial of Saint Lucy in Syracuse, are even emptier: huge dark spaces of wall and floor with small figures in a bleak {{Umber}}-and-{{Sienna}} light.\n\nColor is almost unnecessary here. A red cloth, a flash of skin, a white shirt: these are enough. He died in 1610 at Porto Ercole.\n\nWhat to look for: how a single hand or face is lit by a narrow beam, and how the surrounding shadow keeps a faint, warm color, not pure black.",
+   "colors": [
+    "Umber",
+    "Sienna",
+    "Rust",
+    "Ivory"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 691 paintings",
+   "text": "Chromatlas holds 691 paintings attributed to Caravaggio and his circle; the attributions in a museum database can run wide, so the set may include followers. They are photographs of varnished and sometimes darkened oils, which pushes everything toward brown.\n\nHis darkest large areas are {{Smoky Black}} (about a third of the paintings), black-brown and near-black. The lightest large areas are {{Café Noir}}, {{Bistre}} and {{Dark Brown}}: the lightest large patch in a Caravaggio is often still a dark brown, a rare outcome in the archive. Compared with his peers he uses dark olive brown less and a family of espresso, black and raisin-black more. The honest summary is that the archive confirms the reputation: it is a collection of dark pictures with small pale areas.",
+   "colors": [
+    "Smoky Black",
+    "Café Noir",
+    "Bistre",
+    "Raisin Black"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 691 paintings"
+ ],
+ "words": 599,
+ "status": "article"
+}

@@ -1,1 +1,58 @@
-{"slug": "el-greco", "lead": "Doménikos Theotokópoulos, most widely known as El Greco, was a Greek painter, sculptor and architect of the Spanish Renaissance, regarded as one of the greatest artists of all time.", "paras": ["El Greco was a nickname, and the artist normally signed his paintings with his full birth name in Greek letters often adding the word Κρής, which means \"Cretan\" in Ancient Greek."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "el-greco",
+ "lead": "Doménikos Theotokópoulos, most widely known as El Greco, was a Greek painter, sculptor and architect of the Spanish Renaissance, regarded as one of the greatest artists of all time.",
+ "paras": [
+  "El Greco's color is among the strangest in European painting: acid yellows and greens, sour lakes, a cold silver light. For centuries many viewers took it as an eccentricity; in the twentieth century it was recognized as one of the most original palettes of its day.",
+  "It is a Byzantine painter's color grafted onto the Venetian system, and then pushed to the limit in Spain."
+ ],
+ "chapters": [
+  {
+   "title": "Crete and Venice",
+   "when": "Candia, Venice and Rome · 1541-1576",
+   "text": "Doménikos Theotokópoulos was born on Crete, then a Venetian possession, and began as a painter of icons in the post-Byzantine style. That training matters: gold grounds, strong flat colors and an orderly hierarchy of reds and blues stay in his work for the rest of his life.\n\nIn the 1560s and 1570s he worked in Venice and Rome, where he took Titian and Tintoretto's colors: {{Crimson}} and {{Vermilion}} drapery, deep blues and glazed flesh. A Venetian painter's palette then included natural ultramarine, azurite, red lakes and lead-tin yellow. Ball names El Greco among the painters who used smalt, a blue glass pigment, as did Veronese, Tintoretto, Van Dyck, Rubens and Rembrandt. It could be cheap and tended to fade or gray.",
+   "colors": [
+    "Crimson",
+    "Vermilion",
+    "Lapis Lazuli",
+    "Gold"
+   ]
+  },
+  {
+   "title": "Toledo",
+   "when": "Toledo · 1577-1600",
+   "text": "El Greco moved to Toledo in 1577. Here he painted the Disrobing of Christ for the cathedral, in which a robe of searing {{Scarlet}} stands at the center of a crowd of sour blues and golds. Ball's description of the late pictures, as pallid figures robed in blue, madder and honey-brown, in a ghastly light, is exact about the effect.\n\nThe Burial of the Count of Orgaz (1586 to 1588) divides in two. The lower half is dark Spanish dress and a black field of nobles, with the cleric's gold and white vestments. The upper half is a heaven of {{Cornflower}} blue, yellow, rose and gray. His colors tend to be clear and cool: lemon yellow, {{Sage}} green, silvery blue.\n\nThe View of Toledo (around 1599 to 1600) is his landscape. Ball observes that El Greco's views of Toledo would not look out of place beside Cézanne's hillsides, and that his work was not rediscovered until twentieth-century styles had retrained the eye.",
+   "colors": [
+    "Scarlet",
+    "Cornflower",
+    "Sage",
+    "Gold"
+   ]
+  },
+  {
+   "title": "The late flame",
+   "when": "Toledo · 1600-1614",
+   "text": "In the last years the figures lengthen and the light thins. Pictures like the Laocoön, the Opening of the Fifth Seal and the Immaculate Conception are full of electric blue-greens and tarnished pinks, with figures lit as if by lightning.\n\nThe backgrounds are stormy gray and olive, which sets the saints off as small cold flames. He kept a large workshop in Toledo that repeated his compositions, so a Greco in a museum can be anywhere from the master's own hand to a studio replica.\n\nWhat to look for: a clear, cool light that falls on faces from no definable source; one sharp warm accent per figure group; and color blocks that are modelled in lighter versions of themselves instead of in black.",
+   "colors": [
+    "Teal",
+    "Olive",
+    "Rose"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 490 paintings",
+   "text": "Chromatlas holds 490 paintings attributed to El Greco. Because of the workshop replicas and later attributions, the set contains some pictures that are not strictly his own. They are photographs of varnished, aged oils.\n\nHis darkest large areas are {{Smoky Black}} (42 percent), black-brown and black. His lightest large areas are pale mouse gray, Oatmeal and a linen gray, so his brightest broad patches are cool and low-chroma. Compared with his peers he uses {{Jet}}, {{Black Olive}} and plain black more often. As with the others in this set the data is better at the broad darks than at the small acid accents. El Greco's yellow-greens and lakes are the points of a picture, not its bulk.",
+   "colors": [
+    "Smoky Black",
+    "Black Olive"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 490 paintings"
+ ],
+ "words": 617,
+ "status": "article"
+}

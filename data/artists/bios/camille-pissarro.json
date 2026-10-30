@@ -1,1 +1,62 @@
-{"slug": "camille-pissarro", "lead": "Jacob Abraham Camille Pissarro was a Danish-French Impressionist and Neo-Impressionist painter born on the island of Saint Thomas.", "paras": ["His importance resides in his contributions to both Impressionism and Post-Impressionism."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "camille-pissarro",
+ "lead": "Jacob Abraham Camille Pissarro was a Danish-French Impressionist and Neo-Impressionist painter born on the island of Saint Thomas.",
+ "paras": [
+  "Pissarro is the Impressionist who worked longest and tried the most. He was the only painter to show at all eight Impressionist exhibitions, and he later took up Neo-Impressionism before leaving it.",
+  "His color is the least showy of the group: a tapestry of greens, ochres and pale blues in which no single hue shouts. The interest is in how many colors are packed into one patch of grass."
+ ],
+ "chapters": [
+  {
+   "title": "From the Caribbean to Pontoise",
+   "when": "St Thomas, Caracas and Paris · 1830-1872",
+   "text": "Camille Pissarro was born on Saint Thomas, then Danish, in 1830, and spent his youth between the island and Paris. He studied Corot and Courbet and settled in Louveciennes and then Pontoise. In these early landscapes the palette is brown and olive, with earth pigments and a restrained green, and a gray sky.\n\nThe war of 1870 drove him to London, where he painted suburban scenes and saw Constable and Turner. By 1872 he was back in Pontoise, working next to Cézanne and showing a lighter, more varied color. Cézanne, years younger, is often said to have learned from him how to build a surface from small separate touches.",
+   "colors": [
+    "Olive",
+    "Sage",
+    "Umber",
+    "Sky Blue"
+   ]
+  },
+  {
+   "title": "The three primaries",
+   "when": "Pontoise and Eragny · 1873-1885",
+   "text": "Ball reports that Pissarro advised Cézanne to paint using only the three primary colors and their derivatives, and that he had himself removed black, burnt sienna and the ochre pigments from his palette. That is a purported statement, passed on at one remove, but it matches what the pictures look like: a field in his Pontoise years is {{Sage}}, {{Olive}} and a bright yellow-green laid next to rose-pink and pale blue.\n\nThe effect is a shimmer rather than a contrast. Where a conventional landscape would paint a tree trunk dark brown, Pissarro paints it violet-gray, picks out a warm patch of light on it, and surrounds it with green. The picture is full of color, but no single color stands out.\n\nThe dropping of black shows in the archive, where the colors he uses less than his peers are all dark ones. In a Pissarro the shadows tend to be green, violet or blue, so a black ground would have been out of place.",
+   "colors": [
+    "Sage",
+    "Olive",
+    "Rose",
+    "Sky Blue",
+    "Cornflower"
+   ]
+  },
+  {
+   "title": "Dots, then the city",
+   "when": "Eragny, Paris and Rouen · 1885-1903",
+   "text": "In the mid-1880s Pissarro met Seurat and Signac and for several years adopted pointillist technique, painting in small separated dots of pure color. He found it too slow and too rigid and gave it up by the early 1890s, but he kept its purer tints.\n\nAn eye infection later limited his work outdoors, and from hotel windows he painted a series of Paris views: the Boulevard Montmartre in different weather and times of day, the Avenue de l'Opéra, the Place du Théâtre-Français. The color is mostly pale gold, {{Buff}}, {{Tan}} and lavender-gray, with the wet street reflecting pink and blue. He also painted Rouen, Le Havre and Dieppe. He died in 1903.\n\nWhat to look for: a mid-tone green with several other hues inside it, a very pale and warm sky, and the lack of strong black.",
+   "colors": [
+    "Buff",
+    "Tan",
+    "Lilac",
+    "Cornflower"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 777 paintings",
+   "text": "Chromatlas holds 777 paintings attributed to Pissarro, which is a large and varied set across his whole career. These are photographs of varnished oil paintings; older ones have darkened somewhat.\n\nHis darkest large areas are only weakly dark: {{Dark Jungle Green}}, dark olive brown and {{Smoky Black}}, each on about five percent of the paintings, a flat spread compared with painters like Goya, where one black dominates. His lightest large areas are Oatmeal, {{Papyrus White}} and a gray-white. Compared with his peers, five colors are used much less: {{Smoky Black}}, {{Bistre}}, {{Café Noir}}, dark walnut and dark olive brown. That is the data's way of repeating what Pissarro reportedly told Cézanne: leave out the blacks and the earth browns.",
+   "colors": [
+    "Papyrus White",
+    "Dark Jungle Green",
+    "Bistre"
+   ],
+   "pull": "Five dark colors that his peers use are used much less often by Pissarro."
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 777 paintings"
+ ],
+ "words": 616,
+ "status": "article"
+}

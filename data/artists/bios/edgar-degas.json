@@ -1,0 +1,63 @@
+{
+ "slug": "edgar-degas",
+ "lead": "Edgar Degas was a French Impressionist artist famous for his pastel drawings and oil paintings.",
+ "paras": [
+  "Degas is known for dancers and racehorses, but his color is more unusual than his subjects. He was the one major Impressionist who went into his materials, testing recipes and mixing his own surfaces, and he kept a restless, experimental palette for fifty years.",
+  "His subject was often indoor light, such as gas lamps and stage footlights, which colors faces and fabrics in a way daylight never does."
+ ],
+ "chapters": [
+  {
+   "title": "Training and the studio",
+   "when": "Paris, Italy · 1850s to 1860s",
+   "text": "Degas trained in Paris and spent years in Italy copying earlier painters. His early portraits are low-key and drawn with precision, painted in browns, greys and muted {{Olive}} greens. The family and history paintings of the 1860s, such as The Bellelli Family, rely on dark clothing set against paler skin and wallpaper.\n\nBall notes that, unusually for an Impressionist, Degas was curious about what was actually inside his colors. His notebooks include chemical recipes and notes on materials, partly because he was worried by the way some of Manet's paintings had discolored.",
+   "colors": [
+    "Olive",
+    "Sepia",
+    "Umber",
+    "Cream",
+    "Khaki"
+   ]
+  },
+  {
+   "title": "Dancers and pastel",
+   "when": "Paris · 1870s to 1890s",
+   "text": "From the 1870s Degas turned to dancers, laundresses, café singers and bathers. Many of the best known are in pastel, which he handled in layers, fixing and reworking, sometimes steaming the paper to blend. The effect is a velvety surface in which one color sits partly on top of another instead of mixing.\n\nStage light gives him odd, specific colors. Faces seen from the pit are lit from below, and tutus catch the green and orange of the gas flames, so a white skirt becomes {{Sage}}, {{Peach}} and {{Apricot}} in turn.\n\nWhat to look for in a real pastel is the bare paper. He often left it showing as a tone of its own, so the picture is built from the paper's color outward.",
+   "colors": [
+    "Sage",
+    "Peach",
+    "Apricot",
+    "Coral",
+    "Rose"
+   ]
+  },
+  {
+   "title": "Late work and failing eyes",
+   "when": "Paris · 1890s to 1912",
+   "text": "His eyesight declined in his later decades. The late pastels, mostly of women bathing and drying, are broader and more intense: strong {{Vermilion}}, {{Cadmium Orange}} and {{Turquoise}} are laid down in thick, coarse strokes, with hard outlines that are sometimes redrawn in charcoal.\n\nIt is a mistake to call these crude. The color is deliberate and often daring, and it is closer to the later decorative painters than to the soft Impressionist work of the 1870s.\n\nHe stopped working around 1912 and lived until 1917.",
+   "colors": [
+    "Vermilion",
+    "Cadmium Orange",
+    "Turquoise",
+    "Terracotta",
+    "Burnt Sienna"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 774 paintings",
+   "text": "Our archive holds 774 of his works. The darkest large areas are {{Smoky Black}} and black-brown, and the lightest are plain white and {{Buff}} tones, which fits the paper and chalk he used. He uses {{Smoky Black}} somewhat less than other painters of his time, though the gap is small.\n\nNo single color stands out as his signature. These are photographs of aged work on paper and canvas, so treat them as tendencies and not as pigment tests.",
+   "colors": [
+    "Smoky Black",
+    "Buff",
+    "Camel"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 774 paintings"
+ ],
+ "words": 462,
+ "status": "article"
+}

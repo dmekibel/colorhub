@@ -1,1 +1,63 @@
-{"slug": "paul-cezanne", "lead": "Paul Cézanne was a French Post-Impressionist painter whose work introduced new modes of representation, influenced avant-garde artistic movements of the early 20th century and formed the bridge between late 19th-century Impressionism and early 20th-century Cubism.", "paras": [], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "paul-cezanne",
+ "lead": "Paul Cézanne was a French Post-Impressionist painter whose work introduced new modes of representation, influenced avant-garde artistic movements of the early 20th century and formed the bridge between late 19th-century Impressionism and early 20th-century Cubism.",
+ "paras": [
+  "Cézanne did not draw an outline and then fill it. He built form with patches of color, warm against cool, and let the patches carry the shape.",
+  "That is why a Cézanne apple seems to turn in space even though almost nothing is shaded in the usual way."
+ ],
+ "chapters": [
+  {
+   "title": "Dark beginnings in Paris and Aix",
+   "when": "Aix-en-Provence, Paris · 1860s",
+   "text": "His early paintings of the 1860s are heavy and dark, painted with a palette knife in thick strokes of black, {{Umber}} and {{Maroon}}. Many are violent or erotic scenes, set in dim interiors, and their color is the opposite of what we think of as his.\n\nThe change came through his friendship with Camille Pissarro, whom he met in Paris and with whom he painted at Pontoise in the early 1870s. By the usual account, Pissarro urged him to drop black and the dark earth colors and to work from the primaries and their mixtures, and the pictures of the next decade are visibly lighter.",
+   "colors": [
+    "Umber",
+    "Maroon",
+    "Sepia",
+    "Rust",
+    "Olive"
+   ]
+  },
+  {
+   "title": "The constructive stroke",
+   "when": "Provence and Paris · 1870s to 1890s",
+   "text": "The pictures of the 1880s are built from parallel, tilted brushstrokes, each a small plane of color. Cool blues recede and warm {{Ochre}} and {{Terracotta}} come forward, but not by a rule: he moves them back and forth until the surface holds together.\n\nThe pigments reported for his palette include {{Viridian}}, {{Emerald Green}} and {{Cobalt Blue}}, with {{Vermilion}} and several earths. Accounts differ on the exact list, and some are recollections by younger painters, so treat any single palette chart with caution.\n\nHis landscapes around L'Estaque and Mont Sainte-Victoire pair the red-orange of Provençal roofs and soil with blue-green pine and a flat blue sky.",
+   "colors": [
+    "Viridian",
+    "Cobalt Blue",
+    "Ochre",
+    "Terracotta",
+    "Emerald Green"
+   ]
+  },
+  {
+   "title": "Late watercolors and the mountain",
+   "when": "Aix · 1895 to 1906",
+   "text": "In his last decade Cézanne returned to Mont Sainte-Victoire again and again. The late oil versions are made of patches of {{Cerulean Blue}}, {{Lavender}} and green, with the canvas sometimes left bare between them.\n\nHis watercolors use the white of the paper as the light. Washes of blue, green and yellow overlap so that the third color appears where two meet, and the whole image can look finished while large parts of the sheet are untouched.\n\nHe died in 1906 after being caught in a storm while painting outdoors.",
+   "colors": [
+    "Cerulean Blue",
+    "Lavender",
+    "Sage",
+    "Ochre",
+    "Powder Blue"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 757 paintings",
+   "text": "Our archive holds 757 of his works. His darkest large areas are {{Dark Jungle Green}} and {{Fir Green}}, not black, and his lightest are pale grey whites. He avoids {{Bistre}} and other earthy blacks more than his peers do, which agrees with Pissarro's advice.\n\nThese are photographs of varnished and aged works, so the grey in the highlights may partly be the camera.",
+   "colors": [
+    "Dark Jungle Green",
+    "Fir Green",
+    "French Grey"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 757 paintings"
+ ],
+ "words": 445,
+ "status": "article"
+}

@@ -1,1 +1,62 @@
-{"slug": "peter-paul-rubens", "lead": "Sir Peter Paul Rubens was a Flemish artist and diplomat.", "paras": ["He is considered the most influential artist of the Flemish Baroque tradition."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "peter-paul-rubens",
+ "lead": "Sir Peter Paul Rubens was a Flemish artist and diplomat.",
+ "paras": [
+  "Rubens is the painter of flesh. His color has warmth and body, built from a very pale ground, warm lights and transparent, cool shadows. It is also the most technically organized palette of the Baroque.",
+  "The common idea that he used the modern pigment cobalt blue is a mistake; that blue was only invented in 1802, almost two centuries after his Antwerp years, and he relied on older blues instead."
+ ],
+ "chapters": [
+  {
+   "title": "Italy and the Gonzagas",
+   "when": "Mantua, Rome and Genoa · 1600-1608",
+   "text": "Peter Paul Rubens was born in 1577 in Siegen, trained in Antwerp, and from 1600 spent eight years in Italy, mainly at the court of the Gonzaga in Mantua. He copied Titian, Veronese and Tintoretto, and the Venetian way with red and gold shows up in his early color: warm {{Crimson}} drapery, golden-brown shadows, flesh with a pink undertone.\n\nHe learned there to paint on a light ground and to build form with a few pigments in many layers: lead white, red lakes, vermilion, ochres and earths, a lead-tin yellow, and for blues azurite, smalt or natural ultramarine according to how rich the commission was. Ball lists Rubens among the painters of Descent from the Cross (1611 to 1614) whose work contains smalt, which discolors with time.",
+   "colors": [
+    "Crimson",
+    "Vermilion",
+    "Ochre",
+    "Gold"
+   ]
+  },
+  {
+   "title": "The Antwerp workshop",
+   "when": "Antwerp · 1608-1630",
+   "text": "Back in Antwerp, he set up a large studio with assistants. His oil sketches on small panels settled the color scheme before the larger paintings began. The Descent from the Cross is built around a white shroud against black, with {{Scarlet}} and green accents in the garments of the holy figures around Christ.\n\nThe flesh is the center of his method. A pale base gives luminosity; red, yellow and gray tones are set in separate touches; cool, transparent shadows lie over an underpainting that is allowed to show. This is why his skin colors seem to have blood under them.\n\nHe also made landscapes and animals in strong {{Forest Green}} and {{Gold}}, and his workshop, which at times included the young Van Dyck, produced work that is hard to separate from his own.",
+   "colors": [
+    "Scarlet",
+    "Forest Green",
+    "Gold",
+    "Peach"
+   ]
+  },
+  {
+   "title": "Diplomat and decorator",
+   "when": "Paris, London and Antwerp · 1622-1640",
+   "text": "The Marie de' Medici cycle (1622 to 1625) for the Luxembourg Palace in Paris and the Banqueting House ceiling in London (1629 to 1634) are his largest color programs: saturated {{Cerulean}} sky blues, royal reds, golds, pearly nudes. As a diplomat he traveled between Spain, France and England, and met Velázquez in Madrid.\n\nIn his last decade at Antwerp, he painted for himself: the Garden of Love, landscapes of his estate at Steen. The paint is lighter, the strokes more broken, the flesh pink and cream beside misty green. He died in 1640.\n\nHe made oil sketches on small panels first, and these are often the best place to see his color at its most direct: a few notes of {{Crimson}} and blue laid on a warm brown ground, with the rest left to the studio. What to look for: a warm golden ground that glimmers through shadows, the contrast between a pearly body and a deep red or green cloth, and sky blues that go from a rich ultramarine to a pale gray-blue.",
+   "colors": [
+    "Cerulean",
+    "Rose",
+    "Gold",
+    "Cream"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 1,307 paintings",
+   "text": "Chromatlas holds 1,307 paintings attributed to Rubens, the largest set of the ten in this batch. Many are studio works or later attributions, and all are photographs of varnished panels and canvases, so older varnish adds yellow.\n\nHis darkest large areas are {{Smoky Black}} (37 percent), black-brown and near-black. His lightest large areas are {{Tan}}, {{Camel}} and {{White}}, the flesh and ground color. The colors he uses more than his peers are brown ones: {{Dark Brown}}, {{Bistre}} and {{Café Noir}}. That points to what is easy to miss in a Rubens: although it is thought of as pink and gold, the majority of its area is a warm brown.",
+   "colors": [
+    "Tan",
+    "Camel",
+    "Bistre",
+    "Café Noir"
+   ],
+   "pull": "The colors Rubens uses more than his peers are browns, not pinks."
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 1,307 paintings"
+ ],
+ "words": 623,
+ "status": "article"
+}

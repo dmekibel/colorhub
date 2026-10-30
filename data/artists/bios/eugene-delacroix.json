@@ -1,1 +1,62 @@
-{"slug": "eugene-delacroix", "lead": "Ferdinand Victor Eugène Delacroix was a French Romantic artist who was regarded as the leader of the French Romantic school.", "paras": [], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "eugene-delacroix",
+ "lead": "Ferdinand Victor Eugène Delacroix was a French Romantic artist who was regarded as the leader of the French Romantic school.",
+ "paras": [
+  "Delacroix thought color, not line, was the center of painting, and he wrote about it daily in a journal. The painters who came after him, Impressionists and Neo-Impressionists included, read those pages.",
+  "His practical discovery was that shadows are not just darker: they carry color from the objects around them. He rendered them with reflected tones, and he allowed adjacent colors to modify each other."
+ ],
+ "chapters": [
+  {
+   "title": "The first great pictures",
+   "when": "Paris · 1822-1830",
+   "text": "Eugène Delacroix exhibited Dante and Virgil in 1822 and the Massacre at Chios in 1824. Both have strong dark ground and rich color accents: a red cap, a blue robe, an ivory body. A well-known story says he repainted parts of the Massacre after seeing Constable's Hay Wain at the 1824 Salon; the story is retold in many books, but the sequence is disputed, so hold it loosely.\n\nBy 1830, Liberty Leading the People shows his control of a restricted palette. The tricolor, blue, white and red, appears as three small spots against a field of brown smoke. The blue is {{Cobalt Blue}} or a similar blue of the day, and the red is something like {{Vermilion}} or a lake. Cobalt blue became available in 1802, ultramarine's artificial version in 1828, and Delacroix had access to both during his career; which he used where is a matter for analysis.",
+   "colors": [
+    "Cobalt Blue",
+    "Vermilion",
+    "Ivory",
+    "Umber"
+   ]
+  },
+  {
+   "title": "Morocco and the colored shadow",
+   "when": "North Africa and Paris · 1832-1850",
+   "text": "In 1832 Delacroix traveled to Morocco and Algeria with a diplomatic mission. He filled sketchbooks with pencil and watercolor and noted how bright light made shadows appear violet or green. In his journal he recorded that flesh in sun is orange-ish and in shade takes up blue-green from nearby objects. These notes are one of the sources for later theories of simultaneous contrast.\n\nBack in Paris he put what he saw to work in Women of Algiers (1834) and in his many orientalist scenes: a bright orange, a dusty {{Rose}}, a deep {{Emerald}} green, and warm whites. Hatching, colored parallel strokes laid side by side, replaced smooth blending in his later oils and in the drawn studies. He liked to place a complement in the shadow of a color: a violet-tinged shade under a yellow drapery, a green one beside a red.",
+   "colors": [
+    "Rose",
+    "Emerald",
+    "Persimmon",
+    "Ivory",
+    "Teal"
+   ]
+  },
+  {
+   "title": "Saint-Sulpice",
+   "when": "Paris · 1849-1861",
+   "text": "His last large commission was the mural cycle in the Chapel of the Holy Angels at Saint-Sulpice, including Jacob Wrestling with the Angel. Painted on the walls, it combines a strong, low {{Forest Green}} landscape with brilliant figures in red and blue.\n\nWhat to look for in a real Delacroix: a brown or dark-green ground that keeps showing through; quick, hatched strokes in a contrasting color inside shadows; and a small accent of vermilion or crimson that keeps the picture from sinking.\n\nHe finished the chapel in 1861 and died in 1863. Van Gogh, who copied him and wrote about him often, and Signac, who studied his journal, both took from him the idea that complementary colors set side by side make each other stronger. The method is easy to see in his work and hard to copy: the strokes are loose, and the colors stay clean because they are not blended into each other.",
+   "colors": [
+    "Forest Green",
+    "Crimson",
+    "Vermilion",
+    "Burnt Sienna"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 427 paintings",
+   "text": "Chromatlas holds 427 paintings attributed to Delacroix, photographed from museum collections. They are photographs of varnished oil paintings, some of which have darkened, so the darks here exaggerate shadow.\n\nHis darkest large areas are {{Smoky Black}}, black-brown and {{Raisin Black}}. The lightest large areas include {{White}}, Seaweed green and {{Dark Brown}}, a mix that shows how many of his pictures lack large pale areas. Compared with his peers, he uses {{Bistre}}, {{Café Noir}} and {{Dark Jungle Green}} more often: the signature brown-green-black ground. That is the archive's way of saying what the journal says: Delacroix builds the picture up from deep tones, and lets color burn through.",
+   "colors": [
+    "Bistre",
+    "Café Noir",
+    "Dark Jungle Green",
+    "Raisin Black"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 427 paintings"
+ ],
+ "words": 638,
+ "status": "article"
+}
