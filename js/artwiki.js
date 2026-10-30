@@ -640,6 +640,7 @@ function awPainter(slug, push = true) {
       ${awHighlight(P.typical != null ? P.typical : -1, hlLine, hlChips)}
       ${palettes}
       ${time}
+      ${awSimilarPainters(slug)}
       ${compared}
       <div class="aw-acts" data-aw-acts></div>
       ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "painter:" + slug, title: A.name }) : ""}
@@ -849,6 +850,18 @@ function awComparedSection(slug, m, A, P) {
     <div class="aw-typs">${typ(P.atypical, "Least typical")}</div>
     ${near.length ? `<p class="aw-lbl">Paints like</p><div class="aw-near">${near.map(x => `<button class="aw-tie" data-awpainter="${x.slug}"><b>${esc(x.name)}</b><span>palette distance ${x.d.toFixed(2)}</span></button>`).join("")}</div><p class="fine">Nearest painters by six numbers: lightness, chroma, warmth, vivid share, muted share and color variety, across all ${AW.list.length}.</p>` : ""}
     ${ties}`;
+}
+
+// Similar painters: working in the same years (midpoint of dated work within 40 years) and close in lightness, vividness and warmth.
+function awSimilarPainters(slug) {
+  const me = AW.meta.a[slug]; if (!me || me.y0 == null || me.L == null || me.k < 5) return "";
+  const mid = m => (m.y0 + m.y1) / 2, M = mid(me);
+  const rows = AW.list.filter(x => x.slug !== slug && x.k >= 8 && x.y0 != null && x.L != null && x.y1 - x.y0 <= 90 && Math.abs(mid(x) - M) <= 40)
+    .map(x => ({ x, d: Math.hypot((x.L - me.L) / 12, (x.C - me.C) / 8, (x.W - me.W) / .2, (mid(x) - M) / 30) })).sort((a, b) => a.d - b.d).slice(0, 8);
+  if (rows.length < 3) return "";
+  return `<div class="sec-head"><b>Painters like this</b><span>same years, similar look</span></div>
+    <div class="aw-near">${rows.map(({ x }) => `<button class="aw-tie" data-awpainter="${x.slug}"><b>${esc(x.n)}</b><span>${x.y0}\u2013${x.y1}${x.co ? " \u00b7 " + esc(x.co) : ""}</span></button>`).join("")}</div>
+    <p class="fine">Painters whose dated work falls in the same years, nearest in average lightness, vividness and warmth (photographs of paintings, so a rough guide).</p>`;
 }
 
 function awPainterFindings(A, P, n) {
