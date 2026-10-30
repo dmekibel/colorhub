@@ -112,9 +112,9 @@ async function cardShare(spec, text, url, fileName = "colorhub.png") {
 }
 
 // Send someone a link to a page: the phone's share sheet where there is one, else copy the link.
-async function shareLink(title, url) {
-  const text = `${title} · Chromatlas`;
-  try { if (navigator.share) { await navigator.share({ title: text, text, url }); return "shared"; } }
+async function shareLink(title, url, msg) {
+  const text = msg || `${title} · Chromatlas`;
+  try { if (navigator.share) { await navigator.share({ title: `${title} · Chromatlas`, text, url }); return "shared"; } }
   catch (e) { if (e && e.name === "AbortError") return "cancelled"; }
   try { await navigator.clipboard.writeText(url); toast("Link copied"); return "copied"; } catch (e) {}
   toast("Couldn't share. Copy the address bar link"); return "failed";
@@ -122,5 +122,5 @@ async function shareLink(title, url) {
 const shareBtn = `<button class="icon-btn glass" data-pshare aria-label="Share this painting">${ICON.share}</button>`;
 function wirePaintingShare(el, title, path) {
   const b = el.querySelector("[data-pshare]"); if (!b) return;
-  b.onclick = e => { e.stopPropagation(); buzz(6); shareLink(title, shareURL(path)); };
+  b.onclick = e => { e.stopPropagation(); buzz(6); shareLink(title, shareURL(path), "Check out this painting I found on Chromatlas"); };   // the preview card under it names the painting
 }

@@ -29,8 +29,8 @@ export default {
     const title = row && row[1] ? row[1] : "A painting";
     const painter = row && row[2] ? row[2] : "";
     const img = (row && (row[9] || row[5])) || (hosted ? `${DATA}thumb/${gi}.webp` : `${APP}og/default.png`);   // the 1200 px picture makes the big card
-    const head = painter ? `${title}, ${painter}` : title;
-    const desc = "Check out this painting I found on Chromatlas. See its colors, named and measured.";
+    const head = painter ? `${title} by ${painter}` : title;
+    const desc = "See its colors, named and measured, on Chromatlas.";   // the message itself says "Check out this painting I found on Chromatlas" (js/sharecard.js)
     const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${esc(head)} · Chromatlas</title>
 <meta name="description" content="${esc(desc)}">
 <meta property="og:site_name" content="Chromatlas"><meta property="og:type" content="website">
