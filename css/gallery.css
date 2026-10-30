@@ -620,8 +620,9 @@ html.desk .fd-bar{top:calc(var(--dkn,60px) - 1px)}
 .gl-hero,.aw-pt-hero{position:relative}
 .gl-split .fd-mapb-hero{display:none}
 .fd-mapb.in-top{display:none;margin-left:auto}
-.art-top .fd-mapb.in-top{display:inline-flex;opacity:var(--fd-p,0);pointer-events:none}
-.fd-stuck .art-top .fd-mapb.in-top{pointer-events:auto}
+.art-top .fd-mapb.in-top{display:inline-flex}
+/* Map lives in the header beside the dots, always (David, 2026-10-30: "not in the image itself"); the copy on the picture is for the desktop */
+html:not(.desk) .gl-hero>.fd-mapb-hero,html:not(.desk) .aw-pt-hero>.fd-mapb-hero{display:none}
 .rp-bar .fd-mapb.in-top{display:inline-flex;min-height:34px;padding:0 12px 0 9px;font-size:15px;margin-left:auto;pointer-events:auto}
 .rp-bar .fd-mapb.in-top svg{width:16px;height:16px}
 .fd-mapw{display:none;flex:none;position:relative;padding-left:10px}

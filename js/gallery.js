@@ -1566,7 +1566,7 @@ function glPage(i, d, fromHex, tol) {
     <header class="art-top" data-similar-gi="${i}"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${typeof fvArtHeart === "function" && d.id ? fvArtHeart(d.id) : ""}</header>
     <div class="gl-cols">
     <div class="gl-pal-wrap">
-    <div class="gl-hero gl-full-w" style="--c:${avg}">${fdMapBtnHTML("fd-mapb-hero")}<span style="width:min(calc(100% - 2 * var(--g)), calc(var(--hero-vh, 62dvh) / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${glHiSrc(d) ? ` data-hi="${esc(glHiSrc(d))}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas><div class="gl-hero-dots" data-glherodots aria-hidden="true"></div>
+    <div class="gl-hero gl-full-w" style="--c:${avg}">${fdMapBtnHTML("fd-mapb-hero")}<span style="width:min(100%, calc(var(--hero-vh, 62dvh) / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${glHiSrc(d) ? ` data-hi="${esc(glHiSrc(d))}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas><div class="gl-hero-dots" data-glherodots aria-hidden="true"></div>
     <button class="gl-closer" data-glcloser aria-label="Look closer">${ICON.search}<span>Look closer</span></button>
     <button class="gl-closer gl-pick-btn" data-glpickbtn hidden aria-pressed="false" aria-label="Pick a color">${icon("pipette", 17)}<span>Pick a color</span></button></span></div>
     <div class="gl-id">${shareBtn}
@@ -1641,6 +1641,14 @@ function glPage(i, d, fromHex, tol) {
     }
   }
   const route = "#/gallery/" + i, heroSpan = el.querySelector(".gl-hero > span");
+  // the stored shape comes from the museum's small image, which can be a crop of a different shape (David, 2026-10-30: Cloud Towers,
+  // a square painting, sat letterboxed in a tall box with bands above and below): once the real picture loads, its own shape wins,
+  // unless a margin crop (glCropStyle) is shaping it on purpose
+  { const im = heroSpan && heroSpan.querySelector("img");
+    let fixed = false;   // once, from the first picture: the hi-res swap is the same painting and must not resize the page again
+    const fixAr = () => { if (fixed || !im || !im.naturalWidth || im.getAttribute("style")) return; fixed = true; const r = im.naturalHeight / im.naturalWidth;
+      if (Math.abs(r / ar - 1) > .03) { heroSpan.style.aspectRatio = (1 / r).toFixed(4); heroSpan.style.width = `min(100%, calc(var(--hero-vh, 62dvh) / ${r.toFixed(3)}))`; } };
+    if (im) { im.addEventListener("load", fixAr); if (im.complete) fixAr(); } }
   // David, 2026-10-25: the picture, its title and "painter · year" are all that sits between the picture and the chip row. Everything else about
   // the painting (where it hangs, country, movement, how it compares) opens the Overview, and the picture is sized from the screen so the
   // chip row is always on the first screen (a tall painting shrinks, undistorted, instead of pushing the chips down).

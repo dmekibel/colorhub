@@ -78,7 +78,7 @@
 /* the hero on the painting page itself: much bigger than the old 30dvh box, tinted with the painting's own
    average color instead of black when it doesn't fill the full width, and a quiet "Look closer" button on it
    (David's rebuild brief, 2026-10-09) */
-.gl-hero.gl-full-w{background:var(--c);border-radius:2px;margin:0 calc(-1 * var(--g));padding:0 var(--g)}
+.gl-hero.gl-full-w{background:var(--c);border-radius:2px;margin:0 calc(-1 * var(--g));padding:0}   /* edge to edge (David, 2026-10-30: no border when the art could take the space) */
 /* the button sits inside the picture's own box (.gl-hero>span, already position:relative + overflow:hidden in
    css/gallery.css), not the full-bleed tinted surround — so it always lands on the image itself, at any aspect
    ratio, instead of risking the surrounding padding math (David's rebuild brief, 2026-10-09) */
