@@ -50,6 +50,7 @@ const routeURL = path => APP_BASE() + "#/" + path;
 // exists, otherwise the app address.
 function shareURL(path) {
   const [kind, id, more] = String(path || "").split("/"), dir = { color: "c", page: "p", painting: "art" }[kind];
+  if (kind === "gallery" && /^\d+$/.test(id || "") && !more) return "https://s.chromatlas.app/" + id;   // cloudflare/share-worker: a preview card with this painting
   if (dir && id && !more) {
     const n = kind === "color" ? routeColor(id) && colorNode(routeColor(id)) : graph().nodes.get(kind === "painting" ? "painting-" + id : id);
     if (n && !n.stub) return APP_BASE() + dir + "/" + id + "/";
