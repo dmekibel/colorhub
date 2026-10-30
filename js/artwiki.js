@@ -284,10 +284,22 @@ function awGlance(n, picks, ext) {
 function awPortraitHero(slug, A, P, hlChips) {   // the portrait band, with Map pinned at its top right
   return awPortraitHero0(slug, A, P, hlChips).replace(/^(\s*<figure[^>]*>)/, (m) => m + fdMapBtnHTML("fd-mapb-hero"));
 }
+function awSelfHero(rec) {
+  const pt = rec.portrait || {};
+  return pt.src === "self" && pt.gi != null && !/echantillon|sample|sheet|autoportraits|self-portraits|studies|history painting/i.test(pt.caption || "") && GAL.ar[pt.gi] >= 1.05 && GAL.ar[pt.gi] <= 1.5;
+}
 function awPortraitHero0(slug, A, P, hlChips) {
   const rec = (AW.port && AW.port[slug]) || {}, pt = rec.portrait || { src: "none" };
   const famous0 = (rec.famous || []).find(gi => gi != null && gi >= 0);
   const field = (hlChips[0] && hlChips[0].h) || awHex((A.clusters && A.clusters[0] && A.clusters[0].colors[0]) || "");
+  // David, 2026-10-30: a self-portrait comes first, but only a single one that shows whole in the hero (not a
+  // sample sheet, not a very wide or very tall canvas that the crop would cut)
+  if (awSelfHero(rec)) {
+    return `<figure class="aw-pt-hero" data-pthero="${pt.gi}" data-ptself style="--c:${field}">
+      <button class="aw-pt-open" data-gi="${pt.gi}" aria-label="Open the painting"><img alt="" data-ptimg></button>
+      <figcaption>${esc(pt.caption || "Self-portrait")}${pt.year ? ", " + awY(pt.year) : ""}</figcaption>
+    </figure>`;
+  }
   if (famous0 != null) {   // David, 2026-10-30: the most famous painting is the hero (a low-resolution self-portrait sample sheet looked cheap)
     return `<figure class="aw-pt-hero" data-pthero="${famous0}" style="--c:${field}">
       <button class="aw-pt-open" data-gi="${famous0}" aria-label="Open the painting"><img alt="" data-ptimg></button>
@@ -343,6 +355,15 @@ function awFillPortrait(el) {
     // this hero is standing in for a missing portrait (awPortraitHero): caption it as what it actually is
     const fam = b.querySelector("[data-ptfam]");
     if (fam) { const yr = glYear(gi); fam.textContent = `${d.t}${yr ? ", " + yr : ""}`; }
+    // a self-portrait hero never repeats in the rail; otherwise the rail keeps at most one self-portrait
+    const rail = el.querySelector("[data-awfamous]");
+    if (rail) {
+      let kept = 0, heroSelf = b.hasAttribute("data-ptself");
+      const jobs = [...rail.querySelectorAll(".gl-pin")].map(pin => glDetail(+pin.dataset.gi).then(dd => {
+        if (+pin.dataset.gi === gi || /self[- ]?portrait|autoportrait/i.test(dd.t) && (heroSelf || kept++ >= 1)) pin.remove();
+      }).catch(() => {}));
+      Promise.all(jobs).then(() => { if (rail.isConnected && rail.children.length < 2) { const h = rail.previousElementSibling; rail.remove(); if (h && h.classList.contains("sec-head")) h.remove(); } });
+    }
     const cap = b.querySelector("[data-ptnoport]");
     if (cap) { const name = cap.dataset.ptnoport, yr = glYear(gi); cap.textContent = `${d.t}${yr ? ", " + yr : ""} — no portrait of ${name} in the archive`; }
   }).catch(() => {});
@@ -352,7 +373,7 @@ function awFamousRail(slug, n) {
   const hasPortrait = ((pt.src === "self" || pt.src === "other") && pt.gi != null) || (pt.src === "wikidata" && !!pt.url);
   let list = (rec.famous || []).filter(gi => gi != null && gi >= 0);
   // its first entry is already standing in for the portrait hero above (awPortraitHero) when there isn't one
-  if (list.length) list = list.slice(1);   // the first is the page's hero (awPortraitHero0)
+  if (list.length && !awSelfHero(rec)) list = list.slice(1);   // the first is the page's hero (awPortraitHero0) unless a self-portrait took that place
   if (list.length < 2) return "";
   const note = rec.famousBy === "wikidata" ? "most widely recorded" : "closest to his signature colors";
   return `<div class="sec-head"><b>Most famous</b><span>${esc(note)}</span></div>
