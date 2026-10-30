@@ -1,1 +1,60 @@
-{"slug": "berthe-morisot", "lead": "Berthe Marie Pauline Morisot was a French painter, printmaker and a member of the circle of painters in Paris who became known as the Impressionists.", "paras": [], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "berthe-morisot",
+ "lead": "Berthe Marie Pauline Morisot was a French painter, printmaker and a member of the circle of painters in Paris who became known as the Impressionists.",
+ "paras": [
+  "Morisot painted the light of rooms and gardens in fast, feathery strokes, and her pictures are dominated by white. She was one of the founding members of the first Impressionist exhibition in 1874, and her handling is among the loosest of the group.",
+  "The chapters below follow her from copying in the Louvre to the white interiors of her married years, and end with what our archive shows."
+ ],
+ "chapters": [
+  {
+   "title": "Copyist and student of Corot",
+   "when": "Paris · 1850s to 1860s",
+   "text": "Morisot was born in Bourges in 1841 and grew up in Paris. She and her sister Edma studied with private teachers and then with the landscapist Camille Corot, and copied in the Louvre. She exhibited at the official Salon from 1864.\n\nThe early landscapes are the work of a Corot student, in quiet {{Sage}}, {{Dove Grey}} and {{Olive}} greens, with soft light on water and a low horizon.\n\nThe interest is in the thin, silvery handling, which stays all her life. She left areas of canvas lightly covered, so that the ground shows through as a pale tone.",
+   "colors": [
+    "Sage",
+    "Dove Grey",
+    "Olive",
+    "Pale Pink"
+   ]
+  },
+  {
+   "title": "Manet and the model",
+   "when": "Paris · 1868 to 1874",
+   "text": "She met Edouard Manet in 1868 and sat for him several times, among them the dark-toned Repose of 1870 and the portrait with a bunch of violets. Their exchange ran both ways. He loosened his strokes, and she made more use of black and strong tone contrast, by the usual account.\n\nIn 1874 she married his brother Eugène, and in the same year showed at the first Impressionist exhibition, where she was the only woman among the thirty participants listed by most accounts.\n\nThe Cradle, from 1872, is the key picture of these years. A veil of white muslin covers the baby, and the whole canvas is built from tones close to {{Ivory}}, {{Pearl}} and {{Blush}}.\n\nThe Cradle depicts her sister Edma and her niece. It was among the pictures shown in 1874, and critics of the time found it unfinished, because the brush marks are visible and the edges soft.",
+   "colors": [
+    "Ivory",
+    "Pearl",
+    "Blush",
+    "Putty"
+   ]
+  },
+  {
+   "title": "White rooms and gardens",
+   "when": "Bougival and Paris · 1875 to 1885",
+   "text": "In the late 1870s and 1880s she painted her daughter Julie, born in 1878, her family, and women in gardens. The brushwork grows looser and the color lighter, and there is often more canvas showing than paint.\n\nThe whites are not plain. She modulated them with {{Powder Blue}}, {{Lavender}} and {{Peach}}, and used a green accent such as {{Mint}} near a pale dress to bring out its warmth.\n\nWhat to look for in the real pictures is the way a white dress is made with separate strokes of near-colors, and how the edge between dress and background is not drawn but suggested.\n\nShe often worked in pastel and watercolor as well as oil, and the same pale tone runs through all of them. Look for a ring of pale canvas around a figure, where she simply stopped.",
+   "colors": [
+    "Powder Blue",
+    "Lavender",
+    "Peach",
+    "Mint"
+   ],
+   "pull": "Morisot's whites are never one white: they are modulated with blue, lavender and peach."
+  },
+  {
+   "title": "Late work and what our archive shows",
+   "when": "1885 to 1895 · 420 paintings",
+   "text": "In her last decade she drew more, and the lines of her compositions are visible under the paint. She died in 1895, aged fifty-four.\n\nOur archive holds 420 of her paintings. In the pale areas {{Greyish White}} leads, at about eight per cent, with Linen grey and {{Olive-Buff}} close behind. Her darkest large areas are Smoky Black, but only at about nine per cent.\n\nShe uses Bistre, Smoky Black and Dark olive brown less than other painters of her years do, in some cases by a large factor. That fits a painter who kept even her shadows light. These are photographs, and a canvas left thin photographs lighter than a thick one.\n\nHer daughter Julie later helped to look after the studio and her records, and her pictures of Julie from childhood to young adulthood form one of the longest portrait series by an Impressionist.",
+   "colors": [
+    "Greyish White",
+    "Olive-Buff",
+    "Bistre"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Chromatlas archive, 420 paintings"
+ ],
+ "words": 624,
+ "status": "article"
+}

@@ -1,1 +1,60 @@
-{"slug": "james-mcneill-whistler", "lead": "James Abbott McNeill Whistler was an American painter in oils and watercolor, and printmaker, based primarily in the United Kingdom.", "paras": ["He eschewed sentimentality and moral allusion in painting and was a leading proponent of the credo \"art for art's sake\"."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "james-mcneill-whistler",
+ "lead": "James Abbott McNeill Whistler was an American painter in oils and watercolor, and printmaker, based primarily in the United Kingdom.",
+ "paras": [
+  "Whistler called his pictures symphonies, nocturnes and arrangements, and named them after color. He painted thin, with a very limited number of tones, and he wanted the color harmony itself to be the subject.",
+  "The chapters below follow him from West Point to Paris and London, and end with what the archive shows."
+ ],
+ "chapters": [
+  {
+   "title": "From Lowell to Paris",
+   "when": "United States and Paris · 1834 to 1859",
+   "text": "Whistler was born in Lowell, Massachusetts, in 1834 and spent part of his childhood in Russia. He went to West Point but was dismissed, and left for Paris in 1855 to study art.\n\nThere he met Courbet and the Realists. The early pictures, like At the Piano, are low in key, with a black dress set against a warm {{Chestnut}} room and a white dress beyond.\n\nWhat to look for is the control of dark and light. The blacks are not flat. They shift between {{Olive}}, {{Bistre}} and blue, and he leaves just enough edge for the figure to stand clear.\n\nHe is reported to have favored thin, dark-toned grounds, which would help explain why his blacks look so deep when seen from a distance.",
+   "colors": [
+    "Chestnut",
+    "Olive",
+    "Bistre",
+    "Umber"
+   ]
+  },
+  {
+   "title": "Symphony in White",
+   "when": "London · 1862 to 1870",
+   "text": "Whistler settled in London in the early 1860s. Symphony in White, No. 1: The White Girl, painted in 1862, was refused by the Royal Academy and shown at the Salon des Refusés in 1863. It shows a young woman in a white dress against a white curtain.\n\nThe subject is the range of whites. He sets {{Ivory}}, {{Pearl}} and cold {{Silver}} together, with a red-brown hair and a few warm spots as relief. The idea that white could hold so many tones was radical for its time.\n\nHe was then drawn to Japanese prints and blue-and-white porcelain, and the flat arrangements of his river scenes borrow their balance.\n\nThe white of the dress is set against pale grey and cream, never a stark contrast. He called the painting a symphony because the notes of a single color are the subject.",
+   "colors": [
+    "Ivory",
+    "Pearl",
+    "Silver",
+    "Rosewood"
+   ]
+  },
+  {
+   "title": "Nocturnes and the Peacock Room",
+   "when": "Chelsea · 1871 to 1879",
+   "text": "In the 1870s he painted the Thames at night, in what he called Nocturnes. The color is {{Midnight Blue}}, {{Cadet Blue}} and Olive grey, with a little {{Gold}} for fireworks or lamps, and the shapes of the far bank are only a smear.\n\nThe pictures were painted thinly with a very fluid medium, in a way that worked on a light ground. When Nocturne in Black and Gold: The Falling Rocket was shown in 1877, John Ruskin criticized it, and Whistler sued him for libel. He won a farthing in damages in 1878, and was bankrupt soon after.\n\nIn the same years he repainted a room in Frederick Leyland's London house, the Peacock Room, in blue-green and gold.\n\nA Nocturne seen in the real light of a gallery is a shock for anyone who knows it from reproductions: the surface is almost dry and misty, with the glow of a lamp suggested by a few dots of paint.",
+   "colors": [
+    "Midnight Blue",
+    "Cadet Blue",
+    "Gold",
+    "Teal"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 453 paintings",
+   "text": "His Arrangement in Grey and Black No. 1, from 1871, is better known as the portrait of his mother. It is a lesson in how few colors a picture needs, and the title is a reminder that the color pair came first.\n\nOur archive holds 453 of his paintings. {{Smoky Black}} is the commonest dark, at nearly a fifth of the dark areas, with Bistre and {{Dark Jungle Green}} next. In the pale areas {{Ghost White}} and warm creams share the lead.\n\nHe uses Blackish Brown about twice as often as his peers. That fits the dark browns under his blacks. These are photographs of aged works, and Whistler's thin paint has been reported to change with time.",
+   "colors": [
+    "Smoky Black",
+    "Bistre",
+    "Blackish Brown",
+    "Ghost White"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Chromatlas archive, 453 paintings"
+ ],
+ "words": 614,
+ "status": "article"
+}

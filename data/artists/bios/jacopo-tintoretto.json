@@ -1,1 +1,60 @@
-{"slug": "jacopo-tintoretto", "lead": "Jacopo Robusti, best known as Tintoretto, was an Italian Renaissance painter of the Venetian school.", "paras": ["His contemporaries both admired and criticised the speed with which he painted and the unprecedented boldness of his brushwork."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "jacopo-tintoretto",
+ "lead": "Jacopo Robusti, best known as Tintoretto, was an Italian Renaissance painter of the Venetian school.",
+ "paras": [
+  "Tintoretto painted fast, on big canvases, on dark grounds, and his color is the color of a lit scene in a dim room. Wikipedia notes that contemporaries admired and criticised both his speed and the boldness of his brushwork.",
+  "The chapters follow his Venice, from early commissions to the Scuola di San Rocco, and end with what the archive measures."
+ ],
+ "chapters": [
+  {
+   "title": "Canvas, red grounds and early commissions",
+   "when": "Venice · 1540s",
+   "text": "Venetian painters adopted canvas from the 1440s, helped by a shipbuilding trade that made sailcloth and a damp climate that attacked frescoes. Tintoretto inherited that tradition. He worked on coarse canvas, commonly described as primed dark and reddish-brown, which sat under his lights and gave his shadows a warm base.\n\nThe Miracle of the Slave of 1548 made his name: a saint dives headfirst from the sky to rescue a slave, among men in {{Scarlet}}, {{Olive}} and gold. Everything in it is turned toward bright, hurried light.\n\nThe flesh in these pictures is light over dark. A pale {{Tan}} is struck on a brown ground and left to read as skin.\n\nWikipedia reports that his contemporaries criticised the speed with which he worked. A fast, loaded brush leaves the paint thick where it lights and thin where it shades, and the result is a rough texture that Titian's glazed work does not have.",
+   "colors": [
+    "Scarlet",
+    "Olive",
+    "Tan",
+    "Burnt Umber"
+   ]
+  },
+  {
+   "title": "The Scuola di San Rocco",
+   "when": "Venice · 1564 to 1587",
+   "text": "His largest project was the Scuola Grande di San Rocco, where he painted a cycle of the life of Christ over more than two decades. The halls are lit from windows at the side, and the paintings use that light: cold greys and blues against a few bright reds and {{Mustard}} yellows.\n\nTwo pigments of the period are worth knowing. Smalt, a blue glass ground to powder, appears in Venetian painting of the sixteenth century, and Ball notes it loses color if ground too fine and dulls in oil. Ball also lists Tintoretto among the painters who used copper resinate green, which can darken. Whether either is in a given picture takes analysis.\n\nTitian's contemporaries compared the two, and Tintoretto was thought hasty by comparison.\n\nThe scale matters too. Some of the halls hold canvases more than five meters wide, and in dim light the eye reads only the loudest passages: a white shirt, a red sleeve, a yellow cloak. Nothing else has to compete with them.",
+   "colors": [
+    "Mustard",
+    "Steel Blue",
+    "Hunter Green",
+    "Charcoal"
+   ]
+  },
+  {
+   "title": "Night, fire and the late pictures",
+   "when": "Venice · 1575 to 1594",
+   "text": "The Origin of the Milky Way, about 1575, is a lively cream-white spray of milk across a blue-black sky, in front of a bright Juno and an infant Hercules. His late works are much darker. The Last Supper in San Giorgio Maggiore, 1592 to 1594, is a dim interior that glows with a halo of {{Gold}} around Christ and a table lit by an oil lamp.\n\nThe usual story is that he wished to combine Titian's color with Michelangelo's drawing. The inscription is traditional, and it is a handy summary, not evidence of his intentions.\n\nIn the real paintings, find the point of greatest brightness and then look at how much of the picture is deep brown.",
+   "colors": [
+    "Gold",
+    "Sepia",
+    "Dark Brown",
+    "Burnt Sienna"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 942 paintings",
+   "text": "Our archive holds 942 of his paintings, photographed under aged varnish. {{Smoky Black}} is the darkest large area in 345 of them, 37 per cent, with black brown a further 195, one in five. A black-brown share of one in five is unusually high and fits his dark grounds.\n\nThe lightest areas are {{Tan}} (43), {{Camel}} (36) and white (34), warm and not bright. These are photographs, so read them as tendencies, not as pigment tests.",
+   "colors": [
+    "Smoky Black",
+    "Tan",
+    "Camel"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 942 paintings"
+ ],
+ "words": 573,
+ "status": "article"
+}

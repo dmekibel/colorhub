@@ -1,1 +1,60 @@
-{"slug": "thomas-gainsborough", "lead": "Thomas Gainsborough was an English painter, draughtsman and printmaker who specialised in portrait and landscape painting.", "paras": ["Along with his rival Sir Joshua Reynolds, he was one of the most important British artists of the 18th century."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "thomas-gainsborough",
+ "lead": "Thomas Gainsborough was an English painter, draughtsman and printmaker who specialised in portrait and landscape painting.",
+ "paras": [
+  "Gainsborough is the English portraitist who painted like a landscape artist: feathery, fast, and sensitive to silk, mist and foliage. His surfaces are thin and his colors are soft, and they have aged in ways he did not plan.",
+  "The chapters below follow him from Suffolk to Bath and London, and end with what the archive shows."
+ ],
+ "chapters": [
+  {
+   "title": "Suffolk and the landscape habit",
+   "when": "Sudbury and Ipswich · 1740s to 1759",
+   "text": "Gainsborough was born in Sudbury, Suffolk, in 1727, and trained in London before returning to the Suffolk countryside. His early portraits are small, with the sitters set outdoors against trees, in a green and brown landscape.\n\nThe palette of this period is made of earthy tones: {{Olive}}, {{Chestnut}}, {{Sage}} and {{Fawn}}, with {{Sky Blue}} breaking through the branches. He painted landscapes for himself and sold portraits to live.\n\nWhat to look for is that the figures are not separate from the setting. The foliage behind a sitter is made with the same quick, curling strokes as the dress.\n\nThe country around Sudbury stayed his model for life. Even in his Bath and London years he kept a painting of a cottage or a wood on his easel for himself, and gave it to friends.",
+   "colors": [
+    "Olive",
+    "Chestnut",
+    "Sage",
+    "Fawn"
+   ]
+  },
+  {
+   "title": "Bath and the silver touch",
+   "when": "Bath · 1759 to 1774",
+   "text": "In 1759 he moved to Bath, a fashionable spa town, and began to paint a wealthier clientele in full length. His technique became lighter, with long, thin brushes that he is said to have used to make the delicate, almost flickering strokes in satin and lace.\n\nHis dresses are painted in silvery {{Pearl}}, {{Dove Grey}} and {{Blush}}, and his backgrounds are green or brown, with the dress glowing against them. Pale blues and pinks are the typical notes.\n\nThe blue in those pictures is a little cooler and softer than the strong blues in the work of his Italian-trained contemporaries.\n\nThe silvery effect depends on thin paint over a dark ground. The light dress is not a thick white but a veil of lighter color that lets the dark under it show, and gives the cool, shimmering quality that people still call Gainsborough's touch.",
+   "colors": [
+    "Pearl",
+    "Dove Grey",
+    "Blush",
+    "Powder Blue"
+   ]
+  },
+  {
+   "title": "The Blue Boy and London",
+   "when": "London · 1774 to 1788",
+   "text": "The Blue Boy, painted around 1770, shows a young man in a blue satin suit against a brown-green landscape. A well-known story says that Gainsborough was answering Reynolds's advice that blue should not dominate a picture. That is how it is usually told, not a documented fact, and some historians doubt the link.\n\nThe suit is a complex blue made of {{Steel Blue}}, {{Azure}} and {{Royal Blue}} highlights over a deep underlayer. X-ray studies of this painting show that the artist changed the position of the figure as he worked.\n\nHe moved to London in 1774 and painted the royal family, but he kept quarreling with the Royal Academy about hanging. He died in 1788, and left many landscape drawings unsold.\n\nThe Blue Boy now hangs in the Huntington Library in California, which bought it in 1921, and its journey across the Atlantic was a public event.",
+   "colors": [
+    "Steel Blue",
+    "Azure",
+    "Royal Blue",
+    "Oxford Blue"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 724 paintings",
+   "text": "Our archive holds 724 of his paintings. {{Smoky Black}} is the commonest dark, at nearly two fifths of his largest dark areas, with Black brown second. That is a much darker profile than the soft look of his reputation suggests.\n\nThe reason is partly age. Older oil paintings have darkened under yellowed varnish, and Gainsborough's thin glazes have changed as well. We are measuring photographs of paintings as they are, not as they left the studio.\n\nHe uses Dark chocolate brown more than twice as often as his peers, and Bistre and Dark walnut too.",
+   "colors": [
+    "Smoky Black",
+    "Bistre",
+    "Charcoal"
+   ],
+   "pull": "Gainsborough's pale, silvery dresses sit in a darker archive profile than his reputation suggests; age and varnish are part of the reason."
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Chromatlas archive, 724 paintings"
+ ],
+ "words": 593,
+ "status": "article"
+}

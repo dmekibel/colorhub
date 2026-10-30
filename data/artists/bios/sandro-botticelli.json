@@ -1,1 +1,60 @@
-{"slug": "sandro-botticelli", "lead": "Alessandro di Mariano di Vanni Filipepi, better known as Sandro Botticelli or simply Botticelli, was an Italian painter of the Early Renaissance.", "paras": ["Botticelli's posthumous reputation suffered until the late 19th century, when he was rediscovered by the Pre-Raphaelites who stimulated a reappraisal of his work."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "sandro-botticelli",
+ "lead": "Alessandro di Mariano di Vanni Filipepi, better known as Sandro Botticelli or simply Botticelli, was an Italian painter of the Early Renaissance.",
+ "paras": [
+  "Botticelli painted with egg tempera on wood and, for the Birth of Venus, on canvas. The medium gives a matte, chalky surface, and his color depends on clean outline, flat fields of pale color and fine lines of gold.",
+  "The chapters follow the Florence of the Medici and then of Savonarola, and end with what the archive measures."
+ ],
+ "chapters": [
+  {
+   "title": "Lippi's workshop and the Medici",
+   "when": "Florence · 1460s to 1470s",
+   "text": "Botticelli trained under Fra Filippo Lippi, a Carmelite friar and a master of soft flesh and rich cloth. His early Madonnas have Lippi's warm faces and pale, even light, and the backgrounds are often a deep {{Azure}} or a green plain.\n\nOn panel, tempera flesh was commonly started over a green underpaint, usually described as green earth or terre verte, with pink laid over it so that cool shadows show through the warm skin. The practice is documented for Italian tempera painting in general, and it explains the faintly olive shadows on many Florentine faces.\n\nIn the Adoration of the Magi of about 1475 he put portraits of the Medici family among the kings, and gave the group {{Vermilion}}, {{Gold}} and dark blue robes against a rough stone shelter.",
+   "colors": [
+    "Azure",
+    "Vermilion",
+    "Gold",
+    "Green Earth"
+   ]
+  },
+  {
+   "title": "Primavera and the Birth of Venus",
+   "when": "Florence · about 1480 to 1486",
+   "text": "The Primavera, about 1480, is a dark orange grove with figures in thin, pale veils, and its ground is a carpet of small flowers in white, {{Rose}}, blue and yellow. The orange trees against a dark {{Forest Green}} background have a cold clarity, and the figures stand out mainly by being paler than everything behind them.\n\nThe Birth of Venus, about 1485, is on canvas and not panel, which is why its surface is so matte. The sea is a grey-green, the sky a pale {{Sea Green}} fading to {{Pale Pink}} at the horizon, and Venus is the lightest thing in the picture. Fine strokes of gold are laid over her hair and over the rose petals and the trees.\n\nGold was used in two ways in this period, as leaf on grounds and halos and as powdered shell gold painted on in lines. St Clair notes that flat gold looks unreal because light falls evenly on it, and painters used hatched gold to bring it to life.",
+   "colors": [
+    "Rose",
+    "Forest Green",
+    "Sea Green",
+    "Pale Pink"
+   ]
+  },
+  {
+   "title": "Savonarola and the last pictures",
+   "when": "Florence · 1490 to 1510",
+   "text": "After the 1490s the mood of his pictures changes. Savonarola preached against luxury in Florence, and Botticelli's late works, such as the Mystic Nativity of 1500, lose the soft naturalism of the Venus. The figures are flatter and the colors harder, a clear {{Royal Blue}} for the Virgin, {{Scarlet}} and a bright green for the angels, and gold in the sky.\n\nWe do not know how much of the change was religious and how much was a change in what clients wanted. The biographical accounts that say Botticelli burned his own pictures come from later writers, and are best treated as unproven.\n\nHe died in 1510, and was little regarded for centuries. Wikipedia notes that the Pre-Raphaelites revived him in the nineteenth century. The pale, flat, line-led color that had fallen from fashion appealed to them.",
+   "colors": [
+    "Royal Blue",
+    "Scarlet",
+    "Olive",
+    "Old Gold"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 436 paintings",
+   "text": "Our archive holds 436 items under his name, photographed as they hang today. {{Smoky Black}} is the darkest large area in 118 of them, over a quarter, followed by black brown (32) and a dark olive brown (26). Part of that comes from his drawings, such as the Dante series, which are ink on parchment.\n\nThe lightest areas are white (29), {{Tan}} (27) and {{Ecru}} (13), the colors of panel gesso and parchment. These are photographs of aged works, so read them as tendencies, not as pigment tests.",
+   "colors": [
+    "Smoky Black",
+    "Tan",
+    "Ecru"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "St Clair, The Secret Lives of Color (2016)",
+  "Chromatlas archive, 436 paintings"
+ ],
+ "words": 579,
+ "status": "article"
+}

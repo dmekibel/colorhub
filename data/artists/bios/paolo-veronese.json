@@ -1,1 +1,61 @@
-{"slug": "paolo-veronese", "lead": "Paolo Caliari, known as Paolo Veronese, was an Italian Renaissance painter based in Venice, known for extremely large history paintings of religion and mythology, such as The Wedding at Cana (1563) and The Feast in the House of Levi (1573).", "paras": ["Included with Titian, a generation older, and Tintoretto, a decade senior, Veronese is one of the \"great trio that dominated Venetian painting of the cinquecento\" and the Late Renaissance in the 16th century."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "paolo-veronese",
+ "lead": "Paolo Caliari, known as Paolo Veronese, was an Italian Renaissance painter based in Venice, known for extremely large history paintings of religion and mythology, such as The Wedding at Cana (1563) and The Feast in the House of Levi (1573).",
+ "paras": [
+  "Veronese is the painter of Venetian daylight at its most cheerful: pearl-grey and pink architecture, silver and lemon-yellow silks, and a bright green that became a trademark.",
+  "The chapters follow his career from Verona to the Doge's Palace and the great banquet pictures, and end with what the archive measures."
+ ],
+ "chapters": [
+  {
+   "title": "Verona and the move to Venice",
+   "when": "Verona and Venice · 1540s to 1553",
+   "text": "Veronese was trained in Verona, a city with a tradition of pale, cool, silvery color. He moved to Venice in 1553 and stayed, taking a place beside Titian, a generation older, and Tintoretto, a decade senior.\n\nHe brought a different tone from theirs. By the usual comparison with Titian and Tintoretto, Veronese kept grounds lighter and let blue-greys and {{Lilac}} shadows sit in the silks. In his early ceilings for the Doge's Palace and San Sebastiano the sky is open {{Sky Blue}} and the clothes are pink, yellow and white.\n\nA feature of Veronese's early training was the use of {{Lemon Yellow}} and pink in the same fabric. In the Verona tradition, silk is drawn in a pale local color and the shadows are painted in a different hue, not a darker version of the same one.",
+   "colors": [
+    "Lilac",
+    "Sky Blue",
+    "Pearl",
+    "Lemon Yellow"
+   ]
+  },
+  {
+   "title": "The banquet pictures",
+   "when": "Venice · 1560s to 1570s",
+   "text": "His great banquet scenes are the Wedding at Cana of 1563, painted for the refectory of San Giorgio Maggiore and now in the Louvre, and the Feast in the House of Levi of 1573. The second was first titled the Last Supper, and was renamed after the Inquisition questioned its drunks, dwarfs and soldiers.\n\nCana is huge, with dozens of guests in cloth of gold, {{Mustard}}, {{Salmon}} and silver-green, and a balustrade with a pale blue sky behind it. Gage notes that the musicians at the center are portraits of Venetian painters, including Titian on the bass viol.\n\nHe used shot or changing color: a fabric painted in a light yellow in the highlight and a deep green in the fold, so that it seems to shimmer. The Italian word is cangiante.\n\nBe careful in the Louvre: the Cana canvas is more than nine meters long, and from the usual viewing distance the faces are small and the fabrics are large. The color works as a field, and its detail comes in only when you move closer.",
+   "colors": [
+    "Mustard",
+    "Salmon",
+    "Sea Green",
+    "Silver"
+   ]
+  },
+  {
+   "title": "Green, orange and the later pictures",
+   "when": "Venice · 1570s to 1588",
+   "text": "Ball reports that Veronese's bright green, mixed from three pigments in two layers, became such a trademark that the synthetic emerald green of the eighteenth century was called vert Paul Veronese in French. It is worth looking for in the real paintings; the green in his draperies is a clear, bright one, close to {{Emerald}}.\n\nHis oranges have been analysed too. X-ray diffraction on the Allegories of about 1570 showed both realgar and pararealgar, a different crystal form of the same arsenic sulphide. Pararealgar can form when realgar is altered by light, so some of that orange may have shifted.\n\nIn his last years he painted for the Doge's Palace again, and died in 1588. His successors in the next century, including Tiepolo, took his pale, sunlit palette as a model.",
+   "colors": [
+    "Emerald",
+    "Orange",
+    "Apricot",
+    "Gold"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 825 paintings",
+   "text": "Our archive holds 825 of his paintings, photographed under aged varnish. {{Smoky Black}} is the darkest large area in 247 of them, 30 per cent, with black brown (125) and dark chocolate brown (58). Many of those are the black of oil-painted architecture and shadow.\n\nThe lightest areas are white (51), {{Tan}} (35) and a pale linen grey (32), so the set is slightly lighter than Tintoretto's. These are photographs, so read them as tendencies, not as pigment tests.",
+   "colors": [
+    "Smoky Black",
+    "Tan",
+    "Camel"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Gage, Colour and Culture (1993)",
+  "Chromatlas archive, 825 paintings"
+ ],
+ "words": 574,
+ "status": "article"
+}

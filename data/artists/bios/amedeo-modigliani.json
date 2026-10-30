@@ -1,1 +1,60 @@
-{"slug": "amedeo-modigliani", "lead": "Amedeo Clemente Modigliani was an Italian painter and sculptor of the École de Paris who worked mainly in France.", "paras": ["He is known for portraits and nudes in a modern style characterised by a surreal elongation of faces, necks, and figures — works that were not received well during his lifetime, but later became much sought after."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "amedeo-modigliani",
+ "lead": "Amedeo Clemente Modigliani was an Italian painter and sculptor of the École de Paris who worked mainly in France.",
+ "paras": [
+  "Modigliani is remembered for long necks and almond eyes, but the color under the drawing is just as distinctive: warm, earthy, matte, and close to a Tuscan wall. He painted fast, in a small group of colors, and rarely used strong blue.",
+  "The chapters below follow him from Livorno to Paris and sculpture, to the portraits and nudes of 1916 to 1919, and end with what the archive shows."
+ ],
+ "chapters": [
+  {
+   "title": "Livorno and Italian ground",
+   "when": "Tuscany and Venice · 1884 to 1906",
+   "text": "Modigliani was born in Livorno in 1884 and studied in Florence and Venice before moving to Paris in 1906. What stayed from Italy was a taste for the warm surfaces of Siena and the early Renaissance rather than any particular subject.\n\nThe colors are of the earth: {{Raw Sienna}}, {{Burnt Sienna}}, {{Terracotta}} and soft {{Putty}}, and the faces are drawn in a few of these, with thin shadows.\n\nWhat to look for is the lack of a bright background. Even when a figure sits against a wall, the wall is a tone close to the skin, so the person and the room share a single warm family.\n\nThe grounds he used are often rubbed and scraped, so a wall can look like an old plaster surface. The warmth comes partly from how thin the paint is.",
+   "colors": [
+    "Raw Sienna",
+    "Burnt Sienna",
+    "Terracotta",
+    "Putty"
+   ]
+  },
+  {
+   "title": "Sculpture and the Paris years",
+   "when": "Paris · 1906 to 1914",
+   "text": "In Paris Modigliani met Constantin Brancusi, and from about 1909 to 1914 he gave most of his time to stone sculpture, carving long heads that look like African masks and Cycladic figures. He returned to painting in 1914, partly because dust from the stone was bad for his health, by the usual account.\n\nThe habit carries into the paintings. The faces are smooth and almost uncolored, with {{Buff}}, {{Fawn}} and {{Pale Pink}} laid in flat passages, as if the surface were still a block of limestone.\n\nA simple range of {{Ochre}} and brown surrounds them, and the dark line of the eyebrow and nose is drawn in an almost black {{Raisin Black}} tone.\n\nThe eyes are the most surprising part. Sometimes both are a flat blue, and sometimes one is blank, which gives the face a calm that is half mask and half portrait.",
+   "colors": [
+    "Buff",
+    "Fawn",
+    "Ochre",
+    "Pale Pink"
+   ]
+  },
+  {
+   "title": "Portraits and nudes",
+   "when": "Paris and Nice · 1916 to 1919",
+   "text": "From 1916 his dealer Léopold Zborowski supported him, and in these years Modigliani painted his best-known portraits and a group of reclining nudes. The nudes were shown in 1917 at the Berthe Weill gallery, where police closed the exhibition on the day it opened.\n\nThe nudes are painted in {{Apricot}}, {{Coral}} and {{Brick Red}}, set against warm backgrounds of Burgundy and Rust. The skin is glazed thinly over the ground, so a deep red glow comes up from below.\n\nHis portraits of friends, such as the poet Jean Cocteau and the sculptor Jacques Lipchitz, are quieter: a blue-grey ground and a cream face. The sitters' eyes are often painted as plain blue or empty almond shapes.\n\nThe nudes are best seen in front of the real surface, where the thin red and orange glaze over a pale ground shows as a glow that reproductions flatten.",
+   "colors": [
+    "Apricot",
+    "Coral",
+    "Brick Red",
+    "Burgundy"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 678 paintings",
+   "text": "Modigliani died of tubercular meningitis in 1920, aged thirty-five. Our archive holds 678 of his paintings. Smoky Black is the commonest dark, at about a fifth of the dark areas, followed by Black brown and plain black.\n\nHe uses Raisin Black and plain black about twice as often as his peers, which fits the strong outlines around the eyes and brows. The lights are small in extent: Tan, Cinnamon-Buff and white sit in the pale areas, and the rest are mid-tones.\n\nWhat the archive sees as rare is also a clue. He uses Dark olive brown, Café Noir and Bistre less often than his peers: the darks in his pictures are blacker and redder rather than muddy brown. These are photographs of canvases, and red glazes can photograph darker than they look.",
+   "colors": [
+    "Smoky Black",
+    "Tan",
+    "Cinnamon-Buff",
+    "Raisin Black"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Chromatlas archive, 678 paintings"
+ ],
+ "words": 645,
+ "status": "article"
+}

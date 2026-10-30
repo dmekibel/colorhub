@@ -1,0 +1,59 @@
+{
+ "slug": "jan-van-eyck",
+ "lead": "Jan van Eyck was a painter from the Low Countries who worked for Philip the Good of Burgundy and in Bruges, and is counted among the founders of Early Netherlandish painting.",
+ "paras": [
+  "Jan van Eyck's color is jewel-like because it is made of layers. A thin colored glaze laid over a brighter underpaint behaves like stained glass, and the effect is of light coming out of the picture and not falling on it.",
+  "The chapters follow him from the court of Burgundy to Bruges, and end with what the archive measures."
+ ],
+ "chapters": [
+  {
+   "title": "Court painter to Philip the Good",
+   "when": "The Hague, Lille and Bruges · 1422 to 1432",
+   "text": "Jan van Eyck is first documented working at The Hague, then in the service of Philip the Good, Duke of Burgundy, who made him court painter and valet. He traveled on secret missions for the duke, including a journey to Portugal in 1428 to 1429, and settled in Bruges in 1430.\n\nVasari credited him with inventing oil painting. Ball says that overstates it, since oil was used earlier, but van Eyck refined it. His method was to build forms in tempera or thin underpaint and then glaze over it with oil, so a red lake over a blue ground gives a deep purple without any purple pigment.\n\nThe result is a color that cannot be reproduced by a single flat swatch. A red glaze of {{Maroon}} over a pale ground reads brighter than the same red mixed opaque, and the difference shows even on a screen.",
+   "colors": [
+    "Indigo",
+    "Plum",
+    "Crimson",
+    "Eggplant"
+   ]
+  },
+  {
+   "title": "The Ghent Altarpiece and the Arnolfini portrait",
+   "when": "Ghent and Bruges · 1432 to 1434",
+   "text": "The Ghent Altarpiece, finished in 1432 for a church in Ghent and begun, as a later verse inscription says, by his brother Hubert, is the largest work attributed to him. The Lamb sits in a green meadow with flowers painted species by species, and the robes of the angels run from {{Vermilion}} through {{Royal Blue}} to white.\n\nThe Arnolfini Portrait of 1434 is cited by Ball as the clearest example of layered oil color, with its green gown and the red bed hangings. In the green dress, a deep {{Hunter Green}} glows from within, and the {{Burgundy}} of the bed drapery is almost wet.\n\nThe room also holds a small convex mirror that reflects the whole interior, painted in a few square centimeters.\n\nLook at how the greens are divided in the Ghent meadow: grass in cool {{Sap Green}}, leaves in warm olive, and a few white and yellow flowers in the foreground so small they could be missed. Van Eyck seems to have painted every plant as if it were the only subject.",
+   "colors": [
+    "Vermilion",
+    "Hunter Green",
+    "Burgundy",
+    "Gold"
+   ]
+  },
+  {
+   "title": "The Virgin in red and the last years",
+   "when": "Bruges · 1435 to 1441",
+   "text": "In the Madonna of Chancellor Rolin, about 1435, the Virgin wears a deep red mantle, and the red is the main color of the picture. Ball points out that a crimson Madonna, a purplish red tinted toward the old prized dyes, breaks with the ultramarine garb of earlier medieval Madonnas.\n\nIn the Rolin panel a landscape of blue distance runs through the arches behind the figures. The tiny people, towers and bridge are painted with a precision that a magnifying glass only confirms.\n\nVan Eyck died in 1441. His method, glazing layers of clear oil over a luminous ground, was taken up by later painters in Bruges and well beyond.",
+   "colors": [
+    "Crimson",
+    "Cobalt Blue",
+    "Cadet Blue",
+    "Olive"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 123 paintings",
+   "text": "Our archive holds 123 items under his name, photographed as they hang today. {{Smoky Black}} is the darkest large area in 31 of them, and black brown in 27, and espresso brown in 9, because many of the works are small portraits on dark backgrounds.\n\nThe lightest areas are white, {{Tan}} and an olive buff. These are photographs of aged works, so read them as tendencies, not as pigment tests.\n\nOnly 123 images are in the set, and most are small, so one or two panels move the percentages. Treat this as a rough sketch, since the Ghent Altarpiece and the Arnolfini room are hard to summarize in one dark color.",
+   "colors": [
+    "Smoky Black",
+    "Tan",
+    "Olive-Buff"
+   ]
+  }
+ ],
+ "sources": [
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 123 paintings"
+ ],
+ "words": 600,
+ "status": "article"
+}

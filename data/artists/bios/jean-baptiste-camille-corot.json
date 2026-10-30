@@ -1,1 +1,60 @@
-{"slug": "jean-baptiste-camille-corot", "lead": "Jean-Baptiste-Camille Corot, or simply Camille Corot, was a French landscape and portrait painter as well as a printmaker in etching.", "paras": ["A pivotal figure in landscape painting, his vast output simultaneously referenced the neoclassical tradition and anticipated the plein-air innovations of Impressionism."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "jean-baptiste-camille-corot",
+ "lead": "Jean-Baptiste-Camille Corot, or simply Camille Corot, was a French landscape and portrait painter as well as a printmaker in etching.",
+ "paras": [
+  "Corot painted the silver in a landscape. His late Ville d'Avray and Mortefontaine scenes are built of grey-greens, pearl and cream, with a single red cap or blue jacket added as a signal.",
+  "The chapters follow his early Italian studies, the Salon landscapes and the late figure paintings, and end with what the archive measures."
+ ],
+ "chapters": [
+  {
+   "title": "Rome and the Italian sketches",
+   "when": "Italy · 1825 to 1828",
+   "text": "Corot was the son of a Paris draper and drew in his spare time before his parents let him study painting. In 1825 he went to Italy, where in three years he made small oil studies of Rome, the Campagna and the hill towns outdoors.\n\nThe studies are plain: a pale wall in {{Ecru}} or {{Sand}}, a roof of {{Terracotta}}, a hill in {{Sage}} and a high white sky. Their strength is in the exact value of each patch. Corot is reported to have advised painters to set the lightest and darkest values before any hue.\n\nHe kept most of these sketches as studies, and they are now among his most admired pictures.",
+   "colors": [
+    "Ecru",
+    "Sand",
+    "Terracotta",
+    "Sage"
+   ]
+  },
+  {
+   "title": "The Salon landscapes",
+   "when": "France · 1830 to 1860",
+   "text": "For the Salon he painted larger, studio pictures that drew on classical landscape painting, with a dark foreground, a tree on one side and a bright, empty distance. These pictures often put a deep brown or {{Umber}} foreground in front of a pale blue-green distance, and the technique, called repoussoir, gave the eye a ramp into the picture.\n\nHe also traveled to the Barbizon forest and the Normandy coast. Viridian was available in tubes from about 1859, and the greens of his later landscapes are muted by white and grey until the whole picture has a quiet, dusty cast.\n\nBall cites Corot alongside Helmholtz's 1860s argument that painters cannot match nature's brightness and should imitate the impression instead: Corot lightened his scenes rather than darkening them.\n\nIn the real pictures, the foreground is usually the darkest part and the sky the palest, and the middle ground carries the most variety of green. Cover the foreground with your hand and the picture goes flat; the dark is doing the work of distance.",
+   "colors": [
+    "Umber",
+    "Olive",
+    "Viridian",
+    "Dove Grey"
+   ]
+  },
+  {
+   "title": "Silver mornings and the figures",
+   "when": "Ville d'Avray and Paris · 1860 to 1875",
+   "text": "By the 1860s his landscapes were famously silvery. In Souvenir de Mortefontaine of 1864 a group of trees leans over a still pond, and the whole picture is {{Olive}}, {{Sage}} and grey, and he often relieved such scenes with one small touch of red. Younger painters, including Pissarro, learned from his example.\n\nIn the last decade he turned to figures: women in the studio in costume, and portraits, such as the Woman with a Pearl of 1868 to 1870. They are brown-grey and soft, with a spot of red or blue in a ribbon.\n\nThe market for his landscapes was so strong that forgeries multiplied after his death in 1875. A catalogue and a pigment test are better guides than an impressive silver tone.",
+   "colors": [
+    "Olive",
+    "Sage",
+    "Dove Grey",
+    "Pearl"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 945 paintings",
+   "text": "Our archive holds 945 of his paintings, photographed as they hang today. {{Smoky Black}} is the darkest large area in 274 of them, 29 per cent, but dark olive brown follows at 124, 13 per cent, and {{Dark Jungle Green}} at 67. That fits the brown foreground and green-black trees of his Salon manner.\n\nThe lightest areas are greyish whites (40 and 34) and {{Olive-Buff}} (34), which is a strong sign of his silvery skies and pale light. These are photographs, so read them as tendencies, not as pigment tests.",
+   "colors": [
+    "Smoky Black",
+    "Dark Jungle Green",
+    "Olive-Buff"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 945 paintings"
+ ],
+ "words": 553,
+ "status": "article"
+}

@@ -1,1 +1,60 @@
-{"slug": "winslow-homer", "lead": "Winslow Homer was an American landscape painter and illustrator, best known for his marine subjects.", "paras": ["He is considered one of the foremost painters of 19th-century America and a preeminent figure in American art."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "winslow-homer",
+ "lead": "Winslow Homer was an American landscape painter and illustrator, best known for his marine subjects.",
+ "paras": [
+  "Homer began as a magazine illustrator and ended as the American painter of the sea, and in between he became one of the great watercolorists. His color is clearest in the watercolors, where white paper does the work that white paint does elsewhere.",
+  "The chapters below follow him from Civil War camps to the English coast, to Maine and the tropics, and end with what the archive shows."
+ ],
+ "chapters": [
+  {
+   "title": "War prints and Prisoners from the Front",
+   "when": "Boston and New York · 1850s to 1860s",
+   "text": "Homer was born in Boston in 1836 and trained as a lithographer before working as a freelance illustrator in New York. In the Civil War he drew camp life for Harper's Weekly and then turned the subjects into oil paintings.\n\nPrisoners from the Front, from 1866, set a Union officer against Confederate captives on an empty field. The palette is restrained, built from {{Khaki}}, {{Olive}} and {{Dove Grey}}, with a patch of blue uniform and a pale sky.\n\nHe was already a painter of tone more than hue, and the flat, plain shapes of the illustrations stayed with him all his life.\n\nHe had little formal training, and the clear shapes and strong outlines of his illustrations are the background to his later directness.",
+   "colors": [
+    "Khaki",
+    "Olive",
+    "Dove Grey",
+    "Navy"
+   ]
+  },
+  {
+   "title": "Watercolor and Cullercoats",
+   "when": "Gloucester and England · 1873 to 1882",
+   "text": "At Gloucester, Massachusetts, in 1873 he first took up watercolor seriously, and the transparent washes brought a brighter palette. He then spent 1881 and 1882 in Cullercoats, a fishing village on the north-east coast of England, where he drew women waiting by the shore.\n\nThe colors turn heavier, with {{Payne's Grey}} skies and {{Steel Blue}} water, damp {{Sienna}} clothes and a low horizon. The women appear monumental against wide water.\n\nWhat to look for is how the sea is painted in only a few steps: a flat gray ground, a darker band, and a white edge for the foam.\n\nWhat stays with you in the Cullercoats pictures is the weight of the figures. Their dark shawls are almost the same as the sea, and the pale sky above is the only light.",
+   "colors": [
+    "Payne's Grey",
+    "Sienna",
+    "Cadet Blue",
+    "Rust"
+   ]
+  },
+  {
+   "title": "Prouts Neck and the sea",
+   "when": "Maine · 1883 to 1910",
+   "text": "In 1883 Homer settled at Prouts Neck, on the Maine coast, and spent the rest of his life there. His late oils, such as Northeaster, from 1895, are almost entirely waves and rock: {{Prussian Blue}}, {{Sea Green}}, {{Burnt Umber}} and a very bright white in the spray.\n\nThe white is the key. He placed the lightest note of the picture exactly where the wave breaks, and kept everything around it a step darker. This is why his seascapes seem to move even in a still photograph.\n\nThe Gulf Stream, finished in 1899, shows a man on a damaged boat among sharks, with a {{Scarlet}}-edged sail and a heavy green-blue swell. It was criticized as grim and sold only years later.\n\nHomer lived mostly alone at Prouts Neck and worked in a studio converted from a carriage house. He studied the sea there at different times of day and in storms, and many of the late paintings were done from memory of those hours.",
+   "colors": [
+    "Prussian Blue",
+    "Sea Green",
+    "Burnt Umber",
+    "Scarlet"
+   ]
+  },
+  {
+   "title": "The tropics and what our archive shows",
+   "when": "Bahamas and Adirondacks · 1884 to 1900 · 699 paintings",
+   "text": "Winter trips to Bermuda, the Bahamas, Cuba and Florida produced his best-known watercolors. Strong {{Turquoise}}, {{Aquamarine}} and Tangerine appear against paper that is left bare for sails and coral, and the wet-in-wet blues of the water are among the cleanest in American painting. The Adirondack watercolors of fishermen and guides use cooler greens.\n\nOur archive holds 699 of his paintings. Smoky Black is the commonest dark, but only at about fifteen per cent of dark areas, and the lights are led by Ecru and Greyish White, the cream tones of the paper.\n\nHe uses Greyish White about three and a half times as often as his peers. The figure is partly a measurement of watercolor paper. These are photographs of works on paper and canvas, so the paper tone is as photographed, not a pigment test.",
+   "colors": [
+    "Turquoise",
+    "Aquamarine",
+    "Ecru",
+    "Greyish White"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Chromatlas archive, 699 paintings"
+ ],
+ "words": 638,
+ "status": "article"
+}

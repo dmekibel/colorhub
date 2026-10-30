@@ -1,1 +1,59 @@
-{"slug": "gustave-caillebotte", "lead": "Gustave Caillebotte was a French painter who was a member and patron of the Impressionists, although he painted in a more realistic manner than many others in the group.", "paras": ["Caillebotte was known for his early interest in photography as an art form."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "gustave-caillebotte",
+ "lead": "Gustave Caillebotte was a French painter who was a member and patron of the Impressionists, although he painted in a more realistic manner than many others in the group.",
+ "paras": [
+  "Caillebotte painted Paris in grey and blue, from rainy streets to river banks, and his color is different from the sunny Impressionism of his friends. He was also a patron: his collection of their work was left to the French state.",
+  "The chapters below follow him from the Paris boulevards to the Seine and Petit Gennevilliers, and end with what our archive shows."
+ ],
+ "chapters": [
+  {
+   "title": "Floor scrapers and the grey city",
+   "when": "Paris · 1875 to 1877",
+   "text": "Caillebotte was born in 1848 into a wealthy Parisian family, trained as a lawyer and an engineer, and studied painting with Léon Bonnat. His first big picture, The Floor Scrapers, was rejected by the Salon in 1875 and shown at the Impressionist exhibition of 1876.\n\nThree men, stripped to the waist, scrape a parquet floor. The floor is in warm {{Sienna}} and {{Rust}}, the light from the window is cool, and the strips of wood shaving look {{Buff}}-colored on the ground.\n\nWhat to look for is the tilted perspective, so that the floor is a pattern of near-parallel lines almost like a photograph.\n\nCaillebotte funded much of the third Impressionist exhibition and many later ones, and bought paintings from his friends when they needed money. He kept a house on the Boulevard Haussmann with a view of the street that he painted from the balcony.",
+   "colors": [
+    "Sienna",
+    "Rust",
+    "Buff",
+    "Chestnut"
+   ]
+  },
+  {
+   "title": "Paris Street; Rainy Day",
+   "when": "Paris · 1877",
+   "text": "Paris Street; Rainy Day, exhibited in 1877, is a life-size crossing at a junction in the Europe district. The stone is a wet {{Dove Grey}}, the umbrellas and coats are dark, and a few warm spots of skin and brick break through.\n\nThe tonal range is narrow. The mid-greys and {{Cadet Blue}} of the street hold close together in value, so the scene is cohesive and the figures seem to be walking through the same air.\n\nHe was known for an early interest in photography, and the odd cropping of the figures at the edges suggests that he looked at photographs, though he is not recorded as copying one.\n\nThe color in this picture is low-key, and the activity is in the lines of cobbles and pavements. Look at the shine on the wet street, which is done with a pale grey-blue.",
+   "colors": [
+    "Dove Grey",
+    "Cadet Blue",
+    "Grey Blue",
+    "Taupe"
+   ]
+  },
+  {
+   "title": "The Seine and the sailing boats",
+   "when": "Yerres and Argenteuil · 1877 to 1893",
+   "text": "Caillebotte spent summers at his family's estate at Yerres, and later at Petit Gennevilliers on the Seine, where he kept racing sailboats. His river pictures are brighter than the city pictures, with {{Cerulean}}, {{Sea Blue}} and {{Light Green}} water under pale sails.\n\nHe painted rowers and sailors in the same strokes as his friends, but the compositions are still deliberately structured, with strong diagonals.\n\nThe pictures of his gardens, in the 1890s, are covered in short, loose strokes of {{Rose}}, {{Mint}} and {{Lilac}}, and show that he had learned from Monet's way of handling a flower bed.\n\nHis sailing interests were serious: he designed racing yachts and was a leading member of the Cercle de la Voile de Paris. The boats in his pictures are portraits of actual vessels.",
+   "colors": [
+    "Cerulean",
+    "Sea Blue",
+    "Light Green",
+    "Rose"
+   ]
+  },
+  {
+   "title": "Patron and what our archive shows",
+   "when": "1894 · 243 paintings",
+   "text": "Caillebotte died in 1894, aged forty-five, and left his collection of Impressionist works to the state, which accepted most but not all. It is one of the foundations of the Musée d'Orsay holdings.\n\nOur archive holds 243 of his paintings, a small group. {{Smoky Black}} is the commonest dark, at about twelve per cent of dark areas, followed by Dark Jungle Green. In the pale areas Grey White, Papyrus White and French Grey lead, the colors of wet pavement and sky.\n\nHe uses Bistre, Café Noir and deep olive brown less often than his peers. His darks are clean, near neutral blacks and greens. With only 243 paintings, the figures are less certain than for larger groups.",
+   "colors": [
+    "Grey White",
+    "Papyrus White",
+    "Dark Jungle Green"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Chromatlas archive, 243 paintings"
+ ],
+ "words": 625,
+ "status": "article"
+}

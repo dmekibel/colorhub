@@ -1,1 +1,60 @@
-{"slug": "raphael", "lead": "Raffaello Sanzio da Urbino, now generally known in English as Raphael, was an Italian painter and architect of the High Renaissance.", "paras": ["His work is admired for its clarity of form, ease of composition, and visual achievement of the Neoplatonic ideal of human grandeur."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "raphael",
+ "lead": "Raffaello Sanzio da Urbino, now generally known in English as Raphael, was an Italian painter and architect of the High Renaissance.",
+ "paras": [
+  "Raphael's color is a lesson in not shouting. He gave his Madonnas strong blues and reds, then softened every contrast so neighboring colors seem to belong together, a quality Ball describes with the Italian word unione.",
+  "The chapters follow him from Urbino and Umbria through Florence to the Vatican, then turn to what the archive measures."
+ ],
+ "chapters": [
+  {
+   "title": "Urbino and Umbria",
+   "when": "Urbino and Perugia · 1500 to 1504",
+   "text": "Raphael grew up in Urbino, a small court town, and in his teens worked in the shadow of Perugino in Umbria. The early altarpieces, such as the Marriage of the Virgin of 1504, have clear light, wide skies and slim figures in pure, flat colors.\n\nThe skies fade from a deep {{Azure}} at the top to a pale, almost white {{Sky Blue}} at the horizon, a device from Perugino that Raphael kept for the rest of his career. Garments are plain: red, green, blue, gold. The painting is tempera and oil on wooden panel, and the surfaces are smooth and enamel-like.\n\nWhat to look for is how few colors carry each picture. The Marriage of the Virgin has a pale stone temple, a red or rose robe, a blue mantle and a lot of warm light, and the eye finds the figures by value before it finds them by hue.",
+   "colors": [
+    "Azure",
+    "Sky Blue",
+    "Old Gold",
+    "Malachite"
+   ]
+  },
+  {
+   "title": "Florence and the soft Madonnas",
+   "when": "Florence · 1504 to 1508",
+   "text": "In Florence Raphael looked hard at Leonardo and Michelangelo, and the Madonnas he painted there are his most gentle. By Ball's account he avoided hard contrasts. In the Madonna Alba the Virgin's ultramarine is cut with lead white to make a softer tone, and in the Madonna del Granduca, c. 1505, a bright red is harmonised by shadow and golden flesh against a dark ground.\n\nUltramarine, ground from lapis lazuli, was the costliest blue, and patrons often named the quantity in contracts. Raphael's blues are usually reserved for the Virgin's mantle, with {{Royal Blue}} at its darkest.\n\nGreens in this period are often made with verdigris or copper resinate, a mix with resin that was popular from the mid-fifteenth century. Some forms of it darken or turn brown over time, which is why green drapery in old paintings can look muddy.",
+   "colors": [
+    "Royal Blue",
+    "Lapis Lazuli",
+    "Malachite",
+    "Scarlet"
+   ]
+  },
+  {
+   "title": "Rome, the Vatican and the unfinished Transfiguration",
+   "when": "Rome · 1508 to 1520",
+   "text": "Raphael moved to Rome in 1508 and painted the Stanze for Pope Julius II, including the School of Athens. In fresco only lime-proof pigments will do, and the palette shifts toward earths, ochres, malachite and {{Terracotta}} and {{Sienna}}, with lighter tones made from lime white because lead white does not hold up in true fresco.\n\nThe tapestry cartoons of 1515 to 1516 and the Sistine Madonna brought a brighter, more theatrical range, with the green curtain of the Sistine Madonna and clear {{Vermilion}} reds. At the end he was painting the Transfiguration, the large altarpiece he left unfinished at his death in 1520. The upper half is silvery white and blue; the lower is dark with firelight, and pupils completed it.\n\nIn the real pictures, notice how often a red is placed next to a deep green or blue, and how a thin line of warm shadow ties them.",
+   "colors": [
+    "Terracotta",
+    "Sienna",
+    "Vermilion",
+    "Burnt Sienna"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 185 paintings",
+   "text": "Our archive holds 185 works under his name, photographed as they hang now. {{Smoky Black}} is the darkest large area in 69 of them, over a third, and the lightest are white, {{Tan}} and a pale oatmeal.\n\nThat is a heavier dark than his bright altarpieces suggest. Part of it is varnish and dark backgrounds, and part is the portraits in black, which he painted well. These are photographs of aged works, not pigment tests. The pale oatmeal and warm tan of the lights are the colors of flesh and plaster, which suits a painter who kept his highlights warm.",
+   "colors": [
+    "Smoky Black",
+    "Tan",
+    "Raisin Black"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 185 paintings"
+ ],
+ "words": 596,
+ "status": "article"
+}

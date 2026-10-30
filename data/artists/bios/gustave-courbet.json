@@ -1,1 +1,59 @@
-{"slug": "gustave-courbet", "lead": "Jean Désiré Gustave Courbet was a French painter who led the Realism movement in 19th-century French painting.", "paras": ["Committed to painting only what he could see, he rejected academic convention and the Romanticism of the previous generation of visual artists."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "gustave-courbet",
+ "lead": "Jean Désiré Gustave Courbet was a French painter who led the Realism movement in 19th-century French painting.",
+ "paras": [
+  "Courbet turned the dark ground of older painting into a statement. He painted peasants, stonebreakers and funerals at the size usually kept for history, and he used browns, blacks and deep greens to do it.",
+  "The chapters below follow his palette from Ornans to the sea at Étretat and exile, and close with what the archive shows."
+ ],
+ "chapters": [
+  {
+   "title": "Ornans and the dark ground",
+   "when": "France · 1840s",
+   "text": "Courbet came from Ornans, in the Franche-Comté, and kept returning to its limestone cliffs and wooded valleys. The early pictures, including self-portraits, follow the Old Master habit of beginning on a dark brown ground and building lights upon it.\n\nThe result is a deep range of {{Umber}}, {{Chestnut}} and {{Hunter Green}} in the shadows, with the face or hand picked out by a warm light. That is why a Courbet interior can look smoky even when freshly cleaned.\n\nWhat to look for is where the dark ground shows through. In the shadow areas of his portraits the lower layers glow, and the surface is thinner than the lights.\n\nCourbet also painted the hunt, the forest and the stream of his native valley again and again. These landscapes are the quiet center of his work, and they are painted with the same dark ground as the large figures.",
+   "colors": [
+    "Umber",
+    "Chestnut",
+    "Hunter Green",
+    "Burnt Umber"
+   ]
+  },
+  {
+   "title": "A Burial at Ornans",
+   "when": "Ornans and Paris · 1849 to 1855",
+   "text": "A Burial at Ornans, shown in 1850 and 1851, is around six meters wide and fills the canvas with people in black clothing at a village funeral. It scandalized critics because it gave a local scene the size of a history painting.\n\nThe color is unusual. It is a painting of blacks, in which the clothes are a number of different near-blacks, set against the pale {{Buff}} of the cliff and the {{Ivory}} of the priest's surplice and the sky.\n\nIn 1855, when the Exposition Universelle rejected some of his large pictures, he built his own pavilion. His Painter's Studio there is built on much the same dark-ground method, with a warm {{Sienna}} that holds the whole group.\n\nNotice how the picture is organized as a frieze, with the black clothes forming a long band. The few light spots are the faces, a white dog and the pale sky, so the eye moves from one to the next along the line.",
+   "colors": [
+    "Buff",
+    "Ivory",
+    "Sienna",
+    "Olive"
+   ]
+  },
+  {
+   "title": "The palette knife and the sea",
+   "when": "Normandy and the Jura · 1860s",
+   "text": "In the 1860s Courbet spread paint with a palette knife as well as brushes, especially for rocks, snow and waves. The knife leaves flat, scraped planes that catch light, and works well for the cliffs and grey-green water of his Étretat seascapes in 1869.\n\nHere the palette moves to {{Cadet Blue}}, {{Sea Green}} and {{Dove Grey}}, with a low horizon and a heavy sky. The waves are painted nearly in the colors of the sky, not in contrast to it.\n\nHis forests and stag-hunting scenes are different again. Deep {{Forest Green}} and {{Pine Green}} fill much of the canvas, and a single {{Scarlet}} coat or a patch of snow gives the eye something to rest on.\n\nThe knife leaves a hard edge where one color meets another. In a Courbet wave the foam is a thick white, and the water behind it is a thin, dark glaze, so the paint itself is rough and the sea looks heavy.",
+   "colors": [
+    "Cadet Blue",
+    "Sea Green",
+    "Forest Green",
+    "Scarlet"
+   ]
+  },
+  {
+   "title": "The Commune and what our archive shows",
+   "when": "Switzerland · 1871 to 1877 · 757 paintings",
+   "text": "Courbet took part in the Paris Commune of 1871 and was later held responsible for the toppling of the Vendôme column. He was fined, left for Switzerland in 1873, and died near Lake Geneva in 1877. His late pictures there are landscapes and still lifes, with trout and apples painted in warm browns and greens.\n\nOur archive holds 757 of his paintings. Smoky Black makes up more than a third of his largest dark areas, and Dark Jungle Green and Black Olive follow, a darker profile than most of his contemporaries.\n\nHe uses Black Olive about three times as often as his peers, and Dark Jungle Green about three times too. That matches the green-black of his forests. These are photographs of aged, varnished works, so some of the darkness is varnish.",
+   "colors": [
+    "Smoky Black",
+    "Dark Jungle Green",
+    "Black Olive"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Chromatlas archive, 757 paintings"
+ ],
+ "words": 672,
+ "status": "article"
+}

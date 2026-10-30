@@ -1,1 +1,61 @@
-{"slug": "leonardo-da-vinci", "lead": "Leonardo di ser Piero da Vinci, better known as Leonardo da Vinci, was an Italian polymath of the High Renaissance who was active as a painter, draughtsman, engineer, scientist, theorist, sculptor, and architect.", "paras": ["While his fame initially rested on his achievements as a painter, he has also become known for his notebooks, in which he made drawings and notes on a variety of subjects, including anatomy, astronomy, botany, cartography, painting, and palaeontology."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "leonardo-da-vinci",
+ "lead": "Leonardo di ser Piero da Vinci, better known as Leonardo da Vinci, was an Italian polymath of the High Renaissance who was active as a painter, draughtsman, engineer, scientist, theorist, sculptor, and architect.",
+ "paras": [
+  "Leonardo painted fewer pictures than almost any artist of his rank, and he wrote about color at more length than most of them painted. His notebooks treat color as a matter of light, distance and neighboring surfaces, and the surviving pictures follow that reasoning.",
+  "Few of them are untouched. Varnish, repaint and, for the Last Supper, an experimental wall technique have all changed what a viewer sees today."
+ ],
+ "chapters": [
+  {
+   "title": "Verrocchio's workshop",
+   "when": "Florence · 1466 to 1481",
+   "text": "Leonardo trained in Florence in the workshop of Andrea del Verrocchio, where panels were mostly tempera and oil was a new and useful addition. Tradition gives him an angel in Verrocchio's Baptism of Christ, painted in oil, and the soft turn from light into shadow there is an early sign of where he was heading.\n\nGinevra de' Benci, from the 1470s, sets a pale, cool face against a dark juniper bush, and the green behind her is close to {{Dark Jungle Green}}. Note how little saturated color the portrait contains; the sitter is a study in greys, creams and warm {{Tan}} flesh.\n\nHis notebooks later state a rule that the early work already follows. A shadow takes some of the color of the surface it falls on, and a color looks strongest beside its opposite, blue by yellow and green by red (Ball; Jarman).",
+   "colors": [
+    "Dark Jungle Green",
+    "Tan",
+    "Ecru",
+    "Olive"
+   ]
+  },
+  {
+   "title": "Milan and the Last Supper",
+   "when": "Milan · 1482 to 1499",
+   "text": "In Milan he worked for the Sforza court and painted the Virgin of the Rocks. A first version is now in Paris and a second in London. The figures sit in a cave of cool grey rock, and the plants at the water's edge are among the most carefully observed greens in Italian painting.\n\nFor the Last Supper in the refectory of Santa Maria delle Grazie, about 1495 to 1498, he did not use true fresco, which has to be painted fast on wet plaster. He painted on dry plaster with tempera and oil so he could work slowly, and the experiment began to fail early. The wall was in poor condition within decades, and a long restoration in the late twentieth century has recovered a muted version of the original.\n\nWhat survives is a pale, {{Steel Blue}} and {{Cadet Blue}} architecture with figures in blue, rose and earth red. Most of the strong colors are in the robes at the center.",
+   "colors": [
+    "Steel Blue",
+    "Cadet Blue",
+    "Sage",
+    "Burnt Umber"
+   ]
+  },
+  {
+   "title": "Mona Lisa and the blue distance",
+   "when": "Florence, Rome and France · 1500 to 1519",
+   "text": "The Mona Lisa was begun around 1503 and, by most accounts, was still with him near the end of his life. Its famous softness comes from sfumato, thin translucent layers of color laid one over another so that edges never show. Technical studies have reported glaze layers only a few thousandths of a millimeter thick, though that figure is from a single study and worth treating cautiously.\n\nThe landscape follows his written advice on aerial perspective. Far hills turn blue and pale, near ground goes dark, and a {{Powder Blue}} distance sits behind {{Olive}} and {{Umber}} foreground rocks. Today the sky reads greenish, and some of that is aged varnish.\n\nLeonardo painted only a few pictures in these years and took works to France in 1516, where he died in 1519. Look in the real pictures for the shadow around the mouth: it is a warm brown that has never been drawn as a line.",
+   "colors": [
+    "Powder Blue",
+    "Olive",
+    "Umber",
+    "Sepia"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 255 paintings",
+   "text": "Our archive holds 255 works under his name, photographed under aged varnish. {{Smoky Black}} is the darkest large area in 67 of them, over a quarter, with dark chocolate brown and black brown after it. That is much more than the pictures themselves would suggest, and varnish and drawing sheets explain part of it.\n\nThe lightest areas are white, {{Ecru}} and {{Light Ivory}}, which fits paper and pale flesh more than painted sky. These are photographs, so read them as tendencies in the images, not as pigment tests.",
+   "colors": [
+    "Smoky Black",
+    "Ecru",
+    "Light Ivory"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Jarman, Chroma (1994)",
+  "Chromatlas archive, 255 paintings"
+ ],
+ "words": 617,
+ "status": "article"
+}

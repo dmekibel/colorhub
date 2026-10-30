@@ -1,1 +1,59 @@
-{"slug": "piet-mondrian", "lead": "Pieter Cornelis Mondriaan, known after 1911 as Piet Mondrian, was a Dutch painter and art theoretician, who is regarded as one of the greatest artists of the 20th century.", "paras": ["He was one of the pioneers of 20th-century abstract art, as he changed his artistic direction from figurative painting to an increasingly abstract style, until he reached a point where his artistic vocabulary was taken down to simple geometric elements."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "piet-mondrian",
+ "lead": "Pieter Cornelis Mondriaan, known after 1911 as Piet Mondrian, was a Dutch painter and art theoretician, who is regarded as one of the greatest artists of the 20th century.",
+ "paras": [
+  "Mondrian is famous for a few primary colors and a black grid, but he came to them by a long road through landscape. The restraint at the end only makes sense if you have seen the colors he gave up.",
+  "The chapters below follow his path from Dutch landscapes to Paris cubism and the grid, and end with what the archive shows."
+ ],
+ "chapters": [
+  {
+   "title": "Dutch landscapes",
+   "when": "Netherlands · 1890s to 1910",
+   "text": "Mondrian was born in Amersfoort in 1872 and trained in Amsterdam. His early landscapes, windmills and farms are painted in the muted greens, browns and greys of the Hague School.\n\nAround 1907 and 1908 the colors changed. The Evening and Red Tree paintings are done in bold {{Scarlet}}, {{Cobalt Blue}} and {{Orange}}, with strong outlines, under the influence of the Fauves and Van Gogh by the usual account.\n\nThe Red Tree sets a strongly colored trunk against a blue sky, and shows that he was already working with opposites.\n\nHe also made many flower studies in these years, especially chrysanthemums and amaryllis, in soft tones of {{Rose}} and {{Dove Grey}} on pale grounds.",
+   "colors": [
+    "Scarlet",
+    "Cobalt Blue",
+    "Orange",
+    "Olive"
+   ]
+  },
+  {
+   "title": "Paris and the dissolving tree",
+   "when": "Paris · 1912 to 1914",
+   "text": "He moved to Paris in 1912 and dropped the second 'a' from his name. Under the influence of Cubism the grey and brown tree series breaks into a lattice of lines.\n\nThe palette goes to {{Taupe}}, {{Sand}} and Dove Grey, a muted range of near-neutrals like Picasso's and Braque's.\n\nWhat to look for in the Gray Tree of 1911 is the way a tree turns into a set of arcs and then into a field, with the color lowered to leave the structure visible.\n\nHe continued to make the tree and the church facade into a grid for several years. The titles keep the old subject, but the surface becomes more and more a plane of lines.",
+   "colors": [
+    "Taupe",
+    "Sand",
+    "Dove Grey",
+    "Bone"
+   ]
+  },
+  {
+   "title": "The grid and the primaries",
+   "when": "Netherlands and Paris · 1917 to 1935",
+   "text": "During the First World War he was in the Netherlands, where he joined Theo van Doesburg and the De Stijl group in 1917. In the 1920s he reduced his painting to horizontal and vertical black lines, white and grey planes, and rectangles of Scarlet, {{Royal Blue}} and a strong yellow.\n\nThe red, yellow and blue he used belong to the painter's convention of primaries. It is a teaching tradition, not a physical fact, and no three pigments mix every color. For Mondrian they were a vocabulary of the simplest colors.\n\nThe pictures are less regular than they look. The lines vary in width, the squares in size, and the {{Platinum}} of the white areas is often a faintly warm grey. The balance is tuned by eye.\n\nThe paintings of the 1920s were revised over months. He kept moving a line or changing the size of a color plane until the weight felt even, and the final surface often shows the older lines beneath the white.",
+   "colors": [
+    "Scarlet",
+    "Royal Blue",
+    "Platinum",
+    "Midnight Blue"
+   ]
+  },
+  {
+   "title": "New York and what our archive shows",
+   "when": "1938 to 1944 · 424 paintings",
+   "text": "He left Paris for London in 1938 and for New York in 1940. In Broadway Boogie Woogie, from 1942 to 1943, the black lines disappear and small blocks of Scarlet, Cobalt Blue and yellow flicker along colored paths.\n\nOur archive holds 424 of his paintings. Dark olive brown and {{Smoky Black}} are the commonest darks, each around a tenth of the dark areas, and the lights are pale grey tones such as Platinum.\n\nHe uses Platinum almost nine times as often as his peers, and white more than five times. That shows the weight he gave to the empty planes. These are photographs of aged paint, and white often yellows or greys with time.",
+   "colors": [
+    "Smoky Black",
+    "Platinum",
+    "Charcoal"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Chromatlas archive, 424 paintings"
+ ],
+ "words": 600,
+ "status": "article"
+}

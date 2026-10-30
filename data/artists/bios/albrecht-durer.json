@@ -1,1 +1,60 @@
-{"slug": "albrecht-durer", "lead": "Albrecht Dürer, sometimes spelled in English as Durer or Duerer, was a German painter, printmaker, and theorist of the German Renaissance.", "paras": ["Born in Nuremberg, Dürer established his reputation and influence across Europe in his twenties due to his high-quality woodcut prints."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "albrecht-durer",
+ "lead": "Albrecht Dürer, sometimes spelled in English as Durer or Duerer, was a German painter, printmaker, and theorist of the German Renaissance.",
+ "paras": [
+  "Dürer is remembered first as a master of black line, yet he was also a colorist who studied Venetian painting twice and wrote about the cost of blue. His watercolors of grass, hares and Alpine valleys are among the earliest landscapes painted as landscapes.",
+  "The chapters follow the colors from Nuremberg to Venice and the Netherlands, then turn to what the archive shows."
+ ],
+ "chapters": [
+  {
+   "title": "Nuremberg and the first watercolors",
+   "when": "Nuremberg and the Alps · 1490 to 1497",
+   "text": "Dürer was the son of a Nuremberg goldsmith and learned drawing in that trade before he painted. On his first journey south over the Alps, about 1494 to 1495, he made watercolor views of valleys and towns that record exact weather, with grey-blue distances and {{Olive}} and sage hills.\n\nThese sheets use transparent washes and a little body color on paper, so the paper itself is the white. Stone walls are {{Ecru}} and {{Tan}}; roofs a flat {{Terracotta}}. He often drew first in pen and then laid color over the line, a habit of an engraver.\n\nAs a printmaker he was already famous across Europe by his twenties, and the Apocalypse woodcuts of 1498 made his name.\n\nLook at the sky in these sheets. Dürer leaves the paper bare for cloud and lays a thin blue wash above it, so the white of a cloud is only the absence of paint, which is how all watercolor works and also how his prints work.",
+   "colors": [
+    "Olive",
+    "Sage",
+    "Ecru",
+    "Terracotta"
+   ]
+  },
+  {
+   "title": "Venice and the painted Madonnas",
+   "when": "Nuremberg and Venice · 1500 to 1507",
+   "text": "The Self-Portrait of 1500 is almost symmetrical, dark fur against a plain dark ground, with the face in warm flesh and the hair in {{Chestnut}} and {{Auburn}} curls. It is among the most controlled color schemes of the period, and the gold of the lettering is as important as the face.\n\nDürer returned to Venice in 1505 to 1507 and found Giovanni Bellini still painting, a meeting he recorded with admiration. For the Feast of the Rose Garlands, 1506, he used the clear, saturated reds and blues he had seen there, with {{Crimson}} robes and a blue cloak.\n\nSt Clair gives an example that shows the scale of the cost: in 1521 Dürer paid nearly a hundred times more for ultramarine than for some earth pigments.",
+   "colors": [
+    "Chestnut",
+    "Auburn",
+    "Crimson",
+    "Royal Blue"
+   ]
+  },
+  {
+   "title": "Nature studies and the Netherlands",
+   "when": "Nuremberg and Antwerp · 1502 to 1521",
+   "text": "His best-known color studies were made at home. The Hare of 1502 and the Great Piece of Turf of 1503 are watercolor with gouache, and in the hare the fur is made of fine strokes of {{Sienna}}, {{Khaki}} and a warm grey, each laid in the direction of the hair. The turf shows plants one by one, with a green that varies stalk by stalk.\n\nIn 1520 and 1521 he traveled through the Netherlands with his wife and kept a diary that notes what he bought, what he gave away and what he was paid. It is a source for prices of colors, though not a pigment list.\n\nAfter his return to Nuremberg he painted the Four Apostles of 1526 as a gift to the city: a red cloak, a white mantle and dark robes, with the sober look of Lutheran Nuremberg.",
+   "colors": [
+    "Sienna",
+    "Khaki",
+    "Forest Green",
+    "Wheat"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 391 paintings",
+   "text": "Our archive holds 391 items under his name, photographed as they exist today. {{Smoky Black}} is the darkest large area in 93 of them, about a quarter, followed by dark chocolate brown and black brown. The lightest areas are {{Ecru}} (35) and white (23).\n\nThose pale tones probably include the paper of drawings and prints in the set, so the lights tell us about the sheet as much as the paint. These are photographs of aged works and papers, so read them as tendencies, not as pigment tests.\n\nThe two numbers together suggest an archive that is partly engravings and drawings, in which black is ink and the pale tone is the sheet. The brown-black and ivory are a record of materials as much as of choices.",
+   "colors": [
+    "Smoky Black",
+    "Ecru",
+    "Ivory"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "St Clair, The Secret Lives of Color (2016)",
+  "Chromatlas archive, 391 paintings"
+ ],
+ "words": 621,
+ "status": "article"
+}

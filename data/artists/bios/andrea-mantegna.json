@@ -1,1 +1,60 @@
-{"slug": "andrea-mantegna", "lead": "Andrea Mantegna was an Italian Renaissance painter, a student of Roman archaeology, and the son-in-law of Jacopo Bellini.", "paras": [], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "andrea-mantegna",
+ "lead": "Andrea Mantegna was an Italian Renaissance painter, a student of Roman archaeology, and the son-in-law of Jacopo Bellini.",
+ "paras": [
+  "Mantegna painted stone better than anyone in the fifteenth century, and the color of his pictures is often the color of marble, bronze and aged plaster. He is a draftsman first, but his hues are clean, cool and hard.",
+  "The chapters below follow him from Padua to Mantua and the grisaille pictures of his last years, and end with what our archive shows."
+ ],
+ "chapters": [
+  {
+   "title": "Padua and the Ovetari Chapel",
+   "when": "Padua · 1440s to 1450s",
+   "text": "Mantegna was born near Padua in 1431 and was adopted by the painter Francesco Squarcione. He studied the antique sculpture of the city and was soon painting frescoes for the Ovetari Chapel, which were badly damaged by bombing in 1944.\n\nThe frescoes were painted in the quick-drying lime plaster that fixes only a few pigments, such as earth colors and a green earth, and for the blues painters often added a dry layer on top.\n\nSurviving photographs and fragments show a palette of {{Terracotta}}, {{Ochre}}, {{Green Earth}} and pale stone, with soldiers whose armor looks metal because of how its highlights are placed.\n\nHis teacher Squarcione was a collector of antique casts, and Mantegna learned from them how to model a body as if cut from stone. That habit shows in his flesh, which is firm and slightly cool.",
+   "colors": [
+    "Terracotta",
+    "Ochre",
+    "Green Earth",
+    "Sand"
+   ]
+  },
+  {
+   "title": "Mantua and the Camera degli Sposi",
+   "when": "Mantua · 1460 to 1474",
+   "text": "In 1460 Mantegna became court painter to the Gonzaga family in Mantua. His best-known work there is the Camera degli Sposi, completed in 1474, a painted room in the ducal palace where the Gonzaga family meets a courtier and a ceiling opens onto the sky.\n\nThe colors of the room are bright and clear: {{Azure}} in the sky, {{Burgundy}} and {{Gold}} in the clothing, and a stage of {{Olive}} and {{Sage}} in the landscape. The illusion is built from the light, as much as from perspective.\n\nWhat to look for is the oculus on the ceiling, where a blue sky holds a ring of figures looking down. The sky blue and the pale plaster are chosen to look as if they carry on beyond the room.\n\nGonzaga records show that Mantegna was sometimes slow and demanding in his dealings with the court, and wrote to the marquis about his pay. The work he did there nevertheless occupied him for most of his remaining life.",
+   "colors": [
+    "Azure",
+    "Burgundy",
+    "Gold",
+    "Sage"
+   ]
+  },
+  {
+   "title": "Tempera, stone and the Dead Christ",
+   "when": "Mantua · 1470s to 1490s",
+   "text": "The Lamentation over the Dead Christ, painted around 1480, is a small canvas in tempera, showing the body foreshortened from the feet. It is a pale body in a very cool {{Dove Grey}} room, with a warm {{Sienna}} in the sheet and dark shadow.\n\nHe also painted The Triumphs of Caesar for the Gonzagas, nine large canvases in tempera. A tempera binder gives a matte surface, and the colors are a little chalky, like the stone he liked to paint.\n\nIn his last years he painted figures in grisaille, imitating carved stone relief in tones of grey and ochre. Look for {{Charcoal}} and {{Silver}} where he fakes a bronze or marble statue.\n\nCompare a Mantegna flesh tone with the soft warmth of a Venetian picture by his brother-in-law Giovanni Bellini. Mantegna's is cooler and harder, and the edges of forms are sharper.",
+   "colors": [
+    "Dove Grey",
+    "Sienna",
+    "Charcoal",
+    "Silver"
+   ],
+   "pull": "Mantegna's late grisailles imitate carved stone in painted greys, and are meant to be mistaken for sculpture."
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 498 paintings",
+   "text": "Mantegna died in Mantua in 1506. Our archive holds 498 of his paintings and panels. Smoky Black is the largest dark, at over a quarter of the dark areas, with Black Blue and Raisin Black each around six per cent.\n\nIn the pale areas Tan leads, followed by Linen grey and Ecru. These are the stone and flesh tones of a painter who modeled with light.\n\nThese are photographs of five-hundred-year-old pictures. Old varnish and darkened glazes make the dark areas heavier than the painter intended, and the blues may have shifted, so read the result as the condition of the pictures today.",
+   "colors": [
+    "Smoky Black",
+    "Black Blue",
+    "Tan"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Chromatlas archive, 498 paintings"
+ ],
+ "words": 629,
+ "status": "article"
+}

@@ -1,1 +1,60 @@
-{"slug": "egon-schiele", "lead": "Egon Leo Adolf Ludwig Schiele was an Austrian Expressionist painter.", "paras": ["His work is noted for its intensity and its raw sexuality, and for the many self-portraits the artist produced, including nude self-portraits."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "egon-schiele",
+ "lead": "Egon Leo Adolf Ludwig Schiele was an Austrian Expressionist painter.",
+ "paras": [
+  "Schiele is known for his drawn line, but his color is just as striking. The skin of his figures is painted in livid greens, reds and yellows, on a ground that is often simply the bare paper.",
+  "The chapters below follow his short life from Vienna to the war years, and end with what our archive shows."
+ ],
+ "chapters": [
+  {
+   "title": "Vienna and Klimt",
+   "when": "Vienna · 1906 to 1909",
+   "text": "Schiele was born in Tulln in 1890 and entered the Vienna Academy at sixteen. He met Gustav Klimt, who encouraged him, and whose gold and ornament show up in the early pictures.\n\nThe first portraits are decorative, with flat panels of {{Gold}}, {{Mustard}} and {{Plum}} around the sitter, and the thin figures are drawn in a hard dark line.\n\nWithin two years he had turned away from ornament, and by 1910 the figure was alone against a bare ground.\n\nKlimt introduced him to patrons, and bought some of his drawings. The older painter's influence is visible in the use of gold and in the flatness of the backgrounds.",
+   "colors": [
+    "Gold",
+    "Mustard",
+    "Plum",
+    "Ochre"
+   ]
+  },
+  {
+   "title": "Skin and bare paper",
+   "when": "Vienna and Krumau · 1910 to 1912",
+   "text": "In 1910 he began the nude studies for which he is best known, in watercolor and gouache over pencil. He left the ground bare, so that the {{Ivory}} or {{Buff}} of the paper functions as an area of light between the colored patches.\n\nThe skin is not flesh pink. He used patches of {{Sage}}, {{Rust}}, {{Coral}} and a bluish {{Grey Blue}}, laid in unevenly so the figure looks bruised or fevered.\n\nIn 1912 he was arrested in Neulengbach and held for about three weeks, on charges linked to the drawings found in his studio. A judge is reported to have burned one of the drawings in court.\n\nThe unusual part is the outline. Schiele draws it in a dark brown line that is thick in places and nearly absent in others, and colors the inside as if the figure were a map.",
+   "colors": [
+    "Ivory",
+    "Buff",
+    "Sage",
+    "Coral"
+   ]
+  },
+  {
+   "title": "War years and Edith",
+   "when": "Vienna · 1914 to 1918",
+   "text": "After he began living with the model Wally Neuzil in 1911, he separated from her in 1915 to marry Edith Harms. He served in the army from 1915, mostly in clerical posts, and painted on leave.\n\nThe late oils are fuller, more modeled, and the color becomes warmer, with {{Terracotta}}, {{Cinnamon-Buff}} and a deep {{Burgundy}} in clothes. His portraits of 1917 and 1918, including The Family, are more traditional.\n\nEdith died of the Spanish flu in October 1918, and Schiele died of the same disease three days later, aged twenty-eight.",
+   "colors": [
+    "Terracotta",
+    "Cinnamon-Buff",
+    "Burgundy",
+    "Camel"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 134 paintings",
+   "text": "Our archive holds 134 of his paintings, the smallest group in this set, so the numbers are less certain. In the pale areas Ecru leads, at about eleven per cent, followed by Almond and Greyish White.\n\nHe uses Almond about nine times as often as his peers, and Ecru and Light Ivory nearly as much. That is the paper and the pale primer, the bare ground he left on purpose. Among the darks, Smoky Black leads at about fourteen per cent.\n\nThese are photographs of works on paper and canvas, so the paper tone is as photographed, and the figures say something about his method more than about pigments.\n\nFew of his pictures are large, and the color often fills only a part of the figure, leaving the rest as drawing. Because the paper is the lightest note, it is easy to miss that the page itself is part of the palette.",
+   "colors": [
+    "Ecru",
+    "Almond",
+    "Light Ivory",
+    "Smoky Black"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Chromatlas archive, 134 paintings"
+ ],
+ "words": 559,
+ "status": "article"
+}

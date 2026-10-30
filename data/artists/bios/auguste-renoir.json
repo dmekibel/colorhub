@@ -1,1 +1,61 @@
-{"slug": "auguste-renoir", "lead": "Pierre-Auguste Renoir was a leading French Impressionist artist.", "paras": ["In his depiction of feminine beauty, Renoir has been described as \"the final representative of a tradition which runs directly from Rubens to Watteau.\""], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "auguste-renoir",
+ "lead": "Pierre-Auguste Renoir was a leading French Impressionist artist.",
+ "paras": [
+  "Renoir is the Impressionist most tied to warmth. Flesh in his paintings is built from {{Rose}}, salmon and cream, set against cool leaf greens and blue-grey shadows, and he kept changing his method for most of his life.",
+  "The chapters below follow his palette from the Paris porcelain workshop to the arthritic last years at Cagnes, and end with what the archive measures."
+ ],
+ "chapters": [
+  {
+   "title": "Porcelain, Gleyre and the Seine",
+   "when": "Paris · 1854 to 1874",
+   "text": "Renoir began as a teenage apprentice painting porcelain in Paris, work that rewarded a light hand and clean, thin color. In 1862 he entered the studio of Charles Gleyre, where he met Monet, Sisley and Bazille. His early canvases still lean on the dark, brown-black grounds of the Salon tradition.\n\nThat changed at La Grenouillère in the summer of 1869, when he painted beside Monet at a riverside bathing spot. The water breaks into quick strokes of {{Cobalt Blue}}, {{Viridian}} and white, and the tubes that carried those pigments are part of the story. Ball repeats a remark attributed to Renoir that without paint in collapsible tubes there would have been no Impressionism.\n\nThe tin tube was patented in 1841 by the American portrait painter John Rand, and it is why a painter could carry a full range of bright manufactured colors to the riverbank.",
+   "colors": [
+    "Cobalt Blue",
+    "Viridian",
+    "Sky Blue",
+    "Powder Blue"
+   ]
+  },
+  {
+   "title": "Dance halls and boating parties",
+   "when": "Paris and the Seine · 1874 to 1880",
+   "text": "In the mid-1870s Renoir painted the crowds of Montmartre. In the Moulin de la Galette of 1876 the dancers' clothes and the dappled ground are laced with blue shadow, so that the sunlight seems to land on cool paper.\n\nBy Ball's account Boating on the Seine, from 1879 to 1880, was painted with a very short list: lead white, cobalt, viridian, vermilion, chrome and strontium yellows, chrome orange and a red lake. That is about eight pigments for a whole summer afternoon. Renoir also told a student, as Ball relays, that no shadow is truly black and that black and white are not really colors.\n\nWhere he wanted mauves he followed the usual Impressionist habit of glazing cobalt or ultramarine with red lake, rather than reaching for the newer cobalt violet. In the real paintings, look for {{Lilac}} and {{Mauve}} running through the grey of the shadows.",
+   "colors": [
+    "Vermilion",
+    "Lilac",
+    "Mauve",
+    "Cadmium Orange"
+   ]
+  },
+  {
+   "title": "Italy, dry years and the late reds",
+   "when": "Italy and the south of France · 1881 to 1919",
+   "text": "After a trip to Italy in 1881 and 1882, where he saw Raphael's frescoes in Rome and the wall paintings of Pompeii, Renoir grew dissatisfied with his loose manner. His pictures of the mid-1880s, such as the Large Bathers, have firmer outlines and a cooler, more pastel surface.\n\nBy the 1890s he had returned to a soft touch and a warm palette, and in the last two decades the flesh grows redder and the backgrounds orange and rose. He lived in the south, at Cagnes-sur-Mer, and rheumatoid arthritis forced him to work with a brush fixed to his hand. The reds of those years sit close to {{Coral}} and {{Carnation Pink}}, with a deep {{Scarlet}} or {{Vermilion}} in the cushions and hats.\n\nHe was still painting in 1919, the year he died. What to look for is the way a late nude is built from a few glazed warm colors, not from the broken blue-and-orange touches of 1870.",
+   "colors": [
+    "Coral",
+    "Carnation Pink",
+    "Scarlet",
+    "Rose"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 1,412 paintings",
+   "text": "Our archive holds 1,412 of his paintings, photographed as they hang today under aged varnish. The most common dark in the set is {{Smoky Black}}, the darkest large area in 142 of them, followed by {{Dark Jungle Green}} (82) and a dark olive brown (62), which is a little odd for a painter who disliked black.\n\nSome of that comes from early dark-ground pictures and from varnish, and some from portraits with dark dresses. The most common light areas are {{Tan}}, a pale oatmeal and linen grey, warm creams and not clean white. These are photographs, so read them as tendencies in the images, not as pigment tests.",
+   "colors": [
+    "Smoky Black",
+    "Dark Jungle Green",
+    "Tan",
+    "Ecru"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 1,412 paintings"
+ ],
+ "words": 621,
+ "status": "article"
+}

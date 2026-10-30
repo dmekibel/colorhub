@@ -1,1 +1,60 @@
-{"slug": "joshua-reynolds", "lead": "Sir Joshua Reynolds was an English painter who specialised in portraits.", "paras": ["The art critic John Russell called him one of the major European painters of the 18th century, while Lucy Peltz says he was \"the leading portrait artist of the 18th-century and arguably one of the greatest artists in the history of art.\" He promoted the \"Grand Style\" in painting, which depended on idealisation of the imperfect."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "joshua-reynolds",
+ "lead": "Sir Joshua Reynolds was an English painter who specialised in portraits.",
+ "paras": [
+  "Reynolds was the first president of the Royal Academy and the great English theorist of portrait painting, and he was also a restless experimenter with materials. The result is a body of work that is now often darker and more cracked than he intended.",
+  "The chapters below follow his training, his Italian years, the Academy period and his experiments, and end with what the archive shows."
+ ],
+ "chapters": [
+  {
+   "title": "Devon and the first portraits",
+   "when": "Plympton and London · 1723 to 1749",
+   "text": "Reynolds was born in Plympton, Devon, in 1723 and was apprenticed in London to the portraitist Thomas Hudson. His first pictures are bright and a little stiff, in the manner of his teacher, with the sitter in a warm brown interior.\n\nThe earliest palette is of simple tones: {{Chestnut}}, {{Umber}} and {{Olive Green}} in the backgrounds, with ivory-toned faces and small spots of {{Scarlet}}.\n\nThe interest of the early work is the face. Even in the first pictures he is already building the skin in several thin warm layers and keeping the shadow cool.\n\nHis surviving notebooks show how often he returned to the Old Masters for guidance, and his own collection of them was large.",
+   "colors": [
+    "Chestnut",
+    "Umber",
+    "Olive Green",
+    "Scarlet"
+   ]
+  },
+  {
+   "title": "Italy and Venetian color",
+   "when": "Rome and Venice · 1750 to 1752",
+   "text": "He went to Italy in 1750, and spent two years in Rome, Florence and Venice. He studied Raphael and Michelangelo, but his notes show how closely he looked at Venetian painting, and its warm shadows and rich color stayed with him.\n\nBack in London, the sitters of the 1750s are posed in the grand manner, in rich {{Burgundy}}, {{Oxblood}} and {{Gold}} drapery, with a sky or a column behind them.\n\nHe looked for the sense of weight in color. A heavy {{Maroon}} curtain behind a pale face gives the face a clear front, and he often kept one note of the picture, such as a red sleeve, noticeably brighter than the rest.\n\nHe later wrote that the Venetians taught him how to use a few colors in large masses. You can see the lesson in portraits where a single large area, such as a cloak, is kept simple while the face receives the most care.",
+   "colors": [
+    "Burgundy",
+    "Oxblood",
+    "Gold",
+    "Maroon"
+   ]
+  },
+  {
+   "title": "The Academy and the experiments",
+   "when": "London · 1768 to 1792",
+   "text": "When the Royal Academy opened in 1768, Reynolds was its president, and he gave fifteen Discourses on art to its students. In them he promoted the Grand Style and warned against bright color for its own sake.\n\nIn his own studio he kept experimenting with unstable materials. He used resins, waxes and fugitive red lakes in his flesh tones, and some of those faded, so that rosy cheeks have turned pale. Others darkened and cracked. His pictures often look different from the way he left them.\n\nThat gives a rule for looking: expect a warm brown and pale pink face with the blush faded away, and imagine {{Rose}} and {{Carmine}} where the face is now plain.\n\nA visitor to the National Gallery in London can compare a Reynolds with a Gainsborough from the same decade. The Reynolds is usually the darker and the more thoroughly built; the Gainsborough is quicker and more silvery.",
+   "colors": [
+    "Rose",
+    "Carmine",
+    "Burnt Sienna",
+    "Buff"
+   ],
+   "pull": "Reynolds experimented with fugitive red lakes, and many of the blushes in his portraits have faded; they were pinker when they left the studio."
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 670 paintings",
+   "text": "Our archive holds 670 of his paintings, photographed as they hang today. {{Smoky Black}} dominates his largest dark areas, at about two fifths, followed by Black brown and Near black.\n\nHe uses Near black about three times as often as his peers, and Smoky Black nearly three times as well. The reasons are probably both original and later: the dark grounds he liked, and the changes of old varnish and bitumen-like glazes.\n\nThe lightest large areas are cream and {{Beige}} tones. These are photographs, so the darkness is partly the condition of the pictures.",
+   "colors": [
+    "Smoky Black",
+    "Beige",
+    "Charcoal"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Chromatlas archive, 670 paintings"
+ ],
+ "words": 595,
+ "status": "article"
+}

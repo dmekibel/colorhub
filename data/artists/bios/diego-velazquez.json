@@ -1,1 +1,59 @@
-{"slug": "diego-velazquez", "lead": "Diego Rodríguez de Silva y Velázquez was a Spanish Baroque painter, the leading artist in the court of King Philip IV of Spain and Portugal, and of the Spanish Golden Age.", "paras": ["He is generally considered one of the greatest artists in the history of Western art."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "diego-velazquez",
+ "lead": "Diego Rodríguez de Silva y Velázquez was a Spanish Baroque painter, the leading artist in the court of King Philip IV of Spain and Portugal, and of the Spanish Golden Age.",
+ "paras": [
+  "Velázquez painted the Spanish court, and the Spanish court dressed in black. His color is built from greys, dark browns and silvery greens, with a few clear reds and blues set against them as if lit from inside.",
+  "The chapters follow him from Seville to Madrid and Rome, and end with what the archive measures."
+ ],
+ "chapters": [
+  {
+   "title": "Seville and the kitchen scenes",
+   "when": "Seville · 1617 to 1623",
+   "text": "Velázquez trained in Seville under Francisco Pacheco and as a teenager painted bodegones, kitchen and tavern scenes with still life in the foreground. The Old Woman Frying Eggs of 1618 is built from dark browns and {{Burnt Umber}}, with pans the color of {{Copper}} and a white bowl as the one bright spot.\n\nTechnical studies commonly report a reddish earth ground under Spanish canvases of this period, which shows through the darks and warms them. The effect, in his early pictures, is that every shadow is a brown, not a grey.\n\nAt the same time he learned to paint the surfaces of things, the sheen on a glazed jug and the damp of a fish. These are texture studies, but color is how they work: a few close browns, one cold white, and the metal's bronze glow set by a small touch of orange.",
+   "colors": [
+    "Burnt Umber",
+    "Copper",
+    "Sienna",
+    "Mahogany"
+   ]
+  },
+  {
+   "title": "Madrid and the grey court",
+   "when": "Madrid · 1623 to 1648",
+   "text": "In 1623 he became court painter to Philip IV, a post he held for the rest of his life. His portraits of the king set a pale face and fair hair against black clothing and a soft grey background, and the colors that remain are small: a red sash, a gold chain, a white collar. Spanish court dress was black, so the painter had to find variety within it.\n\nHis open-air hunting portraits of the 1630s add {{Sage}} and {{Olive}} hills with a distant {{Powder Blue}} Guadarrama. The Surrender of Breda, about 1635, spreads a pale sky across the upper half and puts the soldiers' spears against it in a repeating vertical rhythm.\n\nHe is often described as a painter of greys, and his own contemporaries admired how he got so much from so little.",
+   "colors": [
+    "Sage",
+    "Olive",
+    "Powder Blue",
+    "Gold"
+   ]
+  },
+  {
+   "title": "Italy, the Rokeby Venus and Las Meninas",
+   "when": "Rome and Madrid · 1649 to 1660",
+   "text": "On his second Italian journey, in 1649 to 1651, he painted Pope Innocent X, a portrait in many reds: a {{Crimson}} cap and cape, a rose-white surplice, and a red velvet chair. Painters have long taken it as a lesson in how to vary one color across a whole canvas.\n\nThe Rokeby Venus, painted around the same time, balances a grey drapery and a pink ribbon against warm {{Rose}} skin. Las Meninas, finished in 1656, is built from the browns and blacks of the room, with the little princess in silver-grey and white at the center, and red in the lips, the pottery the maid offers and, by the usual account added after his knighthood in 1659, the cross of Santiago on the painter's chest.\n\nThe brushwork also changed. In late work the colors are put on in loose touches that resolve only at a distance, one reason he mattered to Manet and later painters.",
+   "colors": [
+    "Crimson",
+    "Rose",
+    "Silver",
+    "Maroon"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 165 paintings",
+   "text": "Our archive holds 165 of his paintings, photographed under aged varnish. {{Smoky Black}} is the darkest large area in 78 of them, almost half, with black brown and a near black behind it. That fits the court black.\n\nThe list of lightest areas shows brownish olive and dark browns, which looks odd for lights and probably reflects his overall dark tone and the varnish, so we set it aside. These are photographs, so read them as tendencies, not as pigment tests.\n\nAlmost half the set sits in a single dark family because the court wore it and because the backgrounds of portraits are dark. The archive can see that, but it cannot see the small clear reds and silvers that actually make the pictures, since they cover little area.",
+   "colors": [
+    "Smoky Black",
+    "Olive-Brown",
+    "Dark Brown"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Chromatlas archive, 165 paintings"
+ ],
+ "words": 618,
+ "status": "article"
+}

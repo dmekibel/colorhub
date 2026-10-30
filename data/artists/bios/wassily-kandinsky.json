@@ -1,1 +1,61 @@
-{"slug": "wassily-kandinsky", "lead": "Wassily Wassilyevich Kandinsky was a Russian painter and art theorist active in Germany during the late Belle Époque and Interwar eras.", "paras": ["Kandinsky is generally credited as one of the pioneers of abstraction in Western art."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "wassily-kandinsky",
+ "lead": "Wassily Wassilyevich Kandinsky was a Russian painter and art theorist active in Germany during the late Belle Époque and Interwar eras.",
+ "paras": [
+  "Kandinsky is usually named as one of the first painters to give up recognizable subjects, and he explained the step in terms of color. He believed that hues act directly on the viewer, and he wrote about them almost as if they were instruments in an orchestra.",
+  "The chapters below follow his palette from the bright Bavarian landscapes of 1908 to the geometry of the Bauhaus and the soft inventions of his last Paris years, and end with what the archive shows."
+ ],
+ "chapters": [
+  {
+   "title": "Munich and Murnau",
+   "when": "Germany · 1896 to 1909",
+   "text": "Kandinsky came to painting late. He had studied law and economics in Moscow and moved to Munich in 1896, aged thirty, to train as an artist. His first mature pictures were small, flat-colored scenes of riders and old Russian towns, painted with a palette knife in strong, unmixed patches.\n\nIn 1908 and 1909 he worked in the Bavarian village of Murnau, where the {{Cobalt Blue}} of the mountains, the {{Vermilion}} of roofs and the {{Emerald Green}} of meadows were set side by side with little blending. The village houses become blocks of color, and the hills shrink to a few simple shapes.\n\nWhat to look for in these canvases is how little shadow there is. Dark areas are saturated blues and violets rather than browns, which is why the pictures read as bright even when the subject is a rainy street.\n\nEven at this early stage he thought about how two colors act on each other. A strong yellow roof beside a blue hill sharpens both, and he set such pairs next to one another on purpose.",
+   "colors": [
+    "Cobalt Blue",
+    "Vermilion",
+    "Emerald Green",
+    "Sky Blue"
+   ]
+  },
+  {
+   "title": "Improvisations and the Blue Rider",
+   "when": "Munich · 1910 to 1914",
+   "text": "Around 1910 the recognizable subject begins to dissolve. In the Improvisations and Compositions of these years, riders, towers and hills are reduced to a few curved black lines, and the colors travel on their own across the canvas, among them Lemon Meringue-like yellows, {{Royal Blue}} and {{Scarlet}}.\n\nHis book Concerning the Spiritual in Art, published in 1911, set out a theory of what each color does. By his account yellow pushes toward the viewer, blue draws away, and the pair are a kind of conflict that the eye feels. These are his claims, not measurements, and modern studies of color and mood are much more cautious.\n\nHe is often described as a synesthete who heard colors. That is his own report and that of some contemporaries; treat it as a reason he described paintings in musical terms, not as a proven mechanism.",
+   "colors": [
+    "Royal Blue",
+    "Scarlet",
+    "Periwinkle"
+   ],
+   "pull": "Kandinsky taught that yellow advances and blue retreats; it was a theory he proposed, not a result he measured."
+  },
+  {
+   "title": "Bauhaus and the geometry years",
+   "when": "Weimar and Dessau · 1922 to 1933",
+   "text": "After returning from Russia he taught at the Bauhaus from 1922. The loose clouds of color gave way to circles, triangles, lines and grids on carefully prepared grounds, and the palette became cooler and more measured: {{Teal}}, {{Pompeian Red}}, {{Mustard}} and {{Dove Grey}} set against a deep ground.\n\nHe linked three shapes to three colors in a famous Bauhaus questionnaire: yellow with the triangle, red with the square, blue with the circle. Most of his colleagues did not agree, and the results were mixed, so the scheme is better read as his own working system.\n\nIn pictures such as Yellow-Red-Blue, 1925, the shapes overlap and the colors push against each other at the edges. Look at how a small touch of {{Pale Pink}} or a cream next to a dark ground makes the dark go further back.",
+   "colors": [
+    "Teal",
+    "Pompeian Red",
+    "Mustard",
+    "Dove Grey"
+   ]
+  },
+  {
+   "title": "Paris and what our archive shows",
+   "when": "France · 1934 to 1944 · 839 paintings",
+   "text": "He left Germany when the Nazi government closed the Bauhaus and settled outside Paris in 1933. In the final decade the forms turn into small biomorphic creatures, set on pale sandy or soft {{Ecru}} backgrounds, with tones close to {{Peach}} and Aquamarine.\n\nOur archive holds 839 of his paintings, photographed as they hang. Among his largest dark areas, Smoky Black is the most common, at about a fifth of the dark ground. In the pale areas Ecru and Greyish White lead.\n\nHe uses Bistre, Café Noir and deep olive brown far less than other painters of the same period, which fits a palette of saturated blues and clean, chromatic darks. These are photographs, and some darks may read blacker than the paint is.\n\nIf you can see one of his late Paris pictures in person, notice how the small shapes float on their pale grounds. The grounds are warm and sandy, and the little forms in Coral and Turquoise seem to hover rather than sit.",
+   "colors": [
+    "Smoky Black",
+    "Ecru",
+    "Bistre",
+    "Peach"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Kandinsky, Concerning the Spiritual in Art (1911)",
+  "Chromatlas archive, 839 paintings"
+ ],
+ "words": 724,
+ "status": "article"
+}

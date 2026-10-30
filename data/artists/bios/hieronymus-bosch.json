@@ -1,1 +1,60 @@
-{"slug": "hieronymus-bosch", "lead": "Hieronymus Bosch was a Dutch painter from Brabant.", "paras": ["He is one of the most notable representatives of the Early Netherlandish painting school."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "hieronymus-bosch",
+ "lead": "Hieronymus Bosch was a Dutch painter from Brabant.",
+ "paras": [
+  "Bosch's color is lighter than his subjects. In the Garden of Earthly Delights and the Haywain, pale pinks, blue-greens and cream carry the crowds, and the nightmares of the last panels are set against black and fire.",
+  "The chapters follow his world in 's-Hertogenbosch, then three of his best-known works, and end with what the archive measures."
+ ],
+ "chapters": [
+  {
+   "title": "'s-Hertogenbosch",
+   "when": "Brabant · 1450 to 1490",
+   "text": "Bosch spent his life in 's-Hertogenbosch, a prosperous trading town in Brabant, and was a member of a religious brotherhood there. Fewer than thirty paintings are generally attributed to him, and none of his works are dated. Our own archive's larger count includes workshop pieces and followers, as noted below.\n\nHe painted in oil on oak panels with a thin chalk ground. A brush drawing in brown or black ink often lies under the paint, and infrared studies have revealed how freely he changed his mind. The surface is thin, so the underdrawing shows through in places and the light panel itself becomes part of the color.",
+   "colors": [
+    "Olive-Buff",
+    "Sepia",
+    "Lion",
+    "Ecru"
+   ]
+  },
+  {
+   "title": "The Garden of Earthly Delights",
+   "when": "'s-Hertogenbosch · about 1490 to 1510",
+   "text": "The triptych now in the Prado is the best place to see his palette. The left panel is a pale {{Pistachio}} and blue-green Paradise with a pink fountain, the center a meadow of pink bodies and strange fruit, and the right a night of fire.\n\nThe outer shutters, closed, show the world on the third day of creation as a grey-green glass sphere on a dark ground, in monochrome. Open them and the color arrives all at once.\n\nIn the center panel the flesh is a delicate {{Peach}} and {{Blush}}, near pure white where it catches the light, set against meadow greens and a distant {{Sky Blue}}.\n\nThe brightest paint is applied last and thinly. Flowers, small birds and fruit are given a touch of {{Cerise}} or white and a hint of blue, and they sit on the green like jewels.",
+   "colors": [
+    "Pistachio",
+    "Peach",
+    "Blush",
+    "Sky Blue"
+   ]
+  },
+  {
+   "title": "Hell, night and fire",
+   "when": "'s-Hertogenbosch · about 1500 to 1516",
+   "text": "The right wing of the triptych and the Temptation of St Anthony in Lisbon use the opposite scheme. A black or deep blue-black sky is lit from below by {{Burnt Orange}} and {{Vermilion}} fire, and small bright figures stand out against it. The contrast is among the strongest in Netherlandish painting.\n\nFor greens, Bosch could use copper-based pigments, which Ball notes were common in Netherlandish and Italian painting but could darken over time. Azurite for blue and lead-tin yellow were the usual choices of the period, though naming the pigment in any one passage needs analysis.\n\nHe died in 1516. In the real paintings, notice how the lightest tones are saved for the figures and how the sky is always the darkest part.",
+   "colors": [
+    "Burnt Orange",
+    "Vermilion",
+    "Charcoal",
+    "Dark Brown"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 103 paintings",
+   "text": "Our archive holds 103 items under his name, including workshop works and followers, so these figures are about the Bosch circle more than the man. {{Smoky Black}} is the darkest large area in 32 of them, almost a third, followed by black brown and dark walnut.\n\nThe lightest large areas are white (11), an olive buff and a warm {{Lion}} tan, which matches the pale panel showing through. These are photographs of aged works, so read them as tendencies, not as pigment tests.\n\nEach of these numbers comes from a handful of panels, many of them follower works, so a single dark panel changes a lot. The cautious reading is that dark, brown-black tones dominate the archive while the lightness of the best pictures is mostly in the details.",
+   "colors": [
+    "Smoky Black",
+    "Lion",
+    "Olive-Buff"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 103 paintings"
+ ],
+ "words": 557,
+ "status": "article"
+}

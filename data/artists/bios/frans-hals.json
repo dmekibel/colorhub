@@ -1,1 +1,60 @@
-{"slug": "frans-hals", "lead": "Frans Hals the Elder was a Dutch Golden Age painter.", "paras": ["He lived and worked in Haarlem, a city in which the local authority of the day frowned on religious painting in places of worship but citizens liked to decorate their homes with works of art."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "frans-hals",
+ "lead": "Frans Hals the Elder was a Dutch Golden Age painter.",
+ "paras": [
+  "Frans Hals painted faces fast and in few strokes, and he painted black more carefully than almost anyone. For a Dutch city that prized sober dress, the black suit was a field of color in its own right.",
+  "The chapters follow him through the Haarlem guard portraits to the late regents, and end with what the archive measures."
+ ],
+ "chapters": [
+  {
+   "title": "Haarlem and the civic guards",
+   "when": "Haarlem · 1610 to 1627",
+   "text": "Hals spent nearly all his life in Haarlem, a Calvinist city where few churches wanted altarpieces and many citizens wanted portraits. His big early commissions were of the militia companies, such as the Banquet of the Officers of the St George Guard of 1616. These groups wore sashes in their company colors, and the paintings are among the brightest of his career: sashes of {{Orange}} and {{Royal Blue}}, white collars and gold lace across black.\n\nThe Laughing Cavalier of 1624 shows his early finish. The sitter's sleeve is embroidered with small symbols in orange, red and white, and the face is warm {{Peach}} against a pale grey wall.\n\nA company portrait of this kind needed twelve or more faces at the same value, and Hals handled it by changing the temperature of each face from warm to cool in turn, not by changing the lightness.",
+   "colors": [
+    "Orange",
+    "Royal Blue",
+    "Peach",
+    "Gold"
+   ]
+  },
+  {
+   "title": "The many blacks",
+   "when": "Haarlem · 1627 to 1650",
+   "text": "By the 1630s Hals was painting individual portraits of Haarlem burghers, almost all in black. Van Gogh, writing to his brother, said that Hals used no fewer than twenty-seven blacks, a remark Gage reports. The count is a painter's hyperbole, but the idea holds: black cloth in his pictures turns blue-black, brown-black, green-black and grey, depending on the light.\n\nHe built them by laying a dark ground, then adding thin strokes of grey, blue or ochre. A sleeve can be {{Raisin Black}} in the fold and a pale slate on the ridge. White collars and cuffs are brushed with a few strokes of grey and cream, and show his speed more than any other passage.\n\nThe flesh is lit from the side and set in warm {{Salmon}} and {{Rosy Brown}}, with red touches on the cheeks, nose and lips.",
+   "colors": [
+    "Raisin Black",
+    "Salmon",
+    "Rosy Brown",
+    "Dark Brown"
+   ]
+  },
+  {
+   "title": "Late years and the almshouse regents",
+   "when": "Haarlem · 1650 to 1666",
+   "text": "In his last years Hals had money troubles and sold goods to pay debts. The late work is much more restrained. The two large group portraits of the regents and regentesses of the Old Men's Almshouse, around 1664, are painted in black, grey and flesh pink, with little else but the white of cuffs and collars.\n\nThe brushwork is looser than ever. Hands and faces seem to dissolve into strokes of {{Sepia}} and ash, and the black clothing becomes almost one dark mass. Hals was in his eighties, and a younger generation had moved on to smoother surfaces.\n\nIn the real pictures it helps to step back: the faces hold together at a distance in a way they do not up close.",
+   "colors": [
+    "Sepia",
+    "Charcoal",
+    "Davy's Grey",
+    "Khaki"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 278 paintings",
+   "text": "Our archive holds 278 of his paintings, photographed as they hang today. {{Smoky Black}} is the darkest large area in 136 of them, half the set, and a further 33 read as near black and 23 as {{Raisin Black}}. This is an obvious result for a painter of black coats.\n\nThe lightest areas are white (16) and greyish olive-browns, the collar and the wall. These are photographs, so read them as tendencies, not as pigment tests.\n\nFor this painter the dark list is the story: 136 paintings with black as the leading dark, 33 with near black. Most painters show a spread of dark browns and greens, and Hals shows the black coat that the city wanted.",
+   "colors": [
+    "Smoky Black",
+    "Raisin Black",
+    "Brownish Olive"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Gage, Colour and Culture (1993)",
+  "Chromatlas archive, 278 paintings"
+ ],
+ "words": 581,
+ "status": "article"
+}

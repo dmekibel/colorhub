@@ -1,1 +1,61 @@
-{"slug": "giovanni-bellini", "lead": "Giovanni Bellini was an Italian Renaissance painter, probably the best known of the Bellini family of Venetian painters.", "paras": ["He was raised in the household of Jacopo Bellini, formerly thought to have been his father, but now that familial generational relationship is questioned."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "giovanni-bellini",
+ "lead": "Giovanni Bellini was an Italian Renaissance painter, probably the best known of the Bellini family of Venetian painters.",
+ "paras": [
+  "Bellini is the painter who taught Venice to paint light. His Madonnas, saints and Doges sit in evening air that is warm at the horizon and cool overhead, and the shift from tempera to oil gave him the means to do it.",
+  "The chapters follow his color from the first tempera altarpieces to the last mythologies, and end with what the archive measures."
+ ],
+ "chapters": [
+  {
+   "title": "Tempera and the Bellini workshop",
+   "when": "Venice · 1450s to 1470s",
+   "text": "Bellini was raised in the household of Jacopo Bellini, and learned in a workshop of drawing and tempera. The early Madonnas have clean outlines and pure colors, with a {{Royal Blue}} mantle and a red dress against a pale parapet, in the manner of his brother-in-law Mantegna.\n\nThe Agony in the Garden, from the 1460s, is already looking at landscape more than at figure. The sky grows pale toward the horizon, and the distant hills are {{Powder Blue}} and {{Sage}}.\n\nWhat to look for is the parapet: a ledge in front of the Virgin, often with a cloth of {{Burgundy}} red hung over it, which sets the figure forward from a landscape of blue and green. The device recurs through his career, and the cloth is often the strongest saturated color in the picture.",
+   "colors": [
+    "Royal Blue",
+    "Powder Blue",
+    "Sage",
+    "Vermilion"
+   ]
+  },
+  {
+   "title": "Oil, glaze and evening light",
+   "when": "Venice · 1470s to 1490s",
+   "text": "From about the middle of the 1470s Bellini worked in oil, often credited to the influence of Antonello da Messina, though the account is a tradition and not a documented fact. Oil let him blend and glaze, and his color becomes softer and deeper.\n\nSaint Francis in Ecstasy, from about 1480, is lit by a low light on rocks and a distant town, with the sky a pale gold fading to blue. The Frari Triptych of 1488 puts the Virgin in a thick red and blue against a gold mosaic apse, and the flesh has a warm {{Apricot}} tone that Titian and Giorgione would build on.\n\nVenice was by most accounts a major market for pigments, which helps explain how bright and varied the colors in Venetian painting became.",
+   "colors": [
+    "Apricot",
+    "Gold",
+    "Camel",
+    "Burgundy"
+   ]
+  },
+  {
+   "title": "Doges, altarpieces and the Feast of the Gods",
+   "when": "Venice · 1500 to 1516",
+   "text": "The portrait of Doge Leonardo Loredan, about 1501, sets a still face and a white-gold cap against an unbroken blue ground. In the San Zaccaria Altarpiece of 1505, a gold dome shelters a Virgin in blue, with saints in red and green. Ball lists Bellini among the painters who used copper resinate, a green made of verdigris dissolved in resin that was popular from the mid-fifteenth century, although some forms darken or turn brown over time. If a green robe in a Venetian altarpiece looks muddy, that may be why.\n\nHis last great picture, the Feast of the Gods of 1514, was altered later: X-radiographs show it was begun by Bellini, changed by Dosso Dossi, and given a new mountain landscape by Titian. It is a rare case where three painters' colors lie in layers of the same canvas.\n\nBellini died in 1516, in his eighties, still working.",
+   "colors": [
+    "Hunter Green",
+    "Olive",
+    "Steel Blue",
+    "Gold"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 601 paintings",
+   "text": "Our archive holds 601 of his paintings, photographed under aged varnish. {{Smoky Black}} is the darkest large area in 197 of them, a third of the set, followed by black brown (57) and dark chocolate brown (43). The darkness in a Venetian altarpiece is often in the draperies and background, which have aged.\n\nThe lightest areas are {{Tan}} (24), {{Camel}} (19) and white (17), warm and quiet. White is not the leading light, which fits warm, golden pictures. These are photographs, so read them as tendencies, not as pigment tests.\n\nA third of the set dark and only a tenth pale means that the photographs say more about varnish and background than about the color of Venetian daylight, which is better seen in the Madonnas of the 1480s.",
+   "colors": [
+    "Smoky Black",
+    "Tan",
+    "Camel"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Finlay, Color (2002)",
+  "Chromatlas archive, 601 paintings"
+ ],
+ "words": 602,
+ "status": "article"
+}

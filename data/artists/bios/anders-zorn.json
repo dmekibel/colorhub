@@ -1,1 +1,60 @@
-{"slug": "anders-zorn", "lead": "Anders Leonard Zorn was a Swedish artist who attained international success as a painter, sculptor, and etching artist.", "paras": ["His portrait subjects include King Oscar II of Sweden and three American Presidents: Grover Cleveland, William H. Taft, and Theodore Roosevelt."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "anders-zorn",
+ "lead": "Anders Leonard Zorn was a Swedish artist who attained international success as a painter, sculptor, and etching artist.",
+ "paras": [
+  "Zorn is known for a palette of just four colors, and the way a limited set can still give a full range of skin, water and cloth. He painted wet watercolors and rough oil portraits with an unusual speed.",
+  "The chapters below follow him from Sweden to Paris and America and home to Mora, and end with what our archive shows."
+ ],
+ "chapters": [
+  {
+   "title": "Mora and watercolor",
+   "when": "Sweden · 1860 to 1887",
+   "text": "Zorn was born in 1860 in Mora, in Dalarna, Sweden, and studied at the Academy in Stockholm. He made his name first as a watercolorist, with portraits and scenes of the sea painted in wet washes.\n\nThe early watercolors are built from {{Cerulean}}, {{Sea Green}} and {{Peach}} for skin and light, with paper left bare for highlights. In 1887 he moved to London, and then to Paris.\n\nWhat to look for is the speed. The wet edges merge in the sky and water, and small dry touches of {{Rose}} and {{Scarlet}} hold the picture.\n\nThe swimmer pictures he painted in later years take the same open-air method into oils. He was also a keen etcher, and his etched portraits are among the best of his time.",
+   "colors": [
+    "Cerulean",
+    "Sea Green",
+    "Peach",
+    "Rose"
+   ]
+  },
+  {
+   "title": "The Zorn palette",
+   "when": "Paris and London · 1888 to 1900",
+   "text": "In oil, Zorn is famed for a reduced palette: yellow ochre, vermilion, ivory black and lead white. By the common account he mixed his skin tones, greys and even apparent blues from just these four. The pairing of black and white, with the warm yellow and red, gives cool-looking greens and blues by contrast.\n\nThe effect is easy to check. His water is an olive-grey that reads as blue because the flesh next to it is {{Ochre}} and {{Vermilion}}.\n\nHe painted nudes outdoors, with water. Look at the warm {{Apricot}} skin beside the dark, glassy water in works like Outdoor Bath of 1888.\n\nThe limits make the harmonies. With only a warm red, a warm yellow, a black and a white, every mixture sits between those four, and the picture holds together.",
+   "colors": [
+    "Ochre",
+    "Vermilion",
+    "Apricot",
+    "Olive"
+   ],
+   "pull": "Zorn's famed palette is four pigments: yellow ochre, vermilion, ivory black and lead white."
+  },
+  {
+   "title": "Portraits and America",
+   "when": "United States · 1893 to 1911",
+   "text": "Zorn visited the United States several times, beginning in 1893 for the Chicago World's Fair. He painted Grover Cleveland, William H. Taft and Theodore Roosevelt, as well as wealthy patrons, and was famous for painting a likeness in a single sitting.\n\nHis portraits are built on strong flesh tones in warm {{Sienna}} and {{Salmon}}, against a plain dark {{Umber}} or {{Charcoal}} ground, and their darks stay open.\n\nThe dress is painted with a few direct strokes, and the hands are often only suggested.",
+   "colors": [
+    "Sienna",
+    "Salmon",
+    "Umber",
+    "Charcoal"
+   ]
+  },
+  {
+   "title": "Home to Mora and what our archive shows",
+   "when": "1896 to 1920 · 502 paintings",
+   "text": "In 1896 he returned to Mora, where he painted peasant dances in summer light, such as Midsummer Dance in 1897, and helped to preserve local crafts. He died in 1920.\n\nOur archive holds 502 of his paintings. Smoky Black is the commonest dark, at nearly a fifth, followed by Raisin Black and Black brown. Among his pale areas, Ghost White and Greyish White are common.\n\nHe uses Raisin Black about one and a half times as often as his peers, which is the dark that sits nearest his ivory black. This is an echo of the four-color method, in photographs of aged, varnished paintings, so it is a hint, not a pigment test.\n\nZorn and his wife Emma left their house and collections to the Swedish state, and Zorngården in Mora can still be visited. The house holds his palette, brushes and some of his unfinished portraits.",
+   "colors": [
+    "Smoky Black",
+    "Raisin Black",
+    "Ghost White"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Chromatlas archive, 502 paintings"
+ ],
+ "words": 567,
+ "status": "article"
+}

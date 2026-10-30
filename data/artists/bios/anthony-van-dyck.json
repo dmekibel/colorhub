@@ -1,1 +1,61 @@
-{"slug": "anthony-van-dyck", "lead": "Sir Anthony van Dyck was a Flemish Baroque artist, who became the leading court painter in England after success in the Spanish Netherlands and Italy.", "paras": [], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "anthony-van-dyck",
+ "lead": "Sir Anthony van Dyck was a Flemish Baroque artist, who became the leading court painter in England after success in the Spanish Netherlands and Italy.",
+ "paras": [
+  "Van Dyck painted silk. His reputation as the finest portraitist of the Stuart court rests on a mastery of how a satin sleeve reflects pale light, how velvet drinks it and how a face keeps its warmth between them.",
+  "The chapters follow him from Antwerp to Italy and then England, and end with what the archive measures."
+ ],
+ "chapters": [
+  {
+   "title": "Antwerp and Rubens",
+   "when": "Antwerp · 1615 to 1621",
+   "text": "Van Dyck was a prodigy, working as an independent master in Antwerp by his late teens, and by 1618 he was in the workshop of Rubens. His early pictures use Rubens's warm flesh and a bright red, but the touch is thinner and the figures more slender.\n\nSome of his surprising colors come from economy. Ball reports that Van Dyck's purple dress of a girl, about 1620 to 1621, is made of red lake, charcoal and white, with no blue pigment at all. Black standing in for blue was also a way to spare ultramarine, which in 1626 cost 45 guilders an ounce by Ball's figure.",
+   "colors": [
+    "Plum",
+    "Lilac",
+    "Crimson",
+    "Dusty Rose"
+   ]
+  },
+  {
+   "title": "Italy and the Genoese portraits",
+   "when": "Italy · 1621 to 1627",
+   "text": "He spent six years in Italy, where he studied Titian in Venice and painted the Genoese nobility. The Genoa portraits are tall, dark pictures in which a face, a pair of hands and a white ruff float out of black or {{Burgundy}} clothing against a dark curtain.\n\nThe Venetian influence shows in the reds: velvets in {{Maroon}} and a deep {{Claret}}, glazed thin over a darker layer. The pale flesh is cool at the edges and warm at the center, which gives it a transparency that his Flemish contemporaries rarely reach.\n\nA note on the whites: his ruffs and cuffs are lead white warmed with a little yellow ochre or {{Ivory}}, and set against black they look brighter than they are. The trick of relative contrast does most of the work.",
+   "colors": [
+    "Burgundy",
+    "Maroon",
+    "Claret",
+    "Raisin Black"
+   ]
+  },
+  {
+   "title": "Charles I and the English court",
+   "when": "London · 1632 to 1641",
+   "text": "In 1632 Charles I brought him to London, knighted him and made him principal painter. The English portraits sharpen his contrasts. The king in Charles I at the Hunt, about 1635, stands at ease in a wide hat before an {{Olive}} landscape, with the horse and groom in warm browns; the royal children in his group portraits wear satin in pearl, {{Pale Pink}} and pale blue.\n\nThe Triple Portrait of Charles I of 1635 was sent to Rome for Bernini to use in sculpting a bust, and shows the king's face in three views against a plain background.\n\nThe deep earth brown sold as Vandyke brown carries his name, though a name given later says more about his reputation among painters than about his own palette. Van Dyck died in London in 1641, aged 42.\n\nThe English court pictures also show his speed. Sitters came for a few sessions, and he worked from drawings and from assistants who painted drapery and lace. Look closely at the hands, which are often the freest and most personal passage.",
+   "colors": [
+    "Olive",
+    "Pale Pink",
+    "Powder Blue",
+    "Silver"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 954 paintings",
+   "text": "Our archive holds 954 of his paintings, photographed under aged varnish. {{Smoky Black}} is the darkest large area in 360 of them, almost 40 per cent, followed by black brown (92) and near black (78). That is a result of the clothing: his sitters wore black to show rank and wealth, and he painted it well.\n\nThe list of lightest areas shows dark colors such as {{Café Noir}} and dark brown, which looks odd for lights and probably reflects the aged varnish and dark grounds, so we set it aside. These are photographs, so read them as tendencies, not as pigment tests.",
+   "colors": [
+    "Smoky Black",
+    "Café Noir",
+    "Dark Brown"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Gage, Colour and Culture (1993)",
+  "Chromatlas archive, 954 paintings"
+ ],
+ "words": 572,
+ "status": "article"
+}

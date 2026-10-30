@@ -1,1 +1,61 @@
-{"slug": "fra-angelico", "lead": "John of Fiesole, known posthumously as Fra Angelico or in Italian as Beato Angelico, was an Italian Dominican friar and painter active during the early Florentine Renaissance.", "paras": [], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "fra-angelico",
+ "lead": "John of Fiesole, known posthumously as Fra Angelico or in Italian as Beato Angelico, was an Italian Dominican friar and painter active during the early Florentine Renaissance.",
+ "paras": [
+  "Fra Angelico was a Dominican friar, and his pictures are painted for prayer. Their color is clean, bright and a little unreal: gold grounds, clear blue mantles, and rose-pink and pale green robes in even light.",
+  "The chapters follow his panel painting and his frescoes, and end with what the archive measures."
+ ],
+ "chapters": [
+  {
+   "title": "Fiesole, gold and tempera",
+   "when": "Florence and Fiesole · 1420s to 1430s",
+   "text": "Fra Angelico trained as an illuminator and painter before and after joining the Dominicans, and he painted in egg tempera on panel with gold leaf. In altarpieces such as the Annalena and Linaiuoli works, the ground is real {{Gold}}, pressed with punched patterns, and the Virgin's mantle is a deep blue, often ultramarine or azurite.\n\nColors are laid in clear, flat areas with a pale line. Flesh is {{Peach}} and cream over a green underpaint in the usual Florentine method, and cloaks go from a deep tone to a pale one in even steps.\n\nThe black, red and white of his Last Judgment are expressive, as Pastoureau notes: a savage triad in which Satan devours the white bodies of the damned.\n\nBall explains why the blue matters. Ultramarine, ground from lapis lazuli, was far more expensive than other colors, and contracts of the period sometimes specified the quality and amount a painter had to use, so a patron could see where the money went. The blue in a Virgin's robe was often a statement about cost as well as devotion.",
+   "colors": [
+    "Gold",
+    "Peach",
+    "Royal Blue",
+    "Cadet Blue"
+   ]
+  },
+  {
+   "title": "San Marco",
+   "when": "Florence · 1438 to 1445",
+   "text": "At the convent of San Marco, he painted frescoes for the monks' cells and the cloister, including the Annunciation at the top of the stairs. A fresco is painted on wet plaster, so the colors are limited to earth pigments and a few others, and the effect is calm and pale: {{Terracotta}}, {{Sage}} and cream, with one patch of blue.\n\nThe Dominicans wore white robes and black capes, and in Pastoureau's account they were compared to magpies. Artists painting a black cope often added blue, brown or purple highlights so it would not read as the dark of hell.\n\nNo cell asks for much of the viewer's attention. The color is arranged as a spiritual aid, close to bare wall and plain light.\n\nLook for a {{Lavender}} or {{Rose}} garment that turns to white in the highlights. In wall painting the artist could not glaze, so the shift from shadow to light is made by steps of flat pale color, giving the folds a stained-glass clarity.",
+   "colors": [
+    "Terracotta",
+    "Sage",
+    "Ivory",
+    "Lavender"
+   ]
+  },
+  {
+   "title": "Cortona, Orvieto and Rome",
+   "when": "Cortona, Orvieto and Rome · 1433 to 1455",
+   "text": "The Cortona Annunciation, from the 1430s, shows a richly colored foreground against a distant night scene of the Expulsion painted in monochrome, in the manner called grisaille. Gage discusses it as a case of rich color set against a colorless distance.\n\nIn the late 1440s he worked at Orvieto and then in the Vatican, painting the Chapel of Nicholas V. He died in Rome in 1455.\n\nWhen you see his pictures in a museum, the gold is the main fact. It is always flatter than any photograph and brightest where a candle or window catches it.",
+   "colors": [
+    "Gold",
+    "Lavender",
+    "Salmon",
+    "Teal"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 861 paintings",
+   "text": "Our archive holds 861 items under his name, which probably include workshop pieces, photographed under aged varnish. {{Smoky Black}} is the darkest large area in 221 of them, a quarter, followed by a dark olive brown (60) and dark chocolate brown (58). Photographed gold grounds may read as bistre and brown.\n\nThe lightest areas are white (72), {{Tan}} (50) and {{Camel}} (37). These are photographs, and gold leaf is a poor subject for photography, so read them as tendencies, not as pigment tests.\n\nGold is the main reason the archive can say little about this painter's color. A gold ground is the brightest thing in the room and, to a camera, a mid-tone brown.",
+   "colors": [
+    "Smoky Black",
+    "Tan",
+    "Camel"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Pastoureau, Black (2008)",
+  "Gage, Colour and Culture (1993)",
+  "Chromatlas archive, 861 paintings"
+ ],
+ "words": 608,
+ "status": "article"
+}

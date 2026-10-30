@@ -1,1 +1,60 @@
-{"slug": "alfred-sisley", "lead": "Alfred Sisley was a French-born British Impressionist landscape painter, born in Paris to British expatriate parents.", "paras": ["Considered the most consistent of the Impressionists in his dedication to painting en plein air, Sisley's oeuvre comprises almost entirely landscapes, with his most important works including series of paintings around Hampton Court on the River Thames, the floods at Marly-le-Roi in 1875, and the Gothic church at Moret-sur-Loing."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "alfred-sisley",
+ "lead": "Alfred Sisley was a French-born British Impressionist landscape painter, born in Paris to British expatriate parents.",
+ "paras": [
+  "Sisley is the Impressionist who stayed closest to landscape, and his subject was above all the sky. Even in the early years he gave long, pale horizons to clouds, and in the later years the sky does much of the emotional work.",
+  "The chapters below follow him from Paris and Louveciennes to the Thames and the small town of Moret, and end with what our measurements show."
+ ],
+ "chapters": [
+  {
+   "title": "Gleyre's studio and Louveciennes",
+   "when": "Paris · 1860s to 1870s",
+   "text": "Sisley was born in Paris to English parents and trained in the early 1860s in the studio of Charles Gleyre, where he met Monet, Renoir and Bazille. The early landscapes are quiet and relatively dark, with the broad brown masses of Barbizon painting that his friends were also leaving behind.\n\nIn the village of Louveciennes, west of Paris, he started to lighten his ground. Streets, walls and gardens are given the pale tones of {{Buff}} and {{Sand}}, and the sky becomes a field of blue and {{Pale Pink}}.\n\nWhat to look for is how much of the picture is the sky. He often gives it a large share of the canvas and fills it with many small tones rather than a single blue.\n\nHe painted nearly all his life from nature. Sisley rarely painted people, and the village street, the field edge and the river bank are the stage on which light changes.",
+   "colors": [
+    "Buff",
+    "Sand",
+    "Pale Pink",
+    "Sky Blue"
+   ]
+  },
+  {
+   "title": "The floods at Marly",
+   "when": "Île-de-France · 1874 to 1876",
+   "text": "In the mid-1870s Sisley painted the Seine in flood at Port-Marly. The water spreads across the street and reflects the houses, and the pictures were made over several days as the level changed.\n\nThe colors are a calm group: {{Cerulean}} and {{Steel Blue}} in the water, {{Sage}} in the distant trees, and warm {{Terracotta}} and {{Rust}} touches in rooftops and doors. The flood is not a disaster scene; the light stays soft and the surface still.\n\nThe water takes the same blue as the sky above it, and a few brush strokes of the building color break up the reflection. Compare the bottom and top edges of the picture: they are close in value.\n\nThe flood pictures are also lessons in reflection. Water takes on the color of what it mirrors, and Sisley lets the reflected house wall run into the reflected sky without a clear line between them.",
+   "colors": [
+    "Cerulean",
+    "Steel Blue",
+    "Sage",
+    "Terracotta"
+   ]
+  },
+  {
+   "title": "The Thames and Hampton Court",
+   "when": "England · 1874",
+   "text": "In 1874 he spent months in England, painting the Thames at Hampton Court and Molesey Weir. The river pictures lean toward silver and pale green.\n\nThe usual picture of Impressionist color is of strong complementary pairs. Sisley's English pictures are quieter. Look at the {{Light Blue}}, {{Olive Green}} and {{Dove Grey}} that fill the sky and trees; the colors are close, and the difference between them is mostly one of value.\n\nIt was a stay of a few months, and he never worked in England on that scale again.",
+   "colors": [
+    "Light Blue",
+    "Olive Green",
+    "Dove Grey",
+    "Silver"
+   ]
+  },
+  {
+   "title": "Moret and what our archive shows",
+   "when": "Moret-sur-Loing · 1880 to 1899 · 795 paintings",
+   "text": "From 1880 Sisley lived in and near Moret-sur-Loing, where the Gothic church, the bridge and the poplar-lined river became his subjects until he died in 1899. The brushwork grows thicker and the colors a little warmer, with {{Chestnut}} trunks, Apricot sunlit stone and Cadet Blue water.\n\nOur archive holds 795 of his paintings, as photographed today. His darks are not especially dark: Smoky Black is the most common dark but covers only about six per cent of his canvas. In the pale areas Grey White and Papyrus White lead, the colors of cloud and wall.\n\nHe uses Smoky Black, Bistre and Café Noir far less than his peers, which fits what we see: a light-handed, high-key painter. These are photographs of varnished works, so the result is a tendency, not a pigment test.\n\nHe died in Moret in 1899, still poor, and his prices rose only after his death. The late canvases repay slow looking: a field of short strokes of green, blue and warm pink adds up to a single grey afternoon.",
+   "colors": [
+    "Chestnut",
+    "Apricot",
+    "Cadet Blue",
+    "Grey White"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Chromatlas archive, 795 paintings"
+ ],
+ "words": 647,
+ "status": "article"
+}

@@ -1,1 +1,59 @@
-{"slug": "pierre-bonnard", "lead": "Pierre Bonnard was a French painter, illustrator and printmaker, known especially for the stylized decorative qualities of his paintings and his bold use of color.", "paras": ["A founding member of the Post-Impressionist group of avant-garde painters Les Nabis, his early work was strongly influenced by the work of Paul Gauguin, as well as the prints of Hokusai and other Japanese artists."], "sources": ["From Wikipedia (CC BY-SA 4.0)"], "status": "wiki"}
+{
+ "slug": "pierre-bonnard",
+ "lead": "Pierre Bonnard was a French painter, illustrator and printmaker, known especially for the stylized decorative qualities of his paintings and his bold use of color.",
+ "paras": [
+  "Bonnard painted ordinary rooms with an unusual glow, and the glow came from color. A bathroom, a table or a garden under his hand fills with yellow, violet and orange, and the shadows are colors too.",
+  "The chapters below follow him from the Nabis to the south of France, and end with what the archive shows."
+ ],
+ "chapters": [
+  {
+   "title": "The Nabis and Japanese prints",
+   "when": "Paris · 1888 to 1900",
+   "text": "Bonnard was born in 1867 near Paris and studied law before turning to painting. In 1888 he joined the Nabis, a group around the ideas of Paul Gauguin, and he was nicknamed the Japanese Nabi for his love of ukiyo-e prints.\n\nThe early pictures use flat shapes of color with a high contrast of pattern, in {{Mustard}}, {{Plum}} and {{Olive Green}}. Dresses and wallpapers fill the surface like prints.\n\nThe look is of the Edo prints he admired, and the picture space is tipped up so that the table and the floor are nearly flat.\n\nHe left law practice for painting around 1890 and shared a studio with other Nabis. The early pictures of Parisian streets, with crowds in dark coats, are small and strongly patterned.",
+   "colors": [
+    "Mustard",
+    "Plum",
+    "Olive Green",
+    "Burgundy"
+   ]
+  },
+  {
+   "title": "Marthe and the bath",
+   "when": "Vernon and Paris · 1900 to 1925",
+   "text": "He met Marthe de Méligny in the 1890s and she became his wife and his most frequent model. From about 1925 she appears again and again in the bathroom, at her toilet or in the tub. She is painted in tones close to {{Peach}}, {{Salmon}} and {{Lilac}}.\n\nHe worked from memory and drawings. He kept small notes of the color of an object, and painted the picture afterwards in the studio, often with the canvas pinned to a wall instead of stretched.\n\nThe result is a color remembered, not copied. A white wall can be tinted with {{Lavender}} and {{Apricot}} without any one patch standing out.\n\nOne reason the bathroom pictures glow is the tiles. A wall of small square tiles breaks the light into many tones, and he painted them as a patchwork of {{Powder Blue}}, Peach and cream.",
+   "colors": [
+    "Peach",
+    "Salmon",
+    "Lilac",
+    "Lavender"
+   ]
+  },
+  {
+   "title": "Le Cannet",
+   "when": "South of France · 1926 to 1947",
+   "text": "From 1926 he lived in Le Cannet, in a villa above Cannes, with a garden and a view of the Mediterranean. The late pictures are among the most saturated in French painting, with {{Tangerine}}, {{Turquoise}}, {{Mauve}} and lemon yellow in the same room.\n\nHe is known for using violet next to yellow, and for modulating shadows by making them a color rather than a darker version of the lit one. This is the standard account of his method.\n\nMarthe died in 1942 and Bonnard continued to paint until his death in 1947. His last self-portraits and interiors are still bright.\n\nHe often painted the same window many times. The garden outside is a bank of yellow and green, and the room inside is violet, so the window is a joint between two colors.",
+   "colors": [
+    "Tangerine",
+    "Turquoise",
+    "Mauve",
+    "Apricot"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 452 paintings",
+   "text": "Our archive holds 452 of his paintings. His largest dark areas are only moderately dark: Smoky Black makes up about seven per cent, with Raisin Black close behind. Among his pale areas, Greyish White, Lemon Meringue and Oatmeal lead, the colors of a sunlit table.\n\nHe uses Smoky Black, Café Noir and Bistre less often than other painters. In some cases this is by a large factor. Whatever darks he used, they were seldom plain black or brown.\n\nThese are photographs of finished pictures, which are also often painted thinly on unprimed canvas, so the tones in the archive may be paler than the paint.",
+   "colors": [
+    "Smoky Black",
+    "Raisin Black",
+    "Charcoal"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Chromatlas archive, 452 paintings"
+ ],
+ "words": 585,
+ "status": "article"
+}
