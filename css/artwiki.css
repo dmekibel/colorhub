@@ -366,3 +366,17 @@
 .aw-ch-w{display:block;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;opacity:.65;margin-bottom:2px}
 .aw-ch-p{display:flex;height:10px;border-radius:5px;overflow:hidden;width:190px;margin:10px 0 2px}.aw-ch-p i{flex:1;background:var(--c)}
 .aw-pull{font:italic 400 21px/1.35 var(--serif,Georgia,serif);margin:14px 0 4px;color:#f4e9c8}
+/* painter page v2b: the name sits on the hero painting */
+.aw-herowrap{position:relative;margin:0 calc(-1 * var(--g))}
+.aw-herowrap .aw-pt-hero{margin:0}
+.aw-herowrap .aw-pt-open,.aw-herowrap .aw-pt-hero>img{max-height:none;height:min(66dvh,560px)}
+.aw-herowrap:after{content:"";position:absolute;left:0;right:0;bottom:0;height:62%;background:linear-gradient(transparent,rgba(10,9,8,.93));pointer-events:none}
+.aw-herowrap .aw-pt-hero figcaption{position:absolute;right:var(--g);top:10px;padding:3px 9px;border-radius:10px;background:rgba(10,9,8,.55);font-size:13px;z-index:2;max-width:70%}
+.aw-herowrap .aw-head{position:absolute;left:0;right:0;bottom:16px;z-index:2;padding:0 var(--g);margin:0}
+.aw-herowrap .p-title{font-size:clamp(38px,11vw,52px);line-height:1.04;margin:2px 0 6px}
+.aw-herowrap .p-dek,.aw-herowrap .eyebrow{color:#e6ded3}
+.aw-hstrip{margin:0 calc(-1 * var(--g))}
+.aw-simt{display:flex;align-items:center;gap:12px;text-align:left}
+.aw-minif{display:flex;width:64px;height:30px;border-radius:8px;overflow:hidden;flex:none}.aw-minif i{flex:1;background:var(--c)}
+.aw-simb{display:flex;flex-direction:column;min-width:0}
+.aw-hstrip .aw-strip{display:flex;width:100%}

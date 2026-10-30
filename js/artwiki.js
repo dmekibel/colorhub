@@ -207,7 +207,7 @@ function bioSlot(slug) {
     if (!paras.length && !b.lead && !(b.chapters || []).length) return "";
     const chs = (b.chapters || []).map(c => { const cols = (c.colors || []).map(awHex).filter(h => h !== "#808080");
       return `<div class="aw-ch" style="--c:${cols[0] || "#888"}">${c.when ? `<span class="aw-ch-w">${esc(c.when)}</span>` : ""}<h3>${esc(c.title)}</h3>${String(c.text || "").split(/\n\n+/).map(t => `<p>${awCw(esc(t))}</p>`).join("")}${cols.length ? `<span class="aw-ch-p">${cols.map(h => `<i style="--c:${h}"></i>`).join("")}</span>` : ""}${c.pull ? `<p class="aw-pull">${esc(c.pull)}</p>` : ""}</div>`; }).join("");
-    return `<section class="aw-bio">${b.lead ? `<p class="aw-lead">${esc(b.lead)}</p>` : ""}${paras.map(t => `<p>${awCw(esc(t))}</p>`).join("")}${chs}${(b.sources || []).length ? `<p class="fine">${b.sources.map(esc).join(" · ")}</p>` : ""}</section>`;
+    return `<section class="aw-bio">${b.lead ? `<p class="aw-lead">${esc(b.lead)}</p>` : ""}${paras.map(t => `<p>${awCw(esc(t))}</p>`).join("")}${chs ? `<div class="sec-head"><b>Life in color</b><span>${(b.chapters || []).length} chapters</span></div>` : ""}${chs}${(b.sources || []).length ? `<p class="fine">${b.sources.map(esc).join(" · ")}</p>` : ""}</section>`;
   }).catch(() => "");
 }
 
@@ -677,12 +677,14 @@ function awPainter(slug, push = true) {
   const colorsPane = hasColors ? `${typeof pcOpen === "function" ? `<div class="aw-cmap">${cmapHexes.length >= 2 ? awStrip(cmapHexes, 34) : ""}<p class="aw-sub">Every color they used, sized by how many of their paintings hold it, and five ways to arrange them.</p><button class="aw-pcolors" data-awcolors="${esc(slug)}">${icon("map", 20)}<span>Open their color map</span></button></div>` : ""}${colors}` : "";
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
-    <div class="aw-head"><div><p class="eyebrow p-type">Painter</p><h1 class="p-title">${esc(A.name)}</h1><p class="p-dek">${dek}</p></div></div>
-    ${awPortraitHero(slug, A, P, small ? [] : awSigChips(P.sig, P.ix))}
+    <div class="aw-herowrap">
+      ${awPortraitHero(slug, A, P, small ? [] : awSigChips(P.sig, P.ix))}
+      <div class="aw-head"><div><p class="eyebrow p-type">Painter</p><h1 class="p-title">${esc(A.name)}</h1><p class="p-dek">${dek}</p></div></div>
+    </div>
+    ${small ? "" : `<div class="aw-hstrip">${awStrip(awVividStrip(slug, P, (cmapHexes.filter(h => !awNearBlack(h)).length >= 4 ? cmapHexes.filter(h => !awNearBlack(h)) : cmapHexes).slice(0, 8)), 40)}</div>`}
+    ${small ? "" : awGlance(n, decPicks, hlExt)}
     ${TABS.length > 1 ? `<div class="fd-bar aw-tabs"><div class="fd-chips" role="tablist" aria-label="About ${esc(A.name)}, their work, their colors">${TABS.map(([k, t]) => `<button class="fd-chip${k === startTab ? " on" : ""}" role="tab" data-awtab="${k}" aria-selected="${k === startTab}"${TUNE[k] ? ` aria-haspopup="dialog"` : ""}>${t}${TUNE[k] ? `<span class="fd-tune" aria-hidden="true">${FD_ICON_TUNE}</span><i class="fd-dot" hidden></i>` : ""}</button>`).join("")}</div></div>` : ""}
     <div class="aw-pane" data-awpane="about"${startTab === "about" ? "" : " hidden"}>
-      ${small ? "" : `<div class="aw-hstrip">${awStrip(awVividStrip(slug, P, (cmapHexes.filter(h => !awNearBlack(h)).length >= 4 ? cmapHexes.filter(h => !awNearBlack(h)) : cmapHexes).slice(0, 8)), 40)}</div>`}
-      ${small ? "" : awGlance(n, decPicks, hlExt)}
       <div data-awbio></div>
       ${decRail}
       ${awFamousRail(slug, n)}
@@ -905,6 +907,7 @@ function awComparedSection(slug, m, A, P) {
 }
 
 // Similar painters: working in the same years (midpoint of dated work within 40 years) and close in lightness, vividness and warmth.
+const awMiniFam = slug => { const g = (((AW.port && AW.port[slug]) || {}).famous || []).find(i => i != null && i >= 0); return g == null ? "" : `<span class="aw-minif">${[0, 1, 2, 3].map(j => `<i style="--c:${glHex(g, j)}"></i>`).join("")}</span>`; };
 function awSimilarPainters(slug) {
   const me = AW.meta.a[slug]; if (!me || me.y0 == null || me.L == null || me.k < 5) return "";
   const mid = m => (m.y0 + m.y1) / 2, M = mid(me);
@@ -912,7 +915,7 @@ function awSimilarPainters(slug) {
     .map(x => ({ x, d: Math.hypot((x.L - me.L) / 12, (x.C - me.C) / 8, (x.W - me.W) / .2, (mid(x) - M) / 30) })).sort((a, b) => a.d - b.d).slice(0, 8);
   if (rows.length < 3) return "";
   return `<div class="sec-head"><b>Painters like this</b><span>same years, similar look</span></div>
-    <div class="aw-near">${rows.map(({ x }) => `<button class="aw-tie" data-awpainter="${x.slug}"><b>${esc(x.n)}</b><span>${x.y0}\u2013${x.y1}${x.co ? " \u00b7 " + esc(x.co) : ""}</span></button>`).join("")}</div>
+    <div class="aw-near">${rows.map(({ x }) => `<button class="aw-tie aw-simt" data-awpainter="${x.slug}">${awMiniFam(x.slug)}<span class="aw-simb"><b>${esc(x.n)}</b><span>${x.y0}\u2013${x.y1}${x.co ? " \u00b7 " + esc(x.co) : ""}</span></span></button>`).join("")}</div>
     <p class="fine">Painters whose dated work falls in the same years, nearest in average lightness, vividness and warmth (photographs of paintings, so a rough guide).</p>`;
 }
 
