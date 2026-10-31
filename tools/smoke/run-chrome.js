@@ -12,9 +12,28 @@ const CHROME = process.env.SMOKE_CHROME || "/Applications/Google Chrome.app/Cont
 // Raised both ceilings with real margin for the largest group to keep growing a while longer; a normal run still
 // finishes in its own real time either way (CLAUDE.md's "about 10 seconds" is unaffected by a higher ceiling that
 // never gets hit on a healthy run -- only a run that was silently truncated before gets to actually finish now).
+// 2026-10-31: disk leak. Each run makes a ~300 MB --user-data-dir; the one-shot 300ms rm timer never ran because
+// run.js calls process.exit right after the last result (and Chrome could still be writing), so hundreds piled up
+// (571 dirs / ~75 GB). Now: live dirs are tracked in a Set, rm is retried (capped), an exit/SIGINT/SIGTERM handler
+// removes whatever is left synchronously, and stale colorhub-smoke-* dirs (>60 min) are swept once at load.
+const LIVE = new Set();
+const rmDir = d => { try { fs.rmSync(d, { recursive: true, force: true }); } catch (e) {} return !fs.existsSync(d); };
+const cleanAll = () => { for (const d of LIVE) if (rmDir(d)) LIVE.delete(d); };
+process.on("exit", cleanAll);
+for (const sig of ["SIGINT", "SIGTERM"]) process.on(sig, () => { cleanAll(); process.exit(130); });
+try {
+  const tmp = os.tmpdir(), old = Date.now() - 60 * 60 * 1000;
+  for (const n of fs.readdirSync(tmp)) {
+    if (!n.startsWith("colorhub-smoke-")) continue;
+    const d = path.join(tmp, n);
+    try { if (fs.statSync(d).mtimeMs < old) fs.rmSync(d, { recursive: true, force: true }); } catch (e) {}
+  }
+} catch (e) {}
+
 function runChrome(url, { budget = 480000, alarm = 400, tag = "run" } = {}) {
   return new Promise(resolve => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), `colorhub-smoke-${tag}-`));
+    LIVE.add(dir);
     const args = ["-e", `alarm ${alarm}; exec @ARGV`, CHROME, "--headless", "--disable-gpu", "--no-first-run", "--no-default-browser-check",
       "--disable-background-networking", "--disable-component-update", "--disable-extensions", "--mute-audio", "--hide-scrollbars", "--deny-permission-prompts",
       "--window-size=500,900", `--user-data-dir=${dir}`,
@@ -29,7 +48,7 @@ function runChrome(url, { budget = 480000, alarm = 400, tag = "run" } = {}) {
       if (done) return; done = true; clearTimeout(guard);
       try { process.kill(-child.pid, "SIGKILL"); } catch (e) {}
       try { child.stdout.destroy(); child.stderr.destroy(); child.unref(); } catch (e) {}
-      setTimeout(() => { try { fs.rmSync(dir, { recursive: true, force: true }); } catch (e) {} }, 300);
+      for (const ms of [300, 1000, 3000]) setTimeout(() => { if (LIVE.has(dir) && rmDir(dir)) LIVE.delete(dir); }, ms);
       resolve({ out, reason, ms: Date.now() - t0 });
     };
     child.stdout.on("data", d => { out += d; if (/<\/html>\s*$/.test(out)) finish("dumped"); });
