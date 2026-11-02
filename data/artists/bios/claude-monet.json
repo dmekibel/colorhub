@@ -1,0 +1,65 @@
+{
+ "slug": "claude-monet",
+ "lead": "Oscar-Claude Monet was a French painter and founder of Impressionism who is seen as a key precursor to modernism, especially in his attempts to paint nature as he perceived it.",
+ "paras": [
+  "Monet is the painter people name first when they think of light, yet his palette was unusually short on the colors that usually carry shadow. He worked with bright, newly manufactured pigments and let blues and violets stand in for the browns and blacks of older painting.",
+  "The chapters below follow that habit from the 1870s riverbank to the water garden at Giverny, and end with what the archive shows when we measure his canvases."
+ ],
+ "chapters": [
+  {
+   "title": "Argenteuil and the new tube paints",
+   "when": "Seine valley · 1870s",
+   "text": "In the 1870s Monet painted outdoors on the Seine at Argenteuil, where sailboats, bridges and gardens gave him small bright subjects to finish in a single sitting. Collapsible metal tubes had made oil paint portable a generation earlier, and the factory pigments inside them were stronger than anything a studio grinder had offered: {{Cobalt Blue}}, {{Viridian}}, {{Emerald Green}}, {{Vermilion}} and the cadmium yellows.\n\nBy the usual account of his palette, lead white, a few of these colors and little else were enough. Look at the 1872 harbor scene that named the movement: the orange sun is a small, sharp patch of vermilion-like color against a grey-blue sea, and the two are close enough in value that the sun seems to flicker.\n\nWhen snow fell he painted it, and the shadows were not grey. In Lavacourt under Snow, around 1879, the cold areas lean blue and violet, which is how snow actually looks under a pale sky, and a lesson he handed to later landscape painters.",
+   "colors": [
+    "Cobalt Blue",
+    "Viridian",
+    "Vermilion",
+    "Periwinkle",
+    "Powder Blue"
+   ]
+  },
+  {
+   "title": "Series and the sun at Giverny",
+   "when": "Normandy · 1883 to 1900",
+   "text": "After he settled at Giverny in 1883 Monet began to paint the same subject over and over. The haystacks of 1890 to 1891 and the Rouen Cathedral façades of the early 1890s were each worked in many canvases at different hours, and the stone or straw changes from {{Peach}} to {{Lavender}} to {{Salmon}} as the light moves. Several were brought back to the studio and finished there, so the idea of pure on-the-spot painting is partly a legend.\n\nThe lesson is in the comparison. A single canvas shows a color; the series shows that color is a reading of a light, and that the object itself can hold almost any hue.\n\nWhat to look for in the real paintings is how little black there is. Where another painter would deepen a shadow with a dark neutral, Monet mixes the opposite of the lit color into it, so the dark stays chromatic.",
+   "colors": [
+    "Peach",
+    "Lavender",
+    "Salmon",
+    "Lilac",
+    "Straw"
+   ]
+  },
+  {
+   "title": "Water lilies and failing sight",
+   "when": "Giverny · 1900 to 1926",
+   "text": "From about 1900 the pond he had dug in his own garden became his main subject. The lily paintings drop the horizon and fill the canvas with water, reflected sky and floating flowers, and their greens run from {{Sap Green}} and {{Teal}} through {{Olive}} to deep blue-greens.\n\nMonet had cataracts in the 1910s, and by his own report colors had become muddy and warmer. Some of the paintings of those years turn red-brown and orange. He had surgery in 1923, after which he said he could again see blues, and he reworked or abandoned some canvases.\n\nThe large panels given to the Orangerie in Paris were finished by the end of his life in 1926. In them the colors dissolve into each other with almost no edge.",
+   "colors": [
+    "Sap Green",
+    "Teal",
+    "Olive",
+    "Turquoise",
+    "Mauve"
+   ],
+   "pull": "Monet had cataract surgery in 1923 and, by his own account, saw blues he had lost; many late canvases drift toward red and brown."
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 1,200 paintings",
+   "text": "Our archive holds 1,200 of his paintings, photographed as they hang today under aged varnish. In those images he uses {{Smoky Black}}, {{Bistre}} and deep olive-brown much less than other painters of his time, which matches what his own methods predict.\n\nHis darkest large areas are {{Dark Jungle Green}} rather than neutral black, and his lightest large areas are pale greys and whites. These are photographs, so read them as tendencies in the images, not as pigment tests.",
+   "colors": [
+    "Dark Jungle Green",
+    "Smoky Black",
+    "Bistre"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Gurney, Color and Light (2010)",
+  "Chromatlas archive, 1,200 paintings"
+ ],
+ "words": 626,
+ "status": "article"
+}

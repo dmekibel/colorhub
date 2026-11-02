@@ -23,7 +23,7 @@ ACCOUNT = "041c8f332ceba311c523162ef6f29cef"
 BUCKET = "chromatlas-data"
 HOST = f"{ACCOUNT}.r2.cloudflarestorage.com"
 PUBLIC = "https://data.chromatlas.app"
-DIRS = ["data/gallery", "data/analysis", "data/paintmap", "data/artists", "data/facets"]
+DIRS = ["data/gallery", "data/analysis", "data/paintmap", "data/artists", "data/facets", "data/colorindex"]
 SKIP = {".progress.json"}
 MANIFEST = ROOT / "research" / "_raw" / "r2-manifest.json"
 CACHE = "public, max-age=300, stale-while-revalidate=86400"

@@ -75,10 +75,15 @@ for (let i = 0; i < names.length; i++) for (let j = i + 1; j < names.length; j++
 let aliasN = 0;
 try {
   const al = JSON.parse(fs.readFileSync(path.join(ROOT, "data/aliases.json"), "utf8"));
+  // a pin (data/alias-pins.json) may point at a library.json entry: the router and lxRekey both resolve those
+  const pinsPath = path.join(ROOT, "data/alias-pins.json");
+  const pins = new Map((fs.existsSync(pinsPath) ? JSON.parse(fs.readFileSync(pinsPath, "utf8")).pins || [] : []).map(p => [p.slug, p.to]));
+  const libSlugs = new Set(JSON.parse(fs.readFileSync(path.join(ROOT, "data/library.json"), "utf8")).map(e => slug(e.n)));
   for (const [a, canon] of Object.entries(al.slugs)) {
     aliasN++;
     if (seen.has(a)) fail(`alias slug "${a}" shadows the core name "${seen.get(a)}"`);
-    if (!seen.has(canon)) fail(`alias "${a}" points at "${canon}", which is not a core name`);
+    if (pins.get(a) === canon) { if (!seen.has(canon) && !libSlugs.has(canon)) fail(`pinned alias "${a}" points at "${canon}", which is neither a core name nor a library entry`); }
+    else if (!seen.has(canon)) fail(`alias "${a}" points at "${canon}", which is not a core name`);
   }
 } catch (e) { fail("data/aliases.json missing or unreadable: " + e.message); }
 

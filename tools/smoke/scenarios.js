@@ -1191,7 +1191,7 @@ scenario("home", "View sheet filters · Surprise me · Search", async t => {
   const q = t.$(".sr-input"); t.expect(q === t.d.activeElement, "the search field did not focus");
   q.value = "teal"; q.dispatchEvent(new t.w.Event("input", { bubbles: true }));
   await t.tick(); await t.sleep(300);
-  t.expect(t.$(".sr-colors .sr-color"), "searching \"teal\" found no color results");
+  t.expect(t.$(".sq-row .sq-sw"), "searching \"teal\" found no color results");
   t.d.querySelector(".scrim").dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
   await t.sleep(400);
   t.expect(cv.isConnected, "the honeycomb was replaced while searching");
@@ -1200,13 +1200,13 @@ scenario("home", "View sheet filters · Surprise me · Search", async t => {
 // PLAN §3.1/§9, restored 2026-10-10 (David's verdict on the Simplify corners): the Places menu is the
 // expanding-pill stem again (js/places.js placesOpen), not a full-screen sheet.
 scenario("home", "Rooms corner opens the Places stem; each place navigates", async t => {
-  const rooms = [["learn", "Learn"], ["gym", "Train"], ["explore", "Museum"], ["studio", "Studio"]];
+  const rooms = [["learn", "Learn"], ["gym", "Train"], ["studio", "Studio"]];   // the Museum is no longer a place of its own (David, 2026-10-28)
   for (const [id, label] of rooms) {
     await H.homeReady(t);
     await t.click("[data-rooms-corner]");
     await t.waitFor(".rooms-stem.on", 4000, "the Places stem");
     const rows = t.$$(".rooms-stem [data-pl]").map(b => b.dataset.pl);
-    t.expect(rooms.every(([r]) => rows.includes(r)) && !rows.includes("colls"), `the Places stem shows ${rows.join(", ")}`);
+    t.expect(rooms.every(([r]) => rows.includes(r)) && !rows.includes("colls") && !rows.includes("explore") && rows.includes("feed"), `the Places stem shows ${rows.join(", ")}`);
     await t.click(`.rooms-stem [data-pl="${id}"]`, { wait: 700 });
     await t.waitFor(`.room-sheet[data-room="${id}"]`, 6000, `the ${label} room`);
     t.expect(t.$(".room-sheet").innerText.length > 80, `the ${label} room is empty`);
@@ -2133,7 +2133,7 @@ scenario("pages", "colorPage x3: renders, swatch opens another, Back works", asy
 // stamps) opens its own page at #/source/<id>; Back returns exactly.
 scenario("pages", "a source name on the cover opens its source page and Back returns", async t => {
   await H.openPage(t, "#/name/dawn-grey", "Dawn Grey");   // a library name, not one of the taught app colors: #/name/, not #/color/
-  const link = await t.waitFor(() => t.$(".rp-tier [data-src-open], .rc-stamp[data-src-open]"), 10000, "a tappable source name");
+  const link = await t.waitFor(() => t.$(".rp-tier [data-src-open], .rp-tl-i[data-src-open]"), 10000, "a tappable source name");
   const id = link.dataset.srcOpen;
   await t.click(link, { wait: 500 });
   await t.waitFor(() => /^#\/source\//.test(t.w.location.hash), 6000, "the source page's own address");
@@ -2258,16 +2258,22 @@ scenario("pages", "a #/color/<slug>/s-<id> deep link opens straight on that chap
   // setTimeout after the open animation, so the automated half of this scenario stops at "opened".
 });
 
-// David, 2026-10-09: caught while craft-reviewing Olive (a color with children) -- Family needs to show on the
-// color page no matter how long the article above it is (it has its own always-present slot, independent of
-// the article's own rendering).
-scenario("pages", "Family still shows on a long article's color page (Olive -- it has children)", async t => {
-  await H.openPage(t, "#/name/olive", "Olive");
-  await t.waitFor("[data-ar-head]:not([hidden]) .ar-lede", 10000, "Olive's article, inline on the color page");
-  const fam = await t.waitFor(".ar-fam", 8000, "the Family section, alongside a long inline article");
-  t.expect(t.$$(".fam-trow-l", fam).some(p => p.textContent === "Variations"), "Olive's children ('Variations') don't show in the family tree");
-  await t.click([...t.$$(".fam-seg-b", fam)].find(b => b.textContent === "Compare"), { wait: 300 });
-  t.expect(t.$(".fam-cmp-line", fam), "Compare has no split/diff line for a long article's color page");
+// David, 2026-10-25: the Family tab (Tree, Spectrum, Compare, Map) is replaced by Next to it: three ladders of named neighbors (lighter or
+// darker, cooler or warmer, duller or brighter) with this color in the middle, a draggable split against the nearest name, and one plain line.
+// It is built from the ~1,000 names, so it shows on a color with a long inline article (Olive) and on one with no article at all.
+scenario("pages", "Next to it shows on a long article's color page (Olive) and on a described shade with no article", async t => {
+  for (const [hash, title] of [["#/name/olive", "Olive"], ["#/name/clear-cadet-blue", "Clear Cadet Blue"]]) {
+    await H.openPage(t, hash, title);
+    const nt = await t.waitFor(".rc-nt", 15000, "the Next to it section on " + title);
+    const ladders = t.$$(".nt-ladder", nt);
+    t.expect(ladders.length >= 1, `${title}: no ladder`);
+    t.expect(ladders.every(l => t.$(".nt-self", l) && t.$$(".nt-tile[data-swatch]", l).length >= 1), `${title}: a ladder has no neighbors or lost its own color`);
+    t.expect(/ is (almost the same as|[a-z ]+ than) /.test(t.text(t.$(".fam-cmp-line", nt))), `${title}: the compare line reads "${t.text(t.$(".fam-cmp-line", nt))}"`);
+    t.expect(!t.$(".ar-fam"), `${title}: the old Family tab is still on the page`);
+  }
+  // a ladder tile opens that color's page in one tap
+  const tile = t.$(".rc-nt .nt-tile[data-swatch]"); await t.click(tile, { wait: 500 });
+  await t.waitFor(() => H.title(t) !== "Clear Cadet Blue", 8000, "a ladder tile to open its color");
 });
 
 // David, 2026-10-09: "header feels too big -- harder to read the article". Scrolling down slims the pinned bar
@@ -2320,6 +2326,7 @@ scenario("pages", "a fast scripted scroll never leaves the pinned header's trans
   const INSET = 59;
   await H.openPage(t, "#/color/scarlet", "Scarlet");
   const bar = await t.waitFor(() => t.$("body > .rp-bar"), 8000, "the pinned header");
+  t.ev("typeof FD_HIDE_OFF === 'function' && FD_HIDE_OFF && FD_HIDE_OFF(); 1");   // this scenario is about the bar's own "on" transition; hide-on-scroll has its own scenario
   { const st = t.w.document.createElement("style"); st.textContent = `:root{--top:${INSET}px !important}`; t.w.document.head.appendChild(st); }
   const settled = () => { const r = bar.getBoundingClientRect(); return Math.abs(r.top) < 1; };   // .on's resting transform: translate(-50%,0)
   for (let rep = 0; rep < 6; rep++) {
@@ -2406,7 +2413,7 @@ scenario("pages", "article figure cards: Mauve draws them inline; a card opens i
   const all = t.$$(".cp-page .ar-fig"), figs = all.filter(f => !f.hasAttribute("data-ar-gap")), gapFigs = all.filter(f => f.hasAttribute("data-ar-gap"));
   t.expect(figs.length <= 5, `${figs.length} auto-figures, the limit is 5`);
   t.expect(gapFigs.length <= 10, `${gapFigs.length} pictures between paragraphs, the limit is 10`);
-  t.expect(all.every(f => /\d+% match to Mauve/.test(t.text(f.querySelector(".ar-fig-m")))), "a card is missing its '% match to Mauve' line");
+  t.expect(all.every(f => /(Nearly identical|Very close|Close|Related) to Mauve/.test(t.text(f.querySelector(".ar-fig-m")))), "a card is missing its '% match to Mauve' line");
   // a compact card's picture is a fixed 112 (88 under 360 px) square; a wide one fills the measure at a fixed 4:3 or 3:2
   t.expect(all.every(f => { const r = f.querySelector(".ar-fig-im").getBoundingClientRect(); return f.classList.contains("ar-wide") ? r.width > 200 && [3 / 4, 2 / 3].some(k => Math.abs(r.height - r.width * k) < 2) : [112, 88].includes(r.width); }), "a card's picture box lost its fixed proportions");
   const secs = figs.map(f => (f.closest("[data-ar-sec]") || {}).id || "seen").filter(x => x !== "seen");
@@ -2474,7 +2481,7 @@ scenario("pages", "a tapped in-between hex opens its nearest name with 'Your col
 
 // David, 2026-10-24: an in-between color's page lists the next-nearest names right under the cover ("It could also be
 // called"), the winner restated, each row an equal-swatch pair that opens that name's page with the exact color kept.
-scenario("pages", "an in-between color lists its runner-up names under the cover and a row opens that name with your color", async t => {
+scenario("pages", "an in-between color lists its runner-up names in Overview and a row opens that name with your color", async t => {
   await t.open("#/color/teal", { settle: 300 });
   const hex = "#C37FAC";
   const sw = t.d.createElement("button"); sw.dataset.swatch = hex; sw.style.cssText = "position:fixed;left:150px;top:300px;width:60px;height:60px;z-index:9999";
@@ -2487,8 +2494,7 @@ scenario("pages", "an in-between color lists its runner-up names under the cover
   const rows = t.$$(".rp-also-row", sec);
   t.expect(rows.length >= 1 && rows.length <= 6, `${rows.length} rows, expected 1-6`);
   rows.forEach(r => { const sws = r.querySelectorAll(".rp-also-sw i"); t.expect(sws.length === 2 && Math.abs(sws[0].getBoundingClientRect().width - sws[1].getBoundingClientRect().width) < 1, "the pair's swatches are not equal"); });
-  const heroTop = t.$(".cp-hero-full").getBoundingClientRect().bottom, secTop = sec.getBoundingClientRect().top;
-  t.expect(secTop - heroTop < 200, `the section sits ${Math.round(secTop - heroTop)}px under the cover, not right under it`);
+  t.expect(sec.closest("[data-rp-about]"), "the section is not inside Overview (David, 2026-10-26: it is not forced above the paintings)");
   await t.waitFor(() => typeof t.w.loadLongNames !== "function" || t.ev("LONG_NAMES && LONG_NAMES.length > 0"), 8000, "the archive names to load (the section widens to them)");
   await new Promise(r => setTimeout(r, 300));
   const row0 = t.$(".rp-also-row"), first = row0.dataset.rpAlsoN;   // re-read: the section is redrawn once the archive lands
@@ -2575,16 +2581,17 @@ scenario("pages", "a color's lead picture never prefers a far painting with more
   }
 });
 
-scenario("pages", "a world twin (In gems) opens its page in one tap, Back returns to the color", async t => {
+scenario("pages", "a world twin (In gems) opens its page in one tap and Back returns to the color", async t => {
   await H.openPage(t, "#/name/fiery-rose", "Fiery Rose");
-  // David, 2026-10-09: "Found in the world" (gems/botany/brands/fashion twins) tucks into the Paintings section now
-  const d = await t.waitFor(() => t.$(".rp-paint .rp-elsewhere"), 8000, "the Paintings section's elsewhere block");
-  await t.waitFor(() => t.$$("[data-to]", d).length > 0, 10000, "a twin row (gem, flower, fashion or film) near Paintings");
-  const row = t.$$("[data-to]", d).find(e => /^gm:/.test(e.dataset.to)) || t.$$("[data-to]", d)[0];
-  t.expect(row, "no twin row to tap");
-  const id = row.dataset.to;
+  // David, 2026-10-25: gems, nature, design, objects, fashion, films, books, poems and looks are ONE Elsewhere strip with chips
+  const d = await t.waitFor(() => t.$(".rc-else"), 25000, "the Elsewhere strip");
+  const chip = t.$$(".el-chip", d).find(b => /^Gems/.test(t.text(b))) || t.$(".el-chip", d);
+  t.expect(chip, "Elsewhere has no chips");
+  await t.click(chip, { wait: 300 });
+  const row = await t.waitFor(() => t.$(".el-card", d), 5000, "a card in the Elsewhere strip");
+  const id = t.text(chip);
   await t.click(row, { wait: 700 });
-  await t.waitFor(() => !t.$(".cp-page .cp-hero-foot h1") || H.title(t) !== "Fiery Rose", 8000, `the twin page for ${id} to open`);
+  await t.waitFor(() => !t.$(".cp-page .cp-hero-foot h1") || H.title(t) !== "Fiery Rose", 8000, `the ${id} page to open`);
   t.expect(t.$("#app").innerText.length > 100, `the page for ${id} is empty`);
   t.notes.push(`Fiery Rose > ${id}`);
   await t.click("[data-back]", { wait: 600 });
@@ -2597,10 +2604,17 @@ scenario("pages", "role paintings and Werner's 1821 example show on the color pa
   await H.openPage(t, "#/name/auburn", "Auburn");
   // David, 2026-10-09: Paintings is a first-class section now, not a drawer behind a summary tap
   const paint = await t.waitFor(() => t.$(".rp-paint"), 8000, "the Paintings section");
-  await t.waitFor(() => t.$$(".rc-ri", paint).length >= 2, 15000, "a role-paintings row (shadow/mid/light/accent/hidden)");
-  const tiles = t.$$(".rc-ri", paint);
-  t.expect(tiles.every(x => /Shadow|Mid|Light|Accent|Hidden/.test(x.textContent)), "a role tile is missing its label");
-  const tile = await t.waitFor(() => tiles.find(x => x.dataset.rcGi), 15000, "a role painting resolved to a gallery index");
+  // "How painters use it" is no longer an Overview section: it is the Paintings Settings sheet's "part it plays" chips (percent under each)
+  t.expect(!t.$(".rs-roles"), "the How painters use it section is still on the Overview");
+  await cfeedOpen(t, "#/name/auburn");
+  await openSettingsChip(t, 500);
+  const sheet = await t.waitFor(".fs-sheet", 8000, "the Paintings Settings sheet");
+  const chips = t.$$("[data-fsmulti=roles] button", sheet);
+  t.expect(chips.length === 5 && chips.every(x => /^(Main|Shadow|Mid-tone|Light|Accent)\d+%$/.test(t.text(x).replace(/\s+/g, ""))), `part-it-plays chips read ${chips.map(x => t.text(x))}`);
+  await t.click(chips[0], { wait: 300 });
+  t.expect(/% of the [\d,]+ paintings that hold it/.test(t.text("[data-fs-say]")), `no one-line meaning under the chip: "${t.text("[data-fs-say]")}"`);
+  await t.open("#/name/auburn", { settle: 600 });
+  const tile = await t.waitFor(() => t.$(".rp-paint [data-gi]"), 15000, "a painting on the page");
   await t.click(tile, { wait: 700 });
   await t.waitFor(() => t.$(".gl-page"), 10000, "the role painting's own page");
   await t.click("[data-back]", { wait: 600 });
@@ -2646,13 +2660,6 @@ scenario("pages", "every painting tile on a color page opens its painting: the I
   await t.click("[data-back]", { wait: 600 });
   await t.waitFor(() => H.title(t) === "Ochre Brown", 8000, "Back to return to Ochre Brown from the archive hero");
 
-  // 3. a role-paintings tile (rcRolePaintingsHTML) -- resolves async per role; any one that lands counts
-  paint = await freshPaint();
-  const role = await t.waitFor(() => t.$$(".rc-ri[data-rc-gi]", paint)[0], 15000, "a resolved role-paintings tile");
-  await t.click(role, { wait: 700 });
-  await t.waitFor(() => t.$(".gl-page"), 10000, "the role tile's own page");
-  await t.click("[data-back]", { wait: 600 });
-  await t.waitFor(() => H.title(t) === "Ochre Brown", 8000, "Back to return to Ochre Brown from the role tile");
 });
 
 // David, 2026-10-09 on Baby Pink: "It's not letting me tap Paul Signac... and Paul has no photo" -- a painter
@@ -2682,7 +2689,7 @@ scenario("pages", "a painter row in Painters who use it opens their page, and al
 // "Black brown" still has 5 painters here, none with a Wikidata portrait (all five exercise the famous/typical
 // fallback this scenario exists to check), so it keeps the original intent without hardcoding a count that
 // drifts with the corpus.
-scenario("pages", "every painter avatar (portrait or famous/typical-painting fallback) resolves to a real image, same size", async t => {
+scenario("painters", "every painter avatar (portrait or famous/typical-painting fallback) resolves to a real image, same size", async t => {
   await H.openPage(t, "#/name/black-brown", "Black brown");
   const paint = await t.waitFor(() => t.$(".rp-paint"), 8000, "the Paintings section");
   const rows = await t.waitFor(() => { const r = t.$$(".rc-painter[data-awpainter]", paint); return r.length >= 4 ? r : null; }, 20000, "several painter rows");
@@ -3099,8 +3106,8 @@ scenario("studio", "camera: a refused permission gets its own fix-it message, an
   t.expect(left !== right, `dragging the circle should change what it names (both read "${left}")`);
   // how much the circle reads is a setting in ⋯ (2x2 by default), never a pinch on the picture
   await t.click("#more", { wait: 300 });
-  t.expect(t.$$(".eye-sheet [data-eydsize]").length === 5, "the ⋯ sheet should offer five read sizes");
-  t.expect(t.$(".eye-sheet [data-eydsize].on") && t.$(".eye-sheet [data-eydsize].on").dataset.eydsize === "2", "the default read should be a 2x2 average");
+  t.expect(t.$$(".eye-sheet [data-eydsize]").length === 4, "the ⋯ sheet should offer four read sizes (Point, Small, Medium, Large)");
+  t.expect(t.$(".eye-sheet [data-eydsize].on") && t.$(".eye-sheet [data-eydsize].on").dataset.eydsize === "5", "the default read should be Small");
   t.ev("(() => { const s = [...document.querySelectorAll('.scrim')].pop(); if (s) s.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, cancelable: true })); })()");
   await t.sleep(500);
   // hold still to lock; the name line says Held; a tap goes live again
@@ -3234,7 +3241,7 @@ scenario("studio", "photo page: a camera photo opens with a color circle where t
   ev("pointermove", r.left + r.width * .7, r.top + r.height * .5); ev("pointerup", r.left + r.width * .7, r.top + r.height * .5);
   await t.sleep(200);
   t.expect(t.$$(".pv-yname em")[0].textContent !== first, "dragging a circle should change its color");
-  t.expect(t.$('[data-pvread="2"].on'), "circles should read a 2x2 average by default");
+  t.expect(t.$('[data-pvread="5"].on'), "circles should read a Small average by default");
   await t.click('[data-pvread="1"]', { wait: 200 });
   t.expect(t.$('[data-pvread="1"].on'), "Exact should turn on below the photo");
   await t.click('[data-pvlens="value"]', { wait: 200 });
@@ -3515,7 +3522,7 @@ scenario("favs", "shelf: top five, a plate opens its page, Back returns, a row h
   await t.click("[data-close]", { wait: 500 });
   await t.waitFor(".fv-shelf", 6000, "the shelf after closing the ranking");
   await t.click("[data-cs=map]", { wait: 900 });
-  await t.waitFor(".ph-sheet", 15000, "your colors' own honeycomb");
+  await t.waitFor(".phx", 15000, "your colors' own color map");
   t.expect(t.ev("window.PH_DEBUG && PH_DEBUG.count()") > 0, "the honeycomb drew no cells");
 });
 
@@ -3679,8 +3686,13 @@ scenario("map", "From a painting: See its colors opens its own honeycomb (not th
     t.expect(row, "no \"On the map\" row in the painting's ⋯ sheet, and no [data-cs=map] button on the surface either");
     await t.click(row, { wait: 500 });
   }
-  await t.waitFor(".ph-sheet", 12000, "the palette honeycomb sheet");
+  await t.waitFor(".phx", 12000, "the palette color map");
   await t.waitFor(() => t.ev("window.PH_DEBUG && PH_DEBUG.count()") > 0, 8000, "the honeycomb to lay out its cells");
+  // the options live in the standard map ⋯ sheet (no floating menu above the map)
+  t.expect(!t.$(".ph-arr, .ph-count"), "a floating menu is still above the map");
+  await t.click("[data-phdo]", { wait: 500 });
+  await t.waitFor("[data-ph-n]", 6000, "the ⋯ sheet's How many slider");
+  t.expect(t.$$("[data-phlook]").length === 2, "the ⋯ sheet has no Look: Circles | Honeycomb");
   let shown = +t.text("[data-ph-n]"), cells = t.ev("PH_DEBUG.count()");
   t.expect(shown > 0 && shown === cells, `the slider says ${shown} but the honeycomb drew ${cells} cells`);
   // slide the count: the honeycomb must recompute to match, never just truncate what it already had. Go down
@@ -3694,12 +3706,13 @@ scenario("map", "From a painting: See its colors opens its own honeycomb (not th
   await t.waitFor(() => t.ev("PH_DEBUG.count()") === shown, 6000, "the honeycomb to redraw at the new count");
   cells = t.ev("PH_DEBUG.count()");
   t.expect(shown === cells, `after sliding, the slider says ${shown} but the honeycomb drew ${cells} cells`);
+  await t.click("[data-sheet-close]", { wait: 500 });
   // tap the first cell -> its color page, in one tap, no sheet in between
   const hex = t.ev("PH_DEBUG.hexAt(0)"), at = t.ev(`PH_DEBUG.screenOf(${JSON.stringify(hex)})`);
   t.expect(at, "couldn't find the first cell's screen position");
-  await t.tapAt(t.$(".ph-cv"), at.x, at.y, { wait: 500 });
+  await t.tapAt(t.$(".pmx-cv"), at.x, at.y, { wait: 500 });
   await t.waitFor(".cp-page", 8000, "a color page after tapping a cell");
-  t.expect(!t.$(".ph-sheet"), "the honeycomb sheet is still open after tapping a cell");
+  t.expect(!t.$(".phx"), "the color map is still open after tapping a cell");
   // Back returns to the painting, not to the honeycomb
   await H.back(t);
   await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 8000, "Back to return to the painting page");
@@ -4238,6 +4251,20 @@ scenario("paintings", "at strict settings a rare color shows no unrelated painti
   await t.waitFor(() => !t.$(".pt-results [data-pt-loosen]") || !/Loosening/.test(t.$(".pt-results [data-pt-loosen]").textContent), 15000, "loosening to finish");
   t.expect(/loosened/i.test(t.text("[data-finding]")) || t.$$(".pt-results .pin, .pt-results .gl-pin").length > 0 || /nothing|not one/i.test(t.text("[data-finding]")), "Loosen should either find something and say so, or admit it's at the loosest measure");
 });
+scenario("paintings", "hidden non-artworks (data/gallery/hidden.json) never rank in a color's paintings, yet still open by address; margin crops are in the shards", async t => {
+  await t.open("#/paintings-of/ffffff?t=6&m=1", { settle: 600 });
+  const r = await t.ev(`(async () => { const G = await loadGallery(); if (!G.hidIdx || !G.hidIdx.length) return { none: true };
+    const rows = fdcScan("#FFFFFF", 6, 0).map(x => x.i), bad = G.hidIdx.filter(i => rows.includes(i)), far = await fdcFar("#FFFFFF");
+    return { n: G.hidIdx.length, bad: bad.length, farInf: G.hidIdx.every(i => far[i] === Infinity), hi: G.hidIdx[0] }; })()`);
+  t.expect(r.none || (r.bad === 0 && r.farInf), "a hidden painting still ranks in the White list: " + JSON.stringify(r));
+  if (!r.none) {
+    await t.open("#/gallery/" + r.hi, { settle: 800 });
+    await t.waitFor(".gl-hero, .gl-page", 12000, "a hidden painting opened by its address");
+    t.expect(t.$("#app").innerText.length > 100, "a hidden painting opened by address is empty");
+  }
+  const c = await t.ev(`(async () => { await loadGallery(); let n = 0; for (let k = 0; k < 20; k++) { const rows = await glShard(k); for (const r of rows) if (r[11]) n++; } return n; })()`);
+  t.expect(c > 300, "the first 2,000 paintings carry only " + c + " crops: the crop rows went missing");
+});
 scenario("paintings", "a pair's paintings, the masters' chords, and a painting with its color pinned", async t => {
   await t.open("#/paintings-of/c2412d+4f6b3a?t=4&m=1", { settle: 600 });
   await t.waitFor(".pt-finding", 12000, "the pair's paintings");
@@ -4253,7 +4280,7 @@ scenario("paintings", "a pair's paintings, the masters' chords, and a painting w
   await t.waitFor(".sp-page .sp-pair", 12000, "a pair page opened from a chord");
   // the color is one of this painting's own six palette swatches, so "covers" is guaranteed rather than tied to
   // whatever an arbitrary hex happens to be close to -- gallery order shifts whenever the corpus does
-  await t.open("#/gallery/15146?c=8A7A48&t=10", { settle: 800 });
+  await t.open("#/gallery/15146?c=6C8484&t=10", { settle: 800 });   // 6C8484: the grey-teal ground of Bellini's Portrait of a Man, 12% of its photo within 10% (measured from the pixels; the color index is rebuilt for today's gallery order)
   await t.waitFor(() => /covers/.test(t.text(".pt-arrive")), 14000, "the pinned coverage line");
   // David, 2026-10-08: the color you came from sits under the palette, one quiet row; the tolerance opens on a tap
   t.expect(t.$(".pt-arrive").getBoundingClientRect().top > t.$("[data-glrows]").getBoundingClientRect().top, "the arriving color sits above the palette");
@@ -4275,7 +4302,9 @@ scenario("paintings", "a painting's identity (title, painter, museum) sits above
   t.expect(stripTop > idTop, "the palette strip isn't below the identity block (title/painter/date/museum)");
   // the smoke iframe is 375x812 (tools/smoke/harness.js); the palette strip should still be reachable without
   // scrolling the page at that height (440x956 is checked separately with a real screenshot -- see colorhub-verify)
-  t.expect(stripTop < 812, `the palette strip sits at y=${Math.round(stripTop)}, below the 812px fold`);
+  // 2026-10-25: the chip row (Overview . Color . ...) now sits between the identity block and the strip, so it is the chip row that must be on the first screen
+  const chipsB = t.$("[data-glfeed] .fd-chips").getBoundingClientRect().bottom;
+  t.expect(chipsB <= 812 && stripTop >= chipsB - 2, `the chip row (bottom y=${Math.round(chipsB)}) should be on the 812px first screen, with the strip (y=${Math.round(stripTop)}) right under it`);
 });
 // David, relayed 2026-10-09 ("usually tapping a color should open the color, not the segmentation of it"):
 // a strip tile opens its color's page in one tap, the app-wide [data-swatch] rule (CLAUDE.md).
@@ -4292,16 +4321,16 @@ scenario("paintings", "a painting's identity (title, painter, museum) sits above
 // the painting page); a second long-press clears it; a plain short tap is unaffected and still opens the
 // color page. This scenario covers everything that IS reliable under virtual time: the glyph is gone from the
 // strip, a plain tap still opens the page, and the row action (an ordinary click, no timer) does the same job.
-scenario("paintings", "a painting's strip tile opens its color page in one tap, with no Where glyph on the chip; the expanded list's row action locates it", async t => {
+scenario("paintings", "a painting's strip tile opens the whole palette in one tap (a hold opens that color), with no Where glyph on the chip; the expanded list's row action locates it", async t => {
   await t.open("#/gallery/12", { settle: 800 });
   t.expect(!t.$("[data-glwhere]"), "the old On the painting switch is still in the DOM");
   await t.waitFor("[data-glswatches] [data-glj]", 15000, "a palette swatch tile");
   const tileAt0 = () => t.$('[data-glswatches] [data-glj="0"]');
-  t.expect(tileAt0().hasAttribute("data-swatch"), "the strip chip isn't a [data-swatch] (one tap should open its page)");
+  t.expect(!tileAt0().hasAttribute("data-swatch") && tileAt0().dataset.hex, "the strip chip should carry its hex for a hold, and not be a [data-swatch] (a tap opens the whole palette, 2026-10-28)");
   t.expect(!tileAt0().querySelector("[data-locate], .pal-where"), "the strip chip still has a Where glyph on it");
   t.expect(t.$("[data-glswatches]").hasAttribute("data-no-hold"), "the strip doesn't opt out of settray.js's app-wide long-press (needed so its own long-press can locate instead)");
   await t.click(tileAt0(), { force: true, wait: 600 });
-  await t.waitFor(".cp-page", 8000, "the color page after tapping the chip body");
+  await t.waitFor(".sp-page", 8000, "the palette page after tapping the strip");
   await t.click(TRL.screenBack(t), { wait: 600 });
   // the expanded list's own row action: an ordinary click, no timing involved, so it's reliable here
   await t.waitFor("[data-glrows] [data-glj]", 10000, "the expanded palette rows");
@@ -4380,7 +4409,7 @@ scenario("paintings", "a color page says where you met it, and the link reopens 
 scenario("paintings", "swiping the picture moves to the next/previous painting by the same painter", async t => {
   await t.open("#/gallery/12", { settle: 800 });
   await t.waitFor("[data-glmorepainter] .gl-rail .gl-pin", 15000, "More by this painter (painterOrder ready)");
-  const title0 = t.text(".p-title"), hash0 = TRL.hash(t);
+  const title0 = t.text(".p-title"), hash0 = TRL.hash(t), depth0 = t.ev("XSTACK.length");
   const span = t.$(".gl-hero > span"), r = span.getBoundingClientRect(), w = t.w;
   const swipe = (x1, x2) => {
     const o = { bubbles: true, cancelable: true, clientY: r.top + r.height / 2, pointerId: 1, pointerType: "touch", isPrimary: true, view: w };
@@ -4392,16 +4421,184 @@ scenario("paintings", "swiping the picture moves to the next/previous painting b
   if (t.text(".p-title") === title0) { swipe(r.left + r.width * .15, r.left + r.width * .85); await t.sleep(500); }   // the edge of the timeline: try the other way
   t.expect(t.text(".p-title") !== title0, "a swipe never moved to another painting");
   t.expect(/^#\/gallery\/\d+/.test(TRL.hash(t)) && TRL.hash(t) !== hash0, "the swipe didn't navigate to a gallery address");
-  await t.click(TRL.screenBack(t), { wait: 500 });
-  t.expect(t.text(".p-title") === title0, "Back after a swipe didn't return to the first painting");
+  // the swipe REPLACES this painting (no new trail step): Back leaves for the page before, not for the first painting (David, 2026-10-25)
+  t.expect(t.ev("XSTACK.length") === depth0, `the swipe changed the trail depth from ${depth0} to ${t.ev("XSTACK.length")}`);
+});
+
+// Pinterest-style gestures (David, 2026-10-25): swipe the page to the next / previous painting of the list it was opened from; pull down to close one step
+async function glDrag(t, target, pts, id = 7, ms = 16) {
+  const w = t.w, o = { bubbles: true, cancelable: true, pointerId: id, pointerType: "touch", isPrimary: true, view: w };
+  target.dispatchEvent(new w.PointerEvent("pointerdown", { ...o, clientX: pts[0][0], clientY: pts[0][1] }));
+  for (const [x, y] of pts.slice(1, -1)) { target.dispatchEvent(new w.PointerEvent("pointermove", { ...o, clientX: x, clientY: y })); await t.sleep(ms); }
+  return () => target.dispatchEvent(new w.PointerEvent("pointerup", { ...o, clientX: pts[pts.length - 1][0], clientY: pts[pts.length - 1][1] }));
+}
+scenario("paintings", "swiping a painting opened from the feed walks that feed's list without a new trail step", async t => {
+  await feedOpen(t, 12);
+  const tiles = t.$$(".fd-tile[data-fk]");
+  await t.click(tiles[2], { wait: 900 });
+  await t.waitFor(() => /^#\/gallery\/\d+/.test(TRL.hash(t)) ? true : null, 8000, "the tile's painting");
+  const hash0 = TRL.hash(t), title0 = t.text(".p-title"), depth0 = t.ev("XSTACK.length"), ctx = t.ev("JSON.stringify(GL_CTXS.get(+location.hash.split('/').pop()) || null)");
+  t.expect(ctx && ctx !== "null", "opening a feed tile left no list context for swiping");
+  const c = JSON.parse(ctx), nextIdx = c.list[c.pos + 1];
+  await t.sleep(900);
+  const page = t.$(".screen.gl-page"), W = t.ev("innerWidth");
+  t.w.scrollTo(0, 0); await t.sleep(100);
+  // mid-drag: the page follows the finger
+  let up = await glDrag(t, page, [[W * .8, 400], [W * .6, 402], [W * .5, 404], [W * .35, 404]]);
+  t.expect(/translate3d\(-/.test(page.style.transform), `mid-drag the page doesn't follow the finger (${page.style.transform})`);
+  up();
+  await t.waitFor(() => TRL.hash(t) !== hash0 ? true : null, 4000, "the next painting");
+  t.expect(TRL.hash(t).endsWith("/" + nextIdx), `swiped to ${TRL.hash(t)}, the list's next is ${nextIdx}`);
+  t.expect(t.ev("XSTACK.length") === depth0, `the swipe pushed a trail step (${depth0} -> ${t.ev("XSTACK.length")})`);
+  t.expect(t.text(".p-title") !== title0, "the title didn't change");
+  // ignored: a drag that starts at the left edge (the iOS back swipe)
+  await t.sleep(900);
+  const hash1 = TRL.hash(t);
+  up = await glDrag(t, t.$(".screen.gl-page"), [[10, 400], [60, 402], [160, 404], [300, 404]]); up(); await t.sleep(500);
+  t.expect(TRL.hash(t) === hash1, "a drag from the left edge swiped the painting");
+  // previous: back to where it came from
+  up = await glDrag(t, t.$(".screen.gl-page"), [[W * .3, 400], [W * .4, 402], [W * .6, 404], [W * .85, 404]]); up();
+  await t.waitFor(() => TRL.hash(t) === hash0 ? true : null, 4000, "the previous painting");
+  // Back leaves for the page before the list
+  await t.sleep(700);   // the click that follows a swipe is swallowed for a moment, and the hand-over ghost is still fading
+  await t.click(TRL.screenBack(t), { wait: 700 });
+  t.expect(t.ev("XSTACK.length") === depth0 - 1, `Back after swiping left the trail at ${t.ev("XSTACK.length")}, expected ${depth0 - 1}`);
+});
+scenario("paintings", "pulling a painting page down at the top closes one step back to the page it came from", async t => {
+  await feedOpen(t, 12);
+  await t.click(t.$$(".fd-tile[data-fk]")[1], { wait: 900 });
+  await t.waitFor(() => t.$(".screen.gl-page [data-glfeed]") ? true : null, 8000, "the painting");
+  await t.sleep(1200);
+  const page = t.$(".screen.gl-page"), depth0 = t.ev("XSTACK.length"), W = t.ev("innerWidth");
+  t.w.scrollTo(0, 0); await t.sleep(900);
+  // David, 2026-10-25 (third pass): ONLY the picture follows the finger; the whole page fades (one opacity on the page, a see-through ground)
+  let up = await glDrag(t, page, [[W / 2, 200], [W / 2, 215], [W / 2, 240], [W / 2, 290], [W / 2, 330]], 9);
+  await t.waitFor(() => { const p = t.$(".tlg-pic"); return p && /translate\([-\d.]+px, ?([\d.]+)/.test(p.style.transform) && +/translate\([-\d.]+px, ?([\d.]+)/.exec(p.style.transform)[1] > 60 ? true : null; }, 2000, "the picture to follow the finger (one rAF per frame)");
+  const mm = /translate\(([-\d.]+)px, ?([-\d.]+)px\) scale\(([\d.]+)\)/.exec(t.$(".tlg-pic").style.transform);
+  t.expect(mm && +mm[2] > 60 && +mm[2] <= 140 && +mm[3] < 1 && +mm[3] >= .8, `mid-pull the picture isn't following the finger and shrinking a little (${t.$(".tlg-pic").style.transform})`);
+  t.expect(+page.style.opacity < .5, `at 90px the rest of the page is still at opacity ${page.style.opacity}, expected it faded away`);
+  t.expect(t.w.getComputedStyle(page).backgroundColor === "rgba(0, 0, 0, 0)", "the dragged page keeps an opaque ground (the page underneath can't show through)");
+  t.expect(!page.style.transform, "the whole page is being moved; only the picture should follow the finger");
+  up();
+  await t.waitFor(() => t.ev("TLG_ANIM") ? true : null, 3000, "the fly-back into the tile to start");
+  t.ev("TLG_ANIM.finish()");
+  await t.waitFor(() => t.ev("XSTACK.length") === depth0 - 1 ? true : null, 4000, "the page to close one step");
+  t.expect(t.$$(".fd-tile[data-fk]").length > 0, "the previous screen is not shown after the page flew into its tile");
+  // a short pull springs back
+  await feedOpen(t, 12);
+  await t.click(t.$$(".fd-tile[data-fk]")[1], { wait: 900 });
+  await t.waitFor(() => t.$(".screen.gl-page [data-glfeed]") ? true : null, 8000, "the painting again");
+  await t.sleep(1200); t.w.scrollTo(0, 0); await t.sleep(900);
+  const d1 = t.ev("XSTACK.length"); up = await glDrag(t, t.$(".screen.gl-page"), [[W / 2, 200], [W / 2, 215], [W / 2, 240]], 10); up(); await t.sleep(700);
+  t.expect(t.ev("XSTACK.length") === d1 && t.$(".screen.gl-page"), "a short pull closed the page");
+});
+// David, 2026-10-25 (second pass): the page underneath shows while a painting is pulled down, and the swipe has its neighbor beside it from the first move
+scenario("paintings", "pulling a painting down shows the page it came from underneath and hands over without a flash", async t => {
+  await feedOpen(t, 12);
+  const tiles0 = t.$$(".fd-tile[data-fk]").length;
+  await t.click(t.$$(".fd-tile[data-fk]")[1], { wait: 900 });
+  await t.waitFor(() => t.$(".screen.gl-page [data-glfeed]") ? true : null, 8000, "the painting");
+  await t.sleep(1200); t.w.scrollTo(0, 0); await t.sleep(900);
+  const page = t.$(".screen.gl-page"), W = t.ev("innerWidth"), depth0 = t.ev("XSTACK.length");
+  t.expect(t.ev("!!(TLG_PREV && TLG_PREV.el)"), "opening a painting from the feed kept no previous screen");
+  // the very first moves of the drag already mount it
+  let up = await glDrag(t, page, [[W / 2, 200], [W / 2, 215], [W / 2, 240], [W / 2, 330], [W / 2, 330]], 31);
+  const L = t.$(".tlg-back");
+  t.expect(L, "no backdrop layer while the painting is pulled down");
+  t.expect(L.querySelectorAll(".fd-tile").length >= Math.min(6, tiles0), `the backdrop holds ${L.querySelectorAll(".fd-tile").length} feed tiles, the page it came from had ${tiles0}`);
+  const bg = t.w.getComputedStyle(L).backgroundColor, dim = +t.w.getComputedStyle(L.querySelector(".tlg-dim")).opacity;
+  t.expect(bg !== "rgb(0, 0, 0)" && bg !== "rgba(0, 0, 0, 0)", `the backdrop is black (${bg})`);
+  t.expect(dim > 0 && dim < .2, `the backdrop dim is ${dim}, expected a slight one that lifts as the page leaves`);
+  t.expect(t.w.getComputedStyle(page).backgroundColor === "rgba(0, 0, 0, 0)", "the dragged page has an opaque ground (the page it came from should show through as the page fades)");
+  t.expect(t.ev("document.getElementById('app').compareDocumentPosition(document.querySelector('.tlg-back')) & Node.DOCUMENT_POSITION_PRECEDING"), "the backdrop is not behind the page");
+  up();
+  await t.waitFor(() => t.ev("TLG_ANIM") ? true : null, 3000, "the fly-back to start");
+  t.ev("TLG_ANIM.finish()");
+  await t.waitFor(() => t.ev("XSTACK.length") === depth0 - 1 ? true : null, 4000, "the page to close one step");
+  await t.waitFor(() => !t.$(".tlg-back") ? true : null, 3000, "the backdrop layer to go once the real page is drawn");
+  t.expect(t.$$(".fd-tile[data-fk]").length > 0, "the page it came from is not drawn after the close");
+  // a short pull gives the layer up again
+  await t.click(t.$$(".fd-tile[data-fk]")[1], { wait: 900 });
+  await t.waitFor(() => t.$(".screen.gl-page [data-glfeed]") ? true : null, 8000, "the painting again");
+  await t.sleep(1200); t.w.scrollTo(0, 0); await t.sleep(900);
+  up = await glDrag(t, t.$(".screen.gl-page"), [[W / 2, 200], [W / 2, 203], [W / 2, 206], [W / 2, 209], [W / 2, 212], [W / 2, 215], [W / 2, 216], [W / 2, 218]], 32, 40);
+  t.expect(t.$(".tlg-back"), "no backdrop on the second pull");
+  await t.sleep(100);
+  t.expect(t.$(".tlg-pic") && +t.$(".screen.gl-page").style.opacity < 1, "a slow short pull didn't lift the picture off the page while the page fades");
+  up(); await t.sleep(900);
+  t.expect(!t.$(".tlg-pic") && t.$(".screen.gl-page").style.opacity === "", `after springing back the picture copy is left behind or the page is still faded (${t.$$(".tlg-pic").length} ${t.$(".screen.gl-page").style.opacity})`);
+  t.expect(!t.$(".tlg-back") && t.$(".screen.gl-page"), "a short pull left the backdrop layer behind or closed the page");
+});
+scenario("paintings", "a swipe has its neighbor beside the page from the first move even before its picture loads", async t => {
+  await feedOpen(t, 12);
+  await t.click(t.$$(".fd-tile[data-fk]")[2], { wait: 900 });
+  await t.waitFor(() => /^#\/gallery\/\d+/.test(TRL.hash(t)) ? true : null, 8000, "the tile's painting");
+  await t.sleep(1000);
+  const page = t.$(".screen.gl-page"), W = t.ev("innerWidth"), hash0 = TRL.hash(t), depth0 = t.ev("XSTACK.length");
+  t.w.scrollTo(0, 0); await t.sleep(100);
+  t.expect(t.ev("getComputedStyle(document.querySelector('.screen.gl-page')).touchAction") === "pan-y pinch-zoom", "the page doesn't hand horizontal drags to the app (touch-action)");
+  const ghosts = () => t.$$(".gl-ghost");
+  t.expect(ghosts().length === 2, `${ghosts().length} neighbor ghosts built when the page opened, expected 2`);
+  // stub a neighbor whose picture and data haven't arrived: only the palette field and the shape remain, and no "undefined" anywhere
+  ghosts().forEach(g => { g.querySelectorAll(".gl-ghost-lo,.gl-ghost-hi").forEach(n => n.remove()); g.querySelector(".gl-ghost-t").textContent = ""; });
+  const ph = ghosts()[0].querySelector(".gl-ghost-ph");
+  t.expect(ph && /gradient/.test(ph.style.background || ph.style.backgroundImage), "a neighbor without its picture has no color field");
+  t.expect(ghosts().every(g => !/undefined/.test(g.textContent)), "a neighbor ghost says undefined");
+  // two moves (a 6px lock, then a few more): the neighbor is already beside the page, and both track the finger 1:1
+  await glDrag(t, page, [[W * .8, 400], [W * .8 - 4, 401], [W * .8 - 9, 402], [W * .8 - 30, 403], [W * .8 - 80, 404], [W * .8 - 80, 404]], 33);
+  const tx = el => +((/translate3d\((-?[\d.]+)px/.exec(el.style.transform) || [0, 0])[1]);
+  const on = ghosts().find(g => +g.style.opacity === 1);
+  t.expect(on, "no neighbor ghost shown after the first moves of the drag");
+  t.expect(Math.abs(tx(page) + 80) < 1.5, `the page is at ${tx(page)}px after an 80px drag, expected -80`);
+  t.expect(Math.abs(tx(on) - (W - 80)) < 1.5, `the neighbor is at ${tx(on)}px, expected ${W - 80} (one page-width to the right of the page)`);
+  t.expect(on.getBoundingClientRect().height > 100 && on.querySelector(".gl-ghost-pic").getBoundingClientRect().height > 50, "the neighbor's picture box has no size");
+  // a drag past 30% lands the neighbor in one piece (the swipe waits for its data), with no new trail step
+  const more = async () => { for (const x of [W * .8 - 130, W * .8 - 200, W * .8 - 260]) { page.dispatchEvent(new t.w.PointerEvent("pointermove", { bubbles: true, cancelable: true, pointerId: 33, pointerType: "touch", isPrimary: true, view: t.w, clientX: x, clientY: 404 })); await t.sleep(16); } page.dispatchEvent(new t.w.PointerEvent("pointerup", { bubbles: true, cancelable: true, pointerId: 33, pointerType: "touch", isPrimary: true, view: t.w, clientX: W * .8 - 260, clientY: 404 })); };
+  await more();
+  await t.waitFor(() => TRL.hash(t) !== hash0 ? true : null, 4000, "the neighbor painting to land");
+  t.expect(t.ev("XSTACK.length") === depth0, `the swipe pushed a trail step (${depth0} -> ${t.ev("XSTACK.length")})`);
+  await t.waitFor(() => t.$$(".gl-ghost").every(g => +g.style.opacity === 0 || !g.isConnected) ? true : null, 3000, "the hand-over ghost to fade");
+  // what is under the painting is still the list it came from, so pulling the swiped painting down still shows it
+  t.expect(t.ev("!!(TLG_PREV && TLG_PREV.el && TLG_PREV.el.querySelector('.fd-tile'))"), "after a swipe the page underneath is no longer the list it came from");
+});
+scenario("paintings", "a swipe at the end of the list rubber-bands and a short drag springs back", async t => {
+  await feedOpen(t, 12);
+  await t.click(t.$$(".fd-tile[data-fk]")[0], { wait: 900 });
+  await t.waitFor(() => /^#\/gallery\/\d+/.test(TRL.hash(t)) ? true : null, 8000, "the first tile's painting");
+  await t.sleep(1000);
+  const page = t.$(".screen.gl-page"), W = t.ev("innerWidth"), hash0 = TRL.hash(t);
+  t.w.scrollTo(0, 0); await t.sleep(100);
+  const tx = el => +((/translate3d\((-?[\d.]+)px/.exec(el.style.transform) || [0, 0])[1]);
+  // the first one has no previous painting: dragging right resists and springs back, whatever the distance
+  let up = await glDrag(t, page, [[W * .3, 400], [W * .35, 401], [W * .5, 402], [W * .8, 403], [W * .8, 403]], 34);
+  t.expect(tx(page) > 0 && tx(page) < W * .5 * .45, `at the list's start the page is at ${tx(page)}px for a ${W * .5}px drag, expected a rubber band`);
+  up(); await t.sleep(900);
+  t.expect(TRL.hash(t) === hash0 && Math.abs(tx(page)) < 1, "the page did not spring back at the start of the list");
+  // a short drag toward the next one springs back too
+  up = await glDrag(t, page, [[W * .8, 400], [W * .77, 401], [W * .77, 401]], 35); up(); await t.sleep(900);
+  t.expect(TRL.hash(t) === hash0 && Math.abs(tx(page)) < 1 && t.$$(".gl-ghost").length >= 1 && t.$$(".gl-ghost").every(g => +g.style.opacity === 0), `a short drag did not spring back cleanly (${TRL.hash(t) === hash0 ? "same" : "moved"} painting, page at ${tx(page)}px, ${t.$$(".gl-ghost").length} ghosts, opacities ${t.$$(".gl-ghost").map(g => g.style.opacity)})`);
 });
 // ---------- Keep exploring (js/feed.js): the Pinterest-style feed at the foot of every painting page (David, 2026-10-24) ----------
-// open a painting, reset the remembered chip (sessionStorage survives the reloads between scenarios), scroll until the feed is built
+// a painting reached by browsing (from a color page, the map...) starts on its Color feed: tap Overview to get at the page's own sections (palette, findings...)
+async function glOverview(t) {
+  await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre) .fd-chip[data-fc=about]") ? true : null, 25000, "the painting's real chip row");
+  if (t.$("[data-gl-about]").hidden) await t.click("[data-glfeed] .fd-chip[data-fc=about]", { wait: 300 });
+}
+// open a painting (a cold open starts on Overview), turn the wanted chip on (the chip row sits right under the title), scroll until the feed is built
+// Settings are the active chip tapped again; Map is a small button at the top right of the hero and in the sticky bar (David, 2026-10-25)
+const activeChip = t => t.$(".fd-bar:not(.fd-pre) .fd-chip.on") || t.$(".fd-chip.on");
+const openSettingsChip = async (t, wait) => { await t.click(activeChip(t), { wait: wait || 600 }); };
+const mapBtn = t => t.$$("[data-fdmap]").find(b => { const r = b.getBoundingClientRect(); return r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < t.ev("innerHeight") && getComputedStyle(b).visibility !== "hidden"; }) || t.$("[data-fdmap]");
+async function feedPick(t, chip) {
+  await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre) .fd-chip[data-fc=" + chip + "]") ? true : null, 25000, "the real chip row");
+  t.ev(`Object.assign(FD_ST, { metric: "overall", color: 0 })`);
+  await t.click(`[data-glfeed] .fd-chip[data-fc=${chip}]`, { wait: 300 });
+  await feedScroll(t);
+}
 async function feedOpen(t, i, chip) {
   await t.open("#/gallery/" + i, { settle: 600 });
-  await t.waitFor("[data-glfeed]", 15000, "the feed's host at the foot of the painting page");
-  t.ev(`Object.assign(FD_ST, { chip: ${JSON.stringify(chip || "color")}, metric: "overall", color: 0 })`);
-  await feedScroll(t);
+  await t.waitFor("[data-glfeed]", 15000, "the feed's host under the painting's title");
+  await feedPick(t, chip || "color");
 }
 async function feedScroll(t) {
   await t.waitFor(() => { t.w.scrollTo(0, 1e7); return t.$$(".fd-tile[data-fk]").length >= 6 ? true : null; }, 20000, "the feed's first tiles");
@@ -4409,14 +4606,38 @@ async function feedScroll(t) {
 }
 const feedCaps = t => t.$$(".fd-tile[data-fk] .fd-cap").map(e => t.text(e));
 const feedTop = t => { const r = t.$(".fd-grid").getBoundingClientRect(); return r.top + t.w.scrollY; };
+// The pinned stack (top bar + chip row): sits right under the safe area, hides on scroll down, returns on scroll up (David, 2026-10-25)
+scenario("paintings", "the pinned bar sits under the safe area and hides on scroll down then returns on scroll up", async t => {
+  const INSET = 62;
+  await t.open("#/gallery/12", { settle: 600 });
+  { const st = t.w.document.createElement("style"); st.textContent = `:root{--top:${INSET}px !important}`; t.w.document.head.appendChild(st); }
+  t.w.location.hash = "#/home"; await t.sleep(300); t.w.location.hash = "#/gallery/12"; await t.sleep(300);
+  await t.waitFor("[data-glfeed]", 15000, "the feed's host");
+  await feedPick(t, "color");
+  const bar = () => t.$(".gl-page > .art-top"), chips = () => t.$("[data-glfeed] .fd-bar"), ty = el => new t.w.DOMMatrix(t.w.getComputedStyle(el).transform).m42;
+  const sc = async y => { t.w.scrollTo(0, y); t.w.dispatchEvent(new t.w.Event("scroll")); await t.sleep(120); };
+  const yEnd = 2400;
+  await sc(0); for (let y = 600; y <= yEnd; y += 300) await sc(y); await t.sleep(500);
+  t.expect(ty(bar()) < -20 && ty(chips()) < -60 && t.w.document.documentElement.classList.contains("fd-hid"), `after scrolling down to the feed the bar is at ${ty(bar())} / chips at ${ty(chips())}, expected hidden (y ${t.w.scrollY}, H ${t.w.document.documentElement.scrollHeight}, ${t.w.document.documentElement.className}, tiles ${t.$$(".fd-tile").length}, pin ${t.ev("(()=>{const b=document.querySelector(\"[data-glfeed] .fd-bar\");const p=b.parentElement;return Math.round(p.getBoundingClientRect().top+scrollY)+\"/\"+getComputedStyle(b).top+\"/\"+typeof fdHideWire+\"/\"+b.className})()")})`);
+  await sc(t.w.scrollY - 40); await sc(t.w.scrollY - 60); await t.sleep(500);
+  t.expect(!t.w.document.documentElement.classList.contains("fd-hid"), `a small scroll up left the bar at ${ty(bar())} / chips at ${ty(chips())}, expected back (y ${t.w.scrollY}, sheet ${!!t.$(".sheet")}, ${t.w.document.documentElement.className})`);
+  await t.waitFor(() => ty(bar()) === 0 && ty(chips()) === 0 ? true : null, 4000, "the bar to finish sliding back");
+  const top0 = bar().getBoundingClientRect().top;
+  t.expect(Math.abs(top0) <= 1, `the bar's top is ${top0}px, expected 0 (sticky under the band)`);
+  const btn = t.$(".gl-page > .art-top [data-back]").getBoundingClientRect();
+  t.expect(btn.top >= INSET + 3 && btn.top <= INSET + 6.5, `the buttons start ${btn.top - INSET}px under the safe area, expected 4px`);
+  const chipTop = chips().getBoundingClientRect().top, barBottom = bar().getBoundingClientRect().bottom;
+  t.expect(Math.abs(chipTop - barBottom) <= 2, `the chip row starts ${chipTop - barBottom}px from the bar`);
+  t.expect(barBottom - INSET <= 54, `the bar is ${barBottom - INSET}px tall under the inset, expected ~52`);
+  t.ev("scrollTo(0,0)"); await t.sleep(300);
+  t.expect(!t.w.document.documentElement.classList.contains("fd-hid"), "at the top the bar is not shown");
+});
 scenario("paintings", "Keep exploring: a feed at the bottom of a painting page, four chips, closest palette first, 24 at a time, a bounded number of live pictures", async t => {
   await feedOpen(t, 12);
-  t.expect(t.$(".gl-feed .sec-head") && /Keep exploring/.test(t.text(".gl-feed .sec-head")), "the Keep exploring heading is missing");
-  t.expect(t.$$(".fd-chip").map(b => t.text(b).replace(/ ·.*/, "")).join() === "Color,Painter,Era,Place", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}", not Color, Painter, Era, Place`);
+  t.expect(t.$$(".fd-chip").map(b => t.text(b).replace(/ ·.*/, "")).join() === "Overview,Color,Look,Painter,Era,Place", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}", not Overview, Color, Vibe, Painter, Era, Place`);
   t.expect(/^Color/.test(t.text(".fd-chip.on")) && !/·/.test(t.text(".fd-chip.on")), `Color is not on by default: "${t.text(".fd-chip.on")}"`);
   const caps = feedCaps(t), pct = caps.map(c => +((c.match(/(\d+)%/) || [])[1] || NaN));
-  t.expect(caps.length >= 6 && caps.every(c => /^Close palette · \d+%$/.test(c)), `captions don't say why in plain words: ${caps.slice(0, 4)}`);
-  t.expect(pct.every((p, k) => k === 0 || p <= pct[k - 1]), `not closest first: ${pct}`);
+  t.expect(t.$$(".fd-tile[data-fk]").length >= 6 && caps.every(c => !c), `tiles carry only painter and year, no caption line: ${caps.slice(0, 4)}`);
   // the first tile is exactly what the page's own "More like this" would rank first
   const want = t.ev(`glSimilarPal(twPal(twQuery(glTwCols(glPoolDecode(glDetailNow(12).pl), glPal(12)), { self: 12 })), 1, { exclude: 12, pairs: false, noEra: true }).list[0].i`);
   t.expect(t.ev(`FD_CACHE.get("12|color|overall|0").items[0].j`) === want, "the first tile is not the closest painting by overall palette");
@@ -4438,32 +4659,32 @@ scenario("paintings", "Keep exploring: each chip re-ranks, the first tile is the
   // Era: nearest in year first: same year, then 1 yr earlier / later ...
   await t.click(".fd-chip[data-fc=era]", { wait: 300 });
   await t.waitFor(() => t.text(".fd-chip.on") === "Era" && t.$(".fd-tile[data-fk='0'] .fd-cap") && !t.$(".fd-tile.sk") ? true : null, 10000, "the Era ranking");
-  const gaps = feedCaps(t).map(c => c === "Same year" ? 0 : +((c.match(/(\d+) yrs? (earlier|later)/) || [])[1] || NaN));
-  t.expect(gaps.length >= 6 && gaps.every((g, k) => g >= 0 && (k === 0 || g >= gaps[k - 1])), `Era is not nearest in year first: ${feedCaps(t).slice(0, 8)}`);
+  const yrs = t.$$(".fd-tile[data-fk] .fd-by").map(e => +((t.text(e).match(/(\d{4})\s*$/) || [])[1] || NaN)), y0 = yrs[0], gaps = yrs.map(y => Math.abs(y - y0));
+  t.expect(gaps.length >= 6 && gaps.slice(0, 8).every(g => g <= 25), `Era does not start with nearby years: ${yrs.slice(0, 8)}`);
   // Painter: the same painter first
   await t.click(".fd-chip[data-fc=painter]", { wait: 300 });
-  await t.waitFor(() => t.text(".fd-chip.on") === "Painter" && /^Also /.test(t.text(".fd-tile[data-fk='0'] .fd-cap")) ? true : null, 20000, "the Painter ranking (its facets load first)");
+  await t.waitFor(() => t.text(".fd-chip.on") === "Painter" && /Same painter first/.test(t.text(".fd-lead")) && t.$(".fd-tile[data-fk='0']") && !t.$(".fd-tile.sk") ? true : null, 20000, "the Painter ranking (its facets load first)");
   t.expect(/Same painter first/.test(t.text(".fd-lead")), `the Painter lead line reads "${t.text(".fd-lead")}"`);
   // Place: the same country first, nearest in time
   await t.click(".fd-chip[data-fc=place]", { wait: 300 });
-  await t.waitFor(() => t.text(".fd-chip.on") === "Place" && / · /.test(t.text(".fd-tile[data-fk='0'] .fd-cap")) ? true : null, 20000, "the Place ranking");
-  const country = t.text(".fd-tile[data-fk='0'] .fd-cap").split(" · ")[0];
-  t.expect(feedCaps(t).slice(0, 4).every(c => c.startsWith(country)), `Place doesn't lead with the same country: ${feedCaps(t).slice(0, 4)}`);
+  await t.waitFor(() => t.text(".fd-chip.on") === "Place" && t.ev(`!!FD_CACHE.get("12|place|overall|0")`) && t.$(".fd-tile[data-fk='0']") && !t.$(".fd-tile.sk") ? true : null, 20000, "the Place ranking");
+  const placeCaps = t.ev(`FD_CACHE.get("12|place|overall|0").items.slice(0, 4).map(x => x.cap)`), country = placeCaps[0].split(" · ")[0];   // the tiles show only painter and year; the ranking still carries the country
+  t.expect(placeCaps.every(c => c.startsWith(country)), `Place doesn't lead with the same country: ${placeCaps}`);
   // Color's "by…" sheet: Mood re-ranks (the caption speaks of mood), and the chip says which
   await t.click(".fd-chip[data-fc=color]", { wait: 300 });
   t.expect(/^Color/.test(t.text(".fd-chip.on")), "Color didn't come back on");
-  await t.click(".fd-chip.on", { wait: 500 });
-  const sheet = await t.waitFor(".fd-sheet", 5000, "the by… sheet");
-  t.expect(/Overall palette/.test(t.text(sheet)) && /Mood/.test(t.text(sheet)) && /One color/.test(t.text(sheet)), "the by… sheet doesn't list the metrics");
+  await openSettingsChip(t, 500);   // the active chip tapped again: its Settings, with the match-by choices in them
+  const sheet = await t.waitFor(".fs-sheet", 5000, "the Color Settings sheet");
+  t.expect(/Overall palette/.test(t.text(sheet)) && /Mood/.test(t.text(sheet)) && /One color/.test(t.text(sheet)), "the Color Settings don't list the metrics");
   await t.click(sheet.querySelector("[data-m=mood]"), { wait: 400 });
-  await t.waitFor(() => /mood$/.test(t.text(".fd-tile[data-fk='0'] .fd-cap")) ? true : null, 20000, "the Mood ranking");
+  await t.waitFor(() => t.ev(`FD_LAST.metric`) === "mood" && t.$(".fd-tile[data-fk='0']") && !t.$(".fd-tile.sk") ? true : null, 20000, "the Mood ranking");
   t.expect(/^Color · Mood/.test(t.text(".fd-chip.on")), `the chip doesn't name Mood: "${t.text(".fd-chip.on")}"`);
   // a painting with no year: Era is disabled with a plain reason (and the feed shows color instead of nothing)
   const idx = t.ev(`(() => { for (let j = 300; j < GAL.n; j++) if (GAL.year[j] === GL_UNDATED) return j; return -1; })()`);
   t.expect(idx > 0, "found no undated painting");
   await t.open("#/gallery/" + idx, { settle: 600 });
-  t.ev(`Object.assign(FD_ST, { chip: "era", metric: "overall", color: 0 })`);
-  await feedScroll(t);
+  await feedPick(t, "color");
+  await t.click(".fd-chip[data-fc=era]", { wait: 300 });
   const era = t.$(".fd-chip[data-fc=era]");
   t.expect(era.getAttribute("aria-disabled") === "true", "Era isn't disabled on a painting with no year");
   t.expect(/^Color/.test(t.text(".fd-chip.on")) && /no year/i.test(t.text(".fd-lead")), `no plain reason or fallback: on "${t.text(".fd-chip.on")}", lead "${t.text(".fd-lead")}"`);
@@ -4472,17 +4693,22 @@ scenario("paintings", "Keep exploring: a tile opens its painting with the chip s
   await feedOpen(t, 12, "era");
   await t.waitFor(() => t.text(".fd-chip.on") === "Era" && !t.$(".fd-tile.sk") ? true : null, 10000, "Era");
   for (let n = 0; n < 7; n++) { t.w.scrollBy(0, 700); await t.sleep(250); }   // deep enough that more than one page has loaded
-  const tile = t.$$(".fd-tile[data-fk]").find(e => +e.dataset.fk >= 10);
+  let tile = t.$$(".fd-tile[data-fk]").find(e => +e.dataset.fk >= 10);
   t.expect(tile, "no tile past the first page to tap");
   tile.scrollIntoView({ block: "center" }); await t.sleep(500);
-  const k = tile.dataset.fk, y0 = tile.getBoundingClientRect().top, hash0 = TRL.hash(t), sc0 = t.w.scrollY;
+  const k = tile.dataset.fk;
+  for (let n = 0; n < 12 && !(tile = t.$(`.fd-tile[data-fk='${k}']`)); n++) { await t.sleep(300); await t.tick(); }   // the feed redraws its window on the frame after a scroll: hold the live tile, not the one first found
+  t.expect(tile, `tile ${k} was unloaded after scrolling to it`);
+  const y0 = tile.getBoundingClientRect().top, hash0 = TRL.hash(t), sc0 = t.w.scrollY;
   t.expect(+k >= 10, `expected to be deep in the feed, at tile ${k}`);
   await t.click(tile, { wait: 900 });
   await TRL.atHash(t, /^#\/gallery\/\d+$/, "the tapped painting's page");
   t.expect(TRL.hash(t) !== hash0, "the tap didn't open another painting");
   t.expect(t.w.scrollY < 40, `the new page isn't at the top (scrollY ${t.w.scrollY})`);
+  await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre)") ? true : null, 25000, "the real chip row");
   await feedScroll(t);
-  t.expect(t.text(".fd-chip.on") === "Era", `the chip didn't stay on Era: "${t.text(".fd-chip.on")}"`);
+  t.expect(/^Color/.test(t.text(".fd-chip.on")), `a painting opened from a feed tile should start on Color (its closest palettes), not "${t.text(".fd-chip.on")}"`);
+  await t.click(".fd-chip[data-fc=era]", { wait: 300 });   // so Back has a different tab to restore
   // Back: the same painting, the same tile, at the same height on the screen
   await t.click(TRL.screenBack(t), { wait: 600 });
   await TRL.atHash(t, new RegExp("^" + hash0.replace(/[#/]/g, "\\$&") + "$"), "the previous painting");
@@ -4491,85 +4717,294 @@ scenario("paintings", "Keep exploring: a tile opens its painting with the chip s
   const y1 = t.$(`.fd-tile[data-fk='${k}']`).getBoundingClientRect().top;
   t.expect(Math.abs(y1 - y0) <= 4, `Back put the tile at ${Math.round(y1)}px, it was at ${Math.round(y0)}px (scroll ${Math.round(sc0)} -> ${Math.round(t.w.scrollY)})`);
   t.expect(t.text(".fd-chip.on") === "Era", "Back lost the chip");
+  t.expect(t.$("[data-gl-about]").hidden, "Back should land on the Era tab, with the Overview hidden");
 });
-scenario("paintings", "Keep exploring: the end of the feed says so, and a picture that fails to load is a designed state, not a hole", async t => {
+// painting A -> a tile on its Vibe tab (B) -> a tile on B's Color tab (C), then Back three times: each landing is the same page, the same tab, the same tile
+scenario("paintings", "trail: painting then a Look tile then a Color tile then Back to each page with its tab and exact tile", async t => {
+  await feedOpen(t, 12, "vibe");
+  await t.waitFor(() => t.text(".fd-chip.on") === "Look" && !t.$(".fd-tile.sk") && t.$(".fd-tile[data-fk]") ? true : null, 15000, "the Look feed");
+  const hashA = TRL.hash(t);
+  const pickTile = async () => {
+    await t.sleep(1500);
+    t.w.scrollTo(0, feedTop(t) - 150); t.w.dispatchEvent(new t.w.Event("scroll")); await t.tick(); await t.sleep(900); await t.tick();
+    const findTile = () => t.$$(".fd-tile[data-fk]").find(e => +e.dataset.fk >= 1 && e.getBoundingClientRect().top > 160 && e.getBoundingClientRect().bottom < t.w.innerHeight - 60);
+    for (let n = 0; n < 12 && !findTile(); n++) { await t.sleep(400); await t.tick(); }   // the feed draws its window on the next frame after a scroll
+    const tile = findTile();
+    t.expect(tile, "no tile to tap on " + TRL.hash(t) + ": " + t.text(".fd-chip.on") + " " + t.$$(".fd-tile[data-fk]").length + " tiles " + t.$$(".fd-tile[data-fk]").map(e => e.dataset.fk + "@" + Math.round(e.getBoundingClientRect().top)) + ", scroll " + t.w.scrollY + ", grid " + t.$(".fd-grid").style.height);
+    tile.scrollIntoView({ block: "center" }); await t.sleep(400);
+    return { k: tile.dataset.fk, y: tile.getBoundingClientRect().top, tile };
+  };
+  const a = await pickTile();
+  await t.click(`.fd-tile[data-fk="${a.k}"]`, { wait: 900 });
+  await TRL.atHash(t, /^#\/gallery\/\d+$/, "painting B");
+  const hashB = TRL.hash(t); t.expect(hashB !== hashA, "the tap didn't open another painting");
+  await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre)") ? true : null, 25000, "B's chip row");
+  t.expect(/^Color/.test(t.text(".fd-chip.on")), "B should start on Color");
+  await feedScroll(t);
+  const b = await pickTile();
+  await t.click(`.fd-tile[data-fk="${b.k}"]`, { wait: 900 });
+  await TRL.atHash(t, /^#\/gallery\/\d+$/, "painting C");
+  t.expect(TRL.hash(t) !== hashB && TRL.hash(t) !== hashA, "C is not a new painting");
+  await t.click(TRL.screenBack(t), { wait: 700 });
+  await TRL.atHash(t, new RegExp("^" + hashB.replace(/[#/]/g, "\\$&") + "$"), "back on B");
+  await t.waitFor(() => t.$(`.fd-tile[data-fk='${b.k}']`), 15000, "B's tile");
+  await t.sleep(2000);
+  t.expect(/^Color/.test(t.text(".fd-chip.on")), "Back to B lost its tab");
+  t.expect(Math.abs(t.$(`.fd-tile[data-fk='${b.k}']`).getBoundingClientRect().top - b.y) <= 6, "Back to B: the tile moved");
+  await t.click(TRL.screenBack(t), { wait: 700 });
+  await TRL.atHash(t, new RegExp("^" + hashA.replace(/[#/]/g, "\\$&") + "$"), "back on A");
+  await t.waitFor(() => t.$(`.fd-tile[data-fk='${a.k}']`), 15000, "A's tile");
+  await t.sleep(2000);
+  t.expect(t.text(".fd-chip.on") === "Look", `Back to A lost its tab: "${t.text(".fd-chip.on")}"`);
+  t.expect(Math.abs(t.$(`.fd-tile[data-fk='${a.k}']`).getBoundingClientRect().top - a.y) <= 6, "Back to A: the tile moved");
+});
+scenario("paintings", "Keep exploring: the feed never ends and a picture that fails to load is a designed state not a hole", async t => {
   await feedOpen(t, 12, "era");
   await t.waitFor(() => t.text(".fd-chip.on") === "Era" && !t.$(".fd-tile.sk") ? true : null, 10000, "Era");
-  // a picture that won't load: the tile keeps its box, says so, and still opens
+  // a picture that won't load is taken out of the list (never a hole, never the words "Picture unavailable")
   const img = t.$(".fd-tile[data-fk='0'] img");
-  if (img) { img.dataset.retry = "1"; img.src = "/__no_such_picture__.jpg"; await t.waitFor(() => t.$(".fd-tile[data-fk='0'] .fd-err") ? true : null, 8000, "the picture-unavailable state"); }
-  t.expect(t.$(".fd-tile[data-fk='0']") && t.$(".fd-tile[data-fk='0'] .fd-cap"), "a failed picture removed the tile");
-  // page to the end (300 items = 13 pages)
-  const end = await t.waitFor(() => { t.w.scrollTo(0, 1e7); return t.$(".fd-end"); }, 60000, "the end-of-feed line", 30000);
-  t.expect(end && /That is everything close to this one\./.test(t.text(end)), "the end-of-feed line never appeared");
-  t.expect(t.$("[data-fdup]"), "the end of the feed has no way back up");
+  if (img) { img.dataset.retry = "1"; img.src = "/__no_such_picture__.jpg"; await t.sleep(1500); await t.tick(); t.expect(!/Picture unavailable/.test(t.d.body.textContent), "the words Picture unavailable are on screen"); }
+  // the list never ends (David, 2026-10-25): the bottom keeps adding tiles well past the first 300, and the top of it is still the closest
+  const eraList = `(FD_CACHE.get([...FD_CACHE.keys()].find(k => k.startsWith("12|era|"))) || { items: [] })`, len = () => t.ev(eraList + `.items.length`);
+  await t.waitFor(() => len() > 100 ? true : null, 20000, "the Era list in the cache");
+  const n0 = len();
+  await t.waitFor(() => { t.w.scrollTo(0, 1e7); return len() > n0 + 60 ? true : null; }, 60000, "more tiles after the bottom was reached", 30000);
+  t.expect(len() > 300, `the list stopped at ${len()}`);
+  t.expect(!t.$(".fd-end"), "an end line appeared while the archive still has paintings");
+  const gaps = t.ev(eraList + `.items.slice(0, 40).map(x => Math.abs(GAL.year[x.j] - GAL.year[12]))`);
+  t.expect(gaps.slice(0, 20).every((g, k, a) => k === 0 || g >= a[k - 1] - 1), `the top of the Era list is not closest-first: ${gaps.slice(0, 20)}`);
 });
-// David, 2026-10-24: "Keep exploring is so far down below it takes forever to get there" -- one tap from the top.
-scenario("paintings", "a painting page has a Keep exploring jump near the top; one tap brings the feed into view", async t => {
+// David, 2026-10-25: the painting page is the picture, the title, then the chip row (Overview . Color . Vibe . Painter . Era . Place); the old Explore pill is gone
+scenario("paintings", "a painting page: picture, title, then the chip row right under them; a cold open shows Overview, with every section of the page in it and no Explore pill", async t => {
   await t.open("#/gallery/12", { settle: 800 });
-  await t.waitFor("[data-glfeedjump]", 15000, "the Keep exploring jump on the painting page");
-  const before = t.ev("document.querySelector('[data-glfeed]').getBoundingClientRect().top"), vh = t.ev("innerHeight");
-  t.expect(before > vh, `the feed is already on screen before the tap (top ${before}, window ${vh})`);
-  // headless Chrome does not run smooth scrolls to the end, so watch what the tap asks for, then check an instant jump lands
-  // the Explore pill is on the picture, on the first screen, with no scrolling
-  const pill = t.ev("(() => { const b = [...document.querySelectorAll('[data-glfeedjump]')].find(x => x.offsetWidth); if (!b) return null; const q = b.getBoundingClientRect(); return { t: q.top, b: q.bottom, txt: b.textContent.trim(), svg: !!b.querySelector('svg') }; })()");
-  t.expect(pill && pill.t >= 0 && pill.b <= vh && pill.txt === "Explore" && pill.svg, `no Explore pill on the first screen (${JSON.stringify(pill)})`);
-  t.ev("window.__st = null; const o = window.scrollTo; window.scrollTo = function (a, b) { if (typeof a === 'object') { window.__st = a; return o.call(window, Object.assign({}, a, { behavior: 'auto' })); } return o.call(window, a, b); };");
-  await t.click("[data-glfeedjump]", { wait: 900 });
-  const st = t.ev("window.__st");
-  t.expect(st && st.top > 300, `the Explore pill did not ask to scroll to the feed (${JSON.stringify(st)})`);
-  // after the feed has built, the feed's heading sits just under the top bar and its tiles fill the screen
-  await t.sleep(1500);
-  const after = t.ev("document.querySelector('[data-glfeed]').getBoundingClientRect().top");
-  t.expect(after < 130 && after > -20, `the feed did not land under the top bar (top ${after}, window ${vh}, ${JSON.stringify(st)} ${JSON.stringify(t.ev("({ sy: scrollY, dh: document.documentElement.scrollHeight, mh: document.querySelector('[data-glfeed]').style.minHeight, h: document.querySelector('[data-glfeed]').offsetHeight, kids: document.querySelector('[data-glfeed]').children.length, cs: (c => [c.minHeight, c.height, c.maxHeight, c.contain, c.contentVisibility, c.position, c.transitionProperty, c.transitionDuration, document.querySelector('[data-glfeed]').getAnimations().length].join('|'))(getComputedStyle(document.querySelector('[data-glfeed]'))), cls: document.querySelector('[data-glfeed]').className, same: document.querySelectorAll('[data-glfeed]').length, disp: getComputedStyle(document.querySelector('[data-glfeed]')).display, par: document.querySelector('[data-glfeed]').parentElement.className })"))})`);
+  await t.waitFor("[data-glfeed] .fd-chips", 15000, "the chip row under the title");
+  t.expect(!t.$("[data-glfeedjump]"), "the painting page still has the old Explore pill");
+  const r = t.ev("(() => { const q = document.querySelector('[data-glfeed] .fd-chips').getBoundingClientRect(), h = document.querySelector('.p-title').getBoundingClientRect(); return { t: q.top, b: q.bottom, h: innerHeight, tb: h.bottom }; })()");
+  t.expect(r.t >= r.tb && r.b < r.h, `the chip row is not on the first screen under the title (${JSON.stringify(r)})`);
+  t.expect(t.text(".fd-chip.on") === "Overview" && !t.$("[data-gl-about]").hidden, "a cold open should start on Overview with the page's sections showing");
+  for (const sel of ["[data-glswatches]", "[data-glroles]", "[data-glsim]", "[data-glquiz]", ".srcs"]) t.expect(t.$("[data-gl-about] " + sel), "Overview lost " + sel);
+  await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre)") ? true : null, 25000, "the real chip row");
+  t.expect(t.$$(".fd-chip").map(b => t.text(b)).join() === "Overview,Color,Look,Painter,Era,Place", "the chips are not Overview, Color, Vibe, Painter, Era, Place");
+  t.expect(!t.$("[data-glfeed] .fd-tile"), "the feed's tiles show while Overview is on");
 });
-scenario("pages", "a color page shows Explore on first paint, keeps it in the pinned header at every scroll depth, and both ask to scroll to the feed", async t => {
+scenario("pages", "a color page puts the chip row (About, Paintings, ...) right under the cover on first paint, with no Explore pill, and About shows the article", async t => {
   await t.open("#/color/teal", { settle: 900 });
-  await t.waitFor("[data-rpfeed]", 15000, "the feed's host on the color page");
-  const btn = t.$("[data-rp-explore]");
-  t.expect(btn, "the cover has no Explore button");
-  const r = t.ev("(() => { const q = document.querySelector('[data-rp-explore]').getBoundingClientRect(); return { t: q.top, b: q.bottom, h: innerHeight, w: q.width }; })()");
-  t.expect(r.t >= 0 && r.b <= r.h && r.w > 60, `the cover's Explore button is not fully on the first screen (${JSON.stringify(r)})`);
-  t.expect(!/[↓→]/.test(t.text(btn)) && btn.querySelector("svg"), "the cover Explore button should use an svg glyph, not a text arrow");
-  // headless Chrome does not run smooth scrolls to the end: record the scroll the button asks for
-  t.ev("window.__st = null; const o = window.scrollTo; window.scrollTo = function (a, b) { if (typeof a === 'object') { window.__st = a; return o.call(window, Object.assign({}, a, { behavior: 'auto' })); } return o.call(window, a, b); };");
-  t.ev("document.querySelector('[data-rp-explore]').click()");
-  await t.sleep(500);
-  let st = t.ev("window.__st");
-  t.expect(st && st.top > 300, `the cover Explore button did not ask to scroll down to the feed (${JSON.stringify(st)})`);
-  // the pinned header is on screen (not transformed away) at three depths, Explore visible even when slim
-  for (const y of [1000, 1800, 1200]) {
-    t.w.scrollTo(0, y); await t.sleep(500);
-    await t.waitFor(() => t.ev("document.querySelector('body > .rp-bar').classList.contains('on')") || null, 4000, `the pinned header at scroll ${y}`).catch(() => null);
-    const bar = t.ev("(() => { const b = document.querySelector('body > .rp-bar'), r = b.getBoundingClientRect(), e = b.querySelector('[data-rp-jump=explore]'), er = e.getBoundingClientRect(); return { sy: scrollY, hb: document.querySelector('.cp-hero').getBoundingClientRect().bottom, on: b.classList.contains('on'), top: r.top, bottom: r.bottom, ex: !e.hidden && er.width > 30 && er.right <= innerWidth + 1, eo: getComputedStyle(e).opacity }; })()");
-    t.expect(bar.on && bar.top >= -1 && bar.bottom > 20, `the pinned header is not on screen at scroll ${y} (${JSON.stringify(bar)})`);
-    t.expect(bar.ex && bar.eo === "1", `the header's Explore button is missing or faded at scroll ${y} (${JSON.stringify(bar)})`);
-  }
-  t.w.scrollTo(0, 1000); await t.sleep(600);
-  t.ev("window.__st = null; document.querySelector('body > .rp-bar [data-rp-jump=explore]').click()");
-  await t.sleep(500);
-  st = t.ev("window.__st"); const feedTop = t.ev("document.querySelector('[data-rpfeed]').getBoundingClientRect().top"), vh = t.ev("innerHeight");
-  t.expect(st && st.top > 700, `the header Explore button did not ask to scroll down to the feed (${JSON.stringify(st)})`);
-  t.expect(feedTop < vh, `the feed is still below the screen after the header button (top ${feedTop}, window ${vh})`);
-  await t.sleep(1800);
-  const landed = t.ev("document.querySelector('[data-rpfeed]').getBoundingClientRect().top");
-  t.expect(landed < 130 && landed > -20, `the feed did not land just under the pinned header (top ${landed}; ${JSON.stringify(t.ev("({ mh: document.querySelector('[data-rpfeed]').style.minHeight, h: document.querySelector('[data-rpfeed]').offsetHeight, sy: scrollY, dh: document.documentElement.scrollHeight, ih: innerHeight, bar: document.querySelector('body > .rp-bar').offsetHeight })"))})`);
+  await t.waitFor("[data-rpfeed] .fd-chips", 15000, "the chip row under the cover");
+  t.expect(!t.$("[data-rp-explore]"), "the cover still has the old Explore pill");
+  const r = t.ev("(() => { const q = document.querySelector('[data-rpfeed] .fd-chips').getBoundingClientRect(); return { t: q.top, b: q.bottom, h: innerHeight }; })()");
+  t.expect(r.t > 100 && r.b < r.h - 40, `the chip row is not on the first screen under the cover (${JSON.stringify(r)})`);
+  t.expect(t.text(".fd-chip.on") === "Overview" && !t.$("[data-rp-about]").hidden, "a cold open should start on About with the article showing");
+  const pinned = t.ev("(() => { const b = document.querySelector('body > .rp-bar'); return b ? [...b.querySelectorAll('[data-rp-jump]')].every(x => x.hidden) : true; })()");
+  t.expect(pinned, "the pinned header still shows its own jump chips and Explore above the page's chip row");
 });
-scenario("pages", "an in-between color's cover also has Explore on first paint", async t => {
+scenario("pages", "an in-between color's page also has the chip row on first paint", async t => {
   await t.open("#/color/teal", { settle: 300 });
   const sw = t.d.createElement("button"); sw.dataset.swatch = "#292C10"; sw.style.cssText = "position:fixed;left:150px;top:300px;width:60px;height:60px;z-index:9999";
   t.d.body.appendChild(sw);
   await t.click(sw, { wait: 400 }); sw.remove();
   await t.waitFor(() => /Your color/.test(H.chip(t)), 10000, "a 'Your color' page for #292C10");
-  const r = t.ev("(() => { const b = document.querySelector('[data-rp-explore]'); if (!b) return null; const q = b.getBoundingClientRect(); return { t: q.top, b: q.bottom, h: innerHeight }; })()");
-  t.expect(r && r.t >= 0 && r.b <= r.h, `the in-between cover has no Explore button on the first screen (${JSON.stringify(r)})`);
+  await t.waitFor("[data-rpfeed] .fd-chips", 15000, "the chip row under the in-between cover");
+  t.expect(!t.$("[data-rp-explore]"), "the in-between cover still has the old Explore pill");
+  // its cover (the two-up band, the save line, the runner-up names) is taller than a plain color's, so the chips may sit below the first
+  // screen; what matters is that no article precedes them: the sections live inside the feed's About tab
+  t.expect(t.$("[data-rpfeed] [data-ar-body]") && t.$("[data-rpfeed] .rp-paint"), "the article's sections should sit inside the feed's About tab, after the chip row");
 });
 
+scenario("paintings", "desktop 1440x900: Keep exploring shows tiles on a painting page (under the title) and a color page (Paintings tab)", async t => {
+  const probe = async (hash, host) => {
+    await t.open(hash, { settle: 900, size: [1440, 900] });
+    await t.waitFor(host, 15000, "the feed host on " + hash);
+    {   // both pages open on Overview (a cold open): tap the first feed chip once the real chip row is up
+      const first = host === "[data-rpfeed]" ? "paintings" : "color";
+      await t.waitFor(() => t.$(host + " .fd-bar:not(.fd-pre) .fd-chip[data-fc=" + first + "]") ? true : null, 25000, "the real chip row");
+      await t.click(".fd-chip[data-fc=" + first + "]", { wait: 400 });
+    }
+    t.w.scrollTo(0, 1e7); await t.sleep(900); t.w.scrollTo(0, 1e7); await t.sleep(600);
+    const info = t.ev(`(() => { const h = document.querySelector(${JSON.stringify(host)}); if (!h) return 'no host'; const r = h.getBoundingClientRect(); return JSON.stringify({ top: Math.round(r.top), w: Math.round(r.width), h: Math.round(r.height), tiles: h.querySelectorAll('.fd-tile[data-fk]').length, chips: h.querySelectorAll('.fd-chip').length, gh: h.querySelector('.fd-grid') && h.querySelector('.fd-grid').style.height, gw: h.querySelector('.fd-grid') && h.querySelector('.fd-grid').clientWidth, st: (h.querySelector('.fd-state')||{}).innerHTML, lead: (h.querySelector('.fd-lead')||{}).textContent, kids: h.querySelector('.fd-grid') && h.querySelector('.fd-grid').children.length, sy: scrollY, dh: document.documentElement.scrollHeight }); })()`);
+    return JSON.parse(info);
+  };
+  const p = await probe("#/gallery/12", "[data-glfeed]");
+  t.expect(p.tiles >= 6 && p.w > 400, "no feed tiles on the desktop painting page: " + JSON.stringify(p));
+  const c = await probe("#/color/teal", "[data-rpfeed]");
+  t.expect(c.tiles >= 4 && c.w > 400, "no feed tiles on the desktop color page: " + JSON.stringify(c));
+});
+// David, 2026-10-25 (desktop): "scrolling in the painting page Explore gets stuck and refuses to scroll... it doesn't scroll when your mouse is on
+// a painting." A plain wheel over a tile / the hero / the bar must never be preventDefault'ed (only ctrl+wheel, the pinch, may be), nothing may
+// sit over the tiles, and the feed must keep growing as the page is scrolled to its end (more tiles laid out, or stand-ins, before the bar stops).
+scenario("paintings", "desktop 1440x900: the wheel scrolls over a tile and the picture; the feed keeps growing at the bottom", async t => {
+  await t.open("#/gallery/12", { settle: 900, size: [1440, 900] });
+  await t.waitFor("[data-glfeed] .fd-bar:not(.fd-pre) .fd-chip[data-fc=color]", 25000, "the real chip row");
+  await t.click(".fd-chip[data-fc=color]", { wait: 600 });
+  await t.waitFor(() => t.$("[data-glfeed] .fd-tile[data-fk]") ? true : null, 15000, "feed tiles");
+  const wheel = (el, init) => { const r = el.getBoundingClientRect(), ev = new t.w.WheelEvent("wheel", Object.assign({ bubbles: true, cancelable: true, clientX: r.left + r.width / 2, clientY: Math.max(5, Math.min(t.w.innerHeight - 5, r.top + r.height / 2)), view: t.w }, init)); el.dispatchEvent(ev); return ev.defaultPrevented; };
+  const tile = t.$("[data-glfeed] .fd-tile[data-fk]"), hero = t.$(".gl-hero img") || t.$(".gl-hero"), bar = t.$("[data-glfeed] .fd-bar");
+  for (const [label, el] of [["a tile", tile], ["the hero picture", hero], ["the sticky bar", bar]]) {
+    if (!el) continue;
+    for (const init of [{ deltaY: 100 }, { deltaY: 4.5, deltaX: 0.5 }, { deltaY: 3, deltaMode: 1 }])
+      t.expect(!wheel(el, init), `a plain wheel over ${label} was preventDefault'ed (${JSON.stringify(init)}): the page would not scroll`);
+  }
+  // a pinch burst (ctrl+wheel) must not leave the grid in a state that swallows the wheel that follows it
+  wheel(tile, { ctrlKey: true, deltaY: -3 }); wheel(tile, { ctrlKey: true, deltaY: -2 }); await t.sleep(600);
+  t.expect(!wheel(tile, { deltaY: 100 }), "a plain wheel after a pinch burst was preventDefault'ed");
+  t.expect(!t.$(".tlg-back"), "a pull-down backdrop layer (.tlg-back) is left mounted over the page");
+  t.w.scrollTo(0, 1500); await t.sleep(300);
+  const hit = t.ev(`(() => { const e = document.querySelector('[data-glfeed] .fd-tile[data-fk]'); if (!e) return 'none'; const r = e.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2; if (y < 0 || y > innerHeight) return 'offscreen'; const h = document.elementFromPoint(x, y); return h && e.contains(h) ? 'ok' : 'covered by ' + (h && h.tagName + '.' + h.className); })()`);
+  t.expect(hit === "ok" || hit === "offscreen", "a feed tile is covered at its center: " + hit);
+  // scroll to the very end again and again (each time a real scroll event, as a wheel at the end would give): the laid-out height (tiles, or
+  // stand-ins) must grow within a second, never stop at a wall; a scrollbar that ends is the page that "refuses to scroll"
+  const dh = () => t.ev("document.documentElement.scrollHeight"); let grew = 0, last = await dh(); const seq = [];
+  for (let n = 0; n < 6; n++) {
+    t.w.scrollTo(0, last); t.w.dispatchEvent(new t.w.Event("scroll"));
+    for (let k = 0; k < 12; k++) { await t.sleep(100); if ((await dh()) > last + 200) break; }
+    const now = await dh(); if (now > last + 200) grew++; seq.push(last + ">" + now); last = Math.min(now, 3e6);
+  }
+  t.expect(grew >= 5, `the feed stopped growing at the bottom: it grew on ${grew} of 6 tries to the end (${seq.join(" ")})`);
+});
+// A scripted two-finger pinch on a grid inside the page: fires real touch events and samples the grid's transform each frame
+// (the harness clock is virtual, so the fingers are moved from here, one step at a time, never by a timer inside the page)
+const PINCH_JS = `window.__pf = (sel, type, d) => { const g = document.querySelector(sel), cx = innerWidth / 2, cy = Math.min(innerHeight / 2, 380), tgt = document.elementFromPoint(cx, cy) || g;
+  const ts = type === "touchend" ? [] : [0, 1].map(i => ({ identifier: i, target: tgt, clientX: cx + (i ? 1 : -1) * d / 2, clientY: cy }));
+  const e = new Event(type, { bubbles: true, cancelable: true }); e.touches = ts; e.targetTouches = ts; e.changedTouches = ts; tgt.dispatchEvent(e); return g.style.transform; }; 1`;
+async function pinchRun(t, sel, d0, d1, steps) {
+  t.ev(PINCH_JS); t.ev(`__pf(${JSON.stringify(sel)}, "touchstart", ${d0})`);
+  for (let k = 1; k <= steps; k++) { t.ev(`__pf(${JSON.stringify(sel)}, "touchmove", ${d0 + (d1 - d0) * k / steps})`); await t.tick(); await t.sleep(120); await t.tick(); }
+  t.ev(`__pf(${JSON.stringify(sel)}, "touchend", 0)`);
+}
+scenario("paintings", "Keep exploring: a Vibe chip re-ranks by the picture model and says plainly when there is none", async t => {
+  await feedOpen(t, 12, "color");
+  const chips = t.$$(".fd-chip").map(e => t.text(e));
+  t.expect(chips.map(c => c.replace(/ ·.*/, "")).join("|") === "Overview|Color|Look|Painter|Era|Place", "chips are not Overview, Color, Vibe, Painter, Era, Place: " + chips.join("|"));
+  t.ev(`try { localStorage.removeItem("colorhub-vibe-explained"); } catch (e) {} 1`);
+  await t.click(".fd-chip[data-fc='vibe']", { wait: 300 });
+  await t.waitFor(() => t.text(".fd-chip.on") === "Look" && !t.$(".fd-tile.sk") && t.$(".fd-tile[data-fk]") ? true : null, 10000, "the Look feed");
+  t.expect(/picture model finds them/.test(t.text(".fd-lead")), "no one-line Vibe explainer: " + t.text(".fd-lead"));
+  const want = await t.ev("vibeNeighbors(12, 1).then(r => r[0].i)");
+  const first = t.ev("(() => { const el = document.querySelector('.fd-tile[data-fk=\"0\"]'); return el ? el.getAttribute('aria-label') : ''; })()");
+  t.expect(want >= 0 && first, "no first vibe tile");
+  const title = await t.waitFor(() => t.ev(`(() => { const d = glDetailNow(${want}); return d ? d.t : null; })()`), 6000, "the first neighbor's details");
+  t.expect(first.indexOf(title) === 0, `the first Vibe tile is not the model's nearest (${first} vs ${title})`);
+  // the reader finds nothing: the chip goes dim with a plain reason
+  await t.open("#/gallery/40", { settle: 300 });
+  await t.waitFor("[data-glfeed]", 15000, "feed host");
+  t.ev("window.vibeNeighbors = () => Promise.resolve([]); 1");
+  await feedPick(t, "color");
+  await t.waitFor(() => t.$(".fd-chip[data-fc='vibe'].dis") ? true : null, 8000, "the Look chip dimmed when the reader returns nothing");
+  t.ev(`document.querySelector(".fd-chip[data-fc='vibe']").click(); 1`); await t.sleep(300);
+  t.expect(/picture model/.test(t.text(".fd-lead")) && t.$(".fd-lead.why"), "a dim Look chip gives no reason");
+});
+scenario("paintings", "Keep exploring: a pinch zooms the feed live and settles on a column count and remembers it", async t => {
+  await feedOpen(t, 12, "color");
+  t.ev(`try { localStorage.removeItem("colorhub-feed-view"); } catch (e) {} 1`);
+  const c0 = t.ev("new Set([...document.querySelectorAll('.fd-grid .fd-tile')].map(e => e.style.left)).size");
+  t.ev("GZ_DBG.scales.length = 0; 1");
+  await pinchRun(t, ".fd-grid", 200, 90, 10);
+  const sc = t.ev("GZ_DBG.scales");
+  t.expect(sc.length >= 2 && new Set(sc).size >= 2 && sc[0] < 1, "the pinch showed no intermediate scales: " + JSON.stringify(sc));
+  await t.sleep(700);
+  const c1 = t.ev("new Set([...document.querySelectorAll('.fd-grid .fd-tile')].map(e => e.style.left)).size");
+  t.expect(c1 > c0 && c1 <= 6, `pinching in did not add columns (${c0} -> ${c1})`);
+  t.expect(JSON.parse(t.ev(`localStorage.getItem("colorhub-feed-view")`) || "{}").cols === c1, "the density was not remembered");
+  t.expect(t.ev("document.querySelector('.fd-grid').style.transform") === "", "the grid is left scaled after settling");
+  t.ev(`window.dispatchEvent(new KeyboardEvent("keydown", { key: "+" })); 1`); await t.sleep(500);
+  t.expect(t.ev("new Set([...document.querySelectorAll('.fd-grid .fd-tile')].map(e => e.style.left)).size") === c1 - 1, "the + key did not give one column fewer");
+  const n = t.$$(".fd-tile img").length; t.expect(n <= 120, "too many live pictures: " + n);
+});
+scenario("paintings", "the chip row is on the first screen of a painting page at 440x956 (and under the picture at 320x640), with no Explore pill", async t => {
+  for (const size of [[440, 956], [375, 812], [320, 640]]) {
+    await t.open("#/gallery/12", { settle: 800, size });
+    await t.waitFor("[data-glfeed] .fd-chips", 15000, "the chip row");
+    t.expect(!t.$("[data-glfeedjump]"), "the Explore pill is back");
+    const r = t.ev("(() => { const q = document.querySelector('[data-glfeed] .fd-chips').getBoundingClientRect(); return { t: q.top, b: q.bottom, l: q.left, w: innerWidth, h: innerHeight }; })()");
+    t.expect(r.l >= 0 && (size[0] === 320 || r.b <= r.h), "the chip row is not on the first screen at " + size + ": " + JSON.stringify(r));
+  }
+});
+// David, 2026-10-25: Settings = the active chip tapped again; Map (hero corner / top bar) follows the tab; a chip tap brings the chip row to the top
+scenario("paintings", "painting page: tapping another chip pins the chip row at the top, tapping the active one opens its Settings, and Map follows the tab", async t => {
+  await t.open("#/gallery/12", { settle: 800, size: [375, 812] });
+  await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre) .fd-chip[data-fc=color]") ? true : null, 25000, "the real chip row");
+  t.expect(!t.$(".fd-float") && !t.$("[data-fdset]"), "the old floating Settings / Map buttons are still there");
+  t.w.__specs = []; t.w.pmGo = s => { t.w.__specs.push(s); };
+  await t.click(mapBtn(t), { force: true, wait: 600 });   // on Overview: the map around this painting
+  await t.click(".fd-chip[data-fc=color]", { wait: 1200 });
+  const barTop = t.ev(`document.querySelector("[data-glfeed] .fd-bar").getBoundingClientRect().top`), topH = t.ev(`document.querySelector(".gl-page > .art-top").getBoundingClientRect().height`);
+  t.expect(Math.abs(barTop - (topH - 1)) < 6, `the chip row didn't come to the top after the tap (at ${barTop}, bar ${topH})`);
+  t.expect(t.$(".fd-chip.on .fd-tune"), "the active chip shows no Settings glyph");
+  t.expect(!t.$(".art-top .fd-mapb.in-top").hidden && getComputedStyle(t.$(".art-top .fd-mapb.in-top")).display !== "none", "the top bar has no Map once the hero has gone");
+  await t.click(mapBtn(t), { force: true, wait: 600 });
+  await t.click(".fd-chip[data-fc=era]", { wait: 600 });
+  await t.waitFor(() => t.text(".fd-chip.on") === "Era" && !t.$(".fd-tile.sk") ? true : null, 15000, "Era");
+  await t.click(mapBtn(t), { force: true, wait: 600 });
+  const sp = t.w.__specs;
+  t.expect(sp.length === 3 && sp[1] !== sp[2] && /y0=\d+&y1=\d+/.test(sp[2]) && !/y0=/.test(sp[1]), `Map doesn't follow the tab: ${JSON.stringify(sp)}`);
+  await t.click(".fd-chip.on", { wait: 700 });
+  await t.waitFor(".fs-sheet", 5000, "Settings after tapping the active chip");
+  await t.click(".fd-chip.on", { wait: 700 });
+  t.expect(!t.$(".sheet.fs-half"), "tapping the active chip again didn't close Settings");
+});
+scenario("paintings", "chip row: Overview keeps the scroll and Color opens a quick row then Settings and the top bar swaps smoothly", async t => {
+  await t.open("#/gallery/12", { settle: 800, size: [375, 812] });
+  await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre) .fd-chip[data-fc=color]") ? true : null, 25000, "the real chip row");
+  // Color: first tap = quick row, second tap = Settings (and the row leaves)
+  await t.click(".fd-chip[data-fc=color]", { wait: 1200 });
+  await t.waitFor(".fd-quick.on", 4000, "the quick row after the first Color tap");
+  t.ev(`document.querySelector(".fd-quick").style.width="200px"`); t.ev(`document.querySelector(".fd-quick").style.right="auto"`);
+  // a sideways drag inside the row scrolls it and keeps it open
+  t.ev(`(() => { const q = document.querySelector(".fd-quick"); q.scrollLeft = 0; q.scrollLeft = 60; q.dispatchEvent(new Event("scroll")); window.__ql = q.scrollLeft; })()`);
+  await t.sleep(500);
+  t.expect(t.ev(`window.__ql`) > 0 && t.$(".fd-quick.on"), "the quick row did not scroll sideways, or closed while it did");
+  t.ev(`(() => { const q = document.querySelector(".fd-quick"); q.style.width=""; q.style.right=""; })()`);
+  t.expect(t.ev(`getComputedStyle(document.querySelector(".fd-quick")).touchAction`) === "pan-x" && t.ev(`getComputedStyle(document.querySelector(".fd-quick")).overflowX`) === "auto", "the quick row is not a horizontal scroller");
+  await t.click(".fd-chip[data-fc=color]", { wait: 900 });
+  await t.waitFor(".fs-sheet", 5000, "Settings after the second Color tap");
+  t.expect(!t.$(".fd-quick.on"), "the quick row stayed open next to Settings");
+  await t.click(".fd-chip[data-fc=color]", { wait: 700 });   // Settings closes
+  t.ev("document.querySelectorAll('.scrim').forEach(s => s.click())"); await t.sleep(400);
+  // Overview keeps the scroll offset
+  t.ev("scrollTo(0, 1500)"); await t.sleep(500);
+  const y0 = t.ev("scrollY");
+  await t.click(".fd-chip[data-fc=about]", { wait: 900 });
+  const y1 = t.ev("scrollY"), mx = t.ev("document.documentElement.scrollHeight - innerHeight");
+  t.expect(Math.abs(y1 - Math.min(y0, mx)) < 3 || y1 <= mx, `Overview moved the page (${y0} -> ${y1})`);
+  t.expect(y1 > 400, `Overview threw the page to the top (${y1})`);
+  // the top bar swap is one continuous move: --fd-p rises with the scroll, no step bigger than 0.5 per 20px
+  await t.sleep(800); t.ev("scrollTo(0, 0)"); await t.sleep(300);
+  const pin = t.ev(`fdPinYOf(document.querySelector("[data-glfeed] .fd-bar"))`);
+  // every 20px the bar's swap value must equal (scroll - pin) / 60 clamped: a smooth ramp, no step
+  const bad = [];
+  for (let y = Math.max(0, pin - 100); y <= pin + 160; y += 20) {
+    t.ev(`scrollTo(0, ${y})`);
+    const want = Math.max(0, Math.min(1, (y - pin) / 60));
+    const ok = await t.waitFor(() => Math.abs((parseFloat(t.ev(`document.documentElement.style.getPropertyValue("--fd-p") || "0"`)) || 0) - want) < 0.03 && Math.abs(t.ev("scrollY") - y) < 2 ? true : null, 3000, "the swap value at " + y).catch(() => null);
+    if (!ok) bad.push(y + ":" + want.toFixed(2) + "/" + t.ev(`document.documentElement.style.getPropertyValue("--fd-p")`));
+  }
+  t.expect(!bad.length, `the top bar swap does not follow the scroll: ${bad.join(" ")}`);
+});
+scenario("pages", "color page: the cover is a compact band with Map in its corner then in the top bar and the Paintings list never ends", async t => {
+  await t.open("#/color/teal", { settle: 900, size: [375, 812] });
+  await t.waitFor("[data-rpfeed] .fd-chips", 15000, "the chip row");
+  const h = t.ev(`document.querySelector(".cp-hero").getBoundingClientRect().height`);
+  t.expect(h <= 812 * .36, `the color band takes ${Math.round(h / 8.12)}% of the screen`);
+  t.expect(t.$(".cp-hero .fd-mapb-hero"), "no Map button on the cover");
+  t.w.__specs = []; t.w.pmGo = s => { t.w.__specs.push(s); };
+  await t.waitFor(() => t.$("[data-rpfeed] .fd-bar:not(.fd-pre) .fd-chip[data-fc=paintings]") ? true : null, 25000, "the real chip row");
+  await t.click(".fd-chip[data-fc=paintings]", { wait: 1500 });
+  await t.waitFor(() => t.$$(".fd-tile[data-fk]").length >= 4 ? true : null, 20000, "tiles");
+  await t.click(mapBtn(t), { force: true, wait: 700 });
+  t.expect(t.w.__specs.length === 1 && /&c=/.test(t.w.__specs[0]), `Map on Paintings: ${JSON.stringify(t.w.__specs)}`);
+  // the list never ends: past the paintings that hold the color, the rest of the archive follows, nearest color first
+  t.w.__r = null; t.ev("fdcRankPaintings({ sub: { hex: '#00FF00', name: 'Green', tapped: null } }).then(r => { window.__r = r; })");
+  const res = await t.waitFor(() => t.w.__r, 30000, "a ranking of paintings for a rare color");
+  const n0 = res.items.length; t.expect(typeof res.next === "function" && !res.moreDone, "the Paintings ranking has no next page");
+  for (let k = 0; k < 4; k++) await res.next();
+  t.expect(res.items.length > n0 + 100 && !res.moreDone, `the list did not keep going (${n0} -> ${res.items.length})`);
+});
 // ---------- Keep exploring on a COLOR page (js/feed.js fdMount with sub = a color, mounted by js/richpage.js) ----------
 async function cfeedOpen(t, hash, chip) {
   await t.open(hash, { settle: 900 });
-  await t.waitFor("[data-rpfeed]", 15000, "the feed's host at the foot of the color page");
-  t.ev(`Object.assign(FDC_ST, { chip: ${JSON.stringify(chip || "paintings")}, metric: "overall", color: 0 })`);
+  await t.waitFor("[data-rpfeed]", 15000, "the feed's host under the color page's cover");
+  // a cold open starts on About (the article); the chip row is a placeholder until the paintings load, then real
+  await t.waitFor(() => t.$("[data-rpfeed] .fd-bar:not(.fd-pre) .fd-chip[data-fc=paintings]") ? true : null, 25000, "the real chip row");
+  await t.click(`.fd-chip[data-fc=${chip || "paintings"}]`, { wait: 300 });
   await t.waitFor(() => { const h = t.$("[data-rpfeed]"); if (h) t.w.scrollTo(0, h.getBoundingClientRect().top + t.w.scrollY - 200); return t.$$(".fd-tile[data-fk]").length >= 4 ? true : null; }, 25000, "the color feed's first tiles");
   await t.sleep(500);
 }
@@ -4579,34 +5014,86 @@ async function cfeedChip(t, chip) {
   await t.waitFor(() => t.$(`.fd-chip.on[data-fc=${chip}]`) && !t.$(".fd-tile.sk") && t.$(".fd-tile[data-fk='0'] .fd-cap") ? true : null, 25000, "the " + chip + " ranking");
   await t.sleep(300);
 }
-scenario("pages", "Keep exploring on a color page: the feed is at the very bottom, closest painting first, and the cover and the fine print are untouched", async t => {
+scenario("cfeed", "Keep exploring on a color page: the feed is the body under the cover (About first), closest painting first, and the cover and the fine print are untouched", async t => {
   await cfeedOpen(t, "#/color/teal");
   const feed = t.$("[data-rpfeed]");
-  t.expect(feed && /Keep exploring/.test(t.text(feed.querySelector(".sec-head"))), "the Keep exploring heading is missing on the color page");
-  t.expect(t.$$(".fd-chip").map(b => t.text(b)).join() === "Paintings,Painters,Era,Place,Other worlds,Close colors", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}"`);
-  t.expect(t.text(".fd-chip.on") === "Paintings", "Paintings is not on by default");
-  // it sits after "What links here" and before the last fine-print line, and the page's own cover is still there
-  const order = [".rp-idcard", "[data-rpfeed]", ".rp-last"].map(s => t.$(s)), pos = (a, b) => a.compareDocumentPosition(b) & 4;
-  t.expect(order.every(Boolean) && pos(order[0], order[1]) && pos(order[1], order[2]), "the feed isn't between the ID card and the last fine-print line");
+  t.expect(feed, "the feed host is missing on the color page");
+  t.expect(t.$$(".fd-chip").map(b => t.text(b)).join() === "Overview,Paintings,Painters,Era,Place,Other worlds,Close colors", `the chips read "${t.$$(".fd-chip").map(b => t.text(b))}"`);
+  t.expect(t.text(".fd-chip.on") === "Paintings", "Paintings did not turn on when tapped");
+  t.expect(t.$("[data-rp-about]").hidden, "the article should hide while Paintings shows");
+  // the cover comes first, then the feed (its About pane holds the ID card), then the last fine-print line
+  const order = [".cp-hero", "[data-rpfeed]", ".rp-last"].map(s => t.$(s)), pos = (a, b) => a.compareDocumentPosition(b) & 4;
+  t.expect(order.every(Boolean) && pos(order[0], order[1]) && pos(order[1], order[2]), "the feed isn't between the cover and the last fine-print line");
+  t.expect(t.$("[data-rp-about] .rp-idcard"), "the ID card isn't inside the About tab");
   t.expect(t.$(".cp-hero .rp-name"), "the color page's cover is gone");
-  const caps = feedCaps(t), pct = caps.map(c => parseFloat((c.match(/^([\d.]+)% match$/) || [])[1] || NaN));
-  t.expect(caps.length >= 4 && pct.every((p, k) => p >= 1 && (k === 0 || p <= pct[k - 1])), `captions aren't plain "NN% match", closest first: ${caps.slice(0, 6)}`);
-  const first = t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items[0].j`);
-  t.expect(Number.isInteger(first) && t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items.length`) >= 24, "the top of the ranking isn't cached (rank once, page through)");
-  // the first tile is the nearest patch, whatever the area (closeness beats coverage): nothing in the cache is closer
-  t.expect(t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0").items.filter(it => /^[\d.]+%/.test(it.cap)).every((it, k, a) => k === 0 || parseFloat(it.cap) <= parseFloat(a[0].cap) + 1)`), "a later tile is clearly closer than the first");
-  t.expect(t.$$(".fd-tile[data-fk] .fd-cap, .fd-tile[data-fk] .fd-by").every(e => parseFloat(getComputedStyle(e).fontSize) >= 15), "caption text is smaller than body size");
+  const caps = feedCaps(t);
+  t.expect(caps.length >= 4 && !caps.some(c => /% match/.test(c)), `the paintings feed should show no match percent: ${caps.slice(0, 6)}`);
+  const first = t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0|" + fdsSig("paintings")).items[0].j`);
+  t.expect(Number.isInteger(first) && t.ev(`FD_CACHE.get("c:#008080|paintings|overall|0|" + fdsSig("paintings")).items.length`) >= 24, "the top of the ranking isn't cached (rank once, page through)");
+  t.expect(t.$$(".fd-tile[data-fk] .fd-cap, .fd-tile[data-fk] .fd-by").every(e => parseFloat(getComputedStyle(e).fontSize) >= 14), "caption text is smaller than 14px (the byline is 14px by David's 2026-10-25 call)");
+  // About brings the article back in place and hides the feed's own parts; Paintings returns
+  await t.click(".fd-chip[data-fc=about]", { wait: 300 });
+  t.expect(!t.$("[data-rp-about]").hidden && t.$(".fd-grid").hidden, "About didn't swap in the article");
+  await t.click(".fd-chip[data-fc=paintings]", { wait: 300 });
+  t.expect(t.$("[data-rp-about]").hidden && !t.$(".fd-grid").hidden, "Paintings didn't swap the feed back");
   t.notes.push(`color feed first ranking ${t.ev("FD_LAST.ms")} ms`);
 });
-scenario("pages", "Keep exploring on a color page: each chip re-ranks with its own plain captions", async t => {
+// David, 2026-10-25: the "2 across" button is gone. A Settings button opens a sheet made for the tab (closeness, coverage, role, years, shape, order,
+// size on Paintings) with a live count, and a Map button opens the same list as the painting map, the painting nearest the top in the middle.
+scenario("cfeed", "Keep exploring on a color page: Settings changes the list with a live count and the Map lens opens the same list", async t => {
+  await cfeedOpen(t, "#/color/teal");
+  t.expect(!t.$("[data-fdsize]"), "the old '2 across' button is still on the page");
+  const before = t.$$(".fd-tile[data-fk]").length;
+  await openSettingsChip(t, 600);
+  const sh = await t.waitFor(".fs-sheet", 5000, "the Settings sheet");
+  t.expect(t.$$(".fs-c", sh).length >= 5, "the Paintings sheet has too few controls");
+  const n0 = t.text(".fs-count");
+  t.expect(/paintings/.test(n0), `no live count in the sheet: "${n0}"`);
+  const tol = t.$("[data-fs=tol]", sh); tol.value = 3; tol.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+  await t.waitFor(() => t.text(".fs-count") !== n0 ? true : null, 20000, "the count to change after tightening the match");
+  t.expect(!t.$(".fd-chip.on .fd-dot").hidden, "the active chip shows no mark that something changed");
+  await t.click(".fs-reset", { wait: 800 });
+  t.ev("document.querySelectorAll('.scrim').forEach(s => s.click())"); await t.sleep(500);
+  await t.click(mapBtn(t), { force: true, wait: 900 });
+  await TRL.atHash(t, /^#\/paintings\/map\?arr=spiral&seed=\d+&c=/, "the painting map, seeded on a painting with the color as its filter");
+  // the map's ⋯ sheet leads with one button back to the feed it came from, and the feed is where it was
+  await t.waitFor(".pmx-do", 15000, "the map's ⋯ button");
+  await t.click(".pmx-do", { wait: 600 });
+  const back = await t.waitFor("[data-pmtofeed]", 5000, "Back to the feed in the map's ⋯ sheet");
+  t.expect(/Back to the feed/.test(t.text(back)), "the button should say Back to the feed");
+  await t.click(back, { wait: 900 });
+  await TRL.atHash(t, /^#\/(color|name)\//, "the color page again");
+  await t.waitFor(() => t.text(".fd-chip.on") === "Paintings" ? true : null, 20000, "the Paintings feed, as it was left");
+});
+// David, 2026-10-25: every number is a door. A decade bar and a country on "When and where" open the Era and Place feeds on that decade or
+// country; "All the painters" opens Painters. The page's own chip row (not a scroll to the bottom) is what takes you there.
+scenario("pages", "When and where: a decade bar opens the Era feed and a country opens Place", async t => {
+  await H.openPage(t, "#/color/camel", "Camel");
+  const ww = await t.waitFor(".rc-whenwhere", 20000, "the When and where section");
+  await t.waitFor(() => t.$("[data-rpfeed] .fd-bar:not(.fd-pre)") ? true : null, 25000, "the real chip row");
+  const bars = t.$$(".rc-spark-c", ww);
+  t.expect(bars.length >= 5, `the decade bars are missing (${bars.length})`);
+  const bar = bars[Math.floor(bars.length / 3)], dec = Math.floor(+bar.dataset.rcEra / 10) * 10;
+  t.expect(dec > 0, `the bar has no decade (${bar.outerHTML.slice(0, 80)})`);
+  await t.click(bar, { wait: 600 });
+  await t.waitFor(() => t.text(".fd-chip.on") === "Era" && t.$$(".fd-tile[data-fk]").length >= 4 ? true : null, 25000, "the Era feed after the bar tap " + JSON.stringify(t.ev("(() => { const g = document.querySelector(\".fd-grid\"); return g ? { h: g.style.height, w: g.clientWidth, n: g.children.length, cls: g.className, top: Math.round(g.getBoundingClientRect().top), sy: scrollY, chip: (document.querySelector(\".fd-chip.on\")||{}).textContent } : null; })()")));
+  t.expect(new RegExp("Nearest the " + dec + "s").test(t.text(".fd-lead")), `the Era lead is "${t.text(".fd-lead")}", not the ${dec}s`);
+  await t.click(".fd-chip[data-fc=about]", { wait: 400 });
+  const door = await t.waitFor(() => t.$(".rc-door[data-rc-place]"), 5000, "a country door");
+  const country = door.dataset.rcPlace;
+  await t.click(door, { wait: 600 });
+  await t.waitFor(() => t.text(".fd-chip.on") === "Place" && t.$$(".fd-tile[data-fk]").length >= 4 ? true : null, 25000, "the Place feed after the country tap");
+  t.expect(t.text(".fd-lead").startsWith(country), `the Place lead is "${t.text(".fd-lead")}", not ${country} first`);
+});
+scenario("cfeed", "Keep exploring on a color page: each chip re-ranks with its own plain captions", async t => {
   await cfeedOpen(t, "#/color/teal");
   await cfeedChip(t, "painters");
   t.expect(/^(Used most|Also used) by \S/.test(t.text(".fd-tile[data-fk='0'] .fd-cap")), `Painters caption: "${t.text(".fd-tile[data-fk='0'] .fd-cap")}"`);
   await cfeedChip(t, "era");
-  const decs = feedCaps(t).map(c => (c.match(/^(\d{3})0s · [\d.]+% match$/) || [])[1]);
-  t.expect(decs.length >= 4 && decs.every(Boolean), `Era captions don't say the decade: ${feedCaps(t).slice(0, 4)}`);
+  const decs = feedCaps(t).map(c => (c.match(/^(\d{3})0s$/) || [])[1]);
+  t.expect(decs.length >= 4 && decs.every(Boolean), `Era captions don't say just the decade: ${feedCaps(t).slice(0, 4)}`);
   await cfeedChip(t, "place");
-  t.expect(feedCaps(t).slice(0, 3).every(c => /^[A-Z][^·]+ · [\d.]+% match$/.test(c)), `Place captions: ${feedCaps(t).slice(0, 3)}`);
+  t.expect(feedCaps(t).slice(0, 3).every(c => /^[A-Z][^·%]+$/.test(c)), `Place captions: ${feedCaps(t).slice(0, 3)}`);
   await cfeedChip(t, "worlds");
   t.expect(feedCaps(t).slice(0, 3).every(c => /^In /.test(c)), `Other worlds captions: ${feedCaps(t).slice(0, 3)}`);
   t.expect(t.$(".fd-tile.fd-card"), "Other worlds has no card");
@@ -4614,22 +5101,23 @@ scenario("pages", "Keep exploring on a color page: each chip re-ranks with its o
   t.expect(feedCaps(t).slice(0, 3).every(c => /^[\d.]+% match$/.test(c)), `Close colors captions: ${feedCaps(t).slice(0, 3)}`);
   // back on Paintings the first tile is the closest again (cached: instant)
   await cfeedChip(t, "paintings");
-  t.expect(/^[\d.]+% match$/.test(feedCaps(t)[0]), "Paintings didn't come back");
+  t.expect(t.$(".fd-tile[data-fk='0']"), "Paintings didn't come back");
   t.expect(t.ev(`JSON.parse(sessionStorage.getItem("colorhub-feed-color")).chip`) === "paintings", "the chip choice isn't remembered for the session");
 });
-scenario("pages", "Keep exploring on a color page: a chip with nothing for this color is disabled with a plain reason", async t => {
+scenario("cfeed", "Keep exploring on a color page: a chip with nothing for this color is disabled with a plain reason", async t => {
   await t.open("#/color/teal", { settle: 600 });
   t.ev(`fdcOff("c:#008080", "era", "Too few paintings that hold this color have a year, so there is no era to read.")`);
   await cfeedOpen(t, "#/color/teal");
   t.ev(`fdcOff("c:#008080", "era", "Too few paintings that hold this color have a year, so there is no era to read.")`);
-  await t.click(".fd-chip[data-fc=paintings]", { wait: 200 });
+  await t.click(".fd-chip[data-fc=about]", { wait: 200 });
+  await t.click(".fd-chip[data-fc=paintings]", { wait: 300 });
   await t.click(".fd-chip[data-fc=era]", { wait: 300 });
   const era = t.$(".fd-chip[data-fc=era]");
   t.expect(era.getAttribute("aria-disabled") === "true", "Era isn't disabled");
   t.expect(/no era to read/.test(t.text(".fd-lead")) && t.text(".fd-chip.on") === "Paintings", `no plain reason on tap: lead "${t.text(".fd-lead")}"`);
   t.ev(`FDC_OFF.delete("c:#008080")`);
 });
-scenario("pages", "Keep exploring on a color page: a tile opens its painting, and Back returns to the exact feed position", async t => {
+scenario("cfeed", "Keep exploring on a color page: a tile opens its painting, and Back returns to the exact feed position", async t => {
   await cfeedOpen(t, "#/color/teal");
   for (let n = 0; n < 6; n++) { t.w.scrollBy(0, 700); await t.sleep(250); }
   const tile = t.$$(".fd-tile[data-fk]").find(e => +e.dataset.fk >= 8);
@@ -4639,6 +5127,8 @@ scenario("pages", "Keep exploring on a color page: a tile opens its painting, an
   await t.click(tile, { wait: 900 });
   await TRL.atHash(t, /^#\/gallery\/\d+/, "the tapped painting's page");
   t.expect(t.w.scrollY < 40, `the painting page isn't at the top (scrollY ${t.w.scrollY})`);
+  await t.waitFor(() => t.$("[data-glfeed] .fd-bar:not(.fd-pre)") ? true : null, 25000, "the painting's real chip row");
+  t.expect(/^Color/.test(t.text(".fd-chip.on")) && t.$("[data-gl-about]").hidden, `a painting opened from a color page's tile should start on Color, not "${t.text(".fd-chip.on")}"`);
   await t.click(TRL.screenBack(t), { wait: 600 });
   await TRL.atHash(t, new RegExp("^" + hash0.replace(/[#/?=]/g, "\\$&") + "$"), "the color page");
   await t.waitFor(() => t.$(`.fd-tile[data-fk='${k}']`), 15000, "the tile you left from");
@@ -4646,11 +5136,11 @@ scenario("pages", "Keep exploring on a color page: a tile opens its painting, an
   const y1 = t.$(`.fd-tile[data-fk='${k}']`).getBoundingClientRect().top;
   t.expect(Math.abs(y1 - y0) <= 4, `Back put the tile at ${Math.round(y1)}px, it was at ${Math.round(y0)}px`);
 });
-scenario("pages", "Keep exploring on an in-between color: the feed measures the tapped color, and a close name opens with the exact color", async t => {
+scenario("cfeed", "Keep exploring on an in-between color: the feed measures the tapped color, and a close name opens with the exact color", async t => {
   await cfeedOpen(t, "#/color/teal?c=2f8f8a");
   const caps = feedCaps(t);
-  t.expect(caps.length >= 4 && caps.every(c => /^[\d.]+% match$/.test(c)), `captions: ${caps.slice(0, 4)}`);
-  t.expect(t.ev(`!!FD_CACHE.get("c:#2F8F8A|paintings|overall|0")`), "the feed is not keyed to the tapped color");
+  t.expect(caps.length >= 4 && !caps.some(c => /% match/.test(c)), `captions: ${caps.slice(0, 4)}`);
+  t.expect(t.ev(`!!FD_CACHE.get("c:#2F8F8A|paintings|overall|0|" + fdsSig("paintings"))`), "the feed is not keyed to the tapped color");
   t.expect(/Your color/.test(t.text(".cp-chip")), "this isn't the tapped-color page");
   await cfeedChip(t, "close");
   const card = t.$(".fd-tile.fd-card[data-fk]"); t.expect(card, "no close-color card");
@@ -4735,9 +5225,10 @@ scenario("eyedrop", "the shared eyedropper: drag reads each side, and sample siz
     cx.fillStyle = "#FF0000"; cx.fillRect(0, 0, 50, 40);
     cx.fillStyle = "#0000FF"; cx.fillRect(50, 0, 50, 40);
     const img = new Image();
-    img.onload = () => {
+    img.onload = async () => {
       img.style.cssText = "position:fixed;left:0;top:0;width:200px;height:80px;z-index:999";
       document.body.appendChild(img);
+      const raf = () => new Promise(r => requestAnimationFrame(() => r()));
       const r = img.getBoundingClientRect();
       const fire = (el, type, x) => el.dispatchEvent(new PointerEvent(type, { bubbles: true, clientX: r.left + x, clientY: r.top + r.height / 2, isPrimary: true, pointerId: 1 }));
       setSampleSize(1);
@@ -4745,13 +5236,13 @@ scenario("eyedrop", "the shared eyedropper: drag reads each side, and sample siz
       const a1 = eyedropAttach(img, { onMove: (hex) => moves1.push(hex) });
       fire(img, "pointerdown", 10);
       const redHex = moves1[moves1.length - 1];
-      fire(img, "pointermove", 190);
+      fire(img, "pointermove", 190); await raf();
       const blueHex = moves1[moves1.length - 1];
-      fire(img, "pointermove", 100);
+      fire(img, "pointermove", 100); await raf();
       const pointBoundary = moves1[moves1.length - 1];
       fire(img, "pointerup", 100);
       a1.detach();
-      setSampleSize(31);
+      setSampleSize(21);
       const moves2 = [];
       const a2 = eyedropAttach(img, { onMove: (hex) => moves2.push(hex) });
       fire(img, "pointerdown", 100);
@@ -4768,26 +5259,41 @@ scenario("eyedrop", "the shared eyedropper: drag reads each side, and sample siz
   t.expect(r.redHex === "#FF0000", `the red side read ${r.redHex}, not pure red`);
   t.expect(r.blueHex === "#0000FF", `the blue side read ${r.blueHex}, not pure blue`);
   t.expect(r.pointBoundary === "#FF0000" || r.pointBoundary === "#0000FF", `Point at the boundary should land on one exact side, got ${r.pointBoundary}`);
-  t.expect(r.avgBoundary !== "#FF0000" && r.avgBoundary !== "#0000FF" && /^#[0-9A-F]{6}$/.test(r.avgBoundary), `31×31 at the boundary should blend the two sides, got ${r.avgBoundary}`);
-  // the loupe follows the drag and shows a live readout
-  const loupeInfo = await t.ev(`(() => new Promise(resolve => {
+  t.expect(r.avgBoundary !== "#FF0000" && r.avgBoundary !== "#0000FF" && /^#[0-9A-F]{6}$/.test(r.avgBoundary), `Large at the boundary should blend the two sides, got ${r.avgBoundary}`);
+  // Adobe Capture style (2026-10-25): a persistent reticle and a corner preview, no floating loupe; the size row sits below
+  const info = await t.ev(`(() => new Promise(resolve => {
     const img = document.createElement("img");
-    img.style.cssText = "position:fixed;left:0;top:0;width:200px;height:80px;z-index:999";
-    img.onload = () => {
+    img.style.cssText = "position:fixed;left:0;top:60px;width:300px;height:200px;z-index:999";
+    img.onload = async () => {
       document.body.appendChild(img);
-      const r = img.getBoundingClientRect();
-      eyedropAttach(img, {});
-      img.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, clientX: r.left + 10, clientY: r.top + r.height / 2, isPrimary: true, pointerId: 1 }));
-      const loupe = document.querySelector(".eyd-loupe");
-      resolve(JSON.stringify({ shown: !!loupe, hex: loupe && loupe.querySelector(".eyd-loupe-hex").textContent }));
+      const r = img.getBoundingClientRect(), raf = () => new Promise(q => requestAnimationFrame(() => q()));
+      const d = eyedropAttach(img, {});
+      await raf();
+      const ring0 = document.querySelector(".eyd-ret"), pv0 = document.querySelector(".eyd-prev");
+      const idle = { ring: !!ring0, prev: !!pv0, left: pv0 && parseFloat(pv0.style.left), sizes: document.querySelectorAll(".eyd-sizebar [data-eydsize]").length, loupe: !!document.querySelector(".eyd-loupe") };
+      // a mouse press jumps the ring to the top-left of the picture: the preview must flip to the right
+      img.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, clientX: r.left + 20, clientY: r.top + 20, isPrimary: true, pointerId: 1, pointerType: "mouse" }));
+      await raf();
+      const pv = document.querySelector(".eyd-prev");
+      const flipped = { right: pv.classList.contains("eyd-prev-r"), name: pv.querySelector(".eyd-prev-name").textContent };
+      img.dispatchEvent(new PointerEvent("pointerup", { bubbles: true, clientX: r.left + 20, clientY: r.top + 20, isPrimary: true, pointerId: 1, pointerType: "mouse" }));
+      d.detach();
+      const gone = !document.querySelector(".eyd-layer") && !document.querySelector(".eyd-sizebar");
+      document.body.removeChild(img);
+      resolve(JSON.stringify({ idle, flipped, gone }));
     };
-    const c = document.createElement("canvas"); c.width = 100; c.height = 40;
-    c.getContext("2d").fillRect(0, 0, 100, 40);
+    const c = document.createElement("canvas"); c.width = 300; c.height = 200;
+    c.getContext("2d").fillRect(0, 0, 300, 200);
     img.src = c.toDataURL();
   }))()`);
-  const lr = JSON.parse(loupeInfo);
-  t.expect(lr.shown, "the loupe never appeared on pointerdown");
-  t.expect(/^#[0-9A-F]{6}$/.test(lr.hex), `the loupe's hex readout is missing or wrong: ${lr.hex}`);
+  const lr = JSON.parse(info);
+  t.expect(lr.idle.ring && lr.idle.prev, "the persistent reticle and the corner preview weren't there before any touch");
+  t.expect(lr.idle.left < 40, `the preview should start in the top-left corner, left=${lr.idle.left}`);
+  t.expect(lr.idle.sizes === 4, `the size row below the picture should hold four buttons, got ${lr.idle.sizes}`);
+  t.expect(!lr.idle.loupe, "the old floating loupe is still around");
+  t.expect(lr.flipped.right, "the preview did not flip to the right when the reticle went under its corner");
+  t.expect(lr.flipped.name.length > 0, "the preview shows no color name");
+  t.expect(lr.gone, "detach() left the reticle layer or the size row behind");
 });
 // js/picked.js: picking = saving (David, 2026-10-10). Two real picks through the real eyedropAttach path
 // (Pair with… → From a photo, the same door tested above) land in Picked colors automatically; Select mode's
@@ -4921,7 +5427,7 @@ scenario("paintings", "Look closer's Select tool: tap adds a point, opens the se
   // place js/segment.js checks window.__segStub runs later still, from a click, so the timing is the same either way
   await t.open("#/gallery/12", { settle: 800 });
   t.ev("window.__segStub = true");
-  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { wait: 700 });
+  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { force: true, wait: 700 });
   const selectBtn = await t.waitFor('[data-glzv="select"]:not([hidden])', 8000, "the Select tool (segProbe resolving under the stub)");
   t.expect(!selectBtn.disabled, "Select came back disabled even under the stub (segProbe should always resolve true there)");
   await t.click(selectBtn, { force: true, wait: 400 });
@@ -4974,7 +5480,7 @@ scenario("paintings", "Look closer's Select tool: tap adds a point, opens the se
 scenario("paintings", "Look closer's Select tool: an init failure surfaces an honest message + Details, never an endless spinner", async t => {
   await t.open("#/gallery/12", { settle: 800 });
   t.ev('window.__segStub = true; window.__segStubFail = "stub: simulated init failure (missing ort-wasm-simd-threaded.mjs)";');
-  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { wait: 700 });
+  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { force: true, wait: 700 });
   const selectBtn = await t.waitFor('[data-glzv="select"]:not([hidden])', 8000, "the Select tool (segProbe resolving under the stub)");
   await t.click(selectBtn, { force: true, wait: 400 });
   const hint = await t.waitFor("[data-glzselhint]:not([hidden])", 8000, "an honest hint after the forced init failure (found an endless spinner instead)");
@@ -4999,7 +5505,7 @@ scenario("paintings", "Look closer's Select tool: an init failure surfaces an ho
 // NaN/Infinity through or skipped a clamp.
 scenario("paintings", "Look closer: random gesture fuzz (pinch/pan/lost fingers) never zooms below fit or sends the image off-screen", async t => {
   await t.open("#/gallery/12", { settle: 800 });
-  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { wait: 700 });
+  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { force: true, wait: 700 });
   await t.waitFor(".glz-scrim.in", 4000, "the Look closer overlay");
   const result = t.ev(`(() => {
     const scrim = document.querySelector(".glz-scrim"), stage = document.querySelector(".glz-stage");
@@ -5082,7 +5588,7 @@ scenario("paintings", "Look closer on a painting then swiping back (popstate) ne
     await t.click("[data-pt-rail] [data-gi]", { wait: 800 });
     await t.waitFor(".gl-page", 12000, "the painting page");
     await t.waitFor("[data-glcloser]", 8000, "the Look closer button");
-    await t.click("[data-glcloser]", { wait: 500 });
+    await t.click("[data-glcloser]", { force: true, wait: 500 });
     t.expect(t.$(".glz-scrim"), "Look closer didn't open its scrim");
   };
   // the opaque scrim covers the painting page's own ‹, so a real finger has only one way back while it's up: the
@@ -5304,7 +5810,7 @@ scenario("sets", "a pair page: facts and paintings and Add a color makes a trio"
   await t.open("#/pair/4f6b3a+c2412d", { settle: 800, keepState: true });
   await t.waitFor(".sp-page .sp-plate", 12000, "the pair page");
   await SP.lead(t);
-  await t.waitFor(() => t.$("[data-ptg] .gl-pin") || /too few|No painting/.test(t.text("[data-ptg]")), 25000, "paintings or an honest line");
+  await t.waitFor(() => t.$(".sp-fgrid .gl-pin") || t.$("[data-ptg] .gl-pin") || /too few|No painting/.test(t.text("[data-ptg]")), 25000, "paintings or an honest line");
   t.expect(/:1 contrast/.test(t.text(".sp-facts")), "no contrast ratio");
   await t.click('[data-sp-add]', { wait: 600 });
   await t.waitFor(".sheet.sx-sheet .sx-opt", 6000, "the add-a-color picker");
@@ -5477,7 +5983,7 @@ scenario("sets", "a pair's painting rail carries the whole pair, not one color: 
   await t.open(`#/pair/${a}+${b}`, { settle: 800, keepState: true });
   await t.waitFor(".sp-page .sp-pair .sp-plate", 12000, "the pair page");
   await SP.lead(t);
-  const pin = await t.waitFor("[data-ptg] .gl-pin", 25000, "a painting holding this pair (painting 15146 itself, at least)");
+  const pin = await t.waitFor(".sp-fgrid .gl-pin", 25000, "a painting holding this pair (painting 15146 itself, at least)");
   await t.click(pin, { force: true, wait: 900 });
   await t.waitFor(".pt-arrive [data-opensp]", 14000, "the painting's arrival row");
   t.expect(/You came from/.test(t.text(".pt-arrive")), `the arrival row doesn't say "You came from": ${t.text(".pt-arrive")}`);
@@ -5530,25 +6036,17 @@ scenario("sets", "drag a row's handle to reorder a trio; the new order is still 
 // David, 2026-10-09: "sooner or later something will match" if you loosen enough, so Together in paintings never
 // shows a near-miss as if it mattered — a vivid, mostly-synthetic trio (rare in oil paint) says so plainly, and
 // Loosen until something matches is explicit about how far it went.
-scenario("sets", "a trio with no close match says so plainly, with no unrelated painting shown until you loosen it yourself", async t => {
+// David, 2026-10-28 (design/plans/2026-10-28-ux-backlog.md section 1): the palette page's paintings are an endless feed that loosens by itself; there is no
+// "Nothing this close yet" state and no sliders on the page. A trio with no close match still fills: tightest first, then one thin "Looser matches" line.
+scenario("sets", "a trio with no close match: the feed loosens by itself under one thin line, never a dead end", async t => {
   SP.placed();
   await t.open("#/set/656300-8000ff-b70088", { settle: 800, keepState: true });
   await t.waitFor(".sp-page .sp-strip", 12000, "the trio page");
   await SP.lead(t);
-  await t.waitFor("[data-ptg] .sp-match [data-mt-sliders] .pt-range", 20000, "the Closeness / Minimum share sliders");
-  await t.waitFor(() => /Nothing this close yet|Not one painting holds/.test(t.text("[data-ptg] .sp-mt-body")) || t.$("[data-ptg] .sp-mt-body .gl-pin"), 25000, "a real result or an honest empty state");
-  const emptyMsg = t.text("[data-ptg] .sp-mt-body");
-  if (/Nothing this close yet/.test(emptyMsg) || /Not one painting holds/.test(emptyMsg)) {
-    t.expect(!t.$("[data-ptg] .sp-mt-body .gl-pin"), "a near-miss painting is showing without being asked for");
-    if (/Nothing this close yet/.test(emptyMsg)) {
-      const btn = t.$("[data-mt-loosen]");
-      t.expect(btn, "no Loosen until something matches button at the default setting");
-      await t.click(btn, { force: true, wait: 1500 });
-      await t.waitFor(() => /Loosened/.test(t.text("[data-ptg] .sp-mt-body")) || /even at the loosest measure/.test(t.text("[data-ptg] .sp-mt-body")), 20000, "an honest line about how far it loosened, or a final no");
-    }
-  } else {
-    t.notes.push("this trio already had a real match at the standard measure");
-  }
+  await t.waitFor(() => t.$(".sp-fgrid .gl-pin") || /every painting in the archive|No painting in the archive/.test(t.text(".sp-feedsec")), 30000, "paintings in the feed, or an honest end");
+  t.expect(!/Nothing this close yet/.test(t.text(".sp-page")), "a dead-end 'Nothing this close yet' is back on the palette page");
+  t.expect(!t.$("[data-mt-sliders]"), "the Closeness / Minimum share sliders are back on the palette page");
+  if (t.$(".sp-loose")) t.expect(/Looser matches/.test(t.text(".sp-loose")), "the divider doesn't say Looser matches");
 });
 
 // ================================================================== DIRECT LOADS (a typed or shared address on a fresh load)
@@ -5557,7 +6055,7 @@ scenario("sets", "a trio with no close match says so plainly, with no unrelated 
 // painting page. The rule now: every painter name is tappable (js/artwiki.js awPainter() falls back to
 // awPainterLite(), built from tools/painters_lite.py's data/artists/lite.json, every OTHER named painter in the
 // corpus). A random daily-seeded sample of paintings, including deliberately minor ones, checks this holds.
-scenario("pages", "every painter name on a random sample of paintings is tappable, including minor painters without a full profile", async t => {
+scenario("painters", "every painter name on a random sample of paintings is tappable, including minor painters without a full profile", async t => {
   await t.open("#/home", { settle: 300 });
   // 23778: the corpus size tools/check.js's own "ids gate" reports (checked at the top of this file's other
   // gallery-index scenarios, e.g. "a random archive painting has..."); galleryPage() itself loads the gallery
@@ -5610,7 +6108,7 @@ scenario("pages", "a fresh load of #/painter/<slug> opens that painter, not Home
 // Bazille's self-portrait is one of the few whose museum (AIC) serves its image same-origin (img/gallery/...),
 // so it loads under the smoke harness's host-resolver-rules (every other host, Wikimedia included, is
 // deliberately unreachable there -- most painter portraits are Commons-hosted and can't be asserted on here).
-scenario("pages", "painter page: the portrait hero renders (an image or the signature-color field -- never empty)", async t => {
+scenario("painters", "painter page: the portrait hero renders (an image or the signature-color field -- never empty)", async t => {
   await t.open("#/painter/frederic-bazille", { settle: 600 });
   await t.waitFor(".aw-page", 15000, "the painter page");
   const hero = await t.waitFor(".aw-pt-hero", 8000, "the portrait hero");
@@ -5629,32 +6127,71 @@ scenario("pages", "painter page: the portrait hero renders (an image or the sign
   const open = t.$(".aw-pt-open", stand);
   t.expect(open && open.dataset.gi === stand.dataset.pthero, "the hero doesn't link to the painting it shows");
 });
-scenario("pages", "painter page: a sort chip reorders the life's work grid", async t => {
-  await t.open("#/painter/john-singer-sargent", { settle: 600 });
+// David, 2026-10-25: the painter page is the shared shape: portrait band, ONE sticky chip row (Overview, Their work, Their colors), one pane at a time.
+// The sort / view / filter chips that sat above the grid are in a Settings sheet now, opened from the small floating pill (same sheet and pill as the feeds).
+async function awWorkTab(t, slug) {
+  await t.open("#/painter/" + slug, { settle: 600 });
   await t.waitFor(".aw-page", 15000, "the painter page");
+  const tabs = t.$$(".aw-tabs [data-awtab]").map(b => b.textContent.trim());
+  t.expect(tabs.join("|") === "Overview|Their work|Their colors", `the chip row reads "${tabs.join(" | ")}"`);
+  t.expect(t.$$(".aw-tabs").length === 1 && !t.$(".aw-map-row"), "the painter page has a second row of buttons or chips above the chip row");
+  await t.click('[data-awtab="work"]', { wait: 500 });
   await t.waitFor("#aw-works", 8000, "the Life's work section");
-  const firstGi = () => { const p = t.$(".aw-wk-mount .gl-pin, .aw-wk-mount .gl-pin.wait"); return p && p.dataset.gi; };
-  await t.waitFor(() => firstGi(), 8000, "the grid's first pin");
+  const first = () => { const p = t.$(".aw-wk-mount .gl-pin"); return p && p.dataset.gi; };
+  await t.waitFor(() => first(), 8000, "the grid's first pin");
+  return first;
+}
+scenario("painters", "painter page: Settings sorts the life's work grid, and the pill shows only while the pictures are on screen", async t => {
+  const firstGi = await awWorkTab(t, "john-singer-sargent");
   const before = firstGi();
-  const vivid = t.$$('[data-wksort="C"]').find(b => /Vivid/.test(b.textContent));
-  t.expect(vivid, "no Vivid sort chip");
-  await t.click(vivid, { wait: 500 });
-  t.expect(vivid.classList.contains("on"), "the Vivid chip didn't turn on");
+  t.expect(!t.$(".fd-float"), "the old floating Settings / Map pill is still on the page");
+  await openSettingsChip(t, 600);
+  const sh = await t.waitFor(".fs-sheet", 5000, "the Settings sheet");
+  t.expect(/paintings/.test(t.text(".fs-count")), `no live count in the sheet: "${t.text(".fs-count")}"`);
+  const sel = t.$("[data-wksel]", sh);
+  t.expect([...sel.options].some(o => /Most vivid first/.test(o.textContent)), "no Most vivid first order");
+  sel.value = "C:0"; sel.dispatchEvent(new t.w.Event("change", { bubbles: true }));
   await t.waitFor(() => firstGi() && firstGi() !== before, 6000, "the grid order to change after switching sort");
+  t.expect(!t.$(".aw-tabs .fd-chip.on .fd-dot").hidden, "the Their work chip shows no mark that something changed");
+  await t.click(".fs-reset", { wait: 800 });
+  t.ev("document.querySelectorAll('.scrim').forEach(s => s.click())"); await t.sleep(500);
+  await t.waitFor(() => firstGi() === before, 6000, "Reset to put the order back");
+  // on Overview there is no Settings glyph on the chip
+  await t.click('[data-awtab="about"]', { wait: 500 });
+  t.expect(!t.$(".aw-tabs .fd-chip.on .fd-tune"), "the Overview chip shows a Settings glyph");
 });
-scenario("pages", "painter page: a museum filter narrows the life's work grid -- honestly", async t => {
-  await t.open("#/painter/rembrandt-van-rijn", { settle: 600 });
-  await t.waitFor(".aw-page", 15000, "the painter page");
-  await t.waitFor("#aw-works", 8000, "the Life's work section");
-  const fold = await t.waitFor('[data-wkfilter] summary', 8000, "the Filter drawer");
-  await t.click(fold, { wait: 300 });
-  const mus = t.$$("[data-wkmus]")[0];
+scenario("painters", "painter page: a museum filter narrows the life's work grid -- honestly", async t => {
+  await awWorkTab(t, "rembrandt-van-rijn");
+  await openSettingsChip(t, 600);
+  const sh = await t.waitFor(".fs-sheet", 5000, "the Settings sheet");
+  const mus = t.$$("[data-wkmus]", sh)[0];
   t.expect(mus, "no museum filter chip (expected more than one museum here)");
   const before = t.text("[data-wkcount]");
   await t.click(mus, { wait: 500 });
-  t.expect(mus.classList.contains("on"), "the museum chip didn't turn on");
+  t.expect(mus.getAttribute("aria-pressed") === "true", "the museum chip didn't turn on");
   await t.waitFor(() => t.text("[data-wkcount]") !== before, 6000, "the count readout to change after a museum filter");
   t.expect(/ of /.test(t.text("[data-wkcount]")), `the count doesn't read "N of M" once filtered (got "${t.text("[data-wkcount]")}")`);
+});
+scenario("painters", "painter page: Map opens the painter's work seeded on a painting and Back to the feed returns to the same place", async t => {
+  const firstGi = await awWorkTab(t, "claude-monet");
+  const y0 = 900; t.w.scrollTo(0, y0); t.w.dispatchEvent(new t.w.Event("scroll")); await t.sleep(500);
+  const yBefore = t.w.scrollY;
+  await t.click(mapBtn(t), { force: true, wait: 900 });
+  await TRL.atHash(t, /^#\/paintings\/map\?arr=spiral&seed=\d+&p=claude-monet/, "the painting map, seeded on a painting, filtered to the painter");
+  await t.waitFor(".pmx-do", 15000, "the map's ⋯ button");
+  await t.click(".pmx-do", { wait: 600 });
+  const back = await t.waitFor("[data-pmtofeed]", 5000, "Back to the feed in the map's ⋯ sheet");
+  await t.click(back, { wait: 900 });
+  await TRL.atHash(t, /^#\/painter\/claude-monet/, "the painter page again");
+  await t.waitFor(() => t.$(".aw-tabs .fd-chip.on") && /Their work/.test(t.$(".aw-tabs .fd-chip.on").textContent), 6000, "the Their work tab to be the one reopened");
+  await t.waitFor(() => Math.abs(t.w.scrollY - yBefore) < 40, 6000, `the scroll to come back (was ${yBefore}, is ${t.w.scrollY})`);
+});
+scenario("painters", "painter page: a painter with few paintings still has the chip row, and Their colors says so honestly", async t => {
+  await t.open("#/painter/adam-pijnacker", { settle: 600 });
+  await t.waitFor(".aw-page", 15000, "the painter page");
+  t.expect(t.$$(".aw-tabs").length <= 1, "more than one chip row");
+  const chips = t.$$(".aw-tabs [data-awtab]");
+  if (chips.length > 1) { await t.click(chips[chips.length - 1], { wait: 500 }); t.expect(t.$(".aw-pane:not([hidden])"), "no pane shows after a tab tap"); }
 });
 
 // ================================================================== THE TRAIL (js/trail.js: one Back for everything, the map glyph)
@@ -5690,6 +6227,7 @@ const TRL = {
     await TRL.atHash(t, /^#\/gallery\/\d+/, "the second painting");
     note();
     // 5 + 6. a color in it whose page has a gem: try the palette's colors until one does
+    await glOverview(t);
     const nSw = (await t.waitFor(() => t.$$("[data-glrows] [data-swatch]").length && t.$$("[data-glrows] [data-swatch]"), 15000, "the painting's palette")).length;
     let gem = null;
     for (let i = 0; i < nSw && !gem; i++) {
@@ -5700,6 +6238,8 @@ const TRL = {
     }
     t.expect(gem, "no color in the second painting has a gem on its page");
     seen.push({ hash: TRL.hash(t), y: 0, n: TRL.depth(t) });
+    // a color page opened from a painting starts on its Paintings tab: the gem lives in the About tab
+    const aboutChip = t.$("#app .screen .fd-chip[data-fc=about]"); if (aboutChip && !aboutChip.classList.contains("on")) await t.click(aboutChip, { wait: 400 });
     const gf = gem.closest("details:not([open])"); if (gf) await t.click(gf.querySelector("summary"), { wait: 300 });
     await t.click(gem, { wait: 600 });
     await TRL.atHash(t, /^#\/gem\//, "the gem page");
@@ -6207,9 +6747,10 @@ scenario("paintings", "lane A: a painting page leads with what stands out; Name 
   // David, 2026-10-08: the palette is right under the identity block, and both fit one screen so you can change types and sizes.
   // David, 2026-10-09: the identity block (title, painter, date, museum, why it matters) now sits between the pinned
   // image and the palette, so the strip follows the identity block, not the image, directly.
-  const idB = t.$(".gl-id").getBoundingClientRect().bottom, stripB = t.$("[data-glswatches]").getBoundingClientRect().bottom;
-  t.expect(stripB <= t.ev("innerHeight"), `the palette strip sits below the first screen (${Math.round(stripB)})`);
-  t.expect(t.$("[data-glswatches]").getBoundingClientRect().top - idB < 24, "the palette strip isn't right under the identity block");
+  // 2026-10-25: the chip row sits between the identity block and the strip: the row is on the first screen, the strip right under it
+  const chipsB = t.$("[data-glfeed] .fd-chips").getBoundingClientRect().bottom, stripB = t.$("[data-glswatches]").getBoundingClientRect().bottom;
+  t.expect(chipsB <= t.ev("innerHeight"), `the chip row sits below the first screen (${Math.round(chipsB)})`);
+  t.expect(t.$("[data-glswatches]").getBoundingClientRect().top - t.$("[data-glfeed] .fd-bar").getBoundingClientRect().bottom < 260, "the palette strip isn't near the chip row");
   t.expect(t.$("[data-glorder]").getBoundingClientRect().top - stripB < 24, "the palette types aren't right under the strip");
   const nTypes = t.$$("[data-glorder] [data-glo]").length;
   t.expect(nTypes >= 4, `only ${nTypes} palette types`);
@@ -6288,7 +6829,9 @@ scenario("paintings", "a plain tap on the painting opens Look closer, not the co
   t.expect(!t.$("[data-glpickbtn]").classList.contains("on"), "the eyedropper starts armed");
   const r = img.getBoundingClientRect(), w = t.w;
   img.dispatchEvent(new w.MouseEvent("click", { bubbles: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 }));
-  await t.waitFor(".glz-scrim.in", 4000, "Look closer after a plain tap on the painting");
+  await t.waitFor(".gl-tray.in", 4000, "the tools tray after a plain tap on the painting");   // 2026-10-28: a tap shows the picture's tools; the viewer is its first button
+  await t.click(await t.waitFor('[data-gltool="closer"]', 2000, "the Look closer tool"), { force: true, wait: 400 });
+  await t.waitFor(".glz-scrim.in", 4000, "Look closer from the tray");
   t.expect(!t.$(".eyd-loupe"), "the eyedrop loupe showed from a plain tap");
   t.expect(!t.$(".gcr-sheet, .sw-sheet"), "a color readout opened from a plain tap");
   t.expect(!t.$(".iso"), "the guessing game opened from a plain tap");
@@ -6318,7 +6861,7 @@ scenario("paintings", "an unreadable painting's Pick controls give an honest mes
   await t.click(btn, { force: true, wait: 300 });
   await t.waitFor(() => /can.t be read/i.test(t.text(".toast")), 3000, "an honest toast explaining why Pick can't work here");
   t.expect(!btn.classList.contains("on"), "the Pick button armed anyway, with nothing to actually sample");
-  await t.click(await t.waitFor("[data-glcloser]", 8000, "the Look closer button"), { wait: 500 });
+  await t.click(await t.waitFor("[data-glcloser]", 8000, "the Look closer button"), { force: true, wait: 500 });
   await t.waitFor(".glz-scrim.in", 4000, "Look closer");
   await t.click(await t.waitFor('[data-glzv="pick"]', 4000, "Look closer's Pick tool"), { force: true, wait: 300 });
   await t.waitFor(() => /can.t be read/i.test(t.text(".toast")), 3000, "Look closer's Pick tool also explains itself instead of a dead drag");
@@ -6428,6 +6971,47 @@ scenario("paintmap", "the map lays out, a tap glides a painting to the middle, t
 // instead of reloading the position." PM_PAN already tracks pan-on-every-center-change and build() restores it,
 // but nothing had checked an ARBITRARY (non-grid-snapped) pan/zoom survives a real Back round trip, card state
 // included -- _qaSetPZ plants one precisely (a real drag would be slow and imprecise to land exactly).
+// David, 2026-10-25: "When you open the app it should open to a random cluster of paintings in the big map of 200k paintings ...
+// all the visible paintings in that cluster should be loaded." A cold start (no address) opens the painting map on a random
+// painting at the ordinary opening zoom; every visible tile is drawn from its sharper tier (none left as a flat swatch)
+// and the ring around the screen follows. Two cold opens land on different clusters. Back from a painting returns to the map.
+scenario("paintmap", "a cold open (no address) lands on the color map as a spiral honeycomb with the most vivid colors in the middle", async t => {
+  await t.open("", { settle: 800 });
+  await t.waitFor(".screen.hm", 15000, "the color map to open");
+  const hm = t.ev("({ mode: S.hm.mode, arr: S.hm.arr, ord: S.hm.ord && S.hm.ord.sunflower, style: S.hm.style, src: S.hm.src, fam: S.hm.fam, filter: S.hm.filter })");
+  t.expect(hm.mode === "colors" && hm.arr === "sunflower" && hm.ord === "vivid" && hm.style === "honeycomb" && hm.src === "every-name" && !hm.fam && hm.filter === "all", `a cold open should be Every name, Sunflower/vivid as a Honeycomb on the color map, got ${JSON.stringify(hm)}`);
+  t.expect(!/#\/paintings\/map/.test(t.w.location.hash), "a cold open is the color map, not the painting map");
+});
+// David, 2026-10-25: "this loads too slowly sometimes; even a super pixelated, blurry, tiny version of the painting is better than a color" and
+// "sometimes it doesn't load until I zoom in a bit and then zoom out". Every visible cell must show a picture (the micro layer under tier 0/1, never a
+// flat swatch), and a sheet that fails must be asked for again by itself: no pan or zoom between the failure and the sharp tile.
+scenario("paintmap", "every visible cell shows a picture (the micro layer), never a flat swatch", async t => {
+  await t.open("#/paintings/map?arr=color&rnd=1", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.$(".pmx-cv") && t.w.PM_CTRL.count > 150000 && t.w.PM_CTRL.drawn > 20, 30000, "the cold open to lay out the painting map");
+  await t.waitFor(() => { const q = t.w.PM_CTRL._qaPictureStats(); return q.n > 8 && q.flat === 0; }, 40000, "every visible cell to show a picture (no flat swatch)");
+});
+scenario("paintmap", "a failed sheet is asked for again by itself: the view sharpens with no pan or zoom", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 150000 && t.w.PM_CTRL.drawn > 20, 30000, "the map to lay out");
+  await t.waitFor(() => { const q = t.w.PM_CTRL._qaTier1Stats(); return q.want > 8 && q.have >= q.want * .9; }, 40000, "the first view to sharpen");
+  // from now on the next 6 requests for a sheet or a pack fail (a flaky connection), then work again
+  t.ev("(() => { const f = window.fetch; window.__failN = 0; window.fetch = (u, o) => (typeof u === 'string' && /data\\/paintmap\\/(c|g)\\d+\\.webp/.test(u) && window.__failN < 6 && ++window.__failN) ? Promise.reject(new Error('flaky')) : f(u, o); })()");
+  t.ev("(() => { const l = PM_CTRL.lay(); PM_CTRL._qaSetPZ(l.gx0 + l.GW * .8, l.gy0 + l.GH * .75, 1); PM_CTRL._qaForceDraw(); })()");
+  await t.waitFor(() => t.w.__failN >= 1, 20000, "the view to ask for new sheets (and be refused)");
+  await t.waitFor(() => { const q = t.w.PM_CTRL._qaTier1Stats(); return q.want > 8 && q.have >= q.want * .9; }, 60000, "the failed sheets to be asked for again and the view to sharpen with no pan or zoom");
+  t.expect(t.w.__failN >= 1, "the failure was never exercised");
+  t.ev("(() => { const l = PM_CTRL.lay(); PM_CTRL._qaSetPZ(l.start[0], l.start[1], 1); PM_CTRL._qaForceDraw(); })()");   // leave the remembered pan/zoom at the ordinary view for later scenarios
+});
+scenario("paintmap", "zoomed far out the mosaic is a soft overview, not salt-and-pepper static", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 150000 && t.w.PM_CTRL.drawn > 20, 30000, "the map to lay out");
+  t.ev("(() => { const l = PM_CTRL.lay(); PM_CTRL._qaSetPZ(l.gx0 + l.GW / 2, l.gy0 + l.GH / 2, PM_CTRL.zFit()); PM_CTRL._qaForceDraw(); })()");
+  // mean difference between neighboring pixels in a patch of the overview: ~20 when every cell is point-sampled (noise), under 8 area-averaged
+  const noise = t.ev("(() => { const cv = document.querySelector('.pmx-cv'), c = cv.getContext('2d'), w = cv.width, h = cv.height, d = c.getImageData((w * .3) | 0, (h * .4) | 0, 120, 120).data; let s = 0, n = 0; for (let y = 0; y < 120; y++) for (let x = 0; x < 119; x++) { const o = (y * 120 + x) * 4; s += Math.abs(d[o] - d[o + 4]) + Math.abs(d[o + 1] - d[o + 5]) + Math.abs(d[o + 2] - d[o + 6]); n += 3; } return s / n; })()");
+  t.expect(noise < 8, `the zoomed-out overview is still noisy: ${noise.toFixed(1)} mean pixel-to-pixel difference (wanted < 8)`);
+  t.notes.push(`zoomed-out noise ${noise.toFixed(2)}`);
+  t.ev("(() => { const l = PM_CTRL.lay(); PM_CTRL._qaSetPZ(l.start[0], l.start[1], 1); PM_CTRL._qaForceDraw(); })()");
+});
 scenario("paintmap", "Back from a painting restores the exact prior pan/zoom, not a re-fit", async t => {
   await t.open("#/paintings/map?arr=color", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
@@ -6641,6 +7225,8 @@ scenario("paintmap", "the Filter sheet: a region chip bulk-selects countries, co
   await t.click(".pmx-do", { wait: 400 });
   await t.waitFor(".pmx-sheet [data-tab='filter']", 4000, "the sheet tabs");
   await t.click(".pmx-sheet [data-tab='filter']", { wait: 400 });
+  await t.waitFor("[data-pmsec='place']", 4000, "the Place section");
+  await t.click("[data-pmsec='place']", { wait: 300 });   // the Filter sheet is sections, one open at a time
   await t.waitFor("[data-pmregion]", 4000, "the region chips");
   await t.click("[data-pmregion='europe']", { wait: 300 });
   t.expect(t.w.PM_CTRL.spec.f.coSet.length > 5, `Europe didn't bulk-add countries: ${JSON.stringify(t.w.PM_CTRL.spec.f.coSet)}`);
@@ -6659,6 +7245,7 @@ scenario("paintmap", "the Filter sheet: a region chip bulk-selects countries, co
   // painter: tap two different ones, both should stay selected (multi-select) -- re-queried between taps since
   // each tap's rebuild() + renderFilter() re-sorts/re-renders the chip row (a stale element reference from
   // before the re-render can end up detached or zero-size)
+  await t.click("[data-pmsec='painter']", { wait: 300 });
   t.expect(t.$$("[data-pmp]").length >= 2, "not enough painter chips to test multi-select");
   await t.click(t.$$("[data-pmp]")[0], { wait: 300 });
   const secondId = t.w.PM_CTRL.spec.f.painterSet[0];
@@ -6725,8 +7312,8 @@ scenario("paintmap", "the card's Same painter / Same decade / Same place chips n
   await t.tapAt(cv0, r00.left + r00.width / 2, r00.top + r00.height / 2 - 150, { wait: 900 });
   await t.waitFor(".pmx-facets button", 6000, "the card's facet chips");
   const labels = t.$$(".pmx-facets button").map(b => t.text(b));
-  // Phase B (2026-10-24): the three presets carry a live count after their words ("Same painter 377"); More, Open, Around this and Walk follow
-  t.expect(labels.every(l => /^(Same painter|Same era here|Around the same era here|Same era|Around the same era|More|Open|Around this|Walk from here)/.test(l)), `unexpected chip label(s): ${JSON.stringify(labels)}`);
+  // Phase B (2026-10-24): the three presets carry a live count after their words ("Same painter 377"); More follows; Open is the card itself, Around this and Walk live in More
+  t.expect(labels.every(l => /^(Same painter|Same era here|Around the same era here|Same era|Around the same era|More)/.test(l)), `unexpected chip label(s): ${JSON.stringify(labels)}`);
   t.expect(!labels.some(l => /undefined/.test(l)), `a chip rendered the literal text "undefined": ${JSON.stringify(labels)}`);
   const facetBtn = t.$$(".pmx-facets [data-pmpre]").find(b => !b.disabled);
   t.expect(facetBtn, "no preset chip to test (this painting has none?)");
@@ -6744,9 +7331,11 @@ scenario("paintmap", "Walk from here steps to a different painter each time", as
   // the card (and its Walk chip) only opens on a tap now -- tap an off-center painting to open it first
   const cv0 = t.$(".pmx-cv"), r00 = cv0.getBoundingClientRect();
   await t.tapAt(cv0, r00.left + r00.width / 2, r00.top + r00.height / 2 - 150, { wait: 900 });
-  await t.waitFor(".pmx-facets [data-pmwalk-go]", 6000, "the Walk from here chip");
+  await t.waitFor(".pmx-facets [data-pmmore2]", 6000, "the More chip");
   const start = t.w.PM_CTRL.center, startPainter = t.ev(`typeof XBF !== "undefined" ? XBF.artist[${start}] : null`);
-  await t.click(".pmx-facets [data-pmwalk-go]", { wait: 700 });
+  await t.click(".pmx-facets [data-pmmore2]", { wait: 500 });
+  await t.waitFor(".pmx-moresheet [data-pmwalk-go]", 4000, "Walk from here at the top of More");
+  await t.click(".pmx-moresheet [data-pmwalk-go]", { wait: 700 });
   t.expect(t.w.PM_CTRL.spec.arr === "spiral", `Walk from here didn't center on a new painting: ${t.w.PM_CTRL.spec.arr}`);
   const step1 = t.w.PM_CTRL.spec.seed;
   t.expect(step1 >= 0 && step1 !== start, "Walk from here didn't move to a new painting");
@@ -7004,6 +7593,7 @@ scenario("paintmap", "a maker page's Design map button opens the design map scop
 scenario("favs", "a painting's heart (now in the top bar) and a double-tap on the picture both keep it; the shelf sorts favorites into kinds with counts, remembered", async t => {
   await t.open("#/gallery/8136", { settle: 800 });
   await t.waitFor("[data-fva]", 14000, "the heart under the painting");
+  const HSEL = t.$(".gl-corner-heart") ? ".gl-corner-heart" : "[data-fva]";   // a phone shows the heart at the picture's top-left
   t.expect(!!t.$(".art-top [data-fva]"), "the heart isn't in the top bar beside the museum link, where it's visible without scrolling");
   // double-tap to like (Instagram-style): a quick second tap on the picture favorites it, with a heart burst,
   // before its single-tap action (name a spot) gets to fire
@@ -7012,14 +7602,14 @@ scenario("favs", "a painting's heart (now in the top bar) and a double-tap on th
   await t.click(hero, { wait: 500 });
   t.expect(t.ev("Object.keys(S.favArt || {}).length") === 1, "a double-tap on the painting didn't favorite it");
   t.expect(t.$("[data-fva]").getAttribute("aria-pressed") === "true", "the heart didn't fill after the double-tap");
-  await t.click("[data-fva]", { wait: 400 });
+  await t.click(HSEL, { wait: 400 });
   t.expect(t.ev("Object.keys(S.favArt || {}).length") === 0, "the heart button didn't un-favorite it again");
-  await t.click("[data-fva]", { wait: 400 });
+  await t.click(HSEL, { wait: 400 });
   t.expect(t.$("[data-fva]").getAttribute("aria-pressed") === "true", "the heart didn't fill");
   t.expect(t.ev("Object.keys(S.favArt || {}).length") === 1, "the painting isn't in favorites");
   // David, 2026-10-09: a toast used to land right over the heart it was confirming. Now it's low, and the heart
   // (still animating/settled) stays the top hit at its own center the whole time.
-  const atHeart = t.ev(`(() => { const r = document.querySelector("[data-fva]").getBoundingClientRect(); const el = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return el && el.closest("[data-fva]") === document.querySelector("[data-fva]"); })()`);
+  const atHeart = t.ev(`(() => { const r = document.querySelector(${JSON.stringify(HSEL)}).getBoundingClientRect(); const el = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return el && el.closest(".gl-corner-heart, [data-fva]") === document.querySelector(${JSON.stringify(HSEL)}); })()`);
   t.expect(atHeart, "the heart is no longer the top element at its own center — something is covering it");
   const toastEl = t.$(".toast");
   t.expect(toastEl && toastEl.classList.contains("toast-low"), "the favorites toast isn't the low (bottom) variant");
@@ -7198,6 +7788,7 @@ scenario("trail", "Close from color > painting > color: the map as it was, the t
   await t.click(pin, { wait: 600 });
   await TRL.atHash(t, /^#\/gallery\/\d+/, "the painting page");
   t.expect(t.$("#app .screen [data-tl-exit]"), "the painting page has no place pill");
+  await glOverview(t);
   await t.waitFor(() => t.$$("[data-glrows] [data-swatch]").length, 15000, "the painting's palette");
   await t.click(t.$$("[data-glrows] [data-swatch]")[0], { wait: 600 });
   await TRL.atHash(t, /^#\/(color|name)\//, "a color from the painting");
@@ -7231,7 +7822,7 @@ for (const hash of ["#/color/cobalt", "#/name/ecru", "#/read/mauve", "#/hub/sour
     for (const sel of ["[data-back]", "[data-tl-exit]"]) {
       const node = t.$("#app .screen " + sel); if (!node) continue;
       const r = node.getBoundingClientRect();
-      if (r.top < INSET + 6) bad.push(`${sel} at ${Math.round(r.top)}px`);
+      if (r.top < INSET + 3) bad.push(`${sel} at ${Math.round(r.top)}px`);
     }
     t.expect(!bad.length, `on the status bar: ${bad.join(", ")}`);
   });
@@ -7690,10 +8281,10 @@ scenario("design", "a maker page lists their objects", async t => {
   await t.waitFor(() => t.text(".p-title") !== before, 10000, "the maker page to open");
   await t.waitFor(".masonry .pin", 8000, "the maker's objects grid");
 });
-scenario("design", "\"In design objects\" renders on a color page with design-object coverage", async t => {
+scenario("design", "Design objects show as a chip in a color page's Elsewhere strip when the color has design-object coverage", async t => {
   await t.open("#/color/ivory", { settle: 800 });
   await t.waitFor(".p-title, .cp-page", 12000, "a color page");
-  await t.waitFor(() => /In design objects/.test(t.d.body.innerText), 10000, '"In design objects" section');
+  await t.waitFor(() => t.$$(".rc-else .el-chip").some(b => /^Objects/.test(t.text(b))) ? true : null, 25000, 'the Objects chip in the Elsewhere strip');
 });
 // David, 2026-10-10: "I got to Design objects but the screen gets stuck and won't let me go back to anything
 // else." The repro that matters is the one a real phone hits that this suite's own host-blocked network can't
@@ -8046,23 +8637,51 @@ scenario("pv", "Palette view: categories render equal-swatch rows, the count sli
 });
 // Look closer's Pick mode is the palette editor (David, 2026-10-20): "Pick a color" opens it, a tap drops a loupe + a
 // swatch, the palette survives closing and reopening, and Save puts it in Kept.
-scenario("paintings", "Pick a color opens the palette editor: taps add loupes and swatches that persist and Save keeps them", async t => {
+scenario("paintings", "Pick a color opens the palette editor: one reticle moves, + keeps its colors as swatches that persist and Save keeps them", async t => {
   await t.open("#/gallery/5", { settle: 800 });
   const btn = await t.waitFor("[data-glpickbtn]:not([hidden])", 15000, "the Pick a color button");
   await t.click(btn, { force: true, wait: 900 });
   await t.waitFor(".glz-scrim [data-glzpk]:not([hidden])", 8000, "the palette editor panel");
-  t.expect(/tap the painting/i.test(t.text(".glz-pk-info")), "the first-time hint is missing");
+  await t.waitFor(() => t.$(".glz-pk-name"), 6000, "the live color name under the picture");
+  t.expect(t.$$(".glz-scrim .eyd-ret").length === 1, "there should be exactly one reticle");
+  t.expect(t.$(".glz-scrim .eyd-prev") && !t.$(".glz-scrim .eyd-prev").hidden, "the corner preview is missing");
+  // no black sausage (David, 2026-10-25): the first time the close-up shows it is already drawn from real pixels, in the corner
+  const pv0 = t.ev(`(() => { const p = document.querySelector(".glz-scrim .eyd-prev"), cv = p.querySelector("canvas"), d = cv.getContext("2d").getImageData(cv.width >> 1, cv.height >> 1, 1, 1).data, r = p.getBoundingClientRect(), s = document.querySelector(".glz-stage").getBoundingClientRect();
+    return JSON.stringify({ lit: d[0] + d[1] + d[2] > 24, side: Math.round(r.width), nearTop: r.top - s.top < 24, nearEdge: r.left - s.left < 24 || s.right - r.right < 24, name: p.querySelector(".eyd-prev-name").textContent.length > 0 }); })()`);
+  const pvj = JSON.parse(pv0);
+  t.expect(pvj.lit && pvj.nearTop && pvj.nearEdge && pvj.name && pvj.side >= 150, `the close-up must open drawn, in a corner, at least 150px: ${pv0}`);
+  t.expect(t.$$(".glz-pk-strip .glz-seg-c").length === 1 && t.$(".glz-seg-live"), "with no colors kept, the live color fills the whole strip alone");
+  const st0 = t.$(".glz-pk-strip").getBoundingClientRect(), sg0 = t.$(".glz-seg-live").getBoundingClientRect();
+  t.expect(Math.abs(sg0.width - st0.width) < 2 && st0.height >= 70, `the first color should fill the strip: strip ${st0.width}x${st0.height}, cell ${sg0.width}`);
+  t.expect(t.$$(".glz-pk-size [data-eydsize]").length === 4, "the Point / Small / Medium / Large row should sit below the palette row");
   const pts = [[.3, .3], [.6, .5], [.5, .8]];
-  t.ev(`(() => { const s = document.querySelector(".glz-scrim"), im = s.querySelector(".glz-img"), r = im.getBoundingClientRect();
-    ${JSON.stringify(pts)}.forEach(([fx, fy]) => s._glzQA.pkTap(r.left + fx * r.width, r.top + fy * r.height)); })()`);
-  t.expect(t.$$(".glz-lp").length === 3 && t.$$(".glz-sw-w").length === 3, `expected 3 loupes and 3 swatches, got ${t.$$(".glz-lp").length}/${t.$$(".glz-sw-w").length}`);
-  t.expect(t.$(".glz-sw.on") && t.$(".glz-lp.on"), "the last pick should be the active swatch and loupe");
-  const first = t.$(".glz-sw-w .glz-sw");
-  await t.click(first, { force: true, wait: 200 });
-  t.expect(t.$(".glz-sw-w .glz-sw").classList.contains("on"), "tapping a swatch should select it");
+  for (const [fx, fy] of pts) {
+    t.ev(`(() => { const s = document.querySelector(".glz-scrim"), im = s.querySelector(".glz-img"), r = im.getBoundingClientRect();
+      s._glzQA.pkTap(r.left + ${fx} * r.width, r.top + ${fy} * r.height); })()`);
+    await t.sleep(80);
+    await t.click(t.$("[data-glzpkadd]"), { force: true, wait: 120 });
+  }
+  t.expect(t.$$(".glz-seg-c[data-id]").length === 3, `expected 3 kept cells, got ${t.$$(".glz-seg-c[data-id]").length}`);
+  t.expect(t.$$(".glz-scrim .eyd-ret").length === 1, "adding a color must not drop another reticle");
+  t.expect(t.$(".glz-seg-c.on"), "the last added color should be selected");
+  // equal cells: three kept colors split the strip in thirds (the ring sits on the last, so no extra live cell)
+  const ws = t.$$(".glz-seg-c[data-id]").map(c => c.getBoundingClientRect().width);
+  t.expect(Math.max(...ws) - Math.min(...ws) < 2, `the cells should all be the same width: ${ws.join(",")}`);
+  // a long press selects the first cell (no corner dot); the x shows on the selected one
+  t.expect(!t.$(".glz-seg-dot") || getComputedStyle(t.$(".glz-seg-dot")).display === "none", "there is no corner dot on a cell");
+  await t.ev(`(() => { const w = document.querySelector('.glz-seg-c[data-id]'), r = w.getBoundingClientRect(), o = { bubbles: true, pointerId: 7, pointerType: 'touch', isPrimary: true, clientX: r.left + 20, clientY: r.top + 20 }; w.dispatchEvent(new PointerEvent('pointerdown', o)); setTimeout(() => w.dispatchEvent(new PointerEvent('pointerup', o)), 520); })()`);
+  await t.sleep(800);
+  t.expect(t.$(".glz-seg-c[data-id]").classList.contains("on") && t.$(".glz-seg-c.on [data-glzpkx]"), "a long press should select a color and show its x");
+  // a tap on the strip goes straight to the full-screen palette preview; closing it returns with the same colors
+  await t.click(t.$(".glz-seg-c[data-id]:nth-child(2) .glz-seg-t"), { force: true, wait: 500 });
+  await t.waitFor(".rp-focus.cf-multi", 3000, "the palette preview after tapping the strip");
+  t.expect(t.$$(".rp-focus .cf-band").length === 3, "the preview should show the 3 kept colors");
+  await t.click(t.$(".cf-close"), { force: true, pointer: true, wait: 500 });   // the preview closes on pointerup
+  await t.waitFor(() => !t.$(".rp-focus"), 3000, "the palette preview to close");
+  t.expect(t.$(".glz-scrim") && t.$$(".glz-seg-c[data-id]").length === 3, "closing the preview should return to the picker with the same colors");
   await t.click(t.$("[data-glzclose]"), { force: true, wait: 500 });
   await t.click(await t.waitFor("[data-glpickbtn]:not([hidden])", 8000, "the Pick a color button again"), { force: true, wait: 900 });
-  t.expect(t.$$(".glz-sw-w").length === 3, "the palette should still be there after closing and reopening");
+  t.expect(t.$$(".glz-seg-c[data-id]").length === 3, "the palette should still be there after closing and reopening");
   const kept0 = t.ev(`(S.palettes || []).length`);
   await t.click(t.$("[data-glzpksave]"), { force: true, wait: 400 });
   t.expect(t.ev(`(S.palettes || []).length`) === kept0 + 1, "Save palette should add one kept palette");
@@ -8199,27 +8818,48 @@ scenario("paintings", "five cold addresses open their own page at 375x812 and 14
   }
 });
 
-// David, 2026-10-21: Today is a feed (js/todayfeed.js, #/feed). It opens with cards, a chip filters, a card tap opens its
-// page and Back returns to the feed (scroll kept), and the old daily game still opens from its card.
-scenario("home", "Today feed: cards, a chip filter, a card opens and Back returns, the daily game opens from its card", async t => {
+// David, 2026-10-26: Today is a Pinterest for paintings (js/todayfeed.js, js/homefeed.js, #/feed). It opens on Paintings and nothing else, with two slim rows
+// on top (kinds, then lenses) and no header or intro line; a single tap opens a painting after a beat and Back returns with the scroll kept; a double-tap
+// keeps it instead; Colors holds the color of the day, the daily game and Continue learning.
+scenario("home", "Today: paintings only on open, two rows, a double-tap likes, a tap opens and Back keeps the scroll, Colors holds the game", async t => {
   await t.open("#/feed", { settle: 600 });
-  await t.waitFor(() => t.$$(".tf-col .tf-card:not(.sk)").length >= 12, 20000, "the feed to show cards");
-  const first = t.$$(".tf-col .tf-card")[0];
-  t.expect(!first.classList.contains("tf-game"), "the game card is the first card");
-  t.expect(t.$(".tf-cotd") && t.$(".tf-game") && t.$(".tf-cont"), "the color of the day, the game card and Continue learning should all be in All");
-  await t.click(t.$("[data-tf-f=paint]"), { wait: 500 });
-  await t.waitFor(() => t.$$(".tf-col .tf-card").length >= 12 && t.$$(".tf-col .tf-card").every(c => c.classList.contains("tf-paint")), 8000, "the Paintings chip to show only paintings");
-  await t.click(t.$("[data-tf-f=all]"), { wait: 500 });
+  await t.waitFor(() => t.$$(".tf-col .tf-paint:not(.sk)").length >= 12, 20000, "the feed to show paintings");
+  t.expect(t.$$(".tf-col .tf-card").every(c => c.classList.contains("tf-paint")), "the first screen holds something that is not a painting");
+  t.expect(!t.$(".tf-head") && !t.$(".tf-because"), "Today still has a header or an intro line");
+  t.expect(t.$(".tf-kinds") && t.$(".tf-lenses") && t.$$(".tf-lenses .tf-chip").length >= 2, "the two rows (kinds and lenses) are not both there");
+  t.expect(t.$$("[data-tf-heart]").length >= 8, "the paintings have no hearts");
+  t.expect(t.$(".tf-feed").classList.contains("nocaps"), "painter and year should be off by default");
+  // a double-tap keeps a painting and stays on the page
+  const dt = t.$$(".tf-col .tf-paint")[1], k0 = Object.keys(t.w.fvArtStore()).length, ev = () => new t.w.MouseEvent("click", { bubbles: true, clientX: 30, clientY: 30 });
+  dt.dispatchEvent(ev()); await t.sleep(60); dt.dispatchEvent(ev()); await t.sleep(900);
+  t.expect(t.w.location.hash === "#/feed", "a double-tap opened the painting");
+  t.expect(Object.keys(t.w.fvArtStore()).length === k0 + 1, "a double-tap did not keep the painting");
+  t.expect(dt.querySelector(".tf-heart.on"), "the tile's heart did not light");
+  // a lens chip changes the list
+  const ids0 = t.$$(".tf-col .tf-paint").slice(0, 6).map(c => c.dataset.gi).join(",");
+  const lens = t.$$(".tf-lenses .tf-chip")[1];
+  await t.click(lens, { wait: 1200 });
+  await t.waitFor(() => t.$(".tf-lenses .tf-chip.on") && t.$(".tf-lenses .tf-chip.on") !== t.$$(".tf-lenses .tf-chip")[0] && t.$$(".tf-col .tf-paint").length >= 8, 12000, "a lens to load");
+  t.expect(t.$$(".tf-col .tf-paint").slice(0, 6).map(c => c.dataset.gi).join(",") !== ids0, "a lens showed the same paintings");
+  await t.click(t.$$(".tf-lenses .tf-chip")[0], { wait: 800 });
+  // Colors: the color of the day, the game, Continue learning
+  await t.click(t.$("[data-tf-f=color]"), { wait: 700 });
+  await t.waitFor(() => t.$(".tf-cotd") && t.$(".tf-game") && t.$(".tf-cont"), 8000, "the color of the day, the game card and Continue learning should all be in Colors");
+  await t.click(t.$("[data-tf-f=paint]"), { wait: 800 });
+  await t.waitFor(() => t.$$(".tf-col .tf-paint").length >= 12, 12000, "Paintings to come back");
+  // open, Back, scroll kept
   const sc = t.$(".tf-screen"); sc.scrollTop = 500; await t.sleep(300);
-  const card = t.$$(".tf-col .tf-card").find(c => (c.dataset.tf === "name" || c.dataset.tf === "paint") && c.getBoundingClientRect().top > 150);
-  await t.click(card, { wait: 800 });
-  const y = t.ev("TF.y.all");
+  const card = t.$$(".tf-col .tf-paint").find(c => c.getBoundingClientRect().top > 150);
+  await t.click(card, { wait: 900 });
+  const y = t.ev("Object.values(HF_STATE.y).pop()");
   t.expect(y > 200, `the feed did not remember its scroll (${y})`);
-  await t.waitFor(() => !t.$(".tf-screen") && t.w.location.hash !== "#/feed", 12000, "a card to open its page");
+  await t.waitFor(() => !t.$(".tf-screen") && t.w.location.hash !== "#/feed", 12000, "a painting to open its page");
   t.w.history.back();
   await t.waitFor(() => t.$(".tf-screen") && t.w.location.hash === "#/feed", 12000, "Back to return to the feed");
-  await t.sleep(500);
+  await t.sleep(600);
   t.expect(Math.abs(t.$(".tf-screen").scrollTop - y) < 40, `Back lost the scroll (${y} -> ${t.$(".tf-screen").scrollTop})`);
+  await t.click(t.$("[data-tf-f=color]"), { wait: 700 });
+  await t.waitFor(() => t.$(".tf-game"), 8000, "the game card");
   await t.click(t.$(".tf-game"), { wait: 800 });
   await t.waitFor(() => t.w.location.hash === "#/daily", 12000, "the daily game to open from its card");
 });
@@ -8267,7 +8907,7 @@ scenario("paintmap", "focus: a year range change keeps the painting in the middl
   const i0 = await pmFocusOpen(t), y = t.ev(`GAL.year[${i0}]`);
   t.expect(t.w.PM_CTRL.center === i0, "the standing painting isn't in the middle");
   t.ev(`PM_CTRL.spec.f.y0 = ${y - 40}; PM_CTRL.spec.f.y1 = ${y + 40}; PM_CTRL.rebuild()`);
-  t.expect(t.w.PM_CTRL.count < 60000 && t.w.PM_CTRL.count > 0, `the range didn't narrow the map (${t.w.PM_CTRL.count})`);
+  t.expect(t.w.PM_CTRL.count < 120000 && t.w.PM_CTRL.count > 0, `the range didn't narrow the map (${t.w.PM_CTRL.count})`);
   t.expect(t.w.PM_CTRL.center === i0, `the year range moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
   t.ev(`PM_CTRL.spec.f.y0 = ${y - 10}; PM_CTRL.spec.f.y1 = ${y + 10}; PM_CTRL.rebuild()`);
   t.expect(t.w.PM_CTRL.center === i0, `a tighter range moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
@@ -8318,6 +8958,8 @@ async function pmCardOpen(t, hash = "#/paintings/map?arr=color") {
   await t.waitFor(".pmx-facets [data-pmpre]", 6000, "the card's preset chips");
   t.ev("PM_CTRL._qaSkipGlide()"); await t.sleep(150);   // the harness can leave the tap's glide mid-ease: land it
   await t.waitFor(".pmx-facets [data-pmpre]", 6000, "the card's preset chips after landing");
+  // the chip rows follow the card's measured height (--cap-x, set a frame after the card's text lands): wait for them to clear it
+  await t.waitFor(() => t.$("[data-pmmore2]").getBoundingClientRect().bottom <= t.$(".pmx-cap").getBoundingClientRect().top + 1, 6000, "the chip rows to clear the card");
   return t.w.PM_CTRL.center;
 }
 scenario("paintmap", "presets: each of the three chips narrows the map, keeps your painting in the middle, shows a count, and a second tap removes it", async t => {
@@ -8381,7 +9023,7 @@ scenario("paintmap", "a color is a filter: only paintings that hold it stay, cen
   t.expect(/paintings/.test(chipTxt) && chipTxt.replace(/,/g, "").includes(String(n)), `the chip should read "<name> · ${n.toLocaleString()} paintings": "${chipTxt}"`);
   t.expect(t.text("[data-pmcount]").replace(/,/g, "").includes(String(n)), "the corner count disagrees with the chip");
   await t.click(".pmx-xcl-x", { wait: 900 });
-  t.expect(t.w.PM_CTRL.count === total, `x didn't restore every painting (${t.w.PM_CTRL.count} of ${total})`);
+  t.expect(t.w.PM_CTRL.count === total || t.w.PM_CTRL.count === total - t.ev("(GAL.hidIdx || []).length"), `x didn't restore every painting (${t.w.PM_CTRL.count} of ${total})`);
   t.expect(t.w.PM_CTRL.center === chk.center, `x moved you off the painting you were on: ${chk.center} -> ${t.w.PM_CTRL.center}`);
   t.expect(!t.$(".pmx-xcolor") && t.$(".pmx-chipbar").hidden, "the color chip stayed after x");
 });
@@ -8450,20 +9092,20 @@ scenario("paintmap", "a color nothing holds that closely says so and offers Loos
   t.expect(t.w.PM_CTRL.count > 0, "loosening the closeness never brought paintings back");
 });
 
-// ---- By vibe (David, 2026-10-24: "a map arranged by vibe"): data/gallery/look.bin from the CLIP image model -----------------------------
+// ---- By look (David, 2026-10-24: "a map arranged by vibe"): data/gallery/look.bin from the CLIP image model -----------------------------
 // Passes trivially when look.json is absent: the option is hidden then, which is the designed fallback.
-scenario("paintmap", "By vibe: the option appears, switching keeps the painting in the middle, a filter refills a compact grid with no voids", async t => {
+scenario("paintmap", "By look: the option appears, switching keeps the painting in the middle, a filter refills a compact grid with no voids", async t => {
   const i0 = await pmFocusOpen(t);
   const meta = await t.w.fetch("data/gallery/look.json").then(r => r.ok ? r.json() : null).catch(() => null);
-  if (!meta) { t.expect(true, "no look.json in this checkout: By vibe is hidden by design"); return; }
+  if (!meta) { t.expect(true, "no look.json in this checkout: By look is hidden by design"); return; }
   await t.click(".pmx-do", { wait: 400 });
-  await t.waitFor(".pmx-sheet [data-pmarr=\"look\"]", 6000, "the By vibe choice in Arrange");
+  await t.waitFor(".pmx-sheet [data-pmarr=\"look\"]", 6000, "the By look choice in Arrange");
   await t.click('.pmx-sheet [data-pmarr="look"]', { force: true, wait: 600 });
   await t.waitFor(() => t.w.PM_CTRL.spec.arr === "look" && t.w.PM_CTRL.lay().arr === "look", 15000, "the look layout (look.bin) to load and lay out");
   t.expect(/image model/i.test(t.text(".pmx-sheet .hm-arr-sub")), "the Arrange line doesn't say it comes from an image model");
-  t.expect(t.w.PM_CTRL.center === i0, `By vibe moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  t.expect(t.w.PM_CTRL.center === i0, `By look moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
   const full = t.ev("PM_CTRL.lay().n");
-  t.expect(full === meta.n, `By vibe should hold every painting (${full} of ${meta.n})`);
+  t.expect(full === meta.n || full === meta.n - t.ev("(GAL.hidIdx || []).length"), `By look should hold every painting (${full} of ${meta.n})`);
   // the Even grid layout (a setting; Islands is the default): a filter refills it with no voids
   await t.click('.pmx-sheet [data-pmlk="lay"][data-v="grid"]', { force: true, wait: 600 });
   await t.waitFor(() => !t.w.PM_CTRL.lay().islands && t.w.PM_CTRL.lay().arr === "look", 15000, "the Even grid layout (look.bin) to load");
@@ -8471,29 +9113,30 @@ scenario("paintmap", "By vibe: the option appears, switching keeps the painting 
   const y = t.ev(`GAL.year[${i0}]`);
   t.ev(`PM_CTRL.spec.f.y0 = ${y - 15}; PM_CTRL.spec.f.y1 = ${y + 15}; PM_CTRL.rebuild()`);
   const lay = t.ev("(() => { const l = PM_CTRL.lay(); return { n: l.n, GW: l.GW, GH: l.GH, arr: l.arr }; })()");
-  t.expect(lay.arr === "look" && lay.n > 50 && lay.n < full, `the filter didn't narrow By vibe (${JSON.stringify(lay)})`);
-  t.expect(lay.GW * lay.GH - lay.n < lay.GW, `a filtered By vibe map has voids: ${lay.GW}x${lay.GH} cells for ${lay.n} paintings`);
-  t.expect(t.w.PM_CTRL.center === i0, `a filter moved you off your painting in By vibe: ${i0} -> ${t.w.PM_CTRL.center}`);
+  t.expect(lay.arr === "look" && lay.n > 50 && lay.n < full, `the filter didn't narrow By look (${JSON.stringify(lay)})`);
+  t.expect(lay.GW * lay.GH - lay.n < lay.GW, `a filtered By look map has voids: ${lay.GW}x${lay.GH} cells for ${lay.n} paintings`);
+  t.expect(t.w.PM_CTRL.center === i0, `a filter moved you off your painting in By look: ${i0} -> ${t.w.PM_CTRL.center}`);
   t.ev("PM_CTRL.spec.f.y0 = null; PM_CTRL.spec.f.y1 = null; PM_CTRL.rebuild()");
   await t.click('.pmx-sheet [data-pmarr="color"]', { force: true, wait: 700 });
-  t.expect(t.w.PM_CTRL.center === i0, `leaving By vibe moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
+  t.expect(t.w.PM_CTRL.center === i0, `leaving By look moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
 });
 
-// By vibe Islands (David, 2026-10-24: "maybe each thing should be an island"): natural clusters laid out apart with empty space between.
-scenario("paintmap", "By vibe islands: every painting once and apart with space between; names never overlap; settings persist; focus is kept; a filter compacts", async t => {
+// By look Islands (David, 2026-10-24: "maybe each thing should be an island"): natural clusters laid out apart with empty space between.
+scenario("paintmap", "By look islands: every painting once and apart with space between; names never overlap; settings persist; focus is kept; a filter compacts", async t => {
   const i0 = await pmFocusOpen(t);
   const meta = await t.w.fetch("data/gallery/look.json").then(r => r.ok ? r.json() : null).catch(() => null);
   if (!meta || !meta.islands) { t.expect(true, "no islands table in this checkout: Islands is hidden by design"); return; }
   t.ev("try { localStorage.removeItem('pm-look-opts'); } catch (e) {}");
   await t.click(".pmx-do", { wait: 400 });
-  await t.waitFor(".pmx-sheet [data-pmarr=\"look\"]", 6000, "the By vibe choice in Arrange");
+  await t.waitFor(".pmx-sheet [data-pmarr=\"look\"]", 6000, "the By look choice in Arrange");
   await t.click('.pmx-sheet [data-pmarr="look"]', { force: true, wait: 600 });
   await t.waitFor(() => t.w.PM_CTRL.spec.arr === "look" && (t.w.PM_CTRL.lay().islands || []).length > 10, 20000, "the islands layout to load");
   t.expect(t.w.PM_CTRL.center === i0, `Islands moved you off your painting: ${i0} -> ${t.w.PM_CTRL.center}`);
   const st = t.ev(`(() => { const l = PM_CTRL.lay(); let c = 0; for (let g = 0; g < l.grid.length; g++) if (l.grid[g] >= 0) c++;
     const seen = new Set(l.items); return { n: l.n, filled: c, uniq: seen.size, area: l.GW * l.GH, isl: l.islands.length, labeled: l.islands.filter(q => q.text).length, sumN: l.islands.reduce((a, q) => a + q.n, 0) }; })()`);
-  t.expect(st.n === meta.n && st.uniq === meta.n && st.filled === meta.n, `every painting exactly once: ${JSON.stringify(st)}`);
-  t.expect(st.sumN === meta.n, `every painting belongs to one island: ${st.sumN} of ${meta.n}`);
+  const hn = t.ev("(GAL.hidIdx || []).length"), mn = meta.n - hn;
+  t.expect(st.n === mn && st.uniq === mn && st.filled === mn, `every painting exactly once: ${JSON.stringify(st)}`);
+  t.expect(st.sumN === mn, `every painting belongs to one island: ${st.sumN} of ${mn}`);
   t.expect(st.area > st.n * 1.6, `no empty space between islands: ${st.area} cells for ${st.n} paintings`);
   t.expect(st.labeled >= 5, `too few island names (${st.labeled})`);
   // names: shown only when the island is wide enough on screen, and never on top of each other
@@ -8521,4 +9164,222 @@ scenario("paintmap", "By vibe islands: every painting once and apart with space 
   t.expect(t.w.PM_CTRL.center === c1, `a filter moved you off your painting in Islands: ${c1} -> ${t.w.PM_CTRL.center}`);
   t.ev("PM_CTRL.spec.f.y0 = null; PM_CTRL.spec.f.y1 = null; PM_CTRL.rebuild()");
   t.ev("try { localStorage.removeItem('pm-look-opts'); } catch (e) {}");
+});
+
+scenario("paintmap", "the card is one row of chips; tapping the card opens the painting; Around this seeds from More", async t => {
+  const i0 = await pmCardOpen(t);
+  t.expect(t.$$(".pmx-facets .pmx-frow").length === 1, "the bottom stack should be ONE row of chips");
+  t.expect(!t.$(".pmx-facets [data-pmopen2],.pmx-facets [data-pmwalk-go],.pmx-facets [data-pmarrange-go]"), "Open / Around this / Walk are still pills in the row");
+  t.expect(t.$(".pmx-cap-go"), "the card has no chevron");
+  await t.click("[data-pmmore2]", { wait: 500 });
+  await t.click(".pmx-moresheet [data-pmarrange-go]", { wait: 700 });
+  t.expect(t.w.PM_CTRL.spec.arr === "spiral" && t.w.PM_CTRL.spec.seed === i0, `Around this didn't seed on the painting (${t.w.PM_CTRL.spec.arr}, ${t.w.PM_CTRL.spec.seed} vs ${i0})`);
+  await t.waitFor(() => t.$(".pmx-cap-main") && !t.$(".pmx-cap").hidden, 4000, "the card");
+  await t.click(".pmx-cap-main", { wait: 600 });
+  await t.waitFor(() => /#\/gallery\//.test(t.w.location.hash), 10000, "the card to open the painting");
+});
+
+// David, 2026-10-24: "see a painter only through color: a color map of the painter where the size of a node is based
+// on how much they use that color... and maybe other ways to organize." The painter page's Their colors opens the
+// painter's own color map (js/paintercolors.js on js/palettehive.js): their colors only, area = how many of their
+// paintings hold the color, five arrangements, one tap on a node = that color's page with the painter's use.
+scenario("painters", "painter's color map: the standard map (circles, same size, most used in the middle), options in the ⋯ sheet, every arrangement lays out, a node opens its color", async t => {
+  await t.open("#/painter/vincent-van-gogh", { settle: 600 });
+  await t.waitFor(".aw-page", 15000, "the painter page");
+  await t.click('[data-awtab="colors"]', { wait: 400 });
+  const btn = await t.waitFor(".aw-pcolors", 8000, "the Their colors tab's color map button");
+  await t.click(btn, { wait: 500 });
+  await t.waitFor(".phx", 12000, "the color map");
+  await t.waitFor(() => t.ev("window.PH_DEBUG && PH_DEBUG.count()") > 0, 60000, "the painter's colors to lay out (vivid reading)");
+  t.expect(t.ev("PH_DEBUG.mode()") === "vivid", "the default isn't the Vivid colors reading");
+  t.expect(t.ev("PH_DEBUG.look()") === "circles" && t.ev("PH_DEBUG.size()") === false, "the default isn't same-size Circles");
+  t.expect(/van Gogh/i.test(t.text(".pmx-title b")), `the map isn't titled for the painter: ${t.text(".pmx-title b")}`);
+  t.expect(t.w.location.hash === "#/painter/vincent-van-gogh/colors", `the address while open is ${t.w.location.hash}`);
+  t.expect(!t.$(".ph-arr, .ph-count, .ph-mode"), "a floating menu is still above the map");
+  // the options live in the standard ⋯ sheet: Look, Arrange, Which colors, the size switch
+  await t.click("[data-phdo]", { wait: 500 });
+  await t.waitFor("[data-phlook]", 6000, "the ⋯ sheet");
+  t.expect(t.$$("[data-phmode]").length === 2, "no Vivid | All colors choice in the ⋯ sheet");
+  const chips = t.$$("[data-pharr]").map(b => b.dataset.pharr);
+  t.expect(["share", "hue", "light", "decade"].every(k => chips.includes(k)), `missing arrangements: ${chips}`);
+  t.expect(t.$("[data-phsize]"), "no size switch for Circles");
+  await t.click("[data-sheet-close]", { wait: 400 });
+  // Circles default: every circle the SAME size, the most used color in the middle; vivid = never a near-black among the most used
+  const raw = t.ev("PH_DEBUG.nodes()"), maxShare = Math.max(...raw.map(n => n.share));
+  t.expect(raw.length >= 20, `only ${raw.length} colors for Van Gogh`);
+  t.expect(raw.every(n => Math.abs(n.r - raw[0].r) < .01), "the circles aren't all one size by default");
+  const centre = raw.slice().sort((a, b) => Math.hypot(a.x, a.y) - Math.hypot(b.x, b.y))[0];
+  t.expect(centre.share === maxShare, `By use: the node at the center (share ${centre.share}) isn't the most used (${maxShare})`);
+  const top = raw.slice().sort((a, b) => b.share - a.share).slice(0, 5).map(n => t.ev(`lch(${JSON.stringify(n.h)})[0]`));
+  t.expect(top.every(L => L > 22), `a near-black color is among the most used vivid nodes (${top.map(x => Math.round(x))})`);
+  // Size circles by how much they use it: opt-in, sizes follow use
+  t.ev("PH_DEBUG.setSize(true)"); await t.sleep(600);
+  const ns = t.ev("PH_DEBUG.nodes()").sort((a, b) => b.share - a.share);
+  for (let i = 1; i < ns.length; i++) t.expect(ns[i].r <= ns[i - 1].r + 0.01, `circle ${i} is bigger than a more-used one (${ns[i].r} > ${ns[i - 1].r})`);
+  t.expect(ns[0].r > ns[ns.length - 1].r * 1.2, `the most used color (${ns[0].r}) isn't clearly bigger than the least (${ns[ns.length - 1].r}) with the size switch on`);
+  // Honeycomb: same arrangement as cells, never scaled, and no size switch
+  t.ev(`PH_DEBUG.setLook("honey")`); await t.sleep(600);
+  const hn = t.ev("PH_DEBUG.nodes()");
+  t.expect(hn.every(n => Math.abs(n.r - hn[0].r) < .01), "honeycomb cells aren't all one size");
+  await t.click("[data-phdo]", { wait: 500 });
+  t.expect(!t.$("[data-phsize]"), "the size switch shows for the honeycomb");
+  await t.click("[data-sheet-close]", { wait: 400 });
+  t.ev(`PH_DEBUG.setLook("circles"); PH_DEBUG.setSize(false)`); await t.sleep(500);
+  // every arrangement lays out: finite positions, something drawn
+  for (const arr of ["hue", "light", "decade", "peers"]) {
+    if (!chips.includes(arr)) continue;
+    t.ev(`PH_DEBUG.setArr(${JSON.stringify(arr)})`);
+    await t.waitFor(() => t.ev("PH_DEBUG.arr()") === arr && t.ev("PH_DEBUG.count()") > 0, 6000, `${arr} to lay out`);
+    await t.sleep(500);
+    const nn = t.ev("PH_DEBUG.nodes()");
+    t.expect(nn.length > 0 && nn.every(n => isFinite(n.x) && isFinite(n.y) && n.r > 0), `${arr}: a node has no finite place`);
+    if (arr === "decade") t.expect(new Set(nn.map(n => Math.round(n.y / 40))).size >= 2, "By decade shows only one row");
+    if (arr === "peers") t.expect(nn.some(n => n.hollow), "Against peers has no 'less than peers' colors for Van Gogh");
+  }
+  // All colors (incl. the dark grounds) is one choice away
+  t.ev(`PH_DEBUG.setMode("all")`);
+  await t.waitFor(() => t.ev("PH_DEBUG.mode()") === "all" && t.ev("PH_DEBUG.count()") > 0, 6000, "All colors");
+  t.ev(`PH_DEBUG.setMode("vivid")`);
+  await t.waitFor(() => t.ev("PH_DEBUG.mode()") === "vivid", 6000, "Vivid colors again");
+  // one tap on a node opens its color page, carrying the painter's use
+  t.ev(`PH_DEBUG.setArr("share")`);
+  await t.waitFor(() => t.ev("PH_DEBUG.arr()") === "share", 4000, "By use again");
+  await t.sleep(600);
+  const hex = t.ev("PH_DEBUG.hexAt(0)"), at = t.ev(`PH_DEBUG.screenOf(${JSON.stringify(hex)})`);
+  t.expect(at, "couldn't find the biggest node's screen position");
+  await t.tapAt(t.$(".pmx-cv"), at.x, at.y, { wait: 500 });
+  await t.waitFor(() => /^#\/(c|name)\//.test(t.w.location.hash), 8000, "a color page after tapping a node");
+  t.expect(!t.$(".phx"), "the color map is still open after tapping a node");
+  // a color page opened from a map starts on its Paintings tab (js/richpage.js rpStartChip); the line sits in the article's "In paintings" section,
+  // which loads when it scrolls near, so open Overview and bring that section up (as the trail scenario does)
+  const aboutChip = t.$(".fd-chip[data-fc=about]"); if (aboutChip && !aboutChip.classList.contains("on")) await t.click(aboutChip, { wait: 400 });
+  await t.waitFor(() => { const g = t.$("[data-glin]"); if (g) { g.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); } return t.$(".pc-use"); }, 20000, "the painter's use line on the color page");
+  t.expect(/van Gogh holds this in \d[\d,]* of \d[\d,]* paintings/.test(t.text(".pc-use")), `the use line reads: ${t.text(".pc-use")}`);
+});
+
+
+
+
+// ---- search (2026-10-25): one engine (js/sq*.js) behind the app search; typos, years, painters and combinations ----
+async function sqType(t, text, ready) {
+  if (!t.$(".sr-sheet")) { t.ev("searchOpen()"); await t.waitFor(".sr-input", 4000, "the search sheet"); }
+  const q = t.$(".sr-input"); q.value = text; q.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+  await t.waitFor(() => t.ev("sqWarmed()") && !t.$(".sq-loading") && ready.test((t.$(".sq-row") || {}).textContent || ""), 25000, `a suggestion for "${text}" (rows: ${t.$$(".sq-row").map(r => r.textContent).join(" | ").slice(0, 200)})`);
+  await t.sleep(250);   // the rows are final (the warm-up redraw has happened)
+}
+for (const [typed, want, slug] of [["vermillion", /Vermilion/, /#\/(color|name)\/vermilion$/], ["celedon", /Celadon/, /#\/(color|name)\/celadon$/], ["perwinkle", /Periwinkle/, /#\/(color|name)\/periwinkle$/], ["faded purple", /Faded Purple/, /#\/(color|name)\/faded-purple$/]]) {
+  scenario("search", `typing "${typed}" finds its color page in one tap`, async t => {
+    await t.open("#/today", { settle: 800 });
+    await sqType(t, typed, want);
+    await t.click(t.$(".sq-row"), { wait: 1200 });
+    await t.waitFor(() => slug.test(t.w.location.hash), 12000, `the page for "${typed}" (at ${t.w.location.hash})`);
+  });
+}
+scenario("search", "typing 'van goh' finds Van Gogh's page in one tap", async t => {
+  await t.open("#/today", { settle: 800 });
+  await sqType(t, "van goh", /Vincent van Gogh/);
+  await t.click(t.$(".sq-row"), { wait: 1200 });
+  await t.waitFor(() => /#\/painter\/vincent-van-gogh/.test(t.w.location.hash), 12000, `Van Gogh's page (at ${t.w.location.hash})`);
+});
+for (const [typed, y0, y1] of [["1870s to 80s", 1870, 1889], ["1870-1880", 1870, 1880]]) {
+  scenario("search", `typing "${typed}" offers that span and one tap opens the map filtered to it`, async t => {
+    await t.open("#/today", { settle: 800 });
+    await sqType(t, typed, new RegExp(`${y0}.${y1}`));
+    await t.waitFor(() => /\d[\d,]* paintings/.test((t.$(".sq-row") || {}).textContent || ""), 25000, "its count");
+    await t.click(t.$(".sq-row"), { wait: 1500 });
+    await t.waitFor(() => /paintings\/map/.test(t.w.location.hash) && t.w.location.hash.includes("y0=" + y0) && t.w.location.hash.includes("y1=" + y1), 20000, `the map for ${y0}-${y1} (at ${t.w.location.hash})`);
+  });
+}
+for (const [typed, want, hashHas] of [["dutch portraits", /Show [\d,]+ paintings/, ["co=Netherlands", "subj="]], ["blue 1870s", /Show [\d,]+ paintings/, ["c=", "y0=1870"]]]) {
+  scenario("search", `typing "${typed}" offers "Show N paintings" and one tap opens the filtered map`, async t => {
+    await t.open("#/today", { settle: 800 });
+    await sqType(t, typed, want);
+    await t.click(t.$(".sq-row"), { wait: 1500 });
+    await t.waitFor(() => /paintings\/map/.test(t.w.location.hash) && hashHas.every(x => t.w.location.hash.includes(x)), 20000, `the filtered map (at ${t.w.location.hash})`);
+  });
+}
+scenario("search", "the map opened from Faded purple's page keeps that color and its name (not Dusty violet)", async t => {
+  await t.open("#/color/faded-purple", { settle: 1500 });
+  await t.waitFor(".cp-page", 12000, "the Faded purple page");
+  const hex = t.ev(`document.querySelector(".cp-page").style.getPropertyValue("--c")`).trim().toLowerCase().replace("#", "");
+  await t.waitFor("[data-fdmap]", 12000, "the page's Map button");
+  const mb = t.$$("[data-fdmap]").filter(b => { const r = b.getBoundingClientRect(); return r.width > 0 && r.top >= 0 && r.bottom <= 812; })[0];
+  t.expect(mb, "no visible Map button on the page");
+  await t.click(mb, { wait: 1500 });
+  await t.waitFor(() => /paintings\/map/.test(t.w.location.hash), 20000, "the painting map");
+  const h = decodeURIComponent(t.w.location.hash);
+  t.expect(h.includes("c=" + hex), `the map is not on the page's color ${hex}: ${h}`);
+  await t.waitFor(() => /faded purple/i.test(t.d.body.innerText), 15000, "the map to call the color Faded purple");
+  t.expect(!/dusty violet/i.test(t.d.body.innerText), "the map still names it Dusty violet");
+});
+
+// ---- Museum > Art > Subjects: the painting map's vibe islands as a list (js/subjectisl.js) ----
+scenario("pages", "Subjects: the list draws a card per island with cover photos, a card opens its paintings, Back returns", async t => {
+  await t.open("#/museum/art/subjects", { settle: 600 });
+  await t.waitFor(() => t.$$(".sbi-card[data-sbi-card]").length >= 30, 15000, "the Subjects cards");
+  t.expect(/\/museum\/art\/subjects$/.test(t.w.location.hash), `the list's own address, got ${t.w.location.hash}`);
+  const cards = t.$$(".sbi-card[data-sbi-card]");
+  t.expect(cards.every(c => c.querySelector(".sbi-txt b") && /paintings$/.test(t.text(c.querySelector(".sbi-n")))), "a card is missing its name or count");
+  t.expect(new Set(cards.map(c => t.text(c.querySelector(".sbi-txt b")))).size === cards.length, "two cards share a name");
+  t.expect(cards.every(c => c.querySelectorAll(".sbi-colors button").length >= 4), "a card is missing its palette strip");
+  t.expect(cards.every(c => c.querySelectorAll(".sbi-ph").length >= 2), "a card has no cover frames");   // a photo that fails to load is dropped and its color stays
+  const first = cards[0], name = t.text(first.querySelector(".sbi-txt b"));
+  await t.click(first.querySelector("[data-sbi]"), { wait: 500 });
+  await t.waitFor(() => t.$(".sbi-one") && t.$$(".sbi-grid .gl-pin").length >= 6, 15000, "the island's paintings");
+  t.expect(t.text(".sbi-one h1") === name, `the page shows "${t.text(".sbi-one h1")}", expected "${name}"`);
+  t.expect(/\/museum\/art\/subject\//.test(t.w.location.hash), `the island's address, got ${t.w.location.hash}`);
+  t.expect(t.$(".sbi-one [data-pmap]"), "no Map button");
+  t.expect(/arr=look/.test(t.$(".sbi-one [data-pmap]").dataset.pmap), "the Map button does not open By look");
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => t.$$(".sbi-card[data-sbi-card]").length >= 30 && !t.$(".sbi-one"), 8000, "Back to the Subjects list");
+});
+scenario("pages", "Subjects: the door on Art's first screen opens the list", async t => {
+  await t.open("#/museum/art", { settle: 600 });
+  const door = await t.waitFor(() => { const d = t.$("[data-sbidoor]"); return d && !d.hidden && d; }, 15000, "the Subjects door");
+  await t.click(door, { wait: 500 });
+  await t.waitFor(() => t.$$(".sbi-card[data-sbi-card]").length >= 30, 12000, "the Subjects list after the door");
+});
+
+// ---- Rooms as one system (js/roomshub.js): the rail expands in place, the hub page, a room's page, Walk this room ----
+scenario("pages", "Rooms: See all expands Art's rail into a grid in place, remembers it, and Fewer collapses it", async t => {
+  await t.open("#/museum/art", { settle: 600 });
+  const btn = await t.waitFor(() => t.$("[data-rhexp]"), 15000, "the Rooms expand control");
+  const rail = t.$(".xb-roomrail");
+  t.expect(!rail.classList.contains("open") && btn.getAttribute("aria-expanded") === "false", "the rail starts collapsed");
+  await t.click(btn, { wait: 700 });
+  t.expect(t.$(".xb-roomrail").classList.contains("open") && t.$("[data-rhexp]").getAttribute("aria-expanded") === "true", "See all did not expand the rail");
+  t.expect(t.w.getComputedStyle(t.$(".xb-roomrail")).display === "grid", "the expanded rail is not a grid");
+  t.expect(t.w.localStorage.getItem("colorhub-rooms-open") === "1", "the open state is not remembered");
+  await t.click(t.$("[data-rhexp]"), { wait: 700 });
+  t.expect(!t.$(".xb-roomrail").classList.contains("open") && t.w.localStorage.getItem("colorhub-rooms-open") === "0", "Fewer did not collapse the rail");
+});
+scenario("pages", "Rooms: the hub lists its sections, a room opens as a paintings page, Walk shows eight slides, Back returns", async t => {
+  await t.open("#/museum/art/rooms", { settle: 600 });
+  await t.waitFor(() => t.$$(".rh-card, .sbi-card").length >= 20, 20000, "the room cards");
+  const heads = t.$$(".rh-sec b").map(b => t.text(b));
+  ["Yours", "Today's room", "By subject", "By color", "By time", "By place", "Curated"].forEach(h => t.expect(heads.includes(h), `the hub has no "${h}" section (${heads.join(", ")})`));
+  t.expect(/\/museum\/art\/rooms$/.test(t.w.location.hash), `the hub's own address, got ${t.w.location.hash}`);
+  const q = t.$("[data-rhq]"); q.value = "blue"; q.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+  await t.waitFor(() => t.$$(".rh-card, .sbi-card").some(c => /blue/i.test(t.text(c.querySelector(".sbi-txt b")))), 8000, "search to find a Blue room");
+  q.value = ""; q.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+  await t.waitFor(() => t.$("[data-rh='c-blues']"), 8000, "the full list back");
+  await t.click(t.$("[data-rh='c-blues']"), { wait: 600 });
+  await t.waitFor(() => t.$(".rh-room h1") && t.$$(".sbi-grid .gl-pin").length >= 6 && !t.$("[data-rhwalk]").disabled, 20000, "the Blues room's paintings");
+  t.expect(t.text(".rh-room h1") === "Blues", "the room page has the wrong title");
+  t.expect(/\/museum\/art\/room\/c-blues$/.test(t.w.location.hash), `the room's address, got ${t.w.location.hash}`);
+  t.expect(t.$("[data-rhmap]"), "no Map button");
+  await t.click(t.$("[data-rhwalk]"), { wait: 500 });
+  await t.waitFor(() => t.$$(".rh-w-slide").length === 8, 8000, "eight Walk slides");
+  t.expect(t.$$(".rh-w-slide p").every(p => t.text(p).length > 20), "a Walk slide has no measured fact");
+  await t.click("[data-rhwx]", { wait: 300 });
+  t.expect(!t.$(".rh-walk"), "the Walk did not close");
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => t.$(".rh-page") && !t.$(".rh-room"), 8000, "Back to the Rooms page");
+});
+
+scenario("home", "a cold open (no address) lands on the Today feed, paintings first", async t => {
+  await t.open("", { cold: true, settle: 1500 });
+  await t.waitFor(() => t.$(".tf-screen .tf-kinds") ? true : null, 12000, "the Today feed on a cold open");
+  t.expect(/#\/feed/.test(t.w.location.hash), `the address is ${t.w.location.hash}, not #/feed`);
+  t.expect(t.text(".tf-kinds .tf-chip[aria-checked='true'], .tf-kinds .tf-chip.on") === "Paintings", "Paintings is not the selected kind");
 });

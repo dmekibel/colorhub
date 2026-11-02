@@ -1,0 +1,12 @@
+{
+  "_doc": "Hand-curated alias targets that no build script may change. Every writer of data/aliases.json applies these last (tools/build_core_names.py write_aliases, tools/fix_alias_targets.py skips them), tools/check_aliases.js fails if aliases.json stops carrying one, and tools/check_solvable.js lets a pin point at a library.json entry (js/router.js routeNameAsync and js/learnmore.js lxRekey both resolve library targets), not only a core name. Add a pin only when the right page is a named subject the nearest-core-name search can't reach.",
+  "pins": [
+    {
+      "alias": "Ultramarine",
+      "slug": "ultramarine",
+      "to": "lapis-lazuli",
+      "toName": "Lapis Lazuli",
+      "why": "Ultramarine is the pigment ground from lapis lazuli; data/articles/lapis-lazuli.json is its article and there is no ultramarine page. The nearest-core search sent it to yellow (2026-10-09, an ISCC-NBS row listing blocks 82/194/267 was read as block 82, vivid yellow)."
+    }
+  ]
+}

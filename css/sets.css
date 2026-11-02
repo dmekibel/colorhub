@@ -336,3 +336,22 @@ html.sheet-open .sx-tray,html.booth .sx-tray{display:none}
 .sp-nt small{font:400 14px/1.2 var(--sans);color:var(--soft)}
 .sp-strip .sp-expand{position:absolute;flex:none;min-width:38px}
 .sp-from .sp-title{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+
+/* The palette page's order and its endless feed (js/setpage.js spMountFeed; David, 2026-10-28) */
+.sp-toolrow{display:flex;gap:10px;margin:10px 0 4px}
+.sp-tool{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;background:var(--surface-2);border:1px solid var(--rule);color:var(--ink);font:500 15px/1 var(--sans)}
+.sp-tool svg{width:18px;height:18px}
+.sp-relate-d>summary,.sp-more-d>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:0 2px;border-bottom:1px solid var(--rule);font:400 20px/1.2 var(--serif);color:var(--ink)}
+.sp-relate-d>summary::-webkit-details-marker,.sp-more-d>summary::-webkit-details-marker{display:none}
+.sp-relate-d>summary::after,.sp-more-d>summary::after{content:"";width:9px;height:9px;border-right:1.5px solid var(--soft);border-bottom:1.5px solid var(--soft);transform:rotate(45deg);margin-right:6px;transition:transform .2s var(--ease)}
+.sp-relate-d[open]>summary::after,.sp-more-d[open]>summary::after{transform:rotate(-135deg)}
+.sp-more-d{margin-top:6px}
+.sp-feedsec{margin-top:26px}
+.sp-feedsec>h3{margin-bottom:2px}
+.sp-fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+@media (min-width:700px){.sp-fgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1100px){.sp-fgrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.sp-fgrid .sp-mtile{min-width:0}
+.sp-fgrid .gl-pin{width:100%}
+.sp-loose{grid-column:1/-1;margin:14px 0 2px;padding-top:10px;border-top:1px solid var(--rule);font:500 14px/1.3 var(--sans);color:var(--soft)}
+.sp-fend{text-align:center;padding:24px 0 60px}

@@ -1,0 +1,152 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Painter page v2</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#0e0d0c;--card:#1a1816;--line:#2a2724;--fg:#f2ede6;--mut:#a9a199;--acc:#e8c860}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 Inter,system-ui,sans-serif}
+.serif{font-family:Newsreader,Georgia,serif}
+.hero{position:relative;height:560px;overflow:hidden}
+.hero img{width:100%;height:100%;object-fit:cover}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(14,13,12,.92))}
+.top{position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;z-index:2}
+.btn{background:rgba(20,18,16,.6);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:22px;padding:8px 14px;font-size:14px}
+.ht{position:absolute;left:20px;right:20px;bottom:22px;z-index:2}
+.ht h1{font:500 44px/1.05 Newsreader,serif;margin:0}
+.ht p{margin:6px 0 0;color:#ddd5cb;font-size:15px}
+.ht small{display:block;margin-top:10px;font:italic 15px Newsreader,serif;color:#e9dfcf}
+.strip{display:flex;height:46px}.strip i{flex:1}
+.glance{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:18px 16px 6px}
+.glance div{background:var(--card);border-radius:14px;padding:12px 10px}
+.glance b{display:block;font:500 22px Newsreader,serif}
+.glance span{font-size:12.5px;color:var(--mut);line-height:1.35;display:block}
+.tabs{position:sticky;top:0;z-index:5;background:rgba(14,13,12,.94);backdrop-filter:blur(8px);display:flex;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.tabs b{padding:7px 16px;border-radius:20px;border:1px solid var(--line);font:400 16px Newsreader,serif;color:var(--mut)}
+.tabs b.on{background:var(--fg);color:#111;border-color:var(--fg)}
+section{padding:22px 16px 6px}
+h2{font:500 26px/1.15 Newsreader,serif;margin:0 0 4px}
+.sub{color:var(--mut);font-size:14px;margin:0 0 14px}
+.ch{border-left:3px solid var(--c);padding:2px 0 2px 14px;margin:0 0 22px}
+.ch h3{margin:0;font:500 20px Newsreader,serif}
+.ch .when{font-size:13px;color:var(--mut);letter-spacing:.04em;text-transform:uppercase}
+.ch p{margin:8px 0 0;color:#e6e0d8}
+.mini{display:flex;height:10px;border-radius:5px;overflow:hidden;margin:8px 0 0;width:180px}.mini i{flex:1}
+.cw{white-space:nowrap;font-weight:600;color:var(--c);border-bottom:2px solid color-mix(in srgb,var(--c) 45%,transparent)}
+.cw:before{content:"";display:inline-block;width:.62em;height:.62em;border-radius:50%;background:var(--c);margin:0 .28em .05em 0;box-shadow:0 0 0 1px rgba(255,255,255,.25)}
+.years{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.yr{flex:0 0 118px}.yr .im{height:120px;border-radius:10px;overflow:hidden;background:#222}.yr img{width:100%;height:100%;object-fit:cover}
+.yr .mini{width:100%;height:8px;margin-top:6px}.yr b{display:block;font:500 17px Newsreader,serif;margin-top:4px}
+.arrow{display:flex;align-items:center;gap:8px;color:var(--mut);font-size:13px;margin-top:6px}
+.arrow i{flex:1;height:2px;background:linear-gradient(90deg,#5b543b,#685c40,#8f9891,#c1b331,#354b86)}
+.sw{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.sw div{text-align:left}.sw i{display:block;height:64px;border-radius:12px}
+.sw b{display:block;font-size:13px;margin-top:6px;line-height:1.25}.sw span{font-size:12px;color:var(--mut)}
+.sw div.dim{opacity:.35}
+.filt{display:flex;gap:6px;margin:16px 0 10px;flex-wrap:wrap}
+.filt b{font-size:13px;font-weight:500;padding:6px 10px;border-radius:16px;background:var(--card);display:flex;align-items:center;gap:6px}
+.filt b i{width:12px;height:12px;border-radius:50%;background:var(--c)}.filt b.on{outline:1.5px solid var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}.grid div{aspect-ratio:1;overflow:hidden;border-radius:6px}.grid img{width:100%;height:100%;object-fit:cover}
+.grid div.off{opacity:.18}
+.rail{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none}
+.card{flex:0 0 220px}.card .im{height:160px;border-radius:12px;overflow:hidden}.card img{width:100%;height:100%;object-fit:cover}
+.card .mini{width:100%;height:9px;margin-top:6px}.card b{display:block;font:500 17px Newsreader,serif;margin-top:6px}.card span{font-size:13px;color:var(--mut)}
+.like{display:flex;flex-direction:column}
+.lk{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.lk .mini{width:64px;height:28px;border-radius:8px;margin:0}
+.lk>div:not(.mini){flex:1}.lk b{font:500 17px Newsreader,serif;display:block}.lk span{font-size:13px;color:var(--mut)}
+.lk em{font-style:normal;font-size:13px;border:1px solid var(--line);border-radius:14px;padding:5px 11px}
+.drawer{margin:18px 16px;padding:14px 16px;background:var(--card);border-radius:14px;display:flex;justify-content:space-between;color:var(--mut)}
+.drawer b{color:var(--fg);font:500 18px Newsreader,serif}
+.pull{font:italic 400 24px/1.3 Newsreader,serif;margin:6px 0 22px;padding:0 4px;color:#f4e9c8}
+.note{margin:28px 16px 60px;font-size:12.5px;color:var(--mut)}
+.tag{display:inline-block;background:#e8c860;color:#111;font-size:11px;font-weight:600;padding:2px 7px;border-radius:6px;margin-left:6px;vertical-align:3px}
+</style></head><body>
+
+<div class="hero">
+ <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Van%20Gogh%20-%20Starry%20Night%20-%20Google%20Art%20Project.jpg?width=900" alt="">
+ <div class="top"><span class="btn">‹ Back</span><span style="display:flex;gap:8px"><span class="btn">♡ Follow</span><span class="btn">Map</span><span class="btn">⋯</span></span></div>
+ <div class="ht"><h1>Vincent van Gogh</h1><p>1853–1890 · Netherlands, France · Post-Impressionism</p>
+ <small>From peat-dark browns to cadmium yellow and cobalt night, in ten years.</small></div>
+</div>
+<div class="strip"><i style="background:#C1B331"></i><i style="background:#354B86"></i><i style="background:#59769D"></i><i style="background:#719F91"></i><i style="background:#8E7618"></i><i style="background:#0A437A"></i><i style="background:#3E3C32"></i><i style="background:#100C08"></i></div>
+
+<div class="glance">
+ <div><b>1,239</b><span>paintings here, in only ten years</span></div>
+ <div><b>×0.3</b><span>as much dark brown as his peers</span></div>
+ <div><b>1888</b><span>the year his color turned</span></div>
+</div>
+
+<div class="tabs"><b class="on">About</b><b>Work</b><b>Colors</b></div>
+
+<section>
+ <h2>His life in color</h2><p class="sub">Three places, three palettes · 4 min read</p>
+ <div class="ch" style="--c:#685C40"><span class="when">Netherlands · 1881–1885</span><h3>The peat-dark years</h3>
+  <p>He began among farm workers, painting in <span class="cw" style="--c:#8a7a52">Brownish Olive</span>, <span class="cw" style="--c:#8a6a4f">Sepia</span> and near-black. <i>The Potato Eaters</i> is lit by one lamp; almost everything else is <span class="cw" style="--c:#7a7262">Smoky Black</span>.</p>
+  <div class="mini"><i style="background:#100C08"></i><i style="background:#1A2421"></i><i style="background:#35382E"></i><i style="background:#685C40"></i><i style="background:#5B5940"></i></div></div>
+ <div class="ch" style="--c:#8F9891"><span class="when">Paris · 1886–1887</span><h3>The palette opens</h3>
+  <p>In Paris he met Impressionist and Neo-Impressionist work. Greys turned silvery, <span class="cw" style="--c:#9fb4ba">Pale Russian Blue</span> and <span class="cw" style="--c:#7fa09b">Grey-Green</span> crept in, and the browns thinned out.</p>
+  <div class="mini"><i style="background:#B5C6CA"></i><i style="background:#8F9891"></i><i style="background:#64807C"></i><i style="background:#797C5A"></i><i style="background:#8F6852"></i></div></div>
+ <p class="pull">“By 1890 he used dark brown a third as often as painters of his time.”</p>
+ <div class="ch" style="--c:#C1B331"><span class="when">Arles &amp; Saint-Rémy · 1888–1890</span><h3>Yellow against blue</h3>
+  <p>In the south he set <span class="cw" style="--c:#d6c63e">Cadmium Lemon</span> against <span class="cw" style="--c:#7f96e0">Cyanine Blue</span>, a pair he wrote about to his brother. Some of his chrome yellows have since darkened, so the sunflowers you see are browner than he painted them.</p>
+  <div class="mini"><i style="background:#C1B331"></i><i style="background:#AD9E4B"></i><i style="background:#354B86"></i><i style="background:#698ACE"></i><i style="background:#0A437A"></i></div></div>
+</section>
+
+<section>
+ <h2>A painting a year</h2><p class="sub">Swipe to watch his color change</p>
+ <div class="years">
+  <div class="yr"><div class="im"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Van%20Gogh%20-%20Kauernder%20Junge%20mit%20Sichel.jpeg?width=300"></div><div class="mini"><i style="background:#9F9F52"></i><i style="background:#C2C190"></i><i style="background:#685C40"></i></div><b>1881</b></div>
+  <div class="yr"><div class="im"><img src="https://iiif.micr.io/egrgo/full/400,/0/default.jpg"></div><div class="mini"><i style="background:#1B1B1B"></i><i style="background:#3B3429"></i><i style="background:#523E25"></i></div><b>1884</b></div>
+  <div class="yr"><div class="im"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Schoenen%20-%20s0011V1962%20-%20Van%20Gogh%20Museum.jpg?width=300"></div><div class="mini"><i style="background:#4E4334"></i><i style="background:#685C40"></i><i style="background:#8C7C56"></i></div><b>1886</b></div>
+  <div class="yr"><div class="im"><img src="https://www.artic.edu/iiif/2/a971fad5-a24d-9985-03fb-1f17db9a9d74/full/843,/0/default.jpg"></div><div class="mini"><i style="background:#B5C6CA"></i><i style="background:#8F9891"></i><i style="background:#64807C"></i></div><b>1887</b></div>
+  <div class="yr"><div class="im"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vincent%20Willem%20van%20Gogh%20076.jpg?width=300"></div><div class="mini"><i style="background:#9A8A37"></i><i style="background:#776B39"></i><i style="background:#5A3A29"></i></div><b>1888</b></div>
+  <div class="yr"><div class="im"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Van%20Gogh%20-%20Starry%20Night%20-%20Google%20Art%20Project.jpg?width=300"></div><div class="mini"><i style="background:#59769D"></i><i style="background:#354B86"></i><i style="background:#ABA956"></i></div><b>1889</b></div>
+  <div class="yr"><div class="im"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Korenveld%20met%20kraaien%20-%20s0149V1962%20-%20Van%20Gogh%20Museum.jpg?width=300"></div><div class="mini"><i style="background:#C1B331"></i><i style="background:#354B86"></i><i style="background:#698ACE"></i></div><b>1890</b></div>
+ </div>
+ <div class="arrow">1881<i></i>1890</div>
+</section>
+
+<section>
+ <h2>Most famous</h2>
+ <div class="rail">
+  <div class="card"><div class="im"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Irises-Vincent%20van%20Gogh.jpg?width=400"></div><div class="mini"><i style="background:#719F91"></i><i style="background:#4F638D"></i><i style="background:#4A646C"></i><i style="background:#56794E"></i><i style="background:#7D8C55"></i><i style="background:#8F6852"></i></div><b>Irises</b><span>1889</span></div>
+  <div class="card"><div class="im"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Van%20Gogh%20-%20Terrace%20of%20a%20Caf%C3%A9%20at%20Night%20%28Place%20du%20Forum%29%201888.jpg?width=400"></div><div class="mini"><i style="background:#495746"></i><i style="background:#776B39"></i><i style="background:#8E7618"></i><i style="background:#1B2431"></i><i style="background:#485B6C"></i><i style="background:#0A437A"></i></div><b>Café Terrace at Night</b><span>1888</span></div>
+  <div class="card"><div class="im"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/De%20aardappeleters%20-%20s0005V1962%20-%20Van%20Gogh%20Museum.jpg?width=400"></div><div class="mini"><i style="background:#100C08"></i><i style="background:#1B1B1B"></i><i style="background:#1A2421"></i><i style="background:#35382E"></i><i style="background:#33431E"></i><i style="background:#5B5940"></i></div><b>The Potato Eaters</b><span>1885</span></div>
+ </div>
+</section>
+
+<section>
+ <h2>What he paints with</h2><p class="sub">His most telling colors. Tap one to see where it lives.</p>
+ <div class="sw">
+  <div><i style="background:#C1B331"></i><b>Cadmium Lemon</b><span>Arles skies, wheat</span></div>
+  <div><i style="background:#354B86"></i><b>Cyanine Blue</b><span>night, shadows</span></div>
+  <div><i style="background:#719F91"></i><b>Greyish Teal</b><span>Irises leaves</span></div>
+  <div><i style="background:#8E7618"></i><b>Hazel</b><span>lamplight</span></div>
+  <div><i style="background:#59769D"></i><b>Stardew</b><span>Starry Night</span></div>
+  <div><i style="background:#0A437A"></i><b>Twilight Blue</b><span>café night</span></div>
+  <div><i style="background:#685C40"></i><b>Brownish Olive</b><span>Dutch fields</span></div>
+  <div><i style="background:#100C08"></i><b>Smoky Black</b><span>early interiors</span></div>
+ </div>
+ <div class="filt"><b class="on" style="--c:#C1B331"><i></i>Cadmium Lemon</b><b style="--c:#354B86"><i></i>Cyanine Blue</b><b style="--c:#719F91"><i></i>Greyish Teal</b></div>
+ <div class="grid">
+  <div><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Korenveld%20met%20kraaien%20-%20s0149V1962%20-%20Van%20Gogh%20Museum.jpg?width=300"></div>
+  <div class="off"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/De%20aardappeleters%20-%20s0005V1962%20-%20Van%20Gogh%20Museum.jpg?width=300"></div>
+  <div><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Van%20Gogh%20-%20Terrace%20of%20a%20Caf%C3%A9%20at%20Night%20%28Place%20du%20Forum%29%201888.jpg?width=300"></div>
+  <div class="off"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Schoenen%20-%20s0011V1962%20-%20Van%20Gogh%20Museum.jpg?width=300"></div>
+  <div><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vincent%20Willem%20van%20Gogh%20076.jpg?width=300"></div>
+  <div class="off"><img src="https://iiif.micr.io/egrgo/full/400,/0/default.jpg"></div>
+ </div>
+ <p class="sub" style="margin-top:8px">Paintings with Cadmium Lemon stay lit.</p>
+</section>
+
+<section>
+ <h2>Painters like this</h2><p class="sub">Same years, similar look</p>
+ <div class="like">
+  <div class="lk"><div class="mini" style="display:flex"><i style="background:#c9a33a"></i><i style="background:#3d5a8a"></i><i style="background:#7a8a5a"></i></div><div><b>Paul Gauguin</b><span>1873–1903 · France</span></div><em>vs</em></div>
+  <div class="lk"><div class="mini" style="display:flex"><i style="background:#b9b07a"></i><i style="background:#6a86a8"></i><i style="background:#8f7a5a"></i></div><div><b>Émile Bernard</b><span>1886–1941 · France</span></div><em>vs</em></div>
+  <div class="lk"><div class="mini" style="display:flex"><i style="background:#d4b25a"></i><i style="background:#5a7aa0"></i><i style="background:#a46a4a"></i></div><div><b>Henri de Toulouse-Lautrec</b><span>1880–1901 · France</span></div><em>vs</em></div>
+ </div>
+</section>
+
+<div class="drawer"><b>The measurements</b><span>value, vividness, pairs, avoids ›</span></div>
+<p class="note">Mockup, Van Gogh's real paintings and palettes. Painters-like swatches and the glance numbers are placeholders until built.</p>
+</body></html>

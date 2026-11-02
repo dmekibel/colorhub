@@ -1,0 +1,60 @@
+/* Subjects: the painting map's vibe islands as a list (js/subjectisl.js). Warm black, opaque, text never under body size. */
+.sbi-page .p-dek{max-width:60ch}
+.sbi-list{display:grid;grid-template-columns:1fr;gap:22px;margin-top:18px}
+@media (min-width:700px){.sbi-list{grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:26px 22px}}
+.sbi-fam{margin-top:40px}
+.sbi-fam+.sbi-list{margin-top:16px}
+.sbi-card{display:flex;flex-direction:column;background:var(--surface-1);border:1px solid var(--rule);border-radius:var(--r-2);overflow:hidden}
+.sbi-open{display:block;width:100%;text-align:left;color:inherit;background:none;border:0;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform var(--dur-0) var(--ease)}
+.sbi-open:active{transform:scale(.985)}
+.sbi-open:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
+.sbi-mos{display:grid;gap:2px;aspect-ratio:3/2;background:var(--ground)}
+.sbi-mos.m3{grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr}
+.sbi-mos.m3>.sbi-ph:first-child{grid-row:1/3}
+.sbi-mos.m2{grid-template-columns:2fr 1fr;grid-template-rows:1fr}
+.sbi-mos.m1{grid-template-columns:1fr}
+.sbi-ph{position:relative;display:block;overflow:hidden;background:var(--c,var(--surface-2))}
+.sbi-ph img,.sbi-hero img,.sbi-t img,.sbi-door-i img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s var(--ease)}
+.sbi-ph img.ld,.sbi-hero img.ld,.sbi-t img.ld,.sbi-door-i img.ld{opacity:1}
+.sbi-txt{display:flex;flex-direction:column;gap:3px;padding:14px 16px 12px}
+.sbi-txt b{font:400 25px/1.08 var(--serif);letter-spacing:-.015em;color:var(--ink);text-wrap:balance}
+.sbi-n{font:500 16px/1.3 var(--sans);color:var(--ink)}
+.sbi-sub{font:400 15.5px/1.4 var(--sans);color:var(--soft);text-wrap:pretty}
+.sbi-colors{display:flex;height:22px;border-top:1px solid var(--ground)}
+.sbi-colors button{flex:1 1 0;min-width:0;padding:0;border:0;background:var(--c);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.sbi-colors button:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
+.sbi-sk .sbi-ph{background:var(--surface-2);animation:xbPulse 1.6s ease-in-out infinite}
+.sbi-sk .sbi-txt{min-height:80px}
+/* one island */
+.sbi-hero{position:relative;margin:0 calc(-1 * var(--g));aspect-ratio:4/3;max-height:62vh;background:var(--c);overflow:hidden}
+.sbi-pal{display:flex;height:12px;border-radius:var(--r-1);overflow:hidden;margin-top:16px}
+.sbi-pal i{flex:1 1 0;background:var(--c)}
+.sbi-chips{display:flex;gap:8px;margin:20px 0 14px}
+.sbi-chip{min-height:44px;padding:0 18px;border-radius:var(--r-pill);border:1px solid var(--rule-strong);background:var(--surface-2);color:var(--ink);font:500 16px/1 var(--sans);cursor:pointer}
+.sbi-chip.on{background:var(--paper);color:var(--paper-ink);border-color:var(--paper)}
+.sbi-pane[hidden]{display:none}
+.sbi-grid{position:relative;margin:0 calc(-1 * var(--g) + 2px)}
+.sbi-grid.live{margin-top:0}
+.sbi-tsk{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.sbi-tsk i{aspect-ratio:3/4;background:var(--surface-2);animation:xbPulse 1.6s ease-in-out infinite}
+.sbi-grid.live .sbi-tsk{display:none}
+.sbi-three{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:14px}
+.sbi-t{position:relative;aspect-ratio:3/4;padding:0;border:0;overflow:hidden;background:var(--c);border-radius:var(--r-1);cursor:pointer}
+.sbi-sw{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:14px}
+.sbi-sw button{min-height:56px;padding:10px 12px;border:0;border-radius:var(--r-1);background:var(--c);text-align:left;cursor:pointer;font:500 16px/1.2 var(--sans)}
+.sbi-sw button span{display:inline-block;padding:3px 7px;border-radius:var(--r-1);background:var(--ground);color:var(--ink)}
+.sbi-facts{list-style:none;padding:0;margin:12px 0 0;display:flex;flex-direction:column;gap:6px;font:400 17px/1.4 var(--sans);color:var(--ink)}
+.sbi-near{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.sbi-near button{display:flex;justify-content:space-between;align-items:baseline;gap:12px;min-height:52px;padding:12px 16px;border:1px solid var(--rule);border-radius:var(--r-2);background:var(--surface-1);color:var(--ink);text-align:left;cursor:pointer}
+.sbi-near b{font:400 20px/1.15 var(--serif)}
+.sbi-near span{font:400 16px/1.2 var(--sans);color:var(--soft);white-space:nowrap}
+/* the door on Art's first screen */
+.sbi-door{display:flex;align-items:stretch;justify-content:space-between;gap:12px;width:100%;margin:6px 0 4px;padding:0;border:1px solid var(--rule);border-radius:var(--r-2);background:var(--surface-1);color:var(--ink);text-align:left;overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.sbi-door[hidden]{display:none}
+.sbi-door:active{transform:scale(.985)}
+.sbi-door-t{display:flex;flex-direction:column;justify-content:center;gap:4px;padding:14px 4px 14px 16px;min-width:0}
+.sbi-door-t b{font:400 25px/1.05 var(--serif);letter-spacing:-.015em}
+.sbi-door-t span{font:400 16px/1.35 var(--sans);color:var(--soft)}
+.sbi-door-i{display:flex;gap:2px;flex:none;width:44%;max-width:210px}
+.sbi-door-i span{position:relative;flex:1;background:var(--c)}
+@media (prefers-reduced-motion:reduce){.sbi-ph img,.sbi-hero img,.sbi-t img,.sbi-door-i img{transition:none}.sbi-open:active,.sbi-door:active{transform:none}.sbi-sk .sbi-ph,.sbi-tsk i{animation:none}}

@@ -521,6 +521,11 @@ def write_aliases(out, merged):
     prim = {slug(e["n"]) for e in out}
     slugs = {k: v for k, v in slugs.items() if k not in prim}
     names = {k: v for k, v in names.items() if slug(k) not in prim}
+    # hand-curated pins (data/alias-pins.json) win over every computed target; tools/check_aliases.js enforces them
+    pins_path = ROOT / "data" / "alias-pins.json"
+    if pins_path.exists():
+        for p in json.loads(pins_path.read_text(encoding="utf-8")).get("pins", []):
+            slugs[p["slug"]] = p["to"]; names[p["alias"]] = p["toName"]
     doc = {"_doc": "Canonical-name table (L15, 2026-10-08). `slugs` maps any synonym/spelling-variant slug to the canonical color slug; `names` is the same by display name; `merged` lists the duplicate colors folded into one entry (kept, dropped, dE between their hexes). Count by canonical slug.",
            "merged": [list(m) for m in merged], "slugs": dict(sorted(slugs.items())), "names": dict(sorted(names.items()))}
     (ROOT / "data" / "aliases.json").write_text(json.dumps(doc, ensure_ascii=False, indent=0, separators=(",", ":")) + "\n", encoding="utf-8")

@@ -43,6 +43,37 @@ function checkIds() {
     const b = fs.readFileSync(path.join(ROOT, "data/gallery/look.bin")), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
     if (b.length < 24 || b.readUInt32LE(8) !== gIds.length || b.readUInt32LE(20) !== parseInt(h, 16) || b.length !== 24 + 4 * gIds.length) warn("data/gallery/look.bin is out of step with ids.txt (By look is hidden until it is rebuilt): python3 tools/look_layout.py");
   }
+  // the painting map's micro layer and cluster packs (tools/paintmap_micro.py, tools/paintmap_cluster.py): both are cut from the atlas sheets in gallery order.
+  // micro.json's `hash` is the whole ids.txt (rebuilt with every atlas build); cluster.json's is the FIRST n ids (append-only: a longer ids.txt is fine, the
+  // paintings past n just use the tier-1 sheets). Both ignore themselves in the app when stale; this says so and names the fix.
+  if (fs.existsSync(path.join(ROOT, "data/paintmap/manifest.json"))) {
+    const h8 = s => require("crypto").createHash("sha1").update(s).digest("hex").slice(0, 8), man = rj("data/paintmap/manifest.json");
+    for (const [f, fix] of [["micro", "python3 tools/paintmap_micro.py"], ["cluster", "python3 tools/paintmap_cluster.py"]]) {
+      if (!fs.existsSync(path.join(ROOT, `data/paintmap/${f}.json`))) { warn(`data/paintmap/${f}.json is missing (the map starts without it): ${fix}`); continue; }
+      const m = rj(`data/paintmap/${f}.json`), ok = m.n <= gIds.length && m.hash === h8(gIds.slice(0, m.n).join("\n") + "\n");
+      if (!ok) warn(`data/paintmap/${f}.json is out of step with ids.txt (the map ignores it until it is rebuilt): ${fix}`);
+      else if (m.n !== man.n) warn(`data/paintmap/${f}.json covers ${m.n} paintings, the atlas ${man.n}: ${fix}`);
+    }
+  }
+  if (fs.existsSync(path.join(ROOT, "data/gallery/island-names.json"))) {   // the Subjects list (tools/island_names.py): same ids hash as look.bin, same bytes of look-islands.bin, covers still the right paintings
+    const nm = rj("data/gallery/island-names.json"), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
+    const ib = fs.existsSync(path.join(ROOT, "data/gallery/look-islands.bin")) ? require("crypto").createHash("sha1").update(fs.readFileSync(path.join(ROOT, "data/gallery/look-islands.bin"))).digest("hex").slice(0, 8) : "";
+    const lj = has("data/gallery/look.json") ? rj("data/gallery/look.json") : null;
+    if (nm.n !== gIds.length || nm.hash !== h || nm.isl !== ib || (lj && lj.islands.length !== nm.islands.length)) warn("data/gallery/island-names.json is out of step with ids.txt / look-islands.bin (the Subjects list is hidden until it is rebuilt): python3 tools/island_names.py");
+    else if (nm.islands.some(o => o.cov.some(c => gIds[c[0]] !== c[1]))) warn("data/gallery/island-names.json has a cover that is not at its gallery position: python3 tools/island_names.py");
+  }
+  if (fs.existsSync(path.join(ROOT, "data/gallery/hidden.json"))) {   // hidden non-artworks: header must name THIS ids.txt (a stale one would hide the wrong paintings)
+    const hj = rj("data/gallery/hidden.json"), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
+    if (hj.n !== gIds.length || hj.hash !== h) err("data/gallery/hidden.json was built for a different ids.txt (it would hide the wrong paintings): python3 tools/hide_nonart.py");
+  }
+  if (fs.existsSync(path.join(ROOT, "data/gallery/aesthetic.json"))) {   // the home's picture-appeal reading (tools/audit_beauty.py): a stale one is ignored by the app, so only a warning
+    const aj = rj("data/gallery/aesthetic.json"), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
+    if (aj.n !== gIds.length || aj.hash !== h || sz("data/gallery/aesthetic.bin") !== gIds.length) warn("data/gallery/aesthetic.bin is out of step with ids.txt (the home falls back to palette-only beauty until it is rebuilt): python3 tools/audit_beauty.py");
+  }
+  if (fs.existsSync(path.join(ROOT, "data/gallery/scene.json"))) {   // the home's abstraction and scale axes (tools/audit_scene.py); stale ones are ignored, so a warning
+    const sj = rj("data/gallery/scene.json"), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
+    if (sj.n !== gIds.length || sj.hash !== h || sz("data/gallery/scene.bin") !== gIds.length * 2) warn("data/gallery/scene.bin is out of step with ids.txt (the home changes color only): python3 tools/audit_scene.py");
+  }
   if (fs.existsSync(path.join(ROOT, "data/gallery/vibe/index.json"))) {   // By vibe neighbors (feed): header must name THIS ids.txt
     const v = rj("data/gallery/vibe/index.json"), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
     if (v.n !== gIds.length || v.ids_hash !== h) warn("data/gallery/vibe/ is out of step with ids.txt (the feed's Vibe ranking is empty until it is rebuilt): python3 tools/vibe_knn.py");
@@ -55,6 +86,13 @@ function checkIds() {
   if (has("data/facets/facets.json")) { const fn = rj("data/facets/facets.json").n; if (fn !== N) err(`data/facets/facets.json n=${fn}, the gallery ${N}: rebuild with tools/facets.py`); }
 
   if (has("data/gallery/subjects.json")) { const sj = rj("data/gallery/subjects.json"); if (sj.ia.length !== N || sj.it.length !== N) err(`data/gallery/subjects.json has ${sj.ia.length}/${sj.it.length} entries, the gallery ${N}: rebuild with tools/subjects.py`); }
+
+  // 2b. the finer color index (data/colorindex/, tools/color_index.py): item numbers are gallery indices, so it must name THIS ids.txt
+  if (has("data/colorindex/index.json")) {
+    const ci = rj("data/colorindex/index.json"), h = require("crypto").createHash("sha1").update(fs.readFileSync(path.join(ROOT, "data/gallery/ids.txt"))).digest("hex").slice(0, 12);
+    if (ci.n !== N) err(`data/colorindex/index.json n=${ci.n}, the gallery ${N}: rebuild with tools/color_index.py --raw research/_raw (the color page's "In paintings" row shows the wrong paintings until then)`);
+    else if (ci.ids !== h) err(`data/colorindex/index.json was built for a different data/gallery/ids.txt (${ci.ids || "no hash"} vs ${h}): rebuild with tools/color_index.py --raw research/_raw`);
+  }
 
   // 3. analysis shards (same order, id by id)
   let at = 0, anErr = 0;

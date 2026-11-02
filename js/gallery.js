@@ -39,12 +39,20 @@ const GL_ICON_DICE = sv('<rect x="4" y="4" width="16" height="16" rx="3.5"/><cir
 function galVer() { return typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : ""; }
 function loadGallery() {
   if (GAL) return Promise.resolve(GAL);
-  const get = (f, kind) => fetch(GAL_DIR + f + galVer()).then(r => { if (!r.ok) throw new Error(f + " " + r.status); return r[kind](); });
+  // js/early.js starts these on a cold open before this file runs; take its copy once, else (or if it failed) fetch
+  const get = (f, kind) => { const own = () => fetch(GAL_DIR + f + galVer()), pre = window.__EARLY && window.__EARLY.take(GAL_DIR + f);
+    return (pre ? pre.then(r => r.ok ? r : own(), own) : own()).then(r => { if (!r.ok) throw new Error(f + " " + r.status); return r[kind](); }); };
   // est.json (tools/gallery.py): which years / countries are estimates. Optional: without it everything reads as measured, as before.
-  return GAL_LOADING || (GAL_LOADING = Promise.all([get("index.json", "json"), get("index.bin", "arrayBuffer"), get("est.json", "json").catch(() => null)])
-    .then(([head, buf, est]) => (GAL = glEst(glBuild(head, new Uint8Array(buf)), est)))
+  // hidden.json (tools/hide_nonart.py): items that are not artworks. Optional; GAL.hid[i] = 1 and every list / ranking skips them (a direct address still opens one).
+  return GAL_LOADING || (GAL_LOADING = Promise.all([get("index.json", "json"), get("index.bin", "arrayBuffer"), get("est.json", "json").catch(() => null), get("hidden.json", "json").catch(() => null)])
+    .then(([head, buf, est, hid]) => (GAL = glHide(glEst(glBuild(head, new Uint8Array(buf)), est), hid)))
     .catch(e => { GAL_LOADING = null; throw e; }));
 }
+function glHide(G, h) {
+  if (h && h.n === G.n && Array.isArray(h.idx) && h.idx.length) { G.hid = new Uint8Array(G.n); h.idx.forEach(i => { if (i >= 0 && i < G.n) G.hid[i] = 1; }); G.hidIdx = h.idx; }
+  return G;
+}
+const glHidden = i => !!(GAL && GAL.hid && GAL.hid[i]);
 // ---------- subjects (data/gallery/subjects.json, built by tools/subjects.py + tools/subjects_clip.py) ----------
 // What a painting shows: genre ("g"), things ("t"), iconography ("i"). Three sources per painting, in rank order:
 // ia = authority (museum / Wikidata), it = words in the title, im = detected by a model from the picture (kept only at
@@ -207,7 +215,17 @@ function glEst(G, est) {
 const glPalSpec = i => {
   const G = GAL, h = [], sh = []; let tot = 0;
   for (let j = 0; j < 6; j++) { const s = G.sh[i * 6 + j]; if (s > 0) { h.push(glHex(i, j).slice(1).toLowerCase()); sh.push(s); tot += s; } }
-  return `arr=color&c=${h.join(",")}&cm=overall&sh=${sh.map(x => (x / (tot || 1)).toFixed(3)).join(",")}&t=14&at=1&m=0&hit=1&nm=${encodeURIComponent("This painting's palette")}`;
+  return `arr=spiral&seed=${i}&c=${h.join(",")}&cm=overall&sh=${sh.map(x => (x / (tot || 1)).toFixed(3)).join(",")}&t=14&at=1&m=0&nm=${encodeURIComponent("This painting's palette")}`;
+};
+// the same filter for a derived palette on screen (Stands out, a harmony card, a shuffle, an edit): its own colors and shares
+const glPalSpecOf = (pal, name, on) => {
+  // "Holds every color" (cm=all), not "same overall palette": every color here was taken from this painting, so the
+  // painting itself always holds them all and stays on the map, in the middle (on=). A shuffled, trimmed or edited
+  // palette no longer has this painting's shares, so the overall match would often drop its own parent.
+  const rows = pal.filter(p => p && p.h);
+  // arr=spiral&seed= puts this painting in the middle and spreads the rest outward by how close they are to it, so the
+  // far edge of the map is the least like it (David, 2026-10-25)
+  return `${on >= 0 ? `arr=spiral&seed=${on}` : "arr=color&hit=1"}&c=${rows.map(p => p.h.slice(1).toLowerCase()).join(",")}&cm=all&t=10&m=0&nm=${encodeURIComponent(name)}`;
 };
 const glYearEst = i => !!(GAL.yspan && GAL.yspan[i] && GAL.year[i] !== GL_UNDATED);
 const glCoEst = i => !!(GAL.coest && GAL.coest[i]);
@@ -448,7 +466,7 @@ function glNear(hex) {
       const d = glDE(tL, ta, tb, Lb[o], Lb[o + 1], Lb[o + 2]);
       if (d < GL_R) { const q = d / GL_R; w += sh[k] * (1 - q * q); }
     }
-    s[i] = w;
+    s[i] = G.hid && G.hid[i] ? 0 : w;
   }
   return s;
 }
@@ -466,7 +484,7 @@ function glNearRanked(hex) {
   for (let i = 0; i < N; i++) {
     let bd = 1e9;
     for (let j = 0; j < 6; j++) { const o = (i * 6 + j) * 3, d = glDE(tL, ta, tb, Lb[o], Lb[o + 1], Lb[o + 2]); if (d < bd) bd = d; }
-    out[i] = s[i] > 0 ? 1 + s[i] : 1 / (2 + bd);   // holders first, then nearest patch
+    out[i] = G.hid && G.hid[i] ? 0 : s[i] > 0 ? 1 + s[i] : 1 / (2 + bd);   // holders first, then nearest patch (hidden last)
   }
   GL_NEAR_RANK.set(k, { key: out, min: 0, ranked: true, floor: have });
   if (GL_NEAR_RANK.size > 8) GL_NEAR_RANK.delete(GL_NEAR_RANK.keys().next().value);
@@ -533,7 +551,7 @@ function glRun(q) {
   if (!key) key = glDaily();
   const out = new Int32Array(N); let n = 0;
   for (let i = 0; i < N; i++) {
-    if (q.mus >= 0 && G.mus[i] !== q.mus) continue;
+    if ((q.mus >= 0 && G.mus[i] !== q.mus) || (G.hid && G.hid[i])) continue;
     const L = G.L[i], C = G.C[i];
     if (L < Llo || L > Lhi || C < Clo || C > Chi) continue;
     if (eras.length) { const y = G.year[i]; if (y === GL_UNDATED || !eras.some(e => y >= e[1] && y < e[2])) continue; }
@@ -629,7 +647,7 @@ function glGrid(host, res) {
   addEventListener("scroll", onScroll, { passive: true });
   addEventListener("resize", onResize);
   // change the columns, keeping the painting under (fx, fy) (viewport px) exactly where it is
-  const setCols = (c, fx, fy) => {
+  const setCols = (c, fx, fy, toY) => {
     c = Math.max(2, Math.min(glMaxCols(), c)); if (c === cols || !n) return false;
     const vy = fy == null ? innerHeight / 2 : fy, r = host.getBoundingClientRect(), y = vy - r.top, x = (fx == null ? W / 2 : fx) - r.left;
     const cx = Math.max(0, Math.min(cols - 1, Math.floor(x / (colW + gap))));
@@ -637,30 +655,14 @@ function glGrid(host, res) {
     const frac = hh[a] ? Math.max(0, Math.min(1, (y - top[a]) / hh[a])) : 0;
     cols = c; relayout();
     const r2 = host.getBoundingClientRect();
-    scrollBy(0, r2.top + top[a] + frac * hh[a] - vy);
+    scrollBy(0, r2.top + top[a] + frac * hh[a] - (toY == null ? vy : toY));
     draw(); if (res.onCols) res.onCols(cols);
     return true;
   };
   const setPlain = v => { plain = !!v; relayout(); draw(); };
-  // two fingers: spreading apart (zoom in) means fewer, bigger paintings; pinching in means more. One step per ~28% change
-  let pd = 0;
-  const dist = t => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
-  const mid = t => [(t[0].clientX + t[1].clientX) / 2, (t[0].clientY + t[1].clientY) / 2];
-  const onTS = e => { if (e.touches.length === 2) { pd = dist(e.touches); e.stopPropagation(); } else pd = 0; };
-  const onTM = e => {
-    if (!pd || e.touches.length !== 2) return;
-    e.preventDefault(); e.stopPropagation();
-    const d = dist(e.touches), ratio = d / pd, m = mid(e.touches);
-    if (ratio > 1.28 || ratio < 0.78) { if (setCols(cols + (ratio > 1 ? -1 : 1), m[0], m[1])) buzz(6); pd = d; }
-  };
-  const onTE = e => { if (e.touches.length < 2) pd = 0; };
-  if (res.pinch) {
-    host.style.touchAction = "pan-y"; host.setAttribute("data-nopull", "");
-    host.addEventListener("touchstart", onTS, { passive: false });
-    host.addEventListener("touchmove", onTM, { passive: false });
-    host.addEventListener("touchend", onTE, { passive: true }); host.addEventListener("touchcancel", onTE, { passive: true });
-  }
-  const destroy = () => { removeEventListener("scroll", onScroll); removeEventListener("resize", onResize); cancelAnimationFrame(raf); live.clear(); };
+  // two fingers, trackpad pinch, ctrl+wheel and + / -: js/gridzoom.js scales the grid live under the fingers and settles on a column count
+  const zoom = res.pinch ? gzAttach(host, { cols: () => cols, min: () => 2, max: glMaxCols, colW: () => colW, setCols }) : null;
+  const destroy = () => { removeEventListener("scroll", onScroll); removeEventListener("resize", onResize); cancelAnimationFrame(raf); live.clear(); if (zoom) zoom.destroy(); };
   cleanup.push(destroy);
   host.innerHTML = "";
   layout(); draw();
@@ -1272,6 +1274,12 @@ function glHarmonyFamily(pool, k, seed, relFilter) {
 }
 const GL_HARM_CHIPS = [["all", "All"], ["comp", "Complementary"], ["analogous", "Analogous"], ["triad", "Triad"], ["split", "Split"], ["tetrad", "Tetrad"], ["mono", "Mono"], ["warmcool", "Warm/cool"], ["accent", "Accent"]];
 
+// Preview a derived palette full screen without saving it (David, 2026-10-24): the same bands view the set page uses.
+function glFullScreen(hexes) { if (typeof colorFocus === "function") colorFocus(hexes.map(h => ({ name: nameOf(h).n, hex: h }))); }
+// "Find paintings" on a derived palette (David, 2026-10-24): the palette page the favorites open ("Closest in the
+// archive", js/twins.js), for the palette on screen and without saving it. Back returns to this painting.
+// "Find paintings" on a derived palette (David, 2026-10-24): the painting map filtered to this palette on screen
+function glFindWith(i, pal, label) { if (typeof pmGo === "function") pmGo(glPalSpecOf(pal, label ? label + " palette" : "This palette", i)); }
 // ---------- saving a derived palette (David, 2026-10-10: "how do we save a palette once derived?") ----------
 // The same store as Picked colors' Build (js/picked.js pkSaveAsPalette) and the set page (js/setpage.js): S.palettes,
 // newest first, capped at 60 -- so a painting's palette shows up in Studio's Kept exactly like any other saved one.
@@ -1438,6 +1446,10 @@ function glFadeEdges(wrap, row) {
   wrap.classList.toggle("fl", row.scrollLeft > 4);
   wrap.classList.toggle("fr", row.scrollLeft < max - 4);
 }
+// The list a painting was opened from (Keep exploring's feed): swiping the page moves along it (glSwipeWire, phone).
+// painting -> { list: [gallery index...], pos, key: FD_MEMO key of the page that owns the list, fks: [feed item index...] }
+const GL_CTXS = new Map();
+function glCtxSet(list, fks, pos, key) { if (list[pos] != null) GL_CTXS.set(list[pos], { list, fks, pos, key }); }
 function galleryPage(i, push = true, fromHex = null, tol = null) {
   if (!GAL) return loadGallery().then(() => galleryPage(i, push, fromHex, tol)).catch(() => toast("The gallery didn't load"));
   if (!(i >= 0 && i < GAL.n)) return;
@@ -1514,9 +1526,12 @@ function glPage(i, d, fromHex, tol) {
   let harmMoreOpen = false;   // "show the best ~6, More for the rest" (David, 2026-10-10: no arbitrary cap at 10)
   const modeSet = (m, k) => {
     if (plvGens[m]) return plvPalFor(m, k);
-    if (m === "out") return { pal: glStandOut(pool.length ? pool : pal6, pool.length ? k : 6, prior, seedOf("out")), max: pool.length ? Math.min(pool.length, 20) : 6 };
-    if (m === "area") return { pal: pool.length ? glPoolByArea(pool, k, seedOf("area")) : pal6, max: pool.length ? Math.min(pool.length, 20) : 6 };
-    if (m === "diverse") return { pal: pool.length ? glPoolDiverse(pool, k, seedOf("diverse")) : pal6, max: pool.length ? Math.min(pool.length, 20) : 6 };
+    // no pool (43% of the archive has none: no cached image at build time) = the six colors in the index; the count
+    // still works down to 2, by the biggest areas, instead of the slider moving while the palette stood still
+    const six = k => k >= pal6.length ? pal6 : pal6.slice().sort((a, b) => b.share - a.share).slice(0, Math.max(2, k));
+    if (m === "out") return { pal: glStandOut(pool.length ? pool : pal6, pool.length ? k : Math.min(k, 6), prior, seedOf("out")), max: pool.length ? Math.min(pool.length, 20) : 6 };
+    if (m === "area") return { pal: pool.length ? glPoolByArea(pool, k, seedOf("area")) : six(k), max: pool.length ? Math.min(pool.length, 20) : 6 };
+    if (m === "diverse") return { pal: pool.length ? glPoolDiverse(pool, k, seedOf("diverse")) : six(k), max: pool.length ? Math.min(pool.length, 20) : 6 };
     if (m === "harmony") {
       harmCards = pool.length >= 3 ? glHarmonyFamily(pool, k, seedOf("harmony"), harmFilter) : [];
       return harmCards.length ? { pal: harmCards[0].pal, max: 20, harmony: true } : null;
@@ -1538,27 +1553,31 @@ function glPage(i, d, fromHex, tol) {
   const shuffleHistoryTo = (m, idx) => { const s = SHUF[m]; if (!s || idx === s.idx) return; s.idx = idx; locate = null; buzz(5); drawPalette(); };
   // the ColorSet verbs (js/colorset.js): this painting's palette, at whatever size the slider shows. Declared
   // early so both the action row and the coverage row's Learn button (David, 2026-10-09) can use it.
-  const glSet = () => colorSet({ kind: "painting", id: "g" + i, title: d.t, colors: curPal().map(p => ({ h: p.h, share: p.share })), src: "gallery/" + i,
+  const glSet = () => colorSet({ kind: "painting", id: "g" + i, title: d.t, painter: d.a || "", colors: curPal().map(p => ({ h: p.h, share: p.share })), src: "gallery/" + i,
     ...(pool.length > 3 && (mode === "out" || mode === "area") && typeof csPoolPick === "function" ? { pick: csPoolPick(pool), max: pool.length } : {}) });
   const dom = pal6.reduce((a, b) => b.share > a.share ? b : a).h;
   // the surround behind the picture (when it doesn't fill the full width) tints with the painting's own average
   // color, not black (David's rebuild brief, 2026-10-09) — G.mean is the true pixel-weighted mean, in Lab
   const avg = (typeof G.mean !== "undefined" && G.mean) ? labHex(G.mean[i * 3], G.mean[i * 3 + 1], G.mean[i * 3 + 2]) : dom;
+  // David, 2026-10-25: the picture, its title, then the chip row (Overview . Color . Vibe . Painter . Era . Place); the page's own sections are the
+  // Overview tab. Browsing (arriving from a painting, a color page's tile, the map or a painter) starts on Color; a cold open on Overview;
+  // a Back puts back the tab and tile that were left.
+  const memo0 = backNav && typeof FD_MEMO !== "undefined" ? FD_MEMO.get(i) : null;
+  const startChip = memo0 && memo0.chip ? memo0.chip : glStartChip();
   const el = show(`
     <header class="art-top" data-similar-gi="${i}"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${typeof fvArtHeart === "function" && d.id ? fvArtHeart(d.id) : ""}</header>
     <div class="gl-cols">
     <div class="gl-pal-wrap">
-    <div class="gl-hero gl-full-w" style="--c:${avg}"><span style="width:min(100%, calc(var(--hero-vh, 62dvh) / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${glHiSrc(d) ? ` data-hi="${esc(glHiSrc(d))}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas><div class="gl-hero-dots" data-glherodots aria-hidden="true"></div>
+    <div class="gl-hero gl-full-w" style="--c:${avg}">${fdMapBtnHTML("fd-mapb-hero")}<span style="width:min(100%, calc(var(--hero-vh, 62dvh) / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${glHiSrc(d) ? ` data-hi="${esc(glHiSrc(d))}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas><div class="gl-hero-dots" data-glherodots aria-hidden="true"></div>
     <button class="gl-closer" data-glcloser aria-label="Look closer">${ICON.search}<span>Look closer</span></button>
-    <button type="button" class="gl-closer gl-explore-ov" data-glfeedjump aria-label="Explore: keep exploring paintings like this"><span>Explore</span>${ICON.down}</button>
     <button class="gl-closer gl-pick-btn" data-glpickbtn hidden aria-pressed="false" aria-label="Pick a color">${icon("pipette", 17)}<span>Pick a color</span></button></span></div>
-    <div class="gl-id">
+    <div class="gl-id">${shareBtn}
     <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
     <h1 class="p-title">${esc(d.t)}</h1>
-    <p class="p-dek">${d.a ? `<button class="aw-link" data-awpainter="${esc(routeSlug(d.a))}">${esc(d.a)}</button>` : "Artist unknown"}${[d.co, d.mv].filter(Boolean).map(x => ` · ${esc(x)}`).join("")}</p>
+    <p class="p-dek">${d.a ? `<button class="aw-link" data-awpainter="${esc(routeSlug(d.a))}">${esc(d.a)}</button>` : "Artist unknown"}${glDesk() ? [d.co, d.mv].filter(Boolean).map(x => ` · ${esc(x)}`).join("") : yr ? ` · ${esc(yr)}` : ""}</p>
     <p class="gl-id-src">${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? `<span class="gl-dk-credit"> · ${esc(src.credit)}</span>` : ""}</p>
     ${glEstNote(i) ? `<p class="gl-est-note">${esc(glEstNote(i))}</p>` : ""}
-    <button type="button" class="rp-explore gl-explore" data-glfeedjump aria-label="Explore: keep exploring paintings like this"><span>Explore</span>${ICON.down}</button>
+    <div class="gl-go" data-glgo hidden></div>
     <div class="gl-dk-acts"><button class="gl-dk-btn" data-dkpick hidden aria-pressed="false">${icon("pipette", 18)}<span>Pick a color</span></button><button class="gl-dk-btn" data-dkcloser>${ICON.search}<span>Look closer</span></button></div>
     ${(() => { /* desktop: the map's card chips live here now (a click on the map opens this page directly) */
       // the same three presets the map's card offers (js/paintmap.js pmPresetsOf), each opening the map on THIS painting (on=)
@@ -1568,10 +1587,13 @@ function glPage(i, d, fromHex, tol) {
     })()}
     <div class="gl-why" data-glwhy hidden></div>
     </div>
+    <section class="gl-feed gl-tabs" data-glfeed aria-label="About this painting, and keep exploring">
+    <div class="fd-bar fd-pre"><div class="fd-chips" role="tablist" aria-label="About this painting, or keep exploring">${[["about", "Overview"], ...FD_CHIPS].map(([k, t]) => `<button class="fd-chip${k === startChip ? " on" : ""}${k === "about" || k === startChip ? "" : " dis"}" role="tab" data-fc="${k}" aria-selected="${k === startChip}">${t}</button>`).join("")}</div></div>
+    <div class="rp-about gl-about" data-rp-about data-gl-about${startChip === "about" ? "" : " hidden"}>
     <div class="gl-pal-ui">
     <div class="palette gl-strip" data-glswatches></div>
     <div class="gl-modes-f" data-glfade><div class="gl-modes" data-glorder role="group" aria-label="Palette type"></div></div>
-    <div class="gl-seg-row"><span class="gl-seg-l" id="glwl">Widths</span><div class="gl-seg" role="group" aria-labelledby="glwl"><button data-glw="prop" aria-pressed="true">Proportional</button><button data-glw="eq" aria-pressed="false">Equal</button></div>${typeof palFullBtn === "function" ? palFullBtn("Full screen", "gl-full") : ""}</div>
+    <div class="gl-seg-row"><span class="gl-seg-l" id="glwl">Widths</span><div class="gl-seg" role="group" aria-labelledby="glwl"><button data-glw="prop" aria-pressed="true">Proportional</button><button data-glw="eq" aria-pressed="false">Equal</button></div></div>
     <div class="pr-slide gl-slide" data-glslide hidden><input type="range" data-glk aria-label="How many colors"><span class="gl-kn-t" data-glkn>6 colors</span></div>
     <p class="gl-locate" data-gllocate hidden></p>
     <p class="gl-cap" data-glcap></p>
@@ -1590,7 +1612,7 @@ function glPage(i, d, fromHex, tol) {
     ${!S.pmMapHintSeen ? `<p class="gl-pmap-hint" data-glpmhint><i aria-hidden="true"></i><span>New: browse paintings by how alike their colors are</span></p>` : ""}
     <button class="gl-pmap gl-pmap-top" data-pmap="arr=spiral&seed=${i}">${GL_ICON_MAP}<span>Similar paintings on the map</span>${ICON.chev}</button>
     <button class="gl-pmap gl-pmap-pal" data-pmap="${glPalSpec(i)}">${GL_ICON_MAP}<span>Find paintings with this palette</span>${ICON.chev}</button>
-    </div></div>
+    </div>
     <div class="gl-under">${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}</div>
     <p class="gl-subj" data-glsubj-line hidden></p>
     <div class="gl-finds"><div class="sec-head"><b>Findings</b><span>as photographed</span></div>
@@ -1598,16 +1620,58 @@ function glPage(i, d, fromHex, tol) {
     <div class="aw-cx" data-glctx></div>
     <p class="fine">Computed by Chromatlas, not by the museum, from its photograph. Names are the nearest of about 1,000. Old varnish and the photograph shift color, and screens differ.</p>
     <details class="gl-finds-more"><summary>More</summary><div data-awan></div></details></div>
-    </div>
     <div class="gl-morepainter" data-glmorepainter></div>
     ${typeof twSection === "function" ? `<div data-glsim></div>` : `<div class="sec-head gl-sim-h"><b>Similar palettes</b><span>by color, not subject</span></div>
     <div class="gl-rail" data-glsim></div>`}
     <button class="gl-pmap" data-pmap="arr=spiral&seed=${i}">${GL_ICON_MAP}<span>Similar paintings, on the map</span>${ICON.chev}</button>
     <section class="srcs"><h3>Image and data</h3><ul><li>${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? ` · ${esc(src.credit)}` : ""}</li><li>Palette and color names computed by Chromatlas from the museum's image</li></ul></section>
     <details class="gl-quiz-fold"><summary>Test yourself</summary><div class="gl-quiz" data-glquiz></div></details>
-    <section class="gl-feed" data-glfeed aria-label="Keep exploring"></section>
-  `, "article gl-page");
+    </div></section></div></div>
+  `, "article gl-page" + (ar >= 0.667 ? " gl-side" : ""));
+  wirePaintingShare(el, d.t + (d.a ? " by " + d.a : ""), "gallery/" + i);
+  // David, 2026-10-28: the heart sits far left of the title row at one fixed x (never on the picture), share far right. The bar's heart stays in the DOM, hidden,
+  // for the code that finds it (js/favs.js fvArtWire); this one passes its tap to it and mirrors its on/off.
+  {
+    const bh = el.querySelector(".art-top [data-fva]"), idBox = el.querySelector(".gl-id");
+    if (bh && idBox) {
+      const ch = document.createElement("button"); ch.type = "button"; ch.className = "gl-corner-heart gl-trow-heart"; ch.setAttribute("data-glch", "");
+      const sync = () => { ch.innerHTML = bh.innerHTML; ch.classList.toggle("on", bh.classList.contains("on")); ch.setAttribute("aria-pressed", bh.getAttribute("aria-pressed") || "false"); ch.setAttribute("aria-label", bh.getAttribute("aria-label") || "Keep this painting"); };
+      sync(); ch.onclick = e => { e.stopPropagation(); bh.click(); };
+      new MutationObserver(sync).observe(bh, { attributes: true, childList: true, subtree: true });
+      idBox.appendChild(ch);
+      idBox.classList.add("gl-has-heart");
+    }
+  }
   const route = "#/gallery/" + i, heroSpan = el.querySelector(".gl-hero > span");
+  // the stored shape comes from the museum's small image, which can be a crop of a different shape (David, 2026-10-30: Cloud Towers,
+  // a square painting, sat letterboxed in a tall box with bands above and below): once the real picture loads, its own shape wins,
+  // unless a margin crop (glCropStyle) is shaping it on purpose
+  { const im = heroSpan && heroSpan.querySelector("img");
+    let fixed = false;   // once, from the first picture: the hi-res swap is the same painting and must not resize the page again
+    const fixAr = () => { if (fixed || !im || !im.naturalWidth || im.getAttribute("style")) return; fixed = true; const r = im.naturalHeight / im.naturalWidth;
+      if (Math.abs(r / ar - 1) > .03) { heroSpan.style.aspectRatio = (1 / r).toFixed(4); heroSpan.style.width = `min(100%, calc(var(--hero-vh, 62dvh) / ${r.toFixed(3)}))`; } };
+    if (im) { im.addEventListener("load", fixAr); if (im.complete) fixAr(); } }
+  // David, 2026-10-25: the picture, its title and "painter · year" are all that sits between the picture and the chip row. Everything else about
+  // the painting (where it hangs, country, movement, how it compares) opens the Overview, and the picture is sized from the screen so the
+  // chip row is always on the first screen (a tall painting shrinks, undistorted, instead of pushing the chips down).
+  if (!glDesk()) {
+    const f = document.createElement("div"); f.className = "gl-facts";
+    const line = [d.co, d.mv].filter(Boolean).join(" · ");
+    if (line) f.insertAdjacentHTML("beforeend", `<p class="gl-facts-l">${esc(line)}</p>`);
+    [".gl-id-src", ".gl-est-note", "[data-glwhy]"].forEach(sel => { const n = el.querySelector(".gl-id " + sel); if (n) f.appendChild(n); });
+    const ab = el.querySelector("[data-gl-about]"); if (ab && f.children.length) ab.insertBefore(f, ab.firstChild);
+  }
+  fdTopBar(el, d.t);
+  const fitBox = el.querySelector(".gl-pal-wrap"), fitId = el.querySelector(".gl-id"), fitTop = el.querySelector(".gl-page > .art-top, .art-top");
+  const fitHero = () => {
+    const fitBar = el.querySelector("[data-glfeed] .fd-bar");
+    if (!fitBox || !fitId || !fitBar || !heroSpan.isConnected || !heroSpan.parentNode.matches(".gl-hero") || glDesk()) return;
+    const vh = innerHeight, tabs = fitBar.closest("[data-glfeed]"), gap = tabs ? parseFloat(getComputedStyle(tabs).marginTop) || 0 : 0;
+    const over = (fitTop ? fitTop.offsetHeight : 0) + (fitId.getBoundingClientRect().bottom - heroSpan.getBoundingClientRect().bottom) + gap + fitBar.offsetHeight + 4;
+    fitBox.style.setProperty("--hero-vh", Math.round(Math.max(vh * .3, Math.min(vh * .62, vh - over))) + "px");
+  };
+  fitHero(); setTimeout(fitHero, 250); setTimeout(fitHero, 900);
+  { const onFit = () => fitHero(); addEventListener("resize", onFit); cleanup.push(() => removeEventListener("resize", onFit)); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitHero); }
   // stable references into the hero's own innards (not re-queried through `el` later): split mode moves the
   // whole .gl-hero node out to a body-level overlay and back (buildSplitEl/exitSplitMode, below), so anything
   // that looked it up via el.querySelector() after that move would just come back null.
@@ -1659,7 +1723,7 @@ function glPage(i, d, fromHex, tol) {
     // press a swatch adds it to your set", since that's the same gesture slot) and an explicit row action in
     // the expanded list (the [data-locate] glyph there, the one nested-control exemption js/swatch.js's capture
     // delegate already recognizes, same as the old strip glyph did).
-    stripH.innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}${locate && locate.j === j ? " loc" : ""}" data-glj="${j}" data-swatch="${p.h}" style="--c:${p.h};flex:${eqW ? 1 : (Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.pick || eqW ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
+    stripH.innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}${locate && locate.j === j ? " loc" : ""}" data-glj="${j}" data-hex="${p.h}" style="--c:${p.h};flex:${eqW ? 1 : (Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.pick || eqW ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
     rowsH.innerHTML = pal.map((p, j) => {
       const nm = glName(p.h), fam = !nm.sub && !p.out && typeof familyOf === "function" && familyOf(p.h);
       const sub = [p.out ? "Stands out" : nm.sub ? nm.sub.charAt(0).toUpperCase() + nm.sub.slice(1) : fam ? fam.head.n + " family" : "", p.pick ? "Picked" : eqW ? "" : glPctTxt(p.share)].filter(Boolean).join(" · ");
@@ -1696,7 +1760,7 @@ function glPage(i, d, fromHex, tol) {
     // focused (coordinator, 2026-10-12: "Hearts, Save and Edit keep working on the current one"). The standalone
     // Palette view button is gone now that its feed lives inline (same brief: "can go once the feed is inline").
     if (!host.hidden) host.innerHTML = (isPlvChip() ? "" : `<button class="gl-pa-btn" data-glshuffle>${GL_ICON_DICE}<span>Shuffle</span></button>`)
-      + `<button class="gl-pa-btn" data-gledit>Edit</button><button class="gl-pa-btn solid" data-glsave>Save palette</button>`;
+      + `<button class="gl-pa-btn" data-glfull>Full screen</button><button class="gl-pa-btn" data-glfind>Find paintings</button><button class="gl-pa-btn" data-gledit>Edit</button><button class="gl-pa-btn solid" data-glsave>Save palette</button>`;
     const s = SHUF[mode];
     if (!histHost) return;
     histHost.hidden = isHarm || !s || s.seeds.length < 2;
@@ -1723,7 +1787,7 @@ function glPage(i, d, fromHex, tol) {
         <div class="gl-hcard-top"><b>${esc(c.label)}</b><span>${c.fitPct}% fit</span></div>
         <div class="palette gl-strip gl-hcard-strip">${c.pal.map(p => `<button class="pal" data-swatch="${p.h}" style="--c:${p.h};flex:${eqW ? 1 : (Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${eqW ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("")}</div>
         <div class="gl-hcard-names">${c.pal.map(p => esc(nameOf(p.h).n)).join(" · ")}</div>
-        <div class="gl-hcard-acts"><button class="gl-pa-btn" data-hcfull="${j}">Full screen</button><button class="gl-pa-btn" data-hcedit="${j}">Edit</button><button class="gl-pa-btn solid" data-hcsave="${j}">Save palette</button></div>
+        <div class="gl-hcard-acts"><button class="gl-pa-btn" data-hcfull="${j}">Full screen</button><button class="gl-pa-btn" data-hcfind="${j}">Find paintings</button><button class="gl-pa-btn" data-hcedit="${j}">Edit</button><button class="gl-pa-btn solid" data-hcsave="${j}">Save palette</button></div>
       </div>`).join("") : `<p class="fine">No ${harmFilter === "all" ? "clear relation" : harmCardName(harmFilter).toLowerCase()} shows up among this painting's own colors. Try Shuffle, or another type.</p>`;
     moreBtn.hidden = harmCards.length <= 6;
     if (!moreBtn.hidden) moreBtn.textContent = harmMoreOpen ? "Fewer" : `More (${harmCards.length - 6})`;
@@ -2045,20 +2109,24 @@ function glPage(i, d, fromHex, tol) {
   // the 3 actions or the picture's own Pick a color / Look closer. Registered once per draw (moreRegister keys
   // by ctx, so a re-register on the same painting just replaces the closures with ones that see this draw's d/i).
   if (d.a && typeof ooWithIndex === "function") ooWithIndex();
-  if (typeof moreRegister === "function") moreRegister("gallery", () => [
-    { title: "Look", items: [
-      { t: "Where each color sits", n: "Opens Look closer", run: () => glZoomOpen({ ...glZoomOpts(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "where", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
-      { t: "Value and squint", n: "See the light structure, or the big shapes", run: () => openLookCloser() },
-      { t: "Select an object", n: "Tap the thing you want", run: () => glZoomOpen({ ...glZoomOpts(sampleImg.src || glBig(d.img)), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "select", cors: !!(sampleImg && sampleImg.crossOrigin), sampleOk: canSample }) },
-    ] },
-    { title: "Go", items: [
-      ...(d.a ? [{ t: "The painter", n: d.a, run: () => { if (typeof awPainter === "function") awPainter(routeSlug(d.a)); } }] : []),
-      ...(d.rec ? [{ t: "Full size at the museum", n: src.name, run: () => window.open(d.rec, "_blank", "noopener") }] : []),
-      ...(typeof playSet === "function" ? [{ t: "Play with these colors", run: () => csPlay(glSet, { back: () => galleryPage(i, false) }) }] : []),
-      ...(d.a && typeof ooWithItem === "function" ? ooWithItem("painter", d.a, { first: i }) : []),   // js/games/oo-with.js: this painting first, then their others
-      { t: "Keep this palette", n: "Separately from the painting itself", run: () => csPalette(glSet) },
-    ] },
-  ]);
+  // David, 2026-10-28: the three-dots menu is emptied. The Look tools are the tray on the picture (tap it); "Go" is the rows under the title; Keep this palette
+  // is one of those rows too. What is left is the default: Search and Profile and settings.
+  const goRows = [
+    ...(d.rec ? [{ t: "Full size at the museum", n: src.name, run: () => window.open(d.rec, "_blank", "noopener") }] : []),
+    ...(typeof playSet === "function" ? [{ t: "Play with these colors", n: "A quick game on this palette", run: () => csPlay(glSet, { back: () => galleryPage(i, false) }) }] : []),
+    ...(d.a ? [{ t: "This painter's other works", n: d.a, painter: routeSlug(d.a) }] : []),
+    { t: "Keep this palette", n: "Separately from the painting itself", run: () => csPalette(glSet) },
+  ];
+  {
+    const box = el.querySelector("[data-glgo]");
+    if (box) {
+      box.innerHTML = goRows.map((r, k) => `<button type="button" class="gl-gorow"${r.painter ? ` data-awpainter="${esc(r.painter)}"` : ""} data-gogo="${k}"><span><b>${esc(r.t)}</b>${r.n ? `<small>${esc(r.n)}</small>` : ""}</span>${ICON.chev}</button>`).join("");
+      box.hidden = false;
+      box.addEventListener("click", e => { const b = e.target.closest("[data-gogo]"); if (!b) return; const r = goRows[+b.dataset.gogo]; if (r && r.run) { buzz(5); r.run(); } });
+      if (!glDesk()) { const un = el.querySelector("[data-gl-about] .gl-under"); if (un) un.parentNode.insertBefore(box, un); }   // phone: in the Overview right below the palette, so the palette stays beside the tabs
+    }
+  }
+  if (typeof moreRegister === "function") moreRegister("gallery", () => []);
   if (typeof featureRegister === "function") {
     featureRegister("gl-pick", { t: "Pick a color", where: "A painting · on the picture", words: ["eyedropper", "sample", "pipette"], run: () => { if (canSample) openLookCloser("pick"); else toast("This museum's photo can't be read here, so colors can't be picked from it."); } });
     featureRegister("gl-where", { t: "Where a color sits on a painting", where: "A painting · ⋯ · Look", words: ["where", "locate", "highlight"], run: () => toast("Open a painting, then ⋯ · Where each color sits") });
@@ -2089,11 +2157,11 @@ function glPage(i, d, fromHex, tol) {
   stripEl.addEventListener("pointerdown", e => {
     const b = e.target.closest("[data-glj]"); if (!b || e.button > 0) return;
     if (locPress) clearTimeout(locPress.t);
-    const p = { x: e.clientX, y: e.clientY, j: +b.dataset.glj };
+    const p = { x: e.clientX, y: e.clientY, j: +b.dataset.glj, hex: b.dataset.hex };
     p.t = setTimeout(() => {
       if (locPress !== p) return;
       locPress = null; locJustHeld = performance.now();
-      buzz(6); toggleLocate(p.j);
+      buzz(6); if (typeof openTappedColor === "function") openTappedColor(p.hex);   // David, 2026-10-28: press and hold a swatch opens that color's page
     }, LOC_HOLD);
     locPress = p;
   });
@@ -2107,8 +2175,13 @@ function glPage(i, d, fromHex, tol) {
   };
   addEventListener("click", locSwallow, true);
   cleanup.push(() => removeEventListener("click", locSwallow, true));
+  // a tap on the strip opens the whole palette's page (David, 2026-10-28: tap the strip = the palette, hold a swatch = that color)
+  stripEl.addEventListener("click", e => {
+    if (!e.target.closest("[data-glj]") || typeof spPage !== "function") return;
+    const hexes = curPal().filter(p => p && p.h).map(p => p.h); if (hexes.length < 2) { const h = e.target.closest("[data-glj]").dataset.hex; if (h && typeof openTappedColor === "function") openTappedColor(h); return; }
+    buzz(5); spPage(hexes, { push: true, painting: { i, t: d.t } });
+  });
   el.querySelector(".gl-seg-row").onclick = e => {
-    if (e.target.closest("[data-pf-open]")) { buzz(5); return palFullOpen(curPal().map(p => ({ hex: p.h, share: p.share })), { title: d.t, source: glModeLabel(mode), from: stripEl, equal: eqW, onSave: () => glSavePalette(curPal().map(p => p.h), glSaveName(d.t, mode === "out" ? "" : glModeLabel(mode)), false, { i, t: d.t }), onEdit: () => glEditOpen(curPal().map(p => p.h), { title: d.t, label: glModeLabel(mode), pool, onSave: (hexes, name) => glSavePalette(hexes, name, false, { i, t: d.t }) }) }); }
     const b = e.target.closest("[data-glw]"); if (!b) return;
     const eq = b.dataset.glw === "eq"; if (eq === eqW) return;
     eqW = eq; glEqSet(eq); buzz(5); drawPalette();
@@ -2131,6 +2204,8 @@ function glPage(i, d, fromHex, tol) {
   const palActsHost = el.querySelector("[data-glpalacts]");
   if (palActsHost) palActsHost.onclick = e => {
     if (e.target.closest("[data-glshuffle]")) return shuffleMode(mode);
+    if (e.target.closest("[data-glfind]")) { buzz(5); return glFindWith(i, curPal(), glModeLabel(mode)); }
+    if (e.target.closest("[data-glfull]")) { buzz(5); return palFullOpen(curPal().map(p => ({ hex: p.h, share: p.share })), { title: d.t, source: glModeLabel(mode), from: stripEl, equal: eqW, onSave: () => glSavePalette(curPal().map(p => p.h), glSaveName(d.t, mode === "out" ? "" : glModeLabel(mode)), false, { i, t: d.t }), onEdit: () => glEditOpen(curPal().map(p => p.h), { title: d.t, label: glModeLabel(mode), pool, onSave: (hexes, name) => glSavePalette(hexes, name, false, { i, t: d.t }) }) }); }
     if (e.target.closest("[data-gledit]")) return glEditOpen(curPal().map(p => p.h), { title: d.t, label: glModeLabel(mode), pool, onSave: (hexes, name) => glSavePalette(hexes, name, false, { i, t: d.t }) });
     if (e.target.closest("[data-glsave]")) { const lbl = glModeLabel(mode); return glSavePalette(curPal().map(p => p.h), glSaveName(d.t, mode === "out" ? "" : lbl), false, { i, t: d.t }); }
   };
@@ -2144,8 +2219,10 @@ function glPage(i, d, fromHex, tol) {
     if (e.target.closest("[data-glharmmore]")) { harmMoreOpen = !harmMoreOpen; buzz(5); drawPalette(); return; }
     if (e.target.closest("[data-glharmshuffle]")) return shuffleMode("harmony");
     const go = e.target.closest("[data-glharmgo]"); if (go) return shuffleHistoryTo("harmony", +go.dataset.glharmgo);
-    const hf = e.target.closest("[data-hcfull]");
-    if (hf && harmCards[+hf.dataset.hcfull]) { buzz(5); const card = harmCards[+hf.dataset.hcfull]; return palFullOpen(card.pal.map(p => ({ hex: p.h, share: p.share })), { title: d.t, source: card.label, from: hf.closest(".gl-hcard") }); }
+    const fi = e.target.closest("[data-hcfind]");
+    if (fi) { const card = harmCards[+fi.dataset.hcfind]; if (card) { buzz(5); glFindWith(i, card.pal, card.label); } return; }
+    const fu = e.target.closest("[data-hcfull]");
+    if (fu) { const card = harmCards[+fu.dataset.hcfull]; if (card) { buzz(5); glFullScreen(card.pal.map(p => p.h)); } return; }
     const ed = e.target.closest("[data-hcedit]"), sv2 = e.target.closest("[data-hcsave]");
     if (ed || sv2) {
       const card = harmCards[+(ed || sv2).dataset[ed ? "hcedit" : "hcsave"]]; if (!card) return;
@@ -2212,6 +2289,16 @@ function glPage(i, d, fromHex, tol) {
   // goes through glCommonsResolve first (its own Special:FilePath can't be read with crossorigin — see glCORS
   // above); crossOrigin is set on both the loader and the visible <img> before either gets a src, so the swap
   // lands in the readable (CORS) cache partition, not the plain one the small copy already used (David, 2026-10-09).
+  // the picture itself must always arrive (David, 2026-10-26: "I click a painting and it doesn't load in its page, but in full screen it does"): a hero that errors or is still
+  // missing after a few seconds is asked for again, up to four times, with a changed address so a stuck or failed request is not reused
+  { const hero = el.querySelector(".gl-hero img");
+    if (hero) {
+      let tries = 0; const t0 = performance.now(), base = () => hero.dataset.src0 || (hero.dataset.src0 = hero.getAttribute("src") || "");
+      const ok = () => hero.complete && hero.naturalWidth > 0;
+      const retry = () => { if (!hero.isConnected || ok() || ++tries > 4) return; const u = base(); if (!u || u.startsWith("data:")) return; hero.src = u + (u.includes("?") ? "&" : "?") + "r=" + tries; };
+      hero.addEventListener("error", () => setTimeout(retry, 500 * (tries + 1)));
+      const wd = setInterval(() => { if (!hero.isConnected || ok()) return clearInterval(wd); if (performance.now() - t0 > 4000 * (tries + 1)) retry(); }, 1000);
+    } }
   const hiImg = el.querySelector("img[data-hi]");
   if (hiImg) {
     const swap = (url, cors) => {
@@ -2223,7 +2310,8 @@ function glPage(i, d, fromHex, tol) {
       };
       // a CORS host that drops its header on this request (the Met's CDN does) still shows the sharp copy, just unreadable
       // (Pick then honestly finds nothing); if even that fails the small copy stays
-      big.onerror = () => { if (!cors) return; const plain = new Image(); plain.onload = () => { if (!hiImg.isConnected) return; hiImg.removeAttribute("crossorigin"); hiImg.src = plain.src; hiImg.classList.add("hi"); armSample(hiImg); }; plain.src = url; };
+      let bigTry = 0;
+      big.onerror = () => { if (!cors) { if (++bigTry <= 2) setTimeout(() => { big.src = url + (url.includes("?") ? "&" : "?") + "r=" + bigTry; }, 800 * bigTry); return; } const plain = new Image(); plain.onload = () => { if (!hiImg.isConnected) return; hiImg.removeAttribute("crossorigin"); hiImg.src = plain.src; hiImg.classList.add("hi"); armSample(hiImg); }; plain.src = url; };
       big.src = url;
     };
     const hiUrl = hiImg.dataset.hi, commonsFn = glCommonsFilename(hiUrl);
@@ -2253,6 +2341,7 @@ function glPage(i, d, fromHex, tol) {
     if (eyd) { eyd.detach(); eyd = null; }
     if (pickArmed && canSample && typeof eyedropAttach === "function") {
       eyd = eyedropAttach(sampleImg, {
+        sizes: false,   // the painting page has no room under the hero; Look closer has the size row
         onMove: () => { swipeStart = null; },   // a color-sampling drag is never a swipe-to-next-painting
         onPick: (hex, pt) => {
           buzz(6);
@@ -2274,6 +2363,11 @@ function glPage(i, d, fromHex, tol) {
   function armSample(img) {
     sampleImg = img; canSample = testSample(img); heroSpan.classList.toggle("gl-tap", canSample); if (arrival) arrival.image(img, canSample);
     lit.ok = canSample; lit.img = img; lit.pix = null;
+    // a painting whose data ships no color pool gets one read live from the picture, when the museum lets a canvas
+    // read it: the same 2-20 count then works as on any other painting (David, 2026-10-24: "+/- isn't working")
+    if (canSample && !pool.length && typeof twRichPool === "function") {
+      try { const live = twRichPool(img); if (live && live.length > 6) { live.sort((a, b) => b.share - a.share).forEach(c => pool.push({ h: c.h, share: c.share })); } } catch (e) { /* tainted canvas: the six stay */ }
+    }
     syncEyd();
     drawPalette();
   }
@@ -2366,8 +2460,26 @@ function glPage(i, d, fromHex, tol) {
       const r = sampleImg.getBoundingClientRect();
       return openLookCloser(null, { fromRect: { left: r.left, top: r.top, width: r.width, height: r.height } });
     }
-    openLookCloser();
+    toolTray();   // a phone: a tap shows the picture's tools (David, 2026-10-28); Look closer is the first of them
   };
+  // The picture's tools, in a tray over the bottom of the picture (David, 2026-10-28): Look closer, Pick a color, Where each color sits, Select an object, Value and squint.
+  // A tap on the picture opens it, a tap on the picture again (or anywhere else) puts it away; a one-time line under the picture says it is there.
+  function toolTray(force) {
+    let tray = heroSpan.querySelector(".gl-tray");
+    if (tray && force !== true) { tray.classList.remove("in"); setTimeout(() => tray.remove(), 220); return; }
+    if (tray) return;
+    tray = document.createElement("div"); tray.className = "gl-tray"; tray.setAttribute("role", "toolbar"); tray.setAttribute("aria-label", "Tools for this picture");
+    const tools = [["closer", ICON.search, "Look closer", () => openLookCloser()],
+      ["pick", icon("pipette", 18), "Pick a color", () => { if (!canSample) { toast("This museum's photo can't be read here, so colors can't be picked from it."); return; } openLookCloser("pick"); }],
+      ["where", icon("colors", 18), "Where each color sits", () => { if (!lit.ok) { toast("This museum's photo can't be read here, so this can't be shown."); return; } openLookCloser("where"); }],
+      ["select", icon("grid", 18), "Select an object", () => openLookCloser("select")],
+      ["value", icon("look", 18), "Value and squint", () => openLookCloser("value")]];
+    tray.innerHTML = tools.map(([k, ic, t]) => `<button type="button" class="gl-tool" data-gltool="${k}">${ic}<span>${t}</span></button>`).join("");
+    tray.addEventListener("click", e => { const b = e.target.closest("[data-gltool]"); if (!b) return; e.stopPropagation(); const t = tools.find(x => x[0] === b.dataset.gltool); tray.remove(); if (t) { buzz(5); t[3](); } });
+    heroSpan.appendChild(tray); requestAnimationFrame(() => tray.classList.add("in")); buzz(3);
+    if (!S.glToolsHint) { S.glToolsHint = 1; save(); const h = el.querySelector("[data-gltoolshint]"); if (h) h.remove(); }
+  }
+  if (!glDesk() && !S.glToolsHint) { const band = heroSpan.closest(".gl-hero"); if (band) band.insertAdjacentHTML("afterend", `<p class="gl-toolhint" data-gltoolshint>Tap the picture for its tools</p>`); }
   // swipe the picture left/right to move to the next/previous painting by the same painter (trail-aware: a
   // normal galleryPage navigation, so Back works) — David's rebuild brief, 2026-10-09, point 7
   let swipeStart = null;
@@ -2381,17 +2493,148 @@ function glPage(i, d, fromHex, tol) {
   heroSpan.addEventListener("pointerup", e => {
     if (pressT) { clearTimeout(pressT); pressT = 0; }
     if (!swipeStart) return;
-    const dx = e.clientX - swipeStart.x, dy = e.clientY - swipeStart.y; swipeStart = null;
-    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.6) return;
-    if (!painterOrder || painterRank < 0) return;
-    const nextRank = painterRank + (dx < 0 ? 1 : -1);
-    if (nextRank < 0 || nextRank >= painterOrder.length) return;
-    buzz(6); galleryPage(painterOrder[nextRank], true);
+    swipeStart = null;   // the swipe itself is glSwipeWire's (the whole page follows the finger)
   });
   heroSpan.addEventListener("pointermove", e => {
     if (pressT && swipeStart && Math.hypot(e.clientX - swipeStart.x, e.clientY - swipeStart.y) > 8) { clearTimeout(pressT); pressT = 0; }
   });
   heroSpan.addEventListener("pointercancel", () => { swipeStart = null; if (pressT) { clearTimeout(pressT); pressT = 0; } });
+  // ---------- swipe the page: next / previous painting in the list you came from, else by the same painter (David, 2026-10-25) ----------
+  // The page follows the finger 1:1 with the neighbor painting coming in beside it; past 30% of the width (or a flick) it replaces this painting
+  // WITHOUT a new trail step, so Back still returns to the list, on the tile you ended on. Starts only off the left edge (the iOS back swipe),
+  // never on a canvas, a horizontal scroller, a sheet, the armed picker or a second finger; vertical drags stay the page's (axis lock by the
+  // dominant direction after 6px). Both neighbors are built when the page opens (their palette as a soft color field at the right shape, at
+  // once; then their blurred small picture, then the sharp one fading in), so the neighbor is beside the page from the first pixel of the drag,
+  // and a commit waits for the neighbor's data so it always lands in one piece. touch-action keeps the browser from claiming the drag.
+  (function glSwipeWire() {
+    if (document.documentElement.classList.contains("desk")) return;
+    const ctx = GL_CTXS.get(i);
+    const nbr = dir => { if (ctx && ctx.list[ctx.pos] === i) { const n = ctx.pos + dir; return n >= 0 && n < ctx.list.length ? ctx.list[n] : -1; }
+      if (!painterOrder || painterRank < 0) return -1; const n = painterRank + dir; return n >= 0 && n < painterOrder.length ? painterOrder[n] : -1; };
+    const hscroller = n => { for (; n && n !== el; n = n.parentElement) { if (n.scrollWidth > n.clientWidth + 2) { const ox = getComputedStyle(n).overflowX; if (ox === "auto" || ox === "scroll") return true; } } return false; };
+    const W = () => innerWidth, off = dir => `translate3d(${dir * W()}px,0,0)`;
+    el.style.touchAction = "pan-y pinch-zoom";   // horizontal drags are ours from the first pixel (the browser neither waits on them nor cancels them); vertical scroll and pinch stay its own
+    const ghosts = { "-1": null, "1": null };
+    const buildGhost = dir => {
+      const j = nbr(dir); if (j < 0) return null;
+      const ar = GAL.ar[j] || 1, pal = glPal(j).filter(p => p.share > 0).sort((a, b) => b.share - a.share), tot = pal.reduce((s, p) => s + p.share, 0) || 1;
+      let acc = 0; const stops = pal.map(p => { const a = acc / tot * 100; acc += p.share; return `${p.h} ${a.toFixed(1)}% ${(acc / tot * 100).toFixed(1)}%`; }).join(",");
+      const gh = document.createElement("div"); gh.className = "gl-ghost"; gh._j = j;
+      const avg = labHex(GAL.mean[j * 3], GAL.mean[j * 3 + 1], GAL.mean[j * 3 + 2]);   // the band behind the picture, like the page's own hero
+      gh.innerHTML = `<div class="gl-ghost-band" style="--c:${avg}"><div class="gl-ghost-pic" style="width:min(calc(100% - 2 * var(--g)), calc(var(--hero-vh, 62dvh) / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><i class="gl-ghost-ph" style="background:linear-gradient(160deg,${stops || "var(--s2)"})"></i></div></div><p class="gl-ghost-t"></p><p class="gl-ghost-a"></p>`;
+      gh.style.opacity = "0"; gh.style.transform = off(dir);
+      document.body.appendChild(gh); return gh;
+    };
+    // fill a neighbor from its shard: title and painter, the small picture blurred, then the sharp one faded in once it has decoded
+    const fillGhost = (dir, dd) => {
+      const gh = ghosts[dir]; if (!gh || gh._filled || !dd || !gh.isConnected) return; gh._filled = true;
+      const j = gh._j, ar = GAL.ar[j] || 1, pic = gh.querySelector(".gl-ghost-pic"), crop = glCropStyle(j, dd, 1 / ar);
+      gh.querySelector(".gl-ghost-t").textContent = dd.t || ""; gh.querySelector(".gl-ghost-a").textContent = dd.a || "";
+      pic.insertAdjacentHTML("beforeend", `<img class="gl-ghost-lo" src="${esc(dd.img)}" alt="" decoding="async"${crop}>`);
+      const lo = pic.lastElementChild; lo.onload = () => lo.classList.add("on");
+      const hi = new Image(); hi.className = "gl-ghost-hi"; hi.alt = ""; hi.setAttribute("fetchpriority", "low"); hi.src = glBig(dd.img);
+      if (crop) hi.setAttribute("style", crop.slice(8, -1));
+      const done = () => { if (!gh.isConnected) return; pic.appendChild(hi); requestAnimationFrame(() => { hi.classList.add("on"); setTimeout(() => lo.remove(), 260); }); };
+      if (hi.decode) hi.decode().then(done, () => {}); else hi.onload = done;
+    };
+    const warm = () => [-1, 1].forEach(dir => { const j = nbr(dir); if (j >= 0 && ghosts[dir]) { const dd = glDetailNow(j); if (dd) fillGhost(dir, dd); else glDetail(j).then(x => fillGhost(dir, x)).catch(() => {}); } });
+    [-1, 1].forEach(dir => { ghosts[dir] = buildGhost(dir); });
+    cleanup.push(() => { [-1, 1].forEach(dir => { if (ghosts[dir]) { ghosts[dir].remove(); ghosts[dir] = null; } }); });
+    setTimeout(() => { if (el.isConnected) warm(); }, 250);
+    let g = null, busy = false, swallow = -1e9, cur = 0;
+    const showDir = dir => { [-1, 1].forEach(k => { if (ghosts[k]) ghosts[k].style.opacity = k === dir ? "1" : "0"; }); cur = dir; };
+    const place = dx => { el.style.transform = `translate3d(${dx}px,0,0)`; const gh = cur && ghosts[cur]; if (gh) gh.style.transform = `translate3d(${dx + cur * W()}px,0,0)`; };
+    const settle = (dx, ms, done) => {
+      const t = `transform ${ms}ms cubic-bezier(.2,.7,.2,1)`, gh = cur && ghosts[cur];
+      if (reduceMotion || !ms) { place(dx); return done && done(); }
+      el.style.transition = t; if (gh) gh.style.transition = t; place(dx);
+      setTimeout(() => { done && done(); }, ms + 20);
+    };
+    const reset = () => {
+      el.style.transition = el.style.transform = el.style.willChange = "";
+      [-1, 1].forEach(k => { const gh = ghosts[k]; if (gh) { gh.style.transition = ""; gh.style.opacity = "0"; gh.style.transform = off(k); } });
+      cur = 0; g = null; busy = false;
+    };
+    // the new page is drawn: the ghost it replaces stays until the new hero picture is up, then fades
+    const handOver = gh => {
+      if (!gh) return; const t0 = performance.now();
+      const tick = () => {
+        const pg = document.querySelector(".screen.gl-page"), im = pg && pg !== el && pg.querySelector(".gl-hero img");
+        if (!gh.isConnected) return;
+        if ((im && im.complete && im.naturalWidth) || performance.now() - t0 > 900) { gh.style.transition = "opacity .14s ease-out"; gh.style.opacity = "0"; return void setTimeout(() => gh.remove(), 180); }
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick); setTimeout(() => { if (gh.isConnected) gh.remove(); }, 2500);
+    };
+    const go = (dir, j) => {
+      const c = ctx && ctx.list[ctx.pos] === i ? { ...ctx, pos: ctx.pos + dir } : null;
+      if (c) { GL_CTXS.set(j, c); const m = c.key != null && typeof FD_MEMO !== "undefined" ? FD_MEMO.get(c.key) : null; if (m && c.fks) { const fk = c.fks[c.pos]; FD_MEMO.set(c.key, { ...m, shown: Math.max(m.shown || 0, fk + 1), ak: fk, ay: 150 }); } }
+      if (XSTACK.length && String(XSTACK[XSTACK.length - 1]).startsWith("g:")) XSTACK[XSTACK.length - 1] = "g:" + j;
+      else XSTACK.push("g:" + j);
+      const gh = cur === dir ? ghosts[dir] : null; if (gh) ghosts[dir] = null;   // not the page's to remove any more: handOver does it
+      TLG_SKIP = true; TLG_KEEP_PREV = true;   // the exit already played; what is under the painting stays the list it came from
+      try { galleryPage(j, false); } finally { TLG_SKIP = false; TLG_KEEP_PREV = false; }
+      handOver(gh);
+    };
+    // dx = where the page is now (px), v = the release velocity; waits for the neighbor's data so the landing is one piece
+    const commit = (dir, dx, v, instant) => {
+      const j = nbr(dir); if (j < 0) return reset();
+      busy = true; swallow = performance.now(); buzz(6);
+      const land = () => { const dd = glDetailNow(j); if (dd) return go(dir, j); glDetail(j).then(() => go(dir, j), () => settle(0, 220, reset)); };
+      if (instant && !cur) return land();
+      const ms = Math.round(clamp((W() - Math.abs(dx)) / Math.max(Math.abs(v), .7), 150, 280));
+      settle(-dir * W(), ms, land);
+    };
+    el.addEventListener("click", e => { if (performance.now() - swallow < 400) { e.stopPropagation(); e.preventDefault(); } }, true);
+    el.addEventListener("pointerdown", e => {
+      if (g) { settle(0, 180, reset); return; }   // a second finger ends it
+      if (!e.isPrimary || busy || e.clientX < 28 || e.clientX > W() - 6 || document.querySelector(".sheet,.gl-zoom,.glz-top") || pickArmed || mode === "pick") return;
+      if (e.target.closest && (e.target.closest("canvas,input,textarea,select,[data-nopull],[data-glpicker]") || hscroller(e.target))) return;
+      if (nbr(-1) < 0 && nbr(1) < 0) return;
+      g = { id: e.pointerId, x0: e.clientX, y0: e.clientY, lx: e.clientX, lt: performance.now(), v: 0, axis: null };
+      warm();   // the neighbors' data and pictures are wanted right now
+    }, { passive: true });
+    el.addEventListener("pointermove", e => {
+      if (!g || e.pointerId !== g.id) return;
+      const dx = e.clientX - g.x0, dy = e.clientY - g.y0;
+      if (!g.axis) {
+        const ax = Math.abs(dx), ay = Math.abs(dy);
+        if (ax < 6 && ay < 6) return;
+        if (ax >= ay * 1.1) { g.axis = "x"; el.style.willChange = "transform"; el.style.transition = "none"; try { el.setPointerCapture(g.id); } catch (er) {} if (pressT) { clearTimeout(pressT); pressT = 0; } }
+        else { g = null; return; }   // vertical: the page's scroll or the pull-down
+      }
+      e.preventDefault();
+      const dir = dx < 0 ? 1 : -1;   // swiping left = the next one
+      if (dir !== cur) { [-1, 1].forEach(k => { if (ghosts[k]) ghosts[k].style.transition = "none"; }); showDir(dir); }
+      const has = nbr(dir) >= 0, ax = Math.abs(dx), shown = has ? dx : Math.sign(dx) * (ax < 80 ? ax * .4 : 32 + (ax - 80) * .12);   // a rubber band at the ends of the list
+      const now = performance.now(), dt = now - g.lt;
+      if (dt >= 1) { g.v = g.v * .5 + ((e.clientX - g.lx) / dt) * .5; g.lx = e.clientX; g.lt = now; }
+      place(shown);
+    }, { passive: false });
+    const up = e => {
+      if (!g || e.pointerId !== g.id) return;
+      const dx = e.clientX - g.x0, dy = e.clientY - g.y0, v = g.v, axis = g.axis; if (!axis) g = null;
+      if (!axis) {   // a bare press-and-release with no moves in between (a scripted flick): treat a long clean horizontal run as the swipe
+        if (Math.abs(dx) >= 60 && Math.abs(dx) > Math.abs(dy) * 1.6 && nbr(dx < 0 ? 1 : -1) >= 0) commit(dx < 0 ? 1 : -1, 0, 1, true);
+        return;
+      }
+      swallow = performance.now();
+      const dir = dx < 0 ? 1 : -1, ok = nbr(dir) >= 0 && (Math.abs(dx) > W() * .3 || (Math.abs(v) > .45 && v * dx > 0 && Math.abs(dx) > 24));
+      if (ok) { g = null; commit(dir, dx, v); } else { g = null; busy = true; settle(0, 240, reset); }
+    };
+    el.addEventListener("pointerup", up);
+    el.addEventListener("pointercancel", () => { if (g && g.axis) { g = null; busy = true; settle(0, 200, reset); } else g = null; });
+    // the first time: a small nudge toward the next painting says the page moves (once ever, never on reduced motion)
+    try {
+      if (!reduceMotion && nbr(1) >= 0 && !localStorage.getItem("colorhub-swipehint")) setTimeout(() => {
+        const gh = ghosts[1]; if (!gh || !el.isConnected || g || busy || cur) return; localStorage.setItem("colorhub-swipehint", "1");
+        // the next painting's edge peeks in 6px at the right for a moment (the page itself never moves, so nothing under a finger shifts)
+        gh.style.opacity = "1"; gh.style.transition = "transform .3s ease-out, opacity .4s";
+        requestAnimationFrame(() => requestAnimationFrame(() => { if (!g && !cur) gh.style.transform = `translate3d(${W() - 7}px,0,0)`; }));
+        setTimeout(() => { if (!g && !busy && !cur && gh.isConnected) { gh.style.opacity = "0"; setTimeout(() => { if (!g && !cur) { gh.style.transition = ""; gh.style.transform = off(1); } }, 450); } }, 1900);
+      }, 1500);
+    } catch (er) {}
+  })();
   heroSpan.addEventListener("click", e => {
     const now = performance.now();
     if (now - glTapAt < 300) {
@@ -2424,12 +2667,17 @@ function glPage(i, d, fromHex, tol) {
     }
     rail.innerHTML = glSimilar(i, 5).map(j => glPinHTML(j)).join(""); glFill(rail);
   }, 40);
-  // "Keep exploring" (js/feed.js): the Pinterest-style feed at the very bottom. Coming Back to this page it is built at once,
-  // so the page is as tall as it was and the scroll lands on the same tile; otherwise it waits until the bottom is near.
+  // the chip row (js/feed.js): the feed tabs sit right under the picture, with this page's sections as the Overview tab. Coming Back to this
+  // page it is built at once, so the scroll lands on the same tile.
   const feedOpts = { i, d, cols: glTwCols(pool, pal6), img: () => canSample ? sampleImg : null, backNav };
-  // the Keep exploring feed is the bottom of a long page: one tap from the top gets there (David, 2026-10-24: "it takes forever")
-  el.querySelectorAll("[data-glfeedjump]").forEach(jumpBtn => jumpBtn.onclick = e => { e.stopPropagation(); const t = el.querySelector("[data-glfeed]"); if (t) { buzz(5); fdJump(t); } });
-  if (typeof fdMount === "function") { if (backNav && fdHasMemo(i)) fdMount(el.querySelector("[data-glfeed]"), feedOpts); else later(() => fdMount(el.querySelector("[data-glfeed]"), feedOpts), 60); }
+  if (typeof fdMount === "function") fdMount(el.querySelector("[data-glfeed]"), { ...feedOpts, about: el.querySelector("[data-gl-about]"), startChip });
+}
+// where a painting page opens: browsing from another painting, a color page's feed tile (p:/n:), the painting map or a painter -> Color; otherwise Overview
+let GL_FROM_TODAY = false;
+function glStartChip() {
+  if (typeof GL_FROM_TODAY !== "undefined" && GL_FROM_TODAY) { GL_FROM_TODAY = false; return "color"; }   // David, 2026-10-26: a painting opened from the Today feed starts on Color, so the scroll goes on
+  const prev = typeof XSTACK !== "undefined" && XSTACK.length > 1 ? String(XSTACK[XSTACK.length - 2]) : "";
+  return /^(g:|p:|n:|aw:)/.test(prev) || /^r:.*paintings\/map/.test(prev) ? "color" : "about";
 }
 // the colors a painting is matched on in "More like this" and "Keep exploring": its palette without the near-blacks (L* < 20),
 // which every old varnished painting shares (IMPROVE-2026-10-08 A15), unless too few are left

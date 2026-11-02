@@ -178,6 +178,218 @@ function rcRoleSection(name, hex) {
   return `<div id="${id}"></div>`;
 }
 
+// ======================================================================
+// How painters use it (David, 2026-10-25: "its role in painting could be more nuanced with more picture examples"). One bar
+// that is also the tabs: Main color, Shadow, Mid-tone, Light, Accent, each as wide as how often the color plays that part. One
+// plain sentence with the n, then a rail of up to 12 real paintings where it plays the chosen part most clearly, each opening
+// with the color marked. Replaces "Its roles, one painting each" and the role bar under By the numbers. Measured live from the
+// gallery index (six measured colors a painting), as photographed: lightness against the painting's own average, so it
+// survives varnish and camera. Closeness counts twice (squared) in the order: an exact match beats a big off-color area.
+// ======================================================================
+const RS_ROLES = [["main", "Main", "the main color, covering a third or more of the canvas"], ["shadow", "Shadow", "a shadow, darker than the painting around it"], ["mid", "Mid-tone", "a mid-tone, about as light as the painting around it"], ["light", "Light", "a light, brighter than the painting around it"], ["accent", "Accent", "an accent, a small strong touch"]];
+const RS_CACHE = new Map();
+function rsRoleStats(hex) {
+  if (RS_CACHE.has(hex)) return RS_CACHE.get(hex);
+  const G = GAL, N = G.n, [tL, ta, tb] = lab(hex);
+  let out = null;
+  for (const R of [12, 18]) {
+    const roles = { main: [], shadow: [], mid: [], light: [], accent: [] }, far = (R * 3) ** 2;   // a cheap Lab-distance cut first: CIEDE2000 under R never sits this far away
+    let n = 0;
+    for (let i = 0; i < N; i++) {
+      let best = -1, bd = R;
+      for (let j = 0; j < 6; j++) {
+        const k = i * 6 + j, o = k * 3, dL = G.lab[o] - tL;
+        if (dL > 30 || dL < -30) continue;
+        const da = G.lab[o + 1] - ta, db = G.lab[o + 2] - tb;
+        if (dL * dL + da * da + db * db > far) continue;
+        const d = glDE(tL, ta, tb, G.lab[o], G.lab[o + 1], G.lab[o + 2]);
+        if (d < bd) { bd = d; best = k; }
+      }
+      if (best < 0) continue;
+      const share = G.sh[best], o = best * 3, dm = G.lab[o] - G.mean[i * 3], near = (1 - bd / R) ** 2;
+      let role = share >= .33 ? "main" : dm < -8 ? "shadow" : dm > 8 ? "light" : "mid";
+      if (share < .1 && G.ch[best] > 18 && glDE(G.lab[o], G.lab[o + 1], G.lab[o + 2], G.mean[i * 3], G.mean[i * 3 + 1], G.mean[i * 3 + 2]) > 22) role = "accent";
+      roles[role].push([i, role === "accent" ? near * G.ch[best] * (1 - share) : near * (.3 + share)]);
+      n++;
+    }
+    if (n >= 5 || R === 18) { out = { roles, n, R }; break; }
+  }
+  for (const k in out.roles) out.roles[k].sort((a, b) => b[1] - a[1]);
+  RS_CACHE.set(hex, out); if (RS_CACHE.size > 8) RS_CACHE.delete(RS_CACHE.keys().next().value);
+  return out;
+}
+function rcRoleShelfHTML(name, hex) {
+  const id = "rc-rs-" + Math.random().toString(36).slice(2, 8);
+  const draw = () => {
+    const box = document.getElementById(id); if (!box) return;
+    const r = rsRoleStats(hex), have = r ? RS_ROLES.filter(([k]) => r.roles[k].length >= 3) : [];
+    if (!r || r.n < 5 || !have.length) { box.remove(); return; }   // never padded: a color too rare to say anything about shows nothing here
+    const pct = k => Math.max(1, Math.round(r.roles[k].length / r.n * 100));
+    let cur = have.reduce((a, b) => r.roles[b[0]].length > r.roles[a[0]].length ? b : a)[0];   // opens on the part it plays most
+    const hair = typeof rcContrast === "function" && rcContrast(hex, "#0E0D0B") < 1.6 ? " rs-hair" : "";   // a near-black color: the chosen role needs a ring to stand off the page
+    box.innerHTML = `<section class="rc-sec rs-roles${hair}" style="--c:${hex}" data-ink="${ink(hex)}">
+      <h3>How painters use it</h3>
+      <div class="rs-bar" role="tablist" aria-label="Its roles in paintings">${have.map(([k, label]) => `<button type="button" role="tab" class="rs-seg" data-rs="${k}" style="flex:${Math.sqrt(r.roles[k].length).toFixed(2)}"><b>${label}</b><span>${pct(k)}%</span></button>`).join("")}</div>
+      <p class="rs-say" data-rs-say aria-live="polite"></p>
+      <div class="gl-rail rs-rail" data-rs-rail></div>
+      <p class="fine">As photographed: its lightness against the painting's own average. Tap a role to see where it plays that part.</p></section>`;
+    const say = box.querySelector("[data-rs-say]"), rail = box.querySelector("[data-rs-rail]");
+    const paint = () => {
+      const [k, , what] = RS_ROLES.find(x => x[0] === cur);
+      box.querySelectorAll("[data-rs]").forEach(b => { const on = b.dataset.rs === k; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
+      say.textContent = `${what.charAt(0).toUpperCase() + what.slice(1)}: in ${pct(k)}% of the ${r.n.toLocaleString("en-US")} paintings that hold it.`;
+      rail.innerHTML = r.roles[k].slice(0, 12).map(([i]) => glPinHTML(i)).join("");
+      rail.scrollLeft = 0; glFill(rail);
+    };
+    paint();
+    box.addEventListener("click", e => {
+      const s = e.target.closest("[data-rs]"); if (s) { if (s.dataset.rs !== cur) { cur = s.dataset.rs; buzz(5); paint(); } return; }
+      const p = e.target.closest("[data-gi]"); if (p) { buzz(6); galleryPage(+p.dataset.gi, true, hex); }
+    });
+  };
+  rcLazyGallery(id, draw);   // the gallery index is large: only loaded once the first screen has settled
+  return `<div id="${id}"></div>`;
+}
+
+// ======================================================================
+// Next to it (David, 2026-10-25: "the whole family tab looks dumb, the tree is dumb"). Three ladders of real, named colors with this one in
+// the middle: lighter to darker, cooler to warmer, duller to brighter. Each side is the cleanest steps along that one axis only (the other
+// two held as still as the names allow), so a ladder shows exactly what one change looks like. Below, the nearest name held against it in a
+// draggable split, with the one line that tells them apart. Built from the ~1,000 learnable names, so every color gets one, article or not.
+// ======================================================================
+const NT_AXES = [
+  { k: "light", lo: "Lighter", hi: "Darker", step: 4, min: 3, max: 32 },
+  { k: "warm", lo: "Cooler", hi: "Warmer", step: 10, min: 6, max: 70 },
+  { k: "vivid", lo: "Duller", hi: "Brighter", step: 6, min: 4, max: 34 }];
+function ntLadders(hex) {
+  const list = (typeof CORE_NAMES !== "undefined" && CORE_NAMES) || [];
+  const [L0, a0, b0] = lab(hex), C0 = Math.hypot(a0, b0), h0 = Math.atan2(b0, a0) * 180 / Math.PI, rad = Math.PI / 180;
+  const wrap = d => d > 180 ? d - 360 : d < -180 ? d + 360 : d, warmSign = wrap(50 - h0) >= 0 ? 1 : -1, upper = hex.toUpperCase();
+  const cands = [];
+  for (const x of list) {
+    if (x.h.toUpperCase() === upper) continue;
+    const l = x.lab || (x.lab = lab(x.h));
+    if (Math.abs(l[0] - L0) > 38 || glDE(L0, a0, b0, l[0], l[1], l[2]) < 1.2) continue;
+    const C = Math.hypot(l[1], l[2]), dh = wrap(Math.atan2(l[2], l[1]) / rad - h0);
+    cands.push({ n: x.n, h: x.h, dL: l[0] - L0, dC: C - C0, dh, da: l[1] - a0, db: l[2] - b0, C, use: x.useRank == null ? 999 : x.useRank });
+  }
+  return NT_AXES.map(ax => {
+    if (ax.k === "warm" && C0 < 9) return { ax, left: [], right: [] };   // a grey has no hue to warm or cool
+    const rows = cands.map(c => {
+      let along, off;
+      if (ax.k === "light") { along = c.dL; off = Math.hypot(c.da, c.db); }
+      else if (ax.k === "warm") { if (c.C < 9) return null; along = -warmSign * c.dh; off = Math.hypot(c.dL, c.dC); }
+      else { along = -c.dC; off = Math.hypot(c.dL, C0 * c.dh * rad); }
+      const a = Math.abs(along);
+      if (a < ax.min || a > ax.max || off > Math.max(5, a * .85)) return null;
+      return { ...c, along, score: off / a + c.use / 1100 };   // clean steps first, and among near-equals the everyday names (useRank 0 = most used)
+    }).filter(Boolean);
+    const side = sign => {
+      const pool = rows.filter(r => r.along * sign > 0).sort((p, q) => p.score - q.score), pick = [];
+      for (const r of pool) { if (pick.length < 3 && pick.every(p => Math.abs(p.along - r.along) >= ax.step)) pick.push(r); }
+      return pick;
+    };
+    const left = side(1).sort((p, q) => q.along - p.along), right = side(-1).sort((p, q) => q.along - p.along);   // far..near | near..far
+    return { ax, left, right };
+  });
+}
+function rcNextToHTML(name, hex) {
+  const id = "rc-nt-" + Math.random().toString(36).slice(2, 8);
+  const draw = () => {
+    const box = document.getElementById(id); if (!box) return;
+    const lad = ntLadders(hex).filter(l => l.left.length + l.right.length);
+    if (!lad.length) { box.remove(); return; }
+    const tile = c => `<button type="button" class="nt-tile" data-swatch="${c.h}" aria-label="${esc(c.n)}"><i style="--c:${c.h}"></i><b>${esc(c.n)}</b></button>`;
+    const self = `<span class="nt-tile nt-self" style="--c:${hex}"><i></i><b>This one</b></span>`;
+    const near = (typeof CORE_NAMES !== "undefined" && CORE_NAMES || []).filter(x => x.n.toLowerCase() !== name.toLowerCase() && x.h.toUpperCase() !== hex.toUpperCase())
+      .map(x => ({ x, d: de2000(hex, x.h) })).filter(o => o.d >= 1.2 && o.d < 14).sort((a, b) => (a.d + (a.x.useRank == null ? 999 : a.x.useRank) / 180) - (b.d + (b.x.useRank == null ? 999 : b.x.useRank) / 180))[0];
+    let cmp = "";
+    if (near) {
+      const diff = typeof lookDiff === "function" ? lookDiff({ h: hex, n: name }, near.x) : "";
+      cmp = `<div class="nt-cmp" data-nt-cmp><div class="fam-cmp-split" data-nt-split>
+          <div class="fam-cmp-half fam-cmp-a" style="--c:${hex}" data-ink="${ink(hex)}"><b>${esc(name)}</b></div>
+          <div class="fam-cmp-half fam-cmp-b" style="--c:${near.x.h}" data-ink="${ink(near.x.h)}"><b>${esc(near.x.n)}</b></div>
+          <button type="button" class="fam-cmp-handle" aria-label="Drag to compare ${esc(name)} with ${esc(near.x.n)}" style="left:50%"><i></i></button></div>
+        <p class="fam-cmp-line">${diff && diff !== "almost the same" ? `${esc(near.x.n)} is ${esc(diff)} than ${esc(name.toLowerCase())}.` : `${esc(near.x.n)} is almost the same as ${esc(name.toLowerCase())}.`}</p>
+        <button type="button" class="fam-cmp-open" data-swatch="${near.x.h}">See ${esc(near.x.n)}${typeof ICON !== "undefined" ? ICON.arrow : ""}</button></div>`;
+    }
+    box.innerHTML = `<section class="rc-sec rc-nt" id="rp-s-next" style="--c:${hex}">
+      <h3>Next to it</h3>
+      ${lad.map(({ ax, left, right }) => `<div class="nt-ladder" data-nt="${ax.k}"><p class="nt-ax"><span>${ax.lo}</span><span>${ax.hi}</span></p>
+        <div class="gl-rail nt-row">${left.map(tile).join("")}${self}${right.map(tile).join("")}</div></div>`).join("")}
+      ${cmp}
+      <div data-nt-disamb></div>
+      <p class="fine">The closest named colors along one change at a time, from about 1,000 names. Screen colors are approximate.</p></section>`;
+    box.querySelectorAll(".nt-row").forEach(r => { const me = r.querySelector(".nt-self"); if (me) r.scrollLeft = Math.max(0, me.offsetLeft - (r.clientWidth - me.offsetWidth) / 2); });
+    const split = box.querySelector("[data-nt-split]");
+    if (split) {
+      const handle = split.querySelector(".fam-cmp-handle"), b = split.querySelector(".fam-cmp-b");
+      const set = pct => { pct = Math.max(2, Math.min(98, pct)); handle.style.left = pct + "%"; b.style.clipPath = `inset(0 0 0 ${pct}%)`; };
+      const move = x => { const r = split.getBoundingClientRect(); set((x - r.left) / r.width * 100); };
+      let dragging = false;
+      handle.addEventListener("pointerdown", e => { dragging = true; try { handle.setPointerCapture(e.pointerId); } catch (er) {} });
+      handle.addEventListener("pointermove", e => { if (dragging) move(e.clientX); });
+      ["pointerup", "pointercancel"].forEach(ev => handle.addEventListener(ev, () => { dragging = false; }));
+      split.addEventListener("click", e => { if (!handle.contains(e.target)) move(e.clientX); });
+    }
+    box.dispatchEvent(new CustomEvent("nt-ready", { bubbles: true }));
+  };
+  // the ~1,000 names, then the draw; the sections below are not waiting on this
+  setTimeout(() => { if (document.getElementById(id)) (typeof loadCoreNames === "function" ? loadCoreNames() : Promise.resolve()).then(draw).catch(() => {}); }, 300);
+  return `<div id="${id}"></div>`;
+}
+
+// ======================================================================
+// Elsewhere (David, 2026-10-25): where else the color lives, in ONE strip with chips (Nature, Gems, Design, Objects, Fashion, Films, Books,
+// Poems, Looks) instead of eight stacked sections. It reads the same lists as the feed's Other worlds tab (js/feed.js fdcWorldLists), so the
+// page and the feed cannot drift apart. A chip with nothing is not drawn; a color with almost nothing shows no strip at all.
+// ======================================================================
+const EL_KINDS = [["In nature", "Nature"], ["In gems", "Gems"], ["In design", "Design"], ["In design objects", "Objects"], ["In fashion", "Fashion"], ["In films", "Films"], ["In books", "Books"], ["In poems", "Poems"], ["In looks", "Looks"]];
+function rcElsewhereHTML(name, hex) {
+  const id = "rc-el-" + Math.random().toString(36).slice(2, 8);
+  const draw = async () => {
+    const box = document.getElementById(id); if (!box) return;
+    let lists = [];
+    try { lists = typeof fdcWorldLists === "function" ? await fdcWorldLists({ sub: { hex, name } }) : []; } catch (e) {}
+    const by = new Map();
+    lists.forEach(l => l.forEach(c => { if (!by.has(c.cap)) by.set(c.cap, []); by.get(c.cap).push(c); }));
+    try {   // "In looks": the looks whose palettes hold a close color (js/looks.js), as cards of the same shape
+      if (typeof lkAll === "function" && typeof lkOpen === "function") {
+        const hits = [];
+        lkAll().forEach(look => { let best = null; look.pals.forEach((p, pi) => p.c.forEach(x => { const d = de2000(hex, x[0]); if (!best || d < best.d) best = { d, pi, x }; })); if (best && best.d < 7) hits.push({ look, ...best }); });
+        hits.sort((a, b) => a.d - b.d);
+        if (hits.length) by.set("In looks", hits.slice(0, 10).map(h => ({ title: h.look.name, h: h.x[0], sub: h.look.pals[h.pi].n ? `${h.look.pals[h.pi].n}` : "A look", cap: "In looks", open: () => lkOpen(h.look.id, { pi: h.pi }) })));
+      }
+    } catch (e) {}
+    const kinds = EL_KINDS.filter(([k]) => (by.get(k) || []).length >= 1);
+    const total = kinds.reduce((a, [k]) => a + by.get(k).length, 0);
+    if (!kinds.length || total < 3) { box.remove(); return; }   // never padded
+    let cur = (kinds.find(([k]) => by.get(k).length >= 3) || kinds[0])[0];
+    const word = t => { const m = /^(\d+(?:\.\d+)?)% match$/.exec(String(t || "")); if (!m) return t || ""; const de = 100 - +m[1]; return de < 2 ? "Nearly identical" : de < 5 ? "Very close" : de < 10 ? "Close" : "Related"; };   // a number nobody can feel, as a word
+    const card = (c, i) => c.ab >= 1.25 && !c.img
+      ? `<button type="button" class="el-card el-q" data-el="${i}"><span class="el-qt">${esc(c.title)}</span><small>${esc(c.sub || "")}</small></button>`
+      : `<button type="button" class="el-card" data-el="${i}"><span class="el-sw" style="--c:${c.h}">${c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : ""}</span><b>${esc(c.title)}</b><small>${esc(word(c.sub))}</small></button>`;
+    box.innerHTML = `<section class="rc-sec rc-else" style="--c:${hex}" data-ink="${ink(hex)}">
+      <h3>Elsewhere</h3>
+      <div class="rs-bar el-chips" role="tablist" aria-label="Where else this color lives">${kinds.map(([k, t]) => `<button type="button" role="tab" class="el-chip" data-elk="${esc(k)}">${t}<span>${by.get(k).length}</span></button>`).join("")}</div>
+      <div class="gl-rail el-rail" data-el-rail></div>
+      <button type="button" class="rc-door rc-door-all" data-rc-feed="worlds">More in Other worlds</button>
+      <p class="fine">Matched by color, as photographed or as catalogued. A close match is not a claim of influence.</p></section>`;
+    const rail = box.querySelector("[data-el-rail]");
+    const paint = () => {
+      box.querySelectorAll("[data-elk]").forEach(b => { const on = b.dataset.elk === cur; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
+      rail.innerHTML = by.get(cur).slice(0, 10).map(card).join(""); rail.scrollLeft = 0;
+    };
+    paint();
+    box.addEventListener("click", e => {
+      const k = e.target.closest("[data-elk]"); if (k) { if (k.dataset.elk !== cur) { cur = k.dataset.elk; buzz(5); paint(); } return; }
+      const c = e.target.closest("[data-el]"); if (c) { const it = by.get(cur)[+c.dataset.el]; if (it && it.open) { buzz(6); it.open(); } }
+    });
+  };
+  setTimeout(() => { if (document.getElementById(id)) draw().catch(() => { const b = document.getElementById(id); if (b) b.remove(); }); }, 1100);
+  return `<div id="${id}"></div>`;
+}
+
 // ---------- Role paintings (design/audit-graph/CHECKPOINT.md #6): for 1,434 colors, data/graph/fieldnotes'
 // ar.rp_ names one real painting where the color plays each part -- shadow, mid-tone, light, accent, hidden
 // note -- picked once by L6, not recomputed live the way rcRoleSection's bar above is. "Never one palette,
@@ -502,6 +714,7 @@ function rcPaintersHTML(name, port) {
   return `<section class="rc-sec rc-painters"><h3>Painters who use it</h3>
     ${rows.slice(0, 5).map(r => { const slug = r.s || routeSlug(r.a);
       return `<button type="button" class="kin rc-plain rc-painter" data-awpainter="${esc(slug)}">${rcPainterPortHTML(slug, port)}<b>${esc(r.a)}</b><span>${r.l.toFixed(1)}× more than their peers, from ${r.n} painting${r.n === 1 ? "" : "s"} here</span></button>`; }).join("")}
+    <button type="button" class="rc-door rc-door-all" data-rc-feed="painters">All the painters who use it</button>
     <p class="fine">Lift vs. the same decade and country (or country, or the whole archive, when that group is too small), as photographed, from the gallery's 23,781 paintings (n per painter above).</p>
   </section>`;
 }
@@ -574,7 +787,11 @@ function rcGroupHits(groups, kind, name) {
 function rcSparkline(hits, peakKey) {
   const keys = hits.map(h => h.key).sort((a, b) => (+a) - (+b));
   const max = Math.max(...hits.map(h => h.share)) || 1;
-  return `<div class="rc-spark">${keys.map(k => { const h = hits.find(x => x.key === k); const pct = Math.max(6, Math.round(h.share / max * 100)); return `<i style="height:${pct}%" class="${k === peakKey ? "on" : ""}"><em>${esc(String(k).slice(2))}</em></i>`; }).join("")}</div>`;
+  // every bar is a door (David, 2026-10-25: "every number is a door"): it opens the Era tab on that decade
+  // a label under about six bars and the peak, never every one: thirty-seven two-digit labels ran into each other
+  const step = Math.max(1, Math.ceil(keys.length / 6)), pk = keys.indexOf(String(peakKey));
+  const labelled = i => i === pk || (i % step === 0 && (pk < 0 || Math.abs(i - pk) >= Math.max(2, step / 1.5)));
+  return `<div class="rc-spark">${keys.map((k, i) => { const h = hits.find(x => x.key === k); const pct = Math.max(6, Math.round(h.share / max * 100)); return `<button type="button" class="rc-spark-c" data-rc-era="${esc(String(k))}" aria-label="Paintings near the ${esc(String(k))}s"><i style="height:${pct}%" class="${k === peakKey ? "on" : ""}">${labelled(i) ? `<em>${esc(String(k))}</em>` : ""}</i></button>`; }).join("")}</div>`;
 }
 function rcWhenWhereHTML(name) {
   if (!RC_GROUPS) return "";
@@ -592,9 +809,26 @@ function rcWhenWhereHTML(name) {
   return `<section class="rc-sec rc-whenwhere"><h3>When and where</h3>
     ${decades.length > 1 ? rcSparkline(decades, peakDecade.key) : ""}
     <p>${sentences.join(" ")}</p>
-    <p class="fine">From the gallery's 23,781 paintings, as photographed; country is often the painter's nationality, and movement data covers only part of the corpus.</p>
+    ${countries.length ? `<div class="rc-doors" role="group" aria-label="Countries where it shows up most">${countries.slice().sort((p, q) => q.share - p.share).slice(0, 4).map(c => `<button type="button" class="rc-door" data-rc-place="${esc(c.key)}">${esc(c.key)}</button>`).join("")}</div>` : ""}
+    <p class="fine">From the gallery's 23,781 paintings, as photographed; country is often the painter's nationality, and movement data covers only part of the corpus. Tap a decade or a country to see those paintings.</p>
   </section>`;
 }
+// the page's doors into the feed (David, 2026-10-25): a decade bar, a country, "all the painters". The feed may still be waiting on the
+// gallery index, so a tap retries for a few seconds rather than doing nothing.
+function rcFeedGo(kind, pick, tries = 0) {
+  const host = document.querySelector("[data-rpfeed]"); if (!host) return;
+  if (host.fdOpen) return host.fdOpen(kind, pick);
+  if (tries < 10) setTimeout(() => rcFeedGo(kind, pick, tries + 1), 600); else toast("The paintings are still loading");
+}
+document.addEventListener("click", e => {
+  const era = e.target.closest("[data-rc-era]"), place = e.target.closest("[data-rc-place]"), feed = e.target.closest("[data-rc-feed]");
+  if (!era && !place && !feed) return;
+  e.preventDefault(); buzz(5);
+  if (era) return rcFeedGo("era", Math.floor(+era.dataset.rcEra / 10));
+  if (feed) return rcFeedGo(feed.dataset.rcFeed);
+  if (typeof fdFacets !== "function") return;
+  loadGallery().then(() => fdFacets()).then(F => { const k = F.meta.countries.indexOf(place.dataset.rcPlace); rcFeedGo("place", k >= 0 ? k + 1 : 0); }).catch(() => rcFeedGo("place", 0));
+});
 function rcWhenWhereSection(name, hex) {
   const id = "rc-ww-" + Math.random().toString(36).slice(2, 8);
   rcLoadGroups().then(() => {
@@ -633,8 +867,8 @@ function rcPairedHTML(name, baseHex, baseName) {
       <p class="rc-pc-meta">${r.l.toFixed(1)}× more than chance · in ${r.n.toLocaleString()} paintings <button class="rc-pc-go" data-rc-pair="${mh.replace("#", "")}+${e.h.replace("#", "")}" data-rc-names="${esc(mn)}|${esc(e.n)}">See them</button></p></div>`;
   }).filter(Boolean);
   if (!cards.length) return "";
-  const more = cards.length > 3 ? `<details class="rc-more"><summary>${cards.length - 3} more pairings</summary>${cards.slice(3).join("")}</details>` : "";
-  return `<section class="rc-sec rc-paired"><h3>Often paired with</h3>${cards.slice(0, 3).join("")}${more}<p class="fine">How much more often two colors share a painting's palette than chance would predict, as photographed, from the gallery's 23,781 paintings.</p></section>`;
+  // a swipeable rail (David, 2026-10-25): six pairs side by side instead of three stacked and a fold of three more
+  return `<section class="rc-sec rc-paired"><h3>Often paired with</h3><div class="gl-rail rc-pc-rail">${cards.join("")}</div><p class="fine">How much more often two colors share a painting's palette than chance would predict, as photographed, from the gallery's 23,781 paintings.</p></section>`;
 }
 function rcPairedSection(name, hex) {
   const id = "rc-pair-" + Math.random().toString(36).slice(2, 8);

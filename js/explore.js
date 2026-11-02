@@ -353,28 +353,42 @@ function museumFillToday(el) {
     nw.onclick = () => { const a = coverData().art; if (a) openNode(a); else challenge(); };
   }).catch(() => {});
 }
+let MU_TAB = "all";
 function museumHome() {
   XSTACK = [];
   museumRegisterMore();
   const { art } = coverData();
   const recentIds = Array.isArray(S.recentColl) ? S.recentColl.slice(0, 3) : [];
   const recent = recentIds.map(id => COLLECTIONS.find(c => c.id === id)).filter(Boolean);
-  const groups = MUSEUM_GROUPS.map(g => [g, COLLECTIONS.filter(c => c.group === g)]).filter(([, l]) => l.length);
+  // the painting Boards (smart folders) lead the Art group; the cover is the Paintings collection's own
+  const boardsTile = { id: "__boards", t: "Painting boards", count: "Smart folders", group: "Art", pic: "#2A2A38", swatches: ["#E8787A", "#F2C94C", "#6FAF8C", "#7FB8D4", "#9B7FD1", "#E8A15A", "#C9D6DF", "#8C5A3C", "#3E5C76"] };
+  const all = [boardsTile, ...COLLECTIONS];
+  const groups = MUSEUM_GROUPS.map(g => [g, all.filter(c => c.group === g)]).filter(([, l]) => l.length);
+  if (MU_TAB !== "all" && !groups.some(([g]) => g === MU_TAB)) MU_TAB = "all";
+  const grid = list => `<div class="pl-colls mu-colls mu-grid">${list.map(placesCollTile).join("")}</div>`;
+  const body = () => MU_TAB === "all"
+    ? `${museumTodayHTML(coverData().art)}${recent.length ? `<div class="sec-head"><b>Recent</b></div>${grid(recent)}` : ""}${groups.map(([g, list]) => `<div class="sec-head"><b>${esc(g)}</b></div>${grid(list)}`).join("")}`
+    : grid((groups.find(([g]) => g === MU_TAB) || [0, []])[1]);
+  const tabs = () => `<div class="mu-tabs tf-chips" role="tablist" aria-label="Museum">${[["all", "All"], ...groups.map(([g]) => [g, g])].map(([id, l]) => `<button type="button" role="tab" class="tf-chip${id === MU_TAB ? " on" : ""}" data-mu-tab="${esc(id)}" aria-selected="${id === MU_TAB}">${esc(l)}</button>`).join("")}</div>`;
   const el = show(`
     <header class="mu-head"><h1 class="title-1">${esc(NAV_MUSEUM)}</h1><div class="mu-head-acts">
       <button class="icon-btn" data-search aria-label="Search">${ICON.search}</button>
       <button class="icon-btn" data-menu aria-label="More">${ICON.dots}</button></div></header>
-    <p class="note mu-sub">Every painting, painter, movement, flower, gem, poem, film and look, in one place.</p>
-    ${museumTodayHTML(art)}
-    ${recent.length ? `<div class="sec-head"><b>Recent</b></div><div class="pl-colls mu-colls">${recent.map(placesCollTile).join("")}</div>` : ""}
-    ${groups.map(([g, list]) => `<div class="sec-head"><b>${esc(g)}</b></div><div class="pl-colls mu-colls">${list.map(placesCollTile).join("")}</div>`).join("")}
+    ${tabs()}
+    <div class="mu-body">${body()}</div>
   `, "explore mu-home", "explore");
+  const redraw = () => { el.querySelector(".mu-tabs").outerHTML = tabs(); el.querySelector(".mu-body").innerHTML = body(); const td2 = el.querySelector("[data-mu-today]"); if (td2) td2.onclick = () => { const a = coverData().art; if (a) openNode(a); }; if (!coverData().art && MU_TAB === "all") museumFillToday(el); };
   el.querySelector("[data-menu]").onclick = () => moreOpen("explore");
   el.querySelector("[data-search]").onclick = () => (typeof searchOpen === "function" ? searchOpen({ from: "museum" }) : exploreSearchSheet());
   const td = el.querySelector("[data-mu-today]");
   if (td) td.onclick = () => { const a = coverData().art; if (a) openNode(a); };
   if (!art) museumFillToday(el);
-  el.addEventListener("click", e => { const c = e.target.closest("[data-pl-coll]"); if (c) { buzz(8); if (typeof collOpen === "function") collOpen(c.dataset.plColl); } });
+  el.addEventListener("click", e => {
+    const tb = e.target.closest("[data-mu-tab]"); if (tb) { MU_TAB = tb.dataset.muTab; buzz(3); redraw(); return; }
+    const c = e.target.closest("[data-pl-coll]"); if (!c) return; buzz(8);
+    if (c.dataset.plColl === "__boards") { location.hash = "#/boards"; return; }
+    if (typeof collOpen === "function") collOpen(c.dataset.plColl);
+  });
 }
 const MUSEUM_GROUPS = ["Art", "Design", "Nature", "Writing & film", "Looks & ideas"];
 const museumShuffle = () => { if (typeof loadGallery === "function") loadGallery().then(() => { if (typeof GAL !== "undefined" && GAL && typeof galleryPage === "function") galleryPage(Math.floor(Math.random() * GAL.n), true); }); };
@@ -439,7 +453,7 @@ function explorePager() {
     const b = e.target.closest("[data-go]"), s = e.target.closest("[data-part]"), part = b ? b.dataset.go : s && s.dataset.part; if (!part) return;
     buzz(6); part === "all" ? exploreForYou() : openPart(part);
   });
-  el.querySelector("[data-search]").onclick = () => exploreSearchSheet();
+  el.querySelector("[data-search]").onclick = () => (typeof searchOpen === "function" ? searchOpen({ from: "museum" }) : exploreSearchSheet());
   // today's painting isn't a graph node (most of the daily set isn't): draw it onto the Art cover when it lands
   if (!art && tp && typeof dpLoad === "function") dpLoad().then(e => {
     const cv = e && el.isConnected && el.querySelector('.xp-cover[data-part="art"]'); if (!cv) return;
@@ -563,7 +577,7 @@ function artHome() {
     <div class="art-feed" id="artFeed"><p class="fine">Loading the gallery…</p></div>
   `, "article");
   wirePartBack(el);
-  el.querySelector("[data-search]").onclick = () => exploreSearchSheet();
+  el.querySelector("[data-search]").onclick = () => (typeof searchOpen === "function" ? searchOpen({ from: "museum" }) : exploreSearchSheet());
   el.querySelectorAll("[data-hex]").forEach(b => b.onclick = () => {
     const same = ART_UI.name === b.dataset.name;
     ART_UI = same ? { hex: null, name: "" } : { hex: b.dataset.hex, name: b.dataset.name };
@@ -594,11 +608,16 @@ function exploreSearchSheet() {
   q.addEventListener("input", () => {
     const s = q.value.trim().toLowerCase();
     if (!s) { results.innerHTML = saved.length ? `<div class="sec-head"><b>Saved</b><span>${saved.length}</span></div>${masonry(saved.map(n => pin(n)))}` : `<p class="fine">Tap ${ICON_HEART} on anything to keep it here, or start typing to search.</p>`; return; }
-    const hits = [...graph().nodes.values()].filter(n => (n.title || "").toLowerCase().includes(s)).slice(0, 40);
+    const all = [...graph().nodes.values()];
+    let hits = all.filter(n => (n.title || "").toLowerCase().includes(s)).slice(0, 40);
+    if (!hits.length && typeof sqFuzzyRank === "function") hits = sqFuzzyRank(all.filter(n => n.title), s, n => n.title, 40).hits;   // typos: "monnet", "perwinkle"
     const painters = typeof awSearchHTML === "function" ? awSearchHTML(s, () => q.dispatchEvent(new Event("input"))) : "";   // painters, from the art wiki (js/artwiki.js)
-    results.innerHTML = painters + (hits.length ? masonry(hits.map(n => pin(n))) : painters ? "" : `<p class="fine">Nothing called that yet.</p>`);
+    const cm = typeof sqColorSearch === "function" ? sqColorSearch(s, 8) : { hits: [] };   // every archive and alternate color name, one tap to its page
+    const cols = cm.hits.length ? `<div class="sec-head"><b>Colors</b><span>${cm.didYouMean ? "Did you mean " + esc(cm.didYouMean) + "?" : ""}</span></div><div class="sr-colors">${cm.hits.map(c => `<button class="sr-color" data-sr-slug="${esc(c.alt ? c.n : c.to)}"><i style="background:${c.h}"></i><b>${esc(c.n)}</b></button>`).join("")}</div>` : "";
+    results.innerHTML = cols + painters + (hits.length ? masonry(hits.map(n => pin(n))) : painters ? "" : `<p class="fine">Nothing called that yet.</p>`);
   });
-  results.addEventListener("click", e => { const p = e.target.closest("[data-pin]"); if (p) { close(); closeup(graph().nodes.get(p.dataset.pin)); } });
+  if (typeof sqLoad === "function") sqLoad().then(() => { if (q.isConnected && q.value.trim()) q.dispatchEvent(new Event("input")); });
+  results.addEventListener("click", e => { const sl = e.target.closest("[data-sr-slug]"); if (sl) { close(); location.hash = "#/color/" + routeSlug(sl.dataset.srSlug); return; } const p = e.target.closest("[data-pin]"); if (p) { close(); closeup(graph().nodes.get(p.dataset.pin)); } });
   setTimeout(() => q.focus(), 260);
 }
 
@@ -681,6 +700,8 @@ const xFallbackTab = () => ["learn", "gym", "explore", "studio", "feed"].include
 function xToOrigin() {
   const r = xFallbackTab();
   if (r) return go(r);
+  // the cold-start painting map is the app's origin (js/boot.js coldMap): back out onto it, where you left it (its pan is kept)
+  if (X_ROOT === "pmap" && typeof pmGo === "function") { if (document.querySelector(".screen.pmx,.pmx")) return; return pmGo("arr=color"); }
   X_ROOT = null;
   return typeof hmHome === "function" ? hmHome() : go("learn");
 }
@@ -914,9 +935,10 @@ function paintingPage(n) {
   const el = show(`
     ${artTop(n)}
     ${n.img ? `<div class="ptg"><img id="pimg" src="${esc(n.img)}" alt="${esc(n.title)} by ${esc(n.artist)}"><canvas id="pmask"></canvas></div>` : ""}
+    <div class="p-id">${n.id && nodeRoute(n).startsWith("painting/") ? shareBtn : ""}
     <p class="eyebrow p-type">${esc(n.typeLabel || "Painting")}${n.year ? " · " + esc(n.year) : ""}</p>
     <h1 class="p-title">${esc(n.title)}</h1>
-    <p class="p-dek">${ptArtistLinkHTML(n)}${n.place ? ` · ${esc(n.place)}` : ""}</p>
+    <p class="p-dek">${ptArtistLinkHTML(n)}${n.place ? ` · ${esc(n.place)}` : ""}</p></div>
     ${n.facts && n.facts.length ? `<dl class="facts">${n.facts.map(f => `<div><dt>${esc(f.label)}</dt><dd>${linkText(f.value)}</dd></div>`).join("")}</dl>` : ""}
     ${pal.length ? `<div class="palette">${pal.map((p, i) => `<button class="pal" data-pi="${i}" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("")}</div>
       ${palFullLink(pal.map(p => p.h), n.title, "Painting")}
@@ -929,6 +951,7 @@ function paintingPage(n) {
     ${n.commons ? `<section class="srcs"><h3>Image</h3><ul><li><a href="${esc(n.commons)}" target="_blank" rel="noopener">${esc(n.imgSrcLabel || "Wikimedia Commons")}</a> · ${esc(n.license || "Public domain")}</li></ul></section>` : ""}
   `, "article");
   wireArticle(el, n);
+  if (n.id) wirePaintingShare(el, n.title + (n.artist ? " by " + n.artist : ""), nodeRoute(n));
   // a photograph or design object keeps with the same heart as a painting, in the same top-bar spot (js/favs.js fvItem*: S.favItem,
   // keyed by the photograph's id, shown in Kept > Archives); this reuses the grid's delegated handler
   if (ptKeepKind(n) && typeof fvItemWireGrid === "function") fvItemWireGrid(el.querySelector(".art-top"), () => n);

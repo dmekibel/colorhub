@@ -1,0 +1,63 @@
+{
+ "slug": "edvard-munch",
+ "lead": "Edvard Munch was a Norwegian painter.",
+ "paras": [
+  "Munch used color to describe a feeling, not a place. A sky in his paintings can be blood orange or sickly green because it is a state of mind.",
+  "He painted for over sixty years and made thousands of works, so the range is wide, from muted Norwegian winters to loud, outdoor summer light."
+ ],
+ "chapters": [
+  {
+   "title": "Kristiania and Paris",
+   "when": "Norway, France · 1880s",
+   "text": "Munch trained in Kristiania, now Oslo, and spent time in Paris in the late 1880s and early 1890s, where he saw the work of Gauguin and Van Gogh. Ball notes that Van Gogh's anguished color gave a vocabulary to Munch and to German Expressionism.\n\nHis early pictures, such as The Sick Child of 1885 to 1886, are painted in thin, scratched layers of {{Sienna}}, grey and pale {{Rose}}, and the surface has been scraped and reworked more than once.",
+   "colors": [
+    "Sienna",
+    "Rose",
+    "Sepia",
+    "Khaki",
+    "Powder Blue"
+   ]
+  },
+  {
+   "title": "The Frieze of Life",
+   "when": "Berlin, Kristiania · 1890s",
+   "text": "In the 1890s Munch organized pictures about love, anxiety and death into a group he called the Frieze of Life. The Scream, first painted in 1893, exists in several versions, in paint, crayon and print. In the best known the sky is {{Orange}} and {{Scarlet}}, the fjord a murky blue-green, and the road a diagonal of dark brown.\n\nTechnical examination reported by the Munch Museum has found that the yellow in one version of The Scream has started to degrade, which the museum links to a cadmium yellow in the paint. If so, that sky was once more intense.\n\nHe often thinned his paint and left areas of the canvas bare, so the color can seem to float.",
+   "colors": [
+    "Orange",
+    "Scarlet",
+    "Teal",
+    "Rust",
+    "Ochre"
+   ],
+   "pull": "Munch Museum researchers have reported that the cadmium yellow in one version of The Scream is deteriorating."
+  },
+  {
+   "title": "Murals and late outdoor work",
+   "when": "Norway · 1900s to 1944",
+   "text": "After a breakdown in 1908 he was treated in a clinic in Copenhagen and returned to Norway, where his color grew lighter and more open. For the university hall in Oslo he painted large murals, finished in 1916, in which the sun is a bright disc of {{Cadmium Lemon}} and the fields are {{Sage}} and {{Lavender}}.\n\nHe lived out his life at Ekely, painting snow, gardens and himself. The late self-portraits are thin, cool and plain, with a lot of grey and pale {{Peach}}.",
+   "colors": [
+    "Cadmium Lemon",
+    "Sage",
+    "Lavender",
+    "Peach",
+    "Sky Blue"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 1,540 paintings",
+   "text": "Our archive has 1,540 of his works, more than any other painter in this group. His darkest large areas are {{Dark Jungle Green}}, and his lightest are Oatmeal and pale grey. He uses {{Smoky Black}} and brown-black less than other painters of his time, even though his reputation is dark.\n\nMany of his pictures are prints and drawings, and photographs of aged paper and canvas shift color, so these are tendencies only.",
+   "colors": [
+    "Dark Jungle Green",
+    "Smoky Black"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 1,540 paintings"
+ ],
+ "words": 413,
+ "status": "article"
+}

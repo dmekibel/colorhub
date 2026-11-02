@@ -31,6 +31,10 @@ space) -- everything between "fetch" and "paste into the sheet" lives in memory 
 
 Usage:
   python3 tools/paintmap_atlas.py build [--workers 20] [--limit N] [--start-group G] [--quality0 Q] [--quality1 Q]
+  python3 tools/paintmap_atlas.py patch [--init-from-current] [--init-lines OLD_THUMBS.txt] [--dry-run]
+                                                             # recompute ONLY tiles whose thumbs.txt line (or cached image) changed
+                                                             # (see "PATCH mode" below); `build` now calls this by itself when sheets exist
+                                                             # (`build --full` keeps the old per-group behavior)
   python3 tools/paintmap_atlas.py report                   # sizes + manifest, no network
   python3 tools/paintmap_atlas.py clean                    # remove .progress.json (start over)
   python3 tools/paintmap_atlas.py resplit                  # re-tile existing v1 sheets to the v2, WebKit-safe
@@ -62,8 +66,11 @@ from math import ceil, sqrt
 from PIL import Image, ImageFilter
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-GAL = os.path.join(ROOT, "data", "gallery")
-OUT = os.path.join(ROOT, "data", "paintmap")
+GAL = os.environ.get("PAINTMAP_GAL") or os.path.join(ROOT, "data", "gallery")
+OUT = os.environ.get("PAINTMAP_OUT") or os.path.join(ROOT, "data", "paintmap")
+# PATCH mode's per-tile hash file: NOT in data/ (it is ~1.7 MB of binary that changes whenever any tile does, so it
+# would bloat git and R2). research/_raw/ is gitignored; a fresh clone just re-initializes it (see cmd_patch).
+TILEHASH = os.environ.get("PAINTMAP_TILEHASH") or os.path.join(ROOT, "research", "_raw", "paintmap-tilehash.bin")
 THUMBS = os.path.join(GAL, "thumbs.txt")
 PROGRESS = os.path.join(OUT, ".progress.json")
 
@@ -215,6 +222,19 @@ def square_crop_resize(raw, crop, tile):
 
 
 _IDS = None
+def local_path(i):
+    """Path of the corpus's cached full image for gallery index i, or None (see local_copy)."""
+    global _IDS
+    if _IDS is None:
+        p = os.path.join(GAL, "ids.txt")
+        _IDS = open(p).read().split("\n") if os.path.exists(p) else []
+    if i >= len(_IDS) or "-" not in _IDS[i]:
+        return None
+    src, rid = _IDS[i].split("-", 1)
+    path = os.path.join(ROOT, "research", "_raw", src, "img", rid + ".jpg")
+    return path if os.path.exists(path) else None
+
+
 def local_copy(i):
     """The corpus's own cached copy of gallery painting i (2026-10-20): every painting added by tools/artist_extra.py or
     tools/corpus.py was already downloaded to research/_raw/<src>/img/<id>.jpg, the same photo the crop was measured on,
@@ -291,6 +311,14 @@ def process_one(i, item, retries=RETRIES):
         return i, None, str(e)
 
 
+def tier0_cell(cell, tile0):
+    """One tier-0 tile from its (decoded) tier-1 cell: the single definition used by the full pass and by PATCH mode."""
+    cell0 = cell.resize((tile0, tile0), Image.LANCZOS)
+    if tile0 < 20:   # a small tile is upscaled 3-6x on screen: a light unsharp mask keeps it from reading as mush
+        cell0 = cell0.filter(ImageFilter.UnsharpMask(radius=SHARPEN_R, percent=SHARPEN_PCT, threshold=0))
+    return cell0
+
+
 def tier0_from_tier1(out_dir, man):
     """Rebuild every tier-0 sheet by downsampling each painting's OWN tier-1 cell (already on disk, one sheet per
     GROUP_SIZE paintings) -- never re-fetched, never independently cropped from the source image a second time.
@@ -336,9 +364,7 @@ def tier0_from_tier1(out_dir, man):
             if cell.getextrema()[3][1] < 10:   # effectively-transparent tier-1 cell -> no real picture to derive
                 missing.append(i)              # from (lossy WEBP can leave a few nonzero alpha speckles, not 0)
                 continue
-            cell0 = cell.resize((tile0, tile0), Image.LANCZOS)
-            if tile0 < 20:   # a small tile is upscaled 3-6x on screen: a light unsharp mask keeps it from reading as mush
-                cell0 = cell0.filter(ImageFilter.UnsharpMask(radius=SHARPEN_R, percent=SHARPEN_PCT, threshold=0))
+            cell0 = tier0_cell(cell, tile0)
             sheet0, local0 = divmod(i, per_sheet0)
             x0, y0 = (local0 % cols0) * tile0, (local0 // cols0) * tile0
             sheets[sheet0].paste(cell0, (x0, y0))
@@ -420,10 +446,35 @@ def save_progress(p):
     os.replace(tmp, PROGRESS)
 
 
+MASTER = os.environ.get("PAINTMAP_MASTER") or os.path.join(ROOT, "research", "_raw", "paintmap-master")
+
+
+def master_path(path):
+    return os.path.join(MASTER, COLLECTION, os.path.basename(path))
+
+
 def atomic_save_webp(im, path, quality):
     tmp = path + ".tmp"
     im.save(tmp, "WEBP", quality=quality, method=6)
     os.replace(tmp, path)
+    # a LOSSLESS master of the canvas that was just encoded (gitignored, ~5 MB/sheet): PATCH mode re-opens the master, not
+    # the lossy sheet, so repeated patches do not stack lossy re-encodes on every untouched tile (one re-encode of a Q76
+    # sheet shifts RGB by ~2.3/255 on average). Written AFTER the sheet, so master mtime >= sheet mtime means "in step".
+    try:
+        mp = master_path(path)
+        os.makedirs(os.path.dirname(mp), exist_ok=True)
+        im.convert("RGBA").save(mp + ".tmp", "WEBP", lossless=True, quality=10, method=0)
+        os.replace(mp + ".tmp", mp)
+    except Exception as e:
+        print("  (could not write the lossless master for", os.path.basename(path), "-", e, ")")
+
+
+def open_sheet(path):
+    """The sheet as PATCH mode should edit it: its lossless master if that is in step with the sheet, else the sheet."""
+    mp = master_path(path)
+    if os.path.exists(mp) and os.path.getmtime(mp) >= os.path.getmtime(path):
+        return Image.open(mp).convert("RGBA")
+    return Image.open(path).convert("RGBA")
 
 
 def find_blank_tier0_cells(tier0, man):
@@ -643,6 +694,205 @@ def cmd_resplit():
     report()
 
 
+
+# ---- PATCH mode (2026-10-27) --------------------------------------------------------------------------------------
+# Why: a per-GROUP hash (groupHash) makes one changed thumbs.txt line recompute all 625 tiles of its group; a crop-margin
+# change touching 2,581 lines in 216 groups cost ~135,000 tile recomputes (~5 h) for 2,581 really-changed tiles. Gallery
+# order is append-only, so a tile's cell never moves; only its picture or crop does. So we keep one 8-byte hash PER TILE
+# (sha1 of the thumbs.txt line [image address + crop] + the identity [mtime_ns:size] of the cached local image, if one is
+# used) in TILEHASH (research/_raw/paintmap-tilehash.bin, gitignored), diff it with the current lines, and recompute ONLY
+# the differing tiles, pasting each into its existing tier-1 cell (g<N>.webp) and tier-0 cell (atlas0-<s>.webp; derived
+# from the NEW tier-1 cell exactly like tier0_from_tier1, so the two tiers cannot drift).
+# Initialization (no hash file yet): `patch --init-from-current` writes the file from the CURRENT lines without touching
+# a sheet (ASSUMPTION: the sheets were built from the current lines/images). `patch --init-lines OLD_THUMBS.txt` writes it
+# from an OLDER thumbs.txt (e.g. `git show <rev>:data/gallery/thumbs.txt`, the version the sheets were really built from),
+# so the very next patch redoes exactly the lines that differ. A plain `patch`/`build` with no hash file does the former
+# automatically, and warns about groups whose manifest groupHash no longer matches (those are the ones --init-lines fixes).
+# Lossy WEBP: a patched sheet is decoded and re-encoded whole, so untouched cells drift by a few levels (one more
+# generation of loss at Q1); they are not recomputed. Failed fetches keep the old picture and keep the old hash (retried).
+def tile_hashes(lines, n):
+    out = []
+    for i in range(n):
+        p = local_path(i)
+        ident = ""
+        if p:
+            st = os.stat(p)
+            ident = f"{st.st_mtime_ns}:{st.st_size}"
+        out.append(hashlib.sha1((lines[i] + "|" + ident).encode("utf-8")).digest()[:8])
+    return out
+
+
+def load_tilehash():
+    if not os.path.exists(TILEHASH):
+        return None
+    b = open(TILEHASH, "rb").read()
+    if not b.startswith(b"PMTH1\n"):
+        return None
+    b = b[6:]
+    return [b[k:k + 8] for k in range(0, len(b) - 7, 8)]
+
+
+def save_tilehash(hs):
+    os.makedirs(os.path.dirname(TILEHASH), exist_ok=True)
+    tmp = TILEHASH + ".tmp"
+    with open(tmp, "wb") as f:
+        f.write(b"PMTH1\n" + b"".join(hs))
+    os.replace(tmp, TILEHASH)
+
+
+def can_patch():
+    mp = os.path.join(OUT, "manifest.json")
+    if COLLECTION != "paintings" or not os.path.exists(mp) or not os.path.exists(os.path.join(OUT, "g0.webp")):
+        return False
+    m = json.load(open(mp))
+    return m.get("v") == 2 and m["tier1"]["groupSize"] == GROUP_SIZE and m["tier1"]["tile"] == TIER1_TILE \
+        and m["tier0"]["tile"] == TIER0_TILE
+
+
+def cmd_patch(workers, init_current=False, init_lines=None, dry_run=False):
+    lines = load_lines()
+    n = len(lines)
+    man_path = os.path.join(OUT, "manifest.json")
+    man = json.load(open(man_path))
+    old_n = man["n"]
+    if n < old_n:
+        raise SystemExit(f"patch: thumbs.txt has {n} lines but the atlas {old_n} (gallery shrank): use `build --full`")
+    cur = tile_hashes(lines, n)
+    if init_lines:
+        old_lines = [l.rstrip("\n") for l in open(init_lines)]
+        base = tile_hashes(old_lines + [""] * (old_n - len(old_lines)), old_n)
+        save_tilehash(base)
+        print(f"initialized {TILEHASH} from {init_lines} ({old_n} tiles); {sum(1 for i in range(old_n) if base[i] != cur[i])} differ from now")
+        return
+    if init_current:
+        save_tilehash(cur[:old_n])
+        print(f"initialized {TILEHASH} from the current lines ({old_n} tiles); no sheet touched")
+        return
+    stored = load_tilehash()
+    if stored is None:
+        gh = man.get("groupHash") or {}
+        bad = [g for g in range(man["tier1"]["numGroups"])
+               if gh.get(str(g)) != hashlib.sha1("\n".join(lines[g * GROUP_SIZE:min(n, (g + 1) * GROUP_SIZE)]).encode("utf-8")).hexdigest()
+               and (g + 1) * GROUP_SIZE <= n]
+        print(f"patch: no {TILEHASH}: ASSUMING the {old_n} existing tiles match the current lines (init-from-current)."
+              + (f" WARNING {len(bad)} group(s) have a manifest groupHash that differs from the current lines; their changed "
+                 f"tiles will NOT be redone. To redo them: git show <rev>:data/gallery/thumbs.txt > old.txt; "
+                 f"python3 tools/paintmap_atlas.py patch --init-lines old.txt" if bad else ""))
+        stored = cur[:old_n]
+        if not dry_run:
+            save_tilehash(stored)
+    stored = stored[:old_n] + [b"\0" * 8] * max(0, n - len(stored))
+    changed = [i for i in range(n) if i >= old_n or stored[i] != cur[i]]
+    by_group = {}
+    for i in changed:
+        by_group.setdefault(i // GROUP_SIZE, []).append(i)
+    print(f"patch: n={n} (was {old_n}); {len(changed)} changed/new tiles in {len(by_group)} of {ceil(n / GROUP_SIZE)} groups")
+    if dry_run or not changed:
+        if not changed:
+            save_tilehash(cur)   # also records a grown tail / refreshed identities
+        return
+
+    cols0, per_sheet0, counts0 = tier0_layout(n)
+    tier0_names = [f"atlas0-{s}.webp" for s in range(len(counts0))]
+    num_groups = ceil(n / GROUP_SIZE)
+    missing = set(man.get("missing", []))
+    group_hash = dict(man.get("groupHash") or {})
+    new_hashes = list(stored)
+    t_start = time.time()
+    done_tiles = failed = 0
+
+    def flush_tier0(cells0):
+        by_sheet = {}
+        for i, c in cells0.items():
+            by_sheet.setdefault(i // per_sheet0, []).append(i)
+        for s, idxs in by_sheet.items():
+            size = (cols0 * TIER0_TILE, ceil(counts0[s] / cols0) * TIER0_TILE)
+            path = os.path.join(OUT, tier0_names[s])
+            old = open_sheet(path) if os.path.exists(path) else None
+            if old is not None and old.size != size:   # last sheet grew (more rows): same columns, so cells keep their place
+                canvas = Image.new("RGBA", size, (0, 0, 0, 0)); canvas.paste(old, (0, 0)); old = canvas
+            sheet = old if old is not None else Image.new("RGBA", size, (0, 0, 0, 0))
+            for i in idxs:
+                local0 = i % per_sheet0
+                sheet.paste(cells0[i], ((local0 % cols0) * TIER0_TILE, (local0 // cols0) * TIER0_TILE))
+            atomic_save_webp(sheet, path, Q0)
+
+    gs = sorted(by_group)
+    CHUNK = 16
+    for c0 in range(0, len(gs), CHUNK):
+        chunk = gs[c0:c0 + CHUNK]
+        t_c = time.time()
+        results = {}
+        with ThreadPoolExecutor(max_workers=workers) as ex:
+            for i, t1img, err in ex.map(lambda i: process_one(i, lines[i]),
+                                         [i for g in chunk for i in by_group[g]]):
+                results[i] = (t1img, err)
+        cells0, ok_groups = {}, []
+        for g in chunk:
+            lo, hi = g * GROUP_SIZE, min(n, (g + 1) * GROUP_SIZE)
+            cols1, rows1 = grid1(hi - lo)
+            size = (cols1 * TIER1_TILE, rows1 * TIER1_TILE)
+            gpath = os.path.join(OUT, f"g{g}.webp")
+            canvas = Image.new("RGBA", size, (0, 0, 0, 0))
+            if os.path.exists(gpath):
+                oldim = open_sheet(gpath)
+                if oldim.size == size:
+                    canvas = oldim
+                else:   # the last group grew, so its grid changed: re-slice the old cells into the new grid (no fetching)
+                    ocols = max(1, oldim.size[0] // TIER1_TILE)
+                    for loc in range(max(0, min(old_n - lo, hi - lo))):
+                        ox, oy = (loc % ocols) * TIER1_TILE, (loc // ocols) * TIER1_TILE
+                        canvas.paste(oldim.crop((ox, oy, ox + TIER1_TILE, oy + TIER1_TILE)),
+                                     ((loc % cols1) * TIER1_TILE, (loc // cols1) * TIER1_TILE))
+            pasted = []
+            g_ok = True
+            for i in by_group[g]:
+                t1img, err = results[i]
+                if err:
+                    failed += 1; g_ok = False
+                    if i >= old_n:
+                        missing.add(i)
+                    continue
+                loc = i - lo
+                x1, y1 = (loc % cols1) * TIER1_TILE, (loc // cols1) * TIER1_TILE
+                canvas.paste(t1img, (x1, y1))
+                pasted.append(i)
+            atomic_save_webp(canvas, gpath, Q1)
+            saved = Image.open(gpath).convert("RGBA")   # tier 0 comes from the SAVED (decoded) tier-1 cell, as in the full pass
+            for i in pasted:
+                loc = i - lo
+                x1, y1 = (loc % cols1) * TIER1_TILE, (loc // cols1) * TIER1_TILE
+                cells0[i] = tier0_cell(saved.crop((x1, y1, x1 + TIER1_TILE, y1 + TIER1_TILE)), TIER0_TILE)
+                new_hashes[i] = cur[i]
+                missing.discard(i)
+            done_tiles += len(pasted)
+            if g_ok:
+                ok_groups.append(g)
+        flush_tier0(cells0)
+        # commit only after BOTH tiers of these tiles are on disk: a crash before here just redoes them
+        for g in ok_groups:
+            group_hash[str(g)] = hashlib.sha1("\n".join(lines[g * GROUP_SIZE:min(n, (g + 1) * GROUP_SIZE)]).encode("utf-8")).hexdigest()
+        man.update({"n": n, "tier0": {"tile": TIER0_TILE, "cols": cols0, "perSheet": per_sheet0, "sheets": tier0_names},
+                    "tier1": {"tile": TIER1_TILE, "groupSize": GROUP_SIZE, "numGroups": num_groups, "file": "g{g}.webp"},
+                    "groupHash": {k: v for k, v in group_hash.items() if int(k) < num_groups},
+                    "missing": sorted(missing)})
+        tmp = man_path + ".tmp"; json.dump(man, open(tmp, "w")); os.replace(tmp, man_path)
+        save_tilehash(new_hashes[:n])
+        print(f"  patched groups {chunk[0]}..{chunk[-1]}: {done_tiles}/{len(changed)} tiles, {failed} failed, "
+              f"{len(cells0) / max(time.time() - t_c, 1e-9):.1f} tiles/s")
+    for g in range(num_groups, num_groups + 50):
+        sp = os.path.join(OUT, f"g{g}.webp")
+        if os.path.exists(sp): os.remove(sp)
+    # groups with no change but a manifest hash that differed from the lines (assumed unchanged): record the assumption
+    for g in range(num_groups):
+        if g not in by_group:
+            group_hash[str(g)] = hashlib.sha1("\n".join(lines[g * GROUP_SIZE:min(n, (g + 1) * GROUP_SIZE)]).encode("utf-8")).hexdigest()
+    man["groupHash"] = {k: v for k, v in group_hash.items() if int(k) < num_groups}
+    tmp = man_path + ".tmp"; json.dump(man, open(tmp, "w")); os.replace(tmp, man_path)
+    print(f"patch done: {done_tiles} tiles recomputed, {failed} failed (kept as they were), "
+          f"{done_tiles / max(time.time() - t_start, 1e-9):.1f} tiles/s overall, {dt_str(time.time() - t_start)}")
+
+
 def dt_str(s):
     return f"{s:.1f}s" if s < 90 else f"{s/60:.1f}m"
 
@@ -653,6 +903,7 @@ def main():
     args = sys.argv[1:]
     cmd = args[0] if args else "build"
     workers, limit, start_group, q0, q1, retries = WORKERS, None, 0, Q0, Q1, RETRIES
+    init_current, init_lines, dry_run, full = False, None, False, False
     k = 1
     while k < len(args):
         if args[k] == "--workers": workers = int(args[k + 1]); k += 2
@@ -663,6 +914,10 @@ def main():
         elif args[k] == "--retries": retries = int(args[k + 1]); k += 2
         elif args[k] == "--tile": TILE_ARG = int(args[k + 1]); k += 2
         elif args[k] == "--collection": COLLECTION = args[k + 1]; k += 2
+        elif args[k] == "--init-from-current": init_current = True; k += 1
+        elif args[k] == "--init-lines": init_lines = args[k + 1]; k += 2
+        elif args[k] == "--dry-run": dry_run = True; k += 1
+        elif args[k] == "--full": full = True; k += 1
         else: k += 1
 
     if COLLECTION not in ("paintings", "design", "photography"):
@@ -679,11 +934,17 @@ def main():
     if cmd == "clean":
         if os.path.exists(PROGRESS):
             os.remove(PROGRESS)
-        print("removed", PROGRESS)
+        print("removed", PROGRESS, "(the per-tile hash file is kept; use `build --full` for the old whole-group build)")
         return
 
     if cmd == "report":
         report()
+        return
+
+    if cmd == "patch" or (cmd == "build" and not full and not limit and can_patch()):
+        if not can_patch():
+            raise SystemExit("patch: no v2 paintings atlas to patch -- run `build` first")
+        cmd_patch(workers, init_current, init_lines, dry_run)
         return
 
     if cmd == "repair":

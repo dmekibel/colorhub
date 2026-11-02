@@ -1,0 +1,61 @@
+{
+ "slug": "georges-seurat",
+ "lead": "Georges Pierre Seurat was a French post-Impressionist artist.",
+ "paras": [
+  "Seurat tried to turn color into a method. He studied the optical writings of Chevreul and Rood and used small touches of separate color set side by side. The effect is a shimmer rather than a brighter mix: at a distance blue and yellow dots average toward grey, not green.",
+  "The method is more subtle than its reputation, and the surviving paintings include small oil sketches, drawings and large canvases that each use it differently."
+ ],
+ "chapters": [
+  {
+   "title": "Bathers and the first method",
+   "when": "Paris · 1883 to 1884",
+   "text": "Seurat's Bathers at Asnières, shown in 1884, was painted in broad, flat strokes laid over each other, not yet in dots. Signac, who saw it at the first Indépendants exhibition, recognized in it a methodical separation of tones and an understanding of contrast.\n\nThe river is blue-green, the grass {{Sap Green}} and {{Olive}}, and the boy's hat a plain orange. The shadows are not black but cooler versions of the surrounding color.",
+   "colors": [
+    "Sap Green",
+    "Olive",
+    "Orange",
+    "Powder Blue",
+    "Tan"
+   ]
+  },
+  {
+   "title": "La Grande Jatte and the dots",
+   "when": "Paris · 1884 to 1886",
+   "text": "Sunday Afternoon on the Island of La Grande Jatte, worked on for two years, brought in the small touches. Seurat tested complementary pairs beside each other, such as orange against {{Cobalt Blue}}, so that each looked stronger. Pissarro called himself, Seurat and Signac the scientific Impressionists, in contrast to the older group, and Fénéon in 1886 gave the new school the name Neo-Impressionism.\n\nTechnical studies on the painting have reported that its zinc yellow has darkened to a brownish tone in some of the sunlit grass. If that is right, the lawn was once brighter than it is today.\n\nThe small oil panels he made beforehand have the same method on a modest scale, and many people prefer their freshness.",
+   "colors": [
+    "Cobalt Blue",
+    "Orange",
+    "Emerald Green",
+    "Cadmium Lemon",
+    "Vermilion"
+   ]
+  },
+  {
+   "title": "Conté crayon and late canvases",
+   "when": "Paris, coast · 1886 to 1891",
+   "text": "Seurat also made drawings in conté crayon in which the grain of the paper produces tone from a few black marks. These are among his best-loved works, and they have no color at all.\n\nIn the late canvases, such as The Circus of 1891, he used lines, as well as dots, to suggest mood, and pushed the palette toward {{Royal Blue}}, {{Vermilion}} and {{Mustard}}.\n\nHe died in 1891 at thirty-one, so the archive of his work is small.",
+   "colors": [
+    "Royal Blue",
+    "Vermilion",
+    "Mustard",
+    "Tan"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 156 paintings",
+   "text": "Our archive holds only 156 of his works, so its tendencies are less certain than for other painters. The darkest large areas are {{Raisin Black}} and {{Fir Green}}, while the lightest are Oatmeal and {{Tan}}, which probably reflects the panels and paper.\n\nHe uses black and earthy brown much less than other painters of his time. These are photographs of aged and varnished work, and a dotted surface can average into a different color in a small image.",
+   "colors": [
+    "Raisin Black",
+    "Fir Green"
+   ]
+  }
+ ],
+ "sources": [
+  "From Wikipedia (CC BY-SA 4.0)",
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 156 paintings"
+ ],
+ "words": 414,
+ "status": "article"
+}

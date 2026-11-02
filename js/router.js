@@ -23,7 +23,7 @@
 
 const routeSlug = s => String(s).normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 const APP_BASE = () => location.origin + location.pathname.replace(/[^/]*$/, "");
-const TAB_ROUTE = { feed: ["feed", "Today"], learn: ["today", "Learn"], gym: ["train", "Train"], explore: ["museum", NAV_MUSEUM], studio: ["studio", "Studio"], you: ["you", "You"] };   // you: js/you.js
+const TAB_ROUTE = { feed: ["feed", "Home"], learn: ["today", "Learn"], gym: ["train", "Train"], explore: ["museum", NAV_MUSEUM], studio: ["studio", "Studio"], you: ["you", "You"] };   // you: js/you.js
 const LENS_ROUTE = { art: "art", ideas: "ideas", world: "world", saved: "saved" };   // "For you" (the pager) is plain #/explore
 const LENS_TITLE = { art: "Art", ideas: "Ideas", world: "World", saved: "Saved" };
 // legacy lens tokens, from before Paintings/Poems merged into Art and Colors was dropped (links, bookmarks, S.lens left over from an old save)
@@ -50,6 +50,7 @@ const routeURL = path => APP_BASE() + "#/" + path;
 // exists, otherwise the app address.
 function shareURL(path) {
   const [kind, id, more] = String(path || "").split("/"), dir = { color: "c", page: "p", painting: "art" }[kind];
+  if (kind === "gallery" && /^\d+$/.test(id || "") && !more) return "https://s.chromatlas.app/" + id;   // cloudflare/share-worker: a preview card with this painting
   if (dir && id && !more) {
     const n = kind === "color" ? routeColor(id) && colorNode(routeColor(id)) : graph().nodes.get(kind === "painting" ? "painting-" + id : id);
     if (n && !n.stub) return APP_BASE() + dir + "/" + id + "/";
@@ -139,6 +140,8 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["awPainter", slug => slug ? routed(awTitle("painter", slug), "painter/" + slug) : null],   // js/artwiki.js: the art wiki
   ["awGroup", (kind, key) => kind && key != null ? routed(awTitle(kind, key), kind + "/" + (kind === "decade" ? key : routeSlug(key))) : null],
   ["awIndex", () => routed("Art history by color", "arthistory")],
+  ["sbiList", () => routed("Subjects", "museum/art/subjects")], ["rhPage", () => routed("Rooms", "museum/art/rooms")], ["rhRoomPage", id => id ? routed(((typeof RH !== "undefined" && RH.reg && RH.reg.reg.get(id)) || {}).name || "Room", "museum/art/room/" + id) : null],
+  ["sbiPage", slug => slug ? routed((typeof sbiOf === "function" && sbiOf(slug) || {}).name || "Subject", "museum/art/subject/" + slug) : null],   // js/subjectisl.js: the painting map's vibe islands as a list
   ["awPainters", () => routed("Painters", "painter-index")],   // js/artwiki.js: the Painters collection (design/SIMPLIFY/PLAN.md §9)
   ["awVs", (a, b) => routed("Painter against painter", "painters" + (a ? "/" + a + (b ? "/" + b : "") : ""))],
   ["gmListPage", kind => typeof gmListTitle === "function" ? routed(gmListTitle(kind), "gem/" + kind) : null],   // js/gems.js (gem/essay detail pages route via wikiPage above)
@@ -266,6 +269,8 @@ function openRoute(hash, initial = false) {
   if (kind === "web" && typeof agOpenRoute === "function") { base(); XSTACK = []; agOpenRoute(id, more); return true; }
   // the Today feed (js/todayfeed.js): a room-style screen of its own, #/feed (#/today stays Learn)
   if (kind === "feed" && typeof todayFeed === "function") { base(); XSTACK = []; todayFeed(); return true; }
+  // Boards is the Museum's front door on a wide screen (David, 2026-10-26): the same screen as Explore, opened on its Boards kind; the address keeps saying so
+  if (kind === "boards" && typeof todayFeed === "function") { base(); XSTACK = []; TF_KIND = "board"; TF_FROM_BOARD = false; todayFeed(); try { history.replaceState(history.state, "", "#/boards"); document.title = "Museum \u00b7 Chromatlas"; if (typeof deskMarkActive === "function") deskMarkActive(); } catch (e) {} return true; }
   // the floor (the honeycomb, js/home.js): not a tab, so it's its own address
   if (kind === "home" && typeof hmHome === "function") { base(); XSTACK = []; hmHome(); return true; }
   if (kind === "map" && id && more != null && typeof hmMapRoute === "function") { base(); XSTACK = []; hmMapRoute(id, more); return true; }   // js/home.js: #/map/gallery/<i>, #/map/painting/<slug>
@@ -279,6 +284,11 @@ function openRoute(hash, initial = false) {
   }
   if (kind === "train" && id === "drills" && typeof r2DrillsPage === "function") { base(); XSTACK = []; r2DrillsPage(); return true; }   // js/rooms2.js
   if (kind === "train" && id === "eye" && typeof r2EyePage === "function") { base(); XSTACK = []; r2EyePage(); return true; }
+  if ((kind === "museum" || kind === "explore") && id === "art" && (more === "subjects" || more === "subject" || more === "rooms" || more === "room") && typeof sbiList === "function") {   // js/subjectisl.js, js/roomshub.js
+    base(); XSTACK = [];
+    if (more === "subject" && parts[3]) sbiPage(parts[3]); else if (more === "rooms") rhPage(); else if (more === "room" && parts[3]) rhRoomPage(parts[3]); else sbiList();
+    return true;
+  }
   if (tabs[kind]) {
     if (kind === "explore" || kind === "museum") S.lens = LENS_LEGACY[id] || Object.keys(LENS_ROUTE).find(k => LENS_ROUTE[k] === id) || "all";
     go(tabs[kind]);

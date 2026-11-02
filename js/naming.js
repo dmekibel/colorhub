@@ -84,7 +84,8 @@ function nameCandidatesWide(hex, n = 6, maxDe = 12, skip = "") {
   const core = CORE_NAMES || coreFallback(), learn = new Set(core.map(e => e.n.toLowerCase()));
   const pool = core.concat((LONG_NAMES || []).filter(e => !learn.has(e.n.toLowerCase())));
   const seen = new Set(), sk = String(skip).toLowerCase();
-  return nearestCore(lab(hex), pool, 60).filter(x => { const k = x.n.toLowerCase(); if (k === sk || seen.has(k) || x.de > maxDe) return false; seen.add(k); return true; })
+  pool.forEach(e => { if (!e.lab) e.lab = lab(e.h); });
+  return nearestCore(lab(hex), pool, Math.max(60, n * 3 + 30)).filter(x => { const k = x.n.toLowerCase(); if (k === sk || seen.has(k) || x.de > maxDe) return false; seen.add(k); return true; })
     .slice(0, n).map(x => ({ ...x, learn: learn.has(x.n.toLowerCase()), src: learn.has(x.n.toLowerCase()) ? "" : (typeof srcLine === "function" ? srcLine(x.entry) : "") }));
 }
 // Has the learner met this word? Only the app's 101 are ever taught today (ROADMAP §13-14's vocabulary ladder

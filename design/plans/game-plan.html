@@ -1,0 +1,155 @@
+<title>Chromatlas Game Plan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: one calm column of pigment-chipped cards, ordered top to bottom = build order; a summary strip on top. */
+:root {
+  --bg: #f3f4f7; --card: #ffffff; --ink: #16181f; --muted: #5a5f6e; --line: #dcdfe7; --soft: #eceef3;
+  --accent: #2f4bd8; --ok: #1f7a4d; --warn: #9a6400; --cut: #8a8f9c;
+  --display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1117; --card: #181b24; --ink: #eef0f5; --muted: #a3a9b8; --line: #2a2e3b; --soft: #20242f;
+  --accent: #8ea2ff; --ok: #5fd39a; --warn: #f0b84f; --cut: #6f7585; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0f1117; --card: #181b24; --ink: #eef0f5; --muted: #a3a9b8; --line: #2a2e3b; --soft: #20242f;
+  --accent: #8ea2ff; --ok: #5fd39a; --warn: #f0b84f; --cut: #6f7585; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font: 17px/1.5 var(--body); }
+.wrap { max-width: 760px; margin: 0 auto; padding-block: 28px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1 { font: 700 clamp(32px, 7vw, 46px)/1.05 var(--display); letter-spacing: -.02em; margin: 0; text-wrap: balance }
+.lede { color: var(--muted); margin: 10px 0 0; max-width: 60ch }
+.palette { display: flex; gap: 6px; margin: 18px 0 6px; flex-wrap: wrap }
+.palette i { width: 26px; height: 26px; border-radius: 50%; display: block }
+.summary { display: grid; gap: 8px; margin: 22px 0 8px; padding: 0; list-style: none }
+.summary li { display: flex; gap: 12px; align-items: baseline; padding: 12px 14px; background: var(--card); border-radius: 14px; border: 1px solid var(--line) }
+.summary b { font-family: var(--display); font-weight: 700; min-width: 0 }
+.summary span { color: var(--muted) }
+.howto { color: var(--muted); font-size: 15px; margin: 18px 0 4px }
+.list { display: grid; gap: 12px; margin-top: 14px }
+.item { display: grid; grid-template-columns: 44px 1fr auto; gap: 12px; align-items: start; padding: 16px; background: var(--card);
+  border: 1px solid var(--line); border-radius: 18px; transition: transform .18s ease, box-shadow .18s ease }
+.item.drag { opacity: .5 } .item.over { box-shadow: 0 0 0 3px var(--accent) }
+.item.cut { opacity: .62 }
+.chip { width: 44px; height: 44px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08) }
+.body { min-width: 0 }
+.top { display: flex; gap: 8px; align-items: center; flex-wrap: wrap }
+.num { font: 700 14px var(--display); color: var(--muted); font-variant-numeric: tabular-nums }
+.lane { font-size: 13px; color: var(--muted); letter-spacing: .02em }
+h2 { font: 700 20px/1.2 var(--display); margin: 4px 0 2px; text-wrap: balance }
+.sub { margin: 0; color: var(--muted) }
+.status { border: 0; border-radius: 999px; padding: 5px 12px; font: 700 13px var(--body); cursor: pointer; background: var(--soft); color: var(--ink) }
+.status[data-s="next"] { background: var(--accent); color: var(--card) }
+.status[data-s="building"] { background: var(--warn); color: var(--card) }
+.status[data-s="done"] { background: var(--ok); color: var(--card) }
+.status[data-s="cut"] { background: var(--cut); color: var(--card) }
+.note { width: 100%; margin-top: 10px; min-height: 44px; resize: vertical; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px;
+  font: 16px/1.4 var(--body); color: var(--ink); background: var(--bg) }
+.note::placeholder { color: var(--muted) }
+.moves { display: grid; gap: 6px }
+.mv { width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font-size: 18px; cursor: pointer }
+.mv:disabled { opacity: .3; cursor: default }
+button:focus-visible, textarea:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px }
+.add { display: flex; gap: 8px; margin-top: 18px }
+.add input { flex: 1; min-width: 0; border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; font: 16px var(--body); background: var(--card); color: var(--ink) }
+.add button { border: 0; border-radius: 14px; padding: 0 18px; font: 700 16px var(--body); background: var(--accent); color: var(--card); cursor: pointer }
+.msg { color: var(--muted); font-size: 15px; margin-top: 14px }
+@media (max-width: 480px) { .item { grid-template-columns: 34px 1fr; } .chip { width: 34px; height: 34px } .moves { grid-column: 1 / -1; grid-auto-flow: column; justify-content: end } }
+@media (prefers-reduced-motion: reduce) { .item { transition: none } }
+</style>
+
+<div class="wrap">
+  <h1>Chromatlas Game Plan</h1>
+  <p class="lede">The map, painters and search, in build order. Tap a status to change it, write notes on any card, move cards up or down (or drag on a computer). Your changes are saved, and I read them before building.</p>
+  <div class="palette" aria-hidden="true"><i style="background:#2a4bb8"></i><i style="background:#1f7a62"></i><i style="background:#b8486a"></i><i style="background:#a5552c"></i><i style="background:#e0b63f"></i><i style="background:#3a3a44"></i><i style="background:#3d8fc4"></i><i style="background:#d8402b"></i><i style="background:#9a7ac8"></i></div>
+  <ul class="summary">
+    <li><b>Map</b><span>your painting stays centered when you change settings; one-tap filters under it</span></li>
+    <li><b>Time</b><span>a big readable era label and new time views</span></li>
+    <li><b>Painters</b><span>clean names, painters like this, a painter map, an article each</span></li>
+    <li><b>Search</b><span>typos forgiven, cities, eras, wide color words</span></li>
+    <li><b>Color</b><span>a color or palette shows only the paintings that hold it</span></li>
+  </ul>
+  <p class="howto">Order top to bottom is the build order.</p>
+  <div class="list" id="list" aria-live="polite"><p class="msg">Loading the plan…</p></div>
+  <form class="add" id="add"><label for="newIdea" class="sr" hidden>New idea</label><input id="newIdea" placeholder="Add an idea or a change" autocomplete="off"><button type="submit">Add</button></form>
+  <p class="msg" id="state"></p>
+</div>
+
+<script>
+const STATUS = ["next", "building", "later", "done", "cut"], LABEL = { next: "Next", building: "Building", later: "Later", done: "Done", cut: "Cut" };
+const listEl = document.getElementById("list"), stateEl = document.getElementById("state");
+let db = null, items = [], canWrite = true, dragId = null;
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+function render() {
+  if (!items.length) { listEl.innerHTML = `<p class="msg">${db ? "No cards yet. Add the first idea below." : "The plan loads when this page is opened in Claude."}</p>`; return; }
+  listEl.innerHTML = items.map((it, k) => `
+    <article class="item${it.status === "cut" ? " cut" : ""}" draggable="${canWrite}" data-id="${esc(it.id)}">
+      <div class="chip" style="background:${esc(it.color || "#8a8f9c")}"></div>
+      <div class="body">
+        <div class="top"><span class="num">${k + 1}</span><button class="status" data-s="${esc(it.status)}" data-act="status" ${canWrite ? "" : "disabled"}>${LABEL[it.status] || "Later"}</button>${it.lane ? `<span class="lane">${esc(it.lane)}</span>` : ""}</div>
+        <h2>${esc(it.title)}</h2>
+        ${it.sub ? `<p class="sub">${esc(it.sub)}</p>` : ""}
+        <textarea class="note" id="note-${esc(it.id)}" data-act="note" placeholder="Your note" ${canWrite ? "" : "readonly"}>${esc(it.note || "")}</textarea>
+      </div>
+      <div class="moves"><button class="mv" data-act="up" aria-label="Move up" ${k === 0 || !canWrite ? "disabled" : ""}>↑</button><button class="mv" data-act="down" aria-label="Move down" ${k === items.length - 1 || !canWrite ? "disabled" : ""}>↓</button></div>
+    </article>`).join("");
+}
+
+async function write(id, data) {
+  try { await db.collection("items").doc(id).update(data); stateEl.textContent = ""; }
+  catch (e) {
+    if (e && e.code === "invalid_argument") { canWrite = false; stateEl.textContent = "This view can read the plan but not change it."; render(); }
+    else stateEl.textContent = "Couldn't save that change. Try again in a moment.";
+  }
+}
+async function move(id, dir) {
+  const k = items.findIndex(x => x.id === id), j = k + dir;
+  if (k < 0 || j < 0 || j >= items.length) return;
+  await moveTo(id, j);
+}
+async function moveTo(id, j) {
+  const arr = items.slice(), k = arr.findIndex(x => x.id === id); if (k < 0) return;
+  const [it] = arr.splice(k, 1); arr.splice(j, 0, it);
+  items = arr; render();
+  for (let n = 0; n < arr.length; n++) if (arr[n].order !== n + 1) { arr[n].order = n + 1; await write(arr[n].id, { order: n + 1 }); }
+}
+
+listEl.addEventListener("click", e => {
+  const b = e.target.closest("[data-act]"), card = e.target.closest(".item"); if (!b || !card || !db || !canWrite) return;
+  const id = card.dataset.id, it = items.find(x => x.id === id);
+  if (b.dataset.act === "status") { const s = STATUS[(STATUS.indexOf(it.status) + 1) % STATUS.length]; it.status = s; render(); write(id, { status: s }); }
+  if (b.dataset.act === "up") move(id, -1);
+  if (b.dataset.act === "down") move(id, 1);
+});
+listEl.addEventListener("focusout", e => {
+  const t = e.target; if (t.dataset.act !== "note" || !db || !canWrite) return;
+  const id = t.closest(".item").dataset.id, it = items.find(x => x.id === id);
+  if (it && (it.note || "") !== t.value) { it.note = t.value; write(id, { note: t.value }); }
+});
+listEl.addEventListener("dragstart", e => { const c = e.target.closest(".item"); if (!c) return; dragId = c.dataset.id; c.classList.add("drag"); });
+listEl.addEventListener("dragend", e => { const c = e.target.closest(".item"); if (c) c.classList.remove("drag"); listEl.querySelectorAll(".over").forEach(x => x.classList.remove("over")); });
+listEl.addEventListener("dragover", e => { const c = e.target.closest(".item"); if (!c || !dragId) return; e.preventDefault(); listEl.querySelectorAll(".over").forEach(x => x.classList.remove("over")); c.classList.add("over"); });
+listEl.addEventListener("drop", e => { const c = e.target.closest(".item"); if (!c || !dragId) return; e.preventDefault(); const j = items.findIndex(x => x.id === c.dataset.id); const id = dragId; dragId = null; moveTo(id, j); });
+
+document.getElementById("add").addEventListener("submit", async e => {
+  e.preventDefault(); const inp = document.getElementById("newIdea"), t = inp.value.trim(); if (!t || !db || !canWrite) return;
+  inp.value = "";
+  try { await db.collection("items").add({ title: t, sub: "", lane: "Your idea", color: "#9a7ac8", status: "later", note: "", order: items.length + 1 }); }
+  catch (err) { stateEl.textContent = err && err.code === "quota_exceeded" ? "The plan is full. Cut a few cards first." : "Couldn't add that. Try again in a moment."; }
+});
+
+(async () => {
+  db = window.claude ? await window.claude.use("db") : null;
+  if (!db) { render(); return; }
+  db.collection("items").orderBy("order").onSnapshot(snap => {
+    const focused = document.activeElement && document.activeElement.dataset && document.activeElement.dataset.act === "note" ? document.activeElement.id : null;
+    items = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    if (focused) return;   // don't redraw under someone typing; the next snapshot after blur catches up
+    render();
+  }, () => { stateEl.textContent = "The plan stopped updating. Reload to see the latest."; });
+})();
+</script>

@@ -304,7 +304,8 @@ def corpus_rows():
 
 def img_path(x):
     src, num = x["id"].split("-", 1)
-    return RAW / src / "img" / f"{num}.jpg"
+    p = RAW / src / "img" / f"{num}.jpg"
+    return p if p.exists() else RAW / "measure-img" / f"{x['id']}.jpg"   # staged-measure rows (saam ...) live there
 
 
 def commons_hint(x):
@@ -569,6 +570,14 @@ def cmd_apply():
                 shares = [round(s, 3) for s in p["share"]]
                 shares[0] = round(shares[0] + 1 - sum(shares), 3)
                 pnew = [[C.rgb_to_hex(rgbs[i]), shares[i], app[V[i]][0], C.family(Ls[i], Cs[i], Hs[i])] for i in range(len(shares))]
+                if len(pnew) < 6:   # a plain cropped picture can resolve to fewer than six distinct colors, and the gallery needs six:
+                    # pad with the colors the uncropped photo had (a hair of share each, taken off the largest), never an invented one
+                    have = {q[0] for q in pnew}
+                    for q in x["p"]:
+                        if len(pnew) >= 6:
+                            break
+                        if q[0] not in have:
+                            pnew.append([q[0], 0.002, q[2], q[3]]); have.add(q[0]); pnew[0][1] = round(pnew[0][1] - 0.002, 3)
                 if want and (pnew != x["p"]):
                     n_pal += 1
                 new["p"] = pnew

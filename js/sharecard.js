@@ -110,3 +110,18 @@ async function cardShare(spec, text, url, fileName = "colorhub.png") {
   if (blob) { const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = fileName; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
   return "saved";
 }
+
+// Send someone a link to a page: the phone's share sheet where there is one, else copy the link.
+// The message and the link go as ONE text (David, 2026-10-30: Telegram kept only the link when they came as separate text and url).
+async function shareLink(title, url, msg) {
+  const text = `${msg || `${title} · Chromatlas`}\n\n${url}`;   // a blank line: Telegram folded a single line break into a space
+  try { if (navigator.share) { await navigator.share({ text }); return "shared"; } }
+  catch (e) { if (e && e.name === "AbortError") return "cancelled"; }
+  try { await navigator.clipboard.writeText(text); toast("Link copied"); return "copied"; } catch (e) {}
+  toast("Couldn't share. Copy the address bar link"); return "failed";
+}
+const shareBtn = `<button class="icon-btn glass" data-pshare aria-label="Share this painting">${ICON.share}</button>`;
+function wirePaintingShare(el, title, path) {
+  const b = el.querySelector("[data-pshare]"); if (!b) return;
+  b.onclick = e => { e.stopPropagation(); buzz(6); shareLink(title, shareURL(path), "Check out this painting I found"); };   // the preview card under it names the painting, its colors and Chromatlas
+}

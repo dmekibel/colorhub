@@ -437,7 +437,7 @@ const HM_GEAR_SVG = `<svg viewBox="0 0 24 24" width="22" height="22" fill="none"
 // Once the user zooms, S.hm.zoom is theirs (onZoom saves it) and this never overrides it.
 function hmStartZoom() {
   const a = (innerWidth || 440) * Math.max(300, (innerHeight || 956) - 60);
-  return Math.round(Math.min(2.5, Math.max(1, Math.sqrt(a / (440 * 956))) * 1.15) * 100) / 100;   // x1.15: every name at the start is big enough to carry its label (the label floor is 11 px)
+  return Math.round(Math.min(2.5, Math.max(1, Math.sqrt(a / (440 * 956))) * 1.15) * 100) / 100;   // x1.15 (the label floor is 5 px since 2026-10-26, so every cell at the start carries its name)
 }
 
 function hmHome() {
@@ -1275,7 +1275,12 @@ async function l18Resolve(q) {
   L18_PAINTERS = L18_PAINTERS || await l18Get("data/artists/meta.json").then(d => d && d.a ? Object.entries(d.a).map(([slug, a]) => ({ slug, n: a.n, k: a.k || 0, w: a.n.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").split(/[\s.-]+/) })) : []);
   const qw = ql.normalize("NFD").replace(/[̀-ͯ]/g, "").split(" ");
   const p = L18_PAINTERS.filter(a => qw.every(x => a.w.some(w => w.startsWith(x)))).sort((a, b) => b.k - a.k)[0];
-  if (!p) return null;
+  if (!p) {   // a typo or another spelling of a color name ("celedon", "perwinkle", "dustyviolet"): fly to the best name, saying so
+    if (typeof sqColorSearch !== "function") return null;
+    await sqLoad();
+    const c = sqColorSearch(ql, 1).hits[0]; if (!c) return null;
+    return { h: c.h, hint: `${l18Sw([c.h])}<span>Did you mean <b>${esc(c.n)}</b>?</span>`, say: o => `${c.n} · nearest here: ${o.n}` };
+  }
   const A = await l18Get(`data/analysis/artists/${p.slug}.json`); if (!A) return null;
   const names = (A.signature || []).map(x => x.name).concat(...(A.clusters || []).map(c => c.colors || []));
   const hs = l18Hexes(names); if (!hs.length) return null;
@@ -1323,7 +1328,7 @@ function hmPaintingSet(n) {
   const colors = [...by.values()].sort((a, b) => b.share - a.share);
   // the full measured pool when there is one (a museum painting's ~24 colors), so the map's How many can show more
   const pool = n.pool && n.pool.length > colors.length ? n.pool : null;
-  return colorSet({ kind: "painting", id: n.id || n.title, title: pool ? n.title : `${n.title} · ${colors.length} named color${colors.length === 1 ? "" : "s"} · as photographed`, colors, src: n.src || "painting/" + routeSlug(String(n.id || "").replace(/^painting-/, "")),
+  return colorSet({ kind: "painting", id: n.id || n.title, title: pool ? n.title : `${n.title} · ${colors.length} named color${colors.length === 1 ? "" : "s"} · as photographed`, painter: n.artist || "", colors, src: n.src || "painting/" + routeSlug(String(n.id || "").replace(/^painting-/, "")),
     ...(pool ? { pick: csPoolPick(pool), max: pool.length } : {}) });
 }
 function hmMapRoute(kind, id) {

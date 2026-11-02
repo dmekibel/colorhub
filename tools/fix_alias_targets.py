@@ -45,6 +45,49 @@ SRC_DIR = ROOT / "data" / "sources"
 DE_OK = 3.0        # current target must be within this of the true hex, or it's wrong
 DE_RETARGET_MAX = DE_OK  # a replacement core name must ALSO be within this, or there simply isn't a good
 # core match for this name and the honest fix is to drop the alias rather than point at another mediocre one
+ISCC_TRUST_MAX = 20.0  # an ISCC-NBS block centroid further than this from the name's documented primary is an
+# extraction slip, not a reading (Ultramarine was read as block 82 vivid yellow; Elfin Green as block 1 vivid pink)
+PINS_PATH = ROOT / "data" / "alias-pins.json"
+
+
+def load_pins():
+    """alias slug -> pin row, from data/alias-pins.json (hand-curated targets no script may change)."""
+    if not PINS_PATH.exists():
+        return {}
+    return {p["slug"]: p for p in json.loads(PINS_PATH.read_text(encoding="utf-8")).get("pins", [])}
+
+
+def load_iscc_blocks():
+    """name_key -> every ISCC-NBS block centroid hex the name is listed under. iscc-nbs-names.json's `block` is
+    only the first of `blocks` (one per source dictionary that names it), so it can't be read on its own."""
+    centroids = {}
+    for line in (SRC_DIR / "iscc-nbs-centroids.json").read_text(encoding="utf-8").splitlines()[1:]:
+        if not line.strip():
+            continue
+        r = json.loads(line)
+        if "block" in r and "hex" in r:
+            centroids[r["block"]] = r["hex"]
+    out = {}
+    for line in (SRC_DIR / "iscc-nbs-names.json").read_text(encoding="utf-8").splitlines()[1:]:
+        if not line.strip():
+            continue
+        r = json.loads(line)
+        k = LIB.key(r["n"])
+        if k in out:
+            continue
+        hexes = [centroids[b] for b in (r.get("blocks") or [r.get("block")]) if b in centroids]
+        if hexes:
+            out[k] = hexes
+    return out
+
+
+def iscc_pick(hexes, primary_hex):
+    """The listed block nearest the name's documented primary, or None if even that one is implausibly far."""
+    if not hexes:
+        return None
+    d = LIB.de2000(LIB.labs([primary_hex]), LIB.labs(hexes))[0]
+    j = int(np.argmin(d))
+    return hexes[j] if d[j] <= ISCC_TRUST_MAX else None
 
 
 def load_truth_hexes(lib, core):
@@ -57,30 +100,18 @@ def load_truth_hexes(lib, core):
         r = json.loads(line)
         mp.setdefault(LIB.key(r["n"]), r["h"])
 
-    names_rows = [json.loads(l) for l in (SRC_DIR / "iscc-nbs-names.json").read_text(encoding="utf-8").splitlines()[1:] if l.strip()]
-    centroids = {}
-    for line in (SRC_DIR / "iscc-nbs-centroids.json").read_text(encoding="utf-8").splitlines()[1:]:
-        if not line.strip():
-            continue
-        r = json.loads(line)
-        if "block" in r and "hex" in r:
-            centroids[r["block"]] = r["hex"]
-    iscc_hex = {}
-    for r in names_rows:
-        hx = centroids.get(r.get("block"))
-        if hx:
-            iscc_hex.setdefault(LIB.key(r["n"]), hx)
-
+    iscc_blocks = load_iscc_blocks()
     truth = {}
 
     def record(name, primary_hex):
         k = LIB.key(name)
         if k in truth:
             return
+        iscc = iscc_pick(iscc_blocks.get(k), primary_hex)
         if k in mp:
             truth[k] = (mp[k], "maerz-paul exact")
-        elif k in iscc_hex:
-            truth[k] = (iscc_hex[k], "iscc-nbs block centroid")
+        elif iscc:
+            truth[k] = (iscc, "iscc-nbs block centroid")
         else:
             truth[k] = (primary_hex, "altn/also primary (proxy)")
 
@@ -175,7 +206,10 @@ def main():
             if k in truth and s not in live_slugs:
                 truth_by_slug.setdefault(s, truth[k])
 
+    pins = load_pins()
     for alias_slug, (true_hex, truth_src) in sorted(truth_by_slug.items()):
+        if alias_slug in pins:
+            continue
         cur_target_slug = slugs_map.get(alias_slug)
         if cur_target_slug is None or cur_target_slug not in core_hex_by_slug:
             continue
@@ -228,6 +262,9 @@ def main():
             if BCN.slug(names_map.get(disp, "")) == old_slug:
                 names_map.pop(disp, None)
 
+    for p in pins.values():
+        slugs_map[p["slug"]] = p["to"]
+        names_map[p["alias"]] = p["toName"]
     aliases["slugs"] = dict(sorted(slugs_map.items()))
     aliases["names"] = dict(sorted(names_map.items()))
     ALIASES_PATH.write_text(json.dumps(aliases, ensure_ascii=False, indent=0, separators=(",", ":")) + "\n", encoding="utf-8")

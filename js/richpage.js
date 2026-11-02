@@ -92,6 +92,35 @@ function rpLearnLabel(name, hex) {
   let st = "none"; try { st = knowState({ n: name, h: hex }); } catch (e) {}
   return st === "yours" ? { t: "Known", known: true } : (st === "learning" || st === "met") ? { t: "Review", known: false } : { t: "Learn it", known: false };
 }
+// David, 2026-10-25: once a color is yours, the next step is telling it from the color you'd mix it up with. Your own mix-ups (the
+// Learner Model's confusions) come first; otherwise the nearest everyday name. One tap opens the Learn sheet on that pair plus one more
+// neighbor, the same way You's Untangle does.
+function rpPairPill(el, name, hex) {
+  const b = el.querySelector("[data-learnpair]"); if (!b) return;
+  const pick = () => {
+    let other = null;
+    try { const ps = typeof confusions === "function" ? confusions({ n: name, h: hex }, 3) : []; const p = (ps || []).find(x => x && x.b && String(x.b).toLowerCase() !== name.toLowerCase()); if (p) other = { n: p.b, h: p.hb || (BYNAME.get(String(p.b).toLowerCase()) || {}).h }; } catch (e) {}
+    if (!other || !other.h) {
+      const use = x => x.useRank == null ? 999 : x.useRank;
+      const near = (CORE_NAMES || []).filter(x => x.n.toLowerCase() !== name.toLowerCase()).map(x => ({ x, d: de2000(hex, x.h) })).filter(o => o.d >= 1.2 && o.d < 14).sort((a, c) => (a.d + use(a.x) / 180) - (c.d + use(c.x) / 180))[0];
+      if (near) other = { n: near.x.n, h: near.x.h };
+    }
+    if (!other || !b.isConnected) return;
+    b.querySelector("span").textContent = `Tell it from ${other.n}`;
+    b.setAttribute("aria-label", `Known. Practice telling ${name} from ${other.n}`);
+    b.onclick = () => {
+      if (typeof prQuick !== "function") return;
+      buzz(6);
+      const a = typeof prSeed === "function" ? prSeed({ n: name, h: hex }) : null, o = typeof prSeed === "function" ? prSeed(other) : null, items = [a, o].filter(Boolean);
+      if (items.length === 2 && typeof prCore === "function") {
+        const third = prCore().filter(c => c.key !== a.key && c.key !== o.key && c.h !== a.h && c.h !== o.h).map(c => ({ c, d: Math.min(de2000(a.h, c.h), de2000(o.h, c.h)) })).sort((m, n) => m.d - n.d)[0];
+        if (third) items.push(third.c);
+      }
+      prQuick({ items: items.length ? items : [hex, other.h], seed: a || undefined, source: "these", label: `${name} and ${other.n.toLowerCase()}`, src: "page" });
+    };
+  };
+  (typeof loadCoreNames === "function" ? loadCoreNames() : Promise.resolve()).then(pick).catch(() => {});
+}
 function rpRelation(name, tapped, hex) {
   if (tapped) return "Your color";   // the match % is said once, on the hex line below
   const t = BYNAME.get(String(name).toLowerCase()), st = t && t.id && S.cards[t.id];
@@ -155,7 +184,7 @@ function rpAlsoHTML(name, hex, tapped) {
       <span class="rp-also-t"><b>${esc(rpYoursName(r.n, r.h, tapped))}</b>${r.src ? `<small>${esc(r.src)}</small>` : ""}</span><em>${pctMatch(r.de).replace(" match", "")}</em></button>`).join("")}</div>
   </section>`;
 }
-// once the archive (data/library.json) has loaded, redraw the section with archive names in it
+// once the archive's long name list has loaded, redraw the section with archive names in it
 function rpAlsoWiden(el, name, hex, tapped) {
   if (!tapped || typeof loadLongNames !== "function") return;
   loadLongNames().then(() => {
@@ -182,16 +211,10 @@ function rpActionRowHTML(name, hex, tapped) {
   const learnHex = tapped || hex, label = rpLearnLabel(name, learnHex);
   const liked = typeof fvHas === "function" && fvHas(learnHex);
   return `<div class="rp-actrow">
-    <button type="button" class="rp-learnpill${label.known ? " rp-learnpill-known" : ""}" data-learnit>${label.known ? ICON.check || "" : ""}<span>${esc(label.t)}</span>${!label.known ? `<em>2 min</em>` : ""}</button>
+    ${label.known ? `<button type="button" class="rp-learnpill rp-learnpill-known" data-learnpair>${ICON.check || ""}<span>${esc(label.t)}</span></button>` : `<button type="button" class="rp-learnpill" data-learnit><span>${esc(label.t)}</span><em>2 min</em></button>`}
     ${typeof sxPairBtnHTML === "function" ? sxPairBtnHTML(learnHex, name) : ""}
     <button type="button" class="icon-btn rp-heart${liked ? " saved" : ""}" data-fvh data-rp-heart aria-label="${liked ? "Remove from your colors" : "Add to your colors"}" aria-pressed="${liked}">${liked ? ICON.heartOn : ICON.heart}</button>
-    ${rpExploreBtnHTML()}
   </div>`;
-}
-// David, 2026-10-24: "from the very beginning, when you click on a color, the explore button should be somewhere there."
-// A quiet pill on the cover (same pill family as Learn it / Pair with), one tap to the Keep exploring feed.
-function rpExploreBtnHTML() {
-  return `<button type="button" class="rp-explore" data-rp-explore aria-label="Explore: keep exploring this color"><span>Explore</span>${ICON.down}</button>`;
 }
 function rpCoverFoot(name, hex, tapped, entry) {
   const id = "rp-cov-" + Math.random().toString(36).slice(2, 8), rel = rpRelation(name, tapped, entry && entry.h || hex);
@@ -200,7 +223,7 @@ function rpCoverFoot(name, hex, tapped, entry) {
         ${tapped ? `<p class="rp-yours">${esc(rpYoursLine(name, hex, tapped))}</p>` : `<p class="rp-tier" data-rp-tier></p>
         <p class="rp-def" data-rp-def></p><p class="rp-defsrc" data-rp-defsrc></p>`}
         ${!tapped ? rpActionRowHTML(name, hex, tapped) : ""}
-        <span class="rp-hexrow"><button class="mono cp-hex" data-copy="${tapped || hex}">${tapped || hex}</button>${tapped && typeof fvSet === "function" ? `<button class="rp-saveyours" data-rp-saveyours>${typeof fvHas === "function" && fvHas(tapped) ? "Saved to your colors" : "Save your color"}</button>` : ""}</span>${tapped ? `<div class="rp-actrow">${typeof sxPairBtnHTML === "function" ? sxPairBtnHTML(tapped || hex, name) : ""}${rpExploreBtnHTML()}</div>` : ""}` };
+        <span class="rp-hexrow"><button class="mono cp-hex" data-copy="${tapped || hex}">${tapped || hex}</button>${tapped && typeof fvSet === "function" ? `<button class="rp-saveyours" data-rp-saveyours>${typeof fvHas === "function" && fvHas(tapped) ? "Saved to your colors" : "Save your color"}</button>` : ""}</span>${tapped ? `<div class="rp-actrow">${typeof sxPairBtnHTML === "function" ? sxPairBtnHTML(tapped || hex, name) : ""}</div>` : ""}` };
 }
 // a quick, good-enough legibility lift for the liking-moment fill: blend the page's color toward white or black
 // until it reads against the heart's own dark surface, without a full perceptual model (it's a decoration, not a swatch)
@@ -271,10 +294,12 @@ function colorFocus(colors, opts = {}) {
   // 4+ always stacks (full-width, so each band stays a real band, not a sliver); a pair or trio stays side by
   // side down to a real phone width (375-440px: David's own device and the smoke harness both live there) and
   // only falls back to stacked below that -- "pick what reads best" (David, 2026-10-09), not a fixed rule
-  const { cx, cy } = opts, multi = colors.length > 1, stacked = colors.length >= 4 || innerWidth < 340;
+  // landscape (wider than tall) keeps full-height columns, any count: a short stacked band can't hold a name
+  const { cx, cy } = opts, multi = colors.length > 1, isStacked = () => innerWidth < 340 || (colors.length >= 4 && innerHeight >= innerWidth), stacked = isStacked();
   const reduce = typeof reduceMotion !== "undefined" && reduceMotion;
   const ov = document.createElement("div");
   ov.className = "rp-focus" + (multi ? " cf-multi" + (stacked ? " cf-stack" : "") : "");
+  ov.style.setProperty("--n", colors.length);
   // David, 2026-10-09: "tapping the color to go full screen shouldn't let me scroll down in the full screen --
   // right now it does." lockScroll() (js/core.js) is the one iOS-safe body lock every sheet already uses (pins
   // the body at its own scroll offset instead of overflow:hidden, which would jump it to the top); touch-action
@@ -302,6 +327,9 @@ function colorFocus(colors, opts = {}) {
     ov.innerHTML = colors.map(({ name, hex }) =>
       `<div class="cf-band" style="--c:${hex}" data-ink="${ink(hex)}"><div class="rp-focus-tag"><p class="rp-focus-tag-name">${esc(name)}</p><p class="rp-focus-tag-hex">${esc(String(hex).toUpperCase())}</p></div></div>`).join("");
   }
+  // turning the phone while it's open flips columns <-> stacked
+  const onResize = () => ov.classList.toggle("cf-stack", multi && isStacked());
+  if (multi) addEventListener("resize", onResize);
   document.body.appendChild(ov);
   RP_FOCUS = ov;
   lockScroll();
@@ -313,6 +341,7 @@ function colorFocus(colors, opts = {}) {
     if (closed) return; closed = true;
     if (wakeLock) { try { wakeLock.release(); } catch (e) {} }
     document.removeEventListener("keydown", onKey2);
+    removeEventListener("resize", onResize);
     unlockScroll();
     ov.classList.remove("on"); ov.classList.add("closing"); buzz(4);
     RP_FOCUS = null;
@@ -330,9 +359,20 @@ function colorFocus(colors, opts = {}) {
   cleanup.push(close);
   // a tap anywhere, or a swipe down, always returns to the page -- there's no big name to dim/bring back any
   // more (David, 2026-10-10), so the single-color case now behaves exactly like the multi/band case always did.
-  let dragging = false;
-  ov.addEventListener("pointerdown", () => { dragging = true; });
-  ov.addEventListener("pointerup", () => { if (dragging) { dragging = false; close(); } });
+  // David, 2026-10-24: with 2+ colors a tap on a band opens that color's page (the one tap rule); the layer closes
+  // with the ✕ at top-right, a swipe down, or Escape. A single color still closes on any tap.
+  let dragging = false, y0 = 0;
+  ov.addEventListener("pointerdown", e => { dragging = true; y0 = e.clientY; });
+  ov.addEventListener("pointerup", e => {
+    if (!dragging) return; dragging = false;
+    if (!multi || e.clientY - y0 > 60) return close();
+    if (e.target.closest(".cf-close")) return close();
+    const band = e.target.closest(".cf-band");
+    if (band && opts.noOpen) return close();   // a caller on a working screen (Look closer's Pick) keeps the person there
+    if (band && typeof openTappedColor === "function") { const hex = band.style.getPropertyValue("--c").trim(); close(); openTappedColor(hex); }
+  });
+  ov.addEventListener("pointercancel", () => { dragging = false; });
+  if (multi) ov.insertAdjacentHTML("beforeend", `<button type="button" class="cf-close" aria-label="Close">${typeof sv === "function" ? sv('<path d="M6 6l12 12M18 6L6 18"/>', 18, 1.8) : "&times;"}</button>`);
 }
 // the single-color entry point (the cover's own tap): rpCoverLike above, and the design-review shot hook
 // (js/boot.js #shot=rpfocus:<name>@<hex>), both still call this directly
@@ -357,8 +397,10 @@ function rpCoverFill(el, name, hex, heroHex, entry) {
 // the cover's near-neighbor line opens Family in Compare, pinned on it (js/family.js famOpenCompare); waits for
 // the article/Family host to have loaded if the tap lands before it has.
 function rpOpenFamilyCompare(el, slug, hex) {
-  const go = () => { if (el.__artData && el.__famHost && typeof famOpenCompare === "function") famOpenCompare(el.__famHost, el.__artData.self, (el.__artData.art && el.__artData.art.aside) || {}, slug, hex); else toast("Loading its family…"); };
-  if (el.__artPromise) el.__artPromise.then(go); else go();
+  const feed = el.querySelector("[data-rpfeed]");
+  const goNt = () => { const t = el.querySelector("[data-nt-cmp]") || el.querySelector(".rc-nt"); if (t) t.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" }); else toast("Loading the neighbors…"); };
+  if (feed && feed.fdChip && feed.dataset.fdTab && feed.dataset.fdTab !== "about") { feed.fdChip("about"); return setTimeout(goNt, 120); }
+  return goNt();
 }
 
 // ---------- the glance strip (a peek of it sits under the cover) ----------
@@ -676,18 +718,19 @@ function rpStoryFill(el, name, hex, o) {
 // on every long article's color page (David, 2026-10-09, caught on Olive while craft-reviewing a color with
 // children: Scarlet, Olive and ~260 of the richest articles are all door-length).
 function rpFamilyFill(el) {
-  const host = el.querySelector("[data-ar-fam-host]"); if (!host || !el.__artPromise) return;
+  // David, 2026-10-25: the Family tab (Tree, Spectrum, Compare, Map) is replaced by Next to it (js/richcolor.js). What stays is the
+  // editorial "Not to be confused with" list from the story, which joins that section once both the story and the ladders are in.
+  if (!el.__artPromise) return;
   el.__artPromise.then(r => {
-    if (!r || !r.has || !host.isConnected || typeof arFamilyHTML !== "function") return;
-    const html = arFamilyHTML(r.art, r.self);
-    if (!html) return;   // no parent/siblings/children/disambiguation: nothing to show, same as any other empty section
-    host.innerHTML = html; host.hidden = false; el.__famHost = host;
-    if (typeof famWire === "function") famWire(host, r.self, r.art.aside || {});
-    // Family's own slot (outside head/body) never got the [data-ar-open]/[data-ar-which] click delegation that
-    // arWire/arWireClicks normally give an article root -- a swatch in the tree/compare/spectrum views looked
-    // tappable but did nothing (caught by tools/smoke.sh: "timed out waiting for .ar-hex[data-ar-open]...").
-    if (typeof arWireClicks === "function") arWireClicks(host, r.art, r.self);
-    rpBarSync(el);
+    if (!r || !r.has || typeof arDisambHTML !== "function") return;
+    const put = () => {
+      const slot = el.querySelector("[data-nt-disamb]"); if (!slot || slot.dataset.done) return !!slot;
+      slot.dataset.done = "1";
+      const html = arDisambHTML(r.self, r.art.aside || {});
+      if (html) { slot.innerHTML = html; if (typeof arWireClicks === "function") arWireClicks(slot, r.art, r.self); }
+      return true;
+    };
+    if (!put()) { const h = () => { if (put()) el.removeEventListener("nt-ready", h); }; el.addEventListener("nt-ready", h); }
   });
 }
 
@@ -696,29 +739,31 @@ function rpBarHTML(name, hex) {
   const hair = typeof rcContrast === "function" && rcContrast(hex, "#0E0D0B") < 1.6 ? " rp-bar-hair" : "";
   return `<div class="rp-bar${hair}" style="--c:${hex}" data-ink="${ink(hex)}" aria-hidden="true">
     <button class="rp-bar-back" data-rp-back aria-label="Back">${ICON.back}</button><button class="rp-bar-name" data-rp-top>${esc(name)}</button>
-    <nav class="rp-bar-chips">${[["story", "Story"], ["paint", "Paintings"], ["family", "Family"], ["id", "ID"]].map(([k, t]) => `<button data-rp-jump="${k}" hidden>${t}</button>`).join("")}</nav>
+    <nav class="rp-bar-chips">${[["story", "Story"], ["paint", "Paintings"], ["family", "Family"], ["id", "ID"]].map(([k, t]) => `<button data-rp-jump="${k}" hidden>${t}</button>`).join("")}</nav>${typeof fdMapBtnHTML === "function" ? fdMapBtnHTML("in-top") : ""}
     <button class="rp-bar-explore" data-rp-jump="explore" hidden aria-label="Explore: keep exploring this color"><span>Explore</span>${ICON.down}</button></div>`;
 }
 function rpBarSync(el) {
   const has = { story: !!el.querySelector(".ar-door,.ar-head,.rp-twin"), paint: !!el.querySelector(".rp-paint"), family: !!el.querySelector(".ar-fam"), id: !!el.querySelector(".rp-idcard"), explore: !!el.querySelector("[data-rpfeed]") };
   const bar = el.querySelector(".rp-bar") || document.querySelector("body > .rp-bar"); if (!bar) return;
-  bar.querySelectorAll("[data-rp-jump]").forEach(b => { b.hidden = !has[b.dataset.rpJump]; });
+  // the page's own chip row (About · Paintings · …, js/feed.js) replaces these jump chips and the Explore pill: one row, not two
+  const tabs = !!el.querySelector("[data-rpfeed] .fd-chips");
+  bar.querySelectorAll("[data-rp-jump]").forEach(b => { b.hidden = tabs || !has[b.dataset.rpJump]; });
 }
 function rpBarWire(el) {
   const bar = el.querySelector(".rp-bar"), hero = el.querySelector(".cp-hero"); if (!bar || !hero) return;
   const scrollTo = t => { if (!t) return; const y = t.getBoundingClientRect().top + scrollY - bar.offsetHeight - 8; window.scrollTo({ top: Math.max(0, y), behavior: reduceMotion ? "auto" : "smooth" }); };
-  const cover = el.querySelector("[data-rp-explore]");
-  if (cover) cover.addEventListener("click", () => { buzz && buzz(5); fdJump(el.querySelector("[data-rpfeed]")); });
   bar.addEventListener("click", e => {
     if (e.target.closest("[data-rp-back]")) return xBack();
     if (e.target.closest("[data-rp-top]")) return window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
     const j = e.target.closest("[data-rp-jump]"); if (!j) return;
-    const k = j.dataset.rpJump;
-    if (k === "story") return scrollTo(el.querySelector(".ar-door,.ar-head,.rp-twin"));
-    if (k === "paint") return scrollTo(el.querySelector(".rp-paint"));
-    if (k === "family") return scrollTo(el.querySelector(".ar-fam"));
-    if (k === "id") return scrollTo(el.querySelector(".rp-idcard"));
-    if (k === "explore") return fdJump(el.querySelector("[data-rpfeed]"));   // David, 2026-10-24: Keep exploring is so far down it takes forever to get there
+    const k = j.dataset.rpJump, feed = el.querySelector("[data-rpfeed]");
+    // the sections live in the About tab: open it first when another tab is showing
+    const inAbout = f => { if (feed && feed.dataset.fdTab && feed.dataset.fdTab !== "about" && feed.fdChip) { feed.fdChip("about"); return setTimeout(f, 60); } f(); };
+    if (k === "story") return inAbout(() => scrollTo(el.querySelector(".ar-door,.ar-head,.rp-twin")));
+    if (k === "paint") return inAbout(() => scrollTo(el.querySelector(".rp-paint")));
+    if (k === "family") return inAbout(() => scrollTo(el.querySelector(".ar-fam")));
+    if (k === "id") return inAbout(() => scrollTo(el.querySelector(".rp-idcard")));
+    if (k === "explore") { if (feed && feed.dataset.fdTab === "about" && feed.fdChip) feed.fdChip("paintings"); return fdJump(feed); }
   });
   // it lives on <body>, not in the screen: the screen's entrance animation leaves a transform that would pin a fixed bar to the page.
   // Defensive: a fast Back-then-forward can call this again before the last page's own cleanup has run (David,
@@ -782,24 +827,15 @@ function rpPaintSectionHTML(name, hex, entry, famC) {
     <h2>Paintings</h2>
     <div class="rp-paint-lead" data-rp-lead></div>
     <div class="gl-in" data-glin></div>
-    ${call(rcRolePaintingsHTML, name, hex)}
     ${call(rcPaintersSection, name, hex)}
     ${call(rcWhenWhereSection, name, hex)}
     ${call(rcPairedSection, name, hex)}
     ${call(rcYouHTML, name, hex)}
     <div class="rp-elsewhere">
-      <div class="c-poems"></div>
-      ${call(archiveRows, entry, "books", famC)}
       ${call(rcWernerLine, name, hex)}
-      ${call(btRow, entry, famC)}
-      ${call(gmRow, entry, famC)}
-      ${call(bdRow, entry, famC)}
-      ${call(doRow, entry, famC)}
-      <section class="fx-in" data-world-in></section>
-      ${call(archiveRows, entry, "films", famC)}
+      ${call(rcElsewhereHTML, name, hex)}
     </div>
     <details class="rc-more rp-bynumbers"><summary>By the numbers</summary>
-      ${call(rcRoleSection, name, hex)}
       ${call(rcReachSection, name, hex)}
       <div class="rp-findings-box" data-rp-findings></div>
     </details>
@@ -829,8 +865,6 @@ function rpPaintFill(el, name, hex, entry, famC) {
     box.innerHTML = `<p class="rp-findings-h">In the archive</p><ul class="rp-findings">${cards.map(c => `<li><button type="button" data-rp-door="${c.door}"><b>${esc(c.fig)}</b> ${esc(c.text)}</button></li>`).join("")}</ul>`;
     box.addEventListener("click", e => { const b = e.target.closest("[data-rp-door]"); if (b && b.dataset.rpDoor === "paint" && typeof paintingsDoor === "function") paintingsDoor([hex], { back: true }); });
   });
-  colorPoems(sec.querySelector(".c-poems"), entry);
-  if (typeof worldColorRow === "function") worldColorRow(sec, { kind: "color", h: hex, title: name }, famC);
   // quiet: the two extra blocks collapse to nothing if they turn out empty, and so does "By the numbers" itself
   // if every one of its three readings came back empty (a color with no reach/role/findings data at all)
   setTimeout(() => {
@@ -842,14 +876,14 @@ function rpPaintFill(el, name, hex, entry, famC) {
 
 // ---------- the ID card (David, 2026-10-09): facts, codes and sources merged into one specimen card ----------
 function rpIdCardHTML() {
+  // David, 2026-10-25: "the ID card looks empty and useless". The big swatch block is gone (the cover already is the color); the facts
+  // read first, the systems that named it become a small timeline, and the codes are a tap-to-copy grid instead of six stacked rows.
   return `<section class="rp-idcard" id="rp-s-id">
-    <h2>ID card</h2>
-    <div class="rp-id-swatch" data-rp-id-swatch></div>
+    <h2>Facts</h2>
     <dl class="ar-facts rp-id-facts" data-rp-id-facts></dl>
-    <p class="rp-n-h">Codes</p>
-    <div class="cp-codes" data-rp-id-codes></div>
-    <p class="fine cp-codes-fine">CMYK here is a rough formula, not a print profile: real values depend on the paper and press.</p>
-    <div class="rc-passport" data-rp-id-stamps hidden></div>
+    <div class="rp-tl" data-rp-id-stamps hidden></div>
+    <div class="cp-codes cp-code-grid" data-rp-id-codes></div>
+    <p class="fine cp-codes-fine">Tap a value to copy it. CMYK here is a rough formula, not a print profile: real values depend on the paper and press.</p>
   </section>`;
 }
 function rpSourceValueHTML(text) {
@@ -864,9 +898,8 @@ function rpSourceValueHTML(text) {
 }
 function rpIdCardFill(el, entry, name, hex, codes) {
   const sec = el.querySelector(".rp-idcard"); if (!sec) return;
-  const sw = sec.querySelector("[data-rp-id-swatch]"); if (sw) { sw.style.setProperty("--c", hex); sw.setAttribute("data-ink", ink(hex)); }
   const codesBox = sec.querySelector("[data-rp-id-codes]");
-  if (codesBox) codesBox.innerHTML = codes.map(([k, v]) => `<button class="cp-code-row" data-copy="${esc(v)}"><span>${esc(k)}</span><b class="mono">${esc(v)}</b></button>`).join("");
+  if (codesBox) codesBox.innerHTML = codes.map(([k, v]) => `<button type="button" class="cp-code-cell" data-copy="${esc(v)}"><span>${esc(k)}</span><b>${esc(v)}</b></button>`).join("");
   const famC = typeof rcFamC === "function" ? rcFamC(hex) : null;
   (el.__artPromise || Promise.resolve(null)).then(r => {
     const art = r && r.art, o = (art && art.aside && art.aside.origin) || {};
@@ -878,8 +911,9 @@ function rpIdCardFill(el, entry, name, hex, codes) {
     if (factsBox) { factsBox.innerHTML = rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join(""); const fo = factsBox.querySelector("[data-ar-open-fam]"); if (fo) fo.onclick = () => openCoreName(fo.dataset.h, fo.textContent); }
     const stampsBox = sec.querySelector("[data-rp-id-stamps]");
     if (stampsBox && typeof RC_STAMPS !== "undefined") {
-      const stamps = RC_STAMPS.filter(([k]) => (entry.src || []).includes(k));
-      if (stamps.length) { stampsBox.hidden = false; stampsBox.innerHTML = stamps.map(([k, label, date]) => `<button type="button" class="rc-stamp" data-src-open="${esc(k)}"><b>${esc(label)}</b>${date ? `<em>${esc(date)}</em>` : ""}</button>`).join(""); }
+      // the systems that named it, in date order: Werner 1821 -> Ridgway 1912 -> ISCC-NBS 1955. Tap one to read about that system.
+      const stamps = RC_STAMPS.filter(([k]) => (entry.src || []).includes(k)).sort((a, b) => (parseInt(a[2], 10) || 9999) - (parseInt(b[2], 10) || 9999));
+      if (stamps.length) { stampsBox.hidden = false; stampsBox.innerHTML = `<p class="rp-tl-h">Named by</p><ol class="rp-tl-l">${stamps.map(([k, label, date]) => `<li><button type="button" class="rp-tl-i" data-src-open="${esc(k)}"><em>${esc(date || "")}</em><b>${esc(label)}</b></button></li>`).join("")}</ol>`; }
     }
   });
 }
@@ -926,14 +960,34 @@ function rpSplitWire(el, name, hex, tapped) {
 // Test yourself lives collapsed at the end of the chapters themselves.
 // entry {n, h, src?, also?, notes?, shade?}; o: { tapped, cls, facet (a story built from the wiki, js/article.js
 // arFacetArt), codes [[k, v]], node }. Returns the screen; the caller wires its own save/share icons, if any.
+function rpStartChip() {
+  const prev = typeof XSTACK !== "undefined" && XSTACK.length > 1 ? String(XSTACK[XSTACK.length - 2]) : "";
+  return /^(g:|pt:|aw:|sv:|pal:|ph:)/.test(prev) || /^r:.*(\/paintings\/map|\/gallery\/|\/painting\/)/.test(prev) ? "paintings" : "about";
+}
 function colorDossier(entry, o = {}) {
   const backNav = BACK_RENDER;   // read before show() clears it: the Keep exploring feed at the foot puts itself back where it was on a Back (js/feed.js)
   const name = entry.n, hex = entry.h, tapped = o.tapped ? String(o.tapped).toUpperCase() : null, heroHex = tapped || hex;
   const famC = typeof rcFamC === "function" ? rcFamC(heroHex) : null;
   const cover = rpCoverFoot(name, hex, tapped, entry);
+  // David, 2026-10-25: "the explorer doesn't make sense to be at the very bottom": the feed is the body of the page and the
+  // article is its first tab (About). Where you start depends on how you arrived: from a painting, the map or a painter you are
+  // browsing, so Paintings; from anywhere else (Learn, search, a new color) the article first. A Back restores the tab you left.
+  const memo0 = backNav && typeof FD_MEMO !== "undefined" ? FD_MEMO.get("c:" + heroHex.toUpperCase()) : null;
+  const startChip = memo0 && memo0.chip ? memo0.chip : rpStartChip();
+  const call = (f, ...a) => typeof f === "function" ? f(...a) : "";
+  // David, 2026-10-26: "it could also be called" lives in Overview (rpAlsoHTML below), not above the paintings
+  const secHTML = `${typeof sxPairBtnHTML === "function" ? `<div class="rp-pair-row">${sxPairBtnHTML(heroHex, name)}</div>` : ""}<div class="ar-head" data-ar-head hidden></div>
+    <div class="ar-body" data-ar-body hidden></div>
+    ${rpPaintSectionHTML(name, heroHex, entry, famC)}
+    ${call(rcNextToHTML, name, heroHex)}
+    ${rpIdCardHTML()}
+    ${rpAlsoHTML(name, hex, tapped)}
+    ${rpNextHTML()}
+    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "c:" + name, title: name }) : ""}`;
   const el = show(`
     <div class="c-hero cp-hero cp-hero-full${tapped ? " rp-split" : ""}" style="--c:${heroHex};--c2:${hex}" data-ink="${ink(heroHex)}">
       <button class="cp-close" data-back aria-label="Back">${ICON.back}</button>
+      ${typeof fdMapBtnHTML === "function" ? fdMapBtnHTML("fd-mapb-hero") : ""}
       <div class="cp-hero-foot">
         ${tapped ? `<div class="rp-split-band"><div class="rp-split-half rp-split-half-a" data-ink="${ink(heroHex)}"><b>${esc(rpYoursName(name, hex, heroHex))}</b><span class="mono">${heroHex}</span></div><div class="rp-split-half rp-split-half-b" data-ink="${ink(hex)}"><b>${esc(name)}</b><span class="mono">${hex}</span></div></div>` : ""}
         ${cover.html}
@@ -941,16 +995,10 @@ function colorDossier(entry, o = {}) {
       </div>
     </div>
     ${rpBarHTML(name, heroHex)}
-    ${rpAlsoHTML(name, hex, tapped)}
     ${entry.shade ? `<p class="fine np-shade">A described shade: ${esc(entry.shade.base)} made ${esc(entry.shade.mod)}${o.shadeBase ? `. <button class="link" data-shade-base>See ${esc(entry.shade.base)}</button>` : "."}</p>` : ""}
-    <div class="ar-head" data-ar-head hidden></div>
-    <div class="ar-body" data-ar-body hidden></div>
-    ${rpPaintSectionHTML(name, heroHex, entry, famC)}
-    <div class="ar-fam-host" data-ar-fam-host hidden></div>
-    ${rpIdCardHTML()}
-    ${rpNextHTML()}
-    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "c:" + name, title: name }) : ""}
-    ${typeof fdMountColor === "function" ? `<section class="gl-feed rp-feed" data-rpfeed aria-label="Keep exploring"></section>` : ""}
+    ${typeof fdMountColor === "function" ? `<section class="gl-feed rp-feed rp-tabs" data-rpfeed aria-label="About this color, and keep exploring">
+      <div class="fd-bar fd-pre"><div class="fd-chips" role="tablist" aria-label="About this color, or keep exploring">${[["about", "Overview"], ...FDC_CHIPS].map(([k, t]) => `<button class="fd-chip${k === startChip ? " on" : ""}${k === "about" || k === startChip ? "" : " dis"}" role="tab" data-fc="${k}" aria-selected="${k === startChip}">${t}</button>`).join("")}</div></div>
+      <div class="rp-about" data-rp-about${startChip === "about" ? "" : " hidden"}>${secHTML}</div></section>` : secHTML}
     <p class="fine rp-last">Screen colors are approximate. Painting figures are measured from museum photographs of aged, varnished paintings.</p>
   `, "article cp-page" + (o.cls ? " " + o.cls : ""));
   el.style.setProperty("--c", heroHex);   // the page's own faint tint (css/colorpage.css .screen.cp-page)
@@ -963,6 +1011,7 @@ function colorDossier(entry, o = {}) {
   rpStoryFill(el, name, hex, o);
   rpCoverFill(el, name, hex, heroHex, entry);
   rpCoverLike(el, name, hex);
+  rpPairPill(el, name, tapped || hex);
   // a direct tap on the heart itself, the same liking moment as the cover's double-tap (js/favs.js fvWireHeart
   // only swaps the icon; this adds the fill + toast). Guarded: namePage() also calls fvWireHeart on this page,
   // so the plain swap stays a harmless no-op fallback if this one is ever skipped.
@@ -978,9 +1027,20 @@ function colorDossier(entry, o = {}) {
   rpNextFill(el, name, heroHex);
   rpHoldWalk(el, name, heroHex);
   rpBarWire(el);
+  // David, 2026-10-26: the hero's own buttons scroll away with it; they fade out before they reach the status bar instead of running under the clock and battery
+  if (!document.documentElement.classList.contains("desk") && matchMedia("(hover:none)").matches) {   // a phone: the status bar is there
+    const ctl = [...el.querySelectorAll(".cp-hero > .cp-close, .cp-hero > .fd-mapb-hero, .cp-hero > .tl-more-float, .cp-hero > .tl-exit-float")], back0 = ctl[0]; let raf = 0;
+    const fade = () => {
+      raf = 0; if (!el.isConnected) { removeEventListener("scroll", on, true); return; }
+      const t = Math.max(0, (parseFloat(getComputedStyle(back0).top) || 0) - 14);   // the safe-area inset: the controls sit at --top + 14px
+      ctl.forEach(c => { const y = c.getBoundingClientRect().top, o = Math.max(0, Math.min(1, (y - (t - 6)) / 22)); c.style.opacity = o < 1 ? o.toFixed(2) : ""; c.style.pointerEvents = o < .4 ? "none" : ""; });
+    };
+    const on = () => { if (back0) fade(); };
+    addEventListener("scroll", on, true);
+  }
   // Keep exploring (js/feed.js): the endless feed of paintings and more at the very bottom, with chips for what counts as related.
   // On a Back it is built at once so the page is as tall as it was and the scroll lands on the same tile.
-  if (typeof fdMountColor === "function") fdMountColor(el.querySelector("[data-rpfeed]"), { sub: { hex: heroHex.toUpperCase(), name, tapped }, backNav });
+  if (typeof fdMountColor === "function") fdMountColor(el.querySelector("[data-rpfeed]"), { sub: { hex: heroHex.toUpperCase(), name, tapped }, backNav, about: el.querySelector("[data-rp-about]"), startChip });
   if (tapped) rpSplitWire(el, name, hex, tapped);
   if (typeof rcWireOpen === "function") rcWireOpen(el, heroHex);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });

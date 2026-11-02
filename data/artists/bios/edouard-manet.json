@@ -1,0 +1,59 @@
+{
+ "slug": "edouard-manet",
+ "lead": "Edouard Manet was a French painter of modern Paris, born in 1832, whose flat light and strong blacks made him a bridge between the old masters and the Impressionists.",
+ "paras": [
+  "Manet's reputation rests on black. Where the Impressionists were about to drop it from the palette, he used it as a color, and made it carry cloth, hats, shadows and the fall of a dress.",
+  "Around it he placed very pale, very clean flesh and a few chosen accents: an orchid, a bouquet, a green shutter. Looking at a Manet is mostly a lesson in what happens to color when the middle tones are taken out."
+ ],
+ "chapters": [
+  {
+   "title": "Black, Spain and the Salon",
+   "when": "Paris · 1850-1865",
+   "text": "Édouard Manet trained in Paris under Thomas Couture and then traveled, studying Hals, Velázquez and Goya in museums. What he took from the Spanish painters was a way of laying a figure against a quiet ground with few mid-tones. In Le Déjeuner sur l'herbe and Olympia, both shown in the 1860s, the flesh is nearly flat and light, and a dark ground makes it jump.\n\nThe darks are not one color. A coat or hat in Manet can be a blue-black, a brown-black or an olive-black, and from {{Smoky Black}} to {{Charcoal}} the painter gives each its own lean. In Olympia the model's skin, the white sheet and the maid's bouquet are the only large light areas, and a black ribbon and a black cat hold the edges.\n\nHe still painted with a conventional studio palette of the period: lead white, ochres, vermilion, blues, lakes and the black pigments. Whatever was fashionable, it was the placement that made it look modern.",
+   "colors": [
+    "Smoky Black",
+    "Charcoal",
+    "Ivory",
+    "Salmon"
+   ]
+  },
+  {
+   "title": "Light and the open air",
+   "when": "Paris and Argenteuil · 1868-1875",
+   "text": "The Balcony (1868-69) puts three figures against a strong green shutter and a deep dark interior. The green is an intense, slightly blue green, a color chosen to be loud. In 1874 Manet spent time with Monet at Argenteuil and painted outdoors, lightening his palette: a Seine scene such as Boating shows a clear {{Azure}} water against pale clothing.\n\nBy Ball's account, Manet and Morisot adopted cadmium yellow in the late 1870s, probably encouraged by Monet, who had been using it since at least 1873. The lesson is that the brightest colors in his late pictures often came from newer industrial pigments, which painters of his circle adopted quickly.\n\nManet never joined the Impressionist exhibitions. He kept his black, even when his friends dropped theirs.",
+   "colors": [
+    "Azure",
+    "Forest Green",
+    "Ecru"
+   ]
+  },
+  {
+   "title": "Flowers and the last great picture",
+   "when": "Paris · 1878-1883",
+   "text": "Illness reduced his range in the last years, and he painted small still lifes of flowers and fruit in his studio: peonies in {{Rose}} and white, lilacs, a single pear. They are among the freshest passages in nineteenth-century color. A white petal is rendered as a warm cream next to a cool gray, so that the whole thing seems to glow.\n\nHis final large picture, A Bar at the Folies-Bergère (1882), brings the two halves of his palette together. The barmaid wears a black bodice, and the counter in front of her is a still life of {{Persimmon}} oranges, flowers in a glass and bottles with red labels or green glass. The mirror behind her reflects pale, hazy crowd color, and the whole image rests on her black.\n\nWhat to look for: a figure set against a flat ground with no half-shadow, a black that has green or brown in it, and one saturated spot of color per picture.",
+   "colors": [
+    "Rose",
+    "Persimmon",
+    "Gold",
+    "Cream"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 583 paintings",
+   "text": "Chromatlas holds 583 paintings attributed to Manet, photographed from museum collections. These are photographs of varnished oil paintings; in a painter so reliant on black, the dark end is the least reliable, since old varnish and dirt add brown.\n\nHis darkest large areas are {{Smoky Black}}, near black and black, which is what the reputation would lead one to expect. His lightest large areas are {{White}}, {{Ecru}} and light gray, and it is notable that a greater share of his palette sits at the pale end than in Goya's or Caravaggio's. Only one color stands out as used more than his peers: {{Dark Jungle Green}}, the near-black green of the balcony shutters and the foliage. The data fits the picture: black, pale flesh, and a green that does the work of a second dark.",
+   "colors": [
+    "Smoky Black",
+    "Ecru",
+    "Dark Jungle Green",
+    "White"
+   ]
+  }
+ ],
+ "sources": [
+  "Ball, Bright Earth (2001)",
+  "Chromatlas archive, 583 paintings"
+ ],
+ "words": 684,
+ "status": "article"
+}

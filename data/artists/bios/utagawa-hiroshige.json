@@ -1,0 +1,61 @@
+{
+ "slug": "utagawa-hiroshige",
+ "lead": "Utagawa Hiroshige (1797-1858) was a Japanese woodblock print artist of the ukiyo-e school, best known for his landscape series, which shaped how later painters in Europe saw sky, rain and water.",
+ "paras": [
+  "Hiroshige's color is the color of the printed page. The paper is a warm ivory, the blues are laid on in bands that fade out, and the other colors come in small quantities that look larger because they sit against that open ground.",
+  "It is a very different kind of palette from an oil painter's, and the data in our archive reflects that."
+ ],
+ "chapters": [
+  {
+   "title": "Edo and the first series",
+   "when": "Edo · 1797-1833",
+   "text": "Hiroshige was born in Edo (now Tokyo) in 1797, the son of a fire-watch official, and became a pupil of the Utagawa school. He began with portraits of actors and women, and then moved to landscapes. The prints are made from carved wooden blocks, one for each color, and inked by hand on washi paper; the paper itself, a pale {{Ivory}} or {{Cream}}, is the biggest color in the picture.\n\nBefore 1830, blue in prints was mostly dayflower and indigo. From about the 1820s, the artificial Prussian blue reached Japan from Europe, and it quickly became the prized blue of prints, sold under the name bero-ai. Its depth, and the way it could be printed in a gradient, suited the landscape format. A short account like this should not date any single print's pigment: some blue in a Hiroshige print is Prussian blue and some is indigo, and only analysis can say which.",
+   "colors": [
+    "Indigo",
+    "Prussian Blue",
+    "Ivory",
+    "Cream"
+   ]
+  },
+  {
+   "title": "The Tokaido and the gradient",
+   "when": "Edo to Kyoto · 1833-1840",
+   "text": "The Fifty-three Stations of the Tokaido (about 1833 to 1834) made his name. The blue sky band at the top, deeper at the edge and fading to white near the horizon, is made by wiping the block while printing, a technique called bokashi. The same band appears in the rain scenes: the famous Shono shows travelers in a downpour, with diagonal lines in Slate Grey and a dark {{Pine Green}} hillside.\n\nThe rest of the palette is quiet: the {{Olive}} and {{Sage}} of foliage, a warm {{Buff}} of road and thatch, a touch of {{Persimmon}} or {{Salmon}} in a roof or a sunset, and pale gray water. Colors are flat but they never clash.",
+   "colors": [
+    "Pine Green",
+    "Olive",
+    "Buff",
+    "Persimmon",
+    "Sky Blue"
+   ]
+  },
+  {
+   "title": "One Hundred Famous Views of Edo",
+   "when": "Edo · 1856-1858",
+   "text": "The last big series, One Hundred Famous Views of Edo, was published in the years just before his death in 1858. The designs are bolder, with close foreground objects, such as a plum tree branch, a pair of horse's legs or a bridge, cut off by the frame. Color becomes more dramatic: a dark night sky, a bright red sunset, and snow made of bare paper.\n\nOne note of caution: some pinks and reds in old prints were made from safflower or from other plant dyes that fade in light, so the red sunsets of a museum print may once have been stronger. What the surviving pale pink or gray-brown tells you is that the print has been in the light.\n\nWhat to look for: how much of the picture is blank paper, where a blue band fades, and the single small area of red.",
+   "colors": [
+    "Persimmon",
+    "Carmine",
+    "Azure",
+    "Ecru"
+   ]
+  },
+  {
+   "title": "What our archive shows",
+   "when": "Chromatlas archive · 217 prints and paintings",
+   "text": "Chromatlas holds 217 works attributed to Hiroshige, almost all prints. They are photographs of paper in museum collections, so the color is also the age of the paper, and the paper has often yellowed.\n\nTwo things make his archive unlike that of an oil painter. First, his darkest large areas are weak: {{Blackish Brown}}, {{Smoky Black}} and a gray-olive, each covering less than 7 percent of the pictures. Second, his lightest areas are large: {{Light Ivory}} (14 percent), {{Cornsilk}} (13 percent) and {{Ecru}}. Those are the paper. Compared with his peers, he uses {{Café Noir}}, dark olive brown and {{Smoky Black}} much less, and his distinctive colors are pale ones: cement, putty and olive-buff. In short, the archive reads Hiroshige as an artist of light grounds with small passages of blue.",
+   "colors": [
+    "Light Ivory",
+    "Cornsilk",
+    "Ecru",
+    "Putty"
+   ],
+   "pull": "The paper is the largest color: Light Ivory and Cornsilk dominate his light areas."
+  }
+ ],
+ "sources": [
+  "Chromatlas archive, 217 works"
+ ],
+ "words": 637,
+ "status": "article"
+}

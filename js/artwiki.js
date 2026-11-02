@@ -56,14 +56,14 @@ function awLoad() {
 }
 function awPainterLoad(slug) {
   if (AW.P.has(slug)) return Promise.resolve(AW.P.get(slug));
-  return Promise.all([awGet(AW_AN + "artists/" + slug + ".json"), awGet(AW_DIR + "p/" + slug + ".json")]).then(([A, P]) => { AW.P.set(slug, { A, P }); return AW.P.get(slug); });
+  return Promise.all([awGet(AW_AN + "artists/" + slug + ".json"), awGet(AW_DIR + "p/" + slug + ".json"), loadGallery().catch(() => null)]).then(([A, P]) => { if (GAL && GAL.hid && P && P.ix) P.ix = P.ix.filter(i => !GAL.hid[i]); AW.P.set(slug, { A, P }); return AW.P.get(slug); });   // hidden: not artworks
 }
 // data/artists/lite.json (tools/painters_lite.py): every named painter who ISN'T one of the ~840 full profiles,
 // built straight from the gallery corpus -- {slug: {n, ix:[gallery index...], co?, y0?, y1?}}. One small file
 // (a few hundred KB), loaded once, the first time any painter turns out not to have a full profile.
 function awLiteLoad() {
   if (AW.lite) return Promise.resolve(AW.lite);
-  return AW.liteLoading || (AW.liteLoading = awGet(AW_DIR + "lite.json").then(doc => { AW.lite = doc.a || {}; AW.liteLoading = null; return AW.lite; }).catch(e => { AW.liteLoading = null; throw e; }));
+  return AW.liteLoading || (AW.liteLoading = Promise.all([awGet(AW_DIR + "lite.json"), loadGallery().catch(() => null)]).then(([doc]) => { AW.lite = doc.a || {}; if (GAL && GAL.hid) for (const k in AW.lite) if (AW.lite[k].ix) AW.lite[k].ix = AW.lite[k].ix.filter(i => !GAL.hid[i]); AW.liteLoading = null; return AW.lite; }).catch(e => { AW.liteLoading = null; throw e; }));
 }
 const awHasLitePainter = slug => !!(AW.lite && AW.lite[slug]);
 function awShard(i) {
@@ -198,12 +198,16 @@ function awHueRing(hh) {
 const awBand = hh => AW_BANDS[hh.indexOf(Math.max(...hh))];
 
 // ---------- the bio slot (the article engine writes data/artists/bios/<slug>.json) ----------
+// {{Color Name}} in a bio becomes a tinted word with a dot; one tap opens that color's page
+function awCw(h) { return h.replace(/\{\{([^{}]+)\}\}/g, (m, nm) => { const hx = awHex(nm); return hx === "#808080" ? nm : `<button class="aw-cw" data-swatch="${hx}" style="--c:${hx}">${nm}</button>`; }); }
 function bioSlot(slug) {
   return awGet(AW_DIR + "bios/" + slug + ".json").then(b => {
     if (!b) return "";
     const paras = b.paras || (b.text ? String(b.text).split(/\n\n+/) : []);
-    if (!paras.length && !b.lead) return "";
-    return `<section class="aw-bio">${b.lead ? `<p class="aw-lead">${esc(b.lead)}</p>` : ""}${paras.map(t => `<p>${esc(t)}</p>`).join("")}${(b.sources || []).length ? `<p class="fine">${b.sources.map(esc).join(" · ")}</p>` : ""}</section>`;
+    if (!paras.length && !b.lead && !(b.chapters || []).length) return "";
+    const chs = (b.chapters || []).map(c => { const cols = (c.colors || []).map(awHex).filter(h => h !== "#808080");
+      return `<div class="aw-ch" style="--c:${cols[0] || "#888"}">${c.when ? `<span class="aw-ch-w">${esc(c.when)}</span>` : ""}<h3>${esc(c.title)}</h3>${String(c.text || "").split(/\n\n+/).map(t => `<p>${awCw(esc(t))}</p>`).join("")}${cols.length ? `<span class="aw-ch-p">${cols.map(h => `<i style="--c:${h}"></i>`).join("")}</span>` : ""}${c.pull ? `<p class="aw-pull">${esc(c.pull)}</p>` : ""}</div>`; }).join("");
+    return `<section class="aw-bio">${b.lead ? `<p class="aw-lead">${esc(b.lead)}</p>` : ""}${paras.map(t => `<p>${awCw(esc(t))}</p>`).join("")}${chs ? `<div class="sec-head"><b>Life in color</b><span>${(b.chapters || []).length} chapters</span></div>` : ""}${chs}${(b.sources || []).length ? `<p class="fine">${b.sources.map(esc).join(" · ")}</p>` : ""}</section>`;
   }).catch(() => "");
 }
 
@@ -228,7 +232,8 @@ function awSearchHTML(s, again) {
   if (!AW.ready) { awLoad().then(() => again && again()).catch(() => {}); return ""; }
   const norm = t => routeSlug(t).replace(/-/g, ""), q = norm(s);
   if (q.length < 2) return "";
-  const hits = AW.list.filter(m => norm(m.n).includes(q)).slice(0, 6);
+  let hits = AW.list.filter(m => norm(m.n).includes(q)).slice(0, 6);
+  if (!hits.length && typeof sqFuzzyRank === "function") hits = sqFuzzyRank(AW.list, s, m => m.n, 6).hits;   // "van goh", "monnet"
   return hits.length ? `<div class="sec-head"><b>Painters</b><span>${hits.length}${hits.length === 6 ? "+" : ""}</span></div>${hits.map(m => `<button class="aw-res" data-awpainter="${m.slug}"><b>${esc(m.n)}</b><span>${[m.b != null ? awY(m.b) + "–" + (m.d != null ? awY(m.d) : "") : m.y0 ? m.y0 + "–" + m.y1 : "", m.co].filter(Boolean).join(" · ")}</span><em>${m.k}</em></button>`).join("")}` : "";
 }
 
@@ -243,9 +248,64 @@ function awSearchHTML(s, again) {
 function awPainterHexes(A, P) {
   return [...new Set([...(A.clusters || []).flatMap(c => c.colors.slice(0, 3)), ...(P.sig || []).map(r => awCol(r[0])[0])])].map(awHex).filter(h => h !== "#808080");
 }
-function awPortraitHero(slug, A, P, hlChips) {
+// ---- painter page v2 (David, 2026-10-30): a color strip and three facts under the hero, a painting a decade, the numbers in one drawer ----
+// A vivid, distinct strip from the painter's most famous paintings' own palettes (David, 2026-10-30: the strip was four muddy greys)
+function awVividStrip(slug, P, fallback) {
+  const rec = (AW.port && AW.port[slug]) || {}, ids = [...(rec.famous || []), P.typical].filter(g => g != null && g >= 0).slice(0, 10), cand = [];
+  ids.forEach(i => { for (let j = 0; j < 6; j++) { const h = glHex(i, j), l = lab(h), c = Math.hypot(l[1], l[2]); if (c >= 16 && l[0] > 18 && l[0] < 92) cand.push({ h, l, w: c * (0.5 + GAL.sh[i * 6 + j]) }); } });
+  cand.sort((a, b) => b.w - a.w);
+  const out = [];
+  cand.forEach(x => { if (out.length < 8 && out.every(o => Math.hypot(o.l[0] - x.l[0], o.l[1] - x.l[1], o.l[2] - x.l[2]) > 18)) out.push(x); });
+  out.sort((a, b) => Math.atan2(a.l[2], a.l[1]) - Math.atan2(b.l[2], b.l[1]));
+  return out.length >= 4 ? out.map(x => x.h) : fallback;
+}
+function awDecadePicks(slug, P, n) {   // [[bucket, gi, count, unit]], a year per painting for a short career, else a decade
+  if (n < 15 || !P.ix) return [];
+  const fam = new Set(((AW.port && AW.port[slug]) || {}).famous || []), ys = [];
+  P.ix.forEach(i => { const y = parseInt(glYearRaw(i), 10); if (y > 0 && awYearOk(slug, y)) ys.push([i, y]); });
+  if (ys.length < 10) return [];
+  const sy = ys.map(x => x[1]).sort((u, v) => u - v), unit = sy[Math.floor(sy.length * .97)] - sy[Math.floor(sy.length * .03)] <= 25 ? 1 : 10, by = new Map();
+  ys.forEach(([i, y]) => { const d = Math.floor(y / unit) * unit; if (!by.has(d)) by.set(d, []); by.get(d).push(i); });
+  const out = [...by.entries()].sort((a, b) => a[0] - b[0]).filter(([, l]) => l.length >= 2).map(([d, l]) => [d, l.find(i => fam.has(i)) ?? (l.includes(P.typical) ? P.typical : l[l.length >> 1]), l.length, unit]);
+  return out.length >= 3 ? out : [];
+}
+function awDecadeRail(picks) {
+  if (!picks.length) return "";
+  const yr = picks[0][3] === 1;
+  return `<div class="sec-head"><b>A painting a ${yr ? "year" : "decade"}</b><span>swipe to watch the color change</span></div>
+    <div class="gl-rail aw-decrail">${picks.map(([d, i]) => `<div class="aw-dec"><b>${d}${yr ? "" : "s"}</b>${glPinHTML(i, { imH: 150 })}</div>`).join("")}</div>`;
+}
+function awGlance(n, picks, ext) {
+  const cards = [[n.toLocaleString("en-US"), n === 1 ? "painting here" : "paintings here"]];
+  if (picks.length) { const top = picks.slice().sort((a, b) => b[2] - a[2])[0]; cards.push([top[0] + (top[3] === 1 ? "" : "s"), "the busiest " + (top[3] === 1 ? "year" : "decade") + ", " + top[2] + " paintings"]); }
+  const mm = /(\d+)%/.exec(ext || ""); if (mm) cards.push([mm[1] + "%", ext.replace(/ of the \d+ painters here/, " of painters")]);
+  return cards.length < 2 ? "" : `<div class="aw-glance">${cards.map(([b, t]) => `<div><b>${esc(b)}</b><span>${esc(t)}</span></div>`).join("")}</div>`;
+}
+function awPortraitHero(slug, A, P, hlChips) {   // the portrait band, with Map pinned at its top right
+  return awPortraitHero0(slug, A, P, hlChips).replace(/^(\s*<figure[^>]*>)/, (m) => m + fdMapBtnHTML("fd-mapb-hero"));
+}
+function awSelfHero(rec) {
+  const pt = rec.portrait || {};
+  return pt.src === "self" && pt.gi != null && !/echantillon|sample|sheet|autoportraits|self-portraits|studies|history painting/i.test(pt.caption || "") && GAL.ar[pt.gi] >= 1.05 && GAL.ar[pt.gi] <= 1.5;
+}
+function awPortraitHero0(slug, A, P, hlChips) {
   const rec = (AW.port && AW.port[slug]) || {}, pt = rec.portrait || { src: "none" };
+  const famous0 = (rec.famous || []).find(gi => gi != null && gi >= 0);
   const field = (hlChips[0] && hlChips[0].h) || awHex((A.clusters && A.clusters[0] && A.clusters[0].colors[0]) || "");
+  // David, 2026-10-30: a self-portrait comes first, but only a single one that shows whole in the hero (not a
+  // sample sheet, not a very wide or very tall canvas that the crop would cut)
+  if (awSelfHero(rec)) {
+    return `<figure class="aw-pt-hero" data-pthero="${pt.gi}" data-ptself style="--c:${field}">
+      <button class="aw-pt-open" data-gi="${pt.gi}" aria-label="Open the painting"><img alt="" data-ptimg></button>
+      <figcaption>${esc(pt.caption || "Self-portrait")}${pt.year ? ", " + awY(pt.year) : ""}</figcaption>
+    </figure>`;
+  }
+  if (famous0 != null) {   // David, 2026-10-30: the most famous painting is the hero (a low-resolution self-portrait sample sheet looked cheap)
+    return `<figure class="aw-pt-hero" data-pthero="${famous0}" style="--c:${field}">
+      <button class="aw-pt-open" data-gi="${famous0}" aria-label="Open the painting"><img alt="" data-ptimg></button>
+      <figcaption data-ptfam>Loading…</figcaption>
+    </figure>`;
+  }
   if ((pt.src === "self" || pt.src === "other") && pt.gi != null) {
     return `<figure class="aw-pt-hero" data-pthero="${pt.gi}" style="--c:${field}">
       <button class="aw-pt-open" data-gi="${pt.gi}" aria-label="Open the painting"><img alt="" data-ptimg></button>
@@ -293,6 +353,17 @@ function awFillPortrait(el) {
     if (!b.isConnected) return;
     im.src = glSmall(d) ? d.img : glBig(d.img); im.alt = d.t; glSharpen(im, d); b.setAttribute("aria-label", "Open " + d.t);
     // this hero is standing in for a missing portrait (awPortraitHero): caption it as what it actually is
+    const fam = b.querySelector("[data-ptfam]");
+    if (fam) { const yr = glYear(gi); fam.textContent = `${d.t}${yr ? ", " + yr : ""}`; }
+    // a self-portrait hero never repeats in the rail; otherwise the rail keeps at most one self-portrait
+    const rail = el.querySelector("[data-awfamous]");
+    if (rail) {
+      let kept = 0, heroSelf = b.hasAttribute("data-ptself");
+      const jobs = [...rail.querySelectorAll(".gl-pin")].map(pin => glDetail(+pin.dataset.gi).then(dd => {
+        if (+pin.dataset.gi === gi || /self[- ]?portrait|autoportrait/i.test(dd.t) && (heroSelf || kept++ >= 1)) pin.remove();
+      }).catch(() => {}));
+      Promise.all(jobs).then(() => { if (rail.isConnected && rail.children.length < 2) { const h = rail.previousElementSibling; rail.remove(); if (h && h.classList.contains("sec-head")) h.remove(); } });
+    }
     const cap = b.querySelector("[data-ptnoport]");
     if (cap) { const name = cap.dataset.ptnoport, yr = glYear(gi); cap.textContent = `${d.t}${yr ? ", " + yr : ""} — no portrait of ${name} in the archive`; }
   }).catch(() => {});
@@ -302,7 +373,7 @@ function awFamousRail(slug, n) {
   const hasPortrait = ((pt.src === "self" || pt.src === "other") && pt.gi != null) || (pt.src === "wikidata" && !!pt.url);
   let list = (rec.famous || []).filter(gi => gi != null && gi >= 0);
   // its first entry is already standing in for the portrait hero above (awPortraitHero) when there isn't one
-  if (!hasPortrait && list.length) list = list.slice(1);
+  if (list.length && !awSelfHero(rec)) list = list.slice(1);   // the first is the page's hero (awPortraitHero0) unless a self-portrait took that place
   if (list.length < 2) return "";
   const note = rec.famousBy === "wikidata" ? "most widely recorded" : "closest to his signature colors";
   return `<div class="sec-head"><b>Most famous</b><span>${esc(note)}</span></div>
@@ -318,10 +389,6 @@ function awViewLoad() {
   return { rev: v.rev && typeof v.rev === "object" ? v.rev : {}, pal: v.pal !== false, cols: [2, 3, 4, 5].includes(v.cols) ? v.cols : 2, dcols: [3, 4, 5, 6, 7, 8].includes(v.dcols) ? v.dcols : 6 };   // dcols: the desktop window's own count (4, 6 or 8 across; a pinch can land between)
 }
 function awViewSave(st) { try { localStorage.setItem(AW_VIEW_KEY, JSON.stringify({ rev: st.rev, pal: st.pal, cols: st.cols, dcols: st.dcols })); } catch (e) {} }
-// the one sort picker: every sort in both directions, the current one shown (a native select styled as a chip)
-function awSortSelect(keys, st) {
-  return `<select class="aw-chipbtn aw-sortsel" data-wksel aria-label="Sort">${AW_WORKS_SORT.filter(([k]) => keys.includes(k)).map(([k]) => (AW_SORT_DIR[k][1] ? [0, 1] : [0]).map(f => `<option value="${k}:${f}"${st.sort === k && !!st.rev[k] === !!f ? " selected" : ""}>${AW_SORT_DIR[k][f]}</option>`).join("")).join("")}</select>`;
-}
 function awWorksRows(P, A) {
   const clusters = A.clusters || [];
   const cent = clusters.length > 1 ? clusters.map(c => { const pts = c.colors.map(awHex).map(h => lab(h)), n = pts.length || 1;
@@ -347,38 +414,35 @@ function awColorNear(gi, hex) {
   }
   return best;
 }
+// the Their work tab: the life's-work grid, and nothing above it. Sort, view, size and the filters live in one Settings sheet and the
+// map is one tap, both in the Their work chip (tapped again) and in the Map button (hero corner, sticky bar), the same sheet the feeds use (.fs-*, js/feed.js),
+// shown only while this grid's pictures are on screen. (David, 2026-10-25: a row of chips above the pictures costs them room.)
 function awWorksSection(slug, m, A, P) {
   const rows = awWorksRows(P, A);
   if (rows.length < 2) return "";
+  return `<div class="sec-head" id="aw-works"><b>Life's work</b><span data-wkcount>${rows.length} paintings</span></div>
+    <div class="aw-wk-mount gl-grid" data-wkmount></div>`;
+}
+const AW_ICON_SET = `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg>`;
+const AW_ICON_GRID = `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/></svg>`;
+// returns { show(on), openSettings() }; the page calls show(true) when the tab opens (the grid is drawn then, not before)
+function awWorksWire(el, slug, m, A, P, setTabMemo) {
+  const mount = el.querySelector("[data-wkmount]");
+  if (!mount) return null;
+  const rows = awWorksRows(P, A);
+  if (rows.length < 2) return null;
+  const byGi = new Map(rows.map(r => [r.gi, r]));
   const decades = [...new Set(rows.filter(r => r.y != null).map(r => Math.floor(r.y / 10) * 10))].sort((a, b) => a - b);
   const museums = [...new Set(rows.map(r => r.mus).filter(Boolean))].sort();
   const famOK = rows.some(r => r.fam >= 0);
   const allNames = [...(A.clusters || []).flatMap(c => c.colors), ...(P.sig || []).map(r => awCol(r[0])[0])];
-  const names = [...new Set(allNames.map(awCanon))].map(k => allNames.find(s => awCanon(s) === k)).slice(0, 8);
-  return `<div class="sec-head" id="aw-works"><b>Life's work</b><span data-wkcount>${rows.length} paintings</span></div>
-    <p class="aw-sub">Every painting here, his. Sort, filter, or look at them on the map.</p>
-    <div class="aw-wk-views"><div class="seg" role="tablist" aria-label="View"><button class="on" data-wkview="grid">Grid</button><button data-wkview="timeline">Timeline</button></div>
-      ${typeof mapSelect === "function" ? `<button class="aw-wk-map" data-wkmap>${GL_ICON_MAP}<span>Color map</span></button>` : ""}</div>
-    <div class="aw-wk-sort aw-wk-look">${awSortSelect(AW_WORKS_SORT.map(r => r[0]).filter(k => (k !== "mus" || museums.length > 1) && (k !== "fam" || famOK)), { sort: "year", rev: awViewLoad().rev })}<span class="aw-look2" data-wklook><button class="aw-chipbtn" data-wkpal aria-pressed="true">Palettes on</button><button class="aw-chipbtn" data-wksize aria-label="Columns">2 across</button></span></div>
-    ${`<details class="aw-more" data-wkfilter><summary>Filter</summary>
-      ${decades.length > 1 ? `<div class="aw-wk-filt"><label>From <b data-wkd0>${decades[0]}</b> to <b data-wkd1>${decades[decades.length - 1] + 9}</b></label>
-        <div class="aw-wk-range"><input type="range" data-wkr="0" min="${decades[0]}" max="${decades[decades.length - 1]}" step="10" value="${decades[0]}"><input type="range" data-wkr="1" min="${decades[0]}" max="${decades[decades.length - 1]}" step="10" value="${decades[decades.length - 1]}"></div></div>` : ""}
-      ${museums.length > 1 ? `<p class="aw-lbl">Museum</p><div class="aw-chips">${museums.map(ms => `<button class="aw-chipbtn" data-wkmus="${esc(ms)}">${esc(ms)}</button>`).join("")}</div>` : ""}
-      ${names.length ? `<p class="aw-lbl">A lot of this color</p><div class="aw-chips">${names.map(nm => `<button class="aw-wk-csw" data-wkcolor="${awHex(nm)}" aria-label="Filter by ${esc(nm)}"><i style="--c:${awHex(nm)}"></i><span>${esc(nm)}</span></button>`).join("")}<button class="aw-chipbtn" data-wkcolorclear hidden>Clear</button></div><p class="fine" data-wkcolornote hidden></p>` : ""}
-      <div data-wksubjrow hidden><p class="aw-lbl">Subject</p><div class="aw-chips" data-wksubjchips></div></div>
-    </details>`}
-    <div class="aw-wk-mount gl-grid" data-wkmount></div>`;
-}
-function awWorksWire(el, slug, m, A, P) {
-  const mount = el.querySelector("[data-wkmount]");
-  if (!mount) return;
-  const rows = awWorksRows(P, A);
-  if (rows.length < 2) return;
-  const byGi = new Map(rows.map(r => [r.gi, r]));
-  const decades = [...new Set(rows.filter(r => r.y != null).map(r => Math.floor(r.y / 10) * 10))].sort((a, b) => a - b);
+  const cnames = [...new Set(allNames.map(awCanon))].map(k => allNames.find(s => awCanon(s) === k)).slice(0, 8);
+  const sortKeys = AW_WORKS_SORT.map(r => r[0]).filter(k => (k !== "mus" || museums.length > 1) && (k !== "fam" || famOK));
   const vs = awViewLoad();
-  const st = { sort: "year", rev: vs.rev, pal: vs.pal, cols: vs.cols, dcols: vs.dcols, view: "grid", d0: decades[0], d1: decades.length ? decades[decades.length - 1] + 9 : null, mus: new Set(), colorHex: null, colorTol: 14, subj: new Set() };
-  let gridCtl = null, subjCtls = [];
+  const dLo = decades.length ? decades[0] : null, dHi = decades.length ? decades[decades.length - 1] + 9 : null;
+  const st = { sort: "year", rev: vs.rev, pal: vs.pal, cols: vs.cols, dcols: vs.dcols, view: "grid", d0: dLo, d1: dHi, mus: new Set(), colorHex: null, colorTol: 14, subj: new Set() };
+  let gridCtl = null, subjCtls = [], active = false, drawn = false, lastW = 0, onList = null;
+  const desk = () => typeof glDesk === "function" && glDesk();
   const filtered = () => { const sf = st.subj.size && SUBJ ? subjFlags(st.subj) : null; return rows.filter(r =>
     (r.y == null || st.d0 == null || (r.y >= st.d0 && r.y <= st.d1)) &&
     (!st.mus.size || st.mus.has(r.mus)) &&
@@ -395,33 +459,22 @@ function awWorksWire(el, slug, m, A, P) {
       copy.sort((a, b) => { const ga = subjGenreOf(a.gi), gb = subjGenreOf(b.gi); return (ga < 0) - (gb < 0) || n.get(gb) - n.get(ga) || ga - gb || (a.y == null) - (b.y == null) || (a.y || 0) - (b.y || 0); }); }
     return copy;
   };
-  const nCols = () => typeof glDesk === "function" && glDesk() ? st.dcols : st.cols;   // the desktop window keeps its own count
-  const setNCols = c => { if (typeof glDesk === "function" && glDesk()) st.dcols = c; else st.cols = c; };
+  const nCols = () => desk() ? st.dcols : st.cols;   // the desktop window keeps its own count
+  const setNCols = c => { if (desk()) st.dcols = c; else st.cols = c; };
   const badge = r => !r ? "" : st.sort === "year" ? ((gridCtl ? gridCtl.cols : st.cols) >= 3 ? "" : r.y != null ? awY(r.y) : "undated") : st.sort === "mus" ? r.mus : st.sort === "fam" ? (r.fam >= 0 ? "Palette " + (r.fam + 1) : "") : "";
-  const drawLook = () => {   // the chips that mirror the grid, after a pinch changed the columns
-    const look = el.querySelector("[data-wklook]"); if (!look) return;
-    const pb = look.querySelector("[data-wkpal]"), sz = look.querySelector("[data-wksize]"), palOn = st.pal && st.cols < 4;
-    if (pb) { pb.classList.toggle("on", palOn); pb.setAttribute("aria-pressed", palOn); pb.textContent = palOn ? "Palettes on" : "Palettes off"; }
-    if (sz) { const c = nCols(); sz.textContent = `${c} across`; sz.setAttribute("aria-label", `Size: ${c} across. Tap for another size.`); }
-  };
+  const changed = () => st.view !== "grid" || st.sort !== "year" || !!st.rev.year || (decades.length > 1 && (st.d0 !== dLo || st.d1 !== dHi)) || st.mus.size > 0 || !!st.colorHex || st.subj.size > 0;
   const draw = () => {
     if (gridCtl) { gridCtl.destroy(); gridCtl = null; }
     subjCtls.forEach(c => c.destroy()); subjCtls = [];
+    lastW = mount.clientWidth;
     const list = sorted(filtered());
-    const look = el.querySelector("[data-wklook]");
-    if (look) { look.hidden = st.view !== "grid" || !list.length; drawLook(); }
     const count = el.querySelector("[data-wkcount]");
     if (count) count.textContent = list.length === rows.length ? awPlural(rows.length, "painting") : `${list.length} of ${awPlural(rows.length, "painting")}`;
-    const note = el.querySelector("[data-wkcolornote]");
-    if (note) {
-      if (st.colorHex) {
-        note.hidden = false;
-        note.innerHTML = list.length ? `${list.length} of ${rows.length} come close.${st.colorTol < 30 ? ` <button class="wl" data-wkloosen>Loosen</button>` : ""}`
-          : `None this close. <button class="wl" data-wkloosen>Loosen</button> or <button class="wl" data-wkcolorclear2>clear</button>.`;
-      } else note.hidden = true;
-    }
-    if (!list.length) { mount.innerHTML = `<p class="fine">Nothing matches every filter at once.</p>`; return; }
+    if (onList) onList(list.length);
+    document.querySelectorAll("[data-awtab=work] .fd-dot").forEach(dot => { dot.hidden = !changed(); });
+    if (!list.length) { mount.style.height = ""; mount.innerHTML = `<p class="fine">Nothing matches every filter at once. Open Settings to loosen one.</p>`; return; }
     if (st.view === "timeline") {
+      mount.style.height = "";
       let last, html = "";
       list.forEach(r => {
         const dec = r.y != null ? Math.floor(r.y / 10) * 10 : null;
@@ -432,65 +485,136 @@ function awWorksWire(el, slug, m, A, P) {
       glFill(mount);
     } else if (st.sort === "subj" && SUBJ) {
       // one small labeled section per genre (the list is already grouped), each its own grid; a pinch in one sets the columns of all
+      mount.style.height = "";
       const groups = []; list.forEach(r => { const g = subjGenreOf(r.gi), last = groups[groups.length - 1]; if (last && last.g === g) last.rows.push(r); else groups.push({ g, rows: [r] }); });
       mount.innerHTML = groups.map((gr, k) => `<section class="aw-subj-sec"><p class="aw-subj-h"><b>${esc(subjGenreLabel(gr.g))}</b><span>${gr.rows.length}</span></p><div class="aw-subj-m gl-grid" data-wksm="${k}"></div></section>`).join("");
       groups.forEach((gr, k) => { const host = mount.querySelector(`[data-wksm="${k}"]`);
         subjCtls.push(glGrid(host, { list: gr.rows.map(r => r.gi), badge: null, cols: nCols(), exact: true, plain: !st.pal, pinch: true,
-          onCols: c => { setNCols(c); awViewSave(st); drawLook(); subjCtls.forEach(x => x.setCols(c)); } })); });
+          onCols: c => { setNCols(c); awViewSave(st); subjCtls.forEach(x => x.setCols(c)); } })); });
     } else {
       mount.innerHTML = "";
       gridCtl = glGrid(mount, { list: list.map(r => r.gi), badge: gi => badge(byGi.get(gi)), cols: nCols(), exact: true, plain: !st.pal, pinch: true,
-        onCols: c => { setNCols(c); awViewSave(st); drawLook(); } });
+        onCols: c => { setNCols(c); awViewSave(st); } });
     }
   };
-  el.querySelectorAll("[data-wkr]").forEach(inp => inp.oninput = () => {
-    const a = el.querySelector('[data-wkr="0"]'), b = el.querySelector('[data-wkr="1"]');
-    if (+a.value > +b.value) { if (inp === a) b.value = a.value; else a.value = b.value; }
-    st.d0 = +a.value; st.d1 = +b.value + 9;
-    const l0 = el.querySelector("[data-wkd0]"), l1 = el.querySelector("[data-wkd1]");
-    if (l0) l0.textContent = a.value; if (l1) l1.textContent = +b.value + 9;
-    draw();
-  });
-  const sel = el.querySelector("[data-wksel]");
-  if (sel) sel.onchange = () => { const [k, f] = sel.value.split(":"); st.sort = k; st.rev[k] = f === "1"; awViewSave(st); buzz(5);
-    if (k === "subj" && !SUBJ) { mount.innerHTML = `<p class="fine">Reading what each painting shows…</p>`; loadSubjects().then(draw).catch(() => { st.sort = "year"; sel.value = "year:0"; toast("Subjects didn't load"); draw(); }); }
-    else draw(); };
-  // Subject filter: this painter's own top subjects with counts, once the data is in (nothing shows if it never loads)
-  const subjRowEl = el.querySelector("[data-wksubjrow]"), subjChips = el.querySelector("[data-wksubjchips]");
-  let subjMore = false;
-  const drawSubjChips = () => {
-    if (!SUBJ || !subjChips) return;
-    const cnt = new Map(); rows.forEach(r => { const seen = new Set(); subjOf(r.gi).forEach(x => { if (!seen.has(x.t)) { seen.add(x.t); cnt.set(x.t, (cnt.get(x.t) || 0) + 1); } }); });
-    const all = [...cnt].filter(([t, n]) => n >= 2 || st.subj.has(t)).sort((a, b) => (st.subj.has(b[0]) - st.subj.has(a[0])) || b[1] - a[1]);
-    if (!all.length) { subjRowEl.hidden = true; return; }
-    const show = subjMore ? all.slice(0, 40) : all.filter(([t], k) => k < 8 || st.subj.has(t));
-    subjRowEl.hidden = false;
-    subjChips.innerHTML = show.map(([t, n]) => `<button class="aw-chipbtn${st.subj.has(t) ? " on" : ""}" data-wksubj="${t}">${esc(subjName(t))} <em class="aw-chipn">${n}</em></button>`).join("")
-      + (!subjMore && all.length > show.length ? `<button class="aw-chipbtn" data-wksubjmore>More subjects</button>` : "");
+
+  // the painting nearest the top of the screen, below the chip row: the map opens centered on it
+  const topPainting = () => {
+    const bar = el.querySelector(".aw-tabs"), bh = bar ? bar.getBoundingClientRect().bottom : 0; let best = null;
+    mount.querySelectorAll("[data-gi]").forEach(p => {
+      const gi = +p.dataset.gi; if (!(gi >= 0)) return;
+      const r = p.getBoundingClientRect(); if (!r.width || r.bottom <= bh + 4 || r.top >= innerHeight) return;
+      if (!best || r.top < best.t - 2 || (Math.abs(r.top - best.t) <= 2 && r.left < best.l)) best = { gi, t: r.top, l: r.left };
+    });
+    return best ? best.gi : rows[0].gi;
   };
-  if (subjRowEl) loadSubjects().then(() => { if (el.isConnected) drawSubjChips(); }).catch(() => {});
-  el.addEventListener("click", e => {
-    const v = e.target.closest("[data-wkview]"); if (v) { el.querySelectorAll("[data-wkview]").forEach(b => b.classList.toggle("on", b === v)); st.view = v.dataset.wkview; buzz(5); return draw(); }
-    if (e.target.closest("[data-wkpal]")) {
-      if (st.cols >= 4) { st.cols = 3; st.pal = true; } else st.pal = !st.pal;   // palettes need room: step back to 3 across
-      awViewSave(st); buzz(5); return draw();
-    }
-    if (e.target.closest("[data-wksize]")) { if (typeof glDesk === "function" && glDesk()) { const o = [4, 6, 8]; st.dcols = o.find(x => x > st.dcols) || o[0]; } else st.cols = st.cols >= 5 ? 2 : st.cols + 1; awViewSave(st); buzz(5); return draw(); }
-    const sj = e.target.closest("[data-wksubj]"); if (sj) { const t = +sj.dataset.wksubj; if (st.subj.has(t)) st.subj.delete(t); else st.subj.add(t); buzz(5); drawSubjChips(); return draw(); }
-    if (e.target.closest("[data-wksubjmore]")) { subjMore = true; return drawSubjChips(); }
-    const ms = e.target.closest("[data-wkmus]"); if (ms) { const on = ms.classList.toggle("on"); if (on) st.mus.add(ms.dataset.wkmus); else st.mus.delete(ms.dataset.wkmus); return draw(); }
-    const cw = e.target.closest("[data-wkcolor]"); if (cw) { st.colorHex = cw.dataset.wkcolor; st.colorTol = 14; el.querySelectorAll("[data-wkcolor]").forEach(b => b.classList.toggle("on", b === cw)); const cl = el.querySelector("[data-wkcolorclear]"); if (cl) cl.hidden = false; return draw(); }
-    if (e.target.closest("[data-wkcolorclear], [data-wkcolorclear2]")) { st.colorHex = null; el.querySelectorAll("[data-wkcolor]").forEach(b => b.classList.remove("on")); const cl = el.querySelector("[data-wkcolorclear]"); if (cl) cl.hidden = true; return draw(); }
-    if (e.target.closest("[data-wkloosen]")) { st.colorTol += 8; return draw(); }
-    if (e.target.closest("[data-wkmap]")) return mapSelect({ title: A.name, colors: awPainterHexes(A, P), source: "painter", id: slug });
-  });
-  draw();
+  const openMap = () => {
+    if (typeof pmGo !== "function") return;
+    let spec = `arr=spiral&seed=${topPainting()}&p=${encodeURIComponent(slug)}`;
+    if (decades.length > 1 && (st.d0 !== dLo || st.d1 !== dHi)) spec += `&y0=${st.d0}&y1=${st.d1}`;
+    if (setTabMemo) setTabMemo();
+    buzz(6); pmGo(spec);
+  };
+
+  // ----- the Settings sheet (same sheet and styles as the feeds', css/gallery.css .fs-*) -----
+  function openSettings() {
+    if (document.querySelector(".fs-sheet")) return;
+    document.querySelectorAll("[data-awtab=work]").forEach(c => c.classList.add("fd-open"));
+    const mx = typeof glMaxCols === "function" ? glMaxCols() : 5, sizeWord = n => `${n} across`;
+    const seg = (k, label, opts, cur) => `<div class="fs-c"><div class="fs-row"><p>${label}</p></div><div class="fs-seg" data-wkseg="${k}">${opts.map(([v, t]) => `<button type="button" data-v="${v}" aria-pressed="${cur === v}">${t}</button>`).join("")}</div></div>`;
+    const sortOpts = AW_WORKS_SORT.filter(([k]) => sortKeys.includes(k)).map(([k]) => (AW_SORT_DIR[k][1] ? [0, 1] : [0]).map(f => `<option value="${k}:${f}"${st.sort === k && !!st.rev[k] === !!f ? " selected" : ""}>${AW_SORT_DIR[k][f]}</option>`).join("")).join("");
+    const body = seg("view", "Show", [["grid", "Grid"], ["timeline", "Timeline"]], st.view)
+      + `<div class="fs-c"><div class="fs-row"><p>Order</p></div><label class="fs-select"><select data-wksel aria-label="Order">${sortOpts}</select></label></div>`
+      + (decades.length > 1 ? `<div class="fs-c"><div class="fs-row"><p>Painted between</p><b data-fs-out="yrs"></b></div><div class="fs-dual"><div class="fs-track"><i data-fs-fill></i></div><input type="range" min="${decades[0]}" max="${decades[decades.length - 1]}" step="10" value="${st.d0}" data-wkr="0" aria-label="From"><input type="range" min="${decades[0]}" max="${decades[decades.length - 1]}" step="10" value="${st.d1 - 9}" data-wkr="1" aria-label="To"></div></div>` : "")
+      + (museums.length > 1 ? `<div class="fs-c"><div class="fs-row"><p>Museum</p></div><div class="fs-multi" data-wkmuseums>${museums.map(ms => `<button type="button" data-wkmus="${esc(ms)}" aria-pressed="${st.mus.has(ms)}">${esc(ms)}</button>`).join("")}</div></div>` : "")
+      + (cnames.length ? `<div class="fs-c"><div class="fs-row"><p>A lot of this color</p><button type="button" class="fs-reset aw-fs-clr" data-wkcolorclear${st.colorHex ? "" : " hidden"}>Clear</button></div><div class="fs-multi" data-wkcolors>${cnames.map(nm => { const hx = awHex(nm); return `<button type="button" class="aw-fs-csw" data-wkcolor="${hx}" aria-pressed="${st.colorHex === hx}"><i style="--c:${hx}"></i>${esc(nm)}</button>`; }).join("")}</div><p class="fs-note" data-wkcolornote hidden></p></div>` : "")
+      + `<div class="fs-c" data-wksubjrow hidden><div class="fs-row"><p>Subject</p></div><div class="fs-multi" data-wksubjchips></div></div>`
+      + `<div class="fs-c"><div class="fs-row"><p>Size</p><b data-fs-out="size"></b></div><input type="range" min="2" max="${mx}" step="1" value="${nCols()}" data-wksize aria-label="Size"><div class="fs-prev" data-fs-prev></div></div>`
+      + (desk() ? "" : `<div class="fs-c fs-tg"><p>Palettes under the pictures</p><button type="button" class="fs-switch" role="switch" aria-checked="true" data-wkpal><i></i></button></div>`);
+    const { sh, close } = sheet(`<div class="fs-sheet"><div class="fs-head"><h3>Their work</h3><span class="fs-count" data-fs-count aria-live="polite"></span><button type="button" class="fs-reset" data-fs-reset>Reset</button></div><div class="fs-scroll">${body}</div></div>`, { lock: false });
+    sh.classList.add("fs-half");
+    { const sc = sh.previousElementSibling; if (sc && sc.classList.contains("scrim")) sc.classList.add("hm-scrim-clear"); }
+    { const x = document.createElement("button"); x.type = "button"; x.className = "iconq fs-x"; x.setAttribute("aria-label", "Close"); x.innerHTML = ICON.x; x.onclick = () => { buzz(4); close(); }; sh.querySelector(".fs-head").appendChild(x); }
+    const q = s2 => sh.querySelector(s2), out = (k, t) => { const o = q(`[data-fs-out="${k}"]`); if (o) o.textContent = t; };
+    const fill = r => { const lo = +r.min, hi = +r.max; r.style.setProperty("--p", ((r.value - lo) / (hi - lo) * 100) + "%"); };
+    const countEl = q("[data-fs-count]");
+    const paint = () => {
+      sh.querySelectorAll("input[type=range]:not([data-wkr])").forEach(fill);
+      if (decades.length > 1) {
+        out("yrs", `${st.d0} to ${st.d1}`);
+        const f = q("[data-fs-fill]"); if (f) { f.style.left = (st.d0 - dLo) / (dHi - dLo) * 100 + "%"; f.style.right = (dHi - st.d1) / (dHi - dLo) * 100 + "%"; }
+      }
+      out("size", sizeWord(nCols()));
+      const pv = q("[data-fs-prev]"); if (pv) { const c = nCols(); pv.style.gridTemplateColumns = `repeat(${c},1fr)`; pv.innerHTML = Array.from({ length: Math.min(c * 2, 12) }, (_, k) => `<i style="--k:${k % 3}"></i>`).join(""); }
+      const pb = q("[data-wkpal]"); if (pb) pb.setAttribute("aria-checked", st.pal && st.cols < 4);
+      const note = q("[data-wkcolornote]"), cl = q("[data-wkcolorclear]");
+      if (cl) cl.hidden = !st.colorHex;
+      if (note) { if (st.colorHex && lastList != null) { note.hidden = false; note.innerHTML = lastList ? `${lastList} of ${rows.length} come close.${st.colorTol < 30 ? ` <button type="button" class="wl" data-wkloosen>Loosen</button>` : ""}` : `None this close. <button type="button" class="wl" data-wkloosen>Loosen</button>`; } else note.hidden = true; }
+    };
+    let lastList = null;
+    onList = n => { lastList = n; if (sh.isConnected) { if (countEl) countEl.textContent = awPlural(n, "painting"); paint(); } };
+    onList(sorted(filtered()).length);
+    // subjects the painter has two or more of (nothing shows if the data never loads)
+    const subjRowEl = q("[data-wksubjrow]"), subjChips = q("[data-wksubjchips]");
+    let subjMore = false;
+    const drawSubjChips = () => {
+      if (!SUBJ || !subjChips || !sh.isConnected) return;
+      const cnt = new Map(); rows.forEach(r => { const seen = new Set(); subjOf(r.gi).forEach(x => { if (!seen.has(x.t)) { seen.add(x.t); cnt.set(x.t, (cnt.get(x.t) || 0) + 1); } }); });
+      const all = [...cnt].filter(([t, n]) => n >= 2 || st.subj.has(t)).sort((a, b) => (st.subj.has(b[0]) - st.subj.has(a[0])) || b[1] - a[1]);
+      if (!all.length) { subjRowEl.hidden = true; return; }
+      const show = subjMore ? all.slice(0, 40) : all.filter(([t], k) => k < 8 || st.subj.has(t));
+      subjRowEl.hidden = false;
+      subjChips.innerHTML = show.map(([t, n]) => `<button type="button" data-wksubj="${t}" aria-pressed="${st.subj.has(t)}">${esc(subjName(t))} <em class="aw-chipn">${n}</em></button>`).join("")
+        + (!subjMore && all.length > show.length ? `<button type="button" data-wksubjmore>More subjects</button>` : "");
+    };
+    loadSubjects().then(drawSubjChips).catch(() => {});
+    sh.addEventListener("input", e => {
+      const r = e.target.closest("[data-wkr]"), z = e.target.closest("[data-wksize]");
+      if (z) { setNCols(+z.value); awViewSave(st); draw(); return; }
+      if (r) {
+        const a = q('[data-wkr="0"]'), b = q('[data-wkr="1"]');
+        if (+a.value > +b.value) { if (r === a) b.value = a.value; else a.value = b.value; }
+        st.d0 = +a.value; st.d1 = +b.value + 9; draw();
+      }
+    });
+    sh.addEventListener("change", e => {
+      const s = e.target.closest("[data-wksel]"); if (!s) return;
+      const [k, f] = s.value.split(":"); st.sort = k; st.rev[k] = f === "1"; awViewSave(st); buzz(5);
+      if (k === "subj" && !SUBJ) { mount.innerHTML = `<p class="fine">Reading what each painting shows…</p>`; loadSubjects().then(draw).catch(() => { st.sort = "year"; s.value = "year:0"; toast("Subjects didn't load"); draw(); }); }
+      else draw();
+    });
+    sh.addEventListener("click", e => {
+      const sg = e.target.closest("[data-wkseg] button"), pb = e.target.closest("[data-wkpal]"), ms = e.target.closest("[data-wkmus]"), cw = e.target.closest("[data-wkcolor]"), sj = e.target.closest("[data-wksubj]");
+      if (sg) { st.view = sg.dataset.v; sg.parentNode.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === sg)); buzz(4); draw(); }
+      else if (pb) { if (st.cols >= 4) { st.cols = 3; st.pal = true; const z = q("[data-wksize]"); if (z) z.value = st.cols; } else st.pal = !st.pal; awViewSave(st); buzz(4); draw(); }   // palettes need room: step back to 3 across
+      else if (ms) { const on = ms.getAttribute("aria-pressed") !== "true"; ms.setAttribute("aria-pressed", on); if (on) st.mus.add(ms.dataset.wkmus); else st.mus.delete(ms.dataset.wkmus); buzz(4); draw(); }
+      else if (cw) { const on = st.colorHex !== cw.dataset.wkcolor; st.colorHex = on ? cw.dataset.wkcolor : null; st.colorTol = 14; sh.querySelectorAll("[data-wkcolor]").forEach(b => b.setAttribute("aria-pressed", b === cw && on)); buzz(4); draw(); }
+      else if (e.target.closest("[data-wkcolorclear]")) { st.colorHex = null; sh.querySelectorAll("[data-wkcolor]").forEach(b => b.setAttribute("aria-pressed", false)); buzz(4); draw(); }
+      else if (e.target.closest("[data-wkloosen]")) { st.colorTol += 8; buzz(4); draw(); }
+      else if (sj) { const t = +sj.dataset.wksubj; if (st.subj.has(t)) st.subj.delete(t); else st.subj.add(t); buzz(4); drawSubjChips(); draw(); }
+      else if (e.target.closest("[data-wksubjmore]")) { subjMore = true; drawSubjChips(); }
+      else if (e.target.closest("[data-fs-reset]")) {
+        st.view = "grid"; st.sort = "year"; st.rev = {}; st.d0 = dLo; st.d1 = dHi; st.mus = new Set(); st.colorHex = null; st.colorTol = 14; st.subj = new Set();
+        awViewSave(st); buzz(5); draw(); onList = null; close(); setTimeout(openSettings, 120);
+      }
+    });
+    const obs = new MutationObserver(() => { if (!sh.isConnected) { onList = null; obs.disconnect(); document.querySelectorAll("[data-awtab=work]").forEach(c => c.classList.remove("fd-open")); } }); obs.observe(document.body, { childList: true, subtree: true });
+  }
+  return {
+    openSettings, openMap, changed,
+    toggleSettings() { if (document.querySelector(".sheet.fs-half")) { const x = document.querySelector(".sheet.fs-half .fs-x"); if (x) x.click(); } else openSettings(); },
+    show(on) {
+      active = on;
+      if (on) { if (!drawn || Math.abs(mount.clientWidth - lastW) > 1) { drawn = true; draw(); } else if (gridCtl) gridCtl.draw(); }
+    },
+  };
 }
 
 // ======================================================================
 // Painter pages
 // ======================================================================
 // painter slugs renamed by the 2026-10-10 European expansion (Wikidata's fuller names); old links keep working
+const AW_TAB = new Map();   // painter slug -> the tab the page was left on (Overview / Their work / Their colors); a Back reopens it
 const AW_SLUG_MOVED = { "david-teniers": "david-teniers-the-younger", "camille-corot": "jean-baptiste-camille-corot", "lucas-cranach": "lucas-cranach-the-elder" };
 function awPainter(slug, push = true) {
   slug = AW_SLUG_MOVED[slug] || slug;
@@ -505,6 +629,7 @@ function awPainter(slug, push = true) {
   if (!AW.P.has(slug)) return awWait(awPainter, [slug, push], () => awPainterLoad(slug));
   const m = AW.meta.a[slug], { A, P } = AW.P.get(slug);
   if (!m) { toast("No data for this painter"); return xToOrigin(); }
+  const backNav = BACK_RENDER;   // read before show() clears it: a Back brings the tab you left
   if (push) XSTACK.push("aw:painter:" + slug);
   const n = A.n, small = n < 10;
   const dates = m.b != null ? `${awY(m.b)}–${m.d != null ? awY(m.d) : ""}` : (m.y0 ? `works dated ${m.y0}–${m.y1}` : "");
@@ -545,7 +670,7 @@ function awPainter(slug, push = true) {
       ${av ? `<details class="aw-more"><summary>Colors he avoids</summary><p class="aw-sub">Much less of these than the same museums' paintings have.</p><div class="aw-chips">${av}</div></details>` : ""}
       ${ch ? `<details class="aw-more"><summary>Favorite pairs and chords</summary><p class="aw-sub">Colors that share a canvas more than chance predicts. Pairs seen in fewer than 4 paintings are left out.</p>${ch}</details>` : ""}`;
   } else if (small) {
-    colors = `<div class="sec-head"><b>Colors</b><span>${n} paintings</span></div><p class="aw-sub">Only ${n} paintings here, too few for a signature. Palettes and the barcode above are a sketch, not a finding.</p>`;
+    colors = `<div class="sec-head"><b>Colors</b><span>${n} paintings</span></div><p class="aw-sub">Only ${n} paintings here, too few for a signature. Their palettes are a sketch, not a finding.</p>`;
   }
 
   // over time
@@ -558,32 +683,95 @@ function awPainter(slug, push = true) {
   const hlChips = small ? [] : awSigChips(P.sig, P.ix);
   const hlExt = small ? "" : awExtreme([["L", "Darker", "Lighter"], ["C", "Less colorful", "More colorful"], ["W", "Cooler", "Warmer"]].map(([k, lo, hi]) => m[k] == null ? null : awPctWords(k, m[k], lo, hi)));
   const hlLine = small ? esc(`Only ${awPlural(n, "painting")} here: a sketch, not a finding.`) : awLineJoin(hlExt, awReach(hlChips[0]), `from ${n} paintings, as photographed`);
+  // The shape every page shares (David, 2026-10-25; the color page first): the portrait band, then ONE sticky chip row, then one
+  // pane at a time. Overview is the reading (bio, palettes, over time, compared); Their work is the life's-work grid, with Settings
+  // and Map in a floating pill (js/artwiki.js awWorksWire); Their colors is the painter's color map and their signature colors.
+  const hasWork = awWorksRows(P, A).length >= 2, hasColors = n >= 2 && (typeof pcOpen === "function" || !!colors);
+  const TABS = [["about", "Overview"], ...(hasWork ? [["work", "Their work"]] : []), ...(hasColors ? [["colors", "Their colors"]] : [])];
+  const TUNE = { work: 1 };   // the tabs whose Settings are the active chip tapped again
+  const prevTok = typeof XSTACK !== "undefined" && XSTACK.length > 1 ? String(XSTACK[XSTACK.length - 2]) : "";
+  const memoTab = backNav ? AW_TAB.get(slug) : null;
+  const startTab0 = memoTab || (/\/colors$/.test(location.hash) ? "colors" : /^(g:|pt:|sv:|pal:|ph:)/.test(prevTok) || /^r:.*(\/paintings\/map|\/gallery\/|\/painting\/)/.test(prevTok) ? "work" : "about");
+  const startTab = TABS.some(t => t[0] === startTab0) ? startTab0 : "about";
+  const cmapHexes = awPainterHexes(A, P).slice(0, 14);
+  const decPicks = awDecadePicks(slug, P, n), decRail = awDecadeRail(decPicks);
+  const colorsPane = hasColors ? `${typeof pcOpen === "function" ? `<div class="aw-cmap">${cmapHexes.length >= 2 ? awStrip(cmapHexes, 34) : ""}<p class="aw-sub">Every color they used, sized by how many of their paintings hold it, and five ways to arrange them.</p><button class="aw-pcolors" data-awcolors="${esc(slug)}">${icon("map", 20)}<span>Open their color map</span></button></div>` : ""}${colors}` : "";
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
-    <div class="aw-head"><div><p class="eyebrow p-type">Painter</p><h1 class="p-title">${esc(A.name)}</h1><p class="p-dek">${dek}</p></div></div>
-    ${n >= 2 ? `<button class="aw-pmap-top" data-pmap="arr=color&p=${esc(slug)}">${GL_ICON_MAP}<span>Painting map</span></button>` : ""}
-    ${awPortraitHero(slug, A, P, small ? [] : awSigChips(P.sig, P.ix))}
-    ${awFamousRail(slug, n)}
-    ${awWorksSection(slug, m, A, P)}
-    <div data-awbio></div>
-    <div class="aw-you" data-aw-you></div>
-    ${awHighlight(P.typical != null ? P.typical : -1, hlLine, hlChips)}
-    ${n >= 2 ? `<button class="gl-pmap aw-pmap" data-pmap="arr=color&p=${esc(slug)}">${GL_ICON_MAP}<span>Their work on the map</span>${ICON.chev}</button>` : ""}
-    ${palettes}
-    ${colors}
-    ${time}
-    ${compared}
-    <div class="aw-acts" data-aw-acts></div>
-    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "painter:" + slug, title: A.name }) : ""}
-    <section class="srcs"><h3>Sources</h3><ul>
-      <li>Colors measured by Chromatlas from museum photographs (${A.n} paintings by ${esc(A.name)} in the archive); every figure is as photographed, screen color only.</li>
-      ${m.q ? `<li>Dates, nationality, movement, teachers and portrait: <a href="https://www.wikidata.org/wiki/${m.q}" target="_blank" rel="noopener">Wikidata</a> (CC0)${m.wp ? ` · <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(m.wp)}" target="_blank" rel="noopener">Wikipedia</a>` : ""}${m.img ? ` · portrait: <a href="https://commons.wikimedia.org/wiki/File:${encodeURIComponent(m.img)}" target="_blank" rel="noopener">Wikimedia Commons</a>` : ""}</li>` : `<li>No Wikidata match was found for this name, so dates come from the paintings themselves.</li>`}
-    </ul></section>`, "article aw-page");
+    <div class="aw-herowrap">
+      ${awPortraitHero(slug, A, P, small ? [] : awSigChips(P.sig, P.ix))}
+      <div class="aw-head"><div><p class="eyebrow p-type">Painter</p><h1 class="p-title">${esc(A.name)}</h1><p class="p-dek">${dek}</p></div></div>
+    </div>
+    ${small ? "" : `<div class="aw-hstrip">${awStrip(awVividStrip(slug, P, (cmapHexes.filter(h => !awNearBlack(h)).length >= 4 ? cmapHexes.filter(h => !awNearBlack(h)) : cmapHexes).slice(0, 8)), 40)}</div>`}
+    ${small ? "" : awGlance(n, decPicks, hlExt)}
+    ${TABS.length > 1 ? `<div class="fd-bar aw-tabs"><div class="fd-chips" role="tablist" aria-label="About ${esc(A.name)}, their work, their colors">${TABS.map(([k, t]) => `<button class="fd-chip${k === startTab ? " on" : ""}" role="tab" data-awtab="${k}" aria-selected="${k === startTab}"${TUNE[k] ? ` aria-haspopup="dialog"` : ""}>${t}${TUNE[k] ? `<span class="fd-tune" aria-hidden="true">${FD_ICON_TUNE}</span><i class="fd-dot" hidden></i>` : ""}</button>`).join("")}</div></div>` : ""}
+    <div class="aw-pane" data-awpane="about"${startTab === "about" ? "" : " hidden"}>
+      <div data-awbio></div>
+      ${decRail}
+      ${awFamousRail(slug, n)}
+      <div class="aw-you" data-aw-you></div>
+      ${awHighlight(P.typical != null ? P.typical : -1, hlLine, hlChips)}
+      ${awSimilarPainters(slug)}
+      <details class="aw-more aw-meas"><summary>The measurements <small>palettes, over time, compared</small></summary>
+        ${palettes}
+        ${time}
+        ${compared}
+      </details>
+      <div class="aw-acts" data-aw-acts></div>
+      ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "painter:" + slug, title: A.name }) : ""}
+      <section class="srcs"><h3>Sources</h3><ul>
+        <li>Colors measured by Chromatlas from museum photographs (${A.n} paintings by ${esc(A.name)} in the archive); every figure is as photographed, screen color only.</li>
+        ${m.q ? `<li>Dates, nationality, movement, teachers and portrait: <a href="https://www.wikidata.org/wiki/${m.q}" target="_blank" rel="noopener">Wikidata</a> (CC0)${m.wp ? ` · <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(m.wp)}" target="_blank" rel="noopener">Wikipedia</a>` : ""}${m.img ? ` · portrait: <a href="https://commons.wikimedia.org/wiki/File:${encodeURIComponent(m.img)}" target="_blank" rel="noopener">Wikimedia Commons</a>` : ""}</li>` : `<li>No Wikidata match was found for this name, so dates come from the paintings themselves.</li>`}
+      </ul></section>
+    </div>
+    ${hasWork ? `<div class="aw-pane" data-awpane="work"${startTab === "work" ? "" : " hidden"}>${awWorksSection(slug, m, A, P)}</div>` : ""}
+    ${hasColors ? `<div class="aw-pane" data-awpane="colors"${startTab === "colors" ? "" : " hidden"}>${colorsPane}</div>` : ""}`, "article aw-page");
   awWire(el);
+  fdTopBar(el, A.name);
   if (typeof wireLinks === "function") wireLinks(el);
   awFillHighlight(el);
   awFillPortrait(el);
-  awWorksWire(el, slug, m, A, P);
+  // the chip row: one pane at a time, the page remembers the tab, the Settings / Map pill belongs to Their work
+  let tab = startTab;
+  const bar = el.querySelector(".aw-tabs"), artTop = el.querySelector(".art-top");
+  const setBarTop = () => { if (!bar) return; if (typeof glDesk === "function" && glDesk()) { bar.style.top = ""; return; } bar.style.top = (artTop ? Math.round(artTop.getBoundingClientRect().height) - 1 : 0) + "px"; };
+  const worksCtl = hasWork ? awWorksWire(el, slug, m, A, P, () => AW_TAB.set(slug, "work")) : null;
+  const setTab = (k, quiet) => {
+    if (!TABS.some(t => t[0] === k)) return;
+    // a tab change keeps the chips where they are: if you had scrolled below the top of the page's chip row, the new pane starts at its top
+    const y0 = scrollY;
+    tab = k; AW_TAB.set(slug, k);
+    el.querySelectorAll("[data-awtab]").forEach(b => { const on = b.dataset.awtab === k; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
+    el.querySelectorAll("[data-awpane]").forEach(pn => { pn.hidden = pn.dataset.awpane !== k; });
+    if (worksCtl) worksCtl.show(k === "work");
+    if (!quiet) { buzz(4); if (k === "about") fdKeepScroll(y0, pinY); else pinTabs(); }
+  };
+  // a tab change brings the chip row to the top of the screen (the pane fills it); the active "Their work" chip tapped again is its Settings
+  const pinY = () => { const desk = typeof glDesk === "function" && glDesk(); return Math.max(0, Math.round(bar.getBoundingClientRect().top + scrollY - (desk || !artTop ? 0 : artTop.getBoundingClientRect().height))); };
+  const pinTabs = () => {
+    if (!bar) return;
+    if (!fdPinOrKeep(pinY, true)) return;   // already pinned: the scroll stays
+    setTimeout(() => { if (bar.isConnected && scrollY < pinY() - 3) scrollTo(0, pinY()); }, 560);
+  };
+  if (bar) bar.onclick = e => {
+    const b = e.target.closest("[data-awtab]"); if (!b) return;
+    if (b.dataset.awtab === tab) { if (tab === "work" && worksCtl) { buzz(4); worksCtl.toggleSettings(); } else if (tab !== "about") pinTabs(); return; }
+    { const x = document.querySelector(".sheet.fs-half .fs-x"); if (x) x.click(); }
+    setTab(b.dataset.awtab);
+  };
+  // Map (hero, top right, and the sticky row's right end): their work on the map, around the painting nearest the top of the Their work grid
+  const mapGo = () => {
+    if (worksCtl) return worksCtl.openMap();
+    if (typeof pmGo !== "function") return;
+    const gi = P.typical != null && P.typical >= 0 ? P.typical : (awWorksRows(P, A)[0] || {}).gi;
+    pmGo(`arr=spiral&seed=${gi >= 0 ? gi : 0}&p=${encodeURIComponent(slug)}`);
+  };
+  fdBarTools(bar); if (bar) fdStickWire(bar);
+  el.querySelectorAll("[data-fdmap]").forEach(b => { b.onclick = mapGo; });
+  setBarTop(); setTimeout(setBarTop, 120);
+  const onRS = () => setBarTop(); addEventListener("resize", onRS); cleanup.push(() => removeEventListener("resize", onRS));
+  AW_TAB.set(slug, tab);
+  if (worksCtl) worksCtl.show(tab === "work");
   glFill(el);   // hydrates the "Most famous" rail's pins once their shard lands
   // js/paintingsof.js (L26): colors used in a quarter of the works, inside the Colors drawer (it inserts before the
   // first [data-awbio] of the element it's handed, so it gets the drawer's own placeholder, not the bio slot)
@@ -622,7 +810,7 @@ function awPainter(slug, push = true) {
     const hx = awPainterHexes(A, P);
     paintSet = colorSet({ kind: "painter", id: slug, title: A.name, colors: hx.map(h => ({ h })), src: "painter/" + slug,
       ...(hx.length > 3 ? { pick: k => hx.slice(0, k).map(h => ({ h })), max: hx.length } : {}) });
-    const row = csActions(paintSet, { only: ["keep", "map"], back: () => awPainter(slug, false) });
+    const row = csActions(paintSet, { only: ["keep", "map"], labels: { map: "Their colors" }, back: () => awPainter(slug, false) });
     const cmp = document.createElement("button"); cmp.className = "cs-act"; cmp.dataset.awvs = slug; cmp.innerHTML = `${ICON.search}<span>Compare</span>`;
     row.insertBefore(cmp, row.firstChild);
     row.style.setProperty("--n", row.children.length); row.dataset.n = row.children.length;
@@ -636,7 +824,7 @@ function awPainter(slug, push = true) {
     { title: A.name, items: [
       ...(typeof whosePalette === "function" ? [{ t: "Whose palette?", n: `Guess ${A.name.split(" ").pop()} from five colors`, run: () => whosePalette(slug) }] : []),
       ...(typeof ooWithItem === "function" ? ooWithItem("painter", slug) : []),   // js/games/oo-with.js: Odd one out with their colors
-      { t: "Filters", n: "Sort their paintings", run: () => { const s = el.querySelector(".aw-wk-sort"); if (s) s.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" }); } },
+      ...(worksCtl ? [{ t: "Settings", n: "Sort, filter and resize their paintings", run: () => { setTab("work"); worksCtl.openSettings(); } }] : []),
       ...(P.typical >= 0 ? [{ t: "Their most typical painting", run: () => galleryPage(P.typical, true) }] : []),
       { t: "Sources", run: () => { const s = el.querySelector(".srcs"); if (s) s.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" }); } },
     ] },
@@ -737,6 +925,19 @@ function awComparedSection(slug, m, A, P) {
     <div class="aw-typs">${typ(P.atypical, "Least typical")}</div>
     ${near.length ? `<p class="aw-lbl">Paints like</p><div class="aw-near">${near.map(x => `<button class="aw-tie" data-awpainter="${x.slug}"><b>${esc(x.name)}</b><span>palette distance ${x.d.toFixed(2)}</span></button>`).join("")}</div><p class="fine">Nearest painters by six numbers: lightness, chroma, warmth, vivid share, muted share and color variety, across all ${AW.list.length}.</p>` : ""}
     ${ties}`;
+}
+
+// Similar painters: working in the same years (midpoint of dated work within 40 years) and close in lightness, vividness and warmth.
+const awMiniFam = slug => { const g = (((AW.port && AW.port[slug]) || {}).famous || []).find(i => i != null && i >= 0); return g == null ? "" : `<span class="aw-minif">${[0, 1, 2, 3].map(j => `<i style="--c:${glHex(g, j)}"></i>`).join("")}</span>`; };
+function awSimilarPainters(slug) {
+  const me = AW.meta.a[slug]; if (!me || me.y0 == null || me.L == null || me.k < 5) return "";
+  const mid = m => (m.y0 + m.y1) / 2, M = mid(me);
+  const rows = AW.list.filter(x => x.slug !== slug && x.k >= 8 && x.y0 != null && x.L != null && x.y1 - x.y0 <= 90 && Math.abs(mid(x) - M) <= 40)
+    .map(x => ({ x, d: Math.hypot((x.L - me.L) / 12, (x.C - me.C) / 8, (x.W - me.W) / .2, (mid(x) - M) / 30) })).sort((a, b) => a.d - b.d).slice(0, 8);
+  if (rows.length < 3) return "";
+  return `<div class="sec-head"><b>Painters like this</b><span>same years, similar look</span></div>
+    <div class="aw-near">${rows.map(({ x }) => `<button class="aw-tie aw-simt" data-awpainter="${x.slug}">${awMiniFam(x.slug)}<span class="aw-simb"><b>${esc(x.n)}</b><span>${x.y0}\u2013${x.y1}${x.co ? " \u00b7 " + esc(x.co) : ""}</span></span></button>`).join("")}</div>
+    <p class="fine">Painters whose dated work falls in the same years, nearest in average lightness, vividness and warmth (photographs of paintings, so a rough guide).</p>`;
 }
 
 function awPainterFindings(A, P, n) {
@@ -1063,7 +1264,8 @@ function awFinder(host, pick, opts = {}) {
   const inp = host.querySelector("input"), res = host.querySelector(".aw-results");
   const norm = s => routeSlug(s).replace(/-/g, "");
   const draw = () => {
-    const q = norm(inp.value), list = q ? AW.list.filter(m => norm(m.n).includes(q)).slice(0, 24) : AW.list.slice(0, opts.n || 10);
+    const q = norm(inp.value); let list = q ? AW.list.filter(m => norm(m.n).includes(q)).slice(0, 24) : AW.list.slice(0, opts.n || 10);
+    if (q && !list.length && typeof sqFuzzyRank === "function") list = sqFuzzyRank(AW.list, inp.value, m => m.n, 24).hits;
     res.innerHTML = list.map(m => `<button class="aw-res" data-pick="${m.slug}"><b>${esc(m.n)}</b><span>${[m.b != null ? awY(m.b) + "–" + (m.d != null ? awY(m.d) : "") : m.y0 ? m.y0 + "–" + m.y1 : "", m.co].filter(Boolean).join(" · ")}</span><em>${m.k}</em></button>`).join("") || `<p class="fine">No painter by that name.</p>`;
   };
   inp.oninput = draw; draw();
@@ -1190,6 +1392,7 @@ document.addEventListener("click", e => {
   const g = e.target.closest("[data-awgroup]"); if (g) { e.preventDefault(); const [k, v] = g.dataset.awgroup.split("|"); return awGroup(k, k === "decade" ? +v : v); }
   const ix = e.target.closest("[data-awindex]"); if (ix) { e.preventDefault(); return awIndex(); }
   const vs = e.target.closest("[data-awvs]"); if (vs) { e.preventDefault(); return awVs(vs.dataset.awvs || "", ""); }
+  const pc = e.target.closest("[data-awcolors]"); if (pc && typeof pcOpen === "function") { e.preventDefault(); buzz(6); return pcOpen(pc.dataset.awcolors); }
 });
 function awStep(tok) {
   const [, kind, a, b] = tok.split(":");
@@ -1203,7 +1406,7 @@ function awOpenRoute(kind, id, more) {
     // awPainter() itself now tries the full profile first and falls back to the lite page (every other named
     // painter, tools/painters_lite.py) before giving up -- see its own comment. A cold #/painter/<slug> link
     // (shared, bookmarked, or the browser's own history replay) gets the exact same fallback a live tap does.
-    if (kind === "painter") return awPainter(id);
+    if (kind === "painter") { awPainter(id); if (more === "colors" && typeof pcOpenRoute === "function") pcOpenRoute(id); return; }   // #/painter/<slug>/colors: the painter's color map over the page (js/paintercolors.js)
     if (kind === "arthistory") return awIndex();
     if (kind === "painter-index") return awPainters();
     if (kind === "painters") return awVs(id && AW.meta.a[id] ? id : "", more && AW.meta.a[more] ? more : "");

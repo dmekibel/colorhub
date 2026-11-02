@@ -34,10 +34,19 @@ for (const r of jsonlRows("maerz-paul-1930-clean.json")) if (!mpHex.has(keyOf(r.
 
 const centroidHex = new Map();
 for (const r of jsonlRows("iscc-nbs-centroids.json")) if (r.block != null && r.hex) centroidHex.set(r.block, r.hex);
-const isccHex = new Map();
+// every block a name is listed under: `block` is only the first of `blocks` (one per source dictionary), so
+// Ultramarine read as block 82 (vivid yellow) though it also lists 194 (vivid purplish blue). Same rule as
+// tools/fix_alias_targets.py iscc_pick(): the block nearest the documented primary, or none if that's > 20 off.
+const ISCC_TRUST_MAX = 20;
+const isccBlocks = new Map();
 for (const r of jsonlRows("iscc-nbs-names.json")) {
-  const h = centroidHex.get(r.block);
-  if (h && !isccHex.has(keyOf(r.n))) isccHex.set(keyOf(r.n), h);
+  const hs = (r.blocks || [r.block]).map(b => centroidHex.get(b)).filter(Boolean);
+  if (hs.length && !isccBlocks.has(keyOf(r.n))) isccBlocks.set(keyOf(r.n), hs);
+}
+function isccPick(k, primaryHex) {
+  let best = null, bd = Infinity;
+  for (const h of isccBlocks.get(k) || []) { const d = de2000(primaryHex, h); if (d < bd) { bd = d; best = h; } }
+  return bd <= ISCC_TRUST_MAX ? best : null;
 }
 
 // truth: alias slug -> [trueHex, source]
@@ -46,7 +55,7 @@ function record(name, primaryHex) {
   const s = slug(name), k = keyOf(name);
   if (truth.has(s)) return;
   if (mpHex.has(k)) truth.set(s, [mpHex.get(k), "maerz-paul exact"]);
-  else if (isccHex.has(k)) truth.set(s, [isccHex.get(k), "iscc-nbs block centroid"]);
+  else if (isccPick(k, primaryHex)) truth.set(s, [isccPick(k, primaryHex), "iscc-nbs block centroid"]);
   else truth.set(s, [primaryHex, "altn/also primary (proxy)"]);
 }
 // a name that is still its own live library.json/core-names.json entry resolves to its own page before
@@ -60,7 +69,17 @@ const coreHexBySlug = new Map(core.map(e => [slug(e.n), e.h]));
 
 const errors = [];
 let checked = 0;
+// data/alias-pins.json: hand-curated targets every rebuild must keep (a rebuild that drops one fails here)
+const pinsPath = path.join(ROOT, "data/alias-pins.json");
+const pins = fs.existsSync(pinsPath) ? JSON.parse(fs.readFileSync(pinsPath, "utf8")).pins || [] : [];
+const pinned = new Set();
+for (const p of pins) {
+  pinned.add(p.slug); checked++;
+  if (aliases.slugs[p.slug] !== p.to) errors.push(`pinned alias "${p.slug}" must point at "${p.to}" (data/alias-pins.json), not "${aliases.slugs[p.slug]}"`);
+  if ((aliases.names || {})[p.alias] !== p.toName) errors.push(`pinned alias name "${p.alias}" must point at "${p.toName}" (data/alias-pins.json), not "${(aliases.names || {})[p.alias]}"`);
+}
 for (const [aliasSlug, [trueHex]] of truth) {
+  if (pinned.has(aliasSlug)) continue;
   const targetSlug = aliases.slugs[aliasSlug];
   if (!targetSlug) continue;
   const targetHex = coreHexBySlug.get(targetSlug);

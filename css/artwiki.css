@@ -32,22 +32,8 @@
 /* most-famous rail: reuses js/gallery.js's gl-rail/gl-pin, no new markup needed */
 
 /* the life's work: view switch, sort chips, filter drawer, grid/timeline mount */
-.aw-wk-views{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:22px 0 14px}
-.aw-wk-map{display:inline-flex;align-items:center;gap:7px;font:500 13px/1 var(--mono);letter-spacing:.04em;color:var(--soft);padding:0;background:none;border:0}
-.aw-wk-map svg{width:16px;height:16px}
-.aw-wk-sort{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
 .aw-chipbtn{min-height:34px;padding:0 14px;border-radius:var(--r-pill);border:1px solid var(--rule);background:none;color:var(--soft);font:500 13px/1 var(--mono);letter-spacing:.04em}
 .aw-chipbtn.on{background:var(--sel-fill);color:var(--sel-ink);box-shadow:var(--sel-ring);border-color:transparent}
-.aw-wk-filt{margin:4px 0 18px}
-.aw-wk-filt label{display:block;font:500 13px/1.3 var(--mono);letter-spacing:.02em;color:var(--soft);margin:0 0 8px}
-.aw-wk-filt label b{color:var(--ink);font-style:normal}
-.aw-wk-range{display:flex;flex-direction:column;gap:2px}
-.aw-wk-range input{width:100%}
-.aw-wk-csw{display:inline-flex;align-items:center;gap:7px;min-height:34px;padding:0 12px 0 6px;border-radius:var(--r-pill);background:none;border:1px solid var(--rule);text-align:left}
-.aw-wk-csw i{width:22px;height:22px;border-radius:50%;background:var(--c);flex:none;box-shadow:inset 0 0 0 1px rgba(236,232,223,.14)}
-.aw-wk-csw span{font:500 13px/1 var(--mono);color:var(--soft);letter-spacing:.04em}
-.aw-wk-csw.on{background:var(--sel-fill);box-shadow:var(--sel-ring);border-color:transparent}
-.aw-wk-csw.on span{color:var(--sel-ink)}
 .aw-wk-mount{margin-top:4px}
 .aw-wk-rail .gl-badge{position:absolute}
 .aw-tl-div{flex:none;align-self:stretch;display:flex;align-items:center;justify-content:center;width:34px;writing-mode:vertical-rl;text-orientation:mixed;font:500 13px/1 var(--mono);letter-spacing:.04em;color:var(--faint);border-left:1px solid var(--rule)}
@@ -317,19 +303,12 @@
    and the Palettes / Size chips (David, 2026-10-20) */
 .aw-pmap-top{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:52px;margin:16px 0 0;padding:0 22px;border:0;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);font:400 21px/1 var(--serif);letter-spacing:-.01em;transition:opacity .2s}
 .aw-pmap-top:active{opacity:.7}
+/* the painter page's two map doors: the painting map (the one paper button) and the painter's own color map */
 .aw-pmap-top svg{width:20px;height:20px;flex:none;color:var(--paper-ink)}
 .aw-chipbtn{display:inline-flex;align-items:center;gap:6px}
 .aw-chipbtn:active{opacity:.7}
-.aw-dirarr{display:inline-flex}
-.aw-dirarr svg{width:15px;height:15px}
-.aw-wk-look[hidden]{display:none}
 
 /* one calm row: sort picker, Palettes, Size (coordinator review, 2026-10-20) */
-.aw-wk-look{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}
-.aw-look2{display:contents}
-.aw-look2[hidden]{display:none}
-.aw-wk-look .aw-chipbtn{padding:0 10px;letter-spacing:0;white-space:nowrap}
-.aw-sortsel{appearance:none;-webkit-appearance:none;padding-right:26px!important;color:var(--ink);cursor:pointer;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23b9b4aa' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9l7 7 7-7'/%3E%3C/svg%3E") no-repeat right 9px center}
 /* Life's work sorted by subject: one small labeled section per genre (js/artwiki.js awWorksWire) */
 .aw-subj-sec + .aw-subj-sec{margin-top:26px}
 .aw-subj-h{display:flex;align-items:baseline;gap:10px;margin:0 0 12px;font:400 15px/1.2 var(--sans);color:var(--ink)}
@@ -337,3 +316,67 @@
 .aw-subj-h span{font:400 13px/1 var(--mono);color:var(--faint)}
 .aw-chipn{font-style:normal;font:500 12px/1 var(--mono);color:var(--faint)}
 .aw-chipbtn.on .aw-chipn{color:inherit;opacity:.8}
+
+
+/* the painter page is the shared shape: portrait band, one sticky chip row (.fd-bar, css/gallery.css), one pane at a time (David, 2026-10-25) */
+.aw-tabs{margin-top:18px}
+.aw-pane[hidden]{display:none}
+.aw-pane>:first-child{margin-top:26px}
+.aw-pane>.sec-head:first-child{margin-top:22px}
+/* Their colors: the strip of their colors and the one paper button that opens the painter's color map (js/paintercolors.js) */
+.aw-cmap{margin:0 0 6px}
+.aw-cmap .aw-strip{display:flex;border-radius:var(--r-2,10px);overflow:hidden}
+.aw-cmap .aw-sub{margin:12px 0 0}
+.aw-pcolors{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:52px;margin:16px 0 0;padding:0 22px;border:0;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);font:400 21px/1 var(--serif);letter-spacing:-.01em}
+.aw-pcolors svg{width:20px;height:20px;flex:none}
+.aw-pcolors:active{opacity:.7}
+/* Settings sheet rows that are not in the feeds' sheet: a swatch in a color chip, and the small Clear next to a heading */
+.aw-fs-csw{display:inline-flex;align-items:center;gap:8px;padding-left:8px!important}
+.aw-fs-csw i{width:22px;height:22px;border-radius:50%;background:var(--c);flex:none;box-shadow:inset 0 0 0 1px rgba(236,232,223,.18)}
+.aw-fs-clr{min-height:0!important;margin-left:auto}
+.fs-multi button .aw-chipn{color:inherit;opacity:.7}
+/* Their work: every tile is by this painter, so the "Painter · year" caption line is dropped (the year is on the picture); js/gallery.js still reserves its line of room */
+.aw-wk-mount .gl-pin small{display:none}
+
+/* a painter's portrait band: kept short on a phone so the chip row stays on the first screen */
+@media (max-width:759px){
+  .aw-pt-open,.aw-pt-hero>img{max-height:min(34dvh,360px);min-height:180px}
+  /* the picture inside the capped box is cropped to it, never spilling over the chip row below (a tall self-portrait covered the chips) */
+  .aw-pt-open{display:block;width:100%;overflow:hidden}
+  .aw-pt-open>img{display:block;width:100%;height:min(34dvh,360px);min-height:180px;object-fit:cover;object-position:50% 25%}
+  /* David, 2026-10-30 (Mary Cassatt's self-portrait filled the screen, zoomed and shifted): the button gets a real height and the picture
+     is pinned inside it, so no image size, late hi-res swap or Safari button quirk can push it past the band */
+  button.aw-pt-open{position:relative;height:min(34dvh,360px)}
+  button.aw-pt-open>img{position:absolute;inset:0;height:100%;min-height:0;max-width:none}
+}
+
+/* painter page v2 (2026-10-30) */
+.aw-hstrip{margin:0 0 4px}.aw-hstrip .aw-strip{border-radius:0}
+.aw-glance{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;padding:14px 0 4px}
+.aw-glance>div{background:var(--card,#1a1816);border-radius:14px;padding:12px 10px}
+.aw-glance b{display:block;font:500 22px/1.1 var(--serif,Georgia,serif)}
+.aw-glance span{display:block;font-size:13px;line-height:1.35;opacity:.78;margin-top:3px}
+.aw-dec{flex:0 0 auto;display:flex;flex-direction:column;gap:4px}.aw-dec>b{font:500 17px var(--serif,Georgia,serif);padding-left:2px}
+.aw-cw{all:unset;cursor:pointer;font-weight:600;white-space:nowrap;color:color-mix(in srgb,var(--c) 45%,#fff 55%);border-bottom:2px solid color-mix(in srgb,var(--c) 50%,transparent)}
+.aw-cw:before{content:"";display:inline-block;width:.62em;height:.62em;border-radius:50%;background:var(--c);margin:0 .28em .05em 0;box-shadow:0 0 0 1px rgba(255,255,255,.3)}
+.aw-meas>summary{font:500 18px var(--serif,Georgia,serif)}.aw-meas>summary small{font:13px var(--sans,system-ui);opacity:.65;margin-left:8px}
+.aw-dec .gl-pin{flex:none;width:auto}.aw-dec .gl-im{height:150px;width:auto}
+.aw-ch{border-left:3px solid var(--c);padding:2px 0 2px 14px;margin:6px 0 24px}
+.aw-ch h3{margin:0;font:500 21px/1.2 var(--serif,Georgia,serif)}
+.aw-ch-w{display:block;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;opacity:.65;margin-bottom:2px}
+.aw-ch-p{display:flex;height:10px;border-radius:5px;overflow:hidden;width:190px;margin:10px 0 2px}.aw-ch-p i{flex:1;background:var(--c)}
+.aw-pull{font:italic 400 21px/1.35 var(--serif,Georgia,serif);margin:14px 0 4px;color:#f4e9c8}
+/* painter page v2b: the name sits on the hero painting */
+.aw-herowrap{position:relative;margin:0 calc(-1 * var(--g))}
+.aw-herowrap .aw-pt-hero{margin:0}
+.aw-herowrap .aw-pt-open,.aw-herowrap .aw-pt-hero>img{max-height:none;height:min(66dvh,560px)}
+.aw-herowrap:after{content:"";position:absolute;left:0;right:0;bottom:0;height:62%;background:linear-gradient(transparent,rgba(10,9,8,.93));pointer-events:none}
+.aw-herowrap .aw-pt-hero figcaption{position:absolute;right:var(--g);top:10px;padding:3px 9px;border-radius:10px;background:rgba(10,9,8,.55);font-size:13px;z-index:2;max-width:70%}
+.aw-herowrap .aw-head{position:absolute;left:0;right:0;bottom:16px;z-index:2;padding:0 var(--g);margin:0}
+.aw-herowrap .p-title{font-size:clamp(38px,11vw,52px);line-height:1.04;margin:2px 0 6px}
+.aw-herowrap .p-dek,.aw-herowrap .eyebrow{color:#e6ded3}
+.aw-hstrip{margin:0 calc(-1 * var(--g))}
+.aw-simt{display:flex;align-items:center;gap:12px;text-align:left}
+.aw-minif{display:flex;width:64px;height:30px;border-radius:8px;overflow:hidden;flex:none}.aw-minif i{flex:1;background:var(--c)}
+.aw-simb{display:flex;flex-direction:column;min-width:0}
+.aw-hstrip .aw-strip{display:flex;width:100%}

@@ -1,0 +1,179 @@
+{
+ "name": "icons-orthodox",
+ "note": "Orthodox, Byzantine, Coptic and Levantine icons beyond the roots already in the caucasus and nordic configs (Icons of Russia/Ukraine/Georgia/Bulgaria/Serbia/Albania/Armenia/Egypt, Coptic icons, Ethiopian). About half of a random sample from Icons of Russia/Greece is church interiors, iconostases and chronicle pages, so the filter and a title test matter. No living or post-1955 icon painters (Commons author blocklist still to add). Label by tradition, place and date; icons are devotional objects.",
+ "depth": 3,
+ "date": {
+  "from": 300,
+  "to": 1925
+ },
+ "caps": {
+  "per_group": 1000,
+  "total": 100000,
+  "overshoot": 1.0
+ },
+ "skip_cat": "painters|Iconostas|Khorugv|Exhibition|Churches|Buildings|Monaster|Cathedral|Chronicle",
+ "co_rules": [],
+ "filter": {
+  "enabled": true,
+  "text": 0.75,
+  "blank": 0.5,
+  "sketch": 0.5,
+  "ornament": 0.6,
+  "dup": 0.975,
+  "text_prompt": "a page of dense text, a church interior, an iconostasis wall, or a photo of a building"
+ },
+ "roots": [
+  {
+   "cat": "Category:Icons of Greece",
+   "co": "Greece",
+   "mv": "Greek icon",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "icons research 2026-10-28; clean count verified, real-icon share about 50-70%"
+  },
+  {
+   "cat": "Category:Cretan School",
+   "co": "Greece",
+   "mv": "Cretan school",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "icons research 2026-10-28; clean count verified, real-icon share about 50-70%"
+  },
+  {
+   "cat": "Category:Icons by Heptanese School (painting)",
+   "co": "Greece",
+   "mv": "Heptanese school",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "icons research 2026-10-28; clean count verified, real-icon share about 50-70%"
+  },
+  {
+   "cat": "Category:Byzantine icons",
+   "co": "Byzantine Empire",
+   "mv": "Byzantine icon",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "icons research 2026-10-28; clean count verified, real-icon share about 50-70%"
+  },
+  {
+   "cat": "Category:Byzantine icons in Russia",
+   "co": "Russia",
+   "mv": "Byzantine icon",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "icons research 2026-10-28; clean count verified, real-icon share about 50-70%"
+  },
+  {
+   "cat": "Category:Icons of Cyprus",
+   "co": "Cyprus",
+   "mv": "Cypriot icon",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "icons research 2026-10-28; clean count verified, real-icon share about 50-70%"
+  },
+  {
+   "cat": "Category:Icons of Romania",
+   "co": "Romania",
+   "mv": "Romanian icon",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "icons research 2026-10-28; clean count verified, real-icon share about 50-70%"
+  },
+  {
+   "cat": "Category:Icons of North Macedonia",
+   "co": "North Macedonia",
+   "mv": "Macedonian icon",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "icons research 2026-10-28; clean count verified, real-icon share about 50-70%"
+  },
+  {
+   "cat": "Category:Icons of Belarus",
+   "co": "Belarus",
+   "mv": "Belarusian icon",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "icons research 2026-10-28; clean count verified, real-icon share about 50-70%"
+  },
+  {
+   "cat": "Category:Icons of Poland",
+   "co": "Poland",
+   "mv": "Carpatho-Rusyn / Polish Orthodox icon",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "mixed Latin and Orthodox; CLIP filter and title test needed"
+  },
+  {
+   "cat": "Category:Icons of Syria",
+   "co": "Syria",
+   "mv": "Syriac / Melkite icon",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "icons research 2026-10-28; clean count verified, real-icon share about 50-70%"
+  },
+  {
+   "cat": "Category:Icons of Lebanon",
+   "co": "Lebanon",
+   "mv": "Melkite icon",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "icons research 2026-10-28; clean count verified, real-icon share about 50-70%"
+  },
+  {
+   "cat": "Category:Icons of Israel",
+   "co": "Israel",
+   "mv": "icon",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "icons research 2026-10-28; clean count verified, real-icon share about 50-70%"
+  },
+  {
+   "cat": "Category:Icons of Turkey",
+   "co": "Turkey",
+   "mv": "Byzantine icon",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "icons research 2026-10-28; clean count verified, real-icon share about 50-70%"
+  },
+  {
+   "cat": "Category:Coptic paintings",
+   "co": "Egypt",
+   "mv": "Coptic icon",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "icons research 2026-10-28; clean count verified, real-icon share about 50-70%"
+  },
+  {
+   "cat": "Category:Icons from Saint Catherine Monastery, Mount Sinai",
+   "co": "Egypt",
+   "mv": "Sinai icon",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "clean count is only 9 because titles say monastery; raw 114"
+  },
+  {
+   "cat": "Category:Icons of Russia by school",
+   "co": "Russia",
+   "mv": "Russian icon",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "the only way to reach Novgorod, Pskov and Moscow schools; overlaps Icons of Russia (kept once)"
+  },
+  {
+   "cat": "Category:Palekh",
+   "co": "Russia",
+   "mv": "Palekh miniature",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "icons research 2026-10-28; clean count verified, real-icon share about 50-70%"
+  },
+  {
+   "cat": "Category:Stroganov School",
+   "co": "Russia",
+   "mv": "Stroganov school",
+   "sure": "medium",
+   "undated_ok": true,
+   "note": "icons research 2026-10-28; clean count verified, real-icon share about 50-70%"
+  }
+ ]
+}

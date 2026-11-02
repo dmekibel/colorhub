@@ -4,8 +4,8 @@
 // Studio, where it can be analyzed (Eyedropper, Select a part: js/studio.js). Cameras shift color, so the copy
 // says so plainly.
 //
-// Sampling: eyeSample() below reads an n x n square (n = getSampleSize(), js/eyedrop.js: Point through 31x31,
-// default a medium average) straight off the SOURCE's native resolution -- the <video> or <img> element itself,
+// Sampling: eyeSample() below reads an n x n square (n = getSampleSize(), js/eyedrop.js: Point, Small, Medium or Large,
+// default Small) straight off the SOURCE's native resolution -- the <video> or <img> element itself,
 // never a canvas that was resized to fit the screen. Live, that's ~12 times a second; only the NAME shown eases
 // between readings (Lab-smoothed), never the sampled color or hex, so flicker can't swap in a slightly-wrong swatch.
 //
@@ -253,8 +253,7 @@ function eyeOffReason(e) {
 // loupe uses elsewhere), with "Add color" building a palette strip as you go. (2) The shutter: takes a real photo,
 // saves it to Studio and opens its page (js/photos.js), where Eyedropper and Select a part (js/studio.js) analyze it.
 const ICON_ADD = sv('<path d="M12 5v14M5 12h14"/>', 24, 2);
-const EYE_WORDS = { 1: "Exact", 2: "2×2", 5: "5×5", 11: "11×11", 31: "31×31" };
-const eyeSizeHTML = () => `<div class="eye-size" role="group" aria-label="How many pixels to average under the circle">${EYD_SIZES.map(n => `<button type="button" data-eydsize="${n}" aria-pressed="${n === getSampleSize()}" class="${n === getSampleSize() ? "on" : ""}">${EYE_WORDS[n]}</button>`).join("")}</div><p class="eye-size-cap" id="sizeCap"></p>`;
+const eyeSizeHTML = () => `<div class="eye-size" role="group" aria-label="How many pixels to average under the circle">${EYD_SIZES.map(n => `<button type="button" data-eydsize="${n}" aria-pressed="${n === getSampleSize()}" class="${n === getSampleSize() ? "on" : ""}">${EYD_LABEL[n]}</button>`).join("")}</div><p class="eye-size-cap" id="sizeCap"></p>`;
 const eyeSizeCap = () => { const n = getSampleSize(); return n === 1 ? "Reads the one pixel at the center" : `Averages ${n} × ${n} pixels at the center`; };
 // David, 2026-10-23 (second pass: "still hard to use and overwhelming"): the live screen is now just the picture, the
 // circle, one line saying what it is, and three buttons -- Photos, the shutter, Add. Everything else (how much to

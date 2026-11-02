@@ -64,8 +64,12 @@ function ymSettingsHTML() {
     { k: "ssidle", lead: icon("play", 20), label: "Idle slideshow", sub: "Starts on its own after a minute, on the map or Today", sw: S.ssIdle !== false }])
   + mnGroup("Your progress", [
     { k: "backup", lead: YM_I.down, label: "Back up your progress", value: last ? `Last ${esc(last)}` : "Never" },
-    { k: "restore", lead: YM_I.up, label: "Restore a backup" },
+    { k: "restore", lead: YM_I.up, label: "Restore a backup", sub: "Replaces what is on this device" },
+    { k: "codecopy", lead: YM_I.down, label: "Copy a code", sub: "Paste it on your other device" },
+    { k: "codepaste", lead: YM_I.up, label: "Paste a code", sub: "Adds your other device's progress to this one" },
+    { k: "merge", lead: YM_I.up, label: "Merge a backup file", sub: "The same, from a file" },
     { k: "place", lead: YM_I.path, label: "Retake the placement test" }])
+  + mnGroup("Your account", typeof syncRows === "function" ? syncRows() : [])
   + mnGroup("", [{ k: "about", lead: YM_I.book, label: "About the colors" }])
   + mnGroup("", [{ k: "reset", lead: YM_I.trash, label: "Reset all progress", danger: true }]);
 }
@@ -80,13 +84,17 @@ function ymWireSettings(root, back, close = () => {}) {
     if (k === "backup") { backupProgress(); const v = b.querySelector(".mn-val"); if (v) v.textContent = `Last ${fmtDay(S.backedUp)}`; return; }
     if (k === "reset") {
       return mnConfirm({ title: "Reset all progress?", body: "Every color you've learned, your reviews, your eye and your taste are erased from this phone. A backup file can bring them back; nothing else can.", yes: "Erase everything", no: "Keep my progress", danger: true })
-        .then(yes => { if (!yes) return; close(); S = fresh(); save(); welcome(); });
+        .then(yes => { if (!yes) return; close(); if (typeof syncSet === "function") syncSet(null); S = fresh(); save(); welcome(); });
     }
     if (k === "you") { close(); return youPage(); }
+    if (k === "codecopy") { copyProgressCode(); return; }
+    if (k === "signin" || k === "syncnow" || k === "signout" || k === "syncerase") { close(); return syncClick(k); }
     if (k === "samplesize") { if (typeof eydSizeSheet === "function") eydSizeSheet(); return; }
     close();
     if (k === "profile") profileSetup(back);
     if (k === "restore") restoreProgress();
+    if (k === "merge") mergeProgressFile();
+    if (k === "codepaste") pasteProgressCode();
     if (k === "place") how();
     if (k === "about") about();
   });
@@ -95,7 +103,7 @@ function ymWireSettings(root, back, close = () => {}) {
 function ymSettingsSheet() {
   // PLAN §3.1/§9: You folds away, so this sheet opens straight on Settings -- no "You" row pointing at a page
   // the nav no longer reaches. js/places.js's moreOpen() calls this as every ⋯'s last row.
-  const { sh, close } = sheet(`<div class="mn-sheet">${mnHead("Settings", { close: true })}
+  const { sh, close } = sheet(`<div class="mn-sheet">${mnHead("Profile and settings", { close: true })}
     ${ymSettingsHTML()}</div>`);
   sh.querySelector("[data-mn-close]").onclick = () => close();
   ymWireSettings(sh, () => go(S.tab || "learn"), close);

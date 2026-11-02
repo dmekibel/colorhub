@@ -16,8 +16,18 @@ function bootStart() {
   // places the learner at the beginning of the path (the same result as the test's "start at the beginning"), so no
   // screen anywhere sends them to welcome(); the placement test stays reachable from Learn (#/welcome).
   if (!S.placed) { S.placed = { tier: 2, at: today(), auto: true }; S.start = 0; save(); }
-  if (!openRoute(location.hash, true)) hmHome();
+  // David, 2026-10-26: "make sure the app opens to Today": an open with no address lands on the Today feed (#/feed); the color map stays one tap away in Explore.
+  if (/^#?\/?$/.test(location.hash) && typeof todayFeed === "function" && !/[?&]home=1\b/.test(location.search) && openRoute("#/feed", true)) { prefetchWiki(); return; }
+  if (!openRoute(location.hash, true)) { if (!/^#?\/?$/.test(location.hash) || !coldMap()) hmHome(); }
   prefetchWiki();
+}
+// A cold start (no address, not screenshot mode, not a deep link) opens the color map as a honeycomb, golden spiral, most vivid in the middle
+// (David, 2026-10-25). No intro or placement stands in front of it (S.placed is set above; the placement test stays in Learn).
+function coldMap() {
+  // David, 2026-10-25: the app opens on the color map as a honeycomb, golden spiral from the middle out, the most vivid colors in the centre.
+  // (The random painting-map cluster open, pmOpen("arr=color&rnd=1"), is kept in js/paintmap.js and can be wired back here.)
+  S.hm = S.hm || {}; S.hm.mode = "colors"; S.hm.arr = "sunflower"; S.hm.ord = { ...(S.hm.ord || {}), sunflower: "vivid" }; S.hm.style = "honeycomb"; S.hm.src = "every-name"; S.hm.fam = ""; S.hm.tone = ""; S.hm.filter = "all"; S.hm.near = null;   // every name: all of them, no family, tone or learned filter narrowing it
+  return false;   // false = the caller opens hmHome() with those settings
 }
 if (document.readyState === "loading") addEventListener("DOMContentLoaded", bootStart, { once: true });
 else bootStart();
@@ -193,6 +203,7 @@ function shot(name) {
       if (act === "tuned") Object.assign(S.cb, { tuned: true, state: { ...cxState(cxNorm(ch)), hue: [190, 280], L: [30, 80] } });
       return colorExplorer({ focus: dailyColor(), pick: c => closeup(colorNode(c)), shot: ["wheel", "tuned"].includes(act) ? "" : act });
     }
+    case "pcolors": { const [, sl = "vincent-van-gogh", ar = ""] = name.split(":"); return awOpenRoute("painter", sl, "colors") || (ar && setTimeout(() => { if (window.PH_DEBUG) PH_DEBUG.setArr(ar); }, 6000)); }   // painter's color map (js/paintercolors.js): pcolors:<slug>:<share|hue|light|decade|peers>
     case "gallery": return galleryShot(name.slice(8));   // gallery, gallery:scroll=600, gallery:color=Cobalt, gallery:adjust=Cobalt, gallery:page=12, gallery:cpage=Cobalt
     case "world": case "fashiondecades": case "fashiondecade": case "fashionera": case "fashioncoty": case "fashionhouse": case "fashionhistory": case "garments": case "garment": case "fxcolor":
       return typeof worldShot === "function" && worldShot(screen, arg);   // js/world.js

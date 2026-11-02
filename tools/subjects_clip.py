@@ -92,7 +92,7 @@ def load_model():
 
 class ImgDS:
     """Module level so DataLoader workers (spawn on macOS) can pickle it."""
-    def __init__(self, todo, pre): self.todo, self.pre = todo, pre
+    def __init__(self, todo, pre, crops=None): self.todo, self.pre, self.crops = todo, pre, crops or {}
     def __len__(self): return len(self.todo)
     def __getitem__(self, k):
         import torch
@@ -104,12 +104,73 @@ class ImgDS:
                 f = RAW / "measure-img" / f"{self.todo[k]}.jpg"   # staged-measure cache (tools/measure_staged.py)
             im = Image.open(f)
             im.draft("RGB", (448, 448))
-            return self.pre(im.convert("RGB")), 1
+            im = im.convert("RGB")
+            c = self.crops.get(self.todo[k])
+            if c:   # the painting's own box (0..1000, data/gallery/thumbs.txt): the wall, mat or page around it is not embedded
+                w, h = im.size
+                im = im.crop((round(c[0] / 1000 * w), round(c[1] / 1000 * h), round(c[2] / 1000 * w), round(c[3] / 1000 * h)))
+            return self.pre(im), 1
         except Exception:
             return torch.zeros(3, 224, 224), 0
 
 
+def load_crops(ids):
+    """{id: [l, t, r, b]} (0..1000) for every painting that has a usable crop box in data/gallery/thumbs.txt (same rule as the atlas)."""
+    try:
+        lines = (ROOT / "data/gallery/thumbs.txt").read_text().split("\n")
+    except OSError:
+        return {}
+    out = {}
+    for i, line in zip(ids, lines):
+        tab = line.find("\t")
+        if tab >= 0 and line[tab + 1:].strip():
+            try:
+                c = [int(x) for x in line[tab + 1:].split(",")]
+            except ValueError:
+                continue
+            if len(c) == 4 and c[2] - c[0] > 50 and c[3] - c[1] > 50:
+                out[i] = c
+    return out
+
+
+CROPSIG = CACHE / "clip-embeds.crop.json"   # {id: "l,t,r,b" or ""}: what each cached embedding was computed from
+
+
 def embed_new(ids, torch, model, pre, dev):
+    """New paintings are embedded from inside their crop; paintings whose crop box is new or changed since their embedding are
+    re-embedded in place (David, 2026-10-27: a wallpaper or mat must not group paintings). Existing embeddings count as full-photo."""
+    import numpy as np
+    crops = load_crops(ids)
+    before = set(EMB_IDS.read_text().splitlines()) if EMB_IDS.exists() else set()
+    have, arr = _embed_rows(ids, torch, model, pre, dev, crops)
+    sig = json.load(open(CROPSIG)) if CROPSIG.exists() else {}
+    sg = lambda i: ",".join(map(str, crops[i])) if i in crops else ""
+    for i in have:
+        if i not in before:
+            sig[i] = sg(i)   # embedded just now, already from inside its crop
+    row = {k: n for n, k in enumerate(have)}
+    redo = [i for i in have if sg(i) != sig.get(i, "") and i in row and (i in crops or sig.get(i))]
+    if redo:
+        print(f"re-embedding {len(redo)} paintings from their crop", flush=True)
+        dl = torch.utils.data.DataLoader(ImgDS(redo, pre, crops), batch_size=64, num_workers=6, shuffle=False)
+        done = 0
+        with torch.no_grad():
+            for x, ok in dl:
+                f = model.encode_image(x.to(dev)); f = f / f.norm(dim=-1, keepdim=True)
+                f = f.float().cpu().numpy().astype(np.float16)
+                for j in range(len(ok)):
+                    if bool(ok[j]):
+                        arr[row[redo[done + j]]] = f[j]
+                        sig[redo[done + j]] = sg(redo[done + j])
+                done += len(ok)
+        np.save(EMB, arr)
+    for i in have:
+        sig.setdefault(i, "")
+    json.dump(sig, open(CROPSIG, "w"))
+    return have, arr
+
+
+def _embed_rows(ids, torch, model, pre, dev, crops):
     import numpy as np
     from PIL import Image
     CACHE.mkdir(parents=True, exist_ok=True)
@@ -123,7 +184,7 @@ def embed_new(ids, torch, model, pre, dev):
     if not todo:
         return have, arr
 
-    dl = torch.utils.data.DataLoader(ImgDS(todo, pre), batch_size=64, num_workers=6, shuffle=False)
+    dl = torch.utils.data.DataLoader(ImgDS(todo, pre, crops), batch_size=64, num_workers=6, shuffle=False)
     st = {"ids": [], "new": [], "have": have, "arr": arr}
     bad, t0 = 0, time.time()
 

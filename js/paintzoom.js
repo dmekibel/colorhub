@@ -25,7 +25,7 @@ function glZoomOpen(opts) {
   scrim.className = "glz-scrim";
   scrim.innerHTML = `
     <div class="glz-top"><button class="tl-exit" data-glzclose aria-label="Done, back to the painting">${ICON.back}<span>Done</span></button><span class="glz-title">${esc(opts.title || "")}</span><span class="glz-zc" data-glzzc role="group" aria-label="Zoom"><button type="button" data-glzfit>Fit</button><button type="button" data-glz100>100%</button></span>${opts.onDetails ? `<button type="button" class="glz-details" data-glzdetails>Open the page</button>` : ""}<span class="glz-pk-slot" data-glz-pk>${typeof pkButtonHTML === "function" ? pkButtonHTML() : ""}</span></div>
-    <div class="glz-stage"><div class="glz-frame"><img class="glz-img" src="${esc(opts.src)}"${opts.cors ? ' crossorigin="anonymous"' : ""} alt="${esc(opts.alt || "")}"><canvas class="glz-cv" aria-hidden="true"></canvas><div class="glz-pk-layer" data-glzpklayer hidden></div></div><div class="glz-lens" data-glzlens hidden aria-hidden="true"><canvas width="102" height="102"></canvas><i></i></div></div>
+    <div class="glz-stage">${opts.fallback ? `<img class="glz-ph" src="${esc(opts.fallback)}" alt="" aria-hidden="true">` : ""}<div class="glz-frame"><img class="glz-img" src="${esc(opts.src)}"${opts.cors ? ' crossorigin="anonymous"' : ""} alt="${esc(opts.alt || "")}"><canvas class="glz-cv" aria-hidden="true"></canvas><div class="glz-pk-layer" data-glzpklayer hidden></div></div>${typeof eydPreviewHTML === "function" ? eydPreviewHTML(true) : ""}</div>
     <p class="glz-cap" aria-hidden="true"><b>${esc(opts.title || "")}</b>${opts.sub ? `<span>${esc(opts.sub)}</span>` : ""}</p>
     <div class="glz-tools">
       <div class="seg glz-seg" role="group" aria-label="Look at it">
@@ -34,8 +34,9 @@ function glZoomOpen(opts) {
       <div class="glz-pal" hidden role="group" aria-label="Which color"></div>
       <div class="glz-pk" data-glzpk hidden>
         <div class="glz-pk-info" data-glzpkinfo aria-live="polite"></div>
-        <div class="glz-pk-strip" data-glzpkstrip role="listbox" aria-label="Your palette, in order"></div>
+        <div class="glz-pk-strip" data-glzpkstrip role="listbox" aria-label="Your palette. Tap it to see the colors full screen"></div>
         <div class="glz-pk-act" data-glzpkact></div>
+        <div class="glz-pk-size" data-glzpksize>${typeof eydSizeControlHTML === "function" ? eydSizeControlHTML(true) : ""}</div>
       </div>
       <div class="glz-sel" data-glzsel hidden>
         <div class="glz-sel-prog" data-glzselprog hidden>
@@ -104,12 +105,14 @@ function glZoomOpen(opts) {
     const cy = soft ? rubberClamp(p[1], -ly, ly) : clamp(p[1], -ly, ly);
     return [Number.isFinite(cx) ? cx : 0, Number.isFinite(cy) ? cy : 0];
   };
+  let pkAfterApply = null;   // Pick: keep the ring's size and the preview's corner right as the picture zooms and pans
   const apply = () => {
     if (!Number.isFinite(Z) || Z <= 0) Z = fitZ || 1;
     if (!Number.isFinite(P[0])) P[0] = 0; if (!Number.isFinite(P[1])) P[1] = 0;
     frame.style.transform = `translate(${P[0]}px,${P[1]}px) scale(${Z})`;
     if (LP) stage.dataset.cur = Z <= fitZ * 1.05 ? "fit" : (loupeOn && !spaceDown && Z <= fitZ * LP_MAX) ? "loupe" : "free";
-    frame.style.setProperty("--iz", String(1 / Z));   // the Pick loupes live inside the frame and counter-scale, so they stay one size on screen but glued to their painting point
+    frame.style.setProperty("--iz", String(1 / Z));   // the Pick reticle lives inside the frame and counter-scales, so it stays one size on screen but glued to its painting point
+    if (pkAfterApply) pkAfterApply();
   };
   const springFrame = (ms, after) => {
     frame.style.transition = `transform ${ms}ms var(--spring)`; scrim.classList.add("glz-spring");
@@ -151,7 +154,9 @@ function glZoomOpen(opts) {
     setTimeout(() => { if (!closed) frame.style.transition = ""; }, 300);
   };
   const firstShow = () => { resetView(); if (!firstShown) { firstShown = true; enterFrom(); } };
-  if (img.complete && img.naturalWidth) firstShow(); else img.addEventListener("load", firstShow);
+  // the page's own small copy stands in (blurred) until the big one decodes, so the stage is never an empty dark block
+  const ph = stage.querySelector(".glz-ph"), dropPh = () => { if (ph) ph.remove(); };
+  if (img.complete && img.naturalWidth) { dropPh(); firstShow(); } else { img.addEventListener("load", dropPh, { once: true }); img.addEventListener("load", firstShow); }
   const onResize = () => {
     computeFit(); Z = clamp(Z, fitZ, maxZ); P = clampP(P, Z, false);
     frame.style.transition = ""; apply();
@@ -223,7 +228,7 @@ function glZoomOpen(opts) {
     }
     if (!aborted && pts.size > 1) return;
     // Pick: a still tap on the painting drops a new picker (pan and pinch stay live; double-tap zoom steps aside)
-    if (!aborted && drag && !drag.moved && active === "pick") { pkTap(drag.x, drag.y); snapBack(); }
+    if (!aborted && drag && drag.ret) { if (!drag.moved) pkSetFromPoint(drag.x, drag.y); snapBack(); }   // a still tap jumps the reticle there; a drag just ends
     else if (!aborted && drag && !drag.moved) { if (LP && lastPtype === "mouse") loupeClick(drag.x, drag.y); else if (!maybeDoubleTap(drag.x, drag.y)) snapBack(); }
     else if (!aborted && drag && drag.moved && (Math.abs(drag.vx) > .02 || Math.abs(drag.vy) > .02)) startMomentum(drag.vx, drag.vy);
     else snapBack();
@@ -238,7 +243,11 @@ function glZoomOpen(opts) {
     if (pts.size >= 2) return;
     pts.set(e.pointerId, { x: e.clientX, y: e.clientY, t: now });
     try { stage.setPointerCapture(e.pointerId); } catch (err) {}
-    if (pts.size === 1) drag = { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, moved: false, lastT: now, vx: 0, vy: 0 };
+    // Pick: one finger moves the reticle (relative motion, offset from the finger); a mouse drags it directly
+    if (pts.size === 1) {
+      drag = { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, moved: false, lastT: now, vx: 0, vy: 0, ret: active === "pick" };
+      if (drag.ret && e.pointerType === "mouse") pkSetFromPoint(e.clientX, e.clientY);
+    }
     else if (pts.size === 2) {
       const [a, b] = [...pts.values()];
       pinch = { d0: Math.max(1, Math.hypot(a.x - b.x, a.y - b.y)), z0: Z };
@@ -258,6 +267,11 @@ function glZoomOpen(opts) {
     if (drag && pts.size === 1) {
       if (!drag.moved && Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 6) return;
       drag.moved = true;
+      if (drag.ret) {
+        if (e.pointerType === "mouse") pkSetFromPoint(e.clientX, e.clientY);
+        else { const r = img.getBoundingClientRect(); pkMoveBy((e.clientX - drag.x) / r.width, (e.clientY - drag.y) / r.height); }
+        drag.x = e.clientX; drag.y = e.clientY; return;
+      }
       if (LP && lastPtype === "mouse" && loupeOn && Z <= fitZ * LP_MAX) { drag.x = e.clientX; drag.y = e.clientY; return; }   // in the loupe the mouse looks around by hovering; a drag does nothing
       const dx = e.clientX - drag.x, dy = e.clientY - drag.y, now = performance.now(), dt = Math.max(1, now - drag.lastT);
       drag.vx = dx / dt; drag.vy = dy / dt; drag.lastT = now;
@@ -281,6 +295,13 @@ function glZoomOpen(opts) {
     }
     zoomAt(e.clientX, e.clientY, Z * Math.exp(-e.deltaY * .0015), false);
   }, { passive: false });
+  // Safari on a Mac pinches with gesture events (David, 2026-10-26: the trackpad zooms the full-screen painting)
+  if (matchMedia("(pointer:fine)").matches && "ongesturestart" in window) {
+    let zg = 1;
+    stage.addEventListener("gesturestart", e => { if (active === "select") return; e.preventDefault(); stopMomentum(); frame.style.transition = ""; loupeOn = false; zg = Z; });
+    stage.addEventListener("gesturechange", e => { if (active === "select") return; e.preventDefault(); zoomAt(e.clientX, e.clientY, zg * e.scale, false); });
+    stage.addEventListener("gestureend", e => e.preventDefault());
+  }
   // ---- the loupe's own pieces ----
   const ZEASE = "cubic-bezier(.2,.7,.2,1)";
   const animTo = fn => { frame.style.transition = `transform 260ms ${ZEASE}`; fn(); lpT = performance.now() + 300; setTimeout(() => { if (!closed && performance.now() >= lpT - 5) frame.style.transition = ""; }, 310); };
@@ -349,11 +370,11 @@ function glZoomOpen(opts) {
   // SELECTS it (it has to, to reorder, remove and adjust). The open-the-page affordance is the explicit name
   // button above the strip, with an arrow.
   const pkKey = opts.galleryIndex != null ? "g" + opts.galleryIndex : String(opts.src || "");
-  const PKS = GLZ_PALETTES[pkKey] || (GLZ_PALETTES[pkKey] = { picks: [], active: null, seq: 0, savedId: null, savedSig: "" });
+  const PKS = GLZ_PALETTES[pkKey] || (GLZ_PALETTES[pkKey] = { picks: [], active: null, seq: 0, savedId: null, savedSig: "", ret: null });
   const pkLayer = scrim.querySelector("[data-glzpklayer]"), pkPanel = scrim.querySelector("[data-glzpk]"), pkInfo = scrim.querySelector("[data-glzpkinfo]");
-  const pkStrip = scrim.querySelector("[data-glzpkstrip]"), pkActEl = scrim.querySelector("[data-glzpkact]"), pkLens = scrim.querySelector("[data-glzlens]");
-  const PK_MAX = 100, pkEls = new Map();
-  let pkSrc = null, pkBlocked = false, pkSwallowClick = 0;
+  const pkStrip = scrim.querySelector("[data-glzpkstrip]"), pkActEl = scrim.querySelector("[data-glzpkact]"), pkPrev = stage.querySelector(".eyd-prev"), pkSizeEl = scrim.querySelector("[data-glzpksize]");
+  const PK_MAX = 100;
+  let pkLoadT = 0, pkSrc = null, pkBlocked = false, pkSwallowClick = 0, pkRet = null, pkLive = null, pkLiveName = null, pkRaf = 0;
   const pkGet = id => PKS.picks.find(p => p.id === id);
   const pkSource = () => {
     if (!pkSrc || pkSrc.key !== img.currentSrc) { const s2 = typeof eydSource === "function" ? eydSource(img) : null; pkSrc = s2 ? Object.assign(s2, { key: img.currentSrc }) : null; }
@@ -371,49 +392,96 @@ function glZoomOpen(opts) {
   };
   // image fraction -> screen point (the picture's rect already carries the live pan/zoom)
   const pkScreen = p => { const r = img.getBoundingClientRect(); return { x: r.left + p.fx * r.width, y: r.top + p.fy * r.height }; };
-  const pkEl = p => {
-    let el = pkEls.get(p.id);
-    if (!el) {
-      el = document.createElement("div"); el.className = "glz-lp"; el.dataset.id = p.id; el.setAttribute("role", "button");
-      pkLayer.appendChild(el); pkEls.set(p.id, el); pkBindLoupe(el, p.id);
-    }
-    el.style.left = (p.fx * 100) + "%"; el.style.top = (p.fy * 100) + "%"; el.style.setProperty("--c", p.hex);
-    el.setAttribute("aria-label", `Color ${PKS.picks.indexOf(p) + 1}, ${pkNameOf(p.hex).label}. Drag to move.`);
-    el.classList.toggle("on", p.id === PKS.active);
-    return el;
+  // ----- the reticle (Adobe Capture style, David 2026-10-25): ONE ring that you move around; "+" keeps its color -----
+  const pkRingEl = () => pkLayer.querySelector(".eyd-ret") || (pkLayer.insertAdjacentHTML("beforeend", typeof eydReticleHTML === "function" ? eydReticleHTML() : ""), pkLayer.querySelector(".eyd-ret"));
+  // the preview sits top-left of the picture area, top-right when the ring is under it
+  const pkLayoutPrev = () => {
+    if (!pkPrev || pkPrev.hidden || !pkRet) return;
+    const sr = stage.getBoundingClientRect(), q = pkScreen(pkRet), x = q.x - sr.left, y = q.y - sr.top;
+    const pv = pkPrev.offsetWidth || 120, ph = pkPrev.offsetHeight || pv + 40, pad = 10, d = (pkRingEl().offsetWidth || 44) / 2 + 4;
+    const hit = l => x > l - d && x < l + pv + d && y > pad - d && y < pad + ph + d;
+    const useRight = hit(pad) && !hit(sr.width - pad - pv);
+    pkPrev.style.left = (useRight ? sr.width - pad - pv : pad) + "px"; pkPrev.style.top = pad + "px";
+    pkPrev.classList.toggle("eyd-prev-r", useRight);
   };
+  // the ring's own size (it grows with the averaged area) and the screen-px-per-source-px scale
+  const pkScale = () => { const s2 = pkSource(), r = img.getBoundingClientRect(); return s2 && r.width ? r.width / s2.w : 1; };
+  const pkLayoutRing = () => {
+    if (!pkRet) return;
+    const s2 = pkSource(), ring = pkRingEl();
+    ring.style.display = ""; ring.style.left = (pkRet.fx * 100) + "%"; ring.style.top = (pkRet.fy * 100) + "%";
+    ring.style.setProperty("--d", (s2 ? eydRingPx(eydN(s2, getSampleSize()), pkScale()) : 44) + "px");
+  };
+  pkAfterApply = () => { if (pkRet && !pkLayer.hidden) { pkLayoutRing(); pkLayoutPrev(); } };
+  // read the live color under the ring, redraw the close-up, and (when the color or the selection changed) the readout
+  const pkUpdate = (force) => {
+    if (!pkRet) return;
+    const s2 = pkSource();
+    if (!s2) {
+      // not decoded yet: show nothing (no preview card, no ring) and, only if it drags on, one calm line
+      if (!img.complete || !img.naturalWidth) { if (!pkLoadT) pkLoadT = setTimeout(() => { pkLoadT = 0; if (active === "pick" && !pkSrc && !(img.complete && img.naturalWidth) && !pkLive) pkInfo.innerHTML = `<p class="glz-pk-hint">Loading the picture\u2026</p>`; }, 400); return; }
+      pkBlocked = true; pkRenderInfo(); return;
+    }
+    const r = eydSampleAt(s2, pkRet.fx, pkRet.fy, getSampleSize());
+    if (!r) return;
+    // the close-up is drawn from real pixels first, then shown: it is never an empty card
+    eydPreviewDraw(pkPrev, s2, pkRet.fx, pkRet.fy, r.n, pkScale(), r.hex);
+    pkPrev.hidden = false; pkLayoutRing(); pkLayoutPrev();
+    const nm = pkNameOf(r.hex).label;
+    if (nm !== pkLiveName && pkLiveName !== null && typeof buzz === "function") buzz(3);
+    if (r.hex !== pkLive || nm !== pkLiveName || force) { pkLive = r.hex; pkLiveName = nm; pkRenderInfo(); pkRenderAct(); }
+  };
+  const pkSchedule = () => { if (!pkRaf) pkRaf = requestAnimationFrame(() => { pkRaf = 0; pkUpdate(); }); };
+  // move the ring (image fractions); a selected swatch lets go, because the ring is live again
+  const pkPlaceRet = (fx, fy) => {
+    pkRet = PKS.ret = { fx: clamp(fx, 0, 1), fy: clamp(fy, 0, 1) };
+    if (PKS.active) { PKS.active = null; pkRenderStrip(); }
+    pkSchedule();
+  };
+  const pkSetFromPoint = (x, y) => { const m = typeof eydMap === "function" ? eydMap(img, x, y) : null; if (m) pkPlaceRet(m.fx, m.fy); };
+  const pkMoveBy = (dfx, dfy) => { if (pkRet) pkPlaceRet(pkRet.fx + dfx, pkRet.fy + dfy); };
   const pkSig = () => PKS.picks.map(p => p.hex).join();
   const pkRenderInfo = () => {
     const a = pkGet(PKS.active);
+    if (!pkLift) { const want = !!(pkLive && !PKS.active && !pkBlocked); if (want !== !!pkStrip.querySelector(".glz-seg-live")) pkRenderStrip(); else pkPaintLive(); }
     if (pkBlocked) { pkInfo.innerHTML = `<p class="glz-pk-hint">This museum's photo can't be read here, so colors can't be picked from it.</p>`; return; }
-    if (!a) { pkInfo.innerHTML = `<p class="glz-pk-hint">${PKS.picks.length ? "Select a color to see its name." : "Tap the painting to pick a color."}</p>`; return; }
-    const { nm, label } = pkNameOf(a.hex), n = PKS.picks.length;
+    const hex = a ? a.hex : pkLive;
+    if (!hex) { pkInfo.innerHTML = `<p class="glz-pk-hint">Drag anywhere on the painting to pick a color.</p>`; return; }
+    const { nm, label } = pkNameOf(hex), n = PKS.picks.length;
+    const where = a ? `${PKS.picks.indexOf(a) + 1} of ${n}` : n === 0 ? "Tap Add color to keep it" : n === 1 ? "1 added, add one more to save" : `${n} added`;
     pkInfo.innerHTML = `<button class="glz-pk-name" data-glzpkopen aria-label="Open the page for ${esc(nm && nm.n ? nm.n : label)}"><span>${esc(label)}</span>${typeof ICON !== "undefined" ? ICON.arrow : ""}</button>
-      <p class="glz-pk-sub"><span class="glz-pk-hex">${esc(a.hex)}</span><span aria-hidden="true"> · </span>${PKS.picks.indexOf(a) + 1} of ${n}</p>`;
+      <p class="glz-pk-sub"><span class="glz-pk-hex">${esc(hex)}</span><span aria-hidden="true"> · </span>${where}</p>`;
   };
   const pkRenderAct = () => {
     const n = PKS.picks.length, saved = n >= 2 && PKS.savedSig === pkSig();
-    pkActEl.innerHTML = `<button class="glz-pk-save" data-glzpksave${n < 2 || saved ? " disabled" : ""}>${saved ? "Saved to Kept" : "Save palette"}</button>${n === 1 ? `<span class="glz-pk-note">Add one more color to save</span>` : n > 1 ? `<span class="glz-pk-note">${n} colors</span>` : ""}${n >= 1 && typeof palFullBtn === "function" ? palFullBtn("Full screen", "glz-pk-full") : ""}`;
+    pkActEl.innerHTML = `<button class="glz-pk-addb" data-glzpkadd${pkBlocked ? " disabled" : ""} aria-label="Add this color to your palette"><svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M7 1.5v11M1.5 7h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Add color</span></button><button class="glz-pk-save" data-glzpksave${n < 2 || saved ? " disabled" : ""}>${saved ? "Saved to Kept" : "Save palette"}</button>`;
+  };
+  // ----- the palette strip (David, 2026-10-25): ONE full-width, tall strip. The first color fills all of it, each added color
+  // splits it equally (2 = 50/50, 3 = thirds ...; past 6 two rows, past 12 a grid), every cell the same size. The live color under
+  // the ring is the last, dashed cell, so you see what Add will keep. Tap the strip = the full-screen palette preview;
+  // the dot in a cell's corner selects it (the ring jumps to where it was taken), the x removes the selected one, long-press drags to reorder.
+  const pkGrid = n => n <= 6 ? { cols: Math.max(n, 1), rows: 1 } : n <= 12 ? { cols: Math.ceil(n / 2), rows: 2 } : (c => ({ cols: c, rows: Math.ceil(n / c) }))(Math.ceil(Math.sqrt(n * 1.6)));
+  const pkSegHTML = (hex, o) => {
+    const label = pkNameOf(hex).label, ik = typeof ink === "function" ? ink(hex) : "light";
+    return `<div class="glz-seg-c${o.on ? " on" : ""}${o.live ? " glz-seg-live" : ""}"${o.id ? ` data-id="${o.id}"` : ""} style="--c:${hex}" data-ink="${ik}" role="option" aria-selected="${!!o.on}" aria-label="${esc(label)}, ${hex}">${o.id ? `<button type="button" class="glz-seg-dot" data-glzpksel aria-label="Select ${esc(label)}"></button>` : ""}${o.on ? `<button type="button" class="glz-seg-x" data-glzpkx aria-label="Remove this color"><svg viewBox="0 0 12 12" width="11" height="11" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>` : ""}<span class="glz-seg-t"><b>${esc(label)}</b><i>${hex}</i></span></div>`;
   };
   const pkRenderStrip = () => {
-    const keep = pkStrip.scrollLeft;
-    pkStrip.innerHTML = PKS.picks.map(p => {
-      const on = p.id === PKS.active;
-      return `<div class="glz-sw-w" data-id="${p.id}"><button class="glz-sw${on ? " on" : ""}" style="--c:${p.hex}" role="option" aria-selected="${on}" aria-label="${esc(pkNameOf(p.hex).label)}, ${p.hex}"></button>${on ? `<button class="glz-sw-x" data-glzpkx aria-label="Remove this color"><svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>` : ""}</div>`;
-    }).join("") + `<button class="glz-sw glz-sw-add" data-glzpkadd aria-label="Add a color">+</button>`;
-    pkStrip.scrollLeft = keep;
+    const showLive = !!(pkLive && !PKS.active && !pkBlocked), n = PKS.picks.length + (showLive ? 1 : 0), g = pkGrid(n);
+    pkStrip.style.setProperty("--cols", g.cols); pkStrip.style.setProperty("--rows", g.rows);
+    pkStrip.dataset.rows = g.rows; pkStrip.dataset.cols = Math.min(g.cols, 6);
+    const w = (pkStrip.clientWidth || 400) / g.cols;
+    pkStrip.dataset.den = (w >= 112 && g.rows === 1) || w >= 150 ? "full" : w >= 56 ? "hex" : "none";
+    pkStrip.innerHTML = PKS.picks.map(p => pkSegHTML(p.hex, { id: p.id, on: p.id === PKS.active })).join("") + (showLive ? pkSegHTML(pkLive, { live: true }) : "");
   };
-  const pkSyncLayer = () => {
-    const ids = new Set(PKS.picks.map(p => p.id));
-    for (const [id, el] of pkEls) if (!ids.has(id)) { el.remove(); pkEls.delete(id); }
-    PKS.picks.forEach(pkEl);
+  // the live cell follows the ring without rebuilding the strip
+  const pkPaintLive = () => {
+    const el = pkStrip.querySelector(".glz-seg-live"); if (!el || !pkLive) return;
+    const label = pkNameOf(pkLive).label;
+    el.style.setProperty("--c", pkLive); el.dataset.ink = typeof ink === "function" ? ink(pkLive) : "light";
+    el.querySelector("b").textContent = label; el.querySelector("i").textContent = pkLive; el.setAttribute("aria-label", `${label}, ${pkLive}`);
   };
-  const pkRender = () => { pkSyncLayer(); pkRenderStrip(); pkRenderInfo(); pkRenderAct(); };
-  const pkScrollToActive = smooth => {
-    const w = pkStrip.querySelector(`.glz-sw-w[data-id="${PKS.active}"]`); if (!w) return;
-    const L = w.offsetLeft - (pkStrip.clientWidth - w.offsetWidth) / 2;
-    pkStrip.scrollTo({ left: Math.max(0, L), behavior: smooth ? "smooth" : "auto" });
-  };
+  const pkRender = () => { pkRenderStrip(); pkRenderInfo(); pkRenderAct(); };
+  const pkScrollToActive = () => {};   // the strip never scrolls: every color is on it at once
   // pan the painting so a selected loupe that is off screen comes back into view
   const pkReveal = p => {
     const s2 = stage.getBoundingClientRect(), q = pkScreen(p);
@@ -422,111 +490,63 @@ function glZoomOpen(opts) {
   };
   const pkSelect = (id, o = {}) => {
     if (PKS.active === id && !o.force) return;
-    PKS.active = id; pkSyncLayer(); pkRenderStrip(); pkRenderInfo();
+    const p = pkGet(id); if (!p) return;
+    PKS.active = id; pkRet = PKS.ret = { fx: p.fx, fy: p.fy };   // the ring goes to where this color was taken
+    pkRenderStrip(); pkUpdate(true);
     if (o.scroll !== false) pkScrollToActive(true);
-    const p = pkGet(id); if (p && o.reveal) pkReveal(p);
+    if (o.reveal) pkReveal(p);
   };
-  const pkAddAt = (fx, fy) => {
+  // "+" keeps the color under the ring as a swatch (the ring stays live, so you can keep looking)
+  const pkAddLive = () => {
     if (PKS.picks.length >= PK_MAX) { if (typeof toast === "function") toast(`${PK_MAX} colors is the most a palette holds here.`); return null; }
-    const hex = pkSample(fx, fy); if (!hex) { pkRenderInfo(); return null; }
-    const p = { id: "k" + (++PKS.seq), fx, fy, hex };
+    if (!pkRet) return null;
+    const hex = pkSample(pkRet.fx, pkRet.fy); if (!hex) { pkRenderInfo(); return null; }
+    const p = { id: "k" + (++PKS.seq), fx: pkRet.fx, fy: pkRet.fy, hex };
     PKS.picks.push(p); PKS.active = p.id;
-    pkRender(); pkEls.get(p.id).classList.add("drop"); setTimeout(() => { const e2 = pkEls.get(p.id); if (e2) e2.classList.remove("drop"); }, 260);
-    pkScrollToActive(true);
+    pkRender(); pkScrollToActive(true);
     if (typeof buzz === "function") buzz(6);
     return p;
   };
-  // a still tap on the painting (see endPointer)
-  const pkTap = (x, y) => { const m = typeof eydMap === "function" ? eydMap(img, x, y) : null; if (m) pkAddAt(m.fx, m.fy); };
-  // "+" drops a loupe in the middle of what you're looking at, nudged clear of any loupe already there
-  const pkAddCenter = () => {
-    const s2 = stage.getBoundingClientRect(); let x = s2.left + s2.width / 2, y = s2.top + s2.height / 2;
-    for (let k = 0; k < 90 && PKS.picks.some(p => { const q = pkScreen(p); return Math.hypot(q.x - x, q.y - y) < 30; }); k++) { x += 34; if (x > s2.right - 30) { x = s2.left + 40; y += 34; } }
-    const m = typeof eydMap === "function" ? eydMap(img, x, y) : null;
-    pkAddAt(m ? m.fx : .5, m ? m.fy : .5);
-  };
+  // a still tap on the painting jumps the ring there (a QA hook as well)
+  const pkTap = (x, y) => pkSetFromPoint(x, y);
   const pkRemove = id => {
     const i = PKS.picks.findIndex(p => p.id === id); if (i < 0) return;
-    const gone = PKS.picks[i], el = pkEls.get(id);
+    const gone = PKS.picks[i];
     PKS.picks.splice(i, 1);
     const next = PKS.picks[Math.min(i, PKS.picks.length - 1)];
-    PKS.active = next ? next.id : null;
-    if (el) { el.classList.add("out"); pkEls.delete(id); setTimeout(() => el.remove(), 160); }
+    PKS.active = null;   // the ring stays where it is, live
     pkRender(); pkScrollToActive(true);
     if (typeof buzz === "function") buzz(5);
     if (typeof toast === "function") toast("Color removed", { undo: () => { PKS.picks.splice(Math.min(i, PKS.picks.length), 0, gone); PKS.active = gone.id; pkRender(); pkScrollToActive(true); } });
   };
-  // ----- dragging a loupe: a magnified lens floats above it so the finger never hides the spot -----
-  const pkShowLens = (p, hex) => {
-    const s2 = pkSource(); if (!s2) return;
-    const c = pkLens.querySelector("canvas"), cx = c.getContext("2d"), half = 8;
-    const px = clamp(Math.round(p.fx * s2.w), 0, s2.w - 1), py = clamp(Math.round(p.fy * s2.h), 0, s2.h - 1);
-    const sx = clamp(px - half, 0, Math.max(0, s2.w - 17)), sy = clamp(py - half, 0, Math.max(0, s2.h - 17));
-    cx.imageSmoothingEnabled = false; cx.clearRect(0, 0, 102, 102);
-    cx.drawImage(s2.c, sx, sy, Math.min(17, s2.w), Math.min(17, s2.h), 0, 0, 102, 102);
-    pkLens.style.setProperty("--c", hex); pkLens.hidden = false;
-    const q = pkScreen(p), sr = stage.getBoundingClientRect();   // the lens is positioned inside the stage
-    let lx = q.x - sr.left, ly = q.y - sr.top - 84;
-    if (ly - 54 < 4) { ly = q.y - sr.top; lx += q.x - sr.left < sr.width / 2 ? 84 : -84; }   // no room above: beside it instead
-    pkLens.style.left = clamp(lx, 58, sr.width - 58) + "px"; pkLens.style.top = ly + "px";
-  };
-  function pkBindLoupe(el, id) {
-    let d = null;
-    el.addEventListener("pointerdown", e => {
-      e.stopPropagation(); e.preventDefault();
-      const p = pkGet(id); if (!p) return;
-      stopMomentum(); const q = pkScreen(p);
-      d = { pid: e.pointerId, ox: q.x - e.clientX, oy: q.y - e.clientY, x0: e.clientX, y0: e.clientY, moved: false };
-      try { el.setPointerCapture(e.pointerId); } catch (err) {}
-      if (PKS.active !== id) { if (typeof buzz === "function") buzz(4); pkSelect(id); }
-    });
-    el.addEventListener("pointermove", e => {
-      if (!d || e.pointerId !== d.pid) return;
-      e.stopPropagation();
-      if (!d.moved && Math.hypot(e.clientX - d.x0, e.clientY - d.y0) < 4) return;
-      d.moved = true; el.classList.add("drag");
-      const p = pkGet(id); if (!p) return;
-      const r = img.getBoundingClientRect();
-      p.fx = clamp((e.clientX + d.ox - r.left) / r.width, 0, 1); p.fy = clamp((e.clientY + d.oy - r.top) / r.height, 0, 1);
-      const hex = pkSample(p.fx, p.fy); if (hex) p.hex = hex;
-      el.style.left = (p.fx * 100) + "%"; el.style.top = (p.fy * 100) + "%"; el.style.setProperty("--c", p.hex);
-      const sw = pkStrip.querySelector(`.glz-sw-w[data-id="${id}"] .glz-sw`); if (sw) sw.style.setProperty("--c", p.hex);
-      pkRenderInfo(); pkRenderAct(); pkShowLens(p, p.hex);
-    });
-    const end = e => {
-      if (!d || e.pointerId !== d.pid) return; e.stopPropagation();
-      const moved = d.moved; d = null; el.classList.remove("drag"); pkLens.hidden = true;
-      try { el.releasePointerCapture(e.pointerId); } catch (err) {}
-      if (moved && e.type === "pointerup") { if (typeof buzz === "function") buzz(6); pkRenderStrip(); }
-    };
-    el.addEventListener("pointerup", end); el.addEventListener("pointercancel", end); el.addEventListener("lostpointercapture", e => e.stopPropagation());
-  }
-  // ----- the strip: tap selects, the x removes, long-press then drag reorders -----
+  // ----- the strip: tap = full-screen preview, the dot selects, the x removes, long-press then drag reorders (one row) -----
   let pkLift = null;
-  const pkStepOf = items => items.length > 1 ? items[1].offsetLeft - items[0].offsetLeft : 54;
+  const pkOpenPreview = () => {
+    const hexes = PKS.picks.length ? PKS.picks.map(p => p.hex) : pkLive ? [pkLive] : [];
+    if (!hexes.length || typeof colorFocus !== "function") return;
+    if (typeof buzz === "function") buzz(5);
+    colorFocus(hexes.map(h => ({ name: pkNameOf(h).label, hex: h })), { noOpen: true });   // Back (x / tap / swipe down) returns here: picks and ring are untouched
+  };
+  const pkSegs = () => [...pkStrip.querySelectorAll(".glz-seg-c[data-id]")];
   const pkLiftMove = () => {
     const L = pkLift; if (!L) return;
-    const tx = L.cx - L.x0 + (pkStrip.scrollLeft - L.sl0), items = L.items;
-    L.el.style.transform = `translateX(${tx}px) scale(1.12)`;
+    const tx = L.cx - L.x0, items = L.items;
+    L.el.style.transform = `translateX(${tx}px) scale(1.04)`;
     const to = clamp(Math.round(L.from + tx / L.step), 0, items.length - 1); L.to = to;
     items.forEach((it, j) => { if (j === L.from) return; const sh = L.from < to && j > L.from && j <= to ? -L.step : L.from > to && j < L.from && j >= to ? L.step : 0; it.style.transform = sh ? `translateX(${sh}px)` : ""; });
   };
-  const pkLiftTick = () => {
-    const L = pkLift; if (!L) return;
-    const r = pkStrip.getBoundingClientRect(), edge = 44;
-    if (L.cx < r.left + edge) pkStrip.scrollLeft -= 9; else if (L.cx > r.right - edge) pkStrip.scrollLeft += 9;
-    pkLiftMove(); L.raf = requestAnimationFrame(pkLiftTick);
-  };
   pkStrip.addEventListener("pointerdown", e => {
-    const w = e.target.closest(".glz-sw-w"); if (!w || e.target.closest("[data-glzpkx]") || pkLift) return;
-    const items = [...pkStrip.querySelectorAll(".glz-sw-w")], from = items.indexOf(w);
-    const L = { el: w, from, to: from, items, step: pkStepOf(items), x0: e.clientX, y0: e.clientY, cx: e.clientX, sl0: pkStrip.scrollLeft, pid: e.pointerId, lifted: false, timer: 0, raf: 0 };
+    const w = e.target.closest(".glz-seg-c[data-id]"); if (!w || e.target.closest("[data-glzpkx],[data-glzpksel]") || pkLift) return;
+    const items = pkSegs(), from = items.indexOf(w), canMove = items.length >= 2 && pkStrip.dataset.rows === "1";
+    const L = { el: w, from, to: from, items, step: items.length > 1 ? items[1].offsetLeft - items[0].offsetLeft : 0, x0: e.clientX, y0: e.clientY, cx: e.clientX, pid: e.pointerId, lifted: false, timer: 0 };
     L.timer = setTimeout(() => {
-      L.lifted = true; pkLift = L; L.sl0 = pkStrip.scrollLeft; L.x0 = L.cx;
       if (typeof buzz === "function") buzz(8);
+      pkSwallowClick = performance.now();
+      pkSelect(w.dataset.id, { reveal: true, force: true });   // a long press selects this color (the ring jumps to where it was taken, its ✕ shows); no corner dot
+      if (!canMove) { pkStrip._arm = null; return; }
+      L.lifted = true; pkLift = L; L.x0 = L.cx;
       w.classList.add("lift"); pkStrip.classList.add("lifting");
       try { pkStrip.setPointerCapture(L.pid); } catch (err) {}
-      L.raf = requestAnimationFrame(pkLiftTick);
     }, 360);
     pkStrip._arm = L;
   });
@@ -541,7 +561,7 @@ function glZoomOpen(opts) {
     const L = pkStrip._arm; if (!L || (e && e.pointerId !== L.pid)) return;
     clearTimeout(L.timer); pkStrip._arm = null;
     if (!L.lifted) return;
-    cancelAnimationFrame(L.raf); pkLift = null; pkSwallowClick = performance.now();
+    pkLift = null; pkSwallowClick = performance.now();
     try { pkStrip.releasePointerCapture(L.pid); } catch (err) {}
     const to = commit ? L.to : L.from;
     L.el.style.transition = "transform .2s var(--spring)"; L.el.style.transform = `translateX(${(to - L.from) * L.step}px)`;
@@ -556,17 +576,17 @@ function glZoomOpen(opts) {
   pkStrip.addEventListener("pointercancel", e => pkLiftEnd(e, false));
   pkStrip.addEventListener("click", e => {
     if (performance.now() - pkSwallowClick < 400) return;
-    if (e.target.closest("[data-glzpkx]")) { const w = e.target.closest(".glz-sw-w"); if (w) pkRemove(w.dataset.id); return; }
-    if (e.target.closest("[data-glzpkadd]")) { if (typeof buzz === "function") buzz(5); pkAddCenter(); return; }
-    const w = e.target.closest(".glz-sw-w");
-    if (w) { if (typeof buzz === "function") buzz(4); pkSelect(w.dataset.id, { reveal: true, force: true }); }
+    const x = e.target.closest("[data-glzpkx]"); if (x) { const w = x.closest(".glz-seg-c"); if (w) pkRemove(w.dataset.id); return; }
+    const s = e.target.closest("[data-glzpksel]"); if (s) { const w = s.closest(".glz-seg-c"); if (typeof buzz === "function") buzz(4); if (w) pkSelect(w.dataset.id, { reveal: true, force: true }); return; }
+    pkOpenPreview();
   });
+  window.addEventListener("resize", () => { if (active === "pick" && !closed) pkRenderStrip(); });
   pkInfo.addEventListener("click", e => {
     if (!e.target.closest("[data-glzpkopen]")) return;
     const a = pkGet(PKS.active); if (a && typeof openTappedColor === "function") openTappedColor(a.hex);
   });
   pkActEl.addEventListener("click", e => {
-    if (e.target.closest("[data-pf-open]")) { if (typeof palFullOpen === "function") palFullOpen(PKS.picks.map(p => p.hex), { title: opts.title || "Your palette", source: "Picked colors", from: pkStrip, onSave: PKS.picks.length >= 2 && PKS.savedSig !== pkSig() ? () => { const b = pkActEl.querySelector("[data-glzpksave]"); if (b && !b.disabled) b.click(); } : null }); return; }
+    if (e.target.closest("[data-glzpkadd]")) { if (typeof buzz === "function") buzz(5); pkAddLive(); return; }
     if (!e.target.closest("[data-glzpksave]")) return;
     const hexes = PKS.picks.map(p => p.hex); if (hexes.length < 2) return;
     // the painting it came from, with where each color was picked (fractions of the image), so the palette's page
@@ -586,9 +606,22 @@ function glZoomOpen(opts) {
   });
   const pkEnter = on => {
     pkPanel.hidden = !on; pkLayer.hidden = !on;
-    if (!on) { pkLens.hidden = true; return; }
-    pkBlocked = false; pkRender(); requestAnimationFrame(() => pkScrollToActive(false));
+    if (pkPrev) pkPrev.hidden = true;   // shown only once the first real sample is drawn into it
+    // the panel changes the stage's height: refit the picture to it (it stays at "fit" if it was there)
+    if (natW) { const wasFit = Z <= fitZ * 1.02; computeFit(); Z = wasFit ? fitZ : clamp(Z, fitZ, maxZ); P = clampP(P, Z, false); frame.style.transition = ""; apply(); }
+    if (!on) return;
+    pkBlocked = false; PKS.active = null; pkLive = null; pkLiveName = null;
+    // the ring comes back where it was; the first time it waits at the middle of what's on screen
+    if (!pkRet) {
+      pkRet = PKS.ret;
+      if (!pkRet) { const sr = stage.getBoundingClientRect(), m = typeof eydMap === "function" ? eydMap(img, sr.left + sr.width / 2, sr.top + sr.height / 2) : null; pkRet = PKS.ret = m ? { fx: m.fx, fy: m.fy } : { fx: .5, fy: .5 }; }
+    }
+    pkRingEl().style.display = "none"; pkRender();
+    if (img.complete && img.naturalWidth) pkUpdate(true);
+    requestAnimationFrame(() => { pkScrollToActive(false); if (active === "pick" && img.complete && img.naturalWidth) pkUpdate(true); });
   };
+  if (pkSizeEl) eydBindSizes(pkSizeEl, () => pkUpdate(true));
+  img.addEventListener("load", () => { if (active === "pick") pkUpdate(true); });
   // Select: an accumulated list of tap points in this image's own resized pixel space (js/segment.js's
   // segEncode/segPointForTap), each +1 (add) or 0 (remove); every tap re-runs the decoder (fast -- see
   // js/segment.js's header) with the full list so far, live-refining one mask rather than restarting it.
@@ -764,6 +797,12 @@ function glZoomOpen(opts) {
   const onKey = e => {
     if (e.key === "Escape") { e.stopImmediatePropagation(); e.preventDefault(); if (LP && Z > fitZ * 1.15) goFit(); else closeBack(); return; }
     if (e.target && /^(INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
+    // Pick: the arrow keys nudge the ring one image pixel (Shift = ten)
+    if (active === "pick" && pkRet && /^Arrow(Left|Right|Up|Down)$/.test(e.key) && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      const s2 = pkSource(); if (!s2) return;
+      const st = e.shiftKey ? 10 : 1, dx = e.key === "ArrowLeft" ? -st : e.key === "ArrowRight" ? st : 0, dy = e.key === "ArrowUp" ? -st : e.key === "ArrowDown" ? st : 0;
+      e.preventDefault(); e.stopPropagation(); pkMoveBy(dx / s2.w, dy / s2.h); return;
+    }
     if (e.key === "+" || e.key === "=") stepTo(Z * 1.5); else if (e.key === "-") stepTo(Z / 1.5); else if (e.key === "0") stepTo(fitZ);
   };
   window.addEventListener("keydown", onKey, true);
@@ -789,10 +828,11 @@ function glZoomOpen(opts) {
   if (opts.startTool === "where" && opts.pix) setMode("where");
   else if (opts.startTool === "select" && opts.src) setMode("select");
   else if (opts.startTool === "pick" && typeof eydSource === "function") setMode("pick");
+  else if (opts.startTool === "value" || opts.startTool === "squint") setMode(opts.startTool);
   // a QA accessor for the gesture fuzz test (tools/smoke/scenarios.js), the same pattern js/honey.js exposes
   // via HM_CTRL._qaState -- the raw camera state plus the bounds it should always be within, so the test can
   // assert on the gesture machinery itself rather than reading rendered pixels back out of a transform string
   scrim._glzQA = { state: () => ({ Z, P: P.slice(), fitZ, maxZ, natW, natH }), stopMomentum: () => stopMomentum(), reset: () => resetView(),
-    pk: () => ({ picks: PKS.picks.map(p => ({ id: p.id, fx: p.fx, fy: p.fy, hex: p.hex })), active: PKS.active, blocked: pkBlocked }), pkTap: (x, y) => pkTap(x, y) };
+    pk: () => ({ picks: PKS.picks.map(p => ({ id: p.id, fx: p.fx, fy: p.fy, hex: p.hex })), active: PKS.active, blocked: pkBlocked, ret: pkRet, live: pkLive }), pkTap: (x, y) => pkTap(x, y), pkAdd: () => pkAddLive() };
   return { close };
 }

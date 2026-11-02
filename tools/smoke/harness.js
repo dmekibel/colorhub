@@ -29,7 +29,8 @@
       const w = f.contentWindow;
       this.frame = f; this.w = w;
       const loaded = new Promise(r => f.addEventListener("load", r, { once: true }));
-      w.location.replace("/index.html" + hash);
+      // an open with no address lands on Today now (js/boot.js); every older scenario that starts from the honeycomb passes ?home=1, the Today cold open passes opt.cold
+      w.location.replace("/index.html" + (hash === "" && !opt.cold ? "?home=1" : "") + hash);
       await loaded;
       this.w = f.contentWindow; this.d = this.w.document;
       // CSS animations and transitions run on the compositor's real clock, not the virtual one, so a sheet would

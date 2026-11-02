@@ -74,7 +74,7 @@ console.log(`${total} colors, ${D.units.length} units: ${errors.length} failures
 // and js/home.js are a different feature, not a display path: the honeycomb's "every name" view browses the
 // raw library as a set of items (each bubble is one exact library entry), not the nearest name of a color.
 // js/honey.js only mentions "library.json" in a comment about that same view's item shape.
-const NAMING_ALLOW = new Set(["naming.js", "graph.js", "colorsets.js", "home.js", "honey.js"]);
+const NAMING_ALLOW = new Set(["naming.js", "graph.js", "colorsets.js", "home.js", "honey.js", "sq.js"]);
 const nameErrors = [];
 for (const f of fs.readdirSync(path.join(__dirname, "../js")).filter(f => f.endsWith(".js"))) {
   if (NAMING_ALLOW.has(f)) continue;

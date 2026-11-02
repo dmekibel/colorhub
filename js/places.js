@@ -13,7 +13,7 @@
 // ---------- the Places stem ----------
 // Every place, in order (PLAN §3.1): the floor plus the four rooms that rise from it. Each row shows its own
 // live art and note (js/core.js roomsBubbleArt/roomsNote, unchanged -- the same pictures the old stem used).
-const PLACES_LIST = [["home", NAV_MAP], ["feed", "Today"], ...ROOMS_LIST];   // Today: the feed (js/todayfeed.js)
+const PLACES_LIST = [["feed", "Home"], ["home", NAV_MAP], ...ROOMS_LIST.filter(r => r[0] !== "explore")];   // David, 2026-10-28: Home is the feed; the Museum is no longer a place of its own (its pages open from Home > Boards)   // Explore: the feed (js/todayfeed.js), then the Map (David, 2026-10-26)
 // Today's stripes read like Learn's (David, 2026-10-24). Same 48 px disc as the other rows, real colors, a different subject:
 // a masonry of four differently sized rounded tiles, like the Today feed itself (never parallel bars). The colors are the same
 // pigment set Today's old strip used (roomsBubbleArt "feed"). Studio keeps its own rainbow disc with a camera on it.
@@ -76,7 +76,7 @@ function placesOpen() {
   // definition, now two doors, same as Keep colors below.
   const rows = PLACES_LIST.map(([id, label]) => ({ id, label, cur: id === here }))
     // (Collections removed, David 2026-10-20: "Collections and Museum" are redundant -- it only opened the Museum's own grid)
-    .concat(typeof ymSettingsSheet === "function" ? [{ id: "settings", label: "Settings", settings: true }] : []);
+    .concat(typeof ymSettingsSheet === "function" ? [{ id: "settings", label: "Profile and settings", settings: true }] : []);
   const n = rows.length;
   const scrim = document.createElement("div"); scrim.className = "rm-scrim rm-scrim-l";
   scrim.addEventListener("pointerdown", e => { e.preventDefault(); e.stopPropagation(); buzz(4); closeStem(); });
@@ -92,7 +92,7 @@ function placesOpen() {
         ${placesCollArt()}<span class="rm-label"><b>Collections</b><em>Every painting, poem, gem and look</em></span></button>`
     : r.settings
     ? `<button class="rm-bubble hm-do-sm" role="menuitem" data-pl="settings" style="--i:${i}">
-        <span class="rm-art hm-do-ic">${HM_GEAR_SVG}</span><span class="rm-label"><b>Settings</b></span></button>`
+        <span class="rm-art hm-do-ic">${HM_GEAR_SVG}</span><span class="rm-label"><b>Profile and settings</b></span></button>`
     : `<button class="rm-bubble${r.cur ? " cur" : ""}" role="menuitem" data-pl="${r.id}" style="--i:${i}">
         ${placesArt(r.id)}<span class="rm-label"><b>${esc(r.label)}</b><em>${esc(r.cur ? "You're here" : roomsNote(r.id))}</em></span></button>`
   ).join("");
@@ -126,6 +126,8 @@ function placesOpen() {
 // array of groups: { title, note, items: [{ t, n?, icon, run } | { chips:[...] } | { html }] }. Nothing is
 // required to register: a context with nothing registered still gets Search + Settings, so ⋯ always works.
 const MORE_REGISTRY = new Map();
+// a page that already has search and settings one tap away returns its groups through bareMore(): the sheet then holds only its own rows
+const bareMore = groups => Object.assign(groups, { bare: true });
 function moreRegister(ctx, groupsFn) { if (ctx && typeof groupsFn === "function") MORE_REGISTRY.set(ctx, groupsFn); }
 function moreGroupHTML(g, gi) {
   const rows = (g.items || []).slice(0, 6).map((it, i) => {
@@ -151,9 +153,9 @@ function moreOpen(ctx) {
   let groups = [];
   if (groupsFn) try { groups = groupsFn() || []; } catch (e) { groups = []; }
   const html = `<div class="mr-sheet">
-    <button type="button" class="mr-search" data-mr-search>${ICON.search}<span>Search</span></button>
+    ${groups.bare ? "" : `<button type="button" class="mr-search" data-mr-search>${ICON.search}<span>Search</span></button>`}
     ${groups.map(moreGroupHTML).join("")}
-    <section class="mn-group"><button type="button" class="mn-row" data-mr-settings>${ICON.chev ? "" : ""}<span class="mn-txt"><b>Settings</b></span><span class="mn-chev">${ICON.chev}</span></button></section>
+    ${groups.bare ? "" : `<section class="mn-group"><button type="button" class="mn-row" data-mr-settings>${ICON.chev ? "" : ""}<span class="mn-txt"><b>Settings</b></span><span class="mn-chev">${ICON.chev}</span></button></section>`}
   </div>`;
   const { sh, close } = sheet(html);
   sh.classList.add("mr-sheet-wrap");

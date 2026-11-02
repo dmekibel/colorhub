@@ -1,0 +1,8 @@
+name = "chromatlas-sync"
+main = "index.js"
+compatibility_date = "2026-10-01"
+# Deployed 2026-10-30 as chromatlas-sync (workers.dev). SESSION_SECRET was set at deploy time and lives only in Cloudflare.
+# Then a custom domain, e.g. sync.chromatlas.app: routes = [{ pattern = "sync.chromatlas.app", custom_domain = true }]
+[[kv_namespaces]]
+binding = "SAVES"
+id = "511e6eafc566495fb8ffb1c96b1694ad"
