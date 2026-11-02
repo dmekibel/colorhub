@@ -8521,9 +8521,9 @@ scenario("paintings", "Save palette adds a new entry to S.palettes, and Edit let
 scenario("paintings", "Palette full screen: opens from the painting's strip with the current palette, a mode switch changes the render, an edit shows up, and close returns exactly", async t => {
   await t.open("#/gallery/777", { settle: 800 });
   await t.waitFor("[data-glswatches] [data-glj]", 15000, "the palette strip");
-  const hexesOf = () => t.ev(`[...document.querySelectorAll('[data-glswatches] [data-swatch]')].map(b => b.dataset.swatch.toUpperCase()).join()`);
+  const hexesOf = () => t.ev(`[...document.querySelectorAll('[data-glswatches] [data-glj]')].map(b => b.style.getPropertyValue('--c').toUpperCase()).join()`);
   const strip = hexesOf(), hash0 = t.ev("location.hash");
-  await t.click(await t.waitFor(".gl-seg-row [data-pf-open]", 8000, "the Full screen button by the strip"), { wait: 500 });
+  await t.click(await t.waitFor("[data-glfull]", 8000, "the Full screen button by the strip"), { wait: 500 });
   await t.waitFor(".palfull [data-pf-stage] .pf-it", 5000, "the full-screen palette viewer");
   const scrollY0 = t.ev("document.body.style.top ? -parseFloat(document.body.style.top) : scrollY");
   const shown = () => t.ev(`[...document.querySelectorAll('.palfull [data-pf-stage] .pf-it')].map(e => e.style.getPropertyValue('--c').toUpperCase()).join()`);
