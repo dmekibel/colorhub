@@ -299,24 +299,22 @@ function honeyGroupBounds(pts, groupOf) {
   }
   return out;
 }
-// SUNFLOWER: the golden-angle disc, filled from the middle out in rank order like the rings. The disc is cut into
-// bands one lattice unit wide; each band takes the next colors in rank order, and inside a band the colors go round
-// by hue (the best rotation of hue order onto the band's seeds), so the middle-vs-edge meaning and a hue circle
-// both read, in the sunflower's own packing.
+// SUNFLOWER: the golden-angle disc, in hue sectors. Colors are sorted round by hue (honeyAngleOf) and the disc's seeds
+// round by their angle, and each hue gets its slice of seeds in proportion (equal counts, so the cut points are
+// cumulative counts), so a color's angle IS its hue, all the way across the disc. Inside a sector the colors go in
+// rank order (most central first) onto the seeds nearest the middle first, so rank runs smoothly middle -> edge and
+// neighboring sectors line up (no per-band re-sorting, which read as patchy).
 function honeySunArr(items, rankOf, groupOf) {
   const N = items.length; if (!N) return { pts: [], finite: true };
   const c = .56, seeds = [];
-  for (let i = 0; i < N; i++) { const r = c * Math.sqrt(i + .5), a = i * HONEY_GA, x = r * Math.cos(a), y = r * Math.sin(a); let t = Math.atan2(-y, x) * 180 / Math.PI; if (t < 0) t += 360; seeds.push({ x, y, t, band: Math.floor(r) }); }
-  const ordered = items.slice().sort((a, b) => rankOf(a) - rankOf(b) || honeyAngleOf(a) - honeyAngleOf(b)), pts = [];
-  const ad = (a, b) => { const d = Math.abs(a - b) % 360; return d > 180 ? 360 - d : d; };
-  for (let i0 = 0; i0 < N;) {
-    let i1 = i0; while (i1 < N && seeds[i1].band === seeds[i0].band) i1++;
-    const cells = seeds.slice(i0, i1).sort((a, b) => a.t - b.t), m = cells.length;
-    const grp = ordered.slice(i0, i1).sort((a, b) => honeyAngleOf(a) - honeyAngleOf(b));
-    let bo = 0, bc = Infinity;
-    for (let o = 0; o < m; o++) { let s = 0; for (let k = 0; k < m && s < bc; k++) s += ad(honeyAngleOf(grp[k]), cells[(k + o) % m].t); if (s < bc) { bc = s; bo = o; } }
-    grp.forEach((it, k) => { const s = cells[(k + bo) % m]; pts.push({ it, x: s.x, y: s.y, g: groupOf ? groupOf(it) : 0 }); });
-    i0 = i1;
+  for (let i = 0; i < N; i++) { const r = c * Math.sqrt(i + .5), a = i * HONEY_GA, x = r * Math.cos(a), y = r * Math.sin(a); let t = Math.atan2(-y, x) * 180 / Math.PI; if (t < 0) t += 360; seeds.push({ x, y, t, r }); }
+  const byHue = items.map(it => ({ it, a: honeyAngleOf(it), k: rankOf(it) })).sort((p, q) => p.a - q.a || p.k - q.k);
+  seeds.sort((p, q) => p.t - q.t || p.r - q.r);
+  const K = Math.max(1, Math.round(N / Math.max(8, Math.min(24, Math.sqrt(N) * .75)))), pts = [];
+  for (let s = 0; s < K; s++) {
+    const i0 = Math.round(s * N / K), i1 = Math.round((s + 1) * N / K);
+    const its = byHue.slice(i0, i1).sort((p, q) => p.k - q.k || p.a - q.a), sd = seeds.slice(i0, i1).sort((p, q) => p.r - q.r);
+    its.forEach((q, i) => pts.push({ it: q.it, x: sd[i].x, y: sd[i].y, g: groupOf ? groupOf(q.it) : 0 }));
   }
   const lay = { pts, finite: true };
   if (groupOf) lay.bounds = honeyGroupBounds(pts, groupOf);
@@ -397,9 +395,18 @@ const honeyMet = it => { const c = typeof hmCard === "function" ? hmCard(it.o) :
 // A layout key is "shape~order" (and "~#hex" for Around a color); the Hue map's own key stays its Look's map shape,
 // so the default map is exactly the one David approved.
 const honeyDistTo = hex => { const o = honeyOk({ h: hex }); return it => { const q = honeyOk(it); return Math.hypot(q[0] - o[0], q[1] - o[1], q[2] - o[2]); }; };
+// "Vivid" ranks by OKLab distance from the hue's own pure color (its cusp: the most chromatic color of that hue), so the
+// pure bright colors sit in the middle and tints, shades and greys all go outward (CIELAB chroma alone put dark navies
+// and maroons in the middle). Greys, which have no hue to speak of, take the outer edge.
+function honeyVividRank(items) {
+  const B = 36, cusp = new Array(B).fill(null), hb = q => Math.floor(((Math.atan2(q[2], q[1]) / (2 * Math.PI) + 1) % 1) * B), cc = q => Math.hypot(q[1], q[2]);
+  for (const it of items) { const q = honeyOk(it), b = hb(q); if (cc(q) > 6 && (!cusp[b] || cc(q) > cc(cusp[b]))) cusp[b] = q; }
+  const near = b => { for (let d = 0; d < B; d++) { const u = cusp[(b + d) % B] || cusp[(b - d + B) % B]; if (u) return u; } return [60, 0, 0]; };
+  return it => { const q = honeyOk(it), u = near(hb(q)); return cc(q) < 4 ? 1e3 - cc(q) : Math.hypot(q[0] - u[0], q[1] - u[1], q[2] - u[2]); };
+}
 // rank(it, items, param) -> lower = nearer the middle; group (optional) -> the seams drawn on the ground
 const HONEY_CENTER = {
-  vivid: { t: "Vivid", mid: "the most vivid", edge: "greys", rank: () => it => -it.C },
+  vivid: { t: "Vivid", mid: "the most vivid", edge: "greys", rank: items => honeyVividRank(items) },
   muted: { t: "Greys", mid: "greys", edge: "the most vivid", rank: () => it => it.C },
   light: { t: "Light", mid: "white", edge: "black", rank: () => it => -it.L },
   dark: { t: "Dark", mid: "black", edge: "white", rank: () => it => it.L },
