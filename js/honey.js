@@ -316,6 +316,7 @@ function honeySunArr(items, rankOf, groupOf) {
     const its = byHue.slice(i0, i1).sort((p, q) => p.k - q.k || p.a - q.a), sd = seeds.slice(i0, i1).sort((p, q) => p.r - q.r);
     its.forEach((q, i) => pts.push({ it: q.it, x: sd[i].x, y: sd[i].y, g: groupOf ? groupOf(q.it) : 0 }));
   }
+  honeySmoothPts(pts);
   const lay = { pts, finite: true };
   if (groupOf) lay.bounds = honeyGroupBounds(pts, groupOf);
   return lay;
@@ -398,11 +399,78 @@ const honeyDistTo = hex => { const o = honeyOk({ h: hex }); return it => { const
 // "Vivid" ranks by OKLab distance from the hue's own pure color (its cusp: the most chromatic color of that hue), so the
 // pure bright colors sit in the middle and tints, shades and greys all go outward (CIELAB chroma alone put dark navies
 // and maroons in the middle). Greys, which have no hue to speak of, take the outer edge.
+let HONEY_CUSP = null;   // 360 entries: the sRGB gamut's most chromatic OKLab point [L, a, b] (x100) at each OKLab hue degree
+function honeyCusps() {
+  if (HONEY_CUSP) return HONEY_CUSP;
+  const lin = v => v > .04045 ? ((v + .055) / 1.055) ** 2.4 : v / 12.92, best = new Array(360).fill(null);
+  const ok = (r, g, b) => {
+    r = lin(r); g = lin(g); b = lin(b);
+    const l = Math.cbrt(.4122214708 * r + .5363325363 * g + .0514459929 * b), m = Math.cbrt(.2119034982 * r + .6806995451 * g + .1073969566 * b), s = Math.cbrt(.0883024619 * r + .2817188376 * g + .6299787005 * b);
+    return [100 * (.2104542553 * l + .793617785 * m - .0040720468 * s), 100 * (1.9779984951 * l - 2.428592205 * m + .4505937099 * s), 100 * (.0259040371 * l + .7827717662 * m - .808675766 * s)];
+  };
+  const S = 2048;
+  for (let ch = 0; ch < 3; ch++) for (let lo = 0; lo < 2; lo++) for (let hi = 0; hi < 2; hi++) {   // the 12 edges of the RGB cube: one channel runs, the other two sit at 0 or 1
+    for (let i = 0; i <= S; i++) {
+      const v = [lo, hi]; v.splice(ch, 0, i / S);
+      const q = ok(v[0], v[1], v[2]), c = Math.hypot(q[1], q[2]); if (c < 1) continue;
+      const h = Math.floor(((Math.atan2(q[2], q[1]) * 180 / Math.PI) + 360) % 360);
+      if (!best[h] || c > Math.hypot(best[h][1], best[h][2])) best[h] = q;
+    }
+  }
+  for (let h = 0; h < 360; h++) if (!best[h]) { let d = 1; while (!best[(h + d) % 360] && !best[(h - d + 360) % 360]) d++; best[h] = best[(h + d) % 360] || best[(h - d + 360) % 360]; }
+  return (HONEY_CUSP = best);
+}
+// shades (darker than the hue's pure color) rank further out than tints at the same OKLab distance, so in every hue sector the
+// darks form one continuous outer band instead of islands among the lights
+const HONEY_SHADE_W = 1.2;
 function honeyVividRank(items) {
-  const B = 36, cusp = new Array(B).fill(null), hb = q => Math.floor(((Math.atan2(q[2], q[1]) / (2 * Math.PI) + 1) % 1) * B), cc = q => Math.hypot(q[1], q[2]);
-  for (const it of items) { const q = honeyOk(it), b = hb(q); if (cc(q) > 6 && (!cusp[b] || cc(q) > cc(cusp[b]))) cusp[b] = q; }
-  const near = b => { for (let d = 0; d < B; d++) { const u = cusp[(b + d) % B] || cusp[(b - d + B) % B]; if (u) return u; } return [60, 0, 0]; };
-  return it => { const q = honeyOk(it), u = near(hb(q)); return cc(q) < 4 ? 1e3 - cc(q) : Math.hypot(q[0] - u[0], q[1] - u[1], q[2] - u[2]); };
+  const cu = honeyCusps(), cc = q => Math.hypot(q[1], q[2]);
+  return it => { const q = honeyOk(it); if (cc(q) < 4) return 1e3 - cc(q); const u = cu[Math.floor(((Math.atan2(q[2], q[1]) * 180 / Math.PI) + 360) % 360)]; const sh = q[0] < u[0] ? (u[0] - q[0]) * HONEY_SHADE_W : 0; return Math.hypot(q[0] - u[0], q[1] - u[1], q[2] - u[2]) + sh; };
+}
+// After placement: swap neighboring cells (and short 3-cycles) when that lowers the OKLab distance to each cell's
+// neighbors, never moving a color more than 1.5 cells from where it was placed (so hue-by-angle and vivid-in-the-middle hold).
+// Deterministic (fixed scan order), at most 3 passes.
+function honeySmoothPts(pts) {
+  const n = pts.length; if (n < 8) return;
+  const X = pts.map(q => q.x), Y = pts.map(q => q.y), O = new Float64Array(n * 3), cell = 1.6, G = new Map();
+  pts.forEach((q, i) => { const o = honeyOk(q.it); O[i * 3] = o[0]; O[i * 3 + 1] = o[1]; O[i * 3 + 2] = o[2]; });
+  const key = (i, j) => i * 100003 + j;
+  for (let i = 0; i < n; i++) { const k = key(Math.floor(X[i] / cell), Math.floor(Y[i] / cell)); (G.get(k) || G.set(k, []).get(k)).push(i); }
+  const NB = [];
+  for (let i = 0; i < n; i++) {
+    const gi = Math.floor(X[i] / cell), gj = Math.floor(Y[i] / cell), a = [];
+    for (let u = -1; u <= 1; u++) for (let v = -1; v <= 1; v++) for (const j of G.get(key(gi + u, gj + v)) || []) if (j !== i && Math.hypot(X[i] - X[j], Y[i] - Y[j]) < 1.5) a.push(j);
+    NB.push(a);
+  }
+  const NB4 = NB.map((a, i) => a.slice().sort((p, q) => Math.hypot(X[i] - X[p], Y[i] - Y[p]) - Math.hypot(X[i] - X[q], Y[i] - Y[q])).slice(0, 4));
+  const col = pts.map((_, i) => i), at = pts.map((_, i) => i);   // col[slot] = which color sits in the slot; at[color] = its slot
+  const d = (c1, c2) => { const i = c1 * 3, j = c2 * 3, x = O[i] - O[j], y = O[i + 1] - O[j + 1], z = O[i + 2] - O[j + 2]; return Math.sqrt(x * x + y * y + z * z); };
+  const near = (c, slot) => Math.hypot(X[slot] - X[c], Y[slot] - Y[c]) <= 1.5;   // color c placed originally in slot c
+  const cost = (slot, c, ex) => { let t = 0; for (const j of NB[slot]) t += d(c, ex && ex.s === j ? ex.c : col[j]); return t; };
+  for (let pass = 0; pass < 3; pass++) {
+    let moved = 0;
+    for (let a = 0; a < n; a++) {
+      for (const b of NB[a]) {
+        if (b < a) continue;
+        const ca = col[a], cb = col[b];
+        if (!near(ca, b) || !near(cb, a)) continue;
+        const before = cost(a, ca) + cost(b, cb), after = cost(a, cb, { s: b, c: ca }) + cost(b, ca, { s: a, c: cb });
+        if (after < before - 1e-6) { col[a] = cb; col[b] = ca; moved++; }
+      }
+      const nb = NB4[a];
+      for (let u = 0; u < nb.length; u++) for (let v = 0; v < nb.length; v++) {   // 3-cycle a <- b <- c <- a
+        if (u === v) continue; const b = nb[u], c = nb[v], ca = col[a], cb = col[b], cc = col[c];
+        if (!near(cb, a) || !near(cc, b) || !near(ca, c)) continue;
+        const loc = new Set([a, b, c]); let before = 0, after = 0;
+        const nw = { [a]: cb, [b]: cc, [c]: ca }, get = (j, m) => m ? (nw[j] != null ? nw[j] : col[j]) : col[j];
+        for (const s of loc) for (const j of NB[s]) if (!loc.has(j) || j > s) { before += d(col[s], get(j, 0)); after += d(nw[s], get(j, 1)); }
+        if (after < before - 1e-6) { col[a] = cb; col[b] = cc; col[c] = ca; moved++; }
+      }
+    }
+    if (!moved) break;
+  }
+  const items = pts.map(q => q.it), gs = pts.map(q => q.g);
+  for (let s = 0; s < n; s++) { pts[s].it = items[col[s]]; pts[s].g = gs[col[s]]; }
 }
 // rank(it, items, param) -> lower = nearer the middle; group (optional) -> the seams drawn on the ground
 const HONEY_CENTER = {
