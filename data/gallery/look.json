@@ -1,486 +1,234 @@
 {
  "v": 1,
- "n": 236949,
- "w": 391,
- "h": 607,
- "hash": "5cdf05cb",
- "built": "2026-10-30",
+ "n": 238262,
+ "w": 392,
+ "h": 608,
+ "hash": "8c04f42e",
+ "built": "2026-11-06",
  "model": "ViT-B-32 laion2b_s34b_b79k",
  "method": "PCA(50) -> UMAP(2-D, 15 neighbors) -> islands placed by CLIP-centroid MDS -> UMAP re-run from that arrangement -> recursive median split onto an even grid -> neighbor-swap smoothing",
  "mitigation": {},
  "sources": {
-  "image": 236881,
+  "image": 238194,
   "tile": 68,
   "imputed": 0
  },
  "islands": [
   {
-   "n": 8883,
-   "w": 98,
-   "h": 125,
-   "mx": 51.2,
-   "my": 61.9,
-   "cx": -373.2,
-   "cy": 37.8,
-   "r": 71.4,
+   "n": 8526,
+   "w": 118,
+   "h": 102,
+   "mx": 59.8,
+   "my": 47.1,
+   "cx": -411.7,
+   "cy": 72.9,
+   "r": 69.5,
    "par": 0,
-   "as": 1.45,
-   "an": 0.843,
+   "as": 1.42,
+   "an": -2.72,
    "lab": "Portraits of men",
    "zs": [
     [
      "Portraits of men",
      "people",
-     2.49,
-     0.59
+     2.64,
+     0.61
     ],
     [
      "Self-portraits",
      "people",
-     1.84,
-     0.1
-    ]
-   ]
-  },
-  {
-   "n": 8735,
-   "w": 95,
-   "h": 123,
-   "mx": 45.8,
-   "my": 61.2,
-   "cx": -43.8,
-   "cy": 101.0,
-   "r": 62.6,
-   "par": 1,
-   "as": 1.39,
-   "an": 1.3,
-   "lab": "Myths and religious scenes",
-   "zs": [
-    [
-     "Myths",
-     "sacred",
-     1.74,
-     0.14
-    ],
-    [
-     "Angels",
-     "sacred",
-     1.56,
-     0.11
-    ]
-   ]
-  },
-  {
-   "n": 8313,
-   "w": 123,
-   "h": 92,
-   "mx": 56.3,
-   "my": 43.8,
-   "cx": 118.9,
-   "cy": -312.5,
-   "r": 69.8,
-   "par": 2,
-   "as": 1.45,
-   "an": 2.537,
-   "lab": "Landscapes and rivers",
-   "zs": [
-    [
-     "Rivers",
-     "water",
-     2.44,
+     1.96,
      0.12
-    ],
-    [
-     "Castles",
-     "built",
-     2.23,
-     0.09
     ]
    ]
   },
   {
-   "n": 8259,
-   "w": 122,
-   "h": 92,
-   "mx": 62.8,
-   "my": 44.8,
-   "cx": -130.4,
-   "cy": -334.3,
-   "r": 66.1,
-   "par": 3,
+   "n": 7688,
+   "w": 102,
+   "h": 104,
+   "mx": 49.0,
+   "my": 51.8,
+   "cx": -258.7,
+   "cy": -297.6,
+   "r": 60.0,
+   "par": 1,
    "as": 1.45,
-   "an": -2.622,
+   "an": -2.516,
    "lab": "Portraits of men, 1800s to 1900s",
    "zs": [
     [
      "Portraits of men",
      "people",
-     2.7,
-     0.47
+     2.75,
+     0.49
     ],
     [
      "Self-portraits",
      "people",
-     2.53,
-     0.32
-    ]
-   ]
-  },
-  {
-   "n": 8227,
-   "w": 108,
-   "h": 113,
-   "mx": 54.7,
-   "my": 56.1,
-   "cx": -142.5,
-   "cy": -125.4,
-   "r": 68.3,
-   "par": 4,
-   "as": 1.45,
-   "an": 2.395,
-   "lab": "Portraits of women, 1800s to 1900s",
-   "zs": [
-    [
-     "Children",
-     "people",
      2.51,
-     0.32
-    ],
-    [
-     "Portraits of women",
-     "people",
-     2.27,
-     0.4
+     0.33
     ]
    ]
   },
   {
-   "n": 7786,
-   "w": 123,
-   "h": 85,
-   "mx": 60.1,
-   "my": 44.2,
-   "cx": -43.6,
-   "cy": -223.9,
-   "r": 65.3,
-   "par": 5,
+   "n": 7564,
+   "w": 115,
+   "h": 93,
+   "mx": 53.3,
+   "my": 43.8,
+   "cx": 194.9,
+   "cy": 211.3,
+   "r": 66.4,
+   "par": 2,
    "as": 1.45,
-   "an": -2.718,
-   "lab": "Women and children, 1800s",
+   "an": 2.424,
+   "lab": "Light books and animals",
    "zs": [
     [
-     "Families",
-     "people",
-     1.55,
-     0.1
-    ],
-    [
-     "Children",
-     "people",
-     1.42,
-     0.09
-    ]
-   ]
-  },
-  {
-   "n": 7730,
-   "w": 98,
-   "h": 106,
-   "mx": 50.0,
-   "my": 51.3,
-   "cx": 365.4,
-   "cy": -45.2,
-   "r": 58.0,
-   "par": 6,
-   "as": 1.32,
-   "an": 2.384,
-   "lab": "Landscapes and houses, 1800s to 1900s",
-   "zs": [
-    [
-     "Villages",
-     "built",
-     2.26,
-     0.12
-    ],
-    [
-     "Wooded landscapes",
-     "land",
-     2.2,
-     0.13
-    ]
-   ]
-  },
-  {
-   "n": 7692,
-   "w": 75,
-   "h": 132,
-   "mx": 38.2,
-   "my": 66.9,
-   "cx": 95.4,
-   "cy": 347.6,
-   "r": 68.2,
-   "par": 7,
-   "as": 1.45,
-   "an": 1.536,
-   "lab": "Books",
-   "zs": [
-    [
-     "Persian miniatures",
+     "Maps",
      "flat",
-     3.87,
-     0.67
+     3.37,
+     0.06
     ],
     [
-     "Illuminated manuscripts",
+     "Patterns",
      "flat",
-     2.3,
-     0.03
-    ]
-   ]
-  },
-  {
-   "n": 7496,
-   "w": 130,
-   "h": 77,
-   "mx": 63.9,
-   "my": 40.2,
-   "cx": -230.1,
-   "cy": -11.6,
-   "r": 66.7,
-   "par": 8,
-   "as": 1.45,
-   "an": 3.058,
-   "lab": "Genre scenes with women",
-   "zs": [
-    [
-     "Families",
-     "people",
-     1.8,
-     0.18
-    ],
-    [
-     "Tavern scenes",
-     "people",
-     1.68,
-     0.12
-    ]
-   ]
-  },
-  {
-   "n": 7365,
-   "w": 83,
-   "h": 119,
-   "mx": 41.9,
-   "my": 57.3,
-   "cx": -7.3,
-   "cy": 227.2,
-   "r": 62.8,
-   "par": 9,
-   "as": 1.43,
-   "an": 1.653,
-   "lab": "Italian religious scenes and churches",
-   "zs": [
-    [
-     "Altarpieces",
-     "sacred",
-     2.23,
-     0.19
-    ],
-    [
-     "Church interiors",
-     "built",
-     2.05,
-     0.11
-    ]
-   ]
-  },
-  {
-   "n": 6718,
-   "w": 111,
-   "h": 80,
-   "mx": 56.7,
-   "my": 37.1,
-   "cx": -228.9,
-   "cy": 171.8,
-   "r": 57.9,
-   "par": 10,
-   "as": 1.45,
-   "an": 3.132,
-   "lab": "Dark religious scenes with children",
-   "zs": [
-    [
-     "Angels",
-     "sacred",
-     1.61,
-     0.23
-    ],
-    [
-     "Altarpieces",
-     "sacred",
-     1.4,
+     3.01,
      0.05
     ]
    ]
   },
   {
-   "n": 6677,
-   "w": 83,
-   "h": 103,
-   "mx": 43.8,
-   "my": 53.1,
-   "cx": 243.7,
-   "cy": 207.0,
-   "r": 54.1,
-   "par": 11,
-   "as": 1.45,
-   "an": 1.529,
-   "lab": "Animals",
-   "zs": [
-    [
-     "Japanese prints",
-     "flat",
-     3.34,
-     0.31
-    ],
-    [
-     "Chinese ink paintings",
-     "flat",
-     3.13,
-     0.24
-    ]
-   ]
-  },
-  {
-   "n": 6106,
-   "w": 84,
-   "h": 107,
-   "mx": 42.2,
-   "my": 53.8,
-   "cx": 166.7,
-   "cy": 113.2,
+   "n": 7137,
+   "w": 109,
+   "h": 92,
+   "mx": 53.7,
+   "my": 46.0,
+   "cx": 21.0,
+   "cy": 377.8,
    "r": 61.3,
-   "par": 12,
+   "par": 3,
    "as": 1.45,
-   "an": 2.064,
-   "lab": "Interiors and books",
+   "an": 2.776,
+   "lab": "Warm vivid Italian religious scenes",
    "zs": [
     [
-     "Maps",
-     "flat",
-     3.59,
-     0.07
+     "Altarpieces",
+     "sacred",
+     2.29,
+     0.19
     ],
     [
-     "Diagrams",
-     "flat",
-     3.13,
-     0.09
+     "Church interiors",
+     "built",
+     2.09,
+     0.11
     ]
    ]
   },
   {
-   "n": 5979,
-   "w": 92,
-   "h": 87,
-   "mx": 45.2,
-   "my": 39.9,
-   "cx": -105.4,
-   "cy": -4.5,
-   "r": 52.2,
-   "par": 13,
-   "as": 1.11,
-   "an": 1.927,
-   "lab": "Nudes and horses, 1800s to 1900s",
+   "n": 7075,
+   "w": 123,
+   "h": 76,
+   "mx": 62.7,
+   "my": 38.9,
+   "cx": -208.7,
+   "cy": 21.1,
+   "r": 63.3,
+   "par": 4,
+   "as": 1.45,
+   "an": 3.137,
+   "lab": "Genre scenes with women",
    "zs": [
     [
-     "Nudes",
+     "Families",
      "people",
-     2.65,
-     0.39
+     1.82,
+     0.17
     ],
     [
-     "Dancers",
+     "Tavern scenes",
      "people",
-     1.84,
+     1.55,
+     0.13
+    ]
+   ]
+  },
+  {
+   "n": 6826,
+   "w": 81,
+   "h": 114,
+   "mx": 43.2,
+   "my": 56.8,
+   "cx": -139.7,
+   "cy": -89.5,
+   "r": 61.1,
+   "par": 5,
+   "as": 1.45,
+   "an": 2.054,
+   "lab": "Portraits of men, 1700s",
+   "zs": [
+    [
+     "Portraits of men",
+     "people",
+     1.96,
+     0.69
+    ],
+    [
+     "Self-portraits",
+     "people",
+     1.16,
      0.06
     ]
    ]
   },
   {
-   "n": 5865,
-   "w": 100,
-   "h": 78,
-   "mx": 47.7,
-   "my": 37.0,
-   "cx": 113.6,
-   "cy": 222.6,
-   "r": 52.1,
-   "par": 14,
-   "as": 1.45,
-   "an": 3.12,
-   "lab": "Landscapes and animals",
+   "n": 6782,
+   "w": 106,
+   "h": 84,
+   "mx": 49.8,
+   "my": 40.1,
+   "cx": -237.6,
+   "cy": 173.5,
+   "r": 55.7,
+   "par": 6,
+   "as": 1.38,
+   "an": 3.136,
+   "lab": "Dark Italian religious scenes",
    "zs": [
     [
-     "Japanese prints",
-     "flat",
-     3.28,
-     0.42
+     "Angels",
+     "sacred",
+     1.68,
+     0.24
     ],
     [
-     "Chinese ink paintings",
-     "flat",
-     3.26,
-     0.32
+     "Crucifixions",
+     "sacred",
+     1.47,
+     0.18
     ]
    ]
   },
   {
-   "n": 5837,
-   "w": 76,
-   "h": 101,
-   "mx": 35.8,
-   "my": 47.1,
-   "cx": -104.8,
-   "cy": 303.7,
-   "r": 55.2,
-   "par": 17,
-   "as": 1.28,
-   "an": 2.112,
-   "lab": "Religious scenes and churches",
-   "zs": [
-    [
-     "Saints",
-     "sacred",
-     2.02,
-     0.34
-    ],
-    [
-     "Altarpieces",
-     "sacred",
-     1.89,
-     0.1
-    ]
-   ]
-  },
-  {
-   "n": 5827,
-   "w": 74,
-   "h": 103,
-   "mx": 38.9,
-   "my": 50.8,
-   "cx": 290.1,
-   "cy": 43.6,
-   "r": 52.4,
-   "par": 16,
+   "n": 6642,
+   "w": 81,
+   "h": 115,
+   "mx": 39.1,
+   "my": 60.7,
+   "cx": 99.4,
+   "cy": -93.2,
+   "r": 63.6,
+   "par": 7,
    "as": 1.45,
-   "an": 1.299,
+   "an": 1.117,
    "lab": "Still lifes and fruit, 1800s to 1900s",
    "zs": [
     [
      "Fruit still lifes",
      "still",
      3.76,
-     0.29
+     0.26
     ],
     [
      "Vanitas",
@@ -491,46 +239,46 @@
    ]
   },
   {
-   "n": 5810,
-   "w": 87,
-   "h": 95,
-   "mx": 45.9,
-   "my": 46.2,
-   "cx": -219.4,
-   "cy": 292.4,
-   "r": 57.0,
-   "par": 17,
-   "as": 1.36,
-   "an": 1.07,
-   "lab": "Religious scenes with children, 1400s",
+   "n": 6544,
+   "w": 74,
+   "h": 121,
+   "mx": 38.2,
+   "my": 61.1,
+   "cx": 68.1,
+   "cy": 256.9,
+   "r": 62.4,
+   "par": 8,
+   "as": 1.45,
+   "an": 1.431,
+   "lab": "Myths and religious scenes",
    "zs": [
     [
-     "Altarpieces",
+     "Angels",
      "sacred",
-     2.19,
-     0.33
+     1.68,
+     0.13
     ],
     [
-     "Group portraits",
-     "people",
-     1.68,
-     0.07
+     "Myths",
+     "sacred",
+     1.62,
+     0.15
     ]
    ]
   },
   {
-   "n": 5630,
-   "w": 81,
-   "h": 95,
-   "mx": 39.1,
-   "my": 45.8,
-   "cx": -6.0,
-   "cy": -341.8,
-   "r": 52.5,
-   "par": 26,
+   "n": 6513,
+   "w": 82,
+   "h": 110,
+   "mx": 42.1,
+   "my": 55.3,
+   "cx": 90.8,
+   "cy": -350.0,
+   "r": 59.7,
+   "par": 31,
    "as": 1.45,
-   "an": 1.25,
-   "lab": "Landscapes and rivers, 1800s",
+   "an": 1.385,
+   "lab": "Landscapes, 1800s to 1900s",
    "zs": [
     [
      "Wooded landscapes",
@@ -541,369 +289,901 @@
     [
      "Rivers",
      "water",
-     2.09,
+     1.92,
      0.06
     ]
    ]
   },
   {
-   "n": 5545,
-   "w": 98,
-   "h": 84,
-   "mx": 50.1,
-   "my": 41.2,
-   "cx": 286.6,
-   "cy": -152.7,
-   "r": 57.8,
-   "par": 22,
-   "as": 1.45,
-   "an": -2.483,
+   "n": 6114,
+   "w": 104,
+   "h": 77,
+   "mx": 52.7,
+   "my": 35.1,
+   "cx": 123.1,
+   "cy": -235.4,
+   "r": 53.3,
+   "par": 10,
+   "as": 1.34,
+   "an": 2.937,
+   "lab": "Landscapes and houses, 1800s to 1900s",
+   "zs": [
+    [
+     "Villages",
+     "built",
+     2.15,
+     0.13
+    ],
+    [
+     "Wooded landscapes",
+     "land",
+     2.02,
+     0.14
+    ]
+   ]
+  },
+  {
+   "n": 5834,
+   "w": 82,
+   "h": 95,
+   "mx": 40.8,
+   "my": 48.1,
+   "cx": -143.8,
+   "cy": 331.9,
+   "r": 49.4,
+   "par": 38,
+   "as": 1.38,
+   "an": 1.257,
+   "lab": "Religious scenes with children, 1400s",
+   "zs": [
+    [
+     "Altarpieces",
+     "sacred",
+     2.23,
+     0.34
+    ],
+    [
+     "Group portraits",
+     "people",
+     1.65,
+     0.07
+    ]
+   ]
+  },
+  {
+   "n": 5716,
+   "w": 81,
+   "h": 100,
+   "mx": 40.2,
+   "my": 49.8,
+   "cx": -46.0,
+   "cy": 207.7,
+   "r": 55.8,
+   "par": 38,
+   "as": 1.28,
+   "an": 2.022,
+   "lab": "Religious scenes and churches",
+   "zs": [
+    [
+     "Saints",
+     "sacred",
+     2.03,
+     0.34
+    ],
+    [
+     "Altarpieces",
+     "sacred",
+     1.94,
+     0.11
+    ]
+   ]
+  },
+  {
+   "n": 5661,
+   "w": 89,
+   "h": 86,
+   "mx": 46.2,
+   "my": 44.1,
+   "cx": 225.2,
+   "cy": -194.6,
+   "r": 50.6,
+   "par": 16,
+   "as": 1.06,
+   "an": -3.074,
    "lab": "Landscapes and houses, Later 1800s",
    "zs": [
     [
      "Wooded landscapes",
      "land",
-     2.66,
-     0.2
+     2.53,
+     0.19
     ],
     [
      "Sunsets",
      "land",
-     2.35,
-     0.12
+     2.26,
+     0.11
     ]
    ]
   },
   {
-   "n": 5495,
-   "w": 86,
-   "h": 84,
-   "mx": 41.8,
-   "my": 44.9,
-   "cx": -159.9,
-   "cy": 87.0,
-   "r": 48.4,
-   "par": 10,
-   "as": 1.43,
-   "an": -2.471,
+   "n": 5634,
+   "w": 80,
+   "h": 95,
+   "mx": 38.1,
+   "my": 47.2,
+   "cx": -363.1,
+   "cy": -107.4,
+   "r": 48.8,
+   "par": 14,
+   "as": 1.29,
+   "an": 1.358,
+   "lab": "Muted portraits of women, 1800s",
+   "zs": [
+    [
+     "Portraits of women",
+     "people",
+     2.35,
+     0.77
+    ],
+    [
+     "Children",
+     "people",
+     1.56,
+     0.1
+    ]
+   ]
+  },
+  {
+   "n": 5271,
+   "w": 97,
+   "h": 74,
+   "mx": 50.9,
+   "my": 35.8,
+   "cx": -132.9,
+   "cy": 130.3,
+   "r": 54.6,
+   "par": 6,
+   "as": 1.41,
+   "an": -2.502,
    "lab": "Myths with men",
    "zs": [
     [
      "Nudes",
      "people",
      1.66,
-     0.24
+     0.25
     ],
     [
      "Angels",
      "sacred",
-     1.39,
+     1.45,
      0.1
     ]
    ]
   },
   {
-   "n": 5445,
-   "w": 90,
-   "h": 80,
-   "mx": 45.1,
-   "my": 37.8,
-   "cx": -0.5,
-   "cy": -6.0,
-   "r": 46.8,
-   "par": 21,
-   "as": 1.14,
-   "an": 0.896,
-   "lab": "Genre scenes",
-   "zs": [
-    [
-     "Tavern scenes",
-     "people",
-     3.11,
-     0.3
-    ],
-    [
-     "Interiors",
-     "people",
-     2.7,
-     0.14
-    ]
-   ]
-  },
-  {
-   "n": 5334,
-   "w": 91,
-   "h": 79,
-   "mx": 42.0,
-   "my": 39.2,
-   "cx": 343.0,
-   "cy": -258.1,
-   "r": 50.7,
-   "par": 22,
-   "as": 1.45,
-   "an": -2.441,
-   "lab": "Landscapes and lakes, 1800s",
+   "n": 5207,
+   "w": 82,
+   "h": 84,
+   "mx": 41.2,
+   "my": 40.1,
+   "cx": 379.5,
+   "cy": -95.5,
+   "r": 47.5,
+   "par": 16,
+   "as": 1.23,
+   "an": -2.796,
+   "lab": "Landscapes and rivers, 1800s",
    "zs": [
     [
      "Mountains",
      "land",
-     2.84,
-     0.27
+     2.75,
+     0.29
     ],
     [
-     "Sunsets",
-     "land",
-     2.55,
-     0.15
+     "Rivers",
+     "water",
+     2.35,
+     0.12
     ]
    ]
   },
   {
-   "n": 5214,
+   "n": 5167,
    "w": 78,
-   "h": 95,
-   "mx": 37.1,
-   "my": 46.2,
-   "cx": 95.4,
-   "cy": -52.1,
-   "r": 53.6,
-   "par": 23,
+   "h": 96,
+   "mx": 37.8,
+   "my": 47.9,
+   "cx": 295.9,
+   "cy": 133.0,
+   "r": 55.4,
+   "par": 17,
    "as": 1.45,
-   "an": 2.315,
-   "lab": "Battles and animals",
+   "an": 2.31,
+   "lab": "Landscapes and flowers",
    "zs": [
     [
-     "Hunting scenes",
-     "people",
-     2.51,
-     0.11
+     "Chinese ink paintings",
+     "flat",
+     3.52,
+     0.31
     ],
     [
-     "Battles",
-     "people",
-     2.41,
-     0.22
+     "Japanese prints",
+     "flat",
+     3.5,
+     0.39
     ]
    ]
   },
   {
-   "n": 5181,
-   "w": 94,
-   "h": 75,
-   "mx": 46.9,
-   "my": 38.9,
-   "cx": -309.0,
-   "cy": -236.7,
-   "r": 50.7,
-   "par": 24,
-   "as": 1.31,
-   "an": 2.532,
-   "lab": "Portraits of men, 1700s",
+   "n": 5114,
+   "w": 87,
+   "h": 79,
+   "mx": 42.0,
+   "my": 39.2,
+   "cx": -321.0,
+   "cy": -9.4,
+   "r": 47.0,
+   "par": 14,
+   "as": 1.25,
+   "an": -2.449,
+   "lab": "Muted portraits of women",
    "zs": [
     [
-     "Portraits of men",
+     "Portraits of women",
      "people",
-     1.86,
-     0.71
+     2.21,
+     0.85
     ],
     [
-     "Self-portraits",
+     "Children",
      "people",
-     1.14,
-     0.07
+     1.3,
+     0.06
     ]
    ]
   },
   {
-   "n": 5138,
-   "w": 72,
-   "h": 98,
-   "mx": 37.0,
-   "my": 46.2,
-   "cx": 234.0,
-   "cy": -256.3,
-   "r": 52.3,
-   "par": 25,
-   "as": 1.34,
-   "an": 1.274,
-   "lab": "Seas and landscapes, 1800s",
+   "n": 5108,
+   "w": 90,
+   "h": 74,
+   "mx": 42.2,
+   "my": 35.1,
+   "cx": 321.3,
+   "cy": -226.4,
+   "r": 47.7,
+   "par": 16,
+   "as": 1.07,
+   "an": 2.96,
+   "lab": "Landscapes and seas, 1800s",
    "zs": [
+    [
+     "Seashores",
+     "water",
+     3.16,
+     0.3
+    ],
     [
      "Ships at sea",
      "water",
-     3.56,
-     0.39
-    ],
-    [
-     "Harbors",
-     "water",
-     3.31,
-     0.21
-    ]
-   ]
-  },
-  {
-   "n": 5135,
-   "w": 97,
-   "h": 71,
-   "mx": 48.9,
-   "my": 37.2,
-   "cx": 76.1,
-   "cy": -191.1,
-   "r": 52.8,
-   "par": 26,
-   "as": 1.45,
-   "an": -2.611,
-   "lab": "Churches and landscapes, 1800s to 1900s",
-   "zs": [
-    [
-     "City streets",
-     "built",
-     2.57,
-     0.19
-    ],
-    [
-     "Venice views",
-     "built",
-     2.08,
+     2.54,
      0.08
     ]
    ]
   },
   {
-   "n": 4928,
-   "w": 93,
-   "h": 75,
-   "mx": 46.0,
-   "my": 39.2,
-   "cx": 171.3,
-   "cy": -131.6,
-   "r": 53.4,
-   "par": 23,
+   "n": 5095,
+   "w": 73,
+   "h": 89,
+   "mx": 33.2,
+   "my": 46.2,
+   "cx": 155.0,
+   "cy": 332.7,
+   "r": 46.9,
+   "par": 34,
    "as": 1.45,
-   "an": 2.405,
-   "lab": "Animals and horses, Later 1800s",
+   "an": 1.487,
+   "lab": "Vivid books and animals",
+   "zs": [
+    [
+     "Persian miniatures",
+     "flat",
+     3.63,
+     0.75
+    ],
+    [
+     "Illuminated manuscripts",
+     "flat",
+     2.26,
+     0.01
+    ]
+   ]
+  },
+  {
+   "n": 5023,
+   "w": 69,
+   "h": 96,
+   "mx": 31.2,
+   "my": 48.9,
+   "cx": 218.5,
+   "cy": -88.6,
+   "r": 49.6,
+   "par": 43,
+   "as": 1.45,
+   "an": 1.591,
+   "lab": "Animals and horses, 1800s",
    "zs": [
     [
      "Horses",
      "animal",
-     2.56,
-     0.21
+     2.16,
+     0.14
     ],
     [
-     "Hunting scenes",
-     "people",
-     2.38,
-     0.03
-    ]
-   ]
-  },
-  {
-   "n": 4903,
-   "w": 83,
-   "h": 83,
-   "mx": 43.8,
-   "my": 41.9,
-   "cx": -202.0,
-   "cy": -235.0,
-   "r": 50.4,
-   "par": 28,
-   "as": 1.29,
-   "an": 2.234,
-   "lab": "Portraits of men, 1800s",
-   "zs": [
-    [
-     "Portraits of men",
-     "people",
-     2.32,
-     0.77
-    ],
-    [
-     "Self-portraits",
-     "people",
-     1.58,
+     "Dogs",
+     "animal",
+     2.15,
      0.08
     ]
    ]
   },
   {
-   "n": 4824,
-   "w": 84,
-   "h": 83,
-   "mx": 41.9,
-   "my": 39.1,
-   "cx": 1.2,
-   "cy": -109.5,
-   "r": 50.8,
-   "par": 29,
+   "n": 4956,
+   "w": 72,
+   "h": 92,
+   "mx": 34.1,
+   "my": 44.8,
+   "cx": -78.8,
+   "cy": 26.0,
+   "r": 48.8,
+   "par": 22,
    "as": 1.45,
-   "an": 0.93,
+   "an": 1.461,
+   "lab": "Houses",
+   "zs": [
+    [
+     "Sculpture",
+     "other",
+     3.3,
+     0.12
+    ],
+    [
+     "Coats of arms",
+     "flat",
+     2.93,
+     0.06
+    ]
+   ]
+  },
+  {
+   "n": 4762,
+   "w": 78,
+   "h": 87,
+   "mx": 36.2,
+   "my": 44.0,
+   "cx": -240.4,
+   "cy": 286.6,
+   "r": 51.4,
+   "par": 23,
+   "as": 1.45,
+   "an": 1.066,
+   "lab": "Religious scenes with children",
+   "zs": [
+    [
+     "Madonnas",
+     "sacred",
+     3.17,
+     0.85
+    ],
+    [
+     "Families",
+     "people",
+     1.48,
+     0.08
+    ]
+   ]
+  },
+  {
+   "n": 4702,
+   "w": 75,
+   "h": 90,
+   "mx": 38.9,
+   "my": 44.1,
+   "cx": -62.2,
+   "cy": -203.8,
+   "r": 50.5,
+   "par": 24,
+   "as": 1.45,
+   "an": 0.876,
    "lab": "Flowers and still lifes",
    "zs": [
     [
      "Flower bouquets",
      "still",
-     4.35,
-     0.5
+     4.61,
+     0.52
     ],
     [
      "Fruit still lifes",
      "still",
-     2.41,
+     2.56,
      0.14
     ]
    ]
   },
   {
-   "n": 4802,
-   "w": 71,
-   "h": 90,
-   "mx": 37.1,
-   "my": 43.8,
-   "cx": -262.1,
-   "cy": -140.4,
-   "r": 46.2,
-   "par": 34,
-   "as": 1.19,
-   "an": 1.213,
-   "lab": "Portraits of women, 1800s",
+   "n": 4660,
+   "w": 65,
+   "h": 97,
+   "mx": 34.0,
+   "my": 46.2,
+   "cx": -258.0,
+   "cy": -92.6,
+   "r": 51.3,
+   "par": 25,
+   "as": 1.43,
+   "an": 1.354,
+   "lab": "Dark portraits of women, 1800s",
    "zs": [
+    [
+     "Children",
+     "people",
+     2.46,
+     0.37
+    ],
     [
      "Portraits of women",
      "people",
-     2.37,
-     0.79
+     2.17,
+     0.42
+    ]
+   ]
+  },
+  {
+   "n": 4653,
+   "w": 88,
+   "h": 70,
+   "mx": 44.0,
+   "my": 36.2,
+   "cx": 327.9,
+   "cy": 30.6,
+   "r": 45.8,
+   "par": 16,
+   "as": 1.21,
+   "an": -2.674,
+   "lab": "Landscapes and rivers",
+   "zs": [
+    [
+     "Rivers",
+     "water",
+     2.5,
+     0.18
+    ],
+    [
+     "Wooded landscapes",
+     "land",
+     2.41,
+     0.07
+    ]
+   ]
+  },
+  {
+   "n": 4648,
+   "w": 81,
+   "h": 80,
+   "mx": 38.0,
+   "my": 40.2,
+   "cx": -151.9,
+   "cy": -257.4,
+   "r": 48.0,
+   "par": 25,
+   "as": 1.25,
+   "an": 2.129,
+   "lab": "Women and children, Later 1800s",
+   "zs": [
+    [
+     "Families",
+     "people",
+     1.61,
+     0.15
     ],
     [
      "Children",
      "people",
-     1.6,
+     1.5,
+     0.12
+    ]
+   ]
+  },
+  {
+   "n": 4596,
+   "w": 92,
+   "h": 73,
+   "mx": 45.9,
+   "my": 36.8,
+   "cx": -21.6,
+   "cy": -103.2,
+   "r": 51.8,
+   "par": 28,
+   "as": 1.45,
+   "an": 2.521,
+   "lab": "Nudes of women, 1800s to 1900s",
+   "zs": [
+    [
+     "Nudes",
+     "people",
+     2.92,
+     0.49
+    ],
+    [
+     "Dancers",
+     "people",
+     1.83,
+     0.07
+    ]
+   ]
+  },
+  {
+   "n": 4595,
+   "w": 74,
+   "h": 89,
+   "mx": 37.9,
+   "my": 43.9,
+   "cx": 182.9,
+   "cy": 89.8,
+   "r": 49.4,
+   "par": 29,
+   "as": 1.45,
+   "an": 2.287,
+   "lab": "Landscapes and birds",
+   "zs": [
+    [
+     "Chinese ink paintings",
+     "flat",
+     3.54,
+     0.4
+    ],
+    [
+     "Japanese prints",
+     "flat",
+     3.35,
+     0.44
+    ]
+   ]
+  },
+  {
+   "n": 4564,
+   "w": 84,
+   "h": 74,
+   "mx": 44.1,
+   "my": 36.2,
+   "cx": 233.1,
+   "cy": -297.2,
+   "r": 46.3,
+   "par": 10,
+   "as": 1.27,
+   "an": -2.996,
+   "lab": "Landscapes and rivers, 1800s to 1900s",
+   "zs": [
+    [
+     "Seashores",
+     "water",
+     2.39,
+     0.15
+    ],
+    [
+     "Harbors",
+     "water",
+     1.92,
+     0.16
+    ]
+   ]
+  },
+  {
+   "n": 4299,
+   "w": 78,
+   "h": 75,
+   "mx": 41.0,
+   "my": 36.8,
+   "cx": 14.4,
+   "cy": -275.0,
+   "r": 44.3,
+   "par": 31,
+   "as": 1.45,
+   "an": -2.369,
+   "lab": "Churches and interiors, 1800s to 1900s",
+   "zs": [
+    [
+     "City streets",
+     "built",
+     2.65,
+     0.23
+    ],
+    [
+     "Venice views",
+     "built",
+     2.15,
+     0.1
+    ]
+   ]
+  },
+  {
+   "n": 4278,
+   "w": 63,
+   "h": 94,
+   "mx": 29.0,
+   "my": 45.2,
+   "cx": -5.9,
+   "cy": 102.3,
+   "r": 50.6,
+   "par": 32,
+   "as": 1.45,
+   "an": 1.917,
+   "lab": "Genre scenes with men",
+   "zs": [
+    [
+     "Tavern scenes",
+     "people",
+     2.28,
+     0.2
+    ],
+    [
+     "Group portraits",
+     "people",
+     2.2,
+     0.1
+    ]
+   ]
+  },
+  {
+   "n": 4139,
+   "w": 64,
+   "h": 86,
+   "mx": 30.9,
+   "my": 40.2,
+   "cx": 75.5,
+   "cy": 44.0,
+   "r": 46.4,
+   "par": 32,
+   "as": 1.22,
+   "an": 2.026,
+   "lab": "Dark genre scenes and interiors, 1800s",
+   "zs": [
+    [
+     "Interiors",
+     "people",
+     3.04,
+     0.19
+    ],
+    [
+     "Tavern scenes",
+     "people",
+     2.96,
+     0.28
+    ]
+   ]
+  },
+  {
+   "n": 4134,
+   "w": 93,
+   "h": 61,
+   "mx": 47.1,
+   "my": 31.2,
+   "cx": 93.8,
+   "cy": 143.0,
+   "r": 48.3,
+   "par": 34,
+   "as": 1.45,
+   "an": -2.926,
+   "lab": "Warm religious scenes",
+   "zs": [
+    [
+     "Persian miniatures",
+     "flat",
+     2.96,
+     0.34
+    ],
+    [
+     "Illuminated manuscripts",
+     "flat",
+     2.25,
+     0.06
+    ]
+   ]
+  },
+  {
+   "n": 4008,
+   "w": 69,
+   "h": 76,
+   "mx": 31.1,
+   "my": 37.8,
+   "cx": -199.5,
+   "cy": -179.1,
+   "r": 40.7,
+   "par": 25,
+   "as": 1.07,
+   "an": 1.937,
+   "lab": "Portraits of women, Early 1900s",
+   "zs": [
+    [
+     "Portraits of women",
+     "people",
+     2.04,
+     0.37
+    ],
+    [
+     "Children",
+     "people",
+     1.99,
+     0.25
+    ]
+   ]
+  },
+  {
+   "n": 3967,
+   "w": 60,
+   "h": 87,
+   "mx": 29.8,
+   "my": 45.0,
+   "cx": -291.7,
+   "cy": -190.4,
+   "r": 46.1,
+   "par": 36,
+   "as": 1.39,
+   "an": 1.252,
+   "lab": "Portraits of men, 1800s",
+   "zs": [
+    [
+     "Portraits of men",
+     "people",
+     2.46,
+     0.77
+    ],
+    [
+     "Self-portraits",
+     "people",
+     1.68,
      0.09
     ]
    ]
   },
   {
-   "n": 4763,
-   "w": 78,
-   "h": 84,
-   "mx": 37.9,
-   "my": 43.2,
-   "cx": -320.0,
-   "cy": 234.6,
-   "r": 46.7,
-   "par": 31,
-   "as": 1.45,
-   "an": 1.007,
-   "lab": "Vivid religious scenes with children",
+   "n": 3748,
+   "w": 79,
+   "h": 63,
+   "mx": 40.8,
+   "my": 30.1,
+   "cx": 35.3,
+   "cy": -185.1,
+   "r": 41.9,
+   "par": 32,
+   "as": 1.23,
+   "an": 2.897,
+   "lab": "Interiors with women, 1800s",
    "zs": [
     [
-     "Madonnas",
-     "sacred",
-     3.14,
-     0.85
+     "Interiors",
+     "people",
+     1.83,
+     0.18
     ],
     [
+     "Self-portraits",
+     "people",
+     1.44,
+     0.09
+    ]
+   ]
+  },
+  {
+   "n": 3599,
+   "w": 79,
+   "h": 61,
+   "mx": 39.1,
+   "my": 28.8,
+   "cx": -144.6,
+   "cy": 233.2,
+   "r": 43.0,
+   "par": 38,
+   "as": 1.26,
+   "an": -2.482,
+   "lab": "Warm Italian religious scenes",
+   "zs": [
+    [
+     "Crucifixions",
+     "sacred",
+     2.22,
+     0.31
+    ],
+    [
+     "Altarpieces",
+     "sacred",
+     2.1,
+     0.05
+    ]
+   ]
+  },
+  {
+   "n": 3535,
+   "w": 71,
+   "h": 67,
+   "mx": 34.1,
+   "my": 32.2,
+   "cx": 154.5,
+   "cy": -0.3,
+   "r": 38.1,
+   "par": 43,
+   "as": 1.28,
+   "an": -2.492,
+   "lab": "Battles with soldiers",
+   "zs": [
+    [
+     "Battles",
+     "people",
+     2.62,
+     0.33
+    ],
+    [
+     "Hunting scenes",
+     "people",
+     2.15,
+     0.05
+    ]
+   ]
+  },
+  {
+   "n": 3526,
+   "w": 70,
+   "h": 67,
+   "mx": 33.9,
+   "my": 34.1,
+   "cx": 5.3,
+   "cy": -11.9,
+   "r": 37.4,
+   "par": 40,
+   "as": 1.1,
+   "an": -2.789,
+   "lab": "Abstract work and animals, Early 1900s",
+   "zs": [
+    [
+     "Abstract art",
+     "flat",
+     4.41,
+     0.59
+    ],
+    [
+     "Fish",
+     "animal",
+     1.83,
+     0.01
+    ]
+   ]
+  },
+  {
+   "n": 3427,
+   "w": 73,
+   "h": 62,
+   "mx": 37.8,
+   "my": 31.1,
+   "cx": -71.2,
+   "cy": -298.5,
+   "r": 38.5,
+   "par": 25,
+   "as": 1.23,
+   "an": 2.331,
+   "lab": "Genre scenes and interiors, 1800s",
+   "zs": [
+    [
      "Families",
+     "people",
+     1.55,
+     0.08
+    ],
+    [
+     "Dancers",
      "people",
      1.42,
      0.08
@@ -911,248 +1191,108 @@
    ]
   },
   {
-   "n": 4758,
-   "w": 63,
-   "h": 100,
-   "mx": 32.1,
-   "my": 47.2,
-   "cx": 403.3,
-   "cy": -160.6,
-   "r": 53.2,
-   "par": 25,
-   "as": 1.44,
-   "an": 1.393,
-   "lab": "Landscapes and seas, 1800s to 1900s",
+   "n": 3357,
+   "w": 59,
+   "h": 77,
+   "mx": 30.1,
+   "my": 39.1,
+   "cx": 300.0,
+   "cy": -138.4,
+   "r": 39.9,
+   "par": 16,
+   "as": 1.25,
+   "an": 1.643,
+   "lab": "Seascapes and skies, 1800s",
    "zs": [
     [
-     "Seashores",
+     "Ships at sea",
      "water",
-     3.18,
-     0.31
+     3.57,
+     0.53
     ],
     [
      "Harbors",
      "water",
-     2.55,
-     0.23
+     3.18,
+     0.21
     ]
    ]
   },
   {
-   "n": 4246,
-   "w": 91,
-   "h": 61,
-   "mx": 47.8,
-   "my": 29.9,
-   "cx": 191.8,
-   "cy": -0.9,
-   "r": 49.6,
-   "par": 21,
-   "as": 1.38,
-   "an": -2.809,
-   "lab": "Interiors and genre scenes, 1800s",
+   "n": 3200,
+   "w": 59,
+   "h": 75,
+   "mx": 31.0,
+   "my": 36.2,
+   "cx": 237.2,
+   "cy": 3.8,
+   "r": 41.7,
+   "par": 43,
+   "as": 1.37,
+   "an": 1.036,
+   "lab": "Horses and animals",
    "zs": [
     [
-     "Interiors",
+     "Hunting scenes",
      "people",
-     2.32,
-     0.2
+     2.73,
+     0.15
     ],
     [
-     "Tavern scenes",
-     "people",
-     1.5,
-     0.05
-    ]
-   ]
-  },
-  {
-   "n": 4019,
-   "w": 63,
-   "h": 85,
-   "mx": 33.1,
-   "my": 41.8,
-   "cx": -360.6,
-   "cy": -151.0,
-   "r": 43.4,
-   "par": 34,
-   "as": 1.18,
-   "an": 1.576,
-   "lab": "Portraits of women",
-   "zs": [
-    [
-     "Portraits of women",
-     "people",
-     1.99,
-     0.72
-    ],
-    [
-     "Children",
-     "people",
-     1.18,
-     0.06
-    ]
-   ]
-  },
-  {
-   "n": 3838,
-   "w": 61,
-   "h": 83,
-   "mx": 28.0,
-   "my": 40.8,
-   "cx": 60.4,
-   "cy": 137.9,
-   "r": 41.9,
-   "par": 35,
-   "as": 1.45,
-   "an": 1.731,
-   "lab": "Houses and interiors",
-   "zs": [
-    [
-     "Sculpture",
-     "other",
-     3.23,
-     0.14
-    ],
-    [
-     "Coats of arms",
-     "flat",
-     2.91,
-     0.08
-    ]
-   ]
-  },
-  {
-   "n": 3533,
-   "w": 67,
-   "h": 72,
-   "mx": 34.2,
-   "my": 36.9,
-   "cx": -118.2,
-   "cy": 193.8,
-   "r": 41.5,
-   "par": 17,
-   "as": 1.25,
-   "an": -2.477,
-   "lab": "Religious scenes",
-   "zs": [
-    [
-     "Crucifixions",
-     "sacred",
-     2.11,
-     0.31
-    ],
-    [
-     "Altarpieces",
-     "sacred",
-     2.05,
-     0.05
-    ]
-   ]
-  },
-  {
-   "n": 3350,
-   "w": 73,
-   "h": 61,
-   "mx": 38.9,
-   "my": 30.1,
-   "cx": 76.0,
-   "cy": 50.0,
-   "r": 40.6,
-   "par": 37,
-   "as": 1.34,
-   "an": 2.431,
-   "lab": "Abstract work and animals, Early 1900s",
-   "zs": [
-    [
-     "Abstract art",
-     "flat",
-     4.19,
-     0.61
-    ],
-    [
-     "Fish",
+     "Horses",
      "animal",
-     1.69,
-     0.01
+     2.59,
+     0.26
     ]
    ]
   },
   {
-   "n": 2826,
-   "w": 49,
-   "h": 76,
-   "mx": 22.9,
-   "my": 35.0,
-   "cx": -326.8,
-   "cy": -70.8,
-   "r": 40.7,
-   "par": 34,
-   "as": 1.45,
-   "an": 1.777,
-   "lab": "Dutch portraits of women",
-   "zs": [
-    [
-     "Portraits of women",
-     "people",
-     2.29,
-     0.8
-    ],
-    [
-     "Children",
-     "people",
-     1.53,
-     0.07
-    ]
-   ]
-  },
-  {
-   "n": 2756,
-   "w": 58,
-   "h": 65,
-   "mx": 28.1,
-   "my": 31.8,
-   "cx": 265.8,
-   "cy": -54.9,
-   "r": 36.1,
-   "par": 23,
-   "as": 1.45,
-   "an": 2.09,
-   "lab": "Genre scenes and beaches, 1800s to 1900s",
-   "zs": [
-    [
-     "Dancers",
-     "people",
-     1.72,
-     0.09
-    ],
-    [
-     "Peasant scenes",
-     "people",
-     1.72,
-     0.09
-    ]
-   ]
-  },
-  {
-   "n": 2381,
-   "w": 63,
-   "h": 50,
-   "mx": 29.9,
-   "my": 23.1,
-   "cx": -270.8,
-   "cy": 86.5,
-   "r": 33.1,
-   "par": 10,
+   "n": 2933,
+   "w": 66,
+   "h": 59,
+   "mx": 30.0,
+   "my": 29.9,
+   "cx": 303.6,
+   "cy": -51.8,
+   "r": 37.1,
+   "par": 16,
    "as": 1.44,
-   "an": 3.091,
+   "an": 2.727,
+   "lab": "Cities and rivers, 1700s to 1800s",
+   "zs": [
+    [
+     "Venice views",
+     "built",
+     3.23,
+     0.43
+    ],
+    [
+     "City streets",
+     "built",
+     2.47,
+     0.19
+    ]
+   ]
+  },
+  {
+   "n": 2531,
+   "w": 64,
+   "h": 52,
+   "mx": 29.8,
+   "my": 26.0,
+   "cx": -323.0,
+   "cy": 137.3,
+   "r": 34.1,
+   "par": 6,
+   "as": 1.42,
+   "an": 3.129,
    "lab": "Religious scenes with men",
    "zs": [
     [
      "Saints",
      "sacred",
-     2.02,
-     0.43
+     1.99,
+     0.41
     ],
     [
      "Portraits of men",
@@ -1163,163 +1303,191 @@
    ]
   },
   {
-   "n": 2203,
-   "w": 50,
+   "n": 2114,
+   "w": 51,
    "h": 61,
-   "mx": 25.1,
-   "my": 29.2,
-   "cx": -10.4,
-   "cy": 329.1,
-   "r": 33.1,
-   "par": 17,
+   "mx": 24.9,
+   "my": 30.8,
+   "cx": -62.7,
+   "cy": 299.8,
+   "r": 34.8,
+   "par": 38,
    "as": 1.45,
-   "an": 0.833,
-   "lab": "Religious scenes and books",
+   "an": 1.023,
+   "lab": "Light religious scenes",
    "zs": [
     [
      "Illuminated manuscripts",
      "flat",
-     3.0,
-     0.35
+     2.89,
+     0.36
     ],
     [
      "Manuscript pages",
      "flat",
-     2.82,
-     0.23
+     2.43,
+     0.17
     ]
    ]
   },
   {
-   "n": 489,
-   "w": 29,
-   "h": 22,
-   "mx": 14.0,
-   "my": 11.1,
-   "cx": 248.3,
-   "cy": 103.7,
-   "r": 14.9,
-   "par": 42,
-   "as": 1.21,
-   "an": -3.038,
-   "lab": "City streets",
-   "zs": [
-    [
-     "City streets",
-     "built",
-     2.6,
-     0.4
-    ],
-    [
-     "Diagrams",
-     "flat",
-     2.02,
-     0.14
-    ]
-   ]
-  },
-  {
-   "n": 344,
-   "w": 26,
-   "h": 17,
-   "mx": 12.9,
-   "my": 7.9,
-   "cx": -61.3,
-   "cy": -76.8,
-   "r": 13.6,
-   "par": 43,
-   "as": 1.34,
-   "an": 3.03,
-   "lab": "Crowds and portraits, Early 1800s",
-   "zs": [
-    [
-     "Native American figures",
-     "people",
-     1.73,
-     0.65
-    ],
-    [
-     "Portraits of men",
-     "people",
-     0.89,
-     0.06
-    ]
-   ]
-  },
-  {
-   "n": 214,
-   "w": 15,
-   "h": 19,
-   "mx": 6.9,
-   "my": 9.0,
-   "cx": -114.0,
-   "cy": 136.4,
-   "r": 10.1,
-   "par": 44,
+   "n": 1512,
+   "w": 37,
+   "h": 54,
+   "mx": 17.0,
+   "my": 27.9,
+   "cx": -287.8,
+   "cy": 78.6,
+   "r": 28.5,
+   "par": 14,
    "as": 1.45,
-   "an": 1.539,
-   "lab": "Egyptian art",
+   "an": 1.87,
+   "lab": "Portraits of women",
    "zs": [
     [
-     "Egyptian art",
-     "other",
-     2.66,
-     0.66
+     "Portraits of women",
+     "people",
+     1.77,
+     0.25
     ],
     [
-     "Sculpture",
-     "other",
-     1.95,
+     "Saints",
+     "sacred",
+     1.61,
      0.16
     ]
    ]
   },
   {
-   "n": 187,
-   "w": 16,
-   "h": 15,
-   "mx": 7.0,
-   "my": 7.1,
-   "cx": 123.6,
-   "cy": 19.5,
-   "r": 8.6,
-   "par": 45,
-   "as": 1.15,
-   "an": -2.83,
+   "n": 521,
+   "w": 33,
+   "h": 21,
+   "mx": 16.0,
+   "my": 10.0,
+   "cx": 251.8,
+   "cy": 67.1,
+   "r": 17.2,
+   "par": 48,
+   "as": 1.41,
+   "an": -2.997,
+   "lab": "Cities",
+   "zs": [
+    [
+     "City streets",
+     "built",
+     2.42,
+     0.38
+    ],
+    [
+     "Diagrams",
+     "flat",
+     2.21,
+     0.15
+    ]
+   ]
+  },
+  {
+   "n": 493,
+   "w": 20,
+   "h": 33,
+   "mx": 9.0,
+   "my": 16.0,
+   "cx": -68.1,
+   "cy": -44.8,
+   "r": 16.8,
+   "par": 49,
+   "as": 1.45,
+   "an": 1.411,
+   "lab": "Crowds and portraits, Early 1800s",
+   "zs": [
+    [
+     "Native American figures",
+     "people",
+     1.96,
+     0.63
+    ],
+    [
+     "Fantasy",
+     "other",
+     0.92,
+     0.05
+    ]
+   ]
+  },
+  {
+   "n": 214,
+   "w": 13,
+   "h": 22,
+   "mx": 6.0,
+   "my": 10.9,
+   "cx": -136.8,
+   "cy": 58.3,
+   "r": 11.6,
+   "par": 50,
+   "as": 1.45,
+   "an": 1.75,
+   "lab": "Egyptian art",
+   "zs": [
+    [
+     "Egyptian art",
+     "other",
+     2.88,
+     0.65
+    ],
+    [
+     "Sculpture",
+     "other",
+     2.04,
+     0.16
+    ]
+   ]
+  },
+  {
+   "n": 186,
+   "w": 17,
+   "h": 16,
+   "mx": 8.9,
+   "my": 7.0,
+   "cx": 57.7,
+   "cy": -24.8,
+   "r": 10.6,
+   "par": 51,
+   "as": 1.45,
+   "an": -2.514,
    "lab": "Native American figures, Later 1800s",
    "zs": [
     [
      "Native American figures",
      "people",
-     3.78,
-     0.98
+     3.82,
+     0.99
     ],
     [
      "Figure groups",
      "people",
-     2.71,
+     2.73,
      0.0
     ]
    ]
   },
   {
-   "n": 163,
-   "w": 15,
-   "h": 17,
+   "n": 164,
+   "w": 14,
+   "h": 16,
    "mx": 7.0,
-   "my": 7.9,
-   "cx": 180.1,
-   "cy": 236.6,
-   "r": 9.9,
-   "par": 46,
+   "my": 8.1,
+   "cx": 201.9,
+   "cy": 292.4,
+   "r": 9.0,
+   "par": 52,
    "as": 1.45,
-   "an": 1.006,
+   "an": 0.931,
    "lab": "Manuscript pages, Early 1400s",
    "zs": [
     [
      "Manuscript pages",
      "flat",
-     2.56,
+     2.63,
      0.99
     ],
     [
@@ -1335,8 +1503,8 @@
  "gapSib": 3,
  "islandsMethod": "HDBSCAN clusters of the same UMAP cloud (+ carved-out look-alike-less bumps); each island an even blob; islands placed by MDS of their CLIP centroids; labels from the island-names tags + CLIP zero-shot phrases",
  "smooth": {
-  "cos_median_split": 0.3426,
-  "cos": 0.256,
+  "cos_median_split": 0.3431,
+  "cos": 0.2564,
   "seams_median_split": 0.1,
   "seams": 0.019
  }
