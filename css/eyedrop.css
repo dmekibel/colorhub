@@ -9,11 +9,11 @@
   border:2px solid #fff;box-shadow:0 0 0 2px rgba(0,0,0,.78),inset 0 0 0 2px rgba(0,0,0,.78),0 2px 8px rgba(0,0,0,.35);box-sizing:border-box;pointer-events:none}
 .eyd-ret-dot{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:#fff;box-shadow:0 0 0 1.5px rgba(0,0,0,.8)}
 
-/* the magnifier (David, 2026-11-06: "my thumb covers what I'm picking"): an opaque card, ~160px on a 440 screen and
-   140 on a 375 one; a 3.5x close-up with the sampled square outlined and a crosshair, and under it the live color as a
+/* the magnifier (David, 2026-11-06: "my thumb covers what I'm picking"): an opaque card, ~112px on a 440 screen and
+   100 on a 375 one; a 3.5x close-up with the sampled square outlined and a crosshair, and under it the live color as a
    large swatch with its name and hex, set on the card's own dark ground so they read on any color. */
 .eyd-prev[hidden]{display:none}
-.eyd-prev{--pv:clamp(140px,36.4vw,168px);position:absolute;left:10px;top:10px;width:var(--pv);padding:0;border-radius:12px;overflow:hidden;background:#161412;
+.eyd-prev{--pv:clamp(100px,25.5vw,112px);position:absolute;left:10px;top:10px;width:var(--pv);padding:0;border-radius:12px;overflow:hidden;background:#161412;
   box-shadow:0 0 0 1.5px rgba(236,232,223,.85),0 0 0 3px rgba(0,0,0,.55),0 8px 22px rgba(0,0,0,.5)}
 .eyd-prev-sq{position:relative;width:var(--pv);height:var(--pv);background:#0b0a09}
 .eyd-prev-sq canvas{display:block;width:100%;height:100%}
@@ -22,11 +22,11 @@
 .eyd-prev-x::before,.eyd-prev-x::after{content:"";position:absolute;background:rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(0,0,0,.6)}
 .eyd-prev-x::before{left:-11px;top:-.5px;width:22px;height:1px}
 .eyd-prev-x::after{top:-11px;left:-.5px;height:22px;width:1px}
-.eyd-prev-info{display:flex;align-items:center;gap:10px;padding:8px 10px 9px;min-height:56px;box-sizing:border-box}
-.eyd-prev-sw{flex:none;width:40px;height:40px;border-radius:9px;background:var(--c,#888);box-shadow:inset 0 0 0 1.5px rgba(236,232,223,.45)}
-.eyd-prev-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
-.eyd-prev-name{min-width:0;font:400 16px/1.15 var(--serif);color:#ECE8DF;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
-.eyd-prev-hex{font:400 16px/1.1 var(--mono,ui-monospace,Menlo,monospace);font-style:normal;color:#C9C4B8;letter-spacing:.02em}
+.eyd-prev-info{display:flex;align-items:center;gap:6px;padding:6px 7px 7px;box-sizing:border-box}
+.eyd-prev-sw{flex:none;width:22px;height:22px;border-radius:6px;background:var(--c,#888);box-shadow:inset 0 0 0 1.5px rgba(236,232,223,.45)}
+.eyd-prev-txt{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1}
+.eyd-prev-name{min-width:0;font:400 16px/1.15 var(--serif);color:#ECE8DF;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.eyd-prev-hex{font:400 14px/1.1 var(--mono,ui-monospace,Menlo,monospace);font-style:normal;color:#C9C4B8;letter-spacing:0}
 
 /* the sample-size row, below the picture */
 .eyd-sizebar{margin:10px auto 0;max-width:420px;width:100%;padding:0 12px;box-sizing:border-box}

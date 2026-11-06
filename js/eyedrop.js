@@ -2,7 +2,7 @@
 // Shared eyedropper, Adobe Capture style (David, 2026-10-25). The old loupe that ballooned above the finger is gone.
 // Now: a persistent reticle (a ring with a double outline and a center dot) sits on the picture. Drag anywhere to move
 // it with RELATIVE motion (the finger never covers the sampled point); tap to jump it there; a mouse drags it directly
-// and the arrow keys nudge it 1px (Shift = 10px). A magnifier, ~160px (140 on a 375 screen), is pinned to the top-left corner of the
+// and the arrow keys nudge it 1px (Shift = 10px). A magnifier, ~112px (100 on a 375 screen), is pinned to the top-left corner of the
 // picture (it flips to the top-right when the reticle or a thumb gets near it): a close-up (about 3.5x, smooth) with a
 // crosshair at the center, the sampled area outlined, and the live swatch, name and hex attached beneath it (David,
 // 2026-11-06: the thumb covered what he was picking). A press-and-drag never jumps the reticle; only a quick tap
@@ -106,7 +106,7 @@ const eydPreviewHTML = (hidden) => `<div class="eyd-prev"${hidden ? " hidden" : 
 // where the preview card goes: the free top corner of the visible picture (vis = {l,t,r,b} in viewport px), flipping to the
 // other corner when the point (x, y) or a thumb about it (radius d, never less than a finger's reach) comes near it
 function eydPrevPlace(prevEl, vis, x, y, d) {
-  const pv = prevEl.offsetWidth || 160, ph = prevEl.offsetHeight || pv + 56, pad = 8, m = Math.max(d, 54);
+  const pv = prevEl.offsetWidth || 112, ph = prevEl.offsetHeight || pv + 50, pad = 8, m = Math.max(d, 54);
   // the corners in order of preference: top-left, top-right, then the bottom two when the picture is tall enough
   const L = vis.l + pad, R = vis.r - pad - pv, T = vis.t + pad, B = vis.b - pad - ph;
   const boxes = [{ l: L, t: T }, { l: R, t: T }];
@@ -124,7 +124,7 @@ const eydRingPx = (nSrc, screenPerSrc) => clamp(Math.round(nSrc * screenPerSrc),
 // is ~3.5x of what's visible whatever the zoom. Smooth (not pixel art); past the picture's edge it stays dark.
 function eydPreviewDraw(root, s, fx, fy, nSrc, screenPerSrc, hex) {
   const sq = root.querySelector(".eyd-prev-sq"), cv = root.querySelector("canvas"), cx = cv.getContext("2d");
-  const pv = sq.offsetWidth || 160;
+  const pv = sq.offsetWidth || 112;
   const side = clamp(pv / (EYD_ZOOM * Math.max(screenPerSrc, 1e-3)), 14, Math.min(s.w, s.h));
   const x0 = fx * s.w - side / 2, y0 = fy * s.h - side / 2;
   cx.imageSmoothingEnabled = true; cx.imageSmoothingQuality = "high";
