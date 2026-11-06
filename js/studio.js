@@ -395,12 +395,25 @@ function palPhotoView(p) {
   // "On the photo" markers start off on a photo, whatever a painting page last left on (David, 2026-10-24: numbered
   // markers piled on top of his own color circles); turning them on here is a choice for this photo only
   let curK = 6, mode = "out", where = "off", capOpen = false;
-  let pvKCtl = null;   // the countify() controller for [data-pvk], built once, re-ranged per mode (js/core.js)
+  let pvRaf = 0;   // the pending slider-drag redraw
+  let pvKCtl = null;  // the countify() controller for [data-pvk], built once, re-ranged per mode (js/core.js)
   let editedPal = null;   // once the visitor edits (remove/replace/nudge/reorder), this overrides the computed set
   let undoPal = null, undoLabel = "";
   const picks = [];   // "Pick from it" taps
   const lit = { img: null, pix: null, ok: true };   // a photo's own pixels are always readable
+  // Computed sets are cached per (mode,k) for the current pool (cleared when the pool changes), so a drag over the
+  // slider recomputes nothing it has already seen; a mode's real reach (how many swatches it can produce for THIS
+  // photo) is measured once by asking for the cap, so the label, the slider and the −/+ always agree with the swatches.
+  let setCache = new Map(), haveCache = null;
+  const poolChanged = () => { setCache = new Map(); haveCache = null; };
   const modeSet = (m, k) => {
+    if (m === "pick") return modeSet0(m, k);
+    const key = m + "|" + k; let r = setCache.get(key);
+    if (r === undefined) { r = modeSet0(m, k); setCache.set(key, r); }
+    return r;
+  };
+  const modeReach = m => { const st = modeSet(m, 20); return st ? Math.min(20, Math.max(st.pal.length, 1)) : 0; };
+  const modeSet0 = (m, k) => {
     if (m === "out") return { pal: glStandOut(pool, k, PV_FLAT_PRIOR), max: Math.min(pool.length, 20) };
     if (m === "area") return { pal: glPoolByArea(pool, k), max: Math.min(pool.length, 20) };
     if (m === "diverse") return { pal: glPoolDiverse(pool, k), max: Math.min(pool.length, 20) };
@@ -408,13 +421,16 @@ function palPhotoView(p) {
       cap: picks.length ? "Colors you took from the photo. Tap it for more, a swatch to open its page." : "Press and drag over the photo to take a color, up to 12." };
     return glModeSet(m, pool, k, null);
   };
-  const curSet = () => editedPal ? { pal: editedPal, max: 24, fixed: true, cap: "Edited by hand." } : (() => { const st = modeSet(mode, curK) || modeSet("out", curK); return mode !== "pick" && mode !== "out" && !st.harmony && st.pal && st.pal.length > 2 && typeof palOrderItems === "function" ? { ...st, pal: palOrderItems(st.pal) } : st; })();
+  const curSet = () => editedPal ? { pal: editedPal, max: 24, fixed: true, cap: "Edited by hand." } : (() => {
+    const mm = modeSet(mode, curK) ? mode : "out"; let st = modeSet(mm, curK);
+    if (!st.fixed) { const reach = modeReach(mm); if (st.pal.length > reach || curK > reach) st = modeSet(mm, reach) || st; st = { ...st, max: Math.max(reach, st.pal.length) }; }
+    return mode !== "pick" && mode !== "out" && !st.harmony && st.pal && st.pal.length > 2 && typeof palOrderItems === "function" ? { ...st, pal: palOrderItems(st.pal) } : st; })();
   const curPal = () => curSet().pal;
   // "Diverse" (David's palette-engine brief, 2026-10-09: farthest-point sampling in OKLab, guarantees every
   // distinct hue family in this photo's pool above a small floor gets a seat) is a photo-agnostic mode, same as
   // out/area/pick -- it operates on the whole pool, not a filtered subset, so it belongs in this always-on list
   // "Pick from it" is left out: the circles on the photo (Your colors, below the photo) are how a photo is picked from
-  const haveModes = () => GL_MODES.filter(m => m[0] !== "pick" && (m[0] === "out" || m[0] === "area" || (m[0] === "diverse" && pool.length > 1) || glModeSet(m[0], pool, 6, null)));
+  const haveModes = () => haveCache || (haveCache = GL_MODES.filter(m => m[0] !== "pick" && (m[0] === "out" || m[0] === "area" || (m[0] === "diverse" && pool.length > 1) || glModeSet(m[0], pool, 6, null))));
   let modesKey = "";
   const dom = pool.reduce((a, b) => b.share > a.share ? b : a).h;
   const titleKind = p.photoId != null ? "photo" : null;
@@ -483,14 +499,20 @@ function palPhotoView(p) {
     if (key !== modesKey) { modesKey = key; el.querySelector("[data-pvorder]").innerHTML = hv.map(m => `<button data-pvo="${m[0]}" aria-pressed="false">${m[1]}</button>`).join(""); }
     const set = curSet(), pal = set.pal;
     el.querySelector("[data-pvorder]").querySelectorAll("button").forEach(b => { const on = b.dataset.pvo === mode; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
-    const slide = el.querySelector("[data-pvslide]"), inp = slide.querySelector("input"), kk = Math.min(Math.max(curK, 2), set.max);
+    // the number is what is drawn: the label, the slider's range and −/+ all come from this mode's real reach on this photo
+    const slide = el.querySelector("[data-pvslide]"), inp = slide.querySelector("input"), kk = set.fixed ? pal.length : Math.max(1, Math.min(curK, set.max, pal.length));
     slide.hidden = !!set.fixed || set.max <= 2 || editing;
     if (!slide.hidden) {
-      if (!pvKCtl) pvKCtl = countify(inp, { min: 2, max: Math.max(2, set.max), value: kk, out: el.querySelector("[data-pvkn]"),
-        onSet: (v, final) => { curK = v; drawPalette(); if (final) buzz(5); } });
-      else { pvKCtl.range(2, Math.max(2, set.max)); pvKCtl.set(kk); }
+      const mx = Math.max(2, set.max), kv = Math.max(2, Math.min(kk, mx));
+      if (!pvKCtl) pvKCtl = countify(inp, { min: 2, max: mx, value: kv, out: el.querySelector("[data-pvkn]"),
+        onSet: (v, final) => {
+          curK = v; el.querySelector("[data-pvkn]").textContent = v + " colors";   // the label moves at once
+          if (final) { cancelAnimationFrame(pvRaf); pvRaf = 0; drawPalette(); buzz(5); }
+          else if (!pvRaf) pvRaf = requestAnimationFrame(() => { pvRaf = 0; drawPalette(); });   // drags coalesce to one draw a frame
+        } });
+      else { pvKCtl.range(2, mx); pvKCtl.set(kv); }
     }
-    el.querySelector("[data-pvkn]").textContent = kk + " colors";
+    el.querySelector("[data-pvkn]").textContent = kk + (kk === 1 ? " color" : " colors");
     const def = GL_MODES.find(m => m[0] === mode) || GL_MODES[0], pvc = PV_CAP[mode];
     const full = set.cap || (pvc ? pvc[1] : def[2]), short = mode === "pick" ? full : (pvc ? pvc[0] : def[3]) || full;
     const cap = el.querySelector("[data-pvcap]");
@@ -902,7 +924,7 @@ function palPhotoView(p) {
     const apply = () => {
       const np = on >= 12 ? makePool() : null;
       if (!np || !np.length) { if (segHas()) toast("That's too small to read. Tap a bigger part."); return; }
-      segPool = np; pool = np; editedPal = null;
+      segPool = np; pool = np; poolChanged(); editedPal = null;
       drawPalette(); verdict();
     };
     if (now) apply(); else seg.t = setTimeout(apply, 140);
@@ -956,7 +978,7 @@ function palPhotoView(p) {
   };
   const segReset = () => {
     seg.pts = []; seg.cseeds = []; seg.raw = null; seg.alpha = null; seg.frac = 0; clearTimeout(seg.t);
-    segCv.classList.remove("on"); segPool = null; pool = basePool; editedPal = null;
+    segCv.classList.remove("on"); segPool = null; pool = basePool; poolChanged(); editedPal = null;
     segInfo(); drawPalette(); verdict();
   };
   // ----- Object: MobileSAM, downloaded once (~46 MB, cached), the photo encoded once, then every tap is fast -----

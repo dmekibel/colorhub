@@ -1469,7 +1469,8 @@ function glPage(i, d, fromHex, tol) {
   const G = GAL, src = G.src[G.mus[i]] || { name: "Museum", short: "Museum", credit: "" }, pal6 = glPal(i), yr = glYear(i), ar = G.ar[i];
   const pool = glPoolDecode(d.pl);
   let curK = 6;   // the "How many colors" slider; every palette type draws that many (up to what it has)
-  let kCtl = null;   // the countify() controller for [data-glk], built once, re-ranged per mode (js/core.js)
+  let glKRaf = 0;   // the pending slider-drag redraw
+  let kCtl = null;  // the countify() controller for [data-glk], built once, re-ranged per mode (js/core.js)
   let mode = "out";   // the palette type (GL_MODES); "out" = stands out first (the default)
   let prior = null;    // this painter's hue habits once they load (glPainterHue); the archive's until then
   let row = null;      // this painting's analysis row once it loads (accents, hidden, focal)
@@ -1540,8 +1541,21 @@ function glPage(i, d, fromHex, tol) {
       cap: !lit.ok ? "This museum's image can't be read here, so tapping the painting can't pick colors from it. Every other palette type still works." : picks.length ? "Colors you took from the painting. Tap the picture for more, a swatch to open its page." : "Tap the painting to take a color, up to 12." };
     return glModeSet(m, pool, k, row);
   };
+  // how many swatches a mode can really produce for this painting (asked once at the 20 cap, per mode/seed/pool size), so the
+  // slider's range, the label and −/+ always agree with what is drawn; harmCards is restored, it is the live draw's
+  const reachMemo = new Map();
+  const modeReach = m => {
+    const key = m + "|" + seedOf(m) + "|" + pool.length + "|" + harmFilter; let r = reachMemo.get(key);
+    if (r === undefined) { const keep = harmCards; const st = modeSet(m, 20); harmCards = keep; r = st && st.pal ? Math.min(20, Math.max(st.pal.length, 1)) : 0; reachMemo.set(key, r); }
+    return r;
+  };
   const curSet = () => {
-    const st = modeSet(mode, curK) || modeSet("out", curK);
+    let st = modeSet(mode, curK) || modeSet("out", curK);
+    if (!st.fixed && !plvGens[mode] && st.pal) {
+      const mm = modeSet(mode, curK) ? mode : "out", reach = modeReach(mm);
+      if (reach && (st.pal.length > reach || curK > reach)) st = modeSet(mm, reach) || st;
+      st = { ...st, max: Math.max(reach, Math.min(st.pal.length, 20), 2) };
+    }
     // every strip reads as a gradient (js/palorder.js; widths still follow area); picked and live combinations keep their own order
     return mode !== "pick" && mode !== "out" && !plvGens[mode] && !st.harmony && st.pal && st.pal.length > 2 && typeof palOrderItems === "function" ? { ...st, pal: palOrderItems(st.pal) } : st;
   };
@@ -1844,17 +1858,21 @@ function glPage(i, d, fromHex, tol) {
     host.querySelectorAll("[data-glo]").forEach(b => { const on = b.dataset.glo === mode; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
     el.querySelectorAll("[data-glw]").forEach(b => { const on = (b.dataset.glw === "eq") === eqW; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
     const browseTile = host.querySelector("[data-glbrowse]"); if (browseTile) browseTile.classList.toggle("on", !!plvGens[mode]);
-    const slide = el.querySelector("[data-glslide]"), inp = slide.querySelector("input"), kk = Math.min(Math.max(curK, 2), set.max);
+    const slide = el.querySelector("[data-glslide]"), inp = slide.querySelector("input"), kk = set.fixed || !set.pal || !set.pal.length ? Math.min(Math.max(curK, 2), set.max) : Math.max(1, Math.min(curK, set.max, set.pal.length));
     // Every mode that reads from the pool gets the same 2-20 "how many colors" slider now (David's palette-engine
     // brief, 2026-10-09: "a slider for all of them" -- only the structurally-fixed readings stay without one: a
     // value ladder is always 5 bands, Focal is always 1 color plus its neighbors, Pick is however many you tapped).
     slide.hidden = !!set.fixed || set.max <= 2;
     if (!slide.hidden) {
-      if (!kCtl) kCtl = countify(inp, { min: 2, max: Math.max(2, set.max), value: kk, out: el.querySelector("[data-glkn]"),
-        onSet: (v, final) => { curK = v; locate = null; drawPalette(); if (final) buzz(5); } });
-      else { kCtl.range(2, Math.max(2, set.max)); kCtl.set(kk); }
+      if (!kCtl) kCtl = countify(inp, { min: 2, max: Math.max(2, set.max), value: Math.max(2, kk), out: el.querySelector("[data-glkn]"),
+        onSet: (v, final) => {
+          curK = v; locate = null; el.querySelector("[data-glkn]").textContent = v + " colors";   // the label moves at once
+          if (final) { cancelAnimationFrame(glKRaf); glKRaf = 0; drawPalette(); buzz(5); }
+          else if (!glKRaf) glKRaf = requestAnimationFrame(() => { glKRaf = 0; drawPalette(); });   // a drag redraws once a frame
+        } });
+      else { kCtl.range(2, Math.max(2, set.max)); kCtl.set(Math.max(2, kk)); }
     }
-    el.querySelector("[data-glkn]").textContent = kk + " colors";
+    el.querySelector("[data-glkn]").textContent = kk + (kk === 1 ? " color" : " colors");
     // one line under the controls; a tap opens the full sentence (the painting stays the focus)
     const def = GL_MODES.find(m => m[0] === mode) || [], full = set.cap || def[2], short = mode === "pick" ? full : (def[3] || full);
     const cap = el.querySelector("[data-glcap]");
