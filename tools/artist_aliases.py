@@ -59,8 +59,18 @@ def subset(ta, tb):
     return True
 
 
-def build(counts):
-    names = [n for n in counts if n and not QUAL.search(n)]
+OLD_CANON = set()
+
+
+def build(counts, years=None):
+    years = years or {}
+    import statistics
+    med = {n: statistics.median(v) for n, v in years.items() if v}
+    # 2026-11-07: two names are one painter only if their paintings date from the same life (Aelbrecht vs Dieric Bouts,
+    # the two Alexander Coopers): medians within 25 years when both are dated.
+    near = lambda a, b: a not in med or b not in med or abs(med[a] - med[b]) <= 25
+    JOINT = re.compile(r" / | o | or | and | & | with | e |;", re.I)   # shared or uncertain credits never fold into one painter
+    names = [n for n in counts if n and not QUAL.search(n) and not JOINT.search(n)]
     T = {n: toks(n) for n in names}
     parent = {n: n for n in names}
 
@@ -75,7 +85,7 @@ def build(counts):
             ta, tb = T[a], T[b]
             if a == b or len(ta) < 2 or len(tb) <= len(ta) or ta[-1] != tb[-1] or not subset(ta, tb):
                 continue
-            if frozenset([a, b]) in KEEP_APART:
+            if frozenset([a, b]) in KEEP_APART or not near(a, b):
                 continue
             parent[find(a)] = find(b)
     comp = {}
@@ -87,10 +97,11 @@ def build(counts):
             continue
         def rank(n):
             t = T[n]
-            return (bool(HONOR & set(t)), len(t), -counts[n], n)
+            return (n not in OLD_CANON, bool(HONOR & set(t)), len(t), -counts[n], n)   # a live canonical name never changes (page links)
         canon = min(members, key=rank)
         for m in members:
-            if m != canon:
+            # no chains: "Alfred Jones" and "Thomas Jones" both fit inside "Thomas Alfred Jones" but are not each other
+            if m != canon and (subset(T[canon], T[m]) or subset(T[m], T[canon])) and near(m, canon):
                 out[m] = canon
     return out
 
@@ -99,7 +110,18 @@ def main():
     import gallery as GAL
     rows, _ = GAL.load_corpus(aliases=False)
     counts = Counter(r.get("a") for r in rows if r.get("a"))
-    al = build(counts)
+    years = {}
+    for r in rows:
+        if r.get("a") and isinstance(r.get("y"), int):
+            years.setdefault(r["a"], []).append(r["y"])
+    global OLD_CANON
+    ap = ROOT / "data" / "artists" / "aliases.json"
+    old = json.loads(ap.read_text(encoding="utf-8")) if ap.exists() else {}
+    OLD_CANON = set(old.values())
+    al = build(counts, years)
+    for k, v in old.items():           # merges already live stay as they are
+        al[k] = v
+    al = {k: v for k, v in al.items() if k != v and k not in OLD_CANON}
     (ROOT / "data" / "artists").mkdir(parents=True, exist_ok=True)
     (ROOT / "data" / "artists" / "aliases.json").write_text(
         json.dumps(dict(sorted(al.items())), ensure_ascii=False, indent=0) + "\n", encoding="utf-8")

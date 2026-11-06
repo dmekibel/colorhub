@@ -26,6 +26,8 @@ step "crops: deep white margins (data/crop-margins.json, 30 s), then every palet
 python3 tools/crop_margins.py | tail -1 | cut -c1-200
 python3 tools/crop_paintings.py apply | tail -1 | cut -c1-160
 
+step "painter name variants (data/artists/aliases.json; live merges never change, new ones need the same lifetime)"
+[ "$SKIPGAL" = 1 ] || python3 tools/artist_aliases.py | sed -n 2p
 step "gallery (deletes metrics.bin and thumbs.txt; the steps below put them back)"
 [ "$SKIPGAL" = 1 ] || python3 tools/gallery.py --raw research/_raw | tail -1 | cut -c1-160
 step "hidden non-artworks (data/gallery/hidden.json: blank scans, journal covers, data/hide-overrides.json; a filter, never a deletion)"
@@ -38,6 +40,10 @@ python3 tools/subjects.py | tail -1   # look_layout reads subjects.json for the 
 { python3 tools/subjects_clip.py --embed-only && python3 tools/look_layout.py; } 2>&1 | tail -2 | cut -c1-160 || FAILED+=("look layout")
 step "By vibe neighbors (exact top-60 by CLIP cosine per painting -> data/gallery/vibe/*.bin; served from R2; skips quietly without the venv)"
 python3 tools/vibe_knn.py 2>&1 | tail -2 | cut -c1-160 || FAILED+=("vibe neighbors")
+step "hidden again, now that new paintings have image embeddings (bad shots and far-off photos, doubles incl. visitor photos)"
+[ -x research/_raw/clipenv/bin/python ] && research/_raw/clipenv/bin/python tools/audit_photos.py --hide | grep -E "^wrote" | cut -c1-160
+python3 tools/hide_duplicates.py | tail -1 | cut -c1-160
+python3 tools/hide_nonart.py | tail -1 | cut -c1-160
 for s in analyze metrics_build facets artwiki_build; do step "$s"; python3 tools/$s.py | tail -1 | cut -c1-160; done
 step "painter counts, movements, portraits and most-famous rails (all store gallery positions)"
 python3 tools/wikidata_artists.py | tail -1 | cut -c1-160
