@@ -397,7 +397,7 @@ function plvRender(el, kind, id, src) {
         plvExpand(item, { srcKey, cat, src, prepped, gens, m: plvModel(), feedRef, onPinChange });
       };
       row.querySelector("[data-plvheart]").onclick = () => doPin(row, item);
-      row.querySelector("[data-plvfull]").onclick = () => { buzz(5); palFullOpen(item.edited || item.cols, { title: src.title || "Palette", source: "Palette view", from: row.querySelector("[data-plvrow]"), onSave: () => { if (!plvIsPinned(srcKey, item.edited || item.cols)) doPin(row, item); } }); };
+      row.querySelector("[data-plvfull]").onclick = () => { buzz(5); palFullOpen(item.edited || item.cols, { title: src.title || "Palette", source: "Palette view", keepOrder: true, from: row.querySelector("[data-plvrow]"), onSave: () => { if (!plvIsPinned(srcKey, item.edited || item.cols)) doPin(row, item); } }); };
     });
   }
 
@@ -463,7 +463,7 @@ function plvExpand(item, ctx) {
     pinBtn.textContent = on ? "Pinned · remove" : "Pin this palette"; pinBtn.classList.toggle("ghost", on);
   }
   wireSwatches();
-  sh.querySelector("[data-pf-open]").onclick = () => { buzz(5); palFullOpen(cols(), { title: ctx.src.title || "Palette", source: "Palette view", from: sh.querySelector(".plv-x-sw") }); };
+  sh.querySelector("[data-pf-open]").onclick = () => { buzz(5); palFullOpen(cols(), { title: ctx.src.title || "Palette", source: "Palette view", keepOrder: true, from: sh.querySelector(".plv-x-sw") }); };
   sh.querySelector("[data-plvxpin]").onclick = () => {
     const on = plvIsPinned(ctx.srcKey, cols());
     if (on) S.plv[ctx.srcKey] = plvPins(ctx.srcKey).filter(p => p.cols.join("|") !== cols().join("|"));

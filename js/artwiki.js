@@ -256,8 +256,7 @@ function awVividStrip(slug, P, fallback) {
   cand.sort((a, b) => b.w - a.w);
   const out = [];
   cand.forEach(x => { if (out.length < 8 && out.every(o => Math.hypot(o.l[0] - x.l[0], o.l[1] - x.l[1], o.l[2] - x.l[2]) > 18)) out.push(x); });
-  out.sort((a, b) => Math.atan2(a.l[2], a.l[1]) - Math.atan2(b.l[2], b.l[1]));
-  return out.length >= 4 ? out.map(x => x.h) : fallback;
+  return out.length >= 4 ? (typeof palDisplayOrder === "function" ? palDisplayOrder(out.map(x => x.h)) : out.sort((a, b) => Math.atan2(a.l[2], a.l[1]) - Math.atan2(b.l[2], b.l[1])).map(x => x.h)) : fallback;
 }
 function awDecadePicks(slug, P, n) {   // [[bucket, gi, count, unit]], a year per painting for a short career, else a decade
   if (n < 15 || !P.ix) return [];

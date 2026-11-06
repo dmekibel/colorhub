@@ -215,7 +215,7 @@ function gamutWheel(preset = "Warm", initPts = null, push = true) {
   el.querySelector("[data-names]").onclick = e => { names = S.wheelNames = !names; save(); e.currentTarget.classList.toggle("on", names); drawNames(); };
   exLongCopy(el.querySelector("#hlist"));   // one tap opens the color's page; press and hold copies the hex
   el.querySelector("[data-keep]").onclick = () => { keepPalette(cur, "Gamut wheel"); };
-  el.querySelector(".pv-full-row [data-pf-open]").onclick = () => { buzz(5); palFullOpen(cur, { title: "Gamut wheel", source: "Studio", from: el.querySelector("#pal"), onSave: () => keepPalette(cur, "Gamut wheel") }); };
+  el.querySelector(".pv-full-row [data-pf-open]").onclick = () => { buzz(5); palFullOpen(cur, { title: "Gamut wheel", source: "Studio", keepOrder: true, from: el.querySelector("#pal"), onSave: () => keepPalette(cur, "Gamut wheel") }); };
   // the result view is one step further down the same trail: Back from it returns to this exact shape (gwReopen below)
   el.querySelector("[data-open]").onclick = () => { if (XSTACK[XSTACK.length - 1] !== "wheelview") XSTACK.push("wheelview"); paletteView({ cols: cur.map(h => ({ h })), from: "Gamut wheel" }); };
   requestAnimationFrame(setup);
@@ -408,7 +408,7 @@ function palPhotoView(p) {
       cap: picks.length ? "Colors you took from the photo. Tap it for more, a swatch to open its page." : "Press and drag over the photo to take a color, up to 12." };
     return glModeSet(m, pool, k, null);
   };
-  const curSet = () => editedPal ? { pal: editedPal, max: 24, fixed: true, cap: "Edited by hand." } : (modeSet(mode, curK) || modeSet("out", curK));
+  const curSet = () => editedPal ? { pal: editedPal, max: 24, fixed: true, cap: "Edited by hand." } : (() => { const st = modeSet(mode, curK) || modeSet("out", curK); return mode !== "pick" && mode !== "out" && !st.harmony && st.pal && st.pal.length > 2 && typeof palOrderItems === "function" ? { ...st, pal: palOrderItems(st.pal) } : st; })();
   const curPal = () => curSet().pal;
   // "Diverse" (David's palette-engine brief, 2026-10-09: farthest-point sampling in OKLab, guarantees every
   // distinct hue family in this photo's pool above a small floor gets a seat) is a photo-agnostic mode, same as
