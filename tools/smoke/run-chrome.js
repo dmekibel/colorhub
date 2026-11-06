@@ -17,10 +17,10 @@ const CHROME = process.env.SMOKE_CHROME || "/Applications/Google Chrome.app/Cont
 // (571 dirs / ~75 GB). Now: live dirs are tracked in a Set, rm is retried (capped), an exit/SIGINT/SIGTERM handler
 // removes whatever is left synchronously, and stale colorhub-smoke-* dirs (>60 min) are swept once at load.
 const LIVE = new Set();
-const rmDir = d => { try { fs.rmSync(d, { recursive: true, force: true }); } catch (e) {} return !fs.existsSync(d); };
+const rmDir = d => { try { fs.rmSync(d, { recursive: true, force: true, maxRetries: 3, retryDelay: 100 }); } catch (e) {} return !fs.existsSync(d); };
 const cleanAll = () => { for (const d of LIVE) if (rmDir(d)) LIVE.delete(d); };
 process.on("exit", cleanAll);
-for (const sig of ["SIGINT", "SIGTERM"]) process.on(sig, () => { cleanAll(); process.exit(130); });
+for (const sig of ["SIGINT", "SIGTERM", "SIGHUP"]) process.on(sig, () => { cleanAll(); process.exit(130); });
 try {
   const tmp = os.tmpdir(), old = Date.now() - 60 * 60 * 1000;
   for (const n of fs.readdirSync(tmp)) {
