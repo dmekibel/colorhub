@@ -175,3 +175,5 @@ html.desk .palfull{z-index:520}
 .pf-flex .pf-flex{position:relative;inset:auto}
 .pf-m-list li>i{box-shadow:inset 0 0 0 1px rgba(128,128,128,.45)}
 @media (max-height:560px){.pf-th{display:none}.pf-mode{min-width:0;padding:10px 14px}.pf-bot{padding-top:8px}.pf-opts{padding-bottom:6px}}
+
+.pf-heart.on{color:#F2A7B5}.pf-heart svg{width:22px;height:22px}

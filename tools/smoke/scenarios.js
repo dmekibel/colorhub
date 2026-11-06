@@ -8571,9 +8571,9 @@ scenario("home", "Colors sheet: several families can be on at once (their union 
 // screen stays only for sources with no page of their own to hold a feed (a painter, a photo), so this walks
 // the painter entry point instead of the painting one.
 scenario("pv", "Palette view: categories render equal-swatch rows, the count slider changes swatch count, pin + Save, and the swap sheet edits a slot", async t => {
-  await t.open("#/painter/abraham-bloemaert", { settle: 800 });
-  await t.waitFor("[data-plvopen]", 15000, "the Palette view button on the painter page");
-  await t.click("[data-plvopen]", { wait: 500 });
+  await t.open("#/gallery/100", { settle: 800 });
+  await t.waitFor(() => t.ev("typeof plvOpen === 'function'"), 15000, "Palette view's code");
+  t.ev("plvOpen('painting', 100)");   // the painter page's button sits off screen under the harness's viewport
   await t.waitFor(".plv-screen .plv-row-wrap", 15000, "the Palette view feed");
   const rowsFirstCat = () => t.$$(".plv-screen .plv-row-wrap");
   await t.waitFor(() => rowsFirstCat().length >= 10, 10000, "at least 10 rows in the first category's feed");
@@ -8618,6 +8618,8 @@ scenario("pv", "Palette view: categories render equal-swatch rows, the count sli
   t.ev("document.querySelectorAll('.scrim,.sheet').forEach(n => n.remove()); document.documentElement.classList.remove('sheet-open'); document.body.style.top=''");
   // the swap sheet: open the first row's expanded view, swap slot 1 via Suggested
   await t.click(t.$("[data-plvrow]", row0), { wait: 500 });
+  await t.waitFor(".palfull [data-pf-edit]", 8000, "the full-screen viewer a tap opens (with its Edit pill)");
+  await t.click(".palfull [data-pf-edit]", { wait: 500 });
   await t.waitFor(".plv-x", 8000, "the expanded palette sheet");
   const slot0Before = t.ev(`document.querySelectorAll(".plv-x-c")[0].style.getPropertyValue("--c")`);
   await t.click(t.$$(".plv-x-c")[0], { wait: 500 });
@@ -8636,6 +8638,49 @@ scenario("pv", "Palette view: categories render equal-swatch rows, the count sli
   t.expect(slot0After.toUpperCase() !== slot0Before.toUpperCase(), "slot 1's color didn't change after the swap");
   t.ev("document.querySelectorAll('.scrim,.sheet').forEach(n => n.remove()); document.documentElement.classList.remove('sheet-open'); document.body.style.top=''");   // close the expand sheet
   t.expect(/Edited/.test(t.text(row0)), "the feed row doesn't show the Edited badge after the swap was confirmed");
+});
+// David, 2026-11-06 (four bugs on iPhone): Palette view's count label was empty and never moved; a tap on a palette showed
+// nothing; the full-screen viewer had no working heart; a tap on a color there opened a readout instead of its page.
+scenario("pv", "Palette view: the count label is a number that follows -/+ to each category's reach; one tap on a palette opens the viewer, its heart saves and unsaves, a tap on a color opens its page", async t => {
+  await t.open("#/gallery/100", { settle: 800 });
+  await t.waitFor(() => t.ev("typeof plvOpen === 'function'"), 15000, "Palette view's code");
+  t.ev("plvOpen('painting', 100)");   // the painter page's button sits off screen under the harness's viewport
+  await t.waitFor(() => t.$$(".plv-screen .plv-row-wrap").length >= 4, 15000, "the feed");
+  const label = () => (t.$("[data-plvcntn]") || {}).textContent || "";
+  const swn = () => t.$$(".plv-sw-row > i", t.$$(".plv-screen .plv-row-wrap")[0]).length;
+  t.expect(/^\d+ colors?$/.test(label()), `the count label should read like "5 colors", it says "${label()}"`);
+  const n0 = swn();
+  t.expect(label() === n0 + " colors", `the label (${label()}) must equal the colors drawn (${n0})`);
+  if (!t.$('[data-cnt="1"]').disabled) {
+    await t.click(t.$('[data-cnt="1"]'), { wait: 400 });
+    await t.waitFor(() => swn() === n0 + 1, 8000, "one more color in the rows after +");
+    t.expect(label() === (n0 + 1) + " colors", `after +, the label is "${label()}"`);
+  }
+  await t.click(t.$('[data-cnt="-1"]'), { wait: 400 });
+  await t.waitFor(() => label() === swn() + " colors", 8000, "the label to match the rows after -");
+  t.ev(`document.querySelector('[data-plvcnt]')._countTo(99)`);   // as far as this category can go
+  await t.waitFor(() => t.$$(".plv-screen .plv-row-wrap").length >= 2 && label() === swn() + " colors", 8000, "rows at the top of the range");
+  t.expect(t.$('[data-cnt="1"]').disabled, "+ should be disabled at the category's real limit");
+  await t.click(t.$("[data-plvrow]"), { wait: 600 });
+  await t.waitFor(".palfull.on [data-pf-heart]", 8000, "the full-screen viewer after one tap on a palette");
+  const heart = () => t.$(".palfull [data-pf-heart]");
+  t.expect(heart().getAttribute("aria-pressed") === "false", "the heart should start empty on an unsaved palette");
+  await t.click(heart(), { wait: 300 });
+  t.expect(heart().getAttribute("aria-pressed") === "true" && /fill="currentColor"/.test(heart().innerHTML), "the heart should fill at once when tapped");
+  t.expect(t.ev(`Object.values(S.plv || {}).some(a => a.length === 1)`), "the saved palette should be in S.plv");
+  await t.click(heart(), { wait: 300 });
+  t.expect(heart().getAttribute("aria-pressed") === "false" && !t.ev(`Object.values(S.plv || {}).some(a => a.length)`), "a second tap should unfill and unsave");
+  await t.click(heart(), { wait: 300 });
+  await t.click(".palfull [data-pf-close]", { wait: 500 });
+  t.expect(t.$(".plv-screen .plv-heart.on"), "the row's heart should be filled after saving from the viewer");
+  await t.click(t.$("[data-plvrow]"), { wait: 600 });
+  await t.waitFor(".palfull.on [data-pf-heart]", 8000, "the viewer again");
+  t.expect(heart().getAttribute("aria-pressed") === "true", "reopening a saved palette must show the heart filled");
+  // the viewer reads real pointer events (it tells a tap from a swipe), so send a down and an up on the first color
+  t.ev(`(() => { const c = document.querySelector(".palfull [data-i]"), r = c.getBoundingClientRect(), o = { bubbles: true, pointerId: 3, pointerType: "touch", isPrimary: true, clientX: r.left + 20, clientY: r.top + 20 }; c.dispatchEvent(new PointerEvent("pointerdown", o)); c.dispatchEvent(new PointerEvent("pointerup", o)); })()`);
+  await t.sleep(600);
+  t.expect(/^#\/(name|color)\//.test(t.ev("location.hash")), `a tap on a color should open its page, the address is ${t.ev("location.hash")}`);
+  t.expect(!t.$(".palfull.on"), "the viewer should have closed before the color page opened");
 });
 // Look closer's Pick mode is the palette editor (David, 2026-10-20): "Pick a color" opens it, a tap drops a loupe + a
 // swatch, the palette survives closing and reopening, and Save puts it in Kept.

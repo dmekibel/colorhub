@@ -185,7 +185,7 @@ function palFullOpen(colors, opts = {}) {
     <div class="pf-read" data-pf-read hidden></div>
     <div class="pf-top" data-pf-top>
       <div class="pf-title"><b>${esc(titleTxt)}</b><span>${[opts.source, `${cols.length} ${cols.length === 1 ? "color" : "colors"}`].filter(Boolean).map(esc).join(" · ")}</span></div>
-      <div class="pf-top-acts">${opts.onEdit ? `<button type="button" class="pf-pill" data-pf-edit>Edit</button>` : ""}${opts.onSave ? `<button type="button" class="pf-pill solid" data-pf-save>Save</button>` : ""}<button type="button" class="pf-x" data-pf-close aria-label="Close full screen">${ICON.x}</button></div>
+      <div class="pf-top-acts">${opts.heart ? `<button type="button" class="pf-x pf-heart" data-pf-heart aria-label="Save this palette" aria-pressed="false"></button>` : ""}${opts.onEdit ? `<button type="button" class="pf-pill" data-pf-edit>Edit</button>` : ""}${opts.onSave ? `<button type="button" class="pf-pill solid" data-pf-save>Save</button>` : ""}<button type="button" class="pf-x" data-pf-close aria-label="Close full screen">${ICON.x}</button></div>
     </div>
     <div class="pf-bot" data-pf-bot>
       <div class="pf-opts" data-pf-opts></div>
@@ -276,8 +276,9 @@ function palFullOpen(colors, opts = {}) {
     if (Math.abs(dx) > 56 && Math.abs(dx) > Math.abs(dy) * 1.6) return step(dx < 0 ? 1 : -1);
     if (p.moved) return;
     if (!st.chrome) return setChrome(true);   // a bare screen: any tap brings the controls back
-    if (p.i >= 0 && p.i !== st.sel) { buzz(4); return showRead(p.i); }
-    setChrome(false); hideRead(); buzz(4);   // empty space, or the same color again: the pure view
+    // one tap on a color opens its page (never a sheet in between): the viewer closes first, so Back returns here
+    if (p.i >= 0 && cols[p.i] && typeof openTappedColor === "function") { const hex = cols[p.i].hex; close(); setTimeout(() => openTappedColor(hex), 0); return; }
+    setChrome(false); hideRead(); buzz(4);   // empty space: the pure view
   };
   stage.addEventListener("pointerup", e => endP(e, false));
   stage.addEventListener("pointercancel", e => endP(e, true));
@@ -294,9 +295,18 @@ function palFullOpen(colors, opts = {}) {
     }
     if (t.closest("[data-pf-names]")) return toggleNames();
     if (t.closest("[data-pf-fs]")) return toggleBrowserFs();
+    if (t.closest("[data-pf-heart]")) { opts.heart.toggle(); paintHeart(true); return; }
     if (t.closest("[data-pf-save]")) { const f = opts.onSave; close(); setTimeout(() => f && f(), 0); return; }
     if (t.closest("[data-pf-edit]")) { const f = opts.onEdit; close(); setTimeout(() => f && f(), 0); return; }
   });
+  // the heart: filled = saved (aria-pressed + the filled icon), read from the caller's own store each time it is drawn
+  const paintHeart = fb => {
+    const h = ov.querySelector("[data-pf-heart]"); if (!h || !opts.heart) return;
+    const on = !!opts.heart.isOn(); h.setAttribute("aria-pressed", on); h.classList.toggle("on", on); h.setAttribute("aria-label", on ? "Saved: tap to remove" : "Save this palette");
+    h.innerHTML = on ? ICON.heartOn : ICON.heart;
+    if (fb) { buzz(on ? 10 : 6); toast(on ? "Saved" : "Removed"); }
+  };
+  paintHeart(false);
   const toggleNames = () => { st.names = !st.names; pfSave({ ...pfLoad(), names: st.names }); buzz(4); render(); paintOpts(); };
   const toggleBrowserFs = () => {
     try { if (document.fullscreenElement) document.exitFullscreen(); else if (ov.requestFullscreen) ov.requestFullscreen({ navigationUI: "hide" }); else toast("Your browser can't fill the window here"); } catch (e) {}

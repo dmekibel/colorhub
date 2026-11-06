@@ -327,10 +327,25 @@ function plvRender(el, kind, id, src) {
     <div class="plv-end" data-plvend hidden><p class="fine">That's every palette in this category for now.</p></div>`);
   el.querySelector(".plv-loading").remove();
 
+  // the number is what is drawn: each category's real reach (the most colors it can still deliver, probed once and kept)
+  // sets the slider's range, the −/+ limits and the label; a category that can't give this many pulls the count down
+  const reachMemo = {}, rngProbe = glRng(7);
+  const reachOf = id => {
+    if (reachMemo[id] != null) return reachMemo[id];
+    const g = gens[id] || gens.foryou, top = Math.min(20, prepped.length); let best = 2, miss = 0;
+    for (let k = 2; k <= top && miss < 2; k++) {
+      let ok = false; for (let t = 0; t < 10 && !ok; t++) { const c = g(k, rngProbe); ok = !!c && c.length === k; }
+      if (ok) { best = k; miss = 0; } else miss++;
+    }
+    return reachMemo[id] = best;
+  };
+  const cntOut = el.querySelector("[data-plvcntn]"), cntLabel = v => v + (v === 1 ? " color" : " colors");
   const cnt = countify(el.querySelector("[data-plvcnt]"), {
-    min: 2, max: Math.max(2, Math.min(10, prepped.length)), value: Math.min(count, prepped.length), out: el.querySelector("[data-plvcntn]"),
-    onSet: (v, final) => { if (final && v !== count) { count = v; resetFeed(); } },
+    min: 2, max: reachOf(cat), value: count, out: cntOut,
+    onSet: (v, final) => { cntOut.textContent = cntLabel(v); if (final && v !== count) { count = v; resetFeed(); } },
   });
+  const fitCount = () => { const mx = reachOf(cat); if (count > mx) count = mx; cnt.range(2, mx); cnt.set(count); cntOut.textContent = cntLabel(count); };
+  fitCount();
 
   function paintForYouNote() { const n = el.querySelector("[data-plvforyou]"); if (n) n.hidden = cat !== "foryou" || !untrained; }
   function paintChips() { el.querySelectorAll("[data-plvcat]").forEach(b => b.classList.toggle("on", b.dataset.plvcat === cat)); }
@@ -390,20 +405,23 @@ function plvRender(el, kind, id, src) {
         row.querySelector(".plv-sw-row").outerHTML = plvSwatchRow(item.edited || item.cols);
         const ed = row.querySelector(".plv-edited"); if (item.edited && !ed) row.querySelector("[data-plvrow]").insertAdjacentHTML("beforeend", `<span class="plv-edited">Edited</span>`);
       };
-      // one tap opens the palette right away (no delay); a genuine fast double-tap (the browser's own click-
-      // count, not a timer) ALSO pins it, same motion as swatch.js's Instagram-style like elsewhere in the app
-      row.querySelector("[data-plvrow]").onclick = e => {
-        if (e.detail >= 2) doPin(row, item);
-        plvExpand(item, { srcKey, cat, src, prepped, gens, m: plvModel(), feedRef, onPinChange });
+      // one tap opens the palette full screen right away (its colors open their pages; Edit there opens the swap sheet);
+      // the little expand button beside it does the same thing
+      const openFull = () => {
+        buzz(5);
+        palFullOpen(item.edited || item.cols, { title: src.title || "Palette", source: "Palette view", keepOrder: true, from: row.querySelector("[data-plvrow]"),
+          heart: { isOn: () => plvIsPinned(srcKey, item.edited || item.cols), toggle: () => doPin(row, item) },
+          onEdit: () => plvExpand(item, { srcKey, cat, src, prepped, gens, m: plvModel(), feedRef, onPinChange }) });
       };
+      row.querySelector("[data-plvrow]").onclick = openFull;
       row.querySelector("[data-plvheart]").onclick = () => doPin(row, item);
-      row.querySelector("[data-plvfull]").onclick = () => { buzz(5); palFullOpen(item.edited || item.cols, { title: src.title || "Palette", source: "Palette view", keepOrder: true, from: row.querySelector("[data-plvrow]"), onSave: () => { if (!plvIsPinned(srcKey, item.edited || item.cols)) doPin(row, item); } }); };
+      row.querySelector("[data-plvfull]").onclick = openFull;
     });
   }
 
   el.querySelector("[data-plvchips]").onclick = e => {
     const b = e.target.closest("[data-plvcat]"); if (!b || b.dataset.plvcat === cat) return;
-    buzz(5); cat = b.dataset.plvcat; paintChips(); resetFeed();
+    buzz(5); cat = b.dataset.plvcat; paintChips(); fitCount(); resetFeed();
   };
   const ladderBtn = el.querySelector("[data-plvladder]"); if (ladderBtn) ladderBtn.onclick = () => { if (typeof tasteLadderIntro === "function") tasteLadderIntro(); };
   el.querySelector("[data-plvpins]").onclick = () => plvPinnedSheet(srcKey, src);
@@ -463,7 +481,7 @@ function plvExpand(item, ctx) {
     pinBtn.textContent = on ? "Pinned · remove" : "Pin this palette"; pinBtn.classList.toggle("ghost", on);
   }
   wireSwatches();
-  sh.querySelector("[data-pf-open]").onclick = () => { buzz(5); palFullOpen(cols(), { title: ctx.src.title || "Palette", source: "Palette view", keepOrder: true, from: sh.querySelector(".plv-x-sw") }); };
+  sh.querySelector("[data-pf-open]").onclick = () => { buzz(5); palFullOpen(cols(), { title: ctx.src.title || "Palette", source: "Palette view", keepOrder: true, from: sh.querySelector(".plv-x-sw"), heart: { isOn: () => plvIsPinned(ctx.srcKey, cols()), toggle: () => sh.querySelector("[data-plvxpin]").click() } }); };
   sh.querySelector("[data-plvxpin]").onclick = () => {
     const on = plvIsPinned(ctx.srcKey, cols());
     if (on) S.plv[ctx.srcKey] = plvPins(ctx.srcKey).filter(p => p.cols.join("|") !== cols().join("|"));
