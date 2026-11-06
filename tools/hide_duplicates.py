@@ -155,6 +155,34 @@ def main():
         ia, ib = emb_ids[a], emb_ids[b]
         if ia in meta and ib in meta:
             cand.append((ia, ib, c))
+    # 2026-11-07 (David: "remove doubles, like the Last Supper"): visitor photos of a famous painting (taken at an angle, with people,
+    # titled "2024 04 Da Vinci Last Supper Milan 7029") sit below cosine 0.90, so they never became candidates. Also pair any two rows
+    # by the same painter where every title word of one (2+ words, not a study / sketch) appears in the other, at cosine >= 0.70;
+    # the ORB check below (15+ matching features under a homography, robust to angle) still decides.
+    epos = {k: n for n, k in enumerate(emb_ids)}
+    E = np.load(EMB).astype(np.float32); E /= np.linalg.norm(E, axis=1, keepdims=True) + 1e-9
+    NOT = re.compile(r"study|sketch|cartoon|drawing|copy after|after ", re.I)
+    byart = defaultdict(list)
+    for k, r in meta.items():
+        if k in epos and r.get("a"):
+            byart[norm(r["a"]).split()[-1]].append(k)
+    have = {(a, b) for a, b, c in cand} | {(b, a) for a, b, c in cand}
+    extra, titled = 0, set()
+    for art, ks in byart.items():
+        if len(ks) < 2 or len(ks) > 4000:
+            continue
+        ws = {k: words(meta[k].get("t")) - set(norm(meta[k].get("a")).split()) for k in ks}
+        for x in ks:
+            wx = ws[x]
+            if len(wx) < 2 or NOT.search(meta[x].get("t") or ""):
+                continue
+            for y in ks:
+                if y == x or (x, y) in have or not wx <= ws[y] or NOT.search(meta[y].get("t") or ""):
+                    continue
+                c = float(E[epos[x]] @ E[epos[y]])
+                if c >= 0.70:
+                    cand.append((x, y, round(c, 4))); have |= {(x, y), (y, x)}; extra += 1; titled.add((x, y))
+    print(f"title-matched candidate pairs added: {extra}")
     check = [(ia, ib) for ia, ib, c in cand if c < 0.99 and same_artist(meta[ia].get("a"), meta[ib].get("a"))]
     orb = orb_inliers(check)
     edges = []
@@ -162,6 +190,9 @@ def main():
         sa = same_artist(meta[ia].get("a"), meta[ib].get("a"))
         if c >= 0.99:
             edges.append((ia, ib))
+        elif (ia, ib) in titled:   # title-only candidates: a painter's look-alike portraits reach 18-33 matches, real copies 290+
+            if orb.get(f"{ia}|{ib}", 0) >= 60:
+                edges.append((ia, ib))
         elif sa and (orb.get(f"{ia}|{ib}", 0) >= ORB_MIN or (c >= 0.975 and jac(words(meta[ia].get("t")), words(meta[ib].get("t"))) >= 0.6)):
             edges.append((ia, ib))
     parent = {}

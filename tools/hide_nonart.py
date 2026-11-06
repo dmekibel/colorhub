@@ -41,6 +41,11 @@ CACHE = Path(os.environ.get("NONART_CACHE", RAW / "subjects"))
 FEAT = CACHE / "nonart-feat.npy"
 OUT = ROOT / "data" / "gallery" / "hidden.json"
 TITLE = re.compile(r"\b(journal|magazine)\s+cover\b|\bscreenshot\b|\btable of contents\b|\bletterhead\b", re.I)
+# 2026-11-07, David: "no paintings with diagrams on top", and no technical images: always hidden.
+DIAGRAM = re.compile(r"linee prospettiche|perspective lines|composition (analysis|lines|diagram)|golden (ratio|section|mean)|\bdiagram|\bschema\b|"
+                     r"infrared|reflectogra|x-?ray|radiogra|\buv\b|ultraviolet|raking light", re.I)
+# a detail / crop of a painting whose full view is also in the archive (same painter, a shared title word): hidden as a double
+DETAIL = re.compile(r"\bdetail|\bdettaglio|\bparticolare|\bausschnitt|\bdétail|\bdetalle|\bpormenor|\bfragment of", re.I)
 
 
 def ids_hash(ids):
@@ -92,13 +97,24 @@ def main():
     pos = {k: i for i, k in enumerate(ids)}
     F = features(ids)
     why = {}
+    details, full = [], {}
     for i in np.where((F[:, 0] < .004) & (F[:, 1] >= 200))[0]:
         why[int(i)] = "blank"
     for f in sorted(glob.glob(str(ROOT / "data" / "corpus" / "*.json"))):
         d = json.load(open(f))
         for x in (d if isinstance(d, list) else d.get("rows", [])):
-            if x["id"] in pos and TITLE.search(x.get("t") or ""):
+            if x["id"] in pos and (TITLE.search(x.get("t") or "") or DIAGRAM.search(x.get("t") or "")):
                 why.setdefault(pos[x["id"]], "title")
+            elif x["id"] in pos and DETAIL.search(x.get("t") or ""):
+                details.append(x)
+            elif x["id"] in pos:
+                words = {w for w in re.findall(r"[a-zà-ÿ]{4,}", (x.get("t") or "").lower())}
+                full.setdefault(" ".join((x.get("a") or "").lower().split()[-1:]), []).append(words)
+    stop = {"detail", "dettaglio", "particolare", "ausschnitt", "détail", "detalle", "with", "from", "della", "dell", "nella", "painting"}
+    for x in details:
+        w = {v for v in re.findall(r"[a-zà-ÿ]{4,}", (x.get("t") or "").lower())} - stop
+        if w and any(w & f for f in full.get(" ".join((x.get("a") or "").lower().split()[-1:]), [])):
+            why.setdefault(pos[x["id"]], "dup")
     hp = ROOT / "data" / "hide-photos.json"
     if hp.exists():
         for k in json.load(open(hp)).get("ids", []):
