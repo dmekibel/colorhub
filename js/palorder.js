@@ -31,4 +31,19 @@ function palOrderGradient(hexes) {
   if (o[path[0]][0] > o[path[path.length - 1]][0]) path.reverse();
   return path.map(i => hexes[i]);
 }
-if (typeof module !== "undefined") module.exports = { palOrderGradient };
+// memoized by the joined hexes; the one entry point the UI uses. Only for plain equal-swatch strips: never for strips whose
+// widths show area, hand-ordered palettes (Studio editor, Picked colors) or an order that means something (timeline, wheel).
+const PAL_ORD_CACHE = new Map();
+function palDisplayOrder(hexes) {
+  const hs = hexes.map(h => String(h).toUpperCase()); if (hs.length < 3 || hs.some(h => !/^#[0-9A-F]{6}$/.test(h))) return hexes.slice();
+  const key = hs.join(""); let r = PAL_ORD_CACHE.get(key);
+  if (!r) { r = palOrderGradient(hs); if (PAL_ORD_CACHE.size > 400) PAL_ORD_CACHE.clear(); PAL_ORD_CACHE.set(key, r); }
+  return r;
+}
+// same, for objects ({ h } / { hex }): returns the items in display order (stable for duplicate hexes)
+function palOrderItems(items, hexOf) {
+  const get = hexOf || (x => x.h || x.hex), left = items.slice(), out = [];
+  palDisplayOrder(items.map(get)).forEach(h => { const j = left.findIndex(x => String(get(x)).toUpperCase() === String(h).toUpperCase()); if (j >= 0) out.push(left.splice(j, 1)[0]); });
+  return out.concat(left);
+}
+if (typeof module !== "undefined") module.exports = { palOrderGradient, palDisplayOrder, palOrderItems };

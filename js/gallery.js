@@ -1411,7 +1411,7 @@ function glEditOpen(hexes, opts = {}) {
     if (e.target.closest("[data-ge-add]")) { swapFor = swapFor === "add" ? -1 : "add"; buzz(5); render(); return; }
     const addfrom = e.target.closest("[data-ge-addfrom]");
     if (addfrom && items.length < 20) { items.push(addfrom.dataset.geAddfrom.toUpperCase()); swapFor = -1; buzz(6); render(); return; }
-    if (e.target.closest("[data-pf-open]")) { buzz(5); return palFullOpen(items.map((h, k) => ({ hex: h, locked: locked.has(k) })), { title: (sh.querySelector("[data-ge-name]") || {}).value || opts.title || "Palette", source: "Your edit", from: sh.querySelector("[data-ge-list]") }); }
+    if (e.target.closest("[data-pf-open]")) { buzz(5); return palFullOpen(items.map((h, k) => ({ hex: h, locked: locked.has(k) })), { title: (sh.querySelector("[data-ge-name]") || {}).value || opts.title || "Palette", source: "Your edit", keepOrder: true, from: sh.querySelector("[data-ge-list]") }); }
     if (e.target.closest("[data-ge-shuffle]")) {
       if (locked.size >= items.length) return;
       const next = glEditShuffle(items, locked, pool);
@@ -1540,7 +1540,11 @@ function glPage(i, d, fromHex, tol) {
       cap: !lit.ok ? "This museum's image can't be read here, so tapping the painting can't pick colors from it. Every other palette type still works." : picks.length ? "Colors you took from the painting. Tap the picture for more, a swatch to open its page." : "Tap the painting to take a color, up to 12." };
     return glModeSet(m, pool, k, row);
   };
-  const curSet = () => modeSet(mode, curK) || modeSet("out", curK);
+  const curSet = () => {
+    const st = modeSet(mode, curK) || modeSet("out", curK);
+    // equal-width strips read as a gradient (js/palorder.js); area widths, picked and live combinations keep their own order
+    return eqW && mode !== "pick" && !plvGens[mode] && !st.harmony && st.pal && st.pal.length > 2 && typeof palOrderItems === "function" ? { ...st, pal: palOrderItems(st.pal) } : st;
+  };
   const curPal = () => curSet().pal;
   // a fresh re-roll for this mode: a new seed, kept in a short history so Shuffle never loses an earlier result
   const shuffleMode = m => {

@@ -215,7 +215,7 @@ function gamutWheel(preset = "Warm", initPts = null, push = true) {
   el.querySelector("[data-names]").onclick = e => { names = S.wheelNames = !names; save(); e.currentTarget.classList.toggle("on", names); drawNames(); };
   exLongCopy(el.querySelector("#hlist"));   // one tap opens the color's page; press and hold copies the hex
   el.querySelector("[data-keep]").onclick = () => { keepPalette(cur, "Gamut wheel"); };
-  el.querySelector(".pv-full-row [data-pf-open]").onclick = () => { buzz(5); palFullOpen(cur, { title: "Gamut wheel", source: "Studio", from: el.querySelector("#pal"), onSave: () => keepPalette(cur, "Gamut wheel") }); };
+  el.querySelector(".pv-full-row [data-pf-open]").onclick = () => { buzz(5); palFullOpen(cur, { title: "Gamut wheel", source: "Studio", keepOrder: true, from: el.querySelector("#pal"), onSave: () => keepPalette(cur, "Gamut wheel") }); };
   // the result view is one step further down the same trail: Back from it returns to this exact shape (gwReopen below)
   el.querySelector("[data-open]").onclick = () => { if (XSTACK[XSTACK.length - 1] !== "wheelview") XSTACK.push("wheelview"); paletteView({ cols: cur.map(h => ({ h })), from: "Gamut wheel" }); };
   requestAnimationFrame(setup);

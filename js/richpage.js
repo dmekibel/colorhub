@@ -290,7 +290,7 @@ let RP_FOCUS = null;
 function colorFocus(colors, opts = {}) {
   if (RP_FOCUS || !colors || !colors.length) return;
   // two or more colors = a palette: the one shared full-screen palette viewer (js/palettefull.js)
-  if (colors.length > 1 && typeof palFullOpen === "function") return palFullOpen(colors.map(c => ({ hex: c.hex, name: c.name })), { title: "Palette", from: opts.from });
+  if (colors.length > 1 && typeof palFullOpen === "function") return palFullOpen(colors.map(c => ({ hex: c.hex, name: c.name })), { title: "Palette", keepOrder: true, from: opts.from });
   // 4+ always stacks (full-width, so each band stays a real band, not a sliver); a pair or trio stays side by
   // side down to a real phone width (375-440px: David's own device and the smoke harness both live there) and
   // only falls back to stacked below that -- "pick what reads best" (David, 2026-10-09), not a fixed rule

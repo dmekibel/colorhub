@@ -46,12 +46,14 @@ function palFullLink(hexes, title, source) {
 }
 
 // ---------- helpers ----------
-function pfNorm(colors) {
+function pfNorm(colors, o = {}) {
   const out = (colors || []).map(c => typeof c === "string" ? { hex: c } : { hex: c.hex || c.h, share: c.share, name: c.name || c.n, locked: !!c.locked })
     .map(c => ({ ...c, hex: String(c.hex).toUpperCase() })).filter(c => /^#[0-9A-F]{6}$/.test(c.hex)).slice(0, 20);
   const haveShare = out.length > 1 && out.every(c => typeof c.share === "number" && c.share > 0);
   out.forEach(c => { c.w = haveShare ? Math.max(c.share, .02) : 1; });
   out.hasShare = haveShare;
+  // a plain palette (no area widths, nothing hand-ordered or locked) opens in the gradient order (js/palorder.js)
+  if (!o.keepOrder && (!haveShare || o.equal) && !out.some(c => c.locked) && typeof palOrderItems === "function") { const r = palOrderItems(out, c => c.hex); r.hasShare = haveShare; return r; }
   return out;
 }
 const pfName = c => { if (c.name) return c.name; try { const n = nameOf(c.hex); return n.text || n.n || c.hex; } catch (e) { return c.hex; } };
@@ -169,7 +171,7 @@ const PF_R = {
 // ---------- the viewer ----------
 function palFullOpen(colors, opts = {}) {
   if (PF) return;
-  const cols = pfNorm(colors); if (!cols.length) return;
+  const cols = pfNorm(colors, opts); if (!cols.length) return;
   const pref = pfLoad(), reduce = typeof reduceMotion !== "undefined" && reduceMotion;
   const st = {
     mode: PF_MODES.some(m => m.id === opts.startMode) ? opts.startMode : (PF_MODES.some(m => m.id === pref.mode) ? pref.mode : "bands"),
@@ -328,7 +330,7 @@ function palFullOpen(colors, opts = {}) {
     requestAnimationFrame(() => requestAnimationFrame(() => { ov.style.transition = ""; ov.classList.add("on", "grow"); ov.style.clipPath = "inset(0 0 0 0 round 0px)"; }));
   }
   buzz(6);
-  PF = { ov, close: () => close(), update(next) { const c2 = pfNorm(next); if (!c2.length) return; cols.length = 0; c2.forEach(c => cols.push(c)); cols.hasShare = c2.hasShare; render(); paintModes(); } };
+  PF = { ov, close: () => close(), update(next) { const c2 = pfNorm(next, opts); if (!c2.length) return; cols.length = 0; c2.forEach(c => cols.push(c)); cols.hasShare = c2.hasShare; render(); paintModes(); } };
 
   function close() {
     if (closed) return; closed = true;
