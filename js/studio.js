@@ -674,12 +674,13 @@ function palPhotoView(p) {
   // the magnifier (js/eyedrop.js eydLoupe; David, 2026-11-06: "my thumb covers what I'm picking"): while a circle is held it
   // sits in the free top corner of the photo with the live swatch, name and hex, and lets go a moment after the finger lifts
   const loupe = typeof eydLoupe === "function" ? eydLoupe() : null; let loupeT = 0;
+  note.insertAdjacentHTML("beforebegin", eydReadoutHTML()); const readEl = note.previousElementSibling;
   if (loupe) cleanup.push(() => { clearTimeout(loupeT); loupe.destroy(); });
   const loupeAt = d => {
     if (!loupe || !d || !dsrc) return; clearTimeout(loupeT);
     const b = picBox(), vw = innerWidth || document.documentElement.clientWidth, vh = innerHeight || document.documentElement.clientHeight;
     const vis = { l: Math.max(b.left, 0), t: Math.max(b.top, 0), r: Math.min(b.left + b.w, vw), b: Math.min(b.top + b.h, vh) };
-    loupe.show(dsrc, d.fx, d.fy, eydN(dsrc, getSampleSize()), b.w / dsrc.w, d.hex, vis, b.left + d.fx * b.w, b.top + d.fy * b.h);
+    loupe.show(dsrc, d.fx, d.fy, eydN(dsrc, getSampleSize()), b.w / dsrc.w, d.hex, vis, b.left + d.fx * b.w, b.top + d.fy * b.h, readEl);
   };
   const loupeLetGo = () => { if (!loupe) return; clearTimeout(loupeT); loupeT = setTimeout(() => loupe.hide(), 1600); };
   const dotName = hex => typeof nameOfTapped === "function" ? nameOfTapped(hex) : nameOf(hex).text;

@@ -102,7 +102,13 @@ function eydNameOf(hex) {
 
 // ---------- the preview square (shared with Look closer) ----------
 const EYD_ZOOM = 3.5;   // the close-up magnifies what's on screen by about this much
-const eydPreviewHTML = (hidden) => `<div class="eyd-prev"${hidden ? " hidden" : ""} aria-hidden="true"><div class="eyd-prev-sq"><canvas width="480" height="480"></canvas><i class="eyd-prev-area"></i><i class="eyd-prev-x"></i></div><div class="eyd-prev-info"><i class="eyd-prev-sw"></i><span class="eyd-prev-txt"><b class="eyd-prev-name"></b><em class="eyd-prev-hex"></em></span></div></div>`;
+const eydPreviewHTML = (hidden) => `<div class="eyd-prev"${hidden ? " hidden" : ""} aria-hidden="true"><div class="eyd-prev-sq"><canvas width="480" height="480"></canvas><i class="eyd-prev-area"></i><i class="eyd-prev-x"></i></div><div class="eyd-prev-info"><i class="eyd-prev-sw"></i></div></div>`;
+// the live readout under the photo (the card itself carries no text): the picked color's name and hex, kept after the finger lifts
+const eydReadoutHTML = () => `<p class="eyd-read" hidden><b class="eyd-read-name"></b><span class="eyd-read-hex"></span></p>`;
+function eydReadoutSet(el, hex) {
+  if (!el || !hex) return; el.hidden = false;
+  el.querySelector(".eyd-read-name").textContent = eydNameOf(hex) || hex; el.querySelector(".eyd-read-hex").textContent = hex;
+}
 // where the preview card goes: the free top corner of the visible picture (vis = {l,t,r,b} in viewport px), flipping to the
 // other corner when the point (x, y) or a thumb about it (radius d, never less than a finger's reach) comes near it
 function eydPrevPlace(prevEl, vis, x, y, d) {
@@ -135,8 +141,6 @@ function eydPreviewDraw(root, s, fx, fy, nSrc, screenPerSrc, hex) {
   area.style.width = area.style.height = ap + "px";
   if (hex) {
     root.querySelector(".eyd-prev-sw").style.setProperty("--c", hex);
-    root.querySelector(".eyd-prev-name").textContent = eydNameOf(hex) || hex;
-    const hx = root.querySelector(".eyd-prev-hex"); if (hx) hx.textContent = hex;
   }
 }
 // the reticle's markup: a ring (double outline, set in css/eyedrop.css) with a center dot; --d is its diameter
@@ -149,8 +153,8 @@ function eydLoupe() {
   layer.innerHTML = eydPreviewHTML(); document.body.appendChild(layer);
   const prev = layer.querySelector(".eyd-prev");
   return {
-    show(s, fx, fy, nSrc, per, hex, vis, x, y) {
-      layer.hidden = false; eydPreviewDraw(prev, s, fx, fy, nSrc, per, hex); eydPrevPlace(prev, vis, x, y, 0);
+    show(s, fx, fy, nSrc, per, hex, vis, x, y, readEl) {
+      eydReadoutSet(readEl, hex); layer.hidden = false; eydPreviewDraw(prev, s, fx, fy, nSrc, per, hex); eydPrevPlace(prev, vis, x, y, 0);
     },
     hide() { layer.hidden = true; },
     destroy() { layer.remove(); },
@@ -160,7 +164,7 @@ function eydLoupe() {
 // ---------- the picker on any <img>/<canvas> ----------
 let EYD_SESSION = null;   // the live drag, if any
 function eyedropAttach(el, o = {}) {
-  let src = null, ret = null, layer = null, ringEl = null, prevEl = null, bar = null, g = null, lastHex = null, lastName = null;
+  let src = null, ret = null, layer = null, ringEl = null, prevEl = null, bar = null, readEl = null, g = null, lastHex = null, lastName = null;
   let tick = 0, raf = 0, dead = false;
   const sess = { resample: null };
   const ensureSrc = () => (src = src || eydSource(el));
@@ -171,6 +175,9 @@ function eyedropAttach(el, o = {}) {
     layer.innerHTML = eydPreviewHTML() + eydReticleHTML();
     document.body.appendChild(layer);
     prevEl = layer.querySelector(".eyd-prev"); ringEl = layer.querySelector(".eyd-ret");
+    if (o.readout !== false && !readEl && el.insertAdjacentElement) {
+      el.insertAdjacentHTML("afterend", eydReadoutHTML()); readEl = el.nextElementSibling;
+    }
     if (o.sizes !== false && !bar) {
       bar = document.createElement("div"); bar.className = "eyd-sizebar"; bar.innerHTML = eydSizeControlHTML();
       if (el.insertAdjacentElement) el.insertAdjacentElement("afterend", bar);
@@ -205,7 +212,7 @@ function eyedropAttach(el, o = {}) {
     eydPreviewDraw(prevEl, src, ret.fx, ret.fy, r.n, f ? f.dw / src.w : 1, r.hex);
     const nm = eydNameOf(r.hex);
     if (nm !== lastName) { if (lastName !== null && typeof buzz === "function") buzz(3); lastName = nm; }
-    lastHex = r.hex;
+    lastHex = r.hex; eydReadoutSet(readEl, r.hex);
     if (fire === false) return true;
     // the commit (pkAdd) happens BEFORE the caller's own onPick fires, so anything that caller shows already reflects it
     if (final && typeof pkAdd === "function") pkAdd(r.hex, { src: "eyedrop" });
@@ -272,6 +279,7 @@ function eyedropAttach(el, o = {}) {
     clearInterval(tick); if (raf) cancelAnimationFrame(raf);
     if (layer) { layer.remove(); layer = null; }
     if (bar) { bar.remove(); bar = null; }
+    if (readEl) { readEl.remove(); readEl = null; }
     el.style.touchAction = prevTouch;
     if (EYD_SESSION === sess) EYD_SESSION = null;
   };
