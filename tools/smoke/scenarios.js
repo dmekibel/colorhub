@@ -5275,7 +5275,7 @@ scenario("eyedrop", "the shared eyedropper: drag reads each side, and sample siz
       img.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, clientX: r.left + 20, clientY: r.top + 20, isPrimary: true, pointerId: 1, pointerType: "mouse" }));
       await raf();
       const pv = document.querySelector(".eyd-prev");
-      const flipped = { right: pv.classList.contains("eyd-prev-r"), name: (document.querySelector(".eyd-read-name") || {}).textContent };
+      const flipped = { right: pv.classList.contains("eyd-prev-r"), name: pv.querySelector(".eyd-prev-name").textContent };
       img.dispatchEvent(new PointerEvent("pointerup", { bubbles: true, clientX: r.left + 20, clientY: r.top + 20, isPrimary: true, pointerId: 1, pointerType: "mouse" }));
       d.detach();
       const gone = !document.querySelector(".eyd-layer") && !document.querySelector(".eyd-sizebar");
