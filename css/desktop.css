@@ -56,13 +56,13 @@ html.desk .dk-foot-links a:hover{color:var(--ink)}
 html.desk{--cp-cover-w:clamp(380px,36vw,560px)}
 
 /* ---------- the painting page: the painting on the left, its palette and notes on the right ---------- */
-html.desk .screen.article:has(>.ptg){max-width:1320px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);column-gap:clamp(36px,4.5vw,72px);align-items:start;padding-top:12px}
-html.desk .screen:has(>.ptg)>*{grid-column:2;min-width:0}
-html.desk .screen:has(>.ptg)>.art-top{grid-column:1/-1}
-html.desk .screen:has(>.ptg)>.ptg{grid-column:1;grid-row:2/span 40;position:sticky;top:calc(var(--dkn) + 20px)}
-html.desk .screen:has(>.ptg)>.dk-foot{grid-column:1/-1}
-html.desk .screen:has(>.ptg) .p-title{font-size:clamp(44px,4.4vw,64px);line-height:1}
-html.desk .screen:has(>.ptg) .p-body{font-size:18px;line-height:1.65}
+html.desk .screen.article.has-ptg{max-width:1320px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);column-gap:clamp(36px,4.5vw,72px);align-items:start;padding-top:12px}
+html.desk .screen.has-ptg>*{grid-column:2;min-width:0}
+html.desk .screen.has-ptg>.art-top{grid-column:1/-1}
+html.desk .screen.has-ptg>.ptg{grid-column:1;grid-row:2/span 40;position:sticky;top:calc(var(--dkn) + 20px)}
+html.desk .screen.has-ptg>.dk-foot{grid-column:1/-1}
+html.desk .screen.has-ptg .p-title{font-size:clamp(44px,4.4vw,64px);line-height:1}
+html.desk .screen.has-ptg .p-body{font-size:18px;line-height:1.65}
 
 /* ---------- the painter page: a wide page, the works in a many-across grid ---------- */
 
@@ -96,7 +96,7 @@ html.desk .orient-tip{left:auto;right:100px;bottom:34px;width:max-content;max-wi
 /* painter page, top: who they are on the left, a portrait of their work on the right */
 
 /* the Back / More row is part of the page here (the bar above already stays put), so text never slides under it */
-html.desk .screen:has(>.ptg)>.art-top,html.desk .aw-page>.art-top{position:static}
+html.desk .screen.has-ptg>.art-top,html.desk .aw-page>.art-top{position:static}
 html.desk .screen.explore.mu-home .pl-colls:has(>:nth-child(3):last-child){grid-template-columns:repeat(3,1fr)}
 
 /* ---------- slice 2: breadcrumbs from the trail ---------- */
@@ -204,8 +204,8 @@ html.desk:has(.glz-scrim) .corner,html.desk:has(.glz-scrim) .dk-crumbs{visibilit
 
 /* ---------- audit 2026-10-21 (painting views): pages that were still a phone column in a wide window ---------- */
 /* a footer inside a narrow page column wraps to two rows instead of squeezing the note into a sliver */
-html.desk .screen:not(.aw-page):not(.gl-page):not(:has(>.ptg)):not(.closeup):not(.plv-screen) .dk-foot-in{grid-template-columns:minmax(0,1fr) auto;gap:20px 40px}
-html.desk .screen:not(.aw-page):not(.gl-page):not(:has(>.ptg)):not(.closeup):not(.plv-screen) .dk-foot-note{grid-column:1/-1;grid-row:2;max-width:none}
+html.desk .screen:not(.aw-page):not(.gl-page):not(.has-ptg):not(.closeup):not(.plv-screen) .dk-foot-in{grid-template-columns:minmax(0,1fr) auto;gap:20px 40px}
+html.desk .screen:not(.aw-page):not(.gl-page):not(.has-ptg):not(.closeup):not(.plv-screen) .dk-foot-note{grid-column:1/-1;grid-row:2;max-width:none}
 /* "More like this" closeup (#/painting/<slug>/more): the painting large and sticky on the left, its words on the right, the neighbors four across below */
 html.desk .screen.closeup{max-width:1320px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);column-gap:clamp(36px,4.5vw,72px);align-items:start;padding-top:12px}
 html.desk .closeup>*{grid-column:1/-1;min-width:0}
@@ -232,7 +232,7 @@ html.desk .plv-screen>.plv-sentinel,html.desk .plv-screen>.plv-end{grid-column:1
 html.desk .aw-page .aw-pt-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:32px}
 @media (max-width:1100px){html.desk .aw-page .aw-pt-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* the Museum lenses and Saved (#/museum/saved): a wide page, the pins four across */
-html.desk .screen.article:has(>.x-feed){max-width:1240px}
+html.desk .screen.article.has-xfeed{max-width:1240px}
 html.desk .x-feed .masonry{display:block;column-count:4;column-gap:14px}
 html.desk .x-feed .masonry>div{display:contents}
 html.desk .x-feed .masonry .pin{break-inside:avoid;margin-bottom:22px}

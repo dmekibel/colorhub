@@ -5,9 +5,9 @@
    A mid-grey around L* 40 (#5F5F5F) is the painter's and photographer's grey card idea: it pushes no hue and
    sits near the middle of the lightness range. See DESIGN.md ("Surround"). The grain is already off here (html.booth).
    Text tokens are re-tuned so captions stay readable on grey (ink 5.6:1, soft 4.6:1). */
-html:has(#app > .screen.deck), html:has(#app > .screen.meet),
-html:has(#app > .screen.drill), html:has(#app > .screen.daily),
-html:has(#app > .screen.learnit){
+html.scf-deck, html.scf-meet,
+html.scf-drill, html.scf-daily,
+html.scf-learnit{
   --ground:#5F5F5F; --lift:#676767; --lift-2:#6E6E6E;
   /* --faint lifted 2026-10-09 (legibility pass): #D6D6D2 was 4.38:1 on the booth ground itself, just under
      AA -- #D9D9D5 clears 4.5:1 there (the comment above claims "soft 4.6:1" but never checked faint). */
@@ -17,11 +17,11 @@ html:has(#app > .screen.learnit){
   --booth:#5F5F5F;
 }
 /* drop shadows read as dark halos on grey; keep them soft */
-html:has(#app > .screen.deck) .card{box-shadow:0 30px 60px -36px rgba(0,0,0,.55)}
-html:has(#app > .screen.meet) .fan i{box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+html.scf-deck .card{box-shadow:0 30px 60px -36px rgba(0,0,0,.55)}
+html.scf-meet .fan i{box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
 
 /* ---------- the screen check (js/accuracy.js): shown on the booth grey, so the test greys sit on neutral ---------- */
-html:has(#app > .screen.scr){--ground:#5F5F5F;--ink:#F4F4F2;--soft:#E0E0DD;--faint:#D9D9D5;--rule:rgba(255,255,255,.24);--rule-2:rgba(255,255,255,.9)}
+html.scf-scr{--ground:#5F5F5F;--ink:#F4F4F2;--soft:#E0E0DD;--faint:#D9D9D5;--rule:rgba(255,255,255,.24);--rule-2:rgba(255,255,255,.9)}
 .scr-h{font:400 clamp(48px,14vw,64px)/.9 var(--serif);letter-spacing:-.03em;margin:22px 0 12px}
 .scr-h em{font-style:italic}
 .scr-lede{color:var(--soft);font-size:15px;max-width:38ch;text-wrap:pretty}

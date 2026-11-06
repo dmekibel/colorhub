@@ -262,6 +262,9 @@
 .gl-strip .pal{position:relative;padding:6px 7px;font:500 13px/1 var(--sans);letter-spacing:0;font-variant-numeric:tabular-nums;min-width:14px;container-type:inline-size}
 .gl-strip .pal>span{display:none;white-space:nowrap;overflow:hidden}
 @container (min-width:28px){.gl-strip .pal>span{display:block}}
+/* while a count slider is dragged: no container queries (they re-run style on every swatch each frame) and no % text */
+.gl-strip.gl-drag .pal{container-type:normal}
+.gl-strip.gl-drag .pal>span{display:none}
 .gl-strip .pal[data-ink="dark"],.pal-name i[data-ink="dark"]{color:rgba(14,13,11,.78)}
 .gl-strip .pal[data-ink="light"],.pal-name i[data-ink="light"]{color:rgba(255,255,255,.88)}
 .gl-strip .pal,.gl-pal-ui .pal-name{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}

@@ -484,11 +484,29 @@ const ICON = {
 };
 // Night Gallery sliders (css/ng.css): every range input's track fills in ink up to its thumb. --ngp is kept in step on
 // input and change, and for sliders that arrive with a screen or have their value set in code (a Reset), on the next frame.
-function ngRange(r) { const lo = +r.min || 0, hi = r.max === "" ? 100 : +r.max, v = +r.value; r.style.setProperty("--ngp", (hi > lo ? Math.max(0, Math.min(1, (v - lo) / (hi - lo))) * 100 : 0).toFixed(2) + "%"); }
+// Only written when it changed: the MutationObserver below re-runs this for EVERY range after any DOM change, and an unchanged
+// setProperty still restyled ~700 elements per call (the count-slider drag spent most of its time there; 2026-11-06).
+function ngRange(r) { const lo = +r.min || 0, hi = r.max === "" ? 100 : +r.max, v = +r.value, p = (hi > lo ? Math.max(0, Math.min(1, (v - lo) / (hi - lo))) * 100 : 0).toFixed(2) + "%"; if (r._ngp === p && r.style.getPropertyValue("--ngp") === p) return; r._ngp = p; r.style.setProperty("--ngp", p); }
 ["input", "change"].forEach(k => document.addEventListener(k, e => { if (e.target && e.target.type === "range") ngRange(e.target); }, true));
 let NG_RANGE_T = 0;
 new MutationObserver(() => { if (NG_RANGE_T) return; NG_RANGE_T = requestAnimationFrame(() => { NG_RANGE_T = 0; document.querySelectorAll('input[type="range"]').forEach(ngRange); }); })
   .observe(document.documentElement, { childList: true, subtree: true });
+// Screen flags on <html> (html.scf-deck …). The booth/practice/favorites/feed themes used to be `html:has(#app > .screen.deck)`, and a
+// :has() on <html> restyles about 700 elements after ANY child-list change anywhere (the count-slider drag spent 12 ms per
+// input at 4x CPU there, 2026-11-06). A flag class is only written when it changes, so ordinary DOM edits cost nothing.
+const SCF_FLAGS = ["deck", "meet", "drill", "daily", "learnit", "scr", "fv-run", "pr-booth"];
+function scfSync() {
+  const root = document.documentElement, kids = [...app.children].filter(c => c.classList.contains("screen"));
+  SCF_FLAGS.forEach(f => { const on = kids.some(c => c.classList.contains(f)); if (root.classList.contains("scf-" + f) !== on) root.classList.toggle("scf-" + f, on); });
+  kids.forEach(c => { // desktop article layouts (css/desktop.css): the same `:has()` cost, so the screen carries the flag itself
+    const p = !!c.querySelector(":scope > .ptg"), x = !!c.querySelector(":scope > .x-feed");
+    if (c.classList.contains("has-ptg") !== p) c.classList.toggle("has-ptg", p);
+    if (c.classList.contains("has-xfeed") !== x) c.classList.toggle("has-xfeed", x);
+  });
+  const tf = !!app.querySelector(".tf-screen"); if (root.classList.contains("scf-tf") !== tf) root.classList.toggle("scf-tf", tf);
+}
+new MutationObserver(scfSync).observe(app, { childList: true, subtree: true, attributes: true, attributeFilter: ["class"] });
+scfSync();
 // How many (David, 2026-10-09: "2 vs 5 vs 10 is a big difference, but the slider goes up to ~1,000"): a count slider
 // runs on stops, so small sizes get most of the track, and −/+ steppers beside the number move it by exactly one
 // (hold to repeat). countify(input, { min, max, value, onSet(v, final) }) turns any range input into one: the input
@@ -704,6 +722,7 @@ function show(html, cls = "", tab = null) {
   const inner = `<div class="screen ${cls}${tab ? " has-tabs" : ""}">${html}</div>`;
   app.innerHTML = tab ? roomChrome(inner, tab) : inner;
   document.documentElement.classList.toggle("booth", /\b(deck|drill|station|meet|daily|fixed|eye|cx)\b/.test(cls));
+  scfSync();
   // history: a tab's home replaces the current entry; any screen inside adds one, so the phone's back gesture works.
   // The entry carries the screen's address (#/color/teal…) and the page title: router.js.
   routeCommit(tab);

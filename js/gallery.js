@@ -1557,7 +1557,7 @@ function glPage(i, d, fromHex, tol) {
       st = { ...st, max: Math.max(reach, Math.min(st.pal.length, 20), 2) };
     }
     // every strip reads as a gradient (js/palorder.js; widths still follow area); picked and live combinations keep their own order
-    return mode !== "pick" && mode !== "out" && !plvGens[mode] && !st.harmony && st.pal && st.pal.length > 2 && typeof palOrderItems === "function" ? { ...st, pal: palOrderItems(st.pal) } : st;
+    return mode !== "pick" && !plvGens[mode] && !st.harmony && st.pal && st.pal.length > 2 && typeof palOrderItems === "function" ? { ...st, pal: palOrderItems(st.pal, null, "g" + i + "|" + mode + "|" + seedOf(mode)) } : st;   // every automatic strip, Stands out too, in gradient order over the whole current set; a new color slots in between its neighbours (js/palorder.js)
   };
   const curPal = () => curSet().pal;
   // a fresh re-roll for this mode: a new seed, kept in a short history so Shuffle never loses an earlier result
@@ -1721,6 +1721,27 @@ function glPage(i, d, fromHex, tol) {
     const go = host.querySelector("[data-glrest]");
     if (go) go.onclick = () => prQuick({ items: rest.map(x => x.h), label: d.t, src: "painting", route });
   };
+  // the strip's own markup (also what a slider drag redraws alone, see dragDraw)
+  const stripHTML = (pal, near) => pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}${locate && locate.j === j ? " loc" : ""}" data-glj="${j}" data-hex="${p.h}" style="--c:${p.h};flex:${eqW ? 1 : (Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.pick || eqW ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
+  // while the slider is dragged only the strip and the number move (David, 2026-11-06: choppy on the phone); the rows, tiles,
+  // coverage ring and readings catch up once the finger lifts (the final onSet runs the full drawPalette)
+  const dragDraw = () => {
+    const pal = curPal();
+    const host = el.querySelector("[data-glswatches]");
+    host.classList.add("gl-drag");
+    while (host.children.length > pal.length) host.lastElementChild.remove();
+    if (host.children.length < pal.length) host.insertAdjacentHTML("beforeend", stripHTML(pal.slice(host.children.length), null).replace(/data-glj="(\d+)"/g, (m, n) => `data-glj="${+n + host.children.length}"`));
+    // patch in place: no tear-down of the buttons on every step (style recalculation was the biggest cost left)
+    for (let j = 0; j < pal.length; j++) {
+      const b = host.children[j], p = pal[j], pc = p.pick || eqW ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%";
+      if (b.dataset.hex !== p.h) { b.dataset.hex = p.h; b.style.setProperty("--c", p.h); b.dataset.ink = ink(p.h); b.setAttribute("aria-label", nameOf(p.h).n); }
+      b.style.flex = eqW ? "1" : (Math.max(p.share, .08) * 100).toFixed(1);
+      b.className = "pal" + (p.out ? " gl-out" : "");
+      if (b.firstChild && b.firstChild.textContent !== pc) b.firstChild.textContent = pc;
+    }
+    el.querySelector("[data-glrows]").style.opacity = ".35";
+    el.querySelector("[data-glkn]").textContent = pal.length + (pal.length === 1 ? " color" : " colors");
+  };
   // the palette strip + named rows + arrival line, redrawn whenever the slider's size changes
   const drawPalette = () => {
     const set = curSet(), pal = set.pal, isHarm = mode === "harmony";
@@ -1741,7 +1762,8 @@ function glPage(i, d, fromHex, tol) {
     // press a swatch adds it to your set", since that's the same gesture slot) and an explicit row action in
     // the expanded list (the [data-locate] glyph there, the one nested-control exemption js/swatch.js's capture
     // delegate already recognizes, same as the old strip glyph did).
-    stripH.innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}${locate && locate.j === j ? " loc" : ""}" data-glj="${j}" data-hex="${p.h}" style="--c:${p.h};flex:${eqW ? 1 : (Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.pick || eqW ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
+    stripH.classList.remove("gl-drag"); stripH.innerHTML = stripHTML(pal, near);
+    rowsH.style.opacity = "";
     rowsH.innerHTML = pal.map((p, j) => {
       const nm = glName(p.h), fam = !nm.sub && !p.out && typeof familyOf === "function" && familyOf(p.h);
       const sub = [p.out ? "Stands out" : nm.sub ? nm.sub.charAt(0).toUpperCase() + nm.sub.slice(1) : fam ? fam.head.n + " family" : "", p.pick ? "Picked" : eqW ? "" : glPctTxt(p.share)].filter(Boolean).join(" · ");
@@ -1868,7 +1890,7 @@ function glPage(i, d, fromHex, tol) {
         onSet: (v, final) => {
           curK = v; locate = null; el.querySelector("[data-glkn]").textContent = v + " colors";   // the label moves at once
           if (final) { cancelAnimationFrame(glKRaf); glKRaf = 0; drawPalette(); buzz(5); }
-          else if (!glKRaf) glKRaf = requestAnimationFrame(() => { glKRaf = 0; drawPalette(); });   // a drag redraws once a frame
+          else if (!glKRaf) glKRaf = requestAnimationFrame(() => { glKRaf = 0; dragDraw(); });   // a drag redraws once a frame
         } });
       else { kCtl.range(2, Math.max(2, set.max)); kCtl.set(Math.max(2, kk)); }
     }
@@ -1896,12 +1918,39 @@ function glPage(i, d, fromHex, tol) {
     const host = splitEl.querySelector("[data-glsplitchips]");
     host.innerHTML = plvAvail.map(c => `<button class="${c.id === plvSplitCat ? "on" : ""}" data-glsplitcat="${c.id}">${esc(c.label)}</button>`).join("");
   }
+  // the number is what is drawn: each category's real reach (the most colors it can still deliver, probed once and kept) sets
+  // the slider's range and the −/+ limits; the label always reads the length of the palette on screen (David, 2026-11-06)
+  const splitReachMemo = {}, splitRng = glRng(7);
+  const splitReach = cat => {
+    if (splitReachMemo[cat] != null) return splitReachMemo[cat];
+    const g = plvGens[cat], top = Math.min(10, plvPrepped.length); let best = 2, miss = 0;
+    for (let k = 2; k <= top && miss < 2 && g; k++) {
+      let ok = false; for (let t = 0; t < 10 && !ok; t++) { const c = g(k, splitRng); ok = !!c && c.length === k; }
+      if (ok) { best = k; miss = 0; } else miss++;
+    }
+    return splitReachMemo[cat] = best;
+  };
+  let splitCtl = null, splitRaf = 0;
+  const splitLabel = () => {
+    const n = plvItems[plvFocusIdx] ? plvItems[plvFocusIdx].length : curK, o = splitEl && splitEl.querySelector("[data-glsplitkn]");
+    if (o) o.textContent = n + (n === 1 ? " color" : " colors");
+  };
+  function fitSplitSlider() {
+    const mx = splitReach(plvSplitCat);
+    if (curK > mx) curK = mx;
+    if (splitCtl) { splitCtl.range(2, mx); splitCtl.set(curK); }
+  }
   function ensureSplitSlider() {
     const slide = splitEl.querySelector("[data-glsplitslide]"), inp = slide.querySelector("input");
-    const max = Math.max(2, Math.min(10, plvPrepped.length)), kk = Math.min(Math.max(curK, 2), max);
-    countify(inp, { min: 2, max, value: kk, out: splitEl.querySelector("[data-glsplitkn]"),
-      onSet: (v, final) => { curK = v; locate = null; renderSplitFeed(); drawPalette(); if (final) buzz(5); } });
-    splitEl.querySelector("[data-glsplitkn]").textContent = kk + " colors";
+    const mx = splitReach(plvSplitCat); if (curK > mx) curK = mx; if (curK < 2) curK = 2;
+    splitCtl = countify(inp, { min: 2, max: mx, value: curK, out: splitEl.querySelector("[data-glsplitkn]"),
+      onSet: (v, final) => {
+        curK = v; locate = null; splitEl.querySelector("[data-glsplitkn]").textContent = v + " colors";
+        // a drag redraws the feed once a frame; the dots on the painting (a scan of the photo per color) wait for the finger to lift
+        if (final) { cancelAnimationFrame(splitRaf); splitRaf = 0; renderSplitFeed(); drawPalette(); buzz(5); }
+        else if (!splitRaf) splitRaf = requestAnimationFrame(() => { splitRaf = 0; renderSplitFeed(); });
+      } });
+    splitLabel();
   }
   function renderSplitFeed() {
     const kk = Math.max(2, Math.min(curK, 10, plvPrepped.length)), key = "g" + i + "|" + plvSplitCat + "|" + kk;
@@ -1928,6 +1977,7 @@ function glPage(i, d, fromHex, tol) {
     // if a scroll has already armed the focus observer (below), keep every row -- including ones this call
     // just added -- under it; re-observing an already-observed element is a no-op, not a duplicate.
     if (splitFocusIO) feedEl.querySelectorAll(".gl-feed-row").forEach(r => splitFocusIO.observe(r));
+    splitLabel();
   }
   // coordinator, 2026-10-12: "the first screen should focus the TOP row, not the 4th one... scrolling then
   // moves the focus." An IntersectionObserver fires once immediately on attach, for whatever already sits in
@@ -1959,12 +2009,18 @@ function glPage(i, d, fromHex, tol) {
     splitEl.querySelector("[data-glsplitchips]").onclick = e => {
       const b = e.target.closest("[data-glsplitcat]"); if (!b || b.dataset.glsplitcat === plvSplitCat) return;
       buzz(5); plvSplitCat = b.dataset.glsplitcat; mode = plvSplitCat; locate = null;
-      renderSplitChips(); renderSplitFeed(); drawPalette();
+      fitSplitSlider(); renderSplitChips(); renderSplitFeed(); drawPalette();
     };
     splitEl.querySelector("[data-glsplitfeed]").onclick = e => {
       const b = e.target.closest("[data-glfeedidx]"); if (!b) return;
-      const idx = +b.dataset.glfeedidx; if (idx === plvFocusIdx) return;
+      const idx = +b.dataset.glfeedidx, cols = plvItems[idx]; if (!cols) return;
+      // one tap opens the palette full screen (David, 2026-11-06: a tap only selected it); scrolling still moves the focus
       buzz(5); setSplitFocus(idx);
+      const sk = plvSrcKey("painting", d.id || "g" + i);
+      palFullOpen(cols, { title: d.t, source: "Browse palettes", keepOrder: true, from: b,
+        heart: { isOn: () => plvIsPinned(sk, cols), toggle: () => { const was = plvIsPinned(sk, cols); if (was) S.plv[sk] = plvPins(sk).filter(p => p.cols.join("|") !== cols.join("|")); else plvPins(sk).unshift({ cols: cols.slice(), cat: plvSplitCat, at: today() }); save(); buzz(was ? 6 : 10); } },
+        onSave: () => glSavePalette(cols, glSaveName(d.t, glModeLabel(plvSplitCat)), false, { i, t: d.t }),
+        onEdit: () => glEditOpen(cols, { title: d.t, label: glModeLabel(plvSplitCat), pool, onSave: (hexes, name) => glSavePalette(hexes, name, false, { i, t: d.t }) }) });
     };
     splitEl.querySelector("[data-glsplitfeed]").addEventListener("scroll", armSplitFocusObserver, { passive: true });
   }
@@ -2101,6 +2157,13 @@ function glPage(i, d, fromHex, tol) {
     drawPalette();
   };
   drawPalette();
+  // warm the name cache for the whole pool in idle time, a few at a time, so dragging the slider to a new count never pays
+  // for naming a color it has not shown yet (each naming is ~1,000 dE2000s; nameOf memoizes, js/naming.js)
+  {
+    let warm = 0; const ric = window.requestIdleCallback || (f => setTimeout(() => f({ timeRemaining: () => 8 }), 30));
+    const step = dl => { while (warm < pool.length && el.isConnected && dl.timeRemaining() > 3) nameOf(pool[warm++].h); if (warm < pool.length && el.isConnected) ric(step); };
+    ric(step);
+  }
   if (typeof awPaintingHook === "function") awPaintingHook(el, i, d, { pool, curPal });
   loadSubjects().then(() => {
     const ln = el.querySelector("[data-glsubj-line]"), h = subjLineHTML(i);

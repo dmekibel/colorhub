@@ -8,13 +8,13 @@
 @media (min-width:430px){.screen.pr-home,.screen.pr-play,.screen.pr-res,.screen.pr-say-intro{--pr-g:24px}}
 .screen.pr-play,.screen.pr-say-intro{height:100dvh;min-height:0;overflow:hidden}
 /* the viewing booth: every judged screen, and the results that follow it (no jump to black) */
-html:has(#app > .screen.pr-booth){
+html.scf-pr-booth{
   --ground:var(--booth,#5F5F5F);
   --ink:var(--b-ink,#FFFFFF); --soft:var(--b-soft,#E4E4E1); --faint:var(--b-faint,#C9C9C5);
   --rule:var(--b-rule,rgba(255,255,255,.22));
   --good:#B9F0CB; --bad:#FFC2B4;
 }
-html:has(#app > .screen.pr-booth) body::after{display:none}
+html.scf-pr-booth body::after{display:none}
 
 /* ---------- type ---------- */
 .pr-t1{font:400 44px/.95 var(--serif);letter-spacing:-.03em;text-wrap:balance;margin:0}

@@ -230,7 +230,7 @@ function plvGenPage(key, gen, count, pageIdx) {
     collected.push({ cols, sig, score: plvScore(cols, m) });
   }
   collected.sort((a, b) => b.score - a.score);
-  const page = collected.slice(0, 24).map(c => c.cols);
+  const page = collected.slice(0, 24).map(c => typeof palDisplayOrder === "function" ? palDisplayOrder(c.cols) : c.cols);   // each row reads as a gradient (js/palorder.js)
   page.forEach(p => st.allShown.push(p));
   st.pages[pageIdx] = page;
   return page;

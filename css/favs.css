@@ -103,7 +103,7 @@
 .fv-heart-btn.saved{color:var(--ink)}
 
 /* ---------- the ranking screens: judged on the viewing-booth grey ---------- */
-html:has(#app > .screen.fv-run){--ground:#5F5F5F;--lift:#676767;--lift-2:#6E6E6E;--surface-2:#555555;--surface-3:#4D4D4D;--ink:#F4F4F2;--soft:#E0E0DD;--faint:#D9D9D5;
+html.scf-fv-run{--ground:#5F5F5F;--lift:#676767;--lift-2:#6E6E6E;--surface-2:#555555;--surface-3:#4D4D4D;--ink:#F4F4F2;--soft:#E0E0DD;--faint:#D9D9D5;
   --rule:rgba(255,255,255,.24);--rule-2:rgba(255,255,255,.9);--good:#B9F0CB;--bad:#FFC2B4;--booth:#5F5F5F}
 .screen.fv-run{padding:calc(var(--top) + 8px) var(--g) calc(var(--bottom) + 14px)}
 .fv-rh{flex:none;display:flex;align-items:center;gap:8px;min-height:48px}

@@ -98,7 +98,18 @@ function coreWordMet(entry) {
 
 // The one naming function. `color`: a hex string, or [r,g,b] (0-255). Always returns a result, synchronously,
 // even before data/core-names.json has loaded.
+// Memoized (a painting page names the same swatches again on every slider step; each naming is ~1,000 dE2000s): the pure
+// part is kept per hex for the loaded list, and only `met` (the learner's own progress) is read fresh on every call.
+let NAME_MEMO = new Map(), NAME_MEMO_LIST = null;
 function nameOf(color, opts = {}) {
+  if (opts.n || !CORE_NAMES) return nameOfRaw(color, opts);
+  if (NAME_MEMO_LIST !== CORE_NAMES) { NAME_MEMO = new Map(); NAME_MEMO_LIST = CORE_NAMES; }
+  const key = Array.isArray(color) ? color.join(",") : String(color).toUpperCase();
+  let r = NAME_MEMO.get(key);
+  if (!r) { r = nameOfRaw(color, opts); if (NAME_MEMO.size > 4000) NAME_MEMO.clear(); NAME_MEMO.set(key, r); }
+  return { ...r, met: r._entry ? coreWordMet(r._entry) : false };
+}
+function nameOfRaw(color, opts = {}) {
   const hex = Array.isArray(color) ? "#" + color.map(v => clamp(Math.round(v), 0, 255).toString(16).padStart(2, "0")).join("").toUpperCase() : String(color).toUpperCase();
   const list = CORE_NAMES || coreFallback();
   const Lhex = lab(hex);
@@ -127,7 +138,7 @@ function nameOf(color, opts = {}) {
     if (mod) text = `${mod} ${top.n.toLowerCase()}`;
   }
   text = text.charAt(0).toUpperCase() + text.slice(1);   // "Pale salmon", "Between teal and slate"
-  return { n: top.n, h: top.h, de: Math.round(top.de * 10) / 10, mod, text, near, between, met: coreWordMet(top.entry) };
+  return { n: top.n, h: top.h, de: Math.round(top.de * 10) / 10, mod, text, near, between, met: coreWordMet(top.entry), _entry: top.entry };
 }
 // David, 2026-10-12: "extend descriptive in-between naming to every place a user picks an arbitrary color" --
 // the color picker, Look closer's eyedropper (and its shared loupe), Studio's photo palette, a painting's

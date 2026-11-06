@@ -194,7 +194,7 @@ html.desk .tf-bars .tf-kinds{padding-right:48px}
 .tf-pull.busy svg{animation:tfSpin .7s linear infinite}
 @keyframes tfSpin{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.tf-pull.busy svg{animation:none}}
-html:has(.tf-screen){overscroll-behavior-y:contain}
+html.scf-tf{overscroll-behavior-y:contain}
 /* sticky offsets here count from below the screen's padding (as the old chip row's -18px did): padding is --top + 6px on a phone, --dkn + 12px on the wide layout */
 .tf-bars{top:-6px}
 html.desk .tf-bars{top:-12px}

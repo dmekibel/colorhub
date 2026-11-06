@@ -6743,9 +6743,8 @@ scenario("paintings", "lane A: a painting page leads with what stands out; Name 
   await t.open("#/gallery/12", { settle: 800 });
   await t.waitFor(".pal-name b", 12000, "the palette rows");
   t.expect(!t.$$(".pal-name b").some(b => /^between/i.test(b.textContent)), "a 'between X and Y' is used as a name");
-  t.expect(t.$("[data-glswatches] .pal.gl-out"), "the strip doesn't lead with a stands-out color");
-  const L0 = t.ev(`lab(getComputedStyle(document.querySelector("[data-glswatches] .pal")).getPropertyValue("--c").trim())[0]`);
-  t.expect(L0 > 30, `the first chip is a near-black (L* ${Math.round(L0)})`);
+  // 2026-11-06: every automatic strip is in gradient order, so the stands-out color is marked (gl-out), not first
+  t.expect(t.$("[data-glswatches] .pal.gl-out"), "the strip has no marked stands-out color");
   // David, 2026-10-08: the palette is right under the identity block, and both fit one screen so you can change types and sizes.
   // David, 2026-10-09: the identity block (title, painter, date, museum, why it matters) now sits between the pinned
   // image and the palette, so the strip follows the identity block, not the image, directly.
@@ -8436,7 +8435,12 @@ scenario("paintings", "Browse palettes opens a split screen; a feed row becomes 
   const dotsBefore = t.ev(`[...document.querySelectorAll("[data-glherodots] i")].length`);
   const row1 = rows()[1], row1Cols = t.$$(".plv-sw-row > i", row1).map(i => getComputedStyle(i).getPropertyValue("--c").trim().toUpperCase());
   await t.click(row1, { force: true, wait: 500 });
-  t.expect(row1.classList.contains("on"), "tapping a feed row didn't focus it");
+  // David, 2026-11-06: one tap opens the palette in the full-screen viewer (it used to only select the row)
+  t.expect(t.$(".palfull"), "one tap on a feed row didn't open the full-screen palette viewer");
+  t.expect(t.$(".palfull [data-pf-heart]"), "the viewer opened from Browse palettes has no heart");
+  await t.click(".palfull [data-pf-close]", { force: true, wait: 400 });
+  t.expect(!t.$(".palfull"), "the viewer didn't close");
+  t.expect(row1.classList.contains("on"), "tapping a feed row didn't also focus it");
   t.expect(t.ev(`[...document.querySelectorAll("[data-glherodots] i")].length`) >= 1 || dotsBefore >= 1, "no location dots appeared on the pinned painting for the focused palette");
   const stripCols = t.ev(`[...document.querySelectorAll("[data-glswatches] .pal")].map(b => b.style.getPropertyValue("--c").trim().toUpperCase())`);
   t.expect(JSON.stringify(stripCols) === JSON.stringify(row1Cols), `the strip (${stripCols.join(",")}) didn't follow the focused row (${row1Cols.join(",")})`);
@@ -8447,6 +8451,23 @@ scenario("paintings", "Browse palettes opens a split screen; a feed row becomes 
   t.expect(JSON.stringify(stripAfter) === JSON.stringify(row1Cols), "the focused palette wasn't kept as current after Done");
   t.expect(t.$$("[data-glpalacts] button").length >= 2, "Edit/Save aren't offered for the kept palette");
   t.expect(!t.$("[data-glpalacts] [data-glshuffle]"), "Shuffle shows for a plv category (it has nothing to reroll -- you scroll instead)");
+});
+// David, 2026-11-06: "the palette browser still doesn't show the right number": the label must equal the swatches drawn, on open,
+// after every -/+ and after switching category (Browse palettes, the split screen on a painting page)
+scenario("paintings", "Browse palettes: the count label equals the swatches drawn on open, after every -/+ and after switching category", async t => {
+  await t.open("#/gallery/100", { settle: 800 });
+  const browse = await t.waitFor("[data-glbrowse]", 15000, "the Browse palettes tile");
+  await t.click(browse, { wait: 500 });
+  await t.waitFor(() => t.$$("[data-glsplitfeed] [data-glfeedidx]").length >= 2, 10000, "the split feed");
+  const label = () => +/\d+/.exec(t.$("[data-glsplitkn]").textContent)[0];
+  const drawn = () => t.$$(".plv-sw-row > i", t.$("[data-glsplitfeed] [data-glfeedidx]")).length;
+  const same = (what) => { t.expect(label() === drawn() && label() >= 2, `${what}: label says ${label()} but ${drawn()} swatches are drawn`); };
+  same("on open");
+  const plus = t.$('[data-glsplitslide] [data-cnt="1"]'), minus = t.$('[data-glsplitslide] [data-cnt="-1"]');
+  for (let k = 0; k < 4; k++) { if (!plus.disabled) { await t.click(plus, { wait: 450 }); same("after +"); } }
+  for (let k = 0; k < 3; k++) { if (!minus.disabled) { await t.click(minus, { wait: 450 }); same("after -"); } }
+  const cats = t.$$("[data-glsplitchips] [data-glsplitcat]");
+  for (const c of cats.slice(0, 4)) { await t.click(c, { force: true, wait: 600 }); await t.waitFor(() => t.$$("[data-glsplitfeed] [data-glfeedidx]").length >= 1, 8000, "the feed after a category switch"); same("after switching to " + c.dataset.glsplitcat); }
 });
 scenario("paintings", "Harmonies shows several relation cards, each built only from real colors in the painting's own pool", async t => {
   await t.open("#/gallery/777", { settle: 800 });

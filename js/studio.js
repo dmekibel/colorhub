@@ -421,10 +421,11 @@ function palPhotoView(p) {
       cap: picks.length ? "Colors you took from the photo. Tap it for more, a swatch to open its page." : "Press and drag over the photo to take a color, up to 12." };
     return glModeSet(m, pool, k, null);
   };
+  const pvOrdCtx = "st" + Math.random().toString(36).slice(2) + "|";   // this photo's strip order memory (js/palorder.js)
   const curSet = () => editedPal ? { pal: editedPal, max: 24, fixed: true, cap: "Edited by hand." } : (() => {
     const mm = modeSet(mode, curK) ? mode : "out"; let st = modeSet(mm, curK);
     if (!st.fixed) { const reach = modeReach(mm); if (st.pal.length > reach || curK > reach) st = modeSet(mm, reach) || st; st = { ...st, max: Math.max(reach, st.pal.length) }; }
-    return mode !== "pick" && mode !== "out" && !st.harmony && st.pal && st.pal.length > 2 && typeof palOrderItems === "function" ? { ...st, pal: palOrderItems(st.pal) } : st; })();
+    return mode !== "pick" && !st.harmony && st.pal && st.pal.length > 2 && typeof palOrderItems === "function" ? { ...st, pal: palOrderItems(st.pal, null, pvOrdCtx + mode) } : st; })();
   const curPal = () => curSet().pal;
   // "Diverse" (David's palette-engine brief, 2026-10-09: farthest-point sampling in OKLab, guarantees every
   // distinct hue family in this photo's pool above a small floor gets a seat) is a photo-agnostic mode, same as
@@ -493,6 +494,15 @@ function palPhotoView(p) {
   let editing = false;
   const pushUndo = (label) => { undoPal = (editedPal || curSet().pal).map(c => ({ ...c })); undoLabel = label; };
   const doUndo = () => { if (!undoPal) return; editedPal = undoPal; undoPal = null; drawPalette(); buzz(6); };
+  const pvStripHost = el.querySelector("[data-pvswatches]");
+  const pvStripHTML = (pal, swAttr) => pal.map((c, j) => `<button class="pal"${swAttr(c)} data-pvj="${j}" style="--c:${c.h};flex:${(Math.max(c.share, .08) * 100).toFixed(1)}" data-ink="${ink(c.h)}"><span>${c.pick ? "" : c.share < .005 ? "<1%" : Math.round(c.share * 100) + "%"}</span>${editing ? `<i class="pv-rm" data-pvrm="${j}" aria-label="Remove">×</i>` : ""}</button>`).join("");
+  // a slider drag moves only the strip and the number; rows, readings and the photo overlay catch up on release (David, 2026-11-06: choppy)
+  const pvDragDraw = () => {
+    const pal = curSet().pal;
+    pvStripHost.classList.add("gl-drag"); pvStripHost.innerHTML = pvStripHTML(pal, c => ` data-swatch="${c.h}"`);
+    el.querySelector("[data-pvrows]").style.opacity = ".35";
+    el.querySelector("[data-pvkn]").textContent = pal.length + (pal.length === 1 ? " color" : " colors");
+  };
   const drawPalette = () => {
     const hv = haveModes(); if (!hv.some(m => m[0] === mode)) { mode = "out"; editedPal = null; }
     const key = hv.map(m => m[0]).join();
@@ -508,7 +518,7 @@ function palPhotoView(p) {
         onSet: (v, final) => {
           curK = v; el.querySelector("[data-pvkn]").textContent = v + " colors";   // the label moves at once
           if (final) { cancelAnimationFrame(pvRaf); pvRaf = 0; drawPalette(); buzz(5); }
-          else if (!pvRaf) pvRaf = requestAnimationFrame(() => { pvRaf = 0; drawPalette(); });   // drags coalesce to one draw a frame
+          else if (!pvRaf) pvRaf = requestAnimationFrame(() => { pvRaf = 0; pvDragDraw(); });   // drags coalesce to one draw a frame
         } });
       else { pvKCtl.range(2, mx); pvKCtl.set(kv); }
     }
@@ -530,7 +540,8 @@ function palPhotoView(p) {
     // icon nested inside a [data-swatch] button) — while editing, a tap opens the edit sheet instead of the
     // color page, wired below through [data-pvj] alone.
     const swAttr = c => editing ? "" : ` data-swatch="${c.h}"`;
-    el.querySelector("[data-pvswatches]").innerHTML = pal.map((c, j) => `<button class="pal"${swAttr(c)} data-pvj="${j}" style="--c:${c.h};flex:${(Math.max(c.share, .08) * 100).toFixed(1)}" data-ink="${ink(c.h)}"><span>${c.pick ? "" : c.share < .005 ? "<1%" : Math.round(c.share * 100) + "%"}</span>${editing ? `<i class="pv-rm" data-pvrm="${j}" aria-label="Remove">×</i>` : ""}</button>`).join("");
+    pvStripHost.classList.remove("gl-drag"); pvStripHost.innerHTML = pvStripHTML(pal, swAttr);
+    el.querySelector("[data-pvrows]").style.opacity = "";
     el.querySelector("[data-pvrows]").innerHTML = pal.map((c, j) => {
       const nm = glName(c.h), fam = typeof familyOf === "function" && familyOf(c.h);
       const sub = [nm.sub ? nm.sub.charAt(0).toUpperCase() + nm.sub.slice(1) : fam ? fam.head.n + " family" : "", c.pick ? "Picked" : glPctTxt(c.share)].filter(Boolean).join(" · ");
