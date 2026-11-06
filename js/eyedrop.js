@@ -2,9 +2,11 @@
 // Shared eyedropper, Adobe Capture style (David, 2026-10-25). The old loupe that ballooned above the finger is gone.
 // Now: a persistent reticle (a ring with a double outline and a center dot) sits on the picture. Drag anywhere to move
 // it with RELATIVE motion (the finger never covers the sampled point); tap to jump it there; a mouse drags it directly
-// and the arrow keys nudge it 1px (Shift = 10px). A square preview, ~120px, is pinned to the top-left corner of the
-// picture (it flips to the top-right when the reticle gets under it): a medium close-up (about 3.5x, smooth) with a
-// crosshair at the center, the sampled area outlined, and the live swatch and name beneath. The sample-size control
+// and the arrow keys nudge it 1px (Shift = 10px). A magnifier, ~112px (100 on a 375 screen), is pinned to the top-left corner of the
+// picture (it flips to the top-right when the reticle or a thumb gets near it): a close-up (about 3.5x, smooth) with a
+// crosshair at the center, the sampled area outlined, and the live swatch, name and hex attached beneath it (David,
+// 2026-11-06: the thumb covered what he was picking). A press-and-drag never jumps the reticle; only a quick tap
+// (under 200 ms, under 8 px of travel) moves it there. The sample-size control
 // (Point / Small / Medium / Large) sits below the picture. Lifting the finger commits the pick (js/picked.js pkAdd).
 //
 // Coordinates map through the element's own getBoundingClientRect(), assuming object-fit:contain (the only mode
@@ -100,14 +102,35 @@ function eydNameOf(hex) {
 
 // ---------- the preview square (shared with Look closer) ----------
 const EYD_ZOOM = 3.5;   // the close-up magnifies what's on screen by about this much
-const eydPreviewHTML = (hidden) => `<div class="eyd-prev"${hidden ? " hidden" : ""} aria-hidden="true"><div class="eyd-prev-sq"><canvas width="440" height="440"></canvas><i class="eyd-prev-area"></i><i class="eyd-prev-x"></i></div><div class="eyd-prev-info"><i class="eyd-prev-sw"></i><span class="eyd-prev-name"></span></div></div>`;
+const eydPreviewHTML = (hidden) => `<div class="eyd-prev"${hidden ? " hidden" : ""} aria-hidden="true"><div class="eyd-prev-sq"><canvas width="480" height="480"></canvas><i class="eyd-prev-area"></i><i class="eyd-prev-x"></i></div><div class="eyd-prev-info"><i class="eyd-prev-sw"></i></div></div>`;
+// the live readout under the photo (the card itself carries no text): the picked color's name and hex, kept after the finger lifts
+const eydReadoutHTML = () => `<p class="eyd-read" hidden><b class="eyd-read-name"></b><span class="eyd-read-hex"></span></p>`;
+function eydReadoutSet(el, hex) {
+  if (!el || !hex) return; el.hidden = false;
+  el.querySelector(".eyd-read-name").textContent = eydNameOf(hex) || hex; el.querySelector(".eyd-read-hex").textContent = hex;
+}
+// where the preview card goes: the free top corner of the visible picture (vis = {l,t,r,b} in viewport px), flipping to the
+// other corner when the point (x, y) or a thumb about it (radius d, never less than a finger's reach) comes near it
+function eydPrevPlace(prevEl, vis, x, y, d) {
+  const pv = prevEl.offsetWidth || 112, ph = prevEl.offsetHeight || pv + 50, pad = 8, m = Math.max(d, 54);
+  // the corners in order of preference: top-left, top-right, then the bottom two when the picture is tall enough
+  const L = vis.l + pad, R = vis.r - pad - pv, T = vis.t + pad, B = vis.b - pad - ph;
+  const boxes = [{ l: L, t: T }, { l: R, t: T }];
+  if (B > T + 24) boxes.push({ l: L, t: B }, { l: R, t: B });
+  const near = b => Math.hypot(x - clamp(x, b.l, b.l + pv), y - clamp(y, b.t, b.t + ph));   // the point's distance from a card
+  const box = boxes.find(b => near(b) > m) || boxes.reduce((a, b) => near(b) > near(a) ? b : a);   // none clear: the farthest from the thumb
+  const useRight = box.l === R && R !== L, key = box.l + "," + box.t;
+  if (prevEl.dataset.at !== key) { prevEl.dataset.at = key; prevEl.style.left = box.l + "px"; prevEl.style.top = box.t + "px"; }
+  prevEl.classList.toggle("eyd-prev-r", useRight);
+  return useRight;
+}
 // the ring's on-screen diameter: 44px, growing when the averaged square is bigger than that
 const eydRingPx = (nSrc, screenPerSrc) => clamp(Math.round(nSrc * screenPerSrc), 44, 150);
 // draw the close-up centered on (fx, fy). screenPerSrc = screen pixels per source pixel right now, so the close-up
 // is ~3.5x of what's visible whatever the zoom. Smooth (not pixel art); past the picture's edge it stays dark.
 function eydPreviewDraw(root, s, fx, fy, nSrc, screenPerSrc, hex) {
   const sq = root.querySelector(".eyd-prev-sq"), cv = root.querySelector("canvas"), cx = cv.getContext("2d");
-  const pv = sq.offsetWidth || 180;
+  const pv = sq.offsetWidth || 112;
   const side = clamp(pv / (EYD_ZOOM * Math.max(screenPerSrc, 1e-3)), 14, Math.min(s.w, s.h));
   const x0 = fx * s.w - side / 2, y0 = fy * s.h - side / 2;
   cx.imageSmoothingEnabled = true; cx.imageSmoothingQuality = "high";
@@ -118,17 +141,31 @@ function eydPreviewDraw(root, s, fx, fy, nSrc, screenPerSrc, hex) {
   area.style.width = area.style.height = ap + "px";
   if (hex) {
     root.querySelector(".eyd-prev-sw").style.setProperty("--c", hex);
-    root.querySelector(".eyd-prev-name").textContent = eydNameOf(hex) || hex;
   }
 }
 // the reticle's markup: a ring (double outline, set in css/eyedrop.css) with a center dot; --d is its diameter
 const eydReticleHTML = () => `<div class="eyd-ret" aria-hidden="true"><i class="eyd-ret-dot"></i></div>`;
 
+// a standalone magnifier for pickers that keep their own gestures (Studio's color circles). show() draws the close-up and
+// puts the card in the free top corner of the visible picture; hide() / destroy() put it away.
+function eydLoupe() {
+  const layer = document.createElement("div"); layer.className = "eyd-layer"; layer.hidden = true;
+  layer.innerHTML = eydPreviewHTML(); document.body.appendChild(layer);
+  const prev = layer.querySelector(".eyd-prev");
+  return {
+    show(s, fx, fy, nSrc, per, hex, vis, x, y, readEl) {
+      eydReadoutSet(readEl, hex); layer.hidden = false; eydPreviewDraw(prev, s, fx, fy, nSrc, per, hex); eydPrevPlace(prev, vis, x, y, 0);
+    },
+    hide() { layer.hidden = true; },
+    destroy() { layer.remove(); },
+  };
+}
+
 // ---------- the picker on any <img>/<canvas> ----------
 let EYD_SESSION = null;   // the live drag, if any
 function eyedropAttach(el, o = {}) {
-  let src = null, ret = null, layer = null, ringEl = null, prevEl = null, bar = null, g = null, lastHex = null, lastName = null;
-  let tick = 0, raf = 0, dead = false, lastPlaced = "";
+  let src = null, ret = null, layer = null, ringEl = null, prevEl = null, bar = null, readEl = null, g = null, lastHex = null, lastName = null;
+  let tick = 0, raf = 0, dead = false;
   const sess = { resample: null };
   const ensureSrc = () => (src = src || eydSource(el));
   const prevTouch = el.style.touchAction; el.style.touchAction = "none";   // one finger moves the reticle, never scrolls the page
@@ -138,6 +175,9 @@ function eyedropAttach(el, o = {}) {
     layer.innerHTML = eydPreviewHTML() + eydReticleHTML();
     document.body.appendChild(layer);
     prevEl = layer.querySelector(".eyd-prev"); ringEl = layer.querySelector(".eyd-ret");
+    if (o.readout !== false && !readEl && el.insertAdjacentElement) {
+      el.insertAdjacentHTML("afterend", eydReadoutHTML()); readEl = el.nextElementSibling;
+    }
     if (o.sizes !== false && !bar) {
       bar = document.createElement("div"); bar.className = "eyd-sizebar"; bar.innerHTML = eydSizeControlHTML();
       if (el.insertAdjacentElement) el.insertAdjacentElement("afterend", bar);
@@ -158,13 +198,7 @@ function eyedropAttach(el, o = {}) {
     const x = f.left + ret.fx * f.dw, y = f.top + ret.fy * f.dh, per = f.dw / src.w, d = eydRingPx(eydN(src, getSampleSize()), per);
     const inView = x >= vis.l - 1 && x <= vis.r + 1 && y >= vis.t - 1 && y <= vis.b + 1;
     ringEl.style.cssText = `--d:${d}px;left:${x}px;top:${y}px;${inView ? "" : "display:none"}`;
-    const pv = prevEl.offsetWidth || 180, pad = 8, ph = prevEl.offsetHeight || pv + 40;
-    const leftBox = { l: vis.l + pad, t: vis.t + pad }, rightBox = { l: vis.r - pad - pv, t: vis.t + pad };
-    const hit = b => x > b.l - d / 2 - 4 && x < b.l + pv + d / 2 + 4 && y > b.t - d / 2 - 4 && y < b.t + ph + d / 2 + 4;
-    const useRight = hit(leftBox) && !hit(rightBox);
-    const box = useRight ? rightBox : leftBox;
-    const key = box.l + "," + box.t; if (key !== lastPlaced) { lastPlaced = key; prevEl.style.left = box.l + "px"; prevEl.style.top = box.t + "px"; }
-    prevEl.classList.toggle("eyd-prev-r", useRight);
+    eydPrevPlace(prevEl, vis, x, y, d / 2);
   };
   const read = () => {
     if (!ret || !ensureSrc()) return null;
@@ -178,7 +212,7 @@ function eyedropAttach(el, o = {}) {
     eydPreviewDraw(prevEl, src, ret.fx, ret.fy, r.n, f ? f.dw / src.w : 1, r.hex);
     const nm = eydNameOf(r.hex);
     if (nm !== lastName) { if (lastName !== null && typeof buzz === "function") buzz(3); lastName = nm; }
-    lastHex = r.hex;
+    lastHex = r.hex; eydReadoutSet(readEl, r.hex);
     if (fire === false) return true;
     // the commit (pkAdd) happens BEFORE the caller's own onPick fires, so anything that caller shows already reflects it
     if (final && typeof pkAdd === "function") pkAdd(r.hex, { src: "eyedrop" });
@@ -199,7 +233,7 @@ function eyedropAttach(el, o = {}) {
     if (!e.isPrimary || e.button > 0) return;
     if (!ensureSrc()) return;
     const rel = e.pointerType === "touch" || e.pointerType === "pen";
-    g = { id: e.pointerId, rel, x0: e.clientX, y0: e.clientY, x: e.clientX, y: e.clientY, moved: false };
+    g = { id: e.pointerId, rel, x0: e.clientX, y0: e.clientY, x: e.clientX, y: e.clientY, moved: false, t0: performance.now() };
     EYD_SESSION = sess;
     try { el.setPointerCapture(e.pointerId); } catch (err) {}
     if (!rel) { if (setFromPoint(e.clientX, e.clientY)) show(false); }   // a mouse drags the reticle itself
@@ -207,7 +241,7 @@ function eyedropAttach(el, o = {}) {
   const move = e => {
     if (!g || e.pointerId !== g.id) return;
     if (g.rel) {
-      if (!g.moved && Math.hypot(e.clientX - g.x0, e.clientY - g.y0) < 6) return;
+      if (!g.moved && Math.hypot(e.clientX - g.x0, e.clientY - g.y0) < 8) return;
       if (!g.moved) { g.moved = true; g.x = e.clientX; g.y = e.clientY; return; }
       nudge(e.clientX - g.x, e.clientY - g.y); g.x = e.clientX; g.y = e.clientY;
     } else { g.moved = true; setFromPoint(e.clientX, e.clientY); }
@@ -220,7 +254,8 @@ function eyedropAttach(el, o = {}) {
     const grab = g; g = null; if (EYD_SESSION === sess) EYD_SESSION = null;
     try { el.releasePointerCapture(e.pointerId); } catch (err) {}
     if (raf) { cancelAnimationFrame(raf); raf = 0; }
-    if (grab.rel && !grab.moved) setFromPoint(e.clientX, e.clientY);
+    // only a quick tap (under 200 ms) jumps the reticle; a press that lingers, or a drag, leaves it where it is
+    if (grab.rel && !grab.moved) { if (performance.now() - grab.t0 < 200) setFromPoint(e.clientX, e.clientY); }
     else if (!grab.rel) setFromPoint(e.clientX, e.clientY);
     if (show(true) && typeof buzz === "function") buzz(10);
   };
@@ -244,6 +279,7 @@ function eyedropAttach(el, o = {}) {
     clearInterval(tick); if (raf) cancelAnimationFrame(raf);
     if (layer) { layer.remove(); layer = null; }
     if (bar) { bar.remove(); bar = null; }
+    if (readEl) { readEl.remove(); readEl = null; }
     el.style.touchAction = prevTouch;
     if (EYD_SESSION === sess) EYD_SESSION = null;
   };

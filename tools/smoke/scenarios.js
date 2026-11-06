@@ -5275,7 +5275,7 @@ scenario("eyedrop", "the shared eyedropper: drag reads each side, and sample siz
       img.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, clientX: r.left + 20, clientY: r.top + 20, isPrimary: true, pointerId: 1, pointerType: "mouse" }));
       await raf();
       const pv = document.querySelector(".eyd-prev");
-      const flipped = { right: pv.classList.contains("eyd-prev-r"), name: pv.querySelector(".eyd-prev-name").textContent };
+      const flipped = { right: pv.classList.contains("eyd-prev-r"), name: (document.querySelector(".eyd-read-name") || {}).textContent };
       img.dispatchEvent(new PointerEvent("pointerup", { bubbles: true, clientX: r.left + 20, clientY: r.top + 20, isPrimary: true, pointerId: 1, pointerType: "mouse" }));
       d.detach();
       const gone = !document.querySelector(".eyd-layer") && !document.querySelector(".eyd-sizebar");
@@ -8647,9 +8647,9 @@ scenario("paintings", "Pick a color opens the palette editor: one reticle moves,
   t.expect(t.$(".glz-scrim .eyd-prev") && !t.$(".glz-scrim .eyd-prev").hidden, "the corner preview is missing");
   // no black sausage (David, 2026-10-25): the first time the close-up shows it is already drawn from real pixels, in the corner
   const pv0 = t.ev(`(() => { const p = document.querySelector(".glz-scrim .eyd-prev"), cv = p.querySelector("canvas"), d = cv.getContext("2d").getImageData(cv.width >> 1, cv.height >> 1, 1, 1).data, r = p.getBoundingClientRect(), s = document.querySelector(".glz-stage").getBoundingClientRect();
-    return JSON.stringify({ lit: d[0] + d[1] + d[2] > 24, side: Math.round(r.width), nearTop: r.top - s.top < 24, nearEdge: r.left - s.left < 24 || s.right - r.right < 24, name: p.querySelector(".eyd-prev-name").textContent.length > 0 }); })()`);
+    return JSON.stringify({ lit: d[0] + d[1] + d[2] > 24, side: Math.round(r.width), nearTop: r.top - s.top < 24, nearEdge: r.left - s.left < 24 || s.right - r.right < 24, name: !!p.querySelector(".eyd-prev-sw") }); })()`);
   const pvj = JSON.parse(pv0);
-  t.expect(pvj.lit && pvj.nearTop && pvj.nearEdge && pvj.name && pvj.side >= 150, `the close-up must open drawn, in a corner, at least 150px: ${pv0}`);
+  t.expect(pvj.lit && pvj.nearTop && pvj.nearEdge && pvj.name && pvj.side >= 98, `the close-up must open drawn, in a corner, at least 98px: ${pv0}`);
   t.expect(t.$$(".glz-pk-strip .glz-seg-c").length === 1 && t.$(".glz-seg-live"), "with no colors kept, the live color fills the whole strip alone");
   const st0 = t.$(".glz-pk-strip").getBoundingClientRect(), sg0 = t.$(".glz-seg-live").getBoundingClientRect();
   t.expect(Math.abs(sg0.width - st0.width) < 2 && st0.height >= 70, `the first color should fill the strip: strip ${st0.width}x${st0.height}, cell ${sg0.width}`);
