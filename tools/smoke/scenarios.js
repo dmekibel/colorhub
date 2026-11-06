@@ -2765,7 +2765,9 @@ scenario("home", "Study corner opens the instant deck seeded with the middle col
   await H.menu(t, "learn");
   await t.waitFor(".pr-quick", 4000, "the instant-deck sheet from Home");
   t.expect(/Learn/.test(t.$("[data-qtitle]").textContent), "the sheet title");
-  t.expect(t.$$(".pr-quick .pr-plate i").length >= 5, "the deck plate");
+  // a learnable name in the middle (the vivid-centred spiral) seeds a one-color "Learn it" lesson; otherwise a deck of 3+ (a very vivid middle color has few look-alikes)
+  const n = t.$$(".pr-quick .pr-plate i").length, lesson = /2 minutes/.test(t.text("[data-qcount]"));
+  t.expect(lesson ? n === 1 : n >= 3, `the deck plate (${n} swatches, ${lesson ? "lesson" : "deck"})`);
 });
 // David, 2026-10-09: "pressing the recall / study button takes you straight into flashcards" — Recall
 // lives only in the left menu's Learn room now (the map's right-corner menu dropped its own Recall
