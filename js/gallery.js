@@ -1542,8 +1542,8 @@ function glPage(i, d, fromHex, tol) {
   };
   const curSet = () => {
     const st = modeSet(mode, curK) || modeSet("out", curK);
-    // equal-width strips read as a gradient (js/palorder.js); area widths, picked and live combinations keep their own order
-    return eqW && mode !== "pick" && !plvGens[mode] && !st.harmony && st.pal && st.pal.length > 2 && typeof palOrderItems === "function" ? { ...st, pal: palOrderItems(st.pal) } : st;
+    // every strip reads as a gradient (js/palorder.js; widths still follow area); picked and live combinations keep their own order
+    return mode !== "pick" && mode !== "out" && !plvGens[mode] && !st.harmony && st.pal && st.pal.length > 2 && typeof palOrderItems === "function" ? { ...st, pal: palOrderItems(st.pal) } : st;
   };
   const curPal = () => curSet().pal;
   // a fresh re-roll for this mode: a new seed, kept in a short history so Shuffle never loses an earlier result
@@ -1789,7 +1789,7 @@ function glPage(i, d, fromHex, tol) {
     listHost.innerHTML = shown.length ? shown.map((c, j) => `
       <div class="gl-hcard" data-hc="${j}">
         <div class="gl-hcard-top"><b>${esc(c.label)}</b><span>${c.fitPct}% fit</span></div>
-        <div class="palette gl-strip gl-hcard-strip">${c.pal.map(p => `<button class="pal" data-swatch="${p.h}" style="--c:${p.h};flex:${eqW ? 1 : (Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${eqW ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("")}</div>
+        <div class="palette gl-strip gl-hcard-strip">${palOrderItems(c.pal).map(p => `<button class="pal" data-swatch="${p.h}" style="--c:${p.h};flex:${eqW ? 1 : (Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${eqW ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("")}</div>
         <div class="gl-hcard-names">${c.pal.map(p => esc(nameOf(p.h).n)).join(" · ")}</div>
         <div class="gl-hcard-acts"><button class="gl-pa-btn" data-hcfull="${j}">Full screen</button><button class="gl-pa-btn" data-hcfind="${j}">Find paintings</button><button class="gl-pa-btn" data-hcedit="${j}">Edit</button><button class="gl-pa-btn solid" data-hcsave="${j}">Save palette</button></div>
       </div>`).join("") : `<p class="fine">No ${harmFilter === "all" ? "clear relation" : harmCardName(harmFilter).toLowerCase()} shows up among this painting's own colors. Try Shuffle, or another type.</p>`;

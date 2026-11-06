@@ -931,7 +931,7 @@ function ptSimilarByPaletteHTML(n) {
     `<button class="aw-tie" data-ptgo="${esc(x.id)}"><b>${esc(x.title)}</b><span>${k} color${k === 1 ? "" : "s"} in common${x.artist ? " · " + esc(x.artist) : ""}</span></button>`).join("")}</div>`;
 }
 function paintingPage(n) {
-  const pal = n.palette || [];
+  const pal = typeof palOrderItems === "function" ? palOrderItems(n.palette || []) : (n.palette || []);
   const el = show(`
     ${artTop(n)}
     ${n.img ? `<div class="ptg"><img id="pimg" src="${esc(n.img)}" alt="${esc(n.title)} by ${esc(n.artist)}"><canvas id="pmask"></canvas></div>` : ""}
