@@ -8649,7 +8649,7 @@ scenario("paintings", "Pick a color opens the palette editor: one reticle moves,
   const pv0 = t.ev(`(() => { const p = document.querySelector(".glz-scrim .eyd-prev"), cv = p.querySelector("canvas"), d = cv.getContext("2d").getImageData(cv.width >> 1, cv.height >> 1, 1, 1).data, r = p.getBoundingClientRect(), s = document.querySelector(".glz-stage").getBoundingClientRect();
     return JSON.stringify({ lit: d[0] + d[1] + d[2] > 24, side: Math.round(r.width), nearTop: r.top - s.top < 24, nearEdge: r.left - s.left < 24 || s.right - r.right < 24, name: p.querySelector(".eyd-prev-name").textContent.length > 0 }); })()`);
   const pvj = JSON.parse(pv0);
-  t.expect(pvj.lit && pvj.nearTop && pvj.nearEdge && pvj.name && pvj.side >= 150, `the close-up must open drawn, in a corner, at least 150px: ${pv0}`);
+  t.expect(pvj.lit && pvj.nearTop && pvj.nearEdge && pvj.name && pvj.side >= 138, `the close-up must open drawn, in a corner, at least 138px: ${pv0}`);
   t.expect(t.$$(".glz-pk-strip .glz-seg-c").length === 1 && t.$(".glz-seg-live"), "with no colors kept, the live color fills the whole strip alone");
   const st0 = t.$(".glz-pk-strip").getBoundingClientRect(), sg0 = t.$(".glz-seg-live").getBoundingClientRect();
   t.expect(Math.abs(sg0.width - st0.width) < 2 && st0.height >= 70, `the first color should fill the strip: strip ${st0.width}x${st0.height}, cell ${sg0.width}`);

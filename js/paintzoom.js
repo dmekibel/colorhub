@@ -228,7 +228,7 @@ function glZoomOpen(opts) {
     }
     if (!aborted && pts.size > 1) return;
     // Pick: a still tap on the painting drops a new picker (pan and pinch stay live; double-tap zoom steps aside)
-    if (!aborted && drag && drag.ret) { if (!drag.moved) pkSetFromPoint(drag.x, drag.y); snapBack(); }   // a still tap jumps the reticle there; a drag just ends
+    if (!aborted && drag && drag.ret) { if (!drag.moved && performance.now() - drag.t0 < 200) pkSetFromPoint(drag.x, drag.y); snapBack(); }   // a still tap jumps the reticle there; a drag just ends
     else if (!aborted && drag && !drag.moved) { if (LP && lastPtype === "mouse") loupeClick(drag.x, drag.y); else if (!maybeDoubleTap(drag.x, drag.y)) snapBack(); }
     else if (!aborted && drag && drag.moved && (Math.abs(drag.vx) > .02 || Math.abs(drag.vy) > .02)) startMomentum(drag.vx, drag.vy);
     else snapBack();
@@ -245,7 +245,7 @@ function glZoomOpen(opts) {
     try { stage.setPointerCapture(e.pointerId); } catch (err) {}
     // Pick: one finger moves the reticle (relative motion, offset from the finger); a mouse drags it directly
     if (pts.size === 1) {
-      drag = { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, moved: false, lastT: now, vx: 0, vy: 0, ret: active === "pick" };
+      drag = { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, moved: false, lastT: now, t0: now, vx: 0, vy: 0, ret: active === "pick" };
       if (drag.ret && e.pointerType === "mouse") pkSetFromPoint(e.clientX, e.clientY);
     }
     else if (pts.size === 2) {
@@ -265,7 +265,7 @@ function glZoomOpen(opts) {
       return;
     }
     if (drag && pts.size === 1) {
-      if (!drag.moved && Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 6) return;
+      if (!drag.moved && Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 8) return;
       drag.moved = true;
       if (drag.ret) {
         if (e.pointerType === "mouse") pkSetFromPoint(e.clientX, e.clientY);
@@ -398,7 +398,7 @@ function glZoomOpen(opts) {
   const pkLayoutPrev = () => {
     if (!pkPrev || pkPrev.hidden || !pkRet) return;
     const sr = stage.getBoundingClientRect(), q = pkScreen(pkRet), x = q.x - sr.left, y = q.y - sr.top;
-    const pv = pkPrev.offsetWidth || 120, ph = pkPrev.offsetHeight || pv + 40, pad = 10, d = (pkRingEl().offsetWidth || 44) / 2 + 4;
+    const pv = pkPrev.offsetWidth || 120, ph = pkPrev.offsetHeight || pv + 40, pad = 10, d = Math.max((pkRingEl().offsetWidth || 44) / 2 + 4, 54);
     const hit = l => x > l - d && x < l + pv + d && y > pad - d && y < pad + ph + d;
     const useRight = hit(pad) && !hit(sr.width - pad - pv);
     pkPrev.style.left = (useRight ? sr.width - pad - pv : pad) + "px"; pkPrev.style.top = pad + "px";

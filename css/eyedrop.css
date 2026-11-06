@@ -9,27 +9,27 @@
   border:2px solid #fff;box-shadow:0 0 0 2px rgba(0,0,0,.78),inset 0 0 0 2px rgba(0,0,0,.78),0 2px 8px rgba(0,0,0,.35);box-sizing:border-box;pointer-events:none}
 .eyd-ret-dot{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:#fff;box-shadow:0 0 0 1.5px rgba(0,0,0,.8)}
 
-/* the preview: an opaque card, rounded 10px; a medium close-up in a square with the area outlined and a crosshair,
-   the live swatch and name under it. ~120px, 104-140px with the screen. */
+/* the magnifier (David, 2026-11-06: "my thumb covers what I'm picking"): an opaque card, ~160px on a 440 screen and
+   140 on a 375 one; a 3.5x close-up with the sampled square outlined and a crosshair, and under it the live color as a
+   large swatch with its name and hex, set on the card's own dark ground so they read on any color. */
 .eyd-prev[hidden]{display:none}
-.eyd-prev{--pv:clamp(104px,27vw,150px);position:absolute;left:10px;top:10px;width:var(--pv);padding:0;border-radius:10px;overflow:hidden;background:var(--surface-3,#1d1b18);
+.eyd-prev{--pv:clamp(140px,36.4vw,168px);position:absolute;left:10px;top:10px;width:var(--pv);padding:0;border-radius:12px;overflow:hidden;background:#161412;
   box-shadow:0 0 0 1.5px rgba(236,232,223,.85),0 0 0 3px rgba(0,0,0,.55),0 8px 22px rgba(0,0,0,.5)}
 .eyd-prev-sq{position:relative;width:var(--pv);height:var(--pv);background:#0b0a09}
 .eyd-prev-sq canvas{display:block;width:100%;height:100%}
 .eyd-prev-area{position:absolute;left:50%;top:50%;box-sizing:border-box;border:1.5px solid #fff;transform:translate(-50%,-50%);box-shadow:0 0 0 1.5px rgba(0,0,0,.7),inset 0 0 0 1.5px rgba(0,0,0,.7)}
 .eyd-prev-x{position:absolute;left:50%;top:50%;width:0;height:0}
 .eyd-prev-x::before,.eyd-prev-x::after{content:"";position:absolute;background:rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(0,0,0,.6)}
-.eyd-prev-x::before{left:-9px;top:-.5px;width:18px;height:1px}
-.eyd-prev-x::after{top:-9px;left:-.5px;height:18px;width:1px}
-.eyd-prev-info{display:flex;align-items:center;gap:7px;padding:9px 10px;min-height:44px}
-.eyd-prev-sw{flex:none;width:18px;height:18px;border-radius:5px;background:var(--c,#888);box-shadow:inset 0 0 0 1px rgba(236,232,223,.3)}
-.eyd-prev-name{min-width:0;font:400 16px/1.2 var(--serif);color:var(--ink,#ECE8DF);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.eyd-prev-x::before{left:-11px;top:-.5px;width:22px;height:1px}
+.eyd-prev-x::after{top:-11px;left:-.5px;height:22px;width:1px}
+.eyd-prev-info{display:flex;align-items:center;gap:10px;padding:8px 10px 9px;min-height:56px;box-sizing:border-box}
+.eyd-prev-sw{flex:none;width:40px;height:40px;border-radius:9px;background:var(--c,#888);box-shadow:inset 0 0 0 1.5px rgba(236,232,223,.45)}
+.eyd-prev-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.eyd-prev-name{min-width:0;font:400 16px/1.15 var(--serif);color:#ECE8DF;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.eyd-prev-hex{font:400 16px/1.1 var(--mono,ui-monospace,Menlo,monospace);font-style:normal;color:#C9C4B8;letter-spacing:.02em}
 
 /* the sample-size row, below the picture */
 .eyd-sizebar{margin:10px auto 0;max-width:420px;width:100%;padding:0 12px;box-sizing:border-box}
 .eyd-sizes.seg{flex-wrap:nowrap;width:100%;gap:2px}
 .eyd-sizes.seg button{flex:1 1 0;min-width:0;min-height:44px;padding:0 4px;font:400 16px/1 var(--sans);font-variant-numeric:tabular-nums}
 .eyd-sizes-cap{margin:6px 0 0;font:italic 400 15px/1.3 var(--serif);color:var(--soft);text-align:center}
-
-/* narrow screens (David, 2026-10-28: the close-up took too much of the picture): a smaller square, and no name row, the readout below the picture already says the name */
-@media (max-width:520px){.eyd-prev-info{display:none}}

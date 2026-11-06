@@ -671,6 +671,17 @@ function palPhotoView(p) {
     return { c, cx, w: c.width, h: c.height };
   };
   const readAt = (fx, fy) => { dsrc = dsrc || makeSrc(); if (!dsrc) return null; const r = eydSampleAt(dsrc, fx, fy, getSampleSize()); return r && r.hex; };
+  // the magnifier (js/eyedrop.js eydLoupe; David, 2026-11-06: "my thumb covers what I'm picking"): while a circle is held it
+  // sits in the free top corner of the photo with the live swatch, name and hex, and lets go a moment after the finger lifts
+  const loupe = typeof eydLoupe === "function" ? eydLoupe() : null; let loupeT = 0;
+  if (loupe) cleanup.push(() => { clearTimeout(loupeT); loupe.destroy(); });
+  const loupeAt = d => {
+    if (!loupe || !d || !dsrc) return; clearTimeout(loupeT);
+    const b = picBox(), vw = innerWidth || document.documentElement.clientWidth, vh = innerHeight || document.documentElement.clientHeight;
+    const vis = { l: Math.max(b.left, 0), t: Math.max(b.top, 0), r: Math.min(b.left + b.w, vw), b: Math.min(b.top + b.h, vh) };
+    loupe.show(dsrc, d.fx, d.fy, eydN(dsrc, getSampleSize()), b.w / dsrc.w, d.hex, vis, b.left + d.fx * b.w, b.top + d.fy * b.h);
+  };
+  const loupeLetGo = () => { if (!loupe) return; clearTimeout(loupeT); loupeT = setTimeout(() => loupe.hide(), 1600); };
   const dotName = hex => typeof nameOfTapped === "function" ? nameOfTapped(hex) : nameOf(hex).text;
   // where the picture itself sits inside the photo frame: a tall photo in a wide frame is letterboxed (object-fit:
   // contain), so circles are placed against the picture, never the frame (David's screenshot: circles off the image)
@@ -713,14 +724,17 @@ function palPhotoView(p) {
     const m = mapIn(e.clientX, e.clientY);
     if (frompic != null) { const hex = readAt(m.fx, m.fy); if (hex) addPick(hex); return; }
     const hit = e.target.closest("[data-pvdot]");
+    // a finger on bare picture never drops a circle under itself: a quick tap does (on lift), a drag slides the active one
+    if (!hit && e.pointerType !== "mouse") { pend = { x0: e.clientX, y0: e.clientY, t0: performance.now(), id: e.pointerId }; try { span.setPointerCapture(e.pointerId); } catch (err) {} return; }
     if (hit) activeDot = +hit.dataset.pvdot;
     const i = hit ? +hit.dataset.pvdot : addDot(m.fx, m.fy);
     if (i < 0) return;
     buzz(hit ? 5 : 9);
     activeDot = i; ddrag = { i, ox: dots[i].fx - m.fx, oy: dots[i].fy - m.fy, name: dotName(dots[i].hex) };
     try { span.setPointerCapture(e.pointerId); } catch (err) {}
-    drawDots(); drawYours();
+    drawDots(); drawYours(); loupeAt(dots[i]);
   });
+  let pend = null;
   // a drag moves just that circle and its name, once per animation frame, at the finger's latest position: no
   // re-render under the finger (that was the jitter), and the page never scrolls while a circle is held
   let dragPt = null, dragRaf = 0;
@@ -734,8 +748,16 @@ function palPhotoView(p) {
     const nm = dotName(d.hex);
     if (tag) { tag.style.left = (b.x + clamp(d.fx, .15, .85) * b.w).toFixed(1) + "px"; tag.style.top = (b.y + d.fy * b.h).toFixed(1) + "px"; tag.classList.toggle("below", d.fy < .14); if (tag.textContent !== nm) tag.textContent = nm; }
     if (nm !== ddrag.name) { ddrag.name = nm; buzz(3); }
+    loupeAt(d);
   };
   span.addEventListener("pointermove", e => {
+    if (pend && e.pointerId === pend.id && Math.hypot(e.clientX - pend.x0, e.clientY - pend.y0) >= 8) {
+      pend = null;
+      const i = activeDot >= 0 && dots[activeDot] ? activeDot : addDot(.5, .5); if (i < 0) return;
+      activeDot = i; const m = mapIn(e.clientX, e.clientY);
+      ddrag = { i, ox: dots[i].fx - m.fx, oy: dots[i].fy - m.fy, name: dotName(dots[i].hex) };
+      buzz(5); drawDots(); drawYours(); loupeAt(dots[i]);
+    }
     if (!ddrag) return;
     e.preventDefault();
     dragPt = { x: e.clientX, y: e.clientY };
@@ -743,7 +765,12 @@ function palPhotoView(p) {
   });
   span.addEventListener("touchmove", e => { if (ddrag) e.preventDefault(); }, { passive: false });   // iOS: no page scroll under a held circle
   const dotUp = e => {
-    if (!ddrag || !e.isPrimary) return; if (dragRaf) { cancelAnimationFrame(dragRaf); dragFrame(); } ddrag = null; dragPt = null; drawYours();
+    if (pend && e.pointerId === pend.id) {
+      const quick = e.type === "pointerup" && performance.now() - pend.t0 < 200; pend = null;
+      if (quick) { const m = mapIn(e.clientX, e.clientY), i = addDot(m.fx, m.fy); if (i >= 0) { buzz(9); activeDot = i; drawDots(); drawYours(); loupeAt(dots[i]); loupeLetGo(); } }
+      return;
+    }
+    if (!ddrag || !e.isPrimary) return; loupeLetGo(); if (dragRaf) { cancelAnimationFrame(dragRaf); dragFrame(); } ddrag = null; dragPt = null; drawYours();
   };
   span.addEventListener("pointerup", dotUp); span.addEventListener("pointercancel", dotUp);
   span.addEventListener("contextmenu", e => e.preventDefault());
