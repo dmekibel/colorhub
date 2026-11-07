@@ -274,6 +274,7 @@ def existing_sargents():
 
 
 def drop_duplicates(new, old):
+    old = [o for o in old if o.get("L") is not None and o.get("C") is not None]   # unmeasurable rows carry no L/C (2026-11-07 crash)
     """corpus.py's own tests: same image URL; same dhash with similar L/C and a similar middle of the picture."""
     import urllib.parse as _up
     norm = lambda u: _up.unquote(str(u)).split("?")[0].rsplit("/", 1)[-1].replace(" ", "_").lower()   # one file, however it was encoded
@@ -396,6 +397,7 @@ def main():
         print(f"hd-images: {len(HD)} museum paintings get a sharper Commons image ({len(cur)} in all)")
     # Lightness story, before the analysis proper
     def mean_L(rs):
+        rs = [r for r in rs if r.get("L") is not None]
         return sum(r["L"] for r in rs) / max(len(rs), 1)
     print(f"mean L*: existing Sargents {mean_L(old):.1f}, new {mean_L(out):.1f}")
 
