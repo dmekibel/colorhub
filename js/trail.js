@@ -48,6 +48,7 @@ const tlPath = hash => String(hash || "").replace(/^#\//, "");
 function tlKind(hash) {
   const p = tlPath(hash).split("?")[0].split("/");
   if (p[2] === "more" || p[1] === "more") return "More like this";
+  if (p[0] === "gallery" && /^\d+$/.test(p[1] || "") && typeof glKindWord === "function" && typeof GAL !== "undefined" && GAL) return glKindWord(+p[1]);   // "Illustration", "Print": the row's own kind (kinds.json)
   return TL_KIND[p[0]] || "Page";
 }
 // a picture of the screen for its row: the hero's color, its first photograph, or a few of its colors
@@ -145,7 +146,7 @@ function tlNote(el, tab, backNav) {
 // ---------- the one top bar (PLAN §3.5, §9): "‹ <previous page>" · ⋯ · the place pill ----------
 // the route's first path segment, for moreRegister/moreOpen keys (places.js) -- "color", "painting", "gallery"...
 function tlRouteKind() { return (ROUTE_NOW || "").replace(/^#\//, "").split(/[/?]/)[0] || "page"; }
-const tlRoomLabel = room => room === "feed" ? (typeof TF_FROM_BOARD !== "undefined" && TF_FROM_BOARD ? "Boards" : "Home") : (ROOMS_LIST.find(r => r[0] === room) || [, NAV.learn])[1];   // the feed is Explore; from a board, ‹ says Boards (David, 2026-10-26)
+const tlRoomLabel = room => room === "feed" ? (typeof TF_FROM_BOARD !== "undefined" && TF_FROM_BOARD ? "Boards" : typeof tfRoomObj === "function" && tfRoomObj() ? tfRoomObj().chip : "Home") : (ROOMS_LIST.find(r => r[0] === room) || [, NAV.learn])[1];   // the feed is Explore; from a board, ‹ says Boards (David, 2026-10-26)
 // where ‹ ultimately lands when the trail runs out, named -- the same destination the place pill closes to
 function tlOriginName() { const room = xFallbackTab(); return room ? tlRoomLabel(room) : NAV_MAP; }
 const TL_TRUNC = s => { s = String(s || "").replace(/\s+/g, " ").trim(); return s.length > 14 ? s.slice(0, 13).trimEnd() + "…" : s; };

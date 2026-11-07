@@ -1,6 +1,6 @@
 "use strict";
 // Addresses. Every meaningful screen has a hash route, so it can be shared, bookmarked and reloaded:
-//   #/illustration (the Illustration room)  #/today  #/train  #/studio  #/museum  #/museum/<art|ideas|world|saved>  #/home (the map)
+//   #/illustration #/prints #/room/<kind> (the rooms)  #/today  #/train  #/studio  #/museum  #/museum/<art|ideas|world|saved>  #/home (the map)
 //   (the Museum was called Explore until 2026-10-08: every #/explore… address still opens it)
 //   (older #/explore/paintings and #/explore/poems open Art; #/explore/colors and #/explore/spectrum open
 //   the pager itself — js/explore.js dropped the "Colors" lens and merged Paintings + Poems into Art)
@@ -273,7 +273,8 @@ function openRoute(hash, initial = false) {
   // Boards is the Museum's front door on a wide screen (David, 2026-10-26): the same screen as Explore, opened on its Boards kind; the address keeps saying so
   if (kind === "boards" && typeof todayFeed === "function") { base(); XSTACK = []; TF_KIND = "board"; TF_FROM_BOARD = false; todayFeed(); try { history.replaceState(history.state, "", "#/boards"); document.title = "Museum \u00b7 Chromatlas"; if (typeof deskMarkActive === "function") deskMarkActive(); } catch (e) {} return true; }
   // the Illustration room (David, 2026-11-07): the home feed opened on its Illustration kind (js/todayfeed.js); without data/gallery/kinds.json it falls back to Paintings
-  if (kind === "illustration" && typeof todayFeed === "function") { base(); XSTACK = []; TF_KIND = "ill"; TF_FROM_BOARD = false; todayFeed(); try { history.replaceState(history.state, "", "#/illustration"); document.title = "Illustration \u00b7 Chromatlas"; if (typeof deskMarkActive === "function") deskMarkActive(); } catch (e) {} return true; }
+  // (the address names the kind: #/illustration, #/prints, or #/room/<kind> for any other; tfAddress() settles the final address and title once the rooms are known)
+  if ((kind === "illustration" || kind === "prints" || (kind === "room" && id)) && typeof todayFeed === "function") { base(); XSTACK = []; TF_KIND = "k:" + (kind === "prints" ? "print" : kind === "room" ? id : kind); TF_FROM_BOARD = false; todayFeed(); try { history.replaceState(history.state, "", "#/" + kind + (kind === "room" ? "/" + id : "")); document.title = "Chromatlas"; if (typeof deskMarkActive === "function") deskMarkActive(); } catch (e) {} return true; }
   // the floor (the honeycomb, js/home.js): not a tab, so it's its own address
   if (kind === "home" && typeof hmHome === "function") { base(); XSTACK = []; hmHome(); return true; }
   if (kind === "map" && id && more != null && typeof hmMapRoute === "function") { base(); XSTACK = []; hmMapRoute(id, more); return true; }   // js/home.js: #/map/gallery/<i>, #/map/painting/<slug>

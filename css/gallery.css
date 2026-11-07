@@ -756,3 +756,17 @@ html:not(.desk) .gl-hero .gl-closer{display:none}
 .gl-gorow small{font:400 14px/1.3 var(--sans);color:var(--soft)}
 .gl-gorow svg{flex:none;width:18px;height:18px;color:var(--soft)}
 .gl-gorow:active{background:var(--surface-2)}
+
+/* the facts block (David, 2026-11-07): museum, medium, size to scale, genre, Wikidata. Under the palette in the Overview (the strip stays right under the chip row); body-size text, nothing is shown that is not known */
+.gl-facts{margin:26px 0 8px;padding:20px 0 0;border-top:1px solid var(--rule)}
+.glf-where{font:500 16px/1.4 var(--sans);color:var(--ink);margin:0}
+.glf-city{font-weight:400;color:var(--soft)}
+.glf-what{font:400 16px/1.45 var(--sans);color:var(--soft);margin:2px 0 0}
+.glf-fig{margin:16px 0 0;color:var(--soft)}
+.glf-svg{display:block;max-width:100%;overflow:visible}
+.glf-fig figcaption{font:400 16px/1.4 var(--sans);color:var(--soft);margin-top:8px}
+.glf-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:16px}
+.glf-chip{font:400 16px/1 var(--sans);color:var(--ink);background:transparent;border:0;box-shadow:inset 0 0 0 1px var(--rule-strong);border-radius:var(--r-pill);padding:0 14px;min-height:40px;display:inline-flex;align-items:center;cursor:pointer;transition:background var(--dur-0)}
+.glf-chip:active{background:var(--surface-3)}
+.glf-chip.plain{box-shadow:inset 0 0 0 1px var(--rule);color:var(--soft);cursor:default}
+.glf-wd{font:400 16px/1 var(--sans);color:var(--soft);text-decoration:underline;text-underline-offset:3px;min-height:40px;display:inline-flex;align-items:center;margin-left:4px}

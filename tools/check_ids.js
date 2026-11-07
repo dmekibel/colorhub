@@ -68,7 +68,11 @@ function checkIds() {
   }
   if (fs.existsSync(path.join(ROOT, "data/gallery/kinds.json"))) {   // the Illustration room's list (tools/kinds.py): positions in THIS ids.txt (a stale one would move the wrong paintings to the other room)
     const kj = rj("data/gallery/kinds.json"), h = require("crypto").createHash("sha1").update(fs.readFileSync(path.join(ROOT, "data/gallery/ids.txt"))).digest("hex");
-    if (kj.n !== gIds.length || !kj.ids || !h.startsWith(String(kj.ids))) err("data/gallery/kinds.json was built for a different ids.txt (it would put the wrong paintings in the Illustration room): python3 tools/kinds.py");
+    if (kj.n !== gIds.length || !kj.ids || !h.startsWith(String(kj.ids))) err("data/gallery/kinds.json was built for a different ids.txt (it would put the wrong paintings in the wrong room): python3 tools/kinds.py");
+  }
+  if (fs.existsSync(path.join(ROOT, "data/gallery/facts/index.json"))) {   // the painting page's facts (tools/facts_build.py): shards are keyed by gallery position, so a stale set would show another painting's museum and size
+    const fj = rj("data/gallery/facts/index.json"), h = require("crypto").createHash("sha1").update(fs.readFileSync(path.join(ROOT, "data/gallery/ids.txt"))).digest("hex");
+    if (fj.n !== gIds.length || !fj.ids || !h.startsWith(String(fj.ids))) err("data/gallery/facts was built for a different ids.txt (the painting page would show another painting's museum and size): python3 tools/facts_build.py");
   }
   if (fs.existsSync(path.join(ROOT, "data/gallery/aesthetic.json"))) {   // the home's picture-appeal reading (tools/audit_beauty.py): a stale one is ignored by the app, so only a warning
     const aj = rj("data/gallery/aesthetic.json"), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);

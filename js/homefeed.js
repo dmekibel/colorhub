@@ -28,20 +28,23 @@ const hfFollows = () => [
   ...Object.entries(hfStore("favPainter")).map(([n, v]) => ({ kind: "p", name: n, at: (v && v.at) || 0 })),
   ...Object.entries(hfStore("favMove")).map(([n, v]) => ({ kind: "m", name: n, at: (v && v.at) || 0 })),
 ].sort((a, b) => b.at - a.at);
-// The two rooms (David, 2026-11-07): the painting surfaces never show an illustration (data/gallery/kinds.json, GAL.ill), and the Illustration room (TF_KIND "ill") shows
-// nothing else. Every list in this file asks hfHid, so the room is decided in this one place.
-const hfIll = () => TF_KIND === "ill";
-const hfHid = i => !!(GAL && ((GAL.hid && GAL.hid[i]) || (TF_KIND === "ill" ? !(GAL.ill && GAL.ill[i]) : GAL.ill && GAL.ill[i])));
+// The rooms (David, 2026-11-07): the painting surfaces never show a row that is not a painting (data/gallery/kinds.json, GAL.kd), and a room (TF_KIND "k:<kind>": Illustration,
+// Prints, ...) shows nothing else than its own kind. Every list in this file asks hfHid, so the room is decided in this one place.
+const hfRoom = () => (TF_KIND.startsWith("k:") ? TF_KIND.slice(2) : "");   // the open room's kind key, or "" for Paintings
+let HF_RN_K = "", HF_RN_G = null, HF_RN = 0;
+const hfRoomN = () => { if (HF_RN_K !== TF_KIND || HF_RN_G !== GAL) { HF_RN_K = TF_KIND; HF_RN_G = GAL; const k = hfRoom(); HF_RN = k && GAL && GAL.rooms ? GAL.rooms.findIndex(r => r.key === k) + 1 : 0; } return HF_RN; };   // 1 + the room's index in GAL.rooms (0 = Paintings)
+const hfHid = i => !!(GAL && ((GAL.hid && GAL.hid[i]) || (GAL.kd && GAL.kd[i] !== hfRoomN())));
+const hfHidDead = i => !!(GAL && GAL.hid && GAL.hid[i]);   // hidden for good (a gallery-wall photo): the only test Favorites applies, so a liked print or illustration is still there
 
 // ---------- the pools ----------
 let HF_F = null, HF_COUNTS = null;
 const hfFacets = () => (HF_F ? Promise.resolve(HF_F) : xbLoad().then(F => (HF_F = F)));
 // how many visible paintings each painter and movement has (once)
 function hfCounts(F) {
-  if (HF_COUNTS && HF_COUNTS.F === F && HF_COUNTS.ill === hfIll()) return HF_COUNTS;
+  if (HF_COUNTS && HF_COUNTS.F === F && HF_COUNTS.room === hfRoom()) return HF_COUNTS;
   const art = new Int32Array(F.meta.artists.length + 2), mv = new Int32Array(F.meta.movements.length + 2);
   for (let i = 0; i < F.N; i++) { if (hfHid(i)) continue; art[F.artist[i]]++; mv[F.mv[i]]++; }
-  return (HF_COUNTS = { F, art, mv, ill: hfIll() });
+  return (HF_COUNTS = { F, art, mv, room: hfRoom() });
 }
 // ---------- beauty (David, 2026-10-26: "the app can make honest aesthetic judgments; some work is simply prettier; the home should give people a
 // beautiful palette for their eyes") ----------
@@ -100,11 +103,12 @@ function hfBeautyReady() {
 }
 const hfBeauty = i => (HF_B ? HF_B[i] : GAL.C[i] / 60);
 // the beauty a painting needs to be on the HOME without being asked for: the top slice (`q` of the archive sits below it)
-// (the Illustration room is a small set whose beauty reading was ranked against paintings: its bar is the same slice of ITS OWN rows, and a looser one so the room is never thin)
-let HF_CUT = null, HF_CUT_ILL = null;
+// (a room such as Illustration is a small set whose beauty reading was ranked against paintings: its bar is the same slice of ITS OWN rows, and a looser one so the room is never thin)
+let HF_CUT = null; const HF_CUT_ROOM = {};
 const hfCut = q => {
   if (!HF_B) return 0;
-  if (hfIll()) { if (!HF_CUT_ILL) HF_CUT_ILL = Float32Array.from((GAL.illIdx || []).map(i => HF_B[i])).sort(); const a = HF_CUT_ILL; return a.length ? a[Math.min(a.length - 1, Math.floor(a.length * q * .6))] : 0; }
+  const room = hfRoomN() ? GAL.rooms[hfRoomN() - 1] : null;
+  if (room) { const ck = room.key + "|" + room.idx.length; if (!HF_CUT_ROOM[ck]) HF_CUT_ROOM[ck] = Float32Array.from(room.idx.map(i => HF_B[i])).sort(); const a = HF_CUT_ROOM[ck]; return a.length ? a[Math.min(a.length - 1, Math.floor(a.length * q * .6))] : 0; }
   if (!HF_CUT) HF_CUT = Float32Array.from(HF_B).sort(); return HF_CUT[Math.min(HF_CUT.length - 1, Math.floor(HF_CUT.length * q))];
 };
 // the weight of a painting in a shuffle: beauty cubed (the prettiest come first but the order is still a shuffle), a body-of-work boost for a
@@ -161,7 +165,7 @@ async function hfPresets(k) {
 // Rebuild it with the console script in tools/home_seed.js.
 let HF_SEEDP = null;
 const hfSeedLoad = () => HF_SEEDP || (HF_SEEDP = Promise.all([fetch("data/home-seed.json").then(r => (r.ok ? r.json() : null)), glKindsRaw()]).then(([o, k]) => {
-  if (o && o.items && k && Array.isArray(k.illustration) && k.illustration.length) { const ill = new Set(k.illustration); o = { ...o, items: o.items.filter(x => !ill.has(x.g)) }; }   // an illustration never opens the painting home
+  if (o && o.items && k) { const out = new Set(); Object.keys(k).forEach(key => { if (key !== "n" && key !== "ids" && Array.isArray(k[key])) k[key].forEach(i => out.add(i)); }); if (out.size) o = { ...o, items: o.items.filter(x => !out.has(x.g)) }; }   // a row of another kind never opens the painting home
   return o && o.items && o.items.length > 40 ? o : null;
 }).catch(() => null));
 function hfSeedRiver(seed, rnd, count) {
@@ -278,7 +282,7 @@ const HF_CPS = [   // composition: how abstract (tools/audit_scene.py), how clos
   ["panorama", "Panoramas", i => GAL.ar[i] < .55],
 ];
 let HF_KEPT_LABEL = "Kept"; const HF_CUSTOM_LABELS = new Map();   // lens id -> its name (filled by hfBoards and hfCustomLabel)
-const hfKeptIds = () => (typeof fvArtStore === "function" ? Object.values(fvArtStore()) : []).filter(x => x && x.i >= 0 && !hfHid(x.i)).sort((a, b) => String(b.at || "").localeCompare(String(a.at || ""))).map(x => x.i);
+const hfKeptIds = () => (typeof fvArtStore === "function" ? Object.values(fvArtStore()) : []).filter(x => x && x.i >= 0 && !hfHidDead(x.i)).sort((a, b) => String(b.at || "").localeCompare(String(a.at || ""))).map(x => x.i);
 const hfKeptEra = i => (GAL.year[i] === GL_UNDATED ? -1 : Math.floor(GAL.year[i] / 50) * 50);
 const HF_HUES = [["Reds and pinks", 345, 15], ["Oranges", 15, 70], ["Golds and yellows", 70, 110], ["Greens", 110, 170], ["Teals", 170, 240], ["Blues", 240, 290], ["Purples", 290, 345]];
 const hfHueFam = i => { if (GAL.C[i] < 10) return "Greys and neutrals"; const h = hfHueOfLab(i); for (const [n, a, b] of HF_HUES) if (a < b ? h >= a && h < b : h >= a || h < b) return n; return "Greys and neutrals"; };
@@ -426,15 +430,15 @@ function hfChips(pre, activeId) {
   if (activeId && !seen.has(activeId)) out.splice(1, 0, { id: activeId, label: hfLabelOf(activeId, pre) });
   return out;
 }
-// The Illustration room's row two (David, 2026-11-07): For you, then one lens per illustrator (the best known first, then the biggest body of work), then decades.
-// Lens ids are the ordinary ones ("p:<illustrator>", "e:<from>-<to>"): inside the room hfHid leaves only illustrations, so the same list-makers do the work.
+// A room's row two (David, 2026-11-07): For you, then one lens per artist (the best known first, then the biggest body of work), then decades.
+// Lens ids are the ordinary ones ("p:<artist>", "e:<from>-<to>"): inside the room hfHid leaves only that kind, so the same list-makers do the work.
 const HF_ILL_FAME = /leyendecker|rackham|dulac|nielsen|pyle|wyeth|mucha|bilibin|jessie willcox|gibson|coles phillips|parrish|rockwell|beardsley|crane|greenaway|tenniel|detmold|artzybasheff/i;
-async function hfIllChips() {
-  if (!GAL.ill) return [];
+async function hfRoomChips(room) {
+  if (!room) return [];
   const F = await hfFacets(), n = new Int32Array(F.meta.artists.length + 2), dec = new Map();
-  GAL.illIdx.forEach(i => { if (GAL.hid && GAL.hid[i]) return; n[F.artist[i]]++; const y = GAL.year[i]; if (y !== GL_UNDATED && y >= 1840 && y < 1960) { const d = Math.floor(y / 10) * 10; dec.set(d, (dec.get(d) || 0) + 1); } });
-  const min = Math.max(3, Math.min(10, Math.round(GAL.illIdx.length / 400))), ars = [];
-  F.meta.artists.forEach((a, j) => { if (n[j + 1] >= min) ars.push({ id: "p:" + a[0], label: fdShortName(a[0]), n: n[j + 1], fame: HF_ILL_FAME.test(a[0]) ? 1 : 0 }); });
+  room.idx.forEach(i => { if (GAL.hid && GAL.hid[i]) return; n[F.artist[i]]++; const y = GAL.year[i]; if (y !== GL_UNDATED && y >= 1600 && y < 1960) { const d = Math.floor(y / 10) * 10; dec.set(d, (dec.get(d) || 0) + 1); } });
+  const min = Math.max(3, Math.min(10, Math.round(room.idx.length / 400))), ars = [];
+  F.meta.artists.forEach((a, j) => { if (n[j + 1] >= min) ars.push({ id: "p:" + a[0], label: fdShortName(a[0]), n: n[j + 1], fame: room.key === "illustration" && HF_ILL_FAME.test(a[0]) ? 1 : 0 }); });
   ars.sort((x, y) => y.fame - x.fame || y.n - x.n);
   const out = [{ id: "foryou", label: "For you" }].concat(ars.slice(0, 30).map(x => ({ id: x.id, label: x.label })));
   [...dec.entries()].filter(([, c]) => c >= min * 2).sort((x, y) => x[0] - y[0]).forEach(([d]) => { const id = "e:" + d + "-" + (d + 10); out.push({ id, label: d + "s" }); });
@@ -657,7 +661,7 @@ async function hfForYou(k, salt) {
   // the facets give painter spacing and a better beauty weight; give them 1.5 s, never more
   const F = await hfBudget(hfFacets().then(f => { hfCounts(f); return f; }).catch(() => null), 1500);
   let seen = hfSeen();
-  if (hfIll() && GAL.illIdx && GAL.illIdx.filter(i => !seen.has(i)).length < 120) seen = new Set();   // the Illustration room is a smaller set: once most of it has been seen, it starts over rather than run dry
+  { const rm = hfRoomN() ? GAL.rooms[hfRoomN() - 1] : null; if (rm && rm.idx.filter(i => !seen.has(i)).length < 120) seen = new Set(); }   // a room is a smaller set: once most of it has been seen, it starts over rather than run dry
   const skip = new Set(seen), rnd = hfSeedOf(k, "fy" + salt);
   const kept = Object.values(typeof fvArtStore === "function" ? fvArtStore() : {}).filter(x => x && x.i >= 0).sort((a, b) => (b.at || 0) - (a.at || 0));
   kept.forEach(x => skip.add(x.i));

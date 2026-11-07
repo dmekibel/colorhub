@@ -15,7 +15,7 @@
 // Back returns to the same screen: todayFeed() re-renders what was shown (TF.shown) and core.js restores the scroll.
 // Everything here is prefixed tf / TF_.
 
-const TF_TYPES = [["paint", "Paintings"], ["ill", "Illustration"], ["board", "Boards"], ["color", "Colors"], ["pal", "Palettes"], ["art", "Stories"]];   // row one of the home (David, 2026-10-26): Paintings is the start and holds nothing else
+const TF_TYPES = [["paint", "Paintings"], ["board", "Boards"], ["color", "Colors"], ["pal", "Palettes"], ["art", "Stories"]];   // row one of the home (David, 2026-10-26): Paintings is the start and holds nothing else
 const TF_BATCH = 24, TF_SHARDS = 48;
 // articles still being written (status pilot/draft in data/articles): never in the feed
 const TF_SKIP = new Set(["b-dazzled-blue", "carolina-blue", "columbia-blue", "cyber-grape", "dark-slate-grey", "deep-rose-red", "delft-blue", "dresden-brown", "dull-indian-purple", "english-violet", "helvetia-blue", "india-spice", "indian-pink", "indigo", "irish-green", "isabelline", "japanese-blue", "link-map", "madder", "mauve", "pale-green-blue-grey", "pale-greyish-vinaceous", "pale-gull-grey", "pale-hortense-violet", "pale-oak", "pale-purple-drab", "pale-purplish-vinaceous", "pale-sea-grey", "pale-turtle-green", "pale-violet-plumbeous", "pale-wistaria-blue", "papyrus-white", "parula-blue", "pastel-parchment", "patina-green", "pauncy-green", "pea-soup-green", "peach-blush", "peachbeige", "pearl-beige", "pearl-blackberry", "pearl-gentian", "pearl-green", "pearly-purple", "perilla-purple", "phlox", "phlox-pink", "pig-pink", "pigeon-blue", "pinard-yellow", "plumbago-grey", "plumbago-slate", "pois-green", "pomegranate-purple", "poppy-purple", "porcelain-green", "prussian-blue", "purple-pizzazz", "red-plum", "reed-green", "reed-yellow", "robin-s-egg", "robin-s-egg-blue", "rose-castor", "rose-dawn", "rose-dust", "spanish-bistre", "steel-pink"]);
@@ -24,18 +24,26 @@ let TF_LITE = null;     // the articles index, once
 
 const tfInk = hex => lab(hex)[0] > 60 ? "#141311" : "#F6F2EA";
 let TF_KIND = "paint", TF_LENS = "foryou", TF_EXTRA = [], TF_FROM_BOARD = false, TF_SIBS = [], TF_BTAB = "all", TF_FTAB = "paint", TF_FGRP = "";   // each launch opens on Paintings and For you; where you went afterwards is kept only for this visit (a Back returns to it)
-const tfFilter = () => (TF_TYPES.some(t => t[0] === TF_KIND) ? TF_KIND : "paint");
-// Paintings and the Illustration room (David, 2026-11-07) are the same river: one machine, two rooms. js/homefeed.js hfHid keeps each room's pictures out of the other.
-const tfPaintish = () => { const f = tfFilter(); return f === "paint" || f === "ill"; };
-const tfWord = n => (TF_KIND === "ill" ? (n === 1 ? "illustration" : "illustrations") : (n === 1 ? "painting" : "paintings"));
-let TF_LENS_BY = {}, TF_LENS_ROOM = "paint", TF_ILL_CHIPS = null;   // each room keeps its own lens; TF_LENS_ROOM = the room TF_LENS belongs to
-function tfSyncRoom() {   // crossing between Paintings and Illustration
-  if (!tfPaintish()) return; const room = TF_KIND === "ill" ? "ill" : "paint";
+const tfFilter = () => (TF_TYPES.some(t => t[0] === TF_KIND) || TF_KIND.startsWith("k:") ? TF_KIND : "paint");
+// Paintings and the rooms (David, 2026-11-07: Illustration, Prints, ... one per kind in data/gallery/kinds.json) are the same river: one machine, many rooms.
+// A room is TF_KIND "k:<kind>". js/homefeed.js hfHid keeps each room's pictures out of the others.
+const tfPaintish = () => { const f = tfFilter(); return f === "paint" || f.startsWith("k:"); };
+const tfRoomObj = () => (typeof GAL !== "undefined" && GAL && GAL.rooms && hfRoom() ? GAL.rooms.find(r => r.key === hfRoom()) || null : null);
+const tfWord = n => { const r = tfRoomObj(); return r ? (n === 1 ? r.one.toLowerCase() : r.many) : (n === 1 ? "painting" : "paintings"); };
+let TF_LENS_BY = {}, TF_LENS_ROOM = "paint"; const TF_ROOM_CHIPS = {};   // each room keeps its own lens; TF_LENS_ROOM = the room TF_LENS belongs to; TF_ROOM_CHIPS[kind] = that room's lens row
+function tfSyncRoom() {   // crossing between Paintings and a room
+  if (!tfPaintish()) return; const room = hfRoom() ? TF_KIND : "paint";
   if (room !== TF_LENS_ROOM) { TF_LENS_BY[TF_LENS_ROOM] = TF_LENS; TF_LENS = TF_LENS_BY[room] || "foryou"; TF_LENS_ROOM = room; }
 }
-// the Illustration room has its own address (#/illustration); leaving it puts the feed's back
+// every room has its own address (#/illustration, #/prints, #/room/<kind>); leaving it puts the feed's back
 function tfAddress() {
-  try { const want = TF_KIND === "ill" ? "#/illustration" : location.hash === "#/illustration" ? "#/feed" : ""; if (want && location.hash !== want) { history.replaceState(history.state, "", want); document.title = (want === "#/feed" ? "Home" : "Illustration") + " \u00b7 Chromatlas"; } } catch (e) {}
+  try {
+    const r = tfRoomObj(), isRoomHash = /^#\/(illustration|prints|room\/.+)$/.test(location.hash);
+    if (hfRoom() && !r) return;   // the rooms are not known yet: the address stays as it was opened
+    const want = r ? "#/" + r.addr : isRoomHash ? "#/feed" : "";
+    if (want && location.hash !== want) history.replaceState(history.state, "", want);
+    if (want) document.title = (r ? r.chip : "Home") + " \u00b7 Chromatlas";
+  } catch (e) {}
 }
 // plain text out of an article's lede (no markup)
 const tfPlain = s => String(s || "").replace(/\[\[(?:[^\]|]*\|)?([^\]]*)\]\]/g, "$1").replace(/\[\d+\]/g, "").replace(/[*`]/g, "").replace(/\s+/g, " ").trim();
@@ -218,7 +226,7 @@ function todayFeed() {
   const back = typeof BACK_RENDER !== "undefined" && BACK_RENDER, k = today();
   if (S.tab !== "feed") { S.tab = "feed"; save(); }   // the place you were last: every "go(S.tab)" Close or Back (the daily game's ✕) comes back here
   const el = show(`<i class="tf-sent" aria-hidden="true"></i>
-    <div class="tf-bars"><div class="tf-chips tf-kinds" role="radiogroup" aria-label="Show"><button type="button" class="tf-sbtn" data-tf-search aria-label="Search">${ICON.search}</button>${TF_TYPES.map(([id, label]) => `<button type="button" role="radio" class="tf-chip" data-tf-f="${id}" aria-checked="false"${id === "ill" ? " hidden" : ""}>${label}</button>`).join("")}</div><div class="tf-chips tf-lenses" role="radiogroup" aria-label="Lenses"></div></div>
+    <div class="tf-bars"><div class="tf-chips tf-kinds" role="radiogroup" aria-label="Show"><button type="button" class="tf-sbtn" data-tf-search aria-label="Search">${ICON.search}</button>${TF_TYPES.map(([id, label]) => `<button type="button" role="radio" class="tf-chip" data-tf-f="${id}" aria-checked="false">${label}</button>`).join("")}</div><div class="tf-chips tf-lenses" role="radiogroup" aria-label="Lenses"></div></div>
     <div class="tf-lens-head" data-tf-lh hidden></div>
     <div class="tf-feed${hfS().caps ? "" : " nocaps"}" data-tf-feed>${tfSkeleton(k)}</div>`, "tf-screen", "feed");
   const host = el.querySelector("[data-tf-feed]"), bars = el.querySelector(".tf-bars"), kindsRow = el.querySelector(".tf-kinds"), lensRow = el.querySelector(".tf-lenses"), lh = el.querySelector("[data-tf-lh]");
@@ -230,11 +238,11 @@ function todayFeed() {
   cleanup.push(() => { tune.remove(); stop.concat(stop.live || []).forEach(f => { try { f(); } catch (e) {} }); });
   const lensId = () => TF_LENS;
   const setKinds = () => kindsRow.querySelectorAll(".tf-chip").forEach(b => { const on = b.dataset.tfF === (TF_FROM_BOARD && tfPaintish() ? "board" : tfFilter()); b.classList.toggle("on", on); b.setAttribute("aria-checked", on); });
-  const tfChipList = () => { if (TF_KIND === "ill") return TF_ILL_CHIPS || [{ id: "foryou", label: "For you" }]; if (TF_FROM_BOARD && TF_SIBS.length) return TF_SIBS.some(c => c.id === lensId()) ? TF_SIBS : [{ id: lensId(), label: hfLabelOf(lensId(), pre) }].concat(TF_SIBS); const base = hfChips(pre, TF_EXTRA.some(c => c.id === lensId()) ? null : lensId()), seen = new Set(base.map(c => c.id)); return base.concat(TF_EXTRA.filter(c => !seen.has(c.id))); };
+  const tfChipList = () => { if (hfRoom()) return TF_ROOM_CHIPS[hfRoom()] || [{ id: "foryou", label: "For you" }]; if (TF_FROM_BOARD && TF_SIBS.length) return TF_SIBS.some(c => c.id === lensId()) ? TF_SIBS : [{ id: lensId(), label: hfLabelOf(lensId(), pre) }].concat(TF_SIBS); const base = hfChips(pre, TF_EXTRA.some(c => c.id === lensId()) ? null : lensId()), seen = new Set(base.map(c => c.id)); return base.concat(TF_EXTRA.filter(c => !seen.has(c.id))); };
   let extraBusy = false;
   // always more to the right: when the row's end is near, new movements, painters and colors are added
   const moreLenses = async () => {
-    if (extraBusy || TF_KIND === "ill" || (TF_FROM_BOARD && TF_SIBS.length)) return; extraBusy = true;
+    if (extraBusy || hfRoom() || (TF_FROM_BOARD && TF_SIBS.length)) return; extraBusy = true;
     try { const have = new Set(tfChipList().map(c => c.id)), add = await hfMoreLenses(have, 8); if (add.length) { TF_EXTRA.push(...add); const sx = lensRow.scrollLeft; drawLenses(); lensRow.scrollLeft = sx; } } catch (e) {}
     extraBusy = false;
   };
@@ -245,14 +253,20 @@ function todayFeed() {
     lensRow.innerHTML = tfChipList().map(c => `<button type="button" role="radio" class="tf-chip tf-lens${c.id === lensId() ? " on" : ""}" data-tf-l="${esc(c.id)}" aria-checked="${c.id === lensId()}">${esc(c.label)}</button>`).join("");
   };
   tfSyncRoom(); tfAddress(); setKinds(); drawLenses();
-  // the Illustration chip shows only when data/gallery/kinds.json names illustrations; the room opened by its address without them goes back to Paintings
-  const illChip = kindsRow.querySelector('[data-tf-f="ill"]');
+  // a room's chip (Illustration, Prints, ...) comes right after Paintings and exists only when data/gallery/kinds.json names rows of that kind;
+  // a room opened by its address without them goes back to Paintings
   loadGallery().then(() => {
     if (!host.isConnected) return;
-    const has = !!(GAL.ill && GAL.illIdx && GAL.illIdx.length); illChip.hidden = !has;
-    if (!has) { if (TF_KIND === "ill") { TF_KIND = "paint"; tfSyncRoom(); tfAddress(); setKinds(); drawLenses(); render(false); } return; }
-    if (TF_ILL_CHIPS) return;
-    return hfIllChips().then(c => { TF_ILL_CHIPS = c; if (host.isConnected && TF_KIND === "ill") drawLenses(); });
+    const rooms = (GAL && GAL.rooms) || [], first = kindsRow.querySelector('[data-tf-f="paint"]');
+    let after = first;
+    rooms.forEach(r => {
+      let b = kindsRow.querySelector(`[data-tf-f="k:${r.key}"]`);
+      if (!b) { b = document.createElement("button"); b.type = "button"; b.setAttribute("role", "radio"); b.className = "tf-chip"; b.dataset.tfF = "k:" + r.key; b.textContent = r.chip; b.setAttribute("aria-checked", "false"); after.after(b); }
+      after = b;
+    });
+    if (hfRoom() && !rooms.some(r => r.key === hfRoom())) { TF_KIND = "paint"; tfSyncRoom(); tfAddress(); setKinds(); drawLenses(); render(false); return; }
+    tfAddress(); setKinds();
+    return Promise.all(rooms.filter(r => !TF_ROOM_CHIPS[r.key]).map(r => hfRoomChips(r).then(c => { TF_ROOM_CHIPS[r.key] = c; if (host.isConnected && hfRoom() === r.key) drawLenses(); })));   // every room's lens row, so a tap on its chip finds it ready
   }).catch(() => {});
   const showBars = () => { bars.classList.remove("hid"); document.documentElement.classList.remove("tf-hid"); };
   // ---- Paintings: the lens list ----
@@ -268,7 +282,7 @@ function todayFeed() {
     lh.innerHTML = html; lh.hidden = !html; lh.dataset.kind = h.kind;
     if (h.kind === "l") glShard(Math.floor(h.seed / GAL.shard)).then(() => { const d = glDetailNow(h.seed); if (!d || !lh.isConnected) return; const t = lh.querySelector("[data-tf-seedt]"), n = lh.querySelector("[data-tf-seedn]"), sd = lh.querySelector("[data-tf-seed]"); if (t) t.textContent = "Like " + d.t; if (n) n.textContent = [d.a, glYear(h.seed)].filter(Boolean).join(" · "); if (sd && d.img) { const im = new Image(); im.alt = ""; im.onload = () => sd.appendChild(im); im.src = d.img; } if (pre && pre.li === h.seed && !pre.likeTitle) { pre.likeTitle = hfShortTitle(d.t); drawLenses(); } }).catch(() => {});
   };
-  const lensKeys = id => { const hk = k + "|" + HF_SESSION + "|" + hfRoll("foryou") + (TF_KIND === "ill" ? "|ill" : ""); return { hk, ck: [id, hk, hfRoll(id), hfS().pOrder, hfS().likeBy, JSON.stringify(hfBF(id))].join("|"), fy: id === "foryou" }; };
+  const lensKeys = id => { const hk = k + "|" + HF_SESSION + "|" + hfRoll("foryou") + (hfRoom() ? "|" + TF_KIND : ""); return { hk, ck: [id, hk, hfRoll(id), hfS().pOrder, hfS().likeBy, JSON.stringify(hfBF(id))].join("|"), fy: id === "foryou" }; };
   const mkItems = list => list.map(gi => ({ t: "paint", key: "g:" + gi, gi }));
   // this board's own filters (years, color family, order) applied to the list
   const fres = (id, res) => { if (!res || !res.ids || id === "foryou") return res; const ids = hfApplyBF(id, res.ids); if (ids === res.ids) return res; return { ...res, ids, total: ids.length, own: res.own != null ? ids.length : res.own, empty: "Nothing here matches these filters. Open Settings to change them." }; };
@@ -297,7 +311,7 @@ function todayFeed() {
     if (HF_CACHE.has(ck)) return go(HF_CACHE.get(ck).res);
     host.innerHTML = tfSkeleton(k);
     // the archive's 9 MB has not arrived: the first screen comes from the small seed set at once, and the real river carries on from its last painting when more is asked for
-    if (fy && TF_KIND !== "ill" && !(typeof GAL !== "undefined" && GAL && GAL.n)) hfSeedLoad().then(seed => {
+    if (fy && !hfRoom() && !(typeof GAL !== "undefined" && GAL && GAL.n)) hfSeedLoad().then(seed => {
       if (!seed || my !== tok || !host.isConnected || HF_CACHE.has(ck) || (typeof GAL !== "undefined" && GAL && GAL.n && HF_CACHE.has(ck))) return;
       const items = hfSeedRiver(seed, hfSeedOf(hk, "seed"), 60); if (!items.length) return;
       let seeded = false; const used = items.map(x => x.gi);
@@ -436,7 +450,7 @@ function todayFeed() {
   };
   kindsRow.querySelector("[data-tf-search]").addEventListener("click", () => { buzz(4); searchOpen(); });
   tfSearchBoardsLoad();
-  const render = restore => { const f = tfFilter(); if (f === "paint" || f === "ill") paintings(restore); else if (f === "board") boardsView(); else others(restore); };
+  const render = restore => { const f = tfFilter(); if (f === "paint" || f.startsWith("k:")) paintings(restore); else if (f === "board") boardsView(); else others(restore); };
   kindsRow.addEventListener("click", e => {
     const b = e.target.closest("[data-tf-f]"); if (!b || b.dataset.tfF === tfFilter()) return;
     buzz(4); TF_KIND = b.dataset.tfF; TF_FROM_BOARD = false; tfSyncRoom(); tfAddress(); setKinds(); drawLenses(); tfChipInView(kindsRow, b); showBars();
@@ -647,7 +661,7 @@ function tfHalf(sh) {
 }
 // the filters of the board you are on (its own years, color family and order)
 function tfBoardPart() {
-  const id = TF_LENS; if ((TF_KIND !== "paint" && TF_KIND !== "ill") || id === "foryou" || /^(l|c):/.test(id)) return "";
+  const id = TF_LENS; if ((TF_KIND !== "paint" && !hfRoom()) || id === "foryou" || /^(l|c):/.test(id)) return "";
   const ms = hfMapSpec(id), map = ms ? `<div class="fs-c"><button type="button" class="tf-mapbtn" data-pmap="${esc(ms)}" data-tfmap>${typeof GL_ICON_MAP !== "undefined" ? GL_ICON_MAP : ""}<span>See these on the map</span></button><small class="tf-fsmall">Every painting here, laid out by color. Back brings you to this board.</small></div>` : "";
   const f = hfBF(id), chips = (k, list, cur) => `<div class="tf-seg" role="radiogroup">${list.map(([v, l]) => `<button type="button" role="radio" aria-checked="${(cur || list[0][0]) === v}" data-tfbf="${k}:${esc(v)}">${esc(l)}</button>`).join("")}</div>`;
   return `${map}<div class="fs-c" data-tfbfbox><p>This board</p><small class="tf-fsmall">Time</small>${chips("era", HF_BF_ERAS, f.era)}<small class="tf-fsmall">Color</small>${chips("hue", [["", "Any"], ...HF_HUES.map(h => [h[0], h[0]]), ["Greys and neutrals", "Greys"]], f.hue)}<small class="tf-fsmall">Order</small>${chips("sort", HF_BF_ORDERS, f.sort)}</div>`;

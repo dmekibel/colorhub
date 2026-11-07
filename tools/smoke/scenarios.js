@@ -4758,7 +4758,7 @@ scenario("paintings", "trail: painting then a Look tile then a Color tile then B
   await t.waitFor(() => t.$(`.fd-tile[data-fk='${a.k}']`), 15000, "A's tile");
   await t.sleep(2000);
   t.expect(t.text(".fd-chip.on") === "Look", `Back to A lost its tab: "${t.text(".fd-chip.on")}"`);
-  t.expect(Math.abs(t.$(`.fd-tile[data-fk='${a.k}']`).getBoundingClientRect().top - a.y) <= 6, "Back to A: the tile moved");
+  t.expect(Math.abs(t.$(`.fd-tile[data-fk='${a.k}']`).getBoundingClientRect().top - a.y) <= 6, "Back to A: the tile moved " + Math.round(t.$(`.fd-tile[data-fk='${a.k}']`).getBoundingClientRect().top) + " vs " + Math.round(a.y) + " about hidden=" + (t.$("[data-gl-about]") && t.$("[data-gl-about]").hidden) + " facts=" + (t.$("[data-glfacts]") && t.$("[data-glfacts]").hidden) + " docH=" + t.d.documentElement.scrollHeight);
 });
 scenario("paintings", "Keep exploring: the feed never ends and a picture that fails to load is a designed state not a hole", async t => {
   await feedOpen(t, 12, "era");
@@ -8936,10 +8936,10 @@ scenario("home", "Illustration room is separate from Paintings: own lenses and a
   await t.open("#/feed", { settle: 600 });
   await t.waitFor(() => t.$$(".tf-col .tf-paint:not(.sk)").length >= 12, 20000, "the feed to show paintings");
   await t.waitFor(() => t.ev("typeof GAL !== \"undefined\" && !!GAL && GAL.n > 0"), 20000, "the gallery");
-  const ill = new Set(t.ev("GAL.illIdx || []"));
+  const ill = new Set(t.ev("(GAL.rooms || []).filter(r => r.key === \"illustration\").flatMap(r => r.idx)"));
   t.expect(ill.size > 20, "kinds.json named no illustrations (the room cannot be tested)");
   t.expect(t.$$(".tf-col .tf-paint[data-gi]").every(c => !ill.has(+c.dataset.gi)), "an illustration is on the Paintings home");
-  const chip = t.$("[data-tf-f=ill]");
+  const chip = t.$("[data-tf-f=\"k:illustration\"]");
   t.expect(chip && !chip.hidden && /Illustration/.test(chip.textContent), "the Illustration chip is not in the kind row");
   t.expect(t.$$(".tf-kinds .tf-chip")[1] === chip, "Illustration is not right after Paintings");
   await t.click(chip, { wait: 1200 });
@@ -8962,7 +8962,69 @@ scenario("home", "Illustration room is separate from Paintings: own lenses and a
   await t.waitFor(() => t.$$(".tf-col .tf-paint[data-gi]").length >= 8 && t.w.location.hash === "#/feed", 20000, "Paintings to come back at #/feed");
   t.expect(t.$$(".tf-col .tf-paint[data-gi]").every(c => !ill.has(+c.dataset.gi)), "an illustration came into Paintings after visiting the room");
   await t.open("#/illustration", { settle: 800 });
-  await t.waitFor(() => t.$("[data-tf-f=ill].on") && t.$$(".tf-col .tf-paint[data-gi]").length >= 8, 20000, "#/illustration to open the room");
+  await t.waitFor(() => t.$("[data-tf-f=\"k:illustration\"].on") && t.$$(".tf-col .tf-paint[data-gi]").length >= 8, 20000, "#/illustration to open the room");
+});
+// David, 2026-11-07: every kind in data/gallery/kinds.json is its own room after Paintings ("print" -> Prints), kept out of Paintings, with the same lenses and its own
+// address and eyebrow word; a kind with no rows has no chip; and a liked illustration or print stays in Favorites. The test splits the illustration list into a fake
+// "print" kind in memory (nothing is written), so it runs whether or not the real file has prints yet.
+scenario("home", "Prints room: a kind in kinds.json gets a chip after Paintings, its own lenses, address and eyebrow; an empty kind has no chip; likes stay in Favorites", async t => {
+  await t.open("#/feed", { settle: 600 });
+  await t.waitFor(() => t.ev("typeof GAL !== \"undefined\" && !!GAL && GAL.n > 0"), 20000, "the gallery");
+  const all = t.ev("(GAL.rooms || []).flatMap(r => r.idx)");
+  t.expect(all.length > 400, "kinds.json named too few non-painting rows to split into a fake Prints room");
+  const prints = new Set(all.slice(0, 150)), rest = all.slice(150);
+  t.ev("window.__kindsKeep = { kd: GAL.kd, rooms: GAL.rooms }");
+  const fake = (withPrint) => t.ev(`glKinds(GAL, { n: GAL.n, illustration: ${JSON.stringify(rest)}, print: ${withPrint ? JSON.stringify([...prints]) : "[]"} }); TF_KIND = "paint"; todayFeed();`);
+  try {
+    fake(false);
+    await t.waitFor(() => t.$('[data-tf-f="k:illustration"]'), 12000, "the Illustration chip");
+    t.expect(!t.$('[data-tf-f="k:print"]'), "a kind with no rows still has a chip");
+    fake(true);
+    await t.waitFor(() => t.$('[data-tf-f="k:print"]'), 12000, "the Prints chip");
+    const chips = t.$$(".tf-kinds .tf-chip").map(c => c.textContent.trim());
+    t.notes.push("kind row: " + chips.join(", "));
+    t.expect(/Prints/.test(t.$('[data-tf-f="k:print"]').textContent), "the chip does not say Prints");
+    t.expect(chips[1] === "Illustration" && chips[2] === "Prints", "rooms are not right after Paintings in order: " + chips.join(", "));
+    t.expect(t.$$(".tf-col .tf-paint[data-gi]").every(c => !prints.has(+c.dataset.gi) && !rest.includes(+c.dataset.gi)), "a room's row is on the Paintings home");
+    await t.click(t.$('[data-tf-f="k:print"]'), { wait: 1200 });
+    await t.waitFor(() => t.$$(".tf-col .tf-paint[data-gi]").length >= 8, 20000, "the Prints room to show pictures");
+    t.expect(t.w.location.hash === "#/prints", `the Prints room has no address (${t.w.location.hash})`);
+    t.expect(t.$$(".tf-col .tf-paint[data-gi]").every(c => prints.has(+c.dataset.gi)), "the Prints room shows something that is not a print");
+    await t.waitFor(() => t.$$(".tf-lenses .tf-chip").length >= 2, 8000, "the Prints lens row");
+    t.expect(t.$$(".tf-lenses .tf-chip")[0].textContent === "For you", "the Prints room's first lens is not For you");
+    const gi = +t.$$(".tf-col .tf-paint[data-gi]")[0].dataset.gi;
+    // a heart on a print keeps it in Favorites (hfKeptIds), which is read from Paintings and Boards
+    const kept = t.ev(`(() => { const st = fvArtStore(); st.__smoke = { i: ${gi}, at: "9" }; TF_KIND = "paint"; const ok = hfKeptIds().includes(${gi}); delete st.__smoke; return ok; })()`);
+    t.expect(kept, "a liked print is missing from Favorites (hfKeptIds)");
+    await t.click(t.$$(".tf-col .tf-paint[data-gi]")[0], { wait: 900 });
+    await t.waitFor(() => !t.$(".tf-screen") && /Print/.test((t.$(".p-type") || {}).textContent || ""), 12000, "a print's page to say Print");
+    t.w.history.back();
+    await t.waitFor(() => t.$(".tf-screen"), 12000, "Back to the Prints room");
+  } finally {
+    t.ev("GAL.kd = __kindsKeep.kd; GAL.rooms = __kindsKeep.rooms; TF_KIND = \"paint\";");
+  }
+});
+// David, 2026-11-07: the painting page's facts (Wikidata via data/gallery/facts): museum and city, medium, size drawn to scale beside a 170 cm person, genre (a chip that
+// opens its board), and a Wikidata link. A painting with no facts shows nothing (no empty labels). Position 9 (aic-862) has all of them; 36 (aic-899) has none.
+scenario("paintings", "painting page facts: museum, medium, size to scale, genre chip and Wikidata link; nothing when a painting has no facts", async t => {
+  await t.open("#/gallery/9", { settle: 800 });
+  await t.waitFor(() => t.$("[data-glfacts]:not([hidden]) .glf-where"), 15000, "the facts block");
+  const fb = t.$("[data-glfacts]");
+  t.expect(/Art Institute of Chicago/.test(t.$(".glf-where").textContent), "the museum is not shown");
+  t.expect(/Chicago/.test(t.$(".glf-where").textContent), "the city is not shown");
+  t.expect(/Oil on canvas/.test(t.$(".glf-what").textContent) && /82\.6 × 64\.8 cm/.test(t.$(".glf-what").textContent), "medium and size read: " + t.$(".glf-what").textContent);
+  t.expect(t.$(".glf-svg") && t.$(".glf-svg .glf-person") && t.$(".glf-svg rect"), "no to-scale figure");
+  t.expect(/Q18009990$/.test((t.$(".glf-wd") || {}).href || ""), "no Wikidata link to Q18009990");
+  const chip = t.$("button.glf-chip");
+  t.expect(chip && /Portrait/.test(chip.textContent), "no Portrait genre chip");
+  const fs = [".glf-where", ".glf-what", ".glf-chip", ".glf-wd", ".glf-fig figcaption"].map(q => parseFloat(t.w.getComputedStyle(t.$(q)).fontSize));
+  t.expect(fs.every(x => x >= 16), "facts text is smaller than body size: " + fs.join(", "));
+  await t.click(chip, { wait: 1200 });
+  await t.waitFor(() => t.$(".tf-screen"), 12000, "the genre chip to open its board");
+  await t.open("#/gallery/36", { settle: 1500 });
+  await t.waitFor(".gl-hero img", 8000, "the page");
+  await t.sleep(600);
+  t.expect(t.$("[data-glfacts]") && t.$("[data-glfacts]").hidden && !t.$("[data-glfacts]").innerHTML.trim(), "a painting without facts shows an empty block");
 });
 // David, 2026-10-21 (desktop): "when you click on the map, I want the page to open. Then when you click on it again, then I want what we
 // described." On a desktop a click on a painting tile opens its page directly (no card, no glide); a click on the page's picture opens

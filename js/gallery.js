@@ -53,19 +53,91 @@ function glHide(G, h) {
   return G;
 }
 const glHidden = i => !!(GAL && GAL.hid && GAL.hid[i]);
-// kinds.json (tools/kinds.py; David, 2026-11-07: Golden Age illustrators get their own room, not mixed into the paintings): {n, ids, illustration: [gallery positions]}.
-// Optional (a missing or stale file means no Illustration room). GAL.ill[i] = 1 for an illustration, GAL.illIdx = the positions. Painting surfaces (js/homefeed.js hfHid) skip them;
-// the Illustration room shows only them; the painting map and a painter's own page keep every work.
+// kinds.json (tools/kinds.py; David, 2026-11-07: rows that are not paintings get their own room): {n, ids, <kind>: [gallery positions], ...}, one key per kind
+// ("illustration", "print", ...). Optional (a missing or stale file means no rooms). GAL.kd[i] = 0 for a painting, else 1 + the room's index in GAL.rooms
+// ([{key, idx: [positions], chip, one, many, addr}]). Painting surfaces (js/homefeed.js hfHid) skip every room's rows; a room shows only its own;
+// the painting map and a painter's own page keep every work. A kind with no rows makes no room.
 let GAL_KINDS_P = null;
 const glKindsRaw = () => GAL_KINDS_P || (GAL_KINDS_P = fetch(GAL_DIR + "kinds.json").then(r => (r.ok ? r.json() : null)).catch(() => null));
+const GL_KIND_INFO = { illustration: { chip: "Illustration", one: "Illustration", many: "illustrations", addr: "illustration" }, print: { chip: "Prints", one: "Print", many: "prints", addr: "prints" } };
+function glKindInfo(key) {
+  const d = GL_KIND_INFO[key]; if (d) return d;
+  const w = String(key).replace(/[-_]+/g, " "), cap = w.charAt(0).toUpperCase() + w.slice(1);
+  return { chip: cap, one: cap, many: w + "s", addr: "room/" + String(key).replace(/[^a-z0-9-]/gi, "") };
+}
 function glKinds(G, k) {
-  if (k && k.n === G.n && Array.isArray(k.illustration) && k.illustration.length) {
-    G.ill = new Uint8Array(G.n); G.illIdx = [];
-    k.illustration.forEach(i => { if (i >= 0 && i < G.n && !G.ill[i]) { G.ill[i] = 1; G.illIdx.push(i); } });
-  }
+  if (!k || k.n !== G.n) return G;
+  const rooms = [];
+  Object.keys(k).forEach(key => {
+    if (key === "n" || key === "ids" || !Array.isArray(k[key]) || !k[key].length) return;
+    rooms.push({ key, idx: [], ...glKindInfo(key) });
+  });
+  if (!rooms.length) return G;
+  G.kd = new Uint8Array(G.n); G.rooms = rooms;
+  rooms.forEach((r, q) => k[r.key].forEach(i => { if (i >= 0 && i < G.n && !G.kd[i]) { G.kd[i] = q + 1; r.idx.push(i); } }));
   return G;
 }
-const glIsIll = i => !!(GAL && GAL.ill && GAL.ill[i]);
+const glRoomOf = i => (GAL && GAL.kd && GAL.kd[i] ? GAL.rooms[GAL.kd[i] - 1] : null);   // the room a row belongs to, or null for a painting
+const glKindWord = i => { const r = glRoomOf(i); return r ? r.one : "Painting"; };         // "Painting", "Illustration", "Print": the eyebrow word and the Back label
+// ---------- facts (data/gallery/facts/, tools/facts_build.py; David, 2026-11-07) ----------
+// Wikidata's museum, city, medium, size, genre and item number per gallery position, in shards of `per`: {o, t: [strings], r: [[museum, city, h, w, medium, genre, qid] | 0]}
+// (string fields are indexes into t, -1 = none; h and w in cm, 0 = none). Fetched lazily, one shard per painting page; a missing or stale index means no facts block.
+let GLF_INDEX = null; const GLF_SHARDS = new Map();
+function glFactsOf(i) {
+  if (!GLF_INDEX) GLF_INDEX = fetch("data/gallery/facts/index.json").then(r => (r.ok ? r.json() : null)).catch(() => null);
+  return GLF_INDEX.then(ix => {
+    if (!ix || !ix.per || (GAL && ix.n !== GAL.n)) return null;
+    const sh = Math.floor(i / ix.per);
+    if (!GLF_SHARDS.has(sh)) GLF_SHARDS.set(sh, fetch("data/gallery/facts/" + sh + ".json").then(r => (r.ok ? r.json() : null)).catch(() => { GLF_SHARDS.delete(sh); return null; }));
+    return GLF_SHARDS.get(sh).then(j => {
+      const r = j && j.r && j.r[i - j.o]; if (!r) return null;
+      const t = k => (k >= 0 ? j.t[k] : "");
+      return { mu: t(r[0]), city: t(r[1]), h: r[2] || 0, w: r[3] || 0, med: t(r[4]), genre: t(r[5]) ? t(r[5]).split("; ") : [], qid: r[6] ? "Q" + r[6] : "" };
+    });
+  });
+}
+// Wikidata genre labels -> the subject tag (data/gallery/subjects.json) whose board (Boards, "su:<tag>") shows that genre
+const GL_GENRE_TAG = { "portrait": "portrait", "self-portrait": "self-portrait", "group portrait": "group portrait", "family portrait": "portrait", "double portrait": "portrait", "equestrian portrait": "portrait",
+  "religious art": "religious", "landscape painting": "landscape", "genre art": "genre scene", "still life": "still life", "mythological painting": "mythological", "history painting": "history",
+  "marine art": "seascape", "allegory": "allegory", "nude": "nude", "cityscape": "cityscape", "veduta": "cityscape", "animal art": "animal", "abstract art": "abstract", "floral painting": "flowers",
+  "church interior": "interior", "interior view": "interior", "architectural painting": "architecture", "battle painting": "battle", "vanitas": "vanitas", "hunting": "hunting" };
+const glfCap = s => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
+const glfCm = n => (Math.round(n * 10) / 10).toLocaleString("en-US", { maximumFractionDigits: 1 });
+// The painting to scale beside a 170 cm person (a line drawing): both in centimetres in one viewBox, so the proportion is the real one.
+// The picture hangs with its middle at about 150 cm (a gallery's eye level) unless that would put it through the floor.
+function glfFigure(f, img, avg, title) {
+  const PH = 170, PW = 46, GAP = 22, pad = 6, bot = Math.max(0, 150 - f.h / 2), top = bot + f.h, H = Math.max(PH, top) + pad, W = pad + PW + GAP + f.w + pad;
+  const px = 148 / H, wpx = W * px, mx = 320;   // 148 px tall at most; a very wide painting shrinks to fit the column instead
+  const k = wpx > mx ? mx / wpx : 1;
+  const x0 = pad + PW + GAP, y = v => (H - pad - v).toFixed(1);   // v = height above the floor in cm
+  const person = `<g class="glf-person" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
+      <circle cx="${pad + PW / 2}" cy="${y(PH - 11)}" r="11" vector-effect="non-scaling-stroke"/>
+      <path vector-effect="non-scaling-stroke" d="M${pad + PW / 2} ${y(PH - 22)} V${y(92)} M${pad + 4} ${y(PH - 28)} Q${pad + PW / 2} ${y(PH - 21)} ${pad + PW - 4} ${y(PH - 28)} L${pad + PW - 1} ${y(100)} M${pad + 4} ${y(PH - 28)} L${pad + 1} ${y(100)} M${pad + PW / 2} ${y(92)} L${pad + 11} ${y(0)} M${pad + PW / 2} ${y(92)} L${pad + PW - 11} ${y(0)}"/></g>`;
+  const clip = "glf" + Math.abs((title || "").length * 31 + Math.round(f.h * 7 + f.w));
+  const art = `<clipPath id="${clip}"><rect x="${x0}" y="${y(top)}" width="${f.w}" height="${f.h}"/></clipPath>
+      <rect x="${x0}" y="${y(top)}" width="${f.w}" height="${f.h}" fill="${avg}"/>
+      ${img ? `<image href="${esc(img)}" x="${x0}" y="${y(top)}" width="${f.w}" height="${f.h}" preserveAspectRatio="xMidYMid slice" clip-path="url(#${clip})"/>` : ""}
+      <rect x="${x0}" y="${y(top)}" width="${f.w}" height="${f.h}" fill="none" stroke="currentColor" stroke-opacity=".55" stroke-width="1" vector-effect="non-scaling-stroke"/>`;
+  const floor = `<line x1="0" x2="${W}" y1="${H - pad}" y2="${H - pad}" stroke="currentColor" stroke-opacity=".35" stroke-width="1" vector-effect="non-scaling-stroke"/>`;
+  return `<svg class="glf-svg" viewBox="0 0 ${W.toFixed(1)} ${H.toFixed(1)}" style="width:${Math.round(wpx * k)}px;height:${Math.round(148 * k)}px" role="img" aria-label="${esc(title)} drawn to scale beside a person 170 centimetres tall: ${glfCm(f.h)} by ${glfCm(f.w)} centimetres">${floor}${person}${art}</svg>`;
+}
+function glFactsHTML(f, d, avg) {
+  const where = f.mu ? esc(f.mu) + (f.city && f.mu.toLowerCase().indexOf(f.city.toLowerCase()) < 0 ? `<span class="glf-city">, ${esc(f.city)}</span>` : "") : "";
+  const what = [f.med ? glfCap(f.med) : "", f.h && f.w ? `${glfCm(f.h)} × ${glfCm(f.w)} cm` : ""].filter(Boolean);
+  const chips = f.genre.slice(0, 3).map((g, q) => `<button type="button" class="glf-chip" data-glf-genre="${esc(g)}">${esc(glfCap(g))}</button>`).join("");
+  const wd = f.qid ? `<a class="glf-wd" href="https://www.wikidata.org/wiki/${esc(f.qid)}" target="_blank" rel="noopener">Wikidata ↗</a>` : "";
+  const fig = f.h && f.w ? `<figure class="glf-fig">${glfFigure(f, d.img ? glBig(d.img) : "", avg, d.t)}<figcaption>Drawn to scale beside a 170 cm person</figcaption></figure>` : "";
+  return `${where ? `<p class="glf-where">${where}</p>` : ""}${what.length ? `<p class="glf-what">${what.map(esc).join(" · ")}</p>` : ""}${fig}${chips || wd ? `<div class="glf-row">${chips}${wd}</div>` : ""}`;
+}
+// a genre chip opens the matching Boards board when the subject index has that tag; with none the chip is plain text
+async function glfOpenGenre(g) {
+  const tag = GL_GENRE_TAG[g.toLowerCase()]; if (!tag) return false;
+  try {
+    const S = await loadSubjects(); if (!S.idx || !S.idx.has(tag) || typeof tfOpenBoardFromSearch !== "function") return false;
+    const id = "su:" + tag; HF_CUSTOM_LABELS.set(id, typeof subjPlural === "function" ? subjPlural(tag) : tag);
+    buzz(5); tfOpenBoardFromSearch({ id, label: HF_CUSTOM_LABELS.get(id), tab: "subjects", group: "Subjects" }); return true;
+  } catch (e) { return false; }
+}
 // ---------- subjects (data/gallery/subjects.json, built by tools/subjects.py + tools/subjects_clip.py) ----------
 // What a painting shows: genre ("g"), things ("t"), iconography ("i"). Three sources per painting, in rank order:
 // ia = authority (museum / Wikidata), it = words in the title, im = detected by a model from the picture (kept only at
@@ -1603,7 +1675,7 @@ function glPage(i, d, fromHex, tol) {
     <button class="gl-closer" data-glcloser aria-label="Look closer">${ICON.search}<span>Look closer</span></button>
     <button class="gl-closer gl-pick-btn" data-glpickbtn hidden aria-pressed="false" aria-label="Pick a color">${icon("pipette", 17)}<span>Pick a color</span></button></span></div>
     <div class="gl-id">${shareBtn}
-    <p class="eyebrow p-type">${glIsIll(i) ? "Illustration" : "Painting"}${yr ? " · " + yr : ""}</p>
+    <p class="eyebrow p-type">${glKindWord(i)}${yr ? " · " + yr : ""}</p>
     <h1 class="p-title">${esc(d.t)}</h1>
     <p class="p-dek">${d.a ? `<button class="aw-link" data-awpainter="${esc(routeSlug(d.a))}">${esc(d.a)}</button>` : "Artist unknown"}${glDesk() ? [d.co, d.mv].filter(Boolean).map(x => ` · ${esc(x)}`).join("") : yr ? ` · ${esc(yr)}` : ""}</p>
     <p class="gl-id-src">${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? `<span class="gl-dk-credit"> · ${esc(src.credit)}</span>` : ""}</p>
@@ -1644,6 +1716,7 @@ function glPage(i, d, fromHex, tol) {
     <button class="gl-pmap gl-pmap-top" data-pmap="arr=spiral&seed=${i}">${GL_ICON_MAP}<span>Similar paintings on the map</span>${ICON.chev}</button>
     <button class="gl-pmap gl-pmap-pal" data-pmap="${glPalSpec(i)}">${GL_ICON_MAP}<span>Find paintings with this palette</span>${ICON.chev}</button>
     </div>
+    <section class="gl-facts" data-glfacts hidden aria-label="About the object"></section>
     <div class="gl-under">${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}</div>
     <p class="gl-subj" data-glsubj-line hidden></p>
     <div class="gl-finds"><div class="sec-head"><b>Findings</b><span>as photographed</span></div>
@@ -1672,6 +1745,19 @@ function glPage(i, d, fromHex, tol) {
       idBox.appendChild(ch);
       idBox.classList.add("gl-has-heart");
     }
+  }
+  {
+    // the facts block (museum and city, medium, size to scale, genre, Wikidata): fetched after the page is up; a painting with no facts shows nothing
+    const fb = el.querySelector("[data-glfacts]");
+    if (fb) glFactsOf(i).then(f => {
+      if (!f || !fb.isConnected) return;
+      const html = glFactsHTML(f, d, avg); if (!html) return;
+      fb.innerHTML = html; fb.hidden = false;
+      fb.querySelectorAll("[data-glf-genre]").forEach(b => {   // a chip stays quiet text unless a board exists for it
+        if (!GL_GENRE_TAG[b.dataset.glfGenre.toLowerCase()]) { const sp = document.createElement("span"); sp.className = "glf-chip plain"; sp.textContent = b.textContent; b.replaceWith(sp); return; }
+        b.addEventListener("click", async () => { if (!(await glfOpenGenre(b.dataset.glfGenre))) { const sp = document.createElement("span"); sp.className = "glf-chip plain"; sp.textContent = b.textContent; b.replaceWith(sp); } });
+      });
+    });
   }
   const route = "#/gallery/" + i, heroSpan = el.querySelector(".gl-hero > span");
   // the stored shape comes from the museum's small image, which can be a crop of a different shape (David, 2026-10-30: Cloud Towers,
