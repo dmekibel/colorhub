@@ -458,8 +458,10 @@ function ptmMount(el, s, from) {
   cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
   cv.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") { focus = null; hover = -1; tip(-1); redraw(); } });
   cv.addEventListener("wheel", e => {
-    e.preventDefault(); const r = cv.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top, [wx, wy] = worldOf(mx, my);
-    const ns = Math.max(minS, Math.min(160, view.s * Math.exp(-e.deltaY * (e.ctrlKey ? .01 : .0018)))); view.s = ns; view.tx = mx - wx * ns; view.ty = my - wy * ns; clampView(); PTM_VIEW.set(vkey(), { ...view }); redraw(); centerSoon();
+    e.preventDefault(); const r = cv.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top, [wx, wy] = worldOf(mx, my), kind = wheelKind(e);
+    // two-finger scroll on a trackpad pans 1:1, as on the painting map (David, 2026-11-07); pinch and a mouse wheel zoom
+    if (kind === "pad") { view.tx -= wheelPx(e, e.deltaX); view.ty -= wheelPx(e, e.deltaY); clampView(); if (focus) focus = [mx, my]; PTM_VIEW.set(vkey(), { ...view }); redraw(); centerSoon(); return; }
+    const ns = Math.max(minS, Math.min(160, view.s * Math.exp(-wheelPx(e, e.deltaY || e.deltaX) * (kind === "pinch" ? .01 : .0018)))); view.s = ns; view.tx = mx - wx * ns; view.ty = my - wy * ns; clampView(); PTM_VIEW.set(vkey(), { ...view }); redraw(); centerSoon();
   }, { passive: false });
   $("[data-ptopen]").onclick = () => openPainter(centerI);
   function flyTo(i, sNew) {
