@@ -34,6 +34,39 @@ mvnames = fac["movements"]
 # ---- the tier-1 sheets: cache the open images ----
 G = man["tier1"]["groupSize"]
 sheets = {}
+WDC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "research", "_raw", "portraits-wd")
+
+
+def wd_tile(pt):
+    """A Wikidata portrait (a Commons file, not one of our paintings): fetched once at 256 px and cached; a square crop that
+    keeps the top of the picture (where the face is in a portrait). David, 2026-11-07: "add the wikidata portraits too"."""
+    import urllib.request, urllib.parse, hashlib, time
+    img = pt.get("img")
+    if not img: return None
+    os.makedirs(WDC, exist_ok=True)
+    f = os.path.join(WDC, hashlib.sha1(img.encode()).hexdigest()[:16] + ".jpg")
+    if not os.path.exists(f):
+        u = "https://commons.wikimedia.org/wiki/Special:FilePath/" + urllib.parse.quote(img.replace(" ", "_")) + "?width=256"
+        for a in range(3):
+            try:
+                req = urllib.request.Request(u, headers={"User-Agent": "Chromatlas-research/1.0 (dmekibel@gmail.com)"})
+                open(f, "wb").write(urllib.request.urlopen(req, timeout=40).read()); break
+            except Exception as e:
+                if "403" in str(e): return None
+                time.sleep(2 + 4 * a)
+        else:
+            return None
+        time.sleep(.15)
+    try:
+        im = Image.open(f).convert("RGB")
+    except Exception:
+        return None
+    w, h = im.size; k = min(w, h)
+    top = 0 if h > w else 0
+    im = im.crop(((w - k) // 2, top, (w - k) // 2 + k, top + k))
+    return im.resize((TILE, TILE), Image.LANCZOS)
+
+
 def tile(gi):
     g = gi // G
     if g not in sheets:
@@ -107,6 +140,9 @@ for i, s in enumerate(slugs):
     if pt.get("src") in ("self", "other") and pt.get("gi") is not None and pt["gi"] not in hid:
         t = tile(pt["gi"])
         if t is not None: pg = pt["gi"]; ports.append((i, t))
+    elif pt.get("src") == "wikidata":
+        t = wd_tile(pt)
+        if t is not None: ports.append((i, t))
     # the paintings that carry the painter's known color: famous ones first, then the typical one (as the painter page's strip)
     ids = [g for g in cands if g != face][:9]
     if face is not None: ids = [face] + ids
