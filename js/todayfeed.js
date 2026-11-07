@@ -352,7 +352,8 @@ function todayFeed() {
         const secHTML = secs.filter(sc => sc.tab === tab).map(sc => `<h2 class="tf-bh">${esc(sc.title)}</h2><div class="tf-bgrid">${sc.boards.map(b => `<button type="button" class="tf-board" data-tf-board="${esc(b.id)}"><span class="tf-bcov" ${b.hex ? `style="--c:${esc(b.hex)}"` : ""}><i></i><i></i><i></i></span><b>${esc(b.label)}</b><small>${esc(b.sub)}</small></button>`).join("")}</div>`).join("");
         const catHTML = cats.length ? `<h2 class="tf-bh">Browse by</h2><div class="tf-bgrid">${cats.map(([id, label]) => `<button type="button" class="tf-board tf-cat" data-tf-cat="${id}"><span class="tf-bcov"><i></i><i></i><i></i></span><b>${label}</b><small>${catCount(id)} boards</small></button>`).join("")}</div>` : "";
         const more = tab === "all" ? `<h2 class="tf-bh">More in the Museum</h2><div class="tf-links">${[["#/museum/art", "Paintings by subject and room"], ["#/museum/ideas", "Ideas"], ["#/museum/world", "The world in color"], ["#/museum/saved", "Saved"]].map(([h, l]) => `<button type="button" class="tf-link" data-tf-go="${h}"><b>${l}</b>${ICON.chev}</button>`).join("")}</div>` : "";
-        return `<div class="tf-bwrap" style="--bcols:${bc}">` + (tab === "all" ? secHTML + catHTML + more : catHTML + secHTML) + `</div>`;
+        const ptDoor = tab === "painters" ? `<button type="button" class="tf-ptdoor" data-ptmap="" aria-label="Painters map"><span class="tf-ptq" aria-hidden="true"><i style="--c:#C8502E"></i><i style="--c:#E3B23C"></i><i style="--c:#3F7CAC"></i><i style="--c:#5E8C4A"></i></span><span><b>Painters map</b><small>Every painter as one cell, by color, time, place or movement</small></span>${ICON.chev}</button>` : "";
+        return `<div class="tf-bwrap" style="--bcols:${bc}">` + ptDoor + (tab === "all" ? secHTML + catHTML + more : catHTML + secHTML) + `</div>`;
       };
       const draw = () => {
         if (io) { io.disconnect(); io = null; }

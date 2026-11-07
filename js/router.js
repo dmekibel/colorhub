@@ -158,6 +158,7 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["hgMap", () => routed("Gradients", "hue")], ["hgDaily", () => routed("Today's gradient", "hue/daily")],   // js/games/hue-ui.js
   ["ooWhose", () => routed("Whose palette?", "odd/whose")], ["ooAcross", () => routed("Across the line", "line")], ["ooPairs", () => routed("Painters' pairs", "odd/pairs")],
   ["wwPlay", () => routed("Which way?", "whichway")],   // js/games/whichway.js
+  ["ptmOpen", spec => typeof ptmRouteOf === "function" ? ptmRouteOf(spec) : null],   // js/paintermap.js: #/painters/map?arr=…&face=…
   ["pmOpen", spec => typeof pmRouteOf === "function" ? pmRouteOf(spec) : null],   // js/paintmap.js: #/paintings/map?arr=…&co=…
   ["arHubPage", id => id ? routed(arPretty(id), "hub/" + id) : null], ["arWhichPage", name => name ? routed(arPretty(name), "which/" + name) : null],
   ["arReadPage", (slug, ch) => slug ? routed(AR_READING.has(slug) ? AR_READING.get(slug).art.name : arPretty(slug), "read/" + slug + (ch ? "/" + ch : "")) : null]];   // js/article.js: the book, #/read/<slug>[/<chapter>]   // js/article.js: #/hub/<id>, #/which/<name>
@@ -408,6 +409,7 @@ function openRoute(hash, initial = false) {
     if (q.hexes.length) { paintingsOfPage(q.hexes, { ...q.st, push: true }); return true; }
     return false;
   }
+  if (kind === "painters" && /^map\b/.test(id || "") && typeof ptmOpen === "function") { base(); XSTACK = []; ptmGo(hash.includes("?") ? hash.slice(hash.indexOf("?") + 1) : "", true); return true; }   // the painter map (js/paintermap.js)
   if (["painter", "movement", "decade", "country", "arthistory", "painters", "painter-index"].includes(kind) && typeof awOpenRoute === "function") { base(); XSTACK = []; awOpenRoute(kind, id, more); return true; }   // js/artwiki.js
   const simple = { daily: () => daily(), challenge: () => challenge(),
     taste: () => id === "style" && typeof tasteLadderIntro === "function" ? tasteLadderIntro() : tasteIntro(id === "palette" ? "palette" : "color"),

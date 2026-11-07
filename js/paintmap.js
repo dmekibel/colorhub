@@ -3520,6 +3520,7 @@ function pmMount(el, s, F) {
       const list = pmList(s, F);
       paneArr.innerHTML = `
         ${!pmSolo(s) && s.arr === "color" && (s.col || "paintings") === "paintings" ? `<button type="button" class="pmx-tofeed" data-pmshuffle><span>Shuffle to another cluster</span></button>` : ""}
+        ${pmSolo(s) || (s.col || "paintings") !== "paintings" ? "" : `<button type="button" class="pmx-tofeed" data-ptmap=""><span>Painters map</span></button>`}
         ${pmSolo(s) ? "" : `<div class="cx-sec"><b>Collection</b></div>
         <div class="hm-seg pmx-col-seg" role="radiogroup" aria-label="Collection">${PM_COLLECTIONS.map(([k, t]) => `<button class="${(s.col || "paintings") === k ? "on" : ""}" data-pmcol="${k}">${esc(t)}</button>`).join("")}</div>`}
         <div class="cx-sec"><b>Shape</b></div>

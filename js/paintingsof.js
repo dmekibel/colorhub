@@ -344,6 +344,7 @@ function paintingsOfPage(hexes, o = {}) {
     </div>
     <div class="pt-acts" data-acts></div>
     <button class="gl-pmap pt-pmap" data-pmapdoor data-pmap="arr=color&c=${hexes.map(h => h.slice(1).toLowerCase()).join(",")}&t=${st.tol}&m=${st.minCover || 0}${hexes.length > 1 ? "&cm=all" : ""}&hit=1">${GL_ICON_MAP}<span>Where it lives, on the map</span>${ICON.chev}</button>
+    ${hexes.length === 1 ? `<button class="gl-pmap pt-pmap" data-ptmap="near=${encodeURIComponent(hexes[0].toUpperCase())}">${GL_ICON_MAP}<span>Painters who love this</span>${ICON.chev}</button>` : ""}
     <details class="pt-stats" data-stats hidden><summary>What the numbers say</summary><div data-statsbody></div></details>
     <div class="pt-sortrow" data-sortrow><div class="pt-seg">${PT_SORTS.map(([k, t]) => `<button data-sort="${k}">${t}</button>`).join("")}</div></div>
     <div class="pt-results" data-results><p class="fine">Finding paintings…</p></div>
