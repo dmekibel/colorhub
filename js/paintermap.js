@@ -34,12 +34,13 @@ const PTM_ICON = {
   movement: sv('<circle cx="7" cy="7" r="3.4"/><circle cx="16.5" cy="6.5" r="2.4"/><circle cx="7" cy="16.5" r="2.4"/><circle cx="17" cy="16" r="3"/>', 22, 1.7),
   fame: sv('<path d="M12 3.8l2.4 5 5.4.7-4 3.8 1 5.4-4.8-2.7-4.8 2.7 1-5.4-4-3.8 5.4-.7z"/>', 22, 1.7),
 };
+const ptmFaceAuto = arr => arr === "color" || arr === "like" ? "dna" : "famous";
 const PTM_REG = [
   ["Western Europe", ["France", "Italy", "Spain", "Portugal", "Netherlands", "Belgium", "Germany", "Austria", "Switzerland", "United Kingdom", "Ireland", "Luxembourg", "Monaco"]],
   ["Northern and Eastern Europe", ["Russia", "Poland", "Sweden", "Norway", "Denmark", "Finland", "Czechia", "Hungary", "Greece", "Ukraine", "Romania", "Croatia", "Serbia", "Estonia", "Latvia", "Lithuania", "Iceland", "Bulgaria", "Slovakia", "Slovenia", "Belarus", "Georgia", "Armenia"]],
   ["The Americas", ["United States", "Canada", "Mexico", "Brazil", "Argentina", "Chile", "Peru", "Colombia", "Cuba", "Venezuela", "Uruguay", "Ecuador", "Bolivia", "Guatemala"]],
 ];
-const PTM_DEF = { arr: "color", face: "famous", min: 6, only: "all", near: "", p: "" };
+const PTM_DEF = { arr: "color", face: "", min: 6, only: "all", near: "", p: "" };
 const PTM_STATE = new Map();   // the address a map opened with -> its spec as you left it
 const PTM_VIEW = new Map();    // arrangement|face|filter -> { tx, ty, s }: where you were, so Back from a painter lands on it again
 const PTM_LAY = new Map();     // arrangement|filter -> layout
@@ -126,14 +127,14 @@ function ptmLayout(arr, ids, st) {
   } else if (arr === "time") {
     const bands = PTM_REG.map(([t, cs]) => ({ t, cs: new Set(cs), ids: [] })).concat([{ t: "Asia and elsewhere", cs: null, ids: [] }]);
     ids.forEach(i => { const c = A[i].co; (bands.find(b => b.cs && b.cs.has(c)) || bands[bands.length - 1]).ids.push(i); });
-    let y0 = 0;
+    let y0 = 1.6;
     bands.filter(b => b.ids.length).forEach(b => {
       b.ids.sort((p, q) => ptmWhen(A[p]) - ptmWhen(A[q]) || p - q);
       const H = Math.max(3, Math.round(Math.sqrt(b.ids.length) * .6)), cols = Math.ceil(b.ids.length / H);
-      b.ids.forEach((id, k) => { const c = Math.floor(k / H), r = k % H, [x, y] = ptmHex(c, r); lay.x[id] = x; lay.y[id] = y0 + y; });
-      for (let c = 0; c < cols; c += Math.max(8, Math.round(cols / 9))) { const id = b.ids[Math.min(b.ids.length - 1, c * H)], yr = Math.round(ptmWhen(A[id]) / 10) * 10; lay.ticks.push({ t: yr + "s", x: c * PTM_SQ, y: y0 - .9 }); }
-      lay.labels.push({ t: b.t, n: b.ids.length, x: 0, y: y0 - 2.2, left: true });
-      y0 += H + 5.5;
+      b.ids.forEach((id, k) => { const c = Math.floor(k / H), r = k % H, [x, y] = ptmHex(c, r); lay.x[id] = x; lay.y[id] = y0 + 1.2 + y; });
+      for (let c = 8; c < cols; c += Math.max(8, Math.round(cols / 9))) { const id = b.ids[Math.min(b.ids.length - 1, c * H)], yr = Math.round(ptmWhen(A[id]) / 10) * 10; lay.ticks.push({ t: yr + "s", x: c * PTM_SQ, y: y0 }); }
+      lay.labels.push({ t: b.t, n: b.ids.length, x: 0, y: y0, left: true, yb: y0 + 1.2 + H });
+      y0 += H + 2.2;
     });
   } else {
     const key = arr === "place" ? (i => A[i].co || "Place unknown") : (i => A[i].mv), g = new Map();
@@ -152,6 +153,7 @@ function ptmParse(q) {
   const u = new URLSearchParams(String(q || "").replace(/^\?/, "")), s = { ...PTM_DEF };
   if (PTM_ARR.some(a => a[0] === u.get("arr"))) s.arr = u.get("arr");
   if (PTM_FACE.some(a => a[0] === u.get("face"))) s.face = u.get("face");
+  else { try { const f = localStorage.getItem("ptm-face"); if (PTM_FACE.some(a => a[0] === f)) s.face = f; } catch (e) {} }
   const mn = +u.get("min"); if (mn >= 6) s.min = mn;
   if (["portrait", "famous"].includes(u.get("only"))) s.only = u.get("only");
   const nr = u.get("near"); if (/^#?[0-9a-f]{6}$/i.test(nr || "")) s.near = "#" + nr.replace("#", "").toUpperCase();
@@ -161,7 +163,7 @@ function ptmParse(q) {
 }
 function ptmQS(s) {
   const o = [];
-  if (s.arr !== PTM_DEF.arr) o.push(["arr", s.arr]); if (s.face !== PTM_DEF.face) o.push(["face", s.face]);
+  if (s.arr !== PTM_DEF.arr) o.push(["arr", s.arr]); 
   if (s.min > 6) o.push(["min", s.min]); if (s.only !== "all") o.push(["only", s.only]); if (s.near) o.push(["near", s.near]);
   return o.map(([k, v]) => k + "=" + encodeURIComponent(v)).join("&");
 }
@@ -216,7 +218,7 @@ function ptmMount(el, s, from) {
   const $ = sel => el.querySelector(sel);
   let W = 0, H = 0, dpr = 1, dead = false, raf = 0, lay = null, ids = [], view = { tx: 0, ty: 0, s: 20 }, minS = 4, bb = null, hash = null, sel = -1, hover = -1, centerI = -1;
   let ground = "#0E0D0B", ink = "#ECE8DF", fadeT0 = performance.now(), vx = 0, vy = 0, glide = null, dirty = true, lit = null, litSet = null;
-  const cleanup = [];
+  const cleanup = [], faceOf = () => s.face || ptmFaceAuto(s.arr);
   const topPad = () => 120, botPad = () => 150;
   const readTheme = () => { const cs = getComputedStyle(stage); ground = cs.backgroundColor || ground; ink = getComputedStyle(el).color || ink; dirty = true; };
   const vkey = () => `${from}|${s.arr}|${s.min}|${s.only}|${s.near}`;
@@ -246,11 +248,12 @@ function ptmMount(el, s, from) {
     // open readable: faces at least ~30 px, centered on the best-known painter (or the lit ones), never on a void
     let s0 = Math.max(f, 30), cx, cy;
     if (litSet && lit && lit.length) { const top = lit.slice(0, 3); cx = top.reduce((a, i) => a + lay.x[i], 0) / top.length; cy = top.reduce((a, i) => a + lay.y[i], 0) / top.length; s0 = Math.max(f, 38); }
-    else if (s.arr === "fame" || s.arr === "color") { cx = 0; cy = 0; }
+    else if (s.arr === "fame" || s.arr === "color") { cx = 0; cy = 0; s0 = Math.max(f, W / 8); }
     else { let best = -1; ids.forEach(i => { if (best < 0 || ptmScore(A[i]) > ptmScore(A[best])) best = i; }); cx = best >= 0 ? lay.x[best] : 0; cy = best >= 0 ? lay.y[best] : 0; }
     if (f >= 30) { s0 = f; cx = (bb.x0 + bb.x1) / 2; cy = (bb.y0 + bb.y1) / 2; }
     view = { s: s0, tx: W / 2 - cx * s0, ty: topPad() + (H - topPad() - botPad()) / 2 - cy * s0 };
     // never open with a void: the edge of the map may come no further in than a sixth of the screen
+    if (s.arr === "fame" || s.arr === "color") return;
     const x0 = bb.x0 * s0 + view.tx, x1 = bb.x1 * s0 + view.tx, y0 = bb.y0 * s0 + view.ty, y1 = bb.y1 * s0 + view.ty, T = topPad(), B = H - botPad() * .6;
     if (x1 - x0 > W) { if (x1 < W * .85) view.tx += W * .85 - x1; else if (x0 > W * .15) view.tx -= x0 - W * .15; }
     if (y1 - y0 > B - T) { if (y1 < B) view.ty += B - y1; else if (y0 > T) view.ty -= y0 - T; }
@@ -285,12 +288,14 @@ function ptmMount(el, s, from) {
   function draw(now) {
     dirty = false;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.fillStyle = ground; ctx.fillRect(0, 0, W, H);
-    const sc = view.s, rad = sc * .47, dotOnly = sc < 9, mode = s.face, fa = Math.min(1, (now - fadeT0) / 380);
+    const sc = view.s, rad = sc * .47, dotOnly = sc < 9, mode = faceOf(), fa = 1;
     const dim = litSet ? .22 : 1;
     ctx.textBaseline = "middle"; ctx.textAlign = "center";
     // block and band names sit behind the cells
     const lbl = (l) => {
-      const x = l.x * sc + view.tx, y = l.y * sc + view.ty; if (y < -40 || y > H + 40 || (!l.left && (x < -300 || x > W + 300))) return;
+      let x = l.x * sc + view.tx, y = l.y * sc + view.ty;
+      if (l.left) { const yb = l.yb * sc + view.ty, top = topPad() + 14; if (y < top && yb > top + 40) y = top; }   // a band name stays at the top while its band is on screen
+      if (y < -40 || y > H + 40 || (!l.left && (x < -300 || x > W + 300))) return;
       const big = Math.min(26, Math.max(13, sc * (l.r ? Math.min(2.6, l.r / 6) : 1.6)));
       ctx.font = `400 ${big}px "Instrument Serif", Georgia, serif`; ctx.textAlign = l.left ? "left" : "center";
       ctx.lineWidth = 4; ctx.strokeStyle = ground; ctx.fillStyle = ink; ctx.globalAlpha = .9;
@@ -315,7 +320,7 @@ function ptmMount(el, s, from) {
     ctx.globalAlpha = 1;
     lay.labels.forEach(lbl);
     ctx.font = `400 12px "Geist", system-ui, sans-serif`; ctx.fillStyle = ink; ctx.globalAlpha = .55; ctx.textAlign = "center";
-    lay.ticks.forEach(t => { const x = t.x * sc + view.tx, y = t.y * sc + view.ty; if (x > -30 && x < W + 30 && y > 0 && y < H) ctx.fillText(t.t, x, y); });
+    lay.ticks.forEach(t => { const x = t.x * sc + view.tx, y = t.y * sc + view.ty; if (x > 340 && x < W + 30 && y > 0 && y < H) ctx.fillText(t.t, x, y); });
     ctx.globalAlpha = 1;
     // names, once cells are big enough to read them
     if (sc >= 58) {
@@ -363,7 +368,7 @@ function ptmMount(el, s, from) {
   const centerSoon = () => { clearTimeout(capT); capT = setTimeout(caption, 90); };
   function caption() {
     const cap = $("[data-ptcap]"); if (!ids.length) { cap.hidden = true; return; }
-    const i = sel >= 0 ? sel : nearestCenter(); if (i < 0) { cap.hidden = true; return; }
+    const i = sel; if (i < 0) { cap.hidden = true; return; }
     centerI = i; const r = A[i];
     cap.hidden = false; cap.style.setProperty("--c", r.sig);
     $("[data-ptct]").textContent = r.n;
@@ -485,12 +490,12 @@ function ptmMount(el, s, from) {
       body.innerHTML = `
         <div class="cx-sec"><b>Position</b></div>
         <div class="hm-arr pmx-arr ptm-arr" role="radiogroup" aria-label="Arrange by">${PTM_ARR.map(([k, t]) => `<button class="hm-arr-b${s.arr === k ? " on" : ""}" data-ptarr="${k}" role="radio" aria-checked="${s.arr === k}"><span class="hm-arr-pic">${PTM_ICON[k]}</span><b>${esc(t)}</b></button>`).join("")}</div>
-        <div class="cx-sec"><b>Each painter shown as</b></div>${seg("face", PTM_FACE, s.face, "Cell face")}
+        <div class="cx-sec"><b>Each painter shown as</b></div>${seg("face", PTM_FACE, faceOf(), "Cell face")}
         <div class="cx-sec"><b>Show</b></div>${seg("only", [["all", "Everyone"], ["famous", "Famous works"], ["portrait", "A portrait"]], s.only, "Show")}
         <div class="hm-feel"><label class="hm-feel-row"><span class="hm-feel-l">At least</span><span class="hm-feel-r"><i>6</i><input type="range" min="6" max="${Math.min(300, maxK)}" step="1" value="${s.min}" data-ptmin aria-label="Fewest paintings"><i>${Math.min(300, maxK)}</i></span></label></div>
         <p class="hm-arr-sub" data-ptminl>${ptmNum(ids.length)} painters${s.min > 6 ? ` with ${s.min}+ paintings` : ""}</p>`;
       body.querySelectorAll("[data-ptarr]").forEach(b => b.onclick = () => { if (s.arr === b.dataset.ptarr) return; buzz(5); s.arr = b.dataset.ptarr; s.near = s.arr === "color" ? s.near : ""; rebuild(); render(); });
-      body.querySelectorAll("[data-ptface]").forEach(b => b.onclick = () => { buzz(5); s.face = b.dataset.ptface; fadeT0 = performance.now() - 380; redraw(); render(); });
+      body.querySelectorAll("[data-ptface]").forEach(b => b.onclick = () => { buzz(5); s.face = b.dataset.ptface; try { localStorage.setItem("ptm-face", s.face); } catch (e) {} redraw(); render(); });
       body.querySelectorAll("[data-ptonly]").forEach(b => b.onclick = () => { buzz(5); s.only = b.dataset.ptonly; rebuild(); render(); });
       const rg = body.querySelector("[data-ptmin]");
       rg.oninput = () => { s.min = +rg.value; ids = ptmIds(s); body.querySelector("[data-ptminl]").textContent = `${ptmNum(ids.length)} painters${s.min > 6 ? ` with ${s.min}+ paintings` : ""}`; };
