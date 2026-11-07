@@ -1567,4 +1567,11 @@
 ["Yellow-Green (Color Wheel)","#30B21A","wiki xkcd"],
 ["Hot Pink","#FF69B4","app css wiki xkcd"],
 ["Light Lavender","#DFC5FE","xkcd iscc-nbs"],
-["Caribbean Green","#00CC99","wiki"]]
+["Caribbean Green","#00CC99","wiki"],
+["Pale Violet","#CEAEFA","xkcd iscc-nbs"],
+["Bright Green","#01FF07","xkcd iscc-nbs wiki maerz-paul ral"],
+["Lavender Pink","#DD85D7","xkcd"],
+["Cellini","#87006D","maerz-paul"],
+["Orchid (Crayola)","#E29CD2","wiki"],
+["Green Yellow","#ADFF2F","css ridgway xkcd iscc-nbs wiki"],
+["Neon Red","#FF073A","xkcd wiki"]]

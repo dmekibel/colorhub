@@ -232,6 +232,8 @@ def local_path(i):
         return None
     src, rid = _IDS[i].split("-", 1)
     path = os.path.join(ROOT, "research", "_raw", src, "img", rid + ".jpg")
+    if not os.path.exists(path):
+        path = os.path.join(ROOT, "research", "_raw", "measure-img", src + "-" + rid + ".jpg")
     return path if os.path.exists(path) else None
 
 
@@ -247,6 +249,8 @@ def local_copy(i):
         return None
     src, rid = _IDS[i].split("-", 1)
     path = os.path.join(ROOT, "research", "_raw", src, "img", rid + ".jpg")
+    if not os.path.exists(path):   # museum prints and other staged batches keep their measuring copy (>= 200 px, enough for the 80 px tier) here
+        path = os.path.join(ROOT, "research", "_raw", "measure-img", src + "-" + rid + ".jpg")
     if not os.path.exists(path):
         return None
     with open(path, "rb") as f:

@@ -8912,6 +8912,7 @@ scenario("home", "Today: paintings only on open, two rows, a double-tap likes, a
   // Colors: the color of the day, the game, Continue learning
   await t.click(t.$("[data-tf-f=color]"), { wait: 700 });
   await t.waitFor(() => t.$(".tf-cotd") && t.$(".tf-game") && t.$(".tf-cont"), 8000, "the color of the day, the game card and Continue learning should all be in Colors");
+  t.$(".tf-kinds").scrollLeft = 0; await t.sleep(200);   // with Illustration and Prints the row is wider than the phone: scroll back like a thumb would (chips pass under the sticky search button)
   await t.click(t.$("[data-tf-f=paint]"), { wait: 800 });
   await t.waitFor(() => t.$$(".tf-col .tf-paint").length >= 12, 12000, "Paintings to come back");
   // open, Back, scroll kept
