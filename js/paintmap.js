@@ -197,7 +197,7 @@ const pmHex = (i, F) => {
 //              f.shares, see pmPalAsync)
 //   hueBand    one of XB_FAMS's 9 family indices (0=Reds..8=Greys), matched against a painting's DOMINANT swatch
 //   l0/l1      a mean-lightness range (0-100, dark<->light), independent of any hex pick
-const pmFilterFresh = () => ({ ...xbFresh(), coSet: [], region: null, painterSet: [], mvSet: [], musSet: [], tySet: [], subjSet: [], bdSet: [], colorMode: "any", shares: null, hueBand: null, l0: null, l1: null });
+const pmFilterFresh = () => ({ ...xbFresh(), coSet: [], region: null, painterSet: [], mvSet: [], musSet: [], tySet: [], kdSet: [], subjSet: [], bdSet: [], colorMode: "any", shares: null, hueBand: null, l0: null, l1: null });
 // Western Europe / Northern Europe / Italy & Spain are deliberately tighter than "Europe" (which is every
 // European country in the dataset) -- each is its own bulk-select, not a strict partition of the broad one.
 const PM_REGIONS = [
@@ -397,6 +397,8 @@ function pmRun(s, F) {
   const mvSet = f.mvSet && f.mvSet.length ? new Set(f.mvSet) : (f.mv ? new Set([f.mv]) : null);
   const musSet = f.musSet && f.musSet.length ? new Set(f.musSet) : (f.mus >= 0 ? new Set([f.mus]) : null);
   const tySet = F.ty && f.tySet && f.tySet.length ? new Set(f.tySet) : null;   // object type (Design objects only, F.ty)
+  // Kind (David, 2026-11-08): paintings, illustrations, prints all live on the map; kdSet holds 1 + G.kd[i] (1 = Paintings, 2.. = G.rooms) and empty means every kind
+  const KD = (F.col || "paintings") === "paintings" && G.kd && G.kd.length === N ? G.kd : null, kdSet = KD && f.kdSet && f.kdSet.length ? new Set(f.kdSet) : null;
   const subjOn = !!SUBJ && (F.col || "paintings") === "paintings" && N <= SUBJ.N;
   const subjFlag = subjOn && f.subjSet && f.subjSet.length ? subjFlags(f.subjSet) : null;
   const bdMask = (F.col || "paintings") === "paintings" && f.bdSet && f.bdSet.length && PM_BD.mask && PM_BD.key === pmBdKey(f.bdSet) && PM_BD.mask.length === N ? PM_BD.mask : null;
@@ -407,7 +409,7 @@ function pmRun(s, F) {
   const when = f.y0 != null || f.y1 != null, y0 = f.y0 == null ? -1e5 : f.y0, y1 = f.y1 == null ? 1e5 : f.y1;
   const hasL = f.l0 != null || f.l1 != null, l0 = f.l0 == null ? -1e5 : f.l0, l1 = f.l1 == null ? 1e5 : f.l1;
   const counts = { when: new Int32Array(XB_NDEC + 1), painter: new Int32Array(F.meta.artists.length + 1), mv: new Int32Array(F.meta.movements.length + 1), co: new Int32Array(F.meta.countries.length + 1),
-    mus: new Int32Array(G.src.length), ty: new Int32Array(((F.meta.types || []).length) + 1), hueBand: new Int32Array(9), color: 0, lightness: 0, subj: subjOn ? new Int32Array(SUBJ.tags.length) : null };
+    mus: new Int32Array(G.src.length), kd: new Int32Array(((G.rooms || []).length) + 2), ty: new Int32Array(((F.meta.types || []).length) + 1), hueBand: new Int32Array(9), color: 0, lightness: 0, subj: subjOn ? new Int32Array(SUBJ.tags.length) : null };
   const out = new Int32Array(N); let n = 0;
   const hid = (F.col || "paintings") === "paintings" && G.hid && G.hid.length === N ? G.hid : null;
   for (let i = 0; i < N; i++) {
@@ -429,6 +431,7 @@ function pmRun(s, F) {
     if (subjFlag && !subjHas(i, subjFlag)) fail |= 256;
     if (tySet && !tySet.has(F.ty[i])) fail |= 512;
     if (bdMask && !bdMask[i]) fail |= 2048;
+    if (kdSet && !kdSet.has(KD[i] + 1)) fail |= 4096;
     if (hid && hid[i]) fail |= 1024;   // not an artwork (tools/hide_nonart.py): off every list and count
     if (fail === 0) out[n++] = i;
     else if (fail & (fail - 1)) continue;
@@ -441,10 +444,14 @@ function pmRun(s, F) {
     if (!(fail & ~64)) counts.hueBand[pmHueBandOf(i, F)]++;
     if (!(fail & ~128)) counts.lightness++;
     if (F.ty && !(fail & ~512)) counts.ty[F.ty[i]]++;
+    if (KD && !(fail & ~4096)) counts.kd[KD[i] + 1]++;
     if (subjOn && !(fail & ~256)) for (let k = SUBJ.off[i], e = SUBJ.off[i + 1]; k < e; k++) counts.subj[SUBJ.tg[k]]++;
   }
   return { list: out.slice(0, n), counts };
 }
+
+// with prints or illustrations in the Kind filter the count says "works", not "paintings"
+const pmKdNoun = (F, s, k) => s && s.f && (s.f.kdSet || []).some(v => v > 1) ? (k === "noun" ? "work" : "works") : pmColLabel(F, k);
 
 // ---------- the spec: what to show and how (the address's query) ----------
 const pmFresh = () => ({ arr: "color", f: pmFilterFresh(), seed: -1, fav: 0, place: "avg", upToYear: null, mag: null, col: "paintings" });
@@ -523,6 +530,7 @@ function pmParse(q, F) {
   if (p.get("mus")) f.musSet = p.get("mus").split(",").map(k => F.G.src.findIndex(x => x.k === k)).filter(v => v >= 0);
   if (p.get("type") && F.meta.types) f.tySet = p.get("type").split(",").map(v => F.meta.types.findIndex(t => routeSlug(t) === v) + 1).filter(v => v > 0);
   f.bdSet = p.getAll("bd").filter(Boolean).slice(0, 12);
+  if (p.get("kind") && F && F.G && F.G.rooms) f.kdSet = p.get("kind").split(",").map(k => k === "paintings" ? 1 : F.G.rooms.findIndex(r => r.key === k) + 2).filter(v => v > 0);
   if (p.get("subj") && SUBJ) f.subjSet = p.get("subj").split(",").map(k => SUBJ.tags.findIndex(n => routeSlug(n) === k)).filter(v => v >= 0);
   if (p.get("rnd") === "1") s.rnd = 1;   // a cold start: js/boot.js asks for a random cluster of the big map (never written back to the address)
   const sd = num("seed"); if (sd != null && sd >= 0 && sd < F.N) s.seed = sd;
@@ -550,6 +558,7 @@ function pmQS(s, F) {
   if (f.tySet && f.tySet.length && F && F.meta.types) out.push(["type", f.tySet.map(v => routeSlug(F.meta.types[v - 1])).join(",")]);
   if (f.subjSet && f.subjSet.length && SUBJ) out.push(["subj", f.subjSet.map(v => routeSlug(SUBJ.tags[v])).join(",")]);
   (f.bdSet || []).forEach(b => out.push(["bd", b]));
+  if (f.kdSet && f.kdSet.length && F && F.G && F.G.rooms) out.push(["kind", f.kdSet.map(v => v === 1 ? "paintings" : (F.G.rooms[v - 2] || {}).key).filter(Boolean).join(",")]);
   if (PM_NEEDS_SEED.has(s.arr) && s.seed >= 0) out.push(["seed", s.seed]);
   if (s.fav) out.push(["fav", 1]);
   if (s.upToYear != null) out.push(["uy", s.upToYear]);
@@ -612,6 +621,7 @@ function pmActiveChips(s, F) {
   if (f.musSet && f.musSet.length) c.push({ dim: "mus", text: f.musSet.length === 1 ? F.G.src[f.musSet[0]].short : `${f.musSet.length} museums` });
   if (f.tySet && f.tySet.length && F.meta.types) c.push({ dim: "ty", text: f.tySet.length === 1 ? F.meta.types[f.tySet[0] - 1] : `${f.tySet.length} types` });
   if (f.subjSet && f.subjSet.length && SUBJ) c.push({ dim: "subj", text: subjSetLabel(f.subjSet) });
+  if (f.kdSet && f.kdSet.length && F.G && F.G.rooms) c.push({ dim: "kd", text: f.kdSet.map(v => v === 1 ? "Paintings" : (F.G.rooms[v - 2] || {}).chip).filter(Boolean).join(" + ") });
   if (f.bdSet && f.bdSet.length) c.push({ dim: "bd", text: f.bdSet.length === 1 ? hfBoardLabel(f.bdSet[0]) : f.bdSet.length + " boards" });
   return c;
 }
@@ -699,6 +709,7 @@ function pmChipClear(f, dim) {
   else if (dim === "ty") f.tySet = [];
   else if (dim === "subj") f.subjSet = [];
   else if (dim === "bd") f.bdSet = [];
+  else if (dim === "kd") f.kdSet = [];
 }
 
 // ---------- Phase A: the painting you are on stays put (David, 2026-10-24) ----------
@@ -2357,7 +2368,7 @@ function pmMount(el, s, F) {
       const b = facets.querySelector(`[data-pmpre="${k}"]`); if (!b) return;
       const on = p.on(s.f), n = on ? lay.n : pmPatchCount(s, F, p, i);
       b.querySelector("[data-pmprec]").textContent = n >= 10000 ? Math.round(n / 1000) + "k" : n >= 1000 && innerWidth <= 460 ? (n / 1000).toFixed(1).replace(".0", "") + "k" : n.toLocaleString();
-      b.setAttribute("aria-label", `${p.label}: ${n.toLocaleString()} ${n === 1 ? pmColLabel(F, "noun") : pmColLabel(F, "nounP")}${on ? ", on. Tap to remove" : ""}`);
+      b.setAttribute("aria-label", `${p.label}: ${n.toLocaleString()} ${n === 1 ? pmKdNoun(F, PM_NOW && PM_NOW.s, "noun") : pmKdNoun(F, PM_NOW && PM_NOW.s, "nounP")}${on ? ", on. Tap to remove" : ""}`);
       if (!on && n <= 1) { b.disabled = true; b.classList.add("none"); }
     }, 30 + k * 40));
     paintWalk();
@@ -3044,7 +3055,7 @@ function pmMount(el, s, F) {
   let cntShown = -1, cntRaf = 0;
   function paintCount() {
     const b = el.querySelector("[data-pmcount]"); if (!b) return;
-    const nounP = pmColLabel(F, "nounP"), nounS = pmColLabel(F, "noun"), total = (F.N | 0) - pmHidN(F);
+    const nounP = pmKdNoun(F, PM_NOW && PM_NOW.s, "nounP"), nounS = pmKdNoun(F, PM_NOW && PM_NOW.s, "noun"), total = (F.N | 0) - pmHidN(F);
     b.hidden = pmSolo(s) || !lay || !total || !lay.n && !pmActiveChips(s, F).length;
     el.classList.toggle("pmx-hascount", !b.hidden);
     if (b.hidden) { cntShown = -1; return; }
@@ -3089,7 +3100,7 @@ function pmMount(el, s, F) {
     const nf = solo ? chips.filter(c => c.dim !== "painter").length : 0;
     chipbar.classList.toggle("pmx-chipbar-wrap", solo);
     chipbar.innerHTML = chips.map((c, k) => solo && c.dim === "painter"
-      ? `<button class="pmx-xchip pmx-xscope" data-pmxclear="${k}" aria-label="${esc(c.text)}: show every ${esc(pmColLabel(F, "painter").toLowerCase())}">${esc(c.text)}<i>${ICON.x}</i></button><button class="pmx-xchip pmx-xcount" data-pmxfilter aria-label="Filter: ${lay.n.toLocaleString()} of ${total.toLocaleString()} ${esc(pmColLabel(F, "nounP"))}">${lay.n === total ? total.toLocaleString() : lay.n.toLocaleString() + " of " + total.toLocaleString()} ${esc(pmColLabel(F, total === 1 ? "noun" : "nounP"))}${PM_ICON.filter}</button>`
+      ? `<button class="pmx-xchip pmx-xscope" data-pmxclear="${k}" aria-label="${esc(c.text)}: show every ${esc(pmColLabel(F, "painter").toLowerCase())}">${esc(c.text)}<i>${ICON.x}</i></button><button class="pmx-xchip pmx-xcount" data-pmxfilter aria-label="Filter: ${lay.n.toLocaleString()} of ${total.toLocaleString()} ${esc(pmKdNoun(F, PM_NOW && PM_NOW.s, "nounP"))}">${lay.n === total ? total.toLocaleString() : lay.n.toLocaleString() + " of " + total.toLocaleString()} ${esc(pmColLabel(F, total === 1 ? "noun" : "nounP"))}${PM_ICON.filter}</button>`
       : c.dim === "color" && s.f.hexes.length ? colorChipHTML(c, k)
       : `<button class="pmx-xchip" data-pmxclear="${k}">${esc(c.text)}<i>${ICON.x}</i></button>`).join("")
       + (nf > 1 ? `<button class="pmx-xchip pmx-xall" data-pmxall>Clear all</button>` : "");
@@ -3118,7 +3129,7 @@ function pmMount(el, s, F) {
       } else if (s.f.hexes.length) {   // a color or a palette that nothing holds this closely: say so, and offer the one step that helps
         const ov = s.f.colorMode === "overall", maxTol = ov ? PM_PAL_MAX : 30, can = s.f.tol < maxTol;
         wait.classList.add("pmx-wait-empty");
-        wait.innerHTML = `<span class="pmx-empty-t">No ${esc(pmColLabel(F, "nounP"))} hold ${ov ? "this palette" : s.f.hexes.length > 1 ? "all of these colors" : "this color"} that closely.</span><span class="pmx-empty-a">${can ? `<button class="pmx-ebtn" data-pmloosen2>Loosen the closeness</button>` : ""}<button class="pmx-ebtn${can ? " ghost" : ""}" data-pmloosen>${pmActiveChips(s, F).length > 1 ? "Clear the filters" : "Show every painting"}</button></span>`;
+        wait.innerHTML = `<span class="pmx-empty-t">No ${esc(pmKdNoun(F, PM_NOW && PM_NOW.s, "nounP"))} hold ${ov ? "this palette" : s.f.hexes.length > 1 ? "all of these colors" : "this color"} that closely.</span><span class="pmx-empty-a">${can ? `<button class="pmx-ebtn" data-pmloosen2>Loosen the closeness</button>` : ""}<button class="pmx-ebtn${can ? " ghost" : ""}" data-pmloosen>${pmActiveChips(s, F).length > 1 ? "Clear the filters" : "Show every painting"}</button></span>`;
         const l2 = wait.querySelector("[data-pmloosen2]"); if (l2) l2.onclick = () => { s.f.tol = Math.min(maxTol, s.f.tol + (ov ? 3 : 6)); rebuild({ focus: lastFocus }); };
       } else wait.innerHTML = `Nothing matches all of that. <button class="wl" data-pmloosen>Clear the filters</button>`;
     }
@@ -3203,7 +3214,7 @@ function pmMount(el, s, F) {
   // under a quiet "Matching 206,345 paintings · 40%" line, then lands (the first open shows the same line over the empty stage)
   let palSeq = 0;
   function palWait(then) {
-    const my = ++palSeq, f = s.f, noun = pmColLabel(F, "nounP");
+    const my = ++palSeq, f = s.f, noun = pmKdNoun(F, PM_NOW && PM_NOW.s, "nounP");
     const say = pct => {
       if (!lay) { wait.hidden = false; wait.textContent = `Finding ${noun} with this palette · ${Math.round(pct * 100)}%`; return; }
       noteEl.hidden = false; noteEl.className = "pmx-note pmx-note-busy";
@@ -3292,7 +3303,7 @@ function pmMount(el, s, F) {
   }
   function openFind() {
     if (document.querySelector(".sheet,.rooms-stem")) return;
-    const painterLab = pmColLabel(F, "painter"), nounP = pmColLabel(F, "nounP"), nounS = pmColLabel(F, "noun");
+    const painterLab = pmColLabel(F, "painter"), nounP = pmKdNoun(F, PM_NOW && PM_NOW.s, "nounP"), nounS = pmKdNoun(F, PM_NOW && PM_NOW.s, "noun");
     const { sh, close } = sheet(`<div class="sr-sheet"><div class="sr-field"><span>${ICON.search}</span><input type="search" class="sr-input" placeholder="Painter, place, subject or years" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Search the map"></div><div class="sr-body" data-pmfb></div></div>`);
     sh.classList.add("sr-sheet-wrap", "pmx-findsheet");
     const inp = sh.querySelector(".sr-input"), body = sh.querySelector("[data-pmfb]");
@@ -3301,7 +3312,7 @@ function pmMount(el, s, F) {
     let rows = [];
     // the live count of one suggestion: the map's own filter pass, with this suggestion's pieces laid over the filters already on
     const countOf = ps => {
-      const key = JSON.stringify([ps.map(p => [p.kind, p.val, p.vals, p.y0, p.y1]), s.f.y0, s.f.y1, s.f.coSet, s.f.mvSet, s.f.painterSet, s.f.hexes, s.f.hueBand, s.f.l0, s.f.l1, s.f.musSet, s.f.bdSet, s.f.tySet, s.f.subjSet, !!SUBJ]);
+      const key = JSON.stringify([ps.map(p => [p.kind, p.val, p.vals, p.y0, p.y1]), s.f.y0, s.f.y1, s.f.coSet, s.f.mvSet, s.f.painterSet, s.f.hexes, s.f.hueBand, s.f.l0, s.f.l1, s.f.musSet, s.f.bdSet, s.f.tySet, s.f.kdSet, s.f.subjSet, !!SUBJ]);
       if (cache.has(key)) return cache.get(key);
       const f = { ...s.f }; ps.forEach(p => pmqApply(f, p));
       const n = pmRun({ f }, F).list.length; cache.set(key, n); return n;
@@ -3396,7 +3407,7 @@ function pmMount(el, s, F) {
     sh.querySelector("[data-sheet-close]").onclick = () => { buzz(4); close(); };
     sh.querySelector("[data-pmarrange-go]").onclick = () => { close(); arrangeAround(i); };
     sh.querySelector("[data-pmwalk-go]").onclick = () => { close(); doWalk(); };
-    const noun = n => n === 1 ? pmColLabel(F, "noun") : pmColLabel(F, "nounP");
+    const noun = n => n === 1 ? pmKdNoun(F, PM_NOW && PM_NOW.s, "noun") : pmKdNoun(F, PM_NOW && PM_NOW.s, "nounP");
     const all = () => [...tg, ...within, ...(palT ? [palT] : [])];
     let tok = 0;
     const row = (p, on) => `<button class="pmx-tg${on ? " on" : ""}" data-tg="${p.id}" role="switch" aria-checked="${on}"><span class="pmx-tg-t"><b>${esc(p.label)}</b>${p.sub ? `<small>${esc(p.sub)}</small>` : ""}</span><em data-tgn="${p.id}"></em><i class="pmx-tg-sw" aria-hidden="true"></i></button>`;
@@ -3617,6 +3628,7 @@ function pmMount(el, s, F) {
       const cos = topMulti(F.meta.countries, C.co, coSelSet), mvs = topMulti(F.meta.movements, C.mv, mvSelSet);
       const pas = topMulti(F.meta.artists.map(a => a[0]), C.painter, paSelSet);
       const tySelSet = new Set(f.tySet || []), tys = F.meta.types ? topMulti(F.meta.types, C.ty, tySelSet).sort((a, b) => (a.name === "Other") - (b.name === "Other") || b.n - a.n) : [];
+      const kdSelSet = new Set(f.kdSet || []), kds = C.kd && F.G.rooms ? [{ name: "Paintings", v: 1, n: C.kd[1] }, ...F.G.rooms.map((r, q) => ({ name: r.chip, v: q + 2, n: C.kd[q + 2] }))].filter(x => x.n || kdSelSet.has(x.v)) : [];
       const musAll = F.G.src.map((m, k) => ({ name: m.short, v: k, n: C.mus[k] })).filter(x => x.n || musSelSet.has(x.v));
       const coList = coq ? cos.filter(x => x.name.toLowerCase().includes(coq.toLowerCase())).slice(0, 30) : cos.slice(0, fopen.co ? 44 : 10);
       const pList = fq ? pas.filter(x => x.name.toLowerCase().includes(fq.toLowerCase())).slice(0, 24) : pas.slice(0, fopen.painter ? 60 : 10);
@@ -3626,7 +3638,7 @@ function pmMount(el, s, F) {
         const cnt = idx.reduce((s2, v) => s2 + (C.co[v] || 0), 0);
         return chip("data-pmregion", key, label, cnt, on);
       }).join("");
-      const nounP = pmColLabel(F, "nounP"), isPaintings = !F.col || F.col === "paintings";
+      const nounP = pmKdNoun(F, PM_NOW && PM_NOW.s, "nounP"), isPaintings = !F.col || F.col === "paintings";
       const painterLab = pmColLabel(F, "painter"), coLab = pmColLabel(F, "co"), musLab = pmColLabel(F, "mus"), mvLab = pmColLabel(F, "mv");
       // the pieces, composed in the usual order for a map of many painters, or in the order a one-painter map wants
       const hueChips = XB_HUE_WORDS.map((w, j) => chip("data-pmhue", j, w, C.hueBand[j], f.hueBand === j, solo ? PM_HUE_DOT[j] : null)).join("");
@@ -3660,7 +3672,7 @@ function pmMount(el, s, F) {
       const bdHTML = () => !PM_BDS || !PM_BDS.length || (F.col || "paintings") !== "paintings" ? "" : PM_BDS.map(g => { const open = fopen["bd" + g.title], show = open ? g.boards : g.boards.filter((b, k) => k < 12 || bdSel.has(b.id)); return secH("bd" + g.title, g.title, sumOf(bdSel, g.boards, "id"), `<div class="pmx-chips">${show.map(b => chip("data-pmbd", b.id, b.label, null, bdSel.has(b.id))).join("")}${!open && g.boards.length > show.length ? `<button class="pmx-more" data-pmmore="bd${esc(g.title)}">All ${g.boards.length}</button>` : ""}</div>`); }).join("");
       const favRow = favIds.length ? `<div class="pmx-row"><span class="pmx-lab">Yours</span><div class="pmx-chips">${chip("data-pmfav", 1, "Your favorites", favN, !!s.fav)}</div></div>` : "";
       if (solo) q$("[data-pmbody]").innerHTML = `
-        <div class="pmx-sh-top"><b>Filter</b><span>${n === sy.total ? n.toLocaleString() : n.toLocaleString() + " of " + sy.total.toLocaleString()} ${sy.total === 1 ? pmColLabel(F, "noun") : nounP}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
+        <div class="pmx-sh-top"><b>Filter</b><span>${n === sy.total ? n.toLocaleString() : n.toLocaleString() + " of " + sy.total.toLocaleString()} ${sy.total === 1 ? pmKdNoun(F, PM_NOW && PM_NOW.s, "noun") : nounP}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
         ${n ? "" : `<p class="pmx-none">Nothing matches all of that. Loosen a range, or Reset.</p>`}
         ${favRow}
         <div class="pmx-row"><span class="pmx-lab">Color family</span><div class="pmx-chips">${hueChips}</div>
@@ -3673,8 +3685,9 @@ function pmMount(el, s, F) {
           <label class="search pmx-find"><span>${ICON.search}</span><input data-pmq type="search" placeholder="Find a ${esc(painterLab.toLowerCase())}" value="${esc(fq)}" autocomplete="off"></label>
           <div class="pmx-chips">${pList.map(x => chip("data-pmp", x.v, x.name, x.n, paSelSet.has(x.v))).join("")}</div></div>`;
       else q$("[data-pmbody]").innerHTML = `
-        <div class="pmx-sh-top"><b>Filter</b><span>${n === F.N - pmHidN(F) ? n.toLocaleString() : n.toLocaleString() + " of " + (F.N - pmHidN(F)).toLocaleString()} ${F.N === 1 || (n === F.N && n === 1) ? pmColLabel(F, "noun") : nounP}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
+        <div class="pmx-sh-top"><b>Filter</b><span>${n === F.N - pmHidN(F) ? n.toLocaleString() : n.toLocaleString() + " of " + (F.N - pmHidN(F)).toLocaleString()} ${F.N === 1 || (n === F.N && n === 1) ? pmKdNoun(F, PM_NOW && PM_NOW.s, "noun") : nounP}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
         ${favIds.length ? `<div class="pmx-row"><span class="pmx-lab">Yours</span><div class="pmx-chips">${chip("data-pmfav", 1, "Your favorites", favN, !!s.fav)}</div></div>` : ""}
+        ${kds.length > 1 ? secH("kd", "Kind", sumOf(kdSelSet, kds), `<div class="pmx-chips">${kds.map(x => chip("data-pmkd", x.v, x.name, x.n, kdSelSet.has(x.v))).join("")}</div>`) : ""}
         ${bdHTML()}
         ${secH("color", "Color", [f.hexes.length ? (f.hexes.length === 1 ? (f.name || nameOf(f.hexes[0]).text) : f.hexes.length + " colors") : "", f.hueBand != null ? XB_HUE_WORDS[f.hueBand] : "", f.l0 != null || f.l1 != null ? "Lightness " + (f.l0 == null ? 0 : f.l0) + "\u2013" + (f.l1 == null ? 100 : f.l1) : ""].filter(Boolean).join(" \u00b7 "), `<div class="pmx-sw">${colsSorted.map(c => `<button data-pmhex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" class="${f.hexes.includes(c.h.toUpperCase()) ? "on" : ""}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
           ${f.hexes.length ? `<p class="pmx-cap2">${f.hexes.map(h => `<i style="--c:${h}"></i>`).join("")}${esc(f.hexes.length === 1 ? (f.name || nameOf(f.hexes[0]).text) : f.hexes.length + " colors")} <span>\u00b7 within ${f.tol}%</span></p>
@@ -3704,7 +3717,7 @@ function pmMount(el, s, F) {
         ${secH("mus", musLab, sumOf(musSelSet, musAll), `<div class="pmx-chips">${musAll.map(x => chip("data-pmmus", x.v, x.name, x.n, musSelSet.has(x.v))).join("")}</div>`)}
         ${secH("painter", painterLab, sumOf(paSelSet, pas), `<label class="search pmx-find"><span>${ICON.search}</span><input data-pmq type="search" placeholder="Find a ${esc(painterLab.toLowerCase())}" value="${esc(fq)}" autocomplete="off"></label>
           <div class="pmx-chips">${pList.map(x => chip("data-pmp", x.v, x.name, x.n, paSelSet.has(x.v))).join("")}${!fq && !fopen.painter && pas.length > 10 ? `<button class="pmx-more" data-pmmore="painter">More ${esc(nounP)}</button>` : ""}</div>`)}
-        <div class="pmx-foot"><button type="button" class="btn pmx-show" data-sheet-close>Show ${n.toLocaleString()} ${n === 1 ? pmColLabel(F, "noun") : nounP}</button></div>`;
+        <div class="pmx-foot"><button type="button" class="btn pmx-show" data-sheet-close>Show ${n.toLocaleString()} ${n === 1 ? pmKdNoun(F, PM_NOW && PM_NOW.s, "noun") : nounP}</button></div>`;
       const inp = q$("[data-pmq]");
       if (inp) inp.oninput = () => { fq = inp.value.trim(); const pos = inp.selectionStart; renderFilter(); const ni = q$("[data-pmq]"); ni.focus(); try { ni.setSelectionRange(pos, pos); } catch (e) {} };
       const coInp = q$("[data-pmcoq]");
@@ -3736,6 +3749,7 @@ function pmMount(el, s, F) {
       else if (d.pmregion) pmRegionToggle(f, d.pmregion, F);
       else if (d.pmco) { const v = +d.pmco, set = new Set(f.coSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.coSet = [...set]; f.region = null; }
       else if (d.pmmv) { const v = +d.pmmv, set = new Set(f.mvSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.mvSet = [...set]; }
+      else if (d.pmkd) { const v = +d.pmkd, set = new Set(f.kdSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.kdSet = [...set]; }
       else if (d.pmty) { const v = +d.pmty, set = new Set(f.tySet || []); if (set.has(v)) set.delete(v); else set.add(v); f.tySet = [...set]; }
       else if (d.pmmus) { const v = +d.pmmus, set = new Set(f.musSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.musSet = [...set]; }
       else if (d.pmsubj) { const v = +d.pmsubj, set = new Set(f.subjSet || []); if (set.has(v)) set.delete(v); else set.add(v); f.subjSet = [...set]; }
