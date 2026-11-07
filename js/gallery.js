@@ -2541,11 +2541,10 @@ function glPage(i, d, fromHex, tol) {
     if (pickArmed) return;
     // desktop (David, 2026-10-21: "first click painting page, second click full screen, third zoom"): this click opens the immersive
     // viewer at FIT (the whole painting on black, growing out of the picture); a click in the viewer then zooms in (js/paintzoom.js loupeClick)
-    if (document.documentElement.classList.contains("desk") && e.clientX != null) {
-      const r = sampleImg.getBoundingClientRect();
-      return openLookCloser(null, { fromRect: { left: r.left, top: r.top, width: r.width, height: r.height } });
-    }
-    toolTray();   // a phone: a tap shows the picture's tools (David, 2026-10-28); Look closer is the first of them
+    // David, 2026-11-07: on a phone too, "clicking the painting should just open it as the Look closer view instead of giving
+    // you all those other options" (Look closer carries Value, Squint, Where and Pick itself). The tool tray is gone.
+    const r = sampleImg.getBoundingClientRect();
+    return openLookCloser(null, { fromRect: { left: r.left, top: r.top, width: r.width, height: r.height } });
   };
   // The picture's tools, in a tray over the bottom of the picture (David, 2026-10-28): Look closer, Pick a color, Where each color sits, Select an object, Value and squint.
   // A tap on the picture opens it, a tap on the picture again (or anywhere else) puts it away; a one-time line under the picture says it is there.
@@ -2564,7 +2563,7 @@ function glPage(i, d, fromHex, tol) {
     heroSpan.appendChild(tray); requestAnimationFrame(() => tray.classList.add("in")); buzz(3);
     if (!S.glToolsHint) { S.glToolsHint = 1; save(); const h = el.querySelector("[data-gltoolshint]"); if (h) h.remove(); }
   }
-  if (!glDesk() && !S.glToolsHint) { const band = heroSpan.closest(".gl-hero"); if (band) band.insertAdjacentHTML("afterend", `<p class="gl-toolhint" data-gltoolshint>Tap the picture for its tools</p>`); }
+
   // swipe the picture left/right to move to the next/previous painting by the same painter (trail-aware: a
   // normal galleryPage navigation, so Back works) — David's rebuild brief, 2026-10-09, point 7
   let swipeStart = null;

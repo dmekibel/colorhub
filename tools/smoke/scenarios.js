@@ -6830,9 +6830,8 @@ scenario("paintings", "a plain tap on the painting opens Look closer, not the co
   t.expect(!t.$("[data-glpickbtn]").classList.contains("on"), "the eyedropper starts armed");
   const r = img.getBoundingClientRect(), w = t.w;
   img.dispatchEvent(new w.MouseEvent("click", { bubbles: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 }));
-  await t.waitFor(".gl-tray.in", 4000, "the tools tray after a plain tap on the painting");   // 2026-10-28: a tap shows the picture's tools; the viewer is its first button
-  await t.click(await t.waitFor('[data-gltool="closer"]', 2000, "the Look closer tool"), { force: true, wait: 400 });
-  await t.waitFor(".glz-scrim.in", 4000, "Look closer from the tray");
+  // 2026-11-07: a plain tap on the painting opens Look closer directly (no tools tray)
+  await t.waitFor(".glz-scrim.in", 4000, "Look closer straight from a tap");
   t.expect(!t.$(".eyd-loupe"), "the eyedrop loupe showed from a plain tap");
   t.expect(!t.$(".gcr-sheet, .sw-sheet"), "a color readout opened from a plain tap");
   t.expect(!t.$(".iso"), "the guessing game opened from a plain tap");
