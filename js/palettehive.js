@@ -18,7 +18,7 @@
 //     max         the slider's ceiling   sub(arr, mode)  the one-line caption under the title   fine  the honest footnote
 //     cta         { label, run } a door out ("All of <painter>'s colors")
 //   And the hooks js/paintercolors.js uses: arrs (its own arrangements), itemsFn(arr, n, mode), rowsFn(arr, items) -> labelled
-//   row groups (By decade / Against peers), noCount(arr, mode), modes ([[key, label]…], e.g. Vivid | All colors),
+//   row groups (By decade / Against peers), noCount(arr, mode), countFn(arr, mode) -> {min,max,def,label} (the "how many" stepper per arrangement), modes ([[key, label]…], e.g. Vivid | All colors),
 //   label2(arr, node) (the second line in a big cell), onTap(node, close, {mode}), sizeLabel, defer(progress, handle) (an
 //   async load behind a calm progress bar; resolves to more options, or null to close).
 //
@@ -191,9 +191,11 @@ function openPaletteHive(o0 = {}) {
       const [sx, sy] = worldToScreen(n.x, n.y), rr = Math.max(.4, n.r * zoom) * (pressed === n ? .94 : 1);
       if (hx) { hexPath(sx, sy, rr); } else { ctx.beginPath(); ctx.arc(sx, sy, rr, 0, 6.283185307); }
       ctx.fillStyle = n.h; ctx.fill();
-      if (rr >= 5) {
+      // a dark circle gets no light outline (David, 2026-11-07: it looked like a white halo zoomed out); only a very
+      // close-up one keeps a faint edge so a near-black still reads against the ground
+      if (rr >= 5 && (hx || n.L >= 50 || rr >= 60)) {
         ctx.lineWidth = hx ? Math.max(1, zoom * 2.4) : Math.max(1, rr * .025);
-        ctx.strokeStyle = hx ? "rgba(20,19,17,.4)" : n.L < 50 ? `rgba(236,232,223,${n.L < 14 ? .3 : .18})` : "rgba(14,13,11,.12)";
+        ctx.strokeStyle = hx ? "rgba(20,19,17,.4)" : n.L < 50 ? "rgba(236,232,223,.12)" : "rgba(14,13,11,.12)";
         ctx.stroke();
       }
       const d = rr * 2;
@@ -245,7 +247,7 @@ function openPaletteHive(o0 = {}) {
   };
   // Circles: all one size unless "Size circles…" is on. A honeycomb never scales.
   function relayout(animate) {
-    const cols = getColors(count), prev = nodes;
+    const cols = getColors(curCount()), prev = nodes;
     const res = phPlace(arr, cols, o.rowsFn, (H - topPad() - botPad()) / Math.max(W, 1));
     const scaled = !honey() && size, RC = PH_D / 2 - 2, RH = PH_D / 2;
     const real = res.nodes.filter(n => !n.ghost), mx = Math.max(...real.map(n => n.share), .0001);
@@ -339,14 +341,18 @@ function openPaletteHive(o0 = {}) {
 
   // ---------- the ⋯ sheet: the app's standard map sheet (same component and classes as the painting map's) ----------
   const arrOk = k => arrs.some(a => a[0] === k);
-  const showCount = () => !(o.noCount && o.noCount(arr, mode)) && max > minN;
+  // how many colors: o.countFn(arr, mode) -> { min, max, def, label } lets each arrangement have its own range and meaning
+  // (By decade: colors per decade row); one remembered value per arrangement and reading. Without it, one count for all.
+  const counts = {}, cfg = () => (o.countFn ? o.countFn(arr, mode) : null), ckey = () => arr + "|" + mode;
+  function curCount() { const c = cfg(); return c ? clamp(counts[ckey()] != null ? counts[ckey()] : c.def, c.min, c.max) : count; }
+  const showCount = () => { const c = cfg(); return c ? c.max > c.min : !(o.noCount && o.noCount(arr, mode)) && max > minN; };
   const saveArr = () => phSavePref(p => { p.arr = { ...(p.arr || {}), [src()]: arr }; });
   const saveMode = () => phSavePref(p => { p.mode = { ...(p.mode || {}), [src()]: mode }; });
   function setLook(k) { if (k === look) return; look = k; phSavePref(p => { p.look = k; }); relayout(true); }
   function setSize(on) { if (on === size) return; size = on; phSavePref(p => { p.size = on; }); relayout(true); }
   function setArr(k) { if (k === arr || !arrOk(k)) return; arr = k; saveArr(); relayout(true); }
   function setMode(k) { if (k === mode || !modes || !modes.some(m => m[0] === k)) return; mode = k; saveMode(); relayout(true); }
-  function setCount(v) { if (v === count) return; count = v; relayout(true); }
+  function setCount(v) { if (v === curCount()) return; if (cfg()) counts[ckey()] = v; else count = v; relayout(true); }
 
   let openSheetClose = null;
   function openOpts() {
@@ -372,18 +378,18 @@ function openPaletteHive(o0 = {}) {
           <button class="hm-look-chip${look === "honey" ? " on" : ""}" data-phlook="honey" role="radio" aria-checked="${look === "honey"}">${icon("honeycomb")}<span>Honeycomb</span></button></div>
         ${arrs.length > 1 ? `<div class="cx-sec"><b>Arrange</b></div>
         <div class="hm-seg phx-seg" role="radiogroup" aria-label="Arrange by">${arrs.map(([k, t]) => `<button class="${k === arr ? "on" : ""}" data-pharr="${k}" role="radio" aria-checked="${k === arr}">${esc(t)}</button>`).join("")}</div>` : ""}
+        ${showCount() ? `<div class="cx-sec"><b>${esc((cfg() || {}).label || "How many")}</b></div>
+        <div class="ph-count"><label class="ph-count-l"><input type="range" aria-label="${esc((cfg() || {}).label || "How many colors")}"><b data-ph-n>${curCount()}</b></label></div>` : ""}
         ${modes ? `<div class="cx-sec"><b>${esc(o.modesTitle || "Colors")}</b></div>
         <div class="hm-seg phx-seg" role="radiogroup" aria-label="Which colors">${modes.map(([k, t]) => `<button class="${k === mode ? "on" : ""}" data-phmode="${k}" role="radio" aria-checked="${k === mode}">${esc(t)}</button>`).join("")}</div>` : ""}
         ${sizeOn ? `<button class="pmx-tg${size ? " on" : ""}" data-phsize role="switch" aria-checked="${size}"><span class="pmx-tg-t"><b>${esc(o.sizeLabel || "Size circles by how much there is")}</b></span><i class="pmx-tg-sw" aria-hidden="true"></i></button>` : ""}
-        ${showCount() ? `<div class="cx-sec"><b>How many</b></div>
-        <div class="ph-count"><label class="ph-count-l"><input type="range" aria-label="How many colors"><b data-ph-n>${count}</b></label></div>` : ""}
         <p class="fine ph-fine">${o.fine ? esc(o.fine) : `Screen colors are approximate${o.subtitle ? " · " + esc(o.subtitle) : ""}.`}</p>`;
       body.querySelectorAll("[data-phlook]").forEach(b => b.onclick = () => { buzz(4); setLook(b.dataset.phlook); render(); });
       body.querySelectorAll("[data-pharr]").forEach(b => b.onclick = () => { buzz(4); setArr(b.dataset.pharr); render(); });
       body.querySelectorAll("[data-phmode]").forEach(b => b.onclick = () => { buzz(4); setMode(b.dataset.phmode); render(); });
       const sw = body.querySelector("[data-phsize]"); if (sw) sw.onclick = () => { buzz(5); setSize(!size); render(); };
       const input = body.querySelector(".ph-count input");
-      if (input) { const nOut = body.querySelector("[data-ph-n]"); countify(input, { min: minN, max, value: count, out: nOut, onSet: (v, final) => { nOut.textContent = v; setCount(v); if (final) buzz(3); } }); }
+      if (input) { const nOut = body.querySelector("[data-ph-n]"); const cc = cfg() || { min: minN, max }; countify(input, { min: cc.min, max: cc.max, value: curCount(), out: nOut, onSet: (v, final) => { nOut.textContent = v; setCount(v); if (final) buzz(3); } }); }
     }
     render();
   }
@@ -426,7 +432,7 @@ function openPaletteHive(o0 = {}) {
 
   // QA hook (tools/smoke/scenarios.js), same pattern as js/home.js's window.HM_CTRL: every field reads live state.
   const DEBUG = {
-    count: () => nodes.filter(n => !n.ghost).length,
+    count: () => nodes.filter(n => !n.ghost).length, setCount, curCount,
     arr: () => arr, mode: () => mode, look: () => look, size: () => size,
     setMode, setArr, setLook: k => setLook(k === "honeycomb" ? "honey" : k), setSize, openOpts,
     nodes: () => nodes.filter(n => !n.ghost).map(n => ({ h: n.h, n: n.n, key: n.key, r: n.r, x: n.x, y: n.y, share: n.share, hollow: !!n.hollow })),
