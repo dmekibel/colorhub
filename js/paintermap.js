@@ -42,6 +42,7 @@ const PTM_REG = [
   ["The Americas", ["United States", "Canada", "Mexico", "Brazil", "Argentina", "Chile", "Peru", "Colombia", "Cuba", "Venezuela", "Uruguay", "Ecuador", "Bolivia", "Guatemala"]],
 ];
 const PTM_DEF = { arr: "color", face: "", min: 6, only: "all", near: "", p: "" };
+const ptmMag = () => { try { const v = localStorage.getItem("ptm-mag"); if (v != null && isFinite(+v)) return Math.max(0, Math.min(1, +v)); } catch (e) {} return .5; };
 const PTM_STATE = new Map();   // the address a map opened with -> its spec as you left it
 const PTM_VIEW = new Map();    // arrangement|face|filter -> { tx, ty, s }: where you were, so Back from a painter lands on it again
 const PTM_LAY = new Map();     // arrangement|filter -> layout
@@ -59,6 +60,16 @@ const ptmVer = () => (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA
 // ---------- the data ----------
 function ptmImg(src) {
   return new Promise(res => { const im = new Image(); im.decoding = "async"; im.onload = () => res(im); im.onerror = () => res(null); im.src = src + ptmVer(); });
+}
+// David, 2026-11-07 ("on desktop painter map is super slow"): each face used to be clipped to a circle on every frame
+// (thousands of save/clip/restore per frame). The sheets are cut round once here, so a frame is plain drawImage calls.
+function ptmRound(img, tile) {
+  if (!img) return null;
+  const c = document.createElement("canvas"); c.width = img.width; c.height = img.height;
+  const g = c.getContext("2d"); g.drawImage(img, 0, 0); g.globalCompositeOperation = "destination-in"; g.beginPath();
+  const r = tile / 2;
+  for (let y = 0; y < img.height; y += tile) for (let x = 0; x < img.width; x += tile) { g.moveTo(x + tile, y + r); g.arc(x + r, y + r, r, 0, 6.2832); }
+  g.fill(); return c;
 }
 function ptmColors(r) {
   // the painter page's strip rule (js/artwiki.js awVividStrip): vivid, mid-light colors of their most famous paintings, distinct from each other
@@ -83,7 +94,7 @@ function ptmLoad() {
     for (let i = 0; i < A.length; i += 300) { for (let j = i; j < Math.min(A.length, i + 300); j++) ptmColors(A[j]); await new Promise(r => setTimeout(r, 0)); }
     const ix = new Map(A.map((r, i) => [r.s, i])), nb = A.map(() => []);
     (m.e || []).forEach(([a, b, k]) => { nb[a].push([b, k, 0]); nb[b].push([a, k, 1]); });   // [other, 0 teacher | 1 influence, 0 = they came first]
-    return (PTM = { A, ix, nb, W: m.W, H: m.H, tile: m.tile, cols: m.cols, pc: m.pc, faces: fi, ports: pi, t0: 0 });
+    return (PTM = { A, ix, nb, W: m.W, H: m.H, tile: m.tile, cols: m.cols, pc: m.pc, faces: ptmRound(fi, m.tile), ports: ptmRound(pi, m.tile), t0: 0 });
   }).catch(e => { PTM_P = null; throw e; }));
 }
 
@@ -220,7 +231,8 @@ function ptmMount(el, s, from) {
   const D = PTM, A = D.A, cv = el.querySelector("canvas"), ctx = cv.getContext("2d"), stage = el.querySelector(".ptm-stage");
   const $ = sel => el.querySelector(sel);
   let W = 0, H = 0, dpr = 1, dead = false, raf = 0, lay = null, ids = [], view = { tx: 0, ty: 0, s: 20 }, minS = 4, bb = null, hash = null, sel = -1, hover = -1, centerI = -1;
-  let ground = "#0E0D0B", ink = "#ECE8DF", fadeT0 = performance.now(), vx = 0, vy = 0, glide = null, dirty = true, lit = null, litSet = null;
+  let ground = "#0E0D0B", ink = "#ECE8DF", fadeT0 = performance.now(), vx = 0, vy = 0, glide = null, dirty = true, lit = null, litSet = null, focus = null;
+  const vis = [];   // the cells as last drawn: [painter, x, y, radius, lens size] on screen (hit testing follows the lens)
   const cleanup = [], faceOf = () => s.face || ptmFaceAuto(s.arr);
   const topPad = () => 120, botPad = () => 150;
   const readTheme = () => { const cs = getComputedStyle(stage); ground = cs.backgroundColor || ground; ink = getComputedStyle(el).color || ink; dirty = true; };
@@ -268,7 +280,7 @@ function ptmMount(el, s, from) {
     if (y1 < topPad()) view.ty += topPad() - y1; if (y0 > H - botPad()) view.ty -= y0 - (H - botPad());
   }
   function size() {
-    const r = stage.getBoundingClientRect(); dpr = Math.min(3, devicePixelRatio || 1);
+    const r = stage.getBoundingClientRect(); dpr = Math.min(2, devicePixelRatio || 1);
     W = Math.max(1, Math.round(r.width)); H = Math.max(1, Math.round(r.height)); cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + "px"; cv.style.height = H + "px"; dirty = true;
   }
 
@@ -305,58 +317,52 @@ function ptmMount(el, s, from) {
       const t = l.t + (sc > 6 || !l.left ? "" : ""); ctx.strokeText(t, l.left ? Math.max(14, x) : x, y); ctx.fillText(t, l.left ? Math.max(14, x) : x, y);
       ctx.globalAlpha = 1;
     };
-    // the cells
+    // the cells, through the Magnify lens (David, 2026-11-07: "i wanna add magnification"): cells near the lens grow and
+    // push their neighbors out, so nothing overlaps; the lens follows the mouse on a desktop, sits mid-screen on a phone.
+    const mag = s.mag == null ? ptmMag() : s.mag, k0 = mag * 2 * Math.max(0, Math.min(1, (120 - sc) / 80));
+    const fx = focus ? focus[0] : W / 2, fy = focus ? focus[1] : topPad() + (H - topPad() - botPad()) / 2, R = Math.max(110, Math.min(W, H) * .2), R2 = R * R;
+    vis.length = 0;
     for (let k = 0; k < ids.length; k++) {
-      const i = ids[k], r = A[i], x = lay.x[i] * sc + view.tx, y = lay.y[i] * sc + view.ty;
-      if (x < -rad || x > W + rad || y < -rad || y > H + rad) continue;
-      const on = !litSet || litSet.has(i); ctx.globalAlpha = on ? 1 : dim;
-      ctx.beginPath(); ctx.arc(x, y, rad, 0, 6.2832); ctx.fillStyle = r.sig;
-      if (mode === "dna" && !dotOnly && r.dna.length > 1) {
-        ctx.save(); ctx.clip(); const n = r.dna.length, w = rad * 2 / n;
-        r.dna.forEach((h, q) => { ctx.fillStyle = h; ctx.fillRect(x - rad + q * w - .3, y - rad, w + .6, rad * 2); }); ctx.restore();
-      } else ctx.fill();
-      // David, 2026-11-07: zoomed out, the faces turning into color dots "looks broken": tiny cells keep their picture
-      // (an unclipped square at that size reads the same as a circle and is far cheaper to draw).
+      const i = ids[k], r = A[i]; let x = lay.x[i] * sc + view.tx, y = lay.y[i] * sc + view.ty, m = 1;
+      if (k0 > 0) { const dx = x - fx, dy = y - fy, u2 = (dx * dx + dy * dy) / R2; if (u2 < 9) { const e = Math.exp(-u2), t = 1 + k0 * e; m = Math.max(.35, Math.min(t, 1 + k0 * e * (1 - 2 * u2))); x = fx + dx * t; y = fy + dy * t; } }
+      const rr = rad * m;
+      if (x < -rr || x > W + rr || y < -rr || y > H + rr) continue;
+      vis.push([i, x, y, rr, m]);
+    }
+    if (k0 > 0) vis.sort((p, q) => p[4] - q[4]);   // the biggest last, on top
+    for (const [i, x, y, rr] of vis) {
+      const r = A[i], on = !litSet || litSet.has(i); ctx.globalAlpha = on ? 1 : dim;
       const src = faceSrc(r, mode);
-      if (src && dotOnly) { ctx.globalAlpha = on ? 1 : dim; ctx.drawImage(src[0], src[1], src[2], D.tile, D.tile, x - rad * .86, y - rad * .86, rad * 1.72, rad * 1.72); }
-      else if (src) { ctx.save(); ctx.beginPath(); ctx.arc(x, y, rad, 0, 6.2832); ctx.clip(); ctx.globalAlpha = (on ? 1 : dim) * fa; ctx.drawImage(src[0], src[1], src[2], D.tile, D.tile, x - rad, y - rad, rad * 2, rad * 2); ctx.restore(); }
-      if (litSet && on) { ctx.globalAlpha = 1; ctx.lineWidth = 2; ctx.strokeStyle = ink; ctx.beginPath(); ctx.arc(x, y, rad + 1.5, 0, 6.2832); ctx.stroke(); }
-      if (i === sel || i === hover) { ctx.globalAlpha = 1; ctx.lineWidth = 2.5; ctx.strokeStyle = ink; ctx.beginPath(); ctx.arc(x, y, rad + 2, 0, 6.2832); ctx.stroke(); }
+      if (src) ctx.drawImage(src[0], src[1], src[2], D.tile, D.tile, x - rr, y - rr, rr * 2, rr * 2);
+      else if (mode === "dna" && !dotOnly && r.dna.length > 1) {
+        ctx.save(); ctx.beginPath(); ctx.arc(x, y, rr, 0, 6.2832); ctx.clip(); const n = r.dna.length, w = rr * 2 / n;
+        r.dna.forEach((h, q) => { ctx.fillStyle = h; ctx.fillRect(x - rr + q * w - .3, y - rr, w + .6, rr * 2); }); ctx.restore();
+      } else { ctx.fillStyle = r.sig; ctx.beginPath(); ctx.arc(x, y, rr, 0, 6.2832); ctx.fill(); }
+      if (litSet && on) { ctx.globalAlpha = 1; ctx.lineWidth = 2; ctx.strokeStyle = ink; ctx.beginPath(); ctx.arc(x, y, rr + 1.5, 0, 6.2832); ctx.stroke(); }
+      if (i === sel || i === hover) { ctx.globalAlpha = 1; ctx.lineWidth = 2.5; ctx.strokeStyle = ink; ctx.beginPath(); ctx.arc(x, y, rr + 2, 0, 6.2832); ctx.stroke(); }
     }
     ctx.globalAlpha = 1;
     lay.labels.forEach(lbl);
     ctx.font = `400 12px "Geist", system-ui, sans-serif`; ctx.fillStyle = ink; ctx.globalAlpha = .55; ctx.textAlign = "center";
     lay.ticks.forEach(t => { const x = t.x * sc + view.tx, y = t.y * sc + view.ty; if (x > 340 && x < W + 30 && y > 0 && y < H) ctx.fillText(t.t, x, y); });
     ctx.globalAlpha = 1;
-    // names, once cells are big enough to read them
-    if (sc >= 58) {
-      ctx.font = `400 ${Math.min(17, sc * .24)}px "Instrument Serif", Georgia, serif`; ctx.lineWidth = 4; ctx.strokeStyle = ground; ctx.fillStyle = ink; ctx.textAlign = "center";
-      // David, 2026-11-07 ("at this distance looks a bit messy"): a name is drawn only where it fits, best-known painters first,
-      // never over another name; zooming in lets more through.
-      const fs = Math.min(17, sc * .24), cand = [];
-      for (let k = 0; k < ids.length; k++) { const i = ids[k], x = lay.x[i] * sc + view.tx, y = lay.y[i] * sc + view.ty + rad + 11; if (x < -60 || x > W + 60 || y < 0 || y > H + 20) continue; if (litSet && !litSet.has(i)) continue; cand.push(i); }
-      cand.sort((a, b) => ptmScore(A[b]) - ptmScore(A[a]));
+    // names, where a cell is big enough to read them (David, 2026-11-07, "at this distance looks a bit messy"): best-known
+    // painters first, only where a name fits, never over another name
+    // (David, 2026-11-07, desktop: a name under every face "looks wrong at this distance"): only faces at least ~96 px wide
+    // carry a name, so a wall of small faces stays clean and the Magnify lens is what brings names up
+    const cand = vis.filter(v => v[3] * 2 >= 96 && v[2] + v[3] + 11 < H + 20 && (!litSet || litSet.has(v[0])));
+    if (cand.length) {
+      ctx.lineWidth = 4; ctx.strokeStyle = ground; ctx.fillStyle = ink; ctx.textAlign = "center";
+      cand.sort((p, q) => q[4] - p[4] || ptmScore(A[q[0]]) - ptmScore(A[p[0]]));
       const placed = [];
-      for (const i of cand) {
-        const x = lay.x[i] * sc + view.tx, y = lay.y[i] * sc + view.ty + rad + 11, w = ctx.measureText(A[i].n).width + 8;
-        if (w > Math.max(sc * 1.9, 80)) continue;   // wider than about two cells: wait for a closer zoom
-        const r = [x - w / 2, y - fs * .85, x + w / 2, y + fs * .3];
-        if (placed.some(q => r[0] < q[2] && r[2] > q[0] && r[1] < q[3] && r[3] > q[1])) continue;
-        placed.push(r); ctx.strokeText(A[i].n, x, y); ctx.fillText(A[i].n, x, y);
+      for (const [i, x, y0, rr] of cand) {
+        const fs = Math.min(17, rr * .5); ctx.font = `400 ${fs}px "Instrument Serif", Georgia, serif`;
+        const y = y0 + rr + 11, w = ctx.measureText(A[i].n).width + 8;
+        if (w > Math.max(rr * 3.8, 80)) continue;   // wider than about two cells: wait for a closer zoom
+        const b = [x - w / 2 - 6, y - fs * 1.1, x + w / 2 + 6, y + fs * .6];
+        if (placed.some(q => b[0] < q[2] && b[2] > q[0] && b[1] < q[3] && b[3] > q[1])) continue;
+        placed.push(b); ctx.strokeText(A[i].n, x, y); ctx.fillText(A[i].n, x, y);
       }
-    }
-    // the selected painter's teachers, students and influences: faint lines, this painter only
-    const who = sel >= 0 ? sel : hover;
-    if (who >= 0 && D.nb[who].length) {
-      const x = lay.x[who] * sc + view.tx, y = lay.y[who] * sc + view.ty;
-      D.nb[who].forEach(([o, kind]) => {
-        if (isNaN(lay.x[o])) return;
-        const ox = lay.x[o] * sc + view.tx, oy = lay.y[o] * sc + view.ty, mx = (x + ox) / 2 - (oy - y) * .12, my = (y + oy) / 2 + (ox - x) * .12;
-        ctx.globalAlpha = .55; ctx.lineWidth = 1.5; ctx.strokeStyle = ink; ctx.setLineDash(kind ? [4, 5] : []);
-        ctx.beginPath(); ctx.moveTo(x, y); ctx.quadraticCurveTo(mx, my, ox, oy); ctx.stroke(); ctx.setLineDash([]);
-        ctx.globalAlpha = .9; ctx.beginPath(); ctx.arc(ox, oy, rad + 3, 0, 6.2832); ctx.stroke();
-      });
-      ctx.globalAlpha = 1;
     }
   }
   function tick(now) {
@@ -373,6 +379,12 @@ function ptmMount(el, s, from) {
   // ---- hit testing, the caption, the tip ----
   const worldOf = (px, py) => [(px - view.tx) / view.s, (py - view.ty) / view.s];
   function hit(px, py, slack = .15) {
+    let best = -1, bd = 1e18;
+    for (const [i, x, y, rr] of vis) { const d = (x - px) ** 2 + (y - py) ** 2, lim = (rr * (1 + slack * 2)) ** 2; if (d < lim && d < bd) { bd = d; best = i; } }
+    if (vis.length) return best;
+    return hitWorld(px, py, slack);
+  }
+  function hitWorld(px, py, slack) {
     const [wx, wy] = worldOf(px, py), cx = Math.floor(wx / 2), cy = Math.floor(wy / 2); let best = -1, bd = (.5 + slack) ** 2;
     for (let a = -1; a <= 1; a++) for (let b = -1; b <= 1; b++) { const L = hash.get((cx + a) * 100003 + cy + b); if (!L) continue; for (const i of L) { const d = (lay.x[i] - wx) ** 2 + (lay.y[i] - wy) ** 2; if (d < bd) { bd = d; best = i; } } }
     return best;
@@ -427,9 +439,11 @@ function ptmMount(el, s, from) {
       if (moved) { view.tx += dx; view.ty += dy; vx = dx; vy = dy; drag.x = e.clientX; drag.y = e.clientY; clampView(); redraw(); centerSoon(); }
       return;
     }
-    if (e.pointerType === "mouse" && !pts.size) {   // hover on a desktop: the name and the teacher lines
-      const now = performance.now(); if (now - lastMove < 30) return; lastMove = now;
-      const i = hit(e.clientX - r.left, e.clientY - r.top); if (i !== hover) { hover = i; tip(i, e.clientX - r.left, e.clientY - r.top); cv.style.cursor = i >= 0 ? "pointer" : ""; redraw(); }
+    if (e.pointerType === "mouse" && !pts.size) {   // hover on a desktop: the name, and the lens follows the mouse
+      const now = performance.now(); if (now - lastMove < 16) return; lastMove = now;
+      const mx = e.clientX - r.left, my = e.clientY - r.top, lens = (s.mag == null ? ptmMag() : s.mag) > 0;
+      if (lens) { focus = [mx, my]; draw(now); }
+      const i = hit(mx, my); if (i !== hover) { hover = i; tip(i, mx, my); cv.style.cursor = i >= 0 ? "pointer" : ""; redraw(); }
     }
   });
   const up = e => {
@@ -442,7 +456,7 @@ function ptmMount(el, s, from) {
     PTM_VIEW.set(vkey(), { ...view }); kick();
   };
   cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
-  cv.addEventListener("pointerleave", e => { if (e.pointerType === "mouse" && hover >= 0) { hover = -1; tip(-1); redraw(); } });
+  cv.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") { focus = null; hover = -1; tip(-1); redraw(); } });
   cv.addEventListener("wheel", e => {
     e.preventDefault(); const r = cv.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top, [wx, wy] = worldOf(mx, my);
     const ns = Math.max(minS, Math.min(160, view.s * Math.exp(-e.deltaY * (e.ctrlKey ? .01 : .0018)))); view.s = ns; view.tx = mx - wx * ns; view.ty = my - wy * ns; clampView(); PTM_VIEW.set(vkey(), { ...view }); redraw(); centerSoon();
@@ -511,13 +525,16 @@ function ptmMount(el, s, from) {
         <div class="cx-sec"><b>Each painter shown as</b></div>${seg("face", PTM_FACE, faceOf(), "Cell face")}
         <div class="cx-sec"><b>Show</b></div>${seg("only", [["all", "Everyone"], ["famous", "Famous works"], ["portrait", "A portrait"]], s.only, "Show")}
         <div class="hm-feel"><label class="hm-feel-row"><span class="hm-feel-l">At least</span><span class="hm-feel-r"><i>6</i><input type="range" min="6" max="${Math.min(300, maxK)}" step="1" value="${s.min}" data-ptmin aria-label="Fewest paintings"><i>${Math.min(300, maxK)}</i></span></label></div>
-        <p class="hm-arr-sub" data-ptminl>${ptmNum(ids.length)} painters${s.min > 6 ? ` with ${s.min}+ paintings` : ""}</p>`;
+        <p class="hm-arr-sub" data-ptminl>${ptmNum(ids.length)} painters${s.min > 6 ? ` with ${s.min}+ paintings` : ""}</p>
+        <div class="hm-feel"><label class="hm-feel-row"><span class="hm-feel-l">Magnify</span><span class="hm-feel-r"><i>Flat</i><input type="range" min="0" max="1" step="0.01" value="${s.mag == null ? ptmMag() : s.mag}" data-ptmag aria-label="Magnify, flat to strong"><i>Strong</i></span></label></div>`;
       body.querySelectorAll("[data-ptarr]").forEach(b => b.onclick = () => { if (s.arr === b.dataset.ptarr) return; buzz(5); s.arr = b.dataset.ptarr; s.near = s.arr === "color" ? s.near : ""; rebuild(); render(); });
       body.querySelectorAll("[data-ptface]").forEach(b => b.onclick = () => { buzz(5); s.face = b.dataset.ptface; try { localStorage.setItem("ptm-face", s.face); } catch (e) {} redraw(); render(); });
       body.querySelectorAll("[data-ptonly]").forEach(b => b.onclick = () => { buzz(5); s.only = b.dataset.ptonly; rebuild(); render(); });
       const rg = body.querySelector("[data-ptmin]");
       rg.oninput = () => { s.min = +rg.value; ids = ptmIds(s); body.querySelector("[data-ptminl]").textContent = `${ptmNum(ids.length)} painters${s.min > 6 ? ` with ${s.min}+ paintings` : ""}`; };
       rg.onchange = () => { rebuild(); render(); };
+      const mg = body.querySelector("[data-ptmag]");
+      mg.oninput = () => { s.mag = +mg.value; try { localStorage.setItem("ptm-mag", s.mag); } catch (e) {} redraw(); };
     };
     render();
   }
