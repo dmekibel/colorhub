@@ -1993,7 +1993,7 @@ function pmToExplore(s, F) {
   if (yr && !lens.startsWith("e:")) { const e = PM_BF_ERAS.find(([, a, b]) => yr[0] >= a && yr[1] < b + 1); if (e) bf.era = e[0]; else dropped.push("the years"); }
   if (f.hueBand != null && PM_BF_HUE[XB_FAMS[f.hueBand]]) bf.hue = PM_BF_HUE[XB_FAMS[f.hueBand]];
   const st = hfS(); st.bf = st.bf || {}; if (Object.keys(bf).length) st.bf[lens] = bf; else delete st.bf[lens];
-  TF_KIND = "paint"; TF_LENS = lens; TF_FROM_BOARD = false; TF_SIBS = []; st.lens = lens;
+  TF_KIND = "paint"; TF_LENS = lens; TF_LENS_ROOM = "paint"; TF_FROM_BOARD = false; TF_SIBS = []; st.lens = lens;
   XSTACK = []; X_ROOT = "pmap"; save(); buzz(6);
   go("feed");
   if (dropped.length) setTimeout(() => toast("Explore keeps years, color family, painter and movement; " + dropped.join(" and ") + " stay on the map."), 400);

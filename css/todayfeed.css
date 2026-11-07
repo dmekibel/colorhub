@@ -125,6 +125,7 @@ html.desk .tf-cotd-s{flex:1 1 38%;max-width:480px;font-size:19px}
 .tf-bars{position:sticky;top:-18px;z-index:5;margin:0 calc(-1 * var(--g));background:var(--ground);transition:transform .26s var(--ease)}
 .tf-bars .tf-chips{position:static;margin:0;padding:8px var(--g) 4px;background:none;border:0}
 .tf-bars .tf-chips[hidden]{display:none}
+.tf-kinds .tf-chip[hidden]{display:none}
 .tf-bars .tf-lenses{padding-top:2px;padding-bottom:10px}
 .tf-lenses .tf-chip{height:34px;padding:0 14px;font-size:15px}
 .tf-bars.stuck::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:var(--top);background:var(--ground)}

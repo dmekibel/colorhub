@@ -44,8 +44,8 @@ function loadGallery() {
     return (pre ? pre.then(r => r.ok ? r : own(), own) : own()).then(r => { if (!r.ok) throw new Error(f + " " + r.status); return r[kind](); }); };
   // est.json (tools/gallery.py): which years / countries are estimates. Optional: without it everything reads as measured, as before.
   // hidden.json (tools/hide_nonart.py): items that are not artworks. Optional; GAL.hid[i] = 1 and every list / ranking skips them (a direct address still opens one).
-  return GAL_LOADING || (GAL_LOADING = Promise.all([get("index.json", "json"), get("index.bin", "arrayBuffer"), get("est.json", "json").catch(() => null), get("hidden.json", "json").catch(() => null)])
-    .then(([head, buf, est, hid]) => (GAL = glHide(glEst(glBuild(head, new Uint8Array(buf)), est), hid)))
+  return GAL_LOADING || (GAL_LOADING = Promise.all([get("index.json", "json"), get("index.bin", "arrayBuffer"), get("est.json", "json").catch(() => null), get("hidden.json", "json").catch(() => null), glKindsRaw()])
+    .then(([head, buf, est, hid, kinds]) => (GAL = glKinds(glHide(glEst(glBuild(head, new Uint8Array(buf)), est), hid), kinds)))
     .catch(e => { GAL_LOADING = null; throw e; }));
 }
 function glHide(G, h) {
@@ -53,6 +53,19 @@ function glHide(G, h) {
   return G;
 }
 const glHidden = i => !!(GAL && GAL.hid && GAL.hid[i]);
+// kinds.json (tools/kinds.py; David, 2026-11-07: Golden Age illustrators get their own room, not mixed into the paintings): {n, ids, illustration: [gallery positions]}.
+// Optional (a missing or stale file means no Illustration room). GAL.ill[i] = 1 for an illustration, GAL.illIdx = the positions. Painting surfaces (js/homefeed.js hfHid) skip them;
+// the Illustration room shows only them; the painting map and a painter's own page keep every work.
+let GAL_KINDS_P = null;
+const glKindsRaw = () => GAL_KINDS_P || (GAL_KINDS_P = fetch(GAL_DIR + "kinds.json").then(r => (r.ok ? r.json() : null)).catch(() => null));
+function glKinds(G, k) {
+  if (k && k.n === G.n && Array.isArray(k.illustration) && k.illustration.length) {
+    G.ill = new Uint8Array(G.n); G.illIdx = [];
+    k.illustration.forEach(i => { if (i >= 0 && i < G.n && !G.ill[i]) { G.ill[i] = 1; G.illIdx.push(i); } });
+  }
+  return G;
+}
+const glIsIll = i => !!(GAL && GAL.ill && GAL.ill[i]);
 // ---------- subjects (data/gallery/subjects.json, built by tools/subjects.py + tools/subjects_clip.py) ----------
 // What a painting shows: genre ("g"), things ("t"), iconography ("i"). Three sources per painting, in rank order:
 // ia = authority (museum / Wikidata), it = words in the title, im = detected by a model from the picture (kept only at
@@ -1590,7 +1603,7 @@ function glPage(i, d, fromHex, tol) {
     <button class="gl-closer" data-glcloser aria-label="Look closer">${ICON.search}<span>Look closer</span></button>
     <button class="gl-closer gl-pick-btn" data-glpickbtn hidden aria-pressed="false" aria-label="Pick a color">${icon("pipette", 17)}<span>Pick a color</span></button></span></div>
     <div class="gl-id">${shareBtn}
-    <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
+    <p class="eyebrow p-type">${glIsIll(i) ? "Illustration" : "Painting"}${yr ? " · " + yr : ""}</p>
     <h1 class="p-title">${esc(d.t)}</h1>
     <p class="p-dek">${d.a ? `<button class="aw-link" data-awpainter="${esc(routeSlug(d.a))}">${esc(d.a)}</button>` : "Artist unknown"}${glDesk() ? [d.co, d.mv].filter(Boolean).map(x => ` · ${esc(x)}`).join("") : yr ? ` · ${esc(yr)}` : ""}</p>
     <p class="gl-id-src">${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? `<span class="gl-dk-credit"> · ${esc(src.credit)}</span>` : ""}</p>
