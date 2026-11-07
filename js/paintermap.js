@@ -51,6 +51,8 @@ const ptmNum = n => Number(n).toLocaleString("en-US");
 const ptmNorm = s => String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
 const ptmYears = r => r.b != null ? `${r.b < 0 ? -r.b + " BCE" : r.b}–${r.d != null ? (r.d < 0 ? -r.d + " BCE" : r.d) : ""}` : (r.y0 ? `${r.y0}–${r.y1}` : "");
 const ptmWhen = r => r.b != null ? r.b : (r.y0 != null ? (r.y0 + r.y1) / 2 : 1800);
+// not a person: museum catch-alls for unknown hands never sit on the map as if they were a painter
+const PTM_ANON = /^(unknown|anonymous|okänd|onbekend|unbekannt|anonyme?|anónimo|ignoto|inconnu)\b|\bunknown (painter|artist)\b/i;
 const ptmScore = r => r.k + 60 * Math.min(3, r.fm) + (r.p >= 0 ? 10 : 0);
 const ptmVer = () => (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "");
 
@@ -174,7 +176,7 @@ function ptmGo(spec, fromAddress) {
 }
 function ptmIds(s) {
   const A = PTM.A, out = [];
-  for (let i = 0; i < A.length; i++) { const r = A[i]; if (r.k < s.min) continue; if (s.only === "portrait" && r.pt == null) continue; if (s.only === "famous" && !r.fm) continue; out.push(i); }
+  for (let i = 0; i < A.length; i++) { const r = A[i]; if (r.k < s.min || PTM_ANON.test(r.n)) continue; if (s.only === "portrait" && r.pt == null) continue; if (s.only === "famous" && !r.fm) continue; out.push(i); }
   return out;
 }
 function ptmOpen(spec, o = {}) {
@@ -313,8 +315,11 @@ function ptmMount(el, s, from) {
         ctx.save(); ctx.clip(); const n = r.dna.length, w = rad * 2 / n;
         r.dna.forEach((h, q) => { ctx.fillStyle = h; ctx.fillRect(x - rad + q * w - .3, y - rad, w + .6, rad * 2); }); ctx.restore();
       } else ctx.fill();
-      const src = !dotOnly ? faceSrc(r, mode) : null;
-      if (src) { ctx.save(); ctx.beginPath(); ctx.arc(x, y, rad, 0, 6.2832); ctx.clip(); ctx.globalAlpha = (on ? 1 : dim) * fa; ctx.drawImage(src[0], src[1], src[2], D.tile, D.tile, x - rad, y - rad, rad * 2, rad * 2); ctx.restore(); }
+      // David, 2026-11-07: zoomed out, the faces turning into color dots "looks broken": tiny cells keep their picture
+      // (an unclipped square at that size reads the same as a circle and is far cheaper to draw).
+      const src = faceSrc(r, mode);
+      if (src && dotOnly) { ctx.globalAlpha = on ? 1 : dim; ctx.drawImage(src[0], src[1], src[2], D.tile, D.tile, x - rad * .86, y - rad * .86, rad * 1.72, rad * 1.72); }
+      else if (src) { ctx.save(); ctx.beginPath(); ctx.arc(x, y, rad, 0, 6.2832); ctx.clip(); ctx.globalAlpha = (on ? 1 : dim) * fa; ctx.drawImage(src[0], src[1], src[2], D.tile, D.tile, x - rad, y - rad, rad * 2, rad * 2); ctx.restore(); }
       if (litSet && on) { ctx.globalAlpha = 1; ctx.lineWidth = 2; ctx.strokeStyle = ink; ctx.beginPath(); ctx.arc(x, y, rad + 1.5, 0, 6.2832); ctx.stroke(); }
       if (i === sel || i === hover) { ctx.globalAlpha = 1; ctx.lineWidth = 2.5; ctx.strokeStyle = ink; ctx.beginPath(); ctx.arc(x, y, rad + 2, 0, 6.2832); ctx.stroke(); }
     }
@@ -326,7 +331,19 @@ function ptmMount(el, s, from) {
     // names, once cells are big enough to read them
     if (sc >= 58) {
       ctx.font = `400 ${Math.min(17, sc * .24)}px "Instrument Serif", Georgia, serif`; ctx.lineWidth = 4; ctx.strokeStyle = ground; ctx.fillStyle = ink; ctx.textAlign = "center";
-      for (let k = 0; k < ids.length; k++) { const i = ids[k], x = lay.x[i] * sc + view.tx, y = lay.y[i] * sc + view.ty + rad + 11; if (x < -60 || x > W + 60 || y < 0 || y > H + 20) continue; if (litSet && !litSet.has(i)) continue; ctx.strokeText(A[i].n, x, y); ctx.fillText(A[i].n, x, y); }
+      // David, 2026-11-07 ("at this distance looks a bit messy"): a name is drawn only where it fits, best-known painters first,
+      // never over another name; zooming in lets more through.
+      const fs = Math.min(17, sc * .24), cand = [];
+      for (let k = 0; k < ids.length; k++) { const i = ids[k], x = lay.x[i] * sc + view.tx, y = lay.y[i] * sc + view.ty + rad + 11; if (x < -60 || x > W + 60 || y < 0 || y > H + 20) continue; if (litSet && !litSet.has(i)) continue; cand.push(i); }
+      cand.sort((a, b) => ptmScore(A[b]) - ptmScore(A[a]));
+      const placed = [];
+      for (const i of cand) {
+        const x = lay.x[i] * sc + view.tx, y = lay.y[i] * sc + view.ty + rad + 11, w = ctx.measureText(A[i].n).width + 8;
+        if (w > Math.max(sc * 1.9, 80)) continue;   // wider than about two cells: wait for a closer zoom
+        const r = [x - w / 2, y - fs * .85, x + w / 2, y + fs * .3];
+        if (placed.some(q => r[0] < q[2] && r[2] > q[0] && r[1] < q[3] && r[3] > q[1])) continue;
+        placed.push(r); ctx.strokeText(A[i].n, x, y); ctx.fillText(A[i].n, x, y);
+      }
     }
     // the selected painter's teachers, students and influences: faint lines, this painter only
     const who = sel >= 0 ? sel : hover;
