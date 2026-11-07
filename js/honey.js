@@ -422,10 +422,15 @@ function honeyCusps() {
 }
 // shades (darker than the hue's pure color) rank further out than tints at the same OKLab distance, so in every hue sector the
 // darks form one continuous outer band instead of islands among the lights
-const HONEY_SHADE_W = 1.2;
+const HONEY_SHADE_W = 1.5;
+// David, 2026-11-07 (screenshot of the Vivid wheel with ten pale patches circled): a pale tint and a dark shade the same distance
+// from the hue's most vivid color landed in the same ring, so pastels sat as light islands among muted darks. Tints now rank
+// closer (their lightness gap counts x .4; the chroma gap in full, so the most vivid still holds the middle) and clearly darker
+// shades start a band further out (up to +.3): vivid middle, then a pastel ring, then muted, then dark, then greys.
+const HONEY_TINT_W = .4, HONEY_SHADE_BAND = .3;
 function honeyVividRank(items) {
   const cu = honeyCusps(), cc = q => Math.hypot(q[1], q[2]);
-  return it => { const q = honeyOk(it); if (cc(q) < 4) return 1e3 - cc(q); const u = cu[Math.floor(((Math.atan2(q[2], q[1]) * 180 / Math.PI) + 360) % 360)]; const sh = q[0] < u[0] ? (u[0] - q[0]) * HONEY_SHADE_W : 0; return Math.hypot(q[0] - u[0], q[1] - u[1], q[2] - u[2]) + sh; };
+  return it => { const q = honeyOk(it); if (cc(q) < 4) return 1e3 - cc(q); const u = cu[Math.floor(((Math.atan2(q[2], q[1]) * 180 / Math.PI) + 360) % 360)]; const dL = q[0] - u[0], dab = Math.hypot(q[1] - u[1], q[2] - u[2]); if (dL > 0) return Math.hypot(dab, dL * HONEY_TINT_W); const sd = -dL; return Math.hypot(dab, sd) + sd * HONEY_SHADE_W + HONEY_SHADE_BAND * Math.min(1, Math.max(0, (sd - .04) / .1)); };
 }
 // After placement: swap neighboring cells (and short 3-cycles) when that lowers the OKLab distance to each cell's
 // neighbors, never moving a color more than 1.5 cells from where it was placed (so hue-by-angle and vivid-in-the-middle hold).
