@@ -24,8 +24,8 @@ const PTM_WHY = {
   movement: "A block for each movement, the biggest first",
   fame: "The best known in the middle, the rest spiralling out",
 };
-const PTM_FACE = [["famous", "Painting"], ["color", "Color"], ["dna", "Color DNA"], ["portrait", "Portrait"]];
-const PTM_FACE_WHY = { famous: "Each painter shown by their best-known painting", color: "Each painter shown by the vivid color they are known for", dna: "Each painter shown by five signature colors", portrait: "Each painter shown by their portrait, where we have one" };
+const PTM_FACE = [["portrait", "Portrait"], ["famous", "Painting"], ["color", "Color"], ["dna", "Color DNA"]];
+const PTM_FACE_WHY = { famous: "Each painter shown by their best-known painting", color: "Each painter shown by the vivid color they are known for", dna: "Each painter shown by five signature colors", portrait: "Each painter shown by their portrait, or their best-known painting" };
 const PTM_ICON = {
   color: sv('<circle cx="8" cy="8" r="3.2"/><circle cx="16" cy="8" r="3.2"/><circle cx="12" cy="15.5" r="3.2"/>', 22, 1.7),
   like: sv('<circle cx="8" cy="9" r="4"/><circle cx="14" cy="14" r="4"/><path d="M11.5 10.5l1 1.5"/>', 22, 1.7),
@@ -34,7 +34,8 @@ const PTM_ICON = {
   movement: sv('<circle cx="7" cy="7" r="3.4"/><circle cx="16.5" cy="6.5" r="2.4"/><circle cx="7" cy="16.5" r="2.4"/><circle cx="17" cy="16" r="3"/>', 22, 1.7),
   fame: sv('<path d="M12 3.8l2.4 5 5.4.7-4 3.8 1 5.4-4.8-2.7-4.8 2.7 1-5.4-4-3.8 5.4-.7z"/>', 22, 1.7),
 };
-const ptmFaceAuto = arr => arr === "color" || arr === "like" ? "dna" : "famous";
+// David, 2026-11-07: "palettes as cells look weird; a self-portrait / portrait, or their most famous painting if there is none"
+const ptmFaceAuto = () => "portrait";
 const PTM_REG = [
   ["Western Europe", ["France", "Italy", "Spain", "Portugal", "Netherlands", "Belgium", "Germany", "Austria", "Switzerland", "United Kingdom", "Ireland", "Luxembourg", "Monaco"]],
   ["Northern and Eastern Europe", ["Russia", "Poland", "Sweden", "Norway", "Denmark", "Finland", "Czechia", "Hungary", "Greece", "Ukraine", "Romania", "Croatia", "Serbia", "Estonia", "Latvia", "Lithuania", "Iceland", "Bulgaria", "Slovakia", "Slovenia", "Belarus", "Georgia", "Armenia"]],
