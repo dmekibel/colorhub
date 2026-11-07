@@ -12,7 +12,7 @@ standing beside a framed painting). CLIP zero-shot on the cached embeddings (no 
 
 Needs research/_raw/clipenv and research/_raw/subjects/clip-embeds.npy (see tools/subjects_clip.py). Env SUBJECTS_RAW as there.
 """
-import json, os, sys
+import json, os, re, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -148,6 +148,9 @@ def main():
     if "--detail" in sys.argv:   # per-row scores for review sheets
         D = {ids[i]: [round(float(score[i]), 3), round(float(frontal[i]), 3), round(float(people[i]), 3), round(float(ceiling[i]), 3)] for i in np.where(score >= 0.5)[0]}
         (ROOT / "research/photos-detail.json").write_text(json.dumps(D)); print("wrote research/photos-detail.json", len(D))
+    if "--why" in sys.argv:   # every score for one row: python tools/audit_photos.py --why commons-F123
+        k = sys.argv[sys.argv.index("--why") + 1]; i = ids.index(k)
+        print(k, names.get(k), {n: round(float(v[i]), 3) for n, v in (("setting", score), ("bad", bad), ("far", far), ("frontal", frontal), ("people", people), ("ceiling", ceiling))}); return
     if "--hide" in sys.argv:
         import datetime
         cut = float(sys.argv[sys.argv.index("--min") + 1]) if "--min" in sys.argv else 0.8
@@ -172,11 +175,13 @@ def main():
         # when another row has the same painter and title.
         church = pair(["a photograph of a church interior", "a fresco or altarpiece photographed in a church", "a ceiling fresco seen from below"],
                       ["a museum gallery", "a framed painting on a wall", "a painting"])
-        norm = lambda s: " ".join(str(s or "").lower().replace(",", " ").split())
+        # titles that differ only by a trailing number ("... Hornu 1" / "... Hornu 2") are the same work
+        norm = lambda s: re.sub(r"[\s\-_.(]*\d{1,2}\)?$", "", " ".join(str(s or "").lower().replace(",", " ").split()))
         cnt = {}
         for k, (a, t) in names.items(): cnt[(norm(a), norm(t))] = cnt.get((norm(a), norm(t)), 0) + 1
         pos = {k: n for n, k in enumerate(ids)}
-        only = {k for k in keep if church[pos[k]] >= .6 and cnt.get((norm(names.get(k, ("", ""))[0]), norm(names.get(k, ("", ""))[1])), 0) <= 1}
+        # never for a photo with visitors in it (2026-11-07: a Tintoretto with five people in front was kept as the "only copy")
+        only = {k for k in keep if church[pos[k]] >= .6 and people[pos[k]] < .5 and cnt.get((norm(names.get(k, ("", ""))[0]), norm(names.get(k, ("", ""))[1])), 0) <= 1}
         print(f"church shots kept because they are the only copy: {len(only)}")
         keep = sorted(keep - only)
         print(f"flagged {sum(1 for i in np.where(score >= cut)[0] if ids[i].startswith('commons-F'))}, kept visible as good straight-on photos {sum(1 for i in np.where(score >= cut)[0] if ids[i].startswith('commons-F') and good[i])}")
