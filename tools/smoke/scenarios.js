@@ -9451,3 +9451,47 @@ scenario("home", "a cold open (no address) lands on the Today feed, paintings fi
   t.expect(/#\/feed/.test(t.w.location.hash), `the address is ${t.w.location.hash}, not #/feed`);
   t.expect(t.text(".tf-kinds .tf-chip[aria-checked='true'], .tf-kinds .tf-chip.on") === "Paintings", "Paintings is not the selected kind");
 });
+
+// The painter map (js/paintermap.js, David 2026-11-07): every painter one cell; the arrangements and cell faces switch in the sheet; a tap opens the painter's page and Back returns to the map; search jumps to a painter; a color deep link lights painters.
+scenario("map", "painter map: opens; arrangement and face switch; search finds; a tap opens a painter and Back returns; a color lights painters", async t => {
+  await t.open("#/painters/map", { settle: 800 });
+  await t.waitFor(() => t.ev("(document.querySelector('.ptm') || {})._ptm ? document.querySelector('.ptm')._ptm.ids.length : 0") > 1000, 40000, "the painter map to lay out thousands of painters");
+  t.expect(t.text(".pmx-title b") === "Painters", "the title is not Painters");
+  t.expect(t.text("[data-ptwhy]").length > 10, "no line under the title saying what position means");
+  const why0 = t.text("[data-ptwhy]");
+  await t.click(t.$("[data-do-corner]"), { wait: 500 });
+  await t.waitFor(() => t.$("[data-ptarr=time]"), 4000, "the sheet's arrangements");
+  t.expect(t.$$("[data-ptarr]").length === 6 && t.$$("[data-ptface]").length === 4, "the sheet should offer 6 arrangements and 4 cell faces");
+  for (const a of ["time", "place", "movement", "fame", "like"]) {
+    await t.click(t.$(`[data-ptarr=${a}]`), { wait: 400 });
+    t.expect(t.text("[data-ptwhy]") !== why0 && t.ev("document.querySelector('.ptm')._ptm.ids.length") > 100, `arrangement ${a} did not lay out`);
+  }
+  for (const f of ["color", "dna", "portrait", "famous"]) await t.click(t.$(`[data-ptface=${f}]`), { wait: 200 });
+  await t.click(t.$("[data-sheet-close]"), { wait: 500 });
+  await t.click(t.$("[data-ptfindb]"), { wait: 300 });
+  const typeQ = q => t.ev(`(() => { const i = document.querySelector('[data-ptq]'); i.value = ${JSON.stringify(q)}; i.dispatchEvent(new Event('input', { bubbles: true })); })()`);
+  typeQ("van gogh");
+  await t.waitFor(() => t.$$("[data-ptpick]").length >= 1, 3000, "search results for van gogh");
+  typeQ("zzzqqq");
+  await t.waitFor(() => t.$(".ptm-none"), 3000, "the no-result line");
+  typeQ("van gogh");
+  await t.waitFor(() => t.$$("[data-ptpick]").length >= 1, 3000, "results again");
+  await t.click(t.$("[data-ptpick]"), { wait: 900 });
+  t.expect(t.$("[data-ptfind]").hidden, "the search stayed open after a pick");
+  // a fresh open for the tap (a light painter's page, not the heavy one the search just flew to)
+  await t.open("#/painters/map?arr=fame", { settle: 800 });
+  await t.waitFor(() => t.ev("(document.querySelector('.ptm') || {})._ptm ? document.querySelector('.ptm')._ptm.ids.length : 0") > 1000, 40000, "the painter map again");
+  const cv = t.$(".ptm-cv"), r = cv.getBoundingClientRect();
+  const atJs = "(() => { const m = document.querySelector('.ptm')._ptm, v = m.view, l = m.lay; for (const i of m.ids) { const x = l.x[i] * v.s + v.tx, y = l.y[i] * v.s + v.ty; if (x > 80 && x < 300 && y > 220 && y < 560) return [x, y, i]; } return null; })()";
+  const at = await t.waitFor(() => t.ev(atJs), 8000, "a painter cell on screen to tap");
+  t.expect(at, "no painter cell on screen to tap");
+  await t.tapAt(cv, r.left + at[0], r.top + at[1], { wait: 900 });
+  await t.waitFor(() => /#\/painter\//.test(t.w.location.hash) && !t.$(".ptm-cv"), 12000, "the painter's page after a tap");
+  await t.click(t.$("[data-back]"), { wait: 900 });
+  await t.waitFor(() => t.$(".ptm-cv") && t.ev("document.querySelector('.ptm') && document.querySelector('.ptm')._ptm"), 15000, "Back to the painter map");
+  await t.open("#/painters/map?near=%23C8501E", { settle: 800 });
+  await t.waitFor(() => t.$(".ptm-cv") && t.$(".pmx-xchip"), 30000, "the lit-color chip");
+  t.expect(/color/.test(t.text(".pmx-xchip")), "no chip saying which color is lit");
+  await t.click(t.$("[data-ptclear=near]"), { wait: 500 });
+  t.expect(!t.$("[data-ptclear=near]"), "the color chip did not clear");
+});
