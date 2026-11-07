@@ -9301,6 +9301,18 @@ scenario("painters", "painter's color map: the standard map (circles, same size,
     const nn = t.ev("PH_DEBUG.nodes()");
     t.expect(nn.length > 0 && nn.every(n => isFinite(n.x) && isFinite(n.y) && n.r > 0), `${arr}: a node has no finite place`);
     if (arr === "decade") t.expect(new Set(nn.map(n => Math.round(n.y / 40))).size >= 2, "By decade shows only one row");
+    if (arr === "decade") {   // the color count works here too: colors per decade row
+      await t.click("[data-phdo]", { wait: 500 });
+      const inp = await t.waitFor(".ph-count input", 4000, "the colors-per-decade stepper in By decade");
+      t.expect(/decade/i.test(t.text(".phx-sheet .cx-sec:last-of-type, .phx-sheet")), "the stepper isn't labelled for decades");
+      const c0 = t.ev("PH_DEBUG.count()");
+      t.ev(`document.querySelector('.ph-count input')._countTo(3)`); await t.sleep(700);
+      const c3 = t.ev("PH_DEBUG.count()");
+      t.expect(c3 < c0, `By decade: 3 colors per decade (${c3}) isn't fewer than the default (${c0})`);
+      t.ev(`document.querySelector('.ph-count input')._countTo(8)`); await t.sleep(700);
+      t.expect(t.ev("PH_DEBUG.count()") > c3, "By decade: 8 colors per decade isn't more than 3");
+      await t.click("[data-sheet-close]", { wait: 400 });
+    }
     if (arr === "peers") t.expect(nn.some(n => n.hollow), "Against peers has no 'less than peers' colors for Van Gogh");
   }
   // All colors (incl. the dark grounds) is one choice away

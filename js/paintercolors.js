@@ -127,7 +127,7 @@ const pcDecades = D => [...D.decN.entries()].filter(([, n]) => n >= PC_MIN_DECAD
 function pcItems(D0, arr, n, mode) {
   const D = { ...D0, ...pcView(D0, mode) };
   if (arr === "decade") {
-    const decs = pcDecades(D), k = decs.length <= 2 ? 12 : decs.length <= 4 ? 9 : decs.length <= 7 ? 6 : 5, out = [];
+    const decs = pcDecades(D), k = Math.max(1, n), out = [];   // n = colors per decade row
     decs.forEach(d => {
       const tot = D.decN.get(d);
       D.items.map(o => ({ o, c: o.dec.get(d) || 0 })).filter(x => x.c > 0).sort((a, b) => b.c - a.c).slice(0, k)
@@ -189,7 +189,19 @@ function pcOpen(slug) {
         title: `${D.name}'s colors`, modes: viv ? [["vivid", "Vivid colors only"], ["all", "All colors"]] : null, mode0: viv ? "vivid" : "all", modesTitle: "Which colors",
         colors: pcItems(D, "share", PC_DEF, viv ? "vivid" : "all"), arrs, arr0: "share",
         itemsFn: (arr, n, mode) => pcItems(D, arr, n, mode), rowsFn: pcRows, max: total, maxCap: PC_CAP, count0: Math.min(PC_DEF, total),
-        noCount: (arr, mode) => arr === "decade" || arr === "peers" || mode === "vivid",
+        // how many colors, in every arrangement: By decade counts colors per decade row; Against peers shows only what was measured
+        countFn: (arr, mode) => {
+          if (arr === "peers") return null;
+          const v = V(mode);
+          if (arr === "decade") {
+            const dv = { ...D, ...v }, decs = pcDecades(dv);
+            const most = Math.max(3, ...decs.map(d => dv.items.filter(o => o.dec.get(d)).length)), mx = Math.min(most, 40);
+            const def = decs.length <= 2 ? 12 : decs.length <= 4 ? 9 : decs.length <= 7 ? 6 : 5;
+            return { min: 3, max: mx, def: Math.min(def, mx), label: "Colors per decade" };
+          }
+          const mx = Math.min(v.items.length, PC_CAP);
+          return { min: Math.min(3, mx), max: mx, def: Math.min(PC_DEF, mx), label: "How many colors" };
+        },
         sub, sizeLabel: "Size circles by how much they use it",
         fine: "Read from each painting's measured palette, as photographed through varnish. Screen colors are approximate.",
         label2: (arr, nd) => arr === "decade" ? `${Math.round(nd.share * 100)}%` : arr === "peers" ? `${pcFmtX(nd.lift >= 1 ? nd.lift : 1 / nd.lift)}×` : `${pcNum(nd.count)}`,
