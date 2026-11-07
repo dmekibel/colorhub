@@ -450,3 +450,12 @@ html.desk .dk-set{flex:none;display:grid;place-items:center;width:38px;height:38
 html.desk .dk-set:hover{border-color:var(--rule-strong);background:var(--surface-3);color:var(--ink)}
 html.desk .dk-set:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 html.desk .dk-set svg{width:19px;height:19px}
+
+/* Reading text on a desktop (David, 2026-11-07: "on desktop painter articles too small the text ... color articles too"):
+   the pages kept their phone sizes (16 px body, 13 px notes) in a wide window. Body copy reads at 19 px, notes never under 15. */
+html.desk :is(.aw-page,.cp-page,.gl-page,.article) :is(p:not([class]),li:not([class]),dd:not([class]),.ar-dc,.aw-pull,.ar-sec>p:not(.ar-chk)){font-size:19px;line-height:1.6}
+html.desk :is(.aw-page,.cp-page,.gl-page,.screen.article) :is(.fine,.aw-cl-n,.aw-sub,.aw-note,.gl-in-sub,.rc-pc-meta,.ar-fig-cr,.aw-glance span,.aw-legend){font-size:15.5px;line-height:1.5}
+html.desk .aw-page .aw-bio .aw-lead{font-size:26px;line-height:1.35}
+html.desk .aw-page :is(.aw-find,.aw-hl-line){font-size:21px}
+html.desk :is(.aw-page,.cp-page,.gl-page,.screen.article) .aw-bio{max-width:62ch}
+html.desk .cp-page .rp-def{font-size:23px;line-height:1.45;max-width:46ch}
