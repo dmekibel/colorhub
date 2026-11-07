@@ -2116,7 +2116,7 @@ function glPage(i, d, fromHex, tol) {
       // one tap opens the palette full screen (David, 2026-11-06: a tap only selected it); scrolling still moves the focus
       buzz(5); setSplitFocus(idx);
       const sk = plvSrcKey("painting", d.id || "g" + i);
-      palFullOpen(cols, { title: d.t, source: "Browse palettes", keepOrder: true, from: b,
+      palFullOpen(cols, { title: d.t, source: "Browse palettes", keepOrder: true, from: b, startMode: "bands",
         heart: { isOn: () => plvIsPinned(sk, cols), toggle: () => { const was = plvIsPinned(sk, cols); if (was) S.plv[sk] = plvPins(sk).filter(p => p.cols.join("|") !== cols.join("|")); else plvPins(sk).unshift({ cols: cols.slice(), cat: plvSplitCat, at: today() }); save(); buzz(was ? 6 : 10); } },
         onSave: () => glSavePalette(cols, glSaveName(d.t, glModeLabel(plvSplitCat)), false, { i, t: d.t }),
         onEdit: () => glEditOpen(cols, { title: d.t, label: glModeLabel(plvSplitCat), pool, onSave: (hexes, name) => glSavePalette(hexes, name, false, { i, t: d.t }) }) });

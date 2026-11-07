@@ -27,7 +27,7 @@
 .pf-tag b{font:400 clamp(17px,4.4vw,24px)/1.1 var(--serif);letter-spacing:-.005em;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .pf-tag i{font:400 12px/1.2 var(--mono);font-style:normal;letter-spacing:.04em;opacity:.8}
 .pf-flex.row .pf-it .pf-tag{left:12px;right:6px}
-.pf-flex.vert .pf-tag{left:auto;right:auto;writing-mode:vertical-rl;transform:rotate(180deg);bottom:calc(var(--bottom) + var(--pf-bh,214px));top:auto;left:50%;margin-left:-8px;max-height:46%}
+.pf-flex.vert .pf-tag{left:auto;right:auto;writing-mode:vertical-rl;transform:none;bottom:calc(var(--bottom) + var(--pf-bh,214px));top:auto;left:50%;margin-left:-8px;max-height:46%}
 .pf-flex.vert .pf-tag i{display:none}
 /* rows (stacked bands): the tag sits inside its own band, left-aligned and vertically centered */
 .pf-flex.col .pf-it .pf-tag{bottom:10px;top:auto;transform:none;flex-direction:row;align-items:baseline;gap:12px;left:calc(var(--left) + 18px);right:calc(var(--right) + 18px);justify-content:space-between}
@@ -177,3 +177,9 @@ html.desk .palfull{z-index:520}
 @media (max-height:560px){.pf-th{display:none}.pf-mode{min-width:0;padding:10px 14px}.pf-bot{padding-top:8px}.pf-opts{padding-bottom:6px}}
 
 .pf-heart.on{color:#F2A7B5}.pf-heart svg{width:22px;height:22px}
+
+/* Bands and Stripes stop above the bottom sheet so no color hides under it (David, 2026-11-07); hiding the chrome (tap or H) gives the full screen back */
+.pf-stage:is(.m-bands,.m-lines)>.pf-flex{bottom:max(0px,calc(var(--pf-bh,214px) - 8px));transition:bottom .28s var(--ease)}
+.pf-stage:is(.m-bands,.m-lines)>.pf-flex.row .pf-tag,.pf-stage:is(.m-bands,.m-lines)>.pf-flex.vert .pf-tag{bottom:16px}
+.palfull.bare .pf-stage:is(.m-bands,.m-lines)>.pf-flex.row .pf-tag{bottom:calc(var(--bottom) + 28px)}
+.palfull.bare .pf-stage:is(.m-bands,.m-lines)>.pf-flex{bottom:0}

@@ -309,7 +309,19 @@ function palFullOpen(colors, opts = {}) {
   paintHeart(false);
   const toggleNames = () => { st.names = !st.names; pfSave({ ...pfLoad(), names: st.names }); buzz(4); render(); paintOpts(); };
   const toggleBrowserFs = () => {
-    try { if (document.fullscreenElement) document.exitFullscreen(); else if (ov.requestFullscreen) ov.requestFullscreen({ navigationUI: "hide" }); else toast("Your browser can't fill the window here"); } catch (e) {}
+    // iPhone Safari has no element full screen, and a desktop browser can refuse it: either way, fill the window by hiding the controls (a tap brings them back)
+    const bare = () => { setChrome(false); buzz(5); };
+    const fsEl = document.fullscreenElement || document.webkitFullscreenElement;
+    try {
+      if (fsEl) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; }
+      const rq = ov.requestFullscreen || ov.webkitRequestFullscreen;
+      if (!rq) return bare();
+      const p = rq.call(ov, { navigationUI: "hide" });
+      let settled = false;
+      if (p && p.then) p.then(() => { settled = true; }, () => { settled = true; bare(); });
+      // some browsers (in-app views) leave the request hanging forever: no full screen after a moment means hide the controls instead
+      setTimeout(() => { if (!settled && !closed && !(document.fullscreenElement || document.webkitFullscreenElement)) bare(); }, 700);
+    } catch (e) { bare(); }
   };
   const onFs = () => { paintOpts(); setTimeout(() => !closed && render(), 60); };
   document.addEventListener("fullscreenchange", onFs);
@@ -333,6 +345,9 @@ function palFullOpen(colors, opts = {}) {
   const rectOf = f => { try { const r = f && (f.getBoundingClientRect ? f.getBoundingClientRect() : f); return r && r.width > 8 && r.height > 8 ? r : null; } catch (e) { return null; } };
   const clipFor = r => r ? `inset(${Math.max(0, r.top)}px ${Math.max(0, innerWidth - r.right)}px ${Math.max(0, innerHeight - r.bottom)}px ${Math.max(0, r.left)}px round 14px)` : "";
   render(); paintOpts(); paintModes(); built = true;
+  // the sheet's height drives --pf-bh (where tags and the Bands/Stripes floor sit): render() measures before the options and modes are drawn, so follow its real size
+  const botEl0 = ov.querySelector("[data-pf-bot]"), syncBh = () => { if (st.chrome && botEl0.offsetHeight > 60) ov.style.setProperty("--pf-bh", (botEl0.offsetHeight + 8) + "px"); };
+  syncBh(); let bhRO = null; if (typeof ResizeObserver === "function") { bhRO = new ResizeObserver(syncBh); bhRO.observe(botEl0); }
   const from0 = rectOf(opts.from);
   if (reduce || !from0) { ov.classList.add("fade"); requestAnimationFrame(() => ov.classList.add("on")); }
   else {
@@ -345,7 +360,7 @@ function palFullOpen(colors, opts = {}) {
   function close() {
     if (closed) return; closed = true;
     document.removeEventListener("keydown", onKey, true); document.removeEventListener("fullscreenchange", onFs);
-    removeEventListener("resize", onRz); removeEventListener("orientationchange", onRz);
+    removeEventListener("resize", onRz); removeEventListener("orientationchange", onRz); if (bhRO) bhRO.disconnect();
     try { if (document.fullscreenElement) document.exitFullscreen(); } catch (e) {}
     if (meta && metaWas != null) meta.setAttribute("content", metaWas);
     unlockScroll(); PF = null; buzz(4);
