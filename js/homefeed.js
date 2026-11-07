@@ -28,17 +28,20 @@ const hfFollows = () => [
   ...Object.entries(hfStore("favPainter")).map(([n, v]) => ({ kind: "p", name: n, at: (v && v.at) || 0 })),
   ...Object.entries(hfStore("favMove")).map(([n, v]) => ({ kind: "m", name: n, at: (v && v.at) || 0 })),
 ].sort((a, b) => b.at - a.at);
-const hfHid = i => !!(GAL && GAL.hid && GAL.hid[i]);
+// The two rooms (David, 2026-11-07): the painting surfaces never show an illustration (data/gallery/kinds.json, GAL.ill), and the Illustration room (TF_KIND "ill") shows
+// nothing else. Every list in this file asks hfHid, so the room is decided in this one place.
+const hfIll = () => TF_KIND === "ill";
+const hfHid = i => !!(GAL && ((GAL.hid && GAL.hid[i]) || (TF_KIND === "ill" ? !(GAL.ill && GAL.ill[i]) : GAL.ill && GAL.ill[i])));
 
 // ---------- the pools ----------
 let HF_F = null, HF_COUNTS = null;
 const hfFacets = () => (HF_F ? Promise.resolve(HF_F) : xbLoad().then(F => (HF_F = F)));
 // how many visible paintings each painter and movement has (once)
 function hfCounts(F) {
-  if (HF_COUNTS && HF_COUNTS.F === F) return HF_COUNTS;
+  if (HF_COUNTS && HF_COUNTS.F === F && HF_COUNTS.ill === hfIll()) return HF_COUNTS;
   const art = new Int32Array(F.meta.artists.length + 2), mv = new Int32Array(F.meta.movements.length + 2);
   for (let i = 0; i < F.N; i++) { if (hfHid(i)) continue; art[F.artist[i]]++; mv[F.mv[i]]++; }
-  return (HF_COUNTS = { F, art, mv });
+  return (HF_COUNTS = { F, art, mv, ill: hfIll() });
 }
 // ---------- beauty (David, 2026-10-26: "the app can make honest aesthetic judgments; some work is simply prettier; the home should give people a
 // beautiful palette for their eyes") ----------
@@ -97,8 +100,13 @@ function hfBeautyReady() {
 }
 const hfBeauty = i => (HF_B ? HF_B[i] : GAL.C[i] / 60);
 // the beauty a painting needs to be on the HOME without being asked for: the top slice (`q` of the archive sits below it)
-let HF_CUT = null;
-const hfCut = q => { if (!HF_B) return 0; if (!HF_CUT) HF_CUT = Float32Array.from(HF_B).sort(); return HF_CUT[Math.min(HF_CUT.length - 1, Math.floor(HF_CUT.length * q))]; };
+// (the Illustration room is a small set whose beauty reading was ranked against paintings: its bar is the same slice of ITS OWN rows, and a looser one so the room is never thin)
+let HF_CUT = null, HF_CUT_ILL = null;
+const hfCut = q => {
+  if (!HF_B) return 0;
+  if (hfIll()) { if (!HF_CUT_ILL) HF_CUT_ILL = Float32Array.from((GAL.illIdx || []).map(i => HF_B[i])).sort(); const a = HF_CUT_ILL; return a.length ? a[Math.min(a.length - 1, Math.floor(a.length * q * .6))] : 0; }
+  if (!HF_CUT) HF_CUT = Float32Array.from(HF_B).sort(); return HF_CUT[Math.min(HF_CUT.length - 1, Math.floor(HF_CUT.length * q))];
+};
 // the weight of a painting in a shuffle: beauty cubed (the prettiest come first but the order is still a shuffle), a body-of-work boost for a
 // painter with real depth, extreme panoramas hardly at all
 const hfW = i => {
@@ -152,7 +160,10 @@ async function hfPresets(k) {
 // everything a tile needs); the first screen is a color-gradual walk through it, drawn at once, and when the page asks for more the real river carries on from its last painting.
 // Rebuild it with the console script in tools/home_seed.js.
 let HF_SEEDP = null;
-const hfSeedLoad = () => HF_SEEDP || (HF_SEEDP = fetch("data/home-seed.json").then(r => (r.ok ? r.json() : null)).then(o => (o && o.items && o.items.length > 40 ? o : null)).catch(() => null));
+const hfSeedLoad = () => HF_SEEDP || (HF_SEEDP = Promise.all([fetch("data/home-seed.json").then(r => (r.ok ? r.json() : null)), glKindsRaw()]).then(([o, k]) => {
+  if (o && o.items && k && Array.isArray(k.illustration) && k.illustration.length) { const ill = new Set(k.illustration); o = { ...o, items: o.items.filter(x => !ill.has(x.g)) }; }   // an illustration never opens the painting home
+  return o && o.items && o.items.length > 40 ? o : null;
+}).catch(() => null));
 function hfSeedRiver(seed, rnd, count) {
   const pool = seed.items.map(x => ({ x, L: lab(x.c) })), out = [];
   let cur = pool.splice(Math.floor(rnd() * pool.length), 1)[0];
@@ -415,6 +426,20 @@ function hfChips(pre, activeId) {
   if (activeId && !seen.has(activeId)) out.splice(1, 0, { id: activeId, label: hfLabelOf(activeId, pre) });
   return out;
 }
+// The Illustration room's row two (David, 2026-11-07): For you, then one lens per illustrator (the best known first, then the biggest body of work), then decades.
+// Lens ids are the ordinary ones ("p:<illustrator>", "e:<from>-<to>"): inside the room hfHid leaves only illustrations, so the same list-makers do the work.
+const HF_ILL_FAME = /leyendecker|rackham|dulac|nielsen|pyle|wyeth|mucha|bilibin|jessie willcox|gibson|coles phillips|parrish|rockwell|beardsley|crane|greenaway|tenniel|detmold|artzybasheff/i;
+async function hfIllChips() {
+  if (!GAL.ill) return [];
+  const F = await hfFacets(), n = new Int32Array(F.meta.artists.length + 2), dec = new Map();
+  GAL.illIdx.forEach(i => { if (GAL.hid && GAL.hid[i]) return; n[F.artist[i]]++; const y = GAL.year[i]; if (y !== GL_UNDATED && y >= 1840 && y < 1960) { const d = Math.floor(y / 10) * 10; dec.set(d, (dec.get(d) || 0) + 1); } });
+  const min = Math.max(3, Math.min(10, Math.round(GAL.illIdx.length / 400))), ars = [];
+  F.meta.artists.forEach((a, j) => { if (n[j + 1] >= min) ars.push({ id: "p:" + a[0], label: fdShortName(a[0]), n: n[j + 1], fame: HF_ILL_FAME.test(a[0]) ? 1 : 0 }); });
+  ars.sort((x, y) => y.fame - x.fame || y.n - x.n);
+  const out = [{ id: "foryou", label: "For you" }].concat(ars.slice(0, 30).map(x => ({ id: x.id, label: x.label })));
+  [...dec.entries()].filter(([, c]) => c >= min * 2).sort((x, y) => x[0] - y[0]).forEach(([d]) => { const id = "e:" + d + "-" + (d + 10); out.push({ id, label: d + "s" }); });
+  return out;
+}
 function hfLabelOf(id, pre) {
   const t = id.slice(0, 2), v = id.slice(2);
   if (t === "mo") return hfMoodName(id.slice(3)); if (t === "e:") return hfEraName(v); if (t === "g:") return hfGenreName(v);
@@ -631,7 +656,9 @@ async function hfAround(k, keep) {
 async function hfForYou(k, salt) {
   // the facets give painter spacing and a better beauty weight; give them 1.5 s, never more
   const F = await hfBudget(hfFacets().then(f => { hfCounts(f); return f; }).catch(() => null), 1500);
-  const seen = hfSeen(), skip = new Set(seen), rnd = hfSeedOf(k, "fy" + salt);
+  let seen = hfSeen();
+  if (hfIll() && GAL.illIdx && GAL.illIdx.filter(i => !seen.has(i)).length < 120) seen = new Set();   // the Illustration room is a smaller set: once most of it has been seen, it starts over rather than run dry
+  const skip = new Set(seen), rnd = hfSeedOf(k, "fy" + salt);
   const kept = Object.values(typeof fvArtStore === "function" ? fvArtStore() : {}).filter(x => x && x.i >= 0).sort((a, b) => (b.at || 0) - (a.at || 0));
   kept.forEach(x => skip.add(x.i));
   const fp = new Set(Object.keys(hfStore("favPainter"))), fm = new Set(Object.keys(hfStore("favMove")));

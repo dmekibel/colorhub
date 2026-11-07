@@ -66,6 +66,10 @@ function checkIds() {
     const hj = rj("data/gallery/hidden.json"), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
     if (hj.n !== gIds.length || hj.hash !== h) err("data/gallery/hidden.json was built for a different ids.txt (it would hide the wrong paintings): python3 tools/hide_nonart.py");
   }
+  if (fs.existsSync(path.join(ROOT, "data/gallery/kinds.json"))) {   // the Illustration room's list (tools/kinds.py): positions in THIS ids.txt (a stale one would move the wrong paintings to the other room)
+    const kj = rj("data/gallery/kinds.json"), h = require("crypto").createHash("sha1").update(fs.readFileSync(path.join(ROOT, "data/gallery/ids.txt"))).digest("hex");
+    if (kj.n !== gIds.length || !kj.ids || !h.startsWith(String(kj.ids))) err("data/gallery/kinds.json was built for a different ids.txt (it would put the wrong paintings in the Illustration room): python3 tools/kinds.py");
+  }
   if (fs.existsSync(path.join(ROOT, "data/gallery/aesthetic.json"))) {   // the home's picture-appeal reading (tools/audit_beauty.py): a stale one is ignored by the app, so only a warning
     const aj = rj("data/gallery/aesthetic.json"), h = require("crypto").createHash("sha1").update(gIds.join("\n") + "\n").digest("hex").slice(0, 8);
     if (aj.n !== gIds.length || aj.hash !== h || sz("data/gallery/aesthetic.bin") !== gIds.length) warn("data/gallery/aesthetic.bin is out of step with ids.txt (the home falls back to palette-only beauty until it is rebuilt): python3 tools/audit_beauty.py");

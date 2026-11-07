@@ -8930,6 +8930,40 @@ scenario("home", "Today: paintings only on open, two rows, a double-tap likes, a
   await t.click(t.$(".tf-game"), { wait: 800 });
   await t.waitFor(() => t.w.location.hash === "#/daily", 12000, "the daily game to open from its card");
 });
+// David, 2026-11-07: Golden Age illustrators have their own room. Paintings never show an illustration; the Illustration room shows nothing else, has its own lens row
+// (For you, an illustrator each, decades), its own address, and an illustration's page says "Illustration". (Needs data/gallery/kinds.json; without it the chip hides.)
+scenario("home", "Illustration room is separate from Paintings: own lenses and address and the page says Illustration", async t => {
+  await t.open("#/feed", { settle: 600 });
+  await t.waitFor(() => t.$$(".tf-col .tf-paint:not(.sk)").length >= 12, 20000, "the feed to show paintings");
+  await t.waitFor(() => t.ev("typeof GAL !== \"undefined\" && !!GAL && GAL.n > 0"), 20000, "the gallery");
+  const ill = new Set(t.ev("GAL.illIdx || []"));
+  t.expect(ill.size > 20, "kinds.json named no illustrations (the room cannot be tested)");
+  t.expect(t.$$(".tf-col .tf-paint[data-gi]").every(c => !ill.has(+c.dataset.gi)), "an illustration is on the Paintings home");
+  const chip = t.$("[data-tf-f=ill]");
+  t.expect(chip && !chip.hidden && /Illustration/.test(chip.textContent), "the Illustration chip is not in the kind row");
+  t.expect(t.$$(".tf-kinds .tf-chip")[1] === chip, "Illustration is not right after Paintings");
+  await t.click(chip, { wait: 1200 });
+  await t.waitFor(() => t.$$(".tf-col .tf-paint[data-gi]").length >= 8, 20000, "the Illustration room to show pictures");
+  t.expect(t.w.location.hash === "#/illustration", `the room has no address (${t.w.location.hash})`);
+  t.expect(t.$$(".tf-col .tf-paint[data-gi]").every(c => ill.has(+c.dataset.gi)), "the Illustration room shows a painting");
+  await t.waitFor(() => t.$$(".tf-lenses .tf-chip").length >= 3, 8000, "the room's lens row");
+  const lenses = t.$$(".tf-lenses .tf-chip").map(c => c.textContent);
+  t.notes.push("lenses: " + lenses.slice(0, 8).join(", "));
+  t.expect(lenses[0] === "For you", "the room's first lens is not For you");
+  await t.click(t.$$(".tf-lenses .tf-chip")[1], { wait: 1200 });
+  await t.waitFor(() => t.$$(".tf-col .tf-paint[data-gi]").length >= 2, 12000, "an illustrator's lens to load");
+  t.expect(t.$$(".tf-col .tf-paint[data-gi]").every(c => ill.has(+c.dataset.gi)), "an illustrator's lens shows a painting");
+  const card = t.$$(".tf-col .tf-paint[data-gi]")[0];
+  await t.click(card, { wait: 900 });
+  await t.waitFor(() => !t.$(".tf-screen") && /Illustration/.test((t.$(".p-type") || {}).textContent || ""), 12000, "an illustration's page to say Illustration");
+  t.w.history.back();
+  await t.waitFor(() => t.$(".tf-screen"), 12000, "Back to the room");
+  await t.click(t.$("[data-tf-f=paint]"), { wait: 1000 });
+  await t.waitFor(() => t.$$(".tf-col .tf-paint[data-gi]").length >= 8 && t.w.location.hash === "#/feed", 20000, "Paintings to come back at #/feed");
+  t.expect(t.$$(".tf-col .tf-paint[data-gi]").every(c => !ill.has(+c.dataset.gi)), "an illustration came into Paintings after visiting the room");
+  await t.open("#/illustration", { settle: 800 });
+  await t.waitFor(() => t.$("[data-tf-f=ill].on") && t.$$(".tf-col .tf-paint[data-gi]").length >= 8, 20000, "#/illustration to open the room");
+});
 // David, 2026-10-21 (desktop): "when you click on the map, I want the page to open. Then when you click on it again, then I want what we
 // described." On a desktop a click on a painting tile opens its page directly (no card, no glide); a click on the page's picture opens
 // the immersive zoom viewer (black, hover-pan); Esc returns to the page; Back returns to the map. The smoke browser has no hover media,
