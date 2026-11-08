@@ -212,7 +212,9 @@ def cands_commons():
         a = r["a"]
         if a and re.search(r"[Ѐ-ӿ]", a):
             a = None if "Прокудин" in a else a
-        out.append(dict(id=r["id"], t=C.clean_title(r["t"]), a=a, y=r["y"], co=r["co"] or C.country_of(" ".join([r["t"], r["category"]])),
+        win = (1903, 1916) if proc.startswith("Prokudin") else (1938, 1946) if proc.startswith("Kodachrome") else (1903, 1960)   # a year outside the process's own era is a filename/accession number, not a date
+        y = r["y"] if r["y"] and win[0] <= r["y"] <= win[1] else None
+        out.append(dict(id=r["id"], t=C.clean_title(r["t"]), a=a, y=y, co=r["co"] or C.country_of(" ".join([r["t"], r["category"]])),
                         mv=mv, process=proc, fetch=fetch or r["img"], fallback=file_img("File:" + fname, 330), img=file_img("File:" + fname),
                         url=r["url"], lic=r["lic"], group=r["category"], mu=mu, premeasured=(r["p"], r["L"], r["C"]),
                         credit=f"{mu + ' via ' if mu else ''}Wikimedia Commons · {r['lic']}"))
@@ -228,6 +230,7 @@ def cands_photochrom():
     out = []
     for u in us:
         c = commons_cand(u, "Photochrom", mv="Photochrom", mu="Library of Congress" if "Library of Congress" in u["group"] else None)
+        c["t"] = re.sub(r"\s*\bLCCN\d+\b", "", c["t"]).strip(" ,.") or c["t"]
         if re.search(r"\b(map|chart|diagram|poster|lithograph of)\b", c["t"], re.I):
             continue
         if c["a"] is None and re.search(r"detroit|library of congress|photochrom prints collection", u["group"], re.I):
@@ -347,8 +350,17 @@ def cands_nasa():
         if y is None or y < 1960:
             drops["no year"] += 1; continue
         t = nasa_clean(d.get("title"))
-        if re.match(r"^[A-Za-z]{2,6}\d", t) and len(t) < 18:   # just a frame number: take the description's first sentence
-            t = nasa_clean(d.get("description")).split(". ")[0][:90] or t
+        generic = re.match(r"^[A-Za-z]{2,6}\d", t) and len(t) < 18 or re.search(r"\btaken by\b|^\d+ - |Mission image|^Earth observations?$|^Crew Earth Observations", t, re.I)
+        if generic:   # just a frame number or a boilerplate title: the description's first sentence says what the picture shows
+            dsc = nasa_clean(d.get("description"))
+            dsc = re.sub(r"^(?:Earth observations?|Crew Earth Observations(?: \(CEO\))?)[^.:]{0,60}?(?:taken|photographed) (?:by|from)[^.:]{0,60}?(?:crew\w*|aboard[^.:]{0,40}|station)\s*[:.\-]*\s*", "", dsc, flags=re.I)
+            first = re.split(r"(?<=[a-z0-9])\.\s", dsc)[0].rstrip(". ")
+            if 12 <= len(first) <= 200 and not first[0].islower():
+                t = first
+        m = re.search(r"Earth observations?[^.]*?\b(Expedition \d+|STS-\d+)", t, re.I)
+        if m and t == nasa_clean(d.get("title")) and len(t) < 100:   # still the boilerplate: say what it is, once
+            t = f"Earth from orbit, {m.group(1)}"
+        t = re.sub(r"(\w)\?s\b", "\\1\u2019s", t)
         pre = nid.lower()[:3] if not nid.lower().startswith(("iss", "sts", "jsc", "sl")) else re.match(r"[a-z]+\d*", nid.lower()).group(0)
         grp = re.match(r"^(as\d+|ap\d+|s6\d|s7\d|sl\d|sts\d+|iss\d+|jsc\d+|s\d+|[a-z]+)", nid.lower()).group(1)
         res.append(dict(id=f"nasa-{safe(nid.lower())}", t=C.clean_title(t), a=d.get("photographer") or "NASA", y=y, co=None,
@@ -388,7 +400,7 @@ def measure(c, app, app_lab):
         return None
     ok, mean_c, spread = PC.classify_color(pal["lab"], pal["share"])
     if SOURCE == "nasa":
-        ok = mean_c >= PC.MONO_C
+        ok = mean_c >= 4.0   # a lunar surface or a dark frame at C* 2-4 is a grey picture, whatever the camera
     if not ok:
         return None
     rgbs = C.lab_to_rgb(np.array(pal["lab"]))
@@ -489,6 +501,10 @@ def main():
             drops["unmeasurable"] += 1; continue
         if not res:
             drops["black-and-white / single-hue tint"] += 1; continue
+        lo, hi = {"photochrom": (1888, 1930), "kahn": (1908, 1932)}.get(SOURCE, (1839, 2030))   # outside the process's own era = an accession number, not a date
+        if c["y"] and not lo <= c["y"] <= hi:
+            drops["year outside the process's era (set to none)"] += 1
+            c["y"] = None
         r = dict(id=c["id"], src=SOURCE_ID, t=c["t"] or "Untitled", a=c["a"], y=c["y"], span=None, co=c["co"], mv=c["mv"], img=c["img"],
                  license=c["lic"], url=c["url"], medium=c["process"], credit=c["credit"], mu=c["mu"])
         r["p"], r["L"], r["C"] = res
