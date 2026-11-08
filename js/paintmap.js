@@ -3485,7 +3485,7 @@ function pmMount(el, s, F) {
     if (document.querySelector(".sheet")) return;
     if (typeof stemJustClosed === "function" && stemJustClosed()) return;   // a ghost click right after closing must not reopen it (js/core.js)
     let tab = startTab === "filter" ? "filter" : "arrange";
-    let fsec = "", fopen = { co: false, painter: false, mv: false, mus: false, subj: false }, fq = "", coq = "", curPresets = PM_TIME_PRESETS;
+    let fsec = "kd", fopen = { co: false, painter: false, mv: false, mus: false, subj: false }, fq = "", coq = "", curPresets = PM_TIME_PRESETS;
     const tabsHTML = `<div class="hm-ch-tabs pmx-tabs" role="tablist" aria-label="Arrange or filter the painting map">
         <button class="hm-ch-tab" data-tab="arrange" role="tab">Arrange</button>
         <button class="hm-ch-tab" data-tab="filter" role="tab">Filter</button>
