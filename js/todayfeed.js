@@ -38,7 +38,7 @@ function tfSyncRoom() {   // crossing between Paintings and a room
 // every room has its own address (#/illustration, #/prints, #/room/<kind>); leaving it puts the feed's back
 function tfAddress() {
   try {
-    const r = tfRoomObj(), isRoomHash = /^#\/(illustration|prints|room\/.+)$/.test(location.hash);
+    const r = tfRoomObj(), isRoomHash = /^#\/(illustration|prints|photos|room\/.+)$/.test(location.hash);
     if (hfRoom() && !r) return;   // the rooms are not known yet: the address stays as it was opened
     const want = r ? "#/" + r.addr : isRoomHash ? "#/feed" : "";
     if (want && location.hash !== want) history.replaceState(history.state, "", want);
