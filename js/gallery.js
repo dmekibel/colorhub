@@ -59,7 +59,7 @@ const glHidden = i => !!(GAL && GAL.hid && GAL.hid[i]);
 // the painting map and a painter's own page keep every work. A kind with no rows makes no room.
 let GAL_KINDS_P = null;
 const glKindsRaw = () => GAL_KINDS_P || (GAL_KINDS_P = fetch(GAL_DIR + "kinds.json").then(r => (r.ok ? r.json() : null)).catch(() => null));
-const GL_KIND_INFO = { illustration: { chip: "Illustration", one: "Illustration", many: "illustrations", addr: "illustration" }, print: { chip: "Prints", one: "Print", many: "prints", addr: "prints" } };
+const GL_KIND_INFO = { illustration: { chip: "Illustration", one: "Illustration", many: "illustrations", addr: "illustration" }, print: { chip: "Prints", one: "Print", many: "prints", addr: "prints" }, photograph: { chip: "Photos", one: "Photograph", many: "photographs", addr: "photos" } };
 function glKindInfo(key) {
   const d = GL_KIND_INFO[key]; if (d) return d;
   const w = String(key).replace(/[-_]+/g, " "), cap = w.charAt(0).toUpperCase() + w.slice(1);

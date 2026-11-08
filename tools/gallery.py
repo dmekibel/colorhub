@@ -150,6 +150,15 @@ for _k, _n, _s, _h, _r in (("yuag", "Yale University Art Gallery", "Yale Art Gal
 # 2026-10-29: Europeana rows (tools/europeana_pull.py); each row's own `credit` and `url` name the holding institution and licence.
 SOURCES["europeana"] = dict(name="Europeana (open licences)", short="Europeana", credit="open licence (CC0, public domain mark, CC BY or CC BY-SA), named on the item's page (the link) · CC0 data",
                             home="https://www.europeana.eu/en/collections", rec="https://www.europeana.eu/en/item/{num}")
+# 2026-11-08: the Photos room (tools/photos_import.py). Every row carries its own url and credit; these entries only name the source.
+SOURCES["photod"] = dict(name="Wikimedia Commons (historic color photography)", short="Commons", credit="public domain or CC0, per file (Library of Congress, Rijksmuseum, Albert Kahn ...)",
+                         home="https://commons.wikimedia.org/wiki/Category:Autochromes", rec="https://commons.wikimedia.org/wiki/{num}")
+SOURCES["photochrom"] = dict(name="Photochrom prints (via Wikimedia Commons)", short="Photochrom", credit="public domain, per file (Detroit Publishing Co. and Photochrom Zurich, Library of Congress)",
+                             home="https://commons.wikimedia.org/wiki/Category:Photochrom_pictures", rec="https://commons.wikimedia.org/wiki/{num}")
+SOURCES["kahn"] = dict(name="Musée départemental Albert-Kahn, Archives of the Planet", short="Albert Kahn", credit="CC0 (musée Albert-Kahn open data, via Wikimedia Commons)",
+                       home="https://collections.albert-kahn.hauts-de-seine.fr/", rec="https://commons.wikimedia.org/wiki/{num}")
+SOURCES["nasa"] = dict(name="NASA Image and Video Library", short="NASA", credit="NASA media, generally not copyrighted",
+                       home="https://images.nasa.gov/", rec="https://images.nasa.gov/details/{num}")
 CMA_IMG = re.compile(r"^https://openaccess-cdn\.clevelandart\.org/([^/]+)/\1_web\.jpg$")
 
 
