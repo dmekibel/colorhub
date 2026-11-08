@@ -3717,7 +3717,7 @@ function pmMount(el, s, F) {
         ${secH("mus", musLab, sumOf(musSelSet, musAll), `<div class="pmx-chips">${musAll.map(x => chip("data-pmmus", x.v, x.name, x.n, musSelSet.has(x.v))).join("")}</div>`)}
         ${secH("painter", painterLab, sumOf(paSelSet, pas), `<label class="search pmx-find"><span>${ICON.search}</span><input data-pmq type="search" placeholder="Find a ${esc(painterLab.toLowerCase())}" value="${esc(fq)}" autocomplete="off"></label>
           <div class="pmx-chips">${pList.map(x => chip("data-pmp", x.v, x.name, x.n, paSelSet.has(x.v))).join("")}${!fq && !fopen.painter && pas.length > 10 ? `<button class="pmx-more" data-pmmore="painter">More ${esc(nounP)}</button>` : ""}</div>`)}
-        <div class="pmx-foot"><button type="button" class="btn pmx-show" data-sheet-close>Show ${n.toLocaleString()} ${n === 1 ? pmKdNoun(F, PM_NOW && PM_NOW.s, "noun") : nounP}</button></div>`;
+        `;
       const inp = q$("[data-pmq]");
       if (inp) inp.oninput = () => { fq = inp.value.trim(); const pos = inp.selectionStart; renderFilter(); const ni = q$("[data-pmq]"); ni.focus(); try { ni.setSelectionRange(pos, pos); } catch (e) {} };
       const coInp = q$("[data-pmcoq]");

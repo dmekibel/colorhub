@@ -87,7 +87,7 @@ PHOTO_FILE = os.path.join(ROOT, "data", "photography", "photos.json")
 DESIGN_SKIP_SRC = {"chndm", "npmd"}
 
 SHARPEN_R, SHARPEN_PCT = 0.8, 90
-TIER0_TILE = 12   # was 20. Decoded memory is what kills iPhones: a tier-0 tile costs tile^2 x 4 B in the browser
+TIER0_TILE = 10   # was 20, then 12 (2026-11-08: 12px = 152 MB at 276k paintings, over the 120 MB budget; 10px = 105 MB). Decoded memory is what kills iPhones: a tier-0 tile costs tile^2 x 4 B in the browser
 # (20px = 1.6 KB/painting = 333 MB at 206k paintings = WebContent killed by iOS; 12px = 0.58 KB = 119 MB).
 # Change it locally with `python3 tools/paintmap_atlas.py tier0 --tile N` (re-derives from tier-1, no network).
 TIER1_TILE = 80
