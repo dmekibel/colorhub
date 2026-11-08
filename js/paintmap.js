@@ -45,7 +45,7 @@ const pmArrOk = s => s.arr === "look" ? (s.col || "paintings") === "paintings" &
 const PM_NEEDS_SEED = new Set(["rings", "spiral"]);
 const PM_WHY = {
   color: "Lighter toward the top, hues left to right",
-  time: "Oldest at the top, a band for each decade",
+  time: "One ribbon, oldest first, the years along the side",
   painter: "A block for each painter, earliest first",
   families: "A block for each movement, the biggest first",
   museum: "A block for each museum, the biggest collection first",
@@ -454,7 +454,7 @@ function pmRun(s, F) {
 const pmKdNoun = (F, s, k) => s && s.f && (s.f.kdSet || []).some(v => v > 1) ? (k === "noun" ? "work" : "works") : pmColLabel(F, k);
 
 // ---------- the spec: what to show and how (the address's query) ----------
-const pmFresh = () => ({ arr: "color", f: pmFilterFresh(), seed: -1, fav: 0, place: "avg", upToYear: null, mag: null, col: "paintings" });
+const pmFresh = () => ({ arr: "color", f: pmFilterFresh(), seed: -1, fav: 0, place: "avg", upToYear: null, mag: null, col: "paintings", tdir: "down", tw: null });
 // David, 2026-10-09: "a time scrubber with play (paintings appear decade by decade)" -- the dataset's own real
 // year span (excluding undated), computed once and cached. The scrubber's slider runs across this, not a guess.
 let PM_YEAR_RANGE = null;
@@ -503,6 +503,8 @@ function pmParse(q, F) {
   s.col = (F && F.col) || "paintings";
   const a = p.get("arr"); if (PM_ARR.some(x => x[0] === a)) s.arr = a;
   const pl = p.get("pl"); if (PM_PLACE.some(x => x[0] === pl)) s.place = pl;
+  if (p.get("td") === "across") s.tdir = "across";
+  { const tw = +p.get("tw"); if (tw >= 1 && tw <= PM_TW_MAX) s.tw = Math.round(tw); }
   const f = s.f, num = k => { const v = p.get(k); return v != null && v !== "" && isFinite(+v) ? +v : null; };
   const uy = num("uy"); if (uy != null) s.upToYear = uy;
   const mg = num("mag"); if (mg != null) s.mag = clamp(mg, 0, 1);
@@ -544,6 +546,7 @@ function pmQS(s, F) {
   const f = s.f, out = [["arr", s.arr]];
   const col = s.col || (F && F.col) || "paintings"; if (col !== "paintings") out.push(["col", col]);
   if (s.place && s.place !== "avg") out.push(["pl", s.place]);
+  if (s.arr === "time") { if (s.tdir === "across") out.push(["td", "across"]); if (s.tw) out.push(["tw", s.tw]); }
   if (s.arr === "look") { const o = pmLk(s); out.push(["lk", o.lay], ["lsp", +o.sp.toFixed(2)], ["lc", o.col], ["lb", o.lab]); }
   if (f.hexes.length) { out.push(["c", f.hexes.map(h => h.slice(1).toLowerCase()).join(",")], ["t", f.tol], ["m", f.cover]); if (f.hexes.length > 1 && f.colorMode === "all") out.push(["cm", "all"]); if (f.colorMode === "overall") { out.push(["cm", "overall"], ["sh", (f.shares || []).join(",")]); if (f.name) out.push(["nm", f.name]); } else if (f.hexes.length === 1 && f.name && f.name !== nameOf(f.hexes[0]).text) out.push(["nm", f.name]); }   // a color keeps the name it was opened with (an archive name, "Your color") across reloads and shares
   if (f.y0 != null) out.push(["y0", f.y0]); if (f.y1 != null) out.push(["y1", f.y1]);
@@ -958,32 +961,41 @@ function pmBand(i, F, yearly) {
   if (y < 1500) { const c = Math.floor(y / 100) * 100; return { key: c, label: c < 0 ? `${-c} BCE` : `${c}–${c + 99}` }; }
   const d = Math.floor(y / 10) * 10; return { key: d, label: d + "s" };
 }
-function pmLayTime(list, place, F, wide) {
-  // wide (a one-painter map): ~1,000 works in 14 columns made a 14x78 sliver on a phone; ~sqrt(n) columns frames it
-  const n = list.length, Wc = wide ? Math.max(6, Math.min(30, Math.round(Math.sqrt(n) * .9))) : Math.max(3, Math.min(16, Math.round(Math.sqrt(n) / 2.2)));
-  const bands = new Map();
-  // a one-painter map whose work sits in a few decades gets a band per YEAR (a decade-only band would be one big block)
+// David, 2026-11-08: one continuous ribbon, no islands -- oldest first, rows packed with no gaps, the years along
+// the side (a margin label where each decade starts, plus a pill that always names the year in view).
+// dir "down" (time runs down, `per` paintings in each row) or "across" (time runs right, `per` in each column).
+const PM_TW_MAX = 40;
+function pmTimePer(n, wide) { return wide ? Math.max(6, Math.min(30, Math.round(Math.sqrt(n) * .9))) : Math.max(3, Math.min(16, Math.round(Math.sqrt(n) / 2.2))); }
+function pmLayTime(list, place, F, wide, dir, per) {
+  const n = list.length, Wc = per ? Math.max(1, Math.min(PM_TW_MAX, per | 0)) : pmTimePer(n, wide), across = dir === "across";
+  const G = (F && F.G) || GAL;
+  // a one-painter map whose work sits in a few decades gets a label per YEAR (decades alone would be two or three marks)
   const yearly = !!wide && new Set(Array.from(list, i => pmBand(i, F).key)).size <= 4;
-  list.forEach(i => { const b = pmBand(i, F, yearly); if (!bands.has(b.key)) bands.set(b.key, { ...b, items: [] }); bands.get(b.key).items.push(i); });
-  const keys = [...bands.keys()].sort((a, b) => a - b);
   const Lv = i => pmPlaceLab(i, place, F)[0], Av = i => pmPlaceLab(i, place, F)[1], Bv = i => pmPlaceLab(i, place, F)[2];
-  const items = new Int32Array(n), X = new Int32Array(n), Y = new Int32Array(n), labels = [];
+  const ord = Array.from(list).sort((p, q) => pmYr(p, F) - pmYr(q, F) || Lv(q) - Lv(p));
+  const items = new Int32Array(n), X = new Int32Array(n), Y = new Int32Array(n), labels = [], lines = [];
   const ox = Math.floor(Wc / 2);
-  let y = 0, m = 0, start = null, half = n / 2, seen = 0;
-  keys.forEach(key => {
-    const b = bands.get(key), its = b.items.sort((p, q) => Lv(q) - Lv(p));
-    labels.push({ x: -ox, y, text: b.label, n: its.length, w: Wc });
-    y++;
-    for (let r = 0; r * Wc < its.length; r++) {
-      const row = its.slice(r * Wc, r * Wc + Wc).sort((p, q) => pmHueKey(Av(p), Bv(p)) - pmHueKey(Av(q), Bv(q)));
-      row.forEach((i, c) => { items[m] = i; X[m] = c - ox; Y[m] = y; m++; });
-      y++;
-    }
-    if (!start && seen + its.length >= half) start = [0, y - Math.ceil(its.length / Wc) / 2 - .5];
-    seen += its.length;
-    y++;   // a quiet gap row between bands
+  let lastKey = null, labAt = [];
+  for (let r = 0; r * Wc < n; r++) {
+    const row = ord.slice(r * Wc, r * Wc + Wc);
+    // each new decade (or year, or century) starting in this line gets a mark at this line
+    row.forEach(i => { const b = pmBand(i, F, yearly); if (b.key !== lastKey) { lastKey = b.key; labAt.push({ line: r, text: b.label, key: b.key }); } });
+    const y0 = G.year[row[0]];
+    lines.push(y0 === GL_UNDATED ? "Undated" : y0 < 0 ? `${-y0} BCE` : String(y0));
+    row.sort((p, q) => pmHueKey(Av(p), Bv(p)) - pmHueKey(Av(q), Bv(q)))
+      .forEach((i, c) => { const m = r * Wc + c; items[m] = i; if (across) { X[m] = r; Y[m] = c - ox; } else { X[m] = c - ox; Y[m] = r; } });
+  }
+  // two marks on one line: keep the later (the line's own era); counts per mark
+  const marks = []; labAt.forEach(L => { if (marks.length && marks[marks.length - 1].line === L.line) marks.pop(); marks.push(L); });
+  marks.forEach((L, k) => {
+    const next = k + 1 < marks.length ? marks[k + 1].line : lines.length;
+    if (across) labels.push({ x: L.line, y: -ox - 1.35, text: L.text, n: 0, w: Math.max(1, next - L.line) - .4, side: 1 });
+    else labels.push({ x: -ox - 4, y: L.line + .45, text: L.text, n: 0, w: 3.4, side: 1 });
   });
-  return pmGridOf(items, X, Y, labels, start ? [Math.round(start[0]), Math.round(start[1])] : [0, 1]);
+  const mid = Math.floor(lines.length / 2);
+  const lay = pmGridOf(items, X, Y, labels, across ? [mid, 0] : [0, mid]);
+  lay.rib = { across, lines, per: Wc };
+  return lay;
 }
 // David, 2026-10-09: the shelf-packer behind "By painter" generalized to take ANY grouping (families groups by
 // movement instead of painter, same shelves) -- one block per group, each block's own internal order its own
@@ -1387,7 +1399,7 @@ function pmLayout(s, F) {
   let lay = PM_LAYOUTS.get(key);
   if (!lay) {
     const arr = s.arr === "look" && !pmLookReady(s) ? "color" : s.arr;   // look.bin not here yet (the caller loads it and rebuilds): never cache the stand-in
-    lay = arr === "look" ? pmLayLook(list, F, s) : s.arr === "time" ? pmLayTime(list, s.place, F, pmSolo(s)) : s.arr === "painter" ? pmLayPainter(list, F)
+    lay = arr === "look" ? pmLayLook(list, F, s) : s.arr === "time" ? pmLayTime(list, s.place, F, pmSolo(s), s.tdir, s.tw) : s.arr === "painter" ? pmLayPainter(list, F)
       : s.arr === "museum" ? pmLayMuseum(list, F)
       : s.arr === "subject" && SUBJ ? pmLaySubject(list, F)
       : s.arr === "families" ? pmLayFamilies(list, F) : s.arr === "tones" ? pmLayTones(list, s.place, F)
@@ -2806,6 +2818,7 @@ function pmMount(el, s, F) {
     // band and painter labels, where there's room to read them
     if (lay.labels.length) {
       ctx.textBaseline = "alphabetic"; ctx.textAlign = "left";
+      const placedL = [];
       for (const L of lay.labels) {
         const ex = L.x - .45 - P[0], ey = L.y + .3 - P[1], z = Math.hypot(ex, ey); if (z > R) continue;
         const f = z < 1e-6 ? 0 : Fz(z) / z, sx = cx + ex * f, sy = cy + ey * f, cell = k0 * Math.min(magR(z), tanR(z));
@@ -2815,10 +2828,26 @@ function pmMount(el, s, F) {
         ctx.font = `400 ${fs}px "Instrument Serif", Georgia, serif`;
         let txt = L.text;
         if (ctx.measureText(txt).width > room) { while (txt.length > 2 && ctx.measureText(txt + "…").width > room) txt = txt.slice(0, -1); txt += "…"; }
-        ctx.fillStyle = "rgba(236,232,223,.92)"; ctx.fillText(txt, sx, sy);
         const tw = ctx.measureText(txt).width;
-        if (room - tw > 40) { ctx.font = `500 ${Math.max(11, fs * .55)}px "Geist Mono", Menlo, monospace`; ctx.fillStyle = "rgba(163,158,146,.9)"; ctx.fillText(L.n.toLocaleString(), sx + tw + 8, sy); }
+        if (L.side) {   // the timeline marks: never two on top of each other (the earlier one wins)
+          const r0 = sx - 2, r1 = sx + tw + 2, t0 = sy - fs, t1 = sy + 4;
+          if (placedL.some(q => r0 < q[1] && r1 > q[0] && t0 < q[3] && t1 > q[2])) continue;
+          placedL.push([r0, r1, t0, t1]);
+        }
+        ctx.fillStyle = "rgba(236,232,223,.92)"; ctx.fillText(txt, sx, sy);
+        if (L.n && room - tw > 40) { ctx.font = `500 ${Math.max(11, fs * .55)}px "Geist Mono", Menlo, monospace`; ctx.fillStyle = "rgba(163,158,146,.9)"; ctx.fillText(L.n.toLocaleString(), sx + tw + 8, sy); }
       }
+    }
+    // the timeline ribbon: a pill on the side always names the year of the line in the middle of the screen
+    if (lay.rib && lay.rib.lines.length) {
+      const R0 = lay.rib, ln = clamp(Math.round(R0.across ? P[0] : P[1]), 0, R0.lines.length - 1), txt = R0.lines[ln];
+      ctx.font = `500 15px "Geist Mono", Menlo, monospace`; ctx.textBaseline = "middle"; ctx.textAlign = "center";
+      const tw = ctx.measureText(txt).width, pw = tw + 20, ph = 30;
+      const px = R0.across ? cx : 10 + pw / 2, py = R0.across ? 112 : cy;
+      ctx.fillStyle = "rgba(14,13,11,.86)"; ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(px - pw / 2, py - ph / 2, pw, ph, ph / 2); else ctx.rect(px - pw / 2, py - ph / 2, pw, ph);
+      ctx.fill(); ctx.fillStyle = "rgba(236,232,223,.98)"; ctx.fillText(txt, px, py + 1);
+      ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
     }
     // By look islands: each island's name sits just above its top edge, centered; only where the island is wide enough on screen to
     // carry it (so a label never names a speck), biggest islands first, and a label that would overlap one already placed is skipped.
@@ -3541,6 +3570,10 @@ function pmMount(el, s, F) {
         <p class="hm-arr-sub">${PM_NEEDS_SEED.has(s.arr) && md ? `Around ${esc(md.t)}` : esc(PM_WHY[s.arr])}</p>
         ${s.arr === "look" ? lookSettingsHTML() : ""}
         <div class="hm-feel"><label class="hm-feel-row" data-feel="mag"><span class="hm-feel-l">Magnify</span><span class="hm-feel-r"><i>Flat</i><input type="range" min="0" max="1" step="0.01" value="${s.mag == null ? .5 : s.mag}" data-pmmag aria-label="Magnify, flat to fisheye"><i>Fisheye</i></span></label></div>
+        ${s.arr === "time" ? `<div class="cx-sec"><b>Timeline</b></div>
+          <div class="hm-seg" role="radiogroup" aria-label="Timeline direction"><button class="${s.tdir !== "across" ? "on" : ""}" data-pmtdir="down">Down</button><button class="${s.tdir === "across" ? "on" : ""}" data-pmtdir="across">Across</button></div>
+          <div class="hm-feel"><label class="hm-feel-row"><span class="hm-feel-l">${s.tdir === "across" ? "Per column" : "Per row"}</span><span class="hm-feel-r"><i>1</i><input type="range" min="1" max="${PM_TW_MAX}" step="1" value="${s.tw || pmTimePer(list.length, pmSolo(s))}" data-pmtw aria-label="Paintings in each line"><i>${PM_TW_MAX}</i></span></label></div>
+          <p class="hm-arr-sub" data-pmtwl>${s.tw || pmTimePer(list.length, pmSolo(s))} in each ${s.tdir === "across" ? "column" : "row"}</p>` : ""}
         ${s.arr === "color" || s.arr === "time" || s.arr === "tones" ? `<div class="cx-sec"><b>Place by</b></div>
           <div class="hm-seg" role="radiogroup" aria-label="Place by">${PM_PLACE.map(([k, t]) => `<button class="${(s.place || "avg") === k ? "on" : ""}" data-pmplace="${k}">${esc(t)}</button>`).join("")}</div>` : ""}
         <div class="cx-sec"><b>Center on</b></div>
@@ -3578,6 +3611,13 @@ function pmMount(el, s, F) {
         lsp.oninput = e => { const v = +e.target.value; if (raf) cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { raf = 0; lookSet("sp", v, true); }); };
         lsp.onchange = () => { try { ROUTE_NOW = "#/" + pmRouteOf(s, F).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {} };
       }
+      qa$("[data-pmtdir]").forEach(b => b.onclick = () => {
+        const d = b.dataset.pmtdir; if ((s.tdir || "down") === d) return; buzz(5); s.tdir = d; rebuild(); renderArrange();
+      });
+      { const tw = q$("[data-pmtw]"); if (tw) {
+        tw.oninput = e => { const l = q$("[data-pmtwl]"); if (l) l.textContent = `${e.target.value} in each ${s.tdir === "across" ? "column" : "row"}`; };
+        tw.onchange = e => { buzz(4); s.tw = +e.target.value; rebuild(); renderArrange(); };
+      } }
       qa$("[data-pmplace]").forEach(b => b.onclick = () => {
         const p = b.dataset.pmplace; if ((s.place || "avg") === p) return; buzz(5); s.place = p; rebuild(); renderArrange();
       });
