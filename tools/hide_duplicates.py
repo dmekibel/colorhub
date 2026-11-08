@@ -164,7 +164,7 @@ def main():
     NOT = re.compile(r"study|sketch|cartoon|drawing|copy after|after ", re.I)
     byart = defaultdict(list)
     for k, r in meta.items():
-        if k in epos and r.get("a"):
+        if k in epos and norm(r.get("a")):
             byart[norm(r["a"]).split()[-1]].append(k)
     have = {(a, b) for a, b, c in cand} | {(b, a) for a, b, c in cand}
     extra, titled = 0, set()

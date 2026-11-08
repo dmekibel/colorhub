@@ -2449,6 +2449,11 @@ function glPage(i, d, fromHex, tol) {
         const rank = order.indexOf(i), idxOf = new Map(order.map((j, k) => [j, k]));
         // swiping the picture moves along this same sequence (chronological when dated, else just the painter's list)
         painterOrder = rank >= 0 ? order : all; painterRank = rank >= 0 ? rank : all.indexOf(i);
+        if (painterRank < 0) {   // this painting is not in the painter's list (a hidden twin opened by its address): slot it in by year so the swipe still walks their work
+          const y = G.year[i], k = y === GL_UNDATED ? 0 : order.findIndex(j => G.year[j] > y);
+          painterOrder = y === GL_UNDATED ? [i, ...all] : order.slice(); if (y !== GL_UNDATED) painterOrder.splice(k < 0 ? order.length : k, 0, i);
+          painterRank = painterOrder.indexOf(i);
+        }
         // the nearest in time read as "where this painting sits" better than a random sample of the painter's works
         const near = rank >= 0
           ? order.filter(j => j !== i).sort((a, b) => Math.abs(idxOf.get(a) - rank) - Math.abs(idxOf.get(b) - rank)).slice(0, 6)
